@@ -1,0 +1,1 @@
+Watch a wall arrive, turn edge-on, or grow into the space beside you. Choose a timed lane or its detour. At the end, a pair of armoured door leaves brings translation, rotation and scale together: this time the moving boundary makes room as you approach.

@@ -1,0 +1,66 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS eight handles, twelve edges, twelve surface patches
+PASS handles unavailable during assembly
+PASS pointer pause freezes assembly advancement
+PASS resume completes and enables corner handles
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS vertex number matches source index
+PASS translated rotated handle movement is stored in artifact coordinates
+PASS deformation preserves connection lists
+PASS surface mesh follows moved corner
+PASS incident edge follows moved corner
+PASS diagonals derived from triangle edges exclude twelve cube edges
+PASS six diagonals become visible
+PASS diagonal follows its actual source pair
+PASS diagonal follows its actual source pair
+PASS diagonal follows its actual source pair
+PASS diagonal follows its actual source pair
+PASS diagonal follows its actual source pair
+PASS diagonal follows its actual source pair
+PASS replay retains the deformed coordinates
+PASS replay hides and disables handles
+PASS replayed surface retains deformation
+PASS restore returns all eight initial positions without replay
+PASS restore preserves connection lists
+PASS readout counts actual visible layers
+PASS hidden surface data follows scaffold deformation
+PASS strata replay restores visible surfaces
+PASS unconfigured artifact retains no instrument
+PASS readout fits case width
+PASS readout stays above controls
+[em-support] animatedcubebuilder      deck=0.00 asked=0.00 dress=0.55 -> station_plinth (dress) | why: dress: the token asked for a 0.55 m station_plinth
+PASS actual room builder stamps
+[em-support] animatedcubebuilder      deck=0.00 asked=0.00 dress=0.55 -> station_plinth (dress) | why: dress: the token asked for a 0.55 m station_plinth
+PASS actual room builder stamps
+PASS map retains two builders for comparison
+PASS both map configurations activate their instruments
+PASS restoration feedback fits above buttons
+RESULT 40 []

@@ -1,0 +1,236 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "flight array exists in the production hall",
+      "passed": true
+    },
+    {
+      "name": "sixty-four original occupants",
+      "passed": true
+    },
+    {
+      "name": "start outside the flight volume",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: enclosure",
+      "passed": true
+    },
+    {
+      "name": "address buttons available",
+      "passed": true
+    },
+    {
+      "name": "address buttons available",
+      "passed": true
+    },
+    {
+      "name": "address buttons available",
+      "passed": true
+    },
+    {
+      "name": "real buttons select 1,2,0",
+      "passed": true
+    },
+    {
+      "name": "selected address starts occupied",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: console-before",
+      "passed": true
+    },
+    {
+      "name": "enter through the ground door",
+      "passed": true
+    },
+    {
+      "name": "flight permission acquired by entering",
+      "passed": true
+    },
+    {
+      "name": "rise between the frame and first layer",
+      "passed": true
+    },
+    {
+      "name": "target cube still present before approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: address-before",
+      "passed": true
+    },
+    {
+      "name": "fly to the selected address",
+      "passed": true
+    },
+    {
+      "name": "physical arrival collects the selected cube",
+      "passed": true
+    },
+    {
+      "name": "only the chosen occupant was collected",
+      "passed": true
+    },
+    {
+      "name": "remaining occupants keep their positions",
+      "passed": true
+    },
+    {
+      "name": "marker and address survive the collection",
+      "passed": true
+    },
+    {
+      "name": "released inputs hover at the recorded absence",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: address-after",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: console-after",
+      "passed": true
+    },
+    {
+      "name": "fly between the interior layers",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-volume",
+      "passed": true
+    },
+    {
+      "name": "return to the entrance side",
+      "passed": true
+    },
+    {
+      "name": "descend to the ground doorway",
+      "passed": true
+    },
+    {
+      "name": "leave through the ground door",
+      "passed": true
+    },
+    {
+      "name": "flight permission ends outside",
+      "passed": true
+    },
+    {
+      "name": "journey completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "descend to the ground doorway": {
+      "feet": [
+        -0.00000095367431640625,
+        0.109597414731979,
+        -4.9038200378418
+      ],
+      "inside_flight": true,
+      "target": [
+        0.0,
+        0.0500000007450581,
+        -5.0
+      ]
+    },
+    "enter through the ground door": {
+      "feet": [
+        0.0,
+        0.0961658954620361,
+        -5.04654598236084
+      ],
+      "inside_flight": true,
+      "target": [
+        0.0,
+        0.0500000007450581,
+        -5.0
+      ]
+    },
+    "fly between the interior layers": {
+      "feet": [
+        -0.0239534378051758,
+        5.25606155395508,
+        -0.0354776382446289
+      ],
+      "inside_flight": true,
+      "target": [
+        0.0,
+        5.30000019073486,
+        0.0
+      ]
+    },
+    "fly to the selected address": {
+      "feet": [
+        -1.14923477172852,
+        5.2561411857605,
+        -3.62119483947754
+      ],
+      "inside_flight": true,
+      "target": [
+        -1.20000004768372,
+        5.30000019073486,
+        -3.59999990463257
+      ]
+    },
+    "leave through the ground door": {
+      "feet": [
+        0.0,
+        0.141421467065811,
+        -6.96630477905273
+      ],
+      "inside_flight": false,
+      "target": [
+        0.0,
+        0.0500000007450581,
+        -7.0
+      ]
+    },
+    "return to the entrance side": {
+      "feet": [
+        -0.000408172607421875,
+        5.25607967376709,
+        -4.87547302246094
+      ],
+      "inside_flight": true,
+      "target": [
+        0.0,
+        5.30000019073486,
+        -5.0
+      ]
+    },
+    "rise between the frame and first layer": {
+      "feet": [
+        0.0,
+        5.25616216659546,
+        -5.04654598236084
+      ],
+      "inside_flight": true,
+      "target": [
+        0.0,
+        5.30000019073486,
+        -5.0
+      ]
+    },
+    "selected_empty": [
+      1,
+      2,
+      0
+    ],
+    "sources": {
+      "algorithms/arrays/grid_3d_4x4x4.gd": "4116e474f84ede18fc62e7f80609875a9ed0fac98107cbe2acb7856ba40aa72a",
+      "commons/artifacts/regularity/array_flight_lab.gd": "398f6eec033a053b7619f587d27d3d2ddd5063a4c137a7b4f068d5e53a0b7666",
+      "commons/movement/museum_flight_box.gd": "de780b48b5b242b78259746da7c780340490c9b2acd60de8d12cce32d23de55b",
+      "commons/movement/museum_flight_provider.gd": "a42443aca3a3bdd475ed97ef7614c2ce242aa4dc5329ef26a4fcc812fcdc9804"
+    }
+  },
+  "passed": true,
+  "room": "Tutorial_3D",
+  "scope": "Isolated production museum. Supplied Godot key events drive the unchanged museum physics controller and actual player capsule. Book camera poses are selected separately. Cube bob/turn processing frozen for matched figures; contact stays live. No headset or learner claim."
+}

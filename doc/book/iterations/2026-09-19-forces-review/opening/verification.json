@@ -1,0 +1,42 @@
+{
+  "checks": {
+    "normalization_executable_lines_unchanged": true,
+    "all_62_resolve": true,
+    "book_anchor_primary_order": true,
+    "headless-final_pass": true,
+    "before-accepted_pass": true,
+    "after-frozen_pass": true,
+    "standing_camera_match": true,
+    "readout_camera_match": true,
+    "same_frozen_loader": true,
+    "same_torque_response": true,
+    "all_watched_source_hashes_match_pair": true
+  },
+  "runtime": {
+    "headless-final": {
+      "checks": 44,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    },
+    "before-accepted": {
+      "checks": 31,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    },
+    "after-frozen": {
+      "checks": 30,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    }
+  },
+  "headset_tested": false,
+  "learner_verified": false,
+  "pair": {
+    "before": "before-accepted/standing.png",
+    "after": "after-frozen/standing.png",
+    "frozen_museum_sha256": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec"
+  }
+}

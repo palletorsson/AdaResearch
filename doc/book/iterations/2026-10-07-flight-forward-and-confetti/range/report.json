@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "museum loads its real turret and dropper",
+      "passed": true
+    },
+    {
+      "name": "museum beam damages balls, not the visitor",
+      "passed": true
+    },
+    {
+      "name": "museum beam delivers eighty health units per second",
+      "passed": true
+    },
+    {
+      "name": "museum target pool retains eight balls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: range-before",
+      "passed": true
+    },
+    {
+      "name": "museum turret destroys the ball through normal firing",
+      "passed": true
+    },
+    {
+      "name": "hit returns ball to its own pool",
+      "passed": true
+    },
+    {
+      "name": "museum death emits one confetti burst",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: range-confetti",
+      "passed": true
+    },
+    {
+      "name": "fresh ball is physically falling",
+      "passed": true
+    },
+    {
+      "name": "museum laser also catches the freely falling ball",
+      "passed": true
+    },
+    {
+      "name": "museum confetti disappears after the celebration",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "capture_note": "One target held stationary for before/after photographs; second destruction tested on a freely falling ball. Actual museum renderer and production turret."
+  },
+  "passed": true,
+  "room": "VFM_08_Arena",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

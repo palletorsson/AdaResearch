@@ -1,0 +1,21 @@
+--- before/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
++++ after/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
+@@ -175,6 +175,7 @@
+ 	_reset_comparison()
+ 	_preroll()
+ 	_update_texture()
++	preload("res://commons/ui/exhibit_control_mount.gd").refresh(self)
+ 
+ 
+ ## SYNCHRONOUS. A deferred rebuild that removes children first makes
+@@ -199,6 +200,10 @@
+ 	_fine_image = null
+ 	_study_readout = null
+ 	_build_all()
++
++
++func exhibit_control_parts() -> Array[Node3D]:
++	return [_controls, get_node("ConsoleStand")]
+ 
+ 
+ func _own(n: Node) -> void:

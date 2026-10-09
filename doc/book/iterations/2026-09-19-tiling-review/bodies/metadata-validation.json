@@ -1,0 +1,135 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: manuscript anchors, primary order and encounter tokens agree"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: every ordered primary is placed and assigned primary"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: every secondary remains in its ordered bucket"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: role assignments are unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: map unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_01: manuscript unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: manuscript anchors, primary order and encounter tokens agree"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: every ordered primary is placed and assigned primary"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: every secondary remains in its ordered bucket"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: role assignments are unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: map unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_02: manuscript unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: manuscript anchors, primary order and encounter tokens agree"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: every ordered primary is placed and assigned primary"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: every secondary remains in its ordered bucket"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: role assignments are unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: map unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon_Patterns_03: manuscript unchanged"
+    },
+    {
+      "pass": true,
+      "check": "Ribbon03 encounter hashes equal raw-byte SHA256 used by review exporter"
+    },
+    {
+      "pass": true,
+      "check": "learner_verified remains false"
+    }
+  ],
+  "halls": {
+    "Ribbon_Patterns_01": {
+      "manuscript_anchors": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "ordered_primary": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "placed_count": 11,
+      "secondary_count": 9,
+      "map_sha256": "db587570b0f260889c87664c6cc664ee5efa5e8e0fd0593e9bf4e1c4fc9362cf",
+      "text_sha256": "494882d0579203c1678cbfea061bd57a40cb4b90430061c1cf92dd64640e1cc2",
+      "recorded_map_matches": false
+    },
+    "Ribbon_Patterns_02": {
+      "manuscript_anchors": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "ordered_primary": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "placed_count": 12,
+      "secondary_count": 10,
+      "map_sha256": "1e803ac63f9f8ff1eb66bdb9b8bed069cfcc3be7e2a311c9dc0a08a07446dda9",
+      "text_sha256": "738c850adf0b894d24386b5030ebde05df99e79b8d64f51d875042c115cb5040",
+      "recorded_map_matches": false
+    },
+    "Ribbon_Patterns_03": {
+      "manuscript_anchors": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "ordered_primary": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "placed_count": 17,
+      "secondary_count": 14,
+      "map_sha256": "769ed2dfd6ee3f2cd5d91e23183af272941a8114de85fbdf0678e30ca7753d01",
+      "text_sha256": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8",
+      "recorded_map_matches": true
+    }
+  },
+  "passed": 20,
+  "failed": 0
+}

@@ -1,0 +1,166 @@
+{
+  "page": {
+    "bookOpen": true,
+    "bookTitle": "What counts as the same",
+    "codeBlocks": 4,
+    "images": [
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-relief.png"
+      },
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-matched.png"
+      },
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-witness.png"
+      },
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-terrain.png"
+      },
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-orb.png"
+      },
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-plan.png"
+      }
+    ],
+    "scroll": 676,
+    "width": 691
+  },
+  "controls": [
+    {
+      "grids": [
+        64,
+        64
+      ],
+      "photo": "noise-perlin-simplex-relief.png",
+      "reading": "Sample 1/5 · x -1.0 · z 0.5OpenSimplex2 0.19015 · Perlin 0.21862Perlin − Simplex = 0.02847Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs.",
+      "state": "0"
+    },
+    {
+      "grids": [
+        64,
+        64
+      ],
+      "photo": "noise-perlin-simplex-plate.png",
+      "reading": "Sample 1/5 · x -1.0 · z 0.5OpenSimplex2 0.19015 · Perlin 0.21862Perlin − Simplex = 0.02847Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs.",
+      "state": "1"
+    },
+    {
+      "grids": [
+        64,
+        64
+      ],
+      "photo": "noise-perlin-simplex-detuned.png",
+      "reading": "Sample 1/5 · x -1.0 · z 0.5OpenSimplex2 -0.37173 · Perlin 0.21862Perlin − Simplex = 0.59035Coordinate multipliers: 14.798 / 10.000Another condition differs: sample scale.",
+      "state": "2"
+    },
+    {
+      "grids": [
+        64,
+        64
+      ],
+      "photo": "noise-perlin-simplex-matched.png",
+      "reading": "Sample 1/5 · x -1.0 · z 0.5OpenSimplex2 0.19015 · Perlin 0.21862Perlin − Simplex = 0.02847Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs.",
+      "state": "3"
+    },
+    {
+      "markers": [
+        [
+          "100",
+          "100"
+        ],
+        [
+          "100",
+          "100"
+        ]
+      ],
+      "reading": "Sample 1/5 · x -1.0 · z 0.5OpenSimplex2 0.19015 · Perlin 0.21862Perlin − Simplex = 0.02847Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs."
+    },
+    {
+      "markers": [
+        [
+          "260",
+          "220"
+        ],
+        [
+          "260",
+          "220"
+        ]
+      ],
+      "reading": "Sample 2/5 · x 1.0 · z -1.0OpenSimplex2 0.35064 · Perlin 0.17551Perlin − Simplex = -0.17513Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs."
+    },
+    {
+      "markers": [
+        [
+          "100",
+          "220"
+        ],
+        [
+          "100",
+          "220"
+        ]
+      ],
+      "reading": "Sample 3/5 · x -1.0 · z -1.0OpenSimplex2 0.33393 · Perlin 0.31245Perlin − Simplex = -0.02149Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs."
+    },
+    {
+      "markers": [
+        [
+          "180",
+          "140"
+        ],
+        [
+          "180",
+          "140"
+        ]
+      ],
+      "reading": "Sample 4/5 · x 0.0 · z 0.0OpenSimplex2 0.00000 · Perlin 0.00000Perlin − Simplex = 0.00000Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs."
+    },
+    {
+      "markers": [
+        [
+          "220",
+          "60"
+        ],
+        [
+          "220",
+          "60"
+        ]
+      ],
+      "reading": "Sample 5/5 · x 0.5 · z 1.0OpenSimplex2 -0.55105 · Perlin -0.28027Perlin − Simplex = 0.27078Coordinate multipliers: 10.000 / 10.000Matched conditions: only the basis differs."
+    }
+  ],
+  "primary": {
+    "headings": [
+      "1. simplex_noise",
+      "2. perlin_noise",
+      "3. perlin_noise_terrain",
+      "4. dark_sphere"
+    ],
+    "passages": [
+      {
+        "open": true,
+        "text": "Read book passage\nStart at the Simplex panel. Press REPLAY and choose a feature to recognise. Move FREQ a little, watch that feature change, then replay. The field returns to the declared setting. Its variation has a way back, as the colour grids did in Randomness.\n\nIn the previous room a height change caught the walking body. Here the small cubes leave space for us to walk around their arrangement. Each sampled coordinate receives a height and a colour. The underlying field relates neighbouring values; the cubes present selected values as separate steps. The grid we see is one way of reading that relation.\n\nThe Simplex visualizer asks for a value like this:\n\n```gdscript\nfunc generate_noise_at(x: float, z: float) -> float:\n\treturn noise_generator.get_noise_2d(x * frequency, z * frequency)\n```\n\nThe slider changes the coordinate multiplier. The display can keep the same cube positions while asking the field about a different scale. A ridge can change across an unmoving grid.\n\nFind the pink marker. Press SAMPLE on the shared instrument and watch it move to another cube. Across the aisle, another marker takes the same address. Their heights need not agree. The readout now gives the coordinate, each field's answer and their signed difference.\n\n```gdscript\nfunc sample_pair(p: Vector2) -> Vector2:\n\treturn Vector2(pair[0].sample_at(p.x,p.y), pair[1].sample_at(p.x,p.y))\n```\n\nOne question goes to two functions. The coordinate is shared. The answer belongs to the function that returns it. A positive difference on the display means the Perlin value exceeds the simplex value at this address; it does not award a point to either landscape."
+      },
+      {
+        "open": true,
+        "text": "Read book passage\nCross to the Perlin panel and compare the readouts. Both begin with the same seed, octave count, frequency and gain. Their displays share amplitude, sample spacing and finish. The Perlin visualizer chooses its basis in this branch of `_noise_type_for`:\n\n```gdscript\n\"perlin\":\n\treturn FastNoiseLite.TYPE_PERLIN\n```\n\nThe Simplex visualizer chooses `TYPE_SIMPLEX`, which this engine implements as OpenSimplex2. The plate reads the choices back from the instantiated generators. Names can help us find a work; here we also have a way to check what they claim.\n\nBoth belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear. [The engine's noise definitions](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations).\n\nChoose one comparison to keep in view: the turn of a ridge, the spacing of hollows, or the difference between answers at one coordinate. The shared seed makes each field repeatable. It does not make a ridge on one side the partner of a ridge on the other.\n\nNow alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.\n\nPress VIEW. Keep following the pink markers while the relief settles into two flat arrangements. The colour retains the sampled values. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.\n\nThe cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.\n\nReturn to relief. The same answers regain height. In Noise Space 10 we joined height to collision so a change could stop a foot. These cubes are a visual comparison with a walking aisle between them. A visible surface and a surface that carries us ask for different work from the implementation.\n\nMatching conditions costs us possibilities. One shared finish helps compare shape while withholding what another colour treatment might reveal. Half-metre samples give the field a body we can inspect; variation between those addresses has no cube of its own. The comparison makes some distinctions easier to see by agreeing to leave others out."
+      },
+      {
+        "open": true,
+        "text": "Read book passage\nBehind the pair, a small pink sheet stands above a low plinth. Stay with it for a moment. Its surface changes in steps even while the two larger fields wait for another action.\n\nIts timer advances a third sampling coordinate:\n\n```gdscript\nfunc _on_timer_timeout() -> void:\n\tif not _is_truthy(animate):\n\t\treturn\n\ttime_offset += 0.5\n\tgenerate_terrain()\n```\n\nThe mesh helper samples a three-dimensional field. The timer visits another slice every half-second. We have met a coordinate changing before; here the change keeps arriving without another gesture. It is neither an erosion calculation nor a memory of the sheet's previous shape.\n\nThe artifact is called `perlin_noise_terrain`, but its helper leaves the generator's basis at the engine default, OpenSimplex2S. This retained work makes the room's question recur inside its own collection. Its one-metre sheet samples in index coordinates, uses seed one and has its own clock. It cannot serve as a third matched surface simply because it stands near the pair."
+      },
+      {
+        "open": true,
+        "text": "Read book passage\nThe dark orb changes too. Its pulse gives the eye another rhythm to follow, independent of the small sheet's half-second steps. MATCH does not restart either work.\n\nA return always has a scope. We recovered the two fields' parameters, while the other bodies continued. Even a careful comparison takes place in a world that has more going on than the question currently admits."
+      }
+    ],
+    "scroll": 1353,
+    "width": 691
+  }
+}

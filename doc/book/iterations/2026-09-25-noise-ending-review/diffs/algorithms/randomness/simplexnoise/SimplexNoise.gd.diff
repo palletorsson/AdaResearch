@@ -1,0 +1,46 @@
+--- before/algorithms/randomness/simplexnoise/SimplexNoise.gd
++++ algorithms/randomness/simplexnoise/SimplexNoise.gd
+@@ -328,10 +328,12 @@
+ 			if witness == "show" and _built:
+ 				_build_witness_plate.call_deferred()
+ 	var changed: bool = false
++	var contract_changed: bool = false
+ 	for key in ["frequency", "amplitude", "persistence", "octaves"]:
+ 		if config.has(key):
+ 			_placement_params[key] = config[key]
+ 			changed = true
++			contract_changed = true
+ 	if config.has("frequency"):
+ 		_frequency = clampf(float(config["frequency"]), FREQ_MIN, FREQ_MAX)
+ 	if config.has("amplitude"):
+@@ -353,16 +355,19 @@
+ 		if s != seed_value:
+ 			seed_value = s
+ 			changed = true
++			contract_changed = true
+ 	if config.has("ramp"):
+ 		var m: String = str(config["ramp"]).to_lower()
+ 		if m != ramp:
+ 			ramp = m
+ 			changed = true
++			contract_changed = true
+ 	if config.has("size"):
+ 		var n: int = int(config["size"])
+ 		if n != size:
+ 			size = n
+ 			changed = true
++			contract_changed = true
+ 	if config.has("panel"):
+ 		var p: String = str(config["panel"]).to_lower()
+ 		if p != panel:
+@@ -370,7 +375,9 @@
+ 			if _built and _panel_node == null:
+ 				_build_panel()
+ 	if changed and noise_field != null:
+-		_apply_contract()
++		# Changing the display must not restore a seed chosen before REGEN.
++		if contract_changed:
++			_apply_contract()
+ 		_update_noise_parameters()
+ # ── the measurement contract, read off the generator ─────────────────────────
+ ## `contract()` above reports THIS SCRIPT'S variables. These are the FastNoiseLite's

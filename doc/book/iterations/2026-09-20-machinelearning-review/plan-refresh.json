@@ -1,0 +1,138 @@
+{
+  "sequence": "machinelearning",
+  "maps": [
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Sequence_Memory",
+    "ML_Generative"
+  ],
+  "live_sequence_maps": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis"
+  ],
+  "museum_template": "chichu-buried-cells",
+  "template_source": "Explicit existing museum key",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "26240e20cb62fe606239b96fe367b2fbe5dfc068dc99f66bef29f96dd387614b",
+    "commons/data/museum/em_plan.json": "26240e20cb62fe606239b96fe367b2fbe5dfc068dc99f66bef29f96dd387614b",
+    "commons/data/map_authored.json": "24a4a97f65f7184e20735ea55cbb9ca8508053c8ebd6549a9403a6d494ac5d92",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/machinelearning.json": "a84e131f7aa1b45a76a660cf328ccc221a09f90028c8667c952437076c32fbee",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/ML_Gradient_Landscape/map_data.json": "a8a7eb0d495705599f74607ae72c830aac5c3d138d27b45609333ff7959d7de7",
+    "commons/maps/ML_Classification/map_data.json": "2957e754c794a4b9cbb93a0ea0d5d3cc7d027894b9bf213bba508febf0dcf750",
+    "commons/maps/ML_Sequence_Memory/map_data.json": "d4e4672f22f418a7093910cc3b090c17eefa8765c0109d1ca569006cdad813c7",
+    "commons/maps/ML_Generative/map_data.json": "e781c86ea2a4d30395a03e4b890714b35f47bcc0975d39e81ab84de77585f0ea"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "3678a151ed5cb30af8bae5290dde431901499e2046919b1acacd6f0d65820543",
+    "commons/data/museum/em_plan.json": "3678a151ed5cb30af8bae5290dde431901499e2046919b1acacd6f0d65820543",
+    "commons/data/map_authored.json": "24a4a97f65f7184e20735ea55cbb9ca8508053c8ebd6549a9403a6d494ac5d92"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 194,
+    "commons/data/museum/em_plan.json": 194
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 194,
+    "commons/data/museum/em_plan.json": 194
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "ML_Gradient_Landscape",
+      "pearl_index": 1,
+      "room": {
+        "w": 13,
+        "h": 12
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 12,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ML_Classification",
+      "pearl_index": 2,
+      "room": {
+        "w": 15,
+        "h": 12
+      },
+      "artifacts": 3,
+      "ruling": {
+        "src_w": 15,
+        "src_h": 12,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "pearl_index": 5,
+      "room": {
+        "w": 19,
+        "h": 23
+      },
+      "artifacts": 2,
+      "ruling": {
+        "src_w": 19,
+        "src_h": 23,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ML_Generative",
+      "pearl_index": 6,
+      "room": {
+        "w": 19,
+        "h": 21
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 19,
+        "src_h": 21,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T091129695330Z"
+}

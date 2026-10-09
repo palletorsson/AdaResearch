@@ -1,0 +1,291 @@
+{
+  "sequence": "proceduralgeneration",
+  "declared_maps": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+  ],
+  "museum_map_authored_order": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "PG_Genetic_Evolution",
+      "recorded_status": "source_checked_draft",
+      "text_words": 778,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "GeneticProgramming"
+        ],
+        "reason": "What would you choose to keep, and what does the scoring rule choose?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Genetic_Evolution/final.md",
+        "text_sha256": "5d084c1cf5f159f159442b337fd524845321186f4b73396401135b1c9437c82c",
+        "map_sha256": "555644ad6594a449d85798f704a51074bd2dd8c2afbdeffe64af1db1058afbe0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "GeneticProgramming"
+      ],
+      "role_primary_order": [
+        "GeneticProgramming"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Space_Colonization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 857,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "space_colonization_algorithm"
+        ],
+        "reason": "Can a branch find a shape that is described only by points it has not reached?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Space_Colonization/final.md",
+        "text_sha256": "5f4e213cab5e35c262b8b173c9442ba7eed46bade01d12c1e1a1060beb1bb7dd",
+        "map_sha256": "be6b4464714b8a357bef287d0e08e3ffcc55ee7438eccf8b248f1bfae1792133",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "space_colonization_algorithm"
+      ],
+      "role_primary_order": [
+        "space_colonization_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Branching_Growth",
+      "recorded_status": "source_checked_draft",
+      "text_words": 475,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "branching_growth_algorithm"
+        ],
+        "reason": "How does a branch decide which direction to try next?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Branching_Growth/final.md",
+        "text_sha256": "c753b91ce75bb1db51159c4c5916afcf83cd8bd931d571234bcec4e364e36887",
+        "map_sha256": "fd64cdf10263ee50bfaea4f5de75c16b521c61a6f7c5762ab3bac9121cd7a0f0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "branching_growth_algorithm"
+      ],
+      "role_primary_order": [
+        "branching_growth_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "recorded_status": "source_checked_draft",
+      "text_words": 461,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "percolationnetwork_ca"
+        ],
+        "reason": "When does local contact become a route across a whole field?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Percolation_Network/final.md",
+        "text_sha256": "548a1e1faa3e84e3c14e8cda095076f18fec258260b291cbd52b0d7e43a07dbb",
+        "map_sha256": "c40b5fd9183c9fa68ee5c0226f9537660f7b91742896be116e022e92d1d8db39",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "percolationnetwork_ca"
+      ],
+      "role_primary_order": [
+        "percolationnetwork_ca"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Caves_Mazes",
+      "recorded_status": "source_checked_draft",
+      "text_words": 548,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "caverandomwalk"
+        ],
+        "reason": "Can removing space leave a memory of the route that removed it?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Caves_Mazes/final.md",
+        "text_sha256": "5220c6e4cb3190da989e75ffd8cce302d64c1e56a3a494b2a61af0b0162b1865",
+        "map_sha256": "c706ebbd6dcdd0ef8ad2de57a6337dc7184bd744defc6ce3cd76cfa84decfd5d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "caverandomwalk",
+        "maze_generation"
+      ],
+      "role_primary_order": [
+        "caverandomwalk"
+      ],
+      "anchors_not_in_primary_roles": [
+        "maze_generation"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "recorded_status": "source_checked_draft",
+      "text_words": 538,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "cube_mound_scene"
+        ],
+        "reason": "When does a pile of separate bodies become one surface?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Sculpted_Forms/final.md",
+        "text_sha256": "dfdb60a1f34679084dae91e3366f7313292ab1cb17012a915411a20a6b77800d",
+        "map_sha256": "5f38abdf62db38d37dfe870af50699b2dc705ce3770f9ef20d7c2bd9d101d36a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "cube_mound_scene",
+        "dome"
+      ],
+      "role_primary_order": [
+        "cube_mound_scene"
+      ],
+      "anchors_not_in_primary_roles": [
+        "dome"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "recorded_status": "source_checked_draft",
+      "text_words": 667,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mirror_cellular_texture_for_3d"
+        ],
+        "reason": "Which parts of a symmetrical pattern were computed, and which were copied?",
+        "status": "source_checked_draft",
+        "sequence": "proceduralgeneration",
+        "text_path": "commons/maps/PG_Mirrored_Patterns/final.md",
+        "text_sha256": "353240c134927a887ca51261f18a74e310a7bbc3051320be587b1233890f9ea2",
+        "map_sha256": "7e2e06ce667892acd25e64162d7be0ebfdc055c7ccf43a4842ad1a0063074c96",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mirror_cellular_texture_for_3d",
+        "rhizomatic_maze_space"
+      ],
+      "role_primary_order": [
+        "mirror_cellular_texture_for_3d"
+      ],
+      "anchors_not_in_primary_roles": [
+        "rhizomatic_maze_space"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd",
+      "algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+      "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+      "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingUI.gd",
+      "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd",
+      "algorithms/proceduralgeneration/growth_systems/caverandomwalk/CaveUI.gd",
+      "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+      "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/genetic_museum.gd",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/selection_lesson.gd",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd",
+      "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+      "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn",
+      "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+      "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+      "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationUI.gd",
+      "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd",
+      "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_museum.gd",
+      "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd",
+      "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn",
+      "algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd",
+      "algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/primitives/booleans/dome.gd",
+      "commons/primitives/booleans/dome.tscn",
+      "commons/render/mesh_kit.gd",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://commons/artifacts/timing_machines/machine_stage.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "id": "Color_Paint/start/blank_canvas",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/original_body",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/uv_corners",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/uv_roundtrip",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/unheld_cannot_paint",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/named_action",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/ray_hits_receiver",
+      "passed": false
+    },
+    {
+      "id": "Color_Paint/start/deposit_between_white_and_ink",
+      "passed": false
+    },
+    {
+      "id": "Color_Paint/start/accumulates",
+      "passed": false
+    },
+    {
+      "id": "Color_Paint/start/release_keeps_mark",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/drop_clears_action",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/outside_rejected",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/back_rejected",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/invalid_radius_rejected",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/invalid_amount_rejected",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/automatic_same_receiver",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/first_hit_blocks",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/xr_near_selection",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/xr_pickup_signal",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/xr_action_signal",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/xr_release_signal",
+      "passed": true
+    },
+    {
+      "id": "Color_Paint/start/xr_drop_signal",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "Color_Paint/start/ray_hits_receiver",
+    "Color_Paint/start/deposit_between_white_and_ink",
+    "Color_Paint/start/accumulates"
+  ],
+  "passed": false
+}

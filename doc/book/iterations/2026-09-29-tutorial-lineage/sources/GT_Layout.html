@@ -1,0 +1,256 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Layout · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Layout">← Tutorial lineage</a></p><h1>GT Layout</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Layout/final.md">Raw captured source</a></p><pre># A connection is not a coordinate
+
+If the drawing moves, has the graph changed?
+
+&lt;!-- @force_directed_layout --&gt;
+
+Choose one vertex and identify two of its connected neighbours. Keep those relationships in view while the drawing settles. Notice which distances change and which connections remain. Try to describe the difference without calling every movement a new network.
+
+The default graph has eight vertices joined in a cube’s connection pattern. Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping wears the motion down. The final arrangement reflects the balance of these forces rather than an instruction to draw a particular cube in a particular orientation.
+
+Choose an edge whose length changes noticeably as the drawing settles. Describe its endpoints without using left, right or above, since those descriptions may stop helping as positions move. You might identify one endpoint through its neighbours and then follow the same relation through the motion. This is a small exercise in recognising structure independently of its current projection. The drawing remains useful, but it is no longer the only way you know which connection you are seeing.
+
+A force-directed layout is a method for choosing a graph’s visible coordinates. The graph supplies adjacency; the layout supplies positions that may make that adjacency easier to inspect. An edge can stretch without ceasing to connect the same pair. Conversely, two unconnected vertices can pass close together in the drawing without acquiring an edge.
+
+The two travellers in the previous room followed connections. They would still need the adjacency structure even if this layout placed two unrelated vertices almost on top of one another. Visual proximity can suggest a relationship that the visiting rule does not possess.
+
+Now find a vertex that looks central. Is it central in the arrangement, unusually well connected, or simply easy to see from where you stand? Those questions can have different answers. Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing’s doing. A useful drawing can also invite an unsupported story about influence or importance.
+
+The drawing in front of you is one layout of many the same graph could be given, and walking gives you another: go round to the far side and look again. Is the vertex you called central still central from there? If a claim about the network disappears when the drawing rearranges, or when you move, ask whether the claim belonged to the graph or to its presentation.
+
+&lt;!-- @ --&gt;
+
+Pathfinding will change a connection’s availability while a traveller is already moving. This time the route really may need to change.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Layout/tutorial.md">Raw captured source</a></p><pre># GT Layout
+
+Force-directed layout. Nodes repel; edges pull.
+
+Track vertex positions and velocities.
+
+```gdscript
+var positions: Dictionary = {}  # vertex_id -&gt; Vector3
+var velocities: Dictionary = {}
+```
+
+Two dictionaries keyed on vertex id. Initialised with random positions and zero velocities.
+
+Compute repulsion.
+
+```gdscript
+@export var repulsion_k: float = 1.0
+
+func repulsion_force_on(v) -&gt; Vector3:
+    var total := Vector3.ZERO
+    for other in vertices:
+        if other == v: continue
+        var direction: Vector3 = positions[v] - positions[other]
+        var distance: float = direction.length() + 0.01
+        total += direction.normalized() * repulsion_k / (distance * distance)
+    return total
+```
+
+Inverse-square repulsion. Every pair of vertices pushes apart.
+
+Compute attraction.
+
+```gdscript
+@export var spring_k: float = 0.5
+
+func spring_force_on(v) -&gt; Vector3:
+    var total := Vector3.ZERO
+    for edge in edges:
+        if edge[0] == v or edge[1] == v:
+            var other = edge[0] if edge[1] == v else edge[1]
+            var direction: Vector3 = positions[other] - positions[v]
+            total += direction * spring_k
+    return total
+```
+
+Linear attraction along edges. Connected vertices pull together.
+
+Step the simulation.
+
+```gdscript
+@export var damping: float = 0.9
+
+func _physics_process(delta: float) -&gt; void:
+    for v in vertices:
+        var force: Vector3 = repulsion_force_on(v) + spring_force_on(v)
+        velocities[v] += force * delta
+        velocities[v] *= damping
+        positions[v] += velocities[v] * delta
+    update_visual_positions()
+```
+
+Each step: compute forces, integrate, damp. The graph settles to equilibrium.
+
+Update visuals.
+
+```gdscript
+func update_visual_positions() -&gt; void:
+    for child in get_children():
+        if child.has_meta(&quot;vertex_id&quot;):
+            var v = child.get_meta(&quot;vertex_id&quot;)
+            child.global_position = positions[v]
+```
+
+Visual meshes follow the computed positions. Update every frame.
+
+Compute layout stress.
+
+```gdscript
+func layout_stress() -&gt; float:
+    var adj: Dictionary = adjacency_list()
+    var total: float = 0.0
+    for u in vertices:
+        var distances: Dictionary = bfs_distances(u, adj)
+        for v in vertices:
+            if u == v: continue
+            var gd: int = distances[v]
+            var sd: float = positions[u].distance_to(positions[v])
+            total += (gd - sd) * (gd - sd)
+    return total
+```
+
+Stress measures mismatch between graph distances and spatial distances. Lower is better.
+
+Seed random positions.
+
+```gdscript
+func seed_positions(bounds: Vector3) -&gt; void:
+    for v in vertices:
+        positions[v] = Vector3(randf(), randf(), randf()) * bounds
+        velocities[v] = Vector3.ZERO
+```
+
+Random initial positions in a bounded volume. The simulation will settle to a layout.
+
+You can now build a force-directed layout with repulsion and spring attraction, integrate the dynamics, update visuals, and measure layout stress. GT_Pathfinding extends into maze navigation.
+
+Snap positions to a grid.
+
+```gdscript
+func snap_positions(cell_size: float = 0.5) -&gt; void:
+    for v in vertices:
+        positions[v] = (positions[v] / cell_size).round() * cell_size
+```
+
+Discretise for cleaner visuals. Useful when the layout looks right but jitters slightly.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Layout/technical.md">Raw captured source</a></p><pre># GT Layout — Technical
+
+The map lays out a graph by running a force-directed simulation. Every vertex repels every other vertex according to an inverse-square Coulomb-like force; every edge pulls its two endpoints together with a Hookean spring force. The graph settles when the two contributions balance.
+
+```gdscript
+# Simplified force step from GraphLayoutRig.gd
+func _physics_process(dt: float) -&gt; void:
+    # Repulsion: O(V^2)
+    for u in vertices:
+        for v in vertices:
+            if u == v: continue
+            var d := v.position - u.position
+            var r := d.length() + 0.01  # avoid divide-by-zero
+            var f := repulsion_k / (r * r)
+            u.velocity -= d.normalized() * f * dt
+
+    # Attraction: O(E)
+    for e in edges:
+        var d := e.b.position - e.a.position
+        var f := spring_k * (d.length() - e.rest_length)
+        e.a.velocity += d.normalized() * f * dt
+        e.b.velocity -= d.normalized() * f * dt
+
+    # Integrate and dampen
+    for v in vertices:
+        v.position += v.velocity * dt
+        v.velocity *= damping
+```
+
+The repulsion pass is O(V²) and dominates the cost. For graphs with more than a few hundred vertices, a Barnes-Hut approximation reduces this to O(V log V) by clustering distant repulsion contributions. The map&#x27;s graphs are small enough that the naive O(V²) path is adequate, and the naive path is what the code above shows.
+
+The equilibrium is not unique. Different initial positions produce different settled configurations, all of which satisfy the force balance. A re-seed button randomises positions and re-runs, so the learner can run the same graph repeatedly and see that the final layout is a function of the initial conditions.
+
+The repulsion_k and spring_k parameters have a product that determines the graph&#x27;s characteristic spacing. Raising repulsion_k spreads the graph wider; raising spring_k pulls connected vertices tighter. A small damping factor (0.8–0.95) is needed to avoid oscillation, and the map exposes all three parameters as sliders.
+
+Within the sequence, Layout converts the abstract graph from GT_Foundations into a spatial display. The force vocabulary is borrowed from the Forces sequence, and the borrowing is deliberate — the map argues that graph layout is an applied physics problem, not a pure geometry problem. The next map, GT_Pathfinding, will treat the laid-out graph as a searchable space and put the learner&#x27;s body into the search.
+
+## Convergence and Parameter Tuning
+
+The force-directed simulation does not always converge. If repulsion is too strong relative to attraction, the graph expands without bound; if attraction dominates, vertices collapse to a single point. The damping factor controls the rate at which kinetic energy leaves the system, and without damping the simulation oscillates indefinitely.
+
+A practical stability condition is that the product of spring_k and damping exceeds a threshold that depends on the graph&#x27;s topology. The map chooses default parameters that work for graphs up to a few hundred vertices. Beyond that, repulsion dominates and the layout drifts — the Barnes-Hut approximation is the standard remedy.
+
+## Stress and Embedding Quality
+
+Layout quality is usually measured by stress: the sum over pairs (u, v) of the squared difference between the graph-theoretic distance (edge count) and the spatial distance (Euclidean). A good layout has low stress, meaning the spatial distances approximate the graph distances.
+
+```gdscript
+func compute_stress() -&gt; float:
+    var stress := 0.0
+    for u in vertices:
+        var dists := bfs_distances(u)
+        for v in vertices:
+            if u == v: continue
+            var gd: float = dists[v]
+            var sd: float = (v.position - u.position).length()
+            stress += (gd - sd) * (gd - sd)
+    return stress
+```
+
+Stress-minimising layouts can be computed directly via majorisation, but force-directed algorithms are simpler and produce similar results for most graphs. The map uses force-directed because the algorithm&#x27;s per-frame iterative nature is visually legible — the layout is seen to settle rather than appearing fully formed.
+
+Within the sequence, Layout&#x27;s physics borrowing prefigures the stress metric: springs pulled to rest length implicitly minimise graph-distance error. GT_Pathfinding will next treat the laid-out graph as a navigable space the learner can walk through.
+
+## One More Note on Initial Positions
+
+Initial positions matter for convergence. Randomly distributed positions avoid the degenerate case where all vertices start at the origin and repulsion has no direction to work with. The map seeds initial positions in a unit sphere around the centre of the arena.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Layout/intent.md">Raw captured source</a></p><pre>Concept: Force-directed graph layout — nodes repel like charges, edges pull like springs, and the graph finds its own equilibrium. Physics borrowed for visualization; the room itself is a graph trying to settle.
+Sequence role: Second map in Graph Theory; connects back to the Forces sequence (Coulomb repulsion + Hooke attraction = layout algorithm). The asymmetric space with nodes at different heights demonstrates that layout is not unique — the same graph can settle into different configurations depending on initial conditions; follows GT_Foundations; leads to GT_Pathfinding.
+Technical angle: Force-directed layout: Coulomb repulsion F = k/r² between all node pairs, Hooke attraction F = -k·d for connected pairs, iterative relaxation until equilibrium. The force_directed_layout artifact implements the full algorithm; the learner watches convergence from random initial positions.
+Critical angle: Graph layout reveals that structure and presentation are not the same thing. Two layouts of the same graph can look completely different yet encode identical relationships. The choice of layout algorithm is a choice of what to emphasize — proximity, centrality, clustering. Visualization is not neutral; it is editorial. The room settling into equilibrium is the F-term seeking minimum energy in a new domain.
+Key artifacts: force_directed_layout implements Coulomb-Hooke relaxation, demonstrating how physics algorithms serve as graph visualization tools.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Layout/critical.md">Raw captured source</a></p><pre># GT_Layout — Critical Reflection
+
+Platforms at irregular heights. No symmetry, no grid. The room is a graph trying to find its own shape. Nodes drift through asymmetric space until forces balance. Repulsion pushes every node apart — Coulomb&#x27;s law borrowed from electrostatics. Springs pull connected nodes together — Hooke&#x27;s law borrowed from mechanics. The system oscillates, overshoots, dampens. Settles. No one designed the layout. It emerged.
+
+Foucault&#x27;s analysis of disciplinary space — the arrangement of bodies in architectures of visibility and control — finds an unexpected inversion here. The force-directed layout is space that disciplines itself. No architect decides where the nodes go. No authority assigns positions. The algorithm distributes spatial roles through the blind interaction of repulsive and attractive forces, and the result is a legible arrangement that emerged from no intention. The `force_directed_layout` artifact implements this: `repulsion F = k/d^2` between all node pairs, `attraction F = -k*d` for connected pairs, iterated until equilibrium. The critical parameter is the ratio of repulsion to stiffness — high repulsion spreads rooms apart, high stiffness pulls connected rooms close — and the equilibrium is the walkable topology.
+
+But equilibrium is not neutrality. The layout the algorithm produces emphasizes certain structural features and hides others. Tightly connected clusters appear as spatial clusters. Bridges between communities appear as long edges across open space. Central nodes gravitate toward the spatial center. The layout makes visible what the algorithm&#x27;s physics rewards: proximity for connection, distance for disconnection, centrality for degree. This is Ranciere&#x27;s distribution of the sensible operating through force simulation — the algorithm determines what can be seen by determining where things are placed, and the placement is governed by a physics that has nothing to do with the graph&#x27;s meaning.
+
+The same graph can produce different layouts from different initial conditions. This is the artifact&#x27;s most subversive property, though the map does not emphasize it. Two runs of the same force-directed algorithm on the same graph will produce different spatial arrangements, both valid, both emphasizing different structural features. A node that appears central in one layout appears peripheral in another. A cluster that looks tight in one arrangement looks dispersed in another. The layout is not a property of the graph; it is a property of the algorithm&#x27;s trajectory through configuration space. The map you walk is one of infinitely many possible arrangements of the same underlying relationships.
+
+Ranciere argues that politics begins when someone who was not counted as a speaking being speaks. The force-directed layout is apolitical in the worst sense: it assigns positions without deliberation, distributes visibility without negotiation, creates a spatial order that looks organic because no one decided it. The nodes do not choose their positions. The forces choose for them. The result is a topology that feels natural — balanced, settled, at rest — and this feeling of naturalness is the ideological operation. The layout presents a particular arrangement of relations as the arrangement, the one the system found, the one the physics preferred, when in fact the physics preferred nothing and the arrangement is contingent on initial conditions and force parameters.
+
+The map&#x27;s asymmetric heights reinforce this. Platforms sit at h1, h2, h3, h4, with walls at h5 — the kind of terrain that reads as organic because it avoids the regularity of designed space. But the asymmetry is itself designed. Someone authored the height map to produce the feeling of emergence. The map performs the force-directed layout&#x27;s ideology at the level of architecture: arranged to look unarranged, structured to feel unstructured, designed to appear as if no one was in charge.
+
+Foucault&#x27;s concept of power/knowledge — the inseparability of what can be known from the structures that produce that knowledge — applies to graph visualization with uncomfortable precision. A force-directed layout produces knowledge about a graph&#x27;s structure: which nodes are central, which are peripheral, which communities exist, which bridges connect them. This knowledge is then used to make decisions — about network design, social policy, resource allocation. But the knowledge was produced by an algorithm whose physics has no relationship to the domain. Coulomb&#x27;s law does not know what friendship is. Hooke&#x27;s law does not understand economic dependency. The layout borrows physics from electrostatics and mechanics, applies it to abstract relations, and produces a spatial arrangement that is then read as if it revealed something true about the relations themselves. The visualization becomes the knowledge, and the knowledge forgets that it was produced by borrowed forces applied to borrowed metaphors.
+
+What emerges is not optimal. It is legible. The graph does not know what it looks like. It only knows what pulls. The question the map leaves in the settled, equilibrium architecture is whether legibility — the quality of being readable, navigable, interpretable — is a property of the structure or a property of the gaze that requires structure to be readable before it can be recognized as real.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Layout/artifacts.md">Raw captured source</a></p><pre># GT Layout — Artifacts
+*Graph Theory: Connections Define Structure · relation · 1 artifacts*
+
+&gt; Scatter nodes. Connect them with edges. Now let physics do the thinking. Repulsion pushes every node apart — Coulomb&#x27;s law borrowed from electrostatics. Springs pull connected nodes together — Hooke&#x27;s law borrowed from mechanics. The system oscillates, overshoots, dampens. Iterates. Eventually settles into something readable. No one designed the layout. It emerged.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## force_directed_layout
+![force_directed_layout](/scene-catalog/force_directed_layout.png)
+
+READ how attraction, repulsion, and damping turn a tangled network into a stable drawing.
+
+`force_directed_layout`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Layout/summary.md">Raw captured source</a></p><pre># GT Layout — Summary
+
+GT_Layout is the second map in the Graph Theory sequence. It treats the visual arrangement of a graph as a physics problem. Nodes repel each other like charges; edges pull their endpoints together like springs; the whole graph is left to settle.
+
+The room itself is the demonstration. A large graph is scattered across the floor and into the air, with nodes at different heights and edges running between them. A timer button starts the simulation: Coulomb repulsion pushes every node away from every other, Hooke attraction pulls connected nodes together, and after a short time the graph settles into a stable arrangement in which the two forces balance.
+
+A controls bench adjusts the parameters. Repulsion strength spreads the graph wider or tightens it inward. Spring constant pulls connected nodes harder or lets them drift. A re-seed button randomises the starting positions so the learner can run the same graph repeatedly and see that the final layout is not unique — initial conditions shape which stable configuration the physics finds.
+
+A second display shows the graph as an adjacency matrix alongside the spatial view, so the structural information stays separate from its visual realisation. Within the sequence, Layout borrows the force vocabulary from the Forces sequence and applies it to the problem of making a graph legible. GT_Pathfinding will next put the learner&#x27;s body into the graph.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Layout/blurb.md">Raw captured source</a></p><pre>Scatter nodes. Connect them with edges. Now let physics do the thinking. Repulsion pushes every node apart — Coulomb&#x27;s law borrowed from electrostatics. Springs pull connected nodes together — Hooke&#x27;s law borrowed from mechanics. The system oscillates, overshoots, dampens. Iterates. Eventually settles into something readable. No one designed the layout. It emerged.
+
+The room is the algorithm. Platforms at irregular heights, no symmetry, no grid — a graph trying to find its own shape. Nodes drift through asymmetric space until forces balance. Equilibrium is not stillness. It&#x27;s the point where every push meets an equal pull, where structure and tension negotiate a truce.
+
+Force-directed layout treats topology as a physics problem. What emerges isn&#x27;t optimal — it&#x27;s legible. The graph doesn&#x27;t know what it looks like. It only knows what pulls.</pre></section></body></html>

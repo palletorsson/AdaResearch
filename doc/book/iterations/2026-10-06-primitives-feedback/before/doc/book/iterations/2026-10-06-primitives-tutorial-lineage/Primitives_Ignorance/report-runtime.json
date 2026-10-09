@@ -1,0 +1,195 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "generator/count_0.3",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.3/0",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.3/2",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.3/4",
+      "passed": true
+    },
+    {
+      "id": "generator/outward_0.3",
+      "passed": true
+    },
+    {
+      "id": "generator/count_0.45",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.45/0",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.45/2",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.45/4",
+      "passed": true
+    },
+    {
+      "id": "generator/outward_0.45",
+      "passed": true
+    },
+    {
+      "id": "generator/count_0.6",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.6/0",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.6/2",
+      "passed": true
+    },
+    {
+      "id": "generator/opposite_0.6/4",
+      "passed": true
+    },
+    {
+      "id": "generator/outward_0.6",
+      "passed": true
+    },
+    {
+      "id": "generator/results_independent",
+      "passed": true
+    },
+    {
+      "id": "generator/rule_unchanged_by_result_edit",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Ignorance",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "result.append(-axis * radius)",
+      "after": "result.append(axis * radius)"
+    },
+    "required_failure": "generator/opposite_0.3/0",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "generator/count_0.3",
+          "passed": true
+        },
+        {
+          "id": "generator/opposite_0.3/0",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.3/2",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.3/4",
+          "passed": false
+        },
+        {
+          "id": "generator/outward_0.3",
+          "passed": false
+        },
+        {
+          "id": "generator/count_0.45",
+          "passed": true
+        },
+        {
+          "id": "generator/opposite_0.45/0",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.45/2",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.45/4",
+          "passed": false
+        },
+        {
+          "id": "generator/outward_0.45",
+          "passed": false
+        },
+        {
+          "id": "generator/count_0.6",
+          "passed": true
+        },
+        {
+          "id": "generator/opposite_0.6/0",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.6/2",
+          "passed": false
+        },
+        {
+          "id": "generator/opposite_0.6/4",
+          "passed": false
+        },
+        {
+          "id": "generator/outward_0.6",
+          "passed": false
+        },
+        {
+          "id": "generator/results_independent",
+          "passed": true
+        },
+        {
+          "id": "generator/rule_unchanged_by_result_edit",
+          "passed": true
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "generator/opposite_0.3/0",
+        "generator/opposite_0.3/2",
+        "generator/opposite_0.3/4",
+        "generator/outward_0.3",
+        "generator/opposite_0.45/0",
+        "generator/opposite_0.45/2",
+        "generator/opposite_0.45/4",
+        "generator/outward_0.45",
+        "generator/opposite_0.6/0",
+        "generator/opposite_0.6/2",
+        "generator/opposite_0.6/4",
+        "generator/outward_0.6"
+      ],
+      "hall": "Primitives_Ignorance",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Ignorance/tutorial.md": "5e0cd3b66711fc0b33bd67922a1c4ea4af1c5c2b44094514db883e7337ce59cb",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/lesson.gd": "e15871f9782b7eaa60fce93c943b8db4220ac9b1f66e79ac8e0e23da001d1efa",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

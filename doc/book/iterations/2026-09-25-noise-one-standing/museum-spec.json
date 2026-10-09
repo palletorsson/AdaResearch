@@ -1,0 +1,91 @@
+{
+  "shots": [],
+  "rays": [
+    {
+      "tag": "standing comparison floor",
+      "x": 5.5,
+      "z": 2.55,
+      "top": 0,
+      "tolerance": 0.15
+    },
+    {
+      "tag": "basin approach floor",
+      "x": 6.3,
+      "z": 10.0,
+      "top": 0,
+      "tolerance": 0.15
+    }
+  ],
+  "walks": [
+    {
+      "tag": "enter beyond doorway to comparison",
+      "from": [
+        6.5,
+        0.1,
+        0.6
+      ],
+      "to": [
+        5.5,
+        0.1,
+        2.6
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "compare from side to side",
+      "from": [
+        4,
+        0.1,
+        2.6
+      ],
+      "to": [
+        7.5,
+        0.1,
+        2.6
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "east aisle alongside model",
+      "from": [
+        8.7,
+        0.1,
+        4.2
+      ],
+      "to": [
+        8.7,
+        0.1,
+        9.8
+      ],
+      "seconds": 4
+    },
+    {
+      "tag": "approach terrain controls",
+      "from": [
+        8.7,
+        0.1,
+        9.8
+      ],
+      "to": [
+        6.3,
+        0.1,
+        10.3
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "depart toward next hall",
+      "from": [
+        6.3,
+        0.1,
+        10.3
+      ],
+      "to": [
+        6.3,
+        0.1,
+        12.3
+      ],
+      "seconds": 3
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+**Yes. I read both files, and there is an important version issue before we edit them:** the committed `Point_One` is still the older, combined opening—not yet the shorter **“A body in the light”** chapter in your reading proof.
+
+I checked the branch at `e2254c8`. The repository’s `final.md` is titled **“Position Without Extension”** and still includes late arrival, the counter, folding frames, the origin, the invisible point, pickup, coordinate readings and the target. Its `tutorial.md` likewise combines axes, object creation, pickup, reporting, tolerance and snapping.  
+
+The new Point Zero agreement already specifies a different division: **Point One distinguishes position, appearance and physical boundary; Point Coordinates teaches components, reference frames and pickup.** The current `Point_One/intent.md` still says it opens the whole curriculum with no predecessor. These files are therefore at different stages of the reorganisation.  
+
+That is not evidence that the older writing is bad. **It means we should separate version reconciliation from editorial criticism.** Here is what I would carry forward from this review.
+
+## 1. `final.md`: preserve its central discovery, redistribute its other work
+
+The strongest material for **Point One itself** is the passage between the invisible position and the body we give it.
+
+> “What have you found, if there is no body there?”
+
+And later:
+
+> “A position does not contain a colour. A mesh does not tell us whether a hand can hold it.” 
+
+These establish a productive question: **what must be added before a position becomes something we can encounter?**
+
+The first sentence creates curiosity. The second identifies operations that the finished object makes easy to confuse. Neither needs to become an exhaustive discussion of coordinates, interaction systems or representation.
+
+### The older chapter’s breadth is now a routing problem
+
+Under the new teaching agreement, I would distribute its material like this:
+
+| Material in the committed `final.md` | Role in the revised sequence |
+|---|---|
+| Arrival, counter, inheritance, folding frames and chosen origin | Point Zero already carries this. Preserve the older version in the revision history rather than repeat the opening. |
+| An undrawn position, a visible marker and a separately constructed physical boundary | The centre of Point One. |
+| Holding the point, WORLD/LOCAL readings, rounded reports and the target | Point Coordinates. |
+| A detour that the endpoint or arrival test does not record | A connection forward into Lines and Trace. |
+
+This is **not a recommendation to remove those artifacts from the museum**. A return may still be valuable. But the new Point One does not need to introduce every relation that a point will eventually acquire.
+
+### What I would protect in the prose
+
+The older file contains a particularly useful affirmative passage:
+
+> “Knowing how the sphere was made need not finish that interest. It gives you places to intervene: another surface, another response, another way to make a location felt.” 
+
+That is important to the research. Understanding does not merely expose an inadequacy; it creates another opportunity to make.
+
+I would preserve that thought somewhere in the new sequence. It may not need these exact three sentences if the light switch and the changing boundary already let the visitor experience it.
+
+### Where the older prose explains too much
+
+The invisible-point section makes the same underlying distinction several times:
+
+- the coordinates make nothing visible;
+- the point is never drawn;
+- it has no hidden mesh;
+- it becomes available through surrounding relations without acquiring a surface.
+
+The distinction deserves time. But after the reader has followed the arrows and lines to their meeting place, the final explanatory paragraph partly restates what they have just understood. 
+
+I would keep **the encounter, the named position and one clear explanation**, then allow the next visible object to change the question.
+
+The sentence I would be most inclined to move or reconsider is:
+
+> “The first point has already broken the promise of taking things one step at a time.”
+
+In the older combined chapter, that names a real proliferation. In the revised sequence, however, you have deliberately separated the steps. The sentence could now make the author sound apologetic for complexity that the new structure is successfully managing.
+
+**The revised Point One can be confident about its modest scope.** A position, an appearance and a boundary are already substantial material.
+
+## 2. `tutorial.md`: it is an outline of operations, not yet a dependable beginner’s lesson
+
+The tutorial’s main problem is not difficult prose. It is the amount of construction the beginner must supply between its excerpts.
+
+Point Zero now tells the learner which project to open, which script to replace, what the complete script looks like, what should happen, and what to change. The committed Point One does not yet offer that continuity. It begins with axis declarations and moves through several functions and scene fragments without establishing one complete working exercise. 
+
+**It is shorter than the encounter text, but it asks the beginner to infer more.**
+
+### A. Start from the supplied scene, not from rebuilding its prerequisites
+
+The opening says:
+
+> “Place a single point in space. Before it, the coordinate system must already exist.”
+
+Then it asks the learner to declare three axis vectors.
+
+Given the new agreement, I would instead begin with something like:
+
+> **Point Zero gave us an instruction that runs when the scene is ready. Here we will use that moment to place a marker. The supplied scene already gives us a floor, a light and a view. We will keep those while changing what appears in front of us.**
+
+This continues the learner’s actual work. It also avoids suggesting that naming three direction vectors is what creates the coordinate system the supplied scene already uses.
+
+The axes remain valuable, but the new agreement places their detailed reading in Point Coordinates.
+
+### B. Make the distinction between the position and the returned marker visible in the variable names
+
+This is the most important local correction.
+
+The tutorial defines:
+
+```gdscript
+func place_point(position: Vector3) -> MeshInstance3D:
+```
+
+It then assigns the returned object to:
+
+```gdscript
+var p := place_point(Vector3(1.0, 0.5, 0.0))
+```
+
+Immediately afterwards, the prose says:
+
+> “Three floats. One position. No extent.” 
+
+But the function returns the **mesh instance**, not the position value. The writing risks collapsing the very distinction the lesson wants to establish.
+
+I would consistently use two names:
+
+**`point_position`** for the location.  
+**`marker`** for the object placed there.
+
+And explain:
+
+> **The position supplies three coordinates. The function returns the visible marker placed at those coordinates.**
+
+This is not merely a naming preference. It makes the conceptual distinction easier to follow through the code.
+
+### C. Show where the creation instruction runs
+
+The tutorial never places the call to `place_point()` inside `_ready()`, despite the preceding lesson explicitly preparing that next step.
+
+I would supply a complete version showing the call in `_ready()`, rather than leaving the standalone `var p := …` for the beginner to position.
+
+The useful continuity is:
+
+> **We already know when this instruction runs. Now we can attend to what it creates.**
+
+That is the teaching promise recorded in Point Zero’s current agreement. 
+
+### D. Identify every borrowed helper
+
+`draw_axes()` calls `spawn_axis_line()`, but this tutorial neither defines that helper nor identifies a supplied script containing it.
+
+Similarly, the gyroscope is loaded from a full-repository path without explaining whether the learner’s study project contains it. 
+
+I am **not** claiming these resources do not exist anywhere in the repository. The problem visible in this document is that a learner cannot tell what they have been given and what they are expected to implement.
+
+For every such dependency, either supply it and name it, or move the operation to the lesson where its construction becomes relevant. Do not make the beginner discover the boundary of the supplied project through an unexplained failure.
+
+### E. “Make the point grabbable” promises more than the excerpt performs
+
+The shown function accepts an existing `XRToolsPickable` and connects its signals. It does not show the learner how the earlier mesh instance becomes that pickable object, and the handlers are not supplied in this tutorial.
+
+This is a gap between the heading and the instructions—not a judgement about whether the museum’s pickup works. 
+
+Under the new sequence, pickup belongs in Point Coordinates. There it should begin with a clearly identified supplied pickable scene or teach the necessary construction.
+
+The paragraph about the previous non-working `grabbable` group is useful development history. I would keep it in a technical note or revision record rather than put it between a beginner and their first successful pickup.
+
+### F. Separate proximity from identity
+
+The tutorial first says:
+
+> “The coordinates change as the point moves. The point’s identity does not.”
+
+Later, `are_same_point()` returns whether two positions are closer than a tolerance, followed by:
+
+> “Use tolerance-based comparison for any practical test of identity.” 
+
+Those are different questions. The displayed function compares a **distance**, not whether the same object persists through movement.
+
+I would rename it `positions_are_close()` and use the narrower explanation:
+
+> **Here we choose how close two positions must be for this test to accept them.**
+
+That belongs naturally beside the target in Point Coordinates. The strong material is the chosen acceptance region; it does not need a sweeping claim about every practical test of identity.
+
+## 3. What the revised Point One tutorial should make possible
+
+Following the new agreement, I would give the making lesson one continuous investigation:
+
+**Keep a position → give it a visible marker → change the marker without changing the position → compare appearance with a physical boundary.**
+
+This is a proposed lesson structure, not a description of a runnable Point One study I have verified.
+
+The important provision is the comparison. A learner could change the visible radius, retain the same centre, and then change the collision boundary independently. But a fixed-camera study needs a supplied way to make that boundary observable—a probe or another clearly explained contact test. A collider alone would not give the reader a visible comparison.
+
+**Borrowing that probe would be legitimate.** Point Zero already establishes that a lesson can provide supporting machinery while asking the learner to understand one selected operation.
+
+The light switch could then remain chiefly an encounter in `final.md`, or become a short optional making exercise. The tutorial does not have to reconstruct every event in the room to support its argument.
+
+## 4. The next action is version alignment, not another rewrite of the old opening
+
+The reading proof’s **“A body in the light”** already contains the more focused encounter: an absent object, a visible sphere, an apparently identical sphere with collision, the disappearing shadows and the larger sphere. :chatgpt-content-reference{index="13"}
+
+That is a substantially different chapter from the committed `final.md`. I would not overwrite it by polishing the older combined text.
+
+Before applying edits, bring the intended Point One `final.md`, `tutorial.md` and `intent.md` onto the same revision. Then review the exact study files supporting that tutorial.
+
+**My main recommendation is not to reduce the ambition. It is to make this distinction reliable in both forms: the encounter lets the visitor discover that appearance and physical boundary are separate; the tutorial lets the learner change that separation deliberately.**
+
+I have reviewed the committed texts and their relationship to the new teaching agreement. I have not changed any files or tested the scene in Godot.

@@ -1,0 +1,36 @@
+{
+  "checks": 76,
+  "failures": [],
+  "observations": [
+    {
+      "dropped_tip": "(-0.2, 0.3, -0.3)",
+      "room": "Point_One",
+      "spacing_m": 0.05,
+      "table": "GRID TRACE DATA\nRetained: 4 / 4096  Length: 0.38 m\nSpacing: 0.05 m\nRETAINED (m)  |  LATTICE INDEX\n(0.05,0.00,0.00) | (1,0,0)\n(0.10,0.00,0.00) | (2,0,0)\n(-0.10,0.00,0.00) | (-2,0,0)\n(-0.20,0.30,-0.30) | (-4,6,-6)\n"
+    },
+    {
+      "dropped_tip": "(-0.2, 1.0, -0.3)",
+      "room": "Point_Line_Grid",
+      "spacing_m": 0.05,
+      "table": "GRID TRACE DATA\nRetained: 4 / 4096  Length: 0.96 m\nSpacing: 0.05 m\nRETAINED (m)  |  LATTICE INDEX\n(0.05,0.00,0.00) | (1,0,0)\n(0.10,0.00,0.00) | (2,0,0)\n(-0.10,0.00,0.00) | (-2,0,0)\n(-0.20,1.00,-0.30) | (-4,20,-6)\n"
+    },
+    {
+      "retained": 3,
+      "scene": "draw_dot",
+      "table": "TRACE DATA\n─────────────────\nRetained: 3 / 3  Length: 0.44 m\nMove: >= 1.0 mm | Grid: 40.0 mm\n─────────────────\nLAST 10 POSITIONS\n 1: (0.36, 0.00, 0.00)\n 2: (0.40, 0.00, 0.00)\n 3: (0.44, 0.00, 0.00)\n"
+    },
+    {
+      "retained": 3,
+      "scene": "draw_stick",
+      "table": "TRACE DATA\n─────────────────\nRetained: 3 / 3  Length: 0.44 m\nMove: >= 1.0 mm | Grid: 40.0 mm\n─────────────────\nLAST 10 POSITIONS\n 1: (0.36, 0.00, 0.00)\n 2: (0.40, 0.00, 0.00)\n 3: (0.44, 0.00, 0.00)\n"
+    },
+    {
+      "contract_exception": "timer sampling including stationary positions",
+      "retained": 2,
+      "scene": "draw_dot_time_domain",
+      "table": "TRACE DATA\n─────────────────\nRetained: 2 / 3  Length: 0.00 m\nSample gate: >= 0.05 s | Z drift: 0.6 m/s\nFade: 0.06 s\n─────────────────\nLAST 10 POSITIONS\n 1: (0.00, 0.00, 0.03)\n 2: (0.00, 0.00, 0.00)\n"
+    }
+  ],
+  "ok": true,
+  "scope": "Actual scene scripts with manually moved grab nodes; controller ergonomics, room reachability and VR legibility remain unverified."
+}

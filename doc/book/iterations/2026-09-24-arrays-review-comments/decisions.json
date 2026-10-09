@@ -1,0 +1,74 @@
+{
+  "book_array_tutorial.001": {
+    "layer": "prose",
+    "decision": "Replaced desktop keys in the chapter with the actual VR mapping: forward stick follows controller aim; sideways stick moves across that aim. Rolling the controller is not a sideways command. The existing museum sign retains desktop instructions.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.002": {
+    "layer": "encounter + prose",
+    "decision": "Developed the changing floor, as the author requested. The blue sphere now writes once per operation into the hall’s real grid. Entry-side PAUSE / RESUME and RESTORE FLOOR controls expose those changes. Perimeter/threshold cells and the existing Molnár pad are protected. A consumed exposed cell reveals the surface one metre below; an actual museum body descends onto it. Restore waits for an occupying body. Added this encounter to final.md and the primary reading order. Headset traversal, recovery and comfort still need observation.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.003": {
+    "layer": "prose",
+    "decision": "Replaced the mistaken right-hand cue with the direction-free landmark beyond ONE EXCEPTION. This is the same sentence corrected for image stretching in comment 008.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.004": {
+    "layer": "prose",
+    "decision": "Distinguished the row’s overhead labels from the second line’s number plates at the cubes’ feet. The secondary column remains available for comparison.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.005": {
+    "layer": "prose",
+    "decision": "Named the actual starting state and the DEPTH 1 / 4 and RESET controls. The Molnár study arrives displaced; the reader now has a concrete way to establish the ordered comparison.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.006": {
+    "layer": "prose + caption",
+    "decision": "Reordered the visit: select an address outside, fly to its cube, collect it, hover in the vacancy, then descend and return to read zero. The console inset is identified as a separate view outside the enclosure; the prose no longer implies it can be read while hovering.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.007": {
+    "layer": "prose",
+    "decision": "Located the sequencer near the entrance, six metres to the right of the console as one enters. Replaced the misleading claim that it stands beside the console.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.008": {
+    "layer": "prose",
+    "decision": "Named the stretch caused by the tall wall sheet: its triangles are more than twice as tall as they are wide. Preserved the chapter’s argument about the receiver changing the image; merged with the orientation repair in comment 003.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.009": {
+    "layer": "figures",
+    "decision": "Recaptured all three affected figures in the working Godot museum with the desktop-only MushroomHand count hidden by the capture probes. Published clean native composites at stable book paths; preserved historical originals. The wall and disco runs passed their inherited controls/collision/capture checks.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.010": {
+    "layer": "code claim",
+    "decision": "Used the exact source expression step % disco_floor.grid_width. The floor is twelve columns wide here; the width belongs to the configured floor rather than a hard-coded twelve in the bridge.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.011": {
+    "layer": "prose",
+    "decision": "Said that the sequencer starts with an empty pattern, then invited the first cell. The text no longer sends a visitor into the dropdown to select its existing state.",
+    "triage": "fix",
+    "status": "done"
+  },
+  "book_array_tutorial.012": {
+    "layer": "figure caption",
+    "decision": "Changed the Molnár illustration’s alt text to describe all four layers seen at an angle, matching the oblique view.",
+    "triage": "fix",
+    "status": "done"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "Color_Context_Placed assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "landscape full size",
+      "passed": true
+    },
+    {
+      "name": "landscape visible",
+      "passed": true
+    },
+    {
+      "name": "landscape controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "landscape amount changed by pointer",
+      "passed": true
+    },
+    {
+      "name": "landscape bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "landscape bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "reference_landscape standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_landscape support along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_landscape standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "reference_landscape support along side 20",
+      "passed": true
+    },
+    {
+      "name": "reference_landscape capture",
+      "passed": true
+    }
+  ],
+  "map": "Color_Context_Placed",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

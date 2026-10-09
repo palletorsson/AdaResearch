@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "file": "reading.html",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "file": "point-one.html",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "file": "point-zero-study.zip",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "application/zip"
+    },
+    {
+      "file": "point-one-study.zip",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "application/zip"
+    },
+    {
+      "file": "point-zero/hello_world.gd",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    {
+      "file": "point-zero/hello_world.tscn",
+      "status": 200,
+      "matches_file": true,
+      "content_type": "text/plain; charset=utf-8"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+--- before/Color_Rainbow/final.md
++++ current/Color_Rainbow/final.md
+@@ -26,7 +26,9 @@
+ 
+ *Four arrangements, seen from the same place. The coloured steps change with the arch; their height and the opening beneath it remain.*
+ 
+-The option called `continuous` still makes forty-eight strips. For each one, the code computes a hue. **HSV** names hue, saturation and value: a place around a colour circle, how far the colour is from grey at that value, and a level that reaches black at zero. Here saturation and value both stay at one. Only hue travels:
++Look for the seams in the forty-eight-band version. The option is called `continuous`, but each strip still has its own colour.
++
++For each strip, the code computes a hue. **HSV** names hue, saturation and value: a place around a colour circle, how far the colour is from grey at that value, and a level that reaches black at zero. Here saturation and value both stay at one. Only hue travels:
+ 
+ ```gdscript
+ var t: float = float(i) / float(count - 1)
+@@ -35,11 +37,11 @@
+ 
+ `t` runs from zero at the first strip to one at the last. A hue value of one would complete a turn around the circle; multiplying by `0.78` takes this sweep partway around instead.
+ 
+-Look for its seams. A name can promise continuity while an implementation offers enough small divisions for some seams to become difficult to see. These are HSV values converted into RGB colours on a mesh. No droplets, sunlight or wavelength calculation produce this particular rainbow. Even its opaque appearance does not make the bands a climbing surface. The low steps have collision; the arch is a display.
++A name can promise continuity while an implementation offers enough small divisions for some seams to become difficult to see. These are HSV values converted into RGB colours on a mesh. No droplets, sunlight or wavelength calculation produce this particular rainbow. Even its opaque appearance does not make the bands a climbing surface. The low steps have collision; the arch is a display.
+ 
+-Look away from it, toward the striped banners and the mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They are already welcome in the room. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?
++Look for a colour you chose in the salon, first in the arch and then among the striped banners and mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They already share the room, even when the arch has no place for them. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?
+ 
+-The answer is not that every difference is already included. This control gives four choices, made in advance. It lets you discover that the arrangement can be otherwise, and also where its available otherwise stops. You might want a fifth choice. You might want a colour to take more space, or a border to refuse its neat curve.
++After the fourth arrangement, RE-DIVIDE returns to the first. You can stay with a version you like. Or you might want a fifth: a pale band, a colour given more room, a border that wanders away from the curve. The next change would reach beyond this button, into the list or the rule that makes it.
+ 
+ Before leaving, choose the version you want to stand beneath. Let the confetti return. The same programmed event can be a reward for obedience or an invitation that asks nothing of you; here you can repeat it without passing a test.
+ 

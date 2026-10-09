@@ -1,0 +1,129 @@
+{
+	"checks": [
+		{
+			"check": "No headset selects desktop",
+			"passed": true
+		},
+		{
+			"check": "Prepared floor supports desktop player",
+			"passed": true
+		},
+		{
+			"check": "Cube rests on plinth",
+			"passed": true
+		},
+		{
+			"check": "Unchanged Point Zero script creates one display",
+			"passed": true
+		},
+		{
+			"check": "Point Zero counter progresses in shared room",
+			"passed": true
+		},
+		{
+			"check": "Desktop view is the active camera",
+			"passed": true
+		},
+		{
+			"check": "Walk input moves through room",
+			"passed": true
+		},
+		{
+			"check": "Walls stop the desktop body",
+			"passed": true
+		},
+		{
+			"check": "Desktop ray can pick up cube",
+			"passed": true
+		},
+		{
+			"check": "Pickup freezes rigid body",
+			"passed": true
+		},
+		{
+			"check": "Held object follows desktop holder",
+			"passed": true
+		},
+		{
+			"check": "Drop restores gravity and pickable layer",
+			"passed": true
+		},
+		{
+			"check": "Reset returns dropped cube to plinth",
+			"passed": true
+		},
+		{
+			"check": "Reset also clears held state",
+			"passed": true
+		},
+		{
+			"check": "Desktop cannot pick up through architecture",
+			"passed": true
+		},
+		{
+			"check": "XR camera and controllers share one origin",
+			"passed": true
+		},
+		{
+			"check": "Both XR controllers receive synthetic grip poses",
+			"passed": true
+		},
+		{
+			"check": "XR Tools discovers both locomotion providers",
+			"passed": true
+		},
+		{
+			"check": "XR rig uses near grip on both hands",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 0 picks up through grip input",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 0 carries cube with tracked pose",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 0 releases cube",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 1 picks up through grip input",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 1 carries cube with tracked pose",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand 1 releases cube",
+			"passed": true
+		},
+		{
+			"check": "Synthetic left stick moves XR body",
+			"passed": true
+		},
+		{
+			"check": "Synthetic right stick snap turns",
+			"passed": true
+		},
+		{
+			"check": "Focus loss disables body and pickups",
+			"passed": true
+		},
+		{
+			"check": "Focus return enables body and pickups",
+			"passed": true
+		},
+		{
+			"check": "B/Y action reaches reset signal",
+			"passed": true
+		}
+	],
+	"godot": "4.6-stable (official)",
+	"headset_tested": false,
+	"passed": true,
+	"standalone_quest_tested": false,
+	"xr_input": "Synthetic XRControllerTrackers; no physical headset or tracked head"
+}

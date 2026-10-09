@@ -1,0 +1,20 @@
+--- before/commons/maps/CA_GameOfLife/final.md
++++ commons/maps/CA_GameOfLife/final.md
+@@ -16,7 +16,7 @@
+ var index = (a << 2) | (b << 1) | c
+ ```
+ 
+-Here `a`, `b` and `c` are the three states. The shifts give their positions different weights: four, two, one. `100` and `001` both contain one occupied cell, but ask different questions of the rule. The bridge's `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.
++Here `a`, `b` and `c` are the three states, read into one index as the board in the first hall did. The bridge's `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.
+ 
+ The study keeps that new row:
+ 
+@@ -43,6 +43,8 @@
+ 
+ Would you choose the same beginning for a screen and a crossing? You may want the holes in one and resist them in the other. A body we liked as ornament becomes awkward underfoot. This is a way of testing our desire against an implementation: change its use and discover what the beautiful surface had allowed us to overlook.
+ 
++Beyond the basin the hall continues: columns, the orb again, a lab, a mirrored automaton. The lab arranges a tape, a head and a state register as a model of a machine. Its sign asks what counts as computation. A familiar arrangement gives us somewhere to begin asking; it cannot do the work of a proof.
++
+ The next hall holds a two-dimensional present. A pattern will seem to travel while its cell addresses stay still. Keep the distinction between a recorded body and the procedure that continues it.
+ 
+ <!-- @ -->

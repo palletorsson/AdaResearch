@@ -1,0 +1,54 @@
+{
+	"artifacts": {
+		"do_not_cross_barrier": {
+			"dna": {
+			 "axes": {
+			 "form": [
+			 "sawhorse",
+			 "tape"
+			 ]
+			 }
+			},
+			"lookup_name": "do_not_cross_barrier",
+			"name": "Do Not Cross — Barrier",
+			"class_name": "DoNotCrossBarrier",
+			"description": "A line you must not cross, rebuilt PROCEDURALLY - no glb, every mesh built in _ready(). Two forms as a declared axis: `sawhorse` (the New York police barricade - a straight wooden plank painted NYPD blue on A-frame legs, the legend stencilled white on both faces) and `tape` (two steel posts and a ribbon hung as a TRUE catenary, a*cosh(x/a) with the constant solved by Newton from span and sag - wave 17 published 'the catenary that is a parabola' as a defect, so a barrier shipped after that finding does not repeat it; measured honestly, at the default 0.18 m sag the catenary is 0.19 mm from the parabola, so the honesty is in the arithmetic, not the look). The legend is a PARAMETER now (legend_text), not baked geometry. Pairs with walk_this_line_marking, the floor half: the tape forbids crossing the line, the paint commands following it. Raised and shortened 2026-09-01: span_m 3.2 -> 2.2 (a prohibition you cannot see the end of is a wall, not a barrier) and a new height_m, default 1.15, deliberately TALLER than either form's natural height - an NYPD barricade is ~28 in because a body leans over it to argue with a cop. It now carries a box collider spanning floor to plank, not the plank alone, since a barricade you can walk between the legs of has forbidden nothing. #height_m:0 restores each form's measured height (0.71 sawhorse, 0.95 tape) and #solid:0 removes the body.",
+			"scene": "res://commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.tscn",
+			"category": "environment",
+			"artifact_type": "prop",
+			"complexity": "simple",
+			"sequence": "primitives",
+			"tags": [
+				"line",
+				"boundary",
+				"prohibition",
+				"barrier",
+				"signage"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"size_group": "medium",
+			"spatial_needs": {
+				"footprint_cells": 3,
+				"clearance": "front"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.2,
+					1.0,
+					0.43
+				],
+				"source": "authored glTF, read from accessor bounds"
+			},
+			"relationships": {
+				"pairs_with": [
+					"walk_this_line_marking"
+				]
+			},
+			"dev_themes": [
+				"the line as instrument of exclusion"
+			],
+			"qfep_connection": "Point_Lines argues that measure is also violence — what does not fit the grid is remainder, error, erased. This and its companion are that argument as furniture, standing in PERPENDICULAR relations to one line: the tape forbids crossing it, the paint commands following it.",
+			"note": "REBUILT 2026-08-19 from the glb-mounted version: commons/models/do_not_cross_line.glb is no longer referenced by any artifact (kept in the repo as the authored source). Config: #form:tape|sawhorse #span_m #legend_text #sag_m #shove_deg."}
+	}
+}

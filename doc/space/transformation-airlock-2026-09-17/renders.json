@@ -1,0 +1,43 @@
+{
+  "artifact_sha256": "8143080a496bfc6474d009108d81a2bc8fd941e2aa533f86014dd84fb912fff9",
+  "mode": "isolated",
+  "results": [
+    {
+      "check": "saved airlock-closed",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved airlock-translation",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved airlock-rotation",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved airlock-open",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved airlock-three-quarter",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved airlock-open-angle",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "screenshots": 6,
+  "states": [
+    0,
+    0.4,
+    0.7,
+    1
+  ]
+}

@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_ElementaryRules · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_ElementaryRules">← Tutorial lineage</a></p><h1>CA ElementaryRules</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_ElementaryRules/final.md">Raw captured source</a></p><pre># A cell with a past
+
+How would you recognise a cell that has stopped being active but has not yet disappeared?
+
+The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. Two of the four choices change at once: a cell can hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
+
+&lt;!-- @structure_growth --&gt;
+
+Beside the volume, twenty-seven positions have been pulled apart. You can walk between them. They show one cell and its neighbours from the small structure, enlarged enough to follow without losing the address. The central position wears a golden frame; the finer outlines keep the empty places visible. Move around a cube that blocks your view. What looked like a crowded surface begins to give up its separate positions.
+
+Begin at the console. The structure is held at its starting generation. Pink means active. Press STEP once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours&#x27; active count. Follow it through another step. What does it leave available?
+
+Each position consults a cube of three by three by three positions. Remove the position itself and twenty-six neighbours remain: through faces, along edges, across corners. The source gathers their activity with this test:
+
+```gdscript
+for offset in neighbor_offsets:
+    if current_state[idx + offset] == 1:
+        neighbors += 1
+```
+
+The comparison is to `1`. A green neighbour holds `2`. Being present and being counted have parted company.
+
+The inscription `6-8/6-8/3/M` names this installation&#x27;s agreement. An active cell survives with six, seven or eight active neighbours. An empty cell becomes active with those same counts. Three states are available: empty, active, fading. `M` denotes the surrounding Moore neighbourhood, which this implementation fixes at twenty-six positions.
+
+REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but the code has already sent it down another branch. These are the lines for a state above one:
+
+```gdscript
+if state &lt; rule_states - 1:
+    next_state[idx] = state + 1
+else:
+    next_state[idx] = 0
+```
+
+Here `rule_states` is three, so state two goes to zero. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
+
+![The enlarged address is green after the first step, with seven active neighbours.](images/lingering-cell.png)
+
+![After the next step, the cell is empty and its golden address remains.](images/available-address.png)
+
+*The golden frame keeps the address while the rule changes what can occupy it. The two views follow successive generations from the same position.*
+
+Every answer is written into a second array. The old volume supplies all the questions before the arrays exchange places. There is no privileged first cell whose new answer reaches its neighbours early. STEP gives this local agreement one generation; the rest of the museum keeps running.
+
+Press VIEW. The structure and its enlarged neighbourhood take on a gradient from dark to light with height. Nothing has advanced. The same cells can look like one continuous material now that their different states share a colour scale. Press VIEW again and recover the distinction. The finish has changed what we can readily recognise. Which reading did we take for the object itself?
+
+The console also separates ACTIVE, FADING and DRAWN. The last number can be smaller than the first two added together. The renderer omits occupied cells surrounded on all six faces by occupied cells. Their state remains in the calculation. What the surface conceals can still help determine its next form. These visible cubes have no individual collision bodies; their appearance is not a promise of footholds.
+
+Try RUN, then hold it. REPLAY returns to the same seeded beginning, so a second observation can follow a detail missed the first time. Twenty steps fit the initial observation budget. At that limit the machine holds; +20 permits another interval without reseeding. Read the generation count, and CHANGED on a line below it, beside DRAWN. A stopped clock alone cannot tell us whether the configuration has stopped changing. Zero changed cells, after an update under these fixed conditions, gives stronger evidence: that whole state reproduced itself.
+
+There is an edge to this world too. Its outer cells stay empty. They do not wrap around to the opposite face as the previous board did. Near that boundary, a cell cannot find the same company it might find in the interior. The body has a rule, a beginning, an edge and a chosen duration of observation. Its organic appearance does not tell us which of these has made a particular feature possible.
+
+&lt;!-- @ --&gt;
+
+The dark orb remains beside the route as a further encounter. For now, carry the difference between an active cell, a lingering cell and a cell hidden by the drawing. The familiar wish to give something life has opened into more particular questions. What must remain? What must become available again? In the next hall, generations will themselves become a structure laid out in space. A past we have just replaced will become something we can approach.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_ElementaryRules/tutorial.md">Raw captured source</a></p><pre># A cell with a past
+
+1. Walk around the retained volume from the floor rim. Separate apparent neighbours by changing viewpoint.
+2. At the held console, STEP once. Find pink active and green fading cells; follow a green cell to empty on the next step.
+3. Walk between the enlarged 3×3×3 positions beside the specimen. Gold marks the centre. Remove it from the count: 26 neighbours. Inspect the source&#x27;s `== 1` comparison.
+4. REPLAY then STEP: the golden centre is green beside seven pink neighbours. STEP again: it empties. Empty can be born, active can survive, fading must finish its interval before rebirth is considered.
+5. VIEW changes state colours into height colours without advancing or resetting the automaton. Compare what each finish reveals.
+6. Compare ACTIVE + FADING with DRAWN. Six-face shell culling hides occupied interior cells while they remain in the 26-neighbour calculation.
+7. RUN and hold; REPLAY repeats the same seed. At the twenty-step budget, +20 permits further observation without restarting. Compare CHANGED with mere stillness.
+8. Carry state, neighbourhood, edge and time into CA_GameOfLife&#x27;s generation-as-space comparison.
+
+All five controls have passed real desktop pointer checks in Godot. The supplied walking body passes through the enlarged neighbourhood on the existing floor. Full-route and headset acceptance, plus update-cost optimisation, remain pending. The web exercise is an independent smaller model for remote review.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_ElementaryRules/technical.md">Raw captured source</a></p><pre># A three-dimensional Generations study
+
+**25 September encounter update:** `room:neighbours` adds an enlarged reading of 27 existing positions, sharing the original solver and console. Current implementation, native results and limitations are in [encounter-notes.md](encounter-notes.md). The dated implementation record below is retained.
+
+Primary source: `algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd`, with `StructureGrowth.tscn`. This historical map ID does not mean that this room enumerates the 256 elementary binary one-dimensional rules. That elementary mechanism is introduced on CA_Introduction&#x27;s rule explorer. This specimen extends the comparison to a volume.
+
+The retained scene has a 50×50×50 grid, 0.15 m logical cell spacing, a random central seven-cubed seed plus a 10% soup, and rule 6-8/6-8/3/M. Only state 1 contributes to the 26-neighbour Moore count. Empty state 0 is born at counts 6–8. Active state 1 survives at counts 6–8 and otherwise becomes 2. State 2 becomes 0 regardless of its neighbours. All interior outputs go into the second buffer before swapping. The rule parser stores a neighbourhood letter, but this source always constructs 26 offsets; another letter does not implement another stencil.
+
+The optional `study:states` placement adds `structure_study.gd` after the base has initialized. Its idempotent mount works through pre-ready config metadata and deferred apply_grid_config. Other scenes and placements retain their defaults and the separate mould DNA rule/wake bands. The structure scene and its original baked geometry remain unchanged.
+
+The study duplicates its MultiMesh resource, retains the full cell count and rule, and scales only the rendered volume by 0.32. It is centred over the retained opening, with a roughly 2.35 m occupied extent and base just above the room&#x27;s floor plane. The console remains metre-sized at the entrance rim, at approximately 1.05 m before tilt. Runtime review moved it 1.65 m to the side of the artifact anchor, narrowed its case to 1.15 m and enlarged its lettering so it no longer obscures the volume. Its five RackTemplates pointer controls are STEP, RUN, REPLAY, VIEW and +20. It disables the standalone camera/light for this instance. No per-cell collision or physical growth is claimed.
+
+The study owns the clock: initially held, automatic updates at most once per second, one generation per STEP, held at the current budget (initially 20). +20 extends that budget without a state update and leaves the study held. REPLAY resets generation, budget, fractional clocks and both state buffers, using Godot RNG seed 23090. VIEW changes only colouring. State colours use the scene&#x27;s pink and green; the alternate height gradient uses the existing gradient. Counts distinguish active, fading, drawn and changed positions. CHANGED compares current_state with next_state after the swap, when next_state holds the previous generation. A zero comparison after a step establishes a fixed point for this deterministic rule and boundary; it does not classify cycles or all possible seeds.
+
+Boundary repair is scoped to this optional study. The legacy initializer seeds the outer shell, while the update and rendering skip it. Without intervention those hidden seeds alternate with the initially empty second buffer. Replay clears boundary cells in both buffers. Subsequent interior-only steps preserve the empty boundary. Other shared-script uses have not been silently changed; their boundary semantics remain a separate review item.
+
+Rendering includes state &gt; 0 only if at least one of its six face neighbours is empty. This shell selection is different from the 26-neighbour calculation. Omitting a cell from the MultiMesh does not remove it from the state arrays. Height colours can conceal active/fading distinctions while leaving both state and generation unchanged.
+
+The complete old 7×10 structure is retained at offset (3,2) inside a 13×14 walled floor with three-cell entry and exit gaps. Its pits and raised cells remain. max_height=6 and museum.wall_height=7 preserve the original raised cells as tiers rather than flattening them into the converter&#x27;s ordinary wall token. An open roof clears the tallest tier. The spawn and next portal now occupy the added level floor. Both authored artifacts remain, with structure_growth primary and dark_sphere decoration. Map declaration and both museum plans insert this hall between CA_Introduction and CA_GameOfLife; other placements remain unchanged.
+
+The independent web exercise uses 14-cubed cells and a fixed JavaScript seed, with the same transition and boundary semantics. It is a teaching model, not a matching Godot seed, screenshot or performance measurement. Source, data, grammar and browser checks are recorded with the review. A rendered Godot review now passes 21 desktop checks, including the actual solver, state replay, boundary buffers, view changes, shell rendering, budget controls, ownership and all five pointer controls. Entrance, side and console photographs are available. The existing editor was left open; the earlier all-process guard was too broad and now distinguishes an editor from another game/capture. A full 125,000-cell update took 144 ms in the latest run. That cost needs optimisation; a one-second update interval does not prevent a long frame. Physical route traversal and headset acceptance remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_ElementaryRules/intent.md">Raw captured source</a></p><pre>Concept: What can a cell retain after it stops being active?
+Sequence role: Second Cellular Automata hall, after CA_Introduction; next CA_GameOfLife.
+Question: Which parts of a visible body are participating, lingering, or concealed by its drawing?
+Primary: structure_growth, retaining its 26-neighbour, three-state builder law.
+Retained further encounter: dark_sphere (decoration).
+Do: Step, hold/run, replay a seed, switch state/height colouring, extend the observation budget. Walk among the enlarged 27 positions of one actual neighbourhood and follow its gold-framed centre.
+Observe: Active count differs from occupied count; rendered count may differ from both. State 2 cannot be reborn until after it becomes empty.
+Critical opening: Visibility, participation and availability are distinct choices in the implementation.
+Spatial approach: The original relief is preserved inside a level perimeter route; the volume is centred over the opening and the controls stand on its entrance rim.
+Next improvement: Optimise the measured full-volume update cost (roughly 150 ms on this desktop). Actual desktop pointer reach and the approach between the enlarged cells are checked; tracked-hand reach, whole-route traversal, comfort and Quest performance remain pending. Explore a longer fading interval only as a clearly named comparison, not an unannounced rule change.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_ElementaryRules/critical.md">Raw captured source</a></p><pre># Present, but not counted
+
+The state-two cell occupies a position but contributes nothing to the active neighbour count. For one generation it also prevents that position from receiving the birth available to an empty cell. The work makes three conditions distinct: participating, lingering, becoming available again. These are consequences of a particular state machine, not laws about social life. Their specificity makes them available for thought without turning the simulation into a universal explanation.
+
+The height finish folds active and fading states into a shared appearance. A second finish separates them. The display can therefore make continuity persuasive where the calculation preserves a difference. Its shell rendering makes another selection: an occupied interior can remain consequential without being drawn. Visibility and causal participation are separate operations in this artifact.
+
+This extends the noise sequence&#x27;s question about the useful organic filter. A blob can give pleasure, desire or a queer suggestion of becoming. Learning the next mechanism lets us ask which relations could sustain another body. Here a stored state delays reuse of a position. The result need not look less like a blob to give us a new capability. Its value is in the particular experiment it makes possible, rather than an assumed hierarchy of more authentic life.
+
+The edge and the clock also belong to the argument. This study specifies an empty outer shell, a repeatable seed and a twenty-step observation budget that can be extended. The inherited source had a hidden alternating boundary because only the interior was updated. Correcting that boundary here makes the stated experiment reproducible; it does not erase the old behaviour from the archive or pretend every other placement has been repaired. A limit in the schedule can produce stillness before the rule produces a fixed point. We can inspect the changed-state count instead of asking stillness to prove equilibrium.
+
+The source gives us handles for further work: alter the fading interval, admit another counted state, change the boundary, draw the hidden interior. Each would revise a specific relation. The museum keeps those possibilities open while giving this first visit a path narrow enough to follow.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_ElementaryRules/artifacts.md">Raw captured source</a></p><pre># CA ElementaryRules — Artifacts
+
+## Structure Growth — primary
+
+`structure_growth`
+
+The existing three-state, 26-neighbour volume: empty, active and fading. Its held console lets us STEP, RUN, REPLAY, change the colour reading with VIEW, and extend the observation budget with +20.
+
+The enlarged neighbourhood beside it reads the same 27 positions around cell (26, 22, 24). At the seeded beginning that cell is active; after one step it is fading beside seven active neighbours; after another it is empty. Gold marks its address. Spacing makes the positions approachable, while the original volume retains their compact relation. Both views share the existing controls and state arrays.
+
+## Dark Sphere — supporting
+
+`dark_sphere`
+
+Retained as a comparison of silhouette and appearance, outside the chapter&#x27;s primary encounter. It does not supply the neighbourhood rule or the fading-cell example.
+
+The historical map name is preserved. This hall does not exhibit all 256 elementary one-dimensional rules; the preceding hall introduces the three-cell rule table.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_ElementaryRules/summary.md">Raw captured source</a></p><pre># A cell with a past
+
+CA_ElementaryRules keeps the existing structure-growth volume and dark orb. The primary volume uses 26 neighbours and three states: empty, active and fading. A held console exposes individual steps, repeatable replay, state/height colours and an extendable twenty-step observation budget. The original floor relief remains inside an added walled circulation floor. The map is restored between CA_Introduction and CA_GameOfLife in the active museum route.
+
+An enlarged view of one actual 27-position neighbourhood makes the active → fading → empty transition approachable. Its golden central address persists when the cell disappears; the seven-neighbour example now occurs in the seeded installation.
+
+The lesson distinguishes active cells, occupied cells, rendered cells and a fixed point. The historical map ID is retained; a survey of all 256 elementary one-dimensional rules is not present. Source, remote review and actual Godot captures are available. The current native desktop checks cover all 27 copied states, shared colour mapping, eight real pointer events, replay, the budget and a supplied walking body through the open gaps. The full update still takes roughly 150 ms. Whole-route traversal, tracked-headset acceptance and Quest performance remain open. See encounter-notes.md for the bounded evidence.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_ElementaryRules/blurb.md">Raw captured source</a></p><pre># A cell with a past
+
+A green cell is still there, but its neighbours no longer count it. Step through its disappearance, change the finish, and discover how much of a body the drawing leaves out.
+</pre></section></body></html>

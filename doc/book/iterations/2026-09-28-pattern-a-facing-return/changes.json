@@ -1,0 +1,26 @@
+[
+  {
+    "before": "In the foundry, a small source reached the walls around you. Here, pass the patterned plates in the main room and take the opening in the east wall into the side bay. Two framed fields flank an editor. Both contain the same red bend, the blue corner and the small ochre interruption. Follow the red bend across each field. Does it always face the same way?",
+    "after": "In the foundry, a surface could keep an earlier version of a pattern. Here two fields stay with the same source. Pass the patterned plates in the main room and take the opening in the east wall into the side bay. Two framed fields flank an editor. Both contain the same red bend, the blue corner and the small ochre interruption. Follow the red bend across each field. Does it always face the same way?"
+  },
+  {
+    "before": "The sixteen buttons on the console show the source. Read them from the top row down. Find the red bend there, then find it again on the left panel. Move one tile to the right. Something has travelled without turning.",
+    "after": "The sixteen buttons on the console show the source. Read them from the top row down. Find the red bend there, then find it again on the left panel. Follow it one tile to the right. The bend returns with the same facing."
+  },
+  {
+    "before": "The names can wait until you have found the difference. P1 repeats by translation. In this station's PM rule, alternate columns sample the source in reverse across x. The shader begins by separating a position into the tile it belongs to and its position within that tile:",
+    "after": "Now press FLIP X. Watch the source this time. Its blue corner crosses to the other side. Both wall fields respond, although their rules remain P1 and PM. One reversal left the painted cells alone; the other has rearranged them. The little grid is where you can tell them apart.\n\n![The same pair of museum panels before and after flipping their shared source.](/book-review/doc/book/iterations/2026-09-28-pattern-a-facing-return/source-pair.png)\n\n*FLIP X changes the little source and both fields. The left field continues to translate; the right continues to reverse alternate columns.*\n\nP1 repeats by translation. In this station's PM rule, alternate columns sample the source in reverse across x. The shader begins by separating a position into the tile it belongs to and its position within that tile:"
+  },
+  {
+    "before": "Now press FLIP X. Watch the source this time. Its blue corner crosses to the other side. Both wall fields respond, although their rules remain P1 and PM. Here the operation really does rewrite the array:",
+    "after": "FLIP X instead rebuilds the stored rows from the opposite end:"
+  },
+  {
+    "before": "The line takes a cell from the opposite end of its row. Press FLIP X again. The second reversal brings every cell back. Try ROTATE, then follow the corner through four presses. UNDO takes you back one editing operation; RESET restores the starting mark and the translating floor. Reset can itself be undone.",
+    "after": "The line takes a cell from the opposite end of its row. You saw its result in the source buttons. Press FLIP X again. The second reversal brings every cell back. Try ROTATE, then follow the corner through four presses. UNDO takes you back one editing operation; RESET restores the starting mark and the translating floor. Reset can itself be undone."
+  },
+  {
+    "before": "For a moment, a field may look unchanged even after an operation. A very symmetrical source can conceal a reversal. Add a difference and try again. The useful mark may be the one that refuses to look the same from every direction.",
+    "after": "A square can turn and seem not to have moved. Here a symmetrical source can conceal a reversal. Add a difference and try again. The useful mark may be the one that refuses to look the same from every direction."
+  }
+]

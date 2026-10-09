@@ -1,0 +1,214 @@
+--- before/commons/artifacts/ignorance_gallery/capsule_reliquary.gd
+
++++ commons/artifacts/ignorance_gallery/capsule_reliquary.gd
+
+@@ -5,12 +5,18 @@
+
+ var body: MeshInstance3D
+ 
+ func _ready() -> void:
++	var architecture = preload("res://commons/artifacts/ignorance_gallery/gallery_architecture.gd")
++	architecture.bay(self,13.0,-1.0)
++	architecture.pentagon(self,Vector3(-3.3,2.2,4.1))
++	Kit.label(self,"ENDLESS MUSEUM",Vector3(3.2,2.65,4.1),0.0032,PI)
++	Kit.label(self,"always another room",Vector3(3.2,2.32,4.09),0.002,PI)
+ 	for i in 8:
+ 		var height := 0.13
+ 		var radius := lerpf(1.55,0.62,float(i)/7.0)
+ 		tiers.append(Kit.cylinder(self,Vector3(0,height*(i+0.5),0),radius,height,i+4))
+ 		Kit.label(self,str(i+4),Vector3(0,height*(i+0.5),-radius-0.006),0.0014,PI)
+ 	capsule=load("res://commons/primitives/capsule/capsule.tscn").instantiate()
++	capsule.facture="facet" # Existing flat-face view of the same five-by-five construction.
+ 	add_child(capsule)
+ 	body=capsule.get_node("capsule")
+ 	body.scale=Vector3.ONE*1.6
+
+--- before/commons/artifacts/ignorance_gallery/geometry_courtyard.gd
+
++++ commons/artifacts/ignorance_gallery/geometry_courtyard.gd
+
+@@ -11,11 +11,14 @@
+
+ var columns: Array[MeshInstance3D]=[]
+ 
+ func _ready() -> void:
++	preload("res://commons/artifacts/ignorance_gallery/gallery_architecture.gd").bay(self,12.0)
+ 	var divisions := [4,5,6,8,12,20,32,64]
+ 	for side in [-1,1]:
+ 		for i in divisions.size():
+ 			var z := -4.5+float(i)*1.28
+ 			columns.append(Kit.cylinder(self,Vector3(side*6.4,1.9,z),0.32,3.8,divisions[i]))
++			Kit.block(self,Vector3(0.85,0.14,0.85),Vector3(side*6.4,0.07,z))
++			Kit.block(self,Vector3(0.85,0.14,0.85),Vector3(side*6.4,3.73,z),Kit.WHITE,false)
+ 			Kit.label(self,str(divisions[i]),Vector3(side*6.4,0.18,z-0.34),0.0016,PI)
+ 	# A lintel and inscription frame the actual entrance, with clear headroom.
+ 	Kit.block(self,Vector3(4.9,0.64,0.10),Vector3(0,3.22,-6.61))
+@@ -36,3 +39,13 @@
+
+ 		remove_child(source);source.queue_free()
+ 	Kit.lamp(self,Vector3(-3.5,3.4,0),0.85)
+ 	Kit.lamp(self,Vector3(3.5,3.4,0),0.85)
++	_neutral_display.call_deferred()
++
++func _neutral_display() -> void:
++	var hall: Node = self
++	while hall != null and not hall.has_meta("em_map"): hall=hall.get_parent()
++	if hall == null or str(hall.get_meta("em_map")) != "Primitives_Ignorance": return
++	if hall.has_node("IgnoranceStonePalette"): return
++	var palette := preload("res://commons/rendering/museum_grayscale.gd").new()
++	palette.name="IgnoranceStonePalette"
++	hall.add_child(palette)
+
+--- before/commons/artifacts/registry/commons_artifacts.json
+
++++ commons/artifacts/registry/commons_artifacts.json
+
+@@ -16569,16 +16569,41 @@
+
+ 	  ],
+ 	  "qfep_connection": "The ready-made scene offers a repertoire before a visitor chooses. Repetition can support a new arrangement while keeping the inherited choices of the source object visible."
+ 	},
++	"form_in_hand": {
++  "lookup_name": "form_in_hand",
++  "scene": "res://commons/artifacts/ignorance_gallery/form_in_hand.tscn",
++  "name": "A form in the hand",
++  "description": "A suspended black point loses rings and radial segments while held. Trigger sends a copy of its current mesh through the catalyst interaction protocol. Paired white spheres distinguish rings from segments.",
++  "footprint": [16, 4.1, 11],
++  "size_group": "large",
++  "category": "primitives",
++  "dev_category": "primitives",
++  "complexity": "beginner",
++  "tags": [
++    "point",
++    "resolution",
++    "pickup",
++    "catalyst",
++    "museum"
++  ],
++  "interactions": [
++    "Grip: simplify the sphere",
++    "Trigger: send the current form",
++    "Release: return after two seconds"
++  ],
++  "map_ready": true,
++  "include_in_map_data": true,
++  "map_sequences": [
++    "primitives"
++  ],
++  "qfep_connection": "The form being inspected becomes a capacity in the hand; reducing divisions changes what can be sent without replacing the point."
++},
+ 	"geometry_courtyard": {
+ 	  "lookup_name": "geometry_courtyard",
+ 	  "scene": "res://commons/artifacts/ignorance_gallery/geometry_courtyard.tscn",
+ 	  "name": "The geometry court",
+ 	  "description": "One of each of five Platonic solids on sober plinths, surrounded by sixteen cylinder columns in eight resolutions. The Academy motto frames the entrance.",
+-	  "footprint": [
+-		14,
+-		4,
+-		12
+-	  ],
++	  "footprint": [16, 4.1, 13],
+ 	  "size_group": "large",
+ 	  "category": "primitives",
+ 	  "dev_category": "primitives",
+@@ -16600,11 +16625,7 @@
+
+         "primitives"
+ 	  ],
+ 	  "parameters": {
+-		"footprint": [
+-		  14,
+-		  4,
+-		  12
+-		]
++		"footprint": [16, 4.1, 13]
+ 	  }
+ 	},
+ 	"sphere_resolution_atlas": {
+@@ -16650,11 +16671,7 @@
+
+ 	  "scene": "res://commons/artifacts/ignorance_gallery/capsule_reliquary.tscn",
+ 	  "name": "Five, on four through eleven",
+ 	  "description": "The existing five-sided, five-ring capsule enlarged 1.6x above eight stacked cylinders with 4 through 11 radial segments.",
+-	  "footprint": [
+-		3.2,
+-		3,
+-		3.2
+-	  ],
++	  "footprint": [16, 4.1, 13],
+ 	  "size_group": "large",
+ 	  "category": "primitives",
+ 	  "dev_category": "primitives",
+@@ -16676,11 +16693,7 @@
+
+         "primitives"
+ 	  ],
+ 	  "parameters": {
+-		"footprint": [
+-		  4,
+-		  3,
+-		  4
+-		]
++		"footprint": [16, 4.1, 13]
+ 	  }
+ 	},
+ 	"primitive_mesh_library": {
+
+--- before/commons/maps/Primitives_Ignorance/final.md
+
++++ commons/maps/Primitives_Ignorance/final.md
+
+@@ -99,6 +99,12 @@
+
+ 
+ The old studies remain through the side opening: the rock, the star, the extra cubes and other studies. The choir joins the engine mesh library in the next hall, Primitives_Godot. The court has made a clear arrangement without exhausting what these forms might become.
+ 
++<!-- @form_in_hand -->
++
++A black point hangs within reach. Take it. As you hold it, the rings and segments decrease; corners emerge where the surface seemed continuous. Its radius stays the same. The hand that examined the form now changes the terms of its construction.
++
++Press the trigger and a copy leaves your hand, keeping the divisions it had at that instant. The point remains with you. Here is the beginning of a catalyst: a form we were learning to recognise becomes something we can act with. What do we want it to do, once understanding gives us that possibility?
++
+ <!-- @ -->
+ 
+ Carry a more specific question than whether the sphere is good enough: **enough to hold which distinction, for whom, at what distance?**
+
+--- before/commons/maps/Primitives_Ignorance/map_data.json
+
++++ commons/maps/Primitives_Ignorance/map_data.json
+
+@@ -11,7 +11,7 @@
+
+ 	},
+ 	"metadata": {
+ 	  "source": "editor",
+-	  "n_artifacts": 27
++	  "n_artifacts": 28
+ 	},
+ 	"museum": {
+ 	  "props_deny": [
+@@ -3555,7 +3555,7 @@
+
+ 		"",
+ 		"",
+ 		"",
+-		" ",
++		"form_in_hand:0:0#plinth:0",
+ 		"",
+ 		"",
+ 		"",
+
+--- before/commons/maps/Primitives_Ignorance/tutorial.md
+
++++ commons/maps/Primitives_Ignorance/tutorial.md
+
+@@ -10,6 +10,8 @@
+
+ ## In the museum
+ 
+ Among the Platonic solids, the octahedron offers a compact rule: put a position at each end of three perpendicular axes. Six positions replace a long list of coordinates. The geometry courtyard gives the result a place; this lesson makes its construction available to you.
++
++The hanging black point near the exit previews the next lesson: holding it reduces its rings and segments, and the trigger sends its current form. You can try it here; this tutorial stays with the rule that produces positions. Primitives_Godot returns to the same point to explain its resolution parameters.
+ 
+ In Cube, you wrote the corner positions into a list. Here you write a rule that returns a list for each radius you give it. Arrays, loops and the face renderer return; a named function makes their work reusable. We supply the eight face triples so that the lesson stays with generating positions.
+ 

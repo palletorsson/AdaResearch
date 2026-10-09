@@ -1,0 +1,402 @@
+{
+  "sequence": "noise",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "Random_Noise_Types",
+      "primary_tokens": [
+        "randompoints"
+      ],
+      "question": "Can random positions still refuse to be neighbours?",
+      "ontology": "A sample distribution specifies how positions are selected; an exclusion radius constrains relations among accepted samples.",
+      "action": "Observe the point cloud from two sides; find the closest visible pair before moving any pickable point.",
+      "observable": "The original cloud avoids pairs closer than 0.25 local units. Moving a point later need not preserve the generation rule.",
+      "mechanism": "spawn_points defaults BLUE_NOISE; _generate_blue_noise rejects candidates within minimum distance and caps100 attempts per requested point.",
+      "limit": "A constrained sample is not proof that all randomness is evenly spaced. Perspective conceals depth and later manipulation changes the sample.",
+      "variation": "Proposed extension: Place matched uniform and blue-noise samples with the same requested count and volume, and reveal rejected candidates.",
+      "prior_bridge": "Random_Game",
+      "next_bridge": "Noise_Columns",
+      "sources": [
+        {
+          "path": "algorithms/randomness/randompoints/randompoints.gd",
+          "fact": "19–25,41–59,87–121: blue-noise default; pickable child scene; finite dart throwing."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 4,
+          "token": "randompoints:-90:0:1"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor distribution selector; apply_grid_config is pass; selecting a distribution is currently author-side. Dark sphere is not placed here.",
+      "source_hashes": {
+        "commons/maps/Random_Noise_Types/map_data.json": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+        "algorithms/randomness/randompoints/randompoints.tscn": "b706a1e42fe4bd9fbce1aa3be7450a668612afa2bd61fc1e76a8ea917513ee59",
+        "algorithms/randomness/randompoints/randompoints.gd": "fe5d88d11ea246600ac47bbcc3647fa04b8fe363f20596e58dfdf91802416a2c",
+        "commons/maps/Random_Noise_Types/intent.md": "bd56f92fc856a88541778419bd0050e0aae4fbbdc77fdb2b35bc314a77976ca5",
+        "commons/maps/Random_Noise_Types/blurb.md": "d7f73bf3bd035979e26e490a9f7dc20ad80cdebbe552e0703a03489827169080",
+        "commons/maps/Random_Noise_Types/critical.md": "e84e07140418afffc6211a14b80771b48fc1fe116a909f03460d57c47beaecd0",
+        "commons/maps/Random_Noise_Types/technical.md": "6c79c2aea05d35bba090856d4805f1a322529151ac8eddd9ed613c244a975d61"
+      }
+    },
+    {
+      "room_id": "Noise_Columns",
+      "primary_tokens": [
+        "MeltingBerniniScene"
+      ],
+      "question": "What remains recognisable while a column changes shape?",
+      "ontology": "A surface can retain its construction and repeated profile while vertex positions and material values vary over time.",
+      "action": "Watch one column through a cycle, then compare it with a neighbouring column at the same moment.",
+      "observable": "Shafts bend and droop while rotation rates and melt phases differ across columns.",
+      "mechanism": "Scene specifies13 columns,8-unit height,13-point layout; _process advances per-column rotation and sin(time*melt_speed+i), rebuilding spiral shaft mesh.",
+      "limit": "This is programmed deformation, not a simulation of stone losing strength or an available noise-amplitude experiment. Periodic change does not establish physical erosion.",
+      "variation": "Proposed extension: Add an intact reference column and a freeze/phase control so the visitor can separate deformation from rotation.",
+      "prior_bridge": "Random_Noise_Types",
+      "next_bridge": "Noise_One",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd",
+          "fact": "130–163: timed rotation and cyclic mesh rebuild;349–370: height compression, spiral and overhang formulas."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 7,
+          "token": "MeltingBerniniScene"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No entrance slider exists; do not repeat brief claims of reversible Perlin erosion. Scene show_platform=false.",
+      "source_hashes": {
+        "commons/maps/Noise_Columns/map_data.json": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+        "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn": "f5fe2b46dbbb2ed74ea0ac05392ab00b61a7b6ba1318f9a6c3cde0fd357a9d65",
+        "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd": "83924139761e4867b6bd89711c7cffde04ed1234bb8dc228d383ac5e56090505",
+        "commons/maps/Noise_Columns/intent.md": "0615196f15a1a762196df979fcdb92d125d76645b6baaaed1966864a1f95c41a",
+        "commons/maps/Noise_Columns/blurb.md": "e1f14246937614b2f848a5c1554c95a9f953de006291d7707aa6294ea6c780e0",
+        "commons/maps/Noise_Columns/critical.md": "645c74469830a60b0eb22e028a5a13453f98413bacfe82ccbeca4c7fdda541fc",
+        "commons/maps/Noise_Columns/technical.md": "0391637b27dd71aee7dfe783aa654ce5d4c1fac6dd7adf57e17de31ad8c2b557"
+      }
+    },
+    {
+      "room_id": "Noise_One",
+      "primary_tokens": [
+        "noisetorus"
+      ],
+      "question": "Is a restless surface changing its underlying shape or only how that shape is expressed?",
+      "ontology": "A field assigns a scalar to a coordinate; a readout turns that scalar into displacement or colour on an existing mesh.",
+      "action": "Watch a section of the ring, then move to see its opening and silhouette.",
+      "observable": "The ring remains the support for changing displacement and hue, although large displacement can obscure its torus form.",
+      "mechanism": "noiseTorus vertex samples interpolated value noise at object XZ plus timed offset and moves vertices along NORMAL; scene height_multiplier0.2 and noise_speed0.935.",
+      "limit": "Spatial correlation does not mean the field remembers a visitor or keeps a neighbour list. A changing view also changes what the visitor can judge.",
+      "variation": "Proposed extension: Make relief and colour-only plate versions share a frozen field so the same values support different readings.",
+      "prior_bridge": "Noise_Columns",
+      "next_bridge": "Noise_Voxel",
+      "sources": [
+        {
+          "path": "commons/resourses/shaders/noiseTorus.gdshader",
+          "fact": "18–27 interpolation;37–59 vertex displacement."
+        },
+        {
+          "path": "algorithms/randomness/noisetorus/noisetorus.gd",
+          "fact": "_apply_readout implements relief/plate/none;235 apply_grid_config."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 5,
+          "token": "noisetorus"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor readout control; noiselayers remains secondary and is not required for this core.",
+      "source_hashes": {
+        "commons/maps/Noise_One/map_data.json": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+        "algorithms/randomness/noisetorus/noisetorus.tscn": "98d53b861cb09f81ac7108b177d6724974a7dc9ed0153202eeeee6f8292ecc41",
+        "commons/resourses/shaders/noisePlanet2.gdshader": "c4da281f5e62937ae37d01b2b36aa78779dc091cbd9c028752ec38627d06de09",
+        "commons/resourses/shaders/noiseTorus.gdshader": "c4da281f5e62937ae37d01b2b36aa78779dc091cbd9c028752ec38627d06de09",
+        "algorithms/randomness/noisetorus/noisetorus.gd": "6ce0ffcef5d275da9729274eb6e876edad96174306d570bfb9309a101753b854",
+        "commons/maps/Noise_One/intent.md": "270e1c7904d00de3da079b09beda5cd76201203b53a06d1bafcd66af90d9f038",
+        "commons/maps/Noise_One/blurb.md": "a9c7c51949f8f669d000232f85a369c8f625e83af2fce0245dd7fddbfd6d2bd0",
+        "commons/maps/Noise_One/critical.md": "e774a788b42022db500dd0f5b030f07a305d89694b782ff6c953133e402edd10",
+        "commons/maps/Noise_One/technical.md": "c5711a68f443a18d02cd06bed6bbbf9fde6d1463b30f97d7d99a368c96f1e29d"
+      }
+    },
+    {
+      "room_id": "Noise_Voxel",
+      "primary_tokens": [
+        "perlin_terrain_sculptor",
+        "voxelnoise"
+      ],
+      "question": "Can you remove matter without changing the field that decides where it could appear?",
+      "ontology": "A voxel is a discrete volume sample. A threshold classifies a sampled scalar as occupied or empty.",
+      "action": "Move THRESH slowly while leaving SCALE and SEED alone; compare the small volume and linked voxel exhibit, then return THRESH to its earlier position.",
+      "observable": "Higher thresholds retain fewer samples; the connected display also rebuilds. Returning the threshold with the seed fixed restores the same classification.",
+      "mechanism": "Sculptor samples Perlin fBm with a height bias and compares n-height_bias>threshold; broadcasts threshold,normalised frequency,octaves,seed to voxelnoise_receivers. Receiver uses a simplex field, so the pair shares controls rather than identical geometry.",
+      "limit": "The cut classifies a field chosen by the author. Occupied cubes are an encoding, not evidence that matter itself is binary. Linked images are not identical field copies.",
+      "variation": "Proposed extension: Let visitors compare fixed threshold and changing seed, then fixed seed and changing threshold; preserve both results side by side.",
+      "prior_bridge": "Noise_One",
+      "next_bridge": "Noise_6_Wall",
+      "sources": [
+        {
+          "path": "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+          "fact": "_create_vr_controls THRESH/SCALE/SEED;226–244 height-biased threshold;300–319 broadcast."
+        },
+        {
+          "path": "algorithms/randomness/voxelnoise/voxelnoise.gd",
+          "fact": "95–115 voxel occupancy;210–220 TYPE_SIMPLEX configuration;apply_perlin_terrain_controls."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "perlin_terrain_sculptor:180:0.5:1#mount:shelf"
+        },
+        {
+          "x": 2,
+          "z": 3,
+          "token": "voxelnoise"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No octaves VR slider despite header comment. Group broadcast may reach receivers beyond this room in museum; runtime pairing must be checked.",
+      "source_hashes": {
+        "commons/maps/Noise_Voxel/map_data.json": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+        "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn": "44bf7a72c567f3be8bff5f9f7a71d809cd7eac1b0fe8f78d6068f05e655aa83c",
+        "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd": "96d626136cdf17db7a44a6af6454a66893b999649199dd7f1aa168ed9fb80bd4",
+        "algorithms/randomness/voxelnoise/voxelnoise.tscn": "128130f2705b1686f24dd5709540bb36b312247838b4941773389f84ff7f1edc",
+        "algorithms/randomness/voxelnoise/voxelnoise.gd": "cf1356a0c28c9e76318aa472ed01fc002e61b8f407acd010d763b210fb390a1c",
+        "commons/maps/Noise_Voxel/intent.md": "399a0f39c53f23b985127b46ca2ee7039347c61c71b7065df3e5b1fc29fa2ae3",
+        "commons/maps/Noise_Voxel/blurb.md": "866df71f196fa6564eb3b492596ee3688c18b2247579b57c4660a0758b03fb21",
+        "commons/maps/Noise_Voxel/critical.md": "cbaaeb216b56af78b8ae6db4b4ac94cb816c72bcf9effa872778136fdcee0df4",
+        "commons/maps/Noise_Voxel/technical.md": "3aaaaaa1dcce06cf0aa9e5ca7524dbfbfbcab3adfabf7dc9edede03e98267078"
+      }
+    },
+    {
+      "room_id": "Noise_6_Wall",
+      "primary_tokens": [
+        "shader_noise_space"
+      ],
+      "question": "What changes when the field surrounds you instead of sitting on a bench?",
+      "ontology": "A shader evaluates a rule across a surface; several spatial frequencies can be summed before they become colour.",
+      "action": "Pause at a visible wall, trace a broad patch and a smaller detail within it, then compare another face.",
+      "observable": "Large cloudy regions carry smaller variation; the material changes with time, and differently timed surfaces need not match.",
+      "mechanism": "WallNoiseShader sums6 octaves, halves amplitude and doubles frequency; noiseroom updates room time and wall time at0.7 of it, plus colour and density.",
+      "limit": "Six superimposed scales are not six separate visible teaching strips. Motion and colour are coupled, so watching alone cannot isolate each parameter.",
+      "variation": "Proposed extension: Offer a freeze control and single-octave comparison with equal framing and brightness.",
+      "prior_bridge": "Noise_Voxel",
+      "next_bridge": "Noise_Inside_Noise",
+      "sources": [
+        {
+          "path": "algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader",
+          "fact": "noise2d dispatch and six-iteration octave sum."
+        },
+        {
+          "path": "algorithms/randomness/shadernoisespace/noiseroom.gd",
+          "fact": "127–184 time/colour/density updates;256–264 desktop ui_accept toggle."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 6,
+          "token": "shader_noise_space"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Desktop ui_accept exists; do not promise a VR freeze control or that room-scale access has been checked.",
+      "source_hashes": {
+        "commons/maps/Noise_6_Wall/map_data.json": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+        "algorithms/randomness/shadernoisespace/noiseroom.tscn": "51c68bad4569504b4fe336ccf91ef66765c83181d7e8ea3bd3f3447bca2d66c0",
+        "algorithms/randomness/shadernoisespace/noiseroom.gd": "fa6b54bd1f3ceafac32ab7af275fab13a30b03f5b88b3a85c7923597c0b981b0",
+        "algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader": "46eba70677e77532afbd413be0972f7a6bd8a2bcacf048ac40cabf817b693c3b",
+        "algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader": "7e61abbea29bf688326671ed765fb2bb6365a7221f050d74c2eb9a72d157a330",
+        "commons/maps/Noise_6_Wall/intent.md": "76cc9f2aa2e2784d1a85555ff005907f43361893e6e48fe11beb35641602be4a",
+        "commons/maps/Noise_6_Wall/blurb.md": "1c36d9663eb5fa1fb3d9dce7c1883c78f083c3c81624c3b7b79b31ec942fbcb9",
+        "commons/maps/Noise_6_Wall/critical.md": "be998ed05f52c00e8aaf8a79b4abdc89b3df8a8f72301097beca437d713c2bf6",
+        "commons/maps/Noise_6_Wall/technical.md": "44e8bc3f20bcc08935a9ce3aac39f8370a0eeb7d195945dc83966ab64d9677a8"
+      }
+    },
+    {
+      "room_id": "Noise_Inside_Noise",
+      "primary_tokens": [
+        "noisesphere"
+      ],
+      "question": "Does placing noise on a sphere mean one noise is being fed into another?",
+      "ontology": "A sampling domain is the coordinates at which a function is evaluated; the supporting mesh and the sampled function are different things.",
+      "action": "Compare the sphere silhouette with the ring you encountered earlier; follow a patch across the curved surface.",
+      "observable": "The same shader family deforms a different support, with finer spatial frequency and a larger enclosing form.",
+      "mechanism": "Sphere uses noisePlanet2, the same value-noise interpolation and normal displacement family as noisetorus; scene readout defaults relief.",
+      "limit": "The placed sphere does not implement domain warping. Curved noisy geometry alone cannot demonstrate noise used to displace sampling coordinates.",
+      "variation": "Proposed extension: Add paired direct-sample and warped-sample surfaces with the same seed and visible coordinate displacement.",
+      "prior_bridge": "Noise_6_Wall",
+      "next_bridge": "Noise_Space_10",
+      "sources": [
+        {
+          "path": "commons/resourses/shaders/noisePlanet2.gdshader",
+          "fact": "37–59: direct XZ sampling plus timed translation, not nested noise."
+        },
+        {
+          "path": "algorithms/randomness/noisesphere/noisesphere.gd",
+          "fact": "91–113 setup and relief readout;167–180 config."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 5,
+          "token": "noisesphere:0:0:4"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Map description promises domain warping that this primary does not perform. Record as a future experiment, not a solved teaching claim.",
+      "source_hashes": {
+        "commons/maps/Noise_Inside_Noise/map_data.json": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+        "algorithms/randomness/noisesphere/noisesphere.tscn": "c8e06bc7357269c29c7e4319d64532f3f70e6b302278fe9f6d8aad077b2a43f2",
+        "commons/resourses/shaders/noisePlanet2.gdshader": "c4da281f5e62937ae37d01b2b36aa78779dc091cbd9c028752ec38627d06de09",
+        "algorithms/randomness/noisesphere/noisesphere.gd": "be76649404d2de82f7940edf9a0c48d4c9f931cdf62c6db412a6cb7e3791f687",
+        "commons/maps/Noise_Inside_Noise/intent.md": "a4561489cdc08fa49ece49ba7fead3c4ee22fb249ebe9d14b18ca509bdb51054",
+        "commons/maps/Noise_Inside_Noise/blurb.md": "9b3515c12008ecc796fa5236ded6d114b747accfd068b71dc4f7ea0d68d3dbdb",
+        "commons/maps/Noise_Inside_Noise/critical.md": "ce7a88643a3524a007da0dfda827a3195325cf32dead21dfe0dadbed9c1bfd4c",
+        "commons/maps/Noise_Inside_Noise/technical.md": "1cc88e586044a9725473ae2dbc4ede6b1fb041e74125e39f28cfb1ff668b5d71"
+      }
+    },
+    {
+      "room_id": "Noise_Space_10",
+      "primary_tokens": [
+        "noise_space"
+      ],
+      "question": "When a field becomes ground, which variations become a route?",
+      "ontology": "A heightfield assigns one height to each planar position and turns samples into a mesh and collision surface.",
+      "action": "Inspect the green terrain from its edge; follow a ridge with your eye and compare a gentle route with a steeper one.",
+      "observable": "Neighbouring heights form a continuous-looking terrain with broad and small features, fixed after construction.",
+      "mechanism": "NoiseSpace generate_space samples noise_2d over10×10 coordinates, multiplies by height_scale, creates mesh and collision.",
+      "limit": "A heightfield cannot give two ground heights to the same XZ location; caves and overhangs need another representation. Ten-dimensional parameter-space controls are absent.",
+      "variation": "Proposed extension: Author two adjacent terrain patches differing only in octave count, then let the visitor choose and explain a route.",
+      "prior_bridge": "Noise_Inside_Noise",
+      "next_bridge": "Noise_Perlin_Simplex",
+      "sources": [
+        {
+          "path": "commons/context/walkgrids/NoiseSpace.gd",
+          "fact": "87–115 deterministic field build and mesh/collision creation;130 config supports generator/octaves/scale/persistence."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 6,
+          "token": "noise_space"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No live10-slider bench. Do not promise terrain traversal until museum collision and entry are checked.",
+      "source_hashes": {
+        "commons/maps/Noise_Space_10/map_data.json": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+        "commons/context/walkgrids/noise_space.tscn": "793c641a2b65f7ab907d91bb38394513aefcd5383f0220e91cc8c707bdefdb52",
+        "commons/context/walkgrids/NoiseSpace.gd": "570ec5fb97495c4d0faf74b562c4fa81c086f15c1656a873f71f115a715cca93",
+        "commons/resourses/shaders/Grid.gdshader": "149e54e8a149c9a7c9852419cca1b40bd6edc9be8393fa7e31342fb56bc7ba3b",
+        "commons/maps/Noise_Space_10/intent.md": "2e418e5ce04df31a230d2ec8b83760dd6d8dad8aa2d35bb5eb86eddf1751bdeb",
+        "commons/maps/Noise_Space_10/blurb.md": "4d9cb989ea3672096ef37c9ae6cbadf2879e51e21c3857d232b224571fadc3a6",
+        "commons/maps/Noise_Space_10/critical.md": "5d7ac4b9b40e3a8374a70d4f5f367422e330352c6fe2d48585b8c83fae769d5c",
+        "commons/maps/Noise_Space_10/technical.md": "0c13eee3ca511e30f00c684fcfe56066eaff75547d0ca47aeb0664e68c1cd199"
+      }
+    },
+    {
+      "room_id": "Noise_Perlin_Simplex",
+      "primary_tokens": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "question": "What would make two noise surfaces a fair comparison?",
+      "ontology": "A noise basis, seed, sampling frequency and visible encoding jointly determine a displayed field.",
+      "action": "Compare neighbouring sample heights and colour changes in the two cube fields; identify what the display lets you see and what it leaves unnamed.",
+      "observable": "Both surfaces are sampled cube fields. Different appearances alone do not establish different algorithms.",
+      "mechanism": "Both placed tokens are bare. PerlinNoise generator defaults simplex and NoiseVisualizer chooses TYPE_SIMPLEX for that value; SimplexVisualizer also uses simplex.",
+      "limit": "This room currently cannot support its titled Perlin-versus-Simplex conclusion: both defaults use simplex-family noise, with independent seeds and different sampling paths.",
+      "variation": "Proposed extension: Set generator=perlin explicitly on one placement and fix matched seeds, dimensions and readout before asking visitors to attribute differences to the basis.",
+      "prior_bridge": "Noise_Space_10",
+      "next_bridge": "Lab_Path",
+      "sources": [
+        {
+          "path": "algorithms/randomness/perlinnoise/PerlinNoise.gd",
+          "fact": "40 generator=simplex;60–74 delegates to NoiseField;110–126 config."
+        },
+        {
+          "path": "algorithms/randomness/perlinnoise/NoiseVisualizer.gd",
+          "fact": "20–29 setup;119–128 basis mapping."
+        },
+        {
+          "path": "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+          "fact": "Noise generator and cube field construction."
+        }
+      ],
+      "placements": [
+        {
+          "x": 3,
+          "z": 4,
+          "token": "simplex_noise"
+        },
+        {
+          "x": 8,
+          "z": 4,
+          "token": "perlin_noise"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not claim a successful basis comparison or museum-safe 2D sliders. Existing critical/brief grid reachability claims are not museum runtime tests.",
+      "source_hashes": {
+        "commons/maps/Noise_Perlin_Simplex/map_data.json": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+        "algorithms/randomness/simplexnoise/simplexnoise.tscn": "5d5c6f5553d5dbd9c669ba91188d9d9355bb7a9c81f52777df572eb66e2335cf",
+        "algorithms/randomness/simplexnoise/SimplexNoise.gd": "17a3c63809c72f564307ba0d922a02bb8c618f4848d50f03e06a60a455ad0eac",
+        "algorithms/randomness/simplexnoise/SimplexVisualizer.gd": "7444d51200b3dced210cfc643c346dd0073b191097dae1036f2b5b95059d8e7c",
+        "algorithms/randomness/perlinnoise/perlinnoise.tscn": "6245b5c835c6e66ec5db053fb70bbefbd413409392b622348cc41b8a6f14139a",
+        "algorithms/randomness/perlinnoise/PerlinNoise.gd": "e9b31fa3b51121f63f686276f7fce82204826bbe1f07988e98ad8dcd1222cc53",
+        "algorithms/randomness/perlinnoise/NoiseVisualizer.gd": "a67420f590014593aacd44bebdd343358834842ffcb2519c1d06a0ef718f3bb4",
+        "commons/maps/Noise_Perlin_Simplex/intent.md": "30bbe32f65334f2b214b7d11199573b1d1e4581562edad8e2b133bc89e99e87f",
+        "commons/maps/Noise_Perlin_Simplex/blurb.md": "e42d1f62568a3f20d246afbf76ca687a289ed317576e75b551c338276bc9b285",
+        "commons/maps/Noise_Perlin_Simplex/critical.md": "29ce9550dd318329a8056fd7ac38baa9527a51004d32efe6000d6a0a4f6ff68f",
+        "commons/maps/Noise_Perlin_Simplex/technical.md": "4149f21c3d205d993f970dc220aa1a42991a088e342dd39f810003e29e8795bd"
+      },
+      "core_gap": "Both placed named displays currently select simplex. A fair basis comparison is absent.",
+      "smallest_repair_candidate": "Set perlin_noise generator to perlin, expose/set a shared seed, and retain matched scale/field extent."
+    },
+    {
+      "room_id": "Lab_Path",
+      "primary_tokens": [
+        "dark_sphere"
+      ],
+      "question": "What can you carry out of a sequence when the busy demonstrations are gone?",
+      "ontology": "A reference object supports recall and comparison; the explanation now has to be supplied by the visitor.",
+      "action": "Pause beside the dark sphere and describe one earlier encounter in terms of field, sample and readout; then name a different outcome from changing the threshold rather than the seed.",
+      "observable": "The sphere pulses and slowly rotates; it does not display a new noise field or a correctness verdict.",
+      "mechanism": "dark_sphere _process varies emission and rotation sinusoidally; map places it with exit utility in the same central cell.",
+      "limit": "A familiar marker cannot verify understanding. A remembered image may omit the parameter and representation that produced it.",
+      "variation": "Proposed extension: Let visitors leave two competing explanations or route memories here, each naming an observation that would distinguish them.",
+      "prior_bridge": "Noise_Perlin_Simplex",
+      "next_bridge": "CA_Introduction",
+      "sources": [
+        {
+          "path": "commons/artifacts/dark_sphere/dark_sphere.gd",
+          "fact": "583–608 ambient build and time-driven emission/rotation."
+        },
+        {
+          "path": "commons/maps/Lab_Path/map_data.json",
+          "fact": "Only placed artifact dark_sphere; shared central exit utility."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "dark_sphere"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. This is a reflective transition with one real artifact, not a new noise simulator; catalyst behavior deliberately outside this lesson.",
+      "source_hashes": {
+        "commons/maps/Lab_Path/map_data.json": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+        "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+        "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+        "commons/maps/Lab_Path/intent.md": "7bffa05f7d99f0989ef891adf6b5b0c737a7bc6b1e995cc3eda7050ce7829745",
+        "commons/maps/Lab_Path/blurb.md": "d12e5d5bd4ce93f0c4b91ab87ad70f6534d19462b2e49518260e8a6ec79af704",
+        "commons/maps/Lab_Path/critical.md": "4d070a6c1f638432ce107ca96d1e88c1459f8dde2b18a840bfed3f7de160e7d5",
+        "commons/maps/Lab_Path/technical.md": "9defe5b996f28dabaf9a0fbfb61aa8e85f2295bae5f1475ae925c4c98c36a19e"
+      }
+    }
+  ]
+}

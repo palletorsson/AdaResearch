@@ -1,0 +1,72 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+TriangleLinePuzzle: 3 lines, 3 vertices, plane=upright stock=racked, constraints: CONNECTED + CLOSED_LOOP
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS open boundary refuses fill button
+PASS incomplete edge assembly stays open
+PASS incomplete edge assembly stays open
+  PASS: Valid closed loop!
+PASS actual endpoint signals close triangle
+PASS closure alone adds no fill
+PASS pointer press reveals face only after closure
+PASS revealed face uses puzzle target geometry
+PASS hide fill preserves closed boundary
+DrawTriangleFaces: Ready! Pick up the sphere and start drawing.
+DrawTriangleFaces: Grabbed! Continue drawing.
+DrawTriangleFaces: Created point 0 at (7.000000, 1.400000, 5.500000)
+DrawTriangleFaces: Created point 1 at (7.600000, 1.400000, 5.500000)
+DrawTriangleFaces: Created point 2 at (7.200000, 1.900000, 5.500000)
+DrawTriangleFaces: Loop closed with 4 points!
+⚠️ Unknown AudioSynthesizer sound: COIN_COLLECT
+⚠️ Failed to generate sound: AudioSynthesizer.COIN_COLLECT
+⚠️ Unknown AudioSynthesizer sound: BLIP_SELECT
+⚠️ Failed to generate sound: AudioSynthesizer.BLIP_SELECT
+DrawTriangleFaces: Creating triangles from 3-point loop
+DrawTriangleFaces: Created 1 triangles from loop
+DrawTriangleFaces: Snapped to point 0
+PASS held point placements close one triangle
+PASS editable corner agrees with world-space source in rotated translated artifact
+PASS editable corner agrees with world-space source in rotated translated artifact
+PASS editable corner agrees with world-space source in rotated translated artifact
+PASS one loop reports one fan triangle
+PASS active first corner is marked
+DrawTriangleFaces: Cannot snap to the last placed point.
+PASS released moving handle cannot lay timed points
+PASS face visibility button hides completed fill
+PASS closed triangle boundary survives hidden fill
+DrawTriangleFaces: Point 1 moved to (7.700000, 1.400000, 5.500000)
+PASS editing a corner snaps in world metres
+PASS edited marker remains on stored vertex
+PASS new outline preserves completed face
+PASS new outline clears first-corner readout
+[ExamGate] exam passed () but no current map known — not gated
+PASS flat status fits the fixed case
+PASS console lettering uses 2D surfaces
+PASS console cannot lift the specimen during seating
+PASS flat status fits the fixed case
+PASS console lettering uses 2D surfaces
+PASS console cannot lift the specimen during seating
+PASS all three actions share the same tilted frame
+RESULT 28 []
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2641)

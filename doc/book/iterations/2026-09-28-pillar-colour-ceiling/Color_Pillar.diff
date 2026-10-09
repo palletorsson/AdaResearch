@@ -1,0 +1,35 @@
+--- before/Color_Pillar/final.md
++++ current/Color_Pillar/final.md
+@@ -2,17 +2,19 @@
+ 
+ <!-- @pillarcolorcollection -->
+ 
+-Stand where the floor's colours are pale. Follow one line of pillars farther into the field. The hue stays recognisable while its saturation increases. Now walk across that line. The hue changes too. Two directions, two different ways to change a colour.
++Step onto the dark floor and look up. A palette stretches across the ceiling, meeting the tops of the pillars. Follow one line of pillars farther into the field: the hue stays recognisable while saturation increases. Walk across it and hue changes too. Two directions, two different ways to change a colour.
+ 
+ Look up a pillar. Near its base, the colour disappears into black. Higher up, it becomes brighter. Height has become a third colour coordinate: **value**. Each pillar keeps one hue and saturation while showing the values between black and its brightest colour.
+ 
+ The grey column beside the field reaches white at the top. The coloured columns do not. Raising value brightens their colours; reaching white also requires saturation to be zero. Even at the same value, a yellow and a blue need not appear equally bright.[^value]
+ 
+-![The pillars rise from black towards colour; a grey reference stands beside the field.](/book-review/doc/book/iterations/2026-09-28-pillar-height-and-value/value-columns.png)
++![Colour spreads across the ceiling above pillars that darken towards the floor.](/book-review/doc/book/iterations/2026-09-28-pillar-colour-ceiling/ceiling-and-column.png)
+ 
+-*Hue across, saturation along, value up. The bright floor shows a fixed-value slice laid beneath the columns.*
++*Hue across, saturation along, value up. At their tops, the pillars meet the same colours in the ceiling.*
+ 
+-The floor keeps value at 0.95. It lets you follow hue and saturation without making the whole walk black at the columns' feet. It is a reference slice brought down to the ground, rather than the bottom of the colour volume. The floor and the coloured faces are drawn without the room's lighting changing them; this darkening is assigned by the colour rule.
++Look up along the pillar. Where does it end? The edge becomes difficult to follow, as though the pillar were entering a fog of its own colour. Its geometry still has a boundary. Knowing where it ends and seeing where it ends are different things. Here, making the colour rule clearer has made the shape less certain.
++
++The ceiling holds value at one. Above each pillar, the same hue and saturation continue into the surface overhead. Beneath it, the floor stays near black. These colours are drawn without the room's lighting changing them; the passage from dark to bright is assigned by the rule. Colour gives this part of the room a roof.
+ 
+ Pick up the small sampling card. Raise it while keeping its place over the floor as steady as you can. Its colour brightens. A dot climbs the thin upright beside it, showing where that sample belongs in the full height of the field. Your hand moves through a shorter distance: the nearby scale maps that movement onto the whole column. The card names the represented height as FIELD Y.
+ 
+@@ -31,7 +33,7 @@
+ 
+ Lower it again. At value zero, different addresses arrive at the same black. The hue and saturation coordinates remain on the card, but the colour alone can no longer tell you which address it came from.
+ 
+-Five columns by seven rows, with 3.2 metres between samples. The gaps contain colours the collection has not raised into pillars. They are also where you can walk. Adding a column in one of these gaps would give another colour a body and take away somewhere you could stand.
++Five columns by seven rows, with 3.2 metres between samples. Overhead, the colour continues through the gaps. Below, those gaps are where you can walk. Adding a column in one of them would give another colour a body and take away somewhere you could stand.
+ 
+ Release the card to leave a sample in place, then step back until several pillars overlap. Their values remain fixed. What their company makes visible keeps changing.
+ 

@@ -1,0 +1,31 @@
+--- current/Noise_Space_10/final.md
++++ proposed/Noise_Space_10/final.md
+@@ -24,7 +24,7 @@
+ 
+ The value is signed. It can lower a point below the one-metre reference as well as raise it above. HEIGHT selects zero, 0.25, 0.65 or 0.90 as the multiplier. At zero, the ground becomes level. The noise calculation still has an answer; its contribution to height has become zero.
+ 
+-One generator supplies this encounter: OpenSimplex2S, with seed zero, four fBM octaves, gain 0.5 and lacunarity 2. Its frequency is 0.1 and the input coordinates are multiplied by five. Those choices remain fixed while we change HEIGHT. This is one slice through the possibilities of the existing terrain, narrow enough for a difference to become attributable.
++The seed and the field's other settings stay fixed while HEIGHT changes how much of the same variation reaches the ground. We have held the source still enough to feel what one multiplication changes.[^walk-recipe]
+ 
+ There is a second multiplier in the code. Look at the place where green ground meets the dark margin. Even at the largest height setting, the two join at the same level.
+ 
+@@ -38,9 +38,9 @@
+ 
+ Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
+ 
+-The display gives a section length and its steepest sampled segment. At 0.25, route A is about 8.13 metres along the surface; B is about 10.40. B also has a slightly steeper sampled segment. Taking a detour has not automatically made this route easier. It has changed which features the proposal meets.
++The display gives the length and steepest sampled stretch of each proposed route. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
+ 
+-These readings leave work for the body. The section samples a line; your body has width. A capsule can meet a neighbouring slope the line does not touch. A controller's speed, step and slope rules also enter the encounter. The tested desktop body accepts floor angles up to 45 degrees, while route A's steepest sampled segment rises from about 24 degrees at 0.25 to about 58 at 0.90. The measurement helps us investigate the stalled walk without declaring the whole landscape impassable.
++The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That helps us ask why this walk stopped. It does not tell us that no body could pass.
+ 
+ Look down at the yellow witness. Its printed height belongs to the triangle under that point. The terrain is made from 81 by 81 sampled positions, spaced ten centimetres apart. Between those positions, triangles supply a surface. Sampling the noise again between the vertices can give a slightly different answer: the collider is the constructed mesh, not an infinitely detailed function.
+ 
+@@ -65,3 +65,7 @@
+ <!-- @ -->
+ 
+ In Noise Perlin Simplex, the next comparison changes the generator. Bring the habit of holding a question steady: if two surfaces differ, which operation changed, and which body makes that difference matter?
++
++[^walk-recipe]: The fixed recipe uses OpenSimplex2S, seed zero, four fBM octaves, gain 0.5 and lacunarity 2. Generator frequency is 0.1 and input coordinates are multiplied by five. HEIGHT changes the later multiplier.
++
++[^walk-measurements]: The desktop record of 13 September 2026 measured routes A/B at approximately 8.13/10.40 metres for HEIGHT 0.25; their steepest sampled segments were about 24.18°/25.22°. Route A reached about 58.26° at HEIGHT 0.90. The tested controller used a 45° floor-angle limit. Forward input crossed at 0.25 and stopped partway at 0.90. A sampled line and one desktop trajectory do not establish every route or body's possibilities.

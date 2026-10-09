@@ -1,0 +1,221 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "columns/count_4",
+      "passed": true
+    },
+    {
+      "id": "columns/height_and_profile_4",
+      "passed": true
+    },
+    {
+      "id": "columns/sides_and_caps_4",
+      "passed": true
+    },
+    {
+      "id": "columns/closed_mesh_4",
+      "passed": true
+    },
+    {
+      "id": "columns/count_6",
+      "passed": true
+    },
+    {
+      "id": "columns/height_and_profile_6",
+      "passed": true
+    },
+    {
+      "id": "columns/sides_and_caps_6",
+      "passed": true
+    },
+    {
+      "id": "columns/closed_mesh_6",
+      "passed": true
+    },
+    {
+      "id": "columns/count_8",
+      "passed": true
+    },
+    {
+      "id": "columns/height_and_profile_8",
+      "passed": true
+    },
+    {
+      "id": "columns/sides_and_caps_8",
+      "passed": true
+    },
+    {
+      "id": "columns/closed_mesh_8",
+      "passed": true
+    },
+    {
+      "id": "columns/count_12",
+      "passed": true
+    },
+    {
+      "id": "columns/height_and_profile_12",
+      "passed": true
+    },
+    {
+      "id": "columns/sides_and_caps_12",
+      "passed": true
+    },
+    {
+      "id": "columns/closed_mesh_12",
+      "passed": true
+    },
+    {
+      "id": "columns/count_16",
+      "passed": true
+    },
+    {
+      "id": "columns/height_and_profile_16",
+      "passed": true
+    },
+    {
+      "id": "columns/sides_and_caps_16",
+      "passed": true
+    },
+    {
+      "id": "columns/closed_mesh_16",
+      "passed": true
+    },
+    {
+      "id": "columns/independent_profile_height_variant",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Columns",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "height * ring / (profile.size() - 1)",
+      "after": "height * ring / profile.size()"
+    },
+    "required_failure": "columns/height_and_profile_4",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "columns/count_4",
+          "passed": true
+        },
+        {
+          "id": "columns/height_and_profile_4",
+          "passed": false
+        },
+        {
+          "id": "columns/sides_and_caps_4",
+          "passed": true
+        },
+        {
+          "id": "columns/closed_mesh_4",
+          "passed": true
+        },
+        {
+          "id": "columns/count_6",
+          "passed": true
+        },
+        {
+          "id": "columns/height_and_profile_6",
+          "passed": false
+        },
+        {
+          "id": "columns/sides_and_caps_6",
+          "passed": true
+        },
+        {
+          "id": "columns/closed_mesh_6",
+          "passed": true
+        },
+        {
+          "id": "columns/count_8",
+          "passed": true
+        },
+        {
+          "id": "columns/height_and_profile_8",
+          "passed": false
+        },
+        {
+          "id": "columns/sides_and_caps_8",
+          "passed": true
+        },
+        {
+          "id": "columns/closed_mesh_8",
+          "passed": true
+        },
+        {
+          "id": "columns/count_12",
+          "passed": true
+        },
+        {
+          "id": "columns/height_and_profile_12",
+          "passed": false
+        },
+        {
+          "id": "columns/sides_and_caps_12",
+          "passed": true
+        },
+        {
+          "id": "columns/closed_mesh_12",
+          "passed": true
+        },
+        {
+          "id": "columns/count_16",
+          "passed": true
+        },
+        {
+          "id": "columns/height_and_profile_16",
+          "passed": false
+        },
+        {
+          "id": "columns/sides_and_caps_16",
+          "passed": true
+        },
+        {
+          "id": "columns/closed_mesh_16",
+          "passed": true
+        },
+        {
+          "id": "columns/independent_profile_height_variant",
+          "passed": false
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "columns/height_and_profile_4",
+        "columns/height_and_profile_6",
+        "columns/height_and_profile_8",
+        "columns/height_and_profile_12",
+        "columns/height_and_profile_16",
+        "columns/independent_profile_height_variant"
+      ],
+      "hall": "Primitives_Columns",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Columns/tutorial.md": "a7fc0f305bb3e54965203e16217c5a6e07153d9665ddf1e68c5329dda0c34526",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/circle_samples.gd": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/column_surface.gd": "b6f7efbb53a55dec22b8ed102129f05e8e8fe70648125ec9ee882a8e2f81b8f6",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/lesson.gd": "108fad54e6a19c47127d90e182d5000ce554af42766273a364be926a708217c0"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "Shader_05_Patterns assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "garden full size",
+      "passed": true
+    },
+    {
+      "name": "garden visible",
+      "passed": true
+    },
+    {
+      "name": "garden controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "garden amount changed by pointer",
+      "passed": true
+    },
+    {
+      "name": "garden bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "garden bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "reference_pattern_garden standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_pattern_garden support along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_pattern_garden standing clearance along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_pattern_garden support along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_pattern_garden capture",
+      "passed": true
+    }
+  ],
+  "map": "Shader_05_Patterns",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

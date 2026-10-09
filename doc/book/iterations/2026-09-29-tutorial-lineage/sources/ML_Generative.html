@@ -1,0 +1,284 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Generative · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Generative">← Tutorial lineage</a></p><h1>ML Generative</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Generative/final.md">Raw captured source</a></p><pre># Learning from an opponent’s response
+
+What changes when a learner’s critic is also learning?
+
+&lt;!-- @generative_adversarial_networks_gans_vr --&gt;
+
+Move between the generator and discriminator regions and follow the indicated exchange. First identify where a candidate is supposed to originate. Then trace where a judgement would return. Before watching the scores, say which part would need to change if the critic became better at distinguishing generated examples. Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.
+
+The two roles depend on one another. A generator attempts to produce candidates that a discriminator will accept as resembling the reference data. The discriminator attempts to distinguish the sources of the examples it receives. Improving one role can change the problem faced by the other, so the learning environment is partly made by another learner.
+
+Read the exchange once from the generator’s side and once from the discriminator’s side. The same candidate can be useful to one participant as an attempted success and to the other as a training example to distinguish. The two roles therefore do not share a single meaning of improvement. Keeping their questions separate will matter when the room gains actual examples: a number moving in a favourable direction for one role may signal a changing difficulty for the other.
+
+That relationship differs from descending a fixed surface. In the loss-landscape room, the scoring rule stayed in place while a point moved. Here the intended training process changes the evaluator as well as the evaluated model. A low score needs interpretation in relation to both participants and the examples they have seen.
+
+The panel said so on arrival, and it bears repeating here, where the diagram is most persuasive: no generator and no discriminator are trained by the exhibit. The motion can help you remember the proposed exchange. It cannot provide evidence that the generated candidates have improved.
+
+Use that boundary to specify the experiment the room still needs: show a changing candidate, the discriminator’s response and the reference example involved in an actual update. Repeating one convincing candidate would then become distinguishable from producing a varied set. A beautiful average or a falling score alone would not settle the difference.
+
+Ask also what the reference set treats as recognisable. Producing more of what an evaluator already accepts can leave unusual forms outside its reward, even when those forms matter to someone encountering the result.
+
+&lt;!-- @ --&gt;
+
+The synthesis room looks directly at that outside: how does a model decide that an observation is an anomaly?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Generative/tutorial.md">Raw captured source</a></p><pre># ML Generative
+
+Generate new data from a learned distribution. GAN, VAE, diffusion.
+
+Build a GAN generator.
+
+```gdscript
+class_name Generator extends FeedforwardNet
+
+func generate(noise: Array) -&gt; Array:
+    return forward(noise)
+```
+
+Takes random noise; produces a sample. The network&#x27;s weights encode the learned distribution.
+
+Build a GAN discriminator.
+
+```gdscript
+class_name Discriminator extends FeedforwardNet
+
+func is_real(sample: Array) -&gt; float:
+    var output := forward(sample)
+    return output[0]  # scalar probability
+```
+
+Outputs the probability the input is real (rather than generated).
+
+Train the GAN.
+
+```gdscript
+func train_step(real_batch: Array, generator: Generator, discriminator: Discriminator, lr: float = 0.001) -&gt; void:
+    var fake_batch: Array = []
+    for _i in real_batch.size():
+        var z: Array = sample_noise(32)
+        fake_batch.append(generator.generate(z))
+    discriminator.backward_real_batch(real_batch, lr)
+    discriminator.backward_fake_batch(fake_batch, lr)
+    var fake_batch_new: Array = []
+    for _i in real_batch.size():
+        var z: Array = sample_noise(32)
+        fake_batch_new.append(generator.generate(z))
+    generator.backward_fool_discriminator(fake_batch_new, discriminator, lr)
+```
+
+Alternating training. First the discriminator learns to distinguish; then the generator learns to fool.
+
+Sample noise.
+
+```gdscript
+func sample_noise(size: int) -&gt; Array:
+    var noise: Array = []
+    for _i in size:
+        noise.append(randfn(0.0, 1.0))
+    return noise
+```
+
+Standard Gaussian. Each generator input is an independent noise vector.
+
+Build a VAE encoder.
+
+```gdscript
+func vae_encode(x: Array) -&gt; Dictionary:
+    var h := encoder_forward(x)
+    return {
+        &quot;mu&quot;: extract_mu(h),
+        &quot;log_var&quot;: extract_log_var(h),
+    }
+```
+
+The encoder produces mean and log-variance of a Gaussian. Sampling from this distribution gives the latent code.
+
+Reparameterise for gradient flow.
+
+```gdscript
+func reparameterize(mu: Array, log_var: Array) -&gt; Array:
+    var z: Array = []
+    for i in mu.size():
+        var std: float = exp(0.5 * log_var[i])
+        var eps: float = randfn(0.0, 1.0)
+        z.append(mu[i] + eps * std)
+    return z
+```
+
+Reparameterisation moves the randomness outside the network. Gradient flows through mu and log_var.
+
+Compute VAE loss.
+
+```gdscript
+func vae_loss(x: Array, reconstructed: Array, mu: Array, log_var: Array) -&gt; float:
+    var recon_loss: float = 0.0
+    for i in x.size():
+        recon_loss += (x[i] - reconstructed[i]) ** 2
+    var kl_loss: float = 0.0
+    for i in mu.size():
+        kl_loss += 0.5 * (exp(log_var[i]) + mu[i] * mu[i] - 1.0 - log_var[i])
+    return recon_loss + kl_loss
+```
+
+Reconstruction plus KL divergence. Balances fidelity against latent-space regularity.
+
+Run a single diffusion step.
+
+```gdscript
+func diffusion_forward(x_0: Array, t: float, beta: float = 0.01) -&gt; Array:
+    var alpha: float = 1.0 - beta * t
+    var noise: Array = sample_noise(x_0.size())
+    var x_t: Array = []
+    for i in x_0.size():
+        x_t.append(sqrt(alpha) * x_0[i] + sqrt(1.0 - alpha) * noise[i])
+    return x_t
+```
+
+Add progressively more noise. The reverse process is a learned neural network.
+
+You can now build GAN generators and discriminators, train with alternating optimisation, encode and decode with VAEs using reparameterisation, compute VAE loss, and run one diffusion step. ML_Synthesis extends into a multi-paradigm synthesis map.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Generative/technical.md">Raw captured source</a></p><pre># ML Generative — Technical
+
+The map runs a generative adversarial network (GAN). A generator takes random noise as input and produces images; a discriminator judges whether an image is real or fake. Both are trained alternately until the generator&#x27;s outputs fool the discriminator.
+
+```gdscript
+class_name GAN extends Node
+
+var generator: FeedforwardNet
+var discriminator: FeedforwardNet
+
+func train_step(real_batch: Array) -&gt; void:
+    # Train discriminator
+    var noise: Array = sample_noise(real_batch.size())
+    var fake_batch: Array = noise.map(func(z): return generator.forward(z))
+    var d_loss_real := -log_mean(real_batch.map(func(x): return discriminator.forward(x)))
+    var d_loss_fake := -log_mean(fake_batch.map(func(x): return 1.0 - discriminator.forward(x)))
+    discriminator.step(d_loss_real + d_loss_fake)
+
+    # Train generator
+    noise = sample_noise(real_batch.size())
+    var g_loss := -log_mean(noise.map(func(z): return discriminator.forward(generator.forward(z))))
+    generator.step(g_loss)
+```
+
+## Training Dynamics
+
+GAN training is notoriously unstable. If the discriminator becomes too good too fast, the generator&#x27;s gradient vanishes (the discriminator assigns probability near 0 to all fakes, so there&#x27;s nothing to learn from). If the generator becomes too good, the discriminator has no signal. Balanced training requires careful hyperparameter tuning.
+
+Mode collapse is another failure mode. The generator discovers a small subset of outputs that reliably fool the discriminator and refuses to produce anything else. The discriminator cannot counter this because the fakes it sees are all from the collapsed mode.
+
+## VAE Alternative
+
+Variational autoencoders (VAEs) offer a different approach. The encoder maps inputs to a distribution over a latent space; the decoder maps latent samples back to input space. The loss combines reconstruction error with a Kullback-Leibler divergence that keeps the latent distribution close to a standard normal.
+
+```gdscript
+func vae_loss(x: Array, mu: Array, log_var: Array, x_reconstructed: Array) -&gt; float:
+    var recon: float = mse(x, x_reconstructed)
+    var kl := 0.0
+    for i in range(mu.size()):
+        kl += 0.5 * (exp(log_var[i]) + mu[i] * mu[i] - 1.0 - log_var[i])
+    return recon + kl
+```
+
+VAEs avoid GAN&#x27;s instability but tend to produce blurrier samples because the reconstruction loss penalises per-pixel error rather than distribution-level similarity. Modern hybrids (VAE-GAN, diffusion models) combine both approaches.
+
+## Complexity
+
+A forward pass through either generator or discriminator is O(L·N²) for L layers of width N. A training step computes one forward and one backward pass through each network, so the per-step cost is roughly 4× a single network&#x27;s forward cost.
+
+Within the sequence, Generative is the creative turn. ML_Synthesis will next gather every thread the sequence has developed.
+
+## Diffusion Models
+
+Diffusion models have displaced GANs for high-quality image generation. The model learns to reverse a gradual noising process: given a noisy image, predict the clean image (or, equivalently, predict the noise that was added). At inference, start from pure noise and iteratively denoise.
+
+```gdscript
+func diffusion_forward(x_0: Array, t: int, noise_schedule: Array) -&gt; Array:
+    # Add noise scaled by the schedule at step t
+    var alpha_t: float = noise_schedule[t]
+    var noise: Array = sample_gaussian(x_0.size())
+    var x_t: Array = []
+    for i in range(x_0.size()):
+        x_t.append(sqrt(alpha_t) * x_0[i] + sqrt(1.0 - alpha_t) * noise[i])
+    return x_t
+
+func diffusion_reverse(x_t: Array, t: int, model) -&gt; Array:
+    # Predict the noise, then subtract it to recover x_{t-1}
+    var predicted_noise: Array = model.forward([x_t, t])
+    var x_t_minus_1: Array = []
+    for i in range(x_t.size()):
+        x_t_minus_1.append(x_t[i] - predicted_noise[i] * step_size(t))
+    return x_t_minus_1
+```
+
+Diffusion avoids GAN&#x27;s mode collapse and VAE&#x27;s blurriness, at the cost of slow inference (hundreds of denoising steps per sample). Guided diffusion and classifier-free guidance let the generation be conditioned on text or other signals.
+
+## Autoregressive Generation
+
+Language models generate text autoregressively — one token at a time, conditioning on previous tokens. Temperature scales the logits before softmax, controlling the randomness of the sampling. Top-k sampling restricts each step to the k most-probable tokens. Nucleus (top-p) sampling restricts to the smallest set of tokens whose cumulative probability exceeds p.
+
+```gdscript
+func sample_token(logits: Array, temperature: float = 1.0, top_k: int = 40) -&gt; int:
+    var scaled: Array = []
+    for l in logits:
+        scaled.append(l / temperature)
+    var sorted_indices := argsort_desc(scaled)
+    var top := sorted_indices.slice(0, top_k)
+    var probs: Array = softmax_subset(scaled, top)
+    return sample_categorical(top, probs)
+```
+
+## Evaluation
+
+Generative models are hard to evaluate. Inception Score and Frechet Inception Distance measure output quality against a reference distribution. Human evaluation remains the gold standard for images and text. For structured outputs, task-specific metrics (BLEU for translation, perplexity for language modelling) are common but each has known failure modes.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Generative/intent.md">Raw captured source</a></p><pre>Concept: Generative models as learned dreamers — networks trained on data distributions that can sample new instances from the learned manifold. The model does not memorize examples; it learns the structure that makes them possible, then hallucinates variations.
+Sequence role: Seventh map in the Machine Learning sequence (15th spine sequence, integration phase). The creative turn in the arc — after classification (discriminative) and sequence memory, the model now produces rather than categorizes. Connects back to ML_Sequence_Memory (generative models often use recurrence) and forward to ML_Synthesis (where all threads converge). The generative capacity connects laterally to QFEP&#x27;s edge of chaos: generation happens at the boundary between memorization and noise.
+Technical angle: Generative adversarial networks (GANs) with generator-discriminator dynamics as a minimax game. Variational autoencoders (VAEs) with encoder-decoder architecture and latent space regularization via KL divergence. The latent space as a compressed manifold of possibilities. Mode collapse in GANs, posterior collapse in VAEs. Interpolation in latent space as smooth morphing between instances.
+Critical angle: A generative model raises the question of originality — if the network produces an image never seen in training, is it creative or merely recombinant? The latent space is a map of possibility, not a library of memory, which makes generation more like imagination than recall. Generative models also expose the training data&#x27;s biases: the model can only dream within the boundaries of what it was shown. What it generates reveals what it was taught to consider real.
+Key artifacts: generative_model provides an interactive generative system with latent space exploration, interpolation between generated instances, and real-time sampling from the learned distribution.
+Gap: Needs a latent space atlas — a 2D projection of the latent space with labeled regions showing how the model organizes its learned manifold, making the structure of possibility visible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Generative/critical.md">Raw captured source</a></p><pre># ML_Generative — Critical Reflection
+
+A mirrored room split by a central wall. Left half: generator. Right half: discriminator. A passage at the center connects them. The symmetry is the argument — two networks locked in productive antagonism, neither improving without the other. The map makes adversarial learning architectural: you stand on one side and look through the passage at the other. Creation on the left. Judgment on the right. The wall between them is load-bearing.
+
+The GAN artifact sits on the generator side. The generator fabricates from noise — random vectors mapped into structures that never existed. The discriminator judges: real or fake. Each round sharpens both. The forger learns to deceive. The detective learns to detect. Neither wins, neither should.
+
+The equilibrium IS the output. Hayles would recognize this as the cybernetic feedback loop stripped of its homeostatic pretension. The GAN does not converge toward truth. It converges toward indistinguishability — the point where the generated distribution matches the real distribution so closely that no discriminator can tell them apart. Truth is not the goal. Passing is the goal. The machine does not learn what is real. It learns what passes for real.
+
+This distinction — between being real and passing as real — is where Chun&#x27;s analysis becomes surgical. Software, she argues, produces the real by performing it convincingly enough that the performance disappears. The GAN literalizes this. The generator&#x27;s output is not a representation of reality; it is a sample from a learned distribution that has been shaped by adversarial pressure to be statistically indistinguishable from reality&#x27;s samples. The generated face does not represent a face. It occupies the same statistical region that faces occupy. The ontological status of the output is genuinely uncertain, and the GAN does not care about ontological status. It cares about the discriminator&#x27;s gradient.
+
+The mirrored architecture normalizes the adversarial frame as balanced opposition. Left and right are symmetrical. Generator and discriminator occupy equal space. But the symmetry is false. In practice, GANs are radically unstable. Mode collapse — the generator learning to produce a small number of outputs that reliably fool the discriminator — is the common failure mode, and it represents a collapse of generative possibility into strategic repetition. The generator discovers that it does not need to learn the full distribution; it only needs to learn the discriminator&#x27;s blind spots. The narrowest deception that works is the one that survives. The mirrored room cannot show this collapse because the collapse is statistical, not spatial. The room remains symmetrical while the generative space collapses into a point.
+
+Hayles&#x27; concept of the computational regime of signification applies directly. In the GAN, meaning is produced by the gap between two networks&#x27; outputs, not by reference to an external world. The discriminator never sees reality directly; it sees training samples, already mediated, curated, compressed. The generator never sees reality at all; it sees only the gradient flowing back from the discriminator. The entire system is closed. Creation happens inside a loop where the only criterion is mutual calibration, and the only ground truth is a dataset that someone collected, labeled, and decided was representative. The GAN inherits every bias in its training data and reproduces those biases as generated reality. What it dreams is what it was shown.
+
+The passage at the center of the wall is the map&#x27;s critical joint. You walk from generator to discriminator through a single opening. This is the gradient signal — the information that flows from discriminator back to generator, the teaching signal that says &quot;this passed&quot; or &quot;this failed.&quot; In the map, it is a doorway. In the mathematics, it is the derivative of the discriminator&#x27;s loss with respect to the generator&#x27;s parameters. Everything the generator learns about reality comes through this narrow channel. The passage normalizes the bottleneck. The bottleneck determines everything.
+
+The blurb distinguishes GANs from VAEs. The VAE compresses reality into a latent space — a smooth, navigable terrain of possibility. Sample any point and decode it back into something plausible. The VAE understands before it generates. The GAN generates before it understands. Or rather, the GAN demonstrates that understanding is not required for production. You can make something convincing without knowing what it is. Chun would call this the condition of software itself: programs that produce effects without requiring comprehension, systems that work without being understood, outputs that are real enough to act upon without being true.
+
+The mirrored room has no windows. Generator and discriminator face each other across the central divide, and neither faces the world. The system that learns to produce reality has no access to reality. The room is hermetic. Creation as sustained conflict within a sealed chamber. The question the map places at its center — quite literally at the passage between the two halves — is whether production without reference is creation or counterfeiting, and whether the distinction matters to anyone outside the room.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Generative/artifacts.md">Raw captured source</a></p><pre># ML Generative — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 1 artifacts*
+
+&gt; Two networks trained against each other. The generator fabricates from noise — random vectors mapped into images, sounds, structures that never existed. The discriminator judges: real or fake. Each round sharpens both. The forger learns to deceive; the detective learns to detect. Neither improves without the other.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## GenerativeAdversarialNetworksGANs_VR
+![GenerativeAdversarialNetworksGANs_VR](/scene-catalog/generative_adversarial_networks_gans_vr.png)
+
+Spatial GAN arena with generator and discriminator zones
+
+`generative_adversarial_networks_gans_vr`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Generative/summary.md">Raw captured source</a></p><pre># ML Generative — Summary
+
+ML_Generative is the seventh map in the Machine Learning sequence. It treats a generative model as a network that has learned the structure of a data distribution well enough to sample new instances from it. The space is built around a generative adversarial pair: a generator and a discriminator, trained against each other.
+
+The generator sits at one station. It takes random noise vectors as input and produces image-like outputs on a large display. The discriminator sits opposite. It takes an input — either a generated fake or a real example — and judges its origin. A shared training loop alternates between them; the generator updates to fool the discriminator, and the discriminator updates to catch the generator.
+
+Controls at the shared bench show the progression. Early in training, the fakes are noise. Over many iterations the fakes sharpen, gain shape, and start to look like members of the real distribution. A slider lets the learner move forward and backward through training checkpoints; a second slider samples different noise vectors at the current checkpoint so the variety within the learned distribution becomes visible.
+
+Within the sequence, Generative is the creative turn. The model does not memorise examples; it learns the manifold that produced them and samples from it. ML_Synthesis will next gather every thread the sequence has developed.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Generative/blurb.md">Raw captured source</a></p><pre>Two networks trained against each other. The generator fabricates from noise — random vectors mapped into images, sounds, structures that never existed. The discriminator judges: real or fake. Each round sharpens both. The forger learns to deceive; the detective learns to detect. Neither improves without the other.
+
+VAEs compress reality into a latent space — a smooth, navigable terrain of possibility. Sample any point and decode it back into something plausible. GANs skip compression entirely. They learn to produce without ever learning to understand.
+
+The mirrored room splits the process in half. Stand on either side and watch the other work. Generator and discriminator are adversaries locked in productive tension — neither wins, neither should. The equilibrium IS the output. Creation as sustained conflict. The machine doesn&#x27;t learn what&#x27;s real. It learns what passes.</pre></section></body></html>

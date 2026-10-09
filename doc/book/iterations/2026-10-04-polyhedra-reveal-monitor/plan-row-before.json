@@ -1,0 +1,1541 @@
+{
+  "museum": "sainsbury-false-perspective-enfilade",
+  "simplex_corners": [
+    {
+      "name": "entry-west",
+      "corner": [
+        1,
+        1
+      ],
+      "inward": [
+        1,
+        1
+      ],
+      "reach_m": 1.5,
+      "color": "#ee5599"
+    },
+    {
+      "name": "first-east-return",
+      "corner": [
+        10,
+        4
+      ],
+      "inward": [
+        -1,
+        1
+      ],
+      "reach_m": 1.5,
+      "color": "#ee5599"
+    },
+    {
+      "name": "first-east-end",
+      "corner": [
+        10,
+        8
+      ],
+      "inward": [
+        -1,
+        -1
+      ],
+      "reach_m": 1.5,
+      "color": "#ee5599"
+    },
+    {
+      "name": "exit-west",
+      "corner": [
+        1,
+        27
+      ],
+      "inward": [
+        1,
+        -1
+      ],
+      "reach_m": 1.5,
+      "color": "#ee5599"
+    },
+    {
+      "name": "exit-east",
+      "corner": [
+        8,
+        27
+      ],
+      "inward": [
+        -1,
+        -1
+      ],
+      "reach_m": 1.5,
+      "color": "#ee5599"
+    },
+    {
+      "name": "side-entry-west",
+      "corner": [
+        9,
+        16
+      ],
+      "inward": [
+        1,
+        1
+      ],
+      "reach_m": 0.9,
+      "color": "#ee5599"
+    },
+    {
+      "name": "side-entry-east",
+      "corner": [
+        12,
+        16
+      ],
+      "inward": [
+        -1,
+        1
+      ],
+      "reach_m": 1.1,
+      "color": "#ee5599"
+    },
+    {
+      "name": "side-exit-west",
+      "corner": [
+        9,
+        27
+      ],
+      "inward": [
+        1,
+        -1
+      ],
+      "reach_m": 1.1,
+      "color": "#ee5599"
+    },
+    {
+      "name": "side-exit-east",
+      "corner": [
+        12,
+        27
+      ],
+      "inward": [
+        -1,
+        -1
+      ],
+      "reach_m": 1.1,
+      "color": "#ee5599"
+    }
+  ],
+  "tile": [
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "p",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "p",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "p",
+      "p",
+      "p",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "p",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "p2",
+      "p2",
+      "1",
+      "1",
+      "p2",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "4",
+      "1",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ]
+  ],
+  "h": 28,
+  "rooms": 0,
+  "artifacts": [
+    {
+      "token": "path_watchdog",
+      "cell": [
+        4,
+        1
+      ],
+      "tile_cell": [
+        4,
+        1
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          1
+        ]
+      }
+    },
+    {
+      "token": "prism_block",
+      "cell": [
+        5,
+        1
+      ],
+      "tile_cell": [
+        5,
+        1
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          5,
+          1
+        ]
+      }
+    },
+    {
+      "token": "path_game_controller",
+      "cell": [
+        6,
+        2
+      ],
+      "tile_cell": [
+        6,
+        2
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          2
+        ]
+      }
+    },
+    {
+      "token": "interactive_point_origin_force",
+      "cell": [
+        4,
+        4
+      ],
+      "tile_cell": [
+        4,
+        4
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          4
+        ]
+      },
+      "config": {
+        "mode": "transformation"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "becoming_catalyst",
+      "cell": [
+        6,
+        4
+      ],
+      "tile_cell": [
+        6,
+        4
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 1.1,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          4
+        ]
+      },
+      "config": {
+        "plinth": "1.10",
+        "offset": "0.00,0.10,0.00",
+        "scale": "0.70"
+      }
+    },
+    {
+      "token": "polyhedra_boundary_plate",
+      "cell": [
+        1,
+        5
+      ],
+      "tile_cell": [
+        1,
+        5
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          1,
+          5
+        ]
+      },
+      "config": {
+        "offset": "-0.30,0.34,0"
+      },
+      "scale": 0.8
+    },
+    {
+      "token": "prism_block",
+      "cell": [
+        2,
+        5
+      ],
+      "tile_cell": [
+        2,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          2,
+          5
+        ]
+      },
+      "config": {
+        "grain": "quartered"
+      }
+    },
+    {
+      "token": "prism_block",
+      "cell": [
+        3,
+        5
+      ],
+      "tile_cell": [
+        3,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          3,
+          5
+        ]
+      },
+      "config": {
+        "grain": "shell"
+      }
+    },
+    {
+      "token": "grab_trihedron",
+      "cell": [
+        9,
+        5
+      ],
+      "tile_cell": [
+        9,
+        5
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          9,
+          5
+        ]
+      },
+      "config": {
+        "plinth": "0.90"
+      }
+    },
+    {
+      "token": "pyramid_edit",
+      "cell": [
+        4,
+        7
+      ],
+      "tile_cell": [
+        4,
+        7
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.65,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          7
+        ]
+      },
+      "config": {
+        "plinth": "0.65,micropod",
+        "workbench": "1"
+      }
+    },
+    {
+      "token": "grab_tetrahedron",
+      "cell": [
+        6,
+        7
+      ],
+      "tile_cell": [
+        6,
+        7
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          7
+        ]
+      },
+      "config": {
+        "plinth": "0.90"
+      }
+    },
+    {
+      "token": "cube_scene",
+      "cell": [
+        8,
+        7
+      ],
+      "tile_cell": [
+        8,
+        7
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          8,
+          7
+        ]
+      },
+      "config": {
+        "plinth": "0.90"
+      }
+    },
+    {
+      "token": "street_sign",
+      "cell": [
+        3,
+        9
+      ],
+      "tile_cell": [
+        3,
+        9
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          3,
+          9
+        ]
+      },
+      "config": {
+        "direction": "both",
+        "sign_sides": "32",
+        "sign_color": "0.08,0.30,0.66",
+        "pole_height": "1.70"
+      }
+    },
+    {
+      "token": "street_sign",
+      "cell": [
+        6,
+        9
+      ],
+      "tile_cell": [
+        6,
+        9
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          9
+        ]
+      },
+      "config": {
+        "pole_height": "1.70",
+        "sign_radius": "0.30",
+        "subtext": "WAIT"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        5,
+        10
+      ],
+      "tile_cell": [
+        5,
+        10
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          5,
+          10
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        6,
+        10
+      ],
+      "tile_cell": [
+        6,
+        10
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          10
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        7,
+        10
+      ],
+      "tile_cell": [
+        7,
+        10
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          7,
+          10
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "street_sign",
+      "cell": [
+        2,
+        11
+      ],
+      "tile_cell": [
+        2,
+        11
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          2,
+          11
+        ]
+      },
+      "config": {
+        "direction": "ahead",
+        "sign_sides": "32",
+        "sign_color": "0.08,0.30,0.66",
+        "pole_height": "1.70"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        4,
+        11
+      ],
+      "tile_cell": [
+        4,
+        11
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          11
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        8,
+        11
+      ],
+      "tile_cell": [
+        8,
+        11
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          8,
+          11
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        4,
+        12
+      ],
+      "tile_cell": [
+        4,
+        12
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          12
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "diamonds",
+      "cell": [
+        6,
+        12
+      ],
+      "tile_cell": [
+        6,
+        12
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          12
+        ]
+      },
+      "offset": [
+        0.0,
+        -5.0,
+        0.0
+      ]
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        8,
+        12
+      ],
+      "tile_cell": [
+        8,
+        12
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          8,
+          12
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        4,
+        13
+      ],
+      "tile_cell": [
+        4,
+        13
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          13
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        8,
+        13
+      ],
+      "tile_cell": [
+        8,
+        13
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          8,
+          13
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        5,
+        14
+      ],
+      "tile_cell": [
+        5,
+        14
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          5,
+          14
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        6,
+        14
+      ],
+      "tile_cell": [
+        6,
+        14
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          6,
+          14
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "concrete_barrier",
+      "cell": [
+        7,
+        14
+      ],
+      "tile_cell": [
+        7,
+        14
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          7,
+          14
+        ]
+      },
+      "config": {
+        "barrier_length": "1.0",
+        "barrier_height": "0.85",
+        "base_width": "0.60",
+        "blocking": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "street_sign",
+      "cell": [
+        3,
+        15
+      ],
+      "tile_cell": [
+        3,
+        15
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          3,
+          15
+        ]
+      },
+      "config": {
+        "direction": "left",
+        "sign_sides": "32",
+        "sign_color": "0.08,0.30,0.66",
+        "pole_height": "1.70"
+      }
+    },
+    {
+      "token": "street_sign",
+      "cell": [
+        7,
+        15
+      ],
+      "tile_cell": [
+        7,
+        15
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          7,
+          15
+        ]
+      },
+      "config": {
+        "direction": "right",
+        "sign_sides": "32",
+        "sign_color": "0.08,0.30,0.66",
+        "pole_height": "1.70"
+      }
+    },
+    {
+      "token": "trafficcone",
+      "cell": [
+        3,
+        16
+      ],
+      "tile_cell": [
+        3,
+        16
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          3,
+          16
+        ]
+      }
+    },
+    {
+      "token": "trafficcone",
+      "cell": [
+        7,
+        16
+      ],
+      "tile_cell": [
+        7,
+        16
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          7,
+          16
+        ]
+      }
+    },
+    {
+      "token": "if_not_exist_create",
+      "cell": [
+        10,
+        18
+      ],
+      "tile_cell": [
+        10,
+        18
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          10,
+          18
+        ]
+      },
+      "config": {
+        "text": "make a godot primtive gallery here"
+      }
+    },
+    {
+      "token": "rock_spawner",
+      "cell": [
+        4,
+        20
+      ],
+      "tile_cell": [
+        4,
+        20
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.95,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          20
+        ]
+      },
+      "config": {
+        "rock_count": "30",
+        "spawn_height": "3.5",
+        "spawn_area_x": "3",
+        "spawn_area_y": "2",
+        "spawn_area_z": "3"
+      }
+    },
+    {
+      "token": "rock_scanner",
+      "cell": [
+        4,
+        22
+      ],
+      "tile_cell": [
+        4,
+        22
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Primitives_Polythedra",
+        "cell": [
+          4,
+          22
+        ]
+      }
+    }
+  ],
+  "rejected": [],
+  "room": {
+    "w": 13,
+    "h": 28
+  },
+  "apron": 0,
+  "interior_count": 240,
+  "ordered": true,
+  "pages": [],
+  "sequence": "primitives",
+  "pearl": "primitives polythedra",
+  "pearl_index": 7,
+  "map": "Primitives_Polythedra",
+  "pearls_total": 16,
+  "authored": "map",
+  "source": "em_map_halls: the map IS the hall",
+  "_ruling": {
+    "src_w": 13,
+    "src_h": 28,
+    "rotated": false,
+    "pad": 0,
+    "pad_closed": false,
+    "ring": null
+  }
+}

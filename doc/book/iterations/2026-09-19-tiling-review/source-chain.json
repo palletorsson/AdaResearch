@@ -1,0 +1,127 @@
+[
+  {
+    "map": "Pattern_Disco",
+    "placed_instances": 3,
+    "unique_lookup_hints": 3,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Pattern_Foundry",
+    "placed_instances": 16,
+    "unique_lookup_hints": 16,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Tutorial_Pattern",
+    "placed_instances": 12,
+    "unique_lookup_hints": 10,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Array_Patterns",
+    "placed_instances": 13,
+    "unique_lookup_hints": 13,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Symmetry_Seventeen",
+    "placed_instances": 14,
+    "unique_lookup_hints": 14,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {
+      "loom_alhambra_p6m": [
+        {
+          "lookup_chain": [
+            "loom_alhambra_p6m",
+            "pattern_loom"
+          ],
+          "scene": "res://commons/artifacts/pattern_loom/pattern_loom.tscn"
+        }
+      ],
+      "loom_escher_mirror": [
+        {
+          "lookup_chain": [
+            "loom_escher_mirror",
+            "pattern_loom"
+          ],
+          "scene": "res://commons/artifacts/pattern_loom/pattern_loom.tscn"
+        }
+      ],
+      "mill_alhambra_p6m": [
+        {
+          "lookup_chain": [
+            "mill_alhambra_p6m",
+            "pattern_machine_c"
+          ],
+          "scene": "res://commons/artifacts/pattern_machine_c/pattern_machine_c.tscn"
+        },
+        {
+          "lookup_chain": [
+            "mill_alhambra_p6m",
+            "pattern_mill"
+          ],
+          "scene": "res://commons/artifacts/pattern_mill/pattern_mill.tscn"
+        }
+      ],
+      "mill_escher_p4g": [
+        {
+          "lookup_chain": [
+            "mill_escher_p4g",
+            "pattern_mill"
+          ],
+          "scene": "res://commons/artifacts/pattern_mill/pattern_mill.tscn"
+        }
+      ],
+      "mill_persian_p4": [
+        {
+          "lookup_chain": [
+            "mill_persian_p4",
+            "pattern_mill"
+          ],
+          "scene": "res://commons/artifacts/pattern_mill/pattern_mill.tscn"
+        }
+      ]
+    }
+  },
+  {
+    "map": "Ribbon_Patterns_01",
+    "placed_instances": 11,
+    "unique_lookup_hints": 11,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Ribbon_Patterns_02",
+    "placed_instances": 12,
+    "unique_lookup_hints": 12,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  },
+  {
+    "map": "Ribbon_Patterns_03",
+    "placed_instances": 17,
+    "unique_lookup_hints": 17,
+    "missing_lookup": [],
+    "book_anchors_not_placed": [],
+    "missing_scene": [],
+    "delegated_scenes": {}
+  }
+]

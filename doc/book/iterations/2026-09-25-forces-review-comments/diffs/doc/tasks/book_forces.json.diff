@@ -1,0 +1,292 @@
+--- before/doc/tasks/book_forces.json
++++ doc/tasks/book_forces.json
+@@ -207,9 +207,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act4a_KineticForces"
+       ],
+@@ -224,9 +224,12 @@
+       "proposal": "Replace the two quoted sentences with one: 'Your stick request carries you progressively less quickly.' Leave the existing 'Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.' as it stands. Optionally, in a separate code edit, reorder the board line at kinetic_drag.gd:187 to 'WALK: XR stick / WASD, not tracked physical steps.'",
+       "evidence": "commons/artifacts/drag_corridor/kinetic_walk_provider.gd:10-11; commons/artifacts/drag_corridor/kinetic_drag.gd:105-106 and :187; commons/scenes/endless_museum.gd:16808-16813 (desktop twin of the same adapter); Vectors_Act4a_KineticForces/final.md:25-27.",
+       "review": "amended: Quote is exact at Vectors_Act4a_KineticForces/final.md:25. Code confirmed: kinetic_walk_provider.gd:10-11 multiplies player_body.ground_control_velocity (the stick request) by walk_multiplier; kinetic_drag.gd:106 returns 1/(1+b) = 0.714/0.435/0.238 under the comment at :105; board text at :187. The desktop half of the sentence is also true (the desktop museum walker scales velocity.x/z by the same multiplier at commons/scenes/endless_museum.gd:16808-16813), so this is purely a matter of which body the sentence addresses, and the next paragraph (:27) already speaks to the headset. The reader's rewrite duplicates the sentence that already follows the quote ('Step outside the narrow passage and ordinary movement returns.'), so the edit should replace only the two quoted sentences.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nReplaced the desktop-first sentence with the same movement of the stick carrying the visitor progressively less quickly. Kept the explicit distinction from physical tracked walking and from rigid-body drag. Existing WALK controls and three speed multipliers pass native checks; no human resistance or headset comfort claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.014Z"
+     },
+     {
+       "id": "book_forces.002",
+@@ -235,9 +238,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -252,9 +255,12 @@
+       "proposal": "'Ordinary stick steering resumes when your feet leave the volume.'",
+       "evidence": "commons/artifacts/force_field_zone/field_carry_provider.gd:9-12: when no carry zone contains the body the provider calls release_carry and returns false, so XRTools' ordinary movement providers (the stick) resume; force_field_zone.gd:347-355 installs this provider only on an XRToolsPlayerBody.",
+       "review": "kept: Quote is exact at Vectors_Act5_ForceAsPlace/final.md:58. field_carry_provider.gd:9-12 releases the carry and returns false when no zone contains the body, handing control back to XRTools' ordinary providers; force_field_zone.gd:347-355 installs the adapter only on an XRToolsPlayerBody. The desktop walker has its own keyboard path (endless_museum.gd:16814-16826), so 'keyboard' is not false, but the book's reader is in the headset and has no keyboard; dropping the word costs nothing.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nRemoved keyboard language, but did not adopt the proposed immediate return of stick steering at the boundary. Leaving ends the field override; the default XR body also requires ground contact for stick control. That condition now appears in the chapter.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.042Z"
+     },
+     {
+       "id": "book_forces.003",
+@@ -263,9 +269,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -280,9 +286,12 @@
+       "proposal": "Replace only the quoted sentence with: 'At the far face the carry receiver lets go: gravity returns to the body, whatever it was carrying continues until your feet find the floor, and then the stick steers again.' Keep the existing 'That seam can be felt as a change in how you travel.'",
+       "evidence": "commons/artifacts/force_field_zone/field_carry_provider.gd:10-16; commons/artifacts/force_field_zone/force_field_zone.gd:329-336; addons/godot-xr-tools/player/player_body.gd:102, :343-356, :818-841, :909-912; commons/scenes/endless_museum.gd:16814-16826.",
+       "review": "amended: Quote is exact at :79 and the desktop sentence is accurate for the desktop rig (endless_museum.gd:16814-16826: outside a carry zone the horizontal velocity is the WASD request and _vy, set from the carried velocity at record_carry, continues under JUMP_GRAVITY). For the headset body the mechanism is confirmed but differs in one detail the reader's proposal glosses: when field_carry_provider.gd:10-12 stops being exclusive, player_body.gd:343-356 applies gravity, but the stick regains the horizontal velocity only through ground control, which is gated to on_ground by default (player_body.gd:102, :827-841, :909-912); while airborne past the far face the carried horizontal velocity simply continues. The reader's proposal also duplicates the sentence that already follows the quote ('That seam can be felt as a change in how you travel.').",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nReplaced the desktop-specific exit with the actual XR relation: the field yields, velocity is retained in the air under ordinary gravity, and stick steering becomes available at ground contact. A nontracked XRToolsPlayerBody fixture exercises the production provider and default ground-control gate. Its move_player supplies a contact result; this is not a tracked or collision-solver test.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.073Z"
+     },
+     {
+       "id": "book_forces.004",
+@@ -291,9 +300,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Choreography"
+       ],
+@@ -308,9 +317,12 @@
+       "proposal": "Add one closing line after the quoted sentence, e.g. 'Next, gravity. The place the spring returned to acquires a body of its own, and we ask whether the centre may answer.' Gravity's opener can then stay as a deliberate reach-back.",
+       "evidence": "commons/maps/sequences/forces.json orders Change_Choreography before VFM_07_Gravity; commons/maps/Change_Choreography/final.md:63 is the last line and carries no forward pointer; commons/maps/VFM_07_Gravity/final.md:5 opens 'The spring had an address to return to' (Vectors_Act4b_Oscillation).",
+       "review": "kept: Quote is exact and is the last line (Change_Choreography/final.md:63). I checked every ending in the sequence: the other twelve name the next hall (Act1:54, Operations:47, Act2:92, Launch:57, Motion:79, Act3:61, Act4a:81, Act4b:59, Gravity:60, Legs:59, Arena:69, Act5:93); Choreography alone does not. forces.json orders it at index 8 before VFM_07_Gravity at 9, and Gravity opens at :5 with 'The spring had an address to return to'. Change_Choreography appears in no other sequence file, so a pointer to Gravity cannot be wrong elsewhere. The proposed line matches Gravity's own opener ('Here the reference has acquired a body', :5) and its RULE question ('What happens if the thing we called the centre is allowed to answer?', :29). Choreography's file is not under the live rewrite (mtime 2026-09-11).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nAdded a short bridge from Choreography to Gravity. The spring’s reference now acquires a body, and the question is whether that centre can respond. Kept Gravity’s deliberate return to the spring and the conveyor’s critical close.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.088Z"
+     },
+     {
+       "id": "book_forces.005",
+@@ -319,9 +331,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -336,9 +348,12 @@
+       "proposal": "'Lift the field off the floor and the same slider begins to be heard; the nearer the field comes to horizontal, the more of the crossing it decides.'",
+       "evidence": "commons/artifacts/vector_machine/vector_machine.gd:93-96, :105-111, :149-152, :157-164.",
+       "review": "amended: Quote exact at :13. Code confirmed: vector_machine.gd:96 multiplies both horizontal terms by cos(pitch); _yaw_idle at :109-111 is abs(cos(pitch)) < 0.1, i.e. pitch within about 5.7 degrees of either pole. The stronger fact the reader missed: while in that band the bench's own readout prints 'YAW held at N deg - idle while the field is vertical' (:163-164) and draws the ghost arrow (:149-152), so a visitor who lifts the field 'by even a little' sees the machine itself still call the slider idle. The sentence contradicts the instrument beside it. Proposal stands.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nRemoved the claim that a tiny lift makes yaw the most powerful control. Described the growing horizontal component instead, and named the display’s small near-pole idle region. Native slider checks confirm both the unchanged vector at the pole and the held bearing, the idle band and full horizontal yaw.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.122Z"
+     },
+     {
+       "id": "book_forces.006",
+@@ -347,9 +362,9 @@
+       "effort": "1h",
+       "skill": "verify",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -364,9 +379,12 @@
+       "proposal": "Either raise the lesson's vanish gate at force_cube.gd:193 from 0.001 to about 0.02 (the same 4 cm/s the redraw deadband at :161 already uses), which keeps the design intent and makes the sentence true, and check in a headset that a held controller sits under that; or soften the prose to 'Stop your hand. Its motion arrow shrinks to a stub; a body at rest need not invent a direction merely to remain a useful exhibit.'",
+       "evidence": "commons/artifacts/force_cube/force_cube.gd:117, :151-157, :161, :193; commons/artifacts/_embodied/embodied_prop.gd:103-118.",
+       "review": "amended: Quote exact at :33. Code facts confirmed: force_cube.gd:151-153 tip = (sampled velocity * 0.5).limit_length(2.6); :154 the 0.12 rest threshold is skipped when config_lesson == 'force_as_place', and :117 returns Vector3.ZERO as the resting vector for the lesson, so the design intent IS a vanishing arrow; :193 draws the arrow whenever |tip| > 0.001, i.e. sampled hand speed above 2 mm/s, which is below any controller's noise floor. Two things the reader did not see: _redraw at :161 only fires when the vector moves by >= 0.02 (4 cm/s), so at rest the drawing freezes at the last redraw rather than flickering; and embodied_prop.gd:106-112 clamps the arrow head to at least 5 cm long with a base radius of 2.6 x 0.03 = 7.8 cm, so a residual centimetre of 'arrow' renders as a fixed 5 cm cone near the cube's centre. Hand stillness is unmeasured here, so the residual's exact size stays plausible; the threshold that would have to be met is confirmed. The reader's code option (0.12 = 24 cm/s) is too coarse: it would blank the arrow for the slow deliberate hand the same paragraph asks for.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nReproduced the old retained-arrow bug in the loaded hall: after 0.03 m/s, a supplied zero-motion step retained a roughly 0.015 m arrow. Added a lesson-only 0.02 m arrow threshold (0.04 m/s) before the redraw deadband, clearing collapsed component geometry as well. Low, zero, renewed and just-above-threshold movements pass; the legacy resting-vector mode remains. The text now identifies a threshold for displayed stillness instead of promising exact physical rest. Actual controller jitter and headset legibility remain to be assessed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.151Z"
+     },
+     {
+       "id": "book_forces.007",
+@@ -375,9 +393,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act1_WhatAVectorIs"
+       ],
+@@ -392,9 +410,12 @@
+       "proposal": "After the quoted sentences at :11 add one deferring line, e.g. 'The push that ends while its body keeps going is still four halls away. First, the arrow itself.' Re-read the file first: it is mid-rewrite.",
+       "evidence": "commons/maps/curriculum_spine.json spine.sequences (change, forces); commons/maps/sequences/change.json (Flow_Field last of 2); commons/maps/Flow_Field/final.md:57; commons/maps/VFM_03_Motion/final.md:7; commons/maps/Vectors_Act1_WhatAVectorIs/final.md:11 (working tree, uncommitted).",
+       "review": "amended: The quoted sentence no longer exists: Vectors_Act1_WhatAVectorIs/final.md is under an uncommitted rewrite (mtime 2026-09-24 16:00; 645 words on disk against the reader's 705 and HEAD's 1234). The join defect itself survives the rewrite: curriculum_spine.json orders change immediately before forces, change.json's last map is Flow_Field, Flow_Field/final.md:57 promises 'In Forces, a push will end and a cube will keep going', that push arrives at VFM_03_Motion/final.md:7, and the current Act1 text mentions neither a push nor the hall just left (its recall at :11 reaches back to the point and transformation rooms). Re-anchored to the current text; the writer must re-read the file before applying, since it is being edited today.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nThe preceding Change pass already deferred the push to Later in Forces. Added the particles in the last room to the opening’s recall of points and transformations. Kept the encounter’s immediate start with pins and the arrow; no four-hall itinerary inserted.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.182Z"
+     },
+     {
+       "id": "book_forces.008",
+@@ -403,9 +424,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -420,9 +441,12 @@
+       "proposal": "'The last slider stops at fifteen metres per second squared.'",
+       "evidence": "commons/artifacts/vector_machine/vector_machine.gd:20 force_max = 15.0; vector_machine.gd:165 the lesson readout appends 'm/s² / this hall only'; force_field_zone.gd:217 'LOCAL ACCELERATION ... m/s²'.",
+       "review": "kept: Quote exact at :27. vector_machine.gd:20 force_max = 15.0; the lesson readout appends 'm/s2 / this hall only' (:165); force_field_zone.gd:217 prints 'LOCAL ACCELERATION ... m/s2'. The chapter last gave a unit at :11 ('9.8 metres per second squared'), sixteen lines and two code blocks earlier; supplying it again where the ceiling is named is a clear, cheap prose fix.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nNamed the acceleration limit as fifteen metres per second squared. The loaded machine and readout confirm the value and units. No change to the slider or field.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.213Z"
+     },
+     {
+       "id": "book_forces.009",
+@@ -431,9 +455,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "VFM_07_Gravity"
+       ],
+@@ -448,9 +472,12 @@
+       "proposal": "'Return to EPS * EPS. The quarter-metre softening (the source calls it Plummer softening) keeps close encounters finite by changing the attraction near coincidence.'",
+       "evidence": "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd:4, :97; commons/maps/VFM_07_Gravity/final.md:56.",
+       "review": "amended: Quote exact at VFM_07_Gravity/final.md:56. gravity_relations.gd:4 'const EPS := 0.25 # metres, Plummer softening' and :97 pow(arm.length_squared() + EPS * EPS, 1.5) confirmed. The chapter already quotes the EPS line and sends the reader back to it ('Return to EPS * EPS'), so naming what the source calls it is a fair, searchable handle rather than added theory. The reader's inline phrasing ('The quarter-metre softening, Plummer's, in the source's own words, keeps...') is clumsy; a parenthesis does it.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nNamed Plummer softening at the existing EPS explanation and added a short linked footnote. The project source declares EPS = 0.25 metres and uses the softened inverse-cube factor. The galpy Plummer potential documentation supplies a primary implementation reference without burdening the encounter with another derivation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.243Z"
+     },
+     {
+       "id": "book_forces.010",
+@@ -459,9 +486,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Vectors_Act5_ForceAsPlace"
+       ],
+@@ -476,9 +503,12 @@
+       "proposal": "Add an H1 above the opening line, e.g. '# Where an instruction becomes a consequence', lifted from the chapter's own last paragraph, so the first sentence reads as the epigraph it is.",
+       "evidence": "python tools/final_tags.py --map=Vectors_Act5_ForceAsPlace lists the first region untitled; the other twelve forces chapters open with an H1 (e.g. commons/maps/VFM_09_Legs/final.md:1 '# What lets a body stand?'); twenty-plus chapters elsewhere in commons/maps/*/final.md also open without an H1, so the convention tolerates both.",
+       "review": "kept: Confirmed: Vectors_Act5_ForceAsPlace/final.md:1 is prose, and the other twelve forces chapters open with an H1 (checked all thirteen first lines). The corpus does tolerate it (52 of the final.md files have no H1 at all), and nothing downstream breaks: build_manuscript.py:441 titles each room '#### <map name>' and prints the regions' bodies, and the book pearl in commons/data/book/forces.json carries no title field, so this is a within-sequence consistency choice rather than a functional defect. It is still worth doing for the closing hall: the proposed title is lifted from the chapter's own last paragraph (:93) and matches the sequence's title pattern ('When the push ends', 'What lets a body stand?'). One correction to the evidence: final_tags.py does not say 'untitled'; it prints a dash for the first region because it carries no artifact tag.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nAdded What carries you across? above the closing hall. Kept its opening hole, two routes, plank, local field and difference between receivers.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T06:13:26.274Z"
+     }
+   ]
+ }

@@ -1,0 +1,85 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Monitor discovers the real drawing tool"
+		},
+		{
+			"passed": true,
+			"test": "Triangle supplies three corners and one six-vertex face"
+		},
+		{
+			"passed": true,
+			"test": "All monitor controls leave the drawing unchanged"
+		},
+		{
+			"passed": true,
+			"test": "Looking at the physical screen starts the feed"
+		},
+		{
+			"passed": true,
+			"test": "Visible film advances"
+		},
+		{
+			"passed": true,
+			"test": "Looking away freezes the construction"
+		},
+		{
+			"passed": true,
+			"test": "Returning gaze respects manual pause"
+		},
+		{
+			"passed": true,
+			"test": "Open four-corner drawing stays open with three edges"
+		},
+		{
+			"passed": true,
+			"test": "Six-corner drawing preserves the source's four fan triangles"
+		},
+		{
+			"passed": true,
+			"test": "Face separation takes place in the filmed 3D world"
+		},
+		{
+			"passed": true,
+			"test": "Separated faces return exactly to their copied positions"
+		},
+		{
+			"passed": true,
+			"test": "Actual Triangle museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Registered monitor appears in the actual hall"
+		},
+		{
+			"passed": true,
+			"test": "Hall monitor finds the existing Triangle creator"
+		},
+		{
+			"passed": true,
+			"test": "Hall's actual drawing supplies the filmed surface"
+		},
+		{
+			"passed": true,
+			"test": "Screen has an unobstructed viewing position inside the museum"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: pause"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: replay"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: step"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: route"
+		}
+	],
+	"passed": true
+}

@@ -1,0 +1,73 @@
+{
+  "checks": 2,
+  "failures": [],
+  "headset_verified": false,
+  "map": "Noise_Space_10",
+  "measurements": {
+    "captures": {
+
+    },
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "SphereDisplay",
+            "position": [
+              5.08072137832642,
+              0.24035120010376,
+              5.07342147827148
+            ],
+            "size": [
+              0.838557243347168,
+              0.719297647476196,
+              0.853157043457031
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              5.07999992370605,
+              0.00749999983236194,
+              5.07999992370605
+            ],
+            "size": [
+              0.840000152587891,
+              0.00499999942258,
+              0.840000152587891
+            ]
+          }
+        ],
+        "position": "(5.5, 0.0, 9.5)",
+        "token": "dark_sphere"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              0.5,
+              -1.56251072883606,
+              1.5
+            ],
+            "size": [
+              10.0,
+              3.04723739624023,
+              10.0
+            ]
+          }
+        ],
+        "position": "(5.5, 0.0, 10.5)",
+        "token": "noise_space"
+      }
+    ],
+    "noise": {
+      "basis": 1,
+      "fractal": 1,
+      "frequency": 0.100000001490116,
+      "gain": 0.5,
+      "lacunarity": 2.0,
+      "octaves": 4,
+      "seed": 0
+    }
+  }
+}

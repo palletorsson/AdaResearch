@@ -1,0 +1,31 @@
+--- canonical/Trans_Rotation/final.md
++++ review-draft/Trans_Rotation/final.md
+@@ -14,15 +14,7 @@
+ 
+ The platform follows an arc while keeping its surface level. It is mounted to one side so the blade can pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.
+ 
+-The X-axis ride's arc, before that sideways offset, is calculated as:
+-
+-```gdscript
+-var radial := Vector3(0, -1.5, -3.5)
+-var orbit := Basis(Vector3.RIGHT, PI * progress) * radial
+-var endpoint := Vector3(0, 1.5, 0) + orbit
+-```
+-
+-`radial` reaches from the centre to the starting point. `Basis` turns that reach around x; `progress` from zero to one supplies half a revolution. Adding the centre gives the new position. The platform carries you until you step off or jump.
++The platform carries you until you step off or jump.
+ 
+ The sideways ride's blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.
+ 
+@@ -41,11 +33,6 @@
+ Eighteen degrees. Thirty-six. Fifty-four.
+ 
+ The centres keep their spacing; each row adds an angle. X makes rises and falls across your route. Z makes ridges along it. Y turns the square footprints while keeping their tops horizontal. The fourth band combines x, then y, then z.
+-
+-```gdscript
+-var degrees := float(cube.get_meta("row")) * row_angle_step
+-cube.basis = rotation_for_band(band, degrees)
+-```
+ 
+ The row supplies the angle; the band supplies the axis or combination. Waiting will not change the slope. The still aisles let you inspect a difficult row from beside it.
+ 

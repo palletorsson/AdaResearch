@@ -1,0 +1,358 @@
+{
+  "checks": [
+    {
+      "check": "Actual Random_Entropy museum segment exists",
+      "passed": true
+    },
+    {
+      "check": "Declared weathering wall is installed in museum architecture",
+      "passed": true
+    },
+    {
+      "check": "Museum wall remains visible outside artifact culling",
+      "passed": true
+    },
+    {
+      "check": "Wall comprises twelve columns of twelve real stones",
+      "passed": true
+    },
+    {
+      "check": "Six native and six outer-skin cells are replaced",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 11",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 23",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 35",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 47",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 59",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 71",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 83",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 95",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 107",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 119",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 131",
+      "passed": true
+    },
+    {
+      "check": "Intact top stone blocks its original wall opening: 143",
+      "passed": true
+    },
+    {
+      "check": "intact floor support at (8.5, 4.5)",
+      "passed": true
+    },
+    {
+      "check": "intact floor support at (8.5, 34.5)",
+      "passed": true
+    },
+    {
+      "check": "intact floor support at (3.5, 32.5)",
+      "passed": true
+    },
+    {
+      "check": "intact floor support at (15.5, 30.5)",
+      "passed": true
+    },
+    {
+      "check": "intact rear exit remains open at body height",
+      "passed": true
+    },
+    {
+      "check": "Compact console was installed after the two-frame staging delay",
+      "passed": true
+    },
+    {
+      "check": "Console retains three original VR buttons",
+      "passed": true
+    },
+    {
+      "check": "Button reachable from standing mark: Btn_0",
+      "passed": true
+    },
+    {
+      "check": "Button at hand height: Btn_0",
+      "passed": true
+    },
+    {
+      "check": "Button reachable from standing mark: Btn_1",
+      "passed": true
+    },
+    {
+      "check": "Button at hand height: Btn_1",
+      "passed": true
+    },
+    {
+      "check": "Button reachable from standing mark: Btn_2",
+      "passed": true
+    },
+    {
+      "check": "Button at hand height: Btn_2",
+      "passed": true
+    },
+    {
+      "check": "VR ONE STONE selects and lands exactly one stone",
+      "passed": true
+    },
+    {
+      "check": "Removed stone opens a physical hole through native wall and outer skin",
+      "passed": true
+    },
+    {
+      "check": "The actual stone moves into visible rubble instead of being hidden",
+      "passed": true
+    },
+    {
+      "check": "The fallen stone retains its collider in the apron",
+      "passed": true
+    },
+    {
+      "check": "VR RESTORE returns the wall to a paused intact state",
+      "passed": true
+    },
+    {
+      "check": "RESTORE replaces the physical wall stone",
+      "passed": true
+    },
+    {
+      "check": "Seeded replay selects the same first stone",
+      "passed": true
+    },
+    {
+      "check": "VR RUN starts automatic weathering",
+      "passed": true
+    },
+    {
+      "check": "VR PAUSE stops an active automatic run",
+      "passed": true
+    },
+    {
+      "check": "Finite weathering moves 120 stones and retains 24 low-course stones",
+      "passed": true
+    },
+    {
+      "check": "Exhausted weathering cannot remove the retained low courses",
+      "passed": true
+    },
+    {
+      "check": "All twelve high openings clear both original wall planes after weathering",
+      "passed": true
+    },
+    {
+      "check": "All twenty-four retained low-course stones remain physically solid",
+      "passed": true
+    },
+    {
+      "check": "Every retained and fallen stone has finite geometry",
+      "passed": true
+    },
+    {
+      "check": "weathered floor support at (8.5, 4.5)",
+      "passed": true
+    },
+    {
+      "check": "weathered floor support at (8.5, 34.5)",
+      "passed": true
+    },
+    {
+      "check": "weathered floor support at (3.5, 32.5)",
+      "passed": true
+    },
+    {
+      "check": "weathered floor support at (15.5, 30.5)",
+      "passed": true
+    },
+    {
+      "check": "weathered rear exit remains open at body height",
+      "passed": true
+    },
+    {
+      "check": "Full RESTORE closes all twelve high openings",
+      "passed": true
+    },
+    {
+      "check": "restored floor support at (8.5, 4.5)",
+      "passed": true
+    },
+    {
+      "check": "restored floor support at (8.5, 34.5)",
+      "passed": true
+    },
+    {
+      "check": "restored floor support at (3.5, 32.5)",
+      "passed": true
+    },
+    {
+      "check": "restored floor support at (15.5, 30.5)",
+      "passed": true
+    },
+    {
+      "check": "restored rear exit remains open at body height",
+      "passed": true
+    },
+    {
+      "check": "Full 120-stone seeded replay preserves the exact selection order",
+      "passed": true
+    }
+  ],
+  "details": {
+    "first_stone": 131,
+    "high_opening_hits_after": [],
+    "history": [
+      131,
+      95,
+      143,
+      130,
+      23,
+      94,
+      11,
+      107,
+      71,
+      10,
+      83,
+      119,
+      82,
+      9,
+      70,
+      93,
+      22,
+      8,
+      106,
+      129,
+      35,
+      7,
+      92,
+      47,
+      128,
+      46,
+      69,
+      45,
+      6,
+      91,
+      44,
+      59,
+      58,
+      5,
+      57,
+      105,
+      4,
+      56,
+      118,
+      21,
+      43,
+      34,
+      42,
+      41,
+      3,
+      81,
+      55,
+      90,
+      117,
+      127,
+      104,
+      126,
+      54,
+      68,
+      33,
+      125,
+      67,
+      124,
+      66,
+      142,
+      65,
+      64,
+      141,
+      116,
+      80,
+      20,
+      89,
+      40,
+      39,
+      79,
+      123,
+      122,
+      140,
+      88,
+      78,
+      77,
+      76,
+      63,
+      115,
+      53,
+      114,
+      103,
+      62,
+      75,
+      87,
+      52,
+      74,
+      139,
+      138,
+      2,
+      32,
+      102,
+      38,
+      137,
+      101,
+      113,
+      51,
+      112,
+      100,
+      136,
+      111,
+      19,
+      135,
+      50,
+      18,
+      86,
+      99,
+      134,
+      17,
+      110,
+      98,
+      16,
+      31,
+      15,
+      30,
+      14,
+      29,
+      28,
+      27,
+      26
+    ],
+    "retained": 24,
+    "wall_position": "(0.5, 0.0, 26.0)",
+    "wall_rotation": "(0.0, 90.0, 0.0)"
+  },
+  "failures": []
+}

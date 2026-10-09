@@ -1,0 +1,36 @@
+--- before/commons/maps/Ribbon_Patterns_02/final.md
++++ commons/maps/Ribbon_Patterns_02/final.md
+@@ -1,3 +1,5 @@
++# The carrier participates
++
+ The value has stayed. Has the colour?
+ 
+ The previous room let you hide forty-eight cells without erasing them. Here the question turns towards the visible ones. A value has reached a surface. What else has arrived with it?
+@@ -8,9 +10,17 @@
+ 
+ Press **SWAP**. The backgrounds exchange places. The targets keep their numerical values. Does your judgement follow the square, its surroundings, or neither?
+ 
+-Press **SURROUNDS** to give both targets the same grey background. Then return to the unequal backgrounds and press **CONNECT**. A narrow bar joins the targets using their colour. Notice what becomes easier to compare, and what remains uncertain. **UNDO** returns to your previous arrangement; **RESET** restores the start.
++Press **SURROUNDS** to give both targets the same grey background. Seen straight on, their faces almost disappear into the grey. The raised edges may still give them away. The contrast has gone; the little bodies remain. Return to the unequal backgrounds and press **CONNECT**. A narrow bar joins the targets using their colour. Notice what becomes easier to compare, and what remains uncertain. **UNDO** returns to your previous arrangement; **RESET** restores the start.
+ 
+ The two targets and the connector are assigned `Color(0.5, 0.5, 0.5)`. This comparison draws them without lighting-dependent shading. The controls change the backgrounds and whether the connector is shown. Numerical equality is something we can inspect in the program. It does not oblige every viewer, display or viewing situation to produce the same experience.
++
++![Equal target values against dark and light surrounds inside the museum](/book-review/doc/book/figures/tiling/contrast-neighbours-museum.png)
++
++*One grey value, two different surrounds.*
++
++![The same comparison after making both surrounds grey](/book-review/doc/book/figures/tiling/contrast-equal-museum.png)
++
++*The surrounds now match the targets. Their faces nearly disappear; the raised squares remain.*
+ 
+ <!-- @MetamerismLab -->
+ 
+@@ -34,8 +44,6 @@
+ 
+ Try **REPEAT SIZE**. It changes the horizontal repeat from one metre to fifty centimetres on both carriers. The vertical repeat remains one metre. Neither the source pixels nor the meshes change. **UNDO** recovers the earlier setting; **RESET** returns to flat colour and the initial spacing.
+ 
+-The archived name of this artifact is MetamerismLab. Its earlier wave display assigned the same RGB yellow to both results without computing spectra. This encounter instead gives us a difference we can inspect: shared source values, different surface directions, and a stated rule for producing appearance. The older name cannot do the work of an experiment.
+-
+ <!-- @ -->
+ 
+ Imagine carrying this mark onto a sleeve. Which part would you call the pattern: the source array, its spacing along the cloth, or the appearance that reaches someone across the room? Keeping one of those fixed does not keep all of them fixed.

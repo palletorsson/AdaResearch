@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Walls tutorial — Endless Museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#25262b;font:17px/1.65 Georgia,serif}a{color:#275d64;text-underline-offset:.2em}header{background:#f4f0e7f5;border-bottom:1px solid #d7d0c5;padding:12px 4vw;position:sticky;top:0;z-index:5;font:14px/1.6 system-ui}header a{margin-right:16px}main{max-width:1260px;margin:auto;padding:40px 4vw 80px}h1,h2,h3{line-height:1.16}h1{font-size:clamp(34px,4vw,64px);font-weight:400;margin:10px 0 24px}h2{font-size:29px;margin-top:2em}h3{font-size:22px}p{max-width:75ch}small,.eyebrow,figcaption,.meta{font:13px/1.55 system-ui;color:#696761}.eyebrow{text-transform:uppercase;letter-spacing:.15em}.lead{font-size:23px;max-width:60ch}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.actions a{background:#22595d;color:white;padding:9px 15px;text-decoration:none;border-radius:3px;font:14px/1.5 system-ui}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:35px}.card{border-top:1px solid #bdb7ac;padding:20px 0}.card h2{margin:12px 0;font-size:30px}.card img{width:100%;height:230px;object-fit:cover;background:#d9d6d0}.card p{font-size:16px}img{max-width:100%;height:auto}figure{margin:20px 0}figcaption{margin-top:7px}pre{background:#e8e5de;padding:18px;overflow:auto;line-height:1.55;font:13px/1.55 Consolas,monospace;border-left:3px solid #608080}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;font:14px/1.5 system-ui;width:100%;margin:25px 0}th,td{padding:10px;border-bottom:1px solid #d0c9be;text-align:left;vertical-align:top}blockquote{border-left:2px solid #b9668c;margin:25px 0;padding-left:22px}nav.halls{display:flex;flex-wrap:wrap;gap:5px}nav.halls a{padding:3px 8px;border:1px solid #d4cec4;margin:0}.selected{background:#275d64;color:white}.spread{max-width:none;padding:0;display:grid;grid-template-columns:1.05fr 1fr;gap:0}.page{padding:30px 3vw;min-width:0;height:calc(100vh - 117px);overflow:auto;scroll-behavior:smooth}.page+.page{border-left:1px solid #ccc4b7;background:#faf7f0}.page h1{font-size:37px}.page h2{font-size:26px}.page pre{font-size:12px}.reading{max-width:880px}.chapter{border-top:1px solid #b9b3a8;margin-top:65px;padding-top:24px;scroll-margin-top:90px}.notice{padding:16px 20px;background:#e7ede7;border-left:3px solid #52705b}.sources{word-break:break-word}details{margin:20px 0}summary{cursor:pointer;font:15px/1.5 system-ui}footer{margin-top:60px;font:13px/1.6 system-ui;color:#696761}@media(max-width:900px){.spread{display:block}.page{height:auto}.page+.page{border-left:0;border-top:1px solid #aaa}.cards{grid-template-columns:1fr}}@media print{header,.actions,nav{display:none}.spread{display:block}.page{height:auto;overflow:visible}.page+.page{border:0}.chapter,.page{break-before:page}pre{white-space:pre-wrap;font-size:10px}body{background:white}main{padding:0}h1{font-size:30px}}</style></head><body><header><div><a href="../index.html">COLOUR · REVIEW DRAFT</a><a href="../all.html">All tutorials</a><a href="../final.html">All reflections</a><a href="../review.html">Reviewer brief & evidence</a><a href="../feedback.html">Feedback revision</a></div><nav class="halls"><a href="../Color_Context_Placed/parallel.html">Colour</a><a href="../Color_Flashlight/parallel.html">Flashlight</a><a href="../Color_Nails/parallel.html">Nails</a><a href="../Color_Rainbow/parallel.html">Rainbow</a><a href="../Color_Pillar/parallel.html">Pillar</a><a href="../Color_Grid_Pallet/parallel.html">Grid</a><a href="../Color_Paint/parallel.html">Paint</a><a href="../Color_Walls/parallel.html">Walls</a></nav></header><main class=""><h1>Walls — a view through two colours</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Alpha and the material's transparency mode</li>
+<li>Independent palettes and materials</li>
+<li>Rendered appearance beside a persistent collider</li>
+<li>Position and rotation changing the overlap of coloured surfaces</li>
+</ul>
+<p>Walk beside the museum's coloured partitions. Two panes overlap from one place, then separate as you move. A view changes without either wall moving. Try to pass through one: being able to see through it has not made a passage.</p>
+<p>Transformation supplied position and rotation. Grid gave each Palette its own remembered index. Bring both back. We will give two panes independent colours and switch their appearance between translucent and opaque.</p>
+<h2>Two surfaces, two choices</h2>
+<p>Keep <code>palette.gd</code> from Grid unchanged. Save it beside <code>lesson.gd</code>, <code>pane.gd</code> and <code>controls.gd</code> below. Attach <code>lesson.gd</code> to a Node3D at floor level in an open patch of your working Walls hall. Keep unit scale. Approach from positive local Z. The museum supplies the view, movement, light and surrounding architecture.</p>
+<p><code>Pane</code> makes one 2 by 2.5 metre sheet and one thin box collider. The two panes are offset and the second is turned by 15 degrees. Each has its own material and Palette. This reconstructs a small part of the installed office's larger composition.</p>
+<h2>The complete continuation — lesson.gd</h2>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const Palette = preload(&quot;palette.gd&quot;)
+const Pane = preload(&quot;pane.gd&quot;)
+const Controls = preload(&quot;controls.gd&quot;)
+
+var filter_mode := true
+var opacity := 0.52
+var positions: Array[Vector3] = [Vector3(-0.4, 1.25, 0), Vector3(0.4, 1.25, -0.8)]
+var turns: Array[float] = [0.0, 15.0]
+var palettes: Array = []
+var panes: Array[StaticBody3D] = []
+
+func _ready() -&gt; void:
+    palettes = [
+        Palette.new([Color(0.2, 0.9, 0.9), Color(1, 0.8, 0.15)]),
+        Palette.new([Color(0.8, 0.2, 0.6), Color(0.15, 0.55, 0.9)])
+    ]
+    for i in range(positions.size()):
+        var pane := Pane.new()
+        pane.position = positions[i]
+        pane.rotation_degrees.y = turns[i]
+        add_child(pane)
+        panes.append(pane)
+    add_child(Controls.new())
+    apply_colours()
+
+func surface_colour(colour: Color, filtered: bool) -&gt; Color:
+    colour.a = clampf(opacity, 0, 1) if filtered else 1.0
+    return colour
+
+func apply_colours() -&gt; void:
+    for i in range(panes.size()):
+        var material: StandardMaterial3D = panes[i].surface
+        material.albedo_color = surface_colour(palettes[i].current_colour(), filter_mode)
+        material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if filter_mode else BaseMaterial3D.TRANSPARENCY_DISABLED
+
+func toggle_filter() -&gt; void:
+    filter_mode = not filter_mode
+    apply_colours()
+
+func change_first() -&gt; void:
+    palettes[0].next_colour()
+    apply_colours()
+</code></pre>
+<p>Run. Press <strong>F</strong> to switch between filter and opaque modes. Press <strong>C</strong> to advance the first pane's palette. Move sideways to change which parts overlap. The second pane's colour should remain unchanged when you advance the first.</p>
+<p><code>surface_colour</code> takes a Color value and returns one with an assigned alpha. It preserves RGB. In filter mode it bounds <code>opacity</code> to 0–1; opaque mode uses one. Because Color is a value, this local change does not alter the stored palette entry.</p>
+<p>The material also needs the matching transparency mode. Alpha alone is insufficient when the material is configured to render as opaque. <code>apply_colours</code> sets both properties. It never moves a pane, resizes its collider or changes collision layers.</p>
+<h2>Separate what changes</h2>
+<p>Set <code>opacity</code> to 0.2 and run. More of the view behind the sheet contributes to the composite. Then try 1.0. Switch with F: at full alpha the visible difference may disappear even though the selected mode changes. In both cases the same collider remains.</p>
+<p>Restore 0.52. Change only the second value in <code>turns</code> from 15 to 45 degrees. The overlap changes through geometry. Change only a palette entry: its colour changes through material state. These are different ways to compose with the same panes.</p>
+<p>For your own continuation, arrange the two panes so one chosen view has a large overlap and a nearby view has none. Keep both palettes independently changeable. Explain which values you changed and why the route around the panes remains open while the panes themselves still block passage.</p>
+<p>This is ordinary alpha compositing, not spectral transmission through glass. It depends on the colours and order of rendered surfaces and on the view behind them. It does not guarantee physically accurate mixing. The unshaded sheets make those assigned colours easier to inspect; they do not illuminate the room.</p>
+<h2>Supplied pane — pane.gd</h2>
+<!-- student-code:pane.gd -->
+
+<pre><code class="language-gdscript"># Supplied pane: one rendered sheet, one persistent physical boundary.
+extends StaticBody3D
+
+var surface: StandardMaterial3D
+var boundary: CollisionShape3D
+
+func _ready() -&gt; void:
+    var view := MeshInstance3D.new()
+    var sheet := QuadMesh.new()
+    sheet.size = Vector2(2, 2.5)
+    view.mesh = sheet
+    surface = StandardMaterial3D.new()
+    surface.cull_mode = BaseMaterial3D.CULL_DISABLED
+    surface.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    view.material_override = surface
+    add_child(view)
+    boundary = CollisionShape3D.new()
+    var shape := BoxShape3D.new()
+    shape.size = Vector3(2, 2.5, 0.04)
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<p>The sheet and boundary are separate children of one body. The boundary's size stays <code>(2, 2.5, 0.04)</code> in both modes. Disabling it would be a different operation with a different effect on movement.</p>
+<h2>Inherited palette — palette.gd</h2>
+<!-- student-code:palette.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+
+var colours: Array[Color] = []
+var index := 0
+
+func _init(choices: Array[Color]) -&gt; void:
+    assert(not choices.is_empty())
+    colours.assign(choices)
+
+func current_colour() -&gt; Color:
+    return colours[index]
+
+func next_colour() -&gt; Color:
+    index = (index + 1) % colours.size()
+    return current_colour()
+</code></pre>
+<h2>Supplied controls — controls.gd</h2>
+<!-- student-code:controls.gd -->
+
+<pre><code class="language-gdscript"># Supplied desktop test adapter; these methods can also receive museum buttons.
+extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if not event is InputEventKey or not event.pressed or event.echo:
+        return
+    if event.keycode == KEY_F:
+        get_parent().toggle_filter()
+    elif event.keycode == KEY_C:
+        get_parent().change_first()
+</code></pre>
+<p>Keep the distinction at the end of Colour: a choice can change a surface, a light, a stored address or the composite seen through several layers. State where the colour is held and which operation receives it. The same three channel values do not make those operations interchangeable.</p></main></body></html>

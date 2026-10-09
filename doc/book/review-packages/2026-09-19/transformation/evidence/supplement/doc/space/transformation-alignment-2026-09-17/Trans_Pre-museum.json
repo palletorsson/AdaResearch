@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "name": "actual museum source grid exists",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum arrival has supporting floor",
+      "passed": true,
+      "value": {
+        "deck": 0.0,
+        "drop": "(7.5, 4.0, 1.5)",
+        "hit": "{ \"position\": (7.5, -0.0, 1.5), \"normal\": (0.0, 1.0, 0.0), \"face_index\": -1, \"collider_id\": 361431566177, \"collider\": Collision:<StaticBody3D#361431566177>, \"shape\": 171, \"rid\": RID(365072220162) }"
+      }
+    },
+    {
+      "name": "museum suppresses grid spawn",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "eight stages and pickups present",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "still cube occupies moved station",
+      "passed": true,
+      "value": "(4.0, 0.5, 3.0)"
+    },
+    {
+      "name": "still cube survives at source entry",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "still cube survives first metre",
+      "passed": true,
+      "value": {
+        "body": "(4.0, 0.50084, 1.999993)",
+        "distance": 0.999992847442627
+      }
+    },
+    {
+      "name": "deliberate approach collects it",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Pre",
+  "standalone": false
+}

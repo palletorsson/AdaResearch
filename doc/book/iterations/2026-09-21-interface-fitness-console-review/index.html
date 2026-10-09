@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A choice you can see · Ada Research</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2eb;color:#242a29;font:17px/1.65 system-ui,sans-serif}
+main,header,footer{max-width:1400px;margin:auto;padding:32px 5vw}header{padding-top:58px;padding-bottom:0}
+h1{font:500 clamp(36px,5vw,65px)/1.1 Georgia,serif;max-width:900px;margin:20px 0}
+h2{font:500 30px/1.25 Georgia,serif}p{max-width:900px}a{color:#255d52;text-underline-offset:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#4f6b62}
+.lead{font-size:21px}.metrics{display:flex;flex-wrap:wrap;gap:18px;margin:30px 0}
+.metric{background:#e5ece5;padding:17px 24px;border-left:3px solid #3a7162}
+.metric strong{display:block;font:32px Georgia,serif}.metric span{font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;height:auto;display:block;border-radius:5px}
+figcaption{font-size:14px;line-height:1.5;color:#58635e;margin:12px 0 24px}section{border-top:1px solid #c8d0c7;margin-top:30px;padding-top:20px}
+code{font-size:14px;overflow-wrap:anywhere}pre{white-space:pre-wrap;background:#e8ede6;padding:20px}
+.note{font-size:14px;color:#58635e}li{margin:8px 0}table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #c8d0c7}
+@media(max-width:760px){.pair{grid-template-columns:1fr}header,main,footer{padding-left:20px;padding-right:20px}table{font-size:13px}th,td{padding:8px}}
+
+.hero-image img{width:100%;height:auto;display:block}.hero-image{margin:0}.zoom-note{font-size:.9rem;color:#496c63}
+.pair img{object-fit:contain}pre{overflow-x:auto}.comparison>input{accent-color:#234e42;margin:1rem .4rem 1rem 1rem}.comparison>label{display:inline-block;border:1px solid #315d50;border-radius:30px;padding:.65rem 1.2rem;cursor:pointer}
+.comparison>input:checked+label{background:#234e42;color:white}.comparison .before-view{display:none}#view-before:checked~.before-view{display:block}#view-before:checked~.after-view{display:none}.comparison figcaption{padding:1rem 0}
+
+.comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.comparison figure{margin:0}.comparison img{width:100%;height:auto} @media(max-width:760px){.comparison{grid-template-columns:1fr}}</style></head>
+<body><header><div class="eyebrow">Ada Research · Physical interface pass · 21 September 2026</div>
+<h1>A choice<br>you can see.</h1>
+<p class="lead">Change what the swarm rewards. Four physical buttons, one continuous fader, and a selected rule that remains visible after your hand leaves.</p>
+<p><a href="../2026-09-21-interface-physical-slider-review/index.html">Previous: the grammar handle</a> · <a href="/necklace/thread?map=SwarmIntelligence_Particle_Swarm_Optimization&amp;role=primary">Particle-swarm hall</a></p>
+<div class="metrics"><div class="metric"><strong>4 choices</strong><span>One visibly selected rule</span></div><div class="metric"><strong>0–1</strong><span>Continuous inertia, held after release</span></div><div class="metric"><strong>114 checks</strong><span>Fitness, grammar and Shannon pass</span></div></div></header>
+<main><section><h2>Something to press. Something to hold.</h2>
+<figure class="hero-image"><a href="after-close.png"><img src="after-close.png" width="1600" height="1200" alt="Inclined console with four raised buttons, a physical inertia fader, reset button and flat printed labels"></a><figcaption>The current Godot artifact. The green cap marks the selected reward. The fader moves continuously; the numbered marks do not impose discrete stops.</figcaption></figure>
+<p>The interface is a compact physical object. Buttons move into their backing when touched; the fader can be grabbed or dragged with a pointer. Titles, numbers and captions stay flat on surfaces. RESET restores the starting population while keeping the chosen reward and inertia.</p></section>
+<section><h2>From a side column to a front station</h2><div class="comparison">
+<figure><a href="before-overview.png"><img src="before-overview.png" width="1600" height="1200" alt="Before: a vertical control column stands beside the terrain"></a><figcaption>Before: controls beside the work.</figcaption></figure>
+<figure><a href="after-overview.png"><img src="after-overview.png" width="1600" height="1200" alt="After: the grouped physical console stands in front of the same terrain"></a><figcaption>After: player → controls → terrain, with a supported caption behind.</figcaption></figure></div>
+<p>These views use the same camera and initial simulation. The seeded agents and terrain colours are unchanged. All four reward functions are now accessible in the default placement; previously RIDGE was only available in a configured variant.</p></section>
+<section><h2>At the operating position</h2>
+<figure><a href="after-front.png"><img src="after-front.png" width="1600" height="1200" alt="Standing view over the low console towards the swarm and caption"></a><figcaption>A desktop camera at local height 1.65 m. The lower panel exposes more of the terrain, although part of its near edge remains covered. <a href="before-front.png">Same position before.</a></figcaption></figure>
+<p>The panel follows the terrain size and sits on a narrow stand. This is a test-scene view of the actual artifact; it is not a headset or full-hall capture. Reach and placement on raised furniture need a separate check in the museum.</p></section>
+<section><h2>The same agents, another reward</h2>
+<figure><a href="ridge-overview.png"><img src="ridge-overview.png" width="1600" height="1200" alt="The ridge reward creates a bright diagonal scoring band and the swarm gathers near it"></a><figcaption>RIDGE selected, after 120 simulation steps. The terrain, selected cap and caption agree.</figcaption></figure>
+<p>The rule changes immediately; the swarm responds over time. Its mathematical behaviour is preserved. The interface makes the choice and its persistence easier to notice.</p></section>
+<section><h2>A pattern other artifacts can use</h2>
+<p>The shared choice console combines up to four physical choices, one continuous parameter and reset. Its owner controls the selection and readout, so configuration changes and direct interaction tell the same story. It reuses the existing physical buttons and the grammar fader, with an explicit continuous mode.</p>
+<p>Shared repairs also ensure that untouched buttons display their configured colour and that a disappearing pointer cannot leave a cap pressed. A hand still touching the button retains its own press.</p></section>
+<section><h2>Evidence and the next step</h2>
+<p><a href="checks.json">45 fitness checks</a> exercise physics touch, ray hits, cap travel, XR Tools grab and release, state updates and reset. <a href="regressions.json">46 grammar and 23 Shannon checks</a> protect the earlier shared-control work.</p>
+<p>Headset comfort, tracked-hand behaviour and Quest performance remain untested. Next is the edge-of-chaos interface, where different configurations deliberately grant or withhold control. Improving its presentation must preserve that distinction.</p>
+<p><a href="implementation.md">Implementation, reuse and limits</a> · <a href="source-hashes.json">Source hashes</a></p></section></main>
+<footer><p><a href="../2026-09-21-interface-edge-console-review/index.html">Continue: who can move the handle?</a></p>Physical controls · Flat surface text · Headset test pending</footer></body></html>

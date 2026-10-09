@@ -1,0 +1,214 @@
+--- before/commons/maps/Boolean_Works/final.md
++++ after/commons/maps/Boolean_Works/final.md
+@@ -1,90 +1,71 @@
+-The room gets taller here, and the things in it stop being demonstrations. A workbench, a catalogue rack, a wall with a door cut through it, a five-metre block of rock with a tunnel bored out of the middle. These are the boolean operations at the size where they would have to be architecture, and the question this hall asks is the one the small rooms could not: when the negative gets big enough to stand in, can you stand in it?
++The room gets taller here. A workbench, a catalogue rack, a wall with a door cut through it, a block of rock with a hollow inside. These are the Boolean operations at the size where they begin to promise architecture. When the negative gets big enough to stand in, can you stand in it?
+ 
+-Do not answer from the doorway. Several objects here offer an image of an interior. One now asks you to enter it. The difference is worth finding with your body before naming it.
++Do not answer from the doorway. Several objects offer an image of an interior. One asks you to enter it. The difference is worth finding with your body before naming it.
+ 
+-## Above the workbench
++## The work waiting above the table
+ 
+ <!-- @csg_compose_workbench -->
+ 
+-```gdscript
+-# csg_compose_workbench.gd:9 — the promise, in the file's own header
+-# stand at the bench, see all three operators side by side, pick one with the bracelet,
+-```
++Three solids turn slowly above a table. Union, intersection, subtraction: the verbs have become a small collection. Their rotation offers each result from another side while the recipe stays fixed.
+ 
+-Three solids turning slowly above a table, each labelled with the operation that made it. The file calls itself a workbench, the registry sells it with the tag `catalyst_affordance`, and the header above says you pick one up with the bracelet.
++The workbench suggests a place to take hold of something and change it. In this version, the three presets keep their distance from that possibility. They turn, but you cannot pick them up or build another expression here. Your eye can follow their contours further than your hand can carry them.
+ 
+-There is no picking. Three hundred and fifty-eight lines and not one input handler, no interaction volume, no signal, no mention of the bracelet outside comments. The only thing that happens at runtime is that the presets rotate. And the geometry has already given it away before you try: the bench top is at 0.56 metres and the work is placed at 1.1, so the objects float just over half a metre above the tabletop, turning. Their position does not make them pickable. The file half-admits it in a line called `needs` — *Missing: a live player-built composition surface beside the three fixed presets.*
++There is already more in the algebra than this table shows. Its source includes a recipe for keeping the parts belonging to either operand while removing the overlap:
+ 
+-Its dial is the interesting part. `algebra` has four settings, and one of them, `complete`, builds symmetric difference out of two nested combiners and labels it longhand as `(A ∪ B) − (A ∩ B)` — the artifact's own argument that XOR is derived rather than primitive, which is a real and good point about what an algebra holds versus what a tool exposes. The default is `triad`. Eleven placements exist in this museum and not one of them passes a config value. So XOR is in the repository and has never once been in the building.
++`(A ∪ B) − (A ∩ B)`
+ 
+-## The two stations that were supposed to be identical
++This is symmetric difference. It composes the familiar verbs instead of adding a new primitive operation. The current table shows the three simpler results. The unplaced recipe leaves a specific possibility to develop: a workbench where combining operations becomes something the visitor can do. For now, the table lets us inspect the answers someone else arranged.
++
++## A cut changes its company
+ 
+ <!-- @subtraction_suite -->
+ 
+-```gdscript
+-# subtraction_suite.gd:254 — the one line that breaks the claim
+-art_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+-```
++A painted cube stands on a white plinth. Beside it, the same cut is presented with transparent operands and an explanatory board. One asks for attention as a sculpture; the other offers the means of explaining its hollow. A tray gathers further specimens nearby.
+ 
+-One cube with a sphere taken out of it, built twice, side by side: once dressed as an art object and once as an instrument reading. The bench's stated result — its smallest and firmest, by its own account — is that these are the same object and *what differs between them is the furniture and the palette*.
++Stay with whichever draws you first. Knowing how the sphere was subtracted need not exhaust the pleasure of the curve it left. Conversely, the desire to understand can send you back to a surface you had already admired.
+ 
+-Cull mode is neither. It is a property of the surface, and the operator's copy does not get it: that station keeps back-face culling, and at every setting past the first the void has already broken through the faces, so the mouths of the cavity are exactly where your eye goes in. One station renders its carved interior. The other deletes it at the moment you look inside. The claim that the difference is not in the object is undone by a line in the object.
++The two presentations share a geometric recipe, but their materials also make decisions about visibility. The painted version draws both sides of its triangles; the operator version keeps ordinary back-face culling. This decides which sides of a triangle may be seen, separately from the geometry of the cut. Comparing the presentations involves more than furniture and colour. The explanation has a way of showing things too.
+ 
+-Worth a count while you are here: the whole bench builds four CSG combiners and eighty-five plain meshes, sixty-eight of which are the catalogue tray beside it, which contains no boolean operation at all.
+-
+-## Four of five are not booleans
++## When did the pieces become pieces?
+ 
+ <!-- @sphere_splitting_showcase -->
+ 
+-```gdscript
+-# sphere_splitting_showcase.gd:182 — the caption
+-_add_info_label(csg_sphere, "CSG CUTTING\nBoolean ops\nfor real cuts\n\nPieces: 1\nSplits: 0")
+-```
++Five spherical bodies and balls to throw recall the earlier force encounters. A sphere coming apart can seem to tell one clear story: impact, then fragments. Here the methods disagree about when those fragments come into existence.
+ 
+-Five destructible spheres in a row with balls to throw at them, each shattering by a different algorithm. It stands in a boolean hall today for the first time, though it has been placed five times before in the forces chapter, which is where it comes from and where its registry entry still files it.
++Some bodies are divided into pieces before the impact. Others calculate a division when they are struck. One method uses CSG intersection to make its piece meshes; the others use different constructions. Similar broken silhouettes can follow different histories.
+ 
+-Four of the five contain no boolean operation. They are fracture algorithms — segmentation, planar cuts, physics shards — and only one of them reaches for CSG at all, which it uses for an *intersection*, baked offline, to mask a mesh. The caption above sits on that one. The room's name claims all five.
+-
+-None of them is seeded, either: the cut planes are three unseeded random floats, so two placements of this token are two different objects the instant anything is thrown. It is the most honest thing in the hall about what a boolean is *for* — a tool used once, offline, to make a mesh — and it is filed as the opposite.
++That is a useful neighbour for the Boolean works. The hall does not need every fracture to be subtraction. It needs us to notice when the appearance of a cut has persuaded us that we know how it was made.
+ 
+ ## The hole that was never made
+ 
+ <!-- @recursive_boolean_cube -->
+ 
++A Menger sponge gives that question a quieter form. Square openings recur inside a cube, and smaller openings repeat in what remains. From a distance it could be a record of patient excavation.
++
++The construction divides a region into twenty-seven positions. It counts how many coordinates of each little position lie in the middle and then makes a choice:
++
+ ```gdscript
+-# recursive_boolean_cube.gd:118 — the whole mechanism
+ if zeros >= 2:
+     continue
+ ```
+ 
+-A Menger sponge. A cube with square holes bored through it, and smaller holes in what remains, recursively. Of everything in this hall it looks the most like subtraction, and it is the hinge of the entire chapter.
++Those cells are never built. The others can be subdivided again. Nothing has to be removed from a previously filled cube to give this body its holes.
+ 
+-It performs no boolean operation. There is no CSG node anywhere in the hundred and fifty-eight lines, no subtraction operator, nothing but boxes and materials. The holes come from the two lines above: walking the twenty-seven cells of each subdivision, if a cell is on the axial cross, the loop does not build it. Nothing is removed. A cube is declined.
++The earlier Boolean difference changed a represented region and generated its new boundary. This work withholds parts of a construction. Both can give us an opening to look through. The image alone does not tell us which history to imagine.
+ 
+-The file's own comment calls this *boolean-like subtraction through recursive geometry*, and the registry, which files it under procedural generation and tags it `procedural`, never uses the word boolean at all. Both are more accurate than the room it now stands in.
+-
+-And it is the only body here that is fully reproducible — no random number in the file, two placements byte-identical — which is a small joke at the chapter's expense: the artifact that does not do the thing is the one that does it the same way twice.
+-
+-Take the mechanism seriously and it reframes everything upstream. A boundary model can define an interior without filling it with material. A Boolean difference changes the represented region and its boundary. This artifact skips even that. It gets the appearance of a hole by never putting anything there and then narrating the absence as a cut. Which is not a lesser version of what the verbs do. It is another construction with a similar silhouette. The image alone does not tell us which work took place.
++There is something generous in that uncertainty. We can want the hollow before knowing whether to carve it, omit it, or compose the surrounding pieces. Learning another construction gives that desire another way to proceed.
+ 
+ ## Equals room
+ 
+ <!-- @csg_architecture_cavity -->
+ 
+-```gdscript
+-# csg_architecture_cavity.gd:20 and :52 — thirty-two lines apart
+-# truth: Every architectural cavity is a difference. A room is a wall that has been subtracted from.
+-...
+-#   operator and never delivers the truth line: a wall has no interior.
+-```
++A wall carries the equation `wall − (door + porthole + window) = room`. There is a doorway, a round bite at the top and an arched opening. Your eye begins arranging a possible passage through them.
+ 
+-A wall, three and a half metres of it, with a door and an opening and a bitten arch cut through. Floating above it in large text: `wall − (door + porthole + window) = room`.
++Walk toward the uncut part. It does not stop you. This display has no enabled collision, so the wall and its doorway make the same offer to the moving body. The opening matters to the image; the implementation has not made it a necessary crossing.
+ 
+-In this placement it is one wall. The setting that would add returning runs is still `none`. The two lines above are both in the file, thirty-two apart, and the second one is right: a wall has no interior. One difference makes a hole, not an inside. You read the payoff from outside, which is the only place there is.
++Go around the end. There is no enclosed room behind this particular wall. The artifact has other configurations with returning walls, but the placement here is a single slab. An equation over its head has supplied a room sooner than the construction has supplied an inside.
+ 
+-Then walk into it. You will not be stopped. There is no collision anywhere in this artifact — no static body, no shape, and the CSG root's own collision flag is never set. This is not something the engine could not do; a tunnel in the alternative-geometries chapter turns exactly that flag on, one line, and you can walk through it. Here the doorway and the wall are the same to your body. The one architectural distinction the object exists to make — that a cut in a solid produces somewhere you can be — is the distinction it does not implement.
+-
+-Even the porthole is not a hole. Its centre is set 1.4 metres up on a wall whose half-height is 1.3, so it is a scallop bitten out of the top edge.
++The failed promise is worth keeping in view. We can understand the operation, recognise the door and still lack the agreement that would let either one organise our movement. A clear picture can carry a desire for somewhere we cannot yet inhabit.
+ 
+ ## The opening that asks for your body
+ 
+@@ -92,9 +73,9 @@
+ 
+ Go around the stone block to the opening on its left side. Try the solid wall first, then the gap. The wall stops you. At the opening, the museum floor continues into a low, turning hollow. Follow it far enough to lose the view you had from outside. Then turn and find your way back.
+ 
+-This burrow was already in the project. Its cutters followed a seeded walk: eleven overlapping spheres, joined and subtracted from a block. The overlap graph reported one connected component. Yet a test body stalled between the second and third hollows. Two spheres can overlap while leaving a raised lip where your feet want a floor. *Connected* had answered a question, just not the whole question we were asking.
++Eleven overlapping cuts follow a seeded walk through the block. In the original construction they were spherical. The hollows belonged to one connected arrangement, yet a walking body could stall at a raised lip between them. Two regions can meet without providing the floor that a particular body needs.
+ 
+-The version standing here keeps those eleven centres and their radius. Upright cylindrical cutters replace the spheres. Their bottoms reach just below the museum floor; their tops leave about 2.3 metres of headroom. The rooms of the hollow still overlap along the same wandering plan, but their floors no longer climb into each join.
++The version here keeps those eleven centres and their radius. Upright cylindrical cutters replace the spheres:
+ 
+ ```gdscript
+ column.radius = carver_radius
+@@ -102,58 +83,54 @@
+ column.position = at
+ ```
+ 
+-These lines change what gets removed. Another line makes the remaining rock resist the body:
++Their bottoms reach just below the museum floor. Their tops leave about 2.3 metres of headroom. The rooms still overlap along the wandering plan, but their floors no longer climb into each join. Another line makes the remaining rock resist the body:
+ 
+ ```gdscript
+ stock.use_collision = walkable and spoil == "rock"
+ ```
+ 
+-Neither line works alone. A collider can enforce an opening too small to enter. A generous opening without collision can be indistinguishable, to your body, from the wall beside it. Here the cutter, the floor, the collision surface and the body's dimensions have to meet.
++The shape of the cut and the rule for contact have to work together. A collider can enforce an opening too small to enter. A generous hollow without collision can make the wall beside it equally passable. Here a body's dimensions have become part of what the room needs to get right.
+ 
+-The spherical version remains available in the artifact. It has not become a wrong shape because we wanted a passage. We have made one kind of body easier to accommodate and changed the space to do it. What else might have lived in the rising hollows? The repair carries a preference. You can now stand inside it.
++The spherical version remains possible. It has not become a wrong shape because we wanted a passage. The hollow here has been adapted to one kind of movement. Another body might find a use for its rising floors, or ask for more clearance than we have left.
++
++Inside, the same wall that stopped you from entering through the rock interrupts the view from the aisle. What enclosed the passage can also give it seclusion. The cut has made a place to withdraw into as well as somewhere to pass. Which of those possibilities matters depends on why a body came here.
+ 
+ ## Walk the hollow
+ 
+ <!-- @sdf_cavern_room -->
+ 
++Nearby, another rock-like body carries the invitation "CARVE THE FUNCTION, WALK THE HOLLOW". Its crust is assembled from small boxes. Five spherical regions are subtracted from a box-shaped field, and samples near the resulting boundary give it this broken surface.
++
++The signed-distance calculation returns from the previous sequence:
++
+ ```gdscript
+-# sdf_cavern_room.gd:55 — the only text in the world
+-_billboard_label("CARVE THE FUNCTION, WALK THE HOLLOW", Vector3(0.0, 3.6, 0.0), 28, ...)
++d = maxf(d, -_sd_sphere(p, c, r))
+ ```
+ 
+-Five metres of rock rendered as a crust of nearly five thousand small boxes, with five spheres subtracted out of the middle of it to make a cave. It is the most beautiful object in the chapter and the sign over it is the plainest instruction in the building.
++Inside uses negative values in this construction. Negating the sphere's field and taking the maximum keeps the region inside the box but outside the cutter. Repeating the operation makes several hollows. Sampling that result into little boxes gives the surface its grain.
+ 
+-There is no collider, and this time it would not help. The block is lifted so its underside sits fifteen centimetres off the floor, and the lowest carved air anywhere inside it is 1.2 metres up — more than a metre of unbroken rock between the ground you are standing on and the bottom of the hollow. The hollow begins well above the floor you are standing on. There is a floor in this artifact, a seven-metre plate, and it belongs to the tray, not the cave; it also sways, because the whole node rocks gently on its vertical axis and takes the ground with it.
++The model has no collider. Its carved air also begins above the museum floor; a lower part of the displayed rock separates the hollow from where your feet are. Enlarging the model has not supplied a walk into it. The invitation stays ahead of the place.
+ 
+-So it is a model of a cavern on a table. Which would be fine — most of this museum is models on tables — except that the verb in its own truth line is the one operation it does not implement, and it is the artifact in the entire chapter that is actually shaped like an interior. It carries no declared axis at all, while the word `interior` has been borrowed from the wall next door by three other registry entries as the term for *whether a solid encloses a void you could occupy*.
++Look back toward the burrow. Related operations have produced two different relations to an interior. One offers a surface to examine. The other has been fitted to a body's approach, support and return. The large hollow may make us want another passage; wanting it does not yet give it a floor.
+ 
+-## Seventy-five things that look grabbable
++## A collection within reach
+ 
+ <!-- @booleanvariations -->
+ 
+-```gdscript
+-# booleanvariations.gd:632 — after wrapping each solid in a VR grab cube
+-grab_cube.set_script(stability_script)
+-```
++The rack gathers seventy-five small combinations in a three-dimensional array. A handleable scale and repeated frames suggest a collection you could take apart in your hands. The current rack's objects do not retain the normal pickup behavior. Here too, an appearance has offered an action that the implementation withholds.
+ 
+-A three-by-five-by-five rack of boolean combinations, seventy-five of them, each one wrapped in the project's standard grab cube so it can be picked up. Then the line above replaces that cube's script with a fourteen-line stub, and the pickable behaviour is gone. The highlight ring is removed first, because it would throw errors against the stub. Seventy-five objects built to be handled, presented as handleable, inert.
++That makes a precise unfinished task. If handling became possible, we could turn one result away from its neighbours, carry it to another comparison, and bring it back. The collection would acquire another order through a visitor's attention. For now, we move around it while its objects keep their places.
+ 
+-Two more things about it that are visible if you look. It clears its own children on the first frame with an unconditional loop, and its scene file's camera and its only light are among them, so standalone it goes black. And of the twenty-five distinct variations it advertises, thirteen are marked `# Placeholder` in the source and call another variation's builder, leaving eleven.
+-
+-## The degenerate case, kept
++## What the picture can settle
+ 
+ <!-- @coincident_face -->
+ 
+-At the back wall, the flat plate about two faces in the same plane — the failure mode, the one condition under which the whole boolean grammar has no answer. The gallery next door explains what it is and how it is drawn. It is here as well, at the end of the heavy hall, because it is the only object in the chapter that takes the position that a case where the machinery breaks is worth an exhibit rather than a bug report.
++The amber-and-blue diagram returns at the back wall. It gives a stable image to a competition between surfaces. In the gallery, we could compare its account with the mechanism drawing the stripes. Here it stands among objects whose accounts also need another kind of evidence.
+ 
+-## What an outside picture misses
++An outside photograph can show an entrance. It cannot establish the route a particular body will find beyond it. The museum's earlier image comparisons scarcely registered the addition of returning walls: from outside, little appeared to change. A visitor might instead find somewhere to be out of sight.
+ 
+-The first wall still lets you pass through its uncut part. The cavern still displays a hollow lifted above the ground. The burrow now makes a different offer. These are implementation choices made with related tools; they are not a verdict that Boolean construction cannot make an interior.
++In the burrow, the cutters kept their centres while a changed profile made a walk possible. The old description, *connected*, remained true. We had to ask what connection would mean for the body arriving there.
+ 
+-The old review found a useful blind spot in the project's own instrument. A still-camera sweep judged whether a setting mattered by counting changed pixels. Adding returning walls to the architectural cavity changed little in that outside view. The camera saw a few more slabs. It did not have to find the doorway, stop at a wall, or turn around inside.
++Keep the signs that overpromise in view. They tell us where the desire for a room arrived before its floor, contact rules or entrance. The next construction can take that desire seriously. Sometimes a different cut lets the body arrive too.
+ 
+-A picture from outside can show an entrance. It cannot establish what a particular body will be allowed to do beyond it. In the burrow, changing the cutter profile keeps the same centres and the same overlap graph while changing the walk. The record that says *one component* remains true. The test that asks *can I get there?* needs other evidence.
+-
+-Keep the signs that overpromise in view. They tell us where the desire for a room arrived before its floor, its contact rules or its entrance. But the response need not be to abandon that desire. Sometimes a different cut lets the body arrive too.
+-
+-Next, the individual body gives way to many. In Swarm Intelligence, each agent follows a rule, and the space they make together will again exceed what one instruction says.
++In Swarm Intelligence, many bodies will follow local rules at once. Their movements will make relations that no single body can supply. Carry the question of accommodation with you: what space becomes possible among them?

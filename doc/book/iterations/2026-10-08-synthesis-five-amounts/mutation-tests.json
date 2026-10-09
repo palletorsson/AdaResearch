@@ -1,0 +1,34 @@
+[
+  {
+    "fault": "wrong-harmonic-index",
+    "rejected": true,
+    "failures": [
+      "third contribution is negative at PI/2",
+      "known signed sum at PI/2",
+      "second harmonic has two returns",
+      "removing negative contribution raises total",
+      "one coefficient recovers a pure sine",
+      "sum and components share declared gain",
+      "even terms break that symmetry in original recipe"
+    ]
+  },
+  {
+    "fault": "unsigned-contribution",
+    "rejected": true,
+    "failures": [
+      "known signed sum at PI/2",
+      "one coefficient recovers a pure sine"
+    ]
+  },
+  {
+    "fault": "aliased-baseline",
+    "rejected": true,
+    "failures": [
+      "working edits preserve the original baseline",
+      "actual H5 action restores all coefficients and handle heights",
+      "sum and components share declared gain",
+      "readout states current recipe hold phase and gain",
+      "even terms break that symmetry in original recipe"
+    ]
+  }
+]

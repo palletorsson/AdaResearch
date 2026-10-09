@@ -1,0 +1,466 @@
+{
+  "checks": [
+    {
+      "name": "three matched trials built",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "initial draw timing 0",
+      "passed": true,
+      "value": {
+        "chosen": -1,
+        "draws": 1,
+        "events": [
+          "DRAW",
+          "REVEAL"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 1,
+        "route": "unselected",
+        "schedule": 0,
+        "seed": 39017,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "closed geometry conceals assignment 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "non-player ignored 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "event order and one draw 0",
+      "passed": true,
+      "value": {
+        "chosen": 0,
+        "draws": 1,
+        "events": [
+          "DRAW",
+          "REVEAL",
+          "CHOOSE A"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 1,
+        "route": "around",
+        "schedule": 0,
+        "seed": 39017,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "pointer replay cancels stale opening 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "same seed repeats answer 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "only chosen entry opens 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "shortcut collision agrees with answer 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "new round changes seed, clears choice 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "initial draw timing 1",
+      "passed": true,
+      "value": {
+        "chosen": -1,
+        "draws": 0,
+        "events": [],
+        "ready": false,
+        "revealed": false,
+        "round": 1,
+        "route": "unselected",
+        "schedule": 1,
+        "seed": 39118,
+        "short_door": -1
+      }
+    },
+    {
+      "name": "closed geometry conceals assignment 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "non-player ignored 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "event order and one draw 1",
+      "passed": true,
+      "value": {
+        "chosen": 0,
+        "draws": 1,
+        "events": [
+          "CHOOSE A",
+          "DRAW",
+          "REVEAL"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 1,
+        "route": "around",
+        "schedule": 1,
+        "seed": 39118,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "pointer replay cancels stale opening 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "same seed repeats answer 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "only chosen entry opens 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "shortcut collision agrees with answer 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "new round changes seed, clears choice 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "initial draw timing 2",
+      "passed": true,
+      "value": {
+        "chosen": -1,
+        "draws": 1,
+        "events": [
+          "DRAW"
+        ],
+        "ready": false,
+        "revealed": false,
+        "round": 1,
+        "route": "unselected",
+        "schedule": 2,
+        "seed": 39219,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "closed geometry conceals assignment 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "non-player ignored 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "event order and one draw 2",
+      "passed": true,
+      "value": {
+        "chosen": 0,
+        "draws": 1,
+        "events": [
+          "DRAW",
+          "CHOOSE A",
+          "REVEAL"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 1,
+        "route": "around",
+        "schedule": 2,
+        "seed": 39219,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "pointer replay cancels stale opening 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "same seed repeats answer 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "only chosen entry opens 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "shortcut collision agrees with answer 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "new round changes seed, clears choice 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "walking onto plate chooses 0",
+      "passed": true,
+      "value": {
+        "chosen": 1,
+        "draws": 1,
+        "events": [
+          "DRAW",
+          "REVEAL",
+          "CHOOSE B"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 5,
+        "route": "direct",
+        "schedule": 0,
+        "seed": 39017,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "selected entrance admits body 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "occupied reset and new-round refused 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "direct route traversable 0",
+      "passed": true,
+      "value": 0.0582799911499023
+    },
+    {
+      "name": "reset works after exit 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "detour choice cannot walk straight through 0",
+      "passed": true,
+      "value": [
+        0.699999809265137,
+        0.000273436307907104,
+        -0.358306884765625
+      ]
+    },
+    {
+      "name": "detour waypoint 0 (0.7, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0533542633056641
+    },
+    {
+      "name": "detour waypoint 0 (1.9, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0345065146684647
+    },
+    {
+      "name": "detour waypoint 0 (1.9, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.0520642586052418
+    },
+    {
+      "name": "detour waypoint 0 (0.7, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.0337231121957302
+    },
+    {
+      "name": "detour waypoint 0 (0.7, 0.02, 3.2)",
+      "passed": true,
+      "value": 0.0601190738379955
+    },
+    {
+      "name": "walking onto plate chooses 1",
+      "passed": true,
+      "value": {
+        "chosen": 1,
+        "draws": 1,
+        "events": [
+          "CHOOSE B",
+          "DRAW",
+          "REVEAL"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 5,
+        "route": "direct",
+        "schedule": 1,
+        "seed": 39118,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "selected entrance admits body 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "occupied reset and new-round refused 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "direct route traversable 1",
+      "passed": true,
+      "value": 0.0582799911499023
+    },
+    {
+      "name": "reset works after exit 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "detour choice cannot walk straight through 1",
+      "passed": true,
+      "value": [
+        0.69999885559082,
+        0.000273436307907104,
+        -0.358305931091309
+      ]
+    },
+    {
+      "name": "detour waypoint 1 (0.7, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0533542633056641
+    },
+    {
+      "name": "detour waypoint 1 (1.9, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0345074683427811
+    },
+    {
+      "name": "detour waypoint 1 (1.9, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.0520642586052418
+    },
+    {
+      "name": "detour waypoint 1 (0.7, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.0337231121957302
+    },
+    {
+      "name": "detour waypoint 1 (0.7, 0.02, 3.2)",
+      "passed": true,
+      "value": 0.0601191073656082
+    },
+    {
+      "name": "walking onto plate chooses 2",
+      "passed": true,
+      "value": {
+        "chosen": 1,
+        "draws": 1,
+        "events": [
+          "DRAW",
+          "CHOOSE B",
+          "REVEAL"
+        ],
+        "ready": false,
+        "revealed": true,
+        "round": 5,
+        "route": "direct",
+        "schedule": 2,
+        "seed": 39219,
+        "short_door": 1
+      }
+    },
+    {
+      "name": "selected entrance admits body 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "occupied reset and new-round refused 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "direct route traversable 2",
+      "passed": true,
+      "value": 0.0582799911499023
+    },
+    {
+      "name": "reset works after exit 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "detour choice cannot walk straight through 2",
+      "passed": true,
+      "value": [
+        0.69999885559082,
+        0.000273436307907104,
+        -0.358306884765625
+      ]
+    },
+    {
+      "name": "detour waypoint 2 (0.7, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0533542633056641
+    },
+    {
+      "name": "detour waypoint 2 (1.9, 0.02, -1.12)",
+      "passed": true,
+      "value": 0.0345074683427811
+    },
+    {
+      "name": "detour waypoint 2 (1.9, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.052064273506403
+    },
+    {
+      "name": "detour waypoint 2 (0.7, 0.02, 1.35)",
+      "passed": true,
+      "value": 0.0337212048470974
+    },
+    {
+      "name": "detour waypoint 2 (0.7, 0.02, 3.2)",
+      "passed": true,
+      "value": 0.0601191073656082
+    },
+    {
+      "name": "new reset leaves no pending opening",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "VR group recognized without desktop museum",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "distinct starting seeds",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "scope": "Native production pointer buttons and CharacterBody plate entry, collision, direct and detour traversal at translated rotated host. VR group detection only; no headset input or statistical test."
+}

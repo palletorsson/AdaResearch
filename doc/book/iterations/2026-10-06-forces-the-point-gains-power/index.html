@@ -1,0 +1,227 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Forces — the point gains power</title><style>
+:root{--ink:#24262a;--paper:#f4f1e9;--accent:#9b3558;--muted:#64615d}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}a{color:var(--accent)}header,main{max-width:1250px;margin:auto;padding:36px}header{padding-top:70px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700;color:var(--accent)}h1{font:clamp(46px,6vw,86px)/1.04 Georgia,serif;letter-spacing:-.04em;max-width:900px;margin:18px 0 24px}h2{font:35px/1.12 Georgia,serif;letter-spacing:-.02em;margin:10px 0 18px}h3{font-size:23px;margin-top:35px}.lead{font-size:23px;max-width:800px;line-height:1.5}.status{font-size:14px;max-width:880px;color:var(--muted);border-left:3px solid var(--accent);padding:10px 18px}.route{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:32px 0}.route a{text-decoration:none;border-top:2px solid var(--ink);font-weight:600;padding:12px 4px;font-size:14px}.route span{display:block;color:var(--muted);font-size:11px}nav{position:sticky;top:0;background:#f4f19ef5;background:rgba(244,241,233,.97);z-index:5;border-block:1px solid #d5d1c8;padding:12px 24px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:14px}nav a{text-decoration:none}.encounter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;padding:55px 0;border-bottom:1px solid #cdc8bc;scroll-margin-top:60px}figure{margin:0}img{display:block;width:100%;height:auto;border:1px solid #d5d1c8}figcaption{font-size:12px;line-height:1.5;color:var(--muted);margin-top:12px}.subject{font-size:14px;letter-spacing:.03em;color:var(--accent)}.story{font-size:18px}blockquote{font:25px/1.4 Georgia,serif;border-left:2px solid var(--accent);margin:28px 0;padding-left:20px}dt{font-size:11px;font-weight:bold;text-transform:uppercase;letter-spacing:.1em;margin-top:18px}dd{margin:5px 0;font-size:15px}details{border-top:1px solid #ccc;padding-top:16px;margin-top:22px;font-size:14px}summary{cursor:pointer;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.6;background:#e9e5dc;padding:16px}.proposal{min-height:350px;background:#25272b;display:flex;align-items:center;justify-content:center;gap:35px;position:relative}.orb{display:block;width:104px;height:104px;border-radius:100%;background:radial-gradient(circle at 35% 25%,#bbb 0%,#333 27%,#0b0c0e 67%);box-shadow:10px 15px 30px #111}.small{width:78px;height:78px}.proposal p{position:absolute;bottom:18px;color:#d2c8bc;font-size:10px;text-align:center;letter-spacing:.13em}.report{max-width:950px;margin:80px auto}.report h1{font-size:43px}.report h2{margin-top:50px}.report table{border-collapse:collapse;font-size:14px;width:100%;display:block;overflow-x:auto}.report th,.report td{border-bottom:1px solid #d0ccbf;padding:12px;text-align:left;vertical-align:top;min-width:170px}.report code{font-size:.86em;overflow-wrap:anywhere}footer{padding:30px 0;border-top:1px solid #ccc;font-size:13px;color:var(--muted)}@media(max-width:760px){header,main{padding:24px}.route{grid-template-columns:repeat(4,1fr)}.encounter{grid-template-columns:1fr;gap:26px}.lesson{order:-1}figure{max-width:520px}nav{gap:14px}.lead{font-size:20px}}@media print{nav{position:static}details{display:block}.encounter{break-inside:avoid}a{color:inherit}}
+</style></head><body>
+<header><p class="eyebrow">Endless Museum / Forces / Proposal · 6 October 2026</p><h1>The point gains power.</h1><p class="lead">First it moves. Then it moves you. The sphere returns in each room with one more capacity.</p><p class="status">Eight proposed encounters, grounded in the existing museum. No runtime, canonical tutorial or sequence-order changes in this pass. The new comic plates are concept illustrations; abilities remain proposals.</p><div class="route"><a href="#push"><span>01</span>Push</a><a href="#launch"><span>02</span>Launch</a><a href="#fly"><span>03</span>Fly</a><a href="#fall"><span>04</span>Brake</a><a href="#vortex"><span>05</span>Read a field</a><a href="#shoot"><span>06</span>Deflect</a><a href="#return"><span>07</span>Redirect a return</a><a href="#course"><span>08</span>Combine</a></div></header>
+<nav aria-label="Report sections"><a href="#route">Eight encounters</a><a href="#the-enemies-i-would-choose">Enemies</a><a href="#what-moves-where">Existing halls</a><a href="#first-build-and-its-evidence">First build</a><a href="PLAN.md">Edit plan</a><a href="encounters.json">Edit summaries</a></nav>
+<main><div id="route"><section class="encounter" id="push">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/01-push.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/01-push.png" alt="New concept illustration: Proposed sphere study adapted from the existing Motion hall. Disable gravity and damping for this comparison. Arrow lengths are schematic, not measured ratios."></a><figcaption>New concept illustration: Proposed sphere study adapted from the existing Motion hall. Disable gravity and damping for this comparison. Arrow lengths are schematic, not measured ratios.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">01 / Push</p><h2>The point receives a push</h2>
+      <p class="subject">Force, mass, retained velocity</p><p class="story">Meet the familiar sphere on a quiet test lane. Bring the point class and its body from earlier halls; add a finite push while gravity and damping are deliberately disabled. Let go and watch it continue. Repeat with twice the mass and the same shape, force and duration. The student changes the pulse and predicts the resulting motion. The sphere leaves this encounter as a receiver with state, ready to pass the same question to the player.</p>
+      <blockquote>The command ends. Its consequence has not.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Point appearance and construction → dynamic sphere with known mass and velocity.</dd><dt>Learner's own move</dt><dd>Choose a different duration and predict the change of velocity before running it.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Known pulse matches Δv = F × duration / mass within declared numerical tolerance; release clears push only; double mass halves Δv.</p><pre>IN point body. ADD finite push, mass. SEE continued motion after release. VARY duration. OUT force receiver. TEST Δv; release; mass.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="launch">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/02-launch.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/02-launch.png" alt="New concept illustration: Proposed free-flight course. Existing pad implementations must be checked: setting velocity and applying an impulse are different operations. The large gaps establish the visual idea; they are not a tested VR course."></a><figcaption>New concept illustration: Proposed free-flight course. Existing pad implementations must be checked: setting velocity and applying an impulse are different operations. The large gaps establish the visual idea; they are not a tested VR course.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">02 / Launch</p><h2>You become the launched body</h2>
+      <p class="subject">Launch velocity, impulse distinction, gravity</p><p class="story">Walk onto one launch pad and cross a small gap. Begin with the sphere&#x27;s previous response, then inspect the player&#x27;s receiver: the installed pad sets velocity, while an impulse model would add a mass-dependent change. Introduce constant downward acceleration through the visible arc. Change one launch component, compare a prediction with the actual landing, and reset at the pad. A second pad asks the student to reach a higher ledge using the same rule. Carry gravity and outgoing velocity into flight.</p>
+      <blockquote>An arrow becomes a route your body must finish.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Known sphere response → explicit player receiver, one launch event.</dd><dt>Learner's own move</dt><dd>Reach a different ledge by changing vertical launch speed while keeping horizontal speed fixed.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Launch occurs once per entry; model gravity matches receiver; no hidden mid-flight velocity lock or landing teleport in the free-flight variant.</p><pre>IN sphere response. ADD player receiver, one launch, gravity. VARY vertical speed. OUT airborne velocity. TEST single event; actual landing; no hidden lock.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="fly">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/03-flight.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/03-flight.png" alt="New concept illustration: The control is agreed. Two-sphere player flight remains to be implemented and tested. White streams indicate aim; amber arrows indicate the resulting thrust in the opposite direction."></a><figcaption>New concept illustration: The control is agreed. Two-sphere player flight remains to be implemented and tested. White streams indicate aim; amber arrows indicate the resulting thrust in the opposite direction.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">03 / Fly</p><h2>Two points can carry you</h2>
+      <p class="subject">Vector addition, continuous thrust, net force</p><p class="story">Hold one familiar sphere in each hand over a low flight court. Hold each trigger for thrust opposite the controller&#x27;s aim: point down to lift, back to advance. This is the author&#x27;s chosen control. Start with one hand, then add the other through the same receiver. Aim together, apart and in opposition; combine thrust with gravity rather than replacing it. Releasing a trigger removes its thrust while motion continues. The student tunes a pair of contributions to hover or travel sideways. Both hands use instances of the same object; the new lesson is their sum.</p>
+      <blockquote>Cooperation need not mean that both hands do the same thing.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Launch + gravity → controllable contributions to the player&#x27;s acceleration.</dd><dt>Learner's own move</dt><dd>Choose unequal hand strengths that produce a stated horizontal direction while balancing weight.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Aim down gives upward thrust; aim back gives forward thrust. Both inputs reach one update; order does not change their sum; releasing a trigger or dropping a sphere clears only its contribution. Opposite horizontal thrust leaves gravity; level camera; one-hand/desktop adapter uses the same contributions.</p><pre>IN player receiver. ADD two point instances, held thrust sum. INPUT accepted: aim down/back + hold triggers → up/forward. RELEASE clears own thrust only. VARY direction/strength. OUT steering. TEST sum before update; gravity/velocity retained.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="fall">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/04-fall.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/04-fall.png" alt="New concept illustration: Proposed short-fall and braking encounter, with nearby resets. Drag and counter-thrust need separate comparisons. A released sphere emits no thrust stream. A backward force does not instantly reverse a forward velocity."></a><figcaption>New concept illustration: Proposed short-fall and braking encounter, with nearby resets. Drag and counter-thrust need separate comparisons. A released sphere emits no thrust stream. A backward force does not instantly reverse a forward velocity.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">04 / Brake</p><h2>Release is not a stop</h2>
+      <p class="subject">Gravity, velocity-dependent drag, opposing thrust</p><p class="story">Leave the launch ledge and release both triggers. You keep travelling as gravity bends the path downward. Add a clearly marked drag volume, then compare it with deliberate counter-thrust from the spheres. The student chooses a drag coefficient and observes a changed approach to the landing zone. Make repeated short falls with nearby restart points; do not secretly arrest the body when the trigger ends. What is learned here will make entry to the vortex legible.</p>
+      <blockquote>Freedom to move includes the problem of coming to rest.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Existing velocity + gravity + thrust → explicit resistance term.</dd><dt>Learner's own move</dt><dd>Land in the same zone using early weak braking and later stronger braking; compare the routes.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Trigger release zeros thrust only; drag opposes current velocity and does nonpositive work in the isolated check; full player model retains gravity and collisions.</p><pre>IN flight state. ADD Fdrag=-b*v. COMPARE release, passive drag, counter-thrust. OUT controlled landing. TEST thrust reset only; drag direction.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="vortex">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/05-vortex.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/05-vortex.png" alt="New concept illustration: Proposed force-accumulating vortex. The installed velocity-setting vortex is a comparison, not evidence of this behavior. The inset distinguishes radial and tangential directions. The scene does not prescribe one orbit for every incoming body."></a><figcaption>New concept illustration: Proposed force-accumulating vortex. The installed velocity-setting vortex is a comparison, not evidence of this behavior. The inset distinguishes radial and tangential directions. The scene does not prescribe one orbit for every incoming body.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">05 / Read a field</p><h2>The room turns your path</h2>
+      <p class="subject">Position-dependent field, radial and tangential contributions</p><p class="story">Enter a broad court where the same sphere and the visitor meet a swirling field. Reuse vector subtraction to find the centre and add an inward and tangential contribution. Carry incoming velocity through the field instead of resetting it on entry. The student changes one component, sees the spiral change and uses the held spheres to escape or enter a chosen landing lane. Compare this with the old velocity-assignment vortex so the difference between directing motion and changing motion remains visible.</p>
+      <blockquote>A centre can gather bodies without becoming their rightful destination.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Accumulated velocity → field contribution sampled at current position.</dd><dt>Learner's own move</dt><dd>Remove only the inward component and predict how entry and escape change.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Incoming velocity is retained; radial term points inward and tangent is perpendicular; centre handling stays finite; exit removes field contribution without clearing velocity.</p><pre>IN receiver state. ADD field(position), radial+tangent. VARY one term. OUT field navigation. TEST centre finite; entry/exit preserve velocity. Old vortex assigns v.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="shoot">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/06-shoot.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/06-shoot.png" alt="New concept illustration: Proposed dynamic sphere target and bounded pursuit variant. Flight and firing require separate actions or an explicit mode. The mass comparison uses free receivers and disables pursuit. Pedestals in the illustration identify the specimens; they are not a constraint model."></a><figcaption>New concept illustration: Proposed dynamic sphere target and bounded pursuit variant. Flight and firing require separate actions or an explicit mode. The mass comparison uses free receivers and disables pursuit. Pedestals in the illustration identify the specimens; they are not a constraint model.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">06 / Deflect</p><h2>Send the push to another body</h2>
+      <p class="subject">Projectile contact, one-off impulse, mass response</p><p class="story">Return the sphere to its familiar catalyst role and send a small form across a target lane. One impact delivers one declared impulse to a dynamic sphere. Repeat with equal-size light and heavy receivers, then let one receiver approach under a bounded force so the student can divert it. The shot changes a body&#x27;s motion before it changes a score. Thrust and firing have explicit, separate controls or an explicit mode choice; pressing the same trigger must not unexpectedly launch both player and projectile.</p>
+      <blockquote>A body can obstruct you without its only possible future being destruction or obedience.</blockquote>
+      <dl><dt>What travels onward</dt><dd>Held point + projectile appearance + known mass law → collision receiver.</dd><dt>Learner's own move</dt><dd>Choose an impulse that gives two different masses the same desired velocity change.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>One contact applies J once; passive receiver satisfies Δv=J/m; no extra collision impulse is double-counted; lifetime and reset work; pursuit disabled during mass comparison.</p><pre>IN catalyst form + mass. ADD one hit→impulse receiver. VARY J,m. OUT deflection. TEST single hit; no double impulse; passive comparison. Separate FIRE/THRUST.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="return">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/07-return.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/07-return.png" alt="New concept illustration: Proposed tethered enemy variant from the existing spring study. Begin with a one-dimensional guide. The last panel sketches anchor placement. A spring moving freely in space requires additional constraints; it is not the first one-dimensional model."></a><figcaption>New concept illustration: Proposed tethered enemy variant from the existing spring study. Begin with a one-dimensional guide. The last panel sketches anchor placement. A spring moving freely in space requires additional constraints; it is not the first one-dimensional model.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">07 / Redirect a return</p><h2>Give the body a place to return to</h2>
+      <p class="subject">Restoring force, displacement from an anchor, damping</p><p class="story">Meet the same target sphere with a visible tether to an anchor. Shoot it aside and watch the retained velocity carry it past the resting place. Add the spring contribution to the already learned damping term. The student changes the anchor or stiffness, then uses the altered sweep to cross a passage. Start with a one-axis study before the spatial enemy. Carry a state-dependent force into the last course and leave a clear opening into Waves.</p>
+      <blockquote>What is asking the body to return—and who put its centre there?</blockquote>
+      <dl><dt>What travels onward</dt><dd>Dynamic sphere + impulse + drag → restoring force toward an explicit anchor.</dd><dt>Learner's own move</dt><dd>Move the anchor without changing the sphere&#x27;s shape and predict the new resting place.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Spring term is zero at anchor and opposes displacement; damping still opposes velocity; same law drives study and enemy; numerical step stable at chosen parameters.</p><pre>IN target + drag. ADD Fspring=-k*(x-anchor). VARY anchor/k. OUT return/overshoot. TEST zero/sign; damping; stable step. Bridge Waves.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section><section class="encounter" id="course">
+      <figure><a href="../2026-10-06-forces-illustrated-atlas/images/08-course.png"><img loading="lazy" src="../2026-10-06-forces-illustrated-atlas/images/08-course.png" alt="New concept illustration: Proposed combined course. No new force law belongs here; the test is whether earlier abilities remain usable together. Cyan lines here are route guides, not instantaneous velocity vectors. The architectural montage is not a verified traversable layout."></a><figcaption>New concept illustration: Proposed combined course. No new force law belongs here; the test is whether earlier abilities remain usable together. Cyan lines here are route guides, not instantaneous velocity vectors. The architectural montage is not a verified traversable layout.</figcaption></figure>
+      <div class="lesson"><p class="eyebrow">08 / Combine</p><h2>Take the abilities through the room</h2>
+      <p class="subject">Composition of learned forces and interaction states</p><p class="story">Cross one connected museum level: short jump pads, an open flight well, a vortex edge, a falling passage, a rolling target and a tethered obstruction. Keep nearby restart points and a ground route for inspection. The student alters one familiar parameter to make another route possible and explains its consequences. The final course introduces no new compulsory force law: the sphere&#x27;s accumulated abilities are enough. An optional sentry adds aim and deflection only after those abilities work independently.</p>
+      <blockquote>The museum now depends on capacities you have made, without demanding a single correct path.</blockquote>
+      <dl><dt>What travels onward</dt><dd>All previous abilities → one traversable encounter; documented sphere state carried onward.</dd><dt>Learner's own move</dt><dd>Make a second successful route by changing one field or pad parameter and explain the tradeoff.</dd></dl>
+      <details><summary>Test obligation + short AI brief</summary><p>Pad/hand/field contributions share the movement owner; all gates clear on exit/restart; no required enemy conversion; test ordinary, one-hand and desktop traversal separately.</p><pre>IN all abilities. ADD no law. COMPOSE pads, flight, swirl, fall, targets. VARY route. OUT capable point/player. TEST restart; handoff; alternate traversal.</pre><p>Acceptance criteria proposed; not yet executed.</p></details>
+      </div></section></div><article class="report" id="report"><h1 id="forces-the-point-gains-power">Forces — the point gains power</h1>
+<p>6 October 2026 · Design proposal following the author's sphere / flight / vortex / combat direction. Existing museum code, manuscripts and thirteen-hall order are unchanged. Eight proposed encounters below are teaching units, not eight newly installed maps. Images are existing comic plates and earlier museum captures, not renders of the proposed upgrades.</p>
+<p>The point has become a body, a drawing instrument and a catalyst. Here it becomes something that can move another body—including yours. Keep its familiar shape and finish. Introduce one ability at a time. A second sphere is another instance of the same object; it is not another system to learn.</p>
+<h2 id="the-route">The route</h2>
+<p><strong>Push → launch → fly → release and brake → swirl → shoot → return → combine.</strong></p>
+<p>The eight editable storyboards are in <a href="encounters.json">encounters.json</a>, with one new operation, a learner variation, a test obligation and a reflective opening per encounter. They are also printed in the <a href="index.html#route">illustrated reading</a>.</p>
+<p>Begin by pushing the familiar sphere while the visitor stands on firm ground. Then make the visitor a receiver. This deliberately proposes a short Motion encounter before Launch, rather than adopting the reviewer's preferred analytic-launch-first order. The launch comparison remains useful inside the launch room; the author wants the continuing point to lead.</p>
+<p>The physics vocabulary stays small: position, velocity, acceleration, force, mass and impulse. Vector subtraction and addition return from earlier sequences when they become useful. Dot products, projection and torque need not all become compulsory prerequisites to taking off. We can preserve their installations as optional studies.</p>
+<h3 id="flight-control-chosen-by-the-author">Flight control — chosen by the author</h3>
+<p>Aim down/back and hold the triggers to thrust up/forward. Each held sphere contributes thrust opposite its controller's aim. Add the two contributions before updating the player once. Releasing either trigger removes only that sphere's thrust; velocity and gravity continue. Releasing both triggers lets the player coast and fall. Dropping a sphere must also clear its contribution.</p>
+<p>Teach one hand first, then the sum of two hands. Keep firing as a distinct action or an explicitly selected mode so the flight trigger does not unexpectedly fire a projectile. The control choice is accepted; the flight implementation and broader proposed map order remain to be developed.</p>
+<h2 id="the-enemies-i-would-choose">The enemies I would choose</h2>
+<h3 id="1-a-rolling-or-drifting-sphere-first-and-most-useful">1. A rolling or drifting sphere — first and most useful</h3>
+<p>Use the point's silhouette and material family. Let it approach through a visible, limited driving force; a shot changes its velocity. Start with a passive version, then switch on its pursuit force. Compare two otherwise identical bodies of different declared masses. During the controlled comparison, disable the pursuit force so it cannot conceal the effect being measured.</p>
+<p>The play is immediately readable: a light body is easy to divert, a heavy body is difficult to move, a missed shot continues into the room. Mass is a response parameter, not a synonym for size, health or moral importance. Keep the same geometry in the first comparison. Health, damage and cosmetic cracks can come later; the first successful hit must visibly change motion.</p>
+<p>This is the best new enemy for the Forces tutorial. It can reuse the sphere's visual construction, but a tested dynamic enemy receiver is still needed. Do not label the existing kinematic crab a mass demonstration.</p>
+<h3 id="2-a-tethered-sphere-the-same-body-another-relation">2. A tethered sphere — the same body, another relation</h3>
+<p>Give the body an anchor and a restoring force. A shot pushes it away; it returns, overshoots and settles according to damping. The player can interrupt its sweep to cross a passage. Change the anchor to change what counts as its resting place. This earns the spring lesson through a useful encounter.</p>
+<p>Its critical edge is precise: who established the place to which this body must return? The spring law models a relationship; it does not establish a natural social order. The installed spring study supplies a reduced law, not a ready-made three-dimensional enemy.</p>
+<h3 id="3-a-sentry-optional-arena-adversary">3. A sentry — optional arena adversary</h3>
+<p>Reuse the existing sentry's appearance and targeting work. Give it slow, legible projectiles and a declared firing interval. Deflect a shot, push a movable sentry off its aim, or use cover and a launch pad to pass it. Make projectile deflection a visible additional capability, not an assumed feature of the current code.</p>
+<p>The question becomes: what makes you a target—distance, visibility, a group assignment? That continues the museum's concern with classification. Keep these selectors out of the first force lesson. The vector turret currently presents many operations at once; reduce its main display to aim and incoming motion here.</p>
+<p><strong>Do not begin with a zoo.</strong> One sphere enemy, its tethered variant, and at most one sentry are enough. Keep the familiar crab as an optional encounter or a later agent lesson. Its current sensing/feeding logic is interesting, but it would introduce a competing subject.</p>
+<h2 id="what-moves-where">What moves where</h2>
+<table>
+<thead>
+<tr>
+<th>Current hall</th>
+<th>Proposed job</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vectors_Act1_WhatAVectorIs</td>
+<td>Short returning-point prelude inside Push; retain the displacement study nearby.</td>
+</tr>
+<tr>
+<td>VFM_03_Motion</td>
+<td>Main source for Push: finite force, mass, motion after release.</td>
+</tr>
+<tr>
+<td>VFM_05_Launch</td>
+<td>Launch-pad level; preserve analytic trajectory as a comparison, then meet the actual player controller.</td>
+</tr>
+<tr>
+<td>VFM_02_Operations</td>
+<td>Two hand contributions add in Fly; route/destination study remains optional.</td>
+</tr>
+<tr>
+<td>Vectors_Act2_VectorArithmetic</td>
+<td>Reuse aim direction as needed; projection, classification and turning studies remain side encounters.</td>
+</tr>
+<tr>
+<td>Vectors_Act4a_KineticForces</td>
+<td>Release / fall / brake. One drag example; mower and prescribed circle leave the required tutorial.</td>
+</tr>
+<tr>
+<td>Vectors_Act3_FieldsAndMotion</td>
+<td>Vortex. Preserve assign-versus-accumulate comparison to expose the change in the receiver.</td>
+</tr>
+<tr>
+<td>VFM_08_Arena</td>
+<td>Shoot a dynamic sphere; later combine with sentry. Keep the crab outside the main force construction.</td>
+</tr>
+<tr>
+<td>Vectors_Act4b_Oscillation</td>
+<td>Tethered return. One spring and damping law, carried into the enemy variant.</td>
+</tr>
+<tr>
+<td>Change_Choreography</td>
+<td>Candidate for Waves / timing; no relocation performed.</td>
+</tr>
+<tr>
+<td>VFM_07_Gravity</td>
+<td>Keep constant downward acceleration in Launch; retain mutual attraction as an optional deeper gravity study.</td>
+</tr>
+<tr>
+<td>VFM_09_Legs</td>
+<td>Optional support / gait comparison; no gait implementation required for the flight route.</td>
+</tr>
+<tr>
+<td>Vectors_Act5_ForceAsPlace</td>
+<td>Final course: launch pads, field, landing ledges and familiar targets.</td>
+</tr>
+</tbody>
+</table>
+<p>This proposes a shorter required tutorial, not deletion of everything outside it. Reflective writing may still visit those works. Physical map consolidation should follow a playable pilot, not precede it.</p>
+<h2 id="what-the-current-code-actually-supplies">What the current code actually supplies</h2>
+<p>Source inspected for this proposal; not newly runtime-tested.</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Present behaviour</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>commons/artifacts/ignorance_gallery/resolution_catalyst.gd</code></td>
+<td>Held sphere simplifies; trigger sends a copy of its current form.</td>
+<td>Strong visual / interaction ancestor. Preserve identity; do not teach construction again.</td>
+</tr>
+<tr>
+<td><code>commons/primitives/point/interactive_point_origin_force.gd</code></td>
+<td>Held point attracts nearby RigidBody3D objects with a capped inverse-square force; supports projectile firing.</td>
+<td>Useful existing force-point work. This is not two-sphere player flight.</td>
+</tr>
+<tr>
+<td><code>commons/artifacts/force_pad/force_pad.gd</code></td>
+<td>Writes a launch velocity to the player.</td>
+<td>Reuse pad and aim presentation. A velocity assignment is not a force integration.</td>
+</tr>
+<tr>
+<td><code>commons/scenes/mapobjects/jump_pad.gd</code></td>
+<td>Solves a flight, locks horizontal velocity, then snaps to the target and clears velocity on landing.</td>
+<td>Useful guided crossing. It cannot silently stand in for free flight or a physically emergent landing.</td>
+</tr>
+<tr>
+<td><code>commons/artifacts/force_vortex/force_vortex.gd</code></td>
+<td>Replaces player velocity with inward + tangential + upward terms; ejects at the core.</td>
+<td>Reuse spatial idea and visuals; an accumulating force vortex requires a changed receiver.</td>
+</tr>
+<tr>
+<td><code>commons/artifacts/force_field_zone/field_carry_provider.gd</code></td>
+<td>Exclusive XR movement provider passes incoming velocity through the active zone and calls move_player.</td>
+<td>Existing integration seam. Hand thrust, gravity, drag and fields must share one movement owner.</td>
+</tr>
+<tr>
+<td><code>commons/hazards/becoming_catalyst/modes/forces_projectile.gd</code></td>
+<td>On hit, damps nearby rigid bodies and immediately scales their velocities down.</td>
+<td>A mixed braking effect, not a clean impulse demonstration. Keep as a later power or replace locally for the lesson.</td>
+</tr>
+<tr>
+<td><code>commons/hazards/catalyst_foe/catalyst_foe.gd</code></td>
+<td>Catalyst hits advance an authored personality progression and grant mode-dependent powers.</td>
+<td>Existing hit/state infrastructure; conversion is not evidence of momentum transfer. Its README describes an older one-hit conversion.</td>
+</tr>
+<tr>
+<td><code>commons/artifacts/hl_turret_vectors/hl_turret_vectors.gd</code>, <code>commons/artifacts/sentry_turret/sentry_turret.gd</code></td>
+<td>Existing tracking / firing artifacts.</td>
+<td>Reuse selectively; deflection and a dynamic receiver remain to be built and tested.</td>
+</tr>
+</tbody>
+</table>
+<p>For a rigid body, use the engine's force/impulse API. For the player, name the explicit locomotion model: CharacterBody3D does not supply the same mass-based integration. If it receives forces in newtons, supply a documented virtual mass and convert the accumulated force to acceleration once. If it receives acceleration directly, label it accordingly. Do not run a second position integrator beside XR Tools. Godot distinguishes continuous force calls from one-off impulses. <a href="https://docs.godotengine.org/en/4.6/classes/class_rigidbody3d.html">RigidBody3D reference</a></p>
+<p>The compact conceptual rule is: add the current contributions, obtain acceleration, update retained velocity, then let the receiver move and collide. Recompute transient contributions next step. Do not clear velocity when the trigger is released. This is the useful backbone to take from <a href="https://natureofcode.com/forces/">The Nature of Code, Forces</a>. Position and velocity are state, not a complete record of the path or the forces that produced them.</p>
+<h2 id="keep-the-two-texts-distinct">Keep the two texts distinct</h2>
+<p><strong>tutorial.md:</strong> name the inherited point class and exact prior state; print the complete small continuation and every new dependency; declare the museum host and bindings. One new operation per encounter. Show what the learner changes and what observation would prove that change. Supplied XR plumbing must be named, not hidden behind an unexplained scene lookup.</p>
+<p><strong>final.md:</strong> stay with the encounter. The push stops but the body continues. Two hands can support or oppose each other. The room catches you; the same room lets you fall. A body labelled enemy can be displaced, passed, defended against or converted. Let those differences carry reflection; do not turn the chapter into another API lesson.</p>
+<p>The queer opening is not that flying or swirling is inherently queer. It is that the world has authored a normal direction, a permitted body, a default control arrangement and a category of enemy. Give the player a way to encounter and alter those conditions. Two hands should be expressive without becoming the only permitted body: offer one-hand and desktop control of the same two contributions. Keep the camera level while the path curves. Offer a ground-level observation route through the flight installation.</p>
+<p>Do not automatically call calming, taming or making a friend care. Those may also be demands for compliance. A passage that can be crossed without converting everything makes that question playable. These are proposed critical openings, not conclusions claimed from physics.</p>
+<h2 id="first-build-and-its-evidence">First build and its evidence</h2>
+<p>Build a small museum pilot spanning <strong>Push → Launch → Fly</strong>, using the existing point appearance and the current XR player. Start with one shared movement provider and one test lane. Use the author's selected control: aim down/back and hold the triggers to thrust up/forward.</p>
+<ol>
+<li>Prove the sphere response with gravity and damping disabled: a known finite force gives the predicted change of velocity; twice the mass halves that change. Release removes the push, not the motion.</li>
+<li>Prove a pad applies its launch event once; no accidental repeat per physics tick. Verify which velocity components it adds or replaces. Match the prediction to actual controller gravity.</li>
+<li>Prove two hand contributions add before one update. Parallel contributions reinforce; opposing horizontal contributions cancel without cancelling gravity. Hover requires upward thrust to balance weight and zero vertical velocity initially.</li>
+<li>Prove disabling a hand, dropping a sphere or leaving the field clears only its own contribution. Collision-adjusted velocity must be used next step. No two movement providers may both move the player.</li>
+<li>Run the printed learner code and a new learner variation. Deliberately break accumulation, delta handling and trigger release; tests must reject those faults. Separate a pure force-law test from a native Godot receiver test and a physical headset playtest.</li>
+</ol>
+<p>Only then expand to braking, vortex and enemies. Headset comfort and learnability need actual play; mathematical assertions alone cannot certify them. The report establishes the plan and source distinctions; no new runtime assertions have been run for it.</p>
+<h2 id="feedback-taken-feedback-resisted">Feedback taken, feedback resisted</h2>
+<p>Keep the reviewer's emphasis on force accumulation, mass, retained velocity, clear model limits and a cumulative learner body. Keep the spring as a useful return rather than requiring a complete oscillation catalogue. Resist turning the sequence into thirteen separate physics lectures. Do not move a hall simply because another textbook orders it differently. The author’s continuing sphere and the existing Endless Museum determine the encounters; the physics reference helps make their mechanisms exact.</p>
+<h2 id="new-illustrated-atlas">New illustrated atlas</h2>
+<p><a href="../2026-10-06-forces-illustrated-atlas/index.html">Browse the ten new plates and thirteen existing hall illustrations</a>. The eight encounter cards now use the new concept plates. The two beyond pages explore further possibilities. Images are proposals, not native screenshots or proof of installed mechanics.</p></article><footer>Read the <a href="../2026-10-06-forces-current-readings/index.html">current thirteen-hall texts</a> or <a href="http://localhost:3003/illustrations?sequence=forces">all Forces illustrations</a>. Proposal generated from PLAN.md and encounters.json.</footer></main></body></html>

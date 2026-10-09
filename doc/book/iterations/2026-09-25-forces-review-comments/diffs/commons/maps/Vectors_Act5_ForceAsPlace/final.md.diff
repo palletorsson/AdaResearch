@@ -1,0 +1,58 @@
+--- before/commons/maps/Vectors_Act5_ForceAsPlace/final.md
++++ commons/maps/Vectors_Act5_ForceAsPlace/final.md
+@@ -1,3 +1,5 @@
++# What carries you across?
++
+ A hole in the floor, and two ways over it. One of them somebody built. The other one you have to set.
+ 
+ The crab in the previous room needed a rule for finding its next encounter. The collision carts needed an account of what the encounter preserved. Bring both questions here. What will this place recognise when you enter it, and what motion will you bring?
+@@ -10,9 +12,9 @@
+ 
+ It opens at an acceleration of 9.8 metres per second squared, downward. That resembles ordinary falling, but the field supplies that value locally. Down is a setting you can change here.
+ 
+-Now watch what the steepness slider costs. At the bottom of its travel the field points straight down, `cos(pitch)` is zero, and the slider beside it does nothing at all. Run it through its whole range and the world will not move. Lift the field off the floor by even a little and the same slider becomes the most powerful control on the console.
++Now watch what the steepness slider costs. At the bottom of its travel the field points straight down, `cos(pitch)` is zero, and the slider beside it does nothing at all. Run it through its whole range and the world will not move. Tilt the field away from vertical. YAW begins to turn its horizontal part; as that part grows, the turn becomes easier to see.
+ 
+-That is not a fault, it is what a direction *is* when you name it with two angles. At the poles the second angle has nothing left to mean. So the console tells you: while the field is vertical the readout says the yaw is idle and at what bearing it is waiting, and a faint arrow on the stage holds that bearing where you can see it. The fader is not dead. It is aimed, and the field cannot hear it yet.
++That is not a fault, it is what a direction *is* when you name it with two angles. At the poles the second angle has nothing left to mean. The console marks a small neighbourhood around either pole as idle too, even though a slight horizontal part is already there. Its readout gives the waiting bearing, and a faint arrow on the stage holds that bearing where you can see it. The fader is not dead. It is aimed, and the field cannot hear it yet.
+ 
+ A direction can be well defined while one of its coordinates is not. Here that ambiguity is at hand height, in metal, where you can feel it happen.
+ 
+@@ -24,13 +26,13 @@
+ return Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw)) * mag
+ ```
+ 
+-The last slider stops at fifteen. Aim partly upward and along the hall. Read the components before leaving the bench: positive Z leads toward the far side. The machine speaks only to this hall's field. A dial elsewhere in the museum cannot quietly rewrite your crossing.
++The last slider stops at fifteen metres per second squared. Aim partly upward and along the hall. Read the components before leaving the bench: positive Z leads toward the far side. The machine speaks only to this hall's field. A dial elsewhere in the museum cannot quietly rewrite your crossing.
+ 
+ ## Something in the way
+ 
+ <!-- @force_cube -->
+ 
+-Three glass cubes wait near the machine. Take one and move it slowly. Stop your hand. Its motion arrow should disappear; a body at rest need not invent a direction merely to remain a useful exhibit.
++Three glass cubes wait near the machine. Take one and move it slowly. Let your hand settle. The motion arrow disappears when the sampled movement becomes small enough. Even stillness has a threshold in this picture.
+ 
+ Release it into the volume and watch before following. Aim down, then repeat with the field tilted up and forward. Your release matters too. The field changes a velocity that has already begun.
+ 
+@@ -55,7 +57,11 @@
+ 
+ Five metres of air, marked by a cage. The thin edges are visible; they are not walls. A solid plank remains through the gap. Look along it, then into the air beside it. What would have to change for both to carry you?
+ 
+-With the field tilted up and forward, enter its near face from the plank. The field takes over locomotion inside. Your incoming velocity is retained, acceleration is added each physics step, and collision can still stop or deflect that movement. Ordinary keyboard or stick steering resumes when your feet leave the volume. Physical tracked movement remains possible in VR; this is a controller handoff, not a force applied to your muscles.
++![The plank and the outlined carrying field seen from inside the museum](/book-review/doc/book/figures/forces/two-crossings-museum.png)
++
++*The plank keeps a route through the gap. Beside it, the outline marks where another rule can carry you.*
++
++With the field tilted up and forward, enter its near face from the plank. The field takes over locomotion inside. Your incoming velocity is retained, acceleration is added each physics step, and collision can still stop or deflect that movement. Leaving the volume ends this override; the return to ordinary stick steering also needs support under your feet. Physical tracked movement remains possible in VR; this is a controller handoff, not a force applied to your muscles.
+ 
+ For a released cube, the central operation is short:
+ 
+@@ -76,7 +82,7 @@
+ 
+ Set ACCEL to zero before another crossing. Enter with some motion. Zero has removed the new contribution; it has not removed what you brought. The loose cube slows through its damping. This visitor receiver does not add that damping. The same empty-looking volume holds two different accounts of persistence.
+ 
+-The boundary is another decision. The cube is detected by overlapping its physical body with an area; the visitor is admitted by a test of the body's position near its feet. Their entries need not happen at the same instant. At the far face, the desktop walker returns horizontal movement to its ordinary input controller and keeps its vertical velocity under ordinary gravity. That seam can be felt as a change in how you travel.
++The boundary is another decision. The cube is detected by overlapping its physical body with an area; the visitor is admitted by a test of the body's position near its feet. Their entries need not happen at the same instant. At the far face, the carry receiver lets go. In the air, you keep the motion you leave with while ordinary gravity changes it. Once your feet find the floor, the stick can steer again. That seam can be felt as a change in how you travel.
+ 
+ <!-- @ -->
+ 

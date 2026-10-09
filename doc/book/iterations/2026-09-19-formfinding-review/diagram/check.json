@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "message": "saved prior diagram compiles",
+      "ok": true
+    },
+    {
+      "message": "every rendered mesh transform and bound retained",
+      "ok": true
+    },
+    {
+      "message": "offset construction explicit",
+      "ok": true
+    },
+    {
+      "message": "static nature explicit",
+      "ok": true
+    },
+    {
+      "message": "critical question preserved",
+      "ok": true
+    },
+    {
+      "message": "saved before",
+      "ok": true
+    },
+    {
+      "message": "saved after",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "scope": "Same-camera isolated actual artifact, saved original versus current source. No museum or headset run.",
+  "texts": [
+    "analytic catenary / fixed offsets",
+    "×8 — fixed differences",
+    "FORM-FINDING\nblue: seeded offsets within +/- epsilon, not solver output\nfixed points / magnified differences / no motion\nwhen does a small remainder count as settled?"
+  ]
+}

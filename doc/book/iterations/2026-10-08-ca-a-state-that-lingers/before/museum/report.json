@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed volume exists",
+      "passed": true
+    },
+    {
+      "name": "Enlarged neighbourhood shares installed study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: neighbours",
+      "passed": true
+    },
+    {
+      "name": "First step: fading centre beside seven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fading",
+      "passed": true
+    },
+    {
+      "name": "Second step: centre empty",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: empty",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "hall_origin": [
+      0.0,
+      0.0,
+      -4.0
+    ],
+    "neighbour_local": [
+      2.65000009536743,
+      1.5,
+      8.69999980926514
+    ],
+    "scope": "Native installed CA_ElementaryRules. Same overhead, raised and visitor cameras; real seeded generations 0/1/2. Other halls/player hidden for capture. No physical headset test.",
+    "work_local": [
+      6.5,
+      0.0,
+      10.5
+    ]
+  },
+  "passed": true,
+  "room": "CA_ElementaryRules"
+}

@@ -1,0 +1,56 @@
+{
+  "checks": 11,
+  "evidence": {
+    "(-0.5, 0.85, 1.1)": [],
+    "(0.0, 0.85, 1.1)": [],
+    "(0.5, 0.85, 1.1)": [],
+    "artifacts": {
+      "frozen_glass_vessel": {
+        "global": "(9.5, 0.0, 2.5)",
+        "scale": "(1.0, 1.0, 1.0)",
+        "segment_local": "(9.5, 0.0, 6.5)"
+      },
+      "mass_spring_bench": {
+        "global": "(2.5, 0.0, 2.5)",
+        "scale": "(1.0, 1.0, 1.0)",
+        "segment_local": "(2.5, 0.0, 6.5)"
+      },
+      "science_screen": {
+        "global": "(8.5, 0.0, 9.5)",
+        "scale": "(1.0, 1.0, 1.0)",
+        "segment_local": "(8.5, 0.0, 13.5)"
+      },
+      "verlet_workbench": {
+        "global": "(6.5, 0.0, 2.5)",
+        "scale": "(1.0, 1.0, 1.0)",
+        "segment_local": "(6.5, 0.0, 6.5)"
+      }
+    },
+    "bench_to_player": 5.0990195274353,
+    "bench_to_player_horizontal": 5.0990195274353,
+    "metadata_artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "mass_spring_bench",
+      "verlet_workbench",
+      "frozen_glass_vessel",
+      "science_screen",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent",
+      "station_plinth",
+      "dream_bodies"
+    ],
+    "player_global": "(7.5, 0.000683, 1.5)",
+    "segment_global": "(0.0, 0.0, -4.0)",
+    "spawn_collision": []
+  },
+  "failures": [],
+  "headset_tested": false
+}

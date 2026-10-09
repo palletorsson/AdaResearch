@@ -1,0 +1,28 @@
+{
+  "before": {
+    "commons/scenes/endless_museum.gd": "21ef71df5cecce0c9df3a02e1a2e25b8b59c08b48e094d14c79fba2335b4b9e5",
+    "commons/scenes/em/em_detail.gd": "fe1e701535656ed87a459ad262f5c37f6107a2f748baa5d46c66873f209201a1",
+    "commons/scenes/em/em_identity.gd": "fd44f8e1355c0a2641f0b24e0739a7ebcb79a14c39d2d55df1f754f57f350fdf",
+    "commons/primitives/point/point_condition.gd": "ba7d3734f573a171305eb5ac4c894c161230953297fe25c078a785335ca8ff98",
+    "commons/primitives/point/point_sun_switch.gd": "f612a39620fec4edeae664bddd3b4fef378d58045e694736c2bc49de39fd758c",
+    "commons/maps/Point_Lines/map_data.json": "b5fd09a6d356a1f51b9ac674ed0e46e26cb908fc28106f75c66d042498f26f84",
+    "doc/book/iterations/2026-10-05-museum-three-points-and-future/probe.gd": "f8a8a957e2539748ff736673c5b63387c40fddb663fe11f2732a1a4cc09a9207",
+    "doc/book/iterations/2026-10-05-museum-three-points-and-future/run_probe.py": "4bb1a5711452e461ebe12dc2a13e1b4e8aa301facdb293d66425a0e9910cfd7c",
+    "commons/font/cormorant-garamond/CormorantGaramond.ttf": "b20b7d9626dd956b2c5e558692ad328b1f19e3275e2782db4fa07670d83f35e0",
+    "commons/font/cormorant-garamond/CormorantGaramond.ttf.import": "c3bd1766193a3d163d16d0f11e342f241eddc62e0f134142ff108bf3dc05b6dd"
+  },
+  "after": {
+    "commons/scenes/endless_museum.gd": "21ef71df5cecce0c9df3a02e1a2e25b8b59c08b48e094d14c79fba2335b4b9e5",
+    "commons/scenes/em/em_detail.gd": "fe1e701535656ed87a459ad262f5c37f6107a2f748baa5d46c66873f209201a1",
+    "commons/scenes/em/em_identity.gd": "fd44f8e1355c0a2641f0b24e0739a7ebcb79a14c39d2d55df1f754f57f350fdf",
+    "commons/primitives/point/point_condition.gd": "ba7d3734f573a171305eb5ac4c894c161230953297fe25c078a785335ca8ff98",
+    "commons/primitives/point/point_sun_switch.gd": "f612a39620fec4edeae664bddd3b4fef378d58045e694736c2bc49de39fd758c",
+    "commons/maps/Point_Lines/map_data.json": "b5fd09a6d356a1f51b9ac674ed0e46e26cb908fc28106f75c66d042498f26f84",
+    "doc/book/iterations/2026-10-05-museum-three-points-and-future/probe.gd": "f8a8a957e2539748ff736673c5b63387c40fddb663fe11f2732a1a4cc09a9207",
+    "doc/book/iterations/2026-10-05-museum-three-points-and-future/run_probe.py": "4bb1a5711452e461ebe12dc2a13e1b4e8aa301facdb293d66425a0e9910cfd7c",
+    "commons/font/cormorant-garamond/CormorantGaramond.ttf": "b20b7d9626dd956b2c5e558692ad328b1f19e3275e2782db4fa07670d83f35e0",
+    "commons/font/cormorant-garamond/CormorantGaramond.ttf.import": "c3bd1766193a3d163d16d0f11e342f241eddc62e0f134142ff108bf3dc05b6dd"
+  },
+  "stable_during_run": true,
+  "scope": "Real museum dependencies read before and after the run; no headset validation."
+}

@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_BeyondBinary · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_BeyondBinary">← Tutorial lineage</a></p><h1>CA BeyondBinary</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_BeyondBinary/final.md">Raw captured source</a></p><pre># A pattern visits an address
+
+&lt;!-- @game_of_life_petri --&gt;
+
+Five green cells wait in the dish. A larger version spreads across the floor beyond it. Three lamps stand along its edge. They are dark.
+
+Press STEP four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
+
+REPLAY brings the five cells back. This time keep your attention on the square marked A, at address (10,10). Step towards it. A cell becomes occupied; a lamp lights. Step again. Follow the square for a while, even when the more recognisable figure tempts your eye away. The address keeps its place. The pattern is already elsewhere.
+
+You can cross the large display. Its empty cells still support your feet. In the previous room, occupancy became a stepping tile over a lower basin. Here it becomes colour on an ordinary floor. We have carried the array forward and given it another job. A zero does not contain an instruction to make a hole.
+
+Stay beside one of the gold squares as its value changes. The pattern visits; the place continues to hold you. A lamp answers the cell, while your weight makes no difference to its next state. Sharing an address with the calculation has not made you one of its conditions.
+
+![The Life floor fills the front bay, with fixed gold addresses connected to three lamps.](images/life-floor.png)
+
+*The same present has room around it now. An empty square remains somewhere to stand.*
+
+Try BLINKER. Three cells lie in a line. One step turns the line; another brings it back. Watch A, the middle cell. The surroundings alternate while this address remains occupied. Its lamp stays lit. Returning, travelling and staying can belong to different parts of the same small event. The names for these, now that you have watched them, are still life, oscillator and spaceship: the block the glider will meet is the first, the blinker the second, the glider the third.
+
+The dish runs Conway&#x27;s Game of Life.[^ca-conway] Each cell has eight neighbours: the second choice, widened from two. An occupied cell survives with two or three occupied neighbours; an empty cell becomes occupied with exactly three. These are the lines that choose its next state:
+
+```gdscript
+if alive:
+    _next_grid[y][x] = neighbors == 2 or neighbors == 3
+else:
+    _next_grid[y][x] = neighbors == 3
+```
+
+Every answer goes into another array. Only when the whole plane has been read do the two buffers exchange places. A cell later in the loop cannot borrow an answer made earlier in this generation. At the edges, the neighbourhood wraps to the opposite side.
+
+In the glider beginning, four generations reproduce the arrangement one address further along each axis. No instruction has moved a glider object. No cell carries a ticket for that journey. We recognise a body across successive relations among sites. The recognition is useful: it lets us anticipate a visit. It also leaves something out. Following the figure, we can miss the cells that cease to participate. Press TRACE. For one generation after each step, a cell that has just stopped is marked in red and one that has just begun in blue; the figure you were following is seen to be leaving a wake, and the wake is where the rule was working.
+
+Try LINK while a lamp is lit. The light goes out; the figure remains. STEP still changes it. The lamp&#x27;s relation to this world has been written separately:
+
+```gdscript
+var occupied: bool = work._grid[site.y][site.x]
+receiver.receive(occupied, linked, count_event)
+```
+
+That address could have been connected to another object. Here it controls an opal lamp. The lamp does not recognise a glider: any occupied state at its assigned address will light it when connected. Nor does its light return an influence to the cells. We have made a small, one-way traffic between the simulation and the room. Its boundary is a decision we can inspect and change.
+
+Press LINK again to reconnect the lamps. Choose MEET. The same glider begins with a four-cell block in its path. Predict which lamps will light. Advance, then compare with GLIDER. GLIDER, BLINKER and MEET each prepare a fresh beginning, so the difference can be revisited; LINK keeps whatever setting you last gave it. In this particular meeting the field is empty within six generations. Only A ever lights, and it was lit before the first step: the block already sat on its address. The rule has stayed the same; what the glider could continue to be depended on what it met.
+
+Conway chose these rules so that no beginning could be proved to grow for ever while some seemed to, and so that small beginnings would grow, change, and end in one of three ways: fading away, settling, or repeating. You have just watched the first. The rule was tuned to sit at the edge of what it can do, which is the name of the hall called Edge of Chaos, ahead.
+
+There is pleasure in the travelling figure and in the room answering it. We need not turn that pleasure into proof of a living creature, or ask a fluid-looking body to stand for every possible difference. This body has particular conditions. Another encounter may interrupt it; another connection may let it do something we have not yet tried.
+
+RUN advances this local experiment slowly and holds it at generation 48. The museum clock continues. We leave a finite observation, not a verdict on everything the rule can make.
+
+&lt;!-- @ --&gt;
+
+Further in, past the mould network and the dark sphere, a table holds a hexagonal field. Here the neighbourhood and the birth condition both change: six neighbours instead of eight, birth on two. The Random Flip control allows occasional reversals of the rule’s answer. Generations stack upward into a terrain. Time has acquired thickness again, through another agreement.
+
+So far the visitor has chosen a beginning and watched an output. In the next room, approaching a surface enters the calculation. What happens when the body doing the observing becomes one of the conditions?
+
+[^ca-conway]: John Conway&#x27;s rules were announced in Martin Gardner&#x27;s “Mathematical Games” column, *Scientific American* 223 (October 1970), with the three conditions Conway set himself: no starting pattern for which there is a simple proof that it grows without limit; patterns that apparently do; and simple patterns that grow and change for a while before ending by fading away, settling, or oscillating.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_BeyondBinary/tutorial.md">Raw captured source</a></p><pre># Follow a cell, then follow a body
+
+Begin at the dish with GLIDER held at generation zero. Let students predict what four presses of STEP will change before explaining Life. REPLAY gives the same beginning to a student exploring alone.
+
+1. Compare the arrangement after four steps with its starting shape and address. Keep shape, location and generation as separate observations.
+2. Replay and follow gold A=(10,10). Notice the occupied cell and lamp together. Then follow the whole pattern while A stays in place.
+3. Walk the enlarged floor image and stay beside a fixed gold address while its state changes. Your presence does not enter this update rule. Recall the previous history bridge: this room maps occupancy to colour, with continuous support beneath both values.
+4. Choose BLINKER. Predict its next phase. Its centre stays occupied, so A stays lit although the line changes orientation.
+5. Read the actual B3/S23 branch in final.md. Work through an empty cell with three neighbours and an occupied cell with one. Explain the second buffer after these observations.
+6. Return to GLIDER and disconnect LINK during a lit moment. STEP again. Identify which output was removed and which process continues. Read the receiver call.
+7. Choose MEET. Predict visits to the witnesses, then compare this prepared beginning with GLIDER. Presets replace the beginning; they do not insert into the current board.
+
+Ask students to explain a lamp using a single address, without saying “it senses the glider.” Then ask what the glider description helps them predict that the single-address record does not. Neither account exhausts the event.
+
+For an independent reader, the readout names generation, population, changed cells, preset, link state and the finite observation limit. REPLAY is local to this experiment. The next hall will make proximity an input; it must earn that claim through its own source and support tests.
+
+
+TRACE offers a second reading of the travelling figure: blue marks newly occupied cells, red marks cells that just stopped. Switching it off restores the ordinary colours immediately, without advancing. In the rear gallery, the hexagonal table changes both neighbourhood and birth condition and allows random flips; it is not just the square rule drawn with another tile shape.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_BeyondBinary/technical.md">Raw captured source</a></p><pre># Fixed cells, travelling relations, explicit outputs
+
+The installed primary is `game_of_life_petri:0:0#study:addresses#plinth:0#floor:walk`. The placement opts into `address_study.gd`; other instances retain the original dish and controls. The original `game_of_life_petri.gd` supplies the Life solver. No new Life rule is introduced.
+
+## State and update
+
+The study uses a 24 × 24 array of booleans, a separate next buffer, eight surrounding neighbours, periodic boundaries and B3/S23. `_advance()` fills the whole next buffer before swapping references. The old state is then available in `_next_grid` for the changed-cell count. Population counts occupied cells; CHANGED counts addresses whose boolean changed in the last update. Neither number identifies a travelling body.
+
+Life is outer-totalistic: it uses the central state separately from the occupied-neighbour count. There are two central states and nine possible counts, giving 18 input cases. Arrangements with the same count receive the same answer for a given central state. This does not imply smooth behaviour. The historical room ID “BeyondBinary” does not describe this primary&#x27;s state alphabet.
+
+## Prepared comparisons
+
+- GLIDER: a five-cell glider, centred through the base pattern placement at (7,7). After four updates its arrangement is translated by (+1,+1).
+- BLINKER: three horizontal cells centred at (10,10). It repeats after two updates. Its centre remains occupied in both phases.
+- MEET: the same glider plus a stable 2 × 2 block at x=10..11, y=10..11. Both are cells in the same automaton, not a collision body placed over it. The tested meeting is empty by generation 6.
+
+Choosing a preset clears both buffers and event counters. REPLAY restores the current preset. STEP performs one update. RUN performs at most one update per 0.5 seconds; it drops overdue catch-up steps, so a slow frame can lengthen the observed interval. All runs hold at generation 48. These controls do not pause the museum clock.
+
+## The room receives occupancy
+
+The small dish and the 9.6 m square floor array read the same present, with the same x/y orientation. This map opts into `floor:walk`, with 0.4 m pitch and a forward offset that fits the existing front bay. Other address studies retain the original 4.8 m display and 0.2 m pitch. Markers and wires follow the same addresses; lamps align along the enlarged edge. The floor&#x27;s geometry and support remain fixed; state changes its colour. The dish is raised onto a table. Gold markers identify A=(10,10), B=(13,13), C=(16,16) in both views.
+
+Each marker is connected visually to a lamp. `life_address_receiver.gd` receives occupancy and the LINK setting. A connected, occupied address sets the globe emission and OmniLight energy; otherwise both are off. ONSETS counts 0→1 transitions while connected. Seed occupancy and reconnecting are not counted as births. Unlinked receivers still track cell state. No receiver writes back into the automaton, and no lamp identifies a pattern type.
+
+This separation makes the application reusable: one can keep the rule and choose another receiver. A door, wall panel or sound would require its own implemented mapping and review. None of those additional outputs is claimed here.
+
+## Placement and retained work
+
+The 15 × 27 map adds a front study and an eastern aisle around the retained rear configuration. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
+
+Runtime evidence and actual images: `doc/space/ca-life-review-2026-09-13/`. Desktop tests cover rule cases, wrapping, travelling and repeating patterns, event coupling, controls, support and a margin walk. Headset reach, comfort, performance and the secondary works require later review.
+
+
+## 25 September staging and verification
+
+The rear hexagonal terrain&#x27;s radius-20, 0.5 m hexagons originally spread roughly 35 m across, reaching into the primary floor. `display:table` now scales its complete simulation root uniformly to 0.12 and places it over a 4.5×4 m table at the rear (9,23). All 1,261 sites, eleven retained layers, transition rule, random-flip mechanism and colliders remain. The control stays full scale at 1.4 m local height; the status label compensates the specimen scale. This is a table-scale comparison, not a new full-size walkable terrain. Other placements keep the original staging.
+
+TRACE-off now restores the base dish display before refreshing the floor. Neither buffer nor generation advances. The earlier code restored the floor but left the dish&#x27;s red/blue wake until a later update.
+
+41 native checks pass, including fourteen real desktop pointer events, four-step glider translation, TRACE colours/restoration, lamp onsets/LINK, the six-generation meeting, body approach to A, occupied/empty support, and retained default floor and hex state dimensions. See encounter-notes.md for evidence and limits.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_BeyondBinary/intent.md">Raw captured source</a></p><pre># A pattern visits an address
+
+Question: What moves when a recognisable pattern crosses fixed cells, and what must we add for the room to answer it?
+
+Inheritance: arrays, colours, clocks, repeated local updates and the distinction between a present and a displayed history. The Life dish uses a two-dimensional present. Its centre state and eight-neighbour count feed the original B3/S23 solver.
+
+Primary: game_of_life_petri, configured with study:addresses. One held glider; fixed witnesses in a small dish and a walkable floor; three occupancy-driven lamps; GLIDER, BLINKER and MEET comparisons; explicit LINK separation. This remains binary despite the historical map ID.
+
+Transfer: use a cell&#x27;s state to drive another museum object through a declared mapping. The installed output is light. Appearance, collision and feedback must not be conflated. The next hall, CA_ExpandingSpace, introduces the visitor&#x27;s proximity as an input.
+
+Preservation: six existing artifacts remain. The added primary bay precedes the retained gallery. Other works need specific comparisons and separate review before receiving additional book passages. No artifact-count quota and no sequence reorder are applied.
+
+
+25 September: enlarge the existing floor receiver to 9.6 m so a fixed address can be approached at body scale. Keep support independent of occupancy and the visitor independent of the rule. Preserve the hexagonal comparison as a table specimen in the rear, clearing its former overflow across the primary. Its full simulation remains; only its museum staging changes.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_BeyondBinary/critical.md">Raw captured source</a></p><pre># A body with no travelling address
+
+The eye follows five cells as something that travels. The array stores no such something. It stores occupied and empty addresses, then another present. “Glider” is a useful recognition across those changes. It can help us predict an encounter without becoming an additional variable hidden inside each cell.
+
+This is one place for the research question “what bodies are possible?” to land. A recognisable body can persist while the sites participating in it change. That does not establish that every body works this way. The museum gives us a particular construction whose conditions we can vary and whose code we can inspect.
+
+The fixed witness complicates our attention. Following A loses the outline; following the outline loses some of the individual changes that sustain it. The lamp translates this selective attention into furniture. It receives only one address. It cannot tell whether occupancy belongs to a glider, a stationary block or something we have not named. The familiar figure is richer than that single signal, yet the lamp can still make the room respond.
+
+LINK exposes the added relation. The lamp is not automatically part of Life&#x27;s neighbourhood. Its glow supplies no feedback. We decided where to sample, what to light and when to count an onset. The gold line is an explanation of a connection implemented in code, not evidence that the automaton naturally wants a lamp. Such choices matter when we transfer a simulation into architecture, a garment or another agent.
+
+MEET changes the glider&#x27;s conditions without changing its rule. This prepared block is neither an enemy nor a moral lesson about collision. It is another configuration of the same cells. In the tested encounter, both recognisable arrangements disappear. Other beginnings require their own observations; we should not make this ending the meaning of encounter itself.
+
+The queer invitation is to investigate which relations allow a body to continue, alter its role or cease to be recognisable. It does not require an organic silhouette. A square grid and two states can already unsettle a simple account of identity; their strict limits also leave much outside. Wanting another body can motivate a new neighbourhood, a state with memory, another coupling. None is automatically freer merely because it is more elaborate.
+
+The floor preserves another decision. Its empty cells remain walkable. The earlier bridge treated occupancy as support above a basin. A value has no single architectural destiny: colour, collision and response are implemented separately. We can enjoy a beautiful patterned room and still ask which of its relations are actually doing something.
+
+Finally, generation 48 is an observation budget. It does not establish extinction, equilibrium or an entropy threshold. The current experiment is held while the larger museum continues. What we leave unobserved remains a question for another return.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_BeyondBinary/artifacts.md">Raw captured source</a></p><pre># CA_BeyondBinary — retained collection
+
+Six works remain. The primary passage follows the Life dish. A smaller initial focus is not a limit on how many works may later join the book.
+
+| Artifact | Role | Place in this pass |
+|---|---|---|
+| `game_of_life_petri` | Primary / book hero | Front bay: held Life dish, 9.6 m matching floor, three fixed-address lamps and explicit connection controls. |
+| `mold_network` | Secondary | Retained rear configuration; a future comparison needs its own mechanism and observation. |
+| `science_screen` | Secondary | Retained grid-mode display. |
+| `hexagon_ca_vr` | Secondary | Rear table at (9,23), with all sites/generations retained and a full-size control. The uniform display scale prevents the original terrain from overflowing into the Life floor. |
+| `ca_growth_network` | Secondary | Retained network work; do not conflate its growth with the primary Life rule. |
+| `dark_sphere` | Decoration | Retained spatial reference. |
+
+The floor and three receivers belong to the configured Life artifact. They share its state and are not duplicate independent Life simulations. The historical room ID does not promise a multistate primary.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_BeyondBinary/summary.md">Raw captured source</a></p><pre># A pattern visits an address
+
+The Life dish starts with one glider on a held 24 × 24 plane. The same present appears in a floor inset. Three gold addresses control three opal lamps, giving the moving pattern a visible consequence in the museum. The addresses and floor support remain fixed.
+
+STEP and REPLAY allow prediction and return. BLINKER separates repetition from displacement; MEET places a block in the same automaton. LINK disconnects the lamps while Life continues. The text follows these observations into the actual B3/S23 branch and receiver call.
+
+The study asks what persists when a pattern&#x27;s participating cells change, and what additional decisions let one system affect another. The state is binary. All six original works remain; the Life dish is primary and the book hero. The next hall brings proximity into the update.
+
+
+The floor now spans 9.6 m, with 0.4 m cell pitch and aligned gold addresses/wires/lamps. A supplied museum body can stand at A as its state and light change without losing floor support. The hexagonal work is contained on a rear table with its full simulation and full-size control; it no longer intrudes into the primary bay. TRACE-off restores both views. Current native results: 41 checks, fourteen desktop pointer events, no failures. Headset, Quest and complete rear-gallery acceptance remain pending.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_BeyondBinary/blurb.md">Raw captured source</a></p><pre>Five cells travel without carrying their addresses with them. Follow a gold square, then follow the figure. A lamp answers. Disconnect it: which part of the event keeps going?
+</pre></section></body></html>

@@ -1,0 +1,515 @@
+--- before/commons/artifacts/whiteboard/whiteboard.gd
++++ after/commons/artifacts/whiteboard/whiteboard.gd
+@@ -42,6 +42,7 @@
+ @export var pens_enabled: bool = false
+ ## Opt-in reachable shelf, sculptural handles and dropped-tool recovery.
+ @export var pen_shelf: bool = false
++@export var simple_pens: bool = false
+ 
+ # ── Constants ─────────────────────────────────────────────────────────
+ 
+@@ -91,6 +92,8 @@
+ 
+ 
+ func _read_metadata_overrides() -> void:
++	if has_meta("config_pen_style"):
++		simple_pens = str(get_meta("config_pen_style")) == "simple"
+ 	if has_meta("config_pen_shelf"):
+ 		pen_shelf = str(get_meta("config_pen_shelf")).to_lower() in ["1", "true"]
+ 	if has_meta("config_pens"):
+@@ -135,6 +138,7 @@
+ 		drawing.board_width = board_width
+ 		drawing.board_height = board_height
+ 		drawing.shelf_enabled = pen_shelf
++		drawing.simple_pens = simple_pens
+ 		add_child(drawing)
+ 
+ 
+--- before/commons/artifacts/whiteboard/whiteboard_drawing.gd
++++ after/commons/artifacts/whiteboard/whiteboard_drawing.gd
+@@ -1,22 +1,18 @@
+ extends Node3D
+-## Reuses the drawing-paper canvas and pen asset with board-local coordinates.
+-const Paper = preload("res://commons/context/drawingboard/paper_draw_surface.gd")
++## Board-local marker drawing, independent of the spray-paint feedback image.
++const Paper = preload("res://commons/artifacts/whiteboard/whiteboard_canvas.gd")
+ const Pen = preload("res://commons/artifacts/whiteboard/whiteboard_pen.gd")
+ const PenModel = preload("res://commons/context/drawingboard/pen.tscn")
++const SimplePen = preload("res://commons/primitives/point/drawing_pen.gd")
+ var board_width: float = 1.6
+ var board_height: float = 1.2
+ var canvas: MeshInstance3D
+ var pens: Array[XRToolsPickable] = []
+ var stroke_events: int = 0
+ var shelf_enabled := false
++var simple_pens := false
+ 
+ func _ready() -> void:
+-	# The existing canvas expects a sibling status label; keep its debug text off
+-	# the visitor's board. The tools themselves carry their color/grid labels.
+-	var status := Label3D.new()
+-	status.name = "Label3D"
+-	status.visible = false
+-	add_child(status)
+ 	canvas = Paper.new()
+ 	canvas.name = "WritingSurface"
+ 	var quad := QuadMesh.new()
+@@ -25,11 +21,6 @@
+ 	canvas.position = Vector3(0, board_height * 0.5, 0.044)
+ 	canvas.texture_size = Vector2i(1024, maxi(64, roundi(1024 * board_height / board_width)))
+ 	add_child(canvas)
+-	# Dry marker ink must not diffuse/fade through the wet-paint simulation.
+-	canvas.get_node("WetPaintCanvas/SimulationPass").visible = false
+-	canvas.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+-	var surface_material := canvas.material_override as StandardMaterial3D
+-	surface_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+ 	if shelf_enabled:
+ 		_build_shelf()
+ 	for i in range(5):
+@@ -54,11 +45,20 @@
+ 		shape.height = 0.22
+ 		collision.shape = shape
+ 		collision.position.y = 0.1
+-		pen.add_child(collision)
++		if not simple_pens or pen.eraser:
++			pen.add_child(collision)
++		else:
++			collision.free()
+ 		var writing_tip := Marker3D.new()
+ 		writing_tip.name = "WritingTip"
+-		pen.add_child(writing_tip)
+-		if not pen.eraser:
++		if simple_pens and not pen.eraser:
++			writing_tip.free()
++			writing_tip = SimplePen.build_body(pen, pen.ink)
++			pen.rotation.x = PI / 2.0
++			pen.position.y = 0.052
++		else:
++			pen.add_child(writing_tip)
++		if not pen.eraser and not simple_pens:
+ 			var model := PenModel.instantiate()
+ 			# Remove the asset's lateral authoring offset; its nib points along +Y.
+ 			model.position = Vector3(-0.00968,0.00054,-0.02409)
+@@ -71,7 +71,7 @@
+ 			var nib: MeshInstance3D = model.get_node("pen/tip")
+ 			var nib_bounds: AABB = (model.transform * nib.get_parent().transform * nib.transform) * nib.get_aabb()
+ 			writing_tip.position = Vector3(nib_bounds.get_center().x, nib_bounds.end.y, nib_bounds.get_center().z)
+-		else:
++		elif pen.eraser:
+ 			var eraser_shape := BoxShape3D.new()
+ 			eraser_shape.size = Vector3(0.085,0.04,0.055)
+ 			collision.shape = eraser_shape
+@@ -85,7 +85,7 @@
+ 			felt.albedo_color = Color(0.16,0.18,0.21)
+ 			block.material_override = felt
+ 			pen.add_child(block)
+-		if shelf_enabled and not pen.eraser:
++		if shelf_enabled and not pen.eraser and not simple_pens:
+ 			_dress_handle(pen, i)
+ 		var label := Label3D.new()
+ 		label.text = "ERASE" if pen.eraser else ("NO GRID" if i == 0 else "%d mm" % pen.resolution_mm)
+@@ -120,7 +120,6 @@
+ 		canvas.draw_point(uv, ink, radius, 1000000)
+ 	else:
+ 		canvas.draw_line(previous, uv, ink, radius, 1000000)
+-	canvas.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+ 	stroke_events += 1
+ 
+ 
+--- before/commons/maps/Point_Trace/detours.md
++++ after/commons/maps/Point_Trace/detours.md
+@@ -1,3 +1,5 @@
++> Arrangement update — 29 September 2026: the desk, head projection, stick and neutral dot have been removed from Point_Trace. This document retains earlier comparisons; see [current intent](intent.md) and [preserved passages](trace-retired-encounters.md) for their status.
++
+ # Return visits in Point_Trace
+ 
+ These experiments remain in the room as secondary encounters. The book follows the drawing dots, stick, head-path comparison, measured writing desk, whiteboard and short-memory point; a return can ask a different question of the same hall.
+--- before/commons/maps/Point_Trace/encounter-reference.md
++++ after/commons/maps/Point_Trace/encounter-reference.md
+@@ -1,3 +1,5 @@
++> Arrangement update — 29 September 2026: the desk, head projection, stick and neutral dot have been removed from Point_Trace. This document retains earlier comparisons; see [current intent](intent.md) and [preserved passages](trace-retired-encounters.md) for their status.
++
+ # Point Trace: encounter reference
+ 
+ Companion to the revised final.md, updated 16 September 2026.
+--- before/commons/maps/Point_Trace/final.md
++++ after/commons/maps/Point_Trace/final.md
+@@ -8,11 +8,13 @@
+ 
+ <!-- @draw_dot -->
+ 
+-The drawing points wait on their plinths. Take the first dot and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
++Three coloured pens wait on their plinths. Take the red pen and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
++
++The nib is the point being followed. Turn your wrist while keeping your hand almost still: the tip can travel while your grip barely moves.
+ 
+ Watch during the pause. Does another point enter merely because time passes?
+ 
+-Move again. Give the loop a tail, then release the dot. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
++Move again. Give the loop a tail, then release the pen. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
+ 
+ The count comes from a list:
+ 
+@@ -30,9 +32,9 @@
+ 
+ ## Another resolution, another gesture
+ 
+-The other dots give the line a coarser grain. From red through green to blue, their grids grow wider. The first dot adds no such grid.
++The other pens give the line a coarser grain. From red through green to blue, their grids grow wider.
+ 
+-Repeat a small bend with the blue dot. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
++Repeat a small bend with the blue pen. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
+ 
+ The program rounds each coordinate to the nearest grid position. Several movements of your hand can arrive at the same saved address. Until a different address is kept, the line has no new corner.[^point-trace-quantisation]
+ 
+@@ -40,15 +42,8 @@
+ 
+ Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+ 
+-There is also a limit to how many positions a dot can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing.
++There is also a limit to how many positions a pen can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing.
+ 
+-## Move the place that draws
+-
+-<!-- @draw_stick -->
+-
+-Take the stick. Keep your fist nearly still and turn your wrist. The tip travels an arc. This tool uses the same recorder, but puts the sampling point at the end of a rod. A small turn can become a large mark.
+-
+-The recording rule is unchanged. We moved the place it observes. Your wrist can stay in one place while the line describes a journey.
+ 
+ ## After the hand lets go
+ 
+@@ -64,53 +59,12 @@
+ 
+ You have set a line in motion and let something else continue it. How much of the drawing did you make when you placed the ball?
+ 
+-## A line you did not hold
+-
+-<!-- @head_trace_projection -->
+-
+-Put the tool down. Enter the outlined square beside the plinths. Lean a little, lower your head, then rise. Step outside the square and look back.
+-
+-A pink line hangs where your head has been. A cyan line lies beneath it. Find the place where you lowered yourself. Can you find that movement in both?
+-
+-The hand needed a tool. Here the point being followed is in the headset. You were making a line while looking for one.
+-
+-Both views use the same retained positions. For the floor version, each position gives up its height:
+-
+-```gdscript
+-return Vector3(p.x, FLOOR_Y, p.z)
+-```
+-
+-`p` is a position measured relative to the square. X and Z remain; the floor height takes Y's place. Positions above one another meet on the same spot below. The line can keep where you went across the room while losing how low you bent.
+-
+-Walk around what remains. Neither line has shoulders, a face, or a reason for leaning. Yet you may recognise something you just did. You know the movement from inside; another observer has these marks.
+-
+-Return to the square to begin again. Try giving the floor line a bend. Then try moving without extending it. The same body can make more than one account of its passage.
+-
+-## The pause leaves a line
+-
+-<!-- @automatic_writing_desk -->
+-
+-Come close to the small writing desk. Let the nib cross a little paper while you hold still. Lower your head, wait there, then rise. Your hands can remain empty.
+-
+-Look for the waits in the writing. A level stretch can keep something the drawing dot left out.
+-
+-At this desk, time moves the pen across the page. The height of your headset moves the mark above or below the row. The height at which you arrived becomes its starting level. Small movements still belong to the recording; stillness need not be perfectly straight.
+-
+-```gdscript
+-_elapsed += delta
+-```
+-
+-Each update adds the elapsed time. The nib keeps travelling while a measured height stays the same. Lower yourself and the line bends; stay lower and another level stretch can appear. We have given waiting a length.
+-
+-The page can also have blanks. When measured input disappears, the clock can carry on without a mark. A horizontal line and an empty interval make different claims about what the instrument received.
+-
+-A completed page waits. Step away and return to begin another. Give one pause more room than the last. Your reason for waiting stays with you.
+ 
+ ## Touch the page
+ 
+ <!-- @whiteboard -->
+ 
+-Four pens and an eraser wait on the shelf beneath the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
++Four pens and an eraser wait on the shelf beneath the wall-mounted whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
+ 
+ Your hand travelled across the gap. The picture leaves it white.
+ 
+@@ -128,7 +82,7 @@
+ 
+ Hold your hand still. Does the remaining line wait with you?
+ 
+-This recorder uses the same movement gate as the first dot. We have given its list less room. When a new position takes it over that limit, the oldest goes:
++This recorder uses the same movement gate as the red pen. We have given its list less room. When a new position takes it over that limit, the oldest goes:
+ 
+ ```gdscript
+ if _trail_points.size() > trail_max_points:
+@@ -141,7 +95,7 @@
+ 
+ <!-- @ -->
+ 
+-Return to a line you want to keep. Release the drawing dot or stick after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.[^point-trace-carry]
++Return to a line you want to keep. Release the drawing pen after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.[^point-trace-carry]
+ 
+ We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+ 
+@@ -155,7 +109,7 @@
+ 
+ [^point-trace-quantisation]: Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons. The [technical companion](/book?map=Point_Trace&section=technical) gives the spacings, recording gate and list capacities.
+ 
+-[^point-trace-carry]: A dot or stick must retain at least two positions to send a copy onward. The whiteboard's image, the ball's path, the head trace and the desk's page stay in this hall. The [technical companion](/book?map=Point_Trace&section=technical) distinguishes these records and their transfer routes.
++[^point-trace-carry]: A drawing pen must retain at least two positions to send a copy onward. The whiteboard's image and the ball's path stay in this hall. The [technical companion](/book?map=Point_Trace&section=technical) distinguishes these records and their transfer routes.
+ 
+ [^point-trace-inscription]: Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. Here they open a question to pursue: what can a retained mark tell us about a movement that has already passed?
+ 
+--- before/commons/maps/Point_Trace/intent.md
++++ after/commons/maps/Point_Trace/intent.md
+@@ -4,12 +4,12 @@
+ 
+ The book follows the detour from Point_Lines through four related decisions: whether movement passes the recorder's gate; where a retained position may stand; which part of a tool is being tracked; and whether contact admits movement to a drawing. An ordered list of selected positions, joined by straight segments, is the main new capability.
+ 
+-The primary tokens are draw_dot, draw_stick and whiteboard. Four draw_dot placements offer no added lattice, then 10, 40 and 80 mm spacing. They share a 5 mm movement gate. The stick moves the observed point to its tip; the board makes contact and lifting consequential. These variations belong to the same inquiry.
++Three drawing pens share the draw_dot recorder and a 5 mm movement gate, with red, green and blue grids of 10, 40 and 80 mm. The plain nib is the sampled point; the grip aligns forward on pickup. The wall-mounted whiteboard keeps four surface-writing pens and an eraser. The ball ramp offers a movement continued by gravity. Telemetry and the science screen remain secondary.
+ 
+-The telemetry diptych remains a secondary comparison for a pause: timed rows can continue when the movement-gated drawing list does not change. Its TRACKING/DEMO FEED label matters to that comparison. The automatic-writing desk remains a secondary encounter about interpreting an expressive mark. The science screen is secondary too. All nine physical placements remain.
++The neutral dot, draw_stick, head_trace_projection and automatic_writing_desk have been removed from this hall at the author's request. Their code is retained; [retired encounter passages](trace-retired-encounters.md) preserve the former manuscript material.
+ 
+ The recording rules can hide a small difference and make another position easier to return to. The critical text should ask what a particular practice needs from its record, who chooses the rules, and how those rules could be challenged. It should not equate a sampled position list with preserved intention, complete duration, or freedom.
+ 
+-Release a dot or stick to copy its retained positions into TraceData. Grid receives that record, centres and scales its display, and applies another lattice. The source is already sampled and may already be spatially rounded; Grid makes addresses and changes of representation the next explicit question.
++Release a drawing pen to copy its retained positions into TraceData. Grid receives that record, centres and scales its display, and applies another lattice. The source is already sampled and may already be spatially rounded; Grid makes addresses and changes of representation the next explicit question.
+ 
+ Earlier drafts are preserved in [the previous texts](../../../doc/space/point-trace-focus-2026-09-16/previous/). Their proposals and historical descriptions are not the current interaction contract.
+--- before/commons/maps/Point_Trace/map_data.json
++++ after/commons/maps/Point_Trace/map_data.json
+@@ -2,11 +2,11 @@
+   "layers": {
+ 	"interactables": [
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-	  [" ", " ", " ", " ", "automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "trace_ball_ramp:0:0#plinth:0", " ", " ", " ", " ", " ", " ", " "],
+-	  [" ", " ", "head_trace_projection:0:0#plinth:0#pin:1", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-	  [" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", " ", " ", " ", " ", " ", " ", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1#pen_style:simple#plinth:0", " ", " ", " ", " ", "trace_ball_ramp:0:0#plinth:0", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", " ", " ", " ", " ", " ", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", "", " ", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth#pen_style:simple", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth#pen_style:simple", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.55#data_table_yaw:180#data_table_tilt:50#data_table_mount:plinth#pen_style:simple", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:0:0.5#offset:0.50,1.45,0.47#support:pylon#screen_width:2.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+@@ -72,7 +72,7 @@
+ 	"format": "json",
+ 	"lookup_name": "Point_Trace",
+ 	"metadata": {
+-	  "n_artifacts": 12,
++	  "n_artifacts": 7,
+ 	  "source": "editor"
+ 	},
+ 	"name": "Point_Trace",
+--- before/commons/maps/Point_Trace/technical.md
++++ after/commons/maps/Point_Trace/technical.md
+@@ -1,3 +1,5 @@
++> Current arrangement, 29 September 2026: three plain drawing pens (10/40/80 mm), their plinth readouts, a whiteboard mounted on the uninterrupted east wall, and the ball ramp. The neutral dot, stick, head projection and writing desk are no longer placed. The dated implementation notes below retain the removed studies' history.
++
+ # Point Trace — implementation reference
+ 
+ The current book develops the selected-position recorder, its spatial grain, its sampling point, and the whiteboard's contact rule. [tutorial.md](tutorial.md) gives the short programming route. This reference distinguishes those installed behaviours from optional comparisons and possible extensions.
+@@ -10,7 +12,7 @@
+ 
+ The gate's reference is therefore the last gate-passing reading, not necessarily the last retained point or the previous frame's position. A released tool updates the reference without extending the trace. Returning to an earlier position after other saved positions is allowed.
+ 
+-The four dot placements use no added lattice, 10 mm, 40 mm and 80 mm spacing. In free space the helper rounds world X, Y and Z to multiples of the spacing. Near a whiteboard it can shape the sample in the board's frame, then convert it back to world coordinates. That capture zone extends 0.05 m from the board plane, with 0.02 m around its bounds; positions are clamped to the face and offset 0.004 m for visibility. This behaviour is separate from the board's own pens.
++The three drawing pens use 10 mm, 40 mm and 80 mm spacing. In free space the helper rounds world X, Y and Z to multiples of the spacing. Near a whiteboard it can shape the sample in the board's frame, then convert it back to world coordinates. That capture zone extends 0.05 m from the board plane, with 0.02 m around its bounds; positions are clamped to the face and offset 0.004 m for visibility. This behaviour is separate from the board's own pens.
+ 
+ ## Reading the line
+ 
+@@ -18,7 +20,7 @@
+ 
+ The cased display tilts 35 degrees from vertical. Its count is read after capacity enforcement; the table shows the last ten retained positions in world metres, with at least three decimal places. Eighteen retained points produce rows 9–18. These numbers are current list positions, not permanent sample identifiers.
+ 
+-The panel anchors beside the trace and remains readable after release. Appending or evicting points does not make it chase the newest endpoint. The casing and display do not change the data being reported.
++The three panels are fixed to their plinths and stay visible at zero points and after release. Appending or evicting points does not make it chase the newest endpoint. The casing and display do not change the data being reported.
+ 
+ When the list exceeds 4096 positions, its oldest position is removed. Live fading is off here. The optional `_trail_times` array is populated only when fading is enabled, so it is empty under these placements' default settings. The live position list does not encode the duration of stationary pauses.
+ 
+@@ -28,13 +30,13 @@
+ 
+ A nib outside the bounds or more than 0.035 m from the plane ends the stroke. The next valid contact starts another stroke. The four pens use 0/10/40/80 mm positional spacing before conversion to canvas coordinates. NO GRID omits that rounding; the image still consists of pixels.
+ 
+-At this board's 2.0 by 1.2 m size, the canvas is 1024 by 614 pixels. A three-pixel brush connects valid contacts; the eraser paints white with a 22-pixel radius. The adapter disables the prior wet-paint simulation and renders the canvas when a stroke changes. Its image stays with the board during this visit.
++At this board's 2.0 by 1.2 m size, the canvas is 1024 by 614 pixels. A brush with a three-pixel radius connects valid contacts; the eraser paints white with a 22-pixel radius. The dedicated `whiteboard_canvas.gd` retains a bounded pixel image and uploads changes once per frame when dirty. It has no wet-paint feedback, diffusion or idle fading. Its image stays with the board during this visit.
+ 
+ ## Room arrangement and tool return
+ 
+-The four drawing dots and the stick occupy five equally spaced plinths centred on the room at X = 4.5 m. Their recording configuration is unchanged. The whiteboard faces into the room from the east wall; its lower edge is 0.95 m above the floor, with a 0.925 m shelf. The hand-telemetry diptych sits 0.45 m higher than before, against the rear wall. The science screen occupies the clear rear-wall panel across the doorway, using its recessed pylon housing. Its face is 1.3 by 1.1 m, centred about 2.03 m above the floor; the housing stays clear of the vertical wall trim. The map excludes automatically placed benches because one blocked the drawing aisle.
++Three drawing pens occupy plinths at source cells (3,5), (4,5) and (5,5). Each readout stays seated on its 0.90 m support. `#pen_style:simple` replaces the held sphere with a 22.5 cm pen; the recorder follows its nib. A fixed, hand-independent XRTools grab point aligns local -Z with the pickup's forward direction. Recording waits for the grip to arrive, so the pickup approach is not drawn. Other draw_dot placements keep their original sphere.
+ 
+-`#pen_shelf:1` enables the board's shelf and return behaviour in this map. Four grips distinguish the existing inks and resolutions: beads, a loop, fins and a stepped sleeve. Labels stay on the shelf. The eraser has its own place. Each tool remains the same rigid body throughout pickup, release and return.
++The whiteboard is at source cell (7,2), with its lower edge 0.95 m above the floor, facing west into the hall. Its two-metre width lies entirely on the solid wall before the side-bay opening. `#pen_style:simple` opts this board into plain barrels with forward-aligned grips; its four resolutions, eraser, shelf and return behavior are retained. The same pen body helper serves both drawing in space and drawing on the board.
+ 
+ Released shelf tools fall under physics. A tool more than 0.25 m below its dock or more than 3 m away returns after 1.25 seconds in that condition. Its home transform is relative to the board, so wall rotation and placement are respected. Held tools never return. Both XRTools pickup and the desktop pointer's grab/drop hooks are supported. Other boards retain the floating-tool arrangement unless they opt into the shelf.
+ 
+@@ -44,11 +46,11 @@
+ 
+ The footer labels a found controller node as TRACKING and the synthetic fallback as DEMO FEED. The lookup checks tracker/name but not active-pose validity or the currently driven rig; TRACKING therefore does not establish live hardware input by itself. Without a controller, synthetic motion fills the rows. Confirming the active source is a pending implementation improvement.
+ 
+-Point_Trace now selects the automatic-writing desk's `head_height` recording mode. It measures head height against elapsed time. The default `asemic` mode elsewhere retains the original speed-modulated generated script; see the measured-mode notes below.
++The removed automatic-writing desk used the `head_height` recording mode. It measures head height against elapsed time. The default `asemic` mode elsewhere retains the original speed-modulated generated script; see the measured-mode notes below.
+ 
+ ## Short-memory companion
+ 
+-`trace_short_memory` inherits the existing draw-dot scene and recorder. Its capacity is 32 instead of 4096, its ink is amber, and its static plaque states the capacity. The extra data panel is disabled so it cannot obscure the drawing. A local display override draws each retained position as a 12 mm bead and each adjacent connection as a 7 mm cord. Two small MultiMeshes render the same list; there is no additional trajectory record. The 5 mm movement gate, unsnapped positions, pickup requirement, lack of time fading and release-to-TraceData behaviour are inherited unchanged. The original four dots and stick retain their configurations.
++`trace_short_memory` inherits the existing draw-dot scene and recorder. Its capacity is 32 instead of 4096, its ink is amber, and its static plaque states the capacity. The extra data panel is disabled so it cannot obscure the drawing. A local display override draws each retained position as a 12 mm bead and each adjacent connection as a 7 mm cord. Two small MultiMeshes render the same list; there is no additional trajectory record. The 5 mm movement gate, unsnapped positions, pickup requirement, lack of time fading and release-to-TraceData behaviour are inherited unchanged. The three remaining drawing pens retain their recording resolutions.
+ 
+ The companion stands in the exit bay at cell (2,9), facing the approach from the central passage. A visitor can draw beyond the bay while carrying the point. Continuing a gesture eventually removes earlier positions, whereas a stationary pause leaves the retained list unchanged. Capacity counts accepted positions; its duration and spatial length depend on the movement and process callbacks. It is not a fixed-time trail.
+ 
+@@ -56,7 +58,7 @@
+ 
+ ## Transfer into Grid
+ 
+-On release, the dot or stick calls [TraceData.add_trace()](../../globals/trace_data.gd). That function requires at least two positions and duplicates the list. Its autoload storage survives room changes in the running game. It has no trace disk-save operation here and does not copy pen colour, identity or per-point timestamps. The whiteboard and player_trace do not publish their records to this store.
++On release, the drawing pen calls [TraceData.add_trace()](../../globals/trace_data.gd). That function requires at least two positions and duplicates the list. Its autoload storage survives room changes in the running game. It has no trace disk-save operation here and does not copy pen colour, identity or per-point timestamps. The whiteboard and player_trace do not publish their records to this store.
+ 
+ [grid_lines.gd](../../primitives/line/grid_lines.gd) reads existing traces and listens for later releases. It subtracts the source bounding-box centre and applies a fivefold enlargement, reducing the factor if necessary to fit the longest dimension within five display metres. A second rendering rounds transformed coordinates to another lattice. Source positions remain unchanged. This supports the book's conditional ending: the bend may have grown.
+ 
+--- before/commons/maps/Point_Trace/tutorial.md
++++ after/commons/maps/Point_Trace/tutorial.md
+@@ -4,7 +4,7 @@
+ 
+ ## Watch a position enter
+ 
+-Draw a short loop with the first dot. Pause, then move again. Compare the point count with two neighbouring rows on the tilted display.
++Draw a short loop with the red pen. Pause, then move again. Compare the point count with two neighbouring rows on the tilted display.
+ 
+ The installed scenes use a 5 mm movement gate. The script can inspect the held point during process callbacks, but a callback need not add a position. This excerpt reduces the recording branch in draw_dot.gd by leaving out display updates, fading and progress bookkeeping:
+ 
+@@ -30,7 +30,7 @@
+ 
+ ## Change where a sample can stand
+ 
+-The first dot adds no lattice. The red, green and blue dots use 10, 40 and 80 mm spacing. In free space, the shaping operation rounds each world-coordinate component:
++The red, green and blue pens use 10, 40 and 80 mm spacing. In free space, the shaping operation rounds each world-coordinate component:
+ 
+ ```gdscript
+ var s: float = resolution_mm / 1000.0
+@@ -51,7 +51,7 @@
+ 
+ The mesh uses `Mesh.PRIMITIVE_LINE_STRIP` and supplies the retained positions in order. Each adjacent pair gives a straight segment. The list supplies endpoints for that segment; it does not establish the intervening route of the hand.
+ 
+-The instrument displays the last ten positions while the larger count includes the whole retained list. The four original dots and stick keep at most 4096 positions each. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
++The instrument displays the last ten positions while the larger count includes the whole retained list. The three drawing pens keep at most 4096 positions each. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
+ 
+ ## Meet the limit sooner
+ 
+@@ -59,24 +59,14 @@
+ 
+ ## Move the observed point
+ 
+-The stick uses the same recorder and threshold. Its `draw_sphere_path` points to `GrabStick/Blade/Top/TrackBall`. Turning the held rod moves that tip even when the fist changes position very little. The different drawing follows from which point is observed.
++The pen uses the same recorder and threshold, but `WritingTip` is the observed point. Turning the barrel moves its nib even when the grip changes position very little. Its fixed XRTools grab point aligns the nib with the hand's forward direction on pickup.
+ 
+ At the whiteboard, lift a pen between two marks. The board's separate pen script writes only while held, within the surface bounds and contact allowance. It starts a fresh stroke after the nib leaves. The drawing can omit the journey across the gap.
+ 
+ ## Carry the record onward
+ 
+-Releasing a dot or stick calls `TraceData.add_trace(_trail_points)`. The store copies lists containing at least two positions. It survives room changes during the running game; it does not save these traces to disk. Whiteboard pixels follow another storage route.
++Releasing a drawing pen calls `TraceData.add_trace(_trail_points)`. The store copies lists containing at least two positions. It survives room changes during the running game; it does not save these traces to disk. Whiteboard pixels follow another storage route.
+ 
+ The copied list contains positions without per-point timestamps. Grid can display and reshape those positions, but cannot recover the timing of a pause from them. That is the record we take into Point_Line_Grid.
+ 
+ See [technical.md](technical.md) for exact source paths, surface rules and the optional timed recorder. Earlier extension sketches are retained in [the previous tutorial](../../../doc/space/point-trace-focus-2026-09-16/previous/tutorial.md).
+-
+-
+-### A body writes without holding the tool
+-
+-After the stick's displaced sampling point, enter the head-trace square beside the plinths. Lower the head and move sideways, step out, then compare the suspended pink path with its cyan floor projection. Both come from one position list. Read the one-line height substitution after trying to find the same movement in each view. Returning begins a new drawing. This prepares the whiteboard's planar inscription without introducing sine or randomness as generators. Desktop walking-camera input is explicitly distinguished from headset input.
+-
+-
+-### Give a pause room on the page
+-
+-At the existing writing desk, the `head_height` mode keeps measured height against elapsed time. Hold still, lower the head, wait and rise. Compare the level stretch with a drawing dot's unchanged count during stillness. The difference is how each instrument admits a sample and gives time a visible role. The desk's empty intervals belong to missing input; the current page waits when full. Its controlled source replaces generated handwriting only in this hall. Read `_elapsed += delta` after observing the waits.
+--- before/commons/primitives/point/draw_dot.gd
++++ after/commons/primitives/point/draw_dot.gd
+@@ -1,6 +1,8 @@
+ extends Node3D
+ 
+ const DataInstrumentSurface = preload("res://commons/ui/data_instrument_surface.gd")
++const DrawingPen = preload("res://commons/primitives/point/drawing_pen.gd")
++@export var simple_pen: bool = false
+ 
+ # @identity
+ # essence: sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
+@@ -326,6 +328,9 @@
+ 	_data_mount_surface = hit.position
+ 	_data_mount_ready = true
+ 	_seat_data_panel()
++	if simple_pen and is_instance_valid(_grab_point) and not _grab_point.is_picked_up():
++		_grab_point.global_position.y = _data_mount_surface.y + 0.07
++		_last_global_position = _draw_sphere.global_position
+ 	_update_data_table()
+ 
+ func _seat_data_panel() -> void:
+@@ -389,6 +394,10 @@
+ 	# INK / GRAIN before _setup_trail — the trail material bakes trail_color in,
+ 	# so the colour must be settled before the material exists.
+ 	_ink_read_config()
++	if has_meta("config_pen_style"):
++		simple_pen = str(get_meta("config_pen_style")) == "simple"
++	if simple_pen:
++		_setup_simple_pen()
+ 
+ 	# Setup progress indicator as world-space (not child of grab point)
+ 	_setup_progress_indicator()
+@@ -427,7 +436,8 @@
+ 	var current_global = _draw_sphere.global_position
+ 
+ 	if record_only_when_grabbed and is_instance_valid(_grab_point) and _grab_point.has_method("is_picked_up"):
+-		if not _grab_point.is_picked_up():
++		var drawing_ready: bool = _grab_point.is_drawing_ready() if _grab_point.has_method("is_drawing_ready") else _grab_point.is_picked_up()
++		if not drawing_ready:
+ 			_last_global_position = current_global
+ 			# If we are not recording, we should still process fading if enabled
+ 			if fade_trail:
+@@ -778,12 +788,42 @@
+ 		if m:
+ 			m.albedo_color = trail_color
+ 			m.emission = trail_color
++	if simple_pen and is_instance_valid(_grab_point):
++		var barrel := _grab_point.get_node_or_null("Barrel") as MeshInstance3D
++		if barrel:
++			barrel.material_override.albedo_color = trail_color
++
++
++func _setup_simple_pen() -> void:
++	if not is_instance_valid(_grab_point) or _grab_point.get_script() == DrawingPen:
++		return
++	var old := _grab_point
++	var pen := DrawingPen.new()
++	pen.name = old.name
++	pen.pen_color = trail_color
++	pen.freeze = true
++	pen.release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	pen.collision_layer = 4
++	pen.collision_mask = 0
++	pen.mass = 0.08
++	pen.position = old.position + Vector3(0.34, -0.17, 0.0)
++	pen.rotation.x = PI / 2.0
++	remove_child(old)
++	old.queue_free()
++	add_child(pen)
++	_grab_point = pen
++	_draw_sphere = pen.get_node("WritingTip")
++	_last_global_position = _draw_sphere.global_position
++	pen.dropped.connect(_on_grab_point_dropped)
+ 
+ 
+ ## Gated per key: a map that says nothing about a key leaves its path untouched, so a
+ ## config carrying only other keys cannot disturb the legacy lineage.
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	var dirty: bool = false
++	if str(config_data.get("pen_style", "")) == "simple":
++		simple_pen = true
++		_setup_simple_pen()
+ 	if config_data.has("data_table_scale"):
+ 		data_table_scale = clampf(float(config_data["data_table_scale"]), 0.4, 1.5)
+ 	if config_data.has("data_table_yaw"):

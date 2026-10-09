@@ -1,0 +1,154 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "scale and rotation crossings instantiated",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "source floor ray agrees with museum deck",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "scale collider flush at maximum",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "scale mesh matches physical box",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "small scale cube withdraws below deck",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "plank is elongated 3.6 by 1 metres",
+      "passed": true,
+      "value": "(3.6, 0.2, 1.0)"
+    },
+    {
+      "name": "crosswise plank leaves a gap to both forward banks",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "crosswise plank top flush",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "quarter-turned plank top flush",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "quarter-turned plank overlaps both banks by 0.3m",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "rotation mesh matches physical box",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "capsule walks across held crossing at row 10.0",
+      "passed": true,
+      "value": "(5.0, 0.500846, 14.50003)"
+    },
+    {
+      "name": "capsule walks across held crossing at row 15.0",
+      "passed": true,
+      "value": "(5.0, 0.500834, 19.49999)"
+    },
+    {
+      "name": "one adjustable landing loaded",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "landing starts at deck",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "control height is reachable",
+      "passed": true,
+      "value": 1.13358438014984
+    },
+    {
+      "name": "native slider selects far bank",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "bank translates exactly one metre",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "bank remains level after moving",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "bridge transform remains untouched",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "far bank leaves 0.70m surface gap at aligned pose",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "same straight-walking capsule loses support at far setting",
+      "passed": true,
+      "value": -0.461207509040833
+    },
+    {
+      "name": "left bypass remains physically walkable",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "native RESET restores overlap",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "RESET synchronizes slider",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "reset crossing supports same capsule through the far bank to the exit",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "measurements": {
+    "far_setting_capsule_drop_m": 0.461207509040833,
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "plank_aligned_collision": "[P: (10.0, -0.2, 20.7), S: (1.0, 0.2, 3.599998)]",
+    "plank_crosswise_collision": "[P: (8.7, -0.2, 22.0), S: (3.6, 0.2, 1.0)]",
+    "scale_full_collision": "[P: (9.0, -3.0, 16.0), S: (3.0, 3.0, 3.0)]"
+  }
+}

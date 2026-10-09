@@ -1,0 +1,729 @@
+[
+  {
+    "id": "cellularautomata",
+    "title": "Cellular Automata",
+    "concepts": [
+      {
+        "label": "Synchronous state buffers",
+        "maps": [
+          "CA_Introduction",
+          "CA_ExpandingSpace"
+        ]
+      },
+      {
+        "label": "Local neighbourhood rules",
+        "maps": [
+          "CA_Introduction",
+          "CA_BeyondBinary"
+        ]
+      },
+      {
+        "label": "Multistate transition tables",
+        "maps": [
+          "CA_ElementaryRules"
+        ]
+      },
+      {
+        "label": "History as spatial data",
+        "maps": [
+          "CA_GameOfLife",
+          "CA_AgentsCircuits"
+        ]
+      },
+      {
+        "label": "State-to-object output mapping",
+        "maps": [
+          "CA_BeyondBinary"
+        ]
+      },
+      {
+        "label": "External spatial inputs",
+        "maps": [
+          "CA_ExpandingSpace"
+        ]
+      },
+      {
+        "label": "Diffusive neighbour exchange",
+        "maps": [
+          "CA_SoftRules"
+        ]
+      },
+      {
+        "label": "Matched perturbation measurements",
+        "maps": [
+          "CA_EdgeOfChaos"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fractals",
+    "title": "Fractals",
+    "concepts": [
+      {
+        "label": "Recursion and base cases",
+        "maps": [
+          "Fractal_Recursion"
+        ]
+      },
+      {
+        "label": "Depth and construction budgets",
+        "maps": [
+          "Fractal_Recursion",
+          "Fractal_MengerSponge"
+        ]
+      },
+      {
+        "label": "Inherited branch state",
+        "maps": [
+          "Fractal_RecursiveTrees"
+        ]
+      },
+      {
+        "label": "Finite interval replacement",
+        "maps": [
+          "Fractal_CantorSet",
+          "Fractal_Synthesis"
+        ]
+      },
+      {
+        "label": "Segment and triangle replacement",
+        "maps": [
+          "Fractal_KochSierpinski"
+        ]
+      },
+      {
+        "label": "Recursive voxel subdivision",
+        "maps": [
+          "Fractal_MengerSponge"
+        ]
+      },
+      {
+        "label": "Fibonacci recurrence",
+        "maps": [
+          "Fractal_GoldenSpiral"
+        ]
+      },
+      {
+        "label": "Values versus display mappings",
+        "maps": [
+          "Fractal_GoldenSpiral"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lsystems",
+    "title": "L-Systems",
+    "concepts": [
+      {
+        "label": "Parallel symbol rewriting",
+        "maps": [
+          "LSystems_Grammar_Lab"
+        ]
+      },
+      {
+        "label": "Turtle command interpretation",
+        "maps": [
+          "LSystems_Grammar_Lab",
+          "LSystems_Grammars_And_Curves"
+        ]
+      },
+      {
+        "label": "Branch stacks and saved state",
+        "maps": [
+          "LSystems_Growth"
+        ]
+      },
+      {
+        "label": "Centreline-to-footprint mapping",
+        "maps": [
+          "LSystems_Architecture"
+        ]
+      },
+      {
+        "label": "Shared resources and execution order",
+        "maps": [
+          "LSystems_Competition"
+        ]
+      },
+      {
+        "label": "Bounded parameter interpretation",
+        "maps": [
+          "LSystems_Living"
+        ]
+      },
+      {
+        "label": "Face selection and extrusion",
+        "maps": [
+          "LSystems_Shape_Grammars"
+        ]
+      },
+      {
+        "label": "Interchangeable mark dictionaries",
+        "maps": [
+          "Assemblage_Same_Desire"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "proceduralgeneration",
+    "title": "Procedural Generation",
+    "concepts": [
+      {
+        "label": "Candidate scoring and selection",
+        "maps": [
+          "PG_Genetic_Evolution"
+        ]
+      },
+      {
+        "label": "Attraction-directed branch growth",
+        "maps": [
+          "PG_Space_Colonization"
+        ]
+      },
+      {
+        "label": "Nearest eligible target search",
+        "maps": [
+          "PG_Branching_Growth"
+        ]
+      },
+      {
+        "label": "Finite-lattice adjacency and propagation",
+        "maps": [
+          "PG_Percolation_Network"
+        ]
+      },
+      {
+        "label": "Path carving and headroom",
+        "maps": [
+          "PG_Caves_Mazes"
+        ]
+      },
+      {
+        "label": "Voxel sampling and exposed faces",
+        "maps": [
+          "PG_Sculpted_Forms"
+        ]
+      },
+      {
+        "label": "Array reflection and symmetry",
+        "maps": [
+          "PG_Mirrored_Patterns"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "softbodies",
+    "title": "Soft Bodies",
+    "concepts": [
+      {
+        "label": "Deformable mesh connectivity",
+        "maps": [
+          "SoftBodies_Soft_Body_Deformation"
+        ]
+      },
+      {
+        "label": "Pinned boundary conditions",
+        "maps": [
+          "SoftBodies_Soft_Body_Deformation",
+          "SoftBodies_Cloth_Physics"
+        ]
+      },
+      {
+        "label": "Driven constraints and response",
+        "maps": [
+          "SoftBodies_Carusell"
+        ]
+      },
+      {
+        "label": "Pressure-driven deformation",
+        "maps": [
+          "SoftBodies_Obsticals"
+        ]
+      },
+      {
+        "label": "Controlled simulation comparisons",
+        "maps": [
+          "SoftBodies_Obsticals_Part2"
+        ]
+      },
+      {
+        "label": "Simulation-to-mesh snapshots",
+        "maps": [
+          "SoftBodies_Playground_of_Joy"
+        ]
+      },
+      {
+        "label": "Gray–Scott reaction and diffusion",
+        "maps": [
+          "ProceduralGeneration_Reaction_Diffusion_Systems"
+        ]
+      },
+      {
+        "label": "Scalar-field parameter mappings",
+        "maps": [
+          "Topology_Entropy_Morphogenesis"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "isosurfaces",
+    "title": "Isosurfaces",
+    "concepts": [
+      {
+        "label": "Scalar sampling and isovalue classification",
+        "maps": [
+          "ISO_Introduction"
+        ]
+      },
+      {
+        "label": "Edge interpolation and case tables",
+        "maps": [
+          "ISO_LookupTable"
+        ]
+      },
+      {
+        "label": "Primitive field composition",
+        "maps": [
+          "ISO_ShapesGallery",
+          "ISO_ImplicitModeling"
+        ]
+      },
+      {
+        "label": "Periodic and noise fields",
+        "maps": [
+          "ISO_TorusGyroid",
+          "ISO_CaveGeneration"
+        ]
+      },
+      {
+        "label": "Ordered brush operations",
+        "maps": [
+          "ISO_Sculpting"
+        ]
+      },
+      {
+        "label": "Height fields versus volumes",
+        "maps": [
+          "ISO_FlatTerrain"
+        ]
+      },
+      {
+        "label": "Spatial masks and weighted contributions",
+        "maps": [
+          "ISO_PortalLandscape"
+        ]
+      },
+      {
+        "label": "Time-varying occupancy",
+        "maps": [
+          "ISO_AnimatedNoise"
+        ]
+      },
+      {
+        "label": "Summed radial influences",
+        "maps": [
+          "ISO_Metaballs"
+        ]
+      },
+      {
+        "label": "Surface extraction and collision",
+        "maps": [
+          "ISO_Introduction",
+          "ISO_Caves",
+          "ISO_ImplicitModeling",
+          "ISO_RhizomeBody"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "boolean_surfaces",
+    "title": "Boolean Surfaces",
+    "concepts": [
+      {
+        "label": "Solid union",
+        "maps": [
+          "Boolean_Verbs",
+          "Boolean_Gallery"
+        ]
+      },
+      {
+        "label": "Solid intersection",
+        "maps": [
+          "Boolean_Verbs",
+          "Boolean_Gallery"
+        ]
+      },
+      {
+        "label": "Ordered solid subtraction",
+        "maps": [
+          "Boolean_Verbs",
+          "Boolean_Works"
+        ]
+      },
+      {
+        "label": "Point-membership volume estimates",
+        "maps": [
+          "Boolean_Verbs"
+        ]
+      },
+      {
+        "label": "Operand transforms and composition",
+        "maps": [
+          "Boolean_Gallery",
+          "Boolean_Works"
+        ]
+      },
+      {
+        "label": "Visible boundaries versus collision",
+        "maps": [
+          "Boolean_Verbs",
+          "Boolean_Works"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "swarmintelligence",
+    "title": "Swarm Intelligence",
+    "concepts": [
+      {
+        "label": "Trail sensing and deposition",
+        "maps": [
+          "SwarmIntelligence_PhysarumColony"
+        ]
+      },
+      {
+        "label": "Position-indexed steering fields",
+        "maps": [
+          "SwarmIntelligence_FlowFields"
+        ]
+      },
+      {
+        "label": "Neighbour selection and flocking rules",
+        "maps": [
+          "SwarmIntelligence_Boids_Algorithm"
+        ]
+      },
+      {
+        "label": "Agent state transitions",
+        "maps": [
+          "SwarmIntelligence_Agent_Based_Modeling_ABM"
+        ]
+      },
+      {
+        "label": "Two-channel foraging simulation",
+        "maps": [
+          "SwarmIntelligence_Ant_Colony_Optimization"
+        ]
+      },
+      {
+        "label": "Personal and shared best positions",
+        "maps": [
+          "SwarmIntelligence_Particle_Swarm_Optimization"
+        ]
+      },
+      {
+        "label": "Population events and replenishment",
+        "maps": [
+          "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "machinelearning",
+    "title": "Machine Learning",
+    "concepts": [
+      {
+        "label": "Mutation and selection",
+        "maps": [
+          "ML_Evolution"
+        ]
+      },
+      {
+        "label": "Loss functions and gradient descent",
+        "maps": [
+          "ML_Gradient_Landscape"
+        ]
+      },
+      {
+        "label": "Nearest-centre clustering",
+        "maps": [
+          "ML_Classification"
+        ]
+      },
+      {
+        "label": "Weighted neural layers",
+        "maps": [
+          "ML_Neural_Networks"
+        ]
+      },
+      {
+        "label": "Training versus held-out error",
+        "maps": [
+          "ML_Neural_Networks"
+        ]
+      },
+      {
+        "label": "Sobel convolution",
+        "maps": [
+          "ML_Perception"
+        ]
+      },
+      {
+        "label": "Linear gated recurrence",
+        "maps": [
+          "ML_Sequence_Memory"
+        ]
+      },
+      {
+        "label": "Scripted generator–critic exchange",
+        "maps": [
+          "ML_Generative"
+        ]
+      },
+      {
+        "label": "Reference-dependent anomaly scores",
+        "maps": [
+          "ML_Synthesis"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "graphtheory",
+    "title": "Graph Theory",
+    "concepts": [
+      {
+        "label": "Adjacency lists and traversal",
+        "maps": [
+          "GT_Foundations"
+        ]
+      },
+      {
+        "label": "Topology versus force-directed layout",
+        "maps": [
+          "GT_Layout"
+        ]
+      },
+      {
+        "label": "Predecessors and path reconstruction",
+        "maps": [
+          "GT_Pathfinding"
+        ]
+      },
+      {
+        "label": "Directed degree counts",
+        "maps": [
+          "GT_Network_Analysis"
+        ]
+      },
+      {
+        "label": "Mutual reachability and strong components",
+        "maps": [
+          "GT_Connectivity"
+        ]
+      },
+      {
+        "label": "Greedy spanning trees",
+        "maps": [
+          "GT_Spanning_Trees"
+        ]
+      },
+      {
+        "label": "Residual capacity and flow",
+        "maps": [
+          "GT_Flow"
+        ]
+      },
+      {
+        "label": "Matching and augmenting paths",
+        "maps": [
+          "GT_Matching"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foundationscrisis",
+    "title": "Foundations Crisis",
+    "concepts": [
+      {
+        "label": "Geometric axioms and models",
+        "maps": [
+          "Euclid_Parallel",
+          "NonEuclidean_Spaces"
+        ]
+      },
+      {
+        "label": "Geodesic angle measurement",
+        "maps": [
+          "NonEuclidean_Spaces"
+        ]
+      },
+      {
+        "label": "Bounded collection filtering",
+        "maps": [
+          "Russell_Paradox"
+        ]
+      },
+      {
+        "label": "Proof checking versus bounded search",
+        "maps": [
+          "Godel_Incompleteness"
+        ]
+      },
+      {
+        "label": "Closed-path height differences",
+        "maps": [
+          "Escher_Impossible"
+        ]
+      },
+      {
+        "label": "Finite prefixes and witnesses",
+        "maps": [
+          "Brouwer_Intuitionism"
+        ]
+      },
+      {
+        "label": "Finite diagonal construction",
+        "maps": [
+          "Brouwer_Intuitionism"
+        ]
+      },
+      {
+        "label": "Conflict storage versus inference",
+        "maps": [
+          "Florensky_Paraconsistent"
+        ]
+      },
+      {
+        "label": "Finite logistic-map iteration",
+        "maps": [
+          "Crisis_Synthesis"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "qfeplaboratory",
+    "title": "QFEP Laboratory",
+    "concepts": [
+      {
+        "label": "Weighted scalar combinations",
+        "maps": [
+          "QFEP_Introduction"
+        ]
+      },
+      {
+        "label": "Binary Shannon entropy",
+        "maps": [
+          "QFEP_F_Term"
+        ]
+      },
+      {
+        "label": "Expected and realised prediction error",
+        "maps": [
+          "QFEP_F_Term"
+        ]
+      },
+      {
+        "label": "Tree pruning and outcome counts",
+        "maps": [
+          "QFEP_E_Term"
+        ]
+      },
+      {
+        "label": "Signed changes and rates",
+        "maps": [
+          "QFEP_Phi_Term"
+        ]
+      },
+      {
+        "label": "Numerical step-size comparisons",
+        "maps": [
+          "QFEP_Edge_Of_Chaos"
+        ]
+      },
+      {
+        "label": "Connected versus held inputs",
+        "maps": [
+          "QFEP_Sandbox"
+        ]
+      },
+      {
+        "label": "Stiffness and damping mappings",
+        "maps": [
+          "QFEP_Synthesis"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "postfoundationscrisis",
+    "title": "Post-Crisis",
+    "concepts": [
+      {
+        "label": "Authored coordinate interpolation",
+        "maps": [
+          "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+        ]
+      },
+      {
+        "label": "Circular arrangement and orientation",
+        "maps": [
+          "CriticalAlgorithms_Applied_Ethics"
+        ]
+      },
+      {
+        "label": "Conflict provenance and decision records",
+        "maps": [
+          "SpeculativeComputation_Paraconsistent_Engineering"
+        ]
+      },
+      {
+        "label": "Timestamped camera snapshots",
+        "maps": [
+          "SpeculativeComputation_Situated_Computation"
+        ]
+      },
+      {
+        "label": "Distinct contributor counting",
+        "maps": [
+          "SpeculativeComputation_Collective_Knowledge"
+        ]
+      },
+      {
+        "label": "Contribution revisions and versions",
+        "maps": [
+          "SpeculativeComputation_Collective_Knowledge"
+        ]
+      },
+      {
+        "label": "Graph adjacency and passage geometry",
+        "maps": [
+          "SpeculativeComputation_Rhizome_Network"
+        ]
+      },
+      {
+        "label": "Pose and connectivity editing",
+        "maps": [
+          "AdvancedLaboratory_Lab_Equipment_Simulation"
+        ]
+      },
+      {
+        "label": "Snapshot serialization and reconstruction",
+        "maps": [
+          "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "PostCrisis_Synthesis"
+        ]
+      }
+    ]
+  }
+]

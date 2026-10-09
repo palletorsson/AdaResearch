@@ -1,0 +1,84 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -8,8 +8,8 @@
+     "status": "desktop_verified_headset_pending",
+     "learner_verified": false,
+     "map_sha256": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+-    "text_sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b",
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "text_sha256": "001ccbe611d8c3a5fc14c32127329bb9fbaba3c0a332e0c066f1299739f59be3",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Descent",
+     "verification_scope": "Historical 36-check museum run with unchanged primary/map/text/source fingerprints; current static-diagram label repair checked separately."
+   },
+   "FormFinding_Catenary": {
+@@ -22,10 +22,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "formfinding",
+     "text_path": "commons/maps/FormFinding_Catenary/final.md",
+-    "text_sha256": "10a77ddaedbf1044fd4d7a6c56d10d14ae0eed55c73d589e622a26fa13b3daab",
++    "text_sha256": "f7b8ad49fc6db7b5ec5da2f311139fb67b5574660aa304241a972800786b484f",
+     "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Catenary",
+     "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+   },
+   "FormFinding_Relaxation": {
+@@ -38,10 +38,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "formfinding",
+     "text_path": "commons/maps/FormFinding_Relaxation/final.md",
+-    "text_sha256": "e6dc5f028daa2703a6ca03165f9496fe0a3705a0f58f077f29ef5675206f296f",
++    "text_sha256": "5d2a2518176fea3bb280917f6c8d7d8d06d2c0df1a584f3822b9b16f6944bc12",
+     "map_sha256": "e8f61c07b352c3d810beb326defbcb7d35aec34be72ffb0014a13c6d76afd625",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Relaxation",
+     "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+   },
+   "FormFinding_Equilibrium": {
+@@ -53,10 +53,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "formfinding",
+     "text_path": "commons/maps/FormFinding_Equilibrium/final.md",
+-    "text_sha256": "7a10f7826640b1ec4b3a21c0885142d56ece2c68760daf27335527aa50a7f480",
++    "text_sha256": "d5253a28a4060b9585909d15c092e9df444aa2b9fe5d78638225488269b04f1b",
+     "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Equilibrium",
+     "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+   },
+   "FormFinding_Annealing": {
+@@ -69,25 +69,26 @@
+     "status": "desktop_checked_native_teardown_unresolved",
+     "sequence": "formfinding",
+     "text_path": "commons/maps/FormFinding_Annealing/final.md",
+-    "text_sha256": "47f2158ba9df6f9ac31ed1a86fa9265ff51f19d92b2fe3d2868ef286971b893f",
++    "text_sha256": "c090a2395b79370f5fd40d0ff34f5c4e9344798d11a287035fa7e268d5742b6d",
+     "map_sha256": "dc537606fed8ef042ca5e77257f9007c385c3e169dc79e71699dfa275ce0dab2",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Annealing",
+     "verification_scope": "Documented behavior and museum placement checks; isolated Annealing/Q behavior checks complete but native teardown crashes. This is not a clean overall runtime pass. Headset and learner validation remain open."
+   },
+   "FormFinding_Forge": {
+     "primary_tokens": [
+       "balance_puzzle",
++      "self_shaping_forge",
+       "gradient_descent_optimizer"
+     ],
+-    "reason": "Question a height-and-stability success rule; compare optimizer histories and distinguish a boundary stop from small slope.",
++    "reason": "Compare a height-and-stability success rule, an authored body gathered by a clock, and local optimizer histories; distinguish recognition, destination and stopping conditions.",
+     "status": "desktop_checked_headset_pending",
+     "sequence": "formfinding",
+     "text_path": "commons/maps/FormFinding_Forge/final.md",
+-    "text_sha256": "6d9bf4a31906d8ce3a7994607c85fffa17151b697bf5fdd1e60109ab3a887e37",
++    "text_sha256": "5bc0dcae07ffd7654926d0f25b8d41bd1d36a2612efe2d6a72b39f848187355a",
+     "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Forge",
+     "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+   }
+ }

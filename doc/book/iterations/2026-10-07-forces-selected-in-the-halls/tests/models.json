@@ -1,0 +1,196 @@
+{
+  "checks": [
+    {
+      "label": "bubble_blaster builds",
+      "passed": true
+    },
+    {
+      "label": "catapult builds",
+      "passed": true
+    },
+    {
+      "label": "human_catapult builds",
+      "passed": true
+    },
+    {
+      "label": "human catapult queues launch with movement owner",
+      "passed": true
+    },
+    {
+      "label": "catapult keeps forward and upward velocity",
+      "passed": true
+    },
+    {
+      "label": "firework_burst builds",
+      "passed": true
+    },
+    {
+      "label": "fountain has forty-eight actual moving sparks",
+      "passed": true
+    },
+    {
+      "label": "fountain reaches automatic hold",
+      "passed": true
+    },
+    {
+      "label": "automatic hold retains actual position",
+      "passed": true
+    },
+    {
+      "label": "large fountain rises over five metres",
+      "passed": true
+    },
+    {
+      "label": "automatic hold resumes",
+      "passed": true
+    },
+    {
+      "label": "nearby button freezes only fountain clock",
+      "passed": true
+    },
+    {
+      "label": "nearby button resumes fountain",
+      "passed": true
+    },
+    {
+      "label": "spark acceleration remains gravity",
+      "passed": true
+    },
+    {
+      "label": "force_mower builds",
+      "passed": true
+    },
+    {
+      "label": "wind_room builds",
+      "passed": true
+    },
+    {
+      "label": "wind has eight real grabbable bodies",
+      "passed": true
+    },
+    {
+      "label": "wind changes actual rigid body velocity",
+      "passed": true
+    },
+    {
+      "label": "same wind accelerates lighter mass more",
+      "passed": true
+    },
+    {
+      "label": "matching air velocity produces no drag",
+      "passed": true
+    },
+    {
+      "label": "calm control removes air velocity",
+      "passed": true
+    },
+    {
+      "label": "turn control changes actual force direction",
+      "passed": true
+    },
+    {
+      "label": "wind pushes the player receiver",
+      "passed": true
+    },
+    {
+      "label": "force_vortex builds",
+      "passed": true
+    },
+    {
+      "label": "vortex carries with inward and tangent components",
+      "passed": true
+    },
+    {
+      "label": "vortex ejects with movement-owned inertia",
+      "passed": true
+    },
+    {
+      "label": "viscosity_layers builds",
+      "passed": true
+    },
+    {
+      "label": "centrifuge_ring builds",
+      "passed": true
+    },
+    {
+      "label": "centrifuge handle recognizes actual XR player",
+      "passed": true
+    },
+    {
+      "label": "centrifuge installs XR motion adapter",
+      "passed": true
+    },
+    {
+      "label": "held ring imparts tangential velocity",
+      "passed": true
+    },
+    {
+      "label": "ring leaves tracked head transform intact",
+      "passed": true
+    },
+    {
+      "label": "ring moves the real XR collision body",
+      "passed": true
+    },
+    {
+      "label": "ring keeps the moving body near its circle",
+      "passed": true
+    },
+    {
+      "label": "release retains tangent then slows",
+      "passed": true
+    },
+    {
+      "label": "nearby speed changes circle speed",
+      "passed": true
+    },
+    {
+      "label": "held controller action also changes speed",
+      "passed": true
+    },
+    {
+      "label": "SpringSuspension builds",
+      "passed": true
+    },
+    {
+      "label": "suspension leaves museum camera and sky alone",
+      "passed": true
+    },
+    {
+      "label": "suspension uses an actual 6DOF joint",
+      "passed": true
+    },
+    {
+      "label": "suspension has a force-transmitting grip",
+      "passed": true
+    },
+    {
+      "label": "Jolt suspension responds to impulse",
+      "passed": true
+    },
+    {
+      "label": "spring_tower builds",
+      "passed": true
+    },
+    {
+      "label": "orbit_walk builds",
+      "passed": true
+    },
+    {
+      "label": "momentum_cradle builds",
+      "passed": true
+    },
+    {
+      "label": "newton_cradle builds",
+      "passed": true
+    },
+    {
+      "label": "launch_arc builds",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "physics": "Jolt Physics",
+  "scope": "Production scenes, deterministic clocks, rigid body response, supplied desktop and XR hand events. Headset feel not tested."
+}

@@ -1,0 +1,298 @@
+{
+	"checks": [
+		{
+			"name": "01-colour display size",
+			"passed": true
+		},
+		{
+			"name": "01-colour waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "unseeded replay continues stream",
+			"passed": true
+		},
+		{
+			"name": "02-seed display size",
+			"passed": true
+		},
+		{
+			"name": "02-seed waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "02-seed replay recovers colours",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "02-seed left assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "03-grid display size",
+			"passed": true
+		},
+		{
+			"name": "03-grid waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "03-grid replay recovers colours",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "03-grid left assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "04-pair display size",
+			"passed": true
+		},
+		{
+			"name": "04-pair waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "04-pair replay recovers colours",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "04-pair left assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "04-pair right assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw display size",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw replay recovers colours",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw left assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "05-unused-draw right assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles display size",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles waiting consumes no draw",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles replay recovers colours",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed 0",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed 1",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed 42",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed 137",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed 999",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles left assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "06-channel-roles right assignments seed -3",
+			"passed": true
+		},
+		{
+			"name": "seed-in-loop edit compiles",
+			"passed": true
+		},
+		{
+			"name": "per-cube reset repeats one colour",
+			"passed": true
+		},
+		{
+			"name": "grey assignment edit compiles",
+			"passed": true
+		},
+		{
+			"name": "grey assignment retains draw positions",
+			"passed": true
+		}
+	],
+	"engine": {
+		"build": "official",
+		"hash": "89cea143987d564363e15d207438530651d943ac",
+		"hex": 263680,
+		"major": 4,
+		"minor": 6,
+		"patch": 0,
+		"status": "stable",
+		"string": "4.6-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"passed": true,
+	"scope": "Complete portable scripts, actual replay signal, six seeds, two learner edits; no learner or headset trial."
+}

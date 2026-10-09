@@ -1,0 +1,20 @@
+--- before/commons/maps/Color_Paint/final.md
++++ current/commons/maps/Color_Paint/final.md
+@@ -9,6 +9,8 @@
+ Thirty pigment balls wait on the low tray. Pick one up and aim it at the canvas. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish. Release the ball. It returns to its place, and your marks stop arriving. The other painter continues.
+ 
+ Which part of the image can you still call yours?
++
++The canvas has its own addresses. `u` and `v` measure position across the surface, each from zero at one edge to one at the other. The automatic painter supplies both coordinates:
+ 
+ ```gdscript
+ var uv := Vector2(0.5+0.43*sin(elapsed*0.71),0.5+0.4*sin(elapsed*1.13+0.6))
+@@ -24,7 +26,7 @@
+ surface.draw_line(previous,uv,color,12,256)
+ ```
+ 
+-That is the automatic caller: brush radius twelve pixels, positions snapped to 256 divisions along each axis. The manual balls carry their own brush sizes and snap resolutions. Try another ball. Colour changes, but it is not the only difference in your hand. As in Trace, the apparently continuous movement passes through a finite choice of positions.
++That is the automatic caller: brush radius twelve pixels, positions snapped to 256 divisions along each axis. The manual balls carry their own brush sizes and snap resolutions. Try another ball. Colour changes, but it is not the only difference in your hand. The apparently continuous movement passes through a finite choice of positions, as the drawn line did in Trace.
+ 
+ The wet canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, shifts the sampling position, and fades the result toward white. The surface remembers by becoming another image. It does not preserve a list of gestures that can be retrieved intact.
+ 

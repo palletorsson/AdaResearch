@@ -1,0 +1,86 @@
+{
+  "sequence": "isosurfaces",
+  "maps": [
+    "ISO_ImplicitModeling"
+  ],
+  "live_sequence_maps": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "museum_template": "castelvecchio-pinch-v2",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "79b27a4c5fee4cd354f0587d82fa5722287bb8e6e7df6158284f97e8d5c98516",
+    "commons/data/museum/em_plan.json": "79b27a4c5fee4cd354f0587d82fa5722287bb8e6e7df6158284f97e8d5c98516",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/isosurfaces.json": "bf634fa525b2e1947f4df2ef69da275d4c411933f88c7808ca3bf4421df533f9",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/ISO_ImplicitModeling/map_data.json": "dcb59152a1fd03fd9d99a925d9d67094eb3b2908b69887cd843daacc9b6fd4f7"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "4d8073400f203351091b4d3c925367b6283249e9b9e322c94566846d58d5b873",
+    "commons/data/museum/em_plan.json": "4d8073400f203351091b4d3c925367b6283249e9b9e322c94566846d58d5b873",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "preservation": "All unrelated plan rows, placements, top-level metadata and relative order retained.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "ISO_ImplicitModeling",
+      "pearl_index": 11,
+      "room": {
+        "w": 16,
+        "h": 18
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 16,
+        "src_h": 18,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T074906143312Z"
+}

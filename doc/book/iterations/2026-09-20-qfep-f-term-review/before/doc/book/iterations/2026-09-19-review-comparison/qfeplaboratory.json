@@ -1,0 +1,48 @@
+{
+  "status": "Introduction reviewed; F Term next",
+  "summary": "The laboratory starts with an existing question worth keeping: can different arrangements give the same total? KEEP now makes their difference visible. The main manuscript is preserved and extended around that comparison. All eleven placed families remain. Two declared halls still need restoration to the museum route.",
+  "items": [
+    {
+      "title": "The outline remembers what the total cannot",
+      "description": "KEEP retains one arrangement while you move the four controls. A pale outline stays beside the current coloured shape, and the readout shows the retained total and difference. The diagram can disagree while the number agrees.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-kept-a.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-current-b.png"
+      ],
+      "captions": [
+        "Keep A: F 0.4, E 0.2, lambda 0.5, phi 0.5. Total 0.450.",
+        "Change to B: F 0.6, E 0.6. Total 0.450 again; A remains as a pale outline."
+      ],
+      "image_note": "Same camera, two states of the actual revised Godot museum. These are not before/after software versions. The test operates the existing KEEP button signal and slider components; tracked hands remain untested.",
+      "text_kind": "book — preserve the question, strengthen its encounter",
+      "before": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Then try changing another control to return the result towards its earlier value. Look for two configurations that look different on the axes but give nearly the same total.",
+      "after": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Press KEEP. A pale outline holds that arrangement while your next movements redraw the coloured shape.\n\nNow try changing two controls to return the result towards the kept total. Look for two configurations that look different on the axes but give nearly the same number. The outline remembers what the total cannot.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/final.diff",
+      "report_label": "Exact introduction manuscript diff"
+    },
+    {
+      "title": "A handle can move without changing this total",
+      "description": "The chapter’s existing zero-weight experiment stays. With lambda at zero, the E vertex moves but its contribution to the total is zero. The saved shape makes the movement visible. The controls also state their domains; the colour names a nearest authored example rather than a detected physical phase.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-low.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-high.png"
+      ],
+      "captions": [
+        "Lambda zero, E 0.1. Keep this arrangement: total 0.550.",
+        "Lambda still zero, E 0.9. Another shape; total still 0.550."
+      ],
+      "image_note": "The unchanged total is a property of this expression. It does not establish that entropy or change has disappeared from the surrounding room.",
+      "text_kind": "book — names and ranges belong to particular instruments",
+      "before": "The named phase on the display is selected by comparing the knob arrangement with authored reference configurations. A changing name therefore reports proximity to a project example; it does not announce an experimentally detected physical phase transition.",
+      "after": "All four rails on this console run from zero to one. Its phi is a nonnegative weight; the separate phi rail nearby, and the later Phi hall, also allow negative values. A familiar symbol does not guarantee the same range. Read the rail as well as the letter.\n\nThe display says “nearest project reference.” Its name and colour come from comparing your arrangement with seven authored examples. A name can change while you are still moving the same four handles. Watch when it changes: the border between two reference examples is a choice made in the comparison, not an experimentally detected physical phase transition.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/QFEP_Introduction-runtime.json",
+      "report_label": "21 control checks and five walking routes"
+    },
+    {
+      "title": "Preserve the hall’s ecology; restore the next encounter",
+      "description": "The workbench and formula face the entrance, with the blocked exit cleared. All eleven placed artifact families remain. Supporting notes distinguish implemented behaviour from retained proposals for memory projections and a responsive room. The existing large wave screen and synthesis stand still need later attention. Next is restoring QFEP_F_Term in its declared position; QFEP_Sandbox is the other missing hall.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md",
+      "report_label": "Findings, decisions, full-hall image and limits"
+    }
+  ]
+}

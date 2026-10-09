@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "check": "two independently collidable CSG roots",
+      "pass": true
+    },
+    {
+      "check": "difference for room; intersection for positive",
+      "pass": true
+    },
+    {
+      "check": "identical void dimensions, details and transforms",
+      "pass": true
+    },
+    {
+      "check": "both result meshes generated",
+      "pass": true
+    },
+    {
+      "check": "mesh triangle counts",
+      "pass": true,
+      "positive": 1750,
+      "room": 1770
+    },
+    {
+      "check": "sampled room and positive do not overlap",
+      "pass": true
+    },
+    {
+      "check": "sampled room and positive fill the stock together",
+      "pass": true
+    },
+    {
+      "check": "partition samples",
+      "gaps": 0,
+      "overlaps": 0,
+      "pass": true,
+      "samples": 120
+    },
+    {
+      "check": "doorway void corresponds to positive matter",
+      "pass": true
+    },
+    {
+      "check": "window void corresponds to positive matter",
+      "pass": true
+    },
+    {
+      "check": "inside void corresponds to positive matter",
+      "pass": true
+    },
+    {
+      "check": "wall rail becomes an indentation in the positive",
+      "pass": true
+    },
+    {
+      "check": "wall below rail keeps inverse correspondence",
+      "pass": true
+    },
+    {
+      "check": "positive clipped to stock, not the unbounded cutter",
+      "pass": true
+    },
+    {
+      "check": "only this facade window's visual pane removed",
+      "pass": true
+    },
+    {
+      "check": "only this doorway's visual backing removed",
+      "pass": true
+    },
+    {
+      "check": "enter, visit alcove and return reaches every waypoint",
+      "pass": true
+    },
+    {
+      "check": "enter, visit alcove and return stays supported",
+      "pass": true
+    },
+    {
+      "check": "room window sill prevents walking through",
+      "pass": true
+    },
+    {
+      "check": "positive doorway is solid",
+      "pass": true
+    },
+    {
+      "check": "walk around positive reaches every waypoint",
+      "pass": true
+    },
+    {
+      "check": "walk around positive stays supported",
+      "pass": true
+    },
+    {
+      "check": "room window carries an unobstructed sightline",
+      "pass": true
+    },
+    {
+      "check": "capture pair",
+      "pass": true
+    },
+    {
+      "check": "capture facade",
+      "pass": true
+    },
+    {
+      "check": "capture inside",
+      "pass": true
+    },
+    {
+      "check": "capture inside-return",
+      "pass": true
+    },
+    {
+      "check": "capture positive",
+      "pass": true
+    },
+    {
+      "check": "capture positive-rail",
+      "pass": true
+    },
+    {
+      "check": "capture room-rail",
+      "pass": true
+    },
+    {
+      "check": "capture overview",
+      "pass": true
+    },
+    {
+      "check": "capture window-inside",
+      "pass": true
+    },
+    {
+      "check": "capture window-positive",
+      "pass": true
+    }
+  ],
+  "scope": "Production paired artifact in isolated desktop study; sampled mesh partition, capsule routes and native renders. Not headset or full museum-loader evidence."
+}

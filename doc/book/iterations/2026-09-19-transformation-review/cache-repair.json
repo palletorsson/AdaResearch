@@ -1,0 +1,1442 @@
+{
+  "before_sha256": "b630097329d658f8756c37ad37f07b1464cbfd69206b1efa578e83e2c0f4282a",
+  "after_sha256": "afff6259cf4e394de1bed7b17277210470e1c8db8866edb1ad00a60862f59f01",
+  "corrected_entries": 239,
+  "remaining_review_package_paths": 0,
+  "changes": [
+    {
+      "class": "PlanVitrine",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/plan_vitrine/plan_vitrine.gd",
+      "after": "res://commons/artifacts/plan_vitrine/plan_vitrine.gd",
+      "live_sha256": "8debd4432ebf9ac8b44155277f1c66c2da5c45a277f2d8a8b9dd36abbb0bc64d"
+    },
+    {
+      "class": "InteractivePointOriginForce",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/point/interactive_point_origin_force.gd",
+      "after": "res://commons/primitives/point/interactive_point_origin_force.gd",
+      "live_sha256": "96117198afcfb0e14f39615acb2dda63cc2d36c0dd67e4625d90373b8f5ddf14"
+    },
+    {
+      "class": "Origin",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/origin/origin.gd",
+      "after": "res://commons/primitives/origin/origin.gd",
+      "live_sha256": "a498746146ff3d882a1ae797dfd2ea7aa4a7b02da1d4ff8c4528598fe7502794"
+    },
+    {
+      "class": "CoordinateLine",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/line/coordinate_line.gd",
+      "after": "res://commons/primitives/line/coordinate_line.gd",
+      "live_sha256": "0a76175d3de1ca1803c73331ffcb84639f2619a99c56ba0ad94d51587f196214"
+    },
+    {
+      "class": "TriangleLinePuzzle",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+      "after": "res://commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+      "live_sha256": "f2ba6f333c928a3e327fa1a3baba001efd329a91871d891372c83b036741a1bc"
+    },
+    {
+      "class": "FontanaPuncture",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/commons/primitives/fontana_puncture/fontana_puncture.gd",
+      "after": "res://commons/primitives/fontana_puncture/fontana_puncture.gd",
+      "live_sha256": "6af81f24e98aa6ff0f23d31e0d6ec80ed27af9e8b83c0be1f165904469755973"
+    },
+    {
+      "class": "AchillesTortoise",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/combines/achilles_tortoise.gd",
+      "after": "res://commons/primitives/combines/achilles_tortoise.gd",
+      "live_sha256": "9eb63d9049f7ec462aee0dd5ef6334e9da545fc42a8c6fadd4e5b3f13a867dba"
+    },
+    {
+      "class": "BalancePuzzle",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/primitives/balance/balance_puzzle.gd",
+      "after": "res://commons/primitives/balance/balance_puzzle.gd",
+      "live_sha256": "e9b9ebfb94d70bfe02e0d8c18e96198e6d58a706eab4fc2a7d9f2ff5456d9237"
+    },
+    {
+      "class": "VRTileEditor",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/primitives/arrays/vr_tile_editor.gd",
+      "after": "res://commons/primitives/arrays/vr_tile_editor.gd",
+      "live_sha256": "179bd31103a8452c62eeada26ba0f58b883ce4419dad21878bf697f40b875f9d"
+    },
+    {
+      "class": "PatternTilePuzzle",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/primitives/arrays/pattern_tile_puzzle.gd",
+      "after": "res://commons/primitives/arrays/pattern_tile_puzzle.gd",
+      "live_sha256": "7e122673f036e21b6d7a69371a4d057ec553c0b5204b7bcd689241a0e4cc0169"
+    },
+    {
+      "class": "QFEPTransformingPattern",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/interfaces/qfep/transforming_pattern.gd",
+      "after": "res://commons/interfaces/qfep/transforming_pattern.gd",
+      "live_sha256": "9291b05cfbc90e1914bdb93fb7845dfad3df61b271e43e30e47d528e5536f5c3"
+    },
+    {
+      "class": "PhiSlider",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/interfaces/qfep/phi_slider.gd",
+      "after": "res://commons/interfaces/qfep/phi_slider.gd",
+      "live_sha256": "c57eb18b6857802fd356fe1ec5d750364188f2007d0c31bcce1b678de051543d"
+    },
+    {
+      "class": "LambdaSlider",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/interfaces/qfep/lambda_slider.gd",
+      "after": "res://commons/interfaces/qfep/lambda_slider.gd",
+      "live_sha256": "bb68145ef7a00540d4f4701115e4cf7df83433b1c20ff477f685dd2ed70748f8"
+    },
+    {
+      "class": "QFEPFormula3D",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/qfep/formula_display/qfep_formula_3d.gd",
+      "after": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.gd",
+      "live_sha256": "14b782085fcfc4f8f07f5653b0f7cc7294ef08c918306854134d0148316b92b0"
+    },
+    {
+      "class": "RussellSetBox",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/russell_set_box.gd",
+      "after": "res://commons/interfaces/foundations/russell_set_box.gd",
+      "live_sha256": "d901a2b21061d0a0dac6376cb5fde2e30fcd938dfaa097ace6524ba80055df0c"
+    },
+    {
+      "class": "MagrittePipe",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/magritte_pipe.gd",
+      "after": "res://commons/interfaces/foundations/magritte_pipe.gd",
+      "live_sha256": "5f6949e8ca936990ef4ec02f6a4efef84a49828c67fc6a5d2c0d9905c586f04f"
+    },
+    {
+      "class": "GodelStatementPlaque",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/godel_statement_plaque.gd",
+      "after": "res://commons/interfaces/foundations/godel_statement_plaque.gd",
+      "live_sha256": "eb59d836820902ce213089b4da2f904fd01d6cf7d4c68e04eb313456509caf3c"
+    },
+    {
+      "class": "FlorenskySphere",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/florensky_sphere.gd",
+      "after": "res://commons/interfaces/foundations/florensky_sphere.gd",
+      "live_sha256": "ef3fe9949e3d300bf8a9c5be0e4838d28a11a246e01416c45f96430ece9ed434"
+    },
+    {
+      "class": "EscherStaircase",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/escher_staircase.gd",
+      "after": "res://commons/interfaces/foundations/escher_staircase.gd",
+      "live_sha256": "73cff06233cf58ebc3861247a97c3510f64da90c1dad8b36e1aff4144845ed01"
+    },
+    {
+      "class": "BifurcationDiagram",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/interfaces/foundations/bifurcation_diagram.gd",
+      "after": "res://commons/interfaces/foundations/bifurcation_diagram.gd",
+      "live_sha256": "2feb888c7268f720741ecd9fce204a4c9f120d364efc5b66588aab85d9eff84d"
+    },
+    {
+      "class": "PusherBlock",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/hazards/transformation_blocks/pusher_block.gd",
+      "after": "res://commons/hazards/transformation_blocks/pusher_block.gd",
+      "live_sha256": "c619d0e13ef973bdbe2cfdac90aa838af67e4f41b584d58d059705ae56baf75c"
+    },
+    {
+      "class": "GrowerBlock",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/hazards/transformation_blocks/grower_block.gd",
+      "after": "res://commons/hazards/transformation_blocks/grower_block.gd",
+      "live_sha256": "c4c7a5be7159c0a008a8dd1e3c1a9e5b5a5daa69ccd2c7a099c02c4939c94b8a"
+    },
+    {
+      "class": "BecomingCatalyst",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/hazards/becoming_catalyst/becoming_catalyst.gd",
+      "after": "res://commons/hazards/becoming_catalyst/becoming_catalyst.gd",
+      "live_sha256": "d4f86c2853a3ee2e10859b0d4db3de725e252ac5338d1779be2982c357e385fc"
+    },
+    {
+      "class": "XRToolsPickable",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/addons/godot-xr-tools/objects/pickable.gd",
+      "after": "res://addons/godot-xr-tools/objects/pickable.gd",
+      "live_sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7"
+    },
+    {
+      "class": "CatalystModeWaveform",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_waveform.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_waveform.gd",
+      "live_sha256": "6540ad5f83859e8f7d4611c0a7bc896984276afaa8af0bd5fd18a2b0ff99bdc1"
+    },
+    {
+      "class": "CatalystModeTransformation",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_transformation.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd",
+      "live_sha256": "df86d66ed8b99d58784d0400d9139974242c781d62c010542ed2295b012ef247"
+    },
+    {
+      "class": "CatalystModeSwarm",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_swarm.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_swarm.gd",
+      "live_sha256": "cab3b865a32c0bbe8d1eaac5469a5ac7b0be20a13597299caf208a15b187edbd"
+    },
+    {
+      "class": "CatalystModePrimitives",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_primitives.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd",
+      "live_sha256": "70eb57993eb7085227fcd4325b2efde16333370fc4533ca370b80e3b54fe6036"
+    },
+    {
+      "class": "CatalystModeFractal",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_fractal.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_fractal.gd",
+      "live_sha256": "c4042e2ba61f61bfb7ff2447f00c6732a18d273961d72c6be7d17ed4175b6c56"
+    },
+    {
+      "class": "CatalystModeForces",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_forces.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_forces.gd",
+      "live_sha256": "931f76cb1472be1b3dc20201cd8aa033b63b1a873e3ba2ab34af43cbd8e9e3c4"
+    },
+    {
+      "class": "CatalystModeChromatic",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_chromatic.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd",
+      "live_sha256": "ef644de4e123496f81e42913cab95e28939a50a613e012b098ed37bab5cb4a9a"
+    },
+    {
+      "class": "CatalystModeChaos",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_chaos.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_chaos.gd",
+      "live_sha256": "92999a4eb2423d7b78f2e8abd9414cf4a8dc52145e8386f90996ecb48ef1579b"
+    },
+    {
+      "class": "CatalystModeCellular",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_cellular.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_cellular.gd",
+      "live_sha256": "0e798f1a4a1ec9680993ba72dc14b6edc365c696397bbb32bfa31bc56a3e7a69"
+    },
+    {
+      "class": "CatalystModeBranching",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/hazards/becoming_catalyst/modes/mode_branching.gd",
+      "after": "res://commons/hazards/becoming_catalyst/modes/mode_branching.gd",
+      "live_sha256": "34d77dec50009b86313443f114e1638bca5109e8d6a7c4f513b46c9ab7f50f2a"
+    },
+    {
+      "class": "GridColorMutator",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/grid/mutators/grid_color_mutator.gd",
+      "after": "res://commons/grid/mutators/grid_color_mutator.gd",
+      "live_sha256": "3b11687cb50f8a6015e05ac32c04fe661a8d91f8860d7a1c496de62868c6d5bf"
+    },
+    {
+      "class": "NoiseSpace",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/commons/context/walkgrids/NoiseSpace.gd",
+      "after": "res://commons/context/walkgrids/NoiseSpace.gd",
+      "live_sha256": "850ffe4e129660f1c0e30467fe4833203eeb22f4ef4a0a7c2945675658e087ec"
+    },
+    {
+      "class": "StandaloneDiscoFloor",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "after": "res://commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "live_sha256": "78bd84964e1d69d69e62fca24c324f3bb2dbd1ea3033acc5b9a1880791998427"
+    },
+    {
+      "class": "DiscoSequencerBridge",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/context/discofloor/DiscoSequencerBridge.gd",
+      "after": "res://commons/context/discofloor/DiscoSequencerBridge.gd",
+      "live_sha256": "dae7721972aaa4345cbfef5646f1731fbf15b09d5659dbdcc656f8397b660652"
+    },
+    {
+      "class": "StepSequencer",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/audio/sequencer/step_sequencer.gd",
+      "after": "res://commons/audio/sequencer/step_sequencer.gd",
+      "live_sha256": "319e801f9b12d32112ce33137a7039cd1f6acda0b796dc044e5d8524c56cd8c1"
+    },
+    {
+      "class": "SequencerUI",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/audio/sequencer/sequencer_ui.gd",
+      "after": "res://commons/audio/sequencer/sequencer_ui.gd",
+      "live_sha256": "991b8087fd483890ed7183530bb5d5db7a006418253c75ea25baa28099406499"
+    },
+    {
+      "class": "RackTemplates",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/commons/audio/rack_templates/RackTemplates.gd",
+      "after": "res://commons/audio/rack_templates/RackTemplates.gd",
+      "live_sha256": "56e9e4839c87597226e53fdebac9a634fca656b96bb98d3ab686cab0050c6ed7"
+    },
+    {
+      "class": "CustomSoundGenerator",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/audio/generators/CustomSoundGenerator.gd",
+      "after": "res://commons/audio/generators/CustomSoundGenerator.gd",
+      "live_sha256": "00c7d499bf1988fc6cdbc98bfef408c4973a3562155e188605f09e67ba4067ca"
+    },
+    {
+      "class": "AudioSynthesizer",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/audio/generators/AudioSynthesizer.gd",
+      "after": "res://commons/audio/generators/AudioSynthesizer.gd",
+      "live_sha256": "dc0decba71418fcf60538bf5b3076d46993cf3eba4884cf8ab89b2c167bf2ef2"
+    },
+    {
+      "class": "Whiteboard",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/whiteboard/whiteboard.gd",
+      "after": "res://commons/artifacts/whiteboard/whiteboard.gd",
+      "live_sha256": "e5c232e540fe75854400347330aea0d632e80ee350b88a9f58dbae25ebc26b91"
+    },
+    {
+      "class": "VectorNormalizeDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+      "after": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+      "live_sha256": "1bebf6c519e6a85df4b621078378fc522caa07f93da3437f77acc5d54dc00054"
+    },
+    {
+      "class": "TuringPatternGenerator",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+      "after": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+      "live_sha256": "28316a932641f9c6568a7a0b1bfc007703b06f1c4b9f7ca67c951f5849faa2df"
+    },
+    {
+      "class": "TriangleCurvatureWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd",
+      "after": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd",
+      "live_sha256": "c250793e7d59db5ce3d1056a4aae50f8fba63bab756c08e4ba5ad2fdf8cf540b"
+    },
+    {
+      "class": "TangentSlopeWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/change/sources/commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+      "after": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+      "live_sha256": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc"
+    },
+    {
+      "class": "SuperpositionDisplay",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/superposition_display/superposition_display.gd",
+      "after": "res://commons/artifacts/superposition_display/superposition_display.gd",
+      "live_sha256": "534143fd67530737589627745e28e82ebb72a4c6fc1b76093ae96704b6a6ace3"
+    },
+    {
+      "class": "StreetSign",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/street_sign/street_sign.gd",
+      "after": "res://commons/artifacts/street_sign/street_sign.gd",
+      "live_sha256": "1f0c1b33a7c2a53473ef964ca4ae509e3802180ed1c98846d653d862430ade08"
+    },
+    {
+      "class": "SituatedReadout",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/commons/artifacts/situated_readout/situated_readout.gd",
+      "after": "res://commons/artifacts/situated_readout/situated_readout.gd",
+      "live_sha256": "475e25ef004f8bcee4df688fcf342cc50b5b11a4c150ce1f692e61f73286c6f8"
+    },
+    {
+      "class": "MeshFactory",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/shared/mesh_factory.gd",
+      "after": "res://commons/artifacts/shared/mesh_factory.gd",
+      "live_sha256": "04e5f6cf061affb6cd9ce627626b509223c3515302636f707803ed62c16d223e"
+    },
+    {
+      "class": "ShannonWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/shannon_workbench/shannon_workbench.gd",
+      "after": "res://commons/artifacts/shannon_workbench/shannon_workbench.gd",
+      "live_sha256": "ddb8dd2a01b82ced17d39ed65671201f0a320a0badd817b9a8147a6ae494b3be"
+    },
+    {
+      "class": "ShannonEntropyMeter",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd",
+      "after": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd",
+      "live_sha256": "840992538a89f906326a1535b7c3bacc15d3114e6e2acf9b4daaea3f224deada"
+    },
+    {
+      "class": "ScienceScreen",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/commons/artifacts/science_screen/science_screen.gd",
+      "after": "res://commons/artifacts/science_screen/science_screen.gd",
+      "live_sha256": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+    },
+    {
+      "class": "SchrodingerBox",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/schrodinger_box/schrodinger_box.gd",
+      "after": "res://commons/artifacts/schrodinger_box/schrodinger_box.gd",
+      "live_sha256": "6fed28186ad6a53e7f4a099e58e9d17a40d22bc5b74cb6ae36f75c9051b38314"
+    },
+    {
+      "class": "RussellParadoxWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/russell_paradox_workbench/russell_paradox_workbench.gd",
+      "after": "res://commons/artifacts/russell_paradox_workbench/russell_paradox_workbench.gd",
+      "live_sha256": "35e082a70b585e6fc77477fb5fb0ab453e22705f873b8916c0f4a1fdedc54ea3"
+    },
+    {
+      "class": "RiemannSumWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/change/sources/commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+      "after": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+      "live_sha256": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f"
+    },
+    {
+      "class": "RiemannSphere",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/riemann_sphere/riemann_sphere.gd",
+      "after": "res://commons/artifacts/riemann_sphere/riemann_sphere.gd",
+      "live_sha256": "023010c7977b45dbd8a88b4ac4ac99ae8bfe80bdfe5c3dae31880ea455b84800"
+    },
+    {
+      "class": "RDArtifact",
+      "before": "res://doc/book/review-packages/2026-09-18/cellularautomata/sources/commons/artifacts/rd_artifact/rd_artifact.gd",
+      "after": "res://commons/artifacts/rd_artifact/rd_artifact.gd",
+      "live_sha256": "1de4dc73156703351c05dda6d619de7e8e0f5964630e73e0cd26de9a96f6ddb6"
+    },
+    {
+      "class": "RandomWalkTerrarium",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+      "after": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+      "live_sha256": "4e497a40663c9a9c575f04cbde6753a340f20de427311a5b519d3b560724b7cf"
+    },
+    {
+      "class": "QueerMorphologySpecimen",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+      "after": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+      "live_sha256": "0c00a813692e64541c99f3d1cc1bcdd3cece6fa750f1df5b7deb1bf683ca7881"
+    },
+    {
+      "class": "QFEPBalanceWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+      "after": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+      "live_sha256": "860e52e40aebc26fbba8b575ff223f6e2e16377afb28600a3152d4793fb2e142"
+    },
+    {
+      "class": "PoincareDisk",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/poincare_disk/poincare_disk.gd",
+      "after": "res://commons/artifacts/poincare_disk/poincare_disk.gd",
+      "live_sha256": "c846bc88377e0726639e4611fed25b52ac139d606566e19be0147dd1aa5588ee"
+    },
+    {
+      "class": "PerlinTerrainSculptor",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+      "after": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+      "live_sha256": "1671ea58af46936601c52e23e82177af833536c9b39358507fd3cd26c4082ae7"
+    },
+    {
+      "class": "PenroseTriangle",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/penrose_triangle/penrose_triangle.gd",
+      "after": "res://commons/artifacts/penrose_triangle/penrose_triangle.gd",
+      "live_sha256": "12be67d80b078dd20c3093ab70a431094abf71b0f7ae7a3e1717a6cce0a334c7"
+    },
+    {
+      "class": "PatternMakerStation",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+      "after": "res://commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+      "live_sha256": "37e2d364c298460b0ba3e1e11479fa4b02d2d95c52e3ab3dbeb2312101eabbed"
+    },
+    {
+      "class": "ParametricLSystem",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/parametric_lsystem/parametric_lsystem.gd",
+      "after": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.gd",
+      "live_sha256": "5277d140b2942c545e4fa56c1a18b79a2551bb5f66b1d5c0e5f6a57940ab2e42"
+    },
+    {
+      "class": "OrbitalMechanicsDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.gd",
+      "after": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.gd",
+      "live_sha256": "b737601f8d53f1c8118752f502331d2ad9deba862d4751822c68d16134f90136"
+    },
+    {
+      "class": "NoiseMixer",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/commons/artifacts/noise_mixer/noise_mixer.gd",
+      "after": "res://commons/artifacts/noise_mixer/noise_mixer.gd",
+      "live_sha256": "05fa7ec7b9d253f793ddfe6b82c540eb7bdf17df8185eddd35ac6a094c4261b9"
+    },
+    {
+      "class": "LSystemEditor",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/lsystem_editor/lsystem_editor.gd",
+      "after": "res://commons/artifacts/lsystem_editor/lsystem_editor.gd",
+      "live_sha256": "4f2c7af4baf3b917cdabf9d361a0327573c6f9cc83401232ada2eeb5ceb7b5db"
+    },
+    {
+      "class": "LSystemDungeon",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd",
+      "after": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd",
+      "live_sha256": "d108a925320b2ef1ae73b3e2190fbcee39b8bee51d1de9e32a225dab30c39b50"
+    },
+    {
+      "class": "JellyCube",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/artifacts/jelly_cube/jelly_cube.gd",
+      "after": "res://commons/artifacts/jelly_cube/jelly_cube.gd",
+      "live_sha256": "07c1af223670b016993592a3592e5b4deca518e34aec16aff8e0a1dd3f2ef293"
+    },
+    {
+      "class": "HyperbolicSurface",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/hyperbolic_surface/hyperbolic_surface.gd",
+      "after": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.gd",
+      "live_sha256": "4a3085134de3c87f277f010a12bd976eb6150a65b186b7bd20a2e355c5c22fcf"
+    },
+    {
+      "class": "HilbertHotel",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/hilbert_hotel/hilbert_hotel.gd",
+      "after": "res://commons/artifacts/hilbert_hotel/hilbert_hotel.gd",
+      "live_sha256": "96b3f9e61cafe962f7bbe90bb499944adee380d9d6099907dec04a3363d5f697"
+    },
+    {
+      "class": "GeneticTreeSculptor",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd",
+      "after": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd",
+      "live_sha256": "de23fd1486aca450f3cf817246f705c488b38b993682ff3fd476790f1aaad7b7"
+    },
+    {
+      "class": "GameOfLifePetri",
+      "before": "res://doc/book/review-packages/2026-09-18/cellularautomata/sources/commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+      "after": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+      "live_sha256": "50b6b681d83626ed8cab41da3cbad896275e22ed50ec936786c7064fb403f2e1"
+    },
+    {
+      "class": "FrozenGlassVessel",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+      "after": "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+      "live_sha256": "fab72efb66b50534faed18784394a1c925736642d72de3f34821084f43c7b0ee"
+    },
+    {
+      "class": "FrictionRamp",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/friction_ramp/friction_ramp.gd",
+      "after": "res://commons/artifacts/friction_ramp/friction_ramp.gd",
+      "live_sha256": "69f176c7be836131826ef8cc70855541cb7171d6838f7d1da7176596793dd3b6"
+    },
+    {
+      "class": "FlowFieldPainter",
+      "before": "res://doc/book/review-packages/2026-09-18/change/sources/commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "after": "res://commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "live_sha256": "6b4f3b828c7812781549672bcfbd952518b7a1dab0e1a0cd94f1a9b8affc7938"
+    },
+    {
+      "class": "FlockingControls",
+      "before": "res://doc/book/review-packages/2026-09-18/swarmintelligence/sources/commons/artifacts/flocking_controls/flocking_controls.gd",
+      "after": "res://commons/artifacts/flocking_controls/flocking_controls.gd",
+      "live_sha256": "52e4a6bbe57cec91c98911414476663d03369ce1a68c110401560821c1551433"
+    },
+    {
+      "class": "FitnessLandscapePolitics",
+      "before": "res://doc/book/review-packages/2026-09-18/swarmintelligence/sources/commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+      "after": "res://commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+      "live_sha256": "9fb7baff2018cc192184f4cbd89db67cdf7709e535d73bebb594e8cae5336d19"
+    },
+    {
+      "class": "AccountabilityLedger",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/commons/artifacts/accountability_ledger/accountability_ledger.gd",
+      "after": "res://commons/artifacts/accountability_ledger/accountability_ledger.gd",
+      "live_sha256": "b0000ffa93c193df8cf7d11615a80bdad0ebfcf6ab4ed4ee7da03b8cf4723a06"
+    },
+    {
+      "class": "BarberParadox",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/barber_paradox/barber_paradox.gd",
+      "after": "res://commons/artifacts/barber_paradox/barber_paradox.gd",
+      "live_sha256": "71a6d010d139cb264786b1ebd706b8bf2e5afba63978e0c8408f67e211092c1e"
+    },
+    {
+      "class": "BothTrueGate",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/both_true_gate/both_true_gate.gd",
+      "after": "res://commons/artifacts/both_true_gate/both_true_gate.gd",
+      "live_sha256": "59803c54c91e76a26e040b6ca5d84116b4a88ac1251e95c51a0c9f7562d06322"
+    },
+    {
+      "class": "ConstructiveStaircase",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/constructive_staircase/constructive_staircase.gd",
+      "after": "res://commons/artifacts/constructive_staircase/constructive_staircase.gd",
+      "live_sha256": "f7fef0c6e293f79f69a0c23a6495b6110e153e8339fee5db1eca8bc88742af6b"
+    },
+    {
+      "class": "EnergyLandscapeBench",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd",
+      "after": "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd",
+      "live_sha256": "6338dba0fd8822d7a480977937f7437674a168a42e608afb215ed5e889a936c6"
+    },
+    {
+      "class": "EntropyFan",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/entropy_fan/entropy_fan.gd",
+      "after": "res://commons/artifacts/entropy_fan/entropy_fan.gd",
+      "live_sha256": "263a6e9640f8dcc8977dd3b1419da159cfeae5dc79893336c6a05c5ebf1ebe6a"
+    },
+    {
+      "class": "FractalTrussTower",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "after": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "live_sha256": "48c88c0a7a8cdb7d20bd752b9078050666b8df83bf5fe4d8a7ee05de0c4d2f90"
+    },
+    {
+      "class": "GodelSentenceMachine",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+      "after": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+      "live_sha256": "4fa2cee894c6ec70dc95b1a8061b9806939381778f1167ebe132714e9ea6856f"
+    },
+    {
+      "class": "GradientDescentOptimizer",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "after": "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "live_sha256": "6eb3466bd05a03e677086b8570c1aaed4644ac88f2de48a3ca1d38fc16039ad1"
+    },
+    {
+      "class": "ImpossibleTrident",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/impossible_trident/impossible_trident.gd",
+      "after": "res://commons/artifacts/impossible_trident/impossible_trident.gd",
+      "live_sha256": "ecf23666c93901477093ff5483a8a0d331329f2d61be28e473b04041d777ba22"
+    },
+    {
+      "class": "LiarLoop",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/liar_loop/liar_loop.gd",
+      "after": "res://commons/artifacts/liar_loop/liar_loop.gd",
+      "live_sha256": "8b5ca0c45496b2b06382ab382d83fe555d79d9f74d6e8ad2be570b764ebad96c"
+    },
+    {
+      "class": "MassSpringBench",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "after": "res://commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "live_sha256": "ec609c654b95198867e443f2198115a648c56c8dc37de7ca344e365d3b21253e"
+    },
+    {
+      "class": "MaxQBasinRoom",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "after": "res://commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "live_sha256": "37f09f98df1a966116014a008fdf7a809441352b8b5a26438f451eeaed2fa714"
+    },
+    {
+      "class": "PeerProductionTool",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/commons/artifacts/peer_production_tool/peer_production_tool.gd",
+      "after": "res://commons/artifacts/peer_production_tool/peer_production_tool.gd",
+      "live_sha256": "91074145442be55410d8831b0790a2753aaae92ff4ec1d9893ad9bac921d190f"
+    },
+    {
+      "class": "ProvabilitySorter",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/provability_sorter/provability_sorter.gd",
+      "after": "res://commons/artifacts/provability_sorter/provability_sorter.gd",
+      "live_sha256": "92e6af26e006ba3a8616cdb0c7dc9752c3dfc44ed87f882ee7c9343f36dadcff"
+    },
+    {
+      "class": "RhizomeGrower",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/commons/artifacts/rhizome_grower/rhizome_grower.gd",
+      "after": "res://commons/artifacts/rhizome_grower/rhizome_grower.gd",
+      "live_sha256": "59fa0023006fb21394149f89ccc178a4fc0cf31dfe706740f604f68ae3a19e70"
+    },
+    {
+      "class": "SdfCavernRoom",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/commons/artifacts/sdf_cavern_room/sdf_cavern_room.gd",
+      "after": "res://commons/artifacts/sdf_cavern_room/sdf_cavern_room.gd",
+      "live_sha256": "4ffd085349c1d907c14d034ed998f199dcfff67d691038cefc3ee236decdccd6"
+    },
+    {
+      "class": "SelfMembershipSet",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/self_membership_set/self_membership_set.gd",
+      "after": "res://commons/artifacts/self_membership_set/self_membership_set.gd",
+      "live_sha256": "9b9dffb872f2934b0ec56617882dee09a1a9251189da686a49d4fa05d0e23c25"
+    },
+    {
+      "class": "VerletWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/verlet_workbench/verlet_workbench.gd",
+      "after": "res://commons/artifacts/verlet_workbench/verlet_workbench.gd",
+      "live_sha256": "962c3b5a5201dd9a40146562e78bc0f6c0aa0f48d56396bc919ebcdd72839dbc"
+    },
+    {
+      "class": "ApproachWall",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/artifacts/approach_wall/approach_wall.gd",
+      "after": "res://commons/artifacts/approach_wall/approach_wall.gd",
+      "live_sha256": "36d30eee8ebed1c5261d45cb53fff4e7fc3d507782261b68567eeac3c954b53a"
+    },
+    {
+      "class": "CarveGrid",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/artifacts/carve_grid/carve_grid.gd",
+      "after": "res://commons/artifacts/carve_grid/carve_grid.gd",
+      "live_sha256": "b1e5a35c54aa944f60ecdf382da749a8b1ece4346126598fa03bc2480170b59a"
+    },
+    {
+      "class": "ApproachScale",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/artifacts/approach_scale/approach_scale.gd",
+      "after": "res://commons/artifacts/approach_scale/approach_scale.gd",
+      "live_sha256": "e59b1cb10d908ddbca594ad9de3506fcd7bb33edf4180b4b7754d8bca42f7d3d"
+    },
+    {
+      "class": "RhizomeInside",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/commons/artifacts/radial_inside/rhizome_inside.gd",
+      "after": "res://commons/artifacts/radial_inside/rhizome_inside.gd",
+      "live_sha256": "17f48c19fe429427a1f8e83abfc1689d6d748b0ff108ef81d31e06af6be30de7"
+    },
+    {
+      "class": "DoNotCrossBarrier",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd",
+      "after": "res://commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd",
+      "live_sha256": "b611d832c3ff922c9c22bf00691d0ca8f04db6ff88b319cc05aaabf385f33377"
+    },
+    {
+      "class": "WalkThisLineMarking",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/walk_this_line_marking/walk_this_line_marking.gd",
+      "after": "res://commons/artifacts/walk_this_line_marking/walk_this_line_marking.gd",
+      "live_sha256": "7b8dc9f2777f8e26b062507d66719ffbbe505b2d59242967ca2f2679ddeac33c"
+    },
+    {
+      "class": "RemovalRoom",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/commons/artifacts/removal_room/removal_room.gd",
+      "after": "res://commons/artifacts/removal_room/removal_room.gd",
+      "live_sha256": "e02deca38910b91fdcbbcad69cd50f78344d4dfdacd60166f4047f85b34da693"
+    },
+    {
+      "class": "SubtractionSuite",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/commons/artifacts/subtraction_suite/subtraction_suite.gd",
+      "after": "res://commons/artifacts/subtraction_suite/subtraction_suite.gd",
+      "live_sha256": "7e2167ed80992369797624895febf72b7788f38f08a5b5f086f75d72a2037ff6"
+    },
+    {
+      "class": "CoincidentFace",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/booleansurfaces/coincident_face/coincident_face.gd",
+      "after": "res://algorithms/booleansurfaces/coincident_face/coincident_face.gd",
+      "live_sha256": "bc99fe63d3ceb4b13364d4303cd7769005339a5cd9cc2a84b48b3991cec66a6a"
+    },
+    {
+      "class": "WallpaperCage",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd",
+      "after": "res://algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd",
+      "live_sha256": "f25c9697ed1621cc60ae431ffdb3c9574177bf4d67f6ba50e2a166048f7bcf29"
+    },
+    {
+      "class": "ExcludedMiddleDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/excluded_middle_demo/excluded_middle_demo.gd",
+      "after": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.gd",
+      "live_sha256": "19a5269490ebf42f638bd951d81461a27f0dab336d08cc6ad766698cdbd4d7a9"
+    },
+    {
+      "class": "EuclidPostulatesPlaque",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.gd",
+      "after": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.gd",
+      "live_sha256": "7341addff30195c22bf4950088524f78b9e22ef5590e636344e9ef45c7ecff90"
+    },
+    {
+      "class": "EllipticSurface",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/elliptic_surface/elliptic_surface.gd",
+      "after": "res://commons/artifacts/elliptic_surface/elliptic_surface.gd",
+      "live_sha256": "f4748a219dad5610c38ce3118456dc9eb439e4388a24895e9254e177f1c76b94"
+    },
+    {
+      "class": "EdgeOfChaosUnlocked",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+      "after": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+      "live_sha256": "c0ba684088951edc38b13c346e199bca26070b655ef8ce197bb77be0a49dff1d"
+    },
+    {
+      "class": "DistributionSampler",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/commons/artifacts/distribution_sampler/distribution_sampler.gd",
+      "after": "res://commons/artifacts/distribution_sampler/distribution_sampler.gd",
+      "live_sha256": "802fc74e9bf66547c4b066cc65a9db4e19891ab18d6ac01bf65e5f6358483669"
+    },
+    {
+      "class": "DarkSphere",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/commons/artifacts/dark_sphere/dark_sphere.gd",
+      "after": "res://commons/artifacts/dark_sphere/dark_sphere.gd",
+      "live_sha256": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839"
+    },
+    {
+      "class": "CurvatureSlider",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/curvature_slider/curvature_slider.gd",
+      "after": "res://commons/artifacts/curvature_slider/curvature_slider.gd",
+      "live_sha256": "f14318e959cead6a09768b76336b5bcf152b022d86819d3db2c103fe89197289"
+    },
+    {
+      "class": "ControlPendulum",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/commons/artifacts/control_pendulum/control_pendulum.gd",
+      "after": "res://commons/artifacts/control_pendulum/control_pendulum.gd",
+      "live_sha256": "2bcd4ce84c90868fd5b2d312b232c1929844d2cd6d5a1cca5dfc92fca827b02b"
+    },
+    {
+      "class": "ConstructiveProof",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/constructive_proof/constructive_proof.gd",
+      "after": "res://commons/artifacts/constructive_proof/constructive_proof.gd",
+      "live_sha256": "8b511534dc6b7006004094675ef89265e3bb563157917bbcd75ef78277ab363a"
+    },
+    {
+      "class": "ConcreteBarrier",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/concrete_barrier/concrete_barrier.gd",
+      "after": "res://commons/artifacts/concrete_barrier/concrete_barrier.gd",
+      "live_sha256": "874cc5ef8146b69fc7142df5d4851ebc7a2373bec323a9a6649eb8984dc13427"
+    },
+    {
+      "class": "ColorSpaceNavigator",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/artifacts/color_space_navigator/color_space_navigator.gd",
+      "after": "res://commons/artifacts/color_space_navigator/color_space_navigator.gd",
+      "live_sha256": "4f2412e416018e945824dd0b315e73de4da6fe146a8a676b78d91a6f4660cfde"
+    },
+    {
+      "class": "CARuleExplorer",
+      "before": "res://doc/book/review-packages/2026-09-18/cellularautomata/sources/commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+      "after": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+      "live_sha256": "02c277de0a760857bfba88a2e679689f9463d90ae32edab5b5a75dfef3cf7226"
+    },
+    {
+      "class": "ArtifactCatalogDataProvider",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/artifacts/catalog/ArtifactCatalogDataProvider.gd",
+      "after": "res://commons/artifacts/catalog/ArtifactCatalogDataProvider.gd",
+      "live_sha256": "5d83066f87bfe81781894555d1f154f99422bedf2880d575968e340a797191f9"
+    },
+    {
+      "class": "CantorDiagonalWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/cantor_diagonal_workbench/cantor_diagonal_workbench.gd",
+      "after": "res://commons/artifacts/cantor_diagonal_workbench/cantor_diagonal_workbench.gd",
+      "live_sha256": "2196c22c678564d57adf0f4283532ef0c29c1196255926595280aca1b579b976"
+    },
+    {
+      "class": "BrouwerChoiceSequence",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.gd",
+      "after": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.gd",
+      "live_sha256": "f3e24f146305a905abc00145813277199255cdc908347dfd2a3e00591474d71c"
+    },
+    {
+      "class": "BiasFromInside",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/commons/artifacts/bias_from_inside/bias_from_inside.gd",
+      "after": "res://commons/artifacts/bias_from_inside/bias_from_inside.gd",
+      "live_sha256": "10e6fe8871032c1367ff3e3b29d890f2c5dcaefd74bc6c9dc85eceea865a7b8f"
+    },
+    {
+      "class": "DisplayMount",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/ui/display_mount.gd",
+      "after": "res://commons/ui/display_mount.gd",
+      "live_sha256": "d56a0e1c32f5f47359e88782b139d9fe04b76dc62ca0f064678ecae7c195ff26"
+    },
+    {
+      "class": "ControlPanel",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/ui/control_panel.gd",
+      "after": "res://commons/ui/control_panel.gd",
+      "live_sha256": "488dd1255dd3b6da3c4e522b798f87f54bb0f38ef923c879fd83cf72f7f7552d"
+    },
+    {
+      "class": "TextScreen",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/ui/text_screen.gd",
+      "after": "res://commons/ui/text_screen.gd",
+      "live_sha256": "2398948ab6043b9998c674c7f65665a76ab3fefd5aaf62477b867fb19341e3a5"
+    },
+    {
+      "class": "ForceCube",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/force_cube/force_cube.gd",
+      "after": "res://commons/artifacts/force_cube/force_cube.gd",
+      "live_sha256": "fb52735b3a6b132f6b9ef7640c19fc14335d898f74adf944de6f8f2dce03423b"
+    },
+    {
+      "class": "ForceMower",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/force_mower/force_mower.gd",
+      "after": "res://commons/artifacts/force_mower/force_mower.gd",
+      "live_sha256": "173ac5564474a7f73a5dd33a59dab811f381a485763c5904cd4787965097ad77"
+    },
+    {
+      "class": "VectorOpConsole",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/vector_op_console/vector_op_console.gd",
+      "after": "res://commons/artifacts/vector_op_console/vector_op_console.gd",
+      "live_sha256": "c7eb0db0720e531ab3565b1b1922c3c4dc86dfbc2ee8c04529c36e39ec491eb5"
+    },
+    {
+      "class": "PatternTunnelMachine",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd",
+      "after": "res://commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd",
+      "live_sha256": "d007cf240ccc629f781cd372e3e3a8bc3ecc6e9358979271f59f199614f57808"
+    },
+    {
+      "class": "CollisionCarts",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/collision_carts/collision_carts.gd",
+      "after": "res://commons/artifacts/collision_carts/collision_carts.gd",
+      "live_sha256": "dfe20a2052fb90a8c7e766f2579a2ab570ff499a15c87f1e2b32b2a62083d083"
+    },
+    {
+      "class": "GoedelAtrium",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/goedel_atrium/goedel_atrium.gd",
+      "after": "res://commons/artifacts/goedel_atrium/goedel_atrium.gd",
+      "live_sha256": "8321212af78f0ed35c74eea09e435a2fae4b2978dcc6c1f73ef00f9bb3434fcd"
+    },
+    {
+      "class": "LambdaHall",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/artifacts/lambda_hall/lambda_hall.gd",
+      "after": "res://commons/artifacts/lambda_hall/lambda_hall.gd",
+      "live_sha256": "9d35acdf74841243c93ce0382a021d6255565dc79b682402ad3eb9e27eddf12f"
+    },
+    {
+      "class": "TorqueCrank",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/torque_crank/torque_crank.gd",
+      "after": "res://commons/artifacts/torque_crank/torque_crank.gd",
+      "live_sha256": "9c0c2556e99d2402914e74138697daac05e89d3f02611158745c06ae9f1e64da"
+    },
+    {
+      "class": "LaunchArc",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/launch_arc/launch_arc.gd",
+      "after": "res://commons/artifacts/launch_arc/launch_arc.gd",
+      "live_sha256": "5c1d5aa79ae2988c41b23c061bed8678c6b5c6e7378afb3866b319bb786dbae9"
+    },
+    {
+      "class": "ProjectionShadow",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/projection_shadow/projection_shadow.gd",
+      "after": "res://commons/artifacts/projection_shadow/projection_shadow.gd",
+      "live_sha256": "e6e5705f946e3fcee19f19810b1b8bb8ed1ea1d61127e399688b9a60c351cd2d"
+    },
+    {
+      "class": "DotAligner",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/dot_aligner/dot_aligner.gd",
+      "after": "res://commons/artifacts/dot_aligner/dot_aligner.gd",
+      "live_sha256": "02ba7e44404e0c10db06ce941cd63188576de1826f19a3f45e6ec2b603ab92cf"
+    },
+    {
+      "class": "PatternMachineA",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/artifacts/pattern_machine_a/pattern_machine_a.gd",
+      "after": "res://commons/artifacts/pattern_machine_a/pattern_machine_a.gd",
+      "live_sha256": "74685f88879af5044bf069db9c44dddb001bbca8d9c390bda8e20ea36b753fd1"
+    },
+    {
+      "class": "AdderBoard",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/adder_board/adder_board.gd",
+      "after": "res://commons/artifacts/adder_board/adder_board.gd",
+      "live_sha256": "500a0c6972b1c6705dd9ec2184b8a398f5000693e89577f75591780802119b5d"
+    },
+    {
+      "class": "ModifierStack",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/modifiers/modifier_stack.gd",
+      "after": "res://commons/modifiers/modifier_stack.gd",
+      "live_sha256": "666ff0909c732d03ebba80f7c870dc26dc6e833e20b9fc8a88b1e62f62b857cc"
+    },
+    {
+      "class": "GridOps",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/modifiers/grid_ops.gd",
+      "after": "res://commons/modifiers/grid_ops.gd",
+      "live_sha256": "5b6182ea29f60e77952c7595edce69da7635f0ff885691e6d5db0de94ef9d842"
+    },
+    {
+      "class": "AngleSumTriangle",
+      "before": "res://doc/book/review-packages/2026-09-18/foundationscrisis/sources/commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd",
+      "after": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd",
+      "live_sha256": "e034bba7a3b9665f50181044cac1921207fb34ef62276be3e23534b72137eca6"
+    },
+    {
+      "class": "AdditiveWaveDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/commons/artifacts/additive_wave_demo/additive_wave_demo.gd",
+      "after": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.gd",
+      "live_sha256": "5ea3e3d4a41289ff9567f4071f7a4004d6c1130df194ef448615482150de1573"
+    },
+    {
+      "class": "BeatFrequencyDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd",
+      "after": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd",
+      "live_sha256": "5e2dd9bdddcdf48d36a05850142b12532582ea72f0006558aa9035136fa5dd01"
+    },
+    {
+      "class": "VectorSceneBase",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/algorithms/vectors/shared/vector_scene_base.gd",
+      "after": "res://algorithms/vectors/shared/vector_scene_base.gd",
+      "live_sha256": "71e5417c679c2781d57624912c16692ed11d268056a076c5f32bdfbaf0ff522d"
+    },
+    {
+      "class": "CarouselCake",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/algorithms/transformation/carousel_cake/carousel_cake.gd",
+      "after": "res://algorithms/transformation/carousel_cake/carousel_cake.gd",
+      "live_sha256": "eef1c359e5af74e249df172a8a60ae75fa0c4ec1d59ebdc15a4e2aae5cac4602"
+    },
+    {
+      "class": "BooleanTunnel",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/algorithms/transformation/booleanTunnel/booleanTunnel.gd",
+      "after": "res://algorithms/transformation/booleanTunnel/booleanTunnel.gd",
+      "live_sha256": "7fdd2390a7c3699e4da488ab48c8fec86a46cae8c5038d76a473dae410363799"
+    },
+    {
+      "class": "PhysarumAgent",
+      "before": "res://doc/book/review-packages/2026-09-18/swarmintelligence/sources/algorithms/swarmintelligence/physarum/PhysarumAgent.gd",
+      "after": "res://algorithms/swarmintelligence/physarum/PhysarumAgent.gd",
+      "live_sha256": "77f7ed826a83af1faee3f49d352e9fff7d7976c97e3218ac4297851a6667e8a7"
+    },
+    {
+      "class": "AntColonyOptimization",
+      "before": "res://doc/book/review-packages/2026-09-18/swarmintelligence/sources/algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+      "after": "res://algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+      "live_sha256": "21823229caad4ad851a23d22f4f1915598b098c6cde67e8f2fe87e9a1ab10eeb"
+    },
+    {
+      "class": "SimpleAnt",
+      "before": "res://doc/book/review-packages/2026-09-18/swarmintelligence/sources/algorithms/swarmintelligence/ants_v2/SimpleAnt.gd",
+      "after": "res://algorithms/swarmintelligence/ants_v2/SimpleAnt.gd",
+      "live_sha256": "8388807a62f1e127b452c8def03c69410cd1dd84d7c77a10a4fd8036f16d5ded"
+    },
+    {
+      "class": "VoxelNoiseMarchingCubes",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+      "after": "res://algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+      "live_sha256": "6009df6c13634cca7019a7db28acfa47d320ce31b66b79fc9146fad87bbac68a"
+    },
+    {
+      "class": "QueerMarchingCave",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd",
+      "after": "res://algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd",
+      "live_sha256": "64dafdba26c2d0c5758ac81b0d6f0f0f695b7f8a8fd865e8f632b54cff11d542"
+    },
+    {
+      "class": "RandomWalk128Algorithm",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/RandomWalk128Algorithm.gd",
+      "after": "res://algorithms/randomness/RandomWalk128Algorithm.gd",
+      "live_sha256": "f9c13d076e688928257d3e82784fbd2b48f9ec8bc67208701c36d8c175a8a46f"
+    },
+    {
+      "class": "SeedReplayDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/seed_replay/seed_replay_demo.gd",
+      "after": "res://algorithms/randomness/seed_replay/seed_replay_demo.gd",
+      "live_sha256": "8e97fb19789146c0266106e40355b8dec2b969b8ffe785da9307d36d6dd0aa05"
+    },
+    {
+      "class": "PrngCrankMachine",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/prng_crank_machine/prng_crank_machine.gd",
+      "after": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd",
+      "live_sha256": "a64119c35c493f2ab92098fece384e4683b42fe4e4ea006274e9b481d9ca1e6c"
+    },
+    {
+      "class": "PerlinNoiseBridge",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd",
+      "after": "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd",
+      "live_sha256": "5287f3fcf25f70f8b59efea569afd40aef6c03b944e6122e76997a0b83dfaed9"
+    },
+    {
+      "class": "NoiseLayers",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/algorithms/randomness/noiselayers/noiselayers.gd",
+      "after": "res://algorithms/randomness/noiselayers/noiselayers.gd",
+      "live_sha256": "6bea1bdf0a9f1771e0c593dda867f65e7b9f49d5647842f85b7bc774e688c7bb"
+    },
+    {
+      "class": "PerlinTerrainGenerator",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/algorithms/randomness/noise/perlinnoise/scripts/terrain_generator.gd",
+      "after": "res://algorithms/randomness/noise/perlinnoise/scripts/terrain_generator.gd",
+      "live_sha256": "a966e465a2d23ea7ed45fe1d55eae1a4a75cd1c4d5f8a5ca401351e8d6fe81b6"
+    },
+    {
+      "class": "MonteCarloDartboard",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd",
+      "after": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd",
+      "live_sha256": "99aac5eb0786c79d7f6198a29170aa46a0afd2e7e61200c2ffdf17ce36851983"
+    },
+    {
+      "class": "DiceThrow",
+      "before": "res://doc/book/review-packages/2026-09-18/randomness/sources/algorithms/randomness/dice_throw/dice_throw.gd",
+      "after": "res://algorithms/randomness/dice_throw/dice_throw.gd",
+      "live_sha256": "8499e0d7c8ea0b08486fb2ef114ba8892194b24879c76fd2f5e7845b2267c4bc"
+    },
+    {
+      "class": "TerrainGeneratorSculpt",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd",
+      "after": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd",
+      "live_sha256": "2f87c47d77152c7de686b719ce82a91ab1dd30284f432a9b9ce7bf1ba2195c96"
+    },
+    {
+      "class": "TerrainGeneratorGyroid",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+      "after": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+      "live_sha256": "8a29b8c461718670bed03f1bafa77b20f47a22eb390f81d58bb46734237ab037"
+    },
+    {
+      "class": "MetaballGenerator",
+      "before": "res://doc/book/review-packages/2026-09-18/isosurfaces/sources/algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd",
+      "after": "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd",
+      "live_sha256": "5fe59cfd6e396eb2ad12f8ba49f16b23c54d1540a3ebbf11533e56de3dcce75f"
+    },
+    {
+      "class": "GeneticProgramming",
+      "before": "res://doc/book/review-packages/2026-09-18/proceduralgeneration/sources/algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+      "after": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+      "live_sha256": "f441c49e9eea4f190d1c77e63725f5f6b5a91ca6954f95dd8adced29ccd9f495"
+    },
+    {
+      "class": "CaveGenerator",
+      "before": "res://doc/book/review-packages/2026-09-18/proceduralgeneration/sources/algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+      "after": "res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+      "live_sha256": "28ef582d19c9d378398f9cbd85a452e4b6cf3135393abcea82a2777af3c2442d"
+    },
+    {
+      "class": "ScaleMe",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/algorithms/primitives/scaleme/scale_me.gd",
+      "after": "res://algorithms/primitives/scaleme/scale_me.gd",
+      "live_sha256": "33e22bba61295f65403e3dbed1540ba535ccc5b35192c3e242b9e293a2a09ec1"
+    },
+    {
+      "class": "RoomShapeDemonstrator",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+      "after": "res://algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+      "live_sha256": "1ecb234488580ce737e4f0a14af20446fe66e7275c3fd016901f53e604147258"
+    },
+    {
+      "class": "MergeConflictVisualizer",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+      "after": "res://algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+      "live_sha256": "e094da6fda39fa4a73f6b08bd97337b442dfbc15c47e3df75307a1886e7ade0e"
+    },
+    {
+      "class": "ThreeBodyProblem",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd",
+      "after": "res://algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd",
+      "live_sha256": "d9ca04df0fd1117cb73d98fda05af92680f4de4227ac42e8b90a7833ccdba1bc"
+    },
+    {
+      "class": "CelestialBody",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/algorithms/physicssimulation/threebodyproblem/CelestialBody.gd",
+      "after": "res://algorithms/physicssimulation/threebodyproblem/CelestialBody.gd",
+      "live_sha256": "39ed1a16b57a37c71ce1edbb3e4a18684b486e3e1383ac70e951ae65bb3e651a"
+    },
+    {
+      "class": "SoftBodyVariation",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/algorithms/physicssimulation/softbody3d/softbody3d.gd",
+      "after": "res://algorithms/physicssimulation/softbody3d/softbody3d.gd",
+      "live_sha256": "40419cc4104eeda7b67f3c341ed6ad20cc75be8c35dbb5f3e44849013350b9c8"
+    },
+    {
+      "class": "FourSoftBodyController",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+      "after": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+      "live_sha256": "30f0fa17573c4161d305d83829a6b5c4bb6270091a374c149c0e3effa902a26f"
+    },
+    {
+      "class": "SimulatedAnnealingVisualization",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+      "after": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+      "live_sha256": "7865a11b8069a602082b1a8676c48bb290e48cced3e3b2b9b881bc8ce7f9ef26"
+    },
+    {
+      "class": "TarjanAlgorithm",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+      "after": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+      "live_sha256": "af84e6c1d283cea690c345ab28f7d376bf45b2529b04c09d4ce609f67f0a8160"
+    },
+    {
+      "class": "PushRelabel",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "after": "res://algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "live_sha256": "01ca06dc94ff64569544b894a60dd11280964b1ffccef2e582476f1488a0dfb1"
+    },
+    {
+      "class": "NetworkAnalysis",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+      "after": "res://algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+      "live_sha256": "de87deb8c09ee7db57e811a7cf3a36df50cbeb48a94f0a56a99079399a10febc"
+    },
+    {
+      "class": "MSTVisualization",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+      "after": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+      "live_sha256": "94aa383688a88d6807fa9a9e606bed40de03ae1862df2d3e9e6f2c05f99277cd"
+    },
+    {
+      "class": "ForceDirectedLayout",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+      "after": "res://algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+      "live_sha256": "27d7221c54cfd5ffad13b0ea004bb5702292fc42dfa03382ebf0cdab29e55490"
+    },
+    {
+      "class": "EdmondsAlgorithm",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+      "after": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+      "live_sha256": "616bea0286e8d73184095f864e4614ca9bbc8609b1be7e2c2fc11245a76f484f"
+    },
+    {
+      "class": "MolecularPart",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/algorithms/computationalbiology/molecular_framework/Part.gd",
+      "after": "res://algorithms/computationalbiology/molecular_framework/Part.gd",
+      "live_sha256": "97cb23c61aefd9846ca064e192fd41a7df19ebe6d18698f858be24df5a5276bb"
+    },
+    {
+      "class": "MolecularDesigner",
+      "before": "res://doc/book/review-packages/2026-09-18/postfoundationscrisis/sources/algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+      "after": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+      "live_sha256": "63b2e663a1a4193929cd935bd896a7e32e3fa0d5d1e09e648d9b3933ee59624a"
+    },
+    {
+      "class": "GridColorizer",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/algorithms/color/gridcolorizer/gridcolorizer.gd",
+      "after": "res://algorithms/color/gridcolorizer/gridcolorizer.gd",
+      "live_sha256": "6b25821ce9df17436b9805412ddfa6fe6fdf23dbddd12288e243b79c2f2a950c"
+    },
+    {
+      "class": "GradientInterpolator",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+      "after": "res://algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+      "live_sha256": "8638a8b0c91475d13a54f794081a303188dc0a1c94de50852c0f6f1d28029ea4"
+    },
+    {
+      "class": "FTCBridge",
+      "before": "res://doc/book/review-packages/2026-09-18/change/sources/algorithms/change/ftc_bridge.gd",
+      "after": "res://algorithms/change/ftc_bridge.gd",
+      "live_sha256": "9915fdab225c8c8f6ec40d3fcc5179c43ce48a292cb888deaacd81da903f6632"
+    },
+    {
+      "class": "LineNetworkCA",
+      "before": "res://doc/book/review-packages/2026-09-18/cellularautomata/sources/algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd",
+      "after": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd",
+      "live_sha256": "178dbd44b2bb60f0bd336f99355c0c52c1d90ac468cad8ce3db7b264ef416b02"
+    },
+    {
+      "class": "CSGUnionDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/boolean_surfaces/csg_union_demo.gd",
+      "after": "res://algorithms/boolean_surfaces/csg_union_demo.gd",
+      "live_sha256": "e47ad58457e5d3a4f62693d4c6df914fa73bba5d51359e090c29d0f968ebb3e7"
+    },
+    {
+      "class": "CSGIntersectionDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/boolean_surfaces/csg_intersection_demo.gd",
+      "after": "res://algorithms/boolean_surfaces/csg_intersection_demo.gd",
+      "live_sha256": "f2b55721c4ce88a15586885d80e9ee949e8eeb464ecaddb1c829cf79a9048425"
+    },
+    {
+      "class": "CSGDifferenceDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/boolean_surfaces/csg_difference_demo.gd",
+      "after": "res://algorithms/boolean_surfaces/csg_difference_demo.gd",
+      "live_sha256": "0a3bab80a776ecb0b59bf5f069472ffaf90a4f9dcf41c9328cbc41c2773290d8"
+    },
+    {
+      "class": "CSGComposeWorkbench",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/boolean_surfaces/csg_compose_workbench.gd",
+      "after": "res://algorithms/boolean_surfaces/csg_compose_workbench.gd",
+      "live_sha256": "53bc3cfc7446d879177af7efddcaddecc43341279056bc5d2536554bf1ef30d1"
+    },
+    {
+      "class": "CSGArchitectureCavity",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+      "after": "res://algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+      "live_sha256": "c87eb4ea6241ce5ba3d23d0bee292c98325937ef1e84ce6e029f811d9b5b80d9"
+    },
+    {
+      "class": "RhizomaticMazeSpace",
+      "before": "res://doc/book/review-packages/2026-09-18/proceduralgeneration/sources/algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd",
+      "after": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd",
+      "live_sha256": "5c579b08a75ababa6426eb58a908979020d4c58570e74a819a27e2120a58ebe0"
+    },
+    {
+      "class": "XRToolsViewport2DIn3D",
+      "before": "res://doc/book/review-packages/2026-09-18/tiling/sources/addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "after": "res://addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "live_sha256": "e86868407fd6a29ba08770ce48d7e037c1802b04d83b2df85d28b009daf6c817"
+    },
+    {
+      "class": "XRToolsHighlightRing",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "after": "res://addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "live_sha256": "7e16a830d6010ee284905f4c8c0be35499b98644d61ec9914b1da640287bdb35"
+    },
+    {
+      "class": "XRToolsInteractableSlider",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/addons/godot-xr-tools/interactables/interactable_slider.gd",
+      "after": "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+      "live_sha256": "ef9b79a8845f9f40a4540e4f4bdda2946c0aae1a3bacac4c9e7e6c400d1bb613"
+    },
+    {
+      "class": "XRToolsInteractableHandle",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/addons/godot-xr-tools/interactables/interactable_handle.gd",
+      "after": "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+      "live_sha256": "90c323f5f675be7f71ec657c33dda73d8dc01aa6e6a8320ea3b3ab4b62f5e33d"
+    },
+    {
+      "class": "BiomeBrushController",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/hazards/becoming_catalyst/BiomeBrushController.gd",
+      "after": "res://commons/hazards/becoming_catalyst/BiomeBrushController.gd",
+      "live_sha256": "c93c45a05bd83343f81be5fa99502017b34723540a669b1ed5ba54ac167f61c3"
+    },
+    {
+      "class": "InterfacePresets",
+      "before": "res://doc/book/review-packages/2026-09-18/qfeplaboratory/sources/commons/ui/interface_presets.gd",
+      "after": "res://commons/ui/interface_presets.gd",
+      "live_sha256": "9f80d7340126754147d56d04d8678bf8c74ca48f6fb21734368b10c73433bbc6"
+    },
+    {
+      "class": "VectorMachine",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/vector_machine/vector_machine.gd",
+      "after": "res://commons/artifacts/vector_machine/vector_machine.gd",
+      "live_sha256": "5327dbe78cf8bd7f36c327284a0803feb8e9571efd1a83594c2accb8556e5044"
+    },
+    {
+      "class": "ForceFieldZone",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/force_field_zone/force_field_zone.gd",
+      "after": "res://commons/artifacts/force_field_zone/force_field_zone.gd",
+      "live_sha256": "567660da2a1a716a9fd04bd98ee9ebd6b60fac2e78c20523bde209303d5083df"
+    },
+    {
+      "class": "CentrifugeRing",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/centrifuge_ring/centrifuge_ring.gd",
+      "after": "res://commons/artifacts/centrifuge_ring/centrifuge_ring.gd",
+      "live_sha256": "84a1180d18dcd9ec53e371898757c86a31d9ccaab988a7d6d430fb019b6398f6"
+    },
+    {
+      "class": "DragCorridor",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/drag_corridor/drag_corridor.gd",
+      "after": "res://commons/artifacts/drag_corridor/drag_corridor.gd",
+      "live_sha256": "bd620c9fb4b9e214c404af42483157fed04cf3208ac6959e4c9941bbcbb19a96"
+    },
+    {
+      "class": "SpringTower",
+      "before": "res://doc/book/review-packages/2026-09-18/forces/sources/commons/artifacts/spring_tower/spring_tower.gd",
+      "after": "res://commons/artifacts/spring_tower/spring_tower.gd",
+      "live_sha256": "b7845bbcdb16f28d2bf1e8a87d7e73df2d0eb2bbd28b98048e6e84cff9253ea6"
+    },
+    {
+      "class": "CalderMobile",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/calder_mobile/calder_mobile.gd",
+      "after": "res://commons/artifacts/calder_mobile/calder_mobile.gd",
+      "live_sha256": "1453621e5d1aa019ca99602af485e0187d9ac8f429e41698a9bdffbfd280095f"
+    },
+    {
+      "class": "TenPrintTextile",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/ten_print_textile/ten_print_textile.gd",
+      "after": "res://commons/artifacts/ten_print_textile/ten_print_textile.gd",
+      "live_sha256": "2c1811536fe77705c9c9090ae43924fd431ab1c149a27d5a01ed0ba8ff34a2f1"
+    },
+    {
+      "class": "LSystem",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/utils/lsystem.gd",
+      "after": "res://utils/lsystem.gd",
+      "live_sha256": "8cb9d5b035b291c2c5987ddf46b66e4885b8a08b68181977d3060507c39a57d9"
+    },
+    {
+      "class": "BakedTextAlbedo",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/utils/baked_text_albedo.gd",
+      "after": "res://commons/utils/baked_text_albedo.gd",
+      "live_sha256": "df0df92ea1126ef58d5e918e4eb95a959619366de3c81c88d199a0007fa9397e"
+    },
+    {
+      "class": "HangarKit",
+      "before": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/commons/artifacts/_hangar/hangar_kit.gd",
+      "after": "res://commons/artifacts/_hangar/hangar_kit.gd",
+      "live_sha256": "d619abd972fb097548dd695c0dc5c5218e47857ed496a56051a71c70b7ef97d4"
+    },
+    {
+      "class": "PbrKit",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/render/pbr_kit.gd",
+      "after": "res://commons/render/pbr_kit.gd",
+      "live_sha256": "533a170b32efa2ddc936b50b50d3b5dd634f5eeea95a2ffc92a13fe6ad941450"
+    },
+    {
+      "class": "MeshKit",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/render/mesh_kit.gd",
+      "after": "res://commons/render/mesh_kit.gd",
+      "live_sha256": "14b1a28706d4c4c24b0eccbe09d408480a30ff2728094ee5e01bb8d7927212d9"
+    },
+    {
+      "class": "PrismBlock",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/prismes/prism_block.gd",
+      "after": "res://commons/primitives/prismes/prism_block.gd",
+      "live_sha256": "a49518c4b3307b7425575bf917266c1e5cfc6c9c2e1394a01681d3c0651f13b5"
+    },
+    {
+      "class": "CubeScene",
+      "before": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/primitives/cubes/cube_scene.gd",
+      "after": "res://commons/primitives/cubes/cube_scene.gd",
+      "live_sha256": "77e5ae122082a331a4d326da6464f2de04e477cf9bb7e9ea3d24172a04f93783"
+    },
+    {
+      "class": "ArtifactIdentity",
+      "before": "res://doc/book/review-packages/2026-09-18/noise/sources/commons/grid/artifact_identity.gd",
+      "after": "res://commons/grid/artifact_identity.gd",
+      "live_sha256": "ebc421f49ffc6fe78ded020aceed6dbe43401abdb69b94a407e677806656c799"
+    },
+    {
+      "class": "FlashlightDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+      "after": "res://algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+      "live_sha256": "d3745680e2b29e3c83ddce78ac28a374dae7929ace19ad52fc1ab98ed283bbad"
+    },
+    {
+      "class": "PickupCube",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/scenes/mapobjects/pick_up_cube.gd",
+      "after": "res://commons/scenes/mapobjects/pick_up_cube.gd",
+      "live_sha256": "1c5fa56d545eb3177099b12b571208fd3731f141073bef526ce4bbd92ae7fb96"
+    },
+    {
+      "class": "TranslationCubeDemo",
+      "before": "res://doc/book/review-packages/2026-09-18/transformation/sources/commons/primitives/translation/translation_cube_demo.gd",
+      "after": "res://commons/primitives/translation/translation_cube_demo.gd",
+      "live_sha256": "0b2856c11b3513751c57b7716ae5f71b11817b3be0b2f367973949042b56d845"
+    },
+    {
+      "class": "MesmerizingTrail",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/trails/mesmerizing_trail.gd",
+      "after": "res://commons/primitives/trails/mesmerizing_trail.gd",
+      "live_sha256": "2da799eed7177fffdbd7f0b27e8bbf2be664be234fc0bd1e5db9e6e2a4ac804c"
+    },
+    {
+      "class": "TensegrityTriangle",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+      "after": "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+      "live_sha256": "f9dc1150945ce29a254ec99f7be7a5a1ae5dfbd19ae8342a64f4d92b812a33c9"
+    },
+    {
+      "class": "Sphere",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/sphere/sphere.gd",
+      "after": "res://commons/primitives/sphere/sphere.gd",
+      "live_sha256": "f17fb20f453ba6e001af4c636f0daef4bdeaaafabcf671287594f321e346fa54"
+    },
+    {
+      "class": "SnapConnectionManager",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/snappoint/snap_connection_manager.gd",
+      "after": "res://commons/primitives/snappoint/snap_connection_manager.gd",
+      "live_sha256": "a28b3822e21c5146f078bad72195f31185595a69a2cb771325e31c5f0ec5eb7d"
+    },
+    {
+      "class": "SnapPyramidPuzzle",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+      "after": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+      "live_sha256": "72ed3a2ba1f3fc8ef24efe42a69a6557c5dc36de53722088946e7a70620c4ab3"
+    },
+    {
+      "class": "PrimitiveMeshBuilder",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/shared/primitive_mesh_builder.gd",
+      "after": "res://commons/primitives/shared/primitive_mesh_builder.gd",
+      "live_sha256": "67f9ab823ac4e216cd4d2d4f0a104b268d002e00b0faf5fbe009e5cca438a7e2"
+    },
+    {
+      "class": "TheArgumentOfSolids",
+      "before": "res://doc/book/review-packages/2026-09-18/boolean_surfaces/sources/commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd",
+      "after": "res://commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd",
+      "live_sha256": "f142b8651f4cc1dcdc11c0a4a0ff73b0e33d01f687ff4a1f1e3287c6233859b2"
+    },
+    {
+      "class": "TheBelievingTurtle",
+      "before": "res://doc/book/review-packages/2026-09-18/lsystems/sources/commons/artifacts/the_believing_turtle/the_believing_turtle.gd",
+      "after": "res://commons/artifacts/the_believing_turtle/the_believing_turtle.gd",
+      "live_sha256": "7b8a89f777e31899ad0f467c34d5acd26e3e68d91ba3d8096144e661b6eb98f1"
+    },
+    {
+      "class": "TheInvisiblePoint",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/the_invisible_point/the_invisible_point.gd",
+      "after": "res://commons/artifacts/the_invisible_point/the_invisible_point.gd",
+      "live_sha256": "287996ff206160680cbf9dd4d278babd517e96fe214a4e5a16fc133561a32a30"
+    },
+    {
+      "class": "TheClockmakerOfRules",
+      "before": "res://doc/book/review-packages/2026-09-18/cellularautomata/sources/commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd",
+      "after": "res://commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd",
+      "live_sha256": "dd79660ac9eeaf7a7bbbb538b5afc7aacb1bad073fcc1a43baa04d4e8d819628"
+    },
+    {
+      "class": "ImpossibleEndTable",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "after": "res://commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "live_sha256": "8f31fcc6fcf5ce34418bff632cd2458093cacc08e527beea9d5fb515b48da733"
+    },
+    {
+      "class": "BudgetOfSmoothness",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd",
+      "after": "res://commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd",
+      "live_sha256": "5d537ea3aa34530576e423581b14491a2db47d8bea6e65709026f40b4bc4743c"
+    },
+    {
+      "class": "TwoTravelers",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/commons/artifacts/two_travelers/two_travelers.gd",
+      "after": "res://commons/artifacts/two_travelers/two_travelers.gd",
+      "live_sha256": "1d3670b0446d88818c09d80a84685fd29bc6603f130e3bb6ece5dc2a98a6c6aa"
+    },
+    {
+      "class": "ImpatientRiver",
+      "before": "res://doc/book/review-packages/2026-09-18/graphtheory/sources/commons/artifacts/impatient_river/impatient_river.gd",
+      "after": "res://commons/artifacts/impatient_river/impatient_river.gd",
+      "live_sha256": "be399ec1cc06686259a17daca84df744b22cdb05e8f46f40a468e3a870cdc610"
+    },
+    {
+      "class": "LaundryLineCathedral",
+      "before": "res://doc/book/review-packages/2026-09-18/formfinding/sources/commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+      "after": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+      "live_sha256": "8c303ee5b41913942e73ddbf32eba55f636f914b0dd09c56b6019cc2e944c1ca"
+    },
+    {
+      "class": "GridMaterialFactory",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/primitives/shared/grid_material_factory.gd",
+      "after": "res://commons/primitives/shared/grid_material_factory.gd",
+      "live_sha256": "03f18dcdd890abe6735cf469da48d197bd1df2ab4bd8871f2911bee89337e98b"
+    },
+    {
+      "class": "QueerConfetti",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/queer_confetti/queer_confetti.gd",
+      "after": "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "live_sha256": "2a10a4b75d6b18bdcf5ed4b00470b12a28a2c06ae891d45bf701f522c1283866"
+    },
+    {
+      "class": "DragPointTarget",
+      "before": "res://doc/book/review-packages/2026-09-18/primitives/sources/commons/artifacts/drag_point_target/drag_point_target.gd",
+      "after": "res://commons/artifacts/drag_point_target/drag_point_target.gd",
+      "live_sha256": "0b53f0be80a7cffc0a2ae94ace30e8d10cc71b83be94edf6d252f503976cb13f"
+    },
+    {
+      "class": "ColorDNAStack",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/artifacts/color_dna_stack/color_dna_stack.gd",
+      "after": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd",
+      "live_sha256": "9b8e88fbe70152d6d57c8bea4eb701968acc4b2bf0c9de16ba171d95a7b2cf96"
+    },
+    {
+      "class": "ChromaStack",
+      "before": "res://doc/book/review-packages/2026-09-18/color/sources/commons/artifacts/chroma_stack/chroma_stack.gd",
+      "after": "res://commons/artifacts/chroma_stack/chroma_stack.gd",
+      "live_sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0"
+    }
+  ]
+}

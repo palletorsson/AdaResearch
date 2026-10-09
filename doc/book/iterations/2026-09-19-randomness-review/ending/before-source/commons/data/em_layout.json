@@ -1,0 +1,183 @@
+{
+	"schema": "adaresearch.em_layout.v1",
+	"_readme": "The museum's LAYOUT NUMBERS, in one file instead of scattered through endless_museum.gd and em_*.gd. Anything an eye would otherwise tune in code lives here: how deep the threshold gate stands, how far a hand must be to open it, how big an inventory caption is, how a hall and a side room are proportioned. The assembler reads this at boot and falls back to the value in the code when a key is absent, so deleting a key is safe and deleting the file changes nothing.",
+	"gate": {
+		"depth_rows": 5,
+		"_depth_rows": "0 = the door in the entry wall (the 2026-08-18 in-doorway ruling). N>0 = the door N rows INTO the hall. 5 since 2026-08-21 (Palle: separate the room before the door as a LOADING ROOM, make it a bit bigger) — the lobby + five hall rows are the loading room; the hall dresses itself behind the sealed door.",
+		"reach_m": 1.5,
+		"_reach_m": "eye or controller this close to the scanner glass counts as a hand — 1.5 so a bare-hands lean-in grants without kissing the glass",
+		"patience_s": 6.0,
+		"_patience_s": "seconds at a sealed door before it opens itself (a museum is not a locked room). 20 made Palle serve a third of his felt load time at the door; 6 is a beat of ritual.",
+		"open_seconds": 1.6,
+		"click_reach_m": 3.2,
+		"click_cone_rad": 0.55
+	},
+	"caption": {
+		"height_m": 0.78,
+		"tilt_deg": -16.0,
+		"stand_off_m": 0.8,
+		"plaque_w_m": 0.46,
+		"plaque_h_m": 0.17,
+		"font_px": 44,
+		"pixel_size": 0.001
+	},
+	"hall": {
+		"depth_m": 4.5,
+		"ramp_len_m": 14,
+		"gallery_w_m": 4,
+		"max_body_m": 90.0,
+		"doll_cut_m": 2.4,
+		"_doll_cut_m": "the doll house's wall cut height. 2.4 keeps the hanging line (1.55) and its showings on visible wall; 1.15 was knee walls that took the pictures with them."
+	},
+	"side_room": {
+		"width_cells": 5,
+		"depth_cells": 7,
+		"gap_cells": 2,
+		"first_row": 4
+	},
+	"editor": {
+		"autosave_seconds": 0.6,
+		"snap_m": 0.2
+	},
+	"lobby": {
+		"_readme": "the FIRST vestibule, dressed as the museum's lobby (Palle, 2026-08-18): no wall works; a large window in the back wall looking backward at Folding Past; a frame counter on the wall; a fire extinguisher; a wooden pallet (pyramid) in the corner blocking a lift door; and MOA on the threshold door's header. Segment-local metres: the lobby floor is x 1..16, z 1..4, the back wall at z 0..1, the entry wall at z 4..5.",
+		"_view_depth_m": "metres behind the view piece's own origin, handed to Folding Past's z_base_offset. Its shipped value is -8.0 and its nested frames run out to about -12.5 from there, which is what actually put the past out of sight — not the room, which has always been 4 deep. -3.0 brings the nest close behind the glass.",
+		"_view_cell": "ENTER-ROOM cells, the frame the editor rules in: z runs -4..-1, so -4 is the vestibule's first row, hard against the back wall. Palle, 2026-08-26: 'folding_past should be at 8, -4'. A map cannot name a negative row, which is exactly why the past lives here and not in Point_One.",
+		"_door_sign": "written on the wall's overpanel above the door (2.92..4.5 m), both faces; a free-standing door (gate.depth_rows > 0) carries it on its own header instead",
+		"_with_": "2026-08-26, Palle: 'the only thing before 0,0,0 is the window out to the maps and the folding past animation artifact'. Any LOBBY_PIECES key takes with_<key>; absent means 1, so a museum that says nothing keeps every piece. The window and the view (Folding Past, standing outside behind the glass) are the two that stay, and they are the two that look OUT — everything switched off here was furniture standing IN the room the map now owns.",
+		"_drop_z": "a MAP row, not a segment-local one — the map begins at VESTIBULE_H, so drop_z 1 is local z 5, past the glass and inside the museum. As a local row it was 1, which is inside the enter room, and the visitor dropped into the annex.",
+		"_drop_hole": "THE WAY IN (Palle, 2026-08-26): 'I think it is better if we start at the roof like in Duke Nukem 3d. So no wedge, just a hole in the ceiling/roof and we jump in the hole ... we jump down in at around 6, 1.' A deck above the foyer with one cell missing, the visitor standing on it, and the ceiling opened under the hole by the same _emit keep-out that stops trim over a void. The wedge it replaces was turned the wrong way, and a chute you are fired down is a different arrival than a roof you step off. drop_hole 0 puts the visitor back on the floor at 7.5, 0.0, 1.5.",
+		"_origin_well": "RETIRED 2026-08-26, and the code is intact behind this 0. It opened the lobby's NW corner around the WORLD ORIGIN: a well a metre deep, Point Zero standing at exactly (0,0,0), a rail, a light (Palle, 2026-08-19). It was the one space in the museum nothing could edit — not a tile, so no brush; not config, so no file — and a day of trying to remove trim left over from an old wall ended with Palle's ruling: 'nothing before 0,0,0 can be editable ... shift the map back so we can edit from 0,0,0 ... the other part of the map becomes the pre annex.' Point_One now carries a 2-cell pre-annex margin with Point Zero at map cell (2,2), so that space is walled, dug and moved with the ordinary brush. Set back to 1 to build the procedural annex again; the six numbers beside it still drive it.",
+		"_intro_text": "the first pearl's paragraph as wall text on the back wall, left of the window — the museum's first sentence ('you arrive late…')"
+	},
+	"speak": {
+		"caps": 0,
+		"_caps": "textD on the wall works: 1 = the sentences in CAPS, 0 = as dictated (Roboto, light on the field)",
+		"show_drafts": 1,
+		"_show_drafts": "1 = the corpus's draft lines (truths, blurbs, descriptions; em_speak.py --draft) hang beside the hand's; 0 = only lines Palle spoke — the other paintings stay black"
+	},
+	"rig": {
+		"plain_hands": true,
+		"_plain_hands": "in VR the hand is a visitor's hand: collision hand + pickup + pointer + mesh. On, the wrist tools below come off every rig in the tree, an activated catalyst bracelet is ended, and every token in no_pickup is shown but cannot be grabbed (grabbing one would put the bracelet on the hand). Palle, 2026-08-18: 'No bracelet, no editing tool, just the VR hands.'",
+		"wrist_tools": [
+			"HandWorkstationVR",
+			"messageconsole",
+			"WristStatsDisplay",
+			"GravityGun"
+		],
+		"no_pickup": [
+			"catalyst_pedestal",
+			"catalyst_pickup",
+			"becoming_catalyst",
+			"catalyst_prompter_box",
+			"catalyst_vent",
+			"catalyst_target",
+			"wedge_skill_pickup",
+			"catalyst_sustain_demo"
+		]
+	},
+	"sculptures": {
+		"_readme": "THE DREAM BODIES (2026-08-29, Palle: 'put them in the museum'). Six sculpture families recreated in Godot from his Stable Diffusion panoramas; the museum stands one on a plinth in every hall, the FAMILY chosen by the chapter (so a chapter reads as a room of related bodies) and the SEED by the hall, so no two halls carry the same individual. The Frank Stella relief is a wall work: it hangs on the hall's west wall instead, found by the same ray the weapon cabinets ask.",
+		"on": 1,
+		"_on": "0 = no statues anywhere",
+		"per_hall": 1,
+		"per_hall_max": 4,
+		"_per_hall_max": "the ceiling; the count is dealt from the hall key between per_hall and this, so a hall always stands the same number and the bake and the replay still agree. Equal to per_hall = the old fixed count.",
+		"assortment": 1,
+		"_assortment": "0 = every body in a hall is the chapter's family, which is what the museum did for its first month - a chapter read as a room of relatives. 1 = the FIRST body still names the chapter and the rest are drawn from the whole living pool of 52 families, so a hall is a room WITH a family in it rather than a room OF one family. stella_wall is never drawn this way: it is a wall work and hangs on the west wall.",
+		"ms_budget": 1200.0,
+		"_ms_budget": "a hall has a FRAME budget, not a statue budget. Four bodies is four builds on the main thread while somebody is walking through, and the families are not equally cheap - a marched isosurface costs 20x a stack of primitives. The hall stops adding when it has spent its milliseconds and PRINTS what it dropped, because a silent cap reads as \"this hall wanted one statue\" forever after.",
+		"_per_hall": "statues per hall, on open interior cells at least clear_m from the save point (the relief is always one)",
+		"clear_m": 3.0,
+		"_clear_m": "no statue stands closer than this to the hall's save point",
+		"plinth_m": 0.42,
+		"_plinth_m": "the station plinth's top height under a standing body",
+		"figures": [],
+		"pin": {
+			"isosurfaces": "fetish_idol",
+			"qfeplaboratory": "fetish_idol",
+			"transformation": "fetish_idol",
+			"postfoundationscrisis": "fetish_idol"
+		},
+		"_pin": "chapter -> figure, OVERRIDING the deal for that chapter only. The family is normally allowed[hash(chapter) % allowed.size()], so appending ONE name to SCULPT_FIGURES reassigns the statue in EVERY chapter at once and stales the bake and every published capture. A pin does not touch the modulo: delete these four keys and the museum stands exactly what it stood before. fetish_idol is pinned to isosurfaces because the body IS that chapter's technique - it is marched out of a signed distance field by dream_iso.gd - and to the three QFEP-arc chapters because a queer, glossy, harnessed body is their argument rather than their decoration.",
+		"cell": 0.046,
+		"_cell": "0 = every family builds at its own bench value. A marched body costs ~1.7 s at fetish_idol's bench cell of 0.034 and the museum builds halls on the MAIN THREAD during play, so a coarser cell here buys the frame back. It is clamped in the builder to a MEASURED range (commons/testing/probe_iso_cell_cost.gd), because a cell that melts the collar or the platform heel does so silently - dream_iso warns only when it emits nothing at all.",
+		"_figures": "empty = all six (rocaille, stijl_robot, panel_robot, dragon, sea_forms, stella_wall). A list narrows which families the museum deals"
+	},
+	"foes": {
+		"_readme": "THE ONE-DIMENSIONAL MEN (2026-08-29, Palle: 'put silhouettes in the museum by default in the grey sequences ... but also give me a gun there so I defend myself'). A hall whose chapter is a GREY sequence - soft_stages.json says no nature kingdoms and zero vegetation: primitives, transformation, isosurfaces, boolean_surfaces - is dressed with a few silhouette foes on its open floor, standing until you come within their detection radius, then walking the grid at you one metre a step; and a very pink gun on a plinth in its vestibule. Shot, a silhouette stops for good and stands on a small plinth of its own colour (a Giacometti). The museum writes what it did to ada_run/em_foes.json.",
+		"on": 1,
+		"_on": "0 = no silhouettes and no gun anywhere; the hall is the hall of yesterday",
+		"per_hall": 1,
+		"_per_hall": "silhouettes per grey hall, on distinct open cells at least 3 cells apart and clear_m from the door. 3 for one evening; 1 since Palle, 2026-08-29: 'only send one silhouette per map now'",
+		"first_hall": 1,
+		"_first_hall": "silhouettes in the FIRST hall of the visit (the hall whose vestibule starts at -4, so its map cell (0,0) is world (0,0)); Palle, 2026-08-29: 'only send one silhouette in map one'",
+		"gun": 1,
+		"_gun": "1 = the pink gun in every grey hall's vestibule (in its velvet wall case when cabinets is on, else on a 0.95 m plinth); 0 = no gun (the silhouettes still come)",
+		"hammer": 1,
+		"_hammer": "1 = the pink sledgehammer in the red EMERGENCY wall cabinet on the vestibule's west wall of every grey hall (needs cabinets); 0 = none",
+		"cabinets": 1,
+		"_cabinets": "1 = the weapons hang in weapon_cabinet wall boxes on the vestibule's side walls (inner faces x 0 and x vest_w), the velvet pistol case east, the EMERGENCY axe cabinet west, both at the annex's middle row facing in (Palle, 2026-08-29: 'make very very nice wall box for it and another one for the pink gun'); 0 = the gun on a plinth, no hammer",
+		"clear_m": 5.0,
+		"_clear_m": "no silhouette stands closer than this to the hall's save point, so a visitor is never dropped into a touch",
+		"chapters": [],
+		"_chapters": "empty = derive the grey chapters from soft_stages.json (no kingdoms, zero vegetation). A non-empty list REPLACES that rule with these chapter names"
+	},
+	"stream": {
+		"build_ahead_m": 6.0,
+		"_build_ahead_m": "open the next segment when the eye is this close to the built edge. 6 = the build happens in the EXIT PASSAGE - the passages must turn a corner, or the doorway shows the unbuilt beyond (the one-hall contract, 2026-08-24)",
+		"keep_behind_m": 6.0,
+		"_keep_behind_m": "free a segment once its far end is this far behind the eye. 6 = the hall behind dies when you are through the starting passage; it REBUILDS if you walk back (rebuild_margin_m)",
+		"min_segments": 1,
+		"_min_segments": "never free below this many. 1 = the one-hall museum: current hall only, plus the next during a passage crossing",
+		"cull_near_m": 32.0,
+		"_cull_near_m": "artifacts closer than this render (the museum's near-artifact cull; shows are budgeted 8 per tick, nearest first)",
+		"cull_far_m": 38.0,
+		"_cull_far_m": "artifacts further than this hide AND suspend (no process, no physics, no audio); the gap is hysteresis",
+		"instantiate_ahead_m": 50.0,
+		"_instantiate_ahead_m": "the patient stamp: a queued body further than this from the eye stays a plan row on paper — not built, not resident",
+		"stamp_budget_ms": 6.0,
+		"_stamp_budget_ms": "ms per frame the patient stamp may spend building queued bodies",
+		"bodies": 1,
+		"_bodies": "1 = the museum as authored. 0 = THE EMPTY-MUSEUM EXPERIMENT: architecture only — no interior bodies, showings, props or DNA runs — so the boot clock can say which seconds the artifacts own. A diagnostic, never a mode.",
+		"keep_ahead_m": 30.0,
+		"_keep_ahead_m": "a segment this far AHEAD frees too - the walker turned around; it rebuilds on approach like everything else",
+		"rebuild_margin_m": 2.0,
+		"_rebuild_margin_m": "rebuild a freed neighbour when the eye is this close to the alive window's edge. MUST stay under keep_behind_m - the gap is the hysteresis that stops free/rebuild thrash",
+		"vr_one_hall": 1,
+		"_vr_one_hall": "1 = in VR only the hall the eye stands in is DRAWN; the build window stays at two so a crossing costs no hitch. 0 = draw whatever is built (the desktop behaviour).",
+		"vr_render_window_m": 4.0,
+		"_vr_render_window_m": "metres either side of a segment that keep it drawn. Hiding a hall hides its meshes and NOT its colliders, so a walker at the threshold of an invisible hall walks on a floor that renders as nothing - this margin is what stops that. Under ~3 the threshold pops."
+	},
+	"env": {
+		"vr_high": 0,
+		"_vr_high": "1 = the headset installs the HIGH tier instead of its default perf. On Quest's Mobile renderer SSIL/SSR/SDFGI/volumetric fog do not exist; the A/B shows what the device supports (glow, fog model, ambient, sky, grade).",
+		"ab_seconds": 0,
+		"_ab_seconds": "0 = off. N = alternate high/perf every N seconds, LIVE, in both modes — the in-headset A/B. Watch the log for [em-env] A/B -> tier. F7 swaps by hand on desktop."
+	},
+	"arrival": {
+		"_readme": "2026-09-06, Palle: \"when I start a new map drop me from y = 4 m.\" How a walk BEGINS — not how it continues; you walk between halls, you are only ever dropped into the first one.",
+		"drop_m": 4.0,
+		"_drop_m": "metres above the floor the visitor is placed at, in both lanes. They then fall, under the museum's own JUMP_GRAVITY of 11.0 — about 0.85 s from 4 m. 0 = stand on the floor as before. Clamped 0..12. The code's own default is 4.0, so deleting this key changes nothing; it is here to be turned down, not to be required. NOT applied to a roofed lobby (lobby.roof 1): there the roof is the height, and the drop is the visitor's own jump through the hole.",
+		"_where": "endless_museum.gd _arrival_drop, read by _drop_point — which the desktop walker takes as its start position and _vr_drop_in as the headset's. Gate: commons/testing/probe_arrival_drop.gd."
+	},
+	"night": {
+		"_readme": "2026-09-05, Palle: \"Remove the ceiling in endless museum and add the night sky from sphere_world_demo.tscn also add a moon a the global moving light source.\" Three switches, not one, because they fail in three different directions: a ceiling left on hides the sky entirely, a sky that failed to load reads as a working night, and a moon that does not move is the sun with a blue filter on it. Gate: commons/testing/probe_night_museum.gd.",
+		"enabled": 1,
+		"_enabled": "1 = the dome becomes NASA's Deep Star Maps 2020 panorama (commons/scenes/em/sky/, README beside it — attribution is a licence condition) and the Sun node is rebuilt as the Moon. 0 = the north-light overcast dome and the sun, exactly as before. Independent of `ceiling` below.",
+		"ceiling": 0,
+		"_ceiling": "0 = em_detail hangs NO ceiling in any hall, so the sky is the ceiling. 1 = the coffered daylight ceiling as before. A hall can still unroof itself alone with map_info.museum.open_roof; this is the museum-wide switch and it is deliberately not tied to `enabled` — a courtyard under a daylit dome is a thing someone may want.",
+		"moon_energy": 0.55,
+		"_moon_energy": "the DirectionalLight3D's energy. The sun ran at 0.35 with em_lighting's rig behind it and 1.1 without one; the moon is higher than the sun's 0.35 because with the ceiling gone it is no longer a shaft through a slot, it is the only thing coming down. Raise toward 1.0 for a full moon, drop to 0.2 for a crescent night lit mostly by the rig.",
+		"period_s": 480,
+		"_period_s": "seconds for ONE CIRCUIT of the sky. This is the whole of \"moving\": at 480 the shadow of a wall crosses a 19 m hall in about a minute, which is legible without being a disco. Under 20 is clamped.",
+		"altitude_deg": 38,
+		"_altitude_deg": "the moon circles the zenith at this CONSTANT altitude rather than rising and setting. A real arc would put the museum in the dark for half of every period, and a low directional inside a building with no ceiling rakes every wall and lights no floor. Clamped 5..85 — at 90 the look_at is parallel to UP and has no answer.",
+		"star_energy": 1.6,
+		"_star_energy": "multiplies the panorama. The dome IS the ambient source (ambient_light_source SKY), and a photograph of space is nearly black, so this is also how much fill the stars themselves give. See NIGHT_AMBIENT in em_environment.gd for the rest of that argument."
+	},
+	"audio": {
+		"step_db": -17.0,
+		"_step_db": "the FOOTFALL's base level in dB (2026-08-24, Palle: \"can we lower the sound of the shoes\"). Was -8, which reads as boots in a stone hall. The per-space step_db trim and the 4 dB random window ride on top of this. Raise toward -8 for a heavier walker, drop to -30 to nearly mute the shoes."
+	}
+}

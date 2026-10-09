@@ -1,0 +1,132 @@
+--- before/Point_Trace.md
++++ after/Point_Trace.md
+@@ -1,85 +1,82 @@
+ # Point Trace — keep the way through
+ 
+-**Learning elements — proposed focus**
+-
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++**Learning elements**
+ 
+ - Ordered position lists
+ - Sampling conditions
+-- Indexed traversal
+-- Neighbour connections
++- Indices and neighbour loops
++- Pen grip and writing tip
+ 
+-Move the point in a loop. Let go. The point stops, but the loop remains: a line through positions the point has left behind.
++In the Endless Museum's Trace hall, take the red pen from its plinth. Draw a bend, pause, then return towards its beginning. Release the pen. The line remains. Read the retained count and the last ten positions on its plinth.
+ 
+-In Point Lines, two positions were enough to draw a segment. Each frame replaced the previous reading. Here we keep readings in order, so the route can outlast the movement.
++Lines gave us a segment between two positions. Here we keep positions in order and connect each one to its neighbour. The museum supplies the player, pickup system, pen, renderer and session storage. Work in the existing project; this lesson follows the pen's record.
+ 
+-Open `point_trace.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). The lesson script is `studies/point_trace/trace.gd`. Hold the point as you did in Lines. This study makes one continuous record; releasing holds the point still, and taking it again continues that record. Restart the scene for a fresh drawing. Releasing also saves a copy for Point Grid; look for **Saved for Point Grid**. The supplied `TraceMemory` carries the list between scenes and separate runs.
++## Keep accepted positions
+ 
+-## 1. Give positions somewhere to stay
++Open `commons/primitives/point/draw_dot.gd`. Its list is declared near the top:
++
++**Museum code excerpt**
+ 
+ ```gdscript
+-var points: Array[Vector3] = []
+-var spacing := 0.08
+-var capacity := 128
++var _trail_points: Array[Vector3] = []
+ ```
+ 
+-`points` is an **Array**: an ordered list. `Array[Vector3]` says what it can hold. Each entry is one position, with three coordinates. The list itself has one index: first entry, second entry, third entry. It is a one-dimensional list of three-dimensional positions.
++An `Array` is an ordered list. Each entry holds a `Vector3`: three coordinates describing one position. The list has one index, even though each position has three components.
+ 
+-`[]` starts it empty. Inside `_ready()`, after placing the point, we keep its first position:
++In `_process()`, `_draw_sphere` refers to this pen's `WritingTip`. The recorder reads its world position. While held, recording waits for the grip to arrive; the pickup approach does not become a line. The movement gate then decides whether to consider another reading. The placed pens use a five-millimetre threshold.
++
++**Reduced code excerpt** — the central recording steps in `_process()`, with guards and display work omitted:
+ 
+ ```gdscript
+-    points.append(point.position)
++var current_global = _draw_sphere.global_position
++var dist = current_global.distance_to(_last_global_position)
++if dist < min_segment_distance:
++    return
++_last_global_position = current_global
++var rec: Vector3 = _shape_sample(current_global)
++_trail_points.append(rec)
+ ```
+ 
+-`append()` adds a value at the end. It stores the position at that moment. Moving the point later does not move that saved position.
++`append()` adds a value at the end. `_shape_sample()` gives the red pen's positions a ten-millimetre spacing in free space; the green and blue pens use forty and eighty millimetres. The full function also rejects a shaped position equal to the previous retained one. The movement threshold and the shaping grid make different decisions. The comparison position updates when the movement gate passes, even if shaping later rejects that reading.
+ 
+-## 2. Decide when to keep another
++Keep this experiment away from the whiteboard, where samples can instead be projected onto its face. Pause with a steady hand: time alone adds no entry.
+ 
+-These lines run inside `_process()`:
++## Follow the order
++
++`_trail_points[0]` reads the first retained position. `_trail_points[1]` reads the second. The plinth numbers these as rows 1 and 2; code indices start at zero.
++
++In `_rebuild_trail()`, the non-fading branch sends the values to a line strip:
++
++**Museum code excerpt**
+ 
+ ```gdscript
+-    var displacement := point.position - points[-1]
+-    if displacement.length() >= spacing:
+-        points.append(point.position)
++for point in _trail_points:
++    _trail_mesh.surface_add_vertex(point)
+ ```
+ 
+-`points[-1]` reads the last entry. We reuse Lines' subtraction and length to measure from that saved position to the point now.
++The renderer connects consecutive vertices. With four entries, it joins 0–1, 1–2 and 2–3. To inspect these pairs explicitly, the existing walking recorder uses this loop in `commons/primitives/point/player_trace.gd`, `get_trail_length()`:
+ 
+-`if` introduces a condition. `>=` means “greater than or equal to”. The indented line runs only when the distance reaches `spacing`: here, 0.08 metres, or eight centimetres. Smaller movements accumulate as a separation from the last saved position; they do not each become entries.
+-
+-Move slowly, then stop. The count stops increasing. Point Zero's frames still pass, but this list records positions rather than elapsed time. A long pause leaves no extra entry to show how long you waited.
+-
+-## 3. Join neighbours in the list
+-
+-After adding a position, the script redraws the retained route:
++**Museum code excerpt**
+ 
+ ```gdscript
+-        drawing.clear()
+-        for i in range(1, points.size()):
+-            drawing.join(points[i - 1], points[i])
++for i in range(1, _trail_points.size()):
++    length += _trail_points[i].distance_to(_trail_points[i - 1])
+ ```
+ 
+-`size()` gives the number of entries. Their indexes start at zero. With four positions, the indexes are `0, 1, 2, 3`.
++`range()` stops before the size. Beginning at 1 makes `i - 1` the preceding valid index. This loop visits a retained list; `_process()` revisits the moving pen over time.
+ 
+-The **for loop** repeats its indented line. `range(1, points.size())` supplies indexes from 1 up to, but excluding, the size. With four entries, `i` becomes 1, then 2, then 3. The pairs are therefore `0–1`, `1–2`, `2–3`: three segments through four positions.
++Trace your bend in its drawing order. Returning to an earlier place can add another entry there. Release and pick up again: the pen continues its retained list rather than starting a new stroke. Its capacity is 4096 positions; adding beyond that removes the oldest entry.
+ 
+-This loop finishes a traversal of the saved list. `_process()` returns each frame to inspect movement. One repeats through entries; the other repeats over time.
++## Seat the pen in your hand
+ 
+-`TraceDrawing` is the supplied display. `clear()` clears the drawing; it leaves `points` alone. Each `join(a, b)` reuses Lines' segment renderer and marks its endpoints with small pink dots. Drawing thickness and mesh construction stay in that helper. The loop deciding which positions to join is yours.
++Open `commons/primitives/point/drawing_pen.gd`, `build_body()`. `WritingGrip` determines the pen's held alignment. `WritingTip` is a separate marker at local Z = −0.155 metres; that is the position we record. Local −Z points towards the nib.
+ 
+-## 4. Change what the route can retain
+-
+-Change `spacing` to `0.25`. Run again and make a similar loop. Fewer positions are kept; the straight connections cut across more of the curve. Restore `0.08` and compare.
+-
+-Spacing is a minimum separation, not a guarantee that every eight centimetres is recorded. We inspect once per frame. A fast move can leave a larger gap, and the drawing joins its ends without knowing what happened between them.
+-
+-The record also has a limit:
++**Student edit** — insert one line after `grip.name = "WritingGrip"`, before `pen.add_child(grip)`:
+ 
+ ```gdscript
+-        if points.size() > capacity:
+-            points.pop_front()
++grip.position.z = -0.03
+ ```
+ 
+-`pop_front()` removes the oldest entry. The remaining entries keep their order. Change `capacity` to `32` and continue drawing. Once the count reaches 32, a new position replaces the oldest; the far end of the route begins to disappear. Waiting alone removes nothing. Restore `128` when you want a longer record.
++Re-run Trace and pick up the pen with each hand. The grip is now three centimetres towards the nib, shortening the tip's reach from the pickup frame. Turn your wrist and draw another bend. Does the visible nib still meet the start you intended? Compare with the original, then remove the line. This shared helper also builds the board's simple pens.
+ 
+-The museum's pens combine a movement threshold with a grid that shapes each saved position. This smaller study follows the handle's centre without snapping it to a grid. All positions use Study's reference frame. Release your drawing before leaving. Grid will reuse this saved list, keeping the original beside a version given grid addresses. You will change the rule without having to make the gesture again.
++You have adjusted the held tool while following the same ordered record. Release a drawing with at least two positions before entering Grid. Release copies the whole retained list into `TraceData` for this running session; it does not save a file. Grid will give that record another arrangement without changing its source positions.

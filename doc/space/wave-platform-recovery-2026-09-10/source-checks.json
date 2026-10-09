@@ -1,0 +1,82 @@
+{
+  "maps": 12,
+  "interior_platforms": 193,
+  "perimeter_walls": 137,
+  "artifact_placements_retained": 136,
+  "active_halls": 6,
+  "extensions_not_activated": 6,
+  "unrelated_plan_rows": "unchanged",
+  "curation_and_route": "unchanged",
+  "repeat_apply": "no-op",
+  "second_consumers": [
+    {
+      "map": "Trans_Pre",
+      "support_changes": [
+        {
+          "token": "pick_up_cube",
+          "from": 0.0,
+          "to": 1.0
+        },
+        {
+          "token": "health_cross",
+          "from": 0.0,
+          "to": 1.0
+        },
+        {
+          "token": "pick_up_cube",
+          "from": 0.0,
+          "to": 1.0
+        },
+        {
+          "token": "health_cross",
+          "from": 0.0,
+          "to": 1.0
+        },
+        {
+          "token": "pick_up_cube",
+          "from": 0.0,
+          "to": 1.0
+        },
+        {
+          "token": "pick_up_cube",
+          "from": 0.0,
+          "to": 1.0
+        }
+      ]
+    },
+    {
+      "map": "Trans_Pit",
+      "support_changes": [
+        {
+          "token": "free_ball_launcher",
+          "from": 0.95,
+          "to": 2.0
+        },
+        {
+          "token": "free_ball_launcher",
+          "from": 0.95,
+          "to": 2.0
+        },
+        {
+          "token": "free_ball_launcher",
+          "from": 0.95,
+          "to": 2.0
+        },
+        {
+          "token": "free_ball_launcher",
+          "from": 0.95,
+          "to": 2.0
+        }
+      ]
+    },
+    {
+      "map": "Point_One",
+      "support_changes": []
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "support_changes": []
+    }
+  ],
+  "runtime_evidence": "ada_run/wave_platform_active.json; separate from these source checks"
+}

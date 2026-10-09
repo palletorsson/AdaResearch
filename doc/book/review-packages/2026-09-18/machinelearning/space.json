@@ -1,0 +1,2403 @@
+{
+  "ML_Evolution": {
+    "map_source": "commons/maps/ML_Evolution/map_data.json",
+    "text_source": "commons/maps/ML_Evolution/final.md",
+    "map_sha256": "3ae0b8de6deb75ca9b6a7532d006fd5d8bed1b5cc94041285d75b1e83e643819",
+    "text_sha256": "1982cda825c0419b4f97e389dff9e3311d6d44d8f9e08d585b437c3b7c879ccc",
+    "map_info": {
+      "name": "Evolution Arena",
+      "lookup_name": "ML_Evolution",
+      "description": "Evolutionary algorithms in action â€” creatures, flowers, rockets, and bloops evolve through selection pressure in a central arena while you observe from a raised amphitheater ring.\n\n[Placement applied humanoid_walker engine — constraint 0.812→0.914, walkability 0.371→0.633]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "6-10 minutes",
+        "spatial_temperature": 0.6,
+        "design_notes": "Amphitheater design â€” raised observation ring (h3) surrounds a sunken central arena (h0 void). Five artifacts spread around the ring edges overlooking the pit. Spawn at top-left, exit at bottom-right."
+      },
+      "title": "Selection Without Design",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next map",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "evolved_creatures:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "evolved_creatures",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "gradient_descent_visualization:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "gradient_descent_visualization",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "non_teleological_evolution:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "non_teleological_evolution",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "evolvingflowers:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "evolvingflowers",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "wp:90",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Evolution",
+      "recorded_status": "source_checked_draft",
+      "text_words": 421,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "non_teleological_evolution"
+        ],
+        "reason": "Can a population change without a single specimen being named the best?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Evolution/final.md",
+        "text_sha256": "1982cda825c0419b4f97e389dff9e3311d6d44d8f9e08d585b437c3b7c879ccc",
+        "map_sha256": "80cc03c973abdf48708648c391981cbcfb7016c696456211f5f28795f38ca4bc",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "non_teleological_evolution"
+      ],
+      "role_primary_order": [
+        "non_teleological_evolution"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Gradient_Landscape": {
+    "map_source": "commons/maps/ML_Gradient_Landscape/map_data.json",
+    "text_source": "commons/maps/ML_Gradient_Landscape/final.md",
+    "map_sha256": "c1cc8616e4a068f0622b68d341539b8532b93dc6f87b07fbd487621f94d7a6cb",
+    "text_sha256": "6795babe138f9416e8699971868293245c5772360551cd46a07479f8bff9c06a",
+    "map_info": {
+      "name": "Gradient Landscape",
+      "lookup_name": "ML_Gradient_Landscape",
+      "description": "Navigate a loss landscape made physical â€” slopes, ridges, and valleys represent the terrain gradient descent must traverse. Feel optimization in your feet.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-8 minutes",
+        "spatial_temperature": 0.65,
+        "design_notes": "Terrain-like height variation representing loss landscape. High ridges (h4-5) frame valleys (h1-2). Three artifacts placed at local minima â€” the player descends through the landscape discovering each."
+      },
+      "title": "Descending the Loss Surface",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "gradient_descent_visualization:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "gradient_descent_visualization",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "pca_visualization:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "pca_visualization",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "loss_function_comparator:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "loss_function_comparator",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 8,
+        "raw_token": "evolved_creatures",
+        "commented_out": false,
+        "lookup_hint": "evolved_creatures",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 8,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Gradient_Landscape",
+      "recorded_status": "source_checked_draft",
+      "text_words": 408,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "loss_function_comparator"
+        ],
+        "reason": "Will the same observations lead to the same best fit when error is measured differently?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Gradient_Landscape/final.md",
+        "text_sha256": "6795babe138f9416e8699971868293245c5772360551cd46a07479f8bff9c06a",
+        "map_sha256": "565bcdae76a35913fd72102788888c77d0e4455179b5e34974bd268c2fbe5a9b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "loss_function_comparator"
+      ],
+      "role_primary_order": [
+        "loss_function_comparator"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Classification": {
+    "map_source": "commons/maps/ML_Classification/map_data.json",
+    "text_source": "commons/maps/ML_Classification/final.md",
+    "map_sha256": "e37addd04afe7e82d974f07bcfb0b5e487b4b19c0719dfe8e580dab7a7960dc8",
+    "text_sha256": "1f1fbee4a528691e9b37ad9429617be4b6d73f96fd34ad1f0e72cbe241a6d2e0",
+    "map_info": {
+      "name": "Classification Boundaries",
+      "lookup_name": "ML_Classification",
+      "description": "Three classification algorithms, three distinct zones â€” K-means clusters, SVM hyperplanes, and random forest regions. Walk the decision boundaries between them.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 15,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.6,
+        "design_notes": "Three classification zones at different heights separated by wall ridges (h5). Zone A (h1) for k-means, Zone B (h2) for SVM, Zone C (h3) for random forest. Narrow passes between zones represent decision boundaries."
+      },
+      "title": "Drawing Boundaries in Data",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "2",
+        "2",
+        "2",
+        "3",
+        "2",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "2",
+        "2",
+        "2",
+        "3",
+        "2",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "3",
+        "2",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "3",
+        "3",
+        "1",
+        "3",
+        "3",
+        "2",
+        "3",
+        "3",
+        "2",
+        "3",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "2",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "enhanced_kmeans:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "enhanced_kmeans",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "svm_visualization:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "svm_visualization",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 5,
+        "raw_token": "random_forest_visualization:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "random_forest_visualization",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "wp:270",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 6,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 8,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 10,
+        "z": 9,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Classification",
+      "recorded_status": "source_checked_draft",
+      "text_words": 431,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "enhanced_kmeans"
+        ],
+        "reason": "When points share a colour, has a group been discovered or assigned?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Classification/final.md",
+        "text_sha256": "1f1fbee4a528691e9b37ad9429617be4b6d73f96fd34ad1f0e72cbe241a6d2e0",
+        "map_sha256": "b9fe57ce05f08610b745b31f37aa7305ba1ff2af584d13ebc0ed66c752bb6db0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "enhanced_kmeans"
+      ],
+      "role_primary_order": [
+        "enhanced_kmeans"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Neural_Networks": {
+    "map_source": "commons/maps/ML_Neural_Networks/map_data.json",
+    "text_source": "commons/maps/ML_Neural_Networks/final.md",
+    "map_sha256": "f53ef04a9d45ee3611f217ad149168eb413cbd545ef554ce9313b2cd0079c86e",
+    "text_sha256": "654ee502f50169df70ab30f1e754bf0708dbe9efafe93435ec2e7903d5a5d70c",
+    "map_info": {
+      "name": "Neural Network Pipeline",
+      "lookup_name": "ML_Neural_Networks",
+      "description": "Walk through a neural network â€” each chamber is a layer, narrow corridors are connections. Data flows from input to output as you move deeper.\n\n[Placement applied promenade engine — constraint 0.814→0.947, walkability 0.411→0.622]",
+      "version": "placed-promenade",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 16,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.6,
+        "design_notes": "Narrow corridor pipeline â€” three wider chambers (h1) connected by bottleneck passages (width 1). Each chamber holds one artifact. Walls (h5) form the pipeline exterior. Player walks through 'layers' of the network."
+      },
+      "title": "Layers Learn Features",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "neural_network_visualization:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "neural_network_visualization",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "neural_networks_vr:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "neural_networks_vr",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 8,
+        "raw_token": "fine_tuning_vr",
+        "commented_out": false,
+        "lookup_hint": "fine_tuning_vr",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 4,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 4,
+        "z": 14,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Neural_Networks",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "neural_network_visualization"
+        ],
+        "reason": "What changes in a network when its answers become closer to the examples?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Neural_Networks/final.md",
+        "text_sha256": "654ee502f50169df70ab30f1e754bf0708dbe9efafe93435ec2e7903d5a5d70c",
+        "map_sha256": "a17e4d5fd22c56ad39c9e588ea89c3311683fc6c534967b060824df48ab9b15d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "neural_network_visualization"
+      ],
+      "role_primary_order": [
+        "neural_network_visualization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Perception": {
+    "map_source": "commons/maps/ML_Perception/map_data.json",
+    "text_source": "commons/maps/ML_Perception/final.md",
+    "map_sha256": "c26b2dce33c03d7b51e646f5fb77697bf8629c5f41d77c38c4833f1a2611d841",
+    "text_sha256": "686ca6d3b2791614b6a686f946a81ff17d692372c9350ac364c6dc678a7a0b12",
+    "map_info": {
+      "name": "Perception Gallery",
+      "lookup_name": "ML_Perception",
+      "description": "A gallery of machine perception â€” computer vision, convolutional networks, and attention mechanisms. Stand back and see how machines learn to see.\n\n[Placement applied hybrid engine — constraint 0.920→0.948, walkability 0.340→0.365]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 10,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.6,
+        "design_notes": "Gallery layout â€” open floor (h1) with three alcoves cut into walls (h5). Each alcove frames an artifact like a painting in a museum. Central viewing space gives distance for appreciation."
+      },
+      "title": "How Machines Learn to See",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "computer_vision_vr:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "computer_vision_vr",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 6,
+        "raw_token": "convolutional_neural_networks_cnns_vr:180:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "convolutional_neural_networks_cnns_vr",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 5,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 5,
+        "z": 8,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Perception",
+      "recorded_status": "source_checked_draft",
+      "text_words": 401,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "computer_vision_vr"
+        ],
+        "reason": "Which parts of this display were computed from pixels, and which were supplied as names?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Perception/final.md",
+        "text_sha256": "686ca6d3b2791614b6a686f946a81ff17d692372c9350ac364c6dc678a7a0b12",
+        "map_sha256": "66d00146dc352a3cb74fd00c373de6990e8c6fc2d926149339d468780b3a3e4c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "computer_vision_vr"
+      ],
+      "role_primary_order": [
+        "computer_vision_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Sequence_Memory": {
+    "map_source": "commons/maps/ML_Sequence_Memory/map_data.json",
+    "text_source": "commons/maps/ML_Sequence_Memory/final.md",
+    "map_sha256": "20191e59208c74353e6a3b39ac37ceec11ab5096c60cd085dd91069f41380bbc",
+    "text_sha256": "971490b3dfe4fcd40ca80aae3250d71630e53fd3639b2006ee622737cf3ce5f0",
+    "map_info": {
+      "name": "Sequence Memory",
+      "lookup_name": "ML_Sequence_Memory",
+      "description": "Time flows forward through this corridor â€” LSTMs remember, transformers attend, time series predicts. Each step is a timestep in the sequence.\n\n[Placement applied hybrid engine — constraint 0.898→0.799, walkability 0.264→0.659]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 4,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.65,
+        "design_notes": "Long narrow corridor â€” time flows from spawn to exit. Three artifacts at regular intervals like timesteps. Width varies slightly to break monotony. Walls close in then open, creating rhythm."
+      },
+      "title": "Gates and Attention Over Time",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "3",
+        "3"
+      ],
+      [
+        "1",
+        "1",
+        "3",
+        "3"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "3"
+      ],
+      [
+        "3",
+        "2",
+        "2",
+        "3"
+      ],
+      [
+        "3",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "3",
+        "2",
+        "2",
+        "3"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "3"
+      ],
+      [
+        "w",
+        "2",
+        "3",
+        "3"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "3"
+      ],
+      [
+        "3",
+        "2",
+        "2",
+        "1"
+      ],
+      [
+        "3",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 5,
+        "raw_token": "transformers_vr:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "transformers_vr",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 0,
+        "z": 8,
+        "raw_token": "lstms_vr:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "lstms_vr",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 1,
+        "z": 2,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Sequence_Memory",
+      "recorded_status": "source_checked_draft",
+      "text_words": 410,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lstms_vr"
+        ],
+        "reason": "What would a memory need to keep, admit and reveal separately?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Sequence_Memory/final.md",
+        "text_sha256": "971490b3dfe4fcd40ca80aae3250d71630e53fd3639b2006ee622737cf3ce5f0",
+        "map_sha256": "a440e81cfcfd322ea101d64b151b57f1ce2fa900db8610519d8cd27cfd040be5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "lstms_vr"
+      ],
+      "role_primary_order": [
+        "lstms_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Generative": {
+    "map_source": "commons/maps/ML_Generative/map_data.json",
+    "text_source": "commons/maps/ML_Generative/final.md",
+    "map_sha256": "787ac058a31d5ec78bc2b3e2fbc04061f3fa693ed7b5d4c98a548778f35f2038",
+    "text_sha256": "923305fd32806ca72863e89059b90461b449d5f46a46ac1c8a03eb93b78d81e1",
+    "map_info": {
+      "name": "Generative Duel",
+      "lookup_name": "ML_Generative",
+      "description": "Generator vs discriminator â€” two mirrored halves face each other across a central divide. GANs and VAEs create from noise.\n\n[Placement applied hybrid engine — constraint 0.947→0.960, walkability 0.681→0.677]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 8,
+        "depth": 8,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "4-6 minutes",
+        "spatial_temperature": 0.65,
+        "design_notes": "Mirrored room split by central wall (h5) with passage at center. Left half = generator side (h1), right half = discriminator side (h1). Each side has one artifact. Symmetry represents the adversarial balance."
+      },
+      "title": "Adversarial Creation from Noise",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "3",
+        "3",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "3",
+        "3",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "generative_adversarial_networks_gans_vr:90:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "generative_adversarial_networks_gans_vr",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 0,
+        "z": 3,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 6,
+        "z": 7,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Generative",
+      "recorded_status": "source_checked_draft",
+      "text_words": 413,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "generative_adversarial_networks_gans_vr"
+        ],
+        "reason": "Who judges a generated example, and how could that judgement change its maker?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Generative/final.md",
+        "text_sha256": "923305fd32806ca72863e89059b90461b449d5f46a46ac1c8a03eb93b78d81e1",
+        "map_sha256": "e3c4371fc4cc586c7c8af70a3cc3a0dcb6bf5d88a523e0d53e5c8ec843bdedc1",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "role_primary_order": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "ML_Synthesis": {
+    "map_source": "commons/maps/ML_Synthesis/map_data.json",
+    "text_source": "commons/maps/ML_Synthesis/final.md",
+    "map_sha256": "48f0db148d05c6158c7b65abe88eb9a7b79249e2e435541484114a3159f8bffc",
+    "text_sha256": "aa7d3958ace196298215d1f9e7fd01f05e64a6696e22bc9df23860d40c21dc19",
+    "map_info": {
+      "name": "ML Synthesis Arena",
+      "lookup_name": "ML_Synthesis",
+      "description": "Everything comes together â€” joint learning, explainability, and anomaly detection on floating platforms in an open arena. The synthesis of machine learning.\n\n[Placement applied humanoid_walker engine — constraint 0.886→0.962, walkability 0.746→0.701]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "machinelearning",
+        "estimated_time": "5-8 minutes",
+        "spatial_temperature": 0.7,
+        "design_notes": "Open arena with raised platforms (h3) scattered in a void-floor (h0) space. Walkways (h1) connect spawn to each platform. Three artifacts on separate platforms â€” synthesis requires visiting all. Player navigates between islands."
+      },
+      "title": "Agents That Question Themselves",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "2",
+        "0",
+        "0",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "2",
+        "0",
+        "0",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "anomaly_detection:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "anomaly_detection",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "joint_learn_walk:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "joint_learn_walk",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "explainable_ai_xai_vr:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "explainable_ai_xai_vr",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "tc:5:x",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "tc:5:z",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 1,
+        "z": 9,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "ML_Synthesis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 413,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "anomaly_detection"
+        ],
+        "reason": "Is a point unusual by itself, or unusual under a particular measuringrule?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Synthesis/final.md",
+        "text_sha256": "aa7d3958ace196298215d1f9e7fd01f05e64a6696e22bc9df23860d40c21dc19",
+        "map_sha256": "e4346e3782296b62ee4c7926e4c76cebe9531cb3ab98c768ae368546d7a77020",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "anomaly_detection"
+      ],
+      "role_primary_order": [
+        "anomaly_detection"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

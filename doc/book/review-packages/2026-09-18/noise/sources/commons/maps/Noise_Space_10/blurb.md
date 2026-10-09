@@ -1,0 +1,1 @@
+A gold line proposes a crossing. At one height setting the desktop body reaches the other side; at another it stops partway. Keep the field and destinations fixed, change the height contribution, and discover what a route leaves for a body to decide.

@@ -1,0 +1,34 @@
+{
+  "hall": "QFEP_E_Term",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "seven_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "microstate_counter",
+    "entropy_fan",
+    "possibility_space_cloud",
+    "particle_chaos",
+    "lambda_slider",
+    "random_cubes"
+  ],
+  "primary_artifacts": [
+    "entropy_fan"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_E_Term\\map_data.json": "8d138d023a01b221c3c888b24a47f506df2f34c0c4c2966b6dd8cdff37758f84",
+    "commons\\maps\\QFEP_E_Term\\final.md": "4b6e0ea0d9b5cfe06cd4c3922fbe411626802356d9d1f8b0eafd4f22504ee1dc",
+    "commons\\maps\\QFEP_E_Term\\tutorial.md": "56846b11195dd67c601143e793b11a7607043cecaef027898821c330004bfd01",
+    "commons\\maps\\QFEP_E_Term\\technical.md": "6e21d035126e5d3b408b232b704f765713a360e7de363aeaa6baa89e3a7085b9",
+    "commons\\maps\\QFEP_E_Term\\critical.md": "7c9ed6c42715a74cfe67cae505f23a5a82d4a4ea18c3e7d15f7db5283f734db8"
+  }
+}

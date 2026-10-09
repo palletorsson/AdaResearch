@@ -1,0 +1,16 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
+@@ -55,3 +55,13 @@
+ Releasing a ring stops its pulling force, leaving gravity, inertia and constraints to act. The HANG AGAIN button on the stand resets velocities and authored part transforms, then recreates the head support. It refuses while a limb is held. Physics transforms are explicitly synchronized before constructing joints and after resetting, avoiding stale attachment frames. No external pose or visitor save is written: the existing gold body and its Synthesis return remain independent.
+ 
+ [Godot PinJoint3D documentation](https://docs.godotengine.org/en/4.6/classes/class_pinjoint3d.html) describes the free joint; [RigidBody3D documentation](https://docs.godotengine.org/en/4.6/classes/class_rigidbody3d.html) describes force application. This is a stylized physics puppet, not a biomechanics model or an avatar worn by the player. Headset reach, comfort, haptic feel and Quest performance still require on-device testing. [Actual museum captures and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-ragdoll/index.html).
++
++## Furniture with the same pulling rule
++
++`body_furniture=true` adds three simultaneous studies via `AssemblyFurnitureStudy.gd`, which inherits the existing ragdoll's force application, coral grips, elastic tethers and reset behavior. Chair, Table and Lamp retain the part names, relative source positions, part masses and connection lists from `assemblies.json`. Their collision geometry is fitted explicitly: the chair back is vertical, panels have finite thickness, legs reach the support surface, and the lamp gets a conical shade and a light on its bulb. This is a staged physics interpretation of those graphs, not a literal reproduction of every catalogue mesh.
++
++Chair has six rigid parts and five pin joints; Table has five and four; Lamp has four and three. Chair and Lamp use a 1.2 physical size multiplier, Table 1.15; all have unit node scale and a 0.04 m floor offset. Non-adjacent parts collide. The links freely rotate, so these are articulated experiments rather than ordinary welded furniture or seating for the player.
++
++Thin visible lines mark initial staging supports. One extra pin per part holds its centre in the authored starting arrangement. Taking any coral ring removes all staging pins for that object. Its structural joints remain. Released objects settle through gravity and contact; each REASSEMBLE button restores only its own supported pose, refusing during a hold. The lamp's bulb retains its light when it falls; electrical breakage is not simulated. Furniture changes are not saved into the gold body's return record.
++
++The studies stand at map coordinates Chair (3.0, 0, 2.3), Table (8.7, 0, 2.3), and Lamp (9.2, 0, 9.8), facing the central passage. Each mat is 2.6 m square and 0.024 m high. The automatic sculpture exclusion grows to [1,1,11,11] to keep these workspaces available. The existing catalogue, gold workshop and human ragdoll are preserved. [Actual museum images, source diffs and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-furniture/index.html). On-headset reach, comfort and performance remain unverified.

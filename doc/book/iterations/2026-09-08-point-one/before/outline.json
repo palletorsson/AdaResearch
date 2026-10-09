@@ -1,0 +1,31 @@
+{
+  "inherited": "No prior mathematical room is required. Begin with the visitor's ability to distinguish here from there and to move a held object. The frame counter establishes that the museum was operating before this first lesson began.",
+  "question": "If a point has no size, what are you holding, and what makes its position readable?",
+  "ontology": "A mathematical point specifies a location without extension. Coordinates express a location relative to a frame; the origin is the point designated zero in that frame. This implementation stores position numerically and supplies a sphere, a label, and a pickable body so a visitor can encounter it. Those aids are additional properties of the artifact, not properties of a dimensionless point.",
+  "experiment": "Pick up interactive_point_origin_force and predict which coordinate changes as you move mainly along one direction. Compare its location with origin, then find a small movement that leaves a printed WORLD component on coordinate_readout unchanged. Carry the same point through CoordinateSystem3M and compare its local-frame reading with WORLD. Finally approach drag_point_target from two directions, leave and return; compare the success response before explaining what its arrival test retains.",
+  "observe": "The point's visible formats and wall WORLD readout round coordinates to two decimals; a small movement can therefore leave a printed value unchanged. The coloured frame uses its own local coordinates. The target accepts coordinate-group points within a 0.45 m radius around a centre 1.20 m above its origin, requires no release and rearms after departure. Its success condition does not retain the route taken. These source-supported behaviors still need a human encounter check.",
+  "limit": "A rounded label cannot establish that two positions are identical. Neither a Vector3 nor the sphere captures the whole body performing the movement. The critical opening is to identify who selected the reference and the visible precision, without treating the choice of coordinates as a mathematical error.",
+  "variation": "Proposed: let the visitor choose which of the existing reference frames names a destination, and make the target display that choice. Both world and local readings are already part of the chapter; visitor-selectable destination framing is the further build. Alternatively let repeated successful arrivals become a rhythm, then ask which additional record would distinguish that chosen play from the assigned delivery task.",
+  "handoff": "Carry two distinguishable positions into Point_Lines. The next question is what a relation between them retains that either position alone cannot.",
+  "candidate_artifacts": [
+    "interactive_point_origin_force",
+    "origin",
+    "coordinate_readout",
+    "CoordinateSystem3M"
+  ],
+  "sources": [
+    "commons/maps/Point_One/map_data.json",
+    "commons/maps/Point_One/brief.md",
+    "commons/maps/Point_One/final.md",
+    "commons/primitives/point/interactive_point_origin.gd",
+    "commons/primitives/point/interactive_point_origin_force.gd",
+    "commons/primitives/point/coordinate_readout.gd",
+    "commons/artifacts/drag_point_target/drag_point_target.gd",
+    "commons/data/artifact_roles.json"
+  ],
+  "open_questions": [
+    "Can a visitor keep the same point associated with the wall readout, coloured frame and target throughout the encounter, without losing the target of attention?",
+    "Does the force variant's pickup morph or attraction obscure the first position comparison? Decide whether that behavior needs a later invitation after a desktop and VR walk.",
+    "Check label legibility, reference-line visibility and the repeated target response from the actual approach; source reconciliation is not educational acceptance."
+  ]
+}

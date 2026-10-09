@@ -1,0 +1,1 @@
+One small mark returns across a field. Change its neighbour, reverse its copies, then follow a loom recipe onto two different surfaces. One sheet bends; one can keep an earlier image. What must stay shared for this still to be the same pattern, and where would you let a difference remain?

@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "message": "pre-tree comparison configuration starts paused at zero",
+      "ok": true
+    },
+    {
+      "message": "five existing-style button areas built once",
+      "ok": true
+    },
+    {
+      "message": "four current-position markers built",
+      "ok": true
+    },
+    {
+      "message": "wall time does not advance comparison history",
+      "ok": true
+    },
+    {
+      "message": "one STEP signal advances exactly one source step",
+      "ok": true
+    },
+    {
+      "message": "REPLAY resets heights scent walkers and RNG",
+      "ok": true
+    },
+    {
+      "message": "batch signal advances20steps",
+      "ok": true
+    },
+    {
+      "message": "twenty single steps equal one batch",
+      "ok": true
+    },
+    {
+      "message": "controlled ATTRACT exactly matches pre-change source fixture",
+      "ok": true
+    },
+    {
+      "message": "AVOID selects existing law and same starting walkers",
+      "ok": true
+    },
+    {
+      "message": "controlled AVOID exactly matches pre-change source fixture",
+      "ok": true
+    },
+    {
+      "message": "law change changes history after same300steps",
+      "ok": true
+    },
+    {
+      "message": "every marker reports actual current walker position",
+      "ok": true
+    },
+    {
+      "message": "repeated unchanged config neither duplicates nor resets history",
+      "ok": true
+    },
+    {
+      "message": "one panel and four markers survive repeated controls",
+      "ok": true
+    },
+    {
+      "message": "REPLAY preserves selected law",
+      "ok": true
+    },
+    {
+      "message": "legacy live placement adds no controls or markers",
+      "ok": true
+    },
+    {
+      "message": "legacy process still advances live simulation",
+      "ok": true
+    },
+    {
+      "message": "one octave ignores spacing of absent later layers",
+      "ok": true
+    },
+    {
+      "message": "persistence changes finite layered value",
+      "ok": true
+    },
+    {
+      "message": "OCT callback regenerates current texture",
+      "ok": true
+    },
+    {
+      "message": "OCT/PER changes retain seeded offsets",
+      "ok": true
+    },
+    {
+      "message": "projectile independently jitters inside configured velocity bands",
+      "ok": true
+    },
+    {
+      "message": "projectile also varies its own jitter interval",
+      "ok": true
+    },
+    {
+      "message": "same launch velocity with another projectile RNG gives another later velocity",
+      "ok": true
+    }
+  ],
+  "collision_playthrough": false,
+  "headset_tested": false,
+  "measurements": {
+    "attract_signature": "81625733333439f185d7b8084120884571e122325f4e6c5bac84da37ba9039c2",
+    "avoid_signature": "b075a12c93e9ce4d0353cf1e89b05bd7b23598f1521cd44790405ee89d51d051"
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "sequence": "graphtheory",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "GT_Foundations",
+      "primary_tokens": [
+        "two_travelers"
+      ],
+      "question": "Does a graph already contain the order in which we should visit it?",
+      "ontology": "A graph separates vertices from their connections. A traversal adds an order ofvisiting to that relation.",
+      "action": "Choose one of the15lamps. Watch the blue tide and then the amber diver reach it; predict which neighbouringlamp lights next.",
+      "observable": "The tide lights successivelevels; the diver follows a branch before returning to another. The same lamps and edges remainthroughout.",
+      "mechanism": "Both orders are actually computed from one adjacencylist: BFS removes from aqueuefront, DFS removes from a stackback. The orders replay at.45seconds pervisit with a pausebetween.",
+      "limit": "A drawnheight is not inherent importance, and traversalorder is not the graph itself. A tree also lacks the cycleambiguities of generalgraphs.",
+      "variation": "Existing: follow a deep lamp rather than the root, making its delay the comparison. Proposed: let thevisitor choose the startingvertex or add a cycle.",
+      "prior_bridge": "Machinelearning classified samples; graphs begin by asking what connections we retain.",
+      "next_bridge": "The next room moves the drawing while retaining theconnections.",
+      "sources": [
+        {
+          "path": "commons/artifacts/two_travelers/two_travelers.gd",
+          "line": 105,
+          "function_or_anchor": "func _bfs",
+          "fact": "Queue-based order on15-node tree."
+        },
+        {
+          "path": "commons/artifacts/two_travelers/two_travelers.gd",
+          "line": 115,
+          "function_or_anchor": "func _dfs",
+          "fact": "Stack-based secondorder."
+        },
+        {
+          "path": "commons/artifacts/two_travelers/two_travelers.gd",
+          "line": 129,
+          "function_or_anchor": "func _process",
+          "fact": "Alternatingreplays."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Foundations/map_data.json": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+        "commons/maps/GT_Foundations/intent.md": "4448dfaa21a8837b0529b8b123fe98112b37eafff27cbd666ecae8b978b0306e",
+        "commons/maps/GT_Foundations/tutorial.md": "641051c0a43df4bb066a0693aa100e8c8bdb158363025b8b95e9897f375a9c41",
+        "commons/maps/GT_Foundations/technical.md": "8bf45c5b804fa0915b1a9a5e7840e8563acd1d176954e47f40f913f702efe1aa",
+        "commons/maps/GT_Foundations/critical.md": "b926fe0bb0f8dfd628ad760fb08280966e9d244922147d53bc56c102a61ab87f",
+        "commons/artifacts/two_travelers/two_travelers.tscn": "aa668db99bdfaa3bafa1732765e18b85b2095d445a1c2383db0fb8226d5a155a",
+        "commons/artifacts/two_travelers/two_travelers.gd": "1d3670b0446d88818c09d80a84685fd29bc6603f130e3bb6ece5dc2a98a6c6aa"
+      },
+      "placements": [
+        {
+          "x": 10,
+          "z": 9,
+          "raw": "two_travelers"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "GT_Layout",
+      "primary_tokens": [
+        "force_directed_layout"
+      ],
+      "question": "Can the picture change while the graph stays the same?",
+      "ontology": "A layout assigns spatialpositions to vertices. Adjacency says whichvertices are joined and can remain unchanged throughout that movement.",
+      "action": "Track one movingvertex and count its links before and after the drawing settles.",
+      "observable": "Eightvertices move while the same12connections stretch and turn; the defaultgraph is the cubegraph drawn in aplane.",
+      "mechanism": "Connectedpairs attract through springs; allpairs repel. Dampedvelocity integrates forces, so initialpositions influence the eventualdrawing.",
+      "limit": "Closeness on the page is a layoutresult, not necessarily a directconnection. A neatdrawing does not prove its arrangement uniquely represents the graph.",
+      "variation": "Existing: compare what you thought was central before/afterrelaxation. Proposed: expose alternate initialpositions with fixedadjacency, then try a ring or star as anexplicit differentgraph.",
+      "prior_bridge": "The same tree supported two itineraries; now the same adjacency supports changingpositions.",
+      "next_bridge": "Pathfinding will change connections rather than merelymoving their picture.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+          "line": 101,
+          "function_or_anchor": "func connections_for",
+          "fact": "Default8vertices12cubeedges."
+        },
+        {
+          "path": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+          "line": 278,
+          "function_or_anchor": "func calculate_forces",
+          "fact": "Spring attraction andpairrepulsion."
+        },
+        {
+          "path": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+          "line": 324,
+          "function_or_anchor": "func update_positions",
+          "fact": "Dampedphysical layoutupdates."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Layout/map_data.json": "f3273bf4d179fb63dd0ccd27027da236f93aeac316842477ff57084498677c4d",
+        "commons/maps/GT_Layout/intent.md": "01e21f821cb0deec7be9cb0c6075f5487840859343aaabebda8b740911139d0e",
+        "commons/maps/GT_Layout/tutorial.md": "b8627b6436074601670061ddd17707a5be479eada1b66c8a7dff45697799e922",
+        "commons/maps/GT_Layout/technical.md": "d737ab3e13f089cc802caf53883c469a7c026a49c051889cadae027619fb4075",
+        "commons/maps/GT_Layout/critical.md": "41cd31f28903679955cc9f115db8005b65e16a72b70d7500bdf435e70327d3c5",
+        "algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn": "2ab031dc6603af23c577358bbfcedf75d119ae37d7a69354ab0766a0de6338e9",
+        "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd": "27d7221c54cfd5ffad13b0ea004bb5702292fc42dfa03382ebf0cdab29e55490"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 5,
+          "raw": "force_directed_layout:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "GT_Pathfinding",
+      "primary_tokens": [
+        "impatient_river"
+      ],
+      "question": "What happens to the shortest route when a stone disappears?",
+      "ontology": "A route is a sequence ofconnected vertices. Shortest refers to summed edgecost on the currentgraph, not the traveller remembering a line.",
+      "action": "Follow the spark between riverbanks, press thebutton to sink a stone, and compare the next computedroute. Repeat to see an oldstone return after the queue exceeds3.",
+      "observable": "A route stone lowers and becomes unavailable; the spark is replanned immediately. Some removals can yield a NO ROUTE message instead of a detour.",
+      "mechanism": "AStar3D connects nearby stones within1.05units, with extra bankconnections. The button disables a routepoint and keeps at most3disabled stones; each bankarrival also recomputes thepath.",
+      "limit": "The spark queries agraph, not actualhuman jumpingability. A drawn stone is not a verified walkablesurface or a promise that every removal has analternatepath.",
+      "variation": "Existing: intentionally interrupt the route and treat waiting or disconnection as an outcome. Proposed: permit a slower accessible route objective alongside Euclideandistance.",
+      "prior_bridge": "Moving a graphpicture left adjacency intact; sinking a stone changes which routes exist.",
+      "next_bridge": "Networkanalysis asks what eachconnection contributes to thewhole.",
+      "sources": [
+        {
+          "path": "commons/artifacts/impatient_river/impatient_river.gd",
+          "line": 74,
+          "function_or_anchor": "func _build_stones",
+          "fact": "Seededstone graph and banklinks."
+        },
+        {
+          "path": "commons/artifacts/impatient_river/impatient_river.gd",
+          "line": 180,
+          "function_or_anchor": "func _on_sink",
+          "fact": "Disabledpoint pool andimmediate replan."
+        },
+        {
+          "path": "commons/artifacts/impatient_river/impatient_river.gd",
+          "line": 124,
+          "function_or_anchor": "func _replan",
+          "fact": "Engine AStar3D and noroute readout."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Pathfinding/map_data.json": "b8a333adc5bb403e0ad0bedb13171885ccb7d74375a6f67a7446c6c9ef9f08fa",
+        "commons/maps/GT_Pathfinding/intent.md": "8cb18aade9c85eec86cc39bdbb4d286572a351cb9f1063436b6f66a4e5152911",
+        "commons/maps/GT_Pathfinding/tutorial.md": "70c6254604df6dcc279b1312a2ce969f352be1404ab9bfcf279860c10d79dec9",
+        "commons/maps/GT_Pathfinding/technical.md": "1f9d44752a441270c5ee59857430d28ea06d17b4974bc91663fdbd2b0451a3d3",
+        "commons/maps/GT_Pathfinding/critical.md": "0a823044310a885657f4714db1da4852dcd290de9dc4fde0aeaf7cb679188248",
+        "commons/artifacts/impatient_river/impatient_river.tscn": "43cc8709acb188bbb114acd3ba43e45c1a4f75f80956a3ba80a0ec9b64bb5ab4",
+        "commons/artifacts/impatient_river/impatient_river.gd": "be399ec1cc06686259a17daca84df744b22cdb05e8f46f40a468e3a870cdc610"
+      },
+      "placements": [
+        {
+          "x": 10,
+          "z": 9,
+          "raw": "impatient_river"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "GT_Network_Analysis",
+      "primary_tokens": [
+        "network_analysis"
+      ],
+      "question": "Is the biggest node the one whose connections matter most?",
+      "ontology": "Degree counts immediateconnections; othercentrality measures answer different questions about routes or influence. Drawing a hub is distinct from measuring one.",
+      "action": "Choose one largenode and one smallnode. Count their visibleconnections and trace at least one route through each before trusting its visualrank.",
+      "observable": "The scene stages5central,8middle and12peripheral nodes, connecting and animating them with deliberately different sizes andcolours.",
+      "mechanism": "Tierlabels and centralityvalues are assigned when nodes arecreated. The displayed clustering/connectivity variables vary with time, not computed graphstatistics.",
+      "limit": "This is a networkdiagram, not a validatedcentrality calculator. Sizeandcolour may guide a hypothesis but cannot serve as evidence that its assignedtier isimportant.",
+      "variation": "Existing: begin from a peripheralnode and identify what its routespermit. Proposed: compute and show actual degree orbetweenness, then compare with the originalvisual hierarchy.",
+      "prior_bridge": "The river showed that removing a node can change routes; now ask which relationships would be lost.",
+      "next_bridge": "Directedconnectivity next requires that a route can alsocomeback.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+          "line": 142,
+          "function_or_anchor": "func create_network_nodes",
+          "fact": "Authoredtiers withassignedcentrality."
+        },
+        {
+          "path": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+          "line": 131,
+          "function_or_anchor": "func _process",
+          "fact": "Time-basedstatistics rather than graphmeasurement."
+        },
+        {
+          "path": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+          "line": 217,
+          "function_or_anchor": "func create_network_edges",
+          "fact": "Actualdisplayed connections."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Network_Analysis/map_data.json": "7028c44b7ff027d269bae2ae88c4314ae0992bbfcca1f2e4524eb514570377f4",
+        "commons/maps/GT_Network_Analysis/intent.md": "b2525982533ad16b674647e2ed56dcf50d4670e3ecc41546c18a056ed2aca745",
+        "commons/maps/GT_Network_Analysis/tutorial.md": "45b009c2879c4de0a717dc4a07e6b8f6a7d867d361eb64579f9977c58b396924",
+        "commons/maps/GT_Network_Analysis/technical.md": "cd04dca521b5cf1957e1e19cec67abee4ef77e980de953bfd8a6675acbbbc12e",
+        "commons/maps/GT_Network_Analysis/critical.md": "51448305d113bd6cae21f53ab46f2a3bc909ff61a3f6211ed9020a20132f1ff1",
+        "algorithms/graphtheory/network_analysis/network_analysis.tscn": "970358e60ab58b49babb381ed9a71dd142342beae8c91504c3e9c6091cad2afb",
+        "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd": "0640e25946b5cdfbd2872c4d3ba38b593ae950f246a2a5cd94ab5e7e7ea5e0cb"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 8,
+          "raw": "network_analysis:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Central concept gap: calculatecentrality from adjacency before treating visualhierarchy asalgorithmic result."
+      ]
+    },
+    {
+      "room_id": "GT_Connectivity",
+      "primary_tokens": [
+        "tarjan_algorithm"
+      ],
+      "question": "If you can reach another node, can you get back?",
+      "ontology": "A strongly connectedcomponent is a maximal set whosevertices can reach eachother along directedpaths. One-way contact is insufficient.",
+      "action": "Pick two vertices joined by anarrow, then trace a returnroute. Watch the automaticsearch assign componentcolours and compare its grouping with your prediction.",
+      "observable": "Current, visited, backedge andcomponent colours expose a depth-firstsearch; the status announces each discoveredcomponent.",
+      "mechanism": "Tarjan records discoverytimes and lowlinks, keeps activevertices on astack, and pops a component when a completedvertex has lowlink equal to its discoverytime.",
+      "limit": "Mutualreachability is a precise relation in this directedgraph, not mutualtrust, equality or universalaccess. A one-way bridge can connect a drawing without merging its strongcomponents.",
+      "variation": "Existing: search for a route that leaves acomponent and cannot return. Proposed: expose a reversiblearrow and observe whichcomponents merge.",
+      "prior_bridge": "Visualnetworkrank depended on representation; directedreachability gives an explicit groupingrule.",
+      "next_bridge": "Spanningtrees ask how few connections can retain reachability in anundirected graph.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+          "line": 549,
+          "function_or_anchor": "func process_tarjan_step",
+          "fact": "Discovery/lowlink propagation andstack-based SCC extraction."
+        },
+        {
+          "path": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+          "line": 140,
+          "function_or_anchor": "func _ready",
+          "fact": "Default auto_start initiatessearch."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Connectivity/map_data.json": "3aa5970405e8a8459a387ccd95f8232fb59aab5a36eb1dd05303b6554f8f01c5",
+        "commons/maps/GT_Connectivity/intent.md": "0bca439bacd5cf07791ce68d7e1a3af74de428af672af22cd939945e20f9d011",
+        "commons/maps/GT_Connectivity/tutorial.md": "2a12cf81c449f8db30ce971413f83dc3096001d4734ce3783b98ae6bcd725cd3",
+        "commons/maps/GT_Connectivity/technical.md": "5c02a7d3d369eb6687845f18199a122307b119afb507941cb83f7b611d90a691",
+        "commons/maps/GT_Connectivity/critical.md": "8eca57f3b2cd949d02fb12ff58d30577ddb38e0ff79b4876b4844b5f7207596e",
+        "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn": "718d86bd67633995e51afd8b06ccde73198994b75a39e16896ac12037a6ee46f",
+        "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd": "7a7a3e0e6f214d2b6282b6f1973828b3e8d7a414198b15105f40a5ffa5745681"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 2,
+          "raw": "tarjan_algorithm:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "GT_Spanning_Trees",
+      "primary_tokens": [
+        "mst_visualization"
+      ],
+      "question": "Which connections can be removed while keeping everyone connected?",
+      "ontology": "A spanningtree connects everyvertex withoutcycles. A minimumspanningtree minimizes totaledgeweight among suchtrees for a connectedweighted undirectedgraph.",
+      "action": "Watch candidateedges receive attention and greenedges join thebackbone. Before eachdecision, predict whether accepting theedge would close acycle.",
+      "observable": "Acceptededges accumulate until the backboneconnects allvertices; some edges are skipped even when short because their ends already belong to thesamecomponent.",
+      "mechanism": "The defaultKruskal path sorts byweight and uses union-find to reject cycleclosingedges. Weight is assigned from the generatedgraph; the nextlowest eligibleedge joins components.",
+      "limit": "Lowesttotalcost does not provide redundantconnections. Every treeedge is a singlepoint of disconnection if removed; reliability may justify an extraedge.",
+      "variation": "Existing: mentally remove an acceptededge and identify the two resultinggroups. Proposed: compare the cheapesttree with a deliberately redundantnetwork and name the extracost.",
+      "prior_bridge": "Strongcomponents asked about roundtrips; now connectivity must survive deliberateedge removal.",
+      "next_bridge": "Flowadds capacity and asks how much can pass through connections.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+          "line": 851,
+          "function_or_anchor": "func step_kruskal",
+          "fact": "Weightordered acceptance withunion-find cyclecheck."
+        },
+        {
+          "path": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+          "line": 146,
+          "function_or_anchor": "func _ready",
+          "fact": "Picked defaultautostarts."
+        },
+        {
+          "path": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+          "line": 938,
+          "function_or_anchor": "func create_mst_edge_visualization",
+          "fact": "Acceptedgreen backbone."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Spanning_Trees/map_data.json": "2bb490dcfe7a0cd4e47068a8e34a38443972129552bf2d90f93127cd9e318256",
+        "commons/maps/GT_Spanning_Trees/intent.md": "ea6b11217dc2e7bdc4e422239880c2d0e7c565bcfba9cae4293d7774a54133f2",
+        "commons/maps/GT_Spanning_Trees/tutorial.md": "12b30c7b206b0cc0959cc9818f7c4a7a1cda37d991f83cffc2f3f9213a670c35",
+        "commons/maps/GT_Spanning_Trees/technical.md": "f5adeee5b14a85af386c88a1a6836efebe0bba36d5c8daa5f2634d19f24f9f5d",
+        "commons/maps/GT_Spanning_Trees/critical.md": "0fa401c2ad491e040e75aee73ded9fc064c66fa1ce6e5740dca4f4a1271f6760",
+        "algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn": "9d669252af108dcf52a9004854fd75b1b33839c7a8678f67dd7dfe4aa596746a",
+        "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd": "d69c72f7bd7ba77c1125259031f0fa2b8559e7d75c06eba82942ae3db459e110"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 4,
+          "raw": "mst_visualization:0:2:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "GT_Flow",
+      "primary_tokens": [
+        "push_relabel_algorithm"
+      ],
+      "question": "When a junction receives more than it can send onward, where does the excess go?",
+      "ontology": "Capacity limits anedge; flow is the currentallocation; excess is netmaterial held temporarily at anintermediatevertex. Height is analgorithmiclabel used to routeupdates.",
+      "action": "Follow the sourceoutflow, then watch a junction with excess and read its PUSH orRELABEL status.",
+      "observable": "Sourceedges fill first; a vertex may pass availableflow to a lowerheight neighbour or change itsheight when itcannotpush. Pervertexheight/excess and overallflow labels are drawn.",
+      "mechanism": "The implementation initializes apreflow, then pushes min(excess,residualcapacity) on originaloutgoingedges whose height islower. Relabelling examines availableoutgoing capacity.",
+      "limit": "A full maximumflow solver needs residualreverse edges so earlierallocations can be undone. This implementation does not maintain them and cannot support its blanket maximumclaim.",
+      "variation": "Proposed nextbuild: draw reversible residualcapacity and let visitors inspect a rerouting case; meanwhile compare a localpush to the sinktotal without assuming everylocaldecision isfinal.",
+      "prior_bridge": "A tree retained connectivity; capacity introduces bottlenecks even where pathsremain.",
+      "next_bridge": "Matching next limits eachvertex to one selectedpartner.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+          "line": 875,
+          "function_or_anchor": "func initialize_preflow",
+          "fact": "Sourceoutgoing edges saturate."
+        },
+        {
+          "path": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+          "line": 893,
+          "function_or_anchor": "func push_relabel_loop",
+          "fact": "Onlyoriginal outgoingedges updated; residualreverse state absent."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Flow/map_data.json": "2d921f58a6fcecd1f787bd516fb756ab447264a3909e37518dbf4d5564c6e780",
+        "commons/maps/GT_Flow/intent.md": "812ab28f64ed9e5ee04d3c10aad3a4852eaab223e1ef21d47a578751c204d769",
+        "commons/maps/GT_Flow/tutorial.md": "79d80f2c6ea334af23f9f524fc197070aee02d5f39b017dea874b9803fdc2237",
+        "commons/maps/GT_Flow/technical.md": "b774eb20a8f81fe4f5aa2824540d56e7f5aa9971700a53287d17b15ccbcef688",
+        "commons/maps/GT_Flow/critical.md": "51cea57ca0d8e4c562dba19298f598eee236b8ede314b60bc7826d313064250d",
+        "algorithms/graphtheory/push_relabel/push_relabel.tscn": "918c998ca48546a4d4e91d3da97afad4c1f410295d66adee7293464ec28c5f4a",
+        "algorithms/graphtheory/push_relabel/push_relabel.gd": "fe288bd5c785032aa3b394b2437899eb0a38791173864b4db0270cd7f1af4fb0"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 4,
+          "raw": "push_relabel_algorithm:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralalgorithm gap: do not assert maximumflow, standardpush-relabel invariants or completion on everygraph. No visitoralgorithm controlsverified."
+      ]
+    },
+    {
+      "room_id": "GT_Matching",
+      "primary_tokens": [
+        "edmonds_algorithm"
+      ],
+      "question": "Can an early pairing prevent a larger set of pairings later?",
+      "ontology": "A matching is a set ofedges with no sharedendpoint. A maximalmatching cannot add anotheredge; a maximummatching has the largestpossible number ofedges. These are differentclaims.",
+      "action": "Watch the next highlightededge. Predict acceptance by checking whether bothendpoints are still unmatched; track onevertex leftwithout a partner.",
+      "observable": "Edgesare scanned in their storedorder. When bothendpoints are free they become a pair, and neither is reconsideredlater.",
+      "mechanism": "process_matching_step implements a greedy scan. There is no augmentingpath search or blossomcontraction, despite the artifactname and completioncaption saying maximum.",
+      "limit": "A completegreedy scan gives a maximalmatching, not necessarilymaximum. On a fourvertexpath, choosing the middleedge first leavesone pair where choosing bothouteredges would giv two.",
+      "variation": "Proposed: expose edgeorder or a4vertexpath counterexample, then add augmentingpath updates. Existing: identify which earlierpair blocks a latercandidate.",
+      "prior_bridge": "Flowallocated capacities; matching makes a discrete onepartnerconstraint visible.",
+      "next_bridge": "Foundationscrisis asks what a formalprocedure can and cannot establish from its ownrules.",
+      "sources": [
+        {
+          "path": "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+          "line": 470,
+          "function_or_anchor": "func process_matching_step",
+          "fact": "Greedyunmatchedendpoint scan; unconditionalmaximumcaption is unsupported."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/GT_Matching/map_data.json": "4469d6a1f75d10313e706631de37d696f3f51bb4d93aff0d471bda665e332fe1",
+        "commons/maps/GT_Matching/intent.md": "0ba8943d0b77f64d226ff65c848fe2ec781da6b59e639d1faa70b8868ad56225",
+        "commons/maps/GT_Matching/tutorial.md": "33188cf04180e47d581e305716bf8f0bb68e6548a546278c62329a92dd26a67f",
+        "commons/maps/GT_Matching/technical.md": "5f2391329afdcc5ddc7b91f51e0f143d25a66abb2e3d96b124fb9552c2818088",
+        "commons/maps/GT_Matching/critical.md": "c7dfab0d62313f05e00d9db8e5cde6f21a49d8507727999889faee23f79bd049",
+        "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn": "e8bfb0a58d78719294d4353869c90b26f82a2c509c89b99fb2ddcb90360e64aa",
+        "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd": "f3a850ae8fdc43bd4472f9d5f24eb2d93ccf2cf9aae5dc73590229a5785a3a7e"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 4,
+          "raw": "edmonds_algorithm:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralalgorithm gap: this is not Edmonds blossomalgorithm. Preserve teachingintent inrepairqueue; do not presentgreedy as correctmaximumsolver."
+      ]
+    }
+  ]
+}

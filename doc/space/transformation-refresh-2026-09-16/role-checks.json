@@ -1,0 +1,62 @@
+[
+  {
+    "map": "Trans_Pre",
+    "primary": [
+      "pick_up_cube"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Introduction",
+    "primary": [
+      "tc",
+      "sc",
+      "rc"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Translation",
+    "primary": [
+      "tc",
+      "pick_up_cube",
+      "translation_cube_demo"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Rotation",
+    "primary": [
+      "rotation_wall_crossings",
+      "rotation_array_compare",
+      "boolean_tunnel",
+      "carousel_cake"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Scale",
+    "primary": [
+      "scale_me"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Body",
+    "primary": [
+      "approach_wall",
+      "carve_grid",
+      "approach_scale"
+    ],
+    "matched_book": true
+  },
+  {
+    "map": "Trans_Pit",
+    "primary": [
+      "pusher_block",
+      "rc",
+      "grower_block"
+    ],
+    "matched_book": true
+  }
+]

@@ -1,0 +1,3 @@
+The room turns a Platonic association around: learn enough geometry to discover what a polygonal model cannot hold. Follow a familiar sphere into its facets, compare an edge overlay with the same unmarked mesh, then choose a use before revealing its cost. Then follow the five-segment capsule: a ridge faces a facet across its body, interrupting the symmetry you may have expected. What can we discover between familiar forms, inside the restrictions that produce them?
+
+Five solids stand within a colonnade of changing resolutions. Beyond them, twelve sphere constructions and a capsule on eight polygonal tiers make the limits visible. A further room displays the engine’s supplied mesh families; the older studies remain through a side opening.

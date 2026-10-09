@@ -1,0 +1,34 @@
+--- Point_Triangle_Context/before
++++ Point_Triangle_Context/final.md
+@@ -36,7 +36,7 @@
+ 
+ Three decisions were taken to get it this far. Six positions were kept out of the hundreds you made, sampled at even intervals along the stored order rather than at the turns you thought you were making. The shape was scaled to arm's reach. And your height was dropped, because a fan asks what lies inside a plane, and your hand was not working in one. Your drawing has been made fillable. Look at what that cost before you close it.
+ 
+-Pick up the drawing point and finish the loop: move near the first corner and wait for it to take. The tool needs a second between recorded corners and enough movement away from the previous one, and it rounds positions to a ten-centimetre grid — the addresses we met in Grid now help corners meet.
++Pick up the drawing point and finish the loop: move near the first corner and wait for it to take. Positions fall on a ten-centimetre grid. The addresses we met in Grid now help corners meet.
+ 
+ Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
+ 
+@@ -44,9 +44,9 @@
+ 
+ If your bend turned back on itself anywhere, the fill has just reached into somewhere your hand never went.
+ 
+-We can watch that exactly, with a shape we specify rather than one we made. Press **NEW OUTLINE**; the faces you have stay. Make a six-corner L in one horizontal plane: a 1.2-metre square with a 0.8-metre square missing from one corner. Begin where the two long outer edges meet. Follow one long edge, go around the notch and return to your beginning. Wait for each numbered corner before moving on.[^point-triangle-construction]
++Try a six-corner L, drawn flat, with two equal arms. Begin where the two long outer edges meet and follow the boundary around the notch. **NEW OUTLINE** lets you begin without erasing your earlier faces; the drawing guide gives the dimensions and timing.[^point-triangle-construction]
+ 
+-Look at the fill, then release the tool at that first corner. Press **SHIFT START** once. The same six points now begin their order at the next corner. Should beginning elsewhere change what lies inside the L?
++Once the L closes, release the tool at its first corner and press **SHIFT START**. The same six points now begin at the next corner. Should beginning elsewhere change what lies inside the L?
+ 
+ The boundary has not moved, but the added fill reaches into the missing notch. Something is covering a place you left open.
+ 
+@@ -65,7 +65,9 @@
+ 
+ The method works for a triangle and for a convex planar polygon. Some concave polygons also work from suitable starting vertices. Concavity by itself does not guarantee failure, which is why this comparison keeps the boundary fixed and changes the start deliberately.
+ 
+-You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation] You might also want that unwanted patch for another work: a wing, a pleat, something extending beyond its frame. Changing its use would give the result another purpose. It would not repair the original fill.
++You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation]
++
++Or keep the overspill. Follow the patch beyond the notch: a wing, a pleat, something extending beyond its frame. It has failed to fill this L; it may have given you a shape you want to make.
+ 
+ Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.
+ 

@@ -1,0 +1,47 @@
+{
+  "id": "mondrian_de_stijl",
+  "artist": "Piet Mondrian",
+  "year": 1930,
+  "movement": "De Stijl",
+  "notes": "Composition with Red, Blue and Yellow (1930). The neoplastic alphabet: white field, black grid, primary triad. Each block its own scale to mark the asymmetry that made the paintings hum.",
+  "layout": "vertical_stack",
+  "palette": "bauhaus",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#f4f2ec",
+      "scale": 1.5
+    },
+    {
+      "shape": "cuboid",
+      "color": "#0a0a0a",
+      "scale": 0.2
+    },
+    {
+      "shape": "cube",
+      "color": "#cc1f1f",
+      "scale": 1.2
+    },
+    {
+      "shape": "cuboid",
+      "color": "#0a0a0a",
+      "scale": 0.18
+    },
+    {
+      "shape": "cube",
+      "color": "#1f4ecc",
+      "scale": 0.9
+    },
+    {
+      "shape": "cuboid",
+      "color": "#0a0a0a",
+      "scale": 0.15
+    },
+    {
+      "shape": "cube",
+      "color": "#f0c020",
+      "scale": 0.7
+    }
+  ]
+}

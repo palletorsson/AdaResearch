@@ -1,0 +1,39 @@
+{
+  "hall": "Crisis_Synthesis",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "ten_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "summit_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "lambda_slider",
+    "phi_slider",
+    "goedel_atrium",
+    "russell_paradox_workbench",
+    "godel_statement_plaque",
+    "russell_set_box",
+    "bifurcation_diagram",
+    "qfep_formula_3d",
+    "florensky_sphere",
+    "escher_staircase"
+  ],
+  "primary_artifacts": [
+    "lambda_slider",
+    "phi_slider",
+    "qfep_formula_3d"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Crisis_Synthesis\\map_data.json": "74ab106e35e57dcc5824e7054fe8c9bc7cb5aa4fddd4c7300316cebd7d3aaeaf",
+    "commons\\maps\\Crisis_Synthesis\\final.md": "0ac964e00ea1ba1baf047bb1de87f1b0a009aacb204dcc8b534a0e79e886f953",
+    "commons\\maps\\Crisis_Synthesis\\tutorial.md": "2bfa745d0cfdea481b16a6d09b2e1f540631e1eacba3611369de2c238773da75",
+    "commons\\maps\\Crisis_Synthesis\\technical.md": "67bbceb4400c308a3ab9b2420dc71864cc129a18446110c79411a5e13ca758ce",
+    "commons\\maps\\Crisis_Synthesis\\critical.md": "4d8bb340b129f3a32cc6e9ad3f637f23155f360de70a7e35cca09750626efbcf"
+  }
+}

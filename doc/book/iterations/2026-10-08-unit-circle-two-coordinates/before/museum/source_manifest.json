@@ -1,0 +1,31 @@
+{
+  "room": "WaveFunctions_Unit_Circle",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/WaveFunctions_Unit_Circle/map_data.json": "730dd6d927d2b106be31a34b0960cb4e593fed59b9bc1da7ccd9857dff1040a6",
+    "tools/probes/wavefunctions_lessons_museum.gd": "212699a807dcd32122a111c69085a09e59333d2eee0bc21c806ad37716d62027",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "f4193017c397f226cab23014101eef6bbf03fadfeda0707d0dccf69efcfb6651",
+    "ada_run/encounter_pilot/WaveFunctions_Unit_Circle/control.json": "f456b313ad75aaece9418bd4dfc3c00918e4399f2cea2a170d824401072b45ba",
+    "ada_run/encounter_pilot/WaveFunctions_Unit_Circle/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/WaveFunctions_Unit_Circle/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/unit_circle/unit_circle.tscn": "7a28b60c1ddb8c336deebf6c6513b139bc54b812fe99c7f358dba6588d73347b",
+    "algorithms/wavefunctions/unit_circle/UnitCircle.gd": "b818014b47d36a23d4b62fa5a668c96bd29b62ee2e2decadbbd6c58582eea013"
+  }
+}

@@ -1,0 +1,200 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One / Coordinates · Ada Research</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f2efe7;color:#252a27;font:17px/1.75 Georgia,serif}header,main,footer{max-width:1320px;margin:auto;padding:36px}header{padding-top:64px;border-bottom:1px solid #d3d0c6}h1,h2,h3{font-weight:400;line-height:1.13}h1{font-size:clamp(44px,6vw,80px);max-width:900px;margin:14px 0 24px;letter-spacing:-.035em}h2{font-size:38px;margin-top:44px}h3{font-size:27px}.kicker,nav,.tag,figcaption,.small,summary{font-family:system-ui,sans-serif}.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#686e61}.intro{font-size:24px;max-width:870px}a{color:#34604f;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:12px 25px;font-size:14px;margin-top:30px}.path{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:32px 0;font:14px/1.5 system-ui}.tag{padding:9px 16px;border:1px solid #cccdbf;border-radius:3px;background:#faf8f1}.active{border-color:#628374;background:#e0e7dc}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}figure{margin:0 0 26px}img{width:100%;height:auto;display:block;border:1px solid #dbd6cc}figcaption{font-size:13px;line-height:1.5;margin-top:9px;color:#616758}.reading{max-width:760px;margin:60px auto;border-top:1px solid #c8cbbc;padding-top:22px;font-size:21px;line-height:1.8}.reading h1{font-size:46px}.reading h2{font-size:31px}pre{font:14px/1.7 Consolas,monospace;padding:20px;background:#e7e7dd;overflow:auto}code{font-size:.82em}blockquote{font-size:27px;line-height:1.55;border-left:3px solid #5d7c69;margin:36px 0;padding:8px 25px;max-width:820px}.footnote{font-size:15px;line-height:1.7}.small{font-size:14px;color:#5d6359;max-width:900px}details{margin:30px 0;border:1px solid #d0d2c3;padding:20px}summary{cursor:pointer;font-size:16px}section{scroll-margin-top:24px}.tutorial{max-width:800px;margin:auto;font-size:18px}.comparison{max-width:1000px}.comparison .pair{gap:40px}.comparison h1{font-size:28px}.comparison h2{font-size:25px}.comparison pre{white-space:pre-wrap}footer{border-top:1px solid #d3d0c6;font:14px/1.7 system-ui;padding-bottom:65px}@media(max-width:800px){header,main,footer{padding:25px 18px}.pair{grid-template-columns:1fr}.reading{font-size:19px}.reading h1{font-size:36px}.intro{font-size:21px}h2{font-size:30px}}</style><body><header><div class="kicker">Ada Research · 29 September 2026 · Two consecutive halls</div><h1>A body in the light.<br>A point in your hand.</h1><p class="intro">First learn what has been given to the point. Then pick it up and ask where it is.</p><div class="path"><span class="tag">Point Zero · begin / continue</span><span>→</span><span class="tag active">Point One · appearance / resistance / light</span><span>→</span><span class="tag active">Coordinates · holding / reference</span><span>→</span><span class="tag">Line · connection / distance</span></div><nav><a href="#museum">Inside the museum</a><a href="#reading">Point One</a><a href="#coordinates">Coordinates</a><a href="#making">Tutorials</a><a href="#changes">What moved</a><a href="/tutorial-lineage#node=coordinates">Updated lineage</a></nav></header><main>
+<section id="museum"><h2>Turn the switch.</h2><p class="small">Two captures from the same position in the museum. The switch removes the directional light for these spheres; a dim fill lets us keep seeing their bodies.</p><div class="pair"><figure><a href="Point_One/sun-on.png"><img src="Point_One/sun-on.png" alt="Sun on. The round bodies leave stretched shadows on the existing museum floor." loading="lazy"></a><figcaption>Sun on. The round bodies leave stretched shadows on the existing museum floor.</figcaption></figure><figure><a href="Point_One/sun-off.png"><img src="Point_One/sun-off.png" alt="Sun off. The long shadows are gone. The spheres and their collision remain." loading="lazy"></a><figcaption>Sun off. The long shadows are gone. The spheres and their collision remain.</figcaption></figure></div><blockquote>There is a switch on the wall. Turn it.<br>You have removed their sun.</blockquote><div class="pair"><figure><a href="Point_One/wall-switch.png"><img src="Point_One/wall-switch.png" alt="A physical wall switch, with the museum’s existing hand-poke and pointer input routes." loading="lazy"></a><figcaption>A physical wall switch, with the museum’s existing hand-poke and pointer input routes.</figcaption></figure><figure><a href="Point_Coordinates/held-point.png"><img src="Point_Coordinates/held-point.png" alt="The next hall begins with the black point. Take it; the name stays behind." loading="lazy"></a><figcaption>The next hall begins with the black point. Take it; the name stays behind.</figcaption></figure></div><figure><a href="Point_Coordinates/coordinates-basin.png"><img src="Point_Coordinates/coordinates-basin.png" alt="The enlarged frame now has opaque pink, grey and black axes. The L-shaped basin keeps its glass at floor level." loading="lazy"></a><figcaption>The enlarged frame now has opaque pink, grey and black axes. The L-shaped basin keeps its glass at floor level.</figcaption></figure></section>
+<section id="reading" class="reading"><h1>Point One — A body in the light</h1>
+<p>The corridor begins with a label: “Point one”. Above it, nothing.</p>
+<p>There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.</p>
+<p>Here is the point, but you cannot see it. We can keep its position in three numbers:<sup id="fnref:part1-point-one-code"><a class="footnote-ref" href="#fn:part1-point-one-code">1</a></sup></p>
+<pre><code class="language-gdscript">var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p>We have given that position a name, <code>point_position</code>. The numbers locate a place. They draw nothing. In the next hall, we will take them apart.</p>
+<p>A mathematical point has no extent.<sup id="fnref:part1-point-one-euclid"><a class="footnote-ref" href="#fn:part1-point-one-euclid">2</a></sup> To let it appear in the room, we will have to give it something a point does not have: a surface.</p>
+<p>Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.</p>
+<p>Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.</p>
+<p>We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.</p>
+<p>The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.</p>
+<p>This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.</p>
+<p>Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.</p>
+<h2>First there was light</h2>
+<p>First there was light, right? Look at the crooked shadows under the white spheres. Round bodies leave stretched marks on the floor. Something outside the shape has helped to draw them.</p>
+<p>There is a switch on the wall. Turn it.</p>
+<p>You have removed their sun.</p>
+<p>The long shadows disappear. The spheres remain, faintly lit. Try approaching the solid one again. Its boundary has not gone with its shadow. What helped you see the body was never what stopped your body.</p>
+<p>Here the sun is a direction from which light arrives. We did not have to build a burning star. A few instructions gave the room a familiar consequence, and familiarity let the source go unquestioned. The switch puts that borrowed certainty within reach.</p>
+<p>Turn it back. A shadow returns to the same place. It makes the sphere easier to locate, but it is not another point beneath the first one. It belongs to a relation between a surface, a light and somewhere for the light to be interrupted.</p>
+<h2>The size of a point</h2>
+<p>Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.</p>
+<p>The small sphere let you approach its centre. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.</p>
+<p>Look from the small white spheres to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.</p>
+<p>In the next room, the point can leave its place with your hand. Now we can ask where it has gone.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:part1-point-one-code">
+<p>The position is drawn from the station's construction in <code>point_condition.gd</code>. The absent station creates no hidden sphere. The separate tutorial keeps a position, adds a visible surface and compares it with a collision boundary. Reading the three components and using pickup belong to the next hall, Point Coordinates.&#160;<a class="footnote-backref" href="#fnref:part1-point-one-code" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:part1-point-one-euclid">
+<p>Euclid, <a href="https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html"><em>Elements</em>, Book I, Definition 1</a>, defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.&#160;<a class="footnote-backref" href="#fnref:part1-point-one-euclid" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div><p class="small"><a href="/compose/sources?map=Point_One&amp;doc=final">Current source and revision comments</a></p></section>
+<section id="coordinates" class="reading"><h1>Point Coordinates — Where is the point?</h1>
+<p>The first label says “Point one”. This time the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.</p>
+<p>Its small size is familiar. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays at the station; the point has gone elsewhere.</p>
+<p>Which part did the name belong to? The position, the sphere, the possibility of taking hold?</p>
+<p>We have already separated seeing a body from being stopped by it. Holding adds another relation. Someone has made this point available to a hand. A position could not have supplied that permission on its own.</p>
+<p>Keep the black point. The corridor opens towards a coloured frame standing in an L-shaped basin. Its glass is level with the floor; the depth belongs below your feet. The point can travel over a hollow without falling into it.</p>
+<h2>Two addresses</h2>
+<p>Keep the point in your hand and watch the white card as you move.</p>
+<p>The guides and the card follow the point you are already holding.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The card rounds each component to two decimal places: <code>1.231</code> and <code>1.234</code> both appear as <code>1.23</code>. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.</p>
+<p>Now compare it with the card marked <code>LOCAL</code>. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?</p>
+<p>Follow the coloured frame's guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p>The two cards give the same point different addresses. <code>WORLD</code> measures from the scene's origin; <code>LOCAL</code> uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.<sup id="fnref:part2-coordinates-haraway"><a class="footnote-ref" href="#fn:part2-coordinates-haraway">1</a></sup></p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.</p>
+<h2>Room to arrive</h2>
+<p>The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.</p>
+<p>“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.</p>
+<p>The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.</p>
+<p>In the next hall, we keep two positions at once. The space between them will become a line, and a distance we can change.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:part2-coordinates-haraway">
+<p>Donna Haraway, <a href="https://doi.org/10.2307/3178066">“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”</a>, <em>Feminist Studies</em> 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?&#160;<a class="footnote-backref" href="#fnref:part2-coordinates-haraway" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div><p class="small"><a href="/compose/sources?map=Point_Coordinates&amp;doc=final">Current source and revision comments</a></p></section>
+<section id="making"><h2>The lessons have different work to do.</h2><p>The first tutorial changes the point’s appearance and physical boundary. The second begins with borrowing a hold, then learns to read and set its position. The guides and target do not become extra programming assignments.</p><details><summary>Point One — give the point a body</summary><div class="tutorial"><h1>Point One — give the point a body</h1>
+<p>Point Zero let us recognise an instruction that begins, and one that continues. Now we follow the corridor. Each label says “Point one”, but something different happens above it.</p>
+<p>The <a href="/book-review/doc/book/studies/point-one/README.md">supplied study</a> lets us inspect the first three conditions together: an absent point, a visible sphere and a solid sphere. Its three scripts are already complete. We will change a few lines as we encounter what they do. The held point and coordinate frame have their own next chapter, Point Coordinates.</p>
+<h2>At the first label, nothing appears</h2>
+<p>There is a place to look, but no visible object. A mathematical point has a position and no extent. How can we keep its position before giving it a surface?</p>
+<p>Open <code>position.gd</code>. This is the whole script:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p>We know <code>_ready()</code> from Point Zero; <code>-&gt; void</code> says it returns no value. Here it keeps a different kind of value: a <code>Vector3</code>, containing three numbers. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.</p>
+<p>We name that value <code>point_position</code>. The middle number places it above the floor. Change <code>1.12</code> to <code>1.7</code> and run. Nothing appears. We have changed a value without attaching any visible body to it. The editor's unused-variable warning describes that condition.</p>
+<p>The other stations in the study still show their spheres. This change belongs only to the empty station. Restore <code>1.12</code> before continuing.</p>
+<h2>Further along, the point has a surface</h2>
+<p>The next label has a small white sphere above it. Its centre gives our eyes a place to find.</p>
+<p>Open <code>visible.gd</code>. The same position is there, now used by a visible object:</p>
+<pre><code class="language-gdscript">visible_point.position = point_position
+</code></pre>
+<p>This line is already inside <code>_ready()</code>. <code>visible_point</code> names the mesh node created by the supplied script; assigning its <code>position</code> puts its centre at our coordinates. We have given the point a body through which it can appear.</p>
+<p>Change <code>1.12</code> to <code>1.7</code> in this script. This time the white sphere rises. Restore the height, then change the radius:</p>
+<pre><code class="language-gdscript">var radius := 0.14
+</code></pre>
+<p>Try <code>0.3</code>. The sphere becomes larger while its centre stays where it was. The supplied <code>SphereMesh</code> uses this radius and a height twice as large. We can inspect its construction later; for now, we can change a position and a surface separately.</p>
+<p>In the museum, try crossing that surface. It is visible, but it does not stop you. Restore the radius to <code>0.14</code> before meeting the next sphere.</p>
+<h2>The next point stops us</h2>
+<p>The next white sphere looks the same. In the museum, approaching it produces a different result: a body meets resistance.</p>
+<p>Open <code>solid.gd</code>. It keeps the visible construction and adds a separate physics body and collision shape. Both are placed at <code>point_position</code>. The boundary's size is set here:</p>
+<pre><code class="language-gdscript">sphere_shape.radius = radius
+</code></pre>
+<p>Change only that line to:</p>
+<pre><code class="language-gdscript">sphere_shape.radius = 0.35
+</code></pre>
+<p>The visible sphere stays small. Its collision boundary grows. In the desktop study, turn on <strong>Debug → Visible Collision Shapes</strong> to see the boundary; the fixed camera does not let you walk into it. In the museum, the distinction is something your movement meets.</p>
+<p>We have chosen whether the surface we see and the boundary we encounter coincide. The full physics construction is supplied; changing this one relation already gives us something consequential to author. Restore the matching radius.</p>
+<h2>Remove the light, keep the body</h2>
+<p>Use the museum's wall switch. The long shadows disappear, while a dim fill leaves the spheres visible. The collision boundary stays where it was.</p>
+<p>The decision in the switch is one line:</p>
+<pre><code class="language-gdscript">sun.visible = false
+</code></pre>
+<p>Here <code>sun</code> is the supplied directional light. This is a reading of the museum source, not a line to paste into <code>visible.gd</code>, which has no variable named <code>sun</code>. We borrow the switch and lighting rig for this encounter. Building shadows is not another task hidden inside learning the point.</p>
+<h2>Before leaving</h2>
+<p>The large sphere repeats the same name. Return to the radius we changed: giving a position more surface did not require a new kind of position.</p>
+<p>We can now change appearance and resistance separately. <a href="/compose/sources?map=Point_Coordinates&amp;doc=tutorial">Point Coordinates</a> begins with a point we can hold, then reads its movement. It will prepare two positions for the line.</p></div></details><details><summary>Point Coordinates — carry a position</summary><div class="tutorial"><h1>Point Coordinates — carry a position</h1>
+<p>Point One separated a position, its surface and its physical boundary. Begin this room by taking the black sphere. The label stays behind. The point now follows a hand.</p>
+<h2>Borrow a working hold</h2>
+<p>The museum uses the supplied <code>point_held.tscn</code>. Inside it is the existing XR Tools pickable point. It already knows how to receive a grab, follow its holder and be released. We can use that relation before writing it ourselves.</p>
+<p>Carry it sideways, lift it, then bring it towards you. The point remains one body while its address changes. Holding supplies the movement we are about to read.</p>
+<p>In an already configured Ada XR scene, instance <code>commons/primitives/point/point_held.tscn</code> under the room root. Keep its scale at one and put its root on the floor; the wrapper places the sphere at hand height. Run with the prepared player and use its existing grab input. In a practice scene without the museum cards, make a second instance somewhere else to try the same interaction again. Do not add a second player or rebuild the controller here. The <code>point_one_main</code> identity belongs to the museum's reporting link, not to the generic act of grabbing; only the original point should use that reporting channel when working with the museum's cards.</p>
+<p>The separate <a href="/book-review/doc/book/studies/point-coordinates/README.md">coordinate study</a> supplies the following desktop exercises. It does not include an XR player or reproduce the museum's pickup. A self-contained portable XR starter remains to be supplied; the in-project exercise above uses Ada's installed player and add-on.</p>
+<h2>Change one component</h2>
+<p>The study opens with two prepared sphere markers and the familiar coloured guides. Open <code>points.gd</code>. The position called <code>a</code> is:</p>
+<pre><code class="language-gdscript">var a := Vector3(-0.75, 1.12, 0.0)
+</code></pre>
+<p>The numbers are X, Y and Z. Change only <code>1.12</code> to <code>1.7</code>. Marker A rises. Restore it, then change <code>-0.75</code> to <code>-1.2</code>. It moves along another direction. Change the last number to <code>0.5</code> and watch it move along the blue guide.</p>
+<p>The guide does not move the point. It gives us a direction with which to read the change. We borrow its construction.</p>
+<p>The supplied script places the marker with:</p>
+<pre><code class="language-gdscript">$A.position = a
+</code></pre>
+<p><code>$A</code> finds the child node named A in this scene. <code>position</code> is its position relative to its parent. We are giving a visible body the three numbers we kept under a name.</p>
+<h2>One body, two addresses</h2>
+<p>In the museum, compare WORLD and LOCAL while moving the same black point. WORLD reads its position in the scene. LOCAL describes it relative to the coloured frame. A different reference can give the same place different numbers.</p>
+<p>In the desktop study, select the root <code>CoordinateStudy</code>. Its parent is the scene's world. Change the root's X position in the Inspector to <code>2.0</code>, then run. Both markers and their guides move together. The value of <code>a</code> in the script has not changed.</p>
+<p>These two lines are already in <code>points.gd</code>:</p>
+<pre><code class="language-gdscript">print(&quot;local &quot;, $A.position)
+print(&quot;world &quot;, $A.global_position)
+</code></pre>
+<p>Read the output. The first address is still <code>a</code>; the second includes the parent's shift. Return the root's X position to zero. We can now change a point within its frame, or move the frame that contains it. The later Transformation sequence will make more of that distinction.</p>
+<p>The view may look unchanged: the supplied camera also belongs to that root and travels with it. The world address can change while the relation between camera and point stays the same.</p>
+<p>The museum cards round their numbers for display. Their apparent stillness during a tiny movement does not mean the point stopped. Reporting is another attachment to the position, with its own limits.</p>
+<h2>Keep another position</h2>
+<p>The next line in the supplied script gives B its own address:</p>
+<pre><code class="language-gdscript">var b := Vector3(0.75, 1.12, 0.0)
+</code></pre>
+<p>Change B while leaving A alone. Then give B the same three numbers as A. One sphere may hide the other; the scene still contains two markers. Restore their separation.</p>
+<p>We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold, but we can enjoy its falling response without bringing that calculation into this lesson yet.</p></div></details><p><a href="point-coordinates-study.zip">Download the standalone coordinate study</a></p><p class="small">Godot 4.6 desktop study; six checks passed. Pickup runs in Ada’s prepared XR environment. This download contains no XR player; a portable headset starter remains pending.</p></section>
+<section id="changes"><h2>What moved, what stayed.</h2><p>Point One keeps the absent point, two white sphere conditions and the large pedestal sphere. Coordinates receives the held point, its two addresses, the coloured frame and target, together with the existing secondary comparisons. Point Zero’s origin and basin were not edited.</p><p>The canonical final.md files and tutorial.md files are updated. The old coordinate passages remain, with new joins. Their historical and critical questions have a room of their own.</p><div class="pair"><figure><a href="Point_One/point-corridor.png"><img src="Point_One/point-corridor.png" alt="The shorter Point One corridor, seen on arrival." loading="lazy"></a><figcaption>The shorter Point One corridor, seen on arrival.</figcaption></figure><figure><a href="Point_One/pedestal.png"><img src="Point_One/pedestal.png" alt="The larger point closes the first hall." loading="lazy"></a><figcaption>The larger point closes the first hall.</figcaption></figure></div><details class="comparison"><summary>Read the original combined chapter</summary><h1>Point One — A body for a position</h1>
+<p>The corridor begins with a label: “Point one”. Above it, nothing.</p>
+<p>There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.</p>
+<p>Here is the point, but you cannot see it. We can keep its position in three numbers:<sup id="fnref:part5-point-one-code"><a class="footnote-ref" href="#fn:part5-point-one-code">1</a></sup></p>
+<pre><code class="language-gdscript">var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p>The three numbers are X, Y and Z: here, 1.12 metres above this station's origin, with no shift along X or Z. We have given that position a name, <code>point_position</code>. The numbers locate a place. They draw nothing.</p>
+<p>A mathematical point has no extent.<sup id="fnref:part5-point-one-euclid"><a class="footnote-ref" href="#fn:part5-point-one-euclid">2</a></sup> To let it appear in the room, we will have to give it something a point does not have: a surface.</p>
+<p>Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.</p>
+<p>Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.</p>
+<p>We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.</p>
+<p>The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.</p>
+<p>This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.</p>
+<p>Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.</p>
+<p>At the fourth label the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.</p>
+<p>Its visible size has not changed. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays in the corridor; the point has gone elsewhere.</p>
+<p>Which part did the name belong to? The position, the sphere, the possibility of taking hold?</p>
+<p>Each station has a different address in the corridor, although its label repeats the same name. The three numbers we began with could never have told us whether the point would be white or black, resist a body or leave with a hand. We have had to give it each of those relations.</p>
+<p>The corridor lets us encounter the decisions separately. In an ordinary object they arrive together, and we can forget that what appears solid has been given a separate reason to resist us.</p>
+<p>Keep the black point. There are other ways to approach it in the wider room: arrows meeting at an empty centre, a screen unfolding the code, another point whose surface changes in your hand. We can return to them. For now, carry this one towards the coloured frame.</p>
+<h2>Two addresses</h2>
+<p>Keep the point in your hand and watch the white card as you move.</p>
+<p>The corridor opens into the coordinate room. Its guides and the card follow the point you are already holding.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The card rounds each component to two decimal places: <code>1.231</code> and <code>1.234</code> both appear as <code>1.23</code>. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.</p>
+<p>Now compare it with the card marked <code>LOCAL</code>. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?</p>
+<p>Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p>The two cards give the same point different addresses. <code>WORLD</code> measures from the scene's origin; <code>LOCAL</code> uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.<sup id="fnref:part5-point-one-haraway"><a class="footnote-ref" href="#fn:part5-point-one-haraway">3</a></sup></p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.</p>
+<h2>Room to arrive</h2>
+<p>The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.</p>
+<p>“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.</p>
+<p>The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.</p>
+<h2>The size of a point</h2>
+<p>Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.</p>
+<p>The small sphere travelled in your hand. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.</p>
+<p>Look from the sphere you carried to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.</p>
+<p>The next room brings two points into relation. A line begins.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:part5-point-one-code">
+<p>The position comes from the station's construction in <code>point_condition.gd</code>. The absent station creates no hidden sphere. The separate making passage places supplied markers at two positions. The study provides their sphere shapes and coordinate guides; mesh and collision construction remain available as a further reading.&#160;<a class="footnote-backref" href="#fnref:part5-point-one-code" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:part5-point-one-euclid">
+<p>Euclid, <a href="https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html"><em>Elements</em>, Book I, Definition 1</a>, defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.&#160;<a class="footnote-backref" href="#fnref:part5-point-one-euclid" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:part5-point-one-haraway">
+<p>Donna Haraway, <a href="https://doi.org/10.2307/3178066">“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”</a>, <em>Feminist Studies</em> 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?&#160;<a class="footnote-backref" href="#fnref:part5-point-one-haraway" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></details><p><a href="Point_One/final.diff">Point One text diff</a> · <a href="Point_Coordinates/final.md">New Coordinates manuscript</a> · <a href="DECISIONS.md">Decisions and scope</a></p></section>
+</main><footer><p>25 Point One checks · 30 Coordinates checks · 6 desktop-study checks · 15 isolated-browser atlas checks. These establish native behavior and source consistency; headset experience and independent learner understanding still need human trials.</p><p><a href="verification.json">Verification</a> · <a href="source-manifest.json">Source versions</a> · <a href="/tutorial-lineage#node=coordinates">Tutorial lineage</a></p></footer></body></html>

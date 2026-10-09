@@ -1,0 +1,199 @@
+{
+  "checks": [
+    {
+      "name": "nonzero edges in cube",
+      "passed": true
+    },
+    {
+      "name": "distinct positions in cube",
+      "passed": true
+    },
+    {
+      "name": "finite bar transforms in cube",
+      "passed": true
+    },
+    {
+      "name": "nonzero edges in pyramid",
+      "passed": true
+    },
+    {
+      "name": "distinct positions in pyramid",
+      "passed": true
+    },
+    {
+      "name": "finite bar transforms in pyramid",
+      "passed": true
+    },
+    {
+      "name": "nonzero edges in narrow box",
+      "passed": true
+    },
+    {
+      "name": "distinct positions in narrow box",
+      "passed": true
+    },
+    {
+      "name": "finite bar transforms in narrow box",
+      "passed": true
+    },
+    {
+      "name": "nonzero edges in taper",
+      "passed": true
+    },
+    {
+      "name": "distinct positions in taper",
+      "passed": true
+    },
+    {
+      "name": "finite bar transforms in taper",
+      "passed": true
+    },
+    {
+      "name": "nonzero edges in shear",
+      "passed": true
+    },
+    {
+      "name": "distinct positions in shear",
+      "passed": true
+    },
+    {
+      "name": "finite bar transforms in shear",
+      "passed": true
+    },
+    {
+      "name": "pyramid base stays fixed",
+      "passed": true
+    },
+    {
+      "name": "taper base stays fixed",
+      "passed": true
+    },
+    {
+      "name": "shear base stays fixed",
+      "passed": true
+    },
+    {
+      "name": "grid has 25 sites",
+      "passed": true
+    },
+    {
+      "name": "cyclic rows each contain all five forms",
+      "passed": true
+    },
+    {
+      "name": "changing selection rule preserves addresses",
+      "passed": true
+    },
+    {
+      "name": "row 1 col 0 changes form",
+      "passed": true
+    },
+    {
+      "name": "five crosses each occupy nine addresses",
+      "passed": true
+    },
+    {
+      "name": "all selected heights fit the bound",
+      "passed": true
+    },
+    {
+      "name": "filled footprint keeps five arrays of 25 addresses",
+      "passed": true
+    },
+    {
+      "name": "expanded footprint adds structure",
+      "passed": true
+    },
+    {
+      "name": "continuum supplies seven sampled forms",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "passed": true,
+  "scope": "Standalone native Godot study; supplied controls and camera; no museum placement, human learner or physical headset trial.",
+  "views": [
+    {
+      "alternative": false,
+      "edges": 56,
+      "eye": "(2.004789, 3.351734, 9.889932)",
+      "fov": 48.0,
+      "id": "five-forms",
+      "mode": 0,
+      "records": 5
+    },
+    {
+      "alternative": false,
+      "edges": 56,
+      "eye": "(2.004789, 3.351734, 9.889932)",
+      "fov": 48.0,
+      "id": "first-connections",
+      "mode": 0,
+      "records": 5
+    },
+    {
+      "alternative": false,
+      "edges": 280,
+      "eye": "(4.709934, 8.512138, 9.750305)",
+      "fov": 48.0,
+      "id": "cyclic-array",
+      "mode": 1,
+      "records": 25
+    },
+    {
+      "alternative": true,
+      "edges": 280,
+      "eye": "(4.709934, 8.512138, 9.750305)",
+      "fov": 48.0,
+      "id": "repeated-array",
+      "mode": 1,
+      "records": 25
+    },
+    {
+      "alternative": false,
+      "edges": 980,
+      "eye": "(4.024702, 6.916682, 9.012424)",
+      "fov": 48.0,
+      "id": "five-height-rules",
+      "mode": 2,
+      "records": 45
+    },
+    {
+      "alternative": true,
+      "edges": 2020,
+      "eye": "(4.024702, 6.916682, 9.012424)",
+      "fov": 48.0,
+      "id": "expanded-footprint",
+      "mode": 2,
+      "records": 125
+    },
+    {
+      "alternative": true,
+      "edges": 80,
+      "eye": "(2.603076, 5.381839, 12.84138)",
+      "fov": 48.0,
+      "id": "between-forms",
+      "mode": 3,
+      "records": 7
+    },
+    {
+      "alternative": true,
+      "edges": 56,
+      "eye": "(2.004789, 3.351734, 9.889932)",
+      "fov": 48.0,
+      "id": "controls",
+      "mode": 0,
+      "records": 5
+    }
+  ]
+}

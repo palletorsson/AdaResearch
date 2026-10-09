@@ -1,0 +1,46 @@
+--- before/algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
++++ algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
+@@ -27,6 +27,7 @@
+ @export var assemble_height: float = 0.0
+ @export var body_study: bool = false
+ @export var body_workshop: bool = false
++@export var body_ragdoll: bool = false
+ @export var bond_radius: float = 0.02
+ @export var bond_color: Color = Color(0.9, 0.9, 1.0, 1.0)
+ 
+@@ -72,6 +73,7 @@
+ 	_setup_auto_cycle()
+ 	if body_study: _mark_witness()
+ 	if body_workshop: call_deferred("_ensure_body_workshop")
++	if body_ragdoll: call_deferred("_ensure_body_ragdoll")
+ 	_log_info("Molecular Designer Ready")
+ 	if enable_auto_cycle:
+ 		_log_info("Auto-cycle enabled: %ds float, %ds assemble" % [float_duration, assemble_duration])
+@@ -527,11 +529,13 @@
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if config.has("body_study"): body_study = str(config.body_study).to_lower() in ["true","1"]
++	if config.has("body_ragdoll"): body_ragdoll = str(config.body_ragdoll).to_lower() in ["true","1"]
+ 	if config.has("body_workshop"): body_workshop = str(config.body_workshop).to_lower() in ["true","1"]
+ 	if config.has("float_duration"): float_duration = clampf(float(config.float_duration),2,60)
+ 	if config.has("assemble_duration"): assemble_duration = clampf(float(config.assemble_duration),2,60)
+ 	if is_node_ready() and body_study: _mark_witness()
+ 	if is_node_ready() and body_workshop: call_deferred("_ensure_body_workshop")
++	if is_node_ready() and body_ragdoll: call_deferred("_ensure_body_ragdoll")
+ 
+ func _ensure_body_workshop() -> void:
+ 	if not body_workshop or has_node("BodyWorkshop"): return
+@@ -563,3 +567,13 @@
+ 		caption.text = "FOLLOW THE AMBER RING\nOne instance. Another role.\nWalk around the assembly."
+ 		caption.position = Vector3(1.6,.8,.8)
+ 		caption.font_size = 24
++
++func _ensure_body_ragdoll() -> void:
++	if not body_ragdoll or has_node("BodyRagdoll") or not assemblies.has("VRBody"): return
++	var study := Node3D.new()
++	study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyRagdoll.gd"))
++	study.name="BodyRagdoll"
++	study.top_level=true
++	add_child(study)
++	study.global_transform=Transform3D(global_basis.orthonormalized()*Basis(Vector3.UP,PI/2),to_global(Vector3(0,0,1.85)))
++	study.build(assemblies["VRBody"])

@@ -1,0 +1,430 @@
+{
+  "checks": [
+    {
+      "code": {
+        "content_height": 124.0,
+        "content_width": 458.0,
+        "label_position": [
+          16.0,
+          16.0
+        ],
+        "label_size": [
+          1368.0,
+          1228.0
+        ],
+        "line_count": 4,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": " 1 extends Node3D\n 2 \n 3 var point_position := Vector3(1.0, 0.5, 0.0)\n 4 ",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          700,
+          630
+        ],
+        "visible_height": 614.0,
+        "visible_line_count": 4,
+        "visible_width": 684.0
+      },
+      "passed": true,
+      "stage": 1,
+      "thinking_body": {
+        "content_height": 396.0,
+        "content_width": 425.0,
+        "label_position": [
+          24.0,
+          90.0
+        ],
+        "label_size": [
+          441.0,
+          510.0
+        ],
+        "line_count": 11,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "These three values can specify a position without drawing a surface. You can read the address before seeing a sphere. This complete illustrative script is displayed here, not executed; it is not the invisible exhibit's own code.\n\nCONCEPTS\nVector3  position  data",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 510.0,
+        "visible_line_count": 11,
+        "visible_width": 441.0
+      },
+      "thinking_title": {
+        "content_height": 42.0,
+        "content_width": 269.0,
+        "label_position": [
+          24.0,
+          20.0
+        ],
+        "label_size": [
+          441.0,
+          60.0
+        ],
+        "line_count": 1,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "1  Before a surface",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 60.0,
+        "visible_line_count": 1,
+        "visible_width": 441.0
+      },
+      "title_body_separated": true
+    },
+    {
+      "code": {
+        "content_height": 465.0,
+        "content_width": 458.0,
+        "label_position": [
+          16.0,
+          16.0
+        ],
+        "label_size": [
+          1368.0,
+          1228.0
+        ],
+        "line_count": 15,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": " 1 extends Node3D\n 2 \n 3 var point_position := Vector3(1.0, 0.5, 0.0)\n 4 \n 5 var marker: MeshInstance3D\n 6 \n 7 func _ready() -> void:\n 8 \tmarker = MeshInstance3D.new()\n 9 \tvar sphere := SphereMesh.new()\n10 \tsphere.radius = 0.04\n11 \tsphere.height = 0.08\n12 \tmarker.mesh = sphere\n13 \tmarker.position = point_position\n14 \tadd_child(marker)\n15 ",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          700,
+          630
+        ],
+        "visible_height": 614.0,
+        "visible_line_count": 15,
+        "visible_width": 684.0
+      },
+      "passed": true,
+      "stage": 2,
+      "thinking_body": {
+        "content_height": 396.0,
+        "content_width": 406.0,
+        "label_position": [
+          24.0,
+          90.0
+        ],
+        "label_size": [
+          441.0,
+          510.0
+        ],
+        "line_count": 11,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "The complete example adds a sphere at the address. Its radius supplies a surface; its position locates the centre. Changing the radius would change what you could see without moving that centre. Geometry has begun to offer more than a location.\n\nCONCEPTS\nSphereMesh  radius  centre",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 510.0,
+        "visible_line_count": 11,
+        "visible_width": 441.0
+      },
+      "thinking_title": {
+        "content_height": 42.0,
+        "content_width": 291.0,
+        "label_position": [
+          24.0,
+          20.0
+        ],
+        "label_size": [
+          441.0,
+          60.0
+        ],
+        "line_count": 1,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "2  Something to find",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 60.0,
+        "visible_line_count": 1,
+        "visible_width": 441.0
+      },
+      "title_body_separated": true
+    },
+    {
+      "code": {
+        "content_height": 465.0,
+        "content_width": 466.0,
+        "label_position": [
+          16.0,
+          16.0
+        ],
+        "label_size": [
+          1368.0,
+          1228.0
+        ],
+        "line_count": 15,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": " 1 # Excerpts; marker already created.\n 2 # In _ready():\n 3 var material := StandardMaterial3D.new()\n 4 material.albedo_color = Color(0.0, 0.8, 1.0)\n 5 marker.material_override = material\n 6 label = Label3D.new()\n 7 label.position = Vector3(0.0, 0.12, 0.0)\n 8 marker.add_child(label)\n 9 \n10 # In _update_label():\n11 var local_p := marker.position\n12 label.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n13     local_p.x, local_p.y, local_p.z\n14 ]\n15 ",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          700,
+          630
+        ],
+        "visible_height": 614.0,
+        "visible_line_count": 15,
+        "visible_width": 684.0
+      },
+      "passed": true,
+      "stage": 3,
+      "thinking_body": {
+        "content_height": 396.0,
+        "content_width": 434.0,
+        "label_position": [
+          24.0,
+          90.0
+        ],
+        "label_size": [
+          441.0,
+          510.0
+        ],
+        "line_count": 11,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "These excerpts add colour and a LOCAL label. The stored position is unchanged by either. Two decimal places make the address easier to read, while some smaller differences disappear from the report. What would you choose to show?\n\nCONCEPTS\ncolour  Label3D  rounding",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 510.0,
+        "visible_line_count": 11,
+        "visible_width": 441.0
+      },
+      "thinking_title": {
+        "content_height": 42.0,
+        "content_width": 382.0,
+        "label_position": [
+          24.0,
+          20.0
+        ],
+        "label_size": [
+          441.0,
+          60.0
+        ],
+        "line_count": 1,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "3  A colour and an address",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 60.0,
+        "visible_line_count": 1,
+        "visible_width": 441.0
+      },
+      "title_body_separated": true
+    },
+    {
+      "code": {
+        "content_height": 279.0,
+        "content_width": 398.0,
+        "label_position": [
+          16.0,
+          16.0
+        ],
+        "label_size": [
+          1368.0,
+          1228.0
+        ],
+        "line_count": 9,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": " 1 # Excerpt; marker setup is omitted.\n 2 var elapsed := 0.0\n 3 \n 4 func _process(delta: float) -> void:\n 5     elapsed += delta\n 6     marker.visible = (\n 7         int(elapsed / 2.0) % 2 == 0\n 8     )\n 9 ",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          700,
+          630
+        ],
+        "visible_height": 614.0,
+        "visible_line_count": 9,
+        "visible_width": 684.0
+      },
+      "passed": true,
+      "stage": 4,
+      "thinking_body": {
+        "content_height": 396.0,
+        "content_width": 430.0,
+        "label_position": [
+          24.0,
+          90.0
+        ],
+        "label_size": [
+          441.0,
+          510.0
+        ],
+        "line_count": 11,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "This example alternates visibility every two seconds, hiding the marker and its child label without changing position. What disappears is the display. The screen only shows this code; it does not run the loop or make the exhibit blink.\n\nCONCEPTS\nvisibility  elapsed time  position",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 510.0,
+        "visible_line_count": 11,
+        "visible_width": 441.0
+      },
+      "thinking_title": {
+        "content_height": 42.0,
+        "content_width": 271.0,
+        "label_position": [
+          24.0,
+          20.0
+        ],
+        "label_size": [
+          441.0,
+          60.0
+        ],
+        "line_count": 1,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "4  Hide the surface",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 60.0,
+        "visible_line_count": 1,
+        "visible_width": 441.0
+      },
+      "title_body_separated": true
+    },
+    {
+      "code": {
+        "content_height": 372.0,
+        "content_width": 431.0,
+        "label_position": [
+          16.0,
+          16.0
+        ],
+        "label_size": [
+          1368.0,
+          1228.0
+        ],
+        "line_count": 12,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": " 1 # Excerpts; marker is this node's child.\n 2 # In _ready(), shift the parent:\n 3 position = Vector3(2.0, 0.0, 0.0)\n 4 \n 5 # In _update_label(), read both frames:\n 6 var local_p := marker.position\n 7 var world_p := marker.global_position\n 8 \n 9 # With no other transformed parent:\n10 # LOCAL (1.00, 0.50, 0.00)\n11 # WORLD (3.00, 0.50, 0.00)\n12 ",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          700,
+          630
+        ],
+        "visible_height": 614.0,
+        "visible_line_count": 12,
+        "visible_width": 684.0
+      },
+      "passed": true,
+      "stage": 5,
+      "thinking_body": {
+        "content_height": 360.0,
+        "content_width": 383.0,
+        "label_position": [
+          24.0,
+          90.0
+        ],
+        "label_size": [
+          441.0,
+          510.0
+        ],
+        "line_count": 10,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "With no other transformed parent, shifting this node two units along X gives the same centre two addresses: LOCAL (1.00, 0.50, 0.00), WORLD (3.00, 0.50, 0.00). Which zero do the numbers answer to?\n\nCONCEPTS\nlocal  world  origin",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 510.0,
+        "visible_line_count": 10,
+        "visible_width": 441.0
+      },
+      "thinking_title": {
+        "content_height": 42.0,
+        "content_width": 214.0,
+        "label_position": [
+          24.0,
+          20.0
+        ],
+        "label_size": [
+          441.0,
+          60.0
+        ],
+        "line_count": 1,
+        "metrics_available": true,
+        "passed": true,
+        "plain_text_including_line_numbers": "5  Whose zero?",
+        "scroll_value": 0.0,
+        "viewport_size": [
+          489,
+          630
+        ],
+        "visible_height": 60.0,
+        "visible_line_count": 1,
+        "visible_width": 441.0
+      },
+      "title_body_separated": true
+    }
+  ],
+  "evolution_path": "res://commons/maps/Point_One/evolution.json",
+  "passed": true,
+  "scale": 2.0,
+  "scope": "Actual code_evolution_screen.tscn at scale2 with explicit Point_One evolution_path, Forward+ rendering. Same label/viewport bounds and title/body separation checks as the museum probe. No museum rerun, pointer-input or learner-acceptance claim.",
+  "snapshots": [
+    {
+      "passed": true,
+      "path": "res://ada_run/point_one_restoration/code-stage-1.png",
+      "scope": "Isolated actual screen scene at scale2; this image supersedes only the previous stage1 title-overlap view, not the museum placement evidence."
+    }
+  ],
+  "stage_count": 5,
+  "supersedes": {
+    "change": "Only evolution.json stage1 title changed from An address without a surface to Before a surface.",
+    "check": "stage_1_display_fits",
+    "report": "ada_run/point_one_restoration/museum_report.json"
+  },
+  "source_hashes": {
+    "commons/maps/Point_One/evolution.json": "055be926ac82f24c8212350fe2cd3b51ead16c638ca2e8e6e9742d38e3cd757f",
+    "commons/artifacts/code_evolution_screen/code_evolution_screen.gd": "f330ca974c4e197e725c26a27762cf7f48c97596b91e6214b512b6062321e640",
+    "commons/artifacts/code_evolution_screen/code_evolution_screen.tscn": "d88222725a8edf6613897c61f8b84fca15bc4c0efad41f878e4fe024520833e1",
+    "ada_run/point_one_restoration/screen_layout.gd": "6f07baccf4f2c4b9e447c7aa04cd86ca0a2a6d7702d3d574588bdef7efb908fd",
+    "ada_run/point_one_restoration/run_screen_layout.py": "5c6a69884aee3940a80938e8532663d7587d41d7fa3ff913c6696cdf375851c4"
+  },
+  "input_drift": {},
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--no-window",
+    "--rendering-method",
+    "forward_plus",
+    "--xr-mode",
+    "off",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\ada_run\\point_one_restoration\\screen-layout-engine.log",
+    "--script",
+    "res://ada_run/point_one_restoration/screen_layout.gd"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 9.63
+}

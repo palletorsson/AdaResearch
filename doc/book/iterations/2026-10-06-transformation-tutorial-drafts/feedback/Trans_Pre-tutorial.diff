@@ -1,0 +1,11 @@
+--- before-feedback/Trans_Pre/tutorial.md
++++ Trans_Pre/tutorial.md
+@@ -73,7 +73,7 @@
+ 
+ Restore `pulse` to `0.2`. The second `lerpf` now chooses a size factor between `0.8` and `1.2`. Multiplying `Vector3.ONE` gives all three axes the same factor, so the cube keeps its proportions. Rise and pulse share the returning fraction; the turn continues at its own steady rate. The assertion keeps the period positive and prevents the pulse from collapsing the cube to zero size. The installed specimen uses a larger pulse, from 0.7 to 1.3; this study keeps the same operation with a smaller range.
+ 
+-Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift.
++Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift. `elapsed` is kept between updates; `t` is calculated afresh from that clock, and the three transform properties are assigned from those values.
+ 
+ ## Walk into it
+ 

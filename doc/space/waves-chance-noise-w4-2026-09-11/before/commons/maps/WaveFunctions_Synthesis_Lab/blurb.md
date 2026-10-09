@@ -1,0 +1,5 @@
+Fourier's theorem: any signal decomposes into sine waves. Any wave, no matter how jagged or complex, is just simple oscillations stacked. This is the room where that principle becomes material.
+
+Layer harmonics on the additive wave demo and watch a square wave emerge from pure curves. Sand migrates across the Chladni plate, settling into nodal geometries where vibration cancels to zero. Six vials pulse in phase sequence — a wave traveling through glass. The multimeter needle tracks alternating current. Chemical flasks bubble with phase offsets. DNA turns in its jar, a double helix that is also two sinusoids displaced by half a period. Worms trace sine paths across petri dishes. The seismograph writes oscillation into permanent record.
+
+Everything here vibrates at its natural frequency. Match it, and resonance amplifies without bound. The laboratory doesn't demonstrate waves — it *is* one. Decomposition reveals that complexity was never complex. It was always just agreement between simple things.

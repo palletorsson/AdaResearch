@@ -1,0 +1,123 @@
+{
+  "checks": [
+    {
+      "name": "Printed construction creates 576 cells, point, label and unlit lamp",
+      "passed": true
+    },
+    {
+      "name": "All eighteen birth and survival cases",
+      "passed": true
+    },
+    {
+      "name": "Every surrounding offset counts once; centre excluded",
+      "passed": true
+    },
+    {
+      "name": "Both boundaries wrap; corner births from three neighbours",
+      "passed": true
+    },
+    {
+      "name": "Evolve writes a new buffer and leaves old state intact",
+      "passed": true
+    },
+    {
+      "name": "Reversing iteration preserves the synchronous answer",
+      "passed": true
+    },
+    {
+      "name": "Printed seed equals installed glider beginning",
+      "passed": true
+    },
+    {
+      "name": "Every glider generation through limit agrees with installed solver",
+      "passed": true
+    },
+    {
+      "name": "Capacity holds the current state at generation 48",
+      "passed": true
+    },
+    {
+      "name": "Eight deterministic random beginnings agree for twelve updates",
+      "passed": true
+    },
+    {
+      "name": "Four phases reproduce seed shifted one address on each axis",
+      "passed": true
+    },
+    {
+      "name": "Fixed A occupied and lamp lit at generation eight",
+      "passed": true
+    },
+    {
+      "name": "Disconnect changes lamp without advancing or editing cells",
+      "passed": true
+    },
+    {
+      "name": "Reconnect reads current state without stepping",
+      "passed": true
+    },
+    {
+      "name": "Unlinked automaton still evolves normally",
+      "passed": true
+    },
+    {
+      "name": "A empty again at generation twelve",
+      "passed": true
+    },
+    {
+      "name": "All tile transforms stay fixed as the pattern travels",
+      "passed": true
+    },
+    {
+      "name": "All rendered tile colours match current state",
+      "passed": true
+    },
+    {
+      "name": "Native collision supports both empty and occupied site",
+      "passed": true
+    },
+    {
+      "name": "Independent blinker exercise has predicted vertical phase",
+      "passed": true
+    },
+    {
+      "name": "Blinker returns in two phases with centre lamp continuously lit",
+      "passed": true
+    },
+    {
+      "name": "Independent other-address lamp alternates without changing cells",
+      "passed": true
+    },
+    {
+      "name": "Counting centre fault fails predicted blinker phase",
+      "passed": true
+    },
+    {
+      "name": "In-place update fault fails synchronous answer",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools carries point without editing automaton",
+      "passed": true
+    },
+    {
+      "name": "Held trigger advances exactly once",
+      "passed": true
+    },
+    {
+      "name": "Release parks at local position in rotated study",
+      "passed": true
+    },
+    {
+      "name": "Enter steps once and ignores repeat",
+      "passed": true
+    },
+    {
+      "name": "Keyboard replay restores edited seed and preserves disconnected link",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed code, native renderer/collision; installed-solver parity; independent blinker/address changes; two deliberately faulty variants; actual XRTools with supplied poses. No physical headset or human learner."
+}

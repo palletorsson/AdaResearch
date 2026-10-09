@@ -1,0 +1,343 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "triangle and twin loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-entrance",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-room",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-two-scales",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-room-matched",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-two-scales-matched",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-entry-improved",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-puzzle-close",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-maker",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-front",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-edge",
+      "passed": true
+    },
+    {
+      "name": "front-to-edge viewpoint keeps a positive area",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-unfilled",
+      "passed": true
+    },
+    {
+      "name": "fill control leaves three shared edges",
+      "passed": true
+    },
+    {
+      "name": "restore refuses while a corner is held",
+      "passed": true
+    },
+    {
+      "name": "collinearity removes area but retains all three addresses",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-collapsed",
+      "passed": true
+    },
+    {
+      "name": "actual restore button recovers face at both scales",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-restored",
+      "passed": true
+    },
+    {
+      "name": "clear research route (6.5, 0.03, 1.5)",
+      "passed": true
+    },
+    {
+      "name": "clear research route (2.0, 0.03, 17.5)",
+      "passed": true
+    },
+    {
+      "name": "clear research route (2.0, 0.03, 11.5)",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "cameras": [
+      {
+        "eye": [
+          3.30000019073486,
+          1.64999997615814,
+          5.5
+        ],
+        "fov": 70.0,
+        "id": "triangle-entrance",
+        "target": [
+          4.5,
+          1.39999997615814,
+          2.5
+        ]
+      },
+      {
+        "eye": [
+          8.60000038146973,
+          1.70000004768372,
+          19.7000007629395
+        ],
+        "fov": 63.0,
+        "id": "triangle-room",
+        "target": [
+          7.09999990463257,
+          1.89999997615814,
+          16.2000007629395
+        ]
+      },
+      {
+        "eye": [
+          10.0,
+          1.70000004768372,
+          19.1000003814697
+        ],
+        "fov": 72.0,
+        "id": "triangle-two-scales",
+        "target": [
+          7.5,
+          1.70000004768372,
+          16.1000003814697
+        ]
+      },
+      {
+        "eye": [
+          4.5,
+          1.5,
+          1.25
+        ],
+        "fov": 60.0,
+        "id": "triangle-puzzle-close",
+        "target": [
+          4.5,
+          1.39999997615814,
+          2.5
+        ]
+      },
+      {
+        "eye": [
+          3.49999976158142,
+          1.82249999046326,
+          11.3999996185303
+        ],
+        "fov": 65.0,
+        "id": "triangle-maker",
+        "target": [
+          3.5,
+          1.57249999046326,
+          13.5
+        ]
+      },
+      {
+        "eye": [
+          6.49999952316284,
+          1.70000004768372,
+          11.5
+        ],
+        "fov": 63.0,
+        "id": "triangle-front",
+        "target": [
+          6.5,
+          1.79999995231628,
+          15.5
+        ]
+      },
+      {
+        "eye": [
+          2.5,
+          1.70000004768372,
+          15.5
+        ],
+        "fov": 63.0,
+        "id": "triangle-edge",
+        "target": [
+          6.5,
+          1.79999995231628,
+          15.5
+        ]
+      },
+      {
+        "eye": [
+          6.49999952316284,
+          1.70000004768372,
+          11.5
+        ],
+        "fov": 63.0,
+        "id": "triangle-unfilled",
+        "target": [
+          6.5,
+          1.79999995231628,
+          15.5
+        ]
+      },
+      {
+        "eye": [
+          6.49999952316284,
+          1.70000004768372,
+          11.5
+        ],
+        "fov": 63.0,
+        "id": "triangle-collapsed",
+        "target": [
+          6.5,
+          1.79999995231628,
+          15.5
+        ]
+      },
+      {
+        "eye": [
+          6.49999952316284,
+          1.70000004768372,
+          11.5
+        ],
+        "fov": 63.0,
+        "id": "triangle-restored",
+        "target": [
+          6.5,
+          1.79999995231628,
+          15.5
+        ]
+      }
+    ],
+    "collapsed_area_m2": 0.0,
+    "engine": {
+      "build": "official",
+      "hash": "89cea143987d564363e15d207438530651d943ac",
+      "hex": 263680,
+      "major": 4,
+      "minor": 6,
+      "patch": 0,
+      "status": "stable",
+      "string": "4.6-stable (official)",
+      "timestamp": 0
+    },
+    "hall_origin": [
+      0.0,
+      0.0,
+      -4.0
+    ],
+    "initial_area_m2": 5.22720050811768,
+    "points": 3,
+    "puzzle_basis": "[X: (-0.0, 0.0, -1.0), Y: (0.0, 1.0, 0.0), Z: (1.0, 0.0, -0.0)]",
+    "puzzle_position": [
+      4.5,
+      1.39999997615814,
+      2.5
+    ],
+    "route": {
+      "body_height": 1.65,
+      "mask": 1,
+      "radius": 0.25,
+      "segments": [
+        {
+          "clear": true,
+          "end": [
+            6.5,
+            0.0299999993294477,
+            28.5
+          ],
+          "from": [
+            6.5,
+            0.0299999993294477,
+            1.5
+          ],
+          "to": [
+            6.5,
+            0.0299999993294477,
+            28.5
+          ]
+        },
+        {
+          "clear": true,
+          "end": [
+            10.5,
+            0.0299999993294477,
+            17.5
+          ],
+          "from": [
+            2.0,
+            0.0299999993294477,
+            17.5
+          ],
+          "to": [
+            10.5,
+            0.0299999993294477,
+            17.5
+          ]
+        },
+        {
+          "clear": true,
+          "end": [
+            10.5,
+            0.0299999993294477,
+            11.5
+          ],
+          "from": [
+            2.0,
+            0.0299999993294477,
+            11.5
+          ],
+          "to": [
+            10.5,
+            0.0299999993294477,
+            11.5
+          ]
+        }
+      ]
+    },
+    "scope": "Actual museum images, production fill/reset signals, supplied corner positions and physics capsule. No human learner or physical headset trial.",
+    "source_position": [
+      3.5,
+      1.57249999046326,
+      13.5
+    ],
+    "twin_transform": {
+      "basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -1.0)]",
+      "origin": [
+        6.5,
+        0.0,
+        15.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Point_Triangle_Context"
+}

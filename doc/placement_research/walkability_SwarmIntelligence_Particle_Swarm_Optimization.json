@@ -1,0 +1,3164 @@
+{
+  "room": {
+    "width": 13,
+    "depth": 11,
+    "spawn_row": 9,
+    "spawn_col": 8,
+    "teleporter_row": 8,
+    "teleporter_col": 8
+  },
+  "artifacts": [
+    {
+      "lookup_name": "tick_flock",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "fitness_landscape_politics",
+      "footprint_cells": 9,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "placed",
+        "alongside",
+        "self_organizing_patterns",
+        "responds",
+        "critical"
+      ],
+      "preferred_zone": "end"
+    },
+    {
+      "lookup_name": "ant_colony_v2",
+      "footprint_cells": 9,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "simpler",
+        "predecessor",
+        "quality",
+        "weighting",
+        "tandem"
+      ],
+      "preferred_zone": "end"
+    },
+    {
+      "lookup_name": "self_organizing_patterns",
+      "footprint_cells": 1,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "generalizes",
+        "stigmergy",
+        "mechanism",
+        "stigmergy_grid",
+        "abstract"
+      ],
+      "preferred_zone": "any"
+    }
+  ],
+  "results": {
+    "random": {
+      "constraint_score": 0.9281,
+      "walkability": 0.324,
+      "combined": 0.686,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.875,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.667,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 25,
+        "detour_ratio": 25.0,
+        "backtrack_rate": 0.28,
+        "encounter_order": 0,
+        "centerpiece_proximity": 0.572,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock",
+          "fitness_landscape_politics"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 6,
+          "col": 12
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 6,
+          "col": 0
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 7,
+          "col": 6
+        }
+      ]
+    },
+    "rule_based": {
+      "constraint_score": 0.9238,
+      "walkability": 0.403,
+      "combined": 0.715,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.844,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.65,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 27.0,
+        "backtrack_rate": 0.074,
+        "encounter_order": 0,
+        "centerpiece_proximity": 0.553,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "fitness_landscape_politics",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 5,
+          "col": 12
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 5,
+          "col": 0
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 5,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 5,
+          "col": 6
+        }
+      ]
+    },
+    "sdf": {
+      "constraint_score": 0.9464,
+      "walkability": 0.423,
+      "combined": 0.737,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.755,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 25,
+        "detour_ratio": 25.0,
+        "backtrack_rate": 0.24,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.624,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "self_organizing_patterns",
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 2,
+          "col": 8
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 8,
+          "col": 2
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 8,
+          "col": 6
+        }
+      ]
+    },
+    "fold": {
+      "constraint_score": 0.9442,
+      "walkability": 0.33,
+      "combined": 0.699,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.938,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.833,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 21,
+        "detour_ratio": 21.0,
+        "backtrack_rate": 0.286,
+        "encounter_order": 0,
+        "centerpiece_proximity": 0.629,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "fitness_landscape_politics",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 7,
+          "col": 12
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 3,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 7,
+          "col": 6
+        }
+      ]
+    },
+    "paradoxical": {
+      "constraint_score": 0.8869,
+      "walkability": 0.389,
+      "combined": 0.688,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.844,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 27.0,
+        "backtrack_rate": 0.074,
+        "encounter_order": 0,
+        "centerpiece_proximity": 0.459,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "self_organizing_patterns",
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 1,
+          "col": 10
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 9,
+          "col": 1
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 9,
+          "col": 11
+        }
+      ]
+    },
+    "hybrid": {
+      "constraint_score": 0.9464,
+      "walkability": 0.43,
+      "combined": 0.74,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.755,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 27.0,
+        "backtrack_rate": 0.222,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.624,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 2,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 8,
+          "col": 2
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    },
+    "circle_packing": {
+      "constraint_score": 0.9164,
+      "walkability": 0.397,
+      "combined": 0.709,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.688,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.813,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 33.0,
+        "backtrack_rate": 0.212,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.376,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "ant_colony_v2",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 0,
+          "col": 10
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 1,
+          "col": 12
+        }
+      ]
+    },
+    "warehouse": {
+      "constraint_score": 0.9237,
+      "walkability": 0.757,
+      "combined": 0.857,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.656,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 1,
+        "detour_ratio": 1.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.883,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 8,
+          "col": 9
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 8,
+          "col": 5
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 10,
+          "col": 8
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 7,
+          "col": 8
+        }
+      ]
+    },
+    "simulated_annealing": {
+      "constraint_score": 0.947,
+      "walkability": 0.384,
+      "combined": 0.722,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.875,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 31,
+        "detour_ratio": 31.0,
+        "backtrack_rate": 0.387,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.758,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 2,
+          "col": 3
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 3,
+          "col": 8
+        }
+      ]
+    },
+    "voronoi": {
+      "constraint_score": 0.9338,
+      "walkability": 0.506,
+      "combined": 0.763,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.938,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.65,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 23,
+        "detour_ratio": 23.0,
+        "backtrack_rate": 0.174,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.502,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "tick_flock",
+          "self_organizing_patterns",
+          "fitness_landscape_politics",
+          "ant_colony_v2"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 7,
+          "col": 9
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 2,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 8,
+          "col": 3
+        }
+      ]
+    },
+    "humanoid_walker": {
+      "constraint_score": 0.9018,
+      "walkability": 0.553,
+      "combined": 0.762,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.812,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.321,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 37,
+        "detour_ratio": 37.0,
+        "backtrack_rate": 0.054,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.495,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "tick_flock",
+          "self_organizing_patterns"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 1,
+          "col": 2
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 1,
+          "col": 10
+        }
+      ]
+    },
+    "grow_walker": {
+      "constraint_score": 0.9056,
+      "walkability": 0.451,
+      "combined": 0.724,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.5,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.973,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 19.0,
+        "backtrack_rate": 0.316,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.516,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "tick_flock",
+          "self_organizing_patterns"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 0,
+          "col": 9
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 3,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 0,
+          "col": 7
+        }
+      ]
+    },
+    "focal_composition": {
+      "constraint_score": 0.9437,
+      "walkability": 0.517,
+      "combined": 0.773,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.844,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 19.0,
+        "backtrack_rate": 0.263,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.814,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "tick_flock",
+          "self_organizing_patterns"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 7,
+          "col": 4
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 7,
+          "col": 3
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 6,
+          "col": 9
+        }
+      ]
+    },
+    "pacing_arc": {
+      "constraint_score": 0.937,
+      "walkability": 0.493,
+      "combined": 0.759,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.781,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 9,
+        "detour_ratio": 9.0,
+        "backtrack_rate": 0.111,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.751,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 5,
+          "col": 4
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 8,
+          "col": 4
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 8,
+          "col": 10
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 6,
+          "col": 8
+        }
+      ]
+    },
+    "alexander": {
+      "constraint_score": 0.9255,
+      "walkability": 0.717,
+      "combined": 0.842,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.969,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.446,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 19.0,
+        "backtrack_rate": 0.053,
+        "encounter_order": 1.0,
+        "centerpiece_proximity": 0.585,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "tick_flock",
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "tick_flock",
+          "row": 8,
+          "col": 5
+        },
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 3,
+          "col": 2
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 6,
+          "col": 9
+        }
+      ]
+    },
+    "promenade": {
+      "constraint_score": 0.9304,
+      "walkability": 0.479,
+      "combined": 0.75,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.719,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 31,
+        "detour_ratio": 31.0,
+        "backtrack_rate": 0.161,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.788,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "self_organizing_patterns",
+          "ant_colony_v2",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 5,
+          "col": 5
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 1,
+          "col": 5
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 3,
+          "col": 3
+        }
+      ]
+    },
+    "tile_wfc": {
+      "constraint_score": 0.9464,
+      "walkability": 0.43,
+      "combined": 0.74,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.755,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 27.0,
+        "backtrack_rate": 0.222,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.624,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_v2",
+          "fitness_landscape_politics",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 2,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 8,
+          "col": 2
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    },
+    "crystallization": {
+      "constraint_score": 0.9305,
+      "walkability": 0.46,
+      "combined": 0.742,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.906,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.65,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 29.0,
+        "backtrack_rate": 0.207,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.788,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 5,
+          "col": 5
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 1,
+          "col": 5
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 5,
+          "col": 1
+        }
+      ]
+    },
+    "stickiness": {
+      "constraint_score": 0.7152,
+      "walkability": 0.467,
+      "combined": 0.616,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.75,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.899,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 0.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 25,
+        "detour_ratio": 25.0,
+        "backtrack_rate": 0.24,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.917,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "fitness_landscape_politics",
+          "ant_colony_v2",
+          "self_organizing_patterns",
+          "tick_flock"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 7,
+          "col": 8
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 4,
+          "col": 7
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 6,
+          "col": 6
+        }
+      ]
+    },
+    "colonization": {
+      "constraint_score": 0.91,
+      "walkability": 0.513,
+      "combined": 0.751,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.938,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.231,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 19.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.585,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "self_organizing_patterns",
+          "tick_flock",
+          "fitness_landscape_politics",
+          "ant_colony_v2"
+        ]
+      },
+      "full_path": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "fitness_landscape_politics",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "ant_colony_v2",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "tick_flock",
+          "row": 5,
+          "col": 8
+        },
+        {
+          "artifact": "self_organizing_patterns",
+          "row": 9,
+          "col": 10
+        }
+      ]
+    }
+  }
+}

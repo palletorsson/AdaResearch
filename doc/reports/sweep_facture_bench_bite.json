@@ -1,0 +1,1448 @@
+{
+ "sweep": "facture_bench",
+ "peak_changed_pct": 4.792,
+ "subject_pct": 9.823,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "changed_px": 17896,
+   "changed_pct": 3.098
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "changed_px": 19309,
+   "changed_pct": 3.343
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "changed_px": 19115,
+   "changed_pct": 3.309
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "changed_px": 11063,
+   "changed_pct": 1.915
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "changed_px": 20716,
+   "changed_pct": 3.587
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 21170,
+   "changed_pct": 3.665
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 21296,
+   "changed_pct": 3.687
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 14996,
+   "changed_pct": 2.596
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 20379,
+   "changed_pct": 3.528
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 20783,
+   "changed_pct": 3.598
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 20908,
+   "changed_pct": 3.62
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 17926,
+   "changed_pct": 3.104
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 20285,
+   "changed_pct": 3.512
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 20710,
+   "changed_pct": 3.586
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 20763,
+   "changed_pct": 3.595
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "changed_px": 12866,
+   "changed_pct": 2.227
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "changed_px": 13070,
+   "changed_pct": 2.263
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "changed_px": 22735,
+   "changed_pct": 3.936
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "changed_px": 13082,
+   "changed_pct": 2.265
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 19041,
+   "changed_pct": 3.297
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 19110,
+   "changed_pct": 3.309
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 23441,
+   "changed_pct": 4.058
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 18058,
+   "changed_pct": 3.126
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 20193,
+   "changed_pct": 3.496
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 20318,
+   "changed_pct": 3.518
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 25242,
+   "changed_pct": 4.37
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 22883,
+   "changed_pct": 3.962
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 23816,
+   "changed_pct": 4.123
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 23880,
+   "changed_pct": 4.134
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "changed_px": 7057,
+   "changed_pct": 1.222
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "changed_px": 24059,
+   "changed_pct": 4.165
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "changed_px": 19911,
+   "changed_pct": 3.447
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 13952,
+   "changed_pct": 2.416
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 17516,
+   "changed_pct": 3.033
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 24974,
+   "changed_pct": 4.324
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 21322,
+   "changed_pct": 3.691
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 19187,
+   "changed_pct": 3.322
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 19652,
+   "changed_pct": 3.402
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 27324,
+   "changed_pct": 4.731
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 25473,
+   "changed_pct": 4.41
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 24540,
+   "changed_pct": 4.249
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 24742,
+   "changed_pct": 4.284
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "changed_px": 24305,
+   "changed_pct": 4.208
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "changed_px": 20100,
+   "changed_pct": 3.48
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 17636,
+   "changed_pct": 3.053
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 14072,
+   "changed_pct": 2.436
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 25324,
+   "changed_pct": 4.384
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 21672,
+   "changed_pct": 3.752
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 19877,
+   "changed_pct": 3.441
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 19412,
+   "changed_pct": 3.361
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 27680,
+   "changed_pct": 4.792
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 25840,
+   "changed_pct": 4.474
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 25045,
+   "changed_pct": 4.336
+  },
+  {
+   "a": {
+    "quorum": "two",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 24843,
+   "changed_pct": 4.301
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "changed_px": 9653,
+   "changed_pct": 1.671
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 10107,
+   "changed_pct": 1.75
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 10233,
+   "changed_pct": 1.772
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 3933,
+   "changed_pct": 0.681
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 9316,
+   "changed_pct": 1.613
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 9720,
+   "changed_pct": 1.683
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 9845,
+   "changed_pct": 1.704
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 6863,
+   "changed_pct": 1.188
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 9222,
+   "changed_pct": 1.597
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 9647,
+   "changed_pct": 1.67
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 9700,
+   "changed_pct": 1.679
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "changed_px": 5959,
+   "changed_pct": 1.032
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 6028,
+   "changed_pct": 1.044
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 10359,
+   "changed_pct": 1.793
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 4976,
+   "changed_pct": 0.861
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 7111,
+   "changed_pct": 1.231
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 7236,
+   "changed_pct": 1.253
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 12160,
+   "changed_pct": 2.105
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 9801,
+   "changed_pct": 1.697
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 10734,
+   "changed_pct": 1.858
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 10798,
+   "changed_pct": 1.869
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "changed_px": 3564,
+   "changed_pct": 0.617
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 11022,
+   "changed_pct": 1.908
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 7370,
+   "changed_pct": 1.276
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 5235,
+   "changed_pct": 0.906
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 5700,
+   "changed_pct": 0.987
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 13372,
+   "changed_pct": 2.315
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 11521,
+   "changed_pct": 1.995
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 10588,
+   "changed_pct": 1.833
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 10790,
+   "changed_pct": 1.868
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "changed_px": 11252,
+   "changed_pct": 1.948
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 7600,
+   "changed_pct": 1.316
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 5805,
+   "changed_pct": 1.005
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 5340,
+   "changed_pct": 0.925
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 13608,
+   "changed_pct": 2.356
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 11768,
+   "changed_pct": 2.037
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 10973,
+   "changed_pct": 1.9
+  },
+  {
+   "a": {
+    "quorum": "three",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 10771,
+   "changed_pct": 1.865
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "changed_px": 5383,
+   "changed_pct": 0.932
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 5787,
+   "changed_pct": 1.002
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 5912,
+   "changed_pct": 1.024
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 2930,
+   "changed_pct": 0.507
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 5289,
+   "changed_pct": 0.916
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 5714,
+   "changed_pct": 0.989
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 5767,
+   "changed_pct": 0.998
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "changed_px": 2135,
+   "changed_pct": 0.37
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 2260,
+   "changed_pct": 0.391
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 7184,
+   "changed_pct": 1.244
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 4825,
+   "changed_pct": 0.835
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 5758,
+   "changed_pct": 0.997
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 5822,
+   "changed_pct": 1.008
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "changed_px": 465,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 8137,
+   "changed_pct": 1.409
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 6286,
+   "changed_pct": 1.088
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 5353,
+   "changed_pct": 0.927
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 5555,
+   "changed_pct": 0.962
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "changed_px": 8268,
+   "changed_pct": 1.431
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 6428,
+   "changed_pct": 1.113
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 5633,
+   "changed_pct": 0.975
+  },
+  {
+   "a": {
+    "quorum": "four",
+    "resolution": "ultra"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 5431,
+   "changed_pct": 0.94
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "changed_px": 2359,
+   "changed_pct": 0.408
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 2784,
+   "changed_pct": 0.482
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "coarse"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 2837,
+   "changed_pct": 0.491
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "changed_px": 933,
+   "changed_pct": 0.162
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "mid"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 997,
+   "changed_pct": 0.173
+  },
+  {
+   "a": {
+    "quorum": "all",
+    "resolution": "fine"
+   },
+   "b": {
+    "quorum": "all",
+    "resolution": "ultra"
+   },
+   "changed_px": 202,
+   "changed_pct": 0.035
+  }
+ ]
+}

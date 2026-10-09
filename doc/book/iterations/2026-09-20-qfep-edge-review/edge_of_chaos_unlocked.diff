@@ -1,0 +1,639 @@
+--- before/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
++++ commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
+@@ -3,14 +3,11 @@
+ # The companion to the locked-lambda map. Now the learner controls lambda.
+ #
+ # @identity
+-# essence: Gray-Scott reaction-diffusion on a 64x64 grid with an UNLOCKED lambda slider — the control the map withheld, now given
+-# desire: to answer the critical.md question by letting the learner discover that adjusting lambda IS knowledge and witnessing lambda locked IS knowledge — different kinds
+-# critical_parameter: lambda (0.0-1.0) — maps to feed/kill rate balance; 0=frozen crystal, 0.4=Turing patterns emerge, 1.0=pure noise
+-# triggers: dragging lambda slowly from 0 toward 0.4 produces the moment of emergence — spots appear from nothing; pushing past 0.7 dissolves everything into static
+-# emerges: Turing spots, stripes, labyrinthine patterns at the edge; the learner discovers the parameter space has texture, not just a gradient
+-# needs: [has] lambda slider via ArtifactControls; [has] regime label (FROZEN/EDGE/CHAOS); [has] display rate control; [missing] no pattern save; no comparison view
+-# relationships: companion to QFEP_Edge_Of_Chaos map where lambda_slider is locked at 0.4; the map withholds what this artifact gives
+-# truth: when you control lambda, you understand the parameter space; when you witness it locked, you understand what it feels like to be at the edge; both are knowledge
++# essence: Gray-Scott fields integrated with a normalized four-neighbour stencil
++# desire: follow a feature and compare numerical resolution before naming a regime
++# critical_parameter: lambda follows one authored route through four coefficients
++# triggers: lambda and speed rails, reproducible restart, new seed, optional paired timesteps
++# truth: a pattern is evidence of this implementation; regime names require additional measurements
+ 
+ extends Node3D
+ 
+@@ -21,7 +18,7 @@
+ ## Grid resolution for reaction-diffusion
+ @export var grid_size: int = 64
+ 
+-## Lambda parameter: 0=frozen, 0.4=edge, 1.0=chaos
++## Authored route through feed, removal and diffusion coefficients. No measured regime.
+ @export_range(0.0, 1.0, 0.01) var lambda: float = 0.4:
+ 	set(value):
+ 		lambda = clampf(value, 0.0, 1.0)
+@@ -31,79 +28,12 @@
+ ## Display update rate (frames between texture updates)
+ @export_range(1, 10) var display_rate: int = 2
+ 
+-## Simulation steps per frame
++## Legacy speed selector; each unit now requests 3 model-time units per second.
+ @export_range(1, 8) var sim_steps: int = 4
+ 
+-# ═══════════════════════════════════════════════════════════════════
+-# STAGE-2 DNA AXIS — tenure
+-# ═══════════════════════════════════════════════════════════════════
+-#
+-# WHO HOLDS LAMBDA, AND AT WHAT SETTING. The truth statement above names two
+-# states — the knob held and the knob withheld — and the artifact ships one.
+-# This axis ships both, plus the two poles the parameter space actually has.
+-#
+-#   unlocked  the LAMBDA fader is built live at 0.40 on the rack at
+-#             (1.2, 1.0, 0); the 1.5 x 1.5 m quad carries the Turing
+-#             spot/stripe field in teal-amber-cream; regime reads
+-#             EDGE OF CHAOS. This is the pre-promotion look, exactly.
+-#   clamped   the fader is still built at 0.40, but a 0.34 x 0.05 x 0.03 m
+-#             brushed-steel bracket is bolted across its travel on two
+-#             0.05 x 0.09 x 0.016 m gunmetal straps, with two 0.02 m bolt heads
+-#             at its ends. The straps stay inside the fader's own 0.09 m slot:
+-#             SIM SPEED and RESEED are not seized and must not look it.
+-#             The pattern is the SAME spot field and the caption is the SAME
+-#             caption — a sign still reading UNLOCKED over a bolt driven through
+-#             the fader IS the value. The companion map's locked slider made an
+-#             OBJECT instead of a sentence in a relationships line.
+-#   withheld  the LAMBDA fader is not built at all. A blank
+-#             0.30 x 0.09 x 0.012 m anthracite blanking plate with four
+-#             0.012 m rivets fills its slot; the other two controls keep the
+-#             exact y they have in every other tenure; lambda is held at 0.40
+-#             so the pattern is unchanged. Where clamped is an object, this one
+-#             is a SENTENCE — so the sentences are what change. The title reads
+-#             EDGE OF CHAOS — WITHHELD in anthracite instead of UNLOCKED in
+-#             green, the caption says the fader is not fitted, and a
+-#             0.556 x 0.358 m TextScreen stands at (1.12, 0.47, 0) beside the
+-#             instrument carrying the amendment. The artifact whose whole title
+-#             is UNLOCKED, shipped locked. This is the value the axis exists for.
+-#   frozen    the fader is built pushed to its left stop and clamped there.
+-#             lambda 0.0 -> feed 0.01 / kill 0.08, which is outside the region
+-#             where B can sustain itself at all, so the 12 seed blots die back
+-#             to nothing and the quad settles to a FLAT deep-teal field; the
+-#             regime readout reads FROZEN in blue.
+-#   chaos     the fader is built at its right stop and clamped. lambda 1.0 ->
+-#             feed 0.08 / kill 0.03, where B invades every cell it can reach, so
+-#             the same quad fills edge-to-edge with warm amber-cream and the
+-#             readout reads CHAOS in red.
+-#
+-# ── WHY TWO OF THESE FIVE USED TO BE ONE PICTURE ──────────────────────────────
+-#
+-# The critic measured this axis at 17.82% focus — a passing verdict — while two
+-# of its pairs were twins underneath the mean. Both had the same shape of fault
+-# and neither was a design fault:
+-#
+-#   frozen == chaos (5.87%). The two ENDS of the parameter space, and they
+-#   photographed the same. Not because the poles were badly chosen but because
+-#   _simulate_step integrates with the raw 5-point stencil at dt = 1.0, whose
+-#   worst mode is a checkerboard with eigenvalue -8: explicit Euler needs
+-#   _diffusion_a * dt < 0.25 there, and _diffusion_a is 0.8 at lambda 0 and 1.2
+-#   at lambda 1 — over the bound by 3.2x and 4.8x. So BOTH poles diverged to the
+-#   same clamp-saturated checkerboard within a few dozen steps, and the feed/kill
+-#   rates, the only thing the poles disagree about, were erased by arithmetic.
+-#   Measured offline before anything was touched: after 240 steps the two fields
+-#   differ by 2.2% mean luminance; integrated stably they differ by 48.6%.
+-#   Fixed by _simulate_step_stable, which the poles alone run — see there.
+-#
+-#   clamped == withheld (1.53%). Both are "the fader is not yours" and both said
+-#   so with a piece of rack hardware about 0.30 m across, on a rack that is 0.9%
+-#   of the framed picture. Two 0.03 m^2 objects cannot differ by more than the
+-#   rack itself does. The repair is not a bigger clamp — a clamp on one 0.09 m
+-#   slot is a small object and pretending otherwise would be a second lie — but
+-#   moving withheld's evidence to where its meaning already lived: the signage.
+-#
+-# NOT swept here: sim_steps and display_rate. Both are exported, both beg to be
+-# swept, and both photograph as identical stills — a time-domain axis is not
+-# evidence.
++# Tenure controls access to lambda, not which equations or integrator are used.
++# Earlier capture variants used a different solver from the interactive mode.
++# All modes now use the same normalized stencil and bounded timestep.
+ const TENURES: PackedStringArray = ["unlocked", "clamped", "withheld", "frozen", "chaos"]
+ 
+ ## Who holds lambda and at what setting.
+@@ -124,21 +54,30 @@
+ const NOTICE_WIDTH: float = 0.52
+ const NOTICE_HEIGHT: float = 0.47
+ 
+-# The two pole tenures are the only ones whose payload IS the developed field,
+-# so only they are pre-rolled. clamped/withheld must keep the DEFAULT's frame-1
+-# spot field — their difference is on the rack and in the signage, never here.
+-#
+-# 240 -> 320 because the poles now integrate at STABLE_DT rather than at a
+-# nominal 1.0: 320 steps is 192 units of model time, which is where the chaos
+-# front has covered 88% of the grid and frozen has been flat for 100 units. The
+-# cost is one third more grid passes than before, on two of five tenures.
+-const PREROLL_STEPS: int = 320
+-
+-# Timestep for the poles' integration. The stability bound for the normalised
+-# 5-point laplacian is _diffusion_a * dt < 1; the worst case here is lambda 1.0,
+-# where _diffusion_a is 1.2, so 0.6 leaves a comfortable margin rather than
+-# riding the edge and calling the ringing "chaos".
+-const STABLE_DT: float = 0.6
++# Preset poles advance for the same 192 model-time units as the old stable presets.
++const PREROLL_DURATION: float = 192.0
++const STABLE_DT: float = 0.3
++const MAX_TICKS_PER_FRAME: int = 4
++
++@export var comparison_study: bool = false
++var time_step: float = STABLE_DT
++var model_time: float = 0.0
++var seed_value: int = 0x5EED17
++var solver_fault: bool = false
++var _time_budget: float = 0.0
++var _fine_a: PackedFloat32Array
++var _fine_b: PackedFloat32Array
++var _fine_a_next: PackedFloat32Array
++var _fine_b_next: PackedFloat32Array
++var _fine_image: Image
++var _fine_texture: ImageTexture
++var _fine_display: MeshInstance3D
++var _dt_labels: Array[Label3D] = []
++var _study_readout: Label
++var _study_sliders: Array[Node3D] = []
++var _study_buttons: Array[Node3D] = []
++var _paused: bool = false
++const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
+ 
+ # Fixed seed: the still has to be the same still every run.
+ const SEED_RNG: int = 0x5EED17
+@@ -196,13 +135,16 @@
+ 
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	var before_tenure: String = tenure
++	var previous_comparison: bool = comparison_study
++	if config_data.has("comparison_study"):
++		comparison_study = str(config_data["comparison_study"]).to_lower() in ["on", "true", "1"]
+ 	if config_data.has("tenure"):
+ 		tenure = _pick_axis(str(config_data["tenure"]), TENURES, tenure)
+ 
+ 	if not _built:
+ 		return
+ 
+-	if tenure != before_tenure:
++	if tenure != before_tenure or previous_comparison != comparison_study:
+ 		_rebuild_now()
+ 		print("[EdgeOfChaosUnlocked] Config applied — tenure=%s" % [tenure])
+ 
+@@ -221,19 +163,18 @@
+ 	return v if allowed.has(v) else fallback
+ 
+ 
+-## The poles keep integrating the way they were pre-rolled, so the still does not
+-## depend on when the shutter opens: frozen has reached a fixed point and stays
+-## there, chaos has reached its uniform high-B state and stays there. Every other
+-## tenure runs the ORIGINAL stepper, untouched, because that is the picture
+-## standing in shipped maps.
++## Model time follows elapsed visitor time, with bounded work per rendered frame.
++## Under load the clock can lag; the readout reports actual integrated time.
+ func _process(delta: float) -> void:
++	if _paused or solver_fault: return
+ 	_frame_count += 1
+-	var pole: bool = _is_pole()
+-	for _step in range(sim_steps):
+-		if pole:
+-			_simulate_step_stable()
+-		else:
+-			_simulate_step()
++	_time_budget = minf(_time_budget + delta * float(sim_steps) * 3.0, time_step * MAX_TICKS_PER_FRAME * 2.0)
++	var ticks := 0
++	while _time_budget + 0.0000001 >= time_step and ticks < MAX_TICKS_PER_FRAME:
++		_advance_tick()
++		_time_budget = maxf(0.0, _time_budget - time_step)
++		ticks += 1
++		if solver_fault: break
+ 	if _frame_count % display_rate == 0:
+ 		_update_texture()
+ 
+@@ -248,7 +189,9 @@
+ 	_build_labels()
+ 	_update_reaction_params()
+ 	_seed_pattern()
++	_reset_comparison()
+ 	_preroll()
++	_update_texture()
+ 
+ 
+ ## SYNCHRONOUS. A deferred rebuild that removes children first makes
+@@ -269,6 +212,13 @@
+ 	_texture = null
+ 	_image = null
+ 	_frame_count = 0
++	_dt_labels.clear()
++	_study_sliders.clear()
++	_study_buttons.clear()
++	_fine_display = null
++	_fine_texture = null
++	_fine_image = null
++	_study_readout = null
+ 	_build_all()
+ 
+ 
+@@ -294,21 +244,37 @@
+ 	return tenure == "frozen" or tenure == "chaos"
+ 
+ 
+-## frozen and chaos are the only tenures whose evidence is the field itself, and
+-## the field needs frames. Pre-rolling them here makes the still deterministic
+-## instead of shutter-timing dependent. unlocked, clamped and withheld are NOT
+-## pre-rolled: they must show the same frame-1 seed field as each other, so the
+-## only difference between them in the capture is the rack and the signage.
+-##
+-## Synchronous by contract, and the cost is bounded: 320 passes over 4096 cells,
+-## on two tenures out of five, on a grid this artifact was already walking 240
+-## times at spawn.
+ func _preroll() -> void:
+-	if not _is_pole():
+-		return
+-	for _i in range(PREROLL_STEPS):
+-		_simulate_step_stable()
++	if not _is_pole(): return
++	for _i in range(int(round(PREROLL_DURATION / time_step))):
++		_advance_tick()
++
++
++func _reset_comparison() -> void:
++	model_time = 0.0
++	_time_budget = 0.0
++	solver_fault = false
++	_fine_a = _grid_a.duplicate()
++	_fine_b = _grid_b.duplicate()
++	_fine_a_next.resize(_grid_a.size())
++	_fine_b_next.resize(_grid_b.size())
++
++
++func restart() -> void:
++	_init_grid()
++	_seed_pattern()
++	_reset_comparison()
+ 	_update_texture()
++
++
++func new_seed() -> void:
++	seed_value += 1
++	restart()
++
++
++func toggle_step() -> void:
++	time_step = 0.15 if time_step > 0.2 else 0.3
++	restart()
+ 
+ 
+ # ── Grid Init ───────────────────────────────────────────────
+@@ -332,10 +298,9 @@
+ 
+ func _seed_pattern() -> void:
+ 	# Seed a few spots of chemical B in the center region.
+-	# Fixed seed — five tenure stills have to be comparable, which means the
+-	# blots have to land in the same twelve places every run.
++	# A numbered seed lets RESTART reproduce the field and NEW SEED change it.
+ 	var rng := RandomNumberGenerator.new()
+-	rng.seed = SEED_RNG
++	rng.seed = seed_value
+ 	var center := grid_size / 2
+ 	var radius := grid_size / 8
+ 	for _s in range(12):
+@@ -354,114 +319,74 @@
+ 
+ func _update_reaction_params() -> void:
+ 	# Map lambda to Gray-Scott feed/kill parameter space
+-	# lambda=0: very low feed, high kill -> frozen, nothing grows
+-	# lambda~0.4: feed=0.037, kill=0.06 -> Turing patterns (spots/stripes)
+-	# lambda=1: high feed, low kill -> everything activates, noise
++	# This is a coupled parameter path, not a measurement of criticality.
+ 	_feed_rate = lerpf(0.01, 0.08, lambda)
+ 	_kill_rate = lerpf(0.08, 0.03, lambda)
+ 	_diffusion_a = lerpf(0.8, 1.2, lambda)
+ 	_diffusion_b = lerpf(0.3, 0.7, lambda)
+ 
+ 
+-func _simulate_step() -> void:
+-	var dt := 1.0
++## Normalized neighbour mean minus centre; periodic boundaries.
++## No concentration clipping: B may legitimately exceed 1 during a transient.
++## Palette clipping is separate from this state calculation.
++func _integrate(a: PackedFloat32Array, b: PackedFloat32Array, na: PackedFloat32Array, nb: PackedFloat32Array, dt: float) -> bool:
+ 	var gs := grid_size
+-
+ 	for z in range(gs):
+ 		for x in range(gs):
+ 			var idx := z * gs + x
+-
+-			var a := _grid_a[idx]
+-			var b := _grid_b[idx]
+-
+-			# Laplacian (5-point stencil with wrapping)
+-			var lap_a := -4.0 * a
+-			var lap_b := -4.0 * b
+-
+-			var xl := ((x - 1) + gs) % gs
++			var xl := (x - 1 + gs) % gs
+ 			var xr := (x + 1) % gs
+-			var zu := ((z - 1) + gs) % gs
++			var zu := (z - 1 + gs) % gs
+ 			var zd := (z + 1) % gs
+-
+-			lap_a += _grid_a[z * gs + xl] + _grid_a[z * gs + xr] + _grid_a[zu * gs + x] + _grid_a[zd * gs + x]
+-			lap_b += _grid_b[z * gs + xl] + _grid_b[z * gs + xr] + _grid_b[zu * gs + x] + _grid_b[zd * gs + x]
+-
+-			# Gray-Scott equations
+-			var ab2 := a * b * b
+-			var new_a := a + (_diffusion_a * lap_a - ab2 + _feed_rate * (1.0 - a)) * dt
+-			var new_b := b + (_diffusion_b * lap_b + ab2 - (_kill_rate + _feed_rate) * b) * dt
+-
+-			_grid_a_next[idx] = clampf(new_a, 0.0, 1.0)
+-			_grid_b_next[idx] = clampf(new_b, 0.0, 1.0)
+-
+-	# Swap buffers
+-	var temp_a := _grid_a
+-	var temp_b := _grid_b
++			var av := a[idx]
++			var bv := b[idx]
++			var lap_a := (a[z*gs+xl] + a[z*gs+xr] + a[zu*gs+x] + a[zd*gs+x]) * 0.25 - av
++			var lap_b := (b[z*gs+xl] + b[z*gs+xr] + b[zu*gs+x] + b[zd*gs+x]) * 0.25 - bv
++			var reaction := av * bv * bv
++			na[idx] = av + (_diffusion_a * lap_a - reaction + _feed_rate * (1.0-av)) * dt
++			nb[idx] = bv + (_diffusion_b * lap_b + reaction - (_kill_rate+_feed_rate)*bv) * dt
++			if not is_finite(na[idx]) or not is_finite(nb[idx]) or na[idx] < 0.0 or nb[idx] < 0.0:
++				solver_fault = true
++				push_error("Reaction-diffusion calculation stopped: invalid concentration")
++				return false
++	return true
++
++
++func _simulate_step() -> void:
++	if not _integrate(_grid_a, _grid_b, _grid_a_next, _grid_b_next, time_step): return
++	var temp := _grid_a
+ 	_grid_a = _grid_a_next
++	_grid_a_next = temp
++	temp = _grid_b
+ 	_grid_b = _grid_b_next
+-	_grid_a_next = temp_a
+-	_grid_b_next = temp_b
+-
+-
+-## THE SAME EQUATIONS AT A STEP THEY SURVIVE. Run by frozen and chaos only.
+-##
+-## _simulate_step above applies the raw 5-point laplacian (centre weight -4) with
+-## dt = 1.0. Explicit Euler on a diffusion term is stable only while D * dt times
+-## the operator's largest eigenvalue stays under 2; that operator's worst mode is
+-## the checkerboard at -8, so the bound is D * dt < 0.25 and _diffusion_a runs
+-## 0.8 to 1.2 — over by 3.2x at lambda 0 and 4.8x at lambda 1, unstable at BOTH
+-## ends and everywhere between. The state saturates against the 0..1 clamp,
+-## and a saturated checkerboard is the same picture whatever feed and kill are.
+-## That is the whole reason the two poles were twins: not a design that failed to
+-## distinguish them, an integrator that threw the distinction away.
+-##
+-## Two changes, both arithmetic, neither touching what the values MEAN:
+-##   * the laplacian is NORMALISED (mean of the four neighbours minus the centre,
+-##     i.e. the same operator scaled by 1/4), the conventional Gray-Scott form;
+-##   * dt is STABLE_DT rather than 1.0.
+-## Together they put the worst case at 1.2 * 0.6 = 0.72, inside the bound with
+-## room to spare, and the poles then land where the parameters say they should:
+-## lambda 0 has no sustaining solution for B, so the seed blots decay and the
+-## field goes flat deep teal; lambda 1 has a stable high-B state at B = 0.59, so
+-## B invades the whole grid and the field goes warm amber-cream.
+-##
+-## Deliberately NOT applied to unlocked, clamped or withheld. Those three stand
+-## in shipped maps and the default's picture is not mine to improve here.
++	_grid_b_next = temp
++
++
++# Retained for callers; all tenures now use this same solver.
+ func _simulate_step_stable() -> void:
+-	var gs: int = grid_size
+-
+-	for z in range(gs):
+-		for x in range(gs):
+-			var idx: int = z * gs + x
+-
+-			var a: float = _grid_a[idx]
+-			var b: float = _grid_b[idx]
+-
+-			var xl: int = ((x - 1) + gs) % gs
+-			var xr: int = (x + 1) % gs
+-			var zu: int = ((z - 1) + gs) % gs
+-			var zd: int = (z + 1) % gs
+-
+-			var lap_a: float = (_grid_a[z * gs + xl] + _grid_a[z * gs + xr] \
+-					+ _grid_a[zu * gs + x] + _grid_a[zd * gs + x]) * 0.25 - a
+-			var lap_b: float = (_grid_b[z * gs + xl] + _grid_b[z * gs + xr] \
+-					+ _grid_b[zu * gs + x] + _grid_b[zd * gs + x]) * 0.25 - b
+-
+-			var ab2: float = a * b * b
+-			var new_a: float = a + (_diffusion_a * lap_a - ab2 \
+-					+ _feed_rate * (1.0 - a)) * STABLE_DT
+-			var new_b: float = b + (_diffusion_b * lap_b + ab2 \
+-					- (_kill_rate + _feed_rate) * b) * STABLE_DT
+-
+-			_grid_a_next[idx] = clampf(new_a, 0.0, 1.0)
+-			_grid_b_next[idx] = clampf(new_b, 0.0, 1.0)
+-
+-	var temp_a: PackedFloat32Array = _grid_a
+-	var temp_b: PackedFloat32Array = _grid_b
+-	_grid_a = _grid_a_next
+-	_grid_b = _grid_b_next
+-	_grid_a_next = temp_a
+-	_grid_b_next = temp_b
++	_simulate_step()
++
++
++func _advance_tick() -> void:
++	_simulate_step()
++	if solver_fault: return
++	if comparison_study:
++		for _half in range(2):
++			if not _integrate(_fine_a, _fine_b, _fine_a_next, _fine_b_next, time_step * 0.5): return
++			var temp := _fine_a
++			_fine_a = _fine_a_next
++			_fine_a_next = temp
++			temp = _fine_b
++			_fine_b = _fine_b_next
++			_fine_b_next = temp
++	model_time += time_step
++
++
++func comparison_error() -> float:
++	if not comparison_study or _fine_b.is_empty(): return 0.0
++	var total := 0.0
++	for i in range(_grid_b.size()): total += pow(_grid_b[i] - _fine_b[i], 2)
++	return sqrt(total / _grid_b.size())
+ 
+ 
+ # ── Display ─────────────────────────────────────────────────
+@@ -487,6 +412,27 @@
+ 	_display_quad.position = Vector3(0, 0.85, 0)
+ 	_display_quad.rotation_degrees.x = -15
+ 	_own(_display_quad)
++
++	if comparison_study:
++		_display_quad.position = Vector3(-0.85, 1.85, 0)
++		_display_quad.rotation_degrees.x = 0
++		_fine_image = Image.create(grid_size, grid_size, false, Image.FORMAT_RGB8)
++		_fine_texture = ImageTexture.create_from_image(_fine_image)
++		_fine_display = MeshInstance3D.new()
++		_fine_display.name = "HalfStepDisplay"
++		_fine_display.mesh = quad
++		var fine_mat := mat.duplicate() as StandardMaterial3D
++		fine_mat.albedo_texture = _fine_texture
++		_fine_display.material_override = fine_mat
++		_fine_display.position = Vector3(0.85, 1.85, 0)
++		_own(_fine_display)
++		for x in [-0.85, 0.85]:
++			var dt_label := Label3D.new()
++			dt_label.position = Vector3(x, 2.70, 0.02)
++			dt_label.pixel_size = 0.0015
++			dt_label.font_size = 32
++			_own(dt_label)
++			_dt_labels.append(dt_label)
+ 
+ 	# Base
+ 	var base := MeshInstance3D.new()
+@@ -503,34 +449,40 @@
+ 	_own(base)
+ 
+ 
+-func _update_texture() -> void:
++func _paint_field(field: PackedFloat32Array, target: Image) -> void:
+ 	for z in range(grid_size):
+ 		for x in range(grid_size):
+-			var idx := z * grid_size + x
+-			var b_val := _grid_b[idx]
+-
+-			# Turing pattern palette:
+-			# Low B (no pattern) -> deep teal
+-			# Medium B (edge patterns) -> warm amber/green
+-			# High B (active) -> bright cream
++			var b_val: float = field[z * grid_size + x]
+ 			var col: Color
+ 			if b_val < 0.15:
+ 				col = Color(0.05, 0.15, 0.18).lerp(Color(0.1, 0.3, 0.25), b_val / 0.15)
+ 			elif b_val < 0.4:
+-				var t := (b_val - 0.15) / 0.25
+-				col = Color(0.1, 0.3, 0.25).lerp(Color(0.7, 0.55, 0.2), t)
++				col = Color(0.1, 0.3, 0.25).lerp(Color(0.7, 0.55, 0.2), (b_val - 0.15) / 0.25)
+ 			else:
+-				var t := clampf((b_val - 0.4) / 0.6, 0.0, 1.0)
+-				col = Color(0.7, 0.55, 0.2).lerp(Color(0.95, 0.9, 0.8), t)
+-
+-			_image.set_pixel(x, z, col)
+-
++				col = Color(0.7, 0.55, 0.2).lerp(Color(0.95, 0.9, 0.8), clampf((b_val-0.4)/0.6, 0.0, 1.0))
++			target.set_pixel(x, z, col)
++
++
++func _update_texture() -> void:
++	if _image == null or _grid_b.is_empty(): return
++	_paint_field(_grid_b, _image)
+ 	_texture.update(_image)
++	if comparison_study and _fine_image != null and not _fine_b.is_empty():
++		_paint_field(_fine_b, _fine_image)
++		_fine_texture.update(_fine_image)
++		_dt_labels[0].text = "DT %.3f" % time_step
++		_dt_labels[1].text = "DT %.3f" % (time_step * 0.5)
++		if _study_readout:
++			_study_readout.text = "lambda %.2f | t %.1f | seed %d\nB difference %.5f" % [lambda, model_time, seed_value - SEED_RNG, comparison_error()]
++	_update_regime_label()
+ 
+ 
+ # ── Controls ────────────────────────────────────────────────
+ 
+ func _build_controls() -> void:
++	if comparison_study:
++		_build_comparison_controls()
++		return
+ 	_controls = ArtifactControls.new()
+ 	_controls.name = "Controls"
+ 	if tenure == "withheld":
+@@ -554,16 +506,44 @@
+ 	_controls.add_slider("SIM SPEED", float(sim_steps - 1) / 7.0, func(v: float):
+ 		sim_steps = int(round(v * 7.0)) + 1
+ 	)
+-	_controls.add_button("RESEED", func():
+-		_init_grid()
+-		_seed_pattern()
+-	)
++	_controls.add_button("RESTART", restart)
++	_controls.add_button("NEW SEED", new_seed)
+ 
+ 	match tenure:
+ 		"clamped", "frozen", "chaos":
+ 			_own(_build_clamp_bracket())
+ 		"withheld":
+ 			_own(_build_blanking_plate())
++
++
++func _build_comparison_controls() -> void:
++	_controls = InterfacePresets.build("machine", "Same start / same time", 1.0)
++	_controls.position = Vector3(0, 1.0, 0.85)
++	_own(_controls)
++	_study_readout = _controls.add_readout("")
++	var l: Node3D = _controls.add_slider("LAMBDA", "Lambda")
++	l.set_normalized_value(lambda)
++	l.slider_moved.connect(func(_v):
++		if tenure == "unlocked": lambda = l.get_normalized_value()
++	)
++	var speed: Node3D = _controls.add_slider("SIM SPEED", "Speed")
++	speed.set_normalized_value(float(sim_steps - 1) / 7.0)
++	speed.slider_moved.connect(func(_v): sim_steps = int(round(speed.get_normalized_value()*7.0))+1)
++	_study_sliders = [l, speed]
++	var buttons = load("res://commons/ui/control_panel.gd").new()
++	buttons.position = Vector3(0, 0.84, 1.15)
++	buttons.spacing = 0.26
++	_own(buttons)
++	var callbacks: Array[Callable] = [restart, new_seed, toggle_step, _toggle_pause]
++	var words := ["RESTART", "NEW SEED", "DT .3 / .15", "HOLD / RUN"]
++	for i in range(words.size()):
++		var button: Node3D = buttons.add_button(words[i])
++		button.get_node("InteractableAreaButton").button_pressed.connect(func(_body): callbacks[i].call())
++		_study_buttons.append(button)
++
++
++func _toggle_pause() -> void:
++	_paused = not _paused
+ 
+ 
+ ## A bar bolted across the LAMBDA fader's travel. Wider than the 0.18 m fader
+@@ -700,10 +680,12 @@
+ ## shared plate from the widest line it measures, and a longer word would move
+ ## furniture that four other tenures share.
+ func _build_labels() -> void:
++	if comparison_study:
++		return  # Per-display timestep labels and the console carry this encounter.
+ 	_title_label = Label3D.new()
+ 	_title_label.name = "Title"
+-	_title_label.text = "EDGE OF CHAOS — WITHHELD" if tenure == "withheld" \
+-			else "EDGE OF CHAOS — UNLOCKED"
++	_title_label.text = "PATTERN — WITHHELD" if tenure == "withheld" \
++			else "PATTERN — UNLOCKED"
+ 	_title_label.font_size = 36
+ 	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+ 	# KEPT. Framed plate ~1.72 x 0.25 m spans y 1.875–2.125; the display quad's
+@@ -757,7 +739,7 @@
+ 	screen.name = "RegimeScreen"
+ 	screen.mode = 0                     # TextScreen.Mode.SCREEN
+ 	screen.width_m = 0.60
+-	screen.title = "EDGE OF CHAOS"
++	screen.title = "PARAMETER SETTING"
+ 	screen.body = "lambda = %.2f" % lambda
+ 	_readout.add_child(screen)
+ 
+@@ -819,13 +801,13 @@
+ func _update_regime_label() -> void:
+ 	if not _regime_label:
+ 		return
+-	var word: String = "EDGE OF CHAOS"
++	var word: String = "LAMBDA MID"
+ 	var tint: Color = Color(0.2, 1.0, 0.5, 0.9)
+ 	if lambda < 0.2:
+-		word = "FROZEN"
++		word = "LAMBDA LOW"
+ 		tint = Color(0.4, 0.6, 1.0, 0.9)
+ 	elif lambda >= 0.55:
+-		word = "CHAOS"
++		word = "LAMBDA HIGH"
+ 		tint = Color(1.0, 0.3, 0.2, 0.9)
+ 
+ 	_regime_label.text = word

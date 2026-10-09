@@ -1,0 +1,150 @@
+{
+  "checks": [
+    {
+      "message": "catenoid inherits pickup contract",
+      "ok": true
+    },
+    {
+      "message": "catenoid permits pickup when not held",
+      "ok": true
+    },
+    {
+      "message": "catenoid hand collision-mask query matches expected source version",
+      "ok": true
+    },
+    {
+      "message": "helicoid inherits pickup contract",
+      "ok": true
+    },
+    {
+      "message": "helicoid permits pickup when not held",
+      "ok": true
+    },
+    {
+      "message": "helicoid hand collision-mask query matches expected source version",
+      "ok": true
+    },
+    {
+      "message": "laundry two crossbars bridge all three anchor pairs",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "laundry plaque distinguishes analytic geometry from settling",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever solved",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model solved",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever halved",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model halved",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever inverted",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model inverted",
+      "ok": true
+    },
+    {
+      "message": "Calder same seed retains leaf mass across lever alternatives",
+      "ok": true
+    },
+    {
+      "message": "truss retains its single board",
+      "ok": true
+    },
+    {
+      "message": "truss board distinguishes bracing geometry from proof of strength",
+      "ok": true
+    },
+    {
+      "message": "triangle pulse directly prescribes squash, not solved load",
+      "ok": true
+    },
+    {
+      "message": "moving cable bead rebuilds spline through actual control position",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "interaction": "source methods and physics mask queries; no real tracked hand",
+  "observations": {
+    "calder": [
+      {
+        "left": "(-1.430935, -0.396562, 0.0)",
+        "lever": "solved",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nbalanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.091971, -0.396562, 0.0)"
+      },
+      {
+        "left": "(-1.258604, -0.311821, 0.0)",
+        "lever": "halved",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nNOT balanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.258604, -0.481303, 0.0)"
+      },
+      {
+        "left": "(-1.082071, -0.24985, 0.0)",
+        "lever": "inverted",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nNOT balanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.417962, -0.588815, 0.0)"
+      }
+    ],
+    "catenoid": {
+      "can_pick_up": true,
+      "collision_layer": 4,
+      "hand_query_found": true,
+      "original_layer": 4
+    },
+    "helicoid": {
+      "can_pick_up": true,
+      "collision_layer": 4,
+      "hand_query_found": true,
+      "original_layer": 4
+    },
+    "laundry": {
+      "crossbars": 2,
+      "plaque": "Three analytic curves, three chosen sags. The crossbars hold their ends.\nMirror each curve: the arch appears. This is not a gravity solver;\nthe clothes add no load. The washing and the cathedral share a curve.\nWhether a built arch stands still depends on its loads and supports."
+    },
+    "truss_plaque": "RECURSIVE BRACED STOREYS\nNO LOAD TEST"
+  },
+  "replay_before": false
+}

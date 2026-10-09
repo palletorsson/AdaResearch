@@ -1,0 +1,341 @@
+# softbodies: the chapters
+
+## SoftBodies Soft Body Deformation
+
+*SoftBodies_Soft_Body_Deformation*
+
+### What holds a cube together?
+
+
+The cube gives way. A small arm holds one point at its top; the rest of its surface can move. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation. Before looking at the settings, choose what you expect a softer cube to do: change further, return more slowly, or fail to return at all?
+
+Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.
+
+Reach toward it. The cube can deform against your hand, but it cannot push the tracked hand out of position. In this room's VR rig, the virtual hand follows the controller directly.[^SoftBodies_Soft_Body_Deformation--hand] One body must accommodate the meeting; the other has already been placed.
+
+```gdscript
+_soft_body.linear_stiffness = stiffness
+_soft_body.damping_coefficient = damping
+_soft_body.pressure_coefficient = pressure
+```
+
+These are parameters of Godot's soft-body solver. The program supplies a subdivided cube and lets its vertices respond under those rules. PRESSURE introduces another contribution. Watch what inflation can conceal: the same outer silhouette can be maintained by different balances of resistance and internal pressure.
+
+There is no modeled flesh behind the green skin. The body is built from a closed surface whose points are linked to keep distances; pressure helps that surface hold a volume. Turn PRESSURE down to zero and wait. What can the linked surface keep when inflation no longer helps it?
+
+The engine has a limited number of attempts to keep those distances at each step. The bench in Form Finding let us change that count; here the cube gets five passes.[^SoftBodies_Soft_Body_Deformation--stiffness] What looks like a quality of the material also depends on how much work the simulation is allowed to do.
+
+The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another. The surface connectivity remains prescribed. Yielding is a new capability; tearing, growing a hole or exchanging a neighbour would require more code. A soft appearance does not announce every freedom a body possesses.
+
+
+
+Turn toward the mill. The moving apparatus brings a repeated encounter to a soft sphere. Use MILL to hold the drive. The sphere's physics continues; stopping a mechanism is different from stopping everything it has set in motion.
+
+The cube made its coefficients available on a desk. The mill makes the source of an encounter visible in the room. Follow the motion from the machinery to the surface, then consider the room around both: the collider, support and pinned points belong to this body's conditions as much as its stiffness does.
+
+The nearby jelly variants remain useful comparisons, and radiolaria offers a different warning: intricate biological resemblance can be constructed without soft-body dynamics. Keep that distinction for later. Here we changed the response of a body while one point remained held. In the next room we change which points must stay.
+
+
+[^SoftBodies_Soft_Body_Deformation--stiffness]: This cube sets Godot's `simulation_precision` to 5 and exposes `linear_stiffness` from 0 to 1. The count is local to this artifact. Godot Physics links triangle edges and also adds bending constraints between points two edges apart. See the [SoftBody3D reference](https://docs.godotengine.org/en/4.6/classes/class_softbody3d.html) and [Godot 4.6 solver source](https://github.com/godotengine/godot/blob/4.6-stable/modules/godot_physics_3d/godot_soft_body_3d.cpp).
+
+[^SoftBodies_Soft_Body_Deformation--hand]: The museum's base rig selects TELEPORT mode for both collision hands: their transforms follow the tracked controllers. The same hand component also supports a collision-following mode. This asymmetry is a choice made in this rig, not a necessary property of every virtual hand.
+
+---
+
+## SoftBodies Cloth Physics
+
+*SoftBodies_Cloth_Physics*
+
+### Which points must stay?
+
+
+Eight strips hang in a rank, each a forearm wide and twice your height. Their edges overlap, so from straight on the rank reads as one surface. Walk along the front of it. Walk behind it. Unlike the cube, this surface does not close around an inside. There is no enclosed volume for pressure to inflate.
+
+Stay with one strip long enough to watch it. There is no motor here. The strips were built hanging and have been settling under gravity ever since; a sheet this long can keep stretching and swinging well after it was made. Whatever shape it has now, it has not finished arriving at.
+
+Look up to where it meets the top. That edge does not move at all. Everything loosening below it begins at that stillness.
+
+So something up there is being held. Before naming it, find out what.
+
+Press **SUPPORT**. The gantry the strips appeared to hang from vanishes, and they go on hanging — the held edge in the same place, the rest still free to move. Press it again for a hoop, again for a mast. Three pieces of architecture, and not one of them changes where the cloth is held.
+
+The rule that holds that edge never looks at the frame:
+
+```gdscript
+var top: bool = absf(verts[i].y - ymax) < 0.01
+var keep: bool = top and (mode == 0 or (mode == 1 and absf(absf(verts[i].x) - xmax) < 0.01))
+sb.set_point_pinned(i, keep)
+```
+
+`verts` is the strip's own rest geometry, in its own coordinates. `ymax` is the highest value in it. A point is held if its height matches that top to within a hundredth of a metre — eight points of the hundred and twelve in each strip. The strip is a mesh of triangles; its points are linked, and the pin rule chooses which must stay. That rule does not consult the frame. The apparent reason for the cloth to hang was built for you to see.
+
+A convincing support does not prove how a simulation is attached to it. You have just taken the support away and watched the attachment survive it.
+
+Press **SUPPORT** once more and a wall arrives behind the rank. The opening behind the cloth is now occupied by a solid surface. The pins stay where they were, but the passage changes. The pin rule can ignore a wall that a body must go around.
+
+Now change what is actually holding. **PINS** keeps only the two points where that top row reaches its outer edges: from eight to two. Watch the top edge while it happens. Six points that were held can now sag between the two corners. The edge remains, but its straightness was being maintained.
+
+Then press **RELEASE**, and the last two let go.
+
+The material never changed while the pins did. The solver ran the same way on the same mesh. What changed is how many of its points were forbidden to move — eight, then two, then none. Boundary conditions are not a detail of the setup. Here they are most of what you have been looking at.
+
+The strips are on the floor now. **REBUILD** makes a fresh hanging rank. Keep its top row held and try **STIFFNESS**. We can now compare two ways of changing the silhouette: change how strongly the surface resists deformation, or change which of its points may move.
+
+When we call an object compliant, how much of that belongs to the object, and how much to the arrangement holding it?
+
+
+
+Four bodies stand nearby. They began falling when the room loaded, and by the time you reach them their timers may already have stopped them. These are soft spheres kept from the earlier collection, not woven cloth. You can arrive after the event and still meet its shape.
+
+A narrow rail crosses each landing. Look for where a body has come to rest: on the bar, against a post, or on the floor below. Then press **LANDING**. It exchanges the support and starts a new fall; the pan that arrives offers a floor between two walls. Stay for the fall this time.
+
+Worth knowing before you read too much into any held shape: the stop raises damping and stiffness rather than recording the vertex positions, so what you are looking at is partly the solver's and not a destination the material was travelling toward.
+
+Two questions leave this room together. What makes a body deform, and what makes us stop looking?
+
+On the way out the floor runs empty for a long time, and then a few cells stand higher than the rest and one is missing altogether — the fixed points of the room this hall used to be, left where they were when everything around them was moved.
+
+
+<!-- study-spine:tension_membrane -->
+
+
+Four slender posts hold a dark, narrow-waisted surface. Between them it has sunk towards the floor. The pink bead at its edge waits within reach. Pull it towards you. A crease travels back towards an attachment that does not move.
+
+Let go. The bead moves without your hand, passes through a lower position, and comes back more quietly. Stay for the small movements after the large one.
+
+Add a load. A dark weight gathers beneath the middle. Pull again and release. The same four points are held, but the surface now has something more to carry. It settles lower. Removing the load allows another return.
+
+Nengudi's stretched hosiery brings a used material, close to skin, into this question of how far something can give. Our surface has no wearer and no remembered damage. Each return is calculated from lengths that the code has kept intact. To recover here is to approach an arrangement the program still remembers.
+
+The anchors have asked nothing of themselves. We have asked the middle to accommodate another weight.
+
+
+Carry the fixed edge into the next hall. There, the support itself moves, and the bodies hanging from it will know.
+
+---
+
+## SoftBodies Carusell
+
+*SoftBodies_Carusell*
+
+### The support moves
+
+
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed. The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.
+
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+
+The rate is measured in radians per second. A complete turn is `TAU` radians. The driven rotation connects this hall to Transformation and Oscillation, but the hanging bodies add a different problem: their current state matters to what happens next.
+
+Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
+
+This carousel offers an image of freedom through motion. Its moving parts also show how motion can be organized by obligations: a joint, a pin, a driven hub. The question is which relations can move, and which relations move them.
+
+
+
+The cloth strips nearby retain a fixed support. Return to them after watching the ride. They make the contrast available at the same bodily scale: a surface can respond while its boundary remains still, or respond because its boundary is driven.
+
+The sticks, pick-up cubes, flex pad and soft mushroom remain part of the collection. They are opportunities for further encounters, rather than evidence that every visible object runs the same solver. Begin with one comparison you can follow, then widen it.
+
+In the next room, the enclosing architecture takes on a deformable surface. The distinction between a body and its surroundings becomes harder to maintain by pointing.
+
+---
+
+## SoftBodies Obsticals
+
+*SoftBodies_Obsticals*
+
+### The room has a body
+
+
+Two pink walls, ten metres long and four high, half a metre thick, stand six metres apart. They swell. Find a position from which both their edges and their centres stay visible: the edges do not move, the middles do. Every vertex along the top, the bottom and the two ends of each wall is pinned; everything between answers to a pressure that rises and falls once every six seconds or so. Before entering, watch a complete breath.
+
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received. STIFFNESS changes the walls’ resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.
+
+```gdscript
+var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+for sb in _walls:
+    sb.pressure_coefficient = p
+```
+
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. At the opening setting the pressure runs from nothing to a half; AMPLITUDE takes it down to 0.15 and up to 0.9, and RATE slows the breath to one every sixteen seconds or quickens it to one every three and a half. The same instruction, and the wall between the pins does something different each time. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
+
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor? Stand between the walls at the middle of their length, where the pinned rows are farthest away, and wait for the inhale. How far the wall comes towards you is not in the sine; it is what stiffness, damping and the pinned edges make of the pressure, and STIFFNESS shows you the same breath meeting a different material. The walls carry collision. What a wall at full inhale does to a body standing in its way is for that body to find out.
+
+
+
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
+
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the floor that carries you through this hall does not deform. A deforming wall and an onward route make different promises.
+
+Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
+
+---
+
+## SoftBodies Obsticals Part2
+
+*SoftBodies_Obsticals_Part2*
+
+### Same fall, another encounter
+
+
+The array contains twelve encounters. Start with the names: Bouncy Collider, Slippery Collider, Torus, Prism, Corner Strike, High Drag, Vacuum, Tiny Sphere, Giant Sphere, Super Soft, Caving Sphere, Collapsed Box. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+
+REPLAY restarts the group from its declared seed. The opening study removes the gallery's additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+
+```gdscript
+sb.linear_stiffness = 0.5
+sb.damping_coefficient = 0.01
+sb.pressure_coefficient = 0.0
+```
+
+The gallery applies each named cell's settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Super Soft” cannot substitute for that construction.
+
+Read the cells against those three lines. High Drag changes one number, damping to 0.8, and nothing else: it is the one controlled comparison in the array. Vacuum sets pressure to nought, which is where every cell already starts, so its name promises a difference its numbers do not contain. Caving Sphere is the only body in the sequence that asks the solver for seven passes instead of five, and the only one whose pressure is negative, so it is drawn inward as it falls. Super Soft and Collapsed Box are both boxes without pressure, but one is half as stiff as the other and lands on a sphere where the other lands on a cube: two differences at once, and the array cannot tell you which one you are watching. Bouncy and Slippery change the collider rather than the body, one perfectly elastic and one without friction, and change its shape at the same time.
+
+HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
+
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver's finite effort.[^SoftBodies_Obsticals_Part2--effort] Those are invitations to further experiments, not conclusions available from a single silhouette.
+
+The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
+
+
+[^SoftBodies_Obsticals_Part2--effort]: Five passes over every spring, every physics tick, for every body in this sequence but one; the Caving Sphere asks for seven. The bench in Form Finding put that count on a dial and read the error it leaves: at one pass the worst spring in a cloth was a third off its length; at four, a tenth.
+
+---
+
+## SoftBodies Playground of Joy
+
+*SoftBodies_Playground_of_Joy*
+
+### When does a body become a form?
+
+
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
+
+Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.
+
+What has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room's axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow.
+
+Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
+
+The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
+
+The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form. A branch recipe, a deformed surface and a sampled field may resemble one another without explaining one another. A small sphere with a thought above it may be wandering near the exit, or standing still. It is an agent from an earlier sequence, placed here with nothing of its own to do; this hall does not use it.
+
+
+
+You have met this vessel before. In Form Finding it stood beside the cloth bench as a fossil of forces, two hundred steps of the bench's own solver. Here it has grown two controls, and the question has moved from what a budget leaves to what a chosen duration keeps.
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
+
+```gdscript
+sim.gravity = Vector3(gravity_x, gravity_y, gravity_z)
+sim.constraint_passes = 5
+```
+
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
+
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette.
+
+A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing. Next, we will ask what else an image of a body invites us to infer.
+
+---
+
+## SoftBodies Affect Theory Visualization
+
+*SoftBodies_Affect_Theory_Visualization*
+
+### What makes this look alive?
+
+
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.[^SoftBodies_Affect_Theory_Visualization--haeckel] Let that recognition arrive, then keep it beside the question of how these objects were made. There are six of them, and the program builds each from a different recipe: a plain body, a spiked one, a polyhedron, a lattice sphere, a ringed form and a pollen grain. Walk the row and say which you would call alive first, before you know how any of them was made.
+
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+
+The program constructs those families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. A spike is a cone between twenty centimetres and a metre and a half long, placed wherever a draw beats a probability of seven in ten; the lattice is an icosahedron half a metre across, subdivided as often as the detail number allows. Press SPIKES and the probability moves; press SEED and the same draws come back in the same order. These names describe decisions available to the generator. They are not measured properties of a living radiolarian, and that is the whole of the biology here: a list of numbers and a random number generator you can pin.
+
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+
+
+[^SoftBodies_Affect_Theory_Visualization--haeckel]: Ernst Haeckel, *Kunstformen der Natur* (1899–1904), the Radiolaria plates. This generator’s families echo the geometric vocabulary of those drawings: a drawn vocabulary, not a measured organism. No parameter here is a property of a living radiolarian.
+
+---
+
+## ProceduralGeneration Reaction Diffusion Systems
+
+*ProceduralGeneration_Reaction_Diffusion_Systems*
+
+### A pattern has a metabolism
+
+
+A patch interrupts the field. Twelve cells at the centre of a grid thirty-two across were given a little of the second substance; everywhere else has only the first. Before advancing it, predict where the next change should occur: everywhere at once, around the boundary, or only inside the patch? STEP performs one update; 100 STEPS performs a hundred, which makes the consequence easier to see while keeping the same rule.
+
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
+
+```gdscript
+var uvv = u * v * v
+var du = Du * lap_u - uvv + feed * (1.0 - u)
+var dv = Dv * lap_v + uvv - (kill + feed) * v
+```
+
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing's original chemical equations.[^ProceduralGeneration_Reaction_Diffusion_Systems--turing] REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
+
+Press 100 STEPS, change REGIME, and press it again. After a hundred updates the six regimes still differ from one another in fewer than one cell in ten: the patch has grown a little and told you nothing about which law it is under. It takes about a thousand. By then, under Spots, the regime this hall opens in, the patch has stopped growing at three per cent of the field and stays one spot for as long as you care to press; under Stripes and Maze the same twelve cells have covered a third of the field and will cover most of it; under Mitosis they have split into four; under Coral they never move at all. The seed decides where, and whether. The two rates decide what.[^ProceduralGeneration_Reaction_Diffusion_Systems--port]
+
+The grid wraps at its edges. Concentrations are clamped to the interval zero to one. These choices are part of the experiment. A field that seems to continue beyond its frame has a particular way of returning through it.
+
+
+
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
+
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
+
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.
+
+
+[^ProceduralGeneration_Reaction_Diffusion_Systems--turing]: Alan Turing, “The Chemical Basis of Morphogenesis”, *Philosophical Transactions of the Royal Society B* 237 (1952), 37–72. Peter Gray and Stephen Scott set out the autocatalytic scheme in *Chemical Engineering Science* 39 (1984); John Pearson, “Complex Patterns in a Simple System”, *Science* 261 (1993), 189–192, mapped its feed and kill plane, and the presets REGIME cycles are points on that map. The excerpt above is Pearson’s discretised form.
+
+[^ProceduralGeneration_Reaction_Diffusion_Systems--port]: Measured in a numpy port of the shipped update (the same 0.2 and 0.05 neighbour weights, the same clamp, the same twelve-cell stamp of U 0.5 and V 0.25) at the hall’s resolution of 32 and its centre seeding, coverage counted as cells where V exceeds a tenth, at 100, 300, 1,000, 2,000 and 4,000 updates: Spots 2, 3, 3, 3, 3 per cent in one blob; Stripes 3, 9, 37, 86, 91; Maze 4, 11, 42, 65, 65; Mitosis 3, 4, 7, 13, 34 in four then twelve blobs; Coral 1 throughout. The artifact’s own source records a matching measurement at resolution 40 with the five-disc seeding.
+
+---
+
+## Topology Entropy Morphogenesis
+
+*Topology_Entropy_Morphogenesis*
+
+### Who connected the controls?
+
+
+The surface opens and folds around passages. It recalls the sine and noise spaces we walked earlier, now combined into a sampled field. Before touching S, choose one opening you can follow with your eyes. Keep track of it as the surface is reconstructed.
+
+S changes several parameters together. The desk reports their values so that an impressive transformation does not hide its recipe.
+
+```gdscript
+current_frequency = lerpf(base_frequency, high_frequency, S)
+current_noise_amp = lerpf(base_noise_amp, high_noise_amp, S)
+current_threshold = threshold_center + threshold_wobble * (S - 0.5) * 2.0
+```
+
+The parameter is called entropy in the source. Here it is an authored control between settings, not an entropy value calculated from a distribution. Its name cannot establish a law connecting disorder and form. The mapping can nevertheless become a useful instrument if we expose what it does.
+
+NOISE removes or restores the noise contribution. LEVEL moves the cut: minimal, thickened, pinched, broken, and back to minimal. RESOLUTION rebuilds the same surface from 24, 16 or 32 samples along each edge. Try them separately, then compare that experience with moving S. Which differences had been bundled into its single gesture?
+
+Here is what the cut does, computed from the field without its noise. At the opening setting the surface divides the box almost in half, 52 per cent solid and 48 air, and each half is one connected labyrinth; the widest ball that fits in the air is about three and a half metres across. Thickened moves the cut down: the solid takes 72 per cent and the air is left in two separate pockets. Pinched leaves the solid a third, still one piece, drawn out into necks. Broken cuts it to a fifth, and the solid comes apart into islands. Now move S to one. The pattern’s period shrinks from five and a half metres to under four, the same four cuts apply, and the thickened pocket that admitted a three-metre ball now admits one of a metre and a half.[^Topology_Entropy_Morphogenesis--gyroid]
+
+![One slice through the field at the opening setting, cut at the four levels the desk offers](/book-review/doc/book/figures/softbodies/gyroid-four-levels.png)
+
+*One slice through the same field, cut at the four levels. Dark is the solid side. Nothing in the field changed between the four panels; only the number the cut was made at.*
+
+The generated collision belongs to the reconstructed surface. An opening that appears in a rendering may still be too narrow for your body. A change in geometric frequency is not automatically a change in connectivity, and neither alone certifies a traversable route. We can learn to ask each question at the scale where it has consequences.
+
+Across these halls, a body has become a set of relations that can yield, remain attached, be driven, meet an obstruction, or be held as a sculpture. We have also seen appearances that imply mechanisms they do not contain. The point is not to exhaust desire by naming every rule. It is to gain enough purchase on a rule to change what it permits—and notice what the next construction still leaves out.
+
+
+[^Topology_Entropy_Morphogenesis--gyroid]: Computed on the artifact’s own grid of forty samples across an eight-unit box from f = sin(kx)cos(ky) + sin(ky)cos(kz) + sin(kz)cos(kx), with k = 1.11 at S = 0.3 (the desk’s opening value) and 1.6 at S = 1, the thresholds the desk sets (0, −0.6, 0.6, 0.95, shifted by 0.15 × (2S − 1)), and the solid taken as the side above the threshold. The noise term, at most a fifth of the field’s range, is left out. Pieces are counted on the sample grid; the ball is the largest that fits in the air phase.
+
+---

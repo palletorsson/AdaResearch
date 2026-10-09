@@ -1,0 +1,102 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed explorer found in CA opening",
+      "passed": true
+    },
+    {
+      "name": "Existing table now has the PointBody reader",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after",
+      "passed": true
+    },
+    {
+      "name": "Reader approach has museum floor",
+      "passed": true
+    },
+    {
+      "name": "Reader stays at hand height above the hall floor",
+      "passed": true
+    },
+    {
+      "name": "Actual hall hand reader reaches address zero",
+      "passed": true
+    },
+    {
+      "name": "Hand step advances one shared generation",
+      "passed": true
+    },
+    {
+      "name": "Reader release remains on local rail",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: boundary",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ring",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-30",
+      "passed": true
+    },
+    {
+      "name": "Exact printed study runs inside the existing hall",
+      "passed": true
+    },
+    {
+      "name": "Museum rendering retains the exact printed history",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "floor_hit": [
+      8.55000019073486,
+      0.000000149011611938477,
+      5.5
+    ],
+    "reader_after_hand": {
+      "cell": 0,
+      "held": true,
+      "position": [
+        -0.800000190734863,
+        0.200000047683716,
+        1.44999980926514
+      ],
+      "reader_can_process": true,
+      "reader_process_mode": 0,
+      "work_process_mode": 0
+    },
+    "reader_world": [
+      9.05000019073486,
+      1.24000000953674,
+      5.52500009536743
+    ],
+    "scope": "Actual CA_Introduction museum. Before/after same Rule 90 state with reader hidden/shown; actual XRTools pickup with supplied controller poses; exact printed reconstruction temporarily mounted. No physical headset or human learner evaluation.",
+    "work_world": [
+      10.5,
+      1.03999996185303,
+      5.5
+    ]
+  },
+  "passed": true,
+  "room": "CA_Introduction",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

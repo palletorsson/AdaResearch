@@ -1,0 +1,274 @@
+--- before/commons/data/book/primitives.json
++++ after/commons/data/book/primitives.json
+@@ -4,8 +4,8 @@
+  "speak_by": "hand",
+  "pearls": [
+   {
+-   "pearl": "point",
+-   "map": "Point_One",
++   "pearl": "point zero",
++   "map": "Point_Zero",
+    "lines": [
+     {
+      "token": "folding_past",
+@@ -25,19 +25,19 @@
+      "by": "hand",
+      "place": "foyer",
+      "lock": [
+-      1,
+-      14
++      7,
++      4
+      ],
+      "rotation": 90
+     },
+     {
+      "token": "origin",
+-     "text": "Mark the origin.\nA point made special by convention: not chosen into existence, chosen to be called zero, so everything else has something to be measured from. Zero is already surrounded, so you have somewhere to stand.\nNo turning back.\n\nvar origin := Vector3.ZERO",
++     "text": "Point zero.\nA chosen place to count from.",
+      "by": "hand",
+      "place": "foyer",
+      "lock": [
+-      0,
+-      0
++      3,
++      5
+      ],
+      "placed_by": "grid",
+      "claimed": true,
+@@ -50,30 +50,54 @@
+      "text": "You are here",
+      "by": "hand",
+      "lock": [
+-      7,
+-      4
++      5,
++      6
+      ],
+      "rotation": 180
++    }
++   ],
++   "ordered": true,
++   "hero": "frame_counter_display"
++  },
++  {
++   "pearl": "point",
++   "map": "Point_One",
++   "lines": [
++    {
++     "token": "point_absent",
++     "text": "Point one.",
++     "by": "hand",
++     "placed_by": "grid"
++    },
++    {
++     "token": "point_visible",
++     "text": "Point one.",
++     "by": "hand",
++     "placed_by": "grid"
++    },
++    {
++     "token": "point_solid",
++     "text": "Point one.",
++     "by": "hand",
++     "placed_by": "grid"
++    },
++    {
++     "token": "point_held",
++     "text": "Point one.",
++     "by": "hand",
++     "placed_by": "grid"
+     },
+     {
+      "token": "interactive_point_origin",
+-     "text": "Point zero, now an object in the exhibition.\nThe sphere is rendering help. The point is the Vector3 that was passed in.\n\npoint.mesh = SphereMesh.new()",
++     "text": "Point one.",
+      "by": "hand",
+      "support_m": 0.95,
+-     "lock": [
+-      7,
+-      6
+-     ],
+      "note": "Three floats. One position. No extent."
+     },
+     {
+      "token": "science_screen",
+      "text": "the map is not the territory — move the point, watch its shadow",
+      "by": "claude",
+-     "lock": [
+-      9,
+-      6
+-     ],
+      "config": {
+       "support": "stand",
+       "scan_radius": 8
+@@ -86,10 +110,6 @@
+      "config": {
+       "floating_point": 1
+      },
+-     "lock": [
+-      3,
+-      3
+-     ],
+      "scale": 0.8,
+      "note": "A point is that which has no part; its place is entirely borrowed from a coordinate system that is not itself a point. For later in color we must give ths more queer colors.",
+      "note_src": {
+@@ -100,21 +120,13 @@
+     {
+      "token": "fontana_puncture",
+      "text": "the one point, pierced",
+-     "by": "claude",
+-     "lock": [
+-      7,
+-      8
+-     ]
++     "by": "claude"
+     },
+     {
+      "token": "floating_sphere_field",
+      "gap": 1,
+      "text": "floating spheres all around me",
+      "by": "hand",
+-     "lock": [
+-      5,
+-      12
+-     ],
+      "placed_by": "grid"
+     },
+     {
+@@ -126,10 +138,6 @@
+      "token": "interactive_point_origin_force",
+      "text": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\npickable.picked_up.connect(_on_picked_up)",
+      "by": "hand",
+-     "lock": [
+-      1,
+-      11
+-     ],
+      "config": {
+       "mode": "transformation"
+      },
+@@ -142,10 +150,6 @@
+     {
+      "token": "lab_room",
+      "by": "grid",
+-     "lock": [
+-      1,
+-      0
+-     ],
+      "config": {
+       "mounted_lab_json": "res://commons/labs/point_one.lab.json"
+      }
+@@ -153,106 +157,17 @@
+     {
+      "text": "queer melancholia, rythm and melancolia",
+      "by": "hand"
++    },
++    {
++     "token": "point_pedestal",
++     "text": "Point one.",
++     "by": "hand",
++     "placed_by": "grid"
+     }
+    ],
+    "rooms": 5,
+    "ordered": true,
+-   "hero": "CoordinateSystem3M",
+-   "cells": [
+-    {
+-     "cell": [
+-      6,
+-      2
+-     ],
+-     "kind": "4"
+-    },
+-    {
+-     "cell": [
+-      7,
+-      2
+-     ],
+-     "kind": "3s"
+-    },
+-    {
+-     "cell": [
+-      2,
+-      14
+-     ],
+-     "kind": "2"
+-    },
+-    {
+-     "cell": [
+-      6,
+-      18
+-     ],
+-     "kind": "4"
+-    },
+-    {
+-     "cell": [
+-      7,
+-      18
+-     ],
+-     "kind": "4"
+-    },
+-    {
+-     "cell": [
+-      8,
+-      18
+-     ],
+-     "kind": "4"
+-    }
+-   ],
+-   "label": [
+-    {
+-     "token": "interactive_point_origin_force",
+-     "mode": "measured"
+-    },
+-    {
+-     "token": "origin",
+-     "mode": "measured"
+-    }
+-   ],
+-   "adopt": [
+-    {
+-     "page": 15,
+-     "token": "origin"
+-    }
+-   ],
+-   "hang": [
+-    {
+-     "page": 0,
+-     "cell": [
+-      7,
+-      7
+-     ],
+-     "dir": [
+-      0,
+-      -1
+-     ]
+-    },
+-    {
+-     "page": 15,
+-     "cell": [
+-      1,
+-      5
+-     ],
+-     "dir": [
+-      0,
+-      -1
+-     ]
+-    },
+-    {
+-     "page": 31,
+-     "cell": [
+-      1,
+-      8
+-     ],
+-     "dir": [
+-      1,
+-      0
+-     ]
+-    }
+-   ]
++   "hero": "CoordinateSystem3M"
+   },
+   {
+    "pearl": "lines",

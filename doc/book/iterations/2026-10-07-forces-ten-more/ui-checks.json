@@ -1,0 +1,17 @@
+{
+  "url": "http://localhost:3003/research/forces-review/index.html",
+  "checks": [
+    "Ten new cards follow the review-room order",
+    "Existing collection filter shows 206 cards",
+    "Search for spring returns 13 candidates",
+    "Before/after switches the selected image",
+    "Keep toggles the pressed state; test decision restored to Undecided",
+    "Notes accept text; test note cleared",
+    "Card hash preserves the interactive page URL",
+    "Empty-scene filter shows the four verified Root-only placeholders"
+  ],
+  "limitations": [
+    "JSON import/export controls implemented; a file round-trip was not exercised in the browser."
+  ],
+  "screenshot": "gallery-preview.jpg"
+}

@@ -1,0 +1,51 @@
+--- before/commons/maps/Point_One/final.md
++++ current/commons/maps/Point_One/final.md
+@@ -12,7 +12,15 @@
+ 
+ Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.
+ 
+-A mesh supplies the visible shape. Drawing it has not made a boundary for the visitor's body.
++A mesh supplies the visible shape. Its dimensions begin here:
++
++```gdscript
++var sphere := SphereMesh.new()
++sphere.radius = radius
++sphere.height = radius * 2.0
++```
++
++Here, `radius` is 0.14 metres. Twice that gives the sphere its height. These lines give it dimensions the renderer can use. Drawing it has not made a boundary for the visitor's body.
+ 
+ <!-- @point_solid -->
+ 
+@@ -20,7 +28,14 @@
+ 
+ This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.
+ 
+-The program has given the second sphere a `SphereShape3D` inside a `StaticBody3D`. One part tells the renderer what to draw; another tells the physics system where movement meets resistance. We have made those surfaces coincide. They could have been arranged otherwise.
++The program attaches a separate collision shape to a fixed body, a `StaticBody3D`. This second sphere uses the same radius:
++
++```gdscript
++var sphere_shape := SphereShape3D.new()
++sphere_shape.radius = radius
++```
++
++One part tells the renderer what to draw; another tells the physics system where movement meets resistance. Sharing a radius helps them agree. We have made those surfaces coincide. They could have been arranged otherwise.
+ 
+ <!-- @point_held -->
+ 
+@@ -68,7 +83,14 @@
+ 
+ Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+ 
+-`WORLD` measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses `to_local()` to express that same position relative to the frame. The `LOCAL` card prints the result beside `WORLD`. The numbers differ because they answer to different references.
++The two cards give the same point different addresses. `WORLD` measures from the scene's origin; `LOCAL` uses the coloured frame. We can write that relation in two lines, with `point` naming the held body and `frame` the reference beside it:
++
++```gdscript
++var world_p := point.global_position
++var local_p := frame.to_local(world_p)
++```
++
++`global_position` supplies the world address. `to_local()` expresses it relative to the frame, accounting for the frame's position, orientation and scale. The point has not become two things. We have asked where it is from two different references.
+ 
+ A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^point-one-haraway]
+ 

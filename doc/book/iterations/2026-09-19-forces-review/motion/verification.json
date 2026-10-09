@@ -1,0 +1,107 @@
+{
+  "checks": {
+    "VFM_03_Motion final byte unchanged": true,
+    "VFM_03_Motion all map layers unchanged": true,
+    "Vectors_Act3_FieldsAndMotion final byte unchanged": true,
+    "Vectors_Act3_FieldsAndMotion all map layers unchanged": true,
+    "Vectors_Act4a_KineticForces final byte unchanged": true,
+    "Kinetic other layers unchanged": true,
+    "Kinetic all8 full artifact tokens retained": true,
+    "Kinetic exactly4 changed cells": true,
+    "Kinetic requested layout": true,
+    "Vectors_Act4b_Oscillation final byte unchanged": true,
+    "Vectors_Act4b_Oscillation all map layers unchanged": true,
+    "Change_Choreography final byte unchanged": true,
+    "Change_Choreography all map layers unchanged": true,
+    "Field field_at unchanged": true,
+    "Field advance unchanged": true,
+    "Field reset_run unchanged": true,
+    "Field act unchanged": true,
+    "Field bank unchanged": true,
+    "Field refresh_field unchanged": true,
+    "Field draw_trails unchanged": true,
+    "Field update_markers unchanged": true,
+    "preserved-headless/motion passed": true,
+    "preserved-headless/motion source stable during run": true,
+    "preserved-headless/spring passed": true,
+    "preserved-headless/spring source stable during run": true,
+    "preserved-headless/timing passed": true,
+    "preserved-headless/timing source stable during run": true,
+    "before-field-final/field passed": true,
+    "before-field-final/field source stable during run": true,
+    "before-runtime/staging passed": true,
+    "before-runtime/staging source stable during run": true,
+    "after-field-final/field passed": true,
+    "after-field-final/field source stable during run": true,
+    "after-runtime/staging passed": true,
+    "after-runtime/staging source stable during run": true,
+    "after-headless/kinetic passed": true,
+    "after-headless/kinetic source stable during run": true,
+    "kinetic-plan camera and model state match": true,
+    "kinetic-approach camera and model state match": true,
+    "field-observe camera and model state match": true,
+    "field-rule camera and model state match": true,
+    "field paired commons/scenes/endless_museum.gd identical": true,
+    "field paired commons/scenes/em/em_detail.gd identical": true,
+    "staging paired commons/scenes/endless_museum.gd identical": true,
+    "staging paired commons/scenes/em/em_detail.gd identical": true
+  },
+  "runtime": {
+    "preserved-headless/motion": {
+      "checks": 34,
+      "failures": [],
+      "returncode": 0
+    },
+    "preserved-headless/spring": {
+      "checks": 48,
+      "failures": [],
+      "returncode": 0
+    },
+    "preserved-headless/timing": {
+      "checks": 24,
+      "failures": [],
+      "returncode": 0
+    },
+    "before-field-final/field": {
+      "checks": 47,
+      "failures": [],
+      "returncode": 0
+    },
+    "before-runtime/staging": {
+      "checks": 18,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-field-final/field": {
+      "checks": 48,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-runtime/staging": {
+      "checks": 19,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-headless/kinetic": {
+      "checks": 45,
+      "failures": [],
+      "returncode": 0
+    }
+  },
+  "images_sha256": {
+    "before-runtime\\field-observe.png": "9e85a23448c807eef3cd6e5d00a55243d1b43f7a1fe4b0b18e5e08d9e59c3169",
+    "before-runtime\\field-rule.png": "fcab86cbe045532dc2f94da979a5ccfa84202e372c74d81ee63cca7a0e1768be",
+    "before-runtime\\kinetic-approach.png": "91a8c9a2e45a051aa41b70442459ccfe0596a05d7bf803562b7916b869b2199c",
+    "before-runtime\\kinetic-plan.png": "0af676961c3bf546029ee31a40178baf044b8da60cbb02cc51593be155d34f55",
+    "after-runtime\\field-observe.png": "ed144e94ec40e6e49f4a2c86f7c6e6c24697585fad4a95f6f0a980fc936ac5fb",
+    "after-runtime\\field-rule.png": "05b57bb2508d0065b49ba5ead5a4e89e72cea7befcb8e711a3bf7f087229a944",
+    "after-runtime\\kinetic-approach.png": "cf5a68fcac5f8fd1d8ed0c7711eb7d57403c62d30721709820d40c74273324bf",
+    "after-runtime\\kinetic-plan.png": "5352251c4f00a8e067b4a7533e5f752a87c1cb632b4424d3760b0cbc3bb59fba",
+    "before-field-final\\field-observe.png": "12da5a25b9e405602473ed586dc20ea7a5c36e7fd1a4cd5bcb589d30c3d2a6f7",
+    "before-field-final\\field-rule.png": "3c582b1c8e9ced86df7d505b60018ab26462442df56a854daddf1c720e6a3acb",
+    "after-field-final\\field-observe.png": "555bc8b68cd4b8431fb506c7fd898b18f0f87f4a3668adb5a8a3bf47f1454ae6",
+    "after-field-final\\field-rule.png": "980aed9fa5ffad79c120d52153b2f93fc9fd109db0405be5d3b705b890e658fd"
+  },
+  "headset_tested": false,
+  "learner_verified": false
+}

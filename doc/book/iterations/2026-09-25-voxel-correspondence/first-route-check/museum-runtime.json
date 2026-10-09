@@ -1,0 +1,1621 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "39"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				8.02999973297119,
+				-0.0333199985325336,
+				4.48000001907349
+			],
+			"bounds_size": [
+				2.94000053405762,
+				1.95332002639771,
+				0.199999809265137
+			],
+			"cell": [
+				9,
+				4
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.0,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "science_screen"
+		},
+		{
+			"bounds_position": [
+				3.40000009536743,
+				0.0750000476837158,
+				6.57000017166138
+			],
+			"bounds_size": [
+				2.19999980926514,
+				1.33299994468689,
+				1.49999952316284
+			],
+			"cell": [
+				4,
+				7
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.63479995727539,
+						1.06662213802338,
+						6.73247337341309
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.63479995727539,
+						1.06662213802338,
+						6.73247337341309
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.50519990921021,
+						1.06662213802338,
+						6.73247385025024
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.50519990921021,
+						1.06662213802338,
+						6.73247385025024
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.63479995727539,
+						0.967344343662262,
+						6.6331958770752
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.63479995727539,
+						0.967344343662262,
+						6.6331958770752
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.50519990921021,
+						0.967344343662262,
+						6.6331958770752
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LatticeStand/Panel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.50519990921021,
+						0.967344343662262,
+						6.6331958770752
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Readout",
+					"position": [
+						5.17999982833862,
+						1.06301498413086,
+						6.9092583656311
+					],
+					"text": "seed 31415 | threshold +0.00 | 24 cubed\ncell 12,12,12 | field -0.0038\nfield - bias +0.0109 = -0.0147\nscore > +0.00 ? EMPTY\n6767 occupied | 25 pieces | largest 6661\nCUT OFF | connected is not walkable"
+				},
+				{
+					"parent": "Panel",
+					"position": [
+						3.5699999332428,
+						1.10836970806122,
+						6.82309627532959
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				4.5,
+				1.35000002384186,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "perlin_terrain_sculptor"
+		},
+		{
+			"bounds_position": [
+				6.90000009536743,
+				-0.119999997317791,
+				6.90000009536743
+			],
+			"bounds_size": [
+				5.20000028610229,
+				4.92000007629395,
+				5.20000028610229
+			],
+			"cell": [
+				9,
+				9
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "VolumeStage",
+					"position": [
+						9.5,
+						0.150000005960464,
+						12.1300001144409
+					],
+					"text": "SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL\r\nThreshold changes the body; this frame stays."
+				},
+				{
+					"parent": "VolumeStage",
+					"position": [
+						9.5,
+						0.150000005960464,
+						6.86999988555908
+					],
+					"text": "SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL\r\nThreshold changes the body; this frame stays."
+				}
+			],
+			"position": [
+				9.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "voxelnoise"
+		},
+		{
+			"bounds_position": [
+				4.07999992370605,
+				0.00749999983236194,
+				12.0799999237061
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949245631694794,
+				0.840000152587891
+			],
+			"cell": [
+				4,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				5.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				7.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:noise voxel"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				17.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				17.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				18.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.00899982452393,
+				1.58000004291534,
+				17.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.99100017547607,
+				1.58000004291534,
+				16.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				7.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				3.27499985694885,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.950000047683716,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.75,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				6.03413581848145,
+				0.419999986886978,
+				14.8565673828125
+			],
+			"bounds_size": [
+				0.948390007019043,
+				1.48032104969025,
+				1.2275562286377
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				162.583160400391,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"bench_state": {
+		"broadcast": {
+			"hall": "Seg0_kanazawa-room-matrix",
+			"reached": [
+				"Voxelnoise"
+			],
+			"receivers_in_tree": 2
+		},
+		"cell": {
+			"bias": 0.0109,
+			"cell": [
+				12,
+				12,
+				12
+			],
+			"decision": false,
+			"normalised": [
+				0.522,
+				0.522,
+				0.522
+			],
+			"threshold": 0.0,
+			"value": -0.0038
+		},
+		"contract": {
+			"basis": "perlin fbm",
+			"bias_scale": 0.5,
+			"octaves": 3,
+			"scale": 4.0,
+			"span": 9.6
+		},
+		"cut": false,
+		"grid": 24,
+		"occupancy": {
+			"cells": 13824,
+			"largest_piece": 6661,
+			"occupied": 6767,
+			"pieces": 25
+		},
+		"rebuild_ms": 10.59,
+		"rebuilds": 6,
+		"seed": 31415,
+		"stand": "lattice",
+		"threshold": 0.0,
+		"threshold_index": 2
+	},
+	"checks": [
+		{
+			"name": "retained model, volume, section screen and orb",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "pair shares world orientation",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "same dimensions and fivefold spacing",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "same named seed",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "frames do not collide",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL selects same address in all views 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section height and address centre 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section perimeter clears volume 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL selects same address in all views 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section height and address centre 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section perimeter clears volume 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL selects same address in all views 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section height and address centre 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section perimeter clears volume 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL selects same address in all views 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section height and address centre 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section perimeter clears volume 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL selects same address in all views 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section height and address centre 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "section perimeter clears volume 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL returns to initial address",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CELL never rebuilds the bodies",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "disabled receiver ignores CELL",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "full field and occupancy match at +0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "surface and collision agree at +0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "selection survives threshold at +0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "full field and occupancy match at +0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "surface and collision agree at +0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "selection survives threshold at +0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "full field and occupancy match at -0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "surface and collision agree at -0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "selection survives threshold at -0.20",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "full field and occupancy match at -0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "surface and collision agree at -0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "selection survives threshold at -0.10",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "full field and occupancy match at +0.00",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "surface and collision agree at +0.00",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "selection survives threshold at +0.00",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "five button presses restore initial field and set",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CUT removes only model drawing",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "CUT restores visible model",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "other hall never receives control or selection",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"failures": [
+		"walk: model to volume west aisle"
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": false,
+	"rays": [
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "comparison standing floor",
+			"top": 0.000000379979610443115
+		},
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "west side of volume",
+			"top": 0.000000379979610443115
+		}
+	],
+	"room": "Noise_Voxel",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"selections": [
+		{
+			"cell": [
+				12.0,
+				12.0,
+				12.0
+			],
+			"decision": false,
+			"height": 2.5
+		},
+		{
+			"cell": [
+				6.0,
+				8.0,
+				17.0
+			],
+			"decision": true,
+			"height": 1.70000004768372
+		},
+		{
+			"cell": [
+				17.0,
+				6.0,
+				9.0
+			],
+			"decision": true,
+			"height": 1.30000007152557
+		},
+		{
+			"cell": [
+				9.0,
+				17.0,
+				6.0
+			],
+			"decision": false,
+			"height": 3.5
+		},
+		{
+			"cell": [
+				15.0,
+				12.0,
+				15.0
+			],
+			"decision": false,
+			"height": 2.5
+		}
+	],
+	"shots": [
+		"res://ada_run/encounter_pilot/Noise_Voxel/bench.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/comparison.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/volume.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/slice-low.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/slice-high.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/threshold-sparse.png",
+		"res://ada_run/encounter_pilot/Noise_Voxel/model-cut.png"
+	],
+	"thresholds": [
+		{
+			"occupied": 4582,
+			"pieces": 21,
+			"threshold": 0.1
+		},
+		{
+			"occupied": 2685,
+			"pieces": 32,
+			"threshold": 0.2
+		},
+		{
+			"occupied": 11040,
+			"pieces": 4,
+			"threshold": -0.2
+		},
+		{
+			"occupied": 9176,
+			"pieces": 15,
+			"threshold": -0.1
+		},
+		{
+			"occupied": 6767,
+			"pieces": 25,
+			"threshold": 0.0
+		}
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				5.53192710876465,
+				0.00083043600898236,
+				5.73135805130005
+			],
+			"passed": true,
+			"tag": "enter toward model",
+			"target": [
+				5.5,
+				0.1,
+				5.8
+			]
+		},
+		{
+			"end": [
+				5.59840297698975,
+				0.000170901417732239,
+				6.24984312057495
+			],
+			"passed": false,
+			"tag": "model to volume west aisle",
+			"target": [
+				6.2,
+				0.1,
+				9.0
+			]
+		},
+		{
+			"end": [
+				6.19999980926514,
+				0.000170901417732239,
+				12.933385848999
+			],
+			"passed": true,
+			"tag": "west aisle to rear",
+			"target": [
+				6.2,
+				0.1,
+				13.0
+			]
+		},
+		{
+			"end": [
+				12.7333946228027,
+				0.000170901417732239,
+				13.0
+			],
+			"passed": true,
+			"tag": "behind volume",
+			"target": [
+				12.8,
+				0.1,
+				13.0
+			]
+		},
+		{
+			"end": [
+				12.8000001907349,
+				0.000170901417732239,
+				6.06660223007202
+			],
+			"passed": true,
+			"tag": "east aisle",
+			"target": [
+				12.8,
+				0.1,
+				6.0
+			]
+		}
+	]
+}

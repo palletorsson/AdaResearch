@@ -1,0 +1,44 @@
+{
+  "map": "Point_Triangle_Context",
+  "status": "author_review_pilot",
+  "needs": [
+    "Day Zero shared room and player",
+    "Vector3 position and value assignment",
+    "PointHandle and Segment",
+    "Array[Vector3], index, size, for and if",
+    "TraceMemory saved source"
+  ],
+  "gives": [
+    "select three samples by index",
+    "integer division for thirds of a list",
+    "vertex as a mesh position",
+    "ImmediateMesh surface_begin/surface_add_vertex/surface_end/clear_surfaces",
+    "closed boundary versus explicit face"
+  ],
+  "learner_owns": [
+    "selection of three original values",
+    "connections AB, BC, CA",
+    "explicit triangle submission",
+    "show_face condition"
+  ],
+  "supplied": [
+    "room and input",
+    "PointHandle",
+    "Segment",
+    "TraceMemory",
+    "two-sided unshaded face and dark edge materials"
+  ],
+  "deferred": [
+    "triangulation of a whole trace",
+    "concave fan investigation (preserved in tutorial-museum.md)",
+    "normal vectors and lighting",
+    "indexed meshes",
+    "volume and collision"
+  ],
+  "data_flow": "Original saved Trace -> select three Vector3 values -> movable copies -> three segments -> optional one triangle",
+  "original_record_unchanged": true,
+  "all_geometry_created_in_code": true,
+  "physical_headset_tested": false,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

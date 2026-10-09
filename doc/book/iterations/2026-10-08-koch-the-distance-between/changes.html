@@ -1,0 +1,372 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Koch — before and after text</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e8;color:#25222a;font:17px/1.65 system-ui,sans-serif}header,main,footer{max-width:1320px;margin:auto;padding:28px 5vw}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:#853856;text-underline-offset:4px}h1{font:clamp(38px,5vw,70px)/1.06 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}p{max-width:75ch}.lead{font-size:23px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}img{width:100%;display:block}figure{margin:28px 0}figcaption{font-size:14px;color:#605964;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;padding:24px;background:#fffcf6}.reading h1{font-size:38px}.reading h2{font-size:27px}pre{overflow:auto;background:#242129;color:#f5eff1;padding:20px;font:13px/1.6 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}table{border-collapse:collapse;width:100%;background:#fffcf6}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d0c7;padding:16px}blockquote{border-left:4px solid #d292a7;margin:25px 0;padding:12px 22px;font:26px/1.5 Georgia,serif}.pill{background:#25222a;color:#fff;padding:8px 18px;display:inline-block;border-radius:22px;font-size:14px}button{font:inherit;background:#fffcf6;border:1px solid #bfa4af;padding:8px 16px;margin-right:8px;cursor:pointer}button[aria-pressed=true]{background:#25222a;color:white}.notes{background:#e8e0d6;padding:22px}del{background:#ffe3e3}ins{background:#e0efdc;text-decoration:none}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}pre{white-space:pre-wrap}body{background:white}article{break-before:page}}details{border-top:1px solid #d8d0c7;padding:16px 0}summary{cursor:pointer;font-weight:600}.single{max-width:880px}.single h1{font-size:42px}</style></head><body><header><p class="eyebrow">Endless Museum · Fractals 04 · 8 October 2026</p><nav><a href="index.html">Museum & changes</a><a href="parallel.html">Tutorial / reflection</a><a href="tutorial.html">Tutorial only</a><a href="changes.html">Before / after</a><a href="student-files.zip">Student files</a></nav></header><main><h1>One construction, carried onward.</h1><p>The old tutorial surveyed three desks. The new lesson reconstructs Koch using the same point, line renderer and current/next pattern. Two paragraphs join the new encounter to the existing reflection.</p><h2>tutorial.md</h2><p><a href="tutorial.diff">Plain diff</a></p><details><summary>Read the complete before and after</summary><div class="pair reading"><article><p class="eyebrow">Before</p><h1>Walk: the boundary takes a detour</h1>
+<p><strong>Learning elements — proposed focus</strong></p>
+<p><em>The labels below set the revision focus; the existing lesson still needs alignment.</em></p>
+<ul>
+<li>Segment replacement</li>
+<li>Endpoint distance</li>
+<li>
+<p>Path length</p>
+</li>
+<li>
+<p>At <strong>fractal_koch_curve</strong>, find both ends of the waiting line. Predict what NEXT might change. Compare endpoint distance, segment count and measured path length. Try TURN, then RESET → FORM → NEXT. Ask which geometric differences survive in the same count. Reveal RULE after the comparison.</p>
+</li>
+<li>At <strong>sierpinski_triangle</strong>, cut once and find the removed middle. Continue to four cuts, comparing area with number of pieces. VIEW cycles kept parts, pale removals, then removals alone. DEPTH changes thickness. Ask what is being computed and what is merely being drawn. The sculpture has no collision.</li>
+<li>At <strong>box_counting_dimension</strong>, hold the 8,000-point sample. FINER and COARSER change the grid; COVER marks occupied cells. RANGE compares coarse, fine and all six measurements. Check that the sample stays unchanged. Reveal RULE and compare the finite fit with the ideal triangle's scaling law.</li>
+<li>Explore the retained secondary collection. The bent arch, assembled cubes and six-call pyramid offer related but distinct procedures. Do not assign the triangle's rule to every triangular-looking object.</li>
+<li>Pass around the original raised cell and follow the exit to <strong>Fractal_MengerSponge</strong>. Ask which holes can become passages for a finite body.</li>
+</ul>
+<p>The first three artifacts are primary and own the three book anchors, in this order. The other seven placements remain. The learner may follow the desks alone or discuss held quantities and changed quantities with a group. Headset reach and comfort still need a physical review.</p></article><article><p class="eyebrow">After</p><h1>Koch / Sierpinski — the distance between</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>An ordered path of positions</li>
+<li>Replacing one segment with four</li>
+<li>Current and next arrays</li>
+<li>A turn in a declared plane</li>
+<li>Endpoint distance and path length</li>
+</ul>
+<p>Hold the black point on the small line beside the Koch desk. Move it along the drawing. Its partner follows the larger line on the floor. Press the trigger once: the line takes a detour. Find the two ends again. They are still four represented metres apart.</p>
+<p>NEXT beside your hand makes the same replacement. BACK and RESET let you compare stages; the original desk also offers TURN and FORM. Each step replaces <strong>every current segment</strong>, including those already climbing or descending. The readout gives the distance between the ends, the complete path length, and your point's place along that path.</p>
+<h2>What continues</h2>
+<p>Keep the museum workspace. We bring <code>PointBody</code> from Cantor and <code>LineSkin</code> from Recursion. Trace taught us to keep positions in order and connect neighbouring entries. Cantor taught us to read <code>current</code>, construct a separate <code>next</code>, then change which record is current. Here that pattern adds a detour instead of removing a middle.</p>
+<p>Save the three files below together. Put <code>koch.gd</code> on your existing empty, unit-scale <code>PointStudy</code> node, facing its positive Z side. Keep the previous lesson's script. The museum already supplies the light, camera, player and XR pickup functions. This script creates its own drawing and point, with no scene-node references.</p>
+<p>Hold the point and press its trigger to replace once. On desktop, press Enter (<code>ui_accept</code>); use the existing pickup/drop interaction to move the point. The complete small study stops after four steps. Run it again to return to the seed. Its purpose is the open Koch path; the production hall adds the table, floor receiver, BACK/RESET controls and closed-triangle comparison.</p>
+<h2>Four segments from two ends</h2>
+<p>The seed is <code>(-2, 0, 0)</code> to <code>(2, 0, 0)</code>. These are positions in a <strong>local XY construction plane</strong>. <code>third = (end - a) / 3</code> is a displacement, with both direction and length.</p>
+<p>Place <code>b</code> one third from <code>a</code>, and <code>d</code> two thirds from <code>a</code>. From <code>b</code>, turn that displacement sixty degrees about positive Z (<code>Vector3.BACK</code>) to find <code>c</code>. The path goes <strong>a → b → c → d → end</strong>. Its middle makes two sides of an equilateral triangle. Each of the four new segments has a third of the old length.</p>
+<p><code>replace_path()</code> appends <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code> for every old segment. The next segment supplies the shared endpoint; only the very last endpoint needs a separate append. One segment therefore needs two positions, four segments need five, and 256 segments need 257. This list describes connections through order.</p>
+<h2>koch.gd</h2>
+<p>Read <code>replace_path()</code>, <code>advance()</code> and <code>path_length()</code> first. The remaining functions connect the known point to the drawing. The closest-point reader is supplied in full below those operations.</p>
+<!-- student-code:koch.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+const VIEW_SCALE := 0.3
+const ORIGIN := Vector3(0, 1.2, 0.2)
+var original: Array[Vector3] = [Vector3(-2, 0, 0), Vector3(2, 0, 0)]
+var current: Array[Vector3] = []
+var generation := 0
+var point: XRToolsPickable
+var drawing: Node3D
+var readout: Label3D
+var cursor := Vector3.ZERO
+var along := 0.0
+
+func _ready() -&gt; void:
+    current = original.duplicate()
+    drawing = Node3D.new()
+    add_child(drawing)
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): advance())
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.85, -0.3)
+    readout.font_size = 24
+    readout.pixel_size = 0.001
+    add_child(readout)
+    redraw()
+
+func replace_path(path: Array[Vector3], side: float = 1.0) -&gt; Array[Vector3]:
+    assert(path.size() &gt;= 2 and absf(side) == 1.0)
+    var next: Array[Vector3] = []
+    for i in path.size() - 1:
+        var a := path[i]
+        var end := path[i + 1]
+        var third := (end - a) / 3.0
+        var b := a + third
+        var c := b + third.rotated(Vector3.BACK, side * PI / 3.0)
+        var d := a + third * 2.0
+        next.append_array([a, b, c, d])
+    next.append(path[-1])
+    return next
+
+func advance() -&gt; void:
+    if generation == 4:
+        return
+    current = replace_path(current)
+    generation += 1
+    redraw()
+
+func path_length(path: Array[Vector3]) -&gt; float:
+    var total := 0.0
+    for i in path.size() - 1:
+        total += path[i].distance_to(path[i + 1])
+    return total
+
+func _process(_delta: float) -&gt; void:
+    if Input.is_action_just_pressed(&quot;ui_accept&quot;):
+        advance()
+
+func _physics_process(_delta: float) -&gt; void:
+    if point.held():
+        var local := (to_local(point.global_position) - ORIGIN) / VIEW_SCALE
+        var reading := nearest_on_path(Vector3(local.x, -local.z, 0))
+        cursor = reading.point
+        along = reading.along
+    else:
+        point.global_transform = global_transform * Transform3D(Basis.IDENTITY, display(cursor))
+    readout.text = &quot;step %d / 4 | %d segments\nends %.3f m | path %.3f m | at %.3f m along&quot; % [generation, current.size() - 1, current[0].distance_to(current[-1]), path_length(current), along]
+
+# Supplied reader: closest point on the finite drawing, with distance from its start.
+# This does not measure the length of the player's hand movement.
+func nearest_on_path(query: Vector3) -&gt; Dictionary:
+    var best := INF
+    var prefix := 0.0
+    var answer := {&quot;point&quot;:current[0], &quot;along&quot;:0.0}
+    for i in current.size() - 1:
+        var a := current[i]
+        var delta := current[i + 1] - a
+        var t := clampf((query - a).dot(delta) / delta.length_squared(), 0.0, 1.0)
+        var p := a + delta * t
+        if p.distance_squared_to(query) &lt; best:
+            best = p.distance_squared_to(query)
+            answer = {&quot;point&quot;:p, &quot;along&quot;:prefix + t * delta.length()}
+        prefix += delta.length()
+    return answer
+
+func display(p: Vector3) -&gt; Vector3:
+    return ORIGIN + Vector3(p.x, 0, -p.y) * VIEW_SCALE
+
+func redraw() -&gt; void:
+    for child in drawing.get_children():
+        drawing.remove_child(child)
+        child.queue_free()
+    for i in current.size() - 1:
+        var start := display(current[i])
+        var displacement := display(current[i + 1]) - start
+        var line = LineSkin.new()
+        drawing.add_child(line)
+        line.mesh.top_radius = 0.002
+        line.mesh.bottom_radius = 0.002
+        line.show_segment(start, displacement, displacement.length())
+    cursor = current[0]
+    along = 0.0
+</code></pre>
+<p>The loop finishes before <code>current</code> is replaced. The original seed stays intact. Like Cantor, this implementation makes one generation per action rather than calling itself to complete every generation at once.</p>
+<p><code>path_length()</code> adds the distance between <strong>each neighbouring pair</strong>. Endpoint distance uses only the first and last positions. After one replacement those readings are 16/3 metres and 4 metres. After four they are about 12.642 metres and 4 metres. The arithmetic is <code>4 × (4/3)^n</code>; it belongs to this particular sixty-degree, thirds rule.</p>
+<h2>Reading is another operation</h2>
+<p><code>display()</code> lays the XY construction onto a horizontal XZ drawing. <code>VIEW_SCALE</code> makes four represented metres fit into 1.2 physical metres. It does not change the stored positions or the length calculation. The supplied LineSkin gives each connection a thin visible cylinder; it supplies no collision.</p>
+<p>The hand remains free while held. The reader finds the nearest point on any segment, then adds the lengths of the preceding segments. On release the ball parks at that reading. It does not drag you or force your hand to follow the path. If you skip from one fold to another, the reading jumps. <strong>“At 3 metres along” is an address on this path, not proof that your hand travelled 3 metres.</strong></p>
+<p>Small folds may become hard to select with this sphere or distinguish in the headset. The exact finite record and the useful size of a gesture have different limits. The larger floor drawing gives the same route another scale; it remains a drawing supported by the existing floor, not a narrow balance beam.</p>
+<h2>Predict, then change</h2>
+<p>Before the second step, predict sixteen segments and seventeen positions. Each segment should be 4/9 metre; their total should be 64/9 metres. Neither endpoint should move. After the fourth step, another trigger should leave the record unchanged.</p>
+<p>For your own variation, change the call to <code>replace_path(current, -1.0)</code> and run again. Predict which coordinates will change sign. The first peak moves below the starting line. Count, segment lengths and endpoint distance stay the same. This reverses the sixty-degree turn; changing the angle itself would require a new length calculation rather than borrowing the same formula.</p>
+<p>Now try a sloping seed in the XY plane, for example <code>(-1, -1, 0)</code> to <code>(1, 1, 0)</code>. Predict its starting length and its first replacement length. The rule uses each segment's displacement, so the peaks turn with the segment. Arbitrary out-of-plane endpoints need another declared construction plane; this lesson does not supply one.</p>
+<h2>Across the aisle</h2>
+<p>At the existing Sierpinski triangle, press NEXT and find the missing middle. Three midpoint pairs give three corner triangles. Each corner has half the side length and a quarter of the area, so three quarters of the parent's area remain. The next generation applies that same replacement to every retained triangle.</p>
+<p>Compare the two operations: Koch keeps the connection and increases length; Sierpinski keeps three corners and reduces area. VIEW changes whether retained corners or removed middles receive meshes, without changing the replacement rule. These are distinct constructions using a familiar current/next pattern. Rebuilding every artifact in this hall is not another assignment.</p>
+<p>The optional box-counting desk changes its measurement grid over a held sample. Leave it for a separate investigation if needed. The next main construction is Menger: carry the replacement pattern from a segment and a triangle into cells of a cube.</p>
+<h2>The carried files</h2>
+<p>These are unchanged from the earlier lessons. <code>PointBody</code> supplies pickup, release and the trigger signal inherited from XRTools. <code>LineSkin</code> places a cylinder between two ends. They are printed here so the example has no missing code dependency; the prepared museum still supplies XRTools and the player.</p>
+<h3>point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h3>line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre></article></div></details><h2>final.md</h2><p><a href="final.diff">Plain diff</a></p><details><summary>Read the complete before and after</summary><div class="pair reading"><article><p class="eyebrow">Before</p><h1>The boundary takes a detour</h1>
+<!-- @fractal_koch_curve -->
+
+<p>Four metres of line wait behind the desk. Keep its ends in view. Where could more line go?</p>
+<p>Press NEXT. The middle lifts into a peak. Follow it up and down before reading the counter. The ends have not moved apart, but travelling between them along the line now takes longer. Press again. Each of the four new segments takes its own detour, including the ones already climbing.</p>
+<p>At the fourth step, 256 segments share a path a little over twelve and a half metres long. The endpoints still stand four metres apart. Distance between them and distance along the boundary have begun telling different stories.</p>
+<p>This is the small decision inside each replacement:</p>
+<pre><code class="language-gdscript">var b := start + dir * (len / 3.0)
+var d := start + dir * (2.0 * len / 3.0)
+var c := mid_point + perpendicular * height
+</code></pre>
+<p>The next list joins <code>start → b → c → d → end</code>. Four segments, each a third of the old length. The next call receives these segments as its beginning. In the cellular automata halls every cell wrote its next state into a separate array before the arrays were swapped; this list is that swap, with segments for cells, and in the next sequence it will be a sentence. Each of the 256 pieces at the fourth step is a separate object in that list; nothing here has yet asked one of them to move. A multiplication of four thirds can be followed with the eye.</p>
+<p>Try TURN. The detours go to the other side. The count and path length survive the reversal. They have not told us everything about the shape.</p>
+<p>RESET, then FORM. A triangle closes the starting line into a boundary. NEXT sends its peaks outward; TURN folds them inward. There is an inside to negotiate now. An instruction about direction has become a decision about where an enclosure extends.</p>
+<p>Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.<sup id="final-before-fnref:1"><a class="footnote-ref" href="#final-before-fn:1">1</a></sup> This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?</p>
+<!-- @sierpinski_triangle -->
+
+<p>A filled triangle waits across the aisle. We have spent several rooms making descendants. What if the next generation occupied less of its parent?</p>
+<p>Press NEXT. Find the middle before looking at the three corners. The middle is now an opening in the drawing. Another press makes a new opening inside each retained corner. The large absence remains; the small ones accumulate around it.</p>
+<p>The code locates three midpoints:</p>
+<pre><code class="language-gdscript">var m1 = (v1 + v2) / 2.0
+var m2 = (v2 + v3) / 2.0
+var m3 = (v3 + v1) / 2.0
+</code></pre>
+<p>The next calls receive the three corner triangles. Their sides are half as long, so each has a quarter of its parent's area. Three quarters remain. At four cuts, eighty-one kept triangles occupy about 4.93 square metres of the original 15.59. There are more pieces to address and less surface to colour.</p>
+<p>Now press VIEW. Pale middles appear where the rule made its removals. Press again. The kept corners disappear from the drawing, and the middles stand in their colours. What we had called the waste now holds the room's attention.</p>
+<p>The program still computes the same corner triangles. It has changed which results receive meshes. The negative view draws forty removed middles from the four cuts. These are parts the operation already located; we did not need a new fractal to find another subject inside it.</p>
+<p>DEPTH gives the drawn pieces more thickness. Their planar area does not change. Neither view makes these pieces load-bearing: the sculpture has no collision, although its control desk does. An opening in an image, a hole in a solid and a passage for our body ask different things of the implementation.</p>
+<p>We can change the view back. That matters here. The ease with which this display restores a discarded part belongs to this stored construction. It does not make every act of removal reversible.</p>
+<!-- @box_counting_dimension -->
+
+<p>The next triangle arrives as points. This bench has its own generator: eight thousand repeated moves halfway towards a chosen corner. It is related to the triangle we just cut, but it is not reading that sculpture's mesh.</p>
+<p>Press FINER. The grid tightens over the same points. Try COVER. Coloured cells mark where at least one sample was found. A crowded cell and a cell holding one point each count once. An empty cell contributes nothing, even when the ideal construction might place detail there.</p>
+<p>Here is the counting decision:</p>
+<pre><code class="language-gdscript">var ix := int(shifted.x / box_size)
+var iz := int(shifted.z / box_size)
+var key := ix * 10000 + iz
+occupied[key] = true
+</code></pre>
+<p>The key gives this cell an address. Writing it again does not create another occupied cell. Arrays and grids have returned as a measuring instrument.</p>
+<p>RANGE reveals a plot and fits the three coarsest measurements. Press it again for the three finest, then for all six. The reported slope moves while the point cloud stays put. Which value would you have called the triangle's dimension if only one had been shown?</p>
+<p>The ideal Sierpinski triangle has dimension <code>log(3) / log(2)</code>, about 1.585.<sup id="final-before-fnref:2"><a class="footnote-ref" href="#final-before-fn:2">2</a></sup> This instrument fits a finite sample at six box sizes. The number it returns depends on those choices; it is evidence from a procedure, with a range beyond which we have not tested it. RESET reproduces the same sample so the comparison can begin again.</p>
+<p>The unoccupied cells tell us where this reading found no points. They have no authority over what may exist. The question becomes sharper when a model is used to decide what the world should retain: what happens to what it did not count? Here we can start with the smaller act: change the grid, look again, and leave room for an answer the first reading could not hold.</p>
+<!-- @sierpinski_pyramid -->
+
+<p>The cube pyramid returns from the cellular automata rooms. There we put its resemblance beside another way of making a pattern. Here, walk around it. Keep one of its rising edges in view, then press COMPARE.</p>
+<p>Something has been held back. The top comes down. Did the cubes shrink? Come closer: the cubes have kept their size. Press again and the taller construction returns. Follow an edge that survived both versions. Where did its neighbours go?</p>
+<p>An earlier comment in the source promised five recursive calls. The program made six. We have kept that inherited construction as the first view. COMPARE holds back the extra upper call wherever the recipe repeats. The remaining calls keep their positions and the same three levels of recursion.</p>
+<p>RULE reveals the count after we have looked: 216 cube instances become 125. One call withheld, ninety-one instances gone. That call had descendants of its own. Some cubes overlap, so counting what the program creates is not the same as counting separate blocks we can see.</p>
+<p>The discrepancy could have disappeared in a correction. Instead it has become a way to touch the recipe. The name invited us to recognise a form; the switch lets that recognition falter. Which version would you have accepted if the other had never been offered? RESET brings back the inherited one. We can keep the strange result and still learn how it was made.</p>
+<!-- @ -->
+
+<p>Around these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.</p>
+<p>In the next hall, removal enters a volume. We will approach the Menger sponge with a body that can fly. Which of its openings will become somewhere we can go?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="final-before-fn:1">
+<p>Helge von Koch, “Sur une courbe continue sans tangente, obtenue par une construction géométrique élémentaire”, <em>Arkiv för matematik, astronomi och fysik</em> 1 (1904). The replacement on this desk is carried from Daniel Shiffman's Example 8.5 in <em>The Nature of Code</em>.&#160;<a class="footnote-backref" href="#final-before-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="final-before-fn:2">
+<p>Wacław Sierpiński, “Sur une courbe dont tout point est un point de ramification”, <em>Comptes rendus de l'Académie des sciences</em> 160 (1915).&#160;<a class="footnote-backref" href="#final-before-fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><p class="eyebrow">After</p><h1>The boundary takes a detour</h1>
+<!-- @fractal_koch_curve -->
+
+<p>Four metres of line wait behind the desk. Keep its ends in view. Where could more line go?</p>
+<p>Press NEXT. The middle lifts into a peak. Follow it up and down before reading the counter. The ends have not moved apart, but travelling between them along the line now takes longer. Press again. Each of the four new segments takes its own detour, including the ones already climbing.</p>
+<p>At the fourth step, 256 segments share a path a little over twelve and a half metres long. The endpoints still stand four metres apart. Distance between them and distance along the boundary have begun telling different stories.</p>
+<p>Beside the desk, the familiar black point rests on a smaller drawing. Take it and follow a fold. A second point travels over the larger line on the floor. The same position has acquired another reach. Press the trigger once while holding: every segment takes the next detour. The point has become a way to read the construction as well as a way to ask for more of it.</p>
+<p>Your hand can leave the line. The reading finds its nearest span; on release, the sphere settles there. Jump across a fold and the number can jump too. It tells you where you are along the path, not how far your hand has travelled. Try the floor drawing with your eyes and feet. The little turns that fit inside one gesture have spread across the room, but at the fourth step some are already too small to follow as separate steps. A route can remain exact after this body loses the means to perform every part of it.</p>
+<p>This is the small decision inside each replacement:</p>
+<pre><code class="language-gdscript">var b := start + dir * (len / 3.0)
+var d := start + dir * (2.0 * len / 3.0)
+var c := mid_point + perpendicular * height
+</code></pre>
+<p>The next list joins <code>start → b → c → d → end</code>. Four segments, each a third of the old length. The next call receives these segments as its beginning. In the cellular automata halls every cell wrote its next state into a separate array before the arrays were swapped; this list is that swap, with segments for cells, and in the next sequence it will be a sentence. Each of the 256 pieces at the fourth step is a separate object in that list; nothing here has yet asked one of them to move. A multiplication of four thirds can be followed with the eye.</p>
+<p>Try TURN. The detours go to the other side. The count and path length survive the reversal. They have not told us everything about the shape.</p>
+<p>RESET, then FORM. A triangle closes the starting line into a boundary. NEXT sends its peaks outward; TURN folds them inward. There is an inside to negotiate now. An instruction about direction has become a decision about where an enclosure extends.</p>
+<p>Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.<sup id="final-after-fnref:1"><a class="footnote-ref" href="#final-after-fn:1">1</a></sup> This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?</p>
+<!-- @sierpinski_triangle -->
+
+<p>A filled triangle waits across the aisle. We have spent several rooms making descendants. What if the next generation occupied less of its parent?</p>
+<p>Press NEXT. Find the middle before looking at the three corners. The middle is now an opening in the drawing. Another press makes a new opening inside each retained corner. The large absence remains; the small ones accumulate around it.</p>
+<p>The code locates three midpoints:</p>
+<pre><code class="language-gdscript">var m1 = (v1 + v2) / 2.0
+var m2 = (v2 + v3) / 2.0
+var m3 = (v3 + v1) / 2.0
+</code></pre>
+<p>The next calls receive the three corner triangles. Their sides are half as long, so each has a quarter of its parent's area. Three quarters remain. At four cuts, eighty-one kept triangles occupy about 4.93 square metres of the original 15.59. There are more pieces to address and less surface to colour.</p>
+<p>Now press VIEW. Pale middles appear where the rule made its removals. Press again. The kept corners disappear from the drawing, and the middles stand in their colours. What we had called the waste now holds the room's attention.</p>
+<p>The program still computes the same corner triangles. It has changed which results receive meshes. The negative view draws forty removed middles from the four cuts. These are parts the operation already located; we did not need a new fractal to find another subject inside it.</p>
+<p>DEPTH gives the drawn pieces more thickness. Their planar area does not change. Neither view makes these pieces load-bearing: the sculpture has no collision, although its control desk does. An opening in an image, a hole in a solid and a passage for our body ask different things of the implementation.</p>
+<p>We can change the view back. That matters here. The ease with which this display restores a discarded part belongs to this stored construction. It does not make every act of removal reversible.</p>
+<!-- @box_counting_dimension -->
+
+<p>The next triangle arrives as points. This bench has its own generator: eight thousand repeated moves halfway towards a chosen corner. It is related to the triangle we just cut, but it is not reading that sculpture's mesh.</p>
+<p>Press FINER. The grid tightens over the same points. Try COVER. Coloured cells mark where at least one sample was found. A crowded cell and a cell holding one point each count once. An empty cell contributes nothing, even when the ideal construction might place detail there.</p>
+<p>Here is the counting decision:</p>
+<pre><code class="language-gdscript">var ix := int(shifted.x / box_size)
+var iz := int(shifted.z / box_size)
+var key := ix * 10000 + iz
+occupied[key] = true
+</code></pre>
+<p>The key gives this cell an address. Writing it again does not create another occupied cell. Arrays and grids have returned as a measuring instrument.</p>
+<p>RANGE reveals a plot and fits the three coarsest measurements. Press it again for the three finest, then for all six. The reported slope moves while the point cloud stays put. Which value would you have called the triangle's dimension if only one had been shown?</p>
+<p>The ideal Sierpinski triangle has dimension <code>log(3) / log(2)</code>, about 1.585.<sup id="final-after-fnref:2"><a class="footnote-ref" href="#final-after-fn:2">2</a></sup> This instrument fits a finite sample at six box sizes. The number it returns depends on those choices; it is evidence from a procedure, with a range beyond which we have not tested it. RESET reproduces the same sample so the comparison can begin again.</p>
+<p>The unoccupied cells tell us where this reading found no points. They have no authority over what may exist. The question becomes sharper when a model is used to decide what the world should retain: what happens to what it did not count? Here we can start with the smaller act: change the grid, look again, and leave room for an answer the first reading could not hold.</p>
+<!-- @sierpinski_pyramid -->
+
+<p>The cube pyramid returns from the cellular automata rooms. There we put its resemblance beside another way of making a pattern. Here, walk around it. Keep one of its rising edges in view, then press COMPARE.</p>
+<p>Something has been held back. The top comes down. Did the cubes shrink? Come closer: the cubes have kept their size. Press again and the taller construction returns. Follow an edge that survived both versions. Where did its neighbours go?</p>
+<p>An earlier comment in the source promised five recursive calls. The program made six. We have kept that inherited construction as the first view. COMPARE holds back the extra upper call wherever the recipe repeats. The remaining calls keep their positions and the same three levels of recursion.</p>
+<p>RULE reveals the count after we have looked: 216 cube instances become 125. One call withheld, ninety-one instances gone. That call had descendants of its own. Some cubes overlap, so counting what the program creates is not the same as counting separate blocks we can see.</p>
+<p>The discrepancy could have disappeared in a correction. Instead it has become a way to touch the recipe. The name invited us to recognise a form; the switch lets that recognition falter. Which version would you have accepted if the other had never been offered? RESET brings back the inherited one. We can keep the strange result and still learn how it was made.</p>
+<!-- @ -->
+
+<p>Around these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.</p>
+<p>In the next hall, removal enters a volume. We will approach the Menger sponge with a body that can fly. Which of its openings will become somewhere we can go?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="final-after-fn:1">
+<p>Helge von Koch, “Sur une courbe continue sans tangente, obtenue par une construction géométrique élémentaire”, <em>Arkiv för matematik, astronomi och fysik</em> 1 (1904). The replacement on this desk is carried from Daniel Shiffman's Example 8.5 in <em>The Nature of Code</em>.&#160;<a class="footnote-backref" href="#final-after-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="final-after-fn:2">
+<p>Wacław Sierpiński, “Sur une courbe dont tout point est un point de ramification”, <em>Comptes rendus de l'Académie des sciences</em> 160 (1915).&#160;<a class="footnote-backref" href="#final-after-fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></details></main><footer>Native Godot captures and supplied test inputs. Physical headset feel, Quest performance and learner understanding remain untested.</footer></body></html>

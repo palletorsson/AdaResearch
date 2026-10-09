@@ -1,0 +1,143 @@
+{
+  "checks": [
+    {
+      "name": "0: actual layer-1 overlap starts 3 2 1",
+      "passed": true
+    },
+    {
+      "name": "0: no early fire, exactly one launch",
+      "passed": true
+    },
+    {
+      "name": "0: velocity goes over axle toward local -Z",
+      "passed": true
+    },
+    {
+      "name": "0: physical first second follows predicted red arc",
+      "passed": true
+    },
+    {
+      "name": "0: red path uses solid triangle geometry",
+      "passed": true
+    },
+    {
+      "name": "90: actual layer-1 overlap starts 3 2 1",
+      "passed": true
+    },
+    {
+      "name": "90: no early fire, exactly one launch",
+      "passed": true
+    },
+    {
+      "name": "90: velocity goes over axle toward local -Z",
+      "passed": true
+    },
+    {
+      "name": "90: physical first second follows predicted red arc",
+      "passed": true
+    },
+    {
+      "name": "90: red path uses solid triangle geometry",
+      "passed": true
+    },
+    {
+      "name": "180: actual layer-1 overlap starts 3 2 1",
+      "passed": true
+    },
+    {
+      "name": "180: no early fire, exactly one launch",
+      "passed": true
+    },
+    {
+      "name": "180: velocity goes over axle toward local -Z",
+      "passed": true
+    },
+    {
+      "name": "180: physical first second follows predicted red arc",
+      "passed": true
+    },
+    {
+      "name": "180: red path uses solid triangle geometry",
+      "passed": true
+    },
+    {
+      "name": "XR layer-20 body starts countdown without a button",
+      "passed": true
+    },
+    {
+      "name": "Stepping out cancels countdown and prevents launch",
+      "passed": true
+    },
+    {
+      "name": "Reboarding completes a fresh countdown",
+      "passed": true
+    },
+    {
+      "name": "Catapult installs XR launch provider before movement",
+      "passed": true
+    },
+    {
+      "name": "Launch moves the actual XR collision body and origin away",
+      "passed": true
+    },
+    {
+      "name": "Launch leaves tracked head transform intact",
+      "passed": true
+    },
+    {
+      "name": "Preview origin stays at release instead of following arm",
+      "passed": true
+    },
+    {
+      "name": "Fountain can finish with no visible trail segments",
+      "passed": true
+    },
+    {
+      "name": "Fountain trails return on the next visible flight",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "measurements": {
+    "0": {
+      "countdown": [
+        3,
+        2,
+        1
+      ],
+      "displacement": 14.4077806472778,
+      "fire_frame": 184,
+      "flight_frames": 118,
+      "preview_error_first_second": 0.0816659927368164
+    },
+    "180": {
+      "countdown": [
+        3,
+        2,
+        1
+      ],
+      "displacement": 14.4077405929565,
+      "fire_frame": 184,
+      "flight_frames": 118,
+      "preview_error_first_second": 0.0816659927368164
+    },
+    "90": {
+      "countdown": [
+        3,
+        2,
+        1
+      ],
+      "displacement": 14.4077367782593,
+      "fire_frame": 184,
+      "flight_frames": 118,
+      "preview_error_first_second": 0.0816659927368164
+    },
+    "xr": {
+      "launch_count": 1,
+      "travel": 9.13572025299072
+    }
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "scope": "Actual Area3D overlaps, layer-1 desktop and layer-20 XR bodies, countdown/cancel, collision-aware ballistic movement and rotated previews. Supplied input; physical headset untested."
+}

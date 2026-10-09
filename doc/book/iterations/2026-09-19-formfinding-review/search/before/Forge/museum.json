@@ -1,0 +1,74 @@
+{
+  "approaches": [
+    {
+      "hits": [],
+      "point": "(5.5, 1.05, 4.8)",
+      "token": "self_shaping_forge"
+    },
+    {
+      "hits": [],
+      "point": "(9.5, 1.05, 6.8)",
+      "token": "balance_puzzle"
+    },
+    {
+      "hits": [],
+      "point": "(4.5, 1.05, 8.8)",
+      "token": "gradient_descent_optimizer"
+    }
+  ],
+  "checks": [
+    {
+      "message": "actual authored museum hall loads",
+      "ok": true
+    },
+    {
+      "message": "all authored artifacts instantiate: 4",
+      "ok": true
+    }
+  ],
+  "hall": "FormFinding_Forge",
+  "headset_tested": false,
+  "inventory": [
+    {
+      "extent": "[P: (5.0, 0.0, 3.25), S: (1.0, 1.27, 0.5)]",
+      "labels": [
+        "SELF-SHAPING FORGE\nstate: MAX Q\nQ: 100%",
+        "SELF-SHAPING FORGE — DESCENT TOWARD MAX Q"
+      ],
+      "position": "(5.5, 0.0, 3.5)",
+      "rotation": "(0.0, 0.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "self_shaping_forge"
+    },
+    {
+      "extent": "[P: (9.25, -0.05, 4.882571), S: (0.896488, 0.249836, 0.874394)]",
+      "labels": [
+        "[===-------]\n0.2 / 0.6 m"
+      ],
+      "position": "(9.5, 0.0, 5.5)",
+      "rotation": "(0.0, 0.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "balance_puzzle"
+    },
+    {
+      "extent": "[P: (4.0, 0.0, 7.05), S: (1.23, 1.21, 0.9)]",
+      "labels": [
+        "GRADIENT DESCENT\nstep: 12\nenergy: 0.0273\nlr: 0.060\n(= a net training)",
+        "TRAINING IS SETTLING — THE WALK DOWNHILL"
+      ],
+      "position": "(4.5, 0.0, 7.5)",
+      "rotation": "(0.0, 0.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "gradient_descent_optimizer"
+    },
+    {
+      "extent": "[P: (8.93, -0.03332, 7.32), S: (3.139999, 2.35332, 0.2)]",
+      "labels": [],
+      "position": "(10.5, 0.0, 7.5)",
+      "rotation": "(0.0, 0.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "science_screen"
+    }
+  ],
+  "player_position": "(7.5, 0.000683, 1.5)"
+}

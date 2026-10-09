@@ -1,0 +1,140 @@
+{
+  "status": "twelve halls restored; focused repairs; eight chapters retained",
+  "summary": "Returning to a position is not returning to the same state. This pass keeps the sequence’s different kinds of return, restores missing halls, and lets two existing instruments support stronger comparisons.",
+  "items": [
+    {
+      "title": "Six missing halls return to the walk",
+      "description": "The declared twelve-hall order was already doing useful work. We restored its six omitted museum entries and retained the encounter-before-explanation move from Sine Space to Unit Circle.",
+      "before": "Intro → Pendulum → Sine Space → Effect Sound → AirMusic → Synthesis Lab",
+      "after": "Intro → Pendulum → Sine Space → Unit Circle → Propagation → Effect Sound → Bernini → John Cage → AirMusic → Sky Stairs → Beats / TrigWalkingPath → Synthesis Lab",
+      "text_kind": "museum route",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md"
+    },
+    {
+      "title": "The rods must stay with the circle",
+      "description": "A local/world-coordinate error let Unit Circle’s projection rods drift by metres when their parent moved. The saved original fails 51 of 102 transformed-parent checks; the repair passes all 102. The chapter and all six placements remain.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/opening/AUDIT.md"
+    },
+    {
+      "title": "Give the lattice a question it can answer",
+      "description": "The new panel repeats the same initial state and forcing with coupling present or absent. Original parameters and the retained analytic tile field remain. A body-sized collision check moved the new console to a clear edge.",
+      "images": [
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/propagation-replay-before/lattice.png",
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/propagation-final-after/lattice.png"
+      ],
+      "captions": [
+        "Before · frozen original artifact replayed in its restored museum hall.",
+        "After · comparison controls at the same placement; SINE state at 2.50 s."
+      ],
+      "image_note": "Actual Godot museum, matched camera. Only the new opt-in panel is added. Surrounding procedural dressing is not pixel-locked. The two wave representations still overlap visually; broader staging remains open.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/middle/AUDIT.md"
+    },
+    {
+      "title": "Same pulse, different relation",
+      "description": "At 1.40 simulated seconds, the coupled lattice has passed movement to its neighbours. In the independent version they stay still while the centre rises higher. The switch restarts the same pulse rather than severing a wave midway.",
+      "images": [
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/propagation-final-after/pulse-coupled.png",
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/propagation-final-after/pulse-independent.png"
+      ],
+      "captions": [
+        "Experiment A · COUPLED / PULSE; neighbouring displacement is visible.",
+        "Experiment B · INDEPENDENT / PULSE; isolated centre near the top of the frame."
+      ],
+      "image_note": "Two states of the updated artifact, not before/after software versions. Same elapsed simulation time and camera; three clear approach capsules do not certify a headset visit."
+    },
+    {
+      "title": "WaveFunctions Sine Space — revised passage",
+      "description": "Restores the intended Sine Space → Unit Circle reveal; the previous sentence followed the shortened route to Effect Sound.",
+      "before": "In the next room a sine enters another sine's phase. There will be no gap to walk through. We will listen for what their relation has made possible.",
+      "after": "Ahead, a point travels around a circle while a graph grows beside it. Follow the point and try to predict the graph. After walking among these folds, we can look at one way their returning values are made.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_Sine_Space.diff"
+    },
+    {
+      "title": "WaveFunctions AirMusic — revised passage",
+      "description": "Align the writing with the retained encounter and its available comparison.",
+      "before": "Every note here is one sinusoid under one decay. The Synthesis Lab adds such sinusoids together on purpose; what the ribbon drew for you as a sum is where that begins.",
+      "after": "Every note here is one sinusoid under one decay. Sky Stairs next asks what a sampled curve needs before it can become a place for a body. The beat display then separates two ongoing motions from their sum. In the Synthesis Lab, we will add such sinusoids together on purpose; what the ribbon drew for you as a sum is where that begins.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_AirMusic.diff"
+    },
+    {
+      "title": "WaveFunctions Effect Sound — revised passage",
+      "description": "Reconnect the next hall while retaining the later auditory return.",
+      "before": "In AirMusic, a strike starts a response that continues after contact. Carry this habit to the bar: give a sound time to change before deciding what sort of body has answered.",
+      "after": "In AirMusic, a strike will start a response that continues after contact. First, Bernini gives periodic change another direction: along the height of a column. Walk around it. What changes as you move, and what keeps moving when you stand still?",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_Effect_Sound.diff"
+    },
+    {
+      "title": "WaveFunctions 3D Wave Propagation — revised passage",
+      "description": "Align the writing with the retained encounter and its available comparison.",
+      "before": "Choose one sphere near the centre of the lattice. Follow that sphere alone for several movements. Then widen your attention to its neighbours. Compare when they rise together and when their displacements differ, without abandoning your first sphere as a reference.",
+      "after": "Choose one sphere near the centre of the lattice. Follow that sphere alone for several movements. Then widen your attention to its neighbours. Their movement can be much smaller. Compare when they rise together and when their displacements differ, without abandoning your first sphere as a reference. The panel begins with COUPLED and SINE. RESET returns the same still lattice and starts its drive again.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_3D_Wave_Propagation.diff"
+    },
+    {
+      "title": "WaveFunctions 3D Wave Propagation — revised passage",
+      "description": "Align the writing with the retained encounter and its available comparison.",
+      "before": "Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. The program gathers those forces and then updates the oscillators' velocities and displacements. The centre receives a continuing excitation in this version, so the surrounding motion has a source.",
+      "after": "Now select PULSE on the panel. After a short wait, the centre receives one push. Follow what happens beyond it. Change COUPLED to INDEPENDENT and watch the same push from the same still beginning. What has stopped travelling? Return to COUPLED before explaining the difference. Every button restarts the comparison; it does not cut a moving wave midway.\n\nEach oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. The program gathers those forces and then updates the oscillators' velocities and displacements. SINE keeps driving the centre; PULSE adds a single initial velocity after half a second. The same source can now be tried with and without the links.\n\nThe readout reports the largest displacement reached by one immediate neighbour since the reset, in millimetres. Under SINE it may be easy to miss that small response among the larger centre movements. PULSE makes a different comparison visible without changing the spring, mass or damping settings. A measurement can help you notice a motion; it does not replace watching which sphere moves next.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_3D_Wave_Propagation.diff"
+    },
+    {
+      "title": "WaveFunctions 3D Wave Propagation — revised passage",
+      "description": "Align the writing with the retained encounter and its available comparison.",
+      "before": "Changing the coupling or disconnecting selected neighbours would extend this investigation; those are proposed variations rather than controls available here.",
+      "after": "The switch disconnects all the links at once. Removing only selected neighbours remains a further experiment: a different boundary inside the same lattice.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_3D_Wave_Propagation.diff"
+    },
+    {
+      "title": "WaveFunctions Effect Sound — revised passage",
+      "description": "Align the writing with the retained encounter and its available comparison.",
+      "before": "The room calls this FM synthesis. This expression implements phase modulation, which also changes instantaneous frequency.",
+      "after": "The instrument names this phase modulation: an FM-style synthesis method that also changes instantaneous frequency.",
+      "text_kind": "book prose",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/diffs/WaveFunctions_Effect_Sound.diff"
+    },
+    {
+      "title": "Name the synthesis method clearly",
+      "description": "The two-ball instrument exposes phase modulation. Its more legible title now says so while retaining the familiar FM-style context. The signal generator is unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/sound-before/instrument.png",
+        "doc/book/iterations/2026-09-19-wavefunctions-review/middle/sound-after/instrument.png"
+      ],
+      "captions": [
+        "Before · original title from the operating view.",
+        "After · Phase modulation / FM-style synth."
+      ],
+      "image_note": "Matched actual Godot museum views. No new human listening test or DSP alteration is claimed.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/middle/AUDIT.md"
+    },
+    {
+      "title": "Let comparison arrive before the recipe name",
+      "description": "Synthesis now shows ARRIVAL RECIPE until H1 ALONE or BASELINE. Sliders, coefficients, sum and formula remain visible. Its existing chapter already asks for those comparisons, so the text stays intact.",
+      "images": [
+        "doc/book/iterations/2026-09-19-wavefunctions-review/ending/before/museum/arrival.png",
+        "doc/book/iterations/2026-09-19-wavefunctions-review/ending/after/museum/arrival.png"
+      ],
+      "captions": [
+        "Before · the approximate sawtooth name appears on arrival.",
+        "After · the name waits; finite-family caption replaces a universal claim."
+      ],
+      "image_note": "Actual museum, same bench scale, camera world Y 1.7 m and held waveform phase. Nineteen checks pass per run; upper labels remain low contrast, and headset reach is still untested.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/ending/AUDIT.md"
+    },
+    {
+      "title": "Preserve what is already working",
+      "description": "Eight final chapters stay byte-for-byte unchanged; all 132 authored placements and roles remain. Bernini, Cage, the struck voices, the stairs and the beat display already sustain distinct questions. Supporting descriptions now catch up with that precision. The omitted bar source is supplied separately without changing the original review package.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md"
+    },
+    {
+      "title": "What remains to experience",
+      "description": "The twelve-hall route contract passes 52 native checks. A full physical walk through the restored halls, complete stair ascent, human listening and headset comfort are still open. Derived indexes retain known layer-size warnings; they are not spatial certification. Randomness is next.",
+      "report": "doc/book/iterations/2026-09-19-wavefunctions-review/verification.json"
+    }
+  ]
+}

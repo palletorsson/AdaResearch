@@ -1,0 +1,94 @@
+{
+  "actual_endless_museum": true,
+  "camera_position": "(5.5, 1.65, 10.5)",
+  "cards": [
+    {
+      "aabb_position": "(2.4592, 0.68, 8.636)",
+      "aabb_size": "(0.0816, 1.44, 1.728001)",
+      "caption": "WORLD",
+      "channel": "point_one_main",
+      "children": [
+        {
+          "class": "MeshInstance3D",
+          "name": "Frame",
+          "text": ""
+        },
+        {
+          "class": "MeshInstance3D",
+          "name": "Card",
+          "text": ""
+        },
+        {
+          "class": "Label3D",
+          "name": "Value",
+          "text": "x = 8.50\ny = 0.99\nz = 5.50"
+        },
+        {
+          "class": "Label3D",
+          "name": "SpaceCaption",
+          "text": "WORLD"
+        }
+      ],
+      "display_scale": 2.4,
+      "position": "(2.5, 1.4, 9.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "space": "world",
+      "values": "x = 8.50\ny = 0.99\nz = 5.50"
+    },
+    {
+      "aabb_position": "(2.4592, 0.68, 10.636)",
+      "aabb_size": "(0.0816, 1.44, 1.728001)",
+      "caption": "LOCAL",
+      "channel": "point_one_main",
+      "children": [
+        {
+          "class": "MeshInstance3D",
+          "name": "Frame",
+          "text": ""
+        },
+        {
+          "class": "MeshInstance3D",
+          "name": "Card",
+          "text": ""
+        },
+        {
+          "class": "Label3D",
+          "name": "Value",
+          "text": "x = 2.67\ny = 0.73\nz = -4.67"
+        },
+        {
+          "class": "Label3D",
+          "name": "SpaceCaption",
+          "text": "LOCAL"
+        }
+      ],
+      "display_scale": 2.4,
+      "position": "(2.5, 1.4, 11.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "space": "local",
+      "values": "x = 2.67\ny = 0.73\nz = -4.67"
+    }
+  ],
+  "failures": [],
+  "frame_position": "(4.5, -0.1, 12.5)",
+  "frame_scale": "(1.5, 1.5, 1.5)",
+  "headset_verified": false,
+  "map": "Point_One",
+  "note": "Current source, isolated museum control, existing museum overrides retained. Screenshot is an observation, not a VR comfort test.",
+  "point_id": "point_one_main",
+  "point_position": "(8.5, 0.99, 5.5)",
+  "renderer": "Windows",
+  "sightlines": [
+    {
+      "hit": "none",
+      "position": "none",
+      "space": "world"
+    },
+    {
+      "hit": "none",
+      "position": "none",
+      "space": "local"
+    }
+  ],
+  "tag": "after"
+}

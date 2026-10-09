@@ -1,0 +1,1271 @@
+{
+ "hall": "Array_Patterns",
+ "hall_description": "Pattern making through arrays. Small tiles become carpets. Handmade meets computational - the mathematics of textiles, tiles, and wallpaper.",
+ "chapter_opening": "",
+ "stations": [
+  {
+   "token": "pattern_tile_4x4",
+   "cell": [
+    7,
+    5
+   ],
+   "what_it_is": "Basic 4x4 tile pattern editor. Simple repeat mode.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_puzzle.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/pattern_tile_puzzle.tscn, commons/primitives/arrays/pattern_tile_puzzle.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "vr_tile_editor_mirror",
+   "cell": [
+    9,
+    5
+   ],
+   "what_it_is": "VR tile editor starting in kaleidoscope mirror mode. Design symmetric patterns and see them tile across a floor carpet.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "VR Tile Editor",
+     "set_in": "_create_labels",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "lattice",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Wallpaper Group %d",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Mode %d",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/vr_tile_editor.tscn, commons/primitives/arrays/vr_tile_editor.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "pattern_tile_mirror",
+   "cell": [
+    11,
+    5
+   ],
+   "what_it_is": "4x4 tile with mirror symmetry (kaleidoscope effect).",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_puzzle.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/pattern_tile_puzzle.tscn, commons/primitives/arrays/pattern_tile_puzzle.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "science_screen",
+   "cell": [
+    13,
+    5
+   ],
+   "what_it_is": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+   "configured_as": [
+    "mode:grid"
+   ],
+   "readable_text": [
+    {
+     "text": "X POSITION",
+     "set_in": "_draw_point_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "Y POSITION",
+     "set_in": "_draw_point_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "DISTANCE",
+     "set_in": "_draw_point_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "TRAIL",
+     "set_in": "_draw_point_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "SCORE",
+     "set_in": "_draw_point_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "|AB| LENGTH",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "THETA ANGLE",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "DELTA X",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "DELTA Y",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "MIDPOINT",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "(%.2f, %.2f)",
+     "set_in": "_draw_line_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "POINTS",
+     "set_in": "_draw_dot_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "PATH LENGTH",
+     "set_in": "_draw_dot_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "%.3f m",
+     "set_in": "_draw_dot_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "ZOOM",
+     "set_in": "_draw_dot_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "%.0f cm",
+     "set_in": "_draw_dot_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "AREA",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "PERIMETER",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "ANGLES",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "%.0f  %.0f  %.0f",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "AB / BC / CA",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "%.2f / %.2f / %.2f",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "CENTROID",
+     "set_in": "_draw_triangle_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "EDGE LENGTH",
+     "set_in": "_draw_net_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "VERTICES",
+     "set_in": "_draw_net_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "EDGES",
+     "set_in": "_draw_net_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "FACES",
+     "set_in": "_draw_net_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "V-E+F",
+     "set_in": "_draw_net_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "AMPLITUDE",
+     "set_in": "_draw_wave_tracker",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "FREQUENCY",
+     "set_in": "_draw_wave_tracker",
+     "file": "science_screen.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/artifacts/science_screen/science_screen.tscn, commons/artifacts/science_screen/science_screen.gd, commons/artifacts/science_screen/screen_overlay.gd"
+  },
+  {
+   "token": "tiling_demo",
+   "cell": [
+    7,
+    7
+   ],
+   "what_it_is": "Italian tiling motifs gallery. 17 wallpaper groups, multi-layer composition. Checkerboard to cosmatesque — field study preparation.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "ITALIAN TILING MOTIFS",
+     "set_in": "_create_motif_gallery",
+     "file": "tiling_demo.gd"
+    },
+    {
+     "text": "COMPOSED FLOORS",
+     "set_in": "_create_composed_floors",
+     "file": "tiling_demo.gd"
+    },
+    {
+     "text": "Floor",
+     "set_in": "_spawn_composed_floor",
+     "file": "tiling_demo.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/tiling_demo.tscn, commons/primitives/arrays/tiling_demo.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "pattern_tile_plate",
+   "cell": [
+    12,
+    8
+   ],
+   "what_it_is": "Dieter Rams-styled pattern studio. Paint a 4x4 grid, see it tile into a carpet using 17 wallpaper symmetry groups. Integrated cream plate with palette, preview, and symmetry controls.",
+   "configured_as": [
+    "p4m"
+   ],
+   "readable_text": [
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_build_plate",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "PREVIEW",
+     "set_in": "_build_preview",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "◄LAT",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ": -0.12,",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "GRP►",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ": -0.06,",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "MODE",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ": 0.06,",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "CARPET",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ": 0.12,",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "P4M",
+     "set_in": "_build_controls",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": ").to_upper(), info.get(",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_plate.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/pattern_tile_plate.tscn, commons/primitives/arrays/pattern_tile_plate.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "grid_model",
+   "cell": [
+    9,
+    10
+   ],
+   "what_it_is": "Miniature interactive model of the map grid — grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "layout_data[z][x]",
+     "set_in": "_build_array_panel",
+     "file": "grid_model.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "algorithms/arrays/grid_model/grid_model.tscn, algorithms/arrays/grid_model/grid_model.gd, algorithms/arrays/grid_model/grid_model_cube.gd"
+  },
+  {
+   "token": "pattern_tunnel_machine",
+   "cell": [
+    24,
+    11
+   ],
+   "what_it_is": "A subway-tiled walkway tunnel that paints itself tile by tile (floor then walls then ceiling), driven by a pattern-maker console at the mouth. The console's GROUP / MOTIF / PALETTE / SPEED sliders re-skin the whole tube through any of the 17 wallpaper symmetry groups; touching a control surges the f",
+   "configured_as": [
+    "lesson:addresses",
+    "tunnel_length:6",
+    "group_index:0",
+    "platform_route:true"
+   ],
+   "readable_text": [
+    {
+     "text": "configure",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "PATTERN  TUNNEL",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "GROUP",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "MOTIF",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "period",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "SPEED",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "changed",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "randomized",
+     "set_in": "_build_console",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "GROUP   %s\\nMOTIF   %s\\nPALETTE %s\\nSPEED   %.1f",
+     "set_in": "_update_monitor",
+     "file": "pattern_tunnel_machine.gd"
+    },
+    {
+     "text": "control_scale",
+     "set_in": "_build",
+     "file": "display_console.gd"
+    },
+    {
+     "text": "ARRAY / SURFACE / PASSAGE",
+     "set_in": "_ready",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "FOLLOW AN ADDRESS",
+     "set_in": "_ready",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "EACH FACE STARTS ITS OWN GRID",
+     "set_in": "_ready",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "FLOOR",
+     "set_in": "refresh",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "RIGHT WALL",
+     "set_in": "refresh",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "/ [%d,%d]\\nSOURCE [%d,%d] = %d\\nCELL %.0f cm / MOTIF %.1f m\\nGRID %s",
+     "set_in": "refresh",
+     "file": "tunnel_address_lesson.gd"
+    },
+    {
+     "text": "OFF",
+     "set_in": "refresh",
+     "file": "tunnel_address_lesson.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "Take the opening into the side bay. A six-metre passage stands on a raised platform; its console is beside the ramp on the lower floor. Three wedges make a broad ascent. Side walls close the routes around the tunnel, so crossing this bay takes you through it and down the ramp at the far end. The source has sixteen cells. There are considerably more squares inside the tunnel. Find the pale yellow indicator on the floor and compare its position with the console's two addresses.\n\nPress COL +. The surface address advances. Press it again, watching the smaller source address. After four steps, one number has returned while the other has moved on.\n\n```gdscript\ncolumn % 4\nrow % 4\n```\n\nThese are the wrapping expressions used by the inspector. It displays addresses as `[row, column]`, then the palette index stored there. Surface `[10,1]` returns to source `[2,1]`. Another place can consult the same memory.\n\nThe tunnel's renderer first computes a small swatch from the source and its translation rule. The shader samples that swatch across each face. The inspector follows the same cell coordinates back to the four-by-four source. You can move the indicator without changing a single stored colour.\n\nNow press FACE. The indicator moves to the right wall. The panel still speaks in rows and columns, but those directions occupy another plane. On the floor, one direction runs across the passage and the other along it. On the right wall, columns run along the passage and rows descend from the ceiling. The address needs a surface to acquire a direction in the room.\n\nWalk inside. Follow a line to the corner between floor and wall. Each face begins its own grid. A shared motif does not promise that its edges will join there. The corner exposes a decision that was harder to notice on a single flat panel: where should counting begin, and which way should it proceed?\n\nReturn to CELL SIZE. A cell now occupies sixty centimetres instead of forty. The source still has four cells across. Its whole motif therefore spans 2.4 metres instead of 1.6. In the previous room, forty centimetres described an entire motif; here the mark has been enlarged so you can inspect its individual addresses. The same number needs its unit and its referent.\n\nThe passage has not grown. Its width remains 3.6 metres and its height 3.2. Some divisions fit exactly; others leave a cut cell at an edge. A room does not",
+   "source": "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn, commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd, commons/artifacts/pattern_tunnel/display_console.gd"
+  },
+  {
+   "token": "pattern_tile_brick",
+   "cell": [
+    7,
+    13
+   ],
+   "what_it_is": "Tile with brick/half-drop offset. Classic masonry pattern.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_puzzle.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "Back among the earlier stations, look at the brick preview. Follow a seam through two neighbouring rows. The boundary steps sideways. Compare that stagger with the tunnel's straight cell divisions and the corner where two faces restart their counting.\n\nA stagger changes how rows relate within a field. A corner changes how a field is carried into space. They can resemble one another as disruptions, but they ask for different changes to the implementation. Keep the motif, the lookup and the carrier available as separate things to question.",
+   "source": "commons/primitives/arrays/pattern_tile_puzzle.tscn, commons/primitives/arrays/pattern_tile_puzzle.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "pattern_tile_herringbone",
+   "cell": [
+    11,
+    13
+   ],
+   "what_it_is": "Tile with herringbone weave pattern.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_puzzle.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/pattern_tile_puzzle.tscn, commons/primitives/arrays/pattern_tile_puzzle.gd, commons/primitives/arrays/array_sequencer.gd"
+  }
+ ]
+}

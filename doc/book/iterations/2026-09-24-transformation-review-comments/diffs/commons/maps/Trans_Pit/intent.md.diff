@@ -1,0 +1,13 @@
+--- before/commons/maps/Trans_Pit/intent.md
++++ commons/maps/Trans_Pit/intent.md
+@@ -6,8 +6,8 @@
+ 
+ Critical angle: A transformation can preserve the object's dimensions or proportions while withdrawing a route from a body. Mathematical invariants and bodily opportunities describe different relations. Timing matters as much as the eventual configuration.
+ 
+-Key artifacts: pusher_block; rotation_cube utilities (rc), rather than a revolving_wall artifact; grower_block; transformation_airlock as the final combined passage. Ball launchers complicate the timing of the middle zone. Legacy fire tokens are currently disarmed by the embedded museum, so no lethal consequence is claimed.
++Key artifacts: pusher_block; rotation_cube utilities (rc), rather than a revolving_wall artifact; grower_block; transformation_airlock as the final combined passage. Ball launchers complicate the timing of the middle zone. Legacy fire utilities were removed on 24 September 2026, including those on the observation floor. The timed bodies remain available to approach or watch from beside them.
+ 
+-Validation: commons/testing/probe_transformation_pit.gd opens the actual endless museum, reads the instantiated map configurations, tests pusher endpoints and pauses, and checks grower mesh/collider agreement and floor contact across a full cycle. This does not establish headset comfort, pushing strength for every player rig, or the current museum's fire/death policy. Those remain embodied review questions.
++Validation: commons/testing/probe_transformation_pit.gd opens the actual endless museum, reads the instantiated map configurations, tests pusher endpoints and pauses, and checks grower mesh/collider agreement and floor contact across a full cycle. This does not establish headset comfort, pushing strength for every player rig. Those remain embodied review questions.
+ 
+ Alignment review 2026-09-17: local display title is The Moving Boundary; canonical map ID remains Trans_Pit. The first and third pushers no longer end in solid walls, and the third has its own lane. Explicit half-height seats keep their cached paths above the floor. Growers keep a common tempo as a repetition study. The closing question is which body can use a clearance, not whether one assumed body survives it.

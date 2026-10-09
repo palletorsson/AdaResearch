@@ -1,0 +1,29 @@
+{
+  "artifact_only": false,
+  "checks": [
+    {
+      "message": "before snapshot compiles: commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "ok": true
+    },
+    {
+      "message": "actual museum contains Flow_Field segment",
+      "ok": true
+    },
+    {
+      "message": "Flow_Field uses actual authored grid",
+      "ok": false
+    }
+  ],
+  "failures": [
+    {
+      "message": "Flow_Field uses actual authored grid",
+      "ok": false
+    }
+  ],
+  "headset_tested": false,
+  "learner_verified": false,
+  "observations": {
+
+  },
+  "replay_before": true
+}

@@ -1,0 +1,158 @@
+{
+  "incoming": {
+    "sha256": "e15871f9782b7eaa60fce93c943b8db4220ac9b1f66e79ac8e0e23da001d1efa"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst FaceBody = preload(\"face_body.gd\")\n# Connectivity is supplied; this lesson generates the positions.\nconst FACES: Array[Vector3i] = [\n    Vector3i(2, 0, 4), Vector3i(2, 4, 1),\n    Vector3i(2, 1, 5), Vector3i(2, 5, 0),\n    Vector3i(3, 4, 0), Vector3i(3, 1, 4),\n    Vector3i(3, 5, 1), Vector3i(3, 0, 5)]\nvar small_points: Array[Vector3] = []\nvar large_points: Array[Vector3] = []\n\nfunc _ready() -> void:\n    small_points = octahedron_positions(0.3)\n    large_points = octahedron_positions(0.6)\n    var small := FaceBody.new()\n    var large := FaceBody.new()\n    small.position = Vector3(-0.7, 1.1, 0)\n    large.position = Vector3(0.7, 1.1, 0)\n    add_child(small)\n    add_child(large)\n    small.show_faces(small_points, FACES)\n    large.show_faces(large_points, FACES)\n\nfunc octahedron_positions(radius: float) -> Array[Vector3]:\n    assert(radius > 0.0)\n    var result: Array[Vector3] = []\n    for axis in [Vector3.RIGHT, Vector3.UP, Vector3.BACK]:\n        result.append(axis * radius)\n        result.append(-axis * radius)\n    return result\n",
+      "after": "extends Node3D\nconst ResolutionPoint = preload(\"resolution_point.gd\")\nvar point := ResolutionPoint.new()\nvar comparison := ResolutionPoint.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    point.position = Vector3(-0.3, 1.12, 0)\n    comparison.position = Vector3(0.3, 1.12, 0)\n    add_child(point)\n    add_child(comparison)\n    add_child(message)\n    message.position = Vector3(0, 1.65, 0)\n    message.pixel_size = 0.002\n\nfunc _process(delta: float) -> void:\n    point.advance(delta)\n    comparison.advance(delta)\n    if Input.is_action_just_pressed(\"ui_accept\"):\n        point.reset_resolution()\n        comparison.reset_resolution()\n    message.text = \"RINGS %d   SEGMENTS %d\" % [point.sphere.rings, point.sphere.radial_segments]\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "point_body.gd",
+      "sha256": "cfa9ddfe56b7e69780029404689c23ce0bcef968be0074d6581b9ebd010b8a7d"
+    },
+    {
+      "path": "resolution_point.gd",
+      "sha256": "ce1f4e0dc8dd49f4da2b20c92ccf7ac4d0023c4d99f448a4b69ff6fdac76c5f6"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Godot/tutorial.md",
+      "sha256": "f1803aa7894f5b16b47755911fb2d807e94258e7036c4f7bdc4a760b668bfcab"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/lesson.gd",
+      "sha256": "cdd4835dbcd5e78e37a2b4ccdccf691317a202d7f9743fc71623467b62613238"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/point_body.gd",
+      "sha256": "cfa9ddfe56b7e69780029404689c23ce0bcef968be0074d6581b9ebd010b8a7d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/resolution_point.gd",
+      "sha256": "ce1f4e0dc8dd49f4da2b20c92ccf7ac4d0023c4d99f448a4b69ff6fdac76c5f6"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/controlled_resource_is_visible_resource",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/released_pauses",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/real_pickup",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/two_time_steps",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/frame_schedule_independent",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/release_preserves_partial_interval",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/regrab_continues",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/valid_lower_bounds",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/size_and_collider_unchanged",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/neighbour_independent",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/reset_geometry_and_clock",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/readout_matches_mesh",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/rings_only",
+      "kind": "native"
+    },
+    {
+      "id": "resolution/segments_only",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Godot/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/point_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/resolution_point.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

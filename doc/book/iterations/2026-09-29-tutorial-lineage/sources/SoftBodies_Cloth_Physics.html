@@ -1,0 +1,277 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Cloth_Physics · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Cloth_Physics">← Tutorial lineage</a></p><h1>SoftBodies Cloth Physics</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Cloth_Physics/final.md">Raw captured source</a></p><pre># Which points must stay?
+
+&lt;!-- @cloth_straps --&gt;
+
+Eight strips hang in a rank, each a forearm wide and twice your height. Their edges overlap, so from straight on the rank reads as one surface. Walk along the front of it. Walk behind it. Unlike the cube, this surface does not close around an inside. There is no enclosed volume for pressure to inflate.
+
+Stay with one strip long enough to watch it. There is no motor here. The strips were built hanging and have been settling under gravity ever since; a sheet this long can keep stretching and swinging well after it was made. Whatever shape it has now, it has not finished arriving at.
+
+Look up to where it meets the top. That edge does not move at all. Everything loosening below it begins at that stillness.
+
+So something up there is being held. Before naming it, find out what.
+
+Press **SUPPORT**. The gantry the strips appeared to hang from vanishes, and they go on hanging — the held edge in the same place, the rest still free to move. Press it again for a hoop, again for a mast. Three pieces of architecture, and not one of them changes where the cloth is held.
+
+The rule that holds that edge never looks at the frame:
+
+```gdscript
+var top: bool = absf(verts[i].y - ymax) &lt; 0.01
+var keep: bool = top and (mode == 0 or (mode == 1 and absf(absf(verts[i].x) - xmax) &lt; 0.01))
+sb.set_point_pinned(i, keep)
+```
+
+`verts` is the strip&#x27;s own rest geometry, in its own coordinates. `ymax` is the highest value in it. A point is held if its height matches that top to within a hundredth of a metre — eight points of the hundred and twelve in each strip. The strip is a mesh of triangles; its points are linked, and the pin rule chooses which must stay. That rule does not consult the frame. The apparent reason for the cloth to hang was built for you to see.
+
+A convincing support does not prove how a simulation is attached to it. You have just taken the support away and watched the attachment survive it.
+
+Press **SUPPORT** once more and a wall arrives behind the rank. The opening behind the cloth is now occupied by a solid surface. The pins stay where they were, but the passage changes. The pin rule can ignore a wall that a body must go around.
+
+Now change what is actually holding. **PINS** keeps only the two points where that top row reaches its outer edges: from eight to two. Watch the top edge while it happens. Six points that were held can now sag between the two corners. The edge remains, but its straightness was being maintained.
+
+Then press **RELEASE**, and the last two let go.
+
+The material never changed while the pins did. The solver ran the same way on the same mesh. What changed is how many of its points were forbidden to move — eight, then two, then none. Boundary conditions are not a detail of the setup. Here they are most of what you have been looking at.
+
+The strips are on the floor now. **REBUILD** makes a fresh hanging rank. Keep its top row held and try **STIFFNESS**. We can now compare two ways of changing the silhouette: change how strongly the surface resists deformation, or change which of its points may move.
+
+When we call an object compliant, how much of that belongs to the object, and how much to the arrangement holding it?
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @softstopscene --&gt;
+
+Four bodies stand nearby. They began falling when the room loaded, and by the time you reach them their timers may already have stopped them. These are soft spheres kept from the earlier collection, not woven cloth. You can arrive after the event and still meet its shape.
+
+A narrow rail crosses each landing. Look for where a body has come to rest: on the bar, against a post, or on the floor below. Then press **LANDING**. It exchanges the support and starts a new fall; the pan that arrives offers a floor between two walls. Stay for the fall this time.
+
+Worth knowing before you read too much into any held shape: the stop raises damping and stiffness rather than recording the vertex positions, so what you are looking at is partly the solver&#x27;s and not a destination the material was travelling toward.
+
+Two questions leave this room together. What makes a body deform, and what makes us stop looking?
+
+On the way out the floor runs empty for a long time, and then a few cells stand higher than the rest and one is missing altogether — the fixed points of the room this hall used to be, left where they were when everything around them was moved.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+&lt;!-- @tension_membrane --&gt;
+
+Four slender posts hold a dark, narrow-waisted surface. Between them it has sunk towards the floor. The pink bead at its edge waits within reach. Pull it towards you. A crease travels back towards an attachment that does not move.
+
+Let go. The bead moves without your hand, passes through a lower position, and comes back more quietly. Stay for the small movements after the large one.
+
+Add a load. A dark weight gathers beneath the middle. Pull again and release. The same four points are held, but the surface now has something more to carry. It settles lower. Removing the load allows another return.
+
+Nengudi&#x27;s stretched hosiery brings a used material, close to skin, into this question of how far something can give. Our surface has no wearer and no remembered damage. Each return is calculated from lengths that the code has kept intact. To recover here is to approach an arrangement the program still remembers.
+
+The anchors have asked nothing of themselves. We have asked the middle to accommodate another weight.
+
+&lt;!-- @ --&gt;
+
+Carry the fixed edge into the next hall. There, the support itself moves, and the bodies hanging from it will know.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Cloth_Physics/tutorial.md">Raw captured source</a></p><pre># Which points must stay?
+
+&lt;!-- @cloth_straps --&gt;
+
+Walk along the hanging strips. Each begins as an open surface. Unlike the pressurized cube, it has no enclosed interior for pressure to inflate. The upper edge holds while the rest hangs below it.
+
+Press PINS to keep only the upper corners. Look for the difference before naming it. The material settings have not changed. The allowed motion has: points that were fixed can now participate in the sag. PINS alternates those two arrangements; RELEASE removes the pins, and REBUILD makes fresh strips with their upper rows fixed again.
+
+```gdscript
+sb.set_point_pinned(i, keep)
+```
+
+For each strip, the desk finds the top row in its mesh coordinates and chooses which indices to pin. This is a boundary condition written into an array. The frame makes that condition visible, but the frame and the pinning rule are distinct constructions. A convincing support does not prove how the simulation is attached to it.
+
+Try STIFFNESS after choosing a support. We now have two ways to change the silhouette: change the material response, or change which points may move. When we describe an object as compliant, how much of that description belongs to the object, and how much to the arrangement holding it?
+
+
+
+&lt;!-- @softstopscene --&gt;
+
+The four falling bodies provide a second encounter. They are soft spheres, retained from the earlier collection, not pieces of woven cloth. LANDING changes the support below them between a floor, a narrow pan, a rail and a cone. Rebuilding that comparison also starts a new fall.
+
+Their timers disable processing and raise damping and stiffness at scheduled moments. This stopping method is not an explicit snapshot of all vertex positions. The apparent crumple depends on the solver as well as the timer; it is not a shape the material was destined to have. Two shipped stop times are equal; four specimens do not automatically mean four different moments.
+
+This prepares two questions we will return to: what makes the body deform, and what makes us stop looking? Carry the fixed edge into the next hall. There, the support itself moves.
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Return: A little give
+
+Change the added load while preserving the four anchors and material compliance. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses soft, constraint, force. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`tension`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-02-nengudi-a-little-give/index.html). Release the pink handle before RESET or the preset pull. The four supports stay fixed throughout.
+
+&lt;!-- study-edit:tension_membrane --&gt;
+
+### One source change: A little give
+
+In tension_score.gd, change the last entry of LOAD_KG from 3.0 to 2.0. Predict and compare the settled centre height after the same pull and release. Keep the pins and compliance fixed. The constraint solver and mesh renderer are supplied; no new foundational capability is required.
+
+```gdscript
+const LOAD_KG := [0.0, 1.0, 2.0]
+```
+
+Source: `commons/artifacts/spine_studies/tension_score.gd`. Use the prepared scene to run and compare.
+
+&lt;!-- tension-reference --&gt;
+
+### Pull, wait, release
+
+This return follows the hanging strips: those changed the fixed points. Here the four corner points stay pinned. The pink bead is one additional prescribed point only while you hold it. Desktop: right-click the bead, move your view, then right-click to release. XR uses the ordinary pickup grip. HOLD A PULL supplies the same target each time; RELEASE lets it move again. Release a hand-held bead before using the preset or RESET.
+
+Start unloaded, use HOLD A PULL, then RELEASE. Watch the bead and the centre height. LOAD selects the next downward load: 0, 1, 3, then 0 kg. Compare one load at a time. MORE / LESS GIVE changes the links&#x27; compliance independently of that load. RESET restores the unloaded, settled starting configuration and the firmer setting.
+
+The bead and black load marker are representations. The solver distributes the additional downward force over nine central nodes; there is no separate falling rigid weight. The remaining mesh is visual, not a barrier to the player. The four supports and the museum floor are solid. A bounded grip target and floor limit keep the small study in its space.
+
+### The next close reading
+
+Begin with the single array edit above. The supplied solver keeps three arrays: current positions, previous positions and rest positions. Gravity changes the free points. Distance links share the displacement between their ends; four indices are excluded from movement. A held bead temporarily adds another exclusion. Releasing it removes that exclusion without replacing its current position with its rest position.
+
+`compliance` controls the distance links&#x27; response; `damping` removes motion over time. They do different jobs. A softer response may settle lower, while greater damping makes the journey quieter. Neither creates wear or a remembered injury. The rest lengths remain unchanged.
+
+
+### Reference
+
+Whitney identifies nylon hosiery and places the work in the RSVP series. Nengudi discusses bodily and psychological elasticity and the energy associated with previously worn material. Ada makes an original four-anchor membrane encounter, not a reconstruction or a measurement of her sculpture. Its knit-like opaque surface is procedural. It models reversible distance constraints, damping and a distributed downward load, with a floor limit; it does not simulate nylon, damage, self-collision, skin or a human body.
+
+[Senga Nengudi: Internal I (1977, refabricated 2014)](https://whitney.org/collection/works/46609).
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Cloth_Physics/technical.md">Raw captured source</a></p><pre># Which points must stay? — implementation
+
+Primary source scenes:
+
+- `res://algorithms/softbodies/cloth_straps/cloth_straps.tscn`
+- `res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers PINS, SUPPORT, STIFFNESS, RELEASE, REBUILD, LANDING, RULE, and blocks repeated activation during rebuilds. The seven controls occupy a four-column, two-row desk with a small inclined transparent readout.
+
+Walk along the hanging strips. Each begins as an open surface. Unlike the pressurized cube, it has no enclosed interior for pressure to inflate. The upper edge holds while the rest hangs below it.
+
+Press PINS to keep only the upper corners. Look for the difference before naming it. The material settings have not changed. The allowed motion has: points that were fixed can now participate in the sag. PINS alternates those two arrangements; RELEASE removes the pins, and REBUILD makes fresh strips with their upper rows fixed again.
+
+```gdscript
+sb.set_point_pinned(i, keep)
+```
+
+For each strip, the desk finds the top row in its mesh coordinates and chooses which indices to pin. This is a boundary condition written into an array. The frame makes that condition visible, but the frame and the pinning rule are distinct constructions. A convincing support does not prove how the simulation is attached to it.
+
+For a comparison that changes one condition at a time, follow PINS with RELEASE, then REBUILD before trying STIFFNESS. We now have two ways to change the silhouette: change the material response, or change which points may move. When we describe an object as compliant, how much of that description belongs to the object, and how much to the arrangement holding it?
+
+The four falling bodies provide a second encounter. They are soft spheres, retained from the earlier collection, not pieces of woven cloth. LANDING changes the support below them between a floor, a narrow pan, a rail and a cone. Rebuilding that comparison also starts a new fall.
+
+Their timers disable processing and raise damping and stiffness at scheduled moments. This stopping method is not an explicit snapshot of all vertex positions. The apparent crumple depends on the solver as well as the timer; it is not a shape the material was destined to have. Two shipped stop times are equal; four specimens do not automatically mean four different moments.
+
+This prepares two questions we will return to: what makes the body deform, and what makes us stop looking? Carry the fixed edge into the next hall. There, the support itself moves.
+
+The lesson token builds eight strips with 112 vertices each, at stiffness 0.34, damping 0.05 and simulation precision 5. The initial top row has eight pins per strip; PINS keeps the two corners, and RELEASE removes all pins. SUPPORT cycles gantry → none → hoop → mast → wall without changing those indices. The wall and other solid frame pieces can still collide; independence from the pin rule is not independence from the physics world. Godot Physics adds bending links as well as triangle-edge links.
+
+The map begins with the rail landing, whose bar is 0.14 m wide. The first LANDING press selects the pan. Rebuilding starts new bodies and timers; the stop raises damping and stiffness rather than preserving a vertex snapshot.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Installed application: A little give
+
+`tension_membrane` occupies a new adjoining bay, after the existing encounters. Cell [15, 57], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tension.tscn`. Original response to Senga Nengudi; no claim of exact reconstruction.
+
+Change the added load while preserving the four anchors and material compliance. Reuses soft, constraint, force; adds no prerequisite node. The display and main-player controls are supplied.
+
+&lt;!-- tension-reference --&gt;
+
+### Implementation and limits
+
+`tension_score.gd` contains a 25 by 9 network (225 nodes), four pinned corners, horizontal/vertical/diagonal distance links and eight compliant-constraint iterations per step. The fixed step is 1/120 second, with at most eight steps per physics update; under sustained overload simulation time slows instead of integrating an unstable large step. The initial five simulated seconds are settled before the handle is exposed. `tension_membrane.gd` fabricates the supports, rebuilds the displayed triangle surface and routes controls. `tension_handle.gd` uses the project&#x27;s XRToolsPickable and desktop grab callbacks.
+
+The model has units but no calibration against nylon. It has no self-collision, tearing, plasticity or contact against the visitor. The shader suggests a weave on an opaque surface. The added load is force distributed over a central patch, not added inertial mass. Pin positions and the original rest lengths survive every comparison. No claim of physical headset testing or Quest performance is made.
+
+
+### Reference
+
+Whitney identifies nylon hosiery and places the work in the RSVP series. Nengudi discusses bodily and psychological elasticity and the energy associated with previously worn material. Ada makes an original four-anchor membrane encounter, not a reconstruction or a measurement of her sculpture. Its knit-like opaque surface is procedural. It models reversible distance constraints, damping and a distributed downward load, with a floor limit; it does not simulate nylon, damage, self-collision, skin or a human body.
+
+[Senga Nengudi: Internal I (1977, refabricated 2014)](https://whitney.org/collection/works/46609).
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Cloth_Physics/intent.md">Raw captured source</a></p><pre># Intent
+
+How does fixing a boundary change the forms a surface can take?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Installed application: A little give
+
+`tension_membrane` occupies a new adjoining bay, after the existing encounters. Cell [15, 57], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tension.tscn`. Original response to Senga Nengudi; no claim of exact reconstruction.
+
+Change the added load while preserving the four anchors and material compliance. Reuses soft, constraint, force; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Cloth_Physics/critical.md">Raw captured source</a></p><pre># Which points must stay? — question the construction
+
+How does fixing a boundary change the forms a surface can take?
+
+Press PINS to keep only the upper corners. Look for the difference before naming it. The material settings have not changed. The allowed motion has: points that were fixed can now participate in the sag. PINS alternates those two arrangements; RELEASE removes the pins, and REBUILD makes fresh strips with their upper rows fixed again.
+
+For each strip, the desk finds the top row in its mesh coordinates and chooses which indices to pin. This is a boundary condition written into an array. The frame makes that condition visible, but the frame and the pinning rule are distinct constructions. A convincing support does not prove how the simulation is attached to it.
+
+The four falling bodies provide a second encounter. They are soft spheres, retained from the earlier collection, not pieces of woven cloth. LANDING changes the support below them between a floor, a narrow pan, a rail and a cone. Rebuilding that comparison also starts a new fall.
+
+Their timers disable processing and raise damping and stiffness at scheduled moments. This stopping method is not an explicit snapshot of all vertex positions. The apparent crumple depends on the solver as well as the timer; it is not a shape the material was destined to have. Two shipped stop times are equal; four specimens do not automatically mean four different moments.
+
+This prepares two questions we will return to: what makes the body deform, and what makes us stop looking? Carry the fixed edge into the next hall. There, the support itself moves.
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Installed application: A little give
+
+The anchors have asked nothing of themselves. We have asked the middle to accommodate another weight.
+
+&lt;!-- tension-reference --&gt;
+
+The difference between elastic recovery and demanded resilience is the critical question of this response. A returning mesh cannot establish what a person can bear. The fixed anchors and intact rest lengths make the model’s promise of restoration inspectable.
+
+
+### Reference
+
+Whitney identifies nylon hosiery and places the work in the RSVP series. Nengudi discusses bodily and psychological elasticity and the energy associated with previously worn material. Ada makes an original four-anchor membrane encounter, not a reconstruction or a measurement of her sculpture. Its knit-like opaque surface is procedural. It models reversible distance constraints, damping and a distributed downward load, with a floor limit; it does not simulate nylon, damage, self-collision, skin or a human body.
+
+[Senga Nengudi: Internal I (1977, refabricated 2014)](https://whitney.org/collection/works/46609).
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Cloth_Physics/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `cloth_straps` — primary
+- `softstopscene` — primary
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Installed application: A little give
+
+`tension_membrane` occupies a new adjoining bay, after the existing encounters. Cell [15, 57], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tension.tscn`. Original response to Senga Nengudi; no claim of exact reconstruction.
+
+Change the added load while preserving the four anchors and material compliance. Reuses soft, constraint, force; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Cloth_Physics/summary.md">Raw captured source</a></p><pre># Which points must stay?
+
+How does fixing a boundary change the forms a surface can take?
+
+Primary encounters: cloth_straps, softstopscene. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+
+
+&lt;!-- study-spine:tension_membrane --&gt;
+
+## Installed application: A little give
+
+`tension_membrane` occupies a new adjoining bay, after the existing encounters. Cell [15, 57], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tension.tscn`. Original response to Senga Nengudi; no claim of exact reconstruction.
+
+Change the added load while preserving the four anchors and material compliance. Reuses soft, constraint, force; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Cloth_Physics/blurb.md">Raw captured source</a></p><pre># Which points must stay?
+
+How does fixing a boundary change the forms a surface can take?
+</pre></section></body></html>

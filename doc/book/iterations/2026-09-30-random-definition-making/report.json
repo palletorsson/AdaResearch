@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "replay instrument present",
+      "passed": true
+    },
+    {
+      "name": "wall display has paired 8 by 8 grids",
+      "passed": true
+    },
+    {
+      "name": "same seed and procedure match",
+      "passed": true
+    },
+    {
+      "name": "replay reconstructs colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-matched",
+      "passed": true
+    },
+    {
+      "name": "extra draw changes only right palette",
+      "passed": true
+    },
+    {
+      "name": "right bars begin one draw later",
+      "passed": true
+    },
+    {
+      "name": "offset colours match independent generator",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-offset",
+      "passed": true
+    },
+    {
+      "name": "restoration recovers seed and flag",
+      "passed": true
+    },
+    {
+      "name": "restoration recovers colours",
+      "passed": true
+    },
+    {
+      "name": "restoration recovers picker",
+      "passed": true
+    },
+    {
+      "name": "portal caller restores experiment",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "scope": "Actual museum artifact and direct portal-state methods; no physical portal crossing, headset or learner trial."
+  },
+  "passed": true,
+  "room": "Random_Definition",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

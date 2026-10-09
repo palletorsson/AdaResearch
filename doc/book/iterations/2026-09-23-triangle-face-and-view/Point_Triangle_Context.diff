@@ -1,0 +1,43 @@
+--- Point_Triangle_Context.before.md
++++ Point_Triangle_Context.after.md
+@@ -6,7 +6,7 @@
+ 
+ Bring two edges into place. Look through the remaining opening before adding the third. What do you expect to arrive with the last connection?
+ 
+-The boundary closes. Its centre stays unfilled. The small instrument beside it reports the closed boundary and the hidden fill. Press **SHOW / HIDE FILL**, then look from another side. Press again. The edges remain while the patch of colour comes and goes.
++The boundary closes. You can still look through its centre into the room. Press **SHOW / HIDE FILL** on the small panel beside it. A translucent patch now hangs between the same three corners. Press again: the patch disappears and the edges stay.
+ 
+ We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.
+ 
+@@ -20,7 +20,7 @@
+ 
+ The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.
+ 
+-This fill is visible from both sides. Walk around it. Its appearance can narrow almost to a line without its three corners moving. The material permits a view from either side; the edge-on projection leaves little of the surface to show.[^point-triangle-winding]
++This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]
+ 
+ Three distinct, non-collinear points determine a triangle and a unique plane. “Non-collinear” means that the third point is not on the line through the other two. Without that condition, the boundary can collapse into a line with no area.
+ 
+@@ -28,11 +28,11 @@
+ 
+ <!-- @draw_triangle_faces -->
+ 
+-Pick up the drawing point and make a small triangle in the air. The tool records a corner while held once its one-second interval has elapsed and the tip has moved far enough from the previous point. Move to each intended corner, watch for the numbered point, then return near the first to close the loop. Positions round to a ten-centimetre grid. The addressing we met in Grid helps corners meet here.
++Pick up the drawing point and make a small triangle in the air. Move to each intended corner and wait for its number to appear. The tool needs a second between recorded corners and enough movement away from the previous point. It rounds positions to a ten-centimetre grid, so the addresses we met in Grid now help corners meet. Return near your first point to close the loop.
+ 
+ Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**: one three-corner loop makes one triangle. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
+ 
+-Release the tool where the triangle closed. Its corners remain grabbable: move one and the faces using it rebuild. Then press **NEW OUTLINE**. The triangle stays while you begin another boundary.
++Release the tool where the triangle closed. Its corners remain grabbable: move one, then release it to rebuild the faces that use it. Press **NEW OUTLINE**. The triangle stays while you begin another boundary.
+ 
+ Make a six-corner L in one horizontal plane: a 1.2-metre square with a 0.8-metre square missing from one corner. Begin where the two long outer edges meet. Follow one long edge, go around the notch and return to your beginning. Wait for each numbered corner before moving on.[^point-triangle-construction]
+ 
+@@ -40,7 +40,7 @@
+ 
+ The boundary has not moved, but the added fill reaches into the missing notch. Something is covering a place you left open.
+ 
+-The tool uses the first point as the centre of a triangle fan, connecting it to successive pairs around the loop. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:
++Every triangle in this fill shares the first corner. The tool connects it to successive pairs around the loop: a fan of triangles. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:
+ 
+ ```text
+ B C D

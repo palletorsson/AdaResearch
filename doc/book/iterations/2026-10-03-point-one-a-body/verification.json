@@ -1,0 +1,98 @@
+{
+	"checks": [
+		{
+			"check": "Shared floor supports the player",
+			"passed": true
+		},
+		{
+			"check": "Setup objects are absent in this lesson",
+			"passed": true
+		},
+		{
+			"check": "A stored position creates no hidden object",
+			"passed": true
+		},
+		{
+			"check": "Visible point contains only a mesh node",
+			"passed": true
+		},
+		{
+			"check": "The two visible markers initially match",
+			"passed": true
+		},
+		{
+			"check": "Player crosses the empty position",
+			"passed": true
+		},
+		{
+			"check": "Player crosses the visible surface",
+			"passed": true
+		},
+		{
+			"check": "Player stops at the solid point",
+			"passed": true
+		},
+		{
+			"check": "solid.gd edited code compiles",
+			"passed": true
+		},
+		{
+			"check": "Larger invisible boundary stops player earlier",
+			"passed": true
+		},
+		{
+			"check": "Boundary edit leaves visible radius unchanged",
+			"passed": true
+		},
+		{
+			"check": "Removing light does not remove the boundary",
+			"passed": true
+		},
+		{
+			"check": "solid.gd edited code compiles",
+			"passed": true
+		},
+		{
+			"check": "One radius changes both shapes",
+			"passed": true
+		},
+		{
+			"check": "Growing both shapes moves the stopping point",
+			"passed": true
+		},
+		{
+			"check": "solid.gd edited code compiles",
+			"passed": true
+		},
+		{
+			"check": "Small boundary permits closer approach to large surface",
+			"passed": true
+		},
+		{
+			"check": "visible.gd edited code compiles",
+			"passed": true
+		},
+		{
+			"check": "Visible code works on a bare Node3D",
+			"passed": true
+		},
+		{
+			"check": "Position edit moves the marker",
+			"passed": true
+		},
+		{
+			"check": "Height remains twice the edited radius",
+			"passed": true
+		},
+		{
+			"check": "position.gd edited code compiles",
+			"passed": true
+		},
+		{
+			"check": "Changing stored data alone still creates no surface",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"physical_headset_tested": false
+}

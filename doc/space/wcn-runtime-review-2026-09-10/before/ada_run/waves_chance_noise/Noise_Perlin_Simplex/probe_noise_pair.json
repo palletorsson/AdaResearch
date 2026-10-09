@@ -1,0 +1,195 @@
+{
+  "checks": 51,
+  "control_path": "slider_moved emitted on simplex FREQ/OCTAVES; REPLAY button_pressed emitted after slider changes; seed-cycle buttons called by method; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "headset_verified": false,
+  "map": "Noise_Perlin_Simplex",
+  "measurements": {
+    "built_bodies": [
+      [
+        "lobby:window",
+        [
+          7.5,
+          1.7,
+          -3.5
+        ]
+      ],
+      [
+        "lobby:view",
+        [
+          7.5,
+          1.7,
+          -2.0
+        ]
+      ],
+      [
+        "lobby:counter",
+        [
+          11.0,
+          1.6,
+          -2.94
+        ]
+      ],
+      [
+        "lobby:extinguisher",
+        [
+          1.14,
+          0.0,
+          -1.4
+        ]
+      ],
+      [
+        "lobby:elevator",
+        [
+          15.94,
+          0.0,
+          -1.8
+        ]
+      ],
+      [
+        "lobby:pallet",
+        [
+          15.1,
+          0.0,
+          -1.8
+        ]
+      ],
+      [
+        "lobby:point_zero",
+        [
+          0.0,
+          0.0,
+          -4.0
+        ]
+      ],
+      [
+        "simplex_noise",
+        [
+          3.5,
+          1.1,
+          7.5
+        ]
+      ],
+      [
+        "perlin_noise",
+        [
+          8.5,
+          1.1,
+          7.5
+        ]
+      ],
+      [
+        "perlin_noise_terrain",
+        [
+          2.5,
+          0.0,
+          11.5
+        ]
+      ],
+      [
+        "dark_sphere",
+        [
+          6.5,
+          0.0,
+          11.5
+        ]
+      ],
+      [
+        "configurable_portal",
+        [
+          9.5,
+          0.0,
+          13.5
+        ]
+      ],
+      [
+        "gate:noise perlin simplex",
+        [
+          6.5,
+          0.0,
+          4.5
+        ]
+      ]
+    ],
+    "built_cells": [
+      "pp.#######################",
+      "................p#########",
+      "##..............p#########",
+      "##...........#############",
+      "######...#################",
+      "##...........#############",
+      "##...........#############",
+      "##...........#############",
+      "##..s....s...#############",
+      "##...........#############",
+      "##...........#############",
+      "##..s....s...#############",
+      "##...........#############",
+      "##...........#############",
+      "##.ss........#############",
+      "##.ss..s.....#############",
+      "##.ss........#############",
+      "##........s..#############",
+      "######...#################",
+      "#######..#################",
+      "#######.....##############",
+      "##########..##############"
+    ],
+    "built_seals": {
+      "2,10": "perlin_noise_terrain",
+      "2,11": "perlin_noise_terrain",
+      "2,12": "perlin_noise_terrain",
+      "3,10": "perlin_noise_terrain",
+      "3,11": "perlin_noise_terrain",
+      "3,12": "perlin_noise_terrain",
+      "3,4": "simplex_noise",
+      "3,7": "simplex_noise",
+      "6,11": "dark_sphere",
+      "8,4": "perlin_noise",
+      "8,7": "perlin_noise",
+      "9,13": "configurable_portal"
+    },
+    "built_severed": [],
+    "contract_perlin": {
+      "amplitude": 0.8,
+      "basis": "perlin",
+      "frequency": 10.0,
+      "gain": 0.5,
+      "octaves": 4,
+      "ramp": "shared",
+      "readout": "relief",
+      "resolution": 0.5,
+      "seed": 20260910,
+      "size": 8
+    },
+    "contract_simplex": {
+      "amplitude": 0.8,
+      "basis": "simplex",
+      "frequency": 10.0,
+      "gain": 0.5,
+      "octaves": 4,
+      "ramp": "shared",
+      "readout": "relief",
+      "resolution": 0.5,
+      "seed": 20260910,
+      "size": 8
+    },
+    "frequency_after_slider": 12.4,
+    "perlin_panel_height": 1.37129235267639,
+    "simplex_panel_height": 1.37129235267639,
+    "values": {
+      "perlin": [
+        0.21862219274044,
+        0.175508692860603
+      ],
+      "simplex": [
+        0.190154299139977,
+        0.350638508796692
+      ]
+    },
+    "walk_aisle_between_the_fields": 1.0,
+    "walk_east_corridor": 1.0,
+    "walk_front_row": 1.0
+  }
+}

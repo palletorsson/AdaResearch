@@ -1,0 +1,390 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SwarmIntelligence_Particle_Swarm_Optimization · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SwarmIntelligence_Particle_Swarm_Optimization">← Tutorial lineage</a></p><h1>SwarmIntelligence Particle Swarm Optimization</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/final.md">Raw captured source</a></p><pre># Better according to which score?
+
+When a swarm improves, who decided what better means?
+
+&lt;!-- @fitness_landscape_politics --&gt;
+
+Watch the population under CONVERGE, then choose SPREAD. The button changes the score while the particles keep their positions and motion. Keep INERTIA steady and watch the turn. For a comparison from the same beginning, use RESET after selecting each objective: it restores the same scatter and velocities. Next try NOVELTY. Before reading these as success and failure, describe what each setting seems to reward.
+
+CONVERGE rewards movement towards the centre. SPREAD rewards distance from it; two particles can score equally well while crowding the same edge. NOVELTY rewards distance from positions retained in an archive. RIDGE, the fourth button, comes later. These are four different questions put to the same moving bodies. The labels Corporate, Ecological, Artistic and Meritocratic are invitations to argue about those questions, not properties proved by the equations.
+
+Keep your attention on one region when you exchange CONVERGE for SPREAD. The region has not moved, but its value under the new objective has changed. Describe the difference as a change of reward before describing any particle as more capable. This also helps with a slow response: the visible position belongs to the current moment, while continuing velocity, and a shared best just re-chosen under the new score, still influence where the next update carries the particle. The button also resets every particle’s own memory to where it stands, so what carries over from before is the motion, not the past.
+
+Each particle remembers a position that scored well for it. The swarm also retains a shared best position. A velocity update combines continuing motion with pulls towards those personal and shared memories, using varying random contributions. INERTIA changes how strongly the existing movement carries into the next update.
+
+“Best” is a relation between a position and an objective. It is not a property the particle discovers independently of the scoring rule. A position can be excellent under one button and poor under another. The ant colony’s traces remembered visits; these particles explicitly remember evaluations.
+
+Spend longer with NOVELTY. At its beginning the archive remembers the current positions. Its count grows as more visits are kept, and the bright regions on the plate change with that record. Follow a place that was bright. Does it remain promising once the swarm has been there?
+
+A remembered position must be scored again when the archive changes. Yesterday&#x27;s high score cannot simply win against today&#x27;s distances: the question has changed under it. The particle retains a place, but its claim to be best has to be renewed. Here forgetting and revaluation are part of the mechanism that lets movement continue.
+
+The archive holds at most two hundred positions, sampled one at a time rather than recording every visit. When it fills, new entries replace the oldest. An apparently unexplored place can be unfamiliar to this record without being unfamiliar to the world. New relative to whom, and to how much of their past?
+
+Now press RIDGE. The plate goes dark except for a band about half a metre wide running corner to corner, and the score is the distance from that diagonal: a particle is scored by how far off the line it stands, never by where along it, so two particles at opposite ends of the line score alike and the rest of the plate counts for nothing. One narrow path counts, the label says, and calls it Meritocratic. It is the sharpest of the four questions, because it is the only one with a straight edge.
+
+Now change INERTIA within one objective. Ask whether overshooting is always wasteful. Motion that delays settling can also carry a particle beyond a region it would otherwise keep revisiting. The consequences depend on the landscape and on what the score values.
+
+An optimiser cannot settle a disagreement about what should be optimised. Rewarding dispersion here may be a productive alternative to rewarding concentration; it does not automatically make dispersion good in every social setting. A future comparison could display two of these scores together, RIDGE beside SPREAD, keeping the compromise visible instead of hiding it inside one number.
+
+One more work stands at the back, a plate with two sliders and a button. Press the button once and it becomes a field of spins under a temperature: push NOISE up until the order dissolves, and back down until it returns. Ask whether self-organising named the rule or the temperature. That is the capstone’s question, a room early.
+
+&lt;!-- @ --&gt;
+
+The capstone turns from declared objectives to quieter rules that keep an apparently self-organising system alive.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/tutorial.md">Raw captured source</a></p><pre># Particle Swarm Optimization
+
+Particles search the space. Each remembers its best; all share the global best.
+
+Define a particle.
+
+```gdscript
+class_name PSOParticle
+
+var position: Vector2
+var velocity: Vector2
+var personal_best_position: Vector2
+var personal_best_score: float = INF
+```
+
+Position, velocity, and personal best tracked. Each particle is self-contained.
+
+Initialise a swarm.
+
+```gdscript
+func initialise_swarm(count: int, bounds: Rect2) -&gt; Array:
+    var swarm: Array = []
+    for _i in count:
+        var p := PSOParticle.new()
+        p.position = Vector2(randf_range(bounds.position.x, bounds.end.x), randf_range(bounds.position.y, bounds.end.y))
+        p.velocity = Vector2(randfn(0, 1), randfn(0, 1))
+        p.personal_best_position = p.position
+        swarm.append(p)
+    return swarm
+```
+
+Random initial positions and velocities. Covers the search space broadly.
+
+Evaluate the fitness function.
+
+```gdscript
+func rastrigin(p: Vector2) -&gt; float:
+    var A: float = 10.0
+    var n: int = 2
+    return A * n + (p.x * p.x - A * cos(2.0 * PI * p.x)) + (p.y * p.y - A * cos(2.0 * PI * p.y))
+```
+
+Rastrigin has many local minima and one global minimum at the origin. Standard test function.
+
+Update velocity.
+
+```gdscript
+@export var inertia: float = 0.7
+@export var cognitive: float = 1.5
+@export var social: float = 1.5
+
+func update_velocity(particle: PSOParticle, global_best: Vector2) -&gt; void:
+    var r1: float = randf()
+    var r2: float = randf()
+    particle.velocity = (
+        particle.velocity * inertia +
+        (particle.personal_best_position - particle.position) * cognitive * r1 +
+        (global_best - particle.position) * social * r2
+    )
+    particle.velocity = particle.velocity.limit_length(5.0)
+```
+
+Three contributions: inertia (keep going), cognitive (toward personal best), social (toward global best). Random factors add exploration.
+
+Update position.
+
+```gdscript
+func update_position(particle: PSOParticle) -&gt; void:
+    particle.position += particle.velocity
+```
+
+Simple Euler step. The particle moves according to its new velocity.
+
+Update bests.
+
+```gdscript
+var global_best_position: Vector2
+var global_best_score: float = INF
+
+func update_bests(particle: PSOParticle) -&gt; void:
+    var score: float = rastrigin(particle.position)
+    if score &lt; particle.personal_best_score:
+        particle.personal_best_score = score
+        particle.personal_best_position = particle.position
+    if score &lt; global_best_score:
+        global_best_score = score
+        global_best_position = particle.position
+```
+
+Check current position against personal and global bests. Update if improved.
+
+Run one iteration.
+
+```gdscript
+func iteration(swarm: Array) -&gt; void:
+    for particle in swarm:
+        update_velocity(particle, global_best_position)
+        update_position(particle)
+        update_bests(particle)
+```
+
+One update per particle. Over many iterations, the swarm converges on the global minimum.
+
+You can now initialise a swarm, evaluate fitness via Rastrigin, update velocities with inertia/cognitive/social terms, and track personal and global bests. SwarmIntelligence_Swarm_Intelligence_Algorithms extends into a gallery of algorithms.
+
+Reset the simulation.
+
+```gdscript
+func reset_swarm(count: int, bounds: Rect2) -&gt; Array:
+    return initialise_swarm(count, bounds)
+```
+
+Fresh start. Same bounds, new random initial conditions.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/technical.md">Raw captured source</a></p><pre># Particles remember their best position and know the swarm&#x27;s best — from this dual memory, a population finds optima without gradients
+
+Ant colony optimization solved combinatorial problems through environmental memory — pheromone trails on edges, accumulated by the colony, read by individuals. No ant remembered its own history beyond the current tour&#x27;s visited set. The intelligence was in the trail, not the agent.
+
+Particle swarm optimization inverts this. The intelligence is in the agents. Each particle carries a personal memory — its own best position ever visited. The swarm shares a global memory — the best position any particle has ever found.
+
+The environment carries no information. No trail. No pheromone. The fitness landscape is read but never written. Optimization happens through social learning: particles adjust their velocity toward their personal best and toward the global best, with randomness preventing premature convergence.
+
+## The Particle
+
+A PSO particle carries position, velocity, and two memories: personal best and access to global best.
+
+```gdscript
+var num_particles: int = 50
+var positions: PackedVector3Array
+var velocities: PackedVector3Array
+var personal_best_positions: PackedVector3Array
+var personal_best_fitness: PackedFloat32Array
+var global_best_position: Vector3
+var global_best_fitness: float = INF
+
+func _ready() -&gt; void:
+    positions.resize(num_particles)
+    velocities.resize(num_particles)
+    personal_best_positions.resize(num_particles)
+    personal_best_fitness.resize(num_particles)
+
+    for i in num_particles:
+        positions[i] = Vector3(
+            randf_range(-search_range, search_range),
+            0.0,
+            randf_range(-search_range, search_range))
+        velocities[i] = Vector3(
+            randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0))
+
+        personal_best_positions[i] = positions[i]
+        var fitness: float = evaluate(positions[i])
+        personal_best_fitness[i] = fitness
+
+        if fitness &lt; global_best_fitness:
+            global_best_fitness = fitness
+            global_best_position = positions[i]
+```
+
+Each particle scatters randomly across the search space and evaluates the fitness landscape at its initial position. The initial personal best is the starting position — the particle has visited nowhere else. The initial global best is the best starting position across all particles — a random head start that may be far from the true optimum.
+
+## The Fitness Landscape
+
+The fitness function maps positions to scalar values. The `PSOVisualization` artifact renders this function as terrain — the search space becomes a physical landscape the learner can see from the elevated observation deck.
+
+```gdscript
+func evaluate(pos: Vector3) -&gt; float:
+    # Rastrigin function: multimodal with many local minima
+    var x: float = pos.x
+    var z: float = pos.z
+    var n: float = 2.0
+    return 10.0 * n + (x * x - 10.0 * cos(TAU * x)) + (z * z - 10.0 * cos(TAU * z))
+
+# Or Ackley function for deceptive landscapes:
+func evaluate_ackley(pos: Vector3) -&gt; float:
+    var x: float = pos.x
+    var z: float = pos.z
+    return -20.0 * exp(-0.2 * sqrt(0.5 * (x * x + z * z))) - \
+           exp(0.5 * (cos(TAU * x) + cos(TAU * z))) + E + 20.0
+```
+
+The Rastrigin function produces a surface of concentric ridges with many local minima and one global minimum at the origin. The Ackley function produces a deceptive surface with a broad, nearly flat valley surrounding a narrow global minimum. Both are standard test functions for optimization algorithms, chosen because they are difficult — gradient descent gets trapped in local minima, and the global minimum requires global search.
+
+The terrain rendering maps fitness to height: the global minimum is the valley floor, local minima are small depressions in the surrounding hills. Particles are rendered as spheres swooping through this landscape, their vertical position tracking the terrain&#x27;s elevation at each point.
+
+## The Velocity Update
+
+The core equation governs how each particle adjusts its velocity each frame.
+
+```gdscript
+var inertia_weight: float = 0.7
+var cognitive_coeff: float = 1.5    # c1: pull toward personal best
+var social_coeff: float = 1.5       # c2: pull toward global best
+
+func update_velocity(i: int) -&gt; void:
+    var r1: float = randf()
+    var r2: float = randf()
+
+    var cognitive_pull: Vector3 = cognitive_coeff * r1 * \
+        (personal_best_positions[i] - positions[i])
+    var social_pull: Vector3 = social_coeff * r2 * \
+        (global_best_position - positions[i])
+    var inertia: Vector3 = inertia_weight * velocities[i]
+
+    velocities[i] = inertia + cognitive_pull + social_pull
+```
+
+Three terms:
+
+**Inertia** — the particle continues in its current direction, scaled by weight w. High inertia means the particle maintains momentum and explores broadly. Low inertia means the particle responds quickly to cognitive and social signals but searches less.
+
+**Cognitive pull** — the particle moves toward its own best-known position. This is personal memory — the particle trusts its own experience. The random factor r1 prevents deterministic convergence.
+
+**Social pull** — the particle moves toward the global best position. This is social learning — the particle trusts the swarm&#x27;s collective experience. The random factor r2 introduces variation in how strongly each particle responds.
+
+The balance between cognitive and social coefficients determines whether the swarm is a collection of independent explorers (high c1, low c2) or a socially dominated herd (low c1, high c2). The canonical setting c1 = c2 = 1.5 balances individual and collective knowledge.
+
+## Position Update and Evaluation
+
+After the velocity update, the particle moves and evaluates its new position.
+
+```gdscript
+func update_particle(i: int) -&gt; void:
+    update_velocity(i)
+    positions[i] += velocities[i]
+
+    # Evaluate fitness at new position
+    var fitness: float = evaluate(positions[i])
+
+    # Update personal best
+    if fitness &lt; personal_best_fitness[i]:
+        personal_best_fitness[i] = fitness
+        personal_best_positions[i] = positions[i]
+
+    # Update global best
+    if fitness &lt; global_best_fitness:
+        global_best_fitness = fitness
+        global_best_position = positions[i]
+```
+
+Memory is one-directional: only improvements are recorded. A particle that wanders into worse territory does not forget its previous best. The personal best is a ratchet — it only moves toward better fitness. The global best is the population-level ratchet — it only improves. The swarm&#x27;s collective knowledge monotonically increases over time.
+
+## The Simulation Loop
+
+```gdscript
+func _process(delta: float) -&gt; void:
+    for i in num_particles:
+        update_particle(i)
+
+    # Optional: decay inertia over time for convergence
+    inertia_weight *= 0.999
+
+    update_display()
+```
+
+Inertia decay is a convergence strategy. Early in the search, high inertia encourages exploration — particles sweep across the landscape. As inertia decreases, particles settle — they circle tighter around the global best. The decay rate controls the transition from exploration to exploitation. Too fast and the swarm converges before finding the global minimum. Too slow and the swarm wanders long after finding it.
+
+## Exploration vs. Exploitation
+
+The tension between exploration (searching new regions) and exploitation (refining around the best known) is the central challenge of any optimization algorithm. PSO manages this tension through three mechanisms:
+
+**Random coefficients r1 and r2** inject stochastic variation each frame. Even a particle near the global best will occasionally overshoot or veer sideways.
+
+**Inertia weight** controls the baseline exploration rate. High inertia means particles carry momentum past the global best, potentially discovering better regions.
+
+**Multiple attractors** — personal best and global best are generally different points. The particle is pulled in two directions simultaneously. The tension between these attractors creates oscillatory behavior that scans the region between them.
+
+The particles visible from the observation deck exhibit characteristic behavior: initial scatter across the landscape, rapid convergence toward the first discovered good region, then a tightening spiral as inertia decays. Particles that start near a different local minimum may be pulled toward the global best slowly, crossing ridges in the Rastrigin landscape, demonstrating the algorithm&#x27;s ability to escape local optima through social information.
+
+## The Observation Deck
+
+The map layout — concentric height rings descending from the rim to a central valley — mirrors the fitness landscape. The elevated deck provides a bird&#x27;s-eye view of particle trajectories. The learner stands above the optimization process, watching particles converge, overshoot, spiral, and settle. The spatial correspondence between map geometry and fitness landscape makes the optimization tangible: the valley the learner descends to is the minimum the particles seek.
+
+## From ACO to PSO: Two Models of Collective Memory
+
+ACO stores memory in the environment (pheromone on edges). PSO stores memory in the agents (personal best, global best). Both solve optimization problems. Both use populations of simple agents. The mechanism differs fundamentally:
+
+ACO: agents are memoryless; the environment remembers; coordination is stigmergic.
+PSO: agents have memory; the environment is passive; coordination is social.
+
+The contrast illuminates two modes of collective intelligence. Stigmergic systems distribute memory across the medium. Social systems concentrate memory in the agents. Neither is universally superior — ACO excels at combinatorial problems on graphs, PSO excels at continuous-domain function optimization. The swarm intelligence sequence presents both, letting the learner see that the same problem (finding optima) can be solved by oppositely structured coordination mechanisms.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/intent.md">Raw captured source</a></p><pre>Concept: Particles remember their best position and know the swarm&#x27;s best position — from this dual memory, a population navigates a fitness landscape toward optima without gradients. An elevated observation deck over a flat valley makes the optimization topology visible: particles swooping through the valley, overshooting, converging, finding the minimum.
+Sequence role: Sixth map in Swarm Intelligence (14th spine sequence, integration phase), intermediate difficulty. After ACO solved optimization through environmental memory (pheromone), PSO solves it through social memory (personal best, global best). The two maps form a pair: stigmergic optimization versus social optimization. Connects forward to SwarmIntelligence_Swarm_Intelligence_Algorithms where multiple swarm approaches are compared in a gallery; follows SwarmIntelligence_Ant_Colony_Optimization.
+Technical angle: Kennedy and Eberhart&#x27;s PSO: each particle has position x, velocity v, personal best p, and access to global best g. Velocity update: v = w*v + c1*r1*(p-x) + c2*r2*(g-x), where w is inertia weight, c1 and c2 are cognitive and social coefficients, r1 and r2 are random vectors. Position update: x = x + v. The fitness landscape is the valley visible from the observation deck — likely a multimodal function (Rastrigin, Ackley, or Rosenbrock) rendered as terrain height. The elevation deck provides a god&#x27;s-eye view of convergence dynamics.
+Critical angle: PSO replaces the environment-as-memory (ACO pheromones) with agents-as-memory — each particle carries its own history and shares only its best result. This is a different model of collective intelligence: not stigmergy but social learning. The inertia weight w controls the tension between exploration (high w, particles maintain momentum) and exploitation (low w, particles converge). PSO is also the bridge between swarm intelligence and machine learning — it optimizes any differentiable or non-differentiable function through population-based search.
+Key artifacts: PSOVisualization implements particle swarm optimization over a visible fitness landscape, with the elevated observation deck providing a spatial overview of particle trajectories, personal bests, and global best convergence.
+Gap: Needs a fitness landscape selector — an artifact that switches between different test functions (unimodal, multimodal, deceptive) so the learner can see how PSO&#x27;s convergence behavior changes with landscape topology.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/critical.md">Raw captured source</a></p><pre># SwarmIntelligence_Particle_Swarm_Optimization — Critical Reflection
+
+## Social Learning as Tout-Monde
+
+Glissant&#x27;s tout-monde — the whole-world conceived as a web of relation without center or hierarchy — finds a structural analog in PSO&#x27;s global best. The global best position is not a command issued from above. It is a fact that emerged from the population&#x27;s collective exploration. Some particle, at some time, stumbled onto a good position. That position became the global best. Every other particle now pulls toward it — not because it was designated as a goal, but because it was the best thing anyone found so far.
+
+This is relation as collective discovery. The global best belongs to no particle. The particle that found it has already moved on — it may be far from the position it contributed. The global best is a trace of encounter, not a possession. Glissant described Caribbean identity in similar terms: not inherited from a single origin but produced through encounter, migration, and the accumulation of many passages. The global best is an identity produced by passage — by particles passing through fitness landscapes and leaving their evaluations behind as shared knowledge.
+
+The personal best introduces a different relational layer. Each particle carries its own history — the best it has personally experienced. The velocity equation pulls the particle toward both its personal best and the global best simultaneously. The particle is constituted by two relations: to its own past and to the collective&#x27;s achievement. Neither relation dominates permanently. The balance shifts with the coefficients c1 and c2, and with the random factors r1 and r2 that modulate each pull on every frame. The particle&#x27;s identity at any moment is a weighted blend of personal memory and social influence — Glissant&#x27;s composite identity, always in process, never fixed.
+
+## The Opacity of the Landscape
+
+The fitness landscape is the environment the swarm navigates. In PSO, unlike ACO, the environment is passive — it does not accumulate information, does not carry pheromone, does not change over time. The landscape is a fixed function, evaluated at points but never written. The particles extract information from it but leave no trace.
+
+This is opacity in Glissant&#x27;s sense: the landscape resists full comprehension. No particle can see the entire fitness function. Each particle evaluates one point per frame. The swarm collectively has evaluated fifty points per frame — fifty samples of an infinite surface. The global optimum may sit in a region no particle has visited. The landscape withholds itself. It offers local readings to those who stand on it but refuses the global view.
+
+The observation deck provides the learner with what the particles cannot have: an overview of the terrain. The irony is pedagogical. The learner sees the whole landscape and watches particles grope toward the minimum they could find instantly if they shared the learner&#x27;s perspective. The deck teaches that optimization is hard precisely because the optimizer lacks the observer&#x27;s vantage. The swarm&#x27;s intelligence is impressive not despite but because of this limitation — it finds near-optimal solutions through social sampling of an opaque terrain.
+
+## Fugitive Momentum
+
+Moten&#x27;s fugitivity — motion that refuses to settle, that produces value through continued movement rather than arrival — describes the particle&#x27;s behavior before convergence. Early in the search, high inertia keeps particles moving. They overshoot the global best. They cross ridges. They visit regions that no rational planner would explore. This overshooting is not error. It is the search strategy. A particle that settles too quickly converges to a local minimum and misses the global one. Fugitive momentum — refusing to stop — is what enables the swarm to escape traps.
+
+As inertia decays, the swarm settles. The particles tighten their spirals. The fugitive phase ends and the convergent phase begins. Moten might say: the system domesticates its own fugitivity. The inertia decay parameter is the mechanism by which the swarm&#x27;s wildness is gradually tamed into productivity. Early chaos serves late order. The exploration was always in service of exploitation.
+
+But there is a version of PSO without inertia decay — one where the particles never settle, where the global best shifts continuously as new regions are sampled. This is the perpetual-fugitive variant, and it is useful when the fitness landscape itself changes over time. Dynamic optimization requires particles that refuse to converge, that maintain their momentum, that treat every answer as provisional. The fugitive is not a failure of optimization. It is the only rational strategy when the ground is moving.
+
+## Two Models of Memory
+
+ACO stored memory in the environment. PSO stores memory in the agents. This is not a technical detail. It is a philosophical choice about where collective knowledge resides.
+
+In Glissant&#x27;s terms, ACO is a landscape-based epistemology — knowledge is deposited in the ground, accessible to anyone who passes through. PSO is a diaspora-based epistemology — knowledge is carried by individuals, shared through social encounter, accumulated in personal and collective experience. Neither model is complete. The pheromone trail evaporates — environmental memory fades. The personal best never fades — agent memory persists. But agent memory is locked inside the agent. It influences the global best only when a particle finds a new optimum. The vast majority of personal experience — all the suboptimal positions visited — is private, shared with no one.
+
+Moten&#x27;s critique of the archive — the institution that stores knowledge selectively, preserving some experiences and erasing others — applies here. The global best is an archive. It records only the single best position. It erases every other experience. The personal best is a smaller archive — it records only each particle&#x27;s single best. The full history of the swarm&#x27;s exploration — every position visited, every fitness evaluated, every overshooting trajectory — is lost. The optimization converges, but the journey vanishes.
+
+## What the Valley Conceals
+
+The map&#x27;s valley geometry — descending terrain toward a central optimum — makes the search problem feel natural. Of course you want to reach the bottom. Of course the valley is the goal. But the valley was constructed. The fitness function was chosen — Rastrigin, Ackley, Rosenbrock — by a programmer who knew the answer before the particles started searching. The particles explore a landscape designed to test them. Their intelligence is measured against a standard they did not set.
+
+The room does not ask whose fitness function the learner is optimizing in their own life. Whose landscape defines what counts as a good position? The PSO framework is neutral about fitness — it minimizes whatever function you give it. But the function is not neutral. It encodes values, priorities, and power structures. Glissant would say: the fitness landscape is the metropole&#x27;s definition of success, and the particles are the colonised subjects moving through it. The swarm finds the minimum that the landscape prescribes. It cannot question the landscape. It can only search.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/artifacts.md">Raw captured source</a></p><pre># SwarmIntelligence Particle Swarm Optimization — Artifacts
+*Swarm Intelligence: No Leader, Yet Coordinated · lambda_edge · 2 artifacts*
+
+&gt; Particles search for optima. Each remembers its best position; all know the global best. Move toward both, add some randomness. The swarm explores and exploits simultaneously. Function optimization as social behavior — finding peaks through collective wandering.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Fitness Landscape Politics
+![Fitness Landscape Politics](/scene-catalog/fitness_landscape_politics.png)
+
+30 PSO particles on 3 switchable fitness landscapes: convergence (corporate — minimize distance), spread (ecological — maximize diversity), novelty (artistic — seek the unvisited). Same agents, different power structures, different &#x27;success.&#x27;
+
+`fitness_landscape_politics`
+
+## Self-Organizing Patterns
+![Self-Organizing Patterns](/scene-catalog/self_organizing_patterns.png)
+
+Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows
+
+`self_organizing_patterns`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/summary.md">Raw captured source</a></p><pre># SwarmIntelligence_Particle_Swarm_Optimization — Summary
+
+Each particle remembers its best position. All particles know the global best. From this dual memory, a population navigates a fitness landscape toward optima without gradients. The velocity update equation — `v = w*v + c1*r1*(personal_best - x) + c2*r2*(global_best - x)` — balances three forces: inertia (keep moving), cognitive pull (trust your own experience), and social pull (trust the swarm&#x27;s best find).
+
+The `PSOVisualization` artifact renders a fitness landscape as terrain — Rastrigin or Ackley test functions with many local minima and one global minimum at the valley floor. Fifty particles scatter across the landscape, evaluate fitness, update personal and global bests, and adjust velocity each frame. The observation deck provides a bird&#x27;s-eye view of convergence: initial scatter, rapid approach to the first good region, then tightening spirals as inertia weight decays from exploration to exploitation.
+
+PSO inverts ACO&#x27;s architecture. Where ants stored memory in the environment (pheromone on edges) and the agents were stateless, PSO stores memory in the agents (personal best, global best) and the environment is passive. The fitness landscape is read but never written. Coordination is social rather than stigmergic — particles learn from each other&#x27;s evaluations, not from environmental traces.
+
+The map&#x27;s concentric height rings descending to a central valley mirror the fitness landscape&#x27;s topology. This is the sixth map in the Swarm Intelligence sequence, pairing with ACO as two complementary models of collective optimization. The teleporter leads to the final gallery map where all swarm algorithms stand side by side.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SwarmIntelligence_Particle_Swarm_Optimization/blurb.md">Raw captured source</a></p><pre>Particles search for optima. Each remembers its best position; all know the global best. Move toward both, add some randomness. The swarm explores and exploits simultaneously. Function optimization as social behavior — finding peaks through collective wandering.
+
+`PSOVisualization` renders the fitness landscape as terrain viewed from the elevated observation deck. Each particle has position, velocity, personal best, and knows the global best. The velocity update combines inertia, cognitive pull toward personal best, and social pull toward global best — three forces balancing exploration against exploitation. Kennedy and Eberhart&#x27;s PSO replaces the environment-as-memory (ACO pheromones) with agents-as-memory — each particle carries its own history and shares only its best result. Not stigmergy but social learning. The swarm converges, overshoots, re-converges, and finds the valley together.
+</pre></section></body></html>

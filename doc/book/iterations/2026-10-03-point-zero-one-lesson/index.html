@@ -1,0 +1,208 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Point Zero — one tutorial</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f6f3eb;color:#282b29;font:19px/1.65 Georgia,serif}
+main{max-width:1160px;margin:auto;padding:35px 24px 70px}header,article{max-width:720px;margin:0 auto}
+header{font:14px/1.6 system-ui,sans-serif;border-bottom:1px solid #ccc6bc;padding-bottom:20px;margin-bottom:42px}
+nav{display:flex;flex-wrap:wrap;gap:12px 24px}a{color:#794451;text-underline-offset:3px}
+h1{font-weight:normal;font-size:38px;line-height:1.2}h2{font-weight:normal;font-size:27px;margin-top:36px}
+p{margin:0 0 22px}pre{padding:20px;background:#eae6dd;overflow:auto;font:14px/1.55 Consolas,monospace}
+code{font-family:Consolas,monospace;font-size:.88em}pre code{font:inherit}details{margin-top:48px;border-top:1px solid #ccc6bc;padding-top:20px}
+summary{font:16px/1.6 system-ui,sans-serif;cursor:pointer}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:35px;font-size:16px}
+.comparison>div{min-width:0}.comparison h1{font-size:28px}.comparison h2{font-size:23px}
+.views{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.views figure{margin:20px 0}.views img{width:100%;height:auto}.views figcaption{font:14px/1.5 system-ui,sans-serif}
+a:focus-visible,summary:focus-visible{outline:3px solid #a75172;outline-offset:4px}
+@media(max-width:800px){.comparison{grid-template-columns:1fr}body{font-size:18px}main{padding:24px 18px}}
+@media print{header,details{display:none}body{background:white;font-size:11pt}main{padding:0}pre{white-space:pre-wrap}h2{break-after:avoid}}
+</style></head><body><main><header><p>Point Zero · One tutorial at a time · 3 October 2026</p>
+<nav><a href="#reading">Read</a><a href="point-zero-study.zip">Download desktop study</a><a href="course-world.html">How the studies belong to Ada</a><a href="#comparison">Before / after</a><a href="Point_Zero.tutorial.diff">Text diff</a></nav></header>
+<article id="reading"><h1>Point Zero — Hello, world</h1>
+<p>Day Zero gave you a running project. Here you decide what happens once and what keeps happening.</p>
+<p>Open <code>hello_world.gd</code> in <a href="point-zero-study.zip">the Point Zero study</a>. The room supplies the floor, camera and light. The script creates its own text display. Each example can also be attached to an empty <code>Node3D</code> in your prepared scene.</p>
+<p>This download is a desktop study. The script also gives us a counter to place in Ada's world. Day Zero prepares that world and its XR tools; this example needs no controller input.</p>
+<h2>Once</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+
+func _ready():
+    display.position.y = 1.5
+    display.text = &quot;Hello, world.&quot;
+    add_child(display)
+</code></pre>
+<p>Run the study. “Hello, world.” appears above the floor.</p>
+<p>A node is a building block of a Godot scene. <code>extends Node3D</code> adds our script's behaviour to a node in 3D space.</p>
+<p><code>Label3D</code> is Godot's class for text in 3D space. <code>.new()</code> creates one. The variable <code>display</code> keeps a reference to that node, so we can change it.</p>
+<p><code>func</code> defines a function: a named block of code. The colon begins the block; the indentation groups its instructions. Godot calls <code>_ready()</code> when this node is ready.</p>
+<p>Inside <code>_ready()</code>, we set the display's height to 1.5 units above its parent and assign its text. <code>add_child(display)</code> adds it beneath our node in the scene. Change the quoted words and run again.</p>
+<h2>The view and the light</h2>
+<p>The display exists in 3D space. A <code>Camera3D</code> chooses the view shown on screen. In the study's <code>base.tscn</code>, select the camera and change its z position from 4.7 to 3.0. Run again: the text appears larger, although the text object has not grown. Restore 4.7.</p>
+<p>This is the desktop camera. In XR, the tracked view follows your head; do this position-editing exercise in the desktop study.</p>
+<p>A <code>DirectionalLight3D</code> sends parallel light through the scene, like sunlight. Select it and change its <code>light_energy</code> from 1.2 to 0.0. Run again: the floor goes dark. This study uses no ambient fill light.</p>
+<p>The text stays bright. By default, <code>Label3D</code> is <em>unshaded</em>: its appearance ignores lighting. Being visible and being illuminated are separate conditions here. Restore the light's energy to 1.2.</p>
+<h2>Repeatedly</h2>
+<p>Replace the script with this version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    display.text = str(count)
+    add_child(display)
+
+func _process(_delta):
+    count += 1
+    display.text = str(count)
+</code></pre>
+<p>The display now shows a number that increases.</p>
+<p><code>var count := 0</code> declares a variable starting at zero. <code>:=</code> lets Godot infer its type from the starting value: here, an integer, or whole number. Declared outside the functions, <code>count</code> keeps its value between calls.</p>
+<p>Godot calls <code>_process</code> on each process frame. <code>count += 1</code> adds one to the stored count. <code>str(count)</code> converts the number to text for the display.</p>
+<p>Godot passes the frame's time interval, in seconds, as <code>_delta</code>. The underscore marks an unused input. This example counts calls, not seconds; its speed depends on how often processing runs.</p>
+<p>Change <code>count += 1</code> to <code>count += 2</code>. Each call now adds two. Restore one before continuing.</p>
+<h2>Change when it happens</h2>
+<p>Move the counting instruction into <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    count += 1
+    display.text = str(count)
+    add_child(display)
+</code></pre>
+<p>The display reaches one and stays there. The scene keeps running. The counting instruction happens once because of where you placed it.</p>
+<p>Restore the version with <code>_process</code> to keep counting.</p>
+<p>Our counter begins with this node. The museum panel reads <code>Engine.get_process_frames()</code>: the engine's process-frame total since startup. Its count includes work done before the panel appeared. The two counts have different beginnings.</p>
+<p>In Point One, we will reuse <code>_ready()</code> and a variable to give a point a position.</p></article>
+<details id="view-study"><summary>See the camera and light experiments</summary><div class="views">
+<figure><a href="camera-light-default.png"><img src="camera-light-default.png" alt="White greeting above a grey floor, viewed from the starting camera position"></a><figcaption>Starting view · camera z 4.7, light energy 1.2</figcaption></figure>
+<figure><a href="camera-nearer.png"><img src="camera-nearer.png" alt="The same greeting appears larger with the camera closer"></a><figcaption>Camera nearer · z 3.0; the text object is unchanged</figcaption></figure>
+<figure><a href="light-off.png"><img src="light-off.png" alt="The floor is black while the unshaded greeting stays bright"></a><figcaption>Light off · energy 0.0; the text remains bright</figcaption></figure>
+</div></details>
+<details id="comparison"><summary>Before / after — 574 → 628 words including code</summary>
+<div class="comparison"><div><h2>Before</h2><h1>Point Zero — Hello, world</h1>
+<p>Day Zero gave you a running project. Here you decide what happens once and what keeps happening.</p>
+<p>Open <code>hello_world.gd</code> in <a href="point-zero-study.zip">the Point Zero study</a>. The room supplies the floor, camera and light. The script creates its own text display. Each example can also be attached to an empty <code>Node3D</code> in your prepared scene.</p>
+<h2>Once</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+
+func _ready():
+    display.position.y = 1.5
+    display.text = &quot;Hello, world.&quot;
+    add_child(display)
+</code></pre>
+<p>Run the study. “Hello, world.” appears above the floor.</p>
+<p>A node is a building block of a Godot scene. <code>extends Node3D</code> adds our script's behaviour to a node in 3D space.</p>
+<p><code>Label3D</code> is Godot's class for text in 3D space. <code>.new()</code> creates one. The variable <code>display</code> keeps a reference to that node, so we can change it.</p>
+<p><code>func</code> defines a function: a named block of code. The colon begins the block; the indentation groups its instructions. Godot calls <code>_ready()</code> when this node is ready.</p>
+<p>Inside <code>_ready()</code>, we set the display's height to 1.5 units above its parent and assign its text. <code>add_child(display)</code> adds it beneath our node in the scene. Change the quoted words and run again.</p>
+<h2>The view and the light</h2>
+<p>The display exists in 3D space. A <code>Camera3D</code> chooses the view shown on screen. In the study's <code>base.tscn</code>, select the camera and change its z position from 4.7 to 3.0. Run again: the text appears larger, although the text object has not grown. Restore 4.7.</p>
+<p>A <code>DirectionalLight3D</code> sends parallel light through the scene, like sunlight. Select it and change its <code>light_energy</code> from 1.2 to 0.0. Run again: the floor goes dark. This study uses no ambient fill light.</p>
+<p>The text stays bright. By default, <code>Label3D</code> is <em>unshaded</em>: its appearance ignores lighting. Being visible and being illuminated are separate conditions here. Restore the light's energy to 1.2.</p>
+<h2>Repeatedly</h2>
+<p>Replace the script with this version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    display.text = str(count)
+    add_child(display)
+
+func _process(_delta):
+    count += 1
+    display.text = str(count)
+</code></pre>
+<p>The display now shows a number that increases.</p>
+<p><code>var count := 0</code> declares a variable starting at zero. <code>:=</code> lets Godot infer its type from the starting value: here, an integer, or whole number. Declared outside the functions, <code>count</code> keeps its value between calls.</p>
+<p>Godot calls <code>_process</code> on each process frame. <code>count += 1</code> adds one to the stored count. <code>str(count)</code> converts the number to text for the display.</p>
+<p>Godot passes the frame's time interval, in seconds, as <code>_delta</code>. The underscore marks an unused input. This example counts calls, not seconds; its speed depends on how often processing runs.</p>
+<p>Change <code>count += 1</code> to <code>count += 2</code>. Each call now adds two. Restore one before continuing.</p>
+<h2>Change when it happens</h2>
+<p>Move the counting instruction into <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    count += 1
+    display.text = str(count)
+    add_child(display)
+</code></pre>
+<p>The display reaches one and stays there. The scene keeps running. The counting instruction happens once because of where you placed it.</p>
+<p>Restore the version with <code>_process</code> to keep counting.</p>
+<p>Our counter begins with this node. The museum panel reads <code>Engine.get_process_frames()</code>: the engine's process-frame total since startup. Its count includes work done before the panel appeared. The two counts have different beginnings.</p>
+<p>In Point One, we will reuse <code>_ready()</code> and a variable to give a point a position.</p></div><div><h2>After</h2><h1>Point Zero — Hello, world</h1>
+<p>Day Zero gave you a running project. Here you decide what happens once and what keeps happening.</p>
+<p>Open <code>hello_world.gd</code> in <a href="point-zero-study.zip">the Point Zero study</a>. The room supplies the floor, camera and light. The script creates its own text display. Each example can also be attached to an empty <code>Node3D</code> in your prepared scene.</p>
+<p>This download is a desktop study. The script also gives us a counter to place in Ada's world. Day Zero prepares that world and its XR tools; this example needs no controller input.</p>
+<h2>Once</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+
+func _ready():
+    display.position.y = 1.5
+    display.text = &quot;Hello, world.&quot;
+    add_child(display)
+</code></pre>
+<p>Run the study. “Hello, world.” appears above the floor.</p>
+<p>A node is a building block of a Godot scene. <code>extends Node3D</code> adds our script's behaviour to a node in 3D space.</p>
+<p><code>Label3D</code> is Godot's class for text in 3D space. <code>.new()</code> creates one. The variable <code>display</code> keeps a reference to that node, so we can change it.</p>
+<p><code>func</code> defines a function: a named block of code. The colon begins the block; the indentation groups its instructions. Godot calls <code>_ready()</code> when this node is ready.</p>
+<p>Inside <code>_ready()</code>, we set the display's height to 1.5 units above its parent and assign its text. <code>add_child(display)</code> adds it beneath our node in the scene. Change the quoted words and run again.</p>
+<h2>The view and the light</h2>
+<p>The display exists in 3D space. A <code>Camera3D</code> chooses the view shown on screen. In the study's <code>base.tscn</code>, select the camera and change its z position from 4.7 to 3.0. Run again: the text appears larger, although the text object has not grown. Restore 4.7.</p>
+<p>This is the desktop camera. In XR, the tracked view follows your head; do this position-editing exercise in the desktop study.</p>
+<p>A <code>DirectionalLight3D</code> sends parallel light through the scene, like sunlight. Select it and change its <code>light_energy</code> from 1.2 to 0.0. Run again: the floor goes dark. This study uses no ambient fill light.</p>
+<p>The text stays bright. By default, <code>Label3D</code> is <em>unshaded</em>: its appearance ignores lighting. Being visible and being illuminated are separate conditions here. Restore the light's energy to 1.2.</p>
+<h2>Repeatedly</h2>
+<p>Replace the script with this version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    display.text = str(count)
+    add_child(display)
+
+func _process(_delta):
+    count += 1
+    display.text = str(count)
+</code></pre>
+<p>The display now shows a number that increases.</p>
+<p><code>var count := 0</code> declares a variable starting at zero. <code>:=</code> lets Godot infer its type from the starting value: here, an integer, or whole number. Declared outside the functions, <code>count</code> keeps its value between calls.</p>
+<p>Godot calls <code>_process</code> on each process frame. <code>count += 1</code> adds one to the stored count. <code>str(count)</code> converts the number to text for the display.</p>
+<p>Godot passes the frame's time interval, in seconds, as <code>_delta</code>. The underscore marks an unused input. This example counts calls, not seconds; its speed depends on how often processing runs.</p>
+<p>Change <code>count += 1</code> to <code>count += 2</code>. Each call now adds two. Restore one before continuing.</p>
+<h2>Change when it happens</h2>
+<p>Move the counting instruction into <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var display := Label3D.new()
+var count := 0
+
+func _ready():
+    display.position.y = 1.5
+    count += 1
+    display.text = str(count)
+    add_child(display)
+</code></pre>
+<p>The display reaches one and stays there. The scene keeps running. The counting instruction happens once because of where you placed it.</p>
+<p>Restore the version with <code>_process</code> to keep counting.</p>
+<p>Our counter begins with this node. The museum panel reads <code>Engine.get_process_frames()</code>: the engine's process-frame total since startup. Its count includes work done before the panel appeared. The two counts have different beginnings.</p>
+<p>In Point One, we will reuse <code>_ready()</code> and a variable to give a point a position.</p></div></div></details>
+</main></body></html>

@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cantor — tutorial and reflection</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e8;color:#25222a;font:17px/1.65 system-ui,sans-serif}header,main,footer{max-width:1320px;margin:auto;padding:28px 5vw}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:#853856;text-underline-offset:4px}h1{font:clamp(38px,5vw,70px)/1.06 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}p{max-width:75ch}.lead{font-size:23px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}img{width:100%;display:block}figure{margin:28px 0}figcaption{font-size:14px;color:#605964;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;padding:24px;background:#fffcf6}.reading h1{font-size:38px}.reading h2{font-size:27px}pre{overflow:auto;background:#242129;color:#f5eff1;padding:20px;font:13px/1.6 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}table{border-collapse:collapse;width:100%;background:#fffcf6}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d0c7;padding:16px}blockquote{border-left:4px solid #d292a7;margin:25px 0;padding:12px 22px;font:26px/1.5 Georgia,serif}.pill{background:#25222a;color:#fff;padding:8px 18px;display:inline-block;border-radius:22px;font-size:14px}button{font:inherit;background:#fffcf6;border:1px solid #bfa4af;padding:8px 16px;margin-right:8px;cursor:pointer}button[aria-pressed=true]{background:#25222a;color:white}.notes{background:#e8e0d6;padding:22px}del{background:#ffe3e3}ins{background:#e0efdc;text-decoration:none}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}pre{white-space:pre-wrap}body{background:white}article{break-before:page}}</style><header><p class="eyebrow">Endless Museum · Fractals 03 · 8 October 2026</p><nav><a href="index.html">Museum & changes</a><a href="parallel.html">Tutorial / reflection</a><a href="changes.html">Text before / after</a><a href="student-files.zip">Student files</a></nav></header><main class="pair reading"><article><p class="eyebrow">Tutorial · reconstruct the operation</p><h1>Cantor Set — keep the two ends</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>An interval recorded as a start and a length</li>
+<li>Replacing each entry with two entries</li>
+<li>Separate current and next arrays</li>
+<li>Retained length and generation history</li>
+</ul>
+<p>Take the rose point above the small bar. Pull its middle towards you, past the rose mark, and release. The large bar becomes two. Repeat: every interval loses its own middle third. Your hand makes one gesture; the rule applies it across the current row.</p>
+<p>The small bar is <strong>one interval enlarged</strong>, not the whole row in miniature. Its apparent size stays useful for your hand while the represented length falls. NEXT beside it performs the same cut. BACK and RESET return to earlier states. HISTORY shows the saved rows; GHOST marks removals without giving them collision.</p>
+<h2>What continues</h2>
+<p>Keep the museum workspace and the small <code>PointBody</code> from Recursive Trees. There it turned a branch; here it carries the middle third. We already know arrays from Trace and loops from Arrays. Now a loop constructs a new array from an old one.</p>
+<p>Save <code>cantor.gd</code> beside the unchanged <code>point_body.gd</code>. Replace the script on your empty, unit-scale <code>PointStudy</code> node with <code>cantor.gd</code>; keep the earlier tree script. Place the study where you can stand in front of its positive Z side. The existing museum supplies the camera, light, player and XR pickup functions. The script creates all its own objects and looks up no scene nodes.</p>
+<p>This small reconstruction makes the interval rows and the hand control. The production artifact adds the plinth, comparison buttons, ghosts and full-size bars. The pagoda remains a second encounter with the same rule; rebuilding its architecture is not another assignment here.</p>
+<h2>A record for one span</h2>
+<p><code>Vector2(0, 6)</code> stores <strong>start = 0, length = 6 metres</strong> along a local horizontal line. These two numbers are data, not an XY position. The interval ends at <code>start + length</code>.</p>
+<p>For its first cut, <code>kept</code> is 2. The new records are <code>(0, 2)</code> and <code>(4, 2)</code>. They cover 0–2 and 4–6. We never construct a solid for 2–4. On the next cut, use each record's own start and length.</p>
+<p>The new function reads <code>intervals</code> and fills a separate <code>next</code> array. Only when that loop finishes does <code>advance()</code> replace <code>current</code>. Appending children to the array we are still reading would mix generations. <code>original.duplicate()</code> preserves the starting record; another copy records each completed row in <code>history</code>. <code>Vector2</code> entries are values, so these array copies are sufficient here.</p>
+<h2>cantor.gd</h2>
+<p>Read <code>replace_intervals()</code> first. The rest connects that operation to the point you already hold and gives the numbers a visible form.</p>
+<!-- student-code:cantor.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const HOME := Vector3(0, 1.27, 0.45)
+const VIEW_SCALE := 0.2
+@export var show_history := false
+var original: Array[Vector2] = [Vector2(0, 6)]
+var current: Array[Vector2] = []
+var history: Array = []
+var rows: Node3D
+var point: XRToolsPickable
+var readout: Label3D
+var was_held := false
+
+func _ready() -&gt; void:
+    current = original.duplicate()
+    history.append(current.duplicate())
+    rows = Node3D.new()
+    add_child(rows)
+    point = PointBody.new()
+    point.tint = Color(&quot;e99db8&quot;)
+    add_child(point)
+    for x in [-0.4, 0.4]:
+        bar(self, Vector3(x, 1.15, 0.45), 0.4, Color(&quot;28252c&quot;))
+    bar(point, Vector3(0, -0.12, 0), 0.4, Color(&quot;e99db8&quot;))
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.98, 0)
+    readout.font_size = 24
+    readout.pixel_size = 0.001
+    add_child(readout)
+    park()
+    redraw()
+
+func replace_intervals(intervals: Array[Vector2], fraction: float = 1.0 / 3.0) -&gt; Array[Vector2]:
+    assert(fraction &gt; 0.0 and fraction &lt; 0.5)
+    var next: Array[Vector2] = []
+    for interval in intervals:
+        var start := interval.x
+        var length := interval.y
+        var kept := length * fraction
+        next.append(Vector2(start, kept))
+        next.append(Vector2(start + length - kept, kept))
+    return next
+
+func advance() -&gt; void:
+    if point.held() or history.size() &gt;= 6:
+        return
+    current = replace_intervals(current)
+    history.append(current.duplicate())
+    redraw()
+
+func kept_length(intervals: Array[Vector2]) -&gt; float:
+    var total := 0.0
+    for interval in intervals:
+        total += interval.y
+    return total
+
+func _physics_process(_delta: float) -&gt; void:
+    var holding: bool = point.held()
+    if was_held and not holding:
+        var release := to_local(point.global_position)
+        if release.z - HOME.z &gt;= 0.30:
+            advance()
+    if not holding:
+        park()
+    was_held = holding
+
+func park() -&gt; void:
+    point.global_transform = global_transform * Transform3D(Basis.IDENTITY, HOME)
+
+func redraw() -&gt; void:
+    for child in rows.get_children():
+        rows.remove_child(child)
+        child.queue_free()
+    var first := 0 if show_history else history.size() - 1
+    for generation in range(first, history.size()):
+        for interval: Vector2 in history[generation]:
+            var centre := (interval.x + interval.y / 2.0 - 3.0) * VIEW_SCALE
+            var at := Vector3(centre, 1.8 - generation * 0.16, 0)
+            bar(rows, at, interval.y * VIEW_SCALE, Color(&quot;28252c&quot;))
+    readout.text = &quot;cut %d / 5 | %d pieces | %.3f m kept\nPull the middle towards you 30 cm, then release&quot; % [history.size() - 1, current.size(), kept_length(current)]
+
+func bar(host: Node3D, at: Vector3, width: float, colour: Color) -&gt; void:
+    var surface := MeshInstance3D.new()
+    var shape := BoxMesh.new()
+    shape.size = Vector3(width, 0.05, 0.06)
+    surface.mesh = shape
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = colour
+    surface.material_override = finish
+    surface.position = at
+    host.add_child(surface)
+</code></pre>
+<p>The transition from held to released triggers one cut. Crossing the threshold while still holding changes nothing. Return the point before releasing to cancel. <code>to_local()</code> measures the withdrawal in the study's frame, even if you turn the whole station. <code>park()</code> returns the control after release. Five cuts is our deliberate limit.</p>
+<p><code>bar()</code> reuses the box mesh we already know. <code>VIEW_SCALE</code> fits six represented metres into a 1.2-metre drawing. The counts and lengths use the interval data, not that display scale. These small bars have no collision: they are a drawing of intervals. The point still has its pickup shape.</p>
+<p>The two recursive child calls in Trees and the two appends here share a branching pattern. This script uses a loop to make one complete generation per gesture. It does not call itself; the hand decides when the next generation begins.</p>
+<h2>Predict, then cut</h2>
+<p>After two releases you should have four records, each 2/3 metre long, with 8/3 metres retained in total. After five: 32 pieces, each 6/243 metre, retaining 64/81 metre. More entries, less material.</p>
+<p>Enable <code>show_history</code> in the Inspector and run again. Make the same cuts. The drawing now includes the old rows, but the latest count and retained length must stay the same. At five cuts there are 63 drawn bars across the history and 32 current intervals. <code>original</code> is still <code>[(0, 6)]</code>.</p>
+<p>For an independent variation, change the call to <code>replace_intervals(current, 0.25)</code>. Predict the two records after one cut before running: <code>(0, 1.5)</code> and <code>(4.5, 1.5)</code>. This keeps the outer quarters and removes the middle half. It is a different rule from the middle-third Cantor construction. The small hand model still depicts thirds; resize its three parts before presenting your variant as a matching exhibit. A legal fraction here is greater than zero and less than one half.</p>
+<h2>Bring the question to the pagoda</h2>
+<p>Walk up the existing ramp and try its broad opening. Two presses of CUT add smaller openings alongside it. The same interval rule has been given height, depth and collision. A positive gap width does not guarantee a passage for the player's collision body.</p>
+<p>What travels onward is the replacement function and the distinction between a current result and its record. These arrays live for the study's lifetime; this lesson does not save them across halls. Koch will replace each segment with a detour and increase length instead. Before changing the rule, keep this version so you can compare what each replacement preserves.</p>
+<h2>The carried point file</h2>
+<p>This is the same <code>point_body.gd</code> as in Recursive Trees, included so the two-file example is complete. Its XR pickup and desktop hooks are existing knowledge; they are not new steps in the interval algorithm.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre></article><article><p class="eyebrow">Final · encounter and reflection</p><h1>More pieces, less material</h1>
+<!-- @cantor_set -->
+
+<p>One bar is waiting. Where could it go if we let it become two?</p>
+<p>Take the rose point above the small bar. Pull its middle towards you, past the mark, and release. The large bar gives way to two. Their outside ends reach as far as the first bar, but the middle is missing. Pull again. Look for the new gaps before counting the pieces. Each piece has lost its own middle; the first large gap has not been divided or repaired. NEXT beside your hand makes the same cut.</p>
+<p>The little bar stays large enough to hold. It represents one interval, enlarged; it is not the whole row. The interface keeps a familiar span between your fingers while the thing it stands for becomes smaller. One movement of your hand is being repeated in places you did not touch.</p>
+<p>The trees sent another branch into space. Here another generation leaves less behind. At the fifth cut, thirty-two pieces share less than a metre of the six metres we began with. The desk counts the latest row. Turn HISTORY on. The old bars appear above it. The whole display has become busier while the thing it is recording has become smaller in total length.</p>
+<p>Turn HISTORY off. There is much less to look at. The kept length does not change. The earlier rows were a record we added so we could follow the operation. They were never extra members of the latest generation.</p>
+<p>GHOST brings back pale marks where this generation cut its middles. They have no collision. The display can remember an absence without filling it with something that supports a body. Turn HISTORY on again and follow the larger absences upwards to the rows where they first appeared.</p>
+<p>These two lines make the next pair in the bar's code:</p>
+<pre><code class="language-gdscript">var new_length = bar_length / 3.0
+var offset = bar_length / 3.0
+</code></pre>
+<p>The new bars are placed at the old centre minus that offset and the old centre plus it. Their width is <code>new_length</code>. Two thirds remain, separated by the third for which we create no solid bar. Repeating the operation gives us:</p>
+<pre><code class="language-text">pieces      = 2^n
+piece length = 6 / 3^n
+kept length  = 6 * (2/3)^n
+</code></pre>
+<p>The count rises as the retained length falls. Neither number tells us how much work the renderer is doing. With history visible, it draws every earlier row as well. At five cuts that means sixty-three solid bars, before we count the ghosts, the desk or the rest of the room.</p>
+<p>The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.</p>
+<p>From here the gaps can look generous. Carry that impression up the ramp.</p>
+<!-- @example_8_4_cantor_pagoda_vr -->
+
+<p>There is a broad opening under the pink beam. Walk through it. The same removal that interrupted a bar now offers a passage.</p>
+<p>Return to the desk and press CUT twice. Smaller openings appear beside the first one. Choose one that looks wide enough, go up the ramp and try it. At this setting the gaps include three metres, one metre and a third of a metre. All are gaps. They do not all admit the same body.</p>
+<p>The rule supplied intervals. The pagoda gave them height and depth, stacked their history above them, and made their surfaces collide with us. Here is the box shape used by its collision code:</p>
+<pre><code class="language-gdscript">shape.size = Vector3(width, block_height, block_thickness)
+</code></pre>
+<p>The interval's width is only one of those three decisions. Press DEPTH: the passage becomes longer or shorter while its opening stays the same width. LATEST removes the earlier levels overhead. The ground-level intervals remain; the roof was our way of arranging their past.</p>
+<p>Try the narrow gap once more. The simulation does not collide with every fold of your clothes. It tests a proxy body. A passage can exclude that body even when the eye can travel through it. The obstruction belongs to a relation between the gap and the body we have implemented. To make a way through, we could widen the opening, change the body, or change which surfaces count as solid. Each choice makes a different world.</p>
+<p>More cuts have made more openings, but many are too small for this visitor. Nothing in the operation promises that more detail will make more room for us. And still we want to look inside. That desire can lead us back to the rule, to ask which of its decisions might move.</p>
+<!-- @ -->
+
+<p>At the far end of the hall, three trees stand in a row. They are one rule, three times. Each is grown by a call that makes its children and then calls itself on each of them, the self-call of the first hall, with every fork's angle and length drawn by chance; near the trunk each fork makes three, further out two. Once grown, the branches push apart level by level until they have found room. No seed is kept. The hall builds three different trees each time it is built, and none of them can be asked for again. Every desk in this sequence returns the same object when you press RESET; these trees never do, and “the same tree” stops meaning anything you could check.</p>
+<p>The smaller Cantor drawing, the cloud and the dark sphere remain around the experiment as well. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Georg Cantor published the set in 1883, in the fifth of his papers “Über unendliche, lineare Punktmannichfaltigkeiten” (<em>Mathematische Annalen</em> 21); Henry J. S. Smith had described the same construction nine years earlier. The pagoda is built on Daniel Shiffman's Example 8.4 in <em>The Nature of Code</em>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></main><footer>Native Godot captures and supplied test inputs. Physical headset feel and learner understanding remain untested.</footer></html>

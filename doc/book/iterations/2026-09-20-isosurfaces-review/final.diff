@@ -1,0 +1,45 @@
+--- before/commons/maps/ISO_PortalLandscape/final.md
++++ commons/maps/ISO_PortalLandscape/final.md
+@@ -4,19 +4,30 @@
+ 
+ How can an opening appear without an instruction that draws a doorway?
+ 
+-Find a projecting ledge in the compound landscape, then compare it with a recess or apparent arch. Shift your viewpoint to test whether a dark patch is a hole, a shadowed face or an overlap in projection. Follow the boundary around a candidate opening before deciding what it connects.
++The landscape begins with hills. Come close enough to see their edges, then lower your viewpoint a little. The sheet has an underside. Choose a ridge you can recognise from both sides before pressing HOLD.
+ 
+-Compare a recess with a neighbouring projection and describe which side of each boundary appears to contain material. An apparent arch seen from the front can be a shallow indentation rather than a passage; changing viewpoint tests that reading. Keep one landmark near the candidate opening so that you do not accidentally compare different features. The goal is a modest claim you can support: this boundary projects, this one recedes, or these visible edges appear to enclose a through-opening. The field's named terms can then help explain those observations without replacing them.
++An earlier surface remains in the neighbouring bay. Its scale, orientation and finish match the live one. Press TERMS once. Find your ridge again. Then press it a second time and look underneath. What has changed around the place you chose? The held hills give you somewhere to return with your eye.
++
++The desk moves through hillside, overhung, quarried, arched and compound. Each step adds one weighted contribution to the same field. Coordinates, sampling and the selected level stay fixed. Keep following one place through those names. Some changes are small; a new word on the desk can arrive more dramatically than a new feature in the surface.
+ 
+ The landscape combines several terms in one density field. A base terrain term supplies an initial relation between ground and air. Other terms reduce density in ways intended to produce overhangs, caves and arches. An outcrop term adds material in selected regions. The extractor sees their combined value at each sample.
+ 
+-An opening can result where those contributions cross the threshold together. It need not exist as a separately modelled doorway. Conversely, adding a term associated with arches does not guarantee a useful opening at every location: its effect depends on the other terms already present.
++```glsl
++density = baseTerrain - overhangDensity - caveStrength
++        - archStrength + outcropStrength;
++```
++
++The additions and subtractions occur before the triangles exist. Each term has its own way of varying across space, including regions where its contribution is small or absent. A minus sign gives something permission to remove material; it does not decide what we will recognise in the result.
++
++An opening can result where those contributions cross the threshold together. It need not exist as a separately modelled doorway. At the setting called “arched,” look for an arch. Shift your viewpoint to test whether a dark patch is a hole, a shadowed face or an overlap in projection. The word has given us an expectation. Where does the surface support it, and where are we supplying what we hoped to find?
+ 
+ The preceding terrain introduced a cave contribution beneath an upper surface. This specimen extends that composition. Rather than describing the final silhouette as a single mysterious noise, you can ask what each part of the field is allowed to change.
+ 
+ Despite the specimen's portal name, an opening here is geometry. It does not transport you somewhere else, and its appearance alone does not prove an accessible route through the mesh.
+ 
+-A useful extension would display the existing cumulative settings in order: hillside, overhung, quarried, arched and compound. Preserve common coordinates and scale so that a visitor can follow the consequences of each added term. A second experiment could remove one term from the compound version and ask which features depended on it.
++HOLD can replace the comparison with any current surface. RESET returns the live hills while leaving that copy beside them. CLEAR removes the copy. The held surface has no collision: it keeps a shape for looking, without becoming another obstacle. Even a faithful copy can enter the room with different permissions.
++
++Try keeping the compound surface and returning to the beginning. More terms have given us another form. Have they given us more room? An extra fold might offer shelter, obstruct a view, or make no usable difference for this body. We can want an opening before we know how to make it. Here that desire has found a few specific operations to try, and a surface against which to test their promises.
+ 
+ <!-- @ -->
+ 
+--- before/commons/maps/ISO_Metaballs/final.md
++++ commons/maps/ISO_Metaballs/final.md
+@@ -27,4 +27,4 @@
+ 
+ <!-- @ -->
+ 
+-A metaball has no outline to defend. It is a negotiation among sources, kernel, sampling grid and threshold. The next hall asks what happens when a boundary is not merely blended, but cut into a passage.
++A metaball has no outline to defend. It is a negotiation among sources, kernel, sampling grid and threshold. The next hall asks whether we need to store a boundary as triangles before we can see it.

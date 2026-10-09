@@ -1,0 +1,96 @@
+{
+	"artifacts": {
+		"chroma_translation": {
+			"dna": {
+				"axes": {
+					"along": [
+						"x",
+						"y",
+						"z",
+						"diagonal"
+					],
+					"colour_by": [
+						"kept",
+						"distance",
+						"step"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "colour_by=distance vs colour_by=step at along=x",
+					"predicted_focus_pct": 22.0,
+					"arithmetic": "both paint each copy one flat colour; they differ only in WHICH hue: distance runs blue, blue-green, green-yellow, orange over 3.75 m; step runs ochre, blue, red, yellow. Copy 1 (blue-green vs blue) is the near-match; copies 0, 2 and 3 differ by a full hue step, so the hottest 5% moves at least 22%. Closest ALONG pair: x vs diagonal from the canonical camera, where the diagonal's z offsets read mostly as a slight rise; the rail and the last copy's plate position separate them."
+				}
+			},
+			"lookup_name": "chroma_translation",
+			"name": "Chroma Translation",
+			"class_name": "ChromaTranslation",
+			"scene": "res://commons/artifacts/chroma_translation/chroma_translation.tscn",
+			"category": "color",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "Primitives x colour x translation, for Color_Context_Placed. A five-piece Bauhaus stack 4.4 m tall on a 1.1 m base - a broad cuboid, a cube, a sphere, a cube and a dome, after Siedhoff-Buscher's Bauspiel of 1923 - stands at its origin and again as three solid copies, each one step of 1.25 m further along the floor, so that a translation is something the hall holds still rather than something a cube performs. Two axes, both words. along (x | y | z | diagonal, default x) is where the copies went: x and z run 1.25 m steps in +x or +z, diagonal steps (1.25, 0, 1.25), and y stacks each copy's base 50 mm above the previous top - capped at TWO copies so the tower tops out at 8.85 m, which the plate says. colour_by (kept | distance | step, default kept) is what the colour was attached to: kept paints every copy by Kandinsky's 1923 assignment, circle blue and square red, and is the control - translation preserved the colour because the colour was a property of the shape; distance gives each copy one hue from a ramp on its displacement, blue at the origin and orange at the farthest copy (3.75 m on an axis), so the colour is a function of position and a moved copy cannot keep it; step paints copies 0..3 ochre, blue, red, yellow, so the colour counts the moves. The geometry is identical under all three. A 50 mm rail on the floor beside the row draws the displacement from the origin to the last copy (a post beside the +X face for y), and one text_screen plate on the +Z face of the front-most copy names the two values and states the rule in one sentence. Everything is built in _ready() from built-in meshes, deterministic, no emission, roughness 0.55; one collider box per copy. FOOTPRINT: along x it spans 4.85 m in +x by 1.17 m in z (6 x 2 cells, 5 tall); along z the same turned, 1.17 m in x by 4.85 m in +z; along the diagonal 4.90 by 4.90 m; along y 1.17 by 1.1 m on the floor and 8.85 m tall. NOT COMPILED OR CAPTURED in the session that wrote it.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				6,
+				2,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"interactions": [],
+			"tags": [
+				"color",
+				"translation",
+				"primitives",
+				"bauhaus",
+				"kandinsky",
+				"stack",
+				"totem",
+				"position",
+				"invariance",
+				"dna"
+			],
+			"parameters": {
+				"footprint": [
+					6,
+					2,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.85,
+					4.4,
+					1.17
+				],
+				"source": "procedural, at the defaults along=x colour_by=kept: four 1.1 m bases at 0, 1.25, 2.5 and 3.75 m in +x give x from -0.55 to 4.30 (4.85); the stack is 0.6 + 4 x 0.95 = 4.4 tall; z runs from the base's -0.55 to the rail's far face at 0.62 (the rail lies 20 mm off the +Z faces, 50 mm square), 1.17. The plate at 1.2 m sits inside that box (z to about 0.51, y 0.90 to 1.50). Per along: z gives 1.17 x 4.4 x 4.85, diagonal 4.90 x 4.4 x 4.90 (x from -0.60 to 4.30, z from -0.55 to 4.35, the rail on the -x/+z side), y gives 1.17 x 8.85 x 1.1. Arithmetic from the script's constants, mirrored in Python 2026-09-17, not renders."
+			},
+			"dev_themes": [
+				"what a colour is attached to: the shape, the place, or the count",
+				"a translation held still instead of performed",
+				"the same four stacks carrying three different claims"
+			],
+			"qfep_connection": "The chapter is 'A colour with company', and the sequence's truth is that a colour value enters an encounter with a light, a surface, a position, a neighbour and a viewer. This object isolates one of those companions, position, and moves it, which is the only thing a translation does. Under kept the colour turns out to have belonged to the shape all along, and the move is invisible to it; under distance the colour belonged to the place, and the move destroys it; under step the colour belongs to the history of moves, which no single copy can see in itself. Three attachments, one geometry, and the question of which one a colour 'really' has is not answerable from the stacks. That is the encounter the room is about: a colour is never alone, and what it is depends on which of its companions the rule was written to read.",
+			"note": "NEW 2026-09-17, built to the two-artifact spec for Color_Context_Placed alongside chroma_stack (the primitives x colour half). Config keys: #along:<x|y|z|diagonal> and #colour_by:<kept|distance|step>, WORDS only - both are read from config_<key> metadata in _ready() and again in apply_grid_config, which rebuilds only if a value changed, so the grid's deferred call and curation_station's blanket emissive call touch nothing. An unknown word falls back to the default with a push_warning. NO dna block written by hand: the lead derives it with tools/apply_dna_block.py --token=chroma_translation --axes=along,colour_by. The stack is the shared bauhaus alphabet only (no stack axis here, by the spec). footprint_cells is 9, the sync_footprints cap; the real along-x area is 6 x 2 = 12 cells. NOT COMPILED AND NOT CAPTURED in the session that wrote it - extents are arithmetic from the constants, mirrored in Python."
+		}
+	}
+}

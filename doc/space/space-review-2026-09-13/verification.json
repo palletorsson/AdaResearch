@@ -1,0 +1,76 @@
+{
+  "run": {
+    "started": "2026-09-13T15:42:53+02:00",
+    "finished": "2026-09-13T15:43:20+02:00",
+    "pid": 23136,
+    "exit": 0,
+    "checks": 36,
+    "failures": [],
+    "source_sha256": {
+      "ada_run/space_probe_base.gd": "48aa76adebc515afaded5d79885f9ed751050ebe6bace6edade324bfe53da52a",
+      "ada_run/space_full_acceptance.gd": "0a0faa5cda1551730d10cf9a369ebc10992aaa22a3687409f7499c5af9cb39d3",
+      "commons/maps/Noise_Space_10/map_data.json": "abdb86edb64b77bc63ea2f0d7fe53ab7fedeeec1fb09e52177fad1f81b671e6c",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+      "ada_run/space-review-2026-09-13/review-plan.json": "9368c4d3d4885cf424590f149dcc7cef425be256ed9a4a394623fcae1b7358f0",
+      "commons/context/walkgrids/NoiseSpace.gd": "850ffe4e129660f1c0e30467fe4833203eeb22f4ef4a0a7c2945675658e087ec",
+      "commons/context/walkgrids/TopologySpace.gd": "303bf78154c5994d12b02ec6eead5ea0685c0afe884d374c37834e870588d297",
+      "commons/context/walkgrids/noise_space.tscn": "793c641a2b65f7ab907d91bb38394513aefcd5383f0220e91cc8c707bdefdb52",
+      "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+      "commons/context/walkgrids/noise_walk_study.gd": "ad22291bb19d039c23ff5cfb9345785547d04a5bae850fb6ca1620752ee34804"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "primary": [
+    "noise_space",
+    "dark_sphere"
+  ],
+  "pack": {
+    "planned": 2,
+    "matched": 2,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 2,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "noise|noise space 10"
+  },
+  "source_exact_code_blocks": 3,
+  "all_original_structure_cells_and_utilities_preserved": true,
+  "added_utilities": [
+    [
+      1,
+      1,
+      "wp"
+    ],
+    [
+      10,
+      11,
+      "wp:180"
+    ]
+  ],
+  "both_authored_works_retained": true,
+  "legacy_scene_base_and_orb_unchanged": true,
+  "live_rows_match_accepted_row": true,
+  "unrelated_plan_rows_unchanged_except_noise_indices": true,
+  "final_words": 1043,
+  "diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer."
+  ],
+  "publication_files": 57
+}

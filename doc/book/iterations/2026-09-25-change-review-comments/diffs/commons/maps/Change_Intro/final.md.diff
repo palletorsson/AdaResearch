@@ -1,0 +1,64 @@
+--- before/commons/maps/Change_Intro/final.md
++++ commons/maps/Change_Intro/final.md
+@@ -23,15 +23,21 @@
+ 
+ A broad interval reached beyond the crest. A shorter one stays on the rising part. Neither line needs to accuse the other of lying. They have looked across different distances.
+ 
+-Now press **DERIVATIVE**. A gold tangent appears at the red point. Beside the curve, another plot shows how its local slope varies from place to place.
++Now press **DERIVATIVE**. A gold tangent appears at the red point. Above the curve, a second plot shows how its local slope varies from place to place.
+ 
+ The derivative asks what the finite ratios approach as the interval tends to zero, where that limit exists. The gold line comes from an analytic calculation for this smooth function. We can compare our samples with it, although none of the four STEP settings reaches the limit itself. Dividing by zero would not bring us closer.
++
++![A shorter interval and the revealed slope plot at the museum workbench](/book-review/doc/book/figures/change/two-readings-near-museum.png)
++
++*The red sample has stayed at the same address. The green one has come closer; their joining line now rises. Above the curve, the second plot gives its slope another place to appear.*
+ 
+ Move the red point with the slider. Find a crest. The curve is high there; the gold line is almost level. Follow the slope plot while moving down the other side. Height and rate have acquired separate lives in the picture: a high value can be changing very little, and a low one can be changing quickly.
+ 
+ Try two places of similar height on opposite sides of a crest. A height alone would not tell you which side you had reached. Even the tangent answers only locally. Extend its line in your imagination and watch it leave the curve behind.
+ 
+ The independent variable here is position. Moving your hand quickly over the slider does not turn the displayed rate into a velocity. To ask how fast a body moves, we would need positions and the times at which it occupied them. For now the curve waits while we change the distance across which we read it.
++
++Across the hall, a puck circles a closed track with an arrow turning beside it. There, a clock advances the position. Watch how the arrow turns as the puck rounds a bend.
+ 
+ <!-- @ -->
+ 
+@@ -41,11 +47,11 @@
+ 
+ <!-- @riemann_sum_workbench -->
+ 
+-Four blue rectangles reach up towards it. Their tops cut through the line: some include space above the curve, others leave space beneath it uncounted. We want the area between the curve and the baseline. These four awkward shapes offer a beginning.
++Four blue rectangles reach up towards the same curve. Their tops cut through the line: some include space above the curve, others leave space beneath it uncounted. We want the area between the curve and the baseline. These four awkward shapes offer a beginning.
+ 
+ Choose a rectangle. **CELL +** moves the red sample from one interval to the next. At each, the console gives a height, a width and their product. One height has been asked to represent everything that happens across that width.
+ 
+-Press **HOLD**. A second panel keeps the four rectangles and their total. Then press **RULE**. The live rectangles take their heights from the right edges instead of the midpoints. The curve has not moved, nor have the intervals. What changed was where each interval was asked to speak from.
++Press **HOLD**. A second panel keeps the four rectangles and their total. Then press **RULE**. The live rectangles take their heights from the right edges instead of the midpoints. Another press takes the left edges; one more returns to the midpoints. The held image stays available through all three. The curve has not moved, nor have the intervals. What changed was where each interval was asked to speak from.
+ 
+ The loop can be written like this:
+ 
+@@ -62,6 +68,10 @@
+ The function stays above the baseline here, so every contribution adds positive area. The loop does not need to see the filled picture we are making from it.
+ 
+ Return to MID and increase the count to eight. Keep the held four beside them. A ridge that passed between two samples can now receive a sample of its own. The total changes noticeably. Continue to narrower rectangles. Their differences become harder to see as the tops gather around the line.
++
++![Eight live rectangles beside four held rectangles inside the museum](/book-review/doc/book/figures/change/four-held-eight-live-museum.png)
++
++*Eight live intervals on the left, four held on the right. The earlier reading remains available.*
+ 
+ There is pleasure in watching the little steps approach a curve. The smooth-looking line has been there throughout, as though it already knew the answer. But it too was drawn from a finite set of positions. The two pictures have different resolutions.
+ 
+@@ -101,10 +111,12 @@
+ 
+ There is still something we cannot recover from slopes alone. Lift the whole arch in your imagination. Its rises and falls remain the same; its starting height changes. To recover absolute height from a rate, we must also choose somewhere to begin.
+ 
+-Back at the line, `b - a` gave the same answer for a direct walk and a detour. The arch brings that question into height. Its climb can cancel its descent in this account. A traveller who had to make both would have another account to give. Adding the magnitudes of the changes would keep the rise and the fall from cancelling, but would answer a different question.
++In **Point_Lines**, `b - a` gave the same answer for a direct walk and a detour. The arch brings that question into height. Its climb can cancel its descent in this account. A traveller who had to make both would have another account to give. Adding the magnitudes of the changes would keep the rise and the fall from cancelling, but would answer a different question.
+ 
+ <!-- @ -->
+ 
+ The pulse begins again. We know where it will end, and still have the arch to follow.
+ 
++Other encounters wait beyond the bridge: three sampling rules side by side at the pump, frame-sized steps on the staircase, paper boats in a gutter river, a marble in a swaying bowl. Each offers another way to ask what a description of movement keeps.
++
+ In the next room, the last step will help decide where the next reading happens. The loop is about to make a route of its own.

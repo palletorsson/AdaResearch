@@ -1,0 +1,43 @@
+--- before/algorithms/randomness/SlopeGradientCubes.gd
++++ algorithms/randomness/SlopeGradientCubes.gd
+@@ -20,6 +20,8 @@
+ var _cubes: Array[Node3D] = []
+ var _time: float = 0.0
+ var _container: Node3D
++var _cube_scale: float = 1.0
++var _cube_lift: float = 0.0
+ 
+ func _ready() -> void:
+ 	_container = Node3D.new()
+@@ -45,7 +47,9 @@
+ 			var pos_x = (x * spacing) - (grid_size.x * spacing * 0.5)
+ 			var pos_z = (z * spacing) # Start at 0 and go forward
+ 			
+-			cube.position = Vector3(pos_x, 0, pos_z)
++			cube.position = Vector3(pos_x, _cube_lift, pos_z)
++			if _cube_scale != 1.0:
++				cube.scale *= _cube_scale
+ 			_cubes.append(cube)
+ 
+ func _process(delta: float) -> void:
+@@ -90,4 +94,19 @@
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	# The museum's short comparison contains the whole half-wave. Other placements
++	# retain their authored grid, size and animation settings.
++	if str(config.get("study", "")) != "compact" or has_meta("compact_study"):
++		return
++	set_meta("compact_study", true)
++	grid_size = Vector2i(5, 5)
++	spacing = 0.75
++	_cube_scale = 0.6
++	_cube_lift = 0.42
++	gradient_start_offset = 0.0
++	gradient_length = 3.0
++	max_slope_angle = 30.0
++	animate_slope = false
++	if _container != null:
++		_generate_grid()
++		_update_cubes(max_slope_angle)

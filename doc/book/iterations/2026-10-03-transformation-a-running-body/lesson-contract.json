@@ -1,0 +1,29 @@
+{
+  "status": "author_review_pilot",
+  "map": "Trans_Pre",
+  "source": "commons/maps/Trans_Pre/tutorial.md",
+  "scene": "trans_pre.tscn",
+  "previous": "Primitives_Melencolia: place whole bodies without changing their mesh",
+  "next": "Trans_Introduction: moving surfaces and bodily passage",
+  "needs": ["Point Zero's _ready and _process", "variables and assignment", "Vector3 components", "Trace's if comparison", "mesh data distinct from a mesh instance", "TAU as a full turn from the polygon studies"],
+  "introduces": ["delta as seconds between process calls", "elapsed time drives a transform", "pingpong maps elapsed time to a repeating 0..1 value", "lerp maps that value to an interval", "angular rate multiplied by delta", "uniform scale written from a reference value rather than compounded"],
+  "deepens": ["a condition includes cumulative stages", "position belongs to the whole body", "time, extent and rate can be changed independently"],
+  "learner_owns": ["stage", "elapsed clock", "centre and travel", "leg duration", "turn speed", "pulse extent", "the transform assignments"],
+  "supplied": ["code-built marked BoxMesh", "numerical annotations", "range guards", "Day Zero studio, light, player and input"],
+  "optional_sine": {
+    "source": "commons/maps/Trans_Pre/tutorial-sine.md",
+    "introduces": "A usable sine expression mapped to 0..1, with the same period and endpoints as the linear example",
+    "learner_can": ["change period", "change extent", "compare the approach to an endpoint"],
+    "deferred": ["unit-circle derivation", "phase relationships", "combining waves", "sound"],
+    "later_return": "wavefunctions"
+  },
+  "bounds": "Stage 0..3, travel 0..0.5 m, leg duration >= 0.25 s, pulse 0..0.5. The printed study keeps the centre at 1.3 m and rotates only about Y.",
+  "does_not_claim": ["pickup or collection", "moving-platform support", "physics integration", "general rotation composition", "live museum uses the sine comparison", "scene placement is part of the mesh"],
+  "all_lesson_geometry_created_in_code": true,
+  "scene_child_lookups_in_learner_scripts": false,
+  "canonical_final_md_changed": false,
+  "museum_placement_changed": false,
+  "physical_headset_tested": false,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

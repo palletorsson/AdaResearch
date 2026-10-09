@@ -1,0 +1,305 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Game · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Game">← Tutorial lineage</a></p><h1>Random Game</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Game/final.md">Raw captured source</a></p><pre># Told, or finding out
+
+In the mushroom bed, a draw helped decide which body appeared. In the gallery it became paint, an estimate and a path. In the last room it shifted the layers of a texture. Here it helps decide whether a body will still be there when yours arrives.
+
+&lt;!-- @r_c --&gt;
+
+Three cyan stones cross a rectangular pit. Their tops stand a little above the museum floor. Beyond them, a lit prism stands on a plinth whose face carries a five-digit number. Watch the middle stone before stepping onto it. When it leaves, what would you be standing on?
+
+The stone turns orange and sinks. The bed below remains. Then green, a rise, cyan again. Watch a second cycle. The order may already feel familiar while the pauses refuse to settle into a beat.
+
+The stele at the lip names four states: IT STANDS, IT LEAVES, IT IS GONE, IT RETURNS. The procedure follows that order. A draw supplies the standing wait:
+
+```gdscript
+var visible_wait: float = _next_random_wait()
+_note_step(&quot;stands&quot;, visible_wait)
+await get_tree().create_timer(visible_wait).timeout
+```
+
+Inside the function, the interval becomes a number:
+
+```gdscript
+return _rng.randf_range(min_wait, max_wait)
+```
+
+For this crossing, the standing wait lies between 2.4 and 4.6 seconds; the hidden wait between 1.1 and 2.2. Sinking, rising and the short collider delays take additional time. Knowing those bands does not name the next draw.
+
+Look at the tablet beside the pit. Each stone has a line: its present state, the last drawn wait and the time left of that wait. Now you can know something that watching cyan alone withheld. The current pause has already been chosen. The next one has not yet been drawn.
+
+```gdscript
+_step_wait = wait_seconds
+_step_until_ms = Time.get_ticks_msec() + int(round(wait_seconds * 1000.0))
+```
+
+The counter reads the stored deadline. It does not keep asking for another duration. During LEAVES and RETURNS, the tablet retains the preceding draw at zero remaining time: it is an account of a wait, not a new measurement of movement.
+
+Try the first stone when it stands. Its top is 22 centimetres above the hall floor, approached by a ramp and short landing; the spaces between stones are twelve centimetres. A stone can leave while you are on it. The pit has a bed 1.02 metres below the hall floor and a ramp up its west side. The corridor east of the pit also reaches the far lip. Crossing is one way to investigate this room; going around is another.
+
+Watch the gold ring on the middle stone. It lights during the final 1.2 seconds of that stone&#x27;s standing wait. Press CUE and try observing without it. Each stone still has a small beacon that lights during its movement. The tablet still shows its deadline. This experiment changes the notice carried by the stones; it does not remove every way to anticipate them. Press CUE again and all three stones carry a ring.
+
+Neither cue draws another wait. Yet the same next event becomes available to you differently: a ring before movement, a beacon during it, a number on a surface you must turn toward. Before describing a missed step as poor timing, ask where its warning was readable.
+
+There is another separation under your feet:
+
+```gdscript
+_set_collision_enabled(false)
+_set_state(CycleState.HIDDEN)
+```
+
+The collider remains enabled through the sink and its short delay. It is disabled while the stone is hidden, then enabled before the rise. Appearance, movement and support have separate instructions. A dim shape below you is not necessarily something the collision system will hold you on. The bed supplies the recovery surface.
+
+REPLAY returns all three stones to their standing positions and restarts their seeded waits. Try it after a stone has begun moving. A repeated seed would mean little if an earlier motion kept pulling that stone down. Restarting must also cancel the old motion and restore support.
+
+The plinth names this local construction. NEW SEED chooses a different current number; an older number may eventually return. REPLAY does not rewind the other artifacts or the visitor. You bring knowledge from the previous attempt into a crossing whose seeded waits have restarted: every REPLAY deals the same first waits, though the middle stone&#x27;s are not the ones it began with when the hall was built.
+
+&lt;!-- @random_removal_arena --&gt;
+
+The next glass enclosure carries the removal rule under your feet. Here there are eighty-one cells. Entering selects one; walking farther asks for more. Red gives a short warning, then both the visible cell and its support disappear. The basin below burns. The dark apron remains a route around the changing set, and the console outside the entrance can restore it. This is a deliberate return to Random Remove: the floor you walked there, smaller now, stands between the crossing and the doors.
+
+&lt;!-- @random_doors --&gt;
+
+Beyond it, three doors face you. Stay at the console behind the amber line and choose one. A door lifts. It might remain a passage. It might announce fire, wait one second, then send a short jet toward the line. Watch before moving forward.
+
+One door is assigned passage at the beginning of the round:
+
+```gdscript
+rng.seed = run_seed
+safe_door = rng.randi_range(0, 2)
+```
+
+The other two are assigned fire. Pressing a button reveals an existing choice; it does not redraw the outcome. A jet reaches 2.7 metres and then stops. That door closes again. The passage stays open until reset. There is always one passage in this construction, because we wrote that guarantee before drawing its index.
+
+REPLAY restores the same assignment. NEW SEED makes another seeded round, which may choose the same passage. The doors begin from the same seed each time the hall is built, so until someone presses NEW SEED the passage is the same door for every visitor. After looking once, your next attempt is different even when the doors are not. Memory belongs to the player as well as to the machine.
+
+&lt;!-- @door_timing_trials --&gt;
+
+Farther along, three small passages repeat the same plan. Two lettered plates lie before each entrance. A wall waits behind each door. One lane will open straight through; the other asks you to turn and go around it. Both reach the far side. Here the cost of a choice is a piece of walking.
+
+At SHOWN FIRST, one letter already says DIRECT. The other says AROUND. Step onto a plate. Your entrance lifts. You can choose the shorter passage, or choose the longer one because you want to see where it goes. Knowing does not prescribe what you must want.
+
+At DRAWN AFTER, both letters carry a question mark. Step forward and watch the three signs above you fill: CHOOSE, DRAW, REVEAL. The program waits for your foot before assigning the shortcut. Your chosen letter stays chosen while its meaning arrives.
+
+The third passage looks equally undecided. But HIDDEN FIRST already carries a DRAW in its first sign. Something has happened without becoming available to you. Step onto a plate: CHOOSE, then REVEAL. Perhaps you turn a corner. Perhaps you walk straight through. Could the walk alone have told you whether the assignment came before your step or after it?
+
+The walls have the same dimensions. The drawing rule has the same two possible answers. What changes is the order:
+
+```text
+draw â†’ reveal â†’ choose
+a choice â†’ a draw â†’ its revelation
+draw â†’ choose â†’ reveal
+```
+
+We needed separate instructions for making a decision and making it visible. A question mark could mean that the program has not decided yet. It could mean that it is keeping its decision from you. On the face of the door, these can look the same.
+
+Walk back to the controls outside. REPLAY restores this passage&#x27;s seed. Now an answer withheld by its sign may still be present in your memory. NEW ROUND chooses a different seed, which can still assign the same shortcut. Each passage has its own seed; the first one does not give away the others.
+
+Take the longer way once. What arrived as a letter becomes a turn of the body, a wall passing close to your shoulder, a few more steps. The draw did not make the distance. We built that consequence around it.
+
+&lt;!-- @cube_projectile_spawner --&gt;
+
+After the doors, cubes arrive from above. Watch from the edge before entering their space. Does the interval between arrivals vary in the way the stones&#x27; pauses did?
+
+At the console in front of the field, press RUN / STOP. Wait. Some cubes continue moving. Press CLEAR and compare what disappears. Stopping the source did not recall what it had already released. Clearing the flights leaves the source&#x27;s running state as it was, so stop it first when you want an empty field that stays empty.
+
+Here the timer attempts a launch every half-second. It skips the attempt if 24 projectiles are already active. Each cube lasts ten seconds, so no more than about twenty are alive at once and that limit never binds here; the readout on the dark case beside the field shows the count. The irregularity begins elsewhere:
+
+```gdscript
+var spawn_pos = field_origin + Vector3(
+    _rng.randf_range(-half_w, half_w),
+    field_spawn_height,
+    _rng.randf_range(-half_d, half_d)
+)
+```
+
+Two draws choose x and z in an eight-metre square. Height is fixed at eight metres above the field origin. The floor lines mark that region of initial centres. They are neither walls nor a forecast of every place a cube may reach.
+
+Another draw gives an initial downward speed between 1.6 and 2.6 metres per second. Small sideways velocities and later changes let the bodies drift. The projectile carries its own generator. A seed that repeats its launch position does not, by itself, repeat those later changes or its collisions.
+
+The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that tries every half-second and one that tries every tenth of a second with a one-in-five chance would make the same expected number of attempts over an hour, but different rhythms. The podium ahead uses another rule again: after each arrival, it draws the length of the next wait. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
+
+&lt;!-- @waiting_profile --&gt;
+
+At the last podium, wait for a small wooden cube. It drops from three metres above the floor onto a two-metre-square surface. Another arrives at the other position. The positions alternate; after the first one-second wait, each new delay is drawn between 0.3 and 1.3 seconds. The places are dependable while the rhythm is not.
+
+Pick one up. Arrivals wait while either cube is held. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
+
+Beside the podium, five cutout profiles recede into the room. Their uneven horizons sit around eye height, 1.7 metres. The nearest is dark; those behind grow lighter. Move sideways and watch one contour uncover another. A landscape appears between flat panels.
+
+![The waiting podium and its five receding profiles, photographed from inside the museum.](/book-review/doc/book/figures/randomness/waiting-and-seeing.png)
+
+Each panel joins seventeen heights. The two ends are fixed; the interior samples vary, with smaller permitted deviations near the edges. PROFILE changes the contours. The nearest, darkest panel shares the podium&#x27;s seed, so until you press PROFILE its fifteen interior heights trace the first fifteen drawn cube delays, the ones REPLAY brings back, flattened toward its ends. Read that ridge from the end nearest the podium: a point above the level of the fixed ends stands for a wait longer than 0.8 seconds. The panels behind it are separate draws, and so is every contour after PROFILE. Here you can look back and forth along the sequence. At the podium you had to wait through it. What did seeing the whole shape let you anticipate?
+
+&lt;!-- @ --&gt;
+
+At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. The fire doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it. The three passages let us separate those events and walk what follows.
+
+The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? Carry that question through the biome ladder, where successive compositions gather the rules we have met. In Noise Types we will then take it between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Game/tutorial.md">Raw captured source</a></p><pre># Read the decision before naming the randomness
+
+From Random_Mushrooms, carry the distinction between a recipe and its choices. Random_Game has two primary encounters: the three-stone crossing, then the falling field. Noise_Types follows on the active route.
+
+At the crossing, watch two cycles from the lip. Say the state order aloud. Then compare the three lines on the tablet. Distinguish knowing the next state, knowing the current stored deadline, and knowing the next random draw.
+
+Try the crossing or use the east corridor. Observe a ring before movement and a beacon during it. CUE changes all three stones&#x27; rings; it leaves the tablet available. REPLAY restores standing positions, collision support and the seeded wait streams. It is a local reset, not a rewind of the visitor or room.
+
+```gdscript
+var visible_wait: float = _next_random_wait()
+_note_step(&quot;stands&quot;, visible_wait)
+await get_tree().create_timer(visible_wait).timeout
+```
+
+At the field&#x27;s east panel, stop the source, observe the flights that remain, then clear them. Start it again. The attempt interval is fixed; the centres and initial velocities are sampled. The 24-body cap can suppress an attempted launch.
+
+```gdscript
+if active_projectiles.size() &gt;= max_projectiles:
+    print(&quot;CubeSpawner: Max projectiles reached (%d)&quot; % max_projectiles)
+    return
+```
+
+Use the yellow floor rectangle to compare initial positions. It marks a sampling region, not containment. The independent projectile jitter means a fixed spawner seed is insufficient to replay the whole flight. The browser review provides captured initial values; it is not an added VR seed-entry control.
+
+Ask which observation belongs to which mechanism. The nearby folding creatures and the Monte Carlo study remain secondary; neither is evidence that the crossing or field has another distribution switch.
+
+The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+`random_removal_arena` uses the existing owned-set `RemoveRandom` algorithm and one collider per cell. Entry and accumulated walking request draws; a reset restores both drawings and support. The basin fire uses the museum death/respawn path.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Game/technical.md">Raw captured source</a></p><pre># Random Game — state, time, position and support
+
+Builds on Random_Mushrooms&#x27; distinction between construction and sampled choices; prepares for Noise_Types and relations between neighbouring samples. These excerpts come from the implemented crossing and falling-field scripts.
+
+## Crossing
+
+`commons/primitives/cubes/random_cycle_cube.gd` supplies the `r_c` token. The map uses `r_c#stand:chasm#cue:advance` at (3,4), in its existing five-by-three pit of zero structure cells. It is a cycling cube, not a score controller.
+
+The fixed order is IDLE → GOING_OUT → HIDDEN → COMING_IN. The wait bands in this hall are [2.4,4.6] and [1.1,2.2] seconds. Despite its name, `wait_span_seconds` is the upper endpoint, not an amount added to the lower endpoint.
+
+```gdscript
+var min_wait: float = max(0.1, wait_min_seconds)
+var max_wait: float = max(min_wait, wait_span_seconds)
+```
+
+The sampled duration is recorded once. The display subtracts engine uptime from a stored deadline:
+
+```gdscript
+var left: float = max(0.0, float(_step_until_ms - Time.get_ticks_msec()) / 1000.0)
+```
+
+The display is refreshed about every 0.12 seconds and rounds its values. SceneTree timers and tweens execute at engine frame boundaries. The stored millisecond deadline is a display estimate, not proof of exact wall-clock transition times. Changing Engine.time_scale or pausing the tree would require revisiting this clock agreement; those conditions are not this room&#x27;s controls.
+
+`step_state()` now exposes the actual state separately from the last wait kind. LEAVES and RETURNS retain the last wait at zero; the tablet no longer calls sinking STANDS or rising GONE. The crown checks IDLE and a positive remaining interval of at most 1.2 seconds. All three stones keep during-motion beacons, including when CUE removes the rings. The tablet remains present in both conditions.
+
+The collider is disabled after the 0.5-second sink and 0.2-second delay; after the hidden wait, another 0.2-second delay precedes enabling collision and the 0.2-second rise. State, position and collider must be inspected independently.
+
+REPLAY reseeds the same assignment of streams and restores position/support. `_restart_cycle_loop` invalidates old tickets immediately and kills an active movement tween before starting the replacement loop. NEW SEED excludes the present five-digit number but keeps no history of earlier names. The sequence of draws is replayed; exact wall-clock timestamps and the rest of the museum are not.
+
+The hall floor is root-local CH_FLOOR = 0.28, bed top CH_BED = −0.74, and stone tops CH_PROUD = 0.22 above the hall floor. CH_SINK = 1.22 leaves a sunken stone top 0.02 above the bed. The standing-top-to-bed difference is 1.24 m; floor-to-bed is 1.02 m. CH_PITCH = 1.12 gives 0.12 m gaps between one-metre stones.
+
+The artifact supplies the bed, side/end walls, thresholds and west recovery ramp. `_process` cancels the moving root&#x27;s displacement out of its staging child. The east corridor is an alternative route through the hall; a map flood fill does not prove absence of attacks from other artifacts.
+
+## Falling field
+
+`commons/primitives/cubes/CubeSpawner.gd` is configured at (6,12) with `mode:field`, an 8×8 region, launch height 8, fall range 1.6–2.6, drift 0.25, jitter 0.25, jitter interval 0.45, vertical variation 0.2, spawn interval 0.5 and a maximum of 24 projectiles. `stand:field` adds a panel and initial-position boundary strips; default placements add neither.
+
+```gdscript
+var initial_velocity = Vector3(
+    _rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed),
+    -fall_speed,
+    _rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed)
+)
+```
+
+This mode samples x and z in world axes around the spawner&#x27;s world origin, not rotated local axes. Its initial height is constant. Positions are continuous samples rather than selection of 64 grid cells. A regular Timer attempts launches; at the active-body cap the attempt is skipped. Existing global desktop P/O/C shortcuts remain, but the new panel provides local pointer controls.
+
+RUN / STOP toggles the timer. STOP leaves active bodies; CLEAR queues those bodies for deletion and clears their account without changing the running state. Repeated toggles cancel the prior pulse tween instead of stacking animations. Configuration can arrive before `_ready`, so the interval setter must retain the number even when its Timer node is not yet bound.
+
+`ProjectileCube.gd` gives each body its own randomized generator. Every jitter update selects a new lateral velocity and a downward speed near that body&#x27;s base fall speed. Gravity is disabled in field mode, and the integration callback imposes the current velocity. This is prescribed velocity with collision response, not a freely accelerating rain model.
+
+```gdscript
+velocity.x = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+velocity.z = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+velocity.y = -new_fall_speed
+linear_velocity = velocity
+```
+
+`field_seed` controls initial positions and velocities only. The review repeats those records while checking that projectile jitter streams remain independent. No distribution-mode panel, survival-score controller or per-frame performance measurement is claimed. The legacy empty audio placeholders are omitted rather than treated as playable sounds.
+
+## Remaining company and validation limits
+
+Six folding creatures and `monte_carlo` remain secondary. The latter&#x27;s π sampling implementation exists; its integration, option-pricing and random-walk alternatives are stubs. Its camera/input arrangement and staging need a separate pass before promotion. Enemies can detect and pursue; moving their map cells does not establish isolation. Combat balance and a controlled encounter activation scheme remain open.
+
+The independent desktop run checks museum placement, floor rays, recovery, real pointer controls, reset during movement, cue invariance, initial launch records and the cap. Headset approach, comfort, legibility and performance remain for a later visit.
+
+The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.
+
+
+## Current staging and door timing — 24 September 2026
+
+This note supersedes the earlier placement and creature-inventory notes above; those describe an older hall. The current 19×66 source map has the crossing (9,6), removal arena (9,17), original fire doors (9,29), door_timing_trials (9,38), falling field (9,51), and waiting_profile (9,61). Fourteen floor rows were inserted before old row 32, retaining every former row and token. The incomplete Monte Carlo display and folding creatures are not current placements.
+
+The new trials share geometry and the binary uniform `randi_range(0, 1)` draw law, but use distinct local seeds. SHOWN FIRST draws and reveals on reset. DRAWN AFTER draws after the first accepted plate entry. HIDDEN FIRST draws on reset but reveals only after plate entry. Each accepted choice records an immutable DRAW/CHOOSE/REVEAL event order for that round. Re-entry cannot draw again. This comparison separates assignment from disclosure; it does not claim a visitor can infer timing from outcome statistics alone.
+
+Each plate is a player-filtered Area3D, usable by the museum CharacterBody or registered VR player bodies. Initially both entry panels and both shortcut panels are closed. Selection lifts the chosen entry, and its shortcut only if it is the direct lane; the unchosen entry stays closed. This prevents the hidden assignment being exposed by different pre-choice geometry. The other lane has a 1.2 m side opening and one-metre outer corridor. Both routes meet at the rear. The visitor may retreat through the chosen entrance. Reset/new-round controls are outside the route and reject requests while player occupancy is detected. An accepted reset kills any opening tween before restoring collision. No draw forces a particular face or switches passage after selection.
+
+The printed seed belongs to that trial only. REPLAY repeats its assignment, not the visitor&#x27;s knowledge or the rest of the hall. NEW ROUND excludes the present seed but can still give the same binary result. The existing fire-door artifact is unchanged and remains a separate earlier encounter.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Game/intent.md">Raw captured source</a></p><pre>Concept: Specify what is uncertain, when it is drawn, when it becomes knowable, and what a choice changes for the body.
+
+Sequence role: Random_Game closes the active fourteen-map randomness route after Random_Space and prepares for Noise_Types. Sequence order is preserved.
+
+Primary thread: r_c → random_removal_arena → random_doors → door_timing_trials → cube_projectile_spawner. The waiting_profile remains a closing companion. Multiple encounters contribute distinct comparisons; none is removed to enforce a primary count.
+
+Critical question: Which decisions are already made, which are still to come, and what lets the visitor know the difference? Knowledge can guide a choice without determining what the visitor wants.
+
+Staging, 24 September 2026: 19×66 hall. Existing crossing at (9,6), removal enclosure at (9,17) and fire doors at (9,29) retained. Fourteen solid-floor rows inserted before the former row 32 create a bay for three matched passages at (9,38). Falling field moves from (9,37) to (9,51); waiting profile from (9,47) to (9,61); exit moves to row 65. All original rows and artifact configuration strings are preserved. The three passages occupy fifteen metres across the seventeen-metre interior, leaving side bypasses. The new comparison has no fire: DIRECT or AROUND changes the walking route. Opaque gates conceal shortcuts until selection; each route can be exited or backed out of. Reset is refused while a player occupies the passage. Headset reach, comfort and learner acceptance remain open.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Game/critical.md">Raw captured source</a></p><pre># What the floor lets you know
+
+The mushroom bed permitted certain differences through its recipes. This room asks when a difference becomes available to the body that must act on it.
+
+The crossing&#x27;s next state is specified. Its next wait is sampled. During the current wait, the duration has already been recorded, and the tablet exposes what colour alone does not. Uncertainty belongs partly to the procedure and partly to the visitor&#x27;s access to its state. Calling both random loses the distinction that makes the experiment possible.
+
+Pressing CUE does not make the machine more generous with its standing time. It changes the notice on its stones. An advance ring permits a different preparation from a beacon during movement. Both are partial: the ring requires attention to the stone; the tablet requires attention elsewhere; neither announces the next unsampled duration. Removing the rings leaves the tablet intact, so this is not a comparison between complete knowledge and its complete absence.
+
+That specificity matters before turning a missed step into a judgment about a person. The result depends on what could be read, when it could be read, movement capabilities, prior experience and the available return route. The state machine stores none of that as an account of the visitor. It can report its own state without explaining why someone fell.
+
+The east corridor and the pit&#x27;s recovery ramp make different ways of continuing possible. A person can study the stones, attempt the crossing, return through the bed or walk around. These are useful terms for an artistic research question about which bodies an arrangement accommodates. A desktop traversal establishes some geometry and mechanics; it does not settle that question for seated or standing headset users.
+
+The falling field adds a second experiment. Stopping its source leaves earlier emissions moving. Their separate generators continue selecting velocities. A boundary around starting positions cannot promise that trajectories remain inside it, and a repeated launch seed cannot promise repeated contact with a visitor. The object&#x27;s past is distributed across more state than its label records.
+
+The other creatures complicate the encounter further. A hit cannot automatically be attributed to the field&#x27;s sampling law, and relocation is not proof of separation from the crossing. The room should eventually make that comparison controllable. For now, the text names the distinction and the review records this limitation instead of describing an isolated or harmless experiment.
+
+QFEP enters here as a research question about what a system keeps fixed, what it permits to vary and what another body can do with those variations. This room does not calculate entropy, a free-energy value or a universal threshold. Its argument is executable in narrower terms: change a cue without changing a deadline; stop a source without recalling its emissions; repeat initial conditions while locating the state that still differs.
+
+Noise Types will change the relation among samples. Before asking whether a landscape is smooth or hostile, we have learned to ask which rule produced its differences and which relation our description left out.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Game/artifacts.md">Raw captured source</a></p><pre># Artifacts in Random_Game
+
+The instrument and the spatial encounter share a hall. Placements are source-grid metres; the entrance is at -Z.
+
+| Artifact | Role | Position (x, z) |
+|---|---|---|
+| `r_c` | primary | (9, 6) |
+| `random_removal_arena` | primary | (9, 17) |
+| `random_doors` | primary | (9, 29) |
+| `cube_projectile_spawner` | primary | (9, 37) |
+
+The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
+
+`random_removal_arena` deliberately returns from Random_Remove as an application in a game; this is not an accidental duplicate. The smaller table remains in its teaching hall.
+
+Supporting artifact: `waiting_profile`, at (9,47): restored wooden pickup cubes and random-height profile.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Game/summary.md">Raw captured source</a></p><pre># Random Game — two encounters with uncertainty
+
+The 15×18 hall keeps nine placed artifacts. Two primaries form the book&#x27;s thread: `r_c`, the three-stone crossing at (3,4), then `cube_projectile_spawner`, the falling field at (6,12). Six folding creatures and `monte_carlo` remain secondary.
+
+The crossing follows a fixed four-state order and samples its standing/hidden waits. Its stele, tablet, rings, beacons and collider expose different facts. REPLAY restores the local construction; NEW SEED chooses another current seed; CUE changes advance rings while retaining during-motion beacons and the tablet. The pit has a bed, west recovery ramp and east bypass.
+
+The field attempts launches every 0.5 seconds into an 8×8 region, with sampled initial velocities and separately randomized later jitter. Its east panel supplies RUN / STOP and CLEAR. Floor strips mark initial centres, not containment. It remains a hazard.
+
+The active route goes Random_Mushrooms → Random_Game → Noise_Types. Current work aligns the actual mechanisms, tutorial roles and book; headset play and controlled separation from the other creatures remain open.
+
+The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Game/blurb.md">Raw captured source</a></p><pre>A stone has already chosen how long to wait. A cube overhead has already left its source. You can stop a machine and still be inside what it has done.
+</pre></section></body></html>

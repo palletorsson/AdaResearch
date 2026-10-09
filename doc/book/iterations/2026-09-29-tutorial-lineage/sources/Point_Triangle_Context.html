@@ -1,0 +1,308 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Triangle_Context · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Triangle_Context">← Tutorial lineage</a></p><h1>Point Triangle Context</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Triangle_Context/final.md">Raw captured source</a></p><pre># Closing a boundary, adding a face
+
+Three edges meet. You can still see the room between them.
+
+&lt;!-- @triangle_line_puzzle --&gt;
+
+Bring the loose lines to the three waiting corners. Fit the last edge and look through the triangle. Closing it has not covered anything.
+
+Press **SHOW / HIDE FILL**. A translucent patch appears between the same corners. Press again. The edges stay; the patch goes.
+
+A boundary and a face have arrived through different actions. Connecting three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. The positions do not contain that instruction. We added it.
+
+&lt;!-- @triangle_construction_plate --&gt;
+
+The wall plate holds the distinction still: three points, three connected edges, a face.
+
+![The same three corners shown as points, a connected boundary and a filled triangle.](/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png)
+
+We built this plate while writing the chapter. The book needed an image; the room gained another object to approach. This illustration is a Godot view of that same construction. A sentence can ask for something to try, and making it can change the sentence.
+
+&lt;!-- @draw_triangle_faces --&gt;
+
+At the small drawing station, a triangle waits with black corners and an off-white face. If you released a drawing in Trace, your own bend waits here instead, still open. Its journey has changed it: six positions kept, its span reduced to arm&#x27;s reach, its height flattened. The machine has prepared your drawing for a method that expects a plane. What did that preparation leave behind?[^point-triangle-carry]
+
+Move the drawing point near the first corner to close that carried loop. For the simpler comparison, **RESTORE TRIANGLE** replaces the current drawing with three editable corners.
+
+&lt;!-- @triangle_live_twin --&gt;
+
+Look up. The small drawing has a twin in the middle of the hall. Move a corner and watch the same change arrive more than three times larger. Your hand can reach the small figure; your body can walk around the other.
+
+Leave the corners where they are. Walk towards the side of the large face. Its breadth narrows until the black edges almost meet in your view. Step back and the surface opens again. You have changed where you look from, without moving a single corner.[^point-triangle-winding]
+
+Now return to the small drawing. Bring its upper corner down onto the line between the other two and release it. The large figure flattens too. This time walking around cannot recover the missing area. Three positions remain, but they lie along one line. Lift the corner away and a face opens between them again.
+
+From one view, these two events can look alike. In one, the face waits for another viewpoint. In the other, we must change what we made.
+
+&lt;!-- @draw_triangle_faces --&gt;
+
+Press **SHOW / HIDE FILL** while the triangle is open in your view. Both copies lose their faces together; the corners and edges remain. Hiding a surface has left its geometry available for a return. The large fill also lets you walk through it while it is visible. What covers your view need not stop your body.
+
+We have been calling all of these a triangle. A boundary, a rendered face, a figure seen edge-on, three corners with no area: keeping their differences lets us do more with the name.
+
+The tool will accept longer outlines too. Draw a six-corner L, close it, then release the handles and press **SHIFT START**. The corners stay where they were. The fill can reach across the notch you left open.[^point-triangle-construction]
+
+Every triangle in this method shares the first corner. Choosing another beginning changes the fan. Its rule has kept working while failing to keep your intended interior. The counter still reports four triangles; counting them does not tell us whether they belong there.
+
+We can choose a suitable start, ask for a different filling method, or keep the unexpected wing as the beginning of another work.[^point-triangle-triangulation] The mistake needs an explanation, but its explanation need not decide what we want from it.
+
+&lt;!-- @quad_line_puzzle --&gt;
+
+At the far end, four edges offer another empty boundary.
+
+&lt;!-- @quad --&gt;
+
+Nearby, the quad adds two triangular faces along a diagonal. Lift a corner away from that diagonal: one face follows while the other stays. Move an end of the shared edge and both change. A shape that looked like one square has given us two surfaces that can tilt apart.
+
+Next, faces meet at a corner. What must we add to enclose a volume?
+
+[^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
+[^point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.
+[^point-triangle-carry]: The trace travels on the same `TraceData` autoload that brings your drawing to the ruled field in Grid: releasing one of the three coloured drawing pens in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. Grid and Triangle each read that saved drawing; Triangle does not receive Grid&#x27;s enlarged or snapped display. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard&#x27;s image travels by no route at all.
+[^point-triangle-construction]: The [technical companion](/book?map=Point_Triangle_Context&amp;section=technical) gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Triangle_Context/tutorial.md">Raw captured source</a></p><pre># From a closed boundary to a visible face
+
+In [Grid](../Point_Line_Grid/tutorial.md), positions became addresses we could return to. This hall uses that repeatability to make corners meet. Its first question is small: **does closing three edges also make their centre visible?**
+
+## Close, look, then fill
+
+At `triangle_line_puzzle`, fit two edges and look through the opening. Fit the third. The instrument reports a closed boundary; the centre is still unfilled. Press SHOW / HIDE FILL. Compare the coloured face with the retained outline, and walk around it before hiding it again.
+
+The completed puzzle&#x27;s fill uses three target positions. This is the actual submission in its script:
+
+```gdscript
+mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
+mesh.surface_end()
+```
+
+The primitive type tells the renderer how to interpret the vertices. Connecting line endpoints and submitting a filled triangle are separate operations. The button is enabled in effect only after the puzzle is complete: pressing it earlier creates no face.
+
+Three distinct, non-collinear points determine a unique plane. Move your viewpoint until the face looks narrow. Its projected width can shrink while its area stays fixed. Making the points themselves collinear would be a different change, leaving zero triangle area. The puzzle&#x27;s material displays both sides; an edge-on view is not proof that a side has been culled.
+
+## Record your own corners
+
+At `draw_triangle_faces`, pick up the drawing point. Hold at each intended corner until a numbered point appears. The held-placement interval is one second, with at least 0.15 metres of travel from the last corner; positions round to a 0.1-metre world grid. Returning within the existing-point snap radius can reuse a point. Make a triangle, returning to the first point to close it.
+
+The instrument separates filled loops from logical triangles. A three-corner loop adds one of each. SHOW / HIDE FILL changes visibility without deleting corners or boundary lines.
+
+Release at the closing corner. The release callback can record that position, but an unheld tool does not continue timed sampling. Existing corner handles remain editable; moving and releasing one stores its new snapped position and rebuilds its faces. This editor can change side lengths; it is not a linkage of rigid rods.
+
+For an independent comparison, release, press NEW OUTLINE and pick up again. Completed faces and their numbered corners remain. START identifies the first point in the new path; it is not a command to clear everything.
+
+## A face, then a view of it
+
+Begin with the small triangle and its large twin. Move one corner and release it; both copies retain that change. Walk towards the side of the large copy without touching the small one. Its projected width narrows while its three positions stay fixed.
+
+Return to the small copy. Bring the top corner onto the line between the other two, then release. The starter corners use the same ten-centimetre world grid as your drop, so the baseline is reachable. A collinear triangle has zero area even though the tool still retains three points and counts one logical triangle. Move the corner away to recover a face. SHOW / HIDE FILL changes visibility without removing the points. RESTORE TRIANGLE replaces the current drawing with the starting three corners; release every held point or pen before using it.
+
+These are three different changes: viewpoint, vertex position and visibility. Use one at a time before extending the outline below.
+
+## Keep the outline, change its start
+
+Make this simple L in a horizontal plane, clear of the practice triangle so its points do not catch the new corners. Coordinates are metres along two horizontal directions from a chosen origin; hold the height fixed. The labels A–F are our recipe, not labels supplied by the tool.
+
+```text
+A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
+D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
+```
+
+1. Follow A → B → C → D → E → F → A. Inspect the fill.
+2. Release, start a new outline and reuse those six corners in B → C → D → E → F → A → B order.
+3. Keep the boundary direction, positions and height fixed. Check START before closing; look into the missing notch after each fill.
+
+Both routes bound the same region. The fan from B extends into the notch. To locate the decision, read these lines from `_create_triangles_from_path()`:
+
+```gdscript
+var first_point = placed_points[loop_points[0]]
+for i in range(1, loop_points.size() - 1):
+    var v0 = first_point
+    var v1 = placed_points[loop_points[i]]
+    var v2 = placed_points[loop_points[i + 1]]
+```
+
+The following code submits each triple as a triangle, with normals, colour and a reversed copy. Here the important choice is which indices share `first_point`. From B, the logical triangles are BCD, BDE, BEF and BFA. Some cross the region you left open.
+
+For `n` corners, this loop makes `n - 2` logical triangles. Both Ls together add two loops and eight triangles. If you kept the first practice triangle and made no extra loops, the total becomes three loops and nine triangles. Hiding a fill does not subtract it from the counter.
+
+A first-vertex fan fills a convex planar polygon. Some concave polygons also admit this fan from a suitable vertex. The failure is not “concave means impossible”; it is a particular method applied from a particular start. The artifact does not check coplanarity, self-intersections or whether the fan stays inside an intended polygon.
+
+## Carry a distinction to the next room
+
+Explain the overspill by pointing to one emitted triangle. Then choose what you would preserve: the outline, this filling method or the unexpected surface as material for another work. A new use is possible without changing code; a different filling algorithm would require an implementation change.
+
+The [secondary studies](detours.md) extend this into shared edges, folds, symbols and measurement. We can return to them. [Polyhedra](../Primitives_Polythedra/tutorial.md) asks what faces need to enclose a volume. Three faces meeting at a corner still leave an opening; a tetrahedron needs four triangular faces.
+
+Source details and validation limits are in [technical.md](technical.md) and [encounter-reference.md](encounter-reference.md).
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Triangle_Context/technical.md">Raw captured source</a></p><pre>&gt; Current hall update — 1 October 2026. Eight placements; see [the current inventory](artifacts.md). The live twin now supplies RESTORE TRIANGLE, refuses reset during a held edit, and constructs reference points using the editor&#x27;s world snapping function. Zero-area triangles retain their logical count and black boundary but submit no face in the large twin. The existing first-vertex fan, carried-outline path and SHIFT START remain. Earlier source analysis below predates this arrangement.
+
+# Point_Triangle_Context — implementation reference
+
+This reference follows the closure puzzle, construction plate and shared drawing with its large twin in [final.md](final.md). The broader studies remain in [detours.md](detours.md); the preceding technical chapter is preserved in the [source archive](../../../doc/space/point-triangle-focus-2026-09-16/previous/technical.md).
+
+## Puzzle: completion and visibility
+
+Source: [triangle_line_puzzle.gd](../../primitives/line/puzzles/triangle_line_puzzle.gd), its [scene](../../primitives/line/puzzles/triangle_line_puzzle.tscn), and [triangle_experiment_panel.gd](../../ui/triangle_experiment_panel.gd).
+
+The placed token is `triangle_line_puzzle:90:1.4#discovery:1#stock:ringed#plinth:0#pin:1` at cell (4, 2). The base puzzle fits line endpoints to a three-edge target with connectivity and closed-loop constraints. Completion locks the puzzle. These manipulable edges should not be described as a physical mechanism that preserves three rod lengths while resisting the hand.
+
+Discovery mode installs a small instrument. It reports fitted edges, boundary state and fill visibility. `toggle_discovery_face()` returns without creating a face unless `is_completed` is true. After completion it creates an `ImmediateMesh` from the three local `target_positions`, or toggles the existing mesh&#x27;s visibility. Reset removes that mesh, but the chapter does not promise a visitor reset button.
+
+The fill material is translucent, unshaded and double-sided. The generated face has no collision shape. Mesh visibility, puzzle completion and physical support are separate properties. A visible patch is not thereby a floor.
+
+Three distinct, non-collinear points determine a plane; collinearity gives zero area. A useful geometric calculation is:
+
+```gdscript
+var cross := (b - a).cross(c - a)
+var area := 0.5 * cross.length()
+```
+
+This is explanatory geometry, not an installed area display. Do not normalize a zero cross product and call it a defined surface orientation.
+
+Godot uses clockwise winding to identify triangle front faces. Vertex normals participate in shading; changing a normal is not the same as reversing the submitted vertex order. Materials can disable culling, as here. The old tutorial&#x27;s geometric `faces_you` example is not a test of Godot&#x27;s front-face convention. [Godot SurfaceTool documentation](https://docs.godotengine.org/en/stable/classes/class_surfacetool.html).
+
+## Drawing: when a point is accepted
+
+Source: [draw_triangle_faces.gd](../../primitives/point/draw_triangle_faces.gd) and its [scene](../../primitives/point/draw_triangle_faces.tscn). The placement enables `#discovery:1`, `#carry:trace`, a 1.10-metre plinth and 180-degree rotation. Museum seating determines the final root height; the native trial measured 1.5725 metres. The twin tracks subsequent source transforms and rebases the world-space drawing onto its support, using the same world snap grid. Without that correction, a later plinth lift left the enlarged starter partly below the floor. The native test now compares initial and restored corner positions, not only area.
+
+`_process(delta)` returns before sampling when `_is_grabbed` is false. While held, it rounds the drawing sphere&#x27;s world position, identifies a nearby stored point, and advances the placement timer. At the defaults, a held sample needs one elapsed second and at least 0.15 metres from the previous path point. An empty path accepts its first point without that travel requirement. Acceptance resets the timer; waiting at the same last corner does not add repeated points.
+
+The world-grid pitch is 0.1 metres. `_find_nearby_point()` reuses the first stored point within the 0.15-metre radius; it is not a nearest-neighbour minimization. In a crowded drawing that distinction can matter. The comparison uses well-separated corners.
+
+`_on_grab_point_dropped()` can place the released position even before the next timed sample. It then ends held sampling and clears the active preview. Releasing at the closing corner avoids introducing an unintended next corner. There is no claim of a perfect hand trajectory or a configurable sampling control on this panel.
+
+Point handles, boundary lines and completed meshes use world positions with top-level transforms, avoiding a second application of the artifact&#x27;s rotation and translation. Releasing an edited corner snaps it, updates `placed_points`, and rebuilds boundaries and completed faces. In this hall, the live twin also follows held corner positions and rebuilds both scales every 0.04 seconds; the drop commits the snapped position. This continuous update is supplied by the twin, not by the standalone drawing script.
+
+## Closing a path and keeping earlier work
+
+`current_path` is an ordered list of indices into `placed_points`. Returning to a previously visited index can close the cycle from that earlier occurrence. The duplicate closing index is removed before triangulation, and a cycle needs at least three entries. The chapter&#x27;s simple loops return to DRAW START, avoiding ambiguous partial cycles. DRAW START marks the first corner of an unfinished outline; START marks the fan anchor of the last completed loop.
+
+`begin_new_outline()` clears the active path and starts a new drawing gesture while preserving stored points and completed meshes. The physical NEW OUTLINE button calls it. Release, press, then pick up again is the taught sequence. It neither erases earlier practice nor deletes a malformed fill.
+
+`shift_start()` operates on `completed_triangles[-1]`, cyclically moving its first stored corner index to the end. `_rebuild_triangle()` replaces the mesh resource on that loop&#x27;s existing mesh node, and `_rebuild_lines()` retains the same boundary edges. Stored positions, other completed loops, material and fill visibility stay unchanged. The panel identifies the selected loop and its START corner; `get_experiment_state()` supplies that selection and the control&#x27;s readiness.
+
+`_shift_start_block_reason()` permits the action only when a completed loop exists, the pen and all editable corners are released, and there is no unfinished outline. The single continuation anchor retained after closure is allowed; a newly drawn first corner is an unfinished outline. The panel reports the blocking reason. NEW OUTLINE clears an unfinished path without removing the last completed loop, so it can make that loop available again once the pen is released.
+
+The panel counts `completed_triangles` entries as filled loops and sums `points.size() - 2` as logical triangles. A practice triangle followed by one six-corner L gives two loops and five triangles; SHIFT START leaves those totals unchanged. Manually retracing a second L gives three loops and nine triangles, provided no extra loops were created. Visibility toggling does not change these totals.
+
+## What the fan submits
+
+`_create_triangles_from_path()` uses the first loop point with every successive pair. For six corners it creates four logical triangles. It submits both vertex orders for each triangle and also disables culling in the material. Thus the display&#x27;s logical count is not a count of every submitted triangle copy or GPU vertex. The current implementation contains redundant double-sided rendering; simplifying it would be a separate runtime change with visual checks.
+
+The algorithm does not validate planar simple polygons, detect self-intersections, or test fan diagonals against an interior. Convex planar polygons work; suitable concave ones can work from particular starting vertices. Arbitrary nonplanar loops do not specify a unique planar interior to triangulate.
+
+The [supplied-input fan probe](../../../tools/probes/museum_triangle_fan.gd) runs the actual drawing scene and its pointer-button callback. It reuses six coplanar world points for the L described in the book. Both starts have boundary area 0.8 square metres. Starting at A produces four triangles with summed area approximately 0.8; starting at B produces four with summed area approximately 1.44, two of whose centroids lie in the excluded notch. The latter sum includes overlaps; it is not the union area of the rendered patch. Counting alone does not establish coverage correctness.
+
+On the manual route, the two L fills coexist. Inspect the first before creating the second; after adding the second, look for new coverage in the notch. NEW OUTLINE preserves the first fill, so this is not a side-by-side display of independently movable polygons. SHIFT START instead replaces the selected loop&#x27;s fill: one L retains four triangles while its start advances from A to B. Six shifts return its order and emitted fan to A.
+
+## A connected surface is not yet an enclosed volume
+
+The optional `quad` splits four source positions along one chosen diagonal. Moving a corner can put its two triangles in different planes. The `folded_strip` shares source positions across twenty-four triangles and, in this placement, runs its hinge study. Its programmed rotations preserve edge lengths; manual vertex edits can change them. Neither example makes the editable face into a fixed-length rod mechanism.
+
+Three triangular faces meeting at one vertex form a corner with an open boundary. Four correctly connected triangular faces can enclose a tetrahedron. The next hall investigates these constructions; the earlier assertion that a trihedron is already a minimal closed surface was incorrect.
+
+## Verification and practical limits
+
+The 16 September run of [probe_triangle_primary.gd](../../testing/probe_triangle_primary.gd) passed 23 checks against actual endpoint and pointer events, transformed scenes, supplied held motion, corner-release updates and the panel. The fan probe passed the manual two-start comparison. Their compact results are retained with the [dated work record](../../../doc/space/point-triangle-focus-2026-09-16/README.md).
+
+The 19 September [museum test report](../../../ada_run/test-results/museum/20260919T114824Z-3f7651db/report.md) passes all 123 Godot checks and nine authored checks. Its Triangle case uses [triangle_shift_check.gd](../../../tests/museum/triangle_shift_check.gd) and passes 60 Godot checks plus two authored checks. It exercises the production scene with supplied hand positions and actual pickup, release and pointer callbacks: unchanged points and edges, in-place replacement and counts, A/B overspill, return to A, readiness guards, corner edits, manual retracing and other loop lengths.
+
+The [isolated-scene capture record](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-shift-observation.json) and plan views from [A](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-start-a-plan.png) and [B](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-start-b-plan.png) show the production drawing scene and discovery panel with supplied positions. They do not test the authored museum placement or a headset.
+
+These checks verify specific engine behavior. They do not verify reach in a headset, hand-drawn coplanarity, comfort, learning or the room&#x27;s secondary interactions. Engine notices are retained in the test report. The first-vertex fan algorithm remains the same; SHIFT START adds a runtime control for changing its input order.
+
+## Draw the six-corner L
+
+This construction accompanies the shorter encounter in `final.md`. Keep all corners at one height, with clear space beside the practice triangle. Release the pen and press NEW OUTLINE to keep that triangle and begin a separate outline. Make a 1.2-metre square missing a 0.8-metre corner; its two arms are 0.4 metres wide.
+
+The coordinates name two horizontal directions in metres, relative to the outer corner where the two long edges meet:
+
+```text
+A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
+D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
+```
+
+Follow **A → B → C → D → E → F → A**. Wait for each numbered point before moving on: held drawing uses a one-second interval and movement gate, with positions rounded to 0.1 m. Release at A after closure, since releasing elsewhere may record a new point. With the pen and all corners released and no unfinished outline, press SHIFT START once. The last completed loop now begins at B, retaining the same six positions and boundary. It replaces this loop&#x27;s four fan triangles; it does not add a second L. Six shifts return to A. START marks the selected completed loop; DRAW START marks an unfinished outline. The panel reports any readiness block.
+
+For the manual comparison, first return the completed L to A. Release, press NEW OUTLINE, and retrace **B → C → D → E → F → A → B**, reusing its six stored corners. Check DRAW START before closing. This route retains both L fills: two loops and eight logical triangles, plus any practice triangle. They overlap at the same boundary; the second is not a separately moved copy. Inspect the first before adding the second.
+
+The sample above is chosen to expose the difference between starting vertices. It does not assert that every concave polygon fails or that every starting vertex spills.
+
+## 26 September 2026 — One drawing, two scales
+
+The existing `draw_triangle_faces` moves from cell (6,13) to (3,13), facing the entry. `triangle_live_twin` stands at (6,15); four old dividing cells at x=4/8, z=12/13 become floor. The companion reads the creator&#x27;s world vertices and actual fan indices and displays a fixed 3.3× copy, centred at 1.8 m. White opaque faces and black tube edges are applied to both copies only while this companion is present; other maps keep their existing palette. Internal fan diagonals remain visible, including when fill is hidden. Existing handles update both scales during pickup; their normal grid snap is applied on drop. The twin has no independent controls or collision surface. Without a carried trace the companion seeds one real editable triangle once; a carried trace stays unclosed. CLEAR stays clear. The carry transform now converts plinth-local positions to world positions, fixing carried outlines after relocation. Native tests cover vertex motion, fill, SHIFT START, clear and the moved carry frame; headset feel is pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Triangle_Context/intent.md">Raw captured source</a></p><pre>Concept: A closed boundary, a visible face, its projection and its collision are separate operations. Begin with an encounter, then change one condition.
+
+Sequence: Grid supplies repeatable addresses; this hall adds a face; Polyhedra asks for enclosure.
+
+Primary route: triangle_line_puzzle → construction plate → draw_triangle_faces with triangle_live_twin → quad boundary and split quad. The first closure is presented as ringed lines facing the approach. The creator and its controls face the arriving visitor. Eight placements remain in the 13 × 30 hall. Folded strip and pink triangle remain as return visits; nine other placements are parked with their exact tokens in the dated research bundle.
+
+First investigation: Hold the three corners fixed and walk towards an edge-on view. Then hold the viewpoint fixed and move the third corner onto the baseline. Distinguish projected disappearance from loss of area. The reference corners now obey the editor&#x27;s own world snap grid; RESTORE TRIANGLE replaces the current drawing, guarded while the pen or a corner is held. A carried trace still arrives open; it is never automatically replaced.
+
+Further investigation: A fixed six-corner L with a shifted starting index can produce an overspilling first-vertex fan. Retain this critical comparison as a return, with the recipe in the tutorial/technical companion. We have not added a different triangulator or an entropy measure.
+
+Writing: The main chapter follows changes one can see and try. Setup recipes and full fan construction belong beside it. The same triangle can have different appearances without becoming a different stored object; a counted face can also have zero area.
+
+Research record: doc/book/iterations/2026-10-01-lines-triangle-research/index.html. Native matched-camera images, supplied-hand pickup/release and capsule route checks. Physical headset reach and learner comprehension remain untested. Baseline placement and text files are preserved there.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Triangle_Context/critical.md">Raw captured source</a></p><pre># Whose outline does the fill keep?
+
+The first triangle closes and leaves its centre empty. That pause is useful. It gives us time to notice that connecting three edges has not told the renderer to cover the space between them. Then a button supplies the face. A small amount of code makes a surface available to look at, and makes its appearance reversible.
+
+That is already a capacity worth wanting. A few positions can become a luminous patch hanging in space. We can approach it, look through it, hide it and recover its edges. Learning the operation gives us something to make with. The critical question grows from using that capacity, rather than from announcing that a surface must be a form of domination.
+
+## An exact disagreement
+
+The second artifact accepts an outline and gives it a fan of triangles. The L-shaped comparison holds the boundary fixed and starts at a different corner. Its intended interior does not move. Some emitted triangles nevertheless cross the missing notch. We can point to the excess and trace it to the first index in the loop.
+
+This is a specific failure relative to the task of filling that planar polygon. It does not make the polygon invalid or give it two equally correct interiors. Nor is the machine refusing to calculate: it calculates exactly the fan we gave it. The disagreement concerns which construction we asked the fan to represent.
+
+Keeping that distinction lets us ask a practical question about authority. When a tool handles one shape readily and mishandles another, must the maker revise the shape, or may the tool be revised? A tutorial can quietly train us to want only its successful examples. Here it should supply enough understanding to recognise the limit and name another possible action.
+
+A fan is useful. Its short loop gives us a surface with few instructions, and a convex outline does not demand a more elaborate method. The problem would be to make that convenience an unspoken requirement for every later body. A learner can prefer a simple triangle, preserve a concavity, or intentionally work with overlaps. None of those choices establishes a political virtue by geometry alone.
+
+## An excess can acquire another use
+
+The patch across the notch may be wrong for the outline and attractive for something else. It could become a wing, an awkward extension of a costume, a surface that exceeds its frame. That is a proposal to try, not an application already installed here. The desire to keep looking can begin where the original task failed.
+
+Distinguish three acts: choosing another start changes input order; implementing another triangulator changes the rule; making a different work from the same result changes its use. Each opens a different route. Calling them all “breaking the algorithm” would make the encounter less precise and conceal how modest or extensive a change actually was.
+
+Ada&#x27;s question about possible bodies belongs here because surfaces help bodies appear, while other code determines what they can touch or pass through. This drawing&#x27;s faces have no generated collider. Seeing a face does not grant it the capacity to carry the player. Later rooms can make that difference bodily; this one gives us the means to name it without inventing a floor beneath the mesh.
+
+## What remains outside this first passage
+
+The other works keep the triangle from becoming only a renderer instruction. The folded strip invites attention to pleats and changing silhouette. Its hinge study preserves edge lengths; a hand edit can stretch them. The coarse ring&#x27;s finish can make low resolution something to desire. Neither needs to be treated as a deficient step on the way to a smoother body.
+
+The pink triangle also stays. Its historical stakes cannot be derived from three vertices or from a generic claim that every boundary excludes. The [return visit](detours.md#pink_triangle) keeps a path into those histories. Focusing this chapter is a decision about the order of attention, not a declaration that symbols, sex, mourning or pleasure are merely decorative.
+
+There are costs to this focus. Six hand-placed corners already demand time and reach; the comparison&#x27;s exactness in a scripted probe does not show how easily another body can reproduce it. The instrument counts stored loops and logical triangles, including earlier attempts, but offers no judgment about their purpose. That limited count helps us inspect a construction. It measures neither freedom nor entropy nor the value of the work.
+
+We leave with a face, a method and a reason to question its reach. The next room brings faces together to enclose volume. The unresolved outline remains available to return to, alongside the question of what other rule—or other desire—could make room for it.
+
+Authoring basis: [Learning an operation, opening a world](../../../doc/book/OPERATIONAL_INQUIRY.md). Source and supplied-input evidence: [technical.md](technical.md). The old rigidity-centred essay is preserved in the [dated archive](../../../doc/space/point-triangle-focus-2026-09-16/previous/critical.md).
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Triangle_Context/artifacts.md">Raw captured source</a></p><pre># Triangle — current encounters
+
+Eight placements. Coordinates are zero-based source-grid (column, row).
+
+| Artifact | Position | Work |
+| --- | --- | --- |
+| `triangle_line_puzzle` | (4, 2) | Close edges; fill remains a separate action. |
+| `triangle_construction_plate` | (9, 5) | The book and room share one points/boundary/face illustration. |
+| `folded_strip` | (2, 7) | A return to shared edges and folding. |
+| `draw_triangle_faces` | (3, 13) | Edit the small drawing; compare filling and start order. |
+| `triangle_live_twin` | (6, 15) | The same drawing enlarged; walk around or through its visual face. |
+| `quad` | (2, 20) | Two triangular faces, one shared diagonal. |
+| `pink_triangle` | (11, 25) | A historical sign whose meanings cannot be deduced from geometry. |
+| `quad_line_puzzle` | (10, 26) | Four connected edges without a face. |
+
+The hall retains its 13 × 30 footprint. Widened openings give access to both sides of the central face. The former portal basin is continuous floor. Authored placements override old necklace stamps; the obsolete museum grid has been brought into agreement with the structure.
+
+Nine parked placements, their positions and reasons remain in [the research record](../../../doc/book/iterations/2026-10-01-lines-triangle-research/parked-placements.json). Their source artifacts are not deleted. The old inventory is preserved in the same bundle.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Triangle_Context/summary.md">Raw captured source</a></p><pre># A boundary, a face, a view
+
+Close three edges, add a visible face, then work on one drawing at two scales. Walk around the large triangle without moving its corners; return to the small version and bring the third point onto the other two. An edge-on view and a zero-area figure can resemble one another while requiring different actions to recover a face.
+
+The eight-artifact hall makes this the first route. The fan&#x27;s overspill, the folded strip and the pink triangle remain further investigations. At the exit, the empty quad boundary and two-face quad prepare for faces meeting in Polyhedra.
+
+[Current placements](artifacts.md), [encounter](final.md), [making](tutorial.md), [source details](technical.md), [research and native images](../../../doc/book/iterations/2026-10-01-lines-triangle-research/index.html).
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Triangle_Context/blurb.md">Raw captured source</a></p><pre>Three edges meet. The middle stays empty until you ask the machine to show a face. Then draw your own outline and begin it again from another corner. The boundary stays put; the fill may stray beyond it. What did the program add, and which of its decisions would you keep?
+</pre></section></body></html>

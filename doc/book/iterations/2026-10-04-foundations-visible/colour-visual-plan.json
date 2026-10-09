@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-04",
+  "scope": "Colour visual teaching plan; diagrams are proposals, photographs are prior native captures. No runtime or canonical edits.",
+  "evidence_policy": "Keep photograph and diagram labels distinct. Captions identify the changed input, retained conditions and what cannot be established from pixels. Numeric Color, rendered appearance and perceived colour are different claims. This pass viewed every listed image; it did not rerun Godot, test a headset, or certify source freshness.",
+  "halls": [
+    {
+      "id": "Color_Context_Placed",
+      "concept": "A list entry reaches a named receiver",
+      "action": "Look across the four existing stacks. In the proposed small study, change one palette entry or its selection rule while keeping the part list and positions fixed.",
+      "visible_consequence": "The same kinds of forms belong to different colour groups without needing another geometry build.",
+      "contrast": "Which part moved, and which only received another Color value? Start with index selection; shape categories can follow.",
+      "diagram_proposal": "Show five numbered part references, a short palette list and arrows from selected entries to named material receivers. One changed arrow/value is highlighted; coordinates remain printed and unchanged. Label this an explanatory diagram, not installed controls.",
+      "picture_limit": "The pictured stacks are different specimens and viewpoints, not a same-object before/after. Their lit appearances cannot prove equal numerical colours, an executed loop or a learner-editable palette.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-23-colour-gathering/four-colour-rules.png",
+          "caption": "Existing composite: five forms under four supplied colour rules; distinct specimens.",
+          "evidence": "doc/book/iterations/2026-09-23-colour-gathering/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Context_Placed/final.md",
+        "doc/book/course/storyboards/COLOUR.md"
+      ]
+    },
+    {
+      "id": "Color_Flashlight",
+      "concept": "An object property changes a condition of appearance",
+      "action": "Aim an existing handheld lamp aside and back; separately use the existing companion edit to change the fixed room light’s colour.",
+      "visible_consequence": "The receiving surface changes appearance even though its material colour and geometry have not been repainted.",
+      "contrast": "Hold viewpoint/material fixed for a lamp-value comparison; hold lamp value fixed for an aim comparison. These are separate beats.",
+      "diagram_proposal": "Draw one retained light reference with light_color and orientation as separate inputs, plus an unchanged receiving material. Reuse the prior paired photograph; do not add a new lamp or fictional colour-control panel.",
+      "picture_limit": "The existing rose/cyan pair records one view under two light states. Pixels alone do not identify which property changed or verify the material stayed fixed; pair it with the named assignment/source.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-28-white-room-and-apertures/white-room-pair.png",
+          "caption": "Existing paired capture: same room/view under rose and cyan light.",
+          "evidence": "doc/book/iterations/2026-09-28-white-room-and-apertures/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Flashlight/tutorial.md",
+        "commons/artifacts/colour_light_rooms/colour_light_rooms.gd"
+      ]
+    },
+    {
+      "id": "Color_Nails",
+      "concept": "Parameters enter a function; a Color value returns",
+      "action": "Move mainly along one axis of the existing RGB chooser. Proposed authored function: give a local point and positive box dimensions, then explicitly assign its returned Color to one preview.",
+      "visible_consequence": "One numeric channel changes while the same nail surfaces remain. The giant and petite hands can receive the same value at different scales.",
+      "contrast": "Keep the returned nail Color fixed while changing rendered skin or view. Equal RGB triples do not guarantee equal perceived colour, and equally easy rendered edits do not make skin and polish equivalent lived choices.",
+      "diagram_proposal": "Use three panels: local point and box dimensions; colour_at(...) with a returned numeric RGB chip; a separately labelled albedo_color assignment to the preview. Mark the preview binding as proposed. No implication that returning a value automatically paints every hand.",
+      "picture_limit": "A still cannot show function execution, scope, the called receiver, or equality of stored values. The labelled channel comparison is stronger than inferring numerical change from pixels.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-23-nails-the-choosing-hand/one-channel-two-choices.png",
+          "caption": "Existing comparison: R and G stay labelled; B changes. Skin and geometry are held.",
+          "evidence": "doc/book/iterations/2026-09-23-nails-the-choosing-hand/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Nails/tutorial.md",
+        "commons/interfaces/value_mapper_3d.gd",
+        "commons/interfaces/nail_color_controller.gd"
+      ]
+    },
+    {
+      "id": "Color_Rainbow",
+      "concept": "A nonempty list partitions a fixed span",
+      "action": "Use RE-DIVIDE to compare the installed six, seven, forty-eight and two band arrangements. Looking and celebrating remain sufficient; optional making substitutes a chosen palette.",
+      "visible_consequence": "More entries divide the same band span into narrower pieces while the opening remains.",
+      "contrast": "Keep radius and total span fixed; compare band count with individual width. Forty-eight discrete samples can look continuous from a distance.",
+      "diagram_proposal": "Place a numbered palette beside the same fixed-width bracket split into 2, 6 and 7 parts; label width/count. State count > 0 rather than hiding division by zero. No new compulsory exercise or optical spectrum simulation.",
+      "picture_limit": "The composite makes band count and aperture comparison visible; it does not prove the loop, division or the proposed custom-palette input. Celebration is not unlocked by code completion.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-23-rainbow-room-for-another/four-arrangements.png",
+          "caption": "Existing four-state museum composite; supplied palettes also recolour the steps.",
+          "evidence": "doc/book/iterations/2026-09-23-rainbow-room-for-another/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Rainbow/final.md",
+        "algorithms/primitives/rainbow/rainbow.gd"
+      ]
+    },
+    {
+      "id": "Color_Pillar",
+      "concept": "The same function contract accepts a new rule",
+      "action": "Move the existing sample card across the field, then vary height with horizontal position fixed. Read HSV, returned RGB and represented field height together.",
+      "visible_consequence": "The card changes its sample between the displayed columns; vertical movement changes value through the supplied height adapter.",
+      "contrast": "Nails maps X/Y/Z directly into bounded RGB; Pillar maps X/Z/represented Y into HSV and then converts. At value zero, different addresses can return the same black.",
+      "diagram_proposal": "Show card-local Y 0.65–1.85 m → represented Y 0.46–4.60 m → hsv_at → Color. Keep coordinate adaptation outside the colour function box. A numeric triple sits beside, not inside, the rendered swatch.",
+      "picture_limit": "sampler-50 has readable values; carried-colour is too distant to explain the mapping alone. A stopped card keeps its latest sample because its position stops changing, not because a held/released gate freezes it. The photograph proves no automatic transfer to Grid.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-28-pillar-height-and-value/sampler-50.png",
+          "caption": "Existing close view: HSV, RGB and represented Y can be read together.",
+          "evidence": "doc/book/iterations/2026-09-28-pillar-height-and-value/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-28-pillar-height-and-value/value-columns.png",
+          "caption": "Existing room view locates the card among the continuous height comparisons.",
+          "evidence": "doc/book/iterations/2026-09-28-pillar-height-and-value/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "algorithms/color/pillarcolorcollection/field_sampler.gd",
+        "commons/maps/Color_Pillar/final.md",
+        "doc/book/course/storyboards/COLOUR.md"
+      ]
+    },
+    {
+      "id": "Color_Grid_Pallet",
+      "concept": "Stored assignment, object state and a first authored class",
+      "action": "In the installed room, write a colour, select another address, return, then run RULE. Proposed class comparison uses two existing floor-cell receivers with a new, explicitly identified Palette adapter.",
+      "visible_consequence": "The edit stays at its address while attention moves; RULE overwrites it. In the proposed extension, advancing one Palette instance changes only its own selected index and the receiver explicitly refreshed from it.",
+      "contrast": "Selection versus write; stored value versus recomputation; one class versus two instances; two independent instances versus two references to one instance. Keep these as separate visual beats.",
+      "diagram_proposal": "Use the dedicated palette_class plan below. Draw state boxes beside the real room capture; never paste pretend new controls into a museum photograph.",
+      "picture_limit": "The current four-frame composite documents selection, return and overwrite, not Palette instances, history versions, or save/load persistence. Existing COLOUR cycles fixed INKS and there is no custom learner-colour input.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png",
+          "caption": "Existing four-frame sequence: write, look elsewhere, return, apply RULE.",
+          "evidence": "doc/book/iterations/2026-09-28-grid-a-colour-left/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "algorithms/color/gridcolorizer/address_lesson.gd",
+        "commons/maps/Color_Grid_Pallet/tutorial.md"
+      ]
+    },
+    {
+      "id": "Color_Paint",
+      "concept": "A method call deposits into an evolving image",
+      "action": "Compare a quick pass with dwelling, using the existing cans. The making proposal changes one rate or amplitude of the existing automatic path; it supplies no second brush.",
+      "visible_consequence": "Coverage accumulates differently, and the image continues to spread and fade after deposition.",
+      "contrast": "Grid replaces one stored entry. Paint contributes through draw_spray to an evolving texture; the current picture is not a lossless list of strokes.",
+      "diagram_proposal": "Show manual hit and automatic path as two callers feeding the same draw_spray operation, then successive image states. Mark which path parameter is the proposed learner edit. Keep shader and hit conversion supplied.",
+      "picture_limit": "The stripe comparison is a captured consequence, not proof of timing by itself. A single image cannot establish decay, invocation count, shared implementation or retained history; pair claims with the recorded sequence/source.",
+      "pictures": [
+        {
+          "path": "ada_run/encounter_pilot/Color_Paint/speed-and-coverage.png",
+          "caption": "Existing native capture comparing the coverage of two passes.",
+          "evidence": "ada_run/encounter_pilot/Color_Paint/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        },
+        {
+          "path": "ada_run/encounter_pilot/Color_Paint/shared-aerosol.png",
+          "caption": "Existing room capture: manual marks and automatic path share the canvas.",
+          "evidence": "ada_run/encounter_pilot/Color_Paint/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Paint/final.md",
+        "commons/maps/Color_Paint/tutorial.md",
+        "doc/book/course/storyboards/COLOUR.md"
+      ]
+    },
+    {
+      "id": "Color_Walls",
+      "concept": "A changed image need not change a boundary",
+      "action": "Use FILTER and OPAQUE, keep the view for comparison, then walk the same route around the panes.",
+      "visible_consequence": "Furniture becomes hidden or visible while the openings keep their positions.",
+      "contrast": "Alpha/material appearance versus geometry and collision; a visible gap versus a route actually traversed. Palette and arrangement remain separate choices.",
+      "diagram_proposal": "Pair the existing inside-glass/inside-opaque captures. Beside them repeat the same simple pane/opening plan with one marked walking route; label the route a proposed observation unless accompanied by recorded traversal evidence.",
+      "picture_limit": "The pair shows visibility changes. It cannot establish traversability, unchanged collision, comfort or privacy outcomes; those need movement/source evidence. Do not infer physical opacity from a rendered colour value.",
+      "pictures": [
+        {
+          "path": "doc/book/iterations/2026-09-28-walls-a-view-from-inside/inside-glass.png",
+          "caption": "Existing inside view in transparent/filter mode.",
+          "evidence": "doc/book/iterations/2026-09-28-walls-a-view-from-inside/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-28-walls-a-view-from-inside/inside-opaque.png",
+          "caption": "Existing matched inside view in opaque mode.",
+          "evidence": "doc/book/iterations/2026-09-28-walls-a-view-from-inside/source_manifest.json",
+          "kind": "Prior native museum capture; this pass inspected the image, not the runtime"
+        }
+      ],
+      "source_refs": [
+        "commons/maps/Color_Walls/final.md",
+        "commons/maps/Color_Walls/tutorial.md"
+      ]
+    }
+  ],
+  "palette_class": {
+    "status": "Proposed explanatory diagram and future teaching adapter; no class or new room controls implemented",
+    "location": "Color_Grid_Pallet",
+    "earlier_objects": "Point_One/tutorial.md:30–35 already creates SphereMesh.new() and explains its reference; :42–54 creates MeshInstance3D and assigns properties. This is the first deliberately authored class, not the first object.",
+    "definition": "One Palette definition groups a nonempty colour list, current_index, current_colour() and next_colour(). current_colour only returns; next_colour advances the index with wrapping.",
+    "list_ownership": "Give each constructed instance its own copied list for the first comparison. If a list is deliberately shared later, show that reference explicitly. Sharing a colour list alone does not share the instances’ current indices.",
+    "existing_receivers": "Use two already mapped room-floor instances, e.g. addresses (10,10) and (11,10), through a supplied address-to-MultiMesh setter. Add no cell Nodes or per-cell materials. The proposed setter/bindings are not current console capabilities.",
+    "frames": [
+      {
+        "title": "One definition, two instances",
+        "show": "Palette class box above A and B. Each instance has a separate current_index = 0 and separately owned matching three-colour list. Explicit reads and writes send the same first colour to two labelled floor addresses."
+      },
+      {
+        "title": "One instance advances",
+        "show": "Invoke A.next_colour(); A.index becomes 1 while B.index stays 0. Call current_colour on both and explicitly refresh both receivers: A’s floor square changes, B’s does not. Print the indices as well as the colours."
+      },
+      {
+        "title": "Two references, one instance",
+        "show": "In a separate reset comparison, left and right references point to the same Palette object. Advance through left, then read through both and explicitly refresh both floor receivers. Both read the same changed index. Label right = left as a reference assignment, not a second construction."
+      }
+    ],
+    "critical_distinction": "Changing object state does not repaint earlier value copies automatically. Every visible update needs a shown current_colour call and receiver write; a previously written cell can remain unchanged until refreshed.",
+    "small_checks": [
+      "Reading current_colour twice leaves current_index unchanged.",
+      "After the last entry, one advance returns to the first.",
+      "Advancing A leaves a separately constructed B unchanged.",
+      "An empty palette is rejected by the declared construction policy; do not call modulo or index it.",
+      "Two aliases share one object state; two constructions do not."
+    ],
+    "source_anchors": [
+      "algorithms/color/gridcolorizer/address_lesson.gd:5 — fixed INKS array",
+      "algorithms/color/gridcolorizer/address_lesson.gd:10 — ink_index state",
+      "algorithms/color/gridcolorizer/address_lesson.gd:80 — paint_selected writes then advances the ink index",
+      "algorithms/color/gridcolorizer/address_lesson.gd:86 — apply_rule uses address-to-instance mapping; empty palette guard at 89",
+      "algorithms/color/gridcolorizer/address_lesson.gd:96 — next_palette selects a named collection and immediately applies RULE; it is not the proposed next_colour method"
+    ]
+  }
+}

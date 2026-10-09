@@ -1,0 +1,58 @@
+{
+  "checks": [
+    "mass: constructed with finite bodies and a reset",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: equal force gives inverse-mass acceleration",
+    "mass: coasting continues after force ends",
+    "mass: finite motion",
+    "mass: reset restores original transforms",
+    "mass: reset survives the next physics frames",
+    "liquids: constructed with finite bodies and a reset",
+    "liquids: greater drag slows the same falling point",
+    "liquids: visitor crosses the same resistance regions",
+    "liquids: finite motion",
+    "liquids: reset restores original transforms",
+    "liquids: reset survives the next physics frames",
+    "springs: constructed with finite bodies and a reset",
+    "springs: disturbing one point moves its neighbour",
+    "springs: seven hanging points with six coupling springs",
+    "springs: finite motion",
+    "springs: reset restores original transforms",
+    "springs: reset survives the next physics frames",
+    "mutual: constructed with finite bodies and a reset",
+    "mutual: pair forces balance without visitor",
+    "mutual: visitor becomes an additional source",
+    "mutual: orbits retain spread instead of centre pile",
+    "mutual: finite motion",
+    "mutual: reset restores original transforms",
+    "mutual: reset survives the next physics frames",
+    "mutual: reset retains the specified orbital launch",
+    "vortex: constructed with finite bodies and a reset",
+    "vortex: tangential field bends cargo paths",
+    "vortex: populated solid vector field",
+    "vortex: finite motion",
+    "vortex: reset restores original transforms",
+    "vortex: reset survives the next physics frames",
+    "vortex: reset retains the specified orbital launch"
+  ],
+  "failures": [],
+  "godot_version": "4.6-stable (official)",
+  "measurements": {
+    "liquid_speeds": [
+      3.90618538856506,
+      1.79694902896881,
+      1.03693878650665
+    ],
+    "mass_velocities": [
+      0.733333289623261,
+      0.36666664481163,
+      0.183333322405815
+    ]
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "physics_server": "PhysicsServer3D",
+  "scope": "Real Jolt Physics bodies, contact, joints and force integration. Simulated hand/receiver inputs; no headset claim."
+}

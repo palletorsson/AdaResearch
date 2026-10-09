@@ -1,0 +1,23 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"acceleration_arrow_scale": 16,
+		"actual_function": "_update_boids",
+		"body_count": 8,
+		"first_velocity_error": 0.0000000000582076609134674,
+		"perception_radius": 0.95,
+		"private_fixture": true,
+		"selected_neighbours": 4,
+		"sequential_source_order": true,
+		"simulation_steps": 300,
+		"snapshot_count": 301,
+		"source_delta": 0.025,
+		"velocity_arrow_scale": 4
+	},
+	"geometry_nodes": 27,
+	"phases": 4,
+	"source_paths": [
+		"res://commons/artifacts/boids_aquarium/boids_aquarium.gd"
+	],
+	"title": "ONE BODY, SEVERAL NEIGHBOURS"
+}

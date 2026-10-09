@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What the surface contributes · Ada Research</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0}</style><main><h1>What the surface contributes</h1>
+<p><strong>Layout update:</strong> this hall is now 27 x 31 m, with framed gallery walls. <a href="compact-ribbons.html">View the compact halls</a>. Main encounters retain their scale. The encounter images below predate this spatial revision; the linked gallery views show the current walls and arrangement.</p>
+<p><a href="/necklace/thread?map=Ribbon_Patterns_02&amp;role=primary">Primary artifacts</a> · <a href="index.html#Ribbon_Patterns_02">Route and evidence</a> · <a href="studio-workshop.html">Workshop</a></p>
+<p>Two manually controlled comparisons now lead the room. First, keep two grey target values fixed while changing their neighbours. Then keep one pattern source fixed while changing its carrier and directional shading.</p>
+<p><img alt="Fixed grey targets with different surrounds" src="carrier-context.png" /></p>
+<p>SURROUNDS, SWAP and CONNECT change the context. The two target values remain RGB (0.5,0.5,0.5). This numerical check cannot determine what a viewer must perceive.</p>
+<p><img alt="One source on a plane and a curved wall" src="carrier-flat.png" /></p>
+<p>The plane spans four metres; the half-cylinder spans four metres along its arc. Both initially repeat the same source four times horizontally. The visible widths differ with projection, although the repeat spacing along each surface agrees.</p>
+<p><img alt="Directional shading changes the curved surface unevenly" src="carrier-shaded.png" /></p>
+<p><img alt="The same shader with its local light direction reversed" src="carrier-light-right.png" /></p>
+<p>FLAT / SHADED enables a small normal-based shading calculation. LIGHT SIDE changes a local shader direction, not the museum sun. REPEAT SIZE changes horizontal spacing between one metre and fifty centimetres; GRID reveals repeat boundaries. UNDO and RESET make changes recoverable.</p>
+<p><img alt="The mounted carrier controls" src="carrier-console.png" /></p>
+<p>23 desktop checks pass, including actual pointer controls, source bytes, surface distance, normal response, unchanged geometry, undo/reset and both standing approaches. <a href="carrier-check.json">Verification report</a>. The neighbouring spherecolors label now respects depth and distance in this map. Headset and continuous gestures remain deferred.</p>
+<p>The inherited MetamerismLab name is retained as the primary artifact token. Its earlier waves did not calculate spectra. This placement uses an explicit RGB/normal model and makes no spectral claim. Cloth fibres, gloss, deformation and garment transfer remain outside this station.</p>
+<p>Next: <strong>Ribbon_Patterns_03</strong>, the planned closing shader and fabric studio.</p>
+<h2>The book passage</h2>
+<p>The value has stayed. Has the colour?</p>
+<p>The previous room let you hide forty-eight cells without erasing them. Here the question turns towards the visible ones. A value has reached a surface. What else has arrived with it?</p>
+<!-- @SimultaneousContrast -->
+
+<p>Begin with the two grey squares. One has dark neighbours, the other light. Look before touching the controls. Do they appear alike to you? There is no required answer to report; make a comparison you can return to.</p>
+<p>Press <strong>SWAP</strong>. The backgrounds exchange places. The targets keep their numerical values. Does your judgement follow the square, its surroundings, or neither?</p>
+<p>Press <strong>SURROUNDS</strong> to give both targets the same grey background. Then return to the unequal backgrounds and press <strong>CONNECT</strong>. A narrow bar joins the targets using their colour. Notice what becomes easier to compare, and what remains uncertain. <strong>UNDO</strong> returns to your previous arrangement; <strong>RESET</strong> restores the start.</p>
+<p>The two targets and the connector are assigned <code>Color(0.5, 0.5, 0.5)</code>. This comparison draws them without lighting-dependent shading. The controls change the backgrounds and whether the connector is shown. Numerical equality is something we can inspect in the program. It does not oblige every viewer, display or viewing situation to produce the same experience.</p>
+<!-- @MetamerismLab -->
+
+<p>At the other station, the familiar bent mark covers a plane and a curved wall. Find its blue corner on both. The plane is four metres wide; the half-cylinder is four metres along its arc. Each begins with four horizontal repeats and two vertical repeats. Walk a little sideways. Equal distances along the surfaces need not occupy equal widths in your view.</p>
+<p>Press <strong>GRID</strong> to mark the repeat boundaries. Follow one around the curve. Its width along the surface stays fixed while its visible width changes with your position. The two ends of this half-cylinder are edges, not a welded seam; this station has not tested a pattern closing around an entire body.</p>
+<p>Turn the grid off and press <strong>FLAT / SHADED</strong>. Keep watching one pale part of the mark. Now press <strong>LIGHT SIDE</strong>. Where does it darken? Compare the plane with the curve before reading the explanation.</p>
+<p>Both surfaces read one texture. Their difference enters through their normals: directions describing which way the surface faces. The plane keeps one direction across its face; the curve turns. This small shader multiplies the sampled colour by a directional factor:</p>
+<pre><code class="language-glsl">float gain = shaded
+    ? 0.18 + 0.82 * max(dot(normalize(specimen_normal),
+                            normalize(light_direction)), 0.0)
+    : 1.0;
+ALBEDO = ink * gain;
+</code></pre>
+<p>The dot product compares the two directions. The added 0.18 keeps the model's darker side from becoming completely black. These are choices in the experiment. <strong>LIGHT SIDE</strong> changes a direction inside this shader; it does not move the museum's sun. The calculation does not model cloth fibres, gloss or wavelengths. Keeping the model small lets us follow exactly where the difference enters.</p>
+<p>Try <strong>REPEAT SIZE</strong>. It changes the horizontal repeat from one metre to fifty centimetres on both carriers. The vertical repeat remains one metre. Neither the source pixels nor the meshes change. <strong>UNDO</strong> recovers the earlier setting; <strong>RESET</strong> returns to flat colour and the initial spacing.</p>
+<p>The archived name of this artifact is MetamerismLab. Its earlier wave display assigned the same RGB yellow to both results without computing spectra. This encounter instead gives us a difference we can inspect: shared source values, different surface directions, and a stated rule for producing appearance. The older name cannot do the work of an experiment.</p>
+<!-- @ -->
+
+<p>Imagine carrying this mark onto a sleeve. Which part would you call the pattern: the source array, its spacing along the cloth, or the appearance that reaches someone across the room? Keeping one of those fixed does not keep all of them fixed.</p>
+<p>This is where dressing becomes a question for the program. A carrier contributes shape; a material contributes rules for appearance. Neither is a neutral delivery system for an untouched original. Yet their contributions can be separated enough to investigate: keep the recipe, change one condition, return, compare.</p>
+<p>In <strong>Ribbon_Patterns_03</strong>, we follow these operations into the shader and fabric studio: what gets sampled, where an edge is drawn, how a surface responds, and what can be carried onto a body. The mark will travel again. We now have more than one place to look when it changes.</p></main></html>

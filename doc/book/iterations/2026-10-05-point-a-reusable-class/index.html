@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One point, a reusable class — Endless Museum</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f1eb;color:#262825;font:17px/1.65 system-ui}main{max-width:1050px;margin:auto;padding:55px 30px}h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.1}h1{font-size:clamp(44px,7vw,78px);letter-spacing:-.035em}h2{font-size:34px}.lead{font:24px/1.5 Georgia,serif;max-width:760px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#626d62}a{color:#873d59;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:14px 24px;font-size:14px;margin:20px 0}section{border-top:1px solid #c9c4ba;margin-top:34px;padding-top:22px}.proof{background:#dfe7d9;padding:16px}pre{overflow:auto;background:#252928;color:#f5ece7;padding:22px;font:13px/1.65 Consolas,monospace}code{font-size:.9em}img{width:100%;display:block}figure{margin:32px 0}figcaption,footer{font-size:12px;color:#636d64}summary{cursor:pointer}table{width:100%;border-collapse:collapse}td,th{padding:12px;text-align:left;border-bottom:1px solid #d7d1c5}@media(max-width:700px){main{padding:30px 18px}td,th{padding:8px;font-size:14px}}</style><main><p class="eyebrow">Endless Museum / Student code / 5 October 2026</p><h1>One point.<br>A class we can carry.</h1><p class="lead">Build it once where its parts can be understood. Give that construction a name when we need it again.</p><nav><a href="#lines">Lines</a><a href="#trace">Trace</a><a href="#point">The point class</a></nav>
+<table><tr><th>Point One → Coordinates</th><th>Lines</th><th>Trace</th></tr><tr><td>Build the body; give it pickup.</td><td>Extract PointBody; make two instances.</td><td>Reuse PointBody; record positions.</td></tr></table>
+<figure><img src="../2026-10-05-eight-interaction-lessons/figures/trace.png" alt="The existing Trace hall and its drawing artifacts"><figcaption>Existing museum capture. This update changes the student tutorials and examples; this image does not depict the native test fixture.</figcaption></figure><section id="lines"><p class="eyebrow">Point Lines</p><h2>Make two instances.</h2><p>Move familiar geometry and pickup settings into PointBody._init; make A and B with .new; keep positions/readout/relation in the lesson. Convert both ends to local coordinates; subtract, measure and draw.</p><p>The main script moves from 62 to 43 lines. Its familiar construction is now visible in the 24-line class.</p><nav><a href="../2026-10-05-primitives-facing-pages/Point_Lines.html?revision=point-class">Read tutorial beside reflection</a><a href="http://localhost:3003/ghost-student?state=point-lines">Ghost Student</a><a href="lines-three-files.zip">Download all three scripts</a></nav><details><summary>Complete main script</summary><pre><code>extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+
+var point: XRToolsPickable
+var readout: Label3D
+var point_b: XRToolsPickable
+var line: MeshInstance3D
+var distance := 0.0
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    point_b = PointBody.new()
+    point_b.position = CENTRE + Vector3(1.0, 0, 0)
+    add_child(point_b)
+
+    line = LineSkin.new()
+    add_child(line)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = &quot;LOCAL &quot; + str(local_position) + &quot;\nWORLD &quot; + str(world_position)
+
+    var a := local_position
+    var b := to_local(point_b.global_position)
+    var displacement := b - a
+    distance = displacement.length()
+    line.show_segment(a, displacement, distance)
+    readout.text += &quot;\nDISTANCE &quot; + str(distance)
+</code></pre></details><p class="proof">170 native Godot checks pass. All declared failure controls are detected.</p><nav><a href="lines/report-runtime.json">Native report</a><a href="lines/contract.json">Continuation contract</a><a href="lines/verify.gd">Behaviour assertions</a><a href="lines-run-checks.py.txt">Test runner</a></nav></section><section id="trace"><p class="eyebrow">Point Trace</p><h2>Keep their history outside the class.</h2><p>Keep PointBody unchanged. Replace B/live span with a seeded Array[Vector3]; append when distance from last retained &gt;= threshold; loop neighbouring entries to redraw. Keep history outside the point class.</p><p>The main script moves from 68 to 49 lines. Its familiar construction is now visible in the 24-line class.</p><nav><a href="../2026-10-05-primitives-facing-pages/Point_Trace.html?revision=point-class">Read tutorial beside reflection</a><a href="http://localhost:3003/ghost-student?state=point-trace">Ghost Student</a><a href="trace-three-files.zip">Download all three scripts</a></nav><details><summary>Complete main script</summary><pre><code>extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+const MIN_SEGMENT_DISTANCE := 0.05
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+
+var point: XRToolsPickable
+var readout: Label3D
+var positions: Array[Vector3] = []
+var trail: Node3D
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    trail = Node3D.new()
+    add_child(trail)
+    positions.append(point.position)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = &quot;LOCAL &quot; + str(local_position) + &quot;\nWORLD &quot; + str(world_position)
+
+    var last := positions[positions.size() - 1]
+    if (local_position - last).length() &gt;= MIN_SEGMENT_DISTANCE:
+        positions.append(local_position)
+
+        for segment in trail.get_children():
+            segment.queue_free()
+
+        for i in range(1, positions.size()):
+            var a := positions[i - 1]
+            var displacement := positions[i] - a
+            var segment := LineSkin.new()
+            trail.add_child(segment)
+            segment.show_segment(a, displacement, displacement.length())
+
+    readout.text += &quot;\nPOINTS &quot; + str(positions.size())
+</code></pre></details><p class="proof">124 native Godot checks pass. All declared failure controls are detected.</p><nav><a href="trace/report-runtime.json">Native report</a><a href="trace/contract.json">Continuation contract</a><a href="trace/verify.gd">Behaviour assertions</a><a href="trace-run-checks.py.txt">Test runner</a></nav></section><section id="point"><h2>The complete point class.</h2><p>The point owns its surface, boundary and pickup settings. Placement, distance and the trace remain with the lesson. Both lessons print the same class in full.</p><pre><code>extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre><p><a href="lines/point_body.gd">Download point_body.gd</a></p></section><section><h2>What the tests establish</h2><p>294 native assertions pass in Godot 4.6 using the real XR Tools library and synthetic controllers. They exercise pickup/release, independent bodies and resources, line geometry, coordinate frames, arrays, threshold sampling and neighbouring segments. Five deliberate faults fail the expected checks.</p><p>The code extracted from each tutorial is the code executed. The class construction is also checked against Coordinates, and Trace carries the exact tested Lines class. Headset input, rendered appearance and learner understanding still need human testing.</p><p>Point One and Coordinates keep their earlier construction lessons. Reflection and museum runtime remain unchanged. Old reports remain immutable; this page holds the new evidence.</p></section><footer>Shared construction does not require shared state. A future change to point behaviour belongs in the point class; a new relation belongs in the lesson that uses it.</footer></main></html>

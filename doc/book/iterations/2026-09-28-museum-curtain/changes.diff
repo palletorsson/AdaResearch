@@ -1,0 +1,340 @@
+--- commons/scenes/em/em_portal_frame.gd before this request
++++ commons/scenes/em/em_portal_frame.gd
+@@ -1,100 +1,42 @@
+ extends RefCounted
+-## Lacquer, chrome and a luminous veil. The veil is one inexpensive surface,
++## Museum plaster and a pink curtain. The curtain is one inexpensive surface,
+ ## not a second camera rendering a hall that has not loaded yet.
+ 
+-static func build(frame: Node3D, title: String, direction: int) -> void:
+-	# Local +Z is the approach side. The room's forward direction is +Z.
++static func build(frame: Node3D, title: String, direction: int, wall_material: Material = null, floor_material: Material = null) -> void:
++	# Local +Z is the approach side. Navigation may turn this frame towards
++	# the clear approach to an authored t marker after it is built.
+ 	frame.rotation.y = PI if direction > 0 else 0.0
+-	var accent := Color(1.0, 0.025, 0.34) if direction > 0 else Color(0.54, 0.20, 1.0)
+-	var shell := _material(Color(0.012,0.008,0.02),0.45,0.16)
+-	var enamel := _material(Color(0.045,0.012,0.028),0.3,0.12)
+-	enamel.clearcoat_enabled = true
+-	enamel.clearcoat = 1.0
+-	enamel.clearcoat_roughness = 0.08
+-	var bevel := _material(Color(0.78,0.81,0.87),0.92,0.17)
+-	var recess := _material(Color(0.012,0.009,0.02),0.3,0.24)
+-	var light := _material(accent,0,0.6,true)
+-	var lettering := Color(0.98,0.91,0.96)
+-	# The safe landing anchor is 5 cm above the measured floor; extend the
+-	# jambs down to that floor while keeping the inlay just above its surface.
+-	var outer: Array[Vector2] = [Vector2(-1.05,-0.05),Vector2(-1.05,2.50),Vector2(-0.83,2.72),Vector2(0.83,2.72),Vector2(1.05,2.50),Vector2(1.05,-0.05)]
+-	var face: Array[Vector2] = [Vector2(-1.02,-0.05),Vector2(-1.02,2.48),Vector2(-0.81,2.68),Vector2(0.81,2.68),Vector2(1.02,2.48),Vector2(1.02,-0.05)]
+-	var inset: Array[Vector2] = [Vector2(-0.90,-0.05),Vector2(-0.90,2.23),Vector2(-0.75,2.38),Vector2(0.75,2.38),Vector2(0.90,2.23),Vector2(0.90,-0.05)]
+-	var opening: Array[Vector2] = [Vector2(-0.86,-0.05),Vector2(-0.86,2.21),Vector2(-0.73,2.34),Vector2(0.73,2.34),Vector2(0.86,2.21),Vector2(0.86,-0.05)]
+-	var seam: Array[Vector2] = [Vector2(-0.878,-0.05),Vector2(-0.878,2.22),Vector2(-0.74,2.357),Vector2(0.74,2.357),Vector2(0.878,2.22),Vector2(0.878,-0.05)]
+-	# Extruded sides and a back face give the frame weight from oblique angles.
++	var accent := Color(1.0, 0.025, 0.34)
++	var plaster := wall_material if wall_material != null else _material(Color(0.885,0.875,0.85),0,0.92)
++	# A plain rectangular plaster reveal, continuous with the hall palette.
++	# The safe anchor is 5 cm above the floor; the threshold stays flush.
++	var body := StaticBody3D.new()
++	body.name = "FrameCollision"
++	frame.add_child(body)
++	for x: float in [-0.955,0.955]:
++		var size := Vector3(0.19,2.39,0.30)
++		var centre := Vector3(x,1.145,0)
++		_box(frame,size,centre,plaster,"PlasterJamb")
++		_collider(body,size,centre)
++	var lintel_size := Vector3(2.1,0.36,0.30)
++	var lintel_centre := Vector3(0,2.52,0)
++	_box(frame,lintel_size,lintel_centre,plaster,"PlasterLintel")
++	_collider(body,lintel_size,lintel_centre)
++	# One opaque, animated curtain hides the unloaded world. No collider,
++	# second camera, lamps or particles are needed for the crossing.
+ 	var st := _surface()
+-	_band(st,outer,opening,-0.14,-0.14)
+-	_band(st,outer,outer,-0.14,0.10)
+-	_band(st,opening,opening,-0.14,0.045)
+-	_mesh(frame,st,shell,"FrameShell")
+-	st = _surface()
+-	_band(st,outer,face,0.10,0.17)
+-	_band(st,inset,opening,0.17,0.045)
+-	_mesh(frame,st,bevel,"ChamferedEdges")
+-	st = _surface()
+-	_band(st,face,inset,0.17,0.17)
+-	_mesh(frame,st,enamel,"EnamelFace")
+-	st = _surface()
+-	_band(st,seam,opening,0.10,0.10)
+-	_mesh(frame,st,light,"RecessedLight")
+-	# Crossed chrome lacing stays on the black jambs, outside the opening.
+-	st = _surface()
+-	for side: int in [-1,1]:
+-		for i in range(9):
+-			var y := 0.13 + i * 0.225
+-			var a := side * 0.922
+-			var b := side * 0.992
+-			_quad(st,Vector3(a,y,0.185),Vector3(a,y+0.014,0.185),Vector3(b,y+0.174,0.185),Vector3(b,y+0.16,0.185))
+-			_quad(st,Vector3(b,y,0.185),Vector3(b,y+0.014,0.185),Vector3(a,y+0.174,0.185),Vector3(a,y+0.16,0.185))
+-	_mesh(frame,st,bevel,"ChromeLacing")
+-	for side: int in [-1,1]:
+-		for y: float in [0.32,1.12,1.92]:
+-			var ring := MeshInstance3D.new()
+-			var torus := TorusMesh.new()
+-			torus.inner_radius = 0.04
+-			torus.outer_radius = 0.057
+-			torus.rings = 16
+-			torus.ring_segments = 8
+-			ring.mesh = torus
+-			ring.material_override = bevel
+-			ring.position = Vector3(side*0.956,y,0.21)
+-			ring.rotation.x = PI/2
+-			ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+-			frame.add_child(ring)
+-	# The opaque visual veil hides the unloaded world; it has no collision.
+-	st = _surface()
+ 	_quad(st,Vector3(-0.86,-0.045,-0.10),Vector3(0.86,-0.045,-0.10),Vector3(0.86,2.34,-0.10),Vector3(-0.86,2.34,-0.10))
+ 	var veil := ShaderMaterial.new()
+ 	veil.shader = load("res://commons/scenes/em/em_portal_veil.gdshader")
+ 	veil.set_shader_parameter("accent", Vector3(accent.r,accent.g,accent.b))
+ 	_mesh(frame,st,veil,"PortalVeil")
+-	# Frame collision leaves the opening clear; the landing below supports it.
+-	var body := StaticBody3D.new()
+-	body.name = "FrameCollision"
+-	frame.add_child(body)
+-	for x: float in [-0.955,0.955]:
+-		_collider(body,Vector3(0.19,2.32,0.31),Vector3(x,1.11,0.015))
+-	_collider(body,Vector3(1.82,0.34,0.31),Vector3(0,2.55,0.015))
+-	for side: int in [-1,1]:
+-		var shoulder := _collider(body,Vector3(0.20,0.31,0.31),Vector3(side*0.89,2.35,0.015))
+-		shoulder.rotation.z = side*PI/4.0
+-	# The name belongs to the architecture rather than floating above it.
+-	_box(frame,Vector3(1.57,0.285,0.035),Vector3(0,2.535,0.19),recess,"DestinationPlaque")
+ 	var destination := title.replace("_"," ").strip_edges()
+-	var pixel := minf(0.00225,1.44/maxf(1.0,destination.length()*32.0))
+-	_text(frame,destination,Vector3(0,2.50,0.213),64,pixel,lettering)
+-	_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.625,0.213),40,0.0018,accent)
+-	build_landing(frame, accent)
+-	# Three small walking arrows point into the opening.
+-	st = _surface()
+-	for z: float in [0.22,0.43,0.64]:
+-		# Point towards the opening (local -Z), away from the approach side.
+-		_quad(st,Vector3(-0.16,-0.032,z+0.08),Vector3(0,-0.032,z-0.015),Vector3(0,-0.032,z+0.02),Vector3(-0.16,-0.032,z+0.115))
+-		_quad(st,Vector3(0,-0.032,z-0.015),Vector3(0.16,-0.032,z+0.08),Vector3(0.16,-0.032,z+0.115),Vector3(0,-0.032,z+0.02))
+-	_mesh(frame,st,light,"WalkingInlay")
++	var pixel := minf(0.0019,1.65/maxf(1.0,destination.length()*32.0))
++	_text(frame,destination,Vector3(0,2.48,0.157),64,pixel,Color(0.13,0.12,0.14))
++	_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.61,0.157),32,0.0017,Color(0.36,0.32,0.35))
++	build_landing(frame, accent, floor_material)
+ 
+-static func build_landing(frame: Node3D, accent: Color) -> void:
++static func build_landing(frame: Node3D, _accent: Color, floor_material: Material = null) -> void:
+ 	# Anchor is 5 cm above the measured floor. A 28 cm solid slab reaches
+ 	# under the doorway and 2.15 m into the room, flush with the existing deck.
+ 	# Local +Z is always the hall side, including the return doorway.
+@@ -104,15 +46,10 @@
+ 	body.name = "LandingCollision"
+ 	frame.add_child(body)
+ 	_collider(body,size,centre)
+-	_box(frame,size,centre,_material(Color(0.025,0.018,0.035),0.45,0.3),"LandingSlab")
+-	# Thin raised inlay avoids z fighting where the floor and pad meet.
+-	_box(frame,Vector3(2.18,0.008,2.98),Vector3(0,-0.046,0.65),
+-		_material(Color(0.035,0.025,0.045),0.35,0.3),"LandingSurface")
+-	var st := _surface()
+-	for side: int in [-1,1]:
+-		_floor_quad(st,side*1.04-0.01,side*1.04+0.01,-0.8,2.1)
+-	_floor_quad(st,-1.04,1.04,2.08,2.1)
+-	_mesh(frame,st,_material(accent,0,0.6,true),"LandingBorder")
++	var stone := floor_material if floor_material != null else _material(Color(0.30,0.29,0.28),0,0.88)
++	_box(frame,size,centre,stone,"LandingSlab")
++	# A thin cap avoids z fighting at the join with the existing gallery deck.
++	_box(frame,Vector3(2.18,0.008,2.98),Vector3(0,-0.046,0.65),stone,"LandingSurface")
+ 
+ static func build_entry_cage(frame: Node3D) -> void:
+ 	# A compact enclosure OUTSIDE a boundary sp. The front opens into a
+@@ -172,13 +109,6 @@
+ 	for v: Vector3 in [a,b,c,a,c,d]:
+ 		st.add_vertex(v)
+ 
+-static func _band(st: SurfaceTool, a: Array[Vector2], b: Array[Vector2], za: float, zb: float) -> void:
+-	for i in range(a.size()-1):
+-		_quad(st,Vector3(a[i].x,a[i].y,za),Vector3(a[i+1].x,a[i+1].y,za),Vector3(b[i+1].x,b[i+1].y,zb),Vector3(b[i].x,b[i].y,zb))
+-
+-static func _floor_quad(st: SurfaceTool, x0: float, x1: float, z0: float, z1: float) -> void:
+-	_quad(st,Vector3(x0,-0.032,z0),Vector3(x1,-0.032,z0),Vector3(x1,-0.032,z1),Vector3(x0,-0.032,z1))
+-
+ static func _mesh(parent: Node3D, st: SurfaceTool, material: Material, mesh_name: String) -> MeshInstance3D:
+ 	st.generate_normals()
+ 	st.index()
+--- commons/scenes/em/em_portal_stream.gd before this request
++++ commons/scenes/em/em_portal_stream.gd
+@@ -19,6 +19,7 @@
+ var _portals: Array[Dictionary] = []
+ var _landings: Dictionary = {}
+ var _entry: Dictionary = {}
++var _exit: Dictionary = {}
+ var _recovery_elapsed := 0.0
+ const ARRIVAL_INSET := 1.15
+ var _armed := false
+@@ -122,16 +123,19 @@
+ 	var near_any := false
+ 	for portal: Dictionary in _portals:
+ 		var p: Vector3 = portal.position
+-		var near := absf(eye.x - p.x) < 0.85 and absf(eye.z - p.z) < 0.55 and absf(eye.y - p.y - 1.4) < 1.3
+-		near_any = near_any or Vector2(eye.x-p.x, eye.z-p.z).length() < 1.8
+-		# Sweep the head path across the threshold: a normal walk or a fast
+-		# step must not miss a portal by spending too few frames inside it.
++		var inward: Vector3 = portal.get("inward", Vector3(0,0,-int(portal.direction)))
++		var across := Vector3(inward.z,0,-inward.x)
++		var offset := eye-p
++		var near := absf(offset.dot(across)) < 0.85 and absf(offset.dot(inward)) < 0.55 and absf(offset.y-1.4) < 1.3
++		near_any = near_any or Vector2(offset.x,offset.z).length() < 1.8
++		# Sweep in the doorway's own orientation, including side-wall exits.
+ 		var direction := int(portal.direction)
++		var before := (previous-p).dot(inward)
++		var after := offset.dot(inward)
+ 		var crossed := false
+-		if (previous.z-p.z)*direction < 0 and (eye.z-p.z)*direction >= 0:
+-			var fraction := (p.z-previous.z)/(eye.z-previous.z)
+-			var crossing := previous.lerp(eye, fraction)
+-			crossed = absf(crossing.x-p.x) < 0.85 and absf(crossing.y-p.y-1.4) < 1.3
++		if before > 0 and after <= 0:
++			var crossing := previous.lerp(eye, before/(before-after))-p
++			crossed = absf(crossing.dot(across)) < 0.85 and absf(crossing.y-1.4) < 1.3
+ 		if _armed and (near or crossed):
+ 			_dwell += delta
+ 			if crossed or _dwell >= 0.08:
+@@ -428,6 +432,10 @@
+ 		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(p+offset+Vector3(0,0.15,0), p+offset-Vector3(0,0.2,0)))
+ 		if hit.is_empty() or hit.normal.y < 0.8 or not (hit.collider is StaticBody3D):
+ 			return false
++	return _body_clear(p)
++
++func _body_clear(p: Vector3) -> bool:
++	var space := get_world_3d().direct_space_state
+ 	var capsule := CapsuleShape3D.new()
+ 	capsule.radius = 0.3
+ 	capsule.height = 1.8
+@@ -527,6 +535,62 @@
+ 		"door":door,"landing":door+Vector3(0,0,ARRIVAL_INSET)}
+ 
+ 
++func _authored_exit() -> Dictionary:
++	var map_name := String(_current.get("map", ""))
++	var path := "user://maps/%s/map_data.json" % map_name
++	if not FileAccess.file_exists(path): path = "res://commons/maps/%s/map_data.json" % map_name
++	if not FileAccess.file_exists(path): return {}
++	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
++	if not parsed is Dictionary: return {}
++	var layers: Dictionary = parsed.get("layers", {})
++	var utilities: Array = layers.get("utilities", [])
++	var candidates: Array[Vector2i] = []
++	var next_map: String = museum.call("_peek_next_authored_map")
++	for z in range(utilities.size()):
++		for x in range(utilities[z].size()):
++			var token := str(utilities[z][x]).strip_edges().split("#")[0]
++			# Restart/side-trip teleporters are not the next-hall crossing.
++			if token == "t" or token == "t:"+next_map:
++				candidates.append(Vector2i(x,z))
++	if candidates.is_empty(): return {}
++	# Repeated t cells often form one wide exit. Prefer the farthest row,
++	# then its centre, while trying the other authored cells if obstructed.
++	var centre := 0.0
++	for cell in candidates: centre += cell.x
++	centre /= candidates.size()
++	candidates.sort_custom(func(a: Vector2i,b: Vector2i): return a.y > b.y if a.y != b.y else absf(a.x-centre) < absf(b.x-centre))
++	var seg: Node3D = _current.node
++	var pad := float((seg.get_meta("em_simulation_stage", {}) as Dictionary).get("pad", 0.0))
++	var grid := seg.get_node_or_null("SimGrid_"+map_name) as Node3D
++	for cell in candidates:
++		var marker := seg.to_global(Vector3(cell.x+0.5+pad,0,cell.y+0.5+pad+float(museum.get("VESTIBULE_H"))))
++		var level: float = museum.call("_arrival_floor_y", marker.x,marker.z)
++		if grid != null:
++			var size := float(grid.get("cube_size"))
++			marker = grid.to_global(Vector3(cell.x*size,0,cell.y*size))
++			var structure: Array = layers.get("structure", [])
++			var height := 1.0
++			if cell.y < structure.size() and cell.x < structure[cell.y].size():
++				var value := str(structure[cell.y][cell.x])
++				if value.is_valid_float(): height = maxf(1.0,float(value))
++			level = grid.global_position.y+(height-0.5)*size
++		# Old grid teleport holes receive a flush solid threshold. Never use
++		# the bottom of a pit as the doorway's floor height.
++		var p := Vector3(marker.x,level+0.05,marker.z)
++		for inward: Vector3 in [Vector3.FORWARD,Vector3.LEFT,Vector3.RIGHT,Vector3.BACK]:
++			var yaw := atan2(inward.x,inward.z)
++			if not _portal_clear(p,yaw): continue
++			if not _supported(p+inward*2.3): continue
++			var clear := true
++			for distance: float in [0.0,0.4,0.8,ARRIVAL_INSET,1.6,2.0,2.3]:
++				if not _body_clear(p+inward*distance):
++					clear = false
++					break
++			if clear:
++				return {"source":"t","cell":cell,"door":p,"inward":inward,"yaw":yaw}
++	return {"invalid":true,"source":"t","cells":candidates}
++
++
+ func _find_landing(at_far_end: bool) -> Vector3:
+ 	var cells: Dictionary = museum.get("_walk_cells")
+ 	var node: Node3D = _current.node
+@@ -557,12 +621,12 @@
+ 			return p
+ 	return Vector3(0,-1.0e9,0)
+ 
+-func _portal_clear(p: Vector3) -> bool:
++func _portal_clear(p: Vector3, yaw := 0.0) -> bool:
+ 	var shape := BoxShape3D.new()
+ 	shape.size = Vector3(2.18,2.76,0.44)
+ 	var query := PhysicsShapeQueryParameters3D.new()
+ 	query.shape = shape
+-	query.transform.origin = p+Vector3(0,1.41,0)
++	query.transform = Transform3D(Basis(Vector3.UP,yaw),p+Vector3(0,1.41,0))
+ 	var walker: Node = museum.get("_player")
+ 	if walker is CollisionObject3D:
+ 		query.exclude = [walker.get_rid()]
+@@ -583,6 +647,7 @@
+ 	_portals.clear()
+ 	_landings.clear()
+ 	_entry = _authored_entry()
++	_exit = _authored_exit()
+ 	var seg: Node3D = _current.node
+ 	if seg.has_node("HallPortals"):
+ 		seg.get_node("HallPortals").queue_free()
+@@ -601,12 +666,20 @@
+ 			var next_map: String = museum.call("_peek_next_authored_map")
+ 			if next_map != "": title = next_map
+ 		var p := Vector3.ZERO
++		var inward := Vector3(0,0,-direction)
+ 		if direction < 0 and not _entry.is_empty():
+ 			if bool(_entry.get("invalid", false)):
+ 				push_warning("[em-portals] blocked authored entry: " + str(_entry))
+ 				continue
+ 			p = _entry.door
++		elif direction > 0 and not _exit.is_empty() and not _exit.get("invalid",false):
++			p = _exit.door
++			inward = _exit.inward
+ 		else:
++			# Preserve navigation for old maps without a usable t; make an
++			# obstructed authored exit visible in the log instead of hiding it.
++			if direction > 0 and _exit.get("invalid",false):
++				push_warning("[em-portals] blocked t exit; safe fallback in " + str(_current.get("map","")) + ": " + str(_exit))
+ 			p = _find_landing(direction > 0)
+ 		if p.y < -1.0e8:
+ 			continue
+@@ -617,13 +690,15 @@
+ 		var builder := load("res://commons/scenes/em/em_portal_frame.gd")
+ 		if direction < 0 and available < 0:
+ 			frame.name = "EntranceLanding"
+-			builder.build_landing(frame, Color(0.54,0.20,1.0))
++			builder.build_landing(frame, Color(0.54,0.20,1.0), museum.call("_sm","deck"))
+ 		else:
+-			builder.build(frame,title,direction)
+-			_portals.append({"direction":direction, "position":p})
++			builder.build(frame,title,direction,seg.get_meta("em_wall_mat",museum.call("_sm","wall_white")),museum.call("_sm","deck"))
++			frame.rotation.y = atan2(inward.x,inward.z)
++			_portals.append({"direction":direction, "position":p, "inward":inward})
++			if direction > 0: frame.set_meta("authored_exit",_exit)
+ 		if direction < 0 and bool(_entry.get("cage", false)):
+ 			builder.build_entry_cage(frame)
+-		var landing := p + Vector3(0,0,-direction * ARRIVAL_INSET)
++		var landing := p + inward * ARRIVAL_INSET
+ 		_landings[direction] = landing
+ 	if not _portals.any(func(p: Dictionary): return int(p.direction) == 1):
+ 		push_error("[em-portals] no supported exit doorway in " + str(_current.get("map", "")))

@@ -1,0 +1,1448 @@
+{
+  "checks": 42,
+  "failures": [],
+  "headset_verified": false,
+  "map": "PG_Space_Colonization",
+  "measurements": {
+    "canopy": {
+      "forks": 41,
+      "nodes": 176,
+      "requests_left": 20
+    },
+    "captures": {
+
+    },
+    "driver_log": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          9.5,
+          0.00100000004749745,
+          2.9300000667572
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "eld/SpaceColonizationAlgorithm/ColonizationLesson/PushButton",
+          "hover": "gorithm/ColonizationLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "nizationAlgorithm/ColonizationLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "nizationAlgorithm/ColonizationLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.8,
+              1.08,
+              3.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2066",
+          "hover": "rithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.5,
+              1.08,
+              3.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2070",
+          "hover": "rithm/ColonizationLesson/@Node3D@2070/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2070/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2070/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.8,
+              1.09,
+              3.36
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2068",
+          "hover": "rithm/ColonizationLesson/@Node3D@2068/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2068/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2068/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              3.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2066",
+          "hover": "rithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2066/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.5,
+              1.08,
+              3.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            -0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2074",
+          "hover": "rithm/ColonizationLesson/@Node3D@2074/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2074/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2074/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.09,
+              3.36
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            2.93
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "d/SpaceColonizationAlgorithm/ColonizationLesson/@Node3D@2072",
+          "hover": "rithm/ColonizationLesson/@Node3D@2072/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              2.93
+            ],
+            "independent_ray": "zationAlgorithm/ColonizationLesson/@Node3D@2072/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "zationAlgorithm/ColonizationLesson/@Node3D@2072/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.5,
+              1.1,
+              3.35
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            2.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            1.35,
+            2.05,
+            23.5
+          ],
+          "forward": [
+            0.88,
+            0.47,
+            0.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            1.35,
+            0.45,
+            23.5
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 37,
+        "moved": [
+          2.14,
+          1.27,
+          0.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            3.49,
+            3.32,
+            23.5
+          ],
+          "forward": [
+            0.88,
+            0.47,
+            0.0
+          ],
+          "rig": [
+            3.49,
+            1.72,
+            23.5
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            3.49,
+            3.32,
+            23.5
+          ],
+          "forward": [
+            0.93,
+            0.37,
+            0.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            3.49,
+            1.72,
+            23.5
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 11,
+        "moved": [
+          0.74,
+          0.28,
+          0.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            4.23,
+            3.6,
+            23.5
+          ],
+          "forward": [
+            0.93,
+            0.37,
+            0.0
+          ],
+          "rig": [
+            4.23,
+            2.0,
+            23.5
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            16.5,
+            1.7,
+            3.0
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            16.5,
+            0.1,
+            3.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 168,
+        "moved": [
+          0.0,
+          -0.1,
+          13.92
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            16.5,
+            1.6,
+            16.92
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rig": [
+            16.5,
+            0.0,
+            16.92
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            16.5,
+            1.6,
+            16.92
+          ],
+          "forward": [
+            0.0,
+            0.01,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            16.5,
+            0.0,
+            16.92
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 181,
+        "moved": [
+          0.0,
+          0.0,
+          15.08
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            16.5,
+            1.6,
+            32.0
+          ],
+          "forward": [
+            0.0,
+            0.01,
+            1.0
+          ],
+          "rig": [
+            16.5,
+            0.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            16.5,
+            1.6,
+            32.0
+          ],
+          "forward": [
+            -1.0,
+            0.01,
+            0.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            16.5,
+            0.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 84,
+        "moved": [
+          -7.0,
+          0.0,
+          0.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            32.0
+          ],
+          "forward": [
+            -1.0,
+            0.01,
+            0.0
+          ],
+          "rig": [
+            9.5,
+            0.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            32.0
+          ],
+          "forward": [
+            0.0,
+            0.02,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 64,
+        "moved": [
+          0.0,
+          0.0,
+          5.33
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            37.33
+          ],
+          "forward": [
+            0.0,
+            0.02,
+            1.0
+          ],
+          "rig": [
+            9.5,
+            0.0,
+            37.33
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            9.5,
+            1.6,
+            37.33
+          ],
+          "forward": [
+            1.0,
+            0.03,
+            0.02
+          ],
+          "miss_deg": 0.02,
+          "rig": [
+            9.5,
+            0.0,
+            37.33
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 36,
+        "moved": [
+          3.0,
+          0.0,
+          0.07
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            12.5,
+            1.6,
+            37.4
+          ],
+          "forward": [
+            1.0,
+            0.03,
+            0.02
+          ],
+          "rig": [
+            12.5,
+            0.0,
+            37.4
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            12.5,
+            1.6,
+            37.4
+          ],
+          "forward": [
+            0.0,
+            0.09,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.5,
+            0.0,
+            37.4
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 13,
+        "moved": [
+          0.0,
+          0.0,
+          1.08
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@2112",
+          "eye": [
+            12.5,
+            1.6,
+            38.48
+          ],
+          "forward": [
+            0.0,
+            0.09,
+            1.0
+          ],
+          "rig": [
+            12.5,
+            0.0,
+            38.48
+          ]
+        }
+      },
+      {
+        "current_camera_after": "/root/EndlessMuseum/@Camera3D@2112",
+        "event": "teardown"
+      }
+    ],
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@2056",
+            "position": [
+              8.9399995803833,
+              0.889999985694885,
+              3.28000020980835
+            ],
+            "size": [
+              1.1200008392334,
+              0.120000004768372,
+              0.439999580383301
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2059",
+            "position": [
+              9.88000011444092,
+              0.0,
+              3.34999990463257
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2062",
+            "position": [
+              9.03999996185303,
+              0.0,
+              3.34999990463257
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.77112483978271,
+              1.03925001621246,
+              3.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.78549957275391,
+              1.05074989795685,
+              3.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.77400016784668,
+              1.05483615398407,
+              3.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.4511251449585,
+              1.03925001621246,
+              3.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.46549987792969,
+              1.05074989795685,
+              3.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.45400047302246,
+              1.05483615398407,
+              3.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.13112545013428,
+              1.03925001621246,
+              3.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.14550018310547,
+              1.05074989795685,
+              3.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.13400077819824,
+              1.05483615398407,
+              3.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.77112483978271,
+              1.03925001621246,
+              3.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.78549957275391,
+              1.05074989795685,
+              3.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.77400016784668,
+              1.05483615398407,
+              3.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.4511251449585,
+              1.03925001621246,
+              3.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.46549987792969,
+              1.05074989795685,
+              3.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.45400047302246,
+              1.05483615398407,
+              3.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.13112545013428,
+              1.03925001621246,
+              3.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.14550018310547,
+              1.05074989795685,
+              3.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.13400077819824,
+              1.05483615398407,
+              3.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2076",
+            "position": [
+              8.9399995803833,
+              0.824999988079071,
+              3.25250053405762
+            ],
+            "size": [
+              1.1200008392334,
+              0.149999976158142,
+              0.0249996185302734
+            ]
+          },
+          {
+            "name": "Glass",
+            "position": [
+              8.90999984741211,
+              1.12255263328552,
+              3.81675624847412
+            ],
+            "size": [
+              1.18000030517578,
+              0.294894695281982,
+              0.206487655639648
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2078",
+            "position": [
+              8.89000034332275,
+              1.10321927070618,
+              3.79987907409668
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222835540771484
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2079",
+            "position": [
+              8.89000034332275,
+              1.4144971370697,
+              4.01783752441406
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222854614257813
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2080",
+            "position": [
+              10.0920000076294,
+              1.10977244377136,
+              3.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2081",
+            "position": [
+              8.89199924468994,
+              1.10977244377136,
+              3.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2082",
+            "position": [
+              9.9709997177124,
+              0.980000019073486,
+              3.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2083",
+            "position": [
+              9.01099967956543,
+              0.980000019073486,
+              3.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2085",
+            "position": [
+              5.50000047683716,
+              0.0,
+              8.0
+            ],
+            "size": [
+              8.0,
+              0.0799999982118607,
+              7.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2086",
+            "position": [
+              13.4500007629395,
+              0.0,
+              10.0
+            ],
+            "size": [
+              2.5,
+              1.20000004768372,
+              3.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2092",
+            "position": [
+              9.39275932312012,
+              0.0700000077486038,
+              11.3927583694458
+            ],
+            "size": [
+              0.214483261108398,
+              0.220000013709068,
+              0.214483261108398
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2093",
+            "position": [
+              11.4171323776245,
+              3.09500002861023,
+              11.4171314239502
+            ],
+            "size": [
+              0.165737152099609,
+              0.170000076293945,
+              0.165737152099609
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2094",
+            "position": [
+              7.41713190078735,
+              3.09500002861023,
+              11.4171314239502
+            ],
+            "size": [
+              0.165738105773926,
+              0.170000076293945,
+              0.165737152099609
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2095",
+            "position": [
+              9.41713237762451,
+              5.09499979019165,
+              11.4171314239502
+            ],
+            "size": [
+              0.165737152099609,
+              0.170000076293945,
+              0.165737152099609
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2096",
+            "position": [
+              9.36351108551025,
+              0.0400000065565109,
+              11.3635101318359
+            ],
+            "size": [
+              0.272979736328125,
+              0.280000030994415,
+              0.272979736328125
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2097",
+            "position": [
+              9.49351596832275,
+              0.175676554441452,
+              11.4910001754761
+            ],
+            "size": [
+              2.01296997070313,
+              3.00864696502686,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2098",
+            "position": [
+              9.48198699951172,
+              0.167990401387215,
+              11.4750003814697
+            ],
+            "size": [
+              0.590728759765625,
+              0.856069624423981,
+              0.0499992370605469
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2099",
+            "position": [
+              7.49351596832275,
+              0.175676554441452,
+              11.4910001754761
+            ],
+            "size": [
+              2.01296997070313,
+              3.00864696502686,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2100",
+            "position": [
+              8.92728614807129,
+              0.167990401387215,
+              11.4750003814697
+            ],
+            "size": [
+              0.590728759765625,
+              0.856069624423981,
+              0.0499992370605469
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2101",
+            "position": [
+              9.49220657348633,
+              0.180000007152557,
+              11.4910001754761
+            ],
+            "size": [
+              0.0155887603759766,
+              5.0,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2102",
+            "position": [
+              9.47835063934326,
+              0.180000007152557,
+              11.4750003814697
+            ],
+            "size": [
+              0.0433006286621094,
+              1.0,
+              0.0499992370605469
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2103",
+            "position": [
+              9.44803905487061,
+              0.180000007152557,
+              11.4399995803833
+            ],
+            "size": [
+              0.103923797607422,
+              0.5,
+              0.120000839233398
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@2104",
+            "position": [
+              9.43663024902344,
+              0.615000009536743,
+              11.4366292953491
+            ],
+            "size": [
+              0.126741409301758,
+              0.129999995231628,
+              0.126741409301758
+            ]
+          }
+        ],
+        "position": "(9.5, 0.0, 9.5)",
+        "token": "space_colonization_algorithm"
+      }
+    ],
+    "next_map": "PG_Branching_Growth",
+    "policy_comparison": {
+      "network_forks": 5,
+      "network_nodes": 31,
+      "requests_left": 2,
+      "tip_nodes": 25
+    }
+  }
+}

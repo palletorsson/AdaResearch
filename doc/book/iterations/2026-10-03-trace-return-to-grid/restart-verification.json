@@ -1,0 +1,22 @@
+{
+	"checks": [
+		{
+			"check": "This reader is a different engine process",
+			"passed": true
+		},
+		{
+			"check": "Trace survives stopping the previous process",
+			"passed": true
+		},
+		{
+			"check": "Grid maps the persisted trace after restart",
+			"passed": true
+		},
+		{
+			"check": "Restart and read leave the saved bytes unchanged",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"reader_process_id": 25172
+}

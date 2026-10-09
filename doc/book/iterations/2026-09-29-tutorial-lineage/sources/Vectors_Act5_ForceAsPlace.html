@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act5_ForceAsPlace · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act5_ForceAsPlace">← Tutorial lineage</a></p><h1>Vectors Act5 ForceAsPlace</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act5_ForceAsPlace/final.md">Raw captured source</a></p><pre># What carries you across?
+
+A hole in the floor, and two ways over it. One of them somebody built. The other one you have to set.
+
+The crab in the previous room needed a rule for finding its next encounter. The collision carts needed an account of what the encounter preserved. Bring both questions here. What will this place recognise when you enter it, and what motion will you bring?
+
+## A direction waiting
+
+&lt;!-- @vector_machine --&gt;
+
+The machine stands before the gap. Three sliders: PITCH, YAW, ACCEL. Before trying to cross, move YAW while the field points straight down. Watch the large arrow and the faint horizontal one. Which has heard you?
+
+It opens at an acceleration of 9.8 metres per second squared, downward. That resembles ordinary falling, but the field supplies that value locally. Down is a setting you can change here.
+
+Now watch what the steepness slider costs. At the bottom of its travel the field points straight down, `cos(pitch)` is zero, and the slider beside it does nothing at all. Run it through its whole range and the world will not move. Tilt the field away from vertical. YAW begins to turn its horizontal part; as that part grows, the turn becomes easier to see.
+
+That is not a fault, it is what a direction *is* when you name it with two angles. At the poles the second angle has nothing left to mean. The console marks a small neighbourhood around either pole as idle too, even though a slight horizontal part is already there. Its readout gives the waiting bearing, and a faint arrow on the stage holds that bearing where you can see it. The fader is not dead. It is aimed, and the field cannot hear it yet.
+
+A direction can be well defined while one of its coordinates is not. Here that ambiguity is at hand height, in metal, where you can feel it happen.
+
+
+The two angles become a direction. Magnitude gives it a size:
+
+```gdscript
+# vector_machine.gd — world coordinates; yaw zero points along +Z
+return Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw)) * mag
+```
+
+The last slider stops at fifteen metres per second squared. Aim partly upward and along the hall. Read the components before leaving the bench: positive Z leads toward the far side. The machine speaks only to this hall&#x27;s field. A dial elsewhere in the museum cannot quietly rewrite your crossing.
+
+## Something in the way
+
+&lt;!-- @force_cube --&gt;
+
+Three glass cubes wait near the machine. Take one and move it slowly. Let your hand settle. The motion arrow disappears when the sampled movement becomes small enough. Even stillness has a threshold in this picture.
+
+Release it into the volume and watch before following. Aim down, then repeat with the field tilted up and forward. Your release matters too. The field changes a velocity that has already begun.
+
+The cube differences its current position against the previous frame:
+
+```gdscript
+# force_cube.gd — the visible arrow follows sampled movement
+var vel: Vector3 = (global_position - _last_pos) / maxf(delta, 0.0001)
+_last_pos = global_position
+var f_world: Vector3 = (vel * 0.5).limit_length(2.6)
+```
+
+The name `f_world` has survived from an earlier account of this object. The quantity is a motion arrow. It shows half a metre for each metre per second, with its length capped at 2.6 metres. A fast throw can outrun what that length can tell you. The coloured legs decompose the drawing in the cube&#x27;s own axes; turn the cube and those axes turn with it.
+
+The arrow arrives after the movement. It cannot tell you, on its own, how much came from your hand, the field, damping or a collision. Even this small instrument has a past it cannot separate for you.
+
+The probe has ordinary gravity outside the field and damping that slows its motion. If it falls four metres below its starting height, it returns there and waits frozen for another pickup. Returning is a recovery rule, not the field bringing it home. A cube resting in the basin may still need to be fetched.
+
+## Enter the sentence
+
+&lt;!-- @force_field_zone --&gt;
+
+Five metres of air, marked by a cage. The thin edges are visible; they are not walls. A solid plank remains through the gap. Look along it, then into the air beside it. What would have to change for both to carry you?
+
+![The plank and the outlined carrying field seen from inside the museum](/book-review/doc/book/figures/forces/two-crossings-museum.png)
+
+*The plank keeps a route through the gap. Beside it, the outline marks where another rule can carry you.*
+
+With the field tilted up and forward, enter its near face from the plank. The field takes over locomotion inside. Your incoming velocity is retained, acceleration is added each physics step, and collision can still stop or deflect that movement. Leaving the volume ends this override; the return to ordinary stick steering also needs support under your feet. Physical tracked movement remains possible in VR; this is a controller handoff, not a force applied to your muscles.
+
+For a released cube, the central operation is short:
+
+```gdscript
+# force_field_zone.gd — remembered gravity is restored on exit
+rb.gravity_scale = 0.0
+rb.linear_velocity += f * delta
+```
+
+The missing division matters. This field gives an acceleration directly. It never divides a force by the receiver&#x27;s mass. A one-kilogram body and a four-kilogram body receive the same velocity increment. They can still meet different contacts or have different damping. Equal instruction does not promise equal journeys.
+
+Gravity arrives at the same place by a different route: its pull grows with the mass it pulls, and the division by that same mass cancels the growth, which is why Galileo&#x27;s two balls reached the ground together. This field skips the multiplication and the division at once.
+
+The visitor&#x27;s controller carries its velocity through a separate receiver:
+
+```gdscript
+# carry_velocity — incoming on entry, post-collision velocity thereafter
+return Vector3(_carry.get(body.get_instance_id(), incoming)) + field_vector * delta
+```
+
+Set ACCEL to zero before another crossing. Enter with some motion. Zero has removed the new contribution; it has not removed what you brought. The loose cube slows through its damping. This visitor receiver does not add that damping. The same empty-looking volume holds two different accounts of persistence.
+
+The boundary is another decision. The cube is detected by overlapping its physical body with an area; the visitor is admitted by a test of the body&#x27;s position near its feet. Their entries need not happen at the same instant. At the far face, the carry receiver lets go. In the air, you keep the motion you leave with while ordinary gravity changes it. Once your feet find the floor, the stick can steer again. That seam can be felt as a change in how you travel.
+
+&lt;!-- @ --&gt;
+
+## What the plank keeps
+
+The plank originally repaired a promise the museum could not keep: a field drew its arrows, but the walker did not accept its acceleration. Writing the same vector into two objects had not made them the same kind of body. One controller erased what another had just written.
+
+The repair belongs in the argument. Keep the plank. It gives you a way through while you investigate the other crossing, and it makes a comparison available: contact underneath, or a rule changing motion around you. Both depend on what the receiver can do.
+
+The small free-vector display and the green invisible-hill diorama remain as side encounters. A vector can be drawn at another address without changing its components. A region can assign vectors to addresses and make paths bend. Between those two statements lies the work of this hall: admitting a body into a rule, retaining its history, and deciding where the rule stops.
+
+What bodies are possible here? A carried visitor and a damped cube have become possible through related operations, implemented differently. The crab from the previous room would need its own receiver before this field could carry its commanded mesh. Shared code as a medium does not make that translation automatic. It gives us somewhere to work on it.
+
+We leave with more than a new route across a hole. We have learned to look for the place where an instruction becomes a consequence. In the next sequence, Form Finding, that question reaches the shape of the world itself.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act5_ForceAsPlace/tutorial.md">Raw captured source</a></p><pre># A local acceleration and three receivers
+
+Start with vector_machine, force_cube, then force_field_zone. Compare the preserved plank with entry into the field. The machine exposes pitch [-pi/2,pi/2], yaw [0,2pi], magnitude [0,15] m/s². Yaw zero points world +Z. Opening acceleration (0,-9.8,0); for an initial up/forward trial choose pitch about 45 degrees, yaw zero, magnitude about 7.5. These values invite a crossing attempt, not a guaranteed landing for every incoming velocity.
+
+The lesson is opted in by #lesson:force_as_place on the machine, zone and three probes. The machine locates the shared em_map ancestor and updates only opted-in zones there, including zones loaded after its controls. Legacy machines skip these scoped zones.
+
+Released RigidBody3D receivers in the real Area3D save gravity_scale, replace it with zero, then add field_vector * delta directly to linear_velocity. This is acceleration, independent of mass. Godot retains body damping/contact. Leaving the area, becoming frozen, or removing the field restores saved gravity. There is no claim that this overrides every other force.
+
+Desktop locomotion samples incoming velocity before its ordinary update, then asks the opted-in containing field for its retained post-collision velocity plus a*dt. The final handoff happens before move_and_slide; collision output is recorded for the next step. While inside, this replaces keyboard steering/jump output. Exit clears field history, ordinary horizontal input takes over, and the vertical state returns to normal gravity. First containing field owns a visitor if volumes overlap.
+
+The XRTools provider runs at order 95, respects earlier exclusive providers, uses move_player and returns exclusive ownership inside. It installs for both existing and late XRTools player bodies without duplicates. This changes software locomotion, not tracked physical movement. Headset comfort and embodied testing remain pending.
+
+Field dimensions: five metres, centred in X/Z and extending from local y=0 to 5. Visitor feet use strict X/Z interior and y in [-0.02,5]; physical cubes use area overlap. On entry, velocity is retained. Zero field acceleration does not stop motion. The carry receiver has no added damping; the loose probes retain linear_damp 0.3 plus project defaults.
+
+ForceCube displays sampled velocity * 0.5, capped at 2.6 m, decomposed in body-local axes. This lesson removes the legacy seeded rest arrow; stationary means zero. Its readout declares the visual scale/cap instead of calling the arrow force. Recovery below four metres from its home height restores the initial transform and freezes; basin floor contact can prevent reaching that threshold.
+
+The map is reversed in Z across all layers to place the machine before the field in museum travel. All eight artifact placements and six identities remain. Original walls, five-row pit and two-cell plank are preserved. Field geometry is an Area and drawing, not a wall; its opt-in placement must not erase the plank from the museum walk graph.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act5_ForceAsPlace/intent.md">Raw captured source</a></p><pre># What admits a body into a rule?
+
+Three linked primaries, in book order: vector_machine, force_cube, force_field_zone. Keep the three probes and all three supporting identities. Aim, release and observe before entering the field and explaining the different receivers. Preserve the developed yaw-at-the-pole passage and the plank&#x27;s access history, correcting obsolete controller claims.
+
+Connect Arena&#x27;s candidate/controller distinction with Form Finding&#x27;s change of world shape. This closes Forces without claiming that every artifact, agent or body now accepts the same acceleration. Headset testing follows later.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act5_ForceAsPlace/critical.md">Raw captured source</a></p><pre># Which body hears the field?
+
+The field&#x27;s strongest claim is also where it can fail. A common vector is offered to different bodies, but an offer is not yet an effect. The loose cube integrates acceleration. The desktop walker previously replaced that result with its own locomotion output. The crab commands its position through another controller. The shared computational medium gives us access to these differences; it does not dissolve them.
+
+This hall makes two receiver paths explicit. It does not upgrade every body in the project into a universal field receiver. Within the opted-in volume, visitor locomotion gives its place to an inertial update. Outside, ordinary steering reclaims it. That boundary determines which history persists, and which movement is allowed to speak next.
+
+There is a queer possibility in a crossing becoming available through a changed parameter. There is also a design decision in the word available. A field pointed upward can carry one implementation and leave another untouched. The question is not whether all bodies secretly were identical, but which translations could admit bodies the current rule cannot hold.
+
+Zero acceleration is a useful interruption of expectation: motion can continue. The cube&#x27;s damping and the visitor&#x27;s undamped receiver complicate that apparent sameness. Keep the plank beside them. It is the history of an access repair and an ongoing comparison, rather than an embarrassing support to erase once the new demonstration works.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act5_ForceAsPlace/blurb.md">Raw captured source</a></p><pre>A gap, a narrow plank and five metres of air you can aim. Test a cube before entering. What changes when a direction becomes a rule for a place—and which bodies can receive it?
+</pre></section></body></html>

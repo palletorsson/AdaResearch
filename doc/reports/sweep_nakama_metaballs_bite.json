@@ -1,0 +1,92 @@
+{
+ "sweep": "nakama_metaballs",
+ "peak_changed_pct": 1.91,
+ "subject_pct": 2.933,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "relief"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "blank"
+   },
+   "changed_px": 2184,
+   "changed_pct": 0.378
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "relief"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "swollen"
+   },
+   "changed_px": 4587,
+   "changed_pct": 0.794
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "relief"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "flayed"
+   },
+   "changed_px": 10221,
+   "changed_pct": 1.77
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "blank"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "swollen"
+   },
+   "changed_px": 5813,
+   "changed_pct": 1.006
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "blank"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "flayed"
+   },
+   "changed_px": 11034,
+   "changed_pct": 1.91
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "swollen"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "pose_time": 3.0,
+    "imprint": "flayed"
+   },
+   "changed_px": 7346,
+   "changed_pct": 1.272
+  }
+ ]
+}

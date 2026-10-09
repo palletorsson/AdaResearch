@@ -1,0 +1,23 @@
+{
+  "commit": "8d49b4d37d0824a94b235e3a8455109e2c8b5c06",
+  "commit_date": "2026-09-07T20:50:33+02:00",
+  "scope": "Historical map JSON with current GridSystem and artifact implementations. JSON lighting; plain background using its authored colour; no biome ring or player.",
+  "maps": [
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "source": "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+      "sha256": "c019971ab60350d4e5e766b625addf242b0fbe11009281e84c4386b71185ef0f",
+      "live_map_unchanged": true,
+      "artifacts": 8,
+      "structure_cubes": 1052
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "source": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+      "sha256": "e797c4cab05936089d096e03a91c79b51f7f6df385f20ae05efae43da17209fd",
+      "live_map_unchanged": true,
+      "artifacts": 4,
+      "structure_cubes": 165
+    }
+  ]
+}

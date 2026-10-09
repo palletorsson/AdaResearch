@@ -1,0 +1,68 @@
+{
+ "sweep": "admission_rack",
+ "peak_changed_pct": 7.38,
+ "subject_pct": 32.041,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "carrier": "housing"
+   },
+   "b": {
+    "carrier": "object"
+   },
+   "changed_px": 41770,
+   "changed_pct": 7.232
+  },
+  {
+   "a": {
+    "carrier": "housing"
+   },
+   "b": {
+    "carrier": "neither"
+   },
+   "changed_px": 36131,
+   "changed_pct": 6.255
+  },
+  {
+   "a": {
+    "carrier": "housing"
+   },
+   "b": {
+    "carrier": "both"
+   },
+   "changed_px": 11014,
+   "changed_pct": 1.907
+  },
+  {
+   "a": {
+    "carrier": "object"
+   },
+   "b": {
+    "carrier": "neither"
+   },
+   "changed_px": 13474,
+   "changed_pct": 2.333
+  },
+  {
+   "a": {
+    "carrier": "object"
+   },
+   "b": {
+    "carrier": "both"
+   },
+   "changed_px": 33112,
+   "changed_pct": 5.733
+  },
+  {
+   "a": {
+    "carrier": "neither"
+   },
+   "b": {
+    "carrier": "both"
+   },
+   "changed_px": 42624,
+   "changed_pct": 7.38
+  }
+ ]
+}

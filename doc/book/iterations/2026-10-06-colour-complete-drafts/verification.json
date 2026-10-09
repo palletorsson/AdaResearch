@@ -1,0 +1,256 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "native_assertions": 311,
+  "variants": 20,
+  "faults_rejected": 10,
+  "variant_edits": {
+    "Color_Rainbow": {
+      "start": [],
+      "two": [
+        [
+          "Color(0.15, 0.55, 0.9), Color(1, 0.8, 0.15)",
+          "Color.WHITE"
+        ]
+      ],
+      "four": [
+        [
+          "Color(1, 0.8, 0.15)]",
+          "Color(1, 0.8, 0.15), Color.BLACK]"
+        ]
+      ],
+      "one": [
+        [
+          "Color(0.8, 0.2, 0.6), Color(0.15, 0.55, 0.9), Color(1, 0.8, 0.15)",
+          "Color(0.8, 0.2, 0.6)"
+        ]
+      ]
+    },
+    "Color_Pillar": {
+      "start": [],
+      "low": [
+        [
+          "Vector3(6.4, 1.25, 9.6)",
+          "Vector3(6.4, 0.65, 9.6)"
+        ]
+      ],
+      "high": [
+        [
+          "Vector3(6.4, 1.25, 9.6)",
+          "Vector3(6.4, 1.85, 9.6)"
+        ]
+      ],
+      "beyond": [
+        [
+          "Vector3(6.4, 1.25, 9.6)",
+          "Vector3(6.4, 2.5, 9.6)"
+        ]
+      ]
+    },
+    "Color_Grid_Pallet": {
+      "start": [],
+      "one": [
+        [
+          "Palette.new([sample, Color.WHITE, Color.BLACK])",
+          "Palette.new([sample])"
+        ]
+      ],
+      "four": [
+        [
+          "Palette.new([sample, Color.WHITE, Color.BLACK])",
+          "Palette.new([sample, Color.WHITE, Color.BLACK, Color(0.8, 0.2, 0.6)])"
+        ]
+      ]
+    },
+    "Color_Paint": {
+      "start": [],
+      "wide": [
+        [
+          "var radius := 0.06",
+          "var radius := 0.12"
+        ]
+      ],
+      "short": [
+        [
+          "var max_distance := 3.0",
+          "var max_distance := 1.0"
+        ]
+      ],
+      "automatic": [
+        [
+          "var automatic := false",
+          "var automatic := true"
+        ]
+      ],
+      "choice": [
+        [
+          "var automatic := false",
+          "var automatic := true"
+        ],
+        [
+          "sin(time * 1.3)",
+          "sin(time * 2.0)"
+        ]
+      ]
+    },
+    "Color_Walls": {
+      "start": [],
+      "thin": [
+        [
+          "var opacity := 0.52",
+          "var opacity := 0.2"
+        ]
+      ],
+      "full": [
+        [
+          "var opacity := 0.52",
+          "var opacity := 1.0"
+        ]
+      ],
+      "turned": [
+        [
+          "= [0.0, 15.0]",
+          "= [0.0, 45.0]"
+        ]
+      ]
+    }
+  },
+  "faults": {
+    "rainbow_extent": [
+      "Color_Rainbow",
+      "lesson.gd",
+      "TOTAL_THICKNESS / float(palette.size())",
+      "0.3",
+      "fixed_outer"
+    ],
+    "rainbow_colour": [
+      "Color_Rainbow",
+      "lesson.gd",
+      "palette[i]",
+      "palette[0]",
+      "colour_1"
+    ],
+    "pillar_frame": [
+      "Color_Pillar",
+      "lesson.gd",
+      "to_local(point.global_position)",
+      "point.global_position",
+      "initial_colour"
+    ],
+    "pillar_clamp": [
+      "Color_Pillar",
+      "lesson.gd",
+      "clampf((hand.y - 0.65) / 1.2, 0, 1)",
+      "(hand.y - 0.65) / 1.2",
+      "height_clamped"
+    ],
+    "grid_advance": [
+      "Color_Grid_Pallet",
+      "palette.gd",
+      "index = (index + 1) % colours.size()",
+      "index = index",
+      "paint_before_advance"
+    ],
+    "grid_alias": [
+      "Color_Grid_Pallet",
+      "palette.gd",
+      "colours.assign(choices)",
+      "colours = choices",
+      "owns_choices"
+    ],
+    "paint_gate": [
+      "Color_Paint",
+      "lesson.gd",
+      "active = pressed and held",
+      "active = pressed",
+      "unheld_cannot_paint"
+    ],
+    "paint_area": [
+      "Color_Paint",
+      "lesson.gd",
+      "query.collide_with_areas = true",
+      "query.collide_with_areas = false",
+      "ray_hits_receiver"
+    ],
+    "walls_mode": [
+      "Color_Walls",
+      "lesson.gd",
+      "BaseMaterial3D.TRANSPARENCY_ALPHA if filter_mode else BaseMaterial3D.TRANSPARENCY_DISABLED",
+      "BaseMaterial3D.TRANSPARENCY_DISABLED",
+      "alpha_mode"
+    ],
+    "walls_boundary": [
+      "Color_Walls",
+      "lesson.gd",
+      "    filter_mode = not filter_mode",
+      "    panes[0].boundary.disabled = true\n    filter_mode = not filter_mode",
+      "opaque_collision"
+    ]
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-colour-complete-8wdnmbgk",
+  "preserved": {
+    "commons/maps/Color_Rainbow/tutorial.md": "96507eb1e7360381c7ae792148115733bd138db266ff7dc8fee626bca5713e08",
+    "commons/maps/Color_Rainbow/final.md": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+    "commons/maps/Color_Rainbow/map_data.json": "5416de4ab930ab5dcf1d2a96530003159ef768e6685a9ea95c7ee20b7db016c9",
+    "commons/maps/Color_Pillar/tutorial.md": "429592b24cba12d3e9e3f64add39509f1c5c00e7b261e9725d174d99ed589ad4",
+    "commons/maps/Color_Pillar/final.md": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+    "commons/maps/Color_Pillar/map_data.json": "1c650917910a0507685b26e91fc4f085e458ebe041bc6d3ebc6cfaa01ef207fc",
+    "commons/maps/Color_Grid_Pallet/tutorial.md": "d6585b30e7da688edea9c8713165e7bf128fe3ac43716f8dded51616945fda84",
+    "commons/maps/Color_Grid_Pallet/final.md": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+    "commons/maps/Color_Grid_Pallet/map_data.json": "c1a927d19870a97dc23692932a193cd5e3f26c2e1444721807ce3185934e9f38",
+    "commons/maps/Color_Paint/tutorial.md": "2d7cef31ac7a1a442891b63cc5afffc21bac1d0b57263eb1b966d75a44eeb7cd",
+    "commons/maps/Color_Paint/final.md": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+    "commons/maps/Color_Paint/map_data.json": "905f3c46f24cf67220f953b5171d075e061c4855f179d666d700894193e26844",
+    "commons/maps/Color_Walls/tutorial.md": "9aecf5086e09dc5edd8196d13f2b9e48e211469c9dfc65ea7cf4a864384baad7",
+    "commons/maps/Color_Walls/final.md": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b",
+    "commons/maps/Color_Walls/map_data.json": "fd3e3c9fa431074578c6676f5bd56415467025a13238a50a86fd9c7df7b1dab0",
+    "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+    "doc/book/course/execution-plan/plan.json": "7ea2524f93441abb3bed08a94ae3f0604c4eb3abbda6d021779a9d9a7d8c32f6"
+  },
+  "scope": "Exact printed sources; native geometry/material/state/physics assertions; XR Tools pickup and action signals with synthetic controller. No headset, museum integration or human learning test.",
+  "inputs": {
+    "run_checks.py": "3f0241c62ae0da7a327924ce6d2494234167f6d9bd863d3f41846b352e41eeac",
+    "verify.gd": "82061e98dd10aa932f81275cc92b889e2ea1631ce81e197e7abe03d1337e176e",
+    "native-project.godot": "82492f1f83988e5dc8d591e38c156155745871b8b3385a19e476949a94f83727",
+    "Color_Rainbow/arc_strip.gd": "fed0c7d734bd4112b93187b6669bf5e42d2abadb88d2b5aa65d4b136f0f68fee",
+    "Color_Rainbow/final.md": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+    "Color_Rainbow/lesson.gd": "d6fc082ba9711b7afd6ee15fdc46ea5145315faf53da4c2d9f3996cc0ab784dc",
+    "Color_Rainbow/tutorial.md": "607da8bc094a5679b90d849790d114f452a4a954cf3efb55d5d68063c370ce87",
+    "Color_Pillar/final.md": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+    "Color_Pillar/lesson.gd": "368527f0f700221916dfbd480a50e94feb20eaec5bd7d6194c82508fd908a314",
+    "Color_Pillar/point_body.gd": "968676c54b9fa9b222c26a791f4d150413dcd8865592f61c72df7adc5f8b9037",
+    "Color_Pillar/tutorial.md": "d79da67ca26762d3238aaac21a9b686571239c2916079e776f6623eb2639bba2",
+    "Color_Grid_Pallet/controls.gd": "2f6cb1bb29ea7401d03bebdbf34c9413c657dada57490ede3a725ea8906d2eff",
+    "Color_Grid_Pallet/final.md": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+    "Color_Grid_Pallet/grid_surface.gd": "7f1d93dee89566a7aec7456a67f7aa2c89e147707c7724d72d87cc6810dc4d75",
+    "Color_Grid_Pallet/lesson.gd": "c6a0ee83fd10b57d8c7b42c576c7f9224e24e80fa4481a39ab3f8acbc85c6faa",
+    "Color_Grid_Pallet/palette.gd": "af848e3c62f97302669d9f733cb2a5bfb695784b5adf945d13c055f0221eef85",
+    "Color_Grid_Pallet/tutorial.md": "0b8fcf8af3eba6a6445b14c6d3a5e204141b94ed787f943469ab2898e3307fa6",
+    "Color_Paint/canvas.gd": "5be00010b5751dc582987e100afb739a8bb181ef0151b39cb13978f6df74a6c6",
+    "Color_Paint/controls.gd": "85bb59600b76264475cdfc24dac42f3f1fd9b98b9a6c4f8d056f937f1da4dbe6",
+    "Color_Paint/final.md": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+    "Color_Paint/lesson.gd": "32d649ee5475251571e268581faf93501a1555b41f8a9d7ab69e62be4f7388a1",
+    "Color_Paint/point_body.gd": "968676c54b9fa9b222c26a791f4d150413dcd8865592f61c72df7adc5f8b9037",
+    "Color_Paint/tutorial.md": "8a7e66029c5f26a9de8c926d5018a999a6708ae144fa811c0963bc010d9900f5",
+    "Color_Walls/controls.gd": "4ef4ec88372fc223e1318105b2cde1cceaa5478ea3a18e996ba9a3f7cc853e81",
+    "Color_Walls/final.md": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b",
+    "Color_Walls/lesson.gd": "70b95d3828ece4de2d8495c9b66fd4eba1482c6d3d264a3b3417bb08d1e7f8c4",
+    "Color_Walls/palette.gd": "af848e3c62f97302669d9f733cb2a5bfb695784b5adf945d13c055f0221eef85",
+    "Color_Walls/pane.gd": "80e1c1cd6e9f60a869f08a9b6aa87685377d758a9d93cbccd8afcc10fa81068e",
+    "Color_Walls/tutorial.md": "8903c13dc1e5c97cf8e7ae8d61eb0485e67322781d05e46c07cc24b49b8afda5",
+    "render_check.gd": "d3cb27a75ab97ac40b7f1d90870b98bbc590fba9a9b9967ad221acba4dabc71d",
+    "run_render.py": "f8b1cb7ad89b450d42764939868f313690c44d46aadf490a77dd1fd8681be127"
+  },
+  "render_assertions": 14,
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "images": {
+    "grid-mark.png": "105c1ee9c7335d717b205286dc88034beb2b258fb3758835399b8cd05c42004e",
+    "grid-rule.png": "8edc3002c3db7413a2a61a8428c0bff9063dc8bce825477c4914a14a24fc273f",
+    "paint-marks.png": "c1a05630a7686f20c5d3b193292c3a4966fcbcde0ac35321f543132313ee0c54",
+    "pillar-high.png": "ac94e7bcb242d34d807778cbd18d1c377776d3e52ce680fd567ca73a730a11c2",
+    "pillar-middle.png": "3188e984a2d5e595b39c5713fd4dae118840771af4e35319317467b3201a6aae",
+    "rainbow.png": "7199ac7a015766b04dd776cbf291fcaaae75b98d47a32fae56c058b2d41b6045",
+    "walls-filter.png": "fec8443c3d5f5eb07dceb44b6ffa78a863cc9616d4f315b92c4e5d5568b8bc74",
+    "walls-opaque.png": "a817636dd268591ad0f91fd91dda7667b8cccd6f89ba09b25886562f1043cd88"
+  }
+}

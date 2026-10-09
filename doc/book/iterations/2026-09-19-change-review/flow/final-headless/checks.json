@@ -1,0 +1,146 @@
+{
+  "artifact_only": true,
+  "checks": [
+    {
+      "message": "shared-field lesson loads",
+      "ok": true
+    },
+    {
+      "message": "authored lesson retains eighty particles",
+      "ok": true
+    },
+    {
+      "message": "field initially held and arrows hidden",
+      "ok": true
+    },
+    {
+      "message": "initial display matches snapshotted or repaired reveal timing",
+      "ok": true
+    },
+    {
+      "message": "canvas and trails share XZ plane",
+      "ok": true
+    },
+    {
+      "message": "lesson preserves original overlap or hides duplicate title after repair",
+      "ok": true
+    },
+    {
+      "message": "RESET/SEED label quads are identified geometrically",
+      "ok": true
+    },
+    {
+      "message": "baseline label burial or repaired tabletop clearance is measurable",
+      "ok": true
+    },
+    {
+      "message": "button interaction volume clears lesson tabletop: Btn_0",
+      "ok": true
+    },
+    {
+      "message": "button interaction volume clears lesson tabletop: Btn_1",
+      "ok": true
+    },
+    {
+      "message": "noise-to-angle returns a unit direction",
+      "ok": true
+    },
+    {
+      "message": "particle displacement follows direction times speed times delta",
+      "ok": true
+    },
+    {
+      "message": "held field clock stays fixed during particle movement",
+      "ok": true
+    },
+    {
+      "message": "ARROWS pointer event reveals arrow mesh",
+      "ok": true
+    },
+    {
+      "message": "24 glyphs each have shaft and two arrowhead strokes",
+      "ok": true
+    },
+    {
+      "message": "all drawn arrow directions agree with particle sampler at their own addresses",
+      "ok": true
+    },
+    {
+      "message": "revealed display reports correct state",
+      "ok": true
+    },
+    {
+      "message": "FIELD TIME pointer event advances field clock",
+      "ok": true
+    },
+    {
+      "message": "FIELD TIME pointer event holds current time without rewinding",
+      "ok": true
+    },
+    {
+      "message": "RESET pointer event clears every trail",
+      "ok": true
+    },
+    {
+      "message": "RESET scatters particle positions",
+      "ok": true
+    },
+    {
+      "message": "RESET retains noise seed and current field time",
+      "ok": true
+    },
+    {
+      "message": "SEED pointer event changes noise seed without rewinding field time",
+      "ok": true
+    },
+    {
+      "message": "SEED also clears trails",
+      "ok": true
+    },
+    {
+      "message": "SPEED slider signal reaches prescribed speed",
+      "ok": true
+    },
+    {
+      "message": "SCALE slider changes lesson noise frequency once",
+      "ok": true
+    },
+    {
+      "message": "opposite wrapped addresses need not share a direction",
+      "ok": true
+    },
+    {
+      "message": "probe finds outward-pointing sample near boundary",
+      "ok": true
+    },
+    {
+      "message": "coordinate return retains cross-canvas adjacent trail samples",
+      "ok": true
+    },
+    {
+      "message": "production renderer preserves the long seam stroke",
+      "ok": true
+    },
+    {
+      "message": "unconfigured painter retains its base title",
+      "ok": true
+    },
+    {
+      "message": "unconfigured painter retains original control placement",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "learner_verified": false,
+  "observations": {
+    "initial_status": "FIELD HELD / 80 PARTICLES\nARROWS HIDDEN",
+    "opposite_edge_direction_distance": 0.271328628063202,
+    "reset_seed_label_clearance_metres": [
+      0.0366765968501568,
+      0.0366765968501568
+    ],
+    "wrap_jump_local_metres": 0.598942697048187
+  },
+  "replay_before": false
+}

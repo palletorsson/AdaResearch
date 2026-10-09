@@ -1,0 +1,21 @@
+{
+  "map_preservation": "Nine preserved galleries byte-identical",
+  "plan_preservation": "Both plans equal only permitted patches",
+  "published_files": [
+    "spine-recovery.html",
+    "spine-platform-recovery.json",
+    "index.html",
+    "structure-recovery.html",
+    "NEXT_BATCH.md"
+  ],
+  "http": "All 200 and source bytes match",
+  "runtime": "Not run; Godot occupied",
+  "probe_syntax": "gdtoolkit parser pass",
+  "regression_tests": 4,
+  "idempotence": "Second apply changed zero maps",
+  "browser": {
+    "published_report": "Opened and visually inspected",
+    "map_search": "Boolean_Verbs shows exactly one matching row; cleared after check",
+    "author_choice": "Visible in report: preserve newer partitions"
+  }
+}

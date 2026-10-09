@@ -1,0 +1,34 @@
+{
+  "room": "Array",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Array/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Array/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Array/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Array/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Array/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Array/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Array/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Array/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Array/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Array/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Array/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "eb106a0da0ef494660f184e4276266d9c1e3d87c12f73ad45991cd744e3f7d67",
+    "commons/maps/Array/map_data.json": "5e0344043f1ea8ccb2f5a680ecf9d0444e68bf0f5b67bc85eb679b8d5d7806a6",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "21a2972b8d764559d8624ee7a64f81b07f9096052b988a99ade3fde0c55ef187",
+    "ada_run/encounter_pilot/Array/control.json": "40caf549d2162008e6d82c64ae48d101bf355515183b475f2c1dba00d220cd6b",
+    "ada_run/encounter_pilot/Array/necklace_hand.json": "cdc8a79f62bb72fbfc2786150b59fd8a628bc86ceaded279a1140f185292b92c",
+    "ada_run/encounter_pilot/Array/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Array/em_bake.json": "04eca89eeb9555eb107be37b50ba696cc3279ea2f7066d3a3104176300487f4a",
+    "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+    "algorithms/arrays/row_3_x.tscn": "e6e92fd31d83499e2c62be91171f92dd3e59258d48e76208017870961ece3e72",
+    "algorithms/arrays/row_3_x.gd": "48220ac5cb4b41618cc2e6b73c02ffb54ebc162ecca88aea329e964a0ef306aa",
+    "algorithms/arrays/grid_2d_4x4.tscn": "b8a71c071e81df564849800a80df64014dfe18a35d94080f72e5a9320ef4fae1",
+    "algorithms/arrays/grid_2d_4x4.gd": "9318036545bbbebbf1518400a9535ed9a2f96f98293f84bf9892c3c9be9ef856",
+    "commons/scenes/mapobjects/pick_up_cube.gd": "fc4599790d901965a0688c5f031812653d3261ad4e611bd9c35b2137e04b617c"
+  }
+}

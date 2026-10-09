@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Lines — two ends</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f1e9;color:#29282b;font:19px/1.65 Georgia,serif}main{max-width:1160px;margin:auto;padding:30px 26px 70px}header{border-bottom:1px solid #cdc6bd;padding-bottom:22px;font:14px/1.6 system-ui,sans-serif}nav{display:flex;gap:12px 24px;flex-wrap:wrap}a{color:#84445f;text-underline-offset:4px}article{max-width:760px;margin:48px auto}h1{font-size:clamp(32px,4vw,47px);font-weight:normal;line-height:1.18}h2{font-size:29px;font-weight:normal;margin-top:44px}p{margin:0 0 23px}code{font:.84em Consolas,monospace}pre{background:#e9e3db;border-left:3px solid #b87792;padding:22px;overflow-x:auto;font:15px/1.6 Consolas,monospace}pre code{font:inherit}figure{margin:34px -90px}img{width:100%;height:auto;display:block}figcaption,.small{font:14px/1.6 system-ui,sans-serif;color:#5e575b;margin-top:12px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px -100px}.pair figure{margin:0;min-width:0}details{margin:28px 0;border-top:1px solid #cdc6bd;padding-top:20px}summary{cursor:pointer;font:17px/1.5 system-ui,sans-serif}details>div{max-width:760px;margin:20px auto}.download{display:inline-block;background:#733e55;color:white;padding:10px 20px;text-decoration:none;font:16px/1.5 system-ui,sans-serif;border-radius:3px}.lineage{max-width:760px;margin:45px auto;border-top:1px solid #cdc6bd;padding-top:20px}a:focus-visible,summary:focus-visible{outline:3px solid #aa577b;outline-offset:4px}@media(max-width:1000px){figure,.pair{margin:30px 0}}@media(max-width:650px){.pair{grid-template-columns:1fr}main{padding:24px 17px}body{font-size:18px}pre{font-size:13px;padding:14px}}@media print{header,details,.download{display:none}body{background:white;font-size:11pt}figure,.pair{margin:20px 0}pre{white-space:pre-wrap}h2{break-after:avoid}}</style></head><body><main><header><p>ADA / ONE TUTORIAL AT A TIME · 3 October 2026</p><nav><a href="#reading">Read Point Lines</a><a href="#code">Complete script</a><a href="#lineage">What it adds</a><a href="Point_Lines.tutorial.diff">Text diff</a></nav></header><article id="reading"><h1>Point Lines — keep two ends in relation</h1>
+<p>Take one endpoint. The other stays where it is. Between them, a pale segment turns and changes length. Two readings follow: a displacement and its length.</p>
+<p>Point One gave a position a body. Point Coordinates adds a working hold and a frame in which to read its position. Here we use two positions in that same frame. The prepared handles supply the hold; the new work is the relation between them.</p>
+<p>Open <code>point_lines.tscn</code> in the <a href="../2026-10-03-ada-xr-starter/index.html#guide">Ada student starter</a>. Use <strong>Run Current Scene</strong> (F6). Open <code>studies/point_lines/line.gd</code>. On desktop, approach a point, aim at it and press E to hold it. Move, then press E to release. It stays where you leave it. The XR route uses the supplied near-grip interaction.</p>
+<figure><a href="room.png"><img src="room.png" alt="Two pale grabbable points joined by a horizontal segment, with displacement and distance above, inside the shared Godot room"></a><figcaption>Actual Godot render. The upper reading is the displacement; below it is the distance.</figcaption></figure><h2>1. Keep two positions</h2>
+<p>Inside <code>_ready()</code>, the script places two handles:</p>
+<pre><code class="language-gdscript">    a.position = Vector3(-0.75, 1.12, 0.0)
+    b.position = Vector3(0.75, 1.12, 0.0)
+</code></pre>
+<p><code>a</code> and <code>b</code> are references to the handles. Each <code>.position</code> is a <code>Vector3</code>. Both handles belong to <code>Study</code>, so their positions use the same reference frame. Keep Study's scale at one. In this room, one unit represents one metre.</p>
+<p>The middle and last numbers agree. The first numbers place the handles 1.5 metres apart.</p>
+<h2>2. Subtract, then measure</h2>
+<p>Inside <code>_process()</code>, we read the relation again:</p>
+<pre><code class="language-gdscript">    var displacement := b.position - a.position
+    var distance := displacement.length()
+</code></pre>
+<p>Subtract the start from the end. <code>displacement</code> is the change needed to get from A to B: initially <code>(1.5, 0.0, 0.0)</code>. It has a direction and a length.</p>
+<p><code>.length()</code> measures that vector and returns one number: <code>1.5</code>. The displacement is a <code>Vector3</code>; the distance is a <code>float</code>. A distance alone does not say which way to go.</p>
+<p>Change B's first number from <code>0.75</code> to <code>0.25</code> in <code>_ready()</code>. Run again. The segment is now one metre long. You changed one endpoint; the relation supplied the new length. Restore <code>0.75</code>.</p>
+<h2>3. Turn without lengthening</h2>
+<p>Replace B's starting position with <code>Vector3(-0.75, 2.62, 0.0)</code>.</p>
+<p>The segment stands upright. Its length is still 1.5 metres. The displacement is now <code>(0.0, 1.5, 0.0)</code>. A different direction can have the same length.</p>
+<p>Restore B's original position. Change the subtraction to <code>a.position - b.position</code>. The displacement reverses. The distance stays the same, and the segment still joins the same two ends. Restore <code>b.position - a.position</code>.</p>
+<div class="pair"><figure><a href="upright.png"><img src="upright.png" alt="The segment is vertical and its distance remains 1.5 metres" loading="lazy"></a><figcaption>Turned upright · the distance remains 1.5 m.</figcaption></figure><figure><a href="depth.png"><img src="depth.png" alt="One endpoint has moved in height and depth, producing a diagonal segment" loading="lazy"></a><figcaption>Change height and depth · all three components contribute.</figcaption></figure></div><h2>4. Read it while it changes</h2>
+<p>This is the whole repeated part of <code>line.gd</code>:</p>
+<pre><code class="language-gdscript">func _process(_delta):
+    var displacement := b.position - a.position
+    var distance := displacement.length()
+    segment.show_between(a.position, b.position)
+    displacement_readout.text = str(displacement)
+    distance_readout.text = &quot;%.2f m&quot; % distance
+</code></pre>
+<p>We reuse Point Zero's <code>_process()</code>. Each frame reads the current positions, draws between them and updates the text. <code>str()</code> makes text from a value. In the last line, <code>%</code> puts the distance into the <code>%.2f</code> slot: a number shown with two decimal places, followed by “m”. This rounds the display, not the stored positions. A small movement can leave the displayed number unchanged.</p>
+<p><code>show_between()</code> is a function in our supplied <code>Segment</code> script. We pass it the two positions. It places a thin cylinder between them and adjusts its length and orientation. The cylinder has a thickness chosen so we can see it. Its drawing code is included, but turning a mesh is not today's new operation.</p>
+<p>Take one endpoint and move it. The handle supplies a new position; the relation responds. Release it. The script keeps reading even when nothing moves.</p>
+<h2>What we borrowed</h2>
+<p>At the top of the file, <code>preload()</code> loads the two supplied scripts. <code>const</code> gives each a fixed name:</p>
+<pre><code class="language-gdscript">const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const Segment = preload(&quot;res://prepared/segment.gd&quot;)
+</code></pre>
+<p><code>PointHandle.new()</code> creates a point with the supplied pickup behaviour. <code>Segment.new()</code> creates the cylinder. The lesson also creates its two <code>Label3D</code> readouts. Each node is added in <code>_ready()</code>; no teaching mesh or display is fetched from a scene file.</p>
+<p>These are named dependencies. We can inspect or replace them while keeping the calculation between two positions.</p>
+<h2>Two ends cannot keep a journey</h2>
+<p>Give B the same starting position as A. The distance becomes zero. The renderer hides a segment too short to draw; at coincidence there is no direction from one end to the other. Separate them again and it reappears.</p>
+<p>Carry an endpoint around a detour, then return it to the same place. The calculation returns to the same result. It has kept no route.</p>
+<p>The museum's walking line makes that absence visible beside a recorded trail. In Trace, we will keep the positions in between.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the starter with Point Lines</a></p><p class="small">Open point_lines.tscn · Run Current Scene (F6).</p></article><details id="code"><summary>line.gd · the complete working lesson</summary><div><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const Segment = preload(&quot;res://prepared/segment.gd&quot;)
+
+var a := PointHandle.new()
+var b := PointHandle.new()
+var segment := Segment.new()
+var displacement_readout := Label3D.new()
+var distance_readout := Label3D.new()
+
+func _ready():
+    a.position = Vector3(-0.75, 1.12, 0.0)
+    b.position = Vector3(0.75, 1.12, 0.0)
+    add_child(a)
+    add_child(b)
+    add_child(segment)
+
+    displacement_readout.position = Vector3(0.0, 2.25, -0.6)
+    add_child(displacement_readout)
+    distance_readout.position = Vector3(0.0, 1.9, -0.6)
+    add_child(distance_readout)
+
+func _process(_delta):
+    var displacement := b.position - a.position
+    var distance := displacement.length()
+    segment.show_between(a.position, b.position)
+    displacement_readout.text = str(displacement)
+    distance_readout.text = &quot;%.2f m&quot; % distance
+</code></pre><p><a href="line.gd" download>Download line.gd</a> · <a href="point_handle.gd">Supplied point handle</a> · <a href="segment.gd">Supplied segment renderer</a></p></div></details><section id="lineage" class="lineage"><h2>The relation is the new work.</h2><p>The lesson inherits a position, a visible body and a working hold. It adds subtraction and length, then reads them repeatedly as the endpoints move. Trace will keep the positions that this calculation replaces.</p><p>Coordinates remains between Point One and Lines in the spine. Its shared-starter rewrite is still pending. This pilot supplies the hold and states the common reference frame explicitly.</p><p class="small">The critical manuscript and live museum are unchanged. This pass updates tutorial.md and its executable companion.</p></section><details id="checked"><summary>32 checks passed · scope and limits</summary><div><p>Checked in Godot 4.6: initial placement, length after coordinate edits, vertical and downward segments, depth, coinciding endpoints, desktop pickup and frozen release, synthetic XR grip, and the reversed subtraction. The lesson constructs its nodes without prepared teaching objects.</p><p>These are desktop renders. Synthetic controller input does not certify headset reach or comfort. A beginner reading trial is also pending.</p><p><a href="verification.json">Native results</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="DECISIONS.md">Editorial decisions</a></p></div></details></main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

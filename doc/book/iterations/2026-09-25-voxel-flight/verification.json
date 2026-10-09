@@ -1,0 +1,228 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "33 by 44 hall with room for 28 m enclosure",
+      "passed": true
+    },
+    {
+      "name": "rectangular layer structure",
+      "passed": true
+    },
+    {
+      "name": "rectangular layer utilities",
+      "passed": true
+    },
+    {
+      "name": "rectangular layer interactables",
+      "passed": true
+    },
+    {
+      "name": "recovered interior structure preserved at x+9",
+      "passed": true
+    },
+    {
+      "name": "every recovered utility retained",
+      "passed": true
+    },
+    {
+      "name": "all four artifacts retained",
+      "passed": true
+    },
+    {
+      "name": "one metre flight placement",
+      "passed": true
+    },
+    {
+      "name": "bench and screen retain height/config",
+      "passed": true
+    },
+    {
+      "name": "unchanged file or absence: commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged file or absence: commons/maps/Noise_Voxel/artifact_roles.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged file or absence: commons/movement/museum_flight_provider.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _generate_chunk",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _add_volume_boundary",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _effective_iso",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _configure_noise",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _rebuild_now",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: _clear_generated",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: apply_perlin_terrain_controls",
+      "passed": true
+    },
+    {
+      "name": "unchanged core function: apply_perlin_cell_selection",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _ready",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: contains_point",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: at_point",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: flight_velocity",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: desktop_velocity",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _node_added",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _install_xr_adapter",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _material",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _box",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _sign",
+      "passed": true
+    },
+    {
+      "name": "flight function preserved apart from dimension parameter: _build_enclosure",
+      "passed": true
+    },
+    {
+      "name": "roles and all other hall metadata preserved",
+      "passed": true
+    },
+    {
+      "name": "current hash: final.md",
+      "passed": true
+    },
+    {
+      "name": "current hash: map_data.json",
+      "passed": true
+    },
+    {
+      "name": "code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors retained",
+      "passed": true
+    },
+    {
+      "name": "opening threshold argument preserved",
+      "passed": true
+    },
+    {
+      "name": "component/orb/closing arguments retained",
+      "passed": true
+    },
+    {
+      "name": "other registry artifacts preserved",
+      "passed": true
+    },
+    {
+      "name": "only voxel description/parameter docs changed",
+      "passed": true
+    },
+    {
+      "name": "passing native run museum-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "floor ray: bench approach",
+      "passed": true
+    },
+    {
+      "name": "floor ray: north flight landing",
+      "passed": true
+    },
+    {
+      "name": "floor ray: rear museum landing",
+      "passed": true
+    },
+    {
+      "name": "passing native run views-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "no script/shader/caption errors in museum-process.log",
+      "passed": true
+    },
+    {
+      "name": "no script/shader/caption errors in views-process.log",
+      "passed": true
+    },
+    {
+      "name": "book figure unmodified",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: [em-art] noise|noise voxel: panton_pop took 121 ms to build \u2014 that is a dropped frame in the hall",
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: [em-art] noise|noise voxel: panton_pop took 121 ms to build \u2014 that is a dropped frame in the hall"
+  ],
+  "other_core_records_changed_concurrently": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+  ],
+  "scope": "Actual museum, synthetic keyboard/controller input, physical collision and private probe files. No headset acceptance."
+}

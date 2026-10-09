@@ -1,0 +1,18 @@
+--- before/commons/maps/Color_Pillar/final.md
++++ current/commons/maps/Color_Pillar/final.md
+@@ -12,9 +12,13 @@
+ return Color.from_hsv(u * 0.85, lerpf(0.25,1.0,v),0.95)
+ ```
+ 
+-The address is doing work. One coordinate chooses a place along the hue range; another chooses saturation. Value stays at 0.95. The gaps between columns contain possibilities that the collection has not put into a body.
++`p` is a position measured from the field's first sample. Dividing by 12.8 and 19.2 turns the distances across its two spans into fractions: `u` and `v`. `clampf` keeps each fraction between zero and one.
+ 
+-The field is larger than its former arrangement: five columns by seven rows, with 3.2 metres between samples. Each pillar rises 4.6 metres. Walk close enough to read a sample's address and colour code, then step back until several pillars overlap. The computed values remain fixed. What their company makes visible keeps changing.
++Stay in one column of samples and follow it from the pale end to the far end. Its `u`, and therefore its hue, stays fixed. At the first row, `v` is zero and saturation is 0.25; at the last, `v` is one and saturation is 1.0. `lerpf` supplies the values between them. Before walking back, predict which way the colour will change.
++
++Value stays at 0.95 throughout the field. You have varied one part of HSV while keeping two still. The gaps between columns contain possibilities that the collection has not put into a body.
++
++Five columns by seven rows, with 3.2 metres between samples: the field gives the rule room to be walked. Each pillar rises 4.6 metres. Walk close enough to read a sample's address and colour code, then step back until several pillars overlap. The computed values remain fixed. What their company makes visible keeps changing.
+ 
+ <!-- @color_sets_overview -->
+ 

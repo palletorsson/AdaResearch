@@ -1,0 +1,22 @@
+--- before/commons/data/book/postfoundationscrisis.json
++++ current/commons/data/book/postfoundationscrisis.json
+@@ -108,12 +108,17 @@
+       "map": "PostCrisis_Synthesis",
+       "lines": [
+         {
++          "token": "assembly_return",
++          "text": "Look for the hand you moved. What survived the journey?",
++          "by": "hand"
++        },
++        {
+           "token": "accountability_ledger",
+-          "text": "The count continues. Which consequence will you carry back?",
++          "text": "The pose is kept. What would you want the record to remember next?",
+           "by": "hand"
+         }
+       ],
+-      "hero": "accountability_ledger"
++      "hero": "assembly_return"
+     }
+   ]
+ }

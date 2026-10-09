@@ -1,0 +1,134 @@
+{
+  "incoming": {
+    "sha256": "b09bc8431e267794abd510cd1ab3fdf72f1999929ff437eaf786c33b21bf3f4d"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst Sweep = preload(\"profile_sweep.gd\")\nconst FONT = preload(\"JetBrainsMono-Medium.ttf\")\nconst WIDTH := 1.4\nconst DEPTH := 1.6\nconst OFFSET := 0.5\nvar section: Dictionary\nvar frames: Array[Transform3D] = []\nvar body := MeshInstance3D.new()\n\nfunc _ready() -> void:\n    section = Sweep.profile(FONT, \"O\")\n    for i in range(5):\n        var fraction := i / 4.0\n        var at := Vector3(OFFSET * fraction, 1.1, DEPTH * fraction)\n        var frame := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * WIDTH), at)\n        frames.append(frame)\n    body.mesh = Sweep.make(section, frames)\n    var finish := StandardMaterial3D.new()\n    finish.albedo_color = Color(0.78, 0.62, 0.72)\n    finish.roughness = 0.4\n    body.material_override = finish\n    add_child(body)\n",
+      "after": "extends Node3D\nconst Circle = preload(\"circle_samples.gd\")\nconst LineSkin = preload(\"line_skin.gd\")\nconst RADIUS := 0.7\nconst TOLERANCE := 0.01\nconst BUDGET := 96\nvar sides := 3\nvar points: Array[Vector3] = []\nvar error := 0.0\nvar met := false\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    choose_resolution(TOLERANCE, BUDGET)\n    for i in range(points.size()):\n        var a := points[i] + Vector3(0, 1.1, 0)\n        var b := points[(i + 1) % points.size()] + Vector3(0, 1.1, 0)\n        var line := LineSkin.new()\n        add_child(line)\n        line.show_segment(a, b - a, a.distance_to(b))\n    add_child(message)\n    message.position = Vector3(0, 1.8, 0)\n    message.pixel_size = 0.002\n    message.text = \"%d sides; error %.5f m; met: %s\" % [sides, error, str(met)]\n\nfunc perimeter(record: Array[Vector3]) -> float:\n    var total := 0.0\n    for i in range(record.size()):\n        total += record[i].distance_to(record[(i + 1) % record.size()])\n    return total\n\nfunc choose_resolution(tolerance: float, budget: int) -> void:\n    assert(tolerance > 0.0 and budget >= 3)\n    sides = 3\n    while true:\n        points = Circle.make(sides, RADIUS)\n        error = absf(TAU * RADIUS - perimeter(points))\n        met = error <= tolerance\n        if met or sides == budget:\n            break\n        sides = mini(sides * 2, budget)\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "circle_samples.gd",
+      "sha256": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Portals/tutorial.md",
+      "sha256": "2c706006525a3f90ad069409cf20eefcf85fb29f1dbebdc26485eb512ebcf28d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/circle_samples.gd",
+      "sha256": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/lesson.gd",
+      "sha256": "abdc3bd88aa92977446cc1b71af385a0fad01978c8ef4dca31329f4257fb3a9d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "limits/hexagon_closing_edge",
+      "kind": "native"
+    },
+    {
+      "id": "limits/tolerance_0.05",
+      "kind": "native"
+    },
+    {
+      "id": "limits/tighter_is_no_coarser_0.05",
+      "kind": "native"
+    },
+    {
+      "id": "limits/tolerance_0.005",
+      "kind": "native"
+    },
+    {
+      "id": "limits/tighter_is_no_coarser_0.005",
+      "kind": "native"
+    },
+    {
+      "id": "limits/budget_reports_unmet",
+      "kind": "native"
+    },
+    {
+      "id": "limits/non_power_budget_respected",
+      "kind": "native"
+    },
+    {
+      "id": "limits/first_polygon_can_suffice",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Portals/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/circle_samples.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

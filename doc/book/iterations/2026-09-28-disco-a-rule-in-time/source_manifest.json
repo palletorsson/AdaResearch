@@ -1,0 +1,35 @@
+{
+  "room": "Tutorial_Disco",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Tutorial_Disco/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Tutorial_Disco/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07fe08753fda37c03c491273bf4df2001c0ba0c13b374e6214b08353aa8beaf6",
+    "commons/maps/Tutorial_Disco/map_data.json": "b41df70d842fc31f5d67b9ff116c2c53dc4a1e8c4d6de30814cff1cc011de075",
+    "doc/book/iterations/2026-09-28-disco-a-rule-in-time/probe.gd": "2e53c3de198cf20ff8c25a1a25e72d7eb9bf63aada630c966950b47359c8d42c",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "74280296475c5e5b72bfd45ee601d35fee180f9544c47eb5e52599ef3f357313",
+    "ada_run/encounter_pilot/Tutorial_Disco/control.json": "7c1c01d4d74d0175b3c85730133b5baebb8aaf51ab91414bb043e1b4ccc68a1c",
+    "ada_run/encounter_pilot/Tutorial_Disco/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Tutorial_Disco/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Tutorial_Disco/em_bake.json": "fdc8a601b3cc46a706301464799d126cb0bb28cff3a898bbf0eb88b821a1ef63",
+    "commons/artifacts/registry/arrays.json": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+    "commons/audio/sequencer/step_sequencer.tscn": "5a62f12e9c1de960334703a7d8e6a9cd7b7e0574b7c4056fa63627c5ef9dc530",
+    "commons/audio/sequencer/step_sequencer.gd": "2117c2d198ffaf79610df7987ae04710cd416aca1961084002ae7baa19bf2ad7",
+    "commons/artifacts/registry/commons_artifacts.json": "978fd17fe68a309df88cfcf140c92acc248bcc84d25f3f74597208322a91d508",
+    "commons/context/discofloor/standalone_disco_floor.tscn": "9b91e0b4672904cf63bde35bee454a0210730fe7f0ee682df3b0f8056a6c7d2c",
+    "commons/context/discofloor/StandaloneDiscoFloor.gd": "78bd84964e1d69d69e62fca24c324f3bb2dbd1ea3033acc5b9a1880791998427",
+    "commons/context/discofloor/DiscoSequencerBridge.gd": "dae7721972aaa4345cbfef5646f1731fbf15b09d5659dbdcc656f8397b660652"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "physics_engine": "Jolt Physics",
+  "passed": true,
+  "checks": 48,
+  "reports": [
+    "evidence/report.json",
+    "tower-regression/report.json"
+  ],
+  "source_sha256": {
+    "commons/artifacts/force_play/stacking_table.gd": "9b3030a2db3f07164f144ad96518a3a21bd47a2969e5e54c0d9ed8fc082541d9",
+    "commons/artifacts/force_play/stacking_table.tscn": "e69684e66c18f07c2cbf1865604a3bf8e0e4c092c6f363c00e7eb6a21adf56aa",
+    "commons/artifacts/force_play/encounter.gd": "4e9e4150a03f1dc77d86a7f37d105793c39d46a2aecdf819ef86bc3d304d9253",
+    "tools/probes/mini_stacking_table.gd": "76052fb2fd577b6a6e4b5b58fbc7c54444ac009c726aaf4f6b50eb8282af5547"
+  },
+  "limit": "Supplied XRTools/desktop inputs and real physics; physical headset ergonomics not tested."
+}

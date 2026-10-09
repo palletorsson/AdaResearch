@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "All four map layers are 27 by 43",
+      "passed": true
+    },
+    {
+      "name": "Twenty-eight declared artifact placements",
+      "passed": true
+    },
+    {
+      "name": "All sixteen older secondary/decorative placements kept in the alcove",
+      "passed": true
+    },
+    {
+      "name": "sphere_high retains both inspection presentations",
+      "passed": true
+    },
+    {
+      "name": "sphere_mid retains both inspection presentations",
+      "passed": true
+    },
+    {
+      "name": "sphere_low retains both inspection presentations",
+      "passed": true
+    },
+    {
+      "name": "Other curation records preserved in artifact_roles.json",
+      "passed": true
+    },
+    {
+      "name": "Other curation records preserved in museum_core_encounters.json",
+      "passed": true
+    },
+    {
+      "name": "All sixty native checks completed and passed",
+      "passed": true
+    },
+    {
+      "name": "All twenty-eight placements loaded at authored cells",
+      "passed": true
+    },
+    {
+      "name": "No GDScript error in the final native run",
+      "passed": true
+    },
+    {
+      "name": "Native run used current commons/maps/Primitives_Ignorance/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Native run used current commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "name": "Native run used current doc/book/iterations/2026-09-27-ignorance-courtyard/probe.gd",
+      "passed": true
+    },
+    {
+      "name": "Book digest is current",
+      "passed": true
+    },
+    {
+      "name": "Map digest is current",
+      "passed": true
+    },
+    {
+      "name": "Headset and learner verification remain open",
+      "passed": true
+    },
+    {
+      "name": "Every book encounter anchor is actually placed",
+      "passed": true
+    },
+    {
+      "name": "Core order matches manuscript encounters",
+      "passed": true
+    },
+    {
+      "name": "geometry_courtyard has a live registered scene",
+      "passed": true
+    },
+    {
+      "name": "sphere_resolution_atlas has a live registered scene",
+      "passed": true
+    },
+    {
+      "name": "capsule_reliquary has a live registered scene",
+      "passed": true
+    },
+    {
+      "name": "primitive_mesh_library has a live registered scene",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

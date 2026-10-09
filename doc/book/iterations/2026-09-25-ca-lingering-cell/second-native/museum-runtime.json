@@ -1,0 +1,2079 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "41"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				1.19500005245209,
+				0.0,
+				3.24499988555908
+			],
+			"bounds_size": [
+				5.40068006515503,
+				2.95499992370605,
+				3.25468015670776
+			],
+			"cell": [
+				6,
+				6
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.08039999008179,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.08039999008179,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.96519994735718,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.96519994735718,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.84999990463257,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.84999990463257,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.73479986190796,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.73479986190796,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.61959981918335,
+						0.790124416351318,
+						3.43350505828857
+					]
+				},
+				{
+					"disabled": false,
+					"path": "StructureStudy/Console/StudyControls/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.61959981918335,
+						0.790124416351318,
+						3.43350505828857
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						4.84999990463257,
+						1.32718098163605,
+						3.73641419410706
+					],
+					"text": "A CELL WITH A PAST\nGEN 0 / 20   HELD\n\nPINK   11264 ACTIVE [1]\nGREEN  0 FADING [2]\nDRAWN 11262   NO STEP YET\n\nSTATE COLOURS\n6-8 / 6-8 / 3 / M\nEDGE CELLS STAY EMPTY"
+				},
+				{
+					"parent": "StudyControls",
+					"position": [
+						4.84999990463257,
+						0.849163472652435,
+						3.49968934059143
+					],
+					"text": "FOLLOW ONE GENERATION"
+				},
+				{
+					"parent": "NeighbourRoom",
+					"position": [
+						2.65000009536743,
+						3.22000002861023,
+						3.52999973297119
+					],
+					"text": "CELL (26, 22, 24) / ENLARGED NEIGHBOURHOOD"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				6.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "structure_growth"
+		},
+		{
+			"bounds_position": [
+				10.0799999237061,
+				0.00749999983236194,
+				9.07999992370605
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949231445789337,
+				0.840000152587891
+			],
+			"cell": [
+				10,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				4.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:ca elementaryrules"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				12.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				12.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				15.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				15.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				16.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				12.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				6.73015069961548,
+				0.419999986886978,
+				11.7605648040771
+			],
+			"bounds_size": [
+				1.5396990776062,
+				1.41022348403931,
+				1.4788703918457
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				155.324844360352,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				8.09189033508301,
+				0.419999986886978,
+				12.1442728042603
+			],
+			"bounds_size": [
+				0.802043914794922,
+				1.61644756793976,
+				0.601436614990234
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				162.16015625,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				5.9516773223877,
+				0.419999986886978,
+				11.9629888534546
+			],
+			"bounds_size": [
+				1.25011253356934,
+				0.928882241249084,
+				1.07319355010986
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				219.760070800781,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				7.02032995223999,
+				0.42119437456131,
+				13.9499483108521
+			],
+			"bounds_size": [
+				0.858473300933838,
+				1.5599992275238,
+				1.08459568023682
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.419999986886978,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				207.830657958984,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"name": "both authored works retained",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "map opts into enlarged neighbourhood",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "original 50 cubed builder and held arrival",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "arrival: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "arrival: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "arrival: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "arrival: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "chosen cell starts active",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					5.08039999008179,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.17286121845245,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "first STEP: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "first STEP: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "first STEP: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "first STEP: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "real fading cell has seven active neighbours",
+			"passed": true,
+			"value": {
+				"active_neighbours": 7,
+				"address": [
+					26,
+					22,
+					24
+				],
+				"centre": 2,
+				"generation": 1,
+				"state_colours": true,
+				"states": [
+					2,
+					0,
+					0,
+					2,
+					0,
+					1,
+					2,
+					2,
+					2,
+					1,
+					1,
+					0,
+					0,
+					2,
+					0,
+					0,
+					2,
+					0,
+					1,
+					0,
+					0,
+					1,
+					1,
+					1,
+					0,
+					2,
+					0
+				]
+			}
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_3",
+			"passed": true,
+			"value": {
+				"button": "Btn_3",
+				"button_position": [
+					4.73479986190796,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.15576386451721,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_3/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "VIEW retains every state and generation",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height colours: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height colours: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height colours: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height colours: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_3",
+			"passed": true,
+			"value": {
+				"button": "Btn_3",
+				"button_position": [
+					4.73479986190796,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.15576386451721,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_3/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "VIEW returns state colours without updating",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					5.08039999008179,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.17286121845245,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "second STEP: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "second STEP: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "second STEP: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "second STEP: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "fading centre empties despite prior birth count",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_2",
+			"passed": true,
+			"value": {
+				"button": "Btn_2",
+				"button_position": [
+					4.84999990463257,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.15000832080841,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_2/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "REPLAY recovers whole source volume",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "replay: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "replay: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "replay: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "replay: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_4",
+			"passed": true,
+			"value": {
+				"button": "Btn_4",
+				"button_position": [
+					4.61959981918335,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.17286121845245,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_4/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "budget extends without changing state",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					4.96519994735718,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.15576386451721,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					4.96519994735718,
+					0.780209183692932,
+					3.452152967453
+				],
+				"clear_to_button": true,
+				"distance": 1.15576386451721,
+				"emissions": 1,
+				"eye": [
+					4.84999990463257,
+					1.65014314651489,
+					2.70000004768372
+				],
+				"feet": [
+					4.84999990463257,
+					0.000143227633088827,
+					2.70000004768372
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "RUN and hold use existing clock",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "RUN then hold: all 27 states match source",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "RUN then hold: only state 1 neighbours counted",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "RUN then hold: colours follow source mapping",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "RUN then hold: empty cubes disappear",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum body walks between enlarged cells",
+			"passed": true,
+			"value": [
+				[
+					3.28999662399292,
+					0.000881864631082863,
+					2.70000004768372
+				],
+				[
+					3.21730089187622,
+					0.000881864631082863,
+					4.63864135742188
+				],
+				[
+					3.21508002281189,
+					0.000881864631082863,
+					6.33863973617554
+				]
+			]
+		},
+		{
+			"name": "receiver adds no collision or sensors",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "source address outlined at real coordinate",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "all 27 offsets are unique",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ordinary state study has no room",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "held beginning restored",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"desktop_input": [
+		{
+			"button": "Btn_0",
+			"button_position": [
+				5.08039999008179,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.17286121845245,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_3",
+			"button_position": [
+				4.73479986190796,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.15576386451721,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_3/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_3",
+			"button_position": [
+				4.73479986190796,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.15576386451721,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_3/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_0",
+			"button_position": [
+				5.08039999008179,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.17286121845245,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_2",
+			"button_position": [
+				4.84999990463257,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.15000832080841,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_2/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_4",
+			"button_position": [
+				4.61959981918335,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.17286121845245,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_4/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				4.96519994735718,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.15576386451721,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				4.96519994735718,
+				0.780209183692932,
+				3.452152967453
+			],
+			"clear_to_button": true,
+			"distance": 1.15576386451721,
+			"emissions": 1,
+			"eye": [
+				4.84999990463257,
+				1.65014314651489,
+				2.70000004768372
+			],
+			"feet": [
+				4.84999990463257,
+				0.000143227633088827,
+				2.70000004768372
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/StructureGrowth/StructureStudy/Console/StudyControls/Btn_1/Button",
+			"hover_matches": true
+		}
+	],
+	"failures": [],
+	"full_step_ms": 140.661,
+	"neighbourhoods": [
+		{
+			"active_neighbours": 11,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 1,
+			"generation": 0,
+			"state_colours": true,
+			"states": [
+				1,
+				0,
+				0,
+				1,
+				0,
+				1,
+				1,
+				1,
+				1,
+				1,
+				0,
+				0,
+				0,
+				1,
+				0,
+				0,
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0
+			]
+		},
+		{
+			"active_neighbours": 7,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 2,
+			"generation": 1,
+			"state_colours": true,
+			"states": [
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				2,
+				2,
+				2,
+				1,
+				1,
+				0,
+				0,
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				0,
+				0,
+				1,
+				1,
+				1,
+				0,
+				2,
+				0
+			]
+		},
+		{
+			"active_neighbours": 7,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 2,
+			"generation": 1,
+			"state_colours": false,
+			"states": [
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				2,
+				2,
+				2,
+				1,
+				1,
+				0,
+				0,
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				0,
+				0,
+				1,
+				1,
+				1,
+				0,
+				2,
+				0
+			]
+		},
+		{
+			"active_neighbours": 5,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 0,
+			"generation": 2,
+			"state_colours": true,
+			"states": [
+				0,
+				0,
+				1,
+				0,
+				1,
+				1,
+				0,
+				0,
+				0,
+				2,
+				2,
+				1,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				2,
+				0,
+				0,
+				2,
+				1,
+				2,
+				0,
+				0,
+				0
+			]
+		},
+		{
+			"active_neighbours": 11,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 1,
+			"generation": 0,
+			"state_colours": true,
+			"states": [
+				1,
+				0,
+				0,
+				1,
+				0,
+				1,
+				1,
+				1,
+				1,
+				1,
+				0,
+				0,
+				0,
+				1,
+				0,
+				0,
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				1,
+				0,
+				1,
+				0
+			]
+		},
+		{
+			"active_neighbours": 7,
+			"address": [
+				26,
+				22,
+				24
+			],
+			"centre": 2,
+			"generation": 1,
+			"state_colours": true,
+			"states": [
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				2,
+				2,
+				2,
+				1,
+				1,
+				0,
+				0,
+				2,
+				0,
+				0,
+				2,
+				0,
+				1,
+				0,
+				0,
+				1,
+				1,
+				1,
+				0,
+				2,
+				0
+			]
+		}
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"pointer_step_wall_ms": 147.02,
+	"rays": [],
+	"room": "CA_ElementaryRules",
+	"scope": "Actual authored museum, source states and pointer events, supplied CharacterBody route through open gaps. No tracked headset, comfort, Quest or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/arrival.png",
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/neighbours-active.png",
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/neighbours-fading.png",
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/height-colours.png",
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/neighbours-empty.png",
+		"res://ada_run/encounter_pilot/CA_ElementaryRules/among-cells.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": []
+}

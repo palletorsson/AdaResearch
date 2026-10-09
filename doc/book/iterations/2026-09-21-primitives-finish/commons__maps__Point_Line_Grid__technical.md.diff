@@ -1,0 +1,32 @@
+--- before/commons/maps/Point_Line_Grid/technical.md
++++ commons/maps/Point_Line_Grid/technical.md
+@@ -80,7 +80,7 @@
+ 
+ These indices name finite cells in this particular plan. The held tool's signed lattice indices count from world zero. Neither numbering scheme defines the walking recorder's local origin. Keep the frame and the kind of thing being indexed explicit when comparing them.
+ 
+-Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine's glass panes have no colliders. Its additional controller-mounted drawing behavior is outside the primary floor-plan exercise and awaits headset validation.
++Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine's glass panes have no colliders. Its configured controller-mounted drawing comparison now belongs to the primary encounter, as described below; headset validation remains open.
+ 
+ ## The basin and the next boundary
+ 
+@@ -96,3 +96,20 @@
+ [Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.
+ 
+ Source entry points: `commons/primitives/point/grab_sphere_point_snap.gd` and its scene; `commons/primitives/point/player_trace.gd`; `commons/globals/trace_data.gd`; `commons/primitives/line/grid_lines.gd` and its scene; `commons/artifacts/plan_vitrine/plan_vitrine.gd`; `commons/artifacts/simulation_grid/simulation_grid.gd`.
++
++## Two spatial pens on the plan — 21 September 2026
++
++The placement opts into `#pen_pair:space_grid`. Entering with both active VR controllers mounts a cyan left pen and an amber right pen. Both retain `draw_dot`'s movement sampling and 2048-position capacity. Neither consumes elapsed time as a coordinate or projects onto a nearby whiteboard. Desktop keeps the numbered floor but has no mounted pens.
++
++The cyan pen stores sampled world positions unchanged. The amber pen converts each accepted position into the vitrine's local frame, rounds X and Z to integer metres, keeps local Y, then converts back to world space. Local X/Z integers coincide with the centres of the one-metre plan cells; indices 0–4 name the centres at local -2–2. This uses the artifact frame, so translating or rotating the exhibit does not detach its addresses from its floor. There is no additional height lattice.
++
++```gdscript
++var on_plan := grid_frame.to_local(p)
++on_plan.x = roundf(on_plan.x)
++on_plan.z = roundf(on_plan.z)
++return grid_frame.to_global(on_plan)
++```
++
++The 6 mm movement gate still samples actual tip movement before shaping. Consecutive identical shaped positions are omitted. A held hand without movement does not add positions; changing height can add positions while the horizontal address stays fixed. Segments connect accepted samples, so a diagonal jump need not follow cell edges. Pens have marker nibs without colliders or pickup/drop signals and do not publish their records to TraceData. Entry clears the previous visit's traces. On exit, pens detach from the controllers and the traces remain for the configured six seconds before clearing.
++
++Other placements retain the default `space_time` pair. This chapter's configuration postpones that comparison without removing its implementation. See [the finishing-pass evidence](../../../doc/book/iterations/2026-09-21-primitives-finish/SUMMARY.md) for controlled runtime scope; headset use remains untested.

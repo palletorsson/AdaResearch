@@ -1,0 +1,43 @@
+extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+
+const PointBody = preload("point_body.gd")
+
+const LineSkin = preload("line_skin.gd")
+
+var point: XRToolsPickable
+var readout: Label3D
+var point_b: XRToolsPickable
+var line: MeshInstance3D
+var distance := 0.0
+
+func _ready() -> void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    point_b = PointBody.new()
+    point_b.position = CENTRE + Vector3(1.0, 0, 0)
+    add_child(point_b)
+
+    line = LineSkin.new()
+    add_child(line)
+
+func _process(_delta: float) -> void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+
+    var a := local_position
+    var b := to_local(point_b.global_position)
+    var displacement := a - b
+    distance = displacement.length()
+    line.show_segment(a, displacement, distance)
+    readout.text += "\nDISTANCE " + str(distance)

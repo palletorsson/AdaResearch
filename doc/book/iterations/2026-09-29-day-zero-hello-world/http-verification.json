@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "path": "doc/book/iterations/2026-09-29-day-zero-hello-world/index.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-29-day-zero-hello-world/day-zero.zip",
+      "status": 200,
+      "content_type": "application/zip",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-29-day-zero-hello-world/base.tscn",
+      "status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-29-day-zero-hello-world/point-one-study.zip",
+      "status": 200,
+      "content_type": "application/zip",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-29-day-zero-hello-world/point-one-making.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-23-book-frame/index.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/iterations/2026-09-23-book-frame/manifest.json",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "matches_source": true
+    },
+    {
+      "path": "doc/book/studies/day-zero/base.tscn",
+      "status": 404,
+      "restricted_root_retained": true
+    }
+  ]
+}

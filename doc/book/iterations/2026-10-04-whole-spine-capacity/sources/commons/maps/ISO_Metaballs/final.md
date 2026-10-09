@@ -1,0 +1,33 @@
+# A neck between sources
+
+<!-- @metaball_world -->
+
+Can two sources make one body before their centres meet? Walk the primary field and look for the narrow neck between rounded regions. The surface does not mark ownership: it is the place where a sum crosses a threshold.
+
+At the desk, press EMPLACE. The same ten sources move from a column to a ring, a pair, a shell and a scatter. Then press KERNEL. The contribution of each source changes from inverse square to Wyvill, Gaussian or cone. Keep the source count fixed while you change the arrangement; keep the arrangement fixed while you change the falloff. That separation is the lesson.
+
+```gdscript
+# metaballgenerator.gd
+total_field += mb_sr2[m] / dist_sq
+if cv0 > iso_level: cube_index |= 1
+```
+
+Each source adds its strength times its radius squared over the square of the distance, and each corner above the level sets one bit of the case.
+
+Press HOLD before making a change. The earlier boundary stays behind the live field, so a neck can be read as a relation rather than a special object. When a bridge pinches off, nothing has been cut from a mesh. A different set of samples simply crosses the same threshold in a different place.
+
+<!-- @raymarched_metaballs -->
+
+The raymarched specimen nearby makes a related surface by another route: signed distance functions are blended while a ray advances. Its smoothness is not evidence that it shares the same field. Look for what the extracted field can show that a ray step keeps implicit, and what the ray can make continuous without storing triangles.
+
+<!-- @nakama_metaballs -->
+
+Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field’s value, so the body can breathe but no neck can ever pinch off. That is the comparison, and it is not a third control on the desk.
+
+<!-- @metaballs -->
+
+At the back the same raymarched body stands again at full size, twelve metres of it. It is not a sum: the threshold that ends it is where the ray stops. What the small copy nearby let you walk round, this one lets you stand under.
+
+<!-- @ -->
+
+A metaball has no outline to defend. It is a negotiation among sources, kernel, sampling grid and threshold. The next hall asks whether we need to store a boundary as triangles before we can see it.

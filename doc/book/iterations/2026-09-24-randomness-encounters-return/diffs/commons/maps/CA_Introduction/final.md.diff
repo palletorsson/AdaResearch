@@ -1,0 +1,38 @@
+--- before/commons/maps/CA_Introduction/final.md
++++ commons/maps/CA_Introduction/final.md
+@@ -6,7 +6,7 @@
+ 
+ <!-- @ca_rule_explorer -->
+ 
+-Find the board on your left as you come in, a few steps into the corridor on that side, near its outer wall. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?
++The board waits in the left-hand corridor near the entrance. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?
+ 
+ Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.
+ 
+@@ -46,7 +46,7 @@
+ 
+ <!-- @persian_rug -->
+ 
+-Now return towards the entrance, go through the opening on the other side of the dividing wall, and approach the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.
++Across the entrance, an opening in the dividing wall leads to the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.
+ 
+ This work has a two-dimensional grid, several states and two sets of local rules. The border and interior decide differently when activity begins, continues or fades. After calculating a generation, the program also mirrors one quarter into the others. In `_enforce_quadrant`, one value is written into three reflected positions (comments between these assignments are omitted):
+ 
+@@ -62,11 +62,15 @@
+ 
+ <!-- @line_network_ca -->
+ 
+-Go back out through the opening, cross the entrance to the board's corridor, and follow it past the agents painting a shared surface. Further along, the line network gives the cell another body. Occupied positions are joined by thin coloured lines, drawn as a tangle in the air above the floor. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
++Return to the board's corridor and follow it past the agents painting a shared surface. Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.
++
++You are watching a saved growth history. The same fixed frame holds its twenty stages, so a line already present stays where it was. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
+ 
+ Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then connects each newly encountered position to one of its neighbours, if any neighbour has already been recorded. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.
+ 
+-This is another construction of an organic form. Chance proposes an addition; stored occupancy constrains where it can occur; the renderer supplies connections and colour. The work has already finished its twenty growth updates by the time you reach it. A still network can be the consequence of that programmed limit. Stillness alone cannot tell us that growth exhausted every possibility.
++Chance proposes an addition; stored occupancy constrains where it can occur; the drawing supplies connections and colour. After twenty updates, the history stops and the whole network remains. **REPLAY** lets the same stages return. It repeats what was kept, rather than asking chance for another growth.
++
++The stillness has a limit written into it. Twenty updates were allowed; the shape did not announce that every possibility was exhausted. We can enjoy its resemblance to an organic body while learning to ask what brought this particular body to rest.
+ 
+ We can begin to distinguish forms by the relations that sustain them. The board keeps a row and repeatedly rewrites it. The rug combines local activity with an imposed symmetry. The network retains occupied positions and draws a selected account of their connections. Their resemblance to living things can invite us closer; the code gives us further differences to explore.
+ 

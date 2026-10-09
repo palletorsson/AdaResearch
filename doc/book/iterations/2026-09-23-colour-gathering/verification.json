@@ -1,0 +1,103 @@
+{
+  "created_at": "2026-09-23T16:57:31.361451+00:00",
+  "scope": "Focused production-museum report, manuscript and source preservation, figure files and HTTP delivery. Native and composed images were inspected separately. Browser interaction and headset not tested.",
+  "checks": [
+    {
+      "name": "Current chapter equals published reading",
+      "passed": true
+    },
+    {
+      "name": "All three code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "All artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Opening and Flashlight handoff preserved",
+      "passed": true
+    },
+    {
+      "name": "Scientific and associative paragraph preserved",
+      "passed": true
+    },
+    {
+      "name": "Tall composite passage preserved",
+      "passed": true
+    },
+    {
+      "name": "Production file unchanged: commons/maps/Color_Context_Placed/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Production file unchanged: commons/artifacts/chroma_stack/chroma_stack.gd",
+      "passed": true
+    },
+    {
+      "name": "Production file unchanged: commons/artifacts/color_dna_stack/color_dna_stack.gd",
+      "passed": true
+    },
+    {
+      "name": "Production file unchanged: commons/artifacts/color_dna_stack/studies.json",
+      "passed": true
+    },
+    {
+      "name": "Production file unchanged: commons/primitive_grammar/primitive_stack.gd",
+      "passed": true
+    },
+    {
+      "name": "Core text hash current",
+      "passed": true
+    },
+    {
+      "name": "Core map hash current",
+      "passed": true
+    },
+    {
+      "name": "Other core fields and chapters unchanged",
+      "passed": true
+    },
+    {
+      "name": "Focused runtime 24/24",
+      "passed": true
+    },
+    {
+      "name": "Shared figure four-colour-rules",
+      "passed": true
+    },
+    {
+      "name": "Shared figure around-the-rainbow",
+      "passed": true
+    },
+    {
+      "name": "HTTP index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP four-colour-rules.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP around-the-rainbow.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP Color_Context_Placed.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP report.json",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

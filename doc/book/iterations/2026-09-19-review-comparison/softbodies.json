@@ -1,0 +1,67 @@
+{
+  "status": "two encounters repaired; eight chapters preserved",
+  "summary": "Soft Bodies already has a useful progression from yielding to constraints, driven supports, contact, frozen form and morphogenesis. This pass strengthens Playground of Joy: reading a body and governing it through a reading become distinct actions. The frozen result gains a surface the player can meet.",
+  "items": [
+    {
+      "title": "An instrument can become a rule",
+      "description": "MEASURE changes the view. FEEDBACK now separately changes pressure. The book lets the reader find the limit of the chosen measurement.",
+      "images": [
+        "doc/book/iterations/2026-09-20-softbodies-review/before-console.png",
+        "doc/book/iterations/2026-09-20-softbodies-review/after-console.png"
+      ],
+      "captions": [
+        "Before · six controls; volume mode silently couples reading and intervention.",
+        "After · an explicit FEEDBACK control; seven buttons remain in two rows."
+      ],
+      "image_note": "Actual museum captures from the same map-relative camera. Other live objects are not synchronised. This wide view is not a stability test of the free body.",
+      "text_kind": "book — insertion after the preserved opening",
+      "before": "",
+      "after": "Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.\n\nWhat has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room's axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow."
+    },
+    {
+      "title": "The surface can meet your body",
+      "description": "The frozen form is fully above the floor and has collision matching its mesh. The text invites contact while noticing the opening that the name “vessel” may have led us to expect.",
+      "images": [
+        "doc/book/iterations/2026-09-20-softbodies-review/before-vessel.png",
+        "doc/book/iterations/2026-09-20-softbodies-review/after-vessel.png"
+      ],
+      "captions": [
+        "Before · most of the form sits below the floor; the surface has no collision.",
+        "After · the complete frozen skin stands above the floor and supports contact."
+      ],
+      "image_note": "Matched museum camera and 200-step specimen. Collision is verified by rays and a CharacterBody test, not inferred from the image.",
+      "text_kind": "book",
+      "before": "The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. The walkable glass surface also has limits established by its mesh and collision; resemblance to a vessel does not guarantee an opening large enough for a body.",
+      "after": "The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette."
+    },
+    {
+      "title": "A body beneath the reading",
+      "description": "The rounded body now starts its solver, its instrument overlays stay on its vertices, and the bench is at working height in this hall. The neighbouring field and branching studies remain.",
+      "images": [
+        "doc/book/iterations/2026-09-20-softbodies-review/after-specimen.png"
+      ],
+      "captions": [
+        "Current encounter · a live deformation with its strain markers, seen at the bench."
+      ],
+      "image_note": "Current Godot museum capture, not a before/after pair. Headset interaction and extended occupancy remain unverified.",
+      "text_kind": "book — reference clarified",
+      "before": "The strain display compares the current geometry with reference lengths. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.",
+      "after": "The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here."
+    },
+    {
+      "title": "Two stops become two forms",
+      "description": "Duration keeps a different result of the same reconstruction. These controls and the existing explanation are retained.",
+      "images": [
+        "doc/book/iterations/2026-09-20-softbodies-review/after-vessel-40.png",
+        "doc/book/iterations/2026-09-20-softbodies-review/after-vessel-400.png"
+      ],
+      "captions": [
+        "40 integration steps · gravity unchanged.",
+        "400 integration steps · gravity unchanged."
+      ],
+      "image_note": "Two states of the revised artifact in the actual museum; these are solver steps, not seconds.",
+      "report": "doc/book/iterations/2026-09-20-softbodies-review/SUMMARY.md",
+      "report_label": "Findings, preservation decisions, 65 runtime checks and limits"
+    }
+  ]
+}

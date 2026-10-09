@@ -1,0 +1,318 @@
+{
+  "sequence": "formfinding",
+  "declared_maps": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+  ],
+  "museum_map_authored_order": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "FormFinding_Descent",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1039,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "descent_landscape_lab"
+        ],
+        "reason": "Predict and take a local step; compare beginnings, step sizes and stopping rules.",
+        "sequence": "formfinding",
+        "status": "desktop_verified_headset_pending",
+        "learner_verified": false,
+        "map_sha256": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+        "text_sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b"
+      },
+      "manuscript_artifact_order": [
+        "descent_landscape_lab"
+      ],
+      "role_primary_order": [
+        "descent_landscape_lab"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "recorded_status": "existing_text_retained",
+      "text_words": 951,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "cable_builder",
+          "catenoid"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Catenary/final.md",
+        "text_sha256": "49df26a33ccdf2fb45c3ecd4867312d51175748ca4bda4ac31e67a1c19e63f54",
+        "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid",
+        "helicoid",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "cable_builder",
+        "catenoid"
+      ],
+      "anchors_not_in_primary_roles": [
+        "helicoid",
+        "laundry_line_cathedral",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "recorded_status": "existing_text_retained",
+      "text_words": 910,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "verlet_workbench",
+          "mass_spring_bench"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Relaxation/final.md",
+        "text_sha256": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+        "map_sha256": "48dd20392e58877ae1c3b2ecaf2c7e7ea5698c5ea42c7fcc7a663fb4ce36ddb0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "verlet_workbench",
+        "mass_spring_bench"
+      ],
+      "anchors_not_in_primary_roles": [
+        "frozen_glass_vessel",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "recorded_status": "existing_text_retained",
+      "text_words": 895,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "calder_mobile",
+          "tensegrity_triangle"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Equilibrium/final.md",
+        "text_sha256": "40e01a633d3f6f5107cc5e9dfba642813a70431720088c744978974a31d888ec",
+        "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "calder_mobile",
+        "tensegrity_triangle",
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "anchors_not_in_primary_roles": [
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1017,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "energy_landscape_bench",
+          "simulated_annealing"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Annealing/final.md",
+        "text_sha256": "d1aa490701065b2e49a4b6f49a791c0947c6d7a6db6ed3d43dd0af4250409b7c",
+        "map_sha256": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "max_q_basin_room",
+        "impossible_end_table",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "energy_landscape_bench",
+        "simulated_annealing"
+      ],
+      "anchors_not_in_primary_roles": [
+        "impossible_end_table",
+        "max_q_basin_room",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "FormFinding_Forge",
+      "recorded_status": "source_checked_draft",
+      "text_words": 454,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "balance_puzzle",
+          "gradient_descent_optimizer"
+        ],
+        "reason": "Who decides when a shape has settled well enough?",
+        "status": "source_checked_draft",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Forge/final.md",
+        "text_sha256": "9b37c121ad49f071c1eeb43bdfa952dfda11f95edfb1fc692f71f4c1ac791b3d",
+        "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "role_primary_order": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+      "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
+      "algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+      "algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/calder_mobile/calder_mobile.gd",
+      "commons/artifacts/calder_mobile/calder_mobile.tscn",
+      "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd",
+      "commons/artifacts/descent_landscape_lab/descent_landscape_lab.tscn",
+      "commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd",
+      "commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn",
+      "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
+      "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+      "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+      "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn",
+      "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "commons/artifacts/impossible_end_table/impossible_end_table.tscn",
+      "commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+      "commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.tscn",
+      "commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "commons/artifacts/mass_spring_bench/mass_spring_bench.tscn",
+      "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "commons/artifacts/max_q_basin_room/max_q_basin_room.tscn",
+      "commons/artifacts/science_screen/science_screen.gd",
+      "commons/artifacts/science_screen/science_screen.tscn",
+      "commons/artifacts/timing_machines/machine_stage.gd",
+      "commons/artifacts/verlet_workbench/verlet_workbench.gd",
+      "commons/artifacts/verlet_workbench/verlet_workbench.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/primitives/arch/arch.tscn",
+      "commons/primitives/balance/balance_puzzle.gd",
+      "commons/primitives/balance/balance_puzzle.tscn",
+      "commons/primitives/cubes/grab_cube.tscn",
+      "commons/primitives/parametric/catenoid.gd",
+      "commons/primitives/parametric/catenoid.tscn",
+      "commons/primitives/parametric/helicoid.gd",
+      "commons/primitives/parametric/helicoid.tscn",
+      "commons/primitives/point/grab_sphere_point.tscn",
+      "commons/primitives/point/point.tscn",
+      "commons/primitives/pyramid/grab_pyramid.tscn",
+      "commons/primitives/pyramid/pyramid.tscn",
+      "commons/primitives/sphere/sphere.tscn",
+      "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+      "commons/primitives/tensegrity_triangle/tensegrity_triangle.tscn",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/resourses/shaders/line_shader.gdshader",
+      "commons/resourses/shaders/line_shader.tres",
+      "commons/soft_body/soft_body_shapes.gd",
+      "commons/soft_body/soft_body_sim.gd",
+      "commons/ui/text_screen.gd",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "res://addons/godot-xr-tools/objects/pickable.tscn",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/arch/arch.gd",
+      "res://commons/primitives/cubes/grab_cube.gd",
+      "res://commons/primitives/point/grab_sphere.gd",
+      "res://commons/primitives/point/point.gd",
+      "res://commons/primitives/point/point_mesh.gd",
+      "res://commons/primitives/pyramid/grab_pyramid.gd",
+      "res://commons/primitives/pyramid/pyramid.gd",
+      "res://commons/primitives/sphere/sphere.gd",
+      "res://commons/resourses/shaders/Grid.gdshader"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

@@ -1,0 +1,2150 @@
+{
+ "sweep": "phase_field",
+ "peak_changed_pct": 3.629,
+ "subject_pct": 32.577,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "changed_px": 7282,
+   "changed_pct": 1.261
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "changed_px": 7563,
+   "changed_pct": 1.309
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "changed_px": 17839,
+   "changed_pct": 3.088
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "changed_px": 13267,
+   "changed_pct": 2.297
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "changed_px": 13267,
+   "changed_pct": 2.297
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 14755,
+   "changed_pct": 2.555
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 10084,
+   "changed_pct": 1.746
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 10084,
+   "changed_pct": 1.746
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 18987,
+   "changed_pct": 3.287
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 10838,
+   "changed_pct": 1.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 15325,
+   "changed_pct": 2.653
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 15757,
+   "changed_pct": 2.728
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 10315,
+   "changed_pct": 1.786
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 12031,
+   "changed_pct": 2.083
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 13387,
+   "changed_pct": 2.318
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 9520,
+   "changed_pct": 1.648
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 10510,
+   "changed_pct": 1.82
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "changed_px": 3830,
+   "changed_pct": 0.663
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "changed_px": 13068,
+   "changed_pct": 2.262
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "changed_px": 7932,
+   "changed_pct": 1.373
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "changed_px": 7932,
+   "changed_pct": 1.373
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 9310,
+   "changed_pct": 1.612
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 4639,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 4639,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 13542,
+   "changed_pct": 2.345
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 5393,
+   "changed_pct": 0.934
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 9880,
+   "changed_pct": 1.711
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 10312,
+   "changed_pct": 1.785
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 4870,
+   "changed_pct": 0.843
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 6586,
+   "changed_pct": 1.14
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 8708,
+   "changed_pct": 1.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 4075,
+   "changed_pct": 0.706
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 5065,
+   "changed_pct": 0.877
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "changed_px": 14962,
+   "changed_pct": 2.59
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "changed_px": 9826,
+   "changed_pct": 1.701
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "changed_px": 9826,
+   "changed_pct": 1.701
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 11209,
+   "changed_pct": 1.941
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 6538,
+   "changed_pct": 1.132
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 6538,
+   "changed_pct": 1.132
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 15441,
+   "changed_pct": 2.673
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 7292,
+   "changed_pct": 1.262
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 11779,
+   "changed_pct": 2.039
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 12211,
+   "changed_pct": 2.114
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 6769,
+   "changed_pct": 1.172
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 8485,
+   "changed_pct": 1.469
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 10096,
+   "changed_pct": 1.748
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 5974,
+   "changed_pct": 1.034
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "traverse",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 6964,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "changed_px": 6991,
+   "changed_pct": 1.21
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "changed_px": 6991,
+   "changed_pct": 1.21
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 18302,
+   "changed_pct": 3.169
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 13631,
+   "changed_pct": 2.36
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 13631,
+   "changed_pct": 2.36
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 20959,
+   "changed_pct": 3.629
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 14385,
+   "changed_pct": 2.49
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 17283,
+   "changed_pct": 2.992
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 19299,
+   "changed_pct": 3.341
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 13862,
+   "changed_pct": 2.4
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 15578,
+   "changed_pct": 2.697
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 13968,
+   "changed_pct": 2.418
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 11683,
+   "changed_pct": 2.023
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 11715,
+   "changed_pct": 2.028
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 13166,
+   "changed_pct": 2.279
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 8495,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 8495,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 17390,
+   "changed_pct": 3.011
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 9249,
+   "changed_pct": 1.601
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 13728,
+   "changed_pct": 2.377
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 14163,
+   "changed_pct": 2.452
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 8726,
+   "changed_pct": 1.511
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 10442,
+   "changed_pct": 1.808
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 10424,
+   "changed_pct": 1.805
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 6509,
+   "changed_pct": 1.127
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 6833,
+   "changed_pct": 1.183
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "changed_px": 13166,
+   "changed_pct": 2.279
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 8495,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 8495,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 17390,
+   "changed_pct": 3.011
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 9249,
+   "changed_pct": 1.601
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 13728,
+   "changed_pct": 2.377
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 14163,
+   "changed_pct": 2.452
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 8726,
+   "changed_pct": 1.511
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 10442,
+   "changed_pct": 1.808
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 10424,
+   "changed_pct": 1.805
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 6509,
+   "changed_pct": 1.127
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "crest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 6833,
+   "changed_pct": 1.183
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "changed_px": 6000,
+   "changed_pct": 1.039
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 6000,
+   "changed_pct": 1.039
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 17959,
+   "changed_pct": 3.109
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 10553,
+   "changed_pct": 1.827
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 15040,
+   "changed_pct": 2.604
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 13718,
+   "changed_pct": 2.375
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 9837,
+   "changed_pct": 1.703
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 11553,
+   "changed_pct": 2.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 14104,
+   "changed_pct": 2.442
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 9309,
+   "changed_pct": 1.612
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 10299,
+   "changed_pct": 1.783
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 13889,
+   "changed_pct": 2.405
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 5956,
+   "changed_pct": 1.031
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 10443,
+   "changed_pct": 1.808
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 10505,
+   "changed_pct": 1.819
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 5433,
+   "changed_pct": 0.941
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 7149,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 9433,
+   "changed_pct": 1.633
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 4638,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 5628,
+   "changed_pct": 0.974
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "changed_px": 13889,
+   "changed_pct": 2.405
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 5956,
+   "changed_pct": 1.031
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 10443,
+   "changed_pct": 1.808
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 10505,
+   "changed_pct": 1.819
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 5433,
+   "changed_pct": 0.941
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 7149,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 9433,
+   "changed_pct": 1.633
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 4638,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "trough",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 5628,
+   "changed_pct": 0.974
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "changed_px": 10241,
+   "changed_pct": 1.773
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 10213,
+   "changed_pct": 1.768
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 13529,
+   "changed_pct": 2.342
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 11606,
+   "changed_pct": 2.009
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 11976,
+   "changed_pct": 2.073
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 17096,
+   "changed_pct": 2.96
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 13541,
+   "changed_pct": 2.344
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 14283,
+   "changed_pct": 2.473
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "changed_px": 5322,
+   "changed_pct": 0.921
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 8847,
+   "changed_pct": 1.532
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 4086,
+   "changed_pct": 0.707
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 4826,
+   "changed_pct": 0.836
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 10187,
+   "changed_pct": 1.764
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 5392,
+   "changed_pct": 0.934
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 6382,
+   "changed_pct": 1.105
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "changed_px": 12078,
+   "changed_pct": 2.091
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 8574,
+   "changed_pct": 1.484
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 9093,
+   "changed_pct": 1.574
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 13430,
+   "changed_pct": 2.325
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 9879,
+   "changed_pct": 1.71
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "steepest",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 10603,
+   "changed_pct": 1.836
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "changed_px": 7006,
+   "changed_pct": 1.213
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 7609,
+   "changed_pct": 1.317
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 15065,
+   "changed_pct": 2.608
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 10311,
+   "changed_pct": 1.785
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 11301,
+   "changed_pct": 1.957
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "changed_px": 2495,
+   "changed_pct": 0.432
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 9664,
+   "changed_pct": 1.673
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 4869,
+   "changed_pct": 0.843
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 5859,
+   "changed_pct": 1.014
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "changed_px": 11380,
+   "changed_pct": 1.97
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 6585,
+   "changed_pct": 1.14
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "oppose",
+    "reading": "partials"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 7575,
+   "changed_pct": 1.311
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "changed_px": 5818,
+   "changed_pct": 1.007
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "tangent"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 5814,
+   "changed_pct": 1.007
+  },
+  {
+   "a": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "point"
+   },
+   "b": {
+    "layout": "single",
+    "phase": "mirror",
+    "reading": "partials"
+   },
+   "changed_px": 1056,
+   "changed_pct": 0.183
+  }
+ ]
+}

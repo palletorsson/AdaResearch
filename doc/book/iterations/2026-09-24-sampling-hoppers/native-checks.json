@@ -1,0 +1,267 @@
+{
+  "after_thirteen_and_eight": {
+    "busy": [
+      false,
+      false
+    ],
+    "histories": [
+      [
+        6,
+        6,
+        2,
+        2,
+        8,
+        6,
+        4,
+        2,
+        7,
+        6,
+        4,
+        6
+      ],
+      [
+        3,
+        6,
+        2,
+        7,
+        4,
+        5,
+        8,
+        1
+      ]
+    ],
+    "memory": 12,
+    "pools": [
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      []
+    ],
+    "seed": 79,
+    "totals": [
+      13,
+      8
+    ]
+  },
+  "checks": [
+    {
+      "name": "eight matching members, no initial draws",
+      "passed": true
+    },
+    {
+      "name": "eight visible blocks per hopper",
+      "passed": true
+    },
+    {
+      "name": "real reusable grab lever",
+      "passed": true
+    },
+    {
+      "name": "pointer drag starts one draw",
+      "passed": true
+    },
+    {
+      "name": "busy hopper refuses a second draw",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "holding past threshold cannot draw again",
+      "passed": true
+    },
+    {
+      "name": "release returns and rearms lever",
+      "passed": true
+    },
+    {
+      "name": "replacement restores original numbered block",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "matched seed and first bound yield same first member",
+      "passed": true
+    },
+    {
+      "name": "without replacement leaves candidate pool",
+      "passed": true
+    },
+    {
+      "name": "removed member rests in record",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "eight draws exhaust every unique member",
+      "passed": true
+    },
+    {
+      "name": "empty lever cannot invent ninth member",
+      "passed": true
+    },
+    {
+      "name": "replacement never shrinks pool",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "replacement permits repeated members",
+      "passed": true
+    },
+    {
+      "name": "replacement record bounded while total continues",
+      "passed": true
+    },
+    {
+      "name": "real replay button restores sets and clears records",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "animation completes",
+      "passed": true
+    },
+    {
+      "name": "replay repeats removal order",
+      "passed": true
+    },
+    {
+      "name": "replay cancels in-flight draws and stale callbacks",
+      "passed": true
+    },
+    {
+      "name": "all source blocks restore their local slots",
+      "passed": true
+    },
+    {
+      "name": "invalid indices rejected",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Supplied native pointer events through the production lever Frame and replay button, with completed tweens at a translated and rotated host. No tracked headset or physical-randomness claim.",
+  "state": {
+    "busy": [
+      false,
+      false
+    ],
+    "histories": [
+      [],
+      []
+    ],
+    "memory": 12,
+    "pools": [
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    ],
+    "seed": 79,
+    "totals": [
+      0,
+      0
+    ]
+  }
+}

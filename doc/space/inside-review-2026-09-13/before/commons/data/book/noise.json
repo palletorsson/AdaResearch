@@ -1,0 +1,210 @@
+{
+  "chapter": "noise",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "pearl": "random noise types",
+      "map": "Random_Noise_Types",
+      "lines": [
+        {
+          "token": "randompoint",
+          "text": "A flat existence takes repeated work to maintain: carry a point and discover which coordinates survive.",
+          "by": "astra-points-review-2026-09-13"
+        },
+        {
+          "token": "randompoints",
+          "text": "Does a rule decide who may enter, or keep acting after somebody moves?",
+          "by": "astra-points-review-2026-09-13"
+        },
+        {
+          "token": "WhiteNoiseGallery",
+          "text": "One value dresses a bar in height and colour. Its sound comes from another stream: what correspondence did we expect?",
+          "by": "astra-noise-galleries-2026-09-13"
+        },
+        {
+          "token": "NoiseColors3D",
+          "text": "A previous moment can be accumulated or subtracted. The illustrated rows and the sound filters make different things from shared names.",
+          "by": "astra-noise-galleries-2026-09-13"
+        }
+      ],
+      "hero": "randompoint"
+    },
+    {
+      "pearl": "columns",
+      "map": "Noise_Columns",
+      "lines": [
+        {
+          "token": "MeltingBerniniScene",
+          "text": "A held shaft, a sine and a coherent field. Pause the local clock; separate turning, veining and deformation.",
+          "by": "astra-columns-review-2026-09-13"
+        },
+        {
+          "token": "dark_sphere",
+          "text": "The orb keeps its own clock while the columns pause. A familiar sine enters appearance instead of shaft height.",
+          "by": "astra-columns-review-2026-09-13"
+        },
+        {
+          "token": "synthesis_stand",
+          "text": "One family, another body: six quiet orbs turn together. Construction choices and a saved metric leave other possibilities open.",
+          "by": "astra-columns-review-2026-09-13"
+        }
+      ],
+      "hero": "MeltingBerniniScene"
+    },
+    {
+      "pearl": "point",
+      "map": "Noise_One",
+      "lines": [
+        {
+          "token": "noisetorus",
+          "text": "One field becomes relief or colour. Hold the present; change the reading to recover signed differences.",
+          "by": "astra-torus-review-2026-09-13"
+        },
+        {
+          "token": "noiselayers",
+          "text": "The existing terrain returns at viewing height. Isolate three weighted sources, then compare their combined landscape.",
+          "by": "astra-torus-review-2026-09-13"
+        },
+        {
+          "token": "dark_sphere",
+          "text": "A familiar sine still lights the orb while another instrument is paused. A pause has an address.",
+          "by": "astra-torus-review-2026-09-13"
+        }
+      ],
+      "hero": "noisetorus"
+    },
+    {
+      "pearl": "voxel",
+      "map": "Noise_Voxel",
+      "lines": [
+        {
+          "token": "perlin_terrain_sculptor",
+          "text": "Keep the field; move the threshold. Compare occupied cells, separate pieces and a cut that only changes the view.",
+          "by": "astra-voxel-review-2026-09-13"
+        },
+        {
+          "token": "science_screen",
+          "text": "Read a horizontal score slice beside its actual occupancy decisions. A dark cell still has a value.",
+          "by": "astra-voxel-review-2026-09-13"
+        },
+        {
+          "token": "voxelnoise",
+          "text": "The same 24 cubed decisions gain five times the cell spacing. Connected cells do not establish a route for your body.",
+          "by": "astra-voxel-review-2026-09-13"
+        },
+        {
+          "token": "dark_sphere",
+          "text": "The familiar sine dresses an independently pulsing orb. Another operation can receive a varying value.",
+          "by": "astra-voxel-review-2026-09-13"
+        }
+      ],
+      "hero": "perlin_terrain_sculptor"
+    },
+    {
+      "pearl": "6 wall",
+      "map": "Noise_6_Wall",
+      "lines": [
+        {
+          "token": "shader_noise_space",
+          "text": "Hold the current moment. Compare cumulative cloud terms, then enter the sum and change its dress. The same doorway remains; the surface offers the eye another depth.",
+          "by": "astra-wall-review-2026-09-13"
+        },
+        {
+          "token": "dark_sphere",
+          "text": "The room is held while the orb continues its sine-driven pulse. A control has a local reach, and the hall has more than one time.",
+          "by": "astra-wall-review-2026-09-13"
+        }
+      ],
+      "hero": "shader_noise_space"
+    },
+    {
+      "pearl": "inside noise",
+      "map": "Noise_Inside_Noise",
+      "lines": [
+        {
+          "token": "noisesphere",
+          "text": "the sphere is not made of noise. It is a shape that has been left out in it",
+          "by": "draft",
+          "note": "warping spends the coordinate system it borrows: the base field is read at displaced addresses, so no point on the slab can say where it came from — the two source fields shown beside it do not add back up.",
+          "note_src": {
+            "file": "commons/maps/Noise_Inside_Noise/critical.md",
+            "quote": "running the base noise on an undistorted grid and the warp noise on its own grid does not add up to the warped slab"
+          }
+        }
+      ],
+      "hero": "noisesphere"
+    },
+    {
+      "pearl": "space 10",
+      "map": "Noise_Space_10",
+      "lines": [
+        {
+          "token": "noise_space",
+          "text": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise …",
+          "by": "draft",
+          "note": "navigation needs continuity, and the tenth axis has none: nine sliders are gradients you can walk, the seed only teleports — so most of the ten-dimensional space has never been evaluated and the presets are its only addresses.",
+          "note_src": {
+            "file": "commons/maps/Noise_Space_10/critical.md",
+            "quote": "shifting the seed replaces the noise with a different sample of the same distribution"
+          }
+        }
+      ],
+      "hero": "noise_space"
+    },
+    {
+      "pearl": "perlin simplex",
+      "map": "Noise_Perlin_Simplex",
+      "lines": [
+        {
+          "token": "simplex_noise",
+          "text": "Replay a field and recognise its return. Change the scale at which it is sampled, then return again. The visible cubes give a related variation a finite body.",
+          "by": "astra-discovery-voice-2026-09-11",
+          "note": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill.",
+          "note_src": {
+            "file": "commons/maps/Noise_Perlin_Simplex/critical.md",
+            "quote": "the artifacts travel with the grid, not with the geometry"
+          }
+        },
+        {
+          "token": "perlin_noise",
+          "text": "A matching seed does not give the two fields matching ridges. Hold the display conditions still, choose a difference to examine, then decide what the comparison can support.",
+          "by": "astra-discovery-voice-2026-09-11"
+        },
+        {
+          "token": "perlin_noise_terrain",
+          "text": "Interactive 3D terrain generation using Perlin noise algorithms",
+          "by": "draft"
+        },
+        {
+          "token": "configurable_portal",
+          "text": "Fully configurable portal - any size, rotation",
+          "by": "draft"
+        }
+      ],
+      "hero": "simplex_noise"
+    },
+    {
+      "pearl": "noise",
+      "map": "Chamber_Noise",
+      "lines": [],
+      "drop": true,
+      "edge": "a chamber is shaped by the creature it stages, and this one has none: with nothing to defeat, nothing ends the room — the save gallery stands in for a finish, and the learner leaves rather than wins.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_Noise/critical.md",
+        "quote": "Chamber_Noise is the only catalyst chamber in the curriculum without a creature."
+      }
+    },
+    {
+      "pearl": "lab path",
+      "map": "Lab_Path",
+      "lines": [],
+      "drop": true,
+      "edge": "the corridor is the same corridor in every chapter: nothing in its geometry is noise, so it can only mean the noise sequence by borrowing what the learner still carries — walk it first and it is an empty hallway.",
+      "edge_src": {
+        "file": "commons/maps/Lab_Path/critical.md",
+        "quote": "What makes this particular Lab_Path specific to Noise is the reading the learner carries through it."
+      }
+    }
+  ]
+}

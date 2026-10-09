@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_TorusGyroid · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_TorusGyroid">← Tutorial lineage</a></p><h1>ISO TorusGyroid</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_TorusGyroid/final.md">Raw captured source</a></p><pre># Repetition without separate pieces
+
+&lt;!-- @mc_torus_sculpture --&gt;
+
+Begin with the torus. Follow the tube around its opening until you return to the part where you started. The empty centre has a boundary you can trace. Move sideways: the visible opening narrows, although the object has not changed.
+
+This reference uses the existing torus field with its distortion weights set to zero. We have temporarily put aside the noise that made the earlier sculpture irregular. The ring lets us keep a relation in view while the next specimen makes repetition harder to separate into individual things. An opening is visible here; whether your body can pass through it is another question, involving orientation, size and collision.
+
+&lt;!-- @GyroidDemo --&gt;
+
+Does a repeating surface have to be a collection of repeating objects?
+
+Choose an opening in the gyroid specimen and follow the surrounding fold into the next region. Change viewpoint wherever a crossing obscures the connection. Look for repetition along another direction, then compare its scale with the first. The pattern is not organised only across a flat face.
+
+Keep one opening as a landmark and compare it with the next recognisable opening along a fold. Look at their orientation as well as their apparent size. Repetition in a volume can carry a relation around a bend, so matching silhouettes are not the only evidence available. If the two features differ, consider whether the difference might come from viewpoint before attributing it to the field&#x27;s perturbation. A second angle can resolve some of that uncertainty while also revealing another layer of the repeating structure behind the first.
+
+The field begins with three linked trigonometric terms: sine in one direction multiplied by cosine in another, repeated cyclically across the coordinates. Together they create a periodic spatial relation. A threshold selects a surface from that relation, and the extractor turns the sampled boundary into triangles.
+
+Start with FORMULA and SHEET, the desk&#x27;s initial settings. No noise perturbation is applied. The selected level is still one: this is a sampled trigonometric gyroid level set, not a demonstration of an exact minimal surface. Even “formula” has a chosen boundary and a finite sampling grid.
+
+Press HOLD before changing PERIOD. A copy remains behind the live specimen. PERIOD cycles through coordinate multipliers 0.5, 1, 2 and 4. Choose a fold and compare how much of the repeating relation now fits inside the same domain. The specimen has not simply been scaled as a whole. Its sampling budget remains 64 points per axis while the expression asks those samples to describe more repetition.
+
+The shader&#x27;s central operation is short enough to carry with you:
+
+```glsl
+vec3 gp = p * periodScale;
+float gyroid = dot(sin(gp), cos(gp.yzx));
+```
+
+The dot product adds sin(x)cos(y), sin(y)cos(z) and sin(z)cos(x). Each term couples two coordinates. The extractor compares the combined value with one; it does not assemble a separate little object for every opening.
+
+INTRUSION restores the complications one step at a time: fine noise erosion, then broader field modulation, then coordinate warp as well. Follow the same region through those changes. Noise can make the surface less regular, but what did it add to the relation you could already describe? What did it make harder to follow? RESET restores FORMULA and SHEET while leaving your held comparison intact.
+
+The shapes gallery assembled descriptions of recognisable parts. Here, repetition arises directly from a field expression. There need be no separately stored object corresponding to each opening you recognise.
+
+That shift changes what it means to edit the form. Adjusting the period changes a repeating relation across the volume. Altering a threshold can change thickness and connections. Distorting coordinates changes where the expression is evaluated. Those operations may all affect an opening, but they are different explanations for its altered shape.
+
+A thin gold line marks one straight test through the live specimen. PROBE changes the radius of an upright capsule from 0.20 to 0.35 to 0.60 metres; its height stays 1.70 metres. The readout reports how far this capsule can travel along the marked twelve-metre segment before the gyroid&#x27;s collider stops it. The warm marker locates that stop. A larger body asks more of the same visible opening.
+
+This is a deliberately narrow question. The probe does not search for a winding route, test footing, or reproduce every part of the player&#x27;s controller. A blocked straight path does not prove that no route exists. If the generator omitted collision because the mesh was too costly, the desk says the probe is unavailable; an untested wall must not become evidence of freedom.
+
+We now have three accounts in the same room: a periodic expression, a visible surface and a limited test of bodily clearance. They can disagree. That disagreement gives the next experiment its location. Rather than adding roughness until the object seems alive, we can ask which change makes a passage, a refuge, a barrier, or a relation we do not yet have a name for.
+
+&lt;!-- @ --&gt;
+
+The next room introduces a more direct gesture. Instead of changing a repeating expression, your hand will add local contributions and watch the extracted surface join them together.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_TorusGyroid/tutorial.md">Raw captured source</a></p><pre># Repetition without separate pieces
+
+&lt;!-- @mc_torus_sculpture --&gt;
+
+Begin with the torus. Follow the tube around its opening until you return to the part where you started. The empty centre has a boundary you can trace. Move sideways: the visible opening narrows, although the object has not changed.
+
+This reference uses the existing torus field with its distortion weights set to zero. We have temporarily put aside the noise that made the earlier sculpture irregular. The ring lets us keep a relation in view while the next specimen makes repetition harder to separate into individual things. An opening is visible here; whether your body can pass through it is another question, involving orientation, size and collision.
+
+&lt;!-- @GyroidDemo --&gt;
+
+Does a repeating surface have to be a collection of repeating objects?
+
+Choose an opening in the gyroid specimen and follow the surrounding fold into the next region. Change viewpoint wherever a crossing obscures the connection. Look for repetition along another direction, then compare its scale with the first. The pattern is not organised only across a flat face.
+
+Keep one opening as a landmark and compare it with the next recognisable opening along a fold. Look at their orientation as well as their apparent size. Repetition in a volume can carry a relation around a bend, so matching silhouettes are not the only evidence available. If the two features differ, consider whether the difference might come from viewpoint before attributing it to the field&#x27;s perturbation. A second angle can resolve some of that uncertainty while also revealing another layer of the repeating structure behind the first.
+
+The field begins with three linked trigonometric terms: sine in one direction multiplied by cosine in another, repeated cyclically across the coordinates. Together they create a periodic spatial relation. A threshold selects a surface from that relation, and the extractor turns the sampled boundary into triangles.
+
+Start with FORMULA and SHEET, the desk&#x27;s initial settings. No noise perturbation is applied. The selected level is still one: this is a sampled trigonometric gyroid level set, not a demonstration of an exact minimal surface. Even “formula” has a chosen boundary and a finite sampling grid.
+
+Press HOLD before changing PERIOD. A copy remains behind the live specimen. PERIOD cycles through coordinate multipliers 0.5, 1, 2 and 4. Choose a fold and compare how much of the repeating relation now fits inside the same domain. The specimen has not simply been scaled as a whole. Its sampling budget remains 64 points per axis while the expression asks those samples to describe more repetition.
+
+The shader&#x27;s central operation is short enough to carry with you:
+
+```glsl
+vec3 gp = p * periodScale;
+float gyroid = dot(sin(gp), cos(gp.yzx));
+```
+
+The dot product adds sin(x)cos(y), sin(y)cos(z) and sin(z)cos(x). Each term couples two coordinates. The extractor compares the combined value with one; it does not assemble a separate little object for every opening.
+
+INTRUSION restores the complications one step at a time: fine noise erosion, then broader field modulation, then coordinate warp as well. Follow the same region through those changes. Noise can make the surface less regular, but what did it add to the relation you could already describe? What did it make harder to follow? RESET restores FORMULA and SHEET while leaving your held comparison intact.
+
+The shapes gallery assembled descriptions of recognisable parts. Here, repetition arises directly from a field expression. There need be no separately stored object corresponding to each opening you recognise.
+
+That shift changes what it means to edit the form. Adjusting the period changes a repeating relation across the volume. Altering a threshold can change thickness and connections. Distorting coordinates changes where the expression is evaluated. Those operations may all affect an opening, but they are different explanations for its altered shape.
+
+A thin gold line marks one straight test through the live specimen. PROBE changes the radius of an upright capsule from 0.20 to 0.35 to 0.60 metres; its height stays 1.70 metres. The readout reports how far this capsule can travel along the marked twelve-metre segment before the gyroid&#x27;s collider stops it. The warm marker locates that stop. A larger body asks more of the same visible opening.
+
+This is a deliberately narrow question. The probe does not search for a winding route, test footing, or reproduce every part of the player&#x27;s controller. A blocked straight path does not prove that no route exists. If the generator omitted collision because the mesh was too costly, the desk says the probe is unavailable; an untested wall must not become evidence of freedom.
+
+We now have three accounts in the same room: a periodic expression, a visible surface and a limited test of bodily clearance. They can disagree. That disagreement gives the next experiment its location. Rather than adding roughness until the object seems alive, we can ask which change makes a passage, a refuge, a barrier, or a relation we do not yet have a name for.
+
+&lt;!-- @ --&gt;
+
+The next room introduces a more direct gesture. Instead of changing a repeating expression, your hand will add local contributions and watch the extracted surface join them together.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_TorusGyroid/technical.md">Raw captured source</a></p><pre># A periodic field and a bounded clearance test
+
+Primary mc_torus_sculpture is a fixed formula reference; primary GyroidDemo is the live periodic field. Both use their existing GPU compute shaders. The lesson resolves child TerrainGeneratorTorus/Gyroid nodes and exposes existing intrusion/period axes. Torus startup work is completed before stopping its redundant process loop. Ordinary scene defaults elsewhere are unchanged.
+
+Gyroid: domain20 field units, scene scale0.5, iso_level1, 64 samples per axis. PERIOD order sheet/pair/lattice/weave corresponds to multipliers0.5/1/2/4. INTRUSION order formula/eroded/drifting/melted uses warp/erosion/modulation triples (0,0,0), (0,.5,0), (0,.5,1), (4,.5,1). The expression dot(sin(gp),cos(gp.yzx)) is a trigonometric gyroid approximation evaluated at the selected level, not an exact minimal-surface certificate. PERIOD scales only the gyroid argument, not all noise arguments. RESET restores formula/sheet and the smallest probe, preserving HOLD.
+
+HOLD makes an independent deep mesh/material copy 18m behind the live specimen. It has no collision. Meshes are grounded after regeneration; the held geometry does not follow later changes. All three inherited artifact instances and historical structure cells remain.
+
+PROBE uses a fixed world-horizontal12m segment through the live domain centreline, capsule centre1m above the hall floor, height1.7m, radii .2/.35/.6m. It checks initial overlap, then PhysicsDirectSpaceState3D.cast_motion against the gyroid&#x27;s actual collision shapes on a dedicated query layer. The readout reports the safe fraction times12. Empty or omitted collision shapes make the test unavailable. This is not a pathfinder, head tracking test, step-height test or full CharacterBody3D motion simulation. Base extraction skips trimesh collision above30000 triangles; a rendered mesh alone cannot certify clearance.
+
+Sources: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd and TerrainGeneratorTorus.gd; Compute/MarchingGyroid.glsl and MarchingCubesTorus.glsl. Lesson: res://commons/artifacts/timing_machines/iso_gyroid_workshop.gd.
+
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ISO_TorusGyroid/intent.md">Raw captured source</a></p><pre>Trace torus opening → follow gyroid fold → HOLD → PERIOD → INTRUSION → explain coupled coordinates → PROBE → separate visible opening, collider and bodily route.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_TorusGyroid/critical.md">Raw captured source</a></p><pre># The wall a picture forgot
+
+A recurring opening is not necessarily an invitation to a particular body. The gyroid gives a repeatable relation in three coordinates; extraction, rendering and collision give different accounts of that relation. The capsule probe makes one small disagreement inspectable.
+
+Increasing the capsule radius changes no visible surface. It changes what can pass along the same test. A blocked straight segment leaves winding routes undecided. Conversely, an omitted collider is not an opening: it is a missing rule in the simulation. Calling either event freedom would confuse an experience with its cause.
+
+The existing specimen&#x27;s noise can now be removed and restored. Formula is not an innocent origin: it still has a level, sampling density, finite domain and body scale. Keeping those choices visible lets the noise become an alteration we can discuss rather than a general sign for organic life or queer possibility.
+
+Hold the earlier surface. Track a fold through the new one. What does this distortion permit, and what does its visual complexity prevent you from seeing? The question of possible bodies includes both the body meeting the opening and the implementation deciding which encounter counts.
+
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_TorusGyroid/artifacts.md">Raw captured source</a></p><pre>Primary order: mc_torus_sculpture, GyroidDemo. Secondary retained: voxel_noise_demo. Decoration: iso_gyroid_console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_TorusGyroid/summary.md">Raw captured source</a></p><pre>Compare the torus reference and periodic gyroid, hold the earlier surface, vary period and perturbation, then test one straight capsule path without confusing it with full navigation.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_TorusGyroid/blurb.md">Raw captured source</a></p><pre>The fold repeats. Does the invitation repeat with it?
+</pre></section></body></html>

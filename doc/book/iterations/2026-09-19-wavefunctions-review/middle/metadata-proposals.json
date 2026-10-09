@@ -1,0 +1,130 @@
+[
+  {
+    "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A wave is not an object—it's a disturbance traveling through a medium. Watch waves emanate from sources, diminishing by inverse square law. Learn distance fields, phase propagation (sin(time - dist)), attenuation, and interference. Discover that identity is permeable: you are not a static entity, but a point of intersection for the world's noise.",
+    "new": "Follow a disturbance through a finite lattice of coupled oscillators. Compare the same sine drive or one pulse with links present and absent. A nearby tiled wave display offers a contrasting analytic distance-field construction; its default attenuation is exponential."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Distance fields: calculating propagation from source to every point",
+      "Wave function: sin(time * speed - dist * frequency)",
+      "Attenuation: inverse square law (energy = 1 / (1 + dist²))",
+      "Interference: wave summation creates peaks and cancellation",
+      "Critical: Identity is permeable—to exist in a medium is to be distorted by it"
+    ],
+    "new": [
+      "Follow one sphere before reading a travelling pattern across the lattice",
+      "Compare identical starting states and forcing with coupling on or off",
+      "Distinguish a continuing sine drive from a single velocity pulse",
+      "Relate boundary behaviour to the number of neighbours",
+      "Compare local force integration with the secondary display’s analytic distance field; do not infer physical inverse-square energy transport from either display"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "One oscillation inside another's rule. The bench row at row 5 holds the racks (303, Moog, DX7, the sine rack) and the audio controllers; the primary, DualBallFMController, stands apart on the open floor at (8,11) in the south-east quarter, turned to face north: two reading desks at hand height, the carrier ball (blue) and the modulator ball (orange), the colour cube on the shelf between them, an AUDITION panel (BASELINE / HOLD / PLAY / COMPARE) and a cased readout on the visitor's side, the four-lane evidence scope above. Structure recovered 2026-09-10: interior 2 = 1 m platform, perimeter w, wall_height 3, gate at the doorway; museum.sculpture_clear_rects keeps dealt plinths off the audition floor.",
+    "new": "Two movable balls map six parameters of a phase-modulation/FM-style instrument. Establish a baseline, hold a reference and compare a changed note. A four-lane scope shows the modulation term, carrier, rule and output while the ear follows the full envelope."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Audio bus and amplitude analysis",
+      "FFT spectrum: breaking waveforms into frequencies",
+      "Frequency bands: bass,mids,highs",
+      "Quantization noise and sampling gaps",
+      "Critical: Latency as reacting to the past,not present",
+      "Biological sounds: heartbeat rhythm",
+      "Ambient soundscapes: lab hum"
+    ],
+    "new": [
+      "Use BASELINE, HOLD, PLAY and COMPARE to hear one changed parameter",
+      "Map ball position to carrier frequency and envelope, and to modulation ratio, index and decay",
+      "Read modulation inside the carrier phase rather than as an added output voice",
+      "Separate the carrier envelope from the modulator envelope",
+      "Notice the scope’s normalization and short time window; preserve listening as evidence"
+    ]
+  },
+  {
+    "path": "commons/maps/Wavefunctions_Bernini/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "The Solomonic columns of St. Peter's Baldachin spiral upward, defying stone's rigidity. Use sine waves to displace mesh vertices, transforming cylinders into twisting baroque forms. Layer noise for organic erosion. Discover procedural geometry as the new Baroque—favoring the variable, mutating, and complex over the static and ideal. Baroque was a glitch in Renaissance order.",
+    "new": "Repeated spiral columns distinguish periodic change through height from rotation through time. A CPU-generated ring mesh combines sine/cosine centre offsets, radius variation and a changing angular phase, with procedural audio accompaniment."
+  },
+  {
+    "path": "commons/maps/Wavefunctions_Bernini/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Vertex displacement: twisting via rotation matrix in shader",
+      "Rotation matrix around Y-axis (angle = VERTEX.y * twist)",
+      "Adding noise for organic detail: VERTEX += NORMAL * noise",
+      "Digital grotesque: animating the twist, breathing columns",
+      "Critical: Baroque as glitch in Renaissance order",
+      "Procedural geometry as new Baroque: variable over ideal"
+    ],
+    "new": [
+      "Follow a shaft profile through height, then observe the shaft rotate through time",
+      "Relate circular sine/cosine coordinates to a helical centre path and radial variation",
+      "Distinguish generated mesh construction from a vertex-shader or noise deformation",
+      "Read the repetition of columns as intervals and sight lines",
+      "Treat architectural inspiration and generated accompaniment as situated choices, not a full historical account or a touch instrument"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_John_Cage/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "In 1952, John Cage presented four minutes and thirty-three seconds of 'silence.' But it wasn't silent—the audience coughed, rain fell, chairs creaked. Silence is not absence of sound, but presence of unintended noise. Explore aleatoric algorithms (chance as life), noise floor (thermal noise, blood in ear), and ambient computation (simulating the uneventful). Cage reframed silence as space of infinite potential. The algorithm is running, but not 'working.' It is just breathing.",
+    "new": "Chance schedules playback within a prepared vocabulary of synthesized clips over drone and city-ambience layers. Luminous forms respond to sound activity. The Cage reference opens a question about authorship and listening; this artifact does not perform a particular Cage score."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_John_Cage/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Aleatoric algorithms: chance operations via randf() as life, not chaos",
+      "Noise floor: you cannot have signal of 0, thermal noise in circuit",
+      "Ambient computation: simulating the uneventful, code that does nothing beautifully",
+      "Drift without destination: noise.get_noise_1d() for wandering",
+      "Queer silence: reframing silence as space of infinite potential",
+      "Critical: Do not look for the puzzle. Just listen. The algorithm is just breathing."
+    ],
+    "new": [
+      "Separate continuous layers from intermittent events by listening over time",
+      "Distinguish uncertain ordering from an open-ended sound vocabulary",
+      "Compare the envelope and texture of recurring prepared variations",
+      "Recognize that the luminous forms do not expose every scheduling choice or spatialize the audio",
+      "Ask what the composer has already decided before leaving event order to chance"
+    ]
+  }
+]

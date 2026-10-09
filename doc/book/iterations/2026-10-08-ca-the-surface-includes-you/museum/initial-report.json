@@ -1,0 +1,413 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed proximity bridge found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: depleted",
+      "passed": true
+    },
+    {
+      "name": "Twenty-one near steps remove W support",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "Installed carried PointBody available",
+      "passed": true
+    },
+    {
+      "name": "Source cycle preserves VISITOR PROBE NONE then adds HAND",
+      "passed": true
+    },
+    {
+      "name": "Unheld HAND uses recovery with no origin fallback",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools held trigger selects HAND and steps once",
+      "passed": true
+    },
+    {
+      "name": "Same nominated point produces PROBE and HAND field parity",
+      "passed": true
+    },
+    {
+      "name": "Held input depletes W and removes its collider",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: carried-input",
+      "passed": true
+    },
+    {
+      "name": "Moving hand upward changes three-dimensional input distance",
+      "passed": true
+    },
+    {
+      "name": "Release parks beside console and withdraws input",
+      "passed": true
+    },
+    {
+      "name": "Released hand permits boundary-led repair",
+      "passed": true
+    },
+    {
+      "name": "All eighty wall cells share corresponding floor material",
+      "passed": true
+    },
+    {
+      "name": "Installed SYNC chain waits at third address",
+      "passed": true
+    },
+    {
+      "name": "Installed SCAN propagates within the pass",
+      "passed": true
+    },
+    {
+      "name": "Installed reversed SCAN postpones that change",
+      "passed": true
+    },
+    {
+      "name": "RUN advances a tenth of a simulated second",
+      "passed": true
+    },
+    {
+      "name": "Installed thirty-second capacity holds",
+      "passed": true
+    },
+    {
+      "name": "VISITOR resolves supplied physical body rather than capture camera",
+      "passed": true
+    },
+    {
+      "name": "A supplied body falls onto collecting basin after support loss",
+      "passed": true
+    },
+    {
+      "name": "Supplied body climbs exit recovery ramp to level museum floor",
+      "passed": true
+    },
+    {
+      "name": "entry_to_console: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "entry_to_console: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "console_to_point: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "console_to_point: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "side_to_rear: capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "side_to_rear: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "side_to_rear: capsule clearance"
+  ],
+  "observations": {
+    "body_basin_y": -0.629854261875153,
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "decaying_bridge",
+        "local": [
+          7.5,
+          0.0,
+          8.5
+        ]
+      },
+      {
+        "key": "crossway_ca",
+        "local": [
+          9.5,
+          0.800000011920929,
+          22.5
+        ]
+      },
+      {
+        "key": "ca_chair_test",
+        "local": [
+          1.5,
+          0.0,
+          23.5
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          3.5,
+          0.0,
+          28.5
+        ]
+      },
+      {
+        "key": "catalyst_vent",
+        "local": [
+          9.5,
+          0.0,
+          28.5
+        ]
+      },
+      {
+        "key": "catalyst_prompter_box",
+        "local": [
+          1.5,
+          0.0,
+          29.5
+        ]
+      },
+      {
+        "key": "cellular_automata_3d_tree",
+        "local": [
+          12.5,
+          0.0,
+          29.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          1.5,
+          3.0,
+          31.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "whiteboard",
+        "local": [
+          14.0,
+          0.899999976158142,
+          18.5
+        ]
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          10.2250003814697
+        ]
+      },
+      {
+        "key": "fire_hose_box",
+        "local": [
+          1.27999997138977,
+          0.850000023841858,
+          6.5
+        ]
+      }
+    ],
+    "ramp_exit_position": [
+      -2.01999998092651,
+      -0.0291223805397749,
+      10.2042694091797
+    ],
+    "routes": {
+      "console_to_point": {
+        "blocked": [],
+        "samples": 17,
+        "unsupported": []
+      },
+      "entry_to_console": {
+        "blocked": [],
+        "samples": 29,
+        "unsupported": []
+      },
+      "rear_to_exit": {
+        "blocked": [],
+        "samples": 31,
+        "unsupported": []
+      },
+      "side_to_rear": {
+        "blocked": [
+          {
+            "at": [
+              3.90000009536743,
+              6.45000028610229
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              6.60000038146973
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              6.75
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              6.90000009536743
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              7.05000019073486
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              7.20000028610229
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          },
+          {
+            "at": [
+              3.90000009536743,
+              7.35000038146973
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/DeskFoot/@StaticBody3D@857"
+          }
+        ],
+        "samples": 165,
+        "unsupported": []
+      }
+    },
+    "scope": "Native museum, overhead and eye level. Player/neighbouring halls hidden for capture. No physical headset.",
+    "step_ms": 0.303,
+    "work_local": [
+      7.5,
+      0.0,
+      8.5
+    ]
+  },
+  "passed": false
+}

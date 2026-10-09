@@ -1,0 +1,198 @@
+{
+ "sequences": {
+  "color": {
+   "name": "Color and Composition",
+   "v1_3_note": "2026-09-09: restore the pre-endless-museum colour rooms. Pattern maps belong exclusively to tiling; array indexing remains in array_tutorial.",
+   "composition_sources": [
+    {
+     "gallery": "primitive-stack-gallery",
+     "path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
+     "role": "vertical compositions — stacks of primitives as raw composition vocabulary"
+    },
+    {
+     "gallery": "facade-gallery",
+     "path": "ada_encyclopedia/public/facade-gallery/manifest.json",
+     "role": "architectural compositions — facades as composed parts within a frame"
+    }
+   ],
+   "truth": "A colour value enters an encounter: a light, a surface, a position, a neighbour and a viewer. Implement each relation, then examine what the implementation leaves out.",
+   "qfep_term": "S",
+   "qfep_connection": "Color is a system stateâ€”part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
+   "formula": "RGB = (r, g, b) âˆˆ [0,1]Â³, HSV = (h, s, v) âˆˆ [0,360)Ã—[0,1]Â²",
+   "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
+   "description": "Add colour to familiar primitives and static transformations, then investigate it through illumination, wearing, authored bands, spatial samples, grid assignments, accumulating paint and glass architecture.",
+   "layer": "F_order",
+   "prerequisites": [
+    "primitives"
+   ],
+   "unlocks": [
+     "proceduralgeneration",
+     "machinelearning",
+     "facade_assembly"
+   ],
+   "difficulty": "beginner",
+   "estimated_time": "20-25 minutes",
+   "learning_objectives": [
+    "Apply colour assignments to familiar primitives and static transforms; compare what stays the same before asking how colour is produced.",
+    "Relate coloured illumination to a receiving surface in the renderer.",
+    "Use RGB coordinates to change a preview and, where available, a hand or nail material.",
+    "Recognise rainbow bands as an authored construction rather than evidence of spectral simulation.",
+    "Read hue and saturation as functions of position; distinguish a field from its discrete samples.",
+    "Trace a grid colour rule from cell coordinates to per-instance colour values.",
+    "Compare manual and automatic marks accumulating on the same canvas.",
+    "Distinguish tinted-glass compositing from colour-coordinate interpolation."
+   ],
+   "content": [
+    "Color_Context_Placed: Colour joins the primitives through static column combinations",
+    "Color_Flashlight: Light meets a coloured surface",
+    "Color_Nails: Color Nails",
+    "Color_Rainbow: Color Rainbow",
+    "Color_Pillar: A spatial gradient sampled by pillars; named palettes on a wall",
+    "Color_Grid_Pallet: Color Grid Pallet",
+    "Color_Paint: A painting continues before you touch it",
+    "Color_Walls: Colour at office scale through orthogonal glass cubicles"
+   ],
+   "maps": [
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Nails",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Paint",
+    "Color_Walls"
+   ],
+   "deferred_maps": [
+    "Color_Context",
+    "Color_Grabbable",
+    "Color_Overlay",
+    "Color_Spectrum",
+    "Color_Sphere",
+    "Chamber_Color"
+   ],
+   "deferred_reason": "The earlier consolidation is superseded by the documented 2026-09-09 recovery. Pattern_Foundry, Tutorial_Pattern, Array_Patterns and Symmetry_Seventeen are in tiling. 2026-09-23: author removed Chamber_Color from the active Colour sequence; its map, artifacts and writing remain available.",
+   "axiom_files": [
+    "res://commons/context/clipboard/tutorial_text/color_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/perception_axioms.md"
+   ],
+   "algorithm_paths": {
+    "Color_Paint": "res://algorithms/color/paint/",
+    "Color_Grid_Pallet": "res://algorithms/color/palette/",
+    "Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
+   },
+   "return_to": "lab",
+   "lab_map": "Lab/map_data_post_color",
+   "unlock_requirements": [
+    "primitives"
+   ],
+   "completion_rewards": [
+    "chromatic_badge",
+    "perception_badge"
+   ],
+   "artifact_groups": [
+    {
+     "map": "Color_Flashlight",
+     "position": "synthesis",
+     "artifacts": [
+      "flashlight_demo"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "MultiMesh color cycling test: pattern progression through flashlight interaction. Synthesis of color systems.",
+     "grammar": "vatican"
+    },
+    {
+     "map": "Color_Nails",
+     "position": "intro",
+     "artifacts": [
+      "science_screen",
+      "colorballs",
+      "hand_model",
+      "brick_wall_factory",
+      "nail_color_controller",
+      "hand_color_controller",
+      "dark_sphere"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Nail salon studio: precise color selection on a digital body. Introduces color as interaction.",
+     "grammar": "linear"
+    },
+    {
+     "map": "Color_Rainbow",
+     "position": "foundation",
+     "artifacts": [
+      "catalyst_pedestal",
+      "pick_up_cube",
+      "catalyst_vent",
+      "dark_sphere",
+      "mario_cube",
+      "rainbow"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Walking through light: spectrum progression with animated rainbow emitters along a corridor.",
+     "grammar": "florence"
+    },
+    {
+     "map": "Color_Pillar",
+     "position": "exploration",
+     "artifacts": [
+      "visual_color_mixing",
+      "pillarcolorcollection",
+      "grab_rainbow_stick",
+      "dark_sphere",
+      "SpectrumVisualizer",
+      "color_sets_overview"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Walk through a continuous spatial gradient sampled by 35 pillars, then compare twelve named palettes on a framed wall.",
+     "grammar": "zelda"
+    },
+    {
+     "map": "Color_Grid_Pallet",
+     "position": "foundation",
+     "artifacts": [
+      "dark_sphere",
+      "gridcolorizer",
+      "spectrum_forest",
+      "science_screen"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Grid becomes canvas: systematic color assignment cell by cell with spectrum visualization.",
+     "grammar": "linear"
+    },
+    {
+     "map": "Color_Paint",
+     "position": "exploration",
+     "artifacts": [
+      "dark_sphere",
+      "albers_wall_gallery",
+      "ball_painting_demo"
+     ],
+     "size_budget": "mixed",
+     "rationale": "An automatic mark is already accumulating on the canvas; manual pigment and Albers studies remain available.",
+     "grammar": "zelda"
+    },
+    {
+     "map": "Color_Walls",
+     "position": "integration",
+     "artifacts": [
+      "dark_sphere",
+      "rainbow_hallway",
+      "color_space_navigator",
+      "color_constellation_office",
+      "subpixel_display",
+      "gradient_interpolator"
+     ],
+     "size_budget": "environment",
+     "rationale": "Eight full-size glass cubicles organise passage and layered views; contrast this with colour coordinates and interpolation.",
+     "grammar": "zelda"
+    }
+   ],
+   "museum_recovery": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+   "teaching_order_note": "2026-09-23: Appearance → illumination → bodily coordinates → banding → spatial sampling → grid rules → accumulating marks → architecture. Color_Walls closes the eight authored Colour halls; Pattern_Disco opens Patterns by returning to the familiar floor with colour. Chamber_Color is deferred by the author.",
+   "pattern_placement_note": "2026-09-10: pattern machines removed from Colour rooms; colour primaries and book anchors preserved."
+  }
+ },
+ "world_phase": "grid",
+ "artifact_groups": []
+}

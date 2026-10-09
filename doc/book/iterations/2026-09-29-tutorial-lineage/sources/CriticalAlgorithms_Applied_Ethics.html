@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CriticalAlgorithms_Applied_Ethics · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CriticalAlgorithms_Applied_Ethics">← Tutorial lineage</a></p><h1>CriticalAlgorithms Applied Ethics</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/final.md">Raw captured source</a></p><pre># Before the first person speaks
+
+Who does this room make easiest to address?
+
+&lt;!-- @room_shape_demonstrator --&gt;
+
+Begin with HEAD. One miniature room waits on the pedestal. Before anyone speaks, where does your eye place the speaker? Walk around the model and compare the large chair at the end with the smaller ones beside the table.
+
+Press CIRCLE. Choose one position and imagine speaking from it. Trace the distances to the others. Then press PAIR to see both plans together. The models become smaller so they fit beside each other; the panel stays where it is.
+
+The long table gives one position a conspicuous role even while every chair has the same colour. Its six smaller accompanying chairs carry less visual weight. The other model places six equal chairs around a round table. The comparison changes more than an outline on the floor: it changes relative size, position and the implied relation between participants.
+
+The source makes the operation inspectable:
+
+```gdscript
+for i in 6:
+    var a: float = TAU * float(i) / 6.0
+    var chair := _make_chair(chair_color_distributed)
+    chair.scale = Vector3(s, s, s)
+    chair.position = origin + Vector3(cos(a) * 0.4 * s, floor_y + 0.1 * s, sin(a) * 0.4 * s)
+    _add_part(chair)
+```
+
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
+
+These are affordances and invitations. A head position can make it easy to identify a speaker; a circle can support addressing several neighbours around a shared centre. Neither miniature contains actual speech, listening or an agreement about whose turn comes next. The geometry proposes conditions under which those activities might happen.
+
+Leave PAIR in place and press COLOUR. No chair moves. Red now singles out authority; green recommends the distributed arrangement. Does the room seem to have made up its mind? Press NEUTRAL again and see what remains of that judgement. Looking critically at a model includes looking at the persuasion built into its presentation.
+
+Find one use for the head position that you would preserve, then one difficulty the circle would not automatically solve. A designated interpreter, a speaker who needs a clear sightline or someone who cannot easily turn towards every other participant can complicate the familiar good-circle story. These possibilities call for observation with people, not a verdict from chair shapes alone.
+
+WATCH puts another arrangement beside the long table: eight backed seats face outward around a raised centre. Follow one seat’s direction with your eyes. The ring has returned, but its invitation has changed. There is no watcher inside the model; the arrangement gives you a question to take to one.
+
+Return to PAIR, then press VACANT. The furniture goes; the walls remain. An empty room still has sides, an opening and a scale. Removing the chairs has not removed every decision.
+
+A future version could compare actual sightlines and turn-taking across the two plans. The ethical question would become a design question with observable consequences: which participant gained access, which difficulty remained, and what change should follow?
+
+&lt;!-- @ --&gt;
+
+The next room lets two requirements meet without immediately deleting one. Participation can be shared while the resulting claims still conflict.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/tutorial.md">Raw captured source</a></p><pre># Who becomes easy to address before anyone speaks?
+
+The previous hall moved labels. Here positions, count and scale arrange possible participants.
+
+&lt;!-- @room_shape_demonstrator --&gt;
+
+Select HEAD, then CIRCLE, before choosing PAIR. Count every chair in each model. Compare the head chair with a side chair, then compare two chairs around the round table. Imagine a participant who needs a clear sightline to an interpreter.
+
+The long-table model has a head chair and six smaller side chairs. The circle has six equally scaled chairs. Count, scale and position change between the plans; COLOUR restores the original red/green contrast; the pair is not an experiment that isolates table shape.
+
+The source makes the operation inspectable:
+
+```gdscript
+for i in 6:
+    var a: float = TAU * float(i) / 6.0
+    var chair := _make_chair(chair_color_distributed)
+    chair.scale = Vector3(s, s, s)
+    chair.position = origin + Vector3(cos(a) * 0.4 * s, floor_y + 0.1 * s, sin(a) * 0.4 * s)
+    _add_part(chair)
+```
+
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
+
+[Implementation](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd). This is an excerpt from the artifact, not a standalone program.
+
+Press COLOUR while keeping PAIR selected. The chairs stay in place, but green now recommends the circle. NEUTRAL removes this colour contrast without changing the arrangement. Before accepting that judgement, consider sightlines, hearing, turning and entry. A shared centre can be useful without meeting every body&#x27;s needs. Geometry sets conditions for participation; it does not contain the participants&#x27; agreements or resolve unequal authority. The next design should let those conditions be compared with people using the space.
+
+&lt;!-- @ --&gt;
+
+A place at the table does not make every account agree. The next hall keeps two accounts visible.
+
+## Next experiment — with participants
+
+Build a comparison with equal chair count, scale and colour, changing only the arrangement. Test sightlines and approach routes before claiming the circle is more accessible. Retain the original coloured pair as a comparison visitors can choose after inspecting each plan.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/technical.md">Raw captured source</a></p><pre># Arrange — choose a plan, then examine its terms
+
+The previous hall moved word positions. Here an array gives possible participants positions. The source is [room_shape_demonstrator.gd](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd).
+
+This map opts into interactive=true, plan=head and palette=neutral. HEAD and CIRCLE show one miniature at 1.5 times the paired model scale. PAIR returns to the original side-by-side comparison. WATCH selects the existing panopticon plan: the long-table model beside a ring of eight outward-facing backed seats and a taller central block. VACANT removes the furniture from both rectangular rooms. These remain miniature studies, not full-size occupied meeting rooms.
+
+```gdscript
+for i in 6:
+    var a: float = TAU * float(i) / 6.0
+    var chair := _make_chair(chair_color_distributed)
+    chair.scale = Vector3(s, s, s)
+    chair.position = origin + Vector3(cos(a) * 0.4 * s, floor_y + 0.1 * s, sin(a) * 0.4 * s)
+    _add_part(chair)
+```
+
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
+
+The long-table model contains seven chairs: one at scale s and six at 0.6*s. The circle contains six at scale s. The WATCH pair contains seven plus nine; VACANT contains none. Chair count, scale and geometry therefore vary across the plans. The console presents choices, not an isolated test of table shape.
+
+NEUTRAL and COLOUR are separate from PLAN. The palette applies a shared material colour or restores the original red/tan/green scheme without changing any chair transform. Neutral colour does not make the arrangement itself neutral. The unconfigured scene retains plan=pair, palette=authored and no visitor console, preserving other placements.
+
+The compact panel remains outside the rebuild list. Only the model&#x27;s own parts are replaced, so the controls and externally attached labels survive. Interactive pedestals have box collisions. The panopticon wall segments now follow the circle&#x27;s tangent; their former radial orientation left a ring of fins.
+
+The hall retains its six artifact families. The primary moves to (6,5), faces the entry and reserves space for both model widths. The arrival gate stays at the boundary; a local clear rectangle keeps a decorative plinth off the exit approach. The authored structure layer is preserved.
+
+Compare actual sightlines and turn-taking with people in a later experiment. These models contain neither a speaking process nor measured accessibility. The next hall keeps conflicting requirements visible after participants have found a place.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/intent.md">Raw captured source</a></p><pre>Concept: Algorithmic classification staged as decision rather than as demonstration — three live cases in which a classifier commits to a positive or negative outcome, with the outside of each classification made visible alongside the prediction.
+Sequence role: Second map in the Post-Foundations Crisis sequence. Takes the structural diagnosis from CriticalAlgorithms_Algorithmic_Bias_Visualization and converts it into practice. Every classifier has an outside; the question this map poses is what responsible practice looks like once that is true. Follows the bias visualiser; leads to SpeculativeComputation_Paraconsistent_Engineering.
+Technical angle: Three case studies — loan approval, hiring shortlist, content moderation — each with a small feature set, a rendered prediction, and an adjacent panel naming what the classifier did not see. An intervention station exposes a calibration slider, a feature re-weighting panel, and a downstream-consequence readout so the learner can feel the effect of each adjustment on the affected populations.
+Critical angle: The map treats classification as a social act rather than as a mathematical one. Disparate impact, refusal, and audit appear as annotated excerpts on one wall; they are placed against the cases rather than presented alone, because the point is that ethics is operational rather than doctrinal. The outside of every classifier is where the consequences land.
+Key artifacts: three case files per station, the classifier prediction heads, the calibration slider and re-weighting panel, and the library of annotated excerpts on disparate impact, refusal, and audit.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/critical.md">Raw captured source</a></p><pre># Who becomes easy to address before anyone speaks?
+
+Select HEAD, then CIRCLE, before choosing PAIR. Count every chair in each model. Compare the head chair with a side chair, then compare two chairs around the round table. Imagine a participant who needs a clear sightline to an interpreter.
+
+Press COLOUR while keeping PAIR selected. The chairs stay in place, but green now recommends the circle. NEUTRAL removes this colour contrast without changing the arrangement. Before accepting that judgement, consider sightlines, hearing, turning and entry. A shared centre can be useful without meeting every body&#x27;s needs. Geometry sets conditions for participation; it does not contain the participants&#x27; agreements or resolve unequal authority. The next design should let those conditions be compared with people using the space.
+
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
+
+The material comparison is specific: the long-table model has a head chair and six smaller side chairs. The circle has six equally scaled chairs. Count, scale and position change between the plans; COLOUR restores the original red/green contrast; the pair is not an experiment that isolates table shape.
+
+A place at the table does not make every account agree. The next hall keeps two accounts visible.
+
+## A question the next version can test
+
+Build a comparison with equal chair count, scale and colour, changing only the arrangement. Test sightlines and approach routes before claiming the circle is more accessible. Retain the original coloured pair as a comparison visitors can choose after inspecting each plan.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/CriticalAlgorithms_Applied_Ethics/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/summary.md">Raw captured source</a></p><pre># Before the first person speaks
+
+Who does this room make easiest to address?
+
+Choose HEAD, CIRCLE, PAIR, WATCH or VACANT. Examine each miniature from several sides. Compare NEUTRAL with COLOUR while holding the plan fixed. The models change chair count, scale and arrangement; the palette comparison holds the chair transforms fixed.
+
+The six original artifact families remain. room_shape_demonstrator is primary; tt, excluded_class_visualizer, bias_from_inside, godel_statement_plaque and synthesis_stand remain secondary. The central model has an accessible panel and solid pedestals. It proposes conditions for participation without simulating speech or certifying accessibility.
+
+The next hall lets conflicting accounts remain visible.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CriticalAlgorithms_Applied_Ethics/blurb.md">Raw captured source</a></p><pre>*Before the first person speaks, where have you put the speaker?*
+
+Change the plan. Then change only its colour.
+
+Empty the room. What decisions remain?
+</pre></section></body></html>

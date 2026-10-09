@@ -1,0 +1,37 @@
+[
+  {
+    "layer": "interactables",
+    "x": 6,
+    "z": 5,
+    "before": "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0",
+    "after": ""
+  },
+  {
+    "layer": "interactables",
+    "x": 9,
+    "z": 5,
+    "before": "",
+    "after": "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0"
+  },
+  {
+    "layer": "interactables",
+    "x": 20,
+    "z": 5,
+    "before": "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0",
+    "after": ""
+  },
+  {
+    "layer": "interactables",
+    "x": 20,
+    "z": 9,
+    "before": "",
+    "after": "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0"
+  },
+  {
+    "layer": "interactables",
+    "x": 6,
+    "z": 12,
+    "before": "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand",
+    "after": "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand#reveal_on_request:true"
+  }
+]

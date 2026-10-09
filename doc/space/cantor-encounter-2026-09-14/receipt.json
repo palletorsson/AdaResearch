@@ -1,0 +1,37 @@
+{
+  "started": "2026-09-14T12:54:21+02:00",
+  "finished": "2026-09-14T12:55:00+02:00",
+  "pid": 40780,
+  "exit": 0,
+  "checks": 66,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/cantor_probe_base.gd": "a5e0477f8b4da524437b08411d9a7aa250c32c6b66835a46e2ce1364726340a9",
+    "ada_run/cantor_acceptance.gd": "fbe963abce254a3f603c47dd2664333ba271c464fc2c6d66057337f52e77d465",
+    "commons/maps/Fractal_CantorSet/map_data.json": "acdf1eea836ef0f7321e21df33177cdd676e2238edfe8e85abfd0017424fc595",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/cantor-review-2026-09-14/review-plan.json": "00be6b9b0a8ab9213d5aded2a383bb76629ad7521912d854eba50e162e1daa70",
+    "commons/artifacts/cantor_lesson/cantor_lesson.gd": "836e2cfd61b308f7f1fb8be6e55d45ead9e9a6f6d657840bea27e7e07ee0beab",
+    "algorithms/fractals/cantorset/cantor_set.gd": "f5b34e7e1bd8930a1102b8d3aa6c4d0dd15de04a2640062c15eac754fb4daed4",
+    "algorithms/fractals/example_8_4_cantor_pagoda_vr.gd": "11692b7d396f33c9bc4d17b402f93f1cb3d83ccb27784fe183d975d7497629e1",
+    "commons/maps/Fractal_CantorSet/final.md": "58393f2bf041b51e88f6aa6a00944314f8f485aee169dbb73fe5e8a73c6d7c7e",
+    "commons/data/artifact_roles.json": "2564244b68898c9603607f9e7f8ab6b3d1cd6df1944ebbf7568eacd6b845201a",
+    "commons/data/book/fractals.json": "f10b5e6eca20eec21a9090bbd4b484fb87d05c5bf27611868d957db53fd4f4b2",
+    "commons/data/trunk_branches.json": "c55b96c23e01cf90f11a7a3f6fbaf9409abae3053c2cca4482f820473ffcfe56"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

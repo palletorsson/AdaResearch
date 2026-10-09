@@ -1,0 +1,320 @@
+{
+	"baseline": false,
+	"checks": [
+		{
+			"message": "Radio text is flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "Tuning control keeps its authored physical size",
+			"passed": true
+		},
+		{
+			"message": "Volume control keeps its authored physical size",
+			"passed": true
+		},
+		{
+			"message": "Initial between-stations sound agrees with wheel position",
+			"passed": true
+		},
+		{
+			"message": "Initial noise uses the selected volume",
+			"passed": true
+		},
+		{
+			"message": "Station shortcut synchronizes the physical wheel",
+			"passed": true
+		},
+		{
+			"message": "Printed display sits in front of its bezel",
+			"passed": true
+		},
+		{
+			"message": "Station 3 requests its actual preset file",
+			"passed": true
+		},
+		{
+			"message": "Starting -6 dB agrees with physical volume angle",
+			"passed": true
+		},
+		{
+			"message": "Level wheel reports decibels instead of a misleading percent",
+			"passed": true
+		},
+		{
+			"message": "Face scale preserves the selected sound",
+			"passed": true
+		},
+		{
+			"message": "Face scale reveals tuning coordinates only on the band",
+			"passed": true
+		},
+		{
+			"message": "Face scale respects the volume-readout rule",
+			"passed": true
+		},
+		{
+			"message": "Face scale keeps every label on a flat surface",
+			"passed": true
+		},
+		{
+			"message": "Face scale ignores identical, unrelated and invalid configuration",
+			"passed": true
+		},
+		{
+			"message": "Face presets preserves the selected sound",
+			"passed": true
+		},
+		{
+			"message": "Face presets reveals tuning coordinates only on the band",
+			"passed": true
+		},
+		{
+			"message": "Face presets respects the volume-readout rule",
+			"passed": true
+		},
+		{
+			"message": "Face presets keeps every label on a flat surface",
+			"passed": true
+		},
+		{
+			"message": "Face presets ignores identical, unrelated and invalid configuration",
+			"passed": true
+		},
+		{
+			"message": "Face list preserves the selected sound",
+			"passed": true
+		},
+		{
+			"message": "Face list reveals tuning coordinates only on the band",
+			"passed": true
+		},
+		{
+			"message": "Face list respects the volume-readout rule",
+			"passed": true
+		},
+		{
+			"message": "Face list keeps every label on a flat surface",
+			"passed": true
+		},
+		{
+			"message": "Face list ignores identical, unrelated and invalid configuration",
+			"passed": true
+		},
+		{
+			"message": "Face void preserves the selected sound",
+			"passed": true
+		},
+		{
+			"message": "Face void reveals tuning coordinates only on the band",
+			"passed": true
+		},
+		{
+			"message": "Face void respects the volume-readout rule",
+			"passed": true
+		},
+		{
+			"message": "Face void keeps every label on a flat surface",
+			"passed": true
+		},
+		{
+			"message": "Face void ignores identical, unrelated and invalid configuration",
+			"passed": true
+		},
+		{
+			"message": "Void supplies no station, level, needle or preparation reading",
+			"passed": true
+		},
+		{
+			"message": "Preset face has one lamp for each real station",
+			"passed": true
+		},
+		{
+			"message": "Only the selected station lamp is lit",
+			"passed": true
+		},
+		{
+			"message": "Between-stations state has no numeric substitute on the discrete face",
+			"passed": true
+		},
+		{
+			"message": "All preset lamps turn off between stations",
+			"passed": true
+		},
+		{
+			"message": "The gap requests the existing noise/drone preset",
+			"passed": true
+		},
+		{
+			"message": "List face highlights the last station",
+			"passed": true
+		},
+		{
+			"message": "Next station wraps and moves the wheel to the first station",
+			"passed": true
+		},
+		{
+			"message": "Previous station wraps and moves the wheel to the last station",
+			"passed": true
+		},
+		{
+			"message": "Band endpoint and physical end-stop agree",
+			"passed": true
+		},
+		{
+			"message": "Band beginning and first station agree",
+			"passed": true
+		},
+		{
+			"message": "XR grab selects station 3 at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "Wheel reading follows radio tuning at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "Released tuning wheel retains its station at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "Physical level wheel changes playback gain at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "Mounted level wheel receives a real pointer ray at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "Mounted pointer produces the expected live gain at yaw 0",
+			"passed": true
+		},
+		{
+			"message": "XR grab selects station 3 at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Wheel reading follows radio tuning at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Released tuning wheel retains its station at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Physical level wheel changes playback gain at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Mounted level wheel receives a real pointer ray at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Mounted pointer produces the expected live gain at yaw 90",
+			"passed": true
+		},
+		{
+			"message": "Negative volume end-stop is quiet attenuation, not a dead half-turn",
+			"passed": true
+		},
+		{
+			"message": "Positive volume end-stop is zero additional attenuation",
+			"passed": true
+		},
+		{
+			"message": "Noise transition preserves the selected level",
+			"passed": true
+		},
+		{
+			"message": "Tuning during generation does not block by stopping or restarting the worker",
+			"passed": true
+		},
+		{
+			"message": "Only the latest queued station is started when generation finishes",
+			"passed": true
+		},
+		{
+			"message": "Queued station also inherits the selected level",
+			"passed": true
+		},
+		{
+			"message": "Empty station catalogue remains a noise state without modulo errors",
+			"passed": true
+		},
+		{
+			"message": "Incomplete sound generation is visible on informative faces",
+			"passed": true
+		},
+		{
+			"message": "Void retains its listening-only restriction even for playback diagnostics",
+			"passed": true
+		},
+		{
+			"message": "Actual threaded soundscape player reaches playback",
+			"passed": true
+		},
+		{
+			"message": "Worker resolves actual sound IDs and pre-generates event pools",
+			"passed": true
+		},
+		{
+			"message": "Event pool streams are not installed as continuous layers",
+			"passed": true
+		},
+		{
+			"message": "New continuous layer includes the selected overall attenuation",
+			"passed": true
+		},
+		{
+			"message": "Changing gain updates a layer already playing",
+			"passed": true
+		},
+		{
+			"message": "Repeating the same gain does not accumulate attenuation",
+			"passed": true
+		},
+		{
+			"message": "Playing a cached event does not synthesize sound on the render thread",
+			"passed": true
+		},
+		{
+			"message": "New event uses the current gain",
+			"passed": true
+		},
+		{
+			"message": "Live gain changes preserve both continuous and event base levels",
+			"passed": true
+		},
+		{
+			"message": "Bank-provided mono streams loop their full length in frames",
+			"passed": true
+		},
+		{
+			"message": "Production sound-bank ID produces real PCM samples",
+			"passed": true
+		},
+		{
+			"message": "Legacy generator-style configuration still produces PCM samples",
+			"passed": true
+		},
+		{
+			"message": "Bank-based drone honors the preset parameter dictionary",
+			"passed": true
+		},
+		{
+			"message": "Focused InteractableDemo mounts the production radio",
+			"passed": true
+		},
+		{
+			"message": "Reference keeps the physical wheel at metre scale",
+			"passed": true
+		},
+		{
+			"message": "Reference plinth stays upright under the inclined radio",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false,
+	"silent_radio_test_double": true
+}

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Zero — Already running</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the tutorial</a><a href="#museum">The existing counter</a><a href="#decisions">Decisions and checks</a></nav><p>ADA / ENDLESS MUSEUM / 3 OCTOBER 2026</p></header>
+<article><p class="step">Point Zero · one tutorial</p><h1>The counter is already here.</h1><p class="subtitle">Follow the code inside the work you encounter. Change when the number is read.</p><p>The existing console carries the lesson. The room and its artifacts remain as they were.</p></article>
+<section id="museum" class="screen"><figure><a href="museum-counter.png"><img src="museum-counter.png" alt="Point Zero’s existing frame counter, inside Endless Museum. Native Godot capture." loading="lazy"></a><figcaption>Point Zero’s existing frame counter, inside Endless Museum. Native Godot capture.</figcaption></figure>
+<div class="pair"><figure><a href="every-frame.png"><img src="every-frame.png" alt="The reduced _process() reads the engine total each frame." loading="lazy"></a><figcaption>The reduced _process() reads the engine total each frame.</figcaption></figure><figure><a href="read-once.png"><img src="read-once.png" alt="The same assignment in _ready() holds one reading. The engine keeps running." loading="lazy"></a><figcaption>The same assignment in _ready() holds one reading. The engine keeps running.</figcaption></figure></div></section>
+<article id="reading" class="chapter"><h1>Point Zero — Already running</h1>
+<p>This tutorial follows a path through <strong>Endless Museum</strong>. You will walk its halls, encounter works, and learn to build and change selected parts of what you find. Each lesson adds something you can carry into work of your own.</p>
+<p>The tutorial track follows particular artifacts and operations. Alongside it, reflective texts explore questions raised by the works: what a form makes possible, what its rules assume, and how we experience it. You can read these texts beside the lessons. Some artifacts take part in both tracks; others belong to only one.</p>
+<p>You will also encounter artifacts that appear in neither track. They are part of the field we explore: neighbours, comparisons, experiments and possibilities we have not yet followed. You can stop with them without needing a lesson to tell you what they are for.</p>
+<p>The museum is larger than the route we take through it. We begin by choosing where to pay attention.</p>
+<h2>The counter is already here</h2>
+<p>You arrive in front of a number that is already increasing. The museum was processing frames before you could see it. We will use this counter to follow what happens once and what repeats.</p>
+<p>Work in your existing Ada project, in Endless Museum's <strong>Point Zero</strong> hall. Open <code>commons/visualaid/frame_counter/frame_counter_display.gd</code>. The script already creates the console and its text in code. We will borrow that construction and change how the number is updated.</p>
+<h2>Ready</h2>
+<p>Find this function:</p>
+<pre><code class="language-gdscript">func _ready() -&gt; void:
+    _build()
+    _arrival_frame = int(Engine.get_process_frames())
+    _built = true
+    _refresh_caption()
+</code></pre>
+<p><code>func</code> defines a function: a named block of instructions. The colon begins its indented body. <code>-&gt; void</code> says this function returns no value. Godot calls <code>_ready()</code> when this node and its children are ready in the scene.</p>
+<p><code>_build()</code> is a supplied function in the same script. It creates the console, including a <code>Label3D</code> for the number, and keeps a reference to that label in <code>label</code>. The remaining lines record the panel's starting frame and prepare its caption. Leave them in place. Making the housing is work we can return to; here we are following when instructions run.</p>
+<h2>Every frame</h2>
+<p>Find <code>func _process(delta: float) -&gt; void:</code> further down the file. Replace that function, including its indented body, with these two lines. Keep the next function, <code>_count()</code>, and everything below it.</p>
+<pre><code class="language-gdscript">func _process(_delta: float) -&gt; void:
+    label.text = str(Engine.get_process_frames())
+</code></pre>
+<p>Save and restart the museum. The existing counter keeps increasing. You have reduced its update to the operation we are studying.</p>
+<p>Godot calls <code>_process()</code> on each process frame. <code>Engine.get_process_frames()</code> reads the engine's total since startup. <code>str()</code> turns that number into text; <code>label.text =</code> assigns it to the display. Each call reads a new total and replaces the previous text.</p>
+<p>Godot also passes the time interval for the frame as <code>_delta</code>, measured in seconds. <code>float</code> means a number that can have a fractional part. The leading underscore marks an input we do not use here. We are displaying a frame count, not elapsed seconds.</p>
+<h2>Read it once</h2>
+<p>Move the assignment into the end of <code>_ready()</code>. Remove the two-line <code>_process()</code> function you just added. Your <code>_ready()</code> now reads:</p>
+<pre><code class="language-gdscript">func _ready() -&gt; void:
+    _build()
+    _arrival_frame = int(Engine.get_process_frames())
+    _built = true
+    _refresh_caption()
+    label.text = str(Engine.get_process_frames())
+</code></pre>
+<p>Save and restart. The counter shows a number and holds it. Walk around: the museum still runs. You have stopped this display from receiving new readings, not stopped the engine.</p>
+<p>The number need not be zero. <code>_ready()</code> marks this node's readiness; the engine has already processed frames getting here.</p>
+<p>Put the assignment back into <code>_process()</code> and remove it from <code>_ready()</code>. Restart: the display follows the running total again. The instruction is the same. Its place determines whether it runs once or repeatedly.</p>
+<p>These are edits to the existing artifact's shared script in your working copy. When you finish experimenting, restore the original functions to keep its other readout modes available.</p>
+<p>In Point One, we will use <code>_ready()</code> again, this time to give a point a position.</p><p class="quiet"><a href="tutorial.md">Tutorial source</a> · <a href="Point_Zero.diff">Exact text diff</a></p></article>
+<details id="decisions"><summary>What changed and what was checked</summary><div><h1>Point Zero — the counter already in the hall</h1>
+<p>The tutorial begins with the existing <code>frame_counter_display</code>. Palle's correction is decisive: the museum already contains the material. The added greeting stand, its source, registry and placement have been removed. No extra artifact is required for this lesson.</p>
+<p>The approved opening about tutorial, reflective writing and the wider museum field is retained verbatim. The practical lesson now uses the artifact's actual <code>_ready()</code> and a reduced <code>_process()</code>. The student keeps the supplied construction and changes when the engine's total reaches its label. This is a close reading and modification of an existing work. It does not claim to build the whole console from scratch.</p>
+<p>The repeated update reads <code>Engine.get_process_frames()</code>; it does not create a counter beginning at node readiness. The once-only experiment holds a reading while the engine continues. Frame counts and elapsed seconds remain distinct.</p>
+<p>Canonical tutorial and implementation notes are updated. The main critical text, artifact source and map are byte-for-byte unchanged from the start of this pass. The handover now explicitly requires beginning with the existing artifact before considering a new teaching object.</p>
+<p>The native probe runs the exact printed function edits in memory on the original artifact at its museum placement. All 26 checks pass. The source is then restored in the test process; the saved production script is never edited. Native images show the original counter, its simplified repeated update and the held reading. A still image alone does not prove updating: the runtime checks compare readings across frames.</p>
+<p>The engine log also reports the project's unresolved audio-bus UID <code>uid://rwex60pqapc</code> and existing material warnings. These did not prevent the checks or images; this is not a claim that the whole project is error-free. Physical headset use and beginner comprehension remain untested. Local HTML links and anchors are checked by the publisher; browser visual inspection was not performed.</p>
+<p>Other starter-based tutorials and Day Zero's detailed setup still need their host instructions aligned individually. Continue one tutorial at a time. Point One follows only after Palle reads this correction.</p><p><a href="verification.json">Native checks</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="before/frame_counter_display.gd">Original artifact source</a> · <a href="verify.gd">Probe</a> · <a href="engine.log">Engine log</a> · <a href="source_manifest.json">Museum source record</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

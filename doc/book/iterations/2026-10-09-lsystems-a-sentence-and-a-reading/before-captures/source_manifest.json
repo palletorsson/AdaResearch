@@ -1,0 +1,26 @@
+{
+  "room": "LSystems_Grammar_Lab",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/LSystems_Grammar_Lab/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/LSystems_Grammar_Lab/map_data.json": "df193f225e813addc6d1ec357e0ce62cf1c32be0973586e6dc69278a6660261c",
+    "tools/probes/grammar_sentence_before.gd": "4d9fb1840005fc6c2f53392337109c012f14ab8d53feecf4074fbe6ad6a5378f",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "e54163c93bfab0ad230a6e654ee995c41f64ea24d2c1ba25f47cafc33478d698",
+    "ada_run/encounter_pilot/LSystems_Grammar_Lab/control.json": "e4f6e9353cc1a1128b25bf1c817246ee95c761e8faec198806eb02db7908ba09",
+    "ada_run/encounter_pilot/LSystems_Grammar_Lab/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/LSystems_Grammar_Lab/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  }
+}

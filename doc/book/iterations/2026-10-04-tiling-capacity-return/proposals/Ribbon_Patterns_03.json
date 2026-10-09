@@ -1,0 +1,40 @@
+{
+  "id": "Ribbon_Patterns_03",
+  "title": "Carry a small recipe onto fabric",
+  "storyboard": "Begin with the existing studio wall and preview skirt sharing a motif. Bring wrapping lookup and surface addresses into a small first shader: multiply mesh UV by repeat counts, add an offset, then sample the supplied texture into ALBEDO. The declared host turns four-by-four palette indices into a nearest-filtered, repeating texture and assigns materials; garment meshes and wardrobe remain supplied. Write and explain the reduced fragment calculation before comparing repeat and offset separately. UV repeats are counts per mesh, not metre spacing. Use the existing SAVE and WEAR SAVED flow to compare live edits with a stored recipe. That file saves bounded cells and settings, not arbitrary shader code. Carry this small sampling vocabulary to Shaders; cut-out, finish and deformation remain optional encounters.",
+  "storyboard_short": "Use existing studio wall/skirt host. Teach tiny fragment: UV×repeat+offset → repeating nearest texture → ALBEDO. Supply palette-index→texture conversion, material assignment, meshes/wardrobe. Predict repeat versus offset; UV counts are not metres. SAVE stores bounded cells/settings; WEAR explicitly applies snapshot to Skirt. No shader-code export or general garment transfer. Cut-out/finish/deformation optional; full companion absent.",
+  "mode": "make",
+  "brings": [
+    "motif texture",
+    "surface address mapping"
+  ],
+  "learns": [
+    "first shader sampling with an explained texture/material host",
+    "mesh UV repeat counts versus physical spacing",
+    "saved recipe data versus shader implementation"
+  ],
+  "carries": "A small repeat-and-offset sampling operation plus a clearly bounded saved appearance recipe.",
+  "supplied": [
+    "Recipe.material: palette indices to texture and shader uniforms",
+    "existing wall and preview skirt material assignment",
+    "wardrobe, saving and supported Skirt receiver"
+  ],
+  "artifact_refs": [
+    "fabric_shader_studio",
+    "super_drag_mirror",
+    "drag_catwalk"
+  ],
+  "review_note": "Use existing Recipe.material and studio.refresh as the explained host. Current SAVE accepts repeats 4/8 and offset 0/.125 plus supported cells/settings; it excludes palette, shader code, meshes and LOOK. The current preview silhouette is chosen separately on wear. Select the reduced fragment excerpt and exact learner edit location before the full lesson; no new host is needed. All three Ribbon tutorial.md files are absent. Do not require finish or vertex deformation before the later Shaders sequence.",
+  "independent_check": "Predict what doubling horizontal repeats does while offset stays fixed, then shift offset without changing the count. Save a supported recipe, edit the live source and predict which skirt changes.",
+  "prior_maps": [
+    "Pattern_Foundry",
+    "Array_Patterns",
+    "Ribbon_Patterns_02"
+  ],
+  "source_refs": [
+    "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+    "commons/artifacts/fabric_shader_studio/fabric_recipe.gd",
+    "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd"
+  ],
+  "change_reason": "Give the sequence a small, usable shader ending without implying the whole studio must be rebuilt."
+}

@@ -1,0 +1,179 @@
+{
+  "chapter": "transformation",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "map": "Trans_Pre",
+      "pearl": "trans pre",
+      "hero": "pick_up_cube",
+      "lines": [
+        {
+          "text": "Observe the still cube before collecting it; three moving demonstrations remain. Add translation, rotation and scale, then climb to four finished pickups.",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "pick_up_cube",
+          "text": "The first cube holds still. Pause before approaching and watch a corner: nothing shifts. Then walk into it: even without an animation, it can be collected. Keep its shape in mind as you go to the next one.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Introduction",
+      "pearl": "trans introduction",
+      "hero": "tc",
+      "lines": [
+        {
+          "text": "Read three crossings while an active head crab shares the room. Then move the far bank while the plank keeps its motion: what makes the crossing possible?",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "tc",
+          "text": "A cube travels between the banks. Let it make a journey without you. Its top meets the floor at each end; between them, it is a small piece of floor with nothing beside it.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "sc",
+          "text": "At the next gap, the green cube stays in one place. Watch its upper face. It rises as the cube grows; its edges approach the banks.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "rc",
+          "text": "The third gap has a thin orange plank. Wait through a turn before stepping onto it. Across the lane, it reaches towards the sides. After a quarter-turn, its long dimension reaches along your route.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "adjustable_landing",
+          "text": "Before leaving, take the side aisle to the small control marked MOVE THE BANK. The far landing rests on rails. Slide BANK a little, then watch the orange plank make its usual turn.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Translation",
+      "pearl": "trans translation",
+      "hero": "tc",
+      "lines": [
+        {
+          "text": "Thirteen pickups sit on seven carrier routes through x, y and z. Two exit mechanisms share a destination but permit different journeys; the turning torus anticipates rotation.",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "tc",
+          "text": "The first carrier travels into depth. Step aboard and let the room pass. Look at the cube under your feet: it keeps its facing and size. Along this journey, only its z coordinate changes.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "pick_up_cube",
+          "text": "The small pickups have been waiting along these journeys. They rise and fall without turning. Their small vertical loop continues as the carrier brings you into contact with them, and each collected cube disappears with a sound.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "translation_cube_demo",
+          "text": "Step onto the final terrace. Two small door mechanisms wait at hand height. Their handles have the same distance to travel upwards and sideways. Try taking the diagonal.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Rotation",
+      "pearl": "trans rotation",
+      "hero": "rotation_wall_crossings",
+      "lines": [
+        {
+          "text": "Compare a level Y bridge and upright X/Z rides, two body widths in rotated arrays, a tunnel and five carousel profiles. Which dimensions make space for this body?",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "rotation_wall_crossings",
+          "text": "The green blade turns around y. Its centre stays over the gap while its ends sweep towards the grid. At ninety degrees it pauses. Walk across the length that has arrived in your direction of travel.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "rotation_array_compare",
+          "text": "Four bands each contain two columns and six rows of cubes. Begin at zero. Choose a column and walk forward along z.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "boolean_tunnel",
+          "text": "Look through the first hollow cube. Four more stand beyond it. Walk inside and follow a corner with your eye.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "carousel_cake",
+          "text": "Step out beside the turning stacks. Follow a stripe on a low layer, then near the top. Stand still. Their relations keep changing.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Scale",
+      "pearl": "trans scale",
+      "hero": "scale_me",
+      "lines": [
+        {
+          "text": "Take the bottle: the room changes to four times its size in one update, then your body is relocated onto the table. Descend and compare the enlarged doorway with a fixed museum frame.",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "scale_me",
+          "text": "In the rotation hall, a wider rim travelled farther in a revolution. Here, something waits to be taken.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Body",
+      "pearl": "trans body",
+      "hero": "approach_wall",
+      "lines": [
+        {
+          "text": "Approach turns slats and shrinks blocks; contact cuts an open-topped trench in a low lattice. Step clear to see reversible openings return; the cut remains.",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "approach_wall",
+          "text": "A wall of upright slats stands across the way. There is no handle, no plate, no light that turns green. Walk at it.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "carve_grid",
+          "text": "The next throat holds a low block of small cubes, about 1.3 metres high. You can look over it. The lattice reaches across the way, but it does not enclose your head.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "approach_scale",
+          "text": "Nine blocks, set closer together than a pair of shoulders. At rest the gap between neighbours is thirty-five centimetres, which is not \"tight\". It is shut.",
+          "by": "final.md encounter"
+        }
+      ]
+    },
+    {
+      "map": "Trans_Pit",
+      "pearl": "trans pit",
+      "hero": "pusher_block",
+      "lines": [
+        {
+          "text": "Three clear pusher lanes, turning gates and synchronised growers change access on level ground. Try the timed route or its bypass; ask which body has room and time to pass.",
+          "by": "transformation alignment 2026-09-17"
+        },
+        {
+          "token": "pusher_block",
+          "text": "Three red blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "rc",
+          "text": "The middle room has two orange turning slabs. Watch one end while the centre stays put. It takes two seconds to make a quarter-turn, waits, then reverses. One slab pauses for four seconds; the other for three.",
+          "by": "final.md encounter"
+        },
+        {
+          "token": "grower_block",
+          "text": "The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway. Watch them together first; the repetition makes the size change easier to read.",
+          "by": "final.md encounter"
+        }
+      ]
+    }
+  ]
+}

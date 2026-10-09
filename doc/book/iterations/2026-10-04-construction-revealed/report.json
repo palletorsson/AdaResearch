@@ -1,0 +1,73 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Uses nine surfaces from the existing generator"
+		},
+		{
+			"passed": true,
+			"test": "Triangle count agrees with the source"
+		},
+		{
+			"passed": true,
+			"test": "Completed reveal preserves source vertices exactly"
+		},
+		{
+			"passed": true,
+			"test": "Re-uploaded normals stay within 0.001 packing tolerance"
+		},
+		{
+			"passed": true,
+			"test": "Face growth exposes a proper subset"
+		},
+		{
+			"passed": true,
+			"test": "Sections separate spatially"
+		},
+		{
+			"passed": true,
+			"test": "Array shares the source mesh at six distinct positions"
+		},
+		{
+			"passed": true,
+			"test": "Colonnade has two completed beams"
+		},
+		{
+			"passed": true,
+			"test": "Camera can orbit the three-dimensional construction"
+		},
+		{
+			"passed": true,
+			"test": "Pause freezes construction and camera time"
+		},
+		{
+			"passed": true,
+			"test": "Step wraps to the next operation while paused"
+		},
+		{
+			"passed": true,
+			"test": "Profile 0 reveals all source surfaces"
+		},
+		{
+			"passed": true,
+			"test": "Profile 1 reveals all source surfaces"
+		},
+		{
+			"passed": true,
+			"test": "Profile 2 reveals all source surfaces"
+		},
+		{
+			"passed": true,
+			"test": "Profile 3 reveals all source surfaces"
+		},
+		{
+			"passed": true,
+			"test": "Profile 4 reveals all source surfaces"
+		}
+	],
+	"failures": [],
+	"max_normal_error": 0.000127852792502381,
+	"passed": true,
+	"scope": "Actual source mesh reused and compared; separate filmed study. No changes to museum map or source generator. Headset test not performed.",
+	"source": "commons/artifacts/resolution_colonnade/resolution_totem.gd"
+}

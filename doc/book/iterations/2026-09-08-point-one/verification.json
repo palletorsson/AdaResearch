@@ -1,0 +1,64 @@
+{
+  "scope": "Point One restoration and prose trial; no learner or headset acceptance.",
+  "python_regressions": {
+    "museum_progress": 14,
+    "museum_actions": 13,
+    "status": "passed"
+  },
+  "plan_refresh": {
+    "room": "Point_One",
+    "placements": 16,
+    "changed_paths": [],
+    "idempotent": true,
+    "unrelated_rows_preserved": true
+  },
+  "role_change_scope": {
+    "roles": [
+      "Point_One"
+    ],
+    "order": [
+      "Point_One"
+    ]
+  },
+  "encyclopedia": {
+    "compose": "New final.md loaded with 12 artifact-tagged regions",
+    "progress": "16 grid placements; 12 references; no absent tags; learner baseline unverified"
+  },
+  "runtime": {
+    "isolated": {
+      "passed": 12,
+      "total": 12
+    },
+    "museum": {
+      "passed": 38,
+      "total": 39,
+      "remaining_failure_in_historical_report": "stage_1_display_fits",
+      "resolution": "Title shortened; separate actual-screen run passes all five stages."
+    },
+    "support_rays": 3,
+    "short_approaches": 2,
+    "final_screen_layout": {
+      "passed": 5,
+      "total": 5
+    },
+    "learner_verified": false
+  },
+  "queue": {
+    "action": "point-one-visible-hidden",
+    "status": "ready",
+    "position": 1,
+    "current_evidence_files": 16,
+    "other_actions_preserved": 9,
+    "other_iteration_items_preserved": 27
+  },
+  "current_invisible_point": {
+    "rule": "Never draw the point; no marker is created.",
+    "report": "always-invisible.json",
+    "component_checks_passed": 11,
+    "sampled_process_frames": 914,
+    "elapsed_ms": 6301,
+    "supersedes": "Earlier timer and appearance checks for this artifact only.",
+    "museum_rewalk": false,
+    "learner_verified": false
+  }
+}

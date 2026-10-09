@@ -1,0 +1,47 @@
+{
+  "id": "Vectors_Act2_VectorArithmetic",
+  "title": "Keep the component along a direction",
+  "storyboard": "Start with SWAP, SHIFT and SAME at the subtraction stage, reusing the measured gap rather than adding another construction. The projection station already reads this source within the same hall. RESET gives it a unit rail; SLIDE moves A across that rail while the gold part stays fixed and the pink remainder changes. In the supplied refresh path, compute gap.dot(axis), form kept=axis*gap.dot(axis), then remainder=gap-kept. Recombine the parts before trying TURN and FLIP. Carry a signed along-axis reading and the remainder it cannot describe. The FRIEND threshold and stationary torque wheel remain short comparisons about the uses of a calculation; neither adds a required controller or cross-product lesson.",
+  "storyboard_short": "Return to SWAP/SHIFT/SAME, then use the actual gap-to-projection connection. Teach signed dot reading, kept vector and subtracted remainder in the existing refresh path; recombine and predict SLIDE/TURN/FLIP. Supply unit rail, controls and diagrams. Carry a projection plus remainder. Keep FRIEND and torque as brief comparisons, not extra builds or evidence of mastered cross products.",
+  "mode": "make",
+  "brings": [
+    "displacement subtraction",
+    "compatible vector addition",
+    "magnitude and a nonzero unit direction"
+  ],
+  "learns": [
+    "dot product as signed distance along a unit axis",
+    "projection and perpendicular remainder",
+    "changing the receiving axis changes the retained component"
+  ],
+  "carries": "An along-axis scalar and projection/remainder pair that reconstruct the input.",
+  "supplied": [
+    "vector_sub with lesson:room_gap and projection_shadow with lesson:room_projection",
+    "same-hall source lookup and contributions_changed connection",
+    "nonzero unit rail and RESET/SLIDE/TURN/FLIP/RULE controls",
+    "scaled floor/wall diagrams; existing dot_aligner and torque_crank comparisons"
+  ],
+  "artifact_refs": [
+    "vector_sub",
+    "dot_aligner",
+    "projection_shadow",
+    "torque_crank"
+  ],
+  "review_note": "This is a real same-hall connection, not transport from the previous room: connect_source() finds the source under the same em_map owner and subscribes refresh(). Coordinates are model X/forward, displayed at half scale, not visitor positions. TURN changes the rail by 30 degrees; bounded SLIDE requests move source A perpendicular by 0.5. FRIEND's 0.985 threshold and torque's unit-direction cross product are independent demonstrations, not subscribers. Keep normalization and subtraction as returns; the substantial new lesson is projection with its remainder.",
+  "prior_maps": [
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations",
+    "Trans_Translation"
+  ],
+  "independent_check": "After RESET, predict what SLIDE changes and check kept+remainder=gap. Then FLIP: explain why the signed coordinate reverses while the kept vector does not.",
+  "source_refs": [
+    "commons/artifacts/vector_op_console/gap_projection_room.gd",
+    "commons/artifacts/vector_op_console/vector_op_console.gd",
+    "commons/artifacts/projection_shadow/projection_shadow.gd",
+    "commons/artifacts/dot_aligner/dot_aligner.gd",
+    "commons/artifacts/torque_crank/torque_crank.gd",
+    "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+    "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md"
+  ],
+  "change_reason": "A single live relation supports reuse and an independent check. The critical questions survive without requiring mastery of every nearby instrument."
+}

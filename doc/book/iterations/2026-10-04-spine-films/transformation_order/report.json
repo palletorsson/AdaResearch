@@ -1,0 +1,153 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@43"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@44"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@47"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@48"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@50"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@53"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@43"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@44"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@47"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@48"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@50"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@53"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@43"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@44"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@47"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@48"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@50"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@53"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@43"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@44"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@47"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@48"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@50"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@53"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"different_outcomes": true,
+		"orders": [
+			"[X: (0.707107, 0.0, -0.707107), Y: (0.0, 1.0, 0.0), Z: (0.707107, 0.0, 0.707107), O: (1.0, 0.0, 0.0)]",
+			"[X: (0.707107, 0.0, -0.707107), Y: (0.0, 1.0, 0.0), Z: (0.707107, 0.0, 0.707107), O: (0.707107, 0.0, -0.707107)]"
+		],
+		"source_geometry": true,
+		"source_pair": 0
+	},
+	"id": "transformation_order",
+	"passed": true,
+	"phases": [
+		"One body, two beginnings",
+		"First operation",
+		"Second operation",
+		"Bring the results together"
+	],
+	"source_paths": [
+		"res://commons/artifacts/transform_composition_workbench/transform_composition_workbench.gd"
+	]
+}

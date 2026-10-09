@@ -1,0 +1,202 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="615fef665fc6a9423001b923d9a7d7be708dc4d6063bb0412baee3d7fa1ae699"><title>commons/artifacts/spine_studies/museum_witnesses.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/museum_witnesses.gd</p><pre><code>extends &quot;res://commons/artifacts/spine_studies/study_forms.gd&quot;
+## Three cameras share the resident museum&#x27;s World3D. No substitute scene.
+## The last two screens reuse camera A with an actual frame buffer and a held image.
+const SCREEN_LAYER := 1 &lt;&lt; 19
+const INTERVAL := 0.25
+const MAX_FRAMES := 30
+var delay_seconds := 3.0
+var view_index := 0
+var held := false
+var sources: Array[Node3D] = []
+var viewports: Array[SubViewport] = []
+var cameras: Array[Camera3D] = []
+var surfaces: Array[StandardMaterial3D] = []
+var labels: Array[Label3D] = []
+var frames: Array = []
+var latest: Dictionary = {}
+var held_frame: Dictionary = {}
+var delayed_frame: Dictionary = {}
+var pending := false
+var since_sample := 0.0
+var last_sample := -1.0
+var generation := 0
+var hall: Node3D
+var ready_sources := false
+var source_retry := 0.0
+var handles: Array[RigidBody3D] = []
+var home_poses: Array[Transform3D] = []
+var return_message := &quot;&quot;
+
+func _ready() -&gt; void:
+	# Five independent stands leave a route between images.
+	var places := [Vector3(-5.0,2.4,-1),Vector3(0,4.0,-3.0),Vector3(5.0,2.4,-0.5),Vector3(-2.75,1.35,2.15),Vector3(2.75,1.45,2.2)]
+	for i in places.size():
+		var at: Vector3 = places[i]
+		block(at,Vector3(3.45,2.02,0.20),Color(&quot;1f2025&quot;),true)
+		for side in [-1,1]:
+			block(Vector3(at.x+side*1.45,at.y*0.5,at.z+0.1),Vector3(0.05,at.y,0.05),Color(&quot;888991&quot;),true)
+			block(Vector3(at.x+side*1.45,0.04,at.z+0.1),Vector3(0.32,0.08,0.95),Color(&quot;74727a&quot;),true)
+		var screen := MeshInstance3D.new(); var quad := QuadMesh.new(); quad.size = Vector2(3.2,1.8)
+		screen.mesh = quad; screen.position = at+Vector3(0,0,0.112); screen.layers = SCREEN_LAYER
+		var surface := material(Color.WHITE,true); screen.material_override = surface; surfaces.append(surface); add_child(screen)
+		block(at+Vector3(0,1.23,0),Vector3(3.45,0.40,0.16),Color(&quot;1f2025&quot;))
+		labels.append(inscription(&quot;SOURCE NOT READY&quot;,at+Vector3(0,1.23,0.12),0.0026,Color(&quot;f4e3ea&quot;)))
+	inscription(&quot;THE SAME ROOM, AT DIFFERENT TIMES&quot;,Vector3(0,5.8,-3.0),0.0045,Color(&quot;eadfe5&quot;))
+	inscription(&quot;A + B / pick up and aim     C / fixed     D / delayed A     E / held A&quot;,Vector3(0,5.4,-3.0),0.0026,Color(&quot;eadfe5&quot;))
+	for i in 3:
+		var viewport := SubViewport.new(); viewport.size = Vector2i(384,216)
+		viewport.world_3d = get_world_3d(); viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+		add_child(viewport); viewports.append(viewport)
+		var camera := Camera3D.new(); viewport.add_child(camera); camera.current = true
+		camera.fov = 63; camera.near = 0.08; camera.far = 65
+		camera.cull_mask = 0xFFFFF &amp; ~SCREEN_LAYER; cameras.append(camera)
+		surfaces[i].albedo_texture = viewport.get_texture()
+	for i in 2:
+		var handle: RigidBody3D = load(&quot;res://commons/artifacts/spine_studies/witness_camera.gd&quot;).new()
+		handle.name = &quot;PortableCamera&quot;+char(65+i); handle.set(&quot;channel&quot;,char(65+i))
+		add_child(handle); handles.append(handle)
+	find_sources.call_deferred()
+
+func find_sources() -&gt; void:
+	hall = get_parent()
+	while hall and not hall.has_meta(&quot;em_map&quot;): hall = hall.get_parent() as Node3D
+	if not hall: return
+	sources.clear()
+	for node in hall.find_children(&quot;*&quot;,&quot;Node3D&quot;,true,false):
+		var script: Script = node.get_script()
+		if script and script.resource_path.ends_with(&quot;/situated_readout.gd&quot;): sources.append(node)
+	sources.sort_custom(func(a: Node3D,b: Node3D): return str(a.get_path()) &lt; str(b.get_path()))
+	ready_sources = sources.size() &gt;= 3
+	if ready_sources:
+		position_cameras()
+		build_camera_stands()
+
+func camera_is_held() -&gt; bool:
+	for handle in handles:
+		if handle.call(&quot;held_by_visitor&quot;): return true
+	return false
+
+func position_cameras() -&gt; void:
+	home_poses.clear()
+	for i in cameras.size():
+		var target: Node3D = sources[(view_index+i)%sources.size()]
+		# Readouts face local +Z. The camera stands in the real hall in front of it.
+		var eye := target.to_global(Vector3(0.9,1.65,3.5))
+		cameras[i].global_position = eye
+		cameras[i].look_at(target.to_global(Vector3(0,1.05,0)))
+		if i &lt; handles.size():
+			var pose := cameras[i].global_transform * Transform3D(Basis.IDENTITY,Vector3(0,0,0.32))
+			home_poses.append(pose); handles[i].global_transform = pose
+	generation += 1; frames.clear(); latest.clear(); delayed_frame.clear()
+	surfaces[3].albedo_texture = null
+
+func build_camera_stands() -&gt; void:
+	# Fixed slim supports stay at the initial camera locations when cameras travel.
+	if has_node(&quot;CameraStands&quot;): return
+	var stands := Node3D.new(); stands.name = &quot;CameraStands&quot;; add_child(stands)
+	for i in handles.size():
+		var at := to_local(handles[i].global_position)
+		var height := maxf(0.4,at.y-0.13)
+		var stem := block(Vector3(at.x,height*0.5,at.z),Vector3(0.07,height,0.07),Color(&quot;85818a&quot;),true); stem.reparent(stands)
+		var foot := block(Vector3(at.x,0.025,at.z),Vector3(0.42,0.05,0.42),Color(&quot;62606a&quot;),true); foot.reparent(stands)
+		var label := inscription(&quot;CAMERA &quot;+char(65+i)+&quot; / TAKE A VIEW&quot;,Vector3(at.x,1.30,at.z+0.24),0.0011)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED; label.reparent(stands)
+
+func sync_portable_cameras() -&gt; void:
+	for i in handles.size(): cameras[i].global_transform = handles[i].call(&quot;lens_pose&quot;)
+
+func return_cameras() -&gt; bool:
+	if camera_is_held():
+		return_message = &quot;Release cameras A and B before returning them.&quot;
+		return false
+	for i in handles.size():
+		handles[i].global_transform = home_poses[i]
+		handles[i].linear_velocity = Vector3.ZERO; handles[i].angular_velocity = Vector3.ZERO
+	sync_portable_cameras()
+	return_message = &quot;Cameras returned. Held image kept.&quot;
+	return true
+
+func source_name(i: int) -&gt; String:
+	if not ready_sources or not is_instance_valid(sources[(view_index+i)%sources.size()]): return &quot;unavailable&quot;
+	if i &lt; handles.size():
+		var at := hall.to_local(cameras[i].global_position)
+		return &quot;camera %s / %.1f, %.1f, %.1f m&quot; % [char(65+i),at.x,at.y,at.z]
+	return &quot;fixed C / readout &quot; + str((view_index+i)%sources.size()+1)
+
+func _process(delta: float) -&gt; void:
+	if not ready_sources:
+		source_retry += delta
+		if source_retry &gt; 1.0: source_retry = 0.0; find_sources()
+		return
+	sync_portable_cameras()
+	var viewer := get_viewport().get_camera_3d()
+	var active := is_visible_in_tree() and viewer != null and viewer.global_position.distance_to(global_position) &lt; 23.0
+	for target in sources:
+		if not is_instance_valid(target) or not target.is_visible_in_tree(): active = false
+	if not active:
+		for i in 3: labels[i].text = &quot;RECORDING PAUSED / source or viewer unavailable&quot;
+		return
+	since_sample += delta
+	if since_sample &gt;= INTERVAL and not pending:
+		since_sample = 0.0
+		capture_frames()
+	update_labels()
+
+func capture_frames() -&gt; void:
+	pending = true
+	var ticket := generation
+	var now := Time.get_ticks_msec()/1000.0
+	var exposure_pose := cameras[0].global_transform
+	var exposure_source := source_name(0)
+	if last_sample &gt;= 0.0 and now-last_sample &gt; 1.0:
+		frames.clear(); delayed_frame.clear(); surfaces[3].albedo_texture = null
+	for viewport in viewports: viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+	await RenderingServer.frame_post_draw
+	if not is_inside_tree(): return
+	pending = false
+	if ticket != generation: return
+	var image := viewports[0].get_texture().get_image()
+	if image == null or image.is_empty(): return
+	latest = {&quot;time&quot;:now,&quot;image&quot;:image,&quot;source&quot;:exposure_source,&quot;pose&quot;:exposure_pose}
+	frames.append(latest)
+	while frames.size() &gt; MAX_FRAMES: frames.pop_front()
+	last_sample = now
+	for frame: Dictionary in frames:
+		if float(frame.time) &lt;= now-delay_seconds: delayed_frame = frame
+	if not delayed_frame.is_empty(): set_image(3,delayed_frame.image)
+	if not held: set_image(4,image)
+	update_labels()
+
+func set_image(index: int, image: Image) -&gt; void:
+	var texture := surfaces[index].albedo_texture as ImageTexture
+	if texture == null: surfaces[index].albedo_texture = ImageTexture.create_from_image(image)
+	else: texture.update(image)
+
+func update_labels() -&gt; void:
+	var seconds := maxf(last_sample,0.0)
+	for i in 3: labels[i].text = &quot;%s / LIVE · %.2fs\n%s / actual museum&quot; % [char(65+i),seconds,source_name(i)]
+	labels[3].text = &quot;D / BUFFERING %.0f s\nsame camera as A&quot; % delay_seconds
+	if not delayed_frame.is_empty(): labels[3].text = &quot;D / %.2fs · %.2f s behind A\n%s&quot; % [delayed_frame.time,seconds-float(delayed_frame.time),delayed_frame.source]
+	labels[4].text = &quot;E / FOLLOWING A\nHOLD keeps an actual frame&quot;
+	if held and not held_frame.is_empty(): labels[4].text = &quot;E / HELD at %.2fs\n%s / %.2f s since exposure&quot; % [held_frame.time,held_frame.source,Time.get_ticks_msec()/1000.0-float(held_frame.time)]
+
+func control(index: int) -&gt; void:
+	match index:
+		0:
+			if camera_is_held(): return_message = &quot;Release cameras before choosing another starting view.&quot;; return
+			if ready_sources: view_index = (view_index+1)%sources.size(); position_cameras()
+		1:
+			delay_seconds = 6.0 if delay_seconds == 3.0 else (1.0 if delay_seconds == 6.0 else 3.0)
+			delayed_frame.clear(); surfaces[3].albedo_texture = null
+		2:
+			if not latest.is_empty():
+				held = not held
+				if held: held_frame = latest.duplicate(); set_image(4,held_frame.image)
+		3:
+			if ready_sources: return_cameras()
+		_:
+			if camera_is_held(): return_message = &quot;Release cameras before resetting the study.&quot;; return
+			held = false; held_frame.clear(); delay_seconds = 3.0; view_index = 0
+			if ready_sources: position_cameras()
+	update_labels()
+</code></pre></body></html>

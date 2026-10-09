@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "name": "Angle composition and original each build fifteen actual segments",
+      "passed": true
+    },
+    {
+      "name": "The same segment lengths survive the new angle rule",
+      "passed": true
+    },
+    {
+      "name": "Rendered cylinders and joints remain finite and attached",
+      "passed": true
+    },
+    {
+      "name": "Noise alters endpoint positions despite unchanged count and lengths",
+      "passed": true
+    },
+    {
+      "name": "Zero influence reconstructs original local endpoints",
+      "passed": true
+    },
+    {
+      "name": "Same seed and receiver choices reproduce geometry",
+      "passed": true
+    },
+    {
+      "name": "A second explicit seed changes this composition",
+      "passed": true
+    },
+    {
+      "name": "The independently held original is unchanged",
+      "passed": true
+    },
+    {
+      "name": "Requested depth -3 stays bounded with valid geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 1 stays bounded with valid geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 3 stays bounded with valid geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 4 stays bounded with valid geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 999 stays bounded with valid geometry",
+      "passed": true
+    },
+    {
+      "name": "Excess positive influence respects declared fifteen-degree offset cap",
+      "passed": true
+    },
+    {
+      "name": "Moving and turning the station preserves the declared local recipe",
+      "passed": true
+    },
+    {
+      "name": "An idle update does not animate the static noise recipe",
+      "passed": true
+    },
+    {
+      "name": "Copied PointBody still acquires the actual XRTools pickup",
+      "passed": true
+    },
+    {
+      "name": "Carried hand interaction can turn the composed tree",
+      "passed": true
+    },
+    {
+      "name": "Hand edit preserves the other subtree and all attachments",
+      "passed": true
+    },
+    {
+      "name": "Released grip parks at the resulting branch tip",
+      "passed": true
+    },
+    {
+      "name": "Baseline remains untouched after all hand experiments",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "One agent-authored response to the open task. Real Godot geometry and synthetic XRTools hand poses. Not independent student work, a museum placement or a test of aesthetic value."
+}

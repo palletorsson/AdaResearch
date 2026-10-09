@@ -1157,3 +1157,5 @@ Python, body in Godot.
 - 2026-07-18 14:19 · **dig** · dig report symmetry: LB=kaleidoscope, pattern_maker_station; 0 promotions proposed, 2 blanks, 8 buried with reasons
 - 2026-07-18 14:19 · **dig** · dig report formfinding: LB=cable_builder, gradient_descent_well; 1 promotions proposed, 1 blanks, 2 buried with reasons
 - 2026-07-18 14:19 · **dig** · dig report boolean_surfaces: LB=csg_architecture_cavity, csg_difference_demo; 0 promotions proposed, 0 blanks, 0 buried with reasons
+- 2026-09-05 15:59 · **build** · chapter rebuilt: transformation
+- 2026-09-19 20:33 · **note** · Reveal-timing play pilot: CA_SoftRules now starts with A/B and reveals exchange settings on the first EXCHANGE B action. 31 synthetic desktop-pointer runtime checks passed; manuscript and map retained. Evidence: doc/space/reveal-play-pilot-2026-09-19/README.md. Headset and learner checks remain open.

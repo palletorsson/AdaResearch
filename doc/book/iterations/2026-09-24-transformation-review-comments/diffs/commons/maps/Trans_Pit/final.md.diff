@@ -1,0 +1,49 @@
+--- before/commons/maps/Trans_Pit/final.md
++++ commons/maps/Trans_Pit/final.md
+@@ -10,7 +10,7 @@
+ 
+ Three red blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.
+ 
+-A fraction marks its place along the journey: zero at the start, one at the far end. The script places the block between those endpoints:
++The script keeps a fraction, `_t`, for its place along the journey: zero at the start, one at the far end. It places the block between those endpoints:
+ 
+ ```gdscript
+ var target_pos: Vector3 = _start_pos.lerp(_end_pos, _t)
+@@ -19,7 +19,7 @@
+ 
+ Each block travels two metres, but they take different times and their pauses differ. Two advance along Z; the third goes the other way. An opening that works for the first does not give you the timing of the next.
+ 
+-From outside, a pusher changes position and keeps its dimensions. From inside, standing where it wants to be, it is a wall that arrives. Look at the space beside its path too. The eastern passage lets you walk around. Try a lane, then return to where you can watch.
++From outside, a pusher changes position and keeps its dimensions. From inside, standing where it wants to be, it is a wall that arrives. Look at the space beside its path too. Open floor along the side wall lets you walk around the lanes. Try a lane, then return to where you can watch.
+ 
+ <!-- @ -->
+ 
+@@ -59,7 +59,9 @@
+ 
+ All three share the same clock rate, moving from thirty centimetres to three and a half metres on a side. Watch one complete small–large–small cycle, then choose when to approach.
+ 
+-![A fixed view down a lane: a small green cube, then the same cube enlarged across the view.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/the-room-keeps-time.png)
++![At its smallest, the green cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
++
++![At full size, the same cube fills the view from the same position.](/book-review/doc/book/figures/Trans_Pit/growers-large.png)
+ 
+ *The same view at two moments in the cycle. At its smallest, the cube leaves the final door visible beyond it. At its largest, it fills the view. The camera has not moved.*
+ 
+@@ -87,7 +89,7 @@
+ 
+ It moves sideways and up. It turns through a quarter-turn. Then it becomes smaller, drawing its armour into a recess beside the opening. The frame has stayed still. The passage has changed.
+ 
+-![The same museum door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png)
++![The same door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png)
+ 
+ *Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
+ 
+@@ -103,7 +105,7 @@
+ 
+ `side` gives the leaves opposite directions. The local Z axis points through the doorway, so these turns happen across its face. Each leaf ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.
+ 
+-Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again. No pickup count decides whether you may enter.
++Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again.
+ 
+ A moving boundary has become a welcome. That welcome, too, has been written: how near you must come, how much room the frame leaves, how long the door waits. What else could these three operations make possible?
+ 

@@ -1,0 +1,45 @@
+--- before/Tutorial_Disco/final.md
++++ current/Tutorial_Disco/final.md
+@@ -2,25 +2,27 @@
+ 
+ How can an arrangement that sits still make a rhythm?
+ 
+-You have seen slots hold values and a motif repeat across floors and walls. Here the floor is black and white again. Stand still and let the pattern move beneath you. Then stop one of its clocks.
++In the last two halls, a small change in an instruction could rearrange a field. You could leave it there and look. Here the floor changes while you are still looking. Stand on a square and wait for it to become black, then white, then black again. Nothing has passed beneath your feet.
+ 
+ <!-- @disco_controls -->
+ 
+-Press PLAY / HOLD at the floor console. Watch the pattern settle. Press ONE STEP: the next arrangement arrives without waiting for the automatic clock. Change PATTERN while holding. CHECKER alternates the tiles, ROWS visits one row at a time, DIAGONALS sends bands across the addresses, and SNAKE follows a route that reverses direction in every other row.
+-
+-Start playback, then change SPEED. The same rule can hurry or wait. This small expression supplies the checker:
++At the floor console, press PLAY / HOLD. The checker settles. ONE STEP exchanges its black and white values; a second step brings them back. The whole field changes, although the instruction stays the same:
+ 
+ ```gdscript
+ return (x+z+phase)%2
+ ```
+ 
+-Two spatial indices and a changing phase enter the same remainder operation. The tiles have not moved; the values displayed at their addresses have changed. Stand on one tile and watch what arrives there. Then cross the floor and let your movement meet its movement.
++`x` and `z` name a square on this floor. The new input is `phase`, a count that advances with each step. Add one and the remainder changes; add another and it returns. On the tiling desk, we compared instructions at the same addresses. Here we keep an instruction and let another input carry it through time.
++
++Start playback, then change SPEED. The same two arrangements can alternate slowly or quickly. The square you chose keeps its place through both. Cross the floor and let your movement meet the returning pattern.
+ 
+ ![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-review/doc/book/figures/Tutorial_Disco/fixed-addresses-changing-values.png)
+ 
+ *One step apart. Every tile keeps its place; black and white exchange addresses. Another step brings this checker back.*
+ 
+-Change PATTERN once more, past SNAKE, to SUPER TRIANGLE. A diagonal divides each square into black and white. Let it play. Neighbouring triangles turn toward one another; a chevron appears, then a diamond. Later the motif grows across several tiles. Keep your foot in place and follow the shape that now includes it.
++With the floor held, change PATTERN. ROWS lights one row at a time. DIAGONALS groups the addresses into bands; SNAKE carries a strip along a route that reverses at the end of each row. ONE STEP lets you follow each rule slowly before releasing it to the clock.
++
++After SNAKE comes SUPER TRIANGLE. The diagonal tile from the earlier halls returns. Let it play. Neighbouring triangles turn toward one another; a chevron appears, then a diamond. Later the motif grows across several tiles. Keep your foot in place and follow the shape that now includes it.
+ 
+ Press HOLD during a turn. The floor keeps that unfinished arrangement. ONE STEP takes it to the next pose. The square joints still mark the old addresses, though your eye can join the triangles into another figure. How large is the thing you are following: one tile, four, the floor? The array supplies places to change; it does not tell us where a figure must end.
+ 
+@@ -28,7 +30,7 @@
+ 
+ *Six moments in the same movement. The triangles turn and gather into larger figures; the floor beneath the foot stays level.*
+ 
+-The console controls this visual clock. The sequencer stands near the entrance, six metres to the right of the console as you enter. It has another clock. Begin with one cell and listen for the time it becomes audible.
++The sequencer stands near the entrance, six metres to the right of the console as you enter. Here you can place an event in a returning count. Begin with one cell and listen for the time it becomes audible.
+ 
+ <!-- @step_sequencer -->
+ 

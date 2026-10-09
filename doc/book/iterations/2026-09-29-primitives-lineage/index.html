@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Primitives · a closer lineage</title><style>
+:root{color-scheme:light}body{margin:0;background:#f3efe8;color:#29282a;font:19px/1.65 Georgia,serif}main{max-width:1200px;margin:auto;padding:45px 25px 90px}h1{font-weight:400;font-size:clamp(40px,6vw,76px);line-height:1.08;max-width:950px}h2{font-weight:400;font-size:34px;margin-top:65px}h3{font-weight:400;font-size:25px}p{max-width:820px}.eyebrow,nav,figcaption,small,footer{font:13px/1.6 system-ui,sans-serif;color:#696069}a{color:#864361}nav{display:flex;gap:22px;flex-wrap:wrap}.route{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#d5ccc4;border:1px solid #d5ccc4;margin:38px 0}.route a{padding:20px 15px;background:#faf7f0;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:6px}.route b{font:14px system-ui;color:#a35877}.route strong{font-weight:400;font-size:20px}.geometric{font-size:clamp(21px,3.2vw,35px);border-left:3px solid #ac6582;padding:10px 22px;background:#e9e3dd}.pair{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:22px 0;border-top:1px solid #cfc5c0;padding:20px 0}.pair p{font-size:17px;white-space:pre-wrap;overflow-wrap:anywhere}img{display:block;width:100%;height:auto}figure{margin:40px 0}figcaption{margin-top:10px}details{margin:38px 0}summary{cursor:pointer;font:18px system-ui}article{max-width:1000px}article h1{font-size:38px}table{border-collapse:collapse;font:14px/1.55 system-ui;width:100%}td,th{text-align:left;vertical-align:top;padding:13px;border-bottom:1px solid #cfc5c0}th{background:#e9e3dd}code{font:14px Consolas,monospace}section{scroll-margin-top:25px}footer{border-top:1px solid #cfc5c0;margin-top:60px;padding-top:18px}@media(max-width:800px){.route{grid-template-columns:repeat(3,1fr)}.pair{grid-template-columns:1fr}article{overflow-x:auto}}@media(max-width:450px){.route{grid-template-columns:repeat(2,1fr)}main{padding:28px 16px}}
+</style><main><div class="eyebrow">ADA · PRIMITIVES · 29 SEPTEMBER 2026</div>
+<h1>What must we add<br>before we can continue?</h1>
+<p>The rooms already carry a strong inquiry. This pass gives each handover a distinct job, while keeping the twelve halls in their current order.</p>
+<nav><a href="#lineage">The route</a><a href="#joins">Three joins</a><a href="#changes">Text changes</a><a href="#agreement">Full agreement</a><a href="/tutorial-lineage#node=enclosure">Live atlas</a></nav>
+<section id="lineage"><h2>A short geometric construction.</h2><div class="geometric">Point → segment → triangular face → tetrahedral enclosure</div>
+<p>A third point must leave the line; a fourth must leave the plane. We still have to connect them and make the faces. The visible sphere used as a point was three-dimensional all along.</p>
+<h2>A longer route through making.</h2><a href="/tutorial-lineage#node=loop"><b>1</b><strong>Ready / again</strong><small>Point Zero</small></a><a href="/tutorial-lineage#node=point"><b>2</b><strong>Position / body</strong><small>Point One</small></a><a href="/tutorial-lineage#node=coordinates"><b>3</b><strong>Reference</strong><small>Coordinates</small></a><a href="/tutorial-lineage#node=line"><b>4</b><strong>Connection</strong><small>Lines</small></a><a href="/tutorial-lineage#node=trace"><b>5</b><strong>Record</strong><small>Trace</small></a><a href="/tutorial-lineage#node=grid"><b>6</b><strong>Address</strong><small>Grid</small></a><a href="/tutorial-lineage#node=face"><b>7</b><strong>Face</strong><small>Triangle</small></a><a href="/tutorial-lineage#node=enclosure"><b>8</b><strong>Enclosure</strong><small>Polyhedra</small></a><a href="/tutorial-lineage#node=mesh"><b>9</b><strong>Shared corners</strong><small>Cube</small></a><a href="/tutorial-lineage#node=primitive"><b>10</b><strong>Configuration</strong><small>Ignorance</small></a><a href="/tutorial-lineage#node=refinement"><b>11</b><strong>Stopping</strong><small>Portals</small></a><a href="/tutorial-lineage#node=geometry_return"><b>12</b><strong>Purpose</strong><small>Melencolia</small></a>
+<p>Trace adds an ordered record. Grid adds repeatable addresses. Neither is a mathematical requirement for a triangle, but both give this particular journey something to carry forward.</p>
+<p>At Cube, another branch begins: reusable scenes and their instances. In Ignorance, generated meshes expose their parameters. A prefab and a primitive mesh are different kinds of supplied beginning.</p></section>
+<section id="joins"><h2>Let the construction make the distinction.</h2><figure><img loading="lazy" src="/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png" alt="Connect the points. Then add a face."><figcaption>Connect the points. Then add a face.</figcaption></figure><figure><img loading="lazy" src="/book-review/doc/book/figures/Primitives_Polythedra/polyhedra-boundaries.png" alt="The visible opening and the collision hull can disagree."><figcaption>The visible opening and the collision hull can disagree.</figcaption></figure><figure><img loading="lazy" src="/book-review/doc/book/figures/Point_Animatedcube/cube-hidden-diagonal.png" alt="Move one corner. Find which face must follow."><figcaption>Move one corner. Find which face must follow.</figcaption></figure>
+<p class="eyebrow">Existing native Godot illustrations, shared by book and museum. This editorial pass did not rebuild the rooms.</p>
+<p>The poetic question can change with the operation: what appears, what stops us, what the record admits, what counts as inside, which shape we recognise, and why we want the construction at all.</p></section>
+<section id="changes"><h2>The small changes in the text.</h2><p>These edits are in the current sources. They sharpen the handovers and update references to the remaining drawing pens.</p><section id="Point_Line_Grid"><h3>Point Line Grid</h3><div class="pair"><div><span class="eyebrow">Before</span><p>Next, three points can close a boundary. What must we add before there is a face inside it?</p></div><div><span class="eyebrow">Now</span><p>We can bring endpoints back to places where they meet. Next, join three points that do not all lie on one straight line, and close the last gap. The grid can help the corners meet; it does not fill the space between them. What must we add before there is a face inside?</p></div></div><div class="pair"><div><span class="eyebrow">Before</span><p>[^point-grid-carry]: If the field is empty, return to Trace, draw with a dot or stick until it retains at least two points, and release it. That release sends the record onward. The whiteboard and walking recorder keep separate records.</p></div><div><span class="eyebrow">Now</span><p>[^point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.</p></div></div><a href="/compose/sources?map=Point_Line_Grid&amp;doc=final">Read current source →</a></section><section id="Point_Triangle_Context"><h3>Point Triangle Context</h3><div class="pair"><div><span class="eyebrow">Before</span><p>Three points can close a boundary. What must the machine add before there is a face to look at?
+
+You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.</p></div><div><span class="eyebrow">Now</span><p>Three edges meet and close. What must the machine add before there is a face to look at?
+
+You have connected endpoints, recorded a path and given positions addresses you can return to. Now choose three points that do not lie on one straight line, and join them in a loop. Something can close without becoming a surface.</p></div></div><div class="pair"><div><span class="eyebrow">Before</span><p>We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.</p></div><div><span class="eyebrow">Now</span><p>We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second. A mesh can begin with this one face; it need not enclose anything.</p></div></div><div class="pair"><div><span class="eyebrow">Before</span><p>[^point-triangle-carry]: The trace travels on the same `TraceData` autoload that brings your drawing to the ruled field in Grid: releasing a drawing dot or stick in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard&#x27;s image travels by no route at all.</p></div><div><span class="eyebrow">Now</span><p>[^point-triangle-carry]: The trace travels on the same `TraceData` autoload that brings your drawing to the ruled field in Grid: releasing one of the three coloured drawing pens in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. Grid and Triangle each read that saved drawing; Triangle does not receive Grid&#x27;s enlarged or snapped display. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard&#x27;s image travels by no route at all.</p></div></div><a href="/compose/sources?map=Point_Triangle_Context&amp;doc=final">Read current source →</a></section><section id="Primitives_Polythedra"><h3>Primitives Polythedra</h3><div class="pair"><div><span class="eyebrow">Before</span><p>Keep the distinction: enclosing a region, admitting a body and suggesting a direction require different decisions. Next, a cube is taken apart so we can follow how its faces are made.</p></div><div><span class="eyebrow">Now</span><p>Keep the distinction: enclosing a region, admitting a body and suggesting a direction require different decisions. Next, take hold of a cube&#x27;s corner. Several faces will answer the same movement. We know how faces can close around a space; now we can ask what keeps them together when their positions change.</p></div></div><a href="/compose/sources?map=Primitives_Polythedra&amp;doc=final">Read current source →</a></section><section id="Point_Animatedcube"><h3>Point Animatedcube</h3><div class="pair"><div><span class="eyebrow">Before</span><p>The next room asks what an engine gives us when it supplies another familiar name: a sphere.</p></div><div><span class="eyebrow">Now</span><p>The boxes offered a made object we could use again. The next room offers a rule for making a family of objects: choose how many divisions, and the engine constructs the surface. We have followed a corner through a mesh. Now we can inspect what the engine chooses when we ask it for a sphere.</p></div></div><a href="/compose/sources?map=Point_Animatedcube&amp;doc=final">Read current source →</a></section><section id="Primitives_Ignorance"><h3>Primitives Ignorance</h3><div class="pair"><div><span class="eyebrow">Before</span><p>The third room has another collection of beginnings. A wedge, a ring, a plane. A pair of letters with depth. The engine supplies these constructions before we decide what to make of them. Each has been wrapped in a reusable scene, like the boxes in the previous hall.</p></div><div><span class="eyebrow">Now</span><p>The third room has another collection of beginnings. A wedge, a ring, a plane. A pair of letters with depth. The engine supplies these constructions before we decide what to make of them. Each has been wrapped in a reusable scene, like the boxes in the previous hall. The mesh supplies a surface; the scene can bring its material, collision and behaviour along. Choosing a shape and choosing what an object can do are still different decisions.</p></div></div><a href="/compose/sources?map=Primitives_Ignorance&amp;doc=final">Read current source →</a></section><section id="Primitives_Portals"><h3>Primitives Portals · tutorial</h3><div class="pair"><div><span class="eyebrow">Before</span><p>Draw a circle the only way the machine can.</p></div><div><span class="eyebrow">Now</span><p>Approximate a circle with the straight segments we already know how to connect.</p></div></div><a href="/compose/sources?map=Primitives_Portals&amp;doc=tutorial">Read current source →</a></section></section>
+<section><h2>Where the work remains concrete.</h2>
+<p>The next making pass is Coordinates into Line: supply the held point and build one measured connection. The current Line tutorial still begins with an 8×8 grid. Trace then needs an introduced list and one recording condition. These are unfinished lessons, even though their museum encounters already exist.</p>
+<p>The cleaned Trace hall also has no placed amber short-memory dot, although its passage remains in the manuscript. Its idea should be resolved through an encounter deliberately; this pass has not quietly put a fourth dot back.</p>
+<p>The saved pen drawing really travels to Grid and Triangle. Both read the original record independently. The later face, tetrahedron and cube share ideas rather than automatically sharing the visitor's particular geometry.</p></section>
+<details id="agreement"><summary>Read the complete twelve-hall agreement</summary><article><h1>Primitives: what each next room needs</h1>
+<p>Working agreement, 29 September 2026. Read against the twelve current <code>final.md</code> texts, their intentions, tutorial files, map placements and the tutorial atlas. This tightens the existing order. It does not certify twelve completed making lessons.</p>
+<p>The thread is <strong>what we have to add before a position can become something we encounter, alter and use again</strong>. A new operation changes both the construction and what a body can do with it. The critical question belongs at that change, rather than arriving afterwards as a separate interpretation.</p>
+<h2>Two connected lineages</h2>
+<p>The geometric construction is short:</p>
+<p><strong>point → segment → triangular face → tetrahedral enclosure</strong></p>
+<p>Two distinct points determine the segment. A third point outside their line allows a triangle with area. A fourth outside their plane allows a tetrahedron with volume. Connections and faces still have to be specified. Adding points alone does not render any of those constructions. The sphere used as a point marker is already a three-dimensional object; it is not the mathematical point growing dimensions.</p>
+<p>The working lineage is longer:</p>
+<p><strong>running scene → visible and physical attachments → reference frame → relation → ordered record → repeatable address → face → enclosure → editable connectivity → reusable scene / generated mesh → refinement and stopping → composition</strong></p>
+<p>This is the museum's learning route, not a claim that software must always be constructed in this order. Trace and Grid teach recording and repeatable placement. A triangle does not mathematically require either. We place them before Triangle because the visitor can bring a drawing, understand its selected positions, and use snapping to make corners meet.</p>
+<h2>The twelve handovers</h2>
+<table>
+<thead>
+<tr>
+<th>Hall</th>
+<th>What returns</th>
+<th>What becomes possible here</th>
+<th>Encounter and critical opening</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point Zero</td>
+<td>Day Zero's working scene</td>
+<td>Begin once, retain a value, update it</td>
+<td>Arrival, counter and folding frames: the world is already working before we understand it.</td>
+</tr>
+<tr>
+<td>Point One</td>
+<td>A named value and a place to run</td>
+<td>Give a position a visible surface and a separate collision boundary</td>
+<td>Absent, visible and resisting points; removable sun: what we see need not be what stops us.</td>
+</tr>
+<tr>
+<td>Point Coordinates</td>
+<td>The sphere as a marker</td>
+<td>Hold it, locate it relative to a frame, prepare a second position</td>
+<td>One held point, two addresses: a reading needs its reference; movement needs permission.</td>
+</tr>
+<tr>
+<td>Point Lines</td>
+<td>Two positions in a common frame</td>
+<td>Connect, measure and update their relation</td>
+<td>Measurable segment, barrier, walking stripe and arrangements: connection, instruction and passage differ.</td>
+</tr>
+<tr>
+<td>Point Trace</td>
+<td>The same two-position connection and continuing update</td>
+<td>Keep selected positions in order; join successive entries</td>
+<td>Pens, ball and whiteboard: the selected point and admission rule shape the record.</td>
+</tr>
+<tr>
+<td>Point Line Grid</td>
+<td>Positions already selected by a recorder</td>
+<td>Give positions lattice addresses; snap a copy and compare</td>
+<td>Snapping point, replayed bend and plan: repeatability permits agreement while admitting differences within an interval.</td>
+</tr>
+<tr>
+<td>Triangle</td>
+<td>Points, segments, ordered positions; grid as an aid</td>
+<td>Close a boundary, then explicitly add a face</td>
+<td>Fill switch, drawing and twin: closure does not supply a surface; a filling rule may fail the intended outline.</td>
+</tr>
+<tr>
+<td>First Polyhedra</td>
+<td>Faces and their edges</td>
+<td>Join faces into an open corner and a closed enclosure</td>
+<td>Trihedron, tetrahedron and room wedge: geometric enclosure, collision and entry are separate.</td>
+</tr>
+<tr>
+<td>Cube</td>
+<td>A joined surface</td>
+<td>Move vertices while keeping connections; recognise what changes across attached faces</td>
+<td>Hidden diagonal, editable cube and folding net: a name can stop fitting before the neighbour lists change.</td>
+</tr>
+<tr>
+<td>Primitives / Ignorance</td>
+<td>Known mesh decisions; the Cube shelf's reusable scenes</td>
+<td>Configure a generated mesh and compare its finite constructions</td>
+<td>Cylinder court, sphere pairs, capsule and mesh library: a supplied name carries choices, and a restriction can yield a desired form.</td>
+</tr>
+<tr>
+<td>Portals</td>
+<td>Configurable subdivision and familiar segments</td>
+<td>Follow a refinement rule; distinguish limit, tolerance and the last built example</td>
+<td>Ring ladder, polygon and halving track: more detail gives a direction without deciding what is enough.</td>
+</tr>
+<tr>
+<td>Melencolia</td>
+<td>The whole small vocabulary and its limits</td>
+<td>Arrange known forms without expecting their definitions to settle their use</td>
+<td>Court, Dürer tableau and returning counter: an exact construction can leave desire and purpose open.</td>
+</tr>
+</tbody>
+</table>
+<p>Transformation then changes the pose of a known object. The Cube hall has already shown a different operation: editing the positions inside a mesh. Keep that distinction available when a whole cube moves, turns or scales.</p>
+<h2>Give the later halls different jobs</h2>
+<p><strong>First Polyhedra asks whether faces enclose a region. Cube asks what stays connected when its corners move.</strong> A mesh already exists with the Triangle hall's single face; we do not wait until Cube to acquire one. Cube makes shared construction more inspectable. Its square-looking face returns the earlier quad's diagonal at a larger, familiar body.</p>
+<p>The Cube shelf adds another branch: instance a reusable scene and change its neighbours. That is different from choosing a <code>PrimitiveMesh</code> class and its parameters. A mesh resource describes a surface; a scene can combine that surface with materials, collision and behaviour. The next hall brings both into view. Neither is simpler in every sense merely because the engine supplies it.</p>
+<p>Ignorance compares constructions. Portals follows a rule through a sequence of constructions. Melencolia asks what we want to do with the resulting vocabulary. Those are different returns to limitation; they do not need to repeat the same warning about finite computers.</p>
+<h2>What actually travels</h2>
+<p>The released coloured pen supplies a saved position list through <code>TraceData</code>. Grid reads it, centres and scales a display copy, and shows a snapped comparison. Triangle independently reads the saved trace, selects up to six corners, scales and flattens them, and leaves the carried outline open. <strong>Grid's green display is not the input handed to Triangle.</strong> The original saved list remains available.</p>
+<p>The whiteboard's image and the ball's path do not travel by that route. A conceptual return is not evidence of a shared data object. The face, tetrahedron and cube are currently separate artifacts; their construction ideas recur, but the visitor's particular face does not automatically become the next hall's solid.</p>
+<p>For the student kit, the intended continuity is stronger: reuse the known positions, segment helper and list rather than replace the framework at every chapter. That is a delivery requirement for the making pass, not something the existing downloads already guarantee.</p>
+<h2>Three selections, one reason to continue</h2>
+<ul>
+<li><strong>Hall:</strong> choose the encounters that let a difference be felt. A second object earns its place by changing a relation, offering a comparison or opening another use. Pleasure and atmosphere can matter without each becoming a coding lesson.</li>
+<li><strong>Main text:</strong> follow the encounter long enough for the new distinction and its stakes to become legible. Keep the mystery of what it might become; avoid mystery about what the installed object actually does.</li>
+<li><strong>Tutorial:</strong> teach the smallest usable operation that lets the student make another choice. Supply surrounding machinery explicitly. Give one variation that works beyond the original demonstration.</li>
+</ul>
+<p>Each handover should answer: <strong>what is being kept, what is newly added, and what can we now change?</strong> These questions guide our editing; they do not need to become a repeated formula in the prose.</p>
+<h2>Where work is still needed</h2>
+<ol>
+<li><strong>Coordinates → Line is the next making task.</strong> The coordinate download has no portable XR rig; the existing Line tutorial starts with an 8×8 grid and nested arrays. Deliver the held point and one measurable segment before extending the grid exercise. The museum already has the two-endpoint encounter.</li>
+<li><strong>Trace needs a small list before the recorder machinery.</strong> Teach <code>append</code> and one distance gate with Line's measurement. Introduce rounding, capacity and transfer afterwards. The amber short-memory passage currently has no corresponding placed artifact in the cleaned hall. Preserve the idea and resolve its encounter deliberately; do not silently restore another dot after the requested cleanup or describe it as installed.</li>
+<li><strong>Triangle's first tutorial should stop at a usable face.</strong> Keep the large twin and fan experiment in the hall and main inquiry. The six-corner concave comparison is a second investigation after the student can deliberately move three corners and fill them. Grid is an optional placement aid, not a prerequisite for the first face.</li>
+<li><strong>Polyhedra → Cube should reuse one vertex/face representation in the student kit.</strong> First compare an open corner and its closed base. Then follow one moved cube corner through the triangles that name it. Avoid introducing a new unexplained mesh helper at this join.</li>
+</ol>
+<p>The main texts can receive small handover edits now. The remaining tutorial gaps need runnable work, not more transitional prose. No new room is required to make this lineage clear.</p>
+<h2>Reading the atlas</h2>
+<p>The <a href="/tutorial-lineage">tutorial atlas</a> distinguishes face, enclosure, editable connectivity, instances, primitive configuration and refinement. Its prerequisite links concern each proposed making task; they do not claim universal mathematical necessity. The walking-order view keeps all twelve halls in their current order. Capability status remains proposed until the lesson and its stated starting material have been tried.</p>
+<p>The sequence's older <code>artifact_groups</code> remain a curation record, not an authoritative list of installed objects. Use each map's current <code>layers.interactables</code>, including wrapper scenes, together with its current intent to establish the encounter.</p></article></details>
+<footer>The atlas build validates coverage of all 204 active halls, dependency references and absence of cycles. All twelve Primitives chapter entries now appear in sequence metadata, including Coordinates. This is source and editorial verification; no new museum runtime or learner test is claimed.<p><a href="text-changes.diff">Text diff</a> · <a href="changes.diff">All changes</a> · <a href="after/doc/book/PRIMITIVES_LINEAGE.md">Agreement source</a> · <a href="sources.json">Source fingerprints</a></p></footer></main></html>

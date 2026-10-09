@@ -1,0 +1,41 @@
+--- before/tools/export_book_captures.py
++++ current/tools/export_book_captures.py
+@@ -24,8 +24,8 @@
+ FOOTNOTE = re.compile(r"\[\^([^\]\s]+)\]")
+ 
+ 
+-def clean_text(text: str, map_name: str) -> str:
+-    """Leave fenced code intact; namespace footnotes across concatenated halls."""
++def clean_text(text: str, map_name: str, heading_offset: int = 0) -> str:
++    """Keep code intact; scope footnotes and optionally nest ATX headings."""
+     lines = []
+     fence_char, fence_size = "", 0
+     for line in text.replace("\r\n", "\n").splitlines():
+@@ -39,6 +39,9 @@
+             fence_char, fence_size = match[1][0], len(match[1])
+             lines.append(line)
+         elif not ANCHOR.fullmatch(line):
++            if heading_offset:
++                line = re.sub(r"^( {0,3})(#{1,6})(?=[ \t]|$)",
++                              lambda m: m[1] + "#" * min(6, len(m[2]) + heading_offset), line)
+             lines.append(FOOTNOTE.sub(lambda m: f"[^{map_name}--{m[1]}]", line))
+     return "\n".join(lines).strip("\n")
+ 
+@@ -63,7 +66,7 @@
+     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+     base = {"captured_at": captured, "base_commit": git_value("rev-parse", "HEAD"),
+             "branch": git_value("branch", "--show-current"), "source": "current working copy, including uncommitted edits",
+-            "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved."}
++            "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved."}
+     prepared = []
+     # Read and validate every requested source before replacing any output.
+     for seq in sequences:
+@@ -77,7 +80,7 @@
+                 raise ValueError(f"Invalid map identifier: {name}")
+             path = MAPS / name / "final.md"
+             raw = path.read_bytes()  # A missing hall must not disappear silently.
+-            text = clean_text(raw.decode("utf-8-sig"), name)
++            text = clean_text(raw.decode("utf-8-sig"), name, heading_offset=2)
+             parts += [f"## {name.replace('_', ' ')}", "", f"*{name}*", "", text, "", "---", ""]
+             sources.append({"map": name, "path": path.relative_to(ROOT).as_posix(), "sha256": sha(raw)})
+         body = "\n".join(parts).encode("utf-8")

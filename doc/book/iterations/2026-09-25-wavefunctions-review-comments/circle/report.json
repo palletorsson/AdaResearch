@@ -1,0 +1,86 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "unit circle is present in the museum",
+      "passed": true
+    },
+    {
+      "name": "finite graph completes",
+      "passed": true
+    },
+    {
+      "name": "graph contains its declared sample count",
+      "passed": true
+    },
+    {
+      "name": "hall opts into continuing projection",
+      "passed": true
+    },
+    {
+      "name": "late point advances a quarter turn",
+      "passed": true
+    },
+    {
+      "name": "angle stays bounded",
+      "passed": true
+    },
+    {
+      "name": "complete graph is not rebuilt or moved",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: circle-late-arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: circle-right",
+      "passed": true
+    },
+    {
+      "name": "top has zero cosine and full sine",
+      "passed": true
+    },
+    {
+      "name": "vertical rod reaches radius",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: circle-top",
+      "passed": true
+    },
+    {
+      "name": "non-opted-in complete figures retain held pose",
+      "passed": true
+    },
+    {
+      "name": "long running point remains bounded without new steps",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "circle_transform": "[X: (-0.0, 0.0, 1.0), Y: (0.0, 1.0, 0.0), Z: (-1.0, 0.0, -0.0), O: (1.5, 0.0, 1.5)]",
+    "finished_motion": {
+      "after": [
+        0.0183666478842497,
+        0.999831318855286,
+        0.0
+      ],
+      "angle": 1.55242864576924,
+      "before": [
+        0.999831318855286,
+        -0.0183666478842497,
+        0.0
+      ],
+      "old_angle": 12.5480029333335,
+      "sample_count": 400
+    }
+  },
+  "passed": true,
+  "room": "WaveFunctions_Unit_Circle",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

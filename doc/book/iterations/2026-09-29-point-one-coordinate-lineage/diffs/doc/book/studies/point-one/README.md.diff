@@ -1,0 +1,26 @@
+--- before/doc/book/studies/point-one/README.md
++++ doc/book/studies/point-one/README.md
+@@ -1,17 +1,11 @@
+-# Point One — building a point
++# Point One — positions before connections
+ 
+-A small Godot 4.6 project accompanying Point One. Setup, running and saving are introduced once in Day Zero (DAY_ZERO.md in this download). The lesson scene is study.tscn; project.godot already selects it.
++Prepared in Day Zero. The main scene is coordinates.tscn; the short learner script is points.gd. Read TUTORIAL.md for the first exercise.
+ 
+-study.tscn inherits base.tscn, the self-contained camera, light, environment and floor from Day Zero. It hides the base greeting and supplies three labels. The three scripts add only the point:
++The download opens with two white markers placed by the complete script. The tutorial first reduces that script to an unused position, then reveals one marker, changes each coordinate, and places a second. Both positions use the same scene reference. This is the material that Point Lines will connect.
+ 
+-- position.gd: keep a local position; nothing is drawn.
+-- visible.gd: keep that position and give it a visible sphere.
+-- solid.gd: keep both, then add a matching fixed physics body.
++Supplied parts: base.tscn from Day Zero; two hidden MeshInstance3D markers sharing a 0.14 m radius SphereMesh; fixed coloured axes and labels. The coordinate script assigns their positions and visibility. It does not build meshes, arrows, readouts, colliders or pickup systems. There are no missing helper functions or plug-ins.
+ 
+-Each script is complete. Read them in order; the later scripts retain the earlier lines. Edit a script and rerun to see the result. The positions of the three stations are set separately in study.tscn.
++Optional: CONSTRUCTION.md and study.tscn preserve the preceding visible/solid comparison with its complete position.gd, visible.gd and solid.gd scripts. Those files are unchanged. They are a further look at the same museum encounter, not prerequisites for the next Line exercise.
+ 
+-The accompanying tutorial is TUTORIAL.md in this folder (also canonical at commons/maps/Point_One/tutorial.md in AdaResearch). The reduction comes from commons/primitives/point/point_condition.gd: 0.14 m radius and local centre (0, 1.12, 0). Labels, finish, resolution choices and condition branches are omitted from the study scripts.
+-
+-This is a fixed-camera construction exercise. It has no walking or pickup controls. The black held point and the coordinate frame remain encounters in the full museum, which supplies those systems. Physics collision is present in the right sphere and can be shown using Godot's Debug > Visible Collision Shapes.
+-
+-Tested engine behavior is recorded in the accompanying review. A beginner's ability to use and understand this kit still needs a learner trial.
++Both scenes are fixed-camera desktop studies. The museum supplies walking and XR pickup. The code and lesson variations are checked in Godot; beginner understanding and headset behavior require separate trials.

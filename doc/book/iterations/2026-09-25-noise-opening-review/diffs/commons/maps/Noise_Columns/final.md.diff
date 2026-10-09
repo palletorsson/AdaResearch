@@ -1,0 +1,14 @@
+--- before/commons/maps/Noise_Columns/final.md
++++ commons/maps/Noise_Columns/final.md
+@@ -82,8 +82,10 @@
+ 
+ The array has come back inside a body. So have the circle and the alternating value. Earlier, a field varied a shaft while its mesh connections remained. Here, selecting a construction changes how many parts the body begins with. These are different kinds of change, and our toolbox contains both.
+ 
+-The stand's plaque records a chosen variant and a score from a saved comparison. That score explains something about the selection procedure; it cannot decide what you should want from this body. Perhaps the small gathering holds your attention precisely because it is difficult to resolve at a glance. Perhaps you prefer the solitary orb.
++The plaque's 35% comes from comparing a saved image of these six orbs with one of the original orb. The score looks at the pixels that changed most.[^image-score] It helped choose a difference in pictures; it cannot decide what you should want from this body. Perhaps the small gathering holds your attention precisely because it is difficult to resolve at a glance. Perhaps you prefer the solitary orb.
+ 
+ A family offers possibilities, and choosing one still leaves other members unvisited. We can name the choice without closing the family. The same is true of our route through these halls: enough attention to make a discovery, with other directions still available.
+ 
+ Noise One takes the next step. Two surfaces will receive the same field and spend it differently, as relief and as colour. We leave with a question about the receiver as well as the source: what can this body do with the value it has been given?
++
++[^image-score]: The comparison removes each image's corner background colour, converts it to greyscale at 160 × 160 pixels, and averages the largest 5% of absolute pixel differences on a scale from 0 to 1. The saved value 0.3509 is rounded to 35% on the plaque. It is not the percentage of the body, or of the pixels, that changed.

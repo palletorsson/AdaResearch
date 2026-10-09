@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "rule explorer and study loaded",
+      "passed": true
+    },
+    {
+      "name": "stand retains its sphere subject",
+      "passed": true
+    },
+    {
+      "name": "runner present before change",
+      "passed": true
+    },
+    {
+      "name": "museum contains no runner target",
+      "passed": true
+    },
+    {
+      "name": "body-sized ring retained",
+      "passed": true
+    },
+    {
+      "name": "two distinct control panels retained",
+      "passed": true
+    },
+    {
+      "name": "90 button selects Rule 90",
+      "passed": true
+    },
+    {
+      "name": "all eight Rule 90 answers",
+      "passed": true
+    },
+    {
+      "name": "RST returns to generation zero",
+      "passed": true
+    },
+    {
+      "name": "STEP produces a held generation",
+      "passed": true
+    },
+    {
+      "name": "30 button selects Rule 30",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: board-and-rule-panels",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-history-ring",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "rule90_answers_111_to_000": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "runner": {
+      "children": 3,
+      "meshes": 0,
+      "target_present": false
+    },
+    "stand_labels": [],
+    "stand_meshes": 18
+  },
+  "passed": true,
+  "room": "CA_Introduction",
+  "scope": "Current isolated museum, supplied control signals and cameras; no headset or performance acceptance."
+}

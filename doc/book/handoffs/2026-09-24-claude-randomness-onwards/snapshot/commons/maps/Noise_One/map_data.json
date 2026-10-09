@@ -1,0 +1,106 @@
+{
+ "map_info": {
+  "name": "Noise: What Does a Value Become?",
+  "title": "Field, Reading, Combination",
+  "lookup_name": "Noise_One",
+  "description": "Three authored works: matching torus rings read a shared field as relief or colour; a compact basin retains the existing three-source terrain and exposes its weighted contributions; the dark orb keeps an independent pulse. FREEZE holds the current local moment, REMAP makes signed differences visible in colour, AMPLITUDE changes relief gain and FREQUENCY changes sampling coordinates. Terrain controls isolate resources before the original slope-lowering pass. Rings have no colliders; the terrain has a matching triangle collider.",
+  "manual_file": "res://commons/context/clipboard/tutorial_text/noise_layers_axioms.md",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 11,
+   "max_height": 5
+  },
+  "metadata": {
+   "difficulty": "intermediate",
+   "category": "noise",
+   "estimated_time": "7-10 minutes",
+   "learning_objectives": [ "Separate a field from its receiving operation", "Compare clipped and signed colour mappings", "Distinguish displacement gain from coordinate scale", "Inspect three retained terrain contributions and their combination", "Distinguish shader relief from collision geometry" ]
+  },
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0,
+   "artifact_placement": "map",
+   "sculpture_clear_rects": [[3, 1, 9, 9]]
+  }
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next Lesson",
+   "description": "Continue to the next algorithm demonstration",
+   "properties": {
+	"action": "next_in_sequence"
+   }
+  },
+  "s": {
+   "properties": {
+	"height": 5.5
+   }
+  }
+ },
+ "lighting": {
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1, 0.9, 0.8 ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1,
+  "gutter": 0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [ 0.2, 0.3, 0.7 ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "1", "1", "w", "w", "w", "w", "1", "w", "w", "w", "w", "w", "w" ],
+   [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+   [ "5", "w", "w", "w", "w", "1", "1", "1", "w", "w", "5", "w", "w" ]
+  ],
+  "utilities": [
+   [ "sp", "", "", "", "", "", "", "", "", "", "an:-90", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "t", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "noisetorus:180#stand:pair", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "noiselayers:0:0.8#stand:basin", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "dark_sphere", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+   ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+  ]
+ }
+}

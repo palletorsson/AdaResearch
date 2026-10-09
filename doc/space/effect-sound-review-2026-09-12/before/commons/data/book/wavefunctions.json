@@ -1,0 +1,467 @@
+{
+  "chapter": "wavefunctions",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "pearl": "intro",
+      "map": "WaveFunctions_Intro",
+      "lines": [
+        {
+          "token": "rotatescalecubes"
+        },
+        {
+          "token": "pickup_cube_static",
+          "text": "A static pickup cube that can be collected",
+          "by": "draft"
+        },
+        {
+          "token": "transformation_cube",
+          "text": "this one does not turn. It bobs — sin(t) about the height it started at — and standing still while changing is a transformation too",
+          "by": "draft"
+        },
+        {
+          "token": "rotating_cube",
+          "text": "the same cube with one component swapped out: it spins where the other bobs. Two cubes, one transformation each, and the difference between them is the whole lesson",
+          "by": "draft"
+        },
+        {
+          "token": "y_oscillation_cube"
+        },
+        {
+          "token": "rotating_cube_demo"
+        },
+        {
+          "token": "pickup_cube_transforming",
+          "text": "A pickup cube that moves up and down",
+          "by": "draft"
+        },
+        {
+          "token": "pickup_cube_rotating",
+          "text": "Pickup cube that rotates continuously — wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area …",
+          "by": "draft"
+        },
+        {
+          "token": "control_pendulum",
+          "text": "The bob crosses the same place with another direction. A release gives it angle and speed, while the projection leaves part of the gesture out. Try two different gestures that leave a similar swing.",
+          "by": "astra-discovery-voice-2026-09-11",
+          "note": "The release keeps a projected velocity and loses the rest of the gesture. The crossing counter retains a total without retaining the circumstances of each pass.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_Intro/critical.md",
+            "quote": "It discards the rest of the gesture."
+          }
+        },
+        {
+          "token": "oscillation_controlled_cube"
+        },
+        {
+          "token": "mario_cube_time_trace",
+          "text": "Every trajectory is a signal in time; recording it reveals the physics as waveform",
+          "by": "draft"
+        },
+        {
+          "token": "SphericalHarmonics"
+        }
+      ],
+      "hero": "control_pendulum"
+    },
+    {
+      "pearl": "pendulum",
+      "map": "WaveFunctions_Pendulum",
+      "lines": [
+        {
+          "token": "foucault_pendulum"
+        },
+        {
+          "token": "WavePaintings"
+        },
+        {
+          "token": "draw_dot_time_domain",
+          "text": "Every motion is a signal; recording it in time reveals the wave hidden in movement",
+          "by": "draft",
+          "note": "A recording rule selects what survives. Compare a position kept after a movement threshold with a position kept after a time threshold; neither records everything between appointments.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_Pendulum/critical.md",
+            "quote": "Each can reveal something the other misses."
+          }
+        },
+        {
+          "token": "BigPipeSystem",
+          "text": "Industrial drain pipe network built from modular segments",
+          "by": "draft"
+        },
+        {
+          "token": "lab_table",
+          "text": "The table is the zero plane from which all measurement begins",
+          "by": "draft"
+        },
+        {
+          "token": "VRAudioMonitor"
+        },
+        {
+          "token": "PendulumWave",
+          "text": "A mark keeps travelling after the bob turns. Time has been given a direction; a coarser record can reach further into the past. At the measured period the sparse marks nearly align, and repetition begins to resemble stillness.",
+          "by": "astra-discovery-voice-2026-09-11"
+        },
+        {
+          "token": "seismograph"
+        },
+        {
+          "token": "GlassRack"
+        }
+      ],
+      "hero": "PendulumWave"
+    },
+    {
+      "pearl": "unit circle",
+      "map": "WaveFunctions_Unit_Circle",
+      "lines": [
+        {
+          "token": "unit_circle_advanced",
+          "note": "sine cannot be read off a circle: it needs an origin, a zero angle and a direction of turn, none of which the circle carries — and the projection that survives costs the radius, discarded to keep the function tractable.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_Unit_Circle/critical.md",
+            "quote": "Sin and cos are not properties of the circle. They are properties of a circle with a chosen frame."
+          }
+        },
+        {
+          "token": "SimpleOscillatingBridge"
+        },
+        {
+          "token": "OscillationCurve"
+        }
+      ],
+      "hero": "OscillationCurve"
+    },
+    {
+      "pearl": "sine space",
+      "map": "WaveFunctions_Sine_Space",
+      "lines": [
+        {
+          "token": "sine_flow_tray",
+          "text": "Choose a hollow, release the spheres, then change their size. At twelve seconds the count stops. Those still inside have a recorded present and an unmeasured future. What would make that hollow a shelter?",
+          "by": "astra-discovery-voice-2026-09-12"
+        },
+        {
+          "token": "sine_space_explanation"
+        },
+        {
+          "token": "sine_space",
+          "text": "3D space defined by sine waves — walls, floors",
+          "by": "draft",
+          "note": "The corridor constructs its smooth skin from samples. A visible boundary, a collision shape and a planned route give a body different possibilities; mesh cost still needs measurement.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_Sine_Space/critical.md",
+            "quote": "A surface, a boundary and a route are distinct things in this implementation."
+          }
+        },
+        {
+          "token": "sine_wall_corridor",
+          "text": "A half-turn makes the walls bend together. The x-gap stays at two metres, but a body might need another measure. Cross a visible crest: the surface has offered a route without gaining the power to stop you.",
+          "by": "astra-discovery-voice-2026-09-11"
+        },
+        {
+          "token": "sine_wall_explanation"
+        }
+      ],
+      "hero": "sine_flow_tray"
+    },
+    {
+      "pearl": "3d wave propagation",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "lines": [
+        {
+          "token": "kusama_sine",
+          "note": "interference is only where a marker stands: the map rents a lattice to make the field visible, and its spacing and dimmest lit step fence the commons at a boundary neither source chose and neither can move.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_3D_Wave_Propagation/critical.md",
+            "quote": "The lattice of small markers pulses in step with the local phase"
+          }
+        },
+        {
+          "token": "wave_propagation_3d"
+        },
+        {
+          "token": "coupled_oscillator_lattice"
+        }
+      ],
+      "hero": "kusama_sine"
+    },
+    {
+      "pearl": "effect sound",
+      "map": "WaveFunctions_Effect_Sound",
+      "lines": [
+        {
+          "token": "timbre_sculptor",
+          "text": "Timbre is the harmonic fingerprint of a sound",
+          "by": "draft",
+          "note": "the sculptor stacks only integer multiples of one fundamental, so no bell is reachable from its eight sliders — and beneath them the buffer, the DAC and a metre of air charge a delay that never reaches zero.",
+          "note_src": {
+            "file": "commons/artifacts/timbre_sculptor/timbre_sculptor.gd",
+            "quote": "Real acoustic instruments produce INHARMONIC partials (bells, drums, piano strings have stretched harmonics)"
+          }
+        },
+        {
+          "token": "RackMoogBass"
+        },
+        {
+          "token": "RackDX7Piano"
+        },
+        {
+          "token": "DualBallFMController",
+          "text": "Hold one note, change a setting and listen through the next. A sine enters another sine’s phase; a change of character can fade on a different clock from the level. Keep a sound because it invites another listening, before deciding what instrument it resembles.",
+          "by": "astra-discovery-voice-2026-09-11"
+        },
+        {
+          "token": "chord_tension_spring",
+          "text": "Musical tension is not metaphor — intervals exert measurable pull on perception",
+          "by": "draft"
+        },
+        {
+          "token": "wave_interference_3d",
+          "text": "Two waves meeting don't fight — they add. The pattern they make holds more information than either wave …",
+          "by": "draft"
+        },
+        {
+          "token": "harmonic_distance_table",
+          "text": "Consonance is the degree to which two pitches share the same overtone series",
+          "by": "draft"
+        },
+        {
+          "token": "MelodyChaser3D"
+        },
+        {
+          "token": "RackSineBasic"
+        },
+        {
+          "token": "interactable_demo",
+          "text": "Inspection rig laying out one of every VR control type in a single row",
+          "by": "draft"
+        },
+        {
+          "token": "AudioContr",
+          "text": "UniversalVRAudioController",
+          "by": "draft"
+        },
+        {
+          "token": "Rack303Acid"
+        },
+        {
+          "token": "mario_test_sound_ui"
+        },
+        {
+          "token": "audio_catalog_tablet",
+          "text": "A sound catalog is a periodic table of timbres, each defined by its synthesis recipe",
+          "by": "draft"
+        },
+        {
+          "token": "MarioSoundController"
+        }
+      ],
+      "hero": "DualBallFMController"
+    },
+    {
+      "pearl": "bernini",
+      "map": "Wavefunctions_Bernini",
+      "lines": [
+        {
+          "token": "ElphabaDress"
+        },
+        {
+          "token": "vowel_sound_board",
+          "text": "Every vowel is a pair of resonant frequencies — the mouth is a tunable resonator",
+          "by": "draft",
+          "note": "a garment cannot supply its own body: this one hangs on nobody, so every sine that runs the hem is a claim about flesh the map has removed — the fold argues, and there is no one inside it.",
+          "note_src": {
+            "file": "algorithms/wavefunctions/dancing_body/ElphabaDress.gd",
+            "quote": "the dress floats empty, worn by nobody, mathematics wearing itself"
+          }
+        },
+        {
+          "token": "bernini_columns"
+        }
+      ],
+      "hero": "ElphabaDress"
+    },
+    {
+      "pearl": "john cage",
+      "map": "WaveFunctions_John_Cage",
+      "lines": [
+        {
+          "token": "ruth_asawa_sculpture",
+          "note": "4'33\" cannot supply its own content: it borrows the ventilation, the lights and the rig's own hum, so the piece runs only while the infrastructure does — and the panes measuring it keep nothing when it stops.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_John_Cage/critical.md",
+            "quote": "it can never reach zero because reaching zero would mean the infrastructure had stopped"
+          }
+        },
+        {
+          "token": "john_cage_tech_noir"
+        }
+      ],
+      "hero": "dual_display_test"
+    },
+    {
+      "pearl": "airmusic",
+      "map": "WaveFunctions_AirMusic",
+      "lines": [
+        {
+          "token": "RackAmbientDrone",
+          "note": "phasing has no score to fall back on: the room depends on a duration only a visitor can spend and cannot store one, so walking through quickly makes the piece genuinely flatter, with nothing kept to prove otherwise.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_AirMusic/critical.md",
+            "quote": "punishes impatient traversal with a flatter experience"
+          }
+        },
+        {
+          "token": "air_music_display_case"
+        },
+        {
+          "token": "resonating_metallophone"
+        },
+        {
+          "token": "SystemsMusicTest"
+        }
+      ],
+      "hero": "RackAmbientDrone"
+    },
+    {
+      "pearl": "sky stairs",
+      "map": "Wavefunctions_Sky_Stairs",
+      "lines": [
+        {
+          "token": "sine_cylinder_staircase",
+          "note": "a curve you climb must be cut into treads a foot can hold: eighty steps, none shallower than a stride, so the sine is quantised by the body and its smooth stretches are exactly the ones no climber reaches.",
+          "note_src": {
+            "file": "commons/maps/Wavefunctions_Sky_Stairs/critical.md",
+            "quote": "Each step is a sample; the tread is the period; the rise is the amplitude."
+          }
+        },
+        {
+          "token": "math_objects"
+        }
+      ],
+      "hero": "sine_cylinder_staircase"
+    },
+    {
+      "pearl": "trigwalkingpath",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "lines": [
+        {
+          "token": "wave_interference"
+        },
+        {
+          "token": "beat_frequency_demo",
+          "text": "When two nearly identical things interfere, their tiny difference becomes the loudest …",
+          "by": "draft",
+          "note": "the lanes are computed a few steps ahead of the foot and never further: the map depends on a horizon it makes as you approach, so it can hand you the sin-cos offset but never the whole curve.",
+          "note_src": {
+            "file": "commons/maps/WaveFunctions_TrigWalkingPath/critical.md",
+            "quote": "The path generates itself a few steps ahead of the walker, so the learner always sees a short runway of coming terrain."
+          }
+        },
+        {
+          "token": "lissajous_curves"
+        },
+        {
+          "token": "TrigWalkingPath"
+        },
+        {
+          "token": "sine_oscillation",
+          "text": "a sine wave is not invented — it is the inevitable shadow of constant rotation",
+          "by": "draft"
+        }
+      ],
+      "hero": "wave_interference"
+    },
+    {
+      "pearl": "waves",
+      "map": "Chamber_Waves",
+      "lines": [],
+      "drop": true,
+      "edge": "resonance needs a rhythm the learner does not own: the creature keeps its own frequency and will not meet you halfway, so the chamber can measure a match but never produce one — most of the encounter is beating.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_Waves/critical.md",
+        "quote": "resonance is a narrow condition and the learner has to tune the catalyst slowly to approach it"
+      }
+    },
+    {
+      "pearl": "synthesis lab",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "lines": [
+        {
+          "token": "dna_specimen",
+          "text": "DNA is a double wave frozen in molecular form — information stored as a helix",
+          "by": "draft"
+        },
+        {
+          "token": "holographicdisplay"
+        },
+        {
+          "token": "electronicscales"
+        },
+        {
+          "token": "biomagneticresonator"
+        },
+        {
+          "token": "UnitCircleTrig"
+        },
+        {
+          "token": "coloredlines",
+          "text": "Every flowing line is a parametric curve — a point moving through space according to …",
+          "by": "draft"
+        },
+        {
+          "token": "hallway_scene"
+        },
+        {
+          "token": "additive_wave_demo",
+          "text": "Any periodic function is a sum of sines; complexity is superposition of simplicity",
+          "by": "draft"
+        },
+        {
+          "token": "samplevialrack"
+        },
+        {
+          "token": "oscilloscope",
+          "text": "Multi-mode oscilloscope with VR sliders. Shows waveform",
+          "by": "draft",
+          "note": "a square is an infinite sum and the bench has sixteen sliders, the scope three: the lab borrows a basis it did not pick and must cut the series somewhere — the ripple on the trace is the cut.",
+          "note_src": {
+            "file": "commons/artifacts/oscilloscope/oscilloscope.gd",
+            "quote": "\"composite\" sums sin(f) + sin(3f)/2 + sin(5f)/3 (the textbook square-wave Fourier series, truncated)"
+          }
+        },
+        {
+          "token": "double_helix_scene"
+        },
+        {
+          "token": "SoundscapeRadioRack"
+        },
+        {
+          "token": "petri_dish_worms",
+          "text": "A worm moves by passing a sine wave through its body",
+          "by": "draft"
+        },
+        {
+          "token": "atmosphericmonitoring"
+        },
+        {
+          "token": "chladni_plate"
+        },
+        {
+          "token": "microscope",
+          "text": "a microscope is the architectural form of LOOKING-CLOSER",
+          "by": "draft"
+        },
+        {
+          "token": "chemicalapparatus"
+        },
+        {
+          "token": "multimeter"
+        }
+      ],
+      "hero": "oscilloscope"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+[
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      18,
+      6
+    ],
+    "raw": "if_not_exist_create:180:0:1#make:floor_eyes_delayed_attention#why:Twenty_boxed_floor_eyes_follow_the_player_with_different_delays#like:phase_rod_array#cells:4x4#height:1.8#solid:0#pin:1#plinth:0",
+    "make": "floor_eyes_delayed_attention",
+    "why": "Twenty_boxed_floor_eyes_follow_the_player_with_different_delays",
+    "like": "phase_rod_array",
+    "cells": "4x4",
+    "state": "open",
+    "near": [
+      {
+        "token": "catalyst_prompter_box",
+        "score": 7,
+        "description": "The catalyst presented from below: a one-meter floor hatch (one grid c"
+      },
+      {
+        "token": "rainbow_checker_floor",
+        "score": 6,
+        "description": "Procedural pixel art floor with rainbow checkerboard pattern. Each row"
+      },
+      {
+        "token": "sona_floor",
+        "score": 6,
+        "description": "A 2.4 m floor plate carrying a lattice of pressed dots and the single "
+      },
+      {
+        "token": "turtle_meander_floor",
+        "score": 6,
+        "description": "Procedural mosaic floor whose Greek key border is traced by a turtle g"
+      },
+      {
+        "token": "walk_this_line_marking",
+        "score": 6,
+        "description": "A legend painted on the floor reading WALK THIS LINE (the words are a "
+      }
+    ]
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      18,
+      11
+    ],
+    "raw": "if_not_exist_create:180:0:1#make:late_connection_platform#why:Two_platforms_miss_each_other_until_the_player_adjusts_phase#like:phase_rod_array#cells:4x3#height:1.8#solid:0#pin:1#plinth:0",
+    "make": "late_connection_platform",
+    "why": "Two_platforms_miss_each_other_until_the_player_adjusts_phase",
+    "like": "phase_rod_array",
+    "cells": "4x3",
+    "state": "open",
+    "near": [
+      {
+        "token": "composition_platform",
+        "score": 5,
+        "description": "Pedestal that captures the player-stacked composition into a primitive"
+      },
+      {
+        "token": "elevator_platform",
+        "score": 5,
+        "description": "Platform that slides up/down on Y axis. Teaches vertical translation w"
+      },
+      {
+        "token": "example_3_11_a_spring_connection_vr",
+        "score": 5,
+        "description": "Spring connection demonstration"
+      },
+      {
+        "token": "phase_chamber_bell",
+        "score": 5,
+        "description": "A bell jar over a specimen oscillating F\u2194E with a phase needle. Life i"
+      },
+      {
+        "token": "phase_cube",
+        "score": 5,
+        "description": "A cube that shows phase transitions. SOLID (crystal, \u03bb<0.25) \u2192 COMPLEX"
+      }
+    ]
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      5,
+      18
+    ],
+    "raw": "if_not_exist_create:180:0:1#make:escalator_wrong_destination#why:An_escalator_meets_a_wall_with_a_clear_alternate_exit#like:conveyor_belt#cells:5x4#height:1.8#solid:0#pin:1#plinth:0",
+    "make": "escalator_wrong_destination",
+    "why": "An_escalator_meets_a_wall_with_a_clear_alternate_exit",
+    "like": "conveyor_belt",
+    "cells": "5x4",
+    "state": "open",
+    "near": [
+      {
+        "token": "exit_sign",
+        "score": 5,
+        "description": "Wall-mounted illuminated EXIT sign in Portal 2 / Half-Life vocabulary "
+      },
+      {
+        "token": "wfc_room_bench",
+        "score": 5,
+        "description": "WFC with floor/wall/door tiles: a corridor meets a door meets a room b"
+      },
+      {
+        "token": "grammar_meeting_faces_clean_side",
+        "score": 4,
+        "description": "Composition of 2 primitives"
+      },
+      {
+        "token": "grammar_meeting_faces_clean_top",
+        "score": 4,
+        "description": "Composition of 2 primitives"
+      },
+      {
+        "token": "grammar_meeting_faces_edge_meeting",
+        "score": 4,
+        "description": "Composition of 2 primitives"
+      }
+    ]
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      6,
+      24
+    ],
+    "raw": "if_not_exist_create:180:0:1#make:mutual_cleanup_machines#why:Two_sweepers_deliver_their_remainder_into_each_others_patch#like:conveyor_backlog#cells:5x2#height:1.8#solid:0#pin:1#plinth:0",
+    "make": "mutual_cleanup_machines",
+    "why": "Two_sweepers_deliver_their_remainder_into_each_others_patch",
+    "like": "conveyor_backlog",
+    "cells": "5x2",
+    "state": "open",
+    "near": [
+      {
+        "token": "remainder_box",
+        "score": 6,
+        "description": "A bench that draws the leftover AND the thing that took it away. TWO t"
+      },
+      {
+        "token": "force_field_zone",
+        "score": 5,
+        "description": "A 5 m cube of space where one vector replaces gravity. Throw a cube in"
+      },
+      {
+        "token": "miura_press",
+        "score": 5,
+        "description": "A press folding a flat sheet into a Miura-ori packed solid and back - "
+      },
+      {
+        "token": "sweeper_block",
+        "score": 5,
+        "description": "A blue beam that rotates around a central pivot, sweeping players off "
+      },
+      {
+        "token": "grammar_tessellation_field_alhambra_penrose_decagon_patch",
+        "score": 4,
+        "description": "Composition of 10 primitives"
+      }
+    ]
+  }
+]

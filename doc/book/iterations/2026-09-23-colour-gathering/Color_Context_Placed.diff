@@ -1,0 +1,35 @@
+--- Color_Context_Placed.before.md
++++ Color_Context_Placed.after.md
+@@ -6,13 +6,17 @@
+ 
+ A block, a sphere, a wedge: the primitives. Their positions, turns and proportions: transformation. One piece followed by another, each with an address in a list: arrays. The columns gather these earlier lessons into bodies we can walk around. The turns are already over. The movement is yours.
+ 
+-This is our way into colour. We have learned enough to build something, repeat a choice, change it and look again.
++On the disco floor, the positions stayed fixed while the pattern changed. Here, different choices stand beside one another. You can go back to the first column.
+ 
+ Begin with the four columns near the entrance. Each has the same five pieces in the same positions. One ochre covers the first from foot to crown. Beside it, the blocks are red and the round forms blue. Follow a block from one column to the other. Does it still belong to the whole in the same way?
+ 
+-The geometry has stayed still. Colour gives you another way to gather it, or take it apart.
++The geometry has stayed still. Follow the red past the blue sphere to the next block. The parts touch in one order; colour lets you gather them in another.
+ 
+ The third column assigns colour by height. Two blocks can now disagree. In the fourth, each colour is calculated from the one below: the hue moves halfway around the hue circle, then halfway again. Two colours alternate up the stack. A neighbour has become an input.
++
++![Four native museum views of the same five forms under four colour rules.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/four-colour-rules.png)
++
++*The four columns near the entrance. Their local geometry is the same; each rule gives their pieces a different colour assignment.*
+ 
+ The pieces are stored in an array. The builder begins each turn through it like this:
+ 
+@@ -49,7 +53,11 @@
+ 
+ Recognition adds another kind of company. A palette can arrive with memories of paintings, furniture, toys or interiors. Those associations may draw your attention to a colour before you begin to measure it. They may also make a combination feel familiar so quickly that you stop looking. Stay with one of the columns a little longer. Find a detail its name did not tell you to expect.
+ 
+-The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. New colours come into view. The object has not turned.
++The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. Stripes disappear at one edge and enter at the other. The object has not turned.
++
++![Two views around the fixed rainbow column, with its broad cap overhead.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/around-the-rainbow.png)
++
++*The same column seen from two sides, at a camera height of 1.65 metres above its base. The stripes keep their places while their arrangement in the view changes.*
+ 
+ This is the gallery's `ps07_kras_rainbow`, with the whole capped column raised to 6.2 metres. Thirty stripes take their colours from an array of six entries:
+ 

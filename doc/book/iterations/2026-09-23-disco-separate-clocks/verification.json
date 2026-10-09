@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Canonical chapter equals published reading",
+      "passed": true
+    },
+    {
+      "name": "Code and artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Closing question and Color handoff preserved",
+      "passed": true
+    },
+    {
+      "name": "Only opening and shared figure change the chapter",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/maps/Tutorial_Disco/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/maps/sequences/array_tutorial.json",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/artifacts/regularity/disco_controls.gd",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/context/discofloor/DiscoSequencerBridge.gd",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/audio/sequencer/step_sequencer.gd",
+      "passed": true
+    },
+    {
+      "name": "Production input preserved: commons/audio/sequencer/sequencer_ui.gd",
+      "passed": true
+    },
+    {
+      "name": "Full prior proposal retained: critical.md",
+      "passed": true
+    },
+    {
+      "name": "Full prior proposal retained: technical.md",
+      "passed": true
+    },
+    {
+      "name": "Core hashes current",
+      "passed": true
+    },
+    {
+      "name": "Existing primary selection preserved",
+      "passed": true
+    },
+    {
+      "name": "Other hall records unchanged",
+      "passed": true
+    },
+    {
+      "name": "All 51 focused runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "Captured production scripts still current",
+      "passed": true
+    },
+    {
+      "name": "Earlier instrument and score verifier sources unchanged",
+      "passed": true
+    },
+    {
+      "name": "No GDScript failure in final capture log",
+      "passed": true
+    },
+    {
+      "name": "All source and composed PNGs decode",
+      "passed": true
+    },
+    {
+      "name": "All twelve native row states are present",
+      "passed": true
+    },
+    {
+      "name": "Viewer has play/pause and disclosed interval",
+      "passed": true
+    },
+    {
+      "name": "Unsupported GIF link removed",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: fixed-addresses-changing-values.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: Tutorial_Disco.diff",
+      "passed": true
+    },
+    {
+      "name": "All twelve viewer frames are served correctly",
+      "passed": true
+    },
+    {
+      "name": "Review links to reading, changes, evidence and current source",
+      "passed": true
+    }
+  ],
+  "scope": "Bounded manuscript diff, preserved production and proposals, source/evidence correspondence, image decoding and HTTP routes. Native/composed images visually inspected; viewer JavaScript syntax checked separately with node --check. Browser click check unavailable: browser tool kernel failed its Windows sandbox setup; interactive UI acceptance is not claimed."
+}

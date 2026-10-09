@@ -1,0 +1,1 @@
+Three faces meet and leave an opening. A fourth can enclose a region, but the body may already meet a boundary the eye cannot see. Follow a prism into a slope, concrete into a detour, and a triangle into an arrow asking you to move.

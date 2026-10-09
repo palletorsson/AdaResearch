@@ -1,0 +1,154 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three configured growers in museum",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three configured pushers in museum",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower receives authored config GrowerBlock",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower receives authored config @Node3D@3555",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower receives authored config @Node3D@3557",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher configured axis reaches cached path PusherBlock",
+      "passed": true,
+      "value": "(0.0, 0.0, 3.0)"
+    },
+    {
+      "name": "pusher arrow follows configured direction PusherBlock",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher configured axis reaches cached path @Node3D@3455",
+      "passed": true,
+      "value": "(0.0, 0.0, 3.0)"
+    },
+    {
+      "name": "pusher arrow follows configured direction @Node3D@3455",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher configured axis reaches cached path @Node3D@3457",
+      "passed": true,
+      "value": "(0.0, 0.0, -3.0)"
+    },
+    {
+      "name": "pusher arrow follows configured direction @Node3D@3457",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower collider floor fixed throughout cycle",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "grower mesh matches collider throughout cycle",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "grower reaches small authored size",
+      "passed": true,
+      "value": 0.300000011920929
+    },
+    {
+      "name": "grower reaches large authored size",
+      "passed": true,
+      "value": 3.5
+    },
+    {
+      "name": "pusher actually reaches configured endpoint 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher pauses at configured endpoint 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher actually reaches configured endpoint 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher pauses at configured endpoint 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher actually reaches configured endpoint 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher pauses at configured endpoint 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "legacy default remains centre anchored",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "legacy default keeps midpoint start",
+      "passed": true,
+      "value": 1.29999995231628
+    },
+    {
+      "name": "legacy pusher keeps default X path",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "speed-only update keeps pusher progress",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Pit",
+  "measurements": {
+    "floor_baselines": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "grower_max_floor_error_m": 0.0,
+    "grower_max_size_m": 3.5,
+    "grower_min_size_m": 0.300000011920929
+  }
+}

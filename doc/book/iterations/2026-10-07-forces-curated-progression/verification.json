@@ -1,0 +1,92 @@
+{
+  "checks": 322,
+  "passed": true,
+  "reports": [
+    {
+      "path": "after/Change_Choreography/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 13
+    },
+    {
+      "path": "after/Vectors_Act1_WhatAVectorIs/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 20
+    },
+    {
+      "path": "after/Vectors_Act2_VectorArithmetic/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/Vectors_Act3_FieldsAndMotion/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/Vectors_Act4a_KineticForces/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 15
+    },
+    {
+      "path": "after/Vectors_Act4b_Oscillation/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/Vectors_Act5_ForceAsPlace/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 20
+    },
+    {
+      "path": "after/VFM_02_Operations/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/VFM_03_Motion/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/VFM_05_Launch/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/VFM_07_Gravity/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 14
+    },
+    {
+      "path": "after/VFM_08_Arena/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 19
+    },
+    {
+      "path": "after/VFM_09_Legs/report.json",
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "checks": 15
+    },
+    {
+      "path": "tests/route/report.json",
+      "scope": "Thirteen actual canonical halls forward and one back through the museum portal coordinator. Supplied crossing requests; headset untested.",
+      "checks": 79
+    },
+    {
+      "path": "tests/Vectors_Act1_WhatAVectorIs/report.json",
+      "scope": "Actual museum lesson, numeric assertions, button events, desktop pointer and supplied XRTools rig. Physical headset tracking untested.",
+      "checks": 15
+    },
+    {
+      "path": "tests/Vectors_Act2_VectorArithmetic/report.json",
+      "scope": "Actual museum lesson, numeric assertions, button events, desktop pointer and supplied XRTools rig. Physical headset tracking untested.",
+      "checks": 14
+    },
+    {
+      "path": "tests/VFM_02_Operations/report.json",
+      "scope": "Actual museum lesson, numeric assertions, button events, desktop pointer and supplied XRTools rig. Physical headset tracking untested.",
+      "checks": 14
+    }
+  ],
+  "limits": "Desktop Godot 4.6, supplied XRTools rig and input events. No physical headset, Quest frame-time, all older mechanisms, or learner comprehension claim."
+}

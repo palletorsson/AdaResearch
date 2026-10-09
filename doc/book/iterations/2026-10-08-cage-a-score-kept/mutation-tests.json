@@ -1,0 +1,33 @@
+[
+  {
+    "fault": "replay-redraws-score",
+    "rejected": true,
+    "failures": [
+      "replay retains the record",
+      "replay makes no random requests",
+      "no event dispatched before its time",
+      "chosen stream reaches its actual audio player",
+      "score ends without dropping overdue voices",
+      "replay resets only performance state",
+      "repeated performance keeps event order"
+    ]
+  },
+  {
+    "fault": "one-overdue-event-per-frame",
+    "rejected": true,
+    "failures": [
+      "one late frame dispatches every overdue event",
+      "score ends without dropping overdue voices",
+      "finished score does not repeat events",
+      "repeated performance keeps event order"
+    ]
+  },
+  {
+    "fault": "waits-not-accumulated",
+    "rejected": true,
+    "failures": [
+      "positive intervals accumulate into chronological times",
+      "first event dispatched once at boundary"
+    ]
+  }
+]

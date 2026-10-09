@@ -1,0 +1,100 @@
+{
+	"aabb_note": "Mesh geometry, including profile boards and plinths; labels excluded.",
+	"checks": [
+		{
+			"detail": null,
+			"name": "scene loads",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "artifact script loaded",
+			"passed": true
+		},
+		{
+			"detail": 6,
+			"name": "six sculptures",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "six source profiles",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "no competing host nodes",
+			"passed": true
+		},
+		{
+			"detail": 0.0,
+			"name": "plinth bases sit on floor",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "gallery fits assigned 29 by 37 m room",
+			"passed": true
+		},
+		{
+			"detail": 5.6399998664856,
+			"name": "seven metre ceiling clears geometry",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "18 static collision bodies",
+			"passed": true
+		},
+		{
+			"detail": [],
+			"name": "central entry-to-exit corridor capsule clear",
+			"passed": true
+		},
+		{
+			"detail": [],
+			"name": "cross aisles capsule clear",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "O centre remains open",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "O lower stroke remains a colliding sill",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "six frame recipes unchanged",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "profile mesher unchanged",
+			"passed": true
+		}
+	],
+	"engine": "4.6-stable (official)",
+	"failed": 0,
+	"local_aabb_end": [
+		11.3999996185303,
+		5.6399998664856,
+		15.3000001907349
+	],
+	"local_aabb_position": [
+		-11.3999996185303,
+		0.0,
+		-15.3000001907349
+	],
+	"local_aabb_size": [
+		22.7999992370605,
+		5.6399998664856,
+		30.6000003814697
+	],
+	"scene": "res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.tscn",
+	"scope": "Native artifact instantiation and physics queries only. Endless Museum/VR integration is a separate host run.",
+	"sculpture_triangles": 71132
+}

@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CriticalAlgorithms_Algorithmic_Bias_Visualization · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CriticalAlgorithms_Algorithmic_Bias_Visualization">← Tutorial lineage</a></p><h1>CriticalAlgorithms Algorithmic Bias Visualization</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md">Raw captured source</a></p><pre># Less room for a distinction
+
+Which differences become difficult to recognise when a representation gives some words less room?
+
+&lt;!-- @bias_from_inside --&gt;
+
+Choose two warm-coloured labels and keep both in view while moving COMPRESSION. Compare their changing separation with two grey labels. Stop partway through the movement and notice which words are still easy to distinguish individually. Keep the handle still and move your head. What changes now?
+
+The warm group compresses into a smaller region while the grey group spreads and moves away. The words themselves remain. Their colours and brightness stay fixed while the space available to tell them apart changes. Presence in a representation is therefore different from being represented with useful distinctions.
+
+The source makes the operation inspectable:
+
+```gdscript
+var pos := _marginalized_positions_default[i].lerp(
+    _marginalized_positions_compressed[i], blend
+)
+var xf := Transform3D.IDENTITY
+xf.origin = pos
+_marginalized_multimesh.multimesh.set_instance_transform(i, xf)
+```
+
+The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The handle changes the represented geometry. Moving your head gives you another view of it. Those are two different changes.
+
+An embedding places items in a numerical space so that relations between positions can be used in later calculations. This exhibit stages an authored analogy for that operation. Its positions interpolate between two designed arrangements; they are not measured coordinates from a trained language model. The slider changes the geometry rather than retraining a model or changing only your camera.
+
+That limitation helps keep the question exact. The piece can show what spatial compression does to your ability to separate its labels. It cannot, by itself, establish the distances those same words occupy in an actual system. An empirical claim would need a named model, a documented measurement and a comparison that someone else could check.
+
+Press READ when you are ready to consider the grouping. Both groups were chosen. Now scrutinise the groups chosen for the sculpture. Words such as “queer”, “disabled” and “refugee” do not name interchangeable experiences. Nor are “normal”, “professional” and “objective” equivalent claims. The exhibit risks repeating a flattening if its two colours become a sufficient account of everyone they contain.
+
+Choose one distinction within a colour that you want the representation to retain. For a future version, compare several groupings and ask the people represented which distinctions matter to them. Greater distance alone will not guarantee a better account, but it can make an otherwise hidden question available.
+
+&lt;!-- @ --&gt;
+
+The applied-ethics room moves from word positions to furniture. A plan can distribute the ability to participate before anyone begins speaking.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md">Raw captured source</a></p><pre># How much space does a distinction need?
+
+Transformation gave us interpolation; arrays gave each word an address. Those operations now distribute room between labels.
+
+&lt;!-- @bias_from_inside --&gt;
+
+Choose two pink labels. Move the COMPRESSION slider partway, compare their separation, then repeat with two grey labels. Hold the slider at one value while moving your own viewpoint.
+
+The slider changes the positions of the labels themselves. Moving your head changes the view of that arrangement. Keep these two transformations separate.
+
+The source makes the operation inspectable:
+
+```gdscript
+var pos := _marginalized_positions_default[i].lerp(
+    _marginalized_positions_compressed[i], blend
+)
+var xf := Transform3D.IDENTITY
+xf.origin = pos
+_marginalized_multimesh.multimesh.set_instance_transform(i, xf)
+```
+
+The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The handle changes the represented geometry. Moving your head changes its projection from where you stand.
+
+[Implementation](../../../commons/artifacts/bias_from_inside/bias_from_inside.gd). This is an excerpt from the artifact, not a standalone program.
+
+The two groups and both arrangements were chosen by the maker. This is a spatial argument about compression, not a measurement of a trained language model. Its pink category can itself flatten the people it asks us to distinguish. Name one difference within that category that matters to you. The queer opening is a demand to revise the representation, not a promise that expanding every distance will produce justice.
+
+&lt;!-- @ --&gt;
+
+A representation allocates distinctions. A room allocates opportunities to address one another.
+
+## Next experiment — not yet a visitor control
+
+Compare a named pair at three slider positions from the same viewing distance, then ask whether the labels remain distinguishable from the intended approach. Record the pair and viewpoint before generalising this to other dense displays.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md">Raw captured source</a></p><pre># Distinguish — an arrangement changes
+
+Synthesis asked which conditions a specimen receives. Here an array of indexed words receives positions. The transformation is the same linear interpolation encountered earlier; the question is what remains distinguishable when those positions converge.
+
+The primary artifact is bias_from_inside. It retains two arrays of twelve terms and seed 42. Each term has an authored position in arrangement A and in arrangement B. The legacy export and map-token key remains perspective_blend; the visible handle is COMPRESSION. No camera, player transform, model training or measured embedding is involved.
+
+```gdscript
+var pos := _marginalized_positions_default[i].lerp(
+    _marginalized_positions_compressed[i], blend
+)
+var xf := Transform3D.IDENTITY
+xf.origin = pos
+_marginalized_multimesh.multimesh.set_instance_transform(i, xf)
+```
+
+The tags follow those same indices. The warm points contract towards a cluster with a default radius of 0.15 m; the grey points move out to a seeded ring whose radii are 2.3–2.7 m. These are authored spatial coordinates. Neither arrangement is labelled fair or unfair by the interface.
+
+The rail signal carries physical travel. The handler now obtains get_normalized_value() from the wrapper, so the full rail spans the whole 0–1 interpolation. The previous callback treated travel as blend; its upper endpoint supplied only 0.14. Author configuration now regenerates endpoints when radii change and synchronizes the handle. Repeated configuration clears the coordinate arrays first.
+
+Warm emission and grey alpha are fixed throughout the comparison. The two groups still have different authored colours, and all tags face the viewer. Fixing their materials isolates one changing cause; it does not remove the interpretive choices already made by their grouping or their spatial arrangement.
+
+READ / CLOSE reveals or hides a short project reading without changing geometry. The header names arrangement A, the interval or arrangement B; the handle gives the numerical setting. The stand keeps the handle near 1.1 m in this hall. The study is placed in the wider southern area with clearance for its expanded endpoint. The other three artifact families remain secondary.
+
+The applied-ethics hall takes the next step: a furniture arrangement can distribute possible relations before anyone speaks. Headset reach, readability and learner understanding remain to be tested; the controlled museum probe checks a selected approach, the callbacks and actual coordinates.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/intent.md">Raw captured source</a></p><pre>Concept: Bias as spatial allocation — a divided room where the left half is spacious and the right half cramped, making algorithmic inequality architectural before it is mathematical.
+Sequence role: First map in Post-Foundations Crisis; the applied consequences of formalization&#x27;s limits. After the Foundations Crisis revealed that formal systems have outsides and the QFEP Lab gave tools for working the edge, this sequence asks: what do we build, knowing what we know? The bias visualizer answers: systems that reproduce inequality unless actively resisted; leads to SpeculativeComputation_Rhizome_Network.
+Technical angle: Algorithmic bias as unequal distribution of computational resources (training data, feature weighting, outcome allocation). The bias_visualizer makes the disparity spatial — walk from the spacious side to the cramped side and feel the difference. The room itself is the dataset, partitioned unfairly.
+Critical angle: Algorithms inherit the biases of their training data, their designers, and their deployment contexts. The post-crisis insight: knowing that formal systems have limits does not prevent those systems from having real effects. Bias is not a bug but a structural property of any system that classifies — and classification always creates an outside. The room&#x27;s asymmetry is the QFEP F-term imposing order that excludes.
+Key artifacts: bias_visualizer demonstrates algorithmic bias as spatial inequality — the architecture IS the argument.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/critical.md">Raw captured source</a></p><pre># How much space does a distinction need?
+
+Choose two pink labels. Move the COMPRESSION slider partway, compare their separation, then repeat with two grey labels. Hold the slider at one value while moving your own viewpoint.
+
+The two groups and both arrangements were chosen by the maker. This is a spatial argument about compression, not a measurement of a trained language model. Its pink category can itself flatten the people it asks us to distinguish. Name one difference within that category that matters to you. The queer opening is a demand to revise the representation, not a promise that expanding every distance will produce justice.
+
+The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The handle changes the represented geometry. Moving your head changes its projection from where you stand.
+
+The material comparison is specific: the slider changes the positions of the labels themselves. Moving your head changes the view of that arrangement. Keep these two transformations separate.
+
+A representation allocates distinctions. A room allocates opportunities to address one another.
+
+## A question to test in the encounter
+
+Compare a named pair at three slider positions from the same viewing distance, then ask whether the labels remain distinguishable from the intended approach. Record the pair and viewpoint before generalising this to other dense displays.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/artifacts.md">Raw captured source</a></p><pre># CriticalAlgorithms Algorithmic Bias Visualization — Artifacts
+*Post-Crisis: Applied Limits · synthesis · 3 artifacts*
+
+&gt; A room divided. The left half: spacious, five columns wide. The right half: cramped, two columns, same population. The bias is architectural before it is mathematical. Walk through it. Feel the allocation.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## Bias Visualizer
+![Bias Visualizer](/scene-catalog/bias_visualizer.png)
+
+Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.
+
+`bias_visualizer`
+
+## Bias From Inside
+![Bias From Inside](/scene-catalog/bias_from_inside.png)
+
+Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god&#x27;s-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).
+
+`bias_from_inside`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/summary.md">Raw captured source</a></p><pre># Less room for a distinction
+
+Move COMPRESSION and follow the same two warm labels, then two grey labels. Keep the handle fixed and move your head. The object changes its coordinates; your movement changes the view.
+
+The study uses 24 indexed terms, two seeded arrangements and linear interpolation. Its materials remain fixed during the comparison. READ / CLOSE offers the maker&#x27;s interpretation separately. The two colour groups are themselves an authored reduction, open to criticism.
+
+This is an illustrative word-position study, not measured language-model data. The surrounding bias_visualizer, science_screen and situated_readout remain secondary. All four artifact families remain; the primary moves to the wider southern area at usable height. The sequence proceeds to Applied Ethics and the relations a furniture arrangement makes possible.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CriticalAlgorithms_Algorithmic_Bias_Visualization/blurb.md">Raw captured source</a></p><pre>*The words remain. How much room do their differences have?*
+
+Hold one pair in view. Move COMPRESSION.
+
+Then hold the handle still and move yourself.
+</pre></section></body></html>

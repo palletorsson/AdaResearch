@@ -1,0 +1,75 @@
+--- Array/title/before
++++ Array/title/after
+@@ -1 +1 @@
+-Keep the address, vary its occupant
++Keep a place when its occupant leaves
+--- Array/storyboard/before
++++ Array/storyboard/after
+@@ -1 +1 @@
+-The labelled row loses a cube without closing its gap; the square grid gives that retained address two indices. Bringing Trace's list and loop, the student builds a small grid and keeps occupancy values separate from the references to its visible cubes. Nested loops place the copies; a supplied collection event changes one value. At the Molnár study, they add one bounded random offset per site and store it, so changing its strength does not draw again. The result is a repeatable arrangement that distinguishes address, occupant and chosen departure.
++The row loses a cube without closing its gap; the nearby grid lets the student locate another absence with two indices. Bringing Trace’s list and loop and Transformation’s positioned body, they begin with four slots, then extend the same read/write operation to a small grid. Follow the installed convention, grid_data[x][z], and keep occupancy values separate from visible-node references and spacing. A named display adapter and collection event are supplied. The student empties a chosen slot, changes the spacing and explains why the other addresses remain. They carry the occupancy record and its reader. Molnár’s retained departures offer an optional next experiment; the changing floor remains an encounter with the physical consequence of an empty place.
+--- Array/storyboard_short/before
++++ Array/storyboard_short/after
+@@ -1 +1 @@
+-Use the gapped row, indexed grid and Molnár study. Reuse Trace's list and loop. Teach nested addressing with occupancy separate from cube references; then store one bounded random offset per site and vary its strength without redrawing. Supply collection event and comparison display. Carry repeatable arrangements distinguishing address, occupant and departure. Keep floor writing an encounter.
++Use row and indexed grid. Reuse Trace list/loop and positioned bodies. Teach retained slots, then grid_data[x][z]; separate occupancy, node reference and spacing. Supply display adapter/collection event. Check: empty one slot, vary spacing, preserve addresses. Carry record + reader. Optional: stored Molnár departures. Floor writer stays an encounter. Open: reduced learner binding; Array tutorial absent.
+--- Tutorial_3D/title/before
++++ Tutorial_3D/title/after
+@@ -1 +1 @@
+-Make a third index usable
++Name the layer and keep the convention visible
+--- Tutorial_3D/storyboard/before
++++ Tutorial_3D/storyboard/after
+@@ -1 +1 @@
+-The flight enclosure lets the student reach a selected cube above the ground layer and return to its empty address. Building on their two-index grid, they extend a small study to layers, explicitly connecting display order x,y,z with storage order layer,row,column. The flight region, selection marker and collection signal are supplied. They write and retrieve one value without shifting its neighbours, then compare the open-structure and suspended-fragment studies as different bodies for repeated sites. The new capability is to navigate a three-index record; visible gaps are not extra array entries.
++In the flight enclosure, the student selects a cube above the ground and later reads zero where it stood. They bring the two-index occupancy record and extend the study to layers. The displayed address is [x, y, z], while the installed volume reads values[y][z][x]. Before changing a value, they show how the earlier [x][z] plane becomes one [z][x] layer: the conversion is part of the lesson. Flight, selection and collection are supplied. The student predicts an unequal-index address, changes its value and reads it back without shifting its neighbours. They carry an explicit storage-to-space mapping. Open structures and suspended fragments remain further uses of addressed places, not additional required data systems.
+--- Tutorial_3D/storyboard_short/before
++++ Tutorial_3D/storyboard_short/after
+@@ -1 +1 @@
+-Use the flight enclosure and its emptied cube address. Reuse the two-index grid; extend a small volume to layers. Teach display x,y,z versus storage layer,row,column; write/retrieve without shifting neighbours. Supply flight permission, selection marker and collection event. Compare open structures and suspended fragments. Carry three-index addressing; visible gaps are not extra entries.
++Use flight enclosure. Reuse occupancy record. Teach displayed [x,y,z] → values[y][z][x]; explicitly convert earlier [x][z] plane into a [z][x] layer. Supply flight/selection/collection. Check unequal indices; write/read one slot without shifts. Carry storage-to-space mapping. Open structures/suspension remain comparisons. Open: reduced study binding; an added dimension grants no flight.
+--- Tutorial_Tiling_Floor/title/before
++++ Tutorial_Tiling_Floor/title/after
+@@ -1 +1 @@
+-A rule reaches every tile
++Let an address choose a turn
+--- Tutorial_Tiling_Floor/storyboard/before
++++ Tutorial_Tiling_Floor/storyboard/after
+@@ -1 +1 @@
+-At the black-and-white fields, the student changes one motif and sees a larger figure cross the tile joints. Their indexed grid and rotation function now become a pattern generator: a small asymmetric tile is supplied, while they assign its quarter-turn from the row and column. Remainder arithmetic makes the count return after four, and a condition lets one chosen address depart from the rule. The large floor and comparison controls remain supplied. The student leaves with a local address rule that can generate a field of any chosen finite size.
++At the paired four-by-four samples, one extra turn at each address makes a larger figure cross the joints. The student brings addressing and rotation, but now gives the value another declared meaning: zero quarter-turns is an orientation, not an empty slot. With the asymmetric tile and image renderer supplied, they write one address-to-turn function using remainder by four. They predict a selected tile’s result, then add one exceptional address. Enlarging the field repeats the same calculation without adding instructions. They carry the motif choice, turn rule and exception separately. The other fields provide comparisons; the floor’s apparent ridges do not become steps underfoot.
+--- Tutorial_Tiling_Floor/storyboard_short/before
++++ Tutorial_Tiling_Floor/storyboard_short/after
+@@ -1 +1 @@
+-Use black-and-white fields. Reuse grid indices and rotation. Teach one quarter-turn rule from row/column, remainder after four and a condition for one exceptional address. Supply asymmetric tile, large floor and comparison controls. Change the motif and inspect figures crossing joints. Carry a local rule for finite fields; use the other fields as comparisons.
++Use paired 4×4 samples. Reuse indices/rotation. Teach address → quarter-turn via remainder; zero means orientation, not vacancy. Supply motif/image renderer. Predict one result, add one exception, enlarge field with same rule. Carry motif + turn rule + exception. Other fields compare. Existing tiling rasterizes images; no per-tile body or stored occupancy implied. Open: learner-rule binding.
+--- Tutorial_Tiling_Walls/title/before
++++ Tutorial_Tiling_Walls/title/after
+@@ -1 +1 @@
+-A picture and the wall carrying it
++Keep the pattern, change what carries it
+--- Tutorial_Tiling_Walls/storyboard/before
++++ Tutorial_Tiling_Walls/storyboard/after
+@@ -1 +1 @@
+-The six familiar fields stand upright, and a patterned wall can turn open onto a finite landing. Reusing their tile rule, the student mounts the same generated image on a small upright surface and compares it with the floor version from several distances. Image generation, the existing hinge and the exterior landing are supplied. They distinguish turning a mark within an image from turning its carrier and collision together; no new syntax is required. A short comparison record travels onward: the same data can face another direction without gaining another physical permission.
++The same pattern now stands in front of the student. They bring the motif and turn rule from the floor and reuse its generated image on a supplied upright receiver. The eye chart and a walk toward and away from it let them compare what remains legible as its apparent size changes. No new syntax is needed. At the exception wall, they predict the difference between turning a mark inside the image and turning the sheet with its collision. One alters the picture; the other can open a passage. The hinge and finite landing stay supplied. They carry a comparison separating source, appearance and access, including the brief chance to look back at the outside of the museum’s enclosure.
+--- Tutorial_Tiling_Walls/storyboard_short/before
++++ Tutorial_Tiling_Walls/storyboard_short/after
+@@ -1 +1 @@
+-Use upright fields and the hinged wall's finite landing. Reuse the tile rule on a small upright surface; compare viewing distances with its floor version. Supply image generation/receiver, hinge and landing. Distinguish image rotation from turning carrier and collision together. Carry a comparison of orientation and physical permission. Require no new syntax; defer wall construction and rendering depth.
++Use wall fields, eye chart and turning wall. Reuse floor motif/rule/image on supplied upright receiver. Compare distance and apparent scale; no new syntax. Predict image-turn versus carrier/collision-turn. Supply hinge/landing. Carry source–appearance–access distinction. Preserve the outside pause. Open: learner image assignment; no new tiling or wall-construction lesson.
+--- Tutorial_Disco/title/before
++++ Tutorial_Disco/title/after
+@@ -1 +1 @@
+-Read a score with a clock
++Let a clock read the choices you kept
+--- Tutorial_Disco/storyboard/before
++++ Tutorial_Disco/storyboard/after
+@@ -1 +1 @@
+-The monochrome floor changes while its squares remain still, and the separate sequencer begins with empty cells. Bringing indexed values and the elapsed clock, the student writes a short repeating score, then advances a playhead through it at a chosen interval. A supplied sound receiver accepts track and trigger; the existing grid display and floor remain available for comparison. One loop reads the stored pattern while another count can drive visual phase. The learner can move an event without changing tempo and change tempo without rewriting the score, carrying a reusable timed reader onward.
++The monochrome floor changes while a separate sequencer offers empty cells to fill. The student brings indexed lookup, remainder and elapsed time. They make a short score with explicitly named track and step indices, following the instrument’s [track][step] convention; false means no new sound trigger, not a missing floor tile. A supplied sound receiver handles the note. The student advances a playhead through the kept score, moves an event without changing tempo, then changes tempo without rewriting the entries. They stop the score and watch the floor continue. They carry a reusable timed reader. The sixteen-step score’s connection to twelve floor columns is a comparison of addresses, not a lesson in recording footsteps.
+--- Tutorial_Disco/storyboard_short/before
++++ Tutorial_Disco/storyboard_short/after
+@@ -1 +1 @@
+-Use the changing stationary floor and separate empty sequencer. Reuse indexed values and elapsed time. Teach a stored repeating score read by an interval-driven playhead. Supply track/trigger sound receiver and grid display. Move an event independently of tempo; change tempo independently of score. Carry a timed reader. Keep floor and score clocks separate; no implemented footstep recording.
++Use separate sequencer and changing floor. Reuse lookup/remainder/time. Teach score[track][step] plus timed playhead; false = no new trigger. Supply sound receiver/display. Move event at fixed tempo; change tempo with score fixed; stop score and predict floor. Carry timed reader. 16 steps/12 columns can share a flash address. No footstep recording. Open: old tutorial contradicts current encounter.

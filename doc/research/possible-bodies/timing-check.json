@@ -1,0 +1,38 @@
+{
+  "checks": 24,
+  "failures": [],
+  "headset_tested": false,
+  "observations": {
+    "backlog": {
+      "admitted": 29,
+      "collected": 12,
+      "here": 17
+    },
+    "highest_backlog_center": 1.54562294483185,
+    "matched": {
+      "admitted": 11,
+      "collected": 5,
+      "here": 6
+    },
+    "parcels_in_tray": 5,
+    "recovered": {
+      "admitted": 49,
+      "collected": 44,
+      "here": 5
+    },
+    "remaining_positions": [
+      "(2.345135, 1.418839, 0.000051)",
+      "(1.265282, 1.418838, 0.000034)",
+      "(0.185429, 1.418839, 0.000017)",
+      "(-0.894424, 1.418838, 0.0)",
+      "(-1.974277, 1.418839, -0.000017)"
+    ]
+  },
+  "date": "2026-09-11",
+  "conditions": "Desktop Godot compatibility renderer; scripted pointer presses and real physics. Supplied capture viewpoints, with target-hall artifacts made visible.",
+  "limitations": [
+    "Headset reach, comfort, legibility and sustained VR performance untested.",
+    "Boxes have rigid bodies but no pick-up interface; a designed climbing route is future work.",
+    "Known project UID and renderer-feature warnings remain; no script errors in the probe."
+  ]
+}

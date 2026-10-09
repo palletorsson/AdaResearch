@@ -1,0 +1,52 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -256,7 +256,7 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Scale/final.md",
+-      "text_sha256": "d526e4cdcea3da7e0735e91feda19b7d70304b72524c4a9fb9f28507122b54f4",
++      "text_sha256": "6f4cf75382995324a151e50a7a0375e804b6cabab09b78dd738321a29b114a83",
+       "map_sha256": "0746e3b72d6d51cbd893e65b22adb3c6d071869ab81fa3d90981f3b31a1fe008",
+       "learner_verified": false
+     },
+
+--- before/commons/maps/Trans_Scale/final.md
++++ after/commons/maps/Trans_Scale/final.md
+@@ -20,7 +20,7 @@
+ room.scale = Vector3.ONE * FACTOR
+ ```
+ 
+-`FACTOR` is four. The food and the figure belong to `room`, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Enlarging a mesh by itself would have left her standing in the wrong relationship to it.
++`FACTOR` is four. The food and the figure belong to `room`, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Increasing only their dimensions would have left the distance between them unchanged.
+ 
+ The arrival on the plate is another operation. Scaling the room would not put you there. The program takes the top plate's local position and asks where it has arrived in the enlarged world:
+ 
+@@ -36,7 +36,11 @@
+ 
+ Just beyond it stands a second gold frame, also 1.8 metres wide and 2.4 high. Pass through that one too. It stood at this size before you took the bottle.
+ 
+-The little doorway has kept its proportions. There is a difference between preserving a shape and preserving what someone can do there.
++![The tiny gold doorway and its enlarged version in the actual museum, viewed from the same standing height and distance.](/book-review/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png)
++
++*The camera stays 1.65 metres above the floor and 2.5 metres from the opening in both views. On the right, the second gold frame beyond the doorway has stayed at its original size.*
++
++The little doorway has kept its proportions. There is a difference between preserving a shape and preserving what someone can do there. If the bottle had enlarged you by the same factor, would that doorway have become an exit?
+ 
+ The figure has not become hostile by becoming enormous. Her unfamiliar body remains with you through the change. The same is true of the food: its strangeness preceded its usefulness as a landscape. You can learn a route through something without exhausting what it is.
+ 
+
+--- before/commons/maps/Trans_Scale/technical.md
++++ after/commons/maps/Trans_Scale/technical.md
+@@ -20,3 +20,12 @@
+ A separate `UnscaledDoorway` is a sibling of `Room`, never a descendant. Its 1.8-by-2.4-metre opening lines up just beyond the expanded exit. Both admit the same body after the change, but only the room doorway has been multiplied. This fixed comparison makes the transform hierarchy visible.
+ 
+ Verification: commons/testing/probe_drink_me_room.gd loads the actual museum hall, takes the bottle through the desktop pointer, checks both door sizes against a body capsule, scale boundaries, arrival clearance, landing collision, descent and visibility near the exit. Headset comfort and learner discovery remain to be walked by a person.
++
++
++## Shared book illustration — 23 September
++
++The chapter's paired door image comes from the actual museum encounter before and after taking the bottle through the desktop pointer. Both cameras sit 1.65 m above the room floor and 2.5 m in front of the opening, look toward a point 1.2 m above its centre, and use the same 70-degree field of view. Camera position follows the doorway when the room grows; camera height, viewing distance and pitch do not scale. The second gold frame visible beyond the enlarged door retains its original world transform.
++
++`tools/probes/scale_book_illustrations.gd` records those views and checks a 0.44 m wide, 1.6 m high capsule before and after the change. A hypothetical fourfold body is only a probe comparison, not a new visitor control. No room, sculpture, map or runtime behavior changed. The earlier full serving-plate descent remains historical evidence; this illustration pass does not rewalk it.
++
++[Full reading, paired image and scope](../../../doc/book/iterations/2026-09-23-scale-door-and-body/index.html).

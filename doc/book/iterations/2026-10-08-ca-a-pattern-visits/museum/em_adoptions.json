@@ -1,0 +1,23 @@
+{
+ "_readme": "ADOPTION — which wall work speaks for which artifact, per hall. DERIVED by closeness (em_detail hangs a line on the field nearest its body) and written here as it was actually hung. The HAND outranks it: put `adopt: [{page, token}]` on the pearl in commons/data/book/<chapter>.json and that page keeps that work whatever moves. An empty token pins the wall silent.",
+ "halls": {
+  "cellularautomata|ca beyondbinary": [
+   {
+    "page": 0,
+    "token": "mold_network"
+   },
+   {
+    "page": 4,
+    "token": "ca_growth_network"
+   },
+   {
+    "page": 5,
+    "token": "game_of_life_petri"
+   },
+   {
+    "page": 8,
+    "token": "hexagon_ca_vr"
+   }
+  ]
+ }
+}

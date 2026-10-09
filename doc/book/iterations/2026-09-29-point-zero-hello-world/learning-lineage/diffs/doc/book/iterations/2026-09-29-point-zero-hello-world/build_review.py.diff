@@ -1,0 +1,11 @@
+--- before/doc/book/iterations/2026-09-29-point-zero-hello-world/build_review.py
++++ doc/book/iterations/2026-09-29-point-zero-hello-world/build_review.py
+@@ -83,6 +83,8 @@
+ })}</article>
+ <div class="turn-page"><p><a href="corridor-order/DECISIONS.md">How the tutorial follows the corridor</a> · <a href="corridor-order/native-verification.json">Study checks</a></p></div>
+ """)
++pages["lineage.html"]=page("The opening tutorial lineage", '<header><p class="eyebrow">Teaching agreement · 29 September 2026</p><nav><a href="point-one.html#making">Return to Point One</a></nav></header><article class="reading" id="lineage">'+render(read(ROOT/"doc/book/TUTORIAL_LINEAGE.md"),"lineage")+'</article>')
++pages["point-one.html"]=pages["point-one.html"].replace('<a href="corridor-order/DECISIONS.md">', '<a href="lineage.html#lineage">The learning lineage</a> · <a href="corridor-order/DECISIONS.md">')
+ for name,body in pages.items():write(OUT/name,body)
+ for name,body in pages.items():
+     soup=BeautifulSoup(body,"html.parser");ids=[e["id"] for e in soup.find_all(id=True)]

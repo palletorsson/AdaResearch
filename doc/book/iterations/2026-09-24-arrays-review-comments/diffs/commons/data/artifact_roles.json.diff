@@ -1,0 +1,42 @@
+--- before/commons/data/artifact_roles.json
++++ commons/data/artifact_roles.json
+@@ -482,8 +482,9 @@
+       "row_3_x": "primary",
+       "xyz_coordinates": "secondary",
+       "grid_2d_4x4": "primary",
+-      "gridagent": "secondary",
+-      "pulsar_visualizer": "secondary"
++      "pulsar_visualizer": "secondary",
++      "array_floor_writer": "primary",
++      "molnar_cube_study": "primary"
+     },
+     "Flow_Field": {
+       "flow_field_painter": "primary",
+@@ -2564,12 +2565,13 @@
+     "Array": {
+       "primary": [
+         "row_3_x",
+-        "grid_2d_4x4"
++        "grid_2d_4x4",
++        "array_floor_writer",
++        "molnar_cube_study"
+       ],
+       "secondary": [
+         "column_3_z",
+         "xyz_coordinates",
+-        "gridagent",
+         "pulsar_visualizer"
+       ],
+       "decoration": []
+@@ -4941,6 +4943,11 @@
+         "id": "note-1",
+         "role": "primary",
+         "text": "THE OVERTURE (Palle, 2026-09-07). This hall keeps row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 even though each now has its own room in the revived array_tutorial ladder. That is the point: you see the whole ladder standing at once before you climb it, and the seven rooms after take one rung each. The duplication is the argument, not debt from the 2026-08-24 fold."
++      },
++      {
++        "id": "array-changing-floor-2026-09-24",
++        "role": "primary",
++        "text": "Author decision, 24 September 2026: develop the changing floor. array_floor_writer replaces the old gridagent placement, making actual grid occupancy alter support underfoot. Primary reading order follows the current five-hall sequence and includes the existing Molnár study. The older overture note above is retained as history."
+       }
+     ],
+     "WaveFunctions_Effect_Sound": [

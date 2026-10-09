@@ -1,5 +1,5 @@
 {
-  "seeds_per_strategy": 20,
+  "seeds_per_strategy": 8,
   "room": {
     "width": 12,
     "depth": 8,
@@ -113,37 +113,37 @@
   ],
   "summary": {
     "random": {
-      "n": 20,
-      "mean": 0.8605,
+      "n": 8,
+      "mean": 0.8809,
       "best": 0.9463,
-      "worst": 0.7837,
-      "std": 0.05,
+      "worst": 0.8078,
+      "std": 0.0561,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.705,
-        "wall_backing_satisfied": 0.525,
-        "isolation_satisfied": 0.64,
-        "cluster_satisfied": 0.659,
-        "preferred_zone_match": 0.496,
-        "reachability": 0.993,
+        "clearance_satisfied": 0.716,
+        "wall_backing_satisfied": 0.688,
+        "isolation_satisfied": 0.663,
+        "cluster_satisfied": 0.747,
+        "preferred_zone_match": 0.545,
+        "reachability": 0.982,
         "spawn_walkable": 1.0,
         "teleporter_walkable": 1.0
       }
     },
     "rule_based": {
-      "n": 20,
-      "mean": 0.897,
-      "best": 0.9234,
+      "n": 8,
+      "mean": 0.8935,
+      "best": 0.9228,
       "worst": 0.8725,
-      "std": 0.0158,
+      "std": 0.0152,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.72,
+        "clearance_satisfied": 0.705,
         "wall_backing_satisfied": 1.0,
-        "isolation_satisfied": 0.345,
-        "cluster_satisfied": 0.809,
+        "isolation_satisfied": 0.35,
+        "cluster_satisfied": 0.771,
         "preferred_zone_match": 0.72,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
@@ -151,45 +151,45 @@
       }
     },
     "sdf": {
-      "n": 20,
-      "mean": 0.9204,
+      "n": 8,
+      "mean": 0.9177,
       "best": 0.9523,
       "worst": 0.8163,
-      "std": 0.032,
+      "std": 0.0396,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.762,
+        "clearance_satisfied": 0.774,
         "wall_backing_satisfied": 1.0,
         "isolation_satisfied": 1.0,
-        "cluster_satisfied": 0.51,
+        "cluster_satisfied": 0.488,
         "preferred_zone_match": 0.72,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
-        "teleporter_walkable": 0.9
+        "teleporter_walkable": 0.875
       }
     },
     "fold": {
-      "n": 20,
-      "mean": 0.9346,
-      "best": 0.963,
+      "n": 8,
+      "mean": 0.9269,
+      "best": 0.9628,
       "worst": 0.85,
-      "std": 0.028,
+      "std": 0.0341,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.788,
-        "wall_backing_satisfied": 0.825,
-        "isolation_satisfied": 0.965,
-        "cluster_satisfied": 0.872,
-        "preferred_zone_match": 0.636,
+        "clearance_satisfied": 0.789,
+        "wall_backing_satisfied": 0.75,
+        "isolation_satisfied": 0.95,
+        "cluster_satisfied": 0.867,
+        "preferred_zone_match": 0.615,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
         "teleporter_walkable": 1.0
       }
     },
     "paradoxical": {
-      "n": 20,
+      "n": 8,
       "mean": 0.9171,
       "best": 0.9171,
       "worst": 0.9171,
@@ -208,18 +208,18 @@
       }
     },
     "hybrid": {
-      "n": 20,
+      "n": 8,
       "mean": 0.9666,
       "best": 0.9671,
       "worst": 0.9662,
-      "std": 0.0004,
+      "std": 0.0005,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
         "clearance_satisfied": 0.829,
         "wall_backing_satisfied": 1.0,
         "isolation_satisfied": 1.0,
-        "cluster_satisfied": 0.73,
+        "cluster_satisfied": 0.732,
         "preferred_zone_match": 1.0,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
@@ -227,7 +227,7 @@
       }
     },
     "circle_packing": {
-      "n": 20,
+      "n": 8,
       "mean": 0.9405,
       "best": 0.9405,
       "worst": 0.9405,
@@ -246,64 +246,64 @@
       }
     },
     "warehouse": {
-      "n": 20,
-      "mean": 0.7815,
+      "n": 8,
+      "mean": 0.7797,
       "best": 0.7868,
       "worst": 0.7787,
-      "std": 0.0039,
+      "std": 0.0027,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.466,
+        "clearance_satisfied": 0.48,
         "wall_backing_satisfied": 1.0,
         "isolation_satisfied": 0.0,
-        "cluster_satisfied": 0.92,
-        "preferred_zone_match": 0.909,
+        "cluster_satisfied": 0.893,
+        "preferred_zone_match": 0.878,
         "reachability": 0.429,
         "spawn_walkable": 1.0,
         "teleporter_walkable": 1.0
       }
     },
     "simulated_annealing": {
-      "n": 20,
-      "mean": 0.9348,
-      "best": 0.9657,
-      "worst": 0.904,
-      "std": 0.0169,
+      "n": 8,
+      "mean": 0.9373,
+      "best": 0.9593,
+      "worst": 0.9186,
+      "std": 0.0142,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.774,
-        "wall_backing_satisfied": 0.925,
-        "isolation_satisfied": 0.915,
-        "cluster_satisfied": 0.853,
-        "preferred_zone_match": 0.622,
+        "clearance_satisfied": 0.786,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.813,
+        "cluster_satisfied": 0.898,
+        "preferred_zone_match": 0.632,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
         "teleporter_walkable": 1.0
       }
     },
     "voronoi": {
-      "n": 20,
-      "mean": 0.8944,
+      "n": 8,
+      "mean": 0.9171,
       "best": 0.9767,
-      "worst": 0.7705,
-      "std": 0.0608,
+      "worst": 0.8206,
+      "std": 0.0543,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.811,
+        "clearance_satisfied": 0.819,
         "wall_backing_satisfied": 1.0,
-        "isolation_satisfied": 0.95,
-        "cluster_satisfied": 0.653,
-        "preferred_zone_match": 0.559,
+        "isolation_satisfied": 0.975,
+        "cluster_satisfied": 0.78,
+        "preferred_zone_match": 0.597,
         "reachability": 1.0,
-        "spawn_walkable": 0.95,
-        "teleporter_walkable": 0.7
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.75
       }
     },
     "humanoid_walker": {
-      "n": 20,
+      "n": 8,
       "mean": 0.9021,
       "best": 0.9021,
       "worst": 0.9021,
@@ -322,36 +322,36 @@
       }
     },
     "grow_walker": {
-      "n": 20,
-      "mean": 0.7314,
+      "n": 8,
+      "mean": 0.7424,
       "best": 0.7971,
       "worst": 0.6512,
-      "std": 0.0726,
+      "std": 0.0706,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.598,
+        "clearance_satisfied": 0.593,
         "wall_backing_satisfied": 0.0,
-        "isolation_satisfied": 0.275,
-        "cluster_satisfied": 0.58,
+        "isolation_satisfied": 0.312,
+        "cluster_satisfied": 0.595,
         "preferred_zone_match": 0.44,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
-        "teleporter_walkable": 0.55
+        "teleporter_walkable": 0.625
       }
     },
     "focal_composition": {
-      "n": 20,
-      "mean": 0.8721,
+      "n": 8,
+      "mean": 0.8718,
       "best": 0.8735,
       "worst": 0.87,
-      "std": 0.0017,
+      "std": 0.0018,
       "per_metric": {
         "footprint_in_bounds": 1.0,
         "no_overlap": 1.0,
-        "clearance_satisfied": 0.736,
+        "clearance_satisfied": 0.739,
         "wall_backing_satisfied": 1.0,
-        "isolation_satisfied": 0.46,
+        "isolation_satisfied": 0.45,
         "cluster_satisfied": 0.196,
         "preferred_zone_match": 0.72,
         "reachability": 1.0,
@@ -360,7 +360,7 @@
       }
     },
     "pacing_arc": {
-      "n": 20,
+      "n": 8,
       "mean": 0.9256,
       "best": 0.9256,
       "worst": 0.9256,
@@ -379,7 +379,7 @@
       }
     },
     "alexander": {
-      "n": 20,
+      "n": 8,
       "mean": 0.8898,
       "best": 0.8898,
       "worst": 0.8898,
@@ -398,7 +398,7 @@
       }
     },
     "promenade": {
-      "n": 20,
+      "n": 8,
       "mean": 0.7971,
       "best": 0.7971,
       "worst": 0.7971,
@@ -417,7 +417,7 @@
       }
     },
     "tile_wfc": {
-      "n": 20,
+      "n": 8,
       "mean": 0.8531,
       "best": 0.8531,
       "worst": 0.8531,
@@ -430,6 +430,63 @@
         "isolation_satisfied": 0.5,
         "cluster_satisfied": 0.75,
         "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "crystallization": {
+      "n": 8,
+      "mean": 0.8364,
+      "best": 0.8364,
+      "worst": 0.8364,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.884,
+        "wall_backing_satisfied": 0.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.144,
+        "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "stickiness": {
+      "n": 8,
+      "mean": 0.7989,
+      "best": 0.8238,
+      "worst": 0.7583,
+      "std": 0.0235,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.581,
+        "wall_backing_satisfied": 0.125,
+        "isolation_satisfied": 0.1,
+        "cluster_satisfied": 0.845,
+        "preferred_zone_match": 0.615,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "colonization": {
+      "n": 8,
+      "mean": 0.8916,
+      "best": 0.9237,
+      "worst": 0.8501,
+      "std": 0.027,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.738,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.463,
+        "cluster_satisfied": 0.866,
+        "preferred_zone_match": 0.387,
         "reachability": 1.0,
         "spawn_walkable": 1.0,
         "teleporter_walkable": 1.0
@@ -488,17 +545,17 @@
       ]
     },
     "rule_based": {
-      "score": 0.9234,
+      "score": 0.9228,
       "placements": [
         {
           "artifact": "2d_in_3d_randomness_vis",
           "row": 0,
-          "col": 7
+          "col": 3
         },
         {
           "artifact": "affect_theory_visualization",
           "row": 0,
-          "col": 10
+          "col": 8
         },
         {
           "artifact": "gallery_winner_showcase",
@@ -517,22 +574,22 @@
         },
         {
           "artifact": "GaussianBlurCircle",
-          "row": 3,
+          "row": 5,
           "col": 2
         },
         {
           "artifact": "point",
           "row": 5,
-          "col": 10
+          "col": 0
         }
       ],
       "ascii": [
-        "......T11.2.",
-        ".55....11...",
+        "...11.T.2...",
+        ".5511.......",
         ".55.........",
-        "..644333....",
         "...44333....",
-        ".....333..7.",
+        "...44333....",
+        "7.6..333....",
         "............",
         "......S....."
       ]
@@ -588,53 +645,53 @@
       ]
     },
     "fold": {
-      "score": 0.963,
+      "score": 0.9628,
       "placements": [
         {
           "artifact": "GaussianBlurCircle",
-          "row": 7,
-          "col": 7
+          "row": 5,
+          "col": 11
         },
         {
           "artifact": "2d_in_3d_randomness_vis",
           "row": 0,
-          "col": 4
+          "col": 10
         },
         {
           "artifact": "gallery_winner_showcase",
-          "row": 3,
-          "col": 6
+          "row": 4,
+          "col": 0
         },
         {
           "artifact": "FlowFieldMain",
-          "row": 6,
-          "col": 3
+          "row": 5,
+          "col": 7
         },
         {
           "artifact": "affect_theory_visualization",
           "row": 0,
-          "col": 0
+          "col": 2
         },
         {
           "artifact": "neon_wave_grid",
           "row": 3,
-          "col": 1
+          "col": 4
         },
         {
           "artifact": "point",
-          "row": 3,
-          "col": 11
+          "row": 0,
+          "col": 7
         }
       ],
       "ascii": [
-        "5...22T.....",
-        "....22......",
+        "..5...T7..22",
+        "..........22",
         "............",
-        ".66...333..7",
-        ".66...333...",
-        "......333...",
-        "...44.......",
-        "...44.S1...."
+        "....66......",
+        "333.66......",
+        "333....44..1",
+        "333....44...",
+        "......S....."
       ]
     },
     "paradoxical": {
@@ -838,53 +895,53 @@
       ]
     },
     "simulated_annealing": {
-      "score": 0.9657,
+      "score": 0.9593,
       "placements": [
         {
           "artifact": "2d_in_3d_randomness_vis",
-          "row": 5,
+          "row": 6,
           "col": 10
         },
         {
           "artifact": "affect_theory_visualization",
           "row": 1,
-          "col": 11
+          "col": 0
         },
         {
           "artifact": "gallery_winner_showcase",
-          "row": 2,
-          "col": 1
+          "row": 3,
+          "col": 2
         },
         {
           "artifact": "neon_wave_grid",
-          "row": 4,
-          "col": 5
+          "row": 0,
+          "col": 4
         },
         {
           "artifact": "FlowFieldMain",
-          "row": 6,
-          "col": 7
+          "row": 2,
+          "col": 6
         },
         {
           "artifact": "GaussianBlurCircle",
-          "row": 2,
+          "row": 1,
           "col": 9
         },
         {
           "artifact": "point",
-          "row": 0,
-          "col": 4
+          "row": 4,
+          "col": 6
         }
       ],
       "ascii": [
-        "....7.T.....",
-        "...........2",
-        ".333.....6..",
-        ".333........",
-        ".333.44.....",
-        ".....44...11",
-        ".......55.11",
-        "......S55..."
+        "....44T.....",
+        "2...44...6..",
+        "......55....",
+        "..333.55....",
+        "..333.7.....",
+        "..333.......",
+        "..........11",
+        "......S...11"
       ]
     },
     "voronoi": {
@@ -1285,6 +1342,151 @@
         "............",
         "............",
         "......S....."
+      ]
+    },
+    "crystallization": {
+      "score": 0.8364,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 1,
+          "col": 5
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 9
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 5,
+          "col": 5
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 5,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 5,
+          "col": 9
+        }
+      ],
+      "ascii": [
+        "......T.....",
+        ".22..111.33.",
+        ".22..111.33.",
+        ".....111....",
+        "............",
+        ".5...44..6..",
+        ".....44.....",
+        "......S....."
+      ]
+    },
+    "stickiness": {
+      "score": 0.8238,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 7
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 5,
+          "col": 4
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 4,
+          "col": 3
+        },
+        {
+          "artifact": "point",
+          "row": 3,
+          "col": 4
+        }
+      ],
+      "ascii": [
+        "......T.....",
+        "............",
+        ".......22...",
+        "....7..22...",
+        "...6..111...",
+        "....33111...",
+        ".54433111...",
+        "..44..S....."
+      ]
+    },
+    "colonization": {
+      "score": 0.9237,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 1,
+          "col": 3
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 7
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 2,
+          "col": 10
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 7,
+          "col": 4
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 7
+        }
+      ],
+      "ascii": [
+        "......T.....",
+        "...111......",
+        "...111.22.44",
+        "...111.22.44",
+        ".33.....6...",
+        ".33.........",
+        ".......7....",
+        "....5.S....."
       ]
     }
   }

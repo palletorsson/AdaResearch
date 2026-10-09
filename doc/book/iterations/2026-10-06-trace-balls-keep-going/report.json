@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-06",
+  "request": "After dropping the ball, give the player a new one on the stand and keep the old one.",
+  "report": "ada_run/test-results/museum/20261006T090819Z-ce5d4c59/report.json",
+  "checks": {
+    "id": "trace-ball-ramp",
+    "static": {
+      "status": "pass",
+      "checks": 2
+    },
+    "manual": [
+      {
+        "check": "Release successive balls with real VR controllers; confirm the replacement is easy to reach on the stand.",
+        "status": "not-run"
+      },
+      {
+        "check": "Check the accumulating balls and traces in the full hall, including performance during a long session.",
+        "status": "not-run"
+      }
+    ],
+    "runtime": {
+      "status": "pass",
+      "checks": 34,
+      "problems": [],
+      "engine_notices": [
+        "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+        "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled."
+      ],
+      "seconds": 13.7
+    }
+  },
+  "sources": {
+    "commons/artifacts/trace_ball_ramp/trace_ball_ramp.gd": "241d6d4816933c8474faf9ef8ec83fd5f26730758488d2a45662a2c31a663f37",
+    "commons/artifacts/trace_ball_ramp/trace_ball_ramp.tscn": "62e989331f057756e6cfece7f128c4905fab9931a75bd2be1b922bf4bfbb70d9",
+    "tests/museum/trace_ball_ramp_check.gd": "6eb67849148bde3051edc999e36ca54bedd7a3be484d73f0ec6c4528b6990829",
+    "tests/museum/trace_ball_ramp_check.tscn": "9563ff5ddb4b3fb052b9e67c2b0d857556b8bf3678c438702cb1036ca1e2d578",
+    "tests/museum/test_trace_ball_ramp.py": "bc16fb9d836d5ed3cd7e0ea7fb03e73365bf5f8854e0a9888a0ea17d77fec794"
+  }
+}

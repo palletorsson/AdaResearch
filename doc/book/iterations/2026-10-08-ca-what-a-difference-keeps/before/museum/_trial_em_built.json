@@ -1,0 +1,1199 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-08 20:23:43",
+	"boot_ms": {
+		"autoloads": 2456,
+		"bake_parsed": 1192,
+		"boot_tail": 4750,
+		"engine_pak": 746,
+		"engine_to_ready": 4835,
+		"entry": 1,
+		"first_frame": 4986,
+		"first_physics": 2948,
+		"grid_warm": 1869,
+		"guests_loaded": 2009,
+		"loading_shell": 30,
+		"modules_loaded": 315,
+		"modules_pool": 395,
+		"museum_data": 395,
+		"plan_parsed": 1143,
+		"pool_done": 1043,
+		"scene_chain": 1633,
+		"segment0_built": 4750,
+		"world_ready": 2949
+	},
+	"plan": "res://doc/book/iterations/2026-10-08-ca-what-a-difference-keeps/before/museum/plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						5
+					],
+					"token": "self_organization_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 10.0,
+					"tile_cell": [
+						4,
+						18
+					],
+					"token": "ca_screen",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.5,
+						18.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.25,
+					"tile_cell": [
+						12,
+						19
+					],
+					"token": "disease_spread_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						3.4,
+						19.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.4,
+					"tile_cell": [
+						4,
+						25
+					],
+					"token": "volumetric_fog_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						2.0,
+						25.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.8,
+					"tile_cell": [
+						12,
+						25
+					],
+					"token": "crackpropagation_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.9,
+						25.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "gate",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "gate:ca edgeofchaos",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						0.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						29
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						28
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca edgeofchaos · 01",
+					"index": 1,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "01\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						29.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca edgeofchaos · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "02\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca edgeofchaos · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "03\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca edgeofchaos · 04",
+					"index": 4,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "04\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.0,
+						2.3
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						29
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						28
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca edgeofchaos · 05",
+					"index": 5,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "05\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						29.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca edgeofchaos · 06",
+					"index": 6,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "06\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca edgeofchaos · 07",
+					"index": 7,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "07\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca edgeofchaos · 08",
+					"index": 8,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "08\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.1,
+						4.6
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						29
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						28
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca edgeofchaos · 09",
+					"index": 9,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "09\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						29.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca edgeofchaos · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "10\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca edgeofchaos · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "11\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						6
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca edgeofchaos · 12",
+					"index": 12,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "12\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.2,
+						6.2
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						29
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						28
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca edgeofchaos · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "13\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.2,
+						1.2,
+						29.0
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca edgeofchaos · 14",
+					"index": 14,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "14\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						8
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca edgeofchaos · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "15\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						8.2
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						8
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca edgeofchaos · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "16\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.0,
+						8.3
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						29
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						15,
+						28
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca edgeofchaos · 17",
+					"index": 17,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca edgeofchaos",
+					"segment": 0,
+					"text": "17\ncellularautomata · ca edgeof",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0256934314966202,
+						"pixel_size": 0.000233576642335766,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.3,
+						1.0,
+						29.0
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.#############################",
+				"................p..#############",
+				"##..............p..#############",
+				"##.................#############",
+				"########.....###################",
+				"##.................#############",
+				"##.................#############",
+				"##..sssssssssss....#############",
+				"##..sssssssssss....#############",
+				"##..sssssssssss....#############",
+				"##..sssssssssss....#############",
+				"##..sssssssssss....#############",
+				"##..sssssssssss....#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##...s.............#############",
+				"##..sss......s.....#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.........sssss...#############",
+				"##.........sssss...#############",
+				"##.sssss...sssss...#############",
+				"##.........sssss...#############",
+				"##.........sssss...#############",
+				"##.................#############",
+				"########.....###################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": true
+			},
+			"h": 30,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "neue-nationalgalerie-free-plan",
+			"pearl": "ca edgeofchaos",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"10,23": "crackpropagation_ca",
+				"10,24": "crackpropagation_ca",
+				"10,25": "crackpropagation_ca",
+				"10,26": "crackpropagation_ca",
+				"10,27": "crackpropagation_ca",
+				"10,3": "self_organization_ca",
+				"10,4": "self_organization_ca",
+				"10,5": "self_organization_ca",
+				"10,6": "self_organization_ca",
+				"10,7": "self_organization_ca",
+				"10,8": "self_organization_ca",
+				"11,23": "crackpropagation_ca",
+				"11,24": "crackpropagation_ca",
+				"11,25": "crackpropagation_ca",
+				"11,26": "crackpropagation_ca",
+				"11,27": "crackpropagation_ca",
+				"11,3": "self_organization_ca",
+				"11,4": "self_organization_ca",
+				"11,5": "self_organization_ca",
+				"11,6": "self_organization_ca",
+				"11,7": "self_organization_ca",
+				"11,8": "self_organization_ca",
+				"12,19": "disease_spread_ca",
+				"12,23": "crackpropagation_ca",
+				"12,24": "crackpropagation_ca",
+				"12,25": "crackpropagation_ca",
+				"12,26": "crackpropagation_ca",
+				"12,27": "crackpropagation_ca",
+				"12,3": "self_organization_ca",
+				"12,4": "self_organization_ca",
+				"12,5": "self_organization_ca",
+				"12,6": "self_organization_ca",
+				"12,7": "self_organization_ca",
+				"12,8": "self_organization_ca",
+				"13,23": "crackpropagation_ca",
+				"13,24": "crackpropagation_ca",
+				"13,25": "crackpropagation_ca",
+				"13,26": "crackpropagation_ca",
+				"13,27": "crackpropagation_ca",
+				"13,3": "self_organization_ca",
+				"13,4": "self_organization_ca",
+				"13,5": "self_organization_ca",
+				"13,6": "self_organization_ca",
+				"13,7": "self_organization_ca",
+				"13,8": "self_organization_ca",
+				"14,23": "crackpropagation_ca",
+				"14,24": "crackpropagation_ca",
+				"14,25": "crackpropagation_ca",
+				"14,26": "crackpropagation_ca",
+				"14,27": "crackpropagation_ca",
+				"2,25": "volumetric_fog_ca",
+				"3,19": "ca_screen",
+				"3,25": "volumetric_fog_ca",
+				"3,3": "self_organization_ca",
+				"3,4": "self_organization_ca",
+				"3,5": "self_organization_ca",
+				"3,6": "self_organization_ca",
+				"3,7": "self_organization_ca",
+				"3,8": "self_organization_ca",
+				"4,18": "ca_screen",
+				"4,19": "ca_screen",
+				"4,25": "volumetric_fog_ca",
+				"4,3": "self_organization_ca",
+				"4,4": "self_organization_ca",
+				"4,5": "self_organization_ca",
+				"4,6": "self_organization_ca",
+				"4,7": "self_organization_ca",
+				"4,8": "self_organization_ca",
+				"5,19": "ca_screen",
+				"5,25": "volumetric_fog_ca",
+				"5,3": "self_organization_ca",
+				"5,4": "self_organization_ca",
+				"5,5": "self_organization_ca",
+				"5,6": "self_organization_ca",
+				"5,7": "self_organization_ca",
+				"5,8": "self_organization_ca",
+				"6,25": "volumetric_fog_ca",
+				"6,3": "self_organization_ca",
+				"6,4": "self_organization_ca",
+				"6,5": "self_organization_ca",
+				"6,6": "self_organization_ca",
+				"6,7": "self_organization_ca",
+				"6,8": "self_organization_ca",
+				"7,3": "self_organization_ca",
+				"7,4": "self_organization_ca",
+				"7,5": "self_organization_ca",
+				"7,6": "self_organization_ca",
+				"7,7": "self_organization_ca",
+				"7,8": "self_organization_ca",
+				"8,3": "self_organization_ca",
+				"8,4": "self_organization_ca",
+				"8,5": "self_organization_ca",
+				"8,6": "self_organization_ca",
+				"8,7": "self_organization_ca",
+				"8,8": "self_organization_ca",
+				"9,3": "self_organization_ca",
+				"9,4": "self_organization_ca",
+				"9,5": "self_organization_ca",
+				"9,6": "self_organization_ca",
+				"9,7": "self_organization_ca",
+				"9,8": "self_organization_ca"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 19,
+			"z0": -4,
+			"z1": 30
+		}
+	]
+}

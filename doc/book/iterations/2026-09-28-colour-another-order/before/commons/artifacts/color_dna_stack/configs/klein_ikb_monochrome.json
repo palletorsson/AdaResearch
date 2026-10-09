@@ -1,0 +1,37 @@
+{
+  "id": "klein_ikb_monochrome",
+  "artist": "Yves Klein",
+  "year": 1957,
+  "movement": "Monochrome / Nouveau r\u00e9alisme",
+  "notes": "International Klein Blue: one ultramarine across the entire object, varied only in form and value. Color reduced to substance.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.26,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#0a1860",
+      "scale": 1.2
+    },
+    {
+      "shape": "sphere",
+      "color": "#1230a8",
+      "scale": 1.1
+    },
+    {
+      "shape": "cuboid",
+      "color": "#0a1860",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#1230a8",
+      "scale": 0.9
+    },
+    {
+      "shape": "cube",
+      "color": "#0a1860",
+      "scale": 0.8
+    }
+  ]
+}

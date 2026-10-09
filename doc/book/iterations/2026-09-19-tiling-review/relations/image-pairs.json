@@ -1,0 +1,60 @@
+[
+  {
+    "label": "Tutorial Pattern labels",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/fixed_motif_bay.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/after/fixed_motif_bay.png",
+    "before_is_source_and_placement_reconstruction": true,
+    "camera_matches": true,
+    "before_sha256": "544cbefc6f818c1716a08ff0c1d72ed48e6ecbfc465a26e40e627112b9982fc6",
+    "after_sha256": "fa9f7e29264f2874d199e4071277d4347672655590826034125897cb4506d6c6"
+  },
+  {
+    "label": "Array Patterns invitation",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/tunnel_address_bay.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/after/tunnel_address_bay.png",
+    "before_is_source_and_placement_reconstruction": true,
+    "camera_matches": true,
+    "before_sha256": "9793f8747f1d7bc0efcc2b933422509694591351793123733119ad7d1482b105",
+    "after_sha256": "b21c3c262855383c030f030d7aa5090aa4d4f83158c1d2c94b16af7a9fb5f84e"
+  },
+  {
+    "label": "Symmetry cage standing view",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/wallpaper_cage.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/final/wallpaper_cage.png",
+    "before_is_source_and_placement_reconstruction": true,
+    "camera_matches": true,
+    "before_sha256": "860a43e4932268d098156c660d16a8eabfbd5b726bc23bb2389ee1dd1b0bf2b5",
+    "after_sha256": "50cf2160cf5f7ee531cec480fc1674cafcef7a65b6be2e9038fba4ae60ce0992",
+    "includes_gallery_world_position_repair": true
+  },
+  {
+    "label": "Symmetry cage close view",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/wallpaper_cage_close.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/final/wallpaper_cage_close.png",
+    "before_is_source_and_placement_reconstruction": true,
+    "camera_matches": true,
+    "before_sha256": "9870c51469245c6f209194210ddd5d5043d5d211bf8fef7d984beb7cd4dcb549",
+    "after_sha256": "1a7cfb50536abf85f752fd8c2779237065447cc186c1b4eacc6743308017aea1",
+    "includes_gallery_world_position_repair": true
+  },
+  {
+    "label": "Gallery placement repair - wallpaper_cage_close",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/after-inspection/wallpaper_cage_close.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/final/wallpaper_cage_close.png",
+    "before_is_source_and_placement_reconstruction": false,
+    "before_is_intermediate_live_state": true,
+    "camera_matches": true,
+    "before_sha256": "37294db36ce7a2cda4ede708acd839a889fa4a3cd59ed2c19dba70f33337d24a",
+    "after_sha256": "1a7cfb50536abf85f752fd8c2779237065447cc186c1b4eacc6743308017aea1"
+  },
+  {
+    "label": "Gallery placement repair - symmetry_compare_bay",
+    "before": "doc/book/iterations/2026-09-19-tiling-review/relations/after-inspection/symmetry_compare_bay.png",
+    "after": "doc/book/iterations/2026-09-19-tiling-review/relations/final/symmetry_compare_bay.png",
+    "before_is_source_and_placement_reconstruction": false,
+    "before_is_intermediate_live_state": true,
+    "camera_matches": true,
+    "before_sha256": "1165ec3c01ebb9c217ebb43b4d5e4983238fc862345ce7a80a278fa1ac606ea9",
+    "after_sha256": "479e40ab57e25bad677ee0117182e5791e3286abc25ec30a8acec2274d32dcf7"
+  }
+]

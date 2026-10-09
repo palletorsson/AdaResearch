@@ -1,0 +1,290 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial_3D · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Tutorial_3D">← Tutorial lineage</a></p><h1>Tutorial 3D</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Tutorial_3D/final.md">Raw captured source</a></p><pre># Fly into the third index
+
+How do you reach an address above your head?
+
+In the last hall, you could walk around the nested cubes. Here the familiar pickup cubes are spaced far enough apart for your body to move between them. Four across, four upwards, four deep: sixty-four possible encounters.
+
+&lt;!-- @array_flight_lab --&gt;
+
+At the console beside the glass enclosure, press Y +. A transparent marker moves up one layer. The X +, Y + and Z + buttons each change one index; after three comes zero again. Set the address to [1, 2, 0], the place shown in the illustration below. Look for its marker among the cubes. It is above the ground layer. You have named a place you cannot yet walk to.
+
+Walk through the ground-level opening. Inside this frame you can fly. Push the left stick forward to travel where the left controller points: aim upwards to climb, downwards to descend, level to cross the enclosure. Push the stick sideways to move across that aim. Release the controls to hover. The permission belongs to this enclosure; descend to either ground-level doorway to leave it.
+
+Rise beside a column, then move between layers. The cubes are spaced 2.4 metres apart. There is room for a body between neighbouring samples. An indexed volume need not be a solid block.
+
+The gap is not an extra entry. You can pass between two named places without arriving at another. The array gives us a way to address its cubes; it does not number every position your body can occupy.
+
+The placement extends the earlier row&#x27;s operation along three directions:
+
+```gdscript
+cube_instance.position = Vector3(x * spacing, y * spacing, z * spacing)
+```
+
+An index becomes a position through this multiplication. Changing the spacing would change the distances you travel without adding an entry. Changing the number of entries would be another operation.
+
+Find the cube at the address you selected before entering. Approach and collect it by contact.
+
+Hover where the cube used to be. Its label has gone; the transparent marker remains. Release the controls and stay a moment. Above and below you, the other layers keep their places.
+
+Descend and leave through the ground-level opening. Back at the console, read the same selected address. Its value is now zero. The other cubes have not slid into the vacancy. This small record writes collection as an absence:
+
+```gdscript
+values[y][z][x] = 0
+```
+
+Zero marks the cube’s departure. It stayed zero while you hovered there: your body could occupy the place without becoming part of this record.
+
+The row inside an array has gained another enclosing list. Read `values[y][z][x]` from left to right: `values[y]` selects one layer containing rows; `[z]` selects a row in that layer; `[x]` selects its entry. The display names coordinates in x, y, z order, while the storage opens them in y, z, x order. Those conventions must be connected explicitly. Neither a list nor a number arrives with a direction built into it.
+
+&lt;!-- @ --&gt;
+
+![The selected cube at address 1,2,0 before collection and the same transparent marker after it has gone, with the console changing from value 1 to value 0.](/book-review/doc/book/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png)
+
+*The same address before and after arrival. The cube and its label leave; the selection marker remains. The console inset is a separate view of the readout outside the enclosure; it is read on returning to the doorway.*
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:open_structures --&gt;
+
+&lt;!-- @open_structures --&gt;
+
+The solid cube has lost its faces. Five open forms stand together, made from connections you can follow with your eye. Across the next arrangement, each place contains one of those forms. A row returns with its beginning moved along.
+
+Change RULE. The places remain; the diagonal succession settles into repeated columns. These are our proposed rules after LeWitt&#x27;s images. Reading a rule from an image means choosing among constructions that might have made it. The ease of producing another arrangement does not settle which one is worth keeping.
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+&lt;!-- @reference_suspension --&gt;
+
+Beyond the open frames, rough fragments hang at three heights along a field of slender supports. Look down one row. Through the damaged-looking surfaces, the address remains exact.
+
+Change the roughness. Seventy-five fragments keep their places. This response to Hatoum borrows the tension between an orderly support and something that seems to have survived damage. Our meshes have no weight and no history of demolition. Their easy restoration makes that absence conspicuous. What would the grid have to carry before its promise to hold something became a responsibility?
+
+&lt;!-- @ --&gt;
+
+The third index has extended what we can address. Flight has extended what we can reach. Back on the ground, the next array will lie underfoot. Its entries will receive a small black-and-white shape, repeated across a surface.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Tutorial_3D/tutorial.md">Raw captured source</a></p><pre>Current encounter, 2026-09-17
+
+array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
+
+The step-by-step reading is in final.md. Earlier objects and layouts remain in the archive; they are not the current walkthrough.
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Return: A rule takes up space
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses line, coordinates, transform, array. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`open`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-lewitt-reading-a-rule/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Return: A place still held
+
+Change fragment roughness without changing any of the 75 positions. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses array, coordinates. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`suspension`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-hatoum-grid-under-load/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:open_structures --&gt;
+
+### One source change: A rule takes up space
+
+In form_at(), replace the cyclic return with this expression. Read one row, then one column; every address remains occupied.
+
+```gdscript
+return column
+```
+
+Source: `commons/artifacts/spine_studies/open_rules.gd`. Use the prepared scene to run and compare.
+
+&lt;!-- study-edit:reference_suspension --&gt;
+
+### One source change: A place still held
+
+This is the existing corner rule in fragment(). Change only the multiplier on offset, for example amount * 0.5. The enclosing loops still place 75 fragments.
+
+```gdscript
+corners.append(base + offset * amount)
+```
+
+Source: `commons/artifacts/reference_studies/suspension.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Tutorial_3D/technical.md">Raw captured source</a></p><pre>array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
+
+Implementation: commons/artifacts/regularity/. Current authored placement: map_data.json. Read final.md for the supported controls and sequence bridge.
+
+
+## Current continuation — 23 September 2026
+
+Builds on Array&#x27;s row/grid and transparent nested-cube study; prepares the return to a surface in Tutorial_Tiling_Floor. The full-scale volume contributes local flight and bodily passage between samples. It need not repeat the previous hall&#x27;s transformation controls.
+
+The unchanged array_flight_lab builds a 4×4×4 pickup grid with spacing 2.4 m and origin (-3.6,0.7,-3.6) inside its enclosure. The visible coordinate order is x,y,z. Storage is values[y][z][x]: layer, row, entry. Collection removes a cube and its attached label; tree_exiting writes zero. The independent selection marker stays at the selected site. This data records cube occupancy, not a continuous occupancy field or visitor position.
+
+The enclosure is 12 m across, with two ground-level openings. It supplies a bounded movement velocity, normalised to at most 2.4 m/s, and neutral input hovers. The production museum controller selects that locomotion when the player&#x27;s position lies inside the zone; it retains normal collision movement. XR uses the shared flight provider. Current desktop journey evidence does not verify a worn headset.
+
+### Shared book figure
+
+an-address-you-can-enter.png in doc/book/iterations/2026-09-23-array-entered-address pairs the actual selected cube [1,2,0] before and after contact. Matching camera poses and frozen bob/turn animation keep the comparison stable; collection stays live. The lower image strips are crops of the actual console readout in those states, not added numerical overlays. The production scene is unchanged. The cube&#x27;s label disappears with it; the independently selected translucent marker remains. A separately provided interior view is captured at the reached player position plus the museum&#x27;s 1.65 m eye offset.
+
+### Evidence
+
+31 focused checks pass in an isolated copy of the production museum. Supplied Godot pointer events select [1,2,0]; supplied W/Space/Ctrl events drive the unchanged museum physics handler and actual player capsule through the entrance, upwards, to contact, into the interior, down and out. Only the chosen cube is collected at the checked collection point, all other positions remain, zero persists while the body hovers, and flight permission ends outside. The camera is independently placed for paired figures. Probe: tools/probes/array_entered_address.gd.
+
+The first run failed five related checks because the probe assumed obsolete Btn_* node names. It already passed the physical flight journey. The probe now finds the existing InteractableAreaButton nodes and all checks pass. No production control or locomotion repair was necessary. The first report is preserved with the review. No new claims about headset comfort, human legibility or learner understanding.
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Installed application: A rule takes up space
+
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Installed application: A place still held
+
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
+
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Tutorial_3D/intent.md">Raw captured source</a></p><pre>Concept: Fly into the third index. Sixty-four familiar cubes occupy a glass enclosure with local flight.
+
+Sequence: array_tutorial; current order is declared in commons/maps/sequences/array_tutorial.json.
+
+Encounter: array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
+
+Critical question: What can inhabit a place the table calls empty? The gap between indexed cubes is traversable space, and the stored zero does not account for the visitor hovering there.
+
+Status: Reading and native illustration refreshed, 2026-09-23; no artifact or map change. Thirty-one checks in doc/book/iterations/2026-09-23-array-entered-address verify supplied pointer/key inputs, selected-cube contact and a continuous ground-door/flight/return journey through the actual museum controller. Earlier first pass, 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Installed application: A rule takes up space
+
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Installed application: A place still held
+
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
+
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Tutorial_3D/critical.md">Raw captured source</a></p><pre>Fly into the third index. Sixty-four familiar cubes occupy a glass enclosure with local flight.
+
+Keep the stored structure, the display rule and the permissions of the body distinct. Repetition can make a field legible while hiding which decisions are shared. A change of surface can alter a walk without changing any stored motif. The first critical task is to observe such a specific difference before proposing what else the room could allow.
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Installed application: A rule takes up space
+
+Change RULE. The places remain; the diagonal succession settles into repeated columns. These are our proposed rules after LeWitt&#x27;s images. Reading a rule from an image means choosing among constructions that might have made it. The ease of producing another arrangement does not settle which one is worth keeping.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Installed application: A place still held
+
+Change the roughness. Seventy-five fragments keep their places. This response to Hatoum borrows the tension between an orderly support and something that seems to have survived damage. Our meshes have no weight and no history of demolition. Their easy restoration makes that absence conspicuous. What would the grid have to carry before its promise to hold something became a responsibility?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Tutorial_3D/artifacts.md">Raw captured source</a></p><pre># Tutorial 3D — Artifacts
+*Array Tutorial Sequence · F_order · 6 artifacts*
+
+&gt; Two dimensions flatten. Three dimensions inhabit. The grid gains a vertical axis — X, Y, and now Z. Height enters the data structure. What was a spreadsheet becomes a volume.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## grid_3d_4x4x4
+![grid_3d_4x4x4](/scene-catalog/grid_3d_4x4x4.png)
+
+Populates a 4x4x4 lattice of pickup cubes for volumetric layouts.
+
+`grid_3d_4x4x4`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Sorting Algorithm Race
+![Sorting Algorithm Race](/scene-catalog/sorting_algorithm_race.png)
+
+Four rows of 16 colored bars sort simultaneously using Bubble, Insertion, Selection, and Merge sort. Animated step-by-step so you can watch algorithms race and feel the difference in strategy.
+
+`sorting_algorithm_race`
+
+## BarArray Substrate
+![BarArray Substrate](/scene-catalog/bar_array.png)
+
+Universal 1D array visualization. MultiMesh bars with emission and smooth transitions. Defaults to Bubble Sort. Use #algorithm:&lt;name&gt; to select cartridge.
+
+`bar_array`
+
+## Grid3D Substrate
+![Grid3D Substrate](/scene-catalog/grid3d.png)
+
+Universal 3D graph visualization. MultiMesh spheres + cylinder edges. Defaults to BFS. Use #algorithm:&lt;name&gt; to select cartridge.
+
+`grid3d`
+
+## BarArray — Bubble Sort
+![BarArray — Bubble Sort](/scene-catalog/bar_array_bubble_sort.png)
+
+Bubble sort on a MultiMesh bar array. Adjacent comparisons, largest bubbles to the end. O(n²). The canonical first sort.
+
+`bar_array_bubble_sort`
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Installed application: A rule takes up space
+
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Installed application: A place still held
+
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
+
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Tutorial_3D/summary.md">Raw captured source</a></p><pre>Fly into the third index. Sixty-four familiar cubes occupy a glass enclosure with local flight.
+
+array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
+
+
+&lt;!-- study-spine:open_structures --&gt;
+
+## Installed application: A rule takes up space
+
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-spine:reference_suspension --&gt;
+
+## Installed application: A place still held
+
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
+
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Tutorial_3D/blurb.md">Raw captured source</a></p><pre>Fly into the third index. Sixty-four familiar cubes occupy a glass enclosure with local flight.
+</pre></section></body></html>

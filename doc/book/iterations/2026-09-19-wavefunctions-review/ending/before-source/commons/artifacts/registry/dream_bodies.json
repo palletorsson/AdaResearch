@@ -1,0 +1,39 @@
+{
+	"id": "dream_bodies",
+	"name": "Dream Bodies",
+	"description": "Six sculptural families recreated in Godot from Palle's Stable Diffusion panoramas (2026-08-29, 'any chance you can recreate some of these bodies in godot?'): glazed Rocaille figurines with patterned skins, De Stijl slab robots, panelled robots, a Frank Stella wall tangle, pastel ceramic dragons, and a chorus of patterned beasts. One artifact, one axis: figure picks the family, seed picks the individual. Every builder works from primitives and SurfaceTool alone, with its patterns painted into textures in code, so a body is a recipe and not a mesh on disk.",
+	"category": "dream_bodies",
+	"theoreticalGrounding": "The diffusion model dreamed these bodies from prompts that name painters, styles and desires in one breath; the museum answers by rebuilding them as procedures - a body as a seed and a rule rather than a picture. What survives the translation (a lean, a pattern, a palette) and what does not (the glaze, the dream's confusion of limbs) is the argument: compression keeps the queer remainder or it does not.",
+	"artifacts": {
+		"dream_bodies": {
+			"lookup_name": "dream_bodies",
+			"scene": "res://commons/artifacts/dream_bodies/dream_bodies.tscn",
+			"class_name": "DreamBodies",
+			"name": "Dream Bodies",
+			"description": "The whole cast in one artifact: a statue from any of the forty-one families, chosen by figure and grown from a seed. Each family is ALSO its own artifact with its own two axes of surreal variation - see commons/artifacts/registry/dream_figures.json and the dream_<family> tokens - which is where the DNA claim lives; this entry is the index, and declares no axis of its own.",
+			"category": "dream_bodies",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"figure",
+				"procedural",
+				"stable-diffusion",
+				"queer",
+				"museum"
+			],
+			"dev_themes": [
+				"sculpture",
+				"queer",
+				"museum"
+			]
+		}
+	}
+}

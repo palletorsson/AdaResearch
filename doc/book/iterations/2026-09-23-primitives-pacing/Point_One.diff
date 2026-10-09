@@ -1,0 +1,36 @@
+--- Point_One/before
++++ Point_One/final.md
+@@ -8,7 +8,9 @@
+ 
+ You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin, and brings decisions with it. We inherit possibilities before we know their conditions. What are we forced to borrow for now, and what must we understand to make the work our own?
+ 
+-Follow the number for a moment. Where does the next one come from?
++Let it run while you look around. When you return to the number, it has moved on.
++
++Where does the next one come from?
+ 
+ A small counter can begin here:
+ 
+@@ -21,11 +23,9 @@
+     _count += 1
+ ```
+ 
+-Godot repeatedly calls the function named `_process`. Each call runs the indented line, `_count += 1`, adding one to the number stored in `_count`. One, then two, then three.
++Godot repeatedly calls `_process`. Each call runs `_count += 1`, adding one to the stored number: one, then two, then three. The starting value, `0`, is set outside the function, so each call keeps what the previous one left behind.
+ 
+-The declaration `var _count := 0` sits outside the function. It sets the starting value. Calling `_process` again does not run that declaration again, so the count keeps what the previous call left behind.
+-
+-Godot also supplies `delta`: this update's time interval, in seconds. Our counter receives it but does not use it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.
++`delta` supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.
+ 
+ That example has its own count. The room's counter reads a total that began earlier:
+ 
+@@ -33,7 +33,7 @@
+ var frames: int = int(Engine.get_process_frames())
+ ```
+ 
+-`Engine.get_process_frames()` counts process frames since the engine started. The panel reads and displays that total on each `_process` call. It includes frames before the panel existed, and before you found the number. Loading the room has already occupied some of those intervals.
++`Engine.get_process_frames()` counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.
+ 
+ We begin with a number that includes something we did not witness.
+ 

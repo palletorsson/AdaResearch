@@ -1,0 +1,18 @@
+--- before/em_portal_stream.gd
++++ after/em_portal_stream.gd
+@@ -742,8 +742,14 @@
+ func _restore_state(root: Node3D) -> void:
+ 	var saved: Dictionary = _states.get(String(root.get_meta("em_map", "")), {})
+ 	for node: Node in root.find_children("*", "", true, false):
++		# Restoring an artifact may rebuild its children during this traversal.
++		# Only surviving receivers need an address; retired display nodes do not.
++		if not is_instance_valid(node) or not node.is_inside_tree() or node.is_queued_for_deletion():
++			continue
++		if not node.has_method("restore_museum_state"):
++			continue
+ 		var key := _state_key(root, node)
+-		if saved.has(key) and node.has_method("restore_museum_state"):
++		if saved.has(key):
+ 			node.call("restore_museum_state", saved[key])
+ 
+ func _state_key(root: Node3D, node: Node) -> String:

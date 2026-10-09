@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_PortalLandscape · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_PortalLandscape">← Tutorial lineage</a></p><h1>ISO PortalLandscape</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_PortalLandscape/final.md">Raw captured source</a></p><pre># An opening from overlapping terms
+
+&lt;!-- @marchingcubes_portal_landscape --&gt;
+
+How can an opening appear without an instruction that draws a doorway?
+
+The amber field from the last hall stands here alone, with a bay for a held copy. You pressed TERMS beside its neighbour; now walk it through all five names with nothing else in view. It begins as hills. Come close enough to see their edges, then lower your viewpoint a little. The sheet has an underside. Choose a ridge you can recognise from both sides before pressing HOLD.
+
+An earlier surface remains in the neighbouring bay. Its scale, orientation and finish match the live one. Press TERMS once. Find your ridge again. Then press it a second time and look underneath. What has changed around the place you chose? The held hills give you somewhere to return with your eye.
+
+The desk moves through hillside, overhung, quarried, arched and compound. Each step adds one weighted contribution to the same field. Coordinates, sampling and the selected level stay fixed. Keep following one place through those names. Some changes are small; a new word on the desk can arrive more dramatically than a new feature in the surface.
+
+The recipe was on the wall next door: a base terrain, three terms that take material away, one that adds it, summed before any triangle exists. What this second pass shows is the ladder entire. Each press adds one term to a field you can already read, and the held copy keeps the previous rung beside the live one, so the added term is the only difference in view. Each term has its own way of varying across space, including regions where its contribution is small or absent. A minus sign gives something permission to remove material; it does not decide what we will recognise in the result.
+
+An opening can result where those contributions cross the threshold together. It need not exist as a separately modelled doorway. At the setting called “arched,” look for an arch. Shift your viewpoint to test whether a dark patch is a hole, a shadowed face or an overlap in projection. The word has given us an expectation. Where does the surface support it, and where are we supplying what we hoped to find?
+
+The preceding terrain introduced a cave contribution beneath an upper surface. This specimen extends that composition. Rather than describing the final silhouette as a single mysterious noise, you can ask what each part of the field is allowed to change.
+
+Despite the specimen&#x27;s portal name, an opening here is geometry. It does not transport you somewhere else, and its appearance alone does not prove an accessible route through the mesh.
+
+HOLD can replace the comparison with any current surface. RESET returns the live hills while leaving that copy beside them. CLEAR removes the copy. The held surface has no collision: it keeps a shape for looking, without becoming another obstacle. Even a faithful copy can enter the room with different permissions.
+
+Try keeping the compound surface and returning to the beginning. More terms have given us another form. Have they given us more room? An extra fold might offer shelter, obstruct a view, or make no usable difference for this body. We can want an opening before we know how to make it. Here that desire has found a few specific operations to try, and a surface against which to test their promises.
+
+&lt;!-- @ --&gt;
+
+Next, the same kind of boundary will be read as enclosure. The question moves from how an opening looks to what the space on its other side permits.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_PortalLandscape/tutorial.md">Raw captured source</a></p><pre># Portal Landscape
+
+The museum desk now exposes the existing ladder directly. TERMS adds overhang, cave, arch and outcrop contributions in order. HOLD keeps a mesh copy in the neighbouring bay, without collision. RESET returns the live hillside and preserves the copy; CLEAR removes it. The domain, sample grid, selected level and display transform remain fixed during the comparison. The names below describe intended tendencies to inspect, not guaranteed arches or traversable passages. RULE reveals the combined expression after observation.
+
+Build a landscape by summing signed terms. Before it, the density must already be allowed to read `y` — a heightfield alone can hold no doorway.
+
+Start from the heightfield.
+
+```gdscript
+func surface_height(p: Vector3) -&gt; float:
+    return noise.get_noise_2d(p.x * 0.01, p.z * 0.01) * 15.0 \
+         + noise.get_noise_2d(p.x * 0.03, p.z * 0.03) * 5.0
+
+func base_terrain(p: Vector3) -&gt; float:
+    return (surface_height(p) - p.y) / 30.0
+```
+
+Positive below the ground, negative above. One height per column. Nothing here can fold over your head.
+
+Subtract an overhang.
+
+```gdscript
+func overhang(p: Vector3, w: float) -&gt; float:
+    var n := fbm(p, 4)
+    var elevation := smoothstep(-10.0, 20.0, surface_height(p))
+    var height_mod := sin(p.y * 0.1) * 0.5 + 0.5
+    return n * elevation * w * lerp(0.3, 1.0, height_mod)
+```
+
+The term reads `p.y`, so density stops being a function of the column. `elevation` zones it: overhangs on the hills, none in the valleys.
+
+Subtract a cave.
+
+```gdscript
+func cave(p: Vector3, w: float) -&gt; float:
+    return ridged(p, 3) * smoothstep(40.0, -10.0, p.y) * w
+```
+
+Below y = 40 the mask opens. This is the rung at which the landscape acquires an interior.
+
+Subtract an arch.
+
+```gdscript
+func arch(p: Vector3, w: float) -&gt; float:
+    var pillars := absf(noise.get_noise_2d(p.x * 0.05, p.z * 0.05))
+    var bands := sin(p.y * 0.15) * 0.5 + 0.5
+    var mask := smoothstep(0.3, 0.7, noise.get_noise_2d(p.x * 0.02, p.z * 0.02))
+    mask *= smoothstep(30.0, 5.0, absf(p.y - surface_height(p)))
+    return pillars * bands * mask * w
+```
+
+Vertical pillars times horizontal bands. Solid columns with air between them — a passage, made by multiplying two periodic things.
+
+Add an outcrop.
+
+```gdscript
+func outcrop(p: Vector3, w: float) -&gt; float:
+    var n := maxf(0.0, noise.get_noise_3d(p.x * 1.5, p.y * 1.5, p.z * 1.5))
+    return n * n * smoothstep(surface_height(p) - 5.0,
+                              surface_height(p) + 15.0, p.y) * w
+```
+
+The only added term. Clamped positive, then squared: it can put rock above the ground, never take any away.
+
+Sum the five.
+
+```gdscript
+func density(p: Vector3, w: Array) -&gt; float:
+    return base_terrain(p) \
+         - overhang(p, w[0]) - cave(p, w[1]) - arch(p, w[2]) \
+         + outcrop(p, w[3])
+```
+
+No term draws a portal. A portal is where two subtractions overlap enough to drag the sum across the threshold.
+
+Name the rungs.
+
+```gdscript
+const LANDFORM_WEIGHTS: Dictionary = {
+    &quot;hillside&quot;: [0.0, 0.0, 0.0, 0.0],
+    &quot;overhung&quot;: [0.8, 0.0, 0.0, 0.0],
+    &quot;quarried&quot;: [0.8, 0.6, 0.0, 0.0],
+    &quot;arched&quot;:   [0.8, 0.6, 0.4, 0.0],
+    &quot;compound&quot;: [0.8, 0.6, 0.4, 0.3],
+}
+@export_enum(&quot;hillside&quot;, &quot;overhung&quot;, &quot;quarried&quot;, &quot;arched&quot;, &quot;compound&quot;) var landform: String = &quot;compound&quot;
+```
+
+A ladder, not four knobs. Each rung adds exactly one claim to the one before it, so any change in the picture is attributable to a single term.
+
+Threshold the sum.
+
+```gdscript
+func corner_bits(corners: PackedFloat32Array, iso: float) -&gt; int:
+    var bits := 0
+    for i in 8:
+        if corners[i] &lt; iso:
+            bits |= 1 &lt;&lt; i
+    return bits
+```
+
+Ground, cliff and doorway leave the field the same way: a sign change on one edge of one cell. The terrain does not contain the passage. The passage was already in the sum.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_PortalLandscape/artifacts.md">Raw captured source</a></p><pre># ISO PortalLandscape — Artifacts
+*Isosurfaces: Implicit to Explicit · F_order · 1 artifacts*
+
+&gt; Marching cubes at landscape scale. A terrain field — noise-driven, continuous — gets sliced at a threshold. Where the function crosses zero, triangles appear. Ground forms. But cut the threshold differently and holes open. Portals. Passages through solid rock that exist because the math said &quot;boundary here.&quot;
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## marchingcubes_portal_landscape
+![marchingcubes_portal_landscape](/scene-catalog/marchingcubes_portal_landscape.png)
+
+marchingcubes_portal_landscape
+
+`marchingcubes_portal_landscape`
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_PortalLandscape/blurb.md">Raw captured source</a></p><pre>Marching cubes at landscape scale. A terrain field — noise-driven, continuous — gets sliced at a threshold. Where the function crosses zero, triangles appear. Ground forms. But cut the threshold differently and holes open. Portals. Passages through solid rock that exist because the math said &quot;boundary here.&quot;
+
+The algorithm walks a 12×12 grid, interrogating each voxel: inside or outside? Eight corners, 256 possible configurations, one lookup table. It doesn&#x27;t know what a landscape is. It doesn&#x27;t know what a portal is. It only knows where the sign flips. Everything else — caves, cliffs, doorways — is emergent geometry.
+
+A portal is just a place where two boundaries got close enough to merge. Topology as architecture. The terrain doesn&#x27;t contain the passage — the passage was always latent in the field.</pre></section></body></html>

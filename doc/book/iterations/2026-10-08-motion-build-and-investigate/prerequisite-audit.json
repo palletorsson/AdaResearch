@@ -1,0 +1,74 @@
+{
+  "scope": "Motion only. Sources were read; this is a content audit, not a test of all prior chapters or human retention.",
+  "inherited": [
+    {
+      "map": "Point_Zero",
+      "source": "commons/maps/Point_Zero/tutorial.md",
+      "reused": [
+        "_ready creates the Label3D before updates",
+        "_process and supplied delta named"
+      ]
+    },
+    {
+      "map": "Point_Coordinates",
+      "source": "commons/maps/Point_Coordinates/tutorial.md",
+      "reused": [
+        "XRToolsPickable and inherited library boundary",
+        "local and global positions"
+      ]
+    },
+    {
+      "map": "Point_Lines",
+      "source": "commons/maps/Point_Lines/tutorial.md",
+      "reused": [
+        "PointBody class and instances",
+        "displacement and length",
+        "helper construction declared"
+      ]
+    },
+    {
+      "map": "Point_Trace",
+      "source": "commons/maps/Point_Trace/tutorial.md",
+      "reused": [
+        "Array[Vector3], append, reading entries",
+        "if and for loops",
+        "positions retained as state"
+      ]
+    },
+    {
+      "map": "Trans_Pre",
+      "source": "commons/maps/Trans_Pre/tutorial.md",
+      "reused": [
+        "elapsed time and delta",
+        "callbacks and signal connection"
+      ]
+    },
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "source": "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+      "reused": [
+        "vector components, length and direction"
+      ]
+    },
+    {
+      "map": "VFM_05_Launch",
+      "source": "commons/maps/VFM_05_Launch/tutorial.md",
+      "reused": [
+        "initial velocity, acceleration and elapsed time"
+      ]
+    }
+  ],
+  "introduced_here": [
+    "force to mass response",
+    "_physics_process and physics time step",
+    "independently timed pushes",
+    "assignment to an existing numeric array entry",
+    "distance snapshot at end of both pulses"
+  ],
+  "supplied": [
+    "free_point physical defaults",
+    "study captions and buttons",
+    "existing museum and installed XR Tools"
+  ],
+  "gap_not_used_as_a_prerequisite": "Array is listed in the arrays sequence but commons/maps/Array/tutorial.md is absent in this checkout. The pilot uses the verified array/loop teaching in Point_Trace instead."
+}

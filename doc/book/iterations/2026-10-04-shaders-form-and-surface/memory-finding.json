@@ -1,0 +1,81 @@
+{
+  "id": "finding-df4629a0663f45a3b3ad16cd03ec889a",
+  "scope": "sequence:shaders",
+  "kind": "decision",
+  "text": "Six Shader full/short summaries now carry a familiar form: distance mask → transformed/repeated motif → material on primitive bodies → field-disturbed boundary → deliberate composition → retained-state question. Reference guide: doc/book/course/storyboards/SHADERS.md. Preview: doc/book/iterations/2026-10-04-shaders-form-and-surface/index.html.",
+  "reason": "Author requested stronger continuity from earlier sequences and The Book of Shaders as tutorial inspiration. The garment studio already uses UVs and materials; Shapes and Matrices can return inside existing halls instead of becoming another gallery. Each hall now has an independent learning check.",
+  "sequence_effect": "Preserve six halls and images → bodies → rooms. Teaching connections remain proposed: host binding, shared material comparison and retained recipe transfer are not implemented by this pass. Garden world projection must not be confused with garment UVs; the final panel still lacks previous-frame feedback.",
+  "project_effect": "Earlier competence deepens rather than restarting. Keep surface appearance, geometry, collision and history distinct. Other 201 route halls and all ordering preserved. Full tutorial.md/final.md and Godot logic were not edited.",
+  "status": "proposed",
+  "method": "Two parallel source/lineage reviews, coordinator source inspection, official Book of Shaders/Godot reference reading, structural consistency and browser review. No new Godot, headset or learner test.",
+  "created_by": "Codex",
+  "created_at": "2026-10-04T15:16:40.405040Z",
+  "review_note": "",
+  "reviewed_at": "",
+  "related_scopes": [
+    "sequence:primitives",
+    "sequence:transformation",
+    "sequence:array_tutorial",
+    "sequence:color",
+    "sequence:tiling",
+    "sequence:noise",
+    "sequence:cellularautomata"
+  ],
+  "sources": [
+    {
+      "path": "doc/book/course/storyboards/growth.json",
+      "sha256": "3632e0c4bc97417ba50d602f9b8139d24804ea8c3fd3eaa73090f8882b2b692f",
+      "current_sha256": "3632e0c4bc97417ba50d602f9b8139d24804ea8c3fd3eaa73090f8882b2b692f",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/course/storyboards/SHADERS.md",
+      "sha256": "547f5dfd899708a408914afbf352c025923a312b893d023478241fcbc5bf2b10",
+      "current_sha256": "547f5dfd899708a408914afbf352c025923a312b893d023478241fcbc5bf2b10",
+      "status": "current"
+    },
+    {
+      "path": "commons/maps/sequences/shaders.json",
+      "sha256": "524828e8faede684aa46fb29b9549e4ddbfaab008c4beba5db441606ae16e2e3",
+      "current_sha256": "524828e8faede684aa46fb29b9549e4ddbfaab008c4beba5db441606ae16e2e3",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+      "sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35",
+      "current_sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/reference_studies/pattern.gdshader",
+      "sha256": "7c10918512d44ecde71a478c027beda2ecc2b4390e240f8f766c13ec0f362390",
+      "current_sha256": "7c10918512d44ecde71a478c027beda2ecc2b4390e240f8f766c13ec0f362390",
+      "status": "current"
+    },
+    {
+      "path": "algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+      "sha256": "8d8a007b1807686f4fd56cddcc77ea1d44a0706ec9cc84fa90e9d3bd2be09c89",
+      "current_sha256": "8d8a007b1807686f4fd56cddcc77ea1d44a0706ec9cc84fa90e9d3bd2be09c89",
+      "status": "current"
+    },
+    {
+      "path": "algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.gd",
+      "sha256": "831c2c74b1783e7119549714d5193384173e1418f09d3987ec315734eab2e74c",
+      "current_sha256": "831c2c74b1783e7119549714d5193384173e1418f09d3987ec315734eab2e74c",
+      "status": "current"
+    },
+    {
+      "path": "commons/resourses/shaders/reaction_diffusion.gdshader",
+      "sha256": "264b4fb75bcd6d1bdbbd2ea4fade3a17e8e60e822fd6e9ea67b1d6f11960ef83",
+      "current_sha256": "264b4fb75bcd6d1bdbbd2ea4fade3a17e8e60e822fd6e9ea67b1d6f11960ef83",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-shaders-form-and-surface/checks.json",
+      "sha256": "8f40a9d8409f8488d62f1daaa7123e8d845dee397eaf9ebd304f2436396765f3",
+      "current_sha256": "8f40a9d8409f8488d62f1daaa7123e8d845dee397eaf9ebd304f2436396765f3",
+      "status": "current"
+    }
+  ],
+  "freshness": "current"
+}

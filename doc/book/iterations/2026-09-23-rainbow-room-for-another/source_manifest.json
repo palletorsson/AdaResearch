@@ -1,0 +1,33 @@
+{
+  "room": "Color_Rainbow",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Rainbow/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Rainbow/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Color_Rainbow/map_data.json": "86a0d12b4a69ed9b24271deff703d302475c8e1f5dd8e1ed04c9eb43ae9e2e4c",
+    "doc/book/iterations/2026-09-23-rainbow-room-for-another/probe.gd": "e5a6a85013047ee99491619711da5a8be72e891dcf9ca62f738d68b5c8b1d6fe",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "e20161f1b5ed577468470020233793d05d9ef31fbe24acb38fa8c181c00cf774",
+    "ada_run/encounter_pilot/Color_Rainbow/control.json": "4d6373eaf42924593f42807baa6778648a19768dcc94fca39e7b1befcee17781",
+    "ada_run/encounter_pilot/Color_Rainbow/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Color_Rainbow/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Rainbow/em_bake.json": "b148cfcc716b29b5f3d6e8f9ad1aa73a48082e7ddeb81b5545bb8b13dfbb04a9",
+    "algorithms/primitives/rainbow/rainbow.gd": "efe38d72f1b16020871874b3a6559d5b015cf30edf48dd0826df1c4c3e04a048",
+    "algorithms/primitives/rainbow/rainbow_celebration.gd": "070506647e8bf8ffc59f4a3adc9ea9c07a5107e16000340cce716a2033dfd3e0",
+    "commons/ui/control_panel.gd": "7d34a50c201159954fc8ca7833fe0f80d2bd496d4cc374dc056988d05292bb9b",
+    "tools/probes/array_entered_address.gd": "042807a5ca9caa7ea2930faae971b1eaf5cf0e30c91065c13b9ab3a01a45e32a",
+    "tools/probes/transformation_encounters.gd": "8b811e7b86f86512d989bc252db7128aeb5e1e9b9e17731b82faa3a9ef829d38"
+  }
+}

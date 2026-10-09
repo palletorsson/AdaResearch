@@ -1,0 +1,133 @@
+{
+  "map": "Noise_Perlin_Simplex",
+  "date": "2026-09-25",
+  "files": [
+    {
+      "path": "algorithms/randomness/perlinnoise/NoiseVisualizer.gd",
+      "before_sha256": "ea4e552ab1d69690a61c505f9713697ae060b4fd82df16a0790341a30f78cfc9",
+      "after_sha256": "ea4e552ab1d69690a61c505f9713697ae060b4fd82df16a0790341a30f78cfc9",
+      "changed": false
+    },
+    {
+      "path": "algorithms/randomness/perlinnoise/PerlinNoise.gd",
+      "before_sha256": "5c8fb79d6fec190b3870861787a5c2fa4c6c88ecb538b8d98dd4a158bca694b5",
+      "after_sha256": "5c8fb79d6fec190b3870861787a5c2fa4c6c88ecb538b8d98dd4a158bca694b5",
+      "changed": false
+    },
+    {
+      "path": "algorithms/randomness/simplexnoise/SimplexNoise.gd",
+      "before_sha256": "c20f1c19b67ea913fd40d9e79c87dc934cc337892d1cffbb39ec9a25b9fe8363",
+      "after_sha256": "c20f1c19b67ea913fd40d9e79c87dc934cc337892d1cffbb39ec9a25b9fe8363",
+      "changed": false
+    },
+    {
+      "path": "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+      "before_sha256": "ea15c0bc02665e0df319609ea0aeebaaff83d3547a3c5ad10503644c9799f49d",
+      "after_sha256": "ea15c0bc02665e0df319609ea0aeebaaff83d3547a3c5ad10503644c9799f49d",
+      "changed": false
+    },
+    {
+      "path": "algorithms/randomness/simplexnoise/noise_arch.gd",
+      "before_sha256": null,
+      "after_sha256": "93a71295c1d869252850a792ffa33ff1c030f09b1f36bf0913db87db02407a22",
+      "changed": true
+    },
+    {
+      "path": "algorithms/randomness/simplexnoise/noise_arch.gdshader",
+      "before_sha256": null,
+      "after_sha256": "b3c0814f1807442888d5913dcbd467558e02bad0304a488b4a35503c98d48c04",
+      "changed": true
+    },
+    {
+      "path": "algorithms/randomness/simplexnoise/pair_study.gd",
+      "before_sha256": "ea8e54f1299e08f4cb2b2638451b0ac79e5e1608e83bac6c2494b13f3d576878",
+      "after_sha256": "6cfb6f1538e45bf0d6e9ab765b6f4b9330e639bc9a076222c55c4de12987d664",
+      "changed": true
+    },
+    {
+      "path": "commons/data/museum_core_encounters.json",
+      "before_sha256": "be7285eb27b331f8cda9ec12515caa8fc530a2eeb9a91fb0fd544c18a3384e54",
+      "after_sha256": "06a3acaee2a9e8631853646e087e795732904b57e1999b2da14f1fbd9b71d02c",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/artifacts.md",
+      "before_sha256": "c6c7839f747795b22a13e330ebee0a7cfaed9b9aa8f74285b9b3162ac77b6a49",
+      "after_sha256": "c8e172e47d3849ff99897abf35a91f84a62fe4449961bc5b77fb39f3bacec2a0",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/critical.md",
+      "before_sha256": "b708ba53198874d0c7060ce2149106a8024a56ea1da0b88ce3dd781538804dac",
+      "after_sha256": "b708ba53198874d0c7060ce2149106a8024a56ea1da0b88ce3dd781538804dac",
+      "changed": false
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/encounter-notes.md",
+      "before_sha256": "5cdef19c56f372cf8f7f2f556ae1d9ea70147061e320d29eb7ebdb0c179569e8",
+      "after_sha256": "bdab6b951435abda0a2c399f630fa0e7630bf272efe66bbbdb309915eb54e381",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/field_notes.md",
+      "before_sha256": "1e6c3ddcb41697e77ca6709d30f23b1992160e961d0c5d17a2f0eb4c290ca8e7",
+      "after_sha256": "c5c8521df56cd9638f90ad3fb905fb8cb2e00a82af45771b4a64f0e91270c895",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/final.md",
+      "before_sha256": "a54dedc09e512083cabf6a9bfd378df367bbda0574fd1e9c67e23370d5083ac7",
+      "after_sha256": "81cc4b5833a214b824027b2b98739e6d37d6df3116e01ea3bbf87201af415310",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/images/noise-archways.png",
+      "before_sha256": null,
+      "after_sha256": "d96be1e5c3c80ec53c1ef5d11359ad3a1c07c5e2bba75fb06778fb7aace32f8b",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/intent.md",
+      "before_sha256": "3f349330574ffe957c762fed52bfb9098378abe6dbd616dc2c96722eac1c8f28",
+      "after_sha256": "270c73610dabb6c987b9a6f9c797dc4256c427e3f0ebc1c3252d1d0f855310be",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/map_data.json",
+      "before_sha256": "1964d1bb14a85542ea5709bd6a9d2a7b04632cb141579ffb2ab33ff3e3b6fa35",
+      "after_sha256": "8deab0d6e8907b0ac25d9d968cb38dbe93f61b2b01086eb5e3f530fec4e0d894",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/summary.md",
+      "before_sha256": "8eae8086075829d377354d264dae9e9e29bdce21d3bca559f665b7b43089af22",
+      "after_sha256": "fe5cff9e160284bb098f346799e91595c77f17b905e0bb2f297d4b0f334f5057",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/technical.md",
+      "before_sha256": "0a228444007744f5b3525bde10ee3e44dcec8018e610108db06e321a813a52c0",
+      "after_sha256": "8259f646c6a433c80e215233644a5d62bb19936e377c9b64d5e6e224a8355540",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/tutorial.md",
+      "before_sha256": "f710e3e599a9e7e294b5b94ef597a4317a492e0b22396a388cda2fb134f0a329",
+      "after_sha256": "ee530387b4f4cd916cef850b06cda682fdf31f8d6fdd175795f9d9672aaf7b6d",
+      "changed": true
+    },
+    {
+      "path": "commons/maps/sequences/noise.json",
+      "before_sha256": "ae774f9fdcbd5d9930be8ca451c6262fd70fbed5f7556c33b267b82e19b21877",
+      "after_sha256": "ae774f9fdcbd5d9930be8ca451c6262fd70fbed5f7556c33b267b82e19b21877",
+      "changed": false
+    },
+    {
+      "path": "doc/book/iterations/WORKING.md",
+      "before_sha256": "23c9577f4b761886280e2775103da3ca104cb13d023dfc856a28447415e2763b",
+      "after_sha256": "0500abb243cd34692c4a1746355eccf721986b10740332ccd9cce4d664ded531",
+      "changed": true
+    }
+  ],
+  "shared_record_baseline": "core-before-update.json"
+}

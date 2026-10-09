@@ -1,0 +1,151 @@
+{
+  "checks": [
+    {
+      "name": "SpeculativeComputation_Situated_Computation assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "witness full size",
+      "passed": true
+    },
+    {
+      "name": "witness visible",
+      "passed": true
+    },
+    {
+      "name": "witness controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "sources are four actual museum readouts",
+      "passed": true
+    },
+    {
+      "name": "all cameras share actual museum world",
+      "passed": true
+    },
+    {
+      "name": "two portable camera bodies and one fixed camera",
+      "passed": true
+    },
+    {
+      "name": "XR pickup camera 0",
+      "passed": true
+    },
+    {
+      "name": "camera follows held translation and rotation 0",
+      "passed": true
+    },
+    {
+      "name": "return refuses to move held camera 0",
+      "passed": true
+    },
+    {
+      "name": "released camera keeps its aim 0",
+      "passed": true
+    },
+    {
+      "name": "XR pickup camera 1",
+      "passed": true
+    },
+    {
+      "name": "camera follows held translation and rotation 1",
+      "passed": true
+    },
+    {
+      "name": "return refuses to move held camera 1",
+      "passed": true
+    },
+    {
+      "name": "released camera keeps its aim 1",
+      "passed": true
+    },
+    {
+      "name": "fixed reference camera stays still",
+      "passed": true
+    },
+    {
+      "name": "desktop ray finds physical camera",
+      "passed": true
+    },
+    {
+      "name": "desktop grab guards return",
+      "passed": true
+    },
+    {
+      "name": "desktop drop restores stationary pickable",
+      "passed": true
+    },
+    {
+      "name": "return button restores both homes",
+      "passed": true
+    },
+    {
+      "name": "delay contains genuinely earlier exposure",
+      "passed": true
+    },
+    {
+      "name": "live green exposure while delay retains red",
+      "passed": true
+    },
+    {
+      "name": "held frame retains red and original exposure time",
+      "passed": true
+    },
+    {
+      "name": "frame buffer bounded",
+      "passed": true
+    },
+    {
+      "name": "feed cameras do not take player camera",
+      "passed": true
+    },
+    {
+      "name": "viewpoint change flushes delay and preserves held source",
+      "passed": true
+    },
+    {
+      "name": "witness bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "witness bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "witness reset",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses support along side 2",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses support along side 20",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses capture",
+      "passed": true
+    },
+    {
+      "name": "portable camera native capture",
+      "passed": true
+    }
+  ],
+  "map": "SpeculativeComputation_Situated_Computation",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

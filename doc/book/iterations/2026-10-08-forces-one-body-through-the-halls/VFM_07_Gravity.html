@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Let both points answer</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>Let both points answer</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Mutual attraction</li>
+<li>Equal and opposite forces</li>
+<li>Adding pair forces</li>
+<li>Initial conditions</li>
+<li>Softening at close range</li>
+</ul>
+<p>Begin with PAIR. Follow both spheres: each turns toward a source that is itself moving. Neither one is fixed. Save PAIR / FIVE until you have watched the pair.</p>
+<h2>Make the small study</h2>
+<p>Return to two physical points. Give them opposite starting velocities. Calculate the attraction between them once, apply it to one body, and apply its negative to the other.</p>
+<p><strong>The hall adds:</strong> The hall can add three more spheres and make the visitor another source. Your first reconstruction keeps the pair isolated, with collisions and ordinary downward gravity off.</p>
+<p>Save <code>08_attraction.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 08_attraction.gd</h2>
+<!-- student-code:08_attraction.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var a = Point.new()
+var b = Point.new()
+var strength := 4.0 # m³ / (kg s²), an authored model value
+var softening := 1.2 # metres
+
+func _ready() -&gt; void:
+    add_child(a)
+    add_child(b)
+    a.position = Vector3(-1.5, 1.2, 0)
+    b.position = Vector3(1.5, 1.2, 0)
+    a.linear_velocity = global_basis * Vector3(0, 0, 0.6)
+    b.linear_velocity = -a.linear_velocity
+    for point in [a, b]:
+        point.mass = 2.0
+        point.collision_layer = 0
+        point.collision_mask = 0
+    caption(&quot;Two sources. Neither is fixed.&quot;)
+
+func pair_force(displacement: Vector3) -&gt; Vector3:
+    var denominator := pow(displacement.length_squared() + softening * softening, 1.5)
+    return displacement * strength * a.mass * b.mass / denominator
+
+func _physics_process(_delta: float) -&gt; void:
+    var force := pair_force(b.global_position - a.global_position)
+    a.apply_central_force(force)
+    b.apply_central_force(-force)
+</code></pre>
+<h2>Read the change</h2>
+<p>Subtract the two world positions to get a displacement from a to b. The force follows that displacement. Both masses multiply its strength.</p>
+<p>The denominator makes attraction weaker with separation. Read <code>softening</code> as a chosen length that changes the calculation when the points get close. It keeps the force finite even when their positions coincide.</p>
+<p>The two calls apply <code>force</code> and <code>-force</code>. The engine then uses each body’s mass to find its acceleration. Both velocities change, so the next update begins with two new source positions.</p>
+<h2>Change one thing</h2>
+<p>Double only <code>a.mass</code> and keep the starting velocities. Predict both responses: the shared force doubles; a’s acceleration stays the same because its mass also doubled; b’s acceleration doubles. Restart to compare.</p>
+<h2>Return to the hall</h2>
+<p>Choose PAIR / FIVE in the hall, then enter the field. Your presence adds another attraction. Track one sphere and notice when a new encounter makes its earlier path a poor guide to what happens next.</p>
+<h2>Model notes</h2>
+<p>This softened attraction is an authored model. Far from the softening length it approaches an inverse-square force. It does not guarantee a circular orbit. Equal and opposite forces preserve the isolated pair’s total momentum within numerical tolerance; the simulation does not conserve energy exactly. Once the visitor joins, the spheres alone are no longer an isolated system.</p>
+<h2>Into the next room</h2>
+<p>These points attract while passing through each other. Bring back collision to ask what lets one body support another.</p>
+<p><a href="final.html#VFM_07_Gravity">Reflective text</a>.</p></main></html>

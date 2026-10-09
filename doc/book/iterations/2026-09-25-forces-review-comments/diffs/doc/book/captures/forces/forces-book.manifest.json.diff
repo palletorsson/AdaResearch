@@ -1,0 +1,53 @@
+--- before/doc/book/captures/forces/forces-book.manifest.json
++++ doc/book/captures/forces/forces-book.manifest.json
+@@ -1,5 +1,5 @@
+ {
+-  "captured_at": "2026-09-24T17:09:41.983250+00:00",
++  "captured_at": "2026-09-25T06:08:37.932185+00:00",
+   "base_commit": "823cdb6073f68c45e04c4a3d367a71225b97758a",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+@@ -10,7 +10,7 @@
+     {
+       "map": "Vectors_Act1_WhatAVectorIs",
+       "path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+-      "sha256": "f7f22b261de37ab671f2f7844f94bdd1efc9d55437d0993afbe5d02811cf40a9"
++      "sha256": "c2a0c0128fef0c09ba844188ce54df1122c0a4a7a7846a511dc693a08d343332"
+     },
+     {
+       "map": "VFM_02_Operations",
+@@ -40,7 +40,7 @@
+     {
+       "map": "Vectors_Act4a_KineticForces",
+       "path": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+-      "sha256": "1f75c3d61f6b2dcc31fafd50e30f7bc88d080b25fc6b2da93c52afba70f0fc76"
++      "sha256": "7ededcffc026b25c007d60a7649f121502365b406b11e7c0774207ce897a0cd6"
+     },
+     {
+       "map": "Vectors_Act4b_Oscillation",
+@@ -50,12 +50,12 @@
+     {
+       "map": "Change_Choreography",
+       "path": "commons/maps/Change_Choreography/final.md",
+-      "sha256": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6"
++      "sha256": "477ec78075f4a11bddadcde93803684cd4620f3f2e8f825f09ef403632dbf3b5"
+     },
+     {
+       "map": "VFM_07_Gravity",
+       "path": "commons/maps/VFM_07_Gravity/final.md",
+-      "sha256": "ca438196f724c79371a732bcd85c8ad66ec7585da4cf1ccfec580c6efb7b9950"
++      "sha256": "6480238f3089a940a6321af670f7c766a867737dc3fc839d3dd95e855434740b"
+     },
+     {
+       "map": "VFM_09_Legs",
+@@ -70,8 +70,8 @@
+     {
+       "map": "Vectors_Act5_ForceAsPlace",
+       "path": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+-      "sha256": "d4d38c2de47d9746e1250923c552b654d10b33d7b10f10cafe34c88fce6546e8"
++      "sha256": "f3a4d7d435d58203a96caea14bcb720288e3642410e1b7c780c2503610bf2161"
+     }
+   ],
+-  "output_sha256": "557c7180ba2f3300c29b9af739ec17a11db806fe4dc92c9fca1dc86e284457cd"
++  "output_sha256": "ea43c1d1d2c006ad5c214a6e98e24ad183e5ba9a66872a7cb9f51eebe53c474c"
+ }

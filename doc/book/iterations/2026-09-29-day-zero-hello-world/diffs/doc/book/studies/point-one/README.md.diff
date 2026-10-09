@@ -1,0 +1,13 @@
+--- before/doc/book/studies/point-one/README.md
++++ doc/book/studies/point-one/README.md
+@@ -1,8 +1,8 @@
+ # Point One — building a point
+ 
+-A small Godot 4.6 project accompanying Point One. Import project.godot, open study.tscn, and run with F6 (or run the project with F5).
++A small Godot 4.6 project accompanying Point One. Setup, running and saving are introduced once in Day Zero (DAY_ZERO.md in this download). The lesson scene is study.tscn; project.godot already selects it.
+ 
+-The camera, lights, floor and labels are supplied in study.tscn. The three scripts add only the point:
++study.tscn inherits base.tscn, the self-contained camera, light, environment and floor from Day Zero. It hides the base greeting and supplies three labels. The three scripts add only the point:
+ 
+ - position.gd: keep a local position; nothing is drawn.
+ - visible.gd: keep that position and give it a visible sphere.

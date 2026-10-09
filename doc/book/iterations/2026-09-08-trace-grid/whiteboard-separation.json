@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-08",
+  "correction": "Pens belong to whiteboard; drawing dots keep original appearance and plinth placements, plus cased numeric readout.",
+  "supersedes": "whiteboard-pens.json: its converted draw_dot presentation was a misunderstanding.",
+  "whiteboard": {
+    "checks": 66,
+    "failures": [],
+    "scope": "Museum stamping, real pickup callbacks with supplied motion; GPU pixel checks when --shot. Headset usability unverified."
+  },
+  "dot_panel": {
+    "checks": 19,
+    "failures": [],
+    "scope": "Real recorder with supplied positions; screenshot is one trace, not a headset reading test."
+  },
+  "shared_recorder_regression": {
+    "checks": 76,
+    "failures": []
+  },
+  "content_checks": {
+    "original_dot_tokens_and_cells_restored": true,
+    "book_tags_match_primary_order": [
+      "draw_dot",
+      "draw_stick",
+      "whiteboard",
+      "hand_telemetry_diptych",
+      "automatic_writing_desk"
+    ]
+  },
+  "implementation": [
+    "commons/artifacts/whiteboard/whiteboard_drawing.gd",
+    "commons/artifacts/whiteboard/whiteboard_pen.gd",
+    "commons/context/drawingboard/paper_draw_surface.gd",
+    "commons/context/drawingboard/pen.tscn"
+  ],
+  "limits": [
+    "Pickup tested with supplied grabber transforms; headset reach and legibility still need a human pass.",
+    "Board ink lives for the loaded encounter; no disk storage."
+  ],
+  "previews": [
+    "ada_run/whiteboard_separation/encounter.png",
+    "ada_run/trace_data_panel/preview.png"
+  ]
+}

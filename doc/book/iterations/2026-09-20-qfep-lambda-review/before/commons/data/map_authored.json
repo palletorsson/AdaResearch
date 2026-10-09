@@ -1,0 +1,273 @@
+{
+  "_readme": "MAP-AUTHORED HALLS — chapters listed here build their museum halls FROM the named grid maps (in order): tile from the map's structure (h>=2 wall, h==1 floor, cropped to content), artifacts at their map cells, plinth = height 2 under the anchor. Applied to em_plan.json by `python tools/em_map_halls.py --apply` (backup kept, shipped copy follows); the museum skips the necklace hand's stamp-clear for these rows — the map is the placement authority. Remove a chapter to return it to the dealt plan on the next apply.",
+  "primitives": [
+    "Point_One",
+    "Point_Lines",
+    "Point_Trace",
+    "Point_Line_Grid",
+    "Point_Triangle_Context",
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Primitives_Ignorance",
+    "Primitives_Portals",
+    "Primitives_Melencolia",
+    "Biome_Ladder_Primitives"
+  ],
+  "transformation": [
+    "Trans_Pre",
+    "Trans_Introduction",
+    "Trans_Translation",
+    "Trans_Rotation",
+    "Trans_Scale",
+    "Trans_Body",
+    "Trans_Pit",
+    "Biome_Ladder_Transformation"
+  ],
+  "color": [
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Nails",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Paint",
+    "Color_Walls",
+    "Chamber_Color",
+    "Biome_Ladder_Color"
+  ],
+  "change": [
+    "Change_Intro",
+    "Flow_Field"
+  ],
+  "forces": [
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations",
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_05_Launch",
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation",
+    "Change_Choreography",
+    "VFM_07_Gravity",
+    "VFM_09_Legs",
+    "VFM_08_Arena",
+    "Vectors_Act5_ForceAsPlace"
+  ],
+  "formfinding": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+  ],
+  "wavefunctions": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Sine_Space",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_3D_Wave_Propagation",
+    "WaveFunctions_Effect_Sound",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "WaveFunctions_AirMusic",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_TrigWalkingPath",
+    "WaveFunctions_Synthesis_Lab"
+  ],
+  "randomness": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Biome_Cage",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game",
+    "Biome_Ladder_Randomness"
+  ],
+  "noise": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Noise_Perlin_Simplex"
+  ],
+  "cellularautomata": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+  ],
+  "fractals": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_CantorSet",
+    "Fractal_KochSierpinski",
+    "Fractal_MengerSponge",
+    "Fractal_GoldenSpiral",
+    "Fractal_Synthesis"
+  ],
+  "lsystems": [
+    "LSystems_Grammar_Lab",
+    "LSystems_Growth",
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living",
+    "Assemblage_Same_Desire"
+  ],
+  "proceduralgeneration": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+  ],
+  "softbodies": [
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Cloth_Physics",
+    "SoftBodies_Carusell",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Playground_of_Joy",
+    "SoftBodies_Affect_Theory_Visualization",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "Topology_Entropy_Morphogenesis"
+  ],
+  "isosurfaces": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "boolean_surfaces": [
+    "Boolean_Verbs",
+    "Boolean_Gallery",
+    "Boolean_Works"
+  ],
+  "swarmintelligence": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Ant_Colony_Optimization",
+    "SwarmIntelligence_Particle_Swarm_Optimization",
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+  ],
+  "machinelearning": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis"
+  ],
+  "graphtheory": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "foundationscrisis": [
+    "Euclid_Parallel",
+    "NonEuclidean_Spaces",
+    "Russell_Paradox",
+    "Godel_Incompleteness",
+    "Escher_Impossible",
+    "Brouwer_Intuitionism",
+    "Florensky_Paraconsistent",
+    "Crisis_Synthesis"
+  ],
+  "qfeplaboratory": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Synthesis"
+  ],
+  "postfoundationscrisis": [
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis"
+  ],
+  "array_tutorial": [
+    "Array",
+    "Tutorial_3D",
+    "Tutorial_Tiling_Floor",
+    "Tutorial_Tiling_Walls",
+    "Tutorial_Disco"
+  ],
+  "tiling": [
+    "Pattern_Disco",
+    "Pattern_Foundry",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Symmetry_Seventeen",
+    "Ribbon_Patterns_01",
+    "Ribbon_Patterns_02",
+    "Ribbon_Patterns_03"
+  ],
+  "_placed_added": {
+    "change": [
+      "Ribbon_Change_01",
+      "Ribbon_Change_02",
+      "Ribbon_Change_03",
+      "Ribbon_Change_04"
+    ],
+    "color": [
+      "Ribbon_Color_01",
+      "Ribbon_Color_02",
+      "Ribbon_Color_03",
+      "Ribbon_Color_04",
+      "Ribbon_Color_05",
+      "Ribbon_Color_06",
+      "Ribbon_Color_07"
+    ]
+  },
+  "_reconstructed": {
+    "at": "2026-09-17T17:32:51+02:00",
+    "by": "session f1681c7b (biome ladders)",
+    "from": "ada_run/em_plan.json _map_halls.chapters, derived from this file at 2026-09-17T17:32:18.326576+02:00 by tools/em_map_halls.py --apply",
+    "why": "a recovery script of this session opened the working copy for writing before reading it and truncated it to 0 bytes (2026-09-17 17:14). The chapter lists are the working tree's as of the last --apply; _readme and _placed_added are HEAD's. Edits made to this file between 17:32 and 17:14 are not recovered. Delete this key once the owner of the colour rewrite has checked the lists."
+  }
+}

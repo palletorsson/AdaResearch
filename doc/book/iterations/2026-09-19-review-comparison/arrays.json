@@ -1,0 +1,72 @@
+{
+  "summary": "The five chapters already carry a clear progression: an address survives its occupant; a volume adds reach; a motif makes a surface; a wall changes its bodily use; a clock reads the array as a score. This pass preserves the prose and repairs the encounters.",
+  "items": [
+    {
+      "title": "Array: keep the address after collection",
+      "description": "Real contact checks confirm the row and grid update the intended table entries. The row loses its cube label; the grid retains its address plate. The manuscript already asks the reader to discover that difference. No book passage changed.",
+      "report": "doc/book/iterations/2026-09-19-arrays-review/opening-audit.md"
+    },
+    {
+      "title": "3D: reach and read an address",
+      "description": "The invitation now asks for an action. Address labels respect the opaque instruction panel and sit above their cubes, instead of being drawn through the panel from inside the cube. Flight controls and the chapter are unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-19-arrays-review/opening/captions-before.png",
+        "doc/book/iterations/2026-09-19-arrays-review/opening/captions-after.png"
+      ],
+      "captions": [
+        "Before · the old heading and addresses showing through the opaque board.",
+        "After · a clear invitation, readable instructions, and addresses above the cubes."
+      ],
+      "image_note": "Same camera, lighting and viewport; real artifact in an isolated fixture. Cube animation continues between runs. These are not full-museum or headset images.",
+      "before": "FLY INTO THE THIRD INDEX\nTHREE INDICES",
+      "after": "REACH AN ADDRESS\nSELECT AN ADDRESS",
+      "text_kind": "artifact captions",
+      "report": "doc/book/iterations/2026-09-19-arrays-review/opening-audit.md"
+    },
+    {
+      "title": "Floor: let the pattern be visible",
+      "description": "Automatic grounding had cancelled the pattern planes’ intended offset, putting all six exactly on the floor. The map now preserves 2.5 cm of image clearance. A local material setting quiets the wireframe; collision geometry and the six rules are unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-19-arrays-review/surfaces/before/Tutorial_Tiling_Floor-inside.png",
+        "doc/book/iterations/2026-09-19-arrays-review/surfaces/after/Tutorial_Tiling_Floor-inside.png"
+      ],
+      "captions": [
+        "Before · magenta edges and floor overlap interfere with the six studies.",
+        "After · clean black-and-white fields, with subdued surrounding edges."
+      ],
+      "image_note": "Actual endless museum, matched camera and motif state. Existing capture-mode height tint remains active in both images; no claim of a completely monochrome surrounding room.",
+      "report": "doc/book/iterations/2026-09-19-arrays-review/surfaces/AUDIT.md"
+    },
+    {
+      "title": "Walls: carry the same rule into another encounter",
+      "description": "These walls reuse the floor’s rules. Their local material now leaves the repeated images easier to inspect. The room’s geometry, pattern generator, controls and final.md remain unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-19-arrays-review/surfaces/before/Tutorial_Tiling_Walls-inside.png",
+        "doc/book/iterations/2026-09-19-arrays-review/surfaces/after/Tutorial_Tiling_Walls-inside.png"
+      ],
+      "captions": [
+        "Before · the surrounding wireframe competes with the panels.",
+        "After · the panels stand out against quieter surroundings."
+      ],
+      "image_note": "Actual endless museum, matched camera and motif state. Capture height tint remains visible. The QUARTER TURN pattern agrees in 30,000 sampled corresponding image pixels; this is image evidence, not a saved texture-byte hash.",
+      "report": "doc/book/iterations/2026-09-19-arrays-review/surfaces/AUDIT.md"
+    },
+    {
+      "title": "Disco: name the sound that is actually playing",
+      "description": "The house preset’s second row was labelled Snare while it played a Korg M1 piano. Track names now follow the loaded sounds across all seventeen presets. Unknown names get a neutral Track N. The musical presets, cells, clocks and chapter are preserved.",
+      "images": [
+        "doc/book/iterations/2026-09-19-arrays-review/disco/before-house-panel.png",
+        "doc/book/iterations/2026-09-19-arrays-review/disco/verified-house-panel.png"
+      ],
+      "captions": [
+        "Before · fixed instrument labels under the house preset.",
+        "After · labels match the actual loaded instruments."
+      ],
+      "image_note": "The real sequencer’s 800 × 300 screen, same preset and selected cell. These are artifact-screen captures, not views from the museum or headset. Audio generation was checked with a dummy driver; listening quality was not tested.",
+      "before": "Kick · Snare · HiHat · Bass",
+      "after": "TR-909 Kick · Korg M1 Piano · Acid 606 Hi-Hat · TB-303 Acid Bass",
+      "text_kind": "track labels",
+      "report": "doc/book/iterations/2026-09-19-arrays-review/disco/AUDIT.md"
+    }
+  ]
+}

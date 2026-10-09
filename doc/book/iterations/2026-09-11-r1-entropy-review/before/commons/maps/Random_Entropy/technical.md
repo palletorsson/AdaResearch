@@ -1,0 +1,25 @@
+# Random_Entropy — technical
+
+## The gauge
+
+`commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd` (`ShannonEntropyMeter`, a `Node3D` whose every child is script-built in `_ready` → `_build_all`). Exports: `panel_size` 0.7 × 0.5 m; `num_symbols` 10; `sequence_length` 200; `bar_color_low` / `bar_color_high`; `stream_seed` (−1 = `hash("shannon_entropy")`); `disclosure` (`oracle` · `tally` · `ledger` · `works` · `origin`, the family's ladder read through `prng_crank_machine.gd`; `works` is the legacy default); since R1, `stand` (`none` · `ledger`).
+
+The build order: seed the local `RandomNumberGenerator`, `_build_panel`, `_build_gauge` (the bar track, fill and ticks 0/1/2/3/max — `tally` and above), `_build_frequency_bars` (ten bars and labels — `tally` and above; ghost bars of the declared law at `origin`), `_build_labels` (title; the formula at `works` and above; the ceiling `max = 3.32 bits (10 symbols)` at `tally` and above; the source strip at `origin`), `_run_measurement`.
+
+The measurement: `_run_measurement` draws `sequence_length` symbols with `_rng.randi_range(0, num_symbols - 1)` and hands them to `_measure`, which tallies (`counts[s] += 1`), computes H over the counts with zero-count terms omitted (`if c > 0: p = c / sequence_length; entropy -= p · log₂ p`), the ceiling `log(num_symbols) / log(2.0)`, and updates the boards: the glowing `H = x.xxx bits`, the fill bar (`frac = H / max`), the ten bars (height ∝ count / max count), the ghosts (`sequence_length / num_symbols`), and the strip of the first forty draws (`ledger` and above). The split between `_run_measurement` and `_measure` is R1's; the default build walks both in the shipped order with the shipped lines. `apply_grid_config` accepts `disclosure`, `num_symbols`, `sequence_length`, `stream_seed`, `seed` and `stand`, and rebuilds inline through `_rebuild_now` when anything changed.
+
+Measured on 2026-09-11 (both lanes agree, `field_notes.md`): the arrival sample's counts, H and the ceiling are in the probe JSON; a single-symbol sample of 200 reads H = 0.000000; an evenly populated one (i mod 10) reads log₂(10) = 3.321928 to 10⁻⁶.
+
+## The ledger (`#stand:ledger`, R1, 2026-09-11)
+
+Constants: `LIFT` 1.40 m (the panel's centre); `DESK_H` 0.92, `DESK_W` 2.30, `DESK_D` 0.45, `DESK_Z` 0.45 (the desk spans z 0.225 … 0.675 before the panel); `RIBBON_Z` 0.40, `RIBBON_W` 2.0; `TILE` 0.008 × 0.03 × 0.02; `SORT_SECONDS` 1.2. Under `ledger`, `_apply_stand` (the last step of `_build_all`) keeps the shipped draw as `_sample_uniform`, draws `_sample_contrast` once (its own generator seeded `_effective_seed() + 1`, weights 2⁻ᵏ, inverse-CDF), builds the staging (post, desk with a collider, caption on the desk's front, the ribbon as a `MultiMeshInstance3D` of `sequence_length` tiles with instance colours `_symbol_color(s)`, the mark under the first forty, the LEDGER panel from `RackTemplates.create_panel` — SORT · CONTRAST · DISCLOSE, tilted 60° up on the desk's front-right — and the readout plate on the front-left), lifts every script-built child by `LIFT`, and measures the contrast sample if CONTRAST is on. `_rebuild_now` skips the staging, so a disclosure step keeps the ribbon and its state; the boards `_measure` rebuilds are lifted in `_after_measure`.
+
+The sort: `_refresh_ribbon` computes each tile's place in a stable sort by symbol (`_sorted_index`); `_place_tiles(t)` lerps every tile between `_tile_x_drawn(i)` (pitch 2.0 / 200) and `_tile_x_sorted(j, block)` (the same pitch with a 6 mm gap before each block after the first) with a 3 cm hop at t = ½; `set_sorted` tweens t over 1.2 s; the mark is visible only at t < 0.01. `sorted_copy()` returns the stable sort of the sample; `tiles_moved()` counts tiles whose sorted index differs from their draw index; `entropy_of(counts, n)` and `counts_of(sequence, symbols)` are the loop and the tally as static functions.
+
+The readout (`_update_readout`, five lines): `N 200 · 10 symbols · uniform · seed S` (or `concentrated p∝2⁻ᵏ · seed S+1`); `counts c0 … c9 · sum 200`; `H h bits · max log2(10) = 3.322`; `as drawn · the strip shows the first 40` or `sorted copy: H h · equal · m of 200 tiles moved`; `disclosure <rung> · <what it shows>`.
+
+API: `measure(sequence) → bool` (exactly `sequence_length` symbols in range; the boards, the ribbon and the readout follow), `get_sequence`, `get_counts`, `get_entropy`, `get_strip_text`, `max_entropy`, `set_sorted` / `toggle_sort`, `set_contrast` / `toggle_contrast`, `set_disclosure` / `step_disclosure`, `get_ledger_state`.
+
+## The map
+
+`commons/maps/Random_Entropy/map_data.json`: 18 × 12, an explicit `w` perimeter, doors at columns 7–9 on rows 0 and 11, interior wall stubs at (2,3), (2,7), (10,7), void corners. The primary at (5,6) as `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` — turned to face east, the corridor. `map_info.museum`: `sculpture_clear_rects` [[4,4,7,8], [7,0,9,11]] (the desk and its approach; the door route), `artifact_placement: "map"`. Nothing else moved. The probe is `commons/testing/probe_wcn_entropy.gd` (`bash tools/run_wcn_probe.sh entropy [live]`); the runtime record is in `field_notes.md`.

@@ -1,0 +1,329 @@
+{
+  "sequence": "cellularautomata",
+  "declared_maps": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+  ],
+  "museum_map_authored_order": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_EdgeOfChaos"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "CA_Introduction",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1226,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ca_rule_explorer"
+        ],
+        "reason": "How much of the next row can you predict from three cells?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_Introduction/final.md",
+        "text_sha256": "491dd3cd3a193dc8e8441173458345fd591e4b011d46cd1a5ad916e3d3e69b17",
+        "map_sha256": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ca_rule_explorer",
+        "persian_rug",
+        "line_network_ca"
+      ],
+      "role_primary_order": [
+        "ca_rule_explorer",
+        "persian_rug",
+        "line_network_ca"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "recorded_status": "source_checked_draft",
+      "text_words": 776,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "structure_growth"
+        ],
+        "reason": "What changes when a cell can have neighbours around it in three dimensions?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_ElementaryRules/final.md",
+        "text_sha256": "76266e161d5dd41920df0b7300418cc34654dd3ba1b9d0ba4ce2e92183de75d8",
+        "map_sha256": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "structure_growth"
+      ],
+      "role_primary_order": [
+        "structure_growth"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_GameOfLife",
+      "recorded_status": "source_checked_draft",
+      "text_words": 601,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ca_bridge"
+        ],
+        "reason": "What happens when the record of time becomes a structure in space?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_GameOfLife/final.md",
+        "text_sha256": "7bd487ca69fdf64fad630dcf2f763aa6ddf9d3a12eab80dce31d22558e222d51",
+        "map_sha256": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ca_bridge"
+      ],
+      "role_primary_order": [
+        "ca_bridge"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "recorded_status": "source_checked_draft",
+      "text_words": 688,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "game_of_life_petri"
+        ],
+        "reason": "Can one rule support both something that repeats and something that travels?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_BeyondBinary/final.md",
+        "text_sha256": "9922a99ec9f42e89a7957e120abf1d2918f1c9bb90d5728ac7ad388e8d539262",
+        "map_sha256": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "game_of_life_petri"
+      ],
+      "role_primary_order": [
+        "game_of_life_petri"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "recorded_status": "source_checked_draft",
+      "text_words": 750,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "decaying_bridge"
+        ],
+        "reason": "Does a route remain the same route after somebody occupies it?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_ExpandingSpace/final.md",
+        "text_sha256": "a206ec9904d6bada67762ef6ed46f2bbdb9abd3c8d0ea5704790f0d11b2f5e7f",
+        "map_sha256": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "decaying_bridge"
+      ],
+      "role_primary_order": [
+        "decaying_bridge"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_SoftRules",
+      "recorded_status": "source_checked_draft",
+      "text_words": 778,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "the_clockmaker_of_rules"
+        ],
+        "reason": "What must remain separate for all cells to share the same present?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_SoftRules/final.md",
+        "text_sha256": "ef9a7fe34cfb1077be13a65d22f668260e8703c6af40beacddd06a3ae14cf543",
+        "map_sha256": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "rd_artifact",
+        "the_clockmaker_of_rules"
+      ],
+      "role_primary_order": [
+        "rd_artifact",
+        "the_clockmaker_of_rules"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "recorded_status": "source_checked_draft",
+      "text_words": 418,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ca_rule_explorer",
+          "sierpinski_pyramid"
+        ],
+        "reason": "Can similar patterns come from different ways of building them?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_AgentsCircuits/final.md",
+        "text_sha256": "3aafdee5204f474d53da18dd5fe5a85f3ef9bffe3cae6ab02b0c6a06db855625",
+        "map_sha256": "0bd90c88a790dabe974396630b2c610852d7118db8913b897d2d62f886b8d457",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "role_primary_order": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "recorded_status": "source_checked_draft",
+      "text_words": 696,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "self_organization_ca"
+        ],
+        "reason": "What evidence would distinguish persistent organisation from a changing picture?",
+        "status": "source_checked_draft",
+        "sequence": "cellularautomata",
+        "text_path": "commons/maps/CA_EdgeOfChaos/final.md",
+        "text_sha256": "86d3283b51843f23678340ecb80ae6c8400463436894384b54487bb4e47165ec",
+        "map_sha256": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "self_organization_ca"
+      ],
+      "role_primary_order": [
+        "self_organization_ca"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+      "algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
+      "algorithms/cellularautomata/ca_bridge/history_study.gd",
+      "algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd",
+      "algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn",
+      "algorithms/cellularautomata/ca_showcase/difference_study.gd",
+      "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+      "algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
+      "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd",
+      "algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
+      "algorithms/cellularautomata/cellular_automata_3d/structure_study.gd",
+      "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+      "algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
+      "algorithms/cellularautomata/living_architecture/proximity_study.gd",
+      "algorithms/cellularautomata/persian_rug/persian_rug.gd",
+      "algorithms/cellularautomata/persian_rug/persian_rug.tscn",
+      "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd",
+      "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+      "commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+      "commons/artifacts/ca_rule_explorer/neighbour_study.gd",
+      "commons/artifacts/game_of_life_petri/address_study.gd",
+      "commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+      "commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
+      "commons/artifacts/rd_artifact/exchange_study.gd",
+      "commons/artifacts/rd_artifact/rd_artifact.gd",
+      "commons/artifacts/rd_artifact/rd_artifact.tscn",
+      "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd",
+      "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/rd_grammar/rd_sim.gd",
+      "commons/ui/text_screen.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://algorithms/cellularautomata/ca_showcase/difference_model.gd",
+      "res://commons/artifacts/game_of_life_petri/life_address_receiver.gd",
+      "res://commons/artifacts/rd_artifact/live_field.gd",
+      "res://commons/graph_grammar/operations/rd_displace_op.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/cubes/cube_scene.gd",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

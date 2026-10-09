@@ -1,0 +1,478 @@
+{
+  "checks": [
+    {
+      "check": "six independent specimens",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed triangle count",
+      "detail": 12,
+      "pass": true
+    },
+    {
+      "check": "seed retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "seed finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed surface ray reaches specimen",
+      "detail": "(-4.975, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "inset triangle count",
+      "detail": 24,
+      "pass": true
+    },
+    {
+      "check": "inset retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "inset finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "inset mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "inset surface ray reaches specimen",
+      "detail": "(0.025, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "lift triangle count",
+      "detail": 36,
+      "pass": true
+    },
+    {
+      "check": "lift retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "lift finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "lift mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "lift surface ray reaches specimen",
+      "detail": "(5.025, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "repeat triangle count",
+      "detail": 84,
+      "pass": true
+    },
+    {
+      "check": "repeat retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "repeat finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "repeat mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "repeat surface ray reaches specimen",
+      "detail": "(-4.975, 0.56, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "wider triangle count",
+      "detail": 84,
+      "pass": true
+    },
+    {
+      "check": "wider retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "wider finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "wider mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "wider surface ray reaches specimen",
+      "detail": "(0.025, 0.56, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "all triangle count",
+      "detail": 444,
+      "pass": true
+    },
+    {
+      "check": "all retained tips",
+      "detail": 12,
+      "pass": true
+    },
+    {
+      "check": "all finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "all mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "all surface ray reaches specimen",
+      "detail": "(5.025, 1.76, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-5.0, 0.0, 6.0)",
+      "detail": "(-4.916295, 0.000836, 6.050223)",
+      "pass": true
+    },
+    {
+      "check": "walk to (5.0, 0.0, 6.0)",
+      "detail": "(4.883581, 0.000826, 6.00059)",
+      "pass": true
+    },
+    {
+      "check": "walk to (8.0, 0.0, 6.0)",
+      "detail": "(7.883582, 0.000828, 6.000022)",
+      "pass": true
+    },
+    {
+      "check": "walk to (8.0, 0.0, 0.0)",
+      "detail": "(7.998684, 0.000828, 0.067801)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-8.0, 0.0, 0.0)",
+      "detail": "(-7.934508, 0.000831, 0.000278)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-8.0, 0.0, -7.0)",
+      "detail": "(-7.999371, 0.000828, -6.93275)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, -7.0)",
+      "detail": "(2.400415, 0.000826, -6.999362)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, 0.0)",
+      "detail": "(2.49905, 0.000833, -0.066738)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, -9.0)",
+      "detail": "(2.499993, 0.00083, -8.933413)",
+      "pass": true
+    },
+    {
+      "check": "walk to (0.0, 0.0, -10.0)",
+      "detail": "(0.108546, 0.000836, -9.95369)",
+      "pass": true
+    },
+    {
+      "check": "plinth stops walking body",
+      "detail": "(-4.999995, -0.000559, 4.801403)",
+      "pass": true
+    },
+    {
+      "check": "capture hall",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture first-three",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture three-families",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture inside",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture diagonal",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "shots": [
+    {
+      "camera": "(8.4, 4.8, 9.0)",
+      "name": "hall",
+      "saved": true,
+      "target": "(0.0, 1.5, -0.5)"
+    },
+    {
+      "camera": "(6.7, 3.3, 10.0)",
+      "name": "first-three",
+      "saved": true,
+      "target": "(0.0, 0.95, 3.2)"
+    },
+    {
+      "camera": "(7.2, 5.0, 5.5)",
+      "name": "three-families",
+      "saved": true,
+      "target": "(0.0, 1.6, -3.2)"
+    },
+    {
+      "camera": "(2.5, 1.7, 0.0)",
+      "name": "inside",
+      "saved": true,
+      "target": "(5.0, 2.1, -3.2)"
+    },
+    {
+      "camera": "(-2.8, 2.8, 6.2)",
+      "name": "diagonal",
+      "saved": true,
+      "target": "(-5.0, 1.25, 3.2)"
+    }
+  ],
+  "specimens": [
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces": 12,
+      "growing": 2,
+      "id": "seed",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "12 triangles / two on top",
+        "id": "seed",
+        "rounds": 0,
+        "selection": "up",
+        "title": "01 / THE CUBE"
+      },
+      "station": [
+        -5.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 8
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces": 24,
+      "growing": 2,
+      "id": "inset",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Each top triangle draws inward",
+        "id": "inset",
+        "inset_only": true,
+        "rounds": 0,
+        "selection": "up",
+        "title": "02 / INSET"
+      },
+      "station": [
+        0.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 14
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.39999997615814,
+        1.0
+      ],
+      "faces": 36,
+      "growing": 2,
+      "id": "lift",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "The two inner faces rise 0.4 m",
+        "id": "lift",
+        "rounds": 1,
+        "selection": "up",
+        "title": "03 / EXTRUDE"
+      },
+      "station": [
+        5.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 20
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        2.19999980926514,
+        1.0
+      ],
+      "faces": 84,
+      "growing": 2,
+      "id": "repeat",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Three rounds / inset 28%",
+        "id": "repeat",
+        "rounds": 3,
+        "selection": "up",
+        "title": "04 / REPEAT"
+      },
+      "station": [
+        -5.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 44
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        2.19999980926514,
+        1.0
+      ],
+      "faces": 84,
+      "growing": 2,
+      "id": "wider",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.08,
+        "caption": "Three rounds / inset 8%",
+        "id": "wider",
+        "rounds": 3,
+        "selection": "up",
+        "title": "05 / VARY THE AMOUNT"
+      },
+      "station": [
+        0.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 44
+    },
+    {
+      "bounds_position": [
+        -1.69999992847443,
+        -1.69999992847443,
+        -1.69999992847443
+      ],
+      "bounds_size": [
+        3.39999985694885,
+        3.40000009536743,
+        3.40000009536743
+      ],
+      "faces": 444,
+      "growing": 12,
+      "id": "all",
+      "plinth_size": [
+        3.64999985694885,
+        0.55,
+        3.65000009536743
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Three rounds / all twelve seed faces",
+        "id": "all",
+        "rounds": 3,
+        "selection": "all",
+        "title": "06 / CHANGE THE SELECTION"
+      },
+      "station": [
+        5.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 224
+    }
+  ]
+}

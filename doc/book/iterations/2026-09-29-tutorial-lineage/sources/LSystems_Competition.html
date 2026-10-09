@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LSystems_Competition · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=LSystems_Competition">← Tutorial lineage</a></p><h1>LSystems Competition</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="LSystems_Competition/final.md">Raw captured source</a></p><pre># Who gets the first turn?
+
+&lt;!-- @ForestCompetition --&gt;
+
+Two stems wait above a tiled field. One is amber, one blue. Both begin with F, the same diameter and the same rule. Their colours let us follow them; colour gives neither a different appetite.
+
+Press STEP: A takes a turn. A small branch appears, and a square patch of soil drops. Press STEP again: B’s turn; the readout names who is next. Both have reached generation one. Look at what they took: A received 2.250, B 1.980. These are the model&#x27;s resource values. We have not measured grams of food.
+
+Is something wrong with B&#x27;s instructions?
+
+Press ORDER to begin the comparison again with B first. The same soil returns; the same two starting stems return. Take two turns. B now receives the larger amount. Nothing in the branching sentence had to change.
+
+Architecture separated the line from the boundary that lets a body pass. Here we separate a rewriting rule from the conditions that let it run. The familiar brackets still save and restore a turtle&#x27;s state. Both specimens use this replacement:
+
+```text
+F → F[+F]F[-F][F]
+```
+
+The forest does something before applying it. It reads the soil around the selected root, subtracts a portion from each cell, and adds those portions to the tree&#x27;s uptake. The comparison gives both trees a growth multiplier of one. This excerpt is the subtraction inside that cell loop:
+
+```gdscript
+var take := minf(_nutrient_grid[cy][cx] * 0.15 * tree.growth_rate_mult, _nutrient_grid[cy][cx])
+_nutrient_grid[cy][cx] -= take
+uptake += take
+```
+
+Each initial sampling square contains twenty-five cells. The squares overlap in twenty cells. The first tree takes fifteen percent of each cell&#x27;s current value. The second arrives at a patch partly used by the first. Its rule is intact; its starting world is already different.
+
+The two root markers are close together on the field. The branching displays stand apart, enlarged four times so that we can inspect them. Their display positions do not move the roots. Follow the coloured squares back to the soil before mistaking the distance between the exhibits for the distance in the calculation.
+
+Try SEASON. This also begins a fresh comparison, now holding winter steady. Take two turns. The patch sinks, and the uptake readings change. The stems do not branch.
+
+The consumption happened before this test:
+
+```gdscript
+if nutrients &gt; 0.05 and _current_season != Season.WINTER:
+    tree.lsystem.generate()
+    tree.generation += 1
+```
+
+Winter refuses the rewrite. It also stops the separate diameter increment. It does not undo the earlier subtraction. A body can remain visibly still while changing the conditions around it. To discover that here, we needed the field as well as the tree. A picture of the crown alone would have concealed the operation.
+
+Press SOIL. For one simulated second, nearby cell values diffuse and replenishment draws them towards the supplied level. No tree takes a turn; the chosen season stays fixed. In winter replenishment is slower. The desk separates these operations so we can follow them. Behind it, the original forest runs them together over time, with five different grammar strategies and the earlier controls.
+
+Return to spring and let the pair reach three generations. Further turns report a generation limit. The limit belongs to this study. It does not tell us that the trees have matured, exhausted their world or found an ideal form. Soil can still change. Even an ending needs its condition read.
+
+We can now ask something more specific of the forest. Which differences came from instructions, which from resources, and which from whose turn came first? The order is a small piece of code, easy to overlook among the branches. It helps distribute a possibility of growth.
+
+There are other schedules we could write: rotate the first turn after each round, or calculate everyone&#x27;s request before changing the shared field. Neither is supplied by these buttons yet. Each would give us a different experiment. Calling the first arrangement natural would close that opening too soon.
+
+&lt;!-- @ --&gt;
+
+Stay with the retained coral for a moment. Its branching form has another recipe; it is not drawing food from this soil. Similar-looking bodies need not inhabit the same relations. In Living, we turn towards the controls that let us author a body, and ask which possible changes those controls have made available.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="LSystems_Competition/tutorial.md">Raw captured source</a></p><pre># Who gets the first turn? — encounter
+
+Primary: ForestCompetition. Retain branching_coral as secondary and dark_sphere as decoration.
+
+1. Compare the two F stems, equal initial values, and overlapping soil squares.
+2. STEP twice. Follow the selected tree, the field and uptake: 2.250 then 1.980.
+3. ORDER starts a fresh comparison with B first. STEP twice and compare the allocation.
+4. SEASON resets in winter. STEP twice: consumption occurs without a rewrite or diameter increment.
+5. SOIL advances diffusion and replenishment by one second without a tree turn or season change.
+6. RESET returns to spring/A first. Six STEP presses give both trees three generations. Further turns report their cap.
+7. Read the consume-then-gate code. Visit the automatic original forest, its four controls and the independent coral.
+
+The two branch displays are enlarged 4× and separated for inspection. Their actual root addresses are the close markers on the soil. Carry the difference between a rule and conditions on its execution into LSystems_Living.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="LSystems_Competition/technical.md">Raw captured source</a></p><pre># Competition — rewriting after a shared-state update
+
+Architecture distinguished records from constructed access. This hall adds a mutable environment and a schedule. The primary is the registered ForestCompetition scene in algorithms/lsystems/Ecosystem; the opt-in CompetitionLesson uses a second, manually advanced instance of the same script as its model. Ordinary placements retain the five-strategy forest. The original forest remains visible behind the lesson in this hall.
+
+## What STEP computes
+
+The controlled pair has roots (-0.175,0,0) and (0.175,0,0), identical F axioms, the existing WIDE_DENSE rule F → F[+F]F[-F][F], diameter 0.02, health 1 and multiplier 1. These are explicit comparison conditions; the original wide strategy uses multiplier 0.9. Both use the original consumption, allometry, competition, rewriting and turtle methods. No random draw enters this pair setup.
+
+The field is 20×20 with 0.35 m cells across 7 m. Every cell starts at 0.6. The sampling radius in cells is clamp(ceil(crown_radius / CELL_SIZE)+1,1,4); it defines a square, not a root disk. Initial crown_radius = 0.1 + sqrt(0.02)*1.5 ≈ 0.3121, giving radius 2 and 25 cells. Root grid addresses are (9,10) and (10,10). Twenty sampled cells overlap. Uptake sums the per-cell amounts, without normalizing by sample count.
+
+At multiplier 1, the first attempt takes 25×0.6×0.15 = 2.25. The second takes (20×0.51 + 5×0.6)×0.15 = 1.98. Swapping the first index exchanges those readings. The first complete pair leaves the same field under the reversed order: both consume the same fractions at their addresses, but the allocation differs. Further generations can change the sampling radius and diameter, so that simple equality must not be assumed indefinitely.
+
+_grow_step wraps its index, checks generation &lt; cap and health &gt; 0.1, consumes soil, updates diameter, conditionally rewrites, updates crowding health and interprets the selected tree. It then records that tree&#x27;s health and advances the index. last_growth_event reports the selected index, uptake, reason and generations before/after; it does not change the kernel&#x27;s calculation. An empty collection is now a safe no-op.
+
+The diameter increment is 0.005 × uptake × season multiplier × growth multiplier × health. Spring uses 1.2; summer 1; autumn 0.3; winter 0. The visual length parameter is 0.3 + dbh^0.67×8 and the turtle&#x27;s base segment length is 0.08×that parameter/2. This is an authored allometric scaling scheme, not a measured botanical height.
+
+The rewrite gate requires uptake &gt; 0.05 and non-winter. Winter still consumes when the outer generation/health gate admits an attempt. At the pair&#x27;s cap of 3, further attempts skip consumption as well as growth. Health below or equal to 0.1 is another gate. _growing can become false at either limit; that is not evidence of ecological equilibrium.
+
+## Separate clocks and representations
+
+The front model never advances itself per frame. STEP is one tree attempt. ORDER flips the first index and resets both trees and soil, retaining the selected season. SEASON toggles spring/winter and resets, retaining first index. RESET restores spring, A first. SOIL performs 60 fixed 1/60 s calls to diffusion and replenishment, with no attempt or season advance. RULE shows the actual gate. History is bounded to 80 events; the pair cap bounds branch growth.
+
+Diffusion uses a new buffer and averages valid four-neighbours, with a clamped interpolation coefficient. The edge has fewer neighbours; do not claim exact total conservation from this averaging. Replenishment interpolates each cell towards nutrient_supply at rate 0.1×season multiplier×delta. Its seasonal multipliers are 1.5, 1, 0.5 and 0.2. A replenished field does not imply a new branch until STEP runs.
+
+The floor diagram shows all 400 values with one mesh; tile height and colour encode resource value. Coloured outlines show each next sampling square. The branch displays are translated apart and magnified 4×, with explicit labels; root coordinates, consumption and crowding are unchanged. Plinths are solid, the diagram is not terrain. The museum floor supports walking across it.
+
+The original forest retains its five grammar strategies, random starts, four controllers and automatic seasons. Its field presentation refreshes at 10 Hz while state still advances each frame. The label now says that soil continues after growth stops. The pre-growth empty tree mesh no longer opens an empty surface. Configuration before _ready is safe. Two former voids remain in the map under flush collision covers; the old teleporter hole is supporting floor. The coral is raised onto a plinth. No coral algorithm changed.
+
+## What the forest does not compute
+
+Crowding is a root-distance threshold plus estimated crown overlap weighted by the other tree&#x27;s biomass. It reduces health, with a small recovery term and a 0.05 lower clamp. It is not branch collision detection. There is no light field, phototropism, branch pruning, moving roots, death, nutrient transfer between trees, or marine-current competition. The retained coral generates form independently. Old texts that described those operations are archived with the pre-change map.
+
+Next: inspect the genetic tree sculptor in LSystems_Living. Its parameter-to-form mapping asks a different question from a resource gate. Desktop test results belong to the review receipt; headset reach, comfort and Quest performance remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="LSystems_Competition/intent.md">Raw captured source</a></p><pre>Concept: Rewriting is conditional on shared mutable state and a schedule.
+Primary: ForestCompetition; opt-in pair uses the actual forest kernel, original five-strategy forest retained.
+Bridge: Architecture&#x27;s instruction/access distinction → growth conditions → Living&#x27;s parameter-to-body mapping.
+Comparison: Equal initial F grammars, opposite first turns; then a held winter; soil time independent of attempts.
+Critical question: Which part of the difference belongs to the rule, the environment, or the order of access?
+Preserve: Three original artifacts, original forest strategies and controls, old floor addresses archived and retained at an offset with support fixes.
+Limits: No light or branch collision model, no demonstrated ecological equilibrium, no measured entropy or moral score.
+Later: Shared-snapshot consumption; rotating first index; explicit resource-transfer experiments; headset tests.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="LSystems_Competition/critical.md">Raw captured source</a></p><pre># A grammar can wait without being erased
+
+The comparison holds both starting grammars equal. After two turns, the resource allocations differ. Reverse the schedule from the same initial state and the advantage changes sides. This gives our question a particular site: the subtraction occurs before the next tree is evaluated.
+
+We often encounter a generated crown as if it were the whole result. Winter interrupts that reading. Here, consumption can continue while diameter and rewriting wait. The visible body is only one account of what this process is doing. The floor diagram lets another account become perceptible. It also selects: a scalar field and two uptake totals are not a complete environment.
+
+The model gives us names such as aggressive and conservative, but those names do not establish winners. It assigns grammars, multipliers, positions and a turn order. To discuss which forms persist, we must first ask which of these conditions was held equal. The controlled pair is deliberately poorer than a forest; its restricted comparison makes one consequence inspectable.
+
+For Ada&#x27;s inquiry into possible bodies, the capacity to write branches now meets a capacity to receive a turn and resources. A rule can remain present without producing its next form. The distribution of opportunity is part of the implementation. The metaphor of a micropolitical order becomes useful when it sends us back to that editable operation, rather than making the toy model stand in for every social relation.
+
+Would a shared snapshot for consumption change the outcome? Would a rotating first turn help under another replenishment rate? Those are proposed experiments, not implemented forms of cooperation or universal accounts of justice. Even an equal split would need a stated criterion: equal quantities, equal time, sufficient support, or room for unlike needs.
+
+The coral remains beside this experiment without being forced into its explanation. A related silhouette can arise through different operations. Nor does more branching measure entropy, desire or freedom. The critical possibility lies partly in learning where a change can be made, and in leaving the desirability of that change open to further bodies and tests.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="LSystems_Competition/artifacts.md">Raw captured source</a></p><pre># Competition — three retained works
+
+1. **ForestCompetition — primary.** Controlled two-tree comparison and retained automatic five-strategy forest. Same consumption, growth, rewrite and interpreter methods.
+2. **branching_coral — secondary.** Independent branching form, on a reachable plinth. Does not consume this forest&#x27;s soil.
+3. **dark_sphere — decoration.** Existing contrasting form retained.
+
+The book hero and Necklace primary both identify ForestCompetition. The old map and texts remain in doc/space/lsystems-competition-2026-09-14/before.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="LSystems_Competition/summary.md">Raw captured source</a></p><pre># Who gets the first turn?
+
+Two equal F grammars take turns on one field. The first receives more from the shared patch. Reverse the order from the same initial state and the allocation reverses. In winter, consumption continues while rewriting waits.
+
+The primary ForestCompetition combines a controlled pair at the front with its original automatic five-strategy forest behind. Coral and the dark sphere remain. Generation count, resources and visible form are distinct records of the process.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="LSystems_Competition/blurb.md">Raw captured source</a></p><pre># Who gets the first turn?
+
+Two stems have the same instructions. One arrives at soil the other has already used. Change the order, hold winter, and look for the activity a motionless branch conceals.
+</pre></section></body></html>

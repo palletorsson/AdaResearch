@@ -1,0 +1,31 @@
+{
+  "owned_source_sha256": {
+    "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd": "9d3f14ae156dfa654f804017186523a2ce2440d55256091939a287a5604a912c",
+    "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd": "bf7d2e221895cf34339e4a05c766b093cd26eee165cef685275fc057d8b716de",
+    "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd": "eabb5ad0d1c53375485a09f2ff9e324c061b8b8e269c1ccdd09223f9796cd052"
+  },
+  "accepted_image_sha256": {
+    "propagation-replay-before/lattice.png": "9f41a5456a5359d21e2066857f1771fadadf559a2ec759ec6bb412c89d18705f",
+    "propagation-final-after/lattice.png": "4df0b7eecfdc400b738c973f477b944f333da4d95350aa51a2055ec1174eb51e",
+    "propagation-final-after/pulse-coupled.png": "2067819162d8f825f77c0c77e3d3fe8c9bbb7f38dd3517d3f0f2c85fa44daa68",
+    "propagation-final-after/pulse-independent.png": "783e2c06612ed20b2a824e4e158d582030f8bd741b47b618dfb3af8782b9855d",
+    "sound-before/instrument.png": "dfcdd423ad4a411a34a8c50872549f577a70aaa480a082c7ac97f6e461ad8d77",
+    "sound-after/instrument.png": "179b4d19c6ea71701e36c9247737f9b70f76164e7cdb84034e0898618c21834d"
+  },
+  "headset_tested": false,
+  "baseline_replay": "Exact frozen original lattice script at actual current museum placement; no scene or renderer synthesis",
+  "diagnostic_directories": [
+    "propagation-before",
+    "propagation-after"
+  ],
+  "tests": {
+    "isolated_controls": "17/17",
+    "actual_museum_propagation": "14/14",
+    "actual_museum_sound": "4/4 before,4/4 after"
+  },
+  "pair_provenance": "pair-provenance.json",
+  "notes": [
+    "No accepted capture used a changed museum loader across its pair",
+    "Sound before/after includes incidental procedural dressing; generator unchanged"
+  ]
+}

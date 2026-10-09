@@ -1,0 +1,11 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -129,6 +129,8 @@
+ 
+ This does not calculate every digit of pi or prove a limit. Both the circle reference and the sampled coordinates use finite precision. It makes the choice of an adequate approximation inspectable.
+ 
++The circle sampler returns from Columns. Its sine and cosine calls are printed support; deriving them is a later investigation. Here, use the sampled positions to choose and test a stopping rule. You can understand the condition for stopping before explaining every operation that supplied the points.
++
+ ## Make it your own
+ 
+ Compare tolerances 0.05 and 0.005 with the same radius and budget. Then request 0.000001 with a budget of twelve. Predict which run will exhaust its budget. Explain what “enough” means in each case and why the last case must still stop.

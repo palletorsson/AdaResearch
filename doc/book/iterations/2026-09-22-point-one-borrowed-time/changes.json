@@ -1,0 +1,61 @@
+{
+  "edits": [
+    {
+      "title": "Let the repeated operation become legible",
+      "incitement": "The reader wants to know where the next number comes from; the original sentence introduces several programming terms together.",
+      "old": "Godot calls `_process` once per process frame while this node is processing. The engine supplies the repetition. Each call reaches the indented line: add one to `_count`. One, then two, then three. Declared outside the function, `_count` keeps its value between calls. Its zero belongs to the beginning of this instance.",
+      "new": "Godot repeatedly calls the function named `_process`. Each call runs the indented line, `_count += 1`, adding one to the number stored in `_count`. One, then two, then three.\n\nThe declaration `var _count := 0` sits outside the function. It sets the starting value. Calling `_process` again does not run that declaration again, so the count keeps what the previous call left behind.",
+      "purposes": [
+        "Explain the repeated addition before asking the reader to distinguish the two counters.",
+        "Explain how the value persists between calls without requiring instance terminology here."
+      ]
+    },
+    {
+      "title": "How many, how long",
+      "incitement": "The code receives a duration but increments a count. A small numerical example makes that difference available.",
+      "old": "`delta` carries this update's time interval in seconds. We receive it here but do not use it yet. Adding one counts calls. The same count could have accumulated through different durations; the number keeps how many, leaving how long unanswered.",
+      "new": "Godot also supplies `delta`: this update's time interval, in seconds. Our counter receives it but does not use it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.",
+      "purposes": [
+        "Distinguish the number of calls from their duration through a numerical example, preserving the open question."
+      ]
+    },
+    {
+      "title": "Keep the two beginnings distinct",
+      "incitement": "A newly introduced example can be mistaken for the code driving the installed panel.",
+      "old": "The room's counter reads a total that began earlier:",
+      "new": "That example has its own count. The room's counter reads a total that began earlier:",
+      "purposes": [
+        "Mark the move from the illustrative counter to the installed engine total."
+      ]
+    },
+    {
+      "title": "Name the frames we are looking at",
+      "incitement": "The word frame has just named an engine update; here it names a rectangular object.",
+      "old": "Through the entrance window, frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.",
+      "new": "Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.",
+      "purposes": [
+        "Locate the visible rectangles and let their recession invite the question of a first beginning."
+      ]
+    },
+    {
+      "title": "Stay with the construction and its invitation",
+      "incitement": "The source inventory is useful because a finite construction invites an apparently longer journey.",
+      "old": "The source gives this particular depth a small inventory: ten frames, scaled and moved through a repeating cycle. It makes a figure of a past. It has no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.",
+      "new": "Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.",
+      "purposes": [
+        "Make the finite construction plain while retaining the journey it invites."
+      ]
+    },
+    {
+      "title": "An earlier room, encountered through history",
+      "incitement": "Borrowing includes the history of being able to look around a computer-drawn room. One documented experiment gives that history a concrete object.",
+      "old": "We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here. To begin with the point, we have to leave some invitations unanswered. The lesson borrows operations we have not learned to examine yet.",
+      "new": "In 1968, an experimental head-mounted display put its viewer inside a room drawn in wireframe. Turning the head changed the view; walls, ceiling and floor were already part of the experiment.[^point-one-room-history] Before we could take a room like this for granted, people had to make it possible to look around one. You are here now, with some time to play.\n\nWe could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here. We would also like time to pick something up and see what happens. To begin with the point, we have to leave some invitations unanswered.",
+      "purposes": [
+        "Give inherited possibility a specific history, then return attention to the visitor's present opportunity to play.",
+        "Let limited time include the desire to experiment as well as the desire to understand the machinery."
+      ]
+    }
+  ],
+  "footnote": "[^point-one-room-history]: Ivan E. Sutherland, [“A Head-Mounted Three Dimensional Display”](https://doi.org/10.1145/1476589.1476686) (1968), especially “Results”; [accessible paper](https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf). The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent."
+}

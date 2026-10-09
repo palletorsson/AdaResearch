@@ -2,14 +2,17 @@
 
 *2026-10-02. The whole course sketched before it is written: one chapter per spine sequence, one picture per chapter. The data is [sketch.json](sketch.json); the encyclopedia shows it at /course/sketch.*
 
+**Scaffold correction:** use the existing map tutorials in spine order. See [the map-by-map alignment](SPINE_SCAFFOLD.md). The short-code chapters remain drafts while we align one lesson at a time.
+
 ## The rules
 
-1. The order is the Ada spine: its 25 sequences, one chapter each; you learn programming by building the Ada examples of that sequence's halls.
-2. Part I (sequences 1 to 5) climbs the Learning Processing ladder (Shiffman) in Godot 4.6 and GDScript: shapes and coordinates, flow, interaction, variables, conditionals, loops, functions, objects, arrays. A concept is used only after it is taught; a part a hall needs earlier is supplied and named as borrowed.
+1. Follow commons/maps/curriculum_spine.json for sequence order and commons/maps/sequences/<sequence>.json for the maps within each sequence. Read their tutorial.md files before drafting or reordering lessons.
+2. Teach a programming concept when the current encounter gives the learner a reason to use it. Point introduces variables through a position; Trace introduces an ordered one-dimensional list of positions and a for loop over that list. Later arrays and tiling chapters develop those skills rather than introduce them from nothing. Use Learning Processing and The Nature of Code as teaching references, with the Ada spine as the route.
 3. From sequence 6 (change) on, the content is The Nature of Code (Shiffman) in the spine's order; shaders, isosurfaces, boolean surfaces, graph theory and the last three sequences are Ada's own.
 4. The voice is The Nature of Code's: second person, friendly, exact, as little text as possible. One idea per short numbered section, a picture for every idea, the code, a sentence or two of why; numbered examples, a few exercises, one running project.
 5. Build from the ground up: each chapter uses only what came before. Haeckel's radiolaria and other specific forms are case studies for later, noted as hooks.
 6. Godot 4.6, GDScript, desktop first, the headset where a hall is about being held or walked. The course look: hot pink sky, violet ground, acid lime body, cyan, orange, off-white, lavender for what has no collider.
+7. Create the teaching nodes and their primitive meshes in code. Do not require editor-made Point, Cube or other mesh nodes or access them with dollar-sign paths. The starter supplies the room, camera and light. Additional supplied parts must be named explicitly; they are not prerequisites silently hidden in a scene.
 
 **The running project.** One running project goes through the whole book: your room, and a figure you make yourself (after Learning Processing's Zoog). The figure is composed from Godot's shapes (1), moves and decides (2), stands on a floor of copies (3), becomes a class (4) and is kept in an array and dressed in a pattern (5). Then it is thrown (6), becomes a Mover that forces push (7), gets a net hung over it and a marble (8), and swings and rings (9). It wanders by seeded chance (10), climbs a noise hill (11), wears a computed skin (12), climbs a Rule 90 stair (13) and walks through a Menger sponge (14). It keeps a garden, a family of plants grown by one rule with different genes (15), and enters a world bred from one seed (16). It walks through a soft curtain (17), stands in a doorway cut from a field (18) and from solids (19), and is copied into a flock (20). It learns (21), finds its way through the room's graph (22), stands where an impossible body closes (23) and is wired to the laboratory's handles (24). In 25 the room is released with one body any visitor can change.
 
@@ -26,7 +29,7 @@
 
 ## Part I: Coding with Bodies
 
-Part I teaches programming from nothing, using the first five spine sequences. Each sequence takes the next rungs of the Learning Processing ladder, in order. Primitives (ch1) opens with how to make a script and press Play, then teaches shapes and coordinates, flow, interaction and variables. Transformation (ch2) teaches conditionals. array_tutorial (ch3) teaches loops. Color (ch4) teaches functions, then objects. Tiling (ch5) teaches arrays. Every chapter builds the main examples of its halls with only what came before. Where a hall needs something earlier, a small supplied part does the job and is named as borrowed. The running project is My Room: a figure you make yourself (Learning Processing's Zoog). It is composed from Godot's shapes, then moves and decides, then stands on a floor of copies, then becomes a class with colour functions, and is finally kept in an array and dressed in a pattern.
+Part I follows the first five spine sequences. Primitives starts with Point Zero’s running clock. Point One gives variables a concrete use; Coordinates reads their components; Lines relates two positions; Trace saves positions in an ordered list and visits them with a for loop. Grid, triangle and body studies reuse this vocabulary. Transformation develops decisions and change. Array develops counted and nested generation in space. Colour develops functions and classes. Tiling returns to stored values, indexing, editing a shared source and patterns. Supplied parts are named; later returns unfold what the learner first borrowed. The critical final.md track keeps its own pace and questions.
 
 ### 1. Points Build Bodies
 
@@ -38,31 +41,39 @@ Part I teaches programming from nothing, using the first five spine sequences. E
 
 **You make:** A court of your own shapes, built from Godot's primitive meshes at chosen coordinates, with a point that follows your mouse and draws.
 
-**New:** flow: a script on a node; _ready() runs once when you press Play · shapes and coordinates: Vector3(x, y, z), y up, counted from the origin; a node's position set from the script · shapes and coordinates: MeshInstance3D with Godot's primitive meshes; StaticBody3D + CollisionShape3D, a boundary apart from the surface · flow: _process() runs every frame · interaction: reading the mouse every frame; duplicate() and add_child() make a copy in code · variables: var, := and a starting value; += and arithmetic; a counter of your own  
+**New:** Point Zero: _ready() once and _process() repeatedly; inspect a supplied display before constructing bodies · Point One: var names a value; Vector3 holds a position; assignment changes it; create visible meshes in code and distinguish their contact shapes · Coordinates: x, y and z; read a position relative to a named frame; prepare two positions · Lines: subtract positions, measure length and connect the two endpoints with a supplied segment renderer · Trace: an ordered one-dimensional Array of Vector3 values; append one position; inspect its size and read one entry · Trace: for point in positions visits stored values in order; distinguish this traversal from Godot calling _process each frame · Grid, triangle and bodies: reuse positions, lists and iteration where they help; introduce only the small new operation each encounter requires
 **Follows:** Learning Processing ch. 1-4 (no Nature of Code chapter)
 
-- **1.1 Press Play.** A script is text on a node: the lines in func _ready() run once, when you press Play.  
-  *Figure: The empty room, pink sky over violet floor, and the same room after Play with one lime sphere that a one-line _ready placed.*
-- **1.2 Somewhere to count from.** Every place in a 3D world is three numbers, x, y and z, counted from zero.  
-  *Figure: The origin sphere with three short axes (lime x, cyan y, orange z), from above and to one side.*
-- **1.3 A position needs a body.** A position stays invisible until you give it a mesh, and a mesh lets things pass until you give it a collider.  
-  *Figure: Three stations in a row: an empty label, a white sphere, and a sphere that stops the cyan feeler.*
-- **1.4 Godot's own shapes.** Box, sphere, cylinder, prism and torus are shapes you set with a few numbers.  
-  *Figure: A row of lime primitives (box, sphere, cylinder, prism, torus) and a sphere at 4, 8, 16 and 64 segments.*
-- **1.5 Two points, three points.** Give the supplied helper two points and it draws a line; give it three and it fills a face.  
-  *Figure: Two white spheres joined by a thin white segment, and three spheres closed into a lime triangle seen from slightly above.*
-- **1.6 Every frame.** _process runs again every frame, so a number can count while the program runs.  
-  *Figure: A frame-counter panel in three stills a second apart, the number larger each time.*
-- **1.7 Follow the mouse.** Read the mouse in _process and the point goes there; leave a copy behind each frame with duplicate() and add_child(), and you are drawing.  
-  *Figure: Top view: a lime point at the cursor with a trail of small white dots behind it.*
-- **1.8 Name a number.** A variable is a name for a value you can read, change and use again: keep the court's sizes in variables.  
-  *Figure: The court from the front right in the course look: cyan corner pyramids, a lime spire on an off-white pedestal, orange cubes, an off-white sphere.*
+- **1.1 Arrive in a running scene.** One instruction in `_ready`; a counter changes in `_process`. Compare once with repeatedly.
+  *Source: [Point_Zero/tutorial.md](../../../../commons/maps/Point_Zero/tutorial.md). Borrow the display and prepared room. Attend to once and repeatedly. Any counter variable is a small working preview; Point One gives variables their fuller explanation.*
+- **1.2 Give the point a body.** Use a variable to name a position and change its value. The position can remain unseen; create a visible marker, then distinguish its mesh from its contact shape.
+  *Source: [Point_One/tutorial.md](../../../../commons/maps/Point_One/tutorial.md). A position value and a node displaying it are different kinds of thing. Create the teaching meshes in code. Borrow the feeler and light switch.*
+- **1.3 Carry a position.** Name x, y and z; change one component. Compare local and world positions. Keep a second point.
+  *Source: [Point_Coordinates/tutorial.md](../../../../commons/maps/Point_Coordinates/tutorial.md). Borrow XR holding or desktop movement. Do not teach controller setup or a distance arrow here.*
+- **1.4 Keep two ends in relation.** Connect the two positions. Subtract them and measure the result. Moving an end changes the relation.
+  *Source: [Point_Lines/tutorial.md](../../../../commons/maps/Point_Lines/tutorial.md). Borrow segment orientation/rendering. Introduce distance here, before the later pickup example uses it.*
+- **1.5 Keep where the point has been.** Keep sampled positions in an ordered one-dimensional list. Append a position, inspect the count and one entry, then visit the list with a for loop to show what was kept.
+  *Source: [Point_Trace/tutorial.md](../../../../commons/maps/Point_Trace/tutorial.md). Teach the small list and its traversal here. Borrow XR movement and the segment renderer. Leave the installed recorder’s movement gate, duplicate suppression, memory cap and transfer machinery for later steps. Position order alone does not record elapsed time.*
+- **1.6 Give a position an address.** Snap a position to a chosen spacing. Compare its coordinates with a discrete grid address.
+  *Source: [Point_Line_Grid/tutorial.md](../../../../commons/maps/Point_Line_Grid/tutorial.md). Reuse the stored positions and the for loop to compare chosen and snapped positions. Introduce a spatial address without implying that a list of Vector3 values is a three-dimensional array. Full nested grid generation can wait for Array.*
+- **1.7 Close three edges, then fill.** Reuse three points and segments. A closed outline and a filled face are different constructions.
+  *Source: [Point_Triangle_Context/tutorial.md](../../../../commons/maps/Point_Triangle_Context/tutorial.md). Reuse the positions and ordered-list vocabulary. Borrow mesh submission to Godot while teaching corners, edges and a face. Buffers, normals and general connectivity need not arrive at once.*
+- **1.8 Enclose a region.** Add a fourth triangular face. Compare an open corner, a visible enclosure and physical contact.
+  *Source: [Primitives_Polythedra/tutorial.md](../../../../commons/maps/Primitives_Polythedra/tutorial.md). Reuse points and faces. Collision remains a separate construction; no new physics system is required.*
+- **1.9 Follow a corner through the cube.** Inspect which edges and faces share a corner. Distinguish editing that corner from transforming the whole body.
+  *Source: [Point_Animatedcube/tutorial.md](../../../../commons/maps/Point_Animatedcube/tutorial.md). Reuse the list and loop from Trace to inspect corners and their connections. Borrow the connectivity editor; defer a general mesh-editing system.*
+- **1.10 Inspect a generated primitive.** Return to SphereMesh and the other built-in primitives. Change their parameters and inspect finite resolution.
+  *Source: [Primitives_Ignorance/tutorial.md](../../../../commons/maps/Primitives_Ignorance/tutorial.md). The first sphere was a working instance; this return examines what its convenient name concealed.*
+- **1.11 Approach a limit.** Compare increasingly fine approximations. More segments and mathematical exactness are different claims.
+  *Source: [Primitives_Portals/tutorial.md](../../../../commons/maps/Primitives_Portals/tutorial.md). Reuse the loop where it makes the repeated construction clear. Borrow or defer the trigonometry and full perimeter calculation; distinguish geometric approximation from numerical precision.*
+- **1.12 Compose with what you know.** Arrange known forms; compare the construction with what the tableau asks of geometry.
+  *Source: [Primitives_Melencolia/tutorial.md](../../../../commons/maps/Primitives_Melencolia/tutorial.md). A synthesis can deepen judgement without introducing another language feature. Preserve its historical and critical register.*
 
 **Examples:** Example 1.1: three stations (position, surface, boundary) · Example 1.2: a court of your own shapes · Example 1.3: the frame counter · Example 1.4: draw with the mouse  
 **Exercises:** (1) Make the collider bigger than the mesh and find the gap with the probe. (2) Set a SphereMesh to 4 radial segments: what body is it now? (3) Count by twos, then move the count into _ready and say what happens. (4) Halve the whole court by changing one variable.  
 **Your room:** Start your room: a figure of your own made from Godot's shapes, placed by coordinates, with its sizes in variables, following the mouse.
 
-*Borrowed (supplied, named):* base.tscn: floor, pink sky, sun, camera and a node named Point, in the course look (kit-base) · line(a, b) and triangle(a, b, c): supplied helpers that draw a segment or a filled face between points; they stay supplied until 11.7 opens the ArrayMesh they build · mouse_point(): the point on the floor under the cursor · contact_probe.gd: a moving cyan feeler that stops at colliders (Point One kit) · the frame-counter panel: a Label3D whose text you set
+*Borrowed (supplied, named):* base.tscn: room, camera and lighting; first_sphere.gd is already attached to its root (first-sphere project) · line(a, b) and triangle(a, b, c): supplied helpers that draw a segment or a filled face between points; they stay supplied until 11.7 opens the ArrayMesh they build · mouse_point(): the point on the floor under the cursor · contact_probe.gd: a moving cyan feeler that stops at colliders (Point One kit) · the frame-counter panel: a Label3D whose text you set
 
 *Hooks for later:* Dürer's truncated solid from Melencolia I, rebuilt from its corners once vertices sit in an array. · Archimedes' polygons closing on the circle (Primitives_Portals), once loops exist. · LeWitt's location drawings: an instruction as coordinates. · Kandinsky's point that becomes a plane as it grows.
 
@@ -114,7 +125,7 @@ Part I teaches programming from nothing, using the first five spine sequences. E
 
 **You make:** A hall of copies: a row, a 4 x 4 grid, a 4 x 4 x 4 lattice you can fly through, and an off-white and near-black floor whose rule changes with the beat.
 
-**New:** loops: while, repeat as long as a test is true · loops: for i in n, counting for you; the loop variable as an address, i * spacing · preload() and PackedScene.instantiate(): many copies of one scene · loops: nested loops, x then z, then y · loops: % (remainder), a rule that repeats · loops: a rule plus a clock, (x + z + phase) % 2  
+**New:** loops: while, repeat as long as a test is true · counted iteration: for i in n uses a count as an address, i * spacing; extend the for-each loop already learned in Trace · preload() and PackedScene.instantiate(): many copies of one scene · loops: nested loops, x then z, then y · loops: % (remainder), a rule that repeats; rotation_degrees turns a tile by it · loops: a rule plus a clock, (x + z + phase) % 2
 **Follows:** Learning Processing ch. 6 (no Nature of Code chapter)
 
 - **3.1 Again, while it holds.** while repeats its block as long as its test is true: instantiate() a cube while there are fewer than four.  
@@ -190,7 +201,7 @@ Part I teaches programming from nothing, using the first five spine sequences. E
 
 **You make:** A patterned room: a 4 x 4 source you paint, copied over floor and walls by P1, PM, PG and P4, and a row of your figures wearing it.
 
-**New:** arrays: [ ] and an index, steps[i] · arrays: size() and append() · arrays: for item in array · arrays: writing into an array, steps[i] = true · arrays: arrays of arrays, source[y][x] · arrays: % wraps an address back into the source · Image.set_pixel() and ImageTexture: a picture from an array · arrays: an array of objects  
+**New:** stored rules: a list of steps revisits the ordered-list vocabulary from Trace · lookup: palette[value] maps a stored value to a colour · editing: steps[i] = true changes one stored entry · arrays of arrays: source[y][x] stores the rows of a source tile · wrapping: % returns a repeated address to the source · Image.set_pixel() and ImageTexture: a picture from an array · an array of objects: keep and operate on the bodies made from a class
 **Follows:** Learning Processing ch. 9 (no Nature of Code chapter)
 
 - **5.1 A list of steps.** var steps := [true, false, false, true] keeps values in order; steps[i] reads one, and the playhead reads them in turn.  

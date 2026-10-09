@@ -1,0 +1,11 @@
+--- before/Trans_Pre-tutorial.md
++++ commons/maps/Trans_Pre/tutorial.md
+@@ -12,7 +12,7 @@
+ 
+ In the last lesson, you placed three bodies. They stayed where you put them. Now keep one cube and change its position while the scene runs. Then add a turn and a change in size.
+ 
+-Open `trans_pre.tscn` in the [shared starter](../../../doc/book/studies/ada-xr-starter/README.md). Edit `studies/trans_pre/motion.gd`. The supplied `Cube` makes a 0.6-metre box with a dark mark on one face. The room and the small numerical display are also supplied. Every lesson object is created in code.
++Open `trans_pre.tscn` in the [shared starter](../../../doc/book/studies/ada-xr-starter/README.md). Edit `studies/trans_pre/motion.gd`. The supplied `Cube` makes a 0.6-metre pale gray box with a dark mark on one face. Throughout Transformation, keep that contrast: the mark lets you follow a face while the body moves. Colour becomes a subject in its own sequence. The room and the small numerical display are also supplied. Every lesson object is created in code.
+ 
+ ## 1. Let the clock run
+ 

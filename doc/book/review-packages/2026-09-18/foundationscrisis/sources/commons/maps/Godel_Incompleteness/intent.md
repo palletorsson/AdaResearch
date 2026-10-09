@@ -1,0 +1,7 @@
+Concept: Any consistent formal system powerful enough to describe arithmetic contains true statements it cannot prove — Gödel's incompleteness theorem, the hardest limit on formalization.
+Sequence role: Fourth map in Foundations Crisis; the climax. After Russell showed contradictions in naive set theory, mathematicians built more careful systems (ZFC, type theory). Gödel proved these systems are still incomplete — not broken, but inherently unable to prove everything true within them. The expert difficulty reflects the depth; follows Russell_Paradox; leads to Brouwer_Intuitionism.
+Technical angle: Gödel numbering (encoding statements as integers), the self-referential sentence G ("this statement cannot be proven within this system"), the diagonalization argument. If the system is consistent, G is true but unprovable. If the system proves G, it is inconsistent.
+Critical angle: Incompleteness is not a failure of mathematicians but a structural property of formal systems. No amount of cleverness will overcome it. This is the QFEP insight at its deepest: pure F-minimization (pure order-seeking) is impossible. Every system powerful enough to describe itself has an outside it cannot reach. The dark room problem — seeking zero surprise — fails because self-reference generates irreducible uncertainty.
+Key artifacts: godel_statement_plaque presents the theorem as a physical inscription — the statement that breaks the system, displayed within the system.
+
+Gap: No gap identified.

@@ -1,0 +1,28 @@
+--- before/Color_Rainbow/final.md
++++ current/Color_Rainbow/final.md
+@@ -7,6 +7,8 @@
+ The mushrooms are dressed for it. Pearl collars beneath candy-coloured caps; stars beyond the arch; a small staircase that seems to have wandered in from a platform game. There is also a level path. You can join the celebration without taking the steps.
+ 
+ Enter along the coloured centre path. Confetti opens above it. You have not solved a puzzle yet. Stay a moment with the possibility that the room is pleased you arrived.
++
++The little wire cubes have returned, spaced along the middle of the walk. Walk into one. Its outline disappears and sparks rise from its place, drawing long coloured tails through the air. Keep walking. Another cube, another burst. For a moment, the celebration marks where you have been.
+ 
+ Find a boundary between two colours in the rainbow. Follow it far enough to see its curve. At the control plinth, press RE-DIVIDE. Find that boundary again. Has it moved, disappeared, acquired a neighbour? Has the opening beneath the arch become any smaller?
+ 
+@@ -39,12 +41,14 @@
+ 
+ A name can promise continuity while an implementation offers enough small divisions for some seams to become difficult to see. These are HSV values converted into RGB colours on a mesh. No droplets, sunlight or wavelength calculation produce this particular rainbow. Even its opaque appearance does not make the bands a climbing surface. The low steps have collision; the arch is a display.
+ 
+-Look for a colour you chose in the salon, first in the arch and then among the striped banners and mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They already share the room, even when the arch has no place for them. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?
++Look for a colour you chose in the salon, first in the arch and then among the striped banners and mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They already share the room, even when the arch has no place for them. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?[^colour-boundaries]
+ 
+ After the fourth arrangement, RE-DIVIDE returns to the first. You can stay with a version you like. Or you might want a fifth: a pale band, a colour given more room, a border that wanders away from the curve. The next change would reach beyond this button, into the list or the rule that makes it.
+ 
+-Before leaving, choose the version you want to stand beneath. Let the confetti return. The same programmed event can be a reward for obedience or an invitation that asks nothing of you; here you can repeat it without passing a test.
++Before leaving, choose the version you want to stand beneath. Let the confetti return. At the far end of the walk, two slender poles hold a rainbow banner above your head. You can pass beneath it whether you collected every cube or left them all. The same programmed event can be a reward for obedience or an invitation that asks nothing of you; here you can repeat the confetti without passing a test.
+ 
+ <!-- @ -->
+ 
+ Carry the distinction between a colour rule and the places where it is sampled. In the next room, pillars stand at particular addresses in a colour field. What is between them, where the field has a value but no pillar has been given a body?
++
++[^colour-boundaries]: A question for later: queer has no compulsory colour. A flag, a garment and a pastel wall do different work. We cannot assume that conservatives share a fear of pastels; we can ask when a colour becomes a threat to an order that wants its distinctions kept. In *Powers of Horror* (1982), Julia Kristeva connects abjection with disturbances of identity, system and order ([opening chapter, pp. 1–4](https://ieas-szeged.hu/downtherabbithole/wp-content/uploads/2018/02/Kristeva_Abjection.pdf)). This offers a way to question the policing of a boundary, without calling queer bodies abject. A future encounter could let us soften the bands or mix their colours towards white. These are different operations. A continuous control would still have limits; smoothness alone would not make it free.

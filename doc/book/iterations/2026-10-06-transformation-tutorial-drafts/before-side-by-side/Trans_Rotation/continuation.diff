@@ -1,0 +1,53 @@
+--- Trans_Translation
++++ Trans_Rotation/lesson.gd
+@@ -1,28 +1,31 @@
+ extends Node3D
+ 
++var pivot := Node3D.new()
+ var cube := MeshInstance3D.new()
+-var start := Vector3(-2, 1, 0)
+-var finish := Vector3(2, 3, 0)
+-var duration := 4.0
+-var via_corner := false
++var mark := MeshInstance3D.new()
++var axis := Vector3.UP
++var offset := Vector3.ZERO
++var speed := 45.0
+ var elapsed := 0.0
+ 
+ func _ready() -> void:
+-    assert(duration > 0.0)
+-    var mesh := BoxMesh.new()
+-    mesh.size = Vector3(1.2, 0.2, 1.2)
+-    cube.mesh = mesh
+-    add_child(cube)
+-    cube.position = start
++    assert(axis.length() > 0.0)
++    add_child(pivot)
++    pivot.position = Vector3(0, 1.2, 0)
++    cube.mesh = BoxMesh.new()
++    pivot.add_child(cube)
++    cube.position = offset
++
++    var mark_mesh := BoxMesh.new()
++    mark_mesh.size = Vector3(0.3, 0.12, 0.02)
++    mark.mesh = mark_mesh
++    var ink := StandardMaterial3D.new()
++    ink.albedo_color = Color(0.06, 0.06, 0.06)
++    mark.material_override = ink
++    cube.add_child(mark)
++    mark.position = Vector3(0.18, 0.2, 0.51)
+ 
+ func _process(delta: float) -> void:
+     elapsed += delta
+-    var t := clampf(elapsed / duration, 0.0, 1.0)
+-    if via_corner:
+-        var corner := Vector3(start.x, finish.y, start.z)
+-        if t < 0.5:
+-            cube.position = start.lerp(corner, t * 2.0)
+-        else:
+-            cube.position = corner.lerp(finish, (t - 0.5) * 2.0)
+-    else:
+-        cube.position = start.lerp(finish, t)
++    var angle := deg_to_rad(speed * elapsed)
++    pivot.basis = Basis(axis.normalized(), angle)

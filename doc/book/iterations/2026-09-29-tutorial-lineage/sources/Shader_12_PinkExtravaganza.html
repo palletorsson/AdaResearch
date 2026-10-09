@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shader_12_PinkExtravaganza · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Shader_12_PinkExtravaganza">← Tutorial lineage</a></p><h1>Shader 12 PinkExtravaganza</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Shader_12_PinkExtravaganza/final.md">Raw captured source</a></p><pre># Which of these is the lamp?
+
+No desks. A title in pink capitals floating above everything. Three lamps, pink, purple and pink again, and five things under them: a sagging sphere, a ring and a black cube, each on a low stage, an enormous sphere floating above the rest, and on the floor a sheet of water twelve metres square that you are already standing in.[^scene] The hall&#x27;s own notes say that every number here has been pushed past its intended range. Hold that. First find the light.
+
+&lt;!-- @shader_12_pinkextravaganza --&gt;
+
+Start with the water, since you are in it. It comes to your ankles and it does not touch you; walk through it and it lifts through your shins as if you were not there. It is pink over purple, with pale glints that move. The notes say it refracts wrong on purpose. Look for the refraction: look at the floor through the water, at the edge where the sheet ends. Nothing is bent. The code has no refraction in it, wrong or right; it has three sines for the height, a noise for the glints, and a colour it partly emits itself.[^water] Stand still in it for half a minute. It jerks. All three of its waves are written straight on the clock, and the clock wraps.
+
+Now the big sphere. It is the loudest thing in the room: hot pink swirling into magenta, a rainbow drifting over it, a glitter, and it breathes, five per cent larger and smaller, every second and a half. Walk round it. The rainbow comes with you; it is the rim again, the angle to your eye. Now try to find the lamps on it. There is a pink lamp to the left and a purple one to the right, so the sphere should be pinker on one side and bluer on the other. It is barely so. Most of what you see it makes itself:
+
+```glsl
+EMISSION = color * 0.4 * pulse;
+EMISSION += hot_pink * rim * 0.8;
+```
+
+Four tenths of its own colour, pulsing, plus a hot pink at the rim, added to whatever the lamps manage. The lamps are there. They are outvoted.
+
+The sagging sphere: bands of sag run across it, up to ten centimetres deep, and move. That is not a body deforming. It is every vertex asked, each frame, how far down to be:
+
+```glsl
+float melt_wave = sin(VERTEX.x * 5.0 + TIME * melt_speed) * 0.5 + 0.5;
+VERTEX.y -= melt_wave * melt_amount;
+```
+
+It, too, emits a fifth of its own colour, and it tints its edges red and its centre blue by the angle to your eye, and calls that chromatic aberration in a comment that admits it cannot do the real thing without reading the screen.[^candy] The ring, crushed pearl, is a diffraction grating done with noise: a hue that runs round the ring by angle and drifts with the clock, and glints that are emission. The black cube is the oil slick of the pillar hall, rim and rainbow, emission, and on a cube the rim is not a band but a face: whichever face turns nearly edge-on to you takes the rainbow whole, and the face that squares up to you goes black.
+
+So: which of these is the lamp? Every one of them. The five surfaces make most of their own light, and the three lamps hung above them add to it and are outvoted. A lamp is a thing that puts light on a surface. In a rule that writes EMISSION, the surface puts light on itself, and it does so at every pixel, from the angle to your eye and the clock, exactly as the rims did two halls ago, only louder.
+
+Now the notes&#x27; claim. Every number pushed past its intended range. Read the script that builds this hall: it loads five shaders, hangs three lamps, sets a title, and sets no number at all. Not one slider value, not one uniform.[^defaults] Everything you see is what these rules do when nobody touches them. The excess is the default. Taste would be the thing you would have to add.
+
+There is one motion in this hall with a past. The objects bob. Not from the clock: each frame adds a small amount to each object&#x27;s height, and the amounts add up, so an object&#x27;s height is the sum of everything that has been added since the hall was built.[^bob] Add faster and it bobs further: at ninety frames a second the bob is nine centimetres, at seventy-two it is seven. A surface asked from the clock is the same in any headset. A bob added up frame by frame is the headset&#x27;s. The only thing here that remembers is also the only thing here that depends on who is looking.
+
+&lt;!-- @dark_sphere --&gt;
+
+The dark sphere, pulsing purple, in a room where everything pulses pink. It is the one thing in the hall you could mistake for a lamp that is not trying to be one.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+&lt;!-- @reference_plural_body --&gt;
+
+Six limbs unfold around three heads. The pose opens without becoming another inventory. A pink edge catches the light; a silver loop holds a space beside the body.
+
+The Peaches and Pussykrew reference brings bodily excess into this return to familiar primitives and shaders. Our assembly makes an attachment changeable. That is a technical permission, with limits: a larger menu of parts cannot by itself promise a freer life. Let the pose remain unresolved. The body does not owe the room a single final outline.
+
+&lt;!-- @ --&gt;
+
+One hall left, and it is quiet. Take the emission with you: a surface that lights itself is answering to nothing but its own rule and your eye.
+
+[^scene]: `shader_12_pinkextravaganza.gd` with the map&#x27;s token `#bodies:1.5#shapes:sphere,torus,cube,plane,sphere_big#stage:0.35#water:12`: melted candy, a sphere of radius 1.17 m on a 0.35 m stage at x -4.5, turning at 0.25 rad/s; crushed pearl, a torus 2.3 m across at x -1.5; oil slick latex, a cube 1.8 m on a side at x 1.5; queer water, a plane 12 m square on the floor, centred on the hall&#x27;s anchor, not turning; drag extravaganza, a sphere of radius 1.6 m at (0, 4, -2), neither scaled nor staged, turning at 0.3 rad/s. The script&#x27;s own defaults, without the token, are smaller bodies at fixed heights, a capsule instead of the cube, and an 8 m water. Lamps: (1.0, 0.0, 0.5) at (-5, 5, 3), energy 8; (0.5, 0.0, 1.0) at (5, 5, 3), energy 8; (1.0, 0.1, 0.8) at (0, 6, -2), energy 6; range 10; no shadows. The title reads P I N K   E X T R A V A G A N Z A between two stars.
+
+[^water]: `queer_water.gdshader`: `wave1 = sin(VERTEX.x * wave_scale + TIME * wave_speed) * 0.05`, `wave2 = cos(... TIME * wave_speed * 1.3) * 0.04`, `wave3 = sin(... TIME * wave_speed * 0.8) * 0.03`, so the crests reach 12 cm above the plane and the troughs 2 cm below the floor it lies on. `EMISSION = color * 0.15 * dream_intensity`, `ALPHA = 0.85`. No `SCREEN_TEXTURE`, no `refract`. At the wrap the three phases drop by 30, 39 and 24 radians, none a whole number of cycles.
+
+[^candy]: `melted_candy.gdshader`: `melt_amount` = 0.1, `EMISSION = candy_color * 0.2`, `BACKLIGHT = candy_color`, and the comment &quot;Hard to do real chromatic aberration in standard shader without screen reading. We can fake it by tinting based on normal angle.&quot; The big sphere&#x27;s breathing is `VERTEX *= 1.0 + 0.05 * sin(TIME * pulse_speed * 2.0)` at `pulse_speed` 2: a period of 1.57 s.
+
+[^defaults]: `shader_12_pinkextravaganza.gd` contains no `set_shader_parameter` call. Each material is `ShaderMaterial.new()` with its shader loaded and nothing else set; the shaders that declare a noise texture read a default white. `crushed_pearl`&#x27;s hue drifts by `TIME * 0.1` inside a `fract`, three whole cycles per wrap, so of the five it is the one that happens not to leap when the clock does.
+
+[^bob]: `_process`: `objects[i].position.y += sin(Time.get_ticks_msec() * 0.001 + float(i) * 1.5) * 0.001`, for every turning object, every frame. Summed over frames at rate r this is a bob of about r x 0.001 m in amplitude: 0.09 m at 90 Hz, 0.072 m at 72 Hz, 0.06 m at 60 Hz. `Time.get_ticks_msec()` does not wrap with the shader clock.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Shader_12_PinkExtravaganza/tutorial.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Return: A body in the plural
+
+Change the unfolding parameter; retain six limbs and three heads. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses transform, shader. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`body`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:reference_plural_body --&gt;
+
+### One source change: A body in the plural
+
+This existing expression controls one lateral control point of the limb curve. Change 2.3 to 1.8. Keep the outer loops and compare all six limbs at the same unfolding setting.
+
+```gdscript
+lerpf(1.0, 2.3, amount)
+```
+
+Source: `commons/artifacts/reference_studies/plural_body.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Shader_12_PinkExtravaganza/technical.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Installed application: A body in the plural
+
+`reference_plural_body` occupies a new adjoining bay, after the existing encounters. Cell [10, 26], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/body.tscn`. Original response to Peaches &amp; Pussykrew; no claim of exact reconstruction.
+
+Change the unfolding parameter; retain six limbs and three heads. Reuses transform, shader; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Shader_12_PinkExtravaganza/intent.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Installed application: A body in the plural
+
+`reference_plural_body` occupies a new adjoining bay, after the existing encounters. Cell [10, 26], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/body.tscn`. Original response to Peaches &amp; Pussykrew; no claim of exact reconstruction.
+
+Change the unfolding parameter; retain six limbs and three heads. Reuses transform, shader; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Shader_12_PinkExtravaganza/critical.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Installed application: A body in the plural
+
+The Peaches and Pussykrew reference brings bodily excess into this return to familiar primitives and shaders. Our assembly makes an attachment changeable. That is a technical permission, with limits: a larger menu of parts cannot by itself promise a freer life. Let the pose remain unresolved. The body does not owe the room a single final outline.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Shader_12_PinkExtravaganza/artifacts.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Installed application: A body in the plural
+
+`reference_plural_body` occupies a new adjoining bay, after the existing encounters. Cell [10, 26], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/body.tscn`. Original response to Peaches &amp; Pussykrew; no claim of exact reconstruction.
+
+Change the unfolding parameter; retain six limbs and three heads. Reuses transform, shader; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Shader_12_PinkExtravaganza/summary.md">Raw captured source</a></p><pre># A body in the plural
+
+
+&lt;!-- study-spine:reference_plural_body --&gt;
+
+## Installed application: A body in the plural
+
+`reference_plural_body` occupies a new adjoining bay, after the existing encounters. Cell [10, 26], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/body.tscn`. Original response to Peaches &amp; Pussykrew; no claim of exact reconstruction.
+
+Change the unfolding parameter; retain six limbs and three heads. Reuses transform, shader; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Shader_12_PinkExtravaganza/blurb.md">Raw captured source</a></p><pre># Which of these is the lamp?
+
+Five surfaces that light themselves under three pink lamps, a floor of water you stand in, and no slider set anywhere. The excess is the default.
+</pre></section></body></html>

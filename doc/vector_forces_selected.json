@@ -1,0 +1,250 @@
+{
+  "date": "2026-10-07",
+  "source": "Explicit user selection; complements the one-item-per-tier picker choices.",
+  "artifacts": [
+    {
+      "map": "VFM_05_Launch",
+      "token": "bubble_blaster",
+      "cell": [
+        32,
+        12
+      ],
+      "zone": [
+        4,
+        4
+      ],
+      "config": "",
+      "y": 0.95,
+      "pedestal": true,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "catapult",
+      "cell": [
+        33,
+        32
+      ],
+      "zone": [
+        12,
+        20
+      ],
+      "config": "default_force:9",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "human_catapult",
+      "cell": [
+        10,
+        62
+      ],
+      "zone": [
+        14,
+        32
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "firework_burst",
+      "cell": [
+        31,
+        66
+      ],
+      "zone": [
+        16,
+        16
+      ],
+      "config": "lesson:live_fountain",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_03_Motion",
+      "token": "force_mower",
+      "cell": [
+        14,
+        46
+      ],
+      "zone": [
+        22,
+        32
+      ],
+      "config": "lesson:flower_garden#lawn_width:20#lawn_length:28",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 270,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "token": "wind_room",
+      "cell": [
+        14,
+        52
+      ],
+      "zone": [
+        16,
+        14
+      ],
+      "config": "lesson:hands_on_wind",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "token": "force_vortex",
+      "cell": [
+        14,
+        72
+      ],
+      "zone": [
+        10,
+        10
+      ],
+      "config": "warning:beacon",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "token": "viscosity_layers",
+      "cell": [
+        15,
+        52
+      ],
+      "zone": [
+        8,
+        6
+      ],
+      "config": "",
+      "y": 0.82,
+      "pedestal": true,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "token": "centrifuge_ring",
+      "cell": [
+        15,
+        69
+      ],
+      "zone": [
+        12,
+        12
+      ],
+      "config": "lesson:hand_ring",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "token": "SpringSuspension",
+      "cell": [
+        8,
+        61
+      ],
+      "zone": [
+        8,
+        8
+      ],
+      "config": "lesson:museum_spring",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "token": "spring_tower",
+      "cell": [
+        22,
+        61
+      ],
+      "zone": [
+        8,
+        8
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "token": "orbit_walk",
+      "cell": [
+        17,
+        70
+      ],
+      "zone": [
+        10,
+        10
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "token": "momentum_cradle",
+      "cell": [
+        8,
+        55
+      ],
+      "zone": [
+        5,
+        4
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "token": "newton_cradle",
+      "cell": [
+        18,
+        55
+      ],
+      "zone": [
+        5,
+        4
+      ],
+      "config": "",
+      "y": 0.82,
+      "pedestal": true,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "launch_arc",
+      "role": "tutorial",
+      "already_placed": true
+    }
+  ]
+}

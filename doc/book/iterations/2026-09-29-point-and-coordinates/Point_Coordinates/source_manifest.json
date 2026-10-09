@@ -1,0 +1,28 @@
+{
+  "room": "Point_Coordinates",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Point_Coordinates/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Point_Coordinates/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "fc5e9779b7bacc591d8dac54898b80e02aed472887c9f3fe3059089793ecaf00",
+    "commons/maps/Point_Coordinates/map_data.json": "203ff218ecfbffa1ddda842aa6b7b8282c50d0aab4444c7496132a8686680c78",
+    "doc/book/iterations/2026-09-29-coordinates-solid-frame/probe.gd": "a86d5407aa584323bfde87e914ce737913d5acf09a60d73b5ca7a30868424ef6",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "4a2739314297b6218f427bb23914fa963ef0a14d9fc936af22723892194cb60e",
+    "ada_run/encounter_pilot/Point_Coordinates/control.json": "9bbc413633f6a7b44f9e03b7e26f7fae6feaee3f5d54d6fd1bb45367e9584730",
+    "ada_run/encounter_pilot/Point_Coordinates/necklace_hand.json": "b38336e283e054b864b39d689cb4d4efcd8e14710e781dde385bf30faa304d01",
+    "ada_run/encounter_pilot/Point_Coordinates/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Point_Coordinates/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394"
+  }
+}

@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial_Tiling_Floor · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Tutorial_Tiling_Floor">← Tutorial lineage</a></p><h1>Tutorial Tiling Floor</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Tutorial_Tiling_Floor/final.md">Raw captured source</a></p><pre># A rule underfoot
+
+How much floor can one small decision make?
+
+The cubes gave us addresses and room to move between them. Back on the ground, the addresses receive a motif: a square divided diagonally into black and white. Six fields lie underfoot. Before reading their names, find two that seem related. Keep that resemblance in mind as you walk between them.
+
+&lt;!-- @tiling_principles --&gt;
+
+At the entrance, two four-by-four samples sit beside a short instruction. For now, both repeat the same tile. Press APPLY / UNDO. The left sample holds still; on the right, each address receives an extra turn. A figure crosses the joints. No larger tile has been added.
+
+The larger field beside the desk changes with it. An orange outline marks the same sixteen addresses inside a field of 256. The instruction has not grown longer. It is being asked again at more places.
+
+NEXT TILE moves a small outline through the samples. Beside it, the rule works out what happens at that address. At [1, 0], the added turn is one quarter-turn; at [2, 0], it is two. Undo the instruction and those differences disappear together. NEXT RULE offers another small alteration: exchange black and white, reflect a column, shift a row. ONE EXCEPTION lets the change stay at one address. A local edit and a rule repeated everywhere need not have the same reach.
+
+![The four-by-four rule study inside the museum, with unchanged and changed samples beside the instruction.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/floor-rule-after.png)
+
+*The same tile before and after adding an address-dependent quarter-turn. The marked address can be followed through all sixteen places. The larger floor field uses the same calculation.*
+
+Carry one of these changes into the six comparison fields. Begin at TRANSLATE. Follow the diagonal through a row. The same square returns at the next address with the same orientation. A single tile has become a field through placement.
+
+At ALTERNATE, neighbouring tiles exchange black and white. At QUARTER TURN, the tile&#x27;s orientation advances with its address. REFLECT reverses it in alternate columns. SHIFT ROWS displaces every other row by half a tile. Walk between these fields before trying to name the larger shapes you see. A chevron or a band may belong to several tiles together. The unit that you notice need not be the unit stored by the program.
+
+At the console for the six fields, press TURN MOTIF. The source triangle turns ninety degrees in all six fields. Their arrangement rules remain in place. Return to the two fields you first compared. Does the resemblance survive? One changed source can have different consequences under different rules.
+
+This is one of the instructions making those differences:
+
+```gdscript
+if rule == 2: rotation += (cx+cy)%4
+```
+
+Here `cx` and `cy` count columns and rows in the tile image. They name directions across that image, which can lie on a floor or stand on a wall; `cy` does not mean height in the room.
+
+The `%` sign gives the remainder after division. As these non-negative counts increase, `%4` returns 0, 1, 2, 3, then 0 again. You met that return at the flight console: after index three, the selection came back to zero. Here the remainder chooses a quarter-turn. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn. Keep this way of returning in mind when repetition begins to sound.
+
+Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours.
+
+![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
+
+*The six images used by the floor artifact, shown face-on for comparison. The source orientation is the same in all six; EXCEPTION is switched on in the last field. The little square at the top is their source motif.*
+
+These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous. Your eye can find a ridge where your foot finds no step.
+
+&lt;!-- @ --&gt;
+
+Black and white already make figure and ground. We have limited the palette to make the arrangement easier to compare; we have not removed perception from the experiment.
+
+Turn the exception off, then on once more. It returns at the same address. A common source makes repetition economical; here, a separate switch gives one copy an extra turn. The motif has stayed the same. What differs is the instruction attached to that place. First, let the same six rules stand up.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Tutorial_Tiling_Floor/tutorial.md">Raw captured source</a></p><pre>Current encounter, 2026-09-17
+
+tiling_principles uses the same binary diagonal tile across six five-metre floor fields. TURN MOTIF changes the source orientation. EXCEPTION changes one designated cell in one field. This introduces arrangement before the Color chapter.
+
+The step-by-step reading is in final.md. Earlier objects and layouts remain in the archive; they are not the current walkthrough.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Tutorial_Tiling_Floor/technical.md">Raw captured source</a></p><pre>tiling_principles uses the same binary diagonal tile across six five-metre floor fields. TURN MOTIF changes the source orientation. EXCEPTION changes one designated cell in one field. This introduces arrangement before the Color chapter.
+
+Implementation: commons/artifacts/regularity/. Current authored placement: map_data.json. Read final.md for the supported controls and sequence bridge.
+
+
+## From indexed places to a surface — 23 September 2026
+
+Builds on Array and Tutorial_3D: the indices now choose a relation among repeated motifs. Prepares Tutorial_Tiling_Walls, which uses the same image generator with a different orientation and backing.
+
+texture_for(rule) produces a 256×256 RGB image. Dividing pixel coordinates by 32 locates a tile; the remainders locate a pixel inside it. The common motif is the test u &gt; v. Six rules translate that motif, invert it in alternating cells, add quarter turns based on the address, reflect alternate columns, offset alternate rows, or turn one designated cell when exception is enabled. The array is eight tile widths across; shifted rows show partial tiles at the edges. The six images are displayed on 5 m square floor quads at local y=0.025, using nearest texture filtering.
+
+TURN MOTIF advances phase modulo four and regenerates all six images. EXCEPTION toggles one boolean; rule 5 uses it at image cell (3,3). There is no randomly selected cell and no per-cell editing interface. The picture supplies no collision shapes: the existing museum floor supports the body. Changing pixels does not excavate a black region or raise a white one.
+
+### Shared book illustration
+
+The six panels of one-motif-six-relations.png come directly from the textures attached to the production artifact in the isolated museum. They are enlarged with nearest-neighbour sampling and labelled for the book; no substitute pattern generator was used. The source square is the upper-left 32×32 tile cropped from rule 0. Common phase is zero; the last field has its local exception on. Original texture PNGs and actual museum views are retained in doc/book/iterations/2026-09-23-tiling-underfoot.
+
+### Evidence
+
+42 focused checks pass. Supplied pointer events exercise both shared buttons. One source turn changes all six images; four turns recover the original bytes. The exception affects only the designated 32×32 cell in the sixth image, with the other five unchanged; turning it off restores the initial field. Floor transforms and sampled collision contacts remain unchanged.
+
+Supplied W input drives the actual museum controller/capsule across TRANSLATE, across the hall and across ONE EXCEPTION, including their outer image boundaries. The recorded feet remain on level ground. Camera views are separately staged. This establishes the particular image/support distinction, not a worn-headset comfort check or a claim that a viewer perceives an illusion of depth.
+
+No production artifact, geometry, controls, map or sequence changed in this pass. Current source hashes, runtime report and publication checks accompany the review. The existing startup unrecognized-UID message remains a separate issue; no GDScript runtime error occurred in this focused run.
+
+
+## A local rule and its larger consequence — 28 September 2026
+
+The placed tiling_principles artifact now constructs tiling_rule_study.gd at its entrance. The raster function is shared in tiling_pattern.gd. Original comparison fields remain 8x8, 32 pixels per tile, with the same phase and exception controls. A regression probe compares all six rules, four phases and both exception states with the previous implementation: 48 byte-identical images.
+
+The study retains an unchanged 4x4 reference. NEXT RULE cycles six candidate instructions; APPLY / UNDO enables or removes the selected addition. NEXT TILE visits all sixteen image addresses and displays the evaluated local instruction. Controls on this desk affect its own comparison, not the six fixed reference fields. TURN MOTIF on the original console changes the shared source phase and also refreshes the study. The one-tile exception in this study is independent of the original EXCEPTION switch. Tile boundaries and the selected-address outline are overlays, not pattern pixels.
+
+The six study instructions are: add one quarter-turn everywhere; invert black/white where (x+y) is odd; add (x+y) modulo four quarter-turns; reflect odd columns; shift odd rows left half a tile; add a quarter-turn only at [3,3]. Each is compared against repeated source tiles. These are direct rules evaluated at each address, not a neighbour-to-neighbour propagation simulation. Odd shifted rows show partial tiles at the crop edges.
+
+The 4x4 result is the exact top-left 128x128-pixel crop of a 512x512-pixel, 16x16 result. The latter occupies a 4.3 m floor quad. An orange boundary locates that window without changing its pixels or adding a collider. The single-cell exception remains at [3,3] in the full field; it is not repeated every four tiles. The existing museum floor provides support.
+
+Evidence: doc/book/iterations/2026-09-28-tiling-rule-study/floor-report.json and its native screenshots. Supplied pointer events test the real controls. Camera positions are staged at eye height. This does not establish headset reach comfort or learner comprehension.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Tutorial_Tiling_Floor/intent.md">Raw captured source</a></p><pre>Concept: One motif, six relations underfoot: translation, alternation, quarter turns, reflection, shifted rows and one exception.
+
+Sequence: array_tutorial; current order is declared in commons/maps/sequences/array_tutorial.json.
+
+Encounter: tiling_principles uses the same binary diagonal tile across six five-metre floor fields. TURN MOTIF changes the source orientation. EXCEPTION changes one designated cell in one field. This introduces arrangement before the Color chapter.
+
+Critical question: How can a repeated image divide or direct a walk while the supporting surface stays continuous? What makes one local difference legible to another visitor?
+
+Status: Reading and native illustration refreshed, 2026-09-23; no artifact or map change. Forty-two checks in doc/book/iterations/2026-09-23-tiling-underfoot cover real pointer events, texture comparisons and supplied walking input through the actual museum controller. Earlier first pass, 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Tutorial_Tiling_Floor/critical.md">Raw captured source</a></p><pre>One motif, six relations underfoot: translation, alternation, quarter turns, reflection, shifted rows and one exception.
+
+Keep the stored structure, the display rule and the permissions of the body distinct. Repetition can make a field legible while hiding which decisions are shared. A change of surface can alter a walk without changing any stored motif. The first critical task is to observe such a specific difference before proposing what else the room could allow.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Tutorial_Tiling_Floor/summary.md">Raw captured source</a></p><pre>One motif, six relations underfoot: translation, alternation, quarter turns, reflection, shifted rows and one exception.
+
+tiling_principles uses the same binary diagonal tile across six five-metre floor fields. TURN MOTIF changes the source orientation. EXCEPTION changes one designated cell in one field. This introduces arrangement before the Color chapter.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Tutorial_Tiling_Floor/blurb.md">Raw captured source</a></p><pre>One motif, six relations underfoot: translation, alternation, quarter turns, reflection, shifted rows and one exception.
+</pre></section></body></html>

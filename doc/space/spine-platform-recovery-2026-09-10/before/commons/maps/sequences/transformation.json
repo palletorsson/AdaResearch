@@ -1,0 +1,152 @@
+{
+ "sequences": {
+  "transformation": {
+   "name": "Transformation: What Stays the Same When Everything Changes",
+   "truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
+   "qfep_term": "S",
+   "qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
+   "formula": "T(v) = M Ã— v, where M is a 4Ã—4 matrix encoding translate, rotate, scale",
+   "demonstration": "Translate: move without changing. Rotate: spin without deforming. Scale: grow without breaking. Combine transformations and see order matters.",
+   "description": "Affine transformations in 3D space. Translation, rotation, and scaleâ€”the three fundamental ways to change position, orientation, and size while preserving shape. Matrix math makes this possible.",
+   "layer": "F_order",
+   "prerequisites": [
+	"primitives",
+    "vectors"
+   ],
+   "unlocks": [
+	"fractals",
+    "proceduralgeneration"
+   ],
+   "difficulty": "beginner",
+   "estimated_time": "15-20 minutes",
+   "learning_objectives": [
+	"Translation: moving objects in space (T_x, T_y, T_z)",
+	"Rotation: changing orientation around axes",
+	"Scale: changing size uniformly or non-uniformly",
+	"Matrix representation: transformations as 4Ã—4 matrices",
+	"Composition: combining transformations (order matters!)",
+	"Invariants: what properties are preserved under each transformation",
+    "Vectors as atoms: every translation is a vector addition; every rotation is a vector-to-vector map. The operations you learn here are operations on vectors — named explicitly at forces (seq 5)."
+   ],
+   "content": [
+	"Trans_Pre: Build the pickup cube - static, add vertical oscillation, turning and swelling; walk a ramp to five pickups",
+	"Trans_Introduction: Three cubes, three transformation types — translate, rotate, scale",
+	"Trans_Translation: Seven transport rides through x, y, z and a final x/z diagonal; collect thirteen pickups in transit",
+	"Trans_Rotation: Centre-mounted blades bridge and climb; then increasing x/y/z and combined rotation across 2D arrays tests forward traversal",
+	"Trans_RotationSpectacle: Walk a boolean tunnel; compare five carousel profiles on the museum floor",
+	"Trans_Scale: Drink Me - a tenfold room turns a food tower into a descent and a tiny doorway into an exit",
+	"Trans_Body: The three operations performed BY the visitor — a wall that opens where you stand, a lattice you cut a tunnel through, a field that shrinks as you come",
+    "Trans_Pit: The same three turned back on the visitor as hazard — pushing stones over pits, revolving walls, a centre that grows and shoves you off the edge"
+   ],
+   "maps": [
+	"Trans_Pre",
+	"Trans_Introduction",
+	"Trans_Translation",
+	"Trans_Rotation",
+	"Trans_RotationSpectacle",
+	"Trans_Scale",
+	"Trans_Body",
+    "Trans_Pit"
+   ],
+   "axiom_files": [
+	"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
+	"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
+   ],
+   "algorithm_paths": {
+	"Transformation_Intro": "res://algorithms/transformations/",
+	"Trans_Rotation": "res://algorithms/transformations/rotation/",
+	"Trans_Composition": "res://commons/primitives/furniture/"
+   },
+   "return_to": "lab",
+   "lab_map": "Lab/map_data_post_transformation",
+   "unlock_requirements": [],
+   "completion_rewards": [
+	"transformer_badge",
+    "matrix_master_badge"
+   ],
+   "artifact_groups": [
+	{
+	 "map": "Trans_Pre",
+	 "position": "primer",
+	 "artifacts": [
+      "pick_up_cube"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Build one pickup cumulatively: inert cube, vertical oscillation, then rotation, then scale. Walk wedges to a platform with five completed pickups. Forms and the grid become a small level.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_Introduction",
+	 "position": "intro",
+	 "artifacts": [
+	  "tc",
+	  "sc",
+      "rc"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Three crossings in walking order: translation carries a rider, scale meets the banks, rotation aligns a plank. Test transformation through changed access.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_Translation",
+	 "position": "foundation",
+	 "artifacts": [
+	  "tc",
+      "pick_up_cube"
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "One extended translation course absorbs AxisDecomposition: seven rides, two levels, thirteen pickups and no rotation or scaling.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_Rotation",
+	 "position": "exploration",
+	 "artifacts": [
+	  "rotation_wall_crossings",
+      "rotation_array_compare"
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "First rotate long blades about their centres to reach grid landings at equal and higher levels; then walk +z through four 4 by 10 cube arrays with x/y/z and combined row angles increasing from zero to ninety degrees. A still landing keeps the two arguments separate.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_RotationSpectacle",
+	 "position": "integration",
+	 "artifacts": [
+	  "boolean_tunnel",
+      "carousel_cake"
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "A museum gallery: central boolean tunnel with three cakes on either side, showing five profiles across six instances. Hold layered angular speeds constant while comparing silhouettes.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_Scale",
+	 "position": "synthesis",
+	 "artifacts": [
+      "scale_me"
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "A bottle activates one explicitly bounded scale change. Dream food and a crystal host grow with the room; the fixed body descends the serving tower and fits a formerly tiny door.",
+	 "grammar": "linear"
+	},
+	{
+	 "map": "Trans_Body",
+	 "position": "synthesis",
+	 "artifacts": [
+	  "approach_wall",
+	  "carve_grid",
+	  "approach_scale",
+      "dark_sphere"
+	 ],
+	 "size_budget": "large_only",
+	 "rationale": "The chapter turned on the visitor. Everywhere before this a cube is translated, turned or scaled while you watch: the artifact is the operator and you are the audience. Here the operator is you and the operand is the room, and the three thresholds are the three operations — a wall that makes way where your body is, a lattice that loses what you touch, a field whose blocks shrink as you approach. Each throat is cut to the width of the thing standing in it, so there is no way round any of them. It is the 2026-09-05 ruling (transformation creates empty space, the holes are the pathway) taken one step past where a map can follow, because the hole is not authored into the structure layer — you make it by arriving.",
+	 "grammar": "linear"
+	}
+   ]
+  }
+ },
+ "world_phase": "grid",
+ "artifact_groups": []
+}

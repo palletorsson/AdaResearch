@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "native": {
+    "Point_One": 25,
+    "Point_Coordinates": 30
+  },
+  "desktop_study_checks": 6,
+  "structure": [
+    {
+      "map": "Point_One",
+      "rectangular": true,
+      "spawn_to_exit_floor_connected": true
+    },
+    {
+      "map": "Point_Coordinates",
+      "rectangular": true,
+      "spawn_to_exit_floor_connected": true
+    }
+  ],
+  "atlas_browser_checks": 15,
+  "scope": "Native museum and standalone desktop study; supplied XR pointer/poke and grab routes exercised without a headset. Learner and headset acceptance remain open."
+}

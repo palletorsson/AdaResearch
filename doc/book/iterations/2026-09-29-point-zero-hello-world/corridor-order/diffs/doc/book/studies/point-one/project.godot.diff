@@ -1,0 +1,11 @@
+--- before/doc/book/studies/point-one/project.godot
++++ doc/book/studies/point-one/project.godot
+@@ -2,7 +2,7 @@
+ 
+ [application]
+ config/name="Point One — building a point"
+-run/main_scene="res://coordinates.tscn"
++run/main_scene="res://study.tscn"
+ config/features=PackedStringArray("4.6", "GL Compatibility")
+ 
+ [display]

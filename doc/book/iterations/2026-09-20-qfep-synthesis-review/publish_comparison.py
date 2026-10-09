@@ -1,0 +1,26 @@
+from pathlib import Path
+import json
+
+H=Path(__file__).resolve().parent; R=H.parents[3]; P=H.parent/'2026-09-19-review-comparison'
+prefix=H.relative_to(R).as_posix(); M='QFEP_Synthesis'
+
+def para(start,old=False):
+ p=(H/'before' if old else R)/'commons/maps'/M/'final.md'
+ return next(t for t in p.read_text(encoding='utf-8').split('\n\n') if t.startswith(start))
+
+d=json.loads((P/'qfeplaboratory.json').read_text(encoding='utf-8'))
+old=json.loads((H/'before/doc/book/iterations/2026-09-19-review-comparison/qfeplaboratory.json').read_text(encoding='utf-8'))
+assert d['items'][:len(old['items'])]==old['items'], 'Preserve earlier review cards'
+checks=json.loads((H/'content-checks.json').read_text(encoding='utf-8'))
+r=json.loads((H/(M+'-runtime.json')).read_text(encoding='utf-8'))
+assert checks['passed'] and r['passed'] and len(r['checks'])==35
+d['status']='All eight QFEP Laboratory halls reviewed; Post-Crisis next'
+d['summary']='The laboratory asks who may revise the terms: a retained arrangement, a prediction, possible branches, a recommendation, signed movement, numerical resolution, a connection and finally a body. Synthesis separates imposed breathing from the specimen’s response. Its name stays above the glass while the visitor changes some conditions and encounters others that the maker has fixed. The source guide explains the Queer Free Energy Principle and Self-Q; the final chapter carries that question into Post-Crisis.'
+cards=[
+ dict(title='Synthesis: stop the imposed breath', description='The old frame callback discarded the lambda-dependent pressure baseline. The repaired physics callback varies pressure around it. PULSE / STEADY lets the visitor stop this imposed variation without stopping the body’s physics. The existing question now has an action to carry it.',images=[prefix+'/synthesis-pulse.png',prefix+'/synthesis-steady.png'],captions=['Lambda 0.50, Phi 0.00: pressure held at the pulse peak, 1.590 around baseline 1.500.','Same slider settings: STEADY supplies baseline pressure 1.500. Physics continues.'],image_note='Actual museum views. For the first still the probe holds the pulse at its peak while physics settles; these photographs do not demonstrate an animation. Separate runtime checks verify phase progression and the 1.410–1.590 range. The frozen earlier script reproduces the baseline being overwritten.',text_kind='book — an invitation to watch what continues',before=para('Use the specimen',True),after=para('Use the specimen')+'\n\n'+para('Choose PAIR B'),report=prefix+'/final.diff',report_label='Exact manuscript changes'),
+ dict(title='A body receives several conditions',description='The plate now names the actual stiffness, damping, drag and pressure instead of declaring that life emerges at a preset. PAIR A/B/C retain three sample combinations. Signed Phi appears consistently on its handle and the main plate. Material and glass repairs keep the specimen visible.',images=[prefix+'/synthesis-stiff.png',prefix+'/synthesis-soft.png'],captions=['Lambda 0.10, Phi +0.80: stiffness 0.820 and damping 0.021.','Lambda 0.80, Phi −0.80: stiffness 0.260 and damping 0.180.'],image_note='These are different combinations, not an experiment isolating one variable: both handles and material appearance change. The visible shape differences are modest. The runtime records actual moving mesh points and body bounds rather than inferring motion from the surrounding fluid shader.',text_kind='book — preserve the distinction between a model and its interpretation',before=para('The mapping is authored',True),after=para('The mapping is authored'),report=prefix+'/'+M+'-runtime.json',report_label='Interaction, body and walking evidence'),
+ dict(title='The name stays. Who can change the jar?',description='The specimen returns at full size on two support cells, with its controls beside it. The former jar had only a floor collider; a side shell and lid now give the closed container boundaries. Cracked, escaped and clouded variants keep their distinct configurations. All ten original artifact families and the central terraces remain.',images=[prefix+'/synthesis-controls.png',prefix+'/synthesis-gallery.png'],captions=['Controls within the tested approach, with the visible body below its live plate.','The surrounding gallery remains; the specimen is one encounter within its existing ecology.'],image_note=f'35 runtime checks, six selected CharacterBody walks and {checks["count"]} content/preservation checks pass. Nine authored works instantiate; legacy tt has no living scene. Earlier QFEP maps and manuscripts remain unchanged. Headset comfort, Quest performance and learner understanding remain unverified.',text_kind='book — Self-Q turns the investigation towards the maker',before=para('A responsive specimen',True),after=para('A responsive specimen')+'\n\n'+para('The name above the glass')+'\n\n'+para('Self-Q turns'),report=prefix+'/SUMMARY.md',report_label='Findings, decisions and limits')]
+titles={c['title'] for c in cards}
+d['items']=[i for i in d['items'] if i['title'] not in titles]+cards
+(P/'qfeplaboratory.json').write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print('Three Synthesis cards published; earlier 21 cards retained')

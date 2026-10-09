@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>What lets the cube stay up?</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>What lets the cube stay up?</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Visible shape and collision shape</li>
+<li>Contact support</li>
+<li>Gravity</li>
+<li>Waking a body</li>
+</ul>
+<p>Pull the rose leg from under the loaded table. Watch what loses support first, then what it meets on the way down. The fall follows the changed arrangement.</p>
+<h2>Make the small study</h2>
+<p>Bring back the cube from Primitives. Start with one box resting on one support. Move the support sideways and let the physics engine determine what happens to the load.</p>
+<p><strong>The hall adds:</strong> The hall adds a tabletop, several supports and a load you can rearrange. Your study begins with one contact so its role is easy to see.</p>
+<p>Save <code>09_support.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 09_support.gd</h2>
+<!-- student-code:09_support.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var leg: StaticBody3D
+var load: RigidBody3D
+
+func _ready() -&gt; void:
+    leg = StaticBody3D.new()
+    leg.position = Vector3(0, 0.5, 0)
+    add_child(leg)
+    box_on(leg, Vector3(0.4, 1.0, 0.4))
+    load = RigidBody3D.new()
+    load.position = Vector3(0, 1.31, 0)
+    load.mass = 2.0
+    add_child(load)
+    box_on(load, Vector3.ONE * 0.6)
+    caption(&quot;A cube stays up because something meets it.&quot;)
+    button(&quot;REMOVE SUPPORT&quot;, Vector3(0, 1, -0.8), remove_support)
+
+func box_on(body: PhysicsBody3D, size: Vector3) -&gt; void:
+    var surface := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    surface.mesh = mesh
+    body.add_child(surface)
+    var collider := CollisionShape3D.new()
+    var shape := BoxShape3D.new()
+    shape.size = size
+    collider.shape = shape
+    body.add_child(collider)
+
+func remove_support() -&gt; void:
+    leg.position.x = 1.5
+    load.sleeping = false
+</code></pre>
+<h2>Read the change</h2>
+<p><code>box_on()</code> gives each body a visible <code>BoxMesh</code> and a matching <code>BoxShape3D</code>. The engine uses the collision shape to detect contact.</p>
+<p>The leg is a <code>StaticBody3D</code>. The load is a <code>RigidBody3D</code> with gravity. It begins one centimetre above the support, falls onto it and settles.</p>
+<p>REMOVE SUPPORT changes the leg’s position. It gives no downward instruction to the cube: gravity was already acting. <code>sleeping = false</code> wakes the load if the engine had paused its settled simulation.</p>
+<h2>Change one thing</h2>
+<p>Change the support’s movement from 1.5 m to 0.1 m and restart. Predict that enough overlap will remain to support the centred cube. Then restore the larger movement. Keep the dimensions and gravity the same.</p>
+<h2>Return to the hall</h2>
+<p>At the full table, move the load toward one side before removing a leg. Predict which contacts matter now. Compare the collapse with the centred arrangement.</p>
+<h2>Model notes</h2>
+<p>A mesh alone supplies no physical support. This example pairs visible dimensions with collision dimensions; the contact result depends on the latter. The walkers nearby add foot placement and control, which this small reconstruction leaves for later.</p>
+<h2>Into the next room</h2>
+<p>Contact can hold a body still. Next, let contact pass motion from one body to another.</p>
+<p><a href="final.html#VFM_09_Legs">Reflective text</a>.</p></main></html>

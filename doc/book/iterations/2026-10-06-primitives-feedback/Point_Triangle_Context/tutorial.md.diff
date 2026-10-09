@@ -1,0 +1,11 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -12,6 +12,8 @@
+ Your drawing has reached Grid as a sculpture. Here, choose three positions from its original record. The triangle tools in this hall show the difference between connecting corners and giving the space between them a surface. We will make that difference with the point and line classes already used.
+ 
+ The saved record still uses the drawing station's local metres. Grid's rounded copy did not replace it. This lesson reads the original archive and creates three temporary PointBody handles at selected entries. It does not save their later edits back to the drawing.
++
++Lines already connected two positions. The new step is to store a connection as a recipe that refers to entries in a position list. Three Vector3 values alone do not instruct Godot to draw a face. We choose which entries belong together and in which order; the same stored position can later belong to several faces.
+ 
+ ## Make this study
+ 

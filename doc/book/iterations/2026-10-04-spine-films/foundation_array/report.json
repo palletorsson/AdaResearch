@@ -1,0 +1,657 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Source-specific validation"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@465"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@466"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@467"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@469"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@470"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@472"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@473"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@475"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@476"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@478"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@479"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@481"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@482"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@484"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@485"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@487"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@488"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@490"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@491"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@493"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@494"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@496"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@497"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@499"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@500"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@502"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@503"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@505"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@506"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@508"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@509"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@511"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@512"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@516"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@517"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@518"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@521"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@523"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@465"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@466"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@467"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@469"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@470"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@472"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@473"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@475"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@476"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@478"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@479"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@481"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@482"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@484"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@485"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@487"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@488"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@490"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@491"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@493"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@494"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@496"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@497"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@499"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@500"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@502"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@503"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@505"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@506"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@508"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@509"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@511"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@512"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@516"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@517"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@518"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@521"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@523"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@465"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@466"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@467"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@469"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@470"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@472"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@473"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@475"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@476"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@478"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@479"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@481"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@484"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@485"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@487"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@488"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@490"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@491"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@493"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@494"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@496"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@497"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@499"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@500"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@502"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@503"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@505"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@506"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@508"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@509"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@511"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@512"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@516"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@517"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@518"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@521"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@523"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@465"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@466"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@467"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@469"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@472"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@473"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@475"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@478"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@481"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@482"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@484"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@487"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@488"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@490"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@491"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@493"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@496"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@497"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@499"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@502"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@505"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@506"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@508"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@511"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@512"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@516"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@517"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@518"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@521"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@523"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"boolean_values": true,
+		"dimensions": [
+			4,
+			4
+		],
+		"initial_selection": [
+			1,
+			1
+		],
+		"native_port": true,
+		"source_lines": [
+			82,
+			94
+		],
+		"storage_order": "cells[x][z]"
+	},
+	"id": "foundation_array",
+	"passed": true,
+	"phases": [
+		"Sixteen slots keep sixteen values",
+		"Selecting reads; it does not write",
+		"Change one value, leave it, return",
+		"One rule writes all sixteen slots"
+	],
+	"source_paths": [
+		"res://commons/artifacts/spine_films/foundation_source.js"
+	]
+}

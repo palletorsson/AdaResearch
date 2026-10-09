@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Colour 2 of 8 — Flashlight</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR 2 / 8 · FLASHLIGHT · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="flashlight-review.zip">Code + tests</a></nav></header><main><p class="quiet">102 native checks and 13 GPU image checks passed; three printed edits and one independent choice tested; 5 deliberate faults rejected. Supplied test hosts. No headset or learner trial.</p><h1>Flashlight — keep the surface</h1>
+<p>Colour lesson 2 of 8. A pale board keeps its material while two spotlights contribute colour. The learner changes one lamp's value, aims it across the other beam, then aims it away.</p>
+<p>The previous lesson assigned a palette to five familiar parts. This one returns to the same BoxMesh and material construction, with one shallow box as the receiving board. The selected new operation is light colour and aim; the museum's existing grabbable handles supply the embodied encounter.</p>
+<h2>Read</h2>
+<ul>
+<li><a href="parallel.html">Tutorial beside the existing reflection</a></li>
+<li><a href="tutorial.html">Tutorial alone</a> · <a href="tutorial.md">tutorial.md</a></li>
+<li><a href="final.html">Reflection alone</a> · <a href="final.md">final.md</a></li>
+<li><a href="lesson.gd">Complete program</a> · <a href="flashlight-review.zip">Code and tests</a></li>
+<li><a href="verification.json">Verification</a> · <a href="normal-report.json">Native checks</a> · <a href="render-report.json">Render checks</a></li>
+<li><a href="../2026-10-06-colour-the-same-parts/parallel.html">Previous: Colour — the same parts</a></li>
+</ul>
+<h2>The comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Keep</th>
+<th>Change</th>
+<th>Observe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Board, material, light positions and aim</td>
+<td>First light red → blue</td>
+<td>One pool changes; the other stays green</td>
+</tr>
+<tr>
+<td>Board, material, positions and light colours</td>
+<td>Aim the red light at the green pool</td>
+<td>Contributions overlap</td>
+</tr>
+<tr>
+<td>Board, material, positions and light colours</td>
+<td>Aim red away from the board</td>
+<td>Its contribution leaves; green remains</td>
+</tr>
+</tbody>
+</table>
+<p>One complete program creates its own board, material and lights. The museum supplies camera, movement and room illumination. The reduced code does not create another grabbing system or automatically control an installed flashlight. The construction is explicit, and the student knows which interaction is supplied.</p>
+<h2>What the two texts do</h2>
+<p>The tutorial makes a small relation executable and gives three exact edits plus an independent target choice. The unchanged reflection follows the handheld lamps, faceted sphere, white room, light well and pink sphere. Their wider experiences need not become additional coding requirements here.</p>
+<p>Colour remains the subject. Local/world coordinates and rotation return to aim a light. The example adds no timer, input action, spectral model, class framework or colour picker.</p>
+<h2>Evidence</h2>
+<p>Native checks extract the exact code printed in tutorial.md. They inspect real Godot nodes, materials and orientations under a translated and rotated host; test the printed edits; and verify that live light edits preserve the receiver and the other lamp. Deliberate faults check whether these assertions detect wrong ownership, omitted coordinate conversion, reversed aim and a disabled light.</p>
+<p>A separate GPU fixture renders the exact variants with a fixed camera and modest ambient light. It checks channel changes, overlap and withdrawal through small sampled image regions. These comparisons validate the selected behaviour under stated rendering conditions, not a calibrated colour appearance or headset experience.</p>
+<h2>Status and carry</h2>
+<p>Review draft. Canonical tutorial.md, final.md, installed artifacts, map, sequence and acceptance status remain unchanged. The lesson carries two named receivers of a Color value—surface albedo and light colour—and the ability to aim a light at a position.</p>
+<p>Next: Nails, where the carried hand point supplies a colour for a surface. Six Colour tutorials remain after this draft.</p><h2>The exact program, rendered</h2><p class="quiet">Fixed camera and supplied ambient light in an isolated GPU fixture. These are renders of the printed code, not screenshots inside the museum.</p><figure><img src="separate.png" alt="Red and green, separate aims"><figcaption>Red and green, separate aims</figcaption></figure><figure><img src="blue.png" alt="Only the first light changes colour"><figcaption>Only the first light changes colour</figcaption></figure><figure><img src="overlap.png" alt="Red aims at the green pool"><figcaption>Red aims at the green pool</figcaption></figure><figure><img src="away.png" alt="Red aims away; green stays"><figcaption>Red aims away; green stays</figcaption></figure><h2>The encounter in the museum</h2><figure><img src="../2026-09-23-flashlight-faceted-sphere/same-sphere-moving-light.png" alt="Earlier native museum comparison of a pale sphere with red light on either side"><figcaption>Earlier museum capture, 23 September. This wider encounter informs the reflection; the tutorial selects a smaller planar receiver.</figcaption></figure></main></html>

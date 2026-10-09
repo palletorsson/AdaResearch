@@ -1,0 +1,43 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing forge present in museum",
+      "passed": true
+    },
+    {
+      "name": "180 particles have authored destinations",
+      "passed": true
+    },
+    {
+      "name": "clock reaches raw phase",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-cloud",
+      "passed": true
+    },
+    {
+      "name": "clock alone reaches MAX Q",
+      "passed": true
+    },
+    {
+      "name": "formed body equals authored targets",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-body",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "period_seconds": 7.69230769230769
+  },
+  "passed": true,
+  "room": "FormFinding_Forge",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

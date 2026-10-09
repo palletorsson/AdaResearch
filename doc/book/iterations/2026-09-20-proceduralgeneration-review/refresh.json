@@ -1,0 +1,80 @@
+{
+  "sequence": "proceduralgeneration",
+  "maps": [
+    "PG_Caves_Mazes"
+  ],
+  "live_sequence_maps": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+  ],
+  "museum_template": "dia-beacon-field",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "25e1fc75a970db872972807a43572261513e7d4de6305adcada7541cc2494ad1",
+    "commons/data/museum/em_plan.json": "25e1fc75a970db872972807a43572261513e7d4de6305adcada7541cc2494ad1",
+    "commons/data/map_authored.json": "cb6c095ca47beea17f08ad6361702e1fafe4ceec63b8c029d59ac23b7cbf02f7",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/proceduralgeneration.json": "723298647a4e8fb0e19b0c684df8a388e80240358fbc3d082481570686ba7bfd",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/PG_Caves_Mazes/map_data.json": "dbb352a20ee6f204cddf6baada4ae9915f6e678420b618ceb3193e144a16bee8"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "89896f4d5f793985f31689ac2570720b88510cb287a67e5c51bcb89d45f151a2",
+    "commons/data/museum/em_plan.json": "89896f4d5f793985f31689ac2570720b88510cb287a67e5c51bcb89d45f151a2",
+    "commons/data/map_authored.json": "cb6c095ca47beea17f08ad6361702e1fafe4ceec63b8c029d59ac23b7cbf02f7"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 185,
+    "commons/data/museum/em_plan.json": 185
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 185,
+    "commons/data/museum/em_plan.json": 185
+  },
+  "preservation": "All unrelated plan rows, placements, top-level metadata and relative order retained.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "PG_Caves_Mazes",
+      "pearl_index": 4,
+      "room": {
+        "w": 38,
+        "h": 48
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 38,
+        "src_h": 48,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T054746533816Z"
+}

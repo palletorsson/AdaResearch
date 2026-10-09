@@ -1,0 +1,222 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "line gallery present in actual museum hall",
+      "passed": true
+    },
+    {
+      "name": "28 line bodies retain existing pickup behaviour",
+      "passed": true
+    },
+    {
+      "name": "horizontal has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "horizontal visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "vertical has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "vertical visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "parallel_a has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "parallel_a visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "parallel_b has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "parallel_b visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "plus_horizontal has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "plus_horizontal visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "plus_vertical has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "plus_vertical visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "cross_a has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "cross_a visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "cross_b has equal 1.2m span",
+      "passed": true
+    },
+    {
+      "name": "cross_b visible endpoints match grab collision",
+      "passed": true
+    },
+    {
+      "name": "horizontal and vertical change direction without changing length",
+      "passed": true
+    },
+    {
+      "name": "parallel bars share direction",
+      "passed": true
+    },
+    {
+      "name": "plus_horizontal crosses only in view: 18cm depth gap",
+      "passed": true
+    },
+    {
+      "name": "cross_a crosses only in view: 18cm depth gap",
+      "passed": true
+    },
+    {
+      "name": "bottom endpoint spheres rest on podium tops",
+      "passed": true
+    },
+    {
+      "name": "podium 0 is solid and outside tool reactions",
+      "passed": true
+    },
+    {
+      "name": "podium 1 is solid and outside tool reactions",
+      "passed": true
+    },
+    {
+      "name": "podium 2 is solid and outside tool reactions",
+      "passed": true
+    },
+    {
+      "name": "podium 3 is solid and outside tool reactions",
+      "passed": true
+    },
+    {
+      "name": "podium 4 is solid and outside tool reactions",
+      "passed": true
+    },
+    {
+      "name": "material study plank remains grabbable",
+      "passed": true
+    },
+    {
+      "name": "material study stick remains grabbable",
+      "passed": true
+    },
+    {
+      "name": "material study light remains grabbable",
+      "passed": true
+    },
+    {
+      "name": "material study measure remains grabbable",
+      "passed": true
+    },
+    {
+      "name": "visitor can walk between podiums at x=-6.0",
+      "passed": true
+    },
+    {
+      "name": "visitor can walk between podiums at x=-2.0",
+      "passed": true
+    },
+    {
+      "name": "visitor can walk between podiums at x=2.0",
+      "passed": true
+    },
+    {
+      "name": "visitor can walk between podiums at x=6.0",
+      "passed": true
+    },
+    {
+      "name": "rising line sits against the actual hall wall",
+      "passed": true
+    },
+    {
+      "name": "production XR pickup carries pink segment and white endpoints together",
+      "passed": true
+    },
+    {
+      "name": "reset leaves a held line in the hand",
+      "passed": true
+    },
+    {
+      "name": "release retains visitor's arrangement",
+      "passed": true
+    },
+    {
+      "name": "reset restores a released line to its podium",
+      "passed": true
+    },
+    {
+      "name": "new pink segment retains its tool-reaction component",
+      "passed": true
+    },
+    {
+      "name": "tool ray hits new cylindrical surface",
+      "passed": true
+    },
+    {
+      "name": "breaking a line leaves the furniture and other studies",
+      "passed": true
+    },
+    {
+      "name": "line rebuilds automatically after eight seconds",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: follow",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: relations",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: horizontal-vertical",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: materials",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cross-depth",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "gallery_world": [
+      13.5,
+      0.0,
+      17.5
+    ]
+  },
+  "passed": true,
+  "scope": "Real museum runtime and desktop captures; headset acceptance remains open."
+}

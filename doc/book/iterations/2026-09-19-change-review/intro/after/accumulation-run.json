@@ -1,0 +1,46 @@
+{
+  "pid": 9788,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--rendering-method",
+    "mobile",
+    "--rendering-driver",
+    "vulkan",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-change-review\\intro\\after\\accumulation-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-change-review/intro/probes/probe_accumulation.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-change-review/intro/after/"
+  ],
+  "returncode": 0,
+  "seconds": 16.82220220565796,
+  "source_sha256_before": {
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "bfdd003e34349ee4d80271737cca6a1959110f52caaf1b1361b5e16ec3b1ae0e",
+    "commons/maps/Change_Intro/map_data.json": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc",
+    "commons/artifacts/tangent_slope_workbench/rate_comparison.gd": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717",
+    "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f",
+    "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454",
+    "algorithms/change/ftc_bridge.gd": "4958d47e41d9f333b1c8158c29ada627f9dbf5749d29e2a505e466ab48a75303"
+  },
+  "source_sha256_after": {
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "bfdd003e34349ee4d80271737cca6a1959110f52caaf1b1361b5e16ec3b1ae0e",
+    "commons/maps/Change_Intro/map_data.json": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc",
+    "commons/artifacts/tangent_slope_workbench/rate_comparison.gd": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717",
+    "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f",
+    "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454",
+    "algorithms/change/ftc_bridge.gd": "4958d47e41d9f333b1c8158c29ada627f9dbf5749d29e2a505e466ab48a75303"
+  }
+}

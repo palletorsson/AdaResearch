@@ -1,0 +1,23 @@
+{
+  "before": true,
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "camera anchor exists",
+      "passed": true
+    },
+    {
+      "name": "animated nodes still move",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "moving_nodes": 9,
+  "passed": true,
+  "presentation_poll_median_ms": 0.0,
+  "room": "Trans_Pit",
+  "scope": "Live museum render and native material/state assertions; desktop Compatibility renderer. No headset acceptance claim."
+}

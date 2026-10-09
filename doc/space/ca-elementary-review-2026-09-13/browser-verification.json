@@ -1,0 +1,94 @@
+{
+  "page": "http://localhost:3003/research/possible-bodies/ca-elementary-rules.html",
+  "date": "2026-09-13",
+  "checks": 21,
+  "passed": 21,
+  "results": [
+    {
+      "name": "starts held",
+      "passed": true
+    },
+    {
+      "name": "illustration loaded and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "fading centre sees seven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "fading centre predicts zero despite seven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "fading centre becomes empty on real UI step",
+      "passed": true
+    },
+    {
+      "name": "empty centre sees same seven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "empty centre predicts activity",
+      "passed": true
+    },
+    {
+      "name": "empty centre becomes active",
+      "passed": true
+    },
+    {
+      "name": "27 active cells render as a 26-cell shell",
+      "passed": true
+    },
+    {
+      "name": "hidden centre remains active with 26 neighbours",
+      "passed": true
+    },
+    {
+      "name": "VIEW keeps generation and all displayed cell states",
+      "passed": true
+    },
+    {
+      "name": "twenty steps reach a held budget",
+      "passed": true
+    },
+    {
+      "name": "+20 extends without altering the state",
+      "passed": true
+    },
+    {
+      "name": "step beyond original budget is possible",
+      "passed": true
+    },
+    {
+      "name": "replay restores selected initial state and initial budget",
+      "passed": true
+    },
+    {
+      "name": "RUN starts the local clock",
+      "passed": true
+    },
+    {
+      "name": "HOLD stops the local clock",
+      "passed": true
+    },
+    {
+      "name": "seeded replay reproduces initial visible cells",
+      "passed": true
+    },
+    {
+      "name": "book text is visible after opening its passage",
+      "passed": true
+    },
+    {
+      "name": "encyclopedia primary card matches the book",
+      "passed": true
+    },
+    {
+      "name": "primary card contains the new cell-state passage",
+      "passed": true
+    }
+  ],
+  "godot_verified": false,
+  "headset_verified": false
+}

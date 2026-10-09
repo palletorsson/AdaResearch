@@ -1,0 +1,593 @@
+{
+  "resonating_metallophone": [
+    {
+      "file": "commons/artifacts/registry/wavefunctions.json",
+      "category": "waves",
+      "complexity": "intermediate",
+      "description": "Metal bars that ring\u2014each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
+      "dev_themes": [
+        "music",
+        "oscillation",
+        "physics",
+        "waves"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "resonating_metallophone",
+      "map_ready": true,
+      "map_sequences": [
+        "wavefunctions"
+      ],
+      "name": "Resonating Metallophone",
+      "scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+      "sequence": "wavefunctions",
+      "tags": [
+        "sound",
+        "waves"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "sunken",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          1.74,
+          2.52,
+          0.5
+        ],
+        "aabb_center": [
+          -0.32,
+          1.24,
+          -0.1
+        ],
+        "grid_cells": [
+          2,
+          1
+        ],
+        "max_dimension_m": 2.52,
+        "measured_at": "2026-08-12T04:39:51.280397Z"
+      },
+      "footprint_measured": [
+        2,
+        1,
+        1
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 4,
+        "density": "low",
+        "min_clearance": 0,
+        "stack_priority": 0.1,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.306132Z",
+        "derived_from": "aabb_size + category"
+      },
+      "dna": {
+        "promoted": "2026-08-05",
+        "deepened": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "tuning": [
+            "pentatonic",
+            "equal",
+            "just",
+            "harmonic"
+          ]
+        },
+        "default": "tuning=pentatonic - TUNINGS[\"pentatonic\"] IS the shipped PENTATONIC_SCALE constant, referenced and not retyped, so every bar rings at exactly the frequency it always did and the sound of all 7 placements is unchanged. The APPEARANCE is not preserved, and could not be: see dna.was.",
+        "was": "eight identical boxes in a row, none of which was ever drawn. resonating_bar.tscn carries a bare MeshInstance3D with no `mesh` property, and ResonatingBar._setup_visual only built a BoxMesh when that node was MISSING - so the branch never fired, mesh stayed null, and the artifact rendered as a Label3D reading HIT THE BARS WITH THE STICK floating over eight invisible colliders. The registry's own measurement agrees: aabb_size [1.74, 0.1, 0.12] centred at (-0.32, 0.5, -0.29) is the grab stick and nothing else. The registry description meanwhile claimed 'each bar's length determines its pitch, shorter bars vibrate faster', which was false twice over - the bars had no length because they had no body, and pitch was a number handed to an audio generator.",
+        "note": "The mesh is now built whenever it is missing, and each bar gets its OWN BoxShape3D because the .tscn's is a shared sub-resource that would otherwise resize the whole row. Bar length comes from the physics of a free-free bar (f = k*h/L^2, so L goes as 1/sqrt(f)) with the lowest note keeping the shipped 0.30 m. AUDIBLE decay and ring are deliberately NOT an axis - a still cannot show them.",
+        "fixture": {
+          "visualizer_height": -1.0
+        },
+        "framing": 0.45,
+        "fixture_note": "The combined-wave display hangs 2.5 m above the bars and the grab stick is a 1.74 m rod offset to x=-0.5, so the fitted AABB is mostly empty air and the row of bars - the entire subject of this axis - lands at about a sixth of the frame. Dropping the visualizer to bar height lets the framing come in without cropping the row off the bottom. If the sweep still reports faint, suspect the framing before the design: the bars are 0.04 m thin and the sweep camera looks 34 degrees off their long axis.",
+        "open": "CombinedWaveVisualizer._find_resonating_bars scans get_parent().get_children() for ResonatingBar, but the bars live inside the 'Bars' container it is a sibling of - so it finds zero bars and the combined wave has never summed anything. Invisible to a still, left alone here, recorded so it is not lost. SECOND, from the deepening pass: about half of the frame is the grab stick and the black X/Y/Z debug readout that comes with grab_long_stick.tscn, and neither of them is ever tuned. Every bite number this token reports is diluted by that constant, and a bench-only prop switch would recover roughly a factor of two - not done here because the stick belongs to a shared primitive used well beyond this artifact.",
+        "deepened_why": "THE COUNT, which the first cut left out. The 2026-08-05 sweep measured pentatonic against just at 0.233% on a subject filling 11.3% of frame - so not a framing fault, a design one. Cause, arithmetic not impression: both are just-ish ratios, so L = 0.30*sqrt(261.63/f) put those two rows within 0.4 mm on bars 1-2 and under 2.3 cm on the rest, eight bars at eight identical x positions differing by under a tenth of their own length. The axis re-cut the bars and never changed the instrument. A tuning is a rule for dividing a range and the first thing that rule fixes is HOW MANY notes there are; five to the octave and twelve to the octave is the entire difference, and it was the one thing every value agreed on. So each value now states its scale over the range the shipped row already spans (C4 to E5) at its own cardinality: pentatonic 8 bars, just 10, equal 17, harmonic 12. No two rows share a bar count, and because x = (i - n/2) * 0.12 the row centres differ too - pentatonic starts at -0.48, just at -0.60, harmonic at -0.72, equal at -1.02 - so no two rows line up bar for bar and the closest pair now differs across its whole width instead of at its tips. EVERY LIST IS A PURE APPEND: not one frequency that was already declared has moved, and pentatonic is not touched at all. Cost: the equal row is 2.00 m wide against the shipped 0.92, so the union AABB grows from about 1.74 m to 2.13 m and every variant is photographed roughly 30% smaller. That is paid for several times over by the change becoming wholesale rather than marginal. framing stays 0.45: at the new union the projected subject is about 86% of the frame width, which is tight but not clipped.",
+        "expected": "A PREDICTION, so the next sweep can falsify it rather than just re-describe it. Measured off the existing pentatonic frame rather than estimated: the row is 337 px wide for 0.761 projected m, so 442.7 px per projected metre, frame width 1.717 m, fitted union diagonal 2.008 m. The 17-bar equal row takes the union x from 1.74 m to 2.13 m, the diagonal to 2.354 m and the frame to 2.013 m, at which the projected subject is 88% of the frame width - tight, uncropped, and 0.85x linear / 0.72x area on everything. The pentatonic row currently inks 14667 px (2.54% of frame); after the shrink it is about 1.8%, harmonic's twelve shorter bars about 1.65%, and because a 0.12 m centre shift is larger than the 0.08 m bar width NO bar lands on its neighbour's old footprint in any pair. Expect every pair between roughly 2.5% and 5%, closest pair pentatonic-vs-harmonic. IF IT COMES BACK UNDER 1% AGAIN, do not re-cut the scales: check first that the row grew at all, because a bar count that did not change means TUNINGS was not the table the code read.",
+        "deepened_declined": "A SECOND AXIS, `cut` (length | thickness | shared) - WHICH DIMENSION carries the pitch, since f = k*h/L^2 has a two-dimensional solution set and a gamelan bar is tuned by thinning its underside where a xylophone bar is tuned by shortening it. Real, independent of tuning, visible in a still, and default-preserving. Not taken in this pass: it is a second claim laid on top of one that had just been measured wrong, and the discipline that produced the count fix was fixing the measured thing first. Worth taking next. NOT worth taking, and recorded so nobody tries: a `width` value, because the flexural frequency of a free-free bar is independent of its width - a row tuned by width would be a picture of a law that does not exist."
+      }
+    }
+  ],
+  "sine_cylinder_staircase": [
+    {
+      "file": "commons/artifacts/registry/wavefunctions.json",
+      "dna": {
+        "axes": {
+          "provision": [
+            "membrane",
+            "none",
+            "rail",
+            "posts"
+          ]
+        }
+      },
+      "category": "waves",
+      "complexity": "intermediate",
+      "description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
+      "dev_themes": [
+        "oscillation",
+        "physics",
+        "waves"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "sine_cylinder_staircase",
+      "map_ready": true,
+      "map_sequences": [
+        "wavefunctions"
+      ],
+      "name": "sine_cylinder_staircase",
+      "parameters": {
+        "footprint": [
+          3,
+          9,
+          6
+        ],
+        "size_group": "environment"
+      },
+      "scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+      "sequence": "wavefunctions",
+      "tags": [
+        "wave"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "box",
+            "cylinder"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "unlit",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "depends",
+          "polar",
+          "conversion",
+          "modulation",
+          "contrasts"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 64,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          7.35,
+          9.21,
+          7.35
+        ],
+        "aabb_center": [
+          0.0,
+          4.39,
+          0.0
+        ],
+        "grid_cells": [
+          8.0,
+          8.0
+        ],
+        "max_dimension_m": 9.21,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        8.0,
+        1,
+        8.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 18,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.306132Z",
+        "derived_from": "aabb_size + category"
+      }
+    }
+  ],
+  "beat_frequency_demo": [
+    {
+      "file": "commons/artifacts/registry/wavefunctions.json",
+      "name": "Beat Frequency Demo",
+      "lookup_name": "beat_frequency_demo",
+      "description": "Visual beat frequency demonstration \u2014 two sine waves at adjustable frequencies and their sum, showing the characteristic pulsing envelope when frequencies are close. Three rows of 64 animated spheres (blue, green, orange) with sliders for each frequency.",
+      "scene": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
+      "category": "waves",
+      "complexity": "beginner",
+      "tags": [
+        "wave",
+        "beat",
+        "frequency",
+        "interference",
+        "envelope",
+        "interactive"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "oscillation",
+        "physics",
+        "waves"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "wall_backing": false,
+        "isolation": 0,
+        "preferred_zone": "middle",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.7,
+          0.38,
+          0.16
+        ],
+        "aabb_center": [
+          0.09,
+          0.9,
+          0.08
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 0.7,
+        "measured_at": "2026-08-12T04:39:51.280397Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 2,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.306641Z",
+        "derived_from": "aabb_size + category"
+      }
+    }
+  ],
+  "TrigWalkingPath": [
+    {
+      "file": "commons/artifacts/registry/wavefunctions.json",
+      "category": "waves",
+      "complexity": "beginner",
+      "description": "Walkable path generated by trig functions",
+      "dev_themes": [
+        "oscillation",
+        "physics",
+        "waves"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "TrigWalkingPath",
+      "map_ready": true,
+      "map_sequences": [
+        "wavefunctions"
+      ],
+      "name": "TrigWalkingPath",
+      "parameters": {
+        "footprint": [
+          6,
+          11,
+          26
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
+      "sequence": "wavefunctions",
+      "tags": [
+        "waves"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "depends",
+          "walking",
+          "plots",
+          "contrasts",
+          "single"
+        ],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          10.0,
+          7.12,
+          103.0
+        ],
+        "aabb_center": [
+          0.0,
+          -1.49,
+          -38.5
+        ],
+        "grid_cells": [
+          10.0,
+          103.0
+        ],
+        "max_dimension_m": 103.0,
+        "measured_at": "2026-08-12T04:39:51.280397Z"
+      },
+      "footprint_measured": [
+        10.0,
+        1,
+        103.0
+      ]
+    }
+  ],
+  "additive_wave_demo": [
+    {
+      "file": "commons/artifacts/registry/commons_artifacts.json",
+      "category": "waves",
+      "complexity": "intermediate",
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "waveform": [
+            "sine",
+            "square",
+            "sawtooth",
+            "triangle",
+            "clear"
+          ],
+          "components": [
+            "ladder",
+            "overlay",
+            "hidden"
+          ]
+        },
+        "default": "waveform=sine, components=ladder - sine writes the same [1,0,0,0,0] amplitudes the sliders were already initialised with, and ladder is the legacy -0.35 - h*0.15 stack, so all 9 existing placements render exactly as before",
+        "was": "five NodePath exports and nothing turnable: every placement showed one green sine, four dead slider tracks and the label f(t) = 1.0 sin(wt). The Fourier claim was written on the label and never shown, because the only way to see a second harmonic was to be in VR with a hand on a slider."
+      },
+      "description": "Interactive demonstration of additive wave synthesis \u2014 layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
+      "dev_themes": [
+        "commons",
+        "mixed",
+        "waves"
+      ],
+      "footprint": [
+        3,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "interaction": "grab",
+      "interactions": [
+        "grab"
+      ],
+      "lookup_name": "additive_wave_demo",
+      "map_ready": true,
+      "map_sequences": [
+        "testmaps",
+        "wavefunctions"
+      ],
+      "name": "Additive Wave Demo",
+      "parameters": {
+        "footprint": [
+          3,
+          1,
+          1
+        ],
+        "size_group": "standard"
+      },
+      "scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+      "sequence": "wavefunctions",
+      "size_group": "standard",
+      "tags": [
+        "waves",
+        "fourier",
+        "additive_synthesis",
+        "sine",
+        "frequency"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "non_manifold",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 3,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "depends",
+          "fundamental",
+          "harmonics",
+          "contrasts",
+          "timbre_sculptor"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 3,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.2,
+          0.89,
+          0.59
+        ],
+        "aabb_center": [
+          0.0,
+          -0.1,
+          0.04
+        ],
+        "grid_cells": [
+          3.0,
+          1.0
+        ],
+        "max_dimension_m": 2.2,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 6,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.082521Z",
+        "derived_from": "aabb_size + category"
+      }
+    }
+  ]
+}

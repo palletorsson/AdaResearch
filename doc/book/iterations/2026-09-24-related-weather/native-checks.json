@@ -1,0 +1,226 @@
+{
+  "checks": [
+    {
+      "name": "empty arrival, held clock",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three banks of eight slits",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "production NEXT starts one sample",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "repeated NEXT resumes rather than redraws",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "one step reaches its target and holds",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "walk uses the same innovation",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "HOLD pauses aperture and clock",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "NEXT finishes paused stroke without another draw",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "REPLAY clears pending travel and record",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "replay repeats all three channels including preparation",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "history bounded to eight visible moments",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 3",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 4",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 5",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 6",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 0 7",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 3",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 4",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 5",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 6",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 1 7",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 2",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 3",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 4",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 5",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 6",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "correct historical target 2 7",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "raw positive walk survives display ceiling",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "raw negative walk survives display floor",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "reset during travel cannot leave a stale opening",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "explicit 128 sample budget never silently loops",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "all visible slits stay within aperture bounds",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "new seed is different and held empty",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "fixed glass retains collision 0",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "fixed glass retains collision 1",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "fixed glass retains collision 2",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "scope": "Production pointer controls and native real-time pause/replay. Record-limit and bound cases advance the production update with explicit delta; forced walk state tests the display boundary. Raw export uses the production signal model. No headset or performance claim."
+}

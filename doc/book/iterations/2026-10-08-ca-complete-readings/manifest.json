@@ -1,0 +1,856 @@
+{
+  "date": "2026-10-08",
+  "sequence": "cellularautomata",
+  "order": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+  ],
+  "sequence_sha256": "304d37c6b6d23bda19b839db1fa89c01138eedc1dc3115346935d2b40c5d9eb1",
+  "halls": [
+    {
+      "id": "CA_Introduction",
+      "number": 1,
+      "operation": "Read three Boolean states, select a rule answer and write a new row. Keep old and next separate.",
+      "point_role": "Move to inspect an address; trigger advances one generation.",
+      "question": "What does a local rule make, and what has the display or imposed symmetry already arranged?",
+      "tracks": {
+        "tutorial": {
+          "title": "A row with neighbours",
+          "prose_words_approx": 917,
+          "code_blocks": 2,
+          "code_lines": 171
+        },
+        "final": {
+          "title": "What will the next row do?",
+          "prose_words_approx": 1641,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "A row with neighbours",
+      "image": "assets/CA_Introduction/neighbour-ring.png",
+      "overhead": "assets/CA_Introduction/room-overhead.png"
+    },
+    {
+      "id": "CA_ElementaryRules",
+      "number": 2,
+      "operation": "Give each address empty, active or fading state. Count active neighbours in a finite volume.",
+      "point_role": "Carry STEP while observing the enlarged neighbourhood.",
+      "question": "Can something remain present after it stops contributing to its neighbours?",
+      "tracks": {
+        "tutorial": {
+          "title": "A state that lingers",
+          "prose_words_approx": 1095,
+          "code_blocks": 2,
+          "code_lines": 176
+        },
+        "final": {
+          "title": "A cell with a past",
+          "prose_words_approx": 960,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "A state that lingers",
+      "image": "assets/CA_ElementaryRules/lingering-cell.png",
+      "overhead": "assets/CA_ElementaryRules/room-overhead.png"
+    },
+    {
+      "id": "CA_GameOfLife",
+      "number": 3,
+      "operation": "Keep independent generations and map one record onto a board and supporting tiles.",
+      "point_role": "Move to inspect a recorded generation; trigger appends the next.",
+      "question": "When does a gap in an image become a missing support for a body?",
+      "tracks": {
+        "tutorial": {
+          "title": "Keep a generation",
+          "prose_words_approx": 978,
+          "code_blocks": 2,
+          "code_lines": 192
+        },
+        "final": {
+          "title": "A history you can inhabit",
+          "prose_words_approx": 775,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "Keep a generation",
+      "image": "assets/CA_GameOfLife/walking-history.png",
+      "overhead": "assets/CA_GameOfLife/room-overhead.png"
+    },
+    {
+      "id": "CA_BeyondBinary",
+      "number": 4,
+      "operation": "Update a two-dimensional present. Follow a moving pattern through fixed addresses and connect one address to a lamp.",
+      "point_role": "Carry STEP; the point does not plant or move the pattern.",
+      "question": "What moves when the addresses stay, and what does being observed change?",
+      "tracks": {
+        "tutorial": {
+          "title": "A pattern visits an address",
+          "prose_words_approx": 870,
+          "code_blocks": 2,
+          "code_lines": 204
+        },
+        "final": {
+          "title": "A pattern visits an address",
+          "prose_words_approx": 990,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "A pattern visits an address",
+      "image": "assets/CA_BeyondBinary/life-floor.png",
+      "overhead": "assets/CA_BeyondBinary/room-overhead.png"
+    },
+    {
+      "id": "CA_ExpandingSpace",
+      "number": 5,
+      "operation": "Let a position become an input. Compare decay, recovery and simultaneous versus ordered updates.",
+      "point_role": "Place the held point near the field; its position enters the rule.",
+      "question": "What happens when observing becomes one of the conditions of the surface?",
+      "tracks": {
+        "tutorial": {
+          "title": "The surface includes you",
+          "prose_words_approx": 1268,
+          "code_blocks": 2,
+          "code_lines": 194
+        },
+        "final": {
+          "title": "The surface includes you",
+          "prose_words_approx": 790,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "The surface includes you",
+      "image": "assets/CA_ExpandingSpace/presence-depleted.png",
+      "overhead": "assets/CA_ExpandingSpace/room-overhead.png"
+    },
+    {
+      "id": "CA_SoftRules",
+      "number": 6,
+      "operation": "Store two concentrations and compare local reaction with neighbour exchange.",
+      "point_role": "Choose a position and trigger a seed in both fields.",
+      "question": "What can a cell receive, and which relations have been withheld?",
+      "tracks": {
+        "tutorial": {
+          "title": "What a neighbour offers",
+          "prose_words_approx": 1260,
+          "code_blocks": 3,
+          "code_lines": 251
+        },
+        "final": {
+          "title": "What can a cell receive?",
+          "prose_words_approx": 963,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "What a neighbour offers",
+      "image": "assets/CA_SoftRules/exchange-seed.png",
+      "overhead": "assets/CA_SoftRules/room-overhead.png"
+    },
+    {
+      "id": "CA_AgentsCircuits",
+      "number": 7,
+      "operation": "Compare a local state update with a supplied recursive placement recipe. Change only the seed.",
+      "point_role": "Return to address inspection and STEP beside a fixed construction.",
+      "question": "Does a similar outline establish the same way of making?",
+      "tracks": {
+        "tutorial": {
+          "title": "Two ways to make",
+          "prose_words_approx": 1242,
+          "code_blocks": 3,
+          "code_lines": 204
+        },
+        "final": {
+          "title": "The same pattern, different work",
+          "prose_words_approx": 943,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "Two ways to make",
+      "image": "assets/CA_AgentsCircuits/two-procedures.png",
+      "overhead": "assets/CA_AgentsCircuits/room-overhead.png"
+    },
+    {
+      "id": "CA_EdgeOfChaos",
+      "number": 8,
+      "operation": "Run matched fields from almost identical beginnings. Distinguish storage, measurement and display gain.",
+      "point_role": "Select a Z section; trigger updates both fields. Release returns the installed reader to walking.",
+      "question": "Has a difference vanished, or have our storage, counting and viewing choices hidden it?",
+      "tracks": {
+        "tutorial": {
+          "title": "What a difference keeps",
+          "prose_words_approx": 1523,
+          "code_blocks": 3,
+          "code_lines": 285
+        },
+        "final": {
+          "title": "How far does one difference go?",
+          "prose_words_approx": 1181,
+          "code_blocks": 0,
+          "code_lines": 0
+        }
+      },
+      "label": "What a difference keeps",
+      "image": "assets/CA_EdgeOfChaos/one-difference.png",
+      "overhead": "assets/CA_EdgeOfChaos/room-overhead.png"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/CA_Introduction/tutorial.md",
+      "copy": "sources/CA_Introduction/tutorial.md",
+      "sha256": "d8cc69d19cd1246d099b1b98a0ad66933f8b73bfc3cf6f1a40999f4d9217e8ea"
+    },
+    {
+      "path": "commons/maps/CA_Introduction/final.md",
+      "copy": "sources/CA_Introduction/final.md",
+      "sha256": "b285f2beb8f0bbc424f0235f6c404556600bcd21670f9403bcff1fb5dfec69a1"
+    },
+    {
+      "path": "commons/maps/CA_ElementaryRules/tutorial.md",
+      "copy": "sources/CA_ElementaryRules/tutorial.md",
+      "sha256": "2739093b7466ff926a47acc90f70ce09ccc8a2740d44dd750b3df4a4c7132bc6"
+    },
+    {
+      "path": "commons/maps/CA_ElementaryRules/final.md",
+      "copy": "sources/CA_ElementaryRules/final.md",
+      "sha256": "c99e1deb0f17286e63e39cf2bba62ad22c22e34e75260fc0242807316bfaa0e5"
+    },
+    {
+      "path": "commons/maps/CA_GameOfLife/tutorial.md",
+      "copy": "sources/CA_GameOfLife/tutorial.md",
+      "sha256": "ce2f81e62be4a803d9951b27ac1128427efc4d25039ff85f62a4efb37d9992cb"
+    },
+    {
+      "path": "commons/maps/CA_GameOfLife/final.md",
+      "copy": "sources/CA_GameOfLife/final.md",
+      "sha256": "630db02d2b1c57e96c819af861cd77a821b3566e8e0b4ffac28f0aca3aded8d7"
+    },
+    {
+      "path": "commons/maps/CA_BeyondBinary/tutorial.md",
+      "copy": "sources/CA_BeyondBinary/tutorial.md",
+      "sha256": "575f4ed317b4619a83588b2e211ea1a8c5fd5af817ce63c04f6fa70a60adc416"
+    },
+    {
+      "path": "commons/maps/CA_BeyondBinary/final.md",
+      "copy": "sources/CA_BeyondBinary/final.md",
+      "sha256": "65ad13844f253e6d50e1d7a0ecd157a0904b0125b1749b5fac3b03aa17172e6b"
+    },
+    {
+      "path": "commons/maps/CA_ExpandingSpace/tutorial.md",
+      "copy": "sources/CA_ExpandingSpace/tutorial.md",
+      "sha256": "a8b91b365eecd6213b05143645e8a0da180966637814e17ce6710611e35d8e12"
+    },
+    {
+      "path": "commons/maps/CA_ExpandingSpace/final.md",
+      "copy": "sources/CA_ExpandingSpace/final.md",
+      "sha256": "52dcbdb10de2c36abc5416d373b50d9bd297eefdced96a9d1744b5ab8c590ede"
+    },
+    {
+      "path": "commons/maps/CA_SoftRules/tutorial.md",
+      "copy": "sources/CA_SoftRules/tutorial.md",
+      "sha256": "824cce7aee12afd28a312c5346553e7e0ffb4c63f42886d0d813cb30ecb66e4b"
+    },
+    {
+      "path": "commons/maps/CA_SoftRules/final.md",
+      "copy": "sources/CA_SoftRules/final.md",
+      "sha256": "dcbae37be7e55f05736d046f422cdbfe020c13490f76c792b0d4f660aeea9ba2"
+    },
+    {
+      "path": "commons/maps/CA_AgentsCircuits/tutorial.md",
+      "copy": "sources/CA_AgentsCircuits/tutorial.md",
+      "sha256": "2a7c96f965e001905651df0014f888abbb207db615624421d223836abc480b71"
+    },
+    {
+      "path": "commons/maps/CA_AgentsCircuits/final.md",
+      "copy": "sources/CA_AgentsCircuits/final.md",
+      "sha256": "9db98294d73efa025073280fb972d4c68a08468d4f4c5e3f0c3532dca81fb74b"
+    },
+    {
+      "path": "commons/maps/CA_EdgeOfChaos/tutorial.md",
+      "copy": "sources/CA_EdgeOfChaos/tutorial.md",
+      "sha256": "36f508960789c717db36c7112c578753e76ffdf3ec8e876b4078ca66bbd472f8"
+    },
+    {
+      "path": "commons/maps/CA_EdgeOfChaos/final.md",
+      "copy": "sources/CA_EdgeOfChaos/final.md",
+      "sha256": "a38ab099c5e158ca3346a9516ed684dec079786c09d9671f095d0c63a8768214"
+    }
+  ],
+  "student_files": [
+    {
+      "hall": "CA_Introduction",
+      "file": "row.gd",
+      "copy": "student-files/CA_Introduction/row.gd",
+      "sha256": "eea0abf2ed7ad9b9cec8c5d6a1d495a4ff3cc4993ab5148ca351ee0133d26922",
+      "lines": 130,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/row.gd",
+      "source_sha256": "eea0abf2ed7ad9b9cec8c5d6a1d495a4ff3cc4993ab5148ca351ee0133d26922",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "c9cde3e1f10b8a1ee6f8691ac375e18ad4f2c5e8c4d52c0c7211b9637be7b1ce"
+    },
+    {
+      "hall": "CA_Introduction",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_Introduction/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "2cf3a890cf011740bc22670b217d560973d43f29371124b16bddb11238a4cf5c"
+    },
+    {
+      "hall": "CA_ElementaryRules",
+      "file": "volume.gd",
+      "copy": "student-files/CA_ElementaryRules/volume.gd",
+      "sha256": "213f744eebdc91464a303582a7285f9bf9bdb7e3eeae3cd8ea1fc4c8706aecaa",
+      "lines": 135,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_ElementaryRules/volume.gd",
+      "source_sha256": "213f744eebdc91464a303582a7285f9bf9bdb7e3eeae3cd8ea1fc4c8706aecaa",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "213f744eebdc91464a303582a7285f9bf9bdb7e3eeae3cd8ea1fc4c8706aecaa"
+    },
+    {
+      "hall": "CA_ElementaryRules",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_ElementaryRules/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_ElementaryRules/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_GameOfLife",
+      "file": "history.gd",
+      "copy": "student-files/CA_GameOfLife/history.gd",
+      "sha256": "0f5ffa6633a38a0bb917358f79f01ce28a44688413190c2d869ac0c70f38cfb2",
+      "lines": 151,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_GameOfLife/history.gd",
+      "source_sha256": "0f5ffa6633a38a0bb917358f79f01ce28a44688413190c2d869ac0c70f38cfb2",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0f5ffa6633a38a0bb917358f79f01ce28a44688413190c2d869ac0c70f38cfb2"
+    },
+    {
+      "hall": "CA_GameOfLife",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_GameOfLife/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_GameOfLife/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_BeyondBinary",
+      "file": "life.gd",
+      "copy": "student-files/CA_BeyondBinary/life.gd",
+      "sha256": "15411ad3ba57ba0a5a84dd34540beef5d50a63f9368bdf6bfe321428722521fc",
+      "lines": 163,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary/life.gd",
+      "source_sha256": "15411ad3ba57ba0a5a84dd34540beef5d50a63f9368bdf6bfe321428722521fc",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "15411ad3ba57ba0a5a84dd34540beef5d50a63f9368bdf6bfe321428722521fc"
+    },
+    {
+      "hall": "CA_BeyondBinary",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_BeyondBinary/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_ExpandingSpace",
+      "file": "presence.gd",
+      "copy": "student-files/CA_ExpandingSpace/presence.gd",
+      "sha256": "74e26811a3113010a7f7ba047be36a32a06b007a848cfefb5363bbc010f775d1",
+      "lines": 153,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_ExpandingSpace/presence.gd",
+      "source_sha256": "74e26811a3113010a7f7ba047be36a32a06b007a848cfefb5363bbc010f775d1",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "74e26811a3113010a7f7ba047be36a32a06b007a848cfefb5363bbc010f775d1"
+    },
+    {
+      "hall": "CA_ExpandingSpace",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_ExpandingSpace/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_ExpandingSpace/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_SoftRules",
+      "file": "field.gd",
+      "copy": "student-files/CA_SoftRules/field.gd",
+      "sha256": "f094751a421770d6f3fe079fd9971ed8c7654c68121e68e0bf87f7bf5b5b09c4",
+      "lines": 58,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/field.gd",
+      "source_sha256": "f094751a421770d6f3fe079fd9971ed8c7654c68121e68e0bf87f7bf5b5b09c4",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "f094751a421770d6f3fe079fd9971ed8c7654c68121e68e0bf87f7bf5b5b09c4"
+    },
+    {
+      "hall": "CA_SoftRules",
+      "file": "exchange.gd",
+      "copy": "student-files/CA_SoftRules/exchange.gd",
+      "sha256": "a232c28f1672c8473fc283b9f3dd9143c52f72b6b4564b00d04f3458a6feba8f",
+      "lines": 152,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/exchange.gd",
+      "source_sha256": "a232c28f1672c8473fc283b9f3dd9143c52f72b6b4564b00d04f3458a6feba8f",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "a232c28f1672c8473fc283b9f3dd9143c52f72b6b4564b00d04f3458a6feba8f"
+    },
+    {
+      "hall": "CA_SoftRules",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_SoftRules/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_AgentsCircuits",
+      "file": "procedures.gd",
+      "copy": "student-files/CA_AgentsCircuits/procedures.gd",
+      "sha256": "b9f08c23a53f662ee7ff740bbc3bfb7835106af4a8e2856c94e9a2164c2869d6",
+      "lines": 27,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/procedures.gd",
+      "source_sha256": "b9f08c23a53f662ee7ff740bbc3bfb7835106af4a8e2856c94e9a2164c2869d6",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "b9f08c23a53f662ee7ff740bbc3bfb7835106af4a8e2856c94e9a2164c2869d6"
+    },
+    {
+      "hall": "CA_AgentsCircuits",
+      "file": "comparison.gd",
+      "copy": "student-files/CA_AgentsCircuits/comparison.gd",
+      "sha256": "ab0b7afa59375939e5fe3a988d4f4a2f118a93f7ce4205d18b6c33266575abd0",
+      "lines": 136,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/comparison.gd",
+      "source_sha256": "ab0b7afa59375939e5fe3a988d4f4a2f118a93f7ce4205d18b6c33266575abd0",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "ab0b7afa59375939e5fe3a988d4f4a2f118a93f7ce4205d18b6c33266575abd0"
+    },
+    {
+      "hall": "CA_AgentsCircuits",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_AgentsCircuits/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "hall": "CA_EdgeOfChaos",
+      "file": "paired.gd",
+      "copy": "student-files/CA_EdgeOfChaos/paired.gd",
+      "sha256": "b6d6be638850fcd6c2210e1e66876f2d63e3844a771b1affd239043559fd217f",
+      "lines": 81,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/paired.gd",
+      "source_sha256": "b6d6be638850fcd6c2210e1e66876f2d63e3844a771b1affd239043559fd217f",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "b6d6be638850fcd6c2210e1e66876f2d63e3844a771b1affd239043559fd217f"
+    },
+    {
+      "hall": "CA_EdgeOfChaos",
+      "file": "difference.gd",
+      "copy": "student-files/CA_EdgeOfChaos/difference.gd",
+      "sha256": "51f6d10afbf5373137570cca4b42114282602af73e2b26f163e68136fda2bad3",
+      "lines": 163,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/difference.gd",
+      "source_sha256": "51f6d10afbf5373137570cca4b42114282602af73e2b26f163e68136fda2bad3",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "51f6d10afbf5373137570cca4b42114282602af73e2b26f163e68136fda2bad3"
+    },
+    {
+      "hall": "CA_EdgeOfChaos",
+      "file": "point_body.gd",
+      "copy": "student-files/CA_EdgeOfChaos/point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "source": "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/point_body.gd",
+      "source_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "matches_previously_tested_printed_code": true,
+      "recorded_printed_sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    }
+  ],
+  "assets": [
+    {
+      "source": "commons/maps/CA_Introduction/images/neighbour-ring.png",
+      "file": "assets/CA_Introduction/neighbour-ring.png",
+      "sha256": "8c0883b9b8b0c5f2a6b4503edc9f73b8cf1681fada983c64a4f45eda67e018dd"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-rooms-connected/after/museum/overhead.png",
+      "file": "assets/CA_Introduction/room-overhead.png",
+      "sha256": "e4e00095e66f04173a7e3e848894325065d5996429797f2bd42846e9f9984848"
+    },
+    {
+      "source": "commons/maps/CA_ElementaryRules/images/lingering-cell.png",
+      "file": "assets/CA_ElementaryRules/lingering-cell.png",
+      "sha256": "173f0cb0ee0531352e0ef2b1aaa278f62f2d3c58a5ab69dcdaa23c1686777257"
+    },
+    {
+      "source": "commons/maps/CA_ElementaryRules/images/available-address.png",
+      "file": "assets/CA_ElementaryRules/available-address.png",
+      "sha256": "9d141997d4e3e25a991fe26b6d41351e060dc7139844bae127e8d4f3ea30fd47"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-a-state-that-lingers/museum/overhead.png",
+      "file": "assets/CA_ElementaryRules/room-overhead.png",
+      "sha256": "c7be92e642a3aadb294adf43e6617a657dbbdb369c47c0ec9acefedd3a86a9f2"
+    },
+    {
+      "source": "commons/maps/CA_GameOfLife/images/history-learner.png",
+      "file": "assets/CA_GameOfLife/history-learner.png",
+      "sha256": "fab158821bda49b32a1fc9667190608c8fec1d1643999919272ffcca4af5a166"
+    },
+    {
+      "source": "commons/maps/CA_GameOfLife/images/walking-history.png",
+      "file": "assets/CA_GameOfLife/walking-history.png",
+      "sha256": "72938bfafe88608ba34b497cafbac01c39c47c833a1f5760099fe11b11076e8c"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-history-three-bodies/museum/overhead.png",
+      "file": "assets/CA_GameOfLife/room-overhead.png",
+      "sha256": "2f82730fb57da53a92dde4b45c96c2c526ad35f5bc76e79f70bb12a8ac3c6029"
+    },
+    {
+      "source": "commons/maps/CA_BeyondBinary/images/life-floor.png",
+      "file": "assets/CA_BeyondBinary/life-floor.png",
+      "sha256": "8035210bdf8516aaea198f30e6cdbd11842580336cb575e14e23eb09a5ec33a7"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-a-pattern-visits/museum/overhead.png",
+      "file": "assets/CA_BeyondBinary/room-overhead.png",
+      "sha256": "fd1510a4540010aebd7ddd9473fe74f552f1b22af64571b4a75f42eb479d6a0e"
+    },
+    {
+      "source": "commons/maps/CA_ExpandingSpace/images/presence-depleted.png",
+      "file": "assets/CA_ExpandingSpace/presence-depleted.png",
+      "sha256": "bbe3551a0ce7c306c31c6fbc8f452d89004a1774d79a1be2b952fc370327e46e"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-the-surface-includes-you/museum/overhead.png",
+      "file": "assets/CA_ExpandingSpace/room-overhead.png",
+      "sha256": "23594bbee6f353521592c505292ec7f00479c307786c30eb55a029030ba7fdf6"
+    },
+    {
+      "source": "commons/maps/CA_SoftRules/images/exchange-seed.png",
+      "file": "assets/CA_SoftRules/exchange-seed.png",
+      "sha256": "279ca4cba5ed937a9f4571e88666c764f86524dbc3b532ec4c93b0d5592fc496"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-what-a-neighbour-offers/museum/overhead.png",
+      "file": "assets/CA_SoftRules/room-overhead.png",
+      "sha256": "abfed772b5f2821f77cc897c1f22d2251ca7dc9630dc99dc167245285ac348ac"
+    },
+    {
+      "source": "commons/maps/CA_AgentsCircuits/images/two-procedures.png",
+      "file": "assets/CA_AgentsCircuits/two-procedures.png",
+      "sha256": "0b6fea2c21f7553adfdbebb23d378fddc042e501f60819e0e87ed6dbaa0afac3"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-two-ways-to-make/museum/overhead.png",
+      "file": "assets/CA_AgentsCircuits/room-overhead.png",
+      "sha256": "95035e815d31c100fb7d06b90305781ba8300dc04652cd5175500673ef2f54d7"
+    },
+    {
+      "source": "commons/maps/CA_EdgeOfChaos/images/one-difference.png",
+      "file": "assets/CA_EdgeOfChaos/one-difference.png",
+      "sha256": "d50a0741eba3344206eb25dc2b87b9248585dc90c6e1ff10471ea1eed35f1cbf"
+    },
+    {
+      "source": "doc/book/iterations/2026-10-08-ca-what-a-difference-keeps/museum/overhead.png",
+      "file": "assets/CA_EdgeOfChaos/room-overhead.png",
+      "sha256": "7a27466d2f5d7f127f23d2160254f2dd6f6d007e66be6055b3e41561c88b1f01"
+    }
+  ],
+  "totals": {
+    "tutorial": {
+      "prose_words_approx": 9153,
+      "code_blocks": 19,
+      "code_lines": 1677
+    },
+    "final": {
+      "prose_words_approx": 8243,
+      "code_blocks": 0,
+      "code_lines": 0
+    }
+  },
+  "previously_recorded_evidence": [
+    {
+      "hall": "CA_Introduction",
+      "original_run": "2026-10-08-ca-a-row-with-neighbours",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 29,
+          "receipt": "evidence/CA_Introduction/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 16,
+          "receipt": "evidence/CA_Introduction/museum-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Later opening-hall layout pass",
+          "checks": 25,
+          "receipt": "evidence/CA_Introduction/later-layout-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_ElementaryRules",
+      "original_run": "2026-10-08-ca-a-state-that-lingers",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 27,
+          "receipt": "evidence/CA_ElementaryRules/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 30,
+          "receipt": "evidence/CA_ElementaryRules/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_GameOfLife",
+      "original_run": "2026-10-08-ca-history-three-bodies",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 30,
+          "receipt": "evidence/CA_GameOfLife/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 35,
+          "receipt": "evidence/CA_GameOfLife/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_BeyondBinary",
+      "original_run": "2026-10-08-ca-a-pattern-visits",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 29,
+          "receipt": "evidence/CA_BeyondBinary/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 38,
+          "receipt": "evidence/CA_BeyondBinary/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_ExpandingSpace",
+      "original_run": "2026-10-08-ca-the-surface-includes-you",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 32,
+          "receipt": "evidence/CA_ExpandingSpace/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 37,
+          "receipt": "evidence/CA_ExpandingSpace/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_SoftRules",
+      "original_run": "2026-10-08-ca-what-a-neighbour-offers",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 39,
+          "receipt": "evidence/CA_SoftRules/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 40,
+          "receipt": "evidence/CA_SoftRules/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_AgentsCircuits",
+      "original_run": "2026-10-08-ca-two-ways-to-make",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 29,
+          "receipt": "evidence/CA_AgentsCircuits/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 38,
+          "receipt": "evidence/CA_AgentsCircuits/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    },
+    {
+      "hall": "CA_EdgeOfChaos",
+      "original_run": "2026-10-08-ca-what-a-difference-keeps",
+      "runs": [
+        {
+          "scope": "Exact printed learner code",
+          "checks": 35,
+          "receipt": "evidence/CA_EdgeOfChaos/learner-checks.json",
+          "passed": true
+        },
+        {
+          "scope": "Museum interaction and capture",
+          "checks": 43,
+          "receipt": "evidence/CA_EdgeOfChaos/museum-checks.json",
+          "passed": true
+        }
+      ],
+      "rerun_for_compilation": false,
+      "all_printed_files_still_match_recorded_tested_files": true
+    }
+  ],
+  "all_point_body_copies_identical": true,
+  "canonical_sources_modified": false,
+  "runtime_tests_rerun_for_compilation": false,
+  "editorial_revision": {
+    "date": "2026-10-08",
+    "modified_manuscripts": [
+      "commons/maps/CA_BeyondBinary/final.md",
+      "commons/maps/CA_ExpandingSpace/tutorial.md",
+      "commons/maps/CA_ExpandingSpace/final.md",
+      "commons/maps/CA_SoftRules/final.md",
+      "commons/maps/CA_EdgeOfChaos/tutorial.md",
+      "commons/maps/CA_EdgeOfChaos/final.md"
+    ],
+    "changed_snapshotted_files": [
+      "doc/book/course/execution-plan/plan.json",
+      "tools/publish_ca_complete_readings.py",
+      "commons/maps/CA_BeyondBinary/final.md",
+      "commons/maps/CA_ExpandingSpace/tutorial.md",
+      "commons/maps/CA_ExpandingSpace/final.md",
+      "commons/maps/CA_SoftRules/final.md",
+      "commons/maps/CA_EdgeOfChaos/tutorial.md",
+      "commons/maps/CA_EdgeOfChaos/final.md"
+    ],
+    "unchanged_snapshotted_files": [
+      "commons/maps/sequences/cellularautomata.json",
+      "commons/maps/CA_Introduction/tutorial.md",
+      "commons/maps/CA_Introduction/final.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/point_body.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/row.gd",
+      "commons/maps/CA_ElementaryRules/tutorial.md",
+      "commons/maps/CA_ElementaryRules/final.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_ElementaryRules/point_body.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_ElementaryRules/volume.gd",
+      "commons/maps/CA_GameOfLife/tutorial.md",
+      "commons/maps/CA_GameOfLife/final.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_GameOfLife/history.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_GameOfLife/point_body.gd",
+      "commons/maps/CA_BeyondBinary/tutorial.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary/life.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary/point_body.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_ExpandingSpace/point_body.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_ExpandingSpace/presence.gd",
+      "commons/maps/CA_SoftRules/tutorial.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/exchange.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/field.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules/point_body.gd",
+      "commons/maps/CA_AgentsCircuits/tutorial.md",
+      "commons/maps/CA_AgentsCircuits/final.md",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/comparison.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/point_body.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits/procedures.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/difference.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/paired.gd",
+      "doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos/point_body.gd",
+      "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+      "algorithms/cellularautomata/living_architecture/proximity_hand.gd",
+      "algorithms/cellularautomata/living_architecture/proximity_study.gd",
+      "algorithms/cellularautomata/ca_showcase/difference_model.gd",
+      "algorithms/cellularautomata/ca_showcase/difference_study.gd",
+      "algorithms/cellularautomata/ca_showcase/walking_slice.gd",
+      "algorithms/cellularautomata/ca_showcase/difference_hand.gd"
+    ],
+    "required_code_files_unchanged": 19,
+    "hall_order_unchanged": true,
+    "snapshotted_production_code_unchanged": true,
+    "fresh_optional_checks": 13,
+    "compared_cell_values": 6400,
+    "test_scope": "Author-made feasibility response using unchanged printed presence.gd and a nominated desktop-point path. Real code and collision flags; no new museum artifact, live VR walk or independent student.",
+    "required_runtime_tests_rerun": false,
+    "independent_student_test": false,
+    "browser_render_checked": false,
+    "after_hashes": {
+      "doc/book/course/execution-plan/plan.json": "65c7285bb2b0b03d91617be3d490d56edf89c3218c22bd30d5dbab1b8886b623",
+      "tools/publish_ca_complete_readings.py": "1d2f6c28094bfdb46fda8eabbbad242bb65b383f1ebb465deab379658eaf59c2",
+      "commons/maps/CA_BeyondBinary/final.md": "65ad13844f253e6d50e1d7a0ecd157a0904b0125b1749b5fac3b03aa17172e6b",
+      "commons/maps/CA_ExpandingSpace/tutorial.md": "a8b91b365eecd6213b05143645e8a0da180966637814e17ce6710611e35d8e12",
+      "commons/maps/CA_ExpandingSpace/final.md": "52dcbdb10de2c36abc5416d373b50d9bd297eefdced96a9d1744b5ab8c590ede",
+      "commons/maps/CA_SoftRules/final.md": "dcbae37be7e55f05736d046f422cdbfe020c13490f76c792b0d4f660aeea9ba2",
+      "commons/maps/CA_EdgeOfChaos/tutorial.md": "36f508960789c717db36c7112c578753e76ffdf3ec8e876b4078ca66bbd472f8",
+      "commons/maps/CA_EdgeOfChaos/final.md": "a38ab099c5e158ca3346a9516ed684dec079786c09d9671f095d0c63a8768214"
+    }
+  }
+}

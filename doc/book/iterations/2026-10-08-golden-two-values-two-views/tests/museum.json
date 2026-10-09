@@ -1,0 +1,242 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Both primary sources are installed",
+      "passed": true
+    },
+    {
+      "name": "Seven authored specimens remain",
+      "passed": true
+    },
+    {
+      "name": "Six original controls per desk plus three nearby controls",
+      "passed": true
+    },
+    {
+      "name": "Hand approach has floor and standing clearance",
+      "passed": true
+    },
+    {
+      "name": "Both points are reachable from one standing place",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-seeds",
+      "passed": true
+    },
+    {
+      "name": "Nearby NEXT reachable through desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby BACK reachable through desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby RESET reachable through desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby reset returns two seeds",
+      "passed": true
+    },
+    {
+      "name": "Museum pickup and contact reveal third term",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: one-sum",
+      "passed": true
+    },
+    {
+      "name": "Held contact stays a single request",
+      "passed": true
+    },
+    {
+      "name": "Release returns point and exposes1+2",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-views",
+      "passed": true
+    },
+    {
+      "name": "Hand and large desk agree at ten terms",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: large-log",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: large-linear",
+      "passed": true
+    },
+    {
+      "name": "HEIGHT keeps hand record and changes large height",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: unit-sum",
+      "passed": true
+    },
+    {
+      "name": "SUM reveals fixed-unit witness",
+      "passed": true
+    },
+    {
+      "name": "Primary edits preserve held secondary examples",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: added-rules",
+      "passed": true
+    },
+    {
+      "name": "Rectangle desk approach supported and clear",
+      "passed": true
+    },
+    {
+      "name": "Rectangle controls work through actual pointer",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rectangle",
+      "passed": true
+    },
+    {
+      "name": "Removing arc retains partition",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rectangle-no-arc",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: overview",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Exact printed code runs inside the museum",
+      "passed": true
+    },
+    {
+      "name": "Both authored portals validate",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "entry": {
+      "cage": false,
+      "cell": "(11, 1)",
+      "door": "(11.5, 0.05, 0.35)",
+      "landing": "(11.5, 0.05, 1.5)",
+      "marker": "(11.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cell": "(17, 36)",
+      "door": "(17.5, 0.05, 36.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(17.5, 0.05, 36.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "hand": [
+      13.6499996185303,
+      0.0,
+      6.5
+    ],
+    "rectangle": [
+      15.5,
+      0.0,
+      25.5
+    ],
+    "scope": "Actual Endless Museum with seven retained specimens. Original desk/rectangle controls through supplied desktop ray; XRTools pickup with supplied pose. Before image hides only the new table. Student image temporarily substitutes exact printed scripts. No physical headset or Quest performance claim.",
+    "source": [
+      11.5,
+      0.0,
+      12.5
+    ],
+    "works": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "fibonacci_sequences",
+      "golden_rectangle",
+      "the_recursion_cabinet",
+      "diffusion_limited_aggregation",
+      "dark_sphere",
+      "fibonacci_terrain",
+      "romanesco",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "exit_sign",
+      "exit_sign",
+      "wall_clock",
+      "whiteboard",
+      "electrical_panel",
+      "ceiling_vent",
+      "fire_hose_box"
+    ]
+  },
+  "passed": true,
+  "room": "Fractal_GoldenSpiral",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

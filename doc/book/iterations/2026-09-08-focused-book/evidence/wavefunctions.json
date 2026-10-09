@@ -1,0 +1,500 @@
+{
+  "sequence": "wavefunctions",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "WaveFunctions_Intro",
+      "primary_tokens": [
+        "control_pendulum"
+      ],
+      "question": "What makes a return become a rhythm?",
+      "ontology": "An oscillator moves around an equilibrium under a restoring influence. Position, direction of motion and phase distinguish states that can occupy the same place at different moments.",
+      "action": "Grasp the pendulum bob, move it away from its resting position, and release it. Watch several crossings of the centre. Repeat from the other side and compare the direction at the same position.",
+      "observable": "The bob turns back at the ends and passes through the centre in alternating directions. A larger displacement changes the swing; it does not simply define a new arbitrary tempo.",
+      "mechanism": "ControlPendulum uses an XRTools grabbable sphere, freezes its angular integration during grab, and takes the released position as its new angle. Its angular acceleration contains −(g/L)*sin(theta), and the default regime applies damping.",
+      "limit": "Equal positions can belong to opposite directions of travel, so a still picture misses part of the state. The familiar length-only period rule is a small-angle approximation; larger swings and damping matter.",
+      "variation": "Release from a small displacement and then a larger one, counting crossings rather than demanding a perfect metronome. A changed damping regime exists as configuration, not as a visitor control here.",
+      "prior_bridge": "Live previous room: FormFinding_Forge. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_Pendulum. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/control_pendulum/control_pendulum.gd :: grab/release handlers, _physics_process",
+        "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd :: _connect_pendulum"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Intro/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/control_pendulum/control_pendulum.tscn",
+        "commons/artifacts/control_pendulum/control_pendulum.gd",
+        "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Intro/map_data.json": "a8237ceb0c1c449e807302023262ed1aad6da0d3cc17702b76bc1c13a3e0c81c",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/artifacts/control_pendulum/control_pendulum.tscn": "06e3ef5bd28d3250d06bb9e034b3a6fa68abc0f6abc850bb0507c2575132fde1",
+        "commons/artifacts/control_pendulum/control_pendulum.gd": "3b9a0cdfa5be854ba23f1a69f3c444a71ca8cb62bebcdd1de31ccdd4666de021",
+        "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd": "e85d0a03c3b06baec89312261f61715656c09c7f021af5b7edcd6398d0987376"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            11
+          ],
+          "value": "control_pendulum:0:1.5:1"
+        }
+      ],
+      "cautions": "The cube searches only an explicit path or sibling ControlPendulum and has fallback animation. Do not claim the room’s separate placements are causally linked until runtime parentage is checked."
+    },
+    {
+      "room_id": "WaveFunctions_Pendulum",
+      "primary_tokens": [
+        "PendulumWave"
+      ],
+      "question": "How can a motion that keeps returning leave a line that keeps extending?",
+      "ontology": "A time trace assigns a separate spatial axis to elapsed history. The bob’s physical path and the record of that path are different constructions.",
+      "action": "Watch the pendulum and then follow its cyan trail away from the bob. Compare two successive swings in the receding record without trying to grab this particular demonstration.",
+      "observable": "The bob returns through familiar positions while older samples move away along the trail axis. The drawing retains a limited recent history, so its far end eventually disappears.",
+      "mechanism": "PendulumWave integrates angular acceleration=−(gravity/length)*sin(angle), velocity and angle each frame. It inserts a sample of the bob’s local X/Y at Z=0 and moves existing samples along negative Z by time_speed*delta; the history is capped at300 samples by default.",
+      "limit": "The depth of the trace is a visual encoding of time, not evidence that the pendulum travelled through that depth. The sample-count limit makes the retained duration depend on frame rate.",
+      "variation": "Choose one crossing and locate the next crossing in the trace. Ask how the reading would change if depth encoded speed instead of time; that remapping is a proposed variation, not an existing control.",
+      "prior_bridge": "Live previous room: WaveFunctions_Intro. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_Sine_Space. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd :: _process, _draw_trail"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Pendulum/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Pendulum/map_data.json": "f50e97e66d1530e35944fa0bba963af945ee44b4838b4c2f3b677ed8a579adbf",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn": "3619ae79399bae246899ad3c7dea6416e1e730aaf772f7e1fc08f6be58b0eaa0",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "6eec3080d5e25d8f6c037c4aa004f0ec182639c9f5274cc9590095703bc639d1"
+      },
+      "placements": [
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "value": "PendulumWave:90"
+        }
+      ],
+      "cautions": "No grab/length sliders exist in this scene; its header’s analytic damped cosine claim is not the actual nonlinear integration."
+    },
+    {
+      "room_id": "WaveFunctions_Sine_Space",
+      "primary_tokens": [
+        "sine_wall_corridor"
+      ],
+      "question": "What can your position reveal about a repeated change?",
+      "ontology": "A wave can be sampled over space as well as time. Phase shifts where the cycle is encountered, while amplitude and frequency shape the extent and repetition of the surface.",
+      "action": "Look along the two wave walls and compare near and distant crests. Move to another viewpoint and watch the slow animation while using a fixed feature as a reference.",
+      "observable": "The facing surfaces change their relationship along the corridor and over time. Their profiles contain several superposed sine contributions rather than one repeated rectangular unit.",
+      "mechanism": "SineWallCorridor generates sampled wall meshes from wave_layers, base frequency/amplitude, left-wall multipliers and phase_offset_between_walls. This scene overrides length8m,width2m,height4m, amplitude0.2, frequency5.2, animate_at_runtime=true and enable_collision=false.",
+      "limit": "A visible wall is not automatically a physical boundary. The continuous-looking surface is built from finite samples; its animation demonstrates a spatial mapping rather than a simulated material transferring forces.",
+      "variation": "Trace a crest with your eyes, then stay still and see whether the same feature comes to you. A phase-control dial or visible sample lattice would be a proposed room development.",
+      "prior_bridge": "Live previous room: WaveFunctions_Pendulum. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_Unit_Circle. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd :: _build_corridor, runtime phase animation",
+        "algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn :: dimensions/animation/collision overrides"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+        "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Sine_Space/map_data.json": "f3cfbaf96167676056741c4451d845919281fa448e615f2be25afeb975c80226",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn": "519cefad01563ab36cb543429a787920f839821b91e6e0ac237edf003739fc50",
+        "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd": "3123219826002fb48ecbc7c834eaafeff62a1800f93cdcdbb9f4e0e8cac47d91"
+      },
+      "placements": [
+        {
+          "cell": [
+            7,
+            3
+          ],
+          "value": "sine_wall_corridor:90"
+        }
+      ],
+      "cautions": "Do not call the walls collidable or promise a walk route between them until museum placement is measured. No live phase/frequency sliders."
+    },
+    {
+      "room_id": "WaveFunctions_Unit_Circle",
+      "primary_tokens": [
+        "unit_circle_advanced"
+      ],
+      "question": "How can going round a circle make a line that rises and falls?",
+      "ontology": "The sine and cosine of an angle are coordinate projections of a point moving round a unit circle. Unrolling angle along another axis makes a graph of those changing coordinates.",
+      "action": "Watch the rotating point and its projection rods as the adjacent wave is built. Compare the point at the top, side and bottom of the circle with the corresponding height of the emerging graph.",
+      "observable": "The vertical coordinate rises and falls while the point keeps circling. The horizontal and vertical projections reach their extremes at different angles.",
+      "mechanism": "UnitCircle._update_rotator_and_indicators evaluates radius*cos(angle) and radius*sin(angle); _process advances angle and adds bridge steps sampled from the selected correspondence. The build stops after configured num_cycles; it is not an endless animation.",
+      "limit": "The graph’s horizontal axis represents angle progression, not the circular point’s horizontal location. A finite sequence of planks approximates a continuous curve, and a visible bridge is not evidence that it is safe or accessible to walk.",
+      "variation": "Find a height occurring on both the rising and falling part of the cycle and identify what extra information separates those positions. A hand-scrubbed angle control would be a proposed extension.",
+      "prior_bridge": "Live previous room: WaveFunctions_Sine_Space. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_3D_Wave_Propagation. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/unit_circle/UnitCircle.gd :: _process, _update_rotator_and_indicators, _create_bridge_step",
+        "algorithms/wavefunctions/unit_circle/unit_circle.tscn :: samples_per_cycle=200"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+        "algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Unit_Circle/map_data.json": "5b5a017ec0721fc88724a0b1959ea42437d52d9cbbaa0e1b0838a4c862fb04d6",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/unit_circle/unit_circle.tscn": "7a28b60c1ddb8c336deebf6c6513b139bc54b812fe99c7f358dba6588d73347b",
+        "algorithms/wavefunctions/unit_circle/UnitCircle.gd": "8576c8db576aaf5c32bf9a68b9e0f95307b4edfdf48be2841f7b08787c38692f"
+      },
+      "placements": [
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "value": "unit_circle_advanced:-90:-0.1"
+        }
+      ],
+      "cautions": "Passive finite build may already be complete on arrival. Do not promise an angle slider or full path traversal."
+    },
+    {
+      "room_id": "WaveFunctions_3D_Wave_Propagation",
+      "primary_tokens": [
+        "coupled_oscillator_lattice"
+      ],
+      "question": "How can a disturbance travel while its parts stay near their places?",
+      "ontology": "A coupled medium consists of local states linked by forces depending on differences between neighbours. Propagation belongs to their relationship, not to a single ball crossing the grid.",
+      "action": "Choose one sphere near the centre and follow only its up-and-down motion. Then widen your attention to nearby spheres and compare when their displacements agree or oppose one another.",
+      "observable": "Each sphere remains at its grid position in the horizontal plane while vertical disturbances spread through coupled motion. The centre is continually driven in the default sine mode.",
+      "mechanism": "_update_oscillators calculates restoring force, damping and coupling_strength*(neighbour displacement−own displacement), then integrates all velocities/displacements after collecting forces. Default coupling_range1 includes diagonal neighbours as well as horizontal/vertical ones.",
+      "limit": "The medium is a finite discrete lattice with simplified springs and damping. It does not show matter travelling with the wave, and source code provides no live coupling-strength slider.",
+      "variation": "Follow an edge sphere and an interior sphere: the boundary has fewer neighbours. A disconnected or differently linked lattice would be a proposed configuration experiment, not a hand control.",
+      "prior_bridge": "Live previous room: WaveFunctions_Unit_Circle. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_Effect_Sound. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd :: _apply_excitation, _update_oscillators, _get_neighbors"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json": "67ff1fa30f881251fe98a854658b2dc9d90094589809b80da7b20e7b0010b32c",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn": "c64b890b2af79e91156a4b849ab5168d539ac37191f03610ee9ed9b03529dd0f",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd": "10f3a5d34c0dff66994eba9b4041a78cf2839bd795fee6dc9e606bccddccf384"
+      },
+      "placements": [
+        {
+          "cell": [
+            8,
+            13
+          ],
+          "value": "coupled_oscillator_lattice"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "WaveFunctions_Effect_Sound",
+      "primary_tokens": [
+        "DualBallFMController"
+      ],
+      "question": "Can one oscillation change the character of another?",
+      "ontology": "A carrier supplies a base oscillation; a modulator changes its phase. Frequency ratio, modulation depth and time envelopes shape the resulting sound.",
+      "action": "Move the carrier ball slightly to hear a triggered tone. Hold its frequency roughly fixed and move the modulator ball along the Mod Index axis, then compare a low and a high setting. Change one axis at a time.",
+      "observable": "The sound can change from relatively plain to more complex without needing a new recorded instrument. Modulator decay changes how that complexity changes during the note.",
+      "mechanism": "Two ValueMapper3D points map to carrier frequency/attack/decay and modulation ratio/index/decay. Movement beyond a threshold triggers a freshly generated sound with a0.3s minimum interval. Audio samples evaluate sin(carrier phase + decaying sinusoidal modulation) under attack/decay and saturation.",
+      "limit": "This is one synthesis method, not an explanation of all timbre. The visual colour cube encodes selected parameter values and is not a waveform. The default evidence mode shows no scope.",
+      "variation": "Try a setting that sounds unstable or metallic rather than imitating a named instrument. A scope comparing carrier, modulator and output exists as an authoring option, but is not necessarily enabled here.",
+      "prior_bridge": "Live previous room: WaveFunctions_3D_Wave_Propagation. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Wavefunctions_Bernini. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd :: _process, _on_carrier_changed, _on_modulator_changed, _generate_fm_sound",
+        "commons/interfaces/value_mapper_3d.gd :: coordinate mapping"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd",
+        "commons/interfaces/value_mapper_3d.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Effect_Sound/map_data.json": "54d63a50832fea182e71ac07e7c38325e1714c0a8833088100a25ead537bac74",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn": "feb402bf92a8db7542242df4ed753f207bbc17bc01ef028a4e310a91bfeae2a1",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd": "af0623b3047d8ed0ddffbd2d03e5923e5713d03c0bde1495a2e61f75925585f7",
+        "commons/interfaces/value_mapper_3d.gd": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            5
+          ],
+          "value": "DualBallFMController"
+        }
+      ],
+      "cautions": "Preset methods are not wired to visible buttons in this scene. Do not promise preset controls or a continuous drone from one held position."
+    },
+    {
+      "room_id": "Wavefunctions_Bernini",
+      "primary_tokens": [
+        "bernini_columns"
+      ],
+      "question": "Can a shape keep the rhythm of a movement without travelling along it?",
+      "ontology": "A helix combines circular coordinates with height. A periodic function can define a shape over space instead of commanding movement over time.",
+      "action": "Look up one twisting shaft and follow a ridge through a turn. Move around the column and compare the ridge’s relation to its vertical axis; then compare the repeated columns as an arrangement.",
+      "observable": "The shaft changes direction around its axis as height increases. The columns also rotate slowly, letting you distinguish an already-twisted shape from the separate motion of that shape.",
+      "mechanism": "BerniniColumns.create_spiral_column samples a procedural shaft using radial and height segments, spiral density and sine/cosine modulation. The default plan generates a3x3 set; _process rotates each RotatingRoot while leaving bases in place and generates an organ-like audio stream.",
+      "limit": "A procedural spiral is not a full account of a historical building, its materials or meanings. The emitted sound accompanies the form; the visitor is not directly playing the column by touching it.",
+      "variation": "Compare the rotation you can watch with the twist you can trace when focusing on a single instant. A two-column threshold or ring arrangement exists as a map configuration choice, not a visitor switch.",
+      "prior_bridge": "Live previous room: WaveFunctions_Effect_Sound. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_John_Cage. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd :: _generate_grid_positions, create_spiral_column, _process",
+        "algorithms/wavefunctions/berninicolumns/BerniniScene.tscn :: script on child BerniniColumns"
+      ],
+      "source_files": [
+        "commons/maps/Wavefunctions_Bernini/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+        "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Wavefunctions_Bernini/map_data.json": "5f711c76a0d6cb050e5e6b5a4333a457cf0e2b587bfa8b29724007810afa0b53",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/berninicolumns/BerniniScene.tscn": "161f06997505a3a6967f5f07eb685a1d0f5a7e5cdb3f88bb5fc67c07b0b2d780",
+        "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd": "6f4250f3122886dec4209849c358cc456e95345aa814d89606712d34ccb3bca0"
+      },
+      "placements": [
+        {
+          "cell": [
+            7,
+            6
+          ],
+          "value": "bernini_columns"
+        }
+      ],
+      "cautions": "Do not state a historical attribution or cultural conclusion beyond the scene’s inspired-by framing. Actual museum scale and clearances unverified."
+    },
+    {
+      "room_id": "WaveFunctions_John_Cage",
+      "primary_tokens": [
+        "john_cage_tech_noir"
+      ],
+      "question": "What remains composed when the next event is left to chance?",
+      "ontology": "A generative soundscape combines a chosen vocabulary with rules selecting and scheduling events. Random choice operates inside authored limits.",
+      "action": "Listen long enough to distinguish the continuous drone from intermittent effects. Count a few entrances without expecting a repeating beat, then attend to the intervals between them.",
+      "observable": "A continuous background persists while different effects appear at varying times and levels. Variation occurs within a recognizable collection of kinds of sound.",
+      "mechanism": "The generator prepares drone/city ambience and variations of seven named effect types in a background thread, then schedules playback from the prepared collection. Visual orbs respond to audio amplitude; default chance=none concerns their fixed visual colouring, not absence of randomness in the sound.",
+      "limit": "The title does not make this a performance of a particular John Cage score. Chance does not choose its own vocabulary: the program’s effect list and scheduling ranges determine what can occur. No runtime composition control is offered.",
+      "variation": "Listen once for recognizable events and once for their gaps. A score that admits sounds outside this vocabulary would be a proposed extension, not something the generator already records from the room.",
+      "prior_bridge": "Live previous room: Wavefunctions_Bernini. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_AirMusic. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd :: sound_types, generation thread, play_random_effect, update_visualizers"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_John_Cage/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_John_Cage/map_data.json": "0739c54571993372d4e69382c4c770fd888ca96a0b8985d4335f28040bf64fc8",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn": "41ec2f0773937c8cefcac3a34b2214f9a500f904b7aaa9e03c7def48f75a9d00",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd": "2d8a26574a1826ed0a412dc8ee002b754f66e8b4af2ceff6d23670579a3ab715"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            12
+          ],
+          "value": "john_cage_tech_noir:90"
+        }
+      ],
+      "cautions": "Audio players are AudioStreamPlayer rather than spatial3D emitters; do not promise moving around changes the mix by source proximity. Loading is asynchronous; hearing depends on completion/audio access."
+    },
+    {
+      "room_id": "WaveFunctions_AirMusic",
+      "primary_tokens": [
+        "resonating_metallophone"
+      ],
+      "question": "What does a strike set in motion, and what decides the note you hear?",
+      "ontology": "An excitation starts a decaying oscillation. This instrument associates each bar with a selected frequency and makes the tuning visible through bar length.",
+      "action": "Take the supplied striking stick and hit one bar; listen as the sound fades. Strike a longer and a shorter bar, then let two notes overlap and compare the combined visual trace.",
+      "observable": "Different bars sound at different pitches; one strike produces a tone that continues and decays after contact. Overlapping strikes coexist rather than waiting for each other.",
+      "mechanism": "ResonatingMetallophone builds bars from a tuning frequency list, sizes length proportional to1/sqrt(f), and creates a grabbable stick. ResonatingBar handles strike contact, initiates synthesized vibration and reports it to the combined visualizer.",
+      "limit": "The frequency is assigned by the tuning table; it is not discovered by a full material simulation. The current pentatonic selection is one musical choice, not a law saying every combination is harmonious for every listener.",
+      "variation": "Repeat one note against another instead of moving neatly up the scale. A different tuning can be authored through configuration, but no live tuning selector is promised.",
+      "prior_bridge": "Live previous room: WaveFunctions_John_Cage. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Wavefunctions_Sky_Stairs. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd :: _create_bars, _bar_length, _create_stick, _create_visualizer",
+        "algorithms/wavefunctions/resonance/ResonatingBar.gd :: strike and vibration implementation"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_AirMusic/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+        "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd",
+        "algorithms/wavefunctions/resonance/ResonatingBar.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_AirMusic/map_data.json": "817e1106532d1c61f37a66c0795d9da5fb42b66b4fe0ebd54927f5b783cbd87f",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/resonance/resonating_metallophone.tscn": "437bc14aa866a68a48ca25d99befcbfd028dc737550ab1c2e431e24b673dcf14",
+        "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd": "73c9421248539a6c08b7654a30ad686c70da99acbd0b0b83109ea4a430e2a0c5",
+        "algorithms/wavefunctions/resonance/ResonatingBar.gd": "0569e683dd6ebd9b70c19cae75e0b34591fa517e2abb41849bf4faca32832506"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            9
+          ],
+          "value": "resonating_metallophone"
+        }
+      ],
+      "cautions": "ResonatingBar body_entered delegates to _on_body_hit and _trigger_resonance; live physics contact and audio require runtime validation."
+    },
+    {
+      "room_id": "Wavefunctions_Sky_Stairs",
+      "primary_tokens": [
+        "sine_cylinder_staircase"
+      ],
+      "question": "When does a sampled curve become a route a body can use?",
+      "ontology": "A parametric path supplies ordered positions; a staircase adds tread surfaces and connections that make those positions potentially traversable. Mathematical continuity and bodily access are different requirements.",
+      "action": "Follow the sequence of treads with your eyes from its lower end, comparing one step to the next. Where an accessible tread is available, compare its direction with the next rise; do not assume the entire spiral has a verified route.",
+      "observable": "The stair combines repeated angular change with increasing height and an oscillating radius. Its steps are separate pieces; the default membrane provision adds surfaces between facing tread edges.",
+      "mechanism": "_compute_samples generates modulated polar positions, converted to Cartesian coordinates. _build orients each tread radially/tangentially and connects neighbouring roots according to provision. The scene sets STEP_RISE0.11 and WAVE_AMPLITUDE0.45.",
+      "limit": "A smooth formula does not guarantee comfortable steps, headroom or a reachable entrance. Finite treads and their connecting geometry determine what the walker actually experiences.",
+      "variation": "Identify a gap or turn that would matter to someone using a different stride or mobility aid. A rail/post/no-membrane configuration changes how the route presents support; these are authoring choices awaiting a walk test.",
+      "prior_bridge": "Live previous room: WaveFunctions_AirMusic. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_TrigWalkingPath. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd :: _compute_samples, _build, provision",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn :: step rise/amplitude"
+      ],
+      "source_files": [
+        "commons/maps/Wavefunctions_Sky_Stairs/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Wavefunctions_Sky_Stairs/map_data.json": "fa69aaa3878574874e44185b9d303705270a1b6b3c300c5e3ca66b8db5a6c6e5",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn": "bcef12ae91474933022e8c402354c5038f5dfb89a6d952b9999e027ebb23c02a",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd": "cacf3e99ffd5b5412770b740b77f74f627ba4dc1c2fd6de6b71bcc87707d6877"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            10
+          ],
+          "value": "sine_cylinder_staircase:0:-2.5"
+        }
+      ],
+      "cautions": "Full climb unverified; do not promise a traversable climb as completed evidence. Header’s formula is simplified; read actual _compute_samples for final mechanism wording."
+    },
+    {
+      "room_id": "WaveFunctions_TrigWalkingPath",
+      "primary_tokens": [
+        "beat_frequency_demo"
+      ],
+      "question": "How can two quick repetitions produce one slow pulse?",
+      "ontology": "Superposition adds oscillations point by point. When their frequencies are close, their changing phase relationship produces a slowly varying envelope.",
+      "action": "Use the two frequency sliders to bring A and B close together. Watch the A+B row grow and shrink, then reduce the frequency difference further while keeping both waves moving.",
+      "observable": "The individual rows keep oscillating quickly while their combination changes strength more slowly. Equal frequencies remove the slow beating in this initially aligned model.",
+      "mechanism": "_animate_spheres evaluates sine(freqA*TAU*time+spatial phase) and sine(freqB*TAU*time+spatial phase). The displayed sum is multiplied by0.5 to fit the row; the label shows abs(freqA−freqB). There is no audio generator in this demonstration.",
+      "limit": "The slow envelope is not a third independent oscillator. The display rescales the sum, and finite samples can make fast movement hard to read. It does not establish that every difference between two things behaves as a beat.",
+      "variation": "Try a slightly unequal pair before an equal one and compare what disappears. A phase-offset control would reveal more cases at equal frequency, but the current panel only controls the two frequencies.",
+      "prior_bridge": "Live previous room: Wavefunctions_Sky_Stairs. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: WaveFunctions_Synthesis_Lab. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd :: _animate_spheres, _create_controls, _update_beat_label"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json": "8b8bd9dd3b8e2501fcae3d0356fac5eb673efcc886daced7b4234173f911c672",
+        "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn": "7d8a28bcd4d131efc084ca5591feb7cc8242bb4616d4fb500ee5d7e18797270c",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd": "5e2dd9bdddcdf48d36a05850142b12532582ea72f0006558aa9035136fa5dd01"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            5
+          ],
+          "value": "beat_frequency_demo:0:-0.5"
+        }
+      ],
+      "cautions": "Despite identity text saying hear/see, this scene is visual only. Other spatial routes in the room remain secondary for this first chapter."
+    },
+    {
+      "room_id": "WaveFunctions_Synthesis_Lab",
+      "primary_tokens": [
+        "additive_wave_demo"
+      ],
+      "question": "How much complexity can you make from five simple contributions?",
+      "ontology": "Additive synthesis forms a waveform by summing components. Each harmonic has an integer multiple of a fundamental frequency and an independently chosen amplitude.",
+      "action": "The room opens with a sawtooth approximation already assembled. Lower the higher-harmonic sliders to leave the first harmonic alone, then raise one again. Watch its component line and the combined curve. Add another, then reduce the first contribution and compare what remains.",
+      "observable": "One slider changes one component, but the total shape changes throughout its cycle. The displayed formula records the amplitudes making the current sum.",
+      "mechanism": "AdditiveWaveDemo connects five scene sliders to harmonic_amplitudes. It renders 256 points of the sum of amplitudes times sin(n*phase) and separate component rows. This map overrides waveform to sawtooth and leaves components=ladder; preset methods are configuration/programmatic, not confirmed buttons.",
+      "limit": "Five harmonics approximate only a limited set of shapes. A sharp-looking square or sawtooth approximation still has smooth transitions and truncation effects; the apparatus does not claim every arbitrary signal is exactly represented by these five controls.",
+      "variation": "Build an unnamed waveform rather than matching a preset. Remove a component you thought was minor and see where its absence becomes visible. More harmonics or independent phases would be proposed extensions.",
+      "prior_bridge": "Live previous room: WaveFunctions_TrigWalkingPath. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Definition. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.gd :: _setup_sliders, _draw_combined_wave, _draw_component_waves, set_preset",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.tscn :: five slider instances"
+      ],
+      "source_files": [
+        "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json": "cdfa59ee9707ebfc4a2a55a3f1e6d9b55c49b93f0bb64a11ac25a4e3749099f6",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.tscn": "fbeb6280b086c2966d707ee1b60bc57d8385dca4774e945f74c4e468d88d78f5",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.gd": "59c50df054fd2a4b0f2c20a69075080cc25b893de003785537badb817da3b980"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            6
+          ],
+          "value": "additive_wave_demo:0:0.5#waveform:sawtooth"
+        }
+      ],
+      "cautions": "The model is visual and does not generate audio. Fundamental slider controls first-harmonic amplitude, not base_frequency; write it accordingly."
+    }
+  ]
+}

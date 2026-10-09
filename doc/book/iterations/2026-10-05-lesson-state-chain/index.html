@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The point continues — Ada</title><style>
+:root{color-scheme:light;--paper:#f5f3ee;--ink:#252525;--muted:#636260;--line:#d5d1c8;--accent:#915266}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}
+header,main,footer{max-width:1120px;margin:auto;padding:2rem}header{padding-top:4rem}h1{font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-.055em;line-height:1.07;margin:.6rem 0 1.2rem}h2{font-size:1.6rem;line-height:1.3;letter-spacing:-.025em}h3{font-size:1.05rem}p{max-width:74ch}.eyebrow{font:12px/1.5 system-ui;letter-spacing:.17em;text-transform:uppercase;color:var(--accent)}.lead{font-size:1.2rem;max-width:65ch}
+a{color:var(--accent);text-underline-offset:3px}nav{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.5rem}nav a{font-size:.88rem}.chain{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0 0 3rem}.card{border-top:3px solid var(--accent);background:#fffdf9;padding:1.4rem}.card p{font-size:.92rem}.number{color:var(--accent);font-size:.8rem}.tree{font-size:.8rem!important;background:transparent!important;padding:0!important}
+section{scroll-margin-top:1rem;margin-bottom:3.5rem}.reading{max-width:760px;margin:auto}.reading>h1{font-size:2.2rem}.reading h2{font-size:1.4rem;margin-top:2.4rem}.reading p{line-height:1.85}.reading pre{margin:1.4rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e9e7e1;padding:1.2rem;border-radius:3px;font:14px/1.6 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.92em}details{border-top:1px solid var(--line);padding:1rem 0}summary{cursor:pointer;font-weight:600}table{border-collapse:collapse;width:100%;font-size:.88rem;margin:1.5rem 0}td,th{border-bottom:1px solid var(--line);padding:.65rem;text-align:left;vertical-align:top}.result{border-left:3px solid #49745d;padding:.7rem 1.2rem;background:#edf0e9}.note{color:var(--muted);font-size:.9rem}.separator{border:0;border-top:1px solid var(--line);margin:3rem 0}.technical{max-width:850px;margin:auto}.fail{border-left:3px solid #b3694c;padding:.7rem 1.2rem;background:#f1e9e2}footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:760px){header,main,footer{padding:1.3rem}.chain{grid-template-columns:1fr}.card{padding:1rem}}
+@media print{nav,details{display:none}body{background:white}.chain{break-inside:avoid}.reading{max-width:none}a{color:inherit}pre{break-inside:avoid}}
+</style></head><body><header><div class="eyebrow">Ada · Tutorial continuation pilot · 5 October 2026</div>
+<h1>The point continues.</h1><p class="lead">We already made its surface and boundary. Now we give the same point to the hand. The lesson shows the change; the test keeps the whole lineage.</p>
+<nav><a href="#reading">Read the short lesson</a><a href="#tests">See what was tested</a><a href="#brief">Compressed brief</a><a href="REPORT.md">Report</a><a href="../../course/functional_text/RECONSTRUCTION.md">Writing guide</a></nav></header><main>
+<div class="chain"><div class="card"><span class="number">01 / BRING</span><h2>The existing point</h2><p>A visible sphere and its matching static boundary. Their size and position are inherited.</p><pre class="tree">Station
+├ Visible sphere
+└ Static body
+  └ Collider</pre><a href="incoming.gd">Incoming file</a></div>
+<div class="card"><span class="number">02 / CHANGE</span><h2>Three edits</h2><p>Change the body class. Set pickup and release conditions. Attach the existing surface to that body.</p><p>No second sphere. No repeated material construction.</p><a href="tutorial.md">Printed instructions</a></div>
+<div class="card"><span class="number">03 / CARRY</span><h2>One moving point</h2><p>The surface and boundary travel together. Release leaves them in place.</p><pre class="tree">Station
+└ Pickable body
+  ├ Collider
+  └ Visible sphere</pre><a href="assembled.gd">Mechanically assembled output</a></div></div>
+<section id="reading" class="reading"><h1>Continue with the point</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickable body</li>
+<li>Parent and child movement</li>
+<li>Pickup and release</li>
+</ul>
+<p>Continue with the solid point from Point One. Its surface and collision shape already exist. Keep their size, material and position. We will change what your hand can do with this point.</p>
+<p>The prepared museum supplies the XR hand and its pickup function. Your code makes the point available to that hand.</p>
+<p>For this pilot, edit <a href="incoming.gd">incoming.gd</a>, attached to a <code>Node3D</code> station in a working copy with the museum's configured XR player. It collects Point One's small solid-point construction into one file. <code>body</code> refers to its visible mesh; <code>solid</code> refers to its physics body. Both are local variables inside <code>_ready()</code>. Keep these changes in that function.</p>
+<h2>Give the existing boundary pickup behaviour</h2>
+<p>Replace this line:</p>
+<pre><code class="language-gdscript">var solid := StaticBody3D.new()
+</code></pre>
+<p>with:</p>
+<pre><code class="language-gdscript">var solid := XRToolsPickable.new()
+</code></pre>
+<p><code>XRToolsPickable</code> is the toolkit's physics body with pickup behaviour. The existing collision shape still belongs to <code>solid</code>. You do not make another sphere or write a hand-tracking loop.</p>
+<p>Immediately after its position assignment, add the settings below:</p>
+<pre><code class="language-gdscript">solid.position = centre
+solid.freeze = true
+solid.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+solid.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+solid.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+solid.collision_layer = 4
+solid.collision_mask = 196615
+</code></pre>
+<p>The first three added lines keep the point still while waiting and after release. Kinematic freezing lets the grab driver move it. <code>RangedMethod.NONE</code> requires the hand to come close. The last two lines use the museum's supplied collision settings: layer 3 for pickable objects, with the existing mask for their collisions.</p>
+<p>These assignments must run before <code>add_child(solid)</code>. When the body enters the scene tree, XR Tools remembers its collision settings for release.</p>
+<h2>Make the surface travel with the boundary</h2>
+<p>At the end of the construction, add one line after the existing <code>add_child(solid)</code>:</p>
+<pre><code class="language-gdscript">add_child(solid)
+body.reparent(solid)
+</code></pre>
+<p>Point One placed the surface and physics body separately. <code>reparent</code> moves the existing surface under <code>solid</code> in the scene tree. Both nodes are already in the tree, so this call keeps the surface's world position. It does not jump or make a copy. When the hand moves <code>solid</code>, its surface and collider move together.</p>
+<p>Run the working copy. Bring your hand close, grab, move and release. The sphere follows your hand and stays where you leave it.</p>
+<h2>Check what changed</h2>
+<p>Predict what would happen without the <code>reparent</code> line. Try it, then restore it. Which part moves, and which part stays?</p>
+<p>Choose a different value for <code>RADIUS</code>, using what Point One taught. Predict what will change. Check that the surface and boundary still agree while held. No second sphere-construction example is needed here: you are extending the same one.</p>
+<p>Carry this changed code forward. The next part of Coordinates can use the same moving point to examine local and world positions. This pilot ends at pickup and release; it has not connected the museum's coordinate readouts to this fixture.</p><details><summary>Full inherited code — reference only</summary><pre># incoming.gd
+# Source-bound fixture ASSEMBLED from Point One&#x27;s small solid-point construction.
+# Assumed incoming learner state, not a recovered learner portfolio or museum file.
+extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+func _ready() -&gt; void:
+	var radius := RADIUS
+	var centre := CENTRE
+	var body := MeshInstance3D.new()
+	body.name = &quot;VisiblePoint&quot;
+	var sphere := SphereMesh.new()
+	sphere.radius = radius
+	sphere.height = radius * 2.0
+	sphere.radial_segments = 48
+	sphere.rings = 24
+	body.mesh = sphere
+	body.material_override = material(Color(0.97, 0.97, 0.95))
+	body.position = centre
+	add_child(body)
+	var solid := StaticBody3D.new()
+	solid.name = &quot;PointCollision&quot;
+	solid.position = centre
+	var collider := CollisionShape3D.new()
+	var sphere_shape := SphereShape3D.new()
+	sphere_shape.radius = radius
+	collider.shape = sphere_shape
+	solid.add_child(collider)
+	add_child(solid)
+
+func material(colour: Color) -&gt; StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = colour
+	mat.roughness = 0.32
+	return mat
+</pre></details><details><summary>Full result — inherited code plus the printed edits</summary><pre># incoming.gd
+# Source-bound fixture ASSEMBLED from Point One&#x27;s small solid-point construction.
+# Assumed incoming learner state, not a recovered learner portfolio or museum file.
+extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+func _ready() -&gt; void:
+	var radius := RADIUS
+	var centre := CENTRE
+	var body := MeshInstance3D.new()
+	body.name = &quot;VisiblePoint&quot;
+	var sphere := SphereMesh.new()
+	sphere.radius = radius
+	sphere.height = radius * 2.0
+	sphere.radial_segments = 48
+	sphere.rings = 24
+	body.mesh = sphere
+	body.material_override = material(Color(0.97, 0.97, 0.95))
+	body.position = centre
+	add_child(body)
+	var solid := XRToolsPickable.new()
+	solid.name = &quot;PointCollision&quot;
+	solid.position = centre
+	solid.freeze = true
+	solid.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	solid.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+	solid.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	solid.collision_layer = 4
+	solid.collision_mask = 196615
+	var collider := CollisionShape3D.new()
+	var sphere_shape := SphereShape3D.new()
+	sphere_shape.radius = radius
+	collider.shape = sphere_shape
+	solid.add_child(collider)
+	add_child(solid)
+	body.reparent(solid)
+
+func material(colour: Color) -&gt; StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = colour
+	mat.roughness = 0.32
+	return mat
+</pre></details></section>
+<hr class="separator"><section id="tests" class="technical"><div class="eyebrow">Evidence, with its limits</div><h2>Test the continuation.</h2><p class="result"><strong>62 native checks passed.</strong> The executed code was generated from the incoming file and the printed edits. No repaired solution was substituted.</p>
+<div class="fail"><strong>The deliberate omission was caught.</strong><p>Without <code>body.reparent(solid)</code>, the collider follows the hand while the visible sphere stays behind. This version compiles, but fails four of the same behaviour checks.</p></div>
+<p class="note">The incoming file is an explicit assumption assembled from Point One's lesson and source. That lesson currently edits an existing museum script; this test does not yet establish that a learner can produce the complete incoming file from it. Real XR Tools code ran with a synthetic controller. Headset input, museum integration and learner understanding remain untested.</p>
+<nav><a href="check-report.json">Lesson check</a><a href="report-runtime.json">Native evidence</a><a href="contract.json">Contract</a><a href="next-input.json">Carry into the next lesson</a></nav>
+<details><summary>All native checks</summary><table><thead><tr><th>Case</th><th>Claim tested</th><th>Result</th></tr></thead><tbody><tr><td>radius_014/incoming/siblings</td><td>Visible mesh and static body are siblings under the station.</td><td>Pass</td></tr><tr><td>radius_014/incoming/minimal_state</td><td>The incoming point has one visible mesh and one separate physics boundary.</td><td>Pass</td></tr><tr><td>radius_014/incoming/not_pickable</td><td>Incoming StaticBody3D has no pickup behavior.</td><td>Pass</td></tr><tr><td>radius_014/incoming/alignment</td><td>The independent visual and physical constructions share one centre and orientation.</td><td>Pass</td></tr><tr><td>radius_014/incoming/geometry</td><td>Mesh and collider use the same incoming radius.</td><td>Pass</td></tr><tr><td>radius_014/incoming/white_material</td><td>Point One&#x27;s white material is retained in the source-bound fixture.</td><td>Pass</td></tr><tr><td>radius_014/incoming/no_grab_candidate</td><td>A controller at the incoming static point cannot select it for pickup.</td><td>Pass</td></tr><tr><td>radius_014/incoming/no_grab</td><td>The pickup library holds nothing when no point is eligible.</td><td>Pass</td></tr><tr><td>radius_014/incoming/physical_boundary</td><td>The incoming static boundary participates in native physics queries.</td><td>Pass</td></tr><tr><td>radius_014/incoming/does_not_follow</td><td>The incoming mesh and boundary stay fixed when the nearby controller moves.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/components</td><td>The existing visible mesh and sphere collider remain present.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/mesh_parent</td><td>The existing visible mesh is now a child of the pickable collision body.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/no_duplicate_point</td><td>The delta creates no second visible point or second collider.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/pose_preserved</td><td>Reparenting preserves Point One&#x27;s visual and collider world pose under a translated, rotated station.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/appearance_and_geometry_preserved</td><td>The lesson delta preserves radius, surface geometry, collider size and white material.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/near_and_frozen</td><td>The point starts frozen, uses near grabbing and freezes after release (ReleaseMode.FROZEN = 1).</td><td>Pass</td></tr><tr><td>radius_014/outgoing/settings_before_ready</td><td>XR Tools cached the intended layers before entering the scene tree.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/outside</td><td>The point begins outside the real near-grab overlap detector.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/near_eligible</td><td>Actual Area3D overlap makes the point eligible for the real pickup library.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/disabled_not_eligible</td><td>Disabling the same point removes it from pickup selection.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held</td><td>XR Tools holds the existing point collision body.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held_layer</td><td>The held body uses the XR Tools held-object layer.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held_body_follows</td><td>The real grab driver moves the pickable body by the controller displacement.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held_collider_follows</td><td>The original collider follows the same held-body displacement.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held_mesh_follows</td><td>The original visible mesh follows the held body and collider.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/held_alignment</td><td>Visible and physical sphere remain aligned while held.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/same_instances</td><td>Pickup and movement retain the original mesh node, collider node and their resources.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/released</td><td>Library release clears the grab.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/release_restores</td><td>Release freezes the point and restores the configured collision settings.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/released_alignment</td><td>Visible and physical boundaries stay together after release.</td><td>Pass</td></tr><tr><td>radius_014/outgoing/release_stays</td><td>The released point, visual and collider stay where they were left while the controller moves away.</td><td>Pass</td></tr><tr><td>radius_030/incoming/siblings</td><td>Visible mesh and static body are siblings under the station.</td><td>Pass</td></tr><tr><td>radius_030/incoming/minimal_state</td><td>The incoming point has one visible mesh and one separate physics boundary.</td><td>Pass</td></tr><tr><td>radius_030/incoming/not_pickable</td><td>Incoming StaticBody3D has no pickup behavior.</td><td>Pass</td></tr><tr><td>radius_030/incoming/alignment</td><td>The independent visual and physical constructions share one centre and orientation.</td><td>Pass</td></tr><tr><td>radius_030/incoming/geometry</td><td>Mesh and collider use the same incoming radius.</td><td>Pass</td></tr><tr><td>radius_030/incoming/white_material</td><td>Point One&#x27;s white material is retained in the source-bound fixture.</td><td>Pass</td></tr><tr><td>radius_030/incoming/no_grab_candidate</td><td>A controller at the incoming static point cannot select it for pickup.</td><td>Pass</td></tr><tr><td>radius_030/incoming/no_grab</td><td>The pickup library holds nothing when no point is eligible.</td><td>Pass</td></tr><tr><td>radius_030/incoming/physical_boundary</td><td>The incoming static boundary participates in native physics queries.</td><td>Pass</td></tr><tr><td>radius_030/incoming/does_not_follow</td><td>The incoming mesh and boundary stay fixed when the nearby controller moves.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/components</td><td>The existing visible mesh and sphere collider remain present.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/mesh_parent</td><td>The existing visible mesh is now a child of the pickable collision body.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/no_duplicate_point</td><td>The delta creates no second visible point or second collider.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/pose_preserved</td><td>Reparenting preserves Point One&#x27;s visual and collider world pose under a translated, rotated station.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/appearance_and_geometry_preserved</td><td>The lesson delta preserves radius, surface geometry, collider size and white material.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/near_and_frozen</td><td>The point starts frozen, uses near grabbing and freezes after release (ReleaseMode.FROZEN = 1).</td><td>Pass</td></tr><tr><td>radius_030/outgoing/settings_before_ready</td><td>XR Tools cached the intended layers before entering the scene tree.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/outside</td><td>The point begins outside the real near-grab overlap detector.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/near_eligible</td><td>Actual Area3D overlap makes the point eligible for the real pickup library.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/disabled_not_eligible</td><td>Disabling the same point removes it from pickup selection.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held</td><td>XR Tools holds the existing point collision body.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held_layer</td><td>The held body uses the XR Tools held-object layer.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held_body_follows</td><td>The real grab driver moves the pickable body by the controller displacement.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held_collider_follows</td><td>The original collider follows the same held-body displacement.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held_mesh_follows</td><td>The original visible mesh follows the held body and collider.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/held_alignment</td><td>Visible and physical sphere remain aligned while held.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/same_instances</td><td>Pickup and movement retain the original mesh node, collider node and their resources.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/released</td><td>Library release clears the grab.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/release_restores</td><td>Release freezes the point and restores the configured collision settings.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/released_alignment</td><td>Visible and physical boundaries stay together after release.</td><td>Pass</td></tr><tr><td>radius_030/outgoing/release_stays</td><td>The released point, visual and collider stay where they were left while the controller moves away.</td><td>Pass</td></tr></tbody></table></details>
+<details><summary>Method, provenance and reproduction</summary><h1>The point continues</h1>
+<p>5 October 2026. One continuation pilot: Point One → Point Coordinates, pickup and release only.</p>
+<p>The student continues the same point. Its sphere, material and matching collider are inherited. The new lesson prints three edits: change the physics body class; add its pickup settings; reparent the existing visible surface. Full files remain available outside the lesson's reading flow.</p>
+<h2>What the test establishes</h2>
+<ol>
+<li><code>incoming.gd</code> records the assumed student state and pins its source evidence.</li>
+<li><code>contract.json</code> contains exact edits printed in <code>tutorial.md</code>.</li>
+<li><code>prepare_lesson.py</code> mechanically applies those edits. A missing or ambiguous anchor fails; no solution is filled in behind the lesson.</li>
+<li>Godot runs <code>assembled.gd</code> with a private copy of the actual XR Tools library.</li>
+<li>The generated output is available as the next lesson's incoming code, with an exact hash in <code>next-input.json</code>.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Printed edits assemble the saved outgoing code</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>Native behaviour</td>
+<td>62/62 checks pass</td>
+</tr>
+<tr>
+<td>Missing reparent line</td>
+<td>Rejected by four expected checks</td>
+</tr>
+<tr>
+<td>Incoming source, lesson, contract, output and verifier freshness</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>Learner explanation and transfer</td>
+<td>Not tested</td>
+</tr>
+<tr>
+<td>Physical headset and museum integration</td>
+<td>Not tested</td>
+</tr>
+</tbody>
+</table>
+<p>The native checks cover radii 0.14 and 0.30, a translated and rotated station, preserved geometry/material/world placement, real near-grab overlap, disabled pickup, movement of both surface and boundary, retained node/resource identity, and stationary release. They bypass hardware input with a synthetic controller. Runtime code and addon files were unchanged.</p>
+<h2>The useful failure</h2>
+<p>Point One makes the visible mesh and static collision body siblings. Merely replacing <code>StaticBody3D</code> with <code>XRToolsPickable</code> can move the boundary without its visible sphere. Omitting <code>body.reparent(solid)</code> compiles but fails the same behaviour contract: the body and collider move while the surface stays. This tests a causal step, not just whether code parses.</p>
+<h2>What remains an assumption</h2>
+<p>The incoming ghost is an explicit reconstruction of what Point One assumes the learner has built. Point One currently provides edits to an existing museum script, so this pilot does not yet prove that its incoming source can be produced from that lesson alone. Source material supplies the names, subdivision settings and material helper; their presence is not evidence that the student has mastered them.</p>
+<p>An exact patch assembler cannot judge ambiguous prose. A fresh reader still needs to apply the instructions, and a learner needs to predict, explain and make a variation. The files are reproducible evidence of this bounded transition, not a certificate for the entire Coordinates tutorial or the book.</p>
+<h2>Reproduce</h2>
+<p>From the repository root:</p>
+<pre><code class="language-text">python doc/book/iterations/2026-10-05-lesson-state-chain/prepare_lesson.py
+python doc/book/iterations/2026-10-05-lesson-state-chain/run_checks.py
+python doc/book/iterations/2026-10-05-lesson-state-chain/build_review.py
+python -m unittest discover -s doc/book/course/functional_text -p test_reconstruction.py
+</code></pre>
+<p>The runner uses the installed Godot executable, overridable with <code>GODOT_EXE</code>; the report renderer requires Python Markdown. Only the private fixture project runs. Lesson/source changes require a fresh test before the report can pass again. The 22 checker tests include omitted printed edits, ambiguous anchors, stale input, manually changed output and incomplete runtime evidence.</p>
+<p>The canonical museum tutorials and <code>final.md</code> were not revised by this pilot. The durable writing guide now says: <strong>complete lineage, minimal new change</strong>.</p></details></section>
+<section id="brief" class="technical"><h2>The short brief stays short.</h2><pre>MAKE: Existing point: grab, carry, release in place.
+BRING: Point One state: sphere surface + matching static boundary.
+GIVEN: Museum XR hand; pickup library; collision settings.
+BUILD: Swap body class; configure pickup; parent existing surface.
+CHECK: Same shape/place; surface and boundary follow; release stays.
+LATER: Grip alignment; actions; coordinate readouts.
+</pre><p>The brief selects what to teach. Its attached contract identifies the incoming code, exact edits and test evidence. Compression keeps the teaching choice visible; the files retain the detail needed to check it.</p></section>
+</main><footer>Point One → Point Coordinates · Pickup/release only. The canonical tutorials, museum runtime and reflective texts were not revised by this pilot.</footer></body></html>

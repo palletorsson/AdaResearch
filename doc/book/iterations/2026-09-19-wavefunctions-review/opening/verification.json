@@ -1,0 +1,70 @@
+{
+  "owned_source_files": 3,
+  "behavioral_fix": "UnitCircle local projection-rod orientation",
+  "map_files_edited_by_subagent": 0,
+  "placements_preserved": {
+    "WaveFunctions_Intro": 21,
+    "WaveFunctions_Pendulum": 10,
+    "WaveFunctions_Sine_Space": 5,
+    "WaveFunctions_Unit_Circle": 6
+  },
+  "runs": [
+    {
+      "run": "unit-transform-before",
+      "checks": 0,
+      "failures": 0,
+      "returncode": 1,
+      "source_stable": true,
+      "script_errors": false,
+      "native_crash": true,
+      "max_rod_center_error_m": null
+    },
+    {
+      "run": "unit-transform-baseline",
+      "checks": 12,
+      "failures": 5,
+      "returncode": 1,
+      "source_stable": true,
+      "script_errors": false,
+      "native_crash": false,
+      "max_rod_center_error_m": 12.1053771972656
+    },
+    {
+      "run": "unit-transform-replay",
+      "checks": 102,
+      "failures": 51,
+      "returncode": 1,
+      "source_stable": true,
+      "script_errors": false,
+      "native_crash": false,
+      "max_rod_center_error_m": 13.2947359085083
+    },
+    {
+      "run": "unit-transform-after",
+      "checks": 102,
+      "failures": 0,
+      "returncode": 0,
+      "source_stable": true,
+      "script_errors": false,
+      "native_crash": false,
+      "max_rod_center_error_m": 0.0
+    }
+  ],
+  "new_gpu_runs": 0,
+  "new_museum_runs": 0,
+  "headset_tested": false,
+  "source_change_verification": [
+    {
+      "path": "commons/artifacts/control_pendulum/control_pendulum.gd",
+      "comments_only": true
+    },
+    {
+      "path": "algorithms/wavefunctions/unit_circle/UnitCircle.gd",
+      "comments_only": false
+    },
+    {
+      "path": "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd",
+      "comments_only": true
+    }
+  ]
+}

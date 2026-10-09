@@ -1,0 +1,332 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpeculativeComputation_Situated_Computation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SpeculativeComputation_Situated_Computation">← Tutorial lineage</a></p><h1>SpeculativeComputation Situated Computation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SpeculativeComputation_Situated_Computation/final.md">Raw captured source</a></p><pre># Four verdicts about the same subject
+
+What changes when the subject stays the same but the source of the judgement changes?
+
+&lt;!-- @situated_readout --&gt;
+
+Begin with FOOTNOTE on the four inward-facing panels. Read the subject identifier on each. Keep it fixed in your comparison, then note the verdict, the confidence and the small address below. Look back at the first panel after reading the others: it has not become a different subject because another description is available.
+
+A small four-legged creature hunts among the readouts. When it reaches you it bites, and enough bites restart the hall. The panels do not direct it, and their confidence numbers do not describe its behaviour. Keep it in view while you read.
+
+SUBJECT #4729 appears as ORDERLY, CREATIVE, DANGEROUS or IRRELEVANT across the four positions. The associated percentages differ too. The room makes a judgement’s location visible instead of presenting one description as if it came from nowhere.
+
+The source makes the operation inspectable:
+
+```gdscript
+var pos := global_position
+var key := _resolve_quadrant_key(pos)
+var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS[&quot;NW&quot;])
+
+_verdict_label.text = verdict.label
+_verdict_label.modulate = verdict.color
+_confidence_label.text = &quot;confidence %d%%&quot; % int(verdict.confidence * 100.0)
+_footer_label.text = &quot;view from %s (%.1f, %.1f)&quot; % [key, pos.x, pos.z]
+```
+
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
+
+These are four authored readouts. Each panel retains the verdict assigned to it; your movement changes which panel you read. The percentages are supplied examples, not calibrated probabilities calculated from evidence about a real person. A high number in this room therefore cannot establish that its description is more trustworthy than a lower number.
+
+Stay with DANGEROUS. Read its 92%, then press COVER. A strip lies across the address. The verdict and the number remain. Has the claim become easier to accept, or harder to ask about? Press FOOTNOTE to uncover the place it was speaking from. Nothing new has been learned about the subject.
+
+Now press WITNESS. The panel acquires a marked base, a height rule and an eye above it. Walk to its side. This eye has no sensor; it is part of the frame. Does giving the claim a visible body make you trust it more? Its 92% has still earned no additional evidence. Return to FOOTNOTE and take that suspicion to another panel.
+
+Separate four parts of a claim: the subject, what is asserted, how certain the speaker appears, and the conditions under which the assertion was produced. Keeping the subject constant helps expose changes in the other parts. It does not imply that all four predicates have the same meaning or answer the same question.
+
+Choose DANGEROUS and ask what evidence would make that judgement accountable. Dangerous to whom, under which circumstances, and according to what consequence? Then apply an equally precise question to CREATIVE. A favourable word also needs criteria; situatedness is not a licence to stop checking an appealing claim.
+
+For the room’s next experiment, each panel could reveal a distinct criterion and the observation it used. A visitor could then compare disagreement caused by different evidence with disagreement caused by different definitions. The current four views supply the scaffold for that comparison.
+
+The creature is still hunting. Keep the two encounters distinguishable: an assigned judgement on a screen, and a rule that acts on a body. What would we need to observe before calling either one dangerous?
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+&lt;!-- @museum_witnesses --&gt;
+
+The room you just crossed returns on five monitors. Pink cameras A and B wait beside its readouts. Pick one up and turn it. A third camera stays fixed. A fourth screen receives the first camera&#x27;s image late. On the fifth, HOLD keeps a frame while the museum continues.
+
+Compare the times beneath them. The earlier image can look as immediate as the present one. Keep it. Aim camera A somewhere else and release it; the camera stays where you leave it. The held frame now belongs to somewhere you are no longer looking, but its address stays with it.
+
+Gilligan&#x27;s distributed moving images offer a way to keep these partial accounts beside one another. Here every view comes from this museum. Sharing an image does not give us the position from which it was seen. Before agreeing about what happened, we may need to agree about which moment we are seeing.
+
+&lt;!-- @ --&gt;
+
+Collective knowledge asks how contributions from different positions can become a common object without losing the evidence and disagreement that make it revisable.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SpeculativeComputation_Situated_Computation/tutorial.md">Raw captured source</a></p><pre># Which part of a judgement tells you where it came from?
+
+The conflict room asked for sources. Here the source travels visibly with the verdict.
+
+&lt;!-- @situated_readout --&gt;
+
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
+
+Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
+
+Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
+
+The source makes the operation inspectable:
+
+```gdscript
+var pos := global_position
+var key := _resolve_quadrant_key(pos)
+var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS[&quot;NW&quot;])
+
+_verdict_label.text = verdict.label
+_verdict_label.modulate = verdict.color
+_confidence_label.text = &quot;confidence %d%%&quot; % int(verdict.confidence * 100.0)
+_footer_label.text = &quot;view from %s (%.1f, %.1f)&quot; % [key, pos.x, pos.z]
+```
+
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
+
+[Implementation](../../../commons/artifacts/situated_readout/situated_readout.gd). This is an excerpt from the artifact, not a standalone program.
+
+A visible address makes a claim easier to question, but cannot make it correct. ORDERLY and CREATIVE are not logical negations; they could both describe someone under different criteria. DANGEROUS demands an account of danger to whom and in what circumstances. Even an agreeable label needs evidence. The room&#x27;s productive limit is the gap between displaying a standpoint and exposing the method that produced its judgement.
+
+&lt;!-- @ --&gt;
+
+Keeping viewpoints visible is different from combining their contributions into a common object.
+
+## Next experiment — not yet a visitor control
+
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Return: The room arrives late
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses loop, trace, array, situation. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`witness`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Study and making notes](/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html). The display stays fixed while its data, words or images change. RESET returns the original comparison.
+
+&lt;!-- study-edit:museum_witnesses --&gt;
+
+### One source change: The room arrives late
+
+Change the initial delay from 3.0 to 1.0 and reload. D stays blank until enough frames exist. Compare A and D using their exposure times; then HOLD E and change VIEWPOINT. The first edit uses the clock and retained state. The supplied SubViewport cameras share the current museum World3D; the bounded image buffer is a close-reading extension, not a prerequisite for the edit.
+
+```gdscript
+var delay_seconds := 1.0
+```
+
+Source: `commons/artifacts/spine_studies/museum_witnesses.gd`. Use the prepared scene to run and compare.
+
+&lt;!-- study-reference:museum_witnesses --&gt;
+
+### Reference and scope
+
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
+
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
+
+&lt;!-- witness-portable-cameras --&gt;
+
+### Take a view
+
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
+
+The camera follows the physical body&#x27;s transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SpeculativeComputation_Situated_Computation/technical.md">Raw captured source</a></p><pre># Locate the claim — implementation and encounter
+
+The primary artifact is `situated_readout`. Its [scene](../../../commons/artifacts/situated_readout/situated_readout.tscn) and [implementation](../../../commons/artifacts/situated_readout/situated_readout.gd) supply the behaviour described here.
+
+This follows the merge encounter&#x27;s question about preserving sources. Four placements retain their explicit `#verdict:NW`, NE, SW and SE keys and cells. They face inward and use full scale, `#interactive:true` and `#address:footnote`. The primary comparison is still between four authored entries, not four sensor measurements.
+
+The ADDRESS panel exposes FOOTNOTE, COVER (`erasure`) and WITNESS. Only the address presentation changes: the subject, verdict, supplied confidence and station transform remain fixed. The explicit key takes precedence over the position hash. Moving a configured panel and repopulating it updates the numeric footer without changing its verdict. Walking the player around does not update a classification.
+
+Interactive panels put their centre at 1.25 m and draw four readable text quads from the existing Label3D values. The erasure strip remains physically in front of the footer. WITNESS retains the existing symbolic eye, station plate and height marks; it measures nothing. Controls sit to the side of the reading. Stage geometry rebuilds independently of the console and children added by the museum. Unconfigured placements retain the passive 0.85 m panel centre and original labels. Parallax and survey remain author-configurable variants; they are not added to this hall&#x27;s controls.
+
+
+## Operation to read after the encounter
+
+```gdscript
+var pos := global_position
+var key := _resolve_quadrant_key(pos)
+var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS[&quot;NW&quot;])
+
+_verdict_label.text = verdict.label
+_verdict_label.modulate = verdict.color
+_confidence_label.text = &quot;confidence %d%%&quot; % int(verdict.confidence * 100.0)
+_footer_label.text = &quot;view from %s (%.1f, %.1f)&quot; % [key, pos.x, pos.z]
+```
+
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
+
+## What to compare
+
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
+
+Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
+
+## Limits and next test
+
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
+
+Controlled runtime checks cover the four assigned claims, presentation changes, selected reach and walking routes. Headset readability, comfort, Quest performance and learner understanding remain open. The supporting spider is paused only in the private geometry probe; its live behaviour is unchanged. Existing supporting artifacts stay in the map; primary status identifies the book&#x27;s encounter, not the only permitted content.
+
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Situated_Computation/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
+
+The grid exit at (4,9) previously had a zero floor cell beneath its teleporter; it now has continuous floor. An arrival marker and local decoration exclusions reserve approach and reading space. The creature remains at its original cell with detection 14.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Installed application: The room arrives late
+
+`museum_witnesses` occupies a new adjoining bay, after the existing encounters. Cell [11, 20], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/witness.tscn`. Original response to Melanie Gilligan; no claim of exact reconstruction.
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Reuses loop, trace, array, situation; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-reference:museum_witnesses --&gt;
+
+### Reference and scope
+
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
+
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
+
+
+&lt;!-- witness-runtime --&gt;
+
+### Actual museum images
+
+Three 384 × 216 SubViewports share the resident museum World3D and face its existing SituatedReadout objects. No duplicate hall or private set is rendered. Four requested exposures per second; achieved rate depends on runtime performance. The last two monitors reuse camera A. D retains actual earlier images; E retains the exposure and address selected with HOLD. The buffer is bounded at 30 images (about 9.5 MiB for RGBA8 frames); the viewport textures and displayed copies are additional. Initial delay is 3 seconds, with 1 / 3 / 6 seconds available. Timestamps are seconds since this game process started.
+
+The screens occupy a camera-excluded visual layer, avoiding recursive screen rendering. Capture pauses outside 23 metres or when source readouts are unavailable. Resuming after a gap clears the delay buffer. Changing the viewpoint preserves an explicitly held image and its earlier source address. These are views of the resident hall, not a promise to stream unloaded distant halls. Physical XR and Quest frame budgets have not been tested.
+
+&lt;!-- witness-portable-cameras --&gt;
+
+### Take a view
+
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
+
+The camera follows the physical body&#x27;s transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SpeculativeComputation_Situated_Computation/intent.md">Raw captured source</a></p><pre>Concept: Haraway&#x27;s situated knowledge as a design constraint on computation — objectivity as the careful accounting of which perspective a system occupies rather than as the absence of perspective. Three viewing platforms render the same dataset differently, and the differences are the argument.
+Sequence role: Fourth map in the Post-Foundations Crisis sequence. Follows SpeculativeComputation_Paraconsistent_Engineering, which turned contradiction into load-bearing infrastructure; leads to SpeculativeComputation_Collective_Knowledge, which turns standpoint into a shared condition rather than a solitary one.
+Technical angle: Three viewing platforms — ground-level, aerial, and a slanted local-community vantage — render a shared dataset differently even though the underlying coordinates, heights, and distances are constant. An annotation bench lets the learner mark what each view shows and what each view hides, and the annotations combine into a running account that reads as partial and located rather than universal. A second station trains a small classifier from a chosen standpoint and makes the standpoint visible in the output labels.
+Critical angle: The map replaces the view from nowhere with an explicit account of where the view is coming from. Situated knowledge, locatable knowledge, accountable knowledge — Haraway&#x27;s vocabulary is treated as a set of design obligations rather than as a political slogan, and the map asks what it takes to build systems that satisfy those obligations.
+Key artifacts: the three viewing platforms carry the standpoint mechanism; the annotation bench carries the accounting practice; the classifier station makes the chosen standpoint legible in the model&#x27;s outputs.
+
+Gap: No gap identified.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Installed application: The room arrives late
+
+`museum_witnesses` occupies a new adjoining bay, after the existing encounters. Cell [11, 20], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/witness.tscn`. Original response to Melanie Gilligan; no claim of exact reconstruction.
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Reuses loop, trace, array, situation; adds no prerequisite node. The display and main-player controls are supplied.
+
+&lt;!-- witness-portable-cameras --&gt;
+
+### Take a view
+
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
+
+The camera follows the physical body&#x27;s transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SpeculativeComputation_Situated_Computation/critical.md">Raw captured source</a></p><pre># Which part of a judgement tells you where it came from?
+
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
+
+Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
+
+A visible address makes a claim easier to question, but cannot make it correct. ORDERLY and CREATIVE are not logical negations; they could both describe someone under different criteria. DANGEROUS demands an account of danger to whom and in what circumstances. Even an agreeable label needs evidence. The room&#x27;s productive limit is the gap between displaying a standpoint and exposing the method that produced its judgement.
+
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
+
+The material comparison is specific: four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
+
+Keeping viewpoints visible is different from combining their contributions into a common object.
+
+## A question the next version can test
+
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Situated_Computation/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Installed application: The room arrives late
+
+Gilligan&#x27;s distributed moving images offer a way to keep these partial accounts beside one another. Here every view comes from this museum. Sharing an image does not give us the position from which it was seen. Before agreeing about what happened, we may need to agree about which moment we are seeing.
+
+
+&lt;!-- study-reference:museum_witnesses --&gt;
+
+### Reference and scope
+
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
+
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SpeculativeComputation_Situated_Computation/artifacts.md">Raw captured source</a></p><pre># Situated Computation — current artifacts
+
+Five placements represent two artifact kinds. The four readouts remain the primary book encounter; the spider is a supporting encounter moved here for later development.
+
+| Role | Artifact | Source cell (x,z) | Work in the hall |
+| --- | --- | --- | --- |
+| Primary | `situated_readout` with `verdict:NW` | 2,2 | An explicitly assigned account of SUBJECT #4729. |
+| Primary | `situated_readout` with `verdict:NE` | 7,2 | A second authored verdict about the same subject. |
+| Primary | `situated_readout` with `verdict:SW` | 2,7 | A third authored verdict about the same subject. |
+| Primary | `situated_readout` with `verdict:SE` | 7,7 | A fourth authored verdict about the same subject. |
+| Secondary | `head_crab:180#detection:14` | 7,5 | Roaming spider relocated from Trans_Introduction on 2026-09-17. |
+
+The spider starts on level floor without a plinth, east of the central passage. It retains its existing movement and bite configuration and can leave its starting cell. The panels neither classify nor control it. A future developed encounter can compare a stated judgement with the observations and selection rules that make an agent act; the current placement does not implement a learned classifier.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Installed application: The room arrives late
+
+`museum_witnesses` occupies a new adjoining bay, after the existing encounters. Cell [11, 20], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/witness.tscn`. Original response to Melanie Gilligan; no claim of exact reconstruction.
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Reuses loop, trace, array, situation; adds no prerequisite node. The display and main-player controls are supplied.
+
+&lt;!-- witness-portable-cameras --&gt;
+
+### Take a view
+
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
+
+The camera follows the physical body&#x27;s transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SpeculativeComputation_Situated_Computation/summary.md">Raw captured source</a></p><pre># Locate the claim
+
+Which part of a judgement tells you where it came from?
+
+The conflict room asked for sources. Here the source travels visibly with the verdict.
+
+Primary: `situated_readout`.
+
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
+
+Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
+
+Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
+
+Keeping viewpoints visible is different from combining their contributions into a common object.
+
+
+&lt;!-- study-spine:museum_witnesses --&gt;
+
+## Installed application: The room arrives late
+
+`museum_witnesses` occupies a new adjoining bay, after the existing encounters. Cell [11, 20], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/witness.tscn`. Original response to Melanie Gilligan; no claim of exact reconstruction.
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Reuses loop, trace, array, situation; adds no prerequisite node. The display and main-player controls are supplied.
+
+&lt;!-- witness-portable-cameras --&gt;
+
+### Take a view
+
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
+
+The camera follows the physical body&#x27;s transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SpeculativeComputation_Situated_Computation/blurb.md">Raw captured source</a></p><pre>One subject. Four verdicts. Cover the address beneath DANGEROUS: the number stays certain, but where has its speaker gone?
+</pre></section></body></html>

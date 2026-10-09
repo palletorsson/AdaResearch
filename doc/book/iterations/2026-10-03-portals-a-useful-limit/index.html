@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Portals — how close is useful?</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the lesson</a><a href="#code">Complete code</a><a href="#scope">Lineage and scope</a><a href="#checked">Checks</a><a href="../2026-10-03-primitives-a-rule-for-positions/index.html#reading">Previous: Primitives</a></nav><p>ADA / TUTORIAL PILOT / 3 OCTOBER 2026</p></header>
+<article id="reading"><h1>Portals — how close is useful?</h1>
+<p>The sphere became rounder as we added divisions. How many would be enough for something we want to make?</p>
+<p>Open <code>primitive_portals.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>. A pink hexagon sits inside a grey circle guide. This is a reduced version of the planar comparison beside the museum's rings.</p>
+<figure><a href="sides-6.png"><img src="sides-6.png" alt="Pink hexagon inside a grey circular guide in the running student room, with perimeter and tolerance readouts."></a><figcaption>Six segments. A closed line, measured from the same positions used to draw it.</figcaption></figure><h2>1. Follow the closed line</h2>
+<p>Open <code>studies/primitive_portals/perimeter.gd</code>. A supplied sampler gives us six positions equally spaced around a circle of radius one metre. They are in order; the first position is not repeated at the end.</p>
+<p>We reuse the segment from Lines. To measure the whole boundary, we add the distances between neighbours, then close the line:</p>
+<pre><code class="language-gdscript">func polygon_perimeter(positions: Array[Vector3]) -&gt; float:
+    var total := 0.0
+    for i in range(positions.size() - 1):
+        total += positions[i].distance_to(positions[i + 1])
+    total += positions[positions.size() - 1].distance_to(positions[0])
+    return total
+</code></pre>
+<p>The loop measures all but the closing edge. The next line measures from the last position back to the first. Together they make the <strong>perimeter</strong>. This function takes a list and returns a number; it does not change the list or draw anything.</p>
+<p>The hexagon's perimeter is about six metres. The corresponding circle's circumference is about 6.283185 metres. The straight edges take a shorter route.</p>
+<h2>2. Add sides</h2>
+<p>Find the settings:</p>
+<pre><code class="language-gdscript">var divisions := 6
+var radius := 1.0
+var tolerance := 0.01
+</code></pre>
+<p>Change <code>divisions</code> to <code>12</code>, then <code>24</code>, then <code>48</code>, running the scene after each edit. Keep the radius fixed. Watch the corners become less visible and the measured shortfall decrease. Walk closer when a corner becomes hard to see.</p>
+<p>Each doubling uses twice as many segments. More detail has a construction cost, though a segment count alone does not tell us the frame rate.</p>
+<p>The grey guide stays at 256 segments throughout. It is another finite drawing, not the exact circle against which the number is calculated.</p>
+<div class="pair"><figure><a href="sides-12.png"><img src="sides-12.png" alt="Twelve-sided polygon approaching the fixed grey guide."></a><figcaption>12 sides. The straight edges remain visible.</figcaption></figure><figure><a href="sides-24.png"><img src="sides-24.png" alt="Twenty-four-sided polygon with a smaller gap to the guide."></a><figcaption>24 sides. Closer, but outside the chosen 0.01 m tolerance.</figcaption></figure></div><h2>3. Choose what counts as enough</h2>
+<p>The script compares the measured perimeter with the circumference formula:</p>
+<pre><code class="language-gdscript">    var circle_length := TAU * radius
+    gap = circle_length - perimeter
+</code></pre>
+<p><code>TAU</code> is Godot's approximation to 2π. The gap is a difference between total lengths, in metres. It is not the visible distance from a pink edge to the grey guide.</p>
+<p>A <strong>tolerance</strong> is the difference we agree to accept. The supplied readout says <em>within tolerance</em> when <code>gap &lt;= tolerance</code>. With <code>0.01</code>, 48 sides is the first of our four trials to pass.</p>
+<p>Keep 48 sides and change the tolerance to <code>0.001</code>. Run again. The same polygon now falls outside the requirement. We changed the decision, not the geometry.</p>
+<div class="pair"><figure><a href="sides-48.png"><img src="sides-48.png" alt="Forty-eight-sided polygon marked within tolerance at 0.01 metre."></a><figcaption>48 sides / tolerance 0.01 m. The comparison passes.</figcaption></figure><figure><a href="tighter-tolerance.png"><img src="tighter-tolerance.png" alt="Identical forty-eight-sided polygon marked outside tolerance at 0.001 metre."></a><figcaption>Same positions / tolerance 0.001 m. The requirement changes.</figcaption></figure></div><p>In exact geometry, these polygons approach the circle without becoming it. The displayed numbers also have limited precision. Neither a pleasing outline nor a passing comparison makes the construction exact.</p>
+<p>The sampler and display are supplied, with their source included. You own the perimeter calculation and the settings. The museum's torus ladder and halving track give other ways to encounter a limit; this study measures neither their surfaces nor their motion.</p>
+<p>We can now give a construction a purpose and a stopping criterion. Melencolia gathers these tools and asks what we want to do with them.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></p><p class="small">Open primitive_portals.tscn with Run Current Scene. Click an image for its full native render.</p></article>
+<details id="code"><summary>perimeter.gd · the complete lesson</summary><div><p>The learner computes a closed boundary length from an ordered list. CircleSamples supplies points; PolygonDisplay supplies segments, a fixed 256-segment reference and readouts. Their sources are included in the starter. All lesson objects are created in code with direct references.</p><pre><code>extends Node3D
+
+const CircleSamples = preload(&quot;res://prepared/circle_samples.gd&quot;)
+const PolygonDisplay = preload(&quot;res://prepared/polygon_measure_display.gd&quot;)
+
+var divisions := 6
+var radius := 1.0
+var tolerance := 0.01
+var points: Array[Vector3] = []
+var perimeter := 0.0
+var gap := 0.0
+var display := PolygonDisplay.new()
+
+func _ready():
+    points = CircleSamples.points_on_circle(divisions, radius)
+    perimeter = polygon_perimeter(points)
+    var circle_length := TAU * radius
+    gap = circle_length - perimeter
+    add_child(display)
+    display.show_polygon(points, radius, perimeter, gap, tolerance)
+
+func polygon_perimeter(positions: Array[Vector3]) -&gt; float:
+    var total := 0.0
+    for i in range(positions.size() - 1):
+        total += positions[i].distance_to(positions[i + 1])
+    total += positions[positions.size() - 1].distance_to(positions[0])
+    return total
+</code></pre><p><a href="perimeter.gd" download>Complete script</a> · <a href="tutorial.md">Tutorial source</a> · <a href="tutorial.diff">Text diff</a></p></div></details>
+<details id="scope"><summary>A short application, with a deliberate stopping criterion</summary><div><p>Lines taught distance, Trace taught traversal, and Primitives introduced a function returning data. Portals combines them in a list-to-number function. The new distinction is between more detail and enough detail for a stated requirement.</p><p>The grey guide is finite. The circumference number uses TAU × radius; it is not measured from that guide. The gap is a difference of boundary lengths, not maximum spatial error, torus accuracy, or frame time. These moderate counts do not stage floating-point saturation.</p><p>The <a href="../../../../commons/maps/Primitives_Portals/technical.md">museum's technical account</a> describes the separate planar instrument, rings and halving track. The previous tutorial introduced additional topics, including portal velocity, that were not implementations of these placed rings. It is preserved as an <a href="../../../../commons/maps/Primitives_Portals/tutorial-previous.md">archived previous draft</a>, not the current hall instructions.</p><p>No critical text or museum placement was edited. Trigonometric derivation, topology and automatic refinement are deferred. Next: Melencolia, an arrangement made from known forms. Coordinates still needs its earlier shared-starter pass. <a href="lesson-contract.json">Teaching contract</a> · <a href="DECISIONS.md">Decisions</a></p></div></details>
+<details id="checked"><summary>35 native checks passed</summary><div><p>Fresh ZIP import; actual printed parameter edits; fixed radius; comparison against the independent chord formula; closing-edge accounting on a 3–4–5 triangle; input preservation; translation and scale checks; tolerance change without a geometry change; bounded redraw; construction on a bare Node3D.</p><p>The images are actual Godot 4.6 student-room renders. No new input system was added. Physical headset use and beginner comprehension remain untested.</p><p><a href="verification.json">Results</a> · <a href="verify.gd">Reproducible harness</a> · <a href="package-verification.json">Download checks</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

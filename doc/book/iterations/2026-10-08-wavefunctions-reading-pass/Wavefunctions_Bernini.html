@@ -1,0 +1,250 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07. Bernini</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}
+.reading{max-width:900px;margin:auto}.reading article{margin:32px 0}
+.chapter{scroll-margin-top:20px}.chapter>h2{border-top:2px solid #809289;padding-top:28px}
+.thread{font:15px/1.6 system-ui;background:#e2ebe7;padding:16px;max-width:none}
+.parallel article>h1{font-size:30px}.parallel{align-items:start}
+.toc{columns:3;column-gap:32px}.toc a{display:block;margin-bottom:12px;break-inside:avoid}
+.interlude{border-top:2px solid #809289;margin-top:3em;padding-top:2em}
+.pictures{margin:28px 0}.pictures img{aspect-ratio:16/10;object-fit:cover}
+details{margin:20px 0}summary{cursor:pointer;font:16px system-ui}pre{tab-size:4}
+@media(max-width:950px){.toc{columns:1}.parallel article>h1{font-size:26px}}
+@media print{.chapter{break-before:page}.reading article{break-inside:auto}details{display:none}}
+</style><header><div class="tag">Endless Museum · Wavefunctions · Reading pass</div><h1>07. Bernini</h1><nav><a href="index.html">Sequence & changes</a><a href="tutorial.html">Whole tutorial</a><a href="final.html">Whole reflection</a><a href="wavefunctions-readings.zip">Download texts & code</a></nav></header><main><nav><a href="WaveFunctions_Effect_Sound.html">← Effect Sound</a><a href="WaveFunctions_John_Cage.html">Cage →</a></nav><p class="thread">Spatial composition · A turn remains in the form when whole-object rotation stops.</p><div class="parallel"><article><div class="tag">Tutorial · build and investigate</div><h1>Bernini — a turn through height</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Sampling an oval profile in rings.</li>
+<li>Giving each ring an angle according to its height.</li>
+<li>Connecting neighbouring rings with triangle faces.</li>
+<li>Separating stored geometry from whole-object rotation.</li>
+</ul>
+<p>Walk between the museum's columns. Follow one ridge upward. Then keep your gaze at one height while the shaft turns past it. You are following two changes: one through height, the other through time.</p>
+<p>Effect Sound put one sine inside another's phase. Here we return to Unit Circle's coordinates and Primitives' connected faces. A rising sequence of angles becomes a shape. We will build a small shaft beside the existing installation, using an oval profile so its orientation is easy to see.</p>
+<h2>Carry the point as a control</h2>
+<p>Keep <code>point_body.gd</code> and <code>line_skin.gd</code> unchanged. The same black sphere now selects the amount of twist. Its trigger starts or stops rotation of the finished shaft. The pink line follows the same numbered corner up through the rings.</p>
+<p>In your prepared museum working copy, attach <code>07_twisted_shaft.gd</code> to an empty, unit-scale <code>Node3D</code> at hall-local <code>(5, 0, 10)</code>, yaw 180 degrees, in the entrance study bay. Keep the three files together. The museum supplies floor, camera, light, player and XR input routing. The script creates the shaft, its low base, control and label. The shaft and base are visual studies without collision; the carried sphere retains its pickup collider.</p>
+<p>Start with the shaft still. Lower the sphere to local height 0.8 metres: the profiles line up. Raise it to 1.2 metres: they make half a turn over the shaft's height. At 1.6 metres they make one turn. Movement beyond those heights is clamped. Press the trigger while holding the sphere. Watch the whole shaft rotate, then press again. The twist remains when rotation stops.</p>
+<h2>Complete program</h2>
+<p>Only the main script is new. The two carried files are printed below it and included in the download.</p>
+<!-- student-code:07_twisted_shaft.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+@export var height := 2.4
+@export var sides := 8
+@export var spans := 16
+@export var radii := Vector2(0.40, 0.20)
+@export var angular_speed := 0.4
+var turns := 0.5
+var running := false
+var points: Array[Vector3] = []
+var faces: Array[Vector3i] = []
+var shaft := Node3D.new()
+var surface := MeshInstance3D.new()
+var point: PointBody
+var label: Label3D
+var witness: Array[MeshInstance3D] = []
+
+func ring_position(row: int, corner: int) -&gt; Vector3:
+    var u := float(row) / spans
+    var angle := TAU * corner / sides
+    var profile := Vector3(radii.x * cos(angle), 0, radii.y * sin(angle))
+    return profile.rotated(Vector3.UP, TAU * turns * u) + Vector3(0, 0.25 + height * u, 0)
+
+func turns_from_height() -&gt; float:
+    return clampf((point.position.y - 0.8) / 0.8, 0.0, 1.0)
+
+func _ready() -&gt; void:
+    add_child(shaft)
+    shaft.add_child(surface)
+    var ivory := StandardMaterial3D.new()
+    ivory.albedo_color = Color(0.91, 0.89, 0.84)
+    ivory.roughness = 0.55
+    surface.material_override = ivory
+    var base := MeshInstance3D.new()
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.55
+    cylinder.bottom_radius = 0.55
+    cylinder.height = 0.25
+    base.mesh = cylinder
+    base.position.y = 0.125
+    base.material_override = ivory
+    add_child(base)
+    for row in range(spans):
+        var line := LineSkin.new()
+        shaft.add_child(line)
+        witness.append(line)
+    point = PointBody.new()
+    point.position = Vector3(1.1, 1.2, 0.4)
+    var black := StandardMaterial3D.new()
+    black.albedo_color = Color(0.025, 0.025, 0.03)
+    black.roughness = 0.18
+    point.get_child(0).material_override = black
+    add_child(point)
+    point.action_pressed.connect(toggle_rotation)
+    label = Label3D.new()
+    label.position = Vector3(0.5, 3.0, 0)
+    label.font_size = 28
+    label.pixel_size = 0.004
+    add_child(label)
+    turns = turns_from_height()
+    rebuild()
+    draw_label()
+
+func rebuild() -&gt; void:
+    points.clear()
+    faces.clear()
+    for row in range(spans + 1):
+        for corner in range(sides):
+            points.append(ring_position(row, corner))
+    for row in range(spans):
+        for corner in range(sides):
+            var next := (corner + 1) % sides
+            var a := row * sides + corner
+            var b := row * sides + next
+            var c := a + sides
+            var d := b + sides
+            faces.append(Vector3i(a, b, c))
+            faces.append(Vector3i(b, d, c))
+    var bottom := points.size()
+    points.append(Vector3(0, 0.25, 0))
+    var top := points.size()
+    points.append(Vector3(0, 0.25 + height, 0))
+    for corner in range(sides):
+        var next := (corner + 1) % sides
+        faces.append(Vector3i(bottom, next, corner))
+        faces.append(Vector3i(top, spans * sides + corner, spans * sides + next))
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    builder.set_smooth_group(-1)
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            builder.add_vertex(points[index])
+    builder.generate_normals()
+    surface.mesh = builder.commit()
+    for row in range(spans):
+        var a := points[row * sides]
+        var b := points[(row + 1) * sides]
+        witness[row].show_segment(a, b - a, a.distance_to(b))
+
+func toggle_rotation(_held: Variant) -&gt; void:
+    running = not running
+    draw_label()
+
+func _process(delta: float) -&gt; void:
+    var selected := turns_from_height()
+    if absf(selected - turns) &gt; 0.002:
+        turns = selected
+        rebuild()
+    if running:
+        shaft.rotate_y(angular_speed * delta)
+    draw_label()
+
+func draw_label() -&gt; void:
+    label.text = &quot;LIFT: %.2f turns through height\nTRIGGER: whole-object rotation %s&quot; % [turns, &quot;ON&quot; if running else &quot;OFF&quot;]
+</code></pre>
+<h2>Read the shape</h2>
+<p>In <code>ring_position</code>, <code>corner</code> goes around one profile; <code>row</code> moves up the shaft. Dividing the row by <code>spans</code> gives <code>u</code>, from zero at the bottom to one at the top. The height is <code>0.25 + height * u</code>: the first quarter metre belongs to the base.</p>
+<p>Cosine supplies X and sine supplies Z, as in Unit Circle, now on a horizontal plane. The unequal radii, 0.40 and 0.20 metres, make an oval. We rotate that profile around Y by <code>TAU * turns * u</code>. At half height, the angle is half the total turn. This multiplication has no clock in it. With the default half-turn, corner zero begins at <code>(0.40, 0.25, 0)</code>, passes through <code>(0, 1.45, -0.40)</code> and ends at <code>(-0.40, 2.65, 0)</code>.</p>
+<p>A perfectly circular cross-section has no preferred orientation. Merely rotating such a section about its centre cannot give its ideal outline a visible twist. Our oval makes the operation legible. The larger museum columns also move their ring centres and vary their radius. This small study isolates one part of their construction; it does not reproduce every feature or an historical building.</p>
+<h2>Connect the rings</h2>
+<p>Eight corners on each of seventeen rings give 136 positions. Sixteen <em>spans</em> are the spaces between those rings. The list still has one dimension: <code>row * sides + corner</code> gives an address, just as Grid used a row and column to find an entry.</p>
+<p>For each span, <code>a</code> and <code>b</code> are neighbouring corners on its lower ring; <code>c</code> and <code>d</code> are the corresponding corners above. The triples <code>(a, b, c)</code> and <code>(b, d, c)</code> make two triangles. <code>% sides</code> wraps the last corner back to zero on the same ring. Without that wrap, the seam would connect the wrong entries. Two centre positions and triangle fans close the bottom and top. We end with 138 positions and 272 faces.</p>
+<p>The renderer reads each face's three addresses, adds those positions and generates normals for lighting. The smoothing group of <code>-1</code> keeps each triangle flat, so the finite facets and cap edges remain visible. This is the face-list approach used in Polyhedra and Sine Space. The pink line is an added guide through corner zero, not an edge that the surface needs in order to exist.</p>
+<h2>Stop the clock without losing the form</h2>
+<p>Lifting the sphere changes <code>turns</code>, so <code>rebuild</code> calculates new positions. The face relationships remain the same. Small hand changes below the stated 0.002-turn threshold are ignored to avoid needless rebuilds.</p>
+<p>The trigger only changes <code>running</code>. While it is true, <code>rotate_y</code> changes the parent shaft's orientation by radians per second times <code>delta</code>. The stored positions and mesh resource stay unchanged. Stopping preserves the current pose; it does not straighten the shaft. The witness line is a child of the same shaft, so it turns with the surface. The control remains outside that rotating parent.</p>
+<h2>Make another shaft</h2>
+<p>Change <code>height</code> from <code>2.4</code> to <code>3.6</code> and run again. Predict what happens at half height and at the top. The same half-turn is spread over a longer distance; the top's orientation stays the same. Then change <code>sides</code> from eight to twelve. The profile has more samples, while height and total turn remain fixed. Explain which edit changed spacing along the shaft and which changed sampling around it.</p>
+<p>Keep a form you want to return to. Its list of positions remains when rotation stops. In John Cage, a list will keep sounds and their times instead. We return to the audio functions from Effect Sound and add the decisions about when to play them. The new subject is a score that can be performed again.</p>
+<h2>Carried code</h2>
+<p><code>point_body.gd</code> — the existing point and pickup behaviour.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<p><code>line_skin.gd</code> — the existing finite cylinder between two positions.</p>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<p>Implementation reference: <a href="https://docs.godotengine.org/en/stable/classes/class_surfacetool.html">Godot SurfaceTool</a>. The larger museum generator is <code>algorithms/wavefunctions/berninicolumns/BerniniColumns.gd</code>. It constructs a mesh on the CPU; this lesson does not require a vertex shader or noise.</p></article><article><div class="tag">Reflection · encounter and question</div><h1>A movement kept in a column</h1>
+<p>In the last room, a periodic relation became a sound. Here it rises above you. Can a shape keep the rhythm of a movement without travelling along it?</p>
+<!-- @bernini_columns -->
+
+<p>Choose one ridge on a twisting shaft and follow it upward. Notice how it moves around the vertical axis as height increases. Change your viewpoint and find the ridge again. Then compare it with a neighbouring column.</p>
+<p>There are two different changes to disentangle. The shaft is already twisted as a shape: its profile varies from one height to another. It also rotates slowly as a whole. Watching that rotation does not explain how the twist was made, and following the twist does not require the column to rotate.</p>
+<p>At a low level, choose a ridge. Find it again higher up, then higher still. The turn you follow belongs to positions already stored in the form. Now keep your attention at one level and let the slow rotation bring the surface past you. Your eye can read either as movement. The first asks you to travel; the second asks you to wait.</p>
+<p>Circular coordinates provide sine and cosine values around an axis. Combining those changing coordinates with height produces a helix. Further variations in the radius and surface give the shaft its richer profile. A periodic function that previously described movement through time now helps specify where parts of a solid belong.</p>
+<p>Look at the columns together. Their repetition creates intervals and sight lines that a single shaft cannot. The form and its arrangement contribute different things: one supplies the twist, the other decides whether you meet a field of objects, a threshold or an aisle. The spacing gives you room to pass between them. The repetition begins to arrange your movement too.</p>
+<p>The scene borrows the spiral architectural column. Its height, repeated bases and lit surfaces give the generated form a ceremony. Its mathematical construction does not account for the whole history of a building, the labour of making it, or what it means to those who use it. A low generated hum accompanies the columns; its level is tied to their rotation speed. Touching a shaft does not play it.</p>
+<p>From the wall, a synthetic voice attempts “right here, right now”, pauses, then begins again. This is a separate instrument. The words return while the columns keep turning. Which “now” has the repeated phrase brought back?</p>
+<!-- @ -->
+
+<p>Try reading the shaft once as a solid and once as a sequence of changing cross-sections. The next room leaves more of its temporal composition to chance. A rule can preserve a recognisable form while allowing individual events to arrive differently.</p></article></div><details><summary>tutorial.md — show exact prose changes</summary><pre>--- Before tutorial
++++ After tutorial
+@@ -171,7 +171,7 @@
+ 
+ Change `height` from `2.4` to `3.6` and run again. Predict what happens at half height and at the top. The same half-turn is spread over a longer distance; the top&#x27;s orientation stays the same. Then change `sides` from eight to twelve. The profile has more samples, while height and total turn remain fixed. Explain which edit changed spacing along the shaft and which changed sampling around it.
+ 
+-Keep a form you want to return to. In John Cage, the next hall, the retained material will be a list of events and their times. A composition can have a record even when its next performance has not yet happened.
++Keep a form you want to return to. Its list of positions remains when rotation stops. In John Cage, a list will keep sounds and their times instead. We return to the audio functions from Effect Sound and add the decisions about when to play them. The new subject is a score that can be performed again.
+ 
+ ## Carried code
+ 
+</pre></details><nav><a href="WaveFunctions_Effect_Sound.html">← Effect Sound</a><a href="WaveFunctions_John_Cage.html">Cage →</a></nav></main></html>

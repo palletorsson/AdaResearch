@@ -1,0 +1,401 @@
+{
+	"checks": [
+		{
+			"hall": "CA_Introduction",
+			"name": "Reconstruction creates its label, point, cells and seed",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Adjacent-seed prediction",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Wrapped boundary prediction",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Actual reversed-loop source agrees across32 updates",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Display budget keeps24 rows while generation continues",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "Unprinted transfer: reflecting a seed reflects the answer",
+			"passed": true
+		},
+		{
+			"hall": "CA_Introduction",
+			"name": "History remains a separate record",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Prepared centre is active with11 neighbours",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "First compact centre fades with14 active neighbours",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Second centre empties",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Two-cell source edit leaves exactly two fading cells",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Next generation of edited seed is wholly empty",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "State versus count transfer",
+			"passed": true
+		},
+		{
+			"hall": "CA_ElementaryRules",
+			"name": "Outer shell remains empty",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Edited beginning gives predicted six sites",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Flipped screen mapping preserves record and deck",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "STEP after old-row selection evolves latest row",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Current edit cannot rewrite generation zero",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "History stops at24 including beginning",
+			"passed": true
+		},
+		{
+			"hall": "CA_GameOfLife",
+			"name": "Native collision flags follow recorded occupancy",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Four-step glider is a translated arrangement",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Lamp A receives occupied address at generation8",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Blinker changes orientation with fixed occupied centre",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Unlinking lamp changes output without changing cells",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Edited SITE makes off-centre lamp alternate",
+			"passed": true
+		},
+		{
+			"hall": "CA_BeyondBinary",
+			"name": "Unprinted transfer: block is stable across periodic corner",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "21 nearby commits produce.16 and disable support",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Conversion back to simulation units retains height",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Vertical separation alone excludes the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Edited.49 threshold cannot feed next cell in SCAN",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Reverse SYNC keeps the same field",
+			"passed": true
+		},
+		{
+			"hall": "CA_ExpandingSpace",
+			"name": "Unprinted transfer: withdrawal cannot repair empty field",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "First neighbour exchange prediction",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Palette switch leaves fields and tick alone",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Matching exchanges agree after100 updates",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Held XR trigger seeds chosen address without advancing",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Released point cannot plant",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Source edit seeds all nine wrapped corner addresses",
+			"passed": true
+		},
+		{
+			"hall": "CA_SoftRules",
+			"name": "Unprinted transfer: first V arrives outside corner seed only by exchange",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Compact copying recipe produces216 entries",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Single seed reaches empty row at generation16",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Three-seed source edit leaves only13 and19",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Cellular edit leaves all copy transforms intact",
+			"passed": true
+		},
+		{
+			"hall": "CA_AgentsCircuits",
+			"name": "Unprinted transfer: translating recipe origin translates every leaf",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Both volumes and all three images constructed",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Printed point accepts actual XRTools pickup with supplied pose",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Existing held trigger advances exactly one update",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Release relinquishes pickup without losing the point",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Integer storage removes the one-cell difference",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Fractional first step has27 differences and peak.75",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Slice choice leaves arrays and update counter intact",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Growing affected count accompanies falling peak and rising gain",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Zero pull retains one full difference",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Corner source edit gives8 and correct receiving denominators",
+			"passed": true
+		},
+		{
+			"hall": "CA_EdgeOfChaos",
+			"name": "Unprinted transfer: shared drive cannot split identical beginnings",
+			"passed": true
+		},
+		{
+			"hall": "Optional composition",
+			"name": "Fresh student response replays all5280 values from recorded inputs",
+			"passed": true
+		},
+		{
+			"hall": "Optional composition",
+			"name": "Repeated positions and absence are present in record",
+			"passed": true
+		},
+		{
+			"hall": "Optional composition",
+			"name": "Reversing input history changes final field",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"observations": {
+		"compact_centre_after_one": {
+			"active_neighbours": 14,
+			"installed_specimen_count_in_text": 7,
+			"state": 2
+		},
+		"optional": {
+			"first_question": "Where did my hand go?",
+			"reverse_input_final_sites_differing": 14,
+			"revised_question": "When did each place receive it?",
+			"scope": "Prescribed simulated gesture; no physical VR walk or independent novice.",
+			"updates": 66,
+			"values_compared": 5280
+		}
+	},
+	"passed": true
+}

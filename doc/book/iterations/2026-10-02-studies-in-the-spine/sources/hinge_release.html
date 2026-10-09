@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="205dfe919471b73389829cdd9f00649e0380fe586b0703219e6f0be003cb0bf0"><title>commons/artifacts/spine_studies/hinge_score.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/hinge_score.gd</p><pre><code>extends RefCounted
+## The editable lesson. Plate fabrication, camera and input are supplied.
+var specimen
+var starting_pose: Array = []
+var return_on_release := false
+var returning := false
+var degrees_per_second := 45.0
+
+func setup(body) -&gt; void:
+	specimen = body
+	starting_pose = specimen.hinge_angles()
+
+func turn(joint: int, degrees: float) -&gt; void:
+	returning = false
+	specimen.set_hinge(joint, degrees)
+
+func release() -&gt; void:
+	returning = return_on_release
+
+func advance(delta: float) -&gt; void:
+	if not returning:
+		return
+	var current: Array = specimen.hinge_angles()
+	var complete := true
+	for joint in current.size():
+		var next := move_toward(float(current[joint]), float(starting_pose[joint]), degrees_per_second * delta)
+		specimen.set_hinge(joint, next)
+		complete = complete and is_equal_approx(next, float(starting_pose[joint]))
+	returning = not complete
+
+func reset() -&gt; void:
+	returning = false
+	for joint in starting_pose.size():
+		specimen.set_hinge(joint, float(starting_pose[joint]))
+</code></pre></body></html>

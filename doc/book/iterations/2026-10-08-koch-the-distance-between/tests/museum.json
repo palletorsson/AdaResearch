@@ -1,0 +1,149 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Existing Koch, triangle and measuring studies remain",
+      "passed": true
+    },
+    {
+      "name": "New hand reader is installed on original Koch desk",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-start",
+      "passed": true
+    },
+    {
+      "name": "Actual held action replaces the line once",
+      "passed": true
+    },
+    {
+      "name": "Held point measures first peak and moves floor receiver",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-detour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-first",
+      "passed": true
+    },
+    {
+      "name": "Hand model has floor at its standing approach",
+      "passed": true
+    },
+    {
+      "name": "Standing body clears the hand model",
+      "passed": true
+    },
+    {
+      "name": "Point remains within standing hand height",
+      "passed": true
+    },
+    {
+      "name": "Actual ray reaches nearby NEXT",
+      "passed": true
+    },
+    {
+      "name": "Actual ray reaches nearby BACK",
+      "passed": true
+    },
+    {
+      "name": "Actual ray reaches nearby RESET",
+      "passed": true
+    },
+    {
+      "name": "Nearby RESET restores seed",
+      "passed": true
+    },
+    {
+      "name": "Every fourth-generation route vertex has museum floor",
+      "passed": true
+    },
+    {
+      "name": "Fourth stage retains endpoints and longer route",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-fourth",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: reversed",
+      "passed": true
+    },
+    {
+      "name": "Original closed comparison still has fourteen-metre boundary",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: closed",
+      "passed": true
+    },
+    {
+      "name": "Sierpinski retains 81 triangles and three-quarter area rule",
+      "passed": true
+    },
+    {
+      "name": "Negative display preserves computed corners",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle",
+      "passed": true
+    },
+    {
+      "name": "Optional measurement preserves its 8000-point sample",
+      "passed": true
+    },
+    {
+      "name": "Central route stays clear at (9.5, 0.91, 8.0)",
+      "passed": true
+    },
+    {
+      "name": "Central route stays clear at (9.5, 0.91, 14.0)",
+      "passed": true
+    },
+    {
+      "name": "Central route stays clear at (9.5, 0.91, 21.0)",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Exact printed study runs beside existing museum artifacts",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "approach_hits": [],
+    "koch_position": [
+      5.5,
+      0.0,
+      10.5
+    ],
+    "scope": "Real museum with supplied XR poses and desktop button targeting. Before image hides only the new receiver. Printed lesson temporarily installed for capture; no physical headset or learner claim."
+  },
+  "passed": true,
+  "room": "Fractal_KochSierpinski",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

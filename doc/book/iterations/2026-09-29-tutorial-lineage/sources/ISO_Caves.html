@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_Caves · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_Caves">← Tutorial lineage</a></p><h1>ISO Caves</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_Caves/final.md">Raw captured source</a></p><pre># On the enclosing side
+
+&lt;!-- @mc_portal_landscape --&gt;
+
+A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface. The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two. Walk its edge first. Does the opening meet the floor, or does the name “portal” ask you to supply a route the mesh has not made?
+
+The generator carries a count and a burial choice:
+
+```gdscript
+num_portals = 7
+burial = &quot;straddling&quot;
+```
+
+Press PORTALS and watch the rings multiply. Press BURIAL to move the same family of portals from sunken to standing to floating. A change in count is a change in repetition. A change in burial is a change in the relation between a boundary and the floor. Neither word guarantees that a body can cross.
+
+&lt;!-- @mc_inside_cave --&gt;
+
+Now turn towards the enclosing cave. The same kind of sampled boundary is no longer a facade in front of you. It is above, beside and behind the eye. Press PLUMB once, then OCTAVES once. Notice which changes you can read from outside and which only become legible when the wall closes around your viewpoint.
+
+```glsl
+density = ridged_noise(p) - plumbScale * (p.y + 100.0) / 300.0;
+```
+
+`plumb` is a written vertical bias: bedded, overturned, weightless or steep. `octaves` decides how many scales of the ridged sum survive. The field is sampled at a level and extracted into triangles. It is not a cave because the label says so; it becomes an interior when the classified air has enough width, headroom and an entrance.
+
+Press HOLD before changing the field. The earlier view stays behind the live specimen as a memory of the surface. The terrain desk’s column could count several crossings; a count was never a body. Follow the wall, look back to the entrance, and test the route with your own clearance rather than with the most dramatic chamber in view.
+
+&lt;!-- @queer_marching_cave --&gt;
+
+The long cave in the rear aisle keeps a different vocabulary: bulge and resolution. It is a useful remainder, not a third answer to the same control panel. Its folds make the distinction felt: topology is not only whether a surface exists, but which bodies its passages permit.
+
+&lt;!-- @ --&gt;
+
+An isosurface gives inside and outside one calculation. The museum makes the choice visible by changing your side of the boundary. A portal can be a hole that does not connect; an enclosing cave can be a room with no adequate entrance. The field supplies possibilities. A route is authored through width, collision and a body that can arrive.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_Caves/tutorial.md">Raw captured source</a></p><pre># On the enclosing side
+
+&lt;!-- @mc_portal_landscape --&gt;
+
+The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two. Walk its edge first. Does the opening meet the floor, or does the name “portal” ask you to supply a route the mesh has not made?
+
+The generator carries a count and a burial choice:
+
+```gdscript
+num_portals = 7
+burial = &quot;straddling&quot;
+```
+
+Press PORTALS and watch the rings multiply. Press BURIAL to move the same family of portals from sunken to standing to floating. A change in count is a change in repetition. A change in burial is a change in the relation between a boundary and the floor. Neither word guarantees that a body can cross.
+
+&lt;!-- @mc_inside_cave --&gt;
+
+Now turn towards the enclosing cave. The same kind of sampled boundary is no longer a facade in front of you. It is above, beside and behind the eye. Press PLUMB once, then OCTAVES once. Notice which changes you can read from outside and which only become legible when the wall closes around your viewpoint.
+
+```glsl
+density = ridged_noise(p) - plumbScale * (p.y + 100.0) / 300.0;
+```
+
+`plumb` is a written vertical bias: bedded, overturned, weightless or steep. `octaves` decides how many scales of the ridged sum survive. The field is sampled at a level and extracted into triangles. It is not a cave because the label says so; it becomes an interior when the classified air has enough width, headroom and an entrance.
+
+Press HOLD before changing the field. The earlier view stays behind the live specimen as a memory of the surface. A column can show several crossings, but a counter is not a body. Follow the wall, look back to the entrance, and test the route with your own clearance rather than with the most dramatic chamber in view.
+
+&lt;!-- @queer_marching_cave --&gt;
+
+The long cave in the rear aisle keeps a different vocabulary: bulge and resolution. It is a useful remainder, not a third answer to the same control panel. Its folds make the distinction felt: topology is not only whether a surface exists, but which bodies its passages permit.
+
+&lt;!-- @ --&gt;
+
+An isosurface gives inside and outside one calculation. The museum makes the choice visible by changing your side of the boundary. A portal can be a hole that does not connect; an enclosing cave can be a room with no adequate entrance. The field supplies possibilities. A route is authored through width, collision and a body that can arrive.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_Caves/technical.md">Raw captured source</a></p><pre># Openings, enclosure and route
+
+The hall preserves the original `TerrainGeneratorUnifiedPortals`, `TerrainGenerator` and `QueerMarchingCave` scenes. The `iso_cave_workshop` binds the first two through their existing `apply_grid_config` methods. PLUMB cycles `bedded / overturned / weightless / steep` on `mc_inside_cave`; OCTAVES cycles `1 / 2 / 3 / 6`. PORTALS cycles `1 / 3 / 7 / 16`; BURIAL cycles `straddling / sunken / standing / floating` on `mc_portal_landscape`. HOLD keeps a non-colliding snapshot of the enclosing cave; RESET returns both primary works to their shipped values. The fixed desk readout states that a sampled opening is not a clearance proof.
+
+The original 16×12 structure and all six inherited map tokens are preserved at `(3,28)` in a 30×44 open-roof court. `mc_inside_cave` and `mc_portal_landscape` are primary because the book compares their two readings of a boundary. `queer_marching_cave`, `rhizome_cave_demo` and `raymarched_metaballs` remain secondary collection works. The desk is decoration.
+
+The portal field exposes `num_portals` and `burial`; the cave field exposes `plumb` and `octaves`. These are real generator parameters, not visual toggles. A rebuild replaces the generated surface and collision owned by the existing script. The held copy has no collision so it cannot create a hidden wall in the route.
+
+The route question remains deliberately bounded. Mesh crossings are not treated as a connectivity graph, and connectivity is not treated as body clearance. Human headset reach, comfort and Quest performance remain unverified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_Caves/critical.md">Raw captured source</a></p><pre># An opening is not yet a route
+
+The portal is a visual claim. Its ring can look like an invitation while its sampled field leaves a gap above the floor, a constriction behind the first view or a collision surface facing the wrong way. “Portal” names an intention; the field and the body decide what arrives.
+
+The enclosing cave reverses the usual picture of a model. Outside, the surface is an object. Inside, the same triangles become ceiling, wall and pressure around a viewpoint. `plumb` makes the vertical bias explicit, but no bias decides who fits. `octaves` can add detail that makes a passage harder to read without adding a passage.
+
+The desk’s count is an instrument with a boundary. A column that crosses a mesh three times proves that the sampled triangles fold through that line. It does not prove a connected room, a doorway or a walkable route. Keeping the counter finite lets the learner ask what the measurement excludes.
+
+The rear collection works complicates the pair. A rhizome and a metaball field can suggest other interiors, but retaining them does not make their vocabularies interchangeable. A small number of primary artifacts gives the book a spine; the secondary works keep the history and its unclosed questions in the room.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_Caves/artifacts.md">Raw captured source</a></p><pre># ISO_Caves — Artifacts
+
+`mc_portal_landscape` and `mc_inside_cave` are the primary pair written into the book. `queer_marching_cave`, `rhizome_cave_demo` and `raymarched_metaballs` remain secondary works from the inherited collection. `iso_cave_console` is the control desk, a reading instrument rather than a fourth primary artifact.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_Caves/blurb.md">Raw captured source</a></p><pre>Two views of the same algorithm. Outside: terrain stretches under open sky, stone arches rise from the ground like thresholds to nowhere — portals carved by mathematics, not erosion. Inside: the cave closes around you. Walls generated from the same noise field, the same isosurface extraction, but now the geometry is shelter instead of horizon.
+
+Sliders control the density threshold. Shift the isolevel and passages open or collapse. What was solid becomes void. What was void becomes wall. The portal landscape and the cave interior share a boundary — one is the negative space of the other.
+
+Every cave is a landscape turned inside out. Every landscape is a cave with its ceiling removed. The threshold doesn&#x27;t separate two spaces. It *is* the space.</pre></section></body></html>

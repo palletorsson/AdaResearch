@@ -1,0 +1,862 @@
+<!doctype html><meta charset="utf-8"><title>module_library.json</title><style>body{margin:3rem;background:#f5f1e9;color:#202129}pre{white-space:pre-wrap;font:15px/1.7 monospace}</style><h1>module_library.json</h1><pre>{
+    &quot;format_version&quot;: &quot;1.0&quot;,
+    &quot;hp_meters&quot;: 0.018,
+    &quot;row_height_meters&quot;: 0.45,
+    &quot;modules&quot;: {
+        &quot;vco&quot;: {
+            &quot;name&quot;: &quot;VCO&quot;,
+            &quot;full_name&quot;: &quot;Voltage Controlled Oscillator&quot;,
+            &quot;hp_width&quot;: 16,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;sources&quot;,
+            &quot;color_accent&quot;: &quot;#8BC34A&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;wave_sel&quot;,
+                    &quot;type&quot;: &quot;sls&quot;,
+                    &quot;label&quot;: &quot;WAVE&quot;,
+                    &quot;parameter&quot;: &quot;source_type&quot;,
+                    &quot;x_hp&quot;: 12,
+                    &quot;y_frac&quot;: 0.15,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 9,
+                    &quot;step&quot;: 1,
+                    &quot;default&quot;: 0
+                },
+                {
+                    &quot;id&quot;: &quot;freq&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;FREQ&quot;,
+                    &quot;parameter&quot;: &quot;freq&quot;,
+                    &quot;x_hp&quot;: 4,
+                    &quot;y_frac&quot;: 0.35,
+                    &quot;min&quot;: 20,
+                    &quot;max&quot;: 2000,
+                    &quot;default&quot;: 440
+                },
+                {
+                    &quot;id&quot;: &quot;fine&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;FINE&quot;,
+                    &quot;parameter&quot;: &quot;detune&quot;,
+                    &quot;x_hp&quot;: 12,
+                    &quot;y_frac&quot;: 0.5,
+                    &quot;min&quot;: -50,
+                    &quot;max&quot;: 50,
+                    &quot;default&quot;: 0
+                },
+                {
+                    &quot;id&quot;: &quot;out_disp&quot;,
+                    &quot;type&quot;: &quot;simple_waveform&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 4,
+                    &quot;y_frac&quot;: 0.75,
+                    &quot;width_hp&quot;: 8,
+                    &quot;source&quot;: &quot;rack&quot;
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;freq_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;frequency&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 14,
+                    &quot;y_frac&quot;: 0.9
+                }
+            ]
+        },
+        &quot;vcf&quot;: {
+            &quot;name&quot;: &quot;VCF&quot;,
+            &quot;full_name&quot;: &quot;Voltage Controlled Filter&quot;,
+            &quot;hp_width&quot;: 12,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;filters&quot;,
+            &quot;color_accent&quot;: &quot;#2196F3&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;cutoff&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;CUTOFF&quot;,
+                    &quot;parameter&quot;: &quot;cutoff&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 100,
+                    &quot;max&quot;: 8000,
+                    &quot;default&quot;: 1000
+                },
+                {
+                    &quot;id&quot;: &quot;res&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;RES&quot;,
+                    &quot;parameter&quot;: &quot;resonance&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 0.3
+                },
+                {
+                    &quot;id&quot;: &quot;enabled&quot;,
+                    &quot;type&quot;: &quot;lever&quot;,
+                    &quot;label&quot;: &quot;FILTER&quot;,
+                    &quot;parameter&quot;: &quot;filter_on&quot;,
+                    &quot;x_hp&quot;: 6,
+                    &quot;y_frac&quot;: 0.65,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 1
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;audio_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;audio_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;audio_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;audio_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;vca&quot;: {
+            &quot;name&quot;: &quot;VCA&quot;,
+            &quot;full_name&quot;: &quot;Voltage Controlled Amplifier&quot;,
+            &quot;hp_width&quot;: 14,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;controls&quot;,
+            &quot;color_accent&quot;: &quot;#4CAF50&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;amp&quot;,
+                    &quot;type&quot;: &quot;slv&quot;,
+                    &quot;label&quot;: &quot;AMP&quot;,
+                    &quot;parameter&quot;: &quot;amp&quot;,
+                    &quot;x_hp&quot;: 4,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 0.8
+                },
+                {
+                    &quot;id&quot;: &quot;pan&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;PAN&quot;,
+                    &quot;parameter&quot;: &quot;pan&quot;,
+                    &quot;x_hp&quot;: 10,
+                    &quot;y_frac&quot;: 0.55,
+                    &quot;min&quot;: -1,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 0
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;audio_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;audio_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;cv_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;cv_in&quot;,
+                    &quot;label&quot;: &quot;CV&quot;,
+                    &quot;x_hp&quot;: 7,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;audio_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;audio_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 11,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;envelope&quot;: {
+            &quot;name&quot;: &quot;ENV&quot;,
+            &quot;full_name&quot;: &quot;Envelope Generator&quot;,
+            &quot;hp_width&quot;: 16,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;modulators&quot;,
+            &quot;color_accent&quot;: &quot;#9C27B0&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;atk&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;ATK&quot;,
+                    &quot;parameter&quot;: &quot;attack&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 2,
+                    &quot;default&quot;: 0.01
+                },
+                {
+                    &quot;id&quot;: &quot;dec&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;DEC&quot;,
+                    &quot;parameter&quot;: &quot;decay_rate&quot;,
+                    &quot;x_hp&quot;: 8,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 2,
+                    &quot;default&quot;: 0.1
+                },
+                {
+                    &quot;id&quot;: &quot;rel&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;REL&quot;,
+                    &quot;parameter&quot;: &quot;release&quot;,
+                    &quot;x_hp&quot;: 13,
+                    &quot;y_frac&quot;: 0.38,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 5,
+                    &quot;default&quot;: 0.3
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;env_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;envelope&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 8,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;mixer&quot;: {
+            &quot;name&quot;: &quot;MIX&quot;,
+            &quot;full_name&quot;: &quot;Mixer / Output&quot;,
+            &quot;hp_width&quot;: 14,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;effects&quot;,
+            &quot;color_accent&quot;: &quot;#FF9800&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;mix&quot;,
+                    &quot;type&quot;: &quot;slh&quot;,
+                    &quot;label&quot;: &quot;MIX&quot;,
+                    &quot;parameter&quot;: &quot;harmonic_mix&quot;,
+                    &quot;x_hp&quot;: 2,
+                    &quot;y_frac&quot;: 0.28,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 0.5
+                },
+                {
+                    &quot;id&quot;: &quot;pan&quot;,
+                    &quot;type&quot;: &quot;slh&quot;,
+                    &quot;label&quot;: &quot;PAN&quot;,
+                    &quot;parameter&quot;: &quot;pan&quot;,
+                    &quot;x_hp&quot;: 2,
+                    &quot;y_frac&quot;: 0.5,
+                    &quot;min&quot;: -1,
+                    &quot;max&quot;: 1,
+                    &quot;default&quot;: 0
+                },
+                {
+                    &quot;id&quot;: &quot;vu_l&quot;,
+                    &quot;type&quot;: &quot;meter&quot;,
+                    &quot;label&quot;: &quot;L&quot;,
+                    &quot;x_hp&quot;: 10,
+                    &quot;y_frac&quot;: 0.35
+                },
+                {
+                    &quot;id&quot;: &quot;vu_r&quot;,
+                    &quot;type&quot;: &quot;meter&quot;,
+                    &quot;label&quot;: &quot;R&quot;,
+                    &quot;x_hp&quot;: 12,
+                    &quot;y_frac&quot;: 0.35
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;mix_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;mix_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;master_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;master_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 11,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;scope&quot;: {
+            &quot;name&quot;: &quot;SCOPE&quot;,
+            &quot;full_name&quot;: &quot;Oscilloscope / Analyzer&quot;,
+            &quot;hp_width&quot;: 20,
+            &quot;row_span&quot;: 2,
+            &quot;category&quot;: &quot;displays&quot;,
+            &quot;color_accent&quot;: &quot;#F44336&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;main_disp&quot;,
+                    &quot;type&quot;: &quot;monitor&quot;,
+                    &quot;label&quot;: &quot;SCOPE&quot;,
+                    &quot;x_hp&quot;: 2,
+                    &quot;y_frac&quot;: 0.08,
+                    &quot;width_hp&quot;: 16,
+                    &quot;height_frac&quot;: 0.75,
+                    &quot;source&quot;: &quot;rack&quot;
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;scope_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;scope_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 10,
+                    &quot;y_frac&quot;: 0.92
+                }
+            ]
+        },
+        &quot;transport&quot;: {
+            &quot;name&quot;: &quot;TRNS&quot;,
+            &quot;full_name&quot;: &quot;Transport Controls&quot;,
+            &quot;hp_width&quot;: 6,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;buttons&quot;,
+            &quot;color_accent&quot;: &quot;#E91E63&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;play&quot;,
+                    &quot;type&quot;: &quot;button&quot;,
+                    &quot;label&quot;: &quot;PLAY&quot;,
+                    &quot;action&quot;: &quot;play&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.25,
+                    &quot;color&quot;: &quot;#4CAF50&quot;
+                },
+                {
+                    &quot;id&quot;: &quot;stop&quot;,
+                    &quot;type&quot;: &quot;button&quot;,
+                    &quot;label&quot;: &quot;STOP&quot;,
+                    &quot;action&quot;: &quot;stop&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.5,
+                    &quot;color&quot;: &quot;#F44336&quot;
+                },
+                {
+                    &quot;id&quot;: &quot;reset&quot;,
+                    &quot;type&quot;: &quot;button&quot;,
+                    &quot;label&quot;: &quot;RST&quot;,
+                    &quot;action&quot;: &quot;reset&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.75,
+                    &quot;color&quot;: &quot;#FF9800&quot;
+                }
+            ]
+        },
+        &quot;effects&quot;: {
+            &quot;name&quot;: &quot;FX&quot;,
+            &quot;full_name&quot;: &quot;Frequency Effects&quot;,
+            &quot;hp_width&quot;: 12,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;effects&quot;,
+            &quot;color_accent&quot;: &quot;#FF9800&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;start_f&quot;,
+                    &quot;type&quot;: &quot;slv&quot;,
+                    &quot;label&quot;: &quot;START&quot;,
+                    &quot;parameter&quot;: &quot;start_freq&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.4,
+                    &quot;min&quot;: 20,
+                    &quot;max&quot;: 2000,
+                    &quot;default&quot;: 200
+                },
+                {
+                    &quot;id&quot;: &quot;end_f&quot;,
+                    &quot;type&quot;: &quot;slv&quot;,
+                    &quot;label&quot;: &quot;END&quot;,
+                    &quot;parameter&quot;: &quot;end_freq&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.4,
+                    &quot;min&quot;: 20,
+                    &quot;max&quot;: 2000,
+                    &quot;default&quot;: 800
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;fx_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;fx_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;fx_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;fx_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;patch_matrix&quot;: {
+            &quot;name&quot;: &quot;PATCH&quot;,
+            &quot;full_name&quot;: &quot;Patch Matrix&quot;,
+            &quot;hp_width&quot;: 18,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;routing&quot;,
+            &quot;color_accent&quot;: &quot;#00BCD4&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;matrix_lbl&quot;,
+                    &quot;type&quot;: &quot;lbl&quot;,
+                    &quot;label&quot;: &quot;PATCH&quot;,
+                    &quot;text&quot;: &quot;ROUTING MATRIX&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.12
+                },
+                {
+                    &quot;id&quot;: &quot;matrix_div&quot;,
+                    &quot;type&quot;: &quot;div&quot;,
+                    &quot;x_hp&quot;: 9,
+                    &quot;y_frac&quot;: 0.5,
+                    &quot;orientation&quot;: &quot;vertical&quot;
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;src_a&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;src_a&quot;,
+                    &quot;label&quot;: &quot;A&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.34
+                },
+                {
+                    &quot;id&quot;: &quot;src_b&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;src_b&quot;,
+                    &quot;label&quot;: &quot;B&quot;,
+                    &quot;x_hp&quot;: 7,
+                    &quot;y_frac&quot;: 0.34
+                },
+                {
+                    &quot;id&quot;: &quot;src_c&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;src_c&quot;,
+                    &quot;label&quot;: &quot;C&quot;,
+                    &quot;x_hp&quot;: 11,
+                    &quot;y_frac&quot;: 0.34
+                },
+                {
+                    &quot;id&quot;: &quot;src_d&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;src_d&quot;,
+                    &quot;label&quot;: &quot;D&quot;,
+                    &quot;x_hp&quot;: 15,
+                    &quot;y_frac&quot;: 0.34
+                },
+                {
+                    &quot;id&quot;: &quot;dst_a&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;dst_a&quot;,
+                    &quot;label&quot;: &quot;A&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.76
+                },
+                {
+                    &quot;id&quot;: &quot;dst_b&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;dst_b&quot;,
+                    &quot;label&quot;: &quot;B&quot;,
+                    &quot;x_hp&quot;: 7,
+                    &quot;y_frac&quot;: 0.76
+                },
+                {
+                    &quot;id&quot;: &quot;dst_c&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;dst_c&quot;,
+                    &quot;label&quot;: &quot;C&quot;,
+                    &quot;x_hp&quot;: 11,
+                    &quot;y_frac&quot;: 0.76
+                },
+                {
+                    &quot;id&quot;: &quot;dst_d&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;dst_d&quot;,
+                    &quot;label&quot;: &quot;D&quot;,
+                    &quot;x_hp&quot;: 15,
+                    &quot;y_frac&quot;: 0.76
+                }
+            ]
+        },
+        &quot;needle_meter&quot;: {
+            &quot;name&quot;: &quot;GAUGE&quot;,
+            &quot;full_name&quot;: &quot;Needle Meter Prototype&quot;,
+            &quot;hp_width&quot;: 8,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;displays&quot;,
+            &quot;color_accent&quot;: &quot;#FFC107&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;level_meter&quot;,
+                    &quot;type&quot;: &quot;meter&quot;,
+                    &quot;label&quot;: &quot;LVL&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.42,
+                    &quot;style&quot;: &quot;needle&quot;,
+                    &quot;source&quot;: &quot;rack&quot;
+                },
+                {
+                    &quot;id&quot;: &quot;trim&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;TRIM&quot;,
+                    &quot;parameter&quot;: &quot;meter_trim&quot;,
+                    &quot;x_hp&quot;: 6,
+                    &quot;y_frac&quot;: 0.62,
+                    &quot;min&quot;: 0.0,
+                    &quot;max&quot;: 2.0,
+                    &quot;default&quot;: 1.0
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;meter_in&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;meter_in&quot;,
+                    &quot;label&quot;: &quot;IN&quot;,
+                    &quot;x_hp&quot;: 2,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;meter_cv&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;meter_cv&quot;,
+                    &quot;label&quot;: &quot;CV&quot;,
+                    &quot;x_hp&quot;: 4,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;meter_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;meter_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 6,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;rotary_selector&quot;: {
+            &quot;name&quot;: &quot;MODE&quot;,
+            &quot;full_name&quot;: &quot;Rotary Mode Selector&quot;,
+            &quot;hp_width&quot;: 10,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;controls&quot;,
+            &quot;color_accent&quot;: &quot;#B0BEC5&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;selector&quot;,
+                    &quot;type&quot;: &quot;knob&quot;,
+                    &quot;label&quot;: &quot;MODE&quot;,
+                    &quot;parameter&quot;: &quot;mode_index&quot;,
+                    &quot;x_hp&quot;: 5,
+                    &quot;y_frac&quot;: 0.4,
+                    &quot;style&quot;: &quot;selector&quot;,
+                    &quot;step_count&quot;: 8,
+                    &quot;min&quot;: 0,
+                    &quot;max&quot;: 7,
+                    &quot;default&quot;: 2
+                },
+                {
+                    &quot;id&quot;: &quot;selector_lbl&quot;,
+                    &quot;type&quot;: &quot;lbl&quot;,
+                    &quot;label&quot;: &quot;BANK&quot;,
+                    &quot;text&quot;: &quot;A / B / C / D&quot;,
+                    &quot;x_hp&quot;: 5,
+                    &quot;y_frac&quot;: 0.72
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;selector_cv&quot;,
+                    &quot;type&quot;: &quot;input&quot;,
+                    &quot;parameter&quot;: &quot;selector_cv&quot;,
+                    &quot;label&quot;: &quot;CV&quot;,
+                    &quot;x_hp&quot;: 3,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;selector_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;selector_out&quot;,
+                    &quot;label&quot;: &quot;OUT&quot;,
+                    &quot;x_hp&quot;: 7,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        },
+        &quot;touch_grid&quot;: {
+            &quot;name&quot;: &quot;TOUCH&quot;,
+            &quot;full_name&quot;: &quot;Touch XY Control Surface&quot;,
+            &quot;hp_width&quot;: 20,
+            &quot;row_span&quot;: 1,
+            &quot;category&quot;: &quot;controls&quot;,
+            &quot;color_accent&quot;: &quot;#26C6DA&quot;,
+            &quot;controls&quot;: [
+                {
+                    &quot;id&quot;: &quot;surface&quot;,
+                    &quot;type&quot;: &quot;xy&quot;,
+                    &quot;label&quot;: &quot;X/Y&quot;,
+                    &quot;parameter_x&quot;: &quot;touch_x&quot;,
+                    &quot;parameter_y&quot;: &quot;touch_y&quot;,
+                    &quot;x_hp&quot;: 10,
+                    &quot;y_frac&quot;: 0.46,
+                    &quot;width_hp&quot;: 16,
+                    &quot;height_frac&quot;: 0.64,
+                    &quot;min_x&quot;: 0.0,
+                    &quot;max_x&quot;: 1.0,
+                    &quot;min_y&quot;: 0.0,
+                    &quot;max_y&quot;: 1.0,
+                    &quot;default&quot;: 0.5,
+                    &quot;default_y&quot;: 0.5
+                }
+            ],
+            &quot;jacks&quot;: [
+                {
+                    &quot;id&quot;: &quot;touch_x_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;touch_x&quot;,
+                    &quot;label&quot;: &quot;X&quot;,
+                    &quot;x_hp&quot;: 6,
+                    &quot;y_frac&quot;: 0.88
+                },
+                {
+                    &quot;id&quot;: &quot;touch_y_out&quot;,
+                    &quot;type&quot;: &quot;output&quot;,
+                    &quot;parameter&quot;: &quot;touch_y&quot;,
+                    &quot;label&quot;: &quot;Y&quot;,
+                    &quot;x_hp&quot;: 14,
+                    &quot;y_frac&quot;: 0.88
+                }
+            ]
+        }
+    },
+    &quot;rack_presets&quot;: {
+        &quot;basic_mono&quot;: {
+            &quot;name&quot;: &quot;Basic Mono Synth&quot;,
+            &quot;sound_type&quot;: &quot;synth_wave&quot;,
+            &quot;rows&quot;: 1,
+            &quot;modules&quot;: [
+                {
+                    &quot;module&quot;: &quot;transport&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 0
+                },
+                {
+                    &quot;module&quot;: &quot;vco&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;vcf&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 2
+                },
+                {
+                    &quot;module&quot;: &quot;vca&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 3
+                },
+                {
+                    &quot;module&quot;: &quot;envelope&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 4
+                }
+            ]
+        },
+        &quot;full_studio&quot;: {
+            &quot;name&quot;: &quot;Full Studio&quot;,
+            &quot;sound_type&quot;: &quot;synth_wave&quot;,
+            &quot;rows&quot;: 2,
+            &quot;modules&quot;: [
+                {
+                    &quot;module&quot;: &quot;transport&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 0
+                },
+                {
+                    &quot;module&quot;: &quot;vco&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;vcf&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 2
+                },
+                {
+                    &quot;module&quot;: &quot;envelope&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 3
+                },
+                {
+                    &quot;module&quot;: &quot;vca&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 4
+                },
+                {
+                    &quot;module&quot;: &quot;mixer&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 5
+                },
+                {
+                    &quot;module&quot;: &quot;scope&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 6
+                },
+                {
+                    &quot;module&quot;: &quot;effects&quot;,
+                    &quot;row&quot;: 1,
+                    &quot;slot&quot;: 0
+                }
+            ]
+        },
+        &quot;interface_prototypes&quot;: {
+            &quot;name&quot;: &quot;Interface Prototypes&quot;,
+            &quot;sound_type&quot;: &quot;synth_wave&quot;,
+            &quot;rows&quot;: 1,
+            &quot;modules&quot;: [
+                {
+                    &quot;module&quot;: &quot;touch_grid&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 0
+                },
+                {
+                    &quot;module&quot;: &quot;rotary_selector&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;needle_meter&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 2
+                },
+                {
+                    &quot;module&quot;: &quot;patch_matrix&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 3
+                }
+            ]
+        },
+        &quot;template_showcase&quot;: {
+            &quot;name&quot;: &quot;Template Showcase&quot;,
+            &quot;sound_type&quot;: &quot;synth_wave&quot;,
+            &quot;rows&quot;: 2,
+            &quot;modules&quot;: [
+                {
+                    &quot;module&quot;: &quot;transport&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 0
+                },
+                {
+                    &quot;module&quot;: &quot;vco&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;vcf&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 2
+                },
+                {
+                    &quot;module&quot;: &quot;envelope&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 3
+                },
+                {
+                    &quot;module&quot;: &quot;vca&quot;,
+                    &quot;row&quot;: 1,
+                    &quot;slot&quot;: 0
+                },
+                {
+                    &quot;module&quot;: &quot;mixer&quot;,
+                    &quot;row&quot;: 1,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;needle_meter&quot;,
+                    &quot;row&quot;: 1,
+                    &quot;slot&quot;: 2
+                },
+                {
+                    &quot;module&quot;: &quot;touch_grid&quot;,
+                    &quot;row&quot;: 1,
+                    &quot;slot&quot;: 3
+                }
+            ]
+        },
+        &quot;patch_and_motion&quot;: {
+            &quot;name&quot;: &quot;Patch and motion&quot;,
+            &quot;rows&quot;: 1,
+            &quot;sound_type&quot;: &quot;synth_wave&quot;,
+            &quot;modules&quot;: [
+                {
+                    &quot;module&quot;: &quot;vco&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 0,
+                    &quot;controls&quot;: {
+                        &quot;wave_sel&quot;: {
+                            &quot;max&quot;: 3,
+                            &quot;label&quot;: &quot;WAVE 0–3&quot;
+                        },
+                        &quot;freq&quot;: {
+                            &quot;default&quot;: 220
+                        }
+                    },
+                    &quot;omit_controls&quot;: [
+                        &quot;out_disp&quot;
+                    ]
+                },
+                {
+                    &quot;module&quot;: &quot;vcf&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 1
+                },
+                {
+                    &quot;module&quot;: &quot;vca&quot;,
+                    &quot;row&quot;: 0,
+                    &quot;slot&quot;: 2,
+                    &quot;controls&quot;: {
+                        &quot;amp&quot;: {
+                            &quot;default&quot;: 0.6
+                        }
+                    },
+                    &quot;omit_jacks&quot;: [
+                        &quot;cv_in&quot;
+                    ]
+                }
+            ]
+        }
+    }
+}
+</pre>

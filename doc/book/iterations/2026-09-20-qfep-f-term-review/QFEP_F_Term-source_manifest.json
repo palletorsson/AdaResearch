@@ -1,0 +1,28 @@
+{
+  "room": "QFEP_F_Term",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/QFEP_F_Term/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/QFEP_F_Term/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "dc37cbdc082afb682ffb69909439c886c6ccb4aa1e02731669f571b7843b0479",
+    "commons/maps/QFEP_F_Term/map_data.json": "65f67e5ae9b64adef862e82e5818d6ae28aba989f711339e051e1eafc00d79a9",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "80dc8b1411280f41c7e1b66b12bfe2431136f7fc7b68ca6a026597873ad70094",
+    "ada_run/encounter_pilot/QFEP_F_Term/control.json": "b3b708e890b622fa33c10158e94cbdf72521fc8bc94df02667e10c01664c2d23",
+    "ada_run/encounter_pilot/QFEP_F_Term/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/QFEP_F_Term/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/QFEP_F_Term/em_bake.json": "8a8f2cc535a5370b98626c34e45745eea8440499f8590e143478418bd4141f22"
+  }
+}

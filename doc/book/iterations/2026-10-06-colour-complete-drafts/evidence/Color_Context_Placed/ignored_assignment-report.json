@@ -1,0 +1,884 @@
+{
+  "checks": [
+    {
+      "id": "one/five_parts",
+      "passed": true
+    },
+    {
+      "id": "one/assigned_colours",
+      "passed": true
+    },
+    {
+      "id": "one/assignment_retained",
+      "passed": true
+    },
+    {
+      "id": "one/local_position_0",
+      "passed": true
+    },
+    {
+      "id": "one/world_position_0",
+      "passed": true
+    },
+    {
+      "id": "one/unchanged_basis_0",
+      "passed": true
+    },
+    {
+      "id": "one/dimensions_0",
+      "passed": true
+    },
+    {
+      "id": "one/touching_levels_0",
+      "passed": true
+    },
+    {
+      "id": "one/opaque_matte_0",
+      "passed": true
+    },
+    {
+      "id": "one/local_position_1",
+      "passed": true
+    },
+    {
+      "id": "one/world_position_1",
+      "passed": true
+    },
+    {
+      "id": "one/unchanged_basis_1",
+      "passed": true
+    },
+    {
+      "id": "one/dimensions_1",
+      "passed": true
+    },
+    {
+      "id": "one/touching_levels_1",
+      "passed": true
+    },
+    {
+      "id": "one/opaque_matte_1",
+      "passed": true
+    },
+    {
+      "id": "one/local_position_2",
+      "passed": true
+    },
+    {
+      "id": "one/world_position_2",
+      "passed": true
+    },
+    {
+      "id": "one/unchanged_basis_2",
+      "passed": true
+    },
+    {
+      "id": "one/dimensions_2",
+      "passed": true
+    },
+    {
+      "id": "one/touching_levels_2",
+      "passed": true
+    },
+    {
+      "id": "one/opaque_matte_2",
+      "passed": true
+    },
+    {
+      "id": "one/local_position_3",
+      "passed": true
+    },
+    {
+      "id": "one/world_position_3",
+      "passed": true
+    },
+    {
+      "id": "one/unchanged_basis_3",
+      "passed": true
+    },
+    {
+      "id": "one/dimensions_3",
+      "passed": true
+    },
+    {
+      "id": "one/touching_levels_3",
+      "passed": true
+    },
+    {
+      "id": "one/opaque_matte_3",
+      "passed": true
+    },
+    {
+      "id": "one/local_position_4",
+      "passed": true
+    },
+    {
+      "id": "one/world_position_4",
+      "passed": true
+    },
+    {
+      "id": "one/unchanged_basis_4",
+      "passed": true
+    },
+    {
+      "id": "one/dimensions_4",
+      "passed": true
+    },
+    {
+      "id": "one/touching_levels_4",
+      "passed": true
+    },
+    {
+      "id": "one/opaque_matte_4",
+      "passed": true
+    },
+    {
+      "id": "one/height_4_4",
+      "passed": true
+    },
+    {
+      "id": "one/independent_parts_and_resources",
+      "passed": true
+    },
+    {
+      "id": "one/familiar_shapes",
+      "passed": true
+    },
+    {
+      "id": "one/sphere_and_dome",
+      "passed": true
+    },
+    {
+      "id": "one/no_scene_dependencies",
+      "passed": true
+    },
+    {
+      "id": "one/repaint_preserves_objects_geometry_and_pose",
+      "passed": true
+    },
+    {
+      "id": "one/repaint_preserves_assignments",
+      "passed": true
+    },
+    {
+      "id": "grouped/five_parts",
+      "passed": true
+    },
+    {
+      "id": "grouped/assigned_colours",
+      "passed": false
+    },
+    {
+      "id": "grouped/assignment_retained",
+      "passed": true
+    },
+    {
+      "id": "grouped/local_position_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/world_position_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/unchanged_basis_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/dimensions_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/touching_levels_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/opaque_matte_0",
+      "passed": true
+    },
+    {
+      "id": "grouped/local_position_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/world_position_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/unchanged_basis_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/dimensions_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/touching_levels_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/opaque_matte_1",
+      "passed": true
+    },
+    {
+      "id": "grouped/local_position_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/world_position_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/unchanged_basis_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/dimensions_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/touching_levels_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/opaque_matte_2",
+      "passed": true
+    },
+    {
+      "id": "grouped/local_position_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/world_position_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/unchanged_basis_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/dimensions_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/touching_levels_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/opaque_matte_3",
+      "passed": true
+    },
+    {
+      "id": "grouped/local_position_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/world_position_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/unchanged_basis_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/dimensions_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/touching_levels_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/opaque_matte_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/height_4_4",
+      "passed": true
+    },
+    {
+      "id": "grouped/independent_parts_and_resources",
+      "passed": true
+    },
+    {
+      "id": "grouped/familiar_shapes",
+      "passed": true
+    },
+    {
+      "id": "grouped/sphere_and_dome",
+      "passed": true
+    },
+    {
+      "id": "grouped/no_scene_dependencies",
+      "passed": true
+    },
+    {
+      "id": "grouped/repaint_preserves_objects_geometry_and_pose",
+      "passed": true
+    },
+    {
+      "id": "grouped/repaint_preserves_assignments",
+      "passed": false
+    },
+    {
+      "id": "recoloured/five_parts",
+      "passed": true
+    },
+    {
+      "id": "recoloured/assigned_colours",
+      "passed": false
+    },
+    {
+      "id": "recoloured/assignment_retained",
+      "passed": true
+    },
+    {
+      "id": "recoloured/local_position_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/world_position_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/unchanged_basis_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/dimensions_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/touching_levels_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/opaque_matte_0",
+      "passed": true
+    },
+    {
+      "id": "recoloured/local_position_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/world_position_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/unchanged_basis_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/dimensions_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/touching_levels_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/opaque_matte_1",
+      "passed": true
+    },
+    {
+      "id": "recoloured/local_position_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/world_position_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/unchanged_basis_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/dimensions_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/touching_levels_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/opaque_matte_2",
+      "passed": true
+    },
+    {
+      "id": "recoloured/local_position_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/world_position_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/unchanged_basis_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/dimensions_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/touching_levels_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/opaque_matte_3",
+      "passed": true
+    },
+    {
+      "id": "recoloured/local_position_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/world_position_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/unchanged_basis_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/dimensions_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/touching_levels_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/opaque_matte_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/height_4_4",
+      "passed": true
+    },
+    {
+      "id": "recoloured/independent_parts_and_resources",
+      "passed": true
+    },
+    {
+      "id": "recoloured/familiar_shapes",
+      "passed": true
+    },
+    {
+      "id": "recoloured/sphere_and_dome",
+      "passed": true
+    },
+    {
+      "id": "recoloured/no_scene_dependencies",
+      "passed": true
+    },
+    {
+      "id": "recoloured/repaint_preserves_objects_geometry_and_pose",
+      "passed": true
+    },
+    {
+      "id": "recoloured/repaint_preserves_assignments",
+      "passed": false
+    },
+    {
+      "id": "alternating/five_parts",
+      "passed": true
+    },
+    {
+      "id": "alternating/assigned_colours",
+      "passed": false
+    },
+    {
+      "id": "alternating/assignment_retained",
+      "passed": true
+    },
+    {
+      "id": "alternating/local_position_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/world_position_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/unchanged_basis_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/dimensions_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/touching_levels_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/opaque_matte_0",
+      "passed": true
+    },
+    {
+      "id": "alternating/local_position_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/world_position_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/unchanged_basis_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/dimensions_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/touching_levels_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/opaque_matte_1",
+      "passed": true
+    },
+    {
+      "id": "alternating/local_position_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/world_position_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/unchanged_basis_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/dimensions_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/touching_levels_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/opaque_matte_2",
+      "passed": true
+    },
+    {
+      "id": "alternating/local_position_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/world_position_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/unchanged_basis_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/dimensions_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/touching_levels_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/opaque_matte_3",
+      "passed": true
+    },
+    {
+      "id": "alternating/local_position_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/world_position_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/unchanged_basis_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/dimensions_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/touching_levels_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/opaque_matte_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/height_4_4",
+      "passed": true
+    },
+    {
+      "id": "alternating/independent_parts_and_resources",
+      "passed": true
+    },
+    {
+      "id": "alternating/familiar_shapes",
+      "passed": true
+    },
+    {
+      "id": "alternating/sphere_and_dome",
+      "passed": true
+    },
+    {
+      "id": "alternating/no_scene_dependencies",
+      "passed": true
+    },
+    {
+      "id": "alternating/repaint_preserves_objects_geometry_and_pose",
+      "passed": true
+    },
+    {
+      "id": "alternating/repaint_preserves_assignments",
+      "passed": false
+    },
+    {
+      "id": "choice/five_parts",
+      "passed": true
+    },
+    {
+      "id": "choice/assigned_colours",
+      "passed": false
+    },
+    {
+      "id": "choice/assignment_retained",
+      "passed": true
+    },
+    {
+      "id": "choice/local_position_0",
+      "passed": true
+    },
+    {
+      "id": "choice/world_position_0",
+      "passed": true
+    },
+    {
+      "id": "choice/unchanged_basis_0",
+      "passed": true
+    },
+    {
+      "id": "choice/dimensions_0",
+      "passed": true
+    },
+    {
+      "id": "choice/touching_levels_0",
+      "passed": true
+    },
+    {
+      "id": "choice/opaque_matte_0",
+      "passed": true
+    },
+    {
+      "id": "choice/local_position_1",
+      "passed": true
+    },
+    {
+      "id": "choice/world_position_1",
+      "passed": true
+    },
+    {
+      "id": "choice/unchanged_basis_1",
+      "passed": true
+    },
+    {
+      "id": "choice/dimensions_1",
+      "passed": true
+    },
+    {
+      "id": "choice/touching_levels_1",
+      "passed": true
+    },
+    {
+      "id": "choice/opaque_matte_1",
+      "passed": true
+    },
+    {
+      "id": "choice/local_position_2",
+      "passed": true
+    },
+    {
+      "id": "choice/world_position_2",
+      "passed": true
+    },
+    {
+      "id": "choice/unchanged_basis_2",
+      "passed": true
+    },
+    {
+      "id": "choice/dimensions_2",
+      "passed": true
+    },
+    {
+      "id": "choice/touching_levels_2",
+      "passed": true
+    },
+    {
+      "id": "choice/opaque_matte_2",
+      "passed": true
+    },
+    {
+      "id": "choice/local_position_3",
+      "passed": true
+    },
+    {
+      "id": "choice/world_position_3",
+      "passed": true
+    },
+    {
+      "id": "choice/unchanged_basis_3",
+      "passed": true
+    },
+    {
+      "id": "choice/dimensions_3",
+      "passed": true
+    },
+    {
+      "id": "choice/touching_levels_3",
+      "passed": true
+    },
+    {
+      "id": "choice/opaque_matte_3",
+      "passed": true
+    },
+    {
+      "id": "choice/local_position_4",
+      "passed": true
+    },
+    {
+      "id": "choice/world_position_4",
+      "passed": true
+    },
+    {
+      "id": "choice/unchanged_basis_4",
+      "passed": true
+    },
+    {
+      "id": "choice/dimensions_4",
+      "passed": true
+    },
+    {
+      "id": "choice/touching_levels_4",
+      "passed": true
+    },
+    {
+      "id": "choice/opaque_matte_4",
+      "passed": true
+    },
+    {
+      "id": "choice/height_4_4",
+      "passed": true
+    },
+    {
+      "id": "choice/independent_parts_and_resources",
+      "passed": true
+    },
+    {
+      "id": "choice/familiar_shapes",
+      "passed": true
+    },
+    {
+      "id": "choice/sphere_and_dome",
+      "passed": true
+    },
+    {
+      "id": "choice/no_scene_dependencies",
+      "passed": true
+    },
+    {
+      "id": "choice/repaint_preserves_objects_geometry_and_pose",
+      "passed": true
+    },
+    {
+      "id": "choice/repaint_preserves_assignments",
+      "passed": false
+    },
+    {
+      "id": "live/assignment_waits_for_apply",
+      "passed": true
+    },
+    {
+      "id": "live/grouped_colours",
+      "passed": false
+    },
+    {
+      "id": "live/reassignment_preserves_geometry",
+      "passed": true
+    },
+    {
+      "id": "live/assignment_does_not_edit_palette",
+      "passed": true
+    },
+    {
+      "id": "live/second_study_unchanged",
+      "passed": true
+    },
+    {
+      "id": "live/palette_value_is_copied",
+      "passed": true
+    },
+    {
+      "id": "live/palette_updates_assigned_group_only",
+      "passed": false
+    },
+    {
+      "id": "live/palette_edit_preserves_assignment",
+      "passed": true
+    },
+    {
+      "id": "live/palette_edit_preserves_geometry",
+      "passed": true
+    },
+    {
+      "id": "live/second_palette_independent",
+      "passed": true
+    },
+    {
+      "id": "live/one_material_edit_is_local",
+      "passed": true
+    },
+    {
+      "id": "live/material_edit_preserves_palette",
+      "passed": true
+    },
+    {
+      "id": "live/reapply_restores_assigned_value",
+      "passed": false
+    },
+    {
+      "id": "live/independent_composition",
+      "passed": false
+    },
+    {
+      "id": "live/composition_preserves_geometry",
+      "passed": true
+    },
+    {
+      "id": "live/return_to_one_colour",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "grouped/assigned_colours",
+    "grouped/repaint_preserves_assignments",
+    "recoloured/assigned_colours",
+    "recoloured/repaint_preserves_assignments",
+    "alternating/assigned_colours",
+    "alternating/repaint_preserves_assignments",
+    "choice/assigned_colours",
+    "choice/repaint_preserves_assignments",
+    "live/grouped_colours",
+    "live/palette_updates_assigned_group_only",
+    "live/reapply_restores_assigned_value",
+    "live/independent_composition"
+  ],
+  "group": "ignored_assignment",
+  "passed": false
+}

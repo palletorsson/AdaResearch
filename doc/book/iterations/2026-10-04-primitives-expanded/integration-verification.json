@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Book route adds exactly three chapters",
+      "passed": true
+    },
+    {
+      "name": "ada_run/em_plan.json: all unrelated rows and placements preserved",
+      "passed": true
+    },
+    {
+      "name": "ada_run/em_plan.json: contiguous runtime order",
+      "passed": true
+    },
+    {
+      "name": "ada_run/em_plan.json: prior biome stop preserved",
+      "passed": true
+    },
+    {
+      "name": "ada_run/em_plan.json: new halls in agreed order",
+      "passed": true
+    },
+    {
+      "name": "commons/data/museum/em_plan.json: all unrelated rows and placements preserved",
+      "passed": true
+    },
+    {
+      "name": "commons/data/museum/em_plan.json: contiguous runtime order",
+      "passed": true
+    },
+    {
+      "name": "commons/data/museum/em_plan.json: prior biome stop preserved",
+      "passed": true
+    },
+    {
+      "name": "commons/data/museum/em_plan.json: new halls in agreed order",
+      "passed": true
+    },
+    {
+      "name": "Local and shipped plans agree",
+      "passed": true
+    },
+    {
+      "name": "Only library and choir removed from Ignorance",
+      "passed": true
+    },
+    {
+      "name": "Ignorance structure and utilities unchanged",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Godot: layers agree",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Godot: central route stays clear",
+      "passed": true
+    },
+    {
+      "name": "primitive_mesh_library: one registry entry",
+      "passed": true
+    },
+    {
+      "name": "primitive_mesh_library: scene exists",
+      "passed": true
+    },
+    {
+      "name": "seven_words_choir: one registry entry",
+      "passed": true
+    },
+    {
+      "name": "seven_words_choir: scene exists",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Columns: layers agree",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Columns: central route stays clear",
+      "passed": true
+    },
+    {
+      "name": "resolution_colonnade_museum: one registry entry",
+      "passed": true
+    },
+    {
+      "name": "resolution_colonnade_museum: scene exists",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Profiles: layers agree",
+      "passed": true
+    },
+    {
+      "name": "Primitives_Profiles: central route stays clear",
+      "passed": true
+    },
+    {
+      "name": "glyph_profile_gallery: one registry entry",
+      "passed": true
+    },
+    {
+      "name": "glyph_profile_gallery: scene exists",
+      "passed": true
+    }
+  ],
+  "scope": "Source chain and preservation; separate native probes test the actual rooms."
+}

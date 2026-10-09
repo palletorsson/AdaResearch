@@ -1,0 +1,87 @@
+<!doctype html><meta charset="utf-8"><title>pipe_ceiling_checks.gd</title><style>body{margin:3rem;background:#f1ede7;color:#222}pre{white-space:pre-wrap;font:14px/1.7 monospace}</style><h1>pipe_ceiling_checks.gd</h1><pre>extends RefCounted
+const Canopy = preload(&quot;res://commons/primitives/pipes/pipe_canopy.gd&quot;)
+class Press extends RefCounted:
+	var event_type := 2
+
+func run(tree: SceneTree, station: Node3D, camera: Camera3D) -&gt; void:
+	var app = station.specimen.ceiling_application
+	var canopy = app.canopy
+	var drawing: Array = station.specimen.strokes.duplicate(true)
+	var routes: Dictionary = station.specimen.patch_application.manager.routes.duplicate(true)
+	var finite := true
+	var clear := true
+	var budget := true
+	var deterministic := true
+	for mode in 3:
+		for count in Canopy.COUNTS:
+			for radius in Canopy.RADII:
+				var data := Canopy.make_layout(mode,count,radius)
+				deterministic = deterministic and data == Canopy.make_layout(mode,count,radius)
+				budget = budget and data.paths.size() &lt;= 22
+				for path in data.paths:
+					budget = budget and path.points.size() &lt;= 97
+					for p in path.points:
+						var point := Vector3(p[0],p[1],p[2])
+						finite = finite and point.is_finite()
+						clear = clear and point.y-radius &gt;= 5.8 and absf(point.x)+radius &lt; 8.0 and absf(point.z)+radius &lt; 8.0
+	tree.check(&quot;all 27 canopy layouts repeat deterministically with finite paths&quot;,finite and deterministic)
+	tree.check(&quot;all canopy controls retain overhead and side-aisle clearance&quot;,clear)
+	tree.check(&quot;canopy generation stays inside path and sample budgets&quot;,budget)
+	var rendered := true
+	for mode in 3:
+		canopy.rule = mode; canopy.count_index = 2; canopy.radius_index = 2; canopy.rebuild()
+		for run in canopy.layout.pipe_systems.values():
+			var mesh: ArrayMesh = run.skin.mesh
+			var arrays := mesh.surface_get_arrays(0)
+			rendered = rendered and arrays[Mesh.ARRAY_INDEX].size() &gt; 0
+			for vertex in arrays[Mesh.ARRAY_VERTEX]:
+				rendered = rendered and vertex.is_finite() and vertex.y &gt; 5.8
+	tree.check(&quot;each maximum-density ceiling produces actual hollow sweep meshes above the work&quot;,rendered)
+	# Check nearest sampled centrelines at the densest and widest weave, including
+	# off-centre approaches. The sweep samples the very same positions.
+	var weave := Canopy.make_layout(1,7,0.42)
+	var closest := INF
+	for a in 7:
+		for b in 7:
+			var first: Array = weave.paths[a*2].points
+			var second: Array = weave.paths[b*2+1].points
+			for i in range(first.size()-1):
+				var p := vec(first[i]); var q := vec(first[i+1])
+				if absf(p.x-(-5.4+1.8*b)) &gt; 2.0: continue
+				for j in range(second.size()-1):
+					var r := vec(second[j]); var s := vec(second[j+1])
+					if absf(r.z-(-5.4+1.8*a)) &gt; 2.0: continue
+					var pair := Geometry3D.get_closest_points_between_segments(p,q,r,s)
+					closest = minf(closest,pair[0].distance_to(pair[1]))
+	tree.check(&quot;thickest densest woven pipes do not intersect&quot;,closest &gt; 0.84)
+	app.control(4)
+	var old_gen: int = canopy.generation
+	app.buttons[3].pointer_event(Press.new())
+	tree.check(&quot;finish control changes actual material without remeshing&quot;,canopy.finish == 1 and canopy.generation == old_gen and canopy.layout.pipe_systems.values()[0].skin.material_override.roughness &lt; 0.2)
+	app.buttons[0].pointer_event(Press.new())
+	app.buttons[1].pointer_event(Press.new())
+	app.buttons[2].pointer_event(Press.new())
+	tree.check(&quot;rule diameter and repetition pointer controls rebuild the canopy&quot;,canopy.rule == 2 and canopy.radius_index == 2 and canopy.count_index == 2)
+	for i in 3: await tree.physics_frame
+	var button = app.buttons[0]
+	var ray := PhysicsRayQueryParameters3D.create(button.to_global(Vector3(0,0,1)),button.global_position,(1&lt;&lt;20)|(1&lt;&lt;22))
+	var hit := station.get_world_3d().direct_space_state.intersect_ray(ray)
+	tree.check(&quot;ceiling controls have reachable native pointer colliders&quot;,not hit.is_empty() and hit.collider == button)
+	app.buttons[4].pointer_event(Press.new())
+	tree.check(&quot;canopy reset leaves drawing and live patch intact&quot;,drawing == station.specimen.strokes and routes == station.specimen.patch_application.manager.routes and canopy.rule == 1 and canopy.radius_index == 1 and canopy.count_index == 1 and canopy.finish == 0)
+	old_gen = canopy.generation
+	for i in 8: await tree.process_frame
+	tree.check(&quot;idle canopy does not rebuild its geometry&quot;,canopy.generation == old_gen)
+	for mode in [1,0,2]:
+		canopy.rule = mode; canopy.rebuild(); app.rehang(); app.update_status()
+		camera.global_position = app.to_global(Vector3(4.7,1.8,8.5))
+		camera.look_at(app.to_global(Vector3(-0.6,6.8,-0.5)))
+		for i in 12: await tree.process_frame
+		await RenderingServer.frame_post_draw
+		var label: String = Canopy.RULES[mode].to_lower()
+		tree.check(&quot;native museum ceiling capture &quot;+label,tree.root.get_texture().get_image().save_png(tree.OUT+&quot;tube-ceiling-&quot;+label+&quot;.png&quot;) == OK)
+	app.control(4)
+
+func vec(p: Array) -&gt; Vector3:
+	return Vector3(p[0],p[1],p[2])
+</pre>

@@ -1,0 +1,38 @@
+--- before/commons/maps/Primitives_Polythedra/final.md
++++ commons/maps/Primitives_Polythedra/final.md
+@@ -18,7 +18,7 @@
+ 
+ <!-- @grab_tetrahedron -->
+ 
+-Turn the tetrahedron beside it. Find a face where the first object has an opening. Follow its edges toward the opposite vertex. Four faces now complete the enclosure.[^polyhedra-separation]
++Turn the tetrahedron a few steps on. Find a face where the first object has an opening. Follow its edges toward the opposite vertex. Four faces now complete the enclosure.[^polyhedra-separation]
+ 
+ Adding a base to the open corner would close a tetrahedron. This neighbouring example is regular, with four congruent equilateral faces. Its proportions differ, so compare how the faces connect before comparing their shapes.
+ 
+@@ -40,7 +40,7 @@
+ 
+ Look at the two versions on the wall. The amber base makes visible a boundary you could not see on the object in your hand.
+ 
+-![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/iterations/2026-09-23-polyhedra-two-boundaries/figures/polyhedra-boundaries.png)
++![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/figures/Primitives_Polythedra/polyhedra-boundaries.png)
+ 
+ *Four positions, two boundaries. The amber face shows where the convex hull closes the opening.*
+ 
+@@ -56,7 +56,7 @@
+ 
+ The small regular tetrahedron has equal edges. This one takes its proportions from the room: three edges leave the old corner at right angles. Follow the pink face into the walls. Its fit depends on their agreement.
+ 
+-Approach it through the game's movement controls. The room has gained a solid and lost a little space for your walk. To make one body fit, we have changed the room available to another.
++Walk up to it. The room has gained a solid and lost a little space for your walk. To make one body fit, we have changed the room available to another.
+ 
+ ## A face meets the floor
+ 
+@@ -88,7 +88,7 @@
+ 
+ STOP stands beside the concrete. Did you pause at the word or at the physical boundary? Recall WALK THIS LINE: an instruction can orient you without enforcing collision. This sign has no collision body of its own.[^polyhedra-ahmed]
+ 
+-Read one blue arrow, then look where it points. An arrow can propose a direction without knowing whether the route is traversable.
++Read one arrow on its blue disc, then look where it points. An arrow can propose a direction without knowing whether the route is traversable.
+ 
+ Look back at the barrier and the slope. Which would you change, and whose movement would it change? The fixtures are fixed here; this is a proposal to carry onward.
+ 

@@ -1,0 +1,235 @@
+{
+  "name": "QFEP Laboratory: The Formula Made Interactive",
+  "truth": "A manipulable formula becomes accountable through explicit quantities, receivers and tests.",
+  "qfep_term": "All",
+  "qfep_connection": "Keep the project’s research proposal open to testing. Slider examples and preferred bands are authored choices; their values do not establish universal conditions for life.",
+  "formula": "QFE = F − λE(S) + φΔE(S,t)",
+  "description": "Investigate Ada’s QFEP research proposal through particular implemented calculations and encounters. Ask what is supplied, what is measured, and what each comparison leaves out.",
+  "layer": "synthesis",
+  "prerequisites": [
+    "primitives",
+    "randomness",
+    "wavefunctions",
+    "foundationscrisis"
+  ],
+  "unlocks": [
+    "postfoundationscrisis",
+    "recursiveemergence",
+    "speculativecomputation"
+  ],
+  "difficulty": "advanced",
+  "estimated_time": "30-35 minutes",
+  "learning_objectives": [
+    "Compare distinct arrangements that yield the same scalar total.",
+    "Distinguish supplied values from measured quantities and specify the system being measured.",
+    "Investigate how a weight changes the consequence of another input.",
+    "Compare change values, rates and their receivers.",
+    "Ask what an authored reference or preferred interval includes and leaves out."
+  ],
+  "content": [
+    "QFEP_Introduction: Four controls, one result",
+    "QFEP_F_Term: Predictable according to what model?",
+    "QFEP_E_Term: Counting what could happen",
+    "QFEP_Lambda_Spectrum: The path the hall recommends",
+    "QFEP_Phi_Term: Giving change a sign",
+    "QFEP_Edge_Of_Chaos: A pattern and the way we drive it",
+    "QFEP_Sandbox: Where the control reaches",
+    "QFEP_Synthesis: What should this body keep?"
+  ],
+  "maps": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+  ],
+  "deferred_maps": [
+    "Chamber_QFEP"
+  ],
+  "deferred_reason": {
+    "Chamber_QFEP": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+  },
+  "audio": {
+    "ambient_preset": "laboratory_hum",
+    "volume": -12.0
+  },
+  "axiom_files": [
+    "res://commons/context/clipboard/tutorial_text/qfep_introduction_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/free_energy_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/entropy_drive_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/edge_of_chaos_axioms.md"
+  ],
+  "interactive_elements": {
+    "lambda_slider": {
+      "description": "Real-time Î» adjustment (0.0 to 1.0)",
+      "default": 0.4,
+      "visual_feedback": "System behavior changes in real-time"
+    },
+    "phi_slider": {
+      "description": "Rate sensitivity adjustment (-1.0 to 1.0)",
+      "default": 0.3,
+      "visual_feedback": "Positive Ï† = embrace change, negative Ï† = resist change"
+    },
+    "entropy_visualization": {
+      "description": "Real-time entropy measurement display",
+      "modes": [
+        "histogram",
+        "phase_space",
+        "time_series"
+      ]
+    }
+  },
+  "references": {
+    "gamwell_chapters": [
+      "Ch 7: Symmetry (Langton's Î»)",
+      "Ch 10: Turing",
+      "Ch 12: Fractals/Bifurcation"
+    ],
+    "key_concepts": [
+      "Free Energy Principle",
+      "Active Inference",
+      "Edge of Chaos",
+      "Langton's Lambda"
+    ],
+    "key_figures": [
+      "Karl Friston",
+      "Chris Langton",
+      "Stuart Kauffman",
+      "Ilya Prigogine"
+    ]
+  },
+  "return_to": "lab",
+  "lab_map": "Lab/map_data_post_qfeplaboratory",
+  "completion_rewards": [
+    "qfep_master_badge",
+    "edge_of_chaos_badge",
+    "theoretical_foundation_badge",
+    "oscillation_badge"
+  ],
+  "artifact_groups": [
+    {
+      "map": "QFEP_Introduction",
+      "position": "intro",
+      "artifacts": [
+        "tt",
+        "qfep_balance_workbench",
+        "grab_sphere_F",
+        "lambda_slider",
+        "science_screen",
+        "phi_slider",
+        "synthesis_stand",
+        "qfep_formula_3d",
+        "grab_sphere_E",
+        "grab_sphere_lambda",
+        "orange_and_apples"
+      ],
+      "size_budget": "mixed",
+      "rationale": "Keep and compare arrangements on the central workbench. All existing secondary works remain; separate rails are independent comparisons."
+    },
+    {
+      "map": "QFEP_F_Term",
+      "position": "foundation",
+      "artifacts": [
+        "dark_sphere",
+        "tt",
+        "lambda_slider",
+        "science_screen",
+        "shannon_workbench",
+        "snap_octahedron_puzzle",
+        "snap_tetrahedron_puzzle",
+        "crystal_cluster"
+      ],
+      "size_budget": "mixed",
+      "rationale": "Restore the source/predictor workbench, with eight existing placements retained. The two puzzles use active scene aliases. Lambda is independent and movable; the decorative sphere is not a dark-room demonstration."
+    },
+    {
+      "map": "QFEP_E_Term",
+      "position": "foundation",
+      "artifacts": [
+        "tt",
+        "microstate_counter",
+        "entropy_fan",
+        "possibility_space_cloud",
+        "particle_chaos",
+        "lambda_slider",
+        "random_cubes"
+      ],
+      "size_budget": "mixed",
+      "rationale": "The visitor-controlled entropy fan counts endings and exposes branch closures. All seven placed works remain. Secondary comparisons are not inputs to the count; lambda is independent and movable."
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "position": "exploration",
+      "artifacts": [
+        "qfep_chalkboard",
+        "edge_particles",
+        "lambda_hall",
+        "chaos_particles",
+        "phase_cube",
+        "bifurcation_walkway",
+        "dissolving_form",
+        "ordered_grid",
+        "complexity_pattern",
+        "crystal_formation"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Retain the authored spectrum and all ten works; move only the lit recommendation to compare its invitation with the geometry and colours already in place."
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "position": "exploration",
+      "artifacts": [
+        "rigid_sculpture",
+        "fluid_form",
+        "phi_slider",
+        "preserved_pattern",
+        "transforming_pattern"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Two primary encounters: a signed rail with a delayed interpretation and an independently moving pattern. Retain the supporting comparisons."
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "position": "integration",
+      "artifacts": [
+        "turing_pattern",
+        "edge_core",
+        "emergence_zone",
+        "lambda_slider"
+      ],
+      "size_budget": "environment",
+      "rationale": "Compare a shared Gray-Scott model at two timesteps before assigning a regime name. Retain the surrounding secondary comparisons."
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "position": "integration",
+      "artifacts": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor",
+        "reactive_particles",
+        "qfep_formula_3d"
+      ],
+      "size_budget": "environment",
+      "rationale": "Connect and cut one identified receiver, compare offered and used inputs, and keep the surrounding works independent."
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "position": "synthesis",
+      "artifacts": [
+        "qfep_term_compass",
+        "grab_sphere_F",
+        "grab_sphere_E",
+        "qfep_formula_3d",
+        "grab_sphere_lambda",
+        "grab_sphere_phi",
+        "queer_morphology_specimen"
+      ],
+      "size_budget": "mixed",
+      "rationale": "Compare authored mechanical quantities and separate imposed pressure modulation from the response of a contained body."
+    }
+  ]
+}

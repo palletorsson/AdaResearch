@@ -1,0 +1,95 @@
+{
+  "sequence": "boolean_surfaces",
+  "maps": [
+    "Boolean_Verbs",
+    "Boolean_Works"
+  ],
+  "live_sequence_maps": [
+    "Boolean_Verbs",
+    "Boolean_Gallery",
+    "Boolean_Works"
+  ],
+  "museum_template": "bilbao-atrium-radial",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "4d8073400f203351091b4d3c925367b6283249e9b9e322c94566846d58d5b873",
+    "commons/data/museum/em_plan.json": "4d8073400f203351091b4d3c925367b6283249e9b9e322c94566846d58d5b873",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/boolean_surfaces.json": "3fe61365ce9b36bca67e25cd6da4fca1cbb7aa395a8a8963725aaa30d56fb753",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/Boolean_Verbs/map_data.json": "ddfd202d9353c8f4797866a201b3ce90f831982f1e040395c631237a770163ba",
+    "commons/maps/Boolean_Works/map_data.json": "b1bffe88eefa0957259fb9a1410e8b45f073094e9ff3f5723121115eeece1880"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "5c1ff22cb955bc33a6be9b9925e587dbfbec60f579dd7fb04cc46badbb79fabd",
+    "commons/data/museum/em_plan.json": "5c1ff22cb955bc33a6be9b9925e587dbfbec60f579dd7fb04cc46badbb79fabd",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "preservation": "All unrelated plan rows, placements, top-level metadata and relative order retained.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "Boolean_Verbs",
+      "pearl_index": 0,
+      "room": {
+        "w": 13,
+        "h": 26
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 26,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "Boolean_Works",
+      "pearl_index": 2,
+      "room": {
+        "w": 19,
+        "h": 46
+      },
+      "artifacts": 9,
+      "ruling": {
+        "src_w": 17,
+        "src_h": 44,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T080600432267Z"
+}

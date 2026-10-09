@@ -1,0 +1,27 @@
+{
+	"evidence": {
+		"corners": 8,
+		"displaced_corner": 6,
+		"displacement": [
+			0,
+			0,
+			0.55
+		],
+		"edges": 12,
+		"front_indices": [
+			[
+				4,
+				5,
+				7
+			],
+			[
+				5,
+				6,
+				7
+			]
+		],
+		"method": "create_triangle_meshes / _update_triangle_mesh",
+		"triangles": 12
+	},
+	"passed": true
+}

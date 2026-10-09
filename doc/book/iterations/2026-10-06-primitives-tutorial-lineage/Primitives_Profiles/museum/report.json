@@ -1,0 +1,36 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "lesson script can instantiate",
+      "passed": true
+    },
+    {
+      "name": "exact learner program mounted in requested hall",
+      "passed": true
+    },
+    {
+      "name": "study has museum floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: learner-study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "hall": "Primitives_Profiles",
+  "observations": {
+    "learner_main": "res://doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/lesson.gd",
+    "station_local": [
+      11.5,
+      0.0,
+      7.5
+    ]
+  },
+  "passed": true,
+  "scope": "Exact printed program mounted temporarily in the real Endless Museum hall. Synthetic input; no permanent placement or headset claim."
+}

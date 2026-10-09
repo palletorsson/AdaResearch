@@ -1,0 +1,256 @@
+{
+  "checks": [
+    {
+      "message": "actual acceptance branch samples expected warm probability",
+      "ok": true
+    },
+    {
+      "message": "zero observed cold acceptances does not make the probability zero",
+      "ok": true
+    },
+    {
+      "message": "a downhill proposal is accepted at cold temperature",
+      "ok": true
+    },
+    {
+      "message": "high recent acceptance accelerates adaptive cooling",
+      "ok": true
+    },
+    {
+      "message": "low recent acceptance slows adaptive cooling",
+      "ok": true
+    },
+    {
+      "message": "nonadaptive exponential schedule uses configured rate",
+      "ok": true
+    },
+    {
+      "message": "START T slider changes initial setting without replacing current temperature",
+      "ok": true
+    },
+    {
+      "message": "RESET applies the initial-temperature setting",
+      "ok": true
+    },
+    {
+      "message": "manual basin hop takes an uphill relocation without acceptance trial",
+      "ok": true
+    },
+    {
+      "message": "hop reheats to at least thirty percent of initial temperature",
+      "ok": true
+    },
+    {
+      "message": "eightieth non-downhill proposal triggers separate automatic hop",
+      "ok": true
+    },
+    {
+      "message": "default hybrid run respects declared stopping disjunction seed11",
+      "ok": true
+    },
+    {
+      "message": "default hybrid run respects declared stopping disjunction seed29",
+      "ok": true
+    },
+    {
+      "message": "default hybrid run respects declared stopping disjunction seed47",
+      "ok": true
+    },
+    {
+      "message": "configured Q build makes one interpretation control",
+      "ok": true
+    },
+    {
+      "message": "Q starts with neutral geometric labels",
+      "ok": true
+    },
+    {
+      "message": "Q reveal retains proposition and names interpretive limit",
+      "ok": true
+    },
+    {
+      "message": "Q reveal preserves live simulation state",
+      "ok": true
+    },
+    {
+      "message": "Q comparison can hide interpretation again",
+      "ok": true
+    },
+    {
+      "message": "periodic driven lattice keeps changing independently of interpretation",
+      "ok": true
+    },
+    {
+      "message": "optimizer readout names implemented scalar objective",
+      "ok": true
+    },
+    {
+      "message": "optimizer eventually restarts after local small-gradient stop",
+      "ok": false
+    },
+    {
+      "message": "optimizer retains at most forty samples",
+      "ok": true
+    },
+    {
+      "message": "actual puzzle scene overrides script defaults: twelve pieces, .6m threshold",
+      "ok": true
+    },
+    {
+      "message": "all spawned pieces admit the real pickable grab contract",
+      "ok": true
+    },
+    {
+      "message": "a quiet low arrangement is refused by height condition",
+      "ok": true
+    },
+    {
+      "message": "height alone does not pass when a piece moves",
+      "ok": true
+    },
+    {
+      "message": "high quiet arrangement accumulates detector dwell",
+      "ok": true
+    },
+    {
+      "message": "sufficient height and quiet dwell trigger authored transformation",
+      "ok": true
+    },
+    {
+      "message": "detector acknowledgment reaches prescribed walker animation",
+      "ok": true
+    }
+  ],
+  "headset_tested": false,
+  "observations": {
+    "default_runs": [
+      {
+        "best_energy": 5.022318676387,
+        "complete": true,
+        "hops": 0,
+        "seed": 11,
+        "steps": 340,
+        "temperature": 0.0905409998005592
+      },
+      {
+        "best_energy": 2.66689779306999,
+        "complete": true,
+        "hops": 0,
+        "seed": 29,
+        "steps": 340,
+        "temperature": 0.0905409998005592
+      },
+      {
+        "best_energy": 3.08867612054709,
+        "complete": true,
+        "hops": 0,
+        "seed": 47,
+        "steps": 340,
+        "temperature": 0.0905409998005592
+      }
+    ],
+    "optimizer": {
+      "last_step_before_restart": 2500,
+      "restarted": false,
+      "start_energy": 0.0333787584508796,
+      "trail_size_after_restart": 40
+    },
+    "piece_pickability": [
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "GrabPyramid"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "GrabCube"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@200"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@201"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@202"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@203"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@204"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@205"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@206"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@207"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@208"
+      },
+      {
+        "can_pick_up": true,
+        "collision_layer": 4,
+        "enabled": true,
+        "frozen": true,
+        "name": "@RigidBody3D@209"
+      }
+    ],
+    "uphill_trials": {
+      "cold_accepted": 0,
+      "cold_probability": 0.000000000013887943864964,
+      "cold_temperature": 0.002,
+      "delta_energy": 0.05,
+      "trials": 2000,
+      "warm_accepted": 1529,
+      "warm_probability": 0.778800783071405,
+      "warm_temperature": 0.2
+    }
+  },
+  "puzzle_scope": "detector and pickable admission with controlled poses; not a natural stack or tracked-hand comfort test"
+}

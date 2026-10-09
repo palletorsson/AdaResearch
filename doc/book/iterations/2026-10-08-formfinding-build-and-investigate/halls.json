@@ -1,0 +1,161 @@
+[
+  {
+    "key": "Descent",
+    "title": "Choose the next address",
+    "script": "01_descent.gd",
+    "primary": "descent_landscape_lab",
+    "bay": [
+      10.5,
+      0,
+      6
+    ],
+    "subjects": [
+      "Objective function",
+      "Finite-difference gradient",
+      "Update rule",
+      "Distinct stopping conditions"
+    ],
+    "encounter": "At the large blue surface, press STEP and follow the gold point. The point changes address because a rule proposes another one. In Forces, a released body kept velocity. This search keeps no velocity: every accepted step replaces its two-number address.",
+    "inherit": "Keep the point class, Vector2 and Vector3, functions, conditionals and the controls from Forces. The displayed sphere is a marker here; its collider is disabled. A grabbable point would let a hand move the picture without changing the search address.",
+    "build": "Reconstruct the STEP operation and both cost functions. The supplied display samples the same functions into a small surface; it does not decide the step. A Vector2 holds the search coordinates. Its second component becomes spatial Z when plotted; surface height shows cost.",
+    "explain": "The bowl costs one quarter of x² + z². Its gradient is (x/2, z/2). The two-valley expression is the hall’s second authored landscape; it gives us two possible local arrivals. In landscape.gd, sample the cost 0.03 to either side of each coordinate and divide the difference by the full 0.06 separation. This estimates the slope of the cost function, not a normal read from the rendered mesh.\n\nSubtract rate × gradient to propose an address. The rate is a search step size, not seconds. STEP does one update. A small gradient, an exhausted budget and an out-of-frame proposal have different names. The last case retains the old address; it does not clamp the point onto the edge and pretend it has settled.",
+    "change": "On the bowl, predict the first step from (−2.8, −2) at rate 0.7: (−1.82, −1.3). Press STEP once and read it. Set rate to 5 and restart: the first proposal leaves the frame, so the point must stay at its start. These outcomes test the operation and the boundary separately.",
+    "task": "Make a second search beginning at (2.8, −2). Give it its own address, step count and status. Use the same two-valley function and rate 0.2 for both searches. Predict whether they finish together. Record their final costs and stopping reasons. A single shared STEP button can call each search once; do not share the mutable address. Explain why two SMALL SLOPE messages need not identify the same result.",
+    "carry": "You now have an objective, a proposed change and a reason to stop. Keep landscape.gd: Annealing will revisit this exact landscape with another proposal and acceptance rule.",
+    "limits": "The hall adds RUN, three starts, rate and tolerance controls, a history and explanatory boards. This study keeps STEP, RESET and two surfaces. Small slope is a local observation; no code here proves a global minimum.",
+    "map": "FormFinding_Descent"
+  },
+  {
+    "key": "Catenary",
+    "title": "Draw between the points",
+    "script": "02_curve.gd",
+    "primary": "cable_builder",
+    "bay": [
+      16,
+      0,
+      7
+    ],
+    "subjects": [
+      "Curve3D",
+      "Endpoints and handles",
+      "Sampling a curve",
+      "Parameters versus simulated forces"
+    ],
+    "encounter": "Move a point on the cable builder. The hanging line follows immediately. Its shape is drafted by handles; it does not wait for gravity to settle a chain. Walk on to the formula-built catenoid and laundry curves before deciding what their resemblance establishes.",
+    "inherit": "Bring the two held points from Lines and Coordinates, local/world conversion, and the loop that joined neighbouring positions in Trace. Here those familiar points become endpoints of a curved span.",
+    "build": "Make one span using the same handle rule as the existing cable builder. Keep two PointBody instances and 24 thin cylinders. The hand supplies endpoints; the script resamples the span as they move.",
+    "explain": "Curve3D stores endpoints with incoming and outgoing handles. A handle is an offset from its endpoint. The outgoing handle follows 30% of the displacement to the other point; the incoming handle points 30% back. Both also move down by sag × span × 0.5. This is the production artifact’s chosen Bézier construction.\n\ncurve.sample(0, t) evaluates the first span at a parameter between 0 and 1. The loop joins neighbouring evaluations. Equal parameter intervals need not have equal spatial length. to_local converts each held point’s world position into the study’s frame before constructing the curve. Local DOWN remains the study’s down; keep the study upright at unit scale.\n\nSag is a dimensionless control of handle depth. It is not the midpoint’s drop and not the cable’s weight. With level endpoints two metres apart and sag 0.5, both handles drop 0.5 m and the midpoint drops 0.375 m. Zero sag gives a straight span. The script evaluates a shape every frame; it does not integrate velocity or conserve cable length.",
+    "change": "Before pressing SAG, predict which points will stay fixed. The button alternates 0.8 and 0 after the initial 0.5 setting. At sag 0, move an endpoint in height and depth: the line should still join both points. Bring the endpoints together; the zero-length drawing should disappear without an invalid direction.",
+    "task": "Build two neighbouring spans from three held points. The middle point is shared: moving it must change both spans without creating two copies of the joint. Retain the same per-span handle rule. Compare the two sag depths when the spans have different lengths. You will need another set of rods, a loop over adjacent endpoint pairs, and the correct Curve3D span index for each sample.",
+    "carry": "A shape can be determined directly from controls. In Relaxation, keep endpoints but replace the drafted interior with positions that repeatedly correct their relationships.",
+    "limits": "The museum cable has four control points and a swept tube. The study uses two and thin cylinders. Neither is a physical catenary solver. The evaluated cosh curves and surfaces elsewhere in the hall are separate constructions.",
+    "map": "FormFinding_Catenary"
+  },
+  {
+    "key": "Relaxation",
+    "title": "Keep correcting the connection",
+    "script": "03_relaxation.gd",
+    "primary": "verlet_workbench",
+    "bay": [
+      16,
+      0,
+      7
+    ],
+    "subjects": [
+      "Current and previous positions",
+      "Pinned endpoints",
+      "Distance constraints",
+      "Iteration budget",
+      "Residual error"
+    ],
+    "encounter": "At the cloth bench, switch WIND off, then compare PASSES. Each choice resets the same cloth. Look at its worst length error as well as its shape. Nearby frozen forms retain the result of earlier corrections; their stillness does not mean the calculation was exact.",
+    "inherit": "Keep the endpoint points, arrays and neighbouring-index loop. Forces supplied gravity, time steps and damping. Here positions and their previous values carry the motion; a separate correction loop enforces approximate lengths.",
+    "build": "Reduce the cloth to seven points and six links. Only the endpoints are held. Each STEP advances one fixed 1/60-second model step, then repeats the constraint corrections. The chain has 2.7 m of requested link length across an initial two-metre span, so it has room to hang.",
+    "explain": "positions and previous are separate arrays. duplicate() preserves the previous record while the current one changes. For an interior point, here − previous[i] is displacement during the preceding fixed step, not metres per second. Multiplying by 0.99 damps that displacement. Gravity adds acceleration × DT². Jolt does not integrate these interior points.\n\nA link compares its current length with REST. correct_pair moves its ends toward the requested distance. An endpoint has correction weight zero; a free point has weight one. Two free ends split a correction; beside a pin the free end takes it all. The tiny-distance guard avoids dividing by zero. It cannot invent a direction for coincident points.\n\nLater corrections can disturb earlier links, so one pass need not satisfy the entire chain. Repeating the pass reduces the remaining error in this comparison. It costs more work and does not certify every possible configuration. worst_error reports the largest absolute relative length error. Moving either held endpoint supplies a new pin on the next STEP; RESET returns both original pins. PASSES switches to 1, then 12, resetting each time. The initial budget is 4.",
+    "change": "From RESET, compare one and twelve passes after the same 420 steps. You may drive step_once() with a bounded for loop for this measurement. Predict which budget leaves less worst error. Keep the same pins, time step, initial positions and damping. Do not compare one fresh chain with another that has already been settling.",
+    "task": "Reconstruct a second chain with the same seven points but only the first point pinned. Update the correction weights and the integration range together so the final point is free. Predict its motion before stepping. Show that the first point stays at its pin and that the last point can move. Then explain why leaving the old endpoint weight at zero would contradict your new model.",
+    "carry": "Constraints can shape a configuration through repeated local corrections. Equilibrium next asks when a simpler relation lets you calculate a pose directly.",
+    "limits": "This study is a fixed-step position solver with no contact response for its interior markers or rods. Keep pins near their initial positions and above the floor. The full cloth includes a two-dimensional spring network and optional wind. The chain is not an exact continuous catenary.",
+    "map": "FormFinding_Relaxation"
+  },
+  {
+    "key": "Equilibrium",
+    "title": "Place the pivot",
+    "script": "04_balance.gd",
+    "primary": "calder_mobile",
+    "bay": [
+      16,
+      0,
+      7
+    ],
+    "subjects": [
+      "Mass moments",
+      "Solving a constraint",
+      "Assumptions of a model",
+      "Balance versus stability"
+    ],
+    "encounter": "Follow one arm of the hanging mobile. The heavier side has less distance to the suspension. Its stillness was constructed from an arithmetic relation. The room’s truss and animated triangle offer other appearances of support without a load test.",
+    "inherit": "Use masses from Forces, displacement and distance from Lines, functions and the drawn rods. We only need two familiar point markers to reconstruct one arm of the recursive mobile.",
+    "build": "Choose two positive masses and a total span. Calculate both distances from the pivot, then place the points. One nearby button changes the left mass while retaining the span.",
+    "explain": "For opposite vertical weights acting on a level, massless arm, equal torque magnitudes require m_left × g × d_left = m_right × g × d_right. The same g cancels. Also, the two arm lengths must add to span. Solving both relations gives d_left = span × m_right / total_mass and the opposite expression for d_right.\n\nWith masses 1 and 2 kg over two metres, the arms are 4/3 and 2/3 m. The heavier mass is closer to the pivot. The label shows mass × arm in kg m; multiply by g for torque magnitude in N m. Equal products express the selected static model.\n\nThe PointBody instances display the calculated places. The masses are numeric inputs, not a claim that these frozen markers are hanging under simulated forces. No joint, collision or settling solver determines this pose. That distinction also applies to the current mobile.",
+    "change": "Predict the pivot’s relation to the points when the left mass changes from 1 to 4 kg. Press LEFT MASS and compare both products. Check that the arm lengths still add to two metres. Then give the sides equal mass and predict the midpoint.",
+    "task": "Build a second two-point arm carrying masses 3 and 7 kg over 1.5 m. Display both distances and the residual m_left × d_left − m_right × d_right. It should be near zero. Construct an intentionally centred pivot as a comparison and show its nonzero residual. Explain why a zero residual in this model does not show that a disturbed physical mobile will return to rest.",
+    "carry": "A calculated relation can construct a pose without waiting. In Annealing we return to a search where a useful next step may first make the objective worse.",
+    "limits": "The museum recurses over many arms and uses nominal disc masses. This lesson isolates one level. It omits rod and wire mass, friction, wind, and dynamic stability. The two points are a diagram of its inputs, not a new physics engine.",
+    "map": "FormFinding_Equilibrium"
+  },
+  {
+    "key": "Annealing",
+    "title": "Keep the best; let the search move",
+    "script": "05_annealing.gd",
+    "primary": "simulated_annealing",
+    "bay": [
+      16,
+      0,
+      7
+    ],
+    "subjects": [
+      "Random proposals",
+      "Acceptance probability",
+      "Cooling",
+      "Current versus best",
+      "Repeatable comparison"
+    ],
+    "encounter": "Watch the search point change its mind. At the annealing cabinet, some accepted moves raise the displayed cost. The lower region it has already found remains worth keeping even while the current candidate explores elsewhere.",
+    "inherit": "Return to the two-valley function and point marker from Descent. Keep the objective unchanged so the new rule, rather than a new landscape, carries the comparison. Conditionals, saved values and bounded loops are already available.",
+    "build": "Propose a nearby address, accept improvements, sometimes accept a worse move, and gradually reduce that willingness. Store current and best separately. The smaller raised marker records the best address found so far.",
+    "explain": "RandomNumberGenerator supplies the proposals. seed = 7 restarts its sequence for repeatable comparisons in this engine version. randf_range(-0.5, 0.5) chooses each coordinate offset; randf() supplies the acceptance draw. This is a first use of random sampling, before the later Randomness sequence studies its varieties.\n\nchange is candidate cost minus current cost. A nonpositive change is accepted. For a positive change and positive temperature, exp(-change / temperature) gives an acceptance probability between zero and one. Compare the random draw with that threshold. At change 0.05 and temperature 0.2, the threshold is about 0.779: a draw of 0.7 accepts and 0.9 rejects.\n\nCurrent may become worse. Best only changes when the accepted current cost improves on it. Cooling multiplies temperature by 0.98 after each attempt, including rejected and out-of-frame proposals. The counter counts attempts, not accepted moves. Below 0.01, or at 240 attempts, the search stops. A reset restores the seed, both addresses, temperature and counter.",
+    "change": "Keep the initial state and proposal rule. Set cooling to 0.9 and compare with 0.98. Predict which schedule stops sooner, then record both attempt counts and best costs. A faster cooling schedule gives fewer opportunities; one result does not establish that every slower run will be better.",
+    "task": "Add counters for accepted improvements, accepted worse moves and rejected in-frame proposals. Define where equal-cost moves belong. Verify that their sum plus out-of-frame proposals equals the attempt count. Run several distinct seeds and keep a small table of best costs. Explain why keeping a best record is different from forcing current to move only downhill.",
+    "carry": "A stopping rule finishes a search; it does not decide whether its result serves your purpose. Forge makes that decision into visible code.",
+    "limits": "The installed cabinet uses another objective and a richer adaptive algorithm, including occasional forced hops and reheating. This study isolates basic acceptance and cooling on the earlier landscape. Temperature here is an algorithmic parameter, not a measured material temperature. Finite runs provide no guarantee of the global optimum.",
+    "map": "FormFinding_Annealing"
+  },
+  {
+    "key": "Forge",
+    "title": "Write what counts",
+    "script": "06_criterion.gd",
+    "primary": "balance_puzzle",
+    "bay": [
+      16,
+      0,
+      7
+    ],
+    "subjects": [
+      "Combining conditions",
+      "Measured state",
+      "Accumulated time",
+      "Success criteria",
+      "Counterexamples"
+    ],
+    "encounter": "At the balance puzzle, make a low quiet arrangement, then a taller one. The detector asks for more than stillness. Turn to the forge’s arriving body and notice that its destination was prescribed in advance. These two forms arrive under different kinds of instruction.",
+    "inherit": "Bring the grabbable cube, engine velocity, conditions, counters and a boolean state. The cube’s complete construction is included with the shared code. The museum floor and XR hands remain the environment.",
+    "build": "Make three small physical cubes. Measure their highest corner above the floor and whether they are moving slowly. Accumulate credit when the height and quietness conditions hold; lose credit when movement returns. Keep ACCEPTED visible once reached.",
+    "explain": "The eight corners of each cube are transformed into the study’s frame before measuring height, so a turned cube’s top is still measured correctly. The study origin must be on the floor and its axes upright at unit scale. The quiet test checks linear speed in m/s and angular speed in radians/s. It also rejects a held cube, whose low reported rigid-body velocity would otherwise be misleading.\n\nobserve is the decision rule separated from measurement. A low result clears credit. A high, quiet result gains delta seconds. A high moving result loses twice delta, down to zero. This follows the museum puzzle’s gain-and-decay idea; it is not a requirement for one perfectly uninterrupted quiet interval. Crossing required_time latches accepted. RESET clears that record and places the cubes separately. Release them before resetting.\n\nThe rule measures height and low motion, not whether the cubes support one another or remain inside a tray. A cube resting on an unrelated high ledge could satisfy these measurements. That limitation is part of what you are learning to inspect, not a property to hide behind the word success.",
+    "change": "Let three separate cubes settle on the floor. They should remain below the 0.5 m threshold. Stack them into a roughly 0.6 m column and let go. Watch the credit rather than assuming the first tall frame will pass. Disturb the stack before acceptance and follow the loss of credit.",
+    "task": "Author a second criterion that rewards a low arrangement. Keep the physical cubes and the measurement code; change the decision function. Supply one measured situation that the original accepts and yours rejects, and another that reverses that judgment. Test both functions with known height, quietness and time values, then build the two arrangements in the room. State what both criteria still fail to measure.",
+    "carry": "An objective, constraint and stopping rule each make a different decision. Keep that distinction when Wavefunctions begins: a continuing oscillation may be a successful behaviour even though it never settles.",
+    "limits": "The installed puzzle has eight mixed pieces and a walking reward animation. Your study has three cubes and a latched caption. It improves height measurement and excludes held cubes, but does not claim to reproduce every part of the production detector. Its success rule does not certify physical stability for all future disturbances.",
+    "map": "FormFinding_Forge"
+  }
+]

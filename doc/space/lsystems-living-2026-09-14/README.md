@@ -1,0 +1,19 @@
+# Living — what counts as a change?
+
+14 September 2026. Review: http://localhost:3003/research/possible-bodies/lsystems-living.html
+
+The sixth L-systems hall now develops genetic_tree_sculptor through raw genes, compiled grammar, held geometry and a placed snapshot. The existing primary and all five secondary works remain. The original 13×12 raised terrain is translated by (3,20) into a 19×36 surround, with a filled former teleporter void and support for coral. Both active plans agree. The saved museum hand and open editor were preserved.
+
+GENE / LESS / MORE / HOLD / PLANT / RESET form a compact 3×2 console. The original eight-slider rack, RANDOM and PLANT remain. A fixed lesson specimen and optional render seed make comparisons reproducible. Depth 4.0,4.2,4.4,4.6,4.8 generates the same branch geometry; 5.0 adds a generation. At maximum Depth/Forks, the sentence requests 4,964 F/S commands against a 200-command drawing budget. Very short segments can emit no mesh.
+
+HOLD copies the body and DNA into a witness slot. PLANT exports independent DNA and places a copy on one local pad. Later edits leave these copies alone; later HOLD/PLANT replaces its slot. RESET restores only the editable specimen. A pending debounce is flushed before copying. These local branch meshes do not collide with the visitor, consume soil or generate terrain. The pre-existing branching catalyst may mutate/rescale the exported DNA and build a temporary tree.
+
+The first two full runs passed the artifact tests but crashed during engine shutdown after DNA export. Releasing Engine metadata before shutdown removed the crash. The shipped fix registers a static cleanup on the application root's tree_exiting signal, preserving the export across hall/instance removal while releasing it before script teardown. The final test leaves the export in place and relies on this runtime callback; it contains no special metadata cleanup. The first route attempt also found that x10.5 met the exit frame; x9.5 reaches the open route. Movement was tested through the existing dogleg, without altering its walls.
+
+Final hidden Godot PID35648: 49 passing checks, clean exit, no GDScript errors. The runner records exact source hashes, verifies no source mutation during capture, and checks the real hand is unchanged. Synthetic DesktopPlayer pointer actions operated all six buttons; its collision capsule walked the outer aisle and exit. Thirty-seven content checks pass, nineteen HTTP assets match their publication hashes. Browser inspection found all seven images loaded, no horizontal overflow, and a working book disclosure. Necklace resolves genetic_tree_sculptor as the sole primary and opens its 743-word anchored passage. Previous Grammar Lab, Architecture and Competition receipts remain valid under scoped shared-file verification.
+
+Headset reach, readability, comfort and Quest performance remain unverified. The retained secondary interactions were not individually re-tested in this encounter. A previously observed startup UID warning remains unrelated to these changes.
+
+Evidence: before/, baseline/, first-run.json, second-run.json, diagnostic-cleanup-run.json, receipt.json, runtime-report.json, engine.log, content-checks.json, http-checks.json and browser-checks.json. Preparation and implementation scripts are one-time migrations; do not rerun them over later edits. review_living.py and check_living_content.py are the repeatable verification entry points. The HTML builder requires the passing receipt to match all recorded sources before publication.
+
+Next: Assemblage_Same_Desire, the final L-systems hall. Inspect the existing ten_print_textile, its full collection and manuscript. Distinguish independent mark choices, geometric adjacency and a reader's inferred route. Complete the first traverse before a broad rewrite.

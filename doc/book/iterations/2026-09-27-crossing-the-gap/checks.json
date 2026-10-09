@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Encounter markers preserved in order",
+      "passed": true
+    },
+    {
+      "name": "All five code excerpts retained unchanged",
+      "passed": true
+    },
+    {
+      "name": "Opening and first gap retained",
+      "passed": true
+    },
+    {
+      "name": "Closing and next-hall handover retained",
+      "passed": true
+    },
+    {
+      "name": "Bank agreement retained",
+      "passed": true
+    },
+    {
+      "name": "Both existing museum images retained",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Trans_Introduction/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Trans_Introduction/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/scenes/mapobjects/transport_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/scenes/mapobjects/rotation_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/scenes/mapobjects/scale_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/artifacts/adjustable_landing/adjustable_landing.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: doc/book/figures/Trans_Introduction/bank-at-crossing.png",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: doc/book/figures/Trans_Introduction/bank-gap.png",
+      "passed": true
+    },
+    {
+      "name": "Ferry at (5,6)",
+      "passed": true
+    },
+    {
+      "name": "Scale at deck with zero added lowering",
+      "passed": true
+    },
+    {
+      "name": "Narrow bridge at deck with zero added lowering",
+      "passed": true
+    },
+    {
+      "name": "Only this hall text hash and review link changed in core metadata",
+      "passed": true
+    },
+    {
+      "name": "Learner validation not promoted",
+      "passed": true
+    },
+    {
+      "name": "Seven-hall Transformation capture current",
+      "passed": true
+    },
+    {
+      "name": "Capture content matches manifest",
+      "passed": true
+    }
+  ],
+  "scope": "Manuscript, current authored placement, source preservation and capture freshness. No new runtime or headset test.",
+  "private_notes": "Index refreshed; pre-existing Point_Zero and Point_One note-template and grounding flags are retained, not counted as failures of this chapter."
+}

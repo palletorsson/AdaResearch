@@ -1,0 +1,83 @@
+{
+	"artifacts": [
+		{
+			"id": "sine_wall_corridor",
+			"placeholder": false,
+			"position": "(7.0, 0.5, 3.0)",
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn"
+		},
+		{
+			"id": "sine_wall_explanation",
+			"placeholder": false,
+			"position": "(2.0, 1.1, 5.0)",
+			"scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn"
+		},
+		{
+			"id": "sine_space_explanation",
+			"placeholder": false,
+			"position": "(9.0, 1.3, 5.0)",
+			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn"
+		},
+		{
+			"id": "colorballs",
+			"placeholder": false,
+			"position": "(9.0, 0.0, 8.0)",
+			"scene": "res://algorithms/color/colorballs/colorballs.tscn"
+		},
+		{
+			"id": "colorballs",
+			"placeholder": false,
+			"position": "(9.0, 0.0, 13.0)",
+			"scene": "res://algorithms/color/colorballs/colorballs.tscn"
+		},
+		{
+			"id": "dark_sphere",
+			"placeholder": false,
+			"position": "(9.0, 0.0, 14.0)",
+			"scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn"
+		},
+		{
+			"id": "sine_space",
+			"placeholder": false,
+			"position": "(9.0, 0.0, 16.0)",
+			"scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn"
+		},
+		{
+			"id": "colorballs",
+			"placeholder": false,
+			"position": "(9.0, 0.0, 18.0)",
+			"scene": "res://algorithms/color/colorballs/colorballs.tscn"
+		}
+	],
+	"dimensions": {
+		"depth": 30.0,
+		"max_height": 8.0,
+		"width": 14.0
+	},
+	"engine": "4.6-stable (official)",
+	"json": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-08-wave-original-grid/WaveFunctions_Sine_Space/map_data.json",
+	"json_sha256": "c019971ab60350d4e5e766b625addf242b0fbe11009281e84c4386b71185ef0f",
+	"map": "WaveFunctions_Sine_Space",
+	"renderer": "real GridSystem / current artifacts",
+	"shots": [
+		{
+			"eye": "(33.0, 31.0, -15.0)",
+			"file": "overview.png",
+			"target": "(6.0, 3.0, 14.0)"
+		},
+		{
+			"eye": "(9.0, 15.0, 0.0)",
+			"file": "basin.png",
+			"target": "(6.0, 1.0, 18.0)"
+		},
+		{
+			"eye": "(10.0, 2.15, 8.0)",
+			"file": "bridge.png",
+			"target": "(6.0, 0.5, 19.0)"
+		}
+	],
+	"structure_cubes": 1052,
+	"structure_rows": 30,
+	"verified": true,
+	"zero_cells": 164
+}

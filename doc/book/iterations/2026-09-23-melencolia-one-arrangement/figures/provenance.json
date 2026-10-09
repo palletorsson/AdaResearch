@@ -1,0 +1,307 @@
+{
+  "source_files": {
+    "commons/font/static/Roboto-Regular.ttf": "dbd285b518e398832f6f4a736109c355ce25a49546bfce41bab256c9ef7e56eb",
+    "commons/font/static/Roboto-Light.ttf": "4b2e824beab63c438c2849bd6e1d4f6708cba5a5c5f3dbe8d5af7e9682ed9373",
+    "tools/captures/melencolia_court.gd": "4d01c306988ef607bdc0871f8dd2d71265911f0d86ec056188bf01572a834030",
+    "commons/primitives/shared/grid_material_factory.gd": "03f18dcdd890abe6735cf469da48d197bd1df2ab4bd8871f2911bee89337e98b",
+    "commons/primitives/shared/primitive_mesh_builder.gd": "67f9ab823ac4e216cd4d2d4f0a104b268d002e00b0faf5fbe009e5cca438a7e2",
+    "commons/primitives/shared/solid_primitive_finish.gd": "a966478b26d12d11ab0c0bce477c422733db2b5ffb951b972dba62b2f99d4121",
+    "commons/resourses/shaders/SimpleGrid.gdshader": "12475b96ee735d3b1e4c37593a54cf6f9ed78f5c6a527940183112379c6f7b5d",
+    "commons/resourses/shaders/ParametricGrid.gdshader": "ca860664776300542810feae23e30d1b16ae0f2ab2f372d872b312fdc6713812",
+    "commons/resourses/shaders/Grid.gdshader": "149e54e8a149c9a7c9852419cca1b40bd6edc9be8393fa7e31342fb56bc7ba3b",
+    "commons/primitives/pyramid/pyramid.gd": "4fb4c3686de3b8473255b9c09bdca1864019d2f80d5eeacf12e0640491cd7e1c",
+    "commons/primitives/pyramid/pyramid.tscn": "54d52a1ff517c11513c5960997ae2f59ba50f40453714876db7b2a1339faaa62",
+    "commons/primitives/pyramid/pyramidlong.gd": "b66a619ce702b81c88f53874a7dbceb464e382c9afe2a87e658ea62311955734",
+    "commons/primitives/pyramid/pyramidlong.tscn": "55bd92610ba3faf86cd60bc49a32a1a770b02e5bdb3f4b028754eb6f9dc6738a",
+    "commons/primitives/cubes/cube_scene.gd": "77e5ae122082a331a4d326da6464f2de04e477cf9bb7e9ea3d24172a04f93783",
+    "commons/primitives/cubes/cube_scene.tscn": "8fb5db55fb30bc9580593c93732eeb089873f6be3ff154a61e5517ac12a2f755",
+    "commons/maps/Primitives_Melencolia/map_data.json": "663f2cd9c0a800d52323c739478b84bc3a267f0bfd8d8c614d3677bd469da613",
+    "ada_run/encounter_pilot/Primitives_Melencolia/report.json": "3005397e63b3cabadf31ffb605d792e9271499f084c36a31eb8f18ec4314322b",
+    "commons/artifacts/registry/primitives.json": "f2aa0f8b24c24b0fa0a5d566099f81d2d0ee725448cc174c20f39b3d5fd00ead"
+  },
+  "godot": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe",
+  "isolated_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-melencolia-court-igkn2epk",
+  "same_artifact_scenes_and_configs_as_museum": true,
+  "book_arrangement": "Three camera views of the same court; plain deck finish and matched lighting.",
+  "placements": [
+    {
+      "token": "pyramid",
+      "cell": [
+        3,
+        3
+      ],
+      "scene": "res://commons/primitives/pyramid/pyramid.tscn",
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "height": "2.4",
+        "solid_color": "B7C7DB"
+      },
+      "scale": 1.0,
+      "rotation": 0.0,
+      "position": [
+        3.5,
+        1.0,
+        3.5
+      ],
+      "bounds_position": [
+        3.20000004768372,
+        1.0,
+        3.20000004768372
+      ],
+      "bounds_size": [
+        0.599999904632568,
+        2.40000009536743,
+        0.599999904632568
+      ]
+    },
+    {
+      "token": "pyramid",
+      "cell": [
+        7,
+        3
+      ],
+      "scene": "res://commons/primitives/pyramid/pyramid.tscn",
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "height": "2.4",
+        "solid_color": "B7C7DB"
+      },
+      "scale": 1.0,
+      "rotation": 0.0,
+      "position": [
+        7.5,
+        1.0,
+        3.5
+      ],
+      "bounds_position": [
+        7.19999980926514,
+        1.0,
+        3.20000004768372
+      ],
+      "bounds_size": [
+        0.600000381469727,
+        2.40000009536743,
+        0.599999904632568
+      ]
+    },
+    {
+      "token": "cube_scene",
+      "cell": [
+        5,
+        4
+      ],
+      "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+      "config": {
+        "offset": "0,0.4,0",
+        "pin": "1",
+        "plinth": "0",
+        "solid_color": "D9AB63"
+      },
+      "scale": 0.8,
+      "rotation": 0.0,
+      "position": [
+        5.5,
+        1.4,
+        4.5
+      ],
+      "bounds_position": [
+        5.09999990463257,
+        1.0,
+        4.09999990463257
+      ],
+      "bounds_size": [
+        0.800000190734863,
+        0.799999952316284,
+        0.800000190734863
+      ]
+    },
+    {
+      "token": "cube_scene",
+      "cell": [
+        4,
+        5
+      ],
+      "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+      "config": {
+        "offset": "0,0.4,0",
+        "pin": "1",
+        "plinth": "0",
+        "solid_color": "D9AB63"
+      },
+      "scale": 0.8,
+      "rotation": 0.0,
+      "position": [
+        4.5,
+        1.4,
+        5.5
+      ],
+      "bounds_position": [
+        4.09999990463257,
+        1.0,
+        5.09999990463257
+      ],
+      "bounds_size": [
+        0.800000190734863,
+        0.799999952316284,
+        0.800000190734863
+      ]
+    },
+    {
+      "token": "pyramidlong",
+      "cell": [
+        5,
+        5
+      ],
+      "scene": "res://commons/primitives/pyramid/pyramidlong.tscn",
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "pedestal_height": "0.8",
+        "solid_color": "DF93B8"
+      },
+      "scale": 1.0,
+      "rotation": 0.0,
+      "position": [
+        5.5,
+        1.0,
+        5.5
+      ],
+      "bounds_position": [
+        5.09999990463257,
+        1.0,
+        5.09999990463257
+      ],
+      "bounds_size": [
+        0.800000190734863,
+        3.59999990463257,
+        0.800000190734863
+      ]
+    },
+    {
+      "token": "cube_scene",
+      "cell": [
+        6,
+        5
+      ],
+      "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+      "config": {
+        "offset": "0,0.4,0",
+        "pin": "1",
+        "plinth": "0",
+        "solid_color": "D9AB63"
+      },
+      "scale": 0.8,
+      "rotation": 0.0,
+      "position": [
+        6.5,
+        1.4,
+        5.5
+      ],
+      "bounds_position": [
+        6.09999990463257,
+        1.0,
+        5.09999990463257
+      ],
+      "bounds_size": [
+        0.800000190734863,
+        0.799999952316284,
+        0.800000190734863
+      ]
+    },
+    {
+      "token": "cube_scene",
+      "cell": [
+        5,
+        6
+      ],
+      "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+      "config": {
+        "offset": "0,0.4,0",
+        "pin": "1",
+        "plinth": "0",
+        "solid_color": "D9AB63"
+      },
+      "scale": 0.8,
+      "rotation": 0.0,
+      "position": [
+        5.5,
+        1.4,
+        6.5
+      ],
+      "bounds_position": [
+        5.09999990463257,
+        1.0,
+        6.09999990463257
+      ],
+      "bounds_size": [
+        0.800000190734863,
+        0.799999952316284,
+        0.800000190734863
+      ]
+    },
+    {
+      "token": "pyramid",
+      "cell": [
+        3,
+        7
+      ],
+      "scene": "res://commons/primitives/pyramid/pyramid.tscn",
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "height": "2.4",
+        "solid_color": "B7C7DB"
+      },
+      "scale": 1.0,
+      "rotation": 0.0,
+      "position": [
+        3.5,
+        1.0,
+        7.5
+      ],
+      "bounds_position": [
+        3.20000004768372,
+        1.0,
+        7.19999980926514
+      ],
+      "bounds_size": [
+        0.599999904632568,
+        2.40000009536743,
+        0.600000381469727
+      ]
+    },
+    {
+      "token": "pyramid",
+      "cell": [
+        7,
+        7
+      ],
+      "scene": "res://commons/primitives/pyramid/pyramid.tscn",
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "height": "2.4",
+        "solid_color": "B7C7DB"
+      },
+      "scale": 1.0,
+      "rotation": 0.0,
+      "position": [
+        7.5,
+        1.0,
+        7.5
+      ],
+      "bounds_position": [
+        7.19999980926514,
+        1.0,
+        7.19999980926514
+      ],
+      "bounds_size": [
+        0.600000381469727,
+        2.40000009536743,
+        0.600000381469727
+      ]
+    }
+  ]
+}

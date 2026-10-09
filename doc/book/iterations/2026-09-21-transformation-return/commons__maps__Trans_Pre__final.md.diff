@@ -1,0 +1,12 @@
+--- before/commons/maps/Trans_Pre/final.md
++++ current/commons/maps/Trans_Pre/final.md
+@@ -41,6 +41,8 @@
+ 
+ Walk up and approach one. You can collect these by walking into them. The three moving demonstrations behind you stay in place for another look.
+ 
+-A few lines of code have given a plain cube the movement of a game pickup: **translation changes position, rotation changes orientation, scale changes size.** We will use these three operations throughout the next halls.
++A few lines of code have given a plain cube the movement of a game pickup: **translation changes position, rotation changes orientation, scale changes size.**
++
++Translation kept its size and facing. Turning kept the distances between its corners. Multiplying all three dimensions by the same factor kept its proportions. Each operation has left something to recognise. The next hall asks which of these changes can give us somewhere to stand.
+ 
+ <!-- @ -->

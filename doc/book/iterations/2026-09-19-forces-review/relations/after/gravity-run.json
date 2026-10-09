@@ -1,0 +1,40 @@
+{
+  "pid": 48140,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--rendering-method",
+    "mobile",
+    "--rendering-driver",
+    "vulkan",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\relations\\after\\gravity-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/relations/probes/probe_gravity.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-forces-review/relations/after/"
+  ],
+  "returncode": 0,
+  "seconds": 22.66460156440735,
+  "source_sha256_before": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/VFM_07_Gravity/map_data.json": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd": "11f75c97e27bad430b4be85174e6a714cdcf51655d0b669a1a6e484d78ed1a7b",
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": "2a362cb700e21a1c2b300f2d924710df15cbf1118cacf1a08e58490f5fa756d2"
+  },
+  "source_sha256_after": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/VFM_07_Gravity/map_data.json": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd": "11f75c97e27bad430b4be85174e6a714cdcf51655d0b669a1a6e484d78ed1a7b",
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": "2a362cb700e21a1c2b300f2d924710df15cbf1118cacf1a08e58490f5fa756d2"
+  }
+}

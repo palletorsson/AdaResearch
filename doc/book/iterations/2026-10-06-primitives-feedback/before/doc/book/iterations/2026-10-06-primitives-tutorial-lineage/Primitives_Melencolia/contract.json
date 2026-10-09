@@ -1,0 +1,144 @@
+{
+  "incoming": {
+    "sha256": "abdc3bd88aa92977446cc1b71af385a0fad01978c8ef4dca31329f4257fb3a9d"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst Circle = preload(\"circle_samples.gd\")\nconst LineSkin = preload(\"line_skin.gd\")\nconst RADIUS := 0.7\nconst TOLERANCE := 0.01\nconst BUDGET := 96\nvar sides := 3\nvar points: Array[Vector3] = []\nvar error := 0.0\nvar met := false\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    choose_resolution(TOLERANCE, BUDGET)\n    for i in range(points.size()):\n        var a := points[i] + Vector3(0, 1.1, 0)\n        var b := points[(i + 1) % points.size()] + Vector3(0, 1.1, 0)\n        var line := LineSkin.new()\n        add_child(line)\n        line.show_segment(a, b - a, a.distance_to(b))\n    add_child(message)\n    message.position = Vector3(0, 1.8, 0)\n    message.pixel_size = 0.002\n    message.text = \"%d sides; error %.5f m; met: %s\" % [sides, error, str(met)]\n\nfunc perimeter(record: Array[Vector3]) -> float:\n    var total := 0.0\n    for i in range(record.size()):\n        total += record[i].distance_to(record[(i + 1) % record.size()])\n    return total\n\nfunc choose_resolution(tolerance: float, budget: int) -> void:\n    assert(tolerance > 0.0 and budget >= 3)\n    sides = 3\n    while true:\n        points = Circle.make(sides, RADIUS)\n        error = absf(TAU * RADIUS - perimeter(points))\n        met = error <= tolerance\n        if met or sides == budget:\n            break\n        sides = mini(sides * 2, budget)\n",
+      "after": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\nconst PointBody = preload(\"point_body.gd\")\nvar places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]\nvar cubes: Array[Node3D] = []\nvar point := PointBody.new()\n\nfunc _ready() -> void:\n    for place in places:\n        var cube := CubeBody.new()\n        cube.position = place\n        add_child(cube)\n        cubes.append(cube)\n    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)\n    add_child(point)\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Melencolia/tutorial.md",
+      "sha256": "a6ac7a526563bb3ee5d8e7ce2f90b9b6737cb2afe8390e69ba03c4f6139463a4"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/lesson.gd",
+      "sha256": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "composition/known_bodies",
+      "kind": "native"
+    },
+    {
+      "id": "composition/original_cube_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "composition/places_used",
+      "kind": "native"
+    },
+    {
+      "id": "composition/arrangement_keeps_construction",
+      "kind": "native"
+    },
+    {
+      "id": "composition/sphere_rests_at_radius",
+      "kind": "native"
+    },
+    {
+      "id": "composition/restart_reconstructs_script",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Melencolia/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/cube_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/face_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/point_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

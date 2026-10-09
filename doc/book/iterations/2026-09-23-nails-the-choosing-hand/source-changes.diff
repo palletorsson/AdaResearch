@@ -1,0 +1,67 @@
+--- before/commons/maps/Color_Nails/intent.md
++++ commons/maps/Color_Nails/intent.md
+@@ -7,3 +7,5 @@
+ Primary encounters remain nail_color_controller and hand_color_controller. Their receiving installation, nail_salon, is secondary. Preserve the distinction between the two display hands and any connected tracked player hand. Bottles are set dressing; no scanner or prism is part of this placement.
+ 
+ The question is what the same implementation permits to become bodily: small and intimate, oversized and unfamiliar, with colour choices that need not imitate skin. Let the reader test that difference before explaining the shared mesh, transform and material addresses. Carry the chosen colour toward Rainbow's ordering without claiming automatic transfer.
++
++23 September return: preserve the working salon and both controllers. Let the small coordinate gesture, its return to the same colour and the giant/petite contrast carry the inquiry. A paragraph recovered from critical.md notices what the salon borrows and omits: furniture and the wish to attend to a hand remain, while brushwork and drying become a material assignment. End with the concrete unchanged finger length rather than a request to list freedoms and limits. Native display-hand figures belong in the book; supplied receiver tests must not be presented as headset photographs.
+--- before/commons/maps/Color_Nails/technical.md
++++ commons/maps/Color_Nails/technical.md
+@@ -31,3 +31,13 @@
+ The raw saved plan still contains the older control coordinates. For authored-map rooms, `endless_museum.gd` derives artifact rows from the current map when building the hall. The positions above describe that current authored configuration, not an inspection of an already-built live scene or a visitor override.
+ 
+ A new isolated Godot probe passed 35 checks, including selection before hands appear, independent nail/skin updates on both real embedded meshes, replacement hand scenes, and coexistence with direct station discovery. The copied receiver/station scripts and colour-only GameManager methods were unchanged; XR animation was omitted and the mapper used a signal fixture. No production autoload, save state or live museum was loaded. This tests material/state wiring, not physical input, wearer perception or comfort. See [the report and reproducible probe](../../../doc/book/iterations/2026-09-21-colour-return/nails/verification.md).
++
++## Native encounter and book figure — 23 September
++
++`doc/book/iterations/2026-09-23-nails-the-choosing-hand/probe.gd` runs the actual hall through the isolated museum runner. A supplied XRTools grabber moves each actual RGB point: red `(0.8, 0.08, 0.12)` becomes violet `(0.8, 0.08, 0.8)` by changing only the blue coordinate; a separate skin edit leaves the chosen nail value in place. Returning to the original point recovers its colour. The two salon meshes and their transforms stay unchanged.
++
++Both production left/right hand scenes are also instantiated as invisible receiver fixtures. Their XR pose-driving root scripts are omitted and animation trees disabled; the original meshes and `PresistNailColor` children receive the same GameManager signals emitted by the real museum controls. This joins the real point gesture to the hand-material receivers without claiming tracked motion or wearer perception. Selected colours are restored after the run; no save is requested.
++
++59 focused checks pass. The initial cross-surface assertion compared against an ideal decimal after several world/local coordinate conversions; the actual blue value differed by about 0.00002. The corrected independence check compares the actual selected colour immediately before and after the skin edit and records both values. Production source was not changed.
++
++The shared book illustration pairs the native giant and petite display-hand captures with height labels (4.3 m and 0.32 m). Views are composed at different scales so the small nails are readable. These are actual placed museum meshes, not photos of the headset experience. The review also shows red/violet choices from fixed cameras and the real RGB plinth. No walking, tracked reach, comfort or performance test is claimed by this pass.
+--- before/commons/maps/Color_Nails/field_notes.md
++++ commons/maps/Color_Nails/field_notes.md
+@@ -22,3 +22,11 @@
+ Moved both RGB interfaces onto separate open plinths in front of the salon, at grid (5,14) and (9,14). The control volumes remain y=0.9–1.4 m, with no table or canopy between the visitor and the colour point. The auxiliary palette display now builds its glass case before spawning balls, with its spawn area restricted to that case. The scene's previous 10 m spawn area could put balls directly into the approach and the RGB boxes.
+ 
+ The extended museum probe passes 35 checks, including contained ball bodies, separate nail/skin changes and both side routes. Updated evidence: `ada_run/probe_nail_salon.json` and `ada_run/nail_salon_museum.png`. Tracked-hand reach remains untested.
++
++## 2026-09-23 — the hand choosing its colour
++
++Kept the existing salon, both primary controls, secondary works, placements, materials and scripts. The actual point gesture reaches both display hands and the production left/right hand receivers in a supplied-input desktop fixture. Native views show red/violet nails at fixed skin colour, then turquoise skin while the violet nails remain. Fifty-nine focused checks pass; original colour choices are restored. No headset was attached. See the review folder's report and technical.md for the receiver-fixture limits and the corrected floating-point assertion.
++
++Canonical final.md keeps the existing questions, coordinate explanation, material code and Rainbow handoff. The initial classroom prediction prompt becomes a return to a colour's place; a repeated invitation is removed; the ending names finger length instead of asking for a list of freedoms and limits. The existing critical companion's unused bottles and brushwork now contribute one paragraph to the chapter. A native giant/petite figure lets the reader compare the same selected values at different scales.
++
++Before copies, current reading, native images and exact diffs: `doc/book/iterations/2026-09-23-nails-the-choosing-hand/`. No production artifact/map change, live museum restart, live bake/save overwrite, commit or frozen book/audio rebuild. Next: Color_Rainbow, where colour becomes a public arrangement and a celebration.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -353,7 +353,7 @@
+       "status": "draft",
+       "sequence": "color",
+       "text_path": "commons/maps/Color_Nails/final.md",
+-      "text_sha256": "39cd64c9d8b887c3abfbbc077c085d73b4099e64e0f46bb38785fb3143839187",
++      "text_sha256": "9bfc03a573c4b63eb888657a9517df287ecc3ac1367c520d1073f926227eac5b",
+       "map_sha256": "0f5b5843b16578ddbe395267a7f413a42817e29683eefb81151928272e975067",
+       "learner_verified": false
+     },
+--- before/commons/maps/Color_Nails/critical.md
++++ commons/maps/Color_Nails/critical.md
+@@ -10,4 +10,4 @@
+ 
+ The furniture also leaves a remainder. There is no salon worker at this table. The bottles do not need opening; the material changes without a brush crossing the nail. The scene borrows the signs of manicure while replacing its application with an assignment. That omission is available to notice, rather than a reason to call this a complete simulation of a salon.
+ 
+-Both display hands work without a tracked player body. That makes the material comparison accessible in desktop play, but it leaves another difference open: dressing a figure before you and recognising an appearance as yours. The later mirror can return to that question. Here, begin with the two hands that actually answer the gesture.
++Both display hands work without a tracked player body, making their material comparison available on desktop. In the museum's standard VR controller setup, the player hand is another receiver. That connection leaves another difference open: dressing a figure before you and recognising an appearance as yours. The later mirror can return to that question.
+--- before/commons/maps/Color_Nails/tutorial.md
++++ commons/maps/Color_Nails/tutorial.md
+@@ -5,6 +5,6 @@
+ 3. Repeat at SKIN. Identify what changed and what stayed fixed.
+ 4. Return to one colour. Trace the coordinate-to-RGB mapping, the GameManager signal and the material albedo assignment.
+ 5. Compare the same selected value on the swatch, the small hand and the giant. Equal channel values do not promise identical viewed appearance.
+-6. When a tracked player hand is actually connected, compare that receiver too. The two salon displays work without it.
++6. In the museum's standard VR controller setup, raise the controller hand and compare its nails and skin. On desktop, use the two salon displays. Receiver wiring is checked; physical headset reach and wearer experience remain untested.
+ 
+ Primary encounters: nail_color_controller and hand_color_controller. Their shared receiving installation, nail_salon, is secondary. Tiny bottles and the file stage the salon but are not interactive palette tools. Carry a chosen colour toward Rainbow's ordering of colour; this room does not establish an automatic handoff to its bands.

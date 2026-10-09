@@ -1,0 +1,42 @@
+--- before/doc/book/captures/noise/noise-book.md
++++ doc/book/captures/noise/noise-book.md
+@@ -456,7 +456,7 @@
+ 
+ Press DRESS without leaving the room. Grey takes the place of pink around you. Your hand has changed the enclosure while your body stays inside it. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+ 
+-We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What the player can physically cross and what the player imagines crossing need not arrive together.
++We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What your body can cross and what you imagine crossing need not arrive together.
+ 
+ ![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
+ 
+@@ -490,7 +490,7 @@
+         float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+ ```
+ 
+-The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white, although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
++The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
+ 
+ Try BASIS while the moment stays held. Perlin, Value, Cellular and Simplex offer different constructions to the same accumulation. These are the implementations in this shader, with their own scaling constants. Watch what happens to a contour you had begun to recognise. Returning to Perlin restores this construction at the held coordinates. There is no seed button here; the shader's hash uses fixed constants.
+ 
+@@ -644,9 +644,9 @@
+ 
+ Return to the margin. Press HEIGHT until it reads 0.90 and look for the feature you just crossed. The posts have not moved. The field has not been drawn again from another seed. Try the same approach.
+ 
+-In the recorded desktop walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
+-
+-Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while a player body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
++In one recorded walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
++
++Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while your body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
+ 
+ The current height rule is short:
+ 
+@@ -674,7 +674,7 @@
+ 
+ The display gives the length and steepest sampled stretch of whichever proposed route is selected. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
+ 
+-The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^Noise_Space_10--walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
++The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The controller in that walk accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^Noise_Space_10--walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
+ 
+ Look down at the yellow witness. Its printed height belongs to the triangle under that point. The terrain is made from 81 by 81 sampled positions, spaced ten centimetres apart. Between those positions, triangles supply a surface. Sampling the noise again between the vertices can give a slightly different answer: the collider is the constructed mesh, not an infinitely detailed function.
+ 

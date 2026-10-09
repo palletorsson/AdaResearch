@@ -40,7 +40,7 @@ QFE = F - lambda*E(S) + phi*dE(S,t)
 | **lambda** | Order<->chaos balance (0->1) | `fractals`, `lsystems` |
 | **phi*dE** | Rate of change (queer signature) | `morphogenesis`, `swarmintelligence` |
 
-**Life exists at lambda ~ 0.3-0.5** -- enough order to maintain identity, enough chaos to adapt.
+The project's [QFEP reactor](../commons/interfaces/qfep/qfep_reactor.gd) labels `0.3 < lambda < 0.5` as its edge regime. This is an authored demonstration range, not a universal measured condition for life. See the [QFEP development notes](research/qfep/README.md) for the distinction between the formula's teaching vocabulary and scientific quantities.
 
 ---
 
@@ -71,6 +71,16 @@ Not a metric. A sieve. The first stops thin/optimised/scoreboard-shaped systems.
 - Blog: `/blog/2026-05-11-cognitive-water` (the frame), `/blog/2026-05-11-self-colonial-recognition` (the pattern)
 - Tool: `python tools/sieve.py <target>` — surface the questions for any decision
 - Skill: `/sieve <target>` — same, conversation-routed
+
+---
+
+## Q, Requisite Variety, and Irreversible Loss
+
+The development essay [Q: An Entropic Morality](research/qfep/entropic-morality.md) (2026-09-14) extends Queer-Q and Self-Q: **keep models and their authority revisable while protecting the capacities of those they leave out**. Modelling happens within relations; this reading does not require an independent inner subject confronting an external world.
+
+Ashby's requisite variety supplies a constraint on regulation, while QFEP makes an explicit ethical commitment to others' lives and agency. Mutual aid is developed as a practice of sustaining shared capacities, and increased intelligence as a possibility for greater responsibility rather than a guarantee of morality. The essay distinguishes entropy from moral value and preserves the difference between simplifying a representation and destroying what it omits.
+
+The proposed principle is to preserve the conditions through which different lives can continue and futures can remain revisable. An incomplete model is not sufficient justification for irreversible destruction of what it leaves out. The [development notes and original bilingual draft](research/qfep/README.md) connect this argument to existing instruments and proposed teaching encounters.
 
 ---
 

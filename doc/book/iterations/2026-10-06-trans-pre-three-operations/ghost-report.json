@@ -1,0 +1,1427 @@
+{
+  "checks": [
+    {
+      "id": "still/owns_visible_cube",
+      "passed": true
+    },
+    {
+      "id": "still/one_box_mesh",
+      "passed": true
+    },
+    {
+      "id": "still/starting_pose",
+      "passed": true
+    },
+    {
+      "id": "still/clock_does_not_require_motion",
+      "passed": true
+    },
+    {
+      "id": "still/sensor_does_not_block",
+      "passed": true
+    },
+    {
+      "id": "translation/equal_displacement_all_corners",
+      "passed": true
+    },
+    {
+      "id": "translation/orientation_and_size_kept",
+      "passed": true
+    },
+    {
+      "id": "translation/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/declared_y_axis",
+      "passed": true
+    },
+    {
+      "id": "rotation/corner_moves",
+      "passed": true
+    },
+    {
+      "id": "rotation/all_pair_distances_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/origin_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "scale/every_distance_times_factor",
+      "passed": true
+    },
+    {
+      "id": "scale/centre_fixed",
+      "passed": true
+    },
+    {
+      "id": "scale/top_reaches_1_75",
+      "passed": true
+    },
+    {
+      "id": "scale/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "transfer/new_angle_on_same_body",
+      "passed": true
+    },
+    {
+      "id": "transfer/neighbour_unaffected",
+      "passed": true
+    },
+    {
+      "id": "time/30/0.5",
+      "passed": true
+    },
+    {
+      "id": "time/30/1.0",
+      "passed": true
+    },
+    {
+      "id": "time/30/2.0",
+      "passed": true
+    },
+    {
+      "id": "time/30/2.5",
+      "passed": true
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/30",
+      "passed": true
+    },
+    {
+      "id": "time/120/0.5",
+      "passed": true
+    },
+    {
+      "id": "time/120/1.0",
+      "passed": true
+    },
+    {
+      "id": "time/120/2.0",
+      "passed": true
+    },
+    {
+      "id": "time/120/2.5",
+      "passed": true
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/120",
+      "passed": true
+    },
+    {
+      "id": "time/equal_elapsed_equal_pose",
+      "passed": true
+    },
+    {
+      "id": "time/double_duration_halfway",
+      "passed": true
+    },
+    {
+      "id": "time/double_duration_same_destination",
+      "passed": true
+    },
+    {
+      "id": "combine/rise_in_study_y",
+      "passed": true
+    },
+    {
+      "id": "combine/fixed_turn_and_size",
+      "passed": true
+    },
+    {
+      "id": "combine/original_construction",
+      "passed": true
+    },
+    {
+      "id": "restore/rerun_original_values",
+      "passed": true
+    },
+    {
+      "id": "engine/actual_process_callback",
+      "passed": true
+    },
+    {
+      "id": "engine/callback_uses_elapsed",
+      "passed": true
+    },
+    {
+      "id": "pickup/outside_kept/em_walker",
+      "passed": true
+    },
+    {
+      "id": "pickup/physics_collects/em_walker",
+      "passed": true
+    },
+    {
+      "id": "pickup/outside_kept/player_body",
+      "passed": true
+    },
+    {
+      "id": "pickup/physics_collects/player_body",
+      "passed": true
+    },
+    {
+      "id": "pickup/ordinary_body_ignored",
+      "passed": true
+    },
+    {
+      "id": "pickup/unwatched_layer_ignored",
+      "passed": true
+    },
+    {
+      "id": "pickup/former_position_is_empty",
+      "passed": true
+    },
+    {
+      "id": "pickup/sensor_moves_with_cube",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true,
+  "inputs": {
+    "commons/maps/Trans_Pre/tutorial.md": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/native-project.godot": "2f5fa852ab7e315bf6b1eca3ce9c2526fe3775cf6a1d630db6c1af685d28e485",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py": "738b01c279e5cfc0fdc700455822993b9ad6daaa400306c54d734340cfac4240",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd": "d8307653ff18d285017a0a2508d0c4482af00078e3cbca65687fc17f207c793e",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd": "e2a55ef8c528d32b5e581891a56539c69ac9655504342b442a32755877fa60a6"
+  },
+  "dependencies": {
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/native-project.godot": "2f5fa852ab7e315bf6b1eca3ce9c2526fe3775cf6a1d630db6c1af685d28e485"
+  },
+  "learner_source_sha256": "e2a55ef8c528d32b5e581891a56539c69ac9655504342b442a32755877fa60a6",
+  "incoming_sha256": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97",
+  "negative_control": {
+    "name": "no-signal",
+    "expected_failure_detected": true,
+    "expected_failure_ids": [
+      "pickup/physics_collects/em_walker"
+    ],
+    "normal_contract_result": {
+      "checks": [
+        {
+          "id": "still/owns_visible_cube",
+          "passed": true
+        },
+        {
+          "id": "still/one_box_mesh",
+          "passed": true
+        },
+        {
+          "id": "still/starting_pose",
+          "passed": true
+        },
+        {
+          "id": "still/clock_does_not_require_motion",
+          "passed": true
+        },
+        {
+          "id": "still/sensor_does_not_block",
+          "passed": true
+        },
+        {
+          "id": "translation/equal_displacement_all_corners",
+          "passed": true
+        },
+        {
+          "id": "translation/orientation_and_size_kept",
+          "passed": true
+        },
+        {
+          "id": "translation/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/declared_y_axis",
+          "passed": true
+        },
+        {
+          "id": "rotation/corner_moves",
+          "passed": true
+        },
+        {
+          "id": "rotation/all_pair_distances_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/origin_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "scale/every_distance_times_factor",
+          "passed": true
+        },
+        {
+          "id": "scale/centre_fixed",
+          "passed": true
+        },
+        {
+          "id": "scale/top_reaches_1_75",
+          "passed": true
+        },
+        {
+          "id": "scale/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "transfer/new_angle_on_same_body",
+          "passed": true
+        },
+        {
+          "id": "transfer/neighbour_unaffected",
+          "passed": true
+        },
+        {
+          "id": "time/30/0.5",
+          "passed": true
+        },
+        {
+          "id": "time/30/1.0",
+          "passed": true
+        },
+        {
+          "id": "time/30/2.0",
+          "passed": true
+        },
+        {
+          "id": "time/30/2.5",
+          "passed": true
+        },
+        {
+          "id": "time/keeps_facing_size_and_data/30",
+          "passed": true
+        },
+        {
+          "id": "time/120/0.5",
+          "passed": true
+        },
+        {
+          "id": "time/120/1.0",
+          "passed": true
+        },
+        {
+          "id": "time/120/2.0",
+          "passed": true
+        },
+        {
+          "id": "time/120/2.5",
+          "passed": true
+        },
+        {
+          "id": "time/keeps_facing_size_and_data/120",
+          "passed": true
+        },
+        {
+          "id": "time/equal_elapsed_equal_pose",
+          "passed": true
+        },
+        {
+          "id": "time/double_duration_halfway",
+          "passed": true
+        },
+        {
+          "id": "time/double_duration_same_destination",
+          "passed": true
+        },
+        {
+          "id": "combine/rise_in_study_y",
+          "passed": true
+        },
+        {
+          "id": "combine/fixed_turn_and_size",
+          "passed": true
+        },
+        {
+          "id": "combine/original_construction",
+          "passed": true
+        },
+        {
+          "id": "restore/rerun_original_values",
+          "passed": true
+        },
+        {
+          "id": "engine/actual_process_callback",
+          "passed": true
+        },
+        {
+          "id": "engine/callback_uses_elapsed",
+          "passed": true
+        },
+        {
+          "id": "pickup/outside_kept/em_walker",
+          "passed": true
+        },
+        {
+          "id": "pickup/physics_collects/em_walker",
+          "passed": false
+        },
+        {
+          "id": "pickup/outside_kept/player_body",
+          "passed": true
+        },
+        {
+          "id": "pickup/physics_collects/player_body",
+          "passed": false
+        },
+        {
+          "id": "pickup/ordinary_body_ignored",
+          "passed": true
+        },
+        {
+          "id": "pickup/unwatched_layer_ignored",
+          "passed": true
+        },
+        {
+          "id": "pickup/former_position_is_empty",
+          "passed": true
+        },
+        {
+          "id": "pickup/sensor_moves_with_cube",
+          "passed": false
+        }
+      ],
+      "failure_ids": [
+        "pickup/physics_collects/em_walker",
+        "pickup/physics_collects/player_body",
+        "pickup/sensor_moves_with_cube"
+      ],
+      "passed": false
+    }
+  },
+  "negative_controls": [
+    {
+      "name": "no-signal",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "pickup/physics_collects/em_walker"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/one_box_mesh",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": true
+          },
+          {
+            "id": "still/sensor_does_not_block",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_1_75",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": true
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/em_walker",
+            "passed": false
+          },
+          {
+            "id": "pickup/outside_kept/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/player_body",
+            "passed": false
+          },
+          {
+            "id": "pickup/ordinary_body_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/unwatched_layer_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/former_position_is_empty",
+            "passed": true
+          },
+          {
+            "id": "pickup/sensor_moves_with_cube",
+            "passed": false
+          }
+        ],
+        "failure_ids": [
+          "pickup/physics_collects/em_walker",
+          "pickup/physics_collects/player_body",
+          "pickup/sensor_moves_with_cube"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "no-player-filter",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "pickup/ordinary_body_ignored"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/one_box_mesh",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": true
+          },
+          {
+            "id": "still/sensor_does_not_block",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_1_75",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": true
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/ordinary_body_ignored",
+            "passed": false
+          },
+          {
+            "id": "pickup/unwatched_layer_ignored",
+            "passed": false
+          },
+          {
+            "id": "pickup/former_position_is_empty",
+            "passed": true
+          },
+          {
+            "id": "pickup/sensor_moves_with_cube",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "pickup/ordinary_body_ignored",
+          "pickup/unwatched_layer_ignored"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "wrong-axis",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "rotation/declared_y_axis"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/one_box_mesh",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": true
+          },
+          {
+            "id": "still/sensor_does_not_block",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": false
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_1_75",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": false
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": true
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": false
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/ordinary_body_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/unwatched_layer_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/former_position_is_empty",
+            "passed": true
+          },
+          {
+            "id": "pickup/sensor_moves_with_cube",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "rotation/declared_y_axis",
+          "transfer/new_angle_on_same_body",
+          "combine/fixed_turn_and_size"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "frame-clock",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "time/30/0.5"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/one_box_mesh",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": false
+          },
+          {
+            "id": "still/sensor_does_not_block",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_1_75",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": false
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/ordinary_body_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/unwatched_layer_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/former_position_is_empty",
+            "passed": true
+          },
+          {
+            "id": "pickup/sensor_moves_with_cube",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "still/clock_does_not_require_motion",
+          "time/30/0.5",
+          "time/30/1.0",
+          "time/120/0.5",
+          "time/120/1.0",
+          "time/double_duration_halfway",
+          "time/double_duration_same_destination"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "accumulated-position",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "still/clock_does_not_require_motion"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/one_box_mesh",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": false
+          },
+          {
+            "id": "still/sensor_does_not_block",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": false
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/centre_fixed",
+            "passed": false
+          },
+          {
+            "id": "scale/top_reaches_1_75",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": false
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": false
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": false
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": false
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": false
+          },
+          {
+            "id": "pickup/outside_kept/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/em_walker",
+            "passed": true
+          },
+          {
+            "id": "pickup/outside_kept/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/physics_collects/player_body",
+            "passed": true
+          },
+          {
+            "id": "pickup/ordinary_body_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/unwatched_layer_ignored",
+            "passed": true
+          },
+          {
+            "id": "pickup/former_position_is_empty",
+            "passed": true
+          },
+          {
+            "id": "pickup/sensor_moves_with_cube",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "still/clock_does_not_require_motion",
+          "rotation/origin_kept",
+          "scale/centre_fixed",
+          "time/30/0.5",
+          "time/30/1.0",
+          "time/30/2.0",
+          "time/30/2.5",
+          "time/120/0.5",
+          "time/120/1.0",
+          "time/120/2.0",
+          "time/120/2.5",
+          "time/equal_elapsed_equal_pose",
+          "time/double_duration_halfway",
+          "time/double_duration_same_destination",
+          "combine/rise_in_study_y",
+          "engine/callback_uses_elapsed"
+        ],
+        "passed": false
+      }
+    }
+  ],
+  "scope": "Exact printed code and value-edited variants in native Godot. Actual process callback plus controlled time steps. No headset or learner-understanding claim."
+}

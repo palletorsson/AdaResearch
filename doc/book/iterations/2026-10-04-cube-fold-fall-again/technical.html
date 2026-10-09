@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hinges, gravity and a return</title><style>
+:root{color-scheme:light;--ink:#302c32;--paper:#f2eee6;--rose:#c65b86}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 Georgia,serif}
+main{max-width:1160px;margin:auto;padding:46px 30px 80px}a{color:inherit;text-underline-offset:4px}
+nav,.kicker,figcaption,.sequence,summary,footer{font:13px/1.65 system-ui,sans-serif}
+nav{display:flex;gap:24px;flex-wrap:wrap;border-bottom:1px solid #cfc4c8;padding-bottom:14px}
+.kicker{text-transform:uppercase;letter-spacing:.14em;color:#83556b;margin-top:42px}
+h1{font-weight:400;font-size:clamp(42px,6vw,78px);line-height:1.06;margin:10px 0 22px}
+h2{font-weight:400;font-size:32px;margin-top:46px}.lede{max-width:690px;font-size:23px}
+video{display:block;width:100%;background:#292630;aspect-ratio:3/2;max-height:76vh}
+figure{margin:30px 0}figcaption{margin:10px 0;color:#665b61}img{width:100%;display:block}
+.sequence{letter-spacing:.05em;border-block:1px solid #cfc4c8;padding:18px 0;text-align:center}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.strip figure{margin:0}
+article{max-width:690px;margin:48px auto}article p{margin:0 0 22px}details{margin:26px 0}
+summary{cursor:pointer}pre{overflow:auto;padding:20px;background:#e7e1db;font-size:13px}
+table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui,sans-serif}td,th{border-bottom:1px solid #ccc;padding:10px;text-align:left}
+footer{border-top:1px solid #cfc4c8;margin-top:60px;padding-top:20px}
+@media(max-width:650px){main{padding:24px 16px}.strip{grid-template-columns:1fr}.lede{font-size:20px}}
+</style><main><nav>
+<a href="index.html#museum">The museum</a><a href="index.html#reading">The passage</a>
+<a href="making.html">Museum companion</a><a href="technical.html">How it works</a>
+</nav><article><h1>A cube assembled, replayed and changed</h1>
+<p>Primitives_Polythedra distinguished a visible boundary from a collision boundary and tested how forms support or interrupt movement. Here, the primary order is an outline (<code>cube_lines</code>), a timed reveal with editable corners (<code>animatedcubebuilder</code>), then a hinged surface (<code>polyhedron_nets_cube</code>). The room has two builder placements; one can remain an unchanged reference.</p>
+<h2>Read a position and a connection separately</h2>
+<p>Before moving a handle, predict which parts will follow. The builder starts with eight local positions at the combinations of ±0.5 on X, Y and Z. It also stores twelve cube edges and twelve triangle patches in separate lists. The positions alone do not specify which vertices should connect.</p>
+<p>For example, the front surface uses these source triples:</p>
+<pre><code class="language-gdscript">[4, 5, 7]
+[5, 6, 7]
+</code></pre>
+<p>Their common edge is <code>[5, 7]</code>. Move vertex 6 out of the original face plane. The second triangle can tilt while the first remains unchanged. This pair no longer forms a planar square.</p>
+<p>The initial cube's geometric face count gives <code>8 - 12 + 6 = 2</code>. Counting the triangulated boundary gives <code>8 - 18 + 12 = 2</code>, because triangulating the six squares adds six diagonals as well as six faces. The visible edge cylinders initially show only the twelve cube edges. The DIAGONALS control exposes the other six, derived from the triangle list rather than a separate hand-authored diagram.</p>
+<p>Each triangle patch is submitted with a reversed copy for visibility from both sides. The panel counts twelve patches, not the twenty-four submitted triangles in this particular implementation. Counts must identify their representation.</p>
+<h2>What the builder animates</h2>
+<p>At setup, the builder prepares hidden handle, edge and surface nodes. Its default timed presentation reveals eight vertices at 0.5-second steps, twelve edges at 0.2-second steps, then twelve patches at 0.15-second steps. Frame timing can extend those intervals: the state machine reveals at most one item per process call and resets its step timer after each item.</p>
+<p>The default <code>closure:strata</code> leaves all layers visible. It does not automatically replace them with a final solid mesh. Existing configuration alternatives remain: <code>closure:scaffold</code> retains corners and edges; <code>closure:solid</code> shows a combined surface with corner handles. <code>order:descend</code> reveals triangles, edges and vertices in that order; <code>order:together</code> reveals all layers at once. These are configuration choices, not new controls on the front panel.</p>
+<p>The <code>#discovery:1</code> option adds the room's instrument and source-index labels <code>v0</code> through <code>v7</code>. During assembly, handles are disabled for pickup; completion enables them. This lets a visitor pause a readable layer without accidentally editing a hidden corner.</p>
+<h2>Four controls, four operations</h2>
+<ul>
+<li><strong>REPLAY</strong> hides and reveals the layers again using the current positions. It resumes a paused assembly and preserves deformation.</li>
+<li><strong>PAUSE / RESUME</strong> stops or resumes only the builder's timed reveal. It does not pause the game clock, the folding net or the room. At completion, it asks the visitor to replay before pausing steps.</li>
+<li><strong>RESTORE CUBE</strong> returns all eight handles to their initial local positions and displays the completed result, without replaying the animation.</li>
+<li><strong>DIAGONALS</strong> shows or hides the six additional triangulation edges after assembly completes. It does not change the faces.</li>
+</ul>
+<p>Replay and restore ask for a held corner to be released first. The panel reports visible points, visible cube edges, surface patches and the largest corner displacement from its initial local position. Local metres do not include additional scale applied to the artifact by a parent.</p>
+<h2>Deformation reads handles back into geometry</h2>
+<p>After a completed build, changed handles update the stored positions:</p>
+<pre><code class="language-gdscript">vertices[i] = handle_nodes[i].position / cube_size
+</code></pre>
+<p>The existing edge and triangle lists are then used to rebuild geometry. Hidden surface patches update too, so replaying or changing the configured closure cannot bring back stale geometry. The yellow diagonal cylinders follow their corresponding vertex pairs.</p>
+<p>This preserves connectivity, not cube validity. It does not enforce equal lengths, right angles, planarity or a non-intersecting enclosure. The mesh surfaces have no enclosing collision body; the corner handles have their own pickup colliders. A deformed shape is therefore a visual construction, not a newly tested walkable shelter.</p>
+<h2>Folding changes another set of data</h2>
+<p>The cube net keeps each square face rigid and rotates parent hinge nodes. Ordinary placements animate a fold-progress property:</p>
+<pre><code class="language-gdscript">tween.tween_property(self, &quot;fold_progress&quot;, 1.0, fold_duration)
+</code></pre>
+<p>For the default net, that property maps to ±90-degree hinge rotations, with the back flap delayed relative to the others. The current room has one <code>latin_cross</code> net with <code>fall_cycle:true</code>. Its separate controller drives the same property over 2.6 seconds, holds the closed cube briefly, then enables a box collider and releases a rigid body under gravity. The six original face nodes remain visible throughout; no replacement cube appears at the handoff.</p>
+<p>The 0.7 m cube settles on the actual museum floor. Contact and low speed start a 2.2-second pause, accompanied by one, two and three dots. The body then rises along an authored path, its collider turns off, and the hinges reopen. Rotation and horizontal motion are locked during the fall so it lands squarely and stays within its display area. “Thinking” names the visitor's possible reading of that pause; the controller runs timed states.</p>
+<p><code>edge_length</code>, <code>fold_duration</code> and <code>think_hold</code> configure the size, fold and pause. <code>fall_cycle</code> defaults to false, preserving the existing fold-only behavior in other rooms. Other net configurations remain available in the source but are not additional placements here. Folding, falling and the builder's visibility sequence change different things; the student tutorial continues to concentrate on vertex positions and their connections.</p>
+<p>Primitives_Ignorance follows by examining what an engine's primitive names leave unspecified. Here, the word cube has already required a distinction between positions, connections, presentation and permitted edits.</p>
+<h2>The box becomes museum structure</h2>
+<p>The endless museum's <code>_box()</code> records a position, size and material for each architectural box. <code>_flush_boxes()</code> renders batches using a shared <code>BoxMesh</code> with <code>size = Vector3.ONE</code>. Each instance receives its own scale and position:</p>
+<pre><code class="language-gdscript">mm.set_instance_transform(i, Transform3D(Basis.from_scale(s), p))
+</code></pre>
+<p>Here <code>s</code> is the box's size and <code>p</code> its centre. An ordinary floor tile is specified as <code>Vector3(1, 0.2, 1)</code>; <code>_wall_at()</code> specifies a wall cell as <code>Vector3(1, hh, 1)</code>, with <code>hh</code> carrying wall height. The repeated unit box becomes slabs and wall blocks. These are box-based constructions, rather than literal equal-sided cubes at every scale. Alternative wall-run batching can merge neighbouring cells into longer boxes.</p>
+<p>The paired <code>_add_col()</code> constructs a separate <code>BoxShape3D</code> with the requested size. This is how the visible architecture gains collision for the walking body. The corner-editable builder does not use this architectural collision setup for its surface patches. A connection between the two constructions does not imply identical meshes, controls or physical behavior.</p>
+<p>The placed <code>crate</code> provides another example. Its <code>_build()</code> calls <code>_build_plank_face()</code> for six sides, adds reinforcement strips and optionally builds a diagonal brace. Those components use additional box meshes. Six sides in a geometric description need not mean six rendered polygons or twelve total triangles in a furnished object.</p>
+<p>This source connection is enough for the current recognition: the museum's floor and walls belong to the same box vocabulary as the exhibits. The new prefab library begins composition with existing objects; later Transformation encounters examine the operations used to place and alter them.</p>
+<h2>Source and verification</h2>
+<ul>
+<li><code>commons/primitives/animatedcubebuilder/animatedcubebuilder.gd</code></li>
+<li><code>commons/ui/cube_experiment_panel.gd</code></li>
+<li><code>commons/infoboards_3d/visualizations/polyhedron_nets.gd</code></li>
+<li><code>commons/infoboards_3d/visualizations/cube_net_cycle.gd</code></li>
+<li><code>commons/testing/capture_cube_net_cycle.gd</code></li>
+<li><code>commons/scenes/endless_museum.gd</code> (<code>_box</code>, <code>_flush_boxes</code>, <code>_wall_at</code>, <code>_add_col</code>, floor stamping)</li>
+<li><code>commons/artifacts/crate/crate.gd</code> (<code>_build</code>, <code>_build_plank_face</code>)</li>
+<li><code>commons/maps/Point_Animatedcube/map_data.json</code></li>
+<li><code>commons/testing/probe_cube_primary.gd</code></li>
+</ul>
+<p>The probe exercises actual pointer-button events and supplied corner positions in a translated, rotated artifact. It checks pause, replay, restoration, connection preservation, surface updates, diagonals and readout bounds. A full-room headset walk remains necessary for reach, viewing distance and comparison between placements.</p>
+<p>The October 4 net test assembles the actual endless museum, runs two complete physics cycles, checks floor contact, face continuity, a still pause, a smooth return and live reconfiguration, and verifies that all four existing net layouts still close. The native clip and 24 checks are in <code>doc/book/iterations/2026-10-04-cube-fold-fall-again/</code>. Physical headset behavior remains untested.</p>
+<h2>Shared front-face illustration</h2>
+<p><code>cube_diagonal_plate</code> renders the same four front-face positions and the same two triples as the builder. In the right specimen only v6 receives <code>(0,0,0.55)</code>. The common diagonal 5–7 and triangle 4–5–7 remain fixed. Both specimens use one oblique projection with equal depth compression; the reference is not metrically to scale on the wall.</p>
+<p><code>tools/capture_cube_diagonal_plate.py</code> extracts the builder's current vertices and faces, then checks the actual plate meshes against them in a private Godot project. It renders the production scene for the book. The plate is static; handle interaction, replay and restoration still belong to the existing builders.</p>
+<h2>A library of box prefabs</h2>
+<p><code>prefab_box_library</code> occupies the widened east gallery at grid (16,7), facing west. Its 9.12 m shelf contains 24 pickable copies: six columns and four tiers. The first four columns repeat cardboard, wooden crate, cargo crate and the original AGAIN carton respectively. The last two vary the wooden crate and carton through exported colour, construction and lettering properties. Twelve distinct source/configuration editions produce the 24 copies.</p>
+<p>The editable <code>commons/artifacts/prefab_box_library/catalog.json</code> names the four real scene sources and their settings. The original cardboard, crate and cargo scenes are unchanged. At construction, each edition loads its source once, applies exported settings before <code>_ready</code>, and collects the resulting meshes and static labels. Meshes are batched by material into a cached <code>PackedScene</code>; copies share its mesh resources but have independent pickable bodies, transforms and physics state. This is a static display-and-pickup adapter for the listed sources, not a general copier of arbitrary prefab scripts or behaviours.</p>
+<p>Each copy has one enclosing box collider, fitted to the source bounds. The cardboard opening is visible but does not have a hollow collision interior. Copies begin frozen on the shelf; pickup uses the production XRToolsPickable and release enables rigid-body physics. Layer 6/mask 7 allows contact with the table, the museum and other pickable copies. Mesh batching produces 24 geometry nodes and 105 geometry surfaces, plus lettering; this is not a claim of 24 draw calls or tested Quest performance.</p>
+<p>The worktop is 0.775 m above the gallery floor. It is initially empty. The bottom and second tiers provide direct-reach copies; the higher tiers use the existing ranged pickup. Dropped objects below -2 m or more than 25 m from the library return to their shelf positions on the next periodic check, unless held. Arrangements are temporary in-session state, not a new save system.</p>
+<p>The native museum probe checks actual production pickup/release with a supplied grabber, separate instance state, shared geometry, gravity settling on the worktop, box-on-box stacking and a visitor-width walk along the shelf. All 19 checks pass. The four screenshots are native views from within the hall. Headset reach, real controller targeting and Quest performance have not been verified.</p>
+<p>Sources and evidence: <code>commons/artifacts/prefab_box_library/</code>; <code>doc/book/iterations/2026-09-26-cube-prefab-library/probe.gd</code>; the adjacent review page and native report.</p></article><footer>Point_Animatedcube · Primitives · 4 October 2026<br>
+Native Godot captures from the endless museum. <a href="evidence.json">24 checks</a> · <a href="source-hashes.json">Source record</a></footer></main></html>

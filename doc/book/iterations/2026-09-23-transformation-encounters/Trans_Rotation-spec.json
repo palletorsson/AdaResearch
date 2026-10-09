@@ -1,0 +1,76 @@
+{
+  "shots": [
+    {
+      "tag": "order-comparison",
+      "from": [
+        29.5,
+        1.65,
+        37.9
+      ],
+      "look_at": [
+        29.5,
+        1.5,
+        39.5
+      ],
+      "fov": 58
+    },
+    {
+      "tag": "array-and-comparison",
+      "from": [
+        34.8,
+        4.5,
+        44.0
+      ],
+      "look_at": [
+        27,
+        0.8,
+        34.2
+      ],
+      "fov": 65
+    },
+    {
+      "tag": "marked-sweep",
+      "from": [
+        14.0,
+        2.15,
+        37.8
+      ],
+      "look_at": [
+        14.5,
+        1.95,
+        39.5
+      ],
+      "fov": 55
+    }
+  ],
+  "rays": [
+    {
+      "tag": "comparison-approach",
+      "x": 29.5,
+      "z": 38,
+      "top": 0
+    },
+    {
+      "tag": "comparison-foot",
+      "x": 29.5,
+      "z": 39.5,
+      "top": 0
+    }
+  ],
+  "walks": [
+    {
+      "tag": "approach-comparison",
+      "from": [
+        29.5,
+        0.05,
+        37.1
+      ],
+      "to": [
+        29.5,
+        0,
+        38.5
+      ],
+      "seconds": 2
+    }
+  ]
+}

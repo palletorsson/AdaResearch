@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "message": "ten vertices, ten edges, paused start from pre-ready configuration",
+      "ok": true
+    },
+    {
+      "message": "wired STEP accepts one edge",
+      "ok": true
+    },
+    {
+      "message": "cycle-first scan ends at three valid pairs",
+      "ok": true
+    },
+    {
+      "message": "completion reports the scan without maximum claim",
+      "ok": true
+    },
+    {
+      "message": "ORDER clears pairs and pauses",
+      "ok": true
+    },
+    {
+      "message": "ORDER preserves edge membership and adjacency input",
+      "ok": true
+    },
+    {
+      "message": "ORDER preserves every vertex position",
+      "ok": true
+    },
+    {
+      "message": "spokes-first scan pairs all ten vertices",
+      "ok": true
+    },
+    {
+      "message": "independent exhaustive matching search confirms optimum five on this graph",
+      "ok": true
+    },
+    {
+      "message": "RUN after completion repeats selected order",
+      "ok": true
+    },
+    {
+      "message": "RESET interrupts a running scan and clears its state",
+      "ok": true
+    },
+    {
+      "message": "returning to cycle-first repeats earlier pair choices",
+      "ok": true
+    },
+    {
+      "message": "configuration does not duplicate controls",
+      "ok": true
+    },
+    {
+      "message": "post-ready configuration builds the same lesson",
+      "ok": true
+    },
+    {
+      "message": "MST museum configuration hides the valid desktop panel",
+      "ok": true
+    },
+    {
+      "message": "MST start stays active after resetting state",
+      "ok": true
+    },
+    {
+      "message": "production timer callback advances Kruskal",
+      "ok": true
+    },
+    {
+      "message": "restored MST produces a connected tree",
+      "ok": true
+    },
+    {
+      "message": "Prim and Kruskal agree on minimum total cost for the same weighted graph",
+      "ok": true
+    },
+    {
+      "message": "preflow puts two units at the dead end",
+      "ok": true
+    },
+    {
+      "message": "restart repeats preflow without accumulating old excess",
+      "ok": true
+    },
+    {
+      "message": "dead end stops with an explicit blocked state",
+      "ok": true
+    },
+    {
+      "message": "blocked state retains excess and reports actual sink receipt",
+      "ok": true
+    },
+    {
+      "message": "study metadata does not certify maximum flow",
+      "ok": true
+    },
+    {
+      "message": "a stopped callback does not claim completion",
+      "ok": true
+    },
+    {
+      "message": "forward scan end does not claim an optimum",
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "matching": {
+      "cycle_first": 3,
+      "exhaustive_optimum": 5,
+      "fixed_edges": 10,
+      "fixed_vertices": 10,
+      "spokes_first": 5
+    },
+    "mst_cost": 42.5414566993713
+  },
+  "failures": [],
+  "scope": "Model and wired-signal checks; not headset interaction"
+}

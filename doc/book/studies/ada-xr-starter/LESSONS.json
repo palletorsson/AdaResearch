@@ -1,0 +1,292 @@
+{
+  "edition": "2026-10-06",
+  "authority": "Current museum tutorial.md student-code blocks",
+  "lessons": [
+    {
+      "hall": "Point_Zero",
+      "scene": "point_zero.tscn",
+      "main": "counter.gd",
+      "source": "commons/maps/Point_Zero/tutorial.md",
+      "source_sha256": "81b3b9f824e468f7b73605fb49d1c057dd73ade026b31114e99bec9b206230f7",
+      "files_sha256": {
+        "counter.gd": "ac3fbcc67fa25933df3a6ee96f8377ec725e145d022df1917b84f86cd35ab55d"
+      },
+      "carried": {},
+      "exercises_sha256": {
+        "counter_once.gd": "cd824e3ed90fd9a65ff8c2741206e37cd00aa103ad7419bc1fb082663724a180"
+      }
+    },
+    {
+      "hall": "Point_One",
+      "scene": "point_one.tscn",
+      "main": "point.gd",
+      "source": "commons/maps/Point_One/tutorial.md",
+      "source_sha256": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+      "files_sha256": {
+        "point.gd": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484"
+      },
+      "carried": {},
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Point_Coordinates",
+      "scene": "point_coordinates.tscn",
+      "main": "point.gd",
+      "source": "commons/maps/Point_Coordinates/tutorial.md",
+      "source_sha256": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+      "files_sha256": {
+        "point.gd": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+      },
+      "carried": {},
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Point_Lines",
+      "scene": "point_lines.tscn",
+      "main": "line.gd",
+      "source": "commons/maps/Point_Lines/tutorial.md",
+      "source_sha256": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+      "files_sha256": {
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line.gd": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "carried": {},
+      "exercises_sha256": {
+        "line_reversed.gd": "da6b3479496fb77446bd73d10279f3a47fdacd8aec6f6241040fb8f01dfc9451"
+      }
+    },
+    {
+      "hall": "Point_Trace",
+      "scene": "point_trace.tscn",
+      "main": "trace.gd",
+      "source": "commons/maps/Point_Trace/tutorial.md",
+      "source_sha256": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+      "files_sha256": {
+        "trace.gd": "165c615c5809f49aa7201c5c770ba6651dd5d6c8642e0805c0a2cf3f5b1a5124",
+        "trace_archive.gd": "adb7783d09018553bb1c035f6a7d03003525e66bf6625756ae76e8bcf3da6871"
+      },
+      "carried": {
+        "point_body.gd": {
+          "from": "Point_Lines",
+          "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+        },
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Point_Line_Grid",
+      "scene": "point_grid.tscn",
+      "main": "grid.gd",
+      "source": "commons/maps/Point_Line_Grid/tutorial.md",
+      "source_sha256": "9f97d12c38c7138758cff138e61b031878f1a2fc18c3a42be1143190f62a2c3c",
+      "files_sha256": {
+        "grid.gd": "a3d5a1b6cfb186b3c08ce1879ede94f911c79cbd62938256e14e6a2e763d0771"
+      },
+      "carried": {
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "trace_archive.gd": {
+          "from": "Point_Trace",
+          "sha256": "adb7783d09018553bb1c035f6a7d03003525e66bf6625756ae76e8bcf3da6871"
+        }
+      },
+      "exercises_sha256": {
+        "grid_flat_y.gd": "c2ed9aaa68e50f209fb0792bbaa3092f38253ed39fea970d05ec6000a2785392"
+      }
+    },
+    {
+      "hall": "Point_Triangle_Context",
+      "scene": "point_triangle.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Point_Triangle_Context/tutorial.md",
+      "source_sha256": "b28ba3b36eec2b345756cefcfd5606d72eb32f548c2de2711ddb0a6f96ee53c5",
+      "files_sha256": {
+        "lesson.gd": "32561b91b52ecdfbc778c251a5964c06301807254ee16e19c78a8d9cb67fc52a",
+        "face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+      },
+      "carried": {
+        "point_body.gd": {
+          "from": "Point_Lines",
+          "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+        },
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "trace_archive.gd": {
+          "from": "Point_Trace",
+          "sha256": "adb7783d09018553bb1c035f6a7d03003525e66bf6625756ae76e8bcf3da6871"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Polythedra",
+      "scene": "point_polyhedra.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Polythedra/tutorial.md",
+      "source_sha256": "d7da05a696e62e9d3d1dad4e1fada4fe0513923c7eed42531d2fb8af4b4c8252",
+      "files_sha256": {
+        "lesson.gd": "bdecfb2e410cd2a902c592d376c433963bdf3003ca41f87b5681e5ca5093b1bc"
+      },
+      "carried": {
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "trace_archive.gd": {
+          "from": "Point_Trace",
+          "sha256": "adb7783d09018553bb1c035f6a7d03003525e66bf6625756ae76e8bcf3da6871"
+        },
+        "face_body.gd": {
+          "from": "Point_Triangle_Context",
+          "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Point_Animatedcube",
+      "scene": "point_cube.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Point_Animatedcube/tutorial.md",
+      "source_sha256": "645242cbe162a9ee3e4e39e92b3d6db6e57920f2cee88bf97de31975a2c2842c",
+      "files_sha256": {
+        "lesson.gd": "79eef8493a6f5d02fe23c90d0e1de5f4fa6c0b37050397094bdb16a7199b8635",
+        "cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+      },
+      "carried": {
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "face_body.gd": {
+          "from": "Point_Triangle_Context",
+          "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Ignorance",
+      "scene": "primitive_rules.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Ignorance/tutorial.md",
+      "source_sha256": "6554037f76b86b81f787b7f39692bc7214451e312de1542f964c7d2461937199",
+      "files_sha256": {
+        "lesson.gd": "e15871f9782b7eaa60fce93c943b8db4220ac9b1f66e79ac8e0e23da001d1efa"
+      },
+      "carried": {
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "face_body.gd": {
+          "from": "Point_Triangle_Context",
+          "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Godot",
+      "scene": "primitive_godot.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Godot/tutorial.md",
+      "source_sha256": "4399cedcd88f88c72ed99cddfb9774d9335efd5ef05d9406dad3935fc30e676b",
+      "files_sha256": {
+        "lesson.gd": "cdd4835dbcd5e78e37a2b4ccdccf691317a202d7f9743fc71623467b62613238",
+        "point_body.gd": "cfa9ddfe56b7e69780029404689c23ce0bcef968be0074d6581b9ebd010b8a7d",
+        "resolution_point.gd": "ce1f4e0dc8dd49f4da2b20c92ccf7ac4d0023c4d99f448a4b69ff6fdac76c5f6"
+      },
+      "carried": {},
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Columns",
+      "scene": "primitive_column.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Columns/tutorial.md",
+      "source_sha256": "815d26e26d8dc3eb955e4a4431e51d6e30f8989ea5886f4f1479e4cc509afa6f",
+      "files_sha256": {
+        "lesson.gd": "108fad54e6a19c47127d90e182d5000ce554af42766273a364be926a708217c0",
+        "circle_samples.gd": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57",
+        "column_surface.gd": "4884e0c5713a1971fd1efeb535e6f926c6d1d4193ad0d2bf04a15e28bae1b380"
+      },
+      "carried": {},
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Profiles",
+      "scene": "primitive_profiles.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Profiles/tutorial.md",
+      "source_sha256": "ac363fa23fb172379f4122894418557a1566d1a3ed73cdf2329f38cc8828b15c",
+      "files_sha256": {
+        "lesson.gd": "b09bc8431e267794abd510cd1ab3fdf72f1999929ff437eaf786c33b21bf3f4d",
+        "profile_sweep.gd": "00ee671a4146d9d4634e5f5e29016a33982a8229c73e1addb6436ca9a6f70c39",
+        "JetBrainsMono-Medium.ttf": "31c92d01a8a08528b718a43addf0ad3df0af2ca4b7b3290a452f70f358e14d3d",
+        "OFL.txt": "7d96701533d059cfd4191a85ecfd159e262527abd737eae6d9fb533844c70410"
+      },
+      "carried": {},
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Portals",
+      "scene": "primitive_portals.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Portals/tutorial.md",
+      "source_sha256": "df3da2df48121af14f772bcc4f7071438183c30a7ae81681d96456d90467cbf4",
+      "files_sha256": {
+        "lesson.gd": "abdc3bd88aa92977446cc1b71af385a0fad01978c8ef4dca31329f4257fb3a9d"
+      },
+      "carried": {
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "circle_samples.gd": {
+          "from": "Primitives_Columns",
+          "sha256": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57"
+        }
+      },
+      "exercises_sha256": {}
+    },
+    {
+      "hall": "Primitives_Melencolia",
+      "scene": "primitive_composition.tscn",
+      "main": "lesson.gd",
+      "source": "commons/maps/Primitives_Melencolia/tutorial.md",
+      "source_sha256": "db6599ce44769b7304445b99e0c06323713eeda78a7b4546eeeaf9dc0155ca51",
+      "files_sha256": {
+        "lesson.gd": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97"
+      },
+      "carried": {
+        "point_body.gd": {
+          "from": "Point_Lines",
+          "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+        },
+        "line_skin.gd": {
+          "from": "Point_Lines",
+          "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+        },
+        "face_body.gd": {
+          "from": "Point_Triangle_Context",
+          "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+        },
+        "cube_body.gd": {
+          "from": "Point_Animatedcube",
+          "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+        }
+      },
+      "exercises_sha256": {}
+    }
+  ]
+}

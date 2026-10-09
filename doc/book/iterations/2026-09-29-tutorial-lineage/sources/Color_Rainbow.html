@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Rainbow · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Rainbow">← Tutorial lineage</a></p><h1>Color Rainbow</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Rainbow/final.md">Raw captured source</a></p><pre># More colour, another rainbow
+
+&lt;!-- @rainbow --&gt;
+
+Two offers wait by the entrance: a crystal in a wire case and a cube to collect. Neither is required to join the celebration.
+
+The mushrooms are dressed for it. Pearl collars beneath candy-coloured caps; stars beyond the arch; a small staircase that seems to have wandered in from a platform game. There is also a level path. You can join the celebration without taking the steps.
+
+Enter along the coloured centre path. Confetti opens above it. You have not solved a puzzle yet. Stay a moment with the possibility that the room is pleased you arrived.
+
+The little wire cubes have returned, spaced along the middle of the walk. Walk into one. Its outline disappears and sparks rise from its place, drawing long coloured tails through the air. Keep walking. Another cube, another burst. For a moment, the celebration marks where you have been.
+
+Find a boundary between two colours in the rainbow. Follow it far enough to see its curve. At the control plinth, press RE-DIVIDE. Find that boundary again. Has it moved, disappeared, acquired a neighbour? Has the opening beneath the arch become any smaller?
+
+Try the button again before deciding what kind of rainbow this is. The steps keep their height. The path remains where it was. Yet the colours have another arrangement, and the familiar outline is being asked to hold it. CELEBRATE gives you another burst whenever you want one. There is no correct partition to earn first.
+
+In the salon, one selected colour reached the same hand at two scales. Here a list of colours reaches a series of curved strips. Each strip is made from vertices: points placed along an inner and an outer half-circle, joined into triangles. Its position in the list gives it a colour.
+
+The button moves through four authored choices: six bands, seven, forty-eight, then two. The generator keeps their combined width fixed:
+
+```gdscript
+return (RAINBOW_THICKNESS * 7.0) / float(maxi(1, rainbow_colors.size()))
+```
+
+The code keeps a total band thickness of `7 × 0.8`, shared out again whenever the list changes. The arch is scaled down to fit this hall. More strips each receive less of the fixed total; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
+
+![Six, seven, forty-eight and two bands on the same museum arch.](/book-review/doc/book/iterations/2026-09-23-rainbow-room-for-another/four-arrangements.png)
+
+*Four arrangements, seen from the same place. The coloured steps change with the arch; their height and the opening beneath it remain.*
+
+Look for the seams in the forty-eight-band version. The option is called `continuous`, but each strip still has its own colour.
+
+For each strip, the code computes a hue. **HSV** names hue, saturation and value: a place around a colour circle, how far the colour is from grey at that value, and a level that reaches black at zero. Here saturation and value both stay at one. Only hue travels:
+
+```gdscript
+var t: float = float(i) / float(count - 1)
+out.append(Color.from_hsv(t * 0.78, 1.0, 1.0, 1.0))
+```
+
+`t` runs from zero at the first strip to one at the last. A hue value of one would complete a turn around the circle; multiplying by `0.78` takes this sweep partway around instead.
+
+A name can promise continuity while an implementation offers enough small divisions for some seams to become difficult to see. These are HSV values converted into RGB colours on a mesh. No droplets, sunlight or wavelength calculation produce this particular rainbow. Even its opaque appearance does not make the bands a climbing surface. The low steps have collision; the arch is a display.
+
+Look for a colour you chose in the salon, first in the arch and then among the striped banners and mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They already share the room, even when the arch has no place for them. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?[^colour-boundaries]
+
+After the fourth arrangement, RE-DIVIDE returns to the first. You can stay with a version you like. Or you might want a fifth: a pale band, a colour given more room, a border that wanders away from the curve. The next change would reach beyond this button, into the list or the rule that makes it.
+
+Before leaving, choose the version you want to stand beneath. Let the confetti return. At the far end of the walk, two slender poles hold a rainbow banner above your head. You can pass beneath it whether you collected every cube or left them all. The same programmed event can be a reward for obedience or an invitation that asks nothing of you; here you can repeat the confetti without passing a test.
+
+&lt;!-- @ --&gt;
+
+Carry the distinction between a colour rule and the places where it is sampled. In the next room, pillars stand at particular addresses in a colour field. What is between them, where the field has a value but no pillar has been given a body?
+
+[^colour-boundaries]: A question for later: queer has no compulsory colour. A flag, a garment and a pastel wall do different work. We cannot assume that conservatives share a fear of pastels; we can ask when a colour becomes a threat to an order that wants its distinctions kept. In *Powers of Horror* (1982), Julia Kristeva connects abjection with disturbances of identity, system and order ([opening chapter, pp. 1–4](https://ieas-szeged.hu/downtherabbithole/wp-content/uploads/2018/02/Kristeva_Abjection.pdf)). This offers a way to question the policing of a boundary, without calling queer bodies abject. A future encounter could let us soften the bands or mix their colours towards white. These are different operations. A continuous control would still have limits; smoothness alone would not make it free.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Rainbow/tutorial.md">Raw captured source</a></p><pre># A celebration you can re-divide
+
+1. Enter along the level coloured centre path. The welcome patch starts confetti; the left-hand steps are optional.
+2. Follow a boundary in the arch. Press RE-DIVIDE on the control plinth and find what changed.
+3. Repeat through the four configurations. Compare boundaries, opening, step positions and colour addresses before explaining the list.
+4. Inspect the fixed-total-width rule in rainbow.gd. Look for seams in the 48-band version before reading the HSV hue rule behind the mode called continuous.
+5. Press CELEBRATE whenever you want another burst. Repetition is available without solving a colour puzzle.
+6. Look for a colour chosen in the salon among the bands, banners and mushrooms. Cycle back to the first arrangement. Keep one you like, or ask what additional list or rule would give another colour a place in the arch.
+
+The rainbow is primary. Its arches and mushrooms are scenery; the low steps have collision. Do not instruct visitors to climb the arch, punch a missing MarioCube, adjust an optical spectrum, or wait for animated band colours: the implemented colour change comes from RE-DIVIDE.
+
+
+## Along the walk
+
+The five small wire cubes in the centre use the familiar pickup body. Walk into one and follow a spark from its bright head along the thinning tail. The tail holds a short history of the spark&#x27;s positions. The cubes disappear when collected and return on the next hall load. The CELEBRATE button still repeats the separate confetti burst.
+
+Walk beneath the six-stripe banner at the far end. Two poles hold it clear of the path. Leaving cubes behind does not close the route. The banner keeps its colours when RE-DIVIDE changes the arch.
+
+The footnote in final.md records a possible later investigation of colour, boundaries and continuous controls. Those controls are not part of the current artifact.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Rainbow/technical.md">Raw captured source</a></p><pre># Re-dividing one arch
+
+The map places `rainbow:0:0:1#stage:celebration#plinth:0` at (7,13). The registered scene remains `algorithms/primitives/rainbow/rainbow.tscn`. Its script detects the opt-in stage and creates `rainbow_celebration.gd`. Other placements retain the existing rainbow behaviour.
+
+The stage reuses rainbow.gd&#x27;s band generator at scale 0.23. RE-DIVIDE cycles `six`, `roygbiv`, `continuous`, `two` (6, 7, 48, 2 bands). `_band_thickness()` divides the original 5.6-unit total thickness by the current palette length. Each band uses 64 angular segments. The secondary arc reverses the palette; its root is displaced slightly in depth to prevent coplanar flicker where opaque bands overlap.
+
+The 48-band option samples `Color.from_hsv(t * 0.78, 1.0, 1.0, 1.0)`, with t=i/(count-1). This is colour assignment to mesh vertices, not a spectral simulation. The celebration uses opaque unshaded band materials. There is no collision attached to the arch, despite its opaque appearance.
+
+The same palette recolours fourteen step/paver meshes without changing their transforms. Eight optional steps have collision, rising by 0.18 m to 0.9 m and then descending. The centre route remains level.
+
+A canonical ControlPanel provides RE-DIVIDE and CELEBRATE. A welcome Area3D recognises em_walker, player, player_body and vr_player groups. Its physics overlap calls the same celebration function. Confetti uses one 96-instance MultiMesh, with a 3.5-second lifetime; another activation restarts that pool. There are no new scores, unlocks or global NextCube listeners.
+
+The museum probe exercises the actual button signals, all four generated partitions, fixed width and route geometry, bounded/repeatable confetti, physics overlap with the museum walker, and a level-route sweep using its capsule dimensions. Tracked-hand button use and headset comfort remain untested. See field_notes.md for the run and capture.
+
+## Native comparison, 23 September 2026
+
+The shared book figure shows the four generated partitions from one camera in the actual museum. The generator&#x27;s 5.6-unit band thickness is local: scale 0.23 makes it approximately 1.288 metres in this hall, while the inner opening spans 6.9 metres. These values were measured from the world-transformed mesh. Changing the band count preserves both dimensions; the fourteen step/paver transforms stay fixed as their colours change.
+
+The focused run passes 40 assertions. Supplied pressed/released pointer events operate the actual RE-DIVIDE and CELEBRATE buttons. The ordinary museum controller walks the level centre path into the welcome volume, beneath the arch and back through the welcome volume. Both passages trigger the existing celebration. The confetti reuses 96 instances and expires after its configured lifetime. Static comparison captures suppress confetti, while a separate native view retains it. No production source or placement changed.
+
+Evidence and native views: `doc/book/iterations/2026-09-23-rainbow-room-for-another/`. The under-arch camera uses the reached walker position plus 1.65 metres. Supplied desktop input and selected camera views do not establish tracked-hand reach, headset comfort, learner experience or performance.
+
+
+## Walk-over celebration, 28 September 2026
+
+Five `rainbow_party_pickup.tscn` instances inherit the existing `pickup_cube_static.tscn` visual body. Their local subclass retains the inherited player/group filter and generated pickup sound, but overrides collection to emit a hall-local signal without awarding points or opening a gate. The Area3D detects layer 1 and layer 20; internal solid collision remains disabled. Cubes sit at x=0, root y=0.1, z=4.2, 2.1, 0, -2.1, -4.2 relative to the stage. They are collected once per hall load. Visuals vanish immediately; the owned sound finishes before the cube is freed.
+
+Each crossing creates one `rainbow_spark_burst.gd`: 28 ballistic sparks, each drawn with 14 tapered segments sampling the previous 0.75 seconds. A single 392-instance MultiMesh per burst works in the Compatibility renderer. Bursts expire after 2.8 seconds, clip their tails above the walk and are capped at five active emitters. The current arch palette is copied at collection time. Welcome confetti remains a separate reusable 96-instance effect.
+
+The end banner is six fixed coloured cloth strips between two 4.95-metre poles at x=±3.4, z=-7.0. A slight sag and ripple are mesh geometry. Its lowest point is 2.85 metres above the floor, with no cloth collision across the route. The poles and small feet have collision. RE-DIVIDE does not recolour this banner or the existing flags.
+
+Continuous boundary/white-mixing controls are recorded as a later idea in the chapter footnote; they have not been implemented.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Rainbow/intent.md">Raw captured source</a></p><pre># Color_Rainbow — intent
+
+Give the hall the pleasure of a queer platform-game celebration: bright colour, optional steps, dressed mushrooms, pride banners and repeatable confetti. Keep a level route and reachable controls.
+
+Use the existing rainbow as the primary. Make the critical comparison operable: RE-DIVIDE changes the colour partition while keeping total band width and route geometry fixed. The available counts are 6, 7, 48 and 2. The reader first notices a boundary change, then encounters the thickness rule and the finite HSV sampling behind the mode called continuous.
+
+Sequence handoff: the salon&#x27;s shared material address at two scales → a list distributed over a familiar arch → the pillar field&#x27;s colours sampled at spatial addresses. Do not equate this RGB geometry with atmospheric optics or claim that four presets exhaust possible colour arrangements.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Rainbow/critical.md">Raw captured source</a></p><pre># The party does not wait for the right answer
+
+A platform game often makes a burst of colour acknowledge something you have earned. Here the welcome patch celebrates arrival, and a button lets the visitor repeat it. The programmed event is still constrained: ninety-six pieces of confetti and a bounded lifetime. Its social invitation has changed without requiring an unbounded simulation.
+
+The arch offers another small displacement. It remains recognisable while the control changes its division into colours. Six, seven, forty-eight, two: each configuration comes from an authored list or rule. The button exposes a choice that the finished rainbow image could otherwise make look inevitable.
+
+This does not put every possible rainbow within reach. Four choices are available. The mode called continuous has forty-eight strips. The code&#x27;s saturated hue sweep does not include the whites, dark colours or pale pinks already present in the banners. Those differences are not impossible for RGB; they are outside this particular generating rule. The next modification would have somewhere precise to begin.
+
+The mushrooms borrow the bodily vocabulary of platform games and wear pearl collars. They do not become enemies. The room can use familiar forms to invite proximity and pleasure without making difference a threat. This is a staging decision, not a claim that friendliness follows automatically from their geometry.
+
+There is also a material limit. An opaque rainbow can look substantial while offering no collision surface. The coloured steps can carry the body because collision was built for them. Appearance alone does not establish the bodily possibility. The level route keeps that distinction available without demanding a jump.
+
+For Ada, the experiment is methodological: hold a recognisable structure, change one rule, and see what another arrangement permits us to notice or want. The celebration can accompany that inquiry before there is a correct answer. The pillar field continues with another question: where does a rule have a colour that the room has not yet given a body?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Rainbow/artifacts.md">Raw captured source</a></p><pre># Color Rainbow — Artifacts
+*Color and Composition · F_order · 4 artifacts*
+
+&gt; Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal. Newton&#x27;s prism stretched into architecture, the spectrum become a path you traverse rather than observe from outside.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Mario Cube
+![Mario Cube](/scene-catalog/mario_cube.png)
+
+An interactive surprise cube inspired by classic platformer mechanics — hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.
+
+`mario_cube`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## rainbow
+![rainbow](/scene-catalog/rainbow.png)
+
+Creates double rainbow arcs with atmospheric bloom and layered color bands.
+
+`rainbow`
+
+## Pick Up Cube
+![Pick Up Cube](/scene-catalog/pick_up_cube.png)
+
+MOVE an object through space and understand translation as carried displacement.
+
+`pick_up_cube`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Rainbow/summary.md">Raw captured source</a></p><pre># Every Body / More Colour
+
+Color_Rainbow follows the salon and precedes Color_Pillar. A room-scale double arch, candy steps, pearl-collared mushrooms, striped pride banners, stars and confetti turn the existing rainbow generator into a queer platform-game celebration.
+
+The primary remains `rainbow`. Its opt-in `stage:celebration` adds two real controls on a plinth. RE-DIVIDE cycles through 6, 7, 48 and 2 bands while retaining the arch&#x27;s total colour width and the walking route. CELEBRATE repeats a bounded confetti burst; entering the centre welcome patch triggers one too. There is no score requirement or room transition.
+
+The 15 by 26 metre room retains its enclosing walls and level floor. Optional left-hand steps rise by 0.18 m to 0.9 m. A level centre path remains available. The mushrooms and arches are visual scenery; the steps and control plinth have collision. A pickup cube and catalyst pedestal remain at the far side. The old dark-sphere/MarioCube reveal and automatic catalyst vent are archived with the prior layout.
+
+The lesson is about authored colour partitions on geometry, not wavelength optics. The mode called continuous is a finite 48-band HSV sweep. The book lets the visitor notice changing boundaries before explaining the list and thickness rule, then carries sampling into the pillar field.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Rainbow/blurb.md">Raw captured source</a></p><pre># Every Body / More Colour
+
+Pearl-collared mushrooms, candy steps and a rainbow wide enough to walk beneath. Enter the centre path and let the confetti welcome you. Then re-divide the arch: its familiar shape can hold another arrangement of colour. There is no correct one to earn before celebrating.
+</pre></section></body></html>

@@ -1,0 +1,932 @@
+{
+ "sweep": "sampling_bench",
+ "peak_changed_pct": 61.43,
+ "subject_pct": 61.372,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "changed_px": 17629,
+   "changed_pct": 3.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "changed_px": 353365,
+   "changed_pct": 61.178
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "changed_px": 10835,
+   "changed_pct": 1.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "changed_px": 244670,
+   "changed_pct": 42.36
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "changed_px": 353586,
+   "changed_pct": 61.216
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 4348,
+   "changed_pct": 0.753
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 16298,
+   "changed_pct": 2.822
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 352775,
+   "changed_pct": 61.076
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 5919,
+   "changed_pct": 1.025
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 22982,
+   "changed_pct": 3.979
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 352308,
+   "changed_pct": 60.995
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "changed_px": 352803,
+   "changed_pct": 61.081
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "changed_px": 31017,
+   "changed_pct": 5.37
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "changed_px": 11855,
+   "changed_pct": 2.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "changed_px": 353030,
+   "changed_pct": 61.12
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 212419,
+   "changed_pct": 36.776
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 5426,
+   "changed_pct": 0.939
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 352124,
+   "changed_pct": 60.963
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 261401,
+   "changed_pct": 45.256
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 7577,
+   "changed_pct": 1.312
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 351603,
+   "changed_pct": 60.873
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "changed_px": 352219,
+   "changed_pct": 60.98
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "changed_px": 351427,
+   "changed_pct": 60.843
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "changed_px": 45443,
+   "changed_pct": 7.868
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 354216,
+   "changed_pct": 61.325
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 353932,
+   "changed_pct": 61.276
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 18553,
+   "changed_pct": 3.212
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 354596,
+   "changed_pct": 61.391
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 354446,
+   "changed_pct": 61.365
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "mid",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 21368,
+   "changed_pct": 3.699
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "changed_px": 19545,
+   "changed_pct": 3.384
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "changed_px": 353810,
+   "changed_pct": 61.255
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 18072,
+   "changed_pct": 3.129
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 73553,
+   "changed_pct": 12.734
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 350717,
+   "changed_pct": 60.72
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 34402,
+   "changed_pct": 5.956
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 96334,
+   "changed_pct": 16.678
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 350000,
+   "changed_pct": 60.596
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "changed_px": 353141,
+   "changed_pct": 61.139
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 289965,
+   "changed_pct": 50.202
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 18718,
+   "changed_pct": 3.241
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 349769,
+   "changed_pct": 60.556
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 297803,
+   "changed_pct": 51.559
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 35871,
+   "changed_pct": 6.21
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 348993,
+   "changed_pct": 60.421
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "changed_px": 354446,
+   "changed_pct": 61.365
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 354166,
+   "changed_pct": 61.317
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 59410,
+   "changed_pct": 10.286
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 354821,
+   "changed_pct": 61.43
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 354678,
+   "changed_pct": 61.405
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "coarse",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 61999,
+   "changed_pct": 10.734
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "changed_px": 18819,
+   "changed_pct": 3.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 354090,
+   "changed_pct": 61.304
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 2375,
+   "changed_pct": 0.411
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 9937,
+   "changed_pct": 1.72
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 353954,
+   "changed_pct": 61.28
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "changed_px": 353790,
+   "changed_pct": 61.252
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 83207,
+   "changed_pct": 14.406
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 3249,
+   "changed_pct": 0.562
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 353638,
+   "changed_pct": 61.225
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "changed_px": 354511,
+   "changed_pct": 61.377
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 354354,
+   "changed_pct": 61.349
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "fine",
+    "reading": "error"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 4003,
+   "changed_pct": 0.693
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "changed_px": 22640,
+   "changed_pct": 3.92
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "sample"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 354482,
+   "changed_pct": 61.372
+  },
+  {
+   "a": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "truth"
+   },
+   "b": {
+    "layout": "single",
+    "resolution": "ultra",
+    "reading": "error"
+   },
+   "changed_px": 354319,
+   "changed_pct": 61.343
+  }
+ ]
+}

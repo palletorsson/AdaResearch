@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VFM_02_Operations · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=VFM_02_Operations">← Tutorial lineage</a></p><h1>VFM 02 Operations</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="VFM_02_Operations/final.md">Raw captured source</a></p><pre># The journey that adds up to nothing
+
+&lt;!-- @adder_board --&gt;
+
+A pale cube waits inside a glass-edged grid. Amber makes one leg of a route; pink continues from its end. A cyan mark waits elsewhere on the floor. Above them, the wall draws the same arrangement from overhead.
+
+Press **GO**. The cube starts at home, follows amber, turns, follows pink. It stops at cyan.
+
+Now **SWAP**, then **GO** again. The turn happens somewhere else. The destination has not moved.
+
+There is already something here that the destination cannot tell us.
+
+In the previous room we moved two points together and kept their difference. Here we keep two differences and exchange their order. Each contribution belongs to the same floor frame: X across the stage, F forward into it. Both are measured in metres. The wall turns that floor into an upright plan; upward in the picture means forward on the stage.
+
+The first pair is one metre across and one metre forward. Change either contribution with the console and watch the cyan marks on the wall and floor move together. Both receive one result.
+
+**PATH** offers another journey. In *direct* mode, GO sends the cube straight to cyan. The corner has gone, but the destination remains. On the opening inputs the two-legged trip covers two metres. The direct trip covers about 1.41.
+
+Behind **RULE**, the arithmetic is waiting:
+
+```gdscript
+result = a + b
+```
+
+Small enough to pass over. Yet this is where two contributions become something a receiver can use. Component by component, one metre across plus no metres across; no metres forward plus one metre forward. The result is `(1, 1)`.
+
+The carriage receives it as a destination. The wall receives it as a point in a diagram. Neither has to invent another answer.
+
+Addition needs compatible quantities and a shared frame. Here a metre of displacement meets another metre of displacement. Later, two velocities or two forces can be added by the same component rule. The numbers will have different jobs. The shape of a vector alone cannot tell us which job it has been given.
+
+## Coming home
+
+**CANCEL** sets B opposite to A. With A still nonzero, cyan returns home.
+
+Choose the route *via A* and press **GO**. The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.
+
+Zero has not meant that nothing happened.
+
+Switch to *direct* and run the same pair. This time the cube stays home. Two journeys now share both their start and their destination. One has movement, a turn, elapsed time. The other has no distance to cover. If we kept only the sum, we could not recover which one we had watched.
+
+The out-and-back is useful precisely because it does not vanish from every account. Displacement cancels; distance accumulates. We have already met accumulation. Here it keeps a fact that the endpoint leaves behind. Which account would a delivery machine need? Which would a tired body insist on keeping?
+
+The counter also has a beginning. Each GO puts the cube home instantly and starts a new trip. That reset is not part of the distance it reports. The experiment lets us start again; it has chosen which movement belongs to the journey.
+
+A prescribed speed carries the cube along its route. We have not yet needed a push or the cube&#x27;s mass. Addition supplied a destination; another part of the program supplied the travel.
+
+In the next room, exchange will matter differently. The gap from here to there has the same length as the gap back. It points the other way.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="VFM_02_Operations/tutorial.md">Raw captured source</a></p><pre># Two contributions, one destination
+
+Primary: `adder_board`, opt-in `lesson:room_sum`. Start with GO; then SWAP and GO. Predict the endpoint before revealing RULE. Compare PATH via A with direct. CANCEL makes B = -A; compare nonzero out-and-back distance with zero resultant.
+
+Controls use real push_button pointer events: A/B selects input; X-/X+/F-/F+ change components by 0.5 m within [-1,1]. PATH switches route, SWAP exchanges inputs, CANCEL opposes them, GO homes and runs, RULE toggles arithmetic. There are no draggable pins in this room variant. The ordinary board retains its original interface in other placements.
+
+`result = a + b` drives both wall and floor. Vector2 stores (local X, local forward) in metres; floor placement is Vector3(v.x, height, -v.y). Wall plotting uses 0.48 display metres per input metre. Both operands and all sums fit the chart; no projection component or result is clipped. Carriage speed is prescribed at 0.8 m/s. Waypoint traversal consumes leftover time across corners; movement is updated in the physics callback. The guarded AnimatableBody is not a force experiment or a player transport platform.
+
+GO instantly resets position and travelled distance. Input/path changes stop and reset the trip; input selection and RULE do not stop it. The old 26 supporting instruments remain in their original relative arrangement, shifted ten source rows behind this arena. The next sequence hall remains Vectors_Act2_VectorArithmetic.
+
+## From the floor plan into the scene
+
+The carriage&#x27;s coordinate conversion is:
+
+```gdscript
+return Vector3(v.x, height, -v.y)
+```
+
+The second plan component becomes local negative Z; height is supplied separately. The wall&#x27;s upward diagram axis denotes forward movement on the stage, not a climb. Starting values A=(1,0), B=(0,1) give route length 2 m and direct length sqrt(2) m. The travelled counter starts again after GO&#x27;s instantaneous homing; it does not include the reset movement.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/VFM_02_Operations/final.md) is retained for comparison.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="VFM_02_Operations/intent.md">Raw captured source</a></p><pre># What can one destination hold?
+
+First pass: addition at room scale, with adder_board as the sole primary. Two editable displacements feed a shared sum, a wall plan, and a guarded carriage. Discovery: exchanging the inputs preserves the endpoint; cancellation can retain a journey with zero displacement. Prior capabilities: coordinate frame, magnitude, accumulation. Next: contrast operations in Vectors_Act2_VectorArithmetic; then separate prescribed motion, velocity, acceleration and force.
+
+The enlarged arrival preserves the previous supporting collection behind it. Desktop checks verify the new encounter. Headset reach and comfort remain deferred; existing supporting instruments are retained, not newly certified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="VFM_02_Operations/critical.md">Raw captured source</a></p><pre># An endpoint cannot tell the whole journey
+
+The claim is testable: A then -A yields a zero resultant, but a nonzero travelled distance. Direct and via-A runs can have identical endpoints and different histories. Addition discards route order from the endpoint; it does not prove that order is irrelevant to lived movement, collisions or time. SWAP preserves the vector sum in this shared frame, while changing the intermediate waypoint.
+
+The queer opening is specific to the two records. The return trip belongs to zero in one account and remains a journey in another. Neither account owns the whole event. Which becomes authoritative depends on the question and the receiver. Calling all such loss entropy would require a defined state space and measure, which this encounter does not supply.
+
+The apparatus also admits its own framing: bounded components, fixed height, prescribed speed and an instantaneous home reset excluded from the distance counter. Those are implementation choices. An alternative learner experiment can change the frame, retain a trace, count the reset or add obstacles. None is silently claimed as an existing control.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="VFM_02_Operations/artifacts.md">Raw captured source</a></p><pre># Primary encounter
+
+`adder_board:180:0:1#lesson:room_sum#pin:1#plinth:0` at source cell (12,6). New opt-in room adapter: commons/artifacts/adder_board/room_sum.gd. One token includes two control rows, glass-edged floor stage, wall plan and kinematic carriage.
+
+The other 26 placements are unchanged in identity and relative configuration, shifted ten rows into the supporting gallery. See doc/space/vector-addition-room-2026-09-11/placements.json for the full before/after ledger. Explicit roles and final.md contain one primary: adder_board. Previous wider manuscript retained under that record&#x27;s before directory for subsequent editing.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="VFM_02_Operations/blurb.md">Raw captured source</a></p><pre>Dot, cross, projection — the operations, walk-around scale.
+</pre></section></body></html>

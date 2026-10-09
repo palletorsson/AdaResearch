@@ -1,0 +1,43 @@
+{
+  "tool": "Built-in image_gen",
+  "plates": [
+    {
+      "slug": "array",
+      "map": "Array",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-5360ae76-f07b-4419-8899-b96a42791b22.png",
+      "refinements": []
+    },
+    {
+      "slug": "array-3d",
+      "map": "Tutorial_3D",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-96350c45-4ae5-446b-9af3-7f16d4356a50.png",
+      "refinements": [
+        "Edit only these specific technical details in this six-panel comic; keep layout, characters, captions, all other panels and text unchanged. MIDDLE-LEFT gap panel: right cube label must read [2,2,0], NOT [3,2,0], because two neighboring sites separated by 2.4m differ by ONE X index. The pink 2.4m measurement must connect the CENTRES of the two cubes: draw extension guides from each central pink dot up to the dimension line, and put its endpoints exactly above those centres, not at inward cube edges. UPPER-RIGHT flight panel: restore a small dark cube INSIDE the selected pink wire marker, same cube as upper-left; visitor is still approaching, collection happens later. MIDDLE-RIGHT collected-site panel: shrink the giant pink wire box to the SAME small cube-sized marker seen upper-left, around the visitor's waist/root position. It marks one cube's address and must not grow into a body-size cage. Cube absent, body overlapping that small marker, rest of body extends above/below it. Preserve inset readout value0 and keep value1 upper-left.",
+        "Edit ONLY the middle-left panel's pink distance annotation. Preserve all six panels, all captions, characters, labels and everything else. Remove the pink horizontal dimension line, its arrowheads and vertical extension strokes because they still measure from the cube edges rather than centres. Keep ONLY the small pink dot at each cube's centre. Replace '2.4 m' with the clear text '2.4 m between centres' above the gap. Keep the address labels [1,2,0] and [2,2,0]. No measurement arrows remain. No other changes."
+      ]
+    },
+    {
+      "slug": "array-floor",
+      "map": "Tutorial_Tiling_Floor",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-330b2534-fbdc-4484-920f-1ad9b4d12fc7.png",
+      "refinements": [
+        "Edit ONLY two details of this existing six-panel comic; preserve the full layout, characters, title, every caption and the other panels. TOP-RIGHT: the drawn large field is not a full sixteen-by-sixteen, so make it explicitly a CROPPED VIEW of that larger field: replace '16 x 16 (256 addresses)' with 'Part of the larger field', extend the patterned surface beyond the right and bottom frame edges so its full outer boundary is not shown. The orange outline must enclose EXACTLY FOUR columns by FOUR rows of the same small bisected-square tiles. Do not label the visible cropped portion as 256 cells. MIDDLE-LEFT small rule card: its two miniatures must show a quarter-turn and a half-turn of the SAME source motif, a square with its black triangle in the upper-right half. Under [1,0] +1 turn (90 degrees), black is upper-LEFT. Under [2,0] +2 turns (180 degrees), black is lower-LEFT. Correct that 180-degree miniature, not the captions or numeric labels. Both miniatures remain diagonally bisected black/white squares. No other changes."
+      ]
+    },
+    {
+      "slug": "array-walls",
+      "map": "Tutorial_Tiling_Walls",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-130ac8e6-be67-40ae-95b3-b715dcc25326.png",
+      "refinements": []
+    },
+    {
+      "slug": "array-disco",
+      "map": "Tutorial_Disco",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-cb1091ef-f82e-4526-9b08-2f8e0daa6b3a.png",
+      "refinements": [
+        "Edit only these specific diagram errors in this existing six-panel comic; preserve the characters, captions, title and all other artwork. TOP-LEFT phase0/phase1 checker comparison: currently they are identical. INVERT every square in the phase1 checker, so at every same address black becomes white and white becomes black. Keep phase0 untouched and the grid geometry identical. TOP-RIGHT two small checker miniatures: also ensure they are exact black-white complements, not identical. BOTTOM-LEFT: replace '12 steps (not tied to sound)' beneath FLOOR CLOCK with 'Independent phase'. Twelve is FLOOR WIDTH, NOT the animation's period. Under the upper inset labelled FLOOR PLAY / SCORE STOP, REMOVE all pink column highlighting from the checker and show black/white alternation with a small two-state arrow; no new sounding event occurs while score stopped. Under lower inset FLOOR HOLD / SCORE PLAY, ADD one clear pink brightened column to the otherwise fixed checker, while playhead remains advancing. This is the sounding step's response, not movement of the floor. BOTTOM-RIGHT: remove the stray isolated pink dot near the middle of the right floor miniature. Both floor miniatures should highlight ONLY the same leftmost column0. Retain labels 0%12=0 and 12%12=0 and the two different score events.",
+        "Edit ONLY the small comparison board in the BOTTOM-RIGHT panel. Preserve ALL other panels and captions exactly. On that board, remove the isolated pink dot inside the RIGHT floor grid; the only pink on either floor grid must be the leftmost column. On the RIGHT score row under 'Step 12 (in second track)', replace its five column labels with '0', '1', '2', '12', '15' and make ONLY the fourth circular score cell (labelled 12) bright pink; all other cells grey. Retain the LEFT score row with active step 0, the labels '0%12 = 0' and '12%12 = 0', and both floor column 0 captions. The lesson is two distinct sounding score events mapping to one floor column. Do not edit any checker comparisons in the upper panels or the clock panel."
+      ]
+    }
+  ]
+}

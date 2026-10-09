@@ -1,0 +1,35 @@
+{
+	"evidence": {
+		"candidate_count": 8,
+		"distance_threshold": 0.8,
+		"expected_final_indices": [
+			0,
+			2,
+			4,
+			5,
+			7
+		],
+		"initial_indices": [
+			0
+		],
+		"metric": "Euclidean distance to the last retained sample, not the previous candidate",
+		"presentation": "Source (x,y) samples embedded as (x,constant,z), with equal units. No live hand or museum trace is read.",
+		"source_functions": [
+			"drawTrace",
+			"next-sample click",
+			"join-next click"
+		]
+	},
+	"passed": true,
+	"state": {
+		"candidate": 0,
+		"joined": 0,
+		"last_distance": 0.0,
+		"last_from": 0,
+		"last_kept": true,
+		"manual": false,
+		"retained_indices": [
+			0
+		]
+	}
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-19",
+  "production_changes": [
+    "commons/maps/Color_Nails/map_data.json",
+    "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+    "commons/testing/probe_nail_salon.gd"
+  ],
+  "manuscripts_changed": [],
+  "runtime": {
+    "Context": {
+      "checks": 691,
+      "failures": [],
+      "source": "runtime/context/runtime-checks.json"
+    },
+    "Flashlight": {
+      "checks": 30,
+      "failures": [],
+      "source": "runtime/flashlight-after-checks.json"
+    },
+    "Nails": {
+      "checks": 36,
+      "failures": [],
+      "source": "runtime/probe_nail_salon.json"
+    }
+  },
+  "total_final_checks": 757,
+  "headset_tested": false,
+  "pairs": [
+    {
+      "hall": "Color_Flashlight",
+      "before": "runtime/flashlight-before-overview.png",
+      "after": "runtime/flashlight-after-overview-final.png",
+      "caption": "Same museum viewpoint. Add the matte receiving cube already requested by the manuscript; board and lamp comparison preserved."
+    },
+    {
+      "hall": "Color_Nails",
+      "before": "runtime/nails-corrected-before/nails-after-choice.png",
+      "after": "runtime/nails-after-choice.png",
+      "caption": "Same camera and chosen hand colors. RGB controls moved from behind the hand onto their existing labelled plinths. Illumination differs between live launches; this is a placement comparison, not a lighting change."
+    }
+  ],
+  "verification_note": "Supplied grabbers act on the live pickables. Runtime capsule sweeps and material values are checked, but VR comfort, tracked-hand receiver binding and learner understanding remain untested."
+}

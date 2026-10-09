@@ -1,0 +1,47 @@
+{
+  "pid": 47028,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--headless",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\motion\\before-headless-v2\\kinetic-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/motion/probes/probe_kinetic.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-forces-review/motion/before-headless-v2/"
+  ],
+  "returncode": 0,
+  "seconds": 19.416954040527344,
+  "source_sha256_before": {
+    "algorithms/vectors/10_vector_field_flow/field_receivers.gd": "b8d20286b06106c60afa0a64ce25f0c6e1accbc3e74ee35eae67e234f05455c5",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json": "00f5dbea1d4958d9d512db7cbfb1f3f3f3049f985486e5c178fa60e77af0274c",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/Change_Intro/map_data.json": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc",
+    "commons/artifacts/tangent_slope_workbench/rate_comparison.gd": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717",
+    "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f",
+    "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454",
+    "algorithms/change/ftc_bridge.gd": "b89c523cd2804ad94489e34141c2a64faa5879525ac9bf05908247a5cc4bfc58"
+  },
+  "source_sha256_after": {
+    "algorithms/vectors/10_vector_field_flow/field_receivers.gd": "b8d20286b06106c60afa0a64ce25f0c6e1accbc3e74ee35eae67e234f05455c5",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json": "00f5dbea1d4958d9d512db7cbfb1f3f3f3049f985486e5c178fa60e77af0274c",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/Change_Intro/map_data.json": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc",
+    "commons/artifacts/tangent_slope_workbench/rate_comparison.gd": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717",
+    "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f",
+    "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454",
+    "algorithms/change/ftc_bridge.gd": "b89c523cd2804ad94489e34141c2a64faa5879525ac9bf05908247a5cc4bfc58"
+  }
+}

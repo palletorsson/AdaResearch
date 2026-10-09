@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Fresh ghost student — Motion</title><style>body{margin:0;background:#eae7df;color:#202026;font:18px/1.65 Georgia,serif}main{max-width:1100px;margin:auto;padding:36px}h1{font-size:2.8rem;line-height:1.1}h2{line-height:1.3;margin-top:2em}a{color:#743b58}table{width:100%;border-collapse:collapse;font:15px/1.55 system-ui}td,th{padding:14px;text-align:left;border-bottom:1px solid #c9c4be;vertical-align:top}article{padding:26px;background:#fffdf8}img{width:100%;height:auto}pre{padding:18px;background:#252932;color:#f7f2e7;overflow:auto;font:13px/1.5 Consolas,monospace}details{padding:18px;background:#fffdf8;margin:18px 0}summary{cursor:pointer}.meta{font:14px/1.6 system-ui}@media(max-width:700px){main{padding:18px}td,th{padding:8px}}</style><main><h1>A fresh ghost student takes Motion</h1>
+<p>The revised lesson is reconstructable by a fresh AI reader. Its unchanged first submission passes <strong>64/64 native checks</strong>: 43 on code and behaviour, 21 in the actual museum. The reader copied the complete reference, made the requested mass edit, authored the two-clock comparison and chose a further 3 kg / 3 second experiment. Predictions were recorded before execution.</p>
+<p>This was a new agent with no conversation history. It received only the revised lesson, its reflective companion and the copied prerequisite readings/helpers. It did not receive the previous student's answer, production force code or teacher checks. The AI brought existing programming and algebra knowledge, which it names in its review. This is one reconstruction test, not a human comprehension or physical-headset test.</p>
+<h2>What it could do</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Prediction</th>
+<th>Executed result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reconstruct the three points</td>
+<td>1 / 0.5 / 0.25 m/s after the pulse</td>
+<td>Matches on Jolt; complete printed code reproduced.</td>
+</tr>
+<tr>
+<td>Change the third mass to 8 kg</td>
+<td>0.125 m/s</td>
+<td>0.125000 m/s.</td>
+</tr>
+<tr>
+<td>Give 1 kg a one-second push and 2 kg a two-second push</td>
+<td>Both finish at 1 m/s, with distances near 1.5 / 1 m</td>
+<td>Both reach 1 m/s; retained display reads 1.508 / 1.008 m at the 60 Hz boundary.</td>
+</tr>
+<tr>
+<td>Choose another mass and duration</td>
+<td>3 kg, 1 N, 3 seconds gives 1 m/s</td>
+<td>1.000002 m/s.</td>
+</tr>
+<tr>
+<td>Press again halfway through the original pulse</td>
+<td>Force lasts 1.5 seconds in total; velocity is retained</td>
+<td>1.499999 m/s for the 1 kg point.</td>
+</tr>
+<tr>
+<td>Turn the study / hold the point</td>
+<td>Force follows the study frame; held time is lost</td>
+<td>Both verified; pickup uses real XRTools with supplied input.</td>
+</tr>
+</tbody>
+</table>
+<p>The held-point check supplies zero release velocity explicitly. It does not establish the result of an arbitrary hand throw. Distances above are the retained end readings; the independently observed positions and later screenshot occur after further coasting.</p>
+<h2>What the reader still had to supply</h2>
+<p><strong>One measurement detail:</strong> the mass-edit exercise predicts 0.125 m/s, but the printed two-decimal caption cannot show that value exactly. A useful small edit would be: “In this variation, use <code>%.3f</code> in the speed caption so you can read 0.125 m/s.”</p>
+<p><strong>One origin decision:</strong> “Keep each starting position before the run” could mean at scene creation or before every press. The reader chose scene creation and correctly retained the existing journey on another press. A useful clarification would be: “Store starting positions once in <code>_ready()</code>. Another press adds motion; restarting the study gives a fresh comparison.”</p>
+<p><strong>One reasoning step:</strong> combining two clock conditions with a once-only snapshot required a small event guard. Earlier lessons contain booleans and conditions, but the reader used prior programming knowledge to combine them. The independent exercise is demanding enough to require that transfer; a short hint or a human trial would tell us whether the step is well placed.</p>
+<p>These are findings, not edits installed in the chapter. The canonical tutorial, reflection and authored lesson data are unchanged in this fresh test.</p>
+<h2>Reading both texts</h2>
+<p>The student could explain why the force ends while velocity continues, then connect that result to the reflection's account of present state and incomplete history. It also identified the limit: its small code has no trail, so it cannot demonstrate the museum's trail truncation. That distinction keeps the tutorial's construction and the reflection's wider encounter from making unsupported claims for one another.</p>
+<h2>A correction to the checker</h2>
+<p>The first run passed 42 of 43 checks. The failing check required the entire caption to remain unchanged during coasting. The student's valid solution shows live distance and speed alongside a retained end-distance pair. The checker was corrected to inspect the retained line. No student code changed. The first checker, log and result remain archived; the final run passes 43 of 43. The separate museum run passes 21 of 21.</p>
+<h2>Read the evidence</h2>
+<ul>
+<li><a href="attempt/predictions.md">Student's predictions, written before execution</a></li>
+<li><a href="attempt/review.md">Student's first-person reading and construction account</a></li>
+<li><a href="attempt/after-run.md">Student's interpretation after receiving measurements</a></li>
+<li><a href="packet/README.md">Reading packet</a></li>
+<li><a href="attempt/comparison.gd">Independent comparison code</a> and <a href="attempt/transfer.gd">new mass/duration code</a></li>
+<li><a href="native-checks.json">Native code checks</a> and <a href="museum/report.json">actual museum checks</a></li>
+<li><a href="first-checker-native-checks.json">First checker result</a></li>
+<li><a href="verification.json">Source and submission record</a></li>
+<li><a href="../2026-10-08-motion-build-and-investigate/parallel.html">Current tutorial and reflection</a></li>
+</ul><h2>The submitted comparison in Endless Museum</h2><img src="museum/student.png" alt="Fresh student comparison in the Motion hall, with two moving spheres, live readings and saved end distances"><p class="meta">Native Godot render. Temporary student construction in the declared working bay. The spheres keep coasting while the end-distance readings remain available.</p><details><summary>Student account before execution</summary><h1>Fresh student's construction account — before running</h1>
+<p>I read only the supplied packet. I have not run Godot or inspected production code, prior student attempts, teacher probes, or solutions. This is an AI reconstruction, so it does not establish what a human beginner would find easy.</p>
+<h2>Construction</h2>
+<p>I reconstructed 03_mass.gd and all three helpers directly from the printed blocks, preserving their code. For 03_mass_eight.gd I changed only the mass expression and heading requested under <strong>Change one thing</strong>. The exact reconstruction did not require a hidden scene recipe: shared-code.md supplies the three filenames, PointStudy setup and museum dependencies.</p>
+<p>For comparison.gd I made two arrays of durations and remaining times, paired their indices with two point bodies, and copied the force application pattern inside that indexed loop. The instruction “Update each clock separately, keeping its index paired with the same point” was concrete enough to guide this. I kept starting-position values in _ready(), as Trace kept a first position. I added a pulse_started flag so the initial zero clocks do not create an end snapshot before the first press. The snapshot_taken flag preserves the distance readings after both clocks reach zero, and push() clears it for another pulse. I display current speeds, current distances, remaining times and the stored distance pair. The additional pulse_started guard is my own programming choice.</p>
+<p>I made transfer.gd with one 3 kg point and a 3 s pulse from the same supplied button helper. I did not add a room, camera, player, RESET or trail. Those are assigned to the hall by <strong>The hall adds</strong>, not to this small reconstruction. Each script is intended to replace the script on the same stationary, unit-scale PointStudy; the saved originals remain available.</p>
+<h2>Inherited and newly learned</h2>
+<p>From Lines I inherited a repeatable pickable point and displacement length; from Coordinates, local versus world positions; from Trace, arrays, retained values, indices, loops and if; from Point Zero, the label and callback pattern. Launch supplies both a running boolean and the constant-acceleration position formula. Transformation had already distinguished changing a property over time from constructing it once.</p>
+<p>The new conceptual step is asking the engine to change a body's velocity by applying force during _physics_process. <strong>Read the change</strong> explicitly gives acceleration = force/mass and velocity change = force * duration/mass, then explains that the script never sets velocity back to zero. <strong>Model notes</strong> explains global_basis and interval/delta well enough to reuse them, though it does not teach the basis calculation itself.</p>
+<p>My existing programming knowledge helped with typed float arrays, boolean conditions, composing a caption and guarding a once-only measurement. The readings show pieces of this syntax, but do not explicitly teach a two-condition event latch. I used prior algebra to rearrange the velocity-change rule for duration and to join an accelerating interval to a coasting interval. I do not claim to have discovered that mathematics merely by copying the example.</p>
+<h2>Prediction and unresolved points</h2>
+<p>The exercise clearly specifies unequal pulse durations, both 1 s and 2 s observations, distance from the starting position and a persistent end snapshot. I could derive the predicted equal final speeds and unequal distances using Launch's formula. My numerical predictions are in predictions.md and were recorded before any execution.</p>
+<p>I do not know the precise ordering of force integration and caption sampling from this text. I take the distance snapshot in the callback where the two clocks first reach zero, literally following the exercise, and accept its stated small physics-step boundary difference. The packet does not tell me the sign or exact size of that difference.</p>
+<p>“Keep each starting position before the run” could mean a new origin on every press. I chose the scene's initial positions, consistent with restarting the study for a fresh comparison and with repeated presses continuing the existing journey. The next press refreshes the end snapshot, but does not reset the origins or motion. My caption describes distance from those original positions.</p>
+<p>I cannot calculate an arbitrary held-point final speed without knowing how the hand moves and releases it. The text supports the missed-force interval and continuing clock, while free_point.gd only names physical release. I have left release-state effects as an explicit uncertainty instead of inventing a stationary release rule.</p>
+<p>The supplied original caption rounds to two decimals, so the requested 0.125 m/s edit is not exactly visible there. I preserved it as printed and used three decimals in my exercises. I also read “distance” as displacement magnitude for these straight paths, because the exercise explicitly limits that measurement; after a detour it would not be total path length.</p>
+<h2>Interpretation</h2>
+<p>Before execution, I can say what a successful run would support: a matched force and duration give different speed changes for different masses; changing duration can equalize final speeds while leaving different distances; and velocity persists when the force ends under the arranged conditions. I cannot yet report any of those as observed results.</p>
+<p>The reflection's passages “The latest instruction does not contain the whole movement” and “A contribution to the present velocity can outlast the mark of where it began” add an account of present state and incomplete records. The repeated-press and catch experiments could make the first concrete. The second depends on the hall's recent trail; my small exercise does not construct that trail and cannot demonstrate its truncation. The reflection's observation that equal treatment yields different movements is tied here to mass, not evidence for a general social conclusion. RESET and remembered experience similarly belong to the larger apparatus and the reader's interpretation, rather than to a result measured by my caption.</p></details><details><summary>Student account after measurements</summary><h1>After-run account</h1>
+<p>I did not execute the engine or inspect the checks. I am interpreting the teacher's reported Godot 4.6/Jolt measurements: 43/43 assertions and 21/21 museum-placement checks passed without changes to my submitted files.</p>
+<p>The original speeds near 1, 0.5 and 0.25 m/s, the edited third speed of 0.12499996 m/s, and my 3 kg / 3 s transfer speed of 1.0000019 m/s agree with my prior predictions. The mid-pulse restart at 0.5 s produced 1.5 m/s, supporting my reading that another press replaces the remaining time while retaining the body's motion.</p>
+<p>The comparison finished with both speeds near 1 m/s. Its saved distances were 1.508 and 1.008 m at 60 Hz, versus my ideal 1.5 and 1 m. The approximately 0.008 m offsets fit the lesson's allowance for a physics-step boundary difference; the 0.5 m distance difference remains. The reported later changes in live distances, while the saved line remains fixed, show why the exercise asks for a snapshot. These reports support equal final speed with unequal distance. They do not give a separate numerical reading at 1 s or a later measured coasting speed, so I cannot independently compare those particular predictions from this summary alone.</p>
+<p>The initial 42/43 result was a checker expectation that the entire caption stop changing. My code intentionally retains live measurements alongside one saved pair, as the exercise requests. Correcting the checker to inspect the saved line required no student repair. I would not count that first result as a construction failure.</p>
+<p>Holding a point throughout its pulse, then explicitly releasing it with zero velocity after expiry, left it still. That agrees with my conditional prediction: held time is not saved for a later push. It does not resolve arbitrary hand-release behavior. I still need the release state to predict the final motion after catching or throwing a moving point.</p>
+<p>The tutorial and reflection do distinct useful work. The tutorial supplies the complete construction, force/mass/duration rule, independent-clock exercise and measurable comparison. The reflection directs attention to what remains after an instruction ends, how a new action meets an existing state, and what a recent trace omits. The repeated-press result supports that first interpretation. These submitted scripts do not test the hall's shortened trace or what a later observer could reconstruct from it; those remain reflective questions rather than measurements established here.</p>
+<p>My successful construction is evidence that this packet supported this AI attempt. It is not evidence that a beginner would invent the boolean snapshot guard or calculate piecewise distances unaided. I brought programming fluency and algebra; the packet supplied examples of arrays, displacement, a running boolean and constant-acceleration position, then introduced continuing force and its timed application. I still find the exact integration/readout order unexplained, and “starting position” on repeated presses leaves a small choice: I retained the scene's original positions. Neither ambiguity prevented this fresh-trial comparison, but both matter when extending it.</p></details><details><summary>comparison.gd</summary><pre><code>extends &quot;study.gd&quot;
+
+var points: Array[RigidBody3D] = []
+var masses: Array[float] = [1.0, 2.0]
+var durations: Array[float] = [1.0, 2.0]
+var remaining: Array[float] = [0.0, 0.0]
+var start_positions: Array[Vector3] = []
+var force := Vector3(0, 0, 1)
+var reading: Label3D
+var pulse_started := false
+var snapshot_taken := false
+var finish_distances: Array[float] = [0.0, 0.0]
+
+func _ready() -&gt; void:
+    for i in range(2):
+        var point = Point.new()
+        add_child(point)
+        point.position = Vector3(i * 1.2 - 0.6, 1.2, 0)
+        point.mass = masses[i]
+        points.append(point)
+        start_positions.append(point.position)
+    reading = caption(&quot;&quot;)
+    button(&quot;START BOTH&quot;, Vector3(0, 1, -0.8), push)
+
+func push() -&gt; void:
+    for i in range(2):
+        remaining[i] = durations[i]
+    pulse_started = true
+    snapshot_taken = false
+
+func _physics_process(delta: float) -&gt; void:
+    for i in range(2):
+        var interval := minf(remaining[i], delta)
+        var point = points[i]
+        if interval &gt; 0 and not point.is_picked_up():
+            point.apply_central_force(global_basis * force * interval / delta)
+        remaining[i] = maxf(0, remaining[i] - delta)
+
+    var first_distance := (points[0].position - start_positions[0]).length()
+    var second_distance := (points[1].position - start_positions[1]).length()
+    if pulse_started and not snapshot_taken and remaining[0] == 0.0 and remaining[1] == 0.0:
+        finish_distances[0] = first_distance
+        finish_distances[1] = second_distance
+        snapshot_taken = true
+
+    reading.text = &quot;1 kg / 2 kg; pushes 1 s / 2 s\nSPEED %.3f / %.3f m/s\nDISTANCE %.3f / %.3f m\nPUSH LEFT %.2f / %.2f s&quot; % [
+        points[0].linear_velocity.length(), points[1].linear_velocity.length(),
+        first_distance, second_distance, remaining[0], remaining[1]]
+    if snapshot_taken:
+        reading.text += &quot;\nAT BOTH PUSHES END %.3f / %.3f m&quot; % [
+            finish_distances[0], finish_distances[1]]
+    else:
+        reading.text += &quot;\nEND DISTANCES waiting for both pushes&quot;
+</code></pre></details><details><summary>transfer.gd</summary><pre><code>extends &quot;study.gd&quot;
+
+var point = Point.new()
+var force := Vector3(0, 0, 1)
+var duration := 3.0
+var remaining := 0.0
+var start_position := Vector3(0, 1.2, 0)
+var reading: Label3D
+
+func _ready() -&gt; void:
+    add_child(point)
+    point.position = start_position
+    point.mass = 3.0
+    reading = caption(&quot;&quot;)
+    button(&quot;PUSH 3 s&quot;, Vector3(0, 1, -0.8), push)
+
+func push() -&gt; void:
+    remaining = duration
+
+func _physics_process(delta: float) -&gt; void:
+    var interval := minf(remaining, delta)
+    if interval &gt; 0 and not point.is_picked_up():
+        point.apply_central_force(global_basis * force * interval / delta)
+    remaining = maxf(0, remaining - delta)
+    reading.text = &quot;3 kg; 1 N for 3 s\nSPEED %.3f m/s\nDISTANCE %.3f m\nPUSH LEFT %.2f s&quot; % [
+        point.linear_velocity.length(), (point.position - start_position).length(), remaining]
+</code></pre></details></main></html>

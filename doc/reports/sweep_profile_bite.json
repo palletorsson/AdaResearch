@@ -1,0 +1,158 @@
+{
+ "sweep": "profile",
+ "peak_changed_pct": 4.858,
+ "subject_pct": 81.13,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "algorithm": "SINE_WAVE"
+   },
+   "b": {
+    "algorithm": "SQUARE_WAVE"
+   },
+   "changed_px": 13704,
+   "changed_pct": 2.373
+  },
+  {
+   "a": {
+    "algorithm": "SINE_WAVE"
+   },
+   "b": {
+    "algorithm": "SAW_WAVE"
+   },
+   "changed_px": 11625,
+   "changed_pct": 2.013
+  },
+  {
+   "a": {
+    "algorithm": "SINE_WAVE"
+   },
+   "b": {
+    "algorithm": "TRIANGLE_WAVE"
+   },
+   "changed_px": 13106,
+   "changed_pct": 2.269
+  },
+  {
+   "a": {
+    "algorithm": "SINE_WAVE"
+   },
+   "b": {
+    "algorithm": "FOURIER_SERIES"
+   },
+   "changed_px": 17723,
+   "changed_pct": 3.068
+  },
+  {
+   "a": {
+    "algorithm": "SINE_WAVE"
+   },
+   "b": {
+    "algorithm": "BEAT_FREQUENCIES"
+   },
+   "changed_px": 24204,
+   "changed_pct": 4.19
+  },
+  {
+   "a": {
+    "algorithm": "SQUARE_WAVE"
+   },
+   "b": {
+    "algorithm": "SAW_WAVE"
+   },
+   "changed_px": 11147,
+   "changed_pct": 1.93
+  },
+  {
+   "a": {
+    "algorithm": "SQUARE_WAVE"
+   },
+   "b": {
+    "algorithm": "TRIANGLE_WAVE"
+   },
+   "changed_px": 14493,
+   "changed_pct": 2.509
+  },
+  {
+   "a": {
+    "algorithm": "SQUARE_WAVE"
+   },
+   "b": {
+    "algorithm": "FOURIER_SERIES"
+   },
+   "changed_px": 16724,
+   "changed_pct": 2.895
+  },
+  {
+   "a": {
+    "algorithm": "SQUARE_WAVE"
+   },
+   "b": {
+    "algorithm": "BEAT_FREQUENCIES"
+   },
+   "changed_px": 25258,
+   "changed_pct": 4.373
+  },
+  {
+   "a": {
+    "algorithm": "SAW_WAVE"
+   },
+   "b": {
+    "algorithm": "TRIANGLE_WAVE"
+   },
+   "changed_px": 12115,
+   "changed_pct": 2.097
+  },
+  {
+   "a": {
+    "algorithm": "SAW_WAVE"
+   },
+   "b": {
+    "algorithm": "FOURIER_SERIES"
+   },
+   "changed_px": 17825,
+   "changed_pct": 3.086
+  },
+  {
+   "a": {
+    "algorithm": "SAW_WAVE"
+   },
+   "b": {
+    "algorithm": "BEAT_FREQUENCIES"
+   },
+   "changed_px": 22627,
+   "changed_pct": 3.917
+  },
+  {
+   "a": {
+    "algorithm": "TRIANGLE_WAVE"
+   },
+   "b": {
+    "algorithm": "FOURIER_SERIES"
+   },
+   "changed_px": 20625,
+   "changed_pct": 3.571
+  },
+  {
+   "a": {
+    "algorithm": "TRIANGLE_WAVE"
+   },
+   "b": {
+    "algorithm": "BEAT_FREQUENCIES"
+   },
+   "changed_px": 23019,
+   "changed_pct": 3.985
+  },
+  {
+   "a": {
+    "algorithm": "FOURIER_SERIES"
+   },
+   "b": {
+    "algorithm": "BEAT_FREQUENCIES"
+   },
+   "changed_px": 28061,
+   "changed_pct": 4.858
+  }
+ ]
+}

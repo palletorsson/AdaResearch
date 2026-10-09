@@ -1,0 +1,232 @@
+[
+  {
+    "map": "Vectors_Act1_WhatAVectorIs",
+    "file": "01_vectors.gd",
+    "title": "The relation between two points",
+    "subjects": [
+      "Displacement",
+      "Length and direction",
+      "Zero length",
+      "Addition and projection"
+    ],
+    "encounter": "Take the two familiar points. Move one and watch the cylinder between them. Then move both by the same amount. Their addresses change; the gap between them stays the same.",
+    "learn": "Continue the point class from Lines. Make two points report their separation as a vector, a length and a direction. Begin with those three readings; return to the projection after they make sense.",
+    "explain": "`b.position - a.position` gives the movement from a to b in the study’s local coordinates. Its three components tell us how far to move along each axis. `length()` measures the whole gap.\n\nDivide that displacement by its length to keep only direction. The result has length one. When the points meet, the `if` leaves direction at zero: there is no direction to recover from a zero-length gap.\n\nRead the projection last. `dot(Vector3.RIGHT)` takes the signed X component. Multiplying it by `Vector3.RIGHT` makes a vector along X; subtracting it from the full displacement leaves the remainder. Add the two parts and you get the original displacement back. This is another use of vector addition.",
+    "tryit": "Place the endpoints three metres apart along X and four along Y. Predict a five-metre gap, then check it. Move both together and check again. Finally bring them together: the cylinder disappears and the direction reads zero.\n\nTo inspect the projection, temporarily display `r.along_x` and `r.remainder` in the caption. The complete example already calculates both; its first readout shows only gap, length and direction.",
+    "onward": "Keep the distinction between a position and a displacement. In Launch, a vector describes how much position changes each second.",
+    "keep": "Keep the earlier distinction between an address and a difference, and between display scale and measured length. Replace descriptions of removed wall consoles with the current hand-held points.",
+    "retained": "This is a description of displacement, not a force controller.",
+    "scope": "The hall adds two stations: joining movements by addition, and keeping the part of a movement along a rail.",
+    "note": "The cylinder draws a relation. It applies no force. These positions share the PointStudy frame, so subtracting them is meaningful."
+  },
+  {
+    "map": "VFM_05_Launch",
+    "file": "02_launch.gd",
+    "title": "Give the point a beginning",
+    "subjects": [
+      "Initial velocity",
+      "Constant acceleration",
+      "Position over time",
+      "A flight model"
+    ],
+    "encounter": "Press FIRE and watch the point rise and return. Before revealing PATH, trace the curve you expect with your hand. Then compare your prediction with the displayed path.",
+    "learn": "Continue the sphere as a marker. Give it an initial velocity and calculate its position as time passes. Freeze its rigid body and turn collision off so this first flight follows the calculation alone.",
+    "explain": "Read `at(t)` from left to right. `START` is the departure position. `initial_velocity * t` is the displacement that the initial velocity would produce on its own. With `(3, 4, 0)`, the point begins by moving right at 3 m/s and up at 4 m/s.\n\nThe last term, `0.5 * acceleration * t * t`, adds the effect of constant downward acceleration. As time grows, this term bends the flight downward. Its units are metres, so all three terms can be added.\n\nFIRE sets time to zero and starts the updates. Each frame adds `delta` to time and asks `at(time)` for a position. `duration()` finds when this particular flight returns to its starting height; `minf` stops the clock at that instant.",
+    "tryit": "Keep the upward component at 4 m/s. Double the horizontal component from 3 to 6 m/s. Predict what changes before running: the return still takes 0.8 seconds, while horizontal range grows from 2.4 to 4.8 metres.\n\nBack in the hall, try PAIR. Two complementary launch angles at the same speed can reach the same distance in different times.",
+    "onward": "You have calculated where the point should be. Next, let the physics engine keep its velocity while you supply a push.",
+    "keep": "Keep the analytical flight, complementary-angle comparison and explicit landing boundary. Remove placement bookkeeping from the student’s opening.",
+    "retained": "Landing freezes the pre-impact state, without collision resolution.",
+    "scope": "The hall adds angle and speed controls, a path display and a second flight for comparison.",
+    "note": "The return-time formula assumes upward initial velocity, constant downward acceleration and equal departure and arrival heights. Drag is absent. The point stops at the calculated time; it does not collide with a landing surface."
+  },
+  {
+    "map": "VFM_03_Motion",
+    "file": "03_mass.gd",
+    "title": "When the push ends",
+    "subjects": [
+      "Force",
+      "Mass",
+      "Physics updates",
+      "Continued velocity"
+    ],
+    "encounter": "Press PUSH 1 s. Three equally sized black points start moving. Their masses are 1, 2 and 4 kilograms. Watch after the second has passed: the push ends, but the points keep going.",
+    "learn": "Use three instances of the familiar point. Give each the same force for the same time and vary only mass. The supplied `free_point.gd` lets them move freely, with gravity and damping set to zero.",
+    "explain": "`apply_central_force` supplies a push to the rigid body. Godot updates its velocity and position. A greater mass receives a smaller acceleration from the same force.\n\nThe loop visits all three points during each physics update. While `remaining` is positive, it applies the force. Once the time runs out, it stops applying it. Nothing sets velocity back to zero.\n\nOne newton acting for one second changes these bodies’ speeds by 1, 0.5 and 0.25 m/s, starting from rest and before contact. Pressing again acts on the motion they already have.",
+    "tryit": "Change the third mass to 8 kg. Predict a speed change of 0.125 m/s from the same pulse. Restart to compare from rest, and keep your hands off while measuring.",
+    "onward": "A push can end while its consequence continues. Next, choose the push from where the point is now.",
+    "keep": "Retain the title and the core distinction between ending a command and erasing velocity. Replace the old cube chamber, brake controls and obsolete pulse strength.",
+    "retained": "The command lasts one second. The cube keeps going.",
+    "scope": "The hall supplies lanes, reset controls and measured speeds beside the expected change. Your study shows the three speeds in one caption.",
+    "explore": "After one pulse has ended, press again before the points hit anything. Predict another equal change in velocity. Then interrupt a trial by catching a point. The button command stayed the same; your intervention changed the starting state for what followed.",
+    "note": "`global_basis` turns the study’s force direction into world axes. Godot already accounts for the physics time step when applying force. `interval / delta` only shortens the last step if less than a full step remains in the one-second pulse."
+  },
+  {
+    "map": "Vectors_Act3_FieldsAndMotion",
+    "file": "04_field.gd",
+    "title": "Ask the field where you are",
+    "subjects": [
+      "A field of vectors",
+      "Sampling by position",
+      "Acceleration and force",
+      "Local and world directions"
+    ],
+    "encounter": "Follow one point through the vortex arrows. At each place it meets a different direction. Watch it turn before switching ONE / MANY to bring back the circulating cargo.",
+    "learn": "Keep the moving point. Replace the fixed push with `sample()`, a function that reads its position and returns an acceleration. Combine an inward pull with a sideways turn.",
+    "explain": "`flat` is the point’s position in the study’s horizontal X–Z plane. Multiplying it by a negative number gives an inward vector toward the centre.\n\n`Vector3(-flat.z, 0, flat.x)` turns that vector sideways by a quarter-turn. Normalizing gives it unit length; multiplying by 2.8 sets the sideways acceleration. Add this to the inward part to make the swirl.\n\nEach physics update samples again at the point’s new position. `global_basis` turns the local result into world axes. Then `point.mass * acceleration` supplies the force needed for that acceleration. The point keeps its existing velocity as this new contribution acts.",
+    "tryit": "Change the point’s mass to 4 kg. With the same start and no contact, predict the same path: the requested force grows with mass. Restart, then set the sideways coefficient from 2.8 to zero. Watch what remains of the motion.",
+    "onward": "This force reads position. The next one reads how fast, and in which direction, the point is moving.",
+    "keep": "Keep the strong assignment-versus-accumulation comparison as a secondary reading. It explains why an arrow alone does not name a force.",
+    "retained": "The field extends across the room, but it has not settled how either body will receive it.",
+    "scope": "The hall adds visible arrows, damping and several bodies that can collide. Your study isolates the acceleration rule, with a caption showing position and acceleration.",
+    "explore": "Return to the hall and choose MANY. Follow one body until it meets another. The field still samples position; contact has now changed the velocity with which the body reaches its next position.",
+    "note": "The rule returns zero within 0.05 m of the centre, where this sideways direction is undefined. The caption’s position is local and its acceleration is in world axes. This study omits the museum vortex’s damping. The nearby flow display makes a separate choice: using a vector as velocity directly gives different motion from using it as acceleration."
+  },
+  {
+    "map": "Vectors_Act4a_KineticForces",
+    "file": "05_drag.gd",
+    "title": "Let motion meet resistance",
+    "subjects": [
+      "Drag",
+      "Speed-dependent resistance",
+      "Entering a region",
+      "Opposing velocity"
+    ],
+    "encounter": "Drop a point into a coloured region. Watch it slow as it falls. Begin with DRAG ONLY; leave BUOYANCY for a later comparison. Use RESET before the next drop.",
+    "learn": "Keep the sphere and enable gravity. Add resistance while its centre lies between heights zero and two metres. The small study uses a height test; it does not build a liquid surface.",
+    "explain": "The `if` asks whether the point is inside the height range. Outside it, this script adds no resistance. Inside it, the force opposes `linear_velocity`.\n\nStart with the minus sign in `resistance()`: it reverses the velocity’s direction. Multiplying by `velocity.length()` makes faster motion meet stronger resistance. Double the speed and the force becomes four times as large, before the limit is reached.\n\n`coefficient` controls the strength of that resistance. Gravity continues to pull down while drag opposes the fall. DROP unfreezes the point so the engine can begin this exchange.",
+    "tryit": "Increase `coefficient` from 0.6 to 3.0 and restart. At the same speed the drag is five times stronger, until capped. Compare the falling speeds over the available drop; the short fall may end before either reaches a steady speed.",
+    "onward": "Drag resists motion. A spring adds a reason to move back toward an attachment.",
+    "keep": "Keep the distinction between an object’s force and a visitor’s controller mapping. Replace the earlier linear-drag coefficients and FIRE interface with the current quadratic region model.",
+    "retained": "One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.",
+    "scope": "The hall makes three regions visible and lets you add buoyancy. The nearby ramps explore contact friction and rolling.",
+    "note": "The coefficient has units kg/m in this quadratic model. `limit_length` caps drag so that this contribution alone cannot reverse velocity in one physics step. This is a force model, not a fluid simulation. Set the starting position before `add_child`, as shown: moving a frozen kinematic body afterward can introduce unintended velocity. The museum uses a separate movement rule for the player walking through a region."
+  },
+  {
+    "map": "Vectors_Act4b_Oscillation",
+    "file": "06_spring.gd",
+    "title": "Release the point; keep the attachment",
+    "subjects": [
+      "Rest length",
+      "Spring force",
+      "Damping",
+      "Equilibrium",
+      "Spring and hinge"
+    ],
+    "encounter": "Pull the rose grip beside the hanging point and release. The point returns, passes its resting place and turns again. The grip lets you pull while the spring keeps acting.",
+    "learn": "Make one spring from the familiar point and a fixed anchor. In your small study, grab the point itself to set its position, then release it to see the spring act. The thin cylinder shows the attachment.",
+    "explain": "`offset` points from the body to the anchor. Its length tells us their current separation. Subtract `rest_length` to find how far the spring is stretched or compressed.\n\nMultiplying that difference by `stiffness` gives the force magnitude. The normalized offset gives its direction. A stretched spring pulls toward the anchor; compression reverses the sign.\n\nThe last term subtracts `damping * velocity`. It opposes movement, so the returns gradually settle. Gravity still acts: the hanging point rests with the spring stretched enough to support its weight.",
+    "tryit": "Release from the same position with damping at 0.5, then at 3.0. Predict which will keep moving longer. Restore damping and double stiffness. Compare the stronger return without changing rest length.",
+    "onward": "Here a repeating movement comes from forces changing velocity. Next, make a similar repetition by assigning positions.",
+    "keep": "Keep the restoring-force/damping distinction. Begin with one visible point; defer the coupled row and separate hinge construction until the mechanism is legible.",
+    "retained": "The later Wavefunctions chapter develops rhythm, records, phase and sound.",
+    "scope": "The hall’s separate rose grip pulls through force while you hold it. ONE / MANY adds six more points and connecting springs. Nearby hinges offer a different kind of attachment.",
+    "explore": "Return to the full row with ONE / MANY. Pull one grip and follow the movement into its neighbours. Try releasing a second point while the first is still moving. Each spring follows its rule, but the next movement now depends on several bodies.",
+    "note": "The zero-length check avoids dividing by zero; the force is capped at 150 N. The student point is placed by the hand while held, and resumes spring motion on release. A hinge keeps a pivot attached; this spring permits its length to change."
+  },
+  {
+    "map": "Change_Choreography",
+    "file": "07_phase.gd",
+    "title": "The same return, a different cause",
+    "subjects": [
+      "Period",
+      "Phase",
+      "Relative rate",
+      "Accumulated angle",
+      "Prescribed motion"
+    ],
+    "encounter": "Watch the rods turn together, then notice one that is out of step. Look back toward the spring. Both repeat. What keeps each one moving?",
+    "learn": "Use two sphere points as the tips of two arms. Give each an angle and a turning rate. OFFSET changes one angle once; DRIFT changes how quickly that angle advances.",
+    "explain": "`angles` stores where each arm is in its turn. `rates` stores how much angle it gains per second. `TAU` is one full turn, so `TAU / 6` completes it in six seconds.\n\nEach frame adds rate times `delta`. The `sin` and `cos` you met in periodic motion turn the angle into a position on a circle. The point is frozen and has no collision; the script places it.\n\nOFFSET adds 45° to one angle. With equal rates, the gap stays fixed. DRIFT raises one rate by 4%, so the gap keeps growing. `fposmod` wraps angles after each complete turn.",
+    "tryit": "Press OFFSET with equal rates and watch the 45° gap persist. Restart, press DRIFT and wait thirty seconds: predict an added gap of 72°. Change the rate difference to 2% and predict 36°.",
+    "onward": "A circular path can be prescribed. Next, let two points attract each other and see what path results.",
+    "keep": "Keep the phase rods as primary because the existing writing makes a necessary distinction between similar movements with different causes. Keep the conveyor’s “Everything worked, and this happened” passage as reflection; no new rate/queue tutorial is forced into this hall.",
+    "retained": "These rods are driven by an angle formula. They do not keep time because a restoring force pulls them back.",
+    "scope": "The hall adds a whole rod array and eyes that follow you. The conveyor nearby shows what repeated arrivals can do to a physical queue.",
+    "note": "The study accumulates angle so a rate change preserves the current position. The museum’s full rod array calculates angle from elapsed time, frequency and phase; changing frequency there can cause a jump. Neither calculation applies a spring force or torque."
+  },
+  {
+    "map": "VFM_07_Gravity",
+    "file": "08_attraction.gd",
+    "title": "Let both points answer",
+    "subjects": [
+      "Mutual attraction",
+      "Equal and opposite forces",
+      "Adding pair forces",
+      "Initial conditions",
+      "Softening at close range"
+    ],
+    "encounter": "Begin with PAIR. Follow both spheres: each turns toward a source that is itself moving. Neither one is fixed. Save PAIR / FIVE until you have watched the pair.",
+    "learn": "Return to two physical points. Give them opposite starting velocities. Calculate the attraction between them once, apply it to one body, and apply its negative to the other.",
+    "explain": "Subtract the two world positions to get a displacement from a to b. The force follows that displacement. Both masses multiply its strength.\n\nThe denominator makes attraction weaker with separation. Read `softening` as a chosen length that changes the calculation when the points get close. It keeps the force finite even when their positions coincide.\n\nThe two calls apply `force` and `-force`. The engine then uses each body’s mass to find its acceleration. Both velocities change, so the next update begins with two new source positions.",
+    "tryit": "Double only `a.mass` and keep the starting velocities. Predict both responses: the shared force doubles; a’s acceleration stays the same because its mass also doubled; b’s acceleration doubles. Restart to compare.",
+    "onward": "These points attract while passing through each other. Bring back collision to ask what lets one body support another.",
+    "keep": "Keep the question “Who gets to stay still?” and the distinction between fixed and mutual sources. Replace the old Verlet interface instructions with the actual rigid-body pair.",
+    "retained": "No new instruction says “be complicated.” Each pair contributes the same softened attraction, with an equal and opposite force on its partner.",
+    "scope": "The hall can add three more spheres and make the visitor another source. Your first reconstruction keeps the pair isolated, with collisions and ordinary downward gravity off.",
+    "explore": "Choose PAIR / FIVE in the hall, then enter the field. Your presence adds another attraction. Track one sphere and notice when a new encounter makes its earlier path a poor guide to what happens next.",
+    "note": "This softened attraction is an authored model. Far from the softening length it approaches an inverse-square force. It does not guarantee a circular orbit. Equal and opposite forces preserve the isolated pair’s total momentum within numerical tolerance; the simulation does not conserve energy exactly. Once the visitor joins, the spheres alone are no longer an isolated system."
+  },
+  {
+    "map": "VFM_09_Legs",
+    "file": "09_support.gd",
+    "title": "What lets the cube stay up?",
+    "subjects": [
+      "Visible shape and collision shape",
+      "Contact support",
+      "Gravity",
+      "Waking a body"
+    ],
+    "encounter": "Pull the rose leg from under the loaded table. Watch what loses support first, then what it meets on the way down. The fall follows the changed arrangement.",
+    "learn": "Bring back the cube from Primitives. Start with one box resting on one support. Move the support sideways and let the physics engine determine what happens to the load.",
+    "explain": "`box_on()` gives each body a visible `BoxMesh` and a matching `BoxShape3D`. The engine uses the collision shape to detect contact.\n\nThe leg is a `StaticBody3D`. The load is a `RigidBody3D` with gravity. It begins one centimetre above the support, falls onto it and settles.\n\nREMOVE SUPPORT changes the leg’s position. It gives no downward instruction to the cube: gravity was already acting. `sleeping = false` wakes the load if the engine had paused its settled simulation.",
+    "tryit": "Change the support’s movement from 1.5 m to 0.1 m and restart. Predict that enough overlap will remain to support the centred cube. Then restore the larger movement. Keep the dimensions and gravity the same.",
+    "onward": "Contact can hold a body still. Next, let contact pass motion from one body to another.",
+    "keep": "Keep “Staying still is now an outcome of contact” and the distinction between foot placement and support. Defer the support-polygon algorithm until the student needs a prediction for multiple contacts.",
+    "retained": "Staying still is now an outcome of contact.",
+    "scope": "The hall adds a tabletop, several supports and a load you can rearrange. Your study begins with one contact so its role is easy to see.",
+    "explore": "At the full table, move the load toward one side before removing a leg. Predict which contacts matter now. Compare the collapse with the centred arrangement.",
+    "note": "A mesh alone supplies no physical support. This example pairs visible dimensions with collision dimensions; the contact result depends on the latter. The walkers nearby add foot placement and control, which this small reconstruction leaves for later."
+  },
+  {
+    "map": "VFM_08_Arena",
+    "file": "10_impulse.gd",
+    "title": "One impact, then the world",
+    "subjects": [
+      "Impulse",
+      "Momentum change",
+      "A one-shot action",
+      "Collision response"
+    ],
+    "encounter": "Send the black bowling point down the lane. Watch the first pin it reaches and follow that pin into the next contact. Your throw starts a sequence you no longer direct.",
+    "learn": "Use the same point twice: one striker and one target. Give the striker one impulse, then let their collision unfold. Start without gravity or a floor so the first question is the impact.",
+    "explain": "An impulse changes momentum in one action. With a 1 kg body, the chosen 3 N·s impulse gives a velocity change of 3 m/s before contact. Doubling mass halves that initial change in velocity.\n\n`roll()` calls `apply_central_impulse` once. The `used` flag stops another button event from adding a second impulse. This differs from the sustained force you applied during repeated physics updates.\n\nBoth points use collision layer and mask 4, so they can meet. The script never assigns a velocity to the target. Its response comes from contact with the striker.",
+    "tryit": "Double the striker’s mass while keeping the impulse. Predict its initial speed, then observe the collision separately. Restart each trial. A prediction about the launch speed does not yet tell you how the whole collision will end.",
+    "onward": "An impulse happens once. In the last hall, hold a trigger to keep adding acceleration to your own movement.",
+    "keep": "Keep collision conservation as a stated-model comparison. Move the crab/food selector out of the primary lesson; targeting is not the new operation needed here.",
+    "retained": "Conservation constrains the total across the two bodies. It does not require each body to keep its own speed, or even its original direction.",
+    "scope": "The hall adds ten pins, floor friction, rolling and a score. Its ROLL control can be used repeatedly; your study allows one launch before a restart.",
+    "explore": "Back at the lane, throw slightly off-centre. Follow the first sideways deflection and the contacts it makes possible. A small change in aim can produce a different arrangement of fallen pins.",
+    "note": "Impulse is measured in N·s, equivalent to kg·m/s. The collision settings and body properties determine the contact response; this code does not promise a perfectly elastic collision. The study’s points meet in mid-air, before the hall adds rolling and floor contact."
+  },
+  {
+    "map": "Vectors_Act5_ForceAsPlace",
+    "file": "11_flight.gd",
+    "title": "The player becomes the receiver",
+    "subjects": [
+      "Pickup and trigger actions",
+      "Hand direction",
+      "Player acceleration",
+      "Combining two inputs",
+      "Continued velocity"
+    ],
+    "encounter": "Take the two black points. Aim where you want to travel and hold the triggers. Let go of the triggers while keeping hold of the points. The thrust ends; your movement continues under gravity and contact.",
+    "learn": "Extend the familiar point into a thruster. While held and activated, it reports an acceleration in the direction of your hand. The small station script creates two of these points.",
+    "explain": "`action_pressed` turns firing on while the point is held. Releasing the trigger or dropping the point turns it off. `held()` reports whether someone has picked it up.\n\n`receiver()` follows the holding controller to its XR origin, then finds the player body under that origin. This connects the action to the player whose hand holds the point.\n\n`acceleration()` reads the controller’s forward direction, local -Z, and multiplies it by 11 m/s². When firing stops, it returns zero. It does not clear the player’s velocity.\n\nAdding the point to `ada_thrust_points` lets the existing court find it. The court asks each held point who its receiver is and what acceleration it requests. Two aligned points request 22 m/s²; opposed directions cancel. The court combines those requests, adds gravity once and moves the player with collisions.",
+    "tryit": "Aim one hand up and one down. Before pressing, predict that the two thrusts cancel while gravity still acts. Then aim both upward: their 22 m/s² request exceeds the court’s 9.8 m/s² gravity. Release the triggers and watch how velocity continues to change.",
+    "onward": "The point now gives you a capacity in the world. Direction, acceleration, resistance and contact are things you can use together. The racer and the larger experiments give you places to try.",
+    "keep": "Keep the receiver-boundary argument. Reuse the existing player adapter instead of teaching a second locomotion system. The catalyst remains a distinct intervention tool, not another name for the thrust points.",
+    "retained": "Writing the same vector into two objects had not made them the same kind of body. One controller erased what another had just written.",
+    "scope": "The existing capability court supplies the player movement, collisions, gravity and visor. Your new code supplies the held action, direction and identity of the player who receives it.",
+    "note": "Mount this study inside the loaded capability court. Its FieldCarryAdapter owns player movement; the points do not set the camera position. The required connection is `receiver()`, `acceleration()` and `held()` in the `ada_thrust_points` group. This small script uses XR hands; the museum version also supports a desktop pointer. Physical headset comfort still needs a playtest."
+  }
+]

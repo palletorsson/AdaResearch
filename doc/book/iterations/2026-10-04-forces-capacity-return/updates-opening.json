@@ -1,0 +1,168 @@
+[
+  {
+    "id": "Vectors_Act1_WhatAVectorIs",
+    "title": "Move the relation without changing it",
+    "mode": "deepen",
+    "storyboard": "SHIFT moves both pins while the wall arrows keep their displacement. Reuse positions and translation by reading the existing sample_vector(): end minus start in world coordinates. Predict one tip movement in the XY view and the XZ view, then reveal PARTS to check what each picture omits. SHORT, LONG and ZERO separate magnitude from direction without another drawing exercise. At the normalization companion, briefly explain division by nonzero length and its chosen small-input threshold; do not assume an earlier mention established the skill. Carry a measured displacement whose frame, origin and display scale are stated. Keep the other instruments available as returns.",
+    "storyboard_short": "Use SHIFT and the existing sample_vector(); reuse positions and translation. Predict a tip movement in supplied XY/XZ views, then reveal PARTS. Use SHORT/LONG/ZERO to distinguish magnitude and direction. Briefly explain normalization and its threshold at the companion. Carry a world displacement with stated display scale; require no new projection display or force controller.",
+    "brings": [
+      "positions in a named frame",
+      "translation and displacement",
+      "Flow_Field's supplied unit direction"
+    ],
+    "learns": [
+      "common translation preserves displacement",
+      "a component view omits one direction",
+      "normalization needs a declared small-input policy"
+    ],
+    "carries": "A displacement measurement with its frame and display scale stated; direction and magnitude remain distinct.",
+    "supplied": [
+      "VectorBasics with lesson:room_reading, existing pins and sample_vector()",
+      "XY/XZ wall drawings and SHORT/LONG/SHIFT/ZERO/PARTS controls",
+      "vector_normalize_demo and its unit-length reference"
+    ],
+    "prior_maps": [
+      "Point_Lines",
+      "Trans_Translation",
+      "Flow_Field"
+    ],
+    "independent_check": "Predict a tip movement visible in XZ but absent from XY; verify it, then shift both pins and explain why the measured vector stays unchanged.",
+    "source_refs": [
+      "algorithms/vectors/01_vector_basics/room_reading.gd",
+      "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+      "commons/maps/Trans_Translation/final.md",
+      "commons/maps/Trans_Translation/tutorial.md"
+    ],
+    "review_note": "Keep this opening a short return. sample_vector() measures world positions; wall drawings scale by 0.85 and clip to radius 1.05 without clipping the numeric vector. SHORT/LONG supply the diagonal below 0.0001, whereas the separate normalization companion returns zero at or below 0.001. Translation's final explains direction and distance, but its present tutorial does not establish normalization practice. No new display binding is implied.",
+    "before": "Write a measurement function, choose display projections and normalize inputs in one opening exercise.",
+    "after": "Read and predict the existing displacement measurement; use a brief normalization return with its explicit threshold.",
+    "reason": "The learner already has positions and translation. A lighter return establishes what an arrow measures without delaying the later retained-state hinge."
+  },
+  {
+    "id": "VFM_02_Operations",
+    "title": "Keep the destination and compare routes",
+    "mode": "make",
+    "storyboard": "GO carries the cube along A and then B; SWAP changes the corner without changing the destination. Reuse displacement and accumulation in the existing room_sum study. Keep its controls, carriage and drawings supplied. In refresh(), calculate result from a+b, then compare a.length()+b.length() with result.length() before running PATH via A or direct. Read the existing travelled increment to see how the executed route is counted. CANCEL makes the distinction sharp: a nonzero out-and-back journey has zero displacement. Carry endpoint and distance as separate accounts. The local plan's forward component maps to negative Z, and GO's instant return home lies outside its reported trip.",
+    "storyboard_short": "Use GO/SWAP/PATH/CANCEL on room_sum. Reuse displacement and accumulation. Own result=a+b and compare summed leg lengths with direct length in the existing refresh path; keep movement and drawing supplied. Check against the actual travelled counter. Carry destination and distance separately, with local forward mapped to -Z and GO's reset excluded. No new carriage or transport binding.",
+    "brings": [
+      "displacements with compatible units and frame",
+      "length and finite accumulation",
+      "a distinction between input values and their receiver"
+    ],
+    "learns": [
+      "addition supplies a common endpoint across different routes",
+      "route length and net displacement retain different information"
+    ],
+    "carries": "Two explicit accounts of a route: net displacement and accumulated distance.",
+    "supplied": [
+      "adder_board with lesson:room_sum and A/B/component controls",
+      "existing guarded carriage and waypoint traversal at prescribed speed",
+      "wall/floor drawings, travelled counter and GO/PATH/SWAP/CANCEL/RULE controls",
+      "floor_point() conversion from local plan coordinates to the scene"
+    ],
+    "prior_maps": [
+      "Vectors_Act1_WhatAVectorIs",
+      "Point_Lines",
+      "Change_Intro",
+      "Trans_Translation"
+    ],
+    "independent_check": "For A=(1,0), B=(0,1), predict the common endpoint and the 2 m versus sqrt(2) m route lengths. Then CANCEL and explain the difference between via A and direct before pressing GO.",
+    "source_refs": [
+      "commons/artifacts/adder_board/room_sum.gd",
+      "commons/artifacts/adder_board/adder_board.gd",
+      "commons/maps/VFM_02_Operations/final.md",
+      "commons/maps/VFM_02_Operations/tutorial.md"
+    ],
+    "review_note": "The installed room uses buttons, not draggable pins. Vector2 stores local X/forward in metres, and floor_point maps forward to -Z. refresh() already supplies the common result to drawings and the route built by GO. The physics callback counts actual prescribed movement and consumes remaining movement budget across corners; leave it supplied. GO and input/path edits reset the counter, while RULE and selecting A/B do not. Do not claim a learner function is already bound to a separate host.",
+    "before": "Create separate summation and travelled-distance functions and assume supplied receivers consume their outputs.",
+    "after": "Use the installed result calculation, compare route lengths, and inspect the existing counter with the same carriage and drawings.",
+    "reason": "The current instrument already makes the distinction tangible. A bounded arithmetic edit avoids adding a second route system before Motion."
+  },
+  {
+    "id": "Vectors_Act2_VectorArithmetic",
+    "title": "Keep the component along a direction",
+    "mode": "make",
+    "storyboard": "Start with SWAP, SHIFT and SAME at the subtraction stage, reusing the measured gap rather than adding another construction. The projection station already reads this source within the same hall. RESET gives it a unit rail; SLIDE moves A across that rail while the gold part stays fixed and the pink remainder changes. In the supplied refresh path, compute gap.dot(axis), form kept=axis*gap.dot(axis), then remainder=gap-kept. Recombine the parts before trying TURN and FLIP. Carry a signed along-axis reading and the remainder it cannot describe. The FRIEND threshold and stationary torque wheel remain short comparisons about the uses of a calculation; neither adds a required controller or cross-product lesson.",
+    "storyboard_short": "Return to SWAP/SHIFT/SAME, then use the actual gap-to-projection connection. Teach signed dot reading, kept vector and subtracted remainder in the existing refresh path; recombine and predict SLIDE/TURN/FLIP. Supply unit rail, controls and diagrams. Carry a projection plus remainder. Keep FRIEND and torque as brief comparisons, not extra builds or evidence of mastered cross products.",
+    "brings": [
+      "displacement subtraction",
+      "compatible vector addition",
+      "magnitude and a nonzero unit direction"
+    ],
+    "learns": [
+      "dot product as signed distance along a unit axis",
+      "projection and perpendicular remainder",
+      "changing the receiving axis changes the retained component"
+    ],
+    "carries": "An along-axis scalar and projection/remainder pair that reconstruct the input.",
+    "supplied": [
+      "vector_sub with lesson:room_gap and projection_shadow with lesson:room_projection",
+      "same-hall source lookup and contributions_changed connection",
+      "nonzero unit rail and RESET/SLIDE/TURN/FLIP/RULE controls",
+      "scaled floor/wall diagrams; existing dot_aligner and torque_crank comparisons"
+    ],
+    "prior_maps": [
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations",
+      "Trans_Translation"
+    ],
+    "independent_check": "After RESET, predict what SLIDE changes and check kept+remainder=gap. Then FLIP: explain why the signed coordinate reverses while the kept vector does not.",
+    "source_refs": [
+      "commons/artifacts/vector_op_console/gap_projection_room.gd",
+      "commons/artifacts/vector_op_console/vector_op_console.gd",
+      "commons/artifacts/projection_shadow/projection_shadow.gd",
+      "commons/artifacts/dot_aligner/dot_aligner.gd",
+      "commons/artifacts/torque_crank/torque_crank.gd",
+      "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+      "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md"
+    ],
+    "review_note": "This is a real same-hall connection, not transport from the previous room: connect_source() finds the source under the same em_map owner and subscribes refresh(). Coordinates are model X/forward, displayed at half scale, not visitor positions. TURN changes the rail by 30 degrees; bounded SLIDE requests move source A perpendicular by 0.5. FRIEND's 0.985 threshold and torque's unit-direction cross product are independent demonstrations, not subscribers. Keep normalization and subtraction as returns; the substantial new lesson is projection with its remainder.",
+    "before": "Teach dot product, projection and remainder while several adjacent operations compete for attention.",
+    "after": "Make the connected gap/projection pair the core, with recombination as its check and the other operations as short returns.",
+    "reason": "A single live relation supports reuse and an independent check. The critical questions survive without requiring mastery of every nearby instrument."
+  },
+  {
+    "id": "VFM_05_Launch",
+    "title": "Read a flight from its beginning",
+    "mode": "deepen",
+    "storyboard": "FIRE sends the marker through a curve; PAIR offers equal ranges with different flight times. Reuse elapsed time, vector components and the distinction between a position and its rate. Introduce acceleration's units, then supply the constant-acceleration position formula, angle conversion and landing-time calculation already used by launch_chamber. Trace flight_position() and change one initial condition, keeping gravity fixed. PATH shows its sampled prediction; PARTS lets the student compare zero vertical velocity at the apex with continuing downward acceleration. SLOW changes playback time without changing the path. Carry a usable position-at-time function and its assumptions into Motion, where retaining and updating velocity becomes the new task.",
+    "storyboard_short": "Use FIRE/PAIR, then trace existing flight_position(). Reuse time, vector components and rate. Supply the analytic position formula, angle conversion, duration and receiver; introduce acceleration's units without deriving a ballistic solver. Vary one beginning, inspect PATH/PARTS and distinguish SLOW from changed gravity. Carry a position-at-time function with assumptions. Launch stays before Motion; no integration or collision response is claimed.",
+    "brings": [
+      "position functions and elapsed seconds",
+      "vector components and addition",
+      "Flow_Field's velocity-as-displacement-per-second relation",
+      "Change's distinction between value and rate"
+    ],
+    "learns": [
+      "acceleration as velocity change per second",
+      "evaluating a supplied analytic position function",
+      "trajectory shape, duration and playback time are distinct"
+    ],
+    "carries": "A supplied analytic path the learner can evaluate and vary under stated gravity, drag and endpoint assumptions.",
+    "supplied": [
+      "launch_arc with lesson:launch_chamber and its flight markers",
+      "launch_velocity() angle conversion and duration() equal-height landing time",
+      "flight_position() constant-acceleration formula and flight_velocity()",
+      "64-segment PATH drawing and FIRE/PAIR/SLOW/PARTS/GRAVITY/SPEED controls"
+    ],
+    "prior_maps": [
+      "Change_Intro",
+      "Flow_Field",
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations"
+    ],
+    "independent_check": "At the opening 30/60-degree pair and fixed speed, predict equal horizontal range but unequal landing times. Explain why SLOW leaves the path unchanged, then use PARTS to distinguish velocity and acceleration at the apex.",
+    "source_refs": [
+      "commons/artifacts/launch_arc/launch_chamber.gd",
+      "commons/artifacts/launch_arc/launch_arc.gd",
+      "commons/maps/VFM_05_Launch/final.md",
+      "commons/maps/VFM_05_Launch/tutorial.md"
+    ],
+    "review_note": "Launch precedes Motion. Supply p(t)=origin+v0*t+0.5*g*t*t, angle-to-velocity conversion and duration rather than asking for their derivation. The existing host clamps each lane to its own equal-height landing time; the frozen velocity is pre-impact. PATH is 64 equal-time segments, while live markers are evaluated analytically. PAIR has separate lane origins, so equal range does not mean the same world endpoint. Parameter edits reset the flight; SLOW only rescales its local clock. No learner-path binding or ballistic solver is newly installed.",
+    "before": "Construct a sampled projectile trajectory while introducing acceleration and its quadratic position contribution.",
+    "after": "Read, evaluate and vary the supplied analytic path, using the existing chamber to check one prediction at a time.",
+    "reason": "The strong spatial encounter can introduce acceleration without consuming the numerical-state lesson that belongs to Motion next."
+  }
+]

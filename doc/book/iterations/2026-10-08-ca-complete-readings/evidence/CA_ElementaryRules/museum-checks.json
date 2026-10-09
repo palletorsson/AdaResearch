@@ -1,0 +1,168 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed volume exists",
+      "passed": true
+    },
+    {
+      "name": "Enlarged neighbourhood shares installed study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: neighbours",
+      "passed": true
+    },
+    {
+      "name": "First step: fading centre beside seven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fading",
+      "passed": true
+    },
+    {
+      "name": "Second step: centre empty",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: empty",
+      "passed": true
+    },
+    {
+      "name": "One hand point installed at reachable height",
+      "passed": true
+    },
+    {
+      "name": "Moving held sphere keeps installed seed and clock",
+      "passed": true
+    },
+    {
+      "name": "Held trigger updates existing volume and enlarged witness together",
+      "passed": true
+    },
+    {
+      "name": "Live caption reports same state and count",
+      "passed": true
+    },
+    {
+      "name": "Installed release parks without changing generation",
+      "passed": true
+    },
+    {
+      "name": "VIEW changes finish without touching state or clock",
+      "passed": true
+    },
+    {
+      "name": "Hand and console share one subsequent step",
+      "passed": true
+    },
+    {
+      "name": "Replay restores witness and held clock",
+      "passed": true
+    },
+    {
+      "name": "entry_to_hand_control: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "entry_to_hand_control: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "control_to_neighbourhood: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "control_to_neighbourhood: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "left_rim_to_rear_gallery: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "left_rim_to_rear_gallery: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_gallery_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_gallery_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-fading",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "hall_origin": [
+      0.0,
+      0.0,
+      -4.0
+    ],
+    "neighbour_local": [
+      2.65000009536743,
+      1.5,
+      8.69999980926514
+    ],
+    "routes": {
+      "control_to_neighbourhood": {
+        "blocked": [],
+        "samples": 33,
+        "unsupported": []
+      },
+      "entry_to_hand_control": {
+        "blocked": [],
+        "samples": 33,
+        "unsupported": []
+      },
+      "left_rim_to_rear_gallery": {
+        "blocked": [],
+        "samples": 74,
+        "unsupported": []
+      },
+      "rear_gallery_to_exit": {
+        "blocked": [],
+        "samples": 57,
+        "unsupported": []
+      }
+    },
+    "scope": "Native installed CA_ElementaryRules. Same overhead, raised and visitor cameras; real seeded generations 0/1/2. Other halls/player hidden for capture. No physical headset test.",
+    "single_step_ms": 212.743,
+    "work_local": [
+      6.5,
+      0.0,
+      10.5
+    ]
+  },
+  "passed": true,
+  "room": "CA_ElementaryRules"
+}

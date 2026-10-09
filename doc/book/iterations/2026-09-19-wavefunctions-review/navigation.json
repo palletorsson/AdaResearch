@@ -1,0 +1,279 @@
+{
+  "checks": [
+    {
+      "message": "Wave Functions has a museum plan owner",
+      "ok": true
+    },
+    {
+      "message": "plan position 1 selects WaveFunctions_Intro",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Intro",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Intro",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Intro",
+      "ok": true
+    },
+    {
+      "message": "plan position 2 selects WaveFunctions_Pendulum",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Pendulum",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Pendulum",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Pendulum",
+      "ok": true
+    },
+    {
+      "message": "plan position 3 selects WaveFunctions_Sine_Space",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Sine_Space",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Sine_Space",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Sine_Space",
+      "ok": true
+    },
+    {
+      "message": "plan position 4 selects WaveFunctions_Unit_Circle",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Unit_Circle",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Unit_Circle",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Unit_Circle",
+      "ok": true
+    },
+    {
+      "message": "plan position 5 selects WaveFunctions_3D_Wave_Propagation",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_3D_Wave_Propagation",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_3D_Wave_Propagation",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_3D_Wave_Propagation",
+      "ok": true
+    },
+    {
+      "message": "plan position 6 selects WaveFunctions_Effect_Sound",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Effect_Sound",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Effect_Sound",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Effect_Sound",
+      "ok": true
+    },
+    {
+      "message": "plan position 7 selects Wavefunctions_Bernini",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for Wavefunctions_Bernini",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Wavefunctions_Bernini",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Wavefunctions_Bernini",
+      "ok": true
+    },
+    {
+      "message": "plan position 8 selects WaveFunctions_John_Cage",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_John_Cage",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_John_Cage",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_John_Cage",
+      "ok": true
+    },
+    {
+      "message": "plan position 9 selects WaveFunctions_AirMusic",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_AirMusic",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_AirMusic",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_AirMusic",
+      "ok": true
+    },
+    {
+      "message": "plan position 10 selects Wavefunctions_Sky_Stairs",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for Wavefunctions_Sky_Stairs",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Wavefunctions_Sky_Stairs",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Wavefunctions_Sky_Stairs",
+      "ok": true
+    },
+    {
+      "message": "plan position 11 selects WaveFunctions_TrigWalkingPath",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_TrigWalkingPath",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_TrigWalkingPath",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_TrigWalkingPath",
+      "ok": true
+    },
+    {
+      "message": "plan position 12 selects WaveFunctions_Synthesis_Lab",
+      "ok": true
+    },
+    {
+      "message": "authored ownership for WaveFunctions_Synthesis_Lab",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in WaveFunctions_Synthesis_Lab",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at WaveFunctions_Synthesis_Lab",
+      "ok": true
+    },
+    {
+      "message": "no legacy teleporter nodes instantiated",
+      "ok": true
+    },
+    {
+      "message": "all twelve museum plan entries match the sequence",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final pearl",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "raw_exits": [
+    {
+      "map": "WaveFunctions_Intro",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "utility": "t"
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "utility": "t"
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "utility": "t"
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "utility": "t"
+    }
+  ],
+  "route": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Sine_Space",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_3D_Wave_Propagation",
+    "WaveFunctions_Effect_Sound",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "WaveFunctions_AirMusic",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_TrigWalkingPath",
+    "WaveFunctions_Synthesis_Lab"
+  ],
+  "scope": "Production plan selection and utility refusal; no physical portal crossing or full route walk"
+}

@@ -1,0 +1,9 @@
+--- before/commons/primitives/point/arrival_shaft.tscn
++++ after/commons/primitives/point/arrival_shaft.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/primitives/point/arrival_shaft.gd" id="1"]
++
++[node name="ArrivalShaft" type="Node3D"]
++script = ExtResource("1")

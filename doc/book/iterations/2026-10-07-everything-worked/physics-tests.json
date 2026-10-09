@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "name": "Existing conveyor scene now builds finite prefab cast",
+      "passed": true
+    },
+    {
+      "name": "Later prefabs increase size and mass together",
+      "passed": true
+    },
+    {
+      "name": "Chair keeps six separate collision parts",
+      "passed": true
+    },
+    {
+      "name": "Unused cargo has no active collision",
+      "passed": true
+    },
+    {
+      "name": "Gate and receiver are actual anchored hinges",
+      "passed": true
+    },
+    {
+      "name": "Feed admits different prefab types",
+      "passed": true
+    },
+    {
+      "name": "Contact belt moves cargo beyond the inlet",
+      "passed": true
+    },
+    {
+      "name": "Delivered objects remain real grabbable bodies",
+      "passed": true
+    },
+    {
+      "name": "Real XRTools hand can hold gate grip",
+      "passed": true
+    },
+    {
+      "name": "Pulling the grip opens the gate",
+      "passed": true
+    },
+    {
+      "name": "Hand does not detach hinge",
+      "passed": true
+    },
+    {
+      "name": "Held trigger selects flood",
+      "passed": true
+    },
+    {
+      "name": "Reset refuses a held control",
+      "passed": true
+    },
+    {
+      "name": "Flood ends when trigger and grip release",
+      "passed": true
+    },
+    {
+      "name": "Cargo crosses gate through contact",
+      "passed": true
+    },
+    {
+      "name": "Consequences include a spill",
+      "passed": true
+    },
+    {
+      "name": "Pausing feed keeps the aftermath",
+      "passed": true
+    },
+    {
+      "name": "No body count growth or nonfinite state",
+      "passed": true
+    },
+    {
+      "name": "Student can pick up a delivered chair",
+      "passed": true
+    },
+    {
+      "name": "Reset refuses held cargo",
+      "passed": true
+    },
+    {
+      "name": "Local reset accepted after release",
+      "passed": true
+    },
+    {
+      "name": "Reset parks cargo and clears the counters",
+      "passed": true
+    },
+    {
+      "name": "Blocked inlet postpones delivery",
+      "passed": true
+    },
+    {
+      "name": "Clear inlet accepts the next delivery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "measurements": {
+    "after_hand": {
+      "admitted": 18,
+      "passed": 12,
+      "spilled": 6
+    },
+    "feed_12": {
+      "admitted": 13,
+      "gate": -0.891558766365051,
+      "passed": 7,
+      "receiver": -0.104132227599621,
+      "spilled": 3
+    },
+    "gate_turn": 1.34352111816406,
+    "hinge_drift": 0.000219109919271432,
+    "receiver_rock": 0.643742203712463
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "scope": "Real Jolt contact, joints, inherited XRTools pickup, supplied hand motion and reset. Not a headset comfort or Quest performance test."
+}

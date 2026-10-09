@@ -1,0 +1,35 @@
+{
+  "id": "Ribbon_Patterns_02",
+  "title": "Compare what the carrier contributes",
+  "storyboard": "Keep the grey targets numerically equal while their surrounds change; there is no required perceptual answer. Bring colour values and surface addresses, then compare the same motif on a flat sheet and a curve of equal surface width. Hold the source and repeat size fixed while changing one surround, carrier or supplied shading condition. Record the equality the code guarantees separately from what appears equal from the current viewpoint. Arc length need not equal projected width. The dot-product lighting model and controls stay supplied, with the operation taught later in Forces. This hall carries a method of comparison into the studio, not a new shader assignment. Its artifact name does not establish a spectral metamerism experiment.",
+  "storyboard_short": "Keep reflective comparison. Equal target values, changed surrounds; same source and surface spacing, flat/curved carriers. Separate numerical equality, arc length and projected appearance. Supply controls and dot-product shading; teach operation later. No required perceptual result or new code. Carry controlled comparison to studio; no spectral-metamerism claim.",
+  "mode": "reflect",
+  "brings": [
+    "colour values",
+    "surface mapping"
+  ],
+  "learns": [
+    "state exactly which equality a controlled comparison preserves"
+  ],
+  "carries": "A comparison that separates stored equality, surface distance and viewed appearance.",
+  "supplied": [
+    "contrast controls",
+    "receiver meshes",
+    "directional shading model"
+  ],
+  "artifact_refs": [
+    "SimultaneousContrast",
+    "MetamerismLab"
+  ],
+  "review_note": "Retain the reflective mode. Equal physical repeat spacing here differs from equal UV repeat counts on differently sized studio receivers. No new code or dot-product prerequisite is added. Equal arc length is not equal projected width; the shader’s direction control is not a moved museum sun. tutorial.md is absent, but a short comparison companion is enough.",
+  "independent_check": "Optional reflection: name one condition held fixed and one changed, then distinguish the program’s equality from your observation.",
+  "prior_maps": [
+    "Color_Flashlight",
+    "Color_Pillar",
+    "Ribbon_Patterns_01"
+  ],
+  "source_refs": [
+    "algorithms/color/carrier_comparison.gd"
+  ],
+  "change_reason": "Allow the sequence to deepen attention without adding more programming."
+}

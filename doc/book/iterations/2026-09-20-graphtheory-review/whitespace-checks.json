@@ -1,0 +1,101 @@
+{
+  "scope": "Changed files against frozen starting files. Git no-index with core.autocrlf=false and cr-at-eol recognizes Windows line endings. Exit 1 alone denotes a difference; diagnostic output records whitespace errors. Ordinary git diff did not recognize the repository in this execution environment.",
+  "checks": [
+    {
+      "path": "ada_run/em_plan.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/museum/em_plan.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/map_authored.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/long_museum.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/museum_order_effective.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/sequences/graphtheory.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/book/graphtheory.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/museum_core_encounters.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/GT_Spanning_Trees/map_data.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/GT_Flow/final.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/GT_Flow/map_data.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/GT_Matching/final.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/maps/GT_Matching/map_data.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/artifacts/registry/algorithms_misc.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/trunk_branches.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "path": "commons/data/museum/trunk_branches.json",
+      "exit": 1,
+      "output": ""
+    }
+  ],
+  "failures": []
+}

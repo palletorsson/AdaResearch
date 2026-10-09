@@ -1,0 +1,42 @@
+MUSEUM MODULARITY — PREDICTION, WRITTEN BEFORE ANY MEASUREMENT
+===============================================================
+Written 2026-08-13, before running any counting script over
+commons/data/template_patterns.json. Nothing below has been measured.
+
+DEFINITION I WILL MEASURE (fixed now, so I cannot move the goalposts later)
+--------------------------------------------------------------------------
+Corpus  = the museum-tagged patterns in commons/data/template_patterns.json
+          (the ~30 real museums; `bay:`/`lattice:`/`beat:` brushes excluded).
+Cell    = one entry of a pattern's `tile`, 1 m x 1 m. Wall cell = "4".
+Face    = (wall cell, direction d in N/E/S/W) where the neighbour cell in
+          direction d is walkable ("1","1s","2","2s","3s"). A face is a
+          square metre of wall a visitor can actually stand in front of.
+Run     = maximal chain of faces sharing the same direction d and contiguous
+          along the axis perpendicular to d. Length in metres = face count.
+
+HEADLINE PREDICTION
+-------------------
+  % of museum wall FACES that sit in runs of 4 m or longer:  52%
+
+Reasoning: doc/reports/white_cube.md measured em_detail's own stretches at
+27.6% of run length in stretches >= 6 m and 38.7% in the 3-5 m band. If the
+3/4/5 m stretches are roughly equinumerous, the 4-5 m part of that band is
+about 3/4 of its length, i.e. ~29%, giving 27.6 + 29 = 56.6%. I shade that
+down to 52% because tile-level faces should break MORE often than em_detail's
+stretches at podium/slot cells my definition does not treat as openings.
+
+SECONDARY PREDICTIONS
+---------------------
+  museums with at least one run >= 4 m (could host a 4 m panel):  26 of 30
+  museums with at least one run >= 8 m:                           14 of 30
+  % of wall faces sitting in runs of exactly 1 m:                 14%
+  mean run length across the corpus:                              4.4 m
+
+WHAT WOULD MAKE ME WRONG IN A USEFUL WAY
+----------------------------------------
+If the measured >= 4 m share is well ABOVE 52%, then the corpus already has
+long planes and the "59% of walls are 1 m" finding in white_cube.md is an
+artefact of em_detail's face-splitting, not of the tiles — which would move
+the whole modularity argument from the data to the code.
+If it is well BELOW, the tiles genuinely cannot host a 4 m module and any
+"museum built from modules" story has to change the tiles, not the dealer.

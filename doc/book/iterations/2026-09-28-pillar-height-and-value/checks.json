@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "scope": "Publication, source correspondence and current native evidence. No headset or calibrated display claim.",
+  "checks": [
+    {
+      "name": "Chapter's HSV code appears in current implementation",
+      "passed": true
+    },
+    {
+      "name": "Both existing encounter anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Named collection preserved with one carrying distinction",
+      "passed": true
+    },
+    {
+      "name": "61 current native checks pass",
+      "passed": true
+    },
+    {
+      "name": "No script or shader errors",
+      "passed": true
+    },
+    {
+      "name": "Tested source current: commons/maps/Color_Pillar/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Tested source current: commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "name": "Tested source current: algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "passed": true
+    },
+    {
+      "name": "Tested source current: doc/book/iterations/2026-09-28-pillar-height-and-value/probe.gd",
+      "passed": true
+    },
+    {
+      "name": "Tested source current: tools/run_encounter_probe.py",
+      "passed": true
+    },
+    {
+      "name": "Hall geometry and placement unchanged",
+      "passed": true
+    },
+    {
+      "name": "Catalogue points to current chapter and review",
+      "passed": true
+    },
+    {
+      "name": "Eight current Colour chapter sources",
+      "passed": true
+    },
+    {
+      "name": "Capture content matches its manifest",
+      "passed": true
+    },
+    {
+      "name": "All published native images readable",
+      "passed": true
+    },
+    {
+      "name": "Rendered IDs unique",
+      "passed": true
+    },
+    {
+      "name": "Internal links resolve",
+      "passed": true
+    },
+    {
+      "name": "Footnote and backlink rendered",
+      "passed": true
+    },
+    {
+      "name": "No unresolved local chapter images",
+      "passed": true
+    }
+  ]
+}

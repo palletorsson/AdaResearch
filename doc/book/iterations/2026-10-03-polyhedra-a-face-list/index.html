@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Polyhedra — which faces make an inside?</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the lesson</a><a href="#code">Complete code</a><a href="#scope">Lineage and scope</a><a href="#checked">Checks</a><a href="../2026-10-03-triangle-three-corners/index.html#reading">Previous: Triangle</a></nav><p>ADA / TUTORIAL PILOT / 3 OCTOBER 2026</p></header>
+<article id="reading"><h1>Polyhedra — which faces make an inside?</h1>
+<p>Three faces meet at one point. Look into the opening opposite it. What would close this little room?</p>
+<p>Open <code>point_polyhedra.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>, using <strong>Run Current Scene</strong> (F6). Edit <code>studies/point_polyhedra/polyhedra.gd</code>.</p>
+<p>The script reads the same saved trace as Triangle and selects the same three original positions. Edits to Triangle's handles were temporary; they did not change that record. If no record is available, draw a bend in Trace and release to save it first.</p>
+<p>We reuse the handles, segments and face material. The new construction separates <strong>where vertices are</strong> from <strong>which vertices a face connects</strong>.</p>
+<h2>1. Add a fourth position</h2>
+<p>The three selected positions are <code>a</code>, <code>b</code> and <code>c</code>. The script adds them and divides by three to find their centre:</p>
+<pre><code class="language-gdscript">    var centre := (a + b + c) / 3.0
+    positions = [centre + Vector3(0.0, 0.0, -0.7), a, b, c]
+</code></pre>
+<p><code>positions</code> is an <code>Array[Vector3]</code>. Entry <code>0</code> is the new point, placed 0.7 metres along negative Z from that centre. Entries <code>1</code>, <code>2</code> and <code>3</code> keep the earlier corners. The saved trace is unchanged.</p>
+<p>Four pink handles carry these numbers. Their labels stay readable through the faces. Hold one and move it. We chose a depth direction in the room, not a direction calculated from your triangle. If all four points lie in one plane, move point <code>0</code> out of it. If the three earlier corners lie along one line, separate one as you did in Triangle.</p>
+<h2>2. Keep connections in a list</h2>
+<pre><code class="language-gdscript">var faces := [
+    [0, 1, 2],
+    [0, 2, 3],
+    [0, 3, 1],
+]
+</code></pre>
+<p><code>faces</code> is an array containing three smaller arrays. Each row gives three <strong>indices into <code>positions</code></strong>. The numbers refer to vertices; they are not coordinates.</p>
+<p>Read the first row: connect position <code>0</code>, then <code>1</code>, then <code>2</code>. Follow that triangle on the object. All three rows include <code>0</code>, so all three faces meet there. None joins <code>1</code>, <code>2</code> and <code>3</code> across the opening.</p>
+<h2>3. Reuse the triangle operation</h2>
+<p>Triangle submitted three positions directly. This version reads them from the face list:</p>
+<pre><code class="language-gdscript">        face_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+        for triangle in faces:
+            for index in triangle:
+                face_mesh.surface_add_vertex(positions[index])
+        face_mesh.surface_end()
+</code></pre>
+<p>The outer <code>for</code> loop takes one face row. The inner loop takes each index in that row and adds its position to the mesh. It completes those three vertices before the outer loop takes the next face.</p>
+<p>This is a <strong>nested loop</strong>: one loop runs inside another. Three rows submit nine vertices. Some positions are submitted more than once because neighbouring faces share corners.</p>
+<p>As before, the script clears the old surface each frame. Before rebuilding, it copies the current handle positions into <code>positions</code>. Moving a corner changes every face that refers to its index. The face list stays the same.</p>
+<h2>4. Close the opening</h2>
+<p>Add one row to <code>faces</code>:</p>
+<pre><code class="language-gdscript">    [1, 3, 2],
+</code></pre>
+<p>Keep the comma and place the row before the array's closing <code>]</code>. Run again. The four positions remain where they started; the new row adds a face across the opening.</p>
+<p>With four non-coplanar positions, these four faces enclose a <strong>tetrahedron</strong>. Non-coplanar means the positions do not all lie in one plane. Its edges need not have equal lengths; equal edges would make it regular.</p>
+<p>Remove the row and run again. You recover the opening without deleting any position. In code, a hole can be an omitted connection.</p>
+<div class="pair"><figure><img src="open.png" alt="Three triangular faces meet at vertex zero behind the open rim. The four corners are numbered."><figcaption>Three faces share point 0. The opposite rim is open; you can look towards the faces behind it.</figcaption></figure><figure><img src="closed.png" alt="The same positions with a fourth face spanning the front rim."><figcaption>Add [1, 3, 2]. The opening closes while every position stays fixed. Number labels remain readable through the surfaces.</figcaption></figure></div><h2>Keep two boundaries distinct</h2>
+<p>The mesh displays a surface. It adds no collision or material filling the interior. Only the small handles have colliders for pickup.</p>
+<p>The museum's open trihedron makes a different choice: its convex collision hull closes the missing side even while the rendering leaves it open. The museum's barriers and slopes extend that investigation to the moving body.</p>
+<p>For now, you can change a surface by moving its vertices or by changing its face list. The next hall carries those two decisions into a cube.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></p><p class="small">Open point_polyhedra.tscn with Run Current Scene. It needs a released Trace record on this device. The shared starter includes every lesson so far.</p></article>
+<details id="code"><summary>polyhedra.gd · the complete lesson</summary><div><p>The learner creates all four handles, six segments and the mesh. The face list is ordinary GDScript data. A nested loop reads its indices into the position array; this is not yet a GPU index buffer. Readout and numbered labels are presentation aids. The original saved trace is never written.</p><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const Segment = preload(&quot;res://prepared/segment.gd&quot;)
+const TraceMemory = preload(&quot;res://prepared/trace_memory.gd&quot;)
+const FaceMaterial = preload(&quot;res://prepared/triangle_face.tres&quot;)
+const EdgeMaterial = preload(&quot;res://prepared/triangle_edge.tres&quot;)
+
+var positions: Array[Vector3] = []
+var handles: Array[PointHandle] = []
+var segments: Array[Segment] = []
+var face_mesh := ImmediateMesh.new()
+var surface := MeshInstance3D.new()
+var readout := Label3D.new()
+
+var faces := [
+    [0, 1, 2],
+    [0, 2, 3],
+    [0, 3, 1],
+]
+
+var edges := [
+    [0, 1], [0, 2], [0, 3],
+    [1, 2], [2, 3], [3, 1],
+]
+
+func _ready():
+    add_child(readout)
+    readout.position = Vector3(0.0, 2.6, -0.6)
+    readout.font_size = 24
+    surface.mesh = face_mesh
+    surface.material_override = FaceMaterial
+    add_child(surface)
+    var source_points := TraceMemory.read_trace()
+    if source_points.size() &lt; 3:
+        readout.text = &quot;Draw a bend in Point Trace, then release to save.\nPolyhedra needs at least three stored positions.&quot;
+        set_process(false)
+        return
+    var third := source_points.size() / 3
+    var a := source_points[0]
+    var b := source_points[third]
+    var c := source_points[third * 2]
+    var centre := (a + b + c) / 3.0
+    positions = [centre + Vector3(0.0, 0.0, -0.7), a, b, c]
+
+    for i in range(positions.size()):
+        var handle := PointHandle.new()
+        handle.position = positions[i]
+        add_child(handle)
+        handles.append(handle)
+        var label := Label3D.new()
+        label.text = str(i)
+        label.position.y = 0.14
+        label.font_size = 24
+        label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+        label.no_depth_test = true
+        handle.add_child(label)
+    for edge in edges:
+        var segment := Segment.new()
+        segment.material_override = EdgeMaterial
+        add_child(segment)
+        segments.append(segment)
+
+func _process(_delta):
+    for i in range(handles.size()):
+        positions[i] = handles[i].position
+    for i in range(edges.size()):
+        var edge = edges[i]
+        segments[i].show_between(positions[edge[0]], positions[edge[1]])
+    face_mesh.clear_surfaces()
+    if not faces.is_empty():
+        face_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+        for triangle in faces:
+            for index in triangle:
+                face_mesh.surface_add_vertex(positions[index])
+        face_mesh.surface_end()
+    readout.text = str(positions.size()) + &quot; positions / &quot; + str(faces.size()) + &quot; faces&quot;
+</code></pre><p><a href="polyhedra.gd" download>Open-corner script</a> · <a href="polyhedra-closed.gd" download>Same script with the fourth row</a> · <a href="tutorial.md">Tutorial source</a> · <a href="tutorial.diff">Text diff</a></p></div></details>
+<details id="scope"><summary>A new decision, using the previous construction</summary><div><p>Triangle made one face from three positions. This lesson adds one position and a list that says which triples belong to which faces. Moving a position and changing a connection now become independent operations. Cube can reuse this distinction next.</p><p>The earlier three positions come from the same original Trace record used by Grid and Triangle. Temporary edits in Triangle are not saved. The added point follows a declared negative-Z offset; it is not automatically placed perpendicular to the triangle. Four coplanar positions still have zero volume. The script displays the authored faces without claiming to validate every edited shape.</p><p>Collision stays a separate construction. The live museum's open trihedron has a convex hull that closes its visually missing side. That richer encounter remains in the <a href="../../../../commons/maps/Primitives_Polythedra/tutorial-museum.md">museum return</a>, the critical chapter and technical reference. No museum artifact or final.md changed.</p><p>The first lesson needs neither every room artifact nor a generic mesh factory. Normals, GPU indices, volume formulae and collision building are deferred. Coordinates still needs its earlier shared-starter writing pass.</p><p><a href="lesson-contract.json">Teaching contract</a> · <a href="DECISIONS.md">Decisions</a></p></div></details>
+<details id="checked"><summary>28 native checks passed</summary><div><p>Godot 4.6 checked the actual saved-source selection, exact emitted vertices, open and closed face connectivity, printed one-row code edit, shared-vertex movement, unchanged opposite face, coplanar collapse and recovery, absence of mesh collision, mouse pickup and synthetic XR grip/release, unchanged saved data, restart and empty states.</p><p>All four printed excerpts match either the default script or the tested one-row edit. These images show the native student room, using the same 41-position synthetic XR release record as Trace, Grid and Triangle. Physical headset use and beginner comprehension remain untested.</p><p><a href="verification.json">Results</a> · <a href="verify.gd">Reproducible harness</a> · <a href="coplanar.png">Coplanar comparison</a> · <a href="empty.png">Missing-record state</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

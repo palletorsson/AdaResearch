@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpeculativeComputation_Paraconsistent_Engineering · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SpeculativeComputation_Paraconsistent_Engineering">← Tutorial lineage</a></p><h1>SpeculativeComputation Paraconsistent Engineering</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/final.md">Raw captured source</a></p><pre># Keeping the disagreement visible
+
+Must one account disappear before two accounts can share a system?
+
+&lt;!-- @merge_conflict_visualizer --&gt;
+
+Trace branch A and branch B towards the lit junction. Look from the side. The light hangs between them, but do the branches actually meet? Press MARKER to take the glow away. Before deciding which branch should win, give each one a source and a reason to have arrived there.
+
+Press OVERLAP. The feet keep their places while the branches lean inward and pass through one another. Walk around the crossing. Nothing has been cut to make room. The renderer lets both forms remain; deciding what their meeting means is still ahead of us.
+
+The sculpture keeps two versions present around a conflict marker. It does not merge actual files or execute rules of logical inference. Its useful first gesture is spatial: an unresolved relation can be represented without erasing the parts that made the relation difficult.
+
+The source makes the operation inspectable:
+
+```gdscript
+func _build_resolved() -&gt; void:
+    _build_pillar(branch_a_color, Vector3(0, 0, 0),
+        Vector3(0.2, pillar_height, 0.2), &quot;branch A&quot;, 0.0, false)
+    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
+        Vector3(0.2, RESOLVED_STUMP_H, 0.2), &quot;branch B&quot;, 0.0, true)
+```
+
+Before pressing RESOLVED, choose what you would keep. Then look down for B. A keeps its full height and takes the centre; B becomes a labelled stump. Did the decision agree with yours? The two builder calls make resolution visible as a change in what remains. That is an authored picture of a decision, not a proof that the decision was warranted.
+
+Press FORK. Both branches regain their height and lean apart. If the marker is visible, it has dropped between their feet. Distance has changed; no new reason has been given for either account. Return to OVERLAP when you want to see what settlement shortened.
+
+Try a concrete disagreement. One report says a door is open; another says it is closed. Adding times may reconcile the reports. Adding the door’s identity may reveal that they concern different doors. Preserving provenance gives us ways to investigate before treating every difference as a contradiction about the same thing at the same time.
+
+Formal paraconsistency concerns the inference rules themselves. In a paraconsistent logic, a contradiction need not license an arbitrary conclusion. It does not mean accepting every claim or abandoning the distinction between supported and unsupported inference. Basu and Roy’s research paper starts from this failure of explosion when developing more general definitions.[^basu-roy]
+
+The current junction is an analogy for retaining a conflict, not a demonstration of that formal property. The next useful addition would expose a small rule table: after entering both a proposition and its negation, which consequences remain available, and which unrelated conclusion still cannot be derived?
+
+Return to RESOLVED and find the small name beside B. A label remains, but it tells us little about what has been lost. What information should remain so the decision can later be reconsidered? Keeping a source, a date and the rejected alternative does not make revision automatic, but it prevents a settled display from hiding how settlement occurred.
+
+&lt;!-- @ --&gt;
+
+Situated computation takes up that provenance. Four panels will judge one subject differently, and their positions will become part of what the judgement tells you.
+
+[^basu-roy]: Sankha S. Basu and Sayantan Roy, &quot;Negation-Free Definitions of Paraconsistency&quot;, arXiv:2112.00357 (2021).
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/tutorial.md">Raw captured source</a></p><pre># What disappears when a disagreement is declared resolved?
+
+Different positions can produce different requirements. Preserving the requirements is the first step towards inspecting their conflict.
+
+&lt;!-- @merge_conflict_visualizer --&gt;
+
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+
+JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
+
+The source makes the operation inspectable:
+
+```gdscript
+func _build_resolved() -&gt; void:
+    _build_pillar(branch_a_color, Vector3(0, 0, 0),
+        Vector3(0.2, pillar_height, 0.2), &quot;branch A&quot;, 0.0, false)
+    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
+        Vector3(0.2, RESOLVED_STUMP_H, 0.2), &quot;branch B&quot;, 0.0, true)
+```
+
+The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
+
+[Implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd). This is an excerpt from the artifact, not a standalone program.
+
+Two stored reports need not be a contradiction: they might concern different doors or different times. Preserving sources helps investigate that difference. It does not by itself change the rules of inference. The paraconsistent question is narrower: when both P and not-P are admitted, can unrelated conclusions still be refused? The sculpture makes room for that question but cannot answer it through overlapping meshes. Its unresolved glow should invite investigation rather than make conflict desirable in every case.
+
+&lt;!-- @ --&gt;
+
+To investigate disagreement we need to know where each claim came from.
+
+## Next experiment — not yet a visitor control
+
+Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/technical.md">Raw captured source</a></p><pre># Keep the conflict — implementation and encounter
+
+The primary artifact is `merge_conflict_visualizer`. Its [scene](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn) and [implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd) supply the behaviour described here.
+
+This follows Applied Ethics: choosing an arrangement made its assumptions available for inspection. Here four stored arrangements let us compare preserving, suppressing and separating a disagreement. Situated Computation next asks where the resulting claims come from.
+
+The artifact still defaults to a passive `merge=junction` in other placements. This hall uses `merge_conflict_visualizer:180:0:1#merge:junction#interactive:true` at (4,4). An independent console presents JUNCTION, OVERLAP, RESOLVED and FORK. MARKER toggles only the glow; it does not rebuild or move the branches. Its choice survives a change of arrangement.
+
+`_build_all()` selects the geometry. `apply_grid_config()` validates the selection, then rebuilds only the nodes owned by the visualization. External labels and the console survive. Each interactive branch has a box collision matching its size and rotation. Branch names use baked text plates; B&#x27;s plate remains beside the short stump. Other placements keep their previous passive geometry and labels.
+
+The display uses transformations already encountered in the book. JUNCTION leaves 0.6 m between upright boxes. OVERLAP rotates each 1.8 m box inward by 14 degrees about its foot, with the centre lines crossing at about 1.60 m. FORK rotates them outward by 18 degrees. RESOLVED moves A to the centre and gives B a height of 0.2 m. `_process()` varies the marker&#x27;s emission with sine. None of these operations executes a logical rule.
+
+
+## Operation to read after the encounter
+
+```gdscript
+func _build_resolved() -&gt; void:
+    _build_pillar(branch_a_color, Vector3(0, 0, 0),
+        Vector3(0.2, pillar_height, 0.2), &quot;branch A&quot;, 0.0, false)
+    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
+        Vector3(0.2, RESOLVED_STUMP_H, 0.2), &quot;branch B&quot;, 0.0, true)
+```
+
+The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
+
+## What to compare
+
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+
+JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
+
+## Limits and next test
+
+Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.
+
+The controlled museum probe checks button callbacks, selected reach, oriented-box overlap and selected walking routes. It does not establish headset readability, comfort or Quest frame rate. Existing supporting artifacts stay in the map; primary status identifies the book&#x27;s encounter, not the only permitted content.
+
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Paraconsistent_Engineering/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
+
+The retained rhizome vault uses `#ground_top:0` here, making its ground plate flush with the museum floor. Its default remains 0.03 m in other placements. The vault retains its original position and scale; its broad footprint still extends beyond this hall and needs a separate architectural placement pass.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/intent.md">Raw captured source</a></p><pre>Concept: Paraconsistent logic staged as engineering practice — a database that holds both P and not-P without collapsing into triviality, and a live inference stage that continues to return useful answers on the non-conflicting parts of the knowledge base.
+Sequence role: Third map in the Post-Foundations Crisis sequence. After Applied Ethics turned the diagnosis of bias into method, this map turns contradiction from a fatal system condition into an engineered affordance. Follows CriticalAlgorithms_Applied_Ethics; leads to SpeculativeComputation_Situated_Computation.
+Technical angle: A spherical rig modelled on Florensky&#x27;s pedagogical sphere holds a small dataset with deliberate contradictions. A classical inference engine crashes under the contradictions; a paraconsistent engine — four-valued logic with true, false, both, neither — continues to produce defensible answers. A small production pipeline next to it demonstrates the same mechanism on realistic sensor data that disagrees across channels.
+Critical angle: Classical systems must be kept pristine because a single contradiction can be used to prove anything. Paraconsistent systems are built for the messy world. The map argues that contradiction is a first-class load to carry rather than a state to avoid, and that the engineering discipline of annotating and containing contradictions is as important as the logical discipline of deriving theorems.
+Key artifacts: the Florensky sphere database carries the contradictory knowledge base; the paraconsistent inference engine carries the live reasoning; the production-pipeline station demonstrates the same principle on live sensor data.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/critical.md">Raw captured source</a></p><pre># What disappears when a disagreement is declared resolved?
+
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+
+Two stored reports need not be a contradiction: they might concern different doors or different times. Preserving sources helps investigate that difference. It does not by itself change the rules of inference. The paraconsistent question is narrower: when both P and not-P are admitted, can unrelated conclusions still be refused? The sculpture makes room for that question but cannot answer it through overlapping meshes. Its unresolved glow should invite investigation rather than make conflict desirable in every case.
+
+The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
+
+The material comparison is specific: the placed junction keeps two upright pillars and a pulsing marker. It displays a relation; it does not run a merge algorithm or derive logical consequences.
+
+To investigate disagreement we need to know where each claim came from.
+
+## A question the next version can test
+
+Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Paraconsistent_Engineering/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/summary.md">Raw captured source</a></p><pre># Keep the conflict
+
+What disappears when a disagreement is declared resolved?
+
+Different positions can produce different requirements. Preserving the requirements is the first step towards inspecting their conflict.
+
+Primary: `merge_conflict_visualizer`.
+
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+
+JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
+
+To investigate disagreement we need to know where each claim came from.
+
+Supporting artifacts remain: `florensky_sphere`, `shannon_workbench`, `superposition_display`, `schrodinger_box`, `cap_theorem_walk`, `tt`, `rhizome_vault`.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SpeculativeComputation_Paraconsistent_Engineering/blurb.md">Raw captured source</a></p><pre>Before deciding which branch should win, give each one a reason to have arrived. Press RESOLVED. Look down for what remains of B.
+</pre></section></body></html>

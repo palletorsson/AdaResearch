@@ -1,0 +1,210 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "one shared wall identity in this hall",
+      "passed": true
+    },
+    {
+      "name": "identity has both requested labels",
+      "passed": true
+    },
+    {
+      "name": "wall title is ENDLESS MUSEUM",
+      "passed": true
+    },
+    {
+      "name": "wall subtitle is always another room",
+      "passed": true
+    },
+    {
+      "name": "shared identity has no collision objects",
+      "passed": true
+    },
+    {
+      "name": "lettering uses a bundled font",
+      "passed": true
+    },
+    {
+      "name": "wall face can contain the lettering",
+      "passed": true
+    },
+    {
+      "name": "identity records a unit wall normal",
+      "passed": true
+    },
+    {
+      "name": "lettering faces into the room",
+      "passed": true
+    },
+    {
+      "name": "lettering has a real wall immediately behind it",
+      "passed": true
+    },
+    {
+      "name": "identity can be approached on the hall floor",
+      "passed": true
+    },
+    {
+      "name": "Title is visible from supported visitor approach",
+      "passed": true
+    },
+    {
+      "name": "Tagline is visible from supported visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-lettering",
+      "passed": true
+    },
+    {
+      "name": "four authored point conditions loaded",
+      "passed": true
+    },
+    {
+      "name": "corridor contains exactly three PointPlinths",
+      "passed": true
+    },
+    {
+      "name": "absent point has its own off-white podium",
+      "passed": true
+    },
+    {
+      "name": "absent point keeps its label",
+      "passed": true
+    },
+    {
+      "name": "visible point has its own off-white podium",
+      "passed": true
+    },
+    {
+      "name": "visible point keeps its label",
+      "passed": true
+    },
+    {
+      "name": "solid point has its own off-white podium",
+      "passed": true
+    },
+    {
+      "name": "solid point keeps its label",
+      "passed": true
+    },
+    {
+      "name": "first podium remains empty",
+      "passed": true
+    },
+    {
+      "name": "two white points retain matching radius",
+      "passed": true
+    },
+    {
+      "name": "white point remains visually white",
+      "passed": true
+    },
+    {
+      "name": "visible sphere preserves its collision condition",
+      "passed": true
+    },
+    {
+      "name": "solid sphere preserves its collision condition",
+      "passed": true
+    },
+    {
+      "name": "future sphere remains 1.3 metres in diameter",
+      "passed": true
+    },
+    {
+      "name": "future sphere is black and glossy",
+      "passed": true
+    },
+    {
+      "name": "future sphere retains physical boundary",
+      "passed": true
+    },
+    {
+      "name": "corridor door retained",
+      "passed": true
+    },
+    {
+      "name": "point sun switch retained",
+      "passed": true
+    },
+    {
+      "name": "plinths stay in the normal museum lighting",
+      "passed": true
+    },
+    {
+      "name": "sun switch still removes its directional light",
+      "passed": true
+    },
+    {
+      "name": "removing sun keeps both point surfaces and solid boundary",
+      "passed": true
+    },
+    {
+      "name": "sun switch restores the directional light",
+      "passed": true
+    },
+    {
+      "name": "walkway beside first and last podium has floor",
+      "passed": true
+    },
+    {
+      "name": "three podiums leave the corridor walking lane open",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: three-podiums",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: future-sphere",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "identity": {
+      "font": "res://commons/font/cormorant-garamond/CormorantGaramond.ttf",
+      "position": [
+        6.01800012588501,
+        3.09999990463257,
+        2.5
+      ],
+      "wall_normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "wall_width": 3.0
+    },
+    "points": {
+      "absent": [
+        7.5,
+        0.0,
+        2.5
+      ],
+      "pedestal": [
+        8.5,
+        0.0,
+        12.5
+      ],
+      "solid": [
+        7.5,
+        0.0,
+        8.5
+      ],
+      "visible": [
+        7.5,
+        0.0,
+        5.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Point_One",
+  "scope": "Real Endless Museum scenes; object geometry/materials, wall lettering and camera captures. No headset playtest or learner acceptance claimed."
+}

@@ -1,187 +1,140 @@
 {
  "sweep": "pendulum_slap",
- "peak_changed_pct": 5.33,
+ "peak_changed_pct": 7.228,
+ "subject_pct": 8.443,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "none"
    },
    "b": {
-    "pendulum_height": 4.0,
-    "arm_length": 3.5
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "slab"
    },
-   "changed_px": 29116,
-   "changed_pct": 5.041
+   "changed_px": 31820,
+   "changed_pct": 5.509
   },
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "none"
    },
    "b": {
-    "pendulum_height": 8.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "cushion"
    },
-   "changed_px": 22691,
-   "changed_pct": 3.928
+   "changed_px": 30221,
+   "changed_pct": 5.232
   },
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "none"
    },
    "b": {
-    "pendulum_height": 8.0,
-    "arm_length": 3.5
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "curtain"
    },
-   "changed_px": 29116,
-   "changed_pct": 5.041
+   "changed_px": 41747,
+   "changed_pct": 7.228
   },
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "slab"
    },
    "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "cushion"
    },
-   "changed_px": 22691,
-   "changed_pct": 3.928
+   "changed_px": 13273,
+   "changed_pct": 2.298
   },
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "slab"
    },
    "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 3.5
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "curtain"
    },
-   "changed_px": 30787,
-   "changed_pct": 5.33
+   "changed_px": 24537,
+   "changed_pct": 4.248
   },
   {
    "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 3.5
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "cushion"
    },
    "b": {
-    "pendulum_height": 8.0,
-    "arm_length": 1.75
+    "initial_impulse": 0.0,
+    "settle_damp": 6.0,
+    "lean_force": 26.0,
+    "pendulum_height": 3.4,
+    "arm_length": 1.5,
+    "paddle_size": 0.7,
+    "anvil": "curtain"
    },
-   "changed_px": 23319,
-   "changed_pct": 4.037
-  },
-  {
-   "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 3.5
-   },
-   "b": {
-    "pendulum_height": 8.0,
-    "arm_length": 3.5
-   },
-   "changed_px": 2,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 3.5
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 1.75
-   },
-   "changed_px": 23321,
-   "changed_pct": 4.038
-  },
-  {
-   "a": {
-    "pendulum_height": 4.0,
-    "arm_length": 3.5
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 3.5
-   },
-   "changed_px": 20010,
-   "changed_pct": 3.464
-  },
-  {
-   "a": {
-    "pendulum_height": 8.0,
-    "arm_length": 1.75
-   },
-   "b": {
-    "pendulum_height": 8.0,
-    "arm_length": 3.5
-   },
-   "changed_px": 23319,
-   "changed_pct": 4.037
-  },
-  {
-   "a": {
-    "pendulum_height": 8.0,
-    "arm_length": 1.75
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 1.75
-   },
-   "changed_px": 51,
-   "changed_pct": 0.009
-  },
-  {
-   "a": {
-    "pendulum_height": 8.0,
-    "arm_length": 1.75
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 3.5
-   },
-   "changed_px": 25003,
-   "changed_pct": 4.329
-  },
-  {
-   "a": {
-    "pendulum_height": 8.0,
-    "arm_length": 3.5
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 1.75
-   },
-   "changed_px": 23321,
-   "changed_pct": 4.038
-  },
-  {
-   "a": {
-    "pendulum_height": 8.0,
-    "arm_length": 3.5
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 3.5
-   },
-   "changed_px": 20010,
-   "changed_pct": 3.464
-  },
-  {
-   "a": {
-    "pendulum_height": 12.8,
-    "arm_length": 1.75
-   },
-   "b": {
-    "pendulum_height": 12.8,
-    "arm_length": 3.5
-   },
-   "changed_px": 25005,
-   "changed_pct": 4.329
+   "changed_px": 20714,
+   "changed_pct": 3.586
   }
  ]
 }

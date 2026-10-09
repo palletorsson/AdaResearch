@@ -1,0 +1,115 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transformation — feedback decisions</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}.full{grid-column:1/-1}hr{border:0;border-top:1px solid #c7c0b6;margin-top:45px}article h1{font-size:1.8em}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="paired.html">Facing texts</a><a href="Trans_Body/parallel.html">Body</a><a href="FEEDBACK.md">Decisions · Markdown</a></nav></header><main><h1>Transformation — reading the two reviews</h1>
+<p>6 October 2026 · A bounded prose revision to the review drafts.</p>
+<p>The reviews support the sequence's shape: combine the operations, compare what they can do, examine each separately, let approach supply an input, then compose an opening. Keep all seven halls. Transformation remains the subject; programming makes its spatial consequences available to the learner.</p>
+<p>The reviews refer to an earlier version. Pre now uses a steady <code>pingpong</code> fraction, not sine. The final tutorial door now includes collision. The latest native run passed 204 checks, with 19 exercise variants and 12 deliberate faults rejected. The reflective drafts have already been shortened since the unchanged collection the reviewer describes.</p>
+<h2>What changed</h2>
+<table>
+<thead>
+<tr>
+<th>Hall</th>
+<th>Decision</th>
+<th>This pass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre</td>
+<td>Keep; clarify</td>
+<td>Name <code>elapsed</code> as retained between updates and <code>t</code> as recalculated. No extra state machinery.</td>
+</tr>
+<tr>
+<td>Introduction</td>
+<td>Keep; sharpen</td>
+<td>A correct end pose can leave a gap when the bank moves. State that relation immediately after the experiment.</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td>Keep; connect</td>
+<td>Recall Trace's ordered positions. <code>start</code>, <code>corner</code>, <code>finish</code> can describe a route before movement. Explain the possible array/index continuation in prose; retain the current two-branch program.</td>
+</tr>
+<tr>
+<td>Rotation</td>
+<td>Keep</td>
+<td>Pivot ownership and inherited movement are already explained. An extra sentence would repeat them.</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>Keep</td>
+<td>Preserve the doorway hierarchy, fixed witness and comparison of uniform/nonuniform scale.</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>Keep; distinguish</td>
+<td>Tutorial explicitly compares its reversible response with Trace's record and the installed lattice's lasting cut. Reflection names what remains after departure.</td>
+</tr>
+<tr>
+<td>Pit</td>
+<td>Keep</td>
+<td>Preserve the composed opening, continuing occupancy and gradual reversal from the current pose.</td>
+</tr>
+</tbody>
+</table>
+<h2>Why not add <code>visited</code> now?</h2>
+<p>The distinction is valuable, but history is already part of the student's work. <a href="http://localhost:3003/book-review/commons/maps/Point_Trace/tutorial.md">Trace</a> retains positions and saves the drawing for Grid. Pre retains elapsed time. Pit retains opening progress, so its current pose depends on the preceding approach or departure. These are different uses of state; they should not all be called historical records.</p>
+<p>Body's selected study recalculates a transform from the current distance. The installed cut gives us a strong comparison with a lasting consequence. A <code>visited</code> flag would add another behaviour to build, explain, show and reset. A one-bit visit record also cannot reconstruct the route or geometry of that cut. Keep it available as an optional future extension when remembering an encounter becomes the lesson's object.</p>
+<p>Translation likewise does not need an unused array declaration to suggest a longer route. Arrays were already introduced in Trace. The useful return here is that ordered positions could prescribe movement as well as record it. Traversing that list would need its own complete, tested continuation.</p>
+<h2>What to carry forward</h2>
+<p>The tutorial selects a relation the learner can reconstruct and vary. The reflection can meet a wider field of artifacts. Their different coverage is intentional.</p>
+<p>Use two editorial questions: <strong>what survives this transformation, and what becomes possible because of it?</strong> Keep them as a test of the writing; repeating them as headings in every hall would flatten the encounters.</p>
+<p>The reviews support architectural readiness. They do not establish human comprehension or headset comfort. A successful learner reconstruction remains separate evidence.</p>
+<h2>Verification and status</h2>
+<p>Four tutorial texts and one reflective text received prose changes. All seven lesson programs and their printed code blocks are byte-identical to the tested versions. The evidence refresh checks that equality and retains the previous native run; it does not report a new engine run. Canonical manuscripts and museum code remain unchanged, and these drafts are still awaiting author acceptance.</p>
+<p><a href="paired.html">Revised facing texts</a> · <a href="Trans_Body/parallel.html">Both tutorial and reflection at Body</a> · <a href="ALL_TUTORIALS.md">Tutorials in one file</a> · <a href="ALL_FINAL.md">Reflections in one file</a></p>
+<p><a href="feedback/tutorial-review.txt">Tutorial review supplied by the author</a> · <a href="feedback/reflection-review.txt">Reflective review supplied by the author</a> · <a href="feedback-prose-verification.json">Evidence for the prose revision</a></p><h2>Exact edits from this review</h2><details><summary>Trans_Body-final</summary><pre>--- before-feedback/Trans_Body/final.md
++++ Trans_Body/final.md
+@@ -56,4 +56,6 @@
+ 
+ Two boundaries return; one keeps the cut. Looking back finds a wall, a trench, a field of blocks. Each has answered the same approach differently.
+ 
++The slats and shrinking blocks answer where you are now. The trench keeps a change made by your earlier passage. After you leave, the next visitor can still follow the opening your body made.
++
+ In the next room, growing blocks follow a clock. Coming closer will no longer ask them to make room. You will have to find your moment.
+</pre></details><details><summary>Trans_Body-tutorial</summary><pre>--- before-feedback/Trans_Body/tutorial.md
++++ Trans_Body/tutorial.md
+@@ -66,7 +66,9 @@
+ 
+ `lerpf(1.0, minimum, closeness)` uses that input to shrink the cube from a one-metre side to a quarter-metre side. The mesh is centred on its origin. Moving its centre to half the current height keeps its bottom on the floor.
+ 
+-Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. The lattice&#x27;s retained cut elsewhere in this hall is a different operation, changing which cells exist.
++Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. At the same distance, it gives the same size whether or not you have approached before. Trace kept earlier positions after the point moved on; this study keeps no record of earlier approaches.
++
++Compare that return with the lattice&#x27;s retained cut elsewhere in this hall. Leaving does not put its missing cells back. This tutorial selects the reversible distance-to-transform relation; the lattice changes which cells remain. Both are visible in the hall.
+ 
+ ## Keep the input, change the response
+ 
+</pre></details><details><summary>Trans_Introduction-tutorial</summary><pre>--- before-feedback/Trans_Introduction/tutorial.md
++++ Trans_Introduction/tutorial.md
+@@ -81,4 +81,6 @@
+ 
+ For a held comparison, set `animate` to `false`, `pose` to `1.0` and `far_gap` to `0.5`. The far banks move half a metre farther along Z. The growing cube and turned plank keep their previous end poses. Each now leaves half a metre unbridged.
+ 
+-Return `far_gap` to zero and choose `pose = 0.5`. Predict the travelling surface&#x27;s position, the cube&#x27;s size and the plank&#x27;s angle before running it. Carry the distinction between changing an object and changing the relation it must satisfy.
++The transform still reaches its intended pose. Reaching the bank also depends on where the bank is.
++
++Return `far_gap` to zero and choose `pose = 0.5`. Predict the travelling surface&#x27;s position, the cube&#x27;s size and the plank&#x27;s angle before running it.
+</pre></details><details><summary>Trans_Pre-tutorial</summary><pre>--- before-feedback/Trans_Pre/tutorial.md
++++ Trans_Pre/tutorial.md
+@@ -73,7 +73,7 @@
+ 
+ Restore `pulse` to `0.2`. The second `lerpf` now chooses a size factor between `0.8` and `1.2`. Multiplying `Vector3.ONE` gives all three axes the same factor, so the cube keeps its proportions. Rise and pulse share the returning fraction; the turn continues at its own steady rate. The assertion keeps the period positive and prevents the pulse from collapsing the cube to zero size. The installed specimen uses a larger pulse, from 0.7 to 1.3; this study keeps the same operation with a smaller range.
+ 
+-Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift.
++Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift. `elapsed` is kept between updates; `t` is calculated afresh from that clock, and the three transform properties are assigned from those values.
+ 
+ ## Walk into it
+ 
+</pre></details><details><summary>Trans_Translation-tutorial</summary><pre>--- before-feedback/Trans_Translation/tutorial.md
++++ Trans_Translation/tutorial.md
+@@ -65,4 +65,6 @@
+ 
+ Keep `via_corner` true and change `finish` to `Vector3(2, 3, 2)`. Predict the new corner and final position. The first leg stays vertical; the second now crosses both X and Z. The body still does not turn to face its travel.
+ 
++In Trace, an ordered list kept positions after movement. Here, `start`, `corner` and `finish` name positions for a movement to follow. Put their values in that order on paper. A longer route could keep them in an array, with an index choosing the next destination. Our two branches still choose the segments here; the list would be a different way to describe the route.
++
+ The next hall makes that turn a deliberate choice, with an axis and a centre of its own.
+</pre></details></main></body></html>

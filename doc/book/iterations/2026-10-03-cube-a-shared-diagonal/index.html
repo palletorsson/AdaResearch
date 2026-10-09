@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cube — the diagonal was already there</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the lesson</a><a href="#code">Complete code</a><a href="#scope">Lineage and scope</a><a href="#checked">Checks</a><a href="../2026-10-03-polyhedra-a-face-list/index.html#reading">Previous: Polyhedra</a></nav><p>ADA / TUTORIAL PILOT / 3 OCTOBER 2026</p></header>
+<article id="reading"><h1>Cube — the diagonal was already there</h1>
+<p>A cube has six square faces. Our mesh draws them with twelve triangles. Move one corner and the difference becomes visible.</p>
+<p>Open <code>point_cube.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>, using <strong>Run Current Scene</strong> (F6). Edit <code>studies/point_cube/cube.gd</code>.</p>
+<p>Polyhedra separated positions from connections. We reuse that construction with eight specified positions, rather than selecting them from the saved trace. No recording is needed here; your earlier trace remains available.</p>
+<h2>1. Read the corners</h2>
+<p><code>positions</code> contains eight <code>Vector3</code> values. Corners <code>0</code>–<code>3</code> form the back square at Z = −0.5. Corners <code>4</code>–<code>7</code> form the front square at Z = 0.5. Each side is one metre long.</p>
+<p>The same PointHandle and Segment components draw the corners and edges. Number labels remain readable through the faces. Find <code>4</code>, <code>5</code>, <code>6</code> and <code>7</code> on the front square.</p>
+<p>The first two rows of <code>faces</code> are:</p>
+<pre><code class="language-gdscript">    [4, 5, 7], [5, 6, 7],
+</code></pre>
+<p>Both triangles use <code>5</code> and <code>7</code>. The amber line marks this shared <strong>diagonal</strong>: an edge across the square between opposite corners. The first triangle is off-white; the second is pink so we can follow it.</p>
+<h2>2. Move only corner 6</h2>
+<p>Hold corner <code>6</code> and pull it a little towards you, out of the front square's plane. Use aim and E on desktop, or near grip in VR. Leave <code>4</code>, <code>5</code> and <code>7</code> where they are.</p>
+<p>The white triangle stays fixed. The pink triangle tilts. Their shared diagonal becomes a crease.</p>
+<p>Each frame, the script copies the handle positions back into the list:</p>
+<pre><code class="language-gdscript">    for i in range(handles.size()):
+        positions[i] = handles[i].position
+</code></pre>
+<p>The face-building loop then reads those positions through the unchanged index rows. Only the second front triangle refers to <code>6</code>. Other triangles around that corner move too; follow its neighbours around the top and right side.</p>
+<p>Release the corner. It stays where you left it. Restarting the scene restores the authored positions. Holding and moving a corner has edited the mesh, not translated or rotated the whole object.</p>
+<p>For a repeatable change, set this variable to <code>0.35</code>:</p>
+<pre><code class="language-gdscript">var corner_shift := 0.0
+</code></pre>
+<p>At startup, the script applies it to corner <code>6</code>:</p>
+<pre><code class="language-gdscript">    positions[6].z += corner_shift
+</code></pre>
+<p>Run again. The same corner starts 0.35 metres farther along positive Z. Set <code>corner_shift</code> back to <code>0.0</code> to restore the cube.</p>
+<div class="pair"><figure><img src="cube.png" alt="Regular cube, with white and pink front triangles sharing an amber diagonal from 5 to 7."><figcaption>Two coplanar triangles cover one square. The guide names the shared edge.</figcaption></figure><figure><img src="creased.png" alt="The same cube with corner 6 moved forward. The pink patch tilts while the white front patch stays fixed."><figcaption>Corner 6 moves 0.35 metres. The white front triangle keeps all three of its original positions.</figcaption></figure></div><h2>3. Choose the other diagonal</h2>
+<p>First use <code>corner_shift = 0.0</code>. Replace the two front rows with:</p>
+<pre><code class="language-gdscript">    [4, 5, 6], [4, 6, 7],
+</code></pre>
+<p>Change <code>diagonal_pair</code> from <code>[5, 7]</code> to <code>[4, 6]</code> so the amber guide follows the new shared edge. Run again. Two triangles still cover the same flat square.</p>
+<p>Now set <code>corner_shift</code> to <code>0.35</code>. Both front triangles contain <code>6</code>, so both tilt. The four corner positions match the previous deformed example, but the crease follows another connection. Changing the triangulation has changed the surface between them.</p>
+<p>Restore the original rows, <code>[5, 7]</code> and <code>corner_shift = 0.0</code> when finished.</p>
+<div class="pair"><figure><img src="creased.png" alt="Deformed front face split along the 5 to 7 diagonal."><figcaption>Connection 5–7. One front triangle retains the original plane.</figcaption></figure><figure><img src="other-diagonal.png" alt="Identical corner positions split along the alternative 4 to 6 diagonal."><figcaption>Connection 4–6. The same four positions now define two tilted patches.</figcaption></figure></div><h2>What remains a cube?</h2>
+<p>Set <code>show_diagonal</code> to <code>false</code>. The guide disappears; the two triangles remain. Set <code>show_faces</code> to <code>false</code> to keep just the corner handles and twelve boundary edges. Restore both to <code>true</code>.</p>
+<p>The initial shape has six geometric square faces. The <code>faces</code> list contains twelve rendering triangles. Counting those rows does not prove that the edited result still has equal edges, right angles or flat squares.</p>
+<p>The colours and amber guide are supplied display aids. Both sides of each triangle are visible. This study gives the surface no thickness or collider; the handles have pickup colliders. The museum adds replay, folding nets and the prefab collection as separate encounters.</p>
+<p>We have used a position list, a connection list and a loop to construct a familiar body. In the next hall, we can ask how a short rule might generate some of that data for us.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></p><p class="small">Open point_cube.tscn with Run Current Scene. All lesson geometry is constructed in code. This study starts from the authored eight-position cube; no saved gesture is required.</p></article>
+<details id="code"><summary>cube.gd · the complete lesson</summary><div><p>The position and connection lists continue the preceding lesson. Each triangle gets its own ImmediateMesh surface so the second front patch can use a distinct supplied material. The position-copy and nested face-submission loops remain inspectable. Labels and the diagonal are display aids.</p><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const Segment = preload(&quot;res://prepared/segment.gd&quot;)
+const FaceMaterial = preload(&quot;res://prepared/triangle_face.tres&quot;)
+const FoldMaterial = preload(&quot;res://prepared/cube_fold.tres&quot;)
+const EdgeMaterial = preload(&quot;res://prepared/triangle_edge.tres&quot;)
+const DiagonalMaterial = preload(&quot;res://prepared/cube_diagonal.tres&quot;)
+
+var positions: Array[Vector3] = [
+    Vector3(-0.5, 0.8, -0.5), # 0
+    Vector3(0.5, 0.8, -0.5),  # 1
+    Vector3(0.5, 1.8, -0.5),  # 2
+    Vector3(-0.5, 1.8, -0.5), # 3
+    Vector3(-0.5, 0.8, 0.5),  # 4
+    Vector3(0.5, 0.8, 0.5),   # 5
+    Vector3(0.5, 1.8, 0.5),   # 6
+    Vector3(-0.5, 1.8, 0.5),  # 7
+]
+
+var faces := [
+    [4, 5, 7], [5, 6, 7],
+    [0, 1, 4], [1, 5, 4],
+    [2, 3, 6], [3, 7, 6],
+    [1, 0, 2], [0, 3, 2],
+    [0, 4, 3], [4, 7, 3],
+    [5, 1, 6], [1, 2, 6],
+]
+
+var edges := [
+    [0, 1], [1, 2], [2, 3], [3, 0],
+    [4, 5], [5, 6], [6, 7], [7, 4],
+    [0, 4], [1, 5], [2, 6], [3, 7],
+]
+
+var diagonal_pair := [5, 7]
+var corner_shift := 0.0
+var show_diagonal := true
+var show_faces := true
+var handles: Array[PointHandle] = []
+var segments: Array[Segment] = []
+var face_mesh := ImmediateMesh.new()
+var surface := MeshInstance3D.new()
+var diagonal := Segment.new()
+var readout := Label3D.new()
+
+func _ready():
+    positions[6].z += corner_shift
+    surface.mesh = face_mesh
+    add_child(surface)
+    diagonal.material_override = DiagonalMaterial
+    add_child(diagonal)
+    readout.position = Vector3(0.0, 2.65, -0.6)
+    readout.font_size = 24
+    readout.text = &quot;8 corners / 12 boundary edges / 12 triangles&quot;
+    add_child(readout)
+    for i in range(positions.size()):
+        var handle := PointHandle.new()
+        handle.position = positions[i]
+        add_child(handle)
+        handles.append(handle)
+        var label := Label3D.new()
+        label.text = str(i)
+        label.position.y = 0.14
+        label.font_size = 22
+        label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+        label.no_depth_test = true
+        handle.add_child(label)
+    for edge in edges:
+        var segment := Segment.new()
+        segment.material_override = EdgeMaterial
+        add_child(segment)
+        segments.append(segment)
+
+func _process(_delta):
+    for i in range(handles.size()):
+        positions[i] = handles[i].position
+    for i in range(edges.size()):
+        var edge = edges[i]
+        segments[i].show_between(positions[edge[0]], positions[edge[1]])
+    diagonal.show_between(positions[diagonal_pair[0]], positions[diagonal_pair[1]])
+    diagonal.visible = show_diagonal and diagonal.visible
+    face_mesh.clear_surfaces()
+    if show_faces:
+        for i in range(faces.size()):
+            var triangle = faces[i]
+            var material := FaceMaterial
+            if i == 1:
+                material = FoldMaterial
+            face_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES, material)
+            for index in triangle:
+                face_mesh.surface_add_vertex(positions[index])
+            face_mesh.surface_end()
+</code></pre><p><a href="cube.gd" download>Regular cube script</a> · <a href="cube-shifted.gd" download>Corner 6 shifted</a> · <a href="cube-other-diagonal.gd" download>Same shift, other diagonal</a> · <a href="tutorial.md">Tutorial source</a> · <a href="tutorial.diff">Text diff</a></p></div></details>
+<details id="scope"><summary>From a face list to an exposed decision</summary><div><p>Polyhedra established positions and connections as separate data. Cube needs no new mesh factory: eight explicit positions, twelve boundary edges and twelve triangle rows reuse that construction. The new encounter is the diagonal concealed in a familiar square face.</p><p>Trace remains the source for the earlier gesture studies. Here we deliberately choose the arrangement of a regular cube and reuse the code, without claiming the cube was recovered from that gesture. Temporary handle edits are not saved.</p><p>The museum's assembly timing, replay, folding net and prefab collection remain in the <a href="../../../../commons/maps/Point_Animatedcube/tutorial-museum.md">museum return</a>. The critical chapter and live room are unchanged. A later lesson can generate position data by a short rule; the existing general GPU index and normal topics remain deferred.</p><p>Coordinates retains its earlier place and still needs its shared-starter writing pass. <a href="lesson-contract.json">Teaching contract</a> · <a href="DECISIONS.md">Decisions</a></p></div></details>
+<details id="checked"><summary>29 native checks passed</summary><div><p>Checked in a freshly extracted Godot 4.6 starter: unit cube edges, closed triangle connectivity, initial shared plane, fixed and moving front patches, alternate diagonal with unchanged coordinates, printed script edits on a bare Node3D, repeatable startup shift, independent visibility controls, no surface collision, desktop mouse and synthetic XR pickup/movement/release, restoration and bounded drawing nodes.</p><p>Five printed excerpts match the default or tested edited script. Images are native student-room renders from a fixed elevated desktop camera. Physical headset use and beginner comprehension remain untested.</p><p><a href="verification.json">Results</a> · <a href="verify.gd">Reproducible harness</a> · <a href="wire.png">Wire comparison</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

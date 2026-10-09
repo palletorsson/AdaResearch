@@ -1,0 +1,156 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "line gallery loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-aligned",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-side-step",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-lower-eye",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-quarter-thickness",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-replay",
+      "passed": true
+    },
+    {
+      "name": "line restored after thickness intervention",
+      "passed": true
+    },
+    {
+      "name": "aligned endpoints project within one pixel",
+      "passed": true
+    },
+    {
+      "name": "side step separates image",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "cameras": [
+      {
+        "eye": [
+          9.5,
+          1.64999997615814,
+          10.5
+        ],
+        "fov": 68.0,
+        "id": "line-aligned",
+        "target": [
+          3.39999961853027,
+          4.57499980926514,
+          23.0
+        ]
+      },
+      {
+        "eye": [
+          10.1499996185303,
+          1.64999997615814,
+          10.5
+        ],
+        "fov": 68.0,
+        "id": "line-side-step",
+        "target": [
+          3.39999961853027,
+          4.57499980926514,
+          23.0
+        ]
+      },
+      {
+        "eye": [
+          9.5,
+          1.29999995231628,
+          10.5
+        ],
+        "fov": 68.0,
+        "id": "line-lower-eye",
+        "target": [
+          3.39999961853027,
+          4.57499980926514,
+          23.0
+        ]
+      },
+      {
+        "eye": [
+          10.1499996185303,
+          1.64999997615814,
+          10.5
+        ],
+        "fov": 68.0,
+        "id": "line-quarter-thickness",
+        "target": [
+          3.39999961853027,
+          4.57499980926514,
+          23.0
+        ]
+      },
+      {
+        "eye": [
+          9.5,
+          1.64999997615814,
+          10.5
+        ],
+        "fov": 68.0,
+        "id": "line-replay",
+        "target": [
+          3.39999961853027,
+          4.57499980926514,
+          23.0
+        ]
+      }
+    ],
+    "engine": {
+      "build": "official",
+      "hash": "89cea143987d564363e15d207438530651d943ac",
+      "hex": 263680,
+      "major": 4,
+      "minor": 6,
+      "patch": 0,
+      "status": "stable",
+      "string": "4.6-stable (official)",
+      "timestamp": 0
+    },
+    "line_trials": [
+      {
+        "endpoint_separation_pixels": [
+          0.00032440631184727,
+          0.00006103515625
+        ],
+        "id": "line-aligned"
+      },
+      {
+        "endpoint_separation_pixels": [
+          82.5562438964844,
+          37.8862533569336
+        ],
+        "id": "line-side-step"
+      },
+      {
+        "endpoint_separation_pixels": [
+          94.6632308959961,
+          21.0469760894775
+        ],
+        "id": "line-lower-eye"
+      }
+    ],
+    "scope": "Camera interventions in native hall; no claim about headset perception or reach. Geometry restored before exit."
+  },
+  "passed": true,
+  "room": "Point_Lines"
+}

@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "restored origin remains at world zero",
+      "passed": true
+    },
+    {
+      "name": "Point One loaded in continuous museum",
+      "passed": true
+    },
+    {
+      "name": "corridor door is present",
+      "passed": true
+    },
+    {
+      "name": "door spans four-metre corridor",
+      "passed": true
+    },
+    {
+      "name": "door does not permanently seal route-planner cells",
+      "passed": true
+    },
+    {
+      "name": "door floor is flush",
+      "passed": true
+    },
+    {
+      "name": "all five point stations remain",
+      "passed": true
+    },
+    {
+      "name": "door initially closed before approach",
+      "passed": true
+    },
+    {
+      "name": "closed leaf blocks actual passage",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: closed",
+      "passed": true
+    },
+    {
+      "name": "approach opens door gradually",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: opening",
+      "passed": true
+    },
+    {
+      "name": "door fully retracts",
+      "passed": true
+    },
+    {
+      "name": "open passage clears the moving colliders",
+      "passed": true
+    },
+    {
+      "name": "actual walker can enter point corridor",
+      "passed": true
+    },
+    {
+      "name": "first station approach is supported",
+      "passed": true
+    },
+    {
+      "name": "actual walker can return through door",
+      "passed": true
+    },
+    {
+      "name": "door stays open after departure",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: open",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "door_world": [
+      8.0,
+      0.0,
+      22.0
+    ],
+    "hall_world": [
+      0.0,
+      0.0,
+      18.0
+    ]
+  },
+  "passed": true,
+  "scope": "Continuous native museum from Point Zero into Point One, current-camera approach, leaf collision and real desktop walker. Headset not tested."
+}

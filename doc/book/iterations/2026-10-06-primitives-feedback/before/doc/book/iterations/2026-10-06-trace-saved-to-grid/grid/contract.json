@@ -1,0 +1,396 @@
+{
+  "incoming": {
+    "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+  },
+  "operations": [
+    {
+      "id": "receive-the-saved-sculpture",
+      "kind": "replace",
+      "before": "extends Node3D\n\nconst CENTRE := Vector3(0, 1.12, 0)\nconst MIN_SEGMENT_DISTANCE := 0.05\n\nconst PointBody = preload(\"point_body.gd\")\n\nconst LineSkin = preload(\"line_skin.gd\")\nconst TraceArchive = preload(\"trace_archive.gd\")\n\nvar point: XRToolsPickable\nvar readout: Label3D\nvar positions: Array[Vector3] = []\nvar trail: Node3D\n\nfunc _ready() -> void:\n    point = PointBody.new()\n    point.position = CENTRE\n    add_child(point)\n\n    readout = Label3D.new()\n    readout.position = Vector3(0, 1.6, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.005\n    add_child(readout)\n\n    trail = Node3D.new()\n    add_child(trail)\n    positions.append(point.position)\n    point.dropped.connect(_save_trace)\n\nfunc _process(_delta: float) -> void:\n    var world_position := point.global_position\n    var local_position := to_local(world_position)\n    readout.text = \"LOCAL \" + str(local_position) + \"\\nWORLD \" + str(world_position)\n\n    var last := positions[positions.size() - 1]\n    if (local_position - last).length() >= MIN_SEGMENT_DISTANCE:\n        positions.append(local_position)\n\n        for segment in trail.get_children():\n            segment.queue_free()\n\n        for i in range(1, positions.size()):\n            var a := positions[i - 1]\n            var displacement := positions[i] - a\n            var segment := LineSkin.new()\n            trail.add_child(segment)\n            segment.show_segment(a, displacement, displacement.length())\n\n    readout.text += \"\\nPOINTS \" + str(positions.size())\n\nfunc _save_trace(_point: Node3D) -> void:\n    await get_tree().process_frame\n    if positions.size() < 2:\n        return\n    var error := TraceArchive.save_drawing(trail, positions)\n    if error != OK:\n        push_error(\"Could not save this trace: \" + error_string(error))\n",
+      "after": "extends Node3D\n\nconst TraceArchive = preload(\"trace_archive.gd\")\nconst LineSkin = preload(\"line_skin.gd\")\n\nvar sculpture: Node3D\nvar grid_copy: Node3D\nvar positions := PackedVector3Array()\nvar addresses: Array[Vector3i] = []\nvar grid_step := 0.25\nvar readout: Label3D\n\nfunc _ready() -> void:\n    readout = Label3D.new()\n    readout.position = Vector3(0, 2.0, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.003\n    add_child(readout)\n\n    sculpture = TraceArchive.load_drawing()\n    if sculpture == null:\n        readout.text = \"Draw in Trace, then release the point to save.\"\n        return\n    add_child(sculpture)\n    positions = sculpture.get_meta(\"positions\").duplicate()\n\n    grid_copy = sculpture.duplicate() as Node3D\n    add_child(grid_copy)\n    for i in grid_copy.get_child_count():\n        var segment := grid_copy.get_child(i)\n        var original := sculpture.get_child(i)\n        segment.set_script(LineSkin)\n        segment.mesh = original.mesh.duplicate()\n        segment.material_override = original.material_override.duplicate()\n        segment.material_override.albedo_color = Color(0.25, 0.85, 0.60)\n    _place_on_grid()\n\nfunc _process(_delta: float) -> void:\n    if grid_copy != null and Input.is_action_just_pressed(\"ui_accept\"):\n        grid_step = 0.50 if grid_step == 0.25 else 0.25\n        _place_on_grid()\n\nfunc _place_on_grid() -> void:\n    addresses.clear()\n    for p in positions:\n        addresses.append(Vector3i(\n            roundi(p.x / grid_step),\n            roundi(p.y / grid_step),\n            roundi(p.z / grid_step)\n        ))\n    for i in range(1, addresses.size()):\n        var a := Vector3(addresses[i - 1]) * grid_step\n        var b := Vector3(addresses[i]) * grid_step\n        var displacement := b - a\n        grid_copy.get_child(i - 1).show_segment(a, displacement, displacement.length())\n    readout.text = \"YOUR SAVED TRACE\\nPOINTS \" + str(positions.size())\n    readout.text += \"\\nGRID \" + str(grid_step) + \" m\"\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4"
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/tutorial.md",
+      "sha256": "d074ea85500993b9d09a6c7d41873dfb355b603e083a58763d5fa05bb2261b8d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json",
+      "sha256": "f0d0bce8ede3643b727dac8d807aac8fe1875059c2d9817709a010f0d28ad9b7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/build.py",
+      "sha256": "6e524d01208aa2d993fd8607c1cc890665e519e383c3e016c5e1237aeacac8b3"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_checks.py",
+      "sha256": "43806b65b1b1fabaa33f5b141778173480d08674b80b7de59b993938af46e1fa"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_handoff.gd",
+      "sha256": "a41430040411ec98dced8541db82ec8ebb353f89ece3e6cc2c2261715a0e77a7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_trace.gd",
+      "sha256": "23783a0eb355decae792270c899c727d49309bc24b557ceb6ec0d544447249ff"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/assembled.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/expected.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/flat_y.gd",
+      "sha256": "f25e01338eb457bc2f8c941cc8a746f16a9548bb75b94866af28fe6db186a80e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/grid.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/incoming.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/operations.json",
+      "sha256": "27df50fe9f2504ae185b11fa8448e5b7ad45a1d27f6e1fdf8cae4e01f3e2951c"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/tutorial.md",
+      "sha256": "d074ea85500993b9d09a6c7d41873dfb355b603e083a58763d5fa05bb2261b8d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/operations.json",
+      "sha256": "9b6499c90d5d019b0413d57561672c61914c5709e5002aad871b9d073fd4bd64"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/tutorial.md",
+      "sha256": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/omit_last_pair.gd",
+      "sha256": "c0c1145c549883454c8443bc307ef51051f5271cb09318099918d2d8ce5b5ae6"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/threshold_020.gd",
+      "sha256": "483014df062bea610dde83c7ae67b603bcb7b2e104a3ba2a8d51b4c2a0a026e8"
+    }
+  ],
+  "checks": [
+    {
+      "id": "produce/save/target",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/grab",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/record",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/release",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/valid",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/local_data",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/same_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/snapshot",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/minimum",
+      "kind": "native"
+    },
+    {
+      "id": "consume/load/existing",
+      "kind": "native"
+    },
+    {
+      "id": "consume/load/record",
+      "kind": "native"
+    },
+    {
+      "id": "consume/load/no_new_point",
+      "kind": "native"
+    },
+    {
+      "id": "consume/load/segments",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/4/source",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/4/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/4/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/4/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/4/file",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/9/source",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/9/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/9/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/9/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/9/file",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/14/source",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/14/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/14/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/14/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "consume/pitch/14/file",
+      "kind": "native"
+    },
+    {
+      "id": "consume/input/pitch",
+      "kind": "native"
+    },
+    {
+      "id": "consume/load/again",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/load/existing",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/load/record",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/load/no_new_point",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/load/segments",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/4/source",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/4/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/4/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/4/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/4/file",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/9/source",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/9/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/9/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/9/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/9/file",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/14/source",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/14/sculpture",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/14/ownership",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/14/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/pitch/14/file",
+      "kind": "native"
+    },
+    {
+      "id": "flat_y/load/again",
+      "kind": "native"
+    },
+    {
+      "id": "empty/empty/no_invention",
+      "kind": "native"
+    },
+    {
+      "id": "empty/empty/direction",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Trace/tutorial.md",
+    "commons/maps/Point_Line_Grid/tutorial.md",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/build.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_handoff.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/flat_y.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/grid.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/operations.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/tutorial.md",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/operations.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/tutorial.md",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/omit_last_pair.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/threshold_020.gd"
+  ]
+}

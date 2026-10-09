@@ -1,0 +1,130 @@
+--- Color_Context_Placed/storyboard/before
++++ Color_Context_Placed/storyboard/after
+@@ -1 +1 @@
+-Among the fixed columns, the same five forms receive different colour assignments. The student brings primitive construction, transforms and indexed repetition, then makes a short stack and gives its parts colours from a palette list. Keeping geometry fixed, they compare colour by list position with colour by a supplied shape category. Materials and their returned references are supplied at first; the learner owns the selection rule. They compose one grouping that crosses physical neighbours, then inspect the richer stacks and cone landscape. The reusable outcome is a palette assignment separated from placement.
++The first columns keep the same five forms while their colour assignments change. Bringing primitives, transforms and array lookup, the student selects colours for a small supplied part list while keeping its geometry fixed. Begin with list position; supplied numeric shape categories offer a second grouping once that assignment is clear. Each part has an explained material reference, so choosing a palette entry and assigning it are visible operations. The student regroups two separated parts by colour without moving either. They carry a palette and a selection rule independent of placement. The larger stacks, historical associations and cone landscape remain available for looking and composition without becoming additional required builds.
+--- Color_Context_Placed/storyboard_short/before
++++ Color_Context_Placed/storyboard_short/after
+@@ -1 +1 @@
+-Use fixed columns, richer stacks and cone landscape. Reuse primitives, transforms and indexed repetition. Assign a small stack colours from a palette; compare list-position and shape-category selection with geometry fixed. Compose a grouping across neighbours. Supply materials with retained references and categories. Carry placement-independent palette assignment. Open: explicit category list or named records; dictionaries are not established.
++Use fixed-geometry columns. Reuse primitives/transforms/lookup. Teach palette selection separately from material assignment and placement. Supply part/material references; numeric categories optional after index selection. Check: regroup separated parts without moving them. Carry palette + selection rule. Rich stacks remain encounters. Open: reduced host binding; no dictionary lesson assumed.
+--- Color_Context_Placed/review_note/before
++++ Color_Context_Placed/review_note/after
+@@ -1 +1 @@
+-Choose whether shape categories use a small explicit list or named part records; do not assume dictionaries have already been taught.
++Use a small explicit part/category list before requiring dictionaries. The museum’s richer stack records remain supplied; choose the reduced editing entry before writing a full lesson.
+--- Color_Flashlight/storyboard/before
++++ Color_Flashlight/storyboard/after
+@@ -1 +1 @@
+-The student separates coloured light pools on the pale board, then carries a lamp around the faceted sphere. Bringing material colour and transformed objects, they create one light with a retained reference in a supplied small receiving room, choose its colour and aim it at unchanged surfaces. The museum's grab system and room geometry are supplied. Comparing this with a fixed lamp whose colour varies over time shows two different inputs to appearance. The learner leaves able to distinguish assigning a surface colour from illuminating that surface, without claiming a spectral optics simulation.
++The student moves a coloured lamp across the pale board and faceted sphere, then follows the source edit already offered by this hall. They bring material colour and transforms and keep a direct reference to one existing supplied light. Change its colour while leaving the receiving surface alone; then keep the colour and change the lamp’s direction. Predict which condition changed before comparing the result. The fixed lamp in the side room offers a later return to time-varying colour. Grabbing, room geometry and the renderer remain supplied. The student carries a controllable light and the distinction between a value assigned to a material and light reaching it; no new room or lamp assembly is required.
+--- Color_Flashlight/storyboard_short/before
++++ Color_Flashlight/storyboard_short/after
+@@ -1 +1 @@
+-Use coloured pools on the board and the lamp around the faceted sphere. Reuse material colour and transforms. Create one named light with a retained reference; aim it at unchanged surfaces and compare time-varying colour. Supply receiving room and grabbing. Carry the distinction between surface colour and illumination. Defer lighting equations; do not claim spectral optics.
++Use existing lamp/board/faceted sphere. Reuse colour assignment and transforms. Follow current bounded light-colour edit; retain named light reference. Vary colour with receiver fixed, then aim with colour fixed. Supply grabbing/room/renderer. Carry illumination versus albedo distinction. Timed lamp optional. No new room; no spectral-optics claim.
+--- Color_Flashlight/review_note/before
++++ Color_Flashlight/review_note/after
+@@ -1 +1 @@
+-Keep lighting construction to one named light; normals can be identified on existing faces without requiring lighting equations yet.
++The existing tutorial already provides a small light-colour edit. Retain that entry; do not replace it with a new host or require lighting equations.
+--- Color_Nails/storyboard/before
++++ Color_Nails/storyboard/after
+@@ -1 +1 @@
+-At the salon, one movable point recolours nails on the giant and petite hands. Reusing the held point and bounded input mapping, the student converts the point's local coordinates into three zero-to-one channel values and constructs an RGB colour. The hand meshes, grab connection and material receivers are supplied; the student passes the resulting value to a clearly named receiver. They keep nail colour fixed while choosing the surrounding skin colour. The useful result is a position-to-colour function whose output can dress different surfaces without changing their shape or size.
++The held point recolours nails on the giant and petite hands and, in the standard VR setup, the choosing hand. Reuse a position in a named local frame and bounded mapping. The student writes one function taking that local position and positive box dimensions, clamping each component to the box and dividing by its dimension: X becomes red, Y green, Z blue. It returns a Color; one named preview material receives it through albedo_color. The grab connection, hand meshes and application signals are supplied. Predict the colour at a different point and revisit it, then keep nail colour fixed while changing rendered skin. Carry the function and a recorded colour. Preserve the critical distinction between these equally easy assignments and their unequal lived meanings.
+--- Color_Nails/storyboard_short/before
++++ Color_Nails/storyboard_short/after
+@@ -1 +1 @@
+-Use the held point recolouring giant and petite hands. Reuse grabbing and bounded mapping. Teach local coordinates mapped to three zero-to-one RGB channels, passed to one explained receiver. Supply hand meshes, grab connection and material receivers. Hold nail colour fixed while changing surrounding skin. Carry a position-to-colour function. Open: direct receiver connection; defer the whole GameManager route.
++Use RGB point and salon hands. Reuse local position/bounded mapping. Teach positive box sizes; clamp/divide X→R, Y→G, Z→B; return Color → named preview albedo. Supply grabbing/hands/signals. Predict another point, revisit it; keep nails fixed while changing skin. Carry function + recorded colour. Preserve Lorde/embodied difference. Open: reduced preview binding; no automatic Rainbow transfer.
+--- Color_Nails/review_note/before
++++ Color_Nails/review_note/after
+@@ -1 +1 @@
+-Choose a direct, explained receiver connection; the whole GameManager signal route need not become this lesson.
++The current companion offers observation/source tracing, not this complete authored function. Bind the reduced function to one named preview before expanding the lesson. GameManager already retains hand/nail choices, but that does not feed Rainbow or Grid automatically. Preserve the main text’s Lorde passage.
+--- Color_Rainbow/mode/before
++++ Color_Rainbow/mode/after
+@@ -1 +1 @@
+-make
++deepen
+--- Color_Rainbow/storyboard/before
++++ Color_Rainbow/storyboard/after
+@@ -1 +1 @@
+-RE-DIVIDE changes the rainbow's bands while the opening and path remain. The student brings palette lists and generated geometry, then uses a supplied curved-strip builder to divide one fixed total width among the entries of their own palette. The builder takes inner radius, width and colour and returns the strip reference; confetti and route geometry remain supplied. Comparing two, six and many bands separates changing the partition from changing the whole span. HSV sampling may be supplied here before its mapping is taught at the pillars. A palette-sized partition generator travels onward.
++RE-DIVIDE changes the bands while the opening and celebration remain available. Bring the palette list and a colour recorded at Nails; there is no automatic transfer. An optional making step substitutes that value in a hand-picked palette, then compares different nonempty palette lengths with the same total band width. The curved-strip builder is supplied with radius, width and colour inputs and a returned strip reference; the learner can inspect the fixed-width division without rebuilding the arch. Predict which boundaries move while the opening stays. The forty-eight-band version introduces the difference between many samples and continuity. Carry palette choice and partitioning onward. Staying, looking and celebrating can complete this hall without another coding assignment.
+--- Color_Rainbow/storyboard_short/before
++++ Color_Rainbow/storyboard_short/after
+@@ -1 +1 @@
+-Use RE-DIVIDE while opening/path remain fixed. Reuse palettes and generated geometry. Divide a fixed total width by palette count; compare two, six and many bands. Supply curved-strip builder with radius/width/colour inputs and returned reference, confetti and route. Carry a partition generator. Open: hand-picked palette or supplied HSV sampler; teach HSV mapping later, not atmospheric optics here.
++Use RE-DIVIDE; celebration stays unconditional. Reuse palette; manually record/reuse Nails colour. Optional: replace palette entry, compare nonempty lengths at fixed total width. Supply curved-strip builder and route. Predict seams versus opening. Carry palette/partition distinction. Many bands remain discrete; HSV sampler optional before Pillar. No automatic transfer or optics claim.
+--- Color_Rainbow/review_note/before
++++ Color_Rainbow/review_note/after
+@@ -1 +1 @@
+-Do not teach atmospheric rainbow optics through these RGB strips; select whether the student first uses a hand-picked palette or the supplied sampler.
++Keep making optional. The installed options are six, seven, forty-eight and two bands. A hand-picked palette avoids making HSV a prerequisite here. Celebration does not require completing a task.
+--- Color_Pillar/storyboard/before
++++ Color_Pillar/storyboard/after
+@@ -1 +1 @@
+-Between the pillars, the held sampling card changes colour with position while a wall swatch keeps its colour when carried. The student brings RGB selection and bounded coordinates, then writes a function mapping field position to hue, saturation and value and converts that result to a colour. The card, readouts and hand-to-field height conversion are supplied and stated. Testing the function at several addresses, including between pillars, separates a continuous rule from its visible samples. The learner carries a colour field that can be sampled wherever another construction needs a value.
++A moving card samples the field between the pillars; leaving it in place keeps its latest sample. Bring Nails’ position-to-colour function and change the rule explicitly: X now chooses hue, Z saturation and represented Y value, converted with Color.from_hsv. The supplied height adapter maps the card’s local 0.65–1.85 metre range into the field’s 0.46–4.60 metre height; it is not the same position passed unchanged. Predict a sample between columns, then vary height while keeping the other coordinates. At value zero, different addresses yield the same black. Carry the field function and one recorded result toward Grid. The matching ceiling and named swatches remain encounters with appearance, classification and the gaps between visible samples.
+--- Color_Pillar/storyboard_short/before
++++ Color_Pillar/storyboard_short/after
+@@ -1 +1 @@
+-Use the position-sensitive card and carried constant swatch. Reuse RGB and bounded coordinates. Teach position-to-HSV and HSV-to-colour conversion using the room's actual conventions. Supply card, readouts and explicit hand-height conversion. Sample several addresses, including between pillars, to distinguish continuous rule from displayed samples. Carry a reusable colour field; equal HSV distances need not mean equal perceived differences.
++Use moving sampler and constant swatch. Reuse Nails function pattern, change convention: field X→H, Z→S, Y→V; convert HSV→Color. Supply explicit hand-height adapter (.65–1.85 → .46–4.60 m), card/readouts. Predict between columns; vary V alone. Movement resamples; stationary card keeps latest. Carry function + recorded result. Black has many source addresses; HSV is not perceptually uniform. No automatic Grid handoff.
+--- Color_Pillar/review_note/before
++++ Color_Pillar/review_note/after
+@@ -1 +1 @@
+-Use the room's actual hue, saturation and value conventions; equal HSV distance must not be presented as equal perceived difference.
++The sampler checks position each frame, not whether it is held. A released stationary card keeps the last sample because its position stops changing. Use actual ranges from hsv_at; value is not perceived lightness. A recorded result or copied function can connect Grid, but the installed exhibits have no such transfer.
+--- Color_Grid_Pallet/title/before
++++ Color_Grid_Pallet/title/after
+@@ -1 +1 @@
+-Let one address keep an exception
++Let one address keep a colour
+--- Color_Grid_Pallet/storyboard/before
++++ Color_Grid_Pallet/storyboard/after
+@@ -1 +1 @@
+-The student changes one floor square, leaves its address and returns before RULE overwrites it. With arrays and palette mapping available, they make a small colour grid that distinguishes selecting a cell from writing its value. A supplied mapping connects each logical address to its material receiver; the student keeps direct references within the teaching grid. They then choose whether a whole-grid rule should replace every entry or skip a marked exception. The exercise yields a stored colour arrangement with an explicit rewrite policy, while the existing floor continues to provide physical support.
++The outline leaves an edited square and returns to find its colour. Bring array addressing and a recorded result from Nails or Pillar. In the proposed reduced study, write that colour to one chosen address through an explained address-to-instance receiver; selecting another address must not write to either. The installed console instead cycles four inks, so using the learner’s own value is a proposed binding. Revisit the address, then apply the whole-grid rule and predict the replacement. Carry stored assignment separately from live field evaluation. Preserving one exception is an optional later policy, not current behaviour. The wider reach of RULE, the twenty-five selectable sites and the unbroken floor retain their critical force.
+--- Color_Grid_Pallet/storyboard_short/before
++++ Color_Grid_Pallet/storyboard_short/after
+@@ -1 +1 @@
+-Use the floor cell that RULE overwrites. Reuse arrays and palette mapping. Teach selection versus writing in a small grid with direct material references. Supply selection interface and address-to-receiver mapping. Choose all-cell replacement or a marked exception. Carry an explicit rewrite policy. Keep exception preservation a proposed extension: current RULE overwrites and supplies no history; floor support remains.
++Use edited floor square. Reuse address/lookup and recorded Nails/Pillar Color. Propose write through named address→instance receiver; selection only reads. Check leave/return, then predict RULE overwrite. Current COLOUR cycles four inks; custom input needs binding. Carry stored assignment versus live evaluation. Optional protected exception; no history/current protection. Keep 25-site control versus wider rule and unchanged support.
+--- Color_Grid_Pallet/review_note/before
++++ Color_Grid_Pallet/review_note/after
+@@ -1 +1 @@
+-Preserving an exception is a proposed student extension; the current museum RULE overwrites it and provides no edit history.
++Vector2i.y denotes room Z here. The actual colour is a MultiMesh instance value, not one separate material per cell. Current COLOUR cycles INKS; custom function input is proposed. RULE overwrites mapped floor colours; protected exceptions/history are not implemented.
+--- Color_Paint/storyboard/before
++++ Color_Paint/storyboard/after
+@@ -1 +1 @@
+-An automatic spray can is already painting when the student adds a mark by hand. Reusing time, sine and coordinate mapping, they write a small two-coordinate path for a second teaching brush and send its position, colour and deposit amount to a supplied canvas interface. That interface provides the evolving image, nozzle hit mapping and spray rendering; none is hidden inside the learner's path function. They compare a quick pass with repeated deposits at one address. The result is a reusable drawing rule and a clear distinction between a stored trace and an image that accumulates marks.
++The automatic can is painting before the student takes a manual one. Bring elapsed time, sine and the distinction between an address and the value kept there. Read the existing two-coordinate automatic path, then change one rate or amplitude while keeping the other coordinate unchanged. Predict whether the path becomes narrower or turns at another pace. The supplied host converts surface coordinates into a hit and sends deposits to the same draw_spray operation used by the manual cans. Compare a quick pass with staying in one place. Carry the path rule and the distinction between replacing a grid entry and contributing to an image that spreads and fades. The shader and spray apparatus remain supplied; no second brush is required.
+--- Color_Paint/storyboard_short/before
++++ Color_Paint/storyboard_short/after
+@@ -1 +1 @@
+-Use automatic spray and manual marks. Reuse time, sine and coordinate mapping. Write a second brush's two-coordinate surface path; send position, colour and deposit amount to a supplied canvas. Compare quick passes with repeated deposits. Supply persistent image, hit mapping and spray rendering. Carry a drawing rule distinct from retained traces. Open: canvas interface and whether manual/automatic strokes share it; defer spray shader.
++Use existing automatic path/manual cans. Reuse time/sine/address distinctions. Edit one UV rate or amplitude; predict path width or pace with other coordinate fixed. Supply UV→hit mapping and shared draw_spray surface. Compare quick versus repeated deposits. Carry path rule and evolving-image distinction, not recoverable gesture history. No second brush; defer spray/feedback shader. Albers remains an encounter.
+--- Color_Paint/review_note/before
++++ Color_Paint/review_note/after
+@@ -1 +1 @@
+-Agree the teaching canvas interface and whether automatic and manual strokes share it; a full spray shader belongs later.
++Both automatic and manual callers already reach draw_spray. Keep that shared operation rather than proposing another brush system. Its retained image spreads and fades; it is not permanent storage or a lossless list of strokes. UVs are introduced as two bounded surface coordinates; shader implementation comes later.
+--- Color_Walls/storyboard/before
++++ Color_Walls/storyboard/after
+@@ -1 +1 @@
+-The student follows a chair through overlapping panes, then switches the same partitions between filter and opaque appearances. Bringing created surfaces, material colour and arrangement, they compose two small panes around a fixed object and set alpha as an additional material channel. The renderer's transparency mode, backing light and collision setup are supplied. Walking around the arrangement separates changed visibility from changed passage; the RGB and HSV gradient bench offers a second comparison of paths between values. The reusable outcome is a coloured spatial composition whose view and physical boundaries are described separately.
++Walk the same route between panes in FILTER and OPAQUE modes: a chair disappears while the gaps stay. Bring colour assignment, surface geometry and transformed arrangements. Use the companion’s existing pane or palette edit to change one condition, keeping the other fixed. Alpha controls the contribution of the view behind a supplied transparent surface; the transparency mode, backing light and collision remain explicit support. Predict what can change in the view without changing passage, then walk around it. The RGB/HSV models and interpolation bench offer optional returns to coordinate choices. Carry palette separately from arrangement into Pattern_Disco. The office and assembly’s questions of privacy and who may rearrange a room need no further coding exercise.
+--- Color_Walls/storyboard_short/before
++++ Color_Walls/storyboard_short/after
+@@ -1 +1 @@
+-Use the chair behind switchable panes. Reuse surfaces, colour and arrangement; compose two panes around a fixed object. Teach alpha as another channel. Supply transparency mode, backing light and collision. Walk around to compare visibility with passage. Carry a composition distinguishing view from physical boundaries. Open: retain RGB/HSV interpolation as an optional return if the lesson is already full.
++Use switchable panes and existing companion edit. Reuse materials/transforms/palette. Vary one pane angle or palette while other condition stays. Explain alpha; supply transparency/light/collision. Predict view versus passage. Carry palette separate from arrangement into Pattern_Disco. RGB/HSV models/interpolation optional; preserve privacy/authority questions. No new composition required. Open: companion spacing prose/code mismatch.
+--- Color_Walls/review_note/before
++++ Color_Walls/review_note/after
+@@ -1 +1 @@
+-Keep RGB/HSV interpolation as an optional return here if alpha and spatial composition already fill the lesson.
++Preserve existing bounded edits and keep interpolation optional. Companion prose says try 0.18 while its spacing example uses 0.21; reconcile at the full-lesson pass. This summary revision does not alter that companion or the mature main text.

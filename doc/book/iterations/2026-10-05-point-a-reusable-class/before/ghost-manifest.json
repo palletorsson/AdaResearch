@@ -1,0 +1,1000 @@
+{
+  "version": 2,
+  "title": "Ghost Student",
+  "summary": "One code lineage: build a point, carry it, relate two endpoints, then let the original moving point leave an ordered trace. Each saved state has its own complete printed program and native evidence.",
+  "files": [
+    {
+      "id": "archive-incoming",
+      "path": "evidence/2026-10-05-lesson-state-chain/incoming.gd",
+      "label": "incoming.gd",
+      "language": "gdscript",
+      "sha256": "c8866090b3cd0a32189a198828bb64cc4861955dbeb11361cc74ba86396cd5d8"
+    },
+    {
+      "id": "archive-assembled",
+      "path": "evidence/2026-10-05-lesson-state-chain/assembled.gd",
+      "label": "assembled.gd",
+      "language": "gdscript",
+      "sha256": "ceb274ec9bc3b15b8eba6f03a61895fbd32d477333f4730e8b508afbcd747c7d"
+    },
+    {
+      "id": "archive-expected",
+      "path": "evidence/2026-10-05-lesson-state-chain/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "ba7c00341fd23ebf22807bd408c475e5c97b7957c4d2c7f84859299f29432bff"
+    },
+    {
+      "id": "archive-contract",
+      "path": "evidence/2026-10-05-lesson-state-chain/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "7c5e1acc521d3be41ad7c3dc64b3f864ed503eec717650b237d585ffe81442eb"
+    },
+    {
+      "id": "archive-tutorial",
+      "path": "evidence/2026-10-05-lesson-state-chain/tutorial.md",
+      "label": "tutorial.md",
+      "language": "markdown",
+      "sha256": "04a4eb324b2491bc45f89fbac4f0141cebfbc63f3fa62f1b409896e54f5ce557"
+    },
+    {
+      "id": "archive-brief",
+      "path": "evidence/2026-10-05-lesson-state-chain/brief.txt",
+      "label": "brief.txt",
+      "language": "text",
+      "sha256": "2b4330c21a3fcc008609d9f0dddc925a98d967ca95b5c14bd6e871744a00c3a4"
+    },
+    {
+      "id": "archive-report-runtime",
+      "path": "evidence/2026-10-05-lesson-state-chain/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "5cb793e1b126da64e5394ad19219b3cecd3366893f28ccda0f03639be5694e96"
+    },
+    {
+      "id": "archive-verify",
+      "path": "evidence/2026-10-05-lesson-state-chain/verify.gd",
+      "label": "verify.gd",
+      "language": "gdscript",
+      "sha256": "240c58f75227da129e515b3367d9a04e0644cb4c796b5d20210b81c0de4104ad"
+    },
+    {
+      "id": "archive-run-checks",
+      "path": "evidence/2026-10-05-lesson-state-chain/run_checks.py",
+      "label": "run_checks.py",
+      "language": "python",
+      "sha256": "b0fe1ecaf53a964e255ff334095ce898da9925479e49ab4039ae42f87ef42121"
+    },
+    {
+      "id": "archive-next-input",
+      "path": "evidence/2026-10-05-lesson-state-chain/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "10ea1124f3632d69fda9d28fa8de791270b275f8e0d904fb3a159a493b73bfd9"
+    },
+    {
+      "id": "archive-reconstruction",
+      "path": "evidence/2026-10-05-lesson-state-chain/reconstruction.py",
+      "label": "Original reconstruction checker",
+      "language": "python",
+      "sha256": "bfd6168d49df5c5385b3c33d8f972f92cd64ec0970a1ed1b0de0a1c364f57192"
+    },
+    {
+      "id": "point-one-code",
+      "path": "states/001-point-one/point.gd",
+      "label": "point.gd",
+      "language": "gdscript",
+      "sha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484"
+    },
+    {
+      "id": "point-coordinates-code",
+      "path": "states/002-point-coordinates/point.gd",
+      "label": "point.gd",
+      "language": "gdscript",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "id": "point-one-brief",
+      "path": "states/001-point-one/brief.json",
+      "label": "State brief",
+      "language": "json",
+      "sha256": "1dd496a1cc6ee171b5b9446c48c03f0a84fefa82fc6918ca1313263ce50b75da"
+    },
+    {
+      "id": "point-coordinates-brief",
+      "path": "states/002-point-coordinates/brief.json",
+      "label": "State brief",
+      "language": "json",
+      "sha256": "13903898f9dcdf9be86a68c85e0c22d76b029b9e31632683fbe27d979f2b8d74"
+    },
+    {
+      "id": "repository-readme",
+      "path": "README.md",
+      "label": "README.md",
+      "language": "markdown",
+      "sha256": "2dc4a9192f1b2720b13ef9af2023e43c1bc8d0b7b6fbfd676cb32a3fdeecd12f"
+    },
+    {
+      "id": "lines-archive-incoming",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/incoming.gd",
+      "label": "incoming.gd",
+      "language": "gdscript",
+      "sha256": "ceb274ec9bc3b15b8eba6f03a61895fbd32d477333f4730e8b508afbcd747c7d"
+    },
+    {
+      "id": "lines-archive-assembled",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/assembled.gd",
+      "label": "assembled.gd",
+      "language": "gdscript",
+      "sha256": "2a064f3d46cee8f7c78533f6f396538852ee5ad931d82c18577bc2becbfeb5f4"
+    },
+    {
+      "id": "lines-archive-expected",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "2a064f3d46cee8f7c78533f6f396538852ee5ad931d82c18577bc2becbfeb5f4"
+    },
+    {
+      "id": "lines-archive-contract",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "68ab40c41aa6a326a267e5457090438ea9704ae6afc6c90aceaaec14aedd9619"
+    },
+    {
+      "id": "lines-archive-brief",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/brief.json",
+      "label": "brief.json",
+      "language": "json",
+      "sha256": "de1ee6ab883819fd09e1894cf0227e7def3cfacf5d8be292b89f5bb72f96212e"
+    },
+    {
+      "id": "lines-archive-report-runtime",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "4fc16ab8dd0e8d4fe34c10daf54dbd368fa6328ec1d37321bd1180e604ad4f62"
+    },
+    {
+      "id": "lines-archive-next-input",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "b8dc14b73da6f867bcf6e865f1fbb536e372375751225e53b128bf06b905bc7d"
+    },
+    {
+      "id": "lines-archive-verify",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/verify.gd",
+      "label": "verify.gd",
+      "language": "gdscript",
+      "sha256": "ad0cd1a8883b7f1aa497d8a2660fed08627622ef87ef8b7776d94172619259eb"
+    },
+    {
+      "id": "lines-archive-run-checks",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/run_checks.py",
+      "label": "run_checks.py",
+      "language": "python",
+      "sha256": "589b0080d47fda51d984c6d2790b53a6db94848a09cb2b55ab288dd60a92a534"
+    },
+    {
+      "id": "lines-archive-build-state",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/build_state.py",
+      "label": "build_state.py",
+      "language": "python",
+      "sha256": "fde892824bf2a94168309caef39379a3566e1d839436c0de6e22ba63f8646d5e"
+    },
+    {
+      "id": "lines-archive-line-skin",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/line_skin.gd",
+      "label": "line_skin.gd",
+      "language": "gdscript",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "id": "lines-archive-two-lines-parallel",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/two_lines_parallel.gd",
+      "label": "two_lines_parallel.gd",
+      "language": "gdscript",
+      "sha256": "02958cc2e2f8ce8e043ca5b5be17e3d50b2b30f3003fb6d5d44f8396e52b30cb"
+    },
+    {
+      "id": "lines-archive-two-lines-plus",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/two_lines_plus.gd",
+      "label": "two_lines_plus.gd",
+      "language": "gdscript",
+      "sha256": "01d5091d3185f48df5a9e42a22f0fff6ece99754a55a8d3a12454b37c8c6ba3b"
+    },
+    {
+      "id": "lines-archive-two-lines-x",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/two_lines_x.gd",
+      "label": "two_lines_x.gd",
+      "language": "gdscript",
+      "sha256": "eed719b5cfdb50443ca5265563b8b65e7eea404ecd54128233c92635e5c263d1"
+    },
+    {
+      "id": "lines-archive-two-lines-x-depth",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/two_lines_x_depth.gd",
+      "label": "two_lines_x_depth.gd",
+      "language": "gdscript",
+      "sha256": "eb58105ecd1587f2ba71e2a6904c561273ea70a8c2e500b159b5519cff6b1de8"
+    },
+    {
+      "id": "lines-archive-two-lines-changes",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/two-lines-changes.json",
+      "label": "two-lines-changes.json",
+      "language": "json",
+      "sha256": "ae28c5d8165b3163de158319cdb237f4a4985b8cc5a54ae763f9da81bd441092"
+    },
+    {
+      "id": "lines-archive-tutorial",
+      "path": "evidence/2026-10-05-lines-relation-and-rule/tutorial.md",
+      "label": "Archived tutorial — native run",
+      "language": "markdown",
+      "sha256": "e18def8d83456b22caeb6a73260dc434c6c9031bb4916b3e02e57c4d7f7db86f"
+    },
+    {
+      "id": "point-lines-code",
+      "path": "states/003-point-lines/line.gd",
+      "label": "line.gd",
+      "language": "gdscript",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "id": "point-lines-skin",
+      "path": "states/003-point-lines/line_skin.gd",
+      "label": "Supplied line_skin.gd",
+      "language": "gdscript",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "id": "point-lines-brief",
+      "path": "states/003-point-lines/brief.json",
+      "label": "State brief",
+      "language": "json",
+      "sha256": "feee70de4d467a8bb1a65cba2a1dbd10005def9fec09af011016f83978365438"
+    },
+    {
+      "id": "lines-current-tutorial",
+      "path": "evidence/2026-10-05-lines-two-texts/tutorial.md",
+      "label": "Current tutorial — full code",
+      "language": "markdown",
+      "sha256": "48786c86342265584c07c9f7e50f92a6bf87ed2b545cdc45671df082d68d9af2"
+    },
+    {
+      "id": "lines-tutorial-text-check",
+      "path": "evidence/2026-10-05-lines-two-texts/tutorial-text-check.json",
+      "label": "Full-code text check (no native rerun)",
+      "language": "json",
+      "sha256": "c1d82095b486ae7cdc6ed7b6d15110c590d6c30e0a922afd8df7062bde7e9b36"
+    },
+    {
+      "id": "points-archive-verify-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/verify.gd",
+      "label": "verify.gd",
+      "language": "gdscript",
+      "sha256": "1a0b109b79cc24140cf50bbe8c4b37c0de6a9a194afa149599fcf0bc60d54644"
+    },
+    {
+      "id": "points-archive-run-checks-py",
+      "path": "evidence/2026-10-05-points-built-and-carried/run_checks.py",
+      "label": "run_checks.py",
+      "language": "python",
+      "sha256": "93226b25f79d118d5f7dd9fbd1727613be5b1ff0a37b4b8632cdfce4393bf3e3"
+    },
+    {
+      "id": "points-archive-report-runtime-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "1fc6545acd861ef7676ec7a6bcf381e7a291a30011449a64e3e94ce28f680a90"
+    },
+    {
+      "id": "points-point-one-contract-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "5c724a834df0517ca81099bee2e549c6e8509374373f747df3ae1b215887ed85"
+    },
+    {
+      "id": "points-point-one-expected-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484"
+    },
+    {
+      "id": "points-point-one-next-input-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "a4c0dc14ecd64fc3fa14a9b7f300f22fc04557d63e9820ba285f4dafc6112960"
+    },
+    {
+      "id": "points-point-one-point-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/point.gd",
+      "label": "point.gd",
+      "language": "gdscript",
+      "sha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484"
+    },
+    {
+      "id": "points-point-one-report-runtime-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "422b44c057de2ea6c319965e919486990dbc66e9b6f631312fa12bd97a57220f"
+    },
+    {
+      "id": "points-point-one-tutorial-md",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/tutorial.md",
+      "label": "tutorial.md",
+      "language": "markdown",
+      "sha256": "a28499f43f50016741f54cf11e8867f3334f2ff09c33ab083f3cd151334ca628"
+    },
+    {
+      "id": "points-point-coordinates-assembled-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/assembled.gd",
+      "label": "assembled.gd",
+      "language": "gdscript",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "id": "points-point-coordinates-contract-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "860a8a17b82690c6c346325ed5d845d06e1c1b067ddd76da9a65f7052efd6bac"
+    },
+    {
+      "id": "points-point-coordinates-expected-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "id": "points-point-coordinates-next-input-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "fe51e9b7412e8cff6ef0a8e5529d0bbaae5fe59b67e07bdf61a39b3073fbd302"
+    },
+    {
+      "id": "points-point-coordinates-point-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+      "label": "point.gd",
+      "language": "gdscript",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "id": "points-point-coordinates-report-runtime-json",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "88f704507a479b119a3cd781653436d5d95c638bf74e875259398fbe7edb0fab"
+    },
+    {
+      "id": "points-point-coordinates-tutorial-md",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/tutorial.md",
+      "label": "tutorial.md",
+      "language": "markdown",
+      "sha256": "0438628e8a37f4e7d602241a967d3db9c99ca06c2a4f4e80af22e7d883d519e5"
+    },
+    {
+      "id": "points-point-coordinates-variants-pickup-disabled-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/002-point-coordinates/variants/pickup-disabled.gd",
+      "label": "pickup-disabled.gd",
+      "language": "gdscript",
+      "sha256": "18577a7dc11333430cca16afb4f6fb8d6bf22281e9640e3f68b77f5d7ff7afaf"
+    },
+    {
+      "id": "points-point-one-variants-boundary-disabled-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/variants/boundary-disabled.gd",
+      "label": "boundary-disabled.gd",
+      "language": "gdscript",
+      "sha256": "512e51e3eb55aaf540f47f6e9d45244ccd2e3906c627c0101859384e0a713b6b"
+    },
+    {
+      "id": "points-point-one-variants-centre-170-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/variants/centre-170.gd",
+      "label": "centre-170.gd",
+      "language": "gdscript",
+      "sha256": "8a519f277a5ff5b21a3748e3410e4f42812dd9dd1b358b0d3f1443e003fedf1b"
+    },
+    {
+      "id": "points-point-one-variants-radius-030-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/variants/radius-030.gd",
+      "label": "radius-030.gd",
+      "language": "gdscript",
+      "sha256": "98d8300e0713f3bdcb28ffab10daf0d3f59b31b42dabf7f31fd8b71760c38955"
+    },
+    {
+      "id": "points-point-one-variants-surface-hidden-gd",
+      "path": "evidence/2026-10-05-points-built-and-carried/states/001-point-one/variants/surface-hidden.gd",
+      "label": "surface-hidden.gd",
+      "language": "gdscript",
+      "sha256": "49361534b083e47264adf60ff453523569fddd014858efd5678a82d1d64eca29"
+    },
+    {
+      "id": "carried-lines-assembled",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/assembled.gd",
+      "label": "assembled.gd",
+      "language": "gdscript",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "id": "carried-lines-contract",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "23618981e341dfa1876e457710243f5cb0aef08ba0e065a6d5676052a3001401"
+    },
+    {
+      "id": "carried-lines-exercise-variants",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/exercise-variants.json",
+      "label": "exercise-variants.json",
+      "language": "json",
+      "sha256": "db176dc325d728fc9edc30f2cd64428ba4fe1906878d96117f9a09748837fe0b"
+    },
+    {
+      "id": "carried-lines-expected",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "id": "carried-lines-incoming",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/incoming.gd",
+      "label": "incoming.gd",
+      "language": "gdscript",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "id": "carried-lines-line",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/line.gd",
+      "label": "line.gd",
+      "language": "gdscript",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "id": "carried-lines-line-skin",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/line_skin.gd",
+      "label": "line_skin.gd",
+      "language": "gdscript",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "id": "carried-lines-next-input",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "464bde769715690a611f0aa23085fd7b483b509564aacf7415ca7dfe5776a1fc"
+    },
+    {
+      "id": "carried-lines-report-runtime",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "c974f7d8a9161e9398a279a37e8c49f1c7dfc54ea67d93fb25125121018c30cd"
+    },
+    {
+      "id": "carried-lines-run-checks",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/run_checks.py",
+      "label": "run_checks.py",
+      "language": "python",
+      "sha256": "3f57776a1c92f1de320d9745b01daf3e7943860085bb8d5a1767cf911c0e142e"
+    },
+    {
+      "id": "carried-lines-tutorial",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/tutorial.md",
+      "label": "tutorial.md",
+      "language": "markdown",
+      "sha256": "117a441f1beb3e180d8504cf1957d24bcbb03ed3866ef18c688542083baf8d9f"
+    },
+    {
+      "id": "carried-lines-two-lines-changes",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/two-lines-changes.json",
+      "label": "two-lines-changes.json",
+      "language": "json",
+      "sha256": "4989f4b0ec186e28797b52434c44b1b05bd881c096930409474f6c998f2a2e26"
+    },
+    {
+      "id": "carried-lines-variants-coincident",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/coincident.gd",
+      "label": "coincident.gd",
+      "language": "gdscript",
+      "sha256": "527b640f57d75a3be1ea47d18817eccc08f75d5428face171512cb12c0854c67"
+    },
+    {
+      "id": "carried-lines-variants-reverse-direction",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/reverse_direction.gd",
+      "label": "reverse_direction.gd",
+      "language": "gdscript",
+      "sha256": "c3e92ee74bd57b19742a4cc051a616b025e6dd501b10ec11ccce55ad68ee6080"
+    },
+    {
+      "id": "carried-lines-variants-two-lines-parallel",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/two_lines_parallel.gd",
+      "label": "two_lines_parallel.gd",
+      "language": "gdscript",
+      "sha256": "5a0a3f5c281b6d1ee2791ac549bf72988e2ab10ad9b4823f7e348c8d679d99e3"
+    },
+    {
+      "id": "carried-lines-variants-two-lines-plus",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/two_lines_plus.gd",
+      "label": "two_lines_plus.gd",
+      "language": "gdscript",
+      "sha256": "1b6c4eff1f829721f9700fa69601970b239df58c52da8c38c7565628b91b1367"
+    },
+    {
+      "id": "carried-lines-variants-two-lines-x",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/two_lines_x.gd",
+      "label": "two_lines_x.gd",
+      "language": "gdscript",
+      "sha256": "07ec14440157bdb8b53d7297191a9aca6e691eb5dbd2906e6be05fb2560ff5b6"
+    },
+    {
+      "id": "carried-lines-variants-two-lines-x-depth",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/two_lines_x_depth.gd",
+      "label": "two_lines_x_depth.gd",
+      "language": "gdscript",
+      "sha256": "9e1ba18eee4ae4d78432e687f424af6b5edf19530cd5702ca472213d8b2601c5"
+    },
+    {
+      "id": "carried-lines-variants-vertical",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/variants/vertical.gd",
+      "label": "vertical.gd",
+      "language": "gdscript",
+      "sha256": "6ee050b65ff899509dbe5dd64d32b876f3b39190a86ee9b4dcb2e0143c1b4df7"
+    },
+    {
+      "id": "carried-lines-verify",
+      "path": "evidence/2026-10-05-lines-from-the-carried-point/verify.gd",
+      "label": "verify.gd",
+      "language": "gdscript",
+      "sha256": "f3b6a3f85d21c234dd1272bbad075b34aa26df67eabaabc229fb843833e9597f"
+    },
+    {
+      "id": "carried-trace-assembled",
+      "path": "evidence/2026-10-05-trace-the-carried-point/assembled.gd",
+      "label": "assembled.gd",
+      "language": "gdscript",
+      "sha256": "a8c21911f418b6a7d9271fa00e78e51431482b0f16dc9e27a97744f3fe53924a"
+    },
+    {
+      "id": "carried-trace-contract",
+      "path": "evidence/2026-10-05-trace-the-carried-point/contract.json",
+      "label": "contract.json",
+      "language": "json",
+      "sha256": "76f0f9704b6d7220f6dd56ab6ebc4020acb74e3b9228e7ae01b0118fcc7f12df"
+    },
+    {
+      "id": "carried-trace-exercise-variants",
+      "path": "evidence/2026-10-05-trace-the-carried-point/exercise-variants.json",
+      "label": "exercise-variants.json",
+      "language": "json",
+      "sha256": "41bb6f091f5f9a1a8aa41f68fcd8bbb3d9cff73dd6a4e1848ed792abccfb693c"
+    },
+    {
+      "id": "carried-trace-expected",
+      "path": "evidence/2026-10-05-trace-the-carried-point/expected.gd",
+      "label": "expected.gd",
+      "language": "gdscript",
+      "sha256": "a8c21911f418b6a7d9271fa00e78e51431482b0f16dc9e27a97744f3fe53924a"
+    },
+    {
+      "id": "carried-trace-incoming",
+      "path": "evidence/2026-10-05-trace-the-carried-point/incoming.gd",
+      "label": "incoming.gd",
+      "language": "gdscript",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "id": "carried-trace-line-skin",
+      "path": "evidence/2026-10-05-trace-the-carried-point/line_skin.gd",
+      "label": "line_skin.gd",
+      "language": "gdscript",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "id": "carried-trace-next-input",
+      "path": "evidence/2026-10-05-trace-the-carried-point/next-input.json",
+      "label": "next-input.json",
+      "language": "json",
+      "sha256": "f8a50f3565afca428a1eea642fb7348800ac0bcd46a430fbc076eec9defb5d02"
+    },
+    {
+      "id": "carried-trace-report-runtime",
+      "path": "evidence/2026-10-05-trace-the-carried-point/report-runtime.json",
+      "label": "report-runtime.json",
+      "language": "json",
+      "sha256": "7098ce677992833056fabedd15d6c82cd4cb33c3c845e6c14a35cb79adbfbb91"
+    },
+    {
+      "id": "carried-trace-run-checks",
+      "path": "evidence/2026-10-05-trace-the-carried-point/run_checks.py",
+      "label": "run_checks.py",
+      "language": "python",
+      "sha256": "4a621a7b1f90d6257bac18d8ebb72faac9f7e361e0bec3ddbfbdf4c13be325d6"
+    },
+    {
+      "id": "carried-trace-trace",
+      "path": "evidence/2026-10-05-trace-the-carried-point/trace.gd",
+      "label": "trace.gd",
+      "language": "gdscript",
+      "sha256": "a8c21911f418b6a7d9271fa00e78e51431482b0f16dc9e27a97744f3fe53924a"
+    },
+    {
+      "id": "carried-trace-tutorial",
+      "path": "evidence/2026-10-05-trace-the-carried-point/tutorial.md",
+      "label": "tutorial.md",
+      "language": "markdown",
+      "sha256": "38f1bf89931deefb8036d4f7a49d12d0113755b45f1d329e866d0c514012c10d"
+    },
+    {
+      "id": "carried-trace-variants-omit-last-pair",
+      "path": "evidence/2026-10-05-trace-the-carried-point/variants/omit_last_pair.gd",
+      "label": "omit_last_pair.gd",
+      "language": "gdscript",
+      "sha256": "29eae6df4594b6b27e5049826d35f7563a2f883658f460a2df783a9098c534d6"
+    },
+    {
+      "id": "carried-trace-variants-threshold-020",
+      "path": "evidence/2026-10-05-trace-the-carried-point/variants/threshold_020.gd",
+      "label": "threshold_020.gd",
+      "language": "gdscript",
+      "sha256": "a4a51e717280b37d32a688432fef8c10bd9d522f04af07568de028e5162eebe0"
+    },
+    {
+      "id": "carried-trace-verify",
+      "path": "evidence/2026-10-05-trace-the-carried-point/verify.gd",
+      "label": "verify.gd",
+      "language": "gdscript",
+      "sha256": "23783a0eb355decae792270c899c727d49309bc24b557ceb6ec0d544447249ff"
+    },
+    {
+      "id": "point-trace-code",
+      "path": "states/004-point-trace/trace.gd",
+      "label": "trace.gd",
+      "language": "gdscript",
+      "sha256": "a8c21911f418b6a7d9271fa00e78e51431482b0f16dc9e27a97744f3fe53924a"
+    },
+    {
+      "id": "point-trace-skin",
+      "path": "states/004-point-trace/line_skin.gd",
+      "label": "Supplied line_skin.gd",
+      "language": "gdscript",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "id": "point-trace-brief",
+      "path": "states/004-point-trace/brief.json",
+      "label": "State brief",
+      "language": "json",
+      "sha256": "02fbb467fb3a933afe7e43b882645bbdf58bf6bbc6270bf1ace66c3849e8c3bf"
+    }
+  ],
+  "states": [
+    {
+      "id": "point-one",
+      "map": "Point_One",
+      "title": "Build one point from scratch",
+      "status": "verified",
+      "predecessor": null,
+      "brief": {
+        "bring": "An empty Node3D named PointStudy with a new point.gd script.",
+        "make": "One static point with a sphere surface and matching physical boundary.",
+        "given": "Day Zero supplies the room, camera or player, and lighting.",
+        "build": "Create the static body, sphere mesh and collision shape; use one radius and centre; attach both shapes beneath the point.",
+        "check": "One matching surface and boundary; radius and centre changes reach both; visibility and collision can change separately.",
+        "later": "Coordinates continues this exact script with pickup and a local/world readout."
+      },
+      "subjects": [
+        "Position values",
+        "Variables and constants",
+        "Object references",
+        "Visible and physical boundaries"
+      ],
+      "provenance": "Built from the complete printed Point One script on an empty Node3D. Every point object is created in this script; no material helper or reconstructed starting fixture is assumed. The saved native report tests this exact tutorial snapshot and code.",
+      "carry": "The complete point.gd: one static body whose mesh and collider share a radius and centre.",
+      "nextStatus": "Coordinates starts with these exact saved bytes and preserves this shape construction.",
+      "files": [
+        "point-one-code",
+        "points-point-one-tutorial-md",
+        "points-point-one-contract-json",
+        "points-point-one-report-runtime-json",
+        "points-point-one-expected-gd",
+        "points-point-one-next-input-json",
+        "point-one-brief",
+        "points-point-one-variants-boundary-disabled-gd",
+        "points-point-one-variants-centre-170-gd",
+        "points-point-one-variants-radius-030-gd",
+        "points-point-one-variants-surface-hidden-gd",
+        "points-archive-verify-gd",
+        "points-archive-run-checks-py",
+        "points-archive-report-runtime-json"
+      ],
+      "code": "point-one-code",
+      "incomingSha256": null,
+      "outgoingSha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484",
+      "changes": [],
+      "evidence": {
+        "report": "points-point-one-report-runtime-json",
+        "contract": "points-point-one-contract-json",
+        "expected": "points-point-one-expected-gd",
+        "nextInput": "points-point-one-next-input-json",
+        "tutorial": "points-point-one-tutorial-md",
+        "negativeControl": "The saved report includes a deliberately broken point and records the expected failed checks. Expected failures: point_one/default/visible_sphere."
+      }
+    },
+    {
+      "id": "point-coordinates",
+      "map": "Point_Coordinates",
+      "title": "Carry the same point and read its position",
+      "status": "verified",
+      "predecessor": "point-one",
+      "brief": {
+        "bring": "The actual saved Point One point.gd and the same PointStudy node.",
+        "make": "The existing point can be carried and released, with its local and world positions shown.",
+        "given": "Configured XR hands, Godot XR Tools and the museum collision settings.",
+        "build": "Change StaticBody3D to XRToolsPickable, configure pickup before tree entry, and add a Label3D updated from global_position and to_local().",
+        "check": "Surface and collider follow together; release stays; the readout tracks the same point in the study and world frames.",
+        "later": "Lines continues this exact point and readout, adding a second endpoint, a segment and distance."
+      },
+      "subjects": [
+        "Pickable",
+        "3D coordinate system",
+        "Local and world position"
+      ],
+      "provenance": "The complete printed Coordinates script continues the actual tested Point One output. Exact declared edits change the body type and settings and add a LOCAL/WORLD label; the existing mesh and collider construction is preserved. Native XR Tools pickup and release are exercised with synthetic controllers.",
+      "carry": "The original point is pickable. Its surface and collider stay together, and a station-owned label reads local and world coordinates each frame.",
+      "nextStatus": "Lines continues these exact saved bytes, retains the point and coordinate readout, and adds a second endpoint and live distance.",
+      "files": [
+        "point-coordinates-code",
+        "points-point-coordinates-tutorial-md",
+        "points-point-coordinates-contract-json",
+        "points-point-coordinates-report-runtime-json",
+        "points-point-coordinates-expected-gd",
+        "points-point-coordinates-next-input-json",
+        "point-coordinates-brief",
+        "points-point-coordinates-assembled-gd",
+        "points-point-coordinates-variants-pickup-disabled-gd",
+        "points-archive-verify-gd",
+        "points-archive-run-checks-py",
+        "points-archive-report-runtime-json"
+      ],
+      "code": "point-coordinates-code",
+      "incomingSha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484",
+      "outgoingSha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649",
+      "changes": [
+        {
+          "id": "body-reference",
+          "kind": "replace",
+          "before": "var point: StaticBody3D\n",
+          "after": "var point: XRToolsPickable\nvar readout: Label3D\n"
+        },
+        {
+          "id": "body-construction",
+          "kind": "replace",
+          "before": "    point = StaticBody3D.new()\n",
+          "after": "    point = XRToolsPickable.new()\n"
+        },
+        {
+          "id": "pickup-settings",
+          "kind": "insert_after",
+          "anchor": "    point.position = CENTRE\n",
+          "text": "    point.freeze = true\n    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC\n    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN\n    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE\n    point.collision_layer = 4\n    point.collision_mask = 196615\n"
+        },
+        {
+          "id": "live-readout",
+          "kind": "insert_after",
+          "anchor": "    add_child(point)\n",
+          "text": "\n    readout = Label3D.new()\n    readout.position = Vector3(0, 1.6, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.005\n    add_child(readout)\n\nfunc _process(_delta: float) -> void:\n    var world_position := point.global_position\n    var local_position := to_local(world_position)\n    readout.text = \"LOCAL \" + str(local_position) + \"\\nWORLD \" + str(world_position)\n"
+        }
+      ],
+      "evidence": {
+        "report": "points-point-coordinates-report-runtime-json",
+        "contract": "points-point-coordinates-contract-json",
+        "expected": "points-point-coordinates-expected-gd",
+        "nextInput": "points-point-coordinates-next-input-json",
+        "tutorial": "points-point-coordinates-tutorial-md",
+        "negativeControl": "The saved report includes deliberately broken pickup/readout behavior and records the expected failed checks. Expected failures: point_coordinates/default/initial_readout, point_coordinates/default/held_readout, point_coordinates/default/released_readout, point_coordinates/default/changed_frame_readout, point_coordinates/default/moved_body_readout."
+      }
+    },
+    {
+      "id": "point-lines",
+      "map": "Point_Lines",
+      "title": "Two points, one relation",
+      "status": "verified",
+      "predecessor": "point-coordinates",
+      "brief": {
+        "bring": "The tested Coordinates point.gd with its point, surface, collider and LOCAL/WORLD readout.",
+        "make": "Two held endpoints, a live segment, and the distance between them.",
+        "given": "Configured XR hands, a unit-scale study, and the complete supplied line_skin.gd renderer.",
+        "build": "Keep point and readout; duplicate the point once; convert both ends into the study frame; subtract, measure, and update the same visible segment each frame.",
+        "check": "Either endpoint moves; both readings and distance follow; release stays; coincident endpoints hide the segment; pairs can be parallel, +, X or separated in depth.",
+        "later": "Trace stores positions in order. Grid will reuse points and relations without a pickup body at every position."
+      },
+      "subjects": [
+        "Endpoints and a segment",
+        "Displacement and distance",
+        "Reusing an object",
+        "Parallel, cross and X",
+        "Position in depth"
+      ],
+      "provenance": "The complete printed line.gd continues the actual tested Coordinates output by exact declared edits. The existing point, shape construction and LOCAL/WORLD readout remain; a duplicate endpoint and live distance are added. The supplied renderer is printed in full, unchanged, and bound to this new native report.",
+      "carry": "A line study with two pickable endpoints, a live segment, the original coordinate readout and a distance reading. Pair exercises reuse this same line.",
+      "nextStatus": "Trace continues this exact script by keeping the original held point and recording accepted local positions. Grid remains planned.",
+      "files": [
+        "point-lines-code",
+        "point-lines-skin",
+        "carried-lines-tutorial",
+        "point-lines-brief",
+        "carried-lines-assembled",
+        "carried-lines-contract",
+        "carried-lines-exercise-variants",
+        "carried-lines-expected",
+        "carried-lines-incoming",
+        "carried-lines-line",
+        "carried-lines-line-skin",
+        "carried-lines-next-input",
+        "carried-lines-report-runtime",
+        "carried-lines-run-checks",
+        "carried-lines-two-lines-changes",
+        "carried-lines-variants-coincident",
+        "carried-lines-variants-reverse-direction",
+        "carried-lines-variants-two-lines-parallel",
+        "carried-lines-variants-two-lines-plus",
+        "carried-lines-variants-two-lines-x",
+        "carried-lines-variants-two-lines-x-depth",
+        "carried-lines-variants-vertical",
+        "carried-lines-verify"
+      ],
+      "code": "point-lines-code",
+      "incomingSha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649",
+      "outgoingSha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69",
+      "changes": [
+        {
+          "id": "supplied-renderer",
+          "kind": "insert_after",
+          "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+          "text": "\nconst LineSkin = preload(\"line_skin.gd\")\n"
+        },
+        {
+          "id": "relation-state",
+          "kind": "insert_after",
+          "anchor": "var readout: Label3D\n",
+          "text": "var point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n"
+        },
+        {
+          "id": "second-end-and-segment",
+          "kind": "insert_after",
+          "anchor": "    add_child(readout)\n",
+          "text": "\n    point_b = point.duplicate() as XRToolsPickable\n    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n    add_child(point_b)\n\n    line = LineSkin.new()\n    add_child(line)\n"
+        },
+        {
+          "id": "live-relation",
+          "kind": "insert_after",
+          "anchor": "    readout.text = \"LOCAL \" + str(local_position) + \"\\nWORLD \" + str(world_position)\n",
+          "text": "\n    var a := local_position\n    var b := to_local(point_b.global_position)\n    var displacement := b - a\n    distance = displacement.length()\n    line.show_segment(a, displacement, distance)\n    readout.text += \"\\nDISTANCE \" + str(distance)\n"
+        }
+      ],
+      "givenFiles": {
+        "line_skin.gd": "point-lines-skin"
+      },
+      "evidence": {
+        "report": "carried-lines-report-runtime",
+        "contract": "carried-lines-contract",
+        "expected": "carried-lines-expected",
+        "nextInput": "carried-lines-next-input",
+        "tutorial": "carried-lines-tutorial",
+        "negativeControls": [
+          "frozen_segment",
+          "mixed_frames"
+        ],
+        "negativeControl": "Two deliberate faults are detected: a frozen segment stops following the working endpoints and readout; mixing local and world positions breaks the geometric relation. Each control is evaluated against the same normal contract."
+      }
+    },
+    {
+      "id": "point-trace",
+      "map": "Point_Trace",
+      "title": "The original point leaves a trace",
+      "status": "verified",
+      "predecessor": "point-lines",
+      "brief": {
+        "bring": "The tested Lines script and its supplied renderer in the learner’s working scene.",
+        "make": "One held point records an ordered sequence of positions, with visible segments joining adjacent samples.",
+        "given": "Configured XR hands, the same unit-scale study, and the unchanged supplied line_skin.gd renderer.",
+        "build": "Keep the original point and readout; remove endpoint B and the live single relation; append local positions to an array when an if condition accepts the distance from the last saved sample; draw adjacent pairs with a for loop.",
+        "check": "Stationary and short movement add no sample; enough accumulated movement does; stored positions remain ordered; the segment count follows the accepted positions; pickup and release still use the original point.",
+        "later": "Grid will reuse positions and relations. It has no assembled student state yet."
+      },
+      "subjects": [
+        "Arrays",
+        "If conditions",
+        "Distance from the last sample",
+        "For loops",
+        "Ordered positions"
+      ],
+      "provenance": "The complete printed trace.gd continues the exact tested Lines source. It retains the original point, shape construction, coordinate readout and supplied renderer, removes the second endpoint and live single segment, and records accepted local positions. This is a continuation of source code in the learner’s working scene; it does not transfer an in-progress museum session.",
+      "carry": "The original pickable point, its coordinate readout, an ordered array of accepted local positions and segments drawn between adjacent entries.",
+      "nextStatus": "Grid can build on stored positions and repeated relations. No Grid student code or native evidence has been assembled.",
+      "code": "point-trace-code",
+      "incomingSha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69",
+      "outgoingSha256": "a8c21911f418b6a7d9271fa00e78e51431482b0f16dc9e27a97744f3fe53924a",
+      "changes": [
+        {
+          "id": "sampling-distance",
+          "kind": "insert_after",
+          "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+          "text": "const MIN_SEGMENT_DISTANCE := 0.05\n"
+        },
+        {
+          "id": "history-state",
+          "kind": "replace",
+          "before": "var point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n",
+          "after": "var positions: Array[Vector3] = []\nvar trail: Node3D\n"
+        },
+        {
+          "id": "seed-instead-of-second-end",
+          "kind": "replace",
+          "before": "    point_b = point.duplicate() as XRToolsPickable\n    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n    add_child(point_b)\n\n    line = LineSkin.new()\n    add_child(line)\n",
+          "after": "    trail = Node3D.new()\n    add_child(trail)\n    positions.append(point.position)\n"
+        },
+        {
+          "id": "retain-and-join-neighbours",
+          "kind": "replace",
+          "before": "    var a := local_position\n    var b := to_local(point_b.global_position)\n    var displacement := b - a\n    distance = displacement.length()\n    line.show_segment(a, displacement, distance)\n    readout.text += \"\\nDISTANCE \" + str(distance)\n",
+          "after": "    var last := positions[positions.size() - 1]\n    if (local_position - last).length() >= MIN_SEGMENT_DISTANCE:\n        positions.append(local_position)\n\n        for segment in trail.get_children():\n            segment.queue_free()\n\n        for i in range(1, positions.size()):\n            var a := positions[i - 1]\n            var displacement := positions[i] - a\n            var segment := LineSkin.new()\n            trail.add_child(segment)\n            segment.show_segment(a, displacement, displacement.length())\n\n    readout.text += \"\\nPOINTS \" + str(positions.size())\n"
+        }
+      ],
+      "givenFiles": {
+        "line_skin.gd": "point-trace-skin"
+      },
+      "files": [
+        "point-trace-code",
+        "point-trace-skin",
+        "carried-trace-tutorial",
+        "point-trace-brief",
+        "carried-trace-assembled",
+        "carried-trace-contract",
+        "carried-trace-exercise-variants",
+        "carried-trace-expected",
+        "carried-trace-incoming",
+        "carried-trace-line-skin",
+        "carried-trace-next-input",
+        "carried-trace-report-runtime",
+        "carried-trace-run-checks",
+        "carried-trace-trace",
+        "carried-trace-variants-omit-last-pair",
+        "carried-trace-variants-threshold-020",
+        "carried-trace-verify"
+      ],
+      "evidence": {
+        "report": "carried-trace-report-runtime",
+        "contract": "carried-trace-contract",
+        "expected": "carried-trace-expected",
+        "nextInput": "carried-trace-next-input",
+        "tutorial": "carried-trace-tutorial",
+        "negativeControls": [
+          "gate_removed",
+          "wrong_neighbours"
+        ],
+        "negativeControl": "Two deliberate failures are detected: removing the distance condition records unwanted samples, and using the wrong neighbour draws incorrect pairs. Both are evaluated against the same normal contract; the exact failed checks are retained in the native report."
+      }
+    }
+  ],
+  "planned": [
+    {
+      "map": "Point_Line_Grid",
+      "title": "Grid",
+      "note": "Planned: no saved student code or evidence yet."
+    }
+  ],
+  "sharedFiles": [
+    "repository-readme",
+    "repository-manifest"
+  ]
+}

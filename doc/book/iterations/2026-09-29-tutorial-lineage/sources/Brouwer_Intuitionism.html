@@ -1,0 +1,475 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brouwer_Intuitionism · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Brouwer_Intuitionism">← Tutorial lineage</a></p><h1>Brouwer Intuitionism</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Brouwer_Intuitionism/final.md">Raw captured source</a></p><pre># Only What You Can Construct
+
+Wait before touching anything.
+
+The game keeps running. The row does not grow. For once, the clock is not the author of the next term.
+
+## A place you have not filled
+
+&lt;!-- @brouwer_choice_sequence --&gt;
+
+Choose **0**. A blue bead appears, with its value above it. Choose **1**. An amber bead follows. Try a few more, then stop.
+
+The question mark stays ahead of what you have made. There is no next value concealed behind it, waiting for the animation to reveal it. The program has not stored one. Your next press will append it:
+
+```gdscript
+terms.append(value)
+```
+
+We met the array much earlier. Here it holds a record of decisions. The order matters: `0, 1` is not `1, 0`. Waiting changes neither. **RESET** clears this record and lets another beginning happen.
+
+Ask a small question: does your current prefix contain a 1? You can inspect it. If it does, point to a position. If it does not, checking every stored term settles that finite question.
+
+Now imagine continuing without a final term. Will a 1 ever appear? A single chosen 1 would answer yes. However long a run of zeros you have made, that run alone does not show that no later choice will be 1.
+
+The difference is already in your hand: evidence about what has been made, and a claim about every continuation.
+
+Brouwer&#x27;s choice sequences make room for construction that proceeds through time. Some sequences follow a rule; others admit choices as they develop.[^choice] This bench offers a modest encounter with that distinction. It records a finite binary prefix, shows its latest ten terms and stores at most 256. Filling that storage completes neither infinity nor the philosophical argument. It fills this instrument.
+
+And who chose the things you are allowed to choose? There are two buttons. You may make a rhythm, break it, repeat yourself, refuse to continue. The freedom has a shape before your hand arrives.
+
+## What would count as an answer?
+
+&lt;!-- @excluded_middle_demo --&gt;
+
+Two spheres name **P** and **not-P**. The sign between them means *or*. Move the reading slider. The objects stay; the caption changes the terms under which the statement may be used.
+
+Classical logic permits `P or not-P` without requiring us to settle which. Under the constructive reading, asserting that disjunction calls for a proof of one side. We may have neither proof. That lack is not a third truth value between true and false.[^logic]
+
+Return to your row. The current finite prefix can be checked. An unrestricted question about an indefinitely continuing sequence asks for more. The distinction concerns the claim and its evidence, not whether you happen to feel certain.
+
+Contradiction still has work to do in intuitionistic logic: showing that an assumption leads to contradiction can establish its negation. What is unavailable in general is the further classical move from *not-not-P* to *P*. The slider is a comparison of these readings. It is not a machine deciding an arbitrary proposition for us.
+
+## Show me which one
+
+&lt;!-- @constructive_proof --&gt;
+
+The small cube offers the word *witness* a place to land. To establish that something with a property exists constructively, supply the thing and establish the property. In your row, a position holding 1 is a witness to “there is a 1 here.” A blue cube alone cannot witness every claim written beside it.
+
+Consider a classical existence argument. Let `c = √2^√2`. If c is rational, the irrational pair √2, √2 already gives a rational power. If c is irrational, the irrational pair c, √2 gives `c^√2 = 2`. Either way such a pair exists. This argument does not tell us which pair its case split has supplied.
+
+The constructive demand asks for that missing identification. It changes what we accept as evidence. It does not make every classical proof worthless, or require every mathematical object to be a physical object we have touched.
+
+## A witness you can check
+
+&lt;!-- @cantor_diagonal_workbench --&gt;
+
+At the workbench, set the list size to four. Four rows, four bits in each. Follow the gold diagonal. Underneath it, the red row gives the opposite bit at each position.
+
+Compare the red row with the first row: they disagree at the first position. Compare it with the second: at the second. Keep going. You can point to why the new string differs from every displayed row.
+
+Increase the size. More rows arrive; the earlier bits stay. The construction extends with them:
+
+```gdscript
+_d[i] = 1 - _list[i][i]
+```
+
+This is a finite stage of diagonalisation. The mathematical argument for infinite binary sequences applies the same rule to every row of a proposed countable list. The headset displays finite strings, up to 32 bits here. Their disagreement is real and inspectable; displaying it does not display the completed infinite object.
+
+You now have two ways of extending a row. At the first bench you choose the next bit. Here a rule determines it from another bit. Both produce something, but they distribute the work differently.
+
+## Whose construction?
+
+&lt;!-- @constructive_staircase --&gt;
+
+Watch the little staircase. Its steps appear on a timer, then dissolve and begin again. Cyan shapes preview what is about to be drawn. This model supplies a construction for you; it does not wait for a decision, and its treads do not carry your body.
+
+Come back to the choice bench and wait again. The contrast is audible even in silence: one apparatus continues; the other leaves you time.
+
+&lt;!-- @angle_sum_triangle --&gt;
+
+&lt;!-- @parallel_lines --&gt;
+
+The triangle and parallel lines return from the earlier geometry. Someone has already supplied their coordinates and relations. A preset is still a construction. What it may conceal is the work by which its particular case supports—or fails to support—a general claim. Look at the displayed shape and ask what the caption adds beyond it.
+
+&lt;!-- @intractable_evidence --&gt;
+
+Back beside the choice bench, the sum over hypotheses brings another limit back from computation. A procedure may be specified and still cost too much to run. That is a different difficulty from having no constructive proof. A formula on a panel cannot tell us, by its appearance alone, which difficulty we face.
+
+This room has not made the world obey your hand. It has made a small part wait for it. Carry that difference onward: what has been asserted, what has been produced, and what follows from the production?
+
+[^choice]: Joan Rand Moschovakis, [Brouwer&#x27;s Notion of Choice Sequence and Its Descendants](https://www.math.ucla.edu/~joan/Oslonewzoom2022handout.pdf), especially the distinction between lawlike sequences and successive choices. The binary bench is our finite teaching model.
+
+[^logic]: Joan Moschovakis, [Intuitionistic Logic](https://plato.stanford.edu/entries/logic-intuitionistic/), sections 1–2. These explain the restriction on excluded middle, the continued use of contradiction to establish negations, and the constructive interpretation of disjunction and existence.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Brouwer_Intuitionism/tutorial.md">Raw captured source</a></p><pre># Brouwer Intuitionism
+
+No existence without construction. Build a room where claims are only valid if the learner assembles them step by step.
+
+Declare an intuitionistic proposition.
+
+```gdscript
+class_name Proposition
+extends Resource
+
+@export var name: String = &quot;&quot;
+@export var constructed: bool = false
+@export var steps: Array[String] = []
+```
+
+A proposition has a name and a record of construction. It is not true until `constructed` flips. Proof is assembly, not assertion.
+
+Instantiate a construction bench.
+
+```gdscript
+func begin_construction(prop: Proposition) -&gt; void:
+    prop.constructed = false
+    prop.steps.clear()
+    bench.display(prop)
+```
+
+The bench resets every time a proposition begins. No carryover from a previous proof. Each construction starts cold.
+
+Append a step.
+
+```gdscript
+func add_step(prop: Proposition, step: String) -&gt; void:
+    prop.steps.append(step)
+    bench.display(prop)
+```
+
+Each step is a text operation the learner performs. The display updates so the learner sees the proof growing in front of them.
+
+Validate the construction.
+
+```gdscript
+func validate(prop: Proposition) -&gt; bool:
+    for required in required_steps_for(prop.name):
+        if not prop.steps.has(required):
+            return false
+    prop.constructed = true
+    return true
+```
+
+Required steps are listed per proposition. Missing any means the proposition stays unconstructed. No proof by absence.
+
+Reject law of excluded middle.
+
+```gdscript
+func attempt_lem(prop: Proposition) -&gt; String:
+    if prop.constructed:
+        return &quot;true&quot;
+    return &quot;not yet constructed&quot;
+```
+
+Classical logic returns either &quot;true&quot; or &quot;false&quot; for every proposition. Brouwer&#x27;s room returns &quot;not yet constructed&quot; instead of &quot;false&quot;. The third option is the whole point.
+
+Light the proposition when constructed.
+
+```gdscript
+func _on_prop_constructed(prop: Proposition) -&gt; void:
+    var light: OmniLight3D = lights[prop.name]
+    light.light_energy = 2.5
+    construction_chime.play()
+```
+
+Constructed propositions glow. Unbuilt ones stay dim. The room is a topology of what the learner has actually made.
+
+Offer a palette of building blocks.
+
+```gdscript
+func present_blocks(panel: Node3D) -&gt; void:
+    for block_name in block_library:
+        var block := preload(&quot;res://commons/artifacts/foundations/proof_block.tscn&quot;).instantiate()
+        block.set_name(block_name)
+        panel.add_child(block)
+```
+
+Blocks are physical. The learner assembles proofs by moving blocks onto the bench. Construction is a bodily act.
+
+Refuse to finalize without all steps.
+
+```gdscript
+func _on_finalize_pressed(prop: Proposition) -&gt; void:
+    if validate(prop):
+        lock_proof(prop)
+    else:
+        show_missing(prop)
+```
+
+Finalization either locks the proof or lists the missing steps. Errors are named, not silent. The rule is that claims require construction.
+
+You have built without proving by contradiction. The next map, Florensky Paraconsistent, accepts contradictions without collapse.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Count constructed propositions on a tally.
+
+```gdscript
+func update_tally(label: Label3D) -&gt; void:
+    var built := 0
+    for p in propositions:
+        if p.constructed: built += 1
+    label.text = &quot;%d / %d constructed&quot; % [built, propositions.size()]
+```
+
+The tally rises only when propositions are actually built. Claims without construction do not count. The tally is a running honesty check.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Brouwer_Intuitionism/technical.md">Raw captured source</a></p><pre># Brouwer_Intuitionism — Technical
+
+## The Constructive Turn
+
+L.E.J. Brouwer (1881-1966) proposed a radical response to the foundations crisis: abandon the logical principles that generate the paradoxes. Classical mathematics asserts existence through contradiction — &quot;assume X doesn&#x27;t exist; derive contradiction; therefore X exists.&quot; The object X is never produced. Its existence is inferred from the impossibility of its nonexistence. Brouwer rejected this. If you cannot construct X, you may not claim X exists.
+
+The central rejection: **the law of excluded middle** (LEM), which states that for any proposition P, either P or not-P holds.
+
+```
+Classical: P ∨ ¬P (always true, no exceptions)
+Intuitionistic: P ∨ ¬P (not assumed — must be proven for each specific P)
+```
+
+In classical logic, LEM is an axiom. In intuitionistic logic, it is a proposition that holds when it can be demonstrated and fails when it cannot. For decidable predicates (Is n = 5? Is this list empty?), LEM holds constructively. For undecidable predicates (Does this program halt? Is this number transcendental?), LEM is not available.
+
+## What Is Lost
+
+Rejecting LEM eliminates several proof techniques that classical mathematics relies on:
+
+**Proof by contradiction (reductio ad absurdum)**: Assume not-P, derive contradiction, conclude P. In intuitionistic logic, this only proves not-not-P (double negation). The step from not-not-P to P requires LEM, which is unavailable. So intuitionistic logic has a weaker double negation law: `¬¬P` does not imply `P`.
+
+**Non-constructive existence proofs**: &quot;There exists an x such that P(x)&quot; proved by showing &quot;for all x, not-P(x)&quot; leads to contradiction. The proof never identifies which x satisfies P. Intuitionistically, `∃x P(x)` requires exhibiting a specific x and a proof that P(x) holds.
+
+**Specific casualties**:
+- The intermediate value theorem (classical version: a continuous function that is negative at a and positive at b has a zero between a and b, but the zero is not constructed).
+- The Bolzano-Weierstrass theorem (every bounded sequence has a convergent subsequence, but the subsequence is not constructed).
+- Many results in analysis, measure theory, and topology that rely on Zorn&#x27;s lemma or the axiom of choice.
+
+## What Is Gained
+
+### The Brouwer-Heyting-Kolmogorov (BHK) Interpretation
+
+In BHK semantics, a proof of a proposition is not a truth value but a construction:
+
+| Proposition | Proof is... |
+|-------------|-------------|
+| P ∧ Q | A pair: (proof of P, proof of Q) |
+| P ∨ Q | A pair: (tag indicating which, proof of the tagged one) |
+| P → Q | A function that transforms any proof of P into a proof of Q |
+| ∃x P(x) | A pair: (witness x, proof that P(x)) |
+| ∀x P(x) | A function that takes any x and returns a proof of P(x) |
+| ¬P | A function that transforms any proof of P into a proof of absurdity |
+
+Under this interpretation, proofs are programs. This is the **Curry-Howard correspondence**: propositions are types, proofs are programs, and proof verification is type checking. Every intuitionistic proof corresponds to a computable function. Every constructive existence proof yields an algorithm.
+
+### Brouwer&#x27;s Free Choice Sequences
+
+Brouwer introduced **choice sequences**: infinite sequences of natural numbers where each element is freely chosen by a creating subject. A choice sequence is never complete — it is an ongoing process. This generates a novel theory of the continuum where real numbers are inherently unfinished, always in the process of being determined.
+
+The free choice sequence challenges the classical picture where all mathematical objects exist timelessly. For Brouwer, mathematics is a temporal activity: objects come into existence through construction, and some objects are perpetually under construction.
+
+## Map Architecture: Stepping Stones
+
+The Brouwer_Intuitionism map is a 13x16 grid, max height 3. Its structure is radically fragmented: disconnected platforms floating over void, connected by bridges. Nothing is given in advance. The map uses `auto_reveal_on_entry: true` and `initial_tile_visibility: &quot;hidden_except_start&quot;` — platforms appear only as the player approaches, constructing the space in real time.
+
+The structure layer:
+- **Start row (row 0) and end row (row 15)**: Full-width floor at height 1, providing entry and exit.
+- **Mid-section**: Scattered islands of height 1, separated by void (0). Small 2x2 or 1x1 platforms at rows 1, 3-5, 6-8, 10-12, connected by single-cell stepping stones.
+- **Bridges**: Utility layer contains bridge markers (`br:z:3`, `br:-x:2`, `br:x:2`) that create physical connections between platforms. Without these, several platforms would be unreachable.
+
+The fragmentation is intentional. Classical mathematics provides a continuous floor — you can walk anywhere because every point is assumed to exist. Intuitionistic mathematics provides only what has been constructed. The gaps between platforms are honest: they represent propositions that have not been proven, objects that have not been built, truths that are not yet available.
+
+The auto-reveal mechanic deepens this: platforms are invisible until the player is close enough to &quot;construct&quot; them. The space builds itself under your feet. This is Brouwer&#x27;s mathematics: existence follows construction, not the other way around.
+
+## Artifact Analysis
+
+### excluded_middle_demo (row 4, col 2)
+**@identity essence**: `P ∨ ¬P — the law of excluded middle; Brouwer: &quot;not always!&quot;`
+
+Two glowing spheres represent P (blue) and ¬P (red) with a disjunction symbol between them. The critical parameter `show_rejection` toggles between classical acceptance (both spheres glow, the disjunction connects them) and intuitionistic doubt (the disjunction fades, the spheres dim, and a question mark appears between them).
+
+The implementation uses two `MeshInstance3D` spheres with emissive materials. In classical mode, both spheres have `emission_energy &gt; 0` and a connecting arc mesh is visible. In intuitionistic mode, the arc fades (alpha lerps to 0), the spheres&#x27; emission drops, and a `Label3D` with &quot;?&quot; fades in. The toggle is triggered by interaction.
+
+The pedagogical point: in classical logic, the disjunction P ∨ ¬P is always available — it is an axiom. In intuitionistic logic, it must be demonstrated for each specific P. The artifact lets the learner toggle the axiom on and off and see what the logical landscape looks like without it.
+
+### constructive_proof (row 4, col 9)
+**@identity essence**: `∃x P(x) requires exhibiting x — no proof by contradiction allowed`
+
+This artifact demonstrates the difference between classical and constructive existence. The implementation presents a claimed existence statement and two proof strategies side by side:
+
+- **Classical panel**: Shows the proof structure &quot;Assume ∀x ¬P(x). Derive contradiction. Therefore ∃x P(x).&quot; The witness x is labeled &quot;?&quot; — it exists but is not identified.
+- **Constructive panel**: Shows the proof structure &quot;Here is x₀. Here is the verification that P(x₀).&quot; The witness is concrete, displayed, inspectable.
+
+The critical parameter is &quot;the witness&quot;: without an explicit construction, the proof is rejected. The constructive panel glows green (valid); the classical panel glows amber (accepted classically, rejected intuitionistically). Toggling between panels highlights what is lost and what is gained.
+
+### brouwer_choice_sequence (row 7, col 5)
+**@identity essence**: `a₁, a₂, a₃, ... , ?, ? — each term chosen freely, never completed`
+
+A visual display of an infinite sequence being generated in real time. The implementation creates a row of `MeshInstance3D` spheres, each representing a term in the sequence. Spheres materialize one by one, left to right, with gentle bobbing animation. Past terms are solid; the current term pulses; future terms are invisible.
+
+```gdscript
+func _process(delta):
+    _time += delta
+    var visible_count = int(_time / interval)
+    for i in range(visible_count):
+        if i &lt; spheres.size():
+            spheres[i].visible = true
+```
+
+The critical parameter is time: the sequence unfolds perpetually, never completing. The rightmost visible sphere always has siblings to the right that have not yet appeared. The learner watches a mathematical object being constructed in real time — an object that is always unfinished, always open to the next freely chosen term.
+
+The sequence is not predetermined. Each term&#x27;s value (represented by the sphere&#x27;s color) is chosen by a pseudo-random process, echoing Brouwer&#x27;s insistence that choice sequences are not deterministic. The colors drift and settle: each term becomes fixed once it appears, but the next term is genuinely open.
+
+## Curry-Howard Correspondence
+
+The deepest technical legacy of Brouwer&#x27;s intuitionism is the Curry-Howard correspondence, which establishes a formal isomorphism between:
+
+| Logic | Type Theory | Computation |
+|-------|-------------|-------------|
+| Proposition | Type | Specification |
+| Proof | Term/Program | Implementation |
+| Implication P → Q | Function type P → Q | Function |
+| Conjunction P ∧ Q | Product type (P, Q) | Pair |
+| Disjunction P ∨ Q | Sum type P + Q | Tagged union |
+| ∃x P(x) | Dependent pair Σ(x:A) P(x) | Data structure + proof |
+| ∀x P(x) | Dependent function Π(x:A) P(x) | Polymorphic function |
+
+Under this correspondence, writing a program that type-checks IS proving the corresponding theorem. Modern proof assistants (Coq, Agda, Lean) exploit this isomorphism: mathematicians write proofs as programs, and the type checker verifies correctness.
+
+Brouwer&#x27;s intuitionism, once considered a fringe position that crippled mathematics, turns out to be the logical foundation of computer science. The discipline he demanded — existence requires construction — is exactly the discipline that programming requires. A function that &quot;exists&quot; but cannot be computed is useless. An algorithm that &quot;works&quot; but cannot be implemented is not an algorithm. Constructive mathematics is what happens when mathematics takes computation seriously.
+
+## The Map as Constructive Space
+
+The auto-reveal mechanic is the map&#x27;s deepest technical feature. In a standard map, all tiles exist from the start — the player reveals what was always there. In Brouwer_Intuitionism, tiles are created by the player&#x27;s approach. The space does not preexist the traversal. This is the BHK interpretation made spatial: a proposition (tile) exists only when there is a proof (the player&#x27;s presence) that constructs it.
+
+The stepping-stone layout means the player must plan their path — some platforms are reachable only via specific routes. There is no omniscient view of the full map. You build the ground as you walk, and the ground you build determines what ground you can build next. This is constructive mathematics as lived experience: each theorem enables further theorems, and the ones you cannot reach from here are not &quot;false&quot; — they are simply unconstructed.
+
+## Intuitionistic Logic
+
+```gdscript
+# Brouwer-Heyting-Kolmogorov interpretation:
+# To assert P, provide a construction.
+# To assert NOT P, provide a construction that transforms any proof of P into a contradiction.
+class_name IntuitionisticJudgment
+
+enum Status { CONSTRUCTED, REFUTED, UNKNOWN }
+
+var status: int = Status.UNKNOWN
+var construction: Callable
+
+static func law_of_excluded_middle_fails() -&gt; String:
+    # P OR NOT P is not a theorem in intuitionistic logic.
+    # A witness is required: either a construction of P, or a refutation.
+    return &quot;No construction of (P OR NOT P) without a witness for P or NOT P.&quot;
+```
+
+## Constructive Proof Scaffold
+
+```gdscript
+# A constructive proof provides a witness.
+# For existential claims: give an example.
+# For universal claims: give an algorithm that constructs the witness for any input.
+class_name ConstructiveProof
+
+func exists_even_number_greater_than(n: int) -&gt; int:
+    # Constructive proof: return an even number &gt; n
+    return n + 2 if (n + 2) % 2 == 0 else n + 3
+
+func all_naturals_have_successor(n: int) -&gt; int:
+    # The successor construction
+    return n + 1
+
+func classical_fallback_rejected(p: bool) -&gt; String:
+    # Classical logic: (NOT NOT P) -&gt; P
+    # Intuitionistic: cannot conclude P from NOT NOT P without a construction
+    return &quot;construction_required&quot;
+```
+
+## Kripke Semantics Sketch
+
+```gdscript
+# Intuitionistic logic has Kripke semantics: truth is relative to a stage of knowledge.
+# Each stage may add knowledge but never remove it.
+class_name KripkeStage
+
+var known_truths: Array = []
+
+func knows(statement: String) -&gt; bool:
+    return statement in known_truths
+
+func extend(new_truth: String) -&gt; KripkeStage:
+    var next := KripkeStage.new()
+    next.known_truths = known_truths.duplicate()
+    if not new_truth in next.known_truths:
+        next.known_truths.append(new_truth)
+    return next
+```
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Brouwer_Intuitionism/intent.md">Raw captured source</a></p><pre>Concept: Mathematics must be constructed, not merely proven to exist — Brouwer rejected proof by contradiction and the law of excluded middle, demanding that existence requires construction.
+Sequence role: Fifth map in Foundations Crisis; the constructive response to Gödel. Rather than accepting incompleteness and continuing with classical logic, Brouwer proposed a radical alternative: abandon the logical tools that create the problems. If you can&#x27;t build it, you can&#x27;t claim it exists. Prepares Florensky by establishing that different logics are possible; follows Godel_Incompleteness; leads to Florensky_Paraconsistent.
+Technical angle: Constructive vs classical logic, rejection of the law of excluded middle (A ∨ ¬A is not assumed), the Brouwer-Heyting-Kolmogorov interpretation, constructive proofs as programs (Curry-Howard correspondence). The brouwer_choice_sequence, constructive_proof, and excluded_middle_demo make these abstractions interactive.
+Critical angle: Brouwer&#x27;s intuitionism is computationally prescient — constructive proofs are programs, existence claims are algorithms. The rejection of excluded middle is not weakness but discipline: you may not assert something exists without showing how to find it. This connects directly to the curriculum&#x27;s coding emphasis: in computation, existence without construction is meaningless.
+Key artifacts: constructive_proof demonstrates the difference between classical and constructive existence; excluded_middle_demo lets the learner experience what&#x27;s lost (and gained) when excluded middle is rejected; brouwer_choice_sequence shows the free-choice alternative.
+
+Gap: brouwer_choice_sequence needs VR controls; constructive_proof needs VR controls.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Brouwer_Intuitionism/critical.md">Raw captured source</a></p><pre># Brouwer_Intuitionism — Critical Reflection
+
+## The Discipline of Refusal
+
+After Godel proved that formal systems have blind spots and Escher made that proof walkable, Brouwer offers a response that is neither repair nor resignation. He refuses the tools that created the problem. The law of excluded middle — P or not-P, always, for every proposition — is the logical engine that drives both classical proof and classical paradox. Without it, Russell&#x27;s paradox loses its bite (the self-referential set cannot be forced into a definite truth value). Without it, Godel&#x27;s construction still works, but the philosophical sting changes: unprovable statements are not true-but-unreachable; they are simply undetermined. Brouwer does not solve the crisis. He declines the question.
+
+Wittgenstein admired this austerity even as he kept his distance from Brouwer&#x27;s mysticism. In *Philosophical Investigations*, Wittgenstein asks what it means to follow a rule: does the rule determine all its applications in advance, or does each application require a new act of judgment? Brouwer&#x27;s mathematics answers: each application requires construction. The rule is not a Platonic object that exists in advance of its use. The rule is the practice of applying it, step by step, moment by moment. The stepping-stone platforms of this map — appearing only as you approach — are Wittgenstein&#x27;s rule-following made spatial. Nothing is determined in advance. Each step is a new act.
+
+The three artifacts crystallize the refusal. `excluded_middle_demo` lets the learner toggle the axiom off and watch the logical landscape change: the disjunction fades, the spheres dim, certainty retreats. `constructive_proof` shows existence with and without a witness — one panel names the thing that exists, the other says only that nonexistence is absurd. `brouwer_choice_sequence` displays an infinite sequence that never finishes, each term appearing when it is chosen and not before. The sequence bobbing gently in the void, always unfinished, always open — this is Brouwer&#x27;s mathematics as a time-bound activity, not a timeless inventory.
+
+## Constructed Life
+
+Agamben distinguishes between the law that is written and the law that is lived — between the juridical order and the forms of life it governs. Classical mathematics is written law: the axioms are declared, the theorems follow by logical necessity, and every mathematical object exists whether or not anyone has found it. Brouwer&#x27;s intuitionism is lived law: a theorem exists only when a mathematician constructs its proof. Mathematical objects are not discovered. They are made. And the making takes time.
+
+The auto-reveal mechanic enacts this distinction. In every other map in the sequence, the entire structure is present from the moment of entry. You arrive and the world is there, waiting, complete. In Brouwer_Intuitionism, the world is not there until you build it. Platforms appear as you approach. The gaps are not hidden architecture — they are genuine absence. The map does not pretend that unconstructed things exist. This honesty is Brouwer&#x27;s honesty, and it costs something real: the space is sparse, fragmentary, uncertain. You cannot see the whole from the start. You must walk into incompleteness and build the ground beneath your feet.
+
+The cost is also mathematical. Without the law of excluded middle, vast regions of classical analysis dissolve. The intermediate value theorem, the Bolzano-Weierstrass theorem, large parts of measure theory — gone, unless reconstructed with explicit algorithms. Brouwer accepted the cost. He preferred a smaller mathematics that meant what it said to a larger mathematics that made claims it could not cash.
+
+## Who Gets to Assert Existence?
+
+Butler asks how the authority to name and categorize is distributed. In classical mathematics, the authority is total: the axioms assert that every proposition has a truth value, that every set is well-defined, that existence follows from non-contradiction. The mathematician discovers truths that preexist the discovery. In constructive mathematics, the authority is local and personal: I may assert existence only when I have built the thing. I may claim truth only when I hold the proof. The shift is from a third-person ontology (truths exist independently of any knower) to a first-person epistemology (truths exist for me when I construct them).
+
+This is not solipsism. Constructive proofs, once built, are publicly verifiable. The Curry-Howard correspondence ensures that every proof can be checked mechanically — it is a program that type-checks. But the initial assertion, the claim that something exists, must originate in an act of construction. Nobody can assert on your behalf. Nobody can prove by contradiction that your experience is valid without producing the experience.
+
+The stepping stones trail off into void. Some platforms are reachable. Some are not, at least not from here, not with the bridges currently available. The unreachable platforms are not false. They are unconstructed.
+
+The map does not forbid their existence — it simply does not assert it. In a project grounded in queer and feminist epistemology, this restraint is politically charged. Brouwer says: do not claim to know what you have not built. Do not declare existence where you have not walked. The gap between platforms is not ignorance. It is honesty about the limits of what has been constructed so far.
+
+The question for the next map — Florensky_Paraconsistent — is whether Brouwer&#x27;s discipline goes too far. He avoids contradiction by restricting what can be said. Florensky will propose the opposite: say everything, hold the contradiction, refuse to let it detonate. Both are responses to the same crisis. Both accept that classical logic broke something. They disagree about what to do with the pieces.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Brouwer_Intuitionism/artifacts.md">Raw captured source</a></p><pre># Brouwer Intuitionism — Artifacts
+*Foundations Crisis: The Limits of Formalization · synthesis · 4 artifacts*
+
+&gt; Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Excluded Middle Demo
+![Excluded Middle Demo](/scene-catalog/excluded_middle_demo.png)
+
+Law of excluded middle (P or not-P) interactive demo - Brouwer rejected this for non-constructive proofs, slider controls the degree of rejection
+
+`excluded_middle_demo`
+
+## Constructive Proof
+![Constructive Proof](/scene-catalog/constructive_proof.png)
+
+Demonstrates constructive vs classical proof - constructive must exhibit the witness, classical can prove existence by contradiction
+
+`constructive_proof`
+
+## ConstructiveStaircase
+![ConstructiveStaircase](/scene-catalog/constructive_staircase.png)
+
+Brouwer&#x27;s intuitionism: the next step isn&#x27;t true-or-false until you construct it.
+
+`constructive_staircase`
+
+## Brouwer Choice Sequence
+![Brouwer Choice Sequence](/scene-catalog/brouwer_choice_sequence.png)
+
+Brouwer&#x27;s free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an open-ended future
+
+`brouwer_choice_sequence`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Brouwer_Intuitionism/summary.md">Raw captured source</a></p><pre># Brouwer_Intuitionism — Summary
+
+The sixth map in the foundationscrisis sequence. An 11x14 grid, max height 2, built as fragmented stepping-stone platforms over void. The map uses auto-reveal mechanics: platforms are invisible until the player approaches, constructing the space in real time. Bridges connect certain islands. The gaps between platforms are honest — they represent what has not been constructed.
+
+Three artifacts occupy separate islands. `excluded_middle_demo` presents two spheres (P and not-P) with a toggleable disjunction: switch to intuitionistic mode and the law of excluded middle fades, the spheres dim, certainty retreats. `constructive_proof` contrasts classical and constructive existence proofs side by side — one panel names the witness, the other proves only that nonexistence is absurd. `brouwer_choice_sequence` displays an infinite sequence generating in real time, each term appearing when chosen, the sequence always unfinished, always open.
+
+Brouwer rejected proof by contradiction and the law of excluded middle. If you cannot construct a mathematical object, you may not assert it exists. The cost is real: large parts of classical analysis dissolve without constructive replacements. The gain is equally real: constructive proofs are programs (the Curry-Howard correspondence), and existence claims become algorithms. Brouwer&#x27;s intuitionism, once a fringe position, is the logical foundation of modern type theory and proof assistants.
+
+Position: map 6 of 8 in foundationscrisis. Difficulty: expert. Estimated time: 5-6 minutes. Follows Escher_Impossible (visual paradox) and Godel_Incompleteness (formal limits). Leads to Florensky_Paraconsistent, which proposes the opposite response: rather than restricting logic to avoid contradiction, embrace contradiction and refuse to let it spread.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Brouwer_Intuitionism/blurb.md">Raw captured source</a></p><pre>Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.
+
+Brouwer refused. If you cannot construct it, it does not exist. No existence without witness. No truth without a hand that built it. The law of excluded middle — *either P or not-P* — falls away, and with it, whole cathedrals of proof dissolve into smoke. What remains is only what you can actually make.
+
+Walk the stepping stones. Each platform appears only as you approach — nothing is given in advance. The gaps between are not failures of the map. They are honest. Some things cannot be constructed, and the space will not pretend otherwise. After Gödel showed the wall, Brouwer asked: what if we never claimed to see past it?</pre></section></body></html>

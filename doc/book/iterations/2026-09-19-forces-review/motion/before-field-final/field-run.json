@@ -1,0 +1,52 @@
+{
+  "pid": 47004,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--rendering-method",
+    "mobile",
+    "--rendering-driver",
+    "vulkan",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\motion\\before-field-final\\field-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/motion/probes/probe_field.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-forces-review/motion/before-field-final/"
+  ],
+  "returncode": 0,
+  "seconds": 18.975046157836914,
+  "source_sha256_before": {
+    "algorithms/vectors/10_vector_field_flow/field_receivers.gd": "0ab725762c7088001090a1cdb1e7c8416144822652dd4c8e876b3ab597d6b524",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json": "583fb38c809f12396b5f4a0d109ff30c1e8ed7e6c9015009642e02d4443b9a4e",
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/artifacts/registry/vectors_demos.json": "a44d24abef89184269a56eeb8dfe1301ffaf783a2b59add333d9984868a0e8cd",
+    "commons/artifacts/drag_corridor/kinetic_drag.gd": "350f56129ded3e3b424de1e83dcf37ef4042de29a7111e521331e57dad9ea7ca",
+    "commons/artifacts/drag_corridor/kinetic_walk_provider.gd": "4bd308a514b2782392817e1dbd09a8606826b0e2983515b361e282756158d2c8",
+    "commons/artifacts/centrifuge_ring/centrifuge_ring.gd": "84a1180d18dcd9ec53e371898757c86a31d9ccaab988a7d6d430fb019b6398f6",
+    "commons/artifacts/force_mower/force_mower.gd": "173ac5564474a7f73a5dd33a59dab811f381a485763c5904cd4787965097ad77",
+    "commons/artifacts/sisyphus_mower/sisyphus_mower.gd": "064c9f01efb4af89c95e7cfebc0a023644c9c3703907f676599366e6ded120ea",
+    "commons/artifacts/prop_carousel/prop_carousel.gd": "ec67c3be4f80d250dd5b24ad89c271dd76e560fa78d3374f30b17621cbb76f3e"
+  },
+  "source_sha256_after": {
+    "algorithms/vectors/10_vector_field_flow/field_receivers.gd": "0ab725762c7088001090a1cdb1e7c8416144822652dd4c8e876b3ab597d6b524",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json": "583fb38c809f12396b5f4a0d109ff30c1e8ed7e6c9015009642e02d4443b9a4e",
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/artifacts/registry/vectors_demos.json": "a44d24abef89184269a56eeb8dfe1301ffaf783a2b59add333d9984868a0e8cd",
+    "commons/artifacts/drag_corridor/kinetic_drag.gd": "350f56129ded3e3b424de1e83dcf37ef4042de29a7111e521331e57dad9ea7ca",
+    "commons/artifacts/drag_corridor/kinetic_walk_provider.gd": "4bd308a514b2782392817e1dbd09a8606826b0e2983515b361e282756158d2c8",
+    "commons/artifacts/centrifuge_ring/centrifuge_ring.gd": "84a1180d18dcd9ec53e371898757c86a31d9ccaab988a7d6d430fb019b6398f6",
+    "commons/artifacts/force_mower/force_mower.gd": "173ac5564474a7f73a5dd33a59dab811f381a485763c5904cd4787965097ad77",
+    "commons/artifacts/sisyphus_mower/sisyphus_mower.gd": "064c9f01efb4af89c95e7cfebc0a023644c9c3703907f676599366e6ded120ea",
+    "commons/artifacts/prop_carousel/prop_carousel.gd": "ec67c3be4f80d250dd5b24ad89c271dd76e560fa78d3374f30b17621cbb76f3e"
+  }
+}

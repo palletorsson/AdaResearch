@@ -1,0 +1,13 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/critical.md
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/critical.md
+@@ -1,8 +1,8 @@
+ # Where was this body's destination decided?
+ 
+-Choose a visible part during the floating phase. Follow it as an assembly forms. Watch another floating phase and a different assembly; notice both its destination and any change of shape or colour.
++Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+ 
+-The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a part the inventory cannot supply? Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
++The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a kind of part the catalogue does not describe? The initial inventory is mutable: an assembly can retype an existing instance or create more instances. Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
+ 
+ Here the restoring force returns from the earlier halls. The vector to_target points from a part to its assigned destination. The spring changes velocity and velocity changes position. A moving piece can look as if it has found its place, although another file already supplied the target. dock_damp is applied each frame, which also makes the settling depend on the update rate. The clock remains inside the body we are watching.
+ 

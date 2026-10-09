@@ -177,6 +177,30 @@
       "passed": true
     },
     {
+      "name": "the guest scene loads: guests/family/family.tscn, and its first node is a Node3D",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name: []",
+      "passed": true
+    },
+    {
+      "name": "the guest runs two frames and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "the guest is one member of the family: its globe.gd is the lesson's globe.gd without the first line, 'class_name Globe'; one body of that class with 8 segments and 4 rings, 80 triangles listed and 64 with area, in BODY c6ff3d, with one collider made from its mesh; it said '[\"Globe, 8, 4: 80 triangles\"]'",
+      "passed": true
+    },
+    {
+      "name": "the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (-0.476, 0.000, -0.476) to (0.476, 1.000, 0.476), and a ray straight down over its middle stops on it at 1.00 m",
+      "passed": true
+    },
+    {
       "name": "sheet.json: with a window the four members are the four of the headless run: the same segments, rings and triangles",
       "passed": true
     },
@@ -253,6 +277,26 @@
         288,
         4224
       ]
+    },
+    "guest": {
+      "box": [
+        [
+          -0.476,
+          0.0,
+          -0.476
+        ],
+        [
+          0.476,
+          1.0,
+          0.476
+        ]
+      ],
+      "rings": 4,
+      "said": [
+        "Globe, 8, 4: 80 triangles"
+      ],
+      "scene": "res://guests/family/family.tscn",
+      "segments": 8
     },
     "marble": {
       "on_top_with_a_body_m": [

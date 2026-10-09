@@ -1,0 +1,387 @@
+[
+  {
+    "sequence": "primitives",
+    "arc": "From arriving in a running world to making its first elements: a point gains a body, an address, a relation, a record and a face. Connected faces become generated forms. Separate rooms then ask what the engine supplies, how a column separates profile from sampling, and what borrowed letter outlines can become. The closing halls consider a chosen tolerance and a composition made with known tools.",
+    "halls": [
+      {
+        "id": "Point_Zero",
+        "title": "Once, then again",
+        "storyboard": "The student encounters the existing museum counter, then reads and runs its smallest complete study: create a Label3D in _ready, attach it, and update its text with the engine frame total in _process. Move the reading to _ready to hold one value while the engine continues. The tutorial prints one complete program, explains every necessary connection and names the exact move for the once-only experiment; camera and player are supplied by Day Zero. Native tests execute the printed code without production-script completion and reject omitted label creation or attachment. Carry execution timing into Point One; keep arrival and borrowed time in final.md.",
+        "mode": "deepen",
+        "brings": [
+          "Running museum",
+          "A saved change appears"
+        ],
+        "learns": [
+          "_ready: initialize when the node is ready",
+          "_process: per-frame updates"
+        ],
+        "carries": "When an instruction runs",
+        "supplied": [
+          "Day Zero running project, camera, light and player"
+        ],
+        "artifact_refs": [
+          "frame_counter_display"
+        ],
+        "review_note": "5 October author correction: smallest complete working code must be visible and tested. This is a reduced learner study of the existing counter, not edits hidden within its production implementation.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Meet museum counter. Print/run complete label + frame-reading study. Create and attach in _ready; update in _process; compare once-only reading. Supply Day Zero camera/player only. Assert exact printed code; missing creation/attachment must fail. Carry execution timing."
+      },
+      {
+        "id": "Point_One",
+        "title": "Give a point a body",
+        "storyboard": "Encounter the corridor's absent, visible and solid points, then build one small point from scratch in point.gd on an empty PointStudy Node3D inside the prepared project. _ready creates a StaticBody3D, sphere mesh and collider. A named centre and radius control position and both boundaries. Change each value; hide the surface or disable collision to separate seeing from contact. The complete code is printed once and executed by native assertions, including the edited states. Carry this actual program into Coordinates. Day Zero supplies room, camera, light and player, not the point.",
+        "mode": "make",
+        "brings": [
+          "Readiness and repeated processing"
+        ],
+        "learns": [
+          "Named values and object references",
+          "Create and attach a visible surface",
+          "Create a separate physical boundary"
+        ],
+        "carries": "The exact point.gd construction continued in Coordinates",
+        "supplied": [
+          "Day Zero room, camera, light and player",
+          "An empty PointStudy Node3D at floor level"
+        ],
+        "artifact_refs": [
+          "point_absent",
+          "point_visible",
+          "point_solid"
+        ],
+        "review_note": "Printed small construction and exact edits have native behavioural evidence. It is a learner study of the existing corridor, with no museum-runtime changes. See doc/book/iterations/2026-10-05-points-built-and-carried/index.html.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Meet corridor points. New point.gd on empty PointStudy in prepared project. _ready builds StaticBody3D + mesh + collider; shared centre/radius. Test position, size, visibility and collision independently. Print complete code once; assert exact script/edits. Carry same program to Coordinates. Supply room/view/player only."
+      },
+      {
+        "id": "Point_Coordinates",
+        "title": "A point we can move",
+        "storyboard": "Meet the museum's held point, then continue the exact point.gd made in Point One. Preserve centre, radius and mesh/collider construction; change the body to XRToolsPickable and supply its pickup settings before adding it to the scene. Create a Label3D and update WORLD from global_position and LOCAL through PointStudy.to_local. Grip, carry and release the same authored construction; disable pickup to isolate permission; move the station to distinguish frames. Test the printed program and its exact predecessor composition in native Godot using the real XR library and synthetic controller. Carry a movable, readable point into Lines. Day Zero supplies configured hands/library; distance is deferred.",
+        "mode": "make",
+        "brings": [
+          "Position variable",
+          "Visible body and collision"
+        ],
+        "learns": [
+          "Pickable body connection and release",
+          "3D coordinates",
+          "Local and world position in named frames"
+        ],
+        "carries": "Point One's authored body construction with pickup and a live coordinate readout",
+        "supplied": [
+          "Day Zero room, camera, light and configured XR hands",
+          "Godot XR Tools library"
+        ],
+        "artifact_refs": [
+          "origin"
+        ],
+        "review_note": "The readout is now created in the printed code. Native evidence tests overlap/grab/release and frame conversion; it does not prove hardware input or headset experience. Current Lines still needs its older predecessor updated.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Continue exact Point One point.gd. Preserve shape construction; StaticBody3D becomes XRToolsPickable. Set pickup configuration before tree entry. Create Label3D; per-frame WORLD=global_position, LOCAL=PointStudy.to_local. Test permission, hold/release, frame change. Supply XR hands/library. Native assertions + exact predecessor composition. Carry point; defer distance."
+      },
+      {
+        "id": "Point_Lines",
+        "title": "Put two points in relation",
+        "storyboard": "At the existing line and relations gallery, the student brings the same pickable point from Coordinates. Its copy becomes another endpoint. Reading both positions in the station's frame gives a displacement and its length; a supplied visible skin draws their relation each frame. A second segment uses two stored positions without pickup bodies. Parallel, plus and X become arrangements the student can alter, including a depth change that separates an apparent crossing. The learner predicts and makes another arrangement, tests coincident endpoints, and carries the connecting operation into Trace. The reflective text follows a line as route, prohibition and sign; Primitive Ignorance later considers choosing rules that organise many finite vertices.",
+        "mode": "make",
+        "brings": [
+          "Pickable point from Coordinates",
+          "Position values in a named frame",
+          "Repeated updates"
+        ],
+        "learns": [
+          "Endpoints and a segment",
+          "Displacement and distance",
+          "Reusing an object",
+          "Parallel, cross and X",
+          "Position in depth"
+        ],
+        "carries": "Connect two positions; reuse that relation to join retained positions in Trace.",
+        "supplied": [
+          "Configured museum hands and room",
+          "line_skin.gd visible segment renderer"
+        ],
+        "artifact_refs": [
+          "line_black_box"
+        ],
+        "review_note": "The saved native checks cover the older Coordinates input. Current Point One/Coordinates now have smaller complete programs; update this continuation before claiming current-chain compatibility. Preserve the archived evidence.",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use existing line and relations gallery. Reuse Coordinates' pickable point; duplicate once. Teach same-frame endpoints, b-a and length; redraw the segment each frame. Supply visible skin and museum hands. Add a second segment from stored positions: parallel, +, X; separate in Z. Check an authored arrangement and coincidence. Carry relation into Trace. Reflection: line as route, prohibition, sign. Later Ignorance: choose rules/connectivity; finite vertices remain countable."
+      },
+      {
+        "id": "Point_Trace",
+        "title": "Keep the positions",
+        "storyboard": "The student uses the existing drawing pen, bringing positions and the segment between two points. They keep accepted positions in an ordered list, read one entry, then loop over neighbouring entries to connect them. A bend or return in their own drawing makes the order worth inspecting. Input, sampling and session storage are supplied. The pen shapes its samples and can retain positions across pickups; release copies the cumulative record to the session store. The student carries that retained drawing into Grid rather than starting again with a stock curve.",
+        "mode": "make",
+        "brings": [
+          "Positions",
+          "A segment between two points"
+        ],
+        "learns": [
+          "Keep accepted positions in an ordered list",
+          "Read one entry",
+          "Traverse neighbouring entries"
+        ],
+        "carries": "The student’s own retained trace",
+        "supplied": [
+          "Existing mouse / VR input",
+          "Sampling and recording policy",
+          "Existing session trace store"
+        ],
+        "artifact_refs": [
+          "draw_dot"
+        ],
+        "review_note": "The pen already shapes its samples, and its record can continue across pickups. Describe those existing choices; do not change the recorder to fit the summary.",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use existing drawing pen. Reuse positions and segments. Teach ordered list: append accepted positions, read an entry, loop over neighbours. Draw a bend or return; follow its order. Supply input, sampling and session storage. Carry the student's retained drawing into Grid. Respect cumulative recording across pickups."
+      },
+      {
+        "id": "Point_Line_Grid",
+        "title": "Give that trace addresses",
+        "storyboard": "The existing grid receives the student’s released trace from the session store. Reusing the list and loop, the student distinguishes an entry’s list index from the spatial address obtained by rounding its position. The display first centres and resizes the drawing, then rounds the displayed positions in X, Y and Z; the original record remains separate. Comparing visits that reach the same address makes this transformation visible. Session transfer and fitting are supplied. The student carries a way to organize positions, without a claim that the record survives a project restart.",
+        "mode": "deepen",
+        "brings": [
+          "Saved trace",
+          "List and traversal"
+        ],
+        "learns": [
+          "Distinguish list order from grid address",
+          "Follow three-dimensional rounding",
+          "Separate source data from its display"
+        ],
+        "carries": "The same trace in a chosen lattice",
+        "supplied": [
+          "Existing session transfer",
+          "Existing display centring and resizing"
+        ],
+        "artifact_refs": [
+          "grid_lines"
+        ],
+        "review_note": "The current artifact rounds after fitting the drawing for display. Do not claim rounding in the original metre frame or persistence after restart. This is a writing summary, not an implementation proposal.",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use existing grid and the student's released trace. Reuse list and loop. Teach list index versus spatial address; follow XYZ rounding. Supply session transfer and display fitting. Existing order: centre/resize, then round displayed positions. Compare coincident addresses; retain source separately. Carry: organize positions. No restart-persistence claim."
+      },
+      {
+        "id": "Point_Triangle_Context",
+        "title": "A boundary becomes a face",
+        "storyboard": "The student encounters the small drawing tool and its enlarged twin. Reusing points or recorded positions and the lines connecting them, they select three non-collinear corners, close an outline and submit a triangular face in an explicit corner order. The outline and surface become distinguishable results of different operations. Mirroring, material and input are supplied. Another valid set of corners lets the student reuse the operation deliberately. A triangular face travels onward; filling an arbitrary polygon remains outside this first step.",
+        "mode": "make",
+        "brings": [
+          "Three positions",
+          "Connected segments"
+        ],
+        "learns": [
+          "Submit a triangular face",
+          "Corner order"
+        ],
+        "carries": "A face made from chosen positions",
+        "supplied": [
+          "Small tool and enlarged twin",
+          "Material and input"
+        ],
+        "artifact_refs": [],
+        "review_note": "Use non-collinear positions. Defer arbitrary polygon filling.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use small drawing tool and enlarged twin. Reuse points or recorded positions and segments. Select three non-collinear corners; close outline, then submit a face in explicit corner order. Distinguish boundary from surface. Supply mirroring, material and input. Carry: triangular face. Defer arbitrary polygon filling."
+      },
+      {
+        "id": "Primitives_Polythedra",
+        "title": "Connect faces around a space",
+        "storyboard": "Among the hall’s solids, the student returns to a position list and the triangular face. Adding one point allows a small enclosure, whose first example still needs choosing. A face list now refers to stored corners by index: changing a position and changing which corners connect are different edits. The rendering wrapper is supplied, and collision remains a separate question. The wider bodily comparisons keep their reflective role. The student leaves with an editable mesh, able to locate both its positions and its connections.",
+        "mode": "make",
+        "brings": [
+          "Position list",
+          "Triangle submission"
+        ],
+        "learns": [
+          "A face list references corners"
+        ],
+        "carries": "A small connected mesh",
+        "supplied": [
+          "Rendering wrapper",
+          "The wider solid comparisons"
+        ],
+        "artifact_refs": [],
+        "review_note": "",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use the hall's solids. Reuse triangular faces and position list; add one point to make a small enclosure. Teach face indices referencing stored corners. Distinguish position edits, connectivity and collision. Supply rendering wrapper; retain bodily comparisons for reflection. Carry: editable mesh. Open: select the first enclosure."
+      },
+      {
+        "id": "Point_Animatedcube",
+        "title": "Keep the corners, change the connections",
+        "storyboard": "The cube and its comparison display return to the position list and face connections. The student moves a shared corner and follows the faces affected by that edit, then compares the two diagonals across one side. Editing vertex data is distinguished from moving the object as a whole. This extends the mesh work without requiring a new system for making bodies. The prefab shelf remains an encounter with reuse and repetition; teaching scene packaging can wait. What travels onward is the ability to edit a connected form deliberately.",
+        "mode": "deepen",
+        "brings": [
+          "Positions and face connections"
+        ],
+        "learns": [
+          "Shared corners",
+          "A diagonal changes connectivity"
+        ],
+        "carries": "Edit a mesh without confusing it with object motion",
+        "supplied": [
+          "Comparison display",
+          "Prefab shelf"
+        ],
+        "artifact_refs": [],
+        "review_note": "",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use cube and comparison display. Reuse positions and face lists. Move a shared corner; inspect affected faces; compare diagonals across one side. Distinguish vertex edits from whole-object motion. Carry: mesh editing. Keep prefab shelf as a reuse/repetition encounter; defer scene packaging."
+      },
+      {
+        "id": "Primitives_Ignorance",
+        "title": "A rule can make the positions",
+        "storyboard": "The solids and columns let the student return to position lists and loops. Instead of entering every position, they write a function that accepts a radius and produces symmetric positions; the face connections are supplied. They compare changing a generated result with changing the rule that makes it. This gives the student a reusable generator while leaving resolution, proportion and aesthetic judgement as separate decisions. The engine mesh library now follows in Godot, while Columns gives profile, height and sampling their own study. The older secondary works remain museum encounters without becoming compulsory lessons.",
+        "mode": "make",
+        "brings": [
+          "Position lists",
+          "Connected faces",
+          "Loop"
+        ],
+        "learns": [
+          "A function generates positions"
+        ],
+        "carries": "A reusable geometric generator",
+        "supplied": [
+          "Face connections",
+          "Museum columns and solids"
+        ],
+        "artifact_refs": [],
+        "review_note": "The engine library and seven-form choir move to Godot. Columns takes the profile-and-rings follow-up; preserve the other secondary works here. Resolution, proportion and aesthetic judgement remain different decisions.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use solids and columns. Reuse position lists and loops. Teach function: radius in, symmetric positions out. Supply face connections. Compare editing a result with changing its rule. Carry: reusable generator. Keep resolution, proportion and aesthetic judgement distinct. Continue through Godot’s supplied forms to a separate Columns study. Preserve the older secondary museum works without making each a lesson."
+      },
+      {
+        "id": "Primitives_Godot",
+        "title": "Forms the engine gives us",
+        "storyboard": "The student encounters the relocated mesh library and seven-form choir after generating positions in Ignorance. They distinguish a generated mesh resource from the reusable scene that supplies its presentation, material, collision or behaviour. The proposed small study selects one familiar resource, changes one documented setting in an agreed edit host, and compares what changed with what the scene still supplies. The library is a set of fixed specimens, not a universal parameter editor; the choir is a selection, not the complete engine vocabulary. The student carries a way to choose and inspect supplied geometry before taking a column’s profile into their own hands.",
+        "mode": "deepen",
+        "brings": [
+          "Position lists and a generating function",
+          "Surface and collision are separate",
+          "Familiar forms encountered in supplied scenes"
+        ],
+        "learns": [
+          "Distinguish generated mesh resource from scene",
+          "Inspect one documented resource setting"
+        ],
+        "carries": "Choose supplied geometry while naming what its scene provides",
+        "supplied": [
+          "Mesh library and seven-form choir",
+          "Materials, museum host and any scene behaviour"
+        ],
+        "artifact_refs": [
+          "primitive_mesh_library",
+          "seven_words_choir"
+        ],
+        "review_note": "Agree the small edit host before expanding a lesson. The library offers no universal visitor parameter controls; trails are shown at rest. The choir names seven selected common forms, not every PrimitiveMesh type.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use relocated mesh library and seven-form choir. Reuse a generating function and the mesh/scene distinction. Teach one documented resource setting in an agreed small host; inspect what its scene supplies. Library specimens are fixed; trails show rest geometry. Choir is a selection, not the complete engine vocabulary. Carry: choose and inspect supplied geometry. Open: learner edit host. Defer a tour through every artifact’s implementation."
+      },
+      {
+        "id": "Primitives_Columns",
+        "title": "One outline, several bodies",
+        "storyboard": "The student begins with five columns sharing a profile, height and profile sampling while their radial counts run 4, 6, 8, 12 and 16. Holding these choices still makes the changed cross-section inspectable. Four further rows then vary outlines and heights as well as sampling; they form a family rather than a controlled resolution-only comparison. In the existing reduced source study, a list of radii and a function separate profile, full height and side count, with the circle sampler and surface builder supplied. Its straight profile intervals differ from the museum’s curved sections. The student carries a form whose inputs can be changed independently, without treating every extra division as an improvement.",
+        "mode": "make",
+        "brings": [
+          "List and loop",
+          "A function returns positions",
+          "Supplied geometry can be inspected"
+        ],
+        "learns": [
+          "Separate profile, full height and radial count",
+          "Hold other inputs fixed for one comparison",
+          "Distinguish profile choice from sampling"
+        ],
+        "carries": "A column rule with separable shape, height and sampling inputs",
+        "supplied": [
+          "Circle sampler and surface builder",
+          "Museum specimens and their curved-section builder",
+          "Room, material and input"
+        ],
+        "artifact_refs": [
+          "resolution_colonnade_museum"
+        ],
+        "review_note": "The museum has fixed specimens, not live editing knobs. The reduced radius-list study uses straight intervals and ArrayMesh; do not call it a built-in PrimitiveMesh or equate more entries with smoothing. Agree where the learner’s edited column belongs in the museum.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use five equal-profile, equal-height columns at 4/6/8/12/16 sides; keep profile sampling fixed. Then inspect four rows of varied outlines and heights without calling them a controlled resolution-only test. Reuse list, loop and function in the existing reduced column study. Teach profile versus full height versus side count. Supply sampler and ArrayMesh builder. Reduced straight intervals differ from museum curved sections. Carry: independently changeable inputs. Open: place for the learner’s edited column. Keep a faceted choice available."
+      },
+      {
+        "id": "Primitives_Profiles",
+        "title": "Borrowed outlines",
+        "storyboard": "The student follows five source signs into six supplied bodies: two uses of O, then B, C, I and a colon. The flat profile stays beside each result. They distinguish the region carried from the route and scale of its successive sections, then identify one disclosed recipe input that could change a chosen form. Font extraction, triangulation and the geometry builder remain supplied; an editable learner host still needs choosing. The upright O retains a sill, the flared vessel has no bottom, B’s wells stay separate, C follows an open route, I closes a path, and the colon remains two bodies. These limits keep architectural possibilities distinct from implemented uses. The student carries a source profile and a construction choice toward Portals without needing a general topology curriculum.",
+        "mode": "deepen",
+        "brings": [
+          "Profile and sampling are different inputs",
+          "A function can return geometry data",
+          "Supplied construction is not a guaranteed use"
+        ],
+        "learns": [
+          "Distinguish source region from section route and scale",
+          "Trace one disclosed input into a resulting body",
+          "Name a visible limitation before proposing a use"
+        ],
+        "carries": "A borrowed profile with an explicit construction choice and use limitation",
+        "supplied": [
+          "Font and six tested form recipes",
+          "Glyph triangulation and sweep builder",
+          "Museum host and source-profile displays"
+        ],
+        "artifact_refs": [
+          "glyph_profile_gallery"
+        ],
+        "review_note": "Choose a bounded learner edit host. The O sill is not a level doorway and the vessel has no bottom. Do not promise arbitrary glyph morphing, general path framing, accessible passage or a general topology lesson. Standalone atlas camera controls are not museum controls.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use O/O/B/C/I/: and their flat source profiles beside six supplied bodies. Reuse profile versus sampling and generating functions. Teach source region versus section route/scale; identify one disclosed recipe input. Supply font extraction, triangulation and sweep builder. Keep O sill, vessel’s missing bottom, B’s separate wells and colon’s separate bodies explicit; I’s closed path supplies its opening. Carry: profile plus construction choice and use limit. Open: bounded learner edit host. Defer general topology, arbitrary paths and contour morphing."
+      },
+      {
+        "id": "Primitives_Portals",
+        "title": "Decide what is sufficient",
+        "storyboard": "At the ring display, the student reuses generated positions and distances while a supplied circle sampler handles construction. They compare segment counts and choose a resolution for a stated visible or bodily purpose. More segments change the approximation, but do not settle proportion or aesthetic preference. The reusable outcome is a tolerance they can explain. This hall keeps a reflective pace: deriving the trigonometric construction and implementing portal rendering are deferred.",
+        "mode": "reflect",
+        "brings": [
+          "Generated positions",
+          "Distance between points"
+        ],
+        "learns": [
+          "Choose finite resolution for a purpose"
+        ],
+        "carries": "A stated tolerance or visible purpose",
+        "supplied": [
+          "Circle sampler",
+          "Ring display"
+        ],
+        "artifact_refs": [],
+        "review_note": "The sampler is supplied; full trigonometric construction is not assumed here.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use ring display; supply circle sampler. Reuse generated positions and distances. Compare segment counts; choose sufficient resolution for a stated visible or bodily purpose. Carry: a justified tolerance. Keep resolution, proportion and aesthetic preference distinct. Preserve reflective pacing; defer trigonometric construction and portal rendering."
+      },
+      {
+        "id": "Primitives_Melencolia",
+        "title": "Compose with what we have",
+        "storyboard": "The existing Dürer encounter gives the student room to compose with familiar forms and placement. Prepared materials are supplied, and a small arrangement can be made without requiring new syntax. If scale has not yet been taught, it must be supplied or deferred rather than silently assumed. The reflective text keeps its inquiry into geometric desire, exact forms and the difficulty of making. Composition carries these known elements toward Transformation, where their arrangement can begin to change.",
+        "mode": "reflect",
+        "brings": [
+          "Generated forms",
+          "Placement and proportion"
+        ],
+        "learns": [
+          "Compose with known elements"
+        ],
+        "carries": "A small arrangement that can change",
+        "supplied": [
+          "Existing Dürer encounter",
+          "Prepared materials"
+        ],
+        "artifact_refs": [],
+        "review_note": "The critical discussion of geometric desire retains its own room; no new syntax is needed to finish.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Use existing Durer encounter and prepared materials. Reuse known forms and placement to compose a small arrangement. Require no new syntax. Preserve reflection on geometric desire, exact forms and the difficulty of making. Carry composition into Transformation. Open: scale must be supplied or deferred if not yet taught."
+      }
+    ]
+  }
+]

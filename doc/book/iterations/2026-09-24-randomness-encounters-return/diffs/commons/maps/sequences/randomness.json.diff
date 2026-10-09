@@ -1,0 +1,39 @@
+--- before/commons/maps/sequences/randomness.json
++++ commons/maps/sequences/randomness.json
+@@ -108,6 +108,9 @@
+           "map": "Randomness_10_PRINT_Algorithm",
+           "position": "foundation",
+           "artifacts": [
++            "ten_print",
++            "composition_stochastique",
++            "ten_print_structure",
+             "remove_random",
+             "ten_print_maze_3d",
+             "pickup_cube_placer",
+@@ -116,7 +119,7 @@
+             "nature_system_demo"
+           ],
+           "size_budget": "mixed",
+-          "rationale": "Classic 10 PRINT algorithm with 3D maze generation; builds on intro with first algorithmic pattern",
++          "rationale": "Take one line of BASIC apart at its coin (205.5) and its semicolon, see the same stream laid on the floor, then walk into twelve of its characters stood up as solid walls to find whether they left a way through.",
+           "grammar": "zelda"
+         },
+         {
+@@ -125,12 +128,12 @@
+           "artifacts": [
+             "dice_throw",
+             "coin_toss",
+-            "dark_sphere",
+             "random_object_spawner",
+-            "random_edge_profile"
+-          ],
+-          "size_budget": "mixed",
+-          "rationale": "Probability primitives (dice, coins) plus random geometry generation via edge profiles",
++            "random_edge_profile",
++            "dark_sphere"
++          ],
++          "size_budget": "mixed",
++          "rationale": "Throw a die and a coin into two records that forget different things; walk through forty-eight bounded draws that show one rule in space.",
+           "grammar": "metropolitan"
+         },
+         {

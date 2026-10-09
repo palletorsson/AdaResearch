@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A point, then a point you can hold — Endless Museum</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#262923;font:16px/1.65 system-ui,sans-serif}main{max-width:1160px;margin:auto;padding:50px 35px 80px}a{color:inherit;text-underline-offset:4px}a:focus-visible,summary:focus-visible{outline:3px solid #946172;outline-offset:5px}.eyebrow{font:11px/1.5 system-ui;letter-spacing:.14em;text-transform:uppercase;color:#536354}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.12}h1{font-size:clamp(38px,5.5vw,66px);max-width:780px;letter-spacing:-.025em;margin:20px 0}h2{font-size:35px;margin-top:18px}h3{font-size:27px}.intro{max-width:760px;font:21px/1.65 Georgia,serif}.proof{padding:15px 20px;background:#dde6d9;border:1px solid #c4d0bf;margin:28px 0}.lessons{display:grid;grid-template-columns:1fr 1fr;gap:22px}article{padding:28px;background:#fffdf8;border:1px solid #d4d0c7;min-width:0}.lead{font:21px/1.5 Georgia,serif}.button{display:inline-block;border-bottom:1px solid;padding:6px 0;font-weight:600;font-size:14px}.files{font-size:13px;color:#586154}details{border-top:1px solid #dedbd3;padding-top:14px;margin-top:22px}summary{cursor:pointer;font-size:13px}pre{font:12px/1.6 Consolas,monospace;overflow:auto;padding:15px;background:#efeee9}section{margin-top:32px;padding-top:12px;border-top:1px solid #cdc8be;max-width:830px}.limits{font-size:14px;color:#596052}.links{display:flex;flex-wrap:wrap;gap:18px;font-size:14px}footer{margin-top:40px;font-size:12px;color:#677061}@media(max-width:750px){main{padding:30px 20px}.lessons{grid-template-columns:1fr}article{padding:22px}}
+</style><main>
+<header><p class="eyebrow">Endless Museum / two executable lessons / 5 October 2026</p>
+<h1>A point, then a point<br>you can hold.</h1>
+<p class="intro">Build the small program from scratch. Continue with that same construction in the next hall. The code printed in each tutorial is the code Godot tested.</p></header>
+<p class="proof"><strong>106 native assertions passed.</strong> 2 deliberate faults were rejected. Coordinates reconstructs exactly from Point One plus its declared edits.</p><div class="lessons"><article>
+          <p class="eyebrow">01 / 60 assertions passed</p>
+          <h2>Make the point</h2><p class="lead">A position, a visible surface and a physical boundary. The script creates all three from scratch.</p><p>Change the centre and radius. Disable collision; hide the surface. Native physics checks distinguish what can be seen from what can be hit.</p>
+          <p><a class="button" href="../2026-10-05-primitives-facing-pages/Point_One.html?revision=built-and-carried">Read the tutorial beside final.md <span aria-hidden="true">↗</span></a></p>
+          <p class="files"><a href="states/001-point-one/point.gd">Download point.gd</a> · <a href="states/001-point-one/report-runtime.json">Native results</a></p>
+          <details><summary>Exact tested program · 25 lines</summary><pre><code>extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+var point: StaticBody3D
+
+func _ready() -&gt; void:
+    point = StaticBody3D.new()
+    point.position = CENTRE
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    point.add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    point.add_child(boundary)
+
+    add_child(point)
+</code></pre></details>
+        </article><article>
+          <p class="eyebrow">02 / 46 assertions passed</p>
+          <h2>Carry the same point</h2><p class="lead">Keep its construction. Give the body pickup behaviour, then create a label that reads its local and world position.</p><p>The real XR Tools library selects, holds, moves and releases the point. A translated and rotated parent separates the coordinate readings.</p>
+          <p><a class="button" href="../2026-10-05-primitives-facing-pages/Point_Coordinates.html?revision=built-and-carried">Read the tutorial beside final.md <span aria-hidden="true">↗</span></a></p>
+          <p class="files"><a href="states/002-point-coordinates/point.gd">Download point.gd</a> · <a href="states/002-point-coordinates/report-runtime.json">Native results</a></p>
+          <details><summary>Exact tested program · 43 lines</summary><pre><code>extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+var point: XRToolsPickable
+var readout: Label3D
+
+func _ready() -&gt; void:
+    point = XRToolsPickable.new()
+    point.position = CENTRE
+    point.freeze = true
+    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    point.collision_layer = 4
+    point.collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    point.add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    point.add_child(boundary)
+
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = &quot;LOCAL &quot; + str(local_position) + &quot;\nWORLD &quot; + str(world_position)
+</code></pre></details>
+        </article></div><section><h3>What continues</h3><p>The centre, radius, mesh and collider keep their construction. Coordinates changes the body class and adds the pickup settings, a label and its per-frame readings. There is one complete program and one <code>_ready()</code> listing per lesson.</p>
+<p>Day Zero supplies the working room, camera, light and configured XR hands/library. It does not secretly supply either lesson’s point or readout.</p></section><section><h3>Tests that can fail</h3><ul><li><strong>missing mesh</strong> — rejected by the ordinary assertions.</li><li><strong>local as world</strong> — rejected by the ordinary assertions.</li></ul><p>The assertions inspect created objects, query native physics and exercise the actual pickup library. The test runner also hashes the exact tutorial sources and refuses a continuation that differs from the declared edits.</p></section><section><h3>Complete experiment scripts</h3><ul><li><a href="states/001-point-one/variants/boundary-disabled.gd">boundary disabled</a></li><li><a href="states/001-point-one/variants/centre-170.gd">centre 170</a></li><li><a href="states/001-point-one/variants/radius-030.gd">radius 030</a></li><li><a href="states/001-point-one/variants/surface-hidden.gd">surface hidden</a></li><li><a href="states/002-point-coordinates/variants/pickup-disabled.gd">pickup disabled</a></li></ul></section><section><h3>What the evidence covers</h3><p class="limits">The tests run headlessly in Godot with synthetic controllers. They verify the code and library behaviour; they do not verify hardware grip input, headset comfort, visual appearance or a student’s understanding. Museum runtime and both reflective texts remain unchanged.</p>
+<p class="limits">Lines still contains the older Coordinates continuation. Its historical test results remain available, with the changed predecessor marked for revision.</p>
+<p class="links"><a href="report-runtime.json">Full result and source hashes</a><a href="run_checks.py.txt">Test runner source</a><a href="verify.gd">Native assertions</a><a href="http://localhost:3003/ghost-student?state=point-coordinates">Ghost Student</a></p></section>
+<footer>Reproduce: python doc/book/iterations/2026-10-05-points-built-and-carried/run_checks.py</footer></main></html>

@@ -1,187 +1,68 @@
 {
  "sweep": "basis_vectors_rig",
- "peak_changed_pct": 7.182,
- "verdict": "BITES",
+ "peak_changed_pct": 1.113,
+ "subject_pct": 82.366,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "table_body": true,
-    "wear": 0.05
+    "decomposition": "chain"
    },
    "b": {
-    "table_body": true,
-    "wear": 0.1
+    "decomposition": "star"
    },
-   "changed_px": 1663,
-   "changed_pct": 0.288
+   "changed_px": 1994,
+   "changed_pct": 0.345
   },
   {
    "a": {
-    "table_body": true,
-    "wear": 0.05
+    "decomposition": "chain"
    },
    "b": {
-    "table_body": true,
-    "wear": 0.16
+    "decomposition": "box"
    },
-   "changed_px": 1663,
-   "changed_pct": 0.288
+   "changed_px": 6287,
+   "changed_pct": 1.088
   },
   {
    "a": {
-    "table_body": true,
-    "wear": 0.05
+    "decomposition": "chain"
    },
    "b": {
-    "table_body": false,
-    "wear": 0.05
+    "decomposition": "none"
    },
-   "changed_px": 41278,
-   "changed_pct": 7.146
+   "changed_px": 1570,
+   "changed_pct": 0.272
   },
   {
    "a": {
-    "table_body": true,
-    "wear": 0.05
+    "decomposition": "star"
    },
    "b": {
-    "table_body": false,
-    "wear": 0.1
+    "decomposition": "box"
    },
-   "changed_px": 41278,
-   "changed_pct": 7.146
+   "changed_px": 5856,
+   "changed_pct": 1.014
   },
   {
    "a": {
-    "table_body": true,
-    "wear": 0.05
+    "decomposition": "star"
    },
    "b": {
-    "table_body": false,
-    "wear": 0.16
+    "decomposition": "none"
    },
-   "changed_px": 41278,
-   "changed_pct": 7.146
+   "changed_px": 718,
+   "changed_pct": 0.124
   },
   {
    "a": {
-    "table_body": true,
-    "wear": 0.1
+    "decomposition": "box"
    },
    "b": {
-    "table_body": true,
-    "wear": 0.16
+    "decomposition": "none"
    },
-   "changed_px": 1,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.1
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.05
-   },
-   "changed_px": 41481,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.1
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.1
-   },
-   "changed_px": 41482,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.1
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.16
-   },
-   "changed_px": 41481,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.16
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.05
-   },
-   "changed_px": 41484,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.16
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.1
-   },
-   "changed_px": 41485,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": true,
-    "wear": 0.16
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.16
-   },
-   "changed_px": 41484,
-   "changed_pct": 7.182
-  },
-  {
-   "a": {
-    "table_body": false,
-    "wear": 0.05
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.1
-   },
-   "changed_px": 1,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "table_body": false,
-    "wear": 0.05
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.16
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "table_body": false,
-    "wear": 0.1
-   },
-   "b": {
-    "table_body": false,
-    "wear": 0.16
-   },
-   "changed_px": 1,
-   "changed_pct": 0.0
+   "changed_px": 6429,
+   "changed_pct": 1.113
   }
  ]
 }

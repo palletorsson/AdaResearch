@@ -1,0 +1,121 @@
+--- before/commons/maps/Primitives_Polythedra/map_data.json
++++ after/commons/maps/Primitives_Polythedra/map_data.json
+@@ -10,6 +10,118 @@
+ 	  "depth": 28,
+ 	  "max_height": 3
+ 	},
++    "museum": {
++      "simplex_corners": [
++        {
++          "name": "entry-west",
++          "corner": [
++            1,
++            1
++          ],
++          "inward": [
++            1,
++            1
++          ],
++          "reach_m": 1.5
++        },
++        {
++          "name": "first-east-return",
++          "corner": [
++            10,
++            4
++          ],
++          "inward": [
++            -1,
++            1
++          ],
++          "reach_m": 1.5
++        },
++        {
++          "name": "first-east-end",
++          "corner": [
++            10,
++            8
++          ],
++          "inward": [
++            -1,
++            -1
++          ],
++          "reach_m": 1.5
++        },
++        {
++          "name": "exit-west",
++          "corner": [
++            1,
++            27
++          ],
++          "inward": [
++            1,
++            -1
++          ],
++          "reach_m": 1.5
++        },
++        {
++          "name": "exit-east",
++          "corner": [
++            8,
++            27
++          ],
++          "inward": [
++            -1,
++            -1
++          ],
++          "reach_m": 1.5
++        },
++        {
++          "name": "side-entry-west",
++          "corner": [
++            9,
++            16
++          ],
++          "inward": [
++            1,
++            1
++          ],
++          "reach_m": 0.9
++        },
++        {
++          "name": "side-entry-east",
++          "corner": [
++            12,
++            16
++          ],
++          "inward": [
++            -1,
++            1
++          ],
++          "reach_m": 1.1
++        },
++        {
++          "name": "side-exit-west",
++          "corner": [
++            9,
++            27
++          ],
++          "inward": [
++            1,
++            -1
++          ],
++          "reach_m": 1.1
++        },
++        {
++          "name": "side-exit-east",
++          "corner": [
++            12,
++            27
++          ],
++          "inward": [
++            -1,
++            -1
++          ],
++          "reach_m": 1.1
++        }
++      ]
++    },
+ 	"metadata": {
+ 	  "source": "editor",
+ 	  "n_artifacts": 34

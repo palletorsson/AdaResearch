@@ -1,0 +1,245 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    },
+    {
+      "name": "finish installs only once",
+      "passed": true
+    },
+    {
+      "name": "original floor and wall instances retained",
+      "passed": true
+    },
+    {
+      "name": "gallery shader replaces triangular wire overlay",
+      "passed": true
+    },
+    {
+      "name": "only the address hall uses instance colour on its floor",
+      "passed": true
+    },
+    {
+      "name": "wall columns have been built",
+      "passed": true
+    },
+    {
+      "name": "new architectural collision stays at perimeter walls",
+      "passed": true
+    },
+    {
+      "name": "museum lettering installed",
+      "passed": true
+    },
+    {
+      "name": "rainbow installation retained",
+      "passed": true
+    },
+    {
+      "name": "visitor photograph has a supporting floor",
+      "passed": true
+    },
+    {
+      "name": "visitor photograph is outside solid furniture",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.5,
+          13.0
+        ],
+        "name": "DoubleRainbow3D",
+        "source": "res://algorithms/primitives/rainbow/rainbow.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.5,
+          13.0
+        ],
+        "name": "@Node3D@2940",
+        "source": "res://algorithms/primitives/rainbow/rainbow_celebration.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.680000007152557,
+          11.0
+        ],
+        "name": "BandComparison",
+        "source": "res://algorithms/primitives/rainbow/rainbow.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.549265503883362,
+          17.2000007629395
+        ],
+        "name": "CelebrationCube_1",
+        "source": "res://algorithms/primitives/rainbow/rainbow_party_pickup.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.549265503883362,
+          15.1000003814697
+        ],
+        "name": "CelebrationCube_2",
+        "source": "res://algorithms/primitives/rainbow/rainbow_party_pickup.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.549265503883362,
+          13.0
+        ],
+        "name": "CelebrationCube_3",
+        "source": "res://algorithms/primitives/rainbow/rainbow_party_pickup.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.549265503883362,
+          10.8999996185303
+        ],
+        "name": "CelebrationCube_4",
+        "source": "res://algorithms/primitives/rainbow/rainbow_party_pickup.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.549265503883362,
+          8.80000019073486
+        ],
+        "name": "CelebrationCube_5",
+        "source": "res://algorithms/primitives/rainbow/rainbow_party_pickup.gd"
+      },
+      {
+        "local_to_grid": [
+          13.0,
+          0.5,
+          16.0
+        ],
+        "name": "film_rainbow_partitions",
+        "source": "res://commons/artifacts/concept_monitor/concept_monitor.gd"
+      },
+      {
+        "local_to_grid": [
+          -0.5,
+          0.5,
+          -0.5
+        ],
+        "name": "RainbowPartitions",
+        "source": "res://commons/artifacts/spine_films/more_early/rainbow_partitions.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          0.5,
+          3.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          0.919999957084656,
+          3.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          3.0
+        ],
+        "name": "ArtPlinth1",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.919999957084656,
+          3.0
+        ],
+        "name": "DreamBody1",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          2.0,
+          0.5,
+          3.0
+        ],
+        "name": "ArtPlinth2",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          2.0,
+          0.919999957084656,
+          3.0
+        ],
+        "name": "DreamBody2",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ],
+    "visitor_clearance_contacts": []
+  },
+  "passed": true,
+  "room": "Color_Rainbow",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

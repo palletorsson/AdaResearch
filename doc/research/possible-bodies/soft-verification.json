@@ -1,0 +1,98 @@
+[
+  {
+    "map": "SoftBodies_Soft_Body_Deformation",
+    "url": "soft-deformation.html",
+    "title": "What holds a cube together?",
+    "question": "How can a body yield while keeping relations between its parts?",
+    "primary": [
+      "jelly_cube",
+      "softmill"
+    ],
+    "checks": 24
+  },
+  {
+    "map": "SoftBodies_Cloth_Physics",
+    "url": "soft-cloth.html",
+    "title": "Which points must stay?",
+    "question": "How does fixing a boundary change the forms a surface can take?",
+    "primary": [
+      "cloth_straps",
+      "softstopscene"
+    ],
+    "checks": 25
+  },
+  {
+    "map": "SoftBodies_Carusell",
+    "url": "soft-carousel.html",
+    "title": "The support moves",
+    "question": "What changes when the constraint itself is driven?",
+    "primary": [
+      "revolving_joy_ride",
+      "cloth_straps"
+    ],
+    "checks": 23
+  },
+  {
+    "map": "SoftBodies_Obsticals",
+    "url": "soft-breathing.html",
+    "title": "The room has a body",
+    "question": "What happens when the enclosing architecture deforms?",
+    "primary": [
+      "breathing_room",
+      "softbody_gallery_part2"
+    ],
+    "checks": 24
+  },
+  {
+    "map": "SoftBodies_Obsticals_Part2",
+    "url": "soft-contact.html",
+    "title": "Same fall, another encounter",
+    "question": "Which differences belong to material, contact geometry and experimental variation?",
+    "primary": [
+      "softbody_gallery_part2"
+    ],
+    "checks": 23
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "url": "soft-sampling.html",
+    "title": "When does a body become a form?",
+    "question": "What does a frozen surface keep of the process that made it?",
+    "primary": [
+      "rounded_softbody_test",
+      "frozen_glass_vessel"
+    ],
+    "checks": 23
+  },
+  {
+    "map": "SoftBodies_Affect_Theory_Visualization",
+    "url": "soft-affect.html",
+    "title": "What makes this look alive?",
+    "question": "What can the image of a living body tell us about the mechanism?",
+    "primary": [
+      "radiolaria"
+    ],
+    "checks": 23
+  },
+  {
+    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "url": "soft-reaction.html",
+    "title": "A pattern has a metabolism",
+    "question": "How can local exchanges maintain a spatial difference?",
+    "primary": [
+      "turing_pattern_generator",
+      "reaction_diffusion"
+    ],
+    "checks": 26
+  },
+  {
+    "map": "Topology_Entropy_Morphogenesis",
+    "url": "soft-morphogenesis.html",
+    "title": "Who connected the controls?",
+    "question": "Does a parameter named entropy measure disorder, or prescribe a family of forms?",
+    "primary": [
+      "entropy_morphogenesis"
+    ],
+    "checks": 23
+  }
+]

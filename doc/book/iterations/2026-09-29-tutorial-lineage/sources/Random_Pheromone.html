@@ -1,0 +1,548 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Pheromone · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Pheromone">← Tutorial lineage</a></p><h1>Random Pheromone</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Pheromone/final.md">Raw captured source</a></p><pre># A path that recruits its next visit
+
+What changes when a walker helps make the evidence its next decision will read?
+
+&lt;!-- @pheromone_terrain --&gt;
+
+At the console, leave ATTRACT selected and press +1 STEP a few times. Follow one cyan marker from place to place. Use +20 STEPS to advance a batch, then choose a small patch of terrain and compare it with a quieter patch nearby. Watch where traces gather and where the surface begins to rise, then look for later walkers returning through those regions.
+
+Keep one rising patch as a landmark and attend to the approaches made towards it. Does traffic return along a familiar direction, arrive from several directions, or shift towards a nearby patch? Compare a short interval with a longer observation before calling a route permanent. The visible height lets you retain a place in view even while the current signal changes. That makes it possible to ask whether present movement is still reinforcing an earlier concentration of visits. If the answer is difficult to see, say which evidence is missing: the current scent, the timing of deposits, or a clearer trace of individual movement.
+
+Each visit away from the flat border band leaves pheromone and, until that patch reaches its height ceiling, raises the local surface. Later choices can favour a stronger pheromone signal, while most movement remains random (the label over the field reads signal-guided: 40%). A path can therefore become established partly because it has already been used. No walker needs a complete plan of the resulting network for this feedback to occur.
+
+This differs from the terrarium&#x27;s memoryless step rule. There, the trail helped the observer read the past without steering the next step. The last room&#x27;s pipe could cross its own earlier route for a similar reason: no place it had passed entered its next choice. Here the environment keeps a signal that participates in future decisions. The mark has become part of the mechanism.
+
+The signal and the raised terrain do not keep identical histories. Pheromone decays; the surface records accumulated visits in another form. A visually prominent ridge and the strongest current scent therefore need not mean exactly the same thing. Distinguish what you can see from what the movement rule reads.
+
+Try identifying a route that may have begun as an accident. Repeated use can reinforce it, but reinforcement does not establish that it is globally shortest, fairest or best. A clipboard in this hall claims more: that shortest paths get reinforced and that the collective finds the optimal route. Its ants carry food back to a nest; these walkers have no nest and no food, so a route here has no two ends to be shortest between. The procedure rewards a particular local signal, and that signal partly reflects its own earlier choices. Not every beginning is an accident, though: where all eight sensed directions read the same, as on fresh ground, a signal-guided walker takes the first direction on its list, and that direction always points the same way.
+
+Could the same act of leaving marks help make a different world? Note the step count, press AVOID and advance to the same count. The terrain and scent clear, and the four walkers begin again from the same seeded positions; this time the signal-guided choice favours the weakest scent. Compare the resulting visits before deciding what the changed rule did. REPLAY restarts the selected rule. Both experiments use the same fixed decay interval per step, although their paths can cause later random draws to be used differently at the boundary.
+
+&lt;!-- @ --&gt;
+
+Next, the noise mixer returns to field construction: several contributions at different scales will combine without depending on a history of visits. Its picture is coloured like land, but no visit shaped it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Pheromone/tutorial.md">Raw captured source</a></p><pre># Random Pheromone
+
+Each ant walks randomly; the trail it leaves biases the next. Build stigmergy from a floor-grid of pheromone values.
+
+Declare the pheromone grid.
+
+```gdscript
+class_name PheromoneGrid
+extends Node3D
+
+@export var size: Vector2i = Vector2i(40, 40)
+var field: PackedFloat32Array = PackedFloat32Array()
+```
+
+A flat grid of floats, one per cell. The values decay over time and grow with deposits.
+
+Deposit pheromone at a position.
+
+```gdscript
+func deposit(pos: Vector3, amount: float) -&gt; void:
+    var cell := _world_to_cell(pos)
+    var idx := cell.y * size.x + cell.x
+    if idx &gt;= 0 and idx &lt; field.size():
+        field[idx] = min(field[idx] + amount, 1.0)
+```
+
+Deposits cap at 1.0. The field stays bounded. Every ant step thickens the floor under it.
+
+Decay the field.
+
+```gdscript
+func decay(dt: float, rate: float) -&gt; void:
+    for i in field.size():
+        field[i] = max(0.0, field[i] - rate * dt)
+```
+
+All cells lose a little each frame. Without fresh deposits, trails fade. Memory is finite.
+
+Spawn ants.
+
+```gdscript
+func spawn_ants(count: int) -&gt; void:
+    for i in count:
+        var ant := preload(&quot;res://commons/artifacts/randomness/ant.tscn&quot;).instantiate()
+        ant.position = Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))
+        add_child(ant)
+```
+
+Ants start scattered. Each carries its own position and heading.
+
+Bias each step by local pheromone.
+
+```gdscript
+func step_ant(ant: Node3D, dt: float) -&gt; void:
+    var dir := _pick_direction_with_bias(ant.global_position)
+    ant.position += dir * ant_speed * dt
+    deposit(ant.global_position, 0.05)
+```
+
+Direction is chosen by sampling neighbouring cells and weighting toward higher pheromone. The ant tends to follow a trail without committing to it.
+
+Sample the bias.
+
+```gdscript
+func _pick_direction_with_bias(pos: Vector3) -&gt; Vector3:
+    var weights := []
+    var dirs := [Vector3.FORWARD, Vector3.BACK, Vector3.LEFT, Vector3.RIGHT]
+    for d in dirs:
+        var sample_pos: Vector3 = pos + d * cell_size
+        weights.append(field[_index(sample_pos)] + 0.05)
+    return dirs[_weighted_pick(weights)]
+```
+
+Four cardinal directions sampled. Weights are the local pheromone plus a small constant so ants still explore empty cells.
+
+Render the pheromone as a heatmap.
+
+```gdscript
+func update_heatmap(image: Image) -&gt; void:
+    for i in field.size():
+        var v: float = field[i]
+        var x: int = i % size.x
+        var y: int = i / size.x
+        image.set_pixel(x, y, Color(v, v * 0.3, 0.0))
+```
+
+Orange trails glow over a dark floor. The learner watches paths consolidate from noise.
+
+Log the trail shape.
+
+```gdscript
+func trail_entropy() -&gt; float:
+    var mean: float = 0.0
+    for v in field: mean += v
+    mean /= field.size()
+    return mean
+```
+
+A scalar describes how much of the grid is active. As ants converge on a trail, the scalar drops.
+
+You have built emergence from individual chance. The next map, Random Space, saturates space with randomness.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Pheromone/technical.md">Raw captured source</a></p><pre># Random_Pheromone - Technical Documentation
+
+## Core Concept in Code
+
+### Basic Pheromone Grid
+
+```gdscript
+extends Node3D
+
+@export var grid_size := 50
+@export var evaporation_rate := 0.02
+@export var deposit_amount := 1.0
+
+var pheromone_grid := []
+
+func _ready():
+    initialize_grid()
+
+func initialize_grid():
+    pheromone_grid.resize(grid_size)
+    for i in range(grid_size):
+        pheromone_grid[i] = []
+        pheromone_grid[i].resize(grid_size)
+        pheromone_grid[i].fill(0.0)
+
+func _process(delta):
+    evaporate(delta)
+    update_visualization()
+
+func evaporate(delta):
+    for x in range(grid_size):
+        for y in range(grid_size):
+            pheromone_grid[x][y] *= (1.0 - evaporation_rate * delta)
+
+func deposit(x: int, y: int, amount: float):
+    if x &gt;= 0 and x &lt; grid_size and y &gt;= 0 and y &lt; grid_size:
+        pheromone_grid[x][y] += amount
+
+func get_pheromone(x: int, y: int) -&gt; float:
+    if x &gt;= 0 and x &lt; grid_size and y &gt;= 0 and y &lt; grid_size:
+        return pheromone_grid[x][y]
+    return 0.0
+```
+
+### Ant Agent with Pheromone Following
+
+```gdscript
+class_name PheromoneAnt
+extends Node3D
+
+var pheromone_system: Node3D  # Reference to grid
+var position_grid := Vector2i.ZERO
+var has_food := false
+var home_position := Vector2i.ZERO
+var rng := RandomNumberGenerator.new()
+
+func _ready():
+    rng.randomize()
+
+func _process(delta):
+    if has_food:
+        return_home()
+    else:
+        search_for_food()
+
+func search_for_food():
+    # Random walk biased by pheromone
+    var neighbors = get_neighbors()
+    var chosen = weighted_random_choice(neighbors)
+    move_to(chosen)
+
+func get_neighbors() -&gt; Array[Vector2i]:
+    var neighbors: Array[Vector2i] = []
+    for dx in range(-1, 2):
+        for dy in range(-1, 2):
+            if dx == 0 and dy == 0:
+                continue
+            neighbors.append(position_grid + Vector2i(dx, dy))
+    return neighbors
+
+func weighted_random_choice(neighbors: Array[Vector2i]) -&gt; Vector2i:
+    var weights := []
+    var total_weight := 0.0
+
+    for pos in neighbors:
+        var pheromone = pheromone_system.get_pheromone(pos.x, pos.y)
+        var weight = 1.0 + pheromone * 2.0  # Base weight + pheromone bonus
+        weights.append(weight)
+        total_weight += weight
+
+    var roll = rng.randf() * total_weight
+    var cumulative := 0.0
+    for i in range(neighbors.size()):
+        cumulative += weights[i]
+        if roll &lt; cumulative:
+            return neighbors[i]
+
+    return neighbors[0]
+
+func return_home():
+    # Leave pheromone trail while returning
+    pheromone_system.deposit(position_grid.x, position_grid.y, 1.0)
+    # Move toward home (simplified)
+    var direction = (home_position - position_grid).sign()
+    position_grid += direction
+```
+
+## Implementation Details
+
+### Pheromone Visualization
+
+```gdscript
+extends Node3D
+
+var mesh_instances := []
+var pheromone_material: StandardMaterial3D
+
+func create_visualization():
+    pheromone_material = StandardMaterial3D.new()
+    pheromone_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+    for x in range(grid_size):
+        mesh_instances.append([])
+        for y in range(grid_size):
+            var instance = create_tile(x, y)
+            mesh_instances[x].append(instance)
+            add_child(instance)
+
+func create_tile(x: int, y: int) -&gt; MeshInstance3D:
+    var mesh = MeshInstance3D.new()
+    var plane = PlaneMesh.new()
+    plane.size = Vector2(0.9, 0.9)
+    mesh.mesh = plane
+    mesh.position = Vector3(x, 0, y)
+    mesh.material_override = pheromone_material.duplicate()
+    return mesh
+
+func update_visualization():
+    for x in range(grid_size):
+        for y in range(grid_size):
+            var intensity = clampf(pheromone_grid[x][y] / 10.0, 0.0, 1.0)
+            var color = Color(0.2, intensity, 0.2)  # Green intensity
+            mesh_instances[x][y].material_override.albedo_color = color
+```
+
+### Multiple Pheromone Types
+
+Real ant colonies use multiple pheromones (food, danger, nest):
+
+```gdscript
+enum PheromoneType { FOOD, DANGER, NEST }
+
+var pheromone_grids := {
+    PheromoneType.FOOD: [],
+    PheromoneType.DANGER: [],
+    PheromoneType.NEST: []
+}
+
+var evaporation_rates := {
+    PheromoneType.FOOD: 0.02,
+    PheromoneType.DANGER: 0.1,   # Danger fades fast
+    PheromoneType.NEST: 0.005   # Nest trails persist
+}
+```
+
+## Map-Specific Configuration
+
+### Structure Analysis
+- 13×14 grid, almost entirely flat (height 0)
+- Single elevated tile at (7,7) with height 1
+- Creates minimal visual interference with pheromone display
+
+### Dual Clipboard System
+The presence of both `clipboard#pheromone_axioms` and `clipboard#queer_energy` explicitly connects biological emergence to QFEP theory.
+
+## Key Takeaways
+
+1. **Random + Memory = Intelligence** - Individual randomness plus environmental memory yields collective optimization
+2. **Evaporation is essential** - Without forgetting, systems can&#x27;t adapt
+3. **Probability, not determination** - Ants don&#x27;t follow trails perfectly; they&#x27;re biased toward them
+4. **Stigmergy** - Communication through environment modification
+
+## Related Systems
+- Swarm intelligence algorithms (Boids, PSO)
+- Cellular automata (local rules → global patterns)
+- Reinforcement learning (reward signals shape behavior)
+
+## Within the Sequence
+
+Random_Pheromone shows randomness accumulating into a spatial field. Pheromone-deposit models use sampled walks to shape a persistent texture, and the technique recurs in the Swarm Intelligence sequence.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map&#x27;s controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map&#x27;s concrete contribution to the curriculum.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Pheromone/intent.md">Raw captured source</a></p><pre>Concept: Feedback between a trace and the next choice. The terrain keeps a scent value and a height per cell; walkers read the scent before stepping, so earlier visits bias later ones. Reinforcement does not establish that a route is shortest, fairest or best: there is no nest and no food here, so nothing is shortest between two ends.
+Sequence role: Twelfth hall of Randomness, after Randomness_Examples_of_Randomness (a pipe that did not remember where it had been) and before Random_Space (a field built from layered scales with no history of visits). The terrarium in Random_Walk kept a trail only for the observer; here the trail enters the mechanism.
+Technical angle: pheromone_terrain#comparison:true#walk_seed:190919. The hall builds from its map (artifact_placement map), so the museum passes both keys and builds the comparison console: ATTRACT/AVOID, step controls, REPLAY, cyan markers at seeded start positions. pheromone_attraction 0.4 (signal-guided on about 40% of steps, as the label reads), sensor distance two cells, eight directions, deposit 0.6, height +0.2 per visit to a maximum of 4.0, decay per step, no diffusion. Ties go to the first direction on the list. Switching law clears the terrain.
+Critical angle: A collective route can look designed and be an artefact of its own history, or of list order. The hall&#x27;s clipboard repeats the optimisation story (shortest paths, optimal routes); the terrain cannot test it and the chapter says so.
+Key artifacts: pheromone_terrain (primary). clipboard#pheromone_axioms is the placed voice of the optimisation claim; clipboard#queer_energy names no tutorial and shows nothing; dark_sphere is a remainder.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Pheromone/critical.md">Raw captured source</a></p><pre># Random_Pheromone - Critical Documentation
+
+## Philosophical Framing
+
+### Intelligence Without Mind
+
+Pheromone systems challenge the assumption that intelligence requires a mind. The ant colony &quot;knows&quot; where food is, but no individual ant knows. Knowledge is distributed, externalized, emergent.
+
+This is deeply strange from a Cartesian perspective. Where is the thinking happening? Not in any ant&#x27;s brain. In the pheromone landscape? In the collective? In the process?
+
+### Memory as Environment
+
+Pheromone trails are environmental memory—knowledge stored not in neurons but in the world itself. This inverts the usual relationship between agent and environment: the environment isn&#x27;t just a container for action, it&#x27;s a medium for thought.
+
+Extended mind theory (Clark &amp; Chalmers, 1998) argues that cognitive processes can extend beyond the brain. Pheromone systems are a biological demonstration: cognition happening in the chemistry between ants, not within them.
+
+### The Violence of Optimization
+
+Ant Colony Optimization (ACO) formalizes pheromone systems into algorithms for finding shortest paths, solving traveling salesman problems, routing networks.
+
+But this formalization abstracts away the ants. The algorithm doesn&#x27;t care about ant welfare, ant experience, ant life. Ants become metaphors, their biology a source of computational techniques.
+
+Is this extractive? We take inspiration from biological systems, patent the algorithms, deploy them in logistics and military applications. The ants get nothing.
+
+## Politics and Assumptions
+
+### Stigmergy and Surveillance
+
+Pheromone systems work because individual behavior leaves traces that others can read. In computational terms: agents leave data, algorithms read data.
+
+This is the logic of surveillance capitalism. Every click leaves a trace. Algorithms read traces to predict and shape behavior. We are ants in a pheromone field of our own data, manipulated by systems that aggregate our traces into &quot;collective intelligence.&quot;
+
+### Optimization as Control
+
+ACO finds optimal paths. But optimal for whom? The algorithm optimizes what it&#x27;s told to optimize—shortest path, lowest cost, fastest delivery.
+
+These optimization criteria are not neutral. They embed values: efficiency over leisure, speed over contemplation, throughput over experience. The pheromone system doesn&#x27;t question its objective function; neither do we question ours.
+
+### The Forgetting Rate
+
+Evaporation is necessary—without it, systems can&#x27;t adapt. But the evaporation rate is a design choice. High evaporation means rapid adaptation but also rapid forgetting. Low evaporation means persistence but also rigidity.
+
+Who decides how fast we forget? In pheromone systems, it&#x27;s the chemistry. In social systems, it&#x27;s power structures. Some histories are preserved; others are evaporated. The rate of forgetting is political.
+
+## Queer Readings
+
+### Against Convergence
+
+Standard ACO eventually converges to a single &quot;optimal&quot; path. Diversity decreases; exploration ceases; the system settles.
+
+A queer reading asks: why converge? Why should the system arrive at a single answer? The QFEP suggests systems can oscillate indefinitely, maintaining diversity, refusing the finality of optimization.
+
+The queer_energy clipboard in this map explicitly makes this connection. Queerness is resistance to convergence—maintaining multiple possibilities, refusing to settle into one &quot;optimal&quot; configuration.
+
+### Collective Without Hierarchy
+
+Ant colonies have no central control—no manager ant directing traffic. Order emerges from local interactions, not top-down command.
+
+This is a model for non-hierarchical organization. Queer communities have often organized similarly: mutual aid networks, decentralized care, coordination without bosses.
+
+But ant colonies also have queens, castes, division of labor. The analogy is imperfect. Still, the pheromone system itself—the coordination mechanism—is genuinely non-hierarchical.
+
+### Traces and Passing
+
+Pheromone trails are traces—marks left by passing bodies. Queer history is often recovered through traces: letters, diaries, photographs, absences in archives.
+
+The pheromone system offers a model for trace-based knowledge: not direct transmission but indirect inference. We read the traces of those who came before, construct paths from partial evidence, navigate by following what others have left.
+
+But pheromones evaporate. Without continuous reinforcement, trails disappear. This is the fragility of marginalized history—without active preservation, traces fade.
+
+## Questions That Remain Open
+
+1. **Can emergence be designed?** Or does designing for emergence contradict its definition?
+
+2. **What is the ethics of swarm metaphors?** When we model human systems on insect systems, what do we lose?
+
+3. **How do evaporation rates shape societies?** What happens when forgetting is too fast or too slow?
+
+4. **Is optimization ever innocent?** Can we optimize without embedding values?
+
+5. **What would non-converging optimization look like?** Maintaining diversity while still being useful?
+
+## The Map&#x27;s Tension
+
+This map presents pheromone systems as elegant biological computing—randomness becoming order through stigmergy. The queer_energy clipboard connects this to QFEP, suggesting oscillation rather than convergence.
+
+But the map doesn&#x27;t fully resolve the tension between:
+- Optimization (finding best paths) and exploration (maintaining diversity)
+- Biological description (how ants work) and computational extraction (how we use them)
+- Emergence (order from chaos) and design (intentional configuration)
+
+The pheromone system is genuinely interesting—a real phenomenon with real implications. The critical reading doesn&#x27;t dismiss it but asks: what are we doing when we learn from it? What values do we embed when we formalize it? What gets lost in the abstraction?
+
+For QFEP: pheromone systems demonstrate the oscillation between exploration (random search) and exploitation (following trails). The evaporation rate is the λ parameter—tuning the balance. But the optimization objective is assumed, not questioned. A fuller QFEP treatment would ask: optimal for whom? By whose definition? And is optimality even the goal?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Pheromone/artifacts.md">Raw captured source</a></p><pre># Random Pheromone — Artifacts
+*Randomness: Freedom from Pattern · E_entropy · 3 artifacts*
+
+&gt; Randomness with memory, trails that decay. Pheromone systems bridge individual chaos and collective order — each agent random, the swarm intelligent. Here randomness becomes stigmergy: communication through environment.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Pheromone Terrain
+![Pheromone Terrain](/scene-catalog/pheromone_terrain.png)
+
+Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.
+
+`pheromone_terrain`
+
+## Clipboard
+![Clipboard](/scene-catalog/clipboard.png)
+
+NAVIGATE paged tutorial content as a stateful object in the world.
+
+`clipboard`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Pheromone/summary.md">Raw captured source</a></p><pre># Random_Pheromone - Map Summary
+
+## Overview
+This map introduces pheromone-based randomness—a system where random individual choices accumulate into collective intelligence. Ants don&#x27;t know where food is; they wander randomly. But when one finds food, it leaves a pheromone trail. Other ants, also random, are slightly more likely to follow trails. The result: emergent pathfinding from pure randomness plus memory.
+
+## Spatial Layout
+- **Dimensions**: 13×14 grid
+- **Architecture**: Completely flat (height 0) with single elevated tile at (7,7)
+- **Height**: Minimal—void-like space focusing attention on the pheromone visualization
+
+## Key Elements
+
+### Interactables
+- **dark_sphere** (4,5) - Ambient contemplation zone
+- **pheromone_terrain** (5,5) - Main pheromone field visualization
+- **clipboard#pheromone_axioms** (2,6) rotated 194°, height 1m - Pheromone theory
+- **clipboard#queer_energy** (3,7) rotated 194°, height 1m - QFEP connection
+
+### Utilities
+- **Spawn point** (0,0) height 5.5m - Elevated entry
+- **wp (waypoint)** (7,6) - Navigation point
+- **Teleporter** (7,7) - Exit to next map (Random_Mushrooms)
+
+## Atmosphere
+- **Background**: Sky blue [0.2, 0.3, 0.7]
+- **Lighting**: Standard cool ambient with warm directional
+- **Mood**: Organic, emergent, watching intelligence arise from noise
+
+## Learning Sequence
+1. Player spawns elevated, looking down at flat terrain
+2. Descends to observe pheromone_terrain visualization
+3. Reads pheromone axioms—understanding stigmergy
+4. Reads queer energy clipboard—connecting to QFEP
+5. Contemplates in dark sphere zone
+6. Watches trails form, strengthen, decay
+7. Exits to continue sequence
+
+## Design Intent
+The flat, minimal architecture lets the pheromone visualization dominate. Unlike bounded arenas, this void-like space suggests the open terrain where ant colonies actually navigate. The presence of both pheromone and queer energy clipboards explicitly connects this biological phenomenon to QFEP theory.
+
+## Connection to Sequence
+- **Position in randomness sequence**: 9/13
+- **Precedes**: Random_Mushrooms
+- **Follows**: Random_Random_Bell_Curve
+- **Theme**: Randomness creating order through memory and accumulation
+
+## Theoretical Framework
+
+### Stigmergy: Communication Through Environment
+
+Coined by Pierre-Paul Grassé (1959), stigmergy describes indirect coordination through environmental modification. Agents don&#x27;t communicate directly; they modify the environment, and others react to those modifications.
+
+**Pheromone rules**:
+1. Agents wander randomly
+2. When finding food, agent deposits pheromone on return path
+3. Pheromone slowly evaporates (decay)
+4. Other agents probabilistically follow higher pheromone concentrations
+5. Successful paths get reinforced; dead ends decay
+
+### The ACO Algorithm
+
+Ant Colony Optimization (Dorigo, 1992) formalized this into a general optimization algorithm:
+
+```gdscript
+# Probability of choosing path i
+func path_probability(pheromone: float, distance: float) -&gt; float:
+    var alpha = 1.0  # Pheromone importance
+    var beta = 2.0   # Distance importance
+    return pow(pheromone, alpha) * pow(1.0/distance, beta)
+```
+
+### Evaporation is Essential
+
+Without decay, early random paths would dominate forever. Evaporation allows the system to forget bad paths and adapt to changes. The evaporation rate is the λ parameter of pheromone systems—tuning the balance between memory and exploration.
+
+### From Individual Chaos to Collective Order
+
+Single ant behavior: random walk with slight bias toward pheromone.
+Colony behavior: optimal pathfinding, resource allocation, adaptive response.
+
+This is emergence: properties of the whole not present in the parts.
+
+## QFEP Connection
+
+Pheromone systems are natural QFEP demonstrations:
+
+- **F (free energy)**: The current pheromone landscape is the system&#x27;s &quot;belief&quot; about good paths
+- **E(S) (entropy)**: Random exploration by individual ants
+- **λ (modulation)**: Evaporation rate—how quickly the system forgets
+- **φΔE(S,t)**: Rate of pheromone change—how quickly new information integrates
+
+The queer_energy clipboard explicitly makes this connection. Pheromone systems don&#x27;t converge to single optimal paths—they maintain multiple trails, oscillating between exploitation and exploration. This is the QFEP&#x27;s &quot;oscillation between order and chaos&quot; made biological.
+
+## Sources
+- Grassé, P.P. (1959). &quot;La reconstruction du nid et les coordinations inter-individuelles&quot; (coined stigmergy)
+- Dorigo, M. (1992). &quot;Optimization, Learning and Natural Algorithms&quot; (ACO thesis)
+- Bonabeau, E., Dorigo, M., Theraulaz, G. (1999). *Swarm Intelligence: From Natural to Artificial Systems*
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Pheromone/blurb.md">Raw captured source</a></p><pre>What changes when a walker helps make the evidence its next decision will read? Four walkers move over a terrain that keeps their traces: every step away from the border leaves scent and lifts the ground a little, until a patch has been visited twenty times. On about four steps in ten a walker smells two cells ahead in eight directions and follows the strongest scent; on the rest it takes a direction at random.
+
+At the console, ATTRACT and AVOID set whether the sensed scent is followed or shunned, the step buttons advance the field, and the walkers start from seeded positions so a run can be taken again. A route that looks chosen may have begun as an accident, or as the first direction on a list.
+</pre></section></body></html>

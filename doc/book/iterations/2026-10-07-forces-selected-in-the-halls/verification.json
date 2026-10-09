@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": 279,
+  "reports": [
+    {
+      "name": "A beginning, then a flight",
+      "path": "museum/VFM_05_Launch/report.json",
+      "checks": 31,
+      "passed": true
+    },
+    {
+      "name": "The push ends. Motion stays.",
+      "path": "museum/VFM_03_Motion/report.json",
+      "checks": 17,
+      "passed": true
+    },
+    {
+      "name": "The room gives a direction",
+      "path": "museum/Vectors_Act3_FieldsAndMotion/report.json",
+      "checks": 22,
+      "passed": true
+    },
+    {
+      "name": "What resists the journey",
+      "path": "museum/Vectors_Act4a_KineticForces/report.json",
+      "checks": 20,
+      "passed": true
+    },
+    {
+      "name": "A force toward home",
+      "path": "museum/Vectors_Act4b_Oscillation/report.json",
+      "checks": 22,
+      "passed": true
+    },
+    {
+      "name": "The source can move too",
+      "path": "museum/VFM_07_Gravity/report.json",
+      "checks": 18,
+      "passed": true
+    },
+    {
+      "name": "One push reaches another body",
+      "path": "museum/VFM_08_Arena/report.json",
+      "checks": 25,
+      "passed": true
+    },
+    {
+      "name": "Interaction and model tests",
+      "path": "tests/models.json",
+      "checks": 47,
+      "passed": true
+    },
+    {
+      "name": "Eleven-hall teleport route and XR return",
+      "path": "tests/route/report.json",
+      "checks": 77,
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "tools/place_forces_selection.py": "6cba7033d38ba8500081f030300ab5080107f374c6d9a6ac706ad311d6a8813a",
+    "tools/probes/forces_selection_models.gd": "5d7635b1f0560ae4ec5fa651fa4c582ecd402694fdd6c781a941c292d464caa9",
+    "tools/probes/forces_selection_museum.gd": "e366a90102b0f70fc173395a1049902ac4666e1281941a080cffe33fa9c5da3f",
+    "commons/artifacts/force_halls/curation.json": "867a175f4718ef1f6e56ef2e6dda215f2c4712f1f5d356631bffeee888c40687",
+    "project.godot": "2dca361b20ef24c6a91a490d5333055485c377f494735b9fcdfbde704191b032",
+    "commons/artifacts/firework_burst/firework_burst.gd": "334ae230ab3e8474e023a8620ca5cc1c35ce366125d610dbbc4747452a185f96",
+    "commons/artifacts/firework_burst/live_fountain.gd": "bea183ad432c0a9d57046277aa9138333ac14614f9061ec2a9ee85a94ec703c2",
+    "commons/artifacts/centrifuge_ring/centrifuge_ring.gd": "8e22bbd7fc2368e323f7b18b6f06966c36e7e465ababf128b3af6edcf1cd6fe0",
+    "commons/artifacts/centrifuge_ring/hand_ring.gd": "002f3824fd4c14b727bab3c464bae002bffa4d038ae1f0c3764f6d5c2b3ae369",
+    "commons/artifacts/centrifuge_ring/ride_handle.gd": "f8804b3e94cf4bdbe9bd1609853d56f970d273b40443f30e54ad4a75932b1d6e",
+    "commons/artifacts/wind_room/hands_on_wind.gd": "af8db35ed36bbe89fee6f93b8aae3d074df8830195b44c29ffb76ba962ff30dc",
+    "commons/artifacts/wind_room/wind_room.gd": "c6e5f602850237a0a8859f647a13c321911db9ad12183fb27aa81c0c17da18f1",
+    "commons/artifacts/human_catapult/human_catapult.gd": "0141839e91f3218d852b9d04bd6d1a98031c87709f1abe48b46bbc672ba83ee1",
+    "commons/artifacts/force_vortex/force_vortex.gd": "a6283bd3fb2866e00fd7873a7db68e021dcd8adeb98f78a598cfa5e7baa5b280",
+    "commons/artifacts/force_play/player_launch.gd": "dadfdc2d165e9cc68eae881fd4aee1701083b6002c1ec4fa18319c5692326103",
+    "algorithms/joint/05_spring_suspension/SpringSuspension.gd": "77ae9f61890dc4fef3458782ee15a9d0443c99563e408ac2b05a446c0371a557"
+  }
+}

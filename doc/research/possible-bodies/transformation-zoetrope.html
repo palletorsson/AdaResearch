@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walk up to the moving edge · Ada Research</title>
+<style>
+:root{color-scheme:dark;--ink:#edeae2;--muted:#a6b9be;--line:#35454d;--paper:#102029;--panel:#152730;--mint:#9de4cc;--rose:#f0aec5}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1370px;margin:auto;padding:30px 28px 70px}a{color:var(--mint);text-underline-offset:4px}button,select,input{font:inherit}button,select{color:var(--ink);background:#20343d;border:1px solid #607780;border-radius:5px;min-height:43px;padding:8px 13px}button{cursor:pointer}button:hover{background:#314851}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:4px}button.primary{background:var(--mint);color:#102029;border-color:var(--mint);font-weight:650;min-width:92px}button.primary:hover{background:#c3f5e3}button:disabled{cursor:default;opacity:.55}nav{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);letter-spacing:.025em}nav a{text-decoration:none}header{padding:29px 0 24px;display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:end}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px}h1{font:clamp(35px,4.1vw,56px)/1.07 Georgia,serif;font-weight:400;letter-spacing:-.02em;margin:0;max-width:720px}header .intro{max-width:520px;margin:0;color:#c5d0d0;font-size:17px}header .intro em{color:var(--ink);font-style:normal}p{margin:0 0 16px}.controls{border:1px solid #53646b;border-radius:9px;padding:17px 19px 13px;background:#192e38;margin-bottom:23px}.control-row{display:flex;gap:17px;align-items:end;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:5px}.field>span,.field>label{font-size:12px;letter-spacing:.035em;color:#c4d0d1}.field select{min-width:170px}.mark-control{display:flex;gap:9px;align-items:center;min-height:43px;padding:0 8px 0 0;cursor:pointer;font-size:14px}.mark-control input{width:19px;height:19px;accent-color:var(--rose);margin:0}.actions{display:flex;gap:8px;margin-left:auto}.clock-row{display:grid;grid-template-columns:245px 1fr 140px;gap:20px;align-items:center;border-top:1px solid #42555e;margin-top:14px;padding-top:12px}.clock-pair{display:flex;gap:19px}.clock-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.clock-pair output{display:block;font:17px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.clock-pair>div:last-child output{color:var(--rose)}.scrub{display:grid;grid-template-columns:1fr auto;gap:8px 10px;align-items:center}.scrub label{font-size:12px;color:var(--muted)}.scrub output{font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--mint);margin:0;cursor:pointer}input[type=range]:disabled{opacity:.4;cursor:default}.clock-note{font-size:12px;color:var(--muted);text-align:right}.status{font-size:12px;color:var(--muted);margin:12px 0 0;min-height:18px}.legend{display:flex;gap:20px;align-items:center;flex-wrap:wrap;font-size:12px;color:#c0cdcf;padding:0 2px 14px}.legend span{display:inline-flex;align-items:center;gap:7px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint)}.dot.held{background:var(--rose)}.legend .footage{margin-left:auto;color:var(--muted)}.studies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.study{border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}.study-heading{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:17px 18px 9px;align-items:baseline}.study-index{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted)}h2{font:26px/1.2 Georgia,serif;font-weight:400;margin:0}.formula-mini{font:12px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted)}.study-question{font-size:13px;color:#bfcccf;margin:0 18px 0 58px;min-height:20px}.scene{display:block;width:100%;height:350px}.study-note{border-top:1px solid #30434c;margin:0;padding:9px 17px 11px;font-size:12px;color:var(--muted)}.reading{margin-top:36px;padding-top:26px;border-top:1px solid #4a5c63;display:grid;grid-template-columns:1fr 1fr;gap:45px}.reading h2{font-size:29px;margin-bottom:18px}.reading p{max-width:660px;color:#c6d1d2}.reading strong{font-weight:550;color:var(--ink)}.reading .question{font:24px/1.45 Georgia,serif;color:var(--ink);margin-top:22px}.guide{margin:0;padding-left:21px;color:#c6d1d2}.guide li{padding:0 0 11px 4px}.guide strong{color:var(--ink)}details{margin-top:24px;border-top:1px solid var(--line);padding-top:15px}summary{cursor:pointer;color:var(--mint);font-size:14px}pre{background:#0b1921;border:1px solid #31434c;padding:17px;border-radius:5px;overflow:auto;color:#d6e5e4;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;margin:18px 0 12px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.87em}details p{font-size:14px}footer{display:flex;flex-wrap:wrap;gap:12px 30px;margin-top:34px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}footer p{max-width:820px;margin:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.noscript{padding:24px;border:1px solid var(--rose)}
+@media(max-width:1000px){main{padding:24px 20px 55px}header{gap:24px}.actions{margin-left:0}.clock-row{grid-template-columns:225px 1fr}.clock-note{display:none}.formula-mini{font-size:11px}}
+@media(max-width:760px){header{grid-template-columns:1fr;gap:17px;padding:27px 0 23px}header .intro{max-width:620px}.studies{grid-template-columns:1fr}.reading{grid-template-columns:1fr;gap:27px}.control-row{gap:13px}.field{flex:1}.field select{width:100%;min-width:135px}.mark-control{flex-basis:100%;min-height:33px}.actions{margin-left:0}.clock-row{grid-template-columns:1fr;gap:12px}.clock-pair{gap:30px}.controls{padding:15px}.legend .footage{margin-left:0;flex-basis:100%}.reading{margin-top:28px}.study-question{margin-left:18px}.study-heading{padding-top:15px}.study-note{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.drum-clock{display:flex;gap:24px;align-items:center;flex-wrap:wrap;border-top:1px solid #42555e;margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px}.drum-clock>div{display:flex;align-items:center;gap:12px}.drum-clock output{font:17px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--ink);font-variant-numeric:tabular-nums}.drum-clock>span:last-child{margin-left:auto}.embodied-studies{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px}.drum-panel,.axial-panel{border:1px solid #405863;border-radius:9px;background:#142731;overflow:hidden}.embodied-heading{display:flex;align-items:start;justify-content:space-between;gap:12px;padding:22px 22px 0}.embodied-heading .eyebrow{font-size:10px;margin-bottom:8px}.embodied-heading h2{font-size:31px}.physical-tag{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:#c8cbb9;padding-top:4px;white-space:nowrap}.embodied-canvas{display:block;width:100%;height:440px}.view-controls{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:0 19px}.view-controls button{font-size:12px;min-height:39px;padding:6px 10px}.view-controls .quiet{background:transparent;color:var(--muted)}.view-divider{width:1px;height:26px;background:#405863;margin:0 4px}.view-readout,.sweep-readout{margin:11px 21px;color:var(--mint);font-size:12px;min-height:20px;font-variant-numeric:tabular-nums}.embodied-caption{padding:13px 21px 17px;margin:0;border-top:1px solid #30454f;color:var(--muted);font-size:13px;line-height:1.6}.axial-controls{display:flex;gap:11px;flex-wrap:wrap;align-items:center;padding:17px 21px 0}.axial-controls select{font-size:12px;min-height:37px;max-width:100%}.axial-controls label{font-size:12px;color:#d2bdcb;display:flex;gap:7px;align-items:center}.axial-controls input{accent-color:var(--rose);width:17px;height:17px}.axial-panel .embodied-canvas{height:387px}.drum-reading{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin:26px 0 28px}.drum-reading p{margin:0;color:#b7c9ce;font-size:15px;line-height:1.7}.drum-reading strong{color:var(--ink);font-weight:500}.sampling-disclosure{border-top:1px solid #52646d;margin-top:28px;padding-top:21px}.sampling-disclosure>summary{font:25px/1.35 Georgia,serif;color:#d9e6e1;padding-bottom:12px}.sampling-intro{max-width:830px;color:var(--muted);font-size:15px;margin-top:18px}.sampling-controls{display:grid;grid-template-columns:235px 130px 1fr;gap:25px;align-items:end;background:#192e38;border:1px solid #425963;border-radius:7px;padding:16px;margin:22px 0}.sampling-controls .clock-pair output{color:var(--rose)}
+@media(max-width:1050px){.embodied-studies{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.physical-tag{display:none}.view-controls{gap:6px}.view-controls button{padding:6px 8px}}
+@media(max-width:760px){.embodied-studies{grid-template-columns:1fr}.embodied-heading{padding:18px 17px 0}.physical-tag{display:block;font-size:10px}.embodied-heading h2{font-size:29px}.drum-clock{gap:10px 20px}.drum-clock>span:last-child{margin-left:0}.drum-reading{grid-template-columns:1fr;gap:18px}.sampling-controls{grid-template-columns:1fr 120px;gap:16px}.sampling-controls .scrub{grid-column:1/-1}.sampling-disclosure>summary{font-size:24px}.view-controls{padding:0 15px}.embodied-caption{padding-left:17px;padding-right:17px}}
+
+</style>
+</head>
+<body><main>
+<nav><a href="index.html">Ada Research / Possible bodies</a><span>Transformation studies · browser experiment</span></nav>
+<header><div><p class="eyebrow">Twelve still poses. A drum that moves.</p><h1>Walk up to<br>the moving edge.</h1></div><p class="intro">The platform turns. Each body keeps its pose while being carried around. Come closer, move around it, then compare a body turning on its own axle. What space does the movement produce?</p></header>
+<section class="controls" aria-label="Shared experiment controls">
+<div class="control-row">
+<label class="field"><span>Body for the twelve poses</span><select id="body"><option value="cube">Cube</option><option value="sphere">Ideal sphere</option><option value="asymmetric">Unequal tetrahedron</option></select></label>
+<label class="field"><span>Arrange the twelve poses by</span><select id="drum-mode"><option value="translation">Translation</option><option value="rotation">Rotation</option><option value="scale">Scale</option><option value="combined" selected>Combined · T · R · S</option></select></label>
+<label class="mark-control"><input type="checkbox" id="marked"><span>Add an off-centre mark</span></label>
+<div class="actions"><button type="button" id="pause" class="primary" aria-pressed="false">Pause</button><button type="button" id="reset">Reset to 0</button></div>
+</div>
+<div class="drum-clock"><div><span class="clock-label">Shared running time</span><output id="clock">0.000 s</output></div><span>Drum: one turn / 6 seconds · Axle: one turn / 20 seconds</span><span>Standing eye: 1.65 m</span></div>
+<p class="status" id="status" role="status">The poses are fixed to the drum. Orbit or step closer to meet them from another position.</p>
+</section>
+<section class="embodied-studies" aria-label="Rotating drum and axial sweep">
+<article class="drum-panel"><div class="embodied-heading"><div><p class="eyebrow">01 / Carried around</p><h2>The drum turns.</h2></div><span class="physical-tag">Platform top / 1.70 m</span></div><canvas id="drum-scene" class="embodied-canvas" role="img" aria-label="Perspective view from standing eye height of a rotating raised drum carrying twelve fixed local poses.">Twelve posed bodies ride a six-second rotating drum on a platform 1.7 metres above the floor.</canvas><div class="view-controls" aria-label="Move around the drum"><button type="button" id="orbit-left" aria-label="Orbit thirty degrees left">← Orbit</button><button type="button" id="orbit-right" aria-label="Orbit thirty degrees right">Orbit →</button><span class="view-divider"></span><button type="button" id="approach">Step closer</button><button type="button" id="retreat">Step back</button><button type="button" id="view-reset" class="quiet">Return view</button></div><p class="view-readout" id="view-readout">Standing beside the drum.</p><p class="embodied-caption">The twelve objects do not animate independently. Their different poses stay fixed in the drum’s local space. The parent carries them around.</p></article>
+<article class="axial-panel"><div class="embodied-heading"><div><p class="eyebrow">02 / Turning on its own axle</p><h2>The edge sweeps space.</h2></div></div><div class="axial-controls"><label for="axial-body" class="sr-only">Body on the axle</label><select id="axial-body"><option value="cube">Cube · 0.60 m edge</option><option value="triangle">Triangle in the XY plane</option></select><label><input id="envelope" type="checkbox"> Show swept boundary</label></div><canvas id="axial-scene" class="embodied-canvas" role="img" aria-label="A body rotating around a vertical spindle, with an optional computed outer boundary of its sweep.">A cube sweeps a cylinder; the specified triangle sweeps a cone.</canvas><p class="sweep-readout" id="sweep-readout">Boundary hidden. Follow the moving edges first.</p><p class="embodied-caption">One body turns about Y. Boundary lines, when shown, are an added geometric trace of where its outside can reach.</p></article>
+</section>
+<section class="drum-reading" aria-label="What the two rotations compare"><p><strong>A local pose can stay unchanged while its place changes.</strong> The drum is doing work that none of its children do alone. The selected operation sets twelve poses; parent rotation makes those poses travel. Step closer to see the platform at face height.</p><p><strong>On the spindle, follow an outside corner.</strong> The rotating cube reaches beyond the side of its stationary square. The triangle is a flat region carried through a third dimension. Turn on the boundary only after looking: the line is something we compute and add, not a claim that your eye sees a solid blur.</p></section>
+<details class="sampling-disclosure" id="sampling-comparisons"><summary>The earlier comparison: what if we only take a sample?</summary><p class="sampling-intro">These four views compare continuously animated bodies with their last sampled pose. They are a separate sample-and-hold illustration. The drum above really changes its orientation in this projected scene; it is not made to move by flashing these views.</p><div class="sampling-controls"><label class="field"><span>Take a sample every</span><select id="interval"><option value="0.3333333333333333">⅓ second · 12 poses / cycle</option><option value="1" selected>1 second · quarter-turn</option><option value="4">4 seconds · whole cycle</option></select></label><div class="clock-pair"><div><span class="clock-label">Last sample</span><output id="sample-clock">0.000 s</output></div></div><div class="scrub"><label for="scrub">Pause to inspect this four-second pose cycle</label><output id="phase-label">0.00 / 4.00 s</output><input id="scrub" type="range" min="0" max="4" step="0.001" value="0" disabled aria-label="Time within the four-second pose cycle"></div></div>
+<div class="legend" aria-label="View legend"><span><i class="dot" aria-hidden="true"></i>Continuous: updated on each browser frame</span><span><i class="dot held" aria-hidden="true"></i>Sampled: last pose held in view</span><span class="footage">No flashing or strobing.</span></div>
+<noscript><p class="noscript">This experiment needs JavaScript. Its four operations and the sampling rule are described below.</p></noscript>
+<section class="studies" aria-label="Four transformation comparisons">
+<article class="study" data-mode="translation"><div class="study-heading"><span class="study-index">01</span><h2>Translate</h2><span class="formula-mini">T</span></div><p class="study-question">The body keeps its shape. Where does it go?</p><canvas class="scene" id="translation" role="img" aria-label="Translation: continuous and sampled views, with twelve still poses underneath.">Translation adds an oscillating horizontal displacement.</canvas><p class="study-note">Horizontal travel · no rotation or resizing.</p></article>
+<article class="study" data-mode="rotation"><div class="study-heading"><span class="study-index">02</span><h2>Rotate</h2><span class="formula-mini">R</span></div><p class="study-question">Which turns can this body conceal?</p><canvas class="scene" id="rotation" role="img" aria-label="Rotation: continuous and sampled views, with twelve still poses underneath.">A body rotates around the vertical axis once every four seconds.</canvas><p class="study-note">A turn about Y · the centre stays put.</p></article>
+<article class="study" data-mode="scale"><div class="study-heading"><span class="study-index">03</span><h2>Scale</h2><span class="formula-mini">S</span></div><p class="study-question">What remains while size comes and goes?</p><canvas class="scene" id="scale" role="img" aria-label="Uniform scale: continuous and sampled views, with twelve still poses underneath.">All three dimensions vary together between 0.7 and 1.3 times their original size.</canvas><p class="study-note">Uniform scale about the centre · proportions remain.</p></article>
+<article class="study" data-mode="combined"><div class="study-heading"><span class="study-index">04</span><h2>Combine</h2><span class="formula-mini">T · R · S</span></div><p class="study-question">Can more change become less visible?</p><canvas class="scene" id="combined" role="img" aria-label="Combined translation, rotation and scale: continuous and sampled views, with twelve still poses underneath.">Scale first, then rotate, then add the horizontal offset.</canvas><p class="study-note">Scale → rotate → translate · all use the same phase.</p></article>
+</section>
+<section class="reading" aria-label="Reading the experiment">
+<div><h2>Try to disturb the sameness.</h2><ol class="guide"><li>With <strong>cube + 1 second</strong>, watch the two rotation views. Add the mark, then remove it.</li><li>Keep the interval. Choose the <strong>unequal tetrahedron</strong>. Has the clock changed, or what the clock can expose?</li><li>Choose the <strong>ideal sphere</strong>. Its unmarked surface gives a turn little to announce. Put the mark back.</li><li>Set the interval to <strong>4 seconds</strong>. Every sampled view returns to the starting phase, while the continuous views continue. Pause and scrub between those visits.</li></ol>
+<p class="question">How much difference must you keep before you can say that something happened?</p></div>
+<div><h2>A pose is not the time it took.</h2><p>A plain cube occupies the same geometry after a quarter-turn about Y. An unequal tetrahedron does not. A uniformly coloured ideal sphere has no preferred orientation to reveal. These are different kinds of sameness before the sampling clock enters the argument.</p><p>At one sample every four seconds, all four studies are observed at the same phase of their motion. The held view can look still while the sampled timestamp advances. <strong>Same geometry, same image and same time are different claims.</strong> A mark changes what the image can distinguish. It adds a relation you can follow, without changing the body's silhouette.</p><p>These four comparisons are a <strong>sample-and-hold illustration</strong>: the last observation stays visible until the next one. A physical 3D zoetrope exposes successive poses through viewing intervals. These held views borrow that question about motion and stillness; they do not simulate literal flashing or retinal perception. The separate perspective drum above uses an actual parent rotation.</p>
+<details><summary>Read the four operations and the sampling rule</summary><pre><code>period = 4 seconds
+theta = 2 * PI * time / period
+
+offset.x = 0.6 * sin(theta)
+angle.y  = theta
+size     = 1 + 0.3 * sin(theta)
+
+combined_point = offset + rotate_y(size * point, angle.y)
+
+sample_time = floor((time + 1e-9) / interval) * interval
+held_pose   = pose_at(sample_time)</code></pre><p>The sampling grid begins at time zero. Changing the interval takes the latest sample on the new grid; it does not restart the clock. The twelve small views always show the twelve equally spaced poses of one complete cycle. Rose ticks mark the phases the selected interval visits; the rose frame marks the pose currently held.</p><p>The cube has edge length 0.55. The sphere has radius 0.32. The tetrahedron's four unequal vertices make orientation visible. Camera, illumination, object colour and reference frames remain fixed. A fixed tessellation depicts the ideal sphere so its rendering mesh does not add an unintended rotating pattern.</p></details></div>
+</section>
+</details>
+<footer><p>Spatial precedent: <code>res://commons/artifacts/grand_zoetrope/grand_zoetrope.gd</code> — twelve stored poses, a turning drum and the passage from discrete states to perceived motion.</p><p>Browser reference for the Godot studies. Drum radius 1.10 m; mount radius 0.84 m; mount height 0.20 m above the 1.70 m disc; mount scale 0.44. The spindle pivot is 2.05 m high. This page is not evidence of a completed headset test.</p></footer>
+</main>
+<script>
+(() => {
+  'use strict';
+  const TAU = Math.PI * 2, PERIOD = 4;
+  const modes = ['translation', 'rotation', 'scale', 'combined'];
+  const el = Object.fromEntries(['body','interval','marked','pause','reset','clock','sample-clock','scrub','phase-label','status','drum-mode','axial-body','envelope','orbit-left','orbit-right','approach','retreat','view-reset','view-readout','sweep-readout','sampling-comparisons'].map(id => [id, document.getElementById(id)]));
+  const state = {time:0, body:'cube', interval:1, marked:false, paused:matchMedia('(prefers-reduced-motion: reduce)').matches, drumMode:'combined', observerYaw:0, observerDistance:4.1, axialBody:'cube', envelope:false};
+  const palette = {translation:[155,217,200], rotation:[184,182,229], scale:[233,199,137], combined:[223,167,190]};
+  const add=(a,b)=>a.map((v,i)=>v+b[i]), sub=(a,b)=>a.map((v,i)=>v-b[i]), mul=(a,s)=>a.map(v=>v*s);
+  const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+  const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  const unit=a=>{const n=Math.hypot(...a);return n>1e-12?mul(a,1/n):[0,1,0]};
+  const rotate=(p,a)=>[Math.cos(a)*p[0]+Math.sin(a)*p[2],p[1],-Math.sin(a)*p[0]+Math.cos(a)*p[2]];
+  const cameraEye=mul(unit([2.8,1.9,-4.7]),6);
+  const forward=unit(mul(cameraEye,-1)), right=unit(cross(forward,[0,1,0])), up=cross(right,forward);
+  const light=unit([-0.45,0.85,-0.9]);
+  const sampleTime=()=>Math.floor((state.time+1e-9)/state.interval)*state.interval;
+  const phase=t=>((t%PERIOD)+PERIOD)%PERIOD;
+  function pose(mode,t) {
+    const theta=TAU*t/PERIOD;
+    return {time:t, theta, offset:[mode==='translation'||mode==='combined'?.6*Math.sin(theta):0,0,0], angle:mode==='rotation'||mode==='combined'?theta:0, scale:mode==='scale'||mode==='combined'?1+.3*Math.sin(theta):1};
+  }
+  function transformed(p,s,rotating=true) {return add(rotating?rotate(mul(p,s.scale),s.angle):mul(p,s.scale),s.offset)}
+  function orientFaces(vertices,faces) {
+    const center=mul(vertices.reduce((a,b)=>add(a,b),[0,0,0]),1/vertices.length);
+    return faces.map(face=>{
+      const pts=face.map(i=>vertices[i]), normal=cross(sub(pts[1],pts[0]),sub(pts[2],pts[0]));
+      return dot(normal,sub(pts[0],center))<0?[...face].reverse():face;
+    });
+  }
+  const h=.275;
+  const cube={vertices:[[-h,-h,-h],[h,-h,-h],[h,h,-h],[-h,h,-h],[-h,-h,h],[h,-h,h],[h,h,h],[-h,h,h]],faces:[[0,3,2,1],[4,5,6,7],[0,4,7,3],[1,2,6,5],[0,1,5,4],[3,7,6,2]],mark:{point:[.16,.09,-.285],normal:[0,0,-1]}};
+  const tetraVertices=[[-.3,-.28,-.22],[.38,-.28,-.22],[-.3,-.28,.31],[-.1,.42,-.08]];
+  const tetraFaces=orientFaces(tetraVertices,[[0,1,2],[0,3,1],[0,2,3],[1,3,2]]);
+  const tetraMarkFace=tetraFaces.find(face=>face.includes(0)&&face.includes(1)&&face.includes(3));
+  const tetraMarkNormal=unit(cross(sub(tetraVertices[tetraMarkFace[1]],tetraVertices[tetraMarkFace[0]]),sub(tetraVertices[tetraMarkFace[2]],tetraVertices[tetraMarkFace[0]])));
+  const asymmetric={vertices:tetraVertices,faces:tetraFaces,mark:{point:add(mul(add(add(tetraVertices[0],tetraVertices[1]),tetraVertices[3]),1/3),[0,0,-.015]),normal:tetraMarkNormal}};
+  function sphereMesh() {
+    const vertices=[], faces=[], rings=12, sectors=24;
+    for(let j=0;j<=rings;j++)for(let i=0;i<sectors;i++){
+      const latitude=Math.PI*j/rings, longitude=TAU*i/sectors;
+      vertices.push([.32*Math.sin(latitude)*Math.cos(longitude),.32*Math.cos(latitude),.32*Math.sin(latitude)*Math.sin(longitude)]);
+    }
+    for(let j=0;j<rings;j++)for(let i=0;i<sectors;i++){
+      const a=j*sectors+i,b=j*sectors+(i+1)%sectors,c=(j+1)*sectors+(i+1)%sectors,d=(j+1)*sectors+i;
+      faces.push(j===0?[a,c,d]:j===rings-1?[a,b,d]:[a,b,c,d]);
+    }
+    const n=unit([.17,.09,-.255]);
+    return {vertices,faces:orientFaces(vertices,faces),mark:{point:mul(n,.325),normal:n}};
+  }
+  const geometry={cube,sphere:sphereMesh(),asymmetric};
+  function projector(rect) {
+    const focal=Math.min(rect.w*2.65,rect.h*3.1);
+    return p=>{
+      const rel=sub(p,cameraEye), depth=dot(rel,forward);
+      return {x:rect.x+rect.w/2+focal*dot(rel,right)/depth,y:rect.y+rect.h*.49-focal*dot(rel,up)/depth,depth};
+    };
+  }
+  function path(ctx,points,close=true) {ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));if(close)ctx.closePath()}
+  function reference(ctx,project,mini) {
+    ctx.lineWidth=mini?.55:.8;
+    ctx.strokeStyle=mini?'#42535c':'#435963';
+    const frame=[[-1.02,-.5,0],[1.02,-.5,0],[1.02,.56,0],[-1.02,.56,0]].map(project);
+    path(ctx,frame);ctx.stroke();
+    ctx.strokeStyle=mini?'#2e424b':'#344b57';
+    for(let x=-1;x<=1;x+=.5){path(ctx,[[x,-.5,-.6],[x,-.5,.6]].map(project),false);ctx.stroke()}
+    for(let z=-.5;z<=.5;z+=.5){path(ctx,[[-1.2,-.5,z],[1.2,-.5,z]].map(project),false);ctx.stroke()}
+    const zero=project([0,0,0]);
+    ctx.strokeStyle='#71858b';ctx.beginPath();ctx.moveTo(zero.x-3,zero.y);ctx.lineTo(zero.x+3,zero.y);ctx.moveTo(zero.x,zero.y-3);ctx.lineTo(zero.x,zero.y+3);ctx.stroke();
+  }
+  function bodyScene(ctx,rect,mode,t,mini=false) {
+    ctx.save();ctx.beginPath();ctx.rect(rect.x,rect.y,rect.w,rect.h);ctx.clip();
+    const project=projector(rect), s=pose(mode,t), mesh=geometry[state.body];
+    reference(ctx,project,mini);
+    // An ideal sphere has no observable orientation. Keep its finite display
+    // tessellation world-aligned, avoiding mesh seams that fake a rotation cue.
+    const vertices=mesh.vertices.map(p=>transformed(p,s,state.body!=='sphere'));
+    const faces=mesh.faces.map(face=>{
+      const points=face.map(i=>vertices[i]);
+      const normal=unit(cross(sub(points[1],points[0]),sub(points[2],points[0])));
+      const centre=mul(points.reduce((a,b)=>add(a,b),[0,0,0]),1/points.length);
+      return {points,normal,depth:dot(sub(centre,cameraEye),forward),visible:dot(normal,sub(cameraEye,centre))>0};
+    }).filter(f=>f.visible).sort((a,b)=>b.depth-a.depth);
+    for(const face of faces){
+      const brightness=.48+.48*Math.max(0,dot(face.normal,light));
+      const color=palette[mode].map(c=>Math.round(c*brightness));
+      path(ctx,face.points.map(project));ctx.fillStyle=`rgb(${color.join(',')})`;ctx.fill();
+      if(state.body!=='sphere'){ctx.strokeStyle=mini?'#e0eeec95':'#e4f1edb0';ctx.lineWidth=mini?.55:1.05;ctx.stroke()}
+      else {ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.45;ctx.stroke()}
+    }
+    if(state.marked){
+      const markPoint=transformed(mesh.mark.point,s), markNormal=rotate(mesh.mark.normal,s.angle);
+      if(dot(markNormal,sub(cameraEye,markPoint))>0){
+        const point=project(markPoint), radius=(mini?1.75:4.3)*s.scale*6/point.depth;
+        ctx.beginPath();ctx.arc(point.x,point.y,radius+1.2,0,TAU);ctx.fillStyle='#102029';ctx.fill();
+        ctx.beginPath();ctx.arc(point.x,point.y,radius,0,TAU);ctx.fillStyle='#fff0de';ctx.fill();
+        ctx.beginPath();ctx.arc(point.x,point.y,radius*.43,0,TAU);ctx.fillStyle='#d84483';ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  // The rotating mechanisms use actual parent transforms, not sampled clocks.
+  const DRUM_PERIOD=6, AXIAL_PERIOD=20, DRUM_TOP=1.7, MOUNT_R=.84, MOUNT_Y=.20, MOUNT_SCALE=.44;
+  const stageViews={drum:{canvas:document.getElementById('drum-scene'),w:0,h:0},axial:{canvas:document.getElementById('axial-scene'),w:0,h:0}};
+  function worldProjector(rect,eye,target,fov=46) {
+    const f=unit(sub(target,eye)), r=unit(cross(f,[0,1,0])), u=cross(r,f), focal=rect.h*.5/Math.tan(fov*Math.PI/360);
+    const project=p=>{const rel=sub(p,eye),depth=dot(rel,f);return {x:rect.w*.5+focal*dot(rel,r)/depth,y:rect.h*.5-focal*dot(rel,u)/depth,depth}};
+    return {project,eye,forward:f};
+  }
+  function boxGeometry(x,y,z) {return {vertices:cube.vertices.map(p=>[p[0]*x/.55,p[1]*y/.55,p[2]*z/.55]),faces:cube.faces}}
+  function cylinderGeometry(radius,height,n=48) {
+    const vertices=[],faces=[];
+    for(let j=0;j<2;j++)for(let i=0;i<n;i++){const a=TAU*i/n;vertices.push([radius*Math.sin(a),(j-.5)*height,radius*Math.cos(a)])}
+    for(let i=0;i<n;i++)faces.push([i,(i+1)%n,(i+1)%n+n,i+n]);
+    faces.push(Array.from({length:n},(_,i)=>i));faces.push(Array.from({length:n},(_,i)=>n+i));
+    return {vertices,faces:orientFaces(vertices,faces)};
+  }
+  const pedestal=boxGeometry(.62,1.66,.62),disc=cylinderGeometry(1.1,.04,64);
+  const axialPedestal=boxGeometry(.38,1.7,.38), spindle=cylinderGeometry(.014,.92,12),axialCube=boxGeometry(.60,.60,.60);
+  const axialTriangle={vertices:[[0,-.35,0],[.45,-.35,0],[0,.35,0]],faces:[[0,1,2]]};
+  function collectMesh(items,mesh,transform,color,view,options={}) {
+    const vertices=mesh.vertices.map(transform);
+    for(const face of mesh.faces){
+      const points=face.map(i=>vertices[i]);
+      let normal=unit(cross(sub(points[1],points[0]),sub(points[2],points[0])));
+      const centre=mul(points.reduce((a,b)=>add(a,b),[0,0,0]),1/points.length);
+      const facing=dot(normal,sub(view.eye,centre));
+      if(facing<=0&&!options.twoSided)continue;
+      if(facing<0)normal=mul(normal,-1);
+      const bright=.44+.53*Math.max(0,dot(normal,light));
+      items.push({kind:'face',points,depth:dot(sub(centre,view.eye),view.forward),fill:`rgb(${color.map(c=>Math.round(c*bright)).join(',')})`,stroke:options.stroke||null});
+    }
+  }
+  function lineItem(items,a,b,color,view,width=1,dash=[]) {items.push({kind:'line',points:[a,b],depth:dot(sub(mul(add(a,b),.5),view.eye),view.forward),color,width,dash})}
+  function worldGround(ctx,view,w,h) {
+    const {project}=view;
+    const gradient=ctx.createLinearGradient(0,0,0,h);gradient.addColorStop(0,'#10212b');gradient.addColorStop(1,'#1c3540');ctx.fillStyle=gradient;ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='#35505b';ctx.lineWidth=.7;
+    const groundLine=(a,b)=>{
+      const da=dot(sub(a,view.eye),view.forward),db=dot(sub(b,view.eye),view.forward),near=.08;
+      if(da<near&&db<near)return;
+      if(da<near)a=add(a,mul(sub(b,a),(near-da)/(db-da)));
+      else if(db<near)b=add(b,mul(sub(a,b),(near-db)/(da-db)));
+      path(ctx,[a,b].map(project),false);ctx.stroke();
+    };
+    for(let i=-4;i<=4;i++){groundLine([i*.5,0,-2],[i*.5,0,2]);groundLine([-2,0,i*.5],[2,0,i*.5])}
+  }
+  function paintItems(ctx,items,view) {
+    items.sort((a,b)=>b.depth-a.depth);
+    for(const item of items){
+      if(item.depth<.06)continue;
+      if(item.kind==='face'){
+        path(ctx,item.points.map(view.project));ctx.fillStyle=item.fill;ctx.fill();
+        ctx.strokeStyle=item.stroke||item.fill;ctx.lineWidth=item.stroke ? .9 : .45;ctx.stroke();
+      }else if(item.kind==='line'){
+        path(ctx,item.points.map(view.project),false);ctx.strokeStyle=item.color;ctx.lineWidth=item.width;ctx.setLineDash(item.dash);ctx.stroke();ctx.setLineDash([]);
+      }else if(item.kind==='mark'){
+        const point=view.project(item.point),radius=Math.max(1.5,Math.min(4.5,item.radius/point.depth));
+        ctx.beginPath();ctx.arc(point.x,point.y,radius+1,0,TAU);ctx.fillStyle='#102029';ctx.fill();ctx.beginPath();ctx.arc(point.x,point.y,radius,0,TAU);ctx.fillStyle='#fff2df';ctx.fill();
+        ctx.beginPath();ctx.arc(point.x,point.y,radius*.44,0,TAU);ctx.fillStyle='#d84483';ctx.fill();
+      }
+    }
+  }
+  function labelWorld(ctx,view,point,text,color='#c7d9db',align='left') {const p=view.project(point);if(p.depth<.1)return;ctx.font='11px system-ui,sans-serif';ctx.textBaseline='middle';ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(text,p.x,p.y);ctx.textAlign='left'}
+  function drawDrum() {
+    const canvas=stageViews.drum;if(!canvas.w)return;
+    const ctx=canvas.canvas.getContext('2d'),w=canvas.w,h=canvas.h;
+    ctx.setTransform(canvas.ratio,0,0,canvas.ratio,0,0);
+    const d=state.observerDistance,yaw=state.observerYaw;
+    const eye=[Math.sin(yaw)*d,1.65,-Math.cos(yaw)*d];
+    const target=[0,1.3+Math.max(0,4.1-d)*.22,0];
+    const view=worldProjector({w,h},eye,target,46),items=[];
+    worldGround(ctx,view,w,h);
+    const angle=TAU*state.time/DRUM_PERIOD;
+    collectMesh(items,pedestal,p=>add(p,[0,.83,0]),[76,104,115],view,{stroke:'#718991'});
+    collectMesh(items,disc,p=>add(rotate(p,angle),[0,DRUM_TOP-.02,0]),[95,127,138],view,{stroke:'#708e99'});
+    // A small index fixed to the disc makes its rotation visible even if a body is symmetric.
+    for(let i=0;i<12;i++){
+      const phi=i*TAU/12,at=add(rotate([Math.sin(phi)*1.098,0,-Math.cos(phi)*1.098],angle),[0,1.68,0]);
+      const normal=rotate([Math.sin(phi),0,-Math.cos(phi)],angle);
+      if(dot(normal,sub(eye,at))>0)lineItem(items,add(at,[0,-.017,0]),add(at,[0,.017,0]),i===0?'#ffcb91':'#99c7cf',view,i===0?3:1.2);
+    }
+    const mesh=geometry[state.body];
+    for(let i=0;i<12;i++){
+      const phi=i*TAU/12,s=pose(state.drumMode,PERIOD*i/12),mountAngle=angle-phi;
+      const anchor=add(rotate([Math.sin(phi)*MOUNT_R,MOUNT_Y,-Math.cos(phi)*MOUNT_R],angle),[0,DRUM_TOP,0]);
+      const centre=add(anchor,rotate(mul(s.offset,MOUNT_SCALE),mountAngle));
+      const totalAngle=mountAngle+s.angle,totalScale=MOUNT_SCALE*s.scale;
+      const transform=p=>add(state.body==='sphere'?mul(p,totalScale):rotate(mul(p,totalScale),totalAngle),centre);
+      collectMesh(items,mesh,transform,palette[state.drumMode],view,{stroke:state.body==='sphere'?null:'#d1e5e4'});
+      if(state.marked){
+        const point=add(rotate(mul(mesh.mark.point,totalScale),totalAngle),centre),normal=rotate(mesh.mark.normal,totalAngle);
+        if(dot(normal,sub(eye,point))>0)items.push({kind:'mark',point,radius:7*s.scale,depth:dot(sub(point,eye),view.forward)});
+      }
+    }
+    // Fixed ruler: this belongs to the floor, not to the moving parent.
+    lineItem(items,[-1.38,0,0],[-1.38,DRUM_TOP,0],'#b5b597',view,1,[3,4]);
+    for(const y of [0,DRUM_TOP])lineItem(items,[-1.46,y,0],[-1.30,y,0],'#cbd0b9',view,1.3);
+    paintItems(ctx,items,view);
+    labelWorld(ctx,view,[-1.48,.88,0],'1.70 m','#d5d2b7','right');
+    ctx.font='11px system-ui,sans-serif';ctx.fillStyle='#a1c1c9';ctx.fillText('12 fixed local poses · parent rotation',18,h-17);
+  }
+  function drawAxial() {
+    const canvas=stageViews.axial;if(!canvas.w)return;
+    const ctx=canvas.canvas.getContext('2d'),w=canvas.w,h=canvas.h;ctx.setTransform(canvas.ratio,0,0,canvas.ratio,0,0);
+    const view=worldProjector({w,h},[2.0,1.65,-3.0],[0,1.4,0],45),items=[];
+    worldGround(ctx,view,w,h);
+    collectMesh(items,axialPedestal,p=>add(p,[0,.85,0]),[75,95,109],view,{stroke:'#677c88'});
+    collectMesh(items,spindle,p=>add(p,[0,2.08,0]),[159,175,180],view);
+    const angle=TAU*state.time/AXIAL_PERIOD,pivot=[0,2.05,0];
+    const mesh=state.axialBody==='cube'?axialCube:axialTriangle;
+    collectMesh(items,mesh,p=>add(rotate(p,angle),pivot),[224,181,151],view,{stroke:'#fff0d5',twoSided:state.axialBody==='triangle'});
+    if(state.envelope){
+      const yLow=state.axialBody==='cube'?-.3:-.35,yHigh=state.axialBody==='cube'?.3:.35;
+      const radius=y=>state.axialBody==='cube'?Math.SQRT2*.3:.45*(.35-y)/.7;
+      for(let level=0;level<=4;level++){
+        const y=yLow+(yHigh-yLow)*level/4,r=radius(y);
+        for(let i=0;i<64;i++){const a=TAU*i/64,b=TAU*(i+1)/64;lineItem(items,add([r*Math.sin(a),y,r*Math.cos(a)],pivot),add([r*Math.sin(b),y,r*Math.cos(b)],pivot),'#e3a9c9b8',view,1.05)}
+      }
+      for(let i=0;i<12;i++){const a=TAU*i/12;lineItem(items,add([radius(yLow)*Math.sin(a),yLow,radius(yLow)*Math.cos(a)],pivot),add([radius(yHigh)*Math.sin(a),yHigh,radius(yHigh)*Math.cos(a)],pivot),'#e3a9c97a',view,.8,[3,3])}
+    }
+    paintItems(ctx,items,view);
+    labelWorld(ctx,view,[.13,2.59,0],'Y / fixed axle','#bed1d7');
+    ctx.font='11px system-ui,sans-serif';ctx.fillStyle=state.envelope?'#e6b2cc':'#a1c1c9';ctx.fillText(state.envelope?'Computed boundary · not optical blur':'Follow the edges before adding the trace',17,h-15);
+  }
+  function resizeMechanisms() {
+    for(const [key,view] of Object.entries(stageViews)){
+      const w=Math.max(270,Math.round(view.canvas.getBoundingClientRect().width));
+      const h=key==='drum'?(w<500?375:440):(w<400?360:387),ratio=Math.min(devicePixelRatio||1,2);
+      if(view.w===w&&view.h===h&&view.ratio===ratio)continue;
+      view.w=w;view.h=h;view.ratio=ratio;view.canvas.width=Math.round(w*ratio);view.canvas.height=Math.round(h*ratio);view.canvas.style.height=h+'px';
+    }
+  }
+  function syncMechanismControls() {
+    el['drum-mode'].value=state.drumMode;el['axial-body'].value=state.axialBody;el.envelope.checked=state.envelope;
+    el['view-readout'].textContent=`Eye 1.65 m · ${(state.observerDistance-1.1).toFixed(2)} m from the rim · orbit ${Math.round(state.observerYaw*180/Math.PI)}°`;
+    el.approach.disabled=state.observerDistance<=2.1;el.retreat.disabled=state.observerDistance>=5.6;
+    el['sweep-readout'].textContent=state.envelope?(state.axialBody==='cube'?'Cube → cylinder · outer radius √2 × 0.30 ≈ 0.424 m':'Triangle → cone · radius decreases from 0.45 m to zero'):'Boundary hidden. Follow the moving edges first.';
+  }
+  const views=modes.map(mode=>({mode,canvas:document.getElementById(mode),history:null,w:0,h:0,cacheKey:''}));
+  function historyGrid(w) {
+    const pad=15, columns=6, cellW=(w-pad*2)/columns, cellH=55;
+    return {pad,columns,cellW,cellH,height:cellH*2};
+  }
+  function rebuildHistory(view) {
+    const layout=historyGrid(view.w), cache=document.createElement('canvas'), ratio=view.ratio;
+    cache.width=Math.round(view.w*ratio);cache.height=Math.round(layout.height*ratio);
+    const ctx=cache.getContext('2d');ctx.scale(ratio,ratio);
+    for(let i=0;i<12;i++){
+      const rect={x:layout.pad+(i%6)*layout.cellW+2,y:Math.floor(i/6)*layout.cellH+3,w:layout.cellW-4,h:layout.cellH-11};
+      bodyScene(ctx,rect,view.mode,i*PERIOD/12,true);
+    }
+    view.history=cache;view.cacheKey=[view.w,state.body,state.marked].join('|');
+  }
+  function resize() {
+    resizeMechanisms();
+    for(const view of views){
+      const w=Math.max(270,Math.round(view.canvas.getBoundingClientRect().width));
+      const h=w<400?322:340, ratio=Math.min(devicePixelRatio||1,2);
+      if(view.w===w&&view.h===h&&view.ratio===ratio)continue;
+      view.w=w;view.h=h;view.ratio=ratio;view.canvas.width=Math.round(w*ratio);view.canvas.height=Math.round(h*ratio);view.canvas.style.height=h+'px';view.cacheKey='';
+    }
+    draw();
+  }
+  function draw() {
+    drawDrum();drawAxial();
+    if(!el['sampling-comparisons'].open)return;
+    const sampled=sampleTime(), historyIndex=Math.round(phase(sampled)/(PERIOD/12))%12;
+    for(const view of views){
+      if(!view.w)continue;
+      const ctx=view.canvas.getContext('2d'), w=view.w,h=view.h, mainH=h-139;
+      ctx.setTransform(view.ratio,0,0,view.ratio,0,0);ctx.clearRect(0,0,w,h);
+      const half=w/2;
+      ctx.fillStyle='#12232c';ctx.fillRect(half,0,half,mainH);
+      ctx.strokeStyle='#354a54';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(half,9);ctx.lineTo(half,mainH-6);ctx.stroke();
+      ctx.font='11px system-ui,sans-serif';ctx.textBaseline='middle';ctx.fillStyle='#9de4cc';ctx.fillText('CONTINUOUS',17,17);ctx.fillStyle='#f0aec5';ctx.fillText('SAMPLED / HELD',half+17,17);
+      bodyScene(ctx,{x:5,y:27,w:half-10,h:mainH-29},view.mode,state.time);
+      bodyScene(ctx,{x:half+5,y:27,w:half-10,h:mainH-29},view.mode,sampled);
+      ctx.strokeStyle='#354a54';ctx.beginPath();ctx.moveTo(15,mainH+1);ctx.lineTo(w-15,mainH+1);ctx.stroke();
+      ctx.font='10px system-ui,sans-serif';ctx.fillStyle='#a6b9be';ctx.fillText('ONE CYCLE / 12 STILL POSES',17,mainH+15);
+      ctx.textAlign='right';ctx.fillStyle='#d9a9ba';ctx.fillText('HELD PHASE',w-17,mainH+15);ctx.textAlign='left';
+      const cacheKey=[w,state.body,state.marked].join('|');
+      if(view.cacheKey!==cacheKey)rebuildHistory(view);
+      const top=mainH+27, grid=historyGrid(w);
+      ctx.drawImage(view.history,0,top,w,grid.height);
+      for(let i=0;i<12;i++){
+        const x=grid.pad+(i%6)*grid.cellW,y=top+Math.floor(i/6)*grid.cellH;
+        const historyTime=i*PERIOD/12;
+        const visited=Math.abs(historyTime/state.interval-Math.round(historyTime/state.interval))<1e-8;
+        if(visited){ctx.fillStyle='#ab7187';ctx.fillRect(x+grid.cellW/2-7,y+grid.cellH-6,14,2)}
+        if(i===historyIndex){ctx.strokeStyle='#f0aec5';ctx.lineWidth=1.1;ctx.strokeRect(x+1,y+1,grid.cellW-2,grid.cellH-4)}
+      }
+    }
+  }
+  function syncControls(announce=false) {
+    syncMechanismControls();
+    el.body.value=state.body;el.interval.value=String(state.interval);el.marked.checked=state.marked;
+    el.pause.textContent=state.paused?'Play':'Pause';el.pause.setAttribute('aria-pressed',String(state.paused));
+    el.scrub.disabled=!state.paused;
+    if(announce)el.status.textContent=state.paused?'Paused. You can still move around the drum; both mechanisms hold their orientation.':'The drum turns every six seconds. The axle turns every twenty seconds.';
+    syncClock();draw();
+  }
+  function syncClock() {
+    el.clock.value=state.time.toFixed(3)+' s';el['sample-clock'].value=sampleTime().toFixed(3)+' s';
+    const within=state.paused&&state.time>0&&phase(state.time)<1e-8?PERIOD:phase(state.time);
+    el.scrub.value=String(within);el['phase-label'].value=within.toFixed(2)+' / 4.00 s';
+  }
+  let last=performance.now(), lastClock=0;
+  function settleClock() {const now=performance.now();if(!state.paused)state.time+=Math.max(0,(now-last)/1000);last=now}
+  el.body.addEventListener('change',()=>{settleClock();state.body=el.body.value;syncControls()});
+  el.interval.addEventListener('change',()=>{settleClock();state.interval=Number(el.interval.value);syncControls();el.status.textContent='Same running time. The held view now uses the latest sample on the new interval grid.'});
+  el.marked.addEventListener('change',()=>{settleClock();state.marked=el.marked.checked;syncControls();el.status.textContent=state.marked?'Follow the mark. It disappears when its surface turns away from the camera.':'The mark is removed. Compare the geometry that remains.'});
+  el.pause.addEventListener('click',()=>{settleClock();state.paused=!state.paused;syncControls(true)});
+  el.reset.addEventListener('click',()=>{state.time=0;last=performance.now();syncControls();el.status.textContent='Both clocks returned to zero. Body, mark and sampling interval are unchanged.'});
+  el.scrub.addEventListener('input',()=>{if(!state.paused)return;state.time=Number(el.scrub.value);last=performance.now();syncClock();draw()});
+  el['drum-mode'].addEventListener('change',()=>{settleClock();state.drumMode=el['drum-mode'].value;syncControls()});
+  el['axial-body'].addEventListener('change',()=>{settleClock();state.axialBody=el['axial-body'].value;syncControls()});
+  el.envelope.addEventListener('change',()=>{state.envelope=el.envelope.checked;syncControls()});
+  for(const [id,amount] of [['orbit-left',-Math.PI/6],['orbit-right',Math.PI/6]])el[id].addEventListener('click',()=>{state.observerYaw+=amount;syncMechanismControls();draw()});
+  el.approach.addEventListener('click',()=>{state.observerDistance=Math.max(2.1,state.observerDistance-.5);syncMechanismControls();draw()});
+  el.retreat.addEventListener('click',()=>{state.observerDistance=Math.min(5.6,state.observerDistance+.5);syncMechanismControls();draw()});
+  el['view-reset'].addEventListener('click',()=>{state.observerYaw=0;state.observerDistance=4.1;syncMechanismControls();draw()});
+  el['sampling-comparisons'].addEventListener('toggle',()=>{resize();draw()});
+  window.transformStudy={
+    snapshot(){
+      const sampled=sampleTime();
+      return {time:state.time,period:PERIOD,phase:phase(state.time),body:state.body,marked:state.marked,paused:state.paused,interval:state.interval,sampleTime:sampled,drum:{mode:state.drumMode,period:DRUM_PERIOD,angle:TAU*state.time/DRUM_PERIOD,platformTop:DRUM_TOP,radius:1.1,mountRadius:MOUNT_R,mountY:MOUNT_Y,mountScale:MOUNT_SCALE,poseCount:12,observer:{yaw:state.observerYaw,distance:state.observerDistance,eyeHeight:1.65}},axial:{body:state.axialBody,period:AXIAL_PERIOD,angle:TAU*state.time/AXIAL_PERIOD,pivotY:2.05,boundary:state.envelope,outerRadius:state.axialBody==='cube'?Math.SQRT2*.3:.45},studies:Object.fromEntries(modes.map(mode=>[mode,{live:pose(mode,state.time),sampled:pose(mode,sampled)}])),history:{times:Array.from({length:12},(_,i)=>i*PERIOD/12),heldIndex:Math.round(phase(sampled)/(PERIOD/12))%12}};
+    },
+    setTime(t){if(!Number.isFinite(t)||t<0)throw new RangeError('Time must be a finite, non-negative number.');state.time=t;state.paused=true;last=performance.now();syncControls(true);return this.snapshot()}
+  };
+  const observer=new ResizeObserver(resize);for(const view of views)observer.observe(view.canvas);for(const view of Object.values(stageViews))observer.observe(view.canvas);
+  if(state.paused)el.status.textContent='Paused to respect reduced motion. Press Play when you want to begin.';
+  syncControls();resize();
+  function frame(now){if(!state.paused){state.time+=Math.max(0,(now-last)/1000);if(now-lastClock>45){syncClock();lastClock=now}draw()}last=now;requestAnimationFrame(frame)}
+  requestAnimationFrame(frame);
+})();
+</script>
+</body></html>

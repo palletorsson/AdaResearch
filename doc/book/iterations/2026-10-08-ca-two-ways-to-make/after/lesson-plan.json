@@ -1,0 +1,29 @@
+{
+  "id": "CA_AgentsCircuits",
+  "decision": "draft",
+  "mode": "reuse",
+  "object": "Same PointBody inspects and steps a Rule 90 history beside a fixed recursive cube construction.",
+  "change": "Compare a next-state calculation with a supplied placement recipe. Change the beginning of one and identify which output responds.",
+  "dependsOn": [
+    "CA_Introduction",
+    "CA_GameOfLife",
+    "Point_Coordinates"
+  ],
+  "reuses": "Carried point/action, world-to-local address, Boolean state, old-to-next update, independent saved rows, arrays and loops, supplied classes and mesh instances.",
+  "given": "Existing Day Zero Endless Museum host, player, camera, lighting and XR Tools. Three full files create the learner comparison. Recursive six-offset placement recipe is supplied and explained one level at a time; derivation belongs to Fractals.",
+  "later": "Compact example fixes Rule 90, caps history at 24 rows and uses keyboard C/R for seed/replay; installed desk has wider VR rule controls and a scrolling floor receiver. Wireworld is archived proposal material, not an installed lesson. No universality or fractal-dimension proof.",
+  "checks": [
+    "29 exact printed-file native checks. All eight Rule 90 cases and 240 mixed-start updates match the installed evaluator. Ordered recursive positions match production at depths 0–4. Test independent rows, finite wrap, geometry/support, supplied XRTools poses and keyboard controls.",
+    "Transfer changes seed_sites to [14,16,18]: first next row contains only 13 and 19, while all 216 cube transforms remain fixed. XOR-to-OR and in-place-read defects are detected.",
+    "38 installed museum checks including cameras: actual pickup/step/release, floor history/colour/transforms, seed/reset/scrolling, all 1296 cube transforms, body walking, four routes/158 clearance and floor samples, supported portal approaches."
+  ],
+  "transfer": "Change seed_sites to [14,16,18]. Predict shared-neighbour cancellation, then show that only addresses 13 and 19 survive the first update and that no cube placement changes.",
+  "carry": "Ask what repeats, what it reads and what input can change it. Similar outlines do not establish the same procedure.",
+  "next": "CA_EdgeOfChaos: keep the procedure fixed and follow one changed starting value through two nearly matching volumes. Audit actual implementation before expanding the lesson.",
+  "notes": "Rule 90 and pyramid algorithms unchanged. Existing HandPoint adapter added to comparison branch. All three authored placements and floor retained; incidental sculpture cleared and portals moved to thresholds. Hall blurb and two catalogue captions corrected to the actual six-call/seed comparison. No headset, Quest, full portal transfer or independent student acceptance.",
+  "baseline": {
+    "tutorial": "fe258caa8f53ee9c35396b2b3115cadf38392fdd928a87a3d9d6918fff093a3e",
+    "choice": "efa9f0745167ef58fa3cfc57a3806e3c5a9b01925facbb9d22bc2a5ab4e98065"
+  },
+  "summary": "Return with the same point and Boolean row. Move the held point to inspect one address; trigger advances one generation. Rule 90 reads old left/right values and writes their inequality into a new row; saved rows make time visible on the table and floor. Compare this with the supplied six-offset recursive cube recipe, which reads positions, spacing and depth. Change seed_sites to [14,16,18], predict the next occupied addresses 13 and 19, and confirm the fixed pyramid has not moved. Carry the distinction between changing state and repeating placement into a comparison of almost identical beginnings."
+}

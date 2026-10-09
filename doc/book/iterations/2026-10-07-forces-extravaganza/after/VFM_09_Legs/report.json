@@ -1,0 +1,1059 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "placed: force_play_support",
+      "passed": true
+    },
+    {
+      "name": "placed: one_leg",
+      "passed": true
+    },
+    {
+      "name": "placed: four_leg_critter",
+      "passed": true
+    },
+    {
+      "name": "placed: six_leg_critter",
+      "passed": true
+    },
+    {
+      "name": "supported route [14.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [25.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [25.5, 35.5]",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 0",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 0",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 1",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 1",
+      "passed": true
+    },
+    {
+      "name": "exit identified and clear",
+      "passed": true
+    },
+    {
+      "name": "support: full-size physical encounter placed",
+      "passed": true
+    },
+    {
+      "name": "support: stacked load stands before the hand intervenes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: support-before",
+      "passed": true
+    },
+    {
+      "name": "support: pulling a leg overturns the actual table",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: support-after",
+      "passed": true
+    },
+    {
+      "name": "support: simulation advances inside the museum",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          1.73999989032745,
+          0.0,
+          3.22749996185303
+        ],
+        "bounds_size": [
+          24.7824993133545,
+          4.17500019073486,
+          35.7274971008301
+        ],
+        "position": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_hall_11"
+      },
+      {
+        "bounds_position": [
+          5.5,
+          0.0,
+          5.5
+        ],
+        "bounds_size": [
+          18.0,
+          3.41652154922485,
+          16.0
+        ],
+        "position": [
+          14.5,
+          0.0,
+          13.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_play_support"
+      },
+      {
+        "bounds_position": [
+          3.71430420875549,
+          -0.139830350875854,
+          29.8806972503662
+        ],
+        "bounds_size": [
+          2.03407406806946,
+          7.33983039855957,
+          2.45340538024902
+        ],
+        "position": [
+          5.5,
+          0.0,
+          31.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "one_leg"
+      },
+      {
+        "bounds_position": [
+          11.6972675323486,
+          -0.119864083826542,
+          29.7899208068848
+        ],
+        "bounds_size": [
+          4.58487319946289,
+          7.31986379623413,
+          4.18294143676758
+        ],
+        "position": [
+          14.5,
+          0.0,
+          31.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "four_leg_critter"
+      },
+      {
+        "bounds_position": [
+          20.4945888519287,
+          -0.119864322245121,
+          29.6035633087158
+        ],
+        "bounds_size": [
+          4.78804206848145,
+          7.31986427307129,
+          4.65106391906738
+        ],
+        "position": [
+          23.5,
+          0.0,
+          31.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "six_leg_critter"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          26.9909992218018,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          26.9909992218018,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          6.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          6.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          26.9909992218018,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          8.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          8.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          8.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          26.9909992218018,
+          1.58000004291534,
+          8.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          10.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          10.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          10.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          26.9909992218018,
+          1.58000004291534,
+          10.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          18.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          18.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          12.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          13.7749996185303,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.450000762939453,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          14.0,
+          3.51999998092651,
+          -1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          6.52500009536743,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.949999809265137,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          7.0,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "ceiling_vent"
+      },
+      {
+        "bounds_position": [
+          1.27999997138977,
+          0.550000011920929,
+          2.18379998207092
+        ],
+        "bounds_size": [
+          0.288000106811523,
+          0.600000083446503,
+          0.616199970245361
+        ],
+        "position": [
+          1.27999997138977,
+          0.850000023841858,
+          2.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "fire_hose_box"
+      }
+    ],
+    "exit": {
+      "cell": "(25, 36)",
+      "door": "(25.5, 0.05, 36.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(25.5, 0.05, 36.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "live_motion": [
+      {
+        "active": true,
+        "clock": 2.75,
+        "elapsed": 5.66666666666665,
+        "end": [
+          -1.72410202026367,
+          0.67466539144516,
+          -1.17245674133301
+        ],
+        "frozen": false,
+        "kind": "support",
+        "mode": 0,
+        "processing": true,
+        "start": [
+          -1.69966411590576,
+          0.674932301044464,
+          -1.20110321044922
+        ]
+      }
+    ],
+    "route_obstructions": [],
+    "studies": [
+      {
+        "bodies": 18,
+        "joints": 0,
+        "kind": "support",
+        "position": [
+          14.5,
+          0.0,
+          17.5
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "room": "VFM_09_Legs",
+  "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach."
+}

@@ -1,0 +1,5 @@
+The chapter's DNA hall places six artifact families across four configurations each. Familiar defaults meet alternatives; this local comparison does not require a claim that no other hall shows variants. The layout is generated from the registry, default first, which is why five of the six bands open on the object as you already know it.
+
+The design bet is that standing the published claim beside the object turns a maintenance problem into an exhibit. The disagreements the hall exposes are not staged: `csg_union_demo` publishes `lobed, distinct, necked, single` against a code ladder that runs monotonically, so the argument the ladder existed to make is scrambled by the order it is shown in; `csg_intersection_demo` gives its familiar broad setting a direct default offset; `coincident_face` contains no boolean operation at all. Leave these visible. The room is the instrument.
+
+Curriculum role: B2 EXAMINE in the boolean_surfaces sequence — the variant as a claim somebody published, and the gap between an object and its own description.

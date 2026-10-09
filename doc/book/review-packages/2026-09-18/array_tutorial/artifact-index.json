@@ -1,0 +1,1039 @@
+{
+  "column_3_z": [
+    {
+      "registry_file": "commons/artifacts/registry/arrays.json",
+      "registry_sha256": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+      "entry_key": "column_3_z",
+      "entry": {
+        "lookup_name": "column_3_z",
+        "name": "column_3_z",
+        "description": "Stacks three pickup cubes in the Z direction for spacing tests.",
+        "scene": "res://algorithms/arrays/column_3_z.tscn",
+        "category": "unknown",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "tiling"
+        ],
+        "footprint": [
+          1,
+          1,
+          4
+        ],
+        "size_group": "room_scale",
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            4
+          ],
+          "size_group": "room_scale"
+        },
+        "complexity": "beginner",
+        "dev_themes": [
+          "arrays",
+          "data_structures"
+        ],
+        "tags": [
+          "array"
+        ],
+        "spatial_needs": {
+          "platform": "pedestal",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "simpler",
+            "grid_2d_4x4",
+            "dimension",
+            "appears",
+            "alongside"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.7,
+            0.5,
+            3.7
+          ],
+          "aabb_center": [
+            0.0,
+            0.66,
+            1.5
+          ],
+          "grid_cells": [
+            1.0,
+            4.0
+          ],
+          "max_dimension_m": 3.7,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 10,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.049800Z",
+          "derived_from": "aabb_size + category"
+        },
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "notation": [
+              "label",
+              "none",
+              "tape",
+              "tally",
+              "plate"
+            ]
+          },
+          "default": "notation=label - the pink billboarded [i] built inside the cube loop, the same node in the same place as before, so the 4 existing placements are unchanged",
+          "was": "a row of four pickup cubes each wearing a pink [i] in the air, which asserted that an index is a tag the object carries and hid that this is one answer among several",
+          "note": "DERIVED from algorithms/arrays/column_3_z.gd, not composed here - the notation export, the NOTATIONS list and the apply_grid_config handling were already in the script and the registry had never been told, so the sweep could not reach the axis. Count, origin and spacing are identical across all five values; only the notation is dressed on afterwards, inside the row's existing X/Z envelope."
+        }
+      }
+    }
+  ],
+  "row_3_x": [
+    {
+      "registry_file": "commons/artifacts/registry/arrays.json",
+      "registry_sha256": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+      "entry_key": "row_3_x",
+      "entry": {
+        "lookup_name": "row_3_x",
+        "name": "row_3_x",
+        "description": "Places three pickup cubes in a single row along the X axis.",
+        "scene": "res://algorithms/arrays/row_3_x.tscn",
+        "category": "unknown",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "tiling"
+        ],
+        "footprint": [
+          4,
+          1,
+          1
+        ],
+        "size_group": "room_scale",
+        "parameters": {
+          "footprint": [
+            4,
+            1,
+            1
+          ],
+          "size_group": "room_scale"
+        },
+        "complexity": "beginner",
+        "dev_themes": [
+          "arrays",
+          "data_structures"
+        ],
+        "tags": [
+          "array"
+        ],
+        "spatial_needs": {
+          "platform": "pedestal",
+          "footprint_cells": 8,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 2,
+          "cluster_with": [
+            "architecture",
+            "column_3_z",
+            "oriented",
+            "along",
+            "instead"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 8,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.7,
+            1.81,
+            1.35
+          ],
+          "aabb_center": [
+            1.5,
+            1.32,
+            -0.33
+          ],
+          "grid_cells": [
+            4,
+            2
+          ],
+          "max_dimension_m": 3.7,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 10,
+          "density": "medium",
+          "min_clearance": 2,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.049800Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "xyz_coordinates": [
+    {
+      "registry_file": "commons/artifacts/registry/commons_artifacts.json",
+      "registry_sha256": "76b2509e7406332a44e04662eb8b08a9a0883c64c3a332f17d14a279e7d61651",
+      "entry_key": "xyz_coordinates",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "frame": [
+              "orthonormal",
+              "tilted",
+              "skewed",
+              "stretched",
+              "mirrored"
+            ],
+            "readout": [
+              "none",
+              "numeral",
+              "gradation",
+              "lattice"
+            ]
+          },
+          "default": "frame=orthonormal, readout=none - orthonormal returns Basis.IDENTITY, which _apply_frame writes into the CoordinateAxes node's transform as Transform3D(IDENTITY, ZERO), i.e. the transform that node already had, and moves the three billboard letters to (1.2,0,0)/(0,1.2,0)/(0,0,1.2), which is where create_axes literally put them; readout=none is the `_:` branch of _build_readout and adds no node at all. All 7 placements (Tutorial_Single, Tutorial_Row, Tutorial_2D_Build, Tutorial_2D_Color, Tutorial_App, Spine_Museum, Lab) are bare tokens with no config, and apply_grid_config only assigns when the word is in the allow-list AND differs from the value already held, so nothing is torn down for them.",
+          "was": "four exports and every one a dial on HANDLING - initial_scale, rotation_speed and two camera sensitivities - and not one about the coordinate system the gadget exists to argue about. The three rods were three literal CSGCylinder3D blocks with hard-coded rotations, and there was no apply_grid_config at all, so no map token could reach anything.",
+          "note": "frame is the argument. This artifact's own truth statement is that a coordinate system is a convention about shared directions and not a property of space, and until now it could draw exactly ONE convention - right angles, equal lengths, right-handed, aligned with the room - which is that claim's contradiction standing in seven rooms. Each value drops one property the identity silently bundles: tilted drops nothing but agreement with the walls (the rung the artifact's own `emerges` note is about, where 'X goes right' stops being true); skewed drops orthogonality; stretched drops unit length, so the same point in the world carries quite different numbers; mirrored drops right-handedness and Z points backward. The map is applied to the CoordinateAxes node, so the rods, the readout collars, the lattice and the invisible FrameAnchor all move as one system - the letters are moved by hand instead of re-parented, because moving them in the tree would change what GridInteractablesComponent._compute_local_aabb sees among the root's direct children and every live placement would ground differently.",
+          "kin": "frame is taken character for character from basis_vectors_rig (promoted the same day), which asks the same question of the same geometry: three coloured legs from one origin, and a name - `basis`, `coordinates` - claiming more than the drawing can support. The shared word is honest here because the geometry IS the geometry; the rig adds the linear-combination staircase, this one adds the graduations. Both ship orthonormal, so the family measures alike at its default. readout is taken character for character from xyz_slider_plate and line, which carry the same four rungs; those two are the plate and the segment, this is the frame they are read against.",
+          "pairs": "skewed x lattice is the strongest single frame this gadget can produce - a graduated oblique lattice is the one picture in which 'the grid' and 'the right angle' visibly come apart. Sweeping frame at readout=none understates it, because a bare rod carries no marks to shear.",
+          "still_note": "every rung of both axes is standing geometry under a standing linear map; nothing animates, so a still holds it. frame needs no rebuild at all (one transform write plus three label positions); readout rebuilds only its own Readout node.",
+          "framing_note": "the gadget is CSGCylinder3D and Label3D only, and both AABB walks in this repo type `is MeshInstance3D`, so an invisible layers=0 FrameAnchor already exists inside CoordinateAxes to give the capture something to measure. It is sized for the ORTHONORMAL frame; under stretched and mirrored it is carried by the same basis and grows with the rods, but check subject % before reading a verdict."
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Cartesian coordinate system, x y z godot",
+        "dev_themes": [
+          "commons",
+          "mixed"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "xyz_coordinates",
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "tiling"
+        ],
+        "name": "XYZ coordinates",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
+        "size_group": "compact",
+        "tags": [
+          "simulation"
+        ],
+        "geometry_spec": {
+          "mesh_type": "boolean_composition",
+          "topology": "volumetric",
+          "construction": {
+            "method": "csg_boolean",
+            "primitives": [
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_primitives",
+              "boolean_combine"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.22,
+            1.22,
+            1.22
+          ],
+          "aabb_center": [
+            0.59,
+            0.59,
+            0.59
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.22,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.084544Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The addressing scheme laid bare — x, y, z, the three numbers that turn empty space into an array of positions. Before any value can be stored somewhere, somewhere has to be nameable; this is the chapter's quiet foundation, the Cartesian grid that makes 'the cell at (3,1,4)' a sentence with a referent."
+      }
+    }
+  ],
+  "grid_2d_4x4": [
+    {
+      "registry_file": "commons/artifacts/registry/arrays.json",
+      "registry_sha256": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+      "entry_key": "grid_2d_4x4",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-05",
+          "stage": "2 - variation",
+          "axes": {
+            "notation": [
+              "label",
+              "none",
+              "tape",
+              "tally",
+              "plate"
+            ]
+          },
+          "default": "notation=label - the white billboarded [x, z] built inside the cube loop, the same node in the same place with the same font size, outline, no_depth_test and colour as before. MEASURED, not assumed: 14 real mentions across 13 map files - bare tokens in Corridor_Tutorial_2D_Build, Kernel_Demo2, Trial_antrooms_array_tutorial, Tutorial_2D, Tutorial_2D_Build and Tutorial_Single; `exhibit_furniture#kind:floor_work#size:l#mount:grid_2d_4x4` in seven museum trials, where the # keys belong to the furniture; and `curation_station#artifacts:column_3_z,grid_2d_4x4,grid_3d_4x4x4` in Curation_Bay_array_tutorial_4, where they belong to the station. None passes a notation key. The layout values (cols, rows, spacing, label_size, label_color) were locals inside apply_grid_config with exactly the defaults _ready hard-coded, so promoting them to members lets one builder serve both paths and changes nothing at the default.",
+          "was": "a 4x4 of pickup cubes each wearing [x, z] in the air, which asserted that an address is a tag the object carries and hid that this is one answer among several - pick the cube up and the address leaves with it, while grid_data[x][z] quietly becomes 0 and the slot it named stays behind unmarked. The runner refused it as NO TURNABLE KNOBS; the exports it did have were a debug flag and a table toggle.",
+          "shares_vocabulary_with": "column_3_z - the same word and the same five values in the same order with the same default, character for character. This artifact's own @identity names column_3_z as the thing it extends to two dimensions, and the two are the same object at n=1 and n=2: pickup cubes on a floor with an index each. Every value has a real 2D answer rather than a fudged one - tape becomes two rules along the two origin-side margins (an address is two distances read off two scales, which is also the matrix margin), tally becomes x strokes on the face looking back down X and z strokes on the face looking back down Z (two counts, each on the face pointing at the origin it counts from), and plate is the strongest fit of the five here, because the floor plaque that stays when the cube is taken is exactly what grid_data[x][z] = 0 has always meant in data and never showed in space.",
+          "nearly_declined": "recorded so the next agent does not reopen it. The obvious reading is that this is scaffolding whose only knob is how many cubes there are, and grid dimensions are the decoration case - prebaked_loader and path_game_controller were both declined that way. What separates it is that the artifact makes a claim (an address is a tag on the object) that it never admitted was a choice, and its 1D sibling had already named the question.",
+          "still_note": "notation is resolved during _ready and the dressing is static geometry - boxes, and one non-billboarded Label3D per slot under `plate`. Nothing here animates, so a single frame is a complete account of the axis.",
+          "framing_note": "the BinaryTableDisplay sits at (-2.0, 1.8, 1.5), about 0.9 m square, and does NOT change with notation, so it dilutes the bite by roughly its share of the frame. Expect a smaller number than column_3_z measures for the same five values; that is dilution, not a weaker axis. All notation geometry stays inside the cubes' own X/Z envelope (-0.25 to 3.25 at default spacing), so the sweep frames the same box whichever value it shoots.",
+          "repair": "apply_grid_config tore down every child and rebuilt on ANY non-empty config, including one naming nothing it owns - the force_pad fault. It is now guarded: a value has to actually move, and nothing rebuilds before _ready has built once. _create_binary_table also read a hard-coded 4 x 4 while feeding it cols x rows of data; it now reads the members, which is identical at the default and merely coherent above it."
+        },
+        "lookup_name": "grid_2d_4x4",
+        "name": "grid_2d_4x4",
+        "description": "Builds a 4x4 pickup-cube grid laid out across the floor.",
+        "scene": "res://algorithms/arrays/grid_2d_4x4.tscn",
+        "category": "unknown",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "tiling"
+        ],
+        "footprint": [
+          4,
+          1,
+          4
+        ],
+        "size_group": "room_scale",
+        "parameters": {
+          "footprint": [
+            4,
+            1,
+            4
+          ],
+          "size_group": "room_scale"
+        },
+        "complexity": "beginner",
+        "tags": [
+          "2d",
+          "grid"
+        ],
+        "dev_themes": [
+          "arrays",
+          "data_structures"
+        ],
+        "spatial_needs": {
+          "platform": "sunken",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "extends",
+            "column_3_z",
+            "dimensions",
+            "precedes",
+            "grid_3d_4x4x4"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 24,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            5.34,
+            1.89,
+            3.68
+          ],
+          "aabb_center": [
+            0.67,
+            1.37,
+            1.5
+          ],
+          "grid_cells": [
+            6,
+            4
+          ],
+          "max_dimension_m": 5.34,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.049800Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "gridagent": [
+    {
+      "registry_file": "commons/artifacts/registry/hazards.json",
+      "registry_sha256": "c72714c93be651071a8d0d72a864c4b56b1019d5240436cfe070ea1c31a39411",
+      "entry_key": "gridagent",
+      "entry": {
+        "category": "hazards",
+        "complexity": "beginner",
+        "description": "Grid-traversing hazard agent spawned from map tokens like `gridagent:copy`.",
+        "dev_themes": [
+          "gameplay",
+          "hazards"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "gridagent",
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "devexamples",
+          "hazards",
+          "softbodies",
+          "testmaps"
+        ],
+        "name": "Grid Agent",
+        "scene": "res://commons/hazards/gridagent/grid_agent_base.tscn",
+        "tags": [
+          "2d",
+          "hazard",
+          "simulation"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~3"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "alongside",
+            "grid_2d_4x4",
+            "hazard",
+            "modifies",
+            "depends"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.8,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.120712Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A creature that walks the array — traversing the grid cell by cell, copying and patterning as it steps. The array given an inhabitant: where the other exhibits show the structure, this one shows what it is like to MOVE through indexed space, a body reading the lattice one address at a time."
+      }
+    }
+  ],
+  "pulsar_visualizer": [
+    {
+      "registry_file": "commons/artifacts/registry/arrays.json",
+      "registry_sha256": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+      "entry_key": "pulsar_visualizer",
+      "entry": {
+        "name": "Pulsar B1919+21 Visualizer",
+        "lookup_name": "pulsar_visualizer",
+        "description": "The first pulsar discovered (1967). Binary table + 3D glass tubes. Joy Division's Unknown Pleasures made interactive.",
+        "scene": "res://algorithms/arrays/pulsar/pulsar_visualizer.tscn",
+        "category": "primitives",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "tiling"
+        ],
+        "sequence": "array_tutorial",
+        "parameters": {
+          "footprint": [
+            2,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "complexity": "intermediate",
+        "tags": [
+          "3d",
+          "primitives"
+        ],
+        "dev_themes": [
+          "arrays",
+          "data_structures"
+        ],
+        "geometry_spec": {
+          "mesh_type": "delegated_scene",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "scene_instantiation",
+            "primitives": [
+              "plane"
+            ],
+            "operations": [
+              "load_scene",
+              "instantiate",
+              "configure"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": [
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "varies"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 6,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [
+            "static",
+            "class",
+            "signal",
+            "generation",
+            "pairs"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 6,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            2.04,
+            0.94,
+            1.14
+          ],
+          "aabb_center": [
+            -0.04,
+            0.12,
+            -0.01
+          ],
+          "grid_cells": [
+            3,
+            2
+          ],
+          "max_dimension_m": 2.04,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          3,
+          1,
+          2
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 6,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.049800Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "array_flight_lab": [
+    {
+      "registry_file": "commons/artifacts/registry/array_flight_lab.json",
+      "registry_sha256": "6bdb6e03b8eda95bdb221303890b18edd91e096c721d92f9e11c372cd328bf8a",
+      "entry_key": "array_flight_lab",
+      "entry": {
+        "lookup_name": "array_flight_lab",
+        "name": "Fly into the third index",
+        "scene": "res://commons/artifacts/regularity/array_flight_lab.tscn",
+        "category": "arrays",
+        "complexity": "beginner",
+        "map_ready": true,
+        "include_in_map_data": true,
+        "footprint": [
+          12,
+          14,
+          12
+        ],
+        "parameters": {
+          "footprint": [
+            12,
+            14,
+            12
+          ],
+          "size_group": "large"
+        },
+        "description": "64 familiar pickup cubes spaced 2.4m apart in the existing 12m Menger glass flight enclosure. X/Y/Z controls select a slot; collecting records zero without shifting its address.",
+        "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+      }
+    }
+  ],
+  "tiling_principles": [
+    {
+      "registry_file": "commons/artifacts/registry/tiling_principles.json",
+      "registry_sha256": "821cb6798546ff408dd4b662044eb7db3d89a39c1073fc908bf5c883889ba69d",
+      "entry_key": "tiling_principles",
+      "entry": {
+        "lookup_name": "tiling_principles",
+        "name": "One motif, six relations",
+        "scene": "res://commons/artifacts/regularity/tiling_principles.tscn",
+        "category": "arrays",
+        "complexity": "beginner",
+        "map_ready": true,
+        "include_in_map_data": true,
+        "footprint": [
+          15,
+          23,
+          6
+        ],
+        "parameters": {
+          "footprint": [
+            15,
+            23,
+            6
+          ],
+          "size_group": "large"
+        },
+        "description": "Six deterministic black and white fields: translation, alternation, quarter turns, reflection, shifted rows and one local exception. Floor and wall installations share exactly the same generator.",
+        "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+      }
+    }
+  ],
+  "disco_controls": [
+    {
+      "registry_file": "commons/artifacts/registry/disco_controls.json",
+      "registry_sha256": "5b695ad9714b16b500c5b7db017ea94a471bc76a3ecc3ba613dceeb7b2e5ca88",
+      "entry_key": "disco_controls",
+      "entry": {
+        "lookup_name": "disco_controls",
+        "name": "A grid with a clock",
+        "scene": "res://commons/artifacts/regularity/disco_controls.tscn",
+        "category": "arrays",
+        "complexity": "beginner",
+        "map_ready": true,
+        "include_in_map_data": true,
+        "footprint": [
+          2,
+          2,
+          2
+        ],
+        "parameters": {
+          "footprint": [
+            2,
+            2,
+            2
+          ],
+          "size_group": "large"
+        },
+        "description": "Local console selects checker, rows, diagonals or snake on the existing disco floor; hold, single step and speed. Colour mode adds a separate palette control.",
+        "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+      }
+    }
+  ],
+  "step_sequencer": [
+    {
+      "registry_file": "commons/artifacts/registry/arrays.json",
+      "registry_sha256": "8599bcd4c2033e647c144a4c5f92f0c18378f2cc78a5b5f46f7d5e8b595ada1b",
+      "entry_key": "step_sequencer",
+      "entry": {
+        "name": "Step Sequencer",
+        "lookup_name": "step_sequencer",
+        "description": "2D step sequencer with click-to-toggle grid. Arrays as sound - playhead reads indices, triggers sounds.",
+        "scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+        "category": "primitives",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial"
+        ],
+        "sequence": "array_tutorial",
+        "complexity": "intermediate",
+        "tags": [
+          "2d",
+          "interactive",
+          "primitives",
+          "sound"
+        ],
+        "dev_themes": [
+          "arrays",
+          "data_structures",
+          "music"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "arrays",
+            "music",
+            "synthesis",
+            "house"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.6,
+            0.25,
+            0.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.6,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 2,
+          "density": "low",
+          "min_clearance": 0,
+          "stack_priority": 0.1,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.049800Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The array played as music: a click-to-toggle grid where a playhead sweeps the indices left to right and triggers sound where it finds a 1. Arrays as time — the same indexed row that held heights now holds beats, and you hear that reading a list in order is exactly what a rhythm is."
+      }
+    }
+  ],
+  "standalone_disco": [
+    {
+      "registry_file": "commons/artifacts/registry/commons_artifacts.json",
+      "registry_sha256": "76b2509e7406332a44e04662eb8b08a9a0883c64c3a332f17d14a279e7d61651",
+      "entry_key": "standalone_disco",
+      "entry": {
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Self-contained disco floor with white tiles and pattern control. Config: width:8, depth:8, tile_size:0.5, show_controls:true",
+        "dev_themes": [
+          "commons",
+          "mixed"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "standalone_disco",
+        "map_ready": true,
+        "map_sequences": [
+          "tiling"
+        ],
+        "name": "Standalone Disco Floor",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/context/discofloor/standalone_disco_floor.tscn",
+        "size_group": "compact",
+        "tags": [
+          "2d",
+          "pattern"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "particle_lifecycle",
+            "driven_by": "cpu_simulation",
+            "affects": [
+              "transform",
+              "color"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "sunken",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 36,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            5.98,
+            0.02,
+            5.98
+          ],
+          "aabb_center": [
+            0.0,
+            0.51,
+            0.0
+          ],
+          "grid_cells": [
+            6.0,
+            6.0
+          ],
+          "max_dimension_m": 5.98,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 18,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.084049Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The array as dancefloor — a grid of tiles lighting in programmed patterns, the 2D array turned nightclub. Proof that the humblest data structure, a grid of cells each holding a state, is enough to choreograph a room. Indices become tiles, values become light."
+      }
+    }
+  ]
+}

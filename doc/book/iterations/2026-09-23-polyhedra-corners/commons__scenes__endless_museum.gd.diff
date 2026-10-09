@@ -1,0 +1,51 @@
+--- before/commons/scenes/endless_museum.gd
++++ after/commons/scenes/endless_museum.gd
+@@ -8059,6 +8059,7 @@
+ 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
+ 			peek["weathering_wall"] = mm.get("weathering_wall", {})
+ 			peek["turning_wall"] = mm.get("turning_wall", {})
++			peek["simplex_corners"] = mm.get("simplex_corners", [])
+ 			if mm.has("gate"):
+ 				peek["gate"] = bool(mm["gate"])
+ 			if mm.has("gate_depth_rows"):
+@@ -9092,6 +9093,16 @@
+ 	# threshold slots, where _seal_cells silently refuses them and spends the
+ 	# cell anyway. That was the whole of Chichu 3 -> 2, and it is why the
+ 	# Uffizi hero ended up holding a guest.
++	# Authored, solid corner cuts; the map owns their placement and reach.
++	var corners: Array = peek.get("simplex_corners", []) if peek.get("simplex_corners") is Array else []
++	if not corners.is_empty():
++		var corner_builder = load("res://commons/scenes/em/em_simplex_corners.gd")
++		var corner_cells: Array = corner_builder.install(seg, corners, tile, m_corner, WALL_H, VESTIBULE_H)
++		for cell: Vector2i in corner_cells:
++			var world_cell := Vector2i(cell.x, cell.y + zbase + VESTIBULE_H)
++			_walk_cells.erase(world_cell)
++			_walk_erased[world_cell] = "architecture:simplex_corner"
++		slots = slots.filter(func(slot): return not corner_cells.has(Vector2i(int(slot["x"]), int(slot["y"]) - VESTIBULE_H)))
+ 	slots.sort_custom(func(a, b):
+ 		if int(a["y"]) != int(b["y"]):
+ 			return int(a["y"]) < int(b["y"])
+@@ -15506,6 +15517,15 @@
+ 		if seg.has_meta("em_props_deny") and (seg.get_meta("em_props_deny") as Array).has(tok):
+ 			print("[em-props] %s refused by the map's props_deny" % tok)
+ 			continue
++		var mount: Variant = r.get("pos", null)
++		var in_corner := false
++		if mount is Vector3 and (mount as Vector3).y < WALL_H:
++			for rect: Rect2 in seg.get_meta("em_simplex_keep_out", []):
++				if rect.grow(0.25).has_point(Vector2(mount.x, mount.z)):
++					in_corner = true
++					break
++		if in_corner:
++			continue  # A flat-wall fitting cannot project through a filled corner.
+ 		var lv: Variant = _live.get(tok, null)
+ 		if not (lv is Dictionary):
+ 			continue
+@@ -24960,6 +24980,7 @@
+ 		out.append(segn.get_meta("em_weathering_keep_out"))
+ 	if segn.has_meta("em_turning_wall_keep_out"):
+ 		out.append(segn.get_meta("em_turning_wall_keep_out"))
++	out.append_array(segn.get_meta("em_simplex_keep_out", []))
+ 	for c_v in (segn.get_meta("em_pool_cells", []) as Array):
+ 		var c: Vector2i = c_v
+ 		# inset a hair: Rect2.intersects counts a shared edge, so a flush rect

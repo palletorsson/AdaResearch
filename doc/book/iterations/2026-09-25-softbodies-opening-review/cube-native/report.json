@@ -1,0 +1,410 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": true
+    },
+    {
+      "name": "desk bound to cube with six controls",
+      "passed": true
+    },
+    {
+      "name": "cube uses five solver passes",
+      "passed": true
+    },
+    {
+      "name": "initial coefficients match manuscript",
+      "passed": true
+    },
+    {
+      "name": "hall holds one upper point with a visible attachment",
+      "passed": true
+    },
+    {
+      "name": "exactly one mesh point is held",
+      "passed": true
+    },
+    {
+      "name": "visible stem ends at the held point",
+      "passed": true
+    },
+    {
+      "name": "label clears the support and legacy caption is hidden",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-one",
+      "passed": true
+    },
+    {
+      "name": "STIFFNESS changes stiffness alone",
+      "passed": true
+    },
+    {
+      "name": "DAMPING changes damping alone",
+      "passed": true
+    },
+    {
+      "name": "RESET restores coefficients in the same body",
+      "passed": true
+    },
+    {
+      "name": "first PRESSURE press sets zero",
+      "passed": true
+    },
+    {
+      "name": "free surface stays within reach of held point at zero pressure",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-zero",
+      "passed": true
+    },
+    {
+      "name": "next PRESSURE press sets two",
+      "passed": true
+    },
+    {
+      "name": "free surface stays within reach of held point at pressure two",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-two",
+      "passed": true
+    },
+    {
+      "name": "body remains near held point after ten more seconds",
+      "passed": true
+    },
+    {
+      "name": "unconfigured cube retains free body and original pedestal",
+      "passed": true
+    },
+    {
+      "name": "held point stays fixed through the setting changes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deformation-hall",
+      "passed": true
+    },
+    {
+      "name": "MILL holds drive without disabling the soft bodies",
+      "passed": true
+    },
+    {
+      "name": "MILL releases the drive",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "after_DAMPING_2": [
+      [
+        8.25052928924561,
+        0.878396332263947,
+        8.25398826599121
+      ],
+      [
+        8.67487716674805,
+        1.35000002384186,
+        8.65798950195313
+      ]
+    ],
+    "after_MILL_6": [
+      [
+        8.24904251098633,
+        0.881230115890503,
+        8.24830055236816
+      ],
+      [
+        8.6687479019165,
+        1.35000002384186,
+        8.70034313201904
+      ]
+    ],
+    "after_MILL_7": [
+      [
+        8.24863529205322,
+        0.881227612495422,
+        8.24709892272949
+      ],
+      [
+        8.67002105712891,
+        1.35000002384186,
+        8.70160102844238
+      ]
+    ],
+    "after_PRESSURE_4": [
+      [
+        8.25811576843262,
+        0.881196618080139,
+        8.26422595977783
+      ],
+      [
+        8.68122673034668,
+        1.35000002384186,
+        8.66134738922119
+      ]
+    ],
+    "after_PRESSURE_5": [
+      [
+        8.23222064971924,
+        0.884390234947205,
+        8.25068950653076
+      ],
+      [
+        8.70065021514893,
+        1.35000002384186,
+        8.67923450469971
+      ]
+    ],
+    "after_RESET_3": [
+      [
+        8.25417518615723,
+        0.881744265556335,
+        8.25887012481689
+      ],
+      [
+        8.67903995513916,
+        1.35000002384186,
+        8.66077613830566
+      ]
+    ],
+    "after_STIFFNESS_1": [
+      [
+        8.24968528747559,
+        0.876591622829437,
+        8.25204467773438
+      ],
+      [
+        8.67136573791504,
+        1.35000002384186,
+        8.65561866760254
+      ]
+    ],
+    "initial_extent": [
+      [
+        8.29717826843262,
+        0.885699152946472,
+        8.29016971588135
+      ],
+      [
+        8.64610767364502,
+        1.35000002384186,
+        8.63592529296875
+      ]
+    ],
+    "initial_tick_0": [
+      [
+        8.2987174987793,
+        0.89234185218811,
+        8.29508304595947
+      ],
+      [
+        8.65583229064941,
+        1.35000002384186,
+        8.64341354370117
+      ]
+    ],
+    "initial_tick_1": [
+      [
+        8.28526782989502,
+        0.883634209632874,
+        8.28085899353027
+      ],
+      [
+        8.65295791625977,
+        1.35000002384186,
+        8.6414623260498
+      ]
+    ],
+    "initial_tick_10": [
+      [
+        8.27768707275391,
+        0.888803958892822,
+        8.27834987640381
+      ],
+      [
+        8.67065715789795,
+        1.35000002384186,
+        8.65454006195068
+      ]
+    ],
+    "initial_tick_11": [
+      [
+        8.2749662399292,
+        0.887984216213226,
+        8.27616024017334
+      ],
+      [
+        8.67163848876953,
+        1.35000002384186,
+        8.65531253814697
+      ]
+    ],
+    "initial_tick_12": [
+      [
+        8.26998329162598,
+        0.885545372962952,
+        8.27147579193115
+      ],
+      [
+        8.67164325714111,
+        1.35000002384186,
+        8.65540885925293
+      ]
+    ],
+    "initial_tick_13": [
+      [
+        8.26283645629883,
+        0.881931185722351,
+        8.26448535919189
+      ],
+      [
+        8.67097854614258,
+        1.35000002384186,
+        8.65508079528809
+      ]
+    ],
+    "initial_tick_14": [
+      [
+        8.25614070892334,
+        0.878779947757721,
+        8.25790119171143
+      ],
+      [
+        8.67036724090576,
+        1.35000002384186,
+        8.65479946136475
+      ]
+    ],
+    "initial_tick_2": [
+      [
+        8.27412223815918,
+        0.877110064029694,
+        8.26884651184082
+      ],
+      [
+        8.65032196044922,
+        1.35000002384186,
+        8.63980007171631
+      ]
+    ],
+    "initial_tick_3": [
+      [
+        8.2656774520874,
+        0.87320339679718,
+        8.25975227355957
+      ],
+      [
+        8.64876079559326,
+        1.35000002384186,
+        8.63902473449707
+      ]
+    ],
+    "initial_tick_4": [
+      [
+        8.26070022583008,
+        0.871522665023804,
+        8.25473976135254
+      ],
+      [
+        8.64913654327393,
+        1.35000002384186,
+        8.63949966430664
+      ]
+    ],
+    "initial_tick_5": [
+      [
+        8.26107978820801,
+        0.872668027877808,
+        8.2559757232666
+      ],
+      [
+        8.65208625793457,
+        1.35000002384186,
+        8.64153099060059
+      ]
+    ],
+    "initial_tick_6": [
+      [
+        8.26469993591309,
+        0.875803649425507,
+        8.26082134246826
+      ],
+      [
+        8.656174659729,
+        1.35000002384186,
+        8.64431953430176
+      ]
+    ],
+    "initial_tick_7": [
+      [
+        8.269775390625,
+        0.880073368549347,
+        8.26727962493896
+      ],
+      [
+        8.66079139709473,
+        1.35000002384186,
+        8.64749717712402
+      ]
+    ],
+    "initial_tick_8": [
+      [
+        8.27455425262451,
+        0.884316504001617,
+        8.27335643768311
+      ],
+      [
+        8.66507911682129,
+        1.35000002384186,
+        8.65049457550049
+      ]
+    ],
+    "initial_tick_9": [
+      [
+        8.27750587463379,
+        0.887495577335358,
+        8.27737236022949
+      ],
+      [
+        8.66846466064453,
+        1.35000002384186,
+        8.65291786193848
+      ]
+    ],
+    "pressure_two_after_3s_extent": [
+      [
+        8.23519611358643,
+        0.881162941455841,
+        8.26383399963379
+      ],
+      [
+        8.6955680847168,
+        1.35000002384186,
+        8.68267154693604
+      ]
+    ],
+    "zero_pressure_after_3s_extent": [
+      [
+        8.23454475402832,
+        0.879971563816071,
+        8.25263214111328
+      ],
+      [
+        8.69593334197998,
+        1.35000002384186,
+        8.67526435852051
+      ]
+    ]
+  },
+  "passed": true,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Native museum with completed stamp queue; supplied pointer events, solver vertex bounds and original captures. No tracked hand, force feedback or headset acceptance."
+}

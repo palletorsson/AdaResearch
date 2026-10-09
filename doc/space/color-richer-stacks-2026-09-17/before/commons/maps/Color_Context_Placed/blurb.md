@@ -1,0 +1,1 @@
+You know the shapes. Now give them colour. Columns hold familiar primitives in different combinations: a turn, a narrower level, a repeated position. Walk among these still arrangements before the following halls ask what makes a colour appear.

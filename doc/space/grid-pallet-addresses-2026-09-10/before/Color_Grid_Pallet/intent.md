@@ -1,0 +1,6 @@
+Concept: Teaches systematic color assignment by turning a grid into an addressable canvas — each cell a pixel, each color a deliberate decision.
+Sequence role: Second map in Color sequence; moves from personal color application (Color_Nails) to structured, grid-based color placement. Prepares for the continuous spectrum in Color_Rainbow.
+Technical angle: Grid colorization as a data structure exercise — mapping (row, col) to (r, g, b). The gridcolorizer makes the relationship between spatial position and color value explicit. Spectrum_forest grows color into three dimensions.
+Critical angle: The grid reveals color as information architecture. Each cell is addressable, systematic, quantized — the opposite of how we perceive color. This is the "RGB is a lie we agree on" made spatial: a grid of discrete values pretending to be a smooth palette.
+Key artifacts: gridcolorizer is the primary tool — it transforms the floor into a programmable surface; spectrum_forest extends color assignment vertically, showing that color data can grow beyond flat grids.
+Gap: Could benefit from an artifact that shows the same grid under different lighting conditions, reinforcing that color is context-dependent.

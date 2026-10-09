@@ -1,0 +1,28 @@
+{
+  "room": "QFEP_Lambda_Spectrum",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "dc37cbdc082afb682ffb69909439c886c6ccb4aa1e02731669f571b7843b0479",
+    "commons/maps/QFEP_Lambda_Spectrum/map_data.json": "320b6c8a9388f8ec4f6938f5cfef3100b244c01b5c9eeb13ae86f700719de473",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "37ba124780936d0dbaa3e219906e5e524e182f7b2e13e24556de3e4d47de7cf0",
+    "ada_run/encounter_pilot/QFEP_Lambda_Spectrum/control.json": "dabe89eaa220d804a02415516fe4720b766104a8a77d4f96fd24cffa6fb2ecde",
+    "ada_run/encounter_pilot/QFEP_Lambda_Spectrum/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/QFEP_Lambda_Spectrum/em_bake.json": "8a8f2cc535a5370b98626c34e45745eea8440499f8590e143478418bd4141f22"
+  }
+}

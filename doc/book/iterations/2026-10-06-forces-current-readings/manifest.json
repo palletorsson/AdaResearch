@@ -1,0 +1,297 @@
+{
+  "date": "2026-10-06",
+  "sequence": "forces",
+  "scope": "Current canonical text snapshot; plan remains draft; no source edits or engine rerun",
+  "map_count": 13,
+  "manuscript_count": 26,
+  "tutorial_words": 7360,
+  "final_words": 13415,
+  "halls": [
+    {
+      "order": 1,
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+        "sha256": "d8876b0bb3a48ecfaa2391e28f35600fd8867b7b6c50238b4c2cb9db8c39aa1a",
+        "words_whitespace": 330,
+        "gdscript_fences": 0,
+        "title": "One displacement, two wall projections"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+        "file": "source/commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+        "sha256": "ca8fea625467648ac58d714696e5331a0d4eb320abb36e38eeb14940a143284c",
+        "words_whitespace": 716,
+        "gdscript_fences": 2,
+        "title": "The same difference, somewhere else"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 2,
+      "map": "VFM_02_Operations",
+      "tutorial": {
+        "source": "commons/maps/VFM_02_Operations/tutorial.md",
+        "file": "source/commons/maps/VFM_02_Operations/tutorial.md",
+        "sha256": "8682a731d14d86aa10770e78e6a0d6245a1bcbf078162c8e7c4c8a19c3b59f35",
+        "words_whitespace": 338,
+        "gdscript_fences": 1,
+        "title": "Two contributions, one destination"
+      },
+      "final": {
+        "source": "commons/maps/VFM_02_Operations/final.md",
+        "file": "source/commons/maps/VFM_02_Operations/final.md",
+        "sha256": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d",
+        "words_whitespace": 601,
+        "gdscript_fences": 1,
+        "title": "The journey that adds up to nothing"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 3,
+      "map": "Vectors_Act2_VectorArithmetic",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+        "sha256": "d360217e5948852381439583694be00fa0ed86cc4210e9a640af2d4f48a96ca6",
+        "words_whitespace": 439,
+        "gdscript_fences": 0,
+        "title": "One gap, two stations"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+        "file": "source/commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+        "sha256": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5",
+        "words_whitespace": 961,
+        "gdscript_fences": 4,
+        "title": "What the line can keep"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 4,
+      "map": "VFM_05_Launch",
+      "tutorial": {
+        "source": "commons/maps/VFM_05_Launch/tutorial.md",
+        "file": "source/commons/maps/VFM_05_Launch/tutorial.md",
+        "sha256": "382af7a51b013db8149089d1c1a2013199fef1bad17ba09962b43a0a5af413f9",
+        "words_whitespace": 320,
+        "gdscript_fences": 0,
+        "title": "Control a flight from inside its diagram"
+      },
+      "final": {
+        "source": "commons/maps/VFM_05_Launch/final.md",
+        "file": "source/commons/maps/VFM_05_Launch/final.md",
+        "sha256": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd",
+        "words_whitespace": 722,
+        "gdscript_fences": 2,
+        "title": "Stand inside the curve"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 5,
+      "map": "VFM_03_Motion",
+      "tutorial": {
+        "source": "commons/maps/VFM_03_Motion/tutorial.md",
+        "file": "source/commons/maps/VFM_03_Motion/tutorial.md",
+        "sha256": "c0bf327feef84e9695d62e3af64548dec7f586b16864dc17894aaace9e8d6cc4",
+        "words_whitespace": 693,
+        "gdscript_fences": 2,
+        "title": "Motion: a command meets a stored velocity"
+      },
+      "final": {
+        "source": "commons/maps/VFM_03_Motion/final.md",
+        "file": "source/commons/maps/VFM_03_Motion/final.md",
+        "sha256": "5c26fa4807d44fb4ee645cdae9f33e8f9a551506755fe30235b729af83679f9b",
+        "words_whitespace": 1088,
+        "gdscript_fences": 2,
+        "title": "When the push ends"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 6,
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+        "sha256": "4e733aea8d71f9895ae638bd6fef5849a82cdf9f75ff0c00dae99c4749b7e254",
+        "words_whitespace": 672,
+        "gdscript_fences": 0,
+        "title": "One field, two receiver rules"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "file": "source/commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "sha256": "9b080531fb62be6f8344fff1055290e3043e488bcbc1364105ae90ad0852c53b",
+        "words_whitespace": 955,
+        "gdscript_fences": 3,
+        "title": "The arrow does not decide"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 7,
+      "map": "Vectors_Act4a_KineticForces",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+        "sha256": "cb39c509ffb17ab9aceef13a6d1e23daf8df47460d37a0b54e9eb80aa3681b87",
+        "words_whitespace": 631,
+        "gdscript_fences": 0,
+        "title": "Kinetic forces: inspect the receiver"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "file": "source/commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "sha256": "70c6e2f8e8e31de062f7a07b9dc3d08388d05b6a8e2fa3903fcf9a472eddc95c",
+        "words_whitespace": 1247,
+        "gdscript_fences": 3,
+        "title": "The return is not an undo"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 8,
+      "map": "Vectors_Act4b_Oscillation",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+        "sha256": "4871d952cbe74a8ed98199f02c255f04278415b1d1495660ba740773a549b0fb",
+        "words_whitespace": 598,
+        "gdscript_fences": 0,
+        "title": "Restoring Forces and Balance"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "file": "source/commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "sha256": "0f771da76884988def6a0d554e52802ee9ced20877f6b21ff375e800a3240922",
+        "words_whitespace": 1148,
+        "gdscript_fences": 2,
+        "title": "Coming back takes you through"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 9,
+      "map": "Change_Choreography",
+      "tutorial": {
+        "source": "commons/maps/Change_Choreography/tutorial.md",
+        "file": "source/commons/maps/Change_Choreography/tutorial.md",
+        "sha256": "d135b7c2b8a3e7dfc51a8c466fee7946d7657d70d29461d1820910f477dbbb35",
+        "words_whitespace": 1142,
+        "gdscript_fences": 2,
+        "title": "Timing machines: period, phase and throughput"
+      },
+      "final": {
+        "source": "commons/maps/Change_Choreography/final.md",
+        "file": "source/commons/maps/Change_Choreography/final.md",
+        "sha256": "7bdd0bf49cfad2f6b9636629114e900dcad81b46c70dfebfe066325e2ce701a6",
+        "words_whitespace": 1194,
+        "gdscript_fences": 2,
+        "title": "Together, out of time"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 10,
+      "map": "VFM_07_Gravity",
+      "tutorial": {
+        "source": "commons/maps/VFM_07_Gravity/tutorial.md",
+        "file": "source/commons/maps/VFM_07_Gravity/tutorial.md",
+        "sha256": "8e0d733c3245595dc2beb47f3428acc2776487e0312e0bbe7ba3f34b23b40df3",
+        "words_whitespace": 569,
+        "gdscript_fences": 0,
+        "title": "Gravity: two encounters, one interaction law"
+      },
+      "final": {
+        "source": "commons/maps/VFM_07_Gravity/final.md",
+        "file": "source/commons/maps/VFM_07_Gravity/final.md",
+        "sha256": "8e7d2278b9ad81b224e39b29ee2a6d62e6efb3839ebbf8017b804e6a75505ab2",
+        "words_whitespace": 1208,
+        "gdscript_fences": 3,
+        "title": "Who gets to stay still?"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 11,
+      "map": "VFM_09_Legs",
+      "tutorial": {
+        "source": "commons/maps/VFM_09_Legs/tutorial.md",
+        "file": "source/commons/maps/VFM_09_Legs/tutorial.md",
+        "sha256": "3f3ad3a347505a1592629ee6ee8d9e6f1ae5dcba48aec17601094688e45c60ae",
+        "words_whitespace": 556,
+        "gdscript_fences": 0,
+        "title": "Support before a step"
+      },
+      "final": {
+        "source": "commons/maps/VFM_09_Legs/final.md",
+        "file": "source/commons/maps/VFM_09_Legs/final.md",
+        "sha256": "b1394a502a0fdfba9c05f6cdb9931e4c6a55544e00cce2a46f3a4ce1aa20e457",
+        "words_whitespace": 1025,
+        "gdscript_fences": 3,
+        "title": "What lets a body stand?"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 12,
+      "map": "VFM_08_Arena",
+      "tutorial": {
+        "source": "commons/maps/VFM_08_Arena/tutorial.md",
+        "file": "source/commons/maps/VFM_08_Arena/tutorial.md",
+        "sha256": "8e3dd958343eea42f3f656a3e004f51a76918d4a20af2a15ef148280008db990",
+        "words_whitespace": 609,
+        "gdscript_fences": 0,
+        "title": "Arena: selection, state and collision"
+      },
+      "final": {
+        "source": "commons/maps/VFM_08_Arena/final.md",
+        "file": "source/commons/maps/VFM_08_Arena/final.md",
+        "sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+        "words_whitespace": 1162,
+        "gdscript_fences": 2,
+        "title": "What makes an encounter?"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    },
+    {
+      "order": 13,
+      "map": "Vectors_Act5_ForceAsPlace",
+      "tutorial": {
+        "source": "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+        "file": "source/commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+        "sha256": "ebda414bc6d5b56ca2ef217589063eb373b6e97594e262ec2d9b7b63bbe64521",
+        "words_whitespace": 463,
+        "gdscript_fences": 0,
+        "title": "A local acceleration and three receivers"
+      },
+      "final": {
+        "source": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+        "file": "source/commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+        "sha256": "a237bc14c03750b853c0e629795620e8352899512c9f6ea9a693662183ad786b",
+        "words_whitespace": 1388,
+        "gdscript_fences": 4,
+        "title": "What carries you across?"
+      },
+      "plan_decision": "draft",
+      "plan_checks": []
+    }
+  ]
+}

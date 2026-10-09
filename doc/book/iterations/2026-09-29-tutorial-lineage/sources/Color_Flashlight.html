@@ -1,0 +1,303 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Flashlight · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Flashlight">← Tutorial lineage</a></p><h1>Color Flashlight</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Flashlight/final.md">Raw captured source</a></p><pre># What reaches the surface
+
+&lt;!-- @flashlight_demo --&gt;
+
+Several pools of colour meet on a pale board. Their edges are easier to follow than their crowded middle. Pick one edge. Which lamp is responsible for it?
+
+Take the red lamp and turn it aside. Follow what leaves the surface. Bring it back slowly, across the other pools. There is a place where its red becomes difficult to name on its own. Move through that place again. Nothing has been painted over, yet something has appeared that neither lamp makes alone.
+
+Leave the red lamp aimed at the surface. It stays where you release it. Take the green one and move its pool across the red. Separate them, then let their edges meet. Try the blue. The white lamp begins aimed aside; bring it into the comparison when you want to see what another contribution does. If the middle grows too pale to distinguish, separate the pools again. Their edges give you somewhere to begin.
+
+In the previous room, colour was assigned to forms and positions. Here you can move one of the conditions of its appearance with your hand. What, exactly, have you changed?
+
+The receiving surface keeps the same material throughout. Its stored base colour, its *albedo*, is a near-white value. Each lamp carries a `SpotLight3D`: a light with a position, a direction and a cone. Turning the handle turns the cone. The surface receives a different contribution because you have changed where that cone falls.
+
+Aim a beam off the board and onto the floor or the cube standing to its side. The cone can cross the boundary of its intended exhibit. Does the colour still read the same way? Follow a shadow or an edge before giving the result a name. The lamp carries a value, but it cannot carry a complete account of what you will see wherever you point it.
+
+Beside the board stands a coarse, pale sphere. Carry the red beam across it. One face brightens while its neighbour stays dull. Move the lamp to the other side and watch the difference change places. No face has been repainted.
+
+We met these flat faces among the primitives, where they interrupted the promise of a smooth sphere. Here they give the light different directions to meet. Each face has a direction, called its *normal*, which the renderer uses along with the light and material to calculate its appearance. What looked like one pale body begins to answer face by face. Bring a second colour across the first. The construction you could barely see now divides their meeting.
+
+![The same pale sphere under a red lamp held on either side. The camera, mesh and material stay fixed.](/book-review/doc/book/iterations/2026-09-23-flashlight-faceted-sphere/same-sphere-moving-light.png)
+
+The red lamp has crossed from board to sphere without changing its assigned colour. Inside each lamp, `flashlight_color.gd` finds the light and gives it its colour:
+
+```gdscript
+var spot = _find_spot_light(target_root)
+if spot:
+    spot.light_color = light_color
+```
+
+Four copies of the same scene receive four values. The red instance is given `Color(1, 0, 0, 1)`; the green instance `Color(0, 1, 0, 1)`. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The fourth number, alpha, stays at one here.
+
+The assignment happens when the scene starts. While you move the lamp, its colour value stays fixed. You have changed where its light meets the room.
+
+There is a useful limit here. These lamps offer RGB values to a renderer. They do not calculate a spectrum of wavelengths. The room also has other illumination: turning the lamps away does not promise darkness. Even the pale surface we have kept fixed is a chosen condition of this experiment. We have made a comparison manageable by leaving much of the world in place.
+
+Perhaps the surprising body here is the patch of colour. You cannot pick it up separately from the meeting that produces it. Move one participant and its boundary moves; withdraw another and it changes again. The code gives us a way to repeat that meeting. There is still more to ask of it.
+
+&lt;!-- @colour_light_rooms --&gt;
+
+Through the side opening, a white room waits with a small light hanging near its centre. Stay with one corner as rose passes into violet. The walls keep their edges. Their colour has left one arrangement and entered another.
+
+Earlier, your hand moved a lamp whose colour stayed fixed. Here the lamp stays in place while its colour changes. You can keep walking, or let the room change around you while you stand still.
+
+On the far wall, a wide pink rectangle draws you towards it. Its narrow luminous lip gives it an outline. From the middle of the room, how much depth can you find inside that outline?
+
+Walk closer, then move sideways. A return wall comes into view. There is room to step inside, and a back wall that stops you. The rectangle has become a recess without anything being rebuilt. Its pink sources keep their colour while the light in the room moves on. The surrounding colour changes the meeting you are looking at.
+
+![The pink recess, photographed from inside the installed white room.](/book-review/doc/book/iterations/2026-10-02-light-an-opening/figures/pink-threshold.png)
+
+The next doorway opens below a tall light well. Three rectangular lips draw the eye upwards. Between them, the walls close around the opening; beyond the last lip is the museum&#x27;s sky.
+
+Wait beneath it. Rose leaves the ceiling for violet. The code changes the lights around the opening; it never assigns a new colour to the sky. Does the piece of sky you see still seem to belong to the same distance?
+
+![The same light well and viewpoint at two moments. The roof and its opening stay fixed while the surrounding lights change.](/book-review/doc/book/iterations/2026-10-02-light-an-opening/light-well-pair.png)
+
+A shallow ramp brings you onto a raised landing. Look back through the well. The nearer edge covers another part of the farther one. The view from below has company now. Neither position can give you every edge at once.
+
+James Turrell&#x27;s light rooms and Skyspaces offer a reference for staying with this uncertainty.[^apertures] Here a rendered sky meets an enclosure made from engine primitives. We can inspect every wall and still need to move to see how their edges fit together.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+&lt;!-- @sphere_in_pink --&gt;
+
+The sphere has returned, pale and still. Five switches offer five directions of pink light. Leave one on and move to the side. The shadow gives the curve an uneven weight.
+
+Keep the lamps in place and change LIGHT / MATERIAL. The pink now belongs to the sphere; the illumination is white. The floor helps you see what the sphere cannot tell you by itself. This is our five-switch response to LeWitt&#x27;s light study. Thirty-two possible switch states include all five lamps off. An inventory can be complete while the experience of looking keeps changing.
+
+&lt;!-- @ --&gt;
+
+Carry the distinction with you: changing the light that reaches a surface and changing the surface&#x27;s own material can both change its appearance. In the next room, the receiving surface begins to resemble part of the body you act through. What happens when the colour is something you choose to wear?
+
+&lt;!-- @ --&gt;
+
+[^apertures]: James Turrell&#x27;s physical light installations are the reference, not the authorship of this scene. Häusler Contemporary describes *Aural* as a walk-in Ganzfeld installation; [its account of the Berlin presentation](https://haeusler-contemporary.com/james-turrell-ganzfeld-aural-en) does not support the supplied collage&#x27;s VR description. In *Twilight Epiphany* (2012), ceiling illumination meets natural twilight through a roof aperture; see [Rice&#x27;s Skyspace account](https://moody.rice.edu/james-turrell-twilight-epiphany-skyspace). Here RGB lights meet the museum&#x27;s rendered sky. Neither natural daylight nor a measured perceptual equivalence is simulated.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Flashlight/tutorial.md">Raw captured source</a></p><pre># Move a condition of appearance
+
+Primary encounters: `flashlight_demo`, then `colour_light_rooms`. Read `final.md` for the book voice and `technical.md` for the implementation.
+
+1. Find the boundary of one coloured pool on the board. Identify the lamp responsible by aiming it aside, then back.
+2. Leave that lamp aimed at the board. Move another so the pools separate and overlap. Describe the change before naming additive colour.
+3. Bring the white lamp into the comparison. If the overlap becomes hard to distinguish, separate the beams again.
+4. Aim onto the floor or side cube. Carry the same light across the faceted sphere; compare neighbouring faces before naming their normals. No face has been repainted.
+5. After following the light between these receivers, inspect `spot.light_color = light_color` in `flashlight_color.gd`. The assignment stays fixed while position and direction change.
+6. Enter the side white room. Keep one corner in view while the central light changes. Compare this fixed lamp/changing value with the handheld lamps&#x27; fixed values/changing positions. Approach the pink recess, then move sideways to find its return walls. Its two sources keep their pink value while the surrounding room changes.
+7. Enter the taller room and look through the stepped light well. Wait for its light to change, then walk up the ramp and compare the lips from the raised landing. Separate these observations: first change time while holding the viewpoint, then change viewpoint. The room&#x27;s script does not recolour the museum sky.
+8. Carry light-versus-material into Color_Nails, where a colour choice addresses a surface resembling part of a body.
+
+The lamp&#x27;s grab and orientation are the interaction. Do not instruct the visitor to switch it off, choose a hue, spawn a prism or select a receiving-ground variant: this placement provides none of those controls. Ask what the RGB model can show and what it leaves unrepresented, without treating this renderer as a spectral optics laboratory.
+
+## Making score: a room receives a value
+
+After reading the encounter, return to the supplied `colour_light_rooms` scene. Its `set_phase()` method includes the same kind of assignment used by the handheld lamp:
+
+```gdscript
+central_light.light_color = c
+```
+
+First give `c` one fixed RGB value, run the scene, then substitute another. Keep the white receiving material and camera position. This reuses the light assignment already introduced in this hall; building all the room geometry is a separate exercise. The luminous reveal has its own material and is not the source that lights the walls.
+
+Then inspect `_process(delta)`: Point Zero&#x27;s repeating callback advances the phase of a 110-second cycle. Pause the cycle with `running = false` and call `set_phase(0.16)` or `set_phase(0.38)` to compare two moments. Those are authoring changes in the script, not controls installed in the hall. The transferable operations are assigning a light colour, changing it over time, and holding conditions fixed to read a difference.
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Return: A sphere in pink
+
+Change one lamp state; compare pink light with a pink surface. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses point, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`pink`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-sphere-in-pink/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:sphere_in_pink --&gt;
+
+### One source change: A sphere in pink
+
+Replace the final set_lights(1) call in _ready(). Mask 3 enables the first two lamps. Bit-mask construction is supplied here; the first task is to compare illumination while the sphere stays fixed.
+
+```gdscript
+set_lights(3)
+```
+
+Source: `commons/artifacts/spine_studies/pink_sphere.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Flashlight/technical.md">Raw captured source</a></p><pre># Colour at a receiving surface
+
+This is the second Colour room. It follows Color_Context_Placed and prepares Color_Nails. Keep two variables distinct: the light&#x27;s colour and the receiving material&#x27;s base colour.
+
+## Repeat the comparison
+
+Hold a coloured lamp, aim it away from the board, then bring it back across another beam. Release it; the pickable is configured to remain frozen in place when released. Compare separate pools with their overlap. White begins aimed aside so it does not obscure the first RGB comparison. Bring it onto the board as another contribution.
+
+There is no on/off control or hue picker in this encounter. Moving and aiming the lamps are the controls. Other museum illumination remains present.
+
+## Trace the implementation
+
+The map places this token at grid (9,9):
+
+```text
+flashlight_demo:180:0:1#plinth:0#mount:standing#receiver_sides:7
+```
+
+The registry resolves `flashlight_demo` to `res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn`. That scene instances `flashlight.tscn` four times. Each copy inherits XRTools&#x27; pickable scene and contains a spotlight and a `ColorSetter` child running `flashlight_color.gd`.
+
+The colour assignment is actual source:
+
+```gdscript
+var spot = _find_spot_light(target_root)
+if spot:
+    spot.light_color = light_color
+```
+
+Red, green, blue and white instances supply `Color(1,0,0,1)`, `Color(0,1,0,1)`, `Color(0,0,1,1)` and `Color(1,1,1,1)`. Lens tint and emission are set separately so the handle&#x27;s lens identifies the beam. They do not recolour the board.
+
+The receiving `Canvas` is a 6 × 4 × 0.1 metre CSG box. Its material has albedo `(0.95, 0.95, 0.95, 1)` and roughness `0.9`. The lamps have a 25-degree spotlight angle, range 20 metres and shadows enabled. Direction, distance, material and other scene lighting contribute to the rendered result; pixel values should not be equated directly with the exported RGB value.
+
+## Standing installation
+
+The optional `mount:standing` metadata is read by `flashlight_demo.gd` before it stages the receiving surface. It places the board centre at local y=2, enables board collision, and puts each handle at y=1.1. Lamp energy is 2.5 in this installation; white begins turned 60 degrees aside. The map places the root at museum floor level. Legacy placements retain their previous mounting.
+
+The separate `ground` authoring option supports `white`, `swatch`, `relief`, `mirror` and `none`. This room uses `white`. These are authoring configurations, not controls offered to the visitor. In particular, the option called `mirror` changes material properties; it does not install the project&#x27;s player-reflection system.
+
+## What has been checked
+
+`commons/testing/probe_flashlight_lesson.gd` loads the actual endless museum, checks placement, floor and lamp heights, exercises XRTools pickup/release using a supplied moving grabber, and compares rendered light contributions against an unchanged receiving material. Its lamp-visibility toggles are test isolation only. A separate test aims a held lamp aside and back, matching the book&#x27;s gesture.
+
+See `field_notes.md` for the recorded run. Tracked controllers, headset comfort and frame-rate performance are not established by this desktop test.
+
+Carry the distinction into Color_Nails: a change of illumination differs from assigning colour to the material of a preview or tracked hand.
+
+## Faceted receiver — 23 September 2026
+
+The standing installation can opt into `receiver_sides:5` or `receiver_sides:7`; the default zero adds nothing. Color_Flashlight selects seven. The numeric key is registered in `GridInteractablesComponent.CONFIG_PARAM_NAMES` so it cannot be misread as a tutorial rotation. The root retains its authored 180-degree yaw.
+
+The new receiver is at local (-5.6, 0, -1), opposite the existing cube. A 0.65-metre pedestal carries a sphere of radius 0.85 metres, centred 1.5 metres above the floor. It uses Godot SphereMesh with seven radial divisions and three rings, converted to flat-shaded triangles. Degenerate pole triangles are omitted; the final mesh has 42 triangles. Seven is not its total face count. A triangle-mesh static collider follows the visible surface. Both board and sphere use the same near-white matte, nonemissive material; no emissive wire overlay masks the lamp response.
+
+The focused probe and native captures are in `doc/book/iterations/2026-09-23-flashlight-faceted-sphere/`. Forty-three checks pass in the isolated production museum: authored placement/yaw, outward flat normals, collider, supporting floor and three standing-body clearances, pickup/movement/release of all four lamps, and changed rendered red contribution on the unchanged sphere when a held lamp moves sides. All four lights remain on; no lamp toggle is introduced. Five-division authoring and legacy mounting are also checked. The book figure crops and labels two native renders from the same camera.
+
+These supplied-grabber desktop checks do not establish tracked-controller reach, headset comfort, a complete walk around the pedestal or Quest performance.
+
+
+## Walk-in light rooms — 28 September 2026
+
+`commons/artifacts/colour_light_rooms/colour_light_rooms.tscn` builds the east annex. Its first room is 8.8 m square; a single central OmniLight3D at y=2.1 m cycles through five RGB values over 110 seconds. Receiving geometry shares near-white albedo (0.92, 0.91, 0.88). `set_phase()` changes light colours and source/reveal materials, never the receiving material or geometry. Emission alone does not light the walls: actual local lights supply the coloured contribution. Existing museum illumination can still contribute.
+
+The second room is 9.2 by 14 m with roof slabs at y=4.4, 5.75 and 7.1 m. Each slab consists of four strips around an actual hole. Two concealed OmniLight3Ds illuminate each level; a narrow emissive reveal marks its opening. The 2 October revision gives all slabs the same outer footprint and connects their openings with vertical return walls, creating a continuous stepped light well. A 1:7.5 ramp leads to the y=1.2 m landing. Wall, slab, ramp and furniture bodies have static colliders. The museum sky is visible through the top opening; there is no dynamic daylight calculation.
+
+Meshes and local lights share rendering layer 20, keeping the new lights off ordinary museum exhibits. Six roof washes and two recess washes have shadows disabled; the central source retains shadows. The rendered desktop test verifies the result; headset cost and comfort still need measurement.
+
+The artifact implements `get_museum_occupied_cells()`. The museum honours this opt-in list for route occupancy. Only body-height partitions, benches and rails reserve cells; floor, roof and traversable ramp do not seal the entire room envelope. Physical collisions remain active. Existing artifacts retain their normal occupancy behaviour.
+
+Placement: cell (25,10), floor-mounted and pinned, offset (-0.5,0,-0.5). The original hall expands east to 42 by 20 cells, opening only x=18, z=8..12 of its old boundary. The first exhibit and all original utility positions remain.
+
+## Pink recess — 2 October 2026
+
+The first room now has a 5.8 m wide, 3.2 m high opening at local z=-3.1. Cheeks, lintel, soffit and return walls bound an approximately 1.1 m deep recess ending at the original back wall. Its floor is continuous with the room. Two fixed-colour OmniLight3Ds at x=±2.62, y=2.8, z=-3.65 provide pink illumination (1, 0.025, 0.30), energy 0.65. A thin unshaded lip marks the opening; it does not itself cast light on the receiving walls. The bench moves to z=3.8.
+
+The roof reveals are 0.025 m thick and sit just below their solid slabs, avoiding coplanar overlapping faces. The three roof hues are separated by 0.055 cycle phase rather than the earlier 0.20. The well still opens all the way through to the rendered sky.
+
+Current native evidence: `doc/book/iterations/2026-10-02-light-an-opening/figures/report.json`. It records actual museum assembly, collision rays, sampled standing-capsule clearances and floor support, route footprint, fixed receiving material and changed rendered light. The capture runtime preserves the artifact&#x27;s active collision objects while freezing its colour loop. This is desktop evidence; the new study has not been walked in a headset.
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Flashlight/intent.md">Raw captured source</a></p><pre># Color_Flashlight — teaching intent
+
+The visitor should discover that changing a surface&#x27;s appearance need not change its material. Keep the board fixed and move the lights. Let the meeting and separation of pools precede the explanation of their RGB values.
+
+Begin with `flashlight_demo`, containing the lamp comparisons. Preserve the side cube as an alternate receiver and possible shadow caster; keep it out of the first comparison&#x27;s sightline. Begin with the white lamp aimed aside, so adding it is a deliberate act.
+
+Sequence handoff: Context&#x27;s neighbours → Flashlight&#x27;s illumination → Nails&#x27; addressed body surface. The reusable method is to hold one participant fixed, change another, and identify the implementation responsible before generalising to a new receiving body.
+
+The critical opening is the apparent colour&#x27;s dependence on a relation, followed by the limits of this particular RGB implementation. No extra controls, spectral claims or unmeasured QFEP scores are needed to make that opening.
+
+The author&#x27;s seven-division faceted sphere returns to the earlier primitive lesson. It shares the board&#x27;s near-white, nonemissive material. Move a lamp around the fixed sphere before adding a second colour: changing incidence makes neighbouring faces differ without repainting them. Keep the board and side cube; the new receiver is a continuation of the same encounter, not another control panel. Seven counts divisions around the sphere, not its total faces.
+
+
+## A room as receiver
+
+The east annex `colour_light_rooms` extends the fixed-material comparison to the room containing the visitor. First move a constant-colour lamp; then enter a fixed room whose central light changes colour. In the second chamber the body changes height under actual openings. Give the comparison time before explaining it. The critical question is where a visible boundary is being made: by material, illumination, an opening or the viewer&#x27;s position.
+
+The pink recess keeps two sources fixed while the central room light changes. Approach and sidestep before naming its depth. In the second chamber, a continuous stepped well frames one final sky opening. Separate waiting from changing eye height so the visitor can follow each condition. The transferable lesson reuses light assignment and the frame loop; it does not require the student to construct this entire architecture at once.
+
+Turrell is a reference for attending to light and architectural openings, not a label for a replica. Use the author&#x27;s own spatial experiment and its renderer limits. Do not replace the established handheld encounter or claim that these RGB lights reproduce a spectrum or a measured perceptual effect.
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Flashlight/critical.md">Raw captured source</a></p><pre># A colour you cannot carry alone
+
+Turn the red lamp away. The patch changes, although the board&#x27;s material has not. This small discrepancy gives the room its critical opening. Calling the patch a property of the board was convenient; now that account leaves something out.
+
+The lamp does carry an assigned colour. Its `ColorSetter` gives the spotlight an RGB value when the scene starts. But that value does not specify the complete appearance of every surface it might illuminate. The visitor changes a direction, the cone meets another part of the room, and the renderer evaluates another situation. A colour value can remain stable while what we see changes.
+
+This makes relation available to experiment. Separate two pools; overlap them; remove one contribution by aiming it aside. The provisional body of the overlap has no independent handle. Its boundary depends on participants that can leave. As an artistic argument, this offers a way to investigate an identity sustained by a meeting. It does not demonstrate that every identity, outside this encounter, obeys the same rules.
+
+The apparatus also selects what can count as a meeting. Four lamps share one scene and receive different RGB assignments. Their apparent differences are produced within a common implementation. That commonality makes some recombinations inexpensive. It does not make every desired transformation available: the visitor cannot turn a lamp into a reflective material simply by changing its RGB value. Different consequences require different connections in the code.
+
+Keeping a near-white board fixed gives us a comparison we can follow. It also postpones questions about other receiving materials. The map&#x27;s authoring system offers swatches and relief, but those variants are not installed as visitor controls here. Aim onto the existing floor or side cube first. What happens when the beam leaves the surface chosen to make its lesson easy to read?
+
+The room uses RGB lights, not a calculation of wavelength spectra. Calling its beams red, green and blue is useful for following its code. It should not become a claim that three numbers exhaust colour, or that all viewers will make the same distinctions. Nor is this an isolated dark chamber: the museum&#x27;s other illumination remains in the result. The conditions we did not move are still participating.
+
+For Ada&#x27;s question, “what bodies are possible?”, this room supplies a precise working case: a visible patch sustained by light, a receiving material and a rendering arrangement. The queer invitation is to try another relation and attend to the difference it produces, while keeping track of what this particular system permits. QFEP can frame that inquiry into constraints and unfamiliar possibilities; this encounter does not measure a numerical entropy threshold.
+
+In the annex, the pink outline gathers attention before its recess gives the body a place to approach. The overhead opening also offers an inviting central view. Moving sideways or climbing brings other edges into relation. Keep the level-floor and raised viewpoints equally legitimate: authoring a compelling view should not make its eye height a compulsory body. The geometry can be inspected, but no single position shows all of its boundaries together.
+
+The next room changes the receiver&#x27;s significance. When the surface resembles part of the player&#x27;s body, the difference between illumination and a chosen material becomes a question of appearance one might wear.
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Installed application: A sphere in pink
+
+Keep the lamps in place and change LIGHT / MATERIAL. The pink now belongs to the sphere; the illumination is white. The floor helps you see what the sphere cannot tell you by itself. This is our five-switch response to LeWitt&#x27;s light study. Thirty-two possible switch states include darkness. An inventory can be complete while the experience of looking keeps changing.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Flashlight/artifacts.md">Raw captured source</a></p><pre># A sphere in pink
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Flashlight/summary.md">Raw captured source</a></p><pre># Color_Flashlight — What reaches the surface
+
+Second in Colour, between Color_Context_Placed and Color_Nails. The lamp encounter moves a condition of appearance by hand. The east annex lets the visitor inhabit that relation: a white room with a changing central source and a fixed pink recess, then a stepped light well and a ramp to a raised landing.
+
+The first primary remains `flashlight_demo`: four pickable red, green, blue and white lamps, a pale board, a side cube and the seven-division faceted sphere. Aim, separate and overlap the pools. The lamps retain their assigned RGB values while the visitor changes their position and direction.
+
+The second primary, `colour_light_rooms`, reverses the comparison. Geometry and near-white albedo remain fixed; the central RGB light changes continuously on a 110-second cycle. A wide recess offers physical depth behind a luminous outline. Its pink washes stay fixed. The second chamber has a continuous three-level light well, concealed coloured washes, thin luminous lips and a 1.2 m raised landing reached by a shallow ramp. The top opening reveals the existing museum sky. No control panel is required.
+
+The hall expands east from 19 by 20 to 42 by 20 cells. Five old east-wall cells open to the annex. The torch placement at (9,9), original spawn, gates and utility positions remain. New room root is at source-grid coordinates (25,0,10), before the museum aligns the embedded grid. Its body-height partitions report their floor footprint separately from its walkable interior and roof.
+
+These are RGB renderer studies. There is no spectral simulation, total-darkness promise or claim that every viewer sees the same colour. Native desktop navigation and rendered-light changes are checked; headset experience and performance remain unverified.
+
+Book: `final.md`. Current sources, photographs and checks: `doc/book/iterations/2026-10-02-light-an-opening/`. The earlier configuration remains archived under `doc/book/iterations/2026-09-28-white-room-and-apertures/`.
+
+
+&lt;!-- study-spine:sphere_in_pink --&gt;
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Flashlight/blurb.md">Raw captured source</a></p><pre># What reaches the surface
+
+Several colours meet on a pale board. Take one lamp and turn it aside. What leaves with it? Bring it back across another beam and watch a colour appear that neither makes alone. The surface has kept its material; your hand has moved a condition of its appearance.
+</pre></section></body></html>

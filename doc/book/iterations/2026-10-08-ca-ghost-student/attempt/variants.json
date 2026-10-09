@@ -1,0 +1,50 @@
+{
+  "row_reverse": [
+    "CA_Introduction",
+    "row.gd",
+    "for i in range(old.size()):",
+    "for i in range(old.size() - 1, -1, -1):"
+  ],
+  "states_two": [
+    "CA_ElementaryRules",
+    "volume.gd",
+    "for z in range(2, 5):\n\t\tfor x in range(2, 5):\n\t\t\tcurrent[index(Vector3i(x, 3, z))] = 1\n\tfor x in range(2, 5):\n\t\tcurrent[index(Vector3i(x, 4, 3))] = 1",
+    "current[index(CENTRE)] = 1\n\tcurrent[index(CENTRE + Vector3i.RIGHT)] = 1"
+  ],
+  "history_flip": [
+    "CA_GameOfLife",
+    "history.gd",
+    "1.05 + x * 0.055",
+    "1.05 + (WIDTH - 1 - x) * 0.055"
+  ],
+  "life_site": [
+    "CA_BeyondBinary",
+    "life.gd",
+    "const SITE := Vector2i(10, 10)",
+    "const SITE := Vector2i(9, 10)"
+  ],
+  "presence_threshold": [
+    "CA_ExpandingSpace",
+    "presence.gd",
+    "current[W] = 0.495",
+    "current[W] = 0.49"
+  ],
+  "exchange_corner": [
+    "CA_SoftRules",
+    "exchange.gd",
+    "right.reset()\n\tinjections",
+    "right.reset()\n\tleft.seed_at(Vector2i(0, 0))\n\tright.seed_at(Vector2i(0, 0))\n\tinjections"
+  ],
+  "comparison_seed": [
+    "CA_AgentsCircuits",
+    "comparison.gd",
+    "var seed_sites: Array[int] = [16]",
+    "var seed_sites: Array[int] = [14, 16, 18]"
+  ],
+  "difference_corner": [
+    "CA_EdgeOfChaos",
+    "paired.gd",
+    "var site := Vector3i(5, 5, 5)",
+    "var site := Vector3i(0, 0, 0)"
+  ]
+}

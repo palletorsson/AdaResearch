@@ -1,0 +1,16 @@
+{
+  "artifacts": {
+    "descent_landscape_lab": {
+      "lookup_name": "descent_landscape_lab",
+      "name": "Where Does Downhill Take You?",
+      "scene": "res://commons/artifacts/descent_landscape_lab/descent_landscape_lab.tscn",
+      "category": "mathematics",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A six-metre objective landscape with step/run, two surfaces, three starts, four step sizes and three stopping tolerances. Reveal finite-difference slope and the update after observing paths. Domain exit, small slope and step limit are distinct outcomes.",
+      "interactions": ["STEP or RUN the optimiser", "Change START and SURFACE", "Change RATE and STOP tolerance; each starts a new comparison", "PARTS and RULE reveal coordinates, slope and code"],
+      "qfep_connection": "An authored objective and stopping threshold select which configurations count as acceptable; numerical optimisation is not a claim about all living form."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "CA_AgentsCircuits",
+  "decision": "draft",
+  "mode": "reuse",
+  "object": "A precise question about what repeats and what each step reads.",
+  "change": "Explain one Rule 90 cell update and one supplied recursive-copy step, then record which visual resemblances survive a changed seed.",
+  "dependsOn": [
+    "CA_Introduction",
+    "CA_GameOfLife"
+  ],
+  "reuses": "A local rule over an ordered neighbourhood.; A displayed history differs from the current state.",
+  "given": "explorer; floor history; pyramid",
+  "later": "Do not explain every visible artifact. Wireworld exists only as an older proposal here; do not teach an installed circuit that the current hall does not contain.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A precise question about what repeats and what each step reads.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The current tutorial teaches proposed Wireworld gates, whereas the storyboard uses the Rule 90 history and Sierpinski comparison.",
+  "baseline": {
+    "tutorial": "fe258caa8f53ee9c35396b2b3115cadf38392fdd928a87a3d9d6918fff093a3e",
+    "choice": "efa9f0745167ef58fa3cfc57a3806e3c5a9b01925facbb9d22bc2a5ab4e98065"
+  },
+  "summary": "Explain one Rule 90 update from its old neighbours and compare it with one supplied recursive-copy construction. Change the seed and record which visual resemblances remain, rather than identifying mechanisms by their shared silhouette. Explorer and pyramid are supplied. Carry a precise question about what repeats and what each step reads, preparing recursion through an explicit comparison rather than a hidden prerequisite."
+}

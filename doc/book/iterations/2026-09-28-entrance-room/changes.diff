@@ -1,0 +1,240 @@
+--- commons/scenes/em/em_portal_frame.gd before entrance-room request
++++ commons/scenes/em/em_portal_frame.gd
+@@ -51,41 +51,45 @@
+ 	# A thin cap avoids z fighting at the join with the existing gallery deck.
+ 	_box(frame,Vector3(2.18,0.008,2.98),Vector3(0,-0.046,0.65),stone,"LandingSurface")
+ 
+-static func build_entry_cage(frame: Node3D) -> void:
+-	# A compact enclosure OUTSIDE a boundary sp. The front opens into a
+-	# narrow supported link ending half a metre beyond the authored marker.
++static func build_entry_room(frame: Node3D, title: String, wall_material: Material = null, floor_material: Material = null) -> void:
++	# Enclose the supported landing outside the boundary spawn. The pink
++	# return curtain stays behind; a roofed link opens into the first cell.
+ 	var body := StaticBody3D.new()
+-	body.name = "EntryCageCollision"
++	body.name = "EntryRoomCollision"
+ 	frame.add_child(body)
+-	var glass := _material(Color(0.65,0.42,0.78,0.16),0.1,0.2)
+-	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+-	var metal := _material(Color(0.12,0.10,0.15),0.8,0.24)
+-	var trim := _material(Color(0.63,0.20,1.0),0,0.6,true)
+-	for x: float in [-1.14,1.14]:
+-		var size := Vector3(0.06,2.4,2.94)
+-		var centre := Vector3(x,1.15,0.65)
+-		_collider(body,size,centre)
+-		_box(frame,size,centre,glass,"SideGlass")
+-		for z: float in [-0.79,2.09]:
+-			_box(frame,Vector3(0.065,2.5,0.065),Vector3(x,1.20,z),metal,"CagePost")
+-		_box(frame,Vector3(0.045,0.04,2.92),Vector3(x,2.42,0.65),trim,"CageLight")
+-	_collider(body,Vector3(2.3,2.4,0.08),Vector3(0,1.15,-0.8))
+-	_box(frame,Vector3(2.3,2.4,0.08),Vector3(0,1.15,-0.8),glass,"BackGlass")
+-	for x: float in [-0.85,0.85]:
+-		var size := Vector3(0.55,1.1,0.06)
+-		var centre := Vector3(x,0.5,2.1)
+-		_collider(body,size,centre)
+-		_box(frame,size,centre,glass,"FrontGuard")
++	var plaster := wall_material if wall_material != null else _material(Color(0.885,0.875,0.85),0,0.92)
++	var stone := floor_material if floor_material != null else _material(Color(0.30,0.29,0.28),0,0.88)
++	var pieces: Array = [
++		[Vector3(0.12,2.75,3.06),Vector3(-1.16,1.325,0.65),"EntryLeftWall"],
++		[Vector3(0.12,2.75,3.06),Vector3(1.16,1.325,0.65),"EntryRightWall"],
++		[Vector3(2.44,2.75,0.12),Vector3(0,1.325,-0.82),"EntryBackWall"],
++		[Vector3(2.44,0.12,3.12),Vector3(0,2.76,0.65),"EntryCeiling"],
++		# Full-height front wall around a 1.12 m clear doorway.
++		[Vector3(0.60,2.75,0.12),Vector3(-0.86,1.325,2.12),"EntryFrontLeft"],
++		[Vector3(0.60,2.75,0.12),Vector3(0.86,1.325,2.12),"EntryFrontRight"],
++		[Vector3(1.12,0.40,0.12),Vector3(0,2.50,2.12),"EntryDoorLintel"],
++		[Vector3(0.12,2.75,1.48),Vector3(-0.62,1.325,2.86),"EntryLinkLeft"],
++		[Vector3(0.12,2.75,1.48),Vector3(0.62,1.325,2.86),"EntryLinkRight"],
++		[Vector3(1.36,0.12,1.48),Vector3(0,2.76,2.86),"EntryLinkCeiling"],
++	]
++	for piece: Array in pieces:
++		_collider(body,piece[0],piece[1])
++		_box(frame,piece[0],piece[1],plaster,piece[2])
+ 	var link_size := Vector3(1.12,0.28,1.55)
+ 	var link_centre := Vector3(0,-0.19,2.775)
+ 	_collider(body,link_size,link_centre)
+-	_box(frame,link_size,link_centre,metal,"EntryLink")
+-	for x: float in [-0.59,0.59]:
+-		var size := Vector3(0.06,1.1,1.4)
+-		var centre := Vector3(x,0.5,2.8)
+-		_collider(body,size,centre)
+-		_box(frame,size,centre,glass,"LinkGuard")
+-	_text(frame,"ARRIVE / BEGIN",Vector3(0,2.22,-0.73),36,0.002,Color(0.88,0.73,1.0))
++	_box(frame,link_size,link_centre,stone,"EntryLink")
++	# A diffuse ceiling fitting adds no dynamic light or shadow pass.
++	_box(frame,Vector3(1.10,0.012,1.0),Vector3(0,2.694,0.70),
++		_material(Color(0.96,0.88,0.83),0,0.9,true),"EntryCeilingPanel")
++	var sign := Node3D.new()
++	sign.name = "EntryHallLabel"
++	frame.add_child(sign)
++	sign.position = Vector3(0,2.49,2.052)
++	sign.rotation.y = PI
++	var destination := title.replace("_"," ").strip_edges()
++	var pixel := minf(0.0015,1.0/maxf(1.0,destination.length()*22.0))
++	_text(sign,destination,Vector3.ZERO,44,pixel,Color(0.16,0.14,0.16))
+ 
+ static func _material(color: Color, metallic: float, roughness: float, luminous := false) -> StandardMaterial3D:
+ 	var mat := StandardMaterial3D.new()
+--- commons/scenes/em/em_portal_stream.gd before entrance-room request
++++ commons/scenes/em/em_portal_stream.gd
+@@ -424,7 +424,7 @@
+ 	var hit := get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(eye, eye-Vector3(0,5,0)))
+ 	return hit.position + Vector3(0,0.05,0) if not hit.is_empty() else Vector3(0,-1.0e9,0)
+ 
+-func _supported(p: Vector3) -> bool:
++func _supported(p: Vector3, allow_opening_door := false) -> bool:
+ 	if p.y < -1.0e8:
+ 		return false
+ 	var space := get_world_3d().direct_space_state
+@@ -432,9 +432,9 @@
+ 		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(p+offset+Vector3(0,0.15,0), p+offset-Vector3(0,0.2,0)))
+ 		if hit.is_empty() or hit.normal.y < 0.8 or not (hit.collider is StaticBody3D):
+ 			return false
+-	return _body_clear(p)
+-
+-func _body_clear(p: Vector3) -> bool:
++	return _body_clear(p,allow_opening_door)
++
++func _body_clear(p: Vector3, allow_opening_door := false) -> bool:
+ 	var space := get_world_3d().direct_space_state
+ 	var capsule := CapsuleShape3D.new()
+ 	capsule.radius = 0.3
+@@ -457,6 +457,13 @@
+ 			var excluded := query.exclude
+ 			excluded.append(body.get_rid())
+ 			query.exclude = excluded
++	if allow_opening_door:
++		for door: Node in get_tree().get_nodes_in_group("museum_approach_doors"):
++			if not door.has_method("museum_passage_bodies"): continue
++			for body: CollisionObject3D in door.call("museum_passage_bodies"):
++				var excluded := query.exclude
++				excluded.append(body.get_rid())
++				query.exclude = excluded
+ 	return space.intersect_shape(query, 1).is_empty()
+ 
+ func _arrival_supported() -> bool:
+@@ -464,7 +471,10 @@
+ 	if _entry.get("cage", false) and _arrival.distance_to(_entry.landing) < 0.1:
+ 		for i in range(12):
+ 			var step := _arrival.lerp((_entry.marker as Vector3)+Vector3(0,0,0.3), i/11.0)
+-			if not _supported(step): return false
++			# An approach door is meant to start closed and open when the
++			# visitor arrives. Only its moving leaves are exempt here; the
++			# landing, floor, fixed frame and other obstacles still validate.
++			if not _supported(step,true): return false
+ 	return true
+ 
+ 
+@@ -524,7 +534,7 @@
+ 		level = grid.global_position.y + (height-0.5)*cell_size
+ 	var floor_point := _nearest_floor(Vector3(marker.x,level+0.4,marker.z))
+ 	var config: Dictionary = doc.get("map_info", {}).get("museum", {}).get("portal_entry", {})
+-	var cage := bool(config.get("cage", source == "sp" and chosen.y == 0 and pad == 0.0))
++	var cage := bool(config.get("cage", chosen.y == 0 and pad == 0.0))
+ 	# A malformed/blocked authored entry is reported, not silently moved past
+ 	# its opening exhibits. The visitor stays on the supported loading floor.
+ 	if not _supported(floor_point):
+@@ -697,7 +707,7 @@
+ 			_portals.append({"direction":direction, "position":p, "inward":inward})
+ 			if direction > 0: frame.set_meta("authored_exit",_exit)
+ 		if direction < 0 and bool(_entry.get("cage", false)):
+-			builder.build_entry_cage(frame)
++			builder.build_entry_room(frame,String(_current.get("map","")),seg.get_meta("em_wall_mat",museum.call("_sm","wall_white")),museum.call("_sm","deck"))
+ 		var landing := p + inward * ARRIVAL_INSET
+ 		_landings[direction] = landing
+ 	if not _portals.any(func(p: Dictionary): return int(p.direction) == 1):
+--- commons/artifacts/point_corridor_door/point_corridor_door.gd before entrance-room request
++++ commons/artifacts/point_corridor_door/point_corridor_door.gd
+@@ -14,6 +14,7 @@
+ 
+ func _ready() -> void:
+ 	set_meta("em_opens_on_approach", true)
++	add_to_group("museum_approach_doors")
+ 	visual = DoorVisual.new()
+ 	visual.name = "Door"
+ 	visual.door_width = WIDTH
+@@ -69,3 +70,12 @@
+ 	visual._panel_right.position.x = _closed_x[1]+amount*travel
+ 	visual.panels_open_amount = amount
+ 	if progress>=1.0:set_physics_process(false)
++
++func museum_passage_bodies() -> Array[CollisionObject3D]:
++	# Arrival validation may allow the moving leaves on the approach path,
++	# while retaining the fixed frame and every other collision check.
++	var bodies: Array[CollisionObject3D] = []
++	if visual == null: return bodies
++	for leaf: Node3D in [visual._panel_left,visual._panel_right]:
++		bodies.append(leaf.get_node("LeafCollision") as CollisionObject3D)
++	return bodies
+--- tools/probes/hall_portal_navigation.gd before entrance-room request
++++ tools/probes/hall_portal_navigation.gd
+@@ -149,9 +149,16 @@
+ 			if child is Timer: child.paused = true
+ 		museum.set_physics_process(false)
+ 		museum.set_process(false)
++		var shot_rig: Node3D = museum.call("_vr_rig") if vr else null
++		var rig_was_visible := shot_rig.visible if shot_rig != null else false
++		if shot_rig != null: shot_rig.hide()
+ 		var camera := Camera3D.new()
+ 		root.add_child(camera)
+-		if bool(spec.get("entry_shot", false)):
++		if bool(spec.get("room_shot", false)):
++			var entry: Dictionary = portal.get("_entry")
++			camera.global_position = entry.door + Vector3(-0.45,1.65,0.30)
++			camera.look_at(entry.marker + Vector3(0,1.1,1.5),Vector3.UP)
++		elif bool(spec.get("entry_shot", false)):
+ 			var entry: Dictionary = portal.get("_entry")
+ 			camera.global_position = entry.door + Vector3(3.5,2.3,-0.4)
+ 			camera.look_at(entry.marker + Vector3(0,0.8,-1), Vector3.UP)
+@@ -159,7 +166,7 @@
+ 			var inward: Vector3 = doors[0].inward
+ 			camera.global_position = doors[0].position + inward*4.0 + Vector3(inward.z,0,-inward.x)*1.4 + Vector3(0,1.7,0)
+ 			camera.look_at(doors[0].position+Vector3(0,1.35,0), Vector3.UP)
+-		camera.fov = 54.0
++		camera.fov = 78.0 if bool(spec.get("room_shot",false)) else 54.0
+ 		camera.current = true
+ 		for i in range(12): await process_frame
+ 		await RenderingServer.frame_post_draw
+@@ -173,6 +180,7 @@
+ 			await RenderingServer.frame_post_draw
+ 			root.get_texture().get_image().save_png(str(spec["view_shot"]))
+ 		camera.queue_free()
++		if shot_rig != null: shot_rig.visible = rig_was_visible
+ 		original.make_current()
+ 		for child in original.get_children():
+ 			if child is Timer: child.paused = false
+@@ -229,7 +237,9 @@
+ 	check(walker != null, label + ": actual physics body exists")
+ 	if walker == null: return
+ 	check(walker.global_position.distance_to(expected) < 0.25, label + ": feet placed inside doorway")
+-	for i in range(30): await physics_frame
++	# Let an existing approach door complete its 1.2-second opening, then
++	# check the actual physical passage with NO door-collider exemption.
++	for i in range(90): await physics_frame
+ 	check(absf(walker.global_position.y - expected.y) < 0.15, label + ": body remains on floor under gravity")
+ 	check(Vector2(walker.global_position.x-expected.x,walker.global_position.z-expected.z).length() < 0.35, label + ": no arrival bounce or drift")
+ 	check(bool(portal.call("_supported", expected)), label + ": pad has clearance")
+@@ -240,7 +250,21 @@
+ 	var entry: Dictionary = portal.get("_entry")
+ 	if end == -1 and not entry.is_empty() and not entry.get("invalid", false):
+ 		if entry.get("cage", false):
+-			check(expected.z < (entry.marker as Vector3).z, label + ": cage precedes the first authored cell")
++			check(expected.z < (entry.marker as Vector3).z, label + ": entrance room precedes the first authored cell")
++			var shell := frames.find_child("EntryRoomCollision",true,false)
++			check(shell != null, label + ": entrance has a solid room enclosure")
++			# From above the arrival point, roof and three closed sides must
++			# hit the room itself. Forward remains the clear route to the hall.
++			var eye := expected+Vector3(0,1.1,0)
++			for ray: Vector3 in [Vector3(0,2,0),Vector3(-2,0,0),Vector3(2,0,0),Vector3(0,0,-3)]:
++				var query := PhysicsRayQueryParameters3D.create(eye,eye+ray)
++				query.exclude = [walker.get_rid()]
++				var hit := museum.get_world_3d().direct_space_state.intersect_ray(query)
++				# A directly opened hall may already have a fixed back wall
++				# inside this envelope. It encloses the room just as the new
++				# back panel does; the side walls and roof must be ours.
++				var closed: bool = not hit.is_empty() and (hit.get("collider") == shell or (ray.z < 0 and hit.get("collider") is StaticBody3D))
++				check(closed, label + ": enclosed side/roof " + str(ray))
+ 			for i in range(12):
+ 				var p := expected.lerp((entry.marker as Vector3)+Vector3(0,0,0.3),i/11.0)
+ 				check(bool(portal.call("_supported",p)), label + ": walkable link into the opening at " + str(p))

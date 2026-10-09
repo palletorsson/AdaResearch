@@ -1,0 +1,1 @@
+You know the shapes. Now give them colour. Simple comparisons become richer stacks: a large bead meets a small one, a thin disc interrupts a heavy form, a slab leaves the centre. Walk among these still constructions before the following halls ask what makes a colour appear.

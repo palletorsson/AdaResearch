@@ -11,6 +11,8 @@ extends SceneTree
 ## set() does with a text, a decimal, a wrong type and a wrong name, what the
 ## supplied sheet does and does not do, the marble over a member, the steps of
 ## the process strip, and that the earlier studies still run.
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -33,6 +35,28 @@ class Worded extends Node:
 	var word: String = "smooth"
 	var whole: int = 7
 	var yes: bool = true
+
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/family/"           # the body this chapter hands to the room
+const PLACE := 0.8                              # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors, and the lines printed, while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lines: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
+
+	func _log_message(message: String, _error: bool) -> void:
+		lock.lock()
+		lines.append(message.strip_edges(false, true))
+		lock.unlock()
 
 var last_sign := 0   # when the last check was written, in milliseconds
 
@@ -153,6 +177,74 @@ func outward(cube: MeshInstance3D) -> int:
 		if plane.normal.dot((vs[t * 3] + vs[t * 3 + 1] + vs[t * 3 + 2]) / 3.0) > 0.0:
 			count += 1
 	return count
+
+## The box around every mesh of a body, in the room.
+func box_of(body: Node3D) -> AABB:
+	var box := AABB()
+	var first := true
+	var meshes: Array[Node] = body.find_children("*", "MeshInstance3D", true, false)
+	meshes.append(body)
+	for node in meshes:
+		var mesh_node := node as MeshInstance3D
+		if mesh_node == null or mesh_node.mesh == null:
+			continue
+		var own: AABB = mesh_node.global_transform * mesh_node.mesh.get_aabb()
+		box = own if first else box.merge(own)
+		first = false
+	return box
+
+## What a ray straight down from 2 m meets first: the height, or -1.0 for nothing.
+func first_under(over: Vector3) -> float:
+	var query := PhysicsRayQueryParameters3D.create(over, Vector3(over.x, -1.0, over.z))
+	var hit := root.get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return -1.0
+	return hit.position.y
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "family.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/family/family.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	var class_text := FileAccess.get_file_as_string("res://globe.gd")
+	var guest_text := FileAccess.get_file_as_string(GUEST + "globe.gd")
+	var members: Array[Node] = guest.find_children("*", "MeshInstance3D", true, false)
+	var member: MeshInstance3D = members[0] if members.size() == 1 else null
+	var one: bool = member != null and member.get_script() == load(GUEST + "globe.gd") and member.get_script() != GlobeScript
+	var numbers: bool = one and member.segments == 8 and member.rings == 4 and listed(member.mesh) == 80 and with_area(member.mesh) == 64
+	var painted: bool = one and member.material_override is StandardMaterial3D and member.material_override.albedo_color.to_html(false) == "c6ff3d" and is_equal_approx(member.material_override.roughness, 0.8)
+	var shapes: Array[Node] = guest.find_children("*", "CollisionShape3D", true, false)
+	var bodied: bool = shapes.size() == 1 and shapes[0].get_parent() is StaticBody3D and shapes[0].shape is ConcavePolygonShape3D
+	check("the guest is one member of the family: its globe.gd is the lesson's globe.gd without the first line, 'class_name Globe'; one body of that class with 8 segments and 4 rings, 80 triangles listed and 64 with area, in BODY c6ff3d, with one collider made from its mesh; it said '%s'" % [catcher.lines],
+		class_text.begins_with("class_name Globe\n") and guest_text == class_text.trim_prefix("class_name Globe\n")
+		and numbers and painted and bodied and catcher.lines == ["Globe, 8, 4: 80 triangles"])
+	var box := box_of(guest as Node3D)
+	var top := first_under(Vector3(0.0, 2.0, 0.0))
+	check("the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (%.3f, %.3f, %.3f) to (%.3f, %.3f, %.3f), and a ray straight down over its middle stops on it at %.2f m" % [
+		box.position.x, box.position.y, box.position.z, box.end.x, box.end.y, box.end.z, top],
+		absf(box.position.y) < 0.001 and box.position.x >= -PLACE and box.position.z >= -PLACE and box.end.x <= PLACE and box.end.z <= PLACE
+		and near(box.get_center(), Vector3(0, 0.5, 0), 0.001) and absf(top - 1.0) < 0.001)
+	measured["guest"] = {"scene": GUEST + "family.tscn", "segments": member.segments if one else 0, "rings": member.rings if one else 0, "said": catcher.lines,
+		"box": [[snappedf(box.position.x, 0.001), snappedf(box.position.y, 0.001), snappedf(box.position.z, 0.001)], [snappedf(box.end.x, 0.001), snappedf(box.end.y, 0.001), snappedf(box.end.z, 0.001)]]}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The named class has to be listed before anything that says Globe can load.
@@ -579,6 +671,9 @@ func run() -> void:
 	var sheet_bytes := FileAccess.get_file_as_bytes("res://sheet.png").size()
 	check("sheet.png is there: the four members in four columns and three rows (from the side, from above, faceted), %d bytes" % sheet_bytes,
 		sheet_picture != null and sheet_picture.get_width() == 4 * TILE.x + 3 * GUTTER and sheet_picture.get_height() > 3 * TILE.y and sheet_bytes < 300000)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

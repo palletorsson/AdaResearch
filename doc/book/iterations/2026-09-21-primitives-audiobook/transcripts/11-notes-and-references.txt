@@ -1,0 +1,95 @@
+Notes and references. These follow the order of the ten halls.
+
+Notes for Point One.
+
+Note 1. Heidegger’s thrownness names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See Being and Time, section 29.
+
+Note 2. Sara Ahmed, Queer Phenomenology: Orientations, Objects, Others (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit.
+
+Note 3. Euclid, Elements, Book I, Definition 1, defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+
+Note 4. Donna Haraway, “Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”, Feminist Studies 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. Naming a coordinate frame is not equivalent to that epistemology. It gives this room a technical way to ask a related question: what must accompany a reading for someone else to understand its reference and limits?
+
+Notes for Point Lines.
+
+Note 1. See Euclid, Elements, Book I, Postulate 1, on drawing a straight line between two points. The construction concerns the finite segment; extending it and treating it as an unbounded line are further steps. The postulate is a historical reference, not an account of the renderer or the barrier’s programmed response.
+
+Note 2. Tim Ingold, Lines: A Brief History (Routledge Classics edition, 2016), especially “Traces, Threads and Surfaces” and “Up, Across and Along.” Walking, drawing, weaving and connecting enter his inquiry as different practices of making lines. This helps us take the room’s proliferation seriously: a connector, a trace and a boundary need not perform the same work merely because we call each a line.
+
+Note 3. Sara Ahmed, Queer Phenomenology (2006), 15–20, especially 16: repeated journeys make paths, while established paths help direct later journeys. Ada takes up this relation as an experiment. Its stripe is authored rather than worn into the ground, and its instruction does not score compliance. Being oriented by a line, evaluated against one and physically blocked by one remain different operations to investigate.
+
+Note 4. Ahmed, Queer Phenomenology, 20, considers how deviations can leave marks and generate other lines. This sampled drawing offers one specific record, not the whole history of the body’s deviation.
+
+Notes for Point Trace.
+
+Note 1. Paul Klee, Pedagogical Sketchbook, translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line.
+
+Note 2. Claude E. Shannon, “Communication in the Presence of Noise”, Proceedings of the IRE 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture.
+
+Note 3. Godot’s snapped f returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons.
+
+Note 4. Sigmund Freud’s “A Note upon the ‘Mystic Writing-Pad’” (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in Writing and Difference, translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. A list of coordinates is not Derrida’s philosophical trace or a model of psychic memory. The connection here is a question to pursue, not an identity between these concepts.
+
+Notes for Point Line Grid.
+
+Note 1. Geoffrey C. Bowker and Susan Leigh Star, Sorting Things Out: Classification and Its Consequences (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. Rounding coordinates is not identical to classifying people. It supplies a small operational comparison: treating different inputs as equivalent can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence.
+
+Note 2. Return to Ahmed, Queer Phenomenology, introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument.
+
+Note 3. James C. Scott, Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place.
+
+Note 4. Henri Lefebvre, The Production of Space, translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.
+
+Notes for Point Triangle Context.
+
+Note 1. For the rendering convention, see Godot 4.6’s SurfaceTool documentation: triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
+
+Note 2. One available development route is Godot’s Geometry two D dot triangulate polygon, which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.
+
+Note 3. The technical companion gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.
+
+Notes for Primitives Polythedra.
+
+Note 1. For the Jordan–Brouwer separation theorem, see Zuoqin Wang's Topology lecture 23, Theorem 2.7 (2020). In three dimensions, a surface embedded in Euclidean space and homeomorphic to a sphere separates its complement into two components, one bounded and one unbounded. The tetrahedron's boundary fits these conditions. This establishes separation, not a collider, an entrance or habitability.
+
+Note 2. Godot's ConvexPolygonShape3D is a solid collision shape. The opening here belongs to the rendered mesh, not to that hull. A collision model assembled from surface triangles is a different construction; Godot's ConcavePolygonShape3D is intended chiefly for static geometry. This is not an instruction to replace a held object's hull with a concave shape without considering its physics behavior.
+
+Note 3. James J. Gibson, The Ecological Approach to Visual Perception (1979; linked Classic Edition), chapter 8, relates a surface's affordance of support to the animal's size, weight and behavior. The wedge invites a computational comparison: passage depends on the surface and the moving body's implementation. The engine's settings do not exhaust Gibson's account of perception or the visitor's bodily experience.
+
+Note 4. See Sara Ahmed, Queer Phenomenology (2006), Introduction; the fuller discussion accompanies WALK THIS LINE. Here orientation returns through a sign beside a physical boundary. Reading an instruction and meeting collision remain different operations.
+
+Notes for Point Animatedcube.
+
+Note 1. Godot Engine 4.6, Using the ArrayMesh, rectangle example: four positions are connected by two triangle triples. This builder submits its patches through Surface Tool in triangle mode. A flat convex quadrilateral admits either diagonal; moving a corner out of its plane can make that choice visible as a different crease.
+
+Note 2. Connectivity names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri's Surface Mesh manual, CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder's patches also lack enclosing collision geometry; its handles have pickup colliders. See the technical chapter.
+
+Note 3. Euler's Elementa doctrinae solidorum (1758) investigates polyhedral counts. For the initial cube, V minus E plus F equals eight minus twelve plus six equals two. Splitting its squares adds six diagonals and six faces: eight minus eighteen plus twelve equals two again. A proof for the sphere's triangulation appears in Heinz Hopf's Selected Chapters of Geometry, section I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.
+
+Notes for Primitives Ignorance.
+
+Note 1. The Academy motto is a later tradition, not a securely documented inscription from Plato's lifetime. See The Academy of Plato, MacTutor History of Mathematics. The museum stages the familiar wording as an instruction whose authority we can question.
+
+Note 2. Plato, Republic, Book VI, Benjamin Jowett translation, the divided-line discussion: drawn figures serve reasoning about geometric objects rather than being its ultimate objects. Ada's reversal is methodological: stay with the implemented figure and investigate its limits and possibilities. This does not establish that Plato was unaware of imperfect drawings, or that geometry cannot describe curves.
+
+Note 3. Some generated triangle triples collapse at the poles. The counter distinguishes all submitted triples from those with measurable area in Godot 4.6 SphereMesh arrays. “With area” excludes triangles below a local squared-cross-product tolerance of one times ten to the power of minus sixteen; it is a practical threshold. The technical chapter records all four measured pairs of counts. Overlays and counter furniture are excluded. Analytic sphere descriptions and this finite polygonal rendering are different representations.
+
+Note 4. The installed capsule dot T S C N uses a CapsuleMesh with five radial segments and five rings. Its regular pentagonal cross-section repeats after 72 degrees, but not after 180 degrees about the long axis. The absent half-turn symmetry does not make all symmetry disappear. The scene turns at 45 degrees per second. These are the authored mesh and spin settings, not controls available on the plinth.
+
+Notes for Primitives Portals.
+
+Note 1. The installed combine portals uses Godot 4.6 TorusMesh. rings divides the torus around its opening; ring segments divides the tube's cross-section. The authored linear rule uses three plus i, and three plus two i for indices 0–19. The panel calls the latter Tube sides. Its selection highlights a mesh; these rings do not implement teleportation.
+
+Note 2. For a regular n-gon inscribed in a unit circle, each chord has length two times the sine of pi divided by n, giving perimeter two times n times the sine of pi divided by n. tau equals two times pi is the circle's circumference. In exact mathematics the perimeter is smaller for every finite n greater than or equal to three and converges to tau. A useful tolerance can be met before equality. A floating-point calculation may eventually round a gap away; that is a separate computational event. The technical chapter explains what the instrument measures.
+
+Note 3. These subdivisions preserve the torus surface's central opening. Resolution and topology are different questions: more triangles do not give this surface another hole. Whether an opening is a usable passage also depends on scale, placement and collision. Keep that distinction for the later investigations of possible spaces.
+
+Note 4. Aristotle discusses the Achilles argument and the bisection argument in Physics, Book VI, parts 2 and 9, translated by R. P. Hardie and R. K. Gaye. This exhibit stages a particular halving construction: A sub n equals L times one minus two to the power of minus n and T sub n equals L times one minus two raised to the negative of the quantity n plus one. Its six-metre track ends the display at stage ten, leaving six divided by one thousand and twenty-four metres between Achilles' anchor and the limit. Autoplay schedules stages two seconds apart and eases movement for one second. That theatrical timing is part of the implementation, not a proof about the duration of a physical race.
+
+Notes for Primitives Melencolia.
+
+Note 1. Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See Solid Objects and the image selected for this room. The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.
+
+Note 2. Albrecht Dürer, Melencolia I (1514), Metropolitan Museum of Art. The museum describes several interpretations rather than a settled key. AdaResearch stages selected objects, not a complete or geometrically exact reconstruction of the engraving. Reading aesthetic attention as a way to continue is this book's proposal.
+
+Note 3. Kant's Critique of Judgement, section section 25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; section 49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.

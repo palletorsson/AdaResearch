@@ -1,0 +1,117 @@
+[
+  {
+    "x": 4,
+    "z": 6,
+    "token": "chroma_stack:180#rule:one"
+  },
+  {
+    "x": 8,
+    "z": 6,
+    "token": "chroma_stack:180#rule:by_shape"
+  },
+  {
+    "x": 14,
+    "z": 6,
+    "token": "chroma_stack:180#rule:by_height"
+  },
+  {
+    "x": 18,
+    "z": 6,
+    "token": "chroma_stack:180#rule:by_neighbour"
+  },
+  {
+    "x": 4,
+    "z": 12,
+    "token": "chroma_stack:180#rule:by_shape#stack:bauhaus"
+  },
+  {
+    "x": 8,
+    "z": 12,
+    "token": "chroma_stack:180#rule:by_shape#stack:turned"
+  },
+  {
+    "x": 16,
+    "z": 12,
+    "token": "chroma_stack:180#rule:by_shape#stack:cut"
+  },
+  {
+    "x": 4,
+    "z": 18,
+    "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:aligned"
+  },
+  {
+    "x": 8,
+    "z": 18,
+    "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:twist"
+  },
+  {
+    "x": 14,
+    "z": 18,
+    "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:taper"
+  },
+  {
+    "x": 18,
+    "z": 18,
+    "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:combined"
+  },
+  {
+    "x": 4,
+    "z": 26,
+    "token": "chroma_stack:180#rule:composed#stack:beads"
+  },
+  {
+    "x": 8,
+    "z": 26,
+    "token": "chroma_stack:180#rule:composed#stack:discs"
+  },
+  {
+    "x": 14,
+    "z": 26,
+    "token": "chroma_stack:180#rule:composed#stack:offset"
+  },
+  {
+    "x": 18,
+    "z": 26,
+    "token": "chroma_stack:180#rule:composed#stack:festival"
+  },
+  {
+    "x": 4,
+    "z": 35,
+    "token": "color_dna_stack:180#study:mondrian"
+  },
+  {
+    "x": 8,
+    "z": 35,
+    "token": "color_dna_stack:180#study:albers"
+  },
+  {
+    "x": 14,
+    "z": 35,
+    "token": "color_dna_stack:180#study:memphis"
+  },
+  {
+    "x": 18,
+    "z": 35,
+    "token": "color_dna_stack:180#study:bauhaus_tall"
+  },
+  {
+    "x": 6,
+    "z": 44,
+    "token": "color_dna_stack:180#study:blue"
+  },
+  {
+    "x": 16,
+    "z": 44,
+    "token": "color_dna_stack:180#study:kras_rainbow"
+  },
+  {
+    "x": 6,
+    "z": 53,
+    "token": "color_dna_stack:180#study:rainbow_crown"
+  },
+  {
+    "x": 16,
+    "z": 53,
+    "token": "color_dna_stack:180#study:memphis_beacon"
+  }
+]

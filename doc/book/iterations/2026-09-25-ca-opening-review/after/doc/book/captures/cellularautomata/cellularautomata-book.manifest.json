@@ -1,0 +1,52 @@
+{
+  "captured_at": "2026-09-25T12:05:23.209587+00:00",
+  "base_commit": "1abbe7d2db4c1189df52faee9dd40438b4e9f069",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "cellularautomata",
+  "sequence_sha256": "fbb2cc605d082a9ec57c12a2856194611a5e55abbfbd32c541b637c4c2a73375",
+  "maps": [
+    {
+      "map": "CA_Introduction",
+      "path": "commons/maps/CA_Introduction/final.md",
+      "sha256": "5b77303f769f1358f11681a02fc62a779aec9d94b0a33d35992fc18976209652"
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "path": "commons/maps/CA_ElementaryRules/final.md",
+      "sha256": "3ac68607502e812159df9df2b16c267cfb22d41cceeb81d9f921c7a16485670f"
+    },
+    {
+      "map": "CA_GameOfLife",
+      "path": "commons/maps/CA_GameOfLife/final.md",
+      "sha256": "e11e83ea0ad14f973a7ef1fcb290d5771516368e55eca0275b38be3757a10b50"
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "path": "commons/maps/CA_BeyondBinary/final.md",
+      "sha256": "41573fe59637a6bfbd262621821bd892f4268b1dbbef84f05184ddd794b6efe3"
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "path": "commons/maps/CA_ExpandingSpace/final.md",
+      "sha256": "43dfd190333a48537422e1c35566a254ef7f74f44ad2199271d9a0a42e1cb024"
+    },
+    {
+      "map": "CA_SoftRules",
+      "path": "commons/maps/CA_SoftRules/final.md",
+      "sha256": "14b788401979545528c4c0a7d51d96a41df8e6755c290ca9b5d8a4e97e6e775d"
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "path": "commons/maps/CA_AgentsCircuits/final.md",
+      "sha256": "ada55960434923fd65c072fe2f4e5d54fcb98e4a23f995bb84823848fc2b054c"
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "path": "commons/maps/CA_EdgeOfChaos/final.md",
+      "sha256": "ce2d3f977ef19072387f8159b474d0886e7c3b14d11c1129143fe043ef158557"
+    }
+  ],
+  "output_sha256": "ed547398cbc8ab97ba2a16b0278ae83e68cc0188ba0a1e52d1f1ba4ae3c368f2"
+}

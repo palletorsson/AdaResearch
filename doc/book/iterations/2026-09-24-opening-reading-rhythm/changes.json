@@ -1,0 +1,142 @@
+{
+  "Point_One": [
+    {
+      "before": "<!-- @origin -->\n\nWe cannot follow everything back to its beginning.",
+      "after": "<!-- @origin -->\n\n## Somewhere to count from\n\nWe cannot follow everything back to its beginning.",
+      "reason": "Give the shift from inherited time to a spatial origin its own pause."
+    },
+    {
+      "before": "Nearby, four words are printed on the floor:",
+      "after": "Nearby, three words are printed on the floor:",
+      "reason": "Correct the count of the three words “you are here”."
+    },
+    {
+      "before": "The arrows aim towards `FOCUS`; the red lines pass through it. What they locate is never drawn. There is no hidden mesh waiting to appear.\n\nThat is a strange thing to exhibit: a position you can locate, with no body of its own. The source lets us approach it from the other direction. In the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.",
+      "after": "The arrows aim towards `FOCUS`; the red lines pass through it. There is no hidden mesh waiting to appear.\n\nIn the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.",
+      "reason": "Let the preceding question about a point without a body stand; keep the reversal between encountering and constructing it."
+    },
+    {
+      "before": "The additions matter separately, even though they arrive together when we look at the finished object. A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.",
+      "after": "The next point has a surface you can take hold of. We will need to distinguish the position, the visible body and what makes it available to your hand.",
+      "reason": "Move into the pickup encounter; its next paragraph already explains the separate constructions."
+    },
+    {
+      "before": "Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. The position can be used by a program that records those things separately. On its own, it does not tell that story.\n\nWhat drew your hand towards the point may be among the things its coordinates cannot report. Knowing how the sphere was made need not finish that interest. It gives you places to intervene: another surface, another response, another way to make a location felt.",
+      "after": "Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. Those would need records of their own.\n\nKnowing how the sphere was made need not finish your interest in it. It gives you places to intervene: another surface, another response, another way to make a location felt.",
+      "reason": "Keep the concrete omissions and possibility of making; remove a second statement of the same limit."
+    },
+    {
+      "before": "<!-- @coordinate_readout -->\n\nKeep the point in your hand. Move it while watching the white card. The changing body now has an address. What does the address follow, and what does it leave out?",
+      "after": "<!-- @coordinate_readout -->\n\n## Two addresses\n\nKeep the point in your hand and watch the white card as you move.",
+      "reason": "Begin the next comparison with the object and card; let their disagreement introduce the question."
+    },
+    {
+      "before": "<!-- @drag_point_target -->\n\nThe red arrow says",
+      "after": "<!-- @drag_point_target -->\n\n## Room to arrive\n\nThe red arrow says",
+      "reason": "Give the arrival experiment its own movement within this longer opening hall."
+    },
+    {
+      "before": "Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. A detour may matter to what you are making while remaining absent from the distance test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.",
+      "after": "Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.",
+      "reason": "End with something the detour can make. The following halls develop the record of the journey."
+    },
+    {
+      "before": "The counter has continued through all of this. A position has acquired a body, different addresses, a tolerance for arrival. It still leaves questions unanswered.\n\nOne of them travels with us: how did it get there?",
+      "after": "The counter has continued through all of this. You have brought the point here. Its address tells us where. How did it get there?",
+      "reason": "Replace the inventory at the exit with the point just carried through the room; keep the question that leads to Lines."
+    }
+  ],
+  "Trans_Rotation": [
+    {
+      "before": "<!-- @rotation_wall_crossings -->\n\n",
+      "after": "<!-- @rotation_wall_crossings -->\n\n## A turn that carries you\n\n",
+      "reason": "Separate the hall’s distinct encounters without removing any of them."
+    },
+    {
+      "before": "<!-- @rotation_array_compare -->\n\n",
+      "after": "<!-- @rotation_array_compare -->\n\n## An angle underfoot\n\n",
+      "reason": "Separate the hall’s distinct encounters without removing any of them."
+    },
+    {
+      "before": "<!-- @transform_composition_workbench -->\n\n",
+      "after": "<!-- @transform_composition_workbench -->\n\n## Which turn comes first?\n\n",
+      "reason": "Separate the hall’s distinct encounters without removing any of them."
+    },
+    {
+      "before": "<!-- @axial_sweep -->\n\n",
+      "after": "<!-- @axial_sweep -->\n\n## Room for a turn\n\n",
+      "reason": "Separate the hall’s distinct encounters without removing any of them."
+    },
+    {
+      "before": "<!-- @boolean_tunnel -->\n\n",
+      "after": "<!-- @boolean_tunnel -->\n\n## Inside the turns\n\n",
+      "reason": "Separate the hall’s distinct encounters without removing any of them."
+    },
+    {
+      "before": "The platform follows an arc while its surface stays level. Its sideways mounting lets the blade pass through vertical without sweeping through your body. Keeping a standing surface under you is another rule in this mechanism. Rotation does not supply it for free.",
+      "after": "The platform follows an arc while its surface stays level. Its sideways mounting lets the blade pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.",
+      "reason": "Keep the bodily distinction; state its additional condition once."
+    },
+    {
+      "before": "The rightmost matrix acts first: x, then y, then z. This band keeps that order. At the comparison beyond it, we can see what exchanging two turns does.\n\nThese angles are assigned by position, not accumulated while you wait.",
+      "after": "The rightmost matrix acts first: x, then y, then z. This band keeps that order. The angles belong to the rows; waiting does not change them.",
+      "reason": "Keep the matrix order and static configuration without pre-announcing the later comparison."
+    },
+    {
+      "before": "The capsules neither jump nor choose a detour. The collision solver supplies their slides. You can walk through them without pushing them, and try your own movement. A stopped trial belongs to this body and these rules. It has not exhausted the space.",
+      "after": "The capsules neither jump nor choose a detour; the collision solver supplies their slides. You can walk through them without pushing them. Try a route they did not take.",
+      "reason": "The specified bodies and motion rules already establish the comparison’s limits; end with the visitor’s possible action."
+    },
+    {
+      "before": "The final row reaches ninety degrees. A cube can recover an axis-aligned outline there. The way to that flat-looking end still passes through everything before it. More rotation does not promise more obstruction.\n\nCompare the first and last orientations in the Y band. The cube's outline returns after ninety degrees. Find the pale L on the top face: the top stays level, but the mark points another way. The occupied shape can be the same while its marked positions have changed places.",
+      "after": "The final row reaches ninety degrees. Compare it with the first in the Y band. The cube's outline returns. Find the pale L on the top face: the top stays level, but the mark points another way.\n\nThat flat-looking end still waits beyond the tilted rows. More rotation does not promise more obstruction.",
+      "reason": "Combine the two descriptions of the quarter-turn return; keep the mark and the route to it."
+    },
+    {
+      "before": "As in the array, the operation on the right acts first. These two turns leave the fin facing different ways. The upward and sideways translations in the previous hall could exchange order and share a destination. Here exchanging the order changes the result.",
+      "after": "The operation on the right acts first. These two orders leave the fin facing different ways. The upward and sideways translations in the previous hall could exchange order and share a destination. Follow the fin to see where the comparison parts company.",
+      "reason": "Retain the contrast with translation without stating the different result twice."
+    }
+  ],
+  "Tutorial_Disco": [
+    {
+      "before": "Find the sequencer's grid. Each row is a **track**, assigned a sound; each column is a **step**, one place in the repeating count. The moving highlight is the playhead: it reads one column at a time. Select the empty pattern and turn on one cell. Activating it previews its sound immediately. Let that preview finish, then start playback and predict when the moving playhead will reach the chosen column. Compare the returning note with the highlighted column. Let the loop come round before changing anything else.\n\nTurn that cell off and watch the same column on the next pass. Its address remains visible, but it requests no new note. This is the array room's question in another material: the slot remains available when its value changes. Here you can turn the value back on and repeat the comparison without rebuilding the room.\n\nTurn the first cell back on, then add another active cell in the same track. Listen to the distance between the two events. Move the second event by turning its old cell off and another cell on. The instrument can remain the same while the rhythm changes, because a position in the pattern determines when that instrument is asked to sound.\n\nThe visible grid is stored state; playback repeatedly reads that state in a particular order. The pattern can wait without making a sound, and the playhead can move past inactive cells without adding a note.\n\nChange the tempo and listen again. The active cells retain their addresses while the time taken to visit them changes. The same pattern can feel different before a single cell has changed.",
+      "after": "Find the sequencer's grid. Each row is a **track**, assigned a sound; each column is a **step**, one place in the repeating count. The moving highlight is the playhead: it reads one column at a time.\n\nChoose the empty pattern and turn on one cell. It sounds immediately as a preview. Let that sound finish, then start playback. Wait for the highlight to reach the cell. The note returns with it, once each time around.\n\nNow give that note company. Add a second cell in the same track. Listen to the interval between them. Move the second event by turning its old cell off and another on. The instrument stays the same; its place in the pattern changes when it sounds.\n\nSwitch one cell off again. On the next pass its address is still there, but that visit asks for no new note. The grid keeps your choices; the playhead keeps returning to read them.\n\nChange the tempo without moving either address. The time between visits changes. Stay with the rhythm for a few loops.",
+      "reason": "Reach a two-note rhythm sooner while retaining track, step, playhead, preview, stored state, absence and tempo. Keep the full comparison recipe in the technical companion."
+    },
+    {
+      "before": "Return to one active cell and let both clocks run. Follow its highlighted column on the sequencer, then look for its flash underfoot. A fresh floor arrangement can overtake that response. Holding the floor gives you longer to distinguish the flash from the pattern carrying it.",
+      "after": "Keep the floor held for a few beats. A flash appears against the settled pattern. Release HOLD, and fresh arrangements can overtake it.",
+      "reason": "Continue the comparison already running instead of resetting it and repeating the explanation."
+    },
+    {
+      "before": "There are sixteen steps but twelve floor columns. The remainder returns here as `step % 12`: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. A single floor flash cannot distinguish those two addresses, although the sequencer still can. A representation can preserve an event while folding together some of the information about where it came from.",
+      "after": "There are sixteen steps but twelve floor columns. The remainder returns here as `step % 12`: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. The flash returns to the same place underfoot, at another place in the count. The sequencer tells the addresses apart; that flash alone cannot.",
+      "reason": "Let the particular sixteen-to-twelve mapping carry the argument without another general conclusion about representation."
+    },
+    {
+      "before": "A gesture falling between steps would need another representation if its timing were to be retained. Imagine what you would add to preserve that chosen difference, then listen to what can already be made within the current grid. Precision and pleasure need not ask the same question.",
+      "after": "Let it run while you cross the floor. Your next step need not wait for the next note.",
+      "reason": "Leave the visitor with the independent movement already available; retain the timing-development idea in the technical companion."
+    }
+  ],
+  "Primitives_Melencolia": [
+    {
+      "before": "Between the frames you can account for and the total on the panel lies everything this chapter has been about.",
+      "after": "The number keeps growing while you read it.",
+      "reason": "Replace a claim to summarise the whole chapter with the still-running encounter."
+    },
+    {
+      "before": "The previous room left us approaching a curve with finite pieces. An exact mathematical description and a rendered body make different promises. More triangles can improve an approximation; they cannot decide what we should want to make with it.\n\n",
+      "after": "",
+      "reason": "The sphere and portals have already made this distinction. Let the closing section begin with the accomplished, unfinished image."
+    }
+  ],
+  "Color_Nails": [
+    {
+      "before": "The editable channels are a material choice, not a complete description of identity. The colour changes; the length of a finger does not. Once the surface is yours to alter, what else might you want to change?",
+      "after": "You have chosen their colour. The fingers have kept their length. What else might you want to change?",
+      "reason": "Keep the material limit and the desire to change more, without a general disclaimer about identity."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "name": "A saved position adds no visible or physical child",
+      "passed": true
+    },
+    {
+      "name": "Visible and solid mesh radii match",
+      "passed": true
+    },
+    {
+      "name": "World address includes the station placement",
+      "passed": true
+    },
+    {
+      "name": "Visible and physical centres coincide",
+      "passed": true
+    },
+    {
+      "name": "Visible and physical radii coincide",
+      "passed": true
+    },
+    {
+      "name": "Project now begins with the three corridor conditions",
+      "passed": true
+    },
+    {
+      "name": "The height edit compiles",
+      "passed": true
+    },
+    {
+      "name": "The named height edit raises the sphere",
+      "passed": true
+    },
+    {
+      "name": "Raising the sphere preserves its radius",
+      "passed": true
+    },
+    {
+      "name": "The visible radius edit compiles",
+      "passed": true
+    },
+    {
+      "name": "The radius edit changes the visible sphere dimensions",
+      "passed": true
+    },
+    {
+      "name": "Growing the visible sphere leaves its centre unchanged",
+      "passed": true
+    },
+    {
+      "name": "Physics ray: Position",
+      "passed": true
+    },
+    {
+      "name": "Physics ray: Visible",
+      "passed": true
+    },
+    {
+      "name": "Physics ray: Solid",
+      "passed": true
+    },
+    {
+      "name": "Ray meets the authored sphere surface",
+      "passed": true
+    },
+    {
+      "name": "Moving body: Position",
+      "passed": true
+    },
+    {
+      "name": "Moving body: Visible",
+      "passed": true
+    },
+    {
+      "name": "Moving body: Solid",
+      "passed": true
+    },
+    {
+      "name": "Larger collision resists before the visible surface",
+      "passed": true
+    },
+    {
+      "name": "Changing collision leaves mesh radius unchanged",
+      "passed": true
+    }
+  ],
+  "engine": "4.6-stable (official)",
+  "passed": true,
+  "scope": "Native standalone study: compilation, instantiation, world placement, physics rays and moving-body comparisons. No museum or headset run."
+}

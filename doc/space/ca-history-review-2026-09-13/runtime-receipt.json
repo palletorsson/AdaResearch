@@ -1,0 +1,28 @@
+{
+  "started": "2026-09-13T22:57:13+02:00",
+  "finished": "2026-09-13T22:57:37+02:00",
+  "pid": 33728,
+  "exit": 0,
+  "checks": 29,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/ca_history_probe_base.gd": "0f36309b8bbf46523ad09b1291c6ca0bd013df639156a5c255e6a0ce3df31807",
+    "ada_run/ca_history_acceptance.gd": "3245cbabdcbc19c966a99f159375a3428bdc8603963a0f259d501475d33bb430",
+    "commons/maps/CA_GameOfLife/map_data.json": "a4486083e834db8061f919ed37388069bf6cd64a51ca9ac1dda58d12e5d81808",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-history-review-2026-09-13/review-plan.json": "abc9371340d6b26701109d504c1e4936d75b90569632df5605e0f9ead5417156",
+    "algorithms/cellularautomata/ca_bridge/ca_bridge.gd": "cee89d78394e16f3071eb7baec51e7916975ac990feae7e1be5a1d9321ef2e99",
+    "algorithms/cellularautomata/ca_bridge/history_study.gd": "786eb3e68cab10ce0da72cb46bdb0cb0170bc31bc5bc79aae834d7b63e99c47b"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

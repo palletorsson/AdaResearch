@@ -1,0 +1,81 @@
+{
+  "artifact": "perlin_noise_bridge",
+  "title": "Building a Bridge from Noise to Terrain",
+  "concept_layer": "coherent noise as randomness with spatial memory; gradient noise; octaves as self-similar detail",
+  "technique_first": ["FastNoiseLite", "get_noise_2d()", "octave summation", "side-by-side grid comparison", "heightfield from sampled field", "seed parameter for reproducibility"],
+  "technique_reference": ["Triple nested grid (entropy_axiom)", "random offset (Random_Definition)", "@export parameters (OscillationCurve)", "apply_grid_config (Tutorial_Single)", "RackTemplates slider panel (rotation_gimbal)"],
+  "domain_deferred": ["simplex noise internals \u2192 later noise maps", "worley/cellular noise \u2192 noise_mixer", "curl noise + vector fields \u2192 curl_noise_particles", "fractal dimension of noise \u2192 fractals sequence", "wave function collapse (WFC) \u2192 procgen"],
+  "capture_leaks": {
+    "two_dimensional_sampling": "This uses 2D Perlin. The same function extends to 3D (volumetric clouds) and 4D (animated clouds). Volumetric noise deferred to procgen.",
+    "gradient_vectors_hidden": "Perlin computes noise from a grid of random gradient vectors. We see the output, not the gradients. Understanding the gradient dot product is what separates using noise from making noise.",
+    "band_limited_signal": "Perlin noise has no frequencies above ~2/grid_spacing. This is a feature (no aliasing) and a limit (fine detail needs octaves or different generator).",
+    "deterministic_per_seed": "Same seed + same coordinates = same output. The noise is reproducible \u2014 useful for procgen, but it also means Perlin noise is not random in the information-theoretic sense. It's compressed pseudo-randomness.",
+    "no_large_scale_structure": "Perlin noise is statistically homogeneous. If you want valleys and ridges at multiple scales, you sum octaves. Real terrain has tectonics \u2014 non-noise structure \u2014 that noise alone cannot give."
+  },
+  "limit": "Two grids: one chaos, one terrain. The only difference is whether neighbors remember each other. This is the essence of coherent noise. What it refuses: physical causality (noise doesn't know about erosion, plate tectonics, weather), time dependence (the field is static), and anisotropy (same behavior all directions). Real terrain is not noise; noise is a stand-in that often convinces us because our perception is statistical.",
+  "grammar_alignment": {
+    "sequence": "noise",
+    "operations_taught": ["perturb", "terrain"],
+    "operations_deferred_to_sequence": ["warp (domain_warp)", "octaves (dedicated octave artifacts)"],
+    "note": "perlin_noise_bridge teaches perturb (displace each grid cell by noise sample) and terrain (use noise as height). The four noise operations are effectively: sample \u2192 displace \u2192 warp space itself \u2192 layer multiple scales. This artifact covers the first two side by side."
+  },
+  "biome_alignment": {
+    "sequence": "noise",
+    "density_at_entry": 0.4,
+    "kingdoms_unlocked": ["flower", "tree", "fungus"],
+    "hand_verbs_gained": ["sculpt_terrain"],
+    "catalyst_mode": null,
+    "terrain_mode_change": "flat \u2192 noise",
+    "note": "Big moment \u2014 this is the first sequence where terrain_mode shifts from 'flat' to 'noise.' The biome no longer sits on a plane. Floors undulate. Vegetation follows the terrain. The player gains the 'sculpt_terrain' verb: they can push noise into the world and watch the ground respond."
+  },
+  "stages": [
+    {
+      "title": "From entropy to memory",
+      "thinking": "Random_Definition taught that randomness dissolves order \u2014 each point independent, each offset fresh, entropy as a gradient. But nature doesn\u2019t look like that. Mountains aren\u2019t jittered grids. Clouds aren\u2019t salt-and-pepper. Real landscapes have the statistical feel of randomness plus something else: neighbors influencing neighbors. That something is the subject of this map. What happens when randomness remembers?",
+      "code": "# Random_Definition taught:\n#   position += Vector3(\n#     randf_range(-a, a),\n#     randf_range(-a, a),\n#     0\n#   )\n# Every point independent. Neighbors don't correlate.\n#\n# Now: what if position at (x, y) knew\n# about position at (x-1, y)?\n# What if randomness had a topology?\n#\n# This is the entire noise sequence in one question.",
+      "concepts": ["white noise vs coherent noise", "spatial correlation", "memory as structure"]
+    },
+    {
+      "title": "Two grids side by side",
+      "thinking": "The teaching trick is juxtaposition. Build two 16\u00d716 heightfield grids. Left grid: each cell's height is `randf()`. Right grid: each cell's height is `FastNoiseLite.get_noise_2d(x, y)`. Identical random range. Identical cell positions. Only difference: one is memoryless, the other isn't. Watching them side by side, the player feels why terrain looks like terrain.",
+      "code": "extends Node3D\nclass_name PerlinNoiseBridge\n\nconst GRID_SIZE := 16\nconst CELL_WIDTH := 0.015\nconst MAX_HEIGHT := 0.15\nconst GRID_SPACING := 0.35  # distance between the two grids\n\nvar _noise: FastNoiseLite\nvar _white_columns: Array[MeshInstance3D] = []\nvar _perlin_columns: Array[MeshInstance3D] = []\n\nfunc _ready() -> void:\n\t_noise = FastNoiseLite.new()\n\t_noise.noise_type = FastNoiseLite.TYPE_PERLIN\n\t_create_grids()\n\t_rebuild_grids()",
+      "concepts": ["FastNoiseLite", "side-by-side comparison", "heightfield from value", "grid instancing"]
+    },
+    {
+      "title": "The left grid \u2014 pure randf()",
+      "thinking": "For each cell, pick a random height. No coordination with neighbors. This is the baseline \u2014 what randomness looks like without correlation. Every time you regenerate, it looks like static. Like TV between channels. Like salt on paper. The eye cannot find a pattern because there is no rule coupling neighbors.",
+      "code": "func _rebuild_white_grid() -> void:\n\tfor i in range(_white_columns.size()):\n\t\tvar col = _white_columns[i]\n\t\tvar h = randf() * MAX_HEIGHT  # each height independent\n\t\tcol.mesh.size.y = max(0.001, h)\n\t\tcol.position.y = h * 0.5\n\n# Salt-and-pepper.\n# Each call to randf() is a fresh draw.\n# No memory. No structure. Pure noise.",
+      "concepts": ["randf()", "independent samples", "no-memory field", "white noise"]
+    },
+    {
+      "title": "The right grid \u2014 FastNoiseLite.get_noise_2d()",
+      "thinking": "Same loop, same grid, same heightfield \u2014 but the height comes from a noise function that computes values from coordinates. Sample point (x, y). Its height correlates with the height at (x-1, y), (x, y-1), (x+1, y+1). Why? Because Perlin uses a grid of hidden gradient vectors, and the noise value at any point is a smooth blend of neighboring gradients. Neighbors are forced to agree. The output: hills, valleys, plausible landscape.",
+      "code": "func _rebuild_perlin_grid() -> void:\n\t_noise.seed = _seed_val\n\t_noise.frequency = _frequency\n\t_noise.fractal_octaves = _octaves\n\t\n\tfor i in range(_perlin_columns.size()):\n\t\tvar col = _perlin_columns[i]\n\t\tvar x = i % GRID_SIZE\n\t\tvar y = i / GRID_SIZE\n\t\t\n\t\t# Sample noise at the grid coordinate\n\t\t# get_noise_2d returns [-1, 1]; remap to [0, MAX_HEIGHT]\n\t\tvar n = _noise.get_noise_2d(float(x), float(y))\n\t\tvar h = (n + 1.0) * 0.5 * MAX_HEIGHT\n\t\t\n\t\tcol.mesh.size.y = max(0.001, h)\n\t\tcol.position.y = h * 0.5",
+      "concepts": ["get_noise_2d()", "coordinate-as-input", "neighbor correlation", "smooth blending of gradients"]
+    },
+    {
+      "title": "Octaves \u2014 self-similar detail at every scale",
+      "thinking": "A single Perlin call produces rolling hills. But real terrain has hills on hills: big mountains with boulders with pebbles. Octaves solve this by summing multiple Perlin samples at increasing frequencies and decreasing amplitudes. Octave 1: big blobs, large amplitude. Octave 2: smaller blobs, half amplitude. Octave 3: finer still. Five octaves and you have something that looks like satellite imagery. FastNoiseLite sums them for you via fractal_octaves.",
+      "code": "var _octaves: int = 3  # how many layers of detail\nvar _frequency: float = 2.0  # base frequency\n\n_noise.fractal_octaves = _octaves\n_noise.frequency = _frequency\n\n# Internally, this computes:\n#   total = 0\n#   amplitude = 1\n#   for i in octaves:\n#     total += perlin(x * frequency, y * frequency) * amplitude\n#     frequency *= 2.0      # next octave is twice as dense\n#     amplitude *= 0.5       # and half as strong\n#   normalize\n#\n# Self-similarity across scales.\n# This is why octaves feel fractal.",
+      "concepts": ["fractal summation", "octaves as self-similar scales", "amplitude decay", "pre-echo of fractals sequence"]
+    },
+    {
+      "title": "Seed, frequency, octaves \u2014 three sliders, infinite terrain",
+      "thinking": "Three parameters cover the entire Perlin parameter space for a terrain. Seed: reroll a new landscape with the same statistics. Frequency: change the scale of features (low = rolling, high = jagged). Octaves: how much fine detail. With these three sliders, the player can generate every plausible terrain. They also learn that terrain is a VALUE OF PARAMETERS \u2014 not a specific shape, but a region in parameter space.",
+      "code": "func _create_vr_controls() -> void:\n\tvar RackTpl = load(\"res://commons/audio/rack_templates/RackTemplates.gd\")\n\tvar panel = RackTpl.create_panel(\"PERLIN BRIDGE\", [\n\t\t[{\"type\": \"slider_h\", \"label\": \"OCTAVES\", \"default\": _octaves / 8.0}],\n\t\t[{\"type\": \"slider_h\", \"label\": \"FREQ\", \"default\": _frequency / 10.0}],\n\t\t[{\"type\": \"slider_h\", \"label\": \"SEED\", \"default\": float(_seed_val) / 1000.0}],\n\t\t[{\"type\": \"button\", \"label\": \"RESAMPLE\"}],\n\t])\n\n# Three sliders. Infinite distinct terrains.\n# The player doesn't learn 'how to make terrain.'\n# They learn that terrain is a region in a\n# 3-dimensional parameter space.",
+      "concepts": ["parameter space", "seed as variation", "frequency as scale", "octaves as detail", "RackTemplates panel"]
+    },
+    {
+      "title": "The rule-made coherence is visible",
+      "thinking": "Stand between the two grids. The white-noise grid shakes like TV snow. The Perlin grid breathes like a sleeping animal. The only difference is memory. This is what the bridge teaches without saying: coherence is not order imposed from above. It is the consequence of a rule that couples neighbors. Structure is free when the rule is right.",
+      "code": "# The player stands between the two grids.\n#\n# LEFT:  randf()     \u2014 each cell lonely, no connection\n# RIGHT: Perlin     \u2014 each cell whispers to its neighbors\n#\n# Same random [-1, 1] range.\n# Same grid dimensions.\n# Same update code.\n#\n# One looks like static. One looks like a place you could walk.\n#\n# No terrain rules were coded.\n# No erosion was simulated.\n# The rule was just: neighbors must agree a little.\n#\n# That's all it takes to move from chaos to landscape.",
+      "concepts": ["coherence from neighbor coupling", "structure as cheap consequence", "no-hidden-terrain lesson"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The bridge knows what it is. Not a terrain generator \u2014 a proof. The proof that when you add a neighbor-coupling rule to noise, terrain emerges for free. No tectonics, no erosion, no voxel carving. Just: \u2018respect your neighbor.\u2019 The critical parameter is frequency because it controls the scale of the feature \u2014 the deep variable that makes Perlin feel like a specific landscape. What the bridge refuses: real physics, large-scale structure, time evolution. All deferred, all earned later.",
+      "code": "# @identity\n# essence: Perlin(x,y) = smoothstep(dot(gradient, offset)) \u2014 gradient noise with spatial memory\n# desire: see two grids side by side \u2014 one chaotic, one terrain \u2014 and feel the moment randomness becomes landscape\n# critical_parameter: frequency \u2014 controls the scale of coherent features; low = rolling hills, high = jagged peaks\n# triggers: _rebuild_grids() regenerates both heightfields when octaves, frequency, or seed change\n# emerges: the Perlin grid looks like terrain not because terrain was coded, but because neighbors remember each other\n# needs: FastNoiseLite [has]; RackTemplates panel with OCTAVES/FREQUENCY/SEED sliders [has]; RESAMPLE button [has]\n# relationships: depends on white_noise_spectrum (conceptual base); feeds noise_layers and procedural terrain artifacts\n# truth: Coherence is not the opposite of randomness \u2014 it is randomness with memory.",
+      "concepts": ["@identity", "memory-as-structure", "free coherence", "truth"]
+    }
+  ]
+}

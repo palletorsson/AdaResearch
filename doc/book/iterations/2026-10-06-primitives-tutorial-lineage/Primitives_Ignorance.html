@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A rule produces positions</title><style>body{margin:0;background:#f2efe9;color:#242322;font:18px/1.65 Georgia,serif}header,main{max-width:1160px;margin:auto;padding:48px 34px}h1{font-size:48px;line-height:1.1}h2{line-height:1.2}a{color:#9c365f}nav{display:flex;gap:15px;flex-wrap:wrap}article{border-top:1px solid #cbc4ba;padding:36px 0}img{width:100%;height:auto;border-radius:6px}small,.meta{font:14px/1.6 system-ui,sans-serif;color:#67615c}.subjects{display:flex;flex-wrap:wrap;gap:8px}.subjects span{background:#e9d8df;padding:4px 10px;border-radius:4px;font:14px system-ui}pre{background:#20272c;color:#eae6de;padding:22px;overflow:auto;font:14px/1.6 Consolas,monospace}code{font-family:Consolas,monospace}.page{max-width:880px;margin:auto}figure{margin:30px 0}summary{cursor:pointer}@media(max-width:600px){h1{font-size:34px}header,main{padding:24px 18px}}</style><main class="page"><nav><a href="index.html#Primitives_Ignorance">Route</a><a href="Point_Animatedcube.html">Previous</a><a href="Primitives_Godot.html">Next</a><a href="Primitives_Ignorance/lesson-files.zip">Code files</a></nav><h1>A rule produces positions</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Functions and typed return values</li>
+<li>Parameters and arguments</li>
+<li>Symmetry as a construction rule</li>
+<li>Independent generated results</li>
+</ul>
+<h2>In the museum</h2>
+<p>Among the Platonic solids, the octahedron offers a compact rule: put a position at each end of three perpendicular axes. Six positions replace a long list of coordinates. The geometry courtyard gives the result a place; this lesson makes its construction available to you.</p>
+<p>You already have arrays, loops and a face renderer. The new step is to give a repeated construction a name and an input. We supply the eight face triples so that the lesson stays with generating positions.</p>
+<h2>Make this study</h2>
+<p>Attach lesson.gd to a Node3D named GeneratorStudy in this museum hall. FaceBody and LineSkin are unchanged. The two calls deliberately use different radii and store their results separately.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3>The program</h3>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+const FaceBody = preload(&quot;face_body.gd&quot;)
+# Connectivity is supplied; this lesson generates the positions.
+const FACES: Array[Vector3i] = [
+    Vector3i(2, 0, 4), Vector3i(2, 4, 1),
+    Vector3i(2, 1, 5), Vector3i(2, 5, 0),
+    Vector3i(3, 4, 0), Vector3i(3, 1, 4),
+    Vector3i(3, 5, 1), Vector3i(3, 0, 5)]
+var small_points: Array[Vector3] = []
+var large_points: Array[Vector3] = []
+
+func _ready() -&gt; void:
+    small_points = octahedron_positions(0.3)
+    large_points = octahedron_positions(0.6)
+    var small := FaceBody.new()
+    var large := FaceBody.new()
+    small.position = Vector3(-0.7, 1.1, 0)
+    large.position = Vector3(0.7, 1.1, 0)
+    add_child(small)
+    add_child(large)
+    small.show_faces(small_points, FACES)
+    large.show_faces(large_points, FACES)
+
+func octahedron_positions(radius: float) -&gt; Array[Vector3]:
+    assert(radius &gt; 0.0)
+    var result: Array[Vector3] = []
+    for axis in [Vector3.RIGHT, Vector3.UP, Vector3.BACK]:
+        result.append(axis * radius)
+        result.append(-axis * radius)
+    return result
+</code></pre>
+<h3>Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3>Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Read the construction</h2>
+<p><code>radius</code> is the function's parameter. The numbers 0.3 and 0.6 are arguments supplied by two calls. <code>-&gt; Array[Vector3]</code> names the kind of value returned: a list of positions. The positive-radius assertion states the function's domain.</p>
+<p>For each positive axis, the loop appends one position and its opposite. The order is +X, −X, +Y, −Y, +Z, −Z. The supplied face list depends on that order. Rearranging the list without changing the faces would make a different set of connections.</p>
+<p>The function builds a fresh <code>result</code> on every call and returns it. It does not place a body in the room or draw anything. FaceBody takes the returned data and renders it. This separates generating positions from displaying them without introducing a general-purpose factory.</p>
+<p>Changing a returned position changes one result. Changing the rule changes future results. Neither operation makes a claim about which sculpture is better. Radius, geometric relationship and aesthetic judgment are different decisions.</p>
+<h2>Make it your own</h2>
+<p>Call the function with 0.45. Use the returned array to display a third body. Move one entry in that array, redraw only that body, and verify that the other two remain unchanged. Describe the symmetry your edit broke.</p>
+<p>Carry the idea of a parameter controlling a construction. In Godot Primitives, return to your original sphere and make two of the engine's construction parameters available while holding it.</p>
+<h2>Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p></main></html>

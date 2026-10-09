@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "origin, counter and arrival shaft present",
+      "passed": true
+    },
+    {
+      "name": "origin marker is at actual world zero",
+      "passed": false
+    },
+    {
+      "name": "label belongs to the origin",
+      "passed": true
+    },
+    {
+      "name": "one origin instance",
+      "passed": true
+    },
+    {
+      "name": "restored basin has sixteen cells",
+      "passed": false
+    },
+    {
+      "name": "glass at deck height (-1.0, -1.0)",
+      "passed": false
+    },
+    {
+      "name": "basin bottom two metres down (-1.0, -1.0)",
+      "passed": false
+    },
+    {
+      "name": "glass at deck height (-1.0, 1.0)",
+      "passed": false
+    },
+    {
+      "name": "basin bottom two metres down (-1.0, 1.0)",
+      "passed": false
+    },
+    {
+      "name": "glass at deck height (1.0, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "basin bottom two metres down (1.0, -1.0)",
+      "passed": false
+    },
+    {
+      "name": "glass at deck height (1.0, 1.0)",
+      "passed": false
+    },
+    {
+      "name": "basin bottom two metres down (1.0, 1.0)",
+      "passed": false
+    },
+    {
+      "name": "no internal wall across basin (-1.5, -0.7, 0.2)",
+      "passed": true
+    },
+    {
+      "name": "no internal wall across basin (0.2, -0.7, -1.5)",
+      "passed": true
+    },
+    {
+      "name": "arrival still lands safely",
+      "passed": true
+    },
+    {
+      "name": "approach from counter reaches basin",
+      "passed": true
+    },
+    {
+      "name": "approach has supporting floor",
+      "passed": true
+    },
+    {
+      "name": "walk onto basin glass",
+      "passed": true
+    },
+    {
+      "name": "glass supports walker",
+      "passed": true
+    },
+    {
+      "name": "Folding Past remains",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: origin-close",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: basin-context",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-counter",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "origin marker is at actual world zero",
+    "restored basin has sixteen cells",
+    "glass at deck height (-1.0, -1.0)",
+    "basin bottom two metres down (-1.0, -1.0)",
+    "glass at deck height (-1.0, 1.0)",
+    "basin bottom two metres down (-1.0, 1.0)",
+    "basin bottom two metres down (1.0, -1.0)",
+    "glass at deck height (1.0, 1.0)",
+    "basin bottom two metres down (1.0, 1.0)"
+  ],
+  "observations": {
+    "arrival_landed": [
+      7.5,
+      0.000683411955833435,
+      1.5
+    ],
+    "origin_world": [
+      3.5,
+      1.0,
+      5.5
+    ]
+  },
+  "passed": false,
+  "scope": "Native museum, exact world coordinates, four-quadrant basin collision and actual desktop walker; headset not tested."
+}

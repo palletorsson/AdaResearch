@@ -1,0 +1,39 @@
+--- before/doc/book/BOOK_FRAME.md
++++ doc/book/BOOK_FRAME.md
+@@ -4,10 +4,12 @@
+ 
+ ## Publication order
+ 
+-1. [Before the first point](preface.md): a short preface, naming the audience, desire, tutorial method and the relationship between page and museum. Introduce QFEP briefly; leave its full argument for the return.
+-2. **The complete active spine:** each hall's `commons/maps/<Map>/final.md`, following `commons/maps/curriculum_spine.json` and the ordered `maps` array in each active sequence JSON. Preface and afterword are book matter, not museum maps or additional sequences.
+-3. [What must a world change so difference can do more than fit?](afterword-qfep.md): a substantial afterword developing QFEP through the encounters, including their consequences for the maker and the museum. It follows the final Post-Foundations Crisis hall, not just the QFEP Laboratory chapter.
+-4. **Publication apparatus to prepare:** consolidated references, glossary where useful, code/build provenance and contributor/AI collaboration credits. Existing hall footnotes stay with their chapters. These additional apparatus items are proposed, not yet written.
++1. [Before the first point](preface.md): the invitation, naming the audience, desire, method and relation between page and museum.
++2. [Day Zero — Hello, world](day-zero.md): the practical chapter of the preface. Reserve preparation time for Godot, the supplied base, editing/running/saving and the separate Quest setup route. Name the player and XR systems we borrow. Complete this before asking a hall to teach its subject.
++3. **The complete active spine:** each hall's `commons/maps/<Map>/final.md`, following `commons/maps/curriculum_spine.json` and the ordered `maps` array in each active sequence JSON. Day Zero is front matter, not a museum map; Point Zero remains the first hall.
++4. [What must a world change so difference can do more than fit?](afterword-qfep.md): the QFEP afterword following the complete spine.
++5. **Publication apparatus to prepare:** consolidated references, glossary where useful, code/build provenance and contributor/AI collaboration credits. Existing hall footnotes stay with their chapters.
++
+ 
+ The opening reader is someone who wants to understand code as a means of making space and the conditions of bodily action. The tutorial supplies the means to investigate; aesthetic attention, desire and critical reflection help determine what to investigate next.
+ 
+@@ -49,7 +51,7 @@
+ python doc/book/iterations/2026-09-23-book-frame/build.py
+ ```
+ 
+-Canonical manuscripts are `doc/book/preface.md` and `doc/book/afterword-qfep.md`. The preview's source files are dated reading snapshots with hashes, not a second editing home. Its manifest records active sequence membership and the source fingerprints used for this edition.
++Canonical front and end matter are `doc/book/preface.md`, `doc/book/day-zero.md` and `doc/book/afterword-qfep.md`. The preview's source files are dated reading snapshots with hashes, not a second editing home. Its manifest records active sequence membership and the source fingerprints used for this edition.
+ 
+ The existing `/book` editor has a separate older `book.json` index; some active halls are absent. This scaffold does not regenerate that index or the legacy `tutorial_authored`/`manuscript_frame.json` exporter. Use `/museum-progress` for active order, and the live final-text source links supplied for the endpoint halls. Integrating the complete final.md book into an export remains a separate implementation task.
+ 
+@@ -62,3 +64,10 @@
+ Point Zero now concentrates on falling into a running room, reading the counter, folding frames and choosing an origin. The preface carries the wider passage about software and AI changing during learning, the spillover of one capacity into another, risk and the death-drive question. The earlier display-history note has moved beside inherited work in the preface. The author's inherited-work paragraph remains exact in Point Zero.
+ 
+ The new passage describes the author's experience of thresholds in making this book and museum. It does not assert a measured universal exponential curve, uninterrupted progress or an unverified breakthrough this week. The gravitational image concerns how proposals acquire weight and redirect attention. Process frames, elapsed time and tool revisions remain distinct. Death drive remains a question, not a diagnosis. See [the relocation and exact differences](/book-review/doc/book/iterations/2026-09-28-preface-arriving-in-change/index.html).
++
++
++## 29 September — preparation belongs before the first hall
++
++Day Zero makes the cost and inheritance of “Hello, world” visible. It supplies one desktop starting project and explains the role of the separate XR/Quest setup. The desktop base.tscn is self-contained; Point One inherits it. The full museum's player and XR toolkit remain borrowed systems. The current small download is not a complete standalone headset kit.
++
++Opening, saving and running are assumed in later making passages. Each hall should spend its teaching attention on a new operation, perception or critical question. The Day Zero route can be revisited if setup fails. Reserve roughly a preparation day in a course without making that duration a measure of the student's ability.

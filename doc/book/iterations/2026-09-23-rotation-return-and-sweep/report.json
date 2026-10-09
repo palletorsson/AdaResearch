@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing spindle study loaded",
+      "passed": true
+    },
+    {
+      "name": "viewing plate remains at 1.7 metres",
+      "passed": true
+    },
+    {
+      "name": "default cube and hidden contour",
+      "passed": true
+    },
+    {
+      "name": "PAUSE pointer event stops study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-zero",
+      "passed": true
+    },
+    {
+      "name": "five seconds selects quarter-turn at authored speed",
+      "passed": true
+    },
+    {
+      "name": "quarter-turn permutes the cube's occupied vertices",
+      "passed": true
+    },
+    {
+      "name": "attached mark turns ninety degrees",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-ninety",
+      "passed": true
+    },
+    {
+      "name": "BOUNDARY pointer event reveals contour",
+      "passed": true
+    },
+    {
+      "name": "cube contour reaches the corner radius",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-sweep",
+      "passed": true
+    },
+    {
+      "name": "SHAPE pointer event selects triangle",
+      "passed": true
+    },
+    {
+      "name": "triangle cone narrows from base to axle tip",
+      "passed": true
+    },
+    {
+      "name": "contour is a visual mesh without a solid body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-sweep",
+      "passed": true
+    },
+    {
+      "name": "PLAY pointer event resumes actual motion",
+      "passed": true
+    },
+    {
+      "name": "PAUSE retains the selected orientation",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifact_world": [
+      19.5,
+      0.0,
+      44.5
+    ],
+    "camera_local": {
+      "eye": [
+        -1.25,
+        2.7,
+        -2.15
+      ],
+      "fov": 32,
+      "target": [
+        0,
+        2.03,
+        0
+      ]
+    },
+    "figure_states": {
+      "cube-ninety": 90,
+      "cube-sweep": 45,
+      "cube-zero": 0,
+      "triangle-sweep": 45
+    }
+  },
+  "passed": true,
+  "room": "Trans_Rotation",
+  "scope": "Isolated actual museum; pointer button events, supplied frozen poses and native captures. No runtime source or geometry edits. This is not a headset or learner test."
+}

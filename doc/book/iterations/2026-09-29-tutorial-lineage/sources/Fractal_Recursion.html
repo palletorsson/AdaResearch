@@ -1,0 +1,286 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_Recursion · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_Recursion">← Tutorial lineage</a></p><h1>Fractal Recursion</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_Recursion/final.md">Raw captured source</a></p><pre># How many times can *again* happen?
+
+&lt;!-- @fractal_recursion_2 --&gt;
+
+A square waits above the first desk. Press MORE. Another square appears inside it, half as wide. Ask again. The instruction is brief enough to hold in your head; the shrinking squares soon become harder to hold in your eyes.
+
+Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.
+
+Here is the self-call from the artifact:[^noc]
+
+```gdscript
+var new_size: float = size * size_reduction
+_draw_recursive_pattern(center, new_size, d - 1)
+```
+
+The function has just drawn a square. It now calls itself with a smaller size and one less level to spend. At the beginning of each call, this condition can return it to the caller:
+
+```gdscript
+if d &lt;= 0 or size &lt; TERM_MIN_SIZE:
+    return
+```
+
+`TERM_MIN_SIZE` is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.
+
+Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.
+
+Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.
+
+![The same shrinking terms become doorframes on the museum floor.](images/recursion-thresholds.png)
+
+
+Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.[^1] Here we reach a last square. The room has stopped where a rule could go on.
+
+We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
+
+&lt;!-- @example_8_3_recursion_circles_vr --&gt;
+
+The other desk begins with one ring. Predict the count after MORE. Five. Once more: twenty-one. The footprint remains roughly the same while the number of things occupying it changes quickly.
+
+Each call draws its ring, then makes four smaller calls, shifting their centres right, left, up and down. Four levels leave `1 + 4 + 16 + 64` rings: eighty-five. The fifth leaves three hundred and forty-one. “One more” has acquired a different cost.
+
+Return to depth four and try PACKING. The child radius changes; the number of rings stays. Press PACKING until the readout says dust, then ask for depth five: the fifth ring’s requested radius, two metres times 0.25 four times over, is about eight millimetres, below the source’s one-centimetre cutoff, and a whole level is lost. A depth allowance does not guarantee that every call will draw. Some overlap, some meet, some separate. TURN releases their planes into the artifact&#x27;s rotating motion. Stop it to return to the frontal comparison. An apparent tangle can come from placement and pose as well as from adding more things.
+
+The room can accommodate three hundred and forty-one rings. That does not mean it has made three hundred and forty-one distinctions easy to read. We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.
+
+&lt;!-- @cube_subdivision --&gt;
+
+Now a cube waits on a plinth. Press SPLIT. Eight smaller cubes take its place. Press again. Fifteen, not sixty-four. This machine divides one selected cell at a time.
+
+Choose DRILL and spend the twelve splits. Then choose SPREAD and spend the same allowance. Both end with eighty-five cells. DRILL follows one corner into smaller and smaller scales; SPREAD chooses a cell from the shallowest remaining level. The readout reaches depth twelve in one case and depth three in the other. Equal counts have bought different bodies.
+
+LOTS draws from the remaining population. Its seed is fixed here. BEGIN lets you repeat the same choices and inspect something you missed. Repetition becomes a way of paying attention.
+
+The source sets a child&#x27;s scale like this:
+
+```gdscript
+var new_scale = cube_scale * 0.5 * 0.9
+```
+
+Half, then a little smaller. The gaps that make the division legible are authored too. And the tiny cell that DRILL keeps choosing still costs something even after its difference becomes difficult to see. More work need not yield more experience. Where would you spend the next split?
+
+&lt;!-- @recursive_chair --&gt;
+
+At the last desk, NEXT starts to make a chair. After the first cut, press GHOST. Eleven pale cells return around the sixteen that were kept. SCAR marks the discarded centres; GONE hides those witnesses again. The choice of what to keep has become visible beside its result.
+
+Something else moved. The first stage lifts the divided lattice; subsequent stages flatten the seat, extend legs and back, then add armrests. The chair was not simply waiting inside the original cube. Parts are selected, translated, stretched and added according to an intention about chairs.
+
+This artifact carries “recursive” in its name, but its construction runs through five authored stages. There is no self-call in that sequence. Its presence beside the squares is useful precisely because a familiar appearance can conceal a different procedure.
+
+&lt;!-- @ --&gt;
+
+The table, staircase, pagoda and other works remain beyond the desks, a collection to return to with these distinctions in hand. We do not have to make every object evidence for the same claim.
+
+A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?
+
+[^1]: Benoît Mandelbrot coined *fractal* in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman&#x27;s introductory discussion in [“What Is a Fractal?”, *The Nature of Code*](https://natureofcode.com/fractals/#what-is-a-fractal). It is a way into the examples, not a complete mathematical definition.
+
+[^noc]: The square and ring source files credit Daniel Shiffman&#x27;s *The Nature of Code*, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_Recursion/tutorial.md">Raw captured source</a></p><pre># Fractal Recursion
+
+A function that calls itself. Depth bounded, structure unbounded.
+
+Recursive factorial.
+
+```gdscript
+func factorial(n: int) -&gt; int:
+    if n &lt;= 1: return 1
+    return n * factorial(n - 1)
+```
+
+Base case at 1; recursive call with smaller argument. The call stack captures the recursion depth.
+
+Recursive tree structure.
+
+```gdscript
+func recursive_tree(start: Vector3, direction: Vector3, length: float, depth: int) -&gt; void:
+    if depth &lt;= 0: return
+    var end := start + direction * length
+    draw_segment(start, end)
+    var axis: Vector3 = direction.cross(Vector3.UP).normalized()
+    var left: Vector3 = direction.rotated(axis, deg_to_rad(20))
+    var right: Vector3 = direction.rotated(axis, deg_to_rad(-20))
+    recursive_tree(end, left, length * 0.7, depth - 1)
+    recursive_tree(end, right, length * 0.7, depth - 1)
+```
+
+Binary branching. Each call spawns two shorter children.
+
+Memoisation.
+
+```gdscript
+var memo: Dictionary = {}
+
+func fib(n: int) -&gt; int:
+    if n in memo: return memo[n]
+    if n &lt;= 1: return n
+    var result: int = fib(n - 1) + fib(n - 2)
+    memo[n] = result
+    return result
+```
+
+Cache results. Fibonacci without memoisation is exponential; with it, linear.
+
+Tail-recursive form.
+
+```gdscript
+func sum_tail(n: int, acc: int = 0) -&gt; int:
+    if n == 0: return acc
+    return sum_tail(n - 1, acc + n)
+```
+
+Accumulator carries state forward. Compilers can optimise this into a loop.
+
+Iterative equivalent.
+
+```gdscript
+func sum_iterative(n: int) -&gt; int:
+    var total: int = 0
+    while n &gt; 0:
+        total += n
+        n -= 1
+    return total
+```
+
+Same computation; no call stack. Faster and safer for large n.
+
+Detect stack depth.
+
+```gdscript
+func measure_depth(n: int, depth: int = 0) -&gt; int:
+    if n &lt;= 0: return depth
+    return measure_depth(n - 1, depth + 1)
+```
+
+Returns the number of recursive calls made. Useful for testing stack-overflow limits.
+
+Self-similar structure.
+
+```gdscript
+func render_fractal_at(position: Vector3, size: float, depth: int) -&gt; void:
+    if depth &lt;= 0:
+        spawn_cube_at(position, size * 0.3)
+        return
+    var offset: float = size * 0.5
+    for dx in [-1, 1]:
+        for dy in [-1, 1]:
+            for dz in [-1, 1]:
+                render_fractal_at(position + Vector3(dx, dy, dz) * offset, size * 0.5, depth - 1)
+```
+
+Each cube spawns 8 smaller cubes. Cantor dust in 3D.
+
+You can now write recursive functions, memoise their results, recognise tail recursion, convert to iteration, measure call depth, and build self-similar 3D structures. Fractal_RecursiveTrees extends into tree morphologies.
+
+Convert iteration to pixel coordinates.
+
+```gdscript
+func complex_to_pixel(c: Vector2, bounds: Rect2, resolution: Vector2i) -&gt; Vector2i:
+    return Vector2i(
+        int((c.x - bounds.position.x) / bounds.size.x * resolution.x),
+        int((c.y - bounds.position.y) / bounds.size.y * resolution.y)
+    )
+```
+
+Maps math-space to image-space. Inverse of pixel-to-complex used in rendering.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_Recursion/technical.md">Raw captured source</a></p><pre># Fractal_Recursion: inspect the operation before naming the form
+
+The manuscript follows four encounters within a ten-work collection. The core registry promotes the squares and rings; subdivision and the chair carry supporting comparisons. Its tokens opt into `lesson:true`; other placements retain their existing behavior. Controls are physical push buttons arranged three across in two rows on a 1.12 m-wide desk. Each control is within 0.8 m of the same nominal reach point. The 1.18 × 0.36 m readout uses one transparent plane (14% opacity), a thin frame and opaque outlined text; it is tilted 35 degrees. Button touch targets retain their original size. RULE reveals the explanation; all four start waiting for input.
+
+## 1. One self-call
+
+`algorithms/fractals/example_8_2_recursion_vr.gd` draws one square and calls `_draw_recursive_pattern` once with `size * size_reduction` and `d - 1`. The initial size in this hall is 2.2 m; the ratio is 0.5. The source returns when `d &lt;= 0` or `size &lt; 0.01`. MORE and LESS request depths 1–7, producing 1–7 square meshes at these settings. The smallest term at depth seven is 0.034375 m.
+
+LAYOUT switches between nested and abreast arrangements. COLLAPSE changes all drawn sizes to the last term&#x27;s size. It preserves the number of generated squares and the mathematical term list; consequently the readout says *smallest term*, not visible footprint. This tail recursion can also be expressed iteratively. A nested image is not proof of a recursive implementation.
+
+### The same terms at body scale
+
+Only the square token in this hall carries `room:thresholds`. The optional `commons/artifacts/recursion_lesson/threshold_walk.gd` reads the existing executor&#x27;s `_terms()`; it does not calculate another recursive sequence. MORE, LESS and BEGIN update both receivers. LAYOUT and COLLAPSE affect the original image only: the physical frames retain the mathematical terms. A size-cutoff return also limits the room, even if requested depth is larger.
+
+The outer square sides are 2.2, 1.1, 0.55, 0.275, 0.1375, 0.06875 and 0.034375 metres. Their centres follow the central aisle at x=8.5, z=4.5 through 10.5, with every base on the floor. These one-metre placement intervals are authored spacing. Side posts and lintels have collision; the bottom edge is a shallow visual inlay with no raised sill. Clear widths/heights subtract the frame bars: the first opening is 2.09 m wide and 2.145 m high, the second 0.99 m wide and 1.045 m high.
+
+Controlled native desktop walking passes the first opening, meets the second lintel, steps aside and returns to the central aisle beyond the seventh frame. The collection remains reachable. This is a standing-body comparison, not a claim that no crouching or smaller body can enter. Human headset reach, comfort and Quest performance still require testing. Ordinary lesson placements and all three other desks receive no doorframes.
+
+
+## 2. Four self-calls
+
+`algorithms/fractals/example_8_3_recursion_circles_vr.gd` draws a ring and calls itself at four shifted centres in the XY plane, each with a smaller radius and one fewer level. For the desk&#x27;s depths, the population is `(4^d - 1) / 3`: 1, 5, 21, 85, 341. The outer radius is 2 m. PACKING cycles fused 0.6, contact 0.5, open 0.35, dust 0.25; at DUST and depth five, the requested fifth-level radius is 2 × 0.25⁴ = 0.0078125 m, below the 0.01 m cutoff, so only 85 rings are generated. All four packings generate 85 at depth four.
+
+The lesson fixture initially turns the native horizontal TorusMesh into the XY plane. This display orientation does not move the recursively generated centres. TURN returns to the source&#x27;s tumbling orientation and rotation speed 0.3; stopping restores the face-on comparison. The source&#x27;s periodic ten-second pause still operates while turning. Packing and depth changes reset the display pose for comparison.
+
+## 3. Choose one cell
+
+`algorithms/fractals/cubesubdivision/cube_subdivision.gd` subdivides **one selected cell per step**. It removes one and adds eight; after `s` splits there are `1 + 7*s` extant cells. This is not uniform eight-way subdivision of the whole population. Twelve steps leave 85 cells.
+
+DRILL selects the fixed corner of the newest litter. SPREAD selects a shallowest extant cell. LOTS selects from the population using the private random generator seeded with 31415. Changing mode restarts; BEGIN replays that mode from the same seed. The initial transform is preserved by `_rebuild()`; the old `reset()` method is not used because it clears all cells without rebuilding the initial cube.
+
+```gdscript
+var new_scale = cube_scale * 0.5 * 0.9
+var offset = cube_scale.x * 0.25
+```
+
+A child is 0.45 times its parent&#x27;s scale. The gap is a display choice. DRILL reaches depth 12 in twelve steps; SPREAD reaches depth 3. Equal extant counts do not imply equal distributions of detail. The readout counts tracked extant cells, not queued nodes waiting to be freed at the end of a frame.
+
+## 4. An authored chair
+
+`algorithms/fractals/cubesubdivision/recursive_chair.gd` runs five construction stages under NEXT: cut and lift, flatten seat, extend legs, extend back, add armrests. The first stage divides a 1.5 m cube into a 3×3×3 lattice, assigns 4 leg cells, 9 seat cells and 3 back cells, and excludes 11. It also lifts the lattice by 0.75 m relative to the original centre. The completed model contains 20 kept parts after adding four armrest/support parts.
+
+GHOST and SCAR instantiate the 11 removed positions; GONE hides them. Switching visibility replays the current deterministic construction stage so its retained geometry stays consistent. BEGIN resets to the original cube. NEXT stops at five rather than appending repeated armrests. These are authored stages, not a recursive self-call. The model is an exhibit; the text does not promise a functional seat.
+
+## Space and continuation
+
+The map uses its authored 17×25 layout in the endless museum, with a continuous floor, three-cell entrance and exit, a central aisle and four desks. Main artifacts keep scale 1 so the metre-based controls remain reachable. The table and staircase are displayed beyond them; the pagoda is raised and reduced to clear the floor. The independent science-screen sample is not a live recursion profiler. All ten prior artifact tokens are retained.
+
+The opt-in fixture suppresses standalone directional lights inside this hall, retaining shared museum lighting and local lamps. The desks reuse `commons/artifacts/timing_machines/machine_stage.gd` and the project&#x27;s physical push button. `commons/artifacts/recursion_lesson/recursion_lesson.gd` connects controls to the original implementations.
+
+Next: Fractal_RecursiveTrees. Carry the function, its parameters and its stopping conditions; investigate how a branching call places and transforms its children.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_Recursion/intent.md">Raw captured source</a></p><pre># Where does “again” spend itself?
+
+First hall of Fractals, following CA_EdgeOfChaos and leading to Fractal_RecursiveTrees. The previous hall compared neighbouring exchanges; this one inspects instructions that ask for another call. A finite recursive construction is the starting encounter, not evidence that the room contains an infinite fractal.
+
+Four manuscript encounters carry different questions; the squares and rings are the two promoted primary works. The nested squares separate a depth allowance, a minimum size and what an eye can resolve. The rings make four descendants per call, so another level has another cost. Subdivision spends the same twelve splits by DRILL, SPREAD or LOTS; selection distributes the detail. The chair keeps and discards cells, then transforms and adds parts through five authored stages. Its name does not make those stages self-calls.
+
+The critical opening lies in allocation and recognition: where does the next operation go, what becomes hard to distinguish, and which chosen arrangement becomes a chair? Keep the supporting collection available for other readings. The dark sphere is a secondary remnant, not the chapter&#x27;s organizing work. Object count is not an entropy measurement; resemblance does not establish topology or implementation.
+
+Continue by giving branches positions, directions and lengths. The first desk now shares its actual shrinking terms with a row of floor-standing doorframes. The body passes the first and meets the next while the instruction still has levels to spend. An ordinary route alongside returns to the collection. The desk image, mathematical stopping conditions and bodily clearance give different answers to “where does it stop?” Keep those differences available; do not present the frames as proof of infinite detail or universal bodily limits. The earlier intent is preserved in the opening-review baseline, rather than treated as a report of installed behavior.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_Recursion/critical.md">Raw captured source</a></p><pre># Where does again spend itself?
+
+The opening hall makes three budgets available for comparison: the number of operations we request, the geometry they leave behind, and the distinctions a visitor can actually perceive. These are related without being interchangeable. Seven stored squares remain seven when COLLAPSE makes them coincide. Eighty-five rings and eighty-five cells are equal populations produced by different operations. A twelve-level drill can invest most of its attention in details the visitor can barely distinguish.
+
+That difference matters to the book&#x27;s question, *what bodies are possible?* A stopping condition is part of a body&#x27;s production. The square&#x27;s one-centimetre minimum and seven-level desk limit are authored constraints. They are not universal boundaries of recursion, perception, or a particular headset. Removing them would change the workload; it would not automatically produce a richer encounter.
+
+Selection is equally consequential. DRILL repeatedly chooses a corner of the newest litter. SPREAD chooses from the shallowest cells. LOTS uses a seeded draw from the extant population. Each distributes the same twelve-step allowance differently. A budget does not decide its own allocation. This is a concrete place to ask what an apparently neutral implementation gives attention to, and what it leaves comparatively undifferentiated.
+
+The chair exposes a more explicit prior. Sixteen of twenty-seven cells receive roles associated with legs, seat and back. Eleven fail that role test. GHOST makes the exclusions available again, but the completed chair also requires translation, deformation and new parts. The artifact&#x27;s name does not establish a recursive implementation: its present code executes five authored stages. Nor does a cube contain a uniquely discoverable chair. It supports a construction whose choices could have been otherwise.
+
+The queer possibility here is an invitation to investigate those choices. A leg could be kept where the recipe removes a cell; a seat could have a different orientation; an apparently wasted operation could become the principal encounter. Those alternatives are questions for further construction, not implemented modes of this desk. Keeping the actual controls distinct from possible extensions lets the text remain hospitable to discovery without pretending the experiment is already done.
+
+There is also a limit to the room&#x27;s language. Object count is not an entropy measurement. More overlap is not automatically more topological complexity. These finite displays show geometry, allocation, visibility and authored roles. Later halls can test connectivity and bodily passage directly. Here we learn to notice when an image, an implementation and an explanation have begun to say different things.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_Recursion/artifacts.md">Raw captured source</a></p><pre># Fractal Recursion — the installed collection
+
+Ten authored works remain. The manuscript develops four encounters; the core registry identifies the squares and rings as primary. The doorframes are a second receiver attached to the existing square study, not an eleventh artifact or a separate solver. Coordinates below are authored grid cells (x, z).
+
+| Work | Cell | Contribution |
+| --- | --- | --- |
+| `fractal_recursion_2` | (4, 5) | Primary. One self-call, halved sizes, stopping conditions. The same term list becomes doorframes: a standing body meets a limit before the function does. |
+| `example_8_3_recursion_circles_vr` | (12, 5) | Primary. Four calls per ring; count, packing and the size cutoff expose different costs. |
+| `cube_subdivision` | (4, 11) | Supporting encounter. Spend twelve splits by DRILL, SPREAD or LOTS. One selected cell becomes eight; children have 0.45 of the parent scale, including the authored gap. |
+| `recursive_chair` | (12, 11) | Supporting encounter. Five authored stages select, transform and add parts. GHOST/SCAR/GONE expose what was discarded. Its name does not imply a self-call. |
+| `science_screen` | (2, 14) | Secondary. An independent sample, not a live profiler of these demonstrations. |
+| `dark_sphere` | (14, 15) | Secondary remainder. Retained, without making it the chapter&#x27;s organizing evidence. |
+| `recursive_table` | (4, 17) | Supporting collection. An authored furniture construction available for comparison with the chair. |
+| `cube_staircase` | (12, 17) | Supporting collection. A constructed staircase form, not a promised player route. |
+| `fibonacci_pagoda` | (4, 22) | Supporting collection. Tiered scale and repetition beyond the four desks. |
+| `synthesis_stand` | (12, 22) | Secondary presentation with `dark_sphere` subject. |
+
+`recursive_boolean_cube` appeared in the earlier inventory but is not placed in this hall. Its prior listing is preserved in the recursion-thresholds review folder. No work was removed to make this inventory agree with the map.
+
+The first frame starts at hall-relative (8.5, 0, 4.5). Further frames follow the aisle at one-metre intervals. The side route is part of the encounter: a rule can keep producing smaller openings without requiring the visitor to keep going through them.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_Recursion/summary.md">Raw captured source</a></p><pre># Fractal Recursion — the cost of again
+
+Carry in arrays, transformations and cellular automata&#x27;s distinction between a local rule and the form it produces. Four principal artifacts now expose four different operations: a single self-call; four branching self-calls; the repeated subdivision of one selected cell; and an authored construction sequence.
+
+The learner acts before opening RULE. Actual counts, depth and removal markers allow comparisons at a fixed budget. Changing an arrangement need not change the number of objects; the same number of objects need not make the same form. All ten existing works remain in the hall, with the rest of the collection available beyond the four desks.
+
+Carry forward the self-call, its parameters and its stopping conditions into Fractal_RecursiveTrees. Do not infer a recursive implementation from an object&#x27;s appearance or name.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_Recursion/blurb.md">Raw captured source</a></p><pre>How many times can again happen? Add a square, multiply rings, choose which cube divides, and uncover the cells excluded from a chair. Four desks make the operation and its cost available to inspection.
+</pre></section></body></html>

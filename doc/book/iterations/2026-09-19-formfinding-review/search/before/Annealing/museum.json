@@ -1,0 +1,83 @@
+{
+  "approaches": [
+    {
+      "hits": [],
+      "point": "(7.8, 1.05, 2.5)",
+      "token": "energy_landscape_bench"
+    },
+    {
+      "hits": [],
+      "point": "(11.8, 1.05, 2.5)",
+      "token": "simulated_annealing"
+    },
+    {
+      "hits": [
+        "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/Collision"
+      ],
+      "point": "(-0.8, 1.05, 2.5)",
+      "token": "max_q_basin_room"
+    }
+  ],
+  "checks": [
+    {
+      "message": "actual authored museum hall loads",
+      "ok": true
+    },
+    {
+      "message": "all authored artifacts instantiate: 4",
+      "ok": false
+    }
+  ],
+  "hall": "FormFinding_Annealing",
+  "headset_tested": false,
+  "inventory": [
+    {
+      "extent": "[P: (6.15, 0.0, 1.95), S: (0.7, 0.7, 1.1)]",
+      "labels": [
+        "IT FINDS THE NEAREST VALLEY, NOT THE DEEPEST"
+      ],
+      "position": "(6.5, 0.0, 2.5)",
+      "rotation": "(0.0, 90.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "energy_landscape_bench"
+    },
+    {
+      "extent": "[P: (9.559999, 0.0, 1.46), S: (1.9228, 1.003279, 1.86)]",
+      "labels": [
+        "T=84.63  E=20.756  best=4.774  [RUNNING]  iter=26",
+        "accept=96.2%  improve=14  reject=1  moves=26",
+        "ADAPTIVE  rate=0.910  window_accept=96.2%  target=44%  hops=0",
+        "",
+        "0.5",
+        "TEMP",
+        "0.5",
+        "COOL"
+      ],
+      "position": "(10.5, 0.0, 2.5)",
+      "rotation": "(0.0, 90.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "simulated_annealing"
+    },
+    {
+      "extent": "[P: (-0.03, 0.0, -0.03), S: (5.06, 1.05, 5.060001)]",
+      "labels": [
+        "DEAD WELL\ndeep · narrow · one frozen shape",
+        "ALIVE WELL\nshallow · wide · keeps re-finding",
+        "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST"
+      ],
+      "position": "(2.5, 0.0, 2.5)",
+      "rotation": "(0.0, 270.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "max_q_basin_room"
+    },
+    {
+      "extent": "[P: (8.32, -0.03332, 7.93), S: (0.200001, 2.35332, 3.14)]",
+      "labels": [],
+      "position": "(8.5, 0.0, 9.5)",
+      "rotation": "(0.0, 90.0, 0.0)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "token": "science_screen"
+    }
+  ],
+  "player_position": "(7.5, 0.000683, 1.5)"
+}

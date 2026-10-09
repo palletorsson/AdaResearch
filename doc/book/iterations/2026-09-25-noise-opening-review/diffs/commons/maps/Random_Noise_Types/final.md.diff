@@ -1,0 +1,13 @@
+--- before/commons/maps/Random_Noise_Types/final.md
++++ commons/maps/Random_Noise_Types/final.md
+@@ -51,7 +51,9 @@
+ 
+ Only the first 220 refusals receive grey bodies. The full refusal count continues beyond them. Even the display of what was excluded has an exclusion of its own, and this time we can read its limit.
+ 
+-Return LOAD to 24, then press RULE. The right frame gathers toward its centre. This setting makes Gaussian draws for each coordinate and clamps their tails to the frame. It applies no pair-distance test. Shells may already be red before you touch anything. They now show a reference distance that the generator never promised to preserve. A crowded centre and a spacing rule are different ways of making a cloud; the names alone cannot tell us how either was made.
++Return LOAD to 24, then press RULE. The right frame gathers toward its centre. This setting makes Gaussian draws for each coordinate and clamps their tails to the frame. It applies no pair-distance test.
++
++Shells may already be red before you touch anything. They now show a reference distance that the generator never promised to preserve. A crowded centre and a spacing rule are different ways of making a cloud; the names alone cannot tell us how either was made.
+ 
+ Return to the spaced rule. Carry a point into another's shell.
+ 

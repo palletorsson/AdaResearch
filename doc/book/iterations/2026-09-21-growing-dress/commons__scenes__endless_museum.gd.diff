@@ -1,0 +1,35 @@
+--- before/commons/scenes/endless_museum.gd
++++ current/commons/scenes/endless_museum.gd
+@@ -15650,13 +15650,28 @@
+ 	print("[em-costume] the walker is dressed — halls will hang their own trophies")
+ 
+ 
+-## Which chapter the walker is standing in, by the segment spans the museum
++## Which chapter the active desktop or VR visitor is standing in, by the spans the museum
+ ## already keeps. Cheap: a handful of float compares, and only on a change does
+ ## anything happen.
+ func _costume_walk() -> void:
+-	if _wardrobe == null or not is_instance_valid(_wardrobe) or _player == null:
+-		return
+-	var z: float = _player.global_position.z
++	if not _costume_on or _studio or _bake_mode:
++		return
++	if _vr:
++		var head: Camera3D = _vr_eye()
++		if head == null:
++			return
++		if not is_instance_valid(_wardrobe) or not _wardrobe.call("wears_head", head):
++			_wardrobe = null
++			_costume_hall = ""
++			for candidate in get_tree().get_nodes_in_group("costume_wardrobes"):
++				if candidate.has_method("wears_head") and candidate.call("wears_head", head):
++					_wardrobe = candidate
++					break
++	elif not is_instance_valid(_player):
++		return
++	if not is_instance_valid(_wardrobe) or not is_instance_valid(_wardrobe.get("costume")):
++		return
++	var z: float = _eye_pos().z
+ 	var here: String = ""
+ 	for sv in _segments:
+ 		var sd: Dictionary = sv

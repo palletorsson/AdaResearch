@@ -1,0 +1,135 @@
+{
+  "status": "Introduction, F and E reviewed; Lambda next",
+  "summary": "The laboratory now names Queer Free Energy Principle and Self-Q from the research documents. Introduction keeps different arrangements with a similar total; F changes a prediction while its bits remain fixed; E closes and reopens branches while exposing what its count includes. Q asks who may revise those terms. These are inspectable encounters and an ethical research proposal, not a numerical proof of freedom. Seven of eight declared halls remain authored; Sandbox is still to restore.",
+  "items": [
+    {
+      "title": "The outline remembers what the total cannot",
+      "description": "KEEP retains one arrangement while you move the four controls. A pale outline stays beside the current coloured shape, and the readout shows the retained total and difference. The diagram can disagree while the number agrees.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-kept-a.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-current-b.png"
+      ],
+      "captions": [
+        "Keep A: F 0.4, E 0.2, lambda 0.5, phi 0.5. Total 0.450.",
+        "Change to B: F 0.6, E 0.6. Total 0.450 again; A remains as a pale outline."
+      ],
+      "image_note": "Same camera, two states of the actual revised Godot museum. These are not before/after software versions. The test operates the existing KEEP button signal and slider components; tracked hands remain untested.",
+      "text_kind": "book — preserve the question, strengthen its encounter",
+      "before": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Then try changing another control to return the result towards its earlier value. Look for two configurations that look different on the axes but give nearly the same total.",
+      "after": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Press KEEP. A pale outline holds that arrangement while your next movements redraw the coloured shape.\n\nNow try changing two controls to return the result towards the kept total. Look for two configurations that look different on the axes but give nearly the same number. The outline remembers what the total cannot.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/final.diff",
+      "report_label": "Exact introduction manuscript diff"
+    },
+    {
+      "title": "A handle can move without changing this total",
+      "description": "The chapter’s existing zero-weight experiment stays. With lambda at zero, the E vertex moves but its contribution to the total is zero. The saved shape makes the movement visible. The controls also state their domains; the colour names a nearest authored example rather than a detected physical phase.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-low.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-high.png"
+      ],
+      "captions": [
+        "Lambda zero, E 0.1. Keep this arrangement: total 0.550.",
+        "Lambda still zero, E 0.9. Another shape; total still 0.550."
+      ],
+      "image_note": "The unchanged total is a property of this expression. It does not establish that entropy or change has disappeared from the surrounding room.",
+      "text_kind": "book — names and ranges belong to particular instruments",
+      "before": "The named phase on the display is selected by comparing the knob arrangement with authored reference configurations. A changing name therefore reports proximity to a project example; it does not announce an experimentally detected physical phase transition.",
+      "after": "All four rails on this console run from zero to one. Its phi is a nonnegative weight; the separate phi rail nearby, and the later Phi hall, also allow negative values. A familiar symbol does not guarantee the same range. Read the rail as well as the letter.\n\nThe display says “nearest project reference.” Its name and colour come from comparing your arrangement with seven authored examples. A name can change while you are still moving the same four handles. Watch when it changes: the border between two reference examples is a choice made in the comparison, not an experimentally detected physical phase transition.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/QFEP_Introduction-runtime.json",
+      "report_label": "21 control checks and five walking routes"
+    },
+    {
+      "title": "Preserve the introduction’s ecology",
+      "description": "The workbench and formula face the entrance, with the blocked exit cleared. All eleven placed artifact families remain. Supporting notes distinguish implemented behaviour from retained proposals for memory projections and a responsive room. The existing large wave screen and synthesis stand still need later attention. The following F hall has now been restored, as shown below.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md",
+      "report_label": "Findings, decisions, full-hall image and limits"
+    },
+    {
+      "title": "F Term: same uncertainty, whose mistake?",
+      "description": "A fixed seed gives 256 stored draws. Changing p re-thresholds them. EXPECT 0 marks each one as a miss. The entropy curve gives the same height at p=0.1 and p=0.9; this particular predictor does very differently. The main chapter’s proposed experiment now exists in the museum.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-low-zero.png",
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-zero.png"
+      ],
+      "captions": [
+        "p=0.1, EXPECT 0: source H≈0.469; 27 observed misses in 256 cells.",
+        "p=0.9, EXPECT 0: source H≈0.469; 230 observed misses in 256 cells."
+      ],
+      "image_note": "Same camera, actual Godot museum. Amber underlines mark errors in the displayed sample. Expected percentages and observed counts are shown separately. H is a source quantity, not the measured encoding length of this grid.",
+      "text_kind": "book — the proposed predictor becomes an encounter",
+      "before": "Imagine a predictor that always expects zero. It would usually succeed near one end of the rail and usually fail near the other, although the entropy can be the same at those two settings. The example separates uncertainty in a source from mismatch between a source and a particular predictor.",
+      "after": "Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compare p near 0.1 with p near 0.9 again. The entropy returns to almost the same height, but the mistakes spread. The source is no more uncertain; this predictor is less suited to it.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/final.diff",
+      "report_label": "Exact F Term manuscript diff"
+    },
+    {
+      "title": "Improve the prediction without changing the world",
+      "description": "Keep p at 0.9 and press EXPECT 1. The bit colours and positions stay fixed. Their amber marks change sides, and observed misses fall from 230 to 26. This is an explicit mismatch count for a simple predictor; the screen does not claim to measure variational free energy.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-zero.png",
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-one.png"
+      ],
+      "captions": [
+        "EXPECT 0: 230 misses. The source and sample are held fixed for the next image.",
+        "EXPECT 1: 26 misses. The same bits meet a different expectation."
+      ],
+      "image_note": "26 runtime assertions and five selected walking routes pass. 70 content/preservation checks pass. This tests the control signals and calculations in the museum, not tracked hands or learner understanding.",
+      "text_kind": "book — the critical question grows from the comparison",
+      "before": "The next useful addition would display that predictor’s expectations and errors beside the grid. It could then change its expectations while the source stays fixed. A learner would see whether improvement came from an easier world or from a better model of it.",
+      "after": "Leave p near 0.9 and press EXPECT 1. Keep your eye on the bits, not only the number. Their colours stay; the amber marks change sides. You have improved this predictor’s performance without making the world easier.\n\nThe screen distinguishes expected errors under the chosen probability from mistakes counted in this particular grid. They need not agree exactly. The smaller experiment is enough to ask something consequential: when we call a world difficult, whose expectation is meeting it?\n\nHere you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/QFEP_F_Term-runtime.json",
+      "report_label": "Controls, sample counts and route evidence"
+    },
+    {
+      "title": "The missing hall returns, with its puzzles",
+      "description": "F Term now stands between Introduction and E Term in both museum plans. All eight map works are retained. Two old puzzle names were preventing their scenes from loading; active names restore the same octahedron and tetrahedron works. The decorative dark sphere remains outside the chapter’s argument. The E hall is reviewed below; Sandbox remains the route gap.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/SUMMARY.md",
+      "report_label": "Findings, decisions, full-hall image and limits"
+    },
+    {
+      "title": "What QFEP means — from the project documents",
+      "description": "QFEP means Queer Free Energy Principle. The research notes ask that a model’s terms remain revisable while what it leaves out retains the capacity to act. Self-Q brings the question back to the maker and the museum: what do our own structures teach us to notice? The introduction now includes both, with document footnotes. The reading note links the sources and separates the ethical proposal from the teaching arithmetic.",
+      "text_kind": "Introduction — the project’s definition enters the book",
+      "before": "This is an operational introduction to the project’s QFEP expression, QFE = F − λE(S) + φΔE(S,t). F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change. The console lets you inspect that arithmetic. It does not measure these quantities from a living system, and its fixed change value is not an observed rate.",
+      "after": "QFEP stands for **Queer Free Energy Principle**. Ada uses the name to ask something of a model as well as something through it: whose persistence does it support, which differences can it notice, and who may change its terms? In the project’s research documents, Q keeps those terms open to revision while protecting the capacities of what the model leaves out to live, act and answer back. More entropy is not, by itself, more freedom. A boundary can shelter a body; opening it can also expose that body to harm.[^qfep]\n\nThe documents call the return of this question to the maker **Self-Q**. A structure teaches its maker what to notice next. After enough time with these four rails, we may begin looking only for things that fit them. What have they made thinkable? What have they made harder to think? What continues beyond their reach? The museum must be able to ask this of its own rooms, including this one.[^self-q]",
+      "report": "doc/book/iterations/QFEP_READING.md",
+      "report_label": "Read the QFEP definition and source guide"
+    },
+    {
+      "title": "E Term: a closure has consequences upstream of the count",
+      "description": "OPEN holds 81 endings. PRUNE closes 18 branches at the third level, removing 54 later endings and leaving 27. Amber caps mark where continuation stops. The existing pruned prospect is now visitor-selectable. The gallery retains its seven placed works, with a level approach and side passages.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-e-term-review/fan-open.png",
+        "doc/book/iterations/2026-09-20-qfep-e-term-review/fan-pruned.png"
+      ],
+      "captions": [
+        "OPEN: 81 leaves; H≈4.39 nats under equal leaf weights.",
+        "PRUNE: 27 leaves; 18 branch closures remove 54 endings."
+      ],
+      "image_note": "Same camera, actual Godot museum. Thinner branches and separated leaf markers make the count visible. The fan assumes equal weights; it does not measure visits or moral value.",
+      "text_kind": "E Term — the proposed extension becomes an encounter",
+      "before": "Now choose a branch and imagine it being closed. Distinguish an option that was available and then prohibited from an option never drawn at all. A picture of the permitted future can hide the history of how the permissions were chosen. Counting its leaves cannot recover those omitted alternatives.\n\nFor a proposed extension, let visitors mark one closed path and preserve its outline. The fan could then show both the current count and the choices excluded from it, instead of making absence look inevitable.",
+      "after": "Press PRUNE. Amber caps appear where branches stop. The fan has twenty-seven leaves now, where OPEN offered eighty-one. Eighteen closures remove fifty-four endings: a cut made earlier takes several later possibilities with it. Follow one of the amber stops. You can see where continuation was refused, even though the missing subtree is no longer drawn.\n\nThis is where QFEP’s Q reaches into the diagram. Who drew the tree? Who can request another branch, or refuse the condition for reaching it? The project’s research documents ask that what a model leaves out retain the capacity to challenge and change its terms.[^q] Our four buttons still belong to a tree someone else specified. You can reopen it. You cannot yet ask it to grow otherwise.",
+      "report": "doc/book/iterations/2026-09-20-qfep-e-term-review/final.diff",
+      "report_label": "Exact E Term manuscript diff"
+    },
+    {
+      "title": "Reopening is easy here. Changing the rule is still another question.",
+      "description": "OPEN restores the same authored fan. It does not let a visitor invent a new kind of ending, and it models none of the losses that real closure can leave behind. The chapter keeps that limit as an invitation. A protective boundary may sustain a vulnerable body; counting more leaves cannot decide what care requires.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-e-term-review/fan-pruned.png",
+        "doc/book/iterations/2026-09-20-qfep-e-term-review/fan-reopened.png"
+      ],
+      "captions": [
+        "A visible stop carries the trace of an excluded continuation.",
+        "The same 81 endings return at a button press."
+      ],
+      "image_note": "31 runtime checks, five selected walking routes and 78 content/preservation checks pass. Headset reach, reading comfort and learner understanding remain pending. A pre-existing secondary microstate-counter formatting error is recorded for follow-up.",
+      "text_kind": "E Term — an easy reset meets a harder question",
+      "before": "For a proposed extension, let visitors mark one closed path and preserve its outline. The fan could then show both the current count and the choices excluded from it, instead of making absence look inevitable.",
+      "after": "Press OPEN again. Here the same endings return at a touch. Outside this little machine, reopening a route may not restore the lives or histories lost when it closed. The ease of the button is part of the experiment’s limit.\n\nKeeping every branch open is not automatically care. A closure might protect a place in which a more vulnerable body can continue. The count cannot decide that for us. Stay with the difference between more endings on a screen and more ways to live.",
+      "report": "doc/book/iterations/2026-09-20-qfep-e-term-review/SUMMARY.md",
+      "report_label": "Findings, full-hall image, exact Introduction diff and limits"
+    }
+  ]
+}

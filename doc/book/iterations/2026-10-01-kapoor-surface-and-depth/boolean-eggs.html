@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boolean eggs — Kapoor / surface and depth</title>
+  <style>
+    :root { color-scheme: dark; --ink:#eeeaf4; --muted:#b3adbf; --plum:#563564; --blue:#394c91; --teal:#24716b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(ellipse at 50% 0%, #242039, #11121b 62%); color:var(--ink); font:16px/1.6 system-ui,sans-serif; }
+    main { width:min(960px, calc(100% - 40px)); margin:0 auto; padding:64px 0 84px; }
+    .eyebrow { color:#c5a9d2; text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; }
+    h1 { font:500 clamp(2.7rem, 8vw, 5.8rem)/.98 Georgia,serif; letter-spacing:-.04em; max-width:800px; margin:.5rem 0 1.2rem; }
+    .lead { color:#d5d0dc; font:1.25rem/1.55 Georgia,serif; max-width:690px; }
+    figure { margin:38px 0 15px; padding:16px; border:1px solid #ffffff20; background:#0b0c1499; border-radius:18px; }
+    svg, figure img { display:block; width:100%; height:auto; }
+    figure img { border-radius:8px; }
+    .captures { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+    .captures figure { margin-top:6px; }
+    summary { cursor:pointer; color:var(--muted); }
+    figcaption,.note { color:var(--muted); font-size:.9rem; }
+    .ops { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0 36px; }
+    .op { padding:16px 18px; border:1px solid #ffffff20; border-radius:12px; background:#ffffff08; }
+    .op strong { display:block; letter-spacing:.12em; font-size:.78rem; }
+    .op p { color:#cbc6d2; margin:.45rem 0 0; font-size:.94rem; }
+    h2 { font:500 1.8rem Georgia,serif; margin-top:38px; }
+    a { color:#d5c1f1; }
+    code { color:#d4c1f4; overflow-wrap:anywhere; }
+    .note { padding:13px 16px; border-left:2px solid #9d73c1; background:#ffffff08; }
+    @media(max-width:650px) { .ops { grid-template-columns:1fr; } main { padding-top:40px; } }
+  </style>
+</head>
+<body>
+<main><p class="note">Installed in Boolean Works: <a href="../2026-10-01-boolean-eggs-in-the-spine/index.html">see the current museum bay and book passage</a>. The photographs below preserve the earlier standalone lighting study.</p>
+  <div class="eyebrow">Boolean surfaces · companion study</div>
+  <h1>Three eggs, three ways to leave a body.</h1>
+  <p class="lead">A Boolean operation is a decision about relation. Join two volumes; keep only where they meet; or let one form cut an inside into another. The egg gives these operations a body we can read at a glance.</p>
+  <section id="godot">
+    <h2>Inside Godot</h2>
+    <p>Three native captures from the authored companion scene, rendered in Godot 4.6. The halo stands behind the forms; the cut interior is a real concavity whose material suppresses reflected light.</p>
+    <figure>
+      <a href="figures/eggs-front.png"><img src="figures/eggs-front.png" alt="Godot front view of plum union, indigo intersection, and teal subtraction eggs with a violet ring behind them" width="2000" height="1400"></a>
+      <figcaption>The three operations, with the scene's own lighting and captions.</figcaption>
+    </figure>
+    <div class="captures">
+      <figure><a href="figures/eggs-oblique.png"><img src="figures/eggs-oblique.png" alt="Angled Godot view of the three Boolean eggs on their plinth" width="2000" height="1400" loading="lazy"></a><figcaption>From the side: the shared volume becomes a narrow lens.</figcaption></figure>
+      <figure><a href="figures/eggs-cavity.png"><img src="figures/eggs-cavity.png" alt="Godot close-up of the teal egg and its unlit black concavity" width="2000" height="1400" loading="lazy"></a><figcaption>The dark opening. Captions are hidden only for this detail; geometry and lighting are unchanged. CSG faceting is still visible around the rim.</figcaption></figure>
+    </div>
+    <p class="small">Desktop companion scene, captured at 2000 × 1400 using the Compatibility renderer. This is not yet an assembled museum or headset capture. <a href="figures/eggs-provenance.json">Capture provenance</a>.</p>
+  </section>
+  <details><summary>Earlier concept diagram</summary>
+  <figure>
+    <svg viewBox="0 0 900 385" role="img" aria-labelledby="title desc">
+      <title id="title">Three deep-coloured Boolean egg forms</title>
+      <desc id="desc">A plum union of two ovoids, an indigo intersection shown as a luminous lens, and a teal egg cut by a dark concavity, with a faint violet ring behind them.</desc>
+      <defs>
+        <radialGradient id="plum"><stop stop-color="#a077af"/><stop offset=".45" stop-color="#704779"/><stop offset="1" stop-color="#30203f"/></radialGradient>
+        <radialGradient id="blue"><stop stop-color="#7f91d1"/><stop offset=".45" stop-color="#455aa0"/><stop offset="1" stop-color="#1d244b"/></radialGradient>
+        <radialGradient id="teal"><stop stop-color="#4d9b91"/><stop offset=".48" stop-color="#236963"/><stop offset="1" stop-color="#143b3d"/></radialGradient>
+        <radialGradient id="void"><stop stop-color="#03040a"/><stop offset=".72" stop-color="#070912"/><stop offset="1" stop-color="#343047"/></radialGradient>
+        <linearGradient id="pedestal" x2="0" y2="1"><stop stop-color="#f1edf5"/><stop offset="1" stop-color="#aaa5b5"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <ellipse cx="450" cy="184" rx="327" ry="147" fill="none" stroke="#8c70bc" stroke-opacity=".24" stroke-width="2" filter="url(#glow)"/>
+      <g fill="url(#pedestal)"><path d="M80 305h220l-17 23H97z"/><path d="M340 305h220l-17 23H357z"/><path d="M600 305h220l-17 23H617z"/></g>
+      <g stroke="#dfd8e6" stroke-opacity=".36" stroke-width="1.5">
+        <ellipse cx="184" cy="215" rx="54" ry="78" fill="url(#plum)" transform="rotate(-8 184 215)"/>
+        <ellipse cx="211" cy="186" rx="36" ry="54" fill="url(#plum)" transform="rotate(15 211 186)"/>
+        <ellipse cx="450" cy="211" rx="56" ry="79" fill="url(#blue)"/>
+        <ellipse cx="480" cy="210" rx="54" ry="74" fill="none" stroke="#bac5f4" stroke-width="15" stroke-opacity=".73"/>
+        <ellipse cx="710" cy="212" rx="54" ry="78" fill="url(#teal)"/>
+        <ellipse cx="710" cy="192" rx="28" ry="39" fill="url(#void)" stroke="#8b789d" stroke-opacity=".48"/>
+      </g>
+      <g fill="#e9e3ee" font-family="system-ui,sans-serif" font-size="14" letter-spacing="2" text-anchor="middle">
+        <text x="190" y="355">UNION</text><text x="450" y="355">INTERSECTION</text><text x="710" y="355">SUBTRACTION</text>
+      </g>
+    </svg>
+    <figcaption>Earlier concept diagram, retained for comparison with the Godot captures above.</figcaption>
+  </figure>
+  </details>
+  <section class="ops" aria-label="Boolean operations">
+    <div class="op"><strong style="color:#d1b1df">UNION</strong><p>Two ovoids meet and remain one joined volume.</p></div>
+    <div class="op"><strong style="color:#b7c5f2">INTERSECTION</strong><p>Only the shared volume survives: relation becomes a lens.</p></div>
+    <div class="op"><strong style="color:#a4dad2">SUBTRACTION</strong><p>A cutter opens a dark interior. The absent volume still gives the form its shape.</p></div>
+  </section>
+  <p class="note">“Transcendental” here is an atmosphere made from scale, color, and a quiet ring of light. The hole remains material geometry. Its darkness uses an ordinary Godot material, not Vantablack or Kapoor's pigment.</p>
+  <h2>Where this sits</h2>
+  <p>This is an original counterpoint to Anish Kapoor's inquiries into void and surface, not a copy of a particular work. In his account of <em>Descent into Limbo</em>, the floor opening reads like a black carpet; writing on the work also describes how a convex wall form can be paired with a concavity. This study borrows those questions of depth and measure, then turns toward Boolean operations. <a href="https://anishkapoor.com/180/in-conversation-with-john-tusa-2">Kapoor in conversation about <em>Descent into Limbo</em></a> · <a href="https://anishkapoor.com/9275/on-the-sublime-in-the-work-of-anish-kapoor-by-camile-van-winkle">Camile van Winkle on Kapoor and the sublime</a>.</p>
+  <p>The component is <code>res://commons/artifacts/kapoor_void_studies/boolean_eggs.tscn</code>; the standalone Godot preview is <code>res://commons/artifacts/kapoor_void_studies/boolean_eggs_preview.tscn</code>. The preview supplies the camera, environment, and three colored lights used in these captures. The project’s documented portable Godot executable was located and the captures completed without engine errors.</p>
+  <p><a href="index.html">Return to Kapoor: surface and depth</a> · <a href="BOOLEAN-EGGS.md">Read the study note</a></p>
+</main>
+</body>
+</html>

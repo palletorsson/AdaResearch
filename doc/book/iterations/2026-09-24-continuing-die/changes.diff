@@ -1,0 +1,405 @@
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -15805,6 +15805,43 @@
+         "size_group": "room_scale"
+       },
+       "description": "Paired rail carriages compare fresh positions with accumulated steps. Shared sampled input, advance targets, matched motor timing and a grabbable prediction marker."
++    },
++    "continuing_die": {
++      "lookup_name": "continuing_die",
++      "name": "The six that does not finish",
++      "scene": "res://commons/artifacts/continuing_die/continuing_die.tscn",
++      "category": "randomness",
++      "sequence": "randomness",
++      "map_sequences": [
++        "randomness"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "parameters": {
++        "footprint": [
++          3,
++          3,
++          3
++        ],
++        "size_group": "room_scale"
++      },
++      "description": "A grabbable physical die adds each settled face to a labelled column. Six permits another throw; a non-six closes the chain. Five throws is a visible display limit, with unfinished chains marked. Separate worked example: 6+6+3.",
++      "qfep_connection": "A result is both an amount and permission to continue. Distinguish the rule that permits further growth from the resource limit that interrupts it; retain the difference rather than naming both completion.",
++      "interactions": [
++        "Throw the die into its felt tray",
++        "Throw again after a six",
++        "Return a fallen die without changing the chain",
++        "NEW CHAIN clears the live column"
++      ],
++      "tags": [
++        "dice",
++        "conditional",
++        "accumulation",
++        "physical_outcome",
++        "continuation",
++        "exploding_dice"
++      ],
++      "complexity": "beginner"
+     }
+   }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -3,19 +3,20 @@
+     "primary_tokens": [
+       "dice_throw",
+       "paired_dice_column",
++      "continuing_die",
+       "coin_toss",
+       "random_object_spawner",
+       "random_edge_profile"
+     ],
+-    "reason": "A die, a paired sum and a coin retain different accounts of their throws; the heap forgets and the field holds one bounded arrangement.",
++    "reason": "A physical face becomes reward, part of a sum or permission to continue. Coin, heap and bounded field retain other consequences.",
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Cubes/final.md",
+-    "text_sha256": "4957b6db7bb52aaa977c322a0980b4dc22b9ae597d5708c5e50a32f247134c9c",
+-    "map_sha256": "c0a53172f72ec7a9d025b69e4c8b2fa364c15f8dc17bf5566f330baee4568098",
++    "text_sha256": "19fd20ec07102ed9971eb4c94a2e8bcf8753fe17c54f8f3579b18a68a84c764e",
++    "map_sha256": "3be60c2a723e240748a0684e98b0a58c414619d96f0e7459ebc7c050678f83f7",
+     "learner_verified": false,
+-    "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review.",
+-    "local_review": "doc/book/iterations/2026-09-24-paired-dice/index.html"
++    "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review. Continuing-die checks and isolated museum evidence: doc/book/iterations/2026-09-24-continuing-die/; controlled physical faces, fresh-release ownership, continuation, closure and explicit unfinished cap. No headset or fairness claim.",
++    "local_review": "doc/book/iterations/2026-09-24-continuing-die/index.html"
+   },
+   "Random_Game": {
+     "primary_tokens": [
+@@ -28,7 +29,7 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Game/final.md",
+-    "text_sha256": "7ebe94c86cb420a0864fcecd656aa1c38cb1d245998dc7b2f5569fa99c5bd760",
++    "text_sha256": "1afd7b95fe97e865002b8f4820d047211af3d12ebcc3babcbd79abde32ff7137",
+     "map_sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
+     "learner_verified": false,
+     "verification_scope": "Current source including previously omitted projectile dependency, plus qualified historical evidence. No new bodily crossing, headset or safety-performance validation.",
+--- before/commons/maps/Random_Cubes/final.md
++++ after/commons/maps/Random_Cubes/final.md
+@@ -36,6 +36,29 @@
+ 
+ <!-- @ -->
+ 
++<!-- @continuing_die -->
++
++## The six that does not finish
++
++A single die waits beside another column base. Throw it into the felt tray. Its number becomes a section of the column, one thin block for each pip. A three leaves three blocks and closes the chain. A six leaves six, but the flag stays raised. Throw again.
++
++This time the first section remains. Another six gives you twelve and another turn. A three after that makes fifteen and closes the chain. The small sculpture beside your tray keeps this example visible: six, six, three. Its label says WORKED EXAMPLE. It is there to show a possibility, not to tell you what you threw.
++
++The first die in this hall made a six into a larger rain of rewards. Here the same face does something else. It keeps an instruction open. Nothing inside the cube knows that six means again:
++
++```gdscript
++total += face
++closed = face != 6
++```
++
++The number enters twice: once as an amount, once as a condition. From the same six faces, the rule can build a body taller than any single throw. Look at the joins in the column. Its height has a history, and the sections still let you read it.
++
++The amber lid marks this display's limit: five throws. If the fifth is another six, the case reads CHAIN UNFINISHED. The rule would permit more; this apparatus has run out of room. That is a different ending from a die landing three.
++
++RETURN DIE recovers it without adding a throw. NEW CHAIN clears the live column. Until then, a closed or limited chain stays as it is even if you throw again. Before clearing it, walk around what those few landings have made. Where did the permission to keep growing reside?
++
++<!-- @ -->
++
+ <!-- @coin_toss -->
+ 
+ Across from the first die, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out.
+--- before/commons/maps/Random_Cubes/intent.md
++++ after/commons/maps/Random_Cubes/intent.md
+@@ -1,3 +1,8 @@
+ # Intent
+ 
+ A throw has conditions; a record keeps only some of its consequences. Let reward, frequency, order, disappearance and bounded variation become distinct encounters. Keep the beginner close to the die and the coin without mistaking symmetry or spectacle for fairness.
++
++
++## Continuation encounter — 24 September 2026
++
++Retain the existing encounters and add continuing_die at (2,5), facing into the first chamber. Book order: original die → paired sum → continuing die → coin → heap → bounded edge field. A six grants a further throw in the same additive chain; a non-six completes it. The fifth six reaches a visible display limit and is explicitly unfinished. A fixed, labelled 6+6+3 sculpture is a worked example, never live evidence. Compare a face, its reward, its contribution to a sum and its power to continue an instruction. No claim of fair independent throws is made from a visitor's physical release.
+--- before/commons/maps/Random_Cubes/map_data.json
++++ after/commons/maps/Random_Cubes/map_data.json
+@@ -721,7 +721,7 @@
+       [
+         " ",
+         " ",
+-        " ",
++        "continuing_die:180",
+         " ",
+         " ",
+         " ",
+--- before/commons/maps/Random_Cubes/technical.md
++++ after/commons/maps/Random_Cubes/technical.md
+@@ -192,3 +192,14 @@
+ RETURN DICE preserves the last column and history. CLEAR RECORD also cancels pending results and removes the record. A loose die below 18 cm or over 3 m from its tray returns after 0.7 seconds; a held die is never reclaimed. Recovery does not produce a throw. The ideal independent fair-dice model has a triangular sum distribution; physical throws do not automatically validate that model.
+ 
+ Review and native evidence: `doc/book/iterations/2026-09-24-paired-dice/`.
++
++
++## The continuing die — 24 September 2026
++
++`continuing_die` at (2,5), yaw 180, uses the unmodified `paired_die.gd` tray and its settled-orientation reader. The die is a production XRToolsPickable with desktop grab/drop hooks. No RNG picks a face, and no automatic reroll is performed. One fresh release arms one valid result; recovery alone never arms it.
++
++Each accepted face appends to a chain and adds to total. A face other than six closes the chain. A six permits another accepted throw unless five throws have already been retained. Five sixes produce total 30, a 2.7m column on a 0.14m base, and an explicit UNFINISHED state. A non-six on the fifth throw completes normally. Further results cannot change a closed or capped column until NEW CHAIN. The cap is a display budget, not a natural end or a claim about an unbounded stochastic process.
++
++One 9cm unit represents each pip; seams and labels retain individual throws. A separate fixed 6+6+3 column is marked WORKED EXAMPLE / NOT LIVE THROWS. It is not sampled, not a remembered player outcome and not mixed into live state. Column support collision follows the live sum. RETURN DIE preserves the chain. NEW CHAIN cancels pending results and clears the live column, retaining ownership if a hand holds the die. Fallen unattended dice return through the existing tray recovery.
++
++Evidence: `doc/book/iterations/2026-09-24-continuing-die/`. Controlled face-up physics drops exercise the production reader; event-only transaction cases are separately identified. These establish behavior, not uniformity, independence or a measured outcome distribution. Tracked-hand throwing and comfort remain pending.
+--- before/commons/maps/Random_Game/final.md
++++ after/commons/maps/Random_Game/final.md
+@@ -103,4 +103,6 @@
+ 
+ <!-- @ -->
+ 
++At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. These doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it.
++
+ The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
+--- before/commons/maps/sequences/randomness.json
++++ after/commons/maps/sequences/randomness.json
+@@ -130,13 +130,14 @@
+           "artifacts": [
+             "dice_throw",
+             "paired_dice_column",
++            "continuing_die",
+             "coin_toss",
+             "random_object_spawner",
+             "random_edge_profile",
+             "dark_sphere"
+           ],
+           "size_budget": "mixed",
+-          "rationale": "Read one throw, then combine two physical faces into one coloured column; compare the coin, changing heap and bounded field.",
++          "rationale": "One die rewards a face; paired dice compose a height; the continuing die turns six into permission for another throw. Coin, changing heap and bounded field retain different consequences.",
+           "grammar": "metropolitan"
+         },
+         {
+--- before/commons/artifacts/continuing_die/continuing_die.gd
++++ after/commons/artifacts/continuing_die/continuing_die.gd
+@@ -0,0 +1,195 @@
++extends Node3D
++## @identity
++## essence: a six becomes permission; the rule, not the die, continues
++## desire: another throw can build a taller body from the same six faces
++## truth: read settled physical orientation; worked example is separate from live evidence
++const Tray = preload("res://commons/artifacts/paired_dice_column/paired_die.gd")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++const MAX_THROWS := 5
++const UNIT_HEIGHT := 0.09
++const INK := Color(0.075,0.10,0.13)
++const PINK := Color(0.96,0.40,0.61)
++const BLUE := Color(0.25,0.76,0.89)
++const EXAMPLE := [6,6,3]
++signal chain_changed(state: Dictionary)
++var tray: Node3D
++var chain: Array[int] = []
++var total := 0
++var armed := false
++var closed := false
++var capped := false
++var live_column: Node3D
++var example_column: Node3D
++var status: Label3D
++var equation: Label3D
++var record: Label3D
++var gate: Node3D
++
++func _ready() -> void:
++	_box(self,"LiveBase",Vector3(0.20,0.07,-0.32),Vector3(0.56,0.14,0.56),INK,true)
++	_box(self,"ExampleBase",Vector3(0.92,0.07,-0.76),Vector3(0.52,0.14,0.52),INK,true)
++	live_column = Node3D.new()
++	live_column.name = "LiveColumn"
++	live_column.position = Vector3(0.20,0.14,-0.32)
++	add_child(live_column)
++	example_column = Node3D.new()
++	example_column.name = "WorkedExample"
++	example_column.position = Vector3(0.92,0.14,-0.76)
++	add_child(example_column)
++	_build_column(example_column,EXAMPLE,false)
++	_box(self,"ExampleCaption",Vector3(0.92,1.82,-0.73),Vector3(0.65,0.54,0.025),INK,false)
++	_label(self,"WORKED EXAMPLE\n6 + 6 + 3 = 15\nNOT LIVE THROWS",Vector3(0.92,1.82,-0.71),0.033)
++	for x in [-1.22,-0.17]:
++		_box(self,"CaptionPost",Vector3(x,0.82,-0.19),Vector3(0.025,1.64,0.035),INK,false)
++	_box(self,"LedgerCase",Vector3(-0.70,1.47,-0.17),Vector3(1.12,0.56,0.07),INK,true)
++	_label(self,"SIX / THROW AGAIN",Vector3(-0.70,1.67,-0.13),0.048)
++	record = _label(self,"",Vector3(-0.70,1.53,-0.13),0.028)
++	equation = _label(self,"",Vector3(-0.70,1.40,-0.13),0.052)
++	status = _label(self,"",Vector3(-0.70,1.28,-0.13),0.029)
++	# A visible open/closed arm answers the continuation rule; it is not a die gate.
++	gate = Node3D.new()
++	gate.name = "PermissionFlag"
++	gate.position = Vector3(-0.16,1.77,-0.14)
++	add_child(gate)
++	_box(gate,"Arm",Vector3(0,0.12,0),Vector3(0.025,0.24,0.025),PINK,false)
++	_box(gate,"Flag",Vector3(0.09,0.20,0),Vector3(0.18,0.09,0.025),PINK,false)
++	tray = Tray.new()
++	tray.name = "LiveDie"
++	tray.position = Vector3(-0.70,0,0.30)
++	tray.dice_color = Color(0.95,0.85,0.90)
++	tray.felt_color = Color(0.24,0.075,0.13)
++	tray.lifted.connect(_on_lifted)
++	tray.released.connect(_on_released)
++	tray.landed.connect(_on_landed)
++	tray.returned.connect(_on_returned)
++	add_child(tray)
++	var panel := Rack.create_panel("",[[{"type":"button","label":"RETURN DIE"},{"type":"button","label":"NEW CHAIN"}]],true)
++	panel.position = Vector3(-0.70,0.97,0.76)
++	panel.rotation_degrees.x = -65
++	panel.scale = Vector3.ONE*1.75
++	add_child(panel)
++	_box(self,"ControlShelf",Vector3(-0.70,0.86,0.73),Vector3(0.70,0.10,0.28),INK,true)
++	panel.find_child("Btn_0",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): tray.return_to_tray())
++	panel.find_child("Btn_1",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): new_chain())
++	_label(self,"LIVE CHAIN",Vector3(0.20,0.08,-0.029),0.038)
++	# This visible height limit is a budget, not a completed chain of sixes.
++	for y in [0.68,1.22,1.76,2.30,2.84]:
++		_box(self,"SixHeight",Vector3(0.51,y,-0.53),Vector3(0.08,0.014,0.014),INK,false)
++	_box(self,"LimitPost",Vector3(0.55,1.49,-0.53),Vector3(0.02,2.70,0.02),INK,false)
++	_box(self,"LimitCap",Vector3(0.20,2.86,-0.32),Vector3(0.56,0.025,0.56),Color(0.94,0.68,0.23,0.35),false)
++	_box(self,"LimitCaption",Vector3(0.20,2.96,-0.04),Vector3(0.78,0.16,0.035),INK,false)
++	_label(self,"5-THROW DISPLAY LIMIT",Vector3(0.20,2.96,-0.020),0.036)
++	_refresh()
++
++func _on_lifted() -> void:
++	armed = false
++
++func _on_released() -> void:
++	armed = not closed and not capped
++
++func _on_returned() -> void:
++	armed = false # Recovery is not a fresh throw.
++
++func _on_landed(face: int) -> void:
++	if not armed or closed or capped or face < 1 or face > 6: return
++	armed = false
++	chain.append(face)
++	total += face
++	closed = face != 6
++	capped = not closed and chain.size() >= MAX_THROWS
++	_build_column(live_column,chain,true)
++	_refresh()
++	chain_changed.emit(get_state())
++
++func new_chain() -> void:
++	armed = false
++	chain.clear()
++	total = 0
++	closed = false
++	capped = false
++	# If held, keep ownership with the hand; its next release starts the new chain.
++	tray._is_rolling = false
++	tray._settle_timer = 0.0
++	tray._still_armed = false
++	tray.return_to_tray()
++	_build_column(live_column,chain,true)
++	_refresh()
++	chain_changed.emit(get_state())
++
++func _refresh() -> void:
++	var terms := PackedStringArray()
++	for value in chain: terms.append(str(value))
++	record.text = "%d / %d THROWS" % [chain.size(),MAX_THROWS]
++	equation.text = "?" if chain.is_empty() else " + ".join(terms)+" = "+str(total)
++	if chain.is_empty(): status.text = "Throw into the tray"
++	elif capped: status.text = "LIMIT / CHAIN UNFINISHED"
++	elif closed: status.text = "CLOSED / NEW CHAIN to begin"
++	else: status.text = "SIX / THROW AGAIN"
++	gate.rotation_degrees.z = -90 if closed or capped else 0
++
++func _build_column(host: Node3D, values: Array, solid: bool) -> void:
++	for child in host.get_children():
++		host.remove_child(child)
++		child.queue_free()
++	var height := 0.0
++	for i in range(values.size()):
++		var value: int = values[i]
++		var segment := Node3D.new()
++		segment.name = "Throw_%d" % (i+1)
++		segment.position.y = height
++		host.add_child(segment)
++		var colour := PINK if value == 6 else BLUE
++		for unit in range(value):
++			_box(segment,"Unit",Vector3(0,(unit+0.5)*UNIT_HEIGHT,0),Vector3(0.36,UNIT_HEIGHT-0.004,0.36),colour,false)
++		_box(segment,"Join",Vector3(0,0.004,0),Vector3(0.375,0.008,0.375),Color(0.96,0.94,0.87),false)
++		_label(segment,"+%d"%value,Vector3(0,value*UNIT_HEIGHT*0.5,0.185),0.050,INK)
++		height += value*UNIT_HEIGHT
++	if solid and height > 0:
++		var body := StaticBody3D.new()
++		body.name = "ColumnSupport"
++		var collision := CollisionShape3D.new()
++		var shape := BoxShape3D.new()
++		shape.size = Vector3(0.36,height,0.36)
++		collision.shape = shape
++		collision.position.y = height*0.5
++		body.add_child(collision)
++		host.add_child(body)
++
++func get_state() -> Dictionary:
++	return {"chain":chain.duplicate(),"total":total,"armed":armed,"closed":closed,"capped":capped,"max_throws":MAX_THROWS,"height":total*UNIT_HEIGHT,"worked_example":EXAMPLE.duplicate()}
++func _label(host: Node3D, text: String, pos: Vector3, height: float, colour: Color = Color(0.93,0.95,0.92)) -> Label3D:
++	var label := Label3D.new()
++	label.text = text
++	label.position = pos
++	label.font_size = 48
++	label.pixel_size = height / 48.0
++	label.modulate = colour
++	label.outline_size = 0 if colour == INK else 4
++	host.add_child(label)
++	return label
++
++func _box(host: Node3D, title: String, pos: Vector3, size: Vector3, colour: Color, solid: bool) -> void:
++	var mesh := MeshInstance3D.new()
++	mesh.name = title
++	mesh.position = pos
++	var shape := BoxMesh.new()
++	shape.size = size
++	mesh.mesh = shape
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = colour
++	mat.roughness = 0.35
++	if colour.a < 1.0:
++		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
++		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++		mat.no_depth_test = false
++	mesh.material_override = mat
++	host.add_child(mesh)
++	if solid:
++		var body := StaticBody3D.new()
++		body.position = pos
++		var collision := CollisionShape3D.new()
++		var box := BoxShape3D.new()
++		box.size = size
++		collision.shape = box
++		body.add_child(collision)
++		host.add_child(body)
+--- before/commons/artifacts/continuing_die/continuing_die.tscn
++++ after/commons/artifacts/continuing_die/continuing_die.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/continuing_die/continuing_die.gd" id="1"]
++
++[node name="ContinuingDie" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/artifacts/continuing_die/README.md
++++ after/commons/artifacts/continuing_die/README.md
+@@ -0,0 +1,14 @@
++# The six that does not finish
++
++An additive continuation rule built around the existing physical die. Placed in Random_Cubes at (2,5), facing the first chamber.
++
++Each freshly released, settled face adds to a live column. Six permits another accepted throw; 1–5 closes the chain. Five throws is the displayed budget. A fifth six leaves the chain UNFINISHED, rather than pretending the continuation rule ended it. NEW CHAIN clears the live record; RETURN DIE retrieves a loose die without adding a result.
++
++The worked example 6+6+3 is a separate, labelled sculpture. Its values never enter live state. The scene does not choose or force a live face, generate reward rain, or automatically reroll. It reuses `commons/artifacts/paired_dice_column/paired_die.gd` and the original settled-orientation reader unchanged.
++
++Every pip adds 9cm to the column. Maximum retained height: 2.7m above a 14cm base. Each throw has a seam and label. Stationary column collision follows its height. The original pickable die retains VR grip and desktop drop hooks; a held die is not reclaimed by NEW CHAIN.
++
++Native tests, actual museum captures, preserved source and exact book differences:
++`doc/book/iterations/2026-09-24-continuing-die/index.html`
++
++Headset throws, comfort and learner interpretation remain to be observed. Tests use disclosed controlled face-up drops; they do not establish fair independent throws or the frequency of long chains.

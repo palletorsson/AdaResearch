@@ -1,6 +1,7 @@
 {
  "sweep": "curation_station",
- "peak_changed_pct": 3.549,
+ "peak_changed_pct": 3.198,
+ "subject_pct": 3.376,
  "verdict": "BITES",
  "variants": [
   {
@@ -12,8 +13,32 @@
     "bay": "hall",
     "duty": "depot"
    },
-   "changed_px": 20499,
-   "changed_pct": 3.549
+   "changed_px": 17967,
+   "changed_pct": 3.111
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "changed_px": 18474,
+   "changed_pct": 3.198
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "changed_px": 17990,
+   "changed_pct": 3.115
   },
   {
    "a": {
@@ -24,8 +49,8 @@
     "bay": "apse",
     "duty": "show"
    },
-   "changed_px": 10866,
-   "changed_pct": 1.881
+   "changed_px": 5973,
+   "changed_pct": 1.034
   },
   {
    "a": {
@@ -36,8 +61,32 @@
     "bay": "apse",
     "duty": "depot"
    },
-   "changed_px": 20385,
-   "changed_pct": 3.529
+   "changed_px": 18308,
+   "changed_pct": 3.17
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 18456,
+   "changed_pct": 3.195
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 18162,
+   "changed_pct": 3.144
   },
   {
    "a": {
@@ -48,8 +97,8 @@
     "bay": "gate",
     "duty": "show"
    },
-   "changed_px": 15637,
-   "changed_pct": 2.707
+   "changed_px": 9172,
+   "changed_pct": 1.588
   },
   {
    "a": {
@@ -60,8 +109,32 @@
     "bay": "gate",
     "duty": "depot"
    },
-   "changed_px": 20347,
-   "changed_pct": 3.523
+   "changed_px": 18400,
+   "changed_pct": 3.186
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 18407,
+   "changed_pct": 3.187
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 18166,
+   "changed_pct": 3.145
   },
   {
    "a": {
@@ -72,8 +145,8 @@
     "bay": "none",
     "duty": "show"
    },
-   "changed_px": 15701,
-   "changed_pct": 2.718
+   "changed_px": 10604,
+   "changed_pct": 1.836
   },
   {
    "a": {
@@ -84,8 +157,56 @@
     "bay": "none",
     "duty": "depot"
    },
-   "changed_px": 20165,
-   "changed_pct": 3.491
+   "changed_px": 17885,
+   "changed_pct": 3.096
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 18264,
+   "changed_pct": 3.162
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 17965,
+   "changed_pct": 3.11
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "changed_px": 17387,
+   "changed_pct": 3.01
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "changed_px": 16683,
+   "changed_pct": 2.888
   },
   {
    "a": {
@@ -96,8 +217,8 @@
     "bay": "apse",
     "duty": "show"
    },
-   "changed_px": 20059,
-   "changed_pct": 3.473
+   "changed_px": 17945,
+   "changed_pct": 3.107
   },
   {
    "a": {
@@ -108,8 +229,32 @@
     "bay": "apse",
     "duty": "depot"
    },
-   "changed_px": 4227,
-   "changed_pct": 0.732
+   "changed_px": 4448,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 17662,
+   "changed_pct": 3.058
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 17252,
+   "changed_pct": 2.987
   },
   {
    "a": {
@@ -120,8 +265,8 @@
     "bay": "gate",
     "duty": "show"
    },
-   "changed_px": 20350,
-   "changed_pct": 3.523
+   "changed_px": 16929,
+   "changed_pct": 2.931
   },
   {
    "a": {
@@ -132,8 +277,32 @@
     "bay": "gate",
     "duty": "depot"
    },
-   "changed_px": 13226,
-   "changed_pct": 2.29
+   "changed_px": 6166,
+   "changed_pct": 1.068
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 17133,
+   "changed_pct": 2.966
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 17211,
+   "changed_pct": 2.98
   },
   {
    "a": {
@@ -144,8 +313,8 @@
     "bay": "none",
     "duty": "show"
    },
-   "changed_px": 20241,
-   "changed_pct": 3.504
+   "changed_px": 16331,
+   "changed_pct": 2.827
   },
   {
    "a": {
@@ -156,8 +325,332 @@
     "bay": "none",
     "duty": "depot"
    },
-   "changed_px": 14041,
-   "changed_pct": 2.431
+   "changed_px": 6971,
+   "changed_pct": 1.207
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 17009,
+   "changed_pct": 2.945
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 16524,
+   "changed_pct": 2.861
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "changed_px": 16938,
+   "changed_pct": 2.932
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "changed_px": 15765,
+   "changed_pct": 2.729
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "changed_px": 16901,
+   "changed_pct": 2.926
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 3229,
+   "changed_pct": 0.559
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 16466,
+   "changed_pct": 2.851
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "changed_px": 17166,
+   "changed_pct": 2.972
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 16835,
+   "changed_pct": 2.915
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 5613,
+   "changed_pct": 0.972
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 16992,
+   "changed_pct": 2.942
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 17470,
+   "changed_pct": 3.025
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 17671,
+   "changed_pct": 3.059
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 8436,
+   "changed_pct": 1.461
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 17393,
+   "changed_pct": 3.011
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "changed_px": 17303,
+   "changed_pct": 2.996
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "changed_px": 15506,
+   "changed_pct": 2.685
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 16927,
+   "changed_pct": 2.931
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 3000,
+   "changed_pct": 0.519
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "changed_px": 15207,
+   "changed_pct": 2.633
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 15421,
+   "changed_pct": 2.67
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 16748,
+   "changed_pct": 2.9
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 6108,
+   "changed_pct": 1.057
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 14926,
+   "changed_pct": 2.584
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 16604,
+   "changed_pct": 2.875
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 16221,
+   "changed_pct": 2.808
+  },
+  {
+   "a": {
+    "bay": "hall",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 6324,
+   "changed_pct": 1.095
   },
   {
    "a": {
@@ -168,8 +661,32 @@
     "bay": "apse",
     "duty": "depot"
    },
-   "changed_px": 19646,
-   "changed_pct": 3.401
+   "changed_px": 16879,
+   "changed_pct": 2.922
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 14329,
+   "changed_pct": 2.481
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 16542,
+   "changed_pct": 2.864
   },
   {
    "a": {
@@ -180,8 +697,8 @@
     "bay": "gate",
     "duty": "show"
    },
-   "changed_px": 13973,
-   "changed_pct": 2.419
+   "changed_px": 9599,
+   "changed_pct": 1.662
   },
   {
    "a": {
@@ -192,8 +709,32 @@
     "bay": "gate",
     "duty": "depot"
    },
-   "changed_px": 20094,
-   "changed_pct": 3.479
+   "changed_px": 17505,
+   "changed_pct": 3.031
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 16724,
+   "changed_pct": 2.895
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 17072,
+   "changed_pct": 2.956
   },
   {
    "a": {
@@ -204,8 +745,8 @@
     "bay": "none",
     "duty": "show"
    },
-   "changed_px": 12972,
-   "changed_pct": 2.246
+   "changed_px": 8529,
+   "changed_pct": 1.477
   },
   {
    "a": {
@@ -216,107 +757,479 @@
     "bay": "none",
     "duty": "depot"
    },
-   "changed_px": 19725,
-   "changed_pct": 3.415
+   "changed_px": 17463,
+   "changed_pct": 3.023
   },
   {
    "a": {
     "bay": "apse",
-    "duty": "depot"
-   },
-   "b": {
-    "bay": "gate",
     "duty": "show"
    },
-   "changed_px": 20255,
-   "changed_pct": 3.507
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 16458,
+   "changed_pct": 2.849
   },
   {
    "a": {
     "bay": "apse",
-    "duty": "depot"
-   },
-   "b": {
-    "bay": "gate",
-    "duty": "depot"
-   },
-   "changed_px": 14015,
-   "changed_pct": 2.426
-  },
-  {
-   "a": {
-    "bay": "apse",
-    "duty": "depot"
-   },
-   "b": {
-    "bay": "none",
-    "duty": "show"
-   },
-   "changed_px": 19887,
-   "changed_pct": 3.443
-  },
-  {
-   "a": {
-    "bay": "apse",
-    "duty": "depot"
-   },
-   "b": {
-    "bay": "none",
-    "duty": "depot"
-   },
-   "changed_px": 12617,
-   "changed_pct": 2.184
-  },
-  {
-   "a": {
-    "bay": "gate",
-    "duty": "show"
-   },
-   "b": {
-    "bay": "gate",
-    "duty": "depot"
-   },
-   "changed_px": 17110,
-   "changed_pct": 2.962
-  },
-  {
-   "a": {
-    "bay": "gate",
     "duty": "show"
    },
    "b": {
     "bay": "none",
-    "duty": "show"
+    "duty": "watch"
    },
-   "changed_px": 1712,
-   "changed_pct": 0.296
-  },
-  {
-   "a": {
-    "bay": "gate",
-    "duty": "show"
-   },
-   "b": {
-    "bay": "none",
-    "duty": "depot"
-   },
-   "changed_px": 16988,
-   "changed_pct": 2.941
-  },
-  {
-   "a": {
-    "bay": "gate",
-    "duty": "depot"
-   },
-   "b": {
-    "bay": "none",
-    "duty": "show"
-   },
-   "changed_px": 16975,
+   "changed_px": 16973,
    "changed_pct": 2.939
   },
   {
    "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "changed_px": 16522,
+   "changed_pct": 2.86
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 15485,
+   "changed_pct": 2.681
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "changed_px": 14970,
+   "changed_pct": 2.592
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 6368,
+   "changed_pct": 1.102
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 16404,
+   "changed_pct": 2.84
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 15646,
+   "changed_pct": 2.709
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 15649,
+   "changed_pct": 2.709
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 6650,
+   "changed_pct": 1.151
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 15280,
+   "changed_pct": 2.645
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 15522,
+   "changed_pct": 2.687
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "changed_px": 16096,
+   "changed_pct": 2.787
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "changed_px": 17323,
+   "changed_pct": 2.999
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 17206,
+   "changed_pct": 2.979
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 8410,
+   "changed_pct": 1.456
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 17040,
+   "changed_pct": 2.95
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 17057,
+   "changed_pct": 2.953
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 17178,
+   "changed_pct": 2.974
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 6765,
+   "changed_pct": 1.171
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 17033,
+   "changed_pct": 2.949
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "changed_px": 15591,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 15990,
+   "changed_pct": 2.768
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 15968,
+   "changed_pct": 2.765
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 6130,
+   "changed_pct": 1.061
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 15785,
+   "changed_pct": 2.733
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 16739,
+   "changed_pct": 2.898
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 14432,
+   "changed_pct": 2.499
+  },
+  {
+   "a": {
+    "bay": "apse",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 6753,
+   "changed_pct": 1.169
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "changed_px": 11512,
+   "changed_pct": 1.993
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 13051,
+   "changed_pct": 2.26
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 10809,
+   "changed_pct": 1.871
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 2970,
+   "changed_pct": 0.514
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 13551,
+   "changed_pct": 2.346
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 12488,
+   "changed_pct": 2.162
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 11109,
+   "changed_pct": 1.923
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "changed_px": 13589,
+   "changed_pct": 2.353
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 12366,
+   "changed_pct": 2.141
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 12647,
+   "changed_pct": 2.19
+  },
+  {
+   "a": {
     "bay": "gate",
     "duty": "depot"
    },
@@ -324,8 +1237,140 @@
     "bay": "none",
     "duty": "depot"
    },
-   "changed_px": 2279,
-   "changed_pct": 0.395
+   "changed_px": 4726,
+   "changed_pct": 0.818
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 13216,
+   "changed_pct": 2.288
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 12497,
+   "changed_pct": 2.164
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "changed_px": 12741,
+   "changed_pct": 2.206
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 13484,
+   "changed_pct": 2.334
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 14713,
+   "changed_pct": 2.547
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 3276,
+   "changed_pct": 0.567
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 13389,
+   "changed_pct": 2.318
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "changed_px": 11570,
+   "changed_pct": 2.003
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "changed_px": 13723,
+   "changed_pct": 2.376
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 11746,
+   "changed_pct": 2.034
+  },
+  {
+   "a": {
+    "bay": "gate",
+    "duty": "watch"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 3155,
+   "changed_pct": 0.546
   },
   {
    "a": {
@@ -336,8 +1381,68 @@
     "bay": "none",
     "duty": "depot"
    },
-   "changed_px": 16510,
-   "changed_pct": 2.858
+   "changed_px": 12413,
+   "changed_pct": 2.149
+  },
+  {
+   "a": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 12319,
+   "changed_pct": 2.133
+  },
+  {
+   "a": {
+    "bay": "none",
+    "duty": "show"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 9351,
+   "changed_pct": 1.619
+  },
+  {
+   "a": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "changed_px": 13748,
+   "changed_pct": 2.38
+  },
+  {
+   "a": {
+    "bay": "none",
+    "duty": "depot"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 12584,
+   "changed_pct": 2.179
+  },
+  {
+   "a": {
+    "bay": "none",
+    "duty": "handling"
+   },
+   "b": {
+    "bay": "none",
+    "duty": "watch"
+   },
+   "changed_px": 12272,
+   "changed_pct": 2.125
   }
  ]
 }

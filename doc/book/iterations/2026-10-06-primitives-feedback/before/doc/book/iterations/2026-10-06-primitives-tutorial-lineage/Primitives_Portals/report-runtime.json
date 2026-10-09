@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "limits/hexagon_closing_edge",
+      "passed": true
+    },
+    {
+      "id": "limits/tolerance_0.05",
+      "passed": true
+    },
+    {
+      "id": "limits/tighter_is_no_coarser_0.05",
+      "passed": true
+    },
+    {
+      "id": "limits/tolerance_0.005",
+      "passed": true
+    },
+    {
+      "id": "limits/tighter_is_no_coarser_0.005",
+      "passed": true
+    },
+    {
+      "id": "limits/budget_reports_unmet",
+      "passed": true
+    },
+    {
+      "id": "limits/non_power_budget_respected",
+      "passed": true
+    },
+    {
+      "id": "limits/first_polygon_can_suffice",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Portals",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "for i in range(record.size()):",
+      "after": "for i in range(record.size() - 1):"
+    },
+    "required_failure": "limits/hexagon_closing_edge",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "limits/hexagon_closing_edge",
+          "passed": false
+        },
+        {
+          "id": "limits/tolerance_0.05",
+          "passed": true
+        },
+        {
+          "id": "limits/tighter_is_no_coarser_0.05",
+          "passed": true
+        },
+        {
+          "id": "limits/tolerance_0.005",
+          "passed": false
+        },
+        {
+          "id": "limits/tighter_is_no_coarser_0.005",
+          "passed": true
+        },
+        {
+          "id": "limits/budget_reports_unmet",
+          "passed": true
+        },
+        {
+          "id": "limits/non_power_budget_respected",
+          "passed": true
+        },
+        {
+          "id": "limits/first_polygon_can_suffice",
+          "passed": true
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "limits/hexagon_closing_edge",
+        "limits/tolerance_0.005"
+      ],
+      "hall": "Primitives_Portals",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Portals/tutorial.md": "2c706006525a3f90ad069409cf20eefcf85fb29f1dbebdc26485eb512ebcf28d",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/circle_samples.gd": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/lesson.gd": "abdc3bd88aa92977446cc1b71af385a0fad01978c8ef4dca31329f4257fb3a9d",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Portals/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

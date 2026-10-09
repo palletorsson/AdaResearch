@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "name": "The greeting is present at startup",
+      "passed": true
+    },
+    {
+      "name": "The supplied camera is current",
+      "passed": true
+    },
+    {
+      "name": "The supplied floor has a physical boundary",
+      "passed": true
+    },
+    {
+      "name": "The changed scene can be packed",
+      "passed": true
+    },
+    {
+      "name": "The changed scene can be saved",
+      "passed": true
+    },
+    {
+      "name": "The saved change survives reopening",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Native startup, camera and floor, edit/save/reload. No headset or beginner trial."
+}

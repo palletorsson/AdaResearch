@@ -1,0 +1,769 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "placed: force_point_direction",
+      "passed": true
+    },
+    {
+      "name": "placed: magnitude_bench",
+      "passed": true
+    },
+    {
+      "name": "placed: stretch_bench",
+      "passed": true
+    },
+    {
+      "name": "supported route [8.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [13.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [13.5, 18.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [11.8, 18.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [11.8, 20.5]",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 0",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 0",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 1",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 1",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 2",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 2",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 3",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 3",
+      "passed": true
+    },
+    {
+      "name": "exit identified and clear",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          1.79999995231628,
+          0.0,
+          3.29999995231628
+        ],
+        "bounds_size": [
+          12.7224988937378,
+          4.17500019073486,
+          19.6549987792969
+        ],
+        "position": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_hall_01"
+      },
+      {
+        "bounds_position": [
+          5.49200010299683,
+          0.0,
+          4.84499979019165
+        ],
+        "bounds_size": [
+          6.01600027084351,
+          1.68999993801117,
+          6.66300058364868
+        ],
+        "position": [
+          8.5,
+          0.0,
+          8.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_point_direction"
+      },
+      {
+        "bounds_position": [
+          10.6436500549316,
+          0.839099526405334,
+          17.1445484161377
+        ],
+        "bounds_size": [
+          1.55924987792969,
+          1.72312533855438,
+          0.804662704467773
+        ],
+        "position": [
+          11.5,
+          1.04999995231628,
+          17.5
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "token": "stretch_bench"
+      },
+      {
+        "bounds_position": [
+          2.55112433433533,
+          0.0999999940395355,
+          17.0637168884277
+        ],
+        "bounds_size": [
+          3.04887557029724,
+          2.19988322257996,
+          2.53628349304199
+        ],
+        "position": [
+          4.5,
+          0.0,
+          18.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "magnitude_bench"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          22.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          22.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.0,
+          1.58000004291534,
+          22.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.0,
+          1.58000004291534,
+          22.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          7.77500009536743,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.450000286102295,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          8.0,
+          3.51999998092651,
+          -1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          3.52499985694885,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.950000047683716,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          4.0,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "ceiling_vent"
+      }
+    ],
+    "exit": {
+      "cell": "(13, 20)",
+      "door": "(13.5, 0.05, 20.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(13.5, 0.05, 20.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "route_obstructions": []
+  },
+  "passed": true,
+  "room": "Vectors_Act1_WhatAVectorIs",
+  "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach."
+}

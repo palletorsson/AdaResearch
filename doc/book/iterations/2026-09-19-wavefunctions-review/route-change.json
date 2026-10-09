@@ -1,0 +1,315 @@
+{
+  "sequence": "wavefunctions",
+  "maps": [
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_3D_Wave_Propagation",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_TrigWalkingPath"
+  ],
+  "live_sequence_maps": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Sine_Space",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_3D_Wave_Propagation",
+    "WaveFunctions_Effect_Sound",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "WaveFunctions_AirMusic",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_TrigWalkingPath",
+    "WaveFunctions_Synthesis_Lab"
+  ],
+  "museum_template": "louisiana-pavilion-chain",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json",
+    "commons/data/map_authored.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "d53f4732e955e21bdc7f12445ec02d6d9bf6dfae8d59029c21048ab26f98cc39",
+    "commons/data/museum/em_plan.json": "d53f4732e955e21bdc7f12445ec02d6d9bf6dfae8d59029c21048ab26f98cc39",
+    "commons/data/map_authored.json": "4669db13d96f590688216deeec5a8afbfbc0d0ec0712d04bf61d928d0be81f37",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/wavefunctions.json": "00040c435767e332725b0960f552e26113733b3ee35e46c80c9afb556d0f1851",
+    "tools/em_map_halls.py": "40a11f4a0c9bc19f0ab9a9def6f32bbd91fb8cd087348e9c1107023a0ebacf19",
+    "tools/em_refresh_sequence.py": "6f06dd699738c9362f6d79a556f66dc6bbe5129b325363c17af816c7547c20c8",
+    "commons/maps/WaveFunctions_Unit_Circle/map_data.json": "fd59014f2ae0729f16364124a6ab5e3d5345b4a88c7cf78cde1f1cce0869fcd4",
+    "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json": "4f43b358dc4a3d6d2eecf0fb35c53de835f223cac783824a62e6efe0a59eae50",
+    "commons/maps/Wavefunctions_Bernini/map_data.json": "621ba297c469d8920eb1742c66451994e98193cefdb4b980072937dd9e2d85d9",
+    "commons/maps/WaveFunctions_John_Cage/map_data.json": "4ae3635e4a1c7b42bff6cb2fb11e033d16e422b11742dfdcfb2721b41d0b7457",
+    "commons/maps/Wavefunctions_Sky_Stairs/map_data.json": "f6f4dc5b4ae999c55657e545bcd4df6620788bb0037a3d99136e5b45fd6d7c9f",
+    "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json": "1bbbb7a661641b2463c520c187cbe91a12aa0e68ac3efc228010c6acd911b10f"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "1cbfda9b0a1752e5c5f546e7f917b12648d07198e04ecfb2503baadc5899edf6",
+    "commons/data/museum/em_plan.json": "1cbfda9b0a1752e5c5f546e7f917b12648d07198e04ecfb2503baadc5899edf6",
+    "commons/data/map_authored.json": "6334bab56b14f75bbe80bbb3eb20bdbf281f7576feb41787efcf72ff943349ed"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 172,
+    "commons/data/museum/em_plan.json": 172
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 178,
+    "commons/data/museum/em_plan.json": 178
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [
+      {
+        "map": "WaveFunctions_Intro",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Pendulum",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Sine_Space",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_AirMusic",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 8,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 11,
+          "pearls_total": 12
+        }
+      }
+    ],
+    "commons/data/museum/em_plan.json": [
+      {
+        "map": "WaveFunctions_Intro",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Pendulum",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Sine_Space",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_AirMusic",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 8,
+          "pearls_total": 12
+        }
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 11,
+          "pearls_total": 12
+        }
+      }
+    ]
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "pearl_index": 3,
+      "room": {
+        "w": 15,
+        "h": 19
+      },
+      "artifacts": 6,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 17,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "pearl_index": 4,
+      "room": {
+        "w": 17,
+        "h": 20
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 15,
+        "src_h": 18,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "pearl_index": 6,
+      "room": {
+        "w": 15,
+        "h": 15
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 15,
+        "src_h": 15,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "pearl_index": 7,
+      "room": {
+        "w": 14,
+        "h": 16
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 12,
+        "src_h": 14,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "pearl_index": 9,
+      "room": {
+        "w": 13,
+        "h": 13
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 12,
+        "src_h": 13,
+        "rotated": false,
+        "pad": 1,
+        "pad_closed": true,
+        "ring": null
+      }
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "pearl_index": 10,
+      "room": {
+        "w": 14,
+        "h": 14
+      },
+      "artifacts": 6,
+      "ruling": {
+        "src_w": 14,
+        "src_h": 14,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260919T175422364655Z"
+}

@@ -1,0 +1,3159 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "42"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				3.22000002861023,
+				0.0,
+				1.69000005722046
+			],
+			"bounds_size": [
+				0.490000009536743,
+				2.05999994277954,
+				1.55999994277954
+			],
+			"cell": [
+				3,
+				2
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Labels",
+					"position": [
+						3.5,
+						1.37000000476837,
+						1.64999997615814
+					],
+					"text": "X"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						3.5,
+						2.09999990463257,
+						2.38000011444092
+					],
+					"text": "Y"
+				},
+				{
+					"parent": "RandomPoint",
+					"position": [
+						3.5,
+						1.38817501068115,
+						2.18488478660584
+					],
+					"text": "(0.32, 0.08)"
+				},
+				{
+					"parent": "BoundsFrame",
+					"position": [
+						3.66000008583069,
+						0.449999988079071,
+						2.5
+					],
+					"text": "CARRY A POINT\nx,y: -0.6 to +0.6 m | z = 0\nRelease it. Which coordinates remain?"
+				}
+			],
+			"position": [
+				3.5,
+				1.25,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "randompoint"
+		},
+		{
+			"bounds_position": [
+				9.18000030517578,
+				0.0,
+				2.81946969032288
+			],
+			"bounds_size": [
+				2.63999938964844,
+				1.80035734176636,
+				1.16053032875061
+			],
+			"cell": [
+				10,
+				3
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.69040012359619,
+						1.12858080863953,
+						2.93370580673218
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.69040012359619,
+						1.12858080863953,
+						2.93370580673218
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.58960056304932,
+						1.12858080863953,
+						2.93370580673218
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.58960056304932,
+						1.12858080863953,
+						2.93370580673218
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.69040012359619,
+						1.03043246269226,
+						2.88583588600159
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.69040012359619,
+						1.03043246269226,
+						2.88583588600159
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.58960056304932,
+						1.03043246269226,
+						2.88583588600159
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.58960056304932,
+						1.03043246269226,
+						2.88583588600159
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.64000034332275,
+						0.93228417634964,
+						2.83796572685242
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Bench/Panel/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.64000034332275,
+						0.93228417634964,
+						2.83796572685242
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.1635322570801,
+						1.18115103244781,
+						3.48460245132446
+					],
+					"text": "(11.1, 1.1, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.955491065979,
+						1.39696991443634,
+						3.45710492134094
+					],
+					"text": "(10.9, 1.3, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.4585056304932,
+						1.04177868366241,
+						3.44704937934875
+					],
+					"text": "(11.4, 1.0, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.2496995925903,
+						1.02821207046509,
+						3.52332496643066
+					],
+					"text": "(11.2, 1.0, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.2028589248657,
+						1.21457409858704,
+						3.54234957695007
+					],
+					"text": "(11.2, 1.2, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.5164279937744,
+						1.59047722816467,
+						3.54501819610596
+					],
+					"text": "(11.5, 1.5, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.3270292282104,
+						1.33293223381042,
+						3.51187372207642
+					],
+					"text": "(11.3, 1.3, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.2287244796753,
+						1.16102230548859,
+						3.54034280776978
+					],
+					"text": "(11.2, 1.1, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.445725440979,
+						1.52818608283997,
+						3.55932021141052
+					],
+					"text": "(11.4, 1.5, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.85569190979,
+						1.42614901065826,
+						3.50480604171753
+					],
+					"text": "(10.8, 1.4, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.3534660339355,
+						1.41591238975525,
+						3.53925275802612
+					],
+					"text": "(11.3, 1.4, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.9125881195068,
+						1.35758793354034,
+						3.48544502258301
+					],
+					"text": "(10.9, 1.3, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.9387817382813,
+						1.56713998317719,
+						3.4435076713562
+					],
+					"text": "(10.9, 1.5, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.1077499389648,
+						0.9672611951828,
+						3.50188732147217
+					],
+					"text": "(11.1, 0.9, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.9807567596436,
+						1.05746424198151,
+						3.55823922157288
+					],
+					"text": "(10.9, 1.0, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.9962902069092,
+						1.16106021404266,
+						3.54654288291931
+					],
+					"text": "(10.9, 1.1, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.31005859375,
+						1.46772623062134,
+						3.49585914611816
+					],
+					"text": "(11.3, 1.4, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.7460269927979,
+						1.79535722732544,
+						3.48387312889099
+					],
+					"text": "(10.7, 1.7, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.4514102935791,
+						0.937673211097717,
+						3.44654607772827
+					],
+					"text": "(11.4, 0.9, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.5503234863281,
+						1.27828872203827,
+						3.50422024726868
+					],
+					"text": "(11.5, 1.2, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.2592735290527,
+						1.37169647216797,
+						3.46869158744812
+					],
+					"text": "(11.2, 1.3, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.036958694458,
+						1.16709625720978,
+						3.53973913192749
+					],
+					"text": "(11.0, 1.1, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.3532447814941,
+						1.77525293827057,
+						3.46423292160034
+					],
+					"text": "(11.3, 1.7, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						11.2062082290649,
+						0.932506680488586,
+						3.50160956382751
+					],
+					"text": "(11.2, 0.9, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.83356189727783,
+						1.79380679130554,
+						3.46093153953552
+					],
+					"text": "(9.8, 1.7, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.69481372833252,
+						1.22631704807281,
+						3.54010820388794
+					],
+					"text": "(9.6, 1.2, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.6694974899292,
+						1.00587630271912,
+						3.5483992099762
+					],
+					"text": "(9.6, 1.0, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.55696582794189,
+						1.12160062789917,
+						3.55473637580872
+					],
+					"text": "(9.5, 1.1, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.44289684295654,
+						1.57577562332153,
+						3.54752588272095
+					],
+					"text": "(9.4, 1.5, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.2035512924194,
+						1.36259269714355,
+						3.47064471244812
+					],
+					"text": "(10.2, 1.3, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.94281005859375,
+						1.18823516368866,
+						3.44702792167664
+					],
+					"text": "(9.9, 1.1, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.01806640625,
+						1.26325643062592,
+						3.53699636459351
+					],
+					"text": "(10.0, 1.2, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.0329723358154,
+						1.4392397403717,
+						3.48260521888733
+					],
+					"text": "(10.0, 1.4, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.285548210144,
+						0.969297885894775,
+						3.51910543441772
+					],
+					"text": "(10.2, 0.9, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.86182880401611,
+						1.42891800403595,
+						3.53963899612427
+					],
+					"text": "(9.8, 1.4, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.57338619232178,
+						1.3767032623291,
+						3.47565698623657
+					],
+					"text": "(9.5, 1.3, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.71626663208008,
+						1.39988958835602,
+						3.52115178108215
+					],
+					"text": "(9.7, 1.3, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.5337610244751,
+						0.936140954494476,
+						3.49439477920532
+					],
+					"text": "(9.5, 0.9, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.82392692565918,
+						1.13360786437988,
+						3.51091146469116
+					],
+					"text": "(9.8, 1.1, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.51574039459229,
+						1.67694282531738,
+						3.47510504722595
+					],
+					"text": "(9.5, 1.6, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.0545101165771,
+						1.10174083709717,
+						3.45503449440002
+					],
+					"text": "(10.0, 1.1, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.6588830947876,
+						1.67968106269836,
+						3.54961919784546
+					],
+					"text": "(9.6, 1.6, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.1561670303345,
+						1.62636232376099,
+						3.49895906448364
+					],
+					"text": "(10.1, 1.6, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.250750541687,
+						1.77108252048492,
+						3.46624660491943
+					],
+					"text": "(10.2, 1.7, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.4600772857666,
+						1.21664893627167,
+						3.55382657051086
+					],
+					"text": "(9.4, 1.2, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.1453008651733,
+						0.983449637889862,
+						3.4593677520752
+					],
+					"text": "(10.1, 0.9, 3.4)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						9.93993186950684,
+						1.59578967094421,
+						3.51007843017578
+					],
+					"text": "(9.9, 1.5, 3.5)"
+				},
+				{
+					"parent": "MeshInstance3DSphere",
+					"position": [
+						10.0113229751587,
+						0.947623729705811,
+						3.50665736198425
+					],
+					"text": "(10.0, 0.9, 3.5)"
+				},
+				{
+					"parent": "Readout",
+					"position": [
+						11.6849994659424,
+						0.923265218734741,
+						2.99212861061096
+					],
+					"text": "SEED 11836 · REQUEST 24 · 0.90 x 0.90 x 0.12 m\nLEFT  kept 24 · closest 0.042 m\nRIGHT spaced · kept 24 · closest 0.136 m\n56 candidates = 24 kept + 32 refused\nGhosts: first 32 of 32 refusals · spacing 0.130 m\nmoved 0 · 0 pairs < d - 1 mm\nSpacing applied at birth, not since"
+				},
+				{
+					"parent": "Panel",
+					"position": [
+						9.64000034332275,
+						1.18222951889038,
+						2.98977899551392
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				10.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "randompoints"
+		},
+		{
+			"bounds_position": [
+				3.26999998092651,
+				0.0,
+				3.65283060073853
+			],
+			"bounds_size": [
+				0.900000095367432,
+				1.53250002861023,
+				0.377169609069824
+			],
+			"cell": [
+				4,
+				4
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.84960007667542,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.84960007667542,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.72000002861023,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.72000002861023,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.59039998054504,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.59039998054504,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.84960007667542,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.84960007667542,
+						1.1690217256546,
+						3.69617915153503
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.72000002861023,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.72000002861023,
+						1.1690217256546,
+						3.69617915153503
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_5/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.59039998054504,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_5/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.59039998054504,
+						1.1690217256546,
+						3.69617915153503
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "WhiteNoiseSpectrum",
+					"position": [
+						4.5,
+						1.20000004768372,
+						4.5
+					],
+					"text": "White Noise Spectrum"
+				},
+				{
+					"parent": "Panel",
+					"position": [
+						3.72000002861023,
+						1.36649203300476,
+						3.82639384269714
+					],
+					"text": "WHITE NOISE"
+				},
+				{
+					"parent": "GalleryConsole",
+					"position": [
+						3.72000002861023,
+						0.879999995231628,
+						3.6800000667572
+					],
+					"text": "Audio: stopped\nIMAGE: independent bar heights\nSOUND: separate filtered draws"
+				},
+				{
+					"parent": "GalleryConsole",
+					"position": [
+						3.72000002861023,
+						1.5,
+						3.75999999046326
+					],
+					"text": "LISTEN. WHAT IN THE IMAGE CHANGES?"
+				}
+			],
+			"position": [
+				4.5,
+				1.0,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.0500000007450581,
+				0.0500000007450581,
+				0.0500000007450581
+			],
+			"token": "WhiteNoiseGallery"
+		},
+		{
+			"bounds_position": [
+				5.27000045776367,
+				0.0,
+				3.65283060073853
+			],
+			"bounds_size": [
+				0.899999618530273,
+				1.53250002861023,
+				0.377169609069824
+			],
+			"cell": [
+				6,
+				4
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.84960031509399,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.84960031509399,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.72000026702881,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.72000026702881,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.59040021896362,
+						1.28622603416443,
+						3.77704858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.59040021896362,
+						1.29626739025116,
+						3.75551462173462
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.84960031509399,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.84960031509399,
+						1.1690217256546,
+						3.69617915153503
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.72000026702881,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.72000026702881,
+						1.1690217256546,
+						3.69617915153503
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_5/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.59040021896362,
+						1.15898036956787,
+						3.71771311759949
+					]
+				},
+				{
+					"disabled": false,
+					"path": "GalleryConsole/Panel/Btn_5/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.59040021896362,
+						1.1690217256546,
+						3.69617915153503
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Labels",
+					"position": [
+						6.5,
+						1.5,
+						4.5
+					],
+					"text": "The Colors of Noise"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						7.09999990463257,
+						1.0,
+						4.90000009536743
+					],
+					"text": "Brown (1/f²)"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						7.09999990463257,
+						1.0,
+						4.69999980926514
+					],
+					"text": "Pink (1/f)"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						7.09999990463257,
+						1.0,
+						4.5
+					],
+					"text": "White (flat)"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						7.09999990463257,
+						1.0,
+						4.29999971389771
+					],
+					"text": "Blue (f)"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						7.09999990463257,
+						1.0,
+						4.09999990463257
+					],
+					"text": "Violet (f²)"
+				},
+				{
+					"parent": "Labels",
+					"position": [
+						6.5,
+						0.899999976158142,
+						5.09999990463257
+					],
+					"text": "Frequency →"
+				},
+				{
+					"parent": "Panel",
+					"position": [
+						5.72000026702881,
+						1.36649203300476,
+						3.82639384269714
+					],
+					"text": "NOISE 3D"
+				},
+				{
+					"parent": "GalleryConsole",
+					"position": [
+						5.72000026702881,
+						0.879999995231628,
+						3.6800000667572
+					],
+					"text": "Audio: stopped\nIMAGE: illustrated spectral shapes\nSOUND: separate filtered draws"
+				},
+				{
+					"parent": "GalleryConsole",
+					"position": [
+						5.72000026702881,
+						1.5,
+						3.75999999046326
+					],
+					"text": "FIVE COLOURS. TRY ANOTHER SOUND."
+				}
+			],
+			"position": [
+				6.5,
+				1.0,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.100000001490116,
+				0.100000001490116,
+				0.100000001490116
+			],
+			"token": "NoiseColors3D"
+		},
+		{
+			"bounds_position": [
+				1.64999985694885,
+				0.0,
+				12.7249994277954
+			],
+			"bounds_size": [
+				9.67500019073486,
+				3.39999985694885,
+				10.3750009536743
+			],
+			"cell": [
+				6,
+				18
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.67819976806641,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.67819976806641,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.55940008163452,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.55940008163452,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.44059991836548,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.44059991836548,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.32180023193359,
+						1.14760971069336,
+						12.8182172775269
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WeatherControls/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.32180023193359,
+						1.14760971069336,
+						12.8182172775269
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.80000019073486,
+						3.09999990463257,
+						14.1900005340576
+					],
+					"text": "FRESH DRAW"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.80000019073486,
+						2.88000011444092,
+						14.1900005340576
+					],
+					"text": "NEWEST HERE / 8 MOMENTS HELD"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.80000019073486,
+						2.72000002861023,
+						14.1900005340576
+					],
+					"text": "GLAZED VIEWING WALL"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.96000003814697,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						9.64000034332275,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						3.09999990463257,
+						14.1900005340576
+					],
+					"text": "ACCUMULATED STEP"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						2.88000011444092,
+						14.1900005340576
+					],
+					"text": "NEWEST HERE / 8 MOMENTS HELD"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						2.72000002861023,
+						14.1900005340576
+					],
+					"text": "GLAZED VIEWING WALL"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.65999984741211,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.34000015258789,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.20000004768372,
+						3.09999990463257,
+						14.1900005340576
+					],
+					"text": "FILTERED / PINK"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.20000004768372,
+						2.88000011444092,
+						14.1900005340576
+					],
+					"text": "NEWEST HERE / 8 MOMENTS HELD"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.20000004768372,
+						2.72000002861023,
+						14.1900005340576
+					],
+					"text": "GLAZED VIEWING WALL"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						15.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						16.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						17.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						18.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						19.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						20.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						21.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.35999989509583,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						3.03999996185303,
+						0.46000000834465,
+						22.0
+					],
+					"text": "—"
+				},
+				{
+					"parent": "WeatherControls",
+					"position": [
+						6.5,
+						1.17849266529083,
+						12.9043073654175
+					],
+					"text": ""
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						1.87000000476837,
+						12.8500003814697
+					],
+					"text": "HOLD / 0 OF 128 / SEED 4321"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						1.66999995708466,
+						12.8500003814697
+					],
+					"text": "FRESH —     SUM —     FILTER —"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						1.49000000953674,
+						12.8500003814697
+					],
+					"text": "ORANGE EDGE = DISPLAY LIMIT"
+				},
+				{
+					"parent": "RelatedWeather",
+					"position": [
+						6.5,
+						0.740000009536743,
+						12.6000003814697
+					],
+					"text": "PINK FILTER / 4096 PREPARATION SAMPLES"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				18.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "related_weather"
+		},
+		{
+			"bounds_position": [
+				4.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:random noise types"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				6.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				29.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				30.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				28.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				29.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				3.22499990463257,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.950000286102295,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.70000004768372,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				1.27999997138977,
+				0.550000011920929,
+				2.18379998207092
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616199970245361
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.27999997138977,
+				0.850000023841858,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				9.95794010162354,
+				0.419999957084656,
+				6.90095901489258
+			],
+			"bounds_size": [
+				1.0226879119873,
+				1.34872710704803,
+				1.11235523223877
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.5,
+				0.419999986886978,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				156.687301635742,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"name": "viewing walls load through registry",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "intended metre-scale placement",
+			"passed": true,
+			"value": [
+				6.5,
+				0.0,
+				18.5
+			]
+		},
+		{
+			"name": "retained primary: randompoint",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "retained primary: randompoints",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "retained primary: WhiteNoiseGallery",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "retained primary: NoiseColors3D",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "arrival has no invented history",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "capture camera: empty",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "eight pointer advances produce eight shared records",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "visible first and oldest record 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height matches bounded sample 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "visible first and oldest record 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height matches bounded sample 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "visible first and oldest record 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "height matches bounded sample 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "capture camera: eight",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "capture camera: sight",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "capture camera: aligned",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum HOLD freezes moving slits",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum NEXT finishes pending sample",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum walker available",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "sight opening remains glazed body boundary",
+			"passed": true,
+			"value": [
+				3.80963039398193,
+				0.000161205185577273,
+				-0.5
+			]
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"first_eight": [
+		[
+			-0.457645297050476,
+			-0.0457645297050476,
+			-0.0773670971860232
+		],
+		[
+			0.942795634269714,
+			0.0485150337219238,
+			-0.00930327022949586
+		],
+		[
+			-0.322955906391144,
+			0.0162194430828095,
+			-0.0355073516784751
+		],
+		[
+			0.936208367347717,
+			0.109840279817581,
+			0.0172518097811795
+		],
+		[
+			0.812618851661682,
+			0.191102164983749,
+			0.0400075860422847
+		],
+		[
+			-0.422840893268585,
+			0.148818075656891,
+			-0.00383324280090974
+		],
+		[
+			0.656853199005127,
+			0.214503395557404,
+			0.0291217343225878
+		],
+		[
+			-0.211574137210846,
+			0.193345981836319,
+			0.00268199826288571
+		]
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "new approach floor",
+			"top": 0.000000379979610443115
+		},
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "rear floor",
+			"top": 0.000000379979610443115
+		}
+	],
+	"room": "Random_Noise_Types",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Random_Noise_Types/empty.png",
+		"res://ada_run/encounter_pilot/Random_Noise_Types/eight.png",
+		"res://ada_run/encounter_pilot/Random_Noise_Types/sight.png",
+		"res://ada_run/encounter_pilot/Random_Noise_Types/aligned.png",
+		"res://ada_run/encounter_pilot/Random_Noise_Types/room.png",
+		"res://ada_run/encounter_pilot/Random_Noise_Types/along.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				8.14999961853027,
+				0.000170901417732239,
+				23.9332523345947
+			],
+			"passed": true,
+			"tag": "aisle between white and brown",
+			"target": [
+				8.15,
+				0.1,
+				24.0
+			]
+		},
+		{
+			"end": [
+				4.84999990463257,
+				0.000170901417732239,
+				23.9332523345947
+			],
+			"passed": true,
+			"tag": "aisle between brown and pink",
+			"target": [
+				4.85,
+				0.1,
+				24.0
+			]
+		},
+		{
+			"end": [
+				11.3999996185303,
+				0.000170901417732239,
+				23.9332523345947
+			],
+			"passed": true,
+			"tag": "east gallery bypass",
+			"target": [
+				11.4,
+				0.1,
+				24.0
+			]
+		},
+		{
+			"end": [
+				2.45000004768372,
+				0.000170901417732239,
+				23.9332523345947
+			],
+			"passed": true,
+			"tag": "west viewing aisle",
+			"target": [
+				2.45,
+				0.1,
+				24.0
+			]
+		},
+		{
+			"end": [
+				11.1333694458008,
+				0.000170901417732239,
+				24.3999996185303
+			],
+			"passed": true,
+			"tag": "rear cross aisle",
+			"target": [
+				11.2,
+				0.1,
+				24.4
+			]
+		},
+		{
+			"end": [
+				6.5,
+				0.000838712614495307,
+				26.9332942962646
+			],
+			"passed": true,
+			"tag": "exit beyond new study",
+			"target": [
+				6.5,
+				0.1,
+				27.0
+			]
+		}
+	]
+}

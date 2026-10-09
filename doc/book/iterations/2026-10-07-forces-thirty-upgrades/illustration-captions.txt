@@ -1,0 +1,154 @@
+ENDLESS MUSEUM — THE POINT GAINS POWER
+Thirty ideas / ten comic plates / sixty frames
+Concept illustrations for the existing proposal. Images are schematic; these are not museum captures, measured simulations or evidence of implemented behavior.
+Each row reads left to right: setup, then reveal. Grey ghosts represent other recorded positions. Diagram scales and panel perspectives are illustrative, not measurements.
+
+01. The arrow you can carry
+core / Vectors_Act1_WhatAVectorIs
+Translate both endpoints by the same offset. Their displacement stays unchanged. The ghost and solid pairs on the right compare the relation; the two comic panels are not a scale drawing.
+Learn: Displacement; Reference frame; Magnitude; Direction normalization (revisited)
+
+02. Aim without changing strength
+practice / Vectors_Act1_WhatAVectorIs
+Separate direction from magnitude by normalizing a nonzero displacement. Handle coincident endpoints separately.
+Learn: Normalization; Direction versus magnitude; Zero-vector policy
+
+03. Two moves deliver one point
+core / VFM_02_Operations
+Place two displacements head-to-tail. Their sum reaches the same endpoint as the direct displacement; this is a geometric construction.
+Learn: Vector addition; Head-to-tail construction; Compatible quantities
+
+04. Same arrival, different journey
+practice / VFM_02_Operations
+Retain both routes between the same endpoints. Travelled path length can differ while total displacement agrees.
+Learn: Displacement versus path length; Ordered samples
+
+05. The target moved
+practice / Vectors_Act2_VectorArithmetic
+Keep the source point fixed and move the destination. Recalculate the relation from the new target position.
+Learn: Vector subtraction; Relative position
+
+06. The rail keeps only part
+core / Vectors_Act2_VectorArithmetic
+Project onto the rail. Preserve the perpendicular remainder instead of pretending the rail describes the whole displacement.
+Learn: Target minus source; Signed dot product; Projection; Perpendicular remainder
+
+07. The receiver is looking elsewhere
+practice / Vectors_Act2_VectorArithmetic
+Compare the receiver's facing direction with a target direction. This picture tests direction only; distance and obstruction need separate rules.
+Learn: Normalized dot product; Angular threshold; Selection rule
+
+08. Where you push will matter
+optional extension / Vectors_Act2_VectorArithmetic
+Preview torque with the lever arm and force direction. A turning-moment diagram comes before any claim of a simulated hinge.
+Learn: Cross product; Lever arm; Torque direction
+
+09. The cup across the room
+core / VFM_05_Launch
+The dashed prediction assumes uninterrupted flight. Contact with the hoop changes velocity and therefore the remaining journey; translucent samples show successive positions.
+Learn: Initial velocity; Constant acceleration; Trajectory assumptions
+
+10. Your body follows the arc
+practice / VFM_05_Launch
+A launch can reach the platform without bringing horizontal velocity to zero. The receiving surface and recovery route matter.
+Learn: Launch state; Ballistic motion; Landing velocity
+
+11. Let go of the command
+core / VFM_03_Motion
+End the applied push and observe the motion that remains. The room still determines friction, drag and later contacts.
+Learn: Force; Mass and acceleration; Retained velocity; Engine integration
+
+12. Same push, different body
+practice / VFM_03_Motion
+Compare equal force over equal time from rest, using different TOTAL moving masses. If a trolley is used, include it in the mass; drawn arrows are schematic.
+Learn: F=ma; Controlled comparison; Mass versus visual size
+
+13. Two points can carry you
+practice / VFM_03_Motion
+Hold a sphere in each hand. Aim down/back and press to thrust up/forward; release stops thrust, while momentum and gravity continue.
+Learn: Vector sum of forces; Sustained thrust; Counter-thrust
+
+14. Same arrows, different journeys
+core / Vectors_Act3_FieldsAndMotion
+Use the same direction samples as a velocity instruction or as an acceleration instruction. Equal-time positions reveal equal steps or increasing steps.
+Learn: Field sampling; Assignment versus accumulation; State update
+
+15. The drain becomes an orbit
+practice / Vectors_Act3_FieldsAndMotion
+Combine an inward component with a tangential component. Circulation is a candidate outcome; stable orbit is not guaranteed.
+Learn: Radial and tangential vectors; Force superposition; Incoming velocity
+
+16. The tray refuses to move
+practice / Vectors_Act4a_KineticForces
+Compare a resisted push with movement after the resistance is overcome. Overshoot depends on continuing input and the selected friction model.
+Learn: Static threshold; Sliding friction; Normal contact
+
+17. The room takes speed away
+core / Vectors_Act4a_KineticForces
+Launch identical bodies equally and change drag. Resistance opposes velocity; the paths and remaining speeds diverge.
+Learn: Velocity-dependent drag; Coefficient; Mass response
+
+18. Slide, roll or tip?
+optional extension / Vectors_Act4a_KineticForces
+Compare a constrained orientation with free rotation on an incline. Sliding and tipping depend on geometry, friction and the initial state.
+Learn: Angular freedom; Friction; Shape and contact
+
+19. Where the pipe lets go
+practice / Vectors_Act4a_KineticForces
+The channel constrains the point until its exit. Outside, velocity initially follows the outlet tangent; gravity then curves the trajectory.
+Learn: Contact constraint; Tangential departure; Gravity after release
+
+20. The point returns
+core / Vectors_Act4b_Oscillation
+Displace the point from equilibrium and release. With low damping it overshoots; other damping values may return without crossing.
+Learn: Restoring force; Rest length; Damping; Equilibrium
+
+21. The second spring answers
+practice / Vectors_Act4b_Oscillation
+Give two spring-mounted points room to collide. Contact transfers motion and each body's own spring responds.
+Learn: Coupled consequences; Contact transfer; Dynamic anchors
+
+22. A pole becomes your bridge
+optional extension / Vectors_Act4b_Oscillation
+Release a hinged pole of sufficient length onto a receiving support. A precise success makes a bridge; failure is not required.
+Learn: Hinge axis; Limits; Torque and support
+
+23. Two cycles try to meet
+core / Change_Choreography
+Observe a periodic release and a periodic receiver together. Small timing differences accumulate until an earlier alignment is missed.
+Learn: Phase; Period; Relative rate
+
+24. The conveyor remembers the delay
+practice / Change_Choreography
+A paused outlet produces a queue. Reopening at the same average rate as the input preserves the backlog; higher outflow is needed to clear it.
+Learn: Input/output rate; Accumulation; State through time
+
+25. The point retrieves more than you asked
+core / VFM_07_Gravity
+Apply attraction to every eligible body in range. The doorstop can answer alongside the intended point, changing the doorway.
+Learn: Pair forces; Receiver eligibility; Equal and opposite response
+
+26. Three bodies, two beginnings
+optional extension / VFM_07_Gravity
+Compare two three-body trials with a declared small initial difference. Keep trajectories for inspection; the illustration alone does not establish numerical accuracy or chaos.
+Learn: Pair accumulation; Initial conditions; Sensitivity versus integration error
+
+27. Take away one support
+core / VFM_09_Legs
+Remove a support from a loaded arrangement. The remaining contacts and centre of mass determine whether it holds or becomes a ramp.
+Learn: Support region; Mass projection; Static balance limits
+
+28. The dog must brace before it fires
+optional extension / VFM_09_Legs
+Proposed extension: connect permission to fire to the robot's supported stance. A supplied animated gait must be distinguished from physical balance.
+Learn: Support versus commanded pose; Stateful action; Optional recoil
+
+29. Make a passage with one shot
+core / VFM_08_Arena
+Keep the catalyst in hand and emit a separate projectile. Pushing a cube can open one passage and obstruct another; the cube remains in the world.
+Learn: Eligibility and occlusion; Interaction states; Impulse received once
+
+30. Deliver it through the room you changed
+core / Vectors_Act5_ForceAsPlace
+Reuse the pole, displaced cubes and other consequences to deliver the continuing point. Persistence between halls must be implemented explicitly.
+Learn: Field membership; Receiver adapters; Composition and transfer

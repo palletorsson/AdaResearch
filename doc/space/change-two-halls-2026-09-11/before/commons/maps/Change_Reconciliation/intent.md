@@ -1,0 +1,7 @@
+Concept: The Fundamental Theorem of Calculus, animated — differentiation and integration are inverse operations. Take a derivative then integrate it back and you return to the original function; the same holds in reverse. The sequence's two halves are shown to be one.
+Sequence role: Eighth and final teaching map of Change, the synthesis. Closes the rate/accumulation pair built across maps 1-7 and bridges into Chamber_Change, where accumulation becomes the catalyst's sustain affordance.
+Technical angle: Animating the round trip — differentiate f to f', integrate f' back to f (up to a constant), and confirm the return numerically. Visualizing both directions makes the inverse relationship a closed loop rather than two separate facts.
+Critical angle: The reconciliation the whole sequence was arguing toward. Local rate and global total, which felt like opposites, turn out to be readings of one structure from two ends. This is calculus's central unity, and the carry-forward note — F = ma, sine as its own twice-negated derivative — is why forces and wavefunctions can run on this substrate without re-deriving it.
+Key artifacts: ftc_bridge animates the derivative-then-integral round trip; code_display names both directions symbolically; science_screen confirms the return in 2D.
+
+Gap: ftc_bridge is a scaffolded name — the round-trip animation scene is not yet built. Chamber_Change (the catalyst chamber, ninth artifact group) is designed in the sequence JSON but not listed among the eight scored maps.

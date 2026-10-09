@@ -1,0 +1,19 @@
+func settle(s: Node, seconds: int) -> void:
+	for i in range(seconds*60):
+		for p in s.parts:
+			if p.target_active:p._dock_to_target(1.0/60.0)
+		if s.assembled:
+			s._park_surplus(1.0/60.0)
+			s._update_bonds()
+func prepare_view(s: Node, mode: String) -> void:
+	if mode=="float":
+		s._set_float_mode()
+		seed(19)
+		for p in s.parts:
+			p.position=s.inventory_center+Vector3(randf_range(-1,1),randf_range(-1,1),randf_range(-1,1))*s.inventory_box*.5
+	else:
+		s._assemble(mode)
+		settle(s,18)
+	for p in s.parts:p.set_process(false)
+func capture_state(s: Node, mode: String) -> Dictionary:
+	return {"mode":mode,"assembly":s.current_assembly,"assembled":s.assembled,"parts":s.parts.size(),"bonds":s.bonds.size(),"witness_instance":s.parts[0].get_instance_id(),"witness_type":s.parts[0].part_type,"witness_mesh":s.parts[0].mesh_node.mesh.get_class(),"witness_position":arr(s.parts[0].position)}

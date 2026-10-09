@@ -1,0 +1,38 @@
+{
+ "sweep": "brake_skid",
+ "peak_changed_pct": 1.059,
+ "subject_pct": 7.621,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "sled": "block"
+   },
+   "b": {
+    "sled": "crate"
+   },
+   "changed_px": 6116,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "sled": "block"
+   },
+   "b": {
+    "sled": "vitrine"
+   },
+   "changed_px": 6117,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "sled": "crate"
+   },
+   "b": {
+    "sled": "vitrine"
+   },
+   "changed_px": 4951,
+   "changed_pct": 0.857
+  }
+ ]
+}

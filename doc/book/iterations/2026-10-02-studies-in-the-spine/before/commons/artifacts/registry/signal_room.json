@@ -1,0 +1,26 @@
+{
+  "artifacts": {
+    "signal_room": {
+      "lookup_name": "signal_room",
+      "name": "Different neighbours",
+      "scene": "res://commons/artifacts/signal_room/signal_room.tscn",
+      "description": "An entire room displays one retained binary array. Compare ordered rows, seeded row permutations and cell permutations while keeping both symbol counts fixed. Runnable desktop chapter companion; not installed in the museum spine.",
+      "sequence": "randomness",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "status": "chapter companion; intended return after Random_Entropy",
+      "complexity": "intermediate",
+      "tags": ["array", "randomness", "permutation", "entropy", "reference-study"],
+      "reference_artist": "Ryoji Ikeda",
+      "reference_source": "https://www.ryojiikeda.com/project/testpattern/",
+      "proposed_maps": ["Random_Entropy"],
+      "minimum_display_bounds_m": [14, 7.2, 24],
+      "signals": ["state_changed"],
+      "interactions": ["Repeat, shuffle rows, shuffle cells", "Choose and replay a seed", "Step the displayed row offset", "Inspect a 4 by 4 patch of the displayed record", "Walk in the supplied desktop viewer"],
+      "parameters": {"pattern": "set_pattern(mode: int, seed_value: int)", "offset": "step_rows(amount: int)", "sample": "inspect_rows(first_row: int)"},
+      "qfep_connection": "Keep the population fixed and make changed adjacency perceptible at room scale; name what the marginal entropy gauge omits.",
+      "tutorial": "res://doc/book/studies/signal-room/MAKING.md"
+    }
+  }
+}

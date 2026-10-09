@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_GameOfLife · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_GameOfLife">← Tutorial lineage</a></p><h1>CA GameOfLife</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_GameOfLife/final.md">Raw captured source</a></p><pre># A history you can inhabit
+
+&lt;!-- @ca_bridge --&gt;
+
+A gap in the screen lets you see through. The same gap in the floor asks something else of your body.
+
+Stand at the desk before the basin. Its small coloured bars have relatives ahead: tiles laid across the recess, and a lattice standing along its side. Find the gold line in all three places. Press ROW. The line moves into an earlier part of the pattern. Nothing has been recalculated. You are moving your attention through a record.
+
+The room greets you with twelve rows already made. Stay on the museum floor and press REPLAY. The record returns to one occupied square. There is less floor now, and less ornament. This button resets the experiment; the museum&#x27;s clock continues.
+
+Before STEP, look at the three positions around that square. Which squares will appear in the next row? Press once. A short line arrives on the desk, another row of support appears ahead, and the screen receives a vertical strip. Make one more prediction before asking it to continue.
+
+The rule reads left, centre and right in one row. Their ordered bits select an answer:
+
+```gdscript
+var index = (a &lt;&lt; 2) | (b &lt;&lt; 1) | c
+```
+
+Here `a`, `b` and `c` are the three states, read into one index as the board in the first hall did. The bridge&#x27;s `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.
+
+The study keeps that new row:
+
+```gdscript
+var next_row: Array = work._calculate_next_row(history.back())
+history.append(next_row)
+```
+
+These lines come from `history_study.gd`, which calls the original bridge&#x27;s solver. The record holds fifteen sites across and at most twenty-four rows. At the edges, left and right wrap. At the end of the record, this instrument stops adding rows. The first boundary belongs to the neighbourhood; the second belongs to our viewing budget.
+
+Leave the desk and walk along the margin beside the basin. The gold line meets your row. It crosses the tiles and climbs the lattice; back on the desk, the same generation is marked. Walk farther, then turn back. An earlier row returns to the gold, but the later rows have not gone away. Your return has undone nothing.
+
+Depth is doing the work of time. In the earlier volume, neighbours surrounded a cell within one three-dimensional state. Here a nearby row is an earlier or later moment. A solid-looking arrangement can hide that difference. None of the four choices has changed in this hall: it is Rule 30 again, three cells in a row, one row at a time. What has changed is where the past is kept.
+
+Stop beside a gap. The line can pass through it; your foot would need support. Beyond the last recorded row, the marker stays behind. Walking cannot supply a generation the machine has not made. If RUN is on, the record can keep growing while you revisit an earlier part. Looking back and running backwards are different acts.
+
+![The walking visitor selects one generation across the floor tiles and wall lattice.](images/walking-history.png)
+
+*The gold line follows a place in the record. The same pattern meets us as an image and as possible support.*
+
+The same record is dressed three ways. On the desk, a one becomes a coloured bar. In the basin, it becomes a tile with collision. In the lattice, it becomes coloured infill in a bronze frame. There is one stored history, but its uses have different consequences. The frame stands independently; the pattern does not calculate structural engineering. The basin has a lower collecting floor and end ramps, and the museum passage continues alongside it.
+
+Try SEED, which changes the beginning while keeping Rule 30. Or return to SINGLE and press FLIP X9: one additional site in the starting row changes. STEP through the consequences. Later rows are made again from this beginning; we cannot honestly keep the old descendants and call them the same experiment.
+
+Would you choose the same beginning for a screen and a crossing? You may want the holes in one and resist them in the other. A body we liked as ornament becomes awkward underfoot. This is a way of testing our desire against an implementation: change its use and discover what the beautiful surface had allowed us to overlook.
+
+Beyond the basin the hall continues: columns, the orb again, a lab, a mirrored automaton. The lab arranges a tape, a head and a state register as a model of a machine. Its sign asks what counts as computation. A familiar arrangement gives us somewhere to begin asking; it cannot do the work of a proof.
+
+The next hall holds a two-dimensional present. A pattern will seem to travel while its cell addresses stay still. Keep the distinction between a recorded body and the procedure that continues it.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_GameOfLife/tutorial.md">Raw captured source</a></p><pre># Read a row, wear a history
+
+1. At the desk, find the gold row in the flat record, stepping tiles and lattice. ROW moves attention through the retained record without changing it.
+2. From the rim, REPLAY to the beginning. Predict the next row, then STEP. Compare ordered left/centre/right bits with the answer in Rule 30.
+3. Walk along the basin margin: gold follows the nearest recorded row through all three mappings. Walk back and check that later rows remain. Name which direction carries site address and which carries generation. Beyond the record, walking cannot select an unmade row.
+4. RUN to a fuller record. It stops after twenty-four rows; this is the display budget. X wraps according to the neighbourhood rule.
+5. Use SEED or FLIP X9 and repeat. Explain why later rows are recalculated when the beginning changes.
+6. Compare a gap in ornament with a gap in support. Inspect from the side passage before entering the shallow basin; use the end ramps to return. Replay and seed controls alter support, so operate them from the desk on the museum floor.
+7. Continue into the retained rear collection, then the next hall&#x27;s Life dish. The lab, columns and mirrored work are secondary comparisons, not evidence that this Rule 30 history implements Conway Life or a working universal circuit.
+
+Primary: `ca_bridge:0:0#study:history#plinth:0#follow:walk`. Its three mappings belong to this one anchored encounter. Existing secondary roles and the orb remain.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_GameOfLife/technical.md">Raw captured source</a></p><pre># One history, three mappings
+
+This hall returns to the ordered row from CA_Introduction after the current route&#x27;s three-state volume. It prepares for the binary Life dish in CA_BeyondBinary by distinguishing a two-dimensional history image from a two-dimensional current state.
+
+## Actual implementation
+
+`algorithms/cellularautomata/ca_bridge/ca_bridge.gd` retains its standalone bridge. Only `#study:history` installs `history_study.gd`. The module sets width 15, record length 24 and Rule 30. Its call to the parent&#x27;s `_calculate_next_row` uses periodic left/right neighbours and a separate next row. All three views read one `history` array; no independently seeded approximation is used for the wall.
+
+```gdscript
+var index = (a &lt;&lt; 2) | (b &lt;&lt; 1) | c
+```
+
+This excerpt is from the base `_apply_rule`. Bit `index` of `rule` supplies the result. The eight answers for indices 0 through 7 are 0,1,1,1,1,0,0,0. On a fifteen-site ring a single centre cell produces occupied sites 6,7,8 after one update.
+
+From the study&#x27;s `_advance`:
+
+```gdscript
+var next_row: Array = work._calculate_next_row(history.back())
+history.append(next_row)
+```
+
+## Walking through the record — 25 September
+
+The map opts into `#follow:walk`. `history_study.gd` reads CharacterBody3D roots from `em_walker` and `player_body`, in the study&#x27;s local coordinates. Within the recorded bay and its margins, `floor(z / CELL + 0.5)` selects the nearest retained generation. The deck, screen and record witnesses move together. Their contents and support shapes do not change. No body measurement is written into the automaton.
+
+The selection region excludes the desk, neighbouring halls, future rows and bodies above the display. Leaving it retains the selected row; ROW at the desk remains available. Walking does not pause RUN. The floor witness extends to 8.8 m across the margin; it is a visual marker, not support. A ground inscription introduces this use without another control panel. Unconfigured history studies keep their 6.1 m witness and manual selection.
+
+Current native results and limitations: [encounter-notes.md](encounter-notes.md).
+
+## State and controls
+
+The specimen arrives held with generations 0–11. REPLAY resets to generation 0. STEP appends one generation and holds; RUN appends at most one row per 0.5-second timer interval, stopping at generation 23. ROW selects an earlier recorded row without changing history. SEED cycles SINGLE, PAIR and a local RNG seeded with 23090 at density 0.45. FLIP X9 toggles only site nine of that beginning; both seed controls replay. The museum clock is unaffected.
+
+The current model does not accept a continuous stream of visitor proximity or object contact. Its input is the initial row selected at the desk. A contact-driven extension would be a new intervention rule and must declare when it writes state.
+
+## From data to space
+
+For site x and generation g, deck centre = `((x-7)*0.4, -0.11, g*0.4)`. A tile measures 0.4×0.22×0.4 metres and supports at y=0. Only occupied recorded cells enable their pooled collision shape. Empty sites reveal the basin floor at y=-0.60. The basin covers the complete seven-by-ten-metre source-grid opening. End ramps return to rim height; the side passage offers a separate route.
+
+The flat record uses the same entries, with future rows darker than recorded zeroes. In the ornamental screen, site address becomes height (`0.5+x*0.17`) and generation remains depth (`g*0.4`). Colours are a fixed mint-to-lilac mapping of generation, not another state variable. Bronze framing has collision; coloured lattice infill is visual. Material emission is a finish, not implemented projected illumination. A gold witness identifies one selected generation across the three mappings.
+
+Three MultiMeshes and 360 pooled support shapes bound the study&#x27;s work. Reset does not spawn another collection of nodes. Collision toggles are deferred to the physics-safe boundary, so read physical support after the next physics frame.
+
+## Verification scope
+
+See `doc/space/ca-history-review-2026-09-13` for exact runtime receipts, source hashes and screenshots. Tests exercise the inherited rule, wrap, replay, one-bit intervention, history limit, all three mappings, collision rays and six controls through the project&#x27;s real desktop pointer. The pointer rig is placed in the actual museum; it is distinct from the museum&#x27;s ordinary desktop walker. A walked stretch of margin is not a headset traversal acceptance or proof of a continuous route over generated cells. Retained secondary artifacts need further individual review.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_GameOfLife/intent.md">Raw captured source</a></p><pre>Concept: A stored one-dimensional CA history can be mapped into different museum bodies. Distinguish generation from a spatial dimension of the current state, and distinguish occupancy from rendering and collision.
+
+Sequence role: Return to the ordered row after the current route&#x27;s 3D three-state study. Prepare the binary Life dish in CA_BeyondBinary. The broader proposed row/history/plane/volume reorder remains a separate plan.
+
+Primary: ca_bridge with study:history. Rule 30, fifteen sites, twenty-four retained rows. One shared history supplies the desk, support tiles and ornamental screen. Seed/replay and one-bit intervention make the comparison controllable.
+
+Critical opening: The gap valued in a screen can frustrate a crossing. Which additional mappings and bodies make that difference? A shared substrate permits multiple uses; it does not erase their consequences.
+
+Retained: the lab room with its mounted apparatus, ca_columns, mirrored_cellular_automata and dark_sphere. Their detailed secondary encounters remain further work, not grounds for removing them or claiming Life/circuit mechanics for the bridge.
+
+
+25 September encounter: `follow:walk` makes the existing gold witness follow the visitor&#x27;s body along the recorded bay. Walking back selects an earlier retained generation without rewinding the automaton, recolouring the record or changing collision. The witness extends onto the museum margin. Outside the bay, ROW remains available at the desk; beyond the record, no future row is invented. RUN can continue while the visitor looks back. No new interface or artifact replaces the existing collection.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_GameOfLife/critical.md">Raw captured source</a></p><pre># A hole changes its obligations
+
+The same stored one becomes a desk square, a support tile and a coloured part of a screen. This is a small, inspectable instance of the project&#x27;s question about shared computational material. The bodies are related by a shared record. Their ability to carry, obstruct or attract a visitor depends on further decisions.
+
+A gap can make the screen desirable. It interrupts a regular surface and offers a view through it. Put that gap under a foot and the visitor has another reason to judge it. Neither judgement is contained in the bit. The floor adds collision, scale, gravity and a particular player body. The lattice places the cell among a frame, sightlines and colours. We can point to the added procedures instead of treating these identities as essences.
+
+The desire for an organic or queer surface does not need to be disowned. It can become an experiment. Keep the pattern and change what we ask it to do. Does the desired body still welcome us? Which body could use a route that ours cannot? What changes when the appearance is retained but its support is removed? The present hall implements the first comparison; further collision toggles or alternative player bodies remain work to do.
+
+The spatial record also carries an ambiguity. Adjacent rows look contemporaneous because they stand together. They were produced at different updates. The screen turns each row upright, making another plausible picture from the same order. A viewer can read a fabric where the machine stored a past. The gold witness lets that interpretation be checked against an address and generation.
+
+The controls expose a further limit: a new beginning replaces this record. It does not revise every possible past. There are fifteen sites, a periodic boundary and a twenty-four-row budget. The museum clock continues while the experiment is held. We choose enough of the process to investigate, and a remainder stays beyond this instrument.
+
+Beauty here is usable research material. A visitor can keep a pleasing beginning, repeat its construction, and discover how its application alters their judgement. The work leaves that judgement open while making its computational conditions specific.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_GameOfLife/artifacts.md">Raw captured source</a></p><pre># A history you can inhabit — retained collection
+
+The hall contains five artifacts. The primary `ca_bridge` is configured with `study:history`: its desk, stepping tiles and lattice are three views of one stored Rule 30 history, with six controls on the desk and an upright housed readout. The map also opts into `follow:walk`: the visitor selects a retained row by walking beside it, and the same gold witness moves across all three views without altering the history or support.
+
+The rear gallery retains `lab_room` with its mounted `turing_apparatus`, `ca_columns:0:-0.5:0.2`, `mirrored_cellular_automata:0:-0.5` and the decorative `dark_sphere`. The first three remain secondary, the orb remains decoration. Their existing work is available for further comparisons and needs separate interaction review. Neither a mirrored image nor a machine-like enclosure establishes a particular automaton law by itself.
+
+The book&#x27;s primary anchor is `ca_bridge`. No decorative or secondary work is silently promoted by being listed here.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_GameOfLife/summary.md">Raw captured source</a></p><pre># A history you can inhabit
+
+CA_GameOfLife retains its historical map ID, but its primary implements elementary Rule 30. A bounded history becomes a desk record, occupied support tiles and an ornamental lattice. The museum surrounds this experiment with a walking margin; a shallow basin collects the gaps and ramps return to floor level.
+
+The 15×37 map adds nineteen rows before the retained gallery and an eastern aisle that keeps the lab at full size. All five artifacts remain: ca_bridge is primary; lab_room, ca_columns and mirrored_cellular_automata remain secondary; dark_sphere remains decoration. Two cells open an east passage through the old front partition; a third opening joins the added aisle to the rear exit terrace. The active sequence order is unchanged in this pass.
+
+The primary offers STEP, RUN, REPLAY, SEED, FLIP X9 and ROW. It arrives held at generation 11 and records at most generation 23. Each mapping reads the same history. The tutorial asks the visitor to distinguish a spatial neighbour from another generation and to compare an ornamental gap with a gap in physical support.
+
+Book text and supporting documents now describe the installed experiment. The earlier Conway Life discussion and six-station claims are archived with the before state; the actual Life encounter is in CA_BeyondBinary. Runtime evidence and remaining review tasks are under doc/space/ca-history-review-2026-09-13.
+
+
+The current encounter also lets walking select a stored row. All three gold witnesses follow the visitor in the recorded bay; the data, tiles and collision stay unchanged. The floor witness reaches the margin so the visitor can compare without entering the generated crossing. Thirty-seven native desktop checks pass, including seven mouse-ray control events and forward/backward walking. A supplied body covers the XR player-group convention; tracked headset, Quest and whole-gallery acceptance remain pending. See encounter-notes.md and the 25 September walking-history review.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_GameOfLife/blurb.md">Raw captured source</a></p><pre>A hole lets the eye through. Underfoot, it asks for another route. Follow one row through a desk, a bridge and a screen: the same past, differently dressed.
+</pre></section></body></html>

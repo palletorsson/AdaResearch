@@ -1,0 +1,45 @@
+{
+  "started": "2026-09-14T19:45:02+02:00",
+  "finished": "2026-09-14T19:45:33+02:00",
+  "pid": 44844,
+  "exit": 0,
+  "checks": 47,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/living_probe_base.gd": "46d9adec8f94f7ced458f1355486a13fc6ac39c2bf5eb4da1f05b12295241e17",
+    "ada_run/living_acceptance.gd": "7898a66bb2a06298f0a0063edb15a8473371161c0eca1139eaa3fd0c37d57f71",
+    "commons/maps/LSystems_Living/map_data.json": "468abe1ea86e27fa77bb90b2f282e2096bf32e603752de11564e8c29735e2b5b",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/living-review-2026-09-14/review-plan.json": "745938f1ae854553575aeaa766f8eb98868b52152965fb9ef50ee9b0bdc8d72d",
+    "commons/artifacts/genetic_tree_sculptor/living_lesson.gd": "f9db82069b4908c19fdc6ca58c649638f2839a34fc18b2741cf8156196363229",
+    "commons/substrates/living_paper/living_paper.tscn": "23b57132b4d8aee8cb1e1a97a1cb2c4550ef2d2e47dc943fac276801140a1812",
+    "commons/substrates/living_paper/living_paper_manager.gd": "8c6a2c6499b9158c1a8a76ed0ccc5095234d3fccc64d3335aa4cc144b294fde4",
+    "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn": "c45fe5b630724a88430f1e9711a5cf3d84592049b849a6b93863b86bdc30fff4",
+    "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd": "35c794fb4abc4fc6303d1147fdcbfce7f8b38f2944222d0f9b8b839e34c1daad",
+    "commons/artifacts/lsystem_tree/lsystem_tree.tscn": "53b0b1f60c176c5f90742ea1d471fad469952ba3d927ad193133a7724edafd0d",
+    "commons/artifacts/lsystem_tree/lsystem_tree.gd": "202254d9f15c70139c871bc0a60206fc67faa54352981ae8a295bd415d1dd11e",
+    "commons/artifacts/branching_coral/branching_coral.tscn": "838dbac3fe247e6fc8b4ac3bd020004bbca870c5f37a9ff2b00abe8d832cd985",
+    "commons/artifacts/branching_coral/branching_coral.gd": "6652f7ea45afb6da2e06438f57f8c48ac685c4dabc77c46407fee9e160ff9fc6",
+    "algorithms/nature_system/morphology/tree_morphology.gd": "faad36bd2733286a6c3315a120d52071759dedb26ad6b5255377443a280bcf61",
+    "algorithms/nature_system/dna/critter_dna.gd": "410a23440e6f50c03c5293615bcbab9cd10e7e30a83b67eec0224da65c9bafd4",
+    "algorithms/nature_system/dna/critter_trait_mapper.gd": "7a8af8d322d57b6f991d27c54fe3c9561badff8691c40d41bff4a389d33c72e0",
+    "utils/lsystem.gd": "8cb9d5b035b291c2c5987ddf46b66e4885b8a08b68181977d3060507c39a57d9",
+    "commons/hazards/becoming_catalyst/modes/branching_projectile.gd": "c620c6f29e9660b983ebde39605984d0772813fc7f31764c3dcbfdb1876918af",
+    "commons/substrates/living_paper/cartridges/paper_lsystem.gd": "f9c1be9391b4341498780d1ec98804a245737dd96ead873c5eefe2cd7b92b1ee",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "3f764528950b8f076a5c58c7e60af3edd1e1c580cc973c50b63674834e6b7471",
+    "commons/data/trunk_branches.json": "69f320e7dce2f1166255c5d5eb7b72e58cbff0bcc624f9ce0440262f4be23b1e",
+    "commons/maps/LSystems_Living/final.md": "c08af7ca6dab5d7b3803743ec05cc5fea1ff812de3545b2887102020ef1d5f8c"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

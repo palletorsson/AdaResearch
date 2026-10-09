@@ -1,0 +1,48 @@
+
+	report["checks"]=[]
+	var table: Node3D=nodes.get("the_commons_table")
+	var gates: Node3D=nodes.get("the_fourth_limit")
+	var peer: Node3D=nodes.get("peer_production_tool")
+	check(report,is_instance_valid(table) and is_instance_valid(gates),"Both formerly missing works load through the museum registry")
+	if not is_instance_valid(table) or not is_instance_valid(gates):quit(1);return
+	check(report,is_instance_valid(peer) and nodes.has("wiki_fragment"),"All four existing artifact families stand in the hall")
+	peer._paused=true
+	for i in range(30):peer._place_facet(i%6)
+	check(report,table.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Ring table is full size")
+	check(report,gates.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Four gates retain their full height")
+	check(report,(table.global_position-origin).distance_to(Vector3(9.5,0,9.5))<.06,"Table stands in the planned rear bay")
+	check(report,(gates.global_position-origin).distance_to(Vector3(2.5,0,5.5))<.06,"Gates stand along the west side")
+	check(report,table.classification_counts.reduce(func(a,b):return a+b,0)==table.specimens,"Classifier counts account for every specimen")
+	check(report,table._content.find_children("*","StaticBody3D",true,false).size()==28,"Twenty-eight tabletop segments have collision")
+	check(report,gates._content.find_children("*","StaticBody3D",true,false).size()==17,"Four gate frames, three closed leaves, one solid ajar leaf and threshold have collision")
+	var tag_count:=0
+	for c in table._content.get_children():
+		if c.get_script()==load("res://commons/ui/text_screen.gd"):
+			tag_count+=1
+			check(report,c.width_m>=.46,"Restored label has a usable reading width")
+	check(report,tag_count==8,"Seven short instrument cards and one table caption remain")
+	var table_attachment:=Node3D.new();table_attachment.name="MuseumAttachment";table.add_child(table_attachment)
+	var gates_attachment:=Node3D.new();gates_attachment.name="MuseumAttachment";gates.add_child(gates_attachment)
+	var expected_counts: Array=table.classification_counts.duplicate()
+	table.apply_grid_config({"seed":17,"specimens":18})
+	gates.apply_grid_config({"gate_iv":"glass"})
+	await process_frame
+	check(report,is_instance_valid(table_attachment) and is_instance_valid(gates_attachment),"Reconfiguration preserves museum attachments")
+	check(report,table.classification_counts==expected_counts,"Same seed keeps the same counted specimens")
+	check(report,table.get_children().filter(func(c):return c.name=="CommonsInstruments").size()==1 and gates.get_children().filter(func(c):return c.name=="FourGates").size()==1,"Configuration rebuilds one owned exhibit without duplication")
+	await physics_frame
+	var space_test:=hall.get_world_3d().direct_space_state
+	var x: float=gates._gate_x(3)
+	var crossing_ray:=PhysicsRayQueryParameters3D.create(gates.to_global(Vector3(x,1,.5)),gates.to_global(Vector3(x,1,-.5)),1)
+	check(report,not space_test.intersect_ray(crossing_ray).is_empty(),"Glass gate actually blocks the crossing")
+	gates.apply_grid_config({"gate_iv":"open"});await process_frame;await physics_frame
+	check(report,space_test.intersect_ray(crossing_ray).is_empty(),"Authored open variant clears that crossing")
+	gates.apply_grid_config({"gate_iv":"glass"});await process_frame;await physics_frame
+	check(report,not space_test.intersect_ray(crossing_ray).is_empty(),"Restoring glass restores collision")
+	var centre_ray:=PhysicsRayQueryParameters3D.create(table.to_global(Vector3(0,1.5,0)),table.to_global(Vector3(0,.4,0)),1)
+	check(report,space_test.intersect_ray(centre_ray).is_empty(),"The table centre is an actual opening")
+	var rim_ray:=PhysicsRayQueryParameters3D.create(table.to_global(Vector3(1.15,1.5,0)),table.to_global(Vector3(1.15,.4,0)),1)
+	check(report,not space_test.intersect_ray(rim_ray).is_empty(),"Table rim has a physical surface")
+	var gate: Dictionary=museum.get("_gate")
+	if not gate.is_empty():gate.scanner.palm_scanned.emit();museum.get("_mod_gate").call("step_open",gate,10.0)
+	report["classifier"]=table.classification_counts

@@ -1,0 +1,136 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Both authored Cantor anchors remain in the museum",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-model",
+      "passed": true
+    },
+    {
+      "name": "Production hand model arms without changing the current row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pull",
+      "passed": true
+    },
+    {
+      "name": "Production XR release makes exactly two outer intervals",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: latest",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: history",
+      "passed": true
+    },
+    {
+      "name": "Reachable grip has floor in front of its plinth",
+      "passed": true
+    },
+    {
+      "name": "Standing body has clearance at the hand model",
+      "passed": true
+    },
+    {
+      "name": "Grip at standing reach",
+      "passed": true
+    },
+    {
+      "name": "Existing desktop ray reaches nearby RESET",
+      "passed": true
+    },
+    {
+      "name": "Existing ramp carries the actual desktop body onto the deck",
+      "passed": true
+    },
+    {
+      "name": "3.000 m opening: body passes",
+      "passed": true
+    },
+    {
+      "name": "1.000 m opening: body passes",
+      "passed": true
+    },
+    {
+      "name": "0.333 m opening: body stops",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pagoda",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Printed lesson builds beside existing artifacts in museum",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "gap_tests": [
+      {
+        "endpoint": [
+          9.5,
+          0.998281538486481,
+          18.9982299804688
+        ],
+        "width": 3.0
+      },
+      {
+        "endpoint": [
+          6.5,
+          0.998281538486481,
+          18.9982299804688
+        ],
+        "width": 1.0
+      },
+      {
+        "endpoint": [
+          5.5,
+          1.00100004673004,
+          15.2492733001709
+        ],
+        "width": 0.333333333333333
+      }
+    ],
+    "hand_approach_obstructions": [],
+    "pagoda_in_hall": [
+      9.5,
+      1.0,
+      16.5
+    ],
+    "scope": "Native museum; synthetic XR poses and desktop ray/walking inputs. Before fixture reconstructed from pre-edit backup. Exact printed study temporarily added only for its capture. No physical headset test.",
+    "source_in_hall": [
+      5.5,
+      0.0,
+      8.5
+    ]
+  },
+  "passed": true,
+  "room": "Fractal_CantorSet",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

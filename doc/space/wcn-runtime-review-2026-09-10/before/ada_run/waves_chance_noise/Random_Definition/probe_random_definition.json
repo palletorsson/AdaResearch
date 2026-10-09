@@ -1,0 +1,28 @@
+{
+  "checks": 25,
+  "control_path": "InteractableAreaButton.button_pressed emitted programmatically; slider read, not driven; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "res://ada_run/necklace_hand.json (the live stamps, on purpose)",
+  "headset_verified": false,
+  "map": "Random_Definition",
+  "measurements": {
+    "built_cell": [
+      3,
+      12
+    ],
+    "cells_changed_by_one_extra_draw": 64,
+    "map_cell": [
+      3,
+      12
+    ],
+    "panel_height": 1.00699353218079,
+    "platform_cells": 8,
+    "platform_cells_at_one_metre": 8,
+    "seeds": [
+      42,
+      193,
+      602
+    ]
+  }
+}

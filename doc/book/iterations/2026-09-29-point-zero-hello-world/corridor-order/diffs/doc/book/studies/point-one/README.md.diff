@@ -1,0 +1,20 @@
+--- before/doc/book/studies/point-one/README.md
++++ doc/book/studies/point-one/README.md
+@@ -1,11 +1,11 @@
+-# Point One — positions before connections
++# Point One — follow the corridor
+ 
+-Prepared in Day Zero. The main scene is coordinates.tscn; the short learner script is points.gd. Read TUTORIAL.md for the first exercise.
++The tutorial follows the museum's order: absent, visible, solid, held, coordinates, target, pedestal. It alternates small executable changes with encounters whose machinery is supplied by the museum.
+ 
+-The download opens with two white markers placed by the complete script. The tutorial first reduces that script to an unused position, then reveals one marker, changes each coordinate, and places a second. Both positions use the same scene reference. This is the material that Point Lines will connect.
++The project starts in study.tscn, the three-station desktop comparison. position.gd keeps an unused position; visible.gd creates a visible sphere; solid.gd adds a matching physical boundary. TUTORIAL.md identifies the exact lines to change. These scripts and the scene are unchanged from the earlier tested construction study.
+ 
+-Supplied parts: base.tscn from Day Zero; two hidden MeshInstance3D markers sharing a 0.14 m radius SphereMesh; fixed coloured axes and labels. The coordinate script assigns their positions and visibility. It does not build meshes, arrows, readouts, colliders or pickup systems. There are no missing helper functions or plug-ins.
++The black held point, the target and pedestal are encountered in the full museum. This download has no walking or pickup system; it must not be mistaken for a headset-ready reproduction of the whole hall. Godot's collision debug view makes the fixed study's boundary comparison inspectable.
+ 
+-Optional: CONSTRUCTION.md and study.tscn preserve the preceding visible/solid comparison with its complete position.gd, visible.gd and solid.gd scripts. Those files are unchanged. They are a further look at the same museum encounter, not prerequisites for the next Line exercise.
++When the tutorial reaches the coordinate room, coordinates.tscn and points.gd supply the two-marker study. Run that scene with Run Current Scene; the project main scene remains study.tscn. Both scenes inherit the unchanged Day Zero base.tscn.
+ 
+-Both scenes are fixed-camera desktop studies. The museum supplies walking and XR pickup. The code and lesson variations are checked in Godot; beginner understanding and headset behavior require separate trials.
++CONSTRUCTION.md holds the fuller previous construction explanation. POINT_ZERO.md contains the preceding readiness/process tutorial, and DAY_ZERO.md covers preparation. No external plugins or assets are required for either desktop scene.

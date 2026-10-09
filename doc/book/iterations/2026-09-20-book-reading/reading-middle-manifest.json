@@ -1,0 +1,732 @@
+{
+  "reader": "book_read_middle",
+  "completed_at_utc": "2026-09-20T21:22:55.013239+00:00",
+  "scope": "Full ordered close reading of all final.md prose, code blocks, and footnotes in the eight listed current sequences. No runtime or source-code verification outside quoted manuscript code. All files were read in full; truncated first wavefunctions output was supplemented by full rereading of Propagation, Effect Sound and Bernini.",
+  "sequence_order": [
+    "wavefunctions",
+    "randomness",
+    "noise",
+    "cellularautomata",
+    "fractals",
+    "lsystems",
+    "proceduralgeneration",
+    "softbodies"
+  ],
+  "map_count": 73,
+  "word_count_whitespace": 55253,
+  "sequences": [
+    {
+      "sequence": "wavefunctions",
+      "sequence_path": "commons/maps/sequences/wavefunctions.json",
+      "sequence_sha256": "3034dd376598746c86925c3d4cc1f91c9d24ad956bc02b823169166eecde39ed",
+      "maps": [
+        {
+          "order": 1,
+          "map": "WaveFunctions_Intro",
+          "path": "commons/maps/WaveFunctions_Intro/final.md",
+          "sha256": "a4cfd70349d87286032d53620ddae87752d902acc02531881262e47960546f9e",
+          "bytes": 3693,
+          "words_whitespace": 613,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "WaveFunctions_Pendulum",
+          "path": "commons/maps/WaveFunctions_Pendulum/final.md",
+          "sha256": "ca12bf9d17f6c803f5990f5c6a77772195862c20b787ee2887753089c8c44aa5",
+          "bytes": 3857,
+          "words_whitespace": 656,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "WaveFunctions_Sine_Space",
+          "path": "commons/maps/WaveFunctions_Sine_Space/final.md",
+          "sha256": "7a3d47b2a0dd31ccee00d2de68b9337eb6704085f9b71af3aa145b10a1b94a2d",
+          "bytes": 6223,
+          "words_whitespace": 1045,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "WaveFunctions_Unit_Circle",
+          "path": "commons/maps/WaveFunctions_Unit_Circle/final.md",
+          "sha256": "e391c3623417c91e8a90b519aec3c7fffca392f79673fbcd4e72ad979f6f6f55",
+          "bytes": 2538,
+          "words_whitespace": 412,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "WaveFunctions_3D_Wave_Propagation",
+          "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+          "sha256": "8c798adf7d3effdc315f48f3b3cfebca642398e3d06dae7b072667eb590c18dc",
+          "bytes": 3641,
+          "words_whitespace": 570,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "WaveFunctions_Effect_Sound",
+          "path": "commons/maps/WaveFunctions_Effect_Sound/final.md",
+          "sha256": "c02c67069138f08a4ef4d26c05584bfb7c7295094ed73c24e82399a6dcf26cb4",
+          "bytes": 4349,
+          "words_whitespace": 738,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "Wavefunctions_Bernini",
+          "path": "commons/maps/Wavefunctions_Bernini/final.md",
+          "sha256": "78701900090a59b419c1862e9358f171fa8aee75001a5b04b2d8dfd76c71cbd4",
+          "bytes": 2542,
+          "words_whitespace": 419,
+          "read_entire_file": true
+        },
+        {
+          "order": 8,
+          "map": "WaveFunctions_John_Cage",
+          "path": "commons/maps/WaveFunctions_John_Cage/final.md",
+          "sha256": "16a16df2bd92561ab237bd1e14d59e2c5ddfa36c6d28d325389686271ee323f4",
+          "bytes": 2667,
+          "words_whitespace": 419,
+          "read_entire_file": true
+        },
+        {
+          "order": 9,
+          "map": "WaveFunctions_AirMusic",
+          "path": "commons/maps/WaveFunctions_AirMusic/final.md",
+          "sha256": "dd67e9c981558502829a688a83e682faebea33f671899521db06f0d030366e14",
+          "bytes": 4458,
+          "words_whitespace": 797,
+          "read_entire_file": true
+        },
+        {
+          "order": 10,
+          "map": "Wavefunctions_Sky_Stairs",
+          "path": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+          "sha256": "2b8e3f5a889a7dca10cd7422b0eb551915702ebfc21e136d42e41bc144fb9556",
+          "bytes": 2611,
+          "words_whitespace": 424,
+          "read_entire_file": true
+        },
+        {
+          "order": 11,
+          "map": "WaveFunctions_TrigWalkingPath",
+          "path": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+          "sha256": "9feafb76e00cdf28318f5b9e55dc6679ccd534badb9bbaf3da4d27d10deae583",
+          "bytes": 2457,
+          "words_whitespace": 407,
+          "read_entire_file": true
+        },
+        {
+          "order": 12,
+          "map": "WaveFunctions_Synthesis_Lab",
+          "path": "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+          "sha256": "00551106af3e40352ac5c9e88aa8d6fb0bcb8526c1c6ea381740dcd05fca8e6d",
+          "bytes": 5270,
+          "words_whitespace": 933,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "randomness",
+      "sequence_path": "commons/maps/sequences/randomness.json",
+      "sequence_sha256": "d50c48f6446d368610ce319c316d61d47eb57d0b66680a98746e0d3007ef10ab",
+      "maps": [
+        {
+          "order": 1,
+          "map": "Random_Definition",
+          "path": "commons/maps/Random_Definition/final.md",
+          "sha256": "449ee9880e7685f86ea4c66aad7df90a44d4cd065c7d94daf910589ed1600104",
+          "bytes": 4924,
+          "words_whitespace": 828,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "Random_Entropy",
+          "path": "commons/maps/Random_Entropy/final.md",
+          "sha256": "c9616c6da7d990c61ad9837ec7a12bf53c7c5a01e238318a4391115de530c32d",
+          "bytes": 9045,
+          "words_whitespace": 1566,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "Random_Remove",
+          "path": "commons/maps/Random_Remove/final.md",
+          "sha256": "5156030db490bd18fbca0d421f33062f92994bf263dec19effb15908d4d4ea7e",
+          "bytes": 7647,
+          "words_whitespace": 1264,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "Randomness_10_PRINT_Algorithm",
+          "path": "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+          "sha256": "259612018d5721a305e97399d9c5652c5db6917fe019651bca5774c8f4fd8535",
+          "bytes": 2714,
+          "words_whitespace": 424,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "Random_Cubes",
+          "path": "commons/maps/Random_Cubes/final.md",
+          "sha256": "a7b9c7d24246a4be627e2e3dc74492aac82ea2b9d4a69ac2f38144775a48536f",
+          "bytes": 2396,
+          "words_whitespace": 410,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "Random_Rotate_Random_XYZ",
+          "path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+          "sha256": "4ab6e6a1681f6ad918c3f9d09914c2f4836c995f0d7e0e8edf1279a62dd34c6e",
+          "bytes": 2673,
+          "words_whitespace": 409,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "Random_Walk",
+          "path": "commons/maps/Random_Walk/final.md",
+          "sha256": "a72a6459a2fdb701594ba1d5b39792c1670bf24000acfea62db52388c639b1da",
+          "bytes": 8041,
+          "words_whitespace": 1331,
+          "read_entire_file": true
+        },
+        {
+          "order": 8,
+          "map": "Random_Gaussian",
+          "path": "commons/maps/Random_Gaussian/final.md",
+          "sha256": "847f74319596b18679df31dd2d53f945cb6daeee08ebe6976ca72d8fb485529b",
+          "bytes": 5496,
+          "words_whitespace": 921,
+          "read_entire_file": true
+        },
+        {
+          "order": 9,
+          "map": "Random_Mushrooms",
+          "path": "commons/maps/Random_Mushrooms/final.md",
+          "sha256": "48de2a7ffa5339c77523c9c0376a125965c917c9587346d35dc4851fab86b3bc",
+          "bytes": 8511,
+          "words_whitespace": 1354,
+          "read_entire_file": true
+        },
+        {
+          "order": 10,
+          "map": "Random_Space_Geometry",
+          "path": "commons/maps/Random_Space_Geometry/final.md",
+          "sha256": "29bf71622aa8c6b6ffb794168029e019f20a1afacef24c3a7a44ca96f7c2e8e4",
+          "bytes": 2612,
+          "words_whitespace": 399,
+          "read_entire_file": true
+        },
+        {
+          "order": 11,
+          "map": "Randomness_Examples_of_Randomness",
+          "path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+          "sha256": "1664e9ad746a6f978e6b63baa9b9a23eeb94d2e8a53f8c7b45e2f02ddfcf47cb",
+          "bytes": 6527,
+          "words_whitespace": 1080,
+          "read_entire_file": true
+        },
+        {
+          "order": 12,
+          "map": "Random_Pheromone",
+          "path": "commons/maps/Random_Pheromone/final.md",
+          "sha256": "2ceed42c99417f61686b42d7293ca470d05cf79350be0cfc007c158c66638b5e",
+          "bytes": 3033,
+          "words_whitespace": 492,
+          "read_entire_file": true
+        },
+        {
+          "order": 13,
+          "map": "Random_Space",
+          "path": "commons/maps/Random_Space/final.md",
+          "sha256": "5ee4f8d430a547742015918ba2cbe935dfd120c197d07f6c27115019bd9b466a",
+          "bytes": 2553,
+          "words_whitespace": 409,
+          "read_entire_file": true
+        },
+        {
+          "order": 14,
+          "map": "Random_Game",
+          "path": "commons/maps/Random_Game/final.md",
+          "sha256": "a076c53d5357dfd88ce0bedc590695bc168245c07b7f4af0e64b0d6bc42b718b",
+          "bytes": 8861,
+          "words_whitespace": 1440,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "noise",
+      "sequence_path": "commons/maps/sequences/noise.json",
+      "sequence_sha256": "4a7ca520a93f5f2044a74317dfd6ea4fe0059699b8fbb01c7a1dce3951e01d4a",
+      "maps": [
+        {
+          "order": 1,
+          "map": "Random_Noise_Types",
+          "path": "commons/maps/Random_Noise_Types/final.md",
+          "sha256": "f94fc7ff88835c253ca2622e2a638acb6729b057176fe15a3bef42b55b818f30",
+          "bytes": 9738,
+          "words_whitespace": 1602,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "Noise_Columns",
+          "path": "commons/maps/Noise_Columns/final.md",
+          "sha256": "d5e3f300bcf46bcca41512bd10f6082c4426883345271da3f47e273114bbbc8c",
+          "bytes": 7594,
+          "words_whitespace": 1280,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "Noise_One",
+          "path": "commons/maps/Noise_One/final.md",
+          "sha256": "6d9528ae1be355500cc4842e1e3e573cb0f1588d85fe90cb283e31a04717b8c0",
+          "bytes": 8119,
+          "words_whitespace": 1286,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "Noise_Voxel",
+          "path": "commons/maps/Noise_Voxel/final.md",
+          "sha256": "0339bbfd0b398f54b24b843450c7e81664a3c58667ae8e1a6974fa8b0c09523e",
+          "bytes": 7683,
+          "words_whitespace": 1229,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "Noise_6_Wall",
+          "path": "commons/maps/Noise_6_Wall/final.md",
+          "sha256": "e7a08ec471f7ecb941e512797250f24684056fed92763d79a2350fbd6f943172",
+          "bytes": 6480,
+          "words_whitespace": 1062,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "Noise_Inside_Noise",
+          "path": "commons/maps/Noise_Inside_Noise/final.md",
+          "sha256": "8462d0da760da424c42c952fdf02e91373744247abad021d83ecc35697b597fc",
+          "bytes": 6931,
+          "words_whitespace": 1169,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "Noise_Space_10",
+          "path": "commons/maps/Noise_Space_10/final.md",
+          "sha256": "0336acd8fbdc95ae7de375d013b2959456b39947fdecb1a1395f786aad4dcf7d",
+          "bytes": 6727,
+          "words_whitespace": 1098,
+          "read_entire_file": true
+        },
+        {
+          "order": 8,
+          "map": "Noise_Perlin_Simplex",
+          "path": "commons/maps/Noise_Perlin_Simplex/final.md",
+          "sha256": "0748a01ffa376a61ac6790c252be37add52664da592686c5b9077fb6c7974447",
+          "bytes": 8004,
+          "words_whitespace": 1281,
+          "read_entire_file": true
+        },
+        {
+          "order": 9,
+          "map": "Lab_Path",
+          "path": "commons/maps/Lab_Path/final.md",
+          "sha256": "3fa6bd94aa92dce6c0212323f16cf26f2eef6ab414a402e698e8c7dd4bdddbf5",
+          "bytes": 1922,
+          "words_whitespace": 337,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "cellularautomata",
+      "sequence_path": "commons/maps/sequences/cellularautomata.json",
+      "sequence_sha256": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd",
+      "maps": [
+        {
+          "order": 1,
+          "map": "CA_Introduction",
+          "path": "commons/maps/CA_Introduction/final.md",
+          "sha256": "6f1d7de34b510fa4f6071ed4ec96432632e8fc8750bcbbecd260ef2574516b82",
+          "bytes": 7349,
+          "words_whitespace": 1226,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "CA_ElementaryRules",
+          "path": "commons/maps/CA_ElementaryRules/final.md",
+          "sha256": "2638c5ee9765bb8da3c16c383f559b1b35eb7f09dee94dda64005c770c8f3f69",
+          "bytes": 4712,
+          "words_whitespace": 776,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "CA_GameOfLife",
+          "path": "commons/maps/CA_GameOfLife/final.md",
+          "sha256": "780fca9f4f6757699d528ddc4e5ab68f33f7585e93c32446deb403f1e2dceff8",
+          "bytes": 3564,
+          "words_whitespace": 601,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "CA_BeyondBinary",
+          "path": "commons/maps/CA_BeyondBinary/final.md",
+          "sha256": "4e649666dbd3b3d6a10d68cf8a500aa15e2a6b62c2eaf4b80f50a55434a95c8d",
+          "bytes": 4098,
+          "words_whitespace": 688,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "CA_ExpandingSpace",
+          "path": "commons/maps/CA_ExpandingSpace/final.md",
+          "sha256": "e862892a45edaa1f9a3e0752638b808873835f27f6bf4de0c94fe329f62b9726",
+          "bytes": 4597,
+          "words_whitespace": 750,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "CA_SoftRules",
+          "path": "commons/maps/CA_SoftRules/final.md",
+          "sha256": "32b4a5843bad091e62e8760a4640f524c53181636d3e9e290bae99ea315e454d",
+          "bytes": 5154,
+          "words_whitespace": 848,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "CA_AgentsCircuits",
+          "path": "commons/maps/CA_AgentsCircuits/final.md",
+          "sha256": "b192cbe9b731e350850ef3a9d9dde90c649fe615d9edbe44f281734e2bfca3b1",
+          "bytes": 2947,
+          "words_whitespace": 486,
+          "read_entire_file": true
+        },
+        {
+          "order": 8,
+          "map": "CA_EdgeOfChaos",
+          "path": "commons/maps/CA_EdgeOfChaos/final.md",
+          "sha256": "5851c73fa78f74690eb5019fdd7c4facdd6994abddcf995563661073fc30dce9",
+          "bytes": 4428,
+          "words_whitespace": 696,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "fractals",
+      "sequence_path": "commons/maps/sequences/fractals.json",
+      "sequence_sha256": "8278982809b859f76e2712ee8bb3dbb63384f6722e190669d58586d39a378d65",
+      "maps": [
+        {
+          "order": 1,
+          "map": "Fractal_Recursion",
+          "path": "commons/maps/Fractal_Recursion/final.md",
+          "sha256": "3f072d996797876cc871cac46b080ff437270824ad5b70f77c9d0bd9c4926775",
+          "bytes": 5242,
+          "words_whitespace": 861,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "Fractal_RecursiveTrees",
+          "path": "commons/maps/Fractal_RecursiveTrees/final.md",
+          "sha256": "173350e90de9a82d762378768a0a7efcd41b7f7fc7c936dca467d7190f0da0fc",
+          "bytes": 4139,
+          "words_whitespace": 691,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "Fractal_CantorSet",
+          "path": "commons/maps/Fractal_CantorSet/final.md",
+          "sha256": "58393f2bf041b51e88f6aa6a00944314f8f485aee169dbb73fe5e8a73c6d7c7e",
+          "bytes": 4449,
+          "words_whitespace": 783,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "Fractal_KochSierpinski",
+          "path": "commons/maps/Fractal_KochSierpinski/final.md",
+          "sha256": "1402539b26acabc3d9efe24f178ef751710ff8379f33b68135d0387536f68c1f",
+          "bytes": 7351,
+          "words_whitespace": 1261,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "Fractal_MengerSponge",
+          "path": "commons/maps/Fractal_MengerSponge/final.md",
+          "sha256": "dd536779ded483cc5dd5bc08bd28addb5e9442aaf699f39e95d74d234b801c7b",
+          "bytes": 4836,
+          "words_whitespace": 825,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "Fractal_GoldenSpiral",
+          "path": "commons/maps/Fractal_GoldenSpiral/final.md",
+          "sha256": "215e1e408713dd455f701897f7eb21cb8d2e7914eb122087127f5be771357284",
+          "bytes": 6573,
+          "words_whitespace": 1076,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "Fractal_Synthesis",
+          "path": "commons/maps/Fractal_Synthesis/final.md",
+          "sha256": "c4fbd115d47f1fea9b5dff76dc6d0db298da8660cda835f9b42c787029ab3268",
+          "bytes": 5017,
+          "words_whitespace": 786,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "lsystems",
+      "sequence_path": "commons/maps/sequences/lsystems.json",
+      "sequence_sha256": "21e0ae4984d90af673b7af24e6dcdcce4916dbdd714590c4c20cf1318cf29a20",
+      "maps": [
+        {
+          "order": 1,
+          "map": "LSystems_Grammar_Lab",
+          "path": "commons/maps/LSystems_Grammar_Lab/final.md",
+          "sha256": "47dfbd8be11bd4803e0bc2abe51eb3399ff742565e8639a1f664487747b73a73",
+          "bytes": 4276,
+          "words_whitespace": 693,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "LSystems_Growth",
+          "path": "commons/maps/LSystems_Growth/final.md",
+          "sha256": "f01c074ead526b64152eb0b72167e24bee9a575e40856600687e2a88f0f09ef9",
+          "bytes": 4859,
+          "words_whitespace": 795,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "LSystems_Grammars_And_Curves",
+          "path": "commons/maps/LSystems_Grammars_And_Curves/final.md",
+          "sha256": "ede12e1740fc6a9a42d89afcaf39aef661bf98f765c6829b5d6c71cd5a9b31a1",
+          "bytes": 4686,
+          "words_whitespace": 761,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "LSystems_Architecture",
+          "path": "commons/maps/LSystems_Architecture/final.md",
+          "sha256": "a4ce4e370eea3ce4e409ee6fa33f399bab2c29a703cd8095b3e7081e4817d68c",
+          "bytes": 4350,
+          "words_whitespace": 727,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "LSystems_Competition",
+          "path": "commons/maps/LSystems_Competition/final.md",
+          "sha256": "e0af1e67aeb737f9e13f579129d09ffb6bc85b8ef338cfbbf8be033080e303b8",
+          "bytes": 4353,
+          "words_whitespace": 710,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "LSystems_Living",
+          "path": "commons/maps/LSystems_Living/final.md",
+          "sha256": "c08af7ca6dab5d7b3803743ec05cc5fea1ff812de3545b2887102020ef1d5f8c",
+          "bytes": 4824,
+          "words_whitespace": 808,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "Assemblage_Same_Desire",
+          "path": "commons/maps/Assemblage_Same_Desire/final.md",
+          "sha256": "62afcd353272507d64cbbb3357fdb75d1653b6a3aa4494a8670a4d08f84858ef",
+          "bytes": 5043,
+          "words_whitespace": 858,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "sequence_path": "commons/maps/sequences/proceduralgeneration.json",
+      "sequence_sha256": "723298647a4e8fb0e19b0c684df8a388e80240358fbc3d082481570686ba7bfd",
+      "maps": [
+        {
+          "order": 1,
+          "map": "PG_Genetic_Evolution",
+          "path": "commons/maps/PG_Genetic_Evolution/final.md",
+          "sha256": "6b1ec488e300516648f1de19ae3ae479841e416d590d801debcf43b7a348c2df",
+          "bytes": 4607,
+          "words_whitespace": 778,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "PG_Space_Colonization",
+          "path": "commons/maps/PG_Space_Colonization/final.md",
+          "sha256": "dea2441bfe7d513ad6c821c8f719df968206ab54648cedb860fa0f779c26674e",
+          "bytes": 5198,
+          "words_whitespace": 857,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "PG_Branching_Growth",
+          "path": "commons/maps/PG_Branching_Growth/final.md",
+          "sha256": "fdc634ab54f4d1efcb11c8eb3aecbbd344aabad8033a8443221a268d059d3548",
+          "bytes": 3031,
+          "words_whitespace": 475,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "PG_Percolation_Network",
+          "path": "commons/maps/PG_Percolation_Network/final.md",
+          "sha256": "c5c8b14a31152eed0aca31603aac04f0d691cb9e2eed7f5eb3dc2eacd0343fc6",
+          "bytes": 2844,
+          "words_whitespace": 461,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "PG_Caves_Mazes",
+          "path": "commons/maps/PG_Caves_Mazes/final.md",
+          "sha256": "7fb954ffaf4e794a82e93af17b4787006ebeb55e25fbf505f60c5ddbdb2c56db",
+          "bytes": 3508,
+          "words_whitespace": 548,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "PG_Sculpted_Forms",
+          "path": "commons/maps/PG_Sculpted_Forms/final.md",
+          "sha256": "d1af4deef551f49f2dd38f0722289daa5f44206fb1b540158a7110e194094ba4",
+          "bytes": 3409,
+          "words_whitespace": 538,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "PG_Mirrored_Patterns",
+          "path": "commons/maps/PG_Mirrored_Patterns/final.md",
+          "sha256": "ce6659a7d7185c18688370169ba7ee6ffdd4f3ecf318c321dbac2f00c6574287",
+          "bytes": 4309,
+          "words_whitespace": 667,
+          "read_entire_file": true
+        }
+      ]
+    },
+    {
+      "sequence": "softbodies",
+      "sequence_path": "commons/maps/sequences/softbodies.json",
+      "sequence_sha256": "aa162e3273b36c1d20f1ca88f0a81325d314ab6d37311e85a964eac3d843ae59",
+      "maps": [
+        {
+          "order": 1,
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "path": "commons/maps/SoftBodies_Soft_Body_Deformation/final.md",
+          "sha256": "4eb71344fc93eb9545cccfdc57591f5291cde906bbfcd9078a7c930bfd913815",
+          "bytes": 2354,
+          "words_whitespace": 358,
+          "read_entire_file": true
+        },
+        {
+          "order": 2,
+          "map": "SoftBodies_Cloth_Physics",
+          "path": "commons/maps/SoftBodies_Cloth_Physics/final.md",
+          "sha256": "3d9dfd344d2210c3f40613f86b377b1ef7dfdbb02811ef29c0d0d3a8cc26384c",
+          "bytes": 2167,
+          "words_whitespace": 357,
+          "read_entire_file": true
+        },
+        {
+          "order": 3,
+          "map": "SoftBodies_Carusell",
+          "path": "commons/maps/SoftBodies_Carusell/final.md",
+          "sha256": "c78d67bb7bd8399808d3748f81fad7d877bbf1ba566b723842cdec183f4e4b17",
+          "bytes": 2010,
+          "words_whitespace": 322,
+          "read_entire_file": true
+        },
+        {
+          "order": 4,
+          "map": "SoftBodies_Obsticals",
+          "path": "commons/maps/SoftBodies_Obsticals/final.md",
+          "sha256": "c846f0bdda3f0607001307260d3ef534aaf1064ec1efeb1d049fe731ddb59f18",
+          "bytes": 2075,
+          "words_whitespace": 330,
+          "read_entire_file": true
+        },
+        {
+          "order": 5,
+          "map": "SoftBodies_Obsticals_Part2",
+          "path": "commons/maps/SoftBodies_Obsticals_Part2/final.md",
+          "sha256": "7b534d26e0e7413be044726b69f98d95e444683068c70c53a82a77abeba2dd43",
+          "bytes": 1912,
+          "words_whitespace": 292,
+          "read_entire_file": true
+        },
+        {
+          "order": 6,
+          "map": "SoftBodies_Playground_of_Joy",
+          "path": "commons/maps/SoftBodies_Playground_of_Joy/final.md",
+          "sha256": "399c8707f0267597fa874d0b297aa089f49d63c282e7a27e045923d3db71d05a",
+          "bytes": 2917,
+          "words_whitespace": 476,
+          "read_entire_file": true
+        },
+        {
+          "order": 7,
+          "map": "SoftBodies_Affect_Theory_Visualization",
+          "path": "commons/maps/SoftBodies_Affect_Theory_Visualization/final.md",
+          "sha256": "e5efa5db74ff2c18bf60affae7845d27258c82b32c5406523714ab54150da437",
+          "bytes": 1938,
+          "words_whitespace": 297,
+          "read_entire_file": true
+        },
+        {
+          "order": 8,
+          "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "path": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+          "sha256": "e0a3d1a696db3359b160a03bb4361bdf772bca481d5ea7c1093ec23049373a17",
+          "bytes": 2283,
+          "words_whitespace": 371,
+          "read_entire_file": true
+        },
+        {
+          "order": 9,
+          "map": "Topology_Entropy_Morphogenesis",
+          "path": "commons/maps/Topology_Entropy_Morphogenesis/final.md",
+          "sha256": "08d08cb690cbe43f04b2f7ed1dc5ef3b942cba03522be4f40abf22fb67cf7887",
+          "bytes": 2032,
+          "words_whitespace": 316,
+          "read_entire_file": true
+        }
+      ]
+    }
+  ]
+}

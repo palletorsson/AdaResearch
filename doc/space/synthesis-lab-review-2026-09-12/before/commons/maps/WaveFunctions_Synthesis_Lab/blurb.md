@@ -1,0 +1,5 @@
+Fourier's theorem: any periodic signal decomposes into sine waves. Any wave, however jagged, is simple oscillations stacked. This is the room where that principle is a bench you can work at.
+
+A five-slider instrument stands against the north wall with its assembled sawtooth already on the board and the five sines that make it drawn as rows beneath. Take the rows out one at a time and the sawtooth becomes a sine; press BASELINE and it is a sawtooth again; hold the board still and read one place on every row and on the sum. Around the bench the laboratory keeps its specimens of oscillation: sand migrating across the Chladni plate into the lines where vibration cancels, six vials pulsing in phase sequence, a multimeter needle tracking alternating current, flasks bubbling with phase offsets, DNA turning in its jar, worms tracing sine paths across a petri dish, a seismograph writing oscillation into a permanent record.
+
+The bench shows the one operation the specimens share: a shape that looked complex was five amounts of five simple returns, and five are not enough to make a corner.

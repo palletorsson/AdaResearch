@@ -1,0 +1,13 @@
+--- before-feedback/Trans_Body/tutorial.md
++++ Trans_Body/tutorial.md
+@@ -66,7 +66,9 @@
+ 
+ `lerpf(1.0, minimum, closeness)` uses that input to shrink the cube from a one-metre side to a quarter-metre side. The mesh is centred on its origin. Moving its centre to half the current height keeps its bottom on the floor.
+ 
+-Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. The lattice's retained cut elsewhere in this hall is a different operation, changing which cells exist.
++Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. At the same distance, it gives the same size whether or not you have approached before. Trace kept earlier positions after the point moved on; this study keeps no record of earlier approaches.
++
++Compare that return with the lattice's retained cut elsewhere in this hall. Leaving does not put its missing cells back. This tutorial selects the reversible distance-to-transform relation; the lattice changes which cells remain. Both are visible in the hall.
+ 
+ ## Keep the input, change the response
+ 

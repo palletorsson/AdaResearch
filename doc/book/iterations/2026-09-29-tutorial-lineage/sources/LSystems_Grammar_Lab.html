@@ -1,0 +1,159 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LSystems_Grammar_Lab · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=LSystems_Grammar_Lab">← Tutorial lineage</a></p><h1>LSystems Grammar Lab</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="LSystems_Grammar_Lab/final.md">Raw captured source</a></p><pre># The same sentence, another body
+
+&lt;!-- @lsystem_editor --&gt;
+
+Two upright lines meet us. Below each, the same letter: `F`. Can one sentence have two bodies?
+
+Press NEXT once. The live line acquires turns; the held line stays where it was. Count the live segments before looking at the counter. Then press HOLD. Both drawings now share this sentence:
+
+```text
+F+F-F-F+F
+```
+
+Leave NEXT alone. Press TURN. Follow the first bend across the two drawings. The letters below them have not changed. One reading turns through ninety degrees; the other now turns through a hundred and twenty. Five drawn segments in each, yet the same route through the symbols takes another route through space. Some segments may overlap. Count the instructions as well as the lines you can distinguish.
+
+We brought a construction out of the fractal halls. Here we can separate two moments within it: making a sentence, and reading that sentence as movement. HOLD gives us time beside a previous reading. TURN changes the live interpreter&#x27;s angle. NEXT rewrites the sentence from which it draws.
+
+Keep the new angle and press NEXT again. The held drawing remains. The live sentence has forty-nine symbols and twenty-five drawing instructions. The turning signs also take up space in the string; they do not each leave a segment. What has multiplied, and what has merely been carried forward?
+
+RULE opens the replacement used by this preset: each `F` becomes `F+F-F-F+F`. In `lsystem_editor.gd`, the next sentence is assembled from the old one:
+
+```gdscript
+var new_string = &quot;&quot;
+for c in _current_string:
+    new_string += str(_rules.get(c, c))
+_current_string = new_string
+```
+
+A symbol without a replacement passes through as itself. The newly written letters wait for the next generation; they are not rewritten again during this pass. First one `F`, then five, then twenty-five. The small loop has a rhythm, and a place where its repetition must wait.
+
+Another pass through the resulting string gives it geometry. `F` and `G` advance the turtle and draw. `+` and `-` turn its heading. The turtle is a travelling state: position, direction and a sideways axis. A line does not tell us all of that state by looking like a line.
+
+Try RESET, then PRESET three times to reach PLANT. There is an `X`, and no line above the live plinth. We met an invisible point in the first hall, Point One. This absence has a different cause: `X` belongs to the rewriting rules, but this interpreter gives it no drawing action. Press NEXT. Drawing instructions appear around the `X` symbols. What was undrawn was still capable of contributing to the next sentence.
+
+The brackets now matter. `[` saves the travelling state; `]` restores it. A branch can end without forcing every later segment to continue from its tip. The next hall will let length enter that inheritance too.
+
+Look again at the two outlines. Each is fitted to its display. More instructions need not make a taller body here. That apparent continuity of size is another operation, performed after the turtle has travelled. Our eyes receive a composed result: rewriting, interpretation, fitting, thickness, light. None is the untouched original behind the others.
+
+This desk stops at four requested generations, with a budget of 4,096 symbols. If a replacement would exceed that budget, the last complete generation remains. Its readout distinguishes the generation shown from the one requested. A long printed sentence also declares that only its first 120 symbols are visible. Two different limits, two different kinds of remainder.
+
+Seven presets give us places to begin. They do not exhaust the bodies that a grammar could permit; the physical desk does not yet let us type a new rule. Nor does a changed outline automatically make another space habitable: these thin drawings have no collision surfaces. The desire to inhabit them brings another body, another requirement, into the question. Which operation would we have to open next?
+
+&lt;!-- @ --&gt;
+
+The earlier trees, the string study, the city grammar and three trees grown from three traditions’ axioms remain beyond the desk; the last of these asks whose grammar a rule is. Their resemblance can invite a comparison without proving that they share its live sentence. Carry the bracket into the next room: what must a branch remember so that another branch can begin?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="LSystems_Grammar_Lab/tutorial.md">Raw captured source</a></p><pre># A sentence and two readings
+
+1. Begin at the six-button editor desk. Predict what NEXT will do to the live F. Count its five segments and nine symbols after one rewrite.
+2. HOLD that reading, then TURN once: 90° becomes 120°. Compare corresponding segments and identical printed sentences. The held view retains its angle and geometry.
+3. Keep the angle; NEXT rewrites. Compare 49 symbols and 25 drawn segments with the held first generation. RULE exposes the actual production after observing the difference.
+4. RESET; PRESET three times reaches Plant at generation zero. Its X draws nothing. NEXT introduces F commands and brackets. Distinguish an undrawn symbol from a missing state.
+5. Compare local bends and symbol counts rather than height: both drawings are independently fitted to their display. Four requested generations, a 4096-symbol allocation budget and a labelled 120-symbol text prefix are separate limits.
+6. Continue around either end of the plinths into the retained collection. The existing string artifact is its own study, not a live readout of this editor. Take saved state into LSystems_Growth.
+
+Primary: lsystem_editor. All eight existing artifacts remain. The primary contains two views of its actual output; it is not two independent generators. Physical rule typing is future work. Desktop pointer and route checks precede headset reach, comfort and performance review.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="LSystems_Grammar_Lab/technical.md">Raw captured source</a></p><pre># Rewriting, interpretation and display fitting
+
+LSystems_Grammar_Lab follows Fractal_Synthesis and precedes LSystems_Growth. The primary is `lsystem_editor:180#lesson:true#grammar:koch#depth:1`. Lesson startup deliberately resets the actual generation to zero; the existing DNA value depth=0 still means the preset&#x27;s default generation count elsewhere.
+
+## Installed interaction
+
+The opt-in GrammarLesson attaches to the existing editor. Its compact three-by-two desk uses full-sized push buttons at 1.045 m with a small tilted transparent readout. NEXT requests generations 0–4; TURN cycles 30/60/90/120 degrees; HOLD copies the current sentence, angle and fitted geometry; PRESET cycles the seven existing grammars and returns to generation zero; RESET returns both views to the initial Koch F at 90 degrees; RULE displays the actual replacement dictionary. PRESET may change both grammar and angle, so it is not a single-variable angle comparison.
+
+The held snapshot contains copies of the sentence and the exact segment endpoints produced by the editor. It is not regenerated when the live angle changes. Rendering uses thin cylinder instances, without segment colliders. Each view is independently fitted to a 3.4 m display, so comparisons show shape and correspondence, not an absolute common segment-length scale. The relation label states this fitting. Only the first 120 text symbols are printed for long strings, explicitly labelled; the full accepted sentence still generates the geometry.
+
+## Actual source and corrections
+
+`lsystem_editor.gd` first rewrites each old symbol once into a new string. `_rules.get(c, c)` preserves symbols without productions. It then interprets F/G as drawing, f as travel without drawing, +/- as turns, and brackets as push/pop of position, direction and right. Other symbols such as X do not draw. This is a planar turtle embedded in the 3D museum; no extra pitch or roll instructions have been added.
+
+The preset dictionaries are unchanged. Its named Koch Curve uses F -&gt; F+F-F-F+F, not the earlier hall&#x27;s equilateral snowflake. After n rewrites it draws 5^n segments; total string length is 2*5^n-1. At generation four that is 625 segments and 1249 symbols. Plant starts with X and rewrites first to F+[[X]-X]-F[-FX]+X, drawing three F segments. Sierpinski starts F-G-G and retains its declared 120-degree angle.
+
+Angle changes now redraw without invoking rewriting. The former 90-degree ceiling clipped the Sierpinski preset; the supported range is now 5–180 degrees. The missing deferred slider sync method is implemented. `set_rules()` now selects Custom (index 7) without overwriting the supplied dictionary with Binary Tree. Ordinary placements retain their sliders and seven presets. Empty and non-drawing sentences produce no invalid mesh surface; bounds include both segment endpoints.
+
+Before constructing the next sentence, the editor sums replacement lengths. A generation that would exceed max_symbols is refused in its entirety, preserving the last complete sentence and balanced branches supplied by the presets. The lesson budget is 4096 symbols; the ordinary editor retains a 100000-symbol budget. An over-budget axiom is rejected and flagged. Requested/effective generation counts differ when capped; this count is not entropy or a frame-rate measurement. Unbalanced custom productions are not automatically repaired.
+
+## Museum and preservation
+
+The former 13×12 layout is embedded at offset (3,14) in a 19×26 enclosure. Its raised teaching platform and central passage remain. The unused teleporter floor hole is filled. The editor moves to the approach, the oversized science screen is reduced, and local lights support the comparison. All eight original tokens remain, with their other placements carried into the retained layout. The visitor goes around the plinths, then through the former central platform gap to the rear exit. The drawings themselves provide neither walkable branches nor a new collision topology.
+
+Earlier map, texts, editor and historical grid configurations are archived under doc/space/grammar-lab-2026-09-14. Existing critical themes are retained as questions while unsupported claims that a final string always contains its entire history, that presets prove a biological complexity threshold, and that the visitor can type rules have been corrected. Desktop acceptance tests exercise the real pointer path, all desk operations, ordinary presets, the custom API, budget behavior and the walk to the exit. Human headset reach, readability, comfort and Quest frame time remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="LSystems_Grammar_Lab/intent.md">Raw captured source</a></p><pre>Concept: Separate symbolic rewriting from geometric interpretation and display fitting.
+Sequence role: First L-systems encounter, after Fractal_Synthesis.
+Primary: lsystem_editor, with live and held views of its actual output.
+Preserve: all eight existing works and the old raised teaching platform with its central gap.
+Encounter: NEXT, HOLD, TURN; NEXT at a fixed angle; RULE; reset and discover Plant&#x27;s undrawn X.
+Critical pressure: An undrawn symbol still participates; a changed silhouette is not automatically another habitable topology or more freedom.
+Next: LSystems_Growth, where length joins the state saved and restored at branches.
+Later: visitor-authored productions, common physical step-length comparison, deeper secondary encounters, headset and Quest checks.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="LSystems_Grammar_Lab/critical.md">Raw captured source</a></p><pre># What the reader permits
+
+The same sentence appears beneath two different drawings. HOLD and TURN make the difference inspectable: the held snapshot keeps its old angle while the live interpreter assigns another angle to the same turning signs. This gives a specific foothold for asking whose grammar we inhabit. A production is one decision; what its symbols are allowed to do is another.
+
+The undrawn X prevents us from identifying visibility with participation. It can influence the next generation through its replacement even though it contributes no segment to this reading. This is not a hidden organism in the machine. It is an implemented distinction between the alphabet of rewriting and the interpreter&#x27;s drawing commands. What else might we overlook when we treat the visible output as the whole operation?
+
+The score-and-performance analogy is useful up to a point. A final string is not guaranteed to contain a recoverable history of every prior generation; different histories may lead to the same string. A picture also has properties the abstract sentence does not specify by itself: spatial scale, line thickness, material and a position relative to our eyes. Neither representation is automatically the more complete body. We need to say what question each can answer.
+
+These limits complicate the earlier critical text&#x27;s appeal to individuation and cultural grammars. Seven mathematical presets are not evidence of seven cosmotechnics, nor do tree-like silhouettes establish that we found a numerical boundary between life and monotony. Those theoretical connections remain research questions requiring their own sources and comparisons. This hall can already support a narrower experiment: hold the production, change its reading, then ask what conditions that change actually alters.
+
+The desire for another outline is allowed to remain pleasurable. It does not have to prove a liberation every time. The next pressure comes when we want to live in the drawing. Its lines have no collision surfaces. Changing the angle changes geometry, but does not by itself establish a new abstract branching graph, a traversable passage, or an increase in entropy. Intersections in the drawing do not automatically become connected junctions in the interpreter. An inhabiting body brings scale, support and access into the account.
+
+Entropic morality gives us a way to keep these consequences separate: reducing a representation differs from enforcing its omissions on another&#x27;s conditions of existence. Here, a text prefix can omit most of a sentence while the full accepted drawing remains. A computation budget instead prevents a further generation from being built. The interface names both restrictions so that a practical limit does not quietly become the world&#x27;s only possible law.
+
+The physical desk offers seven presets and a few operations. That is a pedagogical starting point, not an exhaustive space of possible bodies. A later rule-writing instrument should let a visitor keep a reference, predict a small consequence, revise a production and recover from an unhelpful change. More symbols alone would give us no guarantee of a better encounter. What matters is whether the new operation opens something we can actually investigate.
+
+All eight earlier works remain. Selecting one primary gives this experiment a clear starting place without treating the other works as failed answers to it. Their differences may carry the next question.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="LSystems_Grammar_Lab/artifacts.md">Raw captured source</a></p><pre># LSystems Grammar Lab — Artifacts
+*L-Systems: Rules Grow Structure · lambda_edge · 6 artifacts*
+
+&gt; The entire L-system pipeline in one room. Axiom becomes rules. Rules become string. String becomes tree.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## L-System Editor
+![L-System Editor](/scene-catalog/lsystem_editor.png)
+
+Edit L-system grammars in real-time and watch procedural plants, fractals, and branching structures grow from simple rewriting rules. Adjust axiom, production rules, angle, and iteration depth to explore the space of formal grammars made visible.
+
+`lsystem_editor`
+
+## Grammar Provenance
+![Grammar Provenance](/scene-catalog/grammar_provenance.png)
+
+Side-by-side L-system trees from three cultural/historical sources — Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion. Same engine, different axioms, different worlds. Asks: whose grammar?
+
+`grammar_provenance`
+
+## L-System Tree
+![L-System Tree](/scene-catalog/lsystem_tree.png)
+
+Classic deterministic L-system tree — the foundational teaching example showing how a simple grammar rule produces organic branching structure.
+
+`lsystem_tree`
+
+## L-System String Expansion
+![L-System String Expansion](/scene-catalog/fractal_lsystem_string.png)
+
+Visualizes the L-system rewriting process — shows how the axiom string expands through each generation, making the grammar visible as text.
+
+`fractal_lsystem_string`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="LSystems_Grammar_Lab/summary.md">Raw captured source</a></p><pre># The same sentence, another body
+
+The L-system editor now holds a reference beside its live drawing. Rewrite once, hold, and change only the angle; then change the sentence while keeping that angle. Plant&#x27;s undrawn X introduces the distinction between rewriting symbols and drawing commands. Explicit counts, fitted displays and finite budgets make the limits visible. All eight earlier works remain. The saved turtle state prepares branch inheritance in LSystems_Growth.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="LSystems_Grammar_Lab/blurb.md">Raw captured source</a></p><pre># The same sentence, another body
+
+Two drawings, one sentence. Change the angle and follow what moves. An X draws nothing here, but it has not stopped participating. What does the interpreter permit a symbol to become?
+</pre></section></body></html>

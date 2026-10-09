@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="99478054ce0fbb7282248ac422bdba178530512655edda7d89421b1f6f6704e7"><title>commons/artifacts/spine_studies/sentence_authority.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/sentence_authority.gd</p><pre><code>extends &quot;res://commons/artifacts/spine_studies/study_forms.gd&quot;
+## Original Ada sentences. Changing a display cannot establish a proposition.
+const SENTENCES := [&quot;YOU MAY REMAIN HERE&quot;, &quot;THIS IS THE WHOLE ACCOUNT&quot;, &quot;THE MODEL NEEDS YOUR CONSENT&quot;]
+var sentence := 0
+var seconds_per_word := 0.85
+var elapsed := 0.0
+var paused := false
+var whole_strip := false
+var small: Label3D
+var strip: Label3D
+var wall: Label3D
+var footer: Label3D
+
+func _ready() -&gt; void:
+	block(Vector3(0,3.25,-4.3),Vector3(14,6.5,0.18),Color(&quot;e6e1d9&quot;),true)
+	block(Vector3(0,5.45,-3.65),Vector3(13.3,0.78,0.20),Color(&quot;15141b&quot;),true)
+	for x in [-6.8,6.8]: block(Vector3(x,2.7,-3.65),Vector3(0.065,5.4,0.065),Color(&quot;64616a&quot;),true)
+	strip = inscription(&quot;&quot;,Vector3(0,5.45,-3.53),0.009,Color(&quot;ff669a&quot;))
+	wall = inscription(&quot;&quot;,Vector3(0,3.1,-4.18),0.016,Color(&quot;842e53&quot;))
+	block(Vector3(-3.4,1.35,1.2),Vector3(1.85,0.55,0.10),Color(&quot;efece5&quot;),true)
+	block(Vector3(-3.4,0.55,1.16),Vector3(0.045,1.1,0.06),Color(&quot;64616a&quot;),true)
+	small = inscription(&quot;&quot;,Vector3(-3.4,1.42,1.26),0.00145)
+	inscription(&quot;Ada / original sentence&quot;,Vector3(-3.4,1.20,1.26),0.00095)
+	footer = inscription(&quot;&quot;,Vector3(0,0.65,-4.17),0.0034)
+	refresh()
+
+func refresh() -&gt; void:
+	var words: PackedStringArray = SENTENCES[sentence].split(&quot; &quot;)
+	small.text = SENTENCES[sentence]
+	wall.text = SENTENCES[sentence].replace(&quot; &quot;,&quot;\n&quot;) if sentence == 0 else SENTENCES[sentence].replace(&quot;THE &quot;,&quot;THE\n&quot;).replace(&quot;YOUR &quot;,&quot;YOUR\n&quot;)
+	strip.text = SENTENCES[sentence] if whole_strip else words[int(elapsed/seconds_per_word)%words.size()]
+	footer.text = &quot;ONE SENTENCE / LABEL · STRIP · WALL\n%.2f s per word / %s / original Ada text&quot; % [seconds_per_word,&quot;HELD&quot; if paused else &quot;RUNNING&quot;]
+
+func _process(delta: float) -&gt; void:
+	if not paused: elapsed += delta
+	refresh()
+
+func control(index: int) -&gt; void:
+	match index:
+		0: sentence = (sentence+1)%SENTENCES.size(); elapsed = 0.0
+		1: seconds_per_word = 1.7 if seconds_per_word &lt; 1.0 else 0.85
+		2: paused = not paused
+		3: whole_strip = not whole_strip
+		_: sentence = 0; seconds_per_word = 0.85; elapsed = 0.0; paused = false; whole_strip = false
+	refresh()
+</code></pre></body></html>

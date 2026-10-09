@@ -1,0 +1,43 @@
+{
+  "id": "VFM_05_Launch",
+  "title": "Read a flight from its beginning",
+  "storyboard": "FIRE sends the marker through a curve; PAIR offers equal ranges with different flight times. Reuse elapsed time, vector components and the distinction between a position and its rate. Introduce acceleration's units, then supply the constant-acceleration position formula, angle conversion and landing-time calculation already used by launch_chamber. Trace flight_position() and change one initial condition, keeping gravity fixed. PATH shows its sampled prediction; PARTS lets the student compare zero vertical velocity at the apex with continuing downward acceleration. SLOW changes playback time without changing the path. Carry a usable position-at-time function and its assumptions into Motion, where retaining and updating velocity becomes the new task.",
+  "storyboard_short": "Use FIRE/PAIR, then trace existing flight_position(). Reuse time, vector components and rate. Supply the analytic position formula, angle conversion, duration and receiver; introduce acceleration's units without deriving a ballistic solver. Vary one beginning, inspect PATH/PARTS and distinguish SLOW from changed gravity. Carry a position-at-time function with assumptions. Launch stays before Motion; no integration or collision response is claimed.",
+  "mode": "deepen",
+  "brings": [
+    "position functions and elapsed seconds",
+    "vector components and addition",
+    "Flow_Field's velocity-as-displacement-per-second relation",
+    "Change's distinction between value and rate"
+  ],
+  "learns": [
+    "acceleration as velocity change per second",
+    "evaluating a supplied analytic position function",
+    "trajectory shape, duration and playback time are distinct"
+  ],
+  "carries": "A supplied analytic path the learner can evaluate and vary under stated gravity, drag and endpoint assumptions.",
+  "supplied": [
+    "launch_arc with lesson:launch_chamber and its flight markers",
+    "launch_velocity() angle conversion and duration() equal-height landing time",
+    "flight_position() constant-acceleration formula and flight_velocity()",
+    "64-segment PATH drawing and FIRE/PAIR/SLOW/PARTS/GRAVITY/SPEED controls"
+  ],
+  "artifact_refs": [
+    "launch_arc"
+  ],
+  "review_note": "Launch precedes Motion. Supply p(t)=origin+v0*t+0.5*g*t*t, angle-to-velocity conversion and duration rather than asking for their derivation. The existing host clamps each lane to its own equal-height landing time; the frozen velocity is pre-impact. PATH is 64 equal-time segments, while live markers are evaluated analytically. PAIR has separate lane origins, so equal range does not mean the same world endpoint. Parameter edits reset the flight; SLOW only rescales its local clock. No learner-path binding or ballistic solver is newly installed.",
+  "prior_maps": [
+    "Change_Intro",
+    "Flow_Field",
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations"
+  ],
+  "independent_check": "At the opening 30/60-degree pair and fixed speed, predict equal horizontal range but unequal landing times. Explain why SLOW leaves the path unchanged, then use PARTS to distinguish velocity and acceleration at the apex.",
+  "source_refs": [
+    "commons/artifacts/launch_arc/launch_chamber.gd",
+    "commons/artifacts/launch_arc/launch_arc.gd",
+    "commons/maps/VFM_05_Launch/final.md",
+    "commons/maps/VFM_05_Launch/tutorial.md"
+  ],
+  "change_reason": "The strong spatial encounter can introduce acceleration without consuming the numerical-state lesson that belongs to Motion next."
+}

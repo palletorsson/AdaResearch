@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "ground and neighbouring exhibits remain",
+      "passed": true
+    },
+    {
+      "name": "visible ground and collision use identical triangles",
+      "passed": true
+    },
+    {
+      "name": "ground remains still",
+      "passed": true
+    },
+    {
+      "name": "entire ground clears the underlying floor",
+      "passed": true
+    },
+    {
+      "name": "cellular image remains above the ground",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-overview",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cellular-field",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "exhibits": {
+      "gauge": [
+        4.5,
+        1.3400000333786,
+        9.5
+      ],
+      "worley": [
+        8.5,
+        0.425000041723251,
+        4.5
+      ]
+    },
+    "ground": {
+      "color": "6b427d",
+      "emission": 0.0199999995529652,
+      "highest": 0.367758750915527,
+      "local_mesh_sha256": "54ea4a78a0901e170c4a2f8ab7c0f0223a4252e5595fe65d1c4c020fec6619f6",
+      "lowest": 0.0325756072998047,
+      "position": [
+        6.5,
+        0.200000002980232,
+        6.5
+      ],
+      "scale": [
+        1.39999997615814,
+        1.39999997615814,
+        1.39999997615814
+      ],
+      "vertices": 2601
+    }
+  },
+  "passed": true,
+  "room": "Random_Space",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

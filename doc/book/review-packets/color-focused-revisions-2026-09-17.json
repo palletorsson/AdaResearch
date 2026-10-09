@@ -1,0 +1,72 @@
+{
+  "status": "context_superseded_by_column_hall_walls_retained",
+  "date": "2026-09-17",
+  "source_hashes": {
+    "Color_Context_Placed": {
+      "path": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\maps\\Color_Context_Placed\\final.md",
+      "sha256": "e61f64a969c0048677c3eb6cc5918ce83684d6c5f095b8d6d435a8cc56d95ba0"
+    },
+    "Color_Walls": {
+      "path": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\maps\\Color_Walls\\final.md",
+      "sha256": "ff6d93047447d8d18c7e3978f1b8e50fe84d84a8109eb1d38be739ce890a0385"
+    }
+  },
+  "changes": [
+    {
+      "map": "Color_Context_Placed",
+      "anchor": "chroma_life",
+      "title": "Let colour keep time; leave the growth rule for later",
+      "reason": "Keep the encounter and its colour reading. Defer the birth/survival tutorial and remove the claim that nobody arranged the board. This passage requires a crowd/age placement, which is currently missing.",
+      "original": "In the bay between the moved columns, columns stand on a dark board that nobody arranged. Five cells, the ones Conway called R, were set down and a rule was run: a cell with two or three neighbours lives, an empty cell with three neighbours is born, and everything else dies. What stands is the eighth generation. Each column is as tall as the crowd around it, so you read the count with your body: two neighbours at your eye, three over your head. The paint is the rule's own record. Blue was born this generation. Orange has stood since the seed. Walk the streets the rule emptied and check the colour against the height. Earlier in the room the neighbour was one shape below. Here it is everyone around, and the colour remembers how long they have been there.",
+      "proposed": "In the bay between the moved columns, a dark board holds a small crowd. Look for blue, then orange. Blue marks a cell born in the latest generation; orange marks one that has survived since the seed. Here colour keeps time.\n\nThe rule that built the crowd belongs to a later hall. For now, you can read something of its past without yet knowing how it grew.",
+      "editorial_status": "accepted",
+      "application_status": "archived_for_later_reuse",
+      "encounter_status": "deferred_outside_opening_hall"
+    },
+    {
+      "map": "Color_Walls",
+      "anchor": "color_space_navigator",
+      "title": "From finding a doorway to finding a colour",
+      "reason": "Give the two investigations a deliberate transition within the existing hall. Keep the coordinate examples, code and interpolation encounter intact.",
+      "original": "At the smaller models, look for red. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.",
+      "proposed": "Leave the cubicle through its opening. At the smaller models, look for red, first in the cube and then in the cylinder. Where could you go from it?\n\nYou have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.",
+      "editorial_status": "accepted",
+      "application_status": "applied",
+      "encounter_status": "existing_placements_transition_revised"
+    },
+    {
+      "map": "Color_Context_Placed",
+      "anchor": "chroma_filter",
+      "title": "Name the operation the panes actually use",
+      "reason": "The material multiplies RGB values over the background. Keep the bodily comparison and the sentence about primaries; distinguish this operation from modelling wavelengths or averaging. The artifact is registered but currently absent from the map.",
+      "original": "In the corner two white walls meet, and three tall panes cross in front of them. Stand in a wedge and look through. Through one pane the wall is that pane's colour. Through two it is what the two have left: the printer's three leave blue, green and red. Through three, almost nothing. The colour you see is not on the pane. It is what the panes between you and the white have taken away, and how many stand between you and the white is decided by where you stand. Move one wedge over and the darkest place moves with you. The table this was taken from mixed its panes by averaging and called the result subtractive; averaging is what your eye does further down the hall, and it is another thing. In the far corner the panes carry the totem's red, yellow and blue. Crossed as filters, the primaries go dark. A primary is a claim about a medium. The white here is the corner's own; the light that reaches it is still the hall's.",
+      "proposed": "In the corner two white walls meet, and three tall panes cross in front of them. Stand in a wedge and look through. Find the white through one pane, then through two. What is left of it? Move one wedge over and follow the overlap.\n\nEach pane multiplies the red, green and blue channels of the image behind it. Through another pane, the values are multiplied again. This is the filter we have built. It works with three colour channels; it does not follow wavelengths through glass.\n\nIn the far corner the panes carry the totem's red, yellow and blue. Compare their overlaps with those of cyan, magenta and yellow. Calling both sets primary does not make them do the same work. A primary is a claim about a medium. The white here is the corner's own; the light that reaches it is still the hall's.",
+      "editorial_status": "accepted",
+      "application_status": "archived_for_later_reuse",
+      "encounter_status": "deferred_outside_opening_hall"
+    },
+    {
+      "map": "Color_Context_Placed",
+      "anchor": "chroma_drum",
+      "title": "Let the distance study ask rather than prescribe",
+      "reason": "Keep the two-sided fin and the pane/distance/pot image. Replace guaranteed grey and an exact half-and-half view with observations the visitor can test. No headset fusion result has been established; both drum placements are currently absent.",
+      "original": "Between the rows two drums stand taller than you, striped blue and yellow. Walk round the first. Its stripes are fins, blue on one face and yellow on the other, so from wherever you stand the drum is half blue and half yellow, split on the fin that faces you, and the split walks round with you. No fin has a colour. Every fin has two. Then go to the far end of the hall and look back at the second drum. Its stripes are painted on, but they are narrower there than the headset can hold apart, and blue and yellow become one grey: not the green of the paint pot, not the dark green the filters leave, a third answer from the same two colours. Which of the three you get depends on the company. A pane, a distance, a pot.",
+      "proposed": "Between the rows two drums stand taller than you, striped blue and yellow. Walk round the first. Its stripes are fins, blue on one face and yellow on the other. Follow the division between the colours as you move. No fin has a colour. Every fin has two.\n\nFind the narrow stripes on the second drum, then walk away. How long can you keep blue apart from yellow? If the stripes begin to merge, approach until they separate again. The drum has kept its colours. Has your view kept their division?\n\nCompare that distant view with the overlap of the blue and yellow panes. Would stirring blue and yellow paint in a pot give you either? The names alone do not tell you what will happen. The colours need their company. A pane, a distance, a pot.",
+      "editorial_status": "accepted",
+      "application_status": "archived_for_later_reuse",
+      "encounter_status": "deferred_outside_opening_hall"
+    }
+  ],
+  "placement_status": "No chroma_filter, chroma_drum or chroma_life token exists in current Color_Context_Placed/map_data.json. No alternate placement found in repository JSON/GDScript search; registry and standalone scenes exist.",
+  "validation": "Headless runtime copy of probe_chroma2: 27 passed after independently correcting seed neighbour expectations in the copy. Original run: 26 passed / 1 failed. Existing probe and artifact scripts unchanged. No rendered capture or headset validation performed.",
+  "accepted_date": "2026-09-17",
+  "acceptance_source": "User-provided review: 34d5bff9-5ae3-4236-acc9-77b5be8ee8ab/pasted-text.txt",
+  "applied_source_hashes": {
+    "Color_Context_Placed": "6b77e89d084cbc8d9a0a65a7c9b7f87d340ba4bce7256081d1b59b8f67817c8b",
+    "Color_Walls": "148ef449203e399e03dd705ebd67082c862b5d3ad6178d3383716a2e049d54c2"
+  },
+  "application_note": "Later user direction reframes the first hall as primitives plus colour through static transformation. Walls revision remains current. The three Context revisions remain accepted research text, archived with the former draft; they are no longer pending additions to Color_Context_Placed.",
+  "policy": "doc/book/ENCOUNTER_STATUS.md",
+  "placement_brief": "doc/book/review-packets/color-placement-brief-2026-09-17.md",
+  "superseded_by": "doc/space/color-column-hall-2026-09-17/README.md"
+}

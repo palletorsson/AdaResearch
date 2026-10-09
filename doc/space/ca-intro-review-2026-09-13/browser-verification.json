@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "name": "held single seed; next answer initially concealed",
+      "passed": true
+    },
+    {
+      "name": "Rule 90 predicts zero for neighbourhood 010",
+      "passed": true
+    },
+    {
+      "name": "Rule 90 first generation matches independent expected cells",
+      "passed": true
+    },
+    {
+      "name": "two adjacent seeds produce the expected four cells",
+      "passed": true
+    },
+    {
+      "name": "Rule 255 turns every output on",
+      "passed": true
+    },
+    {
+      "name": "RESET clears every visible older row",
+      "passed": true
+    },
+    {
+      "name": "Rule 30 first generation matches expected cells",
+      "passed": true
+    },
+    {
+      "name": "26 generations retain exactly 24 rows",
+      "passed": true
+    },
+    {
+      "name": "witness and highlighted neighbours wrap from 31 through zero",
+      "passed": true
+    },
+    {
+      "name": "all eight Rule 255 table entries are visible and correct",
+      "passed": true
+    },
+    {
+      "name": "RUN advances the browser clock",
+      "passed": true
+    },
+    {
+      "name": "HOLD pauses the browser clock",
+      "passed": true
+    },
+    {
+      "name": "review has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "both referenced images loaded",
+      "passed": true
+    },
+    {
+      "name": "book exposes three source excerpts and carries the blob argument",
+      "passed": true
+    },
+    {
+      "name": "necklace has three primaries in book order, all written",
+      "passed": true
+    },
+    {
+      "name": "each primary card opens its matching passage",
+      "passed": true
+    }
+  ],
+  "passed": 17,
+  "visual": {
+    "codeBlocks": 5,
+    "images": [
+      {
+        "loaded": true,
+        "src": "noise-perlin-simplex-terrain.png"
+      },
+      {
+        "loaded": true,
+        "src": "ca-introduction-plan.svg"
+      }
+    ],
+    "viewport": 691,
+    "width": 676
+  },
+  "corrected_assertion": {
+    "name": "book exposes three source excerpts and the blob transition",
+    "passed": false,
+    "reason": "The exact phrase mental algorithmic wall appears in the critical thread; the book opens with the same argument in different words. Checked each section separately."
+  },
+  "godot_runtime_verified": false,
+  "headset_verified": false
+}

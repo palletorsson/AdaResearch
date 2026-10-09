@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A drawing / revealed — Ada</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#10151c;color:#e8e9ed}*{box-sizing:border-box}body{margin:0}main{max-width:1200px;margin:auto;padding:55px 28px 80px}header{max-width:800px;margin-bottom:30px}.eyebrow{color:#a6cbd0;letter-spacing:.13em;font-size:12px;text-transform:uppercase}h1{font-weight:500;font-size:clamp(32px,5vw,61px);line-height:1.04;margin:18px 0}h2{font-weight:500;font-size:25px;margin-top:40px}p{max-width:760px;line-height:1.65;color:#bfc8d3}a{color:#f0ccd6}figure{margin:0;background:#19212c;border:1px solid #33404e;border-radius:10px;overflow:hidden}img{display:block;width:100%;height:auto}figcaption{padding:17px 22px;font-size:14px;line-height:1.55;color:#bfccd9}.controls{padding:18px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}button{cursor:pointer;background:#273442;color:#e8ebef;border:1px solid #596574;border-radius:6px;padding:10px 17px;font:inherit;font-size:14px}button:hover,button.active{background:#f0ccd6;color:#151b24}input{flex:1;min-width:130px;accent-color:#f0ccd6}.phases{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px}.columns{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.notice{border-left:2px solid #a6cbd0;padding-left:18px;margin:28px 0}small{color:#a8b6c5}footer{border-top:1px solid #33404e;margin-top:45px;padding-top:20px;font-size:14px}@media(max-width:700px){main{padding:30px 15px}.columns{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<main>
+<header><div class="eyebrow">Ada · Endless Museum · Triangle</div><h1>A drawing reveals<br>its faces.</h1><p>The corners appear. A boundary joins them. The surface opens into the triangles that compose it, then closes again. A camera films this construction inside Godot.</p></header>
+<figure id="film"><img id="frame" src="frame-15.png" alt="Godot perspective view of two triangular faces joined along the diagonal of a four-corner drawing"><figcaption>The film below uses a supplied four-corner drawing passed through the real Triangle tool. The museum monitor reads the drawing already in the hall and follows your edits.</figcaption></figure>
+<div class="controls"><button id="play" aria-pressed="false">Play construction</button><input id="time" type="range" min="0" max="33" value="15" step="1" aria-label="Construction time"><output id="stamp">7.5 / 17 seconds</output></div>
+<div class="phases"><button data-frame="3">Positions</button><button data-frame="8">Boundary</button><button data-frame="15">Faces</button><button data-frame="22">Separate</button><button data-frame="32">Return</button></div>
+<p class="notice">In the museum, looking at the screen starts the film. Looking away freezes it. <strong>Pause, replay, step</strong> and <strong>turn view</strong> let you inspect the construction at your own pace.</p>
+<h2>Beside the existing drawing</h2><figure id="museum"><img src="museum.png" alt="New monitor standing beside the wall inside the actual Triangle hall"><figcaption>Placed in <strong>Point_Triangle_Context</strong>, beside the drawing area. This capture shows the hall’s existing three-corner drawing. The monitor copies its data; it does not change the creator or the enlarged twin.</figcaption></figure>
+<div class="columns"><figure><img src="apart.png" alt="Four fan triangles lifted away from a six-corner boundary in the filmed scene"><figcaption><strong>Six corners, four triangles.</strong> These faces are copied from the tool’s actual mesh. Lifting them apart is an illustrative operation in the monitor’s private scene.</figcaption></figure><figure><img src="open.png" alt="Four numbered corners joined by three edges, without a filled face"><figcaption><strong>An open path stays open.</strong> The monitor does not invent a closing edge or a surface for an unfinished drawing.</figcaption></figure></div>
+<h2>What the surface contains</h2><p>The first stored corner anchors the fan. Each next pair supplies another triangle. Change the drawing at its tool and the film updates. The source already draws both sides of each face; neither side makes a solid obstacle.</p>
+<p>The monitor keeps the existing triangulation, including its limits for concave and non-planar outlines. It reveals the decisions already made by the drawing tool.</p>
+<footer><a href="DECISIONS.md">Implementation and verification</a> · <a href="report.json">Monitor checks</a> · <a href="record-report.json">Source checks</a> · <a href="../2026-10-04-trace-sampling-monitor/index.html">Previous: Trace sampling</a><p><small>Native preview: right-drag to look away; Home to return; arrows to orbit. Press D to change between supplied examples. Physical headset testing remains open.</small></p></footer>
+</main>
+<script>
+const image=document.querySelector('#frame'),slider=document.querySelector('#time'),stamp=document.querySelector('#stamp'),play=document.querySelector('#play');let timer=null;
+function show(n){slider.value=n;image.src=`frame-${String(n).padStart(2,'0')}.png`;stamp.value=`${(n*.5).toFixed(1)} / 17 seconds`;}
+function stop(){clearInterval(timer);timer=null;play.textContent='Play construction';play.setAttribute('aria-pressed','false');}
+play.onclick=()=>{if(timer){stop();return;}play.textContent='Pause construction';play.setAttribute('aria-pressed','true');timer=setInterval(()=>show((Number(slider.value)+1)%34),500);};
+slider.oninput=()=>{stop();show(Number(slider.value));};document.querySelectorAll('[data-frame]').forEach(button=>button.onclick=()=>{stop();show(Number(button.dataset.frame));});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+</script>
+</html>

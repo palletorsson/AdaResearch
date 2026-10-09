@@ -1,0 +1,30 @@
+{
+  "returncode": 0,
+  "seconds": 4.843408107757568,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--headless",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\navigation-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/probe_navigation.gd"
+  ],
+  "before": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_portal_stream.gd": "25101015e0aba06ea11167647d69fc90c3eca5bff09ccb67442ec9a6af24e299",
+    "ada_run/em_plan.json": "d53f4732e955e21bdc7f12445ec02d6d9bf6dfae8d59029c21048ab26f98cc39",
+    "commons/maps/sequences/forces.json": "4db534f4ee0d79b5389b60b2741ee26dc30f77a5df582b29b8580e603d687b55"
+  },
+  "after": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_portal_stream.gd": "25101015e0aba06ea11167647d69fc90c3eca5bff09ccb67442ec9a6af24e299",
+    "ada_run/em_plan.json": "d53f4732e955e21bdc7f12445ec02d6d9bf6dfae8d59029c21048ab26f98cc39",
+    "commons/maps/sequences/forces.json": "4db534f4ee0d79b5389b60b2741ee26dc30f77a5df582b29b8580e603d687b55"
+  }
+}

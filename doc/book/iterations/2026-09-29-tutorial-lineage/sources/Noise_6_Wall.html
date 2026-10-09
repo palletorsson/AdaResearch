@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Noise_6_Wall · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Noise_6_Wall">← Tutorial lineage</a></p><h1>Noise 6 Wall</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Noise_6_Wall/final.md">Raw captured source</a></p><pre># The room wears the sum
+
+&lt;!-- @shader_noise_space --&gt;
+
+There is a room inside the hall. Pink gathers in its corners. The little sphere inside seems to have borrowed something from the walls, although its clouds pull around a different body. Step through one door and look towards the other. The floor carries you while something softer appears to move through it.
+
+What would have to change for those folds to carry your feet?
+
+Keep that question as you turn towards the panel on the inner wall. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
+
+Press DRESS without leaving the room. Grey takes the place of pink around you. Your hand has changed the enclosure while your body stays inside it. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+
+We have changed what the surface offers the eye. The wall&#x27;s vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What your body can cross and what you imagine crossing need not arrive together.
+
+![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
+
+*The small windows keep their different counts while the room wears the chosen sum. The doorway remains in place when the finish changes.*
+
+At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The four- and six-term windows add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
+
+Here is the loop doing that work:
+
+```glsl
+    for (int i = 0; i &lt; layers; i++) {
+        vec2 animated_pos = pos * frequency;
+        animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
+        animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
+
+        value += amplitude * abs(noise2d(animated_pos));
+        amplitude *= 0.5;
+        frequency *= 2.0;
+    }
+```
+
+`value` begins at zero, `amplitude` at 0.5 and `frequency` at 1. Each turn reaches further through the field over the same surface, then gives its answer half the weight of the previous turn. The familiar sine and cosine move the sampling coordinates. FREEZE has held their time, too.
+
+Stay with `abs` for a moment. A negative answer returns as a positive magnitude. Positive and negative values of equal size can now contribute the same amount. In the previous room, a threshold decided whether a cell received a block. Here another operation gives differences another destination: both signs can help dress a surface. This is a new two-dimensional shader field; we are carrying a way of thinking forward, rather than transferring the voxel room&#x27;s stored samples.
+
+The plate lists accumulated weights: 0.5, 0.75, 0.9375, 0.9844. The sixth term weighs only one thirty-second as much as the first. It still has somewhere to act. Look for a region where a small addition changes the edge you were following.
+
+More terms can also make the grey window brighter. Every weighted magnitude is nonnegative. At a fixed coordinate and time, adding one cannot reduce the sum. But the weights alone do not tell us a pixel&#x27;s brightness: each term brings a sampled value, and the display puts the result through another rule.
+
+```glsl
+        float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+```
+
+The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
+
+Try BASIS while the moment stays held. Perlin, Value, Cellular and Simplex offer different constructions to the same accumulation. These are the implementations in this shader, with their own scaling constants. Watch what happens to a contour you had begun to recognise. Returning to Perlin restores this construction at the held coordinates. There is no seed button here; the shader&#x27;s hash uses fixed constants.
+
+Press DRESS again. The pink returns around the same held cloud sum. The finished material adds a second, four-term turbulence calculation:
+
+```glsl
+        float cloud_pattern = (cloud_base + cloud_detail * 0.4) * cloud_density;
+        cloud_pattern = smoothstep(0.2, 0.8, cloud_pattern);
+```
+
+Colour mixing, edge and corner shading, roughness and small changes to the lighting normal follow. LAYERS changes the cloud sum; that separate detail loop still has four terms. A one-term cloud can therefore wear a detailed finish. The button&#x27;s number names one part of a construction.
+
+Turn from the small windows towards the wall beside them. The material has crossed from a small square to an enclosure and a sphere. Can you follow one cloud around a corner?
+
+Each wall piece starts its own UV coordinates. The sphere wraps a different coordinate chart around itself. The same calculation can stretch, repeat or meet a seam when another surface receives it. The room is surrounded by a shared procedure, but it is not an unbroken sample of a world-space cloud.
+
+The seam is an invitation to look at how the room has dressed. A surface can make a box feel intimate, strange or excessive without first earning another geometry. Its pleasure need not be dismissed when we find the instruction that produces it. Now we can change that instruction with a more particular desire.
+
+&lt;!-- @dark_sphere --&gt;
+
+Outside, the dark orb continues to pulse. The room is held; this body is not. Stand between the two and watch the difference in their times.
+
+```gdscript
+var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+_sphere_material.emission_energy_multiplier = lerpf(pulse_min * _emit_mul, pulse_max * _emit_mul, pulse_t)
+```
+
+The orb receives a sine as a changing emission strength. It belongs to the hall without belonging to the panel&#x27;s clock. A control has a reach, and discovering its edge tells us something about the world&#x27;s construction.
+
+Press FREEZE once more to let the room continue from its held moment. The orb did not wait. We leave with several times still running, and a surface whose apparent depth has not become a foothold.
+
+&lt;!-- @ --&gt;
+
+In Noise Inside Noise, we will ask what happens when a field changes the coordinates at which another field is read. Here we added answers. Next we follow what happens to the asking.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Noise_6_Wall/tutorial.md">Raw captured source</a></p><pre># Noise 6 Wall — hold, accumulate, dress
+
+1. Enter through either side door. Look along the floor towards the other opening and notice the cloud finish on the room&#x27;s sphere.
+2. Turn to the panel on the inner wall and press FREEZE. Compare the current moment before and after the press; it should hold without jumping to time zero.
+3. Press DRESS while staying inside the room. Compare greyscale cloud accumulation with the full pink material. Check the same doorway and floor; the controls change material parameters, not collision.
+4. At the panel, compare the fixed 1/2/4/6 windows. Press LAYERS to carry each cumulative bound into the enclosure. Keep BASIS and the moment fixed for this comparison.
+5. Read the loop below. Each term folds noise through abs, adds a weighted magnitude, halves amplitude and doubles frequency. The sine/cosine offsets are held by the same local clock.
+
+```glsl
+    for (int i = 0; i &lt; layers; i++) {
+        vec2 animated_pos = pos * frequency;
+        animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
+        animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
+
+        value += amplitude * abs(noise2d(animated_pos));
+        amplitude *= 0.5;
+        frequency *= 2.0;
+    }
+```
+
+The first weight is .5 and the frequency is 1. The cumulative weights are .5, .75, .9375 and .984375. These are not predicted brightness values: each term has its own sampled magnitude, followed by gain and clipping.
+
+6. Change BASIS separately. The control cycles the implementations Perlin → Value → Cellular → Simplex → Perlin. Return to Perlin at the held moment. There is no exposed seed control.
+7. Restore the dress. The complete finish adds an independent four-term turbulence calculation, density, smoothstep, colour, corner/edge shading, roughness and lighting-normal variation. Reducing LAYERS does not disable that second calculation.
+8. Follow a cloud towards a door or corner. Each quad restarts its UV chart; the sphere has another chart. A shared procedure does not guarantee continuity between those surfaces.
+9. Watch the independent dark orb while the room is held. Resume with FREEZE again. The room continues from its held phase; the orb has been advancing throughout.
+
+Both shaders expose the same cloud term bound and sum-only mode. The comparison patches always show the sum at gain 2, while DRESS selects what the enclosure and its sphere wear. The actual desktop pointer operates all four controls in the accepted rendered run. The current panel is at (6,4), facing into the room; earlier entrance photographs describe the previous placement. Human VR reach and comfort remain for the deferred headset session.
+
+Next: Noise_Inside_Noise. Keep the distinction between changing the value returned at a coordinate and changing the coordinate at which the question is asked.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Noise_6_Wall/technical.md">Raw captured source</a></p><pre># Noise 6 Wall — one comparison, several surfaces
+
+The active scene is `res://algorithms/randomness/shadernoisespace/noiseroom.tscn`, with `noiseroom.gd`, `WallNoiseShader.gdshader` and `QueerNoiseShader.gdshader`. The map retains a panel placement and an enclosure placement of shader_noise_space plus the independent dark_sphere. Original source and text versions are preserved in the dated wall review archive.
+
+## From cells to fragments
+
+Noise_Voxel stores a finite lattice of scalar samples and occupancy decisions. Here a spatial fragment shader evaluates a 2D noise construction at the interpolated UV coordinates of rendered surfaces. Fragment processing runs on the GPU; it remains finite work bounded by rendered coverage, sampling, precision and the selected branch. It does not evaluate an infinite field or every coordinate simultaneously. The room still has geometry, collision, uniforms and rendering state.
+
+The variable called world_uv receives UV directly. It is not a world-position projection. Every newly staged quad uses its own chart; the sphere&#x27;s chart wraps around its mesh. Equal uniforms produce the same calculation at equal UV coordinates, with different physical spacing and seams on different surfaces. These shader samples are not the stored Perlin FBM volume from the preceding hall.
+
+## Accumulating a folded field
+
+The fixed sine-based hash supplies coordinate-dependent pseudo-random values or vectors. The four selectable implementations are Perlin-style gradient interpolation, Value interpolation, Simplex-style triangular contributions and Cellular nearest-feature distance. Their existing scaling constants remain. This pass verifies shared state and equal shader outputs at matched UVs, not a new statistical equivalence across those four bases. A cellular nearest-distance field can be continuous while its derivative changes at feature boundaries; it is not automatically a discontinuous staircase.
+
+cloud_noise starts value=0, amplitude=.5 and frequency=1. It adds amplitude × abs(noise2d(animated_pos)), halves amplitude and doubles frequency on every iteration. Animated coordinates combine pos × frequency with sine/cosine offsets. This is an octave accumulation of magnitudes, not a signed sum and not a claim to an exact fractional Brownian process. The selectable prefixes have 1, 2, 4 and 6 terms. Their weight sums are .5, .75, .9375 and .984375; their images also depend on sample values and display encoding.
+
+In sum mode, the shader emits clamp(cloud_noise × term_gain, 0, 1), with gain 2 for this comparison. Albedo is zero and the lighting normal is neutral. The branch skips the full finish&#x27;s extra field evaluations. The display may collapse distinct high sums to white; emitted greyscale is a chosen encoding, not an unmediated scalar measurement.
+
+In dressed mode, the cloud sum is combined with a separate four-term turbulence loop, weighted by .4 and multiplied by cloud_density. That loop starts at amplitude 1 and frequency .5, then multiplies by .6 and 2.5. Smoothstep, pink colour mixing, time-driven colour shift, corner/edge treatment, roughness and a finite-difference lighting normal produce the finish. LAYERS changes the cloud loop&#x27;s bound; the detail loop retains four iterations. Neither branch moves vertices or rebuilds collision.
+
+The normal-map encoding has been corrected to map signed XY offsets into the expected 0–1 tangent-normal channels. This shared shader repair can alter shading in other existing consumers. The original scene geometry is unchanged; its default appearance is not claimed pixel-identical to the faulty normal encoding.
+
+## Current time and local ownership
+
+The panel owns the comparison clock. FREEZE stops its advancement and animation updates while retaining current time, rate, density and colours. It does not set time_scale to zero. RESUME advances from the held base_time. The fixed-count patches receive that same clock and basis. The room receiver copies the complete comparison state into its private sphere and wall materials and does not run a second clock.
+
+Broadcasts require a hall ancestor and reach room-mode receivers within that ancestor only. The legacy standalone room is not recruited by a nearby panel. The dark orb keeps its independent clock. State ownership is the reason a comparison can hold while something else in the hall continues.
+
+## Stage and preservation
+
+stand:panel removes its unused large enclosure and builds the supported instrument. stand:room opts into a five-metre floor and 4.8 m wide room, with a 2.8 m ceiling and opposing 1.6 × 2.3 m door clearances. Its floor sits over the current level map floor; the central pit described in earlier reviews has since been filled. Quads have matching static box colliders; DRESS changes neither those shapes nor their positions. The original internal sphere remains, with the controlled material applied at the actual CSG combiner root. The orb has moved to solid floor near the exit. The panel now stands at (6,4), facing inward from the north wall; the room remains at (6,6). This placement revision changes no structure, utilities, shader source, geometry or controller behaviour.
+
+## Evidence and limits
+
+The accepted rendered museum run passes 39 checks. It compares sphere and wall shader output at 256 corresponding sampled pixels for each term prefix, with maximum captured red-channel difference zero. It checks a nondecreasing, changing rendered prefix, current-time freeze/resume, complete state broadcast, an excluded outside receiver, unchanged collision shapes and four actual desktop-pointer controls driven by synthetic mouse events. A desktop body crosses both doors and the floor; the surrounding museum route remains connected.
+
+The 96 × 96 shader captures and their sampled red-channel means are display measurements, not raw noise values or a CPU/GPU precision proof. These checks do not certify headset comfort, reach or Quest performance. Earlier staging runs shared GPU time with another review; the accepted final run began with no other Godot process listed. No timing comparison is made.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Noise_6_Wall/intent.md">Raw captured source</a></p><pre># Noise 6 Wall — what changes when the room changes its dress?
+
+Sequence role: follow Noise_Voxel&#x27;s sampled occupancy with shader material evaluation. Keep the array, coordinates, sine, accumulated terms and alternative uses for values in view. Next is Noise_Inside_Noise and domain warping. The shader uses a new 2D field, not the preceding volume&#x27;s stored 3D samples.
+
+Encounter: enter the pink enclosure, hold its current moment, remove and restore the finish, compare cumulative cloud terms, then inspect the mapping seams. Apparent folds do not supply physical support. The orb&#x27;s independent sine-driven emission lets the visitor encounter the boundary of the room&#x27;s local clock.
+
+Primary encounter: shader_noise_space (panel and room placements, including the room&#x27;s original sphere). Supporting comparison: dark_sphere; retain its short book return without promoting it. Retain all three placements and recovered structure/utilities. The room&#x27;s own floor sits over the current level map floor. Its panel now stands inside, at (6,4), so changing the material does not require leaving the room.
+
+Critical opening: absolute value folds sign, summation merges contributions, the display clips a range and UV charts redistribute a field over surfaces. Every view has an encoding. Surface pleasure remains available after its construction is understood. Ask how apparent depth or darkness affects approach without claiming a measured change in visitor behaviour or geometry.
+
+Evidence: 39 rendered museum checks; four desktop pointer controls, held/resumed state, actual shader readback, cross-hall isolation, unchanged collision through material changes and a desktop body crossing both doors. Headset reach, comfort and Quest performance remain unverified.
+
+Possible later work: compare continuous world-space sampling with the existing UV charts; expose weights or gain separately; let a field deform actual geometry and compare body support. These are proposals, not existing controls. Original texts and sources are archived under doc/space/wall-review-2026-09-13/before/.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Noise_6_Wall/critical.md">Raw captured source</a></p><pre># A surface can change an approach
+
+The room offers a small disturbance before it offers an explanation. The wall seems folded; the floor supports the same step when its finish changes. Geometry and appearance can answer differently. That difference makes the material worth attending to. A visitor may hesitate before a dark patch or move towards a luminous corner, even though neither reaction has been written into the collider. These are invitations to observe bodies in the work, not results from a visitor study.
+
+DRESS gives the room another account of itself. The grey view exposes the cloud accumulation while removing the second turbulence contribution and the pink finish. It still has gain, clipping, raster sampling and a display. Finding another layer does not entitle us to call it the naked original. Each account makes some differences available and others difficult to recover.
+
+The folding begins earlier, inside abs. Opposite signs of equal magnitude contribute the same amount. Summation then gathers differently weighted terms into one scalar. A scalar by itself does not retain a unique decomposition; the program retains a construction we can revisit. In the previous hall we asked what a threshold withheld from a body. Here we can ask what a fold gives another use, and what distinction that use sets aside. The operations are specific enough to alter. They are not evidence that computational categories naturally dissolve or that a material is free of constraints.
+
+There is a queer possibility in how readily the accumulated field receives another body. A square, a wall and a sphere can wear related procedures without being declared the same object. Their charts pull the pattern differently. The seam makes that relation visible: the transfer is an arrangement, not a guarantee of seamless universality. We can desire the strange fit and still examine who chose the coordinates, the range and the edge.
+
+The pink finish deserves more than the role of a seductive mistake. Its depth cues and colour can make a box feel excessive, intimate or inviting. Understanding the shader need not cancel that pleasure. It gives us a way to ask for a different pink, a more insistent seam, a wall that makes the mapping felt. The grey comparison is useful because it permits another reading; the dress is useful because it does something that reading alone cannot describe.
+
+FREEZE makes a boundary audible in the account even without a sound: the room holds while the orb continues. The panel has a local reach. The larger simulation, another clock, the visitor&#x27;s own time have not been suspended. Teaching chooses a tractable interval within those continuing processes. The choice helps us begin and leaves something outside the lesson, available when we return.
+
+For now the surface&#x27;s apparent folds do not carry the player. Later a sampled field may become a height, force, probability or coordinate offset. Each application will have a different relation to possible bodies. Noise_Inside_Noise takes the next step through coordinates: a field can participate in where another field is encountered. We leave this room with an operation we can follow and a desire for what its next use might make possible.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Noise_6_Wall/artifacts.md">Raw captured source</a></p><pre># Noise 6 Wall — one primary encounter, three placements
+
+`shader_noise_space#stand:panel` at (6,4) is the supported four-patch instrument, facing inward from the north wall. Its controls can be reached while standing inside the enclosure. LAYERS, BASIS, FREEZE and DRESS control only receivers in this museum hall. The cased, tilted plate states the held/live phase, term counts, weights, gain and finish.
+
+`shader_noise_space#stand:room` at (6,6) is the same primary work at bodily scale. Its five-metre floor sits over the current level floor. A 4.8 m enclosure has a 2.8 m ceiling and opposing 1.6 m wide, 2.3 m high door openings. The original internal sphere is retained and now receives the material at its combined CSG root. Each wall piece uses its own UV chart. Legacy standalone enclosure geometry remains available in the unchanged scene resource.
+
+`dark_sphere` at (10,10) is a supporting work on solid floor near the exit. Its original material, rotation and independent sine-driven pulse remain. FREEZE at the panel does not stop this orb.
+
+The primary token is shader_noise_space. The book also briefly returns to the supporting dark_sphere; that encounter anchor is retained. The two shader placements share a passage; the internal sphere is part of that scene, not an additional map token. Recovered structure and utilities are unchanged. See `/research/possible-bodies/noise-six-wall.html` for photographs and evidence.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Noise_6_Wall/summary.md">Raw captured source</a></p><pre># The room wears the sum
+
+Noise_6_Wall carries the field from the voxel room&#x27;s occupancy decisions into a material. Two placements of shader_noise_space form one primary encounter: a four-patch panel inside an enterable enclosure with its retained sphere. The independent dark_sphere remains a supporting comparison, with its brief return in the text retained. All three authored placements remain.
+
+FREEZE holds the current local phase, colours and density. LAYERS sends 1, 2, 4 or 6 cumulative cloud terms to the enclosure and sphere. BASIS changes the shader generator. DRESS compares the greyscale cloud sum with the complete pink finish at the same held moment. The four patches retain their fixed counts.
+
+The loop halves amplitude, doubles frequency and folds signed noise through abs before adding it. Weights, sampled values and display encoding jointly determine the image. Each wall piece and the sphere have their own UV mapping. Material variation changes the visible surface without changing its geometry or collision; the separate orb keeps its own clock.
+
+Continue to Noise_Inside_Noise: move from adding sampled answers to changing sampling coordinates. The illustrated review and recorded comparisons are at `/research/possible-bodies/noise-six-wall.html`.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Noise_6_Wall/blurb.md">Raw captured source</a></p><pre>A pink room waits inside the museum. Hold its current moment, compare one, two, four and six cloud terms, then change its dress. What has moved when the wall looks deeper but your feet meet the same floor?
+</pre></section></body></html>

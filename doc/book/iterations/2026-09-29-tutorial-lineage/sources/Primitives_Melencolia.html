@@ -1,0 +1,534 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Primitives_Melencolia · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Primitives_Melencolia">← Tutorial lineage</a></p><h1>Primitives Melencolia</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Primitives_Melencolia/final.md">Raw captured source</a></p><pre># Melancholy of Finitude
+
+What keeps you looking after you know the form?
+
+&lt;!-- @pyramid --&gt;
+
+Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?
+
+Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.
+
+Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.
+
+&lt;!-- @pyramidlong --&gt;
+
+The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?
+
+Its base is still square. Its apex is still a single point above it. The tall pyramid&#x27;s source collects the base vertices and then adds that point:
+
+```gdscript
+vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+```
+
+The same connections can carry a different height. In this version the pyramid&#x27;s base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.
+
+&lt;!-- @cube_scene --&gt;
+
+Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?
+
+The arrangement returns to the room&#x27;s earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.[^solids] Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.
+
+Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.
+
+![The museum court from three viewpoints: aligned, oblique and a plan from above.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-one-arrangement.png)
+
+*The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.*
+
+&lt;!-- @snap_pyramid_puzzle --&gt;
+
+Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.
+
+Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.
+
+&lt;!-- @ --&gt;
+
+## The tools are still here
+
+&lt;!-- @durer_scene --&gt;
+
+Follow the raised connection to the next platform. The large stone stands to the left; the winged figure sits to the right, her head resting on a fist. A sphere lies near the sleeping dog. Above them, the ladder, scales, hourglass and bell give the wall its own order. Beneath them, a saw and a carpenter&#x27;s plane lie among the small tools. Here the forms have company.[^durer]
+
+The compass is in her hand. She has not lost the instrument. A book lies on her lap, and the skirt falls in heavy folds over her knees. Beside her, a smaller winged figure bends over a tablet. One is drawing. The other looks away.
+
+Earlier, a sphere could introduce a primitive. Here it occupies ground beside a tired animal. Nothing has happened to the sphere&#x27;s definition. Much has happened to what we can see in it.
+
+We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it *geometric desire*: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.
+
+Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.
+
+![The reconstructed Melencolia tableau inside the museum.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-tableau.png)
+
+*After Dürer&#x27;s engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.*
+
+The stone has six pentagonal faces and two triangular ends. Its mesh begins with a rhombohedron and cuts off two opposite corners. The proportions are one possible reading of the printed form. We can make a closed solid without claiming to have recovered the only solid the image permits.
+
+Now look up at the numbered square. Choose a row and add it before reading further.
+
+```text
+16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+```
+
+Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.
+
+Stay a little longer. Has that correct answer finished what you came to look at?
+
+## What do we want a form to promise?
+
+This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher&#x27;s study of its mosaics later fed his own investigations of repeating figures.[^pattern] A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.
+
+Malevich&#x27;s tilted square in *White on White* offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint&#x27;s *Paintings for the Temple* give abstract forms a different task, within a spiritual inquiry.[^abstraction] The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.
+
+And abstraction need not carry us away from the body. Lygia Clark&#x27;s hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?
+
+Keep that question beside the seated figure. The tools are here. Their next use is not settled.
+
+## The number that was already running
+
+&lt;!-- @frame_counter_display --&gt;
+
+By the way out, a number is changing. It is the same counter you met on your first step into this chapter: `Engine.get_process_frames()`, process frames since the engine started, read fresh on every call.
+
+It is much larger now. Some of that is yours — the picking up, the drawing, the walking, the shifting of a start. A fixed quantity of it is not, and never will be. The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference.
+
+In the first room we said that its first number for you was not its first number. That is still the one thing it will not tell you, and you now know several reasons why. A record keeps what its rule admits. Someone chose the rule. The number keeps growing while you read it.
+
+## Enough to continue
+
+Dürer&#x27;s engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.
+
+A few tools, and more possible constructions than we have time to pursue.[^sublime]
+
+Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.
+
+We leave with enough to continue. There is still something here we have not finished looking at.
+
+&lt;!-- @ --&gt;
+
+[^solids]: Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See [*Solid Objects*](https://publicdomainreview.org/collection/solid-objects/) and the [image selected for this room](https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/). The court follows the drawing&#x27;s blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.
+
+[^durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. The [National Gallery of Art](https://www.nga.gov/artworks/6641-melencolia-i) provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid&#x27;s proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book&#x27;s reading, not a settled account of Dürer&#x27;s intention.
+
+[^sublime]: Kant&#x27;s [*Critique of Judgement*](https://www.gutenberg.org/files/48433/48433-h/48433-h.htm), §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room&#x27;s investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.
+
+[^pattern]: The [Metropolitan Museum&#x27;s account of geometric pattern](https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art) describes its construction and combination with other ornament. It does not license a single spiritual meaning for all Islamic geometry. [Escher in The Palace&#x27;s timeline](https://escherinhetpaleis.nl/en/about-escher/timeline) records his sustained study of the Alhambra and Córdoba mosaics in 1936; tessellation already appeared in his earlier work.
+
+[^abstraction]: Kazimir Malevich, [*Suprematist Composition: White on White* (1918)](https://www.moma.org/collection/works/80385), MoMA; Hilma af Klint, [*Paintings for the Temple*](https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple), Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence.
+
+[^clark]: Lygia Clark, [*Poetic Shelter* (1964)](https://www.moma.org/collection/works/91767), MoMA, and the museum&#x27;s account of [Neo-Concrete art](https://www.moma.org/collection/terms/neo-concrete-art). Clark&#x27;s participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book&#x27;s proposal.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Primitives_Melencolia/tutorial.md">Raw captured source</a></p><pre># Primitives Melencolia
+
+The current lesson begins with the geometric court and ends at the Dürer tableau. The walkable prose is in `final.md`; these notes connect its observations to the shipped implementation.
+
+## First recognise, then compare
+
+Circle the four corner pyramids. Predict whether their vertex, edge and face counts change when you move. Take the side ramp onto their platform and compare the central spire.
+
+A square pyramid has five geometric vertices, eight edges and five faces. In `commons/primitives/pyramid/pyramidlong.gd`, `create_pyramid_vertices()` builds four corners on the XZ plane and adds the apex:
+
+```gdscript
+vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+```
+
+The default base is 0.8 × 0.8 metres and the default apex is at Y = 2.8. In this hall, `#pedestal_height:0.8` raises the pyramid mesh onto a separate matching block: its tip is 3.6 metres above the court. The four corner pyramids use the sibling `pyramid.gd` with `#height:2.4`, retaining their 0.6-metre square bases. Their different proportions do not require a different connection graph. `create_pyramid_faces()` divides the square base into two triangles and adds four triangular sides: six render triangles representing five geometric faces. The pedestal is a separate cuboid and is not included in those counts.
+
+The four `cube_scene` instances use scale 0.8. Their centres are lifted 0.4 metres above the court so their lower faces meet it. The same cube vocabulary also supplies the supporting grid structure. An artifact&#x27;s role in a composition is not stored in its vertex count.
+
+The supplied manuscript image guides the solid finishes: `#solid_color:B7C7DB` for the blue corners, `#solid_color:DF93B8` for the pink spire and pedestal, and `#solid_color:D9AB63` for the ochre cubes. These placement settings select opaque matte materials. Unconfigured instances keep their original materials and dimensions. The drawing suggests proportions and relationships; the metre values are an adaptation for this walkable court.
+
+## What the puzzle recognises
+
+Beside the court, use the five snap points to make a four-point base cycle and connect each corner to the apex. The connection manager&#x27;s `square_pyramid_formed` signal invokes `_on_pyramid_formed()` in `snap_pyramid_puzzle.gd`. That method checks that all five points belong to this puzzle before calling the shared completion routine.
+
+The detector checks connections, not right angles, equal lengths or base planarity. Its success is narrower than the mathematical name. The separately authored court, connection and Dürer deck exist before success; do not describe them as geometry generated by this puzzle.
+
+## A square that can be checked
+
+At the second platform, read the square generated by `commons/scenes/demos/durer/EngravingScene.gd`. Its `NUMBERS` constant retains the matrix from the earlier `MagicSquare.gd`:
+
+```gdscript
+const NUMBERS = [
+    [16, 3, 2, 13],
+    [5, 10, 11, 8],
+    [9, 6, 7, 12],
+    [4, 15, 14, 1]
+]
+```
+
+Add a row, a column and a main diagonal. Each sums to 34. Then choose an arbitrary group of four entries: the rule does not promise that every such group sums to 34. The exact result answers a stated question without deciding what the whole tableau means.
+
+The registry&#x27;s existing `durer_scene` token now loads `EngravingScene.tscn` at full scale, at cell (6,18) on the two-metre deck. Its front is local +Z, rotated 180 degrees in the hall. The seated figure on the right, stone on the left, smaller figure on the millstone, dog, sphere, ladder and wall instruments follow the engraving&#x27;s projected relationships. The model invents depths and rear surfaces; it is a stylised reconstruction, not an archaeological recovery. The matrix values remain conventional integers; the displayed 5 is upside down and the 9 mirrored, following the print.
+
+`DurerPolyhedron.gd` now constructs a genuine closed truncated rhombohedron. It stretches a cube along its body diagonal, rotates that diagonal upright, and clips opposite corners. Six former rhombus faces become pentagons; the two cuts become triangular caps. The generated face polygons are planar and share twelve unique vertices and eighteen edges. Euler&#x27;s check is 12 − 18 + 8 = 2. The render mesh triangulates those faces into twenty triangles. Face angles of 72 degrees and a truncation depth of 0.38 of the adjacent edge&#x27;s vertical span are modelling choices, not a claim that the engraving establishes these unique values. Here `size=0.75` makes the stone 2.25 metres tall, on a 0.24-metre step.
+
+The cloth is a loft through pleated rings; its folds change the silhouette. Other objects use simple meshes and assembled rods, ellipsoids and boxes. No animation suggests the historical figure has started drawing. The interaction is walking, proximity and changing occlusion. The statue, walls, stone, sphere and steps have local collision. Small instruments and decorative folds do not claim individually exact collision. The old `DurerScene.tscn` remains available for comparison. The new scene inherits its finish/cage/block/veil apparatus API; the museum uses finish.
+
+The expanded second platform runs through rows 14–23, columns 2–10. The approach ramp remains at (5,13). A south-facing ramp at (9,24) spans two metres and descends from the deck to the ordinary floor. The artifact&#x27;s whole bounding box is not sealed as an obstacle: actual local colliders leave aisles around it. This hall refuses the automatic `cable_tray` prop, which otherwise crossed the tableau at the visitor&#x27;s eye height on the raised platform.
+
+## Carry a relation forward
+
+Choose a relation in the court: repeated corners, a tall centre, or the connection between two levels. Predict which part survives moving, turning or scaling the objects. That prediction is the handover to transformation. Purpose, pleasure and the desire to continue investigating remain questions alongside the implementation.
+
+## The court on the page
+
+The book&#x27;s three-view illustration loads the nine production artifact scenes with their actual map configurations: four `pyramid`, one `pyramidlong`, four `cube_scene`. All three views keep mesh data, transforms and pigments fixed. An aligned elevation hides the two rear corner pyramids, an oblique camera separates the outlines, and the plan shows their horizontal positions. These are orthographic explanatory views, not literal headset views. The support matches the court&#x27;s 5 × 5 × 1 metre envelope with a plain finish; lighting is adapted for the page. The surrounding museum is omitted from the illustration and shown separately in the native hall photographs.
+
+The capture checks rendered bounds against the assembled museum&#x27;s measured placements. Two controlled walks reach the court by the west ramp and the Dürer platform from the raised connection; three floor rays verify the two levels and the connection. Headset comfort, magic-square reading distance and every route around the stages remain separate checks.
+
+The later `frame_counter_display` at (3,26) is the existing artifact in its default `count` / `boot` configuration. It reads engine process frames, preserving the return to Point Zero in the current manuscript. A direct launch into this hall starts a new engine session; the text&#x27;s larger number describes continuing through the sequence in one session. It is not a saved personal elapsed-time record.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Primitives_Melencolia/technical.md">Raw captured source</a></p><pre>&gt; Earlier technical research draft. For the current court, connection puzzle, illustrated viewpoints and counter return, use [the implementation companion](tutorial.md). Some sequence counts, placements and code examples below predate the restored hall.
+
+# 09 Melencolia
+
+## The Final Primitive
+
+The primitives sequence ends here. Twelve maps: from a point with no extension, through lines, triangles, cubes, portals, and topological transformations — arriving at this, a map named after Dürer&#x27;s 1514 engraving, *Melencolia I*. The winged figure in that engraving sits surrounded by every tool of geometry and measurement — compass, scale, hourglass, magic square, polyhedron — and stares into the distance. Thinking.
+
+The tools are complete. The thinking is not.
+
+In Primitives_Portals we saw the circle approached from the outside — discrete rings whose count pushed toward the irrational limit of π. The curve was never reached; approximation was the lesson. Melencolia takes that same motif and grounds it: not the limit of a sequence, but the limit of what tools alone can deliver.
+
+Every primitive in this map is a closed form. The pyramid. The torus. The truncated rhombohedron. The magic square. Each is structurally complete. None of them tells you what to build next.
+
+---
+
+## Five Vertices, One Form
+
+The map opens with four static pyramids at the corners of the space — positions (1,1), (5,1), (1,5), and (5,5). These are `pyramid` fixtures, their geometry built at runtime by `pyramid.gd`.
+
+A square pyramid has five vertices: four base corners and one apex. `_create_pyramid_vertices()` encodes them exactly:
+
+```gdscript
+func _create_pyramid_vertices() -&gt; Array[Vector3]:
+    var vertices: Array[Vector3] = []
+    var half_base := base_size * 0.5
+    vertices.append_array([
+        Vector3(-half_base, 0, -half_base),  # back-left
+        Vector3(half_base, 0, -half_base),   # back-right
+        Vector3(half_base, 0, half_base),    # front-right
+        Vector3(-half_base, 0, half_base),   # front-left
+        Vector3(0, pyramid_height, 0)        # apex
+    ])
+    return vertices
+```
+
+Five positions. Then `_create_pyramid_faces()` describes how those positions connect:
+
+```gdscript
+func _create_pyramid_faces() -&gt; Array:
+    return [
+        [0, 2, 1],  # base triangle 1
+        [0, 3, 2],  # base triangle 2
+        [0, 1, 4],  # back side
+        [1, 2, 4],  # right side
+        [2, 3, 4],  # front side
+        [3, 0, 4]   # left side
+    ]
+```
+
+Six triangles total: two for the square base, four lateral faces. These face indices are invariant — the same integers regardless of `pyramid_height` or `base_size`. What changes with those parameters is only the *embedding* of the topology in 3D space. The face list describes connectivity. The vertex positions describe shape. They are separate concerns.
+
+`_rebuild_pyramid()` calls both, then hands them to `PrimitiveMeshBuilder`:
+
+```gdscript
+func _rebuild_pyramid() -&gt; void:
+    var geometry := _pyramid_geometry()
+    var material = GridMaterialFactory.make(base_color)
+    _mesh_instance = PrimitiveMeshBuilder.build_mesh_instance(
+        geometry[&quot;vertices&quot;],
+        geometry[&quot;faces&quot;],
+        { &quot;name&quot;: &quot;Pyramid&quot;, &quot;material&quot;: material }
+    )
+    add_child(_mesh_instance)
+```
+
+The grid shader from `GridMaterialFactory.make()` makes face normals visible as surface orientation — the four lateral faces read as distinct planes rather than a continuous silhouette. Four corner pyramids teach by repetition: same face list, same result, four times over. Topology and geometry are separate. The pyramid&#x27;s identity is in the indices; its presence is in the vectors.
+
+---
+
+## Proportion as Meaning
+
+At the center cluster around (3,3), a `pyramidlong` stands beside a `cube_scene`. Same vertex count as the corner pyramids — five positions, the same face list structure — but with `pyramid_height: float = 2.8` against a base of 0.8×0.8. Proportion has changed. Topology has not.
+
+`pyramidlong.gd` runs the same SurfaceTool pattern:
+
+```gdscript
+func create_pyramid():
+    var st = SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLES)
+    var vertices = create_pyramid_vertices()
+    var faces = create_pyramid_faces()
+    for face in faces:
+        add_triangle_with_normal(st, vertices, face)
+    var mesh_instance = MeshInstance3D.new()
+    mesh_instance.mesh = st.commit()
+    apply_queer_material(mesh_instance, base_color)
+    add_child(mesh_instance)
+```
+
+Identical algorithm. But `pyramid_height = 2.8` against a 0.8 base makes the output read as a spire — an obelisk, a monument — where the corner pyramids read as stable mounds. The same six face indices, the same five vertex slots, produce an entirely different spatial character.
+
+Proportion is a dimension of meaning that the topology cannot encode. A face list is indifferent to aspect ratio. The `cube_scene` beside the long pyramid stages the contrast explicitly: a cube&#x27;s uniform proportions against the vertical excess of the pyramid. What you see in the center of the map is a claim: that the most basic parameter of a shape, its dimensional ratio, changes phenomenological character completely, while leaving the underlying structure intact.
+
+---
+
+## Building by Hand: The Snap Puzzle
+
+The `snap_pyramid_puzzle` at (3,1) shifts the relationship from observation to construction.
+
+Five ghost snap points mark target positions in space — four base corners, one apex — rendered as pink-emissive transparent targets by `_apply_puzzle_materials()` in `snap_pyramid_puzzle.gd`. You pick up snap-point objects from elsewhere in the map and bring them into alignment with those targets. When all five are placed, `_on_pyramid_formed()` fires:
+
+```gdscript
+func _on_pyramid_formed(points: Array) -&gt; void:
+    var our_points_count = 0
+    for point in points:
+        if point in snap_points:
+            our_points_count += 1
+    if our_points_count == 5:
+        _complete_puzzle()
+```
+
+The completion check is exact. Five points. All matching. The puzzle doesn&#x27;t care about the order you placed them, or the path you took — only that the final configuration is achieved. `_complete_puzzle()`, defined in the parent class `SnapPointPuzzleBase`, handles the reward logic.
+
+The detection pattern is set intersection: `snap_points` is this puzzle&#x27;s required positions; `points` is the global list of currently-connected snap objects. The loop counts overlap. If overlap equals the required count, the shape exists.
+
+This generalizes directly. `SnapTetrahedronPuzzle` checks for 4 points; `SnapOctahedronPuzzle` checks for 6. The specific polyhedron is encoded in the target positions, not in the detection algorithm. Any convex polyhedron becomes a completion-detection problem: define the required positions, count the matches, fire when they converge.
+
+The puzzle is the map&#x27;s fulcrum. Everything the primitives sequence has taught — vertex positions, face connectivity, the distinction between topology and geometry — here requires your body. You cannot understand the pyramid&#x27;s five-vertex structure by reading the array. You have to navigate to each position and snap the point into place. Understanding is enacted.
+
+---
+
+## Dürer&#x27;s Problem
+
+The `durer_scene` at (3,12) contains the objects from Melencolia I itself: a truncated rhombohedron and a 4×4 magic square. Both are real artifacts from the engraving, built in GDScript.
+
+`DurerPolyhedron.gd` constructs the rhombohedron in `_generate_durer_solid()` — a rhombohedron stretched along the Y axis, then truncated at two vertices, yielding 8 faces: 6 irregular pentagons and 2 equilateral triangles:
+
+```gdscript
+func _generate_durer_solid() -&gt; ArrayMesh:
+    var st = SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLES)
+    var s = size
+    var h = 1.5 * s
+    var w = 1.0 * s
+    # Top triangular face
+    var t0 = Vector3(0, h * 1.1, -w * 0.4)
+    var t1 = Vector3(w * 0.7, h * 0.95, w * 0.35)
+    var t2 = Vector3(-w * 0.7, h * 0.95, w * 0.35)
+    # ... middle rings, pentagon faces, triangulation
+    st.generate_normals()
+    return st.commit()
+```
+
+Pentagon faces cannot be passed to the GPU as-is — the rasterizer only accepts triangles. `_add_pentagon()` performs fan triangulation from the first vertex:
+
+```gdscript
+func _add_pentagon(st: SurfaceTool, verts: Array):
+    for i in range(1, verts.size() - 1):
+        _add_triangle(st, verts[0], verts[i], verts[i + 1])
+```
+
+Fan triangulation works for any convex polygon: fix one vertex, draw edges to every non-adjacent vertex, fill the resulting triangles. It fails for concave polygons — a limitation this solid doesn&#x27;t hit, but the algorithm&#x27;s constraint is worth noting. Every rendering pipeline eventually hits the triangle as its irreducible unit.
+
+The magic square in `MagicSquare.gd` places 16 numbers in a 4×4 grid where every row, column, and diagonal sums to 34:
+
+```
+16  3  2 13
+ 5 10 11  8
+ 9  6  7 12
+ 4 15 14  1
+```
+
+`_create_cell()` highlights the bottom-center cells:
+
+```gdscript
+if row == 3 and (col == 1 or col == 2):
+    text_color = Color(1.0, 0.85, 0.3)  # Gold
+```
+
+Those cells contain 15 and 14. The year: 1514. A number-theoretic structure that encodes its own date of composition.
+
+The Dürer solid is the most complex primitive in this sequence. Its faces are neither squares nor equilateral triangles; its construction requires vertex positions derived from proportional analysis of the original engraving. It sits in this map as an existence proof: that geometric forms can carry historical specificity, that a vertex array can hold a cultural object.
+
+---
+
+## The Torus and Radial Distribution
+
+The elevated tier at (3,10) holds the `diamondtoruscollection` — seven diamonds hanging from a torus ring via thin cylinders. Their positions are computed by `create_hanging_arrangement()`:
+
+```gdscript
+for i in range(diamond_count):
+    var angle = (i / float(diamond_count)) * 2.0 * PI
+    
+    var torus_position = Vector3(
+        cos(angle) * torus_radius,
+        0,
+        sin(angle) * torus_radius
+    )
+    
+    var diamond_position = Vector3(
+        cos(angle) * torus_radius,
+        -cylinder_length,
+        sin(angle) * torus_radius
+    )
+```
+
+`(i / float(diamond_count)) * 2.0 * PI` divides the full circle into equal arcs. When `diamond_count` is 7, each diamond sits at 51.4° from its neighbor. When it&#x27;s 6, exactly 60°. The formula is indifferent to the count — it distributes whatever you give it, evenly.
+
+This is the pattern behind regular polygons, clock faces, the hexagonal lattice of a honeycomb. The torus is the form whose symmetry group allows equal radial distribution: there is no preferred starting position on a circle. `torus_radius: float = 2.0` sets the circumference; `cylinder_length: float = 1.0` controls how far each diamond descends.
+
+Walk around the collection and the spacing holds from every angle. From directly above, the diamonds form a regular polygon — the torus makes the polygon&#x27;s vertices visible as hanging objects in 3D space. The elevated placement is not decorative; standing at floor level, you look up at the arrangement. Radial symmetry is embodied by being inside it.
+
+---
+
+## The Hollow Frame: Absence as Structure
+
+The `bigframe` — a `boxbeam` — appears in this map as a threshold geometry. Its construction reveals something the solid primitives obscure.
+
+A solid box needs 8 vertices. A hollow frame — a portal you can walk through — requires 16: four outer corners and four inner corners on both front and back faces. `boxbeam.gd` names this explicitly:
+
+```gdscript
+var scaled_vertices = [
+    # Front outer (0-3)
+    Vector3(-half_w - t, -half_h - t, half_d),
+    Vector3(half_w + t, -half_h - t, half_d),
+    Vector3(half_w + t, half_h + t, half_d),
+    Vector3(-half_w - t, half_h + t, half_d),
+    # Front inner (4-7)
+    Vector3(-half_w, -half_h, half_d),
+    Vector3(half_w, -half_h, half_d),
+    Vector3(half_w, half_h, half_d),
+    Vector3(-half_w, half_h, half_d),
+    # Back outer (8-11), Back inner (12-15)
+    # ...
+]
+```
+
+Where `t` is `thickness`. The sixteen faces connect outer-to-inner on front, outer-to-inner on back, front-outer-to-back-outer, front-inner-to-back-inner. The opening — the walkable aperture — is not in the vertex list. It is the gap between the inner corners. The frame&#x27;s identity is its negative space.
+
+This is the first primitive in the sequence whose essential characteristic is what it excludes rather than what it encloses. A cube encloses volume. A pyramid terminates in a point. The frame frames an absence. The geometry describes a boundary around nothing.
+
+The `dark_sphere` at (2,5) completes this atmospheric logic. It pulses between `pulse_min: float = 0.05` and `pulse_max: float = 0.35` emission at `pulse_speed: float = 1.2`, rotating slowly with a slight wobble on X. Its `_process()` drives the oscillation every frame but changes very little — it serves as the perceptual anchor, the reference body against which the other elements read. Not all objects in a space need to teach. Some need to stabilize perception.
+
+---
+
+## The Axioms Display
+
+The `code_display` at (3,13) renders `melencolia_axioms` — tutorial text loaded via `codeDisplay.gd`&#x27;s `set_tutorial()` method. `apply_grid_config()` receives the configuration from the grid system and routes it to the library:
+
+```gdscript
+func apply_grid_config(config_data: Dictionary) -&gt; void:
+    if config_data.has(&quot;tutorial&quot;):
+        var tutorial_key = str(config_data.tutorial).strip_edges()
+        set_tutorial(tutorial_key)
+```
+
+`set_tutorial()` calls into `TutorialTextLibrary`, which loads the content from `tutorial_text.json`. The axioms themselves are stored in that file and are not listed in this map&#x27;s artifact metadata — their propositional content exists outside the geometry.
+
+This is intentional. Some knowledge is transmitted as proposition rather than manipulation. The axioms display acknowledges that not everything can be demonstrated by moving objects in space. The pixel renders text; text carries the things that geometry cannot carry directly.
+
+---
+
+## What Comes Next
+
+This is the last map in the primitives sequence. Every operation performed across these twelve lessons — building vertex arrays, defining face indices, constructing meshes via `SurfaceTool`, computing radial positions, detecting topological completion — has been purely positional. Points placed in space. Edges connecting them. Faces enclosing volume.
+
+The transformations sequence asks a different question: what happens when these objects move, rotate, and scale? Not what a shape is, but what it does under change. The vertex positions you&#x27;ve been placing throughout this sequence become inputs to transformation matrices. The same pyramid you built here becomes a different lesson once it starts moving — rotation reveals which symmetries it has, scaling tests which proportions hold, translation asks what stays invariant under displacement.
+
+That question changes the kind of understanding required. A vertex array tells you where something is. A transformation tells you where it goes. Melencolia marks the boundary between those two regimes. The tools are present. The forms are complete.
+
+Build anyway.
+
+---
+
+## Possible Artifacts
+
+**vertex_position_readout** — No artifact in this map allows the learner to examine the raw Vector3 coordinates of any primitive. A hover-triggered display showing each vertex position for the pyramid, the Dürer solid, or the torus collection would close the gap between seeing the form and knowing its numbers. The axiom &quot;five vertices define a pyramid&quot; becomes verifiable rather than stated.
+
+**durer_proportions_slider** — `DurerPolyhedron.gd` exposes `size: float` and `rotate_slowly: bool` but no live parameter adjustment is present in this map. A grabbable slider controlling the `size` export — rebuilding the solid in real time via the existing `set_size()` setter — would let the learner see how the proportional logic of the engraving&#x27;s original solid changes under scaling. The artifact has the infrastructure; it needs a control surface.
+
+**axiom_label_cluster** — The `code_display` at (3,13) shows the melencolia axioms only when approached directly. A cluster of floating `Label3D` nodes showing the key axioms spatially — positioned near the artifacts they describe — would make propositional content as spatially present as geometric form. Currently, the axioms are legible only at one point; the geometry can be seen from anywhere in the map.</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Primitives_Melencolia/intent.md">Raw captured source</a></p><pre>Concept: Recognising a form does not finish looking at its arrangement. Familiar solids form a court; tools at the next platform make exact answers available while leaving desire and purpose open.
+
+Sequence role: Final hall of the twelve-map Primitives sequence. Follows Portals&#x27; question of choosing a stopping rule. Leads into Transformation by distinguishing movement of the viewpoint from movement of the objects.
+
+Primary encounters: Four blue corner pyramids, a taller pink centre and four ochre cubes; the five-point connection puzzle; the rebuilt Dürer tableau with a seated figure, smaller winged figure, sleeping dog, solid, sphere and wall instruments; the returning frame counter by the exit. The arrangement and both platforms exist before puzzle completion.
+
+Pedagogical thread: Recognise the repeated pyramid; compare proportion and placement; distinguish connection recognition from a complete geometric definition; test the square&#x27;s sums; notice what a shared engine count records and leaves unnamed.
+
+Critical and poetic thread: An exact construction can sustain readings that its counts do not settle. Geometric desire moves from recognisable forms into a scene of work, bodily hesitation and instruments. Pattern, spiritual abstraction and embodied participation offer distinct later returns, rather than one universal history of mathematical art. The Dürer scene is an interpretation, not evidence that geometry or its maker has exhausted every possibility.
+
+Shared illustration: The production court supplies the book&#x27;s aligned, oblique and plan views. All nine artifacts keep the same geometry, material settings and positions; the camera changes. The reconstructed tableau also supplies an actual museum photograph for the book. No additional control interface is required.
+
+Evidence: Native museum views and checks of the closed solid, magic-square sums, approach and descent ramps, four body-width routes and floor support. Headset comfort, reading distance and learner interpretation remain open. The current implementation companion is tutorial.md; critical.md now develops geometric desire through sourced, differentiated comparisons. technical.md is labelled as an earlier research draft.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Primitives_Melencolia/critical.md">Raw captured source</a></p><pre># Geometric desire
+
+This room puts two arrangements beside one another: a court of recognisable solids and a sculptural interpretation of Dürer&#x27;s *Melencolia I*. Geometry travels between them without remaining innocent of its company. A sphere beside a tired animal can still be described by its radius. That description no longer accounts for what makes us stop.
+
+The movement from Plato to melancholy is the book&#x27;s proposed encounter. It is not a claim that Dürer illustrated a simple defeat of Platonism. Nor does a seated figure establish that mathematics has exhausted itself. The engraving gathers capacities for measuring and making around a body whose next action is uncertain. A smaller figure is at work. Hesitation and activity coexist in the same picture. [The Met](https://www.metmuseum.org/art/collection/search/360018) presents the print&#x27;s meanings as contested; the [National Gallery&#x27;s visual account](https://www.nga.gov/artworks/6641-melencolia-i) helps distinguish depicted objects from our interpretation.
+
+The museum makes this uncertainty material in another way. We can build a closed polyhedron, but the image does not uniquely supply every depth and angle. To make the tableau walkable is to decide what the engraving withheld. Going around the stone reveals part of the smaller figure. Going around the wall reveals the model&#x27;s back. Computation offers a complete surface by introducing decisions, not by removing uncertainty.
+
+## Several relations to abstraction
+
+The following comparisons guide returns elsewhere in the book. They are research directions, not five additional installed artworks in this room, and not a genealogy in which every tradition leads toward European abstraction.
+
+| Encounter | A grounded distinction | A question for a later museum encounter |
+|---|---|---|
+| Islamic geometric ornament, including the Alhambra | Pattern belongs to made surfaces, materials and architecture. Its rules can suggest continuation without explaining every cultural use. | What happens to a repeat when it meets a corner, door or body? Let Tiling keep the wall as well as the pattern. |
+| Escher | His documented study of Spanish-Islamic mosaics in 1936 encouraged further tessellation studies. It is one particular act of learning across traditions. | When a repeated unit becomes a recognisable figure, does the ground become a second figure? Let movement change which boundary belongs to which form. |
+| Malevich | *White on White* proposes spatial freedom through a tilted painted square. The paint remains visibly made; liberation also had revolutionary political associations. | Can a finite screen give a sense of unbounded space? Which edge, texture or bodily movement gives the surface back? |
+| Hilma af Klint | The *Paintings for the Temple* belong to her spiritual investigation. Geometric forms participate in a system of correspondences. | When does a diagram explain a relationship, and when does it ask us to trust an invisible order? Whose knowledge receives the authority of a diagram? |
+| Lygia Clark and Brazilian Neo-Concrete art | The manipulable *Bichos* make the encounter with a participant part of the work. A hinge gives geometry a bodily condition. | What does a hand discover that a diagram leaves open? Can an object resist the configuration the visitor intended? |
+
+Sources: [Met, geometric patterns in Islamic art](https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art); [Escher in The Palace, timeline](https://escherinhetpaleis.nl/en/about-escher/timeline); [MoMA, White on White](https://www.moma.org/collection/works/80385); [Guggenheim, Paintings for the Temple](https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple); [MoMA, Poetic Shelter](https://www.moma.org/collection/works/91767); [MoMA, Neo-Concrete art](https://www.moma.org/collection/terms/neo-concrete-art).
+
+## What is being escaped?
+
+“Escapism” is worth retaining as a question about what abstraction permits us to leave. It becomes weak when it describes a whole continent. Clark&#x27;s work offers a particular counterexample: the participant enters the work through touch. Abstraction can also seek transcendence, make a new social order imaginable, or reorganise ordinary perception. These ambitions can overlap, but their historical conditions matter.
+
+For this project, the queer opening lies in a form&#x27;s capacity to enter another relation without being exhausted by its prescribed use. A sphere can be a point, a ball, a coordinate, an obstruction, a thing to cradle, or a neighbour to a sleeping dog. That list does not make the sphere inherently queer, or prove a theory through its shape. It asks who is allowed to approach it, handle it, give it a purpose, and refuse the purpose already offered.
+
+The engine makes some of those permissions literal. Our current sphere has collision and remains fixed. The model offers circulation but no act of taking up the compass. Those limits should remain visible in the writing. A later encounter might give that instrument to a hand; the present scene has not already done so.
+
+The earlier critical draft is preserved in the revision&#x27;s before folder. Its claims that geometry has reached a dead end and that the magic square is meaningless are not the working position of this chapter. Exactness can sustain desire without completing it.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Primitives_Melencolia/artifacts.md">Raw captured source</a></p><pre># Primitives Melencolia — the geometric court, then the tools
+
+Current encounter: 19 placements, 12 artifact types. The opening court restores the four corner pyramids, central spire and four small cubes from the earlier map (`86d423341`). The book&#x27;s six primary artifact families follow this order.
+
+| Book order | Artifact | Placement and purpose |
+|---|---|---|
+| 1 | `pyramid` | Four pale blue spires, 2.4 metres tall on 0.6-metre square bases, at the first platform&#x27;s corners: (3,3), (7,3), (3,7), (7,7). Recognise a repeated form from several positions. |
+| 2 | `pyramidlong` | Pink centre at (5,5): a 2.8-metre pyramid on a matching 0.8-metre cubical pedestal. Compare height and support with the same pyramid boundary connections. |
+| 3 | `cube_scene` | Four ochre cubes, each 0.8 metres across, in a cross around the centre. Read a composition made from familiar solids. |
+| 4 | `snap_pyramid_puzzle` | Beside the front of the court, (9,3). Connect five points; distinguish the detector&#x27;s connection test from a geometric definition. |
+| 5 | `durer_scene` | On the second, higher platform, (6,18), full scale. Enter a sculptural interpretation of *Melencolia I*: seated figure, putto, dog, solid, sphere, ground tools and wall instruments; inspect the square and changing occlusions. |
+| 6 | `frame_counter_display` | By the exit, (3,26), the already placed counter returns to Point Zero&#x27;s engine frame count. |
+
+The first deck is one metre above the museum floor; a side wedge at (2,5) climbs onto it. The raised connection leads to the second wedge at (5,13) and the two-metre-high Dürer deck. The Dürer deck is now nine cells wide and ten deep. A two-metre descent ramp at (9,24) returns to the surrounding floor; clear aisles pass around the tableau. The surrounding floor also provides a route around both stages. These structures exist before puzzle completion.
+
+Supporting studies remain: `prism_block`, two `bigframe` instances restored as the historical pair, `diamondtoruscollection`, `code_display`, and `eleven_dots`. `dark_sphere` remains decoration. Supporting works need not all become separate lessons in `final.md`.
+
+The manuscript and engraving are distinct references. The user-supplied manuscript image now guides the court&#x27;s colours and proportions; its grey support remains the walkable museum platform. See [Solid Objects](https://publicdomainreview.org/collection/solid-objects/) for additional geometric studies. These metre dimensions adapt the drawing to the restored floor composition; they are not measurements inferred from its perspective.
+
+Secondary placement changes: `diamondtoruscollection` moves from (5,14) to (10,12); `code_display` from (9,16) to (10,25); `eleven_dots` from (9,20) to (9,26). All supporting artifact families remain. The counter moves from (3,20) to (3,26). The exit moves from (6,21) to (6,27); the hall grows from 13 × 23 to 13 × 29. The first court and the two historical frames retain their locations.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Primitives_Melencolia/summary.md">Raw captured source</a></p><pre># Primitives Melencolia — forms in company
+
+The final hall of the eleven-map Primitives sequence follows Portals and leads into Transformation. Its two arrangements offer a movement from recognisable solids to the unsettled purposes of making.
+
+The first court keeps four blue corner pyramids, a taller pink centre, and four ochre cubes. These follow an anonymous sixteenth-century geometric manuscript, not Dürer. A connection puzzle beside them tests a graph more narrowly than the complete geometric definition.
+
+On the second platform, a new sculptural tableau follows the principal objects and image relationships of Dürer&#x27;s *Melencolia I*: stone left, seated figure right, child and dog between, sphere and tools below, ladder and instruments above. Its invented depth can be inspected by walking around it. The geometry of its stone and the sums of its square are checkable; those results do not settle the scene&#x27;s meaning.
+
+The hall is 13 × 29 cells, with an entrance at (6,0) and an exit at (6,27). Its decks stand one and two metres above the floor. The original connecting ramp remains; a new descent ramp leads off the tableau platform. All nineteen authored placements remain, with the supporting torus collection and code display moved clear of the composition. The returning counter at (3,26) keeps the link to Point Zero&#x27;s engine clock.
+
+The chapter names geometric desire and opens distinct paths through Islamic geometric ornament, Escher&#x27;s tessellations, Malevich, Hilma af Klint and Clark&#x27;s participatory abstraction. These are written comparisons for later development; only the Dürer reconstruction was added here. The historical links and interpretive limits are set out in critical.md and the final.md notes.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Primitives_Melencolia/blurb.md">Raw captured source</a></p><pre>Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude—where knowing and not knowing interlock.
+
+Melencolia marks the moment when abstraction becomes aware of its own limits. All geometric tools are present, methods still function, and refinement continues—yet completion is withheld. This is not ignorance, but the weight of knowing. Melancholy here is suspension: the pause between mastery and creation, between perfect forms and the decision of what to build next.
+
+Finitude is constitutive of meaning, not its obstacle. Understanding is enacted, not extracted—you must build, not merely possess the tools. The desire to transcend embodiment misunderstands what it means to know. Limits constitute the very possibility of orientation. Master the tools. Recognize their limits. Build anyway.
+</pre></section></body></html>

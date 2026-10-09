@@ -1,0 +1,799 @@
+[
+  {
+    "map": "Random_Mushrooms",
+    "action": "move",
+    "token": "silhouette_arrivals#controls:compact#control_front:-1.65#control_facing:-z",
+    "before": [
+      13,
+      4
+    ],
+    "after": [
+      13,
+      17
+    ]
+  },
+  {
+    "map": "Random_Rotate_Random_XYZ",
+    "action": "configure",
+    "cell": [
+      6,
+      10
+    ],
+    "before": "random_decay_multimesh",
+    "after": "random_decay_multimesh#stack_fit:10"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "configure",
+    "cell": [
+      5,
+      5
+    ],
+    "before": "pheromone_terrain",
+    "after": "pheromone_terrain#comparison:true#walk_seed:190919"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "move",
+    "token": "pheromone_terrain#comparison:true#walk_seed:190919",
+    "before": [
+      5,
+      5
+    ],
+    "after": [
+      5,
+      3
+    ],
+    "empty": " "
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "move",
+    "token": "dark_sphere",
+    "before": [
+      4,
+      5
+    ],
+    "after": [
+      2,
+      5
+    ],
+    "empty": " "
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "museum-config",
+    "before": null,
+    "after": {
+      "piers": false,
+      "floor_cells": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ]
+    }
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "move",
+    "layer": "interactables",
+    "token": "pheromone_terrain#comparison:true#walk_seed:190919",
+    "before": [
+      5,
+      3
+    ],
+    "after": [
+      6,
+      3
+    ],
+    "empty": " "
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "move",
+    "layer": "utilities",
+    "token": "wp",
+    "before": [
+      7,
+      6
+    ],
+    "after": [
+      10,
+      6
+    ],
+    "empty": " "
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      2,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      3,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      4,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      5,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      6,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      7,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      1
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      2,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      3,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      4,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      5,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      7,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      2
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      2,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      3,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      4,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      5,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      6,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      3
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      2,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      3,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      4,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      5,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      6,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      7,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      4
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      4,
+      5
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      5,
+      5
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      5
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      5
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      5
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      2,
+      6
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      6
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      6
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      6
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      3,
+      7
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      7,
+      7
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      8,
+      7
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      9,
+      7
+    ],
+    "before": "0",
+    "after": "1"
+  },
+  {
+    "map": "Random_Pheromone",
+    "action": "layer-cell",
+    "layer": "structure",
+    "cell": [
+      10,
+      7
+    ],
+    "before": "0",
+    "after": "1"
+  }
+]

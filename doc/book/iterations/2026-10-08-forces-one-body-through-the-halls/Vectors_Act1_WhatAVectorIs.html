@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>The relation between two points</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>The relation between two points</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Displacement</li>
+<li>Length and direction</li>
+<li>Zero length</li>
+<li>Addition and projection</li>
+</ul>
+<p>Take the two familiar points. Move one and watch the cylinder between them. Then move both by the same amount. Their addresses change; the gap between them stays the same.</p>
+<h2>Make the small study</h2>
+<p>Continue the point class from Lines. Make two points report their separation as a vector, a length and a direction. Begin with those three readings; return to the projection after they make sense.</p>
+<p><strong>The hall adds:</strong> The hall adds two stations: joining movements by addition, and keeping the part of a movement along a rail.</p>
+<p>Save <code>01_vectors.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 01_vectors.gd</h2>
+<!-- student-code:01_vectors.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var a = Point.new()
+var b = Point.new()
+var segment: MeshInstance3D
+var reading: Label3D
+
+func _ready() -&gt; void:
+    add_child(a)
+    add_child(b)
+    for point in [a, b]:
+        point.freeze = true
+        point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    a.position = Vector3(-0.5, 1.2, 0)
+    b.position = Vector3(0.5, 1.5, 0)
+    segment = rod()
+    reading = caption(&quot;&quot;)
+
+func relation() -&gt; Dictionary:
+    var displacement: Vector3 = b.position - a.position
+    var length := displacement.length()
+    var direction := Vector3.ZERO
+    if length &gt; 0.0001:
+        direction = displacement / length
+    var along_x := Vector3.RIGHT * displacement.dot(Vector3.RIGHT)
+    return {&quot;displacement&quot;: displacement, &quot;length&quot;: length,
+        &quot;direction&quot;: direction, &quot;along_x&quot;: along_x,
+        &quot;remainder&quot;: displacement - along_x}
+
+func _process(_delta: float) -&gt; void:
+    var r := relation()
+    join(segment, a.position, b.position)
+    reading.text = &quot;gap %s m\nlength %.2f m\ndirection %s&quot; % [
+        r.displacement, r.length, r.direction]
+</code></pre>
+<h2>Read the change</h2>
+<p><code>b.position - a.position</code> gives the movement from a to b in the study’s local coordinates. Its three components tell us how far to move along each axis. <code>length()</code> measures the whole gap.</p>
+<p>Divide that displacement by its length to keep only direction. The result has length one. When the points meet, the <code>if</code> leaves direction at zero: there is no direction to recover from a zero-length gap.</p>
+<p>Read the projection last. <code>dot(Vector3.RIGHT)</code> takes the signed X component. Multiplying it by <code>Vector3.RIGHT</code> makes a vector along X; subtracting it from the full displacement leaves the remainder. Add the two parts and you get the original displacement back. This is another use of vector addition.</p>
+<h2>Change one thing</h2>
+<p>Place the endpoints three metres apart along X and four along Y. Predict a five-metre gap, then check it. Move both together and check again. Finally bring them together: the cylinder disappears and the direction reads zero.</p>
+<p>To inspect the projection, temporarily display <code>r.along_x</code> and <code>r.remainder</code> in the caption. The complete example already calculates both; its first readout shows only gap, length and direction.</p>
+<h2>Model notes</h2>
+<p>The cylinder draws a relation. It applies no force. These positions share the PointStudy frame, so subtracting them is meaningful.</p>
+<h2>Into the next room</h2>
+<p>Keep the distinction between a position and a displacement. In Launch, a vector describes how much position changes each second.</p>
+<p><a href="final.html#Vectors_Act1_WhatAVectorIs">Reflective text</a>.</p></main></html>

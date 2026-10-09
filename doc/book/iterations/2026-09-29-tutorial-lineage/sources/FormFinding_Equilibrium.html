@@ -1,0 +1,164 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FormFinding_Equilibrium · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=FormFinding_Equilibrium">← Tutorial lineage</a></p><h1>FormFinding Equilibrium</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="FormFinding_Equilibrium/final.md">Raw captured source</a></p><pre># Where forces cancel
+
+Where forces cancel, a form can hold still. That stillness can conceal opposition, exactly matched. But a still image can also be made without calculating any forces. How would you tell?
+
+The preceding halls gave us steps, drawn curves and a mesh left in the pose where its computation stopped. Here the question becomes structural: which relations make a shape hold, and which relations have only been drawn? Start with a balance whose arithmetic you can inspect.
+
+## Balanced by arithmetic
+
+&lt;!-- @calder_mobile --&gt;
+
+A curtain of painted aluminium discs on hair-thin wires, nearly six metres wide and three and a half tall, filling the north half of the room. Each disc carries a small dark nameplate reading its modelled mass in grams, which is the room telling you what to check.
+
+Find one arm with a disc hanging from each end, and compare their nameplates. Which has the larger mass? Which is nearer its pivot? Follow that relation up one branch before reading the calculation.
+
+```gdscript
+var wl: float = left[&quot;mass&quot;]
+var wr: float = right[&quot;mass&quot;]
+var total: float = wl + wr
+var arm: float = span * (0.7 + 0.35 * float(d)) * _rng.randf_range(0.85, 1.15)
+var dl: float = arm * wr / total
+var dr: float = arm * wl / total
+```
+
+Read the crossover. The left-hand distance is computed from the right-hand mass, and the right-hand distance from the left. Multiply out and the two mass-distance products agree, apart from numerical rounding. Gravity would multiply both by the same factor. The heavier child rides the shorter arm because the arithmetic gives it no choice.
+
+For each disc, the source multiplies its area by three millimetres of sheet and the density assigned to aluminium. Then it builds every rod from the bottom up: add the two children&#x27;s masses, place the pivot where their moments cancel, report the total upward. The rods and wires have no mass in this calculation. That omission lets the visible masses and distances satisfy a clean lever model; it does not establish how the sculpture would behave if we built it from the materials it resembles.
+
+And it does not move. There is no process loop anywhere in it: for all the wire and the counterweighting, this is frozen sculpture. What hangs here is the solution to a chosen system of equations, held still because it was never going to do anything else.
+
+&lt;!-- @tensegrity_triangle --&gt;
+
+Three struts and three orange joints, with a rhythmic squeeze arriving every few seconds. Watch the width as the height contracts. The whole object is being scaled: the source writes a sine-driven change directly into its transform. It looks as though a load arrives and is refused, but no load has been applied and no member force is calculated.
+
+There is a structural question worth keeping inside that appearance. An ideal hinged triangle with fixed side lengths cannot rack in its plane as an unbraced four-bar frame can. A side-by-side load experiment could let you test that difference. This animated triangle has not done that experiment for us.
+
+One correction the name will not make for you. It promises a tensegrity, but the three struts meet at their joints and there is not a tension cable in the object. Keep the distinction between an attractive pose and the force relations needed to sustain it. In the next hall, an apparently impossible table will ask for that distinction again, with an unbothered teacup on top.
+
+&lt;!-- @fractal_truss_tower --&gt;
+
+A steel tower three and a half metres tall standing on a seven-metre plate, four fat corner legs and four stacked panels of cross-bracing, an orange beacon at the top. Its board now says RECURSIVE BRACED STOREYS / NO LOAD TEST. The old promise of maximum strength for minimum material remains an interesting aim. This construction has not measured either quantity.
+
+The recursion halves the tower vertically and braces each half again, so what recurses is the storey and not the strut, and the finer legs it adds lie along the same corner lines as the coarse ones, hidden inside them. A beam made of beams is the idea. Stacked bracing, three deep, is the building. Its slight sway is prescribed too; the tower is not responding to a wind or testing a failure threshold.
+
+&lt;!-- @science_screen --&gt;
+
+The screen has no live load measurement from these objects. Its generic scanner can classify a tower by the word “fractal” and count children, but neither quantity establishes a balance. For the mobile, we need the two mass-distance products at each joint; for the tower, a stated load and a measured response. The nameplates are a beginning. A picture of structure is not yet an instrument for its strength.
+
+&lt;!-- @ --&gt;
+
+## Gravity as co-designer
+
+The hanging models we met at the laundry lines offered another way to approach this problem: set up weights and supports, allow a physical relation to appear, and study its inversion as a possible compression structure. The load and the boundary matter as much as the curve. The model is a way to reason with gravity, not a certificate that every shape it suggests will stand.[^hanging-model]
+
+Our three objects make different parts of that reasoning available. The mobile exposes a balance encoded in its mass model. The triangle lets us catch an animation passing for resistance. The truss makes repetition and bracing visible while leaving strength untested. Their differences give us the next experiments: change a mass, compare a hinged square, put a specified load on the tower. None of those experiments stands in this room.
+
+One thing to carry out. Before asking whether a form has reached the bottom, ask what was allowed to move and what counted as success. The next hall asks whether the bottom is where you want to be.
+
+Next: how to leave a hole you have already fallen into, and why you might not want the deepest one.
+
+[^hanging-model]: Santiago Huerta, [“Structural design in the work of Gaudí”](https://oa.upm.es/703/) (2006). The physical equilibrium method is a reference for these digital models, not a claim that their rendered members currently solve it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="FormFinding_Equilibrium/tutorial.md">Raw captured source</a></p><pre># Form-Finding: Equilibrium
+
+Where forces cancel, form holds still. Before it, weights that are real numbers and distances you are free to choose.
+
+Weigh a leaf from its own geometry.
+
+```gdscript
+const SHEET_T := 0.003      # 3 mm aluminium sheet
+const DENSITY := 2700.0     # kg/m³
+
+var r: float = _rng.randf_range(0.09, 0.24)
+var mass: float = PI * r * r * SHEET_T * DENSITY
+```
+
+The mass is not a label on the disc. It is the disc — radius, thickness, density. Change the radius and the whole mobile is re-solved.
+
+Place the pivot by the lever law.
+
+```gdscript
+var wl: float = left[&quot;mass&quot;]
+var wr: float = right[&quot;mass&quot;]
+var total: float = wl + wr
+var arm: float = span * (0.7 + 0.35 * float(d))
+var dl: float = arm * wr / total
+var dr: float = arm * wl / total
+```
+
+τ = w·d. The heavier child gets the shorter arm, because each distance is scaled by the *other* one&#x27;s weight. The arm is solved, not drawn.
+
+Let every arm hang from the arm above.
+
+```gdscript
+func _build_subtree(d: int) -&gt; Dictionary:
+    if d &lt;= 0:
+        return {&quot;node&quot;: root, &quot;mass&quot;: _make_leaf(pivot)[&quot;mass&quot;]}
+    var left: Dictionary = _build_subtree(d - 1)
+    var right: Dictionary = _build_subtree(d - 1)
+    return {&quot;node&quot;: root, &quot;mass&quot;: left[&quot;mass&quot;] + right[&quot;mass&quot;]}
+```
+
+Each subtree reports its mass upward. A parent balances two numbers without looking inside either.
+
+Break the law, and let the leftover moment become an angle.
+
+```gdscript
+dl = arm * 0.5      # halved — the rod cut in the middle instead
+dr = arm * 0.5
+var tilt: float = asin(clampf((wr * dr - wl * dl) / (arm * total), -1.0, 1.0))
+lp = pivot + Vector3(-dl * cos(tilt), dl * sin(tilt), 0)
+rp = pivot + Vector3(dr * cos(tilt), -dr * sin(tilt), 0)
+```
+
+Residual moment, normalised by the largest moment the arm could carry. Zero residual is zero tilt — which is why a balanced mobile never reaches this branch.
+
+Brace a section instead of thickening it.
+
+```gdscript
+var br: float = leg_r * 0.55
+for i in range(4):
+    var j: int = (i + 1) % 4
+    parent.add_child(_cylinder_between(corners_b[i], corners_t[j], br, brace_mat))
+    parent.add_child(_cylinder_between(corners_b[j], corners_t[i], br, brace_mat))
+    parent.add_child(_cylinder_between(corners_t[i], corners_t[j], br, brace_mat))
+```
+
+Two diagonals and a tie per face, at just over half the leg radius. The strength is in the bracing, not the bulk.
+
+Recurse the bracing.
+
+```gdscript
+var ym: float = (y0 + y1) * 0.5
+var w_mid: float = (w_bot + w_top) * 0.5
+_truss_segment(parent, y0, ym, w_bot, w_mid, d - 1, leg_mat, brace_mat)
+_truss_segment(parent, ym, y1, w_mid, w_top, d - 1, leg_mat, brace_mat)
+```
+
+Every strut becomes a truss of thinner struts; `leg_r` runs 0.05 down to 0.018 with depth. Strength from geometry, not mass. Walk inside and you are in a beam made of beams.
+
+Lock three angles.
+
+```gdscript
+var v_top := Vector3(0.0, tri_height * 0.6, 0.0)
+var v_bl := Vector3(-tri_width * 0.5, -tri_height * 0.4, 0.0)
+var v_br := Vector3(tri_width * 0.5, -tri_height * 0.4, 0.0)
+_add_strut(v_top, v_bl, strut_mat)
+_add_strut(v_bl, v_br, strut_mat)
+_add_strut(v_br, v_top, strut_mat)
+```
+
+Push a square and it racks into a diamond. A triangle cannot: its angles are already fixed by the lengths of its sides.
+
+Load it, and watch it refuse.
+
+```gdscript
+_phase += delta * load_speed
+var load: float = maxf(0.0, sin(_phase)) * load_amplitude
+scale = Vector3(1.0 + load * 0.4, 1.0 - load, 1.0)
+```
+
+It squashes and springs back. Nothing here is stacked. The form holds because forces balance in a field, not because mass piles up in a column.
+
+You can now weigh a part from its geometry, solve a pivot instead of drawing one, recurse bracing into a self-similar truss, and lock a frame with three members. Gaudí hung weighted chains and turned the photograph upside down — tension inverted is compression, and the arch was found rather than imposed. FormFinding_Annealing asks what to do when the rest you reach is only the nearest one.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="FormFinding_Equilibrium/blurb.md">Raw captured source</a></p><pre>Where forces cancel, form holds still. A Calder mobile balances every arm by the lever law, τ = w·d, hanging in a stillness that is not rest but perfect opposition. A fractal truss spans the widest gap with the least material. A tensegrity triangle stands under a load that would collapse a loose pile of the same parts — held by a tension you cannot see. Gaudí found his arches by hanging chains and turning the photograph upside down: gravity as co-designer.
+</pre></section></body></html>

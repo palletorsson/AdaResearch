@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "name": "complete program constructs surface and collision",
+      "passed": true
+    },
+    {
+      "name": "existing point class creates matching sphere and boundary",
+      "passed": true
+    },
+    {
+      "name": "point returns to physics on release",
+      "passed": true
+    },
+    {
+      "name": "17 by 17 shared samples",
+      "passed": true
+    },
+    {
+      "name": "two triangles per cell",
+      "passed": true
+    },
+    {
+      "name": "height at zero crossing is baseline",
+      "passed": true
+    },
+    {
+      "name": "quarter metre reaches crest",
+      "passed": true
+    },
+    {
+      "name": "half metre returns to baseline",
+      "passed": true
+    },
+    {
+      "name": "opposite quarter metre reaches trough",
+      "passed": true
+    },
+    {
+      "name": "one metre repeats spatial value",
+      "passed": true
+    },
+    {
+      "name": "zero Z row cancels X relief",
+      "passed": true
+    },
+    {
+      "name": "drawn and colliding triangles share exact positions",
+      "passed": true
+    },
+    {
+      "name": "mesh has expected emitted triangle vertices",
+      "passed": true
+    },
+    {
+      "name": "every triangle faces upwards",
+      "passed": true
+    },
+    {
+      "name": "triangles cover four square metres in plan",
+      "passed": true
+    },
+    {
+      "name": "rays reach known heights after translation and rotation",
+      "passed": false
+    },
+    {
+      "name": "terrain does not animate with elapsed time",
+      "passed": true
+    },
+    {
+      "name": "half-metre sampling misses the crests",
+      "passed": true
+    },
+    {
+      "name": "coarse sampling does not flatten the underlying function",
+      "passed": true
+    },
+    {
+      "name": "half spatial frequency puts crest at half metre",
+      "passed": true
+    },
+    {
+      "name": "independent instance leaves first frequency intact",
+      "passed": true
+    },
+    {
+      "name": "dropped point starts unfrozen",
+      "passed": true
+    },
+    {
+      "name": "flat receiver supports the physical sphere",
+      "passed": false
+    },
+    {
+      "name": "removing receiver lets same sphere fall through drawing",
+      "passed": true
+    },
+    {
+      "name": "contact trial does not deform geometry",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "rays reach known heights after translation and rotation",
+    "flat receiver supports the physical sphere"
+  ],
+  "passed": false,
+  "scope": "Exact printed program executed in Godot/Jolt; teacher-authored checks, not an independent student or headset test."
+}

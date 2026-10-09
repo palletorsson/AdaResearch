@@ -1,0 +1,4320 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "36"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				3.01999998092651,
+				-0.38960000872612,
+				5.01999998092651
+			],
+			"bounds_size": [
+				0.960000038146973,
+				1.13960003852844,
+				0.967000007629395
+			],
+			"cell": [
+				3,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_walk_collection"
+		},
+		{
+			"bounds_position": [
+				3.10006213188171,
+				0.779999971389771,
+				5.41237640380859
+			],
+			"bounds_size": [
+				0.774612426757813,
+				0.146491348743439,
+				0.514983177185059
+			],
+			"cell": [
+				3,
+				5
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.11463212966919,
+						0.831333100795746,
+						5.59301900863647
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.10249376296997,
+						0.820648908615112,
+						5.60724115371704
+					],
+					"text": "id: 0001 - simpel random walk "
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.41472291946411,
+						0.807915091514587,
+						5.58603382110596
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.40250015258789,
+						0.79339611530304,
+						5.59621095657349
+					],
+					"text": "id: 0002 - diagonal random walk "
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.6940643787384,
+						0.827986836433411,
+						5.59255170822144
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.68186140060425,
+						0.816681146621704,
+						5.60622787475586
+					],
+					"text": "id: 0003 -  brownian random walk"
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.1569709777832,
+						0.853213250637054,
+						5.90378093719482
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.14414215087891,
+						0.846360981464386,
+						5.9196629524231
+					],
+					"text": "id: 0004 - fractal random walk "
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.42878222465515,
+						0.835217893123627,
+						5.90286445617676
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.41673684120178,
+						0.825294494628906,
+						5.91770362854004
+					],
+					"text": "id: 0005 - self avoiding walk "
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.6863386631012,
+						0.839415609836578,
+						5.90458106994629
+					],
+					"text": ""
+				},
+				{
+					"parent": "GrabPaper",
+					"position": [
+						3.67347455024719,
+						0.829931676387787,
+						5.91901540756226
+					],
+					"text": "id: 0006 - levy flight walk "
+				}
+			],
+			"position": [
+				3.5,
+				1.17830228805542,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_walk_collection"
+		},
+		{
+			"bounds_position": [
+				9.06999969482422,
+				0.0,
+				3.62000012397766
+			],
+			"bounds_size": [
+				1.20600032806396,
+				1.53000009059906,
+				2.22250008583069
+			],
+			"cell": [
+				9,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.81087493896484,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.81087493896484,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.6713752746582,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.6713752746582,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.53187561035156,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.53187561035156,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.6713752746582,
+						1.04512763023376,
+						4.15553998947144
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/RackPanel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.6713752746582,
+						1.04512763023376,
+						4.15553998947144
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.3286247253418,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.3286247253418,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.18912506103516,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.18912506103516,
+						1.18209338188171,
+						4.21940803527832
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						9.25887489318848,
+						1.04512763023376,
+						4.15553998947144
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExhibitStage/ReachConsole/LogPanel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						9.25887489318848,
+						1.04512763023376,
+						4.15553998947144
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Cabinet",
+					"position": [
+						9.5,
+						0.57039999961853,
+						5.15999984741211
+					],
+					"text": "3D Walk\nSteps: 30\nMSD: 0.0059"
+				},
+				{
+					"parent": "Plate",
+					"position": [
+						10.2559995651245,
+						1.07919573783875,
+						5.4752254486084
+					],
+					"text": "3D · fixed 0.015 m steps in the volume\nsteps 29 · sim 1.0 s at 30 steps/s\nclock 1.0 s · 35 frames · cap 5/frame\ntrail 29/200 kept · one followed, 4 dimmed\nseed 53283 · RESET replays it\nglass folds a step back at every wall"
+				},
+				{
+					"parent": "RackPanel",
+					"position": [
+						9.6713752746582,
+						1.2576824426651,
+						4.29570198059082
+					],
+					"text": ""
+				},
+				{
+					"parent": "LogPanel",
+					"position": [
+						9.25887489318848,
+						1.2576824426651,
+						4.29570198059082
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				9.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_walk_terrarium"
+		},
+		{
+			"bounds_position": [
+				14.9200000762939,
+				0.0,
+				5.28279972076416
+			],
+			"bounds_size": [
+				0.769999504089355,
+				1.54999995231628,
+				0.367200374603271
+			],
+			"cell": [
+				15,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RANDOM_WALK/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.1499996185303,
+						0.948944568634033,
+						5.29516983032227
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RANDOM_WALK/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.1499996185303,
+						0.948944568634033,
+						5.29516983032227
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RANDOM_WALK",
+					"position": [
+						15.1499996185303,
+						1.05411875247955,
+						5.36539840698242
+					],
+					"text": "RANDOM WALK"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						15.1499996185303,
+						1.03192245960236,
+						5.34224891662598
+					],
+					"text": "0.5"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						15.1499996185303,
+						0.996395230293274,
+						5.32568216323853
+					],
+					"text": "IMPULSE"
+				}
+			],
+			"position": [
+				15.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_walk_leash"
+		},
+		{
+			"bounds_position": [
+				6.25,
+				0.0,
+				7.92424964904785
+			],
+			"bounds_size": [
+				0.5,
+				1.1139999628067,
+				0.825750350952148
+			],
+			"cell": [
+				6,
+				8
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "HAND_+_CHANCE/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.53599977493286,
+						1.0460000038147,
+						7.92479991912842
+					]
+				},
+				{
+					"disabled": false,
+					"path": "HAND_+_CHANCE/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.53599977493286,
+						1.0460000038147,
+						7.92479991912842
+					]
+				},
+				{
+					"disabled": false,
+					"path": "HAND_+_CHANCE/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.46400022506714,
+						1.0460000038147,
+						7.92479991912842
+					]
+				},
+				{
+					"disabled": false,
+					"path": "HAND_+_CHANCE/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.46400022506714,
+						1.0460000038147,
+						7.92479991912842
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "HAND_+_CHANCE",
+					"position": [
+						6.5,
+						1.09799993038177,
+						7.94399976730347
+					],
+					"text": "HAND + CHANCE"
+				},
+				{
+					"parent": "RandomDrawDot",
+					"position": [
+						6.5,
+						1.39999997615814,
+						8.5
+					],
+					"text": "HAND + RANDOM / HOLD THE DOT"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_draw_dot"
+		},
+		{
+			"bounds_position": [
+				10.6100006103516,
+				0.0,
+				7.76999998092651
+			],
+			"bounds_size": [
+				5.72500038146973,
+				2.57999992370605,
+				1.12999963760376
+			],
+			"cell": [
+				13,
+				8
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RunReplay/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.8312005996704,
+						1.05595242977142,
+						7.92573261260986
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RunReplay/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.8312005996704,
+						1.05595242977142,
+						7.92573261260986
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RunReplay/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.7088003158569,
+						1.05595242977142,
+						7.92573261260986
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RunReplay/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.7088003158569,
+						1.05595242977142,
+						7.92573261260986
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						13.5,
+						2.48000001907349,
+						8.4350004196167
+					],
+					"text": "WHERE NEXT?"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						13.5,
+						2.28999996185303,
+						8.43000030517578
+					],
+					"text": "One new number. Two ways to use it."
+				},
+				{
+					"parent": "Carriage0",
+					"position": [
+						13.5,
+						1.96000003814697,
+						8.3169994354248
+					],
+					"text": "NEW"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						15.0500001907349,
+						2.20499992370605,
+						8.43000030517578
+					],
+					"text": "FRESH POSITION"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						12.6999998092651,
+						2.20499992370605,
+						8.43000030517578
+					],
+					"text": "anywhere on this rail"
+				},
+				{
+					"parent": "Carriage1",
+					"position": [
+						13.5,
+						1.42999994754791,
+						8.3169994354248
+					],
+					"text": "+"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						15.0500001907349,
+						1.67499995231628,
+						8.43000030517578
+					],
+					"text": "ADD A STEP"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						12.6999998092651,
+						1.67499995231628,
+						8.43000030517578
+					],
+					"text": "up to 40 cm from here / fold at the ends"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						13.5,
+						0.119999997317791,
+						8.54500007629395
+					],
+					"text": "LAST 12 LANDINGS / NEWEST AT THE TOP"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						13.5,
+						1.12000000476837,
+						8.44999980926514
+					],
+					"text": "Put your marker where the next carriage might land. Pull NEXT."
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						12.5,
+						1.00999999046326,
+						8.44999980926514
+					],
+					"text": ""
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						13.5,
+						0.948000013828278,
+						7.98199987411499
+					],
+					"text": "0.0"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						13.5,
+						0.892000019550323,
+						7.98199987411499
+					],
+					"text": "PARAM"
+				},
+				{
+					"parent": "InteractableSlider",
+					"position": [
+						13.5,
+						2.28999996185303,
+						7.91999959945679
+					],
+					"text": "?"
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						13.5,
+						0.870000004768372,
+						7.95499992370605
+					],
+					"text": "DRAG A GUESS"
+				},
+				{
+					"parent": "RunReplay",
+					"position": [
+						10.7700004577637,
+						1.06373000144959,
+						8.01964473724365
+					],
+					"text": ""
+				},
+				{
+					"parent": "RandomPositionRails",
+					"position": [
+						10.7700004577637,
+						1.23000001907349,
+						7.93000030517578
+					],
+					"text": "HOLD"
+				}
+			],
+			"position": [
+				13.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_position_rails"
+		},
+		{
+			"bounds_position": [
+				2.87000012397766,
+				0.00999999791383743,
+				9.22999954223633
+			],
+			"bounds_size": [
+				0.71999979019165,
+				2.51999974250793,
+				0.360000610351563
+			],
+			"cell": [
+				3,
+				9
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.208000004291534,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.388000011444092,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.388000011444092,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.568000018596649,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.748000025749207,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.5,
+						0.928000092506409,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.3199999332428,
+						0.928000092506409,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.3199999332428,
+						0.748000025749207,
+						9.31999969482422
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.3199999332428,
+						0.748000025749207,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.3199999332428,
+						0.928000092506409,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.1399998664856,
+						0.928000092506409,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						0.928000092506409,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						1.10800004005432,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						1.28800010681152,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						1.46800005435944,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						1.64800012111664,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						1.82800018787384,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						2.00800013542175,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						2.96000003814697,
+						2.18799996376038,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.1399998664856,
+						2.18799996376038,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.1399998664856,
+						2.36800003051758,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.1399998664856,
+						2.54800009727478,
+						9.5
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						3.3199999332428,
+						2.54800009727478,
+						9.5
+					],
+					"text": "1:1"
+				}
+			],
+			"position": [
+				3.5,
+				0.100000001490116,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.180000007152557,
+				0.180000007152557,
+				0.180000007152557
+			],
+			"token": "pixel_cloud"
+		},
+		{
+			"bounds_position": [
+				1.97499930858612,
+				-0.140625,
+				9.97500038146973
+			],
+			"bounds_size": [
+				15.0500001907349,
+				5.18562507629395,
+				15.0499992370605
+			],
+			"cell": [
+				9,
+				17
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						1.25,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "GlassSimulation",
+					"position": [
+						9.50000095367432,
+						4.65000009536743,
+						23.5
+					],
+					"text": "WALK / RETAIN"
+				},
+				{
+					"parent": "GlassSimulation",
+					"position": [
+						9.49999904632568,
+						4.65000009536743,
+						11.5
+					],
+					"text": "WALK / RETAIN"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.265625,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.21875,
+						17.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.203125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.71875,
+						0.234375,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.40625,
+						0.234375,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.40625,
+						0.234375,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.09375,
+						0.203125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.09375,
+						0.203125,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.71875,
+						0.25,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.21875,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.21875,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.203125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.234375,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.21875,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.21875,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.234375,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.203125,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.25,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.25,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.296875,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.03125,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.21875,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.3125,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.34375,
+						0.21875,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.203125,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.203125,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.203125,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.203125,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.203125,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.203125,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.203125,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.21875,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.234375,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.234375,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.234375,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.265625,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.25,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.265625,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.234375,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.21875,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.234375,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.25,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.265625,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.265625,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.28125,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.328125,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.234375,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.234375,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.234375,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.203125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.203125,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.328125,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.390625,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.265625,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.296875,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.96875,
+						0.25,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.234375,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.296875,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						9.65625,
+						0.203125,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.21875,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.203125,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.203125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.203125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.234375,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.265625,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.3125,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.265625,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.265625,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.25,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.25,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.28125,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.265625,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.25,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.203125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.203125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.234375,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.21875,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.28125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.28125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.21875,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.234375,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.265625,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.375,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.3125,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.328125,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.484375,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.40625,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.25,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.25,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.25,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.203125,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.25,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.21875,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.234375,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.203125,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.203125,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.21875,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.234375,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.203125,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.203125,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.21875,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.296875,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.234375,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.25,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.234375,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.296875,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.25,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.328125,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.25,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.25,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.25,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.234375,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.3125,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.25,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.25,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.234375,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.21875,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.265625,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.296875,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.28125,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.234375,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.265625,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.234375,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.203125,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.203125,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.203125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.203125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.203125,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.21875,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.296875,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.265625,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.25,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.234375,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.21875,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.203125,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.234375,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.234375,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.203125,
+						16.40625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.265625,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.203125,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.296875,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.265625,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.25,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.234375,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.203125,
+						17.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.28125,
+						0.203125,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.203125,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.3125,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.234375,
+						17.03125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.203125,
+						17.34375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.234375,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.21875,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.203125,
+						16.71875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.265625,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.234375,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.234375,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.234375,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.59375,
+						0.21875,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.21875,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.203125,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						10.90625,
+						0.203125,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.21875,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.203125,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.21875,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.203125,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.21875,
+						0.21875,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.234375,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.53125,
+						0.21875,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						11.84375,
+						0.234375,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.25,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.15625,
+						0.21875,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.21875,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.21875,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.21875,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.203125,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.21875,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.296875,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.3125,
+						13.59375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.3125,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.359375,
+						14.21875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.375,
+						14.53125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.296875,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.234375,
+						15.46875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.234375,
+						15.78125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.234375,
+						16.09375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.234375,
+						15.15625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.25,
+						14.84375
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.234375,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.34375,
+						0.28125,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.359375,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.328125,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.265625,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.40625,
+						0.21875,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.21875,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.234375,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.28125,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.78125,
+						0.234375,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						12.46875,
+						0.234375,
+						12.65625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.09375,
+						0.203125,
+						13.28125
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.21875,
+						13.90625
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						14.03125,
+						0.203125,
+						12.96875
+					],
+					"text": "1:1"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						13.71875,
+						0.203125,
+						15.46875
+					],
+					"text": "1:1"
+				}
+			],
+			"position": [
+				9.5,
+				0.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_walk_128"
+		},
+		{
+			"bounds_position": [
+				7.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				9.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:random walk"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				28.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				32.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				26.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				17.9909992218018,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.00899982452393,
+				1.58000004291534,
+				29.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.00899982452393,
+				1.58000004291534,
+				26.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				28.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				32.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				28.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				17.9909992218018,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.00899982452393,
+				1.58000004291534,
+				31.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				30.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				17.9909992218018,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.00899982452393,
+				1.58000004291534,
+				33.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				9.27499961853027,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				2.91000008583069,
+				32.9169998168945
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.0,
+				33.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.975000023841858,
+				1.38500010967255,
+				23.9599990844727
+			],
+			"bounds_size": [
+				0.0509999990463257,
+				0.629999995231628,
+				1.08000183105469
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.70000004768372,
+				24.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				4.27500009536743,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.75,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				1.27999997138977,
+				0.550000011920929,
+				2.18379998207092
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616199970245361
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.27999997138977,
+				0.850000023841858,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		}
+	],
+	"checks": [
+		{
+			"name": "paired rails loaded through museum registry",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "intended side position",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "earlier primary encounters retained",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "earlier secondary companions retained",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "no invented run on arrival",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: before",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum marker moves through real pointer body",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: targets",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "targets precede animation in museum",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: first-move",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "fifteen paired moves retained as twelve rows",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: fifteen-moves",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rail_state": {
+		"busy": false,
+		"carriages": [
+			1.50933635234833,
+			0.112769946455956
+		],
+		"committed": [
+			1.50933635234833,
+			0.112769946455956
+		],
+		"from": [
+			-1.84432280063629,
+			-0.161654844880104
+		],
+		"history": [
+			[
+				-0.40308341383934,
+				-0.115481115877628
+			],
+			[
+				-1.446164727211,
+				-0.378420174121857
+			],
+			[
+				0.685065686702728,
+				-0.253862768411636
+			],
+			[
+				1.3840343952179,
+				-0.00222015986219049
+			],
+			[
+				-1.13069176673889,
+				-0.20780049264431
+			],
+			[
+				0.372673392295837,
+				-0.140041694045067
+			],
+			[
+				1.87396121025085,
+				0.200678527355194
+			],
+			[
+				1.12418413162231,
+				0.405075639486313
+			],
+			[
+				-0.416128516197205,
+				0.329415917396545
+			],
+			[
+				-0.856566429138184,
+				0.173676565289497
+			],
+			[
+				-1.84432280063629,
+				-0.161654844880104
+			],
+			[
+				1.50933635234833,
+				0.112769946455956
+			]
+		],
+		"limit": 2.2,
+		"memory": 12,
+		"prediction": 0.949999809265137,
+		"raw_step_target": 0.112769946455956,
+		"running": false,
+		"sample": 0.686061978340149,
+		"seed": 79,
+		"step": 0.4,
+		"targets": [
+			1.50933635234833,
+			0.112769946455956
+		],
+		"tick": 15
+	},
+	"rays": [
+		{
+			"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "prediction approach floor",
+			"top": 0.000000379979610443115
+		}
+	],
+	"room": "Random_Walk",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Random_Walk/before.png",
+		"res://ada_run/encounter_pilot/Random_Walk/targets.png",
+		"res://ada_run/encounter_pilot/Random_Walk/first-move.png",
+		"res://ada_run/encounter_pilot/Random_Walk/fifteen-moves.png",
+		"res://ada_run/encounter_pilot/Random_Walk/room.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				13.5,
+				0.000822816044092178,
+				7.29999589920044
+			],
+			"passed": true,
+			"tag": "approach prediction marker",
+			"target": [
+				13.5,
+				0.1,
+				7.35
+			]
+		},
+		{
+			"end": [
+				16.333402633667,
+				0.000170901417732239,
+				7.25
+			],
+			"passed": true,
+			"tag": "across front of rail",
+			"target": [
+				16.4,
+				0.1,
+				7.25
+			]
+		},
+		{
+			"end": [
+				9.5,
+				0.000170901417732239,
+				11.4333782196045
+			],
+			"passed": true,
+			"tag": "bridge to retained terrain",
+			"target": [
+				9.5,
+				0.1,
+				11.5
+			]
+		}
+	]
+}

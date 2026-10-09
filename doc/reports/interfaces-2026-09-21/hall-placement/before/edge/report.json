@@ -1,0 +1,353 @@
+{
+	"approaches": [
+		{
+			"clear_fraction": 1.0,
+			"clear_start": false,
+			"direction": [
+				-1.0,
+				0.0,
+				0.0000000119248806385031
+			],
+			"level_support": false,
+			"passed": false
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.0000000556362707015978,
+				0.0,
+				1.0
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.000000031786505871878,
+				0.0,
+				-1.0
+			],
+			"level_support": true,
+			"passed": true
+		}
+	],
+	"artifact": {
+		"position": [
+			13.5,
+			0.0,
+			6.5
+		],
+		"rotation": [
+			0.0,
+			-90.0,
+			0.0
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Live hall contains the actual console artifact",
+			"passed": true
+		},
+		{
+			"message": "Physical console exists after museum loading",
+			"passed": true
+		},
+		{
+			"message": "Operating position has supporting floor",
+			"passed": true
+		},
+		{
+			"message": "Artifact retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits in front of console",
+			"passed": true
+		},
+		{
+			"message": "A supported, unobstructed final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "LAMBDA endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "SIM SPEED endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Action_0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Action_0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Action_0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Action_0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Action_1 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Action_1 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Action_1 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Action_1 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Action_2 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Action_2 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Action_2 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Action_2 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Action_3 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Action_3 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Action_3 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Action_3 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Live controls were measured",
+			"passed": true
+		},
+		{
+			"message": "Museum CharacterBody reaches the operating pose along the measured approach",
+			"passed": true
+		}
+	],
+	"console": {
+		"height_above_floor": 0.880000002682209,
+		"position": [
+			12.5,
+			0.879999995231628,
+			6.5
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.873031266033649,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Parameter_0/Face",
+			"horizontal_distance": 0.550985515117645,
+			"label": "LAMBDA endpoint 0.0",
+			"position": [
+				12.4621524810791,
+				0.873031258583069,
+				6.19999980926514
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.976274974644184,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Parameter_0/Face",
+			"horizontal_distance": 0.679420590400696,
+			"label": "LAMBDA endpoint 1.0",
+			"position": [
+				12.6096000671387,
+				0.976274967193604,
+				6.19999980926514
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.873031266033649,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Parameter_1/Face",
+			"horizontal_distance": 0.47506308555603,
+			"label": "SIM SPEED endpoint 0.0",
+			"position": [
+				12.4621524810791,
+				0.873031258583069,
+				6.3899998664856
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.976274974644184,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Parameter_1/Face",
+			"horizontal_distance": 0.619445145130157,
+			"label": "SIM SPEED endpoint 1.0",
+			"position": [
+				12.6096000671387,
+				0.976274967193604,
+				6.3899998664856
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.997453458607197,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Actions/Tilt/Row/Action_0/InteractableAreaButton",
+			"horizontal_distance": 0.626294195652008,
+			"label": "Action_0",
+			"position": [
+				12.6136932373047,
+				0.997453451156616,
+				6.625
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.997452922165394,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Actions/Tilt/Row/Action_1/InteractableAreaButton",
+			"horizontal_distance": 0.680914402008057,
+			"label": "Action_1",
+			"position": [
+				12.6136932373047,
+				0.997452914714813,
+				6.79500007629395
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.891341455280781,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Actions/Tilt/Row/Action_2/InteractableAreaButton",
+			"horizontal_distance": 0.478755980730057,
+			"label": "Action_2",
+			"position": [
+				12.4621496200562,
+				0.8913414478302,
+				6.625
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.891341455280781,
+			"hit": "/root/EndlessMuseum/Seg0_teshima-droplet/EdgeOfChaosUnlocked/Controls/Actions/Tilt/Row/Action_3/InteractableAreaButton",
+			"horizontal_distance": 0.548276662826538,
+			"label": "Action_3",
+			"position": [
+				12.4621496200562,
+				0.8913414478302,
+				6.79500007629395
+			]
+		}
+	],
+	"failures": [],
+	"feet": [
+		12.0,
+		-0.00000000745058059692383,
+		6.5
+	],
+	"floor_collider": "/root/EndlessMuseum/Seg0_teshima-droplet/Collision",
+	"passed": true,
+	"plaques": [],
+	"room": "QFEP_Edge_Of_Chaos",
+	"scope": "Actual museum geometry. Static standing capsule, short approach, control rays and world dimensions; desktop capture, no headset or learner validation.",
+	"shots": [
+		"operating.png",
+		"controls.png",
+		"approach.png"
+	],
+	"standing_obstacles": [],
+	"walk_end": [
+		12.0,
+		0.000935787742491812,
+		6.52499675750732
+	]
+}

@@ -1,0 +1,42 @@
+Transformation review coming. One claim in the text needs a source check first, since the code I read two weeks ago disagreed with it.
+
+The text is right: the code now uses a factor of four and builds the second gold frame, so Trans_Scale matches its source. Here is the Transformation capture.
+
+Transformation has the best chapter-scale architecture in the book so far. It opens with the pickup cube acquiring translation, rotation and scale, and closes with a door using the same three operations: "There they made a small object conspicuous. Here they make room for you." Between those two moments the operations migrate from the object to the body. First they carry you, then they measure you, then they occupy the place you want to stand. That is a pedagogical path, not a list of techniques.
+
+## Passages to protect
+
+- **Trans_Introduction:** "Here the floor is missing." Then "Relative to the room, you are moving. Relative to the cube, you may be standing still." And on the collider line: "The last line matters to your feet."
+- **Trans_Introduction:** "A beautiful motion can still leave someone behind." With the movable bank: "The crossing has lost one of its agreements," and "Now part of that background can answer back."
+- **Trans_Translation:** "Direction of travel and direction of attention have separated." And at the two doors: "A destination can be shared by journeys with very different permissions."
+- **Trans_Rotation:** the order-of-turns passage is the chapter's best return of an earlier capability. Translations commuted at the doors; rotations about different axes do not. Also "You might expect wider to mean worse," and "A shape can return without giving back the time it took."
+- **Trans_Scale:** "calling it an exit describes somebody else's possibility." Then "The program has made that feeling by changing the other side of the comparison," and "There is a difference between preserving a shape and preserving what someone can do there." Point_One said "We are already Alice"; here the bottle makes it literal. That is recurrence with a new consequence, not repetition.
+- **Trans_Body:** "The slat does not know whether you meant to come." "The invitation has dimensions." And on `bite_m`, a lattice that deleted only what it strictly touched "would delete nothing, for ever, and would look exactly like this one." Also "It was made by measuring."
+- **Trans_Pit:** "The matrices did not become false when you entered the room. They became insufficient as descriptions of what the room allows."
+
+## Where it slips
+
+- **Trans_Pre stands at the most exposed seam in the book so far and drops what it is handed.** Melencolia ends by asking which relation in the court would survive a change. Trans_Pre opens with "Now we can make a familiar game object" and proceeds as a clean tutorial ending on a bold definition. The plainness is defensible for a primer. The dropped question is not, because the three operations are exactly its answer.
+- **Trans_Translation slides into a builder's audit** near the escalator ride: departure decks, centres half a metre below, the upper lift socket's starting height. The point is one sentence long, and it is already there: "Coordinates describe the ride; their agreement with the surrounding floor makes it usable."
+- **The Trans_Rotation footnote links to `localhost:3003`** and says the studies are "awaiting placement in the museum." That is a production note and a dead link for any reader outside your machine.
+- **Trans_Pit opens as a walkthrough.** Its thinking lives in the section titled The constant, which is excellent. The three room descriptions before it can lose a third without losing an encounter.
+- **Trans_Scale uses a top-level `#` heading** inside a hall, where the rest of the chapter uses `##`.
+
+## Revisions, in order
+
+1. **Trans_Pre, first and last paragraphs.** Catch Melencolia's question and let the bold summary answer it. Illustratively:
+   > We leave Primitives with a question: which relation would survive a change? Here is something familiar to test it on, the spinning pickup from a platform game. Watch it gain one movement at a time, and ask what each movement leaves alone.
+   
+   And at the close:
+   > Translation moved it and kept its shape and facing. Rotation turned it and kept its shape and place. Scale kept only its proportions. Each operation has something it preserves. The next halls ask what those preserved things are worth to a body.
+2. **Trans_Translation, the escalator paragraph.** Cut the deck and socket arithmetic down to the sentence that already carries the idea.
+3. **Trans_Rotation footnote.** Either place the drum and sweep studies in the museum, where they would give "a shape can return without giving back the time it took" a body, or cut the footnote until they are placed.
+4. **Trans_Pit, first section.** Trim the pusher timing detail and let the chapter reach The constant sooner.
+
+## Questions for you
+
+- Is Trans_Pre's plain register a deliberate choice for a first-time maker? If so, keep it plain. It still needs the one sentence that catches Melencolia's question.
+- The chapter shows three separate operations but never one transform holding all of them. The door's code applies position, turn and size as three lines. Is that deliberate, keeping the combined matrix at the glimpsed level, or is it a step you want the reader to take before The constant invokes "the matrices"?
+- Do the rotation studies in the footnote have a planned hall? The rotation chapter is the natural home, and the text is already written for them.
+
+Array is next.

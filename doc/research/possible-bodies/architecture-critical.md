@@ -1,0 +1,15 @@
+# A connected plan for which body?
+
+The preceding room let a direction convention become strange without changing branch connections. This room holds one four-segment plan steady while constructing different boundaries around it. The distinction becomes bodily: a line continues through an entrance that the desktop collision capsule cannot cross.
+
+Width is not a minor finish added after the important geometry. It helps determine whether the plan's connections are available to a particular body. The forty-centimetre passage is connected as an empty region and as a centreline graph. For a sixty-centimetre collision body, the entrance offers no route. We should specify which space and which body we mean before claiming that topology has changed. The practical topology of available movement can differ while the grammatical graph remains fixed.
+
+The two R instructions also complicate counting. Their saved state places both at one junction. Two records are not two distinct locations, and a location is not yet a room with a use. The added square might permit a pause, a meeting or an obstruction. A label such as room does not decide those activities. Nor does a dead end announce whether it is a failed route or a desired retreat.
+
+The boundary is constructed from a union of floor footprints. This policy omits walls at shared edges and explicitly opens two ends. Other policies could keep partitions, mark ownership, open every branch or provide a second route back. The grammar does not silently absolve the builder of these choices. The original miniature makes the gap visible: its side walls and room slabs suggest architecture, but it neither reconciles all junctions nor provides collision for a visitor.
+
+Changing the same substrate can be pleasurable and useful. A narrow branch can become a generous shared place without acquiring an entirely new symbolic identity. Yet the easy parameter change should not conceal who can request it. The desk refuses to rebuild while someone remains in the study. That is a limited arrangement for cohabiting the experiment, not a complete consent system. A later version might let an occupant authorize a change, preserve an alternative route, or retain a private enclosure while widening shared circulation.
+
+The earlier essay's questions about individuation, technical environments and which interpreters get written remain research leads in the archive. This encounter does not claim that changing a renderer establishes a distinct cosmotechnics, or that every architectural use follows from identical grammars. Its narrower evidence is useful: records, interpretation, construction and bodily passage are different stages that can be inspected and revised.
+
+For the book's larger question, what bodies are possible, the hallway adds a condition: possible in relation to which clearance, support and authority to alter a rule? Neither extra branching nor a larger room count alone measures that possibility. No numerical entropy or QFEP threshold is inferred from the plan. Competition takes this question into a world where several growing forms must meet conditions beyond their own next instruction.

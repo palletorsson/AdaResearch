@@ -1,0 +1,262 @@
+--- before/commons/maps/Fractal_Recursion/artifacts.md
++++ after/commons/maps/Fractal_Recursion/artifacts.md
+@@ -1,76 +1,20 @@
+-# Fractal Recursion — Artifacts
+-*Fractals: Infinite Within Finite · lambda_edge · 10 artifacts*
++# Fractal Recursion — the installed collection
+ 
+-> Infinity lives in finite rules. A simple instruction — divide, repeat — becomes unbounded complexity. Here, recursion reveals its paradox: order generates chaos, the whole contains copies of itself, and dimension refuses to be an integer.
++Ten authored works remain. The manuscript develops four encounters; the core registry identifies the squares and rings as primary. The doorframes are a second receiver attached to the existing square study, not an eleventh artifact or a separate solver. Coordinates below are authored grid cells (x, z).
+ 
+-The map, read through what it holds — its artifacts in the order you meet them:
++| Work | Cell | Contribution |
++| --- | --- | --- |
++| `fractal_recursion_2` | (4, 5) | Primary. One self-call, halved sizes, stopping conditions. The same term list becomes doorframes: a standing body meets a limit before the function does. |
++| `example_8_3_recursion_circles_vr` | (12, 5) | Primary. Four calls per ring; count, packing and the size cutoff expose different costs. |
++| `cube_subdivision` | (4, 11) | Supporting encounter. Spend twelve splits by DRILL, SPREAD or LOTS. One selected cell becomes eight; children have 0.45 of the parent scale, including the authored gap. |
++| `recursive_chair` | (12, 11) | Supporting encounter. Five authored stages select, transform and add parts. GHOST/SCAR/GONE expose what was discarded. Its name does not imply a self-call. |
++| `science_screen` | (2, 14) | Secondary. An independent sample, not a live profiler of these demonstrations. |
++| `dark_sphere` | (14, 15) | Secondary remainder. Retained, without making it the chapter's organizing evidence. |
++| `recursive_table` | (4, 17) | Supporting collection. An authored furniture construction available for comparison with the chair. |
++| `cube_staircase` | (12, 17) | Supporting collection. A constructed staircase form, not a promised player route. |
++| `fibonacci_pagoda` | (4, 22) | Supporting collection. Tiered scale and repetition beyond the four desks. |
++| `synthesis_stand` | (12, 22) | Secondary presentation with `dark_sphere` subject. |
+ 
+-## Science Screen
+-![Science Screen](/scene-catalog/science_screen.png)
++`recursive_boolean_cube` appeared in the earlier inventory but is not placed in this hall. Its prior listing is preserved in the recursion-thresholds review folder. No work was removed to make this inventory agree with the map.
+ 
+-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+-
+-`science_screen`
+-
+-## fibonacci_pagoda
+-![fibonacci_pagoda](/scene-catalog/fibonacci_pagoda.png)
+-
+-tier_scale(n) = base_scale / phi^(n*0.5), stacking Fibonacci-ratioed tiers with golden finial
+-
+-`fibonacci_pagoda`
+-
+-## Recursive Chair
+-![Recursive Chair](/scene-catalog/recursive_chair.png)
+-
+-Chair created through recursive cube subdivision
+-
+-`recursive_chair`
+-
+-## Fractal Recursion 2
+-![Fractal Recursion 2](/scene-catalog/fractal_recursion_2.png)
+-
+-Advanced recursion patterns with multiple levels of depth
+-
+-`fractal_recursion_2`
+-
+-## recursive_table
+-![recursive_table](/scene-catalog/recursive_table.png)
+-
+-table = subdivide_3x2(cube) -> keep(top_layer, corner_legs) -> flatten(top) -> stretch(legs)
+-
+-`recursive_table`
+-
+-## Dark Sphere
+-![Dark Sphere](/scene-catalog/dark_sphere.png)
+-
+-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+-
+-`dark_sphere`
+-
+-## example_8_3_recursion_circles_vr
+-![example_8_3_recursion_circles_vr](/scene-catalog/example_8_3_recursion_circles_vr.png)
+-
+-circle(center, r, d) = torus(r) + 4 * circle(center +/- offset, r * 0.5, d-1)
+-
+-`example_8_3_recursion_circles_vr`
+-
+-## cube_subdivision
+-![cube_subdivision](/scene-catalog/cube_subdivision.png)
+-
+-cube -> 8 sub-cubes -> pick one -> repeat. Scale reduction 0.5 per level.
+-
+-`cube_subdivision`
+-
+-## recursive_boolean_cube
+-![recursive_boolean_cube](/scene-catalog/recursive_boolean_cube.png)
+-
+-menger(center, size, d) = {subcube(i) for i in 27 if zeros(i) < 2}, recursive cross-removal
+-
+-`recursive_boolean_cube`
+-
+-## Cube Staircase
+-![Cube Staircase](/scene-catalog/cube_staircase.png)
+-
+-Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail
+-
+-`cube_staircase`
++The first frame starts at hall-relative (8.5, 0, 4.5). Further frames follow the aisle at one-metre intervals. The side route is part of the encounter: a rule can keep producing smaller openings without requiring the visitor to keep going through them.
+--- before/commons/maps/Fractal_Recursion/final.md
++++ after/commons/maps/Fractal_Recursion/final.md
+@@ -6,7 +6,7 @@
+ 
+ Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.
+ 
+-Here is the self-call from the artifact:
++Here is the self-call from the artifact:[^noc]
+ 
+ ```gdscript
+ var new_size: float = size * size_reduction
+@@ -22,7 +22,16 @@
+ 
+ `TERM_MIN_SIZE` is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.
+ 
+-Seven levels produce seven squares. One call makes one further call. Each square is a smaller copy of the one around it, and that is the first half of what the word *fractal* names: a shape whose parts are reduced copies of the whole.[^1] The second half is that the copying does not run out at any scale you can reach. A straight line is also made of smaller lines, and nobody calls it a fractal; the word begins where a shape keeps its detail however close you come. We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
++Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.
++
++Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.
++
++![The same shrinking terms become doorframes on the museum floor.](images/recursion-thresholds.png)
++
++
++Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.[^1] Here we reach a last square. The room has stopped where a rule could go on.
++
++We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
+ 
+ <!-- @example_8_3_recursion_circles_vr -->
+ 
+@@ -64,4 +73,6 @@
+ 
+ A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?
+ 
+-[^1]: Benoît Mandelbrot coined *fractal* from the Latin *fractus*, broken, in *Les objets fractals* (1975); the definition is his, from *The Fractal Geometry of Nature* (1982). The square desk and the ring desk are carried into the headset from Daniel Shiffman's Examples 8.2 and 8.3 in *The Nature of Code* (natureofcode.com), as several desks in this sequence are.
++[^1]: Benoît Mandelbrot coined *fractal* in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in [“What Is a Fractal?”, *The Nature of Code*](https://natureofcode.com/fractals/#what-is-a-fractal). It is a way into the examples, not a complete mathematical definition.
++
++[^noc]: The square and ring source files credit Daniel Shiffman's *The Nature of Code*, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.--- before/commons/maps/Fractal_Recursion/intent.md
++++ after/commons/maps/Fractal_Recursion/intent.md
+@@ -1,6 +1,9 @@
+-Concept: The gateway to infinite complexity from finite rules — recursion as the engine that turns a single instruction into unbounded structure. A simple command (divide, repeat) applied to cubes, chairs, tables, and circles reveals that self-similarity is not ornament but mechanism.
+-Sequence role: First map in the Fractals sequence (10th spine sequence, lambda_edge phase). Opens the fractal arc at beginner level, establishing recursion as the generative principle before any formal fractal geometry appears. The cube_staircase and recursive_chair ground abstraction in familiar objects; fibonacci_pagoda hints at the golden ratio thread that will surface in Fractals_7. Connects forward to Fractals_2 where recursion takes organic form as trees.
+-Technical angle: Recursive function calls with base case and depth parameter, subdivision as the canonical recursive operation (divide cube into 8 sub-cubes, repeat). The fibonacci_pagoda introduces the Fibonacci recurrence F(n)=F(n-1)+F(n-2) as a recursive structure distinct from geometric subdivision. Boolean operations on recursive geometry (recursive_boolean_cube) demonstrate CSG as a recursive algebra.
+-Critical angle: Recursion is the lambda_edge thesis made concrete: finite rules produce infinite complexity because the output of a rule becomes its own input. The recursive chair and table are uncanny — familiar objects made alien by self-reference. This is the first encounter with the idea that complexity is not designed but generated, that a five-line function can produce structures no human could draw by hand.
+-Key artifacts: cube_staircase and cube_subdivision demonstrate depth-controlled recursion on cubes; example_8_3_recursion_circles_vr shows radial recursive packing; fibonacci_pagoda bridges recursion to Fibonacci; fractal_recursion_2 is the generic recursive template; recursive_boolean_cube, recursive_chair, recursive_table apply recursion to familiar objects; dark_sphere anchors the research space.
+-Gap: Needs a side-by-side depth comparator — an artifact that renders the same recursive rule at depth 1 through 6, making the exponential growth of complexity visible as a discrete progression rather than a sudden reveal.
++# Where does “again” spend itself?
++
++First hall of Fractals, following CA_EdgeOfChaos and leading to Fractal_RecursiveTrees. The previous hall compared neighbouring exchanges; this one inspects instructions that ask for another call. A finite recursive construction is the starting encounter, not evidence that the room contains an infinite fractal.
++
++Four manuscript encounters carry different questions; the squares and rings are the two promoted primary works. The nested squares separate a depth allowance, a minimum size and what an eye can resolve. The rings make four descendants per call, so another level has another cost. Subdivision spends the same twelve splits by DRILL, SPREAD or LOTS; selection distributes the detail. The chair keeps and discards cells, then transforms and adds parts through five authored stages. Its name does not make those stages self-calls.
++
++The critical opening lies in allocation and recognition: where does the next operation go, what becomes hard to distinguish, and which chosen arrangement becomes a chair? Keep the supporting collection available for other readings. The dark sphere is a secondary remnant, not the chapter's organizing work. Object count is not an entropy measurement; resemblance does not establish topology or implementation.
++
++Continue by giving branches positions, directions and lengths. The first desk now shares its actual shrinking terms with a row of floor-standing doorframes. The body passes the first and meets the next while the instruction still has levels to spend. An ordinary route alongside returns to the collection. The desk image, mathematical stopping conditions and bodily clearance give different answers to “where does it stop?” Keep those differences available; do not present the frames as proof of infinite detail or universal bodily limits. The earlier intent is preserved in the opening-review baseline, rather than treated as a report of installed behavior.
+--- before/commons/maps/Fractal_Recursion/technical.md
++++ after/commons/maps/Fractal_Recursion/technical.md
+@@ -1,12 +1,21 @@
+ # Fractal_Recursion: inspect the operation before naming the form
+ 
+-The hall has four primary artifacts and retains six supporting works. Its tokens opt into `lesson:true`; other placements retain their existing behavior. Controls are physical push buttons arranged three across in two rows on a 1.12 m-wide desk. Each control is within 0.8 m of the same nominal reach point. The 1.18 × 0.36 m readout uses one transparent plane (14% opacity), a thin frame and opaque outlined text; it is tilted 35 degrees. Button touch targets retain their original size. RULE reveals the explanation; all four start waiting for input.
++The manuscript follows four encounters within a ten-work collection. The core registry promotes the squares and rings; subdivision and the chair carry supporting comparisons. Its tokens opt into `lesson:true`; other placements retain their existing behavior. Controls are physical push buttons arranged three across in two rows on a 1.12 m-wide desk. Each control is within 0.8 m of the same nominal reach point. The 1.18 × 0.36 m readout uses one transparent plane (14% opacity), a thin frame and opaque outlined text; it is tilted 35 degrees. Button touch targets retain their original size. RULE reveals the explanation; all four start waiting for input.
+ 
+ ## 1. One self-call
+ 
+ `algorithms/fractals/example_8_2_recursion_vr.gd` draws one square and calls `_draw_recursive_pattern` once with `size * size_reduction` and `d - 1`. The initial size in this hall is 2.2 m; the ratio is 0.5. The source returns when `d <= 0` or `size < 0.01`. MORE and LESS request depths 1–7, producing 1–7 square meshes at these settings. The smallest term at depth seven is 0.034375 m.
+ 
+ LAYOUT switches between nested and abreast arrangements. COLLAPSE changes all drawn sizes to the last term's size. It preserves the number of generated squares and the mathematical term list; consequently the readout says *smallest term*, not visible footprint. This tail recursion can also be expressed iteratively. A nested image is not proof of a recursive implementation.
++
++### The same terms at body scale
++
++Only the square token in this hall carries `room:thresholds`. The optional `commons/artifacts/recursion_lesson/threshold_walk.gd` reads the existing executor's `_terms()`; it does not calculate another recursive sequence. MORE, LESS and BEGIN update both receivers. LAYOUT and COLLAPSE affect the original image only: the physical frames retain the mathematical terms. A size-cutoff return also limits the room, even if requested depth is larger.
++
++The outer square sides are 2.2, 1.1, 0.55, 0.275, 0.1375, 0.06875 and 0.034375 metres. Their centres follow the central aisle at x=8.5, z=4.5 through 10.5, with every base on the floor. These one-metre placement intervals are authored spacing. Side posts and lintels have collision; the bottom edge is a shallow visual inlay with no raised sill. Clear widths/heights subtract the frame bars: the first opening is 2.09 m wide and 2.145 m high, the second 0.99 m wide and 1.045 m high.
++
++Controlled native desktop walking passes the first opening, meets the second lintel, steps aside and returns to the central aisle beyond the seventh frame. The collection remains reachable. This is a standing-body comparison, not a claim that no crouching or smaller body can enter. Human headset reach, comfort and Quest performance still require testing. Ordinary lesson placements and all three other desks receive no doorframes.
++
+ 
+ ## 2. Four self-calls
+ 
+--- before/commons/maps/Fractal_Recursion/map_data.json
++++ after/commons/maps/Fractal_Recursion/map_data.json
+@@ -1144,7 +1144,7 @@
+ 		"",
+ 		"",
+ 		"",
+-		"fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true",
++		"fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true#room:thresholds",
+ 		"",
+ 		"",
+ 		"",
+--- before/commons/artifacts/recursion_lesson/recursion_lesson.gd
++++ after/commons/artifacts/recursion_lesson/recursion_lesson.gd
+@@ -5,6 +5,7 @@
+ var source: Node3D
+ var show_rule := false
+ var _elapsed := 0.0
++var _threshold_walk: Node3D
+ const CHAIR_STAGES := ["CUBE", "CUT + LIFT", "FLATTEN SEAT", "EXTEND LEGS", "EXTEND BACK", "ADD ARMRESTS"]
+ 
+ func _ready() -> void:
+@@ -46,6 +47,10 @@
+ 	# A low boundary marks the study's footprint without blocking the visitor.
+ 	box(Vector3(0, 0.006, 0), Vector3(4.7, 0.012, 3.1), material("23323b"))
+ 	begin()
++	if kind == "one" and str(source.get_meta("config_room", "")) == "thresholds":
++		_threshold_walk = load("res://commons/artifacts/recursion_lesson/threshold_walk.gd").new()
++		_threshold_walk.name = "ThresholdWalk"
++		add_child(_threshold_walk)
+ 	if kind == "one": _use_hall_light.call_deferred()
+ 
+ func _build_compact_console(ids: Array, title: String) -> void:
+@@ -195,6 +200,7 @@
+ 		refresh()
+ 
+ func refresh() -> void:
++	if is_instance_valid(_threshold_walk): _threshold_walk.refresh_terms()
+ 	if not is_instance_valid(readout): return
+ 	if show_rule:
+ 		readout.text = {
+--- before/commons/artifacts/recursion_lesson/threshold_walk.gd
++++ after/commons/artifacts/recursion_lesson/threshold_walk.gd
+@@ -0,0 +1,45 @@
++extends "res://commons/artifacts/timing_machines/machine_stage.gd"
++## A second receiver of the square study's actual terms, measured in metres.
++## The gaps between frames are authored placement, not recursive output.
++var source: Node3D
++var sizes: Array[float] = []
++var _frames: Node3D
++
++func _ready() -> void:
++	source = get_parent().source
++	# The desk faces the entrance. Turn this receiver back toward the hall.
++	position = Vector3(-4, 0, 1)
++	rotation.y = PI
++	var caption := label("SAME SIZES / ANOTHER WAY THROUGH", Vector3(0, 0.025, -0.65), 0.00085)
++	caption.rotation_degrees = Vector3(-90, 180, 0)
++	refresh_terms()
++
++func refresh_terms() -> void:
++	var terms: Array[float] = source._terms()
++	if terms == sizes: return
++	sizes = terms.duplicate()
++	if is_instance_valid(_frames):
++		remove_child(_frames)
++		_frames.queue_free()
++	_frames = Node3D.new()
++	_frames.name = "Frames"
++	add_child(_frames)
++	for i in sizes.size():
++		var side: float = sizes[i]
++		var bar := minf(0.055, side * 0.09)
++		var frame := Node3D.new()
++		frame.name = "Term%d" % (i + 1)
++		frame.position.z = float(i)
++		frame.set_meta("side_metres", side)
++		frame.set_meta("opening_width", side - 2 * bar)
++		frame.set_meta("opening_height", side - bar)
++		_frames.add_child(frame)
++		var tint := StandardMaterial3D.new()
++		tint.albedo_color = source.iteration_colors[i % source.iteration_colors.size()]
++		tint.albedo_color.a = 1.0
++		tint.roughness = 0.45
++		for x in [-1.0, 1.0]:
++			box(Vector3(x * (side - bar) * 0.5, side * 0.5, 0), Vector3(bar, side, bar), tint, true, frame)
++		box(Vector3(0, side - bar * 0.5, 0), Vector3(side - 2 * bar, bar, bar), tint, true, frame)
++		# The floor closes the square. Its inlay has no raised collision sill.
++		box(Vector3(0, 0.004, 0), Vector3(side - 2 * bar, 0.008, bar), tint, false, frame)

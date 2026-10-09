@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What reaches the surface</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR 2 / 8 · FLASHLIGHT · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="flashlight-review.zip">Code + tests</a></nav></header><main><h1>What reaches the surface</h1>
+<!-- @flashlight_demo -->
+
+<p>Several pools of colour meet on a pale board. Their edges are easier to follow than their crowded middle. Pick one edge. Which lamp is responsible for it?</p>
+<p>Take the red lamp and turn it aside. Follow what leaves the surface. Bring it back slowly, across the other pools. There is a place where its red becomes difficult to name on its own. Move through that place again. Nothing has been painted over, yet something has appeared that neither lamp makes alone.</p>
+<p>Leave the red lamp aimed at the surface. It stays where you release it. Take the green one and move its pool across the red. Separate them, then let their edges meet. Try the blue. The white lamp begins aimed aside; bring it into the comparison when you want to see what another contribution does. If the middle grows too pale to distinguish, separate the pools again. Their edges give you somewhere to begin.</p>
+<p>In the previous room, colour was assigned to forms and positions. Here you can move one of the conditions of its appearance with your hand. What, exactly, have you changed?</p>
+<p>The receiving surface keeps the same material throughout. Its stored base colour, its <em>albedo</em>, is a near-white value. Each lamp carries a <code>SpotLight3D</code>: a light with a position, a direction and a cone. Turning the handle turns the cone. The surface receives a different contribution because you have changed where that cone falls.</p>
+<p>Aim a beam off the board and onto the floor or the cube standing to its side. The cone can cross the boundary of its intended exhibit. Does the colour still read the same way? Follow a shadow or an edge before giving the result a name. The lamp carries a value, but it cannot carry a complete account of what you will see wherever you point it.</p>
+<p>Beside the board stands a coarse, pale sphere. Carry the red beam across it. One face brightens while its neighbour stays dull. Move the lamp to the other side and watch the difference change places. No face has been repainted.</p>
+<p>We met these flat faces among the primitives, where they interrupted the promise of a smooth sphere. Here they give the light different directions to meet. Each face has a direction, called its <em>normal</em>, which the renderer uses along with the light and material to calculate its appearance. What looked like one pale body begins to answer face by face. Bring a second colour across the first. The construction you could barely see now divides their meeting.</p>
+<p><img alt="The same pale sphere under a red lamp held on either side. The camera, mesh and material stay fixed." src="/book-review/doc/book/iterations/2026-09-23-flashlight-faceted-sphere/same-sphere-moving-light.png" /></p>
+<p>The red lamp has crossed from board to sphere without changing its assigned colour. Inside each lamp, <code>flashlight_color.gd</code> finds the light and gives it its colour:</p>
+<pre><code class="language-gdscript">var spot = _find_spot_light(target_root)
+if spot:
+    spot.light_color = light_color
+</code></pre>
+<p>Four copies of the same scene receive four values. The red instance is given <code>Color(1, 0, 0, 1)</code>; the green instance <code>Color(0, 1, 0, 1)</code>. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The fourth number, alpha, stays at one here.</p>
+<p>The assignment happens when the scene starts. While you move the lamp, its colour value stays fixed. You have changed where its light meets the room.</p>
+<p>There is a useful limit here. These lamps offer RGB values to a renderer. They do not calculate a spectrum of wavelengths. The room also has other illumination: turning the lamps away does not promise darkness. Even the pale surface we have kept fixed is a chosen condition of this experiment. We have made a comparison manageable by leaving much of the world in place.</p>
+<p>Perhaps the surprising body here is the patch of colour. You cannot pick it up separately from the meeting that produces it. Move one participant and its boundary moves; withdraw another and it changes again. The code gives us a way to repeat that meeting. There is still more to ask of it.</p>
+<!-- @colour_light_rooms -->
+
+<p>Through the side opening, a white room waits with a small light hanging near its centre. Stay with one corner as rose passes into violet. The walls keep their edges. Their colour has left one arrangement and entered another.</p>
+<p>Earlier, your hand moved a lamp whose colour stayed fixed. Here the lamp stays in place while its colour changes. You can keep walking, or let the room change around you while you stand still.</p>
+<p>On the far wall, a wide pink rectangle draws you towards it. Its narrow luminous lip gives it an outline. From the middle of the room, how much depth can you find inside that outline?</p>
+<p>Walk closer, then move sideways. A return wall comes into view. There is room to step inside, and a back wall that stops you. The rectangle has become a recess without anything being rebuilt. Its pink sources keep their colour while the light in the room moves on. The surrounding colour changes the meeting you are looking at.</p>
+<p><img alt="The pink recess, photographed from inside the installed white room." src="/book-review/doc/book/iterations/2026-10-02-light-an-opening/figures/pink-threshold.png" /></p>
+<p>The next doorway opens below a tall light well. Three rectangular lips draw the eye upwards. Between them, the walls close around the opening; beyond the last lip is the museum's sky.</p>
+<p>Wait beneath it. Rose leaves the ceiling for violet. The code changes the lights around the opening; it never assigns a new colour to the sky. Does the piece of sky you see still seem to belong to the same distance?</p>
+<p><img alt="The same light well and viewpoint at two moments. The roof and its opening stay fixed while the surrounding lights change." src="/book-review/doc/book/iterations/2026-10-02-light-an-opening/light-well-pair.png" /></p>
+<p>A shallow ramp brings you onto a raised landing. Look back through the well. The nearer edge covers another part of the farther one. The view from below has company now. Neither position can give you every edge at once.</p>
+<p>James Turrell's light rooms and Skyspaces offer a reference for staying with this uncertainty.<sup id="fnref:apertures"><a class="footnote-ref" href="#fn:apertures">1</a></sup> Here a rendered sky meets an enclosure made from engine primitives. We can inspect every wall and still need to move to see how their edges fit together.</p>
+<!-- @ -->
+
+<!-- study-spine:sphere_in_pink -->
+
+<!-- @sphere_in_pink -->
+
+<p>The sphere has returned, pale and still. Five switches offer five directions of pink light. Leave one on and move to the side. The shadow gives the curve an uneven weight.</p>
+<p>Keep the lamps in place and change LIGHT / MATERIAL. The pink now belongs to the sphere; the illumination is white. The floor helps you see what the sphere cannot tell you by itself. This is our five-switch response to LeWitt's light study. Thirty-two possible switch states include all five lamps off. An inventory can be complete while the experience of looking keeps changing.</p>
+<!-- @ -->
+
+<p>Carry the distinction with you: changing the light that reaches a surface and changing the surface's own material can both change its appearance. In the next room, the receiving surface begins to resemble part of the body you act through. What happens when the colour is something you choose to wear?</p>
+<!-- @ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:apertures">
+<p>James Turrell's physical light installations are the reference, not the authorship of this scene. Häusler Contemporary describes <em>Aural</em> as a walk-in Ganzfeld installation; <a href="https://haeusler-contemporary.com/james-turrell-ganzfeld-aural-en">its account of the Berlin presentation</a> does not support the supplied collage's VR description. In <em>Twilight Epiphany</em> (2012), ceiling illumination meets natural twilight through a roof aperture; see <a href="https://moody.rice.edu/james-turrell-twilight-epiphany-skyspace">Rice's Skyspace account</a>. Here RGB lights meet the museum's rendered sky. Neither natural daylight nor a measured perceptual equivalence is simulated.&#160;<a class="footnote-backref" href="#fnref:apertures" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></main></html>

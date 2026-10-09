@@ -1,0 +1,24 @@
+--- before-pink/commons/maps/Primitives_Polythedra/technical.md
++++ after-pink/commons/maps/Primitives_Polythedra/technical.md
+@@ -26,6 +26,21 @@
+ Its edges have equal length. A general tetrahedron need not be regular. Both scenes are pickable and may snap to nearby shelf points. Neither placed scene supplies an alternate material, so its inherited material-button handler is not a usable surface toggle here.
+ 
+ Godot distinguishes [solid convex collision shapes](https://docs.godotengine.org/en/4.6/classes/class_convexpolygonshape3d.html) from [triangle-based concave shapes](https://docs.godotengine.org/en/4.6/classes/class_concavepolygonshape3d.html). The latter are chiefly appropriate for static geometry. Choosing a collision representation requires considering the moving body's physics, not only matching a visible hole.
++
++## A simplex fitted to the room
++
++The museum's [corner builder](../../scenes/em/em_simplex_corners.gd) reads nine `map_info.museum.simplex_corners` entries in this map. Each supplies a floor-corner coordinate, two inward signs, a reach and a pink finish (`#ee5599`). All use the museum wall height, currently 4.5 m. Main-hall reaches are 1.5 m; side-room reaches are 1.1 m, with 0.9 m beside a doorway. These fixed architectural pieces have no grab or resize control.
++
++The four local vertices are the floor corner, the two floor intercepts and the upper wall junction:
++
++```gdscript
++var points := PackedVector3Array([Vector3.ZERO, Vector3(sx * reach, 0, 0),
++    Vector3(0, 0, sz * reach), Vector3(0, height, 0)])
++```
++
++Four triangular faces close the mesh; the same points define a `ConvexPolygonShape3D`. The three edges from the floor corner are mutually perpendicular. This is a right tetrahedron, not the regular equal-edge tetrahedron on the plinth. Its volume is `reach * reach * height / 6.0`. Rendering describes the boundary; the convex collision shape treats the enclosed volume as solid for colliding simulated bodies.
++
++The corner builder checks that both backing walls are continuous and the bordering cells are floor. It rejects cuts across a doorway. Navigation reserves the corner footprint, while trim and automatic service props avoid the fill. The pink material belongs to each piece and does not mutate the shared wall material. The map's underlying grid cells and existing artifacts are unchanged.
+ 
+ ## A prism's grain and its retained collision
+ 

@@ -1,0 +1,33 @@
+{
+  "cause": {
+    "Point_Animatedcube": "sp at wall cell (0,0)",
+    "Primitives_Polythedra": "entry lane at (7,0) intersects an architectural bench at (7.79,0.22,1.5) local to the first room"
+  },
+  "fixes": {
+    "Point_Animatedcube": "sp moved to floor cell (5,0)",
+    "Primitives_Polythedra": "sp moved to floor cell (6,0), annotation shifted to (7,0)"
+  },
+  "checks": {
+    "all_three_routes_pass": true,
+    "full_vr_rig_simulated": true,
+    "physical_headset_crossing_confirmed": false
+  },
+  "device_updates": [
+    {
+      "map": "Primitives_Polythedra",
+      "previous_override": false,
+      "local_patch": "ada_run\\animated-cube-load-2026-09-28\\Primitives_Polythedra-device-after.json",
+      "sha256": "02f4165f1ca0a9361f7a0695bedc3106e461b6791cac21b054dfd138311c10c7",
+      "verified_on_device": true,
+      "installed_at": "2026-09-28T19:18:32.744170+02:00"
+    },
+    {
+      "map": "Point_Animatedcube",
+      "previous_override": false,
+      "local_patch": "ada_run\\animated-cube-load-2026-09-28\\Point_Animatedcube-device-after.json",
+      "sha256": "bd7df7c623af5ef667153575f839e11244729e36a0ea72697f387bfa03095736",
+      "verified_on_device": true,
+      "installed_at": "2026-09-28T19:18:32.960111+02:00"
+    }
+  ]
+}

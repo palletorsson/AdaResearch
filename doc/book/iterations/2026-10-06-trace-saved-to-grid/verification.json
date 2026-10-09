@@ -1,0 +1,53 @@
+{
+  "changed_lessons_current": true,
+  "ghost_states": [
+    {
+      "id": "point-one",
+      "evidence": "current",
+      "checks": 60
+    },
+    {
+      "id": "point-coordinates",
+      "evidence": "current",
+      "checks": 46
+    },
+    {
+      "id": "point-lines",
+      "evidence": "current",
+      "checks": 170
+    },
+    {
+      "id": "point-trace",
+      "evidence": "current",
+      "checks": 134
+    },
+    {
+      "id": "point-grid",
+      "evidence": "current",
+      "checks": 53
+    }
+  ],
+  "broader_plan_validation": {
+    "passed": false,
+    "scope": "Plan structure and protected sources with explicit authorized revisions; no Godot or learner claims.",
+    "halls": 207,
+    "sequences": 25,
+    "source_topics": 116,
+    "ada_topics": 10,
+    "concrete_contracts": 30,
+    "unresolved_contracts": 177,
+    "protected_sources": 637,
+    "unchanged_sources": 631,
+    "authorized_revisions": 5,
+    "errors": [
+      "Protected source changed without a matching recorded revision: commons/maps/Point_Triangle_Context/map_data.json"
+    ],
+    "summaries": 207,
+    "summary_scope": "Structural coverage only; editorial progression judgment is recorded separately in REVIEW.md."
+  },
+  "preserved_out_of_scope_change": "Point_Triangle_Context/map_data.json was not modified or rebaselined by this pass. Its earlier source-baseline mismatch remains visible.",
+  "final_additions": {
+    "Point_Trace": "84220aefb569af0c69b397d5dadae1a7d51208ff67972830a444d29f9b362227",
+    "Point_Line_Grid": "674d74cb6ddf888c9c8d62d58b577324bdcdf1cbd7e7afd75a001316f0ef8a46"
+  }
+}

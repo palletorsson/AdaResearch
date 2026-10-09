@@ -1,0 +1,214 @@
+{
+  "scope": "Forces: thirteen-hall source review, bounded encounter repairs and recorded desktop evidence",
+  "manuscripts": {
+    "Vectors_Act1_WhatAVectorIs": "byte unchanged",
+    "VFM_02_Operations": "byte unchanged",
+    "Vectors_Act2_VectorArithmetic": "narrow recorded repair",
+    "VFM_05_Launch": "byte unchanged",
+    "VFM_03_Motion": "byte unchanged",
+    "Vectors_Act3_FieldsAndMotion": "byte unchanged",
+    "Vectors_Act4a_KineticForces": "byte unchanged",
+    "Vectors_Act4b_Oscillation": "byte unchanged",
+    "Change_Choreography": "byte unchanged",
+    "VFM_07_Gravity": "narrow recorded repair",
+    "VFM_09_Legs": "byte unchanged",
+    "VFM_08_Arena": "byte unchanged",
+    "Vectors_Act5_ForceAsPlace": "narrow recorded repair"
+  },
+  "roles": "only existing pendulum comparison classified secondary; all book roles/order preserved",
+  "placements": {
+    "authored_instances_retained": 178,
+    "book_encounters": 27,
+    "kinetic_changed_cells": 4
+  },
+  "catalog": {
+    "recovered_readiness": [
+      "parlour_orbits",
+      "paused_fountain",
+      "prop_carousel",
+      "prop_mobile",
+      "prop_spigot",
+      "revolving_door",
+      "sisyphus_mower",
+      "three_gravities",
+      "umbrella_field"
+    ],
+    "explicitly_disabled_preserved": "momentum_collision"
+  },
+  "core_records": "current text/map hashes; unchanged primaries; explicit Arena process failure",
+  "frozen_review_inputs_preserved": true,
+  "navigation": {
+    "checks": 43,
+    "scope": "Production plan selection and utility refusal; no physical portal crossing or full route walk"
+  },
+  "opening": {
+    "headless-final": {
+      "checks": 44,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    },
+    "before-accepted": {
+      "checks": 31,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    },
+    "after-frozen": {
+      "checks": 30,
+      "failures": [],
+      "returncode": 0,
+      "loaded_sources_stable": true
+    }
+  },
+  "motion": {
+    "preserved-headless/motion": {
+      "checks": 34,
+      "failures": [],
+      "returncode": 0
+    },
+    "preserved-headless/spring": {
+      "checks": 48,
+      "failures": [],
+      "returncode": 0
+    },
+    "preserved-headless/timing": {
+      "checks": 24,
+      "failures": [],
+      "returncode": 0
+    },
+    "before-field-final/field": {
+      "checks": 47,
+      "failures": [],
+      "returncode": 0
+    },
+    "before-runtime/staging": {
+      "checks": 18,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-field-final/field": {
+      "checks": 48,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-runtime/staging": {
+      "checks": 19,
+      "failures": [],
+      "returncode": 0
+    },
+    "after-headless/kinetic": {
+      "checks": 45,
+      "failures": [],
+      "returncode": 0
+    }
+  },
+  "relations": [
+    {
+      "folder": "rejected-replay-1",
+      "pid": 43052,
+      "returncode": 1,
+      "seconds": 16.92749309539795,
+      "recorded_checks": null,
+      "recorded_failures": null,
+      "watched_sources_stable": true,
+      "clean_process_pass": false
+    },
+    {
+      "folder": "before",
+      "pid": 5956,
+      "returncode": 0,
+      "seconds": 21.919763803482056,
+      "recorded_checks": 58,
+      "recorded_failures": [],
+      "watched_sources_stable": true,
+      "clean_process_pass": true
+    },
+    {
+      "folder": "after",
+      "pid": 48140,
+      "returncode": 0,
+      "seconds": 22.66460156440735,
+      "recorded_checks": 58,
+      "recorded_failures": [],
+      "watched_sources_stable": true,
+      "clean_process_pass": true
+    },
+    {
+      "folder": "arena-before",
+      "pid": 39264,
+      "returncode": -1,
+      "seconds": 180.01819825172424,
+      "recorded_checks": 49,
+      "recorded_failures": [
+        "authored inventory matches baseline omissions or complete restored hall",
+        "authored instantiated placement count 14",
+        "fifth completed meal reaches stopping threshold",
+        "threshold disables movement and bite",
+        "stopped animal retains its place"
+      ],
+      "watched_sources_stable": false,
+      "clean_process_pass": false,
+      "authored_placement_count": 22,
+      "instantiated_authored_placement_count": 14,
+      "missing_tokens": [
+        "momentum_collision",
+        "parlour_orbits",
+        "paused_fountain",
+        "prop_mobile",
+        "prop_spigot",
+        "revolving_door",
+        "three_gravities",
+        "umbrella_field"
+      ]
+    },
+    {
+      "folder": "arena-after",
+      "pid": 45188,
+      "returncode": -1,
+      "seconds": 60.050452709198,
+      "recorded_checks": 49,
+      "recorded_failures": [],
+      "watched_sources_stable": true,
+      "clean_process_pass": false,
+      "authored_placement_count": 22,
+      "instantiated_authored_placement_count": 21,
+      "missing_tokens": [
+        "momentum_collision"
+      ]
+    },
+    {
+      "folder": "arena-after-clean",
+      "pid": 50620,
+      "returncode": 3221225477,
+      "seconds": 22.40047812461853,
+      "recorded_checks": 49,
+      "recorded_failures": [],
+      "watched_sources_stable": true,
+      "clean_process_pass": false,
+      "authored_placement_count": 22,
+      "instantiated_authored_placement_count": 21,
+      "missing_tokens": [
+        "momentum_collision"
+      ]
+    }
+  ],
+  "unresolved": [
+    "Arena completes behavior checks but native headless teardown hangs/crashes; not a clean suite pass.",
+    "No headset or learner verification; no complete physical thirteen-hall route walk."
+  ],
+  "comparison_links_checked": 137,
+  "chosen_image_sha256": {
+    "doc/book/iterations/2026-09-19-forces-review/opening/before-accepted/standing.png": "4dd913c1c12468df0f5e25944901c95175114a249541e61cee7d8ed1695feb14",
+    "doc/book/iterations/2026-09-19-forces-review/opening/after-frozen/standing.png": "a2d535f9ae5324be8238ff2b1d0dde17bfee8720ad6a8626aae153f44b88773c",
+    "doc/book/iterations/2026-09-19-forces-review/motion/before-field-final/field-observe.png": "12da5a25b9e405602473ed586dc20ea7a5c36e7fd1a4cd5bcb589d30c3d2a6f7",
+    "doc/book/iterations/2026-09-19-forces-review/motion/after-field-final/field-observe.png": "555bc8b68cd4b8431fb506c7fd898b18f0f87f4a3668adb5a8a3bf47f1454ae6",
+    "doc/book/iterations/2026-09-19-forces-review/motion/before-runtime/kinetic-plan.png": "0af676961c3bf546029ee31a40178baf044b8da60cbb02cc51593be155d34f55",
+    "doc/book/iterations/2026-09-19-forces-review/motion/after-runtime/kinetic-plan.png": "5352251c4f00a8e067b4a7533e5f752a87c1cb632b4424d3760b0cbc3bb59fba",
+    "doc/book/iterations/2026-09-19-forces-review/relations/before/orbit-initial-board.png": "643ca8968b74038a51ea0383bdd4ae0b7b7f9e88ab2a59264a68d5847f82f8e9",
+    "doc/book/iterations/2026-09-19-forces-review/relations/after/orbit-initial-board.png": "1b052a35a68bea73e1aca7a6a9e0e0c7559f2324d13c273e81f417943f6d0a6c"
+  },
+  "headset_tested": false,
+  "learner_verified": false,
+  "browser_layout_verified": false
+}

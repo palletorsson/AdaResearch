@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "file": "11_two_cycles.gd",
+      "printed_matches_source": true,
+      "sha256": "f4fcb28a40f72bcf7ccb96c7c371228e73627c78f1aa98f5681f5b9dcc34d736"
+    },
+    {
+      "file": "point_body.gd",
+      "printed_matches_source": true,
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "file": "line_skin.gd",
+      "printed_matches_source": true,
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "preserved": {
+    "beat_wave_calculation_unchanged": true,
+    "beat_scene_unchanged": true,
+    "circulating_path_generator_unchanged": true
+  },
+  "production_repairs": [
+    "Beat slider callbacks and initial positions; bottom label states half gain.",
+    "Interference uses a fixed local sampling plane and local sources."
+  ]
+}

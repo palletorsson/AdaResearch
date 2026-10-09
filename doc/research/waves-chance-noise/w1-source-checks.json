@@ -1,0 +1,54 @@
+{
+  "mode": "source expressions + independent arithmetic model; no Godot execution",
+  "gdscript_parses": 4,
+  "verbatim_gdscript_excerpts": 26,
+  "map_files": "unchanged",
+  "phase_error_before": 0.4551313858511317,
+  "phase_error_after": 8.465450562766819e-16,
+  "half_turn_cancellation_error": 4.510281037539698e-16,
+  "flat_colour_intensity": 0.5,
+  "pattern_repeat_seconds": 17.951958020513104,
+  "record_model": {
+    "fine": {
+      "count": 300,
+      "oldest_age": 7.483333349227932,
+      "actual_gaps_ms": [
+        16.666412353515625,
+        33.333778381347656
+      ],
+      "x_spread": 2.828498125076294,
+      "measured_period": 2.9499999999999957
+    },
+    "probe_origin": {
+      "room_origin_count": -1,
+      "pendulum_origin_count": 118
+    },
+    "coarse": {
+      "count": 50,
+      "oldest_age": 9.98333358764663,
+      "actual_gaps_ms": [
+        199.9988555908203,
+        200.00076293945312
+      ],
+      "x_spread": 2.8277506828308105,
+      "measured_period": 2.9499999999998323
+    },
+    "strobe": {
+      "count": 3,
+      "oldest_age": 7.53333282470658,
+      "actual_gaps_ms": [
+        2949.9988555908203,
+        2950.000762939453
+      ],
+      "x_spread": 0.011751294136047363,
+      "measured_period": 2.9499999999998323
+    }
+  },
+  "runtime": "pending; Godot PID 2780 remains occupied",
+  "source_sha256": {
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "ebbee4c1a3d50e548dfd0af2c92f0e8a2b6fb0ea5022f338bead877b6f9484e5",
+    "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd": "6b09e6188802c5b0c4c157dd7feb9bda2be954512279b04be3c131eafb854787",
+    "commons/testing/probe_wcn_pendulum.gd": "a357e65cb1cf622687a97c5af1d524d6ccadda02085b8ba1ed1a808bee2946e5",
+    "commons/testing/probe_wcn_sine_space.gd": "2f2604f1612bd4a49f80d2f6ed3c42d68c63996f4ae8f69dbcfd5049040687f6"
+  }
+}

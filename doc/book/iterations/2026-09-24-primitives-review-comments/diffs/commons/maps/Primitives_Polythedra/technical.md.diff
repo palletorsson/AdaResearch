@@ -1,0 +1,10 @@
+--- before/commons/maps/Primitives_Polythedra/technical.md
++++ commons/maps/Primitives_Polythedra/technical.md
+@@ -103,3 +103,7 @@
+ ## Scope of verification
+ 
+ The existing `commons/testing/probe_polyhedra_flow.gd` loads the room's barrier/sign placements through the museum stamper. It tests an isolated ascent with the museum wedge builder and supplied capsule motion. It does not establish full-room accessibility, live tracked-hand collision, scanner measurements or visitor comprehension. The dated iteration record holds the current run and remaining checks.
++
++## Museum corner construction — review clarification, 24 September 2026
++
++The chapter follows the endless museum build. Its pink architectural corners are created by `endless_museum.gd` through `em_simplex_corners.gd`, reading the map's `museum.simplex_corners` configuration. They are part of the room, not independently placed artifact tokens. A grid-only load does not construct those corners. The chapter's small held polyhedra and the architectural corner therefore need separate source lookup paths.

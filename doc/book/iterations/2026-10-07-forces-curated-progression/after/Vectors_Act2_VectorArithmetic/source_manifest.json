@@ -1,0 +1,28 @@
+{
+  "room": "Vectors_Act2_VectorArithmetic",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json": "c2e7910a85483b24e9f45201caf7d853b842dc694b76e77654d0bd6a7dd07389",
+    "tools/probes/forces_layout.gd": "5a64b09589634427c664d394d7f6e2c1e18775ae1e264ea045e3542517abd27c",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "56c949ebb87f6436abc2ee1e0b125682ab0d003d28dc3ba64a5be9c2eb5218a6",
+    "ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/control.json": "153e890f4eeeba344f17902b635a52eb3162225c98d7bd5307d398433341a34c",
+    "ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Vectors_Act2_VectorArithmetic/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0"
+  }
+}

@@ -1,0 +1,112 @@
+--- before/commons/artifacts/approach_scale/approach_scale.gd
++++ after/commons/artifacts/approach_scale/approach_scale.gd
+@@ -225,7 +225,11 @@
+ 		# reason and said so in writing before this file was fixed to match.
+ 		var body := AnimatableBody3D.new()
+ 		body.name = "Block%d" % i
+-		body.position = centre
++		# Seed the standing pose before entering the tree. With sync_to_physics,
++		# the physics server otherwise restores the initial y=0 pose after
++		# _apply_size, and deferred grounding lifts the entire field by half
++		# a block. Later size changes would then float above the floor.
++		body.position = centre + Vector3.UP * (block_m * 0.5)
+ 		body.sync_to_physics = true
+ 		# On layer 1 on purpose: it has to be solid to the same bodies the area is
+ 		# watching. It is refused as a visitor by ancestry — see _is_visitor.
+
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -2685,7 +2685,7 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Body/final.md",
+-      "text_sha256": "ae87b79a35458e81e7fc113cf89031d11538dcc2b512f9107e2b35f88e3d64b3",
++      "text_sha256": "f3f3d50be6ffd00875d199652f3ed8fb85324438833e49459760d4c5e1c35096",
+       "map_sha256": "19bddcd6ff6efec677215c81e4e6dcf7222a731dce00e5479ec97e5ed4371fa5",
+       "learner_verified": false
+     },
+
+--- before/commons/maps/Trans_Body/final.md
++++ after/commons/maps/Trans_Body/final.md
+@@ -14,7 +14,7 @@
+ var openness: float = (1.0 - t) * (1.0 - d)
+ ```
+ 
+-Two distances, multiplied. The implementation smooths this value and opens a neighbouring run of slats far enough for a body to pass. The first is how far this slat is from you along the wall; the second is how far you are from the wall. The slat does not know whether you meant to come. Its mechanism holds which side you approached from while it swings, then settles back. Even this small response needs a little state.
++Two distances, multiplied: how far the slat is from you along the wall, and how far you are from the wall. The program smooths the response and opens neighbouring slats far enough for a body to pass. The slat does not know whether you meant to come. Its mechanism holds which side you approached from while it swings, then settles back. Even this small response needs a little state.
+ 
+ A door gives you a place to approach. This wall lets the place of approach move with you. Someone has still chosen how close counts as close, how wide the opening should become, and which collision bodies it will notice. The invitation has dimensions. The slats remain attached to their hinges, the material is the same, nothing has been consumed. Your position changes what that arrangement allows.
+ 
+@@ -28,23 +28,27 @@
+ 
+ They are removed. You advance a shell at a time, leaving an open-topped cut through the block. For a standing visitor this is closer to a trench than a tunnel. Your view was above it before your legs had a way through.
+ 
+-The test is one line, and the interesting part is a number:
++This extra reach has a name:
+ 
+ ```gdscript
+ @export var bite_m: float = 0.16
+ ```
+ 
+-The lattice is solid and so are you, so the physics engine stops you at the surface and your collider never actually overlaps a cube. A lattice that deleted only what it strictly intersected would delete nothing, for ever, and would look exactly like this one. `bite_m` is the margin by which you are allowed to reach past the place you were stopped. At zero the room is a wall. At 0.16 against a 0.34 cell it clears about one shell per press.
++`bite_m` gives the collision shape another sixteen centimetres of reach. The physics engine stops your body at the solid cells; this margin lets the deletion reach beyond that stop. With cells spaced thirty-four centimetres apart, it clears roughly one layer at a time. You press forward, the surface gives, and there is another surface.
+ 
+ Your movement supplies the input, but the operation on the lattice is deletion. Translation alone would leave every cube somewhere. Here the count changes. The whole behaviour also hangs on a tolerance: the difference between a body being stopped and a position allowed to reach beyond it.
+ 
+ The cut stays while this room remains loaded. Look at its stepped sides. It records where the lattice met the collision shape used for your body, expanded by that small margin. The cubes can only retain the contact at their own resolution. Some of you passed above the entire record.
+ 
++![The low cube lattice before a passage and the open-topped cut left by the museum body, photographed from the same elevated viewpoint.](/book-review/doc/book/iterations/2026-09-23-body-what-remains/the-cut-remains.png)
++
++*The body has left the second view. These elevated museum views show the missing cells; the opening was made by walking through the block.*
++
+ Somebody following behind you will find the cut already made. Will their body fit the passage yours left?
+ 
+ <!-- @approach_scale -->
+ 
+-Nine blocks, set closer together than a pair of shoulders. At rest the gap between neighbours is thirty-five centimetres, which is not "tight". It is shut.
++Nine blocks. At rest, the gap between neighbours is thirty-five centimetres.
+ 
+ Walk in anyway.
+ 
+@@ -64,6 +68,6 @@
+ 
+ <!-- @ -->
+ 
+-In every other room in this chapter you have watched a cube be moved, turned or grown. Here your approach has turned slats, removed cells and reduced blocks. Two boundaries return; one keeps the cut. Walking felt like walking, while the room was doing different kinds of work.
++The cube carried you; the bottle changed the room around you. Here your approach has turned slats, removed cells and reduced blocks. Two boundaries return; one keeps the cut. Walking felt like walking, while the room was doing different kinds of work.
+ 
+ What the room offers depends on the body its code can recognise. The next room continues changing even when you stand still.
+
+--- before/commons/maps/Trans_Body/intent.md
++++ after/commons/maps/Trans_Body/intent.md
+@@ -1,4 +1,4 @@
+-Concept: The chapter turned on the visitor. Translation, rotation and scale have been shown in earlier rooms as things that happen to a cube while you watch — the artifact is the operator and you are the audience. This room makes the visitor's approach an input. It compares reversible rotation, irreversible cell deletion and reversible scaling; the carve is a change of occupancy, not an affine transformation. Three throats, each cut to the width of the thing standing in it: a wall of slats that opens where your body is, a lattice that loses every cube you touch, a field of blocks that shrinks as you approach. The room is the operand.
++Concept: The chapter turned on the visitor. Earlier rooms already invited riding, grabbing and crossing. This room makes proximity itself a continuous input to the surrounding material. This room makes the visitor's approach an input. It compares reversible rotation, irreversible cell deletion and reversible scaling; the carve is a change of occupancy, not an affine transformation. Three throats, each cut to the width of the thing standing in it: a wall of slats that opens where your body is, a lattice that loses every cube you touch, a field of blocks that shrinks as you approach. The room is the operand.
+ 
+ Sequence role: After Trans_Scale and before Trans_Pit. The room asks what the space remembers: the slats close, the cut remains, and the blocks regain their size. Pit then changes the input from proximity to time. Its growers do not sense approach.
+ 
+@@ -6,7 +6,7 @@
+ 
+ Critical angle: A boundary that is a function of who is standing at it is not the same kind of object as a boundary. Every slat is where it always was and the wall has stopped being an obstacle, which is the chapter's question about invariants asked from the far side. And the lattice keeps the one record the other two do not: the wall and the field return to how they were found, but the open-topped cut remains, so the room afterwards is a discretised record of the collider that crossed its low volume. That is also the room's one authorship problem — the second visitor arrives at the first visitor's corridor.
+ 
+-Key artifacts: approach_wall (five broad boards swinging out of the plane, aperture 1.3 m, reach 2.6 m, guaranteeing a 0.62 m hole); carve_grid (11x4x11 cubes at 0.34 m, bite 0.16 m, regrow 0 so the open-topped cut remains while the room stays loaded); approach_scale (nine blocks at 1.5 m spacing, 1.15 m each, shrinking to 0.34 of size within 2.2 m); dark_sphere at the far end, the chapter's own closing mark.
++Key artifacts: approach_wall (five broad boards swinging out of the plane, aperture 1.3 m, reach 2.6 m, guaranteeing a 0.62 m hole); carve_grid (11x4x11 cubes at 0.34 m, bite 0.16 m, regrow 0 so the open-topped cut remains while the room stays loaded); approach_scale (nine blocks at 1.5 m spacing, 1.15 m each, shrinking to 0.34 of size within 2.2 m); dark_sphere at the far end remains a secondary legacy placement, not an additional book encounter.
+ 
+ Gap: This hall depends on live artifact response, and the pathfinder cannot tell — it reads the structure layer, where all three throats are plain floor, and knows nothing about artifact colliders. commons/testing/probe_trans_body_sealed.gd is what actually gates the room: it sweeps a shoulder-wide sphere across each throat in the live physics world and asserts the widest free run is under 0.52 m (measured 0.20 m at all three), with the open floor before each gate as the negative control (8.45 m). Nobody has walked the room in VR.
+ 
+
+--- before/commons/maps/Trans_Body/tutorial.md
++++ after/commons/maps/Trans_Body/tutorial.md
+@@ -44,3 +44,12 @@
+ At the caption beyond the last row the last row can still be within the 2.2 m sensing reach. Continue into the exit area and wait: these blocks then return. The lattice's missing cells do not. This difference in memory is the room's final comparison. The next hall's growers also resize, but their input is elapsed time, not distance to a visitor.
+ 
+ The encounter recognises supported player collision bodies. A 52 cm-wide test capsule is one model, not a universal body. Player size, controller motion, collision proxies and response time all affect what passage is possible.
++
++
++## Current museum illustration and seating repair — 23 September
++
++The book's before/after lattice figure uses a fixed elevated camera in the actual isolated museum. Its normal Walker, with a 0.64 m wide and 1.5 m high capsule, was driven through the lattice by physics-tick movement; no cells were removed directly by the capture script. This selected straight walk removed 132 of 484 cells. The cut remains after the body is moved away. These are supplied inputs, not a human or headset observation.
++
++That pass exposed a construction defect in `approach_scale`: the initial AnimatableBody3D pose was centred at y=0 before the node entered the scene tree. Physics synchronization restored that pose after the initial size assignment, and automatic grounding compensated by raising the artifact root 0.575 m. Blocks then rose above the floor on their first size response. Each block is now given its standing centre height before it enters the tree. Mesh and collider bases stay on the deck at full, reduced and restored sizes. No map token, dimensions, sensing reach or size law changed.
++
++`tools/probes/body_book_illustrations.gd` records selected continuous walks through each of the three thresholds, with the body placed at each separate approach. The slats and blocks return after leaving reach; the lattice keeps its removed cells. `tools/probes/body_block_seating.gd` is the small diagnostic used to isolate the old height drift. [Images, exact changes and full evidence](../../../doc/book/iterations/2026-09-23-body-what-remains/index.html).

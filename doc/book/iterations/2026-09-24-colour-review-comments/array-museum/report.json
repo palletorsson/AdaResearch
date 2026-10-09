@@ -1,0 +1,130 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "changing-floor encounter loads",
+      "passed": true
+    },
+    {
+      "name": "agent uses actual containing grid",
+      "passed": true
+    },
+    {
+      "name": "ordinary loop writes at readable pace",
+      "passed": true
+    },
+    {
+      "name": "two native entry controls exist",
+      "passed": true
+    },
+    {
+      "name": "pointer pauses autonomous writing",
+      "passed": true
+    },
+    {
+      "name": "paused agent leaves cells unchanged",
+      "passed": true
+    },
+    {
+      "name": "feeding writes once, not once per frame",
+      "passed": true
+    },
+    {
+      "name": "actual floor cells consumed",
+      "passed": true
+    },
+    {
+      "name": "consumed cell loses its original supporting surface",
+      "passed": true
+    },
+    {
+      "name": "actual body descends to the remaining lower surface",
+      "passed": true
+    },
+    {
+      "name": "body in vacancy is detected",
+      "passed": true
+    },
+    {
+      "name": "restore waits for occupied vacancy",
+      "passed": true
+    },
+    {
+      "name": "restore fills vacancy after departure",
+      "passed": true
+    },
+    {
+      "name": "restored floor supports the same address",
+      "passed": true
+    },
+    {
+      "name": "original grid occupancy returns",
+      "passed": true
+    },
+    {
+      "name": "threshold and perimeter cells are outside write domain",
+      "passed": true
+    },
+    {
+      "name": "Molnár pad is outside the write domain",
+      "passed": true
+    },
+    {
+      "name": "both operations change the real floor",
+      "passed": true
+    },
+    {
+      "name": "protected route remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: the-written-floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: restore-at-the-entrance",
+      "passed": true
+    },
+    {
+      "name": "RESTORE button repairs and pauses",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-restored",
+      "passed": true
+    },
+    {
+      "name": "visitor can resume writing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "body_feet_after_consumed_cell": [
+      17.0,
+      -0.999569952487946,
+      16.0
+    ],
+    "body_probe": "Paused agent moved aside; actual museum body and floor collision retained.",
+    "consumed_cell": [
+      17,
+      0,
+      16
+    ],
+    "floor_ray_after_removal": "{ \"position\": (17.0, -1.0, 16.0), \"normal\": (0.0, 1.0, 0.0), \"face_index\": -1, \"collider_id\": 368662546328, \"collider\": Collision:<StaticBody3D#368662546328>, \"shape\": 637, \"rid\": RID(725849473026) }",
+    "natural_writes_eight_seconds": 3
+  },
+  "passed": true,
+  "scope": "Isolated production museum; timed observation, supplied pointer events and explicit operation/body-overlap probes. Not headset or learner acceptance."
+}

@@ -1,0 +1,441 @@
+{
+  "sequence": "color",
+  "declared_maps": [
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Nails",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Paint",
+    "Color_Walls",
+    "Chamber_Color"
+  ],
+  "museum_map_authored_order": [
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Nails",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Paint",
+    "Color_Walls",
+    "Chamber_Color",
+    "Biome_Ladder_Color"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "Color_Context_Placed",
+      "recorded_status": "draft",
+      "text_words": 1190,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "chroma_stack",
+          "color_dna_stack"
+        ],
+        "reason": "Primitives, transformations and arrays are the pedagogical preconditions for colour: compare reproducible assignments, then follow the scientific and associative questions opened by richer stacks and gallery studies.",
+        "status": "draft",
+        "sequence": "color",
+        "text_path": "commons/maps/Color_Context_Placed/final.md",
+        "text_sha256": "a9a7843f170cc575b9b0957f803d2a8cbd0ee97e8e9384384864564542ac762f",
+        "map_sha256": "ef9d90fde64719d480b89abcb76e052fda87c2301f2482933beb1bf5cb010094",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "chroma_stack",
+        "color_dna_stack"
+      ],
+      "role_primary_order": [
+        "chroma_stack",
+        "color_dna_stack"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Flashlight",
+      "recorded_status": "text_pending",
+      "text_words": 584,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "flashlight_demo"
+        ],
+        "sequence": "color",
+        "status": "text_pending",
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "map_sha256": "68c1fc12cdf49fafc25bc470f6f726f027968ffb7f263cbde25e0253ace89633",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "flashlight_demo"
+      ],
+      "role_primary_order": [
+        "flashlight_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Nails",
+      "recorded_status": "draft",
+      "text_words": 593,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "nail_color_controller",
+          "hand_color_controller"
+        ],
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "status": "draft",
+        "sequence": "color",
+        "text_path": "commons/maps/Color_Nails/final.md",
+        "text_sha256": "1569d4f9c99794a9eac81d4accc2e10a9c325ea4a7cbd9ae23c0e1fb7de2a6c1",
+        "map_sha256": "2eed54e7f1632168b7ea9cf5d3376e065963189189da987c62498b271b59dfb9",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "role_primary_order": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Rainbow",
+      "recorded_status": "text_pending",
+      "text_words": 606,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "rainbow"
+        ],
+        "sequence": "color",
+        "status": "text_pending",
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "map_sha256": "d28a3e4d31c0bc80824079cf2662b96e6de1a4425cd46d75b69e257dd9b7a422",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "rainbow"
+      ],
+      "role_primary_order": [
+        "rainbow"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Pillar",
+      "recorded_status": "draft",
+      "text_words": 326,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pillarcolorcollection",
+          "color_sets_overview"
+        ],
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "status": "draft",
+        "sequence": "color",
+        "text_path": "commons/maps/Color_Pillar/final.md",
+        "text_sha256": "51cf3d6bea1a33c12f3b7c156a928db69606dd8ff39e8b674263b41e2cc06180",
+        "map_sha256": "3a154fcbf52bfb7e00efdb6b02ee5d61c2b71790e9affb5aa1cb426618241cac",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "role_primary_order": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "recorded_status": "text_pending",
+      "text_words": 559,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "gridcolorizer"
+        ],
+        "sequence": "color",
+        "status": "text_pending",
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "map_sha256": "990c263f85fef3d079254269922315426278e918370fdbc8902ea91bad08f470",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "gridcolorizer"
+      ],
+      "role_primary_order": [
+        "gridcolorizer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Paint",
+      "recorded_status": "draft",
+      "text_words": 589,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ball_painting_demo",
+          "albers_wall_gallery"
+        ],
+        "sequence": "color",
+        "status": "draft",
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "map_sha256": "0bbafe09b09157599f9e3df4e34d1ffd4f8091c720776d9c4bb701d3bbc3b72c",
+        "learner_verified": false,
+        "text_path": "commons/maps/Color_Paint/final.md",
+        "text_sha256": "0dd375faaddde8c241db629dc88fe75419c2f23fb810b5545289ccd66570c110"
+      },
+      "manuscript_artifact_order": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ],
+      "role_primary_order": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Color_Walls",
+      "recorded_status": "draft",
+      "text_words": 715,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "color_constellation_office",
+          "color_space_navigator",
+          "gradient_interpolator"
+        ],
+        "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+        "status": "draft",
+        "sequence": "color",
+        "text_path": "commons/maps/Color_Walls/final.md",
+        "text_sha256": "c9a2bc0fd20aee2bab3885eade2e439fb4cb8f396fcbf3e0ecc0dc57ed580b15",
+        "map_sha256": "5caed1c4ed6f2bdf61d53f6deba3be5cf36b844d5621044def7f343bc453d306",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "color_constellation_office",
+        "color_space_navigator",
+        "gradient_interpolator"
+      ],
+      "role_primary_order": [
+        "color_constellation_office",
+        "color_space_navigator",
+        "gradient_interpolator"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Chamber_Color",
+      "recorded_status": "source_checked_draft",
+      "text_words": 622,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "becoming_catalyst"
+        ],
+        "sequence": "color",
+        "status": "source_checked_draft",
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "map_sha256": "829b52138e3f558099a96dab614853e0ce6b55ef8ba9a816e65766459b832cef",
+        "learner_verified": false,
+        "text_path": "commons/maps/Chamber_Color/final.md",
+        "text_sha256": "dc574466fbd2f09d8a192e3f0260c6571a63b84926a256675dbc306f5f2c8948"
+      },
+      "manuscript_artifact_order": [
+        "becoming_catalyst"
+      ],
+      "role_primary_order": [
+        "becoming_catalyst"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn",
+      "addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn",
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "addons/godot-xr-tools/objects/pickable.gd",
+      "addons/godot-xr-tools/objects/pickable.tscn",
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn",
+      "algorithms/color/color_mixing/color_constellation_office.gd",
+      "algorithms/color/color_mixing/color_constellation_office.tscn",
+      "algorithms/color/color_palettes.tres",
+      "algorithms/color/grabcolor/color_sets_overview.gd",
+      "algorithms/color/grabcolor/color_sets_overview.tscn",
+      "algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+      "algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
+      "algorithms/color/gridcolorizer/address_lesson.gd",
+      "algorithms/color/gridcolorizer/gridcolorizer.gd",
+      "algorithms/color/gridcolorizer/gridcolorizer.tscn",
+      "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+      "algorithms/postprocessing/flashlight_demo/flashlight.tscn",
+      "algorithms/postprocessing/flashlight_demo/flashlight_color.gd",
+      "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+      "algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn",
+      "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd",
+      "algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
+      "algorithms/primitives/rainbow/rainbow.gd",
+      "algorithms/primitives/rainbow/rainbow.tscn",
+      "algorithms/primitives/rainbow/rainbow_celebration.gd",
+      "commons/artifacts/catalog/ArtifactCatalogDataProvider.gd",
+      "commons/artifacts/chroma_stack/chroma_stack.gd",
+      "commons/artifacts/chroma_stack/chroma_stack.tscn",
+      "commons/artifacts/color_dna_stack/color_dna_stack.gd",
+      "commons/artifacts/color_dna_stack/color_dna_stack.tscn",
+      "commons/artifacts/color_space_navigator/color_space_navigator.gd",
+      "commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/context/drawingboard/ball_grab_sphere.gd",
+      "commons/context/drawingboard/ball_paint_tip.gd",
+      "commons/context/drawingboard/ball_painting_automation.gd",
+      "commons/context/drawingboard/ball_painting_demo_v2.tscn",
+      "commons/context/drawingboard/ball_spawner.gd",
+      "commons/context/drawingboard/paper_draw_surface.gd",
+      "commons/context/drawingboard/wet_paint_canvas.tscn",
+      "commons/grid/mutators/grid_color_mutator.gd",
+      "commons/hazards/becoming_catalyst/BiomeBrushController.gd",
+      "commons/hazards/becoming_catalyst/becoming_catalyst.gd",
+      "commons/hazards/becoming_catalyst/becoming_catalyst.tscn",
+      "commons/hazards/becoming_catalyst/biome_brush_menu_ui.tscn",
+      "commons/hazards/becoming_catalyst/chromatic_study.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_biome_brush.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_branching.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_cellular.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_chaos.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_chromatic.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_forces.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_fractal.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_modifier.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_primitives.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_swarm.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_transformation.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_voxel_editor.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_waveform.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_wedge_placer.gd",
+      "commons/hazards/becoming_catalyst/tabbed_editor_panel.tscn",
+      "commons/hazards/catalyst_sequence_binding.gd",
+      "commons/interfaces/hand_color_controller.tscn",
+      "commons/interfaces/nail_color_controller.gd",
+      "commons/interfaces/nail_color_controller.tscn",
+      "commons/interfaces/value_mapper_3d.gd",
+      "commons/interfaces/value_mapper_3d.tscn",
+      "commons/modifiers/grid_ops.gd",
+      "commons/modifiers/modifier_stack.gd",
+      "commons/primitive_grammar/primitive_stack.gd",
+      "commons/primitives/panels/DigitalPaper/grab_paper.tscn",
+      "commons/primitives/pillar/pillar.tscn",
+      "commons/primitives/sphere/grab_sphere.tscn",
+      "commons/scenes/mapobjects/walkableprism.tscn",
+      "commons/ui/control_panel.gd",
+      "commons/ui/text_screen.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_hand.gd",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "res://addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "res://addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd",
+      "res://algorithms/color/ColorPaletteResource.gd",
+      "res://algorithms/color/drawing/wet_paint_simulation.gdshader",
+      "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn",
+      "res://commons/biome_layers/biome_elements.gd",
+      "res://commons/biome_layers/distribution_field.gd",
+      "res://commons/context/drawingboard/brush_layer.gd",
+      "res://commons/graph_grammar/operations/ca_prune_op.gd",
+      "res://commons/grid/mutators/grid_mutator_base.gd",
+      "res://commons/hazards/becoming_catalyst/biome_brush_menu_ui.gd",
+      "res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/cellular_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/primitives_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/swarm_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/transformation_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/waveform_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/tabbed_editor_panel.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/joystick_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/lsystem_grammar/lsystem_sim.gd",
+      "res://commons/lsystem_grammar/lsystem_turtle.gd",
+      "res://commons/primitives/constraint/distance_constraint.gd",
+      "res://commons/primitives/cubes/grab_cube.gd",
+      "res://commons/primitives/cubes/grab_cube_grid_snap.gd",
+      "res://commons/primitives/line/coordinate_line.tscn",
+      "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
+      "res://commons/primitives/positionlabel/positionlabel.tscn",
+      "res://commons/rd_grammar/rd_sim.gd",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/resourses/shaders/SimpleGrid.gdshader",
+      "res://commons/resourses/shaders/color_space_map.gdshader",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

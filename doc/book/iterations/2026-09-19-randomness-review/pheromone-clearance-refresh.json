@@ -1,0 +1,89 @@
+{
+  "sequence": "randomness",
+  "maps": [
+    "Random_Pheromone"
+  ],
+  "live_sequence_maps": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Biome_Cage",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game",
+    "Biome_Ladder_Randomness"
+  ],
+  "museum_template": "soane-cabinet-vista",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "b3dfe5bc3e94a680f5524cfd581324ba7659e2f6b126f303446480a2a123e02c",
+    "commons/data/museum/em_plan.json": "b3dfe5bc3e94a680f5524cfd581324ba7659e2f6b126f303446480a2a123e02c",
+    "commons/data/map_authored.json": "1fbac1d5df3aaf1db8eae54630dbdcc3414dcd5388d164c9daca71f55c9e7302",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/randomness.json": "7b701de2c16ccae2fba941f50acfa5eabee4f781ef63b7c5dc9884717778ebc3",
+    "tools/em_map_halls.py": "40a11f4a0c9bc19f0ab9a9def6f32bbd91fb8cd087348e9c1107023a0ebacf19",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/Random_Pheromone/map_data.json": "af601cbd552df84a1bbb430b79f3b6d7c8526ee64090298abbd6c68cbeb3c976"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/museum/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/map_authored.json": "1fbac1d5df3aaf1db8eae54630dbdcc3414dcd5388d164c9daca71f55c9e7302"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 183,
+    "commons/data/museum/em_plan.json": 183
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 183,
+    "commons/data/museum/em_plan.json": 183
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "Random_Pheromone",
+      "pearl_index": 12,
+      "room": {
+        "w": 13,
+        "h": 10
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 11,
+        "src_h": 8,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260919T190419096401Z"
+}

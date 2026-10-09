@@ -1,0 +1,42 @@
+{
+  "status": "encounter added · 20 September",
+  "summary": "The enclosure question arrives in Arrays, before Color. Six black-and-white wall studies remain. One of their images now covers a hinged piece of the museum wall: change the image, then change where the body can go.",
+  "items": [
+    {
+      "title": "A different kind of quarter turn",
+      "description": "TURN WALL opens a real passage onto a small landing. The same ONE EXCEPTION image stays on the moving surface. The landing and return route are part of the encounter.",
+      "images": [
+        "doc/book/iterations/2026-09-20-wall-exception/closed.png",
+        "doc/book/iterations/2026-09-20-wall-exception/open.png"
+      ],
+      "captions": [
+        "Closed · a changed image still meets a closed wall.",
+        "Open · the surface and collider turn together; the visitor can pass."
+      ],
+      "image_note": "Two states of the updated actual museum, at the same camera position. Controlled desktop capture; headset use remains unverified.",
+      "report": "doc/book/iterations/2026-09-20-wall-exception/SUMMARY.md"
+    },
+    {
+      "title": "The outside was made too",
+      "description": "Walk around the open panel to inspect its plain reverse. The small landing has its own floor and rail. The experiment gives the earlier passage about thin paper a place to be encountered.",
+      "images": [
+        "doc/book/iterations/2026-09-20-wall-exception/outside.png",
+        "doc/book/iterations/2026-09-20-wall-exception/reverse.png"
+      ],
+      "captions": [
+        "From the landing · looking back through the opening.",
+        "Around the edge · the unprinted reverse."
+      ],
+      "image_note": "Actual museum renders from two points on the landing. The sky remains rendered beyond it; there is no continuation of its walkable floor."
+    },
+    {
+      "title": "A new passage, with the earlier chapter retained",
+      "description": "Inserted after ONE EXCEPTION, before the existing closing paragraphs and transition to the timed floor. None of the previous prose was removed.",
+      "text_kind": "book insertion",
+      "before": "",
+      "after": "Near the far end, on the right, the same pattern reaches a narrow part of the museum wall. EXCEPTION changes a tile here too. Walk towards it. The changed image still holds you on this side.\n\nFind TURN WALL beside it. Press, then wait for the sheet to finish turning. Its pattern travels with it. The opening leads onto a small landing outside the hall. Step through and look back along the edge.\n\nFrom here the panel is almost nothing. A thin sheet, a hinge, the plain reverse of the image. It was enough to stop us. Beyond the landing there is no floor to continue this walk. Until now, it was easy to keep looking ahead: another room, another thing to learn. The thin paper followed us along the way.\n\nThe two turns have done different work. EXCEPTION changed an orientation inside the image. TURN WALL moved the surface and the collision shape that travels with it. The first changed what we could read; the second changed where we could go. A quarter turn, learned among the transformations, has returned as a way to question the enclosure.\n\nThe landing was made too. Even this little outside has a floor and a rail. What else would we have to build to carry the walk further?\n\nReturn inside before turning the wall back. While someone remains on the landing or in the opening, the control holds it open. We can leave the path here, and we can rejoin it.",
+      "report": "doc/book/iterations/2026-09-20-wall-exception/Tutorial_Tiling_Walls.diff",
+      "report_label": "Exact book diff"
+    }
+  ]
+}

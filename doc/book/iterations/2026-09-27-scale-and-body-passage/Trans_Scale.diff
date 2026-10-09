@@ -1,0 +1,28 @@
+--- before/Trans_Scale/final.md
++++ current/Trans_Scale/final.md
+@@ -14,7 +14,7 @@
+ 
+ A cut. Now the plate is under your feet. The figure rises beyond you, her leaning panels large enough to seem architectural. The table has become a place to stand. Look down along the serving plates. What could be read at a glance now asks for a journey.
+ 
+-The bottle is gone. You have not watched the room swell through the sizes between. Everything around it is suddenly four times as large: the food, the figure, the room, the spaces between them. Your body has kept its size. The effect may feel like shrinking. The program has made that feeling by changing the other side of the comparison.
++The bottle is gone. You have not watched the room swell through the sizes between. The room and its contents are suddenly four times as large: the food, the figure, the spaces between them. Your body has kept its size. The effect may feel like shrinking. The program has made that feeling by changing the other side of the comparison.
+ 
+ ```gdscript
+ room.scale = Vector3.ONE * FACTOR
+@@ -28,7 +28,7 @@
+ var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+ ```
+ 
+-Then it moves your body to that position. The multiplication and the relocation arrive together as an encounter, but they do different work. One changes the room; the other chooses where you meet it again. A small clearance keeps your feet out of the porcelain.
++Then it places your feet there, eight centimetres above the porcelain. The room has changed size, and you have been given a new place from which to meet it.
+ 
+ Follow the plates down. Their winding descent was already present when they were small. Nothing in their arrangement needed to be invented after you took the bottle. Yet the distance from one to the next now belongs to balance, gravity and the time spent falling. The program did not multiply your walking speed or the gravity with the room. Uniform scaling has left a very uneven experience.
+ 
+@@ -44,6 +44,6 @@
+ 
+ The figure has not become hostile by becoming enormous. Her unfamiliar body remains with you through the change. The same is true of the food: its strangeness preceded its usefulness as a landscape. You can learn a route through something without exhausting what it is.
+ 
+-Beyond the two frames, turn toward the museum's own exit. The little door has brought you out of the furnished room; there is still a short walk to the next hall. The museum continues at its ordinary scale. The second frame belongs to it. That boundary belongs to the code too: this room was chosen as the thing that could grow. The next hall returns the question to the body that made the comparison possible.
++Beyond the two frames, turn toward the museum's own exit. There is still a short walk to the next hall. The museum and its second frame have kept their ordinary size. The code placed the furnished room inside the change and left them outside it. In the next hall, your approach will be enough to make the surroundings respond.
+ 
+ <!-- @ -->

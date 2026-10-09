@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "check": "unsolved room retains its barrier",
+      "passed": true
+    },
+    {
+      "check": "release outside snap range does not solve",
+      "passed": true
+    },
+    {
+      "check": "real proximity detector finds this demo's other end",
+      "passed": true
+    },
+    {
+      "check": "successful drop creates the line and solves once",
+      "passed": true
+    },
+    {
+      "check": "completion removes target and its collider",
+      "passed": true
+    },
+    {
+      "check": "visible fragments outlive the barrier",
+      "passed": true
+    },
+    {
+      "check": "farther barrier in same hall remains",
+      "passed": true
+    },
+    {
+      "check": "closer barrier in another hall remains",
+      "passed": true
+    },
+    {
+      "check": "line remains editable after reward",
+      "passed": true
+    },
+    {
+      "check": "reconnecting neither repeats reward nor breaks next barrier",
+      "passed": true
+    },
+    {
+      "check": "line_demo in other maps does not explode barriers",
+      "passed": true
+    },
+    {
+      "check": "absent or already destroyed target is harmless",
+      "passed": true
+    },
+    {
+      "check": "fragments clean themselves up",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Actual scenes, supplied endpoint positions and real drop callback; no headset or whole-room walking test.",
+  "source_hashes": {
+    "commons/primitives/snappoint/demos/line_demo.gd": "6f4a0426f51d28ad182507b7c444588ab64e26976cf19c13780de6607b69bd5a",
+    "commons/primitives/snappoint/snap_point.gd": "ca49b5dda35cc082f1a9f6794d0b937e1e08f6b527f6456d7b9d4b32bbb05d65",
+    "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd": "a96148abbea2bd6dbb3a271185365c8574bccb9833ae583d26818fb431991b8c",
+    "commons/testing/probe_line_opens_barrier.gd": "68c93a7bcd2f1d95de4a0d384c728163bc7d090eeefbeac772160b9f1989c212",
+    "commons/maps/Point_Lines/final.md": "84024fc9805cefaf06f4370084d101a0f59a0a474e051e93db7af3436a50e4de"
+  },
+  "command": "Godot_v4.6-stable_win64.exe --headless --xr-mode off --path . --script res://commons/testing/probe_line_opens_barrier.gd",
+  "exit_code": 0,
+  "engine_notes": "No GDScript errors in the verified run. Startup reported an unresolved UID, certificate-store access and DebugLogger file access errors; these are outside the checked interaction."
+}

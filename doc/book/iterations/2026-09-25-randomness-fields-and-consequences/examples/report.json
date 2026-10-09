@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "dartboard present",
+      "passed": true
+    },
+    {
+      "name": "museum walking keys do not change dart count or AUTO",
+      "passed": true
+    },
+    {
+      "name": "sampler can still throw",
+      "passed": true
+    },
+    {
+      "name": "standalone keyboard shortcut remains available",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: dartboard-in-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+
+  },
+  "passed": true,
+  "room": "Randomness_Examples_of_Randomness",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,7 @@
+# CA Introduction
+
+The first hall follows the Noise chapter's question of what forms remain beyond the familiar organic filter. The rule explorer begins with a held row and lets the visitor inspect three inputs before advancing a generation. A second seed, wrapped boundary and bounded history make the experiment more specific. Beyond the desk, those same stored rows hang in a body-sized ring: 31 stands beside 0, and earlier generations rise above the current row.
+
+The rug is a two-dimensional multistate automaton with separate frame/interior rules and an explicitly repeated mirror operation. The line network grows occupied positions and draws selected neighbour connections. Three primary passages compare these mechanisms. Eight placements remain. The unused substrate runner has been removed from this hall; its source and registry entry remain available. The low synthesis stand retains a supporting orb.
+
+The explorer sits one cell clear of the museum entrance. Native museum checks and photographs are recorded in the current encounter notes; tracked headset and Quest acceptance remain pending. The earlier illustrated web exercise remains separate from Godot.

@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Remove · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Remove">← Tutorial lineage</a></p><h1>Random Remove</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Remove/final.md">Raw captured source</a></p><pre># The set before the choice
+
+In the last room, sorting changed the neighbours while the count stayed. Here, find a cube the process cannot choose.
+
+A board of sixty-four small cubes stands on a pedestal a few steps inside the entrance, on the hall&#x27;s centre line, numbered along two edges. Its controls sit together on the console in front; a cased account of the set stands to the left. Sixteen of the cubes are amber; the other forty-eight are grey.
+
+&lt;!-- @remove_random --&gt;
+
+Before pressing anything, count the amber ones. Four rows by four columns, from column 2 to column 5 and row 2 to row 5: sixteen possible first choices. The grey cubes are present, numbered, and out of the question. The plate beside the board says so in its own words: RANGE, columns 2–5, rows 2–5, a seed, and `Eligible: 16   Remaining: 16   Removed: 0`.
+
+Press REMOVE ONE. One amber cube turns red for a moment and is gone; its slot plate stays, so the address survives the cube. The line names it: last removed, column such, row such. Remaining: fifteen. While a cube is still red, the same line says *Choosing* instead, with the address already filled in: the draw is made before the deletion. Press again. Does the new gap touch the first? Either answer is possible. Watch the amber set rather than expecting the gaps to spread like a stain.
+
+Now point to a cube you know cannot disappear, and press until the amber is gone. Sixteen presses. The final shape was never in doubt: the square you counted at the start, emptied. What the initial picture did not tell you was the order, and the plate under each gap keeps only the fact of absence, not the turn it was taken on.
+
+The rule that decided the sixteen is one question asked of every cube&#x27;s own position on the board:
+
+```gdscript
+	match selection_mode:
+		&quot;All&quot;: return true
+		&quot;Column&quot;: return is_equal_approx(pos.x, float(target_column))
+		&quot;Row&quot;: return is_equal_approx(pos.z, float(target_row))
+		&quot;Range&quot;:
+			return pos.x &gt;= x_min and pos.x &lt;= x_max and pos.y &gt;= y_min and pos.y &lt;= y_max and pos.z &gt;= z_min and pos.z &lt;= z_max
+```
+
+The coordinates are the board&#x27;s, not the hall&#x27;s: column 3 is the cube at x = 3 on this eight-by-eight, wherever the pedestal stands. The rule runs over every cube once, when a run begins, and keeps the ones it admits. The loop carries a guard for a cube already removed, but on this bench it never fires: every run empties `_removed` before the question is put, so all sixty-four are asked, each at its original place:
+
+```gdscript
+		if _removed.has(i):
+			continue
+		var included := _should_include_instance(_original[i].origin)
+```
+
+Only then does chance enter, and it enters only the remaining candidates:
+
+```gdscript
+	var offset := _rng.randi_range(0, active_instances.size() - 1)
+	var index := active_instances[offset]
+```
+
+A whole number between zero and one less than the count of what remains, and the cube at that place in the list. The draw never sees a grey cube; there is no probability, however small, of its being chosen in this run. Removal is a third step again:
+
+```gdscript
+	transform.basis = Basis().scaled(Vector3.ZERO)
+	multimesh.set_instance_transform(index, transform)
+```
+
+the cube&#x27;s own transform scaled to nothing, the board underneath untouched. In the same step its entry leaves the list, `active_instances.remove_at(offset)`; the rule is not asked again before the next run, and until then the list only shrinks. Look into the gap. Its small slot plate is still there. The cube also keeps an address inside the MultiMesh, and the remover has kept its original transform in `_original`. The model can stop drawing this body without forgetting how to put it back. At this board, the surface your feet stand on belongs to the museum; these small disappearances make no holes in it. Filter, draw, delete: three decisions that are easy to fold into one word, *random*, and only the middle one is.
+
+Press RESET. All sixty-four cubes return, sixteen amber again, and the line shows the same seed. Empty the square a second time and watch the order: it is the first order, cube for cube, because RESET on this bench puts the generator back to the seed it names:
+
+```gdscript
+	if replay_on_reset:
+		_rng.seed = run_seed
+```
+
+Watch the first few removals twice. After RESET, waiting before your next press does not advance the removal generator. The room goes on around the board; the next choice waits for the button. The same run can be taken slowly or quickly, although a press made during the red highlight is ignored while that removal is busy.
+
+Press NEW SEED and try again. The button selects a five-digit seed and restores the set. It may select one you have already used, and a different seed does not guarantee a different removal order. Compare the histories you get rather than requiring difference as proof of randomness.
+
+Then keep a seed and change the rule. Press ROW: all sixty-four return and only row 3 is amber, eight candidates. Press COLUMN for eight the other way. Keep the same seed for ROW and COLUMN and watch the first few removals in each. Both lists start with eight candidates and shrink by one on each removal. The generator therefore receives the same changing bounds, and selects the same positions within the two lists. The addresses at those positions differ, except once: one list follows row 3 and the other follows column 3, so on any press where ROW&#x27;s line says column 5, row 3, COLUMN&#x27;s says column 3, row 5. In a run taken to the end, both lines name column 3, row 3 exactly once, on the same press: the one cube both rules admit. Press ALL and every cube is admitted, sixty-four candidates. That change also changes the draw&#x27;s bounds; retaining a seed alone no longer means retaining the same list positions. Equal counts can leave a spatial difference undescribed: a rule can offer the same number of choices while making different places available, and the seed cannot tell.
+
+Stop before the set is empty. Keep this interrupted pattern for a moment. Perhaps the openings make an arrangement you want. Nothing requires another press. The final empty range would erase the distinction between the orders you have been comparing; halfway through, their different choices can still be seen. A slot remembers where a cube is absent. The visible last-removal line remembers one event. The program keeps this run&#x27;s full order in `removal_log`, readable through `get_state` but not on this plate, until RESET, NEW SEED or a mode button clears it. The comparison between your runs is kept only by you.
+
+&lt;!-- @sampling_hoppers --&gt;
+
+Beside the board, two glass cases hold the same eight numbered blocks. Each has a handle. Pull the one on the left. A block comes forward, leaves a small copy in the row below, and travels back into its place. Pull the one on the right. Its block stays out. Behind it, the numbered slot is empty.
+
+Try to get the same number again. On the left you can wait for it; nothing promises how long. On the right, the number you have just drawn is no longer available. An absence has become part of the next choice. The chance of pulling the number you just pulled is one in eight on the left and none on the right; after seven pulls the right-hand case has one answer left, and the left still has eight.
+
+The left-hand case returns its member before allowing another draw. All eight remain eligible. The right-hand case loses a candidate each time: eight, seven, six. Stop with one block left. Can you name the next result before pulling? Seven earlier choices have left only one answer. Which number survives to that moment still depends on their order.
+
+Here code chooses the member. The movement lets you follow what happens to it afterward. Both machines begin with the same seed, so their first choices match. Then their available sets part company. The left-hand row can contain repetitions; the right-hand row can fill with every number once. The left keeps only its latest twelve draws, though its count continues. The right stops after eight.
+
+REPLAY BOTH restores the blocks and begins the two orders again. Watch the returning block rejoin its neighbours. Giving it back is an instruction too. What looked like another chance depended on making it available again.
+
+&lt;!-- @random_removal_arena --&gt;
+
+Behind the board, the set becomes a floor. Ninety-nine cubes span a basin inside a glass frame. Pause on the dark edge before entering. That edge is permanent. The amber cells are not.
+
+Entry asks for one removal. As you walk, each further sixty centimetres of accumulated horizontal movement can ask for another; a pending draw must finish first. One cell turns red for eight-tenths of a second. Then its mesh disappears and its collider is disabled. The gap is now something your body can fall through. Fire burns at the base of the basin.
+
+The board hid a drawing while leaving its little slot plate. This version connects the same selection to support:
+
+```gdscript
+func _removed(index: int) -&gt; void:
+    colliders[index].set_deferred(&quot;disabled&quot;, true)
+```
+
+The draw chooses from the floor&#x27;s remaining cells, not from the cube nearest your foot. Walking makes a choice happen; it does not tell the choice where to land. Try the permanent apron and look back. A disappearance becomes a fall only because the code also withdraws support.
+
+REPLAY restores the cells and their colliders, and starts the same seeded order again. NEW SEED restores them with another order. Before either is pressed, the order was not drawn for you: the floor is given the same seed each time the hall is built, so every visitor, walking any path, meets the same cells going in the same sequence. Unlike the board, the floor names no seed, so after NEW SEED you cannot say which order you are in. Both controls stand together outside the frame&#x27;s entrance. Keep the distinction between the small board and the floor: here removal has acquired a consequence because another piece of code joined it to collision.
+
+&lt;!-- @ --&gt;
+
+Ask now whether a random choice can be fair to a cube that was grey. Within the amber set the draw is even; the grey were decided before it ran, by a rule you can read and change, and the seed that makes a run repeatable has no say in it. In the next room, the available choice narrows to two diagonal marks. Follow what their neighbours make of them: when does a choice become a contour, and when can that contour become a passage?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Remove/tutorial.md">Raw captured source</a></p><pre># The set before the choice
+
+Random Definition gave us a procedure that can return. Random Entropy showed what counting leaves out. At this bench, look first for a cube whose chance of removal is zero.
+
+## Find the boundary before drawing
+
+Sixteen amber cubes form a 4×4 range, columns 2–5 and rows 2–5. Forty-eight grey cubes stand outside it. Read the set on the cased plate to the left. Use REMOVE ONE on the right: one candidate becomes red for 0.3 seconds, then disappears while its address plate remains.
+
+Follow a grey cube through several removals. Its exclusion comes from the filter in `algorithms/randomness/RemoveRandom.gd`:
+
+```gdscript
+	match selection_mode:
+		&quot;All&quot;: return true
+		&quot;Column&quot;: return is_equal_approx(pos.x, float(target_column))
+		&quot;Row&quot;: return is_equal_approx(pos.z, float(target_row))
+		&quot;Range&quot;:
+			return pos.x &gt;= x_min and pos.x &lt;= x_max and pos.y &gt;= y_min and pos.y &lt;= y_max and pos.z &gt;= z_min and pos.z &lt;= z_max
+```
+
+These coordinates belong to the explicit grid. Its instances sit at integer x/z addresses, then the whole MultiMesh is scaled by 0.14 and placed on the table. Row 3 stays row 3 when the museum turns the bench.
+
+The candidate list keeps the permitted indices, skipping earlier removals:
+
+```gdscript
+		if _removed.has(i):
+			continue
+		var included := _should_include_instance(_original[i].origin)
+		if included:
+			active_instances.append(i)
+```
+
+## Draw within the remaining set
+
+Only the remaining candidates reach the draw:
+
+```gdscript
+	var offset := _rng.randi_range(0, active_instances.size() - 1)
+	var index := active_instances[offset]
+```
+
+On the first RANGE draw there are sixteen possible offsets. Next time there are fifteen. A cube that survives has a changing chance on the next press: 1/16 initially, then 1/15 if it remains. The forty-eight excluded cubes keep chance zero throughout this run. Exhausting the set removes every candidate exactly once, so randomness determines the order while the initial range determines the final empty shape.
+
+The selected cube goes red. After the delay, a valid pending operation scales its transform to zero and removes its index from the candidate list:
+
+```gdscript
+	transform.basis = Basis().scaled(Vector3.ZERO)
+	multimesh.set_instance_transform(index, transform)
+	_removed[index] = true
+	active_instances.remove_at(offset)
+```
+
+The slot plate and board remain. This operation does not remove museum floor or create a traversable pit. The original transforms remain in memory for RESET.
+
+## Replay a procedure, then change a rule
+
+RESET restores all transforms and, on this bench, resets the private removal generator:
+
+```gdscript
+	if replay_on_reset:
+		_rng.seed = run_seed
+```
+
+Compare ROW and COLUMN under the same seed. Both start with eight candidates, so they use equal bounds on every draw and choose equal offsets in their respective lists. One set runs across row 3; the other down column 3. Their counts agree while their available places differ.
+
+RANGE and ALL have sixteen and sixty-four candidates. The draw bounds now differ, so the same seed is insufficient to claim the same offsets. NEW SEED picks a five-digit value through the fixture and resets. A repeated seed is possible. The bench exposes the chosen value but has no seed-entry control.
+
+## What waits, and what is cancelled?
+
+There is no START or STOP button on this fixture. The remover has a timer API; this bench uses one press per removal. Waiting between completed removals does not consume removal draws. During the red highlight a second REMOVE ONE press is ignored. RESET or a mode change invalidates the pending operation:
+
+```gdscript
+	if generation != _generation or not is_inside_tree():
+		return
+```
+
+The older draw cannot return from its delay and erase a cube in the new run. That small guard is part of what makes a reset mean a beginning.
+
+Keep an unfinished pattern before resetting. Its visible gaps preserve some of the history that a completely emptied range would lose. Random Walk will make each choice alter where a body goes and which choices are available next.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+`random_removal_arena` uses the existing owned-set `RemoveRandom` algorithm and one collider per cell. Entry and accumulated walking request draws; a reset restores both drawings and support. The basin fire uses the museum death/respawn path.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Remove/technical.md">Raw captured source</a></p><pre># Random_Remove — implementation and review
+
+The room&#x27;s one primary is `remove_random:90#local_grid:true` at (6,7). The scene `algorithms/randomness/remove_random.tscn` uses `RemoveRandom.gd`; the owned bench is built by `remove_random_fixture.gd`. The continuation preserves both production scripts and the current placement.
+
+## Selection, state and ownership
+
+Range uses inclusive x/z bounds 2–5 and y bounds −1–1. Row and Column use index 3; All admits every instance. `find_all_instances` tests each original local transform, skips `_removed`, and collects indices in ascending instance order. It colours eligible instances amber and excluded instances grey. An empty set remains empty. The candidate count therefore describes this configured grid, not arbitrary geometry in the museum.
+
+`_bind_owned_grid` accepts an explicitly named descendant MultiMesh and creates a private resource copy before editing it. It never searches the hall for replacement targets. The bench has 64 instance slots; `_original` keeps their transforms. Removal draws a uniform integer offset from the remaining candidate list using a private RandomNumberGenerator, highlights the selected instance for 0.3 seconds, then zero-scales its original basis, records the index and removes it from the candidates. Instance count stays 64. The board and museum colliders remain.
+
+The pending operation records `_generation`. RESET and mode changes increment it, clear the busy flag and restore transforms. A delayed callback from the previous generation returns without modifying the new run. Rapid presses during the highlight do not queue extra removals. The timer API exists but is not connected to START/STOP buttons here.
+
+## Seed and comparison
+
+The fixture enables `replay_on_reset` and chooses a five-digit seed. Both its arrival selection and NEW SEED use the shared `randi_range(10000, 99999)` function to choose the seed; the subsequent removal draws use the remover&#x27;s private generator. Do not describe the whole fixture as isolated from global random state. RESET reseeds that private generator with the named run seed and restores the same list order.
+
+The fixture&#x27;s NEW SEED button calls `set_random_seed` and resets; it does not call the remover&#x27;s separate unrestricted `new_seed()` API. Five-digit seed selection can repeat, and distinct seeds can produce the same permutation. There is no visitor seed-entry field. Rebuilding the hall constructs a fresh bench and selects a seed again; the visitor&#x27;s last seed is not saved.
+
+ROW and COLUMN begin with eight candidates, use identical successive bounds under the same seed, and select equal offsets in different lists. Comparing a range with a row changes both eligibility and the draw bounds. A seed alone is not a specification of the complete procedure.
+
+## The visible bench
+
+The pedestal is 0.8 × 0.96 × 0.8 m. The board is 1.4 m square with its top at 1.02 m. Cubes have local size 0.82 scaled by pitch 0.14, giving a visible width of 0.1148 m. Sixty-four permanent slot plates and sixteen edge numerals retain the addresses. Row/column coordinates are local to the grid.
+
+The seven-button panel stands to the right at fixture position (0.95, 0.82, 0.70), scaled three times and tilted/yawed (−35°, −35°, 0). A cased status plate stands to the left around x = −1.12 m, y = 1.08 m, yawed 30° toward the visitor. It names the set, seed, initial eligible count, remaining count and number removed. Its second label names a pending/last removed address or exhaustion. The complete `removal_log` is available through `get_state`; the plate shows only the last event.
+
+The actual layers are 13 × 18. Museum wall height is 3 and the clear rectangles are [[3,4,10,11]] (the far edges are exclusive). All three placements remain declared: the remover, dark_sphere at (5,8), and hazards_demo at (5,9). Two instantiate; hazards_demo has no living scene. The dark sphere&#x27;s body constrains one adjacent lane; the route around the bench must be checked separately from the small removal model.
+
+## Evidence
+
+The independent continuation exports six complete removal histories, compares equal-sized masks, checks cancellation during the highlight and rapid presses, and retains the existing button, mask, replay, ownership, route and streaming checks. Its run receipt, captures, diagnostics and results are in `doc/space/remove-review-2026-09-12/`; the illustrated review is `/research/possible-bodies/random-remove.html`.
+
+Desktop pointer operation is distinct from tracked-hand reach. Headset reading, approach and Quest performance remain for a later visit. Preserve the raw run diagnostics alongside assertion results.
+
+
+## Paired sampling cases — 24 September 2026
+
+`sampling_hoppers` adds a matched set comparison beside the retained board. Both contain identities 1–8. Each uses its own RandomNumberGenerator, reset to seed 79. A pull crossing 28 degrees draws one candidate uniformly by list index; returning below 8 degrees rearms the lever. Busy motion and an empty pool reject extra draws. Pointer dragging and XR grabbing reuse lever_zero; selection is algorithmic, not physical mixing.
+
+The left pool retains the selected member, animates its return, and refuses another draw until that return completes. A miniature copy joins a twelve-entry record; the total continues beyond the retained window. The right removes the member from its pool at selection and moves its actual visual block into the record. Its eight unique members can be exhausted. Empty slots retain identity labels. Both animations are authored presentation, without RigidBody sorting or a claim of physical entropy.
+
+REPLAY BOTH kills active tweens, resets both independent generators, restores the sets and blocks, clears records and rearms controls. Thus first choices match because seed and eight-candidate bounds match. Later matching is not promised once pool sizes diverge. In-flight callbacks cannot append stale draws after replay. Each station uses a real grabbable lever with a pointer event path, at 1.05 m; reach remains subject to headset acceptance.
+
+Placement: cell (3,6), yaw 180 degrees. The existing board and removal arena remain at their original positions; all floor and utility cells are preserved.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Remove/intent.md">Raw captured source</a></p><pre>Concept: Eligibility is chosen before the random draw. Returning or removing the chosen member changes what future draws can select; connecting removal to collision changes what can support a body.
+Sequence: Random_Entropy -&gt; Random_Remove -&gt; Randomness_10_PRINT_Algorithm. From sorting a retained set, through changing its eligible members, to repeated choices between two diagonal marks.
+Primary: remove_random at (8,5), sampling_hoppers at (3,6), random_removal_arena at (8,17). The existing bench remains central, the paired cases stand beside it, and the glass-framed removal floor spans the basin behind. The hall is 17 by 26 cells with a permanent bypass.
+Discovery: Find an excluded cube; remove one and inspect its surviving address. Pull the two case levers and follow whether a selected member returns. Try for a repeat, then predict the last remaining candidate. Walk from an absent model cube to a floor cell whose collider also disappears.
+Critical: A return is a rule that makes another selection possible. Emptying the set turns the last choice into certainty without making the preceding order inevitable. A grey member may be protected from removal or excluded from opportunity, depending on the action. A retained address and an actual foothold are different kinds of persistence.
+Limits: The cases animate a seeded algorithmic draw; they do not physically mix or measure entropy. Their REPLAY BOTH restarts two independent generators at seed 79, restores candidates and clears records. The left records twelve recent draws; the right exhausts eight members. The older bench and floor keep their own controls. Headset reach and freely operated use remain unverified.
+Review: doc/book/iterations/2026-09-24-sampling-hoppers/index.html. Earlier intent preserved in this review&#x27;s before snapshot.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Remove/critical.md">Raw captured source</a></p><pre># The cube that cannot be chosen
+
+Choose a grey cube and keep looking at it. Others become red, then disappear. This one can remain through every press. Its survival is decided by the range, before any draw occurs.
+
+That distinction gives the argument a place on the board. An even draw among the sixteen amber candidates does not make the forty-eight excluded ones eligible. The code separates the filter, draw and removal. Each can be questioned in its own terms: why this set, what distribution within it, and what should happen to the selected thing?
+
+An excluded cube is protected from removal here. In another application, exclusion from a draw might withhold an opportunity. The colour alone cannot tell us which interpretation applies. The consequence of selection matters. Calling inclusion good or randomness fair before asking what the process does would discard precisely the distinction this bench lets us inspect.
+
+## Eight choices, different places
+
+ROW and COLUMN each offer eight candidates. With the same seed they select equal offsets from equally sized lists, yet they remove cubes along different axes. The count leaves this spatial difference undescribed, just as the previous room&#x27;s entropy reading omitted neighbours. Equal quantities need not supply interchangeable possibilities.
+
+There is also a small place for making. Stop before the set is exhausted. A partly emptied board may offer an opening, a rhythm or a broken symmetry you want to keep. Continue to the end and every range run reaches the same empty square. A rule made to demonstrate subtraction can furnish intermediate arrangements whose value the stopping condition never evaluates. The visitor can pause over one by withholding the next press.
+
+## The means of return
+
+The cube that disappears still has an instance slot. The source keeps its original transform. Removal changes the basis to zero; RESET restores it. There is no physical excavation of the museum floor, and no loss of every trace of the modelled cube. The word “remove” has a specific implementation here.
+
+The permanent slot plates retain addresses of absences. The status retains the last event, and `removal_log` retains the full sequence for code and review. These records answer different questions. Two orders can produce the same final empty range, leaving the board unable to distinguish their histories even while the program still can.
+
+Return depends on keeping things: original transforms, a seed, a generator, a candidate-list order and the filter. The ability to restore the visible body is carried by records that the visitor does not ordinarily see. This is one concrete answer to “what bodies are possible?” A body that can vanish and return is possible because the implementation retains the means of return.
+
+## A modest comparison to carry forward
+
+This instrument does not measure social fairness or an entropy threshold. It lets us test the narrower claim that equal sampling within a set cannot explain how that set was formed. A QFEP investigation would need named observations and an explicit measure before treating the gaps as evidence for a change in entropy.
+
+The next room makes a drawn choice move a walker. The path, the available directions and the boundary will each contribute to where the body can arrive. Keep asking which part of the possibility was chosen before the draw began.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Remove/artifacts.md">Raw captured source</a></p><pre># Artifacts in Random_Remove
+
+The instrument and the spatial encounter share a hall. Placements are source-grid metres; the entrance is at -Z.
+
+| Artifact | Role | Position (x, z) |
+|---|---|---|
+| `remove_random` | primary | (8, 5) |
+| `random_removal_arena` | primary | (8, 17) |
+
+The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Remove/summary.md">Raw captured source</a></p><pre># The set before the choice
+
+The existing 8×8 removal bench separates eligibility, random choice and visible removal. Sixteen amber cubes are admitted by RANGE; forty-eight grey cubes cannot be chosen. The controls stand to the right, with a cased account of the set and last event on the left. One press highlights a candidate, then zero-scales it while its slot plate and original transform remain.
+
+RESET restores the complete model and replays the named seed. ROW and COLUMN admit eight candidates each: the same seed gives equal list offsets but different spatial addresses. RANGE and ALL change the draw bounds as well as the set. NEW SEED can repeat. The full removal history exists in code; the visible plate retains only its last event.
+
+The final text follows a grey cube, observes removal, reads the filter separately from the draw, compares the two eight-choice masks and pauses over an unfinished pattern. A fully emptied range forgets the order in its visible shape. Random_Walk carries the question into successive movement.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Remove/blurb.md">Raw captured source</a></p><pre>Choose a cube that cannot disappear. Sixteen amber cubes can be drawn; forty-eight grey cubes cannot. Remove one, inspect the surviving address, then replay the run. ROW and COLUMN offer eight choices each while making different places available. Keep a pattern before the set empties: what did the rule decide before chance began?
+</pre></section></body></html>

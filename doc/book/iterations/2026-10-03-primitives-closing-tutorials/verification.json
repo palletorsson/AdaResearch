@@ -1,0 +1,232 @@
+{
+	"checks": [
+		{
+			"check": "Seven rings of eight positions, from floor to full height",
+			"passed": true
+		},
+		{
+			"check": "Every stored radius maps to its own evenly placed ring",
+			"passed": true
+		},
+		{
+			"check": "Column seams and both caps close with outward normals",
+			"passed": true
+		},
+		{
+			"check": "Four-sided constant profile encloses the independent expected volume 1 cubic metre",
+			"passed": true
+		},
+		{
+			"check": "Returned data is independent of the visible column",
+			"passed": true
+		},
+		{
+			"check": "Native capture: column.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: 0.22",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Printed profile edit changes only the middle ring, keeping height and side count",
+			"passed": true
+		},
+		{
+			"check": "Bulged profile still closes with correct lighting normals",
+			"passed": true
+		},
+		{
+			"check": "Native capture: bulge.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var height := 2.2",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Printed height edit scales only Y and keeps the base on the floor",
+			"passed": true
+		},
+		{
+			"check": "Native capture: height.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var sides := 8",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Resolution 4 preserves every radius and height and closes all faces",
+			"passed": true
+		},
+		{
+			"check": "Native capture: sides-4.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var sides := 8",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Resolution 6 preserves every radius and height and closes all faces",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var sides := 8",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Resolution 8 preserves every radius and height and closes all faces",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var sides := 8",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Resolution 12 preserves every radius and height and closes all faces",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: var sides := 8",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: column.gd",
+			"passed": true
+		},
+		{
+			"check": "Resolution 16 preserves every radius and height and closes all faces",
+			"passed": true
+		},
+		{
+			"check": "Native capture: sides-16.png",
+			"passed": true
+		},
+		{
+			"check": "Two-ring triangular case closes",
+			"passed": true
+		},
+		{
+			"check": "Documented profile and side bounds produce finite closed geometry",
+			"passed": true
+		},
+		{
+			"check": "No implicit column collider",
+			"passed": true
+		},
+		{
+			"check": "Prepared room still supplies a solid floor",
+			"passed": true
+		},
+		{
+			"check": "Three matching constructions; each closes six triangles around five corners",
+			"passed": true
+		},
+		{
+			"check": "Bodies use the declared local positions in the placed study frame",
+			"passed": true
+		},
+		{
+			"check": "Native capture: arrangement.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: Vector3(0, 0, -0.8)",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: arrangement.gd",
+			"passed": true
+		},
+		{
+			"check": "Printed Z edit brings an unchanged mesh forward",
+			"passed": true
+		},
+		{
+			"check": "Its projected height increases without scaling its geometry",
+			"passed": true
+		},
+		{
+			"check": "Native capture: forward.png",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: Vector3(0, 0, -0.8)",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: -1.15",
+			"passed": true
+		},
+		{
+			"check": "Edit target exists: 1.15",
+			"passed": true
+		},
+		{
+			"check": "Edited learner script compiles: arrangement.gd",
+			"passed": true
+		},
+		{
+			"check": "Printed spacing edit keeps floor height and all local geometry",
+			"passed": true
+		},
+		{
+			"check": "Native capture: close.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: side.png",
+			"passed": true
+		},
+		{
+			"check": "Changing viewpoint leaves the arrangement data and mesh intact",
+			"passed": true
+		},
+		{
+			"check": "Composition does not claim surface collision",
+			"passed": true
+		},
+		{
+			"check": "Authored defaults return in a fresh instance with no scene children",
+			"passed": true
+		},
+		{
+			"check": "Column also builds on an empty Node3D without a authored mesh",
+			"passed": true
+		}
+	],
+	"evidence": "Actual printed source edits compiled and run in the student room; native rendered captures.",
+	"godot": "4.6-stable (official)",
+	"passed": true,
+	"physical_headset_tested": false,
+	"scenes": [
+		"primitive_column.tscn",
+		"primitive_composition.tscn"
+	]
+}

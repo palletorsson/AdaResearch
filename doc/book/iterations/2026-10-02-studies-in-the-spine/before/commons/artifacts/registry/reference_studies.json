@@ -1,0 +1,315 @@
+{
+  "artifacts": {
+    "reference_suspension": {
+      "lookup_name": "reference_suspension",
+      "name": "A place still held",
+      "scene": "res://commons/artifacts/reference_studies/suspension.tscn",
+      "description": "Change the fragments. Keep every address. Independent chapter companion; use the reference-rooms desktop viewer.",
+      "sequence": "array_tutorial",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "array_tutorial"
+      ],
+      "signals": [
+        "state_changed"
+      ],
+      "parameters": {
+        "amount": "0–1, set_amount(value)"
+      },
+      "interactions": [
+        "Change amount in the inspector or supplied desktop viewer"
+      ],
+      "qfep_connection": "What can a grid preserve when its contents are no longer whole?",
+      "proposed_maps": [
+        "Array",
+        "Tutorial_3D"
+      ],
+      "minimum_display_bounds_m": [
+        5.4,
+        5.0,
+        5.4
+      ],
+      "reference_artist": "Mona Hatoum",
+      "status": "chapter companion; not installed in the spine"
+    },
+    "reference_passage": {
+      "lookup_name": "reference_passage",
+      "name": "Who fits through?",
+      "scene": "res://commons/artifacts/reference_studies/passage.tscn",
+      "description": "Change the opening. Keep the visitor the same size. Independent chapter companion; use the reference-rooms desktop viewer.",
+      "sequence": "transformation",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "transformation"
+      ],
+      "signals": [
+        "state_changed"
+      ],
+      "parameters": {
+        "amount": "0–1, set_amount(value)"
+      },
+      "interactions": [
+        "Change amount in the inspector or supplied desktop viewer"
+      ],
+      "qfep_connection": "When does a measurement become permission?",
+      "proposed_maps": [
+        "Trans_Scale",
+        "Trans_Body"
+      ],
+      "minimum_display_bounds_m": [
+        5.4,
+        3.6,
+        7.0
+      ],
+      "reference_artist": "Mirosław Bałka",
+      "status": "chapter companion; not installed in the spine"
+    },
+    "reference_landscape": {
+      "lookup_name": "reference_landscape",
+      "name": "A world from a cone",
+      "scene": "res://commons/artifacts/reference_studies/landscape.tscn",
+      "description": "Change the height. Keep the forest’s sites and parts. Independent chapter companion; use the reference-rooms desktop viewer.",
+      "sequence": "color",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "color"
+      ],
+      "signals": [
+        "state_changed"
+      ],
+      "parameters": {
+        "amount": "0–1, set_amount(value)"
+      },
+      "interactions": [
+        "Change amount in the inspector or supplied desktop viewer"
+      ],
+      "qfep_connection": "How little geometry does a world need before we believe in its scale?",
+      "proposed_maps": [
+        "Color_Context_Placed"
+      ],
+      "minimum_display_bounds_m": [
+        12,
+        4.5,
+        10
+      ],
+      "reference_artist": "Alex McLeod",
+      "status": "chapter companion; not installed in the spine"
+    },
+    "reference_pattern_garden": {
+      "lookup_name": "reference_pattern_garden",
+      "name": "The pattern crosses over",
+      "scene": "res://commons/artifacts/reference_studies/pattern_garden.tscn",
+      "description": "Move the pattern. Keep the flowers and room still. Independent chapter companion; use the reference-rooms desktop viewer.",
+      "sequence": "shaders",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "shaders"
+      ],
+      "signals": [
+        "state_changed"
+      ],
+      "parameters": {
+        "amount": "0–1, set_amount(value)"
+      },
+      "interactions": [
+        "Change amount in the inspector or supplied desktop viewer"
+      ],
+      "qfep_connection": "Does the pattern help you see the object, or make its boundary harder to follow?",
+      "proposed_maps": [
+        "Shader_05_Patterns"
+      ],
+      "minimum_display_bounds_m": [
+        12,
+        5.5,
+        10
+      ],
+      "reference_artist": "Claudia Hart",
+      "status": "chapter companion; not installed in the spine"
+    },
+    "reference_plural_body": {
+      "lookup_name": "reference_plural_body",
+      "name": "A body in the plural",
+      "scene": "res://commons/artifacts/reference_studies/plural_body.tscn",
+      "description": "Unfold the body. Keep its six arms and three heads. Independent chapter companion; use the reference-rooms desktop viewer.",
+      "sequence": "shaders",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "shaders"
+      ],
+      "signals": [
+        "state_changed"
+      ],
+      "parameters": {
+        "amount": "0–1, set_amount(value)"
+      },
+      "interactions": [
+        "Change amount in the inspector or supplied desktop viewer"
+      ],
+      "qfep_connection": "Which attachments can change while we continue to recognise a body?",
+      "proposed_maps": [
+        "Shader_11_QueerRubber",
+        "Shader_12_PinkExtravaganza"
+      ],
+      "minimum_display_bounds_m": [
+        6,
+        4.5,
+        5
+      ],
+      "reference_artist": "Peaches & Pussykrew",
+      "status": "chapter companion; not installed in the spine"
+    },
+    "kapoor_void_studies": {
+      "map_ready": false,
+      "include_in_map_data": false,
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "reference_artist": "Anish Kapoor",
+      "scene": "res://commons/artifacts/kapoor_void_studies/kapoor_void_studies.tscn",
+      "related_study_scene": "res://commons/artifacts/kapoor_void_studies/boolean_eggs.tscn",
+      "bounds": [
+        25,
+        6,
+        10
+      ],
+      "status": "chapter companion with Boolean egg counterpoint; not installed in the spine"
+    },
+    "boolean_eggs": {
+      "lookup_name": "boolean_eggs",
+      "name": "Boolean Eggs — a darkness held",
+      "scene": "res://commons/artifacts/kapoor_void_studies/boolean_eggs_museum.tscn",
+      "description": "Three deep-colour CSG ovoids on a colliding low plinth: union, intersection and a genuinely concave subtraction whose interior material removes lighting cues.",
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "boolean",
+        "colour",
+        "void",
+        "reference-study"
+      ],
+      "minimum_display_bounds_m": [
+        7.84,
+        4.8,
+        3.24
+      ],
+      "reference_artist": "Anish Kapoor (original response, not a reconstruction)",
+      "interactions": [
+        "Walk around the three forms; compare the lit rim with the unlit cavity."
+      ],
+      "parameters": {},
+      "signals": [],
+      "qfep_connection": "The deterministic cut makes a boundary; its material decides which depth cues remain visible.",
+      "status": "Installed in Boolean_Works; desktop capture verified separately from headset acceptance."
+    },
+    "conical_sightline": {
+      "lookup_name": "conical_sightline",
+      "name": "One cut, three rooms",
+      "scene": "res://commons/artifacts/conical_sightline/conical_sightline.tscn",
+      "description": "Three walls receive one conical cutter; a witness display retains the intersections. An original study after Conical Intersect, not a reconstruction.",
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "reference_artist": "Gordon Matta-Clark",
+      "proposed_maps": [
+        "Boolean_Works"
+      ],
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [
+        18.6,
+        5.4,
+        11
+      ],
+      "parameters": {
+        "cut_x": "Shared cutter X offset, -0.65 to 0.85 metres; set_cut_x(value).",
+        "cut_enabled": "Before/cut comparison; set_cut_enabled(value)."
+      },
+      "interactions": [
+        "Use the separate study.tscn desktop viewer: Approach, Inside, Offcuts, Before / cut, Shift cut, Reset."
+      ],
+      "signals": [],
+      "tags": [
+        "boolean",
+        "architecture",
+        "sightline",
+        "reference-study"
+      ],
+      "qfep_connection": "One deterministic cut changes relations between several spaces; permission and historical loss are not computed by it.",
+      "status": "Native Godot companion, 17 desktop checks passed; not installed in the museum."
+    },
+    "colour_assembly": {
+      "lookup_name": "colour_assembly",
+      "name": "Room to gather",
+      "scene": "res://commons/artifacts/colour_assembly/colour_assembly.tscn",
+      "study_scene": "res://commons/artifacts/colour_assembly/study.tscn",
+      "description": "Twelve persistent framed colour panels: canopy, upright screens or an open centre. Arrangement and colour grouping are independently changeable.",
+      "category": "reference_studies",
+      "sequence": "color",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "reference_artist": "Liam Gillick (original response, not a reconstruction)",
+      "proposed_maps": ["Color_Walls"],
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [10.6, 6.3, 10],
+      "parameters": {
+        "arrangement": "set_arrangement(0..2): Canopy, Screens, Gathering",
+        "colour_rule": "set_colour_rule(0..2): Alternating, Groups of three, One colour"
+      },
+      "interactions": [
+        "Use the separate study.tscn desktop gallery to compare arrangement and colour, walk with WASD and mouse, and reset."
+      ],
+      "signals": ["state_changed(arrangement, colour_rule)"],
+      "tags": ["array", "colour", "assembly", "architecture", "reference-study"],
+      "qfep_connection": "A deterministic arrangement distributes positions and passages; naming its open centre Gathering cannot establish who gets to occupy or change it.",
+      "status": "Native companion; 33 behaviour checks and 13 captures passed. Proposed for Color_Walls; not installed."
+    },
+    "colour_wall_studies": {
+      "lookup_name": "colour_wall_studies",
+      "name": "Wall relations",
+      "scene": "res://commons/artifacts/colour_wall_studies/colour_wall_studies.tscn",
+      "study_scene": "res://commons/artifacts/colour_wall_studies/study.tscn",
+      "description": "Three original studies after Gillick: 24 coloured rails with adjustable spacing, a crossing with variable depth, and a twelve-segment composition with one reversible omission.",
+      "category": "reference_studies",
+      "sequence": "color",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "proposed_maps": ["Color_Walls"],
+      "reference_artist": "Liam Gillick (original responses, not reconstructions)",
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [17.2, 3.4, 1.1],
+      "parameters": {
+        "spacing": "set_spacing(0.11..0.21), distance between vertical rail centres in metres",
+        "projection": "set_projection(0.18..0.52), local Z for the crossing's vertical members",
+        "omitted": "set_omitted(bool), visibility and collision of rail index 5",
+        "colour_rule": "set_colour_rule(0..2): Sequence, Groups, All pink"
+      },
+      "interactions": ["Use study.tscn to compare each operation, change colour independently, walk and reset."],
+      "signals": ["state_changed"],
+      "tags": ["colour", "array", "wall", "composition", "shadow", "reference-study"],
+      "qfep_connection": "A legible geometric assembly can suggest an organised process without revealing the labour, authority or production it seems to diagram.",
+      "status": "Independent native companion; 19 behaviour checks and 12 image saves passed. Not installed in a museum hall."
+    }
+  }
+}

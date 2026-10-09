@@ -1,0 +1,17 @@
+--- before/commons/maps/Point_Lines/technical.md
++++ after/commons/maps/Point_Lines/technical.md
+@@ -167,3 +167,14 @@
+ The main reading's monitors are the four live camera studies in `line_space_workshop`, placed at source cell `(16,16)`. Their private three-dimensional line arrangements animate through crossings, separated joins and changes of plane. They are distinct from the secondary `sketch_monitor` with its parallel scan lines and from the three `perspective_lines` placements. See the [workshop source notes](../../artifacts/line_space_workshop/README.md).
+ 
+ The chapter follows a headset visit. `player_trace` reads the headset's horizontal position and the rig origin for height; on desktop its actual fallback follows the walker. The platform distinction remains here rather than interrupting the walking passage.
++
++
++## Four-view gallery — 26 September 2026
++
++The map is 27 × 37 cells, retaining the original first nine rows at their coordinates. Its rear partitions are replaced by open floor. Four sightlines run through x=5.5, 10.5, 15.5 and 20.5. `line_relations_gallery` is pinned at (13,17); its wall drawings are authored for this placement and room size, not advertised as portable to arbitrary walls.
++
++`line_body.gd` extends production XRToolsPickable. `span` determines the same local-X endpoints across stick, plank, light, measure and beam skins. The visible body and its BoxShape3D pickup envelope are explicit; narrow bodies have a minimum 7 cm pickup envelope. The bodies use Dynamic World and Pickable Objects layers (mask 6), do not obstruct the layer-1 walking capsule, and freeze where released. This is a spatial arrangement table at room scale, not a simulation of timber weight. The light skin is an emissive mesh. Graduations are at 10 cm pitch in an unscaled placement. No global pickup or laser implementation was changed.
++
++There are twenty pickable bodies: four for plus/X, four for parallel planks/measures, three for upright/horizon, six for the planar grid and three for depth. The paired sticks are separated by 7–8 cm in depth, so their projected crossing is not a claim that ideal lines intersect in space. The fixed wall drawings are separate meshes; they do not dynamically project the moved rods.
++
++The floor mark runs to the east wall and up its face. The wall's existing structural collider blocks a walking capsule; the paint has no obedience scoring or teleport behavior. The exit remains clear. Automatic dream-body sculptures are excluded only in this hall to preserve these paths.

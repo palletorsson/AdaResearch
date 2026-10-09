@@ -1,0 +1,22 @@
+--- doc/book/iterations/claude-softbodies-softbodies_cloth_physics-pilot/before/soft_workshop.gd	2026-09-23 18:42:46.946937300 +0200
++++ commons/artifacts/timing_machines/soft_workshop.gd	2026-09-23 18:43:45.325011600 +0200
+@@ -125,6 +125,10 @@
+ 		"cloth":
+ 			match id:
+ 				"PINS":_cloth_pins((pin_mode+1)%2)
++				# The five rigs cloth_straps already builds. Nothing here touches a pin:
++				# _cloth_pins reads mesh coordinates, so the cloth cannot know the frame
++				# changed. That is the comparison this control exists to make available.
++				"SUPPORT":model.apply_grid_config({"suspension":["gantry","none","hoop","mast","wall"][_next(id,5)]})
+ 				"RELEASE":_cloth_pins(2)
+ 				"STIFFNESS":
+ 					var value: float=[0.5,0.1,0.9][_next(id,3)]
+@@ -202,7 +206,7 @@
+ 	if readout==null or not ready_for_input:return
+ 	match chapter:
+ 		"deformation":readout.text="stiffness %.2f | damping %.2f\npressure %.2f | mill drive %s" % [model.stiffness,model.damping,model.pressure,"held" if drive_held else "running"]
+-		"cloth":readout.text="%d cloth strips | pins: %s\nFour samples: %s landing\nREBUILD restores strips, not elapsed time" % [_bodies(model).size(),["top row","top corners","released"][pin_mode],other.landing]
++		"cloth":readout.text="%d cloth strips | support: %s | pins: %s\nFour samples: %s landing | REBUILD restores strips\nPins are read from mesh coordinates, not from the frame" % [_bodies(model).size(),model.suspension,["top row","top corners","released"][pin_mode],other.landing]
+ 		"carousel":readout.text="Hub %.2f radians / second\nSTOP holds drive; gravity and bodies continue\nCloth beside it keeps a fixed support" % model.ride_speed
+ 		"breathing":readout.text="Pressure amplitude %.2f | rate %.2f\nDrive %s | physics continues\nSelected vertices stay pinned in the scene" % [model.breath_amplitude,model.breath_speed,"held" if drive_held else "running"]
+ 		"contact":readout.text="Group %d | %d bodies | variation %s\nDeflation/respawn disabled in this study\nHOLD pins current vertices" % [model.gallery_part,model.active_soft_bodies.size(),str(model.lesson_variation)]

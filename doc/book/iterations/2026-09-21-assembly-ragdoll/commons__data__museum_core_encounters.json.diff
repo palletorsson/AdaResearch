@@ -1,0 +1,22 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2548,14 +2548,14 @@
+       "primary_tokens": [
+         "MolecularDesigner"
+       ],
+-      "reason": "Take a hand, move it, let it stay. Which relations still decide the body?",
++      "reason": "Take a hand and change a position, a neighbour, then a physical relation. Compare a pose that stays with a connected body that falls.",
+       "status": "runtime_checked_draft",
+       "sequence": "postfoundationscrisis",
+       "text_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+-      "text_sha256": "2d47bf52225768294ce391a5d8e4caeecd81beedab650b414d8353799bed6c66",
+-      "map_sha256": "a616a74d652b3c265ea7663cf623b7d476591b5251759144bf983d5e17cd8c87",
+-      "learner_verified": false,
+-      "review_report": "doc/book/iterations/2026-09-21-assembly-belonging/SUMMARY.md"
++      "text_sha256": "66adac561a8f4a4955a00a58e4e6de3c2b1e3bc88222513ccaa0f4fc9f3291d8",
++      "map_sha256": "e0809bedef2c99afc394ed7da7676db4ef34c3e17ad16c0bb928f5d316990733",
++      "learner_verified": false,
++      "review_report": "doc/book/iterations/2026-09-21-assembly-ragdoll/SUMMARY.md"
+     },
+     "PostCrisis_Synthesis": {
+       "primary_tokens": [

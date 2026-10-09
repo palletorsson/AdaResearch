@@ -1,0 +1,186 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,70 +1,141 @@
+-# Portals — how close is useful?
++# Choose a useful limit
+
+-**Learning elements — proposed focus**
++## Learning elements
+
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- A closed neighbour loop
++- Error in a stated unit
++- A while loop with a stopping rule
++- A finite work budget
+
+-- Perimeter accumulation
+-- Finite resolution
+-- Tolerance
+-- Stopping criteria
++## In the museum
+
+-The sphere became rounder as we added divisions. How many would be enough for something we want to make?
++A circle's perimeter offers a question that a finite polygon can answer approximately. How many sides are enough for a chosen measurement? The hall's encounters with limits give that question a wider setting; our program makes one bounded decision visible.
+
+-Open `primitive_portals.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). A pink hexagon sits inside a grey circle guide. This is a reduced version of the planar comparison beside the museum's rings.
++Reuse Circle.make from Columns and LineSkin from Lines. There is no new shape factory. Add the lengths between neighbouring samples, including the last sample back to the first.
+
+-## 1. Follow the closed line
++## Make this study
+
+-Open `studies/primitive_portals/perimeter.gd`. A supplied sampler gives us six positions equally spaced around a circle of radius one metre. They are in order; the first position is not repeated at the end.
++Attach lesson.gd to a unit-scale Node3D named LimitStudy in this museum hall. The polygon is drawn horizontally at hand height. TOLERANCE is an absolute perimeter error in metres; BUDGET is the maximum number of sides this run may use.
+
+-We reuse the segment from Lines. To measure the whole boundary, we add the distances between neighbours, then close the line:
++Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.
+
++### The program
++
++<!-- student-code:lesson.gd -->
+ ```gdscript
+-func polygon_perimeter(positions: Array[Vector3]) -> float:
++extends Node3D
++const Circle = preload("circle_samples.gd")
++const LineSkin = preload("line_skin.gd")
++const RADIUS := 0.7
++const TOLERANCE := 0.01
++const BUDGET := 96
++var sides := 3
++var points: Array[Vector3] = []
++var error := 0.0
++var met := false
++var message := Label3D.new()
++
++func _ready() -> void:
++    choose_resolution(TOLERANCE, BUDGET)
++    for i in range(points.size()):
++        var a := points[i] + Vector3(0, 1.1, 0)
++        var b := points[(i + 1) % points.size()] + Vector3(0, 1.1, 0)
++        var line := LineSkin.new()
++        add_child(line)
++        line.show_segment(a, b - a, a.distance_to(b))
++    add_child(message)
++    message.position = Vector3(0, 1.8, 0)
++    message.pixel_size = 0.002
++    message.text = "%d sides; error %.5f m; met: %s" % [sides, error, str(met)]
++
++func perimeter(record: Array[Vector3]) -> float:
+     var total := 0.0
+-    for i in range(positions.size() - 1):
+-        total += positions[i].distance_to(positions[i + 1])
+-    total += positions[positions.size() - 1].distance_to(positions[0])
++    for i in range(record.size()):
++        total += record[i].distance_to(record[(i + 1) % record.size()])
+     return total
++
++func choose_resolution(tolerance: float, budget: int) -> void:
++    assert(tolerance > 0.0 and budget >= 3)
++    sides = 3
++    while true:
++        points = Circle.make(sides, RADIUS)
++        error = absf(TAU * RADIUS - perimeter(points))
++        met = error <= tolerance
++        if met or sides == budget:
++            break
++        sides = mini(sides * 2, budget)
+ ```
+
+-The loop measures all but the closing edge. The next line measures from the last position back to the first. Together they make the **perimeter**. This function takes a list and returns a number; it does not change the list or draw anything.
++### Dependency: circle_samples.gd
+
+-The hexagon's perimeter is about six metres. The corresponding circle's circumference is about 6.283185 metres. The straight edges take a shorter route.
+-
+-## 2. Add sides
+-
+-Find the settings:
+-
++<!-- student-code:circle_samples.gd -->
+ ```gdscript
+-var divisions := 6
+-var radius := 1.0
+-var tolerance := 0.01
++extends RefCounted
++# Supplied circle sampler. Angles return in the Waves sequence.
++static func make(sides: int, radius: float) -> Array[Vector3]:
++    assert(sides >= 3 and radius > 0.0)
++    var points: Array[Vector3] = []
++    for side in range(sides):
++        var angle := TAU * side / sides
++        points.append(Vector3(cos(angle), 0, sin(angle)) * radius)
++    return points
+ ```
+
+-Change `divisions` to `12`, then `24`, then `48`, running the scene after each edit. Keep the radius fixed. Watch the corners become less visible and the measured shortfall decrease. Walk closer when a corner becomes hard to see.
++### Dependency: line_skin.gd
+
+-Each doubling uses twice as many segments. More detail has a construction cost, though a segment count alone does not tell us the frame rate.
++<!-- student-code:line_skin.gd -->
++```gdscript
++# Supplied renderer, adapted from commons/primitives/line/line.gd.
++# This finite cylinder gives the segment a visible thickness. It is not a collider.
++# Inputs share the parent station's local frame; that station has unit scale.
++extends MeshInstance3D
+
+-The grey guide stays at 256 segments throughout. It is another finite drawing, not the exact circle against which the number is calculated.
++func _init() -> void:
++	var cylinder := CylinderMesh.new()
++	cylinder.top_radius = 0.012
++	cylinder.bottom_radius = 0.012
++	cylinder.radial_segments = 16
++	cylinder.rings = 0
++	mesh = cylinder
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = Color(0.98, 0.70, 0.82)
++	finish.roughness = 0.3
++	material_override = finish
++	visible = false
+
+-## 3. Choose what counts as enough
+-
+-The script compares the measured perimeter with the circumference formula:
+-
+-```gdscript
+-    var circle_length := TAU * radius
+-    gap = circle_length - perimeter
++func show_segment(start: Vector3, displacement: Vector3, distance: float) -> void:
++	# A zero-length segment has no direction. Do not normalize it.
++	visible = distance > 0.0001
++	if not visible:
++		return
++	(mesh as CylinderMesh).height = distance
++	position = start + displacement * 0.5
++	# CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
++	var direction := displacement / distance
++	var right := direction.cross(Vector3.UP).normalized()
++	if right.length() < 0.001:
++		right = Vector3.RIGHT
++	var depth := right.cross(direction).normalized()
++	basis = Basis(right, direction, depth)
+ ```
+
+-`TAU` is Godot's approximation to 2π. The gap is a difference between total lengths, in metres. It is not the visible distance from a pink edge to the grey guide.
++## Read the construction
+
+-A **tolerance** is the difference we agree to accept. The supplied readout says *within tolerance* when `gap <= tolerance`. With `0.01`, 48 sides is the first of our four trials to pass.
++`(i + 1) % record.size()` wraps the last index to zero. Without that closing edge, the sum would measure an open path. `perimeter` returns one number rather than creating geometry.
+
+-Keep 48 sides and change the tolerance to `0.001`. Run again. The same polygon now falls outside the requirement. We changed the decision, not the geometry.
++The program compares that sum with `TAU * RADIUS`, the floating-point circle circumference used as its numerical reference. Starting with three sides, it doubles the side count, stopping at the budget if a doubling would exceed it. After each new polygon it recomputes error.
+
+-In exact geometry, these polygons approach the circle without becoming it. The displayed numbers also have limited precision. Neither a pleasing outline nor a passing comparison makes the construction exact.
++There are two honest endings: the requested tolerance is met, or the available work is spent. `met` records which happened. A very small tolerance and a small budget should report false, not run forever or silently claim success. The budget counts samples, not elapsed GPU time.
+
+-The sampler and display are supplied, with their source included. You own the perimeter calculation and the settings. The museum's torus ladder and halving track give other ways to encounter a limit; this study measures neither their surfaces nor their motion.
++This does not calculate every digit of pi or prove a limit. Both the circle reference and the sampled coordinates use finite precision. It makes the choice of an adequate approximation inspectable.
+
+-We can now give a construction a purpose and a stopping criterion. Melencolia gathers these tools and asks what we want to do with them.
++## Make it your own
++
++Compare tolerances 0.05 and 0.005 with the same radius and budget. Then request 0.000001 with a budget of twelve. Predict which run will exhaust its budget. Explain what “enough” means in each case and why the last case must still stop.
++
++Carry the ability to name a criterion and a limit. The final Primitives hall gives you room to decide what to make with the constructions already available.
++
++## Source and scope
++
++The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.
++

@@ -1,0 +1,24 @@
+{
+  "id": "Fractal_Synthesis",
+  "decision": "draft",
+  "mode": "reuse",
+  "object": "A reconstructable account of repeated geometric work.",
+  "change": "Describe one construction precisely enough to predict its next step, separating input, descendants, placement and stopping rule.",
+  "dependsOn": [
+    "Fractal_CantorSet",
+    "Fractal_RecursiveTrees"
+  ],
+  "reuses": "Interval replacement and retained history.; Parent/child construction and inherited parameters.",
+  "given": "interval display; fixed tree; history controls",
+  "later": "Do not explain every visible artifact. An editable cross-procedure comparison is future work; the current hall supports describing and reading existing constructions.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A reconstructable account of repeated geometric work.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "",
+  "baseline": {
+    "tutorial": "c0a689da4fad2569b1400c51088579b8cc15c59ebfecb6ba9f860be960e78a19",
+    "choice": "da2eab2a32bef9bacc62b9a509e96b01e4592afcf15b8774372824be790fafe6"
+  },
+  "summary": "Choose one known construction and state its inputs, descendants, placement and stopping rule clearly enough to predict the next step. Change one of these while keeping the others fixed and compare retained history with current state. Reference displays are supplied. Carry a reconstructable recipe into L-systems; this consolidation asks the learner to explain their own operation rather than acquire another fractal by copying."
+}

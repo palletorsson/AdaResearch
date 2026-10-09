@@ -1,0 +1,2342 @@
+{
+  "checks": 99,
+  "failures": [],
+  "headset_verified": false,
+  "map": "Fractal_MengerSponge",
+  "measurements": {
+    "captures": {
+
+    },
+    "constructions": [
+      {
+        "build_ms": 1.299,
+        "count": 1,
+        "cut": 0,
+        "edge": 9.0,
+        "volume": 729.0
+      },
+      {
+        "build_ms": 3.975,
+        "count": 20,
+        "cut": 1,
+        "edge": 3.0,
+        "volume": 540.0
+      },
+      {
+        "build_ms": 37.712,
+        "count": 400,
+        "cut": 2,
+        "edge": 1.0,
+        "volume": 400.0
+      }
+    ],
+    "cross above the front face": {
+      "finish": "(1.98005, 9.557874, 7.974586)",
+      "frames": 276,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(13.01995, 9.557951, 7.974585)",
+      "target": 2.0
+    },
+    "descend to the rear landing": {
+      "finish": "(7.500004, 0.079168, 18.93457)",
+      "frames": 256,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.500004, 10.3199, 18.93457)",
+      "target": 0.08
+    },
+    "enter the ground doorway": {
+      "finish": "(7.5, 0.001663, 7.934591)",
+      "frames": 32,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.5, 0.05, 6.5)",
+      "target": 7.9
+    },
+    "flight": {
+      "central_passage": true,
+      "cube_edge": 12,
+      "headset_verified": false,
+      "specimen_edge": 9,
+      "speed": 2.4
+    },
+    "fly along the east side": {
+      "finish": "(13.01995, 9.557951, 7.974585)",
+      "frames": 274,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(13.01995, 9.558857, 18.93456)",
+      "target": 8.0
+    },
+    "fly along the west side": {
+      "finish": "(1.98005, 9.557634, 18.93456)",
+      "frames": 274,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(1.98005, 9.557874, 7.974586)",
+      "target": 18.9
+    },
+    "fly through the central passage": {
+      "finish": "(7.5, 3.601789, 18.93456)",
+      "frames": 275,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.5, 3.601661, 7.934591)",
+      "target": 18.9
+    },
+    "inventory": [
+      {
+        "meshes": [],
+        "position": "(4.5, 0.0, 8.5)",
+        "token": "diffusion_limited_aggregation"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@771",
+            "position": [
+              1.0,
+              0.0,
+              6.0
+            ],
+            "size": [
+              1.0,
+              0.100000001490116,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@772",
+            "position": [
+              1.0,
+              0.100000001490116,
+              6.93000030517578
+            ],
+            "size": [
+              1.0,
+              0.0199999958276749,
+              0.0699996948242188
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@773",
+            "position": [
+              1.0,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              1.0,
+              0.0199999958276749,
+              0.0699996948242188
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@774",
+            "position": [
+              1.9300000667572,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              0.0699999332427979,
+              0.0199999958276749,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@775",
+            "position": [
+              0.999999940395355,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              0.0699999928474426,
+              0.0199999958276749,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@776",
+            "position": [
+              1.0900000333786,
+              0.103000000119209,
+              6.09000015258789
+            ],
+            "size": [
+              0.819999933242798,
+              0.00599999725818634,
+              0.819999694824219
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@777",
+            "position": [
+              1.0699999332428,
+              0.125,
+              6.06999969482422
+            ],
+            "size": [
+              0.860000133514404,
+              0.0180000066757202,
+              0.860000610351563
+            ]
+          }
+        ],
+        "position": "(1.5, 0.0, 10.5)",
+        "token": "catalyst_prompter_box"
+      },
+      {
+        "meshes": [
+          {
+            "name": "Floor",
+            "position": [
+              1.5,
+              -0.0599999986588955,
+              3.5
+            ],
+            "size": [
+              12.0,
+              0.0599999986588955,
+              12.0
+            ]
+          },
+          {
+            "name": "Roof",
+            "position": [
+              1.5,
+              11.8199996948242,
+              3.5
+            ],
+            "size": [
+              12.0,
+              0.239999771118164,
+              12.0
+            ]
+          },
+          {
+            "name": "Side",
+            "position": [
+              1.43999981880188,
+              0.0,
+              3.5
+            ],
+            "size": [
+              0.059999942779541,
+              12.0,
+              12.0
+            ]
+          },
+          {
+            "name": "DoorWing",
+            "position": [
+              1.5,
+              0.0,
+              3.4399995803833
+            ],
+            "size": [
+              4.5,
+              12.0,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@782",
+            "position": [
+              9.0,
+              0.0,
+              3.4399995803833
+            ],
+            "size": [
+              4.5,
+              12.0,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "DoorLintel",
+            "position": [
+              6.0,
+              2.60000038146973,
+              3.4399995803833
+            ],
+            "size": [
+              3.0,
+              9.39999961853027,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "Landing",
+            "position": [
+              6.0,
+              -0.0500000007450581,
+              3.0
+            ],
+            "size": [
+              3.0,
+              0.0500000007450581,
+              1.0
+            ]
+          },
+          {
+            "name": "DoorFrame",
+            "position": [
+              5.92000007629395,
+              0.0,
+              3.46000003814697
+            ],
+            "size": [
+              0.0799999237060547,
+              2.59999990463257,
+              0.0799999237060547
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@787",
+            "position": [
+              9.0,
+              0.0,
+              3.46000003814697
+            ],
+            "size": [
+              0.0799999237060547,
+              2.59999990463257,
+              0.0799999237060547
+            ]
+          },
+          {
+            "name": "DoorFrameTop",
+            "position": [
+              5.92000007629395,
+              2.55999994277954,
+              3.46000003814697
+            ],
+            "size": [
+              3.15999984741211,
+              0.0799999237060547,
+              0.0799999237060547
+            ]
+          },
+          {
+            "name": "FloorEdge",
+            "position": [
+              1.5,
+              0.0150000005960464,
+              3.48000001907349
+            ],
+            "size": [
+              4.5,
+              0.0399999991059303,
+              0.0399999618530273
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@788",
+            "position": [
+              9.0,
+              0.0150000005960464,
+              3.48000001907349
+            ],
+            "size": [
+              4.5,
+              0.0399999991059303,
+              0.0399999618530273
+            ]
+          },
+          {
+            "name": "TopEdgeX",
+            "position": [
+              1.5,
+              11.9700002670288,
+              3.46999979019165
+            ],
+            "size": [
+              12.0,
+              0.0599994659423828,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "EdgeZ",
+            "position": [
+              1.47000002861023,
+              0.00500000081956387,
+              3.5
+            ],
+            "size": [
+              0.059999942779541,
+              0.0599999949336052,
+              12.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@789",
+            "position": [
+              1.47000002861023,
+              11.9700002670288,
+              3.5
+            ],
+            "size": [
+              0.059999942779541,
+              0.0599994659423828,
+              12.0
+            ]
+          },
+          {
+            "name": "Upright",
+            "position": [
+              1.46000003814697,
+              0.0,
+              3.46000003814697
+            ],
+            "size": [
+              0.0799999237060547,
+              12.0,
+              0.0799999237060547
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@790",
+            "position": [
+              1.46000003814697,
+              0.0,
+              15.4599990844727
+            ],
+            "size": [
+              0.0799999237060547,
+              12.0,
+              0.0800018310546875
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@791",
+            "position": [
+              13.5000009536743,
+              0.0,
+              3.5
+            ],
+            "size": [
+              0.0599994659423828,
+              12.0,
+              12.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@794",
+            "position": [
+              1.5,
+              0.0,
+              15.5
+            ],
+            "size": [
+              4.5,
+              12.0,
+              0.0600013732910156
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@797",
+            "position": [
+              9.0,
+              0.0,
+              15.5
+            ],
+            "size": [
+              4.5,
+              12.0,
+              0.0600013732910156
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@800",
+            "position": [
+              6.0,
+              2.60000038146973,
+              15.5
+            ],
+            "size": [
+              3.0,
+              9.39999961853027,
+              0.0600013732910156
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@803",
+            "position": [
+              6.0,
+              -0.0500000007450581,
+              15.0
+            ],
+            "size": [
+              3.0,
+              0.0500000007450581,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@806",
+            "position": [
+              5.92000007629395,
+              0.0,
+              15.4599990844727
+            ],
+            "size": [
+              0.0799999237060547,
+              2.59999990463257,
+              0.0800018310546875
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@807",
+            "position": [
+              9.0,
+              0.0,
+              15.4599990844727
+            ],
+            "size": [
+              0.0799999237060547,
+              2.59999990463257,
+              0.0800018310546875
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@808",
+            "position": [
+              5.92000007629395,
+              2.55999994277954,
+              15.4599990844727
+            ],
+            "size": [
+              3.15999984741211,
+              0.0799999237060547,
+              0.0800018310546875
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@809",
+            "position": [
+              1.5,
+              0.0150000005960464,
+              15.4799995422363
+            ],
+            "size": [
+              4.5,
+              0.0399999991059303,
+              0.0400009155273438
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@810",
+            "position": [
+              9.0,
+              0.0150000005960464,
+              15.4799995422363
+            ],
+            "size": [
+              4.5,
+              0.0399999991059303,
+              0.0400009155273438
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@811",
+            "position": [
+              1.5,
+              11.9700002670288,
+              15.4699993133545
+            ],
+            "size": [
+              12.0,
+              0.0599994659423828,
+              0.0600013732910156
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@812",
+            "position": [
+              13.4700002670288,
+              0.00500000081956387,
+              3.5
+            ],
+            "size": [
+              0.0599994659423828,
+              0.0599999949336052,
+              12.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@813",
+            "position": [
+              13.4700002670288,
+              11.9700002670288,
+              3.5
+            ],
+            "size": [
+              0.0599994659423828,
+              0.0599994659423828,
+              12.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@814",
+            "position": [
+              13.460000038147,
+              0.0,
+              3.46000003814697
+            ],
+            "size": [
+              0.0799999237060547,
+              12.0,
+              0.0799999237060547
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@815",
+            "position": [
+              13.460000038147,
+              0.0,
+              15.4599990844727
+            ],
+            "size": [
+              0.0799999237060547,
+              12.0,
+              0.0800018310546875
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@817",
+            "position": [
+              5.05000019073486,
+              2.84999990463257,
+              3.39499998092651
+            ],
+            "size": [
+              4.89999961853027,
+              0.800000190734863,
+              0.0500001907348633
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@819",
+            "position": [
+              5.05000019073486,
+              2.84999990463257,
+              3.55499982833862
+            ],
+            "size": [
+              4.89999961853027,
+              0.800000190734863,
+              0.0500001907348633
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@821",
+            "position": [
+              5.05000019073486,
+              2.84999990463257,
+              15.5550003051758
+            ],
+            "size": [
+              4.89999961853027,
+              0.800000190734863,
+              0.0499992370605469
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@823",
+            "position": [
+              5.05000019073486,
+              2.84999990463257,
+              15.3950004577637
+            ],
+            "size": [
+              4.89999961853027,
+              0.800000190734863,
+              0.0499992370605469
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@847",
+            "position": [
+              10.1399993896484,
+              0.889999985694885,
+              2.48000001907349
+            ],
+            "size": [
+              1.1200008392334,
+              0.120000004768372,
+              0.439999580383301
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@850",
+            "position": [
+              11.0799999237061,
+              0.0,
+              2.54999971389771
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@853",
+            "position": [
+              10.2399997711182,
+              0.0,
+              2.54999971389771
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.9711246490479,
+              1.03925001621246,
+              2.77112483978271
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.985499382019,
+              1.05074989795685,
+              2.78549957275391
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.9739999771118,
+              1.05483615398407,
+              2.77399969100952
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.6511249542236,
+              1.03925001621246,
+              2.77112483978271
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.6654996871948,
+              1.05074989795685,
+              2.78549957275391
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.6540002822876,
+              1.05483615398407,
+              2.77399969100952
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.3311243057251,
+              1.03925001621246,
+              2.77112483978271
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.3454990386963,
+              1.05074989795685,
+              2.78549957275391
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.3339996337891,
+              1.05483615398407,
+              2.77399969100952
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.9711246490479,
+              1.03925001621246,
+              2.54112529754639
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.985499382019,
+              1.05074989795685,
+              2.55550003051758
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.9739999771118,
+              1.05483615398407,
+              2.54400014877319
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.6511249542236,
+              1.03925001621246,
+              2.54112529754639
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.6654996871948,
+              1.05074989795685,
+              2.55550003051758
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.6540002822876,
+              1.05483615398407,
+              2.54400014877319
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              10.3311243057251,
+              1.03925001621246,
+              2.54112529754639
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              10.3454990386963,
+              1.05074989795685,
+              2.55550003051758
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              10.3339996337891,
+              1.05483615398407,
+              2.54400014877319
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@867",
+            "position": [
+              10.1399993896484,
+              0.824999988079071,
+              2.45250034332275
+            ],
+            "size": [
+              1.1200008392334,
+              0.149999976158142,
+              0.0249996185302734
+            ]
+          },
+          {
+            "name": "Glass",
+            "position": [
+              10.1099996566772,
+              1.12255263328552,
+              3.01675605773926
+            ],
+            "size": [
+              1.18000030517578,
+              0.294894695281982,
+              0.206487655639648
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@869",
+            "position": [
+              10.0900001525879,
+              1.10321927070618,
+              2.99987888336182
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222835540771484
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@870",
+            "position": [
+              10.0900001525879,
+              1.4144971370697,
+              3.2178373336792
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222835540771484
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@871",
+            "position": [
+              11.2919998168945,
+              1.10977244377136,
+              3.00446701049805
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@872",
+            "position": [
+              10.0919990539551,
+              1.10977244377136,
+              3.00446701049805
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@873",
+            "position": [
+              11.1709995269775,
+              0.980000019073486,
+              2.99100017547607
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@874",
+            "position": [
+              10.2109994888306,
+              0.980000019073486,
+              2.99100017547607
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              0.0,
+              5.0
+            ],
+            "size": [
+              9.0,
+              9.0,
+              9.0
+            ]
+          }
+        ],
+        "position": "(7.5, 0.0, 13.5)",
+        "token": "menger_sponge"
+      },
+      {
+        "meshes": [
+          {
+            "name": "SphereDisplay",
+            "position": [
+              7.07861518859863,
+              -1.7599288225174,
+              10.0711936950684
+            ],
+            "size": [
+              0.842769622802734,
+              0.719857692718506,
+              0.857612609863281
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              7.07999992370605,
+              -1.9925000667572,
+              10.0799999237061
+            ],
+            "size": [
+              0.840000152587891,
+              0.00500011444091797,
+              0.840000152587891
+            ]
+          }
+        ],
+        "position": "(7.5, -2.0, 14.5)",
+        "token": "dark_sphere"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@824",
+            "position": [
+              1.20000004768372,
+              0.0,
+              13.2000007629395
+            ],
+            "size": [
+              0.600000023841858,
+              4.0,
+              0.599998474121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@825",
+            "position": [
+              1.03999996185303,
+              -0.0200000032782555,
+              13.0400009155273
+            ],
+            "size": [
+              0.920000076293945,
+              0.120000019669533,
+              0.919998168945313
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@826",
+            "position": [
+              1.14040780067444,
+              0.0899999737739563,
+              13.1404075622559
+            ],
+            "size": [
+              0.719184398651123,
+              0.720000028610229,
+              0.719184875488281
+            ]
+          }
+        ],
+        "position": "(1.5, 0.0, 17.5)",
+        "token": "catalyst_vent"
+      }
+    ],
+    "leave by the ground exit": {
+      "finish": "(7.500004, 0.000936, 20.46124)",
+      "frames": 29,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.500004, 0.079168, 18.93457)",
+      "target": 20.3
+    },
+    "pointer_input": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          10.6999998092651,
+          0.00100000004749745,
+          2.12999987602234
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@859",
+          "hover": "MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.4,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@861",
+          "hover": "MengerSponge/MengerLesson/@Node3D@861/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@861/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@861/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.09,
+              2.56
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@859",
+          "hover": "MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.4,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            -0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@865",
+          "hover": "MengerSponge/MengerLesson/@Node3D@865/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@865/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@865/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.4,
+              1.09,
+              2.56
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@857",
+          "hover": "MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@863",
+          "hover": "MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.1,
+              2.55
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@857",
+          "hover": "MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@863",
+          "hover": "MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.1,
+              2.55
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@859",
+          "hover": "MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@859/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.4,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@857",
+          "hover": "MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@857/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "pompidou-plateau-libre/MengerSponge/MengerLesson/@Node3D@863",
+          "hover": "MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eau-libre/MengerSponge/MengerLesson/@Node3D@863/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              10.7,
+              1.1,
+              2.55
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1258",
+          "eye": [
+            10.7,
+            1.6,
+            2.13
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "_pompidou-plateau-libre/MengerSponge/MengerLesson/PushButton",
+          "hover": "/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              10.7,
+              1.6,
+              2.13
+            ],
+            "independent_ray": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "teau-libre/MengerSponge/MengerLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              11.0,
+              1.08,
+              2.78
+            ]
+          },
+          "stand": [
+            10.7,
+            0.0,
+            2.13
+          ]
+        }
+      },
+      {
+        "current_camera_after": "/root/EndlessMuseum/@Camera3D@1258",
+        "event": "teardown"
+      }
+    ],
+    "reach the east margin": {
+      "finish": "(13.01995, 3.598862, 18.93456)",
+      "frames": 138,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.5, 3.601789, 18.93456)",
+      "target": 13.0
+    },
+    "return above the rear door": {
+      "finish": "(7.500004, 9.557428, 18.93457)",
+      "frames": 138,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(1.98005, 9.557634, 18.93456)",
+      "target": 7.5
+    },
+    "rise above the sponge": {
+      "finish": "(13.01995, 9.558857, 18.93456)",
+      "frames": 149,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(13.01995, 3.598862, 18.93456)",
+      "target": 9.55
+    },
+    "rise to the central opening": {
+      "finish": "(7.5, 3.601661, 7.934591)",
+      "frames": 90,
+      "method": "InputEventKey through shipped museum controller",
+      "start": "(7.5, 0.001663, 7.934591)",
+      "target": 3.6
+    },
+    "scope": "Actual endless-museum Walker and _physics_process, synthetic InputEventKey controls, real collisions. Headset not tested.",
+    "small_opening_body": "(-3.0, 1.0, -4.820195)"
+  }
+}

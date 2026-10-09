@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "gallery loads with all 27 movable bodies",
+      "passed": true
+    },
+    {
+      "name": "entrance eye aligns the separate line with the ceiling edge",
+      "passed": true
+    },
+    {
+      "name": "a sideways step separates the two projections",
+      "passed": true
+    },
+    {
+      "name": "alignment available at eye height 1.05",
+      "passed": true
+    },
+    {
+      "name": "alignment available at eye height 2.0",
+      "passed": true
+    },
+    {
+      "name": "whole lateral viewing strip is physically clear",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entering-perspective",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ceiling-aligned",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ceiling-apart",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: under-the-line",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "eye": [
+      -4.0,
+      1.64999997615814,
+      -7.0
+    ],
+    "separation_degrees": [
+      3.30398139017163,
+      1.16470473249843
+    ],
+    "suspended_height_m": 2.76149988174438
+  },
+  "passed": true,
+  "scope": "Native museum render and projection check; no headset acceptance."
+}

@@ -1,0 +1,33 @@
+{
+  "id": "Tutorial_Pattern",
+  "title": "Transform the lookup or the source",
+  "storyboard": "Follow the asymmetric bend through PM, then watch the source cells during FLIP X. Bring the motif and wrapping reader. First change only the read address: on alternate tile columns, reverse the source column while keeping the row. Then make a separate mirrored source by reversing entries inside each row; do not reverse the order of the rows. Displays, editor input and shader rendering are supplied. The student predicts where the coloured neighbour will appear and checks that only the second operation changes the stored source. A symmetric mark can conceal either reversal; altering one cell reveals it again. Carry two named operations, source editing and transformed reading, before considering any wider symmetry classification.",
+  "storyboard_short": "Use PM versus FLIP X. Reuse motif/wrapping. Teach alternate-column reflected read without source mutation; separately reverse entries within each source row, not row order. Predict asymmetric neighbour; inspect unchanged versus changed source. Supply editor/displays/shader. Carry read transform versus data transform. Symmetric motif may hide the operation; shader authorship waits.",
+  "mode": "make",
+  "brings": [
+    "motif storage and wrapping lookup",
+    "conditions"
+  ],
+  "learns": [
+    "horizontal reflected lookup versus horizontal source reversal"
+  ],
+  "carries": "Separate read-address and source-edit functions with a revealing test motif.",
+  "supplied": [
+    "comparison displays",
+    "source editor input"
+  ],
+  "artifact_refs": [
+    "pattern_maker_station"
+  ],
+  "review_note": "Keep the first reduced address operation in GDScript. “Reverse source rows” must mean reversing entries within every row, not swapping top and bottom rows. P1/PM displays are supplied; matching appearance alone cannot tell whether the source was mutated.",
+  "independent_check": "Predict the blue neighbour’s position after each operation, then use a symmetric source to hide the reversal and one changed cell to reveal it.",
+  "prior_maps": [
+    "Pattern_Foundry",
+    "Trans_Rotation"
+  ],
+  "source_refs": [
+    "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd",
+    "commons/maps/Tutorial_Pattern/tutorial.md"
+  ],
+  "change_reason": "Keep a visually similar result from concealing two different operations."
+}

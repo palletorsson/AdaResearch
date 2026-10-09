@@ -1,0 +1,112 @@
+{
+  "status": "Provisional assistant editorial judgments, not human ground truth or Jev results. Review ambiguous overlaps before treating scores as editorial evidence.",
+  "cases": [
+    {
+      "map": "Point_One",
+      "start_line": 9,
+      "suggested_labels": [
+        "embodied",
+        "inquiry"
+      ],
+      "source": "commons/maps/Point_One/final.md"
+    },
+    {
+      "map": "Point_One",
+      "start_line": 22,
+      "suggested_labels": [
+        "technical"
+      ],
+      "source": "commons/maps/Point_One/final.md"
+    },
+    {
+      "map": "Point_One",
+      "start_line": 46,
+      "suggested_labels": [
+        "critical",
+        "connective"
+      ],
+      "source": "commons/maps/Point_One/final.md"
+    },
+    {
+      "map": "Point_Lines",
+      "start_line": 42,
+      "suggested_labels": [
+        "inquiry",
+        "connective"
+      ],
+      "source": "commons/maps/Point_Lines/final.md"
+    },
+    {
+      "map": "Point_Lines",
+      "start_line": 58,
+      "suggested_labels": [
+        "critical",
+        "inquiry"
+      ],
+      "source": "commons/maps/Point_Lines/final.md"
+    },
+    {
+      "map": "Point_Trace",
+      "start_line": 23,
+      "suggested_labels": [
+        "technical",
+        "connective"
+      ],
+      "source": "commons/maps/Point_Trace/final.md"
+    },
+    {
+      "map": "Point_Trace",
+      "start_line": 63,
+      "suggested_labels": [
+        "inquiry",
+        "poetic"
+      ],
+      "source": "commons/maps/Point_Trace/final.md"
+    },
+    {
+      "map": "Point_Trace",
+      "start_line": 79,
+      "suggested_labels": [
+        "contextual",
+        "technical"
+      ],
+      "source": "commons/maps/Point_Trace/final.md"
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "start_line": 46,
+      "suggested_labels": [
+        "interpretive",
+        "poetic",
+        "connective"
+      ],
+      "source": "commons/maps/Primitives_Melencolia/final.md"
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "start_line": 67,
+      "suggested_labels": [
+        "interpretive"
+      ],
+      "source": "commons/maps/Primitives_Melencolia/final.md"
+    },
+    {
+      "map": "Random_Definition",
+      "start_line": 37,
+      "suggested_labels": [
+        "technical",
+        "poetic"
+      ],
+      "source": "commons/maps/Random_Definition/final.md"
+    },
+    {
+      "map": "QFEP_Introduction",
+      "start_line": 19,
+      "suggested_labels": [
+        "critical",
+        "contextual"
+      ],
+      "source": "commons/maps/QFEP_Introduction/final.md"
+    }
+  ]
+}

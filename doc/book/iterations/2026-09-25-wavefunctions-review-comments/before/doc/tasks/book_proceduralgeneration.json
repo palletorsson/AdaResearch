@@ -1,0 +1,532 @@
+{
+  "goal_id": "book_proceduralgeneration",
+  "goal_title": "Book: Procedural Generation: Rules Build Worlds — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in proceduralgeneration became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "proceduralgeneration",
+    "order": 15,
+    "phase": "lambda_edge",
+    "title": "Procedural Generation: Rules Build Worlds",
+    "chapters": [
+      "PG_Genetic_Evolution",
+      "PG_Space_Colonization",
+      "PG_Branching_Growth",
+      "PG_Percolation_Network",
+      "PG_Caves_Mazes",
+      "PG_Sculpted_Forms",
+      "PG_Mirrored_Patterns"
+    ],
+    "words": 4372,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Assemblage_Same_Desire (last of lsystems)",
+      "PG_Genetic_Evolution",
+      "PG_Space_Colonization",
+      "PG_Branching_Growth",
+      "PG_Percolation_Network",
+      "PG_Caves_Mazes",
+      "PG_Sculpted_Forms",
+      "PG_Mirrored_Patterns",
+      "SoftBodies_Soft_Body_Deformation (first of softbodies)"
+    ],
+    "reading": {
+      "arc": "The sequence moves from selection to inhabitation. It opens by letting a score choose among described bodies and asking what that score cannot notice (a drawn torus the estimator never counts), then makes growth explicit as target assignment and summed unit directions (Space Colonization), narrows it to one nearest invitation and discovers that stored records and visible positions can diverge (Branching Growth), tests connection under a stated rule of contact (Percolation), asks a rule to carve room for a body (Caves / Mazes), samples and cuts material (Sculpted Forms), and closes by composing copying with connecting (Mirrored Patterns). The refrain throughout is that a record, a picture and a place to stand are three different relations that must each be built and checked; the museum's own floor, ramps and decks supply the support the generated things never do. Every hall is a six-button desk with a RULE card that reveals the operation only after the visitor has followed it, and every chapter asks for a prediction or a choice before the first press.",
+      "holds": [
+        "The HOLD witness on a side plinth, inherited from LSystems_Living through Assemblage: Genetic, Space Colonization, Branching and Mirrored each keep an independent copy that survives RESET ('the held witness remains').",
+        "Predict before you press: choose a body and remember your reason; which way would you go; find the nearest point; where could something pass; look for the space that would have to remain empty; choose the moment the next construction inherits.",
+        "The six-button desk with RULE last: the operation is named only after it has been followed, and each chapter quotes one or two lines of the running source at the moment they matter.",
+        "Support versus generation: decks and ramps carry the visitor because the museum supplies collision; candidates, drawn branches, pink flowing sites, the sampled surface and the observation specimen do not. 'A connected parent record, a visible shape and a place you can inhabit are three relations we must learn to build together.'",
+        "Budgets are not maturity: 192 nodes / 60 generations, 192 records, 64 generations, 128 maze steps are named as what the program spends.",
+        "Each chapter ends by naming the next hall and the smaller difference to look for there, until the last one, which summarises the sequence without naming Soft Bodies."
+      ],
+      "hall_notes": [
+        {
+          "hall": "PG_Genetic_Evolution",
+          "words": 826,
+          "note": "Opens the sequence by asking the visitor to choose a body before the score does, then uses TARGET, RING, RULE and STEP to expose the seam between builder and evaluator: a torus is drawn but never counted, a box's volume is scale product times eight, overlaps are never subtracted. The best-argued chapter; its second paragraph is the one place it looks backward too far, and the raised deck it sends you to carries a screen it never mentions."
+        },
+        {
+          "hall": "PG_Space_Colonization",
+          "words": 857,
+          "note": "The construction chapter: three requests, unit vectors, a sum, one 0.5 m step, predicted before it is pressed, then FIELD (8 points, a 96-point sine-authored canopy) and POLICY (tips versus network). Reads as a careful demonstration whose numbers all hold; the first instruction names colours the hall does not draw that way."
+        },
+        {
+          "hall": "PG_Branching_Growth",
+          "words": 475,
+          "note": "Short and sharp: one nearest invitation, a predicted (-0.4, 0.3, 0), and the discovery that the readout's records and its distinct positions need not agree because an old site keeps re-choosing the same target. The sequence's best 'useful failure'; one code token leaks into the prose."
+        },
+        {
+          "hall": "PG_Percolation_Network",
+          "words": 461,
+          "note": "Face versus corner contact, the six-neighbour excerpt, LATTICE and DENSITY at 0.2 / 0.4 / 0.6 from one seed, and the collision distinction (white collides, pink does not). Tight and true; 'z face' is a code axis the visitor cannot see."
+        },
+        {
+          "hall": "PG_Caves_Mazes",
+          "words": 548,
+          "note": "Two generators in one hall: carving centres with two cells of headroom versus backtracking that pops a stack. The stack excerpt lands well and the cave's authored bias is honestly named; the closing paragraph lets the author's desktop test harness into the reader's ear."
+        },
+        {
+          "hall": "PG_Sculpted_Forms",
+          "words": 538,
+          "note": "DROP, SAMPLE, VOXEL and ORIGINAL make 'what did the sample keep' concrete (centres, not rotations or contact shapes), and the dome's CUT shows absence as authored. Weak spots: the subtraction excerpt is the section view's cutter, not a core's, and 'repaired scene' is a process note."
+        },
+        {
+          "hall": "PG_Mirrored_Patterns",
+          "words": 667,
+          "note": "Holding a field and stencilling it isolates copying from updating; NETWORK counts edges, components and cycles and refuses to let a skin certify a route. Ends with the sequence's summary sentence but names neither the desk's own word 'rhizome' nor the hall the thread goes to next."
+        }
+      ],
+      "stumbles": [
+        "PG_Genetic_Evolution: the second paragraph stacks five back-references (rewriting a description, the cube family, altered amount / face selection, six kept results, the Form Finding height test) before the room's own idea; the visitor arriving from the textile hall must recall two halls back and eight sequences back.",
+        "PG_Genetic_Evolution: 'take the side ramp onto the raised structure' leads straight to a cased science screen (map row 22) that the chapter never places; a reader may take it for part of the lesson.",
+        "PG_Space_Colonization: 'The gold lines show those requests' — the threads to the points are drawn in muted mauve; the gold marks are the short unit-direction stubs and the chosen site.",
+        "PG_Space_Colonization: 'a restriction easy to miss in the name of this artifact' — the chapter never says the name.",
+        "PG_Branching_Growth: 'Keep the nearby organic_space in view' reads as a variable name.",
+        "PG_Percolation_Network: 'supplied from one z face' and 'the opposite face' — the visitor sees a 9 m cube with a source wall, not an axis.",
+        "PG_Caves_Mazes: 'The desktop check follows open maze cells from entrance to exit' — a headset visitor has no desktop check; this is the author's test record.",
+        "PG_Sculpted_Forms: the excerpt cut.operation = CSGShape3D.OPERATION_SUBTRACTION is introduced as the cores' operation but is the section view's extra cutter.",
+        "PG_Sculpted_Forms: 'Its repaired scene' — the reader never saw it broken.",
+        "PG_Mirrored_Patterns: the desk readout prints 'rhizome' while the chapter says 'the next policy'; and the closing paragraph carries 'the unresolved part into the next hall' without naming Soft Bodies, the only chapter in the sequence not to name its successor."
+      ],
+      "keep": [
+        {
+          "hall": "PG_Genetic_Evolution",
+          "quote": "This is what fitness means in this room. We can inspect it without agreeing that it measures what we value."
+        },
+        {
+          "hall": "PG_Genetic_Evolution",
+          "quote": "Survival does not tell us that every surviving feature was rewarded."
+        },
+        {
+          "hall": "PG_Space_Colonization",
+          "quote": "A distant point will not get a longer vote merely because it is farther away."
+        },
+        {
+          "hall": "PG_Space_Colonization",
+          "quote": "A connected parent record, a visible shape and a place you can inhabit are three relations we must learn to build together."
+        },
+        {
+          "hall": "PG_Branching_Growth",
+          "quote": "The remainder is not always an extravagant shape. Sometimes it is redundant work concealed by a familiar outline."
+        },
+        {
+          "hall": "PG_Percolation_Network",
+          "quote": "The same event is connection for one system and a change of resistance for another."
+        },
+        {
+          "hall": "PG_Caves_Mazes",
+          "quote": "A connected line has no width. Your shoulders do."
+        },
+        {
+          "hall": "PG_Sculpted_Forms",
+          "quote": "A hole can carry as much authorship as the material around it."
+        }
+      ],
+      "handover_in": "Strong. Assemblage_Same_Desire ends (line 52): 'Next, generated forms will be compared using a numerical score... What changes when a program is asked to decide which result should continue?' and PG_Genetic_Evolution opens by asking the visitor to choose a body and remember the reason before the score picks. The only friction is that Genetic's second paragraph reaches past Assemblage to the cube family (LSystems_Shape_Grammars, two halls back) and the Forge's height test (FormFinding_Forge, eight sequences back) without naming either hall; Shape Grammars line 61 had already made that bridge.",
+      "handover_out": "Soft. PG_Mirrored_Patterns closes with the sequence summary and 'carry the unresolved part into the next hall' but does not name Soft Bodies; SoftBodies_Soft_Body_Deformation opens on the jelly cube and reaches back to 'translation, rotation and scale' (line 17) rather than to anything in this sequence. The shared thread is present on both sides — positions moving while connectivity stays prescribed; collider, support and pinned points as the body's conditions — but neither chapter states it, so the reader crosses the seam unaccompanied for the first time in seven halls.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_proceduralgeneration.001",
+      "title": "Remove the desktop test harness from the maze's closing paragraph",
+      "spec": "[vr] PG_Caves_Mazes\nQuote: “The desktop check follows open maze cells from entrance to exit. That proves a route in its array.”\nWhy: A headset visitor has no 'desktop check'; the sentence is the author's test record (walked.md opens 'Desktop encounter record ... DesktopPlayer pointer input') leaking into reader prose, and the user has ruled desktop is for visual tests only.\nDo: Make the generator carry the claim: 'The generator's own record proves a route in its array: every cell was visited and only walls between visited cells were removed, so entrance and exit lie on one connected tree. Whether your shoulders and head clear every generated turn is a separate question; the museum aisle beside it lets you continue while that stays open.'\nEvidence: commons/maps/PG_Caves_Mazes/final.md:37; commons/maps/PG_Caves_Mazes/walked.md:1-3 ('Desktop encounter record', 'DesktopPlayer pointer input'); algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd:280-306 (_generation_step visits every cell, pops the stack, then _create_entrance_exit) and :335-344 (entrance at (1,0), exit at (maze_width-2, maze_height-1)). No other 'desktop' aside exists in the seven chapters (grep).\nFile: commons/maps/PG_Caves_Mazes/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Caves_Mazes"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "PG_Caves_Mazes",
+      "quote": "The desktop check follows open maze cells from entrance to exit. That proves a route in its array.",
+      "why": "A headset visitor has no 'desktop check'; the sentence is the author's test record (walked.md opens 'Desktop encounter record ... DesktopPlayer pointer input') leaking into reader prose, and the user has ruled desktop is for visual tests only.",
+      "proposal": "Make the generator carry the claim: 'The generator's own record proves a route in its array: every cell was visited and only walls between visited cells were removed, so entrance and exit lie on one connected tree. Whether your shoulders and head clear every generated turn is a separate question; the museum aisle beside it lets you continue while that stays open.'",
+      "evidence": "commons/maps/PG_Caves_Mazes/final.md:37; commons/maps/PG_Caves_Mazes/walked.md:1-3 ('Desktop encounter record', 'DesktopPlayer pointer input'); algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd:280-306 (_generation_step visits every cell, pops the stack, then _create_entrance_exit) and :335-344 (entrance at (1,0), exit at (maze_width-2, maze_height-1)). No other 'desktop' aside exists in the seven chapters (grep).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.002",
+      "title": "Name the colours the hall actually draws for requests, directions and the step",
+      "spec": "[prose] PG_Space_Colonization\nQuote: “The gold lines show those requests. The short white segment proposes a step.”\nWhy: It is the first thing the visitor is told to look at, and it points them at the wrong marks: the threads from the site to each point are drawn in muted mauve and only the short unit-direction stubs and the chosen site are gold.\nDo: 'Thin threads run from the root to each point; the short gold stubs are their unit directions, one metre each; the white segment proposes the half-metre step.'\nEvidence: algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd:112 (request rod site->point, material '896d80', radius 0.009), :113 (unit direction rod, gold 'f1d57b', radius 0.025), :109 (chosen site sphere, gold), :115-116 (step rod and endpoint, white 'f2fcff'); final.md:7.\nFile: commons/maps/PG_Space_Colonization/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Space_Colonization"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PG_Space_Colonization",
+      "quote": "The gold lines show those requests. The short white segment proposes a step.",
+      "why": "It is the first thing the visitor is told to look at, and it points them at the wrong marks: the threads from the site to each point are drawn in muted mauve and only the short unit-direction stubs and the chosen site are gold.",
+      "proposal": "'Thin threads run from the root to each point; the short gold stubs are their unit directions, one metre each; the white segment proposes the half-metre step.'",
+      "evidence": "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd:112 (request rod site->point, material '896d80', radius 0.009), :113 (unit direction rod, gold 'f1d57b', radius 0.025), :109 (chosen site sphere, gold), :115-116 (step rod and endpoint, white 'f2fcff'); final.md:7.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.003",
+      "title": "Replace the code token organic_space with the work's name",
+      "spec": "[prose] PG_Branching_Growth\nQuote: “Keep the nearby organic_space in view.”\nWhy: A registry token with an underscore reads as a variable name in reader prose; the work is registered as 'Organic Space' and stands five rows from the growth study.\nDo: 'Keep the organic space beside it in view.' (or 'the Organic Space work nearby').\nEvidence: commons/maps/PG_Branching_Growth/final.md:25; commons/artifacts/registry/alternative_geometries.json entry organic_space, name 'Organic Space'; commons/maps/PG_Branching_Growth/map_data.json interactables row 15 'organic_space:0:0:0.5'.\nFile: commons/maps/PG_Branching_Growth/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Branching_Growth"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PG_Branching_Growth",
+      "quote": "Keep the nearby organic_space in view.",
+      "why": "A registry token with an underscore reads as a variable name in reader prose; the work is registered as 'Organic Space' and stands five rows from the growth study.",
+      "proposal": "'Keep the organic space beside it in view.' (or 'the Organic Space work nearby').",
+      "evidence": "commons/maps/PG_Branching_Growth/final.md:25; commons/artifacts/registry/alternative_geometries.json entry organic_space, name 'Organic Space'; commons/maps/PG_Branching_Growth/map_data.json interactables row 15 'organic_space:0:0:0.5'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.004",
+      "title": "Name Soft Bodies and what carries across in the closing sentence",
+      "spec": "[handover] PG_Mirrored_Patterns\nQuote: “We can answer with a construction, try its limits, and carry the unresolved part into the next hall.”\nWhy: Every other chapter in the sequence ends by naming the next hall and the smaller difference to look for; this one, the sequence's last, leaves the reader to cross into Soft Bodies unaccompanied, and the Soft Bodies opener reaches back to translation, rotation and scale rather than to this sequence.\nDo: Add one sentence: 'In Soft Bodies, next, the record stays fixed while the positions move: a cube keeps every prescribed connection and still gives way. Ask what its support and collider must supply before believing the surface.'\nEvidence: commons/maps/PG_Mirrored_Patterns/final.md:38; commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 ('The surface connectivity remains prescribed. Yielding is a new capability') and :25 ('the collider, support and pinned points belong to this body's conditions'); in-sequence closers naming the next hall: PG_Genetic_Evolution:42, PG_Space_Colonization:45, PG_Branching_Growth:27, PG_Percolation_Network:27, PG_Caves_Mazes:39, PG_Sculpted_Forms:41.\nFile: commons/maps/PG_Mirrored_Patterns/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Mirrored_Patterns"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "PG_Mirrored_Patterns",
+      "quote": "We can answer with a construction, try its limits, and carry the unresolved part into the next hall.",
+      "why": "Every other chapter in the sequence ends by naming the next hall and the smaller difference to look for; this one, the sequence's last, leaves the reader to cross into Soft Bodies unaccompanied, and the Soft Bodies opener reaches back to translation, rotation and scale rather than to this sequence.",
+      "proposal": "Add one sentence: 'In Soft Bodies, next, the record stays fixed while the positions move: a cube keeps every prescribed connection and still gives way. Ask what its support and collider must supply before believing the surface.'",
+      "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:38; commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 ('The surface connectivity remains prescribed. Yielding is a new capability') and :25 ('the collider, support and pinned points belong to this body's conditions'); in-sequence closers naming the next hall: PG_Genetic_Evolution:42, PG_Space_Colonization:45, PG_Branching_Growth:27, PG_Percolation_Network:27, PG_Caves_Mazes:39, PG_Sculpted_Forms:41.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.005",
+      "title": "Lead the second paragraph with the room's own definitions, keep one named bridge",
+      "spec": "[structure] PG_Genetic_Evolution\nQuote: “We arrived here knowing how to rewrite a description and build from it. The cube family let us compare an altered amount with an altered face selection. We kept all six results.”\nWhy: Five back-references precede the sentences that define genome, builder and evaluator, and the previous hall is the textile, not the cube; 'the cube family' is two halls back and 'the height test in Form Finding' is the Forge, eight sequences back, neither named.\nDo: Open with 'Each candidate has a genome: a list of primitive names and parameters. A builder reads that list to make the visible body. An evaluator reads it to produce a number. These readers can notice different things.' Then one bridge: 'The six-specimen family in Shape Grammars built without judging; the Forge's height test in Form Finding showed a result can hold and still fail a chosen criterion. Here a score decides which descriptions get another generation.'\nEvidence: commons/maps/PG_Genetic_Evolution/final.md:7; previous hall is Assemblage_Same_Desire (sequences/lsystems.json); commons/maps/LSystems_Shape_Grammars/final.md:7 ('The first six specimens form a family') and :61 (the Form Finding -> Genetic bridge already made there); commons/maps/FormFinding_Forge/final.md:9 ('asks for height as well as a period of sufficiently small movement. A low heap can therefore be stable and still fail its test').\nFile: commons/maps/PG_Genetic_Evolution/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Genetic_Evolution"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "PG_Genetic_Evolution",
+      "quote": "We arrived here knowing how to rewrite a description and build from it. The cube family let us compare an altered amount with an altered face selection. We kept all six results.",
+      "why": "Five back-references precede the sentences that define genome, builder and evaluator, and the previous hall is the textile, not the cube; 'the cube family' is two halls back and 'the height test in Form Finding' is the Forge, eight sequences back, neither named.",
+      "proposal": "Open with 'Each candidate has a genome: a list of primitive names and parameters. A builder reads that list to make the visible body. An evaluator reads it to produce a number. These readers can notice different things.' Then one bridge: 'The six-specimen family in Shape Grammars built without judging; the Forge's height test in Form Finding showed a result can hold and still fail a chosen criterion. Here a score decides which descriptions get another generation.'",
+      "evidence": "commons/maps/PG_Genetic_Evolution/final.md:7; previous hall is Assemblage_Same_Desire (sequences/lsystems.json); commons/maps/LSystems_Shape_Grammars/final.md:7 ('The first six specimens form a family') and :61 (the Form Finding -> Genetic bridge already made there); commons/maps/FormFinding_Forge/final.md:9 ('asks for height as well as a period of sufficiently small movement. A low heap can therefore be stable and still fail its test').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.006",
+      "title": "Place the science screen the deck walk leads to, or remove it from the map",
+      "spec": "[encounter] PG_Genetic_Evolution\nQuote: “Walk beyond the study and take the side ramp onto the raised structure. These decks carry you because the museum supplies their collision shapes.”\nWhy: The sentence sends the visitor onto the rear structure where a cased science screen in grid mode stands (map row 22), and the chapter never mentions it; a reader will take a second instrument for part of the score lesson, and its scoring integration is recorded as still open.\nDo: One sentence on the deck: 'The cased screen up here scans the older population display; it reads no score from this desk.' Or drop the science_screen token from the map.\nEvidence: commons/maps/PG_Genetic_Evolution/map_data.json interactables row 22 'science_screen:180:1.5#mode:grid' inside the raised structure (rows 20-33, height-3 cells, wp ramps at rows 23/30/32); commons/maps/PG_Genetic_Evolution/walked.md ('The secondary science screen is retained, with its scoring integration still open'); commons/maps/sequences/proceduralgeneration.json artifact_groups rationale 'original grid screen retained as secondary'; commons/artifacts/science_screen/science_screen.gd:449-451 (generic 'grid' mode).\nFile: commons/maps/PG_Genetic_Evolution/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Genetic_Evolution"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "PG_Genetic_Evolution",
+      "quote": "Walk beyond the study and take the side ramp onto the raised structure. These decks carry you because the museum supplies their collision shapes.",
+      "why": "The deck walk (wp ramps at rows 23/30/32) brings the visitor into the walled rear compound where, on a floor-level cell beside the height-3 decks, a science screen in generic grid mode stands at 1.5 m; the chapter never names it and its scoring link is recorded as open.",
+      "proposal": "One sentence on the deck: 'The cased screen standing below the decks scans the older population display; it reads no score from this desk.' Or drop the science_screen token from row 22 of the map.",
+      "evidence": "commons/maps/PG_Genetic_Evolution/map_data.json interactables row 22 'science_screen:180:1.5#mode:grid' inside the raised structure (rows 20-33, height-3 cells, wp ramps at rows 23/30/32); commons/maps/PG_Genetic_Evolution/walked.md ('The secondary science screen is retained, with its scoring integration still open'); commons/maps/sequences/proceduralgeneration.json artifact_groups rationale 'original grid screen retained as secondary'; commons/artifacts/science_screen/science_screen.gd:449-451 (generic 'grid' mode).",
+      "review": "amended by a code checker (cited files only): The token and its neglect hold: PG_Genetic_Evolution interactables row 22 col 13 = science_screen:180:1.5#mode:grid; final.md has no 'screen' anywhere; walked.md:7 'The secondary science screen is retained, with its scoring integration still open'; proceduralgeneration.json:221 'original grid screen retained as secondary'; science_screen.gd:449-451 'grid' is the generic GRID VIEW mode. Correction on where it stands: structure row 22 col 13 is a height-1 floor cell inside the walled rear compound (wall ring rows 20-33), not one of the height-3 deck cells; the screen is lifted by its own 1.5 m y offset, beside the decks rather than on them.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.007",
+      "title": "Say 'rhizome' where the desk prints it, and credit its source",
+      "spec": "[footnote] PG_Mirrored_Patterns\nQuote: “The next policy admits more nearby connections; the third severs connections across a central gap and separates the remaining pieces.”\nWhy: The desk readout and RULE card print 'tree / rhizome / severed' and the chapter calls the middle one 'the next policy'; the visitor meets a word the book never explains or attributes, though the code names Deleuze and Guattari and defines the rule (three nearest neighbours).\nDo: 'The next policy, which the desk calls rhizome, lets every site join its three nearest neighbours' plus a footnote: the rhizome is Deleuze and Guattari's figure (A Thousand Plateaus, 1980), defined against the tree, which is why the opening is a tree.\nEvidence: commons/maps/PG_Mirrored_Patterns/final.md:26; commons/artifacts/timing_machines/pg_workshop.gd:300 (readout prints other.topology: 'tree', 'rhizome', 'severed') and :29 (RULES 'tree / rhizome / severed'); algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd:5, :19-22 ('Deleuze and Guattari define the rhizome AGAINST the tree', 'every seed reaches for its three nearest'); RhizomaticMazeGenerator.gd:62-63 (neighbours = 3), lesson branch_probability 1.0 at RhizomaticMazeSpace.gd:129.\nFile: commons/maps/PG_Mirrored_Patterns/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Mirrored_Patterns"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "PG_Mirrored_Patterns",
+      "quote": "The next policy admits more nearby connections; the third severs connections across a central gap and separates the remaining pieces.",
+      "why": "The desk readout and RULE card print 'tree / rhizome / severed' and the chapter calls the middle one 'the next policy'; the visitor meets a word the book never explains or attributes, though the code names Deleuze and Guattari and defines the rule (three nearest neighbours).",
+      "proposal": "'The next policy, which the desk calls rhizome, lets every site join its three nearest neighbours' plus a footnote: the rhizome is Deleuze and Guattari's figure (A Thousand Plateaus, 1980), defined against the tree, which is why the opening is a tree.",
+      "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:26; commons/artifacts/timing_machines/pg_workshop.gd:300 (readout prints other.topology: 'tree', 'rhizome', 'severed') and :29 (RULES 'tree / rhizome / severed'); algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd:5, :19-22 ('Deleuze and Guattari define the rhizome AGAINST the tree', 'every seed reaches for its three nearest'); RhizomaticMazeGenerator.gd:62-63 (neighbours = 3), lesson branch_probability 1.0 at RhizomaticMazeSpace.gd:129.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.008",
+      "title": "Attribute the subtraction excerpt to the section cut, not the cores",
+      "spec": "[code-claim] PG_Sculpted_Forms\nQuote: “The cores show the shapes that made the absence. A hole can carry as much authorship as the material around it. ```cut.operation = CSGShape3D.OPERATION_SUBTRACTION```”\nWhy: The quoted line is the extra 'SectionCut' the section view builds, not one of the four authored cutting cores (those live in the scene and are found by the same operation test); the chapter's thesis is that the operand is authored, so the excerpt should say which operand it is.\nDo: Change the lead-in to: 'The section view adds one more cutter, carrying the operation the four cores already have:' — or quote the test that finds the authored cores, `shape.operation == CSGShape3D.OPERATION_SUBTRACTION`.\nEvidence: commons/primitives/booleans/dome.gd:418-429 ('section' branch: cut.name = \"SectionCut\", cut.operation = CSGShape3D.OPERATION_SUBTRACTION at :425, built only for facture 'section'); :456-462 (_cut_children finds the authored operands by the same operation); :9 ('the authored CSGBox3D and its four subtraction children'); final.md:31-35.\nFile: commons/maps/PG_Sculpted_Forms/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Sculpted_Forms"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "PG_Sculpted_Forms",
+      "quote": "The cores show the shapes that made the absence. A hole can carry as much authorship as the material around it. ```cut.operation = CSGShape3D.OPERATION_SUBTRACTION```",
+      "why": "The quoted line is the extra 'SectionCut' the section view builds, not one of the four authored cutting cores (those live in the scene and are found by the same operation test); the chapter's thesis is that the operand is authored, so the excerpt should say which operand it is.",
+      "proposal": "Change the lead-in to: 'The section view adds one more cutter, carrying the operation the four cores already have:' — or quote the test that finds the authored cores, `shape.operation == CSGShape3D.OPERATION_SUBTRACTION`.",
+      "evidence": "commons/primitives/booleans/dome.gd:418-429 ('section' branch: cut.name = \"SectionCut\", cut.operation = CSGShape3D.OPERATION_SUBTRACTION at :425, built only for facture 'section'); :456-462 (_cut_children finds the authored operands by the same operation); :9 ('the authored CSGBox3D and its four subtraction children'); final.md:31-35.",
+      "review": "confirmed by a code checker (cited files only): dome.gd has 'OPERATION_SUBTRACTION' at only two lines: :425 'cut.operation = CSGShape3D.OPERATION_SUBTRACTION' inside the 'section' branch (cut.name = \"SectionCut\", :418-429) and :462 the _cut_children test 'shape.operation == CSGShape3D.OPERATION_SUBTRACTION'. :9 names 'the authored CSGBox3D and its four subtraction children'. final.md:31-35 quotes the :425 line after 'The cores show the shapes that made the absence.' Map places 'dome' at (22,12).",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.009",
+      "title": "Drop 'repaired scene' from the membrane sentence",
+      "spec": "[prose] PG_Sculpted_Forms\nQuote: “The layered membrane remains nearby. Its repaired scene makes a further contrast available”\nWhy: The reader never saw the membrane broken; 'repaired scene' is an authoring note that makes them look for a repair instead of at the layers.\nDo: 'The layered membrane remains nearby and makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid.'\nEvidence: commons/maps/PG_Sculpted_Forms/final.md:39; algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.gd:106-135 (50 nested SurfaceTool cylinders with sin + Perlin displacement); git log for that directory shows no reader-visible repair (DNA promotion, identity, stubs, type annotations, README moves).\nFile: commons/maps/PG_Sculpted_Forms/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Sculpted_Forms"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PG_Sculpted_Forms",
+      "quote": "The layered membrane remains nearby. Its repaired scene makes a further contrast available",
+      "why": "The reader never saw the membrane broken; 'repaired scene' is an authoring note that makes them look for a repair instead of at the layers.",
+      "proposal": "'The layered membrane remains nearby and makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid.'",
+      "evidence": "commons/maps/PG_Sculpted_Forms/final.md:39; algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.gd:106-135 (50 nested SurfaceTool cylinders with sin + Perlin displacement); git log for that directory shows no reader-visible repair (DNA promotion, identity, stubs, type annotations, README moves).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.010",
+      "title": "Replace 'z face' with the face the visitor can see",
+      "spec": "[prose] PG_Percolation_Network\nQuote: “The comparison expands into an 18 by 18 by 18 field, supplied from one z face. ... The readout counts sites reached and those reached on the opposite face.”\nWhy: z is a code axis; in the hall the lattice is a 9 m cube whose every site on one vertical side is seeded pink, and the readout's 'opposite face' is the side facing it.\nDo: 'supplied along one whole side of the cube. ... The readout counts sites reached and those on the side facing the source.'\nEvidence: commons/artifacts/timing_machines/pg_workshop.gd:143-145 (LATTICE seeds every grid[x][y][17] as SOURCE) and refresh() counting z==0 as 'on opposite face' (:287-295); algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd:16-17 (GRID_SIZE 18, CUBE_SIZE 0.5) and :401-405 (z is a horizontal axis, lattice centred on the artifact); final.md:19.\nFile: commons/maps/PG_Percolation_Network/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Percolation_Network"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PG_Percolation_Network",
+      "quote": "The comparison expands into an 18 by 18 by 18 field, supplied from one z face. ... The readout counts sites reached and those reached on the opposite face.",
+      "why": "z is a code axis; in the hall the lattice is a 9 m cube whose every site on one vertical side is seeded pink, and the readout's 'opposite face' is the side facing it.",
+      "proposal": "'supplied along one whole side of the cube. ... The readout counts sites reached and those on the side facing the source.'",
+      "evidence": "commons/artifacts/timing_machines/pg_workshop.gd:143-145 (LATTICE seeds every grid[x][y][17] as SOURCE) and refresh() counting z==0 as 'on opposite face' (:287-295); algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd:16-17 (GRID_SIZE 18, CUBE_SIZE 0.5) and :401-405 (z is a horizontal axis, lattice centred on the artifact); final.md:19.",
+      "review": "quote checked: first clause found, rest differs (script) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.011",
+      "title": "Add one captioned still of the opening three-request decision",
+      "spec": "[figure] PG_Space_Colonization\nQuote: “The opening root receives three unit directions. The leftward and rightward components cancel; the upward components add.”\nWhy: None of the seven chapters carries an image, while the previous sequence's chapters do; this arithmetic is the sequence's key construction and the reader is asked to predict it before pressing, so a still of root, three pink points, three gold stubs and the white step lets the book reader do that without the hall.\nDo: One captured still (or a line diagram) of the generation-zero decision, captioned with the arithmetic: unit directions (-0.55, 0.83, 0), (0.55, 0.83, 0), (0, 1, 0) sum to (0, 2.66, 0); normalised and scaled by 0.5 m the first child sits at (0, 0.5, 0).\nEvidence: grep '![' returns 0 in all seven PG final.md files; commons/maps/LSystems_Shape_Grammars/final.md:13,25,41 carry captioned stills; colonization_lesson.gd:34 (points (-2,3,0), (2,3,0), (0,5,0)), :18 (segment_length 0.5), :105-116 (the drawn decision); final.md:20-27.\nFile: commons/maps/PG_Space_Colonization/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Space_Colonization"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "PG_Space_Colonization",
+      "quote": "The opening root receives three unit directions. The leftward and rightward components cancel; the upward components add.",
+      "why": "None of the seven chapters carries an image, while the previous sequence's chapters do; this arithmetic is the sequence's key construction and the reader is asked to predict it before pressing, so a still of root, three pink points, three gold stubs and the white step lets the book reader do that without the hall.",
+      "proposal": "One captured still (or a line diagram) of the generation-zero decision, captioned with the arithmetic: unit directions (-0.55, 0.83, 0), (0.55, 0.83, 0), (0, 1, 0) sum to (0, 2.66, 0); normalised and scaled by 0.5 m the first child sits at (0, 0.5, 0).",
+      "evidence": "grep '![' returns 0 in all seven PG final.md files; commons/maps/LSystems_Shape_Grammars/final.md:13,25,41 carry captioned stills; colonization_lesson.gd:34 (points (-2,3,0), (2,3,0), (0,5,0)), :18 (segment_length 0.5), :105-116 (the drawn decision); final.md:20-27.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.012",
+      "title": "Match the two desk titles that differ from their chapter headings",
+      "spec": "[encounter] PG_Caves_Mazes\nQuote: “\"caves\":\"HOW IS A PASSAGE MADE?\" ... \"mirrored\":\"COPY AN IMAGE / CONNECT A PATH\"”\nWhy: Five desks in the sequence carry their chapter's heading verbatim, so the visitor learns to read the desk plate as the chapter's name; the Caves and Mirrored desks announce a different lesson from the one the book gives ('A route needs room', 'A repeated image, another way through').\nDo: Set the two TITLES entries to 'A ROUTE NEEDS ROOM' and 'A REPEATED IMAGE, ANOTHER WAY THROUGH' (or retitle the two chapters to the plates).\nEvidence: commons/artifacts/timing_machines/pg_workshop.gd:23 (TITLES) and :107 (_build_compact_console(ids, TITLES[chapter])); matching plates: 'ONE NEAREST INVITATION', 'TOUCHING IS NOT ENOUGH', 'WHAT DID THE SAMPLE KEEP?' (same line), selection_lesson.gd:15 'WHAT DOES THE SCORE NOTICE?', colonization_lesson.gd:16 'WHICH POINTS GET A SAY?'; chapter headings at PG_Caves_Mazes/final.md:1 and PG_Mirrored_Patterns/final.md:1.\nFile: commons/maps/PG_Caves_Mazes/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Caves_Mazes"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "PG_Caves_Mazes",
+      "quote": "\"caves\":\"HOW IS A PASSAGE MADE?\" ... \"mirrored\":\"COPY AN IMAGE / CONNECT A PATH\"",
+      "why": "Five desks in the sequence carry their chapter's heading verbatim, so the visitor learns to read the desk plate as the chapter's name; the Caves and Mirrored desks announce a different lesson from the one the book gives ('A route needs room', 'A repeated image, another way through').",
+      "proposal": "Set the two TITLES entries to 'A ROUTE NEEDS ROOM' and 'A REPEATED IMAGE, ANOTHER WAY THROUGH' (or retitle the two chapters to the plates).",
+      "evidence": "commons/artifacts/timing_machines/pg_workshop.gd:23 (TITLES) and :107 (_build_compact_console(ids, TITLES[chapter])); matching plates: 'ONE NEAREST INVITATION', 'TOUCHING IS NOT ENOUGH', 'WHAT DID THE SAMPLE KEEP?' (same line), selection_lesson.gd:15 'WHAT DOES THE SCORE NOTICE?', colonization_lesson.gd:16 'WHICH POINTS GET A SAY?'; chapter headings at PG_Caves_Mazes/final.md:1 and PG_Mirrored_Patterns/final.md:1.",
+      "review": "confirmed by a code checker (cited files only): pg_workshop.gd:23 TITLES has caves 'HOW IS A PASSAGE MADE?' and mirrored 'COPY AN IMAGE / CONNECT A PATH'; :107 _build_compact_console(ids,TITLES[chapter]). Headings: PG_Caves_Mazes '# A route needs room', PG_Mirrored_Patterns '# A repeated image, another way through'. The other five match their plates: PG_Branching_Growth 'One nearest invitation', PG_Percolation_Network 'Touching is not enough', PG_Sculpted_Forms 'What did the sample keep?', PG_Genetic_Evolution 'What does the score notice?' (selection_lesson.gd:15), PG_Space_Colonization 'Which points get a say?' (colonization_lesson.gd:16).",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.013",
+      "title": "Give the artifact's name and its source where the chapter says 'the name of this artifact'",
+      "spec": "[footnote] PG_Space_Colonization\nQuote: “There is a restriction easy to miss in the name of this artifact.”\nWhy: The chapter never states the name it asks the reader to be suspicious of, and the sequence's most-cited construction goes uncredited although the registry calls it Runions-style space colonisation.\nDo: 'There is a restriction easy to miss under the name Space Colonization — the tree model of Runions, Lane and Prusinkiewicz (2007), from which this study takes its attraction points and its kill distance. Under TIPS, a growing end can produce one successor...'\nEvidence: commons/maps/PG_Space_Colonization/final.md:31 (the words 'space colonization' appear nowhere else in the chapter body); commons/artifacts/registry/procgen_extra.json space_colonization_algorithm description ('Runions-style space colonisation'); SpaceColonizationAlgorithm.gd:5-7 (essence; kill_distance).\nFile: commons/maps/PG_Space_Colonization/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Space_Colonization"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "PG_Space_Colonization",
+      "quote": "There is a restriction easy to miss in the name of this artifact.",
+      "why": "The chapter never states the name it asks the reader to be suspicious of, and the sequence's most-cited construction goes uncredited although the registry calls it Runions-style space colonisation.",
+      "proposal": "'There is a restriction easy to miss under the name Space Colonization — the tree model of Runions, Lane and Prusinkiewicz (2007), from which this study takes its attraction points and its kill distance. Under TIPS, a growing end can produce one successor...'",
+      "evidence": "commons/maps/PG_Space_Colonization/final.md:31 (the words 'space colonization' appear nowhere else in the chapter body); commons/artifacts/registry/procgen_extra.json space_colonization_algorithm description ('Runions-style space colonisation'); SpaceColonizationAlgorithm.gd:5-7 (essence; kill_distance).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_proceduralgeneration.014",
+      "title": "Turn the 'deliberately described here' aside into the number the reader needs",
+      "spec": "[prose] PG_Sculpted_Forms\nQuote: “The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction.”\nWhy: 'Deliberately described here' is the writer defending a choice to the reader and reads as a manual; what the reader needs is how far the mark reaches at the opening setting, which the sentence withholds.\nDo: 'The program marks `ceil(cube_size / voxel_size)` cells in each direction around that address: two cells each way at the opening setting, a two-and-a-half-metre box around a one-metre cube.'\nEvidence: algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd:245 (half_extent = int(ceil(cube_size / voxel_size))) and :246-251 (marks voxel_pos +/- half_extent); :77-80 (lesson: cube_size 1.0 default, voxel_size 0.5); final.md:17.\nFile: commons/maps/PG_Sculpted_Forms/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Sculpted_Forms"
+      ],
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PG_Sculpted_Forms",
+      "quote": "The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction.",
+      "why": "'Deliberately described here' is the writer defending a choice to the reader and reads as a manual; what the reader needs is how far the mark reaches at the opening setting, which the sentence withholds.",
+      "proposal": "'The program marks `ceil(cube_size / voxel_size)` cells in each direction around that address: two cells each way at the opening setting, a two-and-a-half-metre box around a one-metre cube.'",
+      "evidence": "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd:245 (half_extent = int(ceil(cube_size / voxel_size))) and :246-251 (marks voxel_pos +/- half_extent); :77-80 (lesson: cube_size 1.0 default, voxel_size 0.5); final.md:17.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

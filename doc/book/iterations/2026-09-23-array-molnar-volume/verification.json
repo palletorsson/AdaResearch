@@ -1,0 +1,116 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "canonical text equals reviewed copy",
+      "passed": true
+    },
+    {
+      "name": "earlier row and grid passages preserved",
+      "passed": true
+    },
+    {
+      "name": "earlier code preserved",
+      "passed": true
+    },
+    {
+      "name": "new encounter anchor and attribution present",
+      "passed": true
+    },
+    {
+      "name": "book figure exists",
+      "passed": true
+    },
+    {
+      "name": "one placement is the only map-data change",
+      "passed": true
+    },
+    {
+      "name": "placement at grid x10 z16",
+      "passed": true
+    },
+    {
+      "name": "sequence map order preserved",
+      "passed": true
+    },
+    {
+      "name": "nested group has the new encounter after row and grid",
+      "passed": true
+    },
+    {
+      "name": "top-level group has the new encounter after row and grid",
+      "passed": true
+    },
+    {
+      "name": "other core rooms preserved",
+      "passed": true
+    },
+    {
+      "name": "core text hash current",
+      "passed": true
+    },
+    {
+      "name": "core map hash current",
+      "passed": true
+    },
+    {
+      "name": "registered scene exists",
+      "passed": true
+    },
+    {
+      "name": "declared footprint includes walk-around floor",
+      "passed": true
+    },
+    {
+      "name": "single artifact registry entry",
+      "passed": true
+    },
+    {
+      "name": "38 isolated-museum checks pass",
+      "passed": true
+    },
+    {
+      "name": "all three native book captures saved",
+      "passed": true
+    },
+    {
+      "name": "book captures match current artifact source",
+      "passed": true
+    },
+    {
+      "name": "runtime map unchanged after capture",
+      "passed": true
+    },
+    {
+      "name": "runtime probe unchanged after capture",
+      "passed": true
+    },
+    {
+      "name": "no GDScript runtime error in focused run",
+      "passed": true
+    },
+    {
+      "name": "figure and museum images decode",
+      "passed": true
+    },
+    {
+      "name": "HTTP index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP array-departures.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP Array.diff",
+      "passed": true
+    }
+  ],
+  "map_changes": [
+    [
+      "/layers/interactables/16/10",
+      "",
+      "molnar_cube_study:180:0#plinth:0"
+    ]
+  ]
+}

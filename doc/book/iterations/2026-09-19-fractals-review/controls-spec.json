@@ -1,0 +1,119 @@
+{
+  "rays": [
+    {
+      "tag": "gallery-entry",
+      "x": 9.5,
+      "z": 19.5,
+      "top": 0
+    },
+    {
+      "tag": "pyramid-approach",
+      "x": 6.5,
+      "z": 22.65,
+      "top": 0
+    },
+    {
+      "tag": "comparison-aisle",
+      "x": 9.5,
+      "z": 25.5,
+      "top": 0
+    },
+    {
+      "tag": "exit",
+      "x": 9.5,
+      "z": 27.5,
+      "top": 0
+    }
+  ],
+  "shots": [
+    {
+      "tag": "pyramid",
+      "from": [
+        8.8,
+        1.7,
+        22.8
+      ],
+      "look_at": [
+        6.5,
+        1.35,
+        25.5
+      ],
+      "fov": 65
+    },
+    {
+      "tag": "desk",
+      "from": [
+        6.5,
+        1.7,
+        22.3
+      ],
+      "look_at": [
+        6.5,
+        1.35,
+        25.4
+      ],
+      "fov": 70
+    }
+  ],
+  "room": "Fractal_KochSierpinski",
+  "sequence": "fractals",
+  "run": "res://ada_run/encounter_pilot/Fractal_KochSierpinski/",
+  "walks": [
+    {
+      "tag": "enter comparison gallery",
+      "from": [
+        9.5,
+        0.05,
+        19.5
+      ],
+      "to": [
+        7.4,
+        0,
+        22.3
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "reach front of controls",
+      "from": [
+        7.4,
+        0.05,
+        22.3
+      ],
+      "to": [
+        6.5,
+        0,
+        22.65
+      ],
+      "seconds": 2
+    },
+    {
+      "tag": "walk around right of specimen",
+      "from": [
+        8.2,
+        0.05,
+        23.5
+      ],
+      "to": [
+        8.2,
+        0,
+        26.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "continue to exit",
+      "from": [
+        8.2,
+        0.05,
+        26.5
+      ],
+      "to": [
+        9.5,
+        0,
+        27.5
+      ],
+      "seconds": 2
+    }
+  ]
+}

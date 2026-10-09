@@ -1,0 +1,162 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing forge present in museum",
+      "passed": true
+    },
+    {
+      "name": "180 particles have authored destinations",
+      "passed": true
+    },
+    {
+      "name": "clock reaches raw phase",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-cloud",
+      "passed": true
+    },
+    {
+      "name": "clock alone reaches MAX Q",
+      "passed": true
+    },
+    {
+      "name": "formed body equals authored targets",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-side",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: forge-reverse",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "forge_children": [
+      {
+        "name": "@MeshInstance3D@612",
+        "position": [
+          0.0,
+          0.0599999986588955,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@613",
+        "position": [
+          -0.340000003576279,
+          0.550000011920929,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@614",
+        "position": [
+          0.340000003576279,
+          0.550000011920929,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@615",
+        "position": [
+          0.0,
+          1.05999994277954,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@616",
+        "position": [
+          0.0,
+          0.550000011920929,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@617",
+        "position": [
+          0.0,
+          1.01999998092651,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MultiMeshInstance3D@618",
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@619",
+        "position": [
+          0.419999986886978,
+          0.550000011920929,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@620",
+        "position": [
+          0.419999986886978,
+          0.529999971389771,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@MeshInstance3D@621",
+        "position": [
+          0.0,
+          1.17999994754791,
+          0.0
+        ],
+        "visible": true
+      },
+      {
+        "name": "@Label3D@622",
+        "position": [
+          0.0,
+          1.17999994754791,
+          0.0199999995529652
+        ],
+        "visible": true
+      },
+      {
+        "name": "@Label3D@623",
+        "position": [
+          0.0,
+          1.41999995708466,
+          0.0
+        ],
+        "visible": true
+      }
+    ],
+    "forge_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (5.5, 0.0, 3.5)]",
+    "period_seconds": 7.69230769230769
+  },
+  "passed": true,
+  "room": "FormFinding_Forge",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

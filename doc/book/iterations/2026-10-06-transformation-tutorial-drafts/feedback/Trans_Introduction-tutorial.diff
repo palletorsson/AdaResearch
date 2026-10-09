@@ -1,0 +1,10 @@
+--- before-feedback/Trans_Introduction/tutorial.md
++++ Trans_Introduction/tutorial.md
+@@ -81,4 +81,6 @@
+ 
+ For a held comparison, set `animate` to `false`, `pose` to `1.0` and `far_gap` to `0.5`. The far banks move half a metre farther along Z. The growing cube and turned plank keep their previous end poses. Each now leaves half a metre unbridged.
+ 
+-Return `far_gap` to zero and choose `pose = 0.5`. Predict the travelling surface's position, the cube's size and the plank's angle before running it. Carry the distinction between changing an object and changing the relation it must satisfy.
++The transform still reaches its intended pose. Reaching the bank also depends on where the bank is.
++
++Return `far_gap` to zero and choose `pose = 0.5`. Predict the travelling surface's position, the cube's size and the plank's angle before running it.

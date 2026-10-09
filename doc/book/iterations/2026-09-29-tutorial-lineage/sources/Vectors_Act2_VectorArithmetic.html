@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act2_VectorArithmetic · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act2_VectorArithmetic">← Tutorial lineage</a></p><h1>Vectors Act2 VectorArithmetic</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act2_VectorArithmetic/final.md">Raw captured source</a></p><pre># What the line can keep
+
+&lt;!-- @vector_add --&gt;
+
+The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.
+
+Move one pad. The sum moves with it. There is no carriage to wait for. A body given that destination would still need a way to get there.
+
+&lt;!-- @vector_sub --&gt;
+
+Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.
+
+With **SWAP**, the arrow reverses.
+
+In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.
+
+**SHIFT** moves both addresses sideways together. The gap stays the same: the first vector room returns inside this new operation. **SAME** brings B to A, leaving no length for the cyan arrow to draw.
+
+Behind **RULE** is the subtraction:
+
+```gdscript
+gap = a - b
+```
+
+From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have asked a different question of the same coordinates.
+
+The blocks and their wall picture use a reduced scale. They represent addresses on the stage, not the visitor&#x27;s position. The arrow can tell the little block how to reach its neighbour. Applying it to our own body would require another connection.
+
+&lt;!-- @dot_aligner --&gt;
+
+## When an angle becomes agreement
+
+Between the gap and its next use, a small aiming console makes a decision from an angle. Its **ALIGNMENT** slider brings the drawn aim toward a target direction. As they approach one another, the target acquires the name *FRIEND*.
+
+The console compares normalised directions. Their dot product reaches one when they align. In the wider operation it is zero at a right angle and negative when the directions point sufficiently against each other; this slider explores only a limited angular range.
+
+Here `0.985` is enough to cross the threshold. The direction changes continuously. The name changes at once.
+
+Nothing about the target&#x27;s intentions entered the calculation. It became a friend by pointing nearly the same way. The number measures alignment; the label supplies a story about whom to welcome. What happens to that story if agreement stops being our condition for approach?
+
+&lt;!-- @projection_shadow --&gt;
+
+## Somewhere for the remainder
+
+At the next wall, the cyan gap has arrived before us. This station reads A and B from the subtraction stage we just left.
+
+A rail lies across the diagram. Gold runs along it; pink reaches from gold&#x27;s endpoint to cyan&#x27;s. **RESET** returns both stations to their opening coordinates, with the rail along X. Then **SLIDE** moves A across the rail.
+
+The cyan gap changes. Gold stays where it was. Pink grows.
+
+The rail&#x27;s along-direction reading cannot register this movement. Beside it, the remainder makes the change visible. A second SLIDE reverses the step.
+
+Now **TURN** moves the rail thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.
+
+The rule separates the gap into two parts:
+
+```gdscript
+kept = axis * gap.dot(axis)
+remainder = gap - kept
+```
+
+The axis has unit length. `gap.dot(axis)` gives a signed distance along it. Multiplying by the axis makes that number into the gold vector. Subtracting gold from the gap leaves the perpendicular pink remainder.
+
+The addition we already know can put them together again:
+
+```gdscript
+kept + remainder
+```
+
+It gives the gap back. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.
+
+**FLIP** reverses the rail&#x27;s orientation. The signed distance changes sign, but gold stays in place: both the axis and its coordinate reverse. A negative number needs its frame before it can tell us where to go.
+
+There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail&#x27;s account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.
+
+&lt;!-- @torque_crank --&gt;
+
+## Across the arm
+
+The crank farther along brings this perpendicular part to a different question. Its **LEVERAGE** slider changes the angle between an illustrated arm and push. Along the arm, the cross-product magnitude is zero. Across it, the value grows toward one.
+
+```gdscript
+var torque_vec: Vector3 = r_dir.cross(f_dir)
+```
+
+These are unit directions. Their cross product supplies an axis and an angular factor. For physical torque we would also need the actual arm length and force magnitude. A push directed through the pivot supplies no torque about it; the perpendicular part can turn the arm.
+
+The readout names the factor, sin θ, beside the chosen angle. The wheel changes its pose as the slider moves. Let go and it holds still.
+
+We can study the relation here without waiting for a wheel to accelerate. But setting a pose has not yet given the wheel momentum. To let it keep turning, we would have to give it a state that carries from one moment into the next.
+
+The larger comparisons and the distant laser-operated diagrams remain around this route. Ahead, in Launch, a vector will be given another job. It will leave the diagram and become an initial velocity for a moving body.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act2_VectorArithmetic/tutorial.md">Raw captured source</a></p><pre># One gap, two stations
+
+Keep five existing primary tokens in order: vector_add, vector_sub, dot_aligner, projection_shadow, torque_crank. All twelve artifacts remain. The new work upgrades vector_sub and projection_shadow through opt-in room_gap and room_projection configurations; other placements keep their original consoles.
+
+Subtraction: A/B selects an address, X-/X+/F-/F+ change a component by 0.5 coordinate metres, SWAP reverses A-B, SHIFT translates both by 0.5 along X and reverses on next accepted press, SAME copies A to B, RESET restores A=(1,.5), B=(-.5,0), RULE reveals arithmetic. Components are bounded to [-1.5,1.5]; common moves are refused atomically at the boundary.
+
+Projection: binds to the gap source inside the same museum segment. TURN rotates a unit rail 30 degrees, SLIDE moves source A perpendicular to that rail by 0.5 metres (alternating sign), FLIP reverses rail orientation, RESET restores both source inputs and rail, RULE reveals arithmetic. The actual shared gap feeds kept=axis*gap.dot(axis), remainder=gap-kept. One coordinate metre is displayed as half a metre on both stages and walls. This is a diagram scale, not player/world position measurement. Values are live while the hall is loaded, not a saved cross-session state.
+
+Test sequence: swap; common translation; coincidence; perpendicular slide; rail turn; sign reversal. Predict first, reveal second. Keep the input fixed while changing the receiver, then change the input in a direction the receiver cannot record. The closed loop is kept+remainder=gap. Zero gaps remain finite; the rail is never a zero direction.
+
+Existing dot and torque consoles are distinct examples, not subscribers to this pair. Dot uses an alignment slider and a chosen threshold; torque uses normalized directions and a displayed wheel angle. Its readout reports sin(theta), the chosen angle and a static wheel pose. The unit-direction cross product sets that pose; it does not integrate angular velocity or report rpm. The final chapter now identifies those limits instead of claiming free aiming, continuous physical wheel motion or a newly simulated force.
+
+Next on the unchanged route: VFM_05_Launch. Motion-before-Launch remains an editorial proposal.
+
+The remaining dot console uses normalized directions and FRIEND at dot &gt;= 0.985. Its ordinary slider spans a limited range; the full signed range of a dot product is mathematical context, not a claim that this control reaches every angle. The crank computes r_dir.cross(f_dir) from unit directions. Actual torque would include arm length and force magnitude; the displayed angular factor alone is not physical torque. Projection recombination and perpendicularity hold to ordinary floating-point precision.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act2_VectorArithmetic/final.md) is retained for comparison.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act2_VectorArithmetic/intent.md">Raw captured source</a></p><pre># What does an operation keep?
+
+Build from the preceding addition arena. Retain the five primary comparisons, with subtraction and projection now connected through one room-local source. Let the visitor predict what survives exchange, common translation, perpendicular movement and a change of rail before revealing code.
+
+All twelve artifacts remain; no sequence reorder. Next is VFM_05_Launch. Existing dot/torque representations are described as their implementations currently behave, including the crank&#x27;s sin(theta) readout and static wheel pose. A physical torque machine is later work, not a completed claim here.
+
+The reading pass follows reversal, threshold naming and a remainder that changes role with its rail. Keep the FRIEND label as a specific critical encounter, and the possibility of another use for the pink remainder. Do not reduce all five instruments to the same lesson about omitted information.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act2_VectorArithmetic/critical.md">Raw captured source</a></p><pre># A remainder can change its role
+
+The subtraction station retains displacement under common translation but reverses it under exchange of A and B. Relation and distance are not identical: equal separation does not decide which address is the destination.
+
+Projection retains one component relative to a chosen unit rail. A perpendicular change alters the input without altering the kept vector. The station explicitly preserves the remainder, so kept+remainder recovers the input; information loss occurs if only the projection is retained. Turning the rail reallocates what is kept. This is a testable framing choice, not proof that every classification or exclusion is the same process.
+
+The live connection makes the comparison accountable: both stations use one room-local pair of coordinates. Controls state their bounds, the diagrams state their half-size scale, and the receiver can visibly edit the upstream A. These conditions are part of the experiment.
+
+The retained dot console applies FRIEND to an angular threshold; its target has no modeled social relation. The retained torque console now names its normalized angular factor, sin(theta), and the wheel&#x27;s static pose. It makes the geometry available without simulating angular acceleration. These are specific seams between implementation and naming. A later force experiment should supply dynamics and measured state before claiming that the wheel teaches physical acceleration. Neither information-theoretic entropy nor a body&#x27;s lived experience is measured by these stations.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Vectors_Act2_VectorArithmetic/artifacts.md">Raw captured source</a></p><pre># Primary route
+
+1. vector_add — existing two-pad addition console.
+2. vector_sub — room_gap at (6,9), rotated 180 degrees: bounded coordinates, directed gap, SHIFT/SWAP/SAME and component controls.
+3. dot_aligner — existing alignment slider and angular classification diagram.
+4. projection_shadow — room_projection at (6,21), rotated 180 degrees: live shared gap, unit rail, kept part and perpendicular remainder. TURN/SLIDE/FLIP/RESET/RULE.
+5. torque_crank — existing leverage slider; normalized angular factor and drawn wheel angle. Its rpm readout is generated rather than measured.
+
+The seven existing supporting exhibits remain: vector_addition_walk, example_2_3_gravity_scaled_by_mass_vr, vector_dot_product_xl, vector_projection_reflection_xl, vector_cross_product_xl, vector_addition_xl_laser, vector_subtraction_xl_laser. Only vector_sub changes cell, from (8,8) to (6,9). Both new models state their half-size display scale.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act2_VectorArithmetic/blurb.md">Raw captured source</a></p><pre>A wide gallery where every operation appears twice — once as a toy in your hand, once at the size of a room you step into. Add two pushes by walking them head to tail. Flip one and find the gap between them. Turn a dial and watch a direction keep its line but change its length. Then the products: close an angle until two directions agree (the dot), cast a shadow of one vector onto another&#x27;s line (projection), and push across a lever instead of along it to find the turn left over (the cross). Arithmetic stops being symbols on a page and becomes things vectors do to each other.
+</pre></section></body></html>

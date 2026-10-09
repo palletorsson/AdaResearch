@@ -1,0 +1,185 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -483,9 +483,12 @@
+       "status": "desktop_verified_headset_pending",
+       "sequence": "forces",
+       "text_path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+-      "text_sha256": "859c7c8fdcd36be3be89b0e7e386411fec987678d27e8ce9dfe1f66590a24b2d",
++      "text_sha256": "e270dec4f34a0a1894a148093a442442e33c12b2fbaa47b5b13392c3261c6606",
+       "map_sha256": "04d80db61a70e28945a021154a53591a2170e694d26402e0b88a59d99fb5a1e4",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_02_Operations": {
+       "primary_tokens": [
+@@ -497,7 +500,10 @@
+       "text_path": "commons/maps/VFM_02_Operations/final.md",
+       "text_sha256": "51edcafb21e713d250e36300b70e28d0f5ba8ee832c7804c723a6d4d7016cd9f",
+       "map_sha256": "cdccdc152925176e55cdefcdc7297a2e1fb97ad7fc656b203c08076042fb852b",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "Vectors_Act2_VectorArithmetic": {
+       "primary_tokens": [
+@@ -511,9 +517,12 @@
+       "status": "desktop_verified_headset_pending",
+       "sequence": "forces",
+       "text_path": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+-      "text_sha256": "9a141e8b922c81f6487ef8ff0aad06e36266e07b5b2465ce0e16247b101cc1fe",
++      "text_sha256": "94331c97d9e05376cc8477d9236d411238f1840a2f6b8521fe0a32b7225b7492",
+       "map_sha256": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_05_Launch": {
+       "primary_tokens": [
+@@ -525,7 +534,10 @@
+       "text_path": "commons/maps/VFM_05_Launch/final.md",
+       "text_sha256": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458",
+       "map_sha256": "cf891a2af0ff03f26ad57a75a512c618d77f2993ea0573e8f9cc1b5e9fa7b813",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_03_Motion": {
+       "primary_tokens": [
+@@ -537,8 +549,11 @@
+       "sequence": "forces",
+       "text_path": "commons/maps/VFM_03_Motion/final.md",
+       "text_sha256": "4674c8b37c0f9b89097f43fea600ca1ae44adda04311fbcf8cd07bb584b01278",
+-      "map_sha256": "e1edd1d88baa953a11a679eb97340ed038e887dd54ab16a763fb70a2c6dcca3c",
+-      "learner_verified": false
++      "map_sha256": "eee92d1694c855c91bb21f41927cc60540338ebc08f50d2fb8ccb7a55d0214aa",
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "Vectors_Act3_FieldsAndMotion": {
+       "primary_tokens": [
+@@ -549,8 +564,11 @@
+       "sequence": "forces",
+       "text_path": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+       "text_sha256": "3050d9438bf37064deb243305c9823223f87428dd6e2c73c2aab650efce8cea3",
+-      "map_sha256": "be97fa6bf07a374954ac95b156efe5dadb4ccc23bbbe07a9672c2d5bca3616f7",
+-      "learner_verified": false
++      "map_sha256": "4fb97e5871633d9804c6d883333ea611427094e0db9fc22d129a5e9db16c360b",
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "Vectors_Act4a_KineticForces": {
+       "primary_tokens": [
+@@ -563,8 +581,11 @@
+       "sequence": "forces",
+       "text_path": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+       "text_sha256": "1f75c3d61f6b2dcc31fafd50e30f7bc88d080b25fc6b2da93c52afba70f0fc76",
+-      "map_sha256": "00f5dbea1d4958d9d512db7cbfb1f3f3f3049f985486e5c178fa60e77af0274c",
+-      "learner_verified": false
++      "map_sha256": "583fb38c809f12396b5f4a0d109ff30c1e8ed7e6c9015009642e02d4443b9a4e",
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "Vectors_Act4b_Oscillation": {
+       "primary_tokens": [
+@@ -576,7 +597,10 @@
+       "text_path": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+       "text_sha256": "dcb13eabab91ba35a0de3d52cd293dd61d276ac6070130d77da7cf7a0bb93cd0",
+       "map_sha256": "8f461aab3551f8b563dc87109a08c98ddee5f8cca5b209042d3c0cf1b164a1c4",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_07_Gravity": {
+       "primary_tokens": [
+@@ -587,9 +611,12 @@
+       "status": "desktop_verified_headset_pending",
+       "sequence": "forces",
+       "text_path": "commons/maps/VFM_07_Gravity/final.md",
+-      "text_sha256": "f6366b3978bf7db77d121824816887d9454bf419642b57376c8ba1b4879b1b7e",
++      "text_sha256": "ca438196f724c79371a732bcd85c8ad66ec7585da4cf1ccfec580c6efb7b9950",
+       "map_sha256": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_09_Legs": {
+       "primary_tokens": [
+@@ -602,7 +629,10 @@
+       "text_path": "commons/maps/VFM_09_Legs/final.md",
+       "text_sha256": "cf1c2f5112ca51a2d82126f5e83c24c508a39e760ce0db60bbd0dcdc02674018",
+       "map_sha256": "089240b597a97326f7e94d570f920531129347a5c74e2be60560ffadbfb4f9ec",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "VFM_08_Arena": {
+       "primary_tokens": [
+@@ -610,12 +640,15 @@
+         "collision_carts"
+       ],
+       "reason": "A scoped creature makes selection and retained feeding state inspectable; the existing collision passage distinguishes controller actions from conservation constraints.",
+-      "status": "desktop_verified_headset_pending",
++      "status": "behavior_checks_passed_teardown_failure",
+       "sequence": "forces",
+       "text_path": "commons/maps/VFM_08_Arena/final.md",
+       "text_sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+       "map_sha256": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+-      "learner_verified": false
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "49 behavioral/inventory/approach checks completed; headless engine teardown hangs or crashes. Not a clean runtime-suite pass."
+     },
+     "Vectors_Act5_ForceAsPlace": {
+       "primary_tokens": [
+@@ -627,9 +660,12 @@
+       "status": "desktop_verified_headset_pending",
+       "sequence": "forces",
+       "text_path": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+-      "text_sha256": "ff6d2e1ec8c762288533299a11d60412c4a3b1a2cafb7ca71341efe3e52c8142",
+-      "map_sha256": "d6aaa1086dabc9278ddfb87ef2748b6bd36862cc3368fd1b6e56531cac44f566",
+-      "learner_verified": false
++      "text_sha256": "d4d38c2de47d9746e1250923c552b654d10b33d7b10f10cafe34c88fce6546e8",
++      "map_sha256": "037918d58315c4fe0e8746cd3dc035851b87f8555a5d701c8d4940595f0075f4",
++      "learner_verified": false,
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "FormFinding_Descent": {
+       "primary_tokens": [
+@@ -2506,7 +2542,12 @@
+       "status": "desktop_verified_headset_pending",
+       "learner_verified": false,
+       "reason": "Fixed phase difference, relative frequency drift and mismatched throughput are distinct inspectable relations.",
+-      "map_sha256": "9c6210a78ae4e1220299895b29435781dcb4f130c8a8d4aa1322f69bf299f69d"
++      "map_sha256": "58077f5ba8da918fd400bf1d359a31170b2e76842404937bca47d3b8f30c5609",
++      "text_path": "commons/maps/Change_Choreography/final.md",
++      "text_sha256": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6",
++      "hash_method": "SHA-256 of raw file bytes",
++      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
++      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+     },
+     "Trans_Body": {
+       "primary_tokens": [

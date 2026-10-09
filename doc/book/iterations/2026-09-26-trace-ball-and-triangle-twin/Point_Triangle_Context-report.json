@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "central live twin is placed",
+      "passed": true
+    },
+    {
+      "name": "small creator starts with an editable triangle",
+      "passed": true
+    },
+    {
+      "name": "same three points appear at both scales",
+      "passed": true
+    },
+    {
+      "name": "white fill and black physical outlines",
+      "passed": true
+    },
+    {
+      "name": "small black outlines share the world-coordinate vertices",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-in-the-hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-small",
+      "passed": true
+    },
+    {
+      "name": "a held corner changes the large twin immediately",
+      "passed": true
+    },
+    {
+      "name": "enlargement preserves the exact vertex relation",
+      "passed": true
+    },
+    {
+      "name": "fill toggle affects both scales and retains edges",
+      "passed": true
+    },
+    {
+      "name": "four corners create two faces and one visible diagonal",
+      "passed": true
+    },
+    {
+      "name": "existing SHIFT START accepts the completed drawing",
+      "passed": true
+    },
+    {
+      "name": "SHIFT START changes the displayed internal diagonal",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-folded",
+      "passed": true
+    },
+    {
+      "name": "carried points are transformed into the moved creator's world space",
+      "passed": true
+    },
+    {
+      "name": "clear removes both copies without reseeding",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-two-scales",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "map": "Point_Triangle_Context",
+  "observations": {
+    "source_world": [
+      3.5,
+      1.46499991416931,
+      13.5
+    ],
+    "twin_world": [
+      6.5,
+      0.0,
+      15.5
+    ]
+  },
+  "passed": true,
+  "scope": "Native museum physics, production pickup with supplied grabber, shared vertices and real renders. Headset feel untested."
+}

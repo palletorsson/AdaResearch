@@ -1,0 +1,23 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"_triangle_vertices",
+			"_edge_samples",
+			"_edge_tangent",
+			"_interior_angle"
+		],
+		"limitation": "No continuous curvature morph, area proof, or inference about Godel is made",
+		"plane_angle_sum": 179.999996056588,
+		"sampled_edges": 6,
+		"segments_per_edge": 36,
+		"sphere_angle_sum": 271.127230270415,
+		"sphere_radius_error": 0.00000014305114737212
+	},
+	"geometry_nodes": 222,
+	"phases": 4,
+	"source_paths": [
+		"res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd"
+	],
+	"title": "A TRIANGLE DEPENDS ON ITS SURFACE"
+}

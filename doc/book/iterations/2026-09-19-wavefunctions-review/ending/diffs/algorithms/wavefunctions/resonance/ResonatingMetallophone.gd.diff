@@ -1,0 +1,16 @@
+--- before/algorithms/wavefunctions/resonance/ResonatingMetallophone.gd
++++ after/algorithms/wavefunctions/resonance/ResonatingMetallophone.gd
+@@ -10,10 +10,10 @@
+ # desire: Strike metal bars and hear pentatonic tones ring while seeing combined wave visualization
+ # critical_parameter: decay_time — controls how long each bar resonates after being struck
+ # triggers: striking a bar initiates a decaying sinusoidal vibration at that frequency
+-# emerges: music from physics — the pentatonic scale emerges from choosing bar lengths
++# emerges: chosen note frequencies become synthesized tones and determine visible bar lengths
+ # needs: VR strike interaction [has], wave visualizer [has]
+-# relationships: depends on ResonatingBar physics; contrasts with chladni_plate (discrete strikes vs continuous vibration); unlocks resonance and timbre
+-# truth: Every object has frequencies at which it wants to vibrate — striking reveals its voice.
++# relationships: depends on ResonatingBar strike detection and synthesized audio; contrasts with chladni_plate (discrete strikes vs continuous vibration); unlocks resonance and timbre
++# truth: This instrument chooses its notes first; a strike restarts the chosen decaying sine voice.
+ 
+ ## --- DNA (stage 2, promoted 2026-08-05) ---
+ ##

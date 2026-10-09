@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "exit turret present in actual loaded hall",
+      "passed": true
+    },
+    {
+      "name": "map configuration excludes the visitor",
+      "passed": true
+    },
+    {
+      "name": "existing scene range retained",
+      "passed": true
+    },
+    {
+      "name": "production player resolver finds supplied XR target contract",
+      "passed": true
+    },
+    {
+      "name": "nearby visitor is not selected",
+      "passed": true
+    },
+    {
+      "name": "ball hunting still selects a nearby ball",
+      "passed": true
+    },
+    {
+      "name": "other placements can still opt into player targeting",
+      "passed": true
+    },
+    {
+      "name": "disabling player targeting releases an existing player lock",
+      "passed": true
+    },
+    {
+      "name": "unrecognised config does not change targeting policy",
+      "passed": true
+    },
+    {
+      "name": "other turret placements retain original defaults",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ribbon-exit",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fabric-studio",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "turret_world": [
+      23.5,
+      0.0,
+      45.5
+    ]
+  },
+  "passed": true,
+  "room": "Ribbon_Patterns_03",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

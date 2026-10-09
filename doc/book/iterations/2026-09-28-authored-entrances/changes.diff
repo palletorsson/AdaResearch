@@ -1,0 +1,536 @@
+--- before/commons/scenes/endless_museum.gd
++++ after/commons/scenes/endless_museum.gd
+@@ -2927,6 +2927,20 @@
+ ## cached one stops being current, and printed once when it changes.
+ var _vr_eye_name: String = ""
+ func _vr_eye() -> Camera3D:
++	# Staging keeps its loading rig current until scene_loaded. The museum's
++	# own sibling rig already exists; arrivals must never move the loading rig.
++	var ancestor := get_parent()
++	while ancestor != null and ancestor != get_tree().root:
++		var owned := ancestor.get_node_or_null("XROrigin3D") as XROrigin3D
++		if owned != null:
++			if is_instance_valid(_vr_cam) and owned.is_ancestor_of(_vr_cam):
++				return _vr_cam
++			var owned_cameras: Array = []
++			_collect_of_type(owned, "XRCamera3D", owned_cameras)
++			if not owned_cameras.is_empty():
++				_vr_cam = owned_cameras[0]
++				return _vr_cam
++		ancestor = ancestor.get_parent()
+ 	if _vr_cam != null and is_instance_valid(_vr_cam):
+ 		var o: Node = _vr_cam.get_parent()
+ 		while o != null and not (o is XROrigin3D):
+@@ -24776,6 +24790,7 @@
+ 
+ 
+ func _vr_drop_in() -> void:
++	# Legacy continuous-museum entry. Portal mode uses em_portal_stream instead.
+ 	# EVERY LAUNCH, not only a lobby with a drop_hole (2026-09-06). The gate used
+ 	# to be the lobby's, because the only thing this did was put the visitor on
+ 	# the roof — so a sequence card opening at `color` placed no headset at all
+--- before/commons/scenes/em/em_portal_stream.gd
++++ after/commons/scenes/em/em_portal_stream.gd
+@@ -18,6 +18,8 @@
+ var _direction := 1
+ var _portals: Array[Dictionary] = []
+ var _landings: Dictionary = {}
++var _entry: Dictionary = {}
++var _recovery_elapsed := 0.0
+ const ARRIVAL_INSET := 1.15
+ var _armed := false
+ var _dwell := 0.0
+@@ -33,6 +35,7 @@
+ const TIMEOUT_MS := 60000
+ 
+ func configure(owner_museum: Node3D, initial_loading := false) -> void:
++	add_to_group("museum_portal_navigation")
+ 	museum = owner_museum
+ 	_initial_loading = initial_loading
+ 	name = "PortalLoading"
+@@ -42,6 +45,15 @@
+ 		_set_phase("boot", "Opening the entrance")
+ 	adopt_current.call_deferred()
+ 
++func staging_rig_ready() -> void:
++	# XRTools' usual centering would subtract the tracked offset a second
++	# time, after our floor-based arrival has already placed the body.
++	if busy:
++		_move_player(_cell_floor)
++	elif _initial_loading and _source.is_empty():
++		_move_player(museum.call("_drop_point") if String(_current.get("map", "")) == "Point_Zero" else _arrival)
++
++
+ func prepare_initial_arrival() -> void:
+ 	# Support exists before a hall does. Keep the actual XR body, as well as
+ 	# its tracking origin, out of the removed lounge while the grid builds.
+@@ -74,7 +86,7 @@
+ 	await get_tree().physics_frame
+ 	await get_tree().process_frame
+ 	_arrival = _landings.get(-1, Vector3(0,-1.0e9,0))
+-	if not _supported(_arrival):
++	if not _arrival_supported():
+ 		_fail("The entrance has no clear supported landing.")
+ 		return
+ 	if _initial_loading:
+@@ -86,6 +98,7 @@
+ 			museum.set("_last_ground", _arrival)
+ 		# A saved viewpoint still outranks a fresh entrance (e.g. editor toggle).
+ 		museum.call("_follow_resume")
++	_update_spawn_marker()
+ 	_restore_movement()
+ 	busy = false
+ 	_set_phase("idle", "")
+@@ -127,6 +140,36 @@
+ 	_dwell = 0.0
+ 	if not near_any:
+ 		_armed = true
++
++func _physics_process(delta: float) -> void:
++	# This replaces the grid bounds checker only while a portal museum exists.
++	# Use the actual physics body, never the room-scale tracking origin.
++	if museum == null or not bool(museum.get("_vr")):
++		return
++	_recovery_elapsed += delta
++	if _recovery_elapsed < 0.2:
++		return
++	_recovery_elapsed = 0.0
++	var rig: Node3D = museum.call("_vr_rig")
++	if rig == null: return
++	var body := rig.find_child("PlayerBody", true, false) as Node3D
++	if body == null: return
++	if busy:
++		# During construction the visitor belongs on the persistent loading
++		# floor. A late staging callback must not leave their body in the void.
++		if phase not in ["entering", "arriving", "support"] and body.global_position.distance_to(_cell_floor) > 4.0:
++			_move_player(_cell_floor)
++		return
++	if _current.is_empty() or _arrival.y < -1.0e8: return
++	var lowest := _arrival.y
++	var heights: Dictionary = museum.get("_walk_h")
++	for cell: Vector2i in heights:
++		lowest = minf(lowest, float(heights[cell]))
++	if body.global_position.y < lowest - 8.0 and _supported(_arrival):
++		_move_player(_arrival)
++		museum.set("_last_ground", _arrival)
++		events.append({"phase":"fall_recovered", "map":_current.get("map", ""), "landing":str(_arrival)})
++
+ 
+ func _unhandled_key_input(event: InputEvent) -> void:
+ 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_B and phase == "error":
+@@ -285,12 +328,13 @@
+ 	await get_tree().physics_frame
+ 	await get_tree().process_frame
+ 	_arrival = _return_point if returning else _landings.get(-_direction, Vector3(0,-1.0e9,0))
+-	if not _supported(_arrival):
++	if not _arrival_supported():
+ 		_fail("The destination has no clear supported landing.")
+ 		return
+ 	_set_phase("arriving", "The hall is ready")
+ 	_move_player(_arrival)
+ 	museum.set("_last_ground", _arrival)
++	_update_spawn_marker()
+ 	await get_tree().physics_frame
+ 	await get_tree().process_frame
+ 	_restore_movement()
+@@ -407,6 +451,82 @@
+ 			query.exclude = excluded
+ 	return space.intersect_shape(query, 1).is_empty()
+ 
++func _arrival_supported() -> bool:
++	if not _supported(_arrival): return false
++	if _entry.get("cage", false) and _arrival.distance_to(_entry.landing) < 0.1:
++		for i in range(12):
++			var step := _arrival.lerp((_entry.marker as Vector3)+Vector3(0,0,0.3), i/11.0)
++			if not _supported(step): return false
++	return true
++
++
++func _update_spawn_marker() -> void:
++	var spawn := museum.get_node_or_null("SpawnPoint") as Node3D
++	if spawn != null and _arrival.y > -1.0e8:
++		spawn.global_position = _arrival
++
++func _authored_entry() -> Dictionary:
++	var map_name := String(_current.get("map", ""))
++	# Point Zero has its own authored drop and lobby; do not turn its grid s into a portal.
++	if map_name == "Point_Zero": return {}
++	var path := "user://maps/%s/map_data.json" % map_name
++	if not FileAccess.file_exists(path): path = "res://commons/maps/%s/map_data.json" % map_name
++	if not FileAccess.file_exists(path): return {}
++	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
++	if not parsed is Dictionary: return {}
++	var doc: Dictionary = parsed
++	var layers: Dictionary = doc.get("layers", {})
++	var utilities: Array = layers.get("utilities", [])
++	var chosen := Vector2i(-1,-1)
++	var source := ""
++	# The museum's sp wins over a legacy grid s when both are present.
++	for kind: String in ["sp","s"]:
++		for z in range(utilities.size()):
++			for x in range(utilities[z].size()):
++				var token := str(utilities[z][x]).strip_edges().split("#")[0]
++				var parts := token.split(":")
++				if parts[0] != kind: continue
++				chosen = Vector2i(x,z)
++				if parts.size() >= 4 and parts[1].is_valid_float() and parts[3].is_valid_float():
++					chosen = Vector2i(int(float(parts[1])),int(float(parts[3])))
++				source = kind
++				break
++			if chosen.x >= 0: break
++		if chosen.x >= 0: break
++	if chosen.x < 0: return {}
++	# Several old grid routes run backwards. Their far-end s is not the
++	# beginning of the museum's forward walk. An explicit sp always wins;
++	# otherwise those maps retain the entrance-side fallback.
++	var structure_rows: Array = layers.get("structure", [])
++	if source == "s" and chosen.y > structure_rows.size() / 2:
++		return {}
++	var seg: Node3D = _current.node
++	var pad := float((seg.get_meta("em_simulation_stage", {}) as Dictionary).get("pad", 0.0))
++	var marker := seg.to_global(Vector3(chosen.x+0.5+pad,0,chosen.y+0.5+pad+float(museum.get("VESTIBULE_H"))))
++	var level: float = museum.call("_arrival_floor_y", marker.x, marker.z)
++	var grid := seg.get_node_or_null("SimGrid_" + map_name) as Node3D
++	if grid != null:
++		var cell_size := float(grid.get("cube_size"))
++		marker = grid.to_global(Vector3(chosen.x*cell_size,0,chosen.y*cell_size))
++		var structure: Array = layers.get("structure", [])
++		var height := 1.0
++		if chosen.y < structure.size() and chosen.x < structure[chosen.y].size():
++			var token := str(structure[chosen.y][chosen.x])
++			if token.is_valid_float(): height = maxf(1.0,float(token))
++		level = grid.global_position.y + (height-0.5)*cell_size
++	var floor_point := _nearest_floor(Vector3(marker.x,level+0.4,marker.z))
++	var config: Dictionary = doc.get("map_info", {}).get("museum", {}).get("portal_entry", {})
++	var cage := bool(config.get("cage", source == "sp" and chosen.y == 0 and pad == 0.0))
++	# A malformed/blocked authored entry is reported, not silently moved past
++	# its opening exhibits. The visitor stays on the supported loading floor.
++	if not _supported(floor_point):
++		return {"invalid":true,"source":source,"cell":chosen}
++	var door := floor_point - Vector3(0,0,3.0 if cage else ARRIVAL_INSET)
++	if not _portal_clear(door): return {"invalid":true,"source":source,"cell":chosen}
++	return {"source":source,"cell":chosen,"marker":floor_point,"cage":cage,
++		"door":door,"landing":door+Vector3(0,0,ARRIVAL_INSET)}
++
++
+ func _find_landing(at_far_end: bool) -> Vector3:
+ 	var cells: Dictionary = museum.get("_walk_cells")
+ 	var node: Node3D = _current.node
+@@ -462,6 +582,7 @@
+ func install_portals() -> void:
+ 	_portals.clear()
+ 	_landings.clear()
++	_entry = _authored_entry()
+ 	var seg: Node3D = _current.node
+ 	if seg.has_node("HallPortals"):
+ 		seg.get_node("HallPortals").queue_free()
+@@ -479,7 +600,14 @@
+ 		else:
+ 			var next_map: String = museum.call("_peek_next_authored_map")
+ 			if next_map != "": title = next_map
+-		var p := _find_landing(direction > 0)
++		var p := Vector3.ZERO
++		if direction < 0 and not _entry.is_empty():
++			if bool(_entry.get("invalid", false)):
++				push_warning("[em-portals] blocked authored entry: " + str(_entry))
++				continue
++			p = _entry.door
++		else:
++			p = _find_landing(direction > 0)
+ 		if p.y < -1.0e8:
+ 			continue
+ 		var frame := Node3D.new()
+@@ -493,6 +621,8 @@
+ 		else:
+ 			builder.build(frame,title,direction)
+ 			_portals.append({"direction":direction, "position":p})
++		if direction < 0 and bool(_entry.get("cage", false)):
++			builder.build_entry_cage(frame)
+ 		var landing := p + Vector3(0,0,-direction * ARRIVAL_INSET)
+ 		_landings[direction] = landing
+ 	if not _portals.any(func(p: Dictionary): return int(p.direction) == 1):
+--- before/commons/scenes/em/em_portal_frame.gd
++++ after/commons/scenes/em/em_portal_frame.gd
+@@ -114,6 +114,42 @@
+ 	_floor_quad(st,-1.04,1.04,2.08,2.1)
+ 	_mesh(frame,st,_material(accent,0,0.6,true),"LandingBorder")
+ 
++static func build_entry_cage(frame: Node3D) -> void:
++	# A compact enclosure OUTSIDE a boundary sp. The front opens into a
++	# narrow supported link ending half a metre beyond the authored marker.
++	var body := StaticBody3D.new()
++	body.name = "EntryCageCollision"
++	frame.add_child(body)
++	var glass := _material(Color(0.65,0.42,0.78,0.16),0.1,0.2)
++	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
++	var metal := _material(Color(0.12,0.10,0.15),0.8,0.24)
++	var trim := _material(Color(0.63,0.20,1.0),0,0.6,true)
++	for x: float in [-1.14,1.14]:
++		var size := Vector3(0.06,2.4,2.94)
++		var centre := Vector3(x,1.15,0.65)
++		_collider(body,size,centre)
++		_box(frame,size,centre,glass,"SideGlass")
++		for z: float in [-0.79,2.09]:
++			_box(frame,Vector3(0.065,2.5,0.065),Vector3(x,1.20,z),metal,"CagePost")
++		_box(frame,Vector3(0.045,0.04,2.92),Vector3(x,2.42,0.65),trim,"CageLight")
++	_collider(body,Vector3(2.3,2.4,0.08),Vector3(0,1.15,-0.8))
++	_box(frame,Vector3(2.3,2.4,0.08),Vector3(0,1.15,-0.8),glass,"BackGlass")
++	for x: float in [-0.85,0.85]:
++		var size := Vector3(0.55,1.1,0.06)
++		var centre := Vector3(x,0.5,2.1)
++		_collider(body,size,centre)
++		_box(frame,size,centre,glass,"FrontGuard")
++	var link_size := Vector3(1.12,0.28,1.55)
++	var link_centre := Vector3(0,-0.19,2.775)
++	_collider(body,link_size,link_centre)
++	_box(frame,link_size,link_centre,metal,"EntryLink")
++	for x: float in [-0.59,0.59]:
++		var size := Vector3(0.06,1.1,1.4)
++		var centre := Vector3(x,0.5,2.8)
++		_collider(body,size,centre)
++		_box(frame,size,centre,glass,"LinkGuard")
++	_text(frame,"ARRIVE / BEGIN",Vector3(0,2.22,-0.73),36,0.002,Color(0.88,0.73,1.0))
++
+ static func _material(color: Color, metallic: float, roughness: float, luminous := false) -> StandardMaterial3D:
+ 	var mat := StandardMaterial3D.new()
+ 	mat.albedo_color = color
+--- before/commons/scenes/mapobjects/PlayerBoundsCheck.gd
++++ after/commons/scenes/mapobjects/PlayerBoundsCheck.gd
+@@ -60,6 +60,11 @@
+ 	_find_player_node()
+ 
+ func _physics_process(delta):
++	# Portal halls own arrival/recovery. Their loading cell and wide halls are
++	# outside a grid map's origin-centred bounds; resetting here teleports the
++	# visitor back to an obsolete spawn while the destination is still loading.
++	if get_tree().get_first_node_in_group("museum_portal_navigation") != null:
++		return
+ 	if not active:
+ 		return
+ 
+--- before/commons/scenes/endless_museum_staged.tscn
++++ after/commons/scenes/endless_museum_staged.tscn
+@@ -1,4 +1,4 @@
+-[gd_scene load_steps=3 format=3 uid="uid://em_staged_menu"]
++[gd_scene load_steps=4 format=3 uid="uid://em_staged_menu"]
+ 
+ ; THE MUSEUM, REACHED FROM THE SHIPPED GAME LOOP.
+ ;
+@@ -10,15 +10,19 @@
+ ; XR Tools scene_base), so the staging system, loading screen, and fade all
+ ; treat the museum like any other destination.
+ ;
+-; The origin override spawns the player at the desktop walker's spawn cell
+-; (7.5, 0, 1.5), turned 180° to face into the museum along +z.
++; The origin override supplies the initial forward orientation. The portal
++; coordinator places the actual XR body after the landing floor is ready;
++; the scene base below prevents staging from recentering that body twice.
+ ;
+ ; Reached from: MainMenu3D sequence picker, the "Endless Museum" card.
+ 
+ [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
+ [ext_resource type="Script" path="res://commons/scenes/em/em_staged_museum.gd" id="2_museum"]
+ 
++[ext_resource type="Script" path="res://commons/scenes/em/em_portal_scene_base.gd" id="3_portal_base"]
++
+ [node name="Base" instance=ExtResource("1_base")]
++script = ExtResource("3_portal_base")
+ 
+ [node name="XROrigin3D" parent="." index="2"]
+ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 0.1, 1.5)
+--- before/commons/maps/Point_Trace/map_data.json
++++ after/commons/maps/Point_Trace/map_data.json
+@@ -38,7 +38,7 @@
+ 	  ["w", "w", "w", "1", "1", "1", "w", "w", "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+ 	],
+ 	"utilities": [
+-	  [" ", "sp", "m:0:3:-1:0.1", " ", " ", " ", "an:-90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", " ", "m:0:3:-1:0.1", "sp", " ", " ", "an:-90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+--- before/tools/probes/hall_portal_navigation.gd
++++ after/tools/probes/hall_portal_navigation.gd
+@@ -5,6 +5,13 @@
+ var museum: Node3D
+ var landing_checks: Array[Dictionary] = []
+ var xr_body: CharacterBody3D
++var bounds: Node3D
++var observed_bounds_reset := false
++
++func _physics_process(_delta: float) -> bool:
++	if bounds != null and float(bounds.get("_reset_cooldown_timer")) > 0.0:
++		observed_bounds_reset = true
++	return false
+ 
+ func _initialize() -> void:
+ 	call_deferred("run")
+@@ -27,17 +34,37 @@
+ 	var spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OS.get_cmdline_user_args()[0]))
+ 	var folder: String = spec["run"]
+ 	var vr := bool(spec.get("vr", false))
+-	if vr:
++	var staged := bool(spec.get("staged", false))
++	var loading_rig: XROrigin3D
++	var scene: Node3D
++	if staged:
++		scene = load("res://commons/scenes/base.tscn").instantiate()
++		scene.set_script(load("res://commons/scenes/em/em_portal_scene_base.gd"))
++	else:
++		scene = Node3D.new()
++	root.add_child(scene)
++	current_scene = scene
++	if vr and staged:
++		xr_body = scene.find_child("PlayerBody", true, false)
++		bounds = scene.find_child("PlayerBoundsCheck", true, false)
++		scene.get_node("XROrigin3D/XRCamera3D").position = Vector3(1.4,1.7,-1.1)
++	elif vr:
+ 		var rig := XROrigin3D.new()
++		rig.name = "XROrigin3D"
+ 		var eye := XRCamera3D.new()
+ 		eye.name = "Camera"
+-		eye.position = Vector3(0.2, 1.7, 0.1)
++		eye.position = Vector3(1.4, 1.7, -1.1) if bool(spec.get("roomscale", false)) else Vector3(0.2, 1.7, 0.1)
+ 		rig.add_child(eye)
+ 		xr_body = load("res://addons/godot-xr-tools/player/player_body.tscn").instantiate()
+ 		rig.add_child(xr_body)
+-		root.add_child(rig)
++		scene.add_child(rig)
++		if bool(spec.get("bounds", false)):
++			bounds = load("res://commons/scenes/mapobjects/PlayerBoundsCheck.gd").new()
++			bounds.name = "PlayerBoundsCheck"
++			scene.add_child(bounds)
+ 		check(xr_body.get("camera_node") == eye, "XR body tracks the simulated headset")
+ 	museum = (load(folder + "museum_snapshot.tscn") as PackedScene).instantiate()
++	museum.name = "Museum"
+ 	museum.set("EM_CONTROL", folder + "control.json")
+ 	museum.set("_hand_path", folder + "necklace_hand.json")
+ 	museum.set("_overrides_path", folder + "em_overrides.json")
+@@ -45,7 +72,15 @@
+ 	museum.set("start_map", spec["room"])
+ 	museum.set("plan_file", folder + "plan.json")
+ 	museum.set("_force_vr", vr)
+-	root.add_child(museum)
++	if staged:
++		loading_rig = XROrigin3D.new()
++		loading_rig.name = "StagingLoadingRig"
++		var loading_eye := XRCamera3D.new()
++		loading_rig.add_child(loading_eye)
++		root.add_child(loading_rig)
++		loading_rig.position = Vector3(100,1,100)
++		loading_rig.current = true
++	scene.add_child(museum)
+ 	var started := Time.get_ticks_msec()
+ 	while museum.get("_portal_stream") == null and Time.get_ticks_msec() - started < 60000:
+ 		await process_frame
+@@ -58,6 +93,13 @@
+ 	while (portal.get("_portals") as Array).is_empty() and Time.get_ticks_msec() - started < 60000:
+ 		await process_frame
+ 	await wait_idle(portal)
++	if staged:
++		# A late staging handoff must not subtract the room-scale offset twice.
++		check(loading_rig.global_position == Vector3(100,1,100), "Museum never moves the staging loading rig")
++		var before := xr_body.global_position
++		scene.call("scene_loaded")
++		for i in range(70): await physics_frame
++		check(xr_body.global_position.distance_to(before) < 0.25, "Late staging handoff keeps the supported feet")
+ 	check((museum.get("_segments") as Array).size() == 1, "Exactly one hall at boot")
+ 	var current: Dictionary = portal.get("_current")
+ 	check(str(current.get("map", "")) == str(spec["room"]), "Requested start hall")
+@@ -73,6 +115,17 @@
+ 		check(Vector2(body.global_position.x-special.x,body.global_position.z-special.z).length() < 0.3, "Point Zero keeps its authored entry position")
+ 		check(absf(body.global_position.y-special.y) < 0.5, "Point Zero keeps its authored entry height")
+ 		landing_checks.append({"stage":"Point Zero special opening","target":str(special),"actual":str(body.global_position)})
++	if spec.has("first_landing"):
++		var xyz: Array = spec["first_landing"]
++		var authored := Vector3(float(xyz[0]), float(xyz[1]), float(xyz[2]))
++		check((portal.get("_arrival") as Vector3).distance_to(authored) < 0.01, "Authored entrance precedes the first exhibits")
++	if bool(spec.get("recovery", false)) and vr:
++		var landing: Vector3 = portal.get("_arrival")
++		portal.call("_move_player", landing - Vector3(0,20,0))
++		check(xr_body.global_position.y < landing.y-10.0, "Recovery test starts below the hall")
++		for i in range(90): await physics_frame
++		check(xr_body.global_position.distance_to(landing) < 0.3, "A fall returns the XR body to the supported entrance")
++		check((portal.get("events") as Array).any(func(e: Dictionary): return e.get("phase", "") == "fall_recovered"), "Portal coordinator records the recovery")
+ 	var doors: Array = portal.get("_portals")
+ 	if doors.is_empty():
+ 		push_error("No exit doorway was placed")
+@@ -80,21 +133,33 @@
+ 		return
+ 	if spec.has("shot"):
+ 		root.size = Vector2i(1440,1000)
+-		var original: Camera3D = museum.get("_cam")
++		var original: Camera3D = museum.call("_vr_eye") if vr else museum.get("_cam")
+ 		for child in original.get_children():
+ 			if child is Timer: child.paused = true
+ 		museum.set_physics_process(false)
+ 		museum.set_process(false)
+ 		var camera := Camera3D.new()
+ 		root.add_child(camera)
+-		camera.global_position = doors[0].position + Vector3(1.4,1.7,-4.0)
+-		camera.look_at(doors[0].position+Vector3(0,1.35,0), Vector3.UP)
++		if bool(spec.get("entry_shot", false)):
++			var entry: Dictionary = portal.get("_entry")
++			camera.global_position = entry.door + Vector3(3.5,2.3,-0.4)
++			camera.look_at(entry.marker + Vector3(0,0.8,-1), Vector3.UP)
++		else:
++			camera.global_position = doors[0].position + Vector3(1.4,1.7,-4.0)
++			camera.look_at(doors[0].position+Vector3(0,1.35,0), Vector3.UP)
+ 		camera.fov = 54.0
+ 		camera.current = true
+ 		for i in range(12): await process_frame
+ 		await RenderingServer.frame_post_draw
+ 		root.get_texture().get_image().save_png(str(spec["shot"]))
+ 		print("PORTAL SHOT: ", doors[0].position, " camera ", root.get_camera_3d().global_position)
++		if spec.has("view_shot"):
++			var entry: Dictionary = portal.get("_entry")
++			camera.global_position = entry.landing + Vector3(0,1.65,0)
++			camera.look_at(entry.marker + Vector3(0,1.3,2),Vector3.UP)
++			for i in range(10): await process_frame
++			await RenderingServer.frame_post_draw
++			root.get_texture().get_image().save_png(str(spec["view_shot"]))
+ 		camera.queue_free()
+ 		original.make_current()
+ 		for child in original.get_children():
+@@ -129,7 +194,8 @@
+ 	await check_landing(portal, 1, "Return arrival")
+ 	check(peak_halls <= 1, "Never two resident halls")
+ 	check(not bool(portal.get("_armed")), "Arrival cannot immediately bounce back")
+-	var report := {"room":spec["room"], "next":spec["next"], "vr_simulated":vr,
++	check(not observed_bounds_reset, "Rig bounds checker does not reset museum arrival")
++	var report := {"staged_rig":staged,"observed_bounds_reset":observed_bounds_reset,"room":spec["room"], "next":spec["next"], "vr_simulated":vr,
+ 		"landing_checks":landing_checks, "xr_physics_body":is_instance_valid(xr_body),
+ 		"peak_resident_halls":peak_halls, "passed":failures.is_empty(), "failures":failures, "events":portal.get("events")}
+ 	var f := FileAccess.open(folder + "report.json", FileAccess.WRITE)
+@@ -157,4 +223,13 @@
+ 	check(bool(portal.call("_supported", expected)), label + ": pad has clearance")
+ 	var inward := Vector3(0,0,-end)
+ 	check(bool(portal.call("_supported", expected + inward * 1.15)), label + ": pad connects to hall floor")
+-	landing_checks.append({"stage":label,"pad":str(expected),"settled_feet":str(walker.global_position),"slabs":collisions.size()})
++	var entry: Dictionary = portal.get("_entry")
++	if end == -1 and not entry.is_empty() and not entry.get("invalid", false):
++		if entry.get("cage", false):
++			check(expected.z < (entry.marker as Vector3).z, label + ": cage precedes the first authored cell")
++			for i in range(12):
++				var p := expected.lerp((entry.marker as Vector3)+Vector3(0,0,0.3),i/11.0)
++				check(bool(portal.call("_supported",p)), label + ": walkable link into the opening at " + str(p))
++		else:
++			check(expected.distance_to(entry.marker) < 0.01, label + ": exact authored spawn")
++	landing_checks.append({"entry_source":entry.get("source","fallback"),"entry_cell":str(entry.get("cell","")),"cage":entry.get("cage",false),"stage":label,"pad":str(expected),"settled_feet":str(walker.global_position),"slabs":collisions.size()})
+--- before/commons/scenes/em/em_portal_scene_base.gd
++++ after/commons/scenes/em/em_portal_scene_base.gd
+@@ -0,0 +1,14 @@
++extends XRToolsSceneBase
++## Staged museum arrival belongs to its portal coordinator. Ordinary XRTools
++## centering uses the origin as a spawn, which re-applies the tracked head offset.
++
++func scene_loaded(user_data = null) -> void:
++	var museum := get_node_or_null("Museum")
++	if museum == null or not bool(museum.get("_portal_mode")):
++		super.scene_loaded(user_data)
++		return
++	$XROrigin3D.current = true
++	$XROrigin3D/XRCamera3D.current = true
++	var portal: Node = museum.get("_portal_stream")
++	if portal != null:
++		portal.call("staging_rig_ready")

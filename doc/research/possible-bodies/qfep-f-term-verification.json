@@ -1,0 +1,35 @@
+{
+  "hall": "QFEP_F_Term",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "eight_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "layer_shapes": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "dark_sphere",
+    "lambda_slider",
+    "science_screen",
+    "shannon_workbench",
+    "snap_cube_puzzle",
+    "snap_tetra_puzzle",
+    "crystal_cluster"
+  ],
+  "primary_artifacts": [
+    "shannon_workbench"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_F_Term\\map_data.json": "acc356d72af92e114ba728c858fa2bec1e898c6f69fa13f9fa0f910981801305",
+    "commons\\maps\\QFEP_F_Term\\final.md": "db3e855ee8ee0bd10b5850a202ab459792189145e0c15a07bdce6d9f6c08fb98",
+    "commons\\maps\\QFEP_F_Term\\tutorial.md": "e2e4e63a86d197a919afd7d2a948bd48f76f12f3fa3e6e2310c707487d9938fa",
+    "commons\\maps\\QFEP_F_Term\\technical.md": "34cbc34270a2a4c8b628f87c4dc27d87981a54f1aa5692d8f1df78eff4aff686",
+    "commons\\maps\\QFEP_F_Term\\critical.md": "d63190e0c1eadc42de58c9089553a61bca1aeed9a6c43ffdbff4a7aea48e19eb"
+  }
+}

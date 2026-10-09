@@ -1,0 +1,22 @@
+--- before/commons/artifacts/turret_targeting/laser_turret.gd
++++ commons/artifacts/turret_targeting/laser_turret.gd
+@@ -47,6 +47,19 @@
+ var laser_glow: MeshInstance3D
+ var impact_particles: GPUParticles3D
+ var eye_glow: MeshInstance3D
++
++# Placements can retain ball hunting without making the visitor a target.
++# Configuration may arrive before _ready or while a target is already locked.
++func apply_grid_config(config: Dictionary) -> void:
++	if not config.has("target_player"):
++		return
++	match str(config["target_player"]).strip_edges().to_lower():
++		"true", "1": target_player = true
++		"false", "0": target_player = false
++		_: return
++	if not target_player and is_inside_tree() and is_instance_valid(current_target):
++		if current_target == _find_player():
++			_lose_target()
+ 
+ func _ready() -> void:
+ 	_build_turret()

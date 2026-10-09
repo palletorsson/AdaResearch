@@ -1,0 +1,90 @@
+--- before/tools/publish_ca_complete_readings.py
++++ after/tools/publish_ca_complete_readings.py
+@@ -2,12 +2,13 @@
+ from pathlib import Path
+ from urllib.parse import urlsplit,unquote
+ from html import escape
+-import ast,hashlib,json,re,shutil,zipfile
++import ast,hashlib,json,re,shutil,zipfile,posixpath
+ import markdown
+ from bs4 import BeautifulSoup
+ 
+ R=Path(__file__).resolve().parents[1]
+ O=R/'doc/book/iterations/2026-10-08-ca-complete-readings'
++REVISION=R/'doc/book/iterations/2026-10-08-ca-a-question-to-follow'
+ SEQ=R/'commons/maps/sequences/cellularautomata.json'
+ order=json.loads(SEQ.read_text(encoding='utf-8-sig'))['sequences']['cellularautomata']['maps']
+ assert order==['CA_Introduction','CA_ElementaryRules','CA_GameOfLife','CA_BeyondBinary','CA_ExpandingSpace','CA_SoftRules','CA_AgentsCircuits','CA_EdgeOfChaos']
+@@ -172,6 +173,12 @@
+ 
+ This is the lineage being proposed, not a verdict that every transition already works.
+ 
++## Revision after the first complete-sequence assessment
++
++The required eight lessons and nineteen code files remain. The middle reflections now leave more room for the encounter before its explanation. Expanding Space adds a route to attempt while the installed field is running. The final tutorial offers an optional composition: return to an earlier operation, follow a question that emerges, and establish what the resulting construction actually does. Trace provides one starting point, recording each committed input including repeated positions and absence. The student's choice remains open.
++
++Read `review-notes/index.html` for the response and before/after passages. An author-made recorder/replayer passed thirteen fresh native checks, including 6,400 cell values across eighty updates. This tests one possible response to the optional task; it is not a ninth required lesson or an independent ghost-student result. Assess whether the invitation allows a question beyond the prescribed comparisons. The wider comparison of dynamical regimes remains a proposal; the final hall does not establish a transition into chaos.
++
+ ## Questions for the reviewer
+ 
+ - Can you identify one main new operation in each lesson, what it reuses, and what you can carry onward? Where is a difficulty increase insufficiently prepared?
+@@ -208,6 +215,11 @@
+ stats=f'<p class="meta">Eight halls · sixteen complete manuscripts · nineteen code files<br>Tutorial: approximately {totals["tutorial"]["prose_words_approx"]:,} prose words + {totals["tutorial"]["code_lines"]:,} code lines · Reflection: approximately {totals["final"]["prose_words_approx"]:,} prose words</p>'
+ body='<main><p class="eyebrow">Endless Museum · complete Cellular Automata sequence</p><h1>A state, a history,<br>a body in the rule.</h1><p class="lead">Eight halls. Two full readings. From a row with neighbours to a comparison of what one difference can keep.</p><div class="downloads"><a href="tutorial.html">Full tutorial</a><a href="final.html">Full reflection</a><a href="cellular-automata-review.zip">Review ZIP</a></div>'+stats+'<p><a href="parallel.html">Tutorial left · reflection right</a> · <a href="ca-tutorial.md">Tutorial Markdown</a> · <a href="ca-final.md">Reflection Markdown</a></p><p class="note">For your reviewer: start with <a href="review.html">the brief</a>. The texts and code are complete; the environment is the existing Endless Museum. This export preserves the canonical writing.</p><h2>The proposed progression</h2><table class="review-table"><thead><tr><th>Hall</th><th>What is added</th><th>The point returns</th></tr></thead><tbody>'+rows+'</tbody></table><h2>The halls</h2>'+cards+'<section id="evidence"><h2>Included evidence</h2><p>Previously recorded native runs, with current printed-code hashes checked. These are scoped receipts, not a fresh whole-sequence or headset test.</p><table><thead><tr><th>Hall</th><th>Receipts</th></tr></thead><tbody>'+evidence_rows+'</tbody></table></section><p><a href="manifest.json">Sources, code and image hashes</a> · <a href="validation.json">Compilation checks</a> · <a href="REVIEW_BRIEF.md">Reviewer brief Markdown</a></p></main>'
+ write(O/'index.html',page('Cellular Automata — complete review readings',body))
++shutil.copytree(REVISION,O/'review-notes',dirs_exist_ok=True)
++revision=json.loads(read(REVISION/'evidence.json'))
++assert revision['required_code_files_unchanged']==19 and revision['fresh_optional_checks']==13
++index=read(O/'index.html').replace('<h2>The proposed progression</h2>','<p class="note"><a href="review-notes/index.html">Feedback revision: a question to follow</a> — six revised manuscripts, an optional return to Trace, and thirteen fresh checks of one author-made response. <a href="review-notes/changes.html">Before / after</a>.</p><h2>The proposed progression</h2>')
++write(O/'index.html',index)
+ readme='''# Cellular Automata — complete review package
+ 
+ Open index.html after extracting this ZIP. Start the review with REVIEW_BRIEF.md or review.html.
+@@ -219,6 +231,7 @@
+ - sources/: sixteen untouched canonical manuscripts, active sequence JSON and current lesson contracts. Raw image paths in these snapshots remain original; use the compiled readings for portable images.
+ - student-files/: nineteen exact printed code files in separate hall folders. All eight PointBody copies are identical. Follow each tutorial inside the prepared Endless Museum workspace with Godot XR Tools and the existing player, camera and lighting. This ZIP is a review package, not a standalone Godot project.
+ - evidence/: previously recorded learner/museum checks and logs, plus the opening's later layout run. No simulations were rerun for this export. Counts include different kinds of assertions and must not be treated as an end-to-end student score.
++- review-notes/: response to the supplied assessment, before/after manuscripts, source diffs, and an optional recorder/replayer with thirteen fresh native checks. These new checks concern one author-made composition, not the required lessons or an independent student.
+ - manifest.json and validation.json: file hashes, source parity, code parity, link checks and ZIP validation.
+ 
+ All eight halls follow the current spine. Use the lesson titles rather than interpreting the historical map IDs as syllabus descriptions. Compiled footnotes are namespaced and image paths local; original prose and code remain unabridged. External source links still require internet access.
+@@ -233,6 +246,7 @@
+ for source in sources:assert sha(R/source['path'])==source['sha256']==sha(O/source['copy'])
+ assert sha(SEQ)==sha(O/'sources/cellularautomata.json')
+ manifest={'date':'2026-10-08','sequence':'cellularautomata','order':order,'sequence_sha256':sha(SEQ),'halls':halls,'sources':sources,'student_files':printed,'assets':assets,'totals':totals,'previously_recorded_evidence':evidence,'all_point_body_copies_identical':True,'canonical_sources_modified':False,'runtime_tests_rerun_for_compilation':False}
++manifest['editorial_revision']=revision
+ dump(O/'manifest.json',manifest)
+ # Placeholder allows link validation to include the receipt itself.
+ dump(O/'validation.json',{'status':'checking'})
+@@ -245,7 +259,7 @@
+     if p.suffix=='.html':z.writestr(name,read(p).replace('href="cellular-automata-review.zip"','href="README.md"').replace('>Download ZIP</a>','>Package README</a>').replace('>Review ZIP</a>','>Package README</a>'))
+     else:z.write(p,name)
+ pack()
+-links=0;chapters=0;pages={p:BeautifulSoup(read(p),'html.parser') for p in O.glob('*.html')}
++links=0;chapters=0;pages={p:BeautifulSoup(read(p),'html.parser') for p in O.rglob('*.html')}
+ for p,soup in pages.items():
+  ids=[t['id'] for t in soup.find_all(id=True)];assert len(ids)==len(set(ids)),p
+  for tag in soup.find_all(['a','img','link']):
+@@ -257,19 +271,19 @@
+   assert dest.is_relative_to(O) and dest.is_file(),(p,url)
+   if u.fragment and dest.suffix=='.html':assert pages[dest].find(id=unquote(u.fragment)),(p,url)
+   links+=1
+- if p.name in ['tutorial.html','final.html','parallel.html']:
++ if p.parent==O and p.name in ['tutorial.html','final.html','parallel.html']:
+   assert [t['id'] for t in soup.select('section.chapter')]==order;chapters+=8
+ with zipfile.ZipFile(archive) as z:
+  assert z.testzip() is None
+  for source in sources:assert hashlib.sha256(z.read(source['copy'])).hexdigest()==source['sha256']
+- for name in ['index.html','tutorial.html','final.html','parallel.html','review.html']:
++ for name in [n for n in z.namelist() if n.endswith('.html')]:
+   soup=BeautifulSoup(z.read(name).decode('utf-8'),'html.parser')
+   for tag in soup.find_all(['a','img','link']):
+    url=tag.get('href') or tag.get('src')
+    if not url:continue
+    u=urlsplit(url)
+    if u.scheme or u.netloc or not u.path:continue
+-   assert unquote(u.path) in z.namelist(),(name,url)
++   assert posixpath.normpath(posixpath.join(posixpath.dirname(name),unquote(u.path))) in z.namelist(),(name,url)
+ dump(O/'validation.json',{'canonical_manuscripts_match_snapshots':16,'printed_files_match_studies_and_prior_tested_files':19,'point_body_copies_identical':8,'combined_code_blocks_exact':19,'rendered_code_blocks_exact_in_each_reading':19,'chapter_sections_in_spine_order':chapters,'local_links_and_anchors_checked':links,'assets':len(assets),'duplicate_html_ids':0,'zip_integrity':'passed','zip_internal_links':'passed','canonical_sources_modified':False,'runtime_tests_rerun':False,'browser_render_checked':False})
+ pack()
+ print(json.dumps({'output':str(O),'manuscripts':len(sources),'code_files':len(printed),'assets':len(assets),'links':links,'totals':totals,'zip_mb':round(archive.stat().st_size/1024**2,2)},indent=2))

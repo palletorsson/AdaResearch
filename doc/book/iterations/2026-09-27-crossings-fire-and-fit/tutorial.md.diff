@@ -1,0 +1,27 @@
+--- before/tutorial.md
++++ current/tutorial.md
+@@ -79,7 +79,7 @@
+ static_body.transform = mesh_instance.transform
+ ```
+ 
+-These excerpts from `rotation_cube.gd` connect the visible angle to the physical surface. The hall opts into `profile:bridge`: a plank 3.6 metres long, one metre wide and 0.2 metres thick. Its centre stays fixed. At zero degrees it lies across the route, with a gap ahead and behind; at ninety degrees its length reaches across the three-metre opening, overlapping each bank by 0.3 metres. Its top stays level with the floor throughout the Y turn. The four-second pauses give time to cross while aligned.
++These excerpts from `rotation_cube.gd` connect the visible angle to the physical surface. The hall opts into `profile:bridge`: a plank three metres long, one metre wide and 0.2 metres thick. Its centre stays fixed. At zero degrees it lies across the route, with a gap ahead and behind; at ninety degrees its length reaches across the three-metre opening, meeting both banks edge to edge. Its top stays level with the floor throughout the Y turn. The four-second pauses give time to cross while aligned.
+ 
+ Now compare the three events. Translation carries the surface between banks. Scale grows a surface until it meets them. Rotation aligns a length with them. The banks supply a shared reference, while the player's body tests whether the apparent opening is physically usable.
+ 
+@@ -123,12 +123,12 @@
+ 
+ ## Change the reference: an adjustable landing
+ 
+-After the third crossing, MOVE THE BANK gives the far landing a one-metre range along local +z. Its top remains at the grid deck. A single slider sets `target_displacement`; `_physics_process` advances at 0.25 m/s. RESET returns both the target and slider to zero. The original 3.6-metre plank and its timer are unchanged.
++After the third crossing, MOVE THE BANK gives the far landing a one-metre range along local +z. Its top remains at the grid deck. A single slider sets `target_displacement`; `_physics_process` advances at 0.25 m/s. RESET returns both the target and slider to zero. The three-metre plank and its timer are unchanged.
+ 
+-At the aligned pose, the plank reaches 0.30 metres into the original bank. The surface separation is `displacement - 0.30`: negative means overlap, positive means an open gap. This is not a traversal predicate. Body radius, floor snapping, gravity and movement all enter the crossing test. Walk the side aisle to compare settings and return without crossing the moving joint.
++At the aligned pose, the three-metre plank meets the original bank with zero overlap. The surface separation is `displacement`: zero means the edges meet, positive means an open gap. This is not a traversal predicate. Body radius, floor snapping, gravity and movement all enter the crossing test. Walk the side aisle to compare settings and return without crossing the moving joint.
+ 
+ Source: `commons/artifacts/adjustable_landing/adjustable_landing.gd`. The artifact owns the movable slab and its controls; the map leaves a recess for it and supplies fixed side aisles. It does not resize or rotate the bridge.
+ 
+ ## Move the destination — 23 September
+ 
+-At the approach to the rotation crossing, MOVE THE BANK translates the landing through one metre while the plank keeps its existing turn. Compare the original 0.30 m overlap with the seam after moving the bank, then RESET. The control is about 1.13 m above the floor; the still side aisles remain available. The production artifact separates control placement from the landing transform.
++At the approach to the rotation crossing, MOVE THE BANK translates the landing through one metre while the plank keeps its existing turn. Compare the originally meeting edges with the gap after moving the bank, then RESET. The control is about 1.13 m above the floor; the still side aisles remain available. The production artifact separates control placement from the landing transform.

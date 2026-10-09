@@ -1,0 +1,2668 @@
+{
+ "sweep": "constant_dispute",
+ "peak_changed_pct": 12.008,
+ "subject_pct": 37.243,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "changed_px": 8998,
+   "changed_pct": 1.558
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "changed_px": 9101,
+   "changed_pct": 1.576
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "changed_px": 14650,
+   "changed_pct": 2.536
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "changed_px": 32232,
+   "changed_pct": 5.58
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "changed_px": 52327,
+   "changed_pct": 9.059
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 52510,
+   "changed_pct": 9.091
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 54707,
+   "changed_pct": 9.471
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 10164,
+   "changed_pct": 1.76
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 13585,
+   "changed_pct": 2.352
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 13585,
+   "changed_pct": 2.352
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 13585,
+   "changed_pct": 2.352
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 13437,
+   "changed_pct": 2.326
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 26405,
+   "changed_pct": 4.572
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 26460,
+   "changed_pct": 4.581
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 28392,
+   "changed_pct": 4.916
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 12303,
+   "changed_pct": 2.13
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 52821,
+   "changed_pct": 9.145
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 53373,
+   "changed_pct": 9.24
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 46939,
+   "changed_pct": 8.127
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "changed_px": 6134,
+   "changed_pct": 1.062
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "changed_px": 7795,
+   "changed_pct": 1.35
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "changed_px": 41230,
+   "changed_pct": 7.138
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "changed_px": 61325,
+   "changed_pct": 10.617
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 61508,
+   "changed_pct": 10.649
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 63705,
+   "changed_pct": 11.029
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 19162,
+   "changed_pct": 3.318
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 17078,
+   "changed_pct": 2.957
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 17078,
+   "changed_pct": 2.957
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 17078,
+   "changed_pct": 2.957
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 22435,
+   "changed_pct": 3.884
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 23469,
+   "changed_pct": 4.063
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 24096,
+   "changed_pct": 4.172
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 25335,
+   "changed_pct": 4.386
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 21301,
+   "changed_pct": 3.688
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 48331,
+   "changed_pct": 8.368
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 51754,
+   "changed_pct": 8.96
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 47353,
+   "changed_pct": 8.198
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "changed_px": 7511,
+   "changed_pct": 1.3
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "changed_px": 41333,
+   "changed_pct": 7.156
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "changed_px": 61428,
+   "changed_pct": 10.635
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 61611,
+   "changed_pct": 10.667
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 63808,
+   "changed_pct": 11.047
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 19265,
+   "changed_pct": 3.335
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 17156,
+   "changed_pct": 2.97
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 17156,
+   "changed_pct": 2.97
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 17156,
+   "changed_pct": 2.97
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 22538,
+   "changed_pct": 3.902
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 23871,
+   "changed_pct": 4.133
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 23621,
+   "changed_pct": 4.09
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 25436,
+   "changed_pct": 4.404
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 21404,
+   "changed_pct": 3.706
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 48827,
+   "changed_pct": 8.453
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 48857,
+   "changed_pct": 8.459
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 48507,
+   "changed_pct": 8.398
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "changed_px": 46882,
+   "changed_pct": 8.117
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "changed_px": 66977,
+   "changed_pct": 11.596
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 67160,
+   "changed_pct": 11.627
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 69357,
+   "changed_pct": 12.008
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 24814,
+   "changed_pct": 4.296
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 21393,
+   "changed_pct": 3.704
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 21393,
+   "changed_pct": 3.704
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 21393,
+   "changed_pct": 3.704
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 28087,
+   "changed_pct": 4.863
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 28346,
+   "changed_pct": 4.908
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 28397,
+   "changed_pct": 4.916
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 29093,
+   "changed_pct": 5.037
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 26953,
+   "changed_pct": 4.666
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 48959,
+   "changed_pct": 8.476
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 48652,
+   "changed_pct": 8.423
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "interval",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 46544,
+   "changed_pct": 8.058
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "changed_px": 20095,
+   "changed_pct": 3.479
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 20278,
+   "changed_pct": 3.511
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 22475,
+   "changed_pct": 3.891
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 24973,
+   "changed_pct": 4.324
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 28394,
+   "changed_pct": 4.916
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 28394,
+   "changed_pct": 4.916
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 28394,
+   "changed_pct": 4.916
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 22970,
+   "changed_pct": 3.977
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 35938,
+   "changed_pct": 6.222
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 35993,
+   "changed_pct": 6.231
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 37925,
+   "changed_pct": 6.566
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 21962,
+   "changed_pct": 3.802
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 62480,
+   "changed_pct": 10.817
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 63032,
+   "changed_pct": 10.913
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 56598,
+   "changed_pct": 9.799
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "changed_px": 7460,
+   "changed_pct": 1.292
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 10626,
+   "changed_pct": 1.84
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 45068,
+   "changed_pct": 7.803
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 48489,
+   "changed_pct": 8.395
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 48489,
+   "changed_pct": 8.395
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 48489,
+   "changed_pct": 8.395
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 43065,
+   "changed_pct": 7.456
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 49898,
+   "changed_pct": 8.639
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 50704,
+   "changed_pct": 8.778
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 52465,
+   "changed_pct": 9.083
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 42057,
+   "changed_pct": 7.281
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 54738,
+   "changed_pct": 9.477
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 58290,
+   "changed_pct": 10.092
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 57160,
+   "changed_pct": 9.896
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "changed_px": 10384,
+   "changed_pct": 1.798
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 45251,
+   "changed_pct": 7.834
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 48672,
+   "changed_pct": 8.427
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 48672,
+   "changed_pct": 8.427
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 48672,
+   "changed_pct": 8.427
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 43248,
+   "changed_pct": 7.488
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 50318,
+   "changed_pct": 8.712
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 50073,
+   "changed_pct": 8.669
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 51698,
+   "changed_pct": 8.95
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 42240,
+   "changed_pct": 7.313
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 59346,
+   "changed_pct": 10.275
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 55061,
+   "changed_pct": 9.533
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 56897,
+   "changed_pct": 9.851
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "changed_px": 47448,
+   "changed_pct": 8.215
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 50869,
+   "changed_pct": 8.807
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 50869,
+   "changed_pct": 8.807
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 50869,
+   "changed_pct": 8.807
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 45445,
+   "changed_pct": 7.868
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 50953,
+   "changed_pct": 8.822
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 51383,
+   "changed_pct": 8.896
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 52154,
+   "changed_pct": 9.029
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 44437,
+   "changed_pct": 7.693
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 59965,
+   "changed_pct": 10.382
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 61140,
+   "changed_pct": 10.585
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "threshold",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 58669,
+   "changed_pct": 10.157
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "changed_px": 3421,
+   "changed_pct": 0.592
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 3421,
+   "changed_pct": 0.592
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 3421,
+   "changed_pct": 0.592
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 11280,
+   "changed_pct": 1.953
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 24248,
+   "changed_pct": 4.198
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 24303,
+   "changed_pct": 4.208
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 26235,
+   "changed_pct": 4.542
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 3752,
+   "changed_pct": 0.65
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 44270,
+   "changed_pct": 7.664
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 44822,
+   "changed_pct": 7.76
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 38388,
+   "changed_pct": 6.646
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 14701,
+   "changed_pct": 2.545
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 21389,
+   "changed_pct": 3.703
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 21421,
+   "changed_pct": 3.709
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 23169,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 7173,
+   "changed_pct": 1.242
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 42687,
+   "changed_pct": 7.39
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 43190,
+   "changed_pct": 7.477
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 38353,
+   "changed_pct": 6.64
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 14701,
+   "changed_pct": 2.545
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 21389,
+   "changed_pct": 3.703
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 21421,
+   "changed_pct": 3.709
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 23169,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 7173,
+   "changed_pct": 1.242
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 42687,
+   "changed_pct": 7.39
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 43190,
+   "changed_pct": 7.477
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 38353,
+   "changed_pct": 6.64
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "changed_px": 14701,
+   "changed_pct": 2.545
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 21389,
+   "changed_pct": 3.703
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 21421,
+   "changed_pct": 3.709
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 23169,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 7173,
+   "changed_pct": 1.242
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 42687,
+   "changed_pct": 7.39
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 43190,
+   "changed_pct": 7.477
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "point",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 38353,
+   "changed_pct": 6.64
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "changed_px": 12968,
+   "changed_pct": 2.245
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 13023,
+   "changed_pct": 2.255
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 14955,
+   "changed_pct": 2.589
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 13251,
+   "changed_pct": 2.294
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 53769,
+   "changed_pct": 9.309
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 54321,
+   "changed_pct": 9.405
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 47887,
+   "changed_pct": 8.291
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "changed_px": 2606,
+   "changed_pct": 0.451
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 4199,
+   "changed_pct": 0.727
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 26219,
+   "changed_pct": 4.539
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 50362,
+   "changed_pct": 8.719
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 52062,
+   "changed_pct": 9.014
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 49207,
+   "changed_pct": 8.519
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "changed_px": 4252,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 26274,
+   "changed_pct": 4.549
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 50921,
+   "changed_pct": 8.816
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 50920,
+   "changed_pct": 8.816
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 49381,
+   "changed_pct": 8.549
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "changed_px": 28206,
+   "changed_pct": 4.883
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 51253,
+   "changed_pct": 8.873
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 51416,
+   "changed_pct": 8.902
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "rival",
+    "record": "drift"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 49137,
+   "changed_pct": 8.507
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "changed_px": 40518,
+   "changed_pct": 7.015
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 41070,
+   "changed_pct": 7.11
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "bare"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 34636,
+   "changed_pct": 5.997
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "changed_px": 25100,
+   "changed_pct": 4.346
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "count"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 33374,
+   "changed_pct": 5.778
+  },
+  {
+   "a": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "spread"
+   },
+   "b": {
+    "trial_seed": 4021,
+    "claim": "absent",
+    "record": "drift"
+   },
+   "changed_px": 35190,
+   "changed_pct": 6.092
+  }
+ ]
+}

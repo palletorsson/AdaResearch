@@ -1,0 +1,437 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "no legacy DangerZone instances remain in this hall",
+      "passed": true
+    },
+    {
+      "name": "three growers, final door and actual museum body loaded",
+      "passed": true
+    },
+    {
+      "name": "grower configuration GrowerBlock",
+      "passed": true
+    },
+    {
+      "name": "grower configuration @Node3D@4256",
+      "passed": true
+    },
+    {
+      "name": "grower configuration @Node3D@4258",
+      "passed": true
+    },
+    {
+      "name": "all cubes grow without visitor approach",
+      "passed": true
+    },
+    {
+      "name": "stationary visitor was not moved",
+      "passed": true
+    },
+    {
+      "name": "small grower base GrowerBlock",
+      "passed": true
+    },
+    {
+      "name": "small mesh matches collision GrowerBlock",
+      "passed": true
+    },
+    {
+      "name": "small grower base @Node3D@4256",
+      "passed": true
+    },
+    {
+      "name": "small mesh matches collision @Node3D@4256",
+      "passed": true
+    },
+    {
+      "name": "small grower base @Node3D@4258",
+      "passed": true
+    },
+    {
+      "name": "small mesh matches collision @Node3D@4258",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: growers-small",
+      "passed": true
+    },
+    {
+      "name": "large grower base GrowerBlock",
+      "passed": true
+    },
+    {
+      "name": "large mesh matches collision GrowerBlock",
+      "passed": true
+    },
+    {
+      "name": "large grower base @Node3D@4256",
+      "passed": true
+    },
+    {
+      "name": "large mesh matches collision @Node3D@4256",
+      "passed": true
+    },
+    {
+      "name": "large grower base @Node3D@4258",
+      "passed": true
+    },
+    {
+      "name": "large mesh matches collision @Node3D@4258",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: growers-large",
+      "passed": true
+    },
+    {
+      "name": "closed physical leaf unit scale 0",
+      "passed": true
+    },
+    {
+      "name": "closed visible physical leaf size 0",
+      "passed": true
+    },
+    {
+      "name": "closed physical leaf unit scale 1",
+      "passed": true
+    },
+    {
+      "name": "closed visible physical leaf size 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: door-closed",
+      "passed": true
+    },
+    {
+      "name": "turning physical leaf unit scale 0",
+      "passed": true
+    },
+    {
+      "name": "turning visible physical leaf size 0",
+      "passed": true
+    },
+    {
+      "name": "turning physical leaf unit scale 1",
+      "passed": true
+    },
+    {
+      "name": "turning visible physical leaf size 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: door-turning",
+      "passed": true
+    },
+    {
+      "name": "open physical leaf unit scale 0",
+      "passed": true
+    },
+    {
+      "name": "open visible physical leaf size 0",
+      "passed": true
+    },
+    {
+      "name": "open physical leaf unit scale 1",
+      "passed": true
+    },
+    {
+      "name": "open visible physical leaf size 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: door-open",
+      "passed": true
+    },
+    {
+      "name": "door stays closed outside sensor",
+      "passed": true
+    },
+    {
+      "name": "walk into door approach",
+      "passed": true
+    },
+    {
+      "name": "normal proximity opens door fully",
+      "passed": true
+    },
+    {
+      "name": "door holds while body waits",
+      "passed": true
+    },
+    {
+      "name": "door never relocates waiting body",
+      "passed": true
+    },
+    {
+      "name": "walk through actual open door",
+      "passed": true
+    },
+    {
+      "name": "return through same opening",
+      "passed": true
+    },
+    {
+      "name": "door waits before empty close",
+      "passed": true
+    },
+    {
+      "name": "door returns closed after vacancy",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 1,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 2,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 6,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 7,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 8,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 12,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 13,11",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 1,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 2,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 6,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 7,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 8,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 12,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 13,12",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 1,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 2,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 6,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 7,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 8,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 12,13",
+      "passed": true
+    },
+    {
+      "name": "cleared observation floor 13,13",
+      "passed": true
+    },
+    {
+      "name": "walk cleared middle route",
+      "passed": true
+    },
+    {
+      "name": "walk cleared left observation strip",
+      "passed": true
+    },
+    {
+      "name": "walk cleared right observation strip",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rotation-observation-floor",
+      "passed": true
+    },
+    {
+      "name": "capture and interaction study completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "actual_body": {
+      "height": 1.5,
+      "offset": [
+        0.0,
+        0.75,
+        0.0
+      ],
+      "width": 0.639999985694885
+    },
+    "door_closed": {
+      "operations": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "progress": 0.0
+    },
+    "door_open": {
+      "operations": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "progress": 1.0
+    },
+    "door_turning": {
+      "operations": [
+        1.0,
+        0.579696595668793,
+        0.0
+      ],
+      "progress": 0.52
+    },
+    "door_world": [
+      12.5,
+      0.0,
+      34.5
+    ],
+    "grower_world": [
+      [
+        8.5,
+        0.0,
+        26.5
+      ],
+      [
+        12.5,
+        0.0,
+        26.5
+      ],
+      [
+        16.5,
+        0.0,
+        26.5
+      ]
+    ],
+    "remaining_hazards": [],
+    "return through same opening": {
+      "arrived": true,
+      "feet": [
+        12.5,
+        0.000837963132653385,
+        32.5250205993652
+      ],
+      "target": [
+        12.5,
+        0.0,
+        32.5
+      ]
+    },
+    "source_grid_origin": [
+      5.5,
+      0.0,
+      5.5
+    ],
+    "walk cleared left observation strip": {
+      "arrived": true,
+      "feet": [
+        6.5,
+        0.000837992469314486,
+        18.4749660491943
+      ],
+      "target": [
+        6.5,
+        0.0,
+        18.5
+      ]
+    },
+    "walk cleared middle route": {
+      "arrived": true,
+      "feet": [
+        12.5,
+        0.000838004983961582,
+        19.4750175476074
+      ],
+      "target": [
+        12.5,
+        0.0,
+        19.5
+      ]
+    },
+    "walk cleared right observation strip": {
+      "arrived": true,
+      "feet": [
+        18.5,
+        0.000838010164443403,
+        18.4749660491943
+      ],
+      "target": [
+        18.5,
+        0.0,
+        18.5
+      ]
+    },
+    "walk into door approach": {
+      "arrived": true,
+      "feet": [
+        12.5,
+        0.000830089731607586,
+        30.9750022888184
+      ],
+      "target": [
+        12.5,
+        0.0,
+        31.0
+      ]
+    },
+    "walk through actual open door": {
+      "arrived": true,
+      "feet": [
+        12.5,
+        0.000834522594232112,
+        35.5749588012695
+      ],
+      "target": [
+        12.5,
+        0.0,
+        35.5999984741211
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Trans_Pit",
+  "scope": "Isolated production museum. Selected frozen figure poses; ordinary grower clock with visitor parked; supplied actual-body approach, crossing and return through the final door. Not a full hall, headset or learner test."
+}

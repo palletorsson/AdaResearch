@@ -1,0 +1,3 @@
+Before the point, infrastructure. The origin is not a point but a prerequisite — coordinate systems, render loops, the void made addressable. Point_One is the first mark: position without extension, existence without duration. You arrive late. The system was running.
+
+The `interactive_point_origin` lets you enact the placement. The `CoordinateSystem3M` makes the coordinate triad visible — three axes, one cell of space, a reference frame pretending to be a pin. The `frame_counter_display` reveals what the point itself cannot report: that the loop was already iterating before your first mark. A point is a decision made inside someone else's clock.

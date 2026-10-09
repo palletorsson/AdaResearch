@@ -1,0 +1,90 @@
+{
+ "_what": "THE FOURTH HAZARD IN A ROOM OF THREE.",
+ "_why": "2026-09-08, Palle: 'in Trans_Pit add shorting free ball from the sides.'\n\nTrans_Pit's three rooms each carry one transformation turned against the visitor: pusher_block translates, sweeper_block rotates, grower_block scales. All three are authored motion on rails - the same path, the same period, for ever, and the lesson is timing. This is the same operation LET GO of. The launcher throws on its own clock and has no further opinion about the ball; where it lands is physics, and it is never the same twice.\n\nIt is deliberately NOT cube_projectile_spawner, which the registry describes as 'spawns projectile cubes, LEADS THE TARGET, and fires warning effects before launch'. That one is about you. This one fires into an empty hall exactly as it fires into a full one, and nothing in the artifact may read a visitor's position, velocity or transform to decide when or where - which is the single thing a reviewer should check first.",
+ "_grid_safe_keys": "A map token's #key:value is read as the tutorial shorthand by GridInteractablesComponent whenever the key is not in CONFIG_PARAM_NAMES and the value parses as a float, and the museum's lane has no such branch - so a numeric key reaches this artifact in the museum and is swallowed in the grid. The knobs a map turns are therefore WORDS: #rate:idle|slow|steady|brisk|relentless and #throw:flat|level|lob|high. The numeric spellings work from a scene or a probe, where the Dictionary is real.",
+
+ "artifacts": {
+  "free_ball_launcher": {
+   "category": "hazards",
+   "complexity": "intermediate",
+   "description": "A mouth at the side of a room that throws a heavy ball across it on its own clock, for ever, whether anybody is standing there or not. The ball is real physics - it arcs, lands, rolls, bounces and drops into whatever pit is under it - and it shoves a visitor it reaches rather than wounding them, because in Trans_Pit the pit does the killing and the hazards only move you. It never aims, never leads and never corrects.",
+   "dev_themes": [
+    "gameplay",
+    "hazards",
+    "transformations"
+   ],
+   "footprint": [
+    1,
+    2,
+    1
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "free_ball_launcher",
+   "map_ready": true,
+   "map_sequences": [
+    "transformation",
+    "hazards"
+   ],
+   "name": "Free Ball Launcher",
+   "parameters": {
+    "footprint": [
+     1,
+     2,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "qfep_connection": "A hazard that aims at you has already agreed that you are the point. This one has not, and that is the whole of it: the room becomes dangerous without becoming about you, which is a harder thing for a room to be and the only honest way to be thrown by a transformation you were not the subject of.",
+   "scene": "res://commons/artifacts/free_ball_launcher/free_ball_launcher.tscn",
+   "size_group": "compact",
+   "tags": [
+    "hazard",
+    "transformation",
+    "translation",
+    "ballistic",
+    "physics",
+    "pit",
+    "shove"
+   ],
+   "spatial_needs": {
+    "platform": "any",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 6,
+     "back": 0,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "side",
+    "wall_backing": true,
+    "orientation": "face_open",
+    "isolation": 0,
+    "cluster_with": [
+     "sibling",
+     "pusher_block",
+     "grower_block",
+     "sweeper_block"
+    ],
+    "preferred_zone": "edge"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.44,
+     0.44,
+     0.58
+    ],
+    "aabb_center": [
+     0.0,
+     1.12,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
+    "max_dimension_m": 0.58,
+    "measured_from": "the barrel and collar only, standing at mount_m; the balls in flight are pooled and are not part of the mount. Front clearance of 6 cells is the throw, not the body: a level throw at 7 m/s falls about a metre in the first 3.2 m and then rolls, so a launcher facing a wall a metre away fires perfectly and does nothing."
+   }
+  }
+ }
+}

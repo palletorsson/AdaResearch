@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rainbow tutorial — Endless Museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#25262b;font:17px/1.65 Georgia,serif}a{color:#275d64;text-underline-offset:.2em}header{background:#f4f0e7f5;border-bottom:1px solid #d7d0c5;padding:12px 4vw;position:sticky;top:0;z-index:5;font:14px/1.6 system-ui}header a{margin-right:16px}main{max-width:1260px;margin:auto;padding:40px 4vw 80px}h1,h2,h3{line-height:1.16}h1{font-size:clamp(34px,4vw,64px);font-weight:400;margin:10px 0 24px}h2{font-size:29px;margin-top:2em}h3{font-size:22px}p{max-width:75ch}small,.eyebrow,figcaption,.meta{font:13px/1.55 system-ui;color:#696761}.eyebrow{text-transform:uppercase;letter-spacing:.15em}.lead{font-size:23px;max-width:60ch}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.actions a{background:#22595d;color:white;padding:9px 15px;text-decoration:none;border-radius:3px;font:14px/1.5 system-ui}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:35px}.card{border-top:1px solid #bdb7ac;padding:20px 0}.card h2{margin:12px 0;font-size:30px}.card img{width:100%;height:230px;object-fit:cover;background:#d9d6d0}.card p{font-size:16px}img{max-width:100%;height:auto}figure{margin:20px 0}figcaption{margin-top:7px}pre{background:#e8e5de;padding:18px;overflow:auto;line-height:1.55;font:13px/1.55 Consolas,monospace;border-left:3px solid #608080}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;font:14px/1.5 system-ui;width:100%;margin:25px 0}th,td{padding:10px;border-bottom:1px solid #d0c9be;text-align:left;vertical-align:top}blockquote{border-left:2px solid #b9668c;margin:25px 0;padding-left:22px}nav.halls{display:flex;flex-wrap:wrap;gap:5px}nav.halls a{padding:3px 8px;border:1px solid #d4cec4;margin:0}.selected{background:#275d64;color:white}.spread{max-width:none;padding:0;display:grid;grid-template-columns:1.05fr 1fr;gap:0}.page{padding:30px 3vw;min-width:0;height:calc(100vh - 117px);overflow:auto;scroll-behavior:smooth}.page+.page{border-left:1px solid #ccc4b7;background:#faf7f0}.page h1{font-size:37px}.page h2{font-size:26px}.page pre{font-size:12px}.reading{max-width:880px}.chapter{border-top:1px solid #b9b3a8;margin-top:65px;padding-top:24px;scroll-margin-top:90px}.notice{padding:16px 20px;background:#e7ede7;border-left:3px solid #52705b}.sources{word-break:break-word}details{margin:20px 0}summary{cursor:pointer;font:15px/1.5 system-ui}footer{margin-top:60px;font:13px/1.6 system-ui;color:#696761}@media(max-width:900px){.spread{display:block}.page{height:auto}.page+.page{border-left:0;border-top:1px solid #aaa}.cards{grid-template-columns:1fr}}@media print{header,.actions,nav{display:none}.spread{display:block}.page{height:auto;overflow:visible}.page+.page{border:0}.chapter,.page{break-before:page}pre{white-space:pre-wrap;font-size:10px}body{background:white}main{padding:0}h1{font-size:30px}}</style></head><body><header><div><a href="../index.html">COLOUR · REVIEW DRAFT</a><a href="../all.html">All tutorials</a><a href="../final.html">All reflections</a><a href="../review.html">Reviewer brief & evidence</a><a href="../feedback.html">Feedback revision</a></div><nav class="halls"><a href="../Color_Context_Placed/parallel.html">Colour</a><a href="../Color_Flashlight/parallel.html">Flashlight</a><a href="../Color_Nails/parallel.html">Nails</a><a href="../Color_Rainbow/parallel.html">Rainbow</a><a href="../Color_Pillar/parallel.html">Pillar</a><a href="../Color_Grid_Pallet/parallel.html">Grid</a><a href="../Color_Paint/parallel.html">Paint</a><a href="../Color_Walls/parallel.html">Walls</a></nav></header><main class=""><h1>Rainbow — keep the opening</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>A palette as an ordered list of colours</li>
+<li>An index connecting a colour to a band</li>
+<li>Dividing a fixed extent among a changing number of parts</li>
+</ul>
+<p>Walk through the museum's arches. Their arrangements differ, but each leaves an opening for a body. In Nails you chose a colour with a point. Here a colour joins a list, and the list changes the division of an arch.</p>
+<p>This is a short, optional making lesson. The celebration, pickups and banner belong to the installed encounter. We will make one small arch to examine how its parts share an extent.</p>
+<h2>Bring a chosen colour</h2>
+<p>Copy the RGB value you recorded in Nails into the first entry of <code>palette</code>. The starting example uses <code>Color(0.8, 0.2, 0.6)</code>. This is a deliberate transfer of a recorded value; the script does not retrieve it from the preceding hall.</p>
+<p>Save <code>lesson.gd</code> and the supplied <code>arc_strip.gd</code> together. Attach <code>lesson.gd</code> to a Node3D in your working copy of the Rainbow hall, with its origin at the centre of an open display surface. Keep unit scale. The museum supplies the camera, light and player. This small arch stands in the local XY plane and has no collider.</p>
+<p><code>ArcStrip</code> builds one coloured semicircular band between two radii. Its complete implementation is printed below. Mesh construction returns from Primitives; the new decision here is how many bands share the available thickness.</p>
+<h2>The complete study — lesson.gd</h2>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const ArcStrip = preload(&quot;arc_strip.gd&quot;)
+const INNER_RADIUS := 0.7
+const TOTAL_THICKNESS := 0.6
+
+var palette: Array[Color] = [Color(0.8, 0.2, 0.6), Color(0.15, 0.55, 0.9), Color(1, 0.8, 0.15)]
+var bands: Array[MeshInstance3D] = []
+
+func _ready() -&gt; void:
+    assert(not palette.is_empty())
+    var width := TOTAL_THICKNESS / float(palette.size())
+    for i in range(palette.size()):
+        var inner := INNER_RADIUS + i * width
+        var band := ArcStrip.new()
+        band.build(inner, inner + width, palette[i])
+        add_child(band)
+        bands.append(band)
+</code></pre>
+<p>Run it. Three bands surround the same opening. The innermost radius is 0.7 metres; the outermost radius is 1.3 metres. <code>TOTAL_THICKNESS</code> is the radial thickness of all the bands together, not the diameter of the whole arch.</p>
+<p><code>palette.size()</code> is the number of entries. Dividing 0.6 by three gives each band a width of 0.2. The loop visits each index <code>i</code>: it advances that band's inner radius by <code>i * width</code>, then uses <code>palette[i]</code> for its colour. Each outer radius meets the next inner radius.</p>
+<p>The assertion requires a nonempty palette. We cannot divide the thickness among zero bands. Every nonempty palette keeps the same inner and outer boundaries; only their internal division changes.</p>
+<h2>Change the division</h2>
+<p>Replace the three-entry palette with <code>[Color(0.8, 0.2, 0.6), Color.WHITE]</code>. Predict the width, then run. Each band is 0.3 metres thick. Restore the original palette and append <code>Color.BLACK</code>: four bands now share the same 0.6 metres, each taking 0.15.</p>
+<p>Change one colour without adding or removing an entry. The geometry should stay still. Band count and colour assignment are separate decisions. This example couples them by making one band per palette entry. Another arrangement could repeat two colours across six bands; the number of available colours would then differ from the number of parts, as it did in the opening Colour lesson.</p>
+<p>Choose your own nonempty palette. Before running, state how many bands will appear, their individual width, and the outer radius. As a boundary case, use one colour: it occupies the full thickness without closing the opening.</p>
+<p>The museum's arches are larger and use their own palettes and arrangement. This study retains their fixed-extent construction. Its colours are assigned surface values; it does not simulate wavelengths or the optics of a rainbow.</p>
+<h2>Supplied band builder — arc_strip.gd</h2>
+<!-- student-code:arc_strip.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer: a reduced version of rainbow.gd's concentric half-strips.
+extends MeshInstance3D
+
+const STEPS := 32
+var inner_radius: float
+var outer_radius: float
+
+func build(inner: float, outer: float, colour: Color) -&gt; void:
+    inner_radius = inner
+    outer_radius = outer
+    var vertices := PackedVector3Array()
+    var normals := PackedVector3Array()
+    var indices := PackedInt32Array()
+    for i in range(STEPS + 1):
+        var angle := PI * float(i) / STEPS
+        var direction := Vector3(cos(angle), sin(angle), 0)
+        vertices.append(direction * inner)
+        vertices.append(direction * outer)
+        normals.append(Vector3.BACK)
+        normals.append(Vector3.BACK)
+    for i in range(STEPS):
+        var n := i * 2
+        indices.append_array([n, n + 1, n + 2, n + 1, n + 3, n + 2])
+    var data := []
+    data.resize(Mesh.ARRAY_MAX)
+    data[Mesh.ARRAY_VERTEX] = vertices
+    data[Mesh.ARRAY_NORMAL] = normals
+    data[Mesh.ARRAY_INDEX] = indices
+    var result := ArrayMesh.new()
+    result.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, data)
+    mesh = result
+    var material := StandardMaterial3D.new()
+    material.albedo_color = colour
+    material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    material.cull_mode = BaseMaterial3D.CULL_DISABLED
+    material_override = material
+</code></pre>
+<p>The builder samples a semicircle, storing an inner and an outer vertex at each angle. Two triangles join each neighbouring pair. The material is independent for each band and unshaded so the palette remains easy to compare. Changing the palette does not change this renderer.</p>
+<p>Keep the chosen list. Pillar will ask how a function can produce colours between selected values, instead of choosing only among entries.</p></main></body></html>

@@ -1,0 +1,366 @@
+{
+ "title": "Ada Research",
+ "subtitle": "A Critical Tutorial \u2014 from a single point in space to the edge of chaos and beyond",
+ "formula": "QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t)",
+ "parts": [
+  {
+   "title": "Order",
+   "chapters": [
+    {
+     "seq": "primitives",
+     "name": "Primitives: Points Build Worlds",
+     "number": 1,
+     "authored": true,
+     "truth": "A point is position without extension. Everything is built from nothing.",
+     "principal": {
+      "hero": "klee_walking_point",
+      "seating": "bed"
+     },
+     "rooms_written": 10,
+     "rooms_silent": 1,
+     "motifs": [
+      "the throw",
+      "the measure",
+      "the hand",
+      "the trace",
+      "the debt"
+     ]
+    },
+    {
+     "seq": "transformation",
+     "name": "Transformation: What Stays the Same When Everything Changes",
+     "number": 2,
+     "authored": false,
+     "truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
+     "principal": {
+      "hero": "rotation_gimbal",
+      "seating": "plinth"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "array_tutorial",
+     "name": "Array Tutorial Sequence",
+     "number": 3,
+     "authored": false,
+     "truth": "",
+     "principal": {
+      "hero": "pattern_tile_plate",
+      "seating": "frame"
+     },
+     "rooms_written": 4,
+     "rooms_silent": 3,
+     "motifs": []
+    },
+    {
+     "seq": "color",
+     "name": "Color and Composition",
+     "number": 4,
+     "authored": false,
+     "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
+     "principal": {
+      "hero": "crackpropagation_ca",
+      "seating": "self"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "interlude": "The Em-Square"
+    }
+   ]
+  },
+  {
+   "title": "Dynamics",
+   "chapters": [
+    {
+     "seq": "change",
+     "name": "Change: Rate, Accumulation, and Flow",
+     "number": 5,
+     "authored": false,
+     "truth": "Things change. Change accumulates. Accumulation flows.",
+     "principal": {
+      "hero": "player_trace",
+      "seating": "self"
+     },
+     "rooms_written": 2,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "forces",
+     "name": "Vectors & Forces: From Direction to Dynamics",
+     "number": 6,
+     "authored": false,
+     "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+     "principal": {
+      "hero": "ca_rules_workbench",
+      "seating": "self"
+     },
+     "rooms_written": 13,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "wavefunctions",
+     "name": "Wavefunctions: Everything Oscillates",
+     "number": 7,
+     "authored": false,
+     "truth": "Everything oscillates. Fourier shows every signal is a sum of sines. The wave is the fundamental pattern of non-rest\u2014perpetual movement between poles.",
+     "principal": {
+      "hero": "pick_up_cube",
+      "seating": "plinth"
+     },
+     "rooms_written": 12,
+     "rooms_silent": 0,
+     "motifs": []
+    }
+   ]
+  },
+  {
+   "title": "Entropy",
+   "chapters": [
+    {
+     "seq": "randomness",
+     "name": "Randomness: Freedom from Pattern",
+     "number": 8,
+     "authored": true,
+     "truth": "Entropy is not decay \u2014 it is the size of the possible.",
+     "principal": {
+      "hero": "slot_machine",
+      "seating": "self"
+     },
+     "rooms_written": 14,
+     "rooms_silent": 0,
+     "motifs": [
+      "the throw",
+      "the hand",
+      "the debt"
+     ]
+    },
+    {
+     "seq": "noise",
+     "name": "Noise: Entropy with Memory",
+     "number": 9,
+     "authored": true,
+     "truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
+     "principal": {
+      "hero": "NoiseColors3D",
+      "seating": "field"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": [
+      "the debt",
+      "the trace",
+      "the measure",
+      "the ghost"
+     ]
+    },
+    {
+     "seq": "cellularautomata",
+     "name": "Cellular Automata: Local Rules, Global Patterns",
+     "number": 10,
+     "authored": false,
+     "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing complete\u2014simple rules can compute anything.",
+     "principal": {
+      "hero": "structure_growth",
+      "seating": "field"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    }
+   ]
+  },
+  {
+   "title": "The Edge",
+   "chapters": [
+    {
+     "seq": "fractals",
+     "name": "Fractals: Infinite Within Finite",
+     "number": 11,
+     "authored": true,
+     "truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
+     "principal": {
+      "hero": "fractal_recursion_2",
+      "seating": "cube"
+     },
+     "rooms_written": 10,
+     "rooms_silent": 0,
+     "motifs": [
+      "the measure",
+      "the debt"
+     ]
+    },
+    {
+     "seq": "lsystems",
+     "name": "L-Systems: Rules Grow Structure",
+     "number": 12,
+     "authored": false,
+     "truth": "A sentence can become a forest. Grammar is generative.",
+     "principal": {
+      "hero": "lsystem_editor",
+      "seating": "self"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "proceduralgeneration",
+     "name": "Procedural Generation: Rules Build Worlds",
+     "number": 13,
+     "authored": false,
+     "truth": "A world doesn't need an author. Rules and randomness are enough.",
+     "principal": {
+      "hero": "maze_generation",
+      "seating": "self"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    }
+   ]
+  },
+  {
+   "title": "Emergence",
+   "chapters": [
+    {
+     "seq": "softbodies",
+     "name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+     "number": 14,
+     "authored": false,
+     "truth": "Form is not imposed  --  it emerges from the material's own dynamics.",
+     "principal": {
+      "hero": "soft_mushroom",
+      "seating": "field"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "isosurfaces",
+     "name": "Isosurfaces: Implicit to Explicit",
+     "number": 15,
+     "authored": false,
+     "truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
+     "principal": {
+      "hero": "mc_sculpt_vr",
+      "seating": "self"
+     },
+     "rooms_written": 12,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "boolean_surfaces",
+     "name": "Boolean Surfaces: CSG as Composition",
+     "number": 16,
+     "authored": false,
+     "truth": "Composition is not addition. Boolean ops give us a lawful way to compose solids: A\u222aB, A\u2229B, A\u2212B. Every architectural cavity is a difference; every joint is an intersection.",
+     "principal": {
+      "hero": "csg_union_demo",
+      "seating": "bed"
+     },
+     "rooms_written": 3,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "swarmintelligence",
+     "name": "Swarm Intelligence: No Leader, Yet Coordinated",
+     "number": 17,
+     "authored": false,
+     "truth": "No leader, yet coordinated. Stigmergy: the environment is the message. Local rules produce global intelligence.",
+     "principal": {
+      "hero": "PhysarumColony",
+      "seating": "field"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "machinelearning",
+     "name": "Machine Learning: Algorithms That Learn",
+     "number": 18,
+     "authored": false,
+     "truth": "Learning is optimization in a landscape you can't fully see.",
+     "principal": {
+      "hero": "9 3 smart rockets vr",
+      "seating": "bed"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "graphtheory",
+     "name": "Graph Theory: Connections Define Structure",
+     "number": 19,
+     "authored": false,
+     "truth": "Everything is a graph if you squint hard enough.",
+     "principal": {
+      "hero": "graphspace",
+      "seating": "self"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    }
+   ]
+  },
+  {
+   "title": "Synthesis",
+   "chapters": [
+    {
+     "seq": "foundationscrisis",
+     "name": "Foundations Crisis: The Limits of Formalization",
+     "number": 20,
+     "authored": false,
+     "truth": "Every formal system has an outside. Complete order is impossible.",
+     "principal": {
+      "hero": "parallel_lines",
+      "seating": "plinth"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "qfeplaboratory",
+     "name": "QFEP Laboratory: The Formula Made Interactive",
+     "number": 21,
+     "authored": false,
+     "truth": "QFE = F \u00e2\u02c6\u2019 \u00ce\u00bbE(S) + \u00cf\u2020\u00ce\u201dE(S,t). Life exists at \u00ce\u00bb \u00e2\u2030\u02c6 0.3-0.5.",
+     "principal": {
+      "hero": "qfep_balance_workbench",
+      "seating": "self"
+     },
+     "rooms_written": 7,
+     "rooms_silent": 0,
+     "motifs": []
+    },
+    {
+     "seq": "postfoundationscrisis",
+     "name": "Post-Crisis: Applied Limits",
+     "number": 22,
+     "authored": false,
+     "truth": "Knowing the limits of formalization, what do we build?",
+     "principal": {
+      "hero": "bias_visualizer",
+      "seating": "cube"
+     },
+     "rooms_written": 8,
+     "rooms_silent": 0,
+     "motifs": []
+    }
+   ]
+  }
+ ]
+}

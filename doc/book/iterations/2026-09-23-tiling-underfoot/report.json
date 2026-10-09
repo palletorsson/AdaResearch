@@ -1,0 +1,215 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "floor study exists",
+      "passed": true
+    },
+    {
+      "name": "six fields are in floor mode",
+      "passed": true
+    },
+    {
+      "name": "exception begins as the translation field",
+      "passed": true
+    },
+    {
+      "name": "each image is a five-metre field above the floor",
+      "passed": true
+    },
+    {
+      "name": "pattern planes carry no collision shapes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: six-fields",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-eye",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: console",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-0-ordered",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-1-ordered",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-2-ordered",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-3-ordered",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-4-ordered",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-5-ordered",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "TURN MOTIF changes the shared phase",
+      "passed": true
+    },
+    {
+      "name": "all six fields respond to the source turn",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: translate-turned",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: reflect-turned",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "four presses return all six images exactly",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exception-before",
+      "passed": true
+    },
+    {
+      "name": "black and white sample positions have floor support",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "EXCEPTION enables the local change",
+      "passed": true
+    },
+    {
+      "name": "exception leaves the other five images identical",
+      "passed": true
+    },
+    {
+      "name": "only the designated tile pixels change",
+      "passed": true
+    },
+    {
+      "name": "saved artifact texture: rule-5-exception",
+      "passed": true
+    },
+    {
+      "name": "both controls preserve the floor geometry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exception-after",
+      "passed": true
+    },
+    {
+      "name": "unchanged collision under sample 0",
+      "passed": true
+    },
+    {
+      "name": "unchanged collision under sample 1",
+      "passed": true
+    },
+    {
+      "name": "unchanged collision under sample 2",
+      "passed": true
+    },
+    {
+      "name": "cross TRANSLATE and its far border",
+      "passed": true
+    },
+    {
+      "name": "approach ONE EXCEPTION across the hall",
+      "passed": true
+    },
+    {
+      "name": "cross ONE EXCEPTION and its far border",
+      "passed": true
+    },
+    {
+      "name": "two live control buttons",
+      "passed": true
+    },
+    {
+      "name": "exception off restores the original sixth image",
+      "passed": true
+    },
+    {
+      "name": "study completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "approach ONE EXCEPTION across the hall": {
+      "arrived": true,
+      "feet": [
+        3.18743991851807,
+        0.000839395856019109,
+        2.99748420715332
+      ],
+      "maximum_y": 0.000839395856019109,
+      "minimum_y": 0.000839395856019109
+    },
+    "artifact_sha256": "d1b64b53995d708f4f5721044ae074e5d853d8d1548709d4dcf6ad80e37bd155",
+    "cross ONE EXCEPTION and its far border": {
+      "arrived": true,
+      "feet": [
+        3.20125675201416,
+        0.000839395856019109,
+        8.98846435546875
+      ],
+      "maximum_y": 0.000839395856019109,
+      "minimum_y": 0.000839395856019109
+    },
+    "cross TRANSLATE and its far border": {
+      "arrived": true,
+      "feet": [
+        -3.19999980926514,
+        0.000839395856019109,
+        -3.04538440704346
+      ],
+      "maximum_y": 0.0500000007450581,
+      "minimum_y": 0.000096568837761879
+    },
+    "exception_changed_pixels": 512,
+    "study_world": [
+      10.0,
+      0.0,
+      15.0
+    ]
+  },
+  "passed": true,
+  "room": "Tutorial_Tiling_Floor",
+  "scope": "Isolated production museum. Existing buttons receive supplied pointer events; actual generated textures are exported. Supplied key input drives the ordinary museum body across three selected paths; camera views are staged. No headset or learner claim."
+}

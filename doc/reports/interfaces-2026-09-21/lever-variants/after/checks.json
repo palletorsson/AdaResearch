@@ -1,0 +1,406 @@
+{
+	"checks": [
+		{
+			"message": "smooth: shared pointer interface exists",
+			"passed": true
+		},
+		{
+			"message": "snap: shared pointer interface exists",
+			"passed": true
+		},
+		{
+			"message": "zero: shared pointer interface exists",
+			"passed": true
+		},
+		{
+			"message": "Zero variant actually returns to zero degrees",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 0: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "smooth yaw 90: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 0: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "snap yaw 90: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: exit returns and idles",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: focus returns and idles",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 0: lost pointer returns and idles",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: hand pose resolves",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: held input follows native detent law",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: printed value follows the joint",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: physical release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: grab driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: released handle matches visible grip",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: grip keeps ray layers after release",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: real ray reaches mounting face",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: 27 small pointer steps accumulate",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: pointer release obeys variant",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: upper stop clamps",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: lower stop clamps",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: exit returns and idles",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: focus returns and idles",
+			"passed": true
+		},
+		{
+			"message": "zero yaw 90: lost pointer returns and idles",
+			"passed": true
+		},
+		{
+			"message": "Reference contains all three production levers",
+			"passed": true
+		},
+		{
+			"message": "Reference uses only flat text surfaces",
+			"passed": true
+		},
+		{
+			"message": "Controls are in front of their receivers",
+			"passed": true
+		},
+		{
+			"message": "Three controls at 24 cm centres",
+			"passed": true
+		},
+		{
+			"message": "Receiver 0 follows its lever",
+			"passed": true
+		},
+		{
+			"message": "Receiver 1 follows its lever",
+			"passed": true
+		},
+		{
+			"message": "Receiver 2 follows its lever",
+			"passed": true
+		},
+		{
+			"message": "Receiver 0 preserves its release distinction",
+			"passed": true
+		},
+		{
+			"message": "Receiver 1 preserves its release distinction",
+			"passed": true
+		},
+		{
+			"message": "Receiver 2 preserves its release distinction",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false
+}

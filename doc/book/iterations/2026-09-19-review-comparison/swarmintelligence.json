@@ -1,0 +1,64 @@
+{
+  "status": "seven halls restored to the route; three focused revisions",
+  "summary": "What holds a collective together: traces, neighbours, a reward, or care? The seven-hall order stays. Two missing halls return, two comparisons become repeatable, and the ecosystem reveals its population support. Four final.md chapters are retained unchanged.",
+  "items": [
+    {
+      "title": "Bring the missing encounters back into the walk",
+      "description": "The Ant Colony and Ecosystem chapters were present, but their halls were absent from the museum plan. Both now have enclosed galleries and tested perimeter passages. The first three halls keep their layouts; all original artifact families remain in the seven maps.",
+      "images": [
+        "doc/book/iterations/2026-09-20-swarm-review/SwarmIntelligence_Ant_Colony_Optimization.png",
+        "doc/book/iterations/2026-09-20-swarm-review/SwarmIntelligence_Swarm_Intelligence_Algorithms.png"
+      ],
+      "captions": [
+        "Restored Ant Colony · home, food and two trail channels occupy a floor-scale field.",
+        "Restored Ecosystem · local organisms and a separate population-support record."
+      ],
+      "image_note": "Current Godot museum captures, not a matched before/after pair. Required primaries instantiated and the selected perimeter routes passed with the museum collision body. Headset comfort and the full sequence walkthrough remain untested.",
+      "report": "doc/book/iterations/2026-09-20-swarm-review/SUMMARY.md",
+      "report_label": "Findings, decisions and remaining work"
+    },
+    {
+      "title": "New travellers, inherited marks",
+      "description": "RESET now repeats food positions, qualities and ant headings. ANTS replaces the agents while preserving their field. The below-floor controls have been raised into reach and the display made smaller.",
+      "images": [
+        "doc/book/iterations/2026-09-20-swarm-review/SwarmIntelligence_Agent_Based_Modeling_ABM.png"
+      ],
+      "captions": [
+        "Current ABM encounter · EVAPORATE and ANTS sit in front of the shared trail diagram."
+      ],
+      "image_note": "Actual museum capture. Button detector centres are approximately 1.03 m above the floor. This verifies placement and a controlled approach; it does not substitute for using the controls with tracked hands.",
+      "text_kind": "book — Agent-Based Modeling",
+      "before": "Next vary ANTS. This control changes the number of agents and respawns them, so treat it as a new population rather than a continuous observation of the old individuals. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks. They may produce superficially similar pictures for different reasons.",
+      "after": "Next vary ANTS. The control replaces the population but leaves its field behind. The new ants arrive in a world marked by ants that are no longer there. Watch whether they pick up an old route. Then RESET: this time the marks disappear too. Replacing the travellers and erasing their history are two different acts. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks; similar pictures can have different histories.",
+      "report": "doc/book/iterations/2026-09-20-swarm-review/model-checks.json",
+      "report_label": "Model comparisons and baseline failures"
+    },
+    {
+      "title": "A remembered place can lose its value",
+      "description": "An impossible initial novelty score froze the old memories. Saved places are now re-evaluated against the current archive. Its count and colour field change together; the field is also lifted above the museum floor.",
+      "images": [
+        "doc/book/iterations/2026-09-20-swarm-review/pso-converge.png",
+        "doc/book/iterations/2026-09-20-swarm-review/pso-novelty.png"
+      ],
+      "captions": [
+        "CONVERGE · the centre stays valuable; particles overlap near it.",
+        "NOVELTY · distances are measured from the current archive, shown here at 35 / 200 places."
+      ],
+      "image_note": "Two states of the revised artifact in the actual museum: same camera, same initial scatter and velocities, 180 updates of 1/60 second each. These are controlled snapshots, not before/after versions or proof of long-term exploration.",
+      "text_kind": "book — Particle Swarm Optimization",
+      "before": "Spend longer with NOVELTY. Newness depends on what has been remembered, and this archive has a finite capacity. An apparently unexplored place can be unfamiliar to the stored record without being unfamiliar to the world. Every novelty measure needs an answer to the question “new relative to what?”",
+      "after": "Spend longer with NOVELTY. At its beginning the archive remembers the current positions. Its count grows as more visits are kept, and the bright regions on the plate change with that record. Follow a place that was bright. Does it remain promising once the swarm has been there?\n\nA remembered position must be scored again when the archive changes. Yesterday's high score cannot simply win against today's distances: the question has changed under it. The particle retains a place, but its claim to be best has to be renewed. Here forgetting and revaluation are part of the mechanism that lets movement continue.\n\nThe archive holds at most two hundred positions, sampled one at a time rather than recording every visit. When it fills, new entries replace the oldest. An apparently unexplored place can be unfamiliar to this record without being unfamiliar to the world. New relative to whom, and to how much of their past?",
+      "report": "doc/book/iterations/2026-09-20-swarm-review/final.diff",
+      "report_label": "Complete exact manuscript diff"
+    },
+    {
+      "title": "Care becomes part of what can be observed",
+      "description": "The ecosystem was skipped because its scene root was Node2D. It now loads as a 3D exhibit, with distinct organism colours and an opt-in record of existing interventions. Support remains active.",
+      "text_kind": "book — Ecosystem",
+      "before": "Watch for a population recovery, but resist assigning its cause from appearance alone. A rising count does not identify whether reproduction or replenishment produced the new bodies. A stronger future version would mark interventions when they occur, allowing you to compare a maintained population with one left to its local rules.",
+      "after": "Watch for a population recovery. Beside the living box, the POPULATION SUPPORT record counts prey and predators supplied from outside. Food has its own count; predator pressure reports when a population-level rule is reducing predator health. These marks come from the interventions themselves. A rise in prey accompanied by five supplied bodies tells a different story from a rise with no addition recorded. Neither view alone gives the whole history.\n\nLook back at the organisms after reading the record. Does the same recovery look different now? The intervention has not become more visible in their movements; you have gained another way to account for them. A future comparison could let you turn population care off while keeping the starting conditions fixed. For now the record exposes support without withdrawing it.",
+      "report": "doc/book/iterations/2026-09-20-swarm-review/content-checks.json",
+      "report_label": "Preservation and integration checks"
+    }
+  ]
+}

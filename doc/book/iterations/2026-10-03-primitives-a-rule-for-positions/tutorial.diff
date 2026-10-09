@@ -1,0 +1,156 @@
+--- before/tutorial.md
++++ tutorial.md
+@@ -1,109 +1,70 @@
+-# Inspect the sphere that the name leaves out
++# Primitives — a rule for positions
+ 
+-The cube hall separated positions, connectivity and presentation. This room carries that distinction into finite models of a curved surface. The Academy motto supplies a question about knowledge; the work is to inspect the construction that knowledge has made familiar. The historical and interpretive references are in the [book text](/book?map=Primitives_Ignorance&section=final).
++An octahedron has six corners: two on each axis, equally far from its centre. We can use that regularity to generate its positions.
+ 
+-## Recognition, then inspection
++Open `primitive_rules.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). The left study is the octahedron; the right is a sphere with its triangle edges exposed. Both use the same room and player as Cube.
+ 
+-Begin with the ordinary `sphere` near the entrance. Approach and inspect its outline. Treat it as an example of what the name leaves unspecified. It is smaller than the later resolution pairs: its default radius is 0.25, while those pairs have radius 0.5. Do not interpret this initial encounter as a controlled resolution comparison.
++## 1. Give a rule a name
+ 
+-Proceed to `sphere_high`, `sphere_mid` and `sphere_low`, at rows 18, 21 and 24. This follows the actual order of their placements. At each pair, compare the edge-marked surface with its plain neighbour, then compare with the preceding pair from a similar distance.
+-
+-| Pair | Rings | Radial segments | Radius / height |
+-| --- | ---: | ---: | ---: |
+-| High | 16 | 16 | 0.5 / 1.0 |
+-| Middle | 7 | 7 | 0.5 / 1.0 |
+-| Low | 1 | 10 | 0.5 / 1.0 |
+-
+-Within a pair, the generated vertex and triangle-index arrays match. Both have `inspection:1`; `inspection_edges:1` adds the overlay to one member and `inspection_edges:0` hides it on the other. The base material also matches. Comparing the pair separates mesh geometry from its presentation.
+-
+-Between pairs, the geometry changes. The low example is especially useful: it has more radial divisions than the middle one, but far fewer rings. A smaller total does not mean every direction was reduced equally.
+-
+-## Follow the two parameters
+-
+-The low sphere's builder reads the selected configuration into these variables:
++Open `studies/primitive_rules/octahedron.gd`. Find this function:
+ 
+ ```gdscript
+-sphere_mesh.radial_segments = segment_count
+-sphere_mesh.rings = ring_count
++func octahedron_positions(radius: float) -> Array[Vector3]:
++    var directions: Array[Vector3] = [
++        Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1),
++    ]
++    var points: Array[Vector3] = []
++    for direction in directions:
++        points.append(direction * radius)
++        points.append(-direction * radius)
++    return points
+ ```
+ 
+-The first controls division around the axis; the second controls the ring structure along it. The current room leaves their defaults in place. It does not provide buttons for rebuilding these pairs at arbitrary resolutions.
++The three directions point along positive X, Y and Z. The loop scales each by `radius`, then adds its opposite. The minus sign reverses the direction. Six positions enter the list in order: +X, −X, +Y, −Y, +Z, −Z.
+ 
+-The source generates positions and joins them with triangles. The definition of a sphere specifies a fixed radius from its centre; a finite surface of flat triangles approximates that curved boundary. Smooth lighting can make a facet less conspicuous while leaving its geometry unchanged. Other ways to represent or render a sphere exist; the limit examined here belongs to these meshes.
++`radius` is a **parameter**: a named input to the function. Here it means the distance from the centre to a corner. Use a positive value. `float` declares a number that can have a fractional part. `-> Array[Vector3]` declares the result: a list of positions. `return points` sends that list back to the code that called the function.
+ 
+-Choose one facet or ridge you would keep for a particular visual use. This is a design proposal about an existing form, not a request to operate an editing control that the display does not have.
++The function calculates coordinates around `(0, 0, 0)`. It creates no visible object. The scene places this whole study above the floor, to your left.
+ 
+-## Continue to the counter
++## 2. Call it with another value
+ 
+-The counter sits at (9,26), near the rear of the second room. Choose one of its four numbered spheres for a distant background, then one for close inspection, before revealing the counts.
+-
+-| Control | What changes | What stays |
+-| --- | --- | --- |
+-| SHOW / HIDE COUNTS | The information on the tilted tags | The generated sphere meshes |
+-| SHOW / HIDE EDGES | The extra triangle-edge overlay | The generated sphere meshes |
+-
+-The spheres remain fixed on their stands and rotate at the same rate. The two controls are independent. The four radial settings are 4, 8, 16 and 64, with rings generated by `maxi(seg / 2, 2)`.
+-
+-Each tag gives two counts. One reads every index triple:
++In `_ready()`, the script asks for the positions:
+ 
+ ```gdscript
+-var arrays = mesh.surface_get_arrays(0)
+-var triangle_entries = arrays[Mesh.ARRAY_INDEX].size() / 3
++    positions = octahedron_positions(0.55)
+ ```
+ 
+-The other looks up the positions and excludes patches whose squared cross product is below `1e-16`. At the poles, some listed triangles collapse. The full [measured invoice and area test](/book?map=Primitives_Ignorance&section=technical) remain in the technical chapter. This distinction offers a second inquiry for readers who want to follow the instrument itself.
++`0.55` is the **argument**, the value passed into `radius` for this call. The returned list becomes `positions`.
+ 
+-A count is not a frame-time measurement. Identify a desired feature, viewing distance and proposed use before treating a larger or smaller number as an improvement. Headset performance requires its own measurement.
++Godot calls `_ready()` when the node is ready. Our new function runs because we call it there. It is not another automatic callback.
+ 
+-## The capsule: the side you have not seen
++Change `0.55` to `0.75` and run again. All six corners move farther from the centre. Their opposite pairing and equal distances remain. The edge length changes too: this radius measures centre to corner, not corner to corner.
+ 
+-The `capsule_reliquary` at (9,22) contains the enlarged original capsule. Its long axis is vertical and it turns at 45 degrees per second. Watch a ridge face you and predict what is opposite it. Observe the changing silhouette while the object turns; no pause or grab control is assumed.
++The existing face list connects these positions into eight triangles. Its indices were supplied separately; the function does not discover which corners belong to a face. We reuse Cube's handles, segments and nested face-building loop.
+ 
+-The scene's authored resource contains:
++## 3. Move outside the rule
+ 
+-```ini
+-radial_segments = 5
+-rings = 5
++Restore `0.55` and run again. Hold one numbered corner and move it sideways. Use aim and E on desktop, or near grip in VR.
++
++The neighbouring triangles follow. The result still has the same connections, but it is no longer a regular octahedron. The generated list was a starting arrangement, not a constraint on your hand.
++
++`_process()` reads the edited handle positions each frame. It does not call the generator again. Restarting runs `_ready()` and restores the rule's result; temporary edits are not saved.
++
++## 4. Return to the sphere
++
++In Point One, SphereMesh gave a point a visible body. Open `studies/primitive_rules/sphere.gd`:
++
++```gdscript
++    sphere_mesh.radius = 0.55
++    sphere_mesh.height = 1.1
++    sphere_mesh.radial_segments = 8
++    sphere_mesh.rings = 4
+ ```
+ 
+-Those are separate parameters. Five radial divisions give a regular pentagonal cross-section through the straight middle of the body. Each angular interval is 360 / 5 = 72 degrees. After that rotation the cross-section fits itself again. A half-turn is 180 / 72 = 2.5 intervals: a ridge arrives opposite the middle of a facet, so this rotation does not preserve the cross-section.
++Radius and full height set the dimensions. `radial_segments` divides the turn around the vertical axis; `rings` controls subdivisions along the height.
+ 
+-The unevenness is the odd count and the mismatch of opposite sides, not irregular spacing between five segments. This is one failed symmetry test, not the disappearance of every symmetry. A regular six-sided cross-section would pass the half-turn; that comparison is calculable without adding another exhibit or suggesting a segment button here.
++Change only `radial_segments` to `16` and run again. Follow the additional edges around the sphere. Restore `8`, then change only `rings` to `8`. The subdivision changes in the other direction. The radius and height settings stay fixed in both trials.
+ 
+-Try to describe what you expected before naming what the geometry does. The name "capsule" does not tell you how the hidden side is divided. Learning the rule gives another route to knowing it. Palle's question concerns the form this restriction makes available between familiar categories, and whether we can encounter it before treating its facets as defects.
++SphereMesh generates its own positions and connections. The supplied MeshEdges guide reads that resulting mesh and draws its edges; it does not make a different sphere. The guide and numbered handles are teaching aids. Neither study's surface has a collider.
+ 
+-## Return visits
+-
+-The following studies remain available alongside the main sphere and capsule encounters. They were moved here from the longer book draft so the collection can retain its depth without requiring every argument on the first walk.
+-
+-### The ideal set
+-
+-Choose a tetrahedron and a cube from the held solids. Turn each until you have inspected more than one face and corner. What kind of sameness repeats within each object? Then compare with another member of the family.
+-
+-The five convex regular polyhedra have congruent regular polygonal faces and the same arrangement at every vertex. They do not look identical from every possible viewpoint. Their regularity is a specified symmetry of the object, not a promise that the eye sees the same picture everywhere.
+-
+-Why only five in this family? Regular face angles must fit around a convex vertex with a positive angular defect. Triangles permit three, four or five faces there; squares permit three; pentagons permit three. Six equilateral triangles or four squares already fill a flat turn. Those constraints lead to the tetrahedron, octahedron, icosahedron, cube and dodecahedron.
+-
+-The list is finite because the question is restrictive. It does not list every useful solid, every beautiful object, or every possible way of making a world.
+-
+-At the held octahedron, count six vertices, twelve edges and eight faces. Compare those numbers with the cube's eight, twelve and six. Vertices and faces exchange roles in their dual relationship. A different way of organising the same comparison reveals a relation the individual names conceal.
+-
+-Look at what cutting the tetrahedron's corners adds. New faces appear where vertices used to be. A construction can leave the five-member regular family while remaining precise and usable. Exclusion from a catalogue is not exclusion from geometry.
+-
+-### Other ways to recognise a form
+-
+-Compare the star's five-point pattern under the same imagined half-turn. A familiar outline can answer one symmetry test and fail another. Name the transformation before saying an object is symmetrical.
+-
+-Look for a feature on the irregular rock that you would lose by replacing it with a regular solid. Choose a use for that feature: recognition, shelter, a grip, a distinctive silhouette. What resists your first abstraction may be exactly what another task needs to keep.
+-
+-The right triangle offers an invariant to compare: move or turn a rigid right triangle and the right angle remains. An invariant says which changes you are considering and which relation survives them. It is not a ranking of the objects that possess it.
+-
+-The cones mark a place that invites you to look for something absent. A marker can preserve an expectation even when the thing it names is no longer there. Read the marking, then check the place.
+-
+-### Further instruments in the existing collection
+-
+-The snap-octahedron puzzle, two cube scenes, cylinder ring/radial display, primitive pillar, tiled science screen, seven-words choir and diamonds remain placed. They are available for later encounters and development; their existence does not add another compulsory step to this chapter. The two dark-sphere placements remain decorative.
+-
+-## Scope of this pass
+-
+-The three-room arrangement contains 28 placements. The five regular solids can be picked up; the twelve new sphere examples vary rings and segments independently. The existing counter has no resize control or frame-time meter, and its samples are not grabbable. Eight additional PrimitiveMesh prefab scenes are displayed at rest in the third room. The sixteen older secondary/decorative placements remain in the side alcove. Native desktop approach and supplied pickup were tested; headset reach and legibility remain unverified.
++The museum's pillars, sphere comparisons and capsule extend this investigation. Here we have gained one reusable operation: a function that takes a value and returns data. A short rule can produce a body; its output remains something we can inspect and alter.

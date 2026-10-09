@@ -1,0 +1,39 @@
+{
+  "core_passed": true,
+  "transfer_passed": true,
+  "museum_passed": true,
+  "check_counts": {
+    "core": 33,
+    "transfer": 22,
+    "museum": 8
+  },
+  "first_submission_unchanged": true,
+  "packet_unchanged": true,
+  "printed_files_match": true,
+  "fractal_chapter_unchanged": true,
+  "other_source_hash_changes": [],
+  "images": {
+    "front": "6a129c8fbf5d32436577469cfaf21dcf5a4f8c823b69cba678c122fedfc76b4e",
+    "oblique": "c3a16cab0c178c3c455c06ecf12aadf8a840ae63b56b7dc1bcc868a71063b550",
+    "side": "e1b3aaf6c5831ee3c965af4f842e0e279e45b2dd1d248926d4c39505e3e040e2"
+  },
+  "tools": {
+    "tools/test_fractals_ghost_student.py": "53635768f3c867a213917b44b4117631e8dabbd8820d3b25a9c01b0cc7dbeb6f",
+    "tools/probes/fractals_ghost_core.gd": "2e2bfc07d2b1b4682049217ff4423f0ace8ca81a623f0be6f7afb59e56321a7d",
+    "tools/probes/fractals_ghost_transfer.gd": "af99040764aac4b1f0402368961c8ce1a1d236ce90e83ca25167759128a05eae",
+    "tools/capture_fractals_ghost_museum.py": "9b9c7105f3b5b3d2f11c124d8b0044a36e5854fec691db53b5aa6e10fb26a127",
+    "tools/probes/fractals_ghost_museum.gd": "274f92b440fced687b311164537a9c14fa53c54e0211150a882e3bb0d14a0fae"
+  },
+  "first_student_runner_accepted": false,
+  "revised_student_runner_accepted": true,
+  "limits": "Fresh capable AI reader; no human beginner, headset, Quest or full interaction certification.",
+  "revision_submission_unchanged": true,
+  "revision_check_counts": {
+    "code": 7,
+    "museum": 5
+  },
+  "revision_images": {
+    "witness": "7ee23c6b5f11d7b5ee8ee1c3551251af14ed4b58d0d8cf7831bec9a8e14f1867",
+    "overview": "fef59f6b1ed1ae64fa5cbcb9fa73d64001381c7292df69601eb5f4854eb92adf"
+  }
+}

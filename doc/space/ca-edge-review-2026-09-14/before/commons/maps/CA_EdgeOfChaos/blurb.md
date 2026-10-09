@@ -1,0 +1,1 @@
+The edge of chaos: some rules produce static death, others produce random noise, but a narrow band between them generates complexity. This is where computation happens — order enough to persist, chaos enough to compute. Life finds this edge. So does interesting automata.

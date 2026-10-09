@@ -1,0 +1,112 @@
+{
+  "required": "shannon_workbench",
+  "shots": [
+    {
+      "tag": "approach",
+      "from": [
+        4.5,
+        1.65,
+        2.6
+      ],
+      "look_at": [
+        4.2,
+        1.6,
+        5.25
+      ],
+      "fov": 64,
+      "p": 0.9,
+      "prediction": 0
+    },
+    {
+      "tag": "controls",
+      "from": [
+        4.5,
+        1.65,
+        3.2
+      ],
+      "look_at": [
+        4.5,
+        1.0,
+        4.45
+      ],
+      "fov": 42,
+      "p": 0.9,
+      "prediction": 1
+    }
+  ],
+  "walks": [
+    {
+      "tag": "entrance",
+      "from": [
+        5.5,
+        0.1,
+        0.6
+      ],
+      "to": [
+        5.5,
+        0.1,
+        2.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "controls",
+      "from": [
+        4.5,
+        0.1,
+        2.5
+      ],
+      "to": [
+        4.5,
+        0.1,
+        3.8
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "right passage",
+      "from": [
+        6.5,
+        0.1,
+        2.5
+      ],
+      "to": [
+        6.5,
+        0.1,
+        7
+      ],
+      "seconds": 5
+    },
+    {
+      "tag": "rear passage",
+      "from": [
+        5.5,
+        0.1,
+        7
+      ],
+      "to": [
+        5.5,
+        0.1,
+        9.6
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "exit",
+      "from": [
+        5.5,
+        0.1,
+        9.6
+      ],
+      "to": [
+        5.5,
+        0.1,
+        11.5
+      ],
+      "seconds": 3
+    }
+  ],
+  "room": "QFEP_F_Term",
+  "sequence": "qfeplaboratory",
+  "run": "res://doc/reports/interfaces-2026-09-20/shannon-pilot/after/runtime/"
+}

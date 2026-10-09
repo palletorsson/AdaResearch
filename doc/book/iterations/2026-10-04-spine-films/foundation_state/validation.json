@@ -1,0 +1,66 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Initial state is empty and both gates closed"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 1"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 2"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 3"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 4"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 5"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 6"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 7"
+		},
+		{
+			"passed": true,
+			"test": "Exact half-second step 8"
+		},
+		{
+			"passed": true,
+			"test": "Travel clamps while elapsed continues"
+		},
+		{
+			"passed": true,
+			"test": "Approach sets current and retained state without ticking clock"
+		},
+		{
+			"passed": true,
+			"test": "Leaving closes only current gate"
+		},
+		{
+			"passed": true,
+			"test": "Reset clears visit and clock"
+		}
+	],
+	"evidence": {
+		"gate_open_fraction": 0.7,
+		"limits": "FRAME is a synthetic teaching step, not a measured Godot frame. APPROACH is a button, not tracked proximity. No hall gates are controlled.",
+		"model": "Exact browser state transitions; 3D display is an explanatory port.",
+		"ready_calls": 1,
+		"source": "State browser study: drawState and its three event listeners",
+		"teaching_step_seconds": 0.5,
+		"travel_seconds": 2.0
+	},
+	"passed": true
+}

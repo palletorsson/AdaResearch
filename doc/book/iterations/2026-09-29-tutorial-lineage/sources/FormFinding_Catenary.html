@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FormFinding_Catenary · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=FormFinding_Catenary">← Tutorial lineage</a></p><h1>FormFinding Catenary</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="FormFinding_Catenary/final.md">Raw captured source</a></p><pre># Drawn, evaluated, settled
+
+What has already been decided when a curve seems to find itself?
+
+The last hall let you follow a search taking steps. Here, first take a curve in your hand. Then compare it with one whose coordinates come from a formula. The hanging chain and the soap film are the physical references: under specified supports, loads and material assumptions, a settled chain or film can make a difficult calculation visible. But these objects in the museum arrive by different routes. Watch for the difference between drawing an answer, evaluating an answer, and letting a system settle toward one.
+
+## The chain
+
+&lt;!-- @cable_builder --&gt;
+
+Four cyan beads, and a four-metre cable glowing magenta into blue slung through them. Take a bead and move it. The whole curve recomputes and re-skins in your hands, every frame. Hold the ends in mind while you move an interior point: what have you asked the curve to obey?
+
+Read it carefully, because it is the room&#x27;s honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span&#x27;s length, so the depth is drafted rather than found. It resembles a hanging cable because its maker supplied a rule for sag. Your hand changes the constraints of that drawing. No weight has been measured and no rope length conserved.
+
+&lt;!-- @laundry_line_cathedral --&gt;
+
+Three washing lines pegged with towels and shirts, supported at their ends by crossbars. These curves are sampled from `cosh`. Their sag comes from three chosen parameters; the washing adds colour and an association with weight, but it adds no load to the calculation. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. The cathedral is implied.
+
+Gaudí used hanging models to study structural form. Inverting a suitable tension model can suggest a compression structure under corresponding loads and supports; it is not a guarantee that any inverted curve will stand. Here the two poses let you see that reversal, while the plaque names the limit: an analytic drawing, not a gravity solver. The washing and the cathedral share a curve. They do not yet share a test.[^hanging-model]
+
+&lt;!-- @ --&gt;
+
+## The film
+
+&lt;!-- @catenoid --&gt;
+
+The chain, revolved into a surface. A soap film can form a catenoid between two coaxial rings, but the rings do not guarantee one enduring answer: stability depends on their separation, and a film can collapse into separate discs. “Minimal” does not promise a globally smallest surface for every boundary.[^film]
+
+Here it lies low and wide, a cyan wireframe hourglass about a metre and a fifth across and a little over a third of a metre tall. Lift the model and turn it. The opening travels with it; the sampled mesh retains its shape. The same `cosh` appears again, now drawn around an axis. You can inspect the result in your hand, but you cannot stretch its rings or watch a film settle between them.
+
+```gdscript
+@export var c: float = 0.5      # waist radius
+
+var r: float = c * cosh(u / c)
+var x: float = r * cos(v)
+var y: float = r * sin(v)
+var z: float = u
+```
+
+The same `cosh` appears in a catenary and in the radial profile of a catenoid. Here `c` sets the waist radius; the chosen range of `u` decides how much surface we keep. The formula does not choose its own boundary. Somebody has already chosen the numbers from which it will begin.
+
+&lt;!-- @helicoid --&gt;
+
+In a slot between two pillars, the other one, and you may step over it before you notice it: a green wireframe corkscrew twenty centimetres across, about thirty-eight centimetres high, six thousand triangles in a thing the size of a mug. Lift this one too. A straight line rotates as it rises; the display gains about nineteen centimetres in each full turn.
+
+A helicoid is ruled: straight lines lie along its surface. A catenoid is a surface of revolution. Suitable patches of these surfaces belong to an isometric family: they can be continuously related while preserving their intrinsic distances. That does not make these two differently bounded meshes the same object, and nothing in the room performs the deformation.[^surfaces]
+
+&lt;!-- @science_screen --&gt;
+
+The screen has no compatible live measurement from these objects. Its scanner needs more than a nearby shape or a suggestive name: it needs data in a form it recognises. The surfaces are visible; their mathematical relation has not become a signal the screen can read. There is still work between having an object and having an instrument for it.
+
+&lt;!-- @ --&gt;
+
+## Matter as the solver
+
+A real chain can move, overshoot and settle after an end is displaced. A film has a history too. The equilibrium equation describes a possible settled condition; it does not erase the time needed to reach it. In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.
+
+The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told `cosh`. That is the difference this room has been drawing, a curve evaluated and a curve arrived at.
+
+This is still a powerful way to make form. The boundary, the formula, the sampling and the drawing each decide something. The calculus of variations asks what makes a shape stationary under allowed changes. Our objects let us approach that question, and also ask which changes their code has allowed us to make.
+
+Next: what happens when the solving has to be done in steps after all, by a machine with a frame budget.
+
+[^hanging-model]: Santiago Huerta, [“Structural design in the work of Gaudí”](https://oa.upm.es/703/) (2006), on hanging models, graphical methods and equilibrium design. The inversion is conditional on loads and supports; the laundry artifact evaluates and mirrors a formula.
+
+[^film]: Gareth P. Alexander and Thomas Machon, [“A Björling Representation for Jacobi Fields on Minimal Surfaces and Soap Film Instabilities”](https://arxiv.org/abs/1912.13009) (2020). Instability and the transition to separated films are not implemented in this model.
+
+[^surfaces]: Danny Calegari, [*Minimal Surfaces*, §1.4](https://math.uchicago.edu/~dannyc/courses/minimal_surfaces_2014/minimal_surfaces_notes.pdf), on the conjugate family and isometric deformation. The local relation does not identify arbitrary finite meshes or their boundaries.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="FormFinding_Catenary/tutorial.md">Raw captured source</a></p><pre># Form-Finding: Catenary
+
+Two of the oldest solved minimisations, side by side. Before them, a boundary must be fixed — two anchors for the chain, two rings for the film.
+
+Fix the anchors.
+
+```gdscript
+for i in range(control_point_count):
+    var point: Node3D = point_scene.instantiate()
+    var t: float = float(i) / float(control_point_count - 1)
+    point.position = Vector3((t - 0.5) * cable_length, 1, 0)
+    $ControlPoints.add_child(point)
+    control_points.append(point)
+```
+
+Grabbable spheres. These are the only decisions you make. The curve between them is not yours.
+
+Pull each span down by a fraction of its own length.
+
+```gdscript
+var p1: Vector3 = to_local(control_points[i].global_position)
+var p2: Vector3 = to_local(control_points[i + 1].global_position)
+var distance: float = p1.distance_to(p2)
+var handle_length: float = distance * 0.3
+curve.set_point_out(i, Vector3(handle_length, -gravity_sag * distance * 0.5, 0))
+curve.set_point_in(i + 1, Vector3(-handle_length, -gravity_sag * distance * 0.5, 0))
+```
+
+The sag scales with the span. Move an anchor and the depth follows. That dependence is the whole difference between a curve derived and a curve drawn.
+
+Sweep a tube along the baked curve.
+
+```gdscript
+var total_length: float = curve.get_baked_length()
+var sample_count: int = maxi(2, int(total_length * spline_resolution))
+for i in range(sample_count):
+    var t: float = float(i) / float(sample_count - 1)
+    positions.append(curve.sample_baked(t * total_length))
+```
+
+`sample_baked` walks the curve by arc length, not by parameter. Even sampling along a cable that sags unevenly.
+
+Draw the alternative, so you can see what it costs.
+
+```gdscript
+var depth: float = 0.45
+var out := PackedVector3Array()
+for k in range(41):
+    var t: float = float(k) / 40.0
+    var p: Vector3 = a[0].lerp(a[a.size() - 1], t)
+    p.y -= depth * 4.0 * t * (1.0 - t)
+    out.append(p)
+```
+
+One fair bow of fixed depth between the end anchors only. The interior control spheres visibly do not sit on it. A drawn curve has stopped agreeing with its own data.
+
+Revolve a cosh to get the soap film.
+
+```gdscript
+@export var c: float = 0.5      # waist radius
+
+var r: float = c * cosh(u / c)
+var x: float = r * cos(v)
+var y: float = r * sin(v)
+var z: float = u
+```
+
+The catenary rotated is the catenoid — the least area that can span two rings. Galileo guessed the hanging chain was a parabola. It is `cosh`, and the chain had been getting it right the whole time. Pull the rings too far apart and no catenoid exists; the film breaks into two discs.
+
+Rule the other minimal surface.
+
+```gdscript
+@export var pitch: float = 0.3
+
+var x: float = u * cos(v)
+var y: float = u * sin(v)
+var z: float = pitch * v
+```
+
+A straight line swept as it rises. The helicoid and the plane are the only ruled minimal surfaces, and the helicoid bends continuously into a catenoid without ever stretching.
+
+Give the surfaces a body so hands can move the boundary.
+
+```gdscript
+var cylinder := CylinderShape3D.new()
+cylinder.radius = c * cosh(u_max / c) * scale_factor
+cylinder.height = (u_max - u_min) * scale_factor
+collision.shape = cylinder
+```
+
+The surface is a function of its frame and nothing else. Move the frame and the minimum moves with it, instantly, with no solver in between.
+
+You can now hang a cable whose sag is derived rather than drawn, revolve a catenary into a minimal surface, rule a helicoid, and hold both by their boundaries. The draftsman proposes; gravity computes. FormFinding_Relaxation replaces the closed form with a mesh that has to settle.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="FormFinding_Catenary/blurb.md">Raw captured source</a></p><pre>Two of the oldest solved minimizations in the world, side by side. A hanging chain finds the catenary — the exact curve of least potential energy for a rope between two points; a soap film finds the minimal surface — the least area that can span its wire frame. No hand draws these shapes. They are computed, continuously, by matter obeying the single instruction: spend the least.
+</pre></section></body></html>

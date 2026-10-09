@@ -1,0 +1,45 @@
+{
+  "map": "Primitives_Polythedra",
+  "status": "author_review_pilot",
+  "needs": [
+    "Vector3 positions and basic arithmetic",
+    "Array indexing, for and if",
+    "Triangle ImmediateMesh submission",
+    "PointHandle, Segment and TraceMemory"
+  ],
+  "gives": [
+    "separate vertex positions from connections",
+    "array of face-index rows",
+    "nested traversal: one face then its indices",
+    "four non-coplanar points and four faces bound a tetrahedron"
+  ],
+  "learner_owns": [
+    "declared fourth-point offset",
+    "positions array",
+    "face list",
+    "nested submission loop",
+    "one-row closure edit"
+  ],
+  "supplied": [
+    "Day Zero room/input",
+    "PointHandle",
+    "Segment",
+    "TraceMemory",
+    "two-sided unshaded face material and dark edge material"
+  ],
+  "deferred": [
+    "mesh normals and back-face winding experiment",
+    "GPU index buffer",
+    "general mesh validity test",
+    "convex hull collision",
+    "volume calculation",
+    "barrier and slope construction"
+  ],
+  "data_flow": "Saved Trace -> same three original selections as Triangle -> add offset fourth point -> labelled handles -> positions -> face-index rows -> triangle surface",
+  "original_record_unchanged": true,
+  "triangle_handle_edits_persist": false,
+  "all_lesson_geometry_created_in_code": true,
+  "physical_headset_tested": false,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

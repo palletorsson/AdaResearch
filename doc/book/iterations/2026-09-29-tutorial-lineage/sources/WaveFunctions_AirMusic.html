@@ -1,0 +1,274 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_AirMusic · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_AirMusic">← Tutorial lineage</a></p><h1>WaveFunctions AirMusic</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_AirMusic/final.md">Raw captured source</a></p><pre># After the strike
+
+In Effect Sound we kept a note and changed the rule that made it. Here the hand can leave while its consequence continues.
+
+A stick lies in a cradle at the left end of a table, front to back. Eight metal bars lie along the table beside it, the longest nearest the stick, and a pale rail runs along the table&#x27;s front edge.
+
+&lt;!-- @resonating_metallophone --&gt;
+
+Take the stick and bring it down on the left-hand bar. Lift it away at once and keep listening. The contact is over; the bar glows and rings, and the plate above the row names one voice, its hertz and its age. The glow fades as the seconds count up. Decide, before the note is gone, whether what you hear is the strike or what the strike began.
+
+Strike the same bar again while it still rings. There is another attack, but no additional voice: this bar starts its existing player again, and its age on the plate returns towards zero. Now strike a shorter bar instead, while the first is still fading. The plate says two voices, each with its own age. The first was not stopped by the second. Try to hear where one ends and the other goes on.
+
+The bar keeps its note as a number and its ring as a curve. Each bar plays a sound it made once at startup:
+
+```gdscript
+		var envelope = exp(-t / decay_time)
+		var wave = sin(2.0 * PI * frequency * t)
+```
+
+a sine at the bar&#x27;s frequency under an exponential decay. After three seconds its envelope is about 37 percent of its initial value. The glow uses that decay too:
+
+```gdscript
+			current_amplitude = (hit_velocity * max_amplitude) * exp(-resonance_time / decay_factor)
+```
+
+So this is a synthesised resonance, not the vibration of a metal bar solved from its material. The length is chosen from the note, not the note from the length:
+
+```gdscript
+	return BAR_LENGTH * sqrt(root / maxf(1.0, freq))
+```
+
+The chosen relation makes length fall with the square root of frequency. This gives the row a visible order before you have struck anything. The program does not compute this note from the metal, the stick&#x27;s material or the table underneath. Those bodies could change without changing the stored frequency. The resemblance is an arrangement we can inspect.
+
+The stick&#x27;s speed does reach the bar. A slow touch lands at a fraction of the level a fast one does:
+
+```gdscript
+		hit_velocity = clamp(velocity_magnitude * 2.0, 0.1, 1.0)
+```
+
+Try the same bar slowly and then quickly, and listen for what the level changes and what it leaves alone. The glow uses the strike value directly; the player maps it into decibels. A much dimmer glow need not mean a proportionally quieter note. The hand has reached two different mappings.
+
+Now the pair. Choose two bars and strike them with a clear gap, letting the first almost finish. Reverse the order. Then shorten the gap until the second enters while the first is still loud. The plate lists both voices with their own playback ages. The ribbon adds a short piece of the two generated notes, and the sum is not a third bar. When one masks the other, let them separate again and try the gap once more.
+
+The eight notes take C, D, E, G and A and continue into the next octave, ending at E5. That is a decision about which pairs are available to you, not a law about which pairs are good. Another cut would offer other pairs; this room offers this one.
+
+Set the stick down more than half a metre from its cradle and leave it alone. After three seconds the return begins. Leave it at rest and listen to the last voice go.
+
+An exponential never quite arrives at zero, but this note does end. The stored sound lasts seven and a half seconds, with a fade over its last tenth of a second. The model lets go before the mathematical tail does.
+
+Look at the plate&#x27;s other number: 12 ms. The ribbon has only that much time across its width. It reads samples near each bar&#x27;s playback position, after that player&#x27;s gain, before distance and the rest of the audio system. A smooth curve here still joins chosen data points. Moving your head changes what reaches you without rewriting these stored notes.
+
+&lt;!-- @ --&gt;
+
+Every note here is one sinusoid under one decay. Sky Stairs next asks what a sampled curve needs before it can become a place for a body. The beat display then separates two ongoing motions from their sum. In the Synthesis Lab, we will add such sinusoids together on purpose; what the ribbon drew for you as a sum is where that begins.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_AirMusic/tutorial.md">Raw captured source</a></p><pre># A strike gives a note its own beginning
+
+Effect Sound let us keep a reference while changing the parameters of another note. In AirMusic, the comparison concerns events: one strike, a repeated strike on the same bar, and a second bar struck while the first continues. Synthesis Lab will build on the sum that appears here.
+
+Take the striker from its cradle at the table&#x27;s left end. Strike the longest bar, lift the stick away, and listen. Read the frequency and age above the row. Make the same contact again before the sound ends: the age restarts. Now use a different bar. Two ages continue together.
+
+## One player belongs to each bar
+
+`ResonatingMetallophone` creates eight `ResonatingBar` bodies for this room. Their notes are C4, D4, E4, G4, A4, C5, D5 and E5. Each owns its own `AudioStreamPlayer3D`. Starting one player again replaces that bar&#x27;s current playback; starting a different player&#x27;s note leaves the first one running.
+
+The length is assigned from the chosen frequency:
+
+```gdscript
+return BAR_LENGTH * sqrt(root / maxf(1.0, freq))
+```
+
+The lowest note keeps a length of 0.30 m. Higher notes get shorter bars. This is a mapping from frequency to visible form, not a simulation deriving sound from the material. Other tunings exist as source configurations; this hall has no visitor tuning selector.
+
+## A recognised contact starts the response
+
+The rigid body&#x27;s contact signal and its `StrikeZone` area feed `_on_body_hit`. The handler follows the hitting node&#x27;s ancestors to recognise the striker&#x27;s tip, which is a child collider rather than the stick&#x27;s root. It ignores the stick while it is returning to its cradle and suppresses closely spaced duplicate notifications.
+
+Strike strength comes from velocity, including the speed measured from a held stick&#x27;s changing position. The handler applies:
+
+```gdscript
+hit_velocity = clamp(velocity_magnitude * 2.0, 0.1, 1.0)
+```
+
+Try a slow and a quick contact on the same bar. Above 0.5 m/s this mapping has already reached its ceiling of one. Below it, strength changes without changing the chosen frequency. The bar then starts its response:
+
+```gdscript
+is_resonating = true
+resonance_time = 0.0
+current_amplitude = impact_strength * max_amplitude
+```
+
+```gdscript
+audio_player.volume_db = -6.0 + (impact_strength * 6.0)
+audio_player.play()
+```
+
+The visible response starts from strength times `max_amplitude`. Playback volume uses a decibel mapping. At strength 0.1, glow starts at one tenth of its full-strength value, while the player&#x27;s gain is about 0.54 of its full-strength gain. These are different representations of the same strike, not equal measurements of loudness.
+
+## The buffer was made before you touched it
+
+Each bar generates its mono PCM note once during setup, at 44,100 samples per second. Inside that loop:
+
+```gdscript
+var envelope = exp(-t / decay_time)
+```
+
+```gdscript
+var wave = sin(2.0 * PI * frequency * t)
+```
+
+```gdscript
+var sample_value = wave * envelope * max_amplitude
+var sample_int = int(sample_value * 32767.0)
+```
+
+The sine and envelope are multiplied, then encoded as a signed 16-bit sample. The collision does not solve a metal bar&#x27;s vibration or regenerate this buffer. It chooses when the stored note starts and at what player gain.
+
+The default decay constant is three seconds. After three seconds the exponential is `exp(-1)`, about 0.368 of its initial amplitude. Its mathematical tail has no finite end. The implementation makes a finite buffer:
+
+```gdscript
+return maxf(1.0, decay_time * 2.5)
+```
+
+For this room that is 7.5 seconds. The last 0.1 seconds receive an additional fade. The bar clears its resonance state when the player stops, so the glow cannot remain as a claim that the note still plays. The final audio fade and the glow&#x27;s exponential are not identical curves.
+
+## Two notes, two clocks, one picture
+
+Strike C4, wait a little, then strike A4. Each audio player has its own playback position. The table&#x27;s scope reads a 12 ms window near each position using 512 points. For every point it decodes that bar&#x27;s PCM and includes the player&#x27;s gain:
+
+```gdscript
+samples[i] = float(pcm.decode_s16(frame * 2)) / 32768.0 * gain
+```
+
+The visualiser adds the windows:
+
+```gdscript
+_summed_samples[i] += values[i]
+```
+
+The gain is fixed: one signal unit becomes 0.15 m of height. The drawn range is limited to ±1 and the readout reports `display limit` if the sampled sum exceeds it. The stored sum remains available for inspection. The picture does not automatically enlarge a fading signal.
+
+This display follows source playback positions, which advance with audio mixing. It is not a microphone at the listener&#x27;s head and does not include spatial attenuation, bus effects or the output device. The reported ages can differ slightly from the frame-updated glow ages. Watching the ribbon does not replace listening to the overlap.
+
+The striker returns when left more than 0.5 m from its rest, unheld, for three seconds. Its three-part return takes another 0.75 seconds and is excluded from striking. A returning tool should not compose extra notes on its way across the row.
+
+Try the same pair far apart and then overlapping. The pitches can stay fixed while the relation changes through their starting times. That is what the Synthesis Lab inherits: a sum depends on the terms, their levels and where they are in their cycles.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_AirMusic/technical.md">Raw captured source</a></p><pre># AirMusic — contact, independent voices and a sampled sum
+
+Builds on Effect Sound&#x27;s phase and envelope comparison; prepares Synthesis Lab&#x27;s additive construction. The primary remains `resonating_metallophone:0#stand:table` at (5,9). The walkway, basin, other nine placements and eight-note tuning are preserved.
+
+## Implementation
+
+- `ResonatingMetallophone.gd` creates the bars, striker, table and cradle. The table is 1.50 × 0.56 m, top at 0.85 m; bars sit at 0.875 m, 0.16 m apart. Locked axes keep the bars in their row; they remain awake for contact monitoring.
+- `ResonatingBar.gd` recognises stick ancestry through rigid and area contacts. A 60 ms debounce suppresses duplicate notifications. Held-stick speed comes from per-physics-frame position differences. The trigger&#x27;s strength is clamped to 0.1–1 after multiplying speed by two. This is a configured response, not an impact-energy calculation.
+- The bar generates a mono 44.1 kHz, 16-bit sine buffer once, multiplied by `max_amplitude = 0.5` and `exp(-t/decay_time)`. The default decay is three seconds; the buffer lasts 7.5 seconds and fades over its final 0.1 s. Strike strength maps to player gain with `-6 + 6 * strength` dB. Audio generation and strike behavior are unchanged by this scope revision.
+- Different bars have different players. A repeat on one bar restarts that player; another bar can overlap. The visible response uses frame age and strength-scaled exponential amplitude. The waveform uses source PCM and player gain, so those levels should not be described as identical.
+
+## Table scope
+
+The table enables `sample_audio` on `CombinedWaveVisualizer`, a 0.012 s window and 512 points. Other placements retain the existing schematic mode by default. `ResonatingBar.get_audio_window()` reads the signed PCM near that bar&#x27;s reported playback position and multiplies by `db_to_linear(audio_player.volume_db)`. The sample buffers are not changed. Samples beyond the end of a note contribute zero.
+
+The scope sums each contributor at the same window offset, preserving their different note ages. Its fixed scale is 0.15 m per unit. Display values are clamped to ±1 with `display limit` in the readout when needed; the summed source samples are retained without that clamp. The readout names the selected window and lists frequencies with source playback ages, two voices per line. The expanded casing has room for this hall&#x27;s eight voices.
+
+The former schematic displayed half a second across 100 points at these pitches, using a shared clock and visual amplitudes. The revised table display uses the generated buffers, including quantisation and final fade. It remains source evidence before spatial attenuation, bus processing and the output device. Audio playback positions update with mixing; the curve is not a sample-accurate capture at the listener&#x27;s ear.
+
+## Return and route
+
+The striker rests front-to-back at the left end. When unheld more than 0.5 m away for three seconds, it returns in three tweened legs over 0.75 s. The `returning` flag prevents its tip from triggering notes on that journey. The table keeps a pale front rail and dark rear kerb. Perimeter access and the south operating strip are checked by the existing museum probe.
+
+## Validation and limits
+
+The independent live probe retains Claude&#x27;s strike, overlap, repeated-note, return, access, desktop approach and streaming checks. New checks independently decode PCM, apply player gain, sum the two source windows, and compare the result with actual ribbon vertices. Captured playback ages differ, so a common global phase cannot substitute for each note&#x27;s own beginning. Two bar buffers are exported for remote listening comparisons.
+
+The run has 67 checks, zero failures and exit 0. This is synthetic movement through the striker&#x27;s collision path, not a verified tracked-hand strike. A listener and headset visit remain pending. `doc/space/air-music-review-2026-09-12/` records the run, source fingerprints and publication. Geometry and tuning were retained; the primary/book alignment and supporting text were reconciled.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_AirMusic/intent.md">Raw captured source</a></p><pre>Concept: What continues after the hand has left. A strike is an event; the response has a duration of its own. Two responses can overlap without one erasing the other, and a chosen tuning decides which pairs are available.
+
+Sequence role: On the active route AirMusic follows Effect Sound, where one oscillation changed another&#x27;s phase; here a brief contact starts a decaying oscillation, and two of them can sound together. The additive sum in the Synthesis Lab is where this leads: every note here is one sinusoid under one decay, and the ribbon above the bars already draws their sum. The hall keeps its wider company — the looper, the drone, the pipes — as the ambient layer round a walkable void.
+
+Technical angle: `resonating_metallophone` (`algorithms/wavefunctions/resonance/`): a row of `ResonatingBar` rigid bodies, each with its own `AudioStreamPlayer3D` and a note it renders once — `sin(2π·f·t) · exp(−t / decay_time)`, decay 3 s, 7.5 s long, eased to silence — so voices on different bars overlap and a re-struck bar starts again. Bar length follows `BAR_LENGTH · sqrt(root / f)`, the free-bar relation, so the scale is visible. The striker is an XR Tools pickable rod; a held pickable is frozen, kinematic, moved to a pick-up collision layer with its mask cleared, and a `StrikeZone` area detects the held tip while the rigid contact signal remains available for a thrown or dropped striker; the striker&#x27;s speed, measured per physics frame by the instrument, sets the strike&#x27;s strength. Under `#stand:table` the row sits on a table at 0.85 m, the bars locked in place and kept awake, the striker in a cradle at the left end it returns to after three seconds elsewhere, the Hz labels and the instruction on the table&#x27;s front, a 12 ms scope of the bars&#x27; own generated samples and a voices/age readout above the row. The tuning axis (`#tuning:pentatonic|equal|just|harmonic`) re-cuts the row; the shipped pentatonic is what this hall offers.
+
+Critical angle: The instrument synthesises a resonance; it does not solve a metal bar. That is a decision the room states rather than hides, and it leaves the visible relation between length and pitch intact. The pentatonic cut decides which pairs of notes a visitor can put together; another cut would offer other pairs. The readout that names each voice&#x27;s age is the room&#x27;s way of separating the strike from what the strike began, which is the distinction the next rooms depend on.
+
+Key artifacts: resonating_metallophone (primary, on its table at (5,9), facing the south strip); SystemsMusicTest (an FM-piano looper over the pillar), RackAmbientDrone, BigPipeSystem, air_music_display_case, GlassRack ×2, lab_table ×2; dark_sphere.
+
+Gap: a strike needs a hand — the desktop lane cannot pick up the striker, so on desktop the probe moves the stick body the way a hand would; a headset walk and a listener are pending; the book hero and primary are the metallophone; the scope is a window of generated samples before the listening space.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_AirMusic/critical.md">Raw captured source</a></p><pre># What continues after the hand has left — resonance, the chosen cut, and knowing by ear
+
+Steven Feld writes about acoustemology: sound as a way of knowing, and knowing-through-sound as inseparable from the place the sound is made in. This hall is a small place of that kind. It is built round a void, and the thing you come to know in it is the difference between an event and its continuation.
+
+The event is a strike. The stick meets the bar and is lifted away, and the contact is over in a fraction of a second. What continues is not the contact but a response with its own duration: a sine at the bar&#x27;s frequency under an exponential decay, three seconds to fall to about 37 percent of its initial envelope, seven and a half seconds before the room lets it go. The plate above the row names that response as a voice with an age, counting up from the strike, and the glow follows an exponential too. Its strength mapping and its frame clock differ from the player&#x27;s decibel gain and playback clock; the last tenth of the sound has an additional fade. Learning to hear the response as something the strike began, rather than as the strike itself, is the hall&#x27;s first lesson, and the listener can test it by separating contact, glow and sound.
+
+The second lesson is overlap. A second bar struck while the first still rings does not stop the first; each bar has its own player, and the plate says two voices with two ages. The ribbon adds a 12 ms window of their generated samples at their own playback ages. It includes player gain and the finite buffer&#x27;s fade, but excludes the room&#x27;s spatial audio and the listening equipment. The sum is not a third bar, and it is not everything the listener hears. A strike on a bar that is already ringing starts it again and adds nothing. These are properties of how the instrument was built, and the room says so: it synthesises a resonance, it does not solve the vibration of a metal bar. It assigns length from a chosen frequency, so the row has an order before anything is struck; what it leaves out is everything a real bar would add, the partials, the stick&#x27;s material, the table underneath. To know this instrument by ear is to know a decision as well as a sound.
+
+The third lesson is the cut. The eight bars are a pentatonic collection, C4 to E5 without the fourth and the seventh. That is a choice about which pairs of notes are available to a visitor, and it is not a claim that those pairs are the harmonious ones and the missing ones mistakes. Other cuts exist in the same instrument, seventeen bars to the equal temperament, ten to just intonation, twelve to the overtone series, and each would offer other pairs. The room offers this one, and says that it is offering it.
+
+Around the ring the rest of the hall keeps an ambient layer going: the looper&#x27;s FM piano over the pillar, the drone rack, the pipe assembly. None of it is the lesson; it is the place the lesson is learned in, in Feld&#x27;s sense, and a visitor who has learned to separate a strike from its response will hear the room&#x27;s other sounds differently on the way out.
+
+Within the sequence, AirMusic follows Effect Sound, where one oscillation changed another&#x27;s phase; here a contact sets an oscillation going and two of them overlap. The Synthesis Lab adds such sinusoids together on purpose. The habit to carry there is the one the plate teaches: give a sound time to change before deciding what sort of body has answered.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_AirMusic/artifacts.md">Raw captured source</a></p><pre># WaveFunctions AirMusic — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 8 artifact types / 10 placements*
+
+&gt; The primary is the struck metallophone: one contact, a continuing response, then two overlapping voices. The looper, drone and other works remain further encounters around the basin.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Glass Rack
+![Glass Rack](/scene-catalog/GlassRack.png)
+
+Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.
+
+`GlassRack`
+
+## Lab Table
+![Lab Table](/scene-catalog/lab_table.png)
+
+Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.
+
+`lab_table`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Systems Music Test
+![Systems Music Test](/scene-catalog/SystemsMusicTest.png)
+
+Music as system—notes triggered by spatial position, harmony emerging from movement through space. Steve Reich meets VR: phase relationships create texture.
+
+`SystemsMusicTest`
+
+## Ambient Drone Rack
+![Ambient Drone Rack](/scene-catalog/RackAmbientDrone.png)
+
+Atmospheric ambient drone synthesizer with lissajous phase display. Slowly evolving textures—sound as environment rather than event. Multiple detuned oscillators create beating patterns; the lissajous shows phase relationships between channels.
+
+`RackAmbientDrone`
+
+## Big Pipe System
+![Big Pipe System](/scene-catalog/BigPipeSystem.png)
+
+Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.
+
+`BigPipeSystem`
+
+## Air Music Display Case
+![Air Music Display Case](/scene-catalog/air_music_display_case.png)
+
+A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.
+
+`air_music_display_case`
+
+## Resonating Metallophone
+![Resonating Metallophone](/scene-catalog/resonating_metallophone.png)
+
+Metal bars that ring—each bar&#x27;s length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.
+
+`resonating_metallophone`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_AirMusic/summary.md">Raw captured source</a></p><pre># WaveFunctions AirMusic — Summary
+
+What continues after the hand has left? This hall puts a struck instrument at the end of a walk round a void, so that a brief contact and its long response can be told apart, and two responses heard together.
+
+The room is a ring of floor round a basin of nothing, with a pillar standing in the void. Along the north side are glass racks and lab tables; over the pillar an FM-piano looper plays its patterns; a drone rack and a run of pipes,  stand on the way round. On the south side, at a table, is the metallophone: eight metal bars cut to a pentatonic scale, the longest at the left, a striker resting front-to-back at the left end.
+
+Take the stick and strike a bar. Lift it away: the bar glows and rings for seconds, and the plate above the row names the voice, its hertz and its source playback age. Strike a second bar while the first still fades and the plate says two voices; the ribbon above it adds a 12 ms window from their generated samples. Strike the same bar again and it starts again, adding nothing. A slow strike lands softer than a fast one. Leave the unheld stick more than half a metre from its cradle for three seconds and its return begins.
+
+Each note is a sine wave under an exponential decay, three seconds to fall to about 37 percent of its initial envelope, seven and a half seconds long, made once by the bar and played from its own speaker — a synthesised resonance, not a solved metal bar, with length assigned from frequency so the scale has a visible order before it is heard.
+
+Within the sequence, AirMusic follows Effect Sound on the active route: one oscillation changed another&#x27;s phase there; here a strike sets a response going and two responses overlap. The Synthesis Lab adds such sinusoids on purpose.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_AirMusic/blurb.md">Raw captured source</a></p><pre>Strike a bar and lift the stick away. The contact has ended; the note keeps going. Strike the same bar again, then another. What gets restarted, and what is allowed to continue?
+
+Eight bars, separate voices, one short window of their sum. Listen through their overlap before deciding where one body ends and another begins.
+</pre></section></body></html>

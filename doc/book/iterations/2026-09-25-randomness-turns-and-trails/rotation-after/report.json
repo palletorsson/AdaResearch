@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "tilt field is present in actual museum",
+      "passed": true
+    },
+    {
+      "name": "this placed field is static",
+      "passed": true
+    },
+    {
+      "name": "field is wholly above the actual floor",
+      "passed": true
+    },
+    {
+      "name": "all 25 cubes lie inside the hall",
+      "passed": true
+    },
+    {
+      "name": "first and last rows are level",
+      "passed": true
+    },
+    {
+      "name": "middle row reaches thirty degrees",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tilt-field",
+      "passed": true
+    },
+    {
+      "name": "other placements retain seven by thirty",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "field": {
+      "animate_slope": false,
+      "cube_count": 25,
+      "floor_height": -0.00000000745058059692383,
+      "grid_size": "(5, 5)",
+      "outside_interior": 0,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unchanged_after_update": true,
+      "world_bounds": "[P: (4.325, 0.010192, 11.2), S: (3.6, 0.819615, 3.6)]",
+      "world_position": [
+        6.5,
+        0.0,
+        11.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Random_Rotate_Random_XYZ",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

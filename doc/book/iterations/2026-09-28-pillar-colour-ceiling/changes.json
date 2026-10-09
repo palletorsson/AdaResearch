@@ -1,0 +1,26 @@
+[
+  {
+    "before": "Stand where the floor's colours are pale. Follow one line of pillars farther into the field. The hue stays recognisable while its saturation increases. Now walk across that line. The hue changes too. Two directions, two different ways to change a colour.",
+    "after": "Step onto the dark floor and look up. A palette stretches across the ceiling, meeting the tops of the pillars. Follow one line of pillars farther into the field: the hue stays recognisable while saturation increases. Walk across it and hue changes too. Two directions, two different ways to change a colour."
+  },
+  {
+    "before": "![The pillars rise from black towards colour; a grey reference stands beside the field.](/book-review/doc/book/iterations/2026-09-28-pillar-height-and-value/value-columns.png)",
+    "after": "![Colour spreads across the ceiling above pillars that darken towards the floor.](/book-review/doc/book/iterations/2026-09-28-pillar-colour-ceiling/ceiling-and-column.png)"
+  },
+  {
+    "before": "*Hue across, saturation along, value up. The bright floor shows a fixed-value slice laid beneath the columns.*",
+    "after": "*Hue across, saturation along, value up. At their tops, the pillars meet the same colours in the ceiling.*"
+  },
+  {
+    "before": "The floor keeps value at 0.95. It lets you follow hue and saturation without making the whole walk black at the columns' feet. It is a reference slice brought down to the ground, rather than the bottom of the colour volume. The floor and the coloured faces are drawn without the room's lighting changing them; this darkening is assigned by the colour rule.",
+    "after": "The ceiling holds value at one. Above each pillar, the same hue and saturation continue into the surface overhead. Beneath it, the floor stays near black. These colours are drawn without the room's lighting changing them; the passage from dark to bright is assigned by the rule. Colour gives this part of the room a roof."
+  },
+  {
+    "before": "Five columns by seven rows, with 3.2 metres between samples. The gaps contain colours the collection has not raised into pillars. They are also where you can walk. Adding a column in one of these gaps would give another colour a body and take away somewhere you could stand.",
+    "after": "Five columns by seven rows, with 3.2 metres between samples. Overhead, the colour continues through the gaps. Below, those gaps are where you can walk. Adding a column in one of them would give another colour a body and take away somewhere you could stand."
+  },
+  {
+    "before": "The ceiling holds value at one. Above each pillar, the same hue and saturation continue into the surface overhead. Beneath it, the floor stays near black. These colours are drawn without the room's lighting changing them; the passage from dark to bright is assigned by the rule. Colour gives this part of the room a roof.",
+    "after": "Look up along the pillar. Where does it end? The edge becomes difficult to follow, as though the pillar were entering a fog of its own colour. Its geometry still has a boundary. Knowing where it ends and seeing where it ends are different things. Here, making the colour rule clearer has made the shape less certain.\n\nThe ceiling holds value at one. Above each pillar, the same hue and saturation continue into the surface overhead. Beneath it, the floor stays near black. These colours are drawn without the room's lighting changing them; the passage from dark to bright is assigned by the rule. Colour gives this part of the room a roof."
+  }
+]

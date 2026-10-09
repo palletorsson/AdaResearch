@@ -1,0 +1,19 @@
+{
+  "source": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\scenes\\endless_museum.gd",
+  "source_sha256": "eb106a0da0ef494660f184e4276266d9c1e3d87c12f73ad45991cd744e3f7d67",
+  "map_sha256": "8fed9482f93c4828aa87adc6e6c29e3444ebcc966afad630eac0ea1bcb8d5a2a",
+  "changes": "Only literal output path substitutions; scene UID removed to avoid aliasing live scene.",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/melencolia_restore/probe_runtime/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/melencolia_restore/probe_runtime/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/melencolia_restore/probe_runtime/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/melencolia_restore/probe_runtime/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/melencolia_restore/probe_runtime/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/melencolia_restore/probe_runtime/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/melencolia_restore/probe_runtime/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/melencolia_restore/probe_runtime/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/melencolia_restore/probe_runtime/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/melencolia_restore/probe_runtime/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/melencolia_restore/probe_runtime/em_basin_plan.txt"
+  }
+}

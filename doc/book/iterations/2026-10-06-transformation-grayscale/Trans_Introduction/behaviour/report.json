@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "landing and rotating bridge exist",
+      "passed": true
+    },
+    {
+      "name": "comparison uses the aligned quarter-turn",
+      "passed": true
+    },
+    {
+      "name": "control relocated to near bank",
+      "passed": true
+    },
+    {
+      "name": "landing home kept independently",
+      "passed": true
+    },
+    {
+      "name": "control approach has support",
+      "passed": true
+    },
+    {
+      "name": "bank slider remains at reachable height",
+      "passed": true
+    },
+    {
+      "name": "real slider signal changes destination",
+      "passed": true
+    },
+    {
+      "name": "bank moves one metre",
+      "passed": true
+    },
+    {
+      "name": "landing stays level",
+      "passed": true
+    },
+    {
+      "name": "control move never changes bridge transform",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-gap",
+      "passed": true
+    },
+    {
+      "name": "RESET restores bank home",
+      "passed": true
+    },
+    {
+      "name": "RESET returns slider",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-at-crossing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-control-close",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "controls_world": [
+      9.5,
+      0.0,
+      20.5
+    ],
+    "slider_height_m": 1.13358438014984
+  },
+  "passed": true,
+  "room": "Trans_Introduction",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

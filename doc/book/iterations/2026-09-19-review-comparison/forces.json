@@ -1,0 +1,94 @@
+{
+  "status": "source and encounter review",
+  "summary": "An arrow does not decide what happens. Keep the mature thirteen-hall progression, repair the instruments and recover supporting works before cutting prose.",
+  "items": [
+    {
+      "title": "Thirteen halls; ten manuscripts kept intact",
+      "description": "Keep the changing quantity, receiver and retained state as the red thread. The local pass preserves all authored artifact placements, repairs nine missing readiness declarations and makes three small manuscript corrections. Individual reports separate source inspection, focused desktop tests and questions left for headset observation.",
+      "report": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md"
+    },
+    {
+      "title": "Torque: an honest instrument",
+      "description": "The wheel is a static pose derived from the cross-product angular factor. Its former rpm display reported no measured rotation. The repaired label names sin θ, the input angle and wheel pose; the text keeps the question of what a dynamic model would need.",
+      "images": [
+        "doc/book/iterations/2026-09-19-forces-review/opening/before-accepted/standing.png",
+        "doc/book/iterations/2026-09-19-forces-review/opening/after-frozen/standing.png"
+      ],
+      "captions": [
+        "Original artifact replay · invented 301 rpm at the chosen angle.",
+        "Repaired artifact · sin θ = 0.94 and static wheel pose 45°."
+      ],
+      "image_note": "Same camera and inputs in the actual Vectors Act2 museum scene. Both runs use the same frozen shared museum-loader source to isolate this repair from concurrent work elsewhere. These are desktop captures, not a headset test.",
+      "before": "Look at the label that says *rpm*. In this implementation it is the factor multiplied by 320 and rounded. It is not a rotation counter. A plausible instrument has arrived before the dynamics that would make its reading a measurement.\n\nWe can use that discrepancy. The diagram shows a relation worth learning, and also where a future simulation must do more work. What the rail keeps of a push along an arm contributes no torque about that arm's origin; the perpendicular part can. Yet neither a projection nor a cross product, by itself, makes a body move.",
+      "after": "The readout names its quantity: sin θ, a unitless factor, beside the chosen angle. It also reports the wheel's static pose. Move the slider, then leave it alone. The wheel holds that pose; time has not been made part of this model.\n\nThe diagram shows a relation worth learning, and also where a future simulation must do more work. What the rail keeps of a push along an arm contributes no torque about that arm's origin; the perpendicular part can. Yet neither a projection nor a cross product, by itself, makes a body move.",
+      "text_kind": "final.md · Vectors_Act2_VectorArithmetic",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "report": "doc/book/iterations/2026-09-19-forces-review/opening/AUDIT.md"
+    },
+    {
+      "title": "Observe the paths before revealing the receiver",
+      "description": "Cyan and pink identities remain visible, while the explanation of SET velocity versus ADD acceleration waits behind the existing RULE control. The field calculation and carried state are unchanged. The chapter already asks for that sequence, so its prose stays intact.",
+      "images": [
+        "doc/book/iterations/2026-09-19-forces-review/motion/before-field-final/field-observe.png",
+        "doc/book/iterations/2026-09-19-forces-review/motion/after-field-final/field-observe.png"
+      ],
+      "captions": [
+        "Original lesson replay · receiver rules already name the moving bodies.",
+        "Repaired lesson · identify the bodies, compare their paths, then reveal RULE."
+      ],
+      "image_note": "Matched camera and model state in the actual museum. Background physics remains live and can differ between frames. The audit also includes the RULE-revealed state and runtime assertions; these still images do not establish how learners follow the motion.",
+      "report": "doc/book/iterations/2026-09-19-forces-review/motion/AUDIT.md"
+    },
+    {
+      "title": "Kinetic: let the walking order support the text",
+      "description": "The chapter already moves from physical drag to signed nominal work, then to prescribed circular motion. The mower and ring now follow that order in the hall. The secondary Sisyphus mower moves aside, and two previously omitted works become eligible in the catalog. All eight authored placements remain.",
+      "images": [
+        "doc/book/iterations/2026-09-19-forces-review/motion/before-runtime/kinetic-plan.png",
+        "doc/book/iterations/2026-09-19-forces-review/motion/after-runtime/kinetic-plan.png"
+      ],
+      "captions": [
+        "Before · ring precedes the mower; two authored secondaries are omitted by the catalog.",
+        "After · drag → mower → ring; all eight authored works instantiate."
+      ],
+      "image_note": "Matched elevated Godot museum views show placement. This is a plan-like camera, not the visitor’s eye or a completed VR walk. The manuscript remains unchanged.",
+      "report": "doc/book/iterations/2026-09-19-forces-review/motion/AUDIT.md"
+    },
+    {
+      "title": "Gravity: let stillness become a question",
+      "description": "The source still stays fixed, and the numerical model is unchanged. Its explanation now waits behind RULE, while PARTS continues to reveal acceleration arrows. The book’s measured 3 cm initial offset growing to roughly 7.6 cm RMS separation after four seconds is preserved with local evidence.",
+      "images": [
+        "doc/book/iterations/2026-09-19-forces-review/relations/before/orbit-initial-board.png",
+        "doc/book/iterations/2026-09-19-forces-review/relations/after/orbit-initial-board.png"
+      ],
+      "captions": [
+        "Before · the board explains which body is held fixed before the first comparison.",
+        "After · observe the orbit, then ask for RULE."
+      ],
+      "image_note": "Actual Gravity museum board captures, saved original lesson versus repaired lesson. See the audit for matched scene state, numerical checks and the separate rule-revealed views.",
+      "before": "Look again at the pink body. Why has it not moved?",
+      "after": "Look again at the pink body. Why has it not moved? Press **RULE** to inspect which body receives the acceleration.",
+      "text_kind": "final.md · VFM_07_Gravity",
+      "map": "VFM_07_Gravity",
+      "report": "doc/book/iterations/2026-09-19-forces-review/relations/AUDIT.md"
+    },
+    {
+      "title": "A coordinate can stop distinguishing directions",
+      "description": "The field’s idle yaw remains a concrete encounter. Remove the unsupported historical superlative while keeping the bodily image and the technical distinction.",
+      "before": "It is the oldest problem in spherical coordinates, and here it is at hand height, in metal, where you can feel it happen.",
+      "after": "A direction can be well defined while one of its coordinates is not. Here that ambiguity is at hand height, in metal, where you can feel it happen.",
+      "text_kind": "final.md · Vectors_Act5_ForceAsPlace",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "report": "doc/book/iterations/2026-09-19-forces-review/relations/AUDIT.md"
+    },
+    {
+      "title": "Recover what is already in the room",
+      "description": "Nine secondary placements were invisible because their catalog records lacked map_ready: two in Kinetic and seven in Arena. Their scene files and authored positions already existed. The explicitly disabled momentum_collision remains disabled pending its own review; the primary collision comparison stays available. The existing pendulum-wave model receives an explicit secondary role, without another primary or a new chapter passage. Arena completes 49 behavior and placement checks, but headless shutdown still hangs or crashes; this is not a clean runtime-suite pass.",
+      "report": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md"
+    },
+    {
+      "title": "Keep the museum route; distinguish the old grid exits",
+      "description": "The production plan selects all thirteen halls in sequence. Legacy t: cells instantiate no teleporter in the endless museum, so their old shortcuts are not proof of skipped museum halls. Forty-three routing checks pass; physical portal crossings and headset movement remain distinct tests.",
+      "report": "doc/book/iterations/2026-09-19-forces-review/navigation.json"
+    }
+  ]
+}

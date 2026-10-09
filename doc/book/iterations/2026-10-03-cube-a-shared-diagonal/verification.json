@@ -1,0 +1,124 @@
+{
+	"checks": [
+		{
+			"check": "Eight supplied coordinates start with twelve unit-length boundary edges",
+			"passed": true
+		},
+		{
+			"check": "The authored boundary edges are each one metre",
+			"passed": true
+		},
+		{
+			"check": "Twelve triangles close the mesh with eighteen shared edges including diagonals",
+			"passed": true
+		},
+		{
+			"check": "The two front triangles initially share a plane and the expected diagonal",
+			"passed": true
+		},
+		{
+			"check": "The pink material marks only the second front patch",
+			"passed": true
+		},
+		{
+			"check": "Capture cube.png",
+			"passed": true
+		},
+		{
+			"check": "Moving 6 leaves the first front triangle fixed and tilts the second",
+			"passed": true
+		},
+		{
+			"check": "Only the requested coordinate changes; connections stay fixed",
+			"passed": true
+		},
+		{
+			"check": "Capture creased.png",
+			"passed": true
+		},
+		{
+			"check": "Hiding the guide leaves both face triangles intact",
+			"passed": true
+		},
+		{
+			"check": "Hiding faces keeps eight handles and twelve edge segments",
+			"passed": true
+		},
+		{
+			"check": "Capture wire.png",
+			"passed": true
+		},
+		{
+			"check": "Other diagonal preserves every coordinate while changing both front triangles",
+			"passed": true
+		},
+		{
+			"check": "Both alternate front triangles tilt away from the original front plane",
+			"passed": true
+		},
+		{
+			"check": "Other diagonal spans the chosen corners",
+			"passed": true
+		},
+		{
+			"check": "Capture other-diagonal.png",
+			"passed": true
+		},
+		{
+			"check": "Both alternate patches again cover the same flat square after restoration",
+			"passed": true
+		},
+		{
+			"check": "The printed shift and diagonal edits compile",
+			"passed": true
+		},
+		{
+			"check": "Edited script constructs on a bare Node3D and reproduces the edited data",
+			"passed": true
+		},
+		{
+			"check": "corner_shift gives a repeatable startup edit",
+			"passed": true
+		},
+		{
+			"check": "Restart with zero shift recovers the regular cube",
+			"passed": true
+		},
+		{
+			"check": "Visible front surface adds no collision across its interior",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim picks up corner 6",
+			"passed": true
+		},
+		{
+			"check": "Mouse-driven movement updates mesh neighbours while the first front patch stays fixed",
+			"passed": true
+		},
+		{
+			"check": "Desktop release retains the edited corner",
+			"passed": true
+		},
+		{
+			"check": "Synthetic near grip picks up corner 6",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand pull creates the expected crease in the shared frame",
+			"passed": true
+		},
+		{
+			"check": "Synthetic release keeps the selected corner",
+			"passed": true
+		},
+		{
+			"check": "Repeated drawing retains twelve surfaces, twelve boundary segments and one guide",
+			"passed": true
+		}
+	],
+	"input": "Actual desktop handler with injected mouse motion; synthetic XR grip and poses",
+	"passed": true,
+	"physical_headset_tested": false,
+	"screenshots": "Native student room, matched elevated desktop camera"
+}

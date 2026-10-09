@@ -1,0 +1,15 @@
+# The angle is a choice about where to measure from — the unit circle as a standpoint rather than a truth
+
+The unit circle is usually introduced as a self-evident object: a circle of radius one centred at the origin, with angles measured from the positive x-axis. Sine and cosine are defined as projections of a rotating point onto two perpendicular lines. The definitions feel like discoveries, as though the functions were there in the geometry waiting to be named.
+
+Donna Haraway's situated knowledge insists otherwise. There is no view from nowhere. Every coordinate system is a standpoint, and the unit circle is a standpoint made to look universal. The choice of origin, the choice of radius, the choice to measure angles counter-clockwise from east — these are conventions, and the conventions encode a particular tradition. Greek geometry set some of them. Eighteenth-century analysis set others. The unit circle the learner walks around in the map is the inheritance of a long set of decisions none of which were inevitable.
+
+The amphitheatre staging makes the convention visible. A rotating marker moves around a ring; its vertical drop is projected onto one axis as sin; its horizontal drop is projected onto the other as cos. Reversing the direction of rotation flips the sign of sin. Rotating the frame ninety degrees swaps the two functions. The map lets the learner run these permutations and watch the definitions rewrite themselves under the new conventions. Sin and cos are not properties of the circle. They are properties of a circle with a chosen frame.
+
+The oscillating bridges extend the lesson into the walker's body. Stepping from one side of the amphitheatre to the other puts the wave under the learner's feet: the bridges rise and fall according to the projections the central marker generates. Walking them is reading the sine curve from inside. The learner's movement and the marker's rotation synchronise, and the unit circle stops being an external object and becomes the apparatus that decides what the learner's own trajectory looks like on the wall.
+
+This is the keystone map in the sequence because it makes the sequence's single assumption visible. Every later demonstration — wave propagation, interference, Fourier synthesis — takes sine and cosine as given. This map asks where they come from. The answer is: from a rotating point projected onto chosen lines, and every piece of that sentence is a choice.
+
+The political register follows immediately. If sin is a projection, then the question of which projection to take is a question about which information to discard. The radial distance is erased; only the vertical component survives. Trigonometry is a discipline of selective forgetting, and the forgetting is exactly what makes the functions tractable. The map does not hide this cost; it stages it as the procedure by which the cost is incurred.
+
+Within the sequence, Unit_Circle is where the learner learns to locate their own sine function. After this, every wave in the later maps is a particular projection chosen from inside a particular frame, and the learner carries the knowledge of the choice forward.

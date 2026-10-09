@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "name": "actual museum source grid exists",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum arrival has supporting floor",
+      "passed": true,
+      "value": {
+        "deck": 0.0,
+        "drop": "(7.5, 4.0, 1.5)",
+        "hit": "{ \"position\": (7.5, -0.0, 1.5), \"normal\": (0.0, 1.0, 0.0), \"face_index\": -1, \"collider_id\": 361431566177, \"collider\": Collision:<StaticBody3D#361431566177>, \"shape\": 173, \"rid\": RID(365072220162) }"
+      }
+    },
+    {
+      "name": "museum suppresses grid spawn",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "crossing lesson has no authored head crab",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Introduction",
+  "standalone": false
+}

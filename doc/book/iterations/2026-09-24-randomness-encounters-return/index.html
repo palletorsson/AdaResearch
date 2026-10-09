@@ -1,0 +1,604 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Let the encounter carry it</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f0e9;color:#242a2b;font-family:Georgia,serif;line-height:1.7}header,main{max-width:1160px;margin:auto;padding:2rem}header{padding-top:4rem}h1,h2,h3,nav,.meta{font-family:system-ui,sans-serif;line-height:1.2}header h1{font-size:clamp(2.2rem,5vw,4rem);max-width:850px;margin:.4em 0}a{color:#266b67}nav{display:flex;flex-wrap:wrap;gap:1rem;padding:1.2rem 0}nav a{padding:.65rem .9rem;border:1px solid #b6c4bf;border-radius:99px;text-decoration:none;font-size:.85rem}section{padding:2rem 0 3rem;border-top:1px solid #bcc5be;scroll-margin-top:1rem}.reading{max-width:740px;margin:2rem auto;font-size:1.13rem}.reading h1{font-size:2rem}.reading p{margin:1.25em 0}.pair,.compare{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}.pair img{width:100%;display:block}figure{margin:0}figcaption,.meta{font-size:.82rem;line-height:1.5;color:#536362}details{background:#e9e9df;padding:1rem;margin:1rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}.compare{font-size:.88rem;max-height:900px;overflow:auto;padding:1rem}.compare>div{min-width:0}pre{overflow:auto;padding:1rem;background:#e3e6df;font-size:.85rem}code{font-family:Consolas,monospace}table{border-collapse:collapse}td,th{padding:.6rem;border-bottom:1px solid #bbc5bf;text-align:left}.pill{font-family:system-ui,sans-serif;font-size:.83rem;background:#dce8df;padding:.5rem .8rem;display:inline-block;border-radius:4px}footer{padding:3rem 0;font-size:.9rem}@media(max-width:750px){.pair,.compare{grid-template-columns:1fr}header,main{padding:1.2rem}.reading{font-size:1.08rem}}</style><header><p class="meta">ADA RESEARCH / 24 SEPTEMBER 2026 / SECOND PASS</p><h1>Let the encounter carry it.</h1><p>Four focused revisions after Claude’s handback. The drawings gain room to act; the chapters leave more room to read.</p><span class="pill">Canonical final.md updated · 31 room records integrated</span><nav><a href="#Randomness_10_PRINT_Algorithm">Randomness 10 PRINT Algorithm</a><a href="#Random_Cubes">Random Cubes</a><a href="#Noise_Perlin_Simplex">Noise Perlin Simplex</a><a href="#CA_Introduction">CA Introduction</a></nav><p class="meta">30 new native checks and five existing gates pass. Headset verification remains open.</p></header><main><section id="Randomness_10_PRINT_Algorithm"><h2>Randomness 10 PRINT Algorithm</h2><p class="meta">2370 → 1339 words · <a href="/compose/sources?map=Randomness_10_PRINT_Algorithm&amp;doc=final">Current source</a> · <a href="diffs/commons/maps/Randomness_10_PRINT_Algorithm/final.md.diff">Exact diff</a></p><article class="reading"><h1>A maze made of marks</h1>
+<p>When do independent marks begin to look like a maze?</p>
+<p>Diagonals rise above the walls on three sides of the hall. Below them, a cluster of solid slabs leaves narrow openings between its edges. The same two marks recur on a screen at the far end. Something that fits inside one character has acquired room for a body.</p>
+<!-- @ten_print -->
+
+<p>The screen prints left to right, row under row. Beside it, the console carries one line of Commodore 64 BASIC:</p>
+<pre><code class="language-basic">10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+</code></pre>
+<p>One line, famous enough to have a book named after it.<sup id="render1-fnref:10print"><a class="footnote-ref" href="#render1-fn:10print">1</a></sup> Read it from the middle outward. <code>RND(1)</code> gives a number from zero up to, but not including, one. Added to 205.5, it lands between 205.5 and 206.5. <code>CHR$</code> keeps the whole part: character 205 or 206, one diagonal or the other. <code>GOTO 10</code> returns to the beginning.</p>
+<p>The constant 205.5 puts the two choices in balance. Each new mark can lean either way. Nothing in that choice asks whether a passage is needed beside it.</p>
+<p>Yet the field on this screen seems to breathe. Bands favour one diagonal, then the other. The small print admits why: “bias breathing.” A sine wave changes the odds while the line above still displays 205.5. What looks like a texture of chance also carries a rhythm someone chose. The familiar line does not account for everything this installation does.</p>
+<p>Press <strong>BIAS +</strong>. The breathing stops and the constant begins to change: 205.4, then 205.3. The next marks increasingly favour one direction. At 205, every mark is the same diagonal. The maze has become stripes. Use <strong>BIAS −</strong> to bring the constant back to 205.5; the odds are now fixed and even.</p>
+<p>There is another small decision in the line. Press <strong>SEMICOLON</strong> and the trailing <code>;</code> disappears. Every mark now begins a row of its own. The field becomes a single column.</p>
+<p>The semicolon tells <code>PRINT</code> to stay on the same line. Without it, each character is followed by a line break. This control starts the seeded stream again, so the column and the plane can receive the same choices. What differs is where a choice goes.</p>
+<p>Down the column, marks can still meet at corners and zigzag. They cannot close around a room. Four marks in a two-by-two block can: their diagonals make a diamond. The grid gives neighbouring marks shared endpoints; the line break decides whether they have neighbours in a second direction.</p>
+<p>Press <strong>SEMICOLON</strong> again. The plane returns. One tiny character has given the other characters another way to meet.</p>
+<p>Even those meetings have been interpreted. The red and blue bars slowly lengthen and shorten, touching at a corner and parting again. Nothing in the BASIC line asks them to do that. A display can loosen a connection the grid appeared to guarantee.</p>
+<!-- @ -->
+
+<!-- @composition_stochastique -->
+
+<p>Beside the printer, four square grids offer another use of the same diagonals. One direction fills each grid; the other occupies exactly one, five, thirty or fifty of its hundred cells. The plate names François and Vera Molnar, 1959.</p>
+<p>Step along them. Where does a field of parallel lines become something else? There is no example between five and thirty. Your eye has to cross that interval.</p>
+<p><strong>RESEED</strong> changes the arrangement while keeping every count. The four grids come from one shuffled deal: the single turned cell in the first is turned in the other three too. Chance decides which cells turn. Their number was settled beforehand.</p>
+<p>The printer leaves that number open. Giving a diagonal a thirty-percent chance does not reserve exactly thirty of a hundred cells for it. A probability and a count are different instruments. Here they stand close enough to compare.</p>
+<!-- @ -->
+
+<!-- @ten_print_structure -->
+
+<p>Look down. The newest seven rows of the screen are also under your feet. Each cell is enlarged to half a metre, each diagonal laid down as a low ridge. A bright tile waits where the next mark will land. When a row fills, the ridges shift towards the far wall and the oldest row leaves the floor.</p>
+<p><strong>RUN</strong> holds the printing; <strong>STEP</strong> adds one mark. The pause gives your eye time to follow a character from the screen to its place on the ground. Taking away the semicolon collapses this floor into a single file too. A change in the line reaches the room.</p>
+<p>These ridges offer no resistance. You can stand among them and pass through their edges. They give the eye a contour without giving the body a boundary.</p>
+<p>Now return to the taller slabs near the entrance.</p>
+<p>They retain the first twelve characters printed when the hall was built, before any adjustment of the odds. Here the characters are wrapped four to a row and stood two metres forty high. The console leaves this arrangement alone. Where two slabs run parallel, the gap is about seventy centimetres wide.</p>
+<p>Walk in. The mark you followed on the screen has become the face of a wall. Your route occupies the space beside it.</p>
+<p>Four slabs meet corner to corner around a small room with no entrance. Joining the marks has closed the passage. The same connection that completes a figure can keep a body outside it.</p>
+<p>Elsewhere the gaps lead back out. Some are shallow bays; one passage crosses the block. None forks. Between these diagonals, each small triangle of floor opens on two sides, so a corridor may turn but offers no branching choice. What looked like a maze from above becomes a different proposition at the width of your shoulders.</p>
+<p>The way through also depends on the crop. These twelve characters leave it when wrapped four to a row. Wrapped three to a row, they would leave neither a crossing nor a closed room. One more row of this stream would close the crossing too. The rule did not choose where the block ends. Whoever placed it did.</p>
+<p>Each cell was decided alone. Whether you can cross depends on their arrangement together. A body meets a consequence that no single draw contains.</p>
+<!-- @ -->
+
+<!-- @ten_print_maze_3d -->
+
+<p>Look up again at the three fields towering above the hall. Their lines can be crossed by your body, but they provide no surface to carry you upwards. Height in the image has not become a climb.</p>
+<p>A red ball stands for an ant in each field. It receives a different map: even parallel diagonals are treated as touching, so a channel you could walk between the slabs is closed to it. The ant stays around a corner until a cell turns and another move becomes possible. Every turn clears its record of where it has been.</p>
+<p>Watch a diagonal change near it. One replacement can join a long contour or break it apart. The slabs held still long enough for you to learn a passage. Here the ground of the ant's small knowledge keeps changing.</p>
+<!-- @ -->
+
+<p>Two marks have supplied a printed field, a floor to stand among, walls that admit or refuse a body, and a changing world for an ant. The marks alone cannot tell us which world we have made. Their arrangement, their material and the body given to them all matter.</p>
+<p>The printed floor lets its oldest row go. In the next room a die's record gathers outcomes instead, keeping how often each face appears while forgetting where it landed. After a passage made from independent choices, we meet a throw made by a hand.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="render1-fn:10print">
+<p>Nick Montfort, Patsy Baudoin, John Bell, Ian Bogost, Jeremy Douglass, Mark C. Marino, Michael Mateas, Casey Reas, Mark Sample and Noah Vawter, <em>10 PRINT CHR$(205.5+RND(1)); : GOTO 10</em> (MIT Press, 2012). The whole book is freely available at <a href="https://10print.org/">10print.org</a> under a Creative Commons BY-NC-SA 3.0 licence. Its chapters are numbered like program lines — 10, 20, 30 — with remarks between them, and its long argument concerns the interplay of randomness and regularity that this room lets you pull apart.&#160;<a class="footnote-backref" href="#render1-fnref:10print" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><details><summary>Before / after — read alongside</summary><div class="compare"><div><h3>Claude’s delivery</h3><h1>A maze made of marks</h1>
+<p>When do independent marks begin to look like a maze?</p>
+<p>Two fields of diagonals ten metres high flank the hall, never still, and a third closes its far end. They are easier to read at the end. Below them, past the solid block beside the door, a cluster of slabs taller than you stands to your left, every one of them set on a diagonal. Leave it for now too. It will make more sense once you have seen where it comes from.</p>
+<!-- @ten_print -->
+
+<p>At the far end of the hall a screen is printing diagonals, one after another, left to right and row under row. The one-line program it is staging is written on the console beside it:</p>
+<pre><code class="language-basic">10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+</code></pre>
+<p>One line of Commodore 64 BASIC, famous enough to have a book named after it.<sup id="render2-fnref:10print"><a class="footnote-ref" href="#render2-fn:10print">1</a></sup> Read it from the middle outward. <code>RND(1)</code> gives a number from zero up to, but not including, one. Added to 205.5, it lands somewhere between 205.5 and 206.5. <code>CHR$</code> keeps only the whole part, so what gets printed is character 205 or character 206: one diagonal or the other. <code>GOTO 10</code> goes back and does it again, for as long as the machine runs.</p>
+<p>On the Commodore, each diagonal is equally likely, because 205.5 sits exactly halfway between them. The famous constant is where the coin balances.</p>
+<p>Before you press anything, look at the screen as a whole. Some bands of rows are heavy with one diagonal and some with the other, and the border between them climbs as the screen scrolls. The coin in this room is not even. It was set up to breathe: across every 540 characters its odds swing from four to one in favour of one diagonal, through even, to four to one for the other, and the screen holds about three-quarters of that cycle at once. The line on the console still reads 205.5. Only the words "bias breathing" in the small print under it admit that the coin is moving. What reads as the texture of chance is partly a sine wave that someone chose.</p>
+<p>The last room's draw was even among the cubes a rule had admitted. Here two diagonals were admitted to the line, and how often each comes up was a second decision, made where you could not see it.</p>
+<p>Now press <strong>BIAS +</strong> and watch the line. 205.5 becomes 205.4, then 205.3. From the first press the breathing stops, the coin is a fixed number, and the number on the console is true. Nothing restarts: the next characters are drawn against the new number, and the field begins to lean while you watch. At 205.1 about nine characters in ten fall the same way. Keep pressing and the constant reaches 205, where every character is the same diagonal. The maze has become stripes. Nothing is left to choose. Nothing on the panel brings the breathing back, but <strong>BIAS −</strong> returns the line to 205.5. Do that before you go on.</p>
+<p>Now find one of the smallest characters in the program. Press <strong>SEMICOLON</strong> and it leaves the line on the console, and the maze goes with it. The screen clears and prints again, and every diagonal now starts a row of its own: a single column down the left edge. A trailing semicolon tells <code>PRINT</code> to stay on the same line. Without it, each character is followed by a line break.</p>
+<p>The draws are not new ones. SEMICOLON starts the same seeded stream again from its first character, as RESET did on the last room's board, and weighs each draw against the constant the line now shows. Between this column and the plane that comes back, only the line break changes.</p>
+<p>What changed is how many directions a mark has neighbours in. Down the column a mark still meets the one above or below it at a corner, often enough to zigzag. But a strip one cell wide can never close around anything. The smallest enclosure this rule can draw takes four marks in a two-by-two block, a diamond. Neighbouring marks meet because the grid puts their ends in shared places; the semicolon decides whether the grid has a second direction to share them in.</p>
+<p>So the look of a maze needs two things, and this one line keeps them in two different places: a choice that is actually open, and a grid with room for one choice to meet the next in both directions. Take away the first and you get stripes. Take away the second and you get a column: zigzags, but no room. Press <strong>SEMICOLON</strong> again and the plane comes back.</p>
+<p>Once it has, look closely. On this screen the characters are drawn as thin bars, corner to corner of their cells, red leaning one way and blue the other. Each bar grows and shrinks a little in a slow wave that runs through the field. Where two bars meet at a corner they touch and part again about every two seconds. Nothing in the line asks for that. The meeting the maze depends on is being given and taken away by the display.</p>
+<!-- @ -->
+
+<!-- @composition_stochastique -->
+
+<p>Beside the printer stand four square grids of the same two diagonals. In each, one diagonal fills the grid and the other turns up in exactly one, five, thirty or fifty of its hundred cells. The plate names François and Vera Molnar, 1959.</p>
+<p>Step along them and decide where a grid stops reading as parallel lines. The board has no grid between five and thirty, so the threshold you find is your own. Press <strong>RESEED</strong> on the board: the hundred cells are shuffled and dealt again, the pattern changes, and every count holds. The four grids are cut from one deal, so the single turned cell in the first is turned in the other three as well.</p>
+<p>These grids are dealt, not flipped. As on the last room's board, what chance may touch was settled before it ran: here, how many cells turn. Chance chooses only which. The printer's coin decides both. At a BIAS of 0.3, the arithmetic says a hundred characters come out exactly thirty and seventy only about one time in twelve. A probability and a count are different instruments, and from here you can see both at once.</p>
+<!-- @ -->
+
+<!-- @ten_print_structure -->
+
+<p>Look down. You have been standing on the screen since you reached the console. The ridged band across the width of the hall is its bottom seven rows, each cell enlarged to half a metre and laid face up: the screen's top toward the far wall, its left on your left, the row it is printing now along the edge nearest the door. Every character printed into those rows comes down here as a low ridge in the same cell, leaning the same way. Seen from the near edge, the floor draws the same glyph the screen draws in that cell.</p>
+<p>A bright tile marks the cell where the next character will land. It runs along the near row several cells a second, and for about ten seconds in every half-minute it crosses the row in a blur. Each time it finishes a row the screen scrolls, every ridge steps half a metre toward the far wall, and the oldest row drops off the far edge. The floor keeps only the newest seven rows. To hold the tile still, press <strong>RUN</strong> at the console. The printing stops with the tile waiting where the next character will land, and each press of <strong>STEP</strong> lays one ridge and moves it on one cell.</p>
+<p>You may already have seen the floor change. When you pressed SEMICOLON, the ridges round your feet vanished too. Take the semicolon away again and look to your left: what is left is a single file of seven ridges at the far end of the band, about nine metres away. It is the same experiment as on the screen, laid across the room.</p>
+<p>The ridges will not stop you. They are a quarter of a metre high, and nothing in them resists a body; you step over and among them and read them standing. The last room asked when a contour becomes a passage. Not here: the floor gives you a contour to stand in, not walls to be kept out by.</p>
+<p>Now go back to the slabs you passed on the way in.</p>
+<p>They are the same structure again, stood up to the height of a body: slabs two metres forty high, and solid. Where two run parallel, the channel between them is about seventy centimetres wide. The pattern is the first twelve characters the printer drew when the hall was built, before anyone touched BIAS or RESEED: the same seed and the same breathing coin, laid out four to a row. The slabs do not follow the console. They are a still, cut from the start of the stream.</p>
+<p>Walk in. The line you could trace on the screen is, here, the face of a wall, and the route is the gap beside it. Where neighbouring slabs are parallel, a channel runs straight on along the diagonal; where two meet, it turns. Twelve coin flips, laid four to a row, have divided this ground into eight regions. Seven open onto the outside. One is closed on every side: a small room made by the rule, that nobody can ever stand in.</p>
+<p>Look at what closes it: four slabs, each touching the next at a corner, all the way round. The drawn segments are joined, and that is exactly what cuts the passage off. A connection between drawn segments and a connection between passages are different observations, and here they point opposite ways.</p>
+<p>Notice, too, what this maze does not have. There are no forks. Every triangle of floor between the slabs opens on two sides only, so each of the seven open regions is a single corridor with two mouths, and once you are in one there is nothing to decide. Most of them are shallow. Four are bays: two slabs meet in a V about a metre in, and you come out beside where you went in. Two are not bays at all, only corners of the block cut off by a single slab. The branching you saw on the screen belonged to the lines. The passages between them never branch.</p>
+<p>The seventh is a way through, from the side that faces the printed floor to the side that faces the way you came in. It exists because these twelve characters, wrapped four to a row, happened to leave one. On the screen, twenty to a row, the same twelve were printed along a single line, and left it at the first scroll. Wrapped three to a row they would leave no way through and no closed room. It also exists because of where the block stops: one row deeper, and the next four characters would have closed it. The rule did not choose where to stop. Whoever placed the block did.</p>
+<p>Each cell was decided alone. Whether you can cross was decided by all twelve together, and you find out with your body. On the last room's board the same draws landed on different cubes when the rule changed. Here the same draws, laid out differently, make different ground.</p>
+<!-- @ -->
+
+<!-- @ten_print_maze_3d -->
+
+<p>Now the three large fields. They stand upright on three sides of the hall, each ten metres on a side and taller than the wall behind it, the far one meeting the other two at right angles in both far corners. They are only lines. Nothing in them stops a body, and beside the printer your head can pass through the lowest row of one. You can look up at them and walk through them, but you cannot travel along them.</p>
+<p>On each, a red ball stands for an ant. The ant can go in, but not by your rules. It is a separate procedure with a map of its own, on which two parallel diagonals touch, so even the kind of channel you just walked between parallel slabs is shut to it. On that map the ant is held in the few cells around a single corner. It moves on only when the cell it stands in turns, and then one corner at a time. Your walls held still long enough to be learned. Each of these fields turns about twelve cells a second, and every turn wipes the ant's memory of where it has been.</p>
+<p>Watch a diagonal change near it. One local replacement can alter a much longer-looking contour, joining two lines or cutting one in two a metre away.</p>
+<!-- @ -->
+
+<p>You have now had both readings from one coin: the floor gave you a textile to stand in, the slabs a passage system that could refuse you. Neither reading changes the original two-choice rule, but they ask different things of its result. The useful question is which relationships are supplied by the rule and which promises your interpretation adds.</p>
+<p>The floor never kept more than the newest seven rows: each full row pushed the oldest off its far edge, and SEMICOLON wiped it and began again. In the next room the record works the other way round. The die's record forgets where and in what order each throw landed, and keeps how often each face came up. That coin has six faces, and nobody has printed its odds where you can change them. You will compare single results with a growing record, asking what repeated observations can establish that one throw cannot.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="render2-fn:10print">
+<p>Nick Montfort, Patsy Baudoin, John Bell, Ian Bogost, Jeremy Douglass, Mark C. Marino, Michael Mateas, Casey Reas, Mark Sample and Noah Vawter, <em>10 PRINT CHR$(205.5+RND(1)); : GOTO 10</em> (MIT Press, 2012). The whole book is freely available at <a href="https://10print.org/">10print.org</a> under a Creative Commons BY-NC-SA 3.0 licence. Its chapters are numbered like program lines — 10, 20, 30 — with remarks between them, and its long argument concerns the interplay of randomness and regularity that this room lets you pull apart.&#160;<a class="footnote-backref" href="#render2-fnref:10print" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div><div><h3>This pass</h3><h1>A maze made of marks</h1>
+<p>When do independent marks begin to look like a maze?</p>
+<p>Diagonals rise above the walls on three sides of the hall. Below them, a cluster of solid slabs leaves narrow openings between its edges. The same two marks recur on a screen at the far end. Something that fits inside one character has acquired room for a body.</p>
+<!-- @ten_print -->
+
+<p>The screen prints left to right, row under row. Beside it, the console carries one line of Commodore 64 BASIC:</p>
+<pre><code class="language-basic">10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+</code></pre>
+<p>One line, famous enough to have a book named after it.<sup id="render3-fnref:10print"><a class="footnote-ref" href="#render3-fn:10print">1</a></sup> Read it from the middle outward. <code>RND(1)</code> gives a number from zero up to, but not including, one. Added to 205.5, it lands between 205.5 and 206.5. <code>CHR$</code> keeps the whole part: character 205 or 206, one diagonal or the other. <code>GOTO 10</code> returns to the beginning.</p>
+<p>The constant 205.5 puts the two choices in balance. Each new mark can lean either way. Nothing in that choice asks whether a passage is needed beside it.</p>
+<p>Yet the field on this screen seems to breathe. Bands favour one diagonal, then the other. The small print admits why: “bias breathing.” A sine wave changes the odds while the line above still displays 205.5. What looks like a texture of chance also carries a rhythm someone chose. The familiar line does not account for everything this installation does.</p>
+<p>Press <strong>BIAS +</strong>. The breathing stops and the constant begins to change: 205.4, then 205.3. The next marks increasingly favour one direction. At 205, every mark is the same diagonal. The maze has become stripes. Use <strong>BIAS −</strong> to bring the constant back to 205.5; the odds are now fixed and even.</p>
+<p>There is another small decision in the line. Press <strong>SEMICOLON</strong> and the trailing <code>;</code> disappears. Every mark now begins a row of its own. The field becomes a single column.</p>
+<p>The semicolon tells <code>PRINT</code> to stay on the same line. Without it, each character is followed by a line break. This control starts the seeded stream again, so the column and the plane can receive the same choices. What differs is where a choice goes.</p>
+<p>Down the column, marks can still meet at corners and zigzag. They cannot close around a room. Four marks in a two-by-two block can: their diagonals make a diamond. The grid gives neighbouring marks shared endpoints; the line break decides whether they have neighbours in a second direction.</p>
+<p>Press <strong>SEMICOLON</strong> again. The plane returns. One tiny character has given the other characters another way to meet.</p>
+<p>Even those meetings have been interpreted. The red and blue bars slowly lengthen and shorten, touching at a corner and parting again. Nothing in the BASIC line asks them to do that. A display can loosen a connection the grid appeared to guarantee.</p>
+<!-- @ -->
+
+<!-- @composition_stochastique -->
+
+<p>Beside the printer, four square grids offer another use of the same diagonals. One direction fills each grid; the other occupies exactly one, five, thirty or fifty of its hundred cells. The plate names François and Vera Molnar, 1959.</p>
+<p>Step along them. Where does a field of parallel lines become something else? There is no example between five and thirty. Your eye has to cross that interval.</p>
+<p><strong>RESEED</strong> changes the arrangement while keeping every count. The four grids come from one shuffled deal: the single turned cell in the first is turned in the other three too. Chance decides which cells turn. Their number was settled beforehand.</p>
+<p>The printer leaves that number open. Giving a diagonal a thirty-percent chance does not reserve exactly thirty of a hundred cells for it. A probability and a count are different instruments. Here they stand close enough to compare.</p>
+<!-- @ -->
+
+<!-- @ten_print_structure -->
+
+<p>Look down. The newest seven rows of the screen are also under your feet. Each cell is enlarged to half a metre, each diagonal laid down as a low ridge. A bright tile waits where the next mark will land. When a row fills, the ridges shift towards the far wall and the oldest row leaves the floor.</p>
+<p><strong>RUN</strong> holds the printing; <strong>STEP</strong> adds one mark. The pause gives your eye time to follow a character from the screen to its place on the ground. Taking away the semicolon collapses this floor into a single file too. A change in the line reaches the room.</p>
+<p>These ridges offer no resistance. You can stand among them and pass through their edges. They give the eye a contour without giving the body a boundary.</p>
+<p>Now return to the taller slabs near the entrance.</p>
+<p>They retain the first twelve characters printed when the hall was built, before any adjustment of the odds. Here the characters are wrapped four to a row and stood two metres forty high. The console leaves this arrangement alone. Where two slabs run parallel, the gap is about seventy centimetres wide.</p>
+<p>Walk in. The mark you followed on the screen has become the face of a wall. Your route occupies the space beside it.</p>
+<p>Four slabs meet corner to corner around a small room with no entrance. Joining the marks has closed the passage. The same connection that completes a figure can keep a body outside it.</p>
+<p>Elsewhere the gaps lead back out. Some are shallow bays; one passage crosses the block. None forks. Between these diagonals, each small triangle of floor opens on two sides, so a corridor may turn but offers no branching choice. What looked like a maze from above becomes a different proposition at the width of your shoulders.</p>
+<p>The way through also depends on the crop. These twelve characters leave it when wrapped four to a row. Wrapped three to a row, they would leave neither a crossing nor a closed room. One more row of this stream would close the crossing too. The rule did not choose where the block ends. Whoever placed it did.</p>
+<p>Each cell was decided alone. Whether you can cross depends on their arrangement together. A body meets a consequence that no single draw contains.</p>
+<!-- @ -->
+
+<!-- @ten_print_maze_3d -->
+
+<p>Look up again at the three fields towering above the hall. Their lines can be crossed by your body, but they provide no surface to carry you upwards. Height in the image has not become a climb.</p>
+<p>A red ball stands for an ant in each field. It receives a different map: even parallel diagonals are treated as touching, so a channel you could walk between the slabs is closed to it. The ant stays around a corner until a cell turns and another move becomes possible. Every turn clears its record of where it has been.</p>
+<p>Watch a diagonal change near it. One replacement can join a long contour or break it apart. The slabs held still long enough for you to learn a passage. Here the ground of the ant's small knowledge keeps changing.</p>
+<!-- @ -->
+
+<p>Two marks have supplied a printed field, a floor to stand among, walls that admit or refuse a body, and a changing world for an ant. The marks alone cannot tell us which world we have made. Their arrangement, their material and the body given to them all matter.</p>
+<p>The printed floor lets its oldest row go. In the next room a die's record gathers outcomes instead, keeping how often each face appears while forgetting where it landed. After a passage made from independent choices, we meet a throw made by a hand.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="render3-fn:10print">
+<p>Nick Montfort, Patsy Baudoin, John Bell, Ian Bogost, Jeremy Douglass, Mark C. Marino, Michael Mateas, Casey Reas, Mark Sample and Noah Vawter, <em>10 PRINT CHR$(205.5+RND(1)); : GOTO 10</em> (MIT Press, 2012). The whole book is freely available at <a href="https://10print.org/">10print.org</a> under a Creative Commons BY-NC-SA 3.0 licence. Its chapters are numbered like program lines — 10, 20, 30 — with remarks between them, and its long argument concerns the interplay of randomness and regularity that this room lets you pull apart.&#160;<a class="footnote-backref" href="#render3-fnref:10print" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div></div></details></section><section id="Random_Cubes"><h2>Random Cubes</h2><p class="meta">1326 → 801 words · <a href="/compose/sources?map=Random_Cubes&amp;doc=final">Current source</a> · <a href="diffs/commons/maps/Random_Cubes/final.md.diff">Exact diff</a></p><article class="reading"><h1>One throw and many throws</h1>
+<p>How much can one throw tell you about a die?</p>
+<!-- @dice_throw -->
+
+<p>A white die lies on green felt, six pips up. Pick it up and throw it. It may keep rocking after it lands. When one face holds the top, the glass records its number and orange balls rain onto the table: sixteen for each pip. A six receives a small spectacle.</p>
+<p>The reward has a rule. It does not make the throw more earned. For a moment, though, its abundance can make this outcome feel like the one the room wanted.</p>
+<p>No random number decides the face. The program draws random values to scatter and tint the reward, but reads the die from its orientation. How your hand let go, the cube's shape and its contact with the felt have already done their work.</p>
+<p>Return it with <strong>RESET</strong> and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.</p>
+<p>The glass keeps the throws after their little storms have passed. Each face has a bar and a percentage; the running mean stands beside the model's 3.50. A short sequence can repeat one face or miss another without settling whether the die is fair.</p>
+<p>Follow one face's share through several throws. Another face makes that share fall. The mean answers a different question: an outcome above the current mean pulls it up; one below pulls it down. Neither movement alone tells us that the die became fairer.</p>
+<p>If all six faces were equally likely, their mean would be 3.5. No side of the cube bears that number. It belongs to a distribution, while the observed mean belongs to the throws made so far.</p>
+<p>The glass cannot tell you whether your last three throws were sixes. It keeps frequencies and loses order, along with every landing position. <strong>RESET</strong> returns the die while keeping this record; <strong>CLEAR</strong> empties it. The instrument has decided what a throw leaves behind.</p>
+<!-- @ -->
+
+<!-- @coin_toss -->
+
+<p>Further along the entrance wall, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out.</p>
+<p>Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using <strong>REFILL</strong> between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing. On a desktop, these are drops: the hand's throw is unavailable.</p>
+<p>The gauges do not predict the next outcome. They let us see something the tally discards: every toss had conditions. Only the latest release keeps its measurements.</p>
+<p>Beside the count stands 0.5000. In the last room, a number could set the printer's odds. This number sets nothing. It states the model's expectation, waiting beside what happened.</p>
+<!-- @ -->
+
+<!-- @random_object_spawner -->
+
+<p>Further in, wooden cubes appear above a waist-high block, at two points side by side. Each arrival knocks against the growing heap. You can pick a cube up.</p>
+<p>Each point keeps at most twenty. After that, a new arrival makes one of its cubes disappear, chosen at random—even the one in your hand. The heap keeps changing without a record. What you were holding is no exception to its rule.</p>
+<!-- @ -->
+
+<!-- @random_edge_profile -->
+
+<p>Beyond the block, forty-eight red slabs form eight rows. Their top edges rise and fall, but each metre-wide slab returns to the same height at both ends. Only the three points between those ends are drawn at random, within narrow limits.</p>
+<p>One slab offers one outcome. Along a row, a regularity becomes visible: however the middle wanders, the joins keep their level. The field lets us inspect many draws together, rather than wait for them one by one. What chance may touch was settled before it ran.</p>
+<p>The ridges are drawn afresh when the hall is built. They do not stop your body. You can walk through an edge that the eye reads as a fence.</p>
+<!-- @ -->
+
+<p>The die and the coin gathered throws into different records. The heap kept losing pieces. The field held one arrangement still. In the next room every piece remains, and what accumulates is its turning. We will have to look for a history that has left no trail.</p></article><details><summary>Before / after — read alongside</summary><div class="compare"><div><h3>Claude’s delivery</h3><h1>One throw and many throws</h1>
+<p>How much can one throw tell you about a die?</p>
+<p>You come in at one corner of the hall. Along the wall you came through, to your left, stand two instruments for throwing: a small table and, further along, a pedestal. Both are played from the hall side, facing back the way you came.</p>
+<!-- @dice_throw -->
+
+<p>The table is covered in green felt, and on it lies a white die, eight centimetres on a side, six pips up. Pick it up and throw it onto the felt. It may go on rocking slowly on its face after it lands. When the same face has stayed on top for most of a second, the number on the glass at the far rail changes to that face, and orange balls rain down onto and around the table: sixteen for every pip, so sixteen for a one and ninety-six for a six. When they have landed, look at the die again and compare its top face with the number on the glass. A larger reward tells you about the rule converting pips into falling balls. It does not make one outcome more earned than another, and the most spectacular result should not stand in for the whole experiment.</p>
+<p>No random number on this table decides the face; the only draws here scatter and tint the reward balls. The face comes from how your hand let go and from what the die and the felt did afterwards. Press <strong>RESET</strong>, lift the die a few centimetres and let it go dead level: it lands six up and reports six. Tilt it by ten degrees before you let go and it can bounce onto another face, even the one you held underneath. On a screen nothing is thrown: the carried die turns to face your view and falls without spin, so the face it lands on depends on how far you are looking down when you let go. Here the result is read from the settled orientation of a simulated physical die. Its shape, contact with the table and the way you throw all contribute to what happens. A cube's symmetry is a reason to investigate fairness, not a proof that every practical way of throwing it produces equal probabilities.</p>
+<p>Throw again, and keep going. The glass keeps a record: how many throws, their running mean beside the model's 3.50, and a bar for each face with its share of the throws so far. A short sequence can contain repetitions or missing faces without settling the question of whether the die is fair. The record becomes useful because it keeps outcomes that your attention might otherwise replace with the newest one.</p>
+<p>Pick a face and watch its percentage. It falls on every throw that is not that face, and the mean may barely move while it does. Watch the mean after a high throw and after a low one. An outcome above the current mean pulls it upwards; an outcome below pulls it downwards. Neither direction alone tells you whether the die became fairer. This small record separates a face's frequency from the numerical average of all faces.</p>
+<p>There are six possible reported faces. If each were equally likely, their mean value would be 3.5. That is a statement about a distribution, not a face you can roll and not a promise that every small batch averages exactly 3.5. The observed mean belongs to the throws made so far.</p>
+<p>Notice what the record lets go. It keeps how often each face came up and forgets the order in which they came and where on the felt each one lay: the glass cannot tell you whether your last three throws were sixes. <strong>RESET</strong> brings the die back and keeps the record. <strong>CLEAR</strong> empties it. Nothing is kept once you leave the hall.</p>
+<!-- @ -->
+
+<!-- @coin_toss -->
+
+<p>Further along the same wall, the pedestal holds eight coins in a tray: the last room's two-way choice as an object you can throw. Toss one onto the dark felt pad on the floor beside it. When it lies still, the console adds it to the heads or the tails, and to a ribbon of the last thirty results in the order they came. A coin that comes to rest on its edge is left out without comment. This record keeps what the die's glass forgot, the order, though only for the last thirty tosses.</p>
+<p>Here the console also shows three gauges, SPIN, DROP and TILT, read off the coin at the moment it leaves your hand. They describe only the most recent throw, and nothing reads them back. Nothing in the pedestal draws a random number either. Toss all eight coins gently and read the ribbon. Press <strong>REFILL</strong>, then toss all eight hard: the ribbon keeps both runs in order, one after the other, and the gauges show how differently each coin left your hand. Keep track of which method produced which outcomes; combining the records immediately would erase the intervention you are testing. On a screen the coin is only let go, never thrown: SPIN reads zero, and TILT is how far you are looking down. The gauges do not predict the next toss. They show that each toss had conditions, and that the tally keeps none of them.</p>
+<p>The console's ratio points at 0.5000. In the last room, the number on the console set the odds once the breathing stopped. Nothing in this pedestal reads 0.5000: it is the model's claim, printed beside the count.</p>
+<!-- @ -->
+
+<!-- @random_object_spawner -->
+
+<p>Further in stands a waist-high block, a dark sphere just in front of it. Above it, at two points side by side, small wooden cubes appear out of the air, each with a knock, one every second or so, and drop onto the block. You can pick them up. Each point keeps at most twenty. After that, every new arrival makes one of that point's cubes vanish, chosen at random, even the one in your hand. Chance decides when a cube arrives and which one goes. Nothing here shows a count of either.</p>
+<!-- @ -->
+
+<!-- @random_edge_profile -->
+
+<p>Beyond the block, forty-eight red slabs stand across the middle of the hall in eight rows of six, each slab a metre wide and about waist high. The top edge of every slab is drawn through five points. The two end points are fixed at one metre. The three between them are drawn at random: the middle one within thirty centimetres of that height, the two beside it within twenty-five. The slabs of a row stand edge to edge, so a row reads as one ridge that returns to the same height at every metre and wanders only in between.</p>
+<p>One slab shows you one draw. The field shows you the rule. Look along a row: however the middles rise and fall, the ridge comes back to its height at every metre, and no peak or dip strays far from it. What many observations can establish that one cannot is laid out here in space instead of in time, and it is a rule about what was allowed to vary: the middles, not the ends.</p>
+<p>The field is dealt again every time the hall is built, so these ridges are not the ones the last visitor saw. They are only drawn. Nothing in them stops your body, and you can walk straight through.</p>
+<!-- @ -->
+
+<p>The die and the coin kept records of outcomes, each forgetting something different. The cubes on the block changed by losing pieces at random and kept no account of it. The field kept a single deal, laid out all at once and then left alone. In the next room every piece stays, and what builds up is how far each has turned. Carry forward the habit of naming what is allowed to vary before calling the whole result random.</p></div><div><h3>This pass</h3><h1>One throw and many throws</h1>
+<p>How much can one throw tell you about a die?</p>
+<!-- @dice_throw -->
+
+<p>A white die lies on green felt, six pips up. Pick it up and throw it. It may keep rocking after it lands. When one face holds the top, the glass records its number and orange balls rain onto the table: sixteen for each pip. A six receives a small spectacle.</p>
+<p>The reward has a rule. It does not make the throw more earned. For a moment, though, its abundance can make this outcome feel like the one the room wanted.</p>
+<p>No random number decides the face. The program draws random values to scatter and tint the reward, but reads the die from its orientation. How your hand let go, the cube's shape and its contact with the felt have already done their work.</p>
+<p>Return it with <strong>RESET</strong> and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.</p>
+<p>The glass keeps the throws after their little storms have passed. Each face has a bar and a percentage; the running mean stands beside the model's 3.50. A short sequence can repeat one face or miss another without settling whether the die is fair.</p>
+<p>Follow one face's share through several throws. Another face makes that share fall. The mean answers a different question: an outcome above the current mean pulls it up; one below pulls it down. Neither movement alone tells us that the die became fairer.</p>
+<p>If all six faces were equally likely, their mean would be 3.5. No side of the cube bears that number. It belongs to a distribution, while the observed mean belongs to the throws made so far.</p>
+<p>The glass cannot tell you whether your last three throws were sixes. It keeps frequencies and loses order, along with every landing position. <strong>RESET</strong> returns the die while keeping this record; <strong>CLEAR</strong> empties it. The instrument has decided what a throw leaves behind.</p>
+<!-- @ -->
+
+<!-- @coin_toss -->
+
+<p>Further along the entrance wall, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out.</p>
+<p>Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using <strong>REFILL</strong> between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing. On a desktop, these are drops: the hand's throw is unavailable.</p>
+<p>The gauges do not predict the next outcome. They let us see something the tally discards: every toss had conditions. Only the latest release keeps its measurements.</p>
+<p>Beside the count stands 0.5000. In the last room, a number could set the printer's odds. This number sets nothing. It states the model's expectation, waiting beside what happened.</p>
+<!-- @ -->
+
+<!-- @random_object_spawner -->
+
+<p>Further in, wooden cubes appear above a waist-high block, at two points side by side. Each arrival knocks against the growing heap. You can pick a cube up.</p>
+<p>Each point keeps at most twenty. After that, a new arrival makes one of its cubes disappear, chosen at random—even the one in your hand. The heap keeps changing without a record. What you were holding is no exception to its rule.</p>
+<!-- @ -->
+
+<!-- @random_edge_profile -->
+
+<p>Beyond the block, forty-eight red slabs form eight rows. Their top edges rise and fall, but each metre-wide slab returns to the same height at both ends. Only the three points between those ends are drawn at random, within narrow limits.</p>
+<p>One slab offers one outcome. Along a row, a regularity becomes visible: however the middle wanders, the joins keep their level. The field lets us inspect many draws together, rather than wait for them one by one. What chance may touch was settled before it ran.</p>
+<p>The ridges are drawn afresh when the hall is built. They do not stop your body. You can walk through an edge that the eye reads as a fence.</p>
+<!-- @ -->
+
+<p>The die and the coin gathered throws into different records. The heap kept losing pieces. The field held one arrangement still. In the next room every piece remains, and what accumulates is its turning. We will have to look for a history that has left no trail.</p></div></div></details></section><section id="Noise_Perlin_Simplex"><h2>Noise Perlin Simplex</h2><p class="meta">1304 → 1302 words · <a href="/compose/sources?map=Noise_Perlin_Simplex&amp;doc=final">Current source</a> · <a href="diffs/commons/maps/Noise_Perlin_Simplex/final.md.diff">Exact diff</a></p><div class="pair"><figure><img src="noise-relief.png" alt="Two noise fields expressed as relief"><figcaption>Relief, after choosing new seeds.</figcaption></figure><figure><img src="noise-plate.png" alt="The same fields as flat colour arrangements"><figcaption>VIEW keeps those fields. Only their expression changes.</figcaption></figure></div><article class="reading"><h1>What counts as the same</h1>
+<p>A hollow on one side of the aisle faces a ridge on the other. It is easy to call that the difference between Perlin and simplex. Walk a little further before deciding.</p>
+<p>Two changes of seed could have made two different pictures too. So could a different scale of sampling. We need a way to ask the fields a narrower question.</p>
+<!-- @simplex_noise -->
+
+<p>Start at the Simplex panel. Press REPLAY and choose a feature to recognise. Move FREQ a little, watch that feature change, then replay. The field returns to the declared setting. Its variation has a way back, as the colour grids did in Randomness.</p>
+<p>In the previous room a height change caught the walking body. Here the small cubes leave space for us to walk around their arrangement. Each sampled coordinate receives a height and a colour. The underlying field relates neighbouring values; the cubes present selected values as separate steps. The grid we see is one way of reading that relation.</p>
+<p>The Simplex visualizer asks for a value like this:</p>
+<pre><code class="language-gdscript">func generate_noise_at(x: float, z: float) -&gt; float:
+    return noise_generator.get_noise_2d(x * frequency, z * frequency)
+</code></pre>
+<p>The slider changes the coordinate multiplier. The display can keep the same cube positions while asking the field about a different scale. A ridge can change across an unmoving grid.</p>
+<p>Find the pink marker. Press SAMPLE on the shared instrument and watch it move to another cube. Across the aisle, another marker takes the same address. Their heights need not agree. The readout now gives the coordinate, each field's answer and their signed difference.</p>
+<pre><code class="language-gdscript">func sample_pair(p: Vector2) -&gt; Vector2:
+    return Vector2(pair[0].sample_at(p.x,p.y), pair[1].sample_at(p.x,p.y))
+</code></pre>
+<p>One question goes to two functions. The coordinate is shared. The answer belongs to the function that returns it. A positive difference on the display means the Perlin value exceeds the simplex value at this address; it does not award a point to either landscape.</p>
+<!-- @perlin_noise -->
+
+<p>Cross to the Perlin panel and compare the readouts. Both begin with the same seed, octave count, frequency and gain. Their displays share amplitude, sample spacing and finish. The Perlin visualizer chooses its basis in this branch of <code>_noise_type_for</code>:</p>
+<pre><code class="language-gdscript">&quot;perlin&quot;:
+    return FastNoiseLite.TYPE_PERLIN
+</code></pre>
+<p>The Simplex visualizer chooses <code>TYPE_SIMPLEX</code>, which this engine implements as OpenSimplex2. The plate reads the choices back from the instantiated generators. Names can help us find a work; here we also have a way to check what they claim.</p>
+<p>Both belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear. <a href="https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations">The engine's noise definitions</a>.</p>
+<p>Choose one comparison to keep in view: the turn of a ridge, the spacing of hollows, or the difference between answers at one coordinate. The shared seed makes each field repeatable. It does not make a ridge on one side the partner of a ridge on the other.</p>
+<p>Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.</p>
+<p>Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colours keep their values. The seed stays where you left it, even after REGEN; only the way a value occupies space has changed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.</p>
+<p>The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.</p>
+<p>Return to relief. The same answers regain height. In Noise Space 10 we joined height to collision so a change could stop a foot. These cubes are a visual comparison with a walking aisle between them. A visible surface and a surface that carries us ask for different work from the implementation.</p>
+<p>Matching conditions costs us possibilities. One shared finish helps compare shape while withholding what another colour treatment might reveal. Half-metre samples give the field a body we can inspect; variation between those addresses has no cube of its own. The comparison makes some distinctions easier to see by agreeing to leave others out.</p>
+<!-- @perlin_noise_terrain -->
+
+<p>Behind the pair, a small pink sheet stands above a low plinth. Stay with it for a moment. Its surface changes in steps even while the two larger fields wait for another action.</p>
+<p>Its timer advances a third sampling coordinate:</p>
+<pre><code class="language-gdscript">func _on_timer_timeout() -&gt; void:
+    if not _is_truthy(animate):
+        return
+    time_offset += 0.5
+    generate_terrain()
+</code></pre>
+<p>The mesh helper samples a three-dimensional field. The timer visits another slice every half-second. We have met a coordinate changing before; here the change keeps arriving without another gesture. It is neither an erosion calculation nor a memory of the sheet's previous shape.</p>
+<p>The artifact is called <code>perlin_noise_terrain</code>, but its helper leaves the generator's basis at the engine default, OpenSimplex2S. This retained work makes the room's question recur inside its own collection. Its one-metre sheet samples in index coordinates, uses seed one and has its own clock. It cannot serve as a third matched surface simply because it stands near the pair.</p>
+<!-- @dark_sphere -->
+
+<p>The dark orb changes too. Its pulse gives the eye another rhythm to follow, independent of the small sheet's half-second steps. MATCH does not restart either work.</p>
+<p>A return always has a scope. We recovered the two fields' parameters, while the other bodies continued. Even a careful comparison takes place in a world that has more going on than the question currently admits.</p>
+<!-- @ -->
+
+<p>Look again at the hollow that first caught your attention. If you were choosing a landscape in which to hide, it might matter for a different reason than if you wanted a clear view. There need not be a winner on either side of the aisle. Keep the ability to repeat a field, change a condition and recognise what the comparison supports.</p>
+<p>The small sheet keeps changing. A little noise, and something begins to feel organic. Perhaps that is the body we wanted. Its swelling can carry pleasure, uncertainty or a queer promise of becoming. The ease of the operation is useful: we can put a similar gesture on many different objects.</p>
+<p>After several rooms, that usefulness can become a mental algorithmic wall. The familiar answer arrives before we have worked out the next question. Different bodies acquire a family resemblance. We can call this tendency blob culture and begin investigating it here, among our own objects. Its cheapness is the ease with which we can add the filter; what someone makes of that gesture can still matter deeply.</p>
+<p>Stay with the sheet and ask what else this body could do. Its changing slice has no record of what happened to the preceding surface. We could give it stored states, neighbours that affect its next move, something to exchange with another body. Each would require another decision and something further to learn. Noise can remain part of those constructions.</p>
+<p>In the next chapter, Cellular Automata, a row waits for its first update. We will let a cell's next state depend on the states beside it. Bring the pleasure of the moving surface, and leave room for another form.</p></article><details><summary>Before / after — read alongside</summary><div class="compare"><div><h3>Claude’s delivery</h3><h1>What counts as the same</h1>
+<p>A hollow on one side of the aisle faces a ridge on the other. It is easy to call that the difference between Perlin and simplex. Walk a little further before deciding.</p>
+<p>Two changes of seed could have made two different pictures too. So could a different scale of sampling. We need a way to ask the fields a narrower question.</p>
+<!-- @simplex_noise -->
+
+<p>Start at the Simplex panel. Press REPLAY and choose a feature to recognise. Move FREQ a little, watch that feature change, then replay. The field returns to the declared setting. Its variation has a way back, as the colour grids did in Randomness.</p>
+<p>In the previous room a height change caught the walking body. Here the small cubes leave space for us to walk around their arrangement. Each sampled coordinate receives a height and a colour. The underlying field relates neighbouring values; the cubes present selected values as separate steps. The grid we see is one way of reading that relation.</p>
+<p>The Simplex visualizer asks for a value like this:</p>
+<pre><code class="language-gdscript">func generate_noise_at(x: float, z: float) -&gt; float:
+    return noise_generator.get_noise_2d(x * frequency, z * frequency)
+</code></pre>
+<p>The slider changes the coordinate multiplier. The display can keep the same cube positions while asking the field about a different scale. A ridge can change across an unmoving grid.</p>
+<p>Find the pink marker. Press SAMPLE on the shared instrument and watch it move to another cube. Across the aisle, another marker takes the same address. Their heights need not agree. The readout now gives the coordinate, each field's answer and their signed difference.</p>
+<pre><code class="language-gdscript">func sample_pair(p: Vector2) -&gt; Vector2:
+    return Vector2(pair[0].sample_at(p.x,p.y), pair[1].sample_at(p.x,p.y))
+</code></pre>
+<p>One question goes to two functions. The coordinate is shared. The answer belongs to the function that returns it. A positive difference on the display means the Perlin value exceeds the simplex value at this address; it does not award a point to either landscape.</p>
+<!-- @perlin_noise -->
+
+<p>Cross to the Perlin panel and compare the readouts. Both begin with the same seed, octave count, frequency and gain. Their displays share amplitude, sample spacing and finish. The Perlin visualizer chooses its basis in this branch of <code>_noise_type_for</code>:</p>
+<pre><code class="language-gdscript">&quot;perlin&quot;:
+    return FastNoiseLite.TYPE_PERLIN
+</code></pre>
+<p>The Simplex visualizer chooses <code>TYPE_SIMPLEX</code>, which this engine implements as OpenSimplex2. The plate reads the choices back from the instantiated generators. Names can help us find a work; here we also have a way to check what they claim.</p>
+<p>Both belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear. <a href="https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations">The engine's noise definitions</a>.</p>
+<p>Choose one comparison to keep in view: the turn of a ridge, the spacing of hollows, or the difference between answers at one coordinate. The shared seed makes each field repeatable. It does not make a ridge on one side the partner of a ridge on the other.</p>
+<p>Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.</p>
+<p>Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colour retains the sampled values, unless REGEN has left the Simplex side on a new seed: VIEW also returns that field to its declared seed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.</p>
+<p>The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.</p>
+<p>Return to relief. The same answers regain height. In Noise Space 10 we joined height to collision so a change could stop a foot. These cubes are a visual comparison with a walking aisle between them. A visible surface and a surface that carries us ask for different work from the implementation.</p>
+<p>Matching conditions costs us possibilities. One shared finish helps compare shape while withholding what another colour treatment might reveal. Half-metre samples give the field a body we can inspect; variation between those addresses has no cube of its own. The comparison makes some distinctions easier to see by agreeing to leave others out.</p>
+<!-- @perlin_noise_terrain -->
+
+<p>Behind the pair, a small pink sheet stands above a low plinth. Stay with it for a moment. Its surface changes in steps even while the two larger fields wait for another action.</p>
+<p>Its timer advances a third sampling coordinate:</p>
+<pre><code class="language-gdscript">func _on_timer_timeout() -&gt; void:
+    if not _is_truthy(animate):
+        return
+    time_offset += 0.5
+    generate_terrain()
+</code></pre>
+<p>The mesh helper samples a three-dimensional field. The timer visits another slice every half-second. We have met a coordinate changing before; here the change keeps arriving without another gesture. It is neither an erosion calculation nor a memory of the sheet's previous shape.</p>
+<p>The artifact is called <code>perlin_noise_terrain</code>, but its helper leaves the generator's basis at the engine default, OpenSimplex2S. This retained work makes the room's question recur inside its own collection. Its one-metre sheet samples in index coordinates, uses seed one and has its own clock. It cannot serve as a third matched surface simply because it stands near the pair.</p>
+<!-- @dark_sphere -->
+
+<p>The dark orb changes too. Its pulse gives the eye another rhythm to follow, independent of the small sheet's half-second steps. MATCH does not restart either work.</p>
+<p>A return always has a scope. We recovered the two fields' parameters, while the other bodies continued. Even a careful comparison takes place in a world that has more going on than the question currently admits.</p>
+<!-- @ -->
+
+<p>Look again at the hollow that first caught your attention. If you were choosing a landscape in which to hide, it might matter for a different reason than if you wanted a clear view. There need not be a winner on either side of the aisle. Keep the ability to repeat a field, change a condition and recognise what the comparison supports.</p>
+<p>The small sheet keeps changing. A little noise, and something begins to feel organic. Perhaps that is the body we wanted. Its swelling can carry pleasure, uncertainty or a queer promise of becoming. The ease of the operation is useful: we can put a similar gesture on many different objects.</p>
+<p>After several rooms, that usefulness can become a mental algorithmic wall. The familiar answer arrives before we have worked out the next question. Different bodies acquire a family resemblance. We can call this tendency blob culture and begin investigating it here, among our own objects. Its cheapness is the ease with which we can add the filter; what someone makes of that gesture can still matter deeply.</p>
+<p>Stay with the sheet and ask what else this body could do. Its changing slice has no record of what happened to the preceding surface. We could give it stored states, neighbours that affect its next move, something to exchange with another body. Each would require another decision and something further to learn. Noise can remain part of those constructions.</p>
+<p>In the next chapter, Cellular Automata, a row waits for its first update. We will let a cell's next state depend on the states beside it. Bring the pleasure of the moving surface, and leave room for another form.</p></div><div><h3>This pass</h3><h1>What counts as the same</h1>
+<p>A hollow on one side of the aisle faces a ridge on the other. It is easy to call that the difference between Perlin and simplex. Walk a little further before deciding.</p>
+<p>Two changes of seed could have made two different pictures too. So could a different scale of sampling. We need a way to ask the fields a narrower question.</p>
+<!-- @simplex_noise -->
+
+<p>Start at the Simplex panel. Press REPLAY and choose a feature to recognise. Move FREQ a little, watch that feature change, then replay. The field returns to the declared setting. Its variation has a way back, as the colour grids did in Randomness.</p>
+<p>In the previous room a height change caught the walking body. Here the small cubes leave space for us to walk around their arrangement. Each sampled coordinate receives a height and a colour. The underlying field relates neighbouring values; the cubes present selected values as separate steps. The grid we see is one way of reading that relation.</p>
+<p>The Simplex visualizer asks for a value like this:</p>
+<pre><code class="language-gdscript">func generate_noise_at(x: float, z: float) -&gt; float:
+    return noise_generator.get_noise_2d(x * frequency, z * frequency)
+</code></pre>
+<p>The slider changes the coordinate multiplier. The display can keep the same cube positions while asking the field about a different scale. A ridge can change across an unmoving grid.</p>
+<p>Find the pink marker. Press SAMPLE on the shared instrument and watch it move to another cube. Across the aisle, another marker takes the same address. Their heights need not agree. The readout now gives the coordinate, each field's answer and their signed difference.</p>
+<pre><code class="language-gdscript">func sample_pair(p: Vector2) -&gt; Vector2:
+    return Vector2(pair[0].sample_at(p.x,p.y), pair[1].sample_at(p.x,p.y))
+</code></pre>
+<p>One question goes to two functions. The coordinate is shared. The answer belongs to the function that returns it. A positive difference on the display means the Perlin value exceeds the simplex value at this address; it does not award a point to either landscape.</p>
+<!-- @perlin_noise -->
+
+<p>Cross to the Perlin panel and compare the readouts. Both begin with the same seed, octave count, frequency and gain. Their displays share amplitude, sample spacing and finish. The Perlin visualizer chooses its basis in this branch of <code>_noise_type_for</code>:</p>
+<pre><code class="language-gdscript">&quot;perlin&quot;:
+    return FastNoiseLite.TYPE_PERLIN
+</code></pre>
+<p>The Simplex visualizer chooses <code>TYPE_SIMPLEX</code>, which this engine implements as OpenSimplex2. The plate reads the choices back from the instantiated generators. Names can help us find a work; here we also have a way to check what they claim.</p>
+<p>Both belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear. <a href="https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations">The engine's noise definitions</a>.</p>
+<p>Choose one comparison to keep in view: the turn of a ridge, the spacing of hollows, or the difference between answers at one coordinate. The shared seed makes each field repeatable. It does not make a ridge on one side the partner of a ridge on the other.</p>
+<p>Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.</p>
+<p>Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colours keep their values. The seed stays where you left it, even after REGEN; only the way a value occupies space has changed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.</p>
+<p>The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.</p>
+<p>Return to relief. The same answers regain height. In Noise Space 10 we joined height to collision so a change could stop a foot. These cubes are a visual comparison with a walking aisle between them. A visible surface and a surface that carries us ask for different work from the implementation.</p>
+<p>Matching conditions costs us possibilities. One shared finish helps compare shape while withholding what another colour treatment might reveal. Half-metre samples give the field a body we can inspect; variation between those addresses has no cube of its own. The comparison makes some distinctions easier to see by agreeing to leave others out.</p>
+<!-- @perlin_noise_terrain -->
+
+<p>Behind the pair, a small pink sheet stands above a low plinth. Stay with it for a moment. Its surface changes in steps even while the two larger fields wait for another action.</p>
+<p>Its timer advances a third sampling coordinate:</p>
+<pre><code class="language-gdscript">func _on_timer_timeout() -&gt; void:
+    if not _is_truthy(animate):
+        return
+    time_offset += 0.5
+    generate_terrain()
+</code></pre>
+<p>The mesh helper samples a three-dimensional field. The timer visits another slice every half-second. We have met a coordinate changing before; here the change keeps arriving without another gesture. It is neither an erosion calculation nor a memory of the sheet's previous shape.</p>
+<p>The artifact is called <code>perlin_noise_terrain</code>, but its helper leaves the generator's basis at the engine default, OpenSimplex2S. This retained work makes the room's question recur inside its own collection. Its one-metre sheet samples in index coordinates, uses seed one and has its own clock. It cannot serve as a third matched surface simply because it stands near the pair.</p>
+<!-- @dark_sphere -->
+
+<p>The dark orb changes too. Its pulse gives the eye another rhythm to follow, independent of the small sheet's half-second steps. MATCH does not restart either work.</p>
+<p>A return always has a scope. We recovered the two fields' parameters, while the other bodies continued. Even a careful comparison takes place in a world that has more going on than the question currently admits.</p>
+<!-- @ -->
+
+<p>Look again at the hollow that first caught your attention. If you were choosing a landscape in which to hide, it might matter for a different reason than if you wanted a clear view. There need not be a winner on either side of the aisle. Keep the ability to repeat a field, change a condition and recognise what the comparison supports.</p>
+<p>The small sheet keeps changing. A little noise, and something begins to feel organic. Perhaps that is the body we wanted. Its swelling can carry pleasure, uncertainty or a queer promise of becoming. The ease of the operation is useful: we can put a similar gesture on many different objects.</p>
+<p>After several rooms, that usefulness can become a mental algorithmic wall. The familiar answer arrives before we have worked out the next question. Different bodies acquire a family resemblance. We can call this tendency blob culture and begin investigating it here, among our own objects. Its cheapness is the ease with which we can add the filter; what someone makes of that gesture can still matter deeply.</p>
+<p>Stay with the sheet and ask what else this body could do. Its changing slice has no record of what happened to the preceding surface. We could give it stored states, neighbours that affect its next move, something to exchange with another body. Each would require another decision and something further to learn. Noise can remain part of those constructions.</p>
+<p>In the next chapter, Cellular Automata, a row waits for its first update. We will let a cell's next state depend on the states beside it. Bring the pleasure of the moving surface, and leave room for another form.</p></div></div></details></section><section id="CA_Introduction"><h2>CA Introduction</h2><p class="meta">1329 → 1364 words · <a href="/compose/sources?map=CA_Introduction&amp;doc=final">Current source</a> · <a href="diffs/commons/maps/CA_Introduction/final.md.diff">Exact diff</a></p><div class="pair"><figure><img src="network-early.png" alt="First retained network stage"><figcaption>The first saved stage waits for arrival.</figcaption></figure><figure><img src="network-grown.png" alt="The full retained network"><figcaption>Twenty saved stages later. Earlier lines retain their places.</figcaption></figure></div><p class="meta">Native studio captures of production artifacts; these are not new museum or headset photographs.</p><article class="reading"><h1>What will the next row do?</h1>
+<p>The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.</p>
+<p>We have carried noise a long way: across a sheet, into a volume, around the body and under a foot. A little variation can satisfy the first wish for something organic. Its ease is part of its power. It can also make that first answer so familiar that other possible forms remain in its shadow. Keep the pleasure of the blob. Bring an unfinished question with it.</p>
+<!-- @ca_rule_explorer -->
+
+<p>The board waits in the left-hand corridor near the entrance. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?</p>
+<p>Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.</p>
+<p>Begin with Rule 90 and the single seed. STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.</p>
+<p>The explorer consults its rule through these actual lines:</p>
+<pre><code class="language-gdscript">func _apply_rule(left: bool, center: bool, right: bool) -&gt; bool:
+    var neighborhood = (int(left) &lt;&lt; 2) | (int(center) &lt;&lt; 1) | int(right)
+    return (rule &gt;&gt; neighborhood) &amp; 1 == 1
+</code></pre>
+<p>Three on/off states make eight possible arrangements. The shifts place them into an index from zero to seven. The rule number stores eight answers, one bit for each arrangement. Reading the selected bit gives this cell's next state.</p>
+<p>For Rule 90, compare <code>100</code> with <code>010</code>. Each contains one occupied cell. The answers differ. A count would have discarded a relation that this rule uses. A neighbourhood is already a decision about what information may matter.</p>
+<p>Choose Rule 30 and keep the single seed. Its rows quickly become harder to anticipate by eye. The board still asks the same small question at every position. A more tangled picture has not made the instruction longer. RUN lets the generations arrive automatically; pressing it again holds them, and STEP always leaves this study held after one update.</p>
+<p>The update writes a separate row. Here is the loop inside <code>_advance</code>, followed by the moment the new row becomes current:</p>
+<pre><code class="language-gdscript">for i in range(cells_x):
+    var left = _current_row[(i - 1 + cells_x) % cells_x]
+    var center = _current_row[i]
+    var right = _current_row[(i + 1) % cells_x]
+    new_row[i] = _apply_rule(left, center, right)
+
+_current_row = new_row
+</code></pre>
+<p>All the questions go to the old row. An answer written at the left cannot slip into the question being asked at the right. This installation builds that separation into its update step, the same under every rule number. A different update order would be another experiment to specify.</p>
+<p>Press SEED. Two adjacent cells now occupy the starting row. The rule has stayed where you left it. Advance again and compare what happens where their consequences meet. Changing the beginning explores something that changing the rule alone could leave unseen. RST returns to the selected beginning and clears the visible history.</p>
+<p>Keep stepping until a pattern reaches the boundary. The witness can cross it too: after cell 31 comes cell 0. The modulo operations in the loop join the two ends. What looks like a line on the desk is a ring to the calculation. Twenty-four rows fit on this board; older rows leave the display while their consequences remain in the current state. Once again, the visible past is smaller than the past that brought us here.</p>
+<!-- @persian_rug -->
+
+<p>Across the entrance, an opening in the dividing wall leads to the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.</p>
+<p>This work has a two-dimensional grid, several states and two sets of local rules. The border and interior decide differently when activity begins, continues or fades. After calculating a generation, the program also mirrors one quarter into the others. In <code>_enforce_quadrant</code>, one value is written into three reflected positions (comments between these assignments are omitted):</p>
+<pre><code class="language-gdscript">grid[row_offset + (width - 1 - x)] = val
+grid[mirror_row_offset + x] = val
+grid[mirror_row_offset + (width - 1 - x)] = val
+</code></pre>
+<p>The ornament has several makers: local updates, a chosen boundary, a palette, and this repeated act of copying. The mirror remains at work after the first seed. Knowing that can give us another way to enjoy the rug. We can follow a changing detail while noticing the procedure that makes its companions answer together.</p>
+<p>The title invites an association with a textile tradition. These few operations do not account for that tradition, its materials or its makers. They produce this particular computational cloth. Its source offers other stencils and divisions to investigate later; the rug in this hall uses the mirrored quarters and frame.</p>
+<!-- @line_network_ca -->
+
+<p>Return to the board's corridor and follow it past the agents painting a shared surface. Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.</p>
+<p>You are watching a saved growth history. The same fixed frame holds its twenty stages, so a line already present stays where it was. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.</p>
+<p>Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then connects each newly encountered position to one of its neighbours, if any neighbour has already been recorded. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.</p>
+<p>Chance proposes an addition; stored occupancy constrains where it can occur; the drawing supplies connections and colour. After twenty updates, the history stops and the whole network remains. <strong>REPLAY</strong> lets the same stages return. It repeats what was kept, rather than asking chance for another growth.</p>
+<p>The stillness has a limit written into it. Twenty updates were allowed; the shape did not announce that every possibility was exhausted. We can enjoy its resemblance to an organic body while learning to ask what brought this particular body to rest.</p>
+<p>We can begin to distinguish forms by the relations that sustain them. The board keeps a row and repeatedly rewrites it. The rug combines local activity with an imposed symmetry. The network retains occupied positions and draws a selected account of their connections. Their resemblance to living things can invite us closer; the code gives us further differences to explore.</p>
+<!-- @ -->
+
+<p>Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.</p>
+<p>For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?</p></article><details><summary>Before / after — read alongside</summary><div class="compare"><div><h3>Claude’s delivery</h3><h1>What will the next row do?</h1>
+<p>The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.</p>
+<p>We have carried noise a long way: across a sheet, into a volume, around the body and under a foot. A little variation can satisfy the first wish for something organic. Its ease is part of its power. It can also make that first answer so familiar that other possible forms remain in its shadow. Keep the pleasure of the blob. Bring an unfinished question with it.</p>
+<!-- @ca_rule_explorer -->
+
+<p>Find the board on your left as you come in, a few steps into the corridor on that side, near its outer wall. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?</p>
+<p>Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.</p>
+<p>Begin with Rule 90 and the single seed. STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.</p>
+<p>The explorer consults its rule through these actual lines:</p>
+<pre><code class="language-gdscript">func _apply_rule(left: bool, center: bool, right: bool) -&gt; bool:
+    var neighborhood = (int(left) &lt;&lt; 2) | (int(center) &lt;&lt; 1) | int(right)
+    return (rule &gt;&gt; neighborhood) &amp; 1 == 1
+</code></pre>
+<p>Three on/off states make eight possible arrangements. The shifts place them into an index from zero to seven. The rule number stores eight answers, one bit for each arrangement. Reading the selected bit gives this cell's next state.</p>
+<p>For Rule 90, compare <code>100</code> with <code>010</code>. Each contains one occupied cell. The answers differ. A count would have discarded a relation that this rule uses. A neighbourhood is already a decision about what information may matter.</p>
+<p>Choose Rule 30 and keep the single seed. Its rows quickly become harder to anticipate by eye. The board still asks the same small question at every position. A more tangled picture has not made the instruction longer. RUN lets the generations arrive automatically; pressing it again holds them, and STEP always leaves this study held after one update.</p>
+<p>The update writes a separate row. Here is the loop inside <code>_advance</code>, followed by the moment the new row becomes current:</p>
+<pre><code class="language-gdscript">for i in range(cells_x):
+    var left = _current_row[(i - 1 + cells_x) % cells_x]
+    var center = _current_row[i]
+    var right = _current_row[(i + 1) % cells_x]
+    new_row[i] = _apply_rule(left, center, right)
+
+_current_row = new_row
+</code></pre>
+<p>All the questions go to the old row. An answer written at the left cannot slip into the question being asked at the right. This installation builds that separation into its update step, the same under every rule number. A different update order would be another experiment to specify.</p>
+<p>Press SEED. Two adjacent cells now occupy the starting row. The rule has stayed where you left it. Advance again and compare what happens where their consequences meet. Changing the beginning explores something that changing the rule alone could leave unseen. RST returns to the selected beginning and clears the visible history.</p>
+<p>Keep stepping until a pattern reaches the boundary. The witness can cross it too: after cell 31 comes cell 0. The modulo operations in the loop join the two ends. What looks like a line on the desk is a ring to the calculation. Twenty-four rows fit on this board; older rows leave the display while their consequences remain in the current state. Once again, the visible past is smaller than the past that brought us here.</p>
+<!-- @persian_rug -->
+
+<p>Now return towards the entrance, go through the opening on the other side of the dividing wall, and approach the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.</p>
+<p>This work has a two-dimensional grid, several states and two sets of local rules. The border and interior decide differently when activity begins, continues or fades. After calculating a generation, the program also mirrors one quarter into the others. In <code>_enforce_quadrant</code>, one value is written into three reflected positions (comments between these assignments are omitted):</p>
+<pre><code class="language-gdscript">grid[row_offset + (width - 1 - x)] = val
+grid[mirror_row_offset + x] = val
+grid[mirror_row_offset + (width - 1 - x)] = val
+</code></pre>
+<p>The ornament has several makers: local updates, a chosen boundary, a palette, and this repeated act of copying. The mirror remains at work after the first seed. Knowing that can give us another way to enjoy the rug. We can follow a changing detail while noticing the procedure that makes its companions answer together.</p>
+<p>The title invites an association with a textile tradition. These few operations do not account for that tradition, its materials or its makers. They produce this particular computational cloth. Its source offers other stencils and divisions to investigate later; the rug in this hall uses the mirrored quarters and frame.</p>
+<!-- @line_network_ca -->
+
+<p>Go back out through the opening, cross the entrance to the board's corridor, and follow it past the agents painting a shared surface. Further along, the line network gives the cell another body. Occupied positions are joined by thin coloured lines, drawn as a tangle in the air above the floor. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.</p>
+<p>Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then connects each newly encountered position to one of its neighbours, if any neighbour has already been recorded. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.</p>
+<p>This is another construction of an organic form. Chance proposes an addition; stored occupancy constrains where it can occur; the renderer supplies connections and colour. The work has already finished its twenty growth updates by the time you reach it. A still network can be the consequence of that programmed limit. Stillness alone cannot tell us that growth exhausted every possibility.</p>
+<p>We can begin to distinguish forms by the relations that sustain them. The board keeps a row and repeatedly rewrites it. The rug combines local activity with an imposed symmetry. The network retains occupied positions and draws a selected account of their connections. Their resemblance to living things can invite us closer; the code gives us further differences to explore.</p>
+<!-- @ -->
+
+<p>Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.</p>
+<p>For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?</p></div><div><h3>This pass</h3><h1>What will the next row do?</h1>
+<p>The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.</p>
+<p>We have carried noise a long way: across a sheet, into a volume, around the body and under a foot. A little variation can satisfy the first wish for something organic. Its ease is part of its power. It can also make that first answer so familiar that other possible forms remain in its shadow. Keep the pleasure of the blob. Bring an unfinished question with it.</p>
+<!-- @ca_rule_explorer -->
+
+<p>The board waits in the left-hand corridor near the entrance. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?</p>
+<p>Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.</p>
+<p>Begin with Rule 90 and the single seed. STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.</p>
+<p>The explorer consults its rule through these actual lines:</p>
+<pre><code class="language-gdscript">func _apply_rule(left: bool, center: bool, right: bool) -&gt; bool:
+    var neighborhood = (int(left) &lt;&lt; 2) | (int(center) &lt;&lt; 1) | int(right)
+    return (rule &gt;&gt; neighborhood) &amp; 1 == 1
+</code></pre>
+<p>Three on/off states make eight possible arrangements. The shifts place them into an index from zero to seven. The rule number stores eight answers, one bit for each arrangement. Reading the selected bit gives this cell's next state.</p>
+<p>For Rule 90, compare <code>100</code> with <code>010</code>. Each contains one occupied cell. The answers differ. A count would have discarded a relation that this rule uses. A neighbourhood is already a decision about what information may matter.</p>
+<p>Choose Rule 30 and keep the single seed. Its rows quickly become harder to anticipate by eye. The board still asks the same small question at every position. A more tangled picture has not made the instruction longer. RUN lets the generations arrive automatically; pressing it again holds them, and STEP always leaves this study held after one update.</p>
+<p>The update writes a separate row. Here is the loop inside <code>_advance</code>, followed by the moment the new row becomes current:</p>
+<pre><code class="language-gdscript">for i in range(cells_x):
+    var left = _current_row[(i - 1 + cells_x) % cells_x]
+    var center = _current_row[i]
+    var right = _current_row[(i + 1) % cells_x]
+    new_row[i] = _apply_rule(left, center, right)
+
+_current_row = new_row
+</code></pre>
+<p>All the questions go to the old row. An answer written at the left cannot slip into the question being asked at the right. This installation builds that separation into its update step, the same under every rule number. A different update order would be another experiment to specify.</p>
+<p>Press SEED. Two adjacent cells now occupy the starting row. The rule has stayed where you left it. Advance again and compare what happens where their consequences meet. Changing the beginning explores something that changing the rule alone could leave unseen. RST returns to the selected beginning and clears the visible history.</p>
+<p>Keep stepping until a pattern reaches the boundary. The witness can cross it too: after cell 31 comes cell 0. The modulo operations in the loop join the two ends. What looks like a line on the desk is a ring to the calculation. Twenty-four rows fit on this board; older rows leave the display while their consequences remain in the current state. Once again, the visible past is smaller than the past that brought us here.</p>
+<!-- @persian_rug -->
+
+<p>Across the entrance, an opening in the dividing wall leads to the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.</p>
+<p>This work has a two-dimensional grid, several states and two sets of local rules. The border and interior decide differently when activity begins, continues or fades. After calculating a generation, the program also mirrors one quarter into the others. In <code>_enforce_quadrant</code>, one value is written into three reflected positions (comments between these assignments are omitted):</p>
+<pre><code class="language-gdscript">grid[row_offset + (width - 1 - x)] = val
+grid[mirror_row_offset + x] = val
+grid[mirror_row_offset + (width - 1 - x)] = val
+</code></pre>
+<p>The ornament has several makers: local updates, a chosen boundary, a palette, and this repeated act of copying. The mirror remains at work after the first seed. Knowing that can give us another way to enjoy the rug. We can follow a changing detail while noticing the procedure that makes its companions answer together.</p>
+<p>The title invites an association with a textile tradition. These few operations do not account for that tradition, its materials or its makers. They produce this particular computational cloth. Its source offers other stencils and divisions to investigate later; the rug in this hall uses the mirrored quarters and frame.</p>
+<!-- @line_network_ca -->
+
+<p>Return to the board's corridor and follow it past the agents painting a shared surface. Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.</p>
+<p>You are watching a saved growth history. The same fixed frame holds its twenty stages, so a line already present stays where it was. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.</p>
+<p>Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then connects each newly encountered position to one of its neighbours, if any neighbour has already been recorded. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.</p>
+<p>Chance proposes an addition; stored occupancy constrains where it can occur; the drawing supplies connections and colour. After twenty updates, the history stops and the whole network remains. <strong>REPLAY</strong> lets the same stages return. It repeats what was kept, rather than asking chance for another growth.</p>
+<p>The stillness has a limit written into it. Twenty updates were allowed; the shape did not announce that every possibility was exhausted. We can enjoy its resemblance to an organic body while learning to ask what brought this particular body to rest.</p>
+<p>We can begin to distinguish forms by the relations that sustain them. The board keeps a row and repeatedly rewrites it. The rug combines local activity with an imposed symmetry. The network retains occupied positions and draws a selected account of their connections. Their resemblance to living things can invite us closer; the code gives us further differences to explore.</p>
+<!-- @ -->
+
+<p>Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.</p>
+<p>For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?</p></div></div></details></section><section id="integration"><h1>Randomness, Noise and Cellular Automata — encounter-led return</h1>
+<p>24 September 2026. Focused second pass on Claude's 31-hall handback.</p>
+<h2>Kept</h2>
+<p>Claude's six developed encounters, the targeted corrections elsewhere, the noise chapter's blob-culture argument, the existing footnotes and all encounter anchors in the four revised chapters. Existing secondary artifacts stay available. No sequence or map order changes.</p>
+<h2>Revised</h2>
+<ul>
+<li><strong>10 PRINT:</strong> 2,370 → 1,339 words. Keep the line of code, biased choice versus fixed counts, semicolon's dimensional consequence, floor/wall difference, crop and access, and the ant's distinct navigation. Move incidental rates and detailed region enumeration into the retained handback/encounter notes.</li>
+<li><strong>Random Cubes:</strong> 1,326 → 801 words. Follow reward, conditions of release, mean/frequency, memory, disappearing cubes and the bounded field. Preserve the desktop-drop distinction. No new die/coin physics changes.</li>
+<li><strong>Perlin/Simplex:</strong> repair VIEW so a change of expression does not restore a seed. Keep the critical writing; remove the now-unnecessary exception in the prose.</li>
+<li><strong>CA Introduction:</strong> retain twenty actual stages, fit them once, and unfold them on approach. REPLAY repeats those recorded stages. The chapter calls it a saved history. Slightly shorten route instructions. No claim that replay reruns the random growth or that a drawn parent proves causal ancestry.</li>
+</ul>
+<h2>Integration</h2>
+<p>All 31 room records now carry current manuscript/map hashes. Apply Claude's three proposed encounter records; promote the recovered comparisons in 10 PRINT and Random Cubes and the CA rule explorer in the current primary lists. Sequence catalogues gain omitted relevant works while keeping secondary entries. Update four intents and link current encounter notes from technical/walked companions.</p>
+<p>The shared 10 PRINT clipboard is corrected in both GD and its previously truncated Markdown twin. It remains usable outside this hall: no false CA classification, blanket collider claim, absent-exit claim or fixed next-hall instruction. Remove one unpromoted science screen from 10 PRINT because it had no data source and displayed a placeholder. Its artifact remains in the project.</p>
+<h2>Evidence</h2>
+<p>30 new native checks pass against production scenes/scripts. Five of Claude's gates pass again: printer, walkable printed maze, die/coin, matched rotation and CA stop/fit/subclass behavior. The long real-time die test initially hit the runner timeout without an assertion failure; rerun with a fixed 120 Hz process timestep passes its 60/90 Hz physics tests. Native logs retain a pre-existing unresolved resource UID warning; no script errors are reported in the successful gates.</p>
+<p>New native images are <strong>studio views of the production artifacts</strong>, not full-museum or headset photographs. Claude's earlier museum placement evidence remains linked and separately identified. No tracked headset or learner validation is claimed.</p>
+<h2>Still open</h2>
+<ul>
+<li>Shared museum bench parsing of multiple #keys, camera suppression, stack_fit parsing and terrain classification in the museum walker.</li>
+<li>CA headset profiling, die visual jitter, and noise-enclosure scale policy.</li>
+<li>Museum re-bake and remaining stale companion accounts beyond these four halls.</li>
+<li>Random_Cubes already declares width 13 while its three 20-row layers each contain 12 columns. It is identical in the before-copy; left unchanged here. Publication/preservation checks: 95 pass, one recorded pre-existing dimension mismatch.</li>
+<li>Whether the ant's navigation should change is an artistic/development decision; the chapter now makes its difference intelligible.</li>
+</ul>
+<p>No live museum restart, saved layout/bake replacement, frozen whole-book/audio rebuild, commit or publication outside the local review site.</p><p><a href="native-checks.json">30 new checks</a> · <a href="claude-gates.json">Five retained gates</a> · <a href="changed-files.json">Changed files</a> · <a href="validation.json">Publication checks</a></p></section><footer><a href="../2026-09-24-claude-randomness-onwards/HANDBACK.md">Claude’s full handback</a> remains the detailed first-pass record.</footer></main></html>

@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial · Two ways to make</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#223334;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1440px;margin:auto;padding:36px}header{padding-top:62px}h1{font-size:clamp(40px,6vw,76px);line-height:1.05;max-width:980px}h2{margin-top:2em;line-height:1.2}nav,figcaption,.eyebrow,.badge,.switch label{font:14px/1.55 system-ui,sans-serif}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:#37676a;text-underline-offset:3px}.eyebrow{text-transform:uppercase;letter-spacing:.12em}.lead{font-size:26px;max-width:830px}p,li{max-width:80ch}.badge{display:inline-block;background:#dce9e2;padding:8px 14px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border:1px solid #c7cbc5}figcaption{padding:9px 0;color:#526260}.pair,.parallel{display:grid;grid-template-columns:1fr 1fr;gap:24px}.parallel article{min-width:0;padding:24px;background:#fffdf6;border-top:4px solid #b2cec4}.parallel article:last-child{border-color:#c9adba}.parallel h1{font-size:34px}pre{background:#1d2b2e;color:#f8f1df;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace;tab-size:4}code{font-size:.83em}pre code{font-size:inherit}table{border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #becac4;text-align:left}.switch input{margin:0 6px 0 18px}.switch label{cursor:pointer}.switch .after{display:none}#after:checked~.after{display:block}#after:checked~.before{display:none}.switch figure img{max-height:1050px;object-fit:contain;background:#d8dbd6}footer{border-top:1px solid #c5cec8}@media(max-width:850px){.pair,.parallel{display:block}header,main,footer{padding:22px}.parallel article{padding:16px}}@media print{nav,.switch input,.switch label{display:none}body{font-size:11pt}pre{white-space:pre-wrap;background:white;color:#111;font-size:8pt}.parallel{display:block}}</style></head><body><header><div class="eyebrow">Endless Museum / Cellular Automata / 8 October 2026</div><h1>Tutorial · Two ways to make</h1><nav><a href="index.html">Hall report</a><a href="index.html#layout">Before / after</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="ca-comparison-review.zip">Review ZIP</a></nav></header><main><h1>Two ways to make</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Rule 90: a next cell is occupied when its two neighbours differ.</li>
+<li>Independent rows store successive states; a picture can show time along one axis.</li>
+<li>A supplied copying recipe places cubes without reading a cellular state.</li>
+<li>Change one input, then identify which construction responds.</li>
+<li>A finite boundary limits a pattern that appears to keep growing.</li>
+</ul>
+<h2>Return to the row</h2>
+<p>The previous hall separated what happens at an address from what it receives from neighbours. Here we return to the Boolean row from the CA opening and the saved history from the third hall. We change its rule, then compare its way of making with the pyramid already in the room.</p>
+<p>At the explorer, select 90 and replay the single central seed. The stored rows appear both on the desk and on the floor. Take the same black point at the desk's front rail. Moving it sideways selects a current-row address; its trigger advances one generation. Read the neighbours before pressing. The point is an inspector and a STEP control here, not a seed brush.</p>
+<p>Follow one triangular gap across the floor toward the pyramid. Both constructions suggest repeated shapes. Find out what each procedure reads before treating that resemblance as an explanation.</p>
+<h2>Reconstruct this comparison</h2>
+<p>Save your earlier study. Put <code>procedures.gd</code>, <code>comparison.gd</code> and the unchanged <code>point_body.gd</code> together. Attach <code>comparison.gd</code> to the existing <code>PointStudy</code> Node3D in the Day Zero museum, at unit scale. Leave about 4 × 2.5 metres clear and approach its positive Z side. The museum continues to supply the player, camera, lighting and XR Tools. All required study children are built below.</p>
+<p>The compact model shows one history table and one fixed cube construction. The museum also enlarges its history onto the floor and supplies richer rule controls. This reconstruction stays with Rule 90. Enter or the held point's trigger steps; R replays the selected seed; C switches between one cell and two adjacent cells and replays. C and R are keyboard controls here; use the installed desk's SEED and RST buttons in the full VR encounter. Walking keys remain available.</p>
+<h2>What does a cell read?</h2>
+<p>For Rule 90 the centre does not affect the answer. Read the old left and right values. If exactly one is true, the next value is true. If they agree, it is false. For Booleans, <code>left != right</code> expresses exclusive OR, often called XOR.</p>
+<table>
+<thead>
+<tr>
+<th>Left</th>
+<th>Right</th>
+<th>Next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+</tr>
+<tr>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>true</td>
+<td>true</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>The existing explorer evaluates a numbered eight-case rule including the centre. Its Rule 90 gives this same answer for all eight cases. The shorter expression below exposes that particular rule; it does not replace the general evaluator in the museum.</p>
+<p><code>next_row</code> reads the complete old row and returns a new one. The last address neighbours the first. <code>history</code> keeps those rows in chronological order. Each row's horizontal positions are space; advancing along the table shows time. New rows change neither the earlier arrays nor the pyramid's positions.</p>
+<h2>What does the copying recipe read?</h2>
+<p><code>copy_positions</code> is supplied from the installed pyramid's placement logic. It reads a position, spacing and remaining depth. At depth zero it returns one position. Otherwise it calls itself at six offsets with half the spacing and one less depth. A function that calls itself is recursive; we will study that process through the Fractals sequence. Here follow just one call and notice its inputs.</p>
+<p>The six placements are four lower corners and two upper positions. This particular recipe has an extra upper branch. It does not inspect neighbouring cubes, read the cellular row, or wait for a clock. The returned list contains one entry per leaf call, including entries that may coincide. Every displayed cube keeps the same size; spacing changes during the construction. The result is a finite collection with overlaps, not a demonstration of an ideal fractal's dimension.</p>
+<p>At depth 3 the procedure returns 6 × 6 × 6 = 216 entries. The large museum pyramid uses depth 4: 1,296 entries. The compact model scales all final positions and cube sizes together, so its smaller version retains the recipe's proportions. We supply that recipe to make the comparison inspectable; deriving it is not a prerequisite for the neighbour-rule lesson.</p>
+<h2>Complete procedures — procedures.gd</h2>
+<pre><code class="language-gdscript">extends RefCounted
+const N := 32
+
+func next_row(old: Array[bool]) -&gt; Array[bool]:
+    var next: Array[bool] = []
+    next.resize(N)
+    for i in N:
+        var left := old[posmod(i - 1, N)]
+        var right := old[(i + 1) % N]
+        next[i] = left != right
+    return next
+
+func copy_positions(at: Vector3, spacing: float, depth: int) -&gt; Array[Vector3]:
+    # Supplied recipe from the installed pyramid; it reads no cell states.
+    if depth == 0:
+        return [at]
+    var half := spacing / 2.0
+    var offset := half / 2.0
+    var shifts: Array[Vector3] = [
+        Vector3(0, half, 0), Vector3(0, offset, 0),
+        Vector3(-offset, -offset, -offset), Vector3(offset, -offset, -offset),
+        Vector3(-offset, -offset, offset), Vector3(offset, -offset, offset)
+    ]
+    var positions: Array[Vector3] = []
+    for shift in shifts:
+        positions.append_array(copy_positions(at + shift, half, depth - 1))
+    return positions
+</code></pre>
+<h2>Keep the two constructions independent</h2>
+<p><code>make_display</code> asks for the cube positions once. <code>step</code> asks only for a next cellular row. <code>reset</code> restores that history from <code>seed_sites</code>. None of those cellular operations rebuilds or edits the cubes.</p>
+<p>The same PointBody from the previous room supplies its held world position. Converting to study-local X selects an address along the rail. This changes <code>selected</code>, not the cells. The readout predicts that address's next value. Release parks the point at the selected address.</p>
+<p><code>redraw</code> places every recorded cell, including zeros. Dark tiles show false; they are not holes. Unrecorded rows have zero-size transforms. The table's collider remains solid beneath both states. The miniature cubes are visual instances on a solid plinth; the installed pyramid uses the museum's cube prefab and its colliders. The compact model does not rebuild that larger climbing geometry.</p>
+<h2>Complete study — comparison.gd</h2>
+<p>Read <code>reset</code>, <code>step</code> and <code>readout</code> first. <code>draw_instances</code> and <code>make_display</code> include the staging so the example can run without prepared child nodes. There is one <code>_ready</code>.</p>
+<pre><code class="language-gdscript">extends Node3D
+const Procedures = preload(&quot;procedures.gd&quot;)
+const PointBody = preload(&quot;point_body.gd&quot;)
+const ROWS := 24
+const PITCH := 0.05
+const DEPTH := 3
+const VIEW_SCALE := 0.18
+var methods := Procedures.new()
+var seed_sites: Array[int] = [16]
+var history: Array[Array] = []
+var cells := MultiMesh.new()
+var copies := MultiMesh.new()
+var positions: Array[Vector3] = []
+var point: XRToolsPickable
+var reading := Label3D.new()
+var selected := 16
+
+func _ready() -&gt; void:
+    make_display()
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): step())
+    reset()
+    park()
+
+func reset() -&gt; void:
+    var row: Array[bool] = []
+    row.resize(Procedures.N)
+    row.fill(false)
+    for i in seed_sites:
+        row[posmod(i, Procedures.N)] = true
+    history.clear()
+    history.append(row)
+    redraw()
+
+func step() -&gt; void:
+    if history.size() == ROWS:
+        return
+    var old: Array[bool] = []
+    old.assign(history.back())
+    history.append(methods.next_row(old))
+    redraw()
+
+func change_seed() -&gt; void:
+    seed_sites.assign([16, 17] if seed_sites.size() == 1 else [16])
+    reset()
+
+func _physics_process(_delta: float) -&gt; void:
+    if point.held():
+        var x := to_local(point.global_position).x
+        selected = clampi(floori((x + 1.15) / PITCH + 16), 0, 31)
+    else:
+        park()
+    readout()
+
+func park() -&gt; void:
+    point.position = Vector3(-1.15 + (selected - 15.5) * PITCH, 1.15, 0.85)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and not event.echo:
+        match event.keycode:
+            KEY_ENTER: step()
+            KEY_R: reset()
+            KEY_C: change_seed()
+            _: return
+        get_viewport().set_input_as_handled()
+
+func at(col: int, row: int) -&gt; Vector3:
+    return Vector3(-1.15 + (col - 15.5) * PITCH, 1.005, (11.5 - row) * PITCH)
+
+func redraw() -&gt; void:
+    for row in ROWS:
+        for col in Procedures.N:
+            var recorded := row &lt; history.size()
+            var alive: bool = recorded and history[row][col]
+            var basis := Basis.IDENTITY if recorded else Basis.IDENTITY.scaled(Vector3.ZERO)
+            cells.set_instance_transform(row * 32 + col, Transform3D(basis, at(col, row)))
+            cells.set_instance_color(row * 32 + col, Color(&quot;eadcc1&quot;) if alive else Color(&quot;183f45&quot;))
+    readout()
+
+func readout() -&gt; void:
+    var row: Array = history.back()
+    var left: bool = row[posmod(selected - 1, 32)]
+    var right: bool = row[(selected + 1) % 32]
+    reading.text = &quot;RULE 90 / GEN %d / CELL %d\nLEFT %d   RIGHT %d   NEXT %d\nENTER / TRIGGER: STEP   R: REPLAY   C: SEED\nHISTORY CHANGES / %d COPY POSITIONS STAY&quot; % [history.size() - 1, selected, int(left), int(right), int(left != right), positions.size()]
+
+func box(size: Vector3, place: Vector3, colour: Color, solid: bool = false) -&gt; MeshInstance3D:
+    var node := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    node.mesh = mesh
+    node.position = place
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = colour
+    node.material_override = finish
+    add_child(node)
+    if solid:
+        var body := StaticBody3D.new()
+        var boundary := CollisionShape3D.new()
+        var shape := BoxShape3D.new()
+        shape.size = size
+        boundary.shape = shape
+        node.add_child(body)
+        body.add_child(boundary)
+    return node
+
+func draw_instances(data: MultiMesh, size: Vector3, colour: Color, colours: bool) -&gt; void:
+    data.transform_format = MultiMesh.TRANSFORM_3D
+    data.use_colors = colours
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    data.mesh = mesh
+    var view := MultiMeshInstance3D.new()
+    view.multimesh = data
+    var material := StandardMaterial3D.new()
+    material.albedo_color = colour
+    material.vertex_color_use_as_albedo = colours
+    view.material_override = material
+    add_child(view)
+
+func make_display() -&gt; void:
+    box(Vector3(1.72, 0.08, 1.32), Vector3(-1.15, 0.96, 0), Color(&quot;c9c5bd&quot;), true)
+    box(Vector3(0.6, 0.92, 0.6), Vector3(-1.15, 0.46, 0), Color(&quot;aaa89f&quot;))
+    draw_instances(cells, Vector3(PITCH * 0.95, 0.006, PITCH * 0.95), Color.WHITE, true)
+    cells.instance_count = 32 * ROWS
+    box(Vector3(1.25, 1.08, 1.25), Vector3(0.8, 0.54, 0), Color(&quot;c9c5bd&quot;), true)
+    draw_instances(copies, Vector3.ONE * VIEW_SCALE, Color(&quot;dfacc4&quot;), false)
+    positions = methods.copy_positions(Vector3.ZERO, pow(2, DEPTH - 1), DEPTH)
+    copies.instance_count = positions.size()
+    for i in positions.size():
+        copies.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0.8, 1.50, 0) + positions[i] * VIEW_SCALE))
+    box(Vector3(1.6, 0.006, 0.008), Vector3(-1.15, 1.04, 0.85), Color(&quot;ffd77d&quot;))
+    reading.position = Vector3(-0.4, 2.45, -0.5)
+    reading.font_size = 34
+    reading.pixel_size = 0.0015
+    add_child(reading)
+</code></pre>
+<h2>Unchanged carried object — point_body.gd</h2>
+<p>Keep your existing copy from the previous hall. It is repeated here only to make the three-file example complete.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>One beginning, two kinds of change</h2>
+<p>Replay the single cell at address 16. Before STEP, predict addresses 15, 16 and 17. After one update, 15 and 17 are occupied; 16 is empty. Both new cells read the old 16. No cube in the pyramid moves.</p>
+<p>Advance to generation 15 and compare a gap with the fixed sculpture. Then predict generation 16 before pressing. On this 32-cell ring, both expanding edges reach the same opposite address. That address reads two true neighbours, so XOR returns false. The entire next row is empty and remains empty. The pattern did not reach an infinite limit: the finite periodic boundary changed the situation.</p>
+<p>Press C to try two adjacent cells. It restarts the cellular history while keeping the same copying construction. Step and compare. Which resemblance survives? You can test the changed row; a visual match with the sculpture remains a judgment about selected features, not a proof that the procedures agree.</p>
+<p>Make one independent edit: set <code>seed_sites</code> to <strong>[14, 16, 18]</strong>, then restart the script. Predict the first row before pressing Enter. Only addresses <strong>13 and 19</strong> should be occupied. Addresses 15 and 17 each receive two true neighbours and cancel. Check the readout at either cancelled address, and confirm that the 216 cube transforms stayed the same. R replays your edited seed; C returns to the built-in single/pair choices.</p>
+<p>The compact table stops after 24 stored rows, generations 0–23, so the comparison stays inspectable. The installed explorer can continue and scrolls its last 24 rows; it labels that retained range. These are different display budgets for the same row update.</p>
+<p>You can now distinguish repeating an update from repeating a placement. The next hall keeps the procedure fixed and changes one starting value, asking how far that difference travels.</p></main><footer>One hall, two complete texts. Native museum evidence. Next: CA_EdgeOfChaos.</footer></body></html>

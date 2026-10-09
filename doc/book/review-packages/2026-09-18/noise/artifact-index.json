@@ -1,0 +1,2448 @@
+{
+  "randompoint": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "randompoint",
+      "entry": {
+        "category": "primitives",
+        "complexity": "intermediate",
+        "description": "A uniformly initialized XY point whose later coordinates are continuously clipped to local bounds with z=0. Optional stand:bounds shows the allowed region and a cased invitation. Dropping does not resample.",
+        "dev_themes": [
+          "probability",
+          "randomness"
+        ],
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "randompoint",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "randompoint",
+        "scene": "res://algorithms/randomness/randompoint/randompoint.tscn",
+        "sequence": "randomness",
+        "size_group": "standard",
+        "tags": [
+          "primitives"
+        ],
+        "geometry_spec": {
+          "mesh_type": "delegated_scene",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "scene_instantiation",
+            "primitives": [],
+            "operations": [
+              "load_scene",
+              "instantiate",
+              "configure"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "varies"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 2,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 2,
+          "cluster_with": [
+            "contrasts",
+            "randompoints",
+            "noise",
+            "enforces",
+            "spacing"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 2,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.56,
+            1.56,
+            0.08
+          ],
+          "aabb_center": [
+            0.03,
+            0.03,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.56,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 4,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.247436Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "randompoints": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "randompoints",
+      "entry": {
+        "capacity": "Distinguish a generative constraint from ongoing enforcement by carrying accepted points into a relation their generator would refuse.",
+        "category": "emergence",
+        "complexity": "beginner",
+        "description": "Uniform, clamped Gaussian and finite minimum-distance dart throwing. Optional stand:compare supplies matched slabs, named seed, full candidate/refusal counts, bounded ghost display and close-pair shells. Admission spacing is not enforced after generation.",
+        "dev_themes": [
+          "emergence",
+          "probability",
+          "randomness"
+        ],
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "gamwell_reference": "Chapter 7: Probability and Randomness",
+        "include_in_map_data": true,
+        "interactions": [
+          "REDRAW repeats the seeded construction",
+          "NEW SEED chooses another current seed",
+          "RULE toggles spaced / clustered",
+          "RESTORE returns generated positions",
+          "LOAD changes request x1 / x4 at fixed spacing",
+          "Carry individual points; shells report close pairs"
+        ],
+        "lookup_name": "randompoints",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "randompoints",
+        "parameters": {
+          "area_size": "Volume dimensions (default: 1x1x1)",
+          "blue_noise_min_dist": "Minimum distance for blue noise rejection (default: 0.25)",
+          "distribution_type": "UNIFORM | GAUSSIAN | BLUE_NOISE",
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "num_points": "Number of points to spawn (default: 30)",
+          "size_group": "compact"
+        },
+        "qfep_connection": "Compare the scope of a rule with the relations bodies can enter after it has produced them. The bench measures distances and search counts; it does not estimate entropy or assign QFEP lambda.",
+        "scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
+        "sequence": "randomness",
+        "size_group": "compact",
+        "tags": [
+          "3d",
+          "emergence",
+          "interactive",
+          "probability",
+          "procedural",
+          "vr",
+          "blue_noise",
+          "gaussian",
+          "distribution",
+          "dart_throwing"
+        ],
+        "geometry_spec": {
+          "mesh_type": "delegated_scene",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "scene_instantiation",
+            "primitives": [],
+            "operations": [
+              "load_scene",
+              "instantiate",
+              "configure"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "varies"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 2,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 2,
+          "cluster_with": [
+            "contrasts",
+            "randompoint",
+            "single",
+            "white",
+            "noise"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 2,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.01,
+            0.98,
+            1.01
+          ],
+          "aabb_center": [
+            0.0,
+            -0.02,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 1.01,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.247436Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "WhiteNoiseGallery": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "WhiteNoiseGallery",
+      "entry": {
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "A grid of independently sampled bar heights, with audio preview controls. The visual is not a frequency-spectrum measurement. Optional stand:gallery retains the model and stages human-sized side controls; seed config supports repeatable comparisons.",
+        "dev_themes": [
+          "art",
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          20,
+          4,
+          20
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "WhiteNoiseGallery",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "White Noise Gallery",
+        "parameters": {
+          "footprint": [
+            20,
+            4,
+            20
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "probability",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "particle_lifecycle",
+            "driven_by": "cpu_simulation",
+            "affects": [
+              "transform",
+              "color"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "pedestal",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 440,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            19.82,
+            3.0,
+            21.26
+          ],
+          "aabb_center": [
+            -0.1,
+            1.5,
+            0.62
+          ],
+          "grid_cells": [
+            20.0,
+            22.0
+          ],
+          "max_dimension_m": 21.26,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 60,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246444Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The baseline: pure white noise, every sample a stranger to its neighbors. This is randomness before it learns to remember — the hiss the whole chapter is a departure from. Hang it first so every other room can be measured as distance from amnesia.",
+        "interactions": [
+          "WHITE, PINK, BROWN, BLUE, VIOLET choose the existing sound filters",
+          "STOP ends this artifact's sound",
+          "Inspect the fixed visual field while the separately generated sound changes"
+        ]
+      }
+    }
+  ],
+  "NoiseColors3D": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "NoiseColors3D",
+      "entry": {
+        "category": "procedural",
+        "complexity": "advanced",
+        "description": "Prescribed spectral-power curves with random variation and clipped display heights, accompanied by separate audio generators. The bars do not measure the generated audio. Optional stand:gallery retains the model and stages human-sized side controls; seed config supports repeatable comparisons.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          10,
+          7,
+          9
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "NoiseColors3D",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Noise Colors 3D",
+        "parameters": {
+          "footprint": [
+            10,
+            7,
+            9
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "3d",
+          "procedural",
+          "sound"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "particle_lifecycle",
+            "driven_by": "cpu_simulation",
+            "affects": [
+              "transform",
+              "color"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 110,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            9.97,
+            6.0,
+            10.26
+          ],
+          "aabb_center": [
+            -0.03,
+            3.0,
+            1.12
+          ],
+          "grid_cells": [
+            10.0,
+            11.0
+          ],
+          "max_dimension_m": 10.26,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "low",
+          "min_clearance": 0,
+          "stack_priority": 0.1,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246444Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Noise has colors: white forgets everything, pink remembers a little, brown wanders like a drunk with a heading, blue avoids itself. The gallery of temperaments — proof that 'random' is not one substance but a spectrum of relationships between a sample and its past.",
+        "interactions": [
+          "WHITE, PINK, BROWN, BLUE, VIOLET choose the existing sound filters",
+          "STOP ends this artifact's sound",
+          "Inspect the fixed visual field while the separately generated sound changes"
+        ]
+      }
+    }
+  ],
+  "synthesis_stand": [
+    {
+      "registry_file": "commons/artifacts/registry/synthesis.json",
+      "registry_sha256": "8562bf645fb4eaba8741b61917e88cb43632a5c078b032a229b5f25b66db1f47",
+      "entry_key": "synthesis_stand",
+      "entry": {
+        "dna": {
+          "axes": {
+            "mode": [
+              "auto",
+              "hero",
+              "series"
+            ]
+          }
+        },
+        "name": "Synthesis Stand",
+        "lookup_name": "synthesis_stand",
+        "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+        "category": "synthesis",
+        "complexity": "intermediate",
+        "description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure — because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands.",
+        "measurements": {
+          "aabb_size": [
+            5.34,
+            1.25,
+            1.31
+          ],
+          "aabb_center": [
+            0.0,
+            0.21,
+            -0.01
+          ],
+          "grid_cells": [
+            6,
+            2
+          ],
+          "max_dimension_m": 5.34,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          6,
+          1,
+          2
+        ],
+        "map_ready": true,
+        "include_in_map_data": true
+      }
+    }
+  ],
+  "dark_sphere": [
+    {
+      "registry_file": "commons/artifacts/registry/lsystems.json",
+      "registry_sha256": "569dc69fc045dd2d888632c4d2e7b1ac2fd310d29bbc704c429dafc9c4752a88",
+      "entry_key": "dark_sphere",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "presence": [
+              "witness",
+              "hush",
+              "beacon",
+              "eclipse",
+              "becoming"
+            ],
+            "body": [
+              "orb",
+              "swarm",
+              "cage",
+              "cairn"
+            ]
+          },
+          "default": "presence=witness + body=orb is the legacy lineage; every witness multiplier is 1.0.",
+          "note": "The agent DEMOTED pulse_speed rather than exposing it: the identity named a rate as critical_parameter, but its own justification was about how much room the sphere takes - the rate was a proxy for presence. presence spends part of its delta on radius, which self-cancels under an AABB-fitted camera; judge hush vs witness at a fixed camera."
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+        "dev_themes": [
+          "grammar",
+          "l_systems",
+          "procedural"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "dark_sphere",
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "bricolage",
+          "cellularautomata",
+          "color",
+          "constraint_solvers",
+          "forces",
+          "fractals",
+          "isosurfaces",
+          "lsystems",
+          "noise",
+          "particles",
+          "patterngeneration",
+          "physicssimulation",
+          "primitives",
+          "proceduralgeneration",
+          "proceduralgeneration_all",
+          "qfeplaboratory",
+          "randomness",
+          "testmaps",
+          "transformation",
+          "unused",
+          "wavefunctions"
+        ],
+        "name": "Dark Sphere",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+        "tags": [
+          "reference",
+          "atmosphere",
+          "sphere",
+          "scale_marker",
+          "lighting",
+          "geometry",
+          "procedural"
+        ],
+        "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+        "gamwell_reference": "",
+        "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+        "interactions": [
+          "observe the pulsing sphere against transformed geometry",
+          "use it as a scale and occlusion reference in the room",
+          "compare its stable silhouette with more dynamic artifacts nearby",
+          "treat it as an atmospheric marker when reading spatial change"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~1536"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.84,
+            0.95,
+            0.84
+          ],
+          "aabb_center": [
+            0.0,
+            0.48,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.95,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.147725Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "MeltingBerniniScene": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "MeltingBerniniScene",
+      "entry": {
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "Procedural ribbed columns. The original ring animates with sine; stand:trio compares a held shaft, sine and seeded coherent-field phase through one bounded shaft recipe. Local FREEZE includes accessory shaders, SPIN turns whole columns, MARBLE isolates shaft veining, and REVEAL names the drivers after observation.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          4,
+          9,
+          3
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "MeltingBerniniScene",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Melting Bernini Columns",
+        "parameters": {
+          "footprint": [
+            4,
+            9,
+            3
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "3d",
+          "graph",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "cylinder"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "generated_texture",
+            "shading_model": "custom_fragment",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~1"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 169,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            12.84,
+            8.11,
+            12.92
+          ],
+          "aabb_center": [
+            0.11,
+            3.79,
+            -0.23
+          ],
+          "grid_cells": [
+            13.0,
+            13.0
+          ],
+          "max_dimension_m": 12.92,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246444Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Bernini's columns dissolving under noise-driven vertex displacement: the baroque — history's most deliberate style — surrendered to structured chance. The primitive of the chapter played as elegy: noise does not destroy the form, it *remembers* it while letting it go, coherence draining out neighbor by neighbor.",
+        "interactions": [
+          "Observe the trio before REVEAL",
+          "FREEZE holds the local column clock, including base/capital shader inputs",
+          "SPIN turns a held shape",
+          "MARBLE removes shaft veining while preserving geometry"
+        ]
+      }
+    }
+  ],
+  "noisetorus": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "noisetorus",
+      "entry": {
+        "dna": {
+          "axes": {
+            "readout": [
+              "relief",
+              "plate",
+              "none"
+            ]
+          }
+        },
+        "category": "procedural",
+        "complexity": "advanced",
+        "description": "A value-noise torus. Optional stand:pair compares matching relief and colour rings with a shared local clock, CPU/GPU-checked integer lattice values, sample markers, cased readout and FREEZE/SAMPLE/AMPLITUDE/FREQUENCY/REMAP controls. Signed remapping changes colour encoding without changing relief. Legacy single-ring mode retains its original field.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          5,
+          8,
+          5
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "noisetorus",
+        "map_ready": true,
+        "map_sequences": [
+          "devexamples",
+          "noise",
+          "structure"
+        ],
+        "name": "noisetorus",
+        "parameters": {
+          "footprint": [
+            5,
+            8,
+            5
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "3d",
+          "color",
+          "geometry",
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 25,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            4.14,
+            7.91,
+            4.14
+          ],
+          "aabb_center": [
+            0.0,
+            3.84,
+            0.0
+          ],
+          "grid_cells": [
+            5.0,
+            5.0
+          ],
+          "max_dimension_m": 7.91,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246941Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Kept in permanent mild weather: animated noise displaces the torus's vertices while the hue drifts, and TIME is wrapped at 3600 seconds so the flux never accumulates. Endless change engineered to loop — E_flux on a one-hour lease."
+      }
+    }
+  ],
+  "noiselayers": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "noiselayers",
+      "entry": {
+        "category": "procedural",
+        "complexity": "advanced",
+        "description": "Existing terrain combines three supplied FastNoiseLite resources and applies three passes of slope-dependent lowering. Optional stand:basin displays the same terrain at 1:50 with SUM/LOW/MIDDLE/HIGH resource-isolation controls and matching triangle collision. It retains the authored coordinate frame; it does not simulate hydraulic sediment transport.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          220,
+          83,
+          200
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "noiselayers",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Noise Layers",
+        "parameters": {
+          "footprint": [
+            220,
+            83,
+            200
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "animation",
+          "fractal",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "implements",
+            "noisetorus",
+            "shows",
+            "abstractly",
+            "precedes"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            220.0,
+            124.5,
+            215.39
+          ],
+          "aabb_center": [
+            0.0,
+            14.53,
+            -1.64
+          ],
+          "grid_cells": [
+            220,
+            216
+          ],
+          "max_dimension_m": 220.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "science_screen": [
+    {
+      "registry_file": "commons/artifacts/registry/shaders.json",
+      "registry_sha256": "565f7f2712e6ec41c7c27f55e5cd79659c707a5e548c18c8dc45364a1880af8f",
+      "entry_key": "science_screen",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "support": [
+              "stand",
+              "frame",
+              "cabinet",
+              "pylon"
+            ],
+            "surface": [
+              "plane",
+              "curve",
+              "triptych",
+              "tiles"
+            ]
+          },
+          "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+          "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
+        },
+        "category": "shaders",
+        "complexity": "intermediate",
+        "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+        "dev_themes": [
+          "shaders",
+          "visual"
+        ],
+        "footprint": [
+          4,
+          3,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "science_screen",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Science Screen",
+        "parameters": {
+          "footprint": [
+            4,
+            3,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+        "sequence": "patterngeneration",
+        "size_group": "standard",
+        "tags": [
+          "projection",
+          "transformation",
+          "screen",
+          "abstraction",
+          "2d",
+          "reflection",
+          "display",
+          "viewport",
+          "grid",
+          "configurable"
+        ],
+        "qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+        "gamwell_reference": "",
+        "capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+        "interactions": [
+          "bring a grid-aware artifact near the screen",
+          "compare the embodied 3D object with its flat rendering",
+          "read algorithm labels and cell statistics on the display",
+          "use the screen to reflect on what projection keeps and discards"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.14,
+            2.35,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            1.14,
+            -0.08
+          ],
+          "grid_cells": [
+            4,
+            1
+          ],
+          "max_dimension_m": 3.14,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 10,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.268877Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "perlin_terrain_sculptor": [
+    {
+      "registry_file": "commons/artifacts/registry/commons_artifacts.json",
+      "registry_sha256": "76b2509e7406332a44e04662eb8b08a9a0883c64c3a332f17d14a279e7d61651",
+      "entry_key": "perlin_terrain_sculptor",
+      "entry": {
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "Perlin terrain model. Optional stand:lattice exposes THRESHOLD, CELL, SEED and view-only CUT with a cased sample/occupancy readout. Its 24 cubed Perlin FBM contract links only to receivers in the same museum hall. Legacy standalone controls remain available.",
+        "dev_themes": [
+          "commons",
+          "mixed",
+          "procedural"
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "interactions": [
+          "observe"
+        ],
+        "lookup_name": "perlin_terrain_sculptor",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Perlin Terrain Sculptor",
+        "parameters": {
+          "footprint": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "size_group": "compact"
+        },
+        "qfep_connection": "Noise is E(S) made visible. The threshold is a Î»-like parameter â€” where you draw the line between solid and void.",
+        "scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+        "sequence": "noise",
+        "tags": [
+          "perlin_noise",
+          "terrain",
+          "sculpting",
+          "procedural",
+          "landscape"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "~0 instances"
+        },
+        "spatial_needs": {
+          "platform": "pedestal",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "broadcasts",
+            "terrain_controls_changed",
+            "voxelnoise",
+            "receivers",
+            "paired"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.02,
+            0.99,
+            1.22
+          ],
+          "aabb_center": [
+            0.0,
+            -0.02,
+            0.1
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.22,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          2.0
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.084049Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "voxelnoise": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "voxelnoise",
+      "entry": {
+        "dna": {
+          "axes": {
+            "threshold": [
+              "sponge",
+              "massif",
+              "archipelago",
+              "wisp"
+            ]
+          }
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "Thresholded 3D noise volume. Optional stand:volume stages a 24 cubed, 4.8 m domain in a 5.2 m frame; linked Perlin samples match the lattice bench, with exposed boundary faces and matching triangle collision. Unlinked legacy mode retains its Simplex generator.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          32,
+          32,
+          32
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "voxelnoise",
+        "map_ready": true,
+        "map_sequences": [
+          "grammar_systems",
+          "noise"
+        ],
+        "name": "Voxel Noise",
+        "scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "3d",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "custom_fragment",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "perlin_terrain_sculptor",
+            "interactive",
+            "control",
+            "discretizes"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1024,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            32.0,
+            32.0,
+            32.0
+          ],
+          "aabb_center": [
+            18.5,
+            16.5,
+            18.5
+          ],
+          "grid_cells": [
+            32.0,
+            32.0
+          ],
+          "max_dimension_m": 32.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.247932Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "3D noise made walkable census: cubes appear where the field crosses threshold, vanish where it does not. The invisible correlation structure of the noise stands revealed as architecture — you are looking at the field's memory, cell by cell."
+      }
+    }
+  ],
+  "shader_noise_space": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "shader_noise_space",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-05",
+          "stage": "2 - variation",
+          "axes": {
+            "generator": [
+              "simplex",
+              "perlin",
+              "value",
+              "cellular"
+            ]
+          },
+          "fixture": {
+            "animation": "frozen"
+          },
+          "fixture_why": "Every visible parameter of this room is driven off a clock in _process — time, time_scale, cloud_density and both colours all move — so a still is taken at whatever instant the shutter happened to fall. `frozen` leaves the .tscn's own authored uniforms in place and never advances them, which makes four basis frames comparable instead of four different moments. It is a String enum, not a bool, because the sweep sets exports from strings before _ready and a typed bool silently rejects \"true\" — the trap that has eaten fixture flags twice. `live` is the default and is the shipped behaviour, so no placement sees the pin.",
+          "default": "generator=perlin - the perlin branch of the shader's dispatch is the shipped noise2d body, character for character (diffed against HEAD, not eyeballed), and _apply_generator writes 1 into a uniform whose own declared default is already 1. Note the default is perlin and NOT simplex, the opposite of the bench artifacts, because that is what this file has always computed: hash2 returns a gradient per lattice corner and the interpolation dots it with the offset, which is Perlin's construction with a sine hash instead of a permutation table. MEASURED, not assumed: there are 13 mentions across 11 map files, not the 5 the promotion brief carried, by three reach-paths - bare tokens in Noise_6_Wall, Corridor_Noise_6_Wall, Noise_Functions, TestMap_Unused_23 and Walk_grande_galerie_axial_text; `exhibit_furniture#kind:floor_work#size:l#mount:shader_noise_space` in six museum trials, where the token is the furniture's mount value and the # keys are the furniture's; and `perlin_noise->shader_noise_space` in Trial_erosion_noise, which is a transformation target and not a config. None carries a generator key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds.",
+          "was": "seven exports, every one of them a rate or a toggle on the animation loop, and the runner refused it as NO TURNABLE KNOBS. The decision that carries the argument was not an export at all: it was the body of a single function called noise2d, hard-coded to one basis in a room whose walls, ceiling and floor are made of nothing else.",
+          "shares_vocabulary_with": "perlin_noise, simplex_noise, noise_terrain - `generator` is the same axis with the same four values in the same order. The noise sequence is built on comparing bases; spelling the comparison a second way would leave nothing to compare. cellular, not worley, for the same reason. What differs here is the scale of the question: on the bench a basis is a tabletop of displaced cubes you look down at, and here it is the room you are standing inside.",
+          "amplitude_note": "The four bases are AMPLITUDE-MATCHED rather than merely swapped in. Measured over 30,000 samples each returns mean |value| = 0.137, which is what the shipped perlin returns; the three scaling constants in the shader (0.770, 38.0, 0.827) exist only for that. Without them the sweep would mostly have been reading which basis is BRIGHTER once the six-octave sum is pushed through smoothstep(0.2, 0.8), and the axis would have been about exposure instead of about structure. Their own characters survive the matching: measured local step per unit distance is 4.7% of mean for value, 8.4% perlin, 11.0% cellular, 13.9% simplex.",
+          "declined": "animation_speed (this file's own declared critical_parameter until now), time_scale_variation, color_cycle_speed and density_variation - four rates, all real, all audible in the room, and all invisible to one still. Promoting any of them would have produced the info_board result: a finished-looking experiment answering nothing. `octaves` was also declined despite simplex_noise carrying it as a numeric axis: the fbm here runs six octaves over a wall two metres from the eye, so the lower rungs would read as a blurrier wall rather than as a claim about self-similarity, and one honest axis is worth more than a second one that argues about resolution.",
+          "still_note": "the basis is a fragment-shader uniform, so it is resolved every frame and never settles into geometry — but it is also constant in time under the fixture, so one frame is a complete account. The subject is a closed 16 x 12 x 27 m box of CSGBox3D walls with cull_disabled, so the sweep's camera sits outside and photographs two or three wall faces filling the frame. That is the field at full size, which is the best case for measuring a basis; if the bite comes back small, suspect the clock, not the axis.",
+          "finding": "QueerNoiseShader.gdshader and WallNoiseShader.gdshader were BYTE-IDENTICAL, header comment included — the room-sphere shader carried the wall shader's filename at the top of the file. The @identity's claim that 'the two materials run independent shader noise loops' out of phase is one shader run twice with different uniform values and a 0.7x offset on time. Both files now carry the same dispatch so the room and its walls change basis together."
+        },
+        "category": "procedural",
+        "complexity": "advanced",
+        "description": "Procedural noise material on an enclosure and sphere. Optional stand:panel provides four cumulative cloud patches and LAYERS, BASIS, FREEZE and DRESS; stand:room stages an enterable five-metre museum floor with opposing doors. Local receivers share the held/resumed phase, basis, cloud count and finish while the independent hall orb keeps its own time. Legacy standalone enclosure geometry remains available.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          19,
+          14,
+          28
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "shader_noise_space",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Shader Noise Space",
+        "parameters": {
+          "footprint": [
+            19,
+            14,
+            28
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "noise",
+          "procedural",
+          "shader"
+        ],
+        "geometry_spec": {
+          "mesh_type": "shader_driven",
+          "topology": "planar",
+          "construction": {
+            "method": "shader_rendering",
+            "primitives": [],
+            "operations": [
+              "create_base_mesh",
+              "apply_shader",
+              "set_parameters"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "custom_fragment",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~4-24 (base mesh)"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "demonstrates",
+            "noise",
+            "distinct",
+            "noise",
+            "noiselayers"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 532,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            18.1,
+            13.6,
+            27.1
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            19.0,
+            28.0
+          ],
+          "max_dimension_m": 27.1,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.247436Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Noise evaluated per-pixel at framerate: the GPU as noise organ, procedural texture with no texture stored. The room turns as you move because nothing in it is a picture — everything is a function, sampled where you look."
+      }
+    }
+  ],
+  "noisesphere": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "noisesphere",
+      "entry": {
+        "dna": {
+          "axes": {
+            "readout": [
+              "relief",
+              "plate",
+              "none"
+            ]
+          }
+        },
+        "category": "procedural",
+        "complexity": "advanced",
+        "description": "Legacy noise dome with an optional stand:warp encounter inside a ten-metre noise sphere. Two opposing openings and a continuous circular floor enclose the visitor and a comparison instrument. WARP controls the surrounding field and a smaller sphere beside a direct reference; SAMPLE exposes p and q; RELIEF affects the small pair only; ZERO restores direct sampling. The fixed enclosing collision and independent orb remain while the field changes.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          32,
+          32,
+          30
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "noisesphere",
+        "map_ready": true,
+        "map_sequences": [
+          "meshes",
+          "noise"
+        ],
+        "name": "noisesphere",
+        "scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 960,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            31.05,
+            31.05,
+            29.99
+          ],
+          "aabb_center": [
+            -17.73,
+            0.85,
+            0.07
+          ],
+          "grid_cells": [
+            32.0,
+            30.0
+          ],
+          "max_dimension_m": 31.05,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246941Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A hemisphere deformed by noise and dressed in the planet shader: a world's skin grown from correlation. The dome overhead is the chapter's quiet claim to scale — planets are noise seen from far enough away."
+      }
+    }
+  ],
+  "noise_space": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "noise_space",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-05",
+          "stage": "2 - variation",
+          "axes": {
+            "generator": [
+              "simplex",
+              "perlin",
+              "value",
+              "cellular"
+            ],
+            "octaves": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "default": "generator=simplex, octaves=4 - octaves=4 is the shipped @export byte for byte. generator=simplex does NOT assign a noise type: the shipped file set frequency and fractal_octaves and never touched noise_type at all, so this ground has always been whatever basis FastNoiseLite itself defaults to, and _build_noise leaves it alone at the default value instead of assigning TYPE_SIMPLEX - assigning it would be a silent correction that reshapes the terrain under every existing placement. MEASURED, not assumed: there are 11 mentions across 10 map files, by three reach-paths - bare tokens in Corridor_Noise_Space_10, Noise_Space_10 and Walk_grande_galerie_axial_text; `exhibit_furniture#kind:floor_work#size:l#mount:noise_space` in six museum trials, where the token is the furniture's mount value and the # keys are the furniture's; and `simplex_noise->noise_space` plus `noise_space->noisetorus` in Trial_erosion_noise, which are transformation targets and not config. None carries a generator or octaves key, and apply_grid_config returns without regenerating unless a key is present AND its value differs from the one the node already holds.",
+          "was": "an artifact named for its noise that never said which noise, and three @exports nobody could reach. TopologySpace has no apply_grid_config and NoiseSpace had none either, so noise_scale, octaves and persistence were editor-only: every placement got the same 10 x 10 m landform and map_data could not say otherwise. The runner refused it as NO TURNABLE KNOBS on exactly that ground - the knobs existed, nothing was connected to them.",
+          "shares_vocabulary_with": "perlin_noise, simplex_noise, shader_noise_space, noise_terrain - `generator` is the same axis with the same four values in the same order and the same default. cellular, not worley, for the same reason: the noise sequence is built on comparing bases, and spelling the comparison four ways would leave nothing to compare. `octaves` is simplex_noise's word for the same quantity, but the ladder is 1-2-3-4 rather than its 1-2-4-6, and the difference was computed rather than chosen: this mesh samples every 0.1 m across a 10 m space (resolution 100) while the base wavelength is about 2 m (frequency 0.1 against coordinates pre-multiplied by noise_scale 5.0), so octave k has wavelength 2 / 2^(k-1) and octaves 5 and 6 land at 0.125 and 0.0625 m, below the mesh's 0.2 m Nyquist wavelength. Declaring 6 would ship a rung that differs from 4 only by aliasing at a sixteenth of the amplitude.",
+          "vocabulary_declined": "readout (relief|plate|column), carried by perlin_noise, simplex_noise, perlin_noise_terrain, random_edge_profile and mandelbrot_set. Declined for exactly the reason noise_terrain recorded when it declined the same word: readout asks a geometric question about a tabletop field, and this is a walkable substrate with a trimesh collider under it, so plate and column would change what the player STANDS ON rather than what the field claims to be, and the word would stop meaning one thing across the sequence. noise_terrain's own second axis `legend` (contours|relief|mood) is declined too, for the opposite reason: there both encodings already existed in the file and only a 2D button chose between them, while here there is exactly one material - a flat organic-green StandardMaterial3D with no height encoding at all - so the shipped look is neither contours nor relief nor mood, and taking the word would mean inventing a fourth value to hold the thing that actually ships. Taking a word without its answers is the dishonest half of a shared vocabulary.",
+          "still_note": "both axes resolve during _ready and never move again - the noise object is fully configured before the 10,201-vertex mesh is built, and nothing on this artifact animates - so a single frame is a complete account of both. Deterministic besides: FastNoiseLite is left on its default seed and nothing in the file calls randf(), so four generator frames are four bases over one footprint rather than four landscapes, and no seed pin is needed.",
+          "framing_note": "the subject is a 10 x 10 m slab carrying about 4 m of relief, and a fit-by-diagonal camera is roughly right for it (the plan diagonal and the box diagonal are within 4% of each other), so no numeric framing is set. If the bite reads modest, compare silhouettes before believing it: expect cellular to be the loudest value by far and octaves=1 to be the smoothest.",
+          "repair": "persistence has been an @export since the file was written and was never spent on anything. It is the fBm gain and is now wired to fractal_gain - but only when it differs from its own shipped 0.5, so a placement that never names it leaves the noise object untouched no matter what FastNoiseLite's own default gain is. It is a repair, not a declared axis."
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "A noise heightfield with matching mesh and collision. The optional stand:walk study in Noise_Space_10 keeps one OpenSimplex2S field fixed while HEIGHT changes its contribution to an eight-metre terrain. A level margin, two proposed routes and a supported profile instrument let the visitor compare a section with an actual crossing. Unconfigured placements retain their original ten-metre terrain.",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          10,
+          4,
+          10
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "noise_space",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Noise Space Explorer",
+        "parameters": {
+          "footprint": [
+            10,
+            4,
+            10
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://commons/context/walkgrids/noise_space.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "3d",
+          "noise",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": [
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 100,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.0,
+            3.05,
+            10.0
+          ],
+          "aabb_center": [
+            0.0,
+            -0.04,
+            0.0
+          ],
+          "grid_cells": [
+            10.0,
+            10.0
+          ],
+          "max_dimension_m": 10.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246941Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The chapter's thesis as a place: a whole environment driven by configurable noise, walked from inside. Not an exhibit about noise — an exhibit *made of* it, where changing a parameter re-decides the room around you."
+      }
+    }
+  ],
+  "simplex_noise": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "simplex_noise",
+      "entry": {
+        "category": "procedural",
+        "complexity": "intermediate",
+        "dna": {
+          "promoted": "2026-07-29",
+          "stage": "2 - variation",
+          "axes": {
+            "readout": [
+              "relief",
+              "plate",
+              "column"
+            ],
+            "octaves": [
+              1,
+              2,
+              4,
+              6
+            ]
+          },
+          "default": "readout=relief, octaves=4 - relief is the legacy cube.position.y = value line and 4 was the hard-coded fractal_octaves, so all 8 existing placements render exactly as before",
+          "was": "no exports on the root at all: the whole parameter space lived in a 2D Control panel that the grid strips out of map placements, so every placement was the same 20x20 field of half-metre cubes displaced in y and tinted pink-to-teal, and map_data could not say otherwise."
+        },
+        "description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          10,
+          3,
+          10
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "simplex_noise",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Simplex Noise",
+        "parameters": {
+          "footprint": [
+            10,
+            3,
+            10
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "noise",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "scene",
+            "architecture",
+            "different",
+            "algorithm"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 100,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.0,
+            2.2,
+            10.0
+          ],
+          "aabb_center": [
+            -0.25,
+            -0.08,
+            -0.25
+          ],
+          "grid_cells": [
+            10,
+            10
+          ],
+          "max_dimension_m": 10.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 18,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.247932Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Perlin's own second draft: the simplex grid replaces squares, fewer artifacts, better behavior in high dimensions. Standing beside its ancestor it teaches versioning as a mathematical practice — even noise gets revised."
+      }
+    }
+  ],
+  "perlin_noise": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "perlin_noise",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-29",
+          "stage": "2 - variation",
+          "axes": {
+            "generator": [
+              "simplex",
+              "perlin",
+              "value",
+              "cellular"
+            ],
+            "readout": [
+              "relief",
+              "plate",
+              "column"
+            ]
+          },
+          "default": "generator=simplex, readout=relief - both are exactly what the shipped code did (NoiseVisualizer hard-coded FastNoiseLite.TYPE_SIMPLEX and lifted a uniform cube to its sample), so the 7 existing placements render identically",
+          "shares_vocabulary_with": "simplex_noise - readout is the same axis with the same three values and the same default on both, so the pair can be compared instead of merely contrasted",
+          "was": "no exports on the root at all - the sweep refused it as NO TURNABLE KNOBS. The two decisions that carry the argument sat one node down as constants: which basis fills the field, and whether a sample is read as elevation or as measurement. Note that the artifact called Perlin Noise has been drawing SIMPLEX noise since it was written; the promotion makes that a declared choice (generator=perlin is now available) rather than silently correcting it and rewriting seven maps."
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "Interactive Perlin noise generation and visualization",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          10,
+          3,
+          10
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "perlin_noise",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Perlin Noise",
+        "parameters": {
+          "footprint": [
+            10,
+            3,
+            10
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
+        "sequence": "randomness",
+        "size_group": "xlarge",
+        "tags": [
+          "noise",
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "gradient",
+            "simplex",
+            "basis",
+            "shares"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 100,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.0,
+            1.89,
+            10.0
+          ],
+          "aabb_center": [
+            -0.25,
+            0.11,
+            -0.25
+          ],
+          "grid_cells": [
+            10,
+            10
+          ],
+          "max_dimension_m": 10.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 18,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246941Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Perlin's gift to graphics: gradients on a lattice, interpolated smoothly — randomness that flows instead of stutters. Every organic-looking surface in games descends from this trick. The demo hands you the dials: octaves stacking detail, persistence deciding how loudly the small scales speak."
+      }
+    }
+  ],
+  "perlin_noise_terrain": [
+    {
+      "registry_file": "commons/artifacts/registry/randomness.json",
+      "registry_sha256": "dddfcf574a040e5564acddfbff61194eb0332d8065d0ff696925dbb10bd1e9a8",
+      "entry_key": "perlin_noise_terrain",
+      "entry": {
+        "dna": {
+          "axes": {
+            "readout": [
+              "relief",
+              "plate",
+              "column"
+            ]
+          }
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "Interactive 3D terrain generation using Perlin noise algorithms",
+        "dev_themes": [
+          "probability",
+          "procedural",
+          "randomness"
+        ],
+        "footprint": [
+          2,
+          1,
+          2
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "perlin_noise_terrain",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Perlin Noise Terrain",
+        "parameters": {
+          "footprint": [
+            2,
+            1,
+            2
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
+        "sequence": "randomness",
+        "size_group": "standard",
+        "tags": [
+          "3d",
+          "noise",
+          "procedural",
+          "terrain"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~800"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.06,
+            0.4,
+            1.07
+          ],
+          "aabb_center": [
+            0.13,
+            0.1,
+            0.0
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.07,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.246941Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The Perlin pipeline run to its natural end: octaves become mountain ranges, persistence becomes ruggedness. Parameter names turn geological — the chapter's clearest case of mathematics wearing the world's clothes."
+      }
+    }
+  ],
+  "configurable_portal": [
+    {
+      "registry_file": "commons/artifacts/registry/furniture.json",
+      "registry_sha256": "d7d7adc5e3562507f7140b669722bd394395fb29ae418148d207d531519babdd",
+      "entry_key": "configurable_portal",
+      "entry": {
+        "dna": {
+          "axes": {
+            "tell": [
+              "mark",
+              "ghost",
+              "exemplar",
+              "none"
+            ]
+          }
+        },
+        "category": "mapobjects",
+        "complexity": "intermediate",
+        "description": "Fully configurable portal - any size, rotation, destination. Use: configurable_portal#width:2#height:3#dest_x:5#dest_y:1#dest_z:10 or configurable_portal#dest_map:Trans_RotationSpectacle",
+        "dev_themes": [
+          "decoration",
+          "environment"
+        ],
+        "footprint": [
+          2.0,
+          3.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "configurable_portal",
+        "map_ready": true,
+        "map_sequences": [
+          "noise"
+        ],
+        "name": "Configurable Portal",
+        "parameters": {
+          "active": "bool - can be used (default true)",
+          "color1": "hex - primary color",
+          "color2": "hex - secondary color",
+          "cooldown": "float - seconds between uses",
+          "depth": "float - collision depth (default 0.5)",
+          "dest": "string - destination as 'x,y,z'",
+          "dest_map": "string - map name to load",
+          "dest_x": "float - destination X in current map",
+          "dest_y": "float - destination Y in current map",
+          "dest_z": "float - destination Z in current map",
+          "energy": "float - glow energy",
+          "footprint": [
+            2.0,
+            3.0,
+            1.0
+          ],
+          "frame": "bool - show frame (default true)",
+          "height": "float - portal height (default 2.5)",
+          "label": "string - text shown above portal",
+          "map": "string - alias for dest_map",
+          "rot_x": "float - rotation X degrees",
+          "rot_y": "float - rotation Y degrees",
+          "rot_z": "float - rotation Z degrees",
+          "size_group": "standard",
+          "spawn": "string - named spawn point in destination",
+          "width": "float - portal width (default 1.5)"
+        },
+        "scene": "res://commons/scenes/mapobjects/configurable_portal.tscn",
+        "sequence": "noise",
+        "size_group": "standard",
+        "tags": [
+          "mapobjects"
+        ],
+        "geometry_spec": {
+          "mesh_type": "shader_driven",
+          "topology": "planar",
+          "construction": {
+            "method": "shader_rendering",
+            "primitives": [
+              "box",
+              "plane"
+            ],
+            "operations": [
+              "create_base_mesh",
+              "apply_shader",
+              "set_parameters"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "custom_fragment",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "~4-24 (base mesh)"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 2,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 2,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.65,
+            2.61,
+            0.3
+          ],
+          "aabb_center": [
+            0.0,
+            1.27,
+            0.0
+          ],
+          "grid_cells": [
+            2.0,
+            1.0
+          ],
+          "max_dimension_m": 2.61,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 6,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.110524Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The door as parameter: size, rotation, destination all data. Passage itself made configurable — the humblest artifact in the room and the most honest about what this world is (everything, including exits, is a setting)."
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "checks": 40,
+  "failures": [],
+  "headset_tested": false,
+  "date": "2026-09-11",
+  "source_sha256": {
+    "commons/maps/VFM_05_Launch/map_data.json": "cf891a2af0ff03f26ad57a75a512c618d77f2993ea0573e8f9cc1b5e9fa7b813",
+    "commons/maps/VFM_05_Launch/final.md": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458",
+    "commons/artifacts/launch_arc/launch_arc.gd": "5c1d5aa79ae2988c41b23c061bed8678c6b5c6e7378afb3866b319bb786dbae9",
+    "commons/artifacts/launch_arc/launch_chamber.gd": "b152e1b28efae968b7565986a60f21cc180da18a9352d0d71173500bac5627c7",
+    "commons/artifacts/timing_machines/machine_stage.gd": "8b9a126debfbed74b6d9734ddef6d3595778e71d142a757c2d3ce1f5e6097925",
+    "commons/testing/probe_launch_chamber.gd": "01384b4df12c84d0b85e95e9fb9f370fe83e44700538965f09ad9d5d4e2a663a"
+  },
+  "scope": "Actual museum; analytic-flight controls, render-time motion and centre/side collision samples. Target hall visible for captures; retained supporting exhibits not newly certified.",
+  "observed_global_scale": [
+    1,
+    1,
+    1
+  ]
+}

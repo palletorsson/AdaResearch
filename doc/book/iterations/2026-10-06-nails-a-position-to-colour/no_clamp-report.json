@@ -1,0 +1,487 @@
+{
+  "checks": [
+    {
+      "id": "start/material_assignment",
+      "passed": true
+    },
+    {
+      "id": "start/local_frame_readout",
+      "passed": true
+    },
+    {
+      "id": "start/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "start/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "start/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "start/same_radius",
+      "passed": true
+    },
+    {
+      "id": "start/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "start/three_guides",
+      "passed": true
+    },
+    {
+      "id": "start/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "start/origin",
+      "passed": true
+    },
+    {
+      "id": "start/opposite",
+      "passed": true
+    },
+    {
+      "id": "start/red_axis",
+      "passed": true
+    },
+    {
+      "id": "start/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "start/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "start/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "start/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "start/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "start/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "red/material_assignment",
+      "passed": true
+    },
+    {
+      "id": "red/local_frame_readout",
+      "passed": true
+    },
+    {
+      "id": "red/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "red/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "red/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "red/same_radius",
+      "passed": true
+    },
+    {
+      "id": "red/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "red/three_guides",
+      "passed": true
+    },
+    {
+      "id": "red/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "red/origin",
+      "passed": true
+    },
+    {
+      "id": "red/opposite",
+      "passed": true
+    },
+    {
+      "id": "red/red_axis",
+      "passed": true
+    },
+    {
+      "id": "red/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "red/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "red/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "red/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "red/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "red/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "wide/material_assignment",
+      "passed": true
+    },
+    {
+      "id": "wide/local_frame_readout",
+      "passed": true
+    },
+    {
+      "id": "wide/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "wide/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "wide/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "wide/same_radius",
+      "passed": true
+    },
+    {
+      "id": "wide/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "wide/three_guides",
+      "passed": true
+    },
+    {
+      "id": "wide/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "wide/origin",
+      "passed": true
+    },
+    {
+      "id": "wide/opposite",
+      "passed": true
+    },
+    {
+      "id": "wide/red_axis",
+      "passed": true
+    },
+    {
+      "id": "wide/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "wide/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "wide/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "wide/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "wide/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "wide/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "outside/material_assignment",
+      "passed": false
+    },
+    {
+      "id": "outside/local_frame_readout",
+      "passed": false
+    },
+    {
+      "id": "outside/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "outside/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "outside/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "outside/same_radius",
+      "passed": true
+    },
+    {
+      "id": "outside/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "outside/three_guides",
+      "passed": true
+    },
+    {
+      "id": "outside/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "outside/origin",
+      "passed": true
+    },
+    {
+      "id": "outside/opposite",
+      "passed": true
+    },
+    {
+      "id": "outside/red_axis",
+      "passed": true
+    },
+    {
+      "id": "outside/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "outside/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "outside/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "outside/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "outside/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "outside/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "choice/material_assignment",
+      "passed": true
+    },
+    {
+      "id": "choice/local_frame_readout",
+      "passed": true
+    },
+    {
+      "id": "choice/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "choice/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "choice/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "choice/same_radius",
+      "passed": true
+    },
+    {
+      "id": "choice/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "choice/three_guides",
+      "passed": true
+    },
+    {
+      "id": "choice/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "choice/origin",
+      "passed": true
+    },
+    {
+      "id": "choice/opposite",
+      "passed": true
+    },
+    {
+      "id": "choice/red_axis",
+      "passed": true
+    },
+    {
+      "id": "choice/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "choice/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "choice/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "choice/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "choice/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "choice/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "transfer/material_assignment",
+      "passed": true
+    },
+    {
+      "id": "transfer/local_frame_readout",
+      "passed": true
+    },
+    {
+      "id": "transfer/preview_receiver",
+      "passed": true
+    },
+    {
+      "id": "transfer/preview_geometry",
+      "passed": true
+    },
+    {
+      "id": "transfer/one_familiar_point",
+      "passed": true
+    },
+    {
+      "id": "transfer/same_radius",
+      "passed": true
+    },
+    {
+      "id": "transfer/pickup_settings",
+      "passed": true
+    },
+    {
+      "id": "transfer/three_guides",
+      "passed": true
+    },
+    {
+      "id": "transfer/guide_extents",
+      "passed": true
+    },
+    {
+      "id": "transfer/origin",
+      "passed": true
+    },
+    {
+      "id": "transfer/opposite",
+      "passed": true
+    },
+    {
+      "id": "transfer/red_axis",
+      "passed": true
+    },
+    {
+      "id": "transfer/clamped_outside",
+      "passed": false
+    },
+    {
+      "id": "transfer/unequal_dimensions",
+      "passed": true
+    },
+    {
+      "id": "transfer/pure_calculation",
+      "passed": true
+    },
+    {
+      "id": "transfer/moved_point_updates",
+      "passed": true
+    },
+    {
+      "id": "transfer/one_axis_one_channel",
+      "passed": true
+    },
+    {
+      "id": "transfer/recolour_keeps_geometry",
+      "passed": true
+    },
+    {
+      "id": "transfer/two_receivers",
+      "passed": true
+    },
+    {
+      "id": "transfer/same_returned_value",
+      "passed": true
+    },
+    {
+      "id": "transfer/independent_finish",
+      "passed": true
+    },
+    {
+      "id": "grab/near_selection",
+      "passed": true
+    },
+    {
+      "id": "grab/held",
+      "passed": true
+    },
+    {
+      "id": "grab/real_driver_moves_point",
+      "passed": true
+    },
+    {
+      "id": "grab/held_position_to_colour",
+      "passed": true
+    },
+    {
+      "id": "grab/released_and_frozen",
+      "passed": true
+    },
+    {
+      "id": "grab/released_colour_stays",
+      "passed": true
+    },
+    {
+      "id": "ownership/independent_instances",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "start/clamped_outside",
+    "red/clamped_outside",
+    "wide/clamped_outside",
+    "outside/material_assignment",
+    "outside/local_frame_readout",
+    "outside/clamped_outside",
+    "choice/clamped_outside",
+    "transfer/clamped_outside"
+  ],
+  "passed": false
+}

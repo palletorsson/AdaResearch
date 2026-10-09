@@ -1,0 +1,29 @@
+How much floor can one small decision make?
+
+The cubes gave us addresses. Now the addresses receive a motif: a square divided diagonally into black and white. Six fields lie underfoot. Before reading their names, find two that seem related. What has stayed the same between them?
+
+<!-- @tiling_principles -->
+
+Begin at TRANSLATE. Follow the diagonal through a row. The same square returns at the next address with the same orientation. A single tile has become a field through placement.
+
+At ALTERNATE, neighbouring tiles exchange black and white. At QUARTER TURN, the tile's orientation advances with its address. REFLECT reverses it in alternate columns. SHIFT ROWS displaces every other row by half a tile. Walk between these fields before trying to name the larger shapes you see. A chevron or a band may belong to several tiles together. The unit that you notice need not be the unit stored by the program.
+
+At the entrance console, press TURN MOTIF. The source triangle turns ninety degrees in all six fields. Their arrangement rules remain in place. Compare TRANSLATE with REFLECT again. One changed source can have different consequences under different rules.
+
+This is one of the instructions making those differences:
+
+```gdscript
+if rule == 2: rotation += (cx+cy)%4
+```
+
+The cell address contributes an orientation. The remainder after division by four gives four returning positions. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn.
+
+Now look at ONE EXCEPTION. Initially it repeats the unexceptional translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. Find the difference from a distance, then approach it. Does it read as a direction, an error, an opening? The code supplies a difference without deciding what it should mean to you.
+
+These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous.
+
+<!-- @ -->
+
+Black and white already make figure and ground. We have limited the palette to make the arrangement easier to compare; we have not removed perception from the experiment.
+
+Turn the exception off, then on once more. A common source makes repetition economical. A local exception needs somewhere else to be recorded. This distinction will matter when the pattern reaches a wall, a room and a body. First, let the same six rules stand up.

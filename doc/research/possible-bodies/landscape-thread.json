@@ -1,0 +1,211 @@
+{
+  "sources": [
+    {
+      "title": "en Perlin Noise",
+      "url": "https://docs.google.com/document/d/1-ezkt4cZ9ZAKsr7Ufwxu8_sML9lSkGE1ba4ow-BmQFA/edit",
+      "kind": "historical presentation draft; theoretical questions, not verified quotations"
+    },
+    {
+      "title": "Perlin Noise",
+      "url": "https://docs.google.com/document/d/1zMi54Mc2R5KfXsQ6iwol781FJSXEPtwST1ZyJNGTtEE/edit",
+      "kind": "historical project report, 2021; reported observations, not reproduced measurements"
+    }
+  ],
+  "historical": {
+    "spheres": 3600,
+    "tilt_degrees": 20,
+    "reported_size_range_units": [
+      0.1,
+      0.3
+    ],
+    "size_definition": "radius versus diameter not specified in the prose",
+    "reported_overflow_counts": {
+      "Voronoi": 0,
+      "Perlin": 45,
+      "Random": 635,
+      "Sine": 3284
+    },
+    "not_established": [
+      "observation duration",
+      "exact mesh data and generator settings",
+      "seed policy",
+      "sphere size interpretation",
+      "physics timestep, friction and restitution",
+      "release geometry and rate",
+      "overflow boundary definition",
+      "full per-run measurements"
+    ],
+    "status": "reported in the 2021 project text; not independently reproduced"
+  },
+  "protocol": {
+    "prototype_status": "standalone_physical_prototype; museum and headset pending",
+    "scene": "res://commons/testing/landscape_flow_workshop.tscn",
+    "artifact": "landscape_flow_bench",
+    "batch_per_tray": 32,
+    "active_body_cap": 128,
+    "surface_grid": [
+      20,
+      32
+    ],
+    "surface_mapping": "each sampled field min/max normalised independently to a shared peak-to-trough relief; not equal slope, spectrum or basin structure",
+    "random_surface": "independent heights at grid vertices joined into triangles; not discontinuous white noise at every real coordinate",
+    "worley_surface": "FastNoiseLite cellular, Euclidean distance, RETURN_DISTANCE, no fractal; normalised sampled F1; not cell IDs or boxes",
+    "release": "same 4 by 8 tray-local grid, normal height 1.1m, same radius/mass/zero velocity; gravity remains world vertical",
+    "outcomes": [
+      "crossed downstream outlet",
+      "still inside when observation window ended",
+      "other exit"
+    ],
+    "compare_one_at_a_time": [
+      "tilt",
+      "relief",
+      "sphere radius",
+      "field seed",
+      "observation window"
+    ],
+    "future_receivers": [
+      "player movement with declared body/collider/locomotion",
+      "line-of-sight with fixed observer and target heights",
+      "local optimiser with stated objective, sampler and stopping rule"
+    ],
+    "do_not_infer": [
+      "permanent trapping from a finite deadline",
+      "concealment from sphere retention",
+      "entropy from roughness alone",
+      "global impossibility from a local optimiser failure",
+      "generalisation from training loss alone"
+    ]
+  },
+  "route": [
+    {
+      "map": "FormFinding_Descent",
+      "sequence": "formfinding",
+      "lead_candidates": [
+        "descent_landscape_lab"
+      ],
+      "active_museum_hall": true,
+      "question": "Where does a local downhill rule take you?",
+      "carry": "One update can finish in unequal valleys from different beginnings.",
+      "next_action": "Carry the distinction between a numerical position update and physical motion into every terrain trial.",
+      "status": "Existing controlled primary; no physical tray added to this hall.",
+      "current_primary": [
+        "descent_landscape_lab"
+      ]
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "sequence": "wavefunctions",
+      "lead_candidates": [
+        "sine_wall_corridor"
+      ],
+      "active_museum_hall": true,
+      "question": "When does repetition direct or obstruct a body?",
+      "carry": "The existing visible walls suggest a passage without colliding.",
+      "next_action": "Place and verify a compact physical sine tray as a supporting comparison; keep the corridor primary. Inspect the existing basin and circulation before choosing its location.",
+      "status": "Next museum integration: the new bench is currently a standalone workshop.",
+      "current_primary": [
+        "sine_wall_corridor"
+      ]
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "sequence": "randomness",
+      "lead_candidates": [
+        "perlin_noise_bridge"
+      ],
+      "active_museum_hall": false,
+      "question": "What does a relationship between neighbouring heights change?",
+      "carry": "The existing white/Perlin column comparison makes independent and correlated samples visible.",
+      "next_action": "Repeat the sphere trial with independent vertex heights, then a shared sampled field; declare triangular versus stepped surfaces.",
+      "status": "Proposed physical receiver extension; existing comparison retained.",
+      "current_primary": [
+        "perlin_noise_bridge"
+      ]
+    },
+    {
+      "map": "Random_Space",
+      "sequence": "randomness",
+      "lead_candidates": [
+        "noise_mixer"
+      ],
+      "active_museum_hall": false,
+      "question": "What changes when variation is layered?",
+      "carry": "The current encounter is a texture mixer, despite the room name.",
+      "next_action": "Use as a cross-reference for scale and normalisation; do not promise a walkable random landscape here.",
+      "status": "Supporting conceptual handoff only.",
+      "current_primary": [
+        "noise_mixer"
+      ]
+    },
+    {
+      "map": "Noise_Space_10",
+      "sequence": "noise",
+      "lead_candidates": [
+        "noise_space"
+      ],
+      "active_museum_hall": false,
+      "question": "What becomes a route, and for which body?",
+      "carry": "The existing heightfield supplies collision, but entry and controls require placement review.",
+      "next_action": "Freeze seed/start/goal and review a real player route; compare it with sphere passage and measured line-of-sight. Add Perlin/cellular choices only through explicit tested controls.",
+      "status": "Walkability and concealment comparison proposed, not demonstrated by the bench.",
+      "current_primary": [
+        "noise_space"
+      ]
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "sequence": "noise",
+      "lead_candidates": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "active_museum_hall": true,
+      "question": "Which difference belongs to the generator and which to its presentation?",
+      "carry": "The paired displays already declare matching settings; shared seed does not mean identical features.",
+      "next_action": "Compare a continuous Worley F1 surface with a stepped/cell-labelled rendering separately. Keep normalisation and sampling visible.",
+      "status": "Existing paired primaries retained; cellular extension still proposed.",
+      "current_primary": [
+        "simplex_noise",
+        "perlin_noise"
+      ]
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "sequence": "machinelearning",
+      "lead_candidates": [
+        "loss_function_comparator"
+      ],
+      "active_museum_hall": true,
+      "question": "Who supplied the meaning of a good arrival?",
+      "carry": "The current comparator scores slope/intercept of a line under different losses.",
+      "next_action": "Return to the terrain experiment explicitly: axes now mean model parameters, height means loss. Inspect training versus held-out evaluation before promising generalisation controls.",
+      "status": "Existing loss comparator is the return point; source/runtime review still required.",
+      "current_primary": [
+        "loss_function_comparator"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "commons/maps/FormFinding_Descent/map_data.json": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+    "commons/maps/FormFinding_Descent/final.md": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b",
+    "commons/maps/WaveFunctions_Sine_Space/map_data.json": "b7310c6eec53a631405fbfef700bb08152d7f0ce8b16232cdcce05fa4d552e93",
+    "commons/maps/WaveFunctions_Sine_Space/final.md": "1b1e7f120b8a863843a6767043aef7242acef7aa61a40f24ebf4da159dd905f3",
+    "commons/maps/Random_Space_Geometry/map_data.json": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+    "commons/maps/Random_Space_Geometry/final.md": "29bf71622aa8c6b6ffb794168029e019f20a1afacef24c3a7a44ca96f7c2e8e4",
+    "commons/maps/Random_Space/map_data.json": "14af0b5e08c6da457ee0de24e1b1c2fb3c3e354f764dfaa327f77b74e9e28393",
+    "commons/maps/Random_Space/final.md": "5ee4f8d430a547742015918ba2cbe935dfd120c197d07f6c27115019bd9b466a",
+    "commons/maps/Noise_Space_10/map_data.json": "68cb9b8049c6ca853619e8cd98c02bee75f907516c4df85bf9e2e77783fe22e6",
+    "commons/maps/Noise_Space_10/final.md": "32e6473ae9e727d1de3e51cd092636990bc3758e293f8c71b143a4af4b413cbf",
+    "commons/maps/Noise_Perlin_Simplex/map_data.json": "6c275501d1a1a86deee8a59122c29ec538c1365a54d0a015c915053e92d514b7",
+    "commons/maps/Noise_Perlin_Simplex/final.md": "6a1187df667312964d0801750f125befd852ab42ecc72a373cf2f12701d6c781",
+    "commons/maps/ML_Gradient_Landscape/map_data.json": "c1cc8616e4a068f0622b68d341539b8532b93dc6f87b07fbd487621f94d7a6cb",
+    "commons/maps/ML_Gradient_Landscape/final.md": "6795babe138f9416e8699971868293245c5772360551cd46a07479f8bff9c06a",
+    "commons/artifacts/landscape_flow_bench/landscape_flow_bench.gd": "bf8800dccf725d3da2d1543338856e199b77e5a99a85e2f60902a0ca1ed88d54",
+    "commons/artifacts/landscape_flow_bench/landscape_flow_bench.tscn": "98eefd85525928367cf2ee275aa48857ea7df049bfcd7d9b92d50a695addcd9c",
+    "commons/artifacts/timing_machines/machine_stage.gd": "8b9a126debfbed74b6d9734ddef6d3595778e71d142a757c2d3ce1f5e6097925",
+    "commons/artifacts/registry/landscape_flow_bench.json": "ec45136983269c15e6a4d438cab5f1c23aeb959239605452fba6318dec46fa44",
+    "commons/testing/landscape_flow_workshop.gd": "ab62ffba8b4f6210c2ada18bd96ccc9b0dd0a1af07c3c523e3c51c93bd852846",
+    "commons/testing/landscape_flow_workshop.tscn": "d7fe0d49d0c82e82a5311b6f5b84db5ba439a9598cb1cf9ef19b963d6d92a9db",
+    "commons/testing/probe_landscape_flow.gd": "11507daadcfb4e8886a00b5a9cf782b592f3a5d5cf2f96c8d7406d7011043aba"
+  }
+}

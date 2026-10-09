@@ -1,0 +1,16 @@
+{
+  "map": "Point_Trace",
+  "status": "verified",
+  "predecessor": "point-lines",
+  "provenance": "The complete printed trace.gd continues the exact tested Lines source. It retains the original point, shape construction, coordinate readout and supplied renderer, removes the second endpoint and live single segment, and records accepted local positions. This is a continuation of source code in the learner’s working scene; it does not transfer an in-progress museum session.",
+  "brief": {
+    "bring": "The tested Lines script and its supplied renderer in the learner’s working scene.",
+    "make": "One held point records an ordered sequence of positions, with visible segments joining adjacent samples.",
+    "given": "Configured XR hands, the same unit-scale study, and the unchanged supplied line_skin.gd renderer.",
+    "build": "Keep the original point and readout; remove endpoint B and the live single relation; append local positions to an array when an if condition accepts the distance from the last saved sample; draw adjacent pairs with a for loop.",
+    "check": "Stationary and short movement add no sample; enough accumulated movement does; stored positions remain ordered; the segment count follows the accepted positions; pickup and release still use the original point.",
+    "later": "Grid will reuse positions and relations. It has no assembled student state yet."
+  },
+  "carry": "The original pickable point, its coordinate readout, an ordered array of accepted local positions and segments drawn between adjacent entries.",
+  "nextStatus": "Grid can build on stored positions and repeated relations. No Grid student code or native evidence has been assembled."
+}

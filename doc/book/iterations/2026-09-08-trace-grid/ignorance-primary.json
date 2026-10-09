@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-08",
+  "room": "Primitives_Ignorance",
+  "primary": [
+    "sphere_low",
+    "sphere_mid",
+    "sphere_high",
+    "sphere",
+    "budget_of_smoothness"
+  ],
+  "improvements": [
+    "Counter exposes actual mesh entries and area-tolerance counts through separate count and edge controls",
+    "Counter relocated to clear central bay; raised spheres and readable tilted tags",
+    "Existing sphere pairs compare identical geometry with and without an actual-index overlay",
+    "Book, tutorial and critical text distinguish counted entries, measurable surfaces, appearance and runtime cost"
+  ],
+  "interaction_checks": {
+    "checks": 38,
+    "failures": [],
+    "invoice": [
+      {
+        "rings": 2,
+        "segments": 4,
+        "submitted": 24,
+        "surface_triangles": 16
+      },
+      {
+        "rings": 4,
+        "segments": 8,
+        "submitted": 80,
+        "surface_triangles": 64
+      },
+      {
+        "rings": 8,
+        "segments": 16,
+        "submitted": 288,
+        "surface_triangles": 256
+      },
+      {
+        "rings": 32,
+        "segments": 64,
+        "submitted": 4224,
+        "surface_triangles": 4096
+      }
+    ],
+    "scope": "Pointer events, actual mesh arrays and configured museum counter stamping; full-room/headset legibility and routes unverified."
+  },
+  "preview": "ada_run/ignorance_primary/preview.png",
+  "content_checks": {
+    "book_primary_agreement": true
+  },
+  "reusable_pattern": "Read measurements and explanatory overlays from the artifact's generated data. State the measurement scope and tolerance; let a visitor judge before revealing the metric. Paired objects can hold geometry constant while varying presentation.",
+  "remaining": "Full-museum/headset pass for counter approach, screen reach and near/far sphere comparisons. No frame-time claim."
+}

@@ -1,0 +1,84 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "one shared wall identity in this hall",
+      "passed": true
+    },
+    {
+      "name": "identity has both requested labels",
+      "passed": true
+    },
+    {
+      "name": "wall title is ENDLESS MUSEUM",
+      "passed": true
+    },
+    {
+      "name": "wall subtitle is always another room",
+      "passed": true
+    },
+    {
+      "name": "shared identity has no collision objects",
+      "passed": true
+    },
+    {
+      "name": "lettering uses a bundled font",
+      "passed": true
+    },
+    {
+      "name": "wall face can contain the lettering",
+      "passed": true
+    },
+    {
+      "name": "identity records a unit wall normal",
+      "passed": true
+    },
+    {
+      "name": "lettering faces into the room",
+      "passed": true
+    },
+    {
+      "name": "lettering has a real wall immediately behind it",
+      "passed": true
+    },
+    {
+      "name": "identity can be approached on the hall floor",
+      "passed": true
+    },
+    {
+      "name": "Title is visible from supported visitor approach",
+      "passed": true
+    },
+    {
+      "name": "Tagline is visible from supported visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-lettering",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "identity": {
+      "font": "res://commons/font/cormorant-garamond/CormorantGaramond.ttf",
+      "position": [
+        25.9820003509521,
+        3.09999990463257,
+        2.5
+      ],
+      "wall_normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "wall_width": 3.0
+    }
+  },
+  "passed": true,
+  "room": "Point_Lines",
+  "scope": "Real Endless Museum scenes; object geometry/materials, wall lettering and camera captures. No headset playtest or learner acceptance claimed."
+}

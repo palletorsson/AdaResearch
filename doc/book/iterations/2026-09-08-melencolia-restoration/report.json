@@ -1,0 +1,2377 @@
+{
+	"bodies": [
+		{
+			"bounds_bottom": 0.850000023841858,
+			"bounds_size": [
+				3.05999970436096,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				4.5,
+				1.70000004768372,
+				-2.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				6.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_bottom": 1.17000007629395,
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.186499997973442,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				0.139999985694885,
+				0.0,
+				1.59999990463257
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation_degrees": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation_degrees": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_bottom": -0.808000028133392,
+			"bounds_size": [
+				1.01599979400635,
+				1.01600003242493,
+				1.01599991321564
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				4.0,
+				0.0,
+				-2.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_bottom": 3.40451383590698,
+			"bounds_size": [
+				1.0,
+				1.19999980926514,
+				0.0
+			],
+			"kind": "",
+			"map_cell": [
+				3,
+				2
+			],
+			"position": [
+				3.5,
+				4.0,
+				2.5
+			],
+			"rotation_degrees": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "code_display"
+		},
+		{
+			"bounds_bottom": 0.800000071525574,
+			"bounds_size": [
+				0.300000190734863,
+				2.79999971389771,
+				2.30000019073486
+			],
+			"kind": "",
+			"map_cell": [
+				3,
+				3
+			],
+			"position": [
+				3.5,
+				2.20000004768372,
+				3.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "bigframe"
+		},
+		{
+			"bounds_bottom": 0.639999985694885,
+			"bounds_size": [
+				1.0,
+				1.32533490657806,
+				0.697013854980469
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				3
+			],
+			"position": [
+				5.5,
+				0.800000011920929,
+				3.5
+			],
+			"rotation_degrees": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "snap_pyramid_puzzle"
+		},
+		{
+			"bounds_bottom": -0.5,
+			"bounds_size": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"kind": "",
+			"map_cell": [
+				4,
+				5
+			],
+			"position": [
+				4.5,
+				0.0,
+				5.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "prism_block"
+		},
+		{
+			"bounds_bottom": 0.00749999983236194,
+			"bounds_size": [
+				0.840000033378601,
+				0.95053505897522,
+				0.840000152587891
+			],
+			"kind": "",
+			"map_cell": [
+				1,
+				6
+			],
+			"position": [
+				1.5,
+				0.0,
+				6.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.599999904632568,
+				0.799999952316284,
+				0.600000381469727
+			],
+			"kind": "",
+			"map_cell": [
+				3,
+				9
+			],
+			"position": [
+				3.5,
+				1.0,
+				9.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pyramid"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.600000381469727,
+				0.799999952316284,
+				0.600000381469727
+			],
+			"kind": "",
+			"map_cell": [
+				7,
+				9
+			],
+			"position": [
+				7.5,
+				1.0,
+				9.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pyramid"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				10
+			],
+			"position": [
+				5.5,
+				1.25,
+				10.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "cube_scene"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"kind": "",
+			"map_cell": [
+				4,
+				11
+			],
+			"position": [
+				4.5,
+				1.25,
+				11.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "cube_scene"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.800000190734863,
+				2.79999995231628,
+				0.799999237060547
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				11
+			],
+			"position": [
+				5.5,
+				1.0,
+				11.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pyramidlong"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"kind": "",
+			"map_cell": [
+				6,
+				11
+			],
+			"position": [
+				6.5,
+				1.25,
+				11.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "cube_scene"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				12
+			],
+			"position": [
+				5.5,
+				1.25,
+				12.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "cube_scene"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.599999904632568,
+				0.799999952316284,
+				0.600000381469727
+			],
+			"kind": "",
+			"map_cell": [
+				3,
+				13
+			],
+			"position": [
+				3.5,
+				1.0,
+				13.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pyramid"
+		},
+		{
+			"bounds_bottom": 1.0,
+			"bounds_size": [
+				0.600000381469727,
+				0.799999952316284,
+				0.600000381469727
+			],
+			"kind": "",
+			"map_cell": [
+				7,
+				13
+			],
+			"position": [
+				7.5,
+				1.0,
+				13.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pyramid"
+		},
+		{
+			"bounds_bottom": 4.75,
+			"bounds_size": [
+				4.30193758010864,
+				1.34999990463257,
+				4.39971160888672
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				18
+			],
+			"position": [
+				5.5,
+				6.0,
+				18.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "diamondtoruscollection"
+		},
+		{
+			"bounds_bottom": 1.77499985694885,
+			"bounds_size": [
+				2.73069906234741,
+				4.12839317321777,
+				3.04827880859375
+			],
+			"kind": "",
+			"map_cell": [
+				5,
+				19
+			],
+			"position": [
+				5.5,
+				2.0,
+				19.5
+			],
+			"rotation_degrees": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "durer_scene"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				6.28000068664551,
+				3.41199994087219,
+				0.409999847412109
+			],
+			"kind": "gate",
+			"map_cell": [],
+			"position": [
+				7.5,
+				0.0,
+				-3.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:primitives melencolia"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				2.0,
+				1.98000001907349,
+				6.99100017547607
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				8.00899982452393
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				25.9909992218018
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				0.00899982452392578
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				12.9910001754761,
+				1.58000004291534,
+				9.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				6.99100017547607,
+				1.58000004291534,
+				32.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				25.9909992218018
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				4.00899982452393,
+				1.58000004291534,
+				32.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				3.00899982452393,
+				0.180000066757202,
+				8.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 0.0,
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"kind": "showing",
+			"map_cell": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				13.0
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_bottom": 3.4300000667572,
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0630002021789551
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				7.5,
+				3.51999998092651,
+				-4.0
+			],
+			"rotation_degrees": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_bottom": 2.91000008583069,
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				7.5,
+				3.0,
+				34.0
+			],
+			"rotation_degrees": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_bottom": 2.31000018119812,
+			"bounds_size": [
+				0.0780000686645508,
+				0.179999828338623,
+				0.18000003695488
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				5.0,
+				2.40000009536743,
+				-0.5
+			],
+			"rotation_degrees": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "emergency_button"
+		},
+		{
+			"bounds_bottom": 2.05920004844666,
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_bottom": 0.810000002384186,
+			"bounds_size": [
+				0.0999999642372131,
+				1.34000015258789,
+				2.5
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				1.0,
+				0.899999976158142,
+				17.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "whiteboard"
+		},
+		{
+			"bounds_bottom": 1.11539852619171,
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"kind": "prop",
+			"map_cell": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_bottom": 4.62799978256226,
+			"bounds_size": [
+				0.950000047683716,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				3.75,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_bottom": 4.32000017166138,
+			"bounds_size": [
+				0.180001258850098,
+				0.0799999237060547,
+				35.5
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				6.5,
+				4.3600001335144,
+				18.0
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_bottom": -0.0500000007450581,
+			"bounds_size": [
+				1.0,
+				0.0500000007450581,
+				1.0
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				6.5,
+				0.0,
+				1.5
+			],
+			"rotation_degrees": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "floor_grate"
+		},
+		{
+			"bounds_bottom": 0.550000011920929,
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616199970245361
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				1.27999997138977,
+				0.850000023841858,
+				2.5
+			],
+			"rotation_degrees": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_bottom": 0.420000016689301,
+			"bounds_size": [
+				0.971956014633179,
+				1.5048816204071,
+				0.863533973693848
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				2.5,
+				0.419999986886978,
+				10.5
+			],
+			"rotation_degrees": [
+				0.0,
+				210.879837036133,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_bottom": 0.419999957084656,
+			"bounds_size": [
+				1.17088413238525,
+				1.66000020503998,
+				0.433362007141113
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				8.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation_degrees": [
+				0.0,
+				185.902603149414,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_bottom": 0.419999986886978,
+			"bounds_size": [
+				0.997989654541016,
+				1.32081770896912,
+				0.996082305908203
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				11.5,
+				0.419999986886978,
+				16.5
+			],
+			"rotation_degrees": [
+				0.0,
+				154.224563598633,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_bottom": 0.419999986886978,
+			"bounds_size": [
+				1.38923501968384,
+				1.57996392250061,
+				1.38923645019531
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				7.5,
+				0.419999986886978,
+				33.5
+			],
+			"rotation_degrees": [
+				0.0,
+				198.257064819336,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_bottom": 0.64000004529953,
+			"bounds_size": [
+				0.172000005841255,
+				1.15999984741211,
+				0.608127593994141
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				0.0920000001788139,
+				1.22000002861023,
+				-2.5
+			],
+			"rotation_degrees": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		},
+		{
+			"bounds_bottom": 1.16999995708466,
+			"bounds_size": [
+				0.17724996805191,
+				0.5,
+				0.659000039100647
+			],
+			"kind": "furniture",
+			"map_cell": [],
+			"position": [
+				0.0820000022649765,
+				1.41999995708466,
+				-0.5
+			],
+			"rotation_degrees": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		}
+	],
+	"durer_meshes": [
+		{
+			"bottom": 1.77499985694885,
+			"path": "Polyhedron",
+			"position": [
+				6.75,
+				2.59999990463257,
+				19.8999996185303
+			],
+			"size": [
+				1.4213981628418,
+				1.65000009536743,
+				1.45675277709961
+			]
+		},
+		{
+			"bottom": 2.0,
+			"path": "Sphere",
+			"position": [
+				5.90000009536743,
+				2.17499995231628,
+				18.8999996185303
+			],
+			"size": [
+				0.349308967590332,
+				0.349999904632568,
+				0.349308013916016
+			]
+		},
+		{
+			"bottom": 2.82999992370605,
+			"path": "MagicSquare/@MeshInstance3D@732",
+			"position": [
+				5.0,
+				3.09999990463257,
+				18.8125
+			],
+			"size": [
+				0.539999961853027,
+				0.539999961853027,
+				0.0149993896484375
+			]
+		},
+		{
+			"bottom": 3.23999977111816,
+			"path": "MagicSquare/@MeshInstance3D@734",
+			"position": [
+				5.19500017166138,
+				3.29499983787537,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.23749995231628,
+			"path": "MagicSquare/@MeshInstance3D@735",
+			"position": [
+				5.19500017166138,
+				3.29499983787537,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.23999977111816,
+			"path": "MagicSquare/@MeshInstance3D@737",
+			"position": [
+				5.06500005722046,
+				3.29499983787537,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.23749995231628,
+			"path": "MagicSquare/@MeshInstance3D@738",
+			"position": [
+				5.06500005722046,
+				3.29499983787537,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.23999977111816,
+			"path": "MagicSquare/@MeshInstance3D@740",
+			"position": [
+				4.93499994277954,
+				3.29499983787537,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.23749995231628,
+			"path": "MagicSquare/@MeshInstance3D@741",
+			"position": [
+				4.93499994277954,
+				3.29499983787537,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.23999977111816,
+			"path": "MagicSquare/@MeshInstance3D@743",
+			"position": [
+				4.80499982833862,
+				3.29499983787537,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.23749995231628,
+			"path": "MagicSquare/@MeshInstance3D@744",
+			"position": [
+				4.80499982833862,
+				3.29499983787537,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.10999989509583,
+			"path": "MagicSquare/@MeshInstance3D@746",
+			"position": [
+				5.19500017166138,
+				3.16499996185303,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.10750007629395,
+			"path": "MagicSquare/@MeshInstance3D@747",
+			"position": [
+				5.19500017166138,
+				3.16499996185303,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.10999989509583,
+			"path": "MagicSquare/@MeshInstance3D@749",
+			"position": [
+				5.06500005722046,
+				3.16499996185303,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.10750007629395,
+			"path": "MagicSquare/@MeshInstance3D@750",
+			"position": [
+				5.06500005722046,
+				3.16499996185303,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.10999989509583,
+			"path": "MagicSquare/@MeshInstance3D@752",
+			"position": [
+				4.93499994277954,
+				3.16499996185303,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.10750007629395,
+			"path": "MagicSquare/@MeshInstance3D@753",
+			"position": [
+				4.93499994277954,
+				3.16499996185303,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 3.10999989509583,
+			"path": "MagicSquare/@MeshInstance3D@755",
+			"position": [
+				4.80499982833862,
+				3.16499996185303,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 3.10750007629395,
+			"path": "MagicSquare/@MeshInstance3D@756",
+			"position": [
+				4.80499982833862,
+				3.16499996185303,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.97999978065491,
+			"path": "MagicSquare/@MeshInstance3D@758",
+			"position": [
+				5.19500017166138,
+				3.03499984741211,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.97749996185303,
+			"path": "MagicSquare/@MeshInstance3D@759",
+			"position": [
+				5.19500017166138,
+				3.03499984741211,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.97999978065491,
+			"path": "MagicSquare/@MeshInstance3D@761",
+			"position": [
+				5.06500005722046,
+				3.03499984741211,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.97749996185303,
+			"path": "MagicSquare/@MeshInstance3D@762",
+			"position": [
+				5.06500005722046,
+				3.03499984741211,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.97999978065491,
+			"path": "MagicSquare/@MeshInstance3D@764",
+			"position": [
+				4.93499994277954,
+				3.03499984741211,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.97749996185303,
+			"path": "MagicSquare/@MeshInstance3D@765",
+			"position": [
+				4.93499994277954,
+				3.03499984741211,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.97999978065491,
+			"path": "MagicSquare/@MeshInstance3D@767",
+			"position": [
+				4.80499982833862,
+				3.03499984741211,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.97749996185303,
+			"path": "MagicSquare/@MeshInstance3D@768",
+			"position": [
+				4.80499982833862,
+				3.03499984741211,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.84999990463257,
+			"path": "MagicSquare/@MeshInstance3D@770",
+			"position": [
+				5.19500017166138,
+				2.90499997138977,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.84750008583069,
+			"path": "MagicSquare/@MeshInstance3D@771",
+			"position": [
+				5.19500017166138,
+				2.90499997138977,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.84999990463257,
+			"path": "MagicSquare/@MeshInstance3D@773",
+			"position": [
+				5.06500005722046,
+				2.90499997138977,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.84750008583069,
+			"path": "MagicSquare/@MeshInstance3D@774",
+			"position": [
+				5.06500005722046,
+				2.90499997138977,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.84999990463257,
+			"path": "MagicSquare/@MeshInstance3D@776",
+			"position": [
+				4.93499994277954,
+				2.90499997138977,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.84750008583069,
+			"path": "MagicSquare/@MeshInstance3D@777",
+			"position": [
+				4.93499994277954,
+				2.90499997138977,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.84999990463257,
+			"path": "MagicSquare/@MeshInstance3D@779",
+			"position": [
+				4.80499982833862,
+				2.90499997138977,
+				18.7999992370605
+			],
+			"size": [
+				0.109999656677246,
+				0.110000133514404,
+				0.00749969482421875
+			]
+		},
+		{
+			"bottom": 2.84750008583069,
+			"path": "MagicSquare/@MeshInstance3D@780",
+			"position": [
+				4.80499982833862,
+				2.90499997138977,
+				18.8024997711182
+			],
+			"size": [
+				0.114999771118164,
+				0.114999771118164,
+				0.00400161743164063
+			]
+		},
+		{
+			"bottom": 2.22463369369507,
+			"path": "Compass/Leg1",
+			"position": [
+				5.19999980926514,
+				2.29999995231628,
+				19.3500003814697
+			],
+			"size": [
+				0.243076324462891,
+				0.150732517242432,
+				0.08856201171875
+			]
+		},
+		{
+			"bottom": 2.22463369369507,
+			"path": "Compass/Leg2",
+			"position": [
+				5.19999980926514,
+				2.29999995231628,
+				19.3500003814697
+			],
+			"size": [
+				0.243076324462891,
+				0.150732517242432,
+				0.08856201171875
+			]
+		},
+		{
+			"bottom": 2.1511664390564,
+			"path": "Ladder/RailL",
+			"position": [
+				6.65295124053955,
+				4.0272798538208,
+				21.66455078125
+			],
+			"size": [
+				1.50066661834717,
+				3.75222682952881,
+				0.218147277832031
+			]
+		},
+		{
+			"bottom": 2.09660673141479,
+			"path": "Ladder/RailR",
+			"position": [
+				6.5470495223999,
+				3.9727201461792,
+				21.33544921875
+			],
+			"size": [
+				1.50066661834717,
+				3.75222682952881,
+				0.218147277832031
+			]
+		},
+		{
+			"bottom": 2.55895256996155,
+			"path": "Ladder/Rungs/Rung1",
+			"position": [
+				7.14053249359131,
+				2.60197234153748,
+				21.5578327178955
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 3.02496194839478,
+			"path": "Ladder/Rungs/Rung2",
+			"position": [
+				6.96035480499268,
+				3.0679817199707,
+				21.5385551452637
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 3.49097108840942,
+			"path": "Ladder/Rungs/Rung3",
+			"position": [
+				6.7801775932312,
+				3.53399085998535,
+				21.5192775726318
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 3.95698022842407,
+			"path": "Ladder/Rungs/Rung4",
+			"position": [
+				6.60000038146973,
+				4.0,
+				21.5
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 4.42298936843872,
+			"path": "Ladder/Rungs/Rung5",
+			"position": [
+				6.41982316970825,
+				4.46600914001465,
+				21.4807224273682
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 4.88899850845337,
+			"path": "Ladder/Rungs/Rung6",
+			"position": [
+				6.23964595794678,
+				4.9320182800293,
+				21.4614448547363
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 5.35500764846802,
+			"path": "Ladder/Rungs/Rung7",
+			"position": [
+				6.05946826934814,
+				5.39802742004395,
+				21.4421672821045
+			],
+			"size": [
+				0.136969566345215,
+				0.0860395431518555,
+				0.338520050048828
+			]
+		},
+		{
+			"bottom": 3.09999990463257,
+			"path": "Hourglass/BulbTop",
+			"position": [
+				6.09999990463257,
+				3.14999985694885,
+				19.8999996185303
+			],
+			"size": [
+				0.0995731353759766,
+				0.0999999046325684,
+				0.0995750427246094
+			]
+		},
+		{
+			"bottom": 3.0,
+			"path": "Hourglass/BulbBot",
+			"position": [
+				6.09999990463257,
+				3.04999995231628,
+				19.8999996185303
+			],
+			"size": [
+				0.0995731353759766,
+				0.0999999046325684,
+				0.0995750427246094
+			]
+		},
+		{
+			"bottom": 3.42499995231628,
+			"path": "Bell/BellMesh",
+			"position": [
+				6.09999990463257,
+				3.5,
+				19.0
+			],
+			"size": [
+				0.180000305175781,
+				0.150000095367432,
+				0.180000305175781
+			]
+		},
+		{
+			"bottom": 2.74399995803833,
+			"path": "Scales/Beam",
+			"position": [
+				5.75,
+				2.75,
+				19.75
+			],
+			"size": [
+				0.225000381469727,
+				0.0120000839233398,
+				0.0120010375976563
+			]
+		},
+		{
+			"bottom": 2.56875014305115,
+			"path": "Scales/PanL",
+			"position": [
+				5.8600001335144,
+				2.57500004768372,
+				19.75
+			],
+			"size": [
+				0.100000381469727,
+				0.0124998092651367,
+				0.0999984741210938
+			]
+		},
+		{
+			"bottom": 2.56875014305115,
+			"path": "Scales/PanR",
+			"position": [
+				5.6399998664856,
+				2.57500004768372,
+				19.75
+			],
+			"size": [
+				0.100000381469727,
+				0.0124998092651367,
+				0.0999984741210938
+			]
+		}
+	],
+	"durer_native_geometry_note": "The Polyhedron child reaches 0.225m below the tableau origin at scale0.5; Sphere base sits at the origin. Whole-tableau lift would float the sphere. Native composition retained.",
+	"failures": [],
+	"map": "Primitives_Melencolia",
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "court top",
+			"top": 0.999999225139618,
+			"x": 4.5,
+			"z": 9.5
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "raised bridge",
+			"top": 0.999999225139618,
+			"x": 5.5,
+			"z": 15.5
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "Durer platform top",
+			"top": 1.99999928474426,
+			"x": 3.2,
+			"z": 22.7
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "flat east bypass",
+			"top": 0.000000379979610443115,
+			"x": 10.5,
+			"z": 20.5
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Wedge_2_15/StaticBody3D",
+			"hit": true,
+			"passed": true,
+			"tag": "lower ramp midpoint",
+			"top": 0.75,
+			"x": 2.5,
+			"z": 11.5
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Wedge_5_21/StaticBody3D",
+			"hit": true,
+			"passed": true,
+			"tag": "upper ramp midpoint",
+			"top": 1.75,
+			"x": 5.5,
+			"z": 17.5
+		}
+	],
+	"scene": "endless_museum.tscn with output-only script path substitutions",
+	"scope": "Actual museum geometry, artifact placements and physics probes; no human or VR walkthrough claim.",
+	"shots": [
+		"res://ada_run/melencolia_restore/probe_runtime/court_from_walk.png",
+		"res://ada_run/melencolia_restore/probe_runtime/court_and_Durer.png",
+		"res://ada_run/melencolia_restore/probe_runtime/Durer_from_bypass.png"
+	],
+	"source_manifest": "res://ada_run/melencolia_restore/probe_runtime/source_manifest.json",
+	"walks": [
+		{
+			"end": [
+				3.50239562988281,
+				1.0008350610733,
+				11.5000791549683
+			],
+			"end_collisions": [
+				{
+					"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"position": [
+						3.50239562988281,
+						1.0,
+						11.5000791549683
+					]
+				}
+			],
+			"horizontal_error": 0.0976043120026588,
+			"passed": true,
+			"tag": "enter court via west ramp",
+			"target": [
+				3.6,
+				1.0,
+				11.5
+			]
+		},
+		{
+			"end": [
+				5.49990558624268,
+				2.00008463859558,
+				18.1038818359375
+			],
+			"end_collisions": [
+				{
+					"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"position": [
+						5.49990558624268,
+						2.0,
+						18.1038818359375
+					]
+				}
+			],
+			"horizontal_error": 0.0961189791560173,
+			"passed": true,
+			"tag": "climb bridge into Durer platform",
+			"target": [
+				5.5,
+				2.0,
+				18.2
+			]
+		},
+		{
+			"end": [
+				10.0,
+				0.00093565508723259,
+				24.4333038330078
+			],
+			"end_collisions": [
+				{
+					"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"position": [
+						10.0,
+						0.0,
+						24.4333038330078
+					]
+				}
+			],
+			"horizontal_error": 0.0666961669921875,
+			"passed": true,
+			"tag": "east bypass past both platforms",
+			"target": [
+				10.0,
+				0.0,
+				24.5
+			]
+		},
+		{
+			"end": [
+				6.59997510910034,
+				0.000170901417732239,
+				24.5
+			],
+			"end_collisions": [
+				{
+					"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"position": [
+						6.59997510910034,
+						0.0,
+						24.5
+					]
+				}
+			],
+			"horizontal_error": 0.0999751091003418,
+			"passed": true,
+			"tag": "turn behind Durer to exit",
+			"target": [
+				6.5,
+				0.0,
+				24.5
+			]
+		},
+		{
+			"end": [
+				6.5,
+				0.00006103515625,
+				26.4333038330078
+			],
+			"end_collisions": [
+				{
+					"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"position": [
+						6.5,
+						0.0,
+						26.4333038330078
+					]
+				}
+			],
+			"horizontal_error": 0.0666961669921875,
+			"passed": true,
+			"tag": "reach the museum exit",
+			"target": [
+				6.5,
+				0.0,
+				26.5
+			]
+		}
+	],
+	"wedges": [
+		{
+			"name": "Wedge_2_15",
+			"position": [
+				2.5,
+				0.5,
+				11.5
+			]
+		},
+		{
+			"name": "Wedge_5_21",
+			"position": [
+				5.5,
+				1.5,
+				17.5
+			]
+		}
+	]
+}

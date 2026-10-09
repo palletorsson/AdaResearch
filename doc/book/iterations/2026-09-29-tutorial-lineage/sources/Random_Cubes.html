@@ -1,0 +1,548 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Cubes · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Cubes">← Tutorial lineage</a></p><h1>Random Cubes</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Cubes/final.md">Raw captured source</a></p><pre># One throw and many throws
+
+How much can one throw tell you about a die?
+
+&lt;!-- @dice_throw --&gt;
+
+A white die lies on green felt, six pips up. Pick it up and throw it. It may keep rocking after it lands. When one face holds the top, the glass records its number and orange balls rain onto the table: sixteen for each pip. A six receives a small spectacle.
+
+The reward has a rule. It does not make the throw more earned. For a moment, though, its abundance can make this outcome feel like the one the room wanted.
+
+No random number decides the face. The program draws random values to scatter and tint the reward, but reads the die from its orientation. How your hand let go, the cube&#x27;s shape and its contact with the felt have already done their work.
+
+Return it with **RESET** and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. A cube&#x27;s symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.
+
+The glass keeps the throws after their little storms have passed. Each face has a bar and a percentage; the running mean stands beside the model&#x27;s 3.50. A short sequence can repeat one face or miss another without settling whether the die is fair.
+
+Follow one face&#x27;s share through several throws. Another face makes that share fall. The mean answers a different question: an outcome above the current mean pulls it up; one below pulls it down. Neither movement alone tells us that the die became fairer.
+
+If all six faces were equally likely, their mean would be 3.5. No side of the cube bears that number. It belongs to a distribution, while the observed mean belongs to the throws made so far.
+
+The glass cannot tell you whether your last three throws were sixes. It keeps frequencies and loses order, along with every landing position. **RESET** returns the die while keeping this record; **CLEAR** empties it. The instrument has decided what a throw leaves behind.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @paired_dice_column --&gt;
+
+Two more dice wait in separate trays, one blue, one pink. Throw each into its own tray. A column stands up behind them when both results have arrived. Count its blue blocks, then its pink ones. The faces have become parts of a height.
+
+Three and four make seven. Five and two make seven too. Can you bring the column back with different ingredients? The dice need not give you the pair you want. On the shelf, small copies keep the last twelve pairs in order, each colour still carrying its share. Two columns can reach the same level without looking the same.
+
+Look only at their tops. Now look at the join between the colours. Each view lets you call something different the same. A total keeps an answer and gives up how it was assembled; the colours let some of that difference return.
+
+How many pairs could make two? How many could make seven? Keep the order of the dice: blue one and pink six is another pair from blue six and pink one. If every face were equally likely and the two throws independent, seven would have six routes out of thirty-six, while two would have one. The middle would occur more often without either die preferring it. Your throws may not yet make that shape. Their conditions still matter.
+
+The shelf eventually lets its oldest pair go. The total count continues. A history needs room; this one has been given twelve places. The larger column waits while you begin again. Returning a loose die adds nothing to it.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @continuing_die --&gt;
+
+## The six that does not finish
+
+A single die waits beside another column base. Throw it into the felt tray. Its number becomes a section of the column, one thin block for each pip. A three leaves three blocks and closes the chain. A six leaves six, but the flag stays raised. Throw again.
+
+This time the first section remains. Another six gives you twelve and another turn. A three after that makes fifteen and closes the chain. The small sculpture beside your tray keeps this example visible: six, six, three. Its label says WORKED EXAMPLE. It is there to show a possibility, not to tell you what you threw.
+
+The first die in this hall made a six into a larger rain of rewards. Here the same face does something else. It keeps an instruction open. Nothing inside the cube knows that six means again:
+
+```gdscript
+total += face
+closed = face != 6
+```
+
+The number enters twice: once as an amount, once as a condition. From the same six faces, the rule can build a body taller than any single throw. Look at the joins in the column. Its height has a history, and the sections still let you read it.
+
+The amber lid marks this display&#x27;s limit: five throws. If the fifth is another six, the case reads CHAIN UNFINISHED. The rule would permit more; this apparatus has run out of room. That is a different ending from a die landing three.
+
+RETURN DIE recovers it without adding a throw. NEW CHAIN clears the live column. Until then, a closed or limited chain stays as it is even if you throw again. Before clearing it, walk around what those few landings have made. Where did the permission to keep growing reside?
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @coin_toss --&gt;
+
+Across from the first die, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out. Read the ribbon as steps, heads forward and tails back: where would a walker be now, and how far has it been? The simplest random walk is a coin on a beam; two rooms on, a block on a rail takes it.
+
+Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing.
+
+The gauges do not predict the next outcome. They let us see something the tally discards: every toss had conditions. Only the latest release keeps its measurements.
+
+Beside the count stands 0.5000. In the last room, a number could set the printer&#x27;s odds. This number sets nothing. It states the model&#x27;s expectation, waiting beside what happened.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @random_object_spawner --&gt;
+
+Further in, wooden cubes appear above a waist-high block, at two points side by side. Each arrival knocks against the growing heap. You can pick a cube up.
+
+Each point keeps at most twenty. After that, a new arrival makes one of its cubes disappear, chosen at random—even the one in your hand. The heap keeps changing without a record. What you were holding is no exception to its rule.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @random_edge_profile --&gt;
+
+Beyond the block, forty-eight red slabs form eight rows. Their top edges rise and fall, but each metre-wide slab returns to the same height at both ends. Only the three points between those ends are drawn at random, within narrow limits.
+
+One slab offers one outcome. Along a row, a regularity becomes visible: however the middle wanders, the joins keep their level. The field lets us inspect many draws together, rather than wait for them one by one. What chance may touch was settled before it ran.
+
+The ridges are drawn afresh when the hall is built. They do not stop your body. You can walk through an edge that the eye reads as a fence.
+
+&lt;!-- @ --&gt;
+
+The die and the coin gathered throws into different records. The paired dice let the same height keep different ingredients. The heap kept losing pieces. The field held one arrangement still. In the next room every piece remains, and what accumulates is its turning. We will have to look for a history that has left no trail.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Cubes/tutorial.md">Raw captured source</a></p><pre># Random Cubes
+
+Each cube remembers its coin flips. Build the arena where form encodes chance.
+
+Declare the random cube.
+
+```gdscript
+class_name RandomEdgeCube
+extends Node3D
+
+@export var edge_chance: float = 0.5
+var edge_profile: PackedInt32Array = PackedInt32Array()
+```
+
+A cube has 12 edges. Each edge is flipped on or off by a chance. The profile records the result.
+
+Flip the edges.
+
+```gdscript
+func flip_edges() -&gt; void:
+    edge_profile.clear()
+    for i in 12:
+        edge_profile.append(1 if randf() &lt; edge_chance else 0)
+```
+
+Twelve flips per cube. Each flip decides whether that edge is beveled, hollowed, or plain. The profile is the cube&#x27;s signature.
+
+Build the cube mesh from the profile.
+
+```gdscript
+func build_mesh() -&gt; void:
+    var st := SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for i in 12:
+        if edge_profile[i] == 1:
+            _add_beveled_edge(st, i)
+        else:
+            _add_plain_edge(st, i)
+    mesh_instance.mesh = st.commit()
+```
+
+The mesh assembles from per-edge rules. Beveled edges get a small chamfer; plain edges stay sharp. The visual is the profile made stone.
+
+Place a field of cubes.
+
+```gdscript
+func populate_field() -&gt; void:
+    for x in 6:
+        for y in 6:
+            var cube := preload(&quot;res://commons/artifacts/randomness/random_edge_cube.tscn&quot;).instantiate()
+            cube.position = Vector3(x * 1.5, 0.0, y * 1.5)
+            cube.flip_edges()
+            cube.build_mesh()
+            add_child(cube)
+```
+
+36 cubes, 36 unique profiles. No two cubes match. The grid makes differences legible side by side.
+
+Highlight the current cube on inspection.
+
+```gdscript
+func highlight(cube: Node3D, active: bool) -&gt; void:
+    cube.material_override.emission = Color.WHITE if active else Color.BLACK
+    cube.material_override.emission_energy_multiplier = 0.3 if active else 0.0
+```
+
+Inspection tints the cube. The learner can see which one they are reading.
+
+Readout the profile.
+
+```gdscript
+func readout(cube: RandomEdgeCube, label: Label3D) -&gt; void:
+    label.text = &quot;profile: &quot; + str(cube.edge_profile)
+```
+
+A label shows the 12-bit profile beside the cube. The number is the cube; the cube is the number.
+
+Offer a dice throw.
+
+```gdscript
+func _on_dice_thrown(face: int) -&gt; void:
+    edge_chance = float(face) / 6.0
+    for cube in cubes:
+        cube.flip_edges()
+        cube.build_mesh()
+```
+
+Throwing a die changes the edge chance for the whole field. The population responds to a single roll. Randomness scales.
+
+You have seen form encoding chance. The next map, Random Rotate, moves randomness into three axes.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Save a profile to disk.
+
+```gdscript
+func save_profile(cube: RandomEdgeCube, slot: int) -&gt; void:
+    UserSettings.set_value(&quot;cubes/slot_%d&quot; % slot, cube.edge_profile)
+```
+
+Any profile can be saved and reloaded later. Randomness becomes archivable.
+
+More rolls produce more varied profiles. The field reads richer over time.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Cubes/technical.md">Raw captured source</a></p><pre>&gt; Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+
+# Random_Cubes - Technical Tutorial
+
+## Randomizing Geometry
+
+The `random_edge_profile` element applies randomness to mesh geometry, not just transforms.
+
+### Edge Profile Randomization
+
+```gdscript
+extends MeshInstance3D
+
+@export var edge_variance: float = 0.3
+@export var seed_offset: int = 0
+
+func _ready():
+    randomize_edges()
+
+func randomize_edges():
+    var rng = RandomNumberGenerator.new()
+    rng.seed = hash(global_position) + seed_offset  # Deterministic per-position
+
+    # Get mesh data
+    var mesh_data = ArrayMesh.new()
+    var vertices = get_base_cube_vertices()
+
+    # Randomize each vertex along edges
+    for i in range(vertices.size()):
+        var v = vertices[i]
+        # Only perturb edge vertices (not faces)
+        if is_edge_vertex(v):
+            v += Vector3(
+                rng.randf_range(-edge_variance, edge_variance),
+                rng.randf_range(-edge_variance, edge_variance),
+                rng.randf_range(-edge_variance, edge_variance)
+            )
+        vertices[i] = v
+
+    # Rebuild mesh with randomized vertices
+    rebuild_mesh(mesh_data, vertices)
+    mesh = mesh_data
+```
+
+### Position-Based Seeding
+
+The key technique: **seed from position** for deterministic yet varied results.
+
+```gdscript
+# Each cube gets unique but reproducible randomness
+rng.seed = hash(global_position)
+
+# Benefits:
+# - Same position = same shape (reproducible)
+# - Different positions = different shapes (varied)
+# - No need to store random values (stateless)
+# - Regenerates identically on reload
+```
+
+### Random Object Spawner
+
+The `random_object_spawner` creates dynamic randomness:
+
+```gdscript
+extends Node3D
+
+@export var spawn_interval: float = 2.0
+@export var spawn_radius: float = 3.0
+@export var object_scenes: Array[PackedScene] = []
+
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+    rng.randomize()
+    spawn_timer()
+
+func spawn_timer():
+    while true:
+        await get_tree().create_timer(spawn_interval).timeout
+        spawn_random_object()
+
+func spawn_random_object():
+    if object_scenes.is_empty():
+        return
+
+    # Random scene selection
+    var scene = object_scenes[rng.randi() % object_scenes.size()]
+    var instance = scene.instantiate()
+
+    # Random position within radius
+    var angle = rng.randf() * TAU
+    var distance = rng.randf() * spawn_radius
+    instance.position = Vector3(
+        cos(angle) * distance,
+        0,
+        sin(angle) * distance
+    )
+
+    # Random rotation
+    instance.rotation.y = rng.randf() * TAU
+
+    add_child(instance)
+```
+
+## Grid Layout Analysis
+
+The map uses a specific pattern for `random_edge_profile` placement:
+
+```gdscript
+# Rows 1-2: North wall (rotation 0°)
+# 6 cubes per row × 2 rows = 12 cubes
+
+# Rows 4-8: East/West columns (rotation 90°)
+# 2 cubes per side × 5 rows × 2 sides = 20 cubes
+
+# Rows 10-11: South wall (rotation 0°)
+# 6 cubes per row × 2 rows = 12 cubes
+
+# Total: ~44 random_edge_profile instances
+```
+
+The rotation parameter (0° or 90°) affects which axis the edge randomization applies to.
+
+## Geometric Randomization Strategies
+
+```gdscript
+# Strategy 1: Vertex displacement
+func displace_vertices(vertices: Array, amount: float) -&gt; Array:
+    for i in range(vertices.size()):
+        vertices[i] += random_vector3() * amount
+    return vertices
+
+# Strategy 2: Edge extrusion
+func extrude_random_edges(mesh: ArrayMesh, count: int):
+    var edges = get_edges(mesh)
+    for i in range(count):
+        var edge = edges[randi() % edges.size()]
+        extrude_edge(mesh, edge, randf_range(0.1, 0.5))
+
+# Strategy 3: Face subdivision
+func subdivide_random_faces(mesh: ArrayMesh, probability: float):
+    for face in get_faces(mesh):
+        if randf() &lt; probability:
+            subdivide_face(mesh, face)
+```
+
+## Implementation Notes
+
+### Arena Structure
+- Perimeter raised (height 2) creates walls
+- Interior flat (height 1) is the observation floor
+- Central raised platform (heights 2) at (5,6)-(6,6) hosts the spawners
+- Void at (9,12) allows teleporter access
+
+### Visual Coherence
+Despite random edges, the cubes maintain recognizable cube-ness:
+- Randomization is bounded (edge_variance parameter)
+- Core structure preserved
+- Variation is local, not global
+
+## Key Takeaway
+
+Randomness can operate at any level of geometric abstraction:
+- **Position**: Where objects are (covered in earlier maps)
+- **Rotation**: How objects orient (next map: Random_Rotate_Random_XYZ)
+- **Scale**: How large objects are
+- **Topology**: The fundamental shape of objects (this map)
+
+The `random_edge_profile` demonstrates that even the &quot;identity&quot; of an object—its shape—can be a random variable. The cube is still recognizably a cube, but no two are identical.
+
+## Axiom References
+- Related concepts in `commons/context/clipboard/tutorial_text/cube_axioms.md`
+- Mesh manipulation concepts
+
+## Within the Sequence
+
+Random_Cubes extends randomness from position to form. The sequence has established randomness as a sampling primitive; this map shows that any property, including geometric shape, can be a random variable.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map&#x27;s controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map&#x27;s concrete contribution to the curriculum.
+
+
+## Paired dice column — 24 September 2026
+
+`paired_dice_column:180` at grid (5,4) adds two XRTools dice derived from `dice_throw`. The original die scene/script are unchanged. The local variant keeps its pips, release hooks and mature settle test, using 11 cm dice in 90 cm-high trays and no reward rain. Desktop input remains a release without a tracked throw.
+
+Only a released die settling in its own tray supplies a value. Both fresh values are required; grabbing a pending die invalidates that value, and the next pair cannot reuse the previous pair&#x27;s other face. A full-size column uses 18 cm per pip, blue A below pink B, on a 20 cm base. Its collision height follows the total. Twelve miniature columns retain the recent ordered pairs; the total count can exceed twelve. Two MultiMeshes bound the shelf&#x27;s coloured-unit rendering.
+
+RETURN DICE preserves the last column and history. CLEAR RECORD also cancels pending results and removes the record. A loose die below 18 cm or over 3 m from its tray returns after 0.7 seconds; a held die is never reclaimed. Recovery does not produce a throw. The ideal independent fair-dice model has a triangular sum distribution; physical throws do not automatically validate that model.
+
+Review and native evidence: `doc/book/iterations/2026-09-24-paired-dice/`.
+
+
+## The continuing die — 24 September 2026
+
+`continuing_die` at (2,5), yaw 180, uses the unmodified `paired_die.gd` tray and its settled-orientation reader. The die is a production XRToolsPickable with desktop grab/drop hooks. No RNG picks a face, and no automatic reroll is performed. One fresh release arms one valid result; recovery alone never arms it.
+
+Each accepted face appends to a chain and adds to total. A face other than six closes the chain. A six permits another accepted throw unless five throws have already been retained. Five sixes produce total 30, a 2.7m column on a 0.14m base, and an explicit UNFINISHED state. A non-six on the fifth throw completes normally. Further results cannot change a closed or capped column until NEW CHAIN. The cap is a display budget, not a natural end or a claim about an unbounded stochastic process.
+
+One 9cm unit represents each pip; seams and labels retain individual throws. A separate fixed 6+6+3 column is marked WORKED EXAMPLE / NOT LIVE THROWS. It is not sampled, not a remembered player outcome and not mixed into live state. Column support collision follows the live sum. RETURN DIE preserves the chain. NEW CHAIN cancels pending results and clears the live column, retaining ownership if a hand holds the die. Fallen unattended dice return through the existing tray recovery.
+
+Evidence: `doc/book/iterations/2026-09-24-continuing-die/`. Controlled face-up physics drops exercise the production reader; event-only transaction cases are separately identified. These establish behavior, not uniformity, independence or a measured outcome distribution. Tracked-hand throwing and comfort remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Cubes/intent.md">Raw captured source</a></p><pre># Intent
+
+A throw has conditions; a record keeps only some of its consequences. Let reward, frequency, order, disappearance and bounded variation become distinct encounters. Keep the beginner close to the die and the coin without mistaking symmetry or spectacle for fairness.
+
+
+## Continuation encounter — 24 September 2026
+
+Retain the existing encounters and add continuing_die at (2,5), facing into the first chamber. Book order: original die → paired sum → continuing die → coin → heap → bounded edge field. A six grants a further throw in the same additive chain; a non-six completes it. The fifth six reaches a visible display limit and is explicitly unfinished. A fixed, labelled 6+6+3 sculpture is a worked example, never live evidence. Compare a face, its reward, its contribution to a sum and its power to continue an instruction. No claim of fair independent throws is made from a visitor&#x27;s physical release.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Cubes/critical.md">Raw captured source</a></p><pre># Random_Cubes - Critical Reflection
+
+## Forms That Could Have Been Otherwise
+
+Each cube in this arena has randomized edges. Same algorithm, different seeds, different shapes.
+
+This raises an ontological question: **what is a cube?**
+
+The Platonic answer: a cube is an ideal form—six equal square faces, twelve equal edges, eight vertices. The randomized cubes in this map deviate from this ideal. Are they still cubes?
+
+The answer depends on your ontology:
+- **Essentialism**: A true cube has specific properties; these are imperfect approximations
+- **Family resemblance**: These are &quot;cube-like&quot; objects sharing a common ancestor
+- **Constructivism**: &quot;Cube&quot; is a category we impose; the boundary is arbitrary
+
+The map suggests the constructivist view: the forms are recognizable as cubes because we recognize them, not because they meet an ideal specification.
+
+## The Arena as Laboratory
+
+The walled arena creates a controlled environment—a **laboratory** for geometric variation.
+
+This is significant. Laboratories are spaces where:
+- Variables are isolated
+- Conditions are controlled
+- Observation is prioritized
+- Replication is possible
+
+The map treats randomized geometry as an object of study. The walls exclude the outside world; the grid positions fix locations; only the edge profiles vary. This is **experimental design** for visual phenomena.
+
+## What Randomness Reveals About Form
+
+When edges are randomized, the cube&#x27;s &quot;cubeness&quot; becomes visible precisely through its degradation.
+
+We don&#x27;t notice the platonic cube&#x27;s regularity until we see what happens without it. The randomized edges make visible what was invisible: the constraint of geometric ideals.
+
+This is a general principle: **randomness reveals structure by violating it**. We learn what rules exist by seeing them broken.
+
+## The Spawner: Randomness in Time
+
+The `random_object_spawner` adds temporal randomness to spatial randomness.
+
+The static cubes embody randomness frozen at instantiation. The spawner embodies randomness ongoing—objects appearing unpredictably, positions varying, the arena never twice the same.
+
+This distinction matters:
+- **Static randomness**: Decided once, then fixed (the edge profiles)
+- **Dynamic randomness**: Continuously generated (the spawner)
+
+The QFEP&#x27;s φΔE(S,t) term captures this: the rate of entropy change. Static randomness has φΔE = 0 (entropy set once, then constant). Dynamic randomness has φΔE &gt; 0 (entropy continuously injected).
+
+## The Politics of Variation
+
+In industrial production, variation is defect. Manufacturing aims for identical copies—any deviation from spec is failure.
+
+This map celebrates variation. Each cube is unique, and uniqueness is the point. This is a **queer** relationship to geometry: difference valued over sameness, variation over standardization.
+
+The randomized cubes resist interchangeability. You cannot swap one for another and get &quot;the same.&quot; Each has its history (its seed), its identity (its edges), its irreducibility.
+
+## The Boundary of Recognition
+
+How much can edges vary before a cube is no longer a cube?
+
+The `edge_variance` parameter controls this. Low variance: recognizable cubes with slight imperfections. High variance: abstract forms that might have once been cubes.
+
+This boundary is **perceptual**, not geometric. We recognize cubes because we&#x27;ve learned to. The randomization tests the limits of that learning—how much deviation can pattern recognition tolerate?
+
+## Questions That Remain
+
+1. **Is randomized form creative?** The cubes are not designed; they&#x27;re generated. Is this creation? Or just calculation? Where is the authorship—in the algorithm, the parameters, the seed, the random function itself?
+
+2. **Can geometry be decolonized?** The cube is a Western ideal, tied to Cartesian coordinates, orthogonal axes, right angles. Randomizing edges disrupts this regime. But does it escape it, or just add noise?
+
+3. **What is the &quot;natural&quot; form?** Platonic geometry is rare in nature. Most forms are irregular, asymmetric, unique. Are randomized cubes more &quot;natural&quot; than perfect ones? Or is this a false dichotomy?
+
+4. **How much entropy is enough?** At what variance does the cube become unrecognizable? At what point does variation become chaos? The edge of chaos applied to geometry.
+
+## The QFEP Connection
+
+This map applies the QFEP framework to form itself:
+
+- **F (free energy)**: The cube template—the ordered ideal that randomness perturbs
+- **E(S) (entropy)**: The edge variance—the disorder introduced into geometry
+- **λ (modulator)**: The variance parameter—how strongly entropy affects form
+- **φΔE (rate of change)**: Static (cubes) vs dynamic (spawner) randomness
+
+The arena demonstrates that even the most basic geometric primitives—the cube—can be subject to entropy modulation. The grid is order; the randomized edges are chaos; the bounded variance keeps the system at the edge where cubes remain recognizable but unique.
+
+This is the QFEP operating at the level of ontology: not just what systems do, but what systems *are* can oscillate between order and disorder.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Cubes/artifacts.md">Raw captured source</a></p><pre># Random Cubes — Artifacts
+*Randomness: Freedom from Pattern · E_entropy · 5 artifacts*
+
+&gt; An arena of randomized edges — cubes with profiles shaped by chance. The grid imposes order; randomness fractures it. Walk among forms that could have been otherwise, each edge a frozen coin flip.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dice Throw
+![Dice Throw](/scene-catalog/dice_throw.png)
+
+A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.
+
+`dice_throw`
+
+## Coin Toss
+![Coin Toss](/scene-catalog/coin_toss.png)
+
+The simplest random experiment. Grab coins from a tray and toss them. A counter tracks the heads/tails ratio converging to 0.5 over many flips. Gold side = heads, silver side = tails.
+
+`coin_toss`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Random Object Spawner
+![Random Object Spawner](/scene-catalog/random_object_spawner.png)
+
+A spawning algorithm that randomly generates and places objects in the environment
+
+`random_object_spawner`
+
+## Random Edge Profile
+![Random Edge Profile](/scene-catalog/random_edge_profile.png)
+
+A planar surface that generates random edge profiles and patterns
+
+`random_edge_profile`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Cubes/summary.md">Raw captured source</a></p><pre># Random Cubes — Summary
+
+Random_Cubes is the fourth map in the Randomness sequence. It takes the randomness the previous maps applied to positions and colours and applies it instead to form — the edge profile of each cube is decided by a random process, so two cubes on the same grid cell are different shapes.
+
+The space is a small walled arena, roughly square, with a raised perimeter and a flat interior. Around the perimeter, dozens of instances of the same artifact — random_edge_profile — are arranged in ordered rows. Each instance generates its silhouette at spawn time by sampling a random offset at each vertex of a base cube, so the overall layout reads as geometric repetition while the individual shapes refuse to match.
+
+Two spawners sit at the centre of the arena and produce further random objects on demand. A dark ambient sphere hangs above the spawners to mark the observation zone. The learner enters from an elevated corner, descends into the arena, and walks the perimeter comparing one cube to its neighbour. The arrangement argues that randomness does not need to operate on obvious parameters; any property can be a random variable, including the primitive geometry a sequence has spent several maps treating as fixed.
+
+Within the sequence, Random_Cubes is the chapter on form. After Random_Noise_Types introduced spectral identity, this map pushes randomness into shape. Random_Rotate_Random_XYZ will next push it into orientation.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Cubes/blurb.md">Raw captured source</a></p><pre>How much can one throw tell you about a die? Just inside the door, a die on green felt and a pedestal of eight coins are thrown by hand; nothing on either draws a random number, so the result comes from how you let go. Each keeps a record that forgets something different: the die&#x27;s glass keeps how often each face came up and loses the order, the coin&#x27;s ribbon keeps the order of the last thirty.
+
+In the middle of the hall small wooden cubes appear above a low block, and once twenty are out every arrival makes one vanish at random, even from your hand. Beyond, forty-eight red slabs in eight rows show one random rule laid out in space: the ends of every slab are fixed at a metre, only the middles vary.
+</pre></section></body></html>

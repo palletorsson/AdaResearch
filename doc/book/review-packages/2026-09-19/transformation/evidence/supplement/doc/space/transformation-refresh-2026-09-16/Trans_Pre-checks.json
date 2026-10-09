@@ -1,0 +1,53 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "eight authored pickup stages present",
+      "passed": true,
+      "value": 8
+    },
+    {
+      "name": "first stage stays visually still",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "first stage collection enabled",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three later moving demonstrations retained",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "real XR body collected still stage through overlap",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "collection awarded exactly one point",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Pre",
+  "measurements": {
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "score_after": 1,
+    "score_before": 0
+  }
+}

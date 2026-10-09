@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "mass",
+    "title": "Same force, different mass",
+    "idea": 12,
+    "action": "A timed force pulse gives the familiar points different accelerations. Coast after the pulse; compare 1, 2 and 4 kg.",
+    "learn": "Force, mass, acceleration; ending a force preserves velocity.",
+    "token": "force_trial_mass",
+    "map": "Force_Review_01_Mass"
+  },
+  {
+    "kind": "vortex",
+    "title": "The drain becomes an orbit",
+    "idea": 15,
+    "action": "Release the point into a radial field, then add a sideways component. A cube can join it; the path is integrated, not animated.",
+    "learn": "Field composition, initial velocity, resistance.",
+    "token": "force_trial_vortex",
+    "map": "Force_Review_02_Vortex"
+  },
+  {
+    "kind": "roll",
+    "title": "Slide, roll or tip?",
+    "idea": 18,
+    "action": "Release a rotation-locked sphere, a free sphere and a cube on three equal slopes. Compare contact, rolling and sticking.",
+    "learn": "Friction, shape, rotational freedom.",
+    "token": "force_trial_roll",
+    "map": "Force_Review_03_Roll"
+  },
+  {
+    "kind": "pipe",
+    "title": "Where the pipe lets go",
+    "idea": 19,
+    "action": "Send the point through a transparent, open curved channel. Predict where it leaves; the channel stops but motion and gravity continue.",
+    "learn": "Contact redirects velocity; tangent and ballistic departure.",
+    "token": "force_trial_pipe",
+    "map": "Force_Review_04_Pipe"
+  },
+  {
+    "kind": "conveyor",
+    "title": "The belt keeps going",
+    "idea": 24,
+    "action": "Feed twelve cubes against a closed receiver. Open the gate and see which boxes still make it. Spilled boxes remain available.",
+    "learn": "Contact motion, input/output rate, accumulated backlog.",
+    "token": "force_trial_conveyor",
+    "map": "Force_Review_05_Conveyor"
+  },
+  {
+    "kind": "attractor",
+    "title": "It caught the doorstop",
+    "idea": 25,
+    "action": "Attract the chosen point, then widen the filter to include the doorstop. The hinged door keeps trying to close.",
+    "learn": "Attraction, selection, unintended secondary effects.",
+    "token": "force_trial_attractor",
+    "map": "Force_Review_06_Attractor"
+  },
+  {
+    "kind": "threebody",
+    "title": "Three bodies, two beginnings",
+    "idea": 26,
+    "action": "Release two planar trios with one small velocity difference. Compare their paths with equal opposite forces and softened near contact.",
+    "learn": "Pairwise force sums, initial conditions, limits of prediction.",
+    "token": "force_trial_threebody",
+    "map": "Force_Review_07_Threebody"
+  },
+  {
+    "kind": "support",
+    "title": "Remove one support",
+    "idea": 27,
+    "action": "Let a loaded table settle. Pull the marked foot and keep the collapse, or rebuild it by hand.",
+    "learn": "Support, centre of mass, contact and structural dependence.",
+    "token": "force_trial_support",
+    "map": "Force_Review_08_Support"
+  },
+  {
+    "kind": "bowling",
+    "title": "One push, two directions",
+    "idea": 29,
+    "action": "Send the point into a little bowling formation. Compare a braced launch cart with a free one; retain the knocked blocks.",
+    "learn": "Impulse, recoil, momentum transfer.",
+    "token": "force_trial_bowling",
+    "map": "Force_Review_09_Bowling"
+  },
+  {
+    "kind": "catapult",
+    "title": "The lever lets go",
+    "idea": 9,
+    "action": "Release a point from a hinged cup driven by a short torque pulse. Its flight comes from contact with the arm.",
+    "learn": "Torque, hinge constraint, release and trajectory.",
+    "token": "force_trial_catapult",
+    "map": "Force_Review_10_Catapult"
+  }
+]

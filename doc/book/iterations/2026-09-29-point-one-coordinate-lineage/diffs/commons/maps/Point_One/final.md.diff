@@ -1,0 +1,11 @@
+--- before/commons/maps/Point_One/final.md
++++ commons/maps/Point_One/final.md
+@@ -94,7 +94,7 @@
+ 
+ The next room brings two points into relation. A line begins.
+ 
+-[^point-one-code]: The position comes from the station's construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate making passage follows this position into a visible body and a collision boundary, using the supplied Godot study.
++[^point-one-code]: The position comes from the station's construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate making passage places supplied markers at two positions. The study provides their sphere shapes and coordinate guides; mesh and collision construction remain available as a further reading.
+ 
+ [^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+ 

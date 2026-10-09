@@ -1,0 +1,20 @@
+{
+  "scope": "Current lesson evaluated ONLY against the new complete-construction requirement; not a general quality verdict.",
+  "expected_result": "fail complete-code correspondence",
+  "result": {
+    "structure": "fail",
+    "errors": [
+      "printed-code: no complete block matches the executable example"
+    ],
+    "native": {
+      "status": "pass",
+      "checks": 30,
+      "scope": "Native Godot; real XRToolsPickable and XRToolsFunctionPickup; synthetic XRController3D moved by code. Actual Area3D overlap, library pickup, driver motion and release. No headset or museum playthrough."
+    },
+    "learner_understanding": "not tested",
+    "learner_transfer": "not tested",
+    "museum_integration": "not tested",
+    "physical_headset": "not tested",
+    "scope": "Declared structure, exact printed build and evidence freshness only; no automatic judgment of teaching quality."
+  }
+}

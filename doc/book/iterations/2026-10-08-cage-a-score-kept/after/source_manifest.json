@@ -1,0 +1,29 @@
+{
+  "room": "WaveFunctions_John_Cage",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_John_Cage/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/WaveFunctions_John_Cage/map_data.json": "5aeee70344477969049385c360f0659f3b18baaa368bd2ed072939ca6ea814de",
+    "tools/probes/wavefunctions_cage_museum.gd": "b4d73f921ff6a6c4fcf09ab071c8976aa6d613b1ea9209bcc47b16252ea7fca4",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "83c87536b5c1f07226a6b21f0806835a1dca516aec8bdc381b4784679ffdee17",
+    "ada_run/encounter_pilot/WaveFunctions_John_Cage/control.json": "4adf8ceadccfa1cff2a5b55b9e0d722915e1ace7ee20fd0b9e0da83c426b6b3d",
+    "ada_run/encounter_pilot/WaveFunctions_John_Cage/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_John_Cage/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn": "41ec2f0773937c8cefcac3a34b2214f9a500f904b7aaa9e03c7def48f75a9d00",
+    "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd": "d5872322a1163758b3a7891411ef820f87bfcd67c23371b2f41faf6dcc8b5170"
+  }
+}

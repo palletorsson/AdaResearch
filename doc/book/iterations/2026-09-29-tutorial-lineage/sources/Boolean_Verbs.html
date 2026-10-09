@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Boolean_Verbs · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Boolean_Verbs">← Tutorial lineage</a></p><h1>Boolean Verbs</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Boolean_Verbs/final.md">Raw captured source</a></p><pre># The Three Verbs
+
+Three objects on one line down the middle of the room. The floor rises to either side twice on the way, giving each object a bay without hiding it from the next. A box and a sphere keep returning. By the third encounter, part of the sphere&#x27;s shape will belong to a hollow in the box.
+
+Their sizes, offsets and colours vary between these demonstrations. We are learning three operations, rather than changing one setting in an otherwise identical experiment. Keep the pair in mind and follow what each operation keeps: either region, their shared region, or the part of the box outside the sphere.
+
+## What a solid is here
+
+These bodies do not have to be filled with little pieces of material. Each primitive describes a region: we can ask whether a point belongs to it. The program combines those regions and makes a boundary visible. This is constructive solid geometry, usually shortened to CSG.
+
+There are several agreements inside the word *solid*. These small exhibits have not enabled collision. You can pass through a surface that your eye has already accepted. The region still has an inside and an outside in the calculation; it has not acquired the power to stop your body. Keep that difference with you when the objects become architecture.
+
+## What can belong together
+
+&lt;!-- @csg_union_demo --&gt;
+
+At the first body, follow the place where the box and sphere meet. Their outside contours survive, but the buried surfaces at the overlap do not belong to the result&#x27;s visible boundary. The operation keeps every point belonging to either region. That is union: `A ∪ B`.
+
+The sphere enters the construction with this instruction:
+
+```gdscript
+csg_sphere.operation = CSGShape3D.OPERATION_UNION
+```
+
+Earlier, distance fields let a parameter round the meeting between forms. Here there is no smoothing band. A crease can remain where the boundaries meet, even though the gap has gone. Being connected and being smooth are different accomplishments.
+
+The next hall also shows this union with its operands separated. It still contains both of them. One result, two disconnected components. The word *joining* may have led us to expect a bridge; the operation has only promised to keep what belongs to either body. They can belong to one result without having to touch.
+
+## What must be shared
+
+&lt;!-- @csg_intersection_demo --&gt;
+
+The second body keeps only the region belonging to both primitives: `A ∩ B`. Much of the box and sphere has no place in this answer. If the operands were moved far enough apart, the shared region would be empty. Nothing can be a successful result.
+
+Beneath the body, three numbers give the volumes of A, B and the region they share. Estimate what remains before looking down at the panel. The little survivor and its precise-looking number are two ways of meeting the same question.
+
+The instrument tests a lattice of sample points. At each point it asks whether the distance from the sphere&#x27;s centre is within its radius:
+
+```gdscript
+var in_b: bool = dx * dx + dy * dy + dz * dz &lt;= r2
+```
+
+It also tests the box, then counts points accepted by both. A forty-eight-by-forty-eight-by-forty-eight lattice makes this an estimate. The visible sphere is faceted, while this test describes an analytic sphere. They share a radius parameter, but they do not spend it in quite the same way.
+
+Move close enough to find a facet. Three decimal places have not made the picture and the measurement identical. We have chosen both how to give the region a surface and how to count it.
+
+## A face neither of them brought
+
+&lt;!-- @csg_difference_demo --&gt;
+
+Follow the place where the sphere enters the third box. The box keeps only what lies outside the sphere: `A − B`. Where the two boundaries meet, the cut exposes a curved wall facing into the hollow. The sphere&#x27;s outer shape has become something we look into.
+
+```gdscript
+csg_sphere.operation = CSGShape3D.OPERATION_SUBTRACTION
+_root_csg.add_child(csg_sphere)
+var mat := StandardMaterial3D.new()
+mat.albedo_color = body_color
+_root_csg.material_override = mat
+```
+
+The first line names the cut. The last gives the result one material. The cavity wall has not uncovered a buried layer of paint; the program generates its boundary and dresses it in the body&#x27;s colour. Here it looks as though the box had always been this colour inside.
+
+We could make the new faces announce another origin. For now, stay with this peculiar intimacy: the sphere disappears from view while its contour remains in the other body. Absence has been given a surface.
+
+## Which body comes first
+
+&lt;!-- @the_argument_of_solids --&gt;
+
+At the end of the hall, a bench brings the three results close enough to compare without walking between bays. Beside them stand two different remainders. One is labelled `A − B`; the other, `B − A`.
+
+The letters changed places. The box with a bite gives way to what remains of the sphere outside the box. The operation is still subtraction. Its order decides whose region may remain and whose will do the cutting.
+
+Two more plates stand on the bench beyond the remainders. On one, two boxes meet face to face, and a marked edge runs where they touch: a cut invents edges that neither solid had, and the next hall holds that flicker still in amber and blue. In the last vitrine, a block minus its rooms, minus its doors, which the plaque calls a building: a block minus the places you can stand. The hall after next begins there.
+
+Above the bench, a caption calls these &quot;the three verbs&quot; and says &quot;the set is closed&quot;. There are three choices in the engine&#x27;s operation list. But an expression also needs operands, their order and their positions. Its result can become an operand in another expression. A small vocabulary can keep making bodies that the list of names does not describe.
+
+The verbs tempt us into quick judgements: union welcomes, intersection demands agreement, subtraction excludes. Then a cavity interrupts that story. What was removed might be precisely where another body could stand. We need to meet the result before deciding what its keeping or cutting has done.
+
+In the next room, the same families appear in several versions, and we will see how much one familiar setting had kept out of sight. The building on the bench waits a room further on.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Boolean_Verbs/tutorial.md">Raw captured source</a></p><pre># Tutorial · The Three Verbs
+
+Start at the near end of the hall. Box and sphere recur in every bay, but their dimensions, offsets and colours also differ. Follow what each operation retains without attributing every visible difference to the verb alone. Read the result before reading the label. What does the boundary let your body do?
+
+At **union**, the two surfaces become one result. The seam disappears because the region belonging to either operand is kept. In code the verb is an enum, not a second object:
+
+```gdscript
+combiner.operation = CSGShape3D.OPERATION_UNION
+```
+
+At **intersection**, keep only the region both operands claim. The placed overlap gives a survivor; if the operands were separated far enough, a successful operation could return no surface at all. This is an explanation of the rule, not a claim that this bay offers an offset control. At **difference**, subtract the sphere from the box. The cavity wall is generated by the operation; neither input carried that face as a separate object.
+
+The three bays are one lesson in a fixed order: include, agree, remove. Return to the centre and say the expression aloud: `A ∪ B`, `A ∩ B`, `A − B`. Then ask what the grammar cannot say. The operation list does not settle operand order, placement or composition. Boundaries can vary continuously as operands move; connectedness can change at particular contacts. Reversing subtraction uses the same operator and produces a different result.
+
+The next hall, **Boolean_Gallery**, lays out the hidden variants of these verbs. It asks whether a published ladder of values agrees with the code that builds it.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Boolean_Verbs/technical.md">Raw captured source</a></p><pre># Technical register · The Three Verbs
+
+`Boolean_Verbs` is a 13×26 museum map with a continuous central walking lane and three raised sills. The authored interactables are one instance each of `csg_union_demo`, `csg_intersection_demo`, and `csg_difference_demo`, followed by `the_argument_of_solids` as a closing secondary exhibit. The map keeps the same box and sphere vocabulary across all three primary artifacts.
+
+Each primary scene builds a `CSGCombiner3D` and assigns `operation` to `OPERATION_UNION`, `OPERATION_INTERSECTION`, or `OPERATION_SUBTRACTION`. The combiner re-derives a boundary from its operands; it does not expose a stored volume for later editing. Placement tokens use explicit axis values where a comparison needs a named rung, so the map remains readable by the museum compiler and by the book index.
+
+The first primary sits at row 4, column 7; the second at row 12, column 7; the third at row 19, column 7. The closing argument sits at row 22, column 4. Utilities retain spawn, text, and the `Boolean_Gallery` exit link. `commons/data/artifact_roles.json` marks the three verbs `primary` and the closing argument `secondary`, matching the tutorial&#x27;s order.
+
+The technical check for this pass resolves every map token against the registry, confirms the three primary roles, and checks that the authored map dimensions and token coordinates remain unchanged while the register files are added.
+
+## Reading revision, 24 September 2026
+
+The complete pre-revision final.md and all companion drafts are preserved under doc/book/iterations/2026-09-24-boolean-room-for-a-body/before/commons/maps/Boolean_Verbs/. They retain the earlier forensic detail, line counts and source commentary as dated material, not newly verified facts. The current final.md follows the encounter and keeps the technical distinctions necessary to understand it. See that iteration&#x27;s DECISIONS.md for source checks, factual corrections and unresolved artifact work.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Boolean_Verbs/intent.md">Raw captured source</a></p><pre>Establishes the Boolean vocabulary through a recurring box-and-sphere pair. Sizes, offsets and colours differ across the three demonstrations, so this is a comparison of operations rather than a controlled one-variable experiment. The three demos were three separate maps until 2026-09-03; they were folded into one because each operation is only legible beside the others — union&#x27;s deleted seam means little until you have seen intersection return an empty set, and difference&#x27;s invented face means nothing until you know that neither input brought it.
+
+The raised sides between bays are sills, not enclosing walls: the player should never lose sight of the previous verb while standing at the next. `the_argument_of_solids` closes the hall by rebuilding all three at bench scale under the claim that the set is closed — and the reflection beat is that the list names three operations but does not exhaust the combinations of operands, order, placement and nested expressions. Difference changes when its operands exchange roles.
+
+Curriculum role: B1 INTRODUCE in the boolean_surfaces sequence — the vocabulary, and the first look at what a boundary representation forecloses.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Boolean_Verbs/critical.md">Raw captured source</a></p><pre># Critical register · The Three Verbs
+
+Boolean language looks neutral because it is short. `OR`, `AND`, `NOT`: three words that appear to settle relation. A boundary representation need not fill its interior with material to describe a solid region. Its surface and orientation still allow a membership question. The verbs redraw the skin, and the body experiences the redraw as a room, a shared patch, or a missing world.
+
+The names invite social associations, but their consequences need inspection. Union can retain disconnected regions, and its boundary can move continuously while connectivity changes. Intersection keeps shared space, including a possibly empty result. Difference is asymmetric: A minus B and B minus A give different remainders. That order supplies a specific relation to investigate; it does not make the mathematical operator itself a moral judgement.
+
+The hall also exposes a measuring bias. A still camera can see the outside of a cavity more easily than the cavity can be inhabited. A clean boolean result may therefore score well as an image while failing as a place. The sills keep the three outcomes in sight so the claim is comparative and embodied rather than a single canonical view.
+
+This is the queer opening of the chapter: the set is declared closed, but the lived possibilities are not. A short operation list can compose further expressions and continuously varying boundaries. In the gallery, display and naming select from those possibilities; in the architectural hall, a subtraction can make room for a body. The question of what is kept becomes a question of what a particular body can use.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Boolean_Verbs/blurb.md">Raw captured source</a></p><pre>Three objects on one line down the middle of the room, and the floor rises twice on the way so each gets a bay to itself without ever being hidden from the next. The same box and the same sphere every time. Nothing changes down the whole length of the hall except a single word set on the sphere, and that word decides whether you are looking at one thing, at the part two things had in common, or at a hole.
+
+A solid here is not a lump with an inside. It is a surface and a rule for asking which side of it you are on, so none of the three verbs can remove anything — there is nothing in there to remove. Union deletes the skins where two solids met. Intersection keeps only what both claimed, and returns nothing when they claim nothing together. Difference manufactures a cavity wall at the instant of the cut, out of the material of the thing being cut. The word is doing more work than the shapes.
+</pre></section></body></html>

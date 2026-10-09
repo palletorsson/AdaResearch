@@ -1,0 +1,88 @@
+{
+  "artifact": "the_invisible_point",
+  "title": "Giving a Position a Body",
+  "description": "The screen shows a separate illustrative marker, which we choose to give a visible body. Two complete short examples lead to focused excerpts; full_code preserves the cumulative Node3D scripts. PLAY advances the presentation without executing code. Neither the examples nor their visibility changes reveal the invisible point in the case.",
+  "concept_layer": "position and representation; visibility; local and world coordinates",
+  "technique_first": [
+    "Vector3",
+    "Node3D",
+    "MeshInstance3D",
+    "SphereMesh",
+    "StandardMaterial3D",
+    "Label3D",
+    "_process(delta)",
+    "visible",
+    "position",
+    "global_position"
+  ],
+  "technique_reference": [],
+  "domain_deferred": [
+    "pickup mechanics",
+    "rotation and scale of reference frames",
+    "recording movement over time"
+  ],
+  "capture_leaks": {
+    "duration": "Point_Trace — a current position alone does not preserve the route taken to reach it.",
+    "relation": "Point_Lines — another position lets us construct a displacement and a connecting line.",
+    "appearance": "A mesh and its material determine a marker's surface; a position value does not.",
+    "frame": "The same location can have different coordinates relative to different frames."
+  },
+  "limit": "A position alone does not specify a surface, a history or an interaction. These examples construct a separate visible marker and a report of its position. The invisible point in the case has no visible body to reveal.",
+  "stages": [
+    {
+      "title": "A position as data",
+      "thinking": "These values specify a position without drawing a surface. This screen follows a separate marker we could build from such data. Its scripts are displayed, not executed. The invisible point in the case remains without a body.",
+      "code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n",
+      "concepts": [
+        "Vector3",
+        "position",
+        "data"
+      ],
+      "full_code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n"
+    },
+    {
+      "title": "Something to find",
+      "thinking": "Our separate example adds a sphere at the address. Its radius supplies a surface; its position locates the centre. Changing the radius would change what you could see without moving that centre. Geometry has begun to offer more than a location.",
+      "code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n\nvar marker: MeshInstance3D\n\nfunc _ready() -> void:\n\tmarker = MeshInstance3D.new()\n\tvar sphere := SphereMesh.new()\n\tsphere.radius = 0.04\n\tsphere.height = 0.08\n\tmarker.mesh = sphere\n\tmarker.position = point_position\n\tadd_child(marker)\n",
+      "concepts": [
+        "SphereMesh",
+        "radius",
+        "centre"
+      ],
+      "full_code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n\nvar marker: MeshInstance3D\n\nfunc _ready() -> void:\n\tmarker = MeshInstance3D.new()\n\tvar sphere := SphereMesh.new()\n\tsphere.radius = 0.04\n\tsphere.height = 0.08\n\tmarker.mesh = sphere\n\tmarker.position = point_position\n\tadd_child(marker)\n"
+    },
+    {
+      "title": "A colour and an address",
+      "thinking": "These excerpts add colour and a LOCAL label. The stored position is unchanged by either. Two decimal places make the address easier to read, while some smaller differences disappear from the report. What would you choose to show?",
+      "code": "# Excerpts; marker already created.\n# In _ready():\nvar material := StandardMaterial3D.new()\nmaterial.albedo_color = Color(0.0, 0.8, 1.0)\nmarker.material_override = material\nlabel = Label3D.new()\nlabel.position = Vector3(0.0, 0.12, 0.0)\nmarker.add_child(label)\n\n# In _update_label():\nvar local_p := marker.position\nlabel.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n    local_p.x, local_p.y, local_p.z\n]\n",
+      "concepts": [
+        "colour",
+        "Label3D",
+        "rounding"
+      ],
+      "full_code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n\nvar marker: MeshInstance3D\nvar label: Label3D\n\nfunc _ready() -> void:\n\tmarker = MeshInstance3D.new()\n\tvar sphere := SphereMesh.new()\n\tsphere.radius = 0.04\n\tsphere.height = 0.08\n\tmarker.mesh = sphere\n\tmarker.position = point_position\n\tadd_child(marker)\n\n\tvar material := StandardMaterial3D.new()\n\tmaterial.albedo_color = Color(0.0, 0.8, 1.0)\n\tmaterial.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED\n\tmarker.material_override = material\n\n\tlabel = Label3D.new()\n\tlabel.billboard = BaseMaterial3D.BILLBOARD_ENABLED\n\tlabel.position = Vector3(0.0, 0.12, 0.0)\n\tmarker.add_child(label)\n\t_update_label()\n\nfunc _update_label() -> void:\n\tvar local_p := marker.position\n\tlabel.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n\t\tlocal_p.x, local_p.y, local_p.z\n\t]\n"
+    },
+    {
+      "title": "Hide the surface",
+      "thinking": "Here the separate marker would alternate visibility every two seconds, using elapsed time accumulated from delta. Its position stays fixed. The screen does not run the code; the invisible point in the case is never drawn.",
+      "code": "# Excerpt; marker setup is omitted.\nvar elapsed := 0.0\n\nfunc _process(delta: float) -> void:\n    elapsed += delta\n    marker.visible = (\n        int(elapsed / 2.0) % 2 == 0\n    )\n",
+      "concepts": [
+        "visibility",
+        "elapsed time",
+        "position"
+      ],
+      "full_code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n\nvar marker: MeshInstance3D\nvar label: Label3D\nvar elapsed := 0.0\n\nfunc _ready() -> void:\n\tmarker = MeshInstance3D.new()\n\tvar sphere := SphereMesh.new()\n\tsphere.radius = 0.04\n\tsphere.height = 0.08\n\tmarker.mesh = sphere\n\tmarker.position = point_position\n\tadd_child(marker)\n\n\tvar material := StandardMaterial3D.new()\n\tmaterial.albedo_color = Color(0.0, 0.8, 1.0)\n\tmaterial.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED\n\tmarker.material_override = material\n\n\tlabel = Label3D.new()\n\tlabel.billboard = BaseMaterial3D.BILLBOARD_ENABLED\n\tlabel.position = Vector3(0.0, 0.12, 0.0)\n\tmarker.add_child(label)\n\t_update_label()\n\nfunc _process(delta: float) -> void:\n\telapsed += delta\n\tmarker.visible = int(elapsed / 2.0) % 2 == 0\n\nfunc _update_label() -> void:\n\tvar local_p := marker.position\n\tlabel.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n\t\tlocal_p.x, local_p.y, local_p.z\n\t]\n"
+    },
+    {
+      "title": "Whose zero?",
+      "thinking": "With no other transformed parent, shifting this node two units along X gives the same centre two addresses: LOCAL (1.00, 0.50, 0.00), WORLD (3.00, 0.50, 0.00). Which zero do the numbers answer to?",
+      "code": "# Excerpts; marker is this node's child.\n# In _ready(), shift the parent:\nposition = Vector3(2.0, 0.0, 0.0)\n\n# In _update_label(), read both frames:\nvar local_p := marker.position\nvar world_p := marker.global_position\n\n# With no other transformed parent:\n# LOCAL (1.00, 0.50, 0.00)\n# WORLD (3.00, 0.50, 0.00)\n",
+      "concepts": [
+        "local",
+        "world",
+        "origin"
+      ],
+      "full_code": "extends Node3D\n\nvar point_position := Vector3(1.0, 0.5, 0.0)\n\nvar marker: MeshInstance3D\nvar label: Label3D\nvar elapsed := 0.0\n\nfunc _ready() -> void:\n\tposition = Vector3(2.0, 0.0, 0.0)\n\tmarker = MeshInstance3D.new()\n\tvar sphere := SphereMesh.new()\n\tsphere.radius = 0.04\n\tsphere.height = 0.08\n\tmarker.mesh = sphere\n\tmarker.position = point_position\n\tadd_child(marker)\n\n\tvar material := StandardMaterial3D.new()\n\tmaterial.albedo_color = Color(0.0, 0.8, 1.0)\n\tmaterial.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED\n\tmarker.material_override = material\n\n\tlabel = Label3D.new()\n\tlabel.billboard = BaseMaterial3D.BILLBOARD_ENABLED\n\tlabel.position = Vector3(0.0, 0.12, 0.0)\n\tmarker.add_child(label)\n\t_update_label()\n\nfunc _process(delta: float) -> void:\n\telapsed += delta\n\tmarker.visible = int(elapsed / 2.0) % 2 == 0\n\nfunc _update_label() -> void:\n\tvar local_p := marker.position\n\tvar world_p := marker.global_position\n\tlabel.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n\t\tlocal_p.x, local_p.y, local_p.z\n\t]\n\tlabel.text += \"\\nWORLD (%.2f, %.2f, %.2f)\" % [\n\t\tworld_p.x, world_p.y, world_p.z\n\t]\n"
+    }
+  ]
+}

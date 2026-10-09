@@ -1,0 +1,13 @@
+--- before/commons/data/book/primitives.json
++++ after/commons/data/book/primitives.json
+@@ -36,8 +36,8 @@
+           "by": "hand",
+           "place": "foyer",
+           "lock": [
+-            3,
+-            5
++            0,
++            0
+           ],
+           "placed_by": "grid",
+           "claimed": true,

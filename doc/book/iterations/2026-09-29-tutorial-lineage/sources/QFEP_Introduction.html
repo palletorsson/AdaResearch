@@ -1,0 +1,257 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_Introduction · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_Introduction">← Tutorial lineage</a></p><h1>QFEP Introduction</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_Introduction/final.md">Raw captured source</a></p><pre># Four controls, one result
+
+In the previous room, the formula waited to be questioned. It hangs again at the back of this hall; on the console in front of it, it returns a number.
+
+Can two different arrangements of a model produce the same number?
+
+&lt;!-- @qfep_balance_workbench --&gt;
+
+Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Press KEEP. A pale outline holds that arrangement while your next movements redraw the coloured shape.
+
+Now try changing two controls to return the result towards the kept total. Look for two configurations that look different on the axes but give nearly the same number. The outline remembers what the total cannot.
+
+The console combines four adjustable quantities. F names a modelling or free-energy contribution,[^friston] E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change. Its current calculation is F minus lambda times E, plus phi times a fixed change value of 0.3. Raising F raises the result. Raising E lowers it in proportion to lambda. Raising phi adds more of the fixed change contribution. When lambda is zero, moving E does not affect the total through that term.
+
+Try the special case with lambda at zero before comparing more complicated settings. Watch what happens to the total when E changes, then give lambda a nonzero value and repeat. The contrast reveals a dependency: E’s contribution passes through another control. A slider can move through its full range without affecting one particular result when its weight is zero. That is a property of this calculation, not evidence that entropy is absent from every surrounding object.
+
+This is an operational introduction to the project’s QFEP expression, QFE = F − λE(S) + φΔE(S,t). The console lets you inspect that arithmetic. It does not measure these quantities from a living system, and its fixed change value is not an observed rate.
+
+QFEP stands for **Queer Free Energy Principle**. Ada uses the name to ask something of a model as well as something through it: whose persistence does it support, which differences can it notice, and who may change its terms? In the project’s research documents, Q keeps those terms open to revision while protecting the capacities of what the model leaves out to live, act and answer back. More entropy is not, by itself, more freedom. A boundary can shelter a body; opening it can also expose that body to harm.[^qfep]
+
+All four rails on this console run from zero to one. Its phi is a nonnegative weight; the separate phi rail nearby, and the later Phi hall, also allow negative values. A familiar symbol does not guarantee the same range. Read the rail as well as the letter.
+
+The display says “nearest project reference.” Its name and colour come from comparing your arrangement with seven authored examples. A name can change while you are still moving the same four handles. Watch when it changes: the border between two reference examples is a choice made in the comparison, not an experimentally detected physical phase transition.
+
+Return to your two nearly equal totals. What distinction did the total lose? One number can summarise several contributions while concealing how they compensated for one another. Keeping the separate values visible prevents a convenient summary from becoming the whole account.
+
+The documents call the return of this question to the maker **Self-Q**. A structure teaches its maker what to notice next. After enough time with these four rails, we may begin looking only for things that fit them. What have they made thinkable? What have they made harder to think? What continues beyond their reach? The museum must be able to ask this of its own rooms, including this one.[^self-q]
+
+For a more demanding version, the room could receive measured quantities from one clearly specified simulation. It would then need to show how those measurements were defined and how changing the weights affected a particular decision. That is the route from a manipulable formula to an accountable model.
+
+The next room starts with a smaller, computable question: what makes an outcome easy or difficult to predict?
+
+[^qfep]: The project’s [QFEP development notes](../../../doc/research/qfep/README.md) and [Entropic morality](../../../doc/research/qfep/entropic-morality.md) develop this ethical commitment. It is a research proposal, not a moral law derived from entropy or a result established by this console.
+
+[^self-q]: [Project entry: The Self-Q](../../../doc/ENTRY.md#the-self-q-recursive-qfep) names the maker’s own history and the three questions used to examine a design decision.
+
+[^friston]: Karl Friston, &quot;The free-energy principle: a unified brain theory?&quot;, *Nature Reviews Neuroscience* 11 (2010), 127–138. The console&#x27;s F is a rail from zero to one named after that quantity; it computes none of it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_Introduction/tutorial.md">Raw captured source</a></p><pre># QFEP Introduction
+
+The formula arrives as four grabbable spheres on a plinth. Pick them up, read their names, feel the weights.
+
+Declare a term sphere.
+
+```gdscript
+class_name TermSphere
+extends RigidBody3D
+
+@export var symbol: String = &quot;F&quot;
+@export var description: String = &quot;&quot;
+@export var base_color: Color = Color.WHITE
+```
+
+Each sphere is a RigidBody3D that carries a symbol and a description. The formula is a bag of four such spheres. Physics treats them as objects; the learner treats them as ideas.
+
+Instantiate the four terms.
+
+```gdscript
+func build_formula(parent: Node3D) -&gt; void:
+    _add_term(parent, &quot;F&quot;, &quot;free energy&quot;, Color(0.9, 0.7, 0.3))
+    _add_term(parent, &quot;E&quot;, &quot;entropy&quot;, Color(0.3, 0.6, 0.9))
+    _add_term(parent, &quot;λ&quot;, &quot;order-chaos mix&quot;, Color(0.8, 0.4, 0.7))
+    _add_term(parent, &quot;φ&quot;, &quot;rate sensitivity&quot;, Color(0.5, 0.9, 0.5))
+```
+
+Warm gold for F. Cool blue for E. Magenta for λ.
+
+Green for φ. The colour key stays stable across every map in the sequence.
+
+Lay the spheres on a plinth.
+
+```gdscript
+func _add_term(parent: Node3D, sym: String, desc: String, col: Color) -&gt; void:
+    var sphere := preload(&quot;res://commons/artifacts/qfep/term_sphere.tscn&quot;).instantiate()
+    sphere.symbol = sym
+    sphere.description = desc
+    sphere.base_color = col
+    parent.add_child(sphere)
+```
+
+The helper loads the prefab and configures it from the scene. Changing term data means changing exports, not rewriting the artifact.
+
+Render the symbol on the sphere.
+
+```gdscript
+func render_label(label: Label3D) -&gt; void:
+    label.text = symbol
+    label.modulate = base_color
+    label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+```
+
+Billboarded labels stay readable at every angle. The sphere is both a body and a sign.
+
+Speak the description when grabbed.
+
+```gdscript
+func _on_grabbed(_hand: Node) -&gt; void:
+    var panel: Label3D = get_tree().get_first_node_in_group(&quot;term_readout&quot;)
+    panel.text = &quot;%s — %s&quot; % [symbol, description]
+```
+
+Grabbing a sphere publishes its meaning to a shared panel. The learner reads by touching. The formula becomes a conversation with the body.
+
+Display the assembled formula.
+
+```gdscript
+func show_formula(label: Label3D) -&gt; void:
+    label.text = &quot;QFE = F − λ·E(S) + φ·ΔE(S,t)&quot;
+    label.font_size = 64
+    label.modulate = Color(1.0, 1.0, 0.95)
+```
+
+The full line hangs above the plinth. Learners see the whole before the parts. Later maps will isolate each term.
+
+You have met the formula. The next map, F Term, zooms into free energy and the trap of pure order.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Colour-key the readout panel.
+
+```gdscript
+func colorize_panel(panel: Label3D, sym: String) -&gt; void:
+    match sym:
+        &quot;F&quot;: panel.modulate = Color(0.9, 0.7, 0.3)
+        &quot;E&quot;: panel.modulate = Color(0.3, 0.6, 0.9)
+        &quot;λ&quot;: panel.modulate = Color(0.8, 0.4, 0.7)
+        &quot;φ&quot;: panel.modulate = Color(0.5, 0.9, 0.5)
+```
+
+The panel tints to match the sphere the learner just grabbed. Name and colour arrive together.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_Introduction/technical.md">Raw captured source</a></p><pre># Keep a reading; change its arrangement
+
+The previous hall let you question a formula. This workbench evaluates one small implementation of it. Its four rails supply F, E, lambda and phi, each between zero and one. None is a sensor measuring the surrounding room.
+
+Move one rail. Watch its point on the four-axis diagram and the number below. Press KEEP: the pale outline and retained total stay while the coloured shape follows your next movements. The instrument holds one arrangement at a time. Pressing KEEP again replaces it.
+
+The implemented calculation is:
+
+```gdscript
+return _F - _lambda * _E + _phi * rate_delta_e
+```
+
+Here `rate_delta_e` is fixed at 0.30. Its historical name does not make it a measured rate. F and E are supplied numbers too; this workbench neither estimates a probability distribution nor evaluates free energy from a model.
+
+Try F = 0.4, E = 0.2, lambda = 0.5 and phi = 0.5. The result is 0.45. Keep it. Change F to 0.6 and E to 0.6. The total returns to 0.45, but the two outlines differ. Two increases have compensated in this calculation. The saved arrangement makes their difference available to inspection.
+
+Then set lambda to zero. Moving E still changes the diagram, but no longer changes this total. Restore a nonzero lambda and repeat. A control’s consequence depends on the expression receiving it.
+
+The name and colour are selected separately: the script compares your four values with seven authored reference tuples, using the sum of absolute differences. The closest example supplies the label. Equal totals need not receive the same name. These are project references, not physical phases detected by the instrument.
+
+The nearby formula and separate lambda/phi rails remain secondary comparisons. They are not wired to the workbench’s four controls. The separate phi rail runs from -1 to +1; this console’s phi runs from 0 to 1. Read the particular instrument’s domain.
+
+The current hall preserves the earlier term spheres and other works. Proposals for remembered scenes, a responsive room and a measured receiver remain in [design-proposals.md](design-proposals.md), clearly marked as development work. Next, the F hall can ask what a prediction would actually be compared against.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_Introduction/intent.md">Raw captured source</a></p><pre>Concept: The formula that unifies everything — QFE = F − λE(S) + φΔE(S,t). First encounter: see it, touch the terms as grabbable spheres, begin to understand that every sequence in the curriculum has been building toward this.
+Sequence role: Opens the QFEP Laboratory; follows directly from Crisis_Synthesis. The formula appeared there as culmination of the crisis; here it becomes the object of study. The grabbable spheres (F, E, λ) make the abstract terms physical. Every prior sequence maps to a term: Primitives/Transformation are F (structure), Randomness/Noise are E (entropy), Forces/Wavefunctions are the dynamics (φΔE); leads to QFEP_F_Term.
+Technical angle: QFE = F − λE(S) + φΔE(S,t) decomposed: F as free energy (prediction error), E(S) as entropy of system state, λ as the balance parameter, φ as rate sensitivity, ΔE(S,t) as temporal change. The lambda_slider and phi_slider provide first interactive parameter control; qfep_formula_3d renders the equation in navigable 3D space.
+Critical angle: The formula is not learned — it is recognized. Every phenomenon the learner has encountered (crystal order, random chaos, oscillation between them) maps to a term. The introduction&#x27;s power comes not from novelty but from retrospective coherence: &quot;oh, that&#x27;s what all of it was about.&quot; The grabbable spheres democratize the abstraction — you hold the terms in your hands.
+Key artifacts: qfep_formula_3d renders the equation spatially; grab_sphere_F, grab_sphere_E, grab_sphere_lambda make terms physical; lambda_slider and phi_slider provide first parameter control; tt provides the teleporter framework.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_Introduction/critical.md">Raw captured source</a></p><pre># What the total cannot keep
+
+The coloured shape changes. The number returns. Without the retained outline, this return could look like nothing happened.
+
+Try it before giving it a larger name. Find two arrangements that nearly agree in their total. One may have more F, another less E. Their equality belongs to the calculation you are using. Your hand can still distinguish the paths that brought them here.
+
+This is where the critical question enters the tutorial. A summary gives you something useful to compare, but it decides which differences can compensate for which others. If this number later selects a body, a route or an action, what differences would that selection leave behind? The present console does not make those decisions. It gives the question a visible beginning.
+
+KEEP preserves an arrangement without requiring it to win. You can return to it, disagree with it, or pass through the same total from elsewhere. There is room here for an account of difference that does not immediately turn difference into a ranking. That possibility is part of Ada’s queer inquiry; a high entropy setting does not acquire it automatically.
+
+The rail also draws a boundary. Phi cannot go below zero on this console, though the separate rail nearby permits it. Neither handle is the whole concept. A limit becomes available to thought when we can meet it, name it and build a comparison beyond it.
+
+Even the reassuring names are choices. The instrument calls your setting the nearest of seven project references. Move across a boundary and its colour changes. Nothing in that colour change proves a natural division between kinds of life. It exposes a comparison rule, which can itself become material for another experiment.
+
+The earlier proposal imagined the laboratory recalling scenes from your walk. That remains a promising encounter to build. It would be stronger if those returns could resist the formula as well as illustrate it: an earlier work might contain something this new summary cannot keep.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_Introduction/artifacts.md">Raw captured source</a></p><pre># QFEP Introduction — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 9 artifacts*
+
+&gt; *The formula that unifies everything.*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## QFEP Balance Workbench
+![QFEP Balance Workbench](/scene-catalog/qfep_balance_workbench.png)
+
+WALK the QFEP frame
+
+`qfep_balance_workbench`
+
+## QFEP Formula 3D
+![QFEP Formula 3D](/scene-catalog/qfep_formula_3d.png)
+
+SEE the theory
+
+`qfep_formula_3d`
+
+## Lambda Slider
+![Lambda Slider](/scene-catalog/lambda_slider.png)
+
+TUNE entropy drive
+
+`lambda_slider`
+
+## Phi Slider
+![Phi Slider](/scene-catalog/phi_slider.png)
+
+TUNE rate sensitivity
+
+`phi_slider`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## F Term Sphere
+![F Term Sphere](/scene-catalog/grab_sphere_F.png)
+
+Grabbable sphere representing F (Free Energy) - the order-seeking, pattern-finding drive. Blue glow.
+
+`grab_sphere_F`
+
+## E Term Sphere
+![E Term Sphere](/scene-catalog/grab_sphere_E.png)
+
+Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space. Red glow.
+
+`grab_sphere_E`
+
+## Lambda Term Sphere
+![Lambda Term Sphere](/scene-catalog/grab_sphere_lambda.png)
+
+Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.
+
+`grab_sphere_lambda`
+
+## Tutorial Text Display
+![Tutorial Text Display](/scene-catalog/tt.png)
+
+In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.
+
+`tt`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_Introduction/summary.md">Raw captured source</a></p><pre># QFEP Introduction — four controls, one result
+
+The opening laboratory hall follows Crisis Synthesis with a manipulable calculation. Its primary work is the QFEP balance workbench: four normalised controls, a four-axis display, and KEEP to retain one outline and total. The learner seeks different arrangements with the same total, then tests why E stops contributing when lambda is zero.
+
+The map is 13 by 12 cells. The workbench at (6,4) and formula at (6,8) face the entrance. A level approach, side passage and exit connect the encounter. Raised cells that blocked the control row and exit have been lowered. All eleven placed artifact families remain; the formula, separate rails, spheres and other works provide secondary comparisons.
+
+The console evaluates F − lambda × E + phi × 0.30. Its inputs are supplied values, not measurements. Its coloured name is the nearest of seven authored references. The separate phi rail has a signed range, unlike the console.
+
+The declared next hall is QFEP_F_Term, on prediction. It and QFEP_Sandbox still need restoration to the authored museum route; the eight-hall sequence intention is retained. Desktop Godot checks cover controls and selected walking routes. Headset reach, comfort and learner understanding remain unverified.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_Introduction/blurb.md">Raw captured source</a></p><pre>*Can two different arrangements give the same number?*
+
+Move a control. Keep an outline. Change the arrangement and try to bring its total back.
+
+The formula offers a way to compare. Your hands may find something it leaves out.
+</pre></section></body></html>

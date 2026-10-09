@@ -1,0 +1,497 @@
+# game_of_life_petri.gd
+# Conway's Game of Life in a petri dish
+# VR-enabled with pattern presets and drawing
+#
+# Rules: B3/S23
+# - Birth: dead cell with exactly 3 neighbors → alive
+# - Survival: live cell with 2 or 3 neighbors → stays alive
+# - Death: otherwise
+#
+# @identity
+# essence: B3/S23 — three neighbors birth, two or three survive. All complexity from this.
+# desire: To be seeded and watched. To surprise with gliders, oscillators, guns.
+# critical_parameter: The rule itself (B3/S23). The initial pattern. Speed of generations.
+# triggers: GLIDER preset → traveling structure, GUN preset → infinite growth, RANDOM → emergent order from noise
+# emerges: Gliders from local rules. Oscillators from symmetry. Guns from precise engineering. Computation from life.
+# needs: VR speed slider [has], pattern buttons [has], clear/random [has]. Could use: rule editor (B/S variants).
+# relationships: Unlocks cellularautomata sequence. Contrasts with continuous automata (CA_SoftRules). Feeds into Turing completeness.
+# truth: Simple rules, applied everywhere simultaneously, produce complexity no one designed.
+
+extends Node3D
+
+class_name GameOfLifePetri
+
+## Dish dimensions
+@export var dish_size: float = 0.8
+
+## Grid resolution
+@export var grid_size: int = 64
+
+## Animation
+@export var generations_per_second: float = 8.0:
+	set(value):
+		generations_per_second = clampf(value, 1.0, 30.0)
+		_sync_speed_slider()
+
+@export var auto_run: bool = true
+
+## Colors
+@export var alive_color: Color = Color(0.2, 1.0, 0.4)
+@export var dead_color: Color = Color(0.02, 0.05, 0.02)
+@export var dish_color: Color = Color(0.15, 0.15, 0.18)
+
+## AXIS — WHAT IS SOWN. B3/S23 is identical in every value; the dish is not. The
+## artifact's whole claim is that the rule does not decide the world, and it has always
+## had the evidence bolted to its own keypad (GLIDER / PULSAR / GUN / RANDOM / CLEAR)
+## while shipping under exactly one culture. This names the family the buttons already
+## describe.
+##
+##   mixed   the legacy lineage, byte for byte: a glider at the quarter mark and a
+##           pulsar at the centre, sown in that order. A traveller and a heartbeat
+##           sharing a dish.
+##   pulsar  the period-3 oscillator alone at centre — a big four-fold symmetric
+##           bloom breathing in place on an otherwise empty field. Order that stays
+##           put.
+##   gun     Gosper's glider gun against the left edge, which never stops: population
+##           climbs forever and a diagonal stream of gliders crosses the whole dish.
+##           The only value whose picture keeps getting fuller.
+##   soup    a seeded random field at 30% density — the entire dish speckled, which
+##           collapses within a few dozen generations into scattered still-lifes and
+##           blinkers. Order out of noise, and the messiest frame in the set.
+##   none    nothing sown. B3/S23 applied to an empty dish, forever, and the empty
+##           dish is the honest picture of that. The rule alone makes nothing.
+##
+## This is an initial-condition axis, which is the shape that failed on
+## reaction_diffusion — but Life has no attractor to fall into: a gun grows without
+## bound, a pulsar oscillates at period 3, an empty dish stays empty, and a soup
+## freezes into rubble. The five never converge on one picture, at any generation.
+@export_enum("mixed", "pulsar", "gun", "soup", "none") var culture: String = "mixed"
+const CULTURES: PackedStringArray = ["mixed", "pulsar", "gun", "soup", "none"]
+
+## Seed for the `soup` culture and the RANDOM key. -1 (the default) draws from the
+## global stream exactly as before — the legacy path makes no draw at all at build
+## time, so this cannot shift anything. Set it to any non-negative number and the same
+## soup is dealt every time, which is the precondition for a soup being MEASURABLE
+## rather than five different dishes wearing one label.
+@export var culture_seed: int = -1
+
+# Patterns
+const PATTERNS = {
+	"glider": [[0,1,0], [0,0,1], [1,1,1]],
+	"blinker": [[1,1,1]],
+	"toad": [[0,1,1,1], [1,1,1,0]],
+	"beacon": [[1,1,0,0], [1,0,0,0], [0,0,0,1], [0,0,1,1]],
+	"pulsar": [
+		[0,0,1,1,1,0,0,0,1,1,1,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[0,0,1,1,1,0,0,0,1,1,1,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,1,1,1,0,0,0,1,1,1,0,0],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[1,0,0,0,0,1,0,1,0,0,0,0,1],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,1,1,1,0,0,0,1,1,1,0,0]
+	],
+	"glider_gun": [
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+		[1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	]
+}
+
+var _grid: Array[Array] = []
+var _next_grid: Array[Array] = []
+var _multimesh: MultiMesh
+var _multimesh_instance: MultiMeshInstance3D
+var _cell_size: float
+var _generation_timer: float = 0.0
+var _generation: int = 0
+var _population: int = 0
+var _info_label: Label3D
+var _rng: RandomNumberGenerator = null
+
+# VR Controls
+var _speed_slider: Node
+var _control_panel: Node3D
+var _study_requested: bool = false
+var _built: bool = false
+
+
+func _ready():
+	if _study_requested or str(get_meta("config_study", "")) == "addresses":
+		_study_requested = true
+		_address_dimensions()
+	_cell_size = dish_size / grid_size
+	_create_dish()
+	_create_multimesh()
+	_create_labels()
+	_create_vr_controls()
+	_init_grid()
+	_sow()
+	_built = true
+	if _study_requested:
+		_mount_address_study()
+
+func _address_dimensions() -> void:
+	grid_size = 24
+	dish_size = 1.15
+	auto_run = false
+	culture = "none"
+
+## Only the reviewed museum placement asks for a held address/receiver study.
+## Original preset buttons and the 64-site dish remain in other placements.
+func _mount_address_study() -> void:
+	if not _built or has_node("AddressStudy"):
+		return
+	if grid_size != 24:
+		for path in ["Dish", "Rim", "CellMultiMesh", "InfoLabel"]:
+			var old: Node = get_node(path)
+			remove_child(old)
+			old.queue_free()
+		_address_dimensions()
+		_cell_size = dish_size / grid_size
+		_create_dish()
+		_create_multimesh()
+		_create_labels()
+		_init_grid()
+	set_process(false)
+	set_process_input(false)
+	auto_run = false
+	if is_instance_valid(_control_panel):
+		remove_child(_control_panel)
+		_control_panel.queue_free()
+	_control_panel = null
+	_speed_slider = null
+	_info_label.visible = false
+	var study: Node3D = load("res://commons/artifacts/game_of_life_petri/address_study.gd").new()
+	study.name = "AddressStudy"
+	add_child(study)
+
+func _create_dish():
+	# Petri dish base
+	var dish = MeshInstance3D.new()
+	dish.name = "Dish"
+	
+	var cylinder = CylinderMesh.new()
+	cylinder.top_radius = dish_size * 0.55
+	cylinder.bottom_radius = dish_size * 0.6
+	cylinder.height = 0.04
+	dish.mesh = cylinder
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = dish_color
+	mat.metallic = 0.6
+	mat.roughness = 0.4
+	dish.material_override = mat
+	
+	dish.position = Vector3(0, -0.02, 0)
+	add_child(dish)
+	
+	# Glass rim
+	var rim = MeshInstance3D.new()
+	rim.name = "Rim"
+	var torus = TorusMesh.new()
+	torus.inner_radius = dish_size * 0.5
+	torus.outer_radius = dish_size * 0.55
+	rim.mesh = torus
+	
+	var glass_mat = StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.8, 0.9, 1.0, 0.3)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.metallic = 0.2
+	glass_mat.roughness = 0.1
+	rim.material_override = glass_mat
+	rim.position = Vector3(0, 0.01, 0)
+	add_child(rim)
+
+func _create_multimesh():
+	_multimesh = MultiMesh.new()
+	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_multimesh.use_colors = true
+	_multimesh.instance_count = grid_size * grid_size
+	
+	var cell_mesh = BoxMesh.new()
+	cell_mesh.size = Vector3(_cell_size * 0.9, 0.005, _cell_size * 0.9)
+	_multimesh.mesh = cell_mesh
+	
+	var mat = StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission_energy_multiplier = 0.4
+	
+	_multimesh_instance = MultiMeshInstance3D.new()
+	_multimesh_instance.name = "CellMultiMesh"
+	_multimesh_instance.multimesh = _multimesh
+	_multimesh_instance.material_override = mat
+	add_child(_multimesh_instance)
+	
+	# Initialize positions
+	var half = dish_size / 2.0
+	for y in range(grid_size):
+		for x in range(grid_size):
+			var idx = y * grid_size + x
+			var px = (x - grid_size / 2.0 + 0.5) * _cell_size
+			var pz = (y - grid_size / 2.0 + 0.5) * _cell_size
+			
+			var transform = Transform3D()
+			transform.origin = Vector3(px, 0.01, pz)
+			_multimesh.set_instance_transform(idx, transform)
+			_multimesh.set_instance_color(idx, dead_color)
+
+func _create_labels():
+	_info_label = Label3D.new()
+	_info_label.name = "InfoLabel"
+	_info_label.pixel_size = 0.002
+	_info_label.font_size = 24
+	_info_label.position = Vector3(0, 0.06, -dish_size/2 - 0.08)
+	add_child(_info_label)
+	_update_info()
+
+func _create_vr_controls():
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("GAME OF LIFE", [
+		[{"type": "slider_h", "label": "SPEED", "default": (generations_per_second - 1.0) / 29.0}],
+		[
+			{"type": "button", "label": "GLIDER"},
+			{"type": "button", "label": "PULSAR"},
+			{"type": "button", "label": "GUN"},
+		],
+		[
+			{"type": "button", "label": "RANDOM"},
+			{"type": "button", "label": "CLEAR"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.04, dish_size/2 + 0.15)
+	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(_control_panel)
+
+	_speed_slider = _control_panel.find_child("Param_0", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_slider_moved)
+
+	for i in range(5):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var idx: int = i
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _on_pattern_button(idx))
+
+func _sync_speed_slider():
+	if _speed_slider and _speed_slider.has_method("set_normalized_value"):
+		_speed_slider.set_normalized_value((generations_per_second - 1.0) / 29.0)
+
+func _on_speed_slider_moved(_position):
+	if _speed_slider and _speed_slider.has_method("get_normalized_value"):
+		generations_per_second = 1.0 + _speed_slider.get_normalized_value() * 29.0
+
+func _on_pattern_button(idx: int):
+	match idx:
+		0:  # Glider
+			_clear_grid()
+			_spawn_pattern("glider", grid_size/4, grid_size/4)
+		1:  # Pulsar
+			_clear_grid()
+			_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+		2:  # Gun
+			_clear_grid()
+			_spawn_pattern("glider_gun", 5, grid_size/2)
+		3:  # Random
+			_randomize_grid()
+		4:  # Clear
+			_clear_grid()
+
+func _init_grid():
+	_grid.clear()
+	_next_grid.clear()
+	for y in range(grid_size):
+		var row: Array[bool] = []
+		var next_row: Array[bool] = []
+		row.resize(grid_size)
+		next_row.resize(grid_size)
+		for x in range(grid_size):
+			row[x] = false
+			next_row[x] = false
+		_grid.append(row)
+		_next_grid.append(next_row)
+
+func _clear_grid():
+	for y in range(grid_size):
+		for x in range(grid_size):
+			_grid[y][x] = false
+	_generation = 0
+	_update_display()
+
+func _randomize_grid():
+	# Re-seeded at the top so one seed always deals the same dish; at culture_seed = -1
+	# _roll() falls straight through to randf() and this is the legacy behaviour.
+	if culture_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = culture_seed
+	for y in range(grid_size):
+		for x in range(grid_size):
+			_grid[y][x] = _roll() < 0.3
+	_generation = 0
+	_update_display()
+
+
+## The single draw the build path can make. Default (-1) is the global stream, one
+## randf() per cell, in the same order as before.
+func _roll() -> float:
+	if culture_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = culture_seed
+	return _rng.randf()
+
+
+## CULTURE — what goes into the dish. "mixed" reproduces the two hard-coded calls this
+## artifact has always made, in the same order, so the legacy dish is identical.
+func _sow() -> void:
+	match culture:
+		"pulsar":
+			_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+		"gun":
+			_spawn_pattern("glider_gun", 5, grid_size/2)
+		"soup":
+			_randomize_grid()
+		"none":
+			_update_display()                 # an empty dish is the picture
+		_:
+			_spawn_pattern("glider", grid_size/4, grid_size/4)
+			_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+
+func _spawn_pattern(pattern_name: String, cx: int, cy: int):
+	if not PATTERNS.has(pattern_name):
+		return
+	var pattern = PATTERNS[pattern_name]
+	var ph = pattern.size()
+	var pw = pattern[0].size()
+	
+	for py in range(ph):
+		for px in range(pw):
+			var x = cx - pw/2 + px
+			var y = cy - ph/2 + py
+			if x >= 0 and x < grid_size and y >= 0 and y < grid_size:
+				_grid[y][x] = pattern[py][px] == 1
+	_update_display()
+
+func _count_neighbors(x: int, y: int) -> int:
+	var count = 0
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			if dx == 0 and dy == 0:
+				continue
+			var nx = (x + dx + grid_size) % grid_size
+			var ny = (y + dy + grid_size) % grid_size
+			if _grid[ny][nx]:
+				count += 1
+	return count
+
+func _advance():
+	_population = 0
+	for y in range(grid_size):
+		for x in range(grid_size):
+			var neighbors = _count_neighbors(x, y)
+			var alive = _grid[y][x]
+			
+			if alive:
+				_next_grid[y][x] = neighbors == 2 or neighbors == 3
+			else:
+				_next_grid[y][x] = neighbors == 3
+			
+			if _next_grid[y][x]:
+				_population += 1
+	
+	# Swap grids
+	var temp = _grid
+	_grid = _next_grid
+	_next_grid = temp
+	
+	_generation += 1
+	_update_display()
+
+func _update_display():
+	_population = 0
+	for y in range(grid_size):
+		for x in range(grid_size):
+			var idx = y * grid_size + x
+			var alive = _grid[y][x]
+			var color = alive_color if alive else dead_color
+			_multimesh.set_instance_color(idx, color)
+			if alive:
+				_population += 1
+	_update_info()
+
+func _update_info():
+	_info_label.text = "GAME OF LIFE\nGen: %d | Pop: %d" % [_generation, _population]
+
+func _process(delta):
+	if not auto_run:
+		return
+	
+	_generation_timer += delta
+	var interval = 1.0 / generations_per_second
+	
+	if _generation_timer >= interval:
+		_generation_timer = 0.0
+		_advance()
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_SPACE:
+				auto_run = not auto_run
+			KEY_R:
+				_randomize_grid()
+			KEY_C:
+				_clear_grid()
+			KEY_G:
+				_clear_grid()
+				_spawn_pattern("glider", grid_size/4, grid_size/4)
+			KEY_P:
+				_clear_grid()
+				_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+			KEY_U:
+				_clear_grid()
+				_spawn_pattern("glider_gun", 5, grid_size/2)
+
+func step():
+	_advance()
+
+func reset():
+	_clear_grid()
+
+func apply_grid_config(config_data: Dictionary):
+	if str(config_data.get("study", "")) == "addresses":
+		_study_requested = true
+		_mount_address_study()
+	for key in config_data:
+		if key == "culture" or key == "culture_seed":
+			continue                          # normalised below, never set raw
+		if key in self:
+			set(key, config_data[key])
+	# Parsed through str() first: a fixture that passes "7" rather than 7 would be
+	# rejected outright by set() on a typed int and the seed would silently not apply.
+	if config_data.has("culture_seed"):
+		culture_seed = int(str(config_data["culture_seed"]))
+	# Normalising read — an unknown word keeps the culture already sown rather than
+	# emptying the dish, so a typo in a map token cannot publish a blank petri.
+	if config_data.has("culture"):
+		var _c: String = str(config_data["culture"]).strip_edges().to_lower()
+		if CULTURES.has(_c):
+			culture = _c
+			_clear_grid()
+			_sow()

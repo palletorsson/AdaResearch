@@ -1,0 +1,29 @@
+--- before/technical.md
++++ current/technical.md
+@@ -74,7 +74,7 @@
+ 
+ The placed `crate` provides another example. Its `_build()` calls `_build_plank_face()` for six sides, adds reinforcement strips and optionally builds a diagonal brace. Those components use additional box meshes. Six sides in a geometric description need not mean six rendered polygons or twelve total triangles in a furnished object.
+ 
+-This source connection is enough for the current recognition: the museum's floor and walls belong to the same box vocabulary as the exhibits. How to choose, transform and combine those parts into another spatial arrangement remains work for subsequent encounters.
++This source connection is enough for the current recognition: the museum's floor and walls belong to the same box vocabulary as the exhibits. The new prefab library begins composition with existing objects; later Transformation encounters examine the operations used to place and alter them.
+ 
+ ## Source and verification
+ 
+@@ -93,3 +93,17 @@
+ `cube_diagonal_plate` renders the same four front-face positions and the same two triples as the builder. In the right specimen only v6 receives `(0,0,0.55)`. The common diagonal 5–7 and triangle 4–5–7 remain fixed. Both specimens use one oblique projection with equal depth compression; the reference is not metrically to scale on the wall.
+ 
+ `tools/capture_cube_diagonal_plate.py` extracts the builder's current vertices and faces, then checks the actual plate meshes against them in a private Godot project. It renders the production scene for the book. The plate is static; handle interaction, replay and restoration still belong to the existing builders.
++
++## A library of box prefabs
++
++`prefab_box_library` occupies the widened east gallery at grid (16,7), facing west. Its 9.12 m shelf contains 24 pickable copies: six columns and four tiers. The first four columns repeat cardboard, wooden crate, cargo crate and the original AGAIN carton respectively. The last two vary the wooden crate and carton through exported colour, construction and lettering properties. Twelve distinct source/configuration editions produce the 24 copies.
++
++The editable `commons/artifacts/prefab_box_library/catalog.json` names the four real scene sources and their settings. The original cardboard, crate and cargo scenes are unchanged. At construction, each edition loads its source once, applies exported settings before `_ready`, and collects the resulting meshes and static labels. Meshes are batched by material into a cached `PackedScene`; copies share its mesh resources but have independent pickable bodies, transforms and physics state. This is a static display-and-pickup adapter for the listed sources, not a general copier of arbitrary prefab scripts or behaviours.
++
++Each copy has one enclosing box collider, fitted to the source bounds. The cardboard opening is visible but does not have a hollow collision interior. Copies begin frozen on the shelf; pickup uses the production XRToolsPickable and release enables rigid-body physics. Layer 6/mask 7 allows contact with the table, the museum and other pickable copies. Mesh batching produces 24 geometry nodes and 105 geometry surfaces, plus lettering; this is not a claim of 24 draw calls or tested Quest performance.
++
++The worktop is 0.775 m above the gallery floor. It is initially empty. The bottom and second tiers provide direct-reach copies; the higher tiers use the existing ranged pickup. Dropped objects below -2 m or more than 25 m from the library return to their shelf positions on the next periodic check, unless held. Arrangements are temporary in-session state, not a new save system.
++
++The native museum probe checks actual production pickup/release with a supplied grabber, separate instance state, shared geometry, gravity settling on the worktop, box-on-box stacking and a visitor-width walk along the shelf. All 19 checks pass. The four screenshots are native views from within the hall. Headset reach, real controller targeting and Quest performance have not been verified.
++
++Sources and evidence: `commons/artifacts/prefab_box_library/`; `doc/book/iterations/2026-09-26-cube-prefab-library/probe.gd`; the adjacent review page and native report.

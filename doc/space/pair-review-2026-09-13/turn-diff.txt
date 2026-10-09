@@ -1,0 +1,145 @@
+--- before/algorithms/randomness/simplexnoise/SimplexNoise.gd
+
++++ algorithms/randomness/simplexnoise/SimplexNoise.gd
+
+@@ -138,6 +138,8 @@
+
+ 	# so the plate is built once both displays exist.
+ 	if witness == "show":
+ 		_build_witness_plate.call_deferred()
++	if str(get_meta("config_study", "none")) == "compare":
++		_build_pair_study.call_deferred()
+ 
+ ## Push the declared seed, ramp and size down to the field. The field built
+ ## itself in ITS _ready, before this root's, with randi(); a declared seed
+@@ -483,7 +485,12 @@
+
+ 	out.append("sample offset     %-10.3f %-10.3f" % [float(mine["sample_offset"]), float(theirs["sample_offset"])])
+ 	out.append("")
+ 	out.append("noise_type        %-10d %-10d" % [int(mine["noise_type"]), int(theirs["noise_type"])])
+-	out.append("the one term that differs. the rest is the control.")
++	var changed: Array[String] = []
++	for key in WITNESS_KEYS:
++		if typeof(mine[key]) == TYPE_FLOAT:
++			if not is_equal_approx(float(mine[key]), float(theirs[key])): changed.append(str(key))
++		elif mine[key] != theirs[key]: changed.append(str(key))
++	out.append("only the basis differs" if changed.is_empty() else "also differs: " + ", ".join(changed))
+ 	return out
+ 
+ 
+@@ -536,3 +543,10 @@
+
+ 	if _witness_label == null:
+ 		return
+ 	_witness_label.text = "\n".join(_witness_lines())
++
++
++func _build_pair_study() -> void:
++	if has_node("PairStudy"): return
++	var study: Node3D = load("res://algorithms/randomness/simplexnoise/pair_study.gd").new()
++	add_child(study)
++	study.build(self)
+--- before/algorithms/randomness/perlinnoise/PerlinNoise.gd
+
++++ algorithms/randomness/perlinnoise/PerlinNoise.gd
+
+@@ -475,7 +475,12 @@
+
+ 	out.append("sample offset     %-10.3f %-10.3f" % [float(mine["sample_offset"]), float(theirs["sample_offset"])])
+ 	out.append("")
+ 	out.append("noise_type        %-10d %-10d" % [int(mine["noise_type"]), int(theirs["noise_type"])])
+-	out.append("the one term that differs. the rest is the control.")
++	var changed: Array[String] = []
++	for key in WITNESS_KEYS:
++		if typeof(mine[key]) == TYPE_FLOAT:
++			if not is_equal_approx(float(mine[key]), float(theirs[key])): changed.append(str(key))
++		elif mine[key] != theirs[key]: changed.append(str(key))
++	out.append("only the basis differs" if changed.is_empty() else "also differs: " + ", ".join(changed))
+ 	return out
+ 
+ 
+--- before/commons/data/artifact_roles.json
+
++++ commons/data/artifact_roles.json
+
+@@ -783,10 +783,10 @@
+
+       "dark_sphere": "primary"
+     },
+     "Noise_Perlin_Simplex": {
+-      "dark_sphere": "decoration",
+       "simplex_noise": "primary",
+       "perlin_noise": "primary",
+-      "perlin_noise_terrain": "secondary",
++      "perlin_noise_terrain": "primary",
++      "dark_sphere": "primary",
+       "configurable_portal": "secondary"
+     },
+     "CA_Introduction": {
+@@ -3212,15 +3212,14 @@
+
+     "Noise_Perlin_Simplex": {
+       "primary": [
+         "simplex_noise",
+-        "perlin_noise"
+-      ],
+-      "secondary": [
++        "perlin_noise",
+         "perlin_noise_terrain",
++        "dark_sphere"
++      ],
++      "secondary": [
+         "configurable_portal"
+       ],
+-      "decoration": [
+-        "dark_sphere"
+-      ]
++      "decoration": []
+     },
+     "Lab_Path": {
+       "primary": [
+--- before/commons/data/book/noise.json
+
++++ commons/data/book/noise.json
+
+@@ -158,28 +158,23 @@
+
+       "lines": [
+         {
+           "token": "simplex_noise",
+-          "text": "Replay a field and recognise its return. Change the scale at which it is sampled, then return again. The visible cubes give a related variation a finite body.",
+-          "by": "astra-discovery-voice-2026-09-11",
+-          "note": "coherence needs a lattice to hang gradients on, and the lattice signs everything: Perlin's bias rotates with the grid, not the geometry — simplex does not remove the scaffold, it swaps squares for triangles and pays a different bill.",
+-          "note_src": {
+-            "file": "commons/maps/Noise_Perlin_Simplex/critical.md",
+-            "quote": "the artifacts travel with the grid, not with the geometry"
+-          }
++          "text": "Replay a field and recognise its return. Follow one shared sample, then flatten the display without changing the sampled values.",
++          "by": "astra-pair-review-2026-09-13"
+         },
+         {
+           "token": "perlin_noise",
+-          "text": "A matching seed does not give the two fields matching ridges. Hold the display conditions still, choose a difference to examine, then decide what the comparison can support.",
+-          "by": "astra-discovery-voice-2026-09-11"
++          "text": "Change one condition and watch the plate report it. Restore the paired settings; a shared seed gives repeatability within each basis, not corresponding ridges.",
++          "by": "astra-pair-review-2026-09-13"
+         },
+         {
+           "token": "perlin_noise_terrain",
+-          "text": "Interactive 3D terrain generation using Perlin noise algorithms",
+-          "by": "draft"
+-        },
+-        {
+-          "token": "configurable_portal",
+-          "text": "Fully configurable portal - any size, rotation",
+-          "by": "draft"
++          "text": "A small sheet advances through slices of a 3D field. Its inherited Perlin name does not establish its actual OpenSimplex2S basis.",
++          "by": "astra-pair-review-2026-09-13"
++        },
++        {
++          "token": "dark_sphere",
++          "text": "The orb keeps its own rhythm while the pair returns to its declared settings. Every return has a scope.",
++          "by": "astra-pair-review-2026-09-13"
+         }
+       ],
+       "hero": "simplex_noise"

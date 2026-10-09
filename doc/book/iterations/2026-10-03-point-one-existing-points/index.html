@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One — the existing points</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the tutorial</a><a href="#museum">Inside the hall</a><a href="#changes">Try the changes</a><a href="#decisions">Decisions and checks</a></nav><p>ADA / ENDLESS MUSEUM / 3 OCTOBER 2026</p></header>
+<article><p class="step">Point One · the next tutorial</p><h1>A position.<br>A surface. A boundary.</h1><p class="subtitle">The points are already in the corridor. Read their construction, then change what they permit.</p><p><a href="../2026-10-03-point-zero-in-the-museum/index.html#reading">Previous: Point Zero’s running counter</a></p></article>
+<section id="museum" class="screen"><figure><a href="corridor.png"><img src="corridor.png" alt="Point One’s existing corridor in Endless Museum. Native Godot rendering." loading="lazy"></a><figcaption>Point One’s existing corridor in Endless Museum. Native Godot rendering.</figcaption></figure><div class="pair"><figure><a href="absence.png"><img src="absence.png" alt="The first station creates a label and no sphere." loading="lazy"></a><figcaption>The first station creates a label and no sphere.</figcaption></figure><figure><a href="surface.png"><img src="surface.png" alt="The next station adds a visible surface, with no collision body." loading="lazy"></a><figcaption>The next station adds a visible surface, with no collision body.</figcaption></figure></div></section>
+<article id="reading" class="chapter"><h1>Point One — give the point a body</h1>
+<p>Three labels say “Point one”. Above the first, nothing. Above the next two, a white sphere. Walk towards each. Only the last stops your movement.</p>
+<p>Point Zero followed when an instruction runs. Here we follow what has to be made for a point to appear and resist us.</p>
+<p>In your working Ada project, open <code>commons/primitives/point/point_condition.gd</code>. This is the script already used by the corridor’s points. Work in the museum’s <strong>Point One</strong> hall. The excerpts below identify parts of this file; make only the specified edits. After each edit, save and restart the scene.</p>
+<h2>A position before a surface</h2>
+<p>Near the top of the script:</p>
+<pre><code class="language-gdscript">const CENTRE := Vector3(0, 1.12, 0)
+</code></pre>
+<p><code>Vector3</code> holds three numbers. Here they locate a position relative to each station. The middle number places it 1.12 metres above that station’s origin. The next hall will examine the three directions and their reference frame.</p>
+<p><code>CENTRE</code> names this value. <code>const</code> makes it a constant: the script cannot reassign it while running. You can edit its starting value and run again. <code>:=</code> lets Godot infer its type from that value: here, <code>Vector3</code>.</p>
+<p>Change <code>1.12</code> to <code>1.7</code>. The small white spheres rise. The first station remains empty: its code finishes after creating the label. A position does not draw a surface by itself. Restore <code>1.12</code>.</p>
+<p>The large sphere on the final pedestal stays where it is. The same script gives that condition a separate centre and radius. We will leave its arrangement in place.</p>
+<h2>A surface at that position</h2>
+<p>Further down, the script creates the visible sphere:</p>
+<pre><code class="language-gdscript">var sphere := SphereMesh.new()
+sphere.radius = radius
+sphere.height = radius * 2.0
+</code></pre>
+<p><code>var</code> declares a variable. <code>sphere</code> keeps a reference to the object made by <code>.new()</code>. <code>SphereMesh</code> is a resource: it holds the surface data that a scene node can display.</p>
+<p>The station setup has already chosen a value for <code>radius</code> and a position called <code>centre</code>. For the small spheres these come from <code>RADIUS</code> and <code>CENTRE</code> near the top of the file. A radius measures from centre to surface; <code>* 2.0</code> makes the sphere’s full height twice that distance.</p>
+<p>Look around these assignments in <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">var body := MeshInstance3D.new()
+</code></pre>
+<pre><code class="language-gdscript">body.mesh = sphere
+</code></pre>
+<pre><code class="language-gdscript">body.position = centre
+add_child(body)
+</code></pre>
+<p><code>MeshInstance3D</code> displays the mesh. The dot selects a property of that node: its mesh, then its position. <code>add_child(body)</code> adds the new node beneath this station in the scene tree. The script creates both resource and node; it does not fetch a hidden sphere from a scene file.</p>
+<p>Change <code>const RADIUS := 0.14</code> to <code>const RADIUS := 0.3</code>. Both small spheres grow around their unchanged centres. Walk towards the first white sphere. You can still cross its surface. Restore <code>0.14</code>.</p>
+<h2>A boundary made separately</h2>
+<p>Find the part that creates <code>PointCollision</code>. It runs for the solid and pedestal conditions. These are its construction lines, with the naming and collision-layer setting left out:</p>
+<pre><code class="language-gdscript">var solid := StaticBody3D.new()
+solid.position = centre
+var collider := CollisionShape3D.new()
+var sphere_shape := SphereShape3D.new()
+sphere_shape.radius = radius
+collider.shape = sphere_shape
+solid.add_child(collider)
+add_child(solid)
+</code></pre>
+<p><code>StaticBody3D</code> is a fixed physics body. <code>SphereShape3D</code> describes its boundary; <code>CollisionShape3D</code> attaches that shape to the body. These lines draw nothing. The visible surface was made above them.</p>
+<p>Both constructions use <code>centre</code> and <code>radius</code>, so their positions and sizes agree.</p>
+<p>Change only <code>sphere_shape.radius = radius</code> to <code>sphere_shape.radius = radius * 2.0</code>. The small solid sphere looks unchanged, but your movement stops farther away. Its invisible radius has doubled. Your player has a width too, so the stopping distance depends on both bodies. The pedestal sphere’s boundary doubles too: this part of the shared script serves both.</p>
+<p>Restore the line. Now change <code>RADIUS</code> to <code>0.3</code> again. The small solid sphere’s surface and boundary grow together because both use that value. Restore <code>0.14</code> when finished.</p>
+<h2>The light remains another condition</h2>
+<p>Use the wall switch. The long shadows disappear; the solid sphere still stops your movement. The light is another existing artifact, and its code can wait. We have enough here to distinguish a position, a visible surface and a physical boundary.</p>
+<p>In Point Coordinates, the point can move with your hand. We will follow the position as it changes.</p><p class="quiet"><a href="tutorial.md">Tutorial source</a> · <a href="Point_One.diff">Exact text diff</a></p></article>
+<section id="changes" class="screen"><div class="pair"><figure><a href="solid.png"><img src="solid.png" alt="The original small solid sphere: radius 0.14 m." loading="lazy"></a><figcaption>The original small solid sphere: radius 0.14 m.</figcaption></figure><figure><a href="grown.png"><img src="grown.png" alt="Changing RADIUS to 0.3 grows this sphere and its matching boundary. The large pedestal sphere retains its own radius." loading="lazy"></a><figcaption>Changing RADIUS to 0.3 grows this sphere and its matching boundary. The large pedestal sphere retains its own radius.</figcaption></figure></div><div class="pair"><figure><a href="surface.png"><img src="surface.png" alt="The original visible point uses a centre height of 1.12 m." loading="lazy"></a><figcaption>The original visible point uses a centre height of 1.12 m.</figcaption></figure><figure><a href="raised.png"><img src="raised.png" alt="CENTRE at 1.7 m moves the surface; its label stays put." loading="lazy"></a><figcaption>CENTRE at 1.7 m moves the surface; its label stays put.</figcaption></figure></div><figure><a href="sun-off.png"><img src="sun-off.png" alt="The existing switch removes the directional sun. Fill remains, and the solid sphere’s collision is unchanged." loading="lazy"></a><figcaption>The existing switch removes the directional sun. Fill remains, and the solid sphere’s collision is unchanged.</figcaption></figure></section>
+<details id="decisions"><summary>What changed and what was checked</summary><div><h1>Point One — use the points already in the corridor</h1>
+<p>Palle asked to continue with the next hall and reiterated that its artifacts already exist. The canonical tutorial now follows the shared <code>commons/primitives/point/point_condition.gd</code> used by <code>point_absent</code>, <code>point_visible</code>, <code>point_solid</code> and <code>point_pedestal</code>. No artifacts, scenes or alternate teaching room were added. The old starter remains a separate study, not the default route.</p>
+<p>The first lesson is the difference between a position, a visible surface and a physical boundary. Its source uses <code>const CENTRE</code>, so the text explains a constant accurately rather than inventing a different variable in a duplicate script. <code>var</code> is introduced through the existing resource and node references. Station selection is named as supplied; the learner edits the relevant values without first implementing all the branches.</p>
+<p>The small visible and solid variants share <code>CENTRE</code> and <code>RADIUS</code>. The pedestal overrides those values. The collision assignment serves both solid and pedestal: doubling it changes both boundaries, and the tutorial says so. The student's own collision body contributes to the stopping distance. The light switch is an encounter at the end; programming its rig is deferred. Coordinates retains grabbing and reference frames.</p>
+<p>The excerpts identify source already present. The larger collision excerpt explicitly omits naming and collision-layer assignments for reading; students are told to make only specified edits. The critical <code>final.md</code>, museum map and source script are byte-for-byte unchanged from this pass's baseline. <code>technical.md</code> and the existing course handover now point to this lesson.</p>
+<p>An independent source reader checked the draft against the script and placement chain. 38 native checks passed using the real museum and its CharacterBody3D. The player crossed absence and visible mesh, met the solid, and stopped earlier after invisible boundary growth. Height, shared radius and pedestal exceptions were checked. The existing button event removed the sun without removing collision. The test substituted edited scripts in memory at original placements; it retained their renderer masks because anonymous test scripts have no source path for the light's normal discovery. Nothing was saved into production artifacts.</p>
+<p>The images are native views inside the museum. Physical headset use and beginner comprehension remain untested. The engine log also contains the existing unresolved audio-bus UID <code>uid://rwex60pqapc</code> and material warnings; passing these focused checks does not certify the whole project. Review links and anchors are checked programmatically; browser visual inspection was not performed.</p>
+<p>Next: read this one lesson, then follow the existing held point into Point Coordinates.</p><p><a href="verification.json">Native checks</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="before/point_condition.gd">Original artifact source</a> · <a href="verify.gd">Probe</a> · <a href="engine.log">Engine log</a> · <a href="source_manifest.json">Museum source record</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

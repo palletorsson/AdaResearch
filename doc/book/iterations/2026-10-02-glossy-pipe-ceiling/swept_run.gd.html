@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><title>swept_run.gd</title><style>body{margin:3rem;background:#f1ede7;color:#222}pre{white-space:pre-wrap;font:14px/1.7 monospace}</style><h1>swept_run.gd</h1><pre>extends Node3D
+## Reusable pipe, tube or cable with the existing glassware port contract.
+const Surface = preload(&quot;res://commons/primitives/pipes/swept_tube.gd&quot;)
+const Network = preload(&quot;res://commons/primitives/pipes/run_network.gd&quot;)
+const Ports = preload(&quot;res://commons/glass_rack/GlassSegmentPorts.gd&quot;)
+var record: Dictionary = {}
+var skin: MeshInstance3D
+
+func configure(points: PackedVector3Array, radius := 0.08, kind := &quot;tube&quot;, sides := 16, colour := Color(&quot;d877a2&quot;), sag := 0.5) -&gt; void:
+	record = {&quot;points&quot;:points,&quot;radius&quot;:radius,&quot;kind&quot;:kind,&quot;sides&quot;:sides,&quot;colour&quot;:colour}
+	if kind == &quot;cable&quot;: Network.shape_cable(record,sag)
+	if skin: remove_child(skin); skin.queue_free(); skin = null
+	var built: Dictionary = Surface.build(record.points,radius,sides,radius*0.22 if kind == &quot;pipe&quot; else 0.0)
+	if built.is_empty(): return
+	skin = MeshInstance3D.new(); skin.mesh = built.mesh; add_child(skin)
+	var material := StandardMaterial3D.new(); material.albedo_color = colour
+	material.roughness = 0.65 if kind == &quot;cable&quot; else 0.28
+	material.metallic = 0.5 if kind == &quot;pipe&quot; else 0.0
+	skin.material_override = material
+	var path: PackedVector3Array = record.points
+	Ports.apply_ports(self,{&quot;in&quot;:Ports.create_port(path[0],path[0]-path[1],radius),&quot;out&quot;:Ports.create_port(path[-1],path[-1]-path[-2],radius)})
+</pre>

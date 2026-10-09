@@ -1,0 +1,3172 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "38"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				2.14999985694885,
+				0.0,
+				3.25250005722046
+			],
+			"bounds_size": [
+				7.45000076293945,
+				3.33000016212463,
+				3.7975001335144
+			],
+			"cell": [
+				4,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@870/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@870/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@872/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@872/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@874/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@874/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@876/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@876/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@878/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@878/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.39000010490417
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "MORE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "LESS"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "LAYOUT"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "COLLAPSE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "BEGIN"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						0.899999976158142,
+						3.24799990653992
+					],
+					"text": "01 / ONE CALL"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						4.5,
+						1.27516222000122,
+						3.91262769699097
+					],
+					"text": "What changed when you asked for more?\n1 squares / depth 1 of 7 / nested\nSmallest term 2.2000 m / MORE, then try LAYOUT"
+				},
+				{
+					"parent": "ThresholdWalk",
+					"position": [
+						8.5,
+						0.025000000372529,
+						3.84999942779541
+					],
+					"text": "SAME SIZES / ANOTHER WAY THROUGH"
+				}
+			],
+			"position": [
+				4.5,
+				2.20000004768372,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fractal_recursion_2"
+		},
+		{
+			"bounds_position": [
+				10.1499996185303,
+				0.0,
+				3.25250005722046
+			],
+			"bounds_size": [
+				4.70000076293945,
+				4.40000009536743,
+				3.7975001335144
+			],
+			"cell": [
+				12,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@912/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@912/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@914/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@914/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@916/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@916/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@918/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@918/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@920/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@920/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.07260000705719,
+						3.39000010490417
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "@Node3D@723",
+					"position": [
+						12.5,
+						3.15000009536743,
+						5.5
+					],
+					"text": "Recursive Circles | Depth: 1"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.8199996948242,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "MORE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.5,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "LESS"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.1800003051758,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "PACKING"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.8199996948242,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "TURN"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.5,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "BEGIN"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.1800003051758,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						12.5,
+						0.899999976158142,
+						3.24799990653992
+					],
+					"text": "02 / FOUR CALLS"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						12.5,
+						1.27516222000122,
+						3.91262769699097
+					],
+					"text": "Predict the next count before pressing MORE.\n1 rings / depth 1 of 5 / fused\nRadius x 0.60 / minimum 0.01 m / turning OFF"
+				}
+			],
+			"position": [
+				12.5,
+				2.40000009536743,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "example_8_3_recursion_circles_vr"
+		},
+		{
+			"bounds_position": [
+				2.14999985694885,
+				0.0,
+				9.25250053405762
+			],
+			"bounds_size": [
+				4.69999980926514,
+				2.0,
+				3.79749965667725
+			],
+			"cell": [
+				4,
+				11
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@946/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@946/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@948/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@948/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						9.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@950/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						9.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@950/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						9.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@952/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						9.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@952/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						9.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@954/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						9.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/@Node3D@954/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						9.39000034332275
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						9.52999973297119
+					],
+					"text": "SPLIT"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						9.52999973297119
+					],
+					"text": "DRILL"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						9.52999973297119
+					],
+					"text": "SPREAD"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						9.30000019073486
+					],
+					"text": "LOTS"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						9.30000019073486
+					],
+					"text": "BEGIN"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						9.30000019073486
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "RecursionLesson",
+					"position": [
+						4.5,
+						0.899999976158142,
+						9.2480001449585
+					],
+					"text": "03 / WHERE NEXT?"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						4.5,
+						1.27516222000122,
+						9.91262817382813
+					],
+					"text": "Where will the next split be spent?\n1 cells / 0 of 12 splits / deepest 0\npopulation / fixed seed 31415 / choose a mode to begin again"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						4.5,
+						2.09999990463257,
+						11.5
+					],
+					"text": "1:1"
+				}
+			],
+			"position": [
+				4.5,
+				1.5,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cube_subdivision"
+		},
+		{
+			"bounds_position": [
+				10.1499996185303,
+				0.0,
+				9.94999980926514
+			],
+			"bounds_size": [
+				4.70000076293945,
+				1.5,
+				3.10000038146973
+			],
+			"cell": [
+				12,
+				11
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.1800003051758
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.1800003051758
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@978/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@978/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@980/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.8200006484985
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@980/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.6199998855591,
+						1.07260000705719,
+						11.8200006484985
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@982/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.1800003051758
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@982/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.1800003051758
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@984/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@984/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@986/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.8200006484985
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RecursionLesson/SideDesk/@Node3D@986/HandPoseArea/CollisionShape3D",
+					"position": [
+						10.3900003433228,
+						1.07260000705719,
+						11.8200006484985
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.5299997329712,
+						1.05499994754791,
+						11.1800003051758
+					],
+					"text": "NEXT"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.5299997329712,
+						1.05499994754791,
+						11.5
+					],
+					"text": "GHOST"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.5299997329712,
+						1.05499994754791,
+						11.8200006484985
+					],
+					"text": "SCAR"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.3000001907349,
+						1.05499994754791,
+						11.1800003051758
+					],
+					"text": "GONE"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.3000001907349,
+						1.05499994754791,
+						11.5
+					],
+					"text": "BEGIN"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.3000001907349,
+						1.05499994754791,
+						11.8200006484985
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "SideDesk",
+					"position": [
+						10.2480001449585,
+						0.899999976158142,
+						11.5
+					],
+					"text": "04 / WHAT COUNTS AS A CHAIR?"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						10.9126281738281,
+						1.27516222000122,
+						11.5
+					],
+					"text": "CUBE / stage 0 of 5\n1 kept parts / 0 removal markers / gone\nNEXT builds; GHOST shows cells the first cut excluded."
+				}
+			],
+			"position": [
+				12.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "recursive_chair"
+		},
+		{
+			"bounds_position": [
+				2.32000017166138,
+				0.00668000057339668,
+				12.9300003051758
+			],
+			"bounds_size": [
+				0.199999809265137,
+				2.35331988334656,
+				3.13999938964844
+			],
+			"cell": [
+				2,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				0.0399999991059303,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "science_screen"
+		},
+		{
+			"bounds_position": [
+				14.0799999237061,
+				0.00749999983236194,
+				15.0799999237061
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949235856533051,
+				0.840000152587891
+			],
+			"cell": [
+				14,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				3.51666665077209,
+				0.420000016689301,
+				16.5166664123535
+			],
+			"bounds_size": [
+				1.96666693687439,
+				1.55999994277954,
+				1.96666717529297
+			],
+			"cell": [
+				4,
+				17
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.800000011920929,
+				0.800000011920929,
+				0.800000011920929
+			],
+			"token": "recursive_table"
+		},
+		{
+			"bounds_position": [
+				11.8999996185303,
+				0.0,
+				16.8899993896484
+			],
+			"bounds_size": [
+				1.20000076293945,
+				0.46000000834465,
+				0.620000839233398
+			],
+			"cell": [
+				12,
+				17
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.5,
+				0.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.600000023841858,
+				0.600000023841858,
+				0.600000023841858
+			],
+			"token": "cube_staircase"
+		},
+		{
+			"bounds_position": [
+				3.36347937583923,
+				0.0329486131668091,
+				21.5002784729004
+			],
+			"bounds_size": [
+				2.11103701591492,
+				5.1842212677002,
+				2.12764930725098
+			],
+			"cell": [
+				4,
+				22
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "PagodaRoot",
+					"position": [
+						4.5,
+						7.07999992370605,
+						22.5
+					],
+					"text": "Fibonacci Pagoda | Tiers: 8"
+				}
+			],
+			"position": [
+				4.5,
+				0.699999988079071,
+				22.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.550000011920929,
+				0.550000011920929,
+				0.550000011920929
+			],
+			"token": "fibonacci_pagoda"
+		},
+		{
+			"bounds_position": [
+				11.8299999237061,
+				0.0,
+				21.8299999237061
+			],
+			"bounds_size": [
+				1.34000015258789,
+				0.66490775346756,
+				1.52750015258789
+			],
+			"cell": [
+				12,
+				22
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.5,
+				0.0,
+				22.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "synthesis_stand"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				23.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				26.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.99100017547607,
+				1.58000004291534,
+				25.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.9910001754761,
+				1.58000004291534,
+				27.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.00899982452393,
+				1.58000004291534,
+				26.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				23.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				23.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				23.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				8.27499961853027,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				8.27499961853027,
+				2.91000008583069,
+				26.9169998168945
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				3.0,
+				27.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.975000023841858,
+				1.38500010967255,
+				22.9599990844727
+			],
+			"bounds_size": [
+				0.0509999990463257,
+				0.629999995231628,
+				1.08000183105469
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.70000004768372,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				3.77499985694885,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.950000047683716,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.25,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				7.40999984741211,
+				4.32000017166138,
+				0.25
+			],
+			"bounds_size": [
+				0.180000305175781,
+				0.0799999237060547,
+				24.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				4.3600001335144,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				-0.0500000007450581,
+				1.0
+			],
+			"bounds_size": [
+				1.0,
+				0.0500000007450581,
+				1.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "floor_grate"
+		},
+		{
+			"bounds_position": [
+				7.98435688018799,
+				0.419999986886978,
+				23.0852870941162
+			],
+			"bounds_size": [
+				1.04530048370361,
+				1.67999994754791,
+				0.836935043334961
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.419999986886978,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				176.652328491211,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				13.932692527771,
+				0.419999986886978,
+				22.9534797668457
+			],
+			"bounds_size": [
+				1.07268619537354,
+				1.67999994754791,
+				1.05147171020508
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.5,
+				0.419999986886978,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				146.127639770508,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"name": "optional room receiver exists",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "existing square lesson begins at one",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "first doorway uses actual 2.2 metre term",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "doorway starts on central aisle floor",
+			"passed": true,
+			"value": [
+				8.5,
+				0.0,
+				4.49999952316284
+			]
+		},
+		{
+			"name": "all ten authored works retained",
+			"passed": false,
+			"value": [
+				"lobby:window",
+				"lobby:view",
+				"lobby:counter",
+				"lobby:extinguisher",
+				"lobby:elevator",
+				"lobby:pallet",
+				"lobby:point_zero",
+				"fractal_recursion_2",
+				"example_8_3_recursion_circles_vr",
+				"cube_subdivision",
+				"recursive_chair",
+				"science_screen",
+				"dark_sphere",
+				"recursive_table",
+				"cube_staircase",
+				"fibonacci_pagoda",
+				"synthesis_stand",
+				"showing",
+				"exit_sign",
+				"wall_clock",
+				"info_screen",
+				"electrical_panel",
+				"ceiling_vent",
+				"cable_tray",
+				"floor_grate",
+				"dream_bodies"
+			]
+		},
+		{
+			"name": "no added doorframes on example_8_3_recursion_circles_vr",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "no added doorframes on cube_subdivision",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "no added doorframes on recursive_chair",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 2 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 3 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 4 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 5 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 6 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates MORE",
+			"passed": true,
+			"value": {
+				"button": "MORE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "MORE depth 7 updates desk and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "seven exact terms copied from original executor",
+			"passed": true,
+			"value": [
+				2.2,
+				1.1,
+				0.55,
+				0.275,
+				0.1375,
+				0.06875,
+				0.034375
+			]
+		},
+		{
+			"name": "frame solids exactly three per term; no raised sill",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "descending sizes share the museum floor",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates LAYOUT",
+			"passed": true,
+			"value": {
+				"button": "LAYOUT",
+				"button_position": [
+					4.17999982833862,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144538402557,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@872/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "LAYOUT changes the image; term sizes and room remain",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates COLLAPSE",
+			"passed": true,
+			"value": {
+				"button": "COLLAPSE",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.32967102527618,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@874/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "COLLAPSE preserves physical terms while drawn sizes collapse",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates RULE",
+			"passed": true,
+			"value": {
+				"button": "RULE",
+				"button_position": [
+					4.17999982833862,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.32967114448547,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@878/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "RULE still exposes source condition",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates LESS",
+			"passed": true,
+			"value": {
+				"button": "LESS",
+				"button_position": [
+					4.5,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.49763965606689,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@870/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "LESS removes the last room frame",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates BEGIN",
+			"passed": true,
+			"value": {
+				"button": "BEGIN",
+				"button_position": [
+					4.5,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.29059112071991,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@876/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "BEGIN resets original square and room together",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates LESS",
+			"passed": true,
+			"value": {
+				"button": "LESS",
+				"button_position": [
+					4.5,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.49763965606689,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@870/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "LESS retains one reachable starting threshold",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "room obeys executor minimum size, not requested depth",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "standing museum body passes through first doorway",
+			"passed": true,
+			"value": {
+				"end": [
+					8.5,
+					0.0,
+					4.83000707626343
+				],
+				"passed": true,
+				"target": [
+					8.5,
+					0.0,
+					4.84999990463257
+				]
+			}
+		},
+		{
+			"name": "second doorway physically stops the standing body",
+			"passed": true,
+			"value": [
+				8.5,
+				-0.0001110433076974,
+				5.15066003799438
+			]
+		},
+		{
+			"name": "body can step sideways out of the size sequence",
+			"passed": true,
+			"value": {
+				"end": [
+					10.0899925231934,
+					0.000870005926117301,
+					5.15066003799438
+				],
+				"passed": true,
+				"target": [
+					10.1000003814697,
+					0.0,
+					5.15066003799438
+				]
+			}
+		},
+		{
+			"name": "ordinary floor bypass reaches remaining collection",
+			"passed": false,
+			"value": {
+				"end": [
+					9.95826816558838,
+					0.000941554899327457,
+					11.9666509628296
+				],
+				"passed": false,
+				"target": [
+					10.1000003814697,
+					0.0,
+					12.0
+				]
+			}
+		},
+		{
+			"name": "legacy desk opt-in remains free of room architecture",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"desktop_input": [
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "MORE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "LAYOUT",
+			"button_position": [
+				4.17999982833862,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144538402557,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@872/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "COLLAPSE",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.32967102527618,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@874/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "RULE",
+			"button_position": [
+				4.17999982833862,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.32967114448547,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@878/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "LESS",
+			"button_position": [
+				4.5,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.49763965606689,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@870/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "BEGIN",
+			"button_position": [
+				4.5,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.29059112071991,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@876/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "LESS",
+			"button_position": [
+				4.5,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.49763965606689,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/Example_8_2_Recursion/RecursionLesson/@Node3D@870/Button",
+			"hover_matches": true
+		}
+	],
+	"failures": [
+		"all ten authored works retained",
+		"ordinary floor bypass reaches remaining collection"
+	],
+	"openings": [
+		{
+			"opening_height": 2.145,
+			"opening_width": 2.09,
+			"position": [
+				8.5,
+				0.0,
+				4.49999952316284
+			],
+			"term": 2.2
+		},
+		{
+			"opening_height": 1.045,
+			"opening_width": 0.99,
+			"position": [
+				8.5,
+				0.0,
+				5.49999952316284
+			],
+			"term": 1.1
+		},
+		{
+			"opening_height": 0.5005,
+			"opening_width": 0.451,
+			"position": [
+				8.5,
+				0.0,
+				6.49999952316284
+			],
+			"term": 0.55
+		},
+		{
+			"opening_height": 0.25025,
+			"opening_width": 0.2255,
+			"position": [
+				8.50000095367432,
+				0.0,
+				7.49999952316284
+			],
+			"term": 0.275
+		},
+		{
+			"opening_height": 0.125125,
+			"opening_width": 0.11275,
+			"position": [
+				8.50000095367432,
+				0.0,
+				8.5
+			],
+			"term": 0.1375
+		},
+		{
+			"opening_height": 0.0625625,
+			"opening_width": 0.056375,
+			"position": [
+				8.50000095367432,
+				0.0,
+				9.5
+			],
+			"term": 0.06875
+		},
+		{
+			"opening_height": 0.03128125,
+			"opening_width": 0.0281875,
+			"position": [
+				8.50000095367432,
+				0.0,
+				10.5
+			],
+			"term": 0.034375
+		}
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": false,
+	"rays": [],
+	"room": "Fractal_Recursion",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Fractal_Recursion/arrival.png",
+		"res://ada_run/encounter_pilot/Fractal_Recursion/first-desk.png",
+		"res://ada_run/encounter_pilot/Fractal_Recursion/seven-frames.png",
+		"res://ada_run/encounter_pilot/Fractal_Recursion/desk-and-doors.png",
+		"res://ada_run/encounter_pilot/Fractal_Recursion/body-limit.png",
+		"res://ada_run/encounter_pilot/Fractal_Recursion/alongside.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": []
+}

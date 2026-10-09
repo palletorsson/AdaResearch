@@ -1,0 +1,307 @@
+I read the complete ZIP as the **full eight-hall Colour sequence**, including tutorials, existing reflections, code, variants, and verification. The chapter holds together very well. I would **freeze the order**. My verdict is **7 KEEP, 1 CHANGE**: Paint is the only hall where the tutorial risks letting infrastructure become larger than the colour lesson.
+
+| Hall | Verdict | Capability actually acquired | Smallest revision |
+|---|---|---|---|
+| **1. Colour — the same parts** | **KEEP** | Separate palette, assignment, material and geometry | Explicitly name “palette = available values / assignment = where they go.” |
+| **2. Flashlight — keep the surface** | **KEEP** | Separate surface colour from coloured illumination and aim | No structural change. |
+| **3. Nails — a position becomes a colour** | **KEEP** | A spatial value enters a function and a `Color` returns | No structural change. |
+| **4. Rainbow — keep the opening** | **KEEP** | An ordered palette partitions a fixed extent | Make explicit that list length and colour assignment are separable decisions even though this example couples them. |
+| **5. Pillar — colour has a height** | **KEEP** | One coordinate system maps into another; RGB and HSV describe the same returned colour differently | No structural change. |
+| **6. Grid — a colour left at an address** | **KEEP** | Colour becomes retained state at an address; Palette instances retain independent sequence state | No structural change. |
+| **7. Paint — a mark stays on the surface** | **CHANGE** | Action → ray → accepted hit → surface address → persistent colour | Make the automatic painter explicitly secondary/optional so the manual causal chain remains dominant. |
+| **8. Walls — a view through two colours** | **KEEP** | Colour becomes a layered spatial relation while collision remains independent | No structural change. |
+
+## The full progression is excellent
+
+The chapter is not simply teaching eight colour techniques. It progressively relocates **where colour exists in the computational system**.
+
+In the first hall colour is a **material value**. Flashlight moves colour into a **light contribution** while holding the material fixed. Nails makes colour the **return value of a spatial mapping**. Rainbow puts colours into an **ordered collection**. Pillar changes the coordinate model and makes colour a **field**. Grid makes colour **persistent data at an address**. Paint turns colour into **accumulated history on a surface**. Walls makes colour part of the **view through several spatial layers**.
+
+That is an exceptionally coherent progression:
+
+**assignment → illumination → mapping → palette → field → memory → inscription → spatial composition**
+
+And each stage reuses the previous book rather than restarting.
+
+The first hall uses Primitives + Transformation + Arrays. Flashlight returns to Transformation through `look_at`. Nails returns to Coordinates and PointBody. Rainbow returns to lists and indexed construction. Pillar reuses the position-to-colour function but changes its coordinate semantics. Grid brings Arrays back explicitly. Paint reuses PointBody, actions and addressed surfaces. Walls reuses Transformation and the Palette class.
+
+That cumulative structure is now very convincing.
+
+## Flashlight is an important second lesson
+
+This hall establishes one of the chapter's central distinctions:
+
+**assigned surface colour ≠ appearance**.
+
+The board's material remains near-white while coloured lights move over it. A light has its own colour, position, direction and cone. Moving its aim changes the surface without repainting it. The overlap can produce a colour that neither light is individually assigned.
+
+The reflection goes further without asking the learner to reconstruct everything: faceted geometry changes how light arrives; surrounding illumination matters; light rooms change apparent depth; a coloured material and coloured illumination can produce related appearances through different mechanisms.
+
+That is exactly the right tutorial/reflection division.
+
+## Nails is probably the cleanest computational Colour lesson
+
+This:
+
+```gdscript
+func colour_at(p: Vector3, size: Vector3) -> Color:
+    var channels := (p / size).clamp(Vector3.ZERO, Vector3.ONE)
+    return Color(channels.x, channels.y, channels.z)
+```
+
+has a very clear contract:
+
+**position in → colour out.**
+
+And importantly, the function knows nothing about nails, hands, materials or lights. Application is separate:
+
+```gdscript
+var chosen := colour_at(...)
+swatch.albedo_color = chosen
+```
+
+That is a very transferable programming idea.
+
+The reflection also correctly destabilizes the apparent neutrality of the colour cube. Equal geometric differences in RGB are not equal perceptual differences, and applying the same numerical colour to skin, nail, giant hand and tiny hand does not make those situations equivalent.
+
+So the tutorial says **how the mapping works**, while the reflection asks **what it means to make the mapping available to a choosing body**.
+
+Strong pair.
+
+## Rainbow should stay optional
+
+I think the decision flagged in the review brief is correct.
+
+The reflective room is primarily an **encounter with celebration and plurality**, not a coding checkpoint. The learner doesn't have to earn the confetti by solving the algorithm.
+
+The small tutorial still contributes something useful: a fixed extent can be divided differently according to the number of colour entries while keeping the opening and outer boundary constant.
+
+Three bands:
+
+```text
+0.6 / 3 = 0.2
+```
+
+Four bands:
+
+```text
+0.6 / 4 = 0.15
+```
+
+One band:
+
+```text
+0.6 / 1 = 0.6
+```
+
+The invariant is important: **internal division changes; opening and total thickness remain**.
+
+It also prepares the reflective forty-eight-band “continuous” rainbow beautifully: increasing sample count can make boundaries harder to see without producing mathematical continuity.
+
+Keep the making lesson optional.
+
+## Pillar is a particularly strong bridge
+
+The hand-height adapter is not confusing; I think it is necessary.
+
+You have deliberately separated:
+
+```text
+reachable hand coordinates
+        ↓
+represented field coordinates
+        ↓
+HSV coordinates
+        ↓
+RGB Color
+```
+
+That is a sophisticated idea made quite understandable through two small functions:
+
+```gdscript
+hand_to_field(...)
+hsv_at(...)
+```
+
+The learner's arm doesn't need to reach 4.6 metres to inspect the represented vertical field.
+
+And the line:
+
+> In Nails, moving up changed green. Here it changes value.
+
+is pedagogically excellent.
+
+It makes clear that **axes do not come with meanings attached**.
+
+The reflection then introduces an important loss of information: at HSV value zero, many different hue/saturation coordinates all become black. The source parameters remain different even though the resulting RGB value cannot recover them.
+
+That connects beautifully with earlier themes about representations losing information.
+
+## Grid is stronger than I expected
+
+The `Palette` class works.
+
+It is small enough not to feel like a new architecture:
+
+```gdscript
+colours
+index
+current_colour()
+next_colour()
+```
+
+Its purpose is immediately understandable:
+
+> remember an ordered set and where I currently am within it.
+
+And two Palette instances prove that the state belongs to the instance.
+
+Grid also establishes three different indices/addresses that could easily become confused:
+
+```text
+grid address
+MultiMesh instance index
+palette index
+```
+
+The tutorial deliberately asks the learner to distinguish them.
+
+That is excellent preparation for later procedural systems.
+
+The reflection then gives the deeper political/spatial question: the program can write across areas that the console does not let the visitor select. **Programmatic reach and user agency need not coincide.**
+
+I would keep all of that.
+
+## Paint is the only hall I would reduce slightly
+
+The idea is excellent:
+
+**Grid:** one colour persists at a cell address.
+
+**Paint:** repeated colour deposits persist across a surface.
+
+And this causal chain is very good:
+
+```text
+held
+→ action active
+→ ray attempted
+→ valid receiver hit
+→ surface address
+→ deposit
+→ changed image
+```
+
+The three readout states are especially useful:
+
+**READY**  
+nothing requested
+
+**SPRAY / MISS**  
+requested, but no valid target
+
+**MARK**  
+requested and accepted
+
+That is a strong distinction between **permission, attempt and consequence**.
+
+My concern is simply density. The core lesson currently also contains:
+
+- automatic painting,
+- two sine oscillators,
+- world↔UV conversion,
+- ray query configuration,
+- angle rejection,
+- image allocation,
+- pixel loops,
+- soft circular rasterization,
+- exponential accumulation,
+- texture updating,
+- desktop control adaptation.
+
+The support files are correctly declared, so this is not a reconstruction failure. But cognitively, Paint is the one hall where a reader could lose the colour lesson inside the machinery.
+
+I would not remove the support implementation. Instead I would make **“Another caller, the same receiver” explicitly optional and subsequent**.
+
+The primary contract should stop at:
+
+> I can hold a known object, request spray, aim it, hit a surface, convert that hit to an address, and leave a coloured mark that persists.
+
+Then, after that succeeds:
+
+> An automatic process can call the same receiver too.
+
+That makes the automatic painter a demonstration of interface reuse rather than a second concurrent subject.
+
+The reflection can remain unchanged. In fact, its automatic painter is much more powerful reflectively when the tutorial does **not** imply that every visitor must first program it.
+
+## Walls is an excellent ending
+
+Walls closes Colour with several distinctions accumulated through the chapter:
+
+**colour value**  
+comes from Palette.
+
+**alpha**  
+changes the rendered contribution of a surface.
+
+**transparency mode**  
+determines whether alpha participates.
+
+**position and rotation**  
+change which panes overlap from a viewpoint.
+
+**collider**  
+remains regardless of visual transparency.
+
+So:
+
+> seeing through ≠ passing through.
+
+That is exactly the kind of conceptual separation Ada repeatedly develops.
+
+The reflection then expands beyond the reduced tutorial into RGB/HSV spatial models, interpolation, modular partitions, Gillick-derived arrangements and colour as architectural organization. That richness belongs there rather than in the small code exercise.
+
+The gradient bench is especially good: **same endpoints, different route through colour space**. It recalls Transformation's shared destination/different journey without mechanically repeating it.
+
+## The deepest chapter-level structure
+
+I think Colour has now found a recurring question comparable to Transformation's *what survives?*
+
+For Colour it is:
+
+> **Where is the colour held, and what receives it?**
+
+Across the sequence:
+
+```text
+material       ← palette assignment
+surface        ← light
+material       ← mapped position
+band           ← palette index
+Color          ← HSV coordinates
+grid instance  ← persistent stored choice
+image          ← repeated deposits
+view           ← layered surfaces
+```
+
+And beside that question runs another:
+
+> **What does the stored value fail to determine?**
+
+RGB doesn't determine appearance. A colour value doesn't contain its cultural associations. A grid cell doesn't retain the history of overwritten colours. A painted image doesn't preserve the original gestures intact. Alpha doesn't imply physical permeability. A palette doesn't explain why those colours belong together.
+
+That makes Colour much more than an interlude about RGB.
+
+The verification package is also unusually substantial: **747 native assertions, 39 render checks, and 25 deliberate behavioural faults rejected** across the collected evidence, while correctly refusing to treat that as evidence of learner comprehension, headset comfort, or interpretive success.
+
+So I would freeze **1–6 and 8**, make the small pedagogical reduction in **Paint**, and preserve the chapter order exactly as it is.
+
+The sequence now has a clear ending point:
+
+**Primitives:** what is constructed?  
+**Transformation:** how can it change?  
+**Arrays:** where is it among many?  
+**Colour:** what value is assigned, where is that value held, and under what conditions does it become what we see?
+
+That is a very strong first four-sequence foundation.

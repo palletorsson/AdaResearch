@@ -1,0 +1,421 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed Life dish found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: address-lit",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "GLIDER reaches A at generation eight",
+      "passed": true
+    },
+    {
+      "name": "Walk-floor installation supplies carried PointBody STEP",
+      "passed": true
+    },
+    {
+      "name": "Installed LINK off changes output only",
+      "passed": true
+    },
+    {
+      "name": "Reconnect relights A without counting a new occupancy",
+      "passed": true
+    },
+    {
+      "name": "TRACE marks births and withdrawals in both receivers",
+      "passed": true
+    },
+    {
+      "name": "TRACE off restores both views without editing state",
+      "passed": true
+    },
+    {
+      "name": "Installed blinker repeats after two steps; centre stays occupied",
+      "passed": true
+    },
+    {
+      "name": "Installed meeting is empty at generation six",
+      "passed": true
+    },
+    {
+      "name": "A supplied body remains supported at A before, during and after occupancy",
+      "passed": true
+    },
+    {
+      "name": "Standing at A never writes cell state",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools carries installed STEP beside floor without editing cells",
+      "passed": true
+    },
+    {
+      "name": "Held installed trigger advances one generation",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: carried-step",
+      "passed": true
+    },
+    {
+      "name": "Release returns installed point to console shelf",
+      "passed": true
+    },
+    {
+      "name": "Installed RUN uses existing half-second update",
+      "passed": true
+    },
+    {
+      "name": "Installed observation holds at 48",
+      "passed": true
+    },
+    {
+      "name": "All installed floor transforms remain fixed",
+      "passed": true
+    },
+    {
+      "name": "Replay clears time but preserves link choice",
+      "passed": true
+    },
+    {
+      "name": "entry_to_desk: capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "entry_to_desk: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "desk_to_floor: capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "desk_to_floor: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "floor_to_rear: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "floor_to_rear: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_to_hex_controls: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_to_hex_controls: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "entry_to_desk: capsule clearance",
+    "desk_to_floor: capsule clearance"
+  ],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_window"
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_view"
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_counter"
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_extinguisher"
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_elevator"
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_pallet"
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_point_zero"
+      },
+      {
+        "key": "game_of_life_petri",
+        "local": [
+          6.5,
+          0.0,
+          8.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri"
+      },
+      {
+        "key": "science_screen",
+        "local": [
+          1.5,
+          1.5,
+          23.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ScienceScreen"
+      },
+      {
+        "key": "mold_network",
+        "local": [
+          2.5,
+          0.0,
+          24.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/MoldNetwork"
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          6.5,
+          0.0,
+          25.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DarkSphere"
+      },
+      {
+        "key": "hexagon_ca_vr",
+        "local": [
+          9.5,
+          0.0,
+          27.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/HexagonCAVR"
+      },
+      {
+        "key": "ca_growth_network",
+        "local": [
+          3.5,
+          1.29999995231628,
+          28.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CAGrowthNetwork"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ExitSign"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          1.5,
+          3.0,
+          30.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/@Node3D@1903"
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/WallClock"
+      },
+      {
+        "key": "whiteboard",
+        "local": [
+          14.0,
+          0.899999976158142,
+          17.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Whiteboard"
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ElectricalPanel"
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          10.2250003814697
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CeilingVent"
+      }
+    ],
+    "routes": {
+      "desk_to_floor": {
+        "blocked": [
+          {
+            "at": [
+              6.5,
+              5.80000019073486
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/AddressConsole/AddressControls/Btn_7/Button"
+          },
+          {
+            "at": [
+              6.35833358764648,
+              5.80000019073486
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/AddressConsole/AddressControls/Btn_7/Button"
+          },
+          {
+            "at": [
+              4.80000019073486,
+              6.828125
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/ReadoutStem/@StaticBody3D@700"
+          },
+          {
+            "at": [
+              4.80000019073486,
+              6.97500038146973
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/ReadoutStem/@StaticBody3D@700"
+          },
+          {
+            "at": [
+              4.80000019073486,
+              7.12187528610229
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/ReadoutStem/@StaticBody3D@700"
+          },
+          {
+            "at": [
+              4.80000019073486,
+              7.26875019073486
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/ReadoutStem/@StaticBody3D@700"
+          }
+        ],
+        "samples": 76,
+        "unsupported": []
+      },
+      "entry_to_desk": {
+        "blocked": [
+          {
+            "at": [
+              6.5,
+              5.80000019073486
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri/AddressStudy/AddressConsole/AddressControls/Btn_7/Button"
+          }
+        ],
+        "samples": 17,
+        "unsupported": []
+      },
+      "floor_to_rear": {
+        "blocked": [],
+        "samples": 52,
+        "unsupported": []
+      },
+      "rear_to_exit": {
+        "blocked": [],
+        "samples": 70,
+        "unsupported": []
+      },
+      "rear_to_hex_controls": {
+        "blocked": [],
+        "samples": 85,
+        "unsupported": []
+      }
+    },
+    "scope": "Native museum; actual hall overhead, raised and visitor-height. Neighbouring halls/player hidden for captures. No physical headset test.",
+    "single_step_ms": 2.378,
+    "work_local": [
+      6.5,
+      0.0,
+      8.5
+    ]
+  },
+  "passed": false
+}

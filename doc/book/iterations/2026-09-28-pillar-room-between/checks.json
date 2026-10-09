@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "scope": "Publication and selected source checks; dated native evidence reused. No fresh runtime test.",
+  "checks": [
+    {
+      "name": "Only four recorded passage revisions",
+      "passed": true
+    },
+    {
+      "name": "Code, figure and artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Opening walk unchanged",
+      "passed": true
+    },
+    {
+      "name": "Closing and Grid handoff unchanged",
+      "passed": true
+    },
+    {
+      "name": "Source match: commons/maps/Color_Pillar/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Source match: algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "passed": true
+    },
+    {
+      "name": "Source match: algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+      "passed": true
+    },
+    {
+      "name": "Source match: algorithms/color/grabcolor/color_sets_overview.gd",
+      "passed": true
+    },
+    {
+      "name": "Source match: commons/primitives/pillar/pillar.tscn",
+      "passed": true
+    },
+    {
+      "name": "Source match: commons/primitives/panels/DigitalPaper/grab_paper.tscn",
+      "passed": true
+    },
+    {
+      "name": "Source match: commons/primitives/cubes/grab_cube_grid_snap.gd",
+      "passed": true
+    },
+    {
+      "name": "Source match: addons/godot-xr-tools/objects/pickable.gd",
+      "passed": true
+    },
+    {
+      "name": "Catalogue chapter hash current",
+      "passed": true
+    },
+    {
+      "name": "Only Pillar catalogue reference changed",
+      "passed": true
+    },
+    {
+      "name": "Eight current Colour chapter sources",
+      "passed": true
+    },
+    {
+      "name": "Capture content matches its manifest",
+      "passed": true
+    },
+    {
+      "name": "Native museum images readable",
+      "passed": true
+    },
+    {
+      "name": "Dated native report preserved",
+      "passed": true
+    },
+    {
+      "name": "Rendered IDs unique",
+      "passed": true
+    },
+    {
+      "name": "Internal navigation resolves",
+      "passed": true
+    }
+  ]
+}

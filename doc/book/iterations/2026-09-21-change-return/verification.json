@@ -1,0 +1,22 @@
+{
+  "scope": "Two manuscripts and the capture exporter; focused source reading, no new Godot or headset run",
+  "protected_passages": 11,
+  "code_blocks_preserved": 6,
+  "encounter_order_preserved": true,
+  "baseline_inputs_preserved": 26,
+  "core_changes": "Only two text hashes",
+  "capture_hall_headings": 2,
+  "exporter_regression_tests_passed": 4,
+  "chapter_counts": [
+    {
+      "map": "Change_Intro",
+      "before_words": 2052,
+      "after_words": 2111
+    },
+    {
+      "map": "Flow_Field",
+      "before_words": 714,
+      "after_words": 807
+    }
+  ]
+}

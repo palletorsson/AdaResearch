@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Colour — the same parts</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="colour-review.zip">Code + tests</a></nav></header><main><p class="quiet">216 native Godot checks passed; three printed exercise variants and one independent-choice example tested; 5 deliberate faults rejected. Exact printed program in a supplied test host. No new museum render, headset or learner trial.</p><h1>Colour — the same parts</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>RGB colour values</li>
+<li>A palette and an assignment to each part</li>
+<li>Independent material resources</li>
+<li>Changing colour while keeping geometry fixed</li>
+</ul>
+<p>Find the first four columns in the Colour hall. They have the same five parts. One coat of ochre gathers the first column into a single body. Beside it, red connects three blocks across a blue sphere. Colour gives your eye another way to group what is there.</p>
+<p>We bring the <code>BoxMesh</code> and <code>SphereMesh</code> constructions from Primitives, their positions and sizes from Transformation, and indexed references from Array. This lesson adds a material colour to each part. The construction stays still while we change the assignment.</p>
+<h2>Keep the construction</h2>
+<p>Work in the existing Endless Museum, beside the entrance columns in <code>Color_Context_Placed</code>. Attach this complete <code>lesson.gd</code> to an empty <code>Node3D</code> named <code>ColourStudy</code>, with unit scale and its origin on clear floor. It builds one 4.4-metre column, 1.1 metres wide. Leave room to walk around it. The museum supplies the room, camera, player and light. The script creates every part and material; it needs no child nodes or companion scripts. This reduced colour study has no collision or pickup behaviour.</p>
+<p>The five construction calls reproduce the opening column's dimensions and order: broad block, block, sphere, block, dome. They gather familiar mesh creation into two small helpers. The last sphere uses Godot's hemisphere option; its origin sits at the dome's base. Those dimensions are already chosen here. Begin by changing only the two lists at the top.</p>
+<p>The palette holds the available colour values. The assignment says where they go: <code>colour_slots</code> chooses a palette entry for each part. Changing a value and changing its destination are separate decisions.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript"># Five familiar parts; colour changes their grouping without changing their geometry.
+extends Node3D
+
+var palette: Array[Color] = [
+    Color(0.78, 0.60, 0.30), # 0: ochre
+    Color(0.80, 0.16, 0.16), # 1: red
+    Color(0.16, 0.36, 0.80), # 2: blue
+]
+var colour_slots: Array[int] = [0, 0, 0, 0, 0]
+var parts: Array[MeshInstance3D] = []
+
+func _ready() -&gt; void:
+    add_box(Vector3(1.10, 0.60, 1.10), Vector3(0, 0.30, 0))
+    add_box(Vector3(0.95, 0.95, 0.95), Vector3(0, 1.075, 0))
+    add_round(0.475, 0.95, Vector3(0, 2.025, 0))
+    add_box(Vector3(0.85, 0.95, 0.85), Vector3(0, 2.975, 0))
+    add_round(0.425, 0.95, Vector3(0, 3.45, 0), true)
+    apply_colours()
+
+func add_box(size: Vector3, at: Vector3) -&gt; void:
+    var shape := BoxMesh.new()
+    shape.size = size
+    add_part(shape, at)
+
+func add_round(radius: float, height: float, at: Vector3, hemisphere := false) -&gt; void:
+    var shape := SphereMesh.new()
+    shape.radius = radius
+    shape.height = height
+    shape.is_hemisphere = hemisphere
+    add_part(shape, at)
+
+func add_part(shape: Mesh, at: Vector3) -&gt; void:
+    var part := MeshInstance3D.new()
+    part.mesh = shape
+    part.position = at
+    var material := StandardMaterial3D.new()
+    material.roughness = 0.55
+    part.material_override = material
+    add_child(part)
+    parts.append(part)
+
+func apply_colours() -&gt; void:
+    assert(colour_slots.size() == parts.size(), &quot;Give every part a palette index.&quot;)
+    for i in parts.size():
+        var slot: int = colour_slots[i]
+        assert(slot &gt;= 0 and slot &lt; palette.size(), &quot;Palette index outside the list.&quot;)
+        var material: StandardMaterial3D = parts[i].material_override
+        material.albedo_color = palette[slot]
+</code></pre>
+<h2>Give a surface a colour</h2>
+<p>Run the study with its five zeroes. Every part receives <code>palette[0]</code>, the ochre. Walk around it. Different sides catch different light although their assigned colour is the same.</p>
+<p><code>Color(r, g, b)</code> supplies red, green and blue channel values. We use values between zero and one. Alpha is omitted, so these colours are opaque. <code>StandardMaterial3D</code> describes how a surface is rendered; <code>albedo_color</code> sets its base colour. Here roughness stays at 0.55 and the other material settings keep their defaults.</p>
+<p>Each call to <code>add_part</code> creates a fresh material and assigns it to that mesh instance. This matters even when all five colours are equal. If all parts shared one material, changing that resource would change every part using it. Independent materials let us address their colours separately, just as independent cube instances let us change one transform in Array.</p>
+<h2>Give the parts another company</h2>
+<p>Replace the five zeroes in <code>colour_slots</code> with <code>[1, 1, 2, 1, 2]</code> and run again. The three blocks become red; the sphere and dome become blue. Their meshes, sizes and positions are unchanged.</p>
+<p>There are two addresses here. <code>i</code> selects a part, counting upwards from zero. <code>colour_slots[i]</code> selects an entry in the palette for that part. At part 2, the slot is 2, so the sphere receives the blue value in <code>palette[2]</code>. At part 3, the slot is 1, so the next block returns to red. Several parts can choose the same palette entry while keeping separate materials.</p>
+<p>The list records our choice. It does not inspect a mesh and discover its category. We chose these five indices to make the same grouping as the hall's shape-based rule. An automatic shape rule would need to examine a declared kind; it is a possible extension once this assignment is clear.</p>
+<p><code>apply_colours()</code> traverses the existing parts and writes each chosen value into its material. It constructs no new geometry. Its assertions check that every part has an assignment and that each palette index exists. They catch an invalid list, not an unsuccessful composition.</p>
+<h2>Change the palette; keep the assignment</h2>
+<p>Keep <code>[1, 1, 2, 1, 2]</code>. Replace the red entry with <code>Color(0.90, 0.22, 0.48)</code> and run again. The three blocks become pink together. The blue parts stay blue. One palette edit reaches several independent surfaces through the assignment list.</p>
+<p>A <code>Color</code> is a value copied into <code>albedo_color</code>; the material does not keep a live link to the palette entry. Running again calls <code>apply_colours()</code> after construction. If a later control changes the palette while the study is running, it must call that function again to update the surfaces.</p>
+<p>Now restore the original red and change the assignment to <code>[1, 2, 1, 2, 1]</code>. Colour alternates up the stack. The sphere joins the base and dome in red; the other two blocks become blue. This is an authored alternation, not the hall's calculation of a complementary colour from its neighbour. We can make the comparison without introducing that second algorithm here.</p>
+<h2>Compose a grouping</h2>
+<p>Choose two non-neighbouring parts to share one colour, and give an intervening part another colour. Write your five palette indices and predict the result before running. Explain which list changes a colour value and which list changes where that value goes. Check that the construction itself has stayed the same.</p>
+<p>Keep the palette, assignment and <code>apply_colours()</code> function. They give later work a way to put a chosen colour on a known surface. The larger stacks elsewhere in this hall develop other compositions; this lesson has selected the smaller operation beneath them.</p>
+<p>In the next hall, the surface can keep its material while we change the light reaching it. We have assigned an exact value. We have not fixed everything that makes it look the way it does.</p></main></html>

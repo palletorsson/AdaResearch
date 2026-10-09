@@ -1,0 +1,61 @@
+--- canonical/Trans_Pit/final.md
++++ review-draft/Trans_Pit/final.md
+@@ -10,13 +10,6 @@
+ 
+ Three blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.
+ 
+-The script keeps a fraction, `_t`, for its place along the journey: zero at the start, one at the far end. It places the block between those endpoints:
+-
+-```gdscript
+-var target_pos: Vector3 = _start_pos.lerp(_end_pos, _t)
+-_body.global_position = target_pos
+-```
+-
+ Each block travels two metres, but they take different times and their pauses differ. Two advance along Z; the third goes the other way. An opening that works for the first does not give you the timing of the next.
+ 
+ The block keeps its dimensions. Standing where it wants to be, you meet a wall that arrives. The displacement that carried you in an earlier hall can also occupy your place. Beside these lanes, open floor lets you walk around.
+@@ -28,11 +21,6 @@
+ <!-- @rc -->
+ 
+ The middle room has two turning slabs. Watch one end while the centre stays put. Each makes a quarter-turn, waits, then reverses. Their different pauses let one begin while the other still holds its place.
+-
+-```gdscript
+-mesh_instance.rotation_degrees = rotation_axis * current_angle
+-static_body.transform = mesh_instance.transform
+-```
+ 
+ The collision follows the visible angle. These upright wall profiles offer a broad face to the route, then a narrow edge. Their dimensions stay the same as the clearance beside them changes. The middle route lets you keep your distance.
+ 
+@@ -48,14 +36,7 @@
+ 
+ The previous hall's blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running.
+ 
+-For this floor-anchored configuration, the size factor comes from:
+-
+-```gdscript
+-var t: float = (1.0 - cos(_time)) * 0.5
+-var current_scale: float = lerpf(min_scale, max_scale, t)
+-```
+-
+-Cosine carries `t` from zero to one and back; `lerpf` places the size between its two limits. All three cubes move from thirty centimetres to three and a half metres on a side, then return together.
++All three cubes move from thirty centimetres to three and a half metres on a side, then return together. Their shared rhythm leaves different amounts of floor available around them.
+ 
+ ![At its smallest, the cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
+ 
+@@ -87,15 +68,7 @@
+ 
+ *Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
+ 
+-The door keeps a fraction of its opening, from zero to one. Three overlapping intervals of that fraction drive position, angle and size:
+-
+-```gdscript
+-var factor: float = lerpf(1.0, 0.34, operations.z)
+-var at := Vector3(side * lerpf(0.75, 2.15, operations.x), lerpf(1.4, 2.0, operations.x), -0.26)
+-var turn := Basis(Vector3.BACK, side * operations.y * PI * 0.5)
+-```
+-
+-`side` gives the leaves opposite directions. The local Z axis points through the doorway, so these turns happen across its face. Each leaf ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.
++The three movements overlap in time. Each leaf turns across the doorway's face and ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.
+ 
+ Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again. Its welcome has a reach, a width and a waiting time, each chosen in advance.
+ 

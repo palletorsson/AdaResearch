@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "preserved commons/maps/Noise_Space_10/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/context/walkgrids/NoiseSpace.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/context/walkgrids/noise_space.tscn",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/context/walkgrids/TopologySpace.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Noise_Space_10/critical.md",
+      "passed": true
+    },
+    {
+      "name": "only attach recorder and clear after accepted height changes",
+      "passed": true
+    },
+    {
+      "name": "all original code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "all original paragraphs retained except ROUTE B observation",
+      "passed": true
+    },
+    {
+      "name": "anchors and order retained",
+      "passed": true
+    },
+    {
+      "name": "dated measurements, cave and shelter argument retained",
+      "passed": true
+    },
+    {
+      "name": "primary selection and other metadata retained",
+      "passed": true
+    },
+    {
+      "name": "current hash final.md",
+      "passed": true
+    },
+    {
+      "name": "current hash map_data.json",
+      "passed": true
+    },
+    {
+      "name": "native run passed",
+      "passed": true
+    },
+    {
+      "name": "30 focused native assertions",
+      "passed": true
+    },
+    {
+      "name": "7 synthetic clicks through museum pointer",
+      "passed": true
+    },
+    {
+      "name": "no script or shader errors",
+      "passed": true
+    },
+    {
+      "name": "book image unmodified",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: [em-art] noise|noise space 10: panton_pop took 166 ms to build \u2014 that is a dropped frame in the hall",
+    "WARNING: [em-art] noise|noise space 10: brass_stamen took 133 ms to build \u2014 that is a dropped frame in the hall"
+  ],
+  "other_core_records_changed_concurrently": [],
+  "scope": "Actual private museum, real CharacterBody move_and_slide with supplied movement; trace samples that body through production physics callbacks. Synthetic pointer controls, fixed camera captures. No tracked headset, free learner route or Quest acceptance."
+}

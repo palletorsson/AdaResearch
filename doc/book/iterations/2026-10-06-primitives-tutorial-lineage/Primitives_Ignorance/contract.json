@@ -1,0 +1,170 @@
+{
+  "incoming": {
+    "sha256": "79eef8493a6f5d02fe23c90d0e1de5f4fa6c0b37050397094bdb16a7199b8635"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\nvar first := CubeBody.new()\nvar second := CubeBody.new()\n\nfunc _ready() -> void:\n    first.position = Vector3(-0.7, 0.7, 0)\n    second.position = Vector3(0.7, 0.7, 0)\n    add_child(first)\n    add_child(second)\n    second.other_diagonal()\n",
+      "after": "extends Node3D\nconst FaceBody = preload(\"face_body.gd\")\n# Connectivity is supplied; this lesson generates the positions.\nconst FACES: Array[Vector3i] = [\n    Vector3i(2, 0, 4), Vector3i(2, 4, 1),\n    Vector3i(2, 1, 5), Vector3i(2, 5, 0),\n    Vector3i(3, 4, 0), Vector3i(3, 1, 4),\n    Vector3i(3, 5, 1), Vector3i(3, 0, 5)]\nvar small_points: Array[Vector3] = []\nvar large_points: Array[Vector3] = []\n\nfunc _ready() -> void:\n    small_points = octahedron_positions(0.3)\n    large_points = octahedron_positions(0.6)\n    var small := FaceBody.new()\n    var large := FaceBody.new()\n    small.position = Vector3(-0.7, 1.1, 0)\n    large.position = Vector3(0.7, 1.1, 0)\n    add_child(small)\n    add_child(large)\n    small.show_faces(small_points, FACES)\n    large.show_faces(large_points, FACES)\n\nfunc octahedron_positions(radius: float) -> Array[Vector3]:\n    assert(radius > 0.0)\n    var result: Array[Vector3] = []\n    for axis in [Vector3.RIGHT, Vector3.UP, Vector3.BACK]:\n        result.append(axis * radius)\n        result.append(-axis * radius)\n    return result\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Ignorance/tutorial.md",
+      "sha256": "68caeded83a5089863e399f0c3c392da956764f0ca9a5f61b22b3eeb228e55ed"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/lesson.gd",
+      "sha256": "e15871f9782b7eaa60fce93c943b8db4220ac9b1f66e79ac8e0e23da001d1efa"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "generator/count_0.3",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.3/0",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.3/2",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.3/4",
+      "kind": "native"
+    },
+    {
+      "id": "generator/outward_0.3",
+      "kind": "native"
+    },
+    {
+      "id": "generator/count_0.45",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.45/0",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.45/2",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.45/4",
+      "kind": "native"
+    },
+    {
+      "id": "generator/outward_0.45",
+      "kind": "native"
+    },
+    {
+      "id": "generator/count_0.6",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.6/0",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.6/2",
+      "kind": "native"
+    },
+    {
+      "id": "generator/opposite_0.6/4",
+      "kind": "native"
+    },
+    {
+      "id": "generator/outward_0.6",
+      "kind": "native"
+    },
+    {
+      "id": "generator/results_independent",
+      "kind": "native"
+    },
+    {
+      "id": "generator/rule_unchanged_by_result_edit",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Ignorance/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/face_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Ignorance/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

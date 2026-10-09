@@ -1,0 +1,166 @@
+{
+	"approaches": [
+		{
+			"clear_motion": 1.0,
+			"clear_start": false,
+			"direction": [
+				1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"passed": false,
+			"supported": true
+		},
+		{
+			"clear_motion": 1.0,
+			"clear_start": true,
+			"direction": [
+				-0.0000000874227765734759,
+				0.0,
+				-1.0
+			],
+			"passed": true,
+			"supported": true
+		},
+		{
+			"clear_motion": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.0,
+				0.0,
+				1.0
+			],
+			"passed": true,
+			"supported": true
+		}
+	],
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored triangle artifact found",
+			"passed": true
+		},
+		{
+			"message": "Experiment panel assembled",
+			"passed": true
+		},
+		{
+			"message": "Reading position has floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits at reading position",
+			"passed": true
+		},
+		{
+			"message": "A supported final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "FillButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "FillButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "FillButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "FillButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "ShiftStartButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "ShiftStartButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "ShiftStartButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "ShiftStartButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "NewOutlineButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "NewOutlineButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "NewOutlineButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "NewOutlineButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.944673217833042,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DrawTriangleFaces/ExperimentPanel/FillButton/InteractableAreaButton",
+			"horizontal_distance": 0.464612185955048,
+			"label": "FillButton",
+			"position": [
+				7.30838251113892,
+				0.944673120975494,
+				16.6000003814697
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.944673217833042,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DrawTriangleFaces/ExperimentPanel/ShiftStartButton/InteractableAreaButton",
+			"horizontal_distance": 0.391617774963379,
+			"label": "ShiftStartButton",
+			"position": [
+				7.30838251113892,
+				0.944673120975494,
+				16.8500003814697
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.944673217833042,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DrawTriangleFaces/ExperimentPanel/NewOutlineButton/InteractableAreaButton",
+			"horizontal_distance": 0.464612185955048,
+			"label": "NewOutlineButton",
+			"position": [
+				7.30838251113892,
+				0.944673120975494,
+				17.1000003814697
+			]
+		}
+	],
+	"failures": [],
+	"panel": {
+		"height_above_floor": 1.16500005871058,
+		"position": [
+			7.15000009536743,
+			1.16499996185303,
+			16.8500003814697
+		]
+	},
+	"passed": true,
+	"room": "Point_Triangle_Context",
+	"scope": "Actual triangle hall; supplied endpoint/drawing positions; desktop images and layout measurements. No headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	],
+	"standing_obstacles": []
+}

@@ -1,0 +1,168 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Source-specific validation"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@16"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@18"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@22"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@24"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@28"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@30"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@17"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@18"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@23"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@24"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@29"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@30"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@15"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@18"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@21"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@24"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@27"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@30"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@15"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@18"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@21"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@24"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@27"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@30"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"cached_construction_steps": 75,
+		"frame_counts": [
+			2,
+			49,
+			96
+		],
+		"original_sources_edited": false,
+		"source_profiles": [
+			"O",
+			"O",
+			"I"
+		],
+		"source_recipe_indices": [
+			0,
+			1,
+			4
+		]
+	},
+	"id": "profile_travels",
+	"passed": true,
+	"phases": [
+		"THE BORROWED OUTLINE",
+		"CARRY THE SECTION",
+		"CONNECT THE EDGES",
+		"WHAT STAYS OPEN"
+	],
+	"source_paths": [
+		"res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.gd",
+		"res://commons/artifacts/glyph_profile_gallery/profile_sweep.gd"
+	]
+}

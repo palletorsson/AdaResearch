@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--no-window",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\reports\\interfaces-2026-09-20\\engine.log",
+    "--script",
+    "res://doc/reports/interfaces-2026-09-20/capture_baseline.gd",
+    "--",
+    "--config=res://doc/reports/interfaces-2026-09-20/default-demo.json",
+    "--out=C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\reports\\interfaces-2026-09-20\\default-demo.png",
+    "--size=1600"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 6.28,
+  "errors": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store."
+  ],
+  "screenshot_exists": true
+}

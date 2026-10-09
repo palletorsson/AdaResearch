@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "generated_at": "2026-09-28T08:07:06.771400+00:00",
+  "checks": [
+    {
+      "name": "Trace preserves all earlier prose",
+      "passed": true
+    },
+    {
+      "name": "Preface preserves earlier prose apart from date",
+      "passed": true
+    },
+    {
+      "name": "Afterword preserves earlier prose apart from date",
+      "passed": true
+    },
+    {
+      "name": "trace footnotes unique and complete",
+      "passed": true
+    },
+    {
+      "name": "preface footnotes unique and complete",
+      "passed": true
+    },
+    {
+      "name": "afterword footnotes unique and complete",
+      "passed": true
+    },
+    {
+      "name": "Trace code and encounter anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/maps/Point_Trace/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/maps/Point_Line_Grid/final.md",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/maps/sequences/primitives.json",
+      "passed": true
+    },
+    {
+      "name": "Catalogue hash matches final.md",
+      "passed": true
+    },
+    {
+      "name": "Only Trace hash and review changed in catalogue",
+      "passed": true
+    },
+    {
+      "name": "All current Primitives sources match capture",
+      "passed": true
+    },
+    {
+      "name": "Capture hash matches",
+      "passed": true
+    },
+    {
+      "name": "Reading edition IDs unique",
+      "passed": true
+    },
+    {
+      "name": "Reading edition internal links resolve",
+      "passed": true
+    },
+    {
+      "name": "No raw footnote notation in reading page",
+      "passed": true
+    }
+  ],
+  "words_added": {
+    "trace": 108,
+    "preface": 118,
+    "afterword": 361
+  },
+  "scope": "Manuscript additions, preservation, footnotes and current capture. No runtime or headset replay."
+}

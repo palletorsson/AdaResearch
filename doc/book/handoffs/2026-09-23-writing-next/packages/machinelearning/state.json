@@ -1,0 +1,372 @@
+{
+  "sequence": "machinelearning",
+  "declared_maps": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis"
+  ],
+  "museum_map_authored_order": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "ML_Evolution",
+      "recorded_status": "source_checked_draft",
+      "text_words": 421,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "non_teleological_evolution"
+        ],
+        "reason": "Can a population change without a single specimen being named the best?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Evolution/final.md",
+        "text_sha256": "1982cda825c0419b4f97e389dff9e3311d6d44d8f9e08d585b437c3b7c879ccc",
+        "map_sha256": "3ae0b8de6deb75ca9b6a7532d006fd5d8bed1b5cc94041285d75b1e83e643819",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "non_teleological_evolution"
+      ],
+      "role_primary_order": [
+        "non_teleological_evolution"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "recorded_status": "source_checked_draft",
+      "text_words": 454,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "loss_function_comparator"
+        ],
+        "reason": "Will the same observations lead to the same best fit when error is measured differently?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Gradient_Landscape/final.md",
+        "text_sha256": "ed84263a9f05ede2ba4eceb76b5cb3d48be415e5613c2327fcac66ff801783a4",
+        "map_sha256": "57e0c8ac92a313a55557e5bfaf8a316db059f492dde7cb0899f36c3bda923644",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "loss_function_comparator"
+      ],
+      "role_primary_order": [
+        "loss_function_comparator"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Classification",
+      "recorded_status": "source_checked_draft",
+      "text_words": 504,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "enhanced_kmeans"
+        ],
+        "reason": "When points share a colour, has a group been discovered or assigned?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Classification/final.md",
+        "text_sha256": "25f3ab7ebbd273cbfa724dc759f156e0e8d477887983247f2e004afb7b3f148d",
+        "map_sha256": "1ce3af5d3f3a5f910f7c7ceac7ce34cabb865d482e2faa73b3a451ebf77d2a55",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "enhanced_kmeans"
+      ],
+      "role_primary_order": [
+        "enhanced_kmeans"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Neural_Networks",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "neural_network_visualization"
+        ],
+        "reason": "What changes in a network when its answers become closer to the examples?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Neural_Networks/final.md",
+        "text_sha256": "654ee502f50169df70ab30f1e754bf0708dbe9efafe93435ec2e7903d5a5d70c",
+        "map_sha256": "f53ef04a9d45ee3611f217ad149168eb413cbd545ef554ce9313b2cd0079c86e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "neural_network_visualization"
+      ],
+      "role_primary_order": [
+        "neural_network_visualization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Perception",
+      "recorded_status": "source_checked_draft",
+      "text_words": 401,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "computer_vision_vr"
+        ],
+        "reason": "Which parts of this display were computed from pixels, and which were supplied as names?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Perception/final.md",
+        "text_sha256": "686ca6d3b2791614b6a686f946a81ff17d692372c9350ac364c6dc678a7a0b12",
+        "map_sha256": "c26b2dce33c03d7b51e646f5fb77697bf8629c5f41d77c38c4833f1a2611d841",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "computer_vision_vr"
+      ],
+      "role_primary_order": [
+        "computer_vision_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "recorded_status": "source_checked_draft",
+      "text_words": 410,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lstms_vr"
+        ],
+        "reason": "What would a memory need to keep, admit and reveal separately?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Sequence_Memory/final.md",
+        "text_sha256": "971490b3dfe4fcd40ca80aae3250d71630e53fd3639b2006ee622737cf3ce5f0",
+        "map_sha256": "d4e4672f22f418a7093910cc3b090c17eefa8765c0109d1ca569006cdad813c7",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "lstms_vr"
+      ],
+      "role_primary_order": [
+        "lstms_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Generative",
+      "recorded_status": "source_checked_draft",
+      "text_words": 413,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "generative_adversarial_networks_gans_vr"
+        ],
+        "reason": "Who judges a generated example, and how could that judgement change its maker?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Generative/final.md",
+        "text_sha256": "923305fd32806ca72863e89059b90461b449d5f46a46ac1c8a03eb93b78d81e1",
+        "map_sha256": "e781c86ea2a4d30395a03e4b890714b35f47bcc0975d39e81ab84de77585f0ea",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "role_primary_order": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ML_Synthesis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 413,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "anomaly_detection"
+        ],
+        "reason": "Is a point unusual by itself, or unusual under a particular measuringrule?",
+        "status": "source_checked_draft",
+        "sequence": "machinelearning",
+        "text_path": "commons/maps/ML_Synthesis/final.md",
+        "text_sha256": "aa7d3958ace196298215d1f9e7fd01f05e64a6696e22bc9df23860d40c21dc19",
+        "map_sha256": "48f0db148d05c6158c7b65abe88eb9a7b79249e2e435541484114a3159f8bffc",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "anomaly_detection"
+      ],
+      "role_primary_order": [
+        "anomaly_detection"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/effects/fade.tscn",
+      "addons/godot-xr-tools/player/player_body.gd",
+      "addons/godot-xr-tools/player/player_body.tscn",
+      "algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+      "algorithms/machinelearning/LSTMs/LSTMs_VR.tscn",
+      "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+      "algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+      "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+      "algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+      "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+      "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+      "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd",
+      "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+      "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+      "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+      "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+      "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+      "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd",
+      "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+      "commons/audio/runtime/CubeAudioPlayer.gd",
+      "commons/grid/GridCommon.gd",
+      "commons/grid/GridStructureComponent.gd",
+      "commons/grid/GridUtilitiesComponent.gd",
+      "commons/grid/UtilityRegistry.gd",
+      "commons/interactables/push_button.tscn",
+      "commons/interactables/slider_horizontal.tscn",
+      "commons/primitives/cubes/cube_scene.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/PinkTeleport.gdshader",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/scenes/endless_museum.gd",
+      "commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "commons/scenes/mapobjects/ScoreCubeController.gd",
+      "commons/scenes/mapobjects/info_board.tscn",
+      "commons/scenes/mapobjects/score_cube.tscn",
+      "commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "commons/scenes/mapobjects/teleport.gd",
+      "commons/scenes/mapobjects/teleport_scene.tscn",
+      "commons/scenes/mapobjects/transport_cube.gd",
+      "commons/scenes/mapobjects/transport_cube.tscn",
+      "commons/scenes/mapobjects/walkableprism.tscn",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://adaresearch/Common/Scripts/Managers/artifact_data.gd",
+      "res://addons/godot-xr-tools/effects/fade.gd",
+      "res://addons/godot-xr-tools/effects/fade.gdshader",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+      "res://commons/artifacts/large_window/large_window.tscn",
+      "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "res://commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "res://commons/artifacts/station/%s.tscn",
+      "res://commons/artifacts/station/station_door.tscn",
+      "res://commons/artifacts/station/station_plinth.tscn",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+      "res://commons/context/clipboard/codeDisplay.tscn",
+      "res://commons/grid/grid_system.tscn",
+      "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+      "res://commons/interactables/angular_handle.gd",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/linear_driver.gd",
+      "res://commons/interactables/materials/ui_shadow.tres",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/interactables/slider_horizontal.gd",
+      "res://commons/movement/museum_flight_box.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/player/costume_wardrobe.gd",
+      "res://commons/primitives/cubes/grab_cube.tscn",
+      "res://commons/primitives/origin/origin.tscn",
+      "res://commons/primitives/shared/solid_primitive_finish.gd",
+      "res://commons/primitives/temporal/animated_folding_past.tscn",
+      "res://commons/scenes/em/em_cartridge.gd",
+      "res://commons/scenes/em/em_desktop_pointer.gd",
+      "res://commons/scenes/em/em_detail.gd",
+      "res://commons/scenes/em/em_lighting.gd",
+      "res://commons/scenes/em/em_portal_stream.gd",
+      "res://commons/scenes/em/em_simplex_corners.gd",
+      "res://commons/scenes/em/em_simulation_stage.gd",
+      "res://commons/scenes/em/em_splatter.gd",
+      "res://commons/scenes/em/em_transform_gizmo.gd",
+      "res://commons/scenes/em/em_wall_fit.gd",
+      "res://commons/scenes/em/em_weathering_wall.gd",
+      "res://commons/scenes/em/floor_seams.gdshader",
+      "res://commons/scenes/endless_museum.tscn",
+      "res://commons/scenes/mapobjects/bridge_path.tscn",
+      "res://commons/scenes/mapobjects/jump_pad.tscn",
+      "res://commons/ui/materials/handle_glow.tres",
+      "res://commons/ui/materials/metal_dark.tres",
+      "res://commons/ui/materials/panel_white.tres",
+      "res://commons/ui/materials/track_groove.tres",
+      "res://commons/ui/text_screen.gd",
+      "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "scope": "Primary artifact scenes and active utility scenes plus two static resource-reference hops; utility registry/grid/museum dispatch context copied without further traversal. Text resources only. Dynamic loads, class-name dependencies, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

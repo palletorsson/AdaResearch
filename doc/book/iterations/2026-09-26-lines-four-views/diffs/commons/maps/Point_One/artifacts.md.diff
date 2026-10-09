@@ -1,0 +1,11 @@
+--- before/commons/maps/Point_One/artifacts.md
++++ after/commons/maps/Point_One/artifacts.md
+@@ -20,7 +20,7 @@
+ | `drag_point_target` | (6, 18) | `drag_point_target#text:drag point here ` |
+ | `coordinate_readout` | (2, 19) | `coordinate_readout:90:1.4:1#plinth:0#pin:1#display_scale:2.4#readout_channel:point_one_main#space:local` |
+ | `fontana_puncture` | (12, 19) | `fontana_puncture:270:0#plinth:1.00#embed_artifact:interactive_point_origin_force#embed_mode:transformation#offset:0.00,0.20,0.00` |
+-| `CoordinateSystem3M` | (4, 20) | `CoordinateSystem3M:0:0#tick_step:0#labels:0#panel:0#floating_point:0#adopt_external_point:1#external_point_id:point_one_main#readout_channel:point_one_main#point_finish:zero#offset:0.00,0.10,0.00#origin_sign_text:#plinth:0#pin:1` |
++| `CoordinateSystem3M` | (4, 20) | `CoordinateSystem3M:0:0#tick_step:0#labels:0#panel:0#floating_point:0#adopt_external_point:1#external_point_id:point_one_main#readout_channel:point_one_main#point_finish:zero#offset:0.00,1.00,0.00#origin_sign_text:#plinth:0#pin:1` |
+ | `floating_sphere_field` | (9, 22) | `floating_sphere_field#sphere_count:18#bounds:2.5,1.2,2.5#volume_offset:0,2.4,0` |
+ | `grab_sphere_point_snap` | (7, 23) | `grab_sphere_point_snap:0:0` |
+ | `point_pedestal` | (8, 26) | `point_pedestal:180#plinth:0#pin:1` |

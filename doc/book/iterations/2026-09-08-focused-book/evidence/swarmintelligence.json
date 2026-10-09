@@ -1,0 +1,394 @@
+{
+  "sequence": "swarmintelligence",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "SwarmIntelligence_PhysarumColony",
+      "primary_tokens": [
+        "PhysarumColony"
+      ],
+      "question": "Can a path remember which way to grow when no individual holds the whole network?",
+      "ontology": "An agent is a moving state; a field stores numbers over cells. Here deposited trail changes what later agents sense: environmental memory.",
+      "action": "Watch a bright connection and keep it in view when the anchor arrangement changes automatically; wait at least one 20-second transition.",
+      "observable": "The caption cycles triad, ring, pair, scattered; trail concentrations change and fade rather than being one pre-drawn network.",
+      "mechanism": "300 agents in the scene sense left/centre/right, turn and deposit. PhysarumGrid multiplies concentration by .95 and mixes four neighbours with .5 diffusion. Fixed anchors also emit; their layout changes every20s.",
+      "limit": "A simulated trail is not proof of a shortest route or a biological nervous system. Chosen anchors and boundary conditions determine which networks can appear.",
+      "variation": "Existing passive variation: compare two automatic anchor layouts. Proposed: visitor-grabbable anchors or a pause control; neither is currently exposed.",
+      "prior_bridge": "Earlier emergent patterns arose from many updates; now the environment retains those updates.",
+      "next_bridge": "The next room supplies a field from outside instead of letting agents write it.",
+      "sources": [
+        {
+          "path": "algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+          "line": 18,
+          "function_or_anchor": "num_agents = 300",
+          "fact": "Scene overrides default500 to300 and binds PhysarumAgent scene."
+        },
+        {
+          "path": "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+          "line": 173,
+          "function_or_anchor": "func _physics_process",
+          "fact": "20-second anchorage carousel and grid updates."
+        },
+        {
+          "path": "algorithms/swarmintelligence/physarum/PhysarumAgent.gd",
+          "line": 24,
+          "function_or_anchor": "func _physics_process",
+          "fact": "Three sensors, turning and trail deposit."
+        },
+        {
+          "path": "algorithms/swarmintelligence/physarum/PhysarumGrid.gd",
+          "line": 58,
+          "function_or_anchor": "func process_step",
+          "fact": "Decay and in-place four-neighbour diffusion."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_PhysarumColony/map_data.json": "bc26039f9496d9e4218d50c5b5e2e72c6ea474a390131c482e8a89235400c833",
+        "commons/maps/SwarmIntelligence_PhysarumColony/intent.md": "ad0ed7e26b8cfbb3907a3be2a8a05a98acfcd5d31a7f840fbebfbab9fc1104b8",
+        "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md": "b22a782eb16982fc6753da6914876fed8f37b5b59754a6b6508137756a237b60",
+        "commons/maps/SwarmIntelligence_PhysarumColony/technical.md": "a026a3fa436d2c1a9d11dfdc3cf29151711d51dc5eb185393de0014c6d656b6d",
+        "commons/maps/SwarmIntelligence_PhysarumColony/critical.md": "d1e6484a58eafb542131ba32d452dc4f71cfc8aa44ac581bda6dfb8d17e91331",
+        "algorithms/swarmintelligence/physarum/PhysarumColony.tscn": "2da5719fe8c5633154e0c434ef8e391262f0af8f0bfc68d5b6c2a1433ca471ae",
+        "algorithms/swarmintelligence/physarum/PhysarumColony.gd": "89468a8c846b5eae9bcc100c81282114d87de049aa12af4be653ad294247d207",
+        "algorithms/swarmintelligence/physarum/PhysarumAgent.gd": "77f7ed826a83af1faee3f49d352e9fff7d7976c97e3218ac4297851a6667e8a7",
+        "algorithms/swarmintelligence/physarum/PhysarumGrid.gd": "3eb8cca0f70d9214e44d350c6af9e96eee5f7d2dd8e057703001cf2130bbbbc2"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 3,
+          "raw": "PhysarumColony:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not repeat intent claims about Steiner optimality or Tokyo networks as what this artifact proves."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_FlowFields",
+      "primary_tokens": [
+        "FlowFieldMain"
+      ],
+      "question": "If many agents turn together, must they be watching one another?",
+      "ontology": "A vector field assigns a direction to a position; an integration field records costs to a target. An agent can navigate by reading its local direction.",
+      "action": "Follow one arrow and one agent through the automatic tour: open field, block, U-wall, zigzag, wind, noise.",
+      "observable": "Obstacles reorganize the arrow pattern; wind has a direction without a destination. The tour advances every10s and remains in noise at the end.",
+      "mechanism": "A40×40 cost grid is propagated from a target, then vectors point toward lower costs.200agents steer toward their current cell vector; near zero vectors they wander.",
+      "limit": "Common motion can come from shared infrastructure rather than agreement. Cost maps choose what counts as a traversable route.",
+      "variation": "Existing comparison: observe the tour. Proposed: hide arrows while holding a scenario fixed using curator scenario/field_display configuration; visitor VR wall placement is not implemented.",
+      "prior_bridge": "Physarum writes its own field; this field is provided to the agents.",
+      "next_bridge": "Boids instead compute directions from neighbouring agents.",
+      "sources": [
+        {
+          "path": "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+          "line": 79,
+          "function_or_anchor": "func _process",
+          "fact": "Six-scenario tour stops advancing in noise."
+        },
+        {
+          "path": "algorithms/pathfinding/flow_field/FlowGrid.gd",
+          "line": 66,
+          "function_or_anchor": "func calculate_flow_field",
+          "fact": "Cost propagation and gradient vectors."
+        },
+        {
+          "path": "algorithms/pathfinding/flow_field/FlowAgent.gd",
+          "line": 11,
+          "function_or_anchor": "func _physics_process",
+          "fact": "Local vector steering and zero-vector wander."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_FlowFields/map_data.json": "df55a34da73c97ed010994975d78395ce1c6b94aee51e08d3201290c4974452e",
+        "commons/maps/SwarmIntelligence_FlowFields/intent.md": "2224172d54f7d5e36edc917cef4591b3d7e26816576f240f58deb22483b2d306",
+        "commons/maps/SwarmIntelligence_FlowFields/tutorial.md": "6a885701146cc2da11eefca6ecd336b99c7232f6839dd94b441c6de65bae98e3",
+        "commons/maps/SwarmIntelligence_FlowFields/technical.md": "cb6650d35d64e66f14460cd124e1646f1e97206103c4438029f782007afbbb33",
+        "commons/maps/SwarmIntelligence_FlowFields/critical.md": "07dc4243a07b34b3134fb29aeb3e560e1269b306714fb71aadad05f6cbedceee",
+        "algorithms/pathfinding/flow_field/FlowFieldMain.tscn": "597526e71a3a68f4ab30d22b471d58b7522e0641690d9d8df656937e5656b0a1",
+        "algorithms/pathfinding/flow_field/FlowFieldMain.gd": "9e07a8dd1b438b111f69b6d1f6fff5061c6545234346d589c61838e4763b1da1",
+        "algorithms/pathfinding/flow_field/FieldVisualizer.gd": "947dbaf15aa4db25959d3218fd86a50f360dee73ed29cd1b680cf679208f70d6",
+        "algorithms/pathfinding/flow_field/FlowGrid.gd": "f2c1f9c2e6c86a327cbaf8bf080a05652333e0ae8745284c187b0354d85109e8",
+        "algorithms/pathfinding/flow_field/FlowAgent.gd": "f09ae50e1f8877303dc82aab1a8b64da1c1e996a9e5e549a4712654a09149869"
+      },
+      "placements": [
+        {
+          "x": 6,
+          "z": 4,
+          "raw": "FlowFieldMain:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Desktop mouse ray uses embedded camera; right-click only sets a wall and does not recompute until another target click. Do not promise museum or VR clicking."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_Boids_Algorithm",
+      "primary_tokens": [
+        "flocking_controls"
+      ],
+      "question": "Which local relationship is making this flock hold together?",
+      "ontology": "Separation, alignment and cohesion are distinct steering contributions; weights determine their relative influence on an agent velocity.",
+      "action": "Follow the highlighted boid and its coloured force arrows. Change one SEP, ALIGN or COH slider while leaving the other settings alone.",
+      "observable": "The highlighted agent exposes red separation, blue alignment and green cohesion; population motion changes as one contribution gains weight.",
+      "mechanism": "Each update gathers neighbours within a perception radius, averages headings/positions, and sums weighted forces. Positions wrap around the displayed bounds.",
+      "limit": "A flock pattern cannot establish consent or a universal ideal balance. The boundary wraps and the neighbour radius already decide who is in relation.",
+      "variation": "Existing: alter perception RADIUS, then see whether the same rule weights still make the same group. Proposed: asymmetric perception to test whose movements become visible.",
+      "prior_bridge": "The flow field supplied common direction; here neighbours supply it.",
+      "next_bridge": "Agent-based modelling generalizes from these three rules to state and environment.",
+      "sources": [
+        {
+          "path": "commons/artifacts/flocking_controls/flocking_controls.gd",
+          "line": 312,
+          "function_or_anchor": "func _create_vr_controls",
+          "fact": "Five connected sliders and reset button."
+        },
+        {
+          "path": "commons/artifacts/flocking_controls/flocking_controls.gd",
+          "line": 438,
+          "function_or_anchor": "func _update_boids",
+          "fact": "Neighbour contributions and wrap boundaries."
+        },
+        {
+          "path": "commons/artifacts/flocking_controls/flocking_controls.gd",
+          "line": 226,
+          "function_or_anchor": "func _update_force_arrows",
+          "fact": "Three force components shown for highlightedboid."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json": "074b54a857290dfd2f4acf4e0017ae75efd2bc1f73ae90781384ff11013bc693",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/intent.md": "418883ddc4aa431f4288791163e628252a34d125069827266827c2272028c762",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/tutorial.md": "eda0ddf7813ad1441ff1158cfc532ff4023f6b1964b61843627b526878183789",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/technical.md": "300d930ad21362e78aac609259c8b84f9fcc6bdb32047c1292b7b6a286025631",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/critical.md": "c1231dcc5ee926414ebca3662893a5a3ea169f812bf161c365d19de2a1a5e884",
+        "commons/artifacts/flocking_controls/flocking_controls.tscn": "55fda3b3c18e4dbcdd8f329e1eaaf58cb7ededcb4f3d16842542c2f8430dc5be",
+        "commons/artifacts/flocking_controls/flocking_controls.gd": "52e4a6bbe57cec91c98911414476663d03369ce1a68c110401560821c1551433"
+      },
+      "placements": [
+        {
+          "x": 10,
+          "z": 9,
+          "raw": "flocking_controls"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "primary_tokens": [
+        "ant_colony_optimization"
+      ],
+      "question": "How much of a collective result changes when one rule changes?",
+      "ontology": "An agent-based model stores individual states and update rules; population outcomes are produced by repeated interaction with shared state.",
+      "action": "Watch the colony, raise EVAPORATE, and compare trail persistence; use RESET before a second comparison. MODE cycles the displayed behavioural mode.",
+      "observable": "The trail heatmap loses or retains marks at different rates. ANTS changes population between5and80 and respawns the agents.",
+      "mechanism": "Agents sense/deposit a pheromone grid, consume food and switch behaviours; evaporation is a shared field update. MODE selects three model modes; this is one model family, not arbitrary rule programming.",
+      "limit": "An aggregate picture does not validate the agents as models of people. What agents can sense and what the shared grid remembers are design choices.",
+      "variation": "Existing: compare many short-lived traces with fewer lasting traces using ANTS and EVAPORATE separately. Proposed: agents with differing sensor capacities.",
+      "prior_bridge": "Boids used three steering terms; now rules include internal state and a lasting environment.",
+      "next_bridge": "The next room concentrates on two trail types and the journey between home and food.",
+      "sources": [
+        {
+          "path": "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+          "line": 238,
+          "function_or_anchor": "func _create_vr_controls",
+          "fact": "EVAPORATE/ANTS sliders; MODE/RESET buttons connected."
+        },
+        {
+          "path": "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+          "line": 415,
+          "function_or_anchor": "func _update_ants",
+          "fact": "Agent and environmental update implementation."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json": "8ed87776d65532eb7017922c649ca8690ef6c996f00f6b44e2d9244ebdc64e86",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/intent.md": "eaf62893ca9548cf4bd19ccf1992b6d16e2e2361f1b43c6f92ff3127bfff32ce",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/tutorial.md": "8b1e5a8e162a37979b40cb2405e4cf0a0710d943d11520cc17a2619d645d5215",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/technical.md": "ff55517fddd0523993bf5f1373be3b562677c852f713832ec65fc34ebe6a94af",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md": "f9ba006f9d6e49086bc106144522ceade10d687ae2f1484be2b71b2d393c0755",
+        "algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn": "3d48b3b8604640724c4298a56443975e453c4375d644fb89ea0f24fe95703f37",
+        "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd": "21823229caad4ad851a23d22f4f1915598b098c6cde67e8f2fe87e9a1ab10eeb"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 4,
+          "raw": "ant_colony_optimization"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Other placed catalyst hazards may disturb observation; no safe/quiet museum encounter verified. Old intent describes physical platforms constraining agents, not confirmed by selected internal2Dmodel."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_Ant_Colony_Optimization",
+      "primary_tokens": [
+        "AntColonyV2"
+      ],
+      "question": "How can an ant leave useful directions without carrying a map?",
+      "ontology": "Stigmergy coordinates activity through a shared medium. This colony uses two numerical trail channels: home and food.",
+      "action": "Observe ants leaving the centre and returning from either food anchor. Compare fresh bright trails with areas no longer visited.",
+      "observable": "Ants change direction/state on reaching food or home, with trail information persisting in the ground between visits.",
+      "mechanism": "FORAGING ants seek food channel and deposit home channel; RETURNING ants reverse that relation. Three local sensors steer movement; trail energy decays until reset at a destination.",
+      "limit": "This scene is a spatial foraging model, not a demonstrated travelling-salesman solver. Efficient-looking trails alone do not prove global optimality.",
+      "variation": "Existing: compare the two fixed food directions. Proposed: curator anchorage ring/triad/scattered variants or movablefood; there is no visitor food-layout control in this scene.",
+      "prior_bridge": "Agent-based modelling exposed rules; here external memory makes one specific rule family legible.",
+      "next_bridge": "Particle swarms move that memory into personal and shared best positions.",
+      "sources": [
+        {
+          "path": "algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+          "line": 4,
+          "function_or_anchor": "ant_scene",
+          "fact": "Scene binds SimpleAnt."
+        },
+        {
+          "path": "algorithms/swarmintelligence/ants_v2/SimpleAnt.gd",
+          "line": 33,
+          "function_or_anchor": "func _physics_process",
+          "fact": "Two-state sensing, opposite-channel deposit and decaying energy."
+        },
+        {
+          "path": "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+          "line": 288,
+          "function_or_anchor": "func _anchor_positions",
+          "fact": "Default pair and curator anchorage alternatives."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/map_data.json": "b9f8d6e49525d00407cb478aff684fb60dd110e1f13ae7238a5aec6627e17770",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/intent.md": "386f7d3dad985857ef85fc00c13c3e8bdf09e6d0f69f93e03d00a59a2d85d638",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/tutorial.md": "b5cb71110e2c5568b7061bff76a1326a6d6e823b05d866d941178b91191722ea",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/technical.md": "712726f4003645266d19ebe7701b5d8eebef5f2449e3abc432f655e455cd56b9",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/critical.md": "c1a77c5ab77a079fdc2548aca1b222d0f0999c50e904d5fb6f70ce1669c5748e",
+        "algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn": "3749fa6e105e6f23606dae5fb5426fd080ba55348000dcb0f5aadcc14e9f05d9",
+        "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd": "6d086db4a27d25caa8d7111f57d3246763743624f677fb9d0701f381e2fed79f",
+        "algorithms/swarmintelligence/ants_v2/SimpleAnt.gd": "8388807a62f1e127b452c8def03c69410cd1dd84d7c77a10a4fd8036f16d5ded"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 3,
+          "raw": "AntColonyV2:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "primary_tokens": [
+        "fitness_landscape_politics"
+      ],
+      "question": "When a swarm improves, who decided what better means?",
+      "ontology": "A particle keeps its own best position and follows a swarm best; fitness is the scoring rule that names these positions best.",
+      "action": "Watch CONVERGE, then press SPREAD, then NOVELTY. Keep INERTIA fixed during the comparison.",
+      "observable": "The same kind of moving population collects toward the centre, favours distance from it, or seeks distance from archived positions according to the chosen score.",
+      "mechanism": "Velocity combines inertia, personal-best displacement and global-best displacement with randomweights. CONVERGE rewards negative radius; SPREAD positive radius; NOVELTY distance to the nearest archived position.",
+      "limit": "Optimization inherits its purpose from the objective; a high score cannot establish that a social outcome is desirable. Novelty also depends on what the archive remembers.",
+      "variation": "Existing: choose novelty as the primary aim instead of treating dispersal as failure; then vary INERTIA. Proposed: compare two explicit conflicting objectives simultaneously.",
+      "prior_bridge": "Ants store traces in the environment; particles retain best positions.",
+      "next_bridge": "The capstone asks which less visible rules keep a collective system going.",
+      "sources": [
+        {
+          "path": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+          "line": 430,
+          "function_or_anchor": "func _evaluate_fitness",
+          "fact": "Different explicit objective functions."
+        },
+        {
+          "path": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+          "line": 454,
+          "function_or_anchor": "func _update_swarm",
+          "fact": "PSO velocity and personal/globalbest updates."
+        },
+        {
+          "path": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+          "line": 527,
+          "function_or_anchor": "func _build_controls",
+          "fact": "CONVERGE/SPREAD/NOVELTY and INERTIA are connected."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json": "dd42ab107006a953e454347b48df3b8fe04bb71811ebbc5126c148697ff80dd2",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/intent.md": "3c82ee07d69a8933a2c4a6c92ce43129ba874fe284a5ab8a877683318b7ee854",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/tutorial.md": "dee67def74ffa896419a481e40786fa30aae2ac60f81504871ec778cfeb4894a",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/technical.md": "c21455c400d8eeaa78caa41b1cd46c25d5640df4a76feb8747a901b3339a7819",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/critical.md": "58fc42064655f910512810478b7dab7e12b968653451376fccc386c3dd4c5248",
+        "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn": "0a732e5980d4b5f00164b9cd59c1a6744caaa29661b44b1921cd7e091e1c7c0a",
+        "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd": "d6812ca5c31a87178ee3727dfc9f4f220d0a681412defc7bc1adb216d82af89d"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 4,
+          "raw": "fitness_landscape_politics"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "primary_tokens": [
+        "ecosystem_simulation"
+      ],
+      "question": "If this small ecosystem persists, which rules are helping it persist?",
+      "ontology": "A population is coupled to resources, predation and reproduction. A simulation may include a separate stabilizer as well as individual agent rules.",
+      "action": "Read the Prey, Pred and Food counts, then track a food loss or population change before returning to the counts.",
+      "observable": "Population and food counts change; prey seek food/flee predators and predators seek prey. The simulation also restocks agents under explicit thresholds.",
+      "mechanism": "Food renews, parents exchange/mutate numericDNA, and balance_ecosystem adds5prey below10, weakens predators above halfprey, and may restock2predators. Default quota is tended.",
+      "limit": "Persistence is not evidence of self-regulation alone: a coded referee assists it. This room contains one ecosystem artifact, not the multi-algorithm showcase imagined in old intent.",
+      "variation": "Existing: distinguish agent events from count changes plausibly due to restocking. Proposed: compare curator quota fallow/barren/hunted configurations or expose restocking as a visitor control.",
+      "prior_bridge": "After changing the PSO objective, look for the less visible objective embodied in population maintenance.",
+      "next_bridge": "Machine learning next makes adjustment and evaluation explicit.",
+      "sources": [
+        {
+          "path": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+          "line": 416,
+          "function_or_anchor": "func balance_ecosystem",
+          "fact": "Explicit restocking and predator weakening."
+        },
+        {
+          "path": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+          "line": 274,
+          "function_or_anchor": "func update_prey",
+          "fact": "Food/predator/reproduction update."
+        },
+        {
+          "path": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+          "line": 266,
+          "function_or_anchor": "func _update_label",
+          "fact": "Live threepopulation counts."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/map_data.json": "dae90306000c9a908b2312bf273f57158ab1c0d626e9318b265cf4b5e17e329a",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/intent.md": "b60dba44ff94e17b380c10c5c41abe8a4d8f329204dad48808aa628fdf2437a0",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/tutorial.md": "6a3441d72bed94f715e909ec790f5de9edd684796d8b5fb8fb42ac6818d42e7c",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/technical.md": "9552dfafda8a5c8260483710d54e076428c9471f07751904c93efafb87235683",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/critical.md": "98b0b04db1b12616812a90e6eb970a744651e58a86b380c131500391cc48e836",
+        "algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn": "efacdbe092d74fe8a094157577f1de4c998fd0650f8f9b6eb50085aab06130fa",
+        "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd": "40fc7b5072ca78d1718e994ced63b084d98032e93c42373c7269f610d5cbb49d"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 6,
+          "raw": "ecosystem_simulation"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not claim no referee, natural equilibrium or implemented swarm-algorithm switcher."
+      ]
+    }
+  ]
+}

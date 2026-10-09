@@ -1,0 +1,176 @@
+{
+	"checks": [
+		{
+			"check": "Initial authored portrait uses coloured tube lines",
+			"passed": true
+		},
+		{
+			"check": "Tube colours are unshaded and nonemissive",
+			"passed": true
+		},
+		{
+			"check": "Native capture lines.png",
+			"passed": true
+		},
+		{
+			"check": "B changes lines into dots without modifying stored strokes",
+			"passed": true
+		},
+		{
+			"check": "Light-dot material retains each stroke colour",
+			"passed": true
+		},
+		{
+			"check": "Dot instance positions follow the same stored paths",
+			"passed": true
+		},
+		{
+			"check": "Native capture dots.png",
+			"passed": true
+		},
+		{
+			"check": "G toggles screen glow without changing geometry or stored strokes",
+			"passed": true
+		},
+		{
+			"check": "Native capture dots-no-glow.png",
+			"passed": true
+		},
+		{
+			"check": "Screen glow changes the rendered light-dot pixels",
+			"passed": true
+		},
+		{
+			"check": "Right-drag orbits without drawing or moving the dot geometry",
+			"passed": true
+		},
+		{
+			"check": "Native capture dots-side.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture controls.png",
+			"passed": true
+		},
+		{
+			"check": "1 selects lines while retaining the portrait",
+			"passed": true
+		},
+		{
+			"check": "C clears the strokes and rendered shapes",
+			"passed": true
+		},
+		{
+			"check": "Plain left-drag records a connected coloured stroke",
+			"passed": true
+		},
+		{
+			"check": "Shift-wheel changes depth during an active stroke",
+			"passed": true
+		},
+		{
+			"check": "Pen-up motion does not add recorded positions",
+			"passed": true
+		},
+		{
+			"check": "Releasing and pressing creates separate stroke meshes",
+			"passed": true
+		},
+		{
+			"check": "X assigns the next colour only to the new stroke",
+			"passed": true
+		},
+		{
+			"check": "Native capture input-lines.png",
+			"passed": true
+		},
+		{
+			"check": "2 renders the input replay as dots without changing the strokes",
+			"passed": true
+		},
+		{
+			"check": "One click leaves exactly one independent light dot",
+			"passed": true
+		},
+		{
+			"check": "Native capture input-dots.png",
+			"passed": true
+		},
+		{
+			"check": "Z undoes exactly the solitary dot",
+			"passed": true
+		},
+		{
+			"check": "Z then undoes exactly the last dragged stroke",
+			"passed": true
+		},
+		{
+			"check": "S changes dot spacing while retaining every recorded point",
+			"passed": true
+		},
+		{
+			"check": "Changing brush size preserves all stroke positions and colours",
+			"passed": true
+		},
+		{
+			"check": "Drawing saves to an isolated test file",
+			"passed": true
+		},
+		{
+			"check": "Loading restores the saved strokes including the solitary dot",
+			"passed": true
+		},
+		{
+			"check": "Reject invalid-types.json without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Reject empty-stroke.json without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Reject out-of-bounds.json without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Reject invalid-colour.json without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Reject unsupported-version.json without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects excessive stroke count without data loss",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects excessive point count without data loss",
+			"passed": true
+		},
+		{
+			"check": "Loading rejects oversized files without data loss",
+			"passed": true
+		},
+		{
+			"check": "Window focus loss ends deposition immediately",
+			"passed": true
+		},
+		{
+			"check": "Long valid paths stay within the total rendered dot budget",
+			"passed": true
+		},
+		{
+			"check": "Adaptive sampling retains the raw long paths and is announced",
+			"passed": true
+		},
+		{
+			"check": "Long valid paths also keep tube geometry bounded",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"rendered_long_path_dots": 4080,
+	"rendered_long_path_tube_vertices": 37200,
+	"scope": "Native Godot rendering and scripted input through Input.parse_input_event. Portrait captures are authored example paths, not human drawing. No tracked controller or Quest test."
+}

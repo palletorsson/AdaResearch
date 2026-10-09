@@ -1,0 +1,351 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed exchange study found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "One update gives W V .02 with exchange and zero without",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exchange",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "Installed point is available beside desk",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools pickup maps held point to requested cell",
+      "passed": true
+    },
+    {
+      "name": "Movement alone leaves the field unseeded",
+      "passed": true
+    },
+    {
+      "name": "Held trigger plants nine matched sites without advancing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: point-seed",
+      "passed": true
+    },
+    {
+      "name": "B table targets corresponding sites in both fields",
+      "passed": true
+    },
+    {
+      "name": "A trigger too high over the table has no effect",
+      "passed": true
+    },
+    {
+      "name": "Released point parks and no longer injects",
+      "passed": true
+    },
+    {
+      "name": "Installed selected seed wraps its patch across corner",
+      "passed": true
+    },
+    {
+      "name": "VIEW and COAT leave every value and clock untouched",
+      "passed": true
+    },
+    {
+      "name": "Both curved walls share the corresponding table texture",
+      "passed": true
+    },
+    {
+      "name": "Coating visibility leaves floor support intact",
+      "passed": true
+    },
+    {
+      "name": "Adding exchange to B replays equal full fields",
+      "passed": true
+    },
+    {
+      "name": "Plus100 uses bounded batches and stops exactly",
+      "passed": true
+    },
+    {
+      "name": "RUN adds four numerical ticks per work opportunity",
+      "passed": true
+    },
+    {
+      "name": "Floor crossing ignores loose props",
+      "passed": true
+    },
+    {
+      "name": "Physical body arrival plants fixed matched patch",
+      "passed": true
+    },
+    {
+      "name": "Remaining on the crossing does not replenish",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: seed-crossing",
+      "passed": true
+    },
+    {
+      "name": "Replay while occupied does not silently reinject",
+      "passed": true
+    },
+    {
+      "name": "Leaving and returning makes a new event",
+      "passed": true
+    },
+    {
+      "name": "Installed study stops both fields at 2400",
+      "passed": true
+    },
+    {
+      "name": "entry_to_point: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "entry_to_point: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "point_to_fields: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "point_to_fields: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "fields_to_clockmaker: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "fields_to_clockmaker: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "clockmaker_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "clockmaker_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "batch_ms": 481.174,
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "rd_artifact",
+        "local": [
+          8.5,
+          0.0,
+          9.5
+        ]
+      },
+      {
+        "key": "the_clockmaker_of_rules",
+        "local": [
+          8.5,
+          0.0,
+          17.5
+        ]
+      },
+      {
+        "key": "crack_propagation_ca",
+        "local": [
+          3.5,
+          1.20000004768372,
+          22.5
+        ]
+      },
+      {
+        "key": "lattice_gas_pump",
+        "local": [
+          12.5,
+          0.0,
+          22.5
+        ]
+      },
+      {
+        "key": "ca_sphere",
+        "local": [
+          3.5,
+          1.10000002384186,
+          26.5
+        ]
+      },
+      {
+        "key": "rule_30_110_gravity",
+        "local": [
+          12.5,
+          2.59999990463257,
+          26.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          8.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          1.5,
+          3.0,
+          29.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "whiteboard",
+        "local": [
+          16.0,
+          0.899999976158142,
+          2.5
+        ]
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          4.25,
+          4.6399998664856,
+          10.2250003814697
+        ]
+      }
+    ],
+    "routes": {
+      "clockmaker_to_exit": {
+        "blocked": [],
+        "samples": 136,
+        "unsupported": []
+      },
+      "entry_to_point": {
+        "blocked": [],
+        "samples": 59,
+        "unsupported": []
+      },
+      "fields_to_clockmaker": {
+        "blocked": [],
+        "samples": 27,
+        "unsupported": []
+      },
+      "point_to_fields": {
+        "blocked": [],
+        "samples": 72,
+        "unsupported": []
+      }
+    },
+    "scope": "Native museum overhead/raised/eye-level. Player and neighbour halls hidden for capture. No headset.",
+    "work_local": [
+      8.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": true
+}

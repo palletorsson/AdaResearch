@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Symmetry_Seventeen · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Symmetry_Seventeen">← Tutorial lineage</a></p><h1>Symmetry Seventeen</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Symmetry_Seventeen/final.md">Raw captured source</a></p><pre># What counts as the same?
+
+What would have to stay the same for this to be the same pattern?
+
+You have followed an address around a corridor. The floor and the wall gave it different directions. Here the surface stays flat, and a small mark returns in ways that do not quite agree.
+
+&lt;!-- @vr_tile_editor --&gt;
+
+Begin at the tilted console in the side bay. Its sixteen buttons hold an asymmetric mark: a bent line, a second colour near a corner, a third near the bend. The left panel holds a sample. The right panel and the carpet follow the current source and rule.
+
+Choose **PM**. Keep your eyes on the corner colour. Find it in the next block. Has the mark travelled, or has it also reversed? Compare it with the held **P1** sample. You have changed no source address.
+
+Now choose **PG**. The reversal remains, but the colour no longer arrives opposite its neighbour. Follow it along the other direction. The rule has slipped the reflected copy by half the source height. With four source rows, that is two rows.
+
+Try to describe the difference before pressing **HOLD**. This saves the current image on the left. It gives your next change somewhere to return to.
+
+![Held P1 and live PG in the museum side bay](/book-review/doc/book/figures/tiling/symmetry-p1-pg-museum.png)
+
+*One source, two returns. The left panel keeps P1; on the right, PG reflects alternate blocks and slips the source lookup by two rows.*
+
+The three buttons select translation, reflection and glide reflection. In the editor&#x27;s integer lookup, the last two differ by one line. This is the PG branch of `WallpaperGroups.get_symmetric_color`, with its local source coordinates:
+
+```gdscript
+var tile_x = px / tile_size
+tx = px % tile_size
+ty = py % tile_size
+if tile_x % 2 == 1:
+    tx = tile_size - 1 - tx
+    ty = (ty + tile_size / 2) % tile_size
+```
+
+An odd block reverses the source column. Then the row shifts halfway round the source and wraps. The array stays where it was; the lookup changes which of its addresses is read. The panel shows eight source blocks across and eight down. A source block is not necessarily a full translation period: reversal makes you wait for another block before its orientation returns.
+
+Select a colour, then press one of the sixteen source cells. The live panel and floor change together; the held image keeps its pixels. **UNDO** can recover a paint edit, a rule choice or the previous held sample. **RESET** restores the initial mark and P1 while leaving the held comparison available.
+
+Now make the source less distinctive. Remove the corner colour, or make both sides alike. Does the difference between rules remain easy to see? A rule can still execute while your chosen mark conceals what it does. The selected button names a construction; it does not prove that the finished image has exactly that symmetry group. An unusually symmetric source can introduce more symmetry.
+
+&lt;!-- @wallpaper_cage --&gt;
+
+Return to the cage. It marks rotational orders one, two, three, four and six, and crosses five and seven. Its subject is rotation compatible with a periodic planar lattice. It is a diagram of that restriction, not an experiment that tries every arrangement until one fails.
+
+The larger classification concerns ideal patterns repeating in two independent directions on the Euclidean plane. Under those conditions there are seventeen plane-group types; the [IUCr tables](https://it.iucr.org/Ab/) list their operations and generators. The three comparisons at the console are an entrance into that subject, not a demonstration of the completeness of the list.
+
+The other machines give these names somewhere else to work. Compare a loom or mill with the framed samples: can you find a repeated turn or reversal before reading its group label? The patterned wall gallery carries selected rules across the architecture. Its changing colours and motifs can make the operation harder to recognise than our small, deliberately awkward mark.
+
+At the atlas plates, read the makers’ names as well as the patterns. A symmetry group can describe a relation between marks without describing the work, place or history that brought them together. Carry both kinds of attention through the gallery.
+
+A fivefold-looking flower can sit inside a repeating cell. That does not give the entire field fivefold rotational symmetry. The flower and the field ask the question at different scales. Look for the boundary of what is being counted.
+
+&lt;!-- @ --&gt;
+
+The catalogue closes under its assumptions. This finite carpet still ends. Its colours have been sampled into pixels, its material meets the light, and your body stands at an angle to it. Those differences have not disappeared because the symmetry has a name.
+
+What could this classification tell you about a garment? What would it leave unasked about its cut, its wearer, or the way a seam interrupts the repeat? Carry the small mark forward. In the next hall, the question is what happens when the source gains another index and supplies a volume.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Symmetry_Seventeen/tutorial.md">Raw captured source</a></p><pre># One mark, three rules
+
+Start with the implemented comparison in `final.md`: P1, PM, PG, HOLD, source paint and UNDO. This placement uses `#lesson:symmetry_compare`; other tile editors retain their existing controls.
+
+The source is a 4 by 4 palette-index array. `WallpaperGroups.get_symmetric_color` reads this array using a selected rule. P1 wraps source coordinates. PM reverses x in odd source blocks. PG also shifts the source row by two, wrapping at four. `VRTileEditor._update_carpet_texture` samples 32 by 32 pixels. The live wall panel and carpet share that image; HOLD copies its pixels into a separate texture.
+
+The console offers 16 source addresses, four paint colours, three rules, HOLD, UNDO and RESET. Undo retains up to 32 changes including the held sample. Reset restores the initial source and P1, keeping the held sample. No headset buttons or keyboard navigation are required by this lesson. The nested legacy cube editor is hidden and suspended here to avoid competing edits.
+
+A source block is not always the translation unit cell. PM and PG reverse every other x block; the x translation period generally spans two blocks. A symmetric source can add symmetries beyond those supplied by the selected construction. Classification concerns the symmetry of the resulting whole field, not merely its selected button.
+
+Only the three selected renderers are checked in this lesson. The other exhibits remain available as supporting material; their full set of numerical wallpaper renderers has not been certified by this comparison. The cage supplies a diagram of the crystallographic restriction. Neither counting enum values nor reading that diagram proves the seventeen-group theorem.
+
+Continue to Ribbon_Patterns_01, then the other ribbon halls before Change. Headset reach and gesture work remain deferred.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Symmetry_Seventeen/intent.md">Raw captured source</a></p><pre>Concept: distinguish a source mark, a rule that places copies, and the symmetries of the resulting field. An unusually symmetric source can conceal a rule difference or add symmetry. Classifying an ideal periodic plane does not classify everything about a finite textile, a body or a room.
+
+Sequence role: fifth room of Tiling, after Array_Patterns and before Ribbon_Patterns_01. The corridor gave addresses physical directions; this room holds a flat receiver fixed and compares three rules before introducing classification.
+
+Primary artifacts: vr_tile_editor supplies an opt-in P1/PM/PG comparison, pointer source editing and independent held image. wallpaper_cage is a diagram of permitted rotational orders under periodic planar assumptions. Keep supporting looms, mills and galleries; they do not all become book anchors.
+
+Space: retain the recovered arrangement, move the editor to the eastern bay at (20,10), and open a three-cell passage through x16 at z9..11. The editor has a reachable plinth console and framed live/held panels. It does not enclose a compulsory corridor; that argument belongs to Array_Patterns.
+
+Limits: the selected CPU operations can be checked against source addresses. That does not certify every existing renderer or prove completeness of the seventeen groups. Headset and continuous gestures remain untested. The local comparison does not claim visitor source persistence between maps.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Symmetry_Seventeen/blurb.md">Raw captured source</a></p><pre>Keep one mark. Repeat it, reverse it, then let the reversal slip. Hold one result while another changes. The difference leads to a question: what does a symmetry classification count, and what remains outside its conditions?
+</pre></section></body></html>

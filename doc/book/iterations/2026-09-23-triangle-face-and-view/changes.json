@@ -1,0 +1,81 @@
+{
+  "map": "Point_Triangle_Context",
+  "scope": "Face appearance, viewpoint, drawing and the shared fan corner",
+  "edits": [
+    {
+      "title": "A patch between three corners",
+      "old": "The boundary closes. Its centre stays unfilled. The small instrument beside it reports the closed boundary and the hidden fill. Press **SHOW / HIDE FILL**, then look from another side. Press again. The edges remain while the patch of colour comes and goes.",
+      "new": "The boundary closes. You can still look through its centre into the room. Press **SHOW / HIDE FILL** on the small panel beside it. A translucent patch now hangs between the same three corners. Press again: the patch disappears and the edges stay.",
+      "incitement": "Let the surface arrive as something to look at before describing the instrument that reports it.",
+      "purpose": "Hold the boundary fixed while showing and hiding a visible surface between its corners.",
+      "reader_move": "Close the loop, look through it, then show and hide the patch.",
+      "why_here": "The reader has just wondered what the final connection will do; the button supplies a second, separate event.",
+      "without": "Closure and visible fill remain a distinction described by the instrument rather than noticed in the room.",
+      "assessment": "grounded",
+      "evidence": [
+        "puzzle",
+        "side",
+        "fill-material"
+      ]
+    },
+    {
+      "title": "The corners stay; the viewpoint moves",
+      "old": "This fill is visible from both sides. Walk around it. Its appearance can narrow almost to a line without its three corners moving. The material permits a view from either side; the edge-on projection leaves little of the surface to show.[^point-triangle-winding]",
+      "new": "This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]",
+      "incitement": "Make projection available through moving around the fixed face. Keep the rendering convention in its existing footnote.",
+      "purpose": "Distinguish a change in view from a change in the triangle by moving the visitor while its corners stay fixed.",
+      "reader_move": "Find the narrow view, then move back to see the patch widen.",
+      "why_here": "The face has appeared; now the reader can investigate how its appearance depends on where they stand.",
+      "without": "The distinction is delivered through projection terminology before it is encountered bodily.",
+      "assessment": "grounded",
+      "evidence": [
+        "side",
+        "fill-material"
+      ]
+    },
+    {
+      "title": "Let each corner arrive",
+      "old": "Pick up the drawing point and make a small triangle in the air. The tool records a corner while held once its one-second interval has elapsed and the tip has moved far enough from the previous point. Move to each intended corner, watch for the numbered point, then return near the first to close the loop. Positions round to a ten-centimetre grid. The addressing we met in Grid helps corners meet here.",
+      "new": "Pick up the drawing point and make a small triangle in the air. Move to each intended corner and wait for its number to appear. The tool needs a second between recorded corners and enough movement away from the previous point. It rounds positions to a ten-centimetre grid, so the addresses we met in Grid now help corners meet. Return near your first point to close the loop.",
+      "incitement": "Put the small action before its timing explanation, while retaining the interval, movement condition and grid spacing.",
+      "purpose": "Teach deliberate corner placement through a small triangle, bringing Grid addresses into a new construction.",
+      "reader_move": "Move, wait for the corner number, then return to the first point.",
+      "why_here": "Practise the simplest loop before attempting the six-corner L.",
+      "without": "The first drawing instruction begins with sampling conditions before the visitor knows what to watch.",
+      "assessment": "grounded",
+      "evidence": [
+        "sample",
+        "placement"
+      ]
+    },
+    {
+      "title": "Release commits the corner edit",
+      "old": "Release the tool where the triangle closed. Its corners remain grabbable: move one and the faces using it rebuild. Then press **NEW OUTLINE**. The triangle stays while you begin another boundary.",
+      "new": "Release the tool where the triangle closed. Its corners remain grabbable: move one, then release it to rebuild the faces that use it. Press **NEW OUTLINE**. The triangle stays while you begin another boundary.",
+      "incitement": "The source rebuilds after the corner is released. This matters to what the reader should expect while holding it.",
+      "purpose": "Teach editing and releasing a stored corner before beginning an independent outline that preserves the first triangle.",
+      "reader_move": "Move and release one corner, then begin another outline.",
+      "why_here": "The reader has a completed face whose corners can now be revised.",
+      "without": "The sentence could promise a face that follows the held corner continuously.",
+      "assessment": "grounded",
+      "evidence": [
+        "edit",
+        "corner-release"
+      ]
+    },
+    {
+      "title": "See the shared corner in the fan",
+      "old": "The tool uses the first point as the centre of a triangle fan, connecting it to successive pairs around the loop. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:",
+      "new": "Every triangle in this fill shares the first corner. The tool connects it to successive pairs around the loop: a fan of triangles. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:",
+      "incitement": "Give the reader the shared corner before naming the fan. Its anchor is one boundary vertex, not the geometric centre of the polygon.",
+      "purpose": "Expose the first-corner choice through the shared vertex of each emitted triangle.",
+      "reader_move": "Find B in each triple and follow the connections across the notch.",
+      "why_here": "The fill has crossed the intended boundary; the triangle list can now explain how.",
+      "without": "The word centre could obscure the boundary vertex that controls the construction.",
+      "assessment": "grounded",
+      "evidence": [
+        "fan"
+      ]
+    }
+  ]
+}

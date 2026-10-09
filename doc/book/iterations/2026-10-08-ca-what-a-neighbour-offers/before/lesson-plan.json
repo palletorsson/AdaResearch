@@ -1,0 +1,24 @@
+{
+  "id": "CA_SoftRules",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A two-field update with the reaction function named as supplied.",
+  "change": "Compute a small neighbour-difference sum for two concentration fields and combine it with a supplied local reaction function.",
+  "dependsOn": [
+    "CA_ExpandingSpace",
+    "WaveFunctions_3D_Wave_Propagation"
+  ],
+  "reuses": "Graded state and synchronous update order.; Neighbour differences can transmit change; revisit the proposed construction.",
+  "given": "field displays; reaction function; body-triggered seed",
+  "later": "Do not explain every visible artifact. Gray\u2013Scott equations are supplied here and deepened in Soft Bodies; current artifacts supersede the sequence's older primary list.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A two-field update with the reaction function named as supplied.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The present comparison explains disabled exchange but does not teach the neighbour sum and two-buffer update.",
+  "baseline": {
+    "tutorial": "49c8387b24a4c7c8af589fad57f6c22979ff5624904b6e63f044e99b9fd7bd79",
+    "choice": "7ea7c24a126950599f3a8947350a62249836f782d5dffa857e8107f701cb0781"
+  },
+  "summary": "Extend discrete cells to two concentration fields. Sum neighbour differences and combine them with a named supplied local reaction function, reading old fields and writing next fields separately. Predict a uniform-field diffusion result before adding a disturbance. Display and seeding input are supplied. Carry a two-field update; derive the local reaction terms later rather than pretending this wrapper already explains them."
+}

@@ -1,0 +1,321 @@
+--- before/doc/tasks/book_color.json
++++ doc/tasks/book_color.json
+@@ -163,9 +163,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Nails"
+       ],
+@@ -180,9 +180,12 @@
+       "proposal": "Line 13: \"Raise the hand you are choosing with and turn its nails toward you.\" Line 35: replace the paragraph with \"The colour leaves with you: your hands keep it in the halls ahead.\"",
+       "evidence": "commons/maps/Color_Nails/final.md:13, :35; commons/interfaces/nail_color_controller.gd:134-135, :149-215, :278-282; commons/managers/GameManager.gd:903-905, :912-914, :932-933; commons/artifacts/nail_salon/nail_salon.gd:14-17; commons/body/hands/left_hand_nails.gd:26,73; commons/scenes/desktop_player.tscn:11; commons/scenes/grid_desktop.tscn:53.",
+       "review": "amended: Quote exact (Color_Nails/final.md:13 and :35). The proposal is right for a reader who is in the headset, but the 'why' overstates and misplaces the fault: the desktop is a shipped play lane (commons/scenes/desktop_player.tscn, grid_desktop.tscn:53, the DesktopMapSwitcherOverlay), not 'a lane that exists only for visual tests'. The real defect in line 35 is that the device split is false: the giant and petite hands answer GameManager's signals on every lane (nail_salon.gd:14-17), and in the headset the visitor's own hand meshes are recoloured too (nail_color_controller.gd:134-135 finds the XR hands, :149-215 picks the nail/skin surfaces) and keep the colour in later halls (commons/body/hands/left_hand_nails.gd:26,73 and right_hand_nails.gd:26,73 re-read GameManager.get_nail_color(); GameManager.gd:903-905, :932-933 store it).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved the device asides and kept the choosing hand at the centre of the encounter. Both salon hands respond on both play modes. Native supplied-grab checks confirm propagation to both display hands and the production left/right material receivers; the latter were invisible fixtures without tracked pose. Loaded colours were restored and no save was requested.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:41:58.833Z"
+     },
+     {
+       "id": "book_color.002",
+@@ -191,9 +194,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Context_Placed"
+       ],
+@@ -208,9 +211,12 @@
+       "proposal": "Delete the quoted paragraph (line 75). Shorten line 52 to one sentence that sends the visitor to the plates without repeating line 54, e.g. \"Four taller columns carry their names on their plates; each plate says what its column borrows.\" Keep line 54 as it is, and keep the striped column and the two composite columns (lines 56-73), which the chapter actually reads.",
+       "evidence": "wc: Color_Context_Placed 1352 words, the other seven 476-796; commons/maps/Color_Context_Placed/map_data.json interactables: 15 chroma_stack (rows 6/12/18/26) + 8 color_dna_stack; commons/artifacts/color_dna_stack/color_dna_stack.gd:91-98 (_add_plate: title and body from studies.json); studies.json titles; final.md:52, :54 (the sentence the proposal would duplicate), :75, :79.",
+       "review": "amended: Quote exact (final.md:75); word count 1352 against 476-796 confirmed; the plates do carry studies.json's title and body (color_dna_stack.gd:91-98, e.g. BLOCK / BORDER / BLOCK, WARMTH IN STEPS, EIGHT PIECES / ONE COLUMN) and the closing region (line 79) restates the DNA paragraph, so the cut is defensible, not just taste. Two corrections: (1) the evidence miscounts the columns: Color_Context_Placed/map_data.json places 15 chroma_stack tokens (rows 6, 12, 18, 26 hold 4+3+4+4) plus 8 color_dna_stack = 23, not 16+8; (2) the proposed replacement for line 52 ends with 'find a detail its name did not tell you to expect', which is line 54 verbatim ('Stay with one of the columns a little longer. Find a detail its name did not tell you to expect.'), so the rewrite would say it twice two lines apart.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nShortened the catalogue of named stacks and reduced the DNA explanation to two sentences. Retained the bridge to later form grammar because that is an authored connection in this book. The plates carry the individual references; the reader’s invitation to find an unexpected detail remains.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:00.896Z"
+     },
+     {
+       "id": "book_color.003",
+@@ -219,9 +225,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Rainbow"
+       ],
+@@ -236,9 +242,12 @@
+       "proposal": "Add one sentence before the quoted line: \"Two offers stand by the door, a crystal in a wire case and a cube to collect; they belong to a later lesson and can be passed.\" (Or, if the pedestal is meant as this room's own gift, say what it gives.)",
+       "evidence": "commons/maps/Color_Rainbow/map_data.json interactables: (x=2,z=3) pick_up_cube, (x=12,z=3) catalyst_pedestal:0:0#sequence:auto#lease_s:45, rainbow at (7,13), teleporter t at (7,2); rainbow_celebration.gd:134 (control panel at local z=7.4, hall z≈20.4) and :150 (WelcomePatch at local z=6.4), so console and welcome are at the far end from the pedestal; museum walk order first row → last row (memory feedback_museum_walk_model_finish_line: _hall_arrives tests the tile's last row); commons/hazards/becoming_catalyst/catalyst_pedestal.gd:172-179 (timed lease), :783-784 (sequence \"auto\" binding); grep bracelet|catalyst over final.md: only Chamber_Color, Fractal_MengerSponge, LSystems_Living.",
+       "review": "kept: Verified on the map and in the museum. Color_Rainbow/map_data.json: pick_up_cube at (x=2,z=3), catalyst_pedestal:0:0#sequence:auto#lease_s:45 at (x=12,z=3), rainbow at (7,13), t at (7,2). The hall is map-authored (commons/data/map_authored.json 'color' lists Color_Rainbow) and ada_run/em_plan.json plans[23] stamps exactly those three artifacts at their map cells, so both offers stand in the museum hall. Entry side: ada_run/em_layout_walk.json's Color_Rainbow row records first_row = the row-0 wall with the 3-cell door at columns 6-8 and a 4-row vestibule before it, and the walk model finishes at the tile's last row, so the visitor enters at map row 0 and passes the cube and pedestal at row 3 before the mushrooms (rainbow_celebration.gd:115-117 puts them at local z 5..-4, i.e. rows ~9-18). The console (:134, local z 7.4) and WelcomePatch (:150, local z 6.4) are indeed at the far end (rows ~20). The pedestal really shows a crystal in a wireframe cage (catalyst_pedestal.gd:12-16), the lease is timed (:172-179) and 'sequence: auto' binds it (:783-784). Bracelet/catalyst are named in final.md only for Chamber_Color (a deferred map in color.json, not a chapter), Fractal_MengerSponge and LSystems_Living, so 'a later lesson' is right. The one-sentence proposal is an improvement: two interactables at the entrance otherwise go unexplained.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed the crystal in its wire case and the collectible cube at the entrance as optional offers. Kept the welcome, mushrooms and rainbow as the room’s main encounter; the map has no gate requiring these pickups.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:02.947Z"
+     },
+     {
+       "id": "book_color.004",
+@@ -247,9 +256,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Context_Placed"
+       ],
+@@ -264,9 +273,12 @@
+       "proposal": "Add a footnote in the book's existing style after \"someone has chosen to make\": \"[^kandinsky]: The assignment follows the questionnaire Wassily Kandinsky circulated at the Bauhaus in 1923 (circle blue, square red, triangle yellow); the stack's five-piece alphabet follows Alma Siedhoff-Buscher's Bauspiel (1923).\"",
+       "evidence": "commons/artifacts/chroma_stack/chroma_stack.gd:30-31 (\"after the questionnaire Kandinsky ran at the Bauhaus in 1923: circle blue, square red, triangle yellow\"), :43 (Siedhoff-Buscher, Bauspiel), :109-112 and :123-128 (KIND_COLOR), :8 (relationships line); footnote convention: 15 final.md files carry [^id]: entries, e.g. commons/maps/Point_Trace/final.md:3 [^point-trace-klee].",
+       "review": "kept: Quote exact (final.md:30). The attribution is the artifact's own: chroma_stack.gd:30-31 ('after the questionnaire Kandinsky ran at the Bauhaus in 1923: circle blue, square red, triangle yellow'), :43 ('bauhaus ... (Siedhoff-Buscher, Bauspiel)'), :8 (relationships line names both), :109-112 (the three constants under 'Kandinsky's assignment'), :123-128 (KIND_COLOR). The dates are right (Kandinsky's 1923 Bauhaus questionnaire; Alma Siedhoff-Buscher's Bauspiel, 1923). The footnote convention exists and the proposal matches its form ([^id]: Author, title, date — Point_Trace/final.md:140); the task's count is low (31 final.md files carry [^id]: definitions, not 15), which does not change the verdict. For a hall whose theme is the association that arrives with a colour before you measure it, naming the source of the strongest association is an improvement, not taste.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nAdded a footnote connecting the colour/shape assignment to Kandinsky’s Bauhaus teaching and the building-game reference to Siedhoff-Buscher. Qualified the five-form stack as a loose reference rather than a reproduction of her set. Linked museum sources.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:05.009Z"
+     },
+     {
+       "id": "book_color.005",
+@@ -275,9 +287,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Nails"
+       ],
+@@ -292,9 +304,12 @@
+       "proposal": "Change the four `sp` cells to `s` (or add an `s` beside each and keep the score cube only in Rainbow, which has a pick-up cube to score). The same slip is in 603 of 2808 maps and 53 spine maps; fix the four here first and decide the sweep separately.",
+       "evidence": "commons/grid/UtilityRegistry.gd:45-56 (\"s\": spawn_point, optional, centroid fallback), :64-70 (\"sp\": \"score points\", score_cube.tscn); commons/grid/GridSpawnComponent.gd:5-36 (SPAWN POLICY: centroid of floor cells, facing interactables), :115; commons/scenes/mapobjects/score_cube.tscn:19-30 (ScoreCube with Label3D text \"0\"); utilities layers of the eight colour map_data.json files (s present only in Color_Context_Placed z=2, Color_Pillar z=22, Color_Grid_Pallet z=15, Color_Paint z=19); measured: 603/2808 maps and 53 spine maps have sp without s.",
+       "review": "kept: Every number re-measured and exact. UtilityRegistry.gd:45-56 defines s as the optional spawn (centroid fallback) and :64-70 defines sp as 'score points' -> score_cube.tscn (a cube with a Label3D '0', score_cube.tscn:19-30), and GridUtilitiesComponent.gd:368-373 instantiates whatever the registry names, so a standalone load really builds a score cube. The four utilities layers: Flashlight sp (z4,x4), Nails sp (z2,x2), Rainbow sp (z23,x7), Walls sp (z4,x4), no s; Context_Placed s z2, Pillar s z22, Grid_Pallet s z15, Paint s z19. None of the four has a spawn_points block (top level or map_info), so GridSpawnComponent.gd:115-116 falls to the smart default (:193-235: centroid of non-void cells, facing interactables): Rainbow centroid (7,12.5), one cell from the arch at row ~11.5; Nails centroid (7,10), one cell from the salon at (7,9). Extra evidence of the slip: Nails, Rainbow and Walls define `s` in their own utility_definitions (\"s\": {\"properties\": {\"height\": 5.5}}) yet place sp, and commons/grid/ForemanController.gd:142 already treats sp as the spawn. Sweep: 603 of 2808 maps and 53 of 196 spine maps have sp without s. The museum is unaffected as stated: endless_museum.gd:752 UTIL_ALLOWED = {rc, sc, tc, br, jp, wp}, so _stamp_utility (:7616-7618) refuses sp and no score cube reaches a museum hall. Note for the planner: this is a standalone-lane fix (the lane used to test a hall in the headset); the museum reader never meets the defect, and the task's 'hall' field (Color_Nails) is arbitrary for a four-map change.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nChanged the mistaken sp score-display token to the intended s spawn token in Flashlight, Nails, Rainbow and Walls. Retained each authored cell; every other map value remains unchanged. Checked registry meaning and floor support in source. This repairs standalone-map loading; the museum controls its own arrival. No broad spawn sweep or headset arrival test is claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:07.071Z"
+     },
+     {
+       "id": "book_color.006",
+@@ -303,9 +318,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Grid_Pallet"
+       ],
+@@ -320,9 +335,12 @@
+       "proposal": "\"RULE replaces that value; the same cube still supports you.\"",
+       "evidence": "commons/maps/Color_Grid_Pallet/final.md:15 (caption), :27 (\"the cube still supports your body\"); memory note feedback_museum_walker_is_not_a_player (\"The museum walker is not a 'player'\").",
+       "review": "kept: Quote exact (Color_Grid_Pallet/final.md:15) and the paragraph below it (line 27) already says 'the cube still supports your body'. 'The walker' is the museum probe body's name (endless_museum.gd:3465 adds it to em_walker); to the visitor it is a third person. Clear prose defect; the proposal is the obvious fix.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced the internal probe-body name “the walker” with “you”. The statement still connects the retained floor support to the reader’s body.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:09.133Z"
+     },
+     {
+       "id": "book_color.007",
+@@ -331,9 +349,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Context_Placed"
+       ],
+@@ -348,9 +366,12 @@
+       "proposal": "Chapter, line 62: \"This column began as a table-sized study, 72 centimetres tall; here it is raised to 6.2 metres.\" And in commons/artifacts/color_dna_stack/studies.json, change kras_rainbow.body to matching words without the identifier, e.g. \"A table-sized study, 72 centimetres tall, raised to 6.2 metres. Thirty fixed stripes carry six colours around the shaft.\" (If the plate must keep the identifier, keep the chapter's mention too and only drop 'the gallery's'.)",
+       "evidence": "commons/maps/Color_Context_Placed/final.md:62; commons/artifacts/color_dna_stack/studies.json kras_rainbow (body carries 'ps07_kras_rainbow', parts[0].source, height 6.2); commons/artifacts/color_dna_stack/color_dna_stack.gd:91-98 (_add_plate: screen.title / screen.body); commons/artifacts/color_dna_stack/configs/ps07_kras_rainbow.json (height 0.72, stripe_count 30, 6 colours); commons/primitive_grammar/primitive_stack.gd:552-553.",
+       "review": "amended: Quote exact (final.md:62) and the numbers check: configs/ps07_kras_rainbow.json has height 0.72, stripe_count 30 and six stripe_colors; studies.json kras_rainbow.parts[0] is source ps07_kras_rainbow at height 6.2; primitive_stack.gd:552-553 are the quoted lines. But the identifier is not only in the chapter: the column's own plate prints it. studies.json kras_rainbow.body is \"ps07_kras_rainbow, raised to 6.2 metres. Thirty fixed stripes carry six colours around the shaft.\" and color_dna_stack.gd:96-97 puts title and body on the plate the visitor reads at the foot of the column. So the chapter is echoing the plate, and rewriting the chapter alone leaves the visitor meeting the string on the plate with no sentence to match it. 'The gallery' is still a place the reader was never shown, so the rewrite is right; it just has to travel with the plate.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced the internal ps07_kras_rainbow identifier with the physical change from a 72-centimetre study to a 6.2-metre column, in both the manuscript and the column plate. The source identifier, construction, dimensions and thirty stripes are unchanged.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:11.194Z"
+     },
+     {
+       "id": "book_color.008",
+@@ -359,9 +380,9 @@
+       "effort": "10min",
+       "skill": "verify",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Walls"
+       ],
+@@ -376,9 +397,12 @@
+       "proposal": "\"Sixteen small cubes run from one to the other.\"",
+       "evidence": "algorithms/color/gradient_interpolator/gradient_interpolator.gd:21, :26-35, :38-39, :127-134, :138-145, :179-184, :250-257; commons/maps/Color_Walls/final.md:53, :67.",
+       "review": "amended: Quote exact (Color_Walls/final.md:53) and the code claim holds: gradient_interpolator.gd:21 step_count = 16, :251 t = float(i)/float(size-1), :257 ca.lerp(cb, t), :38-39 presets 0 (red) and 5 (blue), so cube 0 is red and cube 15 is blue and fourteen intervene. But the 'why' misreads the bench: it also has a red swatch and a blue swatch placed beyond the two ends of the row (:127-134 at x = -total_w/2-0.04, :138-145 at +total_w/2+0.04, driven by COLOUR A / COLOUR B, :179-184), so 'red at one end and blue at the other' is a true description of the bench, and the two sentences do not disagree; only 'hold the intervening values' is wrong, because the first and last cubes repeat the swatches' values. The proposal fixes exactly that and should stand.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nCorrected the sixteen-cube description: the row runs from one endpoint to the other, including those endpoint colours. The fourteen intervening samples no longer stand in for all sixteen cubes.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:13.256Z"
+     },
+     {
+       "id": "book_color.009",
+@@ -387,9 +411,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Paint"
+       ],
+@@ -404,9 +428,12 @@
+       "proposal": "Add \"[^albers]: Josef Albers, *Homage to the Square* (series, 1950-76); the exercise of holding one area and then including its surround is from his *Interaction of Color* (1963).\"",
+       "evidence": "commons/artifacts/registry/algorithms_misc.json:613 (albers_wall_gallery → res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn); commons/maps/Color_Paint/final.md:47; footnote convention as in Point_Trace/final.md:3.",
+       "review": "kept: Quote exact (Color_Paint/final.md:47). The wall is what the task says: registry algorithms_misc.json:613 maps albers_wall_gallery to res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn, and albers_wall_gallery.gd:4 describes '98 procedural Albers \"Homage to the Square\" paintings'. Dates are right (the series ran 1950-1976; Interaction of Color, 1963). Attributing the 'hold one area, then include its surround' exercise to Interaction of Color is a fair reading of that book's premise rather than a quotation; acceptable in a footnote. Footnote form matches the book's (Point_Trace/final.md:140). A surname with nothing to follow, in a hall about surrounds, is a real gap.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed Josef Albers and Homage to the Square; added a footnote to the series and Interaction of Color. Described the attention-to-surround exercise as drawing on his inquiry, without claiming that this wording or the procedural gallery is his original exercise.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:15.303Z"
+     },
+     {
+       "id": "book_color.010",
+@@ -415,9 +442,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Context_Placed"
+       ],
+@@ -432,9 +459,12 @@
+       "proposal": "\"The same column seen from two sides. The stripes keep their places while their arrangement in the view changes.\"",
+       "evidence": "commons/maps/Color_Context_Placed/final.md:60; the figure is a museum capture at doc/book/iterations/2026-09-23-colour-gathering/around-the-rainbow.png.",
+       "review": "kept: Quote exact (final.md:60). 1.65 m is the capture rig's number, not the visitor's: doc/book/iterations/2026-09-23-colour-gathering/build.py:16 describes the figure as 'two selected camera positions, each 1.65 metres above its base', and 1.65 is the standing eye height the testing rigs use (commons/testing/capture_carpet_gallery.gd:26, capture_biome_hinge.gd:44, the rainbow iteration's probe.gd:55,63,79). The caption's point survives without the number, and the proposal keeps the sentence that carries it.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved the capture-rig height from the striped-column caption. The important comparison remains: stripes keep their places while the visitor’s view changes.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:17.367Z"
+     },
+     {
+       "id": "book_color.011",
+@@ -443,9 +473,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Color_Nails"
+       ],
+@@ -460,9 +490,12 @@
+       "proposal": "Add \"# The choosing hand\" (the iteration's own name) above the opening question.",
+       "evidence": "First lines of the eight colour final.md files (Context_Placed, Flashlight, Rainbow, Pillar, Grid_Pallet, Paint, Walls start with #; Nails does not); 149 of 196 spine chapters carry a heading; doc/book/iterations/2026-09-23-nails-the-choosing-hand/.",
+       "review": "kept: Verified: Color_Nails/final.md:1 is the bare question; the other seven colour chapters start with a '#' title; across the spine 149 of 196 final.md files start with a heading (re-measured), and Color_Nails is the only colour chapter without one. The iteration's own name is the proposed title: doc/book/iterations/2026-09-23-nails-the-choosing-hand/SUMMARY.md:1 is '# Color_Nails — the choosing hand'. Small, consistent, no downside.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nAdded the existing title “The choosing hand” above the salon’s opening question, matching the other Colour chapters.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-colour-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:42:19.433Z"
+     }
+   ]
+ }

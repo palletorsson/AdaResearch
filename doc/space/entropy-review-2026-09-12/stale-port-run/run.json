@@ -1,0 +1,24 @@
+{
+  "started": "2026-09-12T21:06:27+02:00",
+  "finished": "2026-09-12T21:07:15+02:00",
+  "pid": 17932,
+  "exit": 4294967295,
+  "checks": 149,
+  "failures": [
+    "arrival: all forty enlarged tiles retain the active sample's original draw order",
+    "sorted: all forty enlarged tiles retain the active sample's original draw order",
+    "contrast: all forty enlarged tiles retain the active sample's original draw order"
+  ],
+  "source_sha256": {
+    "commons/testing/probe_wcn_entropy_live.gd": "e0ddc9fe645c1ce53ae25c23c2a1a27a5c2e6fa13b8af8ca8d40e33c7106c978",
+    "commons/maps/Random_Entropy/map_data.json": "8b225974d386e446da83b5810a90073678dab1f13c420445660167f5efb40384",
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": "9fa6228b0e03a693a44fda903fc523cf8ca66f5fc2ad2e5538622020d3e8dcff",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "commons/interactables/slider_horizontal.gd": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

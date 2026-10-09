@@ -1,0 +1,156 @@
+{
+	"checks": [
+		{
+			"check": "No record exists for this isolated run",
+			"passed": true
+		},
+		{
+			"check": "Grid shows an honest empty state without a sample substitute",
+			"passed": true
+		},
+		{
+			"check": "Capture empty.png",
+			"passed": true
+		},
+		{
+			"check": "Malformed record is rejected without constructing a gesture",
+			"passed": true
+		},
+		{
+			"check": "A mismatched coordinate frame is rejected",
+			"passed": true
+		},
+		{
+			"check": "Snapshot preserves very small coordinates exactly",
+			"passed": true
+		},
+		{
+			"check": "Desktop pickup reaches the Trace point",
+			"passed": true
+		},
+		{
+			"check": "Injected mouse motion creates a trace through the actual hold",
+			"passed": true
+		},
+		{
+			"check": "Desktop release saves the exact retained list",
+			"passed": true
+		},
+		{
+			"check": "Release reports the successful handoff in the room",
+			"passed": true
+		},
+		{
+			"check": "Saved record is a snapshot, independent of subsequent list changes",
+			"passed": true
+		},
+		{
+			"check": "Grid reuses the actual mouse trace rather than starting another recording",
+			"passed": true
+		},
+		{
+			"check": "Mapping preserves one entry per source entry",
+			"passed": true
+		},
+		{
+			"check": "Source array remains unchanged after mapping",
+			"passed": true
+		},
+		{
+			"check": "Each drawing uses the same fit",
+			"passed": true
+		},
+		{
+			"check": "Comparison separation is a display translation only",
+			"passed": true
+		},
+		{
+			"check": "Grid's loaded list cannot mutate the saved file",
+			"passed": true
+		},
+		{
+			"check": "A later valid save replaces the previous snapshot",
+			"passed": true
+		},
+		{
+			"check": "Mapping handles boundaries, negatives and exact halfway values",
+			"passed": true
+		},
+		{
+			"check": "Repeated grid positions retain their entries and order",
+			"passed": true
+		},
+		{
+			"check": "Equal neighbouring outputs draw no spurious segment",
+			"passed": true
+		},
+		{
+			"check": "Coarser spacing starts again from the original source",
+			"passed": true
+		},
+		{
+			"check": "Coarser output changes while the saved data stays fixed",
+			"passed": true
+		},
+		{
+			"check": "Returning to a spacing reproduces the original result",
+			"passed": true
+		},
+		{
+			"check": "A too-short save leaves the previous drawing intact",
+			"passed": true
+		},
+		{
+			"check": "Invalid spacing is reported without dividing by zero",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR grip reaches the same recording point",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR release saves the exact hand trace",
+			"passed": true
+		},
+		{
+			"check": "New release replaces rather than appends to the earlier drawing",
+			"passed": true
+		},
+		{
+			"check": "Capture trace-saved.png",
+			"passed": true
+		},
+		{
+			"check": "Grid loads the released synthetic hand trace",
+			"passed": true
+		},
+		{
+			"check": "Capture quarter.png",
+			"passed": true
+		},
+		{
+			"check": "Both views keep their source-based fit when spacing changes",
+			"passed": true
+		},
+		{
+			"check": "Coarse hand-trace mapping retains the original and its sample count",
+			"passed": true
+		},
+		{
+			"check": "Repeated Grid runs never overwrite the saved gesture",
+			"passed": true
+		},
+		{
+			"check": "Capture half.png",
+			"passed": true
+		}
+	],
+	"desktop_input": "Mouse-motion events injected into the real desktop player handler",
+	"passed": true,
+	"physical_headset_tested": false,
+	"saved_points": 41,
+	"saved_sha256": "d7a334b32fdf7e3787d66cae6b8a8cbcb7412c25859740d77199274ae5619bbb",
+	"screenshots": "Native Godot views of the SAME trace saved by synthetic grip release",
+	"writer_process_id": 26764,
+	"xr_input": "Synthetic tracked poses and grip; no headset"
+}

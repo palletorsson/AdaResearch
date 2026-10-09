@@ -1,0 +1,65 @@
+{
+  "checks": 18,
+  "details": {
+    "centrifuge_ring": {
+      "authored_cell": [
+        9,
+        24
+      ],
+      "global_position": "(9.5, 0.0, 24.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(9.5, 0.0, 24.5)"
+    },
+    "drag_corridor": {
+      "authored_cell": [
+        15,
+        8
+      ],
+      "global_position": "(15.5, 0.0, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(15.5, 0.0, 8.5)"
+    },
+    "encounter_order": "drag / ring / mower",
+    "force_mower": {
+      "authored_cell": [
+        8,
+        37
+      ],
+      "global_position": "(8.5, 0.0, 37.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(8.5, 0.0, 37.5)"
+    },
+    "force_pad": {
+      "authored_cell": [
+        15,
+        30
+      ],
+      "global_position": "(15.5, 0.0, 30.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(15.5, 0.0, 30.5)"
+    },
+    "orbit_walk": {
+      "authored_cell": [
+        21,
+        24
+      ],
+      "global_position": "(21.5, 0.0, 24.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(21.5, 0.0, 24.5)"
+    },
+    "wedge_slide": {
+      "authored_cell": [
+        1,
+        17
+      ],
+      "global_position": "(1.5, 0.0, 17.5)",
+      "scale": "(1.0, 1.0, 1.0)",
+      "source_position": "(1.5, 0.0, 17.5)"
+    }
+  },
+  "failures": [
+    "artifact retained: sisyphus_mower",
+    "artifact retained: prop_carousel"
+  ],
+  "headset_tested": false
+}

@@ -1,0 +1,629 @@
+{
+	"approaches": [
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.0,
+				0.0,
+				1.0
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": false,
+			"direction": [
+				1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": false,
+			"passed": false
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": false,
+			"direction": [
+				-1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": false,
+			"passed": false
+		}
+	],
+	"artifact": {
+		"position": [
+			4.5,
+			0.0,
+			10.5
+		],
+		"rotation": [
+			0.0,
+			0.0,
+			0.0
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Live hall contains the actual console artifact",
+			"passed": true
+		},
+		{
+			"message": "Physical console exists after museum loading",
+			"passed": true
+		},
+		{
+			"message": "Operating position has supporting floor",
+			"passed": true
+		},
+		{
+			"message": "Artifact retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits in front of console",
+			"passed": true
+		},
+		{
+			"message": "A supported, unobstructed final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DENSITY endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "RATE endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "WARMTH endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "SPACE endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DRIFT endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "LEVEL endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "TransportButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "TransportButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "TransportButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "TransportButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "SeedButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "SeedButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "SeedButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "SeedButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "RouteButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "RouteButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "RouteButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "RouteButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "RoomButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "RoomButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "RoomButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "RoomButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Live controls were measured",
+			"passed": true
+		},
+		{
+			"message": "Museum CharacterBody reaches the operating pose along the measured approach",
+			"passed": true
+		},
+		{
+			"message": "DENSITY real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "DENSITY release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "RATE real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "RATE release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "WARMTH real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "WARMTH release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "SPACE real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "SPACE release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "DRIFT real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "DRIFT release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "LEVEL real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "LEVEL release retains restored value in the hall",
+			"passed": true
+		},
+		{
+			"message": "Ambient patch plays after actual museum instantiation",
+			"passed": true
+		}
+	],
+	"console": {
+		"height_above_floor": 0.00000000745058059692383,
+		"position": [
+			4.5,
+			0.0,
+			10.5
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/DensitySlider/Face",
+			"horizontal_distance": 0.652770161628723,
+			"label": "DENSITY endpoint 0.0",
+			"position": [
+				4.03000020980835,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/DensitySlider/Face",
+			"horizontal_distance": 0.652770161628723,
+			"label": "DENSITY endpoint 1.0",
+			"position": [
+				4.03000020980835,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/RateSlider/Face",
+			"horizontal_distance": 0.53360390663147,
+			"label": "RATE endpoint 0.0",
+			"position": [
+				4.21799993515015,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/RateSlider/Face",
+			"horizontal_distance": 0.53360390663147,
+			"label": "RATE endpoint 1.0",
+			"position": [
+				4.21799993515015,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/WarmthSlider/Face",
+			"horizontal_distance": 0.462650001049042,
+			"label": "WARMTH endpoint 0.0",
+			"position": [
+				4.4060001373291,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/WarmthSlider/Face",
+			"horizontal_distance": 0.462650001049042,
+			"label": "WARMTH endpoint 1.0",
+			"position": [
+				4.4060001373291,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/SpaceSlider/Face",
+			"horizontal_distance": 0.462650001049042,
+			"label": "SPACE endpoint 0.0",
+			"position": [
+				4.5939998626709,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/SpaceSlider/Face",
+			"horizontal_distance": 0.462650001049042,
+			"label": "SPACE endpoint 1.0",
+			"position": [
+				4.5939998626709,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/DriftSlider/Face",
+			"horizontal_distance": 0.53360390663147,
+			"label": "DRIFT endpoint 0.0",
+			"position": [
+				4.78200006484985,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/DriftSlider/Face",
+			"horizontal_distance": 0.53360390663147,
+			"label": "DRIFT endpoint 1.0",
+			"position": [
+				4.78200006484985,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.935999996960163,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/LevelSlider/Face",
+			"horizontal_distance": 0.652770161628723,
+			"label": "LEVEL endpoint 0.0",
+			"position": [
+				4.96999979019165,
+				0.935999989509583,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.11600006371737,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/LevelSlider/Face",
+			"horizontal_distance": 0.652770161628723,
+			"label": "LEVEL endpoint 1.0",
+			"position": [
+				4.96999979019165,
+				1.11600005626678,
+				10.5469999313354
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.833999998867512,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/TransportButton/InteractableAreaButton",
+			"horizontal_distance": 0.625184655189514,
+			"label": "TransportButton",
+			"position": [
+				4.05000019073486,
+				0.833999991416931,
+				10.5659999847412
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.833999998867512,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/SeedButton/InteractableAreaButton",
+			"horizontal_distance": 0.459190636873245,
+			"label": "SeedButton",
+			"position": [
+				4.34999990463257,
+				0.833999991416931,
+				10.5659999847412
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.833999998867512,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/RouteButton/InteractableAreaButton",
+			"horizontal_distance": 0.459190636873245,
+			"label": "RouteButton",
+			"position": [
+				4.65000009536743,
+				0.833999991416931,
+				10.5659999847412
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.833999998867512,
+			"hit": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/AmbientPatch/RoomButton/InteractableAreaButton",
+			"horizontal_distance": 0.625184655189514,
+			"label": "RoomButton",
+			"position": [
+				4.94999980926514,
+				0.833999991416931,
+				10.5659999847412
+			]
+		}
+	],
+	"failures": [],
+	"feet": [
+		4.5,
+		-0.00000000745058059692383,
+		11.0
+	],
+	"floor_collider": "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/Collision",
+	"passed": true,
+	"plaques": [],
+	"room": "WaveFunctions_Synthesis_Lab",
+	"scope": "Actual museum geometry. Static standing capsule, short approach, control rays and world dimensions; desktop capture, no headset or learner validation.",
+	"shots": [
+		"operating.png",
+		"controls.png",
+		"approach.png"
+	],
+	"standing_obstacles": [],
+	"walk_end": [
+		4.5,
+		0.000823154696263373,
+		11.0249786376953
+	]
+}

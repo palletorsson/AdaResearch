@@ -1,0 +1,1 @@
+The middle stays while one end rises and the other descends. Climb a turning blade to a higher grid landing, then walk into a 2D array whose angle increases with every row. When does the same forward movement cease to work?

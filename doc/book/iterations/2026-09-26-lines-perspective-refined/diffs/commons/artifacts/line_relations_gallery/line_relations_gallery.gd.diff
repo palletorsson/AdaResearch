@@ -1,0 +1,91 @@
+--- before/commons/artifacts/line_relations_gallery/line_relations_gallery.gd
++++ after/commons/artifacts/line_relations_gallery/line_relations_gallery.gd
+@@ -12,7 +12,6 @@
+ func _ready() -> void:
+ 	for i in range(4):
+ 		var x: float = LANES[i]
+-		paint(Vector3(x,0.009,-4),Vector3(x,0.009,11.5),0.018,Color("9d9b91"))
+ 		floor_words(TITLES[i],Vector3(x,0.016,-3.3),Vector2(3.4,0.2))
+ 		# A small empty viewing mark gives the eye a place to start, not a cage.
+ 		paint(Vector3(x-0.38,0.012,-3.9),Vector3(x+0.38,0.012,-3.9),0.04,Color("282b30"))
+@@ -59,7 +58,13 @@
+ 	box.size=Vector3(a.distance_to(b),width,width);mesh.mesh=box
+ 	mesh.transform=Transform3D(Basis(Quaternion(Vector3.RIGHT,(b-a).normalized())),(a+b)*0.5)
+ 	var mat := StandardMaterial3D.new();mat.albedo_color=colour;mat.roughness=0.8
+-	mesh.material_override=mat;add_child(mesh)
++	mesh.material_override=mat
++	if absf(a.y-b.y)<0.0001 and a.y<0.04:
++		# Floor marks are thin ink; elevated lines keep their actual thickness.
++		box.size.y=0.003
++		mesh.position.y=0.012
++		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	add_child(mesh)
+ 
+ func floor_words(words: String, at: Vector3, size_m: Vector2) -> void:
+ 	var label: MeshInstance3D=KIT.stencil(words,size_m,Color("25282d"))
+@@ -99,39 +104,42 @@
+ 		rod("wall_plank_%d" % (i+1),centre,direction,length_m,"plank")
+ 
+ func room_perspective() -> void:
+-	# Parallel marks belong to the room. Their convergence is made by the view.
++	# Two strong parallels make one readable depth study. Each of the four
++	# neighbouring arrangements keeps its short viewpoint mark, not another rail.
+ 	var ink := Color("202329")
+-	for x in [-10.5,10.5]:
+-		paint(Vector3(x,0.025,-8.15),Vector3(x,0.025,17.9),0.045,ink)
+-		for k in range(13):
++	for x in [-6.4,-1.6]:
++		paint(Vector3(x,0.031,-8.15),Vector3(x,0.031,11.5),0.06,ink)
++		for k in range(10):
+ 			var z: float = -7.5 + float(k)*2.0
+-			paint(Vector3(x-0.12,0.028,z),Vector3(x+0.12,0.028,z),0.025,ink)
+-	# The museum is open to the sky. These two narrow soffits give the drawing
+-	# real ceiling edges without closing the hall. Height comes from its owner.
++			paint(Vector3(x-0.2,0.031,z),Vector3(x+0.2,0.031,z),0.045,ink)
++	# Side canopies put a quiet, actual surface behind the ceiling edge. Most
++	# of the roof stays open. The museum still owns its architectural height.
+ 	var ceiling_y: float = DETAIL.CEIL_SOFFIT
+-	var edge_y := ceiling_y-0.025
+-	for x in [-12.29,12.29]:
++	var edge_y := ceiling_y-0.065
++	var canopy_width := 2.4
++	var edge_x := 12.5-canopy_width
++	for side in [-1.0,1.0]:
+ 		var soffit := MeshInstance3D.new()
+-		soffit.name="CeilingStripLeft" if x<0 else "CeilingStripRight"
+-		var box := BoxMesh.new();box.size=Vector3(0.42,0.12,26.4)
+-		soffit.mesh=box;soffit.position=Vector3(x,ceiling_y+0.06,4.75)
++		soffit.name="CeilingStripLeft" if side<0 else "CeilingStripRight"
++		var box := BoxMesh.new();box.size=Vector3(canopy_width,0.12,26.4)
++		soffit.mesh=box;soffit.position=Vector3(side*(12.5-canopy_width*0.5),ceiling_y+0.06,4.75)
+ 		var mat := StandardMaterial3D.new();mat.albedo_color=Color("e5e1d8");mat.roughness=0.9
+ 		soffit.material_override=mat;add_child(soffit)
+-		var edge_x: float = -12.08 if x<0 else 12.08
+-		paint(Vector3(edge_x,edge_y,-8.45),Vector3(edge_x,edge_y,17.95),0.05,ink)
+-	# The nearer line lies on the same eye-rays as part of the left ceiling
+-	# edge. A sideways step breaks that alignment; no camera or head is moved.
++		paint(Vector3(side*edge_x,edge_y,-8.45),Vector3(side*edge_x,edge_y,17.95),0.12,ink)
++	# Closer and thicker than the first version: the separation should be
++	# visible during an ordinary step, rather than requiring a diagram.
+ 	var eye := Vector3(-4,1.65,-7)
+-	var edge_a := Vector3(-12.08,edge_y,-5.5)
+-	var edge_b := Vector3(-12.08,edge_y,16.5)
+-	var fraction := 0.55
++	var edge_a := Vector3(-edge_x,edge_y,-5.5)
++	var edge_b := Vector3(-edge_x,edge_y,16.5)
++	var fraction := 0.38
+ 	var a := eye.lerp(edge_a,fraction)
+ 	var b := eye.lerp(edge_b,fraction)
+-	paint(a,b,0.05*fraction,ink)
++	paint(a,b,0.12*fraction,ink)
+ 	get_child(get_child_count()-1).name="DetachedCeilingLine"
+ 	set_meta("alignment_eye",eye)
+ 	set_meta("alignment_edge",[edge_a,edge_b])
+ 	set_meta("alignment_line",[a,b])
+-	# A discreet place to begin looking; an invitation, not a required camera.
+-	paint(Vector3(-4.35,0.012,-7),Vector3(-3.65,0.012,-7),0.045,ink)
+-	floor_words("LOOK UP. STEP ASIDE.",Vector3(-4,0.016,-7.55),Vector2(3.3,0.2))
++	# Alignment occurs along a plane of possible eyes, not one privileged
++	# height. A short lateral strip lets lower/taller visitors find their view.
++	paint(Vector3(-5.5,0.012,-7),Vector3(-2.5,0.012,-7),0.045,ink)
++	floor_words("FIND THE EDGE. STEP ASIDE.",Vector3(-4,0.016,-7.65),Vector2(4.4,0.23))

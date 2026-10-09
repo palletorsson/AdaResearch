@@ -1,0 +1,34 @@
+--- before/commons/artifacts/force_field_zone/force_field_zone.gd
++++ after/commons/artifacts/force_field_zone/force_field_zone.gd
+@@ -2,18 +2,19 @@
+ class_name ForceFieldZone
+ 
+ ## @identity
+-## lineage: a force made into a place — a 4 m cube of space where one vector rules. Step in
+-##   (or throw a cube in) and gravity is replaced by whatever the vector machine is pointing;
+-##   the void below is only a void if the field lets you fall.
+-## essence: inside the cube the field is the only force. Point it down and everything drops
+-##   into the void; point it up-and-across and the same cube — and the same you — is carried
+-##   to the far side. The field lines and the central arrow show which way the world pushes.
+-## truth: "falling" isn't a property of the void, it's a property of the field over it; change
+-##   the vector and the impossible crossing becomes a step.
+-##
+-## An Area3D volume. Bodies inside have their gravity replaced by field_vector (RigidBodies:
+-## gravity_scale 0 + velocity += field·dt; the player_body: velocity += (field − its gravity)·dt).
+-## The vector_machine finds this via group "force_field" and calls set_field_vector().
++## lineage: local acceleration made into a place — a default 5 m volume that replaces gravity
++##   for admitted receivers. The vector machine chooses the acceleration; contact, incoming
++##   motion and each receiver's controller still help determine the journey.
++## essence: released rigid bodies receive velocity += field_vector * dt without division by
++##   mass. The field supplies acceleration in m/s²; collisions and damping remain active.
++##   The force_as_place lesson also gives visitors a separate controller-owned carry receiver.
++## truth: the same acceleration increment need not produce the same journey in different bodies.
++##
++## Area3D overlap admits rigid bodies, temporarily sets gravity_scale to zero and restores it
++## on exit. The opt-in lesson admits visitors by a feet-position test and retains post-collision
++## velocity through desktop/XR movement adapters. The legacy player path instead adds
++## (field_vector - ordinary_gravity) * dt to velocity. These are separate receiver contracts.
++## The vector_machine calls set_field_vector(); lesson machines publish only within their hall.
+ 
+ ## ─── STAGE-2 DNA (promoted 2026-08-05) ────────────────────────────────────────
+ ##

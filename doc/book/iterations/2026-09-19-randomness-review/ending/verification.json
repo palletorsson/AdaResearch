@@ -1,0 +1,21 @@
+{
+  "owned_files": 5,
+  "identity_only_files_have_identical_noncomment_code": {
+    "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd": true,
+    "commons/artifacts/noise_mixer/noise_mixer.gd": true,
+    "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd": true
+  },
+  "existing_pheromone_core_functions_identical_ignoring_comments_docstrings": {
+    "_decay_pheromones": true,
+    "_walk_step": true,
+    "_choose_next_position": true,
+    "_initialize_grids": true,
+    "_create_walkers": true,
+    "_update_mesh": true
+  },
+  "git_diff_check_returncode": 0,
+  "git_diff_check_output": "warning: in the working copy of 'algorithms/randomness/pheromone_terrain/pheromone_terrain.gd', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd', LF will be replaced by CRLF the next time Git touches it\n",
+  "owned_hashes_match_after_snapshot": true,
+  "headset_tested": false,
+  "complete_game_collision_playthrough": false
+}

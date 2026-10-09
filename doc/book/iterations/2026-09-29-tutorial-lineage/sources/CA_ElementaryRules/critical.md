@@ -1,0 +1,11 @@
+# Present, but not counted
+
+The state-two cell occupies a position but contributes nothing to the active neighbour count. For one generation it also prevents that position from receiving the birth available to an empty cell. The work makes three conditions distinct: participating, lingering, becoming available again. These are consequences of a particular state machine, not laws about social life. Their specificity makes them available for thought without turning the simulation into a universal explanation.
+
+The height finish folds active and fading states into a shared appearance. A second finish separates them. The display can therefore make continuity persuasive where the calculation preserves a difference. Its shell rendering makes another selection: an occupied interior can remain consequential without being drawn. Visibility and causal participation are separate operations in this artifact.
+
+This extends the noise sequence's question about the useful organic filter. A blob can give pleasure, desire or a queer suggestion of becoming. Learning the next mechanism lets us ask which relations could sustain another body. Here a stored state delays reuse of a position. The result need not look less like a blob to give us a new capability. Its value is in the particular experiment it makes possible, rather than an assumed hierarchy of more authentic life.
+
+The edge and the clock also belong to the argument. This study specifies an empty outer shell, a repeatable seed and a twenty-step observation budget that can be extended. The inherited source had a hidden alternating boundary because only the interior was updated. Correcting that boundary here makes the stated experiment reproducible; it does not erase the old behaviour from the archive or pretend every other placement has been repaired. A limit in the schedule can produce stillness before the rule produces a fixed point. We can inspect the changed-state count instead of asking stillness to prove equilibrium.
+
+The source gives us handles for further work: alter the fading interval, admit another counted state, change the boundary, draw the hidden interior. Each would revise a specific relation. The museum keeps those possibilities open while giving this first visit a path narrow enough to follow.

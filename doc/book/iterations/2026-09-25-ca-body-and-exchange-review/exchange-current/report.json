@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "exchange study present",
+      "passed": true
+    },
+    {
+      "name": "seed crossing retained",
+      "passed": true
+    },
+    {
+      "name": "initial labels withhold the exchange answer",
+      "passed": true
+    },
+    {
+      "name": "W initially has no V on either field",
+      "passed": true
+    },
+    {
+      "name": "gold frame on table 0",
+      "passed": true
+    },
+    {
+      "name": "gold frame on table 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: table-witness",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exchange-before-naming",
+      "passed": true
+    },
+    {
+      "name": "STEP brings V to W only with exchange",
+      "passed": true
+    },
+    {
+      "name": "EXCHANGE B reveals rendered titles",
+      "passed": true
+    },
+    {
+      "name": "EXCHANGE B resets both fields",
+      "passed": true
+    },
+    {
+      "name": "matched exchange gives matching fields",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exchange-after-naming",
+      "passed": true
+    },
+    {
+      "name": "replay retains the discovered relation",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "revealed_titles": [
+      "A / EXCHANGE ON",
+      "B / EXCHANGE ON"
+    ]
+  },
+  "passed": true,
+  "room": "CA_SoftRules",
+  "scope": "Focused native museum tests, supplied console signals/body motion/cameras. No headset readability or Quest profiling claim."
+}

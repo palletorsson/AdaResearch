@@ -1,0 +1,97 @@
+{
+  "id": "primitives-2026-09-08",
+  "title": "Primitives: first ten-action pass",
+  "updated": "2026-09-08",
+  "summary": "Ten manuscripts and their primary encounter order reconciled; shared instruments corrected and a repeatable counterexample added. A follow-up restored Melencolia's historical spatial composition and recorded a reusable restoration method. Engine checks pass within their recorded scopes; teacher-led and solo learner walks remain open.",
+  "items": [
+    {
+      "id": 1,
+      "title": "Repair the snap sphere's precision and labels",
+      "status": "checked",
+      "result": "Adaptive metres/index labels, effective spacing, retained capacity and visible-tip drop alignment implemented; both inspected room configurations pass the scene probe."
+    },
+    {
+      "id": 2,
+      "title": "Reconcile Grid's two scales in final.md",
+      "status": "implemented",
+      "result": "The opening compares the sphere's 0.05 m spacing with the walking recorder's separate 1 m lattice; bounded ordered history replaces the old visited-cell claim."
+    },
+    {
+      "id": 3,
+      "title": "Test the shared correction in Point One",
+      "status": "checked",
+      "result": "The same scene passes with the introductory room's different placement offset. The room keeps its primary coordinate experiment; shared implementation is distinguished from shared purpose."
+    },
+    {
+      "id": 4,
+      "title": "Reinspect the current Trace room",
+      "status": "implemented",
+      "result": "The current automatic-writing desk and hand-telemetry diptych replace absent-object claims in the manuscript; tracked and demonstration feeds are distinguished."
+    },
+    {
+      "id": 5,
+      "title": "Expose the pen's sampling and retention",
+      "status": "checked",
+      "result": "Default/coarse dot and stick readouts show count, cap, movement and grid. The timer-derived pen supplies its own contract. The combined probe passes 76 checks."
+    },
+    {
+      "id": 6,
+      "title": "Make the triangle-fan counterexample reproducible",
+      "status": "checked",
+      "result": "Added NEW OUTLINE using the existing pointer/poke button. The same six-corner L yields four triangles from both starts but two outside centroids from B; completed faces survive restart."
+    },
+    {
+      "id": 7,
+      "title": "Give all ten rooms a primary encounter and order",
+      "status": "implemented",
+      "result": "Ten room-specific primary groups and encounter orders are installed, preserving other rooms, existing notes and positions. Fixed grouped ordering in the spine exporter and rebuilt its 190-room manifest."
+    },
+    {
+      "id": 8,
+      "title": "Reconcile all ten primitives manuscripts",
+      "status": "implemented",
+      "result": "All ten final.md files revised against placed artifacts and source behavior, with action and observation before explanation and a specific limit or variation. No unplaced artifact tags remain in this pass."
+    },
+    {
+      "id": 9,
+      "title": "Check teacher-led and solo journeys",
+      "status": "needs_walk",
+      "result": "Source, primary-order and map-route checks completed. All ten have a structural entry-to-exit route; cached body checks flag Point One and Lines. Full-map captures exist, but teacher-led and solo learner acceptance still needs real room walks."
+    },
+    {
+      "id": 10,
+      "title": "Record scoped lessons and carry one into the next sequence",
+      "status": "implemented",
+      "result": "Four evidence-backed lessons recorded in the first pass. Translation received a bounded trace passage and authored outline; its transport remains primary. Follow-up: Melencolia's missing support was traced to lost static architecture and restored from Git, yielding a fifth scoped lesson. The portal ladder's footprint remains a build candidate."
+    }
+  ],
+  "lessons": [
+    {
+      "principle": "A retained-position display, its lattice index and the released marker must describe the same sampled point.",
+      "scope": "Shared grab_sphere_point_snap script and inspected configurations. Engine checks establish numerical agreement; they do not establish VR reading distance or the two rooms' educational equivalence.",
+      "evidence": "Real-scene probe passes for both Point_One and Point_Line_Grid placement offsets, negative indices, rotated parent, fractional spacing, retention cap and post-release visibility. doc/book/iterations/2026-09-08-primitives/snap_and_pen.json"
+    },
+    {
+      "principle": "Shared display code must describe the sampler that actually runs in each derived artifact.",
+      "scope": "draw_dot.gd family, including the timer-derived scene used in WaveFunctions_Pendulum. Wider recording-contract comparisons remain method candidates; inheritance does not establish semantic equivalence.",
+      "evidence": "76-check scene probe includes timer samples during a stationary interval, capacity/fade updates, and movement/grid labels for the base pens. doc/book/iterations/2026-09-08-primitives/snap_and_pen.json"
+    },
+    {
+      "principle": "Divide a measured displacement by the time elapsed over that same measurement interval.",
+      "scope": "player_trace before spatial duplicate suppression. In the unsnapped Trans_Translation placement, admitted measurement and retained point coincide. Coarse Grid points can omit intermediate measurements; their speed is not necessarily displacement between displayed lattice nodes divided by their timestamps.",
+      "evidence": "Before probe recorded 5 m/s; corrected scene records approximately 1 m/s in timed, distance-gated and every-frame cases. Clear and aligned capacity eviction also pass. doc/book/iterations/2026-09-08-primitives/trace_speed.json"
+    },
+    {
+      "principle": "A useful counterexample needs a repeatable operation that changes one assumption while preserving the comparison.",
+      "scope": "The specified planar six-corner L and draw_triangle_faces. The engine exercise supplies hand positions; a visitor must still reproduce the gesture and interpret the difference. No second representation has yet tested the broader teaching method.",
+      "evidence": "One actual drawing scene, timed placement and real pointer-button events: both starts keep six points and four triangles; start A has no outside centroids, start B has two. Restart preserves the completed faces. doc/book/iterations/2026-09-08-primitives/triangle_fan.json"
+    },
+    {
+      "id": "recover-lost-spatial-relationships",
+      "principle": "When prose and space disagree, inspect the room's history for a lost spatial relationship before deciding what to rebuild or rewrite.",
+      "scope": "Measured in Melencolia; a reusable inspection and adaptation method for other rooms with evidence of lost structure. It does not establish that every discrepancy came from the museum conversion or that the older layout is preferable. Preserve the useful relationships, adapt current dimensions and placement semantics, and record the changes. The Dürer model's internal geometry is a separate artifact repair. A second-room restoration and human learning/comfort checks remain unverified.",
+      "evidence": "Primitives_Melencolia: historical JSON at 4beaa29b89ea1fe297fab7d747a6c44624d01bb1; restored four equal corners, long centre, four cross cubes and two raised platforms. Actual-museum probe built all 16 placements verbatim and passed six collision rays and five movement trials, including both ramps and the exit. doc/book/iterations/2026-09-08-melencolia-restoration/historical-layout.md; doc/book/iterations/2026-09-08-melencolia-restoration/report.json; doc/book/iterations/2026-09-08-melencolia-restoration/source_manifest.json"
+    }
+  ],
+  "next_action": "Walk the restored Melencolia court with its prose, then check the next matching text/map discrepancy against Git history. Reuse a lost arrangement when it still serves the room's question; identify new-build gaps or changed intentions separately. Record a second room's evidence before treating restoration as a demonstrated rollout. Grid and Point One's learner checks also remain open."
+}

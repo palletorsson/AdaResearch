@@ -1,0 +1,155 @@
+{
+  "checks": [
+    {
+      "name": "Engine processing predates the lesson",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Test starts on a bare Node3D with no scene children",
+      "passed": true
+    },
+    {
+      "name": "Script creates exactly one Label3D child",
+      "passed": true
+    },
+    {
+      "name": "Display height is relative to its parent",
+      "passed": true
+    },
+    {
+      "name": "Ready sets text on the code-created display",
+      "passed": true
+    },
+    {
+      "name": "Ready does not reset the greeting on later frames",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Test starts on a bare Node3D with no scene children",
+      "passed": true
+    },
+    {
+      "name": "Script creates exactly one Label3D child",
+      "passed": true
+    },
+    {
+      "name": "Display height is relative to its parent",
+      "passed": true
+    },
+    {
+      "name": "Editing the greeting changes its display",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Test starts on a bare Node3D with no scene children",
+      "passed": true
+    },
+    {
+      "name": "Script creates exactly one Label3D child",
+      "passed": true
+    },
+    {
+      "name": "Display height is relative to its parent",
+      "passed": true
+    },
+    {
+      "name": "Ready displays the initial count",
+      "passed": true
+    },
+    {
+      "name": "Real process calls retain and increase the count",
+      "passed": true
+    },
+    {
+      "name": "The engine count has an earlier beginning",
+      "passed": true
+    },
+    {
+      "name": "Two calls add two despite different intervals",
+      "passed": true
+    },
+    {
+      "name": "Repeated processing does not create more displays",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Test starts on a bare Node3D with no scene children",
+      "passed": true
+    },
+    {
+      "name": "Script creates exactly one Label3D child",
+      "passed": true
+    },
+    {
+      "name": "Display height is relative to its parent",
+      "passed": true
+    },
+    {
+      "name": "Counting in ready displays one",
+      "passed": true
+    },
+    {
+      "name": "The count stays one while the engine runs",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Test starts on a bare Node3D with no scene children",
+      "passed": true
+    },
+    {
+      "name": "Script creates exactly one Label3D child",
+      "passed": true
+    },
+    {
+      "name": "Display height is relative to its parent",
+      "passed": true
+    },
+    {
+      "name": "Changed increment gives two",
+      "passed": true
+    },
+    {
+      "name": "Next call gives four",
+      "passed": true
+    },
+    {
+      "name": "Prepared room has no scene-authored label",
+      "passed": true
+    },
+    {
+      "name": "Downloaded script creates its own display",
+      "passed": true
+    },
+    {
+      "name": "Prepared camera is active",
+      "passed": true
+    },
+    {
+      "name": "Downloaded counter runs",
+      "passed": true
+    }
+  ],
+  "engine": "4.6-stable (official)",
+  "passed": true,
+  "scope": "All lesson blocks on a bare Node3D without any scene children, lifecycle and increment variations, plus the downloadable prepared study. No beginner or headset trial."
+}

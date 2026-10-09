@@ -1,0 +1,129 @@
+{
+  "schema": "tutorial-cards/1",
+  "updatedAt": "2026-10-06T07:50:41.930Z",
+  "cards": {
+    "Point_Coordinates": {
+      "subjects": [
+        "Pickable",
+        "3D coordinate system",
+        "Local and world position"
+      ],
+      "focus": "Carry the existing black sphere and compare LOCAL with WORLD. Read what makes the body grabbable and how its position is expressed in each coordinate frame. The XR player setup is supplied; the pickable-body connection is part of this lesson. Distance calculation belongs in Point Lines.",
+      "updatedAt": "2026-10-05T07:07:34.056Z"
+    },
+    "Primitives_Godot": {
+      "subjects": [
+        "Extending PointBody",
+        "A mesh resource and its parameters",
+        "Held and released states",
+        "Elapsed-time steps and lower bounds"
+      ],
+      "focus": "Return to PointBody and expose its actual SphereMesh as a member. Extend the class so held time decreases rings and radial segments, release pauses, re-grab continues and reset restores. Compare independent spheres and rings-only versus segments-only variants. Keep radius, visual identity and spherical collision fixed; stop at one ring and four segments. Carry controllable construction into Columns and later abilities.",
+      "updatedAt": "2026-10-06T07:24:41.028Z"
+    },
+    "Point_Line_Grid": {
+      "subjects": [
+        "Loading your saved trace",
+        "Reusing a drawing as a sculpture",
+        "One record, different representations",
+        "Source positions and grid addresses",
+        "Integer coordinates and rounding",
+        "Changing a copy while keeping the original"
+      ],
+      "focus": "Meet the drawing saved in Trace as a sculpture in Grid. One sampled record supports several representations: an ordered array, visible segments and rounded XYZ addresses. Keep the pink source intact while changing an independent green copy. Predict an address, compare pitches and flatten only the copy. Carry the preserved source into Triangle.",
+      "updatedAt": "2026-10-06T07:50:41.930Z"
+    },
+    "Point_Trace": {
+      "subjects": [
+        "Reusing the point class",
+        "Arrays of positions",
+        "Appending and reading an index",
+        "A distance condition with if",
+        "Neighbour loops with for",
+        "Saving the drawing for the next hall"
+      ],
+      "focus": "Inside the Trace hall, retain local positions in metres with an array, minimum-distance condition and neighbour loop. Connect the existing release event to the supplied archive. Save the visible segments as a static sculpture with their position record; carry it to Grid in the same project.",
+      "updatedAt": "2026-10-06T06:30:40.454Z"
+    },
+    "Point_Triangle_Context": {
+      "subjects": [
+        "Three selected array entries",
+        "A closed boundary and a face",
+        "Clockwise vertex order",
+        "A guard for a collapsed triangle"
+      ],
+      "focus": "Bring the original saved Trace positions through Grid. Choose three entries, reuse PointBody as temporary handles, and connect them with one ordered triangular face. Move a corner, reverse the front, and collapse the triangle to see why a guard is needed. The archive stays intact. Carry positions and a face recipe into the first enclosure.",
+      "updatedAt": "2026-10-06T07:23:59.627Z"
+    },
+    "Primitives_Polythedra": {
+      "subjects": [
+        "Shared vertices",
+        "A list of face-index triples",
+        "Tetrahedron connectivity",
+        "Surface enclosure versus collision"
+      ],
+      "focus": "Reload the same three selected Trace positions and add an apex behind their plane. Store four positions once and address them with four face-index triples. Move the shared apex and see three faces change together; distinguish a closed visible surface from a collider. Carry the position/connectivity separation and FaceBody into Cube.",
+      "updatedAt": "2026-10-06T07:24:10.209Z"
+    },
+    "Point_Animatedcube": {
+      "subjects": [
+        "A reusable CubeBody class",
+        "Shared corner data",
+        "Two triangles per square side",
+        "Connectivity versus object position"
+      ],
+      "focus": "Build CubeBody from eight shared corners and twelve triangles using the previous face renderer. Compare two independent instances with different front-face diagonals. Deform a corner, then move the whole node, distinguishing a construction edit from a placement. Keep the reusable cube for later composition, Transformation and Arrays.",
+      "updatedAt": "2026-10-06T07:24:20.092Z"
+    },
+    "Primitives_Ignorance": {
+      "subjects": [
+        "Functions and typed return values",
+        "Parameters and arguments",
+        "Symmetry as a construction rule",
+        "Independent generated results"
+      ],
+      "focus": "Generate an octahedron position list with a named function: positive and negative multiples of three axes. Supply the face recipe and render two independent returned lists at different radii. Call it again, modify only one result and explain the broken symmetry. Carry parameters, typed return values and the distinction between a rule and its output.",
+      "updatedAt": "2026-10-06T07:24:30.406Z"
+    },
+    "Primitives_Columns": {
+      "subjects": [
+        "A profile as a radius list",
+        "Nested loops over rings and sides",
+        "Independent height and resolution",
+        "Comparing one variable at a time"
+      ],
+      "focus": "Use a radius profile and two loops to generate stacked ring positions. Compare the same profile and height at 4, 6, 8, 12 and 16 sides with a supplied circle sampler and surface stitcher. Then change silhouette and height separately. Carry independent construction parameters and the profile/placement distinction into borrowed letter outlines.",
+      "updatedAt": "2026-10-06T07:24:51.340Z"
+    },
+    "Primitives_Profiles": {
+      "subjects": [
+        "A supplied outline with a hole",
+        "Cross-section versus route",
+        "Sampling placements along a path",
+        "Declaring a dependency"
+      ],
+      "focus": "Borrow the existing glyph sweep and its declared font to carry an O through five parallel placements. Separate the supplied outline, including its hole, from width, depth and sideways travel. Reverse the travel and try C while preserving the source. This produces a visible hollow mesh with a sill, not an assumed walk-through collider; keep font triangulation and arbitrary curved-path frames supplied or deferred.",
+      "updatedAt": "2026-10-06T07:25:01.394Z"
+    },
+    "Primitives_Portals": {
+      "subjects": [
+        "A closed neighbour loop",
+        "Error in a stated unit",
+        "A while loop with a stopping rule",
+        "A finite work budget"
+      ],
+      "focus": "Reuse circle samples and LineSkin to measure a closed polygon. Sum every neighbour edge including the last-to-first edge, compare with the finite TAU-based circumference reference, and increase sides until the stated metre tolerance is met or the sample budget is spent. Test tighter tolerances and an unattainable request. Carry an honest stopping criterion rather than a promise to reach infinity.",
+      "updatedAt": "2026-10-06T07:25:12.922Z"
+    },
+    "Primitives_Melencolia": {
+      "subjects": [
+        "Composition with known classes",
+        "Independent instances",
+        "Placement versus construction",
+        "Reusing a learned capability"
+      ],
+      "focus": "Compose with two instances of the learned CubeBody and the familiar pickable PointBody. Change their placements without changing construction data; make a second arrangement and reconstruct it from saved script values. Use known constructors, arrays and a loop, leaving scale and rotation to Transformation. The reflective text carries the wider question of what making geometry is meant to give us.",
+      "updatedAt": "2026-10-06T07:25:25.029Z"
+    }
+  }
+}

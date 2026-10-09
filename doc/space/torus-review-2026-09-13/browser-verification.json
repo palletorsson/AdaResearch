@@ -1,0 +1,78 @@
+[
+  {
+    "step": "loaded",
+    "state": {
+      "images": [
+        {
+          "loaded": true,
+          "src": "noise-one-pair.png"
+        },
+        {
+          "loaded": true,
+          "src": "noise-one-readout.png"
+        },
+        {
+          "loaded": true,
+          "src": "noise-one-terrain.png"
+        },
+        {
+          "loaded": true,
+          "src": "noise-one-orb.png"
+        },
+        {
+          "loaded": true,
+          "src": "noise-one-plan.png"
+        }
+      ],
+      "overflow": false,
+      "reading": "Coordinate 1/72 · field 0.739 · relief 0.030 m · CLIP brightness 0.739",
+      "title": "What does a value become? · Ada Research"
+    }
+  },
+  {
+    "step": "negative-clipped",
+    "reading": "Coordinate 2/72 · field -0.320 · relief -0.013 m · CLIP brightness 0.000"
+  },
+  {
+    "step": "negative-remapped",
+    "reading": "Coordinate 2/72 · field -0.320 · relief -0.013 m · REMAP brightness 0.340"
+  },
+  {
+    "step": "book-open",
+    "state": {
+      "codeBlocks": 6,
+      "open": true,
+      "words": 1268
+    }
+  },
+  {
+    "step": "primary-passages",
+    "state": {
+      "containsOrb": true,
+      "containsRemap": true,
+      "containsTerrain": true,
+      "headings": [
+        "1. noisetorus",
+        "2. noiselayers",
+        "3. dark_sphere"
+      ],
+      "passages": [
+        {
+          "codeBlocks": 0,
+          "open": true,
+          "words": 684
+        },
+        {
+          "codeBlocks": 0,
+          "open": true,
+          "words": 405
+        },
+        {
+          "codeBlocks": 0,
+          "open": true,
+          "words": 191
+        }
+      ]
+    }
+  }
+]

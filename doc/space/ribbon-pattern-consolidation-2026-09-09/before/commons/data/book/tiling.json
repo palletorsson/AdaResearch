@@ -1,0 +1,72 @@
+{
+ "chapter": "tiling",
+ "title": "Tiling and Symmetry",
+ "pearls": [
+  {
+   "pearl": "pattern foundry",
+   "map": "Pattern_Foundry",
+   "lines": [
+    {
+     "token": "pattern_tile_4x4",
+     "text": "pattern tile 4x4",
+     "by": "astra"
+    },
+    {
+     "token": "pattern_tile_mirror",
+     "text": "pattern tile mirror",
+     "by": "astra"
+    }
+   ],
+   "hero": "pattern_tile_4x4"
+  },
+  {
+   "pearl": "tutorial pattern",
+   "map": "Tutorial_Pattern",
+   "lines": [
+    {
+     "token": "pattern_maker_station",
+     "text": "pattern maker station",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "pattern_maker_station"
+  },
+  {
+   "pearl": "array patterns",
+   "map": "Array_Patterns",
+   "lines": [
+    {
+     "token": "pattern_tunnel_machine",
+     "text": "pattern tunnel machine",
+     "by": "astra"
+    },
+    {
+     "token": "pattern_tile_brick",
+     "text": "pattern tile brick",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "pattern_tunnel_machine"
+  },
+  {
+   "pearl": "symmetry seventeen",
+   "map": "Symmetry_Seventeen",
+   "lines": [
+    {
+     "token": "vr_tile_editor",
+     "text": "vr tile editor",
+     "by": "astra"
+    },
+    {
+     "token": "wallpaper_cage",
+     "text": "wallpaper cage",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "vr_tile_editor"
+  }
+ ]
+}

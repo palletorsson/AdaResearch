@@ -1,0 +1,871 @@
+{
+  "checks": [
+    {
+      "id": "still/owns_visible_cube",
+      "passed": true
+    },
+    {
+      "id": "still/eight_twelve",
+      "passed": true
+    },
+    {
+      "id": "still/starting_pose",
+      "passed": true
+    },
+    {
+      "id": "still/clock_does_not_require_motion",
+      "passed": true
+    },
+    {
+      "id": "still/visual_not_physical",
+      "passed": true
+    },
+    {
+      "id": "translation/equal_displacement_all_corners",
+      "passed": true
+    },
+    {
+      "id": "translation/orientation_and_size_kept",
+      "passed": true
+    },
+    {
+      "id": "translation/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/declared_y_axis",
+      "passed": true
+    },
+    {
+      "id": "rotation/corner_moves",
+      "passed": true
+    },
+    {
+      "id": "rotation/all_pair_distances_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/origin_kept",
+      "passed": true
+    },
+    {
+      "id": "rotation/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "scale/every_distance_times_factor",
+      "passed": true
+    },
+    {
+      "id": "scale/bottom_centre_fixed",
+      "passed": true
+    },
+    {
+      "id": "scale/top_reaches_2_5",
+      "passed": true
+    },
+    {
+      "id": "scale/construction_kept",
+      "passed": true
+    },
+    {
+      "id": "transfer/new_angle_on_same_body",
+      "passed": true
+    },
+    {
+      "id": "transfer/neighbour_unaffected",
+      "passed": true
+    },
+    {
+      "id": "time/30/0.5",
+      "passed": true
+    },
+    {
+      "id": "time/30/1.0",
+      "passed": true
+    },
+    {
+      "id": "time/30/2.0",
+      "passed": true
+    },
+    {
+      "id": "time/30/2.5",
+      "passed": true
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/30",
+      "passed": true
+    },
+    {
+      "id": "time/120/0.5",
+      "passed": true
+    },
+    {
+      "id": "time/120/1.0",
+      "passed": true
+    },
+    {
+      "id": "time/120/2.0",
+      "passed": true
+    },
+    {
+      "id": "time/120/2.5",
+      "passed": true
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/120",
+      "passed": true
+    },
+    {
+      "id": "time/equal_elapsed_equal_pose",
+      "passed": true
+    },
+    {
+      "id": "time/double_duration_halfway",
+      "passed": true
+    },
+    {
+      "id": "time/double_duration_same_destination",
+      "passed": true
+    },
+    {
+      "id": "combine/rise_in_study_y",
+      "passed": true
+    },
+    {
+      "id": "combine/fixed_turn_and_size",
+      "passed": true
+    },
+    {
+      "id": "combine/original_construction",
+      "passed": true
+    },
+    {
+      "id": "restore/rerun_original_values",
+      "passed": true
+    },
+    {
+      "id": "engine/actual_process_callback",
+      "passed": true
+    },
+    {
+      "id": "engine/callback_uses_elapsed",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true,
+  "inputs": {
+    "commons/maps/Trans_Pre/tutorial.md": "aa8c3c9244394874733c84055bf60aac2eefa5e887645e244d4b0b8d66580a03",
+    "commons/maps/Point_Animatedcube/tutorial.md": "7c9f4a05aa774be8e0fd80f16a4e69971282761b2b88ec0076c9ed6db0aa0021",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py": "efe2477d075c605a8234c37e4d302d0e601894f32ddc7d577530ad75bc6adc85",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd": "f87964989d91e1917e331510e92269e18400a965586d52ce65f4e386f09d8ae8",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd": "f417b0dfb4435bff837209d288fa4470855fb0113bf840eebde3e7aaf98776f0",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "dependencies": {
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "learner_source_sha256": "f417b0dfb4435bff837209d288fa4470855fb0113bf840eebde3e7aaf98776f0",
+  "incoming_sha256": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97",
+  "negative_control": {
+    "name": "wrong-axis",
+    "expected_failure_detected": true,
+    "expected_failure_ids": [
+      "rotation/declared_y_axis"
+    ],
+    "normal_contract_result": {
+      "checks": [
+        {
+          "id": "still/owns_visible_cube",
+          "passed": true
+        },
+        {
+          "id": "still/eight_twelve",
+          "passed": true
+        },
+        {
+          "id": "still/starting_pose",
+          "passed": true
+        },
+        {
+          "id": "still/clock_does_not_require_motion",
+          "passed": true
+        },
+        {
+          "id": "still/visual_not_physical",
+          "passed": true
+        },
+        {
+          "id": "translation/equal_displacement_all_corners",
+          "passed": true
+        },
+        {
+          "id": "translation/orientation_and_size_kept",
+          "passed": true
+        },
+        {
+          "id": "translation/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/declared_y_axis",
+          "passed": false
+        },
+        {
+          "id": "rotation/corner_moves",
+          "passed": true
+        },
+        {
+          "id": "rotation/all_pair_distances_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/origin_kept",
+          "passed": true
+        },
+        {
+          "id": "rotation/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "scale/every_distance_times_factor",
+          "passed": true
+        },
+        {
+          "id": "scale/bottom_centre_fixed",
+          "passed": true
+        },
+        {
+          "id": "scale/top_reaches_2_5",
+          "passed": true
+        },
+        {
+          "id": "scale/construction_kept",
+          "passed": true
+        },
+        {
+          "id": "transfer/new_angle_on_same_body",
+          "passed": false
+        },
+        {
+          "id": "transfer/neighbour_unaffected",
+          "passed": true
+        },
+        {
+          "id": "time/30/0.5",
+          "passed": true
+        },
+        {
+          "id": "time/30/1.0",
+          "passed": true
+        },
+        {
+          "id": "time/30/2.0",
+          "passed": true
+        },
+        {
+          "id": "time/30/2.5",
+          "passed": true
+        },
+        {
+          "id": "time/keeps_facing_size_and_data/30",
+          "passed": true
+        },
+        {
+          "id": "time/120/0.5",
+          "passed": true
+        },
+        {
+          "id": "time/120/1.0",
+          "passed": true
+        },
+        {
+          "id": "time/120/2.0",
+          "passed": true
+        },
+        {
+          "id": "time/120/2.5",
+          "passed": true
+        },
+        {
+          "id": "time/keeps_facing_size_and_data/120",
+          "passed": true
+        },
+        {
+          "id": "time/equal_elapsed_equal_pose",
+          "passed": true
+        },
+        {
+          "id": "time/double_duration_halfway",
+          "passed": true
+        },
+        {
+          "id": "time/double_duration_same_destination",
+          "passed": true
+        },
+        {
+          "id": "combine/rise_in_study_y",
+          "passed": true
+        },
+        {
+          "id": "combine/fixed_turn_and_size",
+          "passed": false
+        },
+        {
+          "id": "combine/original_construction",
+          "passed": true
+        },
+        {
+          "id": "restore/rerun_original_values",
+          "passed": true
+        },
+        {
+          "id": "engine/actual_process_callback",
+          "passed": true
+        },
+        {
+          "id": "engine/callback_uses_elapsed",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "rotation/declared_y_axis",
+        "transfer/new_angle_on_same_body",
+        "combine/fixed_turn_and_size"
+      ],
+      "passed": false
+    }
+  },
+  "negative_controls": [
+    {
+      "name": "wrong-axis",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "rotation/declared_y_axis"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/eight_twelve",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": true
+          },
+          {
+            "id": "still/visual_not_physical",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": false
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/bottom_centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_2_5",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": false
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": true
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": true
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": false
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "rotation/declared_y_axis",
+          "transfer/new_angle_on_same_body",
+          "combine/fixed_turn_and_size"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "frame-clock",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "time/30/0.5"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/eight_twelve",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": false
+          },
+          {
+            "id": "still/visual_not_physical",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/bottom_centre_fixed",
+            "passed": true
+          },
+          {
+            "id": "scale/top_reaches_2_5",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": true
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": true
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": true
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": false
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": true
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "still/clock_does_not_require_motion",
+          "time/30/0.5",
+          "time/30/1.0",
+          "time/120/0.5",
+          "time/120/1.0",
+          "time/double_duration_halfway",
+          "time/double_duration_same_destination"
+        ],
+        "passed": false
+      }
+    },
+    {
+      "name": "accumulated-position",
+      "expected_failure_detected": true,
+      "expected_failure_ids": [
+        "still/clock_does_not_require_motion"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "id": "still/owns_visible_cube",
+            "passed": true
+          },
+          {
+            "id": "still/eight_twelve",
+            "passed": true
+          },
+          {
+            "id": "still/starting_pose",
+            "passed": true
+          },
+          {
+            "id": "still/clock_does_not_require_motion",
+            "passed": false
+          },
+          {
+            "id": "still/visual_not_physical",
+            "passed": true
+          },
+          {
+            "id": "translation/equal_displacement_all_corners",
+            "passed": true
+          },
+          {
+            "id": "translation/orientation_and_size_kept",
+            "passed": true
+          },
+          {
+            "id": "translation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/declared_y_axis",
+            "passed": true
+          },
+          {
+            "id": "rotation/corner_moves",
+            "passed": true
+          },
+          {
+            "id": "rotation/all_pair_distances_kept",
+            "passed": true
+          },
+          {
+            "id": "rotation/origin_kept",
+            "passed": false
+          },
+          {
+            "id": "rotation/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "scale/every_distance_times_factor",
+            "passed": true
+          },
+          {
+            "id": "scale/bottom_centre_fixed",
+            "passed": false
+          },
+          {
+            "id": "scale/top_reaches_2_5",
+            "passed": true
+          },
+          {
+            "id": "scale/construction_kept",
+            "passed": true
+          },
+          {
+            "id": "transfer/new_angle_on_same_body",
+            "passed": true
+          },
+          {
+            "id": "transfer/neighbour_unaffected",
+            "passed": true
+          },
+          {
+            "id": "time/30/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/30/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.0",
+            "passed": false
+          },
+          {
+            "id": "time/30/2.5",
+            "passed": false
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/30",
+            "passed": true
+          },
+          {
+            "id": "time/120/0.5",
+            "passed": false
+          },
+          {
+            "id": "time/120/1.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.0",
+            "passed": false
+          },
+          {
+            "id": "time/120/2.5",
+            "passed": false
+          },
+          {
+            "id": "time/keeps_facing_size_and_data/120",
+            "passed": true
+          },
+          {
+            "id": "time/equal_elapsed_equal_pose",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_halfway",
+            "passed": false
+          },
+          {
+            "id": "time/double_duration_same_destination",
+            "passed": false
+          },
+          {
+            "id": "combine/rise_in_study_y",
+            "passed": false
+          },
+          {
+            "id": "combine/fixed_turn_and_size",
+            "passed": true
+          },
+          {
+            "id": "combine/original_construction",
+            "passed": true
+          },
+          {
+            "id": "restore/rerun_original_values",
+            "passed": true
+          },
+          {
+            "id": "engine/actual_process_callback",
+            "passed": true
+          },
+          {
+            "id": "engine/callback_uses_elapsed",
+            "passed": false
+          }
+        ],
+        "failure_ids": [
+          "still/clock_does_not_require_motion",
+          "rotation/origin_kept",
+          "scale/bottom_centre_fixed",
+          "time/30/0.5",
+          "time/30/1.0",
+          "time/30/2.0",
+          "time/30/2.5",
+          "time/120/0.5",
+          "time/120/1.0",
+          "time/120/2.0",
+          "time/120/2.5",
+          "time/equal_elapsed_equal_pose",
+          "time/double_duration_halfway",
+          "time/double_duration_same_destination",
+          "combine/rise_in_study_y",
+          "engine/callback_uses_elapsed"
+        ],
+        "passed": false
+      }
+    }
+  ],
+  "scope": "Exact printed code and value-edited variants in native Godot. Actual process callback plus controlled time steps. No headset or learner-understanding claim."
+}

@@ -1,0 +1,237 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "resolution/controlled_resource_is_visible_resource",
+      "passed": true
+    },
+    {
+      "id": "resolution/released_pauses",
+      "passed": true
+    },
+    {
+      "id": "resolution/real_pickup",
+      "passed": true
+    },
+    {
+      "id": "resolution/two_time_steps",
+      "passed": true
+    },
+    {
+      "id": "resolution/frame_schedule_independent",
+      "passed": true
+    },
+    {
+      "id": "resolution/release_preserves_partial_interval",
+      "passed": true
+    },
+    {
+      "id": "resolution/regrab_continues",
+      "passed": true
+    },
+    {
+      "id": "resolution/valid_lower_bounds",
+      "passed": true
+    },
+    {
+      "id": "resolution/size_and_collider_unchanged",
+      "passed": true
+    },
+    {
+      "id": "resolution/neighbour_independent",
+      "passed": true
+    },
+    {
+      "id": "resolution/reset_geometry_and_clock",
+      "passed": true
+    },
+    {
+      "id": "resolution/readout_matches_mesh",
+      "passed": true
+    },
+    {
+      "id": "resolution/rings_only",
+      "passed": true
+    },
+    {
+      "id": "resolution/segments_only",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Godot",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "resolution_point.gd",
+      "before": "if not is_picked_up():",
+      "after": "if false:"
+    },
+    "required_failure": "resolution/released_pauses",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "resolution/controlled_resource_is_visible_resource",
+          "passed": true
+        },
+        {
+          "id": "resolution/released_pauses",
+          "passed": false
+        },
+        {
+          "id": "resolution/real_pickup",
+          "passed": true
+        },
+        {
+          "id": "resolution/two_time_steps",
+          "passed": false
+        },
+        {
+          "id": "resolution/frame_schedule_independent",
+          "passed": false
+        },
+        {
+          "id": "resolution/release_preserves_partial_interval",
+          "passed": false
+        },
+        {
+          "id": "resolution/regrab_continues",
+          "passed": false
+        },
+        {
+          "id": "resolution/valid_lower_bounds",
+          "passed": true
+        },
+        {
+          "id": "resolution/size_and_collider_unchanged",
+          "passed": true
+        },
+        {
+          "id": "resolution/neighbour_independent",
+          "passed": true
+        },
+        {
+          "id": "resolution/reset_geometry_and_clock",
+          "passed": true
+        },
+        {
+          "id": "resolution/readout_matches_mesh",
+          "passed": true
+        },
+        {
+          "id": "resolution/rings_only",
+          "passed": true
+        },
+        {
+          "id": "resolution/segments_only",
+          "passed": true
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "resolution/released_pauses",
+        "resolution/two_time_steps",
+        "resolution/frame_schedule_independent",
+        "resolution/release_preserves_partial_interval",
+        "resolution/regrab_continues"
+      ],
+      "hall": "Primitives_Godot",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Godot/tutorial.md": "1d08dff045f315f69f5b0b43816867fd32ab164a991b483085ed1ea8309f684f",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/lesson.gd": "cdd4835dbcd5e78e37a2b4ccdccf691317a202d7f9743fc71623467b62613238",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/point_body.gd": "cfa9ddfe56b7e69780029404689c23ce0bcef968be0074d6581b9ebd010b8a7d",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Godot/resolution_point.gd": "ce1f4e0dc8dd49f4da2b20c92ccf7ac4d0023c4d99f448a4b69ff6fdac76c5f6"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim.",
+  "resource_sharing_fault": {
+    "checks": [
+      {
+        "id": "incoming/real_trace_saves_geometry",
+        "passed": true
+      },
+      {
+        "id": "resolution/controlled_resource_is_visible_resource",
+        "passed": true
+      },
+      {
+        "id": "resolution/released_pauses",
+        "passed": true
+      },
+      {
+        "id": "resolution/real_pickup",
+        "passed": true
+      },
+      {
+        "id": "resolution/two_time_steps",
+        "passed": true
+      },
+      {
+        "id": "resolution/frame_schedule_independent",
+        "passed": true
+      },
+      {
+        "id": "resolution/release_preserves_partial_interval",
+        "passed": true
+      },
+      {
+        "id": "resolution/regrab_continues",
+        "passed": true
+      },
+      {
+        "id": "resolution/valid_lower_bounds",
+        "passed": true
+      },
+      {
+        "id": "resolution/size_and_collider_unchanged",
+        "passed": true
+      },
+      {
+        "id": "resolution/neighbour_independent",
+        "passed": false
+      },
+      {
+        "id": "resolution/reset_geometry_and_clock",
+        "passed": true
+      },
+      {
+        "id": "resolution/readout_matches_mesh",
+        "passed": true
+      },
+      {
+        "id": "resolution/rings_only",
+        "passed": true
+      },
+      {
+        "id": "resolution/segments_only",
+        "passed": true
+      },
+      {
+        "id": "carry/original_trace_file_unchanged",
+        "passed": true
+      }
+    ],
+    "failure_ids": [
+      "resolution/neighbour_independent"
+    ],
+    "hall": "Primitives_Godot",
+    "passed": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "checks": 173,
+  "reports": [
+    {
+      "name": "visor",
+      "checks": 29,
+      "scope": "Production court and player, real pointer events, supplied XRTools rig and pickups. Numeric readings and real lift. No headset comfort or Quest timing claim.",
+      "path": "visor/report.json"
+    },
+    {
+      "name": "travel",
+      "checks": 89,
+      "scope": "Thirteen actual halls, real XRTools pointer events through the buttons, one hand-contact callback return, supported landings. Supplied inputs; physical headset untested.",
+      "path": "travel/report.json"
+    },
+    {
+      "name": "layout",
+      "checks": 20,
+      "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach.",
+      "path": "layout/report.json"
+    },
+    {
+      "name": "court-regression",
+      "checks": 35,
+      "scope": "Production museum and physics, supplied desktop input and receiver; no headset acceptance claim.",
+      "path": "court-regression/report.json"
+    }
+  ],
+  "limits": "Supplied inputs and XRTools rig; no physical headset or Quest performance verification."
+}

@@ -1,0 +1,122 @@
+{
+  "scope": "Isolated desktop artifact; map loader and headset untested",
+  "passed_records": 79,
+  "source": [
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.gd",
+      "sha256": "7180bd140aeaee0e956fde0d59e0f83cde06d5a441e66f85d90e89f2030a22e7",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.tscn",
+      "sha256": "7a0c0d7b843187f29b245de86b714ceab16e0d7d63acabf5e53b8b76c848c5b9",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/cut_surface.gdshader",
+      "sha256": "39b3a5f891759a27e43234d4eef4c89746af90425c946212970069a65551bcd8",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/more_spaces.tscn",
+      "sha256": "eb38feaddc04f7e7b338b860e7236bae83d6e55799269aae97cb6ef9b441c619",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/study.gd",
+      "sha256": "0f8610982dbfe0578c563d9d1263ada4b9ad00d33ce494d62ed521fc3b408605",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/boolean_colour_chamber/study.tscn",
+      "sha256": "8e52c664e4c3af513572abc6c113d65ace3efae5cd0f6282eb3d70d1fcfad2ad",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/blurb.md",
+      "sha256": "7e7234276de7d8cb1a1e2235cc600adf1a046aaf76c8cb6902ef4c2d7d4cf7d0"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/critical.md",
+      "sha256": "f4e2945f447ccef1d3f782efcbbaa745c5ffa11fe1763a311b974f4ff2ccc344"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/final.md",
+      "sha256": "3d4549d89b0ef63a008354494793d9f5cdbda1e25dab52e1adfe243a2cd17a68"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/intent.md",
+      "sha256": "4c1bf46cb4a9f513d7b56a0df086bbc31269cce921fe0104ffcb58124e2096b7"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/map_data.json",
+      "sha256": "d61697b11c4d88902248d3f14cb711acf0f8881b6b8721e112fa63176012a7d3"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/summary.md",
+      "sha256": "4edfab5ce342b4f4d2f8128949f75c928da230f7dd7a76a5ba83da645cbcd364"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/technical.md",
+      "sha256": "b725dacfac237da6ae51cb8a0cee22bcff694ee011fc155e139de240e11d05b9"
+    }
+  ],
+  "images": [
+    {
+      "file": "cross-ceiling.png",
+      "sha256": "92968bdb20d84691c8214a7460b5562054e8c094354736d930c0428cf9758d06"
+    },
+    {
+      "file": "cross-entry.png",
+      "sha256": "fdfdb5d56a68bdbcf70fd2ef864cff7226cb4319189a0cac1eecaf972d72150c"
+    },
+    {
+      "file": "cross-inside.png",
+      "sha256": "294334c5f8f226c1ceb2a212a787851b2d2a05f39fa0cece15a70369841a08c2"
+    },
+    {
+      "file": "fold-ceiling.png",
+      "sha256": "cbc478e2087c4677866f27e12b2eb9a70365d7e05cf36be99ea9f616ea4159d6"
+    },
+    {
+      "file": "fold-entry.png",
+      "sha256": "10568ea8c4ee35da84819e7cb52700b309dc9751d73cfdb618c73ff2432304d3"
+    },
+    {
+      "file": "fold-inside.png",
+      "sha256": "4f1ecb4fae910c91136b4f90f187fda624469b50ef78c1133f3d1eeec1bcfb62"
+    },
+    {
+      "file": "ring-ceiling.png",
+      "sha256": "64a17e5b58e5681d8040c34aae6753eb7770a44fd27140cfd7c7f80d9eb1eb37"
+    },
+    {
+      "file": "ring-entry.png",
+      "sha256": "513ffd49273e28e8c6907ebaa173fa54f16a44f2d37a24198df67f38ed0d2c1d"
+    },
+    {
+      "file": "ring-inside.png",
+      "sha256": "85cfa53599ad8958bb3800c687ad65c23ad39c7898f1636bbf04cc9995eee9fa"
+    },
+    {
+      "file": "ring-return.png",
+      "sha256": "992df8a1826b8bf0bef9204d358002fc4b44bf3927d71a01d493da6e09017ca7"
+    },
+    {
+      "file": "surface-0.png",
+      "sha256": "294334c5f8f226c1ceb2a212a787851b2d2a05f39fa0cece15a70369841a08c2"
+    },
+    {
+      "file": "surface-1.png",
+      "sha256": "d25f9db9af11c6dfaaf3e4435ef19483174da3e089bb63054e6a26078220d8b2"
+    },
+    {
+      "file": "surface-2.png",
+      "sha256": "0c8b8e611d42e4e3b05ba77275f20cf636ddb7a3ff04cc449b2b0d4328c33ae0"
+    },
+    {
+      "file": "surface-3.png",
+      "sha256": "207920011ddeacbe676f952c601873d32eccf8c1b90a01fd55b15116eb07c93c"
+    }
+  ]
+}

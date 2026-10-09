@@ -1,0 +1,350 @@
+{
+  "layer_pattern": {
+    "checks": 25,
+    "failures": [],
+    "exit_code": 0,
+    "sources_changed_during_run": [],
+    "diagnostics": [
+      {
+        "message": "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+        "location": "at: get_id_path (core/io/resource_uid.cpp:208)"
+      },
+      {
+        "message": "ERROR: Failed to read the root certificate store.",
+        "location": "at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)"
+      },
+      {
+        "message": "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+        "location": "at: environment_set_ssao (servers/rendering/storage/environment_storage.cpp:700)"
+      },
+      {
+        "message": "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssil (servers/rendering/storage/environment_storage.cpp:775)"
+      },
+      {
+        "message": "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)"
+      },
+      {
+        "message": "WARNING: SDFGI is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)"
+      },
+      {
+        "message": "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_volumetric_fog (servers/rendering/storage/environment_storage.cpp:458)"
+      },
+      {
+        "message": "WARNING: Only the first 16 of 20 text entries were placed on the shelf.",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: Only the first 16 of 20 text entries were placed on the shelf.",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      }
+    ],
+    "script_compile_errors": false
+  },
+  "carrier_comparison": {
+    "checks": 25,
+    "failures": [],
+    "exit_code": 0,
+    "sources_changed_during_run": [],
+    "diagnostics": [
+      {
+        "message": "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+        "location": "at: get_id_path (core/io/resource_uid.cpp:208)"
+      },
+      {
+        "message": "ERROR: Failed to read the root certificate store.",
+        "location": "at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)"
+      },
+      {
+        "message": "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+        "location": "at: environment_set_ssao (servers/rendering/storage/environment_storage.cpp:700)"
+      },
+      {
+        "message": "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssil (servers/rendering/storage/environment_storage.cpp:775)"
+      },
+      {
+        "message": "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)"
+      },
+      {
+        "message": "WARNING: SDFGI is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)"
+      },
+      {
+        "message": "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_volumetric_fog (servers/rendering/storage/environment_storage.cpp:458)"
+      },
+      {
+        "message": "WARNING: costume: no trophy is designed for sequence 'tiling'",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: [em-art] tiling|ribbon patterns 02: masked_dancer took 156 ms to build \u2014 that is a dropped frame in the hall",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      }
+    ],
+    "script_compile_errors": false
+  },
+  "fabric_studio": {
+    "checks": 40,
+    "failures": [],
+    "exit_code": 0,
+    "sources_changed_during_run": [],
+    "diagnostics": [
+      {
+        "message": "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+        "location": "at: get_id_path (core/io/resource_uid.cpp:208)"
+      },
+      {
+        "message": "ERROR: Failed to read the root certificate store.",
+        "location": "at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)"
+      },
+      {
+        "message": "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      },
+      {
+        "message": "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+        "location": "at: environment_set_ssao (servers/rendering/storage/environment_storage.cpp:700)"
+      },
+      {
+        "message": "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssil (servers/rendering/storage/environment_storage.cpp:775)"
+      },
+      {
+        "message": "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+        "location": "at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)"
+      },
+      {
+        "message": "WARNING: SDFGI is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)"
+      },
+      {
+        "message": "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+        "location": "at: environment_set_volumetric_fog (servers/rendering/storage/environment_storage.cpp:458)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "ERROR: Condition \"f.is_null()\" is true.",
+        "location": "at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:516)"
+      },
+      {
+        "message": "WARNING: DiscoSequencerBridge: Could not find both disco floor and step sequencer",
+        "location": "at: push_warning (core/variant/variant_utility.cpp:1034)"
+      }
+    ],
+    "script_compile_errors": false
+  },
+  "drag_catwalk": {
+    "checks": 26,
+    "failures": [],
+    "exit_code": 0,
+    "sources_changed_during_run": [],
+    "diagnostics": [
+      {
+        "message": "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+        "location": "at: get_id_path (core/io/resource_uid.cpp:208)"
+      },
+      {
+        "message": "ERROR: Failed to read the root certificate store.",
+        "location": "at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)"
+      }
+    ],
+    "script_compile_errors": false
+  }
+}

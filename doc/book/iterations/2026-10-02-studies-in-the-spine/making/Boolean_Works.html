@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="b18670f1c7aaa84842972157d15cf42b48499c9067267b414a3051a0b513d97e"><title>commons/maps/Boolean_Works/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Boolean_Works/tutorial.md</p><h1>Tutorial · When the Negative Gets Big</h1>
+<p>This is the scale test. In the first hall a subtraction made a cavity in a small solid. Here the negative is enlarged until it claims to be a room. Walk the hall in order and test that claim with your body.</p>
+<p>Begin at the compose workbench. Five results turn above a table: union, intersection, both ordered differences and symmetric difference. Look for the promised handoff and notice what the scene actually affords. Then cross to the paired subtraction stations. Compare the cut and its material before you trust the word <em>same</em>.</p>
+<p>The recursive cube is the hinge. Its holes resemble boolean subtraction, but the code never removes a volume; it declines to build selected cells. Between the visual wall and the SDF cavern, enter Boolean Burrow and return through the same opening. Its cylindrical cutters retain the old seeded centres but make the floor level. Compare the solid wall with the opening; collision is part of what makes that difference matter. At the architectural cavity and the SDF cavern, ask the practical question: where is the floor, and what collides with your body? A rendered hollow is not automatically an inhabitable hollow.</p>
+<p>At the Boolean eggs, carry the three operations into a sculptural arrangement. The operands differ between specimens; this is not a controlled comparison of the verbs. In the teal egg, separate the geometric cut from the way its material presents depth.</p>
+<p>For a small making exercise, duplicate <code>commons/artifacts/kapoor_void_studies/boolean_eggs.tscn</code> in the Day Zero project. In <code>_add_subtracted_egg</code>, change only <code>void_material.shading_mode</code> from <code>SHADING_MODE_UNSHADED</code> to <code>SHADING_MODE_PER_PIXEL</code>. Keep the camera, lights and cutter fixed. Compare the curved rim and the interior before touching the shape. The existing CSG construction and lighting are borrowed apparatus; this exercise changes one material decision.</p>
+<p>Finish at the boolean variations and coincident face. The room has moved from verb to apparatus: a label, a camera, and a mesh can all claim an inside while the player remains outside it. The next sequence, swarm intelligence, changes the question from carving a body to coordinating many bodies.</p>
+<!-- study-spine:conical_sightline -->
+
+<h2>Return: One cut, three rooms</h2>
+<p>Translate the shared cutter 0.75 metres; keep the three walls. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses coordinates, transform, boolean. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>cut</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-matta-clark-one-cut/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-spine:kapoor_void_studies -->
+
+<h2>Return: The surface that says depth</h2>
+<p>Change the cavity from unlit black to lit chalk; keep its geometry. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses boolean, shader. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>void</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-kapoor-surface-and-depth/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-edit:conical_sightline -->
+
+<h3>One source change: One cut, three rooms</h3>
+<p>The SHIFT CUT control uses this setter. Try 0.35 metres instead; all six cutter instances share the same offset, including the retained intersections.</p>
+<pre><code class="language-gdscript">set_cut_x(0.75)
+</code></pre>
+<p>Source: <code>commons/artifacts/conical_sightline/conical_sightline.gd</code>. Use the prepared scene to run and compare.</p>
+<!-- study-edit:kapoor_void_studies -->
+
+<h3>One source change: The surface that says depth</h3>
+<p>The BLACK / CHALK control calls this setter. Compare from one fixed position. It replaces materials without rebuilding the bowl mesh.</p>
+<pre><code class="language-gdscript">set_black_surface(false)
+</code></pre>
+<p>Source: <code>commons/artifacts/kapoor_void_studies/kapoor_void_studies.gd</code>. Use the prepared scene to run and compare.</p></body></html>

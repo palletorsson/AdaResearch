@@ -1,0 +1,1180 @@
+{
+  "mode": "continuation_complete_script",
+  "lesson": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/tutorial.md",
+  "canonical_lesson": "commons/maps/Point_Lines/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line.gd",
+  "host": "The existing unit-scale PointStudy station in the prepared XR project; the printed line_skin.gd helper is supplied.",
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/incoming.gd",
+    "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649",
+    "provenance": "The exact current, printed and verified Coordinates point.gd; itself a continuation of the current student-built Point One."
+  },
+  "operations": [
+    {
+      "id": "supplied-renderer",
+      "kind": "insert_after",
+      "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+      "text": "\nconst LineSkin = preload(\"line_skin.gd\")\n"
+    },
+    {
+      "id": "relation-state",
+      "kind": "insert_after",
+      "anchor": "var readout: Label3D\n",
+      "text": "var point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n"
+    },
+    {
+      "id": "second-end-and-segment",
+      "kind": "insert_after",
+      "anchor": "    add_child(readout)\n",
+      "text": "\n    point_b = point.duplicate() as XRToolsPickable\n    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n    add_child(point_b)\n\n    line = LineSkin.new()\n    add_child(line)\n"
+    },
+    {
+      "id": "live-relation",
+      "kind": "insert_after",
+      "anchor": "    readout.text = \"LOCAL \" + str(local_position) + \"\\nWORLD \" + str(world_position)\n",
+      "text": "\n    var a := local_position\n    var b := to_local(point_b.global_position)\n    var displacement := b - a\n    distance = displacement.length()\n    line.show_segment(a, displacement, distance)\n    readout.text += \"\\nDISTANCE \" + str(distance)\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "role": "Complete printed supplied cylinder renderer, unchanged from its original helper."
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Lines/tutorial.md",
+      "sha256": "463885db537ebb9a8b07b0d78ee988625c7c2a4be4c024b6ef2c89b50af817f9"
+    },
+    {
+      "path": "commons/maps/Point_Coordinates/tutorial.md",
+      "sha256": "0438628e8a37f4e7d602241a967d3db9c99ca06c2a4f4e80af22e7d883d519e5"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+      "sha256": "eca213f79e5cf48fbdab07d2b5fce1a6fc175232e75822b1d596bc6d54bc8649"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/report-runtime.json",
+      "sha256": "88f704507a479b119a3cd781653436d5d95c638bf74e875259398fbe7edb0fab"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/tutorial.md",
+      "sha256": "117a441f1beb3e180d8504cf1957d24bcbb03ed3866ef18c688542083baf8d9f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "carry/inherited_point",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The first point retains the exact tested Coordinates geometry, pose, material defaults and pickup configuration."
+    },
+    {
+      "id": "carry/two_points",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The original point and one distinct duplicated endpoint are the only bodies."
+    },
+    {
+      "id": "carry/two_boundaries",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Each endpoint owns one mesh and collider; the segment has no physical boundary."
+    },
+    {
+      "id": "carry/shared_resources",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Duplication creates distinct nodes while retaining the same sphere mesh and shape resources."
+    },
+    {
+      "id": "carry/duplicate_configuration",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The second point differs in placement while preserving inherited shape and pickup settings."
+    },
+    {
+      "id": "carry/second_position",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The second endpoint begins one local metre along X from the inherited point."
+    },
+    {
+      "id": "carry/alignment",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Both inherited sphere surfaces remain aligned with their colliders."
+    },
+    {
+      "id": "carry/readout_preserved",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The Coordinates readout retains its station parent, placement and text size."
+    },
+    {
+      "id": "carry/supplied_visual",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The borrowed line renderer adds one visual relation under the station."
+    },
+    {
+      "id": "initial/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "initial/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "initial/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "initial/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "initial/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "initial/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "held_a/near_pickup",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Actual XR Tools overlap selects this endpoint."
+    },
+    {
+      "id": "held_a/held",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The real pickup library holds this endpoint."
+    },
+    {
+      "id": "held_a/driver_movement",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The real grab driver moves the endpoint by the controller displacement."
+    },
+    {
+      "id": "held_a/same_geometry",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The same visible and physical resources follow the held body together."
+    },
+    {
+      "id": "held_a/other_end_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving one point leaves the other endpoint in place."
+    },
+    {
+      "id": "held_a/same_segment",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The continuing relation updates the existing cylinder resource without replacing it."
+    },
+    {
+      "id": "held_a/readout_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The inherited readout stays attached to the station while an endpoint moves."
+    },
+    {
+      "id": "held_a/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "held_a/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "held_a/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "held_a/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "held_a/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "held_a/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "held_a/release_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Release restores collision settings and leaves the endpoint fixed as the empty controller departs."
+    },
+    {
+      "id": "held_a/released/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "held_a/released/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "held_a/released/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "held_a/released/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "held_a/released/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "held_a/released/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "held_b/near_pickup",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Actual XR Tools overlap selects this endpoint."
+    },
+    {
+      "id": "held_b/held",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The real pickup library holds this endpoint."
+    },
+    {
+      "id": "held_b/driver_movement",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The real grab driver moves the endpoint by the controller displacement."
+    },
+    {
+      "id": "held_b/same_geometry",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The same visible and physical resources follow the held body together."
+    },
+    {
+      "id": "held_b/other_end_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving one point leaves the other endpoint in place."
+    },
+    {
+      "id": "held_b/same_segment",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The continuing relation updates the existing cylinder resource without replacing it."
+    },
+    {
+      "id": "held_b/readout_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The inherited readout stays attached to the station while an endpoint moves."
+    },
+    {
+      "id": "held_b/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "held_b/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "held_b/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "held_b/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "held_b/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "held_b/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "held_b/release_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Release restores collision settings and leaves the endpoint fixed as the empty controller departs."
+    },
+    {
+      "id": "held_b/released/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "held_b/released/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "held_b/released/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "held_b/released/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "held_b/released/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "held_b/released/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "frame/local_stable",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Parent translation and rotation change world addresses while preserving local positions and separation."
+    },
+    {
+      "id": "frame/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "frame/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "frame/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "frame/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "frame/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "frame/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "vertical_live/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "vertical_live/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "vertical_live/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "vertical_live/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "vertical_live/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "vertical_live/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "coincident_live/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "coincident_live/hidden",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Coincident endpoints hide the directionless segment."
+    },
+    {
+      "id": "coincident_live/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "separated_again/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "separated_again/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "separated_again/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "separated_again/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "separated_again/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "separated_again/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/vertical/initial_offset",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full downloadable program applies exactly the stated starting-position experiment."
+    },
+    {
+      "id": "experiment/vertical/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/vertical/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/vertical/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/vertical/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/vertical/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/vertical/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/coincident/initial_offset",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full downloadable program applies exactly the stated starting-position experiment."
+    },
+    {
+      "id": "experiment/coincident/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/coincident/hidden",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Coincident endpoints hide the directionless segment."
+    },
+    {
+      "id": "experiment/coincident/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/reverse_direction/initial_offset",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full downloadable program applies exactly the stated starting-position experiment."
+    },
+    {
+      "id": "experiment/reverse_direction/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/reverse_direction/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/reverse_direction/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/reverse_direction/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/reverse_direction/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/reverse_direction/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_parallel/two_relations_two_bodies",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full two-line program adds a second visual relation and no bodies for the C/D position values."
+    },
+    {
+      "id": "experiment/two_lines_parallel/table_positions",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The held endpoints match the printed coordinate-table assignments."
+    },
+    {
+      "id": "experiment/two_lines_parallel/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_parallel/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_parallel/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_parallel/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_parallel/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_parallel/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_parallel/second_segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer places the second cylinder at the printed C/D coordinates in the same station frame."
+    },
+    {
+      "id": "experiment/two_lines_parallel/direction_relation",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The table produces parallel directions or perpendicular plus/X directions."
+    },
+    {
+      "id": "experiment/two_lines_parallel/depth",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The depth experiment separates the two segment midpoints by 0.2 while other arrangements share a plane."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_parallel/moved_first/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_parallel/second_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving a held endpoint updates the first relation while the second segment drawn in _ready remains fixed."
+    },
+    {
+      "id": "experiment/two_lines_plus/two_relations_two_bodies",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full two-line program adds a second visual relation and no bodies for the C/D position values."
+    },
+    {
+      "id": "experiment/two_lines_plus/table_positions",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The held endpoints match the printed coordinate-table assignments."
+    },
+    {
+      "id": "experiment/two_lines_plus/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_plus/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_plus/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_plus/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_plus/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_plus/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_plus/second_segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer places the second cylinder at the printed C/D coordinates in the same station frame."
+    },
+    {
+      "id": "experiment/two_lines_plus/direction_relation",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The table produces parallel directions or perpendicular plus/X directions."
+    },
+    {
+      "id": "experiment/two_lines_plus/depth",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The depth experiment separates the two segment midpoints by 0.2 while other arrangements share a plane."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_plus/moved_first/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_plus/second_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving a held endpoint updates the first relation while the second segment drawn in _ready remains fixed."
+    },
+    {
+      "id": "experiment/two_lines_x/two_relations_two_bodies",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full two-line program adds a second visual relation and no bodies for the C/D position values."
+    },
+    {
+      "id": "experiment/two_lines_x/table_positions",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The held endpoints match the printed coordinate-table assignments."
+    },
+    {
+      "id": "experiment/two_lines_x/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_x/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_x/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_x/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_x/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_x/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_x/second_segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer places the second cylinder at the printed C/D coordinates in the same station frame."
+    },
+    {
+      "id": "experiment/two_lines_x/direction_relation",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The table produces parallel directions or perpendicular plus/X directions."
+    },
+    {
+      "id": "experiment/two_lines_x/depth",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The depth experiment separates the two segment midpoints by 0.2 while other arrangements share a plane."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_x/moved_first/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_x/second_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving a held endpoint updates the first relation while the second segment drawn in _ready remains fixed."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/two_relations_two_bodies",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The full two-line program adds a second visual relation and no bodies for the C/D position values."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/table_positions",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The held endpoints match the printed coordinate-table assignments."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/second_segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer places the second cylinder at the printed C/D coordinates in the same station frame."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/direction_relation",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The table produces parallel directions or perpendicular plus/X directions."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/depth",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The depth experiment separates the two segment midpoints by 0.2 while other arrangements share a plane."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/distance",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Measured distance agrees with the physical endpoints in the translated, rotated unit-scale station."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/visible",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Separated endpoints have a visible segment node."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/segment_endpoints",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder's world-space ends match the taught displacement; reversing only subtraction points away from B."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/mesh_length",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The cylinder length matches the endpoint distance."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/finite_basis",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The supplied renderer keeps a finite orthonormal orientation, including vertical segments."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/moved_first/readout",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "The live label preserves exact independent LOCAL/WORLD text and reports the independently measured distance within floating-point tolerance."
+    },
+    {
+      "id": "experiment/two_lines_x_depth/second_stays",
+      "kind": "native",
+      "action": "Execute the exact continuation or printed exercise in native Godot.",
+      "expect": "Moving a held endpoint updates the first relation while the second segment drawn in _ready remains fixed."
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Lines/tutorial.md",
+    "commons/maps/Point_Coordinates/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/report-runtime.json",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/line_skin.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/run_checks.py",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/verify.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/incoming.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/assembled.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/expected.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line_skin.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/tutorial.md",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/next-input.json",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/two-lines-changes.json",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/exercise-variants.json",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/vertical.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/coincident.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/reverse_direction.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_parallel.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_plus.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x_depth.gd"
+  ],
+  "exercise_variants": {
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/vertical.gd": {
+      "sha256": "6ee050b65ff899509dbe5dd64d32b876f3b39190a86ee9b4dcb2e0143c1b4df7",
+      "native_filename": "vertical.gd",
+      "edit": {
+        "id": "vertical",
+        "kind": "replace",
+        "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+        "after": "    point_b.position = CENTRE + Vector3(0, 1.0, 0)\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/coincident.gd": {
+      "sha256": "527b640f57d75a3be1ea47d18817eccc08f75d5428face171512cb12c0854c67",
+      "native_filename": "coincident.gd",
+      "edit": {
+        "id": "coincident",
+        "kind": "replace",
+        "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+        "after": "    point_b.position = CENTRE\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/reverse_direction.gd": {
+      "sha256": "c3e92ee74bd57b19742a4cc051a616b025e6dd501b10ec11ccce55ad68ee6080",
+      "native_filename": "reverse_direction.gd",
+      "edit": {
+        "id": "reverse_direction",
+        "kind": "replace",
+        "before": "    var displacement := b - a\n",
+        "after": "    var displacement := a - b\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_parallel.gd": {
+      "sha256": "5a0a3f5c281b6d1ee2791ac549bf72988e2ab10ad9b4823f7e348c8d679d99e3",
+      "native_filename": "two_lines_parallel.gd",
+      "edit": {
+        "id": "two_lines_parallel",
+        "kind": "insert_after",
+        "anchor": "    add_child(line)\n",
+        "text": "    point.position = Vector3(-0.6, 1.12, 0)\n    point_b.position = Vector3(0.6, 1.12, 0)\n    var c := Vector3(-0.6, 1.62, 0)\n    var d := Vector3(0.6, 1.62, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_plus.gd": {
+      "sha256": "1b6c4eff1f829721f9700fa69601970b239df58c52da8c38c7565628b91b1367",
+      "native_filename": "two_lines_plus.gd",
+      "edit": {
+        "id": "two_lines_plus",
+        "kind": "insert_after",
+        "anchor": "    add_child(line)\n",
+        "text": "    point.position = Vector3(-0.6, 1.42, 0)\n    point_b.position = Vector3(0.6, 1.42, 0)\n    var c := Vector3(0, 0.82, 0)\n    var d := Vector3(0, 2.02, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x.gd": {
+      "sha256": "07ec14440157bdb8b53d7297191a9aca6e691eb5dbd2906e6be05fb2560ff5b6",
+      "native_filename": "two_lines_x.gd",
+      "edit": {
+        "id": "two_lines_x",
+        "kind": "insert_after",
+        "anchor": "    add_child(line)\n",
+        "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02, 0)\n    var d := Vector3(0.6, 0.82, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x_depth.gd": {
+      "sha256": "9e1ba18eee4ae4d78432e687f424af6b5edf19530cd5702ca472213d8b2601c5",
+      "native_filename": "two_lines_x_depth.gd",
+      "edit": {
+        "id": "two_lines_x_depth",
+        "kind": "insert_after",
+        "anchor": "    add_child(line)\n",
+        "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02,0.2)\n    var d := Vector3(0.6, 0.82,0.2)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+      }
+    }
+  },
+  "native_report": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/report-runtime.json",
+  "printed_complete_script_equals_native_input": true,
+  "composed_equals_printed_complete_script": true,
+  "coordinate_contract": "Both endpoint positions are converted into the station's local frame; the station may translate and rotate but has unit scale."
+}

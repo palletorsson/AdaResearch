@@ -1,0 +1,258 @@
+--- before/commons/artifacts/bias_from_inside/bias_from_inside.gd
++++ commons/artifacts/bias_from_inside/bias_from_inside.gd
+@@ -1,20 +1,12 @@
+-# bias_from_inside.gd
+-# Visualizes a word embedding space from the perspective of a marginalized term.
+-# Instead of the god's-eye view, this places the camera INSIDE the compressed
+-# region. Nearby terms (other marginalized concepts) cluster tightly together.
+-# Distant terms (the "default" terms) are far away, tiny, unreachable.
+-# A slider shifts between "default perspective" (evenly distributed) and
+-# "compressed perspective" (reveals how uneven the space really is).
+-#
++# An authored word-position study. It moves points, never the visitor or camera.
+ # @identity
+-#   essence: an embedding space experienced from the inside of its compression
+-#   desire: players feel what it means to be algorithmically crowded into a corner
+-#   critical_parameter: perspective_blend — 0.0 = default view, 1.0 = compressed view
+-#   triggers: instantiation, perspective slider interaction
+-#   emerges: the realization that "neutral" embeddings are anything but neutral
+-#   needs: [implemented] MultiMesh spheres, Label3D terms, camera lerp, ArtifactControls
+-#   relationships: algorithmic_bias (same map), algorithmic_bias_visualization (sibling)
+-#   truth: the embedding space is not a fact — it is a map drawn by the powerful
++# essence: indexed words interpolate between two seeded, authored arrangements
++# desire: distinguish being present from being easy to tell apart
++# critical_parameter: perspective_blend (legacy API name) — the COMPRESSION handle
++# triggers: one slider changes positions; READ opens the maker's interpretation
++# emerges: the same words remain while their spatial separations change
++# needs: real normalized rail input, fixed salience, space for both endpoints
++# truth: two coloured groups are a curatorial choice, not measured model embeddings
+ 
+ extends Node3D
+ class_name BiasFromInside
+@@ -37,22 +29,7 @@
+ ]
+ 
+ # --- Configuration ---
+-## THE ARTIFACT'S OWN CRITICAL PARAMETER, finally reachable.
+-##
+-## The @identity block above names perspective_blend as this artifact's critical
+-## parameter — 0.0 the default view, 1.0 the compressed one — and until now it was a
+-## PRIVATE var pinned at 0.0, with apply_grid_config() an empty `pass`. So every one of
+-## its placements in the terminal spine sequence has shown the evenly-distributed,
+-## god's-eye arrangement, and the compressed view this artifact exists to deliver — the
+-## one where you are crowded into a corner and the "default" terms are tiny and
+-## unreachable — was behind a VR slider, absent from every capture, gallery and still
+-## in the project.
+-##
+-## An artifact whose truth is "the embedding space is not a fact, it is a map drawn by
+-## the powerful" was shipping the powerful's map as its only visible state.
+-##
+-## Exported at 0.0 so existing placements are unchanged. A map that wants the other
+-## perspective can now ask for it: bias_from_inside#perspective_blend:1.0
++## Legacy export/token name retained. The control moves geometry, not a camera.
+ @export_range(0.0, 1.0, 0.05) var perspective_blend: float = 0.0
+ @export var sphere_radius: float = 0.025
+ @export var label_font_size: int = 12
+@@ -78,6 +55,8 @@
+ var _header: Node3D
+ var _header_cache: String = ""
+ var _controls: Node
++var _slider: Node
++var _reading: Node3D
+ 
+ # Materials
+ var _marginalized_mat: StandardMaterial3D
+@@ -91,24 +70,23 @@
+ 	_create_labels()
+ 	_create_title()
+ 	_create_controls()
+-	# was _apply_perspective(0.0) — a hardcoded zero that made the export below
+-	# unreachable even after it existed
++	_create_stand()
+ 	_perspective_blend = clampf(perspective_blend, 0.0, 1.0)
+ 	_apply_perspective(_perspective_blend)
+-
+-
+-## Was `pass`. An artifact placed in three maps of the terminal sequence could not be
+-## configured by any of them, which is why every placement looks identical.
++	_slider.set_normalized_value(_perspective_blend)
++
++
++## Apply author configuration before regenerating deterministic endpoints.
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if config.has("perspective_blend"):
+-		perspective_blend = clampf(float(config["perspective_blend"]), 0.0, 1.0)
+-		_perspective_blend = perspective_blend
+-		if is_inside_tree():
+-			_apply_perspective(_perspective_blend)
+-	if config.has("compressed_cluster_radius"):
+-		compressed_cluster_radius = float(config["compressed_cluster_radius"])
+-	if config.has("default_spread_radius"):
+-		default_spread_radius = float(config["default_spread_radius"])
++		perspective_blend = clampf(float(config["perspective_blend"]),0.0,1.0)
++	for key in ["compressed_cluster_radius","default_spread_radius","default_spread_offset"]:
++		if config.has(key): set(key,maxf(0.0,float(config[key])))
++	if is_node_ready():
++		_generate_positions()
++		_perspective_blend=perspective_blend
++		_apply_perspective(_perspective_blend)
++		_slider.set_normalized_value(_perspective_blend)
+ 
+ 
+ # ------------------------------------------------------------------
+@@ -116,10 +94,14 @@
+ # ------------------------------------------------------------------
+ 
+ func _generate_positions() -> void:
++	_marginalized_positions_default.clear()
++	_marginalized_positions_compressed.clear()
++	_default_positions_default.clear()
++	_default_positions_compressed.clear()
+ 	var rng := RandomNumberGenerator.new()
+ 	rng.seed = 42  # Deterministic
+ 
+-	# Default perspective: everything looks evenly distributed
++	# Arrangement A: two seeded rings. Neither arrangement is a fairness measure.
+ 	for i in range(_marginalized_terms.size()):
+ 		var angle := (float(i) / _marginalized_terms.size()) * TAU
+ 		var r := 0.4 + rng.randf() * 0.3
+@@ -244,7 +226,7 @@
+ 	_header.name = "Header"
+ 	_header.position = Vector3(0, 0.52, 0)
+ 	add_child(_header)
+-	_rebuild_header("DEFAULT PERSPECTIVE — everything looks fair", Color(0.7, 0.75, 0.8))
++	_rebuild_header("ARRANGEMENT A", Color(0.7, 0.75, 0.8))
+ 
+ 
+ func _rebuild_header(readout: String, readout_color: Color) -> void:
+@@ -254,34 +236,14 @@
+ 	for child in _header.get_children():
+ 		child.queue_free()
+ 
+-	# Opaque backing plate so the two lines read as one board. A single space
+-	# gives the panel content (empty text returns null from the helper).
+-	var plate := BakedText.make_panel_mesh(
+-		" ", Color(0.05, 0.06, 0.08, 0.92), Color(0.05, 0.06, 0.08),
+-		Vector2(0.62, 0.14), 900, false)
+-	if plate:
+-		plate.position.z = -0.004
+-		var pm = plate.material_override
+-		if pm is StandardMaterial3D:
+-			pm.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+-		_header.add_child(plate)
+-
+-	# Two stacked lines on the one surface: title, then the live readout.
+-	var block := BakedText.make_text_block(
+-		["Embedding Space: View From Inside", readout],
+-		Color(1, 1, 1), 0.05, 0.58, 0.012, true)
+-	# Tint only the readout (second child) with the perspective colour.
+-	var lines := block.get_children()
+-	if lines.size() >= 2 and lines[1] is MeshInstance3D:
+-		var lm = lines[1].material_override
+-		if lm is StandardMaterial3D:
+-			lm.albedo_color = readout_color
+-	for line in block.get_children():
+-		if line is MeshInstance3D:
+-			var lm2 = line.material_override
+-			if lm2 is StandardMaterial3D:
+-				lm2.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+-	_header.add_child(block)
++	# Bake each line onto its own face. Independent billboards must not rotate
++	# a shared backing plate over the lower line.
++	var lines: Array=["WORD POSITIONS — AUTHORED STUDY",readout]
++	for i in range(lines.size()):
++		var face=BakedText.make_panel_mesh(lines[i],Color(.05,.06,.08),Color(.85,.9,1),Vector2(.7,.065),1100,true)
++		face.position.y=.038-float(i)*.076
++		face.material_override.billboard_mode=BaseMaterial3D.BILLBOARD_ENABLED
++		_header.add_child(face)
+ 
+ 
+ # ------------------------------------------------------------------
+@@ -289,29 +251,46 @@
+ # ------------------------------------------------------------------
+ 
+ func _create_controls() -> void:
+-	var slider_scene = load("res://commons/interactables/slider_horizontal.tscn")
+-	if slider_scene == null:
+-		return
+-
+-	_controls = Node3D.new()
+-	_controls.name = "ArtifactControls"
++	var RackTpl: GDScript=load("res://commons/audio/rack_templates/RackTemplates.gd")
++	_controls=RackTpl.create_panel("WORD POSITIONS",[
++		[{"type":"slider_h","label":"COMPRESSION","default":perspective_blend}],
++		[{"type":"button","label":"READ / CLOSE"}]
++	])
++	# Keep the controls in front of the initial ring of word labels.
++	_controls.position=Vector3(0,.02,1.02)
++	_controls.rotation_degrees.x=-20
+ 	add_child(_controls)
+-
+-	var slider: Node = slider_scene.instantiate()
+-	slider.position = Vector3(0, 0.02, 0.45)
+-	slider.rotation_degrees.y = 180
+-	_controls.add_child(slider)
+-
+-	var label_node = slider.get_node_or_null("Frame/LabelName")
+-	if label_node:
+-		label_node.text = "Perspective"
+-	slider.set_param_name("Perspective")
+-	slider.set_normalized_value(0.0)
+-	slider.slider_moved.connect(_on_perspective_changed)
+-
+-
+-func _on_perspective_changed(value: float) -> void:
+-	_perspective_blend = clampf(value, 0.0, 1.0)
++	_slider=_controls.find_child("Param_0",true,false)
++	_slider.slider_moved.connect(_on_perspective_changed)
++	_controls.find_child("Btn_0",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): _reading.visible=not _reading.visible)
++	_reading=Node3D.new()
++	_reading.name="ProjectReading"
++	_reading.position=Vector3(.65,.22,1.02)
++	var panel=BakedText.make_text_block(["PROJECT READING", "Both groups were chosen.", "More room is not a verdict.", "Which distinction matters to you?"],Color(.9,.92,1),.04,.64,.018,true)
++	_reading.add_child(panel)
++	_reading.hide()
++	add_child(_reading)
++
++
++func _create_stand() -> void:
++	var stand := MeshInstance3D.new()
++	stand.name="ControlStand"
++	var shape := CylinderMesh.new()
++	shape.top_radius=.055
++	shape.bottom_radius=.12
++	shape.height=1.05
++	stand.mesh=shape
++	stand.position=Vector3(0,-.56,.91)
++	var material := StandardMaterial3D.new()
++	material.albedo_color=Color(.13,.15,.18)
++	stand.material_override=material
++	add_child(stand)
++
++
++func _on_perspective_changed(_travel: float) -> void:
++	# The rail signal carries physical travel. Read its normalized coordinate.
++	_perspective_blend=clampf(_slider.get_normalized_value(),0.0,1.0)
++	perspective_blend=_perspective_blend
+ 	_apply_perspective(_perspective_blend)
+ 
+ 
+@@ -345,13 +324,10 @@
+ 	# Update the consolidated header readout — rebuilt only when the line text
+ 	# actually changes (cache-guarded inside _rebuild_header).
+ 	if blend < 0.3:
+-		_rebuild_header("DEFAULT PERSPECTIVE — everything looks fair", Color(0.7, 0.75, 0.8))
++		_rebuild_header("ARRANGEMENT A", Color(0.7, 0.75, 0.8))
+ 	elif blend < 0.7:
+-		_rebuild_header("SHIFTING... space is warping", Color(0.9, 0.7, 0.5))
++		_rebuild_header("BETWEEN A AND B", Color(0.7, 0.75, 0.8))
+ 	else:
+-		_rebuild_header("COMPRESSED PERSPECTIVE — feel the crowding", Color(1.0, 0.4, 0.6))
+-
+-	# Marginalized spheres glow more as compression increases
+-	_marginalized_mat.emission_energy_multiplier = 0.4 + blend * 0.8
+-	# Default spheres fade as they recede
+-	_default_mat.albedo_color.a = 1.0 - blend * 0.4
++		_rebuild_header("ARRANGEMENT B", Color(0.7, 0.75, 0.8))
++
++	# Materials remain fixed as positions change. Interpretation is opt-in.

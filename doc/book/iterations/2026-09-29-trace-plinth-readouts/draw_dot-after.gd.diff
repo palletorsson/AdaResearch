@@ -1,0 +1,102 @@
+--- draw_dot-before.gd
++++ draw_dot-after.gd
+@@ -230,6 +230,9 @@
+ 
+ 
+ func _hide_data_table() -> void:
++	if data_table_mount == "plinth":
++		_update_data_table() # A mounted instrument stays on, including at zero.
++		return
+ 	if _data_table_label:
+ 		_data_table_label.visible = false
+ 	if _data_panel:
+@@ -259,7 +262,9 @@
+ 
+ 
+ func _update_data_table() -> void:
+-	if not _data_table_label or _trail_points.is_empty():
++	if not _data_table_label:
++		return
++	if _trail_points.is_empty() and data_table_mount != "plinth":
+ 		_hide_data_table()
+ 		return
+ 
+@@ -288,6 +293,9 @@
+ 	call_deferred("_fit_data_panel")
+ 	_data_table_label.visible = true
+ 	_data_panel.visible = true
++	if data_table_mount == "plinth":
++		_data_panel.visible = _data_mount_ready
++		return
+ 	# Capture the reading surface once; capacity eviction must not drag it along.
+ 	if not _data_panel_anchored:
+ 		var facing := Basis(Vector3.UP, global_rotation.y)
+@@ -299,7 +307,33 @@
+ func _data_readout_basis() -> Basis:
+ 	# Turn only the reading face; its anchor and the drawn positions stay put.
+ 	var facing := Basis(Vector3.UP, global_rotation.y + deg_to_rad(data_table_yaw))
+-	return (facing * Basis(Vector3.RIGHT, deg_to_rad(-35.0))).scaled(Vector3.ONE * data_table_scale)
++	return (facing * Basis(Vector3.RIGHT, deg_to_rad(-data_table_tilt))).scaled(Vector3.ONE * data_table_scale)
++
++func _physics_process(_delta: float) -> void:
++	if data_table_mount != "plinth" or _data_mount_ready or not is_instance_valid(_data_panel):
++		return
++	# Plinths are built after the artifact. Wait for the actual support instead
++	# of guessing from the first drawn point or placing a screen on the floor.
++	var at := global_position + Basis(Vector3.UP, global_rotation.y) * Vector3(0, 0, 0.12)
++	var query := PhysicsRayQueryParameters3D.create(at + Vector3.UP * 0.3, at - Vector3.UP * 2.0, 1)
++	var excluded: Array[RID] = []
++	for body in find_children("*", "CollisionObject3D", true, false):
++		excluded.append(body.get_rid())
++	query.exclude = excluded
++	var hit := get_world_3d().direct_space_state.intersect_ray(query)
++	if hit.is_empty() or hit.normal.y < 0.9 or absf(global_position.y - hit.position.y) > 0.8:
++		return
++	_data_mount_surface = hit.position
++	_data_mount_ready = true
++	_seat_data_panel()
++	_update_data_table()
++
++func _seat_data_panel() -> void:
++	var basis := _data_readout_basis()
++	var shell: MeshInstance3D = _data_panel.get_node("Casing/Shell")
++	var local_shell := _data_panel.global_transform.affine_inverse() * shell.global_transform
++	var bounds := Transform3D(basis, Vector3.ZERO) * local_shell * shell.get_aabb()
++	_data_panel.global_transform = Transform3D(basis, _data_mount_surface - Vector3.UP * bounds.position.y)
+ 
+ @export var fade_trail: bool = false
+ @export var fade_duration: float = 2.0
+@@ -314,10 +348,14 @@
+ @export var data_table_update_interval: float = 0.15  # Seconds between updates
+ @export_range(0.4, 1.5) var data_table_scale: float = 1.0
+ @export var data_table_yaw: float = 0.0 # Additional heading in degrees, relative to the pen.
++@export_range(0.0, 75.0) var data_table_tilt: float = 35.0
++@export_enum("trace", "plinth") var data_table_mount: String = "trace"
+ 
+ var _data_panel: Node3D
+ var _data_count_label: Label
+ var _data_panel_anchored: bool = false
++var _data_mount_ready: bool = false
++var _data_mount_surface := Vector3.ZERO
+ var _data_table_label: Label
+ var _data_table_timer: float = 0.0
+ 
+@@ -750,7 +788,17 @@
+ 		data_table_scale = clampf(float(config_data["data_table_scale"]), 0.4, 1.5)
+ 	if config_data.has("data_table_yaw"):
+ 		data_table_yaw = float(config_data["data_table_yaw"])
+-	if _data_panel_anchored and is_instance_valid(_data_panel):
++	if config_data.has("data_table_tilt"):
++		data_table_tilt = clampf(float(config_data["data_table_tilt"]), 0.0, 75.0)
++	if config_data.has("data_table_mount"):
++		var mount := str(config_data["data_table_mount"])
++		if mount in ["trace", "plinth"] and mount != data_table_mount:
++			data_table_mount = mount
++			_data_mount_ready = false
++			_data_panel_anchored = false
++	if _data_mount_ready and is_instance_valid(_data_panel):
++		_seat_data_panel()
++	elif _data_panel_anchored and is_instance_valid(_data_panel):
+ 		_data_panel.global_basis = _data_readout_basis()
+ 	if config_data.has("ink"):
+ 		var v: String = str(config_data["ink"]).strip_edges().to_lower()

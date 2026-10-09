@@ -1,0 +1,225 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@323"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@325"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@326"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@327"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@328"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@329"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@330"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@331"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@332"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@333"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@324"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@325"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@326"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@327"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@328"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@329"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@330"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@331"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@332"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@333"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@324"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@325"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@326"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@327"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@328"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@329"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@330"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@331"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@332"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@333"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@323"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@324"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@325"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@326"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@327"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@328"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@329"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@330"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@331"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@332"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@333"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 26.0,
+	"evidence": {
+		"changes_source": false,
+		"links": 800,
+		"maximum_pin_error": 0.0,
+		"pins": 4,
+		"positions": 225,
+		"recorded_frames": 181,
+		"settling_steps": 600,
+		"simulation_seconds": 6.0,
+		"simulation_step": 0.00833333333333333,
+		"source_method": "step"
+	},
+	"id": "cloth_relations",
+	"passed": true,
+	"phases": [
+		"FOUR FIXED POINTS",
+		"REVEAL THE DISTANCE LINKS",
+		"PULL ONE POINT",
+		"RELEASE, KEEP THE RELATIONS"
+	],
+	"source_paths": [
+		"res://commons/artifacts/spine_studies/tension_score.gd",
+		"res://commons/artifacts/spine_studies/tension_membrane.gd"
+	]
+}

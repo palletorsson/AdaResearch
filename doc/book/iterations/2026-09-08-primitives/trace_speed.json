@@ -1,0 +1,28 @@
+{
+  "failures": [],
+  "observations": [
+    {
+      "case": "2 Hz gate at 1 m/s",
+      "expected_m_s": 1.0,
+      "observed_m_s": 1.0
+    },
+    {
+      "case": "distance gate at 1 m/s",
+      "expected_m_s": 1.0,
+      "observed_m_s": 1.0
+    },
+    {
+      "case": "clear resets elapsed measurement time",
+      "expected_m_s": 1.0,
+      "observed_m_s": 1.00000023841858
+    },
+    {
+      "case": "every-frame baseline at 1 m/s",
+      "expected_m_s": 1.0,
+      "observed_m_s": 1.00000023841858
+    }
+  ],
+  "passed": true,
+  "probe": "player_trace_elapsed_speed",
+  "scope": "Actual scene with a supplied moving body; no active-rig or human walking verification."
+}

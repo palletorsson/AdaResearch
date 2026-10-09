@@ -1,0 +1,26 @@
+{
+  "started": "2026-09-13T16:01:49+02:00",
+  "finished": "2026-09-13T16:02:06+02:00",
+  "pid": 4768,
+  "exit": 0,
+  "checks": 2,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/pair_probe_base.gd": "c43137c672b7383e33280a5735dadc7a6b07b53105a912b6e31e1e71af2c3035",
+    "ada_run/pair_full_acceptance.gd": "fcb671154f0932bf5dd3a22514aa4a693fbdab3c7e11ecb89ed136f15c7d1cde",
+    "commons/maps/Noise_Perlin_Simplex/map_data.json": "5a5f5130447e4f9e93b45284e8af1c527f3a9cb799580fde4c4aedcb92c66792",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/pair-review-2026-09-13/review-plan.json": "2a53865e58546d42a6e87b7f44f03560978ef4122b47e5b88222903da1afe332",
+    "algorithms/randomness/simplexnoise/SimplexNoise.gd": "8123335fff15ff58ab1edfd056a3fd246b940399b3bff134b5453f43fe760b54",
+    "algorithms/randomness/simplexnoise/SimplexVisualizer.gd": "ea15c0bc02665e0df319609ea0aeebaaff83d3547a3c5ad10503644c9799f49d",
+    "algorithms/randomness/perlinnoise/PerlinNoise.gd": "37adc3746373c02b36e04f84ecf20ac7d73b5e90df9c80668e0e321a9b56adcb",
+    "algorithms/randomness/perlinnoise/NoiseVisualizer.gd": "ea4e552ab1d69690a61c505f9713697ae060b4fd82df16a0790341a30f78cfc9",
+    "algorithms/randomness/noise/perlinnoise/scripts/terrain_generator.gd": "791257e6df0d139d152c92ff3da90d90324460c5b35d4281e31a742ce445602f",
+    "commons/scenes/mapobjects/configurable_portal.gd": "52866f11bbd69a88304c2a581af6991603b19c61920275c2a5bf727a855d9622"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

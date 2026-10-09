@@ -1,0 +1,3077 @@
+{
+  "WaveFunctions_Intro": {
+    "order": {
+      "primary": [
+        "control_pendulum"
+      ],
+      "secondary": [
+        "rotatescalecubes",
+        "pickup_cube_static",
+        "cube_scene",
+        "transformation_cube",
+        "rotating_cube",
+        "y_oscillation_cube",
+        "rotating_cube_demo",
+        "science_screen",
+        "pickup_cube_transforming",
+        "pickup_cube_rotating",
+        "pick_up_cube",
+        "oscillation_controlled_cube",
+        "mario_cube_time_trace",
+        "SphericalHarmonics"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "rotatescalecubes",
+        "token": "rotatescalecubes:0:15",
+        "cell": [
+          4,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/transforms.json",
+            "scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.gd"
+            ]
+          },
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pickup_cube_static",
+        "token": "pickup_cube_static",
+        "cell": [
+          4,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/pickups/pickup_cube_static.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/pickups/pickup_wrapper.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "cube_scene",
+        "token": "cube_scene:0:0:0.2",
+        "cell": [
+          2,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/cube_scene.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "transformation_cube",
+        "token": "transformation_cube:0:0:0.2",
+        "cell": [
+          3,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/animation/transformation_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/animation/TransformationTween.gd",
+              "res://commons/primitives/cubes/cube_bearing.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "rotating_cube",
+        "token": "rotating_cube:0:0:0.2",
+        "cell": [
+          5,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/animation/rotating_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/animation/RotationTween.gd",
+              "res://commons/primitives/cubes/cube_bearing.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "y_oscillation_cube",
+        "token": "y_oscillation_cube:180:0.5",
+        "cell": [
+          3,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "rotating_cube_demo",
+        "token": "rotating_cube_demo:180:0.5",
+        "cell": [
+          5,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "token": "science_screen:180:1.5#mode:wave",
+        "cell": [
+          7,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pickup_cube_transforming",
+        "token": "pickup_cube_transforming",
+        "cell": [
+          4,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/pickups/pickup_cube_transforming.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/pickups/pickup_wrapper.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pickup_cube_rotating",
+        "token": "pickup_cube_rotating",
+        "cell": [
+          4,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/pickups/pickup_cube_rotating.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/pickups/pickup_wrapper.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          4,
+          9
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "control_pendulum",
+        "token": "control_pendulum:0:1.5:1#reference:plumb#evidence:trace",
+        "cell": [
+          2,
+          11
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/control_pendulum/control_pendulum.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube:0:0:0.6",
+        "cell": [
+          4,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube:0:0:0.7",
+        "cell": [
+          4,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "oscillation_controlled_cube",
+        "token": "oscillation_controlled_cube:180:0.5:1",
+        "cell": [
+          2,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube:0:0:0.8",
+        "cell": [
+          4,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mario_cube_time_trace",
+        "token": "mario_cube_time_trace:0:1:0.5",
+        "cell": [
+          6,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/mario_cube_time_trace.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/mario_cube_time_trace.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube:0:0:0.9",
+        "cell": [
+          4,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube:0:0:1",
+        "cell": [
+          4,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SphericalHarmonics",
+        "token": "SphericalHarmonics:0:4",
+        "cell": [
+          1,
+          18
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SphericalHarmonics",
+        "token": "SphericalHarmonics:0:4",
+        "cell": [
+          7,
+          18
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_Pendulum": {
+    "order": {
+      "primary": [
+        "PendulumWave"
+      ],
+      "secondary": [
+        "WavePaintings",
+        "foucault_pendulum",
+        "draw_dot_time_domain",
+        "BigPipeSystem",
+        "lab_table",
+        "seismograph",
+        "GlassRack",
+        "VRAudioMonitor"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "WavePaintings",
+        "token": "WavePaintings:180:1:0.2",
+        "cell": [
+          2,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foucault_pendulum",
+        "token": "foucault_pendulum:0:0:0.5",
+        "cell": [
+          10,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/foucault_pendulum/foucault_pendulum.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/foucault_pendulum/foucault_pendulum.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "BigPipeSystem",
+        "token": "BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight",
+        "cell": [
+          7,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          9,
+          5
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lab_table",
+        "token": "lab_table",
+        "cell": [
+          9,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/table/table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/table/table.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "PendulumWave",
+        "token": "PendulumWave:180",
+        "cell": [
+          6,
+          11
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GlassRack",
+        "token": "GlassRack:0:0.6#config:reflux_apparatus",
+        "cell": [
+          10,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "seismograph",
+        "token": "seismograph",
+        "cell": [
+          2,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/seismograph/seismograph.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/seismograph/seismograph.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "VRAudioMonitor",
+        "token": "VRAudioMonitor",
+        "cell": [
+          11,
+          16
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/interfaces/VRAudioMonitor.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draw_dot_time_domain",
+        "token": "draw_dot_time_domain",
+        "cell": [
+          4,
+          17
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/point/draw_dot_time_domain.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/point/draw_dot_time_domain.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_Sine_Space": {
+    "order": {
+      "primary": [
+        "sine_flow_tray",
+        "sine_wall_corridor"
+      ],
+      "secondary": [
+        "sine_wall_explanation",
+        "sine_space"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "sine_flow_tray",
+        "token": "sine_flow_tray:180",
+        "cell": [
+          3,
+          4
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/sine_flow_tray.json",
+            "scene": "res://commons/artifacts/sine_flow_tray/sine_flow_tray.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/sine_flow_tray/sine_flow_tray.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sine_wall_explanation",
+        "token": "sine_wall_explanation:90:-.4",
+        "cell": [
+          1,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sine_wall_corridor",
+        "token": "sine_wall_corridor:90",
+        "cell": [
+          6,
+          10
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/sine_wall/SineWallCorridor.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          9,
+          20
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sine_space",
+        "token": "sine_space#floor:walk#width:8#depth:18#pos_x:-0.5#pos_z:-0.5",
+        "cell": [
+          6,
+          22
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions_extra.json",
+            "scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/sine_space/SineSpace.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_Unit_Circle": {
+    "order": {
+      "primary": [
+        "unit_circle_advanced"
+      ],
+      "secondary": [
+        "SimpleOscillatingBridge",
+        "OscillationCurve",
+        "cube_scene",
+        "colorballs"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "unit_circle_advanced",
+        "token": "unit_circle_advanced:-90:-0.1",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          4,
+          1
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SimpleOscillatingBridge",
+        "token": "SimpleOscillatingBridge:0:2",
+        "cell": [
+          5,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "OscillationCurve",
+        "token": "OscillationCurve:90:2",
+        "cell": [
+          11,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "cube_scene",
+        "token": "cube_scene:0:0",
+        "cell": [
+          1,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/cube_scene.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "colorballs",
+        "token": "colorballs",
+        "cell": [
+          2,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/color.json",
+            "scene": "res://algorithms/color/colorballs/colorballs.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/color/colorballs/colorballs.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_3D_Wave_Propagation": {
+    "order": {
+      "primary": [
+        "coupled_oscillator_lattice"
+      ],
+      "secondary": [
+        "kusama_sine",
+        "wave_propagation_3d"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "kusama_sine",
+        "token": "kusama_sine:0:3",
+        "cell": [
+          5,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/kusamasine/kusama.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wave_propagation_3d",
+        "token": "wave_propagation_3d",
+        "cell": [
+          7,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/wave_propagation_3d/WavePropagation3D.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "coupled_oscillator_lattice",
+        "token": "coupled_oscillator_lattice#comparison:true",
+        "cell": [
+          8,
+          13
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_Effect_Sound": {
+    "order": {
+      "primary": [
+        "DualBallFMController"
+      ],
+      "secondary": [
+        "BigPipeSystem",
+        "AudioContr",
+        "RackSineBasic",
+        "cable_builder",
+        "VRAudioMonitor",
+        "Rack303Acid",
+        "RackMoogBass",
+        "RackDX7Piano",
+        "audio_catalog_tablet",
+        "wave_interference_3d",
+        "harmonic_distance_table",
+        "chord_tension_spring",
+        "timbre_sculptor",
+        "MarioSoundController",
+        "MelodyChaser3D"
+      ],
+      "decoration": [
+        "pick_up_cube",
+        "GlassRack",
+        "dark_sphere",
+        "rack_room",
+        "lab_table"
+      ]
+    },
+    "placements": [
+      {
+        "key": "BigPipeSystem",
+        "token": "BigPipeSystem:0:-0.5",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          2,
+          2
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "AudioContr",
+        "token": "AudioContr:-90#preset:basic_mono",
+        "cell": [
+          3,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/audio/UniversalVRAudioController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/UniversalVRAudioController.gd",
+              "res://commons/audio/audio_controller_cable_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          5,
+          2
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          10,
+          2
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GlassRack",
+        "token": "GlassRack#config:simple_tube",
+        "cell": [
+          11,
+          2
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          2,
+          3
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "AudioContr",
+        "token": "AudioContr:-90#config:mario_rack",
+        "cell": [
+          3,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/audio/UniversalVRAudioController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/UniversalVRAudioController.gd",
+              "res://commons/audio/audio_controller_cable_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "RackSineBasic",
+        "token": "RackSineBasic:0:1",
+        "cell": [
+          5,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://addons/element_editor/element_layout_node.gd",
+              "res://commons/interactables/slider_smooth.gd",
+              "res://commons/audio/interfaces/VRSimpleWaveform.gd",
+              "res://commons/interactables/push_button.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "cable_builder",
+        "token": "cable_builder",
+        "cell": [
+          10,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "VRAudioMonitor",
+        "token": "VRAudioMonitor",
+        "cell": [
+          11,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/interfaces/VRAudioMonitor.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          8,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          9,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          10,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Rack303Acid",
+        "token": "Rack303Acid:0:1",
+        "cell": [
+          5,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://addons/element_editor/element_layout_node.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "rack_room",
+        "token": "rack_room:0:0",
+        "cell": [
+          6,
+          5
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/rack_room.json",
+            "scene": "res://commons/artifacts/rack_room/rack_room.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/rack_room/rack_room.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "RackMoogBass",
+        "token": "RackMoogBass:0:1",
+        "cell": [
+          7,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://addons/element_editor/element_layout_node.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "RackDX7Piano",
+        "token": "RackDX7Piano:0:1",
+        "cell": [
+          8,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://addons/element_editor/element_layout_node.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "AudioContr",
+        "token": "AudioContr:-90#config:heartbeat_rack",
+        "cell": [
+          9,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/audio/UniversalVRAudioController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/UniversalVRAudioController.gd",
+              "res://commons/audio/audio_controller_cable_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "audio_catalog_tablet",
+        "token": "audio_catalog_tablet:90",
+        "cell": [
+          10,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/furniture.json",
+            "scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/catalog/AudioCatalogTablet3D.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "AudioContr",
+        "token": "AudioContr#config:slider_rack",
+        "cell": [
+          11,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/audio/UniversalVRAudioController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/UniversalVRAudioController.gd",
+              "res://commons/audio/audio_controller_cable_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wave_interference_3d",
+        "token": "wave_interference_3d:0:-0.5",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pick_up_cube",
+        "token": "pick_up_cube",
+        "cell": [
+          11,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/scenes/mapobjects/pick_up_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "harmonic_distance_table",
+        "token": "harmonic_distance_table",
+        "cell": [
+          3,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/harmonic_distance_table/harmonic_distance_table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/harmonic_distance_table/harmonic_distance_table.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "chord_tension_spring",
+        "token": "chord_tension_spring",
+        "cell": [
+          5,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/chord_tension_spring/chord_tension_spring.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/chord_tension_spring/chord_tension_spring.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "timbre_sculptor",
+        "token": "timbre_sculptor#waveform:square#sound:near",
+        "cell": [
+          9,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/timbre_sculptor/timbre_sculptor.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/timbre_sculptor/timbre_sculptor.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GlassRack",
+        "token": "GlassRack:0:0.7#config:distillation_rack",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "MarioSoundController",
+        "token": "MarioSoundController#mode:techno_kick",
+        "cell": [
+          2,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.gd",
+              "res://algorithms/wavefunctions/mariocontrol/PlaySoundButton.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "MarioSoundController",
+        "token": "MarioSoundController#mode:laser_zap",
+        "cell": [
+          2,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.gd",
+              "res://algorithms/wavefunctions/mariocontrol/PlaySoundButton.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "MelodyChaser3D",
+        "token": "MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60",
+        "cell": [
+          5,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "DualBallFMController",
+        "token": "DualBallFMController:180#stand:desks#evidence:longhand",
+        "cell": [
+          8,
+          11
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "MarioSoundController",
+        "token": "MarioSoundController#mode:sine_bell",
+        "cell": [
+          2,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.gd",
+              "res://algorithms/wavefunctions/mariocontrol/PlaySoundButton.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lab_table",
+        "token": "lab_table",
+        "cell": [
+          4,
+          12
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/table/table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/table/table.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Wavefunctions_Bernini": {
+    "order": {
+      "primary": [
+        "bernini_columns"
+      ],
+      "secondary": [
+        "ElphabaDress",
+        "vowel_sound_board"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "ElphabaDress",
+        "token": "ElphabaDress",
+        "cell": [
+          7,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/dancing_body/ElphabaDress.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bernini_columns",
+        "token": "bernini_columns",
+        "cell": [
+          7,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/berninicolumns/BerniniColumns.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "vowel_sound_board",
+        "token": "vowel_sound_board:180:3#say:right here, right now#repeat:true",
+        "cell": [
+          7,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/speech.json",
+            "scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/speech/phoneme_cloud/vowel_sound_board.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_John_Cage": {
+    "order": {
+      "primary": [
+        "john_cage_tech_noir"
+      ],
+      "secondary": [
+        "dual_display_test",
+        "ruth_asawa_sculpture"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "dual_display_test",
+        "token": "dual_display_test:180",
+        "cell": [
+          5,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ruth_asawa_sculpture",
+        "token": "ruth_asawa_sculpture",
+        "cell": [
+          8,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "john_cage_tech_noir",
+        "token": "john_cage_tech_noir:90",
+        "cell": [
+          5,
+          12
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_AirMusic": {
+    "order": {
+      "primary": [
+        "resonating_metallophone"
+      ],
+      "secondary": [
+        "GlassRack",
+        "lab_table",
+        "SystemsMusicTest",
+        "RackAmbientDrone",
+        "BigPipeSystem",
+        "air_music_display_case"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "GlassRack",
+        "token": "GlassRack:0:0.7#config:spiral_tube",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GlassRack",
+        "token": "GlassRack:-90:0.7#config:fractional_distillation",
+        "cell": [
+          9,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lab_table",
+        "token": "lab_table",
+        "cell": [
+          1,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/table/table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/table/table.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lab_table",
+        "token": "lab_table",
+        "cell": [
+          9,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/table/table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/table/table.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          4,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SystemsMusicTest",
+        "token": "SystemsMusicTest:0:0.5:0.9",
+        "cell": [
+          5,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/systems/air_points/FMPianoSynth.gd",
+              "res://commons/audio/systems/air_points/SystemsMusicLooper.gd",
+              "res://commons/audio/systems/air_points/LoopVisualizer.gd",
+              "res://commons/audio/systems/IntensityController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "RackAmbientDrone",
+        "token": "RackAmbientDrone:0:1",
+        "cell": [
+          1,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://addons/element_editor/element_layout_node.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "BigPipeSystem",
+        "token": "BigPipeSystem:90:1#path:straight,straight,up,straight,down,straight,straight",
+        "cell": [
+          7,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "air_music_display_case",
+        "token": "air_music_display_case:0:1",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/air_music_display_case/air_music_display_case.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/air_music_display_case/air_music_display_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "resonating_metallophone",
+        "token": "resonating_metallophone:0#stand:table",
+        "cell": [
+          5,
+          9
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/resonance/ResonatingMetallophone.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Wavefunctions_Sky_Stairs": {
+    "order": {
+      "primary": [
+        "sine_cylinder_staircase"
+      ],
+      "secondary": [
+        "cube_scene",
+        "math_objects"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "cube_scene",
+        "token": "cube_scene:0:8",
+        "cell": [
+          1,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/cube_scene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/cube_scene.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          1,
+          10
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sine_cylinder_staircase",
+        "token": "sine_cylinder_staircase:0:-2.5",
+        "cell": [
+          4,
+          10
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "math_objects",
+        "token": "math_objects:0:1",
+        "cell": [
+          1,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/primitives/parametric/math_objects.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/parametric/math_objects_gallery.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_TrigWalkingPath": {
+    "order": {
+      "primary": [
+        "beat_frequency_demo"
+      ],
+      "secondary": [
+        "sine_oscillation",
+        "lissajous_curves",
+        "TrigWalkingPath",
+        "wave_interference"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "sine_oscillation",
+        "token": "sine_oscillation:0:-0.5",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions_extra.json",
+            "scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lissajous_curves",
+        "token": "lissajous_curves:0:-0.5",
+        "cell": [
+          10,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "TrigWalkingPath",
+        "token": "TrigWalkingPath:0:-0.1",
+        "cell": [
+          6,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wave_interference",
+        "token": "wave_interference:0:-0.5",
+        "cell": [
+          10,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/wave_interference/WaveInterference.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "beat_frequency_demo",
+        "token": "beat_frequency_demo:0:-0.5",
+        "cell": [
+          5,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          4,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "WaveFunctions_Synthesis_Lab": {
+    "order": {
+      "primary": [
+        "additive_wave_demo"
+      ],
+      "secondary": [
+        "dna_specimen",
+        "holographicdisplay",
+        "electronicscales",
+        "air_music_display_case",
+        "lissajous_curves",
+        "seismograph",
+        "GlassRack",
+        "biomagneticresonator",
+        "UnitCircleTrig",
+        "record_room",
+        "hallway_scene",
+        "synthesis_stand",
+        "samplevialrack",
+        "oscilloscope",
+        "double_helix_scene",
+        "spring_demo",
+        "SoundscapeRadioRack",
+        "petri_dish_worms",
+        "atmosphericmonitoring",
+        "chladni_plate",
+        "microscope",
+        "chemicalapparatus",
+        "multimeter"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "dna_specimen",
+        "token": "dna_specimen:0:0.4",
+        "cell": [
+          2,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dna_specimen/dna_specimen.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "holographicdisplay",
+        "token": "holographicdisplay:0:1",
+        "cell": [
+          3,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/holographicdisplay/holographicdisplay.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/holographicdisplay/holographicdisplay.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "electronicscales",
+        "token": "electronicscales:0:1",
+        "cell": [
+          4,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/electronicscales/electronicscales.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/electronicscales/electronicscales.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "air_music_display_case",
+        "token": "air_music_display_case:0:1",
+        "cell": [
+          1,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/air_music_display_case/air_music_display_case.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/air_music_display_case/air_music_display_case.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "additive_wave_demo",
+        "token": "additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true",
+        "cell": [
+          4,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/additive_wave_demo/additive_wave_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          7,
+          2
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biomagneticresonator",
+        "token": "biomagneticresonator:0:1",
+        "cell": [
+          9,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/biomagneticresonator/biomagneticresonator.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "UnitCircleTrig",
+        "token": "UnitCircleTrig:-90:0:0.1",
+        "cell": [
+          10,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "record_room",
+        "token": "record_room:-90:0",
+        "cell": [
+          12,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/record_room.json",
+            "scene": "res://commons/artifacts/record_room/record_room.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/record_room/record_room.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GlassRack",
+        "token": "GlassRack:0:0.8#config:spiral_tube",
+        "cell": [
+          2,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/glass_rack/GlassRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/glass_rack/GlassRackController.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hallway_scene",
+        "token": "hallway_scene:0:0:0.1",
+        "cell": [
+          8,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/sine_hallway/hallway_scene.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "synthesis_stand",
+        "token": "synthesis_stand#subject:hallway_scene#mode:hero",
+        "cell": [
+          10,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/synthesis.json",
+            "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/synthesis/synthesis_stand.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "lissajous_curves",
+        "token": "lissajous_curves:0:1:0.1",
+        "cell": [
+          2,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "seismograph",
+        "token": "seismograph",
+        "cell": [
+          2,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/seismograph/seismograph.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/seismograph/seismograph.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "samplevialrack",
+        "token": "samplevialrack:0:1",
+        "cell": [
+          9,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/samplevialrack/samplevialrack.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "oscilloscope",
+        "token": "oscilloscope:0:0.5",
+        "cell": [
+          10,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/oscilloscope/oscilloscope_artifact.gd",
+              "res://commons/artifacts/oscilloscope/oscilloscope_display.gd"
+            ]
+          },
+          {
+            "registry": "commons/artifacts/registry/lab.json",
+            "scene": "res://commons/artifacts/oscilloscope/oscilloscope.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/oscilloscope/oscilloscope.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "double_helix_scene",
+        "token": "double_helix_scene",
+        "cell": [
+          2,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "spring_demo",
+        "token": "spring_demo:0:0.5",
+        "cell": [
+          6,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/spring_demo/spring_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "SoundscapeRadioRack",
+        "token": "SoundscapeRadioRack:90:1.4",
+        "cell": [
+          7,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/audio/rack_configs/SoundscapeRadioRack.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "petri_dish_worms",
+        "token": "petri_dish_worms:180:0.8",
+        "cell": [
+          9,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/petri_dish_worms/petri_dish_worms.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "atmosphericmonitoring",
+        "token": "atmosphericmonitoring:180:1",
+        "cell": [
+          10,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "chladni_plate",
+        "token": "chladni_plate",
+        "cell": [
+          7,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/artifacts/chladni_plate/chladni_plate.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/chladni_plate/chladni_plate.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "microscope",
+        "token": "microscope:0:1",
+        "cell": [
+          7,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lab.json",
+            "scene": "res://commons/artifacts/microscope/microscope.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/microscope/microscope.gd"
+            ]
+          },
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/microscope/microscope.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/microscope/microscope.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "chemicalapparatus",
+        "token": "chemicalapparatus:0:1",
+        "cell": [
+          9,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/chemicalapparatus/chemicalapparatus.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/chemicalapparatus/chemicalapparatus.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "multimeter",
+        "token": "multimeter:0:1",
+        "cell": [
+          10,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://commons/lab/multimeter/multimeter.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/lab/multimeter/multimeter.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

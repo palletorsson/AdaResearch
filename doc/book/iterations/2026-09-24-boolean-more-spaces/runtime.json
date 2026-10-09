@@ -1,0 +1,324 @@
+{
+  "checks": [
+    {
+      "check": "ring CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "ring nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "ring triangle count",
+      "pass": true,
+      "triangles": 2954
+    },
+    {
+      "check": "ring half-loop 1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "ring half-loop 1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "ring half-loop -1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "ring half-loop -1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "ring core prevents a straight shortcut",
+      "pass": true
+    },
+    {
+      "check": "ring solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "ring ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "ring pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "ring ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "ring pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "ring ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "ring pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "ring ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "ring pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "ring surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "ring drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "ring drift can stop",
+      "pass": true
+    },
+    {
+      "check": "ring stopped phase holds",
+      "pass": true
+    },
+    {
+      "check": "capture ring-inside",
+      "pass": true
+    },
+    {
+      "check": "capture ring-entry",
+      "pass": true
+    },
+    {
+      "check": "capture ring-ceiling",
+      "pass": true
+    },
+    {
+      "check": "capture ring-return",
+      "pass": true
+    },
+    {
+      "check": "cross CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "cross nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "cross triangle count",
+      "pass": true,
+      "triangles": 1330
+    },
+    {
+      "check": "cross through route -1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "cross through route -1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "cross through route 1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "cross through route 1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "cross side branch -1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "cross side branch -1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "cross side branch 1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "cross side branch 1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "cross solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "cross ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "cross pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "cross ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "cross pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "cross ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "cross pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "cross ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "cross pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "cross surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "cross drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "cross drift can stop",
+      "pass": true
+    },
+    {
+      "check": "cross stopped phase holds",
+      "pass": true
+    },
+    {
+      "check": "capture cross-inside",
+      "pass": true
+    },
+    {
+      "check": "capture cross-entry",
+      "pass": true
+    },
+    {
+      "check": "capture cross-ceiling",
+      "pass": true
+    },
+    {
+      "check": "capture surface-0",
+      "pass": true
+    },
+    {
+      "check": "capture surface-1",
+      "pass": true
+    },
+    {
+      "check": "capture surface-2",
+      "pass": true
+    },
+    {
+      "check": "capture surface-3",
+      "pass": true
+    },
+    {
+      "check": "fold CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "fold nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "fold triangle count",
+      "pass": true,
+      "triangles": 294
+    },
+    {
+      "check": "fold through route -1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "fold through route -1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "fold through route 1 reached every waypoint",
+      "pass": true
+    },
+    {
+      "check": "fold through route 1 level support throughout",
+      "pass": true
+    },
+    {
+      "check": "fold solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "fold ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "fold pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "fold ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "fold pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "fold ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "fold pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "fold ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "fold pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "fold surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "fold drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "fold drift can stop",
+      "pass": true
+    },
+    {
+      "check": "fold stopped phase holds",
+      "pass": true
+    },
+    {
+      "check": "capture fold-inside",
+      "pass": true
+    },
+    {
+      "check": "capture fold-entry",
+      "pass": true
+    },
+    {
+      "check": "capture fold-ceiling",
+      "pass": true
+    }
+  ],
+  "scope": "Isolated production artifact with a 1.8m x 0.30m CharacterBody capsule. Native renders and pointer-event tests; not a headset or museum-loader test."
+}

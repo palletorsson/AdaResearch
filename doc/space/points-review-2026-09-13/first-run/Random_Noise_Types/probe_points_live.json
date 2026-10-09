@@ -1,0 +1,1119 @@
+{
+  "checks": 82,
+  "control_path": "REDRAW / NEW SEED / RULE / RESTORE through InteractableAreaButton.button_pressed (one argument); the live port presses NEW SEED and REDRAW through the desktop pointer and carries a point with the pointer's own grab",
+  "engine": "4.6-stable (official)",
+  "failures": [
+    "returning load repeats the original seeded clouds"
+  ],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Noise_Types",
+  "measurements": {
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "large_window.gd",
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "animated_folding_past.gd",
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "frame_counter_display.gd",
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "fire_extinguisher.gd",
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wooden_pallet.gd",
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "origin.gd",
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          5.5,
+          1.25,
+          1.5
+        ],
+        "cell": [
+          5,
+          1
+        ],
+        "scale": 1.0,
+        "script": "randompoint.gd",
+        "token": "randompoint"
+      },
+      {
+        "at": [
+          10.5,
+          0.0,
+          3.5
+        ],
+        "cell": [
+          10,
+          3
+        ],
+        "scale": 1.0,
+        "script": "randompoints.gd",
+        "token": "randompoints"
+      },
+      {
+        "at": [
+          4.5,
+          1.0,
+          4.5
+        ],
+        "cell": [
+          4,
+          4
+        ],
+        "scale": 0.05,
+        "script": "white_noise_spectrum.gd",
+        "token": "WhiteNoiseGallery"
+      },
+      {
+        "at": [
+          6.5,
+          1.0,
+          4.5
+        ],
+        "cell": [
+          6,
+          4
+        ],
+        "scale": 0.1,
+        "script": "noise_spectrum_3d.gd",
+        "token": "NoiseColors3D"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "gate:random noise types"
+      },
+      {
+        "at": [
+          5.0,
+          1.58,
+          6.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          8.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.0,
+          1.58,
+          9.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          11.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          1.58,
+          11.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.99,
+          1.58,
+          12.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          11.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.99,
+          1.58,
+          10.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.0,
+          1.58,
+          8.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.5,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "exit_sign.gd",
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wall_clock.gd",
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "electrical_panel.gd",
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.7,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "ceiling_vent.gd",
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          7.5,
+          0.42,
+          5.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      }
+    ],
+    "captions": [
+      [
+        "Caption_proposed",
+        0.0
+      ],
+      [
+        "Caption_admitted",
+        0.0
+      ]
+    ],
+    "captures": {
+      "admitted": {
+        "at": [
+          9.88,
+          1.33,
+          2.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.01,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "packed": {
+        "at": [
+          9.88,
+          1.33,
+          2.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.01,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          6.5,
+          13.0,
+          4.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -1.0,
+          0.01
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          10.5,
+          1.55,
+          1.3
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.19,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "proposed": {
+        "at": [
+          11.12,
+          1.33,
+          2.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.01,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          10.9,
+          1.02,
+          2.34
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.44,
+          0.9
+        ],
+        "is_ours": true
+      },
+      "violation": {
+        "at": [
+          10.26,
+          1.69,
+          2.86
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.25,
+          0.97
+        ],
+        "is_ours": true
+      },
+      "volumes": {
+        "at": [
+          10.5,
+          1.32,
+          5.35
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@1228",
+        "forward": [
+          0.0,
+          -0.03,
+          -1.0
+        ],
+        "is_ours": true
+      }
+    },
+    "clustered": {
+      "admitted": {
+        "accepted": 24,
+        "attempts": 24,
+        "closest": 0.0239516422152519,
+        "ghosts_shown": 0,
+        "refused": 0,
+        "short": 0
+      },
+      "candidate_budget_per_slot": 100,
+      "dimensions": [
+        0.899999976158142,
+        0.899999976158142,
+        0.119999997317791
+      ],
+      "ghost_positions": [],
+      "min_dist": 0.13,
+      "moved": 0,
+      "proposed": {
+        "accepted": 24,
+        "closest": 0.0293261110782623
+      },
+      "requested": 24,
+      "rule": "clustered",
+      "rule_now": "clustered",
+      "seed": 14899,
+      "shells": 0.065,
+      "under_distance": 82,
+      "volume": 0.9
+    },
+    "coordinate_labels": {
+      "hidden": 24,
+      "total": 24
+    },
+    "desktop_input": {
+      "after_restore": {
+        "moved": 0,
+        "under": 0
+      },
+      "grab": {
+        "capture_pose": {
+          "current_camera": "/root/@Node@1664/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            9.64,
+            1.6,
+            2.47
+          ],
+          "forward": [
+            0.47,
+            -0.18,
+            0.86
+          ],
+          "rig": [
+            9.64,
+            0.0,
+            2.47
+          ]
+        },
+        "distance": 1.13,
+        "held": "Admitted_12",
+        "held_after_release": "nothing",
+        "ray_finds": "Admitted_12",
+        "target": "Admitted_12",
+        "while_carried": {
+          "held_at": [
+            10.22,
+            1.39,
+            3.53
+          ],
+          "moved": 1,
+          "neighbour_gap": 0.09,
+          "under": 1
+        }
+      },
+      "panel_at": [
+        9.64,
+        1.02,
+        2.92
+      ],
+      "press_from": [
+        9.64,
+        2.47
+      ],
+      "press_new_seed": {
+        "control": "eum/Seg0_kanazawa-room-matrix/RandomPoints/Bench/Panel/Btn_1",
+        "hover": "matrix/RandomPoints/Bench/Panel/Btn_1/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.07,
+            -0.74,
+            0.67
+          ],
+          "camera_from": [
+            9.64,
+            1.6,
+            2.47
+          ],
+          "independent_ray": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            9.59,
+            1.12,
+            2.91
+          ]
+        },
+        "stand": [
+          9.64,
+          0.05,
+          2.47
+        ]
+      },
+      "press_redraw": {
+        "control": "eum/Seg0_kanazawa-room-matrix/RandomPoints/Bench/Panel/Btn_0",
+        "hover": "matrix/RandomPoints/Bench/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.07,
+            -0.74,
+            0.67
+          ],
+          "camera_from": [
+            9.64,
+            1.6,
+            2.47
+          ],
+          "independent_ray": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            9.69,
+            1.12,
+            2.91
+          ]
+        },
+        "stand": [
+          9.64,
+          0.05,
+          2.47
+        ]
+      },
+      "press_restore": {
+        "control": "eum/Seg0_kanazawa-room-matrix/RandomPoints/Bench/Panel/Btn_3",
+        "hover": "matrix/RandomPoints/Bench/Panel/Btn_3/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.07,
+            -0.82,
+            0.57
+          ],
+          "camera_from": [
+            9.64,
+            1.6,
+            2.47
+          ],
+          "independent_ray": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_3/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "zawa-room-matrix/RandomPoints/Bench/Panel/Btn_3/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            9.59,
+            1.03,
+            2.86
+          ]
+        },
+        "stand": [
+          9.64,
+          0.05,
+          2.47
+        ]
+      },
+      "stand_pose": {
+        "current_camera": "/root/@Node@1664/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          10.5,
+          1.6,
+          2.35
+        ],
+        "forward": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "rig": [
+          10.5,
+          0.0,
+          2.35
+        ]
+      }
+    },
+    "gallery_gaps": [
+      [
+        "WhiteNoiseGallery",
+        6.1,
+        [
+          4,
+          4
+        ]
+      ],
+      [
+        "NoiseColors3D",
+        4.1,
+        [
+          6,
+          4
+        ]
+      ],
+      [
+        "randompoint",
+        5.4,
+        [
+          5,
+          1
+        ]
+      ]
+    ],
+    "ghosts_drawn": 58,
+    "moved_by_hand": {
+      "after_restore": {
+        "home_again": true,
+        "moved": 0,
+        "under": 0
+      },
+      "moved": 1,
+      "placed_at": [
+        -0.38,
+        0.22,
+        0.02
+      ],
+      "shell_red": true,
+      "under": 1
+    },
+    "museum_severed": [],
+    "museum_walk_severed": [],
+    "new_seed": {
+      "now": 38574,
+      "same_points": false,
+      "was": 14899
+    },
+    "packing_limit": {
+      "closest": 0.13019996881485,
+      "kept": 51,
+      "min_dist": 0.13,
+      "refused": 5239,
+      "requested": 96,
+      "short": 45
+    },
+    "plinths": [
+      [
+        "ArtPlinth0",
+        7,
+        5,
+        0.0
+      ]
+    ],
+    "readout": [
+      "SEED 14899 · REQUEST 24 · 0.90 x 0.90 x 0.12 m",
+      "LEFT  kept 24 · closest 0.029 m",
+      "RIGHT spaced · kept 24 · closest 0.139 m",
+      "82 candidates = 24 kept + 58 refused",
+      "Ghosts: first 58 of 58 refusals · spacing 0.130 m",
+      "moved 0 · 0 pairs < d - 1 mm",
+      "Spacing applied at birth, not since"
+    ],
+    "redraw": {
+      "counts": [
+        [
+          "proposed",
+          24,
+          24
+        ],
+        [
+          "admitted",
+          24,
+          24
+        ]
+      ],
+      "same": true,
+      "worst_move": 0.0
+    },
+    "sampling": {
+      "admitted": {
+        "accepted": 24,
+        "attempts": 82,
+        "closest": 0.139007300138474,
+        "ghosts_shown": 58,
+        "refused": 58,
+        "short": 0
+      },
+      "candidate_budget_per_slot": 100,
+      "dimensions": [
+        0.899999976158142,
+        0.899999976158142,
+        0.119999997317791
+      ],
+      "ghost_positions": [
+        [
+          0.0658822059631348,
+          -0.414100825786591,
+          -0.0543199479579926
+        ],
+        [
+          0.360726237297058,
+          -0.344617456197739,
+          0.0548767410218716
+        ],
+        [
+          -0.412244886159897,
+          -0.358583509922028,
+          0.0400884486734867
+        ],
+        [
+          -0.271872341632843,
+          -0.415975719690323,
+          -0.020024698227644
+        ],
+        [
+          0.311263144016266,
+          -0.368958055973053,
+          -0.0257341265678406
+        ],
+        [
+          -0.178015619516373,
+          0.296587824821472,
+          -0.0503552109003067
+        ],
+        [
+          0.103492021560669,
+          -0.198611110448837,
+          -0.00713258609175682
+        ],
+        [
+          0.00674811005592346,
+          -0.376199066638947,
+          0.02016207203269
+        ],
+        [
+          -0.193971037864685,
+          0.291170418262482,
+          -0.000304386019706726
+        ],
+        [
+          0.133654654026031,
+          0.0371033251285553,
+          -0.0524606220424175
+        ],
+        [
+          -0.0847379863262177,
+          0.346044421195984,
+          0.0509997867047787
+        ],
+        [
+          -0.104469209909439,
+          0.35096287727356,
+          0.0571282468736172
+        ],
+        [
+          0.236439645290375,
+          0.419450640678406,
+          0.0576427392661572
+        ],
+        [
+          -0.394995003938675,
+          0.279455542564392,
+          -0.0119950696825981
+        ],
+        [
+          -0.0552946627140045,
+          -0.273176670074463,
+          -0.051880519837141
+        ],
+        [
+          -0.0683133602142334,
+          -0.0118445456027985,
+          -0.0353459380567074
+        ],
+        [
+          -0.38232347369194,
+          0.157648324966431,
+          -0.054429680109024
+        ],
+        [
+          0.258765399456024,
+          0.339583933353424,
+          0.0237366147339344
+        ],
+        [
+          0.0756941437721252,
+          -0.363147288560867,
+          0.0394490174949169
+        ],
+        [
+          -0.183042109012604,
+          0.261390566825867,
+          0.0251947902143002
+        ],
+        [
+          0.33105343580246,
+          0.106306910514832,
+          -0.00152980163693428
+        ],
+        [
+          -0.184366822242737,
+          -0.317975610494614,
+          0.00756442919373512
+        ],
+        [
+          -0.00875061750411987,
+          -0.397707432508469,
+          -0.0581601411104202
+        ],
+        [
+          0.149825692176819,
+          0.445433259010315,
+          0.0303650163114071
+        ],
+        [
+          -0.191945910453796,
+          -0.419873654842377,
+          0.0318136848509312
+        ],
+        [
+          -0.15470939874649,
+          -0.389904737472534,
+          -0.0557510405778885
+        ],
+        [
+          -0.205013141036034,
+          0.0798808932304382,
+          -0.0292716939002275
+        ],
+        [
+          0.0322258174419403,
+          0.259675264358521,
+          -0.0324573256075382
+        ],
+        [
+          0.0726888179779053,
+          0.199874341487885,
+          0.0222412087023258
+        ],
+        [
+          0.229587852954865,
+          -0.419440984725952,
+          0.00279829278588295
+        ],
+        [
+          0.140583276748657,
+          0.182460963726044,
+          -0.00441446527838707
+        ],
+        [
+          0.30735719203949,
+          0.227811872959137,
+          0.0458154045045376
+        ],
+        [
+          0.306101262569427,
+          -0.0385108888149261,
+          -0.048990398645401
+        ],
+        [
+          0.167350947856903,
+          0.051923394203186,
+          0.000914733856916428
+        ],
+        [
+          0.414413273334503,
+          -0.0609568655490875,
+          0.0204363875091076
+        ],
+        [
+          0.390987992286682,
+          -0.225050166249275,
+          -0.0500894710421562
+        ],
+        [
+          -0.318633049726486,
+          -0.157803863286972,
+          -0.0242900028824806
+        ],
+        [
+          0.385795652866364,
+          -0.201432764530182,
+          -0.0169632472097874
+        ],
+        [
+          0.231575429439545,
+          0.087679922580719,
+          0.0229677297174931
+        ],
+        [
+          0.316484332084656,
+          -0.117379993200302,
+          -0.016251128166914
+        ],
+        [
+          -0.188629150390625,
+          -0.128695160150528,
+          0.0471219755709171
+        ],
+        [
+          -0.238629594445229,
+          -0.0494794547557831,
+          -0.0518561117351055
+        ],
+        [
+          0.0834341049194336,
+          0.325148224830627,
+          -0.0242512449622154
+        ],
+        [
+          0.239910364151001,
+          -0.357571005821228,
+          -0.0068354606628418
+        ],
+        [
+          -0.0420593023300171,
+          0.272329688072205,
+          -0.0136356614530087
+        ],
+        [
+          0.0298547446727753,
+          -0.255776643753052,
+          0.0437284968793392
+        ],
+        [
+          -0.407866567373276,
+          0.0606541037559509,
+          -0.0424914211034775
+        ],
+        [
+          -0.172427892684937,
+          -0.392697751522064,
+          -0.0233950316905975
+        ],
+        [
+          -0.343383550643921,
+          -0.325549602508545,
+          0.046795692294836
+        ],
+        [
+          -0.426285475492477,
+          0.212058842182159,
+          -0.0582420639693737
+        ],
+        [
+          -0.380322933197021,
+          -0.0395420789718628,
+          -0.0219616629183292
+        ],
+        [
+          0.0750004053115845,
+          -0.342615783214569,
+          -0.0477737113833427
+        ],
+        [
+          -0.426060199737549,
+          0.126753091812134,
+          0.0249317996203899
+        ],
+        [
+          0.0388043820858002,
+          0.220940411090851,
+          -0.00543577596545219
+        ],
+        [
+          -0.108506232500076,
+          0.111000061035156,
+          -0.0371611788868904
+        ],
+        [
+          0.307885825634003,
+          -0.126784294843674,
+          -0.0152437798678875
+        ],
+        [
+          -0.256470680236816,
+          -0.0879209041595459,
+          0.0493409521877766
+        ],
+        [
+          0.417736113071442,
+          0.124778509140015,
+          -0.0179849676787853
+        ]
+      ],
+      "min_dist": 0.13,
+      "moved": 0,
+      "proposed": {
+        "accepted": 24,
+        "closest": 0.0293261110782623
+      },
+      "requested": 24,
+      "rule": "spaced",
+      "rule_now": "spaced",
+      "seed": 14899,
+      "shells": 0.065,
+      "under_distance": 0,
+      "volume": 0.9
+    },
+    "shell_radius": 0.065,
+    "tile": [
+      "4444411144444",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111440411114",
+      "4000044111114",
+      "4444411144444",
+      "4444441144444",
+      "4444441111144",
+      "4444444441144"
+    ],
+    "volume_frames": {
+      "admitted": [
+        0.91,
+        0.91,
+        0.13
+      ],
+      "proposed": [
+        0.91,
+        0.91,
+        0.13
+      ]
+    }
+  },
+  "physics_fps": 60
+}

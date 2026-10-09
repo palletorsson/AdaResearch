@@ -1,0 +1,28 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -2759,17 +2759,18 @@
+     },
+     "LSystems_Shape_Grammars": {
+       "primary_tokens": [
+-        "form_grammar_family"
+-      ],
+-      "reason": "Follow a cube through face operations, then separate parameter variation from changed selection; name a form the current rules cannot make.",
++        "form_grammar_family",
++        "form_grammar_canopy"
++      ],
++      "reason": "Read a cube family, add a curved-strip operation, then walk beneath the same surface at another scale. Separate saved parameters, operations, supports and bodily access.",
+       "status": "desktop_checked_headset_pending",
+       "sequence": "lsystems",
+       "text_path": "commons/maps/LSystems_Shape_Grammars/final.md",
+       "learner_verified": false,
+-      "local_review": "doc/book/iterations/2026-09-24-form-grammar-spine/index.html",
+-      "text_sha256": "9073477b1242a5e5eb2921c4c9a5f1d88d5eddb8fce32c5bb1c5113effc89671",
+-      "map_sha256": "1749c27a28295c364c526affe4c56483eee6ba9010dfd3f5cab18d3e0ea24e5a",
+-      "verification_scope": "Isolated production mesh/operation import, finite geometry, six surface collision rays, continuous capsule route, plinth refusal and five native images. Museum loader, tracked-headset, Quest and learner checks remain pending."
++      "local_review": "doc/book/iterations/2026-09-24-form-grammar-canopy/index.html",
++      "text_sha256": "d595d6c53e8785b12c6c4990f9cf04283e9610f61957c61c393f058a120b5bcb",
++      "map_sha256": "9f66cbfb8a2994adcd0bf60556ea3920c2706a7cdfa008d09efb0730aa0d584c",
++      "verification_scope": "66 isolated native checks, including 20 route segments, exact shared local geometry, uniform scale, two-sided surface collision and supports. Full museum-loader, tracked-headset, Quest and learner checks pending."
+     }
+   }
+ }

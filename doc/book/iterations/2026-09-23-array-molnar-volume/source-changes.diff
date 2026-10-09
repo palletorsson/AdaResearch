@@ -1,0 +1,371 @@
+--- before/commons/maps/Array/map_data.json
++++ commons/maps/Array/map_data.json
+@@ -1462,29 +1462,7 @@
+ 		"",
+         ""
+ 	  ],
+-	  [
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-		"",
+-        ""
+-	  ],
++	  ["", "", "", "", "", "", "", "", "", "", "molnar_cube_study:180:0#plinth:0", "", "", "", "", "", "", "", "", "", ""],
+ 	  [
+ 		"",
+ 		"",
+--- before/commons/maps/Array/intent.md
++++ commons/maps/Array/intent.md
+@@ -1,9 +1,9 @@
+-Concept: The same cube, counted. Four positions become a two-index plane; removing an occupant leaves an address.
++Concept: The same cube, counted. Four positions become a two-index plane; removing an occupant leaves an address. The transparent cube study then varies the form at each fixed site.
+ 
+ Sequence: array_tutorial; current order is declared in commons/maps/sequences/array_tutorial.json.
+ 
+-Encounter: One- and two-dimensional arrays share this opening hall. Compare row_3_x with grid_2d_4x4, then continue to the third index. Keep column_3_z, xyz_coordinates, gridagent and pulsar_visualizer as supporting work.
++Encounter: One- and two-dimensional arrays share this opening hall. Compare row_3_x with grid_2d_4x4, then visit molnar_cube_study: repeated transforms can differ while addresses remain. Its one-to-four visible layers prepare the full-scale third-index hall. Keep column_3_z, xyz_coordinates, gridagent and pulsar_visualizer as supporting work.
+ 
+ Critical question: What does the representation preserve, what can the body do here, and which rule would need to change to admit an exception?
+ 
+-Status: Implemented first pass, 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
++Status: Cube study added and chapter extended, 2026-09-23. Current evidence: doc/book/iterations/2026-09-23-array-molnar-volume. Supplied pointer events and an actual-body circuit pass in an isolated production museum. Earlier first pass: 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
+--- before/commons/maps/Array/technical.md
++++ commons/maps/Array/technical.md
+@@ -0,0 +1,31 @@
++# Array — current encounter notes
++
++Updated 23 September 2026. The chapter remains in final.md; these notes describe the new Molnár-inspired cube study and its evidence.
++
++## Three encounters
++
++The active primary order is row_3_x → grid_2d_4x4 → molnar_cube_study. The row and grid retain their collection/absence behavior and code. The added study separates indexed identity from displayed position, orientation and size, and prepares Tutorial_3D without replacing its full-scale flight encounter.
++
++## Transparent cube study
++
++Source: commons/artifacts/molnar_cube_study/molnar_cube_study.gd and .tscn. Registry: commons/artifacts/registry/molnar_cube_study.json. Array placement: (10,16), yaw 180 degrees, no automatic plinth.
++
++The array contains 4×4×4 sites, 0.56 m apart, with four nested frames per site. Their ordered outer edge is 0.44 m; nested fractions are 1, 0.76, 0.52 and 0.28. A repeatable per-site seed assigns a displacement, three Euler angles and a uniform scale departure to each frame. The three sliders multiply these stored departures. They do not resample them. At full control range, displacement is at most 0.07 m on each axis, angles at most 24 degrees on each Euler component, and uniform scale factor between 0.75 and 1.25. Operations are composed as scale, rotation, then translation in each frame pose.
++
++All 64 sites and 256 frames are allocated once. DEPTH changes visible counts, from 16 sites/64 frames to 64 sites/256 frames; it is not a memory-allocation experiment. RESET restores the three amounts to zero, preserving the selected visible layer count. Fixed grey markers stay at each indexed site. They are position markers, not printed address labels. No claim that the visitor can edit an individual cell from these three global controls: the controls vary the extent of already distinct per-frame decisions.
++
++The edge geometry is shared in one MultiMesh. The 64 outer faces use low alpha; inner cubes are edges. No per-frame processing runs at rest. Animation interpolates control changes. This is a bounded exhibit, not a measured Quest performance benchmark.
++
++A 3 m plinth carries the volume. Controls are at 0.96, 1.105 and 1.25 m; the depth/reset buttons sit beside them. Existing shared desktop pointer and XR grab/button mechanisms are used. A 6×6 m floor pad, 0.03 m thick, supplies a continuous walk around the display after the first physical probe found an existing floor drop. Other source grid cells were preserved.
++
++## Attribution and shared figure
++
++After Vera Molnár, (Des)Ordres (1974): https://dam.org/museum/artists_ui/artists/molnar-vera/des-ordres/. Our cube geometry, third dimension, stored departures and controls are an Ada Research interpretation. Do not attribute this particular algorithm or 3D object to Molnár. The earlier vera_molnar_des_ordres artifact remains intact.
++
++The book uses native Godot captures of this same production scene. tools/probes/molnar_book_plates.gd renders selected poses in a neutral photographic stage, hiding the plinth and controls; it does not change cube geometry. The first two views show one layer at zero and combined amounts (0.7,0.7,0.6); the third shows four layers at those amounts. The composed illustration crops a small lower image margin containing an unrelated HUD. It is a book plate, not a museum screenshot. Actual museum images are provided separately.
++
++## Evidence and limits
++
++Review: doc/book/iterations/2026-09-23-array-molnar-volume/index.html. Runtime: report.json, source_manifest.json and molnar_volume.gd in that directory. 38 checks pass, including real pointer callbacks for all controls, repeated-setting equivalence, fixed indices, geometry bounds, and supplied walking input for the actual museum body around all sides of the plinth. This is not a continuous entrance-to-exit test, headset comfort check or learner observation.
++
++Existing startup output includes the unrelated unrecognized UID rwex60pqapc and GridStructureComponent invalid-position warnings from gridagent. They did not fail the new study checks; they remain separate follow-ups. No live museum was restarted and no live bake/save was overwritten.
+--- before/commons/maps/sequences/array_tutorial.json
++++ commons/maps/sequences/array_tutorial.json
+@@ -35,7 +35,8 @@
+ 		  "position": "intro",
+ 		  "artifacts": [
+ 			"row_3_x",
+-            "grid_2d_4x4"
++            "grid_2d_4x4",
++            "molnar_cube_study"
+ 		  ],
+ 		  "rationale": "Array: The same cube, counted",
+ 		  "size_budget": "environment"
+@@ -112,7 +113,8 @@
+ 	  "position": "intro",
+ 	  "artifacts": [
+ 		"row_3_x",
+-        "grid_2d_4x4"
++        "grid_2d_4x4",
++            "molnar_cube_study"
+ 	  ],
+ 	  "rationale": "Array: The same cube, counted",
+ 	  "size_budget": "environment"
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -278,19 +278,21 @@
+     "Array": {
+       "primary_tokens": [
+         "row_3_x",
+-        "grid_2d_4x4"
+-      ],
+-      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
++        "grid_2d_4x4",
++        "molnar_cube_study"
++      ],
++      "reason": "Row and grid introduce indexed occupancy; the Molnar-inspired transparent cube study varies transforms at fixed sites before the full-scale third-index hall.",
+       "status": "source_checked_draft",
+       "sequence": "array_tutorial",
+       "text_path": "commons/maps/Array/final.md",
+-      "text_sha256": "652632a47e288116a10f441ccfee7e1b0cb3ffb2049e4669c392c026a07bda29",
+-      "map_sha256": "145c2a42631238031ab3884ab7a2fcaf640f512122c6582bccdb2a375a7247f2",
++      "text_sha256": "cf2bc21e3d3996e2eed9088f7519fea23a00352444e996f6b44037f85171d7f0",
++      "map_sha256": "7cc10589031a334d23545490a3298a91651847db1e00ccfea8ce7b7ffabedc2d",
+       "learner_verified": false,
+       "pilot_action_id": "array-addresses-persist",
+       "runtime_check": {
+-        "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+-        "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
++        "evidence": "doc/book/iterations/2026-09-23-array-molnar-volume/report.json",
++        "scope": "38 focused checks for the new study: production museum placement, supplied pointer controls, deterministic transforms, fixed indices, bounded geometry and an actual-body circuit around the plinth. Not a full hall or headset/learner test.",
++        "earlier_evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+       }
+     },
+     "Tutorial_Single": {
+--- before/commons/artifacts/molnar_cube_study/molnar_cube_study.gd
++++ commons/artifacts/molnar_cube_study/molnar_cube_study.gd
+@@ -0,0 +1,170 @@
++extends Node3D
++## A spatial interpretation after Vera Molnar's (Des)Ordres (1974), not a reconstruction.
++## Fixed indexed sites; repeatable local departures; no random resampling during interaction.
++signal state_changed(state: Dictionary)
++const SLIDER = preload("res://commons/interactables/slider_horizontal.tscn")
++const COUNT := 4
++const SHELLS := 4
++const STEP := 0.56
++const EDGE := 0.44
++const CENTRE := Vector3(0,1.85,0)
++const NEST := [1.0,0.76,0.52,0.28]
++var amount := Vector3(0.22,0.32,0.18)
++var target_amount := amount
++var depth_layers := 4
++var cells: Array[Dictionary] = []
++var sliders: Array[Node3D] = []
++var buttons: Array[Node3D] = []
++var frames: MultiMeshInstance3D
++var sites: MultiMeshInstance3D
++var glass: Array[MeshInstance3D] = []
++var layer_label: Label3D
++var count_label: Label3D
++var _built := false
++
++func _ready() -> void:
++	_build_data()
++	_build_display()
++	_build_controls()
++	_built=true
++	_refresh()
++	set_process(false)
++
++func _build_data() -> void:
++	for z in COUNT:
++		for y in COUNT:
++			for x in COUNT:
++				var home:=CENTRE+Vector3(x-1.5,y-1.5,1.5-z)*STEP
++				var rng:=RandomNumberGenerator.new()
++				rng.seed=74000+x*997+y*7919+z*65537
++				var departures:Array[Dictionary]=[]
++				for shell in SHELLS:
++					departures.append({"offset":Vector3(rng.randf_range(-0.07,0.07),rng.randf_range(-0.07,0.07),rng.randf_range(-0.07,0.07)),"angles":Vector3(rng.randf_range(-24,24),rng.randf_range(-24,24),rng.randf_range(-24,24))*(PI/180.0),"scale_delta":rng.randf_range(-0.25,0.25)})
++				cells.append({"address":Vector3i(x,y,z),"home":home,"departures":departures})
++
++func frame_pose(index: int, shell: int) -> Transform3D:
++	var cell:Dictionary=cells[index]
++	var decision:Dictionary=cell.departures[shell]
++	var size:float=EDGE*NEST[shell]*(1.0+amount.z*decision.scale_delta)
++	var turn:=Basis.from_euler(decision.angles*amount.y)
++	return Transform3D(turn.scaled(Vector3.ONE*size),cell.home+decision.offset*amount.x)
++
++func set_operation(axis: int, value: float) -> void:
++	if axis<0 or axis>2:return
++	target_amount[axis]=clampf(value,0.0,1.0)
++	set_process(true)
++
++func _process(delta: float) -> void:
++	amount=amount.move_toward(target_amount,delta*2.2)
++	_refresh()
++	if amount.is_equal_approx(target_amount):
++		amount=target_amount
++		set_process(false)
++
++func set_layers(value: int) -> void:
++	depth_layers=clampi(value,1,COUNT)
++	if _built:_refresh()
++
++func cycle_layers() -> void:
++	set_layers(1 if depth_layers==4 else depth_layers+1)
++
++func reset_order() -> void:
++	target_amount=Vector3.ZERO
++	for slider in sliders:slider.set_normalized_value(0.0)
++	set_process(true)
++
++func _refresh() -> void:
++	var visible_cells:=COUNT*COUNT*depth_layers
++	frames.multimesh.visible_instance_count=visible_cells*SHELLS
++	sites.multimesh.visible_instance_count=visible_cells
++	for i in cells.size():
++		for shell in SHELLS:frames.multimesh.set_instance_transform(i*SHELLS+shell,frame_pose(i,shell))
++		glass[i].transform=frame_pose(i,0)
++		glass[i].visible=i<visible_cells
++	count_label.text="%d SITES  /  %d NESTED CUBES" % [visible_cells,visible_cells*SHELLS]
++	layer_label.text="DEPTH  %d / 4" % depth_layers
++	state_changed.emit({"translation":amount.x,"rotation":amount.y,"scale":amount.z,"layers":depth_layers,"sites":visible_cells,"frames":visible_cells*SHELLS})
++
++func _material(c: Color, flat:=false) -> StandardMaterial3D:
++	var mat:=StandardMaterial3D.new()
++	mat.albedo_color=c;mat.roughness=0.65
++	if flat:mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
++	return mat
++
++func _box(title:String,size:Vector3,at:Vector3,mat:Material,solid:=false) -> MeshInstance3D:
++	var n:=MeshInstance3D.new();n.name=title;n.position=at
++	var mesh:=BoxMesh.new();mesh.size=size;n.mesh=mesh;n.material_override=mat;add_child(n)
++	if solid:
++		var body:=StaticBody3D.new();var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=size
++		shape.shape=box;body.add_child(shape);n.add_child(body)
++	return n
++
++func _label(words:String,at:Vector3,pixels:int=26) -> Label3D:
++	var n:=Label3D.new();n.text=words;n.position=at;n.font_size=pixels;n.pixel_size=0.0015
++	n.modulate=Color(0.1,0.1,0.1);n.outline_size=0;n.no_depth_test=false;add_child(n)
++	return n
++
++func _frame_mesh() -> ArrayMesh:
++	# One shared mesh (12 narrow bars), instanced once per nested cube.
++	var unit:=BoxMesh.new();var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
++	for axis in 3:
++		for a in [-0.5,0.5]:
++			for b in [-0.5,0.5]:
++				var at:=Vector3.ZERO;var size:=Vector3.ONE*0.008
++				size[axis]=1.008;at[(axis+1)%3]=a;at[(axis+2)%3]=b
++				st.append_from(unit,0,Transform3D(Basis.from_scale(size),at))
++	return st.commit()
++
++func _batch(title:String,mesh:Mesh,mat:Material,count:int) -> MultiMeshInstance3D:
++	var n:=MultiMeshInstance3D.new();n.name=title
++	var mm:=MultiMesh.new();mm.transform_format=MultiMesh.TRANSFORM_3D;mm.mesh=mesh;mm.instance_count=count
++	n.multimesh=mm;n.material_override=mat;n.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;add_child(n)
++	return n
++
++func _build_display() -> void:
++	var paper:=_material(Color(0.88,0.87,0.83))
++	var ink:=_material(Color(0.075,0.08,0.085),true)
++	_box("GalleryFloor",Vector3(6.0,0.03,6.0),Vector3(0,0.015,0),_material(Color(0.23,0.24,0.25)),true)
++	_box("LowPlinth",Vector3(3.0,0.40,3.0),Vector3(0,0.20,0),paper,true)
++	_box("FloatingLip",Vector3(3.06,0.025,3.06),Vector3(0,0.405,0),ink)
++	frames=_batch("NestedCubeFrames",_frame_mesh(),_material(Color(0.84,0.86,0.86),true),COUNT*COUNT*COUNT*SHELLS)
++	var dot:=SphereMesh.new();dot.radius=0.009;dot.height=0.018;dot.radial_segments=8;dot.rings=4
++	sites=_batch("FixedSites",dot,_material(Color(0.35,0.35,0.35),true),cells.size())
++	var clear:=_material(Color(0.83,0.87,0.89,0.035))
++	clear.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;clear.roughness=0.12;clear.metallic=0.08
++	var unit:=BoxMesh.new()
++	for i in cells.size():
++		sites.multimesh.set_instance_transform(i,Transform3D(Basis.IDENTITY,cells[i].home))
++		var pane:=MeshInstance3D.new();pane.name="ClearCell_%d" % i;pane.mesh=unit;pane.material_override=clear
++		pane.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;add_child(pane);glass.append(pane)
++	_label("AFTER VERA MOLNAR  /  (DES)ORDRES, 1974",Vector3(0,0.26,1.505),24)
++	_label("A SPATIAL STUDY BY ADA RESEARCH",Vector3(0,0.19,1.505),19)
++
++func _build_controls() -> void:
++	var existing:=get_children()
++	var paper:=_material(Color(0.89,0.88,0.85));var graphite:=_material(Color(0.14,0.15,0.16))
++	_box("ControlFoot",Vector3(0.72,0.04,0.48),Vector3(0,0.02,1.87),graphite,true)
++	_box("ControlStem",Vector3(0.09,0.97,0.09),Vector3(0,0.505,1.80),graphite,true)
++	_box("SmallRail",Vector3(1.12,0.66,0.05),Vector3(0,1.10,1.88),paper,true)
++	count_label=_label("",Vector3(0,1.385,1.913),19)
++	var names:=["TRANSLATE","ROTATE","SCALE"]
++	for i in 3:
++		var slider:Node3D=SLIDER.instantiate();slider.name=names[i];slider.position=Vector3(-0.19,1.25-i*0.145,1.93);slider.scale=Vector3.ONE*1.65
++		add_child(slider);slider.set_param_name(names[i]);slider.set_range(0,1);slider.set_normalized_value(amount[i])
++		slider.slider_moved.connect(func(_value):set_operation(i,slider.get_normalized_value()))
++		for part in slider.find_children("*","MeshInstance3D",true,false):
++			if part.name=="AccentMesh":part.set_surface_override_material(0,_material(Color(0.22,0.22,0.22)))
++		sliders.append(slider)
++	var actions:Array[Callable]=[cycle_layers,reset_order]
++	for i in 2:
++		var button:Node3D=load("res://commons/interactables/push_button.tscn").instantiate()
++		button.name="LayersButton" if i==0 else "ResetButton";button.position=Vector3(0.33,1.22-i*0.22,1.975)
++		button.rotation_degrees=Vector3(90,0,0);button.scale=Vector3.ONE*1.2
++		button.released_color=Color(0.35,0.35,0.35);button.pressed_color=Color.WHITE
++		add_child(button);button.pressed.connect(actions[i]);buttons.append(button)
++	layer_label=_label("",Vector3(0.33,1.30,1.935),17)
++	_label("RESET",Vector3(0.33,1.08,1.935),17)
++	_label("WALK AROUND. KEEP AN ADDRESS IN MIND.",Vector3(0,0.83,1.915),17)
++	var rig:=Node3D.new();rig.name="ControlRig";add_child(rig)
++	for child in get_children():
++		if child!=rig and child not in existing:child.reparent(rig)
+--- before/commons/artifacts/molnar_cube_study/molnar_cube_study.tscn
++++ commons/artifacts/molnar_cube_study/molnar_cube_study.tscn
+@@ -0,0 +1,4 @@
++[gd_scene load_steps=2 format=3]
++[ext_resource type="Script" path="res://commons/artifacts/molnar_cube_study/molnar_cube_study.gd" id="1"]
++[node name="MolnarCubeStudy" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/artifacts/registry/molnar_cube_study.json
++++ commons/artifacts/registry/molnar_cube_study.json
+@@ -0,0 +1,53 @@
++{
++  "artifacts": {
++    "molnar_cube_study": {
++      "lookup_name": "molnar_cube_study",
++      "name": "At each address, a decision - after Molnar",
++      "scene": "res://commons/artifacts/molnar_cube_study/molnar_cube_study.tscn",
++      "category": "arrays",
++      "complexity": "beginner",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "footprint": [
++        6,
++        3.3,
++        6
++      ],
++      "parameters": {
++        "footprint": [
++          6,
++          3.3,
++          6
++        ],
++        "size_group": "large"
++      },
++      "description": "Transparent nested cube frames at 4 x 4 x 4 fixed sites. Three reachable sliders independently vary translation, rotation and uniform scale using stable per-site decisions. Depth reveals one to four layers; reset restores the ordered geometry. A spatial interpretation after Vera Molnar’s (Des)Ordres, not a reconstruction of her algorithm.",
++      "interactions": [
++        "Walk around to distinguish the front projection from depth.",
++        "Drag TRANSLATE, ROTATE and SCALE, separately or together.",
++        "Press DEPTH to reveal one through four indexed layers.",
++        "Press RESET to restore all three operation amounts to zero."
++      ],
++      "qfep_connection": "An index retains an identity while visible placement, orientation and size vary. The variation is bounded by authored ranges; local difference need not erase the shared arrangement.",
++      "references": [
++        {
++          "title": "Vera Molnar, (Des)Ordres, 1974 - Digital Art Museum",
++          "url": "https://dam.org/museum/artists_ui/artists/molnar-vera/des-ordres/"
++        }
++      ],
++      "tags": [
++        "array",
++        "molnar",
++        "transformation",
++        "transparent",
++        "nested cubes",
++        "regularity"
++      ],
++      "dev_themes": [
++        "arrays",
++        "transformation",
++        "art"
++      ]
++    }
++  }
++}

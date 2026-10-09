@@ -1,0 +1,94 @@
+{
+	"approaches": [
+		{
+			"clear": false,
+			"direction": [
+				-0.000440484815044329,
+				0.0,
+				-0.999999940395355
+			],
+			"passed": false,
+			"supported": false,
+			"travel": 1.0
+		},
+		{
+			"clear": true,
+			"direction": [
+				-0.999999940395355,
+				0.0,
+				0.000440528528997675
+			],
+			"passed": true,
+			"supported": true,
+			"travel": 1.0
+		},
+		{
+			"clear": false,
+			"direction": [
+				0.999999940395355,
+				0.0,
+				-0.000440441101090983
+			],
+			"passed": false,
+			"supported": false,
+			"travel": 1.0
+		}
+	],
+	"artifact_position": [
+		9.29581546783447,
+		1.50783884525299,
+		9.49313068389893
+	],
+	"checks": [
+		{
+			"message": "Requested polyhedra hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored artifact found",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits beside the exhibit",
+			"passed": true
+		},
+		{
+			"message": "A supported clear final metre reaches the object",
+			"passed": true
+		},
+		{
+			"message": "GrabTrihedron in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "GrabTrihedron within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "GrabTrihedron has a clear native grab ray",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 1.49907586723566,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/GrabTrihedron",
+			"horizontal_distance": 0.500000059604645,
+			"label": "GrabTrihedron"
+		}
+	],
+	"failures": [],
+	"floor": {
+		"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+		"height": -0.0000000968575477600098
+	},
+	"passed": true,
+	"room": "Primitives_Polythedra",
+	"scope": "Actual authored hall; static reach, approach and native grab geometry. Desktop capture, no headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	],
+	"standing_obstacles": []
+}

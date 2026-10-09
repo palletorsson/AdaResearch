@@ -1,0 +1,83 @@
+--- before/commons/player/super_drag_outfit.gd
++++ current/commons/player/super_drag_outfit.gd
+@@ -12,16 +12,26 @@
+ var headpiece: Node3D
+ var sleeves: Array[MeshInstance3D] = []
+ var gloves: Array[MeshInstance3D] = []
++var growth_stage: int = 0
++var growth_enabled: bool = false
++var _growth_amount: float = 0.0
++var _growth_tween: Tween
++var _growth_trims: Array[Dictionary] = []
++const SKIRT_WAIST := -0.515
++
+ 
+ func dress(id: String) -> bool:
+ 	if not LOOKS.has(id):
+ 		return false
++	if _growth_tween and _growth_tween.is_valid():
++		_growth_tween.kill()
+ 	look_id = id
+ 	for child in get_children():
+ 		remove_child(child)
+ 		child.queue_free()
+ 	sleeves.clear()
+ 	gloves.clear()
++	_growth_trims.clear()
+ 	var index: int = LOOKS.find(id)
+ 	var colors := [Color("d91e83"), Color("71e9e0"), Color("b666eb"), Color("f4d7dc")]
+ 	var finishes := ["latex", "chrome", "holo", "pearl"]
+@@ -82,7 +92,8 @@
+ 				for i in range(18):
+ 					var a := float(i) / 18.0 * TAU
+ 					var radius := 0.23 + tier * 0.095
+-					_ball(self, "PearlHem", Vector3(cos(a) * radius, -0.72 - tier * 0.27, sin(a) * radius * 0.8), Vector3.ONE * 0.07, fabric)
++					var pearl := _ball(self, "PearlHem", Vector3(cos(a) * radius, -0.72 - tier * 0.27, sin(a) * radius * 0.8), Vector3.ONE * 0.07, fabric)
++					_growth_trims.append({"node": pearl, "rest": pearl.position})
+ 			for side in [-1.0, 1.0]:
+ 				_ball(self, "RococoSleeve", Vector3(side * 0.31, -0.2, 0), Vector3(0.30, 0.29, 0.29), fabric)
+ 			for i in range(9):
+@@ -91,6 +102,8 @@
+ 		mesh.layers = HEAD_LAYER
+ 	_original_skirt_material = get_node("Skirt").material_override
+ 	apply_skirt_fabric(skirt_fabric)
++	if growth_enabled:
++		_apply_growth(_growth_amount)
+ 	return true
+ 
+ func follow(head: Node3D, left: Node3D, right: Node3D) -> void:
+@@ -143,3 +156,34 @@
+ 	skirt.extra_cull_margin=0.08
+ 	skirt.material_override=_original_skirt_material if recipe.is_empty() else preload("res://commons/artifacts/fabric_shader_studio/fabric_recipe.gd").material(recipe)
+ 	return true
++
++## A retained skirt mesh lengthens and fills; fabric/UV addresses stay its own.
++## The visit supplies the target. Time only eases towards that target.
++func set_growth(value: int, maximum: int = 24, animate: bool = false) -> void:
++	growth_enabled = true
++	growth_stage = clampi(value, 0, maxi(1, maximum))
++	var target := float(growth_stage) / float(maxi(1, maximum))
++	if _growth_tween and _growth_tween.is_valid():
++		_growth_tween.kill()
++	if animate and is_inside_tree() and not is_equal_approx(_growth_amount, target):
++		_growth_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
++		_growth_tween.tween_method(_apply_growth, _growth_amount, target, 1.4)
++	else:
++		_apply_growth(target)
++
++
++func _apply_growth(amount: float) -> void:
++	_growth_amount = clampf(amount, 0.0, 1.0)
++	var skirt := get_node_or_null("Skirt") as MeshInstance3D
++	if skirt == null:
++		return
++	var shape := skirt.mesh as CylinderMesh
++	if shape == null:
++		return
++	var width := lerpf(0.65, 1.15, _growth_amount)
++	shape.height = lerpf(0.50, 0.90, _growth_amount)
++	shape.bottom_radius = (0.26 if look_id == "holo_fan" else 0.43) * width
++	skirt.position.y = SKIRT_WAIST - shape.height * 0.5
++	for trim in _growth_trims:
++		var rest: Vector3 = trim.rest
++		trim.node.position = Vector3(rest.x * width, SKIRT_WAIST + (rest.y - SKIRT_WAIST) * shape.height / 0.85, rest.z * width)

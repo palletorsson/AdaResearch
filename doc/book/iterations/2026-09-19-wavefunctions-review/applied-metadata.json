@@ -1,0 +1,431 @@
+[
+  {
+    "path": "commons/maps/WaveFunctions_Intro/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "What is oscillation? Periodic motion between extremes",
+      "The sine wave: x = A·sin(ωt + φ)",
+      "Parameters: Amplitude, Frequency, Phase",
+      "Harmonic motion in springs and pendulums",
+      "Visualizing waveforms on an oscilloscope"
+    ],
+    "new": [
+      "Distinguish two returns to the same position by the sign of angular velocity",
+      "Read a restoring acceleration, velocity update and angle update as a state loop",
+      "Compare release position and tangent hand velocity with the standard prediction",
+      "Compare integrated pendulum motion with prescribed cube motion and a signal-driven cube"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Pendulum/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Gravity creates oscillation",
+      "Simple pendulum mechanics",
+      "Spring-mass systems",
+      "Pendulum wave patterns",
+      "Chaos: double pendulum sensitivity"
+    ],
+    "new": [
+      "Read sample age as spatial depth rather than motion of the original bob",
+      "Compare target intervals with actual physics-tick sample gaps",
+      "Compare FINE, COARSE and STROBE under point-count and age limits",
+      "Relate the pendulum record to the secondary drum, canvas and point recorders"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Sine wave fundamentals: sin(t) oscillation",
+      "Simple harmonic motion (SHM)",
+      "Amplitude and frequency parameters",
+      "Multiple oscillators and phase relationships",
+      "Spatial phase offset creating wave propagation"
+    ],
+    "new": [
+      "Compare sphere size and relief on one stationary colliding sine surface",
+      "Interpret outlet, other-exit and still-in counts at a stated deadline",
+      "Compare a moving layered wall with walking past its frozen form",
+      "Distinguish relative phase, local-X gap and collision support"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Rotation creates oscillation",
+      "Angular motion fundamentals",
+      "Unit circle → sine/cosine projection",
+      "Oscillating bridges as embodied wave experience"
+    ],
+    "new": [
+      "Predict horizontal and vertical coordinate projections at four reference angles",
+      "Read sine and cosine as projections of angular progression on a unit circle",
+      "Distinguish a graph axis from the physical path of the rotating point",
+      "Recognise the finite sampled construction without assuming it is a verified walking route"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Intro/map_data.json",
+    "keys": [
+      "documentation",
+      "key_elements"
+    ],
+    "old": [
+      "control_pendulum#reference:plumb#evidence:trace - the primary: a grabbable bob, a plumb line and a ring at the rest point that lights at each centre crossing, the label reading the angle and the signed angular velocity, and the predicted theta(t) drawn behind the swing",
+      "pickup_cube_static / transformation_cube / y_oscillation_cube - stationary and prescribed sin(t) motions kept as the comparison: told where to be, not integrated",
+      "rotating_cube / rotating_cube_demo - constant angular velocity, no return",
+      "oscillation_controlled_cube - driven by the pendulum's oscillation_updated signal: one integrated signal, three transformations",
+      "mario_cube_time_trace - a trail of its own child cube's prescribed sin(t) motion along +z: the history of a motion told where to be, not of the swing; the handoff to the Pendulum room",
+      "SphericalHarmonics, science_screen#mode:wave - secondary"
+    ],
+    "new": [
+      "control_pendulum#reference:plumb#evidence:trace - the primary: a grabbable bob, a plumb line and a ring at the rest point that lights at each centre crossing, the label reading the angle and the signed angular velocity, and the predicted theta(t) drawn behind the swing",
+      "pickup_cube_static / transformation_cube / y_oscillation_cube - stationary and prescribed sin(t) motions kept as the comparison: told where to be, not integrated",
+      "rotating_cube / rotating_cube_demo - constant angular velocity; orientation returns while the accumulated angle can continue increasing",
+      "oscillation_controlled_cube - driven by the pendulum's oscillation_updated signal: one integrated signal, three transformations",
+      "mario_cube_time_trace - a trail of its own child cube's prescribed sin(t) motion along +z: the history of a motion told where to be, not of the swing; the handoff to the Pendulum room",
+      "SphericalHarmonics, science_screen#mode:wave - secondary"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Pendulum/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "Where a movement puts its past. One pendulum swings under a gallows frame at the head of the open south half; every 25 ms its position is kept together with the time it was taken, and drawn behind the bob at 0.6 m per second of age, so the record recedes down the hall toward the exit. Two limits hold the record: 300 marks and 10 s. A panel on the walk-side post switches the sampler (FINE 25 ms, COARSE 200 ms, STROBE once per measured period) and resets this experiment; a cased readout beside the trail prints the count, the span kept, the interval, the depth rate and the period. The seismograph and the Foucault rig keep other records on other clocks. Structure recovered 2026-09-10: interior 2 = platform, perimeter w, wall_height 3.",
+    "new": "Where a movement puts its past. One pendulum swings under a gallows frame at the head of the open south half; at a target interval of 25 ms, serviced on physics ticks, its position is kept together with the time it was taken, and drawn behind the bob at 0.6 m per second of age, so the record recedes down the hall toward the exit. Two limits hold the record: 300 marks and 10 s. A panel on the walk-side post switches the sampler (FINE 25 ms, COARSE 200 ms, STROBE once per measured period) and resets this experiment; a cased readout beside the trail prints the count, the span kept, the interval, the depth rate and the period. The seismograph and the Foucault rig keep other records on other clocks. Structure recovered 2026-09-10: interior 2 = platform, perimeter w, wall_height 3."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "Walk into a deep amphitheater where the unit circle reveals the origin of all oscillation. A point rotating on a circle projects its shadow as a sine wave. Elevated ramparts frame the void where the unit circle animator floats, while oscillating bridges at the base make the wave physical—the ground moves under your feet. Rotation is the hidden engine behind every sine and cosine.\n\n[Placement applied humanoid_walker engine — constraint 0.798→0.976, walkability 0.614→0.474]",
+    "new": "A turning point and its two coordinate projections reveal one construction of sine and cosine after the preceding encounters with motion, records and sine-shaped space. A finite sequence of colliding steps unfolds the selected coordinate into a graph. Supporting wave artifacts remain; their resemblance to bridges does not establish a verified walking route."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+    "keys": [
+      "documentation",
+      "layout"
+    ],
+    "old": "13x14 floor with a walkway leading to an elevated unit circle platform under a dark dome.",
+    "new": "The unit-circle construction and supporting oscillating bridge and curve occupy the entry end of the authored platform-and-basin plan. The teleporter is at (10,2); the cube and colour balls remain at (1,11) and (2,11)."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+    "keys": [
+      "documentation",
+      "objective"
+    ],
+    "old": "Navigate the walkway to explore the advanced unit circle animator.",
+    "new": "Follow four positions around the circle, predict a quarter of the adjacent graph, then distinguish coordinate projection from physical motion through the room."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+    "keys": [
+      "documentation",
+      "key_elements"
+    ],
+    "old": [
+      "Spawn `s` at the start of the ramp",
+      "Walkway `wp` guiding players across the span",
+      "`unit_circle_advanced` feature at the platform",
+      "Teleporter `t` beyond the exhibit"
+    ],
+    "new": [
+      "Spawn token sp at (0,0)",
+      "unit_circle_advanced at (1,1), with a rotating point, coordinate rods and finite sampled graph",
+      "SimpleOscillatingBridge at (5,1) and OscillationCurve at (11,1) remain supporting works",
+      "Teleporter t at (10,2)"
+    ]
+  },
+  {
+    "path": "commons/artifacts/registry/commons_artifacts.json",
+    "keys": [
+      "artifacts",
+      "control_pendulum",
+      "description"
+    ],
+    "old": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
+    "new": "A grabbable pendulum integrates the nonlinear restoring term -(g/L)sin(angle), damping and optional drive. Release position and tangent hand velocity set its next swing. Configured plumb/trace evidence can expose signed centre crossings and a prediction from the standard start; length sets the small-angle period only with gravity fixed."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "PendulumWave",
+      "description"
+    ],
+    "old": "Pendulum generating a sine wave",
+    "new": "One integrated pendulum leaves a timestamped position record: sample age becomes depth. FINE, COARSE and measured-period STROBE expose physics-tick sampling, a 300-mark budget and a ten-second age limit; RESET restarts this experiment."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "sine_wall_corridor",
+      "description"
+    ],
+    "old": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",
+    "new": "Layered sine displacements shape two walls. The shipped seven-metre scene has animated, noncolliding walls over a supporting floor; AMP, PHASE, FREEZE and RESET compare running and frozen folds and display the local-X gap. Script defaults differ from this configured scene."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "unit_circle_advanced",
+      "description"
+    ],
+    "old": "Enhanced trigonometric visualization",
+    "new": "A point progresses around a circle with horizontal and vertical projection rods while a finite sampled graph builds beside it. The default graph reads the sine coordinate; configured alternatives expose other correspondences. Collision boxes do not by themselves establish a verified walking route."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "unit_circle_advanced",
+      "qfep_connection"
+    ],
+    "old": "oscillation: the unit circle, annotated — sine and cosine read off a turning radius; the circle that secretly writes every wave.",
+    "new": "One angle supplies two coordinate projections. Their graph depends on which coordinate is retained and how angular progression is placed on a new axis; this construction does not imply that every oscillation is physically driven by rotation."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A wave is not an object—it's a disturbance traveling through a medium. Watch waves emanate from sources, diminishing by inverse square law. Learn distance fields, phase propagation (sin(time - dist)), attenuation, and interference. Discover that identity is permeable: you are not a static entity, but a point of intersection for the world's noise.",
+    "new": "Follow a disturbance through a finite lattice of coupled oscillators. Compare the same sine drive or one pulse with links present and absent. A nearby tiled wave display offers a contrasting analytic distance-field construction; its default attenuation is exponential."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Distance fields: calculating propagation from source to every point",
+      "Wave function: sin(time * speed - dist * frequency)",
+      "Attenuation: inverse square law (energy = 1 / (1 + dist²))",
+      "Interference: wave summation creates peaks and cancellation",
+      "Critical: Identity is permeable—to exist in a medium is to be distorted by it"
+    ],
+    "new": [
+      "Follow one sphere before reading a travelling pattern across the lattice",
+      "Compare identical starting states and forcing with coupling on or off",
+      "Distinguish a continuing sine drive from a single velocity pulse",
+      "Relate boundary behaviour to the number of neighbours",
+      "Compare local force integration with the secondary display’s analytic distance field; do not infer physical inverse-square energy transport from either display"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "One oscillation inside another's rule. The bench row at row 5 holds the racks (303, Moog, DX7, the sine rack) and the audio controllers; the primary, DualBallFMController, stands apart on the open floor at (8,11) in the south-east quarter, turned to face north: two reading desks at hand height, the carrier ball (blue) and the modulator ball (orange), the colour cube on the shelf between them, an AUDITION panel (BASELINE / HOLD / PLAY / COMPARE) and a cased readout on the visitor's side, the four-lane evidence scope above. Structure recovered 2026-09-10: interior 2 = 1 m platform, perimeter w, wall_height 3, gate at the doorway; museum.sculpture_clear_rects keeps dealt plinths off the audition floor.",
+    "new": "Two movable balls map six parameters of a phase-modulation/FM-style instrument. Establish a baseline, hold a reference and compare a changed note. A four-lane scope shows the modulation term, carrier, rule and output while the ear follows the full envelope."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Audio bus and amplitude analysis",
+      "FFT spectrum: breaking waveforms into frequencies",
+      "Frequency bands: bass,mids,highs",
+      "Quantization noise and sampling gaps",
+      "Critical: Latency as reacting to the past,not present",
+      "Biological sounds: heartbeat rhythm",
+      "Ambient soundscapes: lab hum"
+    ],
+    "new": [
+      "Use BASELINE, HOLD, PLAY and COMPARE to hear one changed parameter",
+      "Map ball position to carrier frequency and envelope, and to modulation ratio, index and decay",
+      "Read modulation inside the carrier phase rather than as an added output voice",
+      "Separate the carrier envelope from the modulator envelope",
+      "Notice the scope’s normalization and short time window; preserve listening as evidence"
+    ]
+  },
+  {
+    "path": "commons/maps/Wavefunctions_Bernini/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "The Solomonic columns of St. Peter's Baldachin spiral upward, defying stone's rigidity. Use sine waves to displace mesh vertices, transforming cylinders into twisting baroque forms. Layer noise for organic erosion. Discover procedural geometry as the new Baroque—favoring the variable, mutating, and complex over the static and ideal. Baroque was a glitch in Renaissance order.",
+    "new": "Repeated spiral columns distinguish periodic change through height from rotation through time. A CPU-generated ring mesh combines sine/cosine centre offsets, radius variation and a changing angular phase, with procedural audio accompaniment."
+  },
+  {
+    "path": "commons/maps/Wavefunctions_Bernini/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Vertex displacement: twisting via rotation matrix in shader",
+      "Rotation matrix around Y-axis (angle = VERTEX.y * twist)",
+      "Adding noise for organic detail: VERTEX += NORMAL * noise",
+      "Digital grotesque: animating the twist, breathing columns",
+      "Critical: Baroque as glitch in Renaissance order",
+      "Procedural geometry as new Baroque: variable over ideal"
+    ],
+    "new": [
+      "Follow a shaft profile through height, then observe the shaft rotate through time",
+      "Relate circular sine/cosine coordinates to a helical centre path and radial variation",
+      "Distinguish generated mesh construction from a vertex-shader or noise deformation",
+      "Read the repetition of columns as intervals and sight lines",
+      "Treat architectural inspiration and generated accompaniment as situated choices, not a full historical account or a touch instrument"
+    ]
+  },
+  {
+    "path": "commons/maps/WaveFunctions_John_Cage/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "In 1952, John Cage presented four minutes and thirty-three seconds of 'silence.' But it wasn't silent—the audience coughed, rain fell, chairs creaked. Silence is not absence of sound, but presence of unintended noise. Explore aleatoric algorithms (chance as life), noise floor (thermal noise, blood in ear), and ambient computation (simulating the uneventful). Cage reframed silence as space of infinite potential. The algorithm is running, but not 'working.' It is just breathing.",
+    "new": "Chance schedules playback within a prepared vocabulary of synthesized clips over drone and city-ambience layers. Luminous forms respond to sound activity. The Cage reference opens a question about authorship and listening; this artifact does not perform a particular Cage score."
+  },
+  {
+    "path": "commons/maps/WaveFunctions_John_Cage/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Aleatoric algorithms: chance operations via randf() as life, not chaos",
+      "Noise floor: you cannot have signal of 0, thermal noise in circuit",
+      "Ambient computation: simulating the uneventful, code that does nothing beautifully",
+      "Drift without destination: noise.get_noise_1d() for wandering",
+      "Queer silence: reframing silence as space of infinite potential",
+      "Critical: Do not look for the puzzle. Just listen. The algorithm is just breathing."
+    ],
+    "new": [
+      "Separate continuous layers from intermittent events by listening over time",
+      "Distinguish uncertain ordering from an open-ended sound vocabulary",
+      "Compare the envelope and texture of recurring prepared variations",
+      "Recognize that the luminous forms do not expose every scheduling choice or spatialize the audio",
+      "Ask what the composer has already decided before leaving event order to chance"
+    ]
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "coupled_oscillator_lattice",
+      "description"
+    ],
+    "old": "12×12 oscillator grid",
+    "new": "A 12 by 12 grid of damped oscillators exchanging forces with up to eight neighbours. Optional comparison controls restart the same lattice with coupling on or off, using the existing continuing sine drive or one pulse. Default 2 Hz sine excitation produces a subtle neighbour response; the pulse makes propagation more visible. Fabric variants change representation without changing these forces."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "DualBallFMController",
+      "description"
+    ],
+    "old": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
+    "new": "Two movable ValueMapper3D balls control a phase-modulation/FM-style instrument. Blue controls carrier frequency, attack and decay; orange controls modulation ratio, index and decay. BASELINE, HOLD, PLAY and COMPARE support listening against a retained reference. Scope variants expose operands, the phase-modulation expression and output. The signal generator is unchanged."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "bernini_columns",
+      "description"
+    ],
+    "old": "Baroque architectural wave patterns",
+    "new": "CPU-generated spiral columns combine a helical centre offset, sinusoidal radius variation and angular phase through height. Their shafts rotate through time while the repeated plan creates intervals and sight lines. Procedural accompaniment is generated separately; this is not a noise-displaced vertex shader or a touch instrument."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "john_cage_tech_noir",
+      "description"
+    ],
+    "old": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
+    "new": "A prepared vocabulary of synthesized effect clips is scheduled by chance above drone and city-ambience layers. Non-spatial AudioStreamPlayers mix the sounds; luminous forms report activity. It references John Cage without performing a particular score. Chance changes event order inside a finite vocabulary, and repeats remain possible."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "DualBallFMController",
+      "name"
+    ],
+    "old": "Dual Ball FM Synth",
+    "new": "Dual Ball Phase Modulation / FM-style Synth"
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "resonating_metallophone",
+      "description"
+    ],
+    "old": "Metal bars that ring—each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
+    "new": "Strike-triggered synthesized tones: chosen note frequencies set each bar’s visible length. Each bar plays one decaying sine voice; striking it again restarts that voice. The table stand displays their sampled source-audio sum before spatial attenuation."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "sine_cylinder_staircase",
+      "description"
+    ],
+    "old": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
+    "new": "A helix of separate treads with sine-modulated radius and uniform rise. Optional membranes, rails or posts expose what must be added to sampled positions; colliders exist, while a complete ascent and headset comfort require separate testing."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "TrigWalkingPath",
+      "description"
+    ],
+    "old": "Walkable path generated by trig functions",
+    "new": "A retained secondary installation with two finite rows of collidable steps whose heights follow sine and cosine over a shared descent. The shipped scene circulates existing steps in opposite directions; it does not generate an endless path from the visitor’s position."
+  },
+  {
+    "path": "commons/artifacts/registry/commons_artifacts.json",
+    "keys": [
+      "artifacts",
+      "additive_wave_demo",
+      "description"
+    ],
+    "old": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
+    "new": "A visual additive-synthesis instrument with five nonnegative, phase-locked sine coefficients. Its sliders form finite harmonic sums; nearby recipe names use a coefficient tolerance. The optional bench provides HOLD, H1 ALONE, BASELINE and a component-sum readout."
+  }
+]

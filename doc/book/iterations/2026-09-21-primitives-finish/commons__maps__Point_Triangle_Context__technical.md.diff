@@ -1,0 +1,23 @@
+--- before/commons/maps/Point_Triangle_Context/technical.md
++++ commons/maps/Point_Triangle_Context/technical.md
+@@ -72,3 +72,20 @@
+ The [isolated-scene capture record](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-shift-observation.json) and plan views from [A](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-start-a-plan.png) and [B](../../../doc/book/iterations/2026-09-19-triangle-shift-start/triangle-start-b-plan.png) show the production drawing scene and discovery panel with supplied positions. They do not test the authored museum placement or a headset.
+ 
+ These checks verify specific engine behavior. They do not verify reach in a headset, hand-drawn coplanarity, comfort, learning or the room's secondary interactions. Engine notices are retained in the test report. The first-vertex fan algorithm remains the same; SHIFT START adds a runtime control for changing its input order.
++
++## Draw the six-corner L
++
++This construction accompanies the shorter encounter in `final.md`. Keep all corners at one height, with clear space beside the practice triangle. Release the pen and press NEW OUTLINE to keep that triangle and begin a separate outline. Make a 1.2-metre square missing a 0.8-metre corner; its two arms are 0.4 metres wide.
++
++The coordinates name two horizontal directions in metres, relative to the outer corner where the two long edges meet:
++
++```text
++A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
++D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
++```
++
++Follow **A → B → C → D → E → F → A**. Wait for each numbered point before moving on: held drawing uses a one-second interval and movement gate, with positions rounded to 0.1 m. Release at A after closure, since releasing elsewhere may record a new point. With the pen and all corners released and no unfinished outline, press SHIFT START once. The last completed loop now begins at B, retaining the same six positions and boundary. It replaces this loop's four fan triangles; it does not add a second L. Six shifts return to A. START marks the selected completed loop; DRAW START marks an unfinished outline. The panel reports any readiness block.
++
++For the manual comparison, first return the completed L to A. Release, press NEW OUTLINE, and retrace **B → C → D → E → F → A → B**, reusing its six stored corners. Check DRAW START before closing. This route retains both L fills: two loops and eight logical triangles, plus any practice triangle. They overlap at the same boundary; the second is not a separately moved copy. Inspect the first before adding the second.
++
++The sample above is chosen to expose the difference between starting vertices. It does not assert that every concave polygon fails or that every starting vertex spills.

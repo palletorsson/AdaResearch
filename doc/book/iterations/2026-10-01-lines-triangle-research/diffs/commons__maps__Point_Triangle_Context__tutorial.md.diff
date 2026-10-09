@@ -1,0 +1,17 @@
+--- before/commons/maps/Point_Triangle_Context/tutorial.md
++++ after/commons/maps/Point_Triangle_Context/tutorial.md
+@@ -27,6 +27,14 @@
+ Release at the closing corner. The release callback can record that position, but an unheld tool does not continue timed sampling. Existing corner handles remain editable; moving and releasing one stores its new snapped position and rebuilds its faces. This editor can change side lengths; it is not a linkage of rigid rods.
+ 
+ For an independent comparison, release, press NEW OUTLINE and pick up again. Completed faces and their numbered corners remain. START identifies the first point in the new path; it is not a command to clear everything.
++
++## A face, then a view of it
++
++Begin with the small triangle and its large twin. Move one corner and release it; both copies retain that change. Walk towards the side of the large copy without touching the small one. Its projected width narrows while its three positions stay fixed.
++
++Return to the small copy. Bring the top corner onto the line between the other two, then release. The starter corners use the same ten-centimetre world grid as your drop, so the baseline is reachable. A collinear triangle has zero area even though the tool still retains three points and counts one logical triangle. Move the corner away to recover a face. SHOW / HIDE FILL changes visibility without removing the points. RESTORE TRIANGLE replaces the current drawing with the starting three corners; release every held point or pen before using it.
++
++These are three different changes: viewpoint, vertex position and visibility. Use one at a time before extending the outline below.
+ 
+ ## Keep the outline, change its start
+ 

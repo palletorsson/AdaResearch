@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "name": "Record keeps80 committed updates including repeated positions and absences",
+      "passed": true
+    },
+    {
+      "name": "First two stationary entries remain separate",
+      "passed": true
+    },
+    {
+      "name": "Initial snapshot remains independent of later fields",
+      "passed": true
+    },
+    {
+      "name": "Record stores simulation coordinates from rotated museum study",
+      "passed": true
+    },
+    {
+      "name": "Held and released input at same place stay distinct",
+      "passed": true
+    },
+    {
+      "name": "Every replayed field matches80 recorded fields despite unrelated live hand",
+      "passed": true
+    },
+    {
+      "name": "Replay redraws collision support from final stored values",
+      "passed": true
+    },
+    {
+      "name": "Deleting repeated positions changes duration and final field",
+      "passed": true
+    },
+    {
+      "name": "Forcing absent input to present fails recorded outcome",
+      "passed": true
+    },
+    {
+      "name": "Retained replay rows are independent",
+      "passed": true
+    },
+    {
+      "name": "Replay restores recorded update schedule and inactive CHAIN input",
+      "passed": true
+    },
+    {
+      "name": "No input is recorded after the existing study limit",
+      "passed": true
+    },
+    {
+      "name": "Replay retains starting tick and respects the recorded final tick",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "compared_values": 6400,
+    "deduplicated_updates": 5,
+    "recorded_updates": 80,
+    "scope": "Author-made feasibility response using unchanged printed presence.gd and a nominated desktop-point path. Real code and collision flags; no new museum artifact, live VR walk or independent student."
+  },
+  "passed": true
+}

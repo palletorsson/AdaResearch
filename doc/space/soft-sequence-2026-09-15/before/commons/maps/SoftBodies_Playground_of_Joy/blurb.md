@@ -1,0 +1,5 @@
+No instructions. No objectives. Just a field of soft things waiting to be touched.
+
+Rounded bodies scatter across an open grid — jelly cubes, elastic spheres, capsules that deform under pressure and remember their shape. Push them. Stack them. Watch them bounce, settle, ripple. A branching growth algorithm seeds structures that sprout and spread between the toys, organic geometry threading through elastic matter. Grid agents wander the space, copying what they find, multiplying the playground's population without permission.
+
+This is the map where soft body physics stops being a lesson and becomes a material. Elasticity as medium. Deformation as play. Every squish stores energy; every bounce returns it transformed. The body that yields is not the body that breaks — it is the body that remembers how to come back different.

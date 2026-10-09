@@ -156,9 +156,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Space_10"
       ],
@@ -173,9 +173,12 @@
       "proposal": "Rewrite line 13 as 'In one recorded walk, the first crossing reached the far margin' and line 43 as 'The walking body's controller accepts floor angles up to forty-five degrees'; keep the provenance (rig, 13 September 2026) only in [^walk-measurements]. Better still, re-walk route A at HEIGHT 0.90 in the headset and replace the record with that walk.",
       "evidence": "commons/maps/Noise_Space_10/final.md:13, :43, :71. HEIGHT values commons/context/walkgrids/noise_walk_study.gd:4; the refusal polls the player_body group :54-58, which holds the XROrigin3D (commons/scenes/grid.tscn:47), so the control works in the headset. Headset slope limit: addons/godot-xr-tools/overrides/ground_physics_settings.gd:48 (move_max_slope = 45.0).",
       "review": "quote checked: first clause found, rest differs (script) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe main prose now says one recorded walk and the controller in that walk. Desktop provenance, date, forty-five-degree limit and the limits of that observation stay in the existing footnote. The two height settings, body-dependent argument, pink trail and miniature return are preserved.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-surface-and-body/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:19:06.884Z"
     },
     {
       "id": "book_noise.002",
@@ -184,9 +187,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Lab_Path"
       ],
@@ -201,9 +204,12 @@
       "proposal": "Make the first line the heading ('# What has followed you out of the room?') and let the recalled encounters ('A dark patch that returned with REMAP...') be the opening paragraph; or give it a sequence-style question of its own.",
       "evidence": "commons/maps/Lab_Path/final.md:1 has no '#'; compare commons/maps/Noise_Perlin_Simplex/final.md:1 and commons/maps/Random_Noise_Types/final.md:1. python tools/final_tags.py --map=Lab_Path prints the first region as '—  What has followed you out of the room?' where every other chapter prints '# ...'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nLab_Path now has a real H1. Its reflective question and encounter remain; the subtitle explicitly marks it as an optional return.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.642Z"
     },
     {
       "id": "book_noise.003",
@@ -212,9 +218,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Perlin_Simplex"
       ],
@@ -229,9 +235,12 @@
       "proposal": "Reword: 'VIEW does not touch the seed: a field you regenerated stays regenerated, and MATCH is what brings the declared one back; only the way a value occupies space has changed.'",
       "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:48. REGEN draws a new seed: algorithms/randomness/simplexnoise/SimplexVisualizer.gd:137-139 (current_seed = randi()) and algorithms/randomness/perlinnoise/NoiseVisualizer.gd:172-174. VIEW 'changes the current samples' expression, without restoring a placement seed': algorithms/randomness/simplexnoise/pair_study.gd:58-62; MATCH restores both: pair_study.gd:68.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nVIEW leaves the seed alone. If you used REGEN, you keep that new field. The sentence now distinguishes choosing a new field from changing how its values occupy space. Native sample and generator checks support it.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.671Z"
     },
     {
       "id": "book_noise.004",
@@ -240,9 +249,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Voxel"
       ],
@@ -257,9 +266,12 @@
       "proposal": "Reword: 'Back at the bench, the plate counted groups joined through cell faces; the frame here carries no count. Stand beside the volume and ask what that count cannot tell you.'",
       "evidence": "commons/maps/Noise_Voxel/final.md:63. Count computed and printed at the bench: commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 and :655-656. The volume's only label: algorithms/randomness/voxelnoise/voxelnoise.gd:388-389; no readout, pieces or count elsewhere in that file.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe chapter now locates the piece count at the bench. The volume retains its dimensional captions, one-metre cells and glass flight enclosure.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.526Z"
     },
     {
       "id": "book_noise.005",
@@ -268,9 +280,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Perlin_Simplex"
       ],
@@ -285,9 +297,12 @@
       "proposal": "Delete the fragment and, if the reference is wanted, attach a footnote to the previous sentence: '[^engine-noise]: FastNoiseLite's enumerations in the Godot 4.6 class reference name TYPE_PERLIN and TYPE_SIMPLEX (OpenSimplex2).'",
       "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:42. The chapter already uses the footnote convention elsewhere in the sequence (Noise_Voxel/final.md:84-86, Noise_Space_10/final.md:69-71).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe dangling engine-docs fragment becomes a sourced footnote. The main sentence and four code excerpts remain. The linked Godot 4.6 reference distinguishes Perlin, OpenSimplex2 and OpenSimplex2S.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.703Z"
     },
     {
       "id": "book_noise.006",
@@ -296,9 +311,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "sequence file: commons/maps/sequences/noise.json"
       ],
@@ -313,9 +328,12 @@
       "proposal": "Repair the four damaged strings, then rewrite name, description and the ten content lines from the live chapter titles and closings (as randomness.json:4-5 and :26-40 were done), dropping the Chamber_Noise content line into deferred_reason only.",
       "evidence": "commons/maps/sequences/noise.json:6-9 (bytes c3 8e c2 bb where λ should be; c3 a2 e2 82 ac e2 80 9d where an em dash should be), :28-39 content lines, :37 Chamber_Noise, :51-59 deferred. Model: commons/maps/sequences/randomness.json:4-5, :26-40, :284-287 (local_review_history 2026-09-19). Chapter titles: Noise_Columns/final.md:1, Noise_Space_10/final.md:1.",
       "review": "unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRepaired encoding and updated the sequence title, purposes, descriptions and current chapter titles, with Chamber_Noise kept deferred and Lab_Path explicitly optional. The description distinguishes spatial coherence from stored state. Map order, route, unlocks, roles and artifact lists are retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.733Z"
     },
     {
       "id": "book_noise.007",
@@ -324,9 +342,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Perlin_Simplex"
       ],
@@ -341,9 +359,12 @@
       "proposal": "Either deal Lab_Path (a 5x5 room with one orb is a pause the museum could hold; then change this sentence to 'Beyond the corridor, in Cellular Automata,') or keep it dropped and fold its two strongest sentences ('Hold a seed...' and the two tellings) into this chapter's closing region, leaving Lab_Path a grid-lane-only file.",
       "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:90; commons/maps/Lab_Path/final.md:13, :21-23; commons/maps/sequences/noise.json:40-50 (Lab_Path in maps); ada_run/em_plan.json noise halls run Random_Noise_Types ... Noise_Perlin_Simplex then CA_Introduction with no Lab_Path; commons/data/book/noise.json pearls: Lab_Path drop:true. The block's Lab_Path/DECISIONS.md names the same fork; this task is the reader-facing half of it.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKeep Lab_Path outside the main museum/book route. Fold the two tellings and hold-a-seed invitation into the Perlin/Simplex ending, before the preserved blob-culture passage. The main chapter retains the one handover to Cellular Automata; the optional coda no longer repeats it.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.748Z"
     },
     {
       "id": "book_noise.008",
@@ -352,9 +373,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Columns"
       ],
@@ -369,9 +390,12 @@
       "proposal": "Either add one clause naming the measure ('a score of how far this variant's photograph departs from the shipped orb, thirty-five percent here') or drop the score sentence and keep 'The stand chooses presence = hush and body = swarm before the scene builds' as the whole account of the selection.",
       "evidence": "commons/maps/Noise_Columns/final.md:73, :83. Plaque line: commons/artifacts/synthesis/synthesis_stand.gd:127-132 (subject + '%.0f%%' of score). Verdict: commons/data/dna_synthesis.json dark_sphere: verdict hero, hero {presence: hush, body: swarm}, score 0.3509 (the critic's focus metric).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe 35% now refers to differences between saved images; a footnote states the largest-5%-pixel metric. It does not measure the fraction of the body that changed. The open question of which family member one desires is retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.553Z"
     },
     {
       "id": "book_noise.009",
@@ -380,9 +404,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_6_Wall"
       ],
@@ -397,9 +421,12 @@
       "proposal": "Add a footnote naming when and how the four patches were read (date, gain of two, held moment), or cut the clause and keep 'Any two sums of 0.5 or more would become the same white.'",
       "evidence": "commons/maps/Noise_6_Wall/final.md:43. Gain and clamp: algorithms/randomness/shadernoisespace/noiseroom.gd:68 (PANEL_GAIN = 2.0) and WallNoiseShader.gdshader:170. Footnote convention: Noise_Voxel/final.md:84, Noise_Space_10/final.md:71.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRemoved only the untraceable half-white measurement. The exact gain/clamp equation and the conditional claim that sums of 0.5 or greater map to white remain, along with the argument that grey is already an interpretation. No new measurement is invented.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-surface-and-body/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:19:06.915Z"
     },
     {
       "id": "book_noise.010",
@@ -408,9 +435,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Voxel"
       ],
@@ -425,9 +452,12 @@
       "proposal": "Reword to 'In a recorded comparison of 13 September 2026, seed 31415 produced...'.",
       "evidence": "commons/maps/Noise_Voxel/final.md:84. The count is computed by commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 (components joined through faces), seed from the map token commons/maps/Noise_Voxel/map_data.json interactables 'perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRemoved desktop from the computational piece-count footnote. Date, seed, measurements and limits remain.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.569Z"
     },
     {
       "id": "book_noise.011",
@@ -436,9 +466,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_6_Wall"
       ],
@@ -453,9 +483,12 @@
       "proposal": "Reword: 'What your body can cross and what it imagines crossing need not arrive together.'",
       "evidence": "commons/maps/Noise_6_Wall/final.md:13 ('Your feet meet the same floor' at :11, 'the shapes your body collides with' at :13).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe chapter now asks what your body can cross and what you imagine crossing. It keeps its address to the visitor instead of switching to the player.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-surface-and-body/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:19:06.933Z"
     },
     {
       "id": "book_noise.012",
@@ -464,9 +497,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_One"
       ],
@@ -481,9 +514,12 @@
       "proposal": "Reword: 'The open floor at the room's centre now holds a small violet terrain within a pale coordinate frame.'",
       "evidence": "commons/maps/Noise_One/final.md:51. commons/maps/Noise_One/map_data.json interactables: noiselayers at row 5, column 5 of width 13, depth 11 (noisetorus at row 2, dark_sphere at row 8).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe basin now stands at the centre of the room in the prose, rather than at an ambiguous opening.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.600Z"
     },
     {
       "id": "book_noise.013",
@@ -492,9 +528,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Perlin_Simplex"
       ],
@@ -509,9 +545,12 @@
       "proposal": "Compare Noise_Perlin_Simplex/after.md with the live final.md and choose.",
       "evidence": "Noise_Perlin_Simplex/HASHES.txt LIVE line; forum 260924-zgl38",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nCompared the frozen Claude audited chapter with the live chapter before this pass. Keep the live chapter: its newer arch encounter is supported by native work, and VIEW already bypassed the obsolete seed-reset caveat. All four audited code excerpts and the blob-culture ending remain. This pass also fixes the underlying readout-only config API.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.763Z"
     },
     {
       "id": "book_noise.014",
@@ -520,9 +559,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Lab_Path"
       ],
@@ -537,9 +576,12 @@
       "proposal": "Decide: a grid-lane pause only, or a hall in the museum.",
       "evidence": "commons/data/book/noise.json:193-197",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe absence of Lab_Path from the museum is now an explicit curatorial choice. Its existing drop flag, grid, teleporter and orb stay; final.md and companion descriptions call it an optional return. Its strongest invitation also appears in the main ending, so the spine does not need an unbuilt corridor to carry it.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.778Z"
     },
     {
       "id": "book_noise.015",
@@ -548,9 +590,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Inside_Noise"
       ],
@@ -565,9 +607,12 @@
       "proposal": "Boot the hall and read the enclosure's scale; if it is shrunk, a floor_cells exemption for walk-in bodies.",
       "evidence": "Noise_Inside_Noise/DECISIONS.md Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nFresh native museum check: host, study and shell all have global scale (1,1,1); base radius is five metres. The old 80% shrink is absent. Both shell openings pass bounded rays at three heights; floor support and RELIEF/SKIN return pass. Existing scene and chapter retained; headset comfort is not certified.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-surface-and-body/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:19:06.946Z"
     },
     {
       "id": "book_noise.016",
@@ -576,9 +621,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_One"
       ],
@@ -593,9 +638,12 @@
       "proposal": "Build the cradle, then revert change 1.",
       "evidence": "Noise_One/DECISIONS.md change 1",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAlready repaired in the Noise One standing pass. Fresh native checks find both posts from 0.78 m to 0.98 m, reaching the upright tubes. The source is unchanged from that repair; its current manuscript is retained apart from the basin location.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.617Z"
     },
     {
       "id": "book_noise.017",
@@ -604,9 +652,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Perlin_Simplex"
       ],
@@ -621,9 +669,12 @@
       "proposal": "_update_noise_parameters() without _apply_contract() for readout-only changes; then remove the clause.",
       "evidence": "Noise_Perlin_Simplex/DECISIONS.md change 2",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nSimplex apply_grid_config now separates readout updates from contract application. Native REGEN followed by plate and relief preserves the regenerated seed, 49 sampled values, generator properties and colours; heights change and return. Explicit seed changes, pre-ready config, shared VIEW and MATCH remain effective. 29 native assertions pass, exit 0, no script/shader errors. No headset claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-ending-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T11:31:19.792Z"
     },
     {
       "id": "book_noise.018",
@@ -632,9 +683,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Voxel"
       ],
@@ -649,9 +700,12 @@
       "proposal": "Map and label change; then remove 'turned half round' from the chapter.",
       "evidence": "Noise_Voxel/DECISIONS.md",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAlready repaired and developed further in the voxel flight pass. The paired bodies share orientation; captions face both approaches; the large body keeps 25 times the model spacing. Fresh native checks confirm these. No placement rollback.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.650Z"
     },
     {
       "id": "book_noise.019",
@@ -660,9 +714,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Noise_Voxel"
       ],
@@ -677,9 +731,12 @@
       "proposal": "Gate _input on the visitor being at the work.",
       "evidence": "perlin_terrain_sculptor._input",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nOnly the Noise Voxel bench opts out of global arrow/R/N shortcuts using keyboard:off. All six keys leave its field unchanged; all four real console button signals still work and update the local volume. Standalone defaults and opt-in keyboard behaviour remain available.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-opening-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:05:17.667Z"
     },
     {
       "id": "book_noise.020",
@@ -689,7 +746,7 @@
       "skill": "edit",
       "depends_on": [],
       "status": "open",
-      "claimed_by": null,
+      "claimed_by": "codex",
       "done_at": null,
       "map_refs": [
         "Noise_Space_10"
@@ -705,9 +762,12 @@
       "proposal": "Walk it again in the headset from the other approach.",
       "evidence": "Noise_Space_10/DECISIONS.md",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKeep open for the requested walk from the other approach in a headset. Newer native work adds a pink trail, a recorded sidestep and reversible miniature scale, but none constitutes a tracked-headset crossing. Keep the chapter bounded to one body, one approach and two settings; do not loosen its claims on that basis.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-noise-surface-and-body/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T10:19:06.975Z"
     }
   ]
 }

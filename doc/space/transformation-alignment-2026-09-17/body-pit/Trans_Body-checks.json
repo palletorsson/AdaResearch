@@ -1,0 +1,50 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "lattice is low and open above a 1.7 m eye height",
+      "passed": true,
+      "value": 1.33500005722046
+    },
+    {
+      "name": "natural body proximity removes live cells",
+      "passed": true,
+      "value": 12
+    },
+    {
+      "name": "field is still responding beside old closure caption",
+      "passed": true,
+      "value": 0.84206610918045
+    },
+    {
+      "name": "cut persists after leaving lattice",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "field returns after body clears its reach",
+      "passed": true,
+      "value": 1.0
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Body",
+  "measurements": {
+    "carved_cells": 12,
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "lattice_top_m": 1.33500005722046,
+    "scale_after_step_clear_factor": 1.0,
+    "scale_near_old_caption_factor": 0.84206610918045
+  }
+}

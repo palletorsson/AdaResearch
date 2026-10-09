@@ -1,0 +1,40 @@
+extends "./build.gd"
+## A response to the supplied Hatoum reference, not a reconstruction of her score.
+const FACES := [[0, 2, 3, 1], [4, 5, 7, 6], [0, 1, 5, 4], [2, 6, 7, 3], [0, 4, 6, 2], [1, 3, 7, 5]]
+
+func build() -> void:
+	var stone := ShaderMaterial.new()
+	stone.shader = preload("./grain.gdshader")
+	var metal := material(Color(0.15, 0.135, 0.12), 0.68, 0.35)
+	var positions: Array[Vector3] = []
+	for x in 5:
+		for z in 5:
+			var site := Vector3((x - 2) * 1.12, 0.0, (z - 2) * 1.12)
+			segment(site + Vector3(0, 0.18, 0), site + Vector3(0, 4.65, 0), 0.014, metal)
+			for y in 3:
+				var at := site + Vector3(0, 0.75 + y * 1.28, 0)
+				positions.append(at)
+				mesh_at(fragment(x * 15 + z * 3 + y), at, stone)
+				for k in 2:
+					segment(at + Vector3(-0.26, 0.01 + k * 0.035, 0), at + Vector3(0.26, 0.01 + k * 0.035, 0), 0.009, metal)
+	# A thin overhead support makes the suspension legible; no falling simulation.
+	for x in 5:
+		segment(Vector3((x - 2) * 1.12, 4.65, -2.3), Vector3((x - 2) * 1.12, 4.65, 2.3), 0.028, metal)
+	plaque("A PLACE STILL HELD", Vector3(0, 4.85, -4.84))
+	evidence = {"fragment_count": positions.size(), "positions": positions, "rods": 25, "seed": 821}
+
+func fragment(index: int) -> ArrayMesh:
+	var random := RandomNumberGenerator.new()
+	random.seed = 821 + index * 199
+	var corners: Array[Vector3] = []
+	for i in 8:
+		var base := Vector3(-0.33 if (i & 1) == 0 else 0.33, -0.17 if (i & 2) == 0 else 0.17, -0.28 if (i & 4) == 0 else 0.28)
+		var offset := Vector3(random.randf_range(-0.16, 0.16), random.randf_range(-0.12, 0.12), random.randf_range(-0.13, 0.13))
+		corners.append(base + offset * amount)
+	var tool := SurfaceTool.new()
+	tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for face in FACES:
+		for i in [0, 2, 1, 0, 3, 2]:
+			tool.add_vertex(corners[face[i]])
+	tool.generate_normals()
+	return tool.commit()

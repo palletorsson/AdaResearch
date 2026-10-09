@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-10-02T09:15:39.821714+00:00",
+  "base_commit": "5219cbf4ed8faa5c3f441bc6c54d68e8d1955df8",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "boolean_surfaces",
+  "sequence_sha256": "ef922f43044cb5268a8a38bd57136a53b87972fc14c8cb9718387f9eebc08e2f",
+  "maps": [
+    {
+      "map": "Boolean_Verbs",
+      "path": "commons/maps/Boolean_Verbs/final.md",
+      "sha256": "86c2f3ba10a8a6d5c6fae130ef832a4562ff64aae72865b7bcc2c92134c8a5eb"
+    },
+    {
+      "map": "Boolean_Gallery",
+      "path": "commons/maps/Boolean_Gallery/final.md",
+      "sha256": "17f1d0cc3e8726c973126900c8813dd717876e06fe1ba1b34017926500d2015b"
+    },
+    {
+      "map": "Boolean_Works",
+      "path": "commons/maps/Boolean_Works/final.md",
+      "sha256": "c4b56e19982dd79ee5f6895a451ef81b9c85bc16dc5d5cd3111eeaa568563a89"
+    }
+  ],
+  "output_sha256": "f9e57e336285e781985175e7d282edcab7641a7ac90055e1880c9a3f27e45cc5"
+}

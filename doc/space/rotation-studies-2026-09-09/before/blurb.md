@@ -1,0 +1,1 @@
+Rotation produces space as anisotropic. Where translation leaves direction indifferent, rotation makes facing matter. Front differs from back, left from right. The spinning forms carve orientation into the void. To rotate is to declare: this way and not that way, toward and away, the difference that makes direction real.

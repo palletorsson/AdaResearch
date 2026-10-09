@@ -1,0 +1,292 @@
+{
+  "passed": true,
+  "native_checks": 70,
+  "checks": [
+    {
+      "name": "GT_Network_Analysis assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "network full size",
+      "passed": true
+    },
+    {
+      "name": "network visible",
+      "passed": true
+    },
+    {
+      "name": "network controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "layout retains every directed record",
+      "passed": true
+    },
+    {
+      "name": "layout preserves computed degree",
+      "passed": true
+    },
+    {
+      "name": "filter selects three grant records",
+      "passed": true
+    },
+    {
+      "name": "record control selects inspectable source",
+      "passed": true
+    },
+    {
+      "name": "network bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "network bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "network reset",
+      "passed": true
+    },
+    {
+      "name": "evidence_network standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "evidence_network support along side 2",
+      "passed": true
+    },
+    {
+      "name": "evidence_network standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "evidence_network support along side 20",
+      "passed": true
+    },
+    {
+      "name": "evidence_network capture",
+      "passed": true
+    },
+    {
+      "name": "Crisis_Synthesis assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "sentence full size",
+      "passed": true
+    },
+    {
+      "name": "sentence visible",
+      "passed": true
+    },
+    {
+      "name": "sentence controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "same sentence on label and whole strip",
+      "passed": true
+    },
+    {
+      "name": "pace changes duration without words",
+      "passed": true
+    },
+    {
+      "name": "hold freezes word clock",
+      "passed": true
+    },
+    {
+      "name": "sentence selection reaches all displays",
+      "passed": true
+    },
+    {
+      "name": "sentence bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "sentence bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "sentence reset",
+      "passed": true
+    },
+    {
+      "name": "sentence_authority standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "sentence_authority support along side 2",
+      "passed": true
+    },
+    {
+      "name": "sentence_authority standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "sentence_authority support along side 20",
+      "passed": true
+    },
+    {
+      "name": "sentence_authority capture",
+      "passed": true
+    },
+    {
+      "name": "SpeculativeComputation_Situated_Computation assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "witness full size",
+      "passed": true
+    },
+    {
+      "name": "witness visible",
+      "passed": true
+    },
+    {
+      "name": "witness controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "sources are four actual museum readouts",
+      "passed": true
+    },
+    {
+      "name": "all cameras share actual museum world",
+      "passed": true
+    },
+    {
+      "name": "two portable camera bodies and one fixed camera",
+      "passed": true
+    },
+    {
+      "name": "XR pickup camera 0",
+      "passed": true
+    },
+    {
+      "name": "camera follows held translation and rotation 0",
+      "passed": true
+    },
+    {
+      "name": "return refuses to move held camera 0",
+      "passed": true
+    },
+    {
+      "name": "released camera keeps its aim 0",
+      "passed": true
+    },
+    {
+      "name": "XR pickup camera 1",
+      "passed": true
+    },
+    {
+      "name": "camera follows held translation and rotation 1",
+      "passed": true
+    },
+    {
+      "name": "return refuses to move held camera 1",
+      "passed": true
+    },
+    {
+      "name": "released camera keeps its aim 1",
+      "passed": true
+    },
+    {
+      "name": "fixed reference camera stays still",
+      "passed": true
+    },
+    {
+      "name": "desktop ray finds physical camera",
+      "passed": true
+    },
+    {
+      "name": "desktop grab guards return",
+      "passed": true
+    },
+    {
+      "name": "desktop drop restores stationary pickable",
+      "passed": true
+    },
+    {
+      "name": "return button restores both homes",
+      "passed": true
+    },
+    {
+      "name": "delay contains genuinely earlier exposure",
+      "passed": true
+    },
+    {
+      "name": "live green exposure while delay retains red",
+      "passed": true
+    },
+    {
+      "name": "held frame retains red and original exposure time",
+      "passed": true
+    },
+    {
+      "name": "frame buffer bounded",
+      "passed": true
+    },
+    {
+      "name": "feed cameras do not take player camera",
+      "passed": true
+    },
+    {
+      "name": "viewpoint change flushes delay and preserves held source",
+      "passed": true
+    },
+    {
+      "name": "witness bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "witness bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "witness reset",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses support along side 2",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses support along side 20",
+      "passed": true
+    },
+    {
+      "name": "museum_witnesses capture",
+      "passed": true
+    },
+    {
+      "name": "portable camera native capture",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "commons/artifacts/spine_studies/evidence_network.gd": "a40adb46f0df9e96f833879022b6d5c4a02292273d35be1186fcb6c3622f39f7",
+    "commons/artifacts/spine_studies/sentence_authority.gd": "99478054ce0fbb7282248ac422bdba178530512655edda7d89421b1f6f6704e7",
+    "commons/artifacts/spine_studies/museum_witnesses.gd": "615fef665fc6a9423001b923d9a7d7be708dc4d6063bb0412baee3d7fa1ae699"
+  },
+  "scope": "Actual museum rendering and pointer dispatch; temporary exposure target removed before photograph."
+}

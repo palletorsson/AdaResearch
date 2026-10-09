@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "name": "complete program creates sphere, graph marker and readout",
+      "passed": true
+    },
+    {
+      "name": "carried point remains 14 cm sphere",
+      "passed": true
+    },
+    {
+      "name": "prescribed marker cannot be grabbed or collide",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 0 has correct signed offsets",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 0 graph shares height",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 0 graph X measures angle",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 1 has correct signed offsets",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 1 graph shares height",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 1 graph X measures angle",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 2 has correct signed offsets",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 2 graph shares height",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 2 graph X measures angle",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 3 has correct signed offsets",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 3 graph shares height",
+      "passed": true
+    },
+    {
+      "name": "quarter turn 3 graph X measures angle",
+      "passed": true
+    },
+    {
+      "name": "full turn closes circle",
+      "passed": true
+    },
+    {
+      "name": "full turn spans four metre graph",
+      "passed": true
+    },
+    {
+      "name": "one second is quarter turn",
+      "passed": true
+    },
+    {
+      "name": "sixty smaller steps reach same angle",
+      "passed": true
+    },
+    {
+      "name": "angle wraps without growing the graph",
+      "passed": true
+    },
+    {
+      "name": "pause preserves angular state",
+      "passed": true
+    },
+    {
+      "name": "independent variation predicts top position",
+      "passed": true
+    },
+    {
+      "name": "translated centre stays outside radius multiplication",
+      "passed": true
+    },
+    {
+      "name": "smaller radius retains graph angle scale",
+      "passed": true
+    },
+    {
+      "name": "carried line endpoint meets sphere after parent rotation",
+      "passed": true
+    },
+    {
+      "name": "independent instance does not mutate original radius",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Printed program executed in Godot; teacher-authored tests, not an independent student or headset trial."
+}

@@ -1,0 +1,71 @@
+{
+  "edits": [
+    {
+      "title": "Let the pause read easily",
+      "old": "The dot compares its present position with the one where it last passed the movement test. Less than five millimetres apart, and no new position is added. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.",
+      "new": "The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.",
+      "incitement": "Our previous revision made the first sentence harder to read. Restore a plain account of the movement threshold and keep the stronger relation between waiting and the position list. The exact reference-update mechanics remain in technical.md.",
+      "purpose": "Explain the threshold without interrupting the pause with implementation phrasing.",
+      "reader_move": "Hold the dot still and compare the unchanged count with continuing time.",
+      "why_here": "The pause already supplies the question; the explanation should let the reader stay with it.",
+      "without": "The relative clause about the last passing position slows the reader before the bodily consequence.",
+      "evidence": [
+        "dot-scene",
+        "gate",
+        "fading",
+        "optional-times"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Read one coordinate through the grid",
+      "old": "Each component moves to the nearest multiple of the spacing. If the result repeats the last stored position, the recorder does not add it again. The movement gate decides whether to consider a reading; the grid helps decide where that reading can stand. These are different choices.[^point-trace-quantisation]",
+      "new": "With the blue dot, `s` is `0.08`: an X reading of `0.05` metres is stored as `0.08`. The program rounds Y and Z in the same way. If the resulting position matches the last one kept, it adds nothing to the list. Passing the five-millimetre movement test does not guarantee a new corner; the grid can send different readings to the same address.[^point-trace-quantisation]",
+      "incitement": "The code needs an example a beginner can follow. One coordinate makes rounding and duplicate rejection distinct from movement qualification.",
+      "purpose": "Follow an actual numerical example through rounding, then explain why movement can produce no additional stored position.",
+      "reader_move": "Read 0.05 becoming 0.08 and compare that change with the motion needed to obtain another reading.",
+      "why_here": "The code has introduced rec and s; the blue tool gives them concrete values.",
+      "without": "Nearest multiple and component remain abstractions the reader has to translate unaided.",
+      "evidence": [
+        "placements",
+        "gate",
+        "duplicate",
+        "grid"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Allow the grid a diagonal",
+      "old": "The segments can cross the grid diagonally. Follow one of those shortcuts. Even the finest dot reads positions during successive calls while the rest of the museum runs between them.",
+      "new": "The saved positions lie on the grid, but the segments between them can cut across it diagonally. Look for a diagonal in your drawing. A grid of corners does not require a drawing made only of right angles.",
+      "incitement": "The previous sentence returns to a general sampling limit already established. Stay instead with what this grid permits: constrained positions can still be joined in other directions.",
+      "purpose": "Distinguish where vertices may be stored from the directions of the segments connecting them.",
+      "reader_move": "Look for a diagonal in the drawing made with a gridded dot.",
+      "why_here": "After understanding rounded coordinates, the reader can discover what that restriction does not determine.",
+      "without": "The grid can be mistaken for a requirement to draw orthogonal paths, and the paragraph repeats a general limitation.",
+      "evidence": [
+        "grid",
+        "segments",
+        "placements"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Let looking take its time",
+      "old": "The list is finite too: beyond 4096 accepted positions, keeping a new one means dropping the oldest. A longer drawing can begin to lose its beginning. These dots do not fade their live trails merely because time passes.",
+      "new": "The list can hold 4096 positions. Keep drawing beyond that and each new position replaces the oldest: the line can begin to lose its beginning. You do not have to fill it now. Looking at the line need not spend another place in it.",
+      "incitement": "Recover the earlier draft's invitation to take time looking. Keep finite retention clear without turning a long capacity test into a required exercise or another warning.",
+      "purpose": "Explain capacity eviction while preserving the usefulness of stopping and looking at a persistent record.",
+      "reader_move": "Understand the limit, then take time with a drawing rather than needing to exhaust its capacity.",
+      "why_here": "After exploring what different spacings let the hand make, the drawing remains something worth looking at.",
+      "without": "The passage closes this encounter only on a storage limit and hides the permission to linger.",
+      "evidence": [
+        "dot-scene",
+        "capacity",
+        "fading",
+        "retention-proposal"
+      ],
+      "assessment": "grounded"
+    }
+  ]
+}

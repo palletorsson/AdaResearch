@@ -1,0 +1,36 @@
+{
+  "kind": "tutorial-text-revision",
+  "version": 1,
+  "map": "Point_Lines",
+  "passed": true,
+  "checked_at": "2026-10-05T12:59:26.399819+00:00",
+  "scope": "Textual completeness/equivalence only. Ignore full-line comments, blank lines and trailing whitespace; retain indentation and operations. The earlier native runtime report is unchanged and still binds its original tutorial. No native test was rerun for this text revision.",
+  "tutorial": {
+    "path": "commons/maps/Point_Lines/tutorial.md",
+    "sha256": "48786c86342265584c07c9f7e50f92a6bf87ed2b545cdc45671df082d68d9af2"
+  },
+  "native_report_sha256": "4fc16ab8dd0e8d4fe34c10daf54dbd368fa6328ec1d37321bd1180e604ad4f62",
+  "learner_source_sha256": "2a064f3d46cee8f7c78533f6f396538852ee5ad931d82c18577bc2becbfeb5f4",
+  "helper_sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+  "checks": [
+    {
+      "id": "full-student-code",
+      "passed": true
+    },
+    {
+      "id": "full-renderer-code",
+      "passed": true
+    },
+    {
+      "id": "printed-plus-extension",
+      "passed": true
+    }
+  ],
+  "native_evidence": "ghost-student/evidence/2026-10-05-lines-relation-and-rule/report-runtime.json",
+  "previous_tutorial_sha256": "e18def8d83456b22caeb6a73260dc434c6c9031bb4916b3e02e57c4d7f7db86f",
+  "limits": [
+    "No new learner comprehension claim.",
+    "No headset or museum playthrough claim.",
+    "A changed canonical tutorial makes this textual check stale; the original native source pin remains unchanged."
+  ]
+}

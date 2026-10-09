@@ -1,0 +1,2857 @@
+{
+  "evolved_creatures": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "evolved_creatures",
+      "entry": {
+        "dna": {
+          "axes": {
+            "selection": [
+              "drift",
+              "uniform",
+              "culled",
+              "runaway",
+              "split"
+            ]
+          },
+          "framing": 0.55,
+          "framing_why": "DERIVED FROM THE UNION AABB, WHICH IS A 40 m GROUND PLATE. Union 40.00 x 2.21 x 40.00, diagonal 56.6117, radius 28.3058. The rig fits by DIAGONAL, so at framing 1.0 the camera stands radius/tan(17deg)*1.9 = 175.91 m out and the visible frame is 107.56 m wide - for a subject that projects 55.797 m wide and 16.480 m tall at yaw 0.62 / pitch -0.26. The plate filled 51.9% of frame WIDTH and 15.3% of its HEIGHT: two thirds of the picture was spent on a height a flat square does not have. This is exactly the thin-wide-subject case in CLAUDE.md's null-verdict table, and the cost was not a thin number but a missing one - the archived bite report reads subject 0.268%, peak 0.471%, SUBJECT NOT DETECTED. AT 0.55 the camera is 96.75 m out, the frame is 59.16 m wide, the plate fills 94.3% of it, and the scale is 12.85 px/m. A 0.86 m torso is 11.05 px against LAW 9's floor of 10 - the first framing at which the population is measurable at all. 0.50 would be sharper still and puts the plate at 103.7% of frame width, which clips the corner bodies that ARE the culled value. 0.55 is the tightest framing that does not cut the axis's own evidence.",
+          "measured": "MEASURED 2026-08-13, and this axis had never been photographed. The archived bite report (2026-07-31) reads subject 0.268%, peak 0.471%, SUBJECT NOT DETECTED - and check_dna_declarations returned ok for it the whole time, because the DECLARATION was honest: the five values match SELECTIONS and the @export_enum character for character. Every gate green, nothing seen. TWO FAULTS, both in the harness and neither in the axis. (1) FRAMING - see framing_why: a flat 40 m plate fitted by its DIAGONAL put the camera 175.91 m out and spent two thirds of the picture on height a square does not have. (2) THE ARTIFACT FELL OVER BEFORE THE SHUTTER. Every body spawns with FOOT_CLEARANCE = 1.2 m of air under it and the bench settles 1.1 s; free fall of 1.2 m takes 0.495 s, so the herd landed at ~4.85 m/s with the hip motors driving, ~0.6 s before the frame existed. The recorded measurement said so and nobody read it that way: aabb_size [40.0, 2.21, 40.0] at centre y 0.71 puts the top of everything at 1.815 m, BELOW drift's 2.400 m spawn torso top and far below runaway's 4.250 m. AFTER framing 0.55 and fixture freeze_bodies: subject 0.268% -> 14.6% (54x), peak 0.471% -> 2.43% (5.2x), verdict SUBJECT NOT DETECTED -> BITES. rejected=0. All five values are now individually legible: drift and uniform on the shared 5 x 4 grid, culled as four bodies at the corners, runaway as the converging fan, split as two ranks. WHAT THE FIXTURE DOES NOT FIX, stated because a fixture that hides a defect is the failure this corpus keeps paying for. freeze_bodies makes the still show WHAT THE AXIS BUILDS. What a player meets across 11 maps is still the fallen herd, and bipeds that topple within a second of spawning are a defect in a walker demo, not a capture problem. That is the artifact's own fix and it is not made here. AND drift IS NOT A SPREAD, which the sheet now shows plainly: 20 geometrically identical bodies on a regular lattice. CreatureGenome.randomize() draws hip amplitude, frequency, phase and the two masses - never torso_size or leg_size - and _genome_for returns before _apply_morph for drift. The word promises a spread; the code delivers a lattice, and only the gait and the masses vary, both invisible in a still.",
+          "fixture": {
+            "freeze_bodies": true
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "advanced",
+        "description": "Physics-based creature evolution inspired by Karl Sims — bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.",
+        "dev_themes": [
+          "ai",
+          "biology",
+          "education",
+          "machine_learning"
+        ],
+        "footprint": [
+          40,
+          1,
+          40
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "evolved_creatures",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Evolved Creatures (Karl Sims)",
+        "parameters": {
+          "footprint": [
+            40,
+            1,
+            40
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "evolution",
+          "karl_sims",
+          "creature",
+          "locomotion",
+          "genetic_algorithm",
+          "physics"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1600,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            40.0,
+            2.21,
+            40.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.71,
+            0.0
+          ],
+          "grid_cells": [
+            40,
+            40
+          ],
+          "max_dimension_m": 40.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 60,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152292Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "gradient_descent_visualization": [
+    {
+      "registry_file": "commons/artifacts/registry/algorithms_misc.json",
+      "registry_sha256": "87af799db8de0326b7cadaa8fc530bf30b4375b8eb044eec877146988caced19",
+      "entry_key": "gradient_descent_visualization",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "basin": [
+              "bowl",
+              "valley",
+              "plural",
+              "plateau",
+              "scarp"
+            ],
+            "evidence": [
+              "result",
+              "trace",
+              "longhand",
+              "axiom"
+            ]
+          },
+          "default": "basin=bowl, evidence=longhand - longhand is the four trails, the four markers and the four live gradient arrows, i.e. the shipped OPTIMIZERS picture branch for branch; the arrow block is the original code moved under an `if` and nothing else. All 5 existing placements (Cabinet_Gallery, Disposition_Test_Rooms, Grown_DNA_Algorithms, MachineLearning_Evolving_Creatures, ML_Evolution) are plain tokens with no config, so they get exactly what they got before.",
+          "was": "basin was promoted earlier and lifted function_preset out of apply_grid_config-only reach. What was still hard-coded was the DISCLOSURE: trails, markers and per-runner gradient arrows were drawn unconditionally, so no map could ask this artifact for the answer without the working, or for the rule without the run.",
+          "note": "evidence is what the artifact offers as proof that a descent happened. result = the four markers alone, an optimizer as a POSITION. trace = + the paths, where SGD's zig-zag, Momentum's overshoot and Adam's straight run actually live - none of that is legible from a marker. longhand = + the local gradient at each runner. axiom = the runners go and -grad f is sampled on the same 9 x 9 lattice the HESSIAN mode reads curvature on, direction normalised (the direction is the local truth the update rule consumes) and length carrying log|grad f| scaled to THIS surface. axiom is where the two axes argue: on plateau every arrow collapses toward the length floor because the surface has nothing to say, and on scarp the columns either side of the face point at each other - both derivatives honest about the bowl, one of them a lie about the cliff between them. The readout and key strip switch with it, because a legend naming four colours none of which is in frame is the label contradicting the picture.",
+          "kin": "evidence is taken character for character from the family (example_1_7 / 1_9 / 2_8 / 2_9, koch_curve, box_counting_dimension, three_body_problem) - one question asked of a thing in motion: what do you put in the frame as PROOF that a law is moving it? THE DEFAULT DIFFERS FROM THE FAMILY'S. The motion demos ship as `result`, a bare ball with every exhibit withheld; this one ships with its whole working already on the table, so it ships as `longhand`. A map that asks all of them for `longhand` still gets one vocabulary and several answers, which is the test of the shared word.",
+          "still_note": "evidence needs no rebuild - all four values are branches inside the per-frame ImmediateMesh pass, so apply_grid_config sets the word and never touches the standing 8 m console. Sweeping evidence on the DEFAULT basin (bowl) understates it: bowl's four runners converge to nearly the same short path, so result-vs-trace is small there. Sweep it on `valley` or `plural`, where the trails are long and separate, or measure the pair basin=scarp x evidence=axiom, which is the strongest single frame this artifact can produce.",
+          "framing_note": "the axis lives in the 8 x 8 m field on the deck, not on the console body, so a fit-by-diagonal that includes the legs and the bay will shrink the field to a fraction of frame. Check subject % before reading any verdict on either axis."
+        },
+        "category": "algorithms",
+        "complexity": "intermediate",
+        "description": "Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",
+        "dev_themes": [
+          "algorithms",
+          "education",
+          "misc"
+        ],
+        "footprint": [
+          8,
+          5,
+          8
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "gradient_descent_visualization",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning",
+          "testmaps"
+        ],
+        "name": "Gradient Descent",
+        "parameters": {
+          "footprint": [
+            8,
+            5,
+            8
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "gradient_descent",
+          "optimization",
+          "loss_landscape",
+          "learning_rate",
+          "numerical_methods"
+        ],
+        "geometry_spec": {
+          "mesh_type": "delegated_scene",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "scene_instantiation",
+            "primitives": [],
+            "operations": [
+              "load_scene",
+              "instantiate",
+              "configure"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "varies"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "neural_network_visualization",
+            "gradient",
+            "descent",
+            "training"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            8.84,
+            4.92,
+            8.94
+          ],
+          "aabb_center": [
+            0.0,
+            1.54,
+            0.05
+          ],
+          "grid_cells": [
+            9,
+            9
+          ],
+          "max_dimension_m": 8.94,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 1,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.035559Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "non_teleological_evolution": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "non_teleological_evolution",
+      "entry": {
+        "dna": {
+          "axes": {
+            "selection": [
+              "drift",
+              "uniform",
+              "culled",
+              "runaway",
+              "split"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.",
+        "dev_themes": [
+          "ai",
+          "biology",
+          "machine_learning"
+        ],
+        "footprint": [
+          2,
+          1,
+          2
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "non_teleological_evolution",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Non-Teleological Evolution",
+        "parameters": {
+          "footprint": [
+            2,
+            1,
+            2
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+        "sequence": "machinelearning",
+        "size_group": "standard",
+        "tags": [
+          "evolution",
+          "non_teleological",
+          "drift",
+          "no_fitness",
+          "emergence",
+          "critical_theory"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "particle_lifecycle",
+            "driven_by": "cpu_simulation",
+            "affects": [
+              "transform",
+              "color"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "~64"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 3,
+          "cluster_with": [
+            "evolved_creatures",
+            "fitness",
+            "driven",
+            "counterpart",
+            "similar"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            2.0,
+            100.11,
+            2.0
+          ],
+          "aabb_center": [
+            0.0,
+            -49.97,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 100.11,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "evolvingflowers": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "evolvingflowers",
+      "entry": {
+        "dna": {
+          "axes": {
+            "selection": [
+              "drift",
+              "uniform",
+              "culled",
+              "runaway",
+              "split"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "genome = {petals, color_hue, symmetry, L-system_rules, branch_angle}; fitness = symmetry + vibrancy + complexity",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          20,
+          3,
+          20
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "evolvingflowers",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "evolvingflowers",
+        "parameters": {
+          "footprint": [
+            20,
+            3,
+            20
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [
+              "sphere",
+              "cylinder",
+              "plane"
+            ],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~256"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "shared",
+            "pattern",
+            "unlocks",
+            "evolved_creatures"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 400,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            20.0,
+            2.81,
+            20.0
+          ],
+          "aabb_center": [
+            0.0,
+            1.39,
+            0.0
+          ],
+          "grid_cells": [
+            20,
+            20
+          ],
+          "max_dimension_m": 20.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 35,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "science_screen": [
+    {
+      "registry_file": "commons/artifacts/registry/shaders.json",
+      "registry_sha256": "565f7f2712e6ec41c7c27f55e5cd79659c707a5e548c18c8dc45364a1880af8f",
+      "entry_key": "science_screen",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "support": [
+              "stand",
+              "frame",
+              "cabinet",
+              "pylon"
+            ],
+            "surface": [
+              "plane",
+              "curve",
+              "triptych",
+              "tiles"
+            ]
+          },
+          "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+          "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
+        },
+        "category": "shaders",
+        "complexity": "intermediate",
+        "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+        "dev_themes": [
+          "shaders",
+          "visual"
+        ],
+        "footprint": [
+          4,
+          3,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "science_screen",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Science Screen",
+        "parameters": {
+          "footprint": [
+            4,
+            3,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+        "sequence": "patterngeneration",
+        "size_group": "standard",
+        "tags": [
+          "projection",
+          "transformation",
+          "screen",
+          "abstraction",
+          "2d",
+          "reflection",
+          "display",
+          "viewport",
+          "grid",
+          "configurable"
+        ],
+        "qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+        "gamwell_reference": "",
+        "capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+        "interactions": [
+          "bring a grid-aware artifact near the screen",
+          "compare the embodied 3D object with its flat rendering",
+          "read algorithm labels and cell statistics on the display",
+          "use the screen to reflect on what projection keeps and discards"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.14,
+            2.35,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            1.14,
+            -0.08
+          ],
+          "grid_cells": [
+            4,
+            1
+          ],
+          "max_dimension_m": 3.14,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 10,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.268877Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "pca_visualization": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "pca_visualization",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-30",
+          "stage": "2 - variation",
+          "axes": {
+            "bearing": [
+              "aligned",
+              "crosswise",
+              "none",
+              "curve",
+              "plane"
+            ]
+          },
+          "default": "bearing=aligned - aligned BUILDS NO MANIFOLD BODY. It is the @export default and the only value that adds no geometry, so both existing placements (Grown_DNA_Learning, ML_Gradient_Landscape) render exactly what they rendered before: the sample cloud, the principal-component rods, the two 3D label plates, nothing else. The one honest caveat is that the cloud is now drawn from a seeded RandomNumberGenerator (DATA_SEED) instead of the global unseeded randf(), so a given placement no longer matches any one pre-change run - but pre-change it matched no run either, since the cloud was redrawn differently on every load. Same generator code path, same distribution, same visual character; what changed is that it is now reproducible, which is the precondition for the still being evidence at all.",
+          "was": "no axis of its own. The cloud generator was a single hard-coded correlated-Gaussian draw, so PCA - an algorithm whose entire claim is that it finds the direction structure actually runs in - could only ever be shown one structure. Every placement and every capture met the same axis-aligned blob and the found principal components were a foregone conclusion.",
+          "note": "CAPTURE HAZARD, verified still present: setup_ui() builds a 450 x 800 screen-space Panel on a CanvasLayer during _build_all(), late enough that a single chrome-suppression pass misses it. In an earlier gallery that dark rectangle occupied one tile of five and measured the axis at 11.6% while the four clouds being compared were mutually identical - a number about the overlay, not the artifact. The capturer now suppresses chrome twice. The panel is safe to suppress: _build_3d_labels() builds the player-facing readout as billboarded 3D label plates (title at y=6.0, live stats at y=5.0), so nothing a player needs lives only on the CanvasLayer."
+        },
+        "category": "machinelearning",
+        "complexity": "advanced",
+        "description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          12,
+          5,
+          12
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "pca_visualization",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "PCA Visualization",
+        "parameters": {
+          "footprint": [
+            12,
+            5,
+            12
+          ],
+          "size_group": "xlarge"
+        },
+        "qfep_connection": "PCA is pure F-minimization through dimensionality reduction — finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
+        "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "pca",
+          "dimensionality_reduction",
+          "variance",
+          "projection"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "gradient_descent_visualization",
+            "optimization",
+            "without",
+            "gradient"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 144,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            12.0,
+            5.06,
+            12.0
+          ],
+          "aabb_center": [
+            0.0,
+            -0.47,
+            0.0
+          ],
+          "grid_cells": [
+            12,
+            12
+          ],
+          "max_dimension_m": 12.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "loss_function_comparator": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "loss_function_comparator",
+      "entry": {
+        "dna": {
+          "axes": {
+            "tail": [
+              "few",
+              "none",
+              "heavy",
+              "sole",
+              "split"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.",
+        "dev_themes": [
+          "ai",
+          "education",
+          "machine_learning"
+        ],
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "include_in_map_data": true,
+        "interaction": "interact",
+        "lookup_name": "loss_function_comparator",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Loss Function Comparator",
+        "parameters": {
+          "footprint": [
+            2,
+            1,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+        "sequence": "machinelearning",
+        "size_group": "standard",
+        "tags": [
+          "loss_function",
+          "gradient_descent",
+          "optimization",
+          "comparison",
+          "mse",
+          "huber",
+          "critical_theory"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~144"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 2,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [
+            "gradient_descent_landscape",
+            "single",
+            "optimization_algorithms",
+            "optimizer",
+            "comparison"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 2,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.7,
+            0.47,
+            0.67
+          ],
+          "aabb_center": [
+            0.0,
+            0.21,
+            0.09
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.7,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 4,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "enhanced_kmeans": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "enhanced_kmeans",
+      "entry": {
+        "dna": {
+          "axes": {
+            "cohort": [
+              "blobs",
+              "block",
+              "rings",
+              "braid",
+              "skew"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          50,
+          10,
+          50
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "enhanced_kmeans",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Enhanced K-Means Clustering",
+        "parameters": {
+          "footprint": [
+            50,
+            10,
+            50
+          ],
+          "size_group": "xlarge"
+        },
+        "qfep_connection": "K-means IS iterative F-minimization — centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a λ-like parameter: too few clusters = underfitting, too many = overfitting.",
+        "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "k_means",
+          "clustering",
+          "unsupervised",
+          "centroids",
+          "animation"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere",
+              "cylinder",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "svm_visualization",
+            "supervised",
+            "boundaries",
+            "unsupervised"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 2500,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            50.0,
+            9.38,
+            50.0
+          ],
+          "aabb_center": [
+            0.0,
+            -1.31,
+            0.0
+          ],
+          "grid_cells": [
+            50,
+            50
+          ],
+          "max_dimension_m": 50.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 75,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152292Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "svm_visualization": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "svm_visualization",
+      "entry": {
+        "dna": {
+          "axes": {
+            "cohort": [
+              "blobs",
+              "block",
+              "rings",
+              "braid",
+              "skew"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          10,
+          6,
+          10
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "svm_visualization",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Support Vector Machine Visualization",
+        "parameters": {
+          "footprint": [
+            10,
+            6,
+            10
+          ],
+          "size_group": "xlarge"
+        },
+        "qfep_connection": "SVM finds the maximum-margin boundary — the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
+        "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "svm",
+          "support_vector",
+          "classification",
+          "margin",
+          "kernel"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "enhanced_kmeans",
+            "supervised",
+            "unsupervised",
+            "contrasts"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 100,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.0,
+            4.31,
+            10.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.03,
+            0.0
+          ],
+          "grid_cells": [
+            10,
+            10
+          ],
+          "max_dimension_m": 10.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "random_forest_visualization": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "random_forest_visualization",
+      "entry": {
+        "dna": {
+          "axes": {
+            "cohort": [
+              "block",
+              "blobs",
+              "rings",
+              "braid",
+              "skew"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          20,
+          9,
+          20
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "random_forest_visualization",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Random Forest Visualization",
+        "parameters": {
+          "footprint": [
+            20,
+            9,
+            20
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "random_forest",
+          "ensemble",
+          "decision_tree",
+          "classification"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 2,
+          "cluster_with": [
+            "depends",
+            "enhanced_kmeans",
+            "trees",
+            "split",
+            "clustering"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 400,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            20.0,
+            7.9,
+            20.0
+          ],
+          "aabb_center": [
+            0.0,
+            -0.06,
+            0.0
+          ],
+          "grid_cells": [
+            20,
+            20
+          ],
+          "max_dimension_m": 20.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "neural_network_visualization": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "neural_network_visualization",
+      "entry": {
+        "dna": {
+          "axes": {
+            "topology": [
+              "graded",
+              "flat",
+              "deep",
+              "widened",
+              "pinched"
+            ]
+          }
+        },
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          10,
+          9,
+          1
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "neural_network_visualization",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Neural Network Visualization",
+        "qfep_connection": "Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional λ (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
+        "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "neural_network",
+          "activations",
+          "weights",
+          "forward_pass",
+          "layers"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "gradient_descent_visualization",
+            "backprop",
+            "gradient",
+            "descent"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 10,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            12.62,
+            8.65,
+            5.46
+          ],
+          "aabb_center": [
+            5.92,
+            -0.2,
+            -2.34
+          ],
+          "grid_cells": [
+            13,
+            6
+          ],
+          "max_dimension_m": 12.62,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "neural_networks_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "neural_networks_vr",
+      "entry": {
+        "dna": {
+          "axes": {
+            "topology": [
+              "graded",
+              "flat",
+              "deep",
+              "widened",
+              "pinched"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "advanced",
+        "description": "Walkable neural network with visible weights and backpropagation",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          23,
+          10,
+          8
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "neural_networks_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "NeuralNetworks_VR",
+        "parameters": {
+          "footprint": [
+            23,
+            10,
+            8
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "graph"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "~5 instances"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "gradient_descent_visualization",
+            "training",
+            "optimization",
+            "unlocks"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 224,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            27.4,
+            14.16,
+            8.02
+          ],
+          "aabb_center": [
+            9.05,
+            0.25,
+            -0.01
+          ],
+          "grid_cells": [
+            28,
+            9
+          ],
+          "max_dimension_m": 27.4,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The network turned inside out and made walkable — weights hanging in the air as visible thicknesses, activations lighting up as you pass, and backpropagation running the error backward through the whole structure like a confession travelling upstream. The primitive of deep learning shown honestly: not a brain, but a landscape of numbers that adjusts itself by measuring how wrong it just was."
+      }
+    }
+  ],
+  "fine_tuning_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "fine_tuning_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Transfer learning tower with frozen and trainable layers",
+        "dev_themes": [
+          "ai",
+          "education",
+          "machine_learning"
+        ],
+        "footprint": [
+          3.0,
+          1.0,
+          3.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "fine_tuning_vr",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "FineTuning_VR",
+        "parameters": {
+          "footprint": [
+            3.0,
+            1.0,
+            3.0
+          ],
+          "size_group": "room_scale"
+        },
+        "scene": "res://algorithms/machinelearning/fine_tuning/FineTuning_VR.tscn",
+        "size_group": "room_scale",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~8"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 33,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            11.0,
+            12.07,
+            3.89
+          ],
+          "aabb_center": [
+            0.0,
+            5.89,
+            0.0
+          ],
+          "grid_cells": [
+            11,
+            4
+          ],
+          "max_dimension_m": 12.07,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A network as a tower with padlocks: frozen storeys keep their inherited weights while gradients flow only through the unlocked top. Transfer learning staged as property law — most of the model is estate, and 'learning' happens in the floors you are permitted to renovate."
+      }
+    }
+  ],
+  "computer_vision_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "computer_vision_vr",
+      "entry": {
+        "dna": {
+          "axes": {
+            "detection": [
+              "named",
+              "invented",
+              "swarm",
+              "whole",
+              "bare"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Interactive image processing with spatial convolution filters",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          4,
+          5,
+          2
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "computer_vision_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "ComputerVision_VR",
+        "parameters": {
+          "footprint": [
+            4,
+            5,
+            2
+          ],
+          "size_group": "large"
+        },
+        "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+        "size_group": "large",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "generated_texture",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "convolutional_neural_networks_cnns_vr",
+            "learned",
+            "kernels",
+            "designed"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 50,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            24.82,
+            6.14,
+            1.5
+          ],
+          "aabb_center": [
+            2.09,
+            -1.07,
+            0.1
+          ],
+          "grid_cells": [
+            25.0,
+            2.0
+          ],
+          "max_dimension_m": 24.82,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 60,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152292Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Convolution made spatial — a filter sliding across an image, and you inside the sliding. The room where a machine first *sees*: not by understanding, but by sweeping the same small question (is there an edge here? a corner?) across every position until a picture becomes a field of answers."
+      }
+    }
+  ],
+  "convolutional_neural_networks_cnns_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "convolutional_neural_networks_cnns_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Walkable CNN architecture with interactive kernels",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          50,
+          54,
+          3
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "convolutional_neural_networks_cnns_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "ConvolutionalNeuralNetworksCNNs_VR",
+        "parameters": {
+          "footprint": [
+            50,
+            54,
+            3
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "computer_vision_vr",
+            "designed",
+            "learned",
+            "kernels"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 102,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            51.0,
+            53.25,
+            2.15
+          ],
+          "aabb_center": [
+            24.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            51.0,
+            3.0
+          ],
+          "max_dimension_m": 53.25,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 79,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.152292Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The walkable CNN — kernels you can grab, feature maps stacking from edges to textures to parts to faces. The architecture that taught machines to see by insisting the same detector works everywhere: translation invariance as a built-in belief, the eye's humility written into the weights."
+      }
+    }
+  ],
+  "lstms_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "lstms_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Interactive LSTM cell with walkable memory flow",
+        "dev_themes": [
+          "ai",
+          "biology",
+          "machine_learning"
+        ],
+        "footprint": [
+          11,
+          4,
+          11
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "lstms_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "LSTMs_VR",
+        "parameters": {
+          "footprint": [
+            11,
+            4,
+            11
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/LSTMs/LSTMs_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "wireframe",
+            "key_properties": [
+              "emission",
+              "grid_overlay",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "transformers_vr",
+            "attention",
+            "replaces",
+            "recurrence"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 121,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.04,
+            3.1,
+            10.07
+          ],
+          "aabb_center": [
+            0.0,
+            1.45,
+            -0.02
+          ],
+          "grid_cells": [
+            11,
+            11
+          ],
+          "max_dimension_m": 10.07,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A memory cell you can walk through — gates deciding what to keep, what to forget, what to let out. The LSTM is the chapter's answer to time: a network that carries a thread of context forward, forgetting on purpose so the important thing survives. Memory as a valve, not a vault."
+      }
+    }
+  ],
+  "transformers_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "transformers_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "advanced",
+        "description": "Interactive transformer with attention beam visualization",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          9,
+          10,
+          11
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "transformers_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Transformers_VR",
+        "parameters": {
+          "footprint": [
+            9,
+            10,
+            11
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/transformers/Transformers_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "procedural_line",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "vertex_line_strip",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "compute_vertices",
+              "connect_lines"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "supersedes",
+            "lstms_vr",
+            "attention",
+            "replaces",
+            "recurrence"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 165,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            15.75,
+            20.69,
+            10.6
+          ],
+          "aabb_center": [
+            1.88,
+            0.68,
+            0.0
+          ],
+          "grid_cells": [
+            16,
+            11
+          ],
+          "max_dimension_m": 20.69,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Attention drawn as beams — every token reaching to every other, weighting what matters, and the whole sequence understood at once instead of in order. The architecture underneath the machine writing these very words: not memory marched step by step, but relevance computed all at once. The room where the curriculum quietly meets the intelligence walking it."
+      }
+    }
+  ],
+  "generative_adversarial_networks_gans_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "generative_adversarial_networks_gans_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Spatial GAN arena with generator and discriminator zones",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          13,
+          5,
+          8
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "generative_adversarial_networks_gans_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "GenerativeAdversarialNetworksGANs_VR",
+        "parameters": {
+          "footprint": [
+            13,
+            5,
+            8
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "sunken",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "neural_networks_vr",
+            "discriminative",
+            "generative",
+            "depends"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 198,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            18.54,
+            5.94,
+            11.7
+          ],
+          "aabb_center": [
+            0.03,
+            2.61,
+            -0.2
+          ],
+          "grid_cells": [
+            19,
+            12
+          ],
+          "max_dimension_m": 18.54,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Two networks locked in a duel — a generator forging samples, a discriminator calling the fakes — each making the other better until the forgeries pass. Creation as adversarial pressure, art from an arms race. The world room's unsettling proof that convincing can be reached without ever understanding."
+      }
+    }
+  ],
+  "anomaly_detection": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "anomaly_detection",
+      "entry": {
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          18,
+          1,
+          18
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "anomaly_detection",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Anomaly Detection",
+        "parameters": {
+          "footprint": [
+            18,
+            1,
+            18
+          ],
+          "size_group": "xlarge"
+        },
+        "qfep_connection": "Anomalies are high-F surprises — data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
+        "scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "anomaly",
+          "outlier",
+          "isolation_forest",
+          "detection"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 324,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            18.0,
+            0.53,
+            18.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.15,
+            0.0
+          ],
+          "grid_cells": [
+            18.0,
+            18.0
+          ],
+          "max_dimension_m": 18.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 35,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152292Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "joint_learn_walk": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "joint_learn_walk",
+      "entry": {
+        "category": "machinelearning",
+        "complexity": "advanced",
+        "description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
+        "dev_themes": [
+          "ai",
+          "education",
+          "machine_learning"
+        ],
+        "footprint": [
+          80,
+          1,
+          80
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "lookup_name": "joint_learn_walk",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Joint Learn Walk (Reinforcement Learning)",
+        "qfep_connection": "Reinforcement learning as embodied F-minimization — the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
+        "scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+        "sequence": "machinelearning",
+        "size_group": "xlarge",
+        "tags": [
+          "reinforcement_learning",
+          "locomotion",
+          "joints",
+          "policy_gradient"
+        ],
+        "geometry_spec": {
+          "mesh_type": "procedural_line",
+          "topology": "non_manifold",
+          "construction": {
+            "method": "vertex_line_strip",
+            "primitives": [
+              "sphere",
+              "cylinder",
+              "plane"
+            ],
+            "operations": [
+              "compute_vertices",
+              "connect_lines"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~4"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "evolved_creatures",
+            "adapts",
+            "behavior",
+            "adapts"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            80.0,
+            1.46,
+            80.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.72,
+            0.0
+          ],
+          "grid_cells": [
+            80,
+            80
+          ],
+          "max_dimension_m": 80.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "explainable_ai_xai_vr": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "3d3c9a158adbaafabac5484d0c035367095858def5e32dab3ea48ab57cf9a062",
+      "entry_key": "explainable_ai_xai_vr",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Interactive SHAP, LIME, and Grad-CAM explanations",
+        "dev_themes": [
+          "ai",
+          "machine_learning"
+        ],
+        "footprint": [
+          6,
+          16,
+          7
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "explainable_ai_xai_vr",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "ExplainableAIXAI_VR",
+        "parameters": {
+          "footprint": [
+            6,
+            16,
+            7
+          ],
+          "size_group": "xlarge"
+        },
+        "scene": "res://algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.tscn",
+        "size_group": "xlarge",
+        "tags": [
+          "machine_learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder",
+              "plane"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~25"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "neural_networks_vr",
+            "model",
+            "explain",
+            "contrasts"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 189,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            29.41,
+            16.0,
+            6.79
+          ],
+          "aabb_center": [
+            1.79,
+            0.0,
+            0.21
+          ],
+          "grid_cells": [
+            30,
+            7
+          ],
+          "max_dimension_m": 29.41,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "SHAP, LIME, Grad-CAM — the instruments that ask a black box *why*, and get partial, honest, contestable answers. The accountability room: after seven chambers of learning that works without understanding, this one insists the machine show its reasons. Not because the reasons are the truth, but because a decision no one can question is a decision no one can refuse."
+      }
+    }
+  ]
+}

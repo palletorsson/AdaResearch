@@ -1,0 +1,497 @@
+{
+  "sequence": "isosurfaces",
+  "declared_maps": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "museum_map_authored_order": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_Caves",
+    "ISO_Metaballs"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "ISO_Introduction",
+      "recorded_status": "source_checked_draft",
+      "text_words": 673,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "voxel_noise_demo"
+        ],
+        "reason": "Where does the surface come from if nobody drew its outline?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_Introduction/final.md",
+        "text_sha256": "d48ae5da1f74a9787d5361f06555611edd0e86b52f32fcc7c25b98ef016523cf",
+        "map_sha256": "f104e5fc1bad3d72c5d606414d06c74adde2a693354547a37078a8590d94a104",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "voxel_noise_demo"
+      ],
+      "role_primary_order": [
+        "voxel_noise_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_LookupTable",
+      "recorded_status": "source_checked_draft",
+      "text_words": 616,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "fifteen_cases_demo"
+        ],
+        "reason": "What can eight corner samples tell you about the space between them?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_LookupTable/final.md",
+        "text_sha256": "7656ab164789ac128e57747e1b9f4ef86b88796e042662be77cb71593a8c1e28",
+        "map_sha256": "a55e788d3a9b0a091838eb908955b222bce446fdb54b057e4fe6e7c7cb9d6f3c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "fifteen_cases_demo"
+      ],
+      "role_primary_order": [
+        "fifteen_cases_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_ShapesGallery",
+      "recorded_status": "source_checked_draft",
+      "text_words": 771,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mc_shapes_gallery"
+        ],
+        "reason": "Can the same surface-making procedure describe a chair and a cup?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_ShapesGallery/final.md",
+        "text_sha256": "e4f158a2c5264923af8f55c4f22eab28a9160814786fdc04eb85ffc21a29b321",
+        "map_sha256": "d43b39ead4a257c2c324d430060e9764f1304bf62147270fcc4dceea95ed65b4",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mc_shapes_gallery"
+      ],
+      "role_primary_order": [
+        "mc_shapes_gallery"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_TorusGyroid",
+      "recorded_status": "source_checked_draft",
+      "text_words": 855,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "GyroidDemo"
+        ],
+        "reason": "Does a repeating surface have to be a pile of repeating objects?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_TorusGyroid/final.md",
+        "text_sha256": "ea3976b3fc9139f9fa157fe55a2304fe6a0399dfd134045a39531c315341b67b",
+        "map_sha256": "06d173abd83b69a4d854d1812f2f4a4ab35a8f5dd0de5636d4bffa1d39882801",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mc_torus_sculpture",
+        "GyroidDemo"
+      ],
+      "role_primary_order": [
+        "mc_torus_sculpture",
+        "GyroidDemo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_Sculpting",
+      "recorded_status": "source_checked_draft",
+      "text_words": 624,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mc_sculpt_vr"
+        ],
+        "reason": "When two deposits meet, where is their seam?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_Sculpting/final.md",
+        "text_sha256": "3f11c6f315742e3dde2813d224830c9175771462723eba7ab2ce94754194fb84",
+        "map_sha256": "9f274a93563ba0941f62808fd37d55ca3b3a235531bb6c94f65ce07946c9952d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mc_sculpt_vr"
+      ],
+      "role_primary_order": [
+        "mc_sculpt_vr"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_FlatTerrain",
+      "recorded_status": "source_checked_draft",
+      "text_words": 694,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mc_flat_landscape"
+        ],
+        "reason": "Can a landscape have two surfaces above the same place?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_FlatTerrain/final.md",
+        "text_sha256": "71ba407e9a483ad6b92d9297806ffcb478d1ba68f8afde223c007fb858a884b3",
+        "map_sha256": "7400fc95c1d4f735f0f69bcc1e669daa1980f6344ff8d64de69ff02a40893e1a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mc_flat_landscape",
+        "mc_overhang_landscape"
+      ],
+      "role_primary_order": [
+        "mc_flat_landscape",
+        "mc_overhang_landscape"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_PortalLandscape",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "marchingcubes_portal_landscape"
+        ],
+        "reason": "How can an opening appear without drawing a doorway?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_PortalLandscape/final.md",
+        "text_sha256": "f40c475d123f61a759b1d7c07a401a0027de4d2097e4f1e906d5f8b69baf21bc",
+        "map_sha256": "d77db5177ae840957367875f86deafcc86a2242da0fabd0a460e446ab246c71d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "marchingcubes_portal_landscape"
+      ],
+      "role_primary_order": [
+        "marchingcubes_portal_landscape"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_Caves",
+      "recorded_status": "source_checked_draft",
+      "text_words": 441,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mc_inside_cave"
+        ],
+        "reason": "What changes when a surface surrounds your viewpoint?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_Caves/final.md",
+        "text_sha256": "c8fa3b2d81c103b611f7484e61b2fa8964f7847c0cb37e267b7a04f92b9be2dd",
+        "map_sha256": "99ecb45061987ae113c476f468eebfa56c1b657ea0eefb01ba35153e92ac859c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mc_portal_landscape",
+        "mc_inside_cave",
+        "queer_marching_cave"
+      ],
+      "role_primary_order": [
+        "mc_inside_cave",
+        "mc_portal_landscape"
+      ],
+      "anchors_not_in_primary_roles": [
+        "queer_marching_cave"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_CaveGeneration",
+      "recorded_status": "source_checked_draft",
+      "text_words": 413,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "marchingcubes_cave"
+        ],
+        "reason": "Who designed a corridor when nobody placed its walls one by one?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_CaveGeneration/final.md",
+        "text_sha256": "71d94dd8759c7d5f2a75789c40244b27f37148cc895b87e4015e730909c82e3f",
+        "map_sha256": "2657480d240860d62ab102e0d8308f81781deb9cb042d3af39dc5fc625835c06",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "marchingcubes_cave"
+      ],
+      "role_primary_order": [
+        "marchingcubes_cave"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "recorded_status": "source_checked_draft",
+      "text_words": 395,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "animated_noise_explorer"
+        ],
+        "reason": "Are these blocks moving, or are different blocks being drawn?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_AnimatedNoise/final.md",
+        "text_sha256": "bbbdbecab0a0f5d32963beced4a914f7f0cfb0deaa9061f93b37c8ef03b2057e",
+        "map_sha256": "7f778e5349949c217da94ec9b38f4786d9c0af0bcb7c3bb43905422bcadfef5e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "animated_noise_explorer"
+      ],
+      "role_primary_order": [
+        "animated_noise_explorer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_Metaballs",
+      "recorded_status": "source_checked_draft",
+      "text_words": 329,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "metaball_world"
+        ],
+        "reason": "Can two sources make one body?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_Metaballs/final.md",
+        "text_sha256": "13fd93e27d2d356fcbb6e0641a4163ca8e0c9e40ef1a2d3e35e7cab46496f661",
+        "map_sha256": "73a4e2e24020c8919d1cd2d3080a0afa81c7271880a8c9ef4df6ba2417684ec7",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "metaball_world",
+        "raymarched_metaballs",
+        "nakama_metaballs",
+        "metaballs"
+      ],
+      "role_primary_order": [
+        "metaball_world"
+      ],
+      "anchors_not_in_primary_roles": [
+        "metaballs",
+        "nakama_metaballs",
+        "raymarched_metaballs"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_ImplicitModeling",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "implicit_surface_modeling"
+        ],
+        "reason": "Must a visible surface already exist as a triangle mesh?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_ImplicitModeling/final.md",
+        "text_sha256": "62ff4147f00f0b832f2c4e81a13698efb1df5e603283a301ca1cc4ddbb953cd0",
+        "map_sha256": "6aa23fbdf8e724976e4159643f74377a69b5f53125a8cefe20f53e93fc45c7c0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "implicit_surface_modeling"
+      ],
+      "role_primary_order": [
+        "implicit_surface_modeling"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "ISO_RhizomeBody",
+      "recorded_status": "source_checked_draft",
+      "text_words": 429,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "rhizome_inside"
+        ],
+        "reason": "Can you return by a route different from the one you arrived along?",
+        "status": "source_checked_draft",
+        "sequence": "isosurfaces",
+        "text_path": "commons/maps/ISO_RhizomeBody/final.md",
+        "text_sha256": "4e92761846c77a2bbae6e6e0635c7c06243f369d74cd982725859867f781e624",
+        "map_sha256": "fe120fc5d10a4bee18abfb112f016be9dcab651a0a7ca8f4e90cdace86eb9d59",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "rhizome_inside"
+      ],
+      "role_primary_order": [
+        "rhizome_inside"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd",
+      "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballscene.gd",
+      "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballworld.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaball.gdshader",
+      "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+      "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/animated_noise_explorer.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_portal_landscape.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/AnimatedNoiseExplorer.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingShapesGallery.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorOverhang.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Shaders/TerrainVisual.gdshader",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Shaders/glass_wireframe.gdshader",
+      "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.tscn",
+      "algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+      "algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd",
+      "algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.tscn",
+      "algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd",
+      "algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn",
+      "algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+      "commons/artifacts/dream_bodies/dream_iso.gd",
+      "commons/artifacts/dream_bodies/dream_skin.gd",
+      "commons/artifacts/radial_inside/rhizome_inside.gd",
+      "commons/artifacts/radial_inside/rhizome_inside.tscn",
+      "commons/artifacts/radial_inside/rhizome_surface.gdshader",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/resourses/shaders/PinkTeleport.gdshader"
+    ],
+    "unresolved_static_references": [
+      "res://algorithms/proceduralgeneration/metaballs/nakama_metaballs.gd"
+    ],
+    "further_dependencies_not_traversed": [
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

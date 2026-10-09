@@ -1,0 +1,153 @@
+{
+  "shots": [
+    {
+      "tag": "entrance",
+      "from": [
+        19,
+        1.7,
+        1
+      ],
+      "look_at": [
+        19,
+        1.7,
+        18
+      ],
+      "fov": 80
+    },
+    {
+      "tag": "court",
+      "from": [
+        19,
+        18,
+        1
+      ],
+      "look_at": [
+        19,
+        0,
+        18
+      ],
+      "fov": 80
+    },
+    {
+      "tag": "cave-mouth",
+      "from": [
+        20,
+        1.7,
+        4.5
+      ],
+      "look_at": [
+        20,
+        1.7,
+        9
+      ],
+      "fov": 75
+    }
+  ],
+  "room": "PG_Caves_Mazes",
+  "sequence": "proceduralgeneration",
+  "run": "res://ada_run/encounter_pilot/PG_Caves_Mazes/",
+  "rays": [
+    {
+      "tag": "left approach",
+      "x": 13,
+      "z": 5,
+      "top": 0
+    },
+    {
+      "tag": "left aisle",
+      "x": 13,
+      "z": 18,
+      "top": 0
+    },
+    {
+      "tag": "comparison court",
+      "x": 19.5,
+      "z": 18,
+      "top": 0
+    },
+    {
+      "tag": "onward aisle",
+      "x": 19.5,
+      "z": 35,
+      "top": 0
+    },
+    {
+      "tag": "exit approach",
+      "x": 19.5,
+      "z": 45,
+      "top": 0
+    }
+  ],
+  "walks": [
+    {
+      "tag": "enter cave mouth",
+      "from": [
+        19.5,
+        0.1,
+        4.3
+      ],
+      "to": [
+        20,
+        0,
+        7.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "entry to left approach",
+      "from": [
+        19.5,
+        0.1,
+        5
+      ],
+      "to": [
+        13,
+        0,
+        5
+      ],
+      "seconds": 4
+    },
+    {
+      "tag": "around cave to comparison court",
+      "from": [
+        13,
+        0.1,
+        5
+      ],
+      "to": [
+        13,
+        0,
+        18
+      ],
+      "seconds": 8
+    },
+    {
+      "tag": "across comparison court",
+      "from": [
+        13,
+        0.1,
+        18
+      ],
+      "to": [
+        19.5,
+        0,
+        18
+      ],
+      "seconds": 4
+    },
+    {
+      "tag": "court to exit",
+      "from": [
+        19.5,
+        0.1,
+        18
+      ],
+      "to": [
+        19.5,
+        0,
+        46
+      ],
+      "seconds": 16
+    }
+  ]
+}

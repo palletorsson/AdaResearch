@@ -1,0 +1,425 @@
+--- before/commons/artifacts/registry/primitives.json
++++ commons/artifacts/registry/primitives.json
+@@ -1,5 +1,37 @@
+ {
+   "artifacts": {
++    "head_trace_projection": {
++      "lookup_name": "head_trace_projection",
++      "name": "A line you did not hold",
++      "scene": "res://commons/artifacts/head_trace_projection/head_trace_projection.tscn",
++      "description": "Step into a floor square. Headset positions form a pink path in space; the same points projected onto the floor form a cyan path. Step aside to inspect, then return for a new record. Desktop camera motion is explicitly labelled; there is no generated demo.",
++      "category": "primitives",
++      "complexity": "beginner",
++      "map_sequences": [
++        "primitives"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "footprint": [
++        3,
++        3,
++        3
++      ],
++      "size_group": "environmental",
++      "tags": [
++        "trace",
++        "headset",
++        "projection",
++        "body",
++        "sampling"
++      ],
++      "interactions": [
++        "Enter the square, lean or lower your head.",
++        "Step outside to compare the full path and floor projection.",
++        "Return after a short pause to begin a new drawing."
++      ],
++      "qfep_connection": "A projection preserves a route while making height differences coincide. The encounter asks which differences a representation can hold; point count is not an entropy measure."
++    },
+     "trace_short_memory": {
+       "lookup_name": "trace_short_memory",
+       "name": "A line with a short memory",
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -45,15 +45,16 @@
+       "primary_tokens": [
+         "draw_dot",
+         "draw_stick",
++        "head_trace_projection",
+         "whiteboard",
+         "trace_short_memory"
+       ],
+-      "reason": "The first walk follows spatial recording, the displaced sampling tip and contact with the whiteboard, then a 32-position companion makes finite memory available as a moving tail. Telemetry and automatic writing remain secondary; their questions are retained in detours.md.",
++      "reason": "The first walk follows the held point, the displaced stick tip and the headset path with its floor projection, then whiteboard contact and a 32-position companion. Telemetry and automatic writing remain secondary, with generated-versus-measured input distinctions retained in detours.md.",
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Trace/final.md",
+-      "text_sha256": "3e84756363a0f374f3fa27e8c1bcb61714813d6efcf762c767c17c4ab2c8979a",
+-      "map_sha256": "3b0963f54ab53e367b0cba84e8a00f4b1c9e0bdeaf4f71ca84142a088c82ac2e",
++      "text_sha256": "ef1c56475a1f720d0e266cfcb0ed662554b543cebee05aa9dfea8f32585a3d84",
++      "map_sha256": "fdbf8d104197586f921a34624b828e5a1338a8a28c61d8e992df53e8f631b854",
+       "learner_verified": false
+     },
+     "Point_Line_Grid": {
+--- before/commons/maps/Point_Trace/critical.md
++++ commons/maps/Point_Trace/critical.md
+@@ -36,6 +36,8 @@
+ 
+ The stick keeps the same movement threshold while observing a point farther from the fist. Turning the wrist can move that point through an arc. The resulting line describes the trajectory of the chosen tip; it does not become a complete description of the hand.
+ 
++The head-trace square follows a point the visitor is already carrying. Its floor projection can be a useful account of a route while different heights coincide. Lowering the head and returning makes that choice available to inspect. The suspended version keeps another difference but still has no shoulders or intention. Neither representation needs to become a complete body to be useful; the question is which account a particular purpose requires, and whether its omissions remain available to question.
++
+ At the board, proximity to the face and the board's edges decide where a held pen can write. Lifting makes an interval of movement absent from the image. The visitor can use that absence to separate marks. Here the recording boundary supports an action the person wants to perform.
+ 
+ These choices become political when their outputs acquire authority over someone: when a selected point stands for a whole body, or a missing mark becomes evidence that nothing happened. The museum can make the choice inspectable and invite another use. It should leave room to question the interpretation as well as adjust the parameters.
+--- before/commons/maps/Point_Trace/detours.md
++++ commons/maps/Point_Trace/detours.md
+@@ -1,6 +1,6 @@
+ # Return visits in Point_Trace
+ 
+-These experiments remain in the room as secondary encounters. The book follows the drawing dots, stick and whiteboard; a return can ask a different question of the same hall.
++These experiments remain in the room as secondary encounters. The book follows the drawing dots, stick, head-path comparison, whiteboard and short-memory point; a return can ask a different question of the same hall.
+ 
+ ## Give the pause another record
+ 
+@@ -23,3 +23,8 @@
+ The original drawing instruments keep 4096 positions each. Keeping a new point beyond that limit removes the oldest. Current list indices change when the front is removed; the table's last ten rows are another, smaller window onto that list.
+ 
+ The amber companion near the exit now makes this comparison available with 32 positions and the same movement gate. There is no capacity menu: take the other tool, draw, and pause. The book follows this encounter; a return can try different speeds and ask why the same capacity holds different lengths and durations.
++
++
++## Movement before generators
++
++The new head-path comparison uses measured positions and no sine or random trajectory. Its pink/cyan views make a direct record/projection comparison. This differs from the older automatic-writing desk: that script varies sine-shaped handwriting using head-position speed; it does not draw the head's literal path. The coloured dots' `retention:trace` guide strokes and the hand monitors' fallback also contain generated examples. They remain secondary implementation/curation work, not evidence of a visitor gesture. The [source inventory](../../../doc/book/iterations/2026-09-24-trace-short-memory/INPUT-SOURCES.md) records these distinctions. A future direct head-writing mode would need to replace the desk's waveform rather than merely turn off its fallback.
+--- before/commons/maps/Point_Trace/final.md
++++ commons/maps/Point_Trace/final.md
+@@ -54,6 +54,28 @@
+ 
+ The movement threshold is still five millimetres. We moved the place the recorder observes. Which part of your movement has the line begun to describe?
+ 
++## A line you did not hold
++
++<!-- @head_trace_projection -->
++
++Put the tool down. Enter the outlined square beside the plinths. Lean a little, lower your head, then rise. Step outside the square and look back.
++
++A pink line hangs where your head has been. A cyan line lies beneath it. Find the place where you lowered yourself. Can you find that movement in both?
++
++The hand needed a tool. Here the point being followed is in the headset. You were making a line while looking for one.
++
++Both views use the same retained positions. For the floor version, each position gives up its height:
++
++```gdscript
++return Vector3(p.x, FLOOR_Y, p.z)
++```
++
++`p` is a position measured relative to the square. X and Z remain; the floor height takes Y's place. Positions above one another meet on the same spot below. The line can keep where you went across the room while losing how low you bent.
++
++Walk around what remains. Neither line has shoulders, a face, or a reason for leaning. Yet you may recognise something you just did. Which difference would another observer need in order to read it?
++
++Return to the square to begin again. Try giving the floor line a bend. Then try moving without extending it. The same body can make more than one account of its passage.
++
+ ## Touch the page
+ 
+ <!-- @whiteboard -->
+@@ -89,7 +111,7 @@
+ 
+ <!-- @ -->
+ 
+-Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. With the amber dot, only the surviving positions travel. A whiteboard image is kept differently and will not take this route.
++Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. With the amber dot, only the surviving positions travel. A whiteboard image is kept differently and will not take this route. The head trace stays in this hall.
+ 
+ We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+ 
+--- before/commons/maps/Point_Trace/map_data.json
++++ commons/maps/Point_Trace/map_data.json
+@@ -4,7 +4,7 @@
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", "automatic_writing_desk", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", "head_trace_projection:0:0#plinth:0#pin:1", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+@@ -64,7 +64,7 @@
+ 		"format": "json",
+ 		"lookup_name": "Point_Trace",
+ 		"metadata": {
+-			"n_artifacts": 10,
++			"n_artifacts": 11,
+ 			"source": "editor"
+ 		},
+ 		"name": "Point_Trace",
+--- before/commons/maps/Point_Trace/technical.md
++++ commons/maps/Point_Trace/technical.md
+@@ -63,3 +63,16 @@
+ ## Retained development material
+ 
+ The [previous technical draft](../../../doc/space/point-trace-focus-2026-09-16/previous/technical.md) preserves experiments in timestamps, simplification, fading and storage. Those sketches need separate implementation and verification. Its numerical memory comparison and its named simplification algorithm were not reliable descriptions of the installed recorder; they should not be used as current evidence.
++
++
++## Head path and floor projection — 24 September 2026
++
++`head_trace_projection` occupies cell (2,3), centred at (2.5, 0, 3.5). Its 2.2 m square is a flush visual mark over the existing museum floor, with no added obstacle collider. Pink records full positions; cyan is derived from that same list by `Vector3(p.x, FLOOR_Y, p.z)` in the artifact's local frame. It measures neither feet nor eye gaze. Locomotion is included in the world camera position before conversion to the hall-relative frame.
++
++Input comes from the current XRCamera3D under the current XROrigin3D, with an initialized primary XR interface reporting normal tracking. There is no synthetic fallback. Without active XR, a camera belonging to the active `em_walker` can supply the separately labelled DESKTOP VIEW. Spectator/capture cameras are excluded. Godot notes that the game-logic [XRCamera3D position](https://docs.godotengine.org/en/4.6/classes/class_xrcamera3d.html) may lag the render-thread pose; this is a sampled headset account, not an unmediated body. The interface's [tracking status](https://docs.godotengine.org/en/4.6/classes/class_xrinterface.html#class-xrinterface-method-get-tracking-status) determines admission; unknown or degraded status waits rather than inventing movement.
++
++Accepted positions are at least 15 mm apart, with a shared capacity of 256. The recorder operates on process callbacks without interpolation of missing measurements. Tracking loss, source changes, XRTools teleport, reference/play-area changes, frame gaps above 0.25 s and single-step displacements above 0.45 m prevent a joining segment. The displacement limit is a guard, not proof that every unsignalled discontinuity can be detected. A new observer begins a separate record. Zero-length projected joins are omitted, while their coincident positions remain represented.
++
++Leaving the square preserves the display. After 0.6 s outside, re-entering starts a fresh drawing. Merely waiting or temporarily losing tracking does not erase the previous record. Head/floor history is local to this artifact and is not published to TraceData or carried into Grid.
++
++Validation and labelled scripted camera captures: [head-path review](../../../doc/book/iterations/2026-09-24-head-trace/index.html). The probe exercises production input selection with controlled desktop and XR fixtures; it is not a headset or learner trial.
+--- before/commons/maps/Point_Trace/tutorial.md
++++ commons/maps/Point_Trace/tutorial.md
+@@ -70,3 +70,8 @@
+ The copied list contains positions without per-point timestamps. Grid can display and reshape those positions, but cannot recover the timing of a pause from them. That is the record we take into Point_Line_Grid.
+ 
+ See [technical.md](technical.md) for exact source paths, surface rules and the optional timed recorder. Earlier extension sketches are retained in [the previous tutorial](../../../doc/space/point-trace-focus-2026-09-16/previous/tutorial.md).
++
++
++### A body writes without holding the tool
++
++After the stick's displaced sampling point, enter the head-trace square beside the plinths. Lower the head and move sideways, step out, then compare the suspended pink path with its cyan floor projection. Both come from one position list. Read the one-line height substitution after trying to find the same movement in each view. Returning begins a new drawing. This prepares the whiteboard's planar inscription without introducing sine or randomness as generators. Desktop walking-camera input is explicitly distinguished from headset input.
+--- /dev/null
++++ commons/artifacts/head_trace_projection/head_trace_projection.gd
+@@ -0,0 +1,231 @@
++extends Node3D
++## One measured path, two representations. No demonstration motion is generated.
++## Headset position includes locomotion; the floor mark is not foot tracking.
++## Desktop input is restricted to the active museum walker's camera and labelled.
++
++const CAPACITY := 256
++const HALF_WIDTH := 1.1
++const FLOOR_Y := 0.025
++const MOVEMENT_GATE := 0.015
++const MAX_STEP := 0.45
++const HEAD_COLOR := Color(1.0, 0.60, 0.78)
++const FLOOR_COLOR := Color(0.18, 0.87, 0.94)
++
++var _points: Array[Vector3] = []
++var _joins: Array[bool] = []
++var _head_beads: MultiMeshInstance3D
++var _floor_beads: MultiMeshInstance3D
++var _head_cord: MultiMeshInstance3D
++var _floor_cord: MultiMeshInstance3D
++var _status: Label3D
++var _break_pending := true
++var _outside_time := 1.0
++var _fresh_on_entry := true
++var _source_id := 0
++var _source_kind := ""
++var _body: Node
++var _interface: XRInterface
++
++func _ready() -> void:
++	_build_display()
++	if XRServer.has_signal("reference_frame_changed"):
++		XRServer.connect("reference_frame_changed", _interrupt_stroke)
++
++func _process(delta: float) -> void:
++	var input := _read_input()
++	if input.is_empty():
++		_interrupt_stroke()
++		_set_status("Waiting for a tracked head\nor the desktop walking view")
++		return
++	var camera: Camera3D = input["camera"]
++	var kind: String = input["kind"]
++	if camera.get_instance_id() != _source_id or kind != _source_kind:
++		# A different observer starts another record, never relabels an old one.
++		_fresh_on_entry = true
++		_interrupt_stroke()
++		_source_id = camera.get_instance_id()
++		_source_kind = kind
++	if delta > 0.25:
++		_interrupt_stroke()
++	_accept_position(camera.global_position, delta, kind)
++
++func _read_input() -> Dictionary:
++	var camera := get_viewport().get_camera_3d()
++	if not is_instance_valid(camera): return {}
++	var xr := XRServer.primary_interface
++	if camera is XRCamera3D:
++		if xr == null or not xr.is_initialized(): return {}
++		# Do not treat an old/staging camera or uncertain tracking as measurement.
++		if xr.get_tracking_status() != XRInterface.XR_NORMAL_TRACKING: return {}
++		var rig := camera.get_parent() as XROrigin3D
++		if rig == null or not rig.current: return {}
++		if xr != _interface:
++			if is_instance_valid(_interface) and _interface.play_area_changed.is_connected(_interrupt_stroke):
++				_interface.play_area_changed.disconnect(_interrupt_stroke)
++			_interface = xr
++			_interface.play_area_changed.connect(_interrupt_stroke)
++			_interrupt_stroke()
++		# XRTools teleports may be shorter than the displacement guard.
++		if not is_instance_valid(_body) or not rig.is_ancestor_of(_body):
++			if is_instance_valid(_body) and _body.is_connected("player_teleported", _interrupt_stroke):
++				_body.disconnect("player_teleported", _interrupt_stroke)
++			_body = null
++			for child in rig.find_children("*", "CharacterBody3D", true, false):
++				if child.has_signal("player_teleported"):
++					_body = child
++					_body.connect("player_teleported", _interrupt_stroke)
++					break
++		return {"camera":camera, "kind":"HEADSET"}
++	# Never silently record a spectator, photo, editor or staging camera.
++	if xr != null and xr.is_initialized(): return {}
++	var ancestor: Node = camera
++	while ancestor != null:
++		if ancestor.is_in_group("em_walker"):
++			return {"camera":camera, "kind":"DESKTOP VIEW"}
++		ancestor = ancestor.get_parent()
++	return {}
++
++func _interrupt_stroke(_unused: Variant = null) -> void:
++	_break_pending = true
++
++func _accept_position(world_position: Vector3, delta: float, kind: String) -> void:
++	if not world_position.is_finite():
++		_interrupt_stroke()
++		return
++	var p := to_local(world_position)
++	var inside := absf(p.x) <= HALF_WIDTH and absf(p.z) <= HALF_WIDTH and p.y > 0.15 and p.y < 3.2
++	if not inside:
++		_outside_time += delta
++		if _outside_time >= 0.6: _fresh_on_entry = true
++		_interrupt_stroke()
++		_set_status("Step into the square\nLean. Lower your head. Step aside.")
++		return
++	_outside_time = 0.0
++	if _fresh_on_entry:
++		_points.clear()
++		_joins.clear()
++		_break_pending = true
++		_fresh_on_entry = false
++	var join := not _break_pending and not _points.is_empty()
++	if join:
++		var distance := p.distance_to(_points[-1])
++		if distance < MOVEMENT_GATE: return
++		if distance > MAX_STEP: join = false
++	_points.append(p)
++	_joins.append(join)
++	if _points.size() > CAPACITY:
++		_points.pop_front()
++		_joins.pop_front()
++	_joins[0] = false
++	_break_pending = false
++	_rebuild_trace()
++	_set_status(kind + " / " + str(_points.size()) + " positions\nStep aside to see. Return to begin again.")
++
++func floor_position(p: Vector3) -> Vector3:
++	return Vector3(p.x, FLOOR_Y, p.z)
++
++func _material(color: Color) -> StandardMaterial3D:
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = color
++	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	return mat
++
++func _instances(label: String, mesh: Mesh) -> MultiMeshInstance3D:
++	var node := MultiMeshInstance3D.new()
++	node.name = label
++	node.multimesh = MultiMesh.new()
++	node.multimesh.transform_format = MultiMesh.TRANSFORM_3D
++	node.multimesh.mesh = mesh
++	node.multimesh.instance_count = CAPACITY
++	node.multimesh.visible_instance_count = 0
++	node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	add_child(node)
++	return node
++
++func _build_display() -> void:
++	var bead := SphereMesh.new()
++	bead.radius = 0.008
++	bead.height = 0.016
++	bead.radial_segments = 6
++	bead.rings = 3
++	bead.material = _material(HEAD_COLOR)
++	_head_beads = _instances("HeadPositions", bead)
++	var flat_bead := bead.duplicate() as SphereMesh
++	flat_bead.material = _material(FLOOR_COLOR)
++	_floor_beads = _instances("FloorPositions", flat_bead)
++	var cord := CylinderMesh.new()
++	cord.top_radius = 0.005
++	cord.bottom_radius = 0.005
++	cord.height = 1.0
++	cord.radial_segments = 6
++	cord.rings = 1
++	cord.material = _material(HEAD_COLOR)
++	_head_cord = _instances("HeadJoins", cord)
++	var flat_cord := cord.duplicate() as CylinderMesh
++	flat_cord.material = _material(FLOOR_COLOR)
++	_floor_cord = _instances("FloorJoins", flat_cord)
++	# A flush square, not a stage or an obstacle. The existing museum is the floor.
++	_box(Vector3(2.2,0.008,2.2), Vector3(0,0.005,0), Color(0.08,0.10,0.13))
++	for side in [-1.0,1.0]:
++		_box(Vector3(2.2,0.003,0.012), Vector3(0,0.011,side*HALF_WIDTH), FLOOR_COLOR)
++		_box(Vector3(0.012,0.003,2.2), Vector3(side*HALF_WIDTH,0.011,0), FLOOR_COLOR)
++	# Narrow label at the back edge leaves the square clear to move through.
++	_box(Vector3(0.74,0.33,0.035), Vector3(0,1.10,-1.15), Color(0.045,0.05,0.065))
++	_box(Vector3(0.022,1.08,0.022), Vector3(0,0.54,-1.16), Color(0.22,0.24,0.27))
++	_label("HEAD PATH", Vector3(0,1.20,-1.126), 0.0015, HEAD_COLOR)
++	_label("SAME POINTS / ON THE FLOOR", Vector3(0,1.13,-1.126), 0.0011, FLOOR_COLOR)
++	_status = _label("Step into the square", Vector3(0,1.01,-1.125), 0.001, Color(0.85,0.86,0.88))
++
++func _box(size: Vector3, pos: Vector3, color: Color) -> void:
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	mesh.material = _material(color)
++	var node := MeshInstance3D.new()
++	node.mesh = mesh
++	node.position = pos
++	add_child(node)
++
++func _label(words: String, pos: Vector3, pixels: float, color: Color) -> Label3D:
++	var label := Label3D.new()
++	label.text = words
++	label.position = pos
++	label.pixel_size = pixels
++	label.font_size = 32
++	label.modulate = color
++	label.outline_size = 0
++	label.no_depth_test = false
++	add_child(label)
++	return label
++
++func _set_status(words: String) -> void:
++	if _status.text != words: _status.text = words
++
++func _segment(a: Vector3, b: Vector3) -> Transform3D:
++	var span := b-a
++	var length := span.length()
++	var y := span/length
++	var helper := Vector3.RIGHT if absf(y.dot(Vector3.UP)) > 0.98 else Vector3.UP
++	var x := helper.cross(y).normalized()
++	return Transform3D(Basis(x,y*length,x.cross(y).normalized()), (a+b)*0.5)
++
++func _rebuild_trace() -> void:
++	var head_count := 0
++	var floor_count := 0
++	_head_beads.multimesh.visible_instance_count = _points.size()
++	_floor_beads.multimesh.visible_instance_count = _points.size()
++	for i in range(_points.size()):
++		var p := _points[i]
++		var flat := floor_position(p)
++		_head_beads.multimesh.set_instance_transform(i,Transform3D(Basis.IDENTITY,p))
++		_floor_beads.multimesh.set_instance_transform(i,Transform3D(Basis.IDENTITY,flat))
++		if i == 0 or not _joins[i]: continue
++		var previous := _points[i-1]
++		if previous.distance_to(p) > 0.000001:
++			_head_cord.multimesh.set_instance_transform(head_count,_segment(previous,p))
++			head_count += 1
++		var flat_previous := floor_position(previous)
++		if flat_previous.distance_to(flat) > 0.000001:
++			_floor_cord.multimesh.set_instance_transform(floor_count,_segment(flat_previous,flat))
++			floor_count += 1
++	_head_cord.multimesh.visible_instance_count = head_count
++	_floor_cord.multimesh.visible_instance_count = floor_count
+--- /dev/null
++++ commons/artifacts/head_trace_projection/head_trace_projection.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/head_trace_projection/head_trace_projection.gd" id="1"]
++
++[node name="HeadTraceProjection" type="Node3D"]
++script = ExtResource("1")

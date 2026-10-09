@@ -1,0 +1,342 @@
+--- before/commons/maps/CA_BeyondBinary/final.md
++++ after/commons/maps/CA_BeyondBinary/final.md
+@@ -2,13 +2,19 @@
+ 
+ <!-- @game_of_life_petri -->
+ 
+-Five green cells wait in the dish. A larger version lies in the floor beyond it. Three lamps stand along its edge. They are dark.
++Five green cells wait in the dish. A larger version spreads across the floor beyond it. Three lamps stand along its edge. They are dark.
+ 
+ Press STEP four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
+ 
+ REPLAY brings the five cells back. This time keep your attention on the square marked A, at address (10,10). Step towards it. A cell becomes occupied; a lamp lights. Step again. Follow the square for a while, even when the more recognisable figure tempts your eye away. The address keeps its place. The pattern is already elsewhere.
+ 
+ You can cross the large display. Its empty cells still support your feet. In the previous room, occupancy became a stepping tile over a lower basin. Here it becomes colour on an ordinary floor. We have carried the array forward and given it another job. A zero does not contain an instruction to make a hole.
++
++Stay beside one of the gold squares as its value changes. The pattern visits; the place continues to hold you. A lamp answers the cell, while your weight makes no difference to its next state. Sharing an address with the calculation has not made you one of its conditions.
++
++![The Life floor fills the front bay, with fixed gold addresses connected to three lamps.](images/life-floor.png)
++
++*The same present has room around it now. An empty square remains somewhere to stand.*
+ 
+ Try BLINKER. Three cells lie in a line. One step turns the line; another brings it back. Watch A, the middle cell. The surroundings alternate while this address remains occupied. Its lamp stays lit. Returning, travelling and staying can belong to different parts of the same small event. The names for these, now that you have watched them, are still life, oscillator and spaceship: the block the glider will meet is the first, the blinker the second, the glider the third.
+ 
+@@ -44,7 +50,7 @@
+ 
+ <!-- @ -->
+ 
+-Further in, past the mould network and the dark sphere, a hexagonal field changes the second choice only: six neighbours instead of eight, a birth on two, and its generations stacked upward into a terrain. The same procedure, a different world.
++Further in, past the mould network and the dark sphere, a table holds a hexagonal field. Here the neighbourhood and the birth condition both change: six neighbours instead of eight, birth on two. The Random Flip control allows occasional reversals of the rule’s answer. Generations stack upward into a terrain. Time has acquired thickness again, through another agreement.
+ 
+ So far the visitor has chosen a beginning and watched an output. In the next room, approaching a surface enters the calculation. What happens when the body doing the observing becomes one of the conditions?
+ 
+--- before/commons/maps/CA_BeyondBinary/intent.md
++++ after/commons/maps/CA_BeyondBinary/intent.md
+@@ -9,3 +9,6 @@
+ Transfer: use a cell's state to drive another museum object through a declared mapping. The installed output is light. Appearance, collision and feedback must not be conflated. The next hall, CA_ExpandingSpace, introduces the visitor's proximity as an input.
+ 
+ Preservation: six existing artifacts remain. The added primary bay precedes the retained gallery. Other works need specific comparisons and separate review before receiving additional book passages. No artifact-count quota and no sequence reorder are applied.
++
++
++25 September: enlarge the existing floor receiver to 9.6 m so a fixed address can be approached at body scale. Keep support independent of occupancy and the visitor independent of the rule. Preserve the hexagonal comparison as a table specimen in the rear, clearing its former overflow across the primary. Its full simulation remains; only its museum staging changes.
+--- before/commons/maps/CA_BeyondBinary/summary.md
++++ after/commons/maps/CA_BeyondBinary/summary.md
+@@ -5,3 +5,6 @@
+ STEP and REPLAY allow prediction and return. BLINKER separates repetition from displacement; MEET places a block in the same automaton. LINK disconnects the lamps while Life continues. The text follows these observations into the actual B3/S23 branch and receiver call.
+ 
+ The study asks what persists when a pattern's participating cells change, and what additional decisions let one system affect another. The state is binary. All six original works remain; the Life dish is primary and the book hero. The next hall brings proximity into the update.
++
++
++The floor now spans 9.6 m, with 0.4 m cell pitch and aligned gold addresses/wires/lamps. A supplied museum body can stand at A as its state and light change without losing floor support. The hexagonal work is contained on a rear table with its full simulation and full-size control; it no longer intrudes into the primary bay. TRACE-off restores both views. Current native results: 41 checks, fourteen desktop pointer events, no failures. Headset, Quest and complete rear-gallery acceptance remain pending.
+--- before/commons/maps/CA_BeyondBinary/tutorial.md
++++ after/commons/maps/CA_BeyondBinary/tutorial.md
+@@ -4,7 +4,7 @@
+ 
+ 1. Compare the arrangement after four steps with its starting shape and address. Keep shape, location and generation as separate observations.
+ 2. Replay and follow gold A=(10,10). Notice the occupied cell and lamp together. Then follow the whole pattern while A stays in place.
+-3. Walk the floor image. Recall the previous history bridge: this room maps occupancy to colour, with continuous support beneath both values.
++3. Walk the enlarged floor image and stay beside a fixed gold address while its state changes. Your presence does not enter this update rule. Recall the previous history bridge: this room maps occupancy to colour, with continuous support beneath both values.
+ 4. Choose BLINKER. Predict its next phase. Its centre stays occupied, so A stays lit although the line changes orientation.
+ 5. Read the actual B3/S23 branch in final.md. Work through an empty cell with three neighbours and an occupied cell with one. Explain the second buffer after these observations.
+ 6. Return to GLIDER and disconnect LINK during a lit moment. STEP again. Identify which output was removed and which process continues. Read the receiver call.
+@@ -13,3 +13,6 @@
+ Ask students to explain a lamp using a single address, without saying “it senses the glider.” Then ask what the glider description helps them predict that the single-address record does not. Neither account exhausts the event.
+ 
+ For an independent reader, the readout names generation, population, changed cells, preset, link state and the finite observation limit. REPLAY is local to this experiment. The next hall will make proximity an input; it must earn that claim through its own source and support tests.
++
++
++TRACE offers a second reading of the travelling figure: blue marks newly occupied cells, red marks cells that just stopped. Switching it off restores the ordinary colours immediately, without advancing. In the rear gallery, the hexagonal table changes both neighbourhood and birth condition and allows random flips; it is not just the square rule drawn with another tile shape.
+--- before/commons/maps/CA_BeyondBinary/technical.md
++++ after/commons/maps/CA_BeyondBinary/technical.md
+@@ -1,6 +1,6 @@
+ # Fixed cells, travelling relations, explicit outputs
+ 
+-The installed primary is `game_of_life_petri:0:0#study:addresses#plinth:0`. The placement opts into `address_study.gd`; other instances retain the original dish and controls. The original `game_of_life_petri.gd` supplies the Life solver. No new Life rule is introduced.
++The installed primary is `game_of_life_petri:0:0#study:addresses#plinth:0#floor:walk`. The placement opts into `address_study.gd`; other instances retain the original dish and controls. The original `game_of_life_petri.gd` supplies the Life solver. No new Life rule is introduced.
+ 
+ ## State and update
+ 
+@@ -12,13 +12,13 @@
+ 
+ - GLIDER: a five-cell glider, centred through the base pattern placement at (7,7). After four updates its arrangement is translated by (+1,+1).
+ - BLINKER: three horizontal cells centred at (10,10). It repeats after two updates. Its centre remains occupied in both phases.
+-- MEET: the same glider plus a stable 2 × 2 block at x=10..11, y=10..11. Both are cells in the same automaton, not a collision body placed over it. The tested meeting is empty by generation 24.
++- MEET: the same glider plus a stable 2 × 2 block at x=10..11, y=10..11. Both are cells in the same automaton, not a collision body placed over it. The tested meeting is empty by generation 6.
+ 
+ Choosing a preset clears both buffers and event counters. REPLAY restores the current preset. STEP performs one update. RUN performs at most one update per 0.5 seconds; it drops overdue catch-up steps, so a slow frame can lengthen the observed interval. All runs hold at generation 48. These controls do not pause the museum clock.
+ 
+ ## The room receives occupancy
+ 
+-The small dish and the 4.8 m square floor array read the same present, with the same x/y orientation. Floor cells have a 0.2 m pitch. The floor's geometry and support remain fixed; state changes its colour. The dish is raised onto a table. Gold markers identify A=(10,10), B=(13,13), C=(16,16) in both views.
++The small dish and the 9.6 m square floor array read the same present, with the same x/y orientation. This map opts into `floor:walk`, with 0.4 m pitch and a forward offset that fits the existing front bay. Other address studies retain the original 4.8 m display and 0.2 m pitch. Markers and wires follow the same addresses; lamps align along the enlarged edge. The floor's geometry and support remain fixed; state changes its colour. The dish is raised onto a table. Gold markers identify A=(10,10), B=(13,13), C=(16,16) in both views.
+ 
+ Each marker is connected visually to a lamp. `life_address_receiver.gd` receives occupancy and the LINK setting. A connected, occupied address sets the globe emission and OmniLight energy; otherwise both are off. ONSETS counts 0→1 transitions while connected. Seed occupancy and reconnecting are not counted as births. Unlinked receivers still track cell state. No receiver writes back into the automaton, and no lamp identifies a pattern type.
+ 
+@@ -29,3 +29,12 @@
+ The 15 × 27 map adds a front study and an eastern aisle around the retained rear configuration. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
+ 
+ Runtime evidence and actual images: `doc/space/ca-life-review-2026-09-13/`. Desktop tests cover rule cases, wrapping, travelling and repeating patterns, event coupling, controls, support and a margin walk. Headset reach, comfort, performance and the secondary works require later review.
++
++
++## 25 September staging and verification
++
++The rear hexagonal terrain's radius-20, 0.5 m hexagons originally spread roughly 35 m across, reaching into the primary floor. `display:table` now scales its complete simulation root uniformly to 0.12 and places it over a 4.5×4 m table at the rear (9,23). All 1,261 sites, eleven retained layers, transition rule, random-flip mechanism and colliders remain. The control stays full scale at 1.4 m local height; the status label compensates the specimen scale. This is a table-scale comparison, not a new full-size walkable terrain. Other placements keep the original staging.
++
++TRACE-off now restores the base dish display before refreshing the floor. Neither buffer nor generation advances. The earlier code restored the floor but left the dish's red/blue wake until a later update.
++
++41 native checks pass, including fourteen real desktop pointer events, four-step glider translation, TRACE colours/restoration, lamp onsets/LINK, the six-generation meeting, body approach to A, occupied/empty support, and retained default floor and hex state dimensions. See encounter-notes.md for evidence and limits.
+--- before/commons/maps/CA_BeyondBinary/artifacts.md
++++ after/commons/maps/CA_BeyondBinary/artifacts.md
+@@ -4,10 +4,10 @@
+ 
+ | Artifact | Role | Place in this pass |
+ |---|---|---|
+-| `game_of_life_petri` | Primary / book hero | Front bay: held Life dish, matching floor, three fixed-address lamps and explicit connection controls. |
++| `game_of_life_petri` | Primary / book hero | Front bay: held Life dish, 9.6 m matching floor, three fixed-address lamps and explicit connection controls. |
+ | `mold_network` | Secondary | Retained rear configuration; a future comparison needs its own mechanism and observation. |
+ | `science_screen` | Secondary | Retained grid-mode display. |
+-| `hexagon_ca_vr` | Secondary | Retained hexagonal work, placed beyond the new study. Review neighbourhood and rule together before extending the chapter. |
++| `hexagon_ca_vr` | Secondary | Rear table at (9,23), with all sites/generations retained and a full-size control. The uniform display scale prevents the original terrain from overflowing into the Life floor. |
+ | `ca_growth_network` | Secondary | Retained network work; do not conflate its growth with the primary Life rule. |
+ | `dark_sphere` | Decoration | Retained spatial reference. |
+ 
+--- before/commons/maps/CA_BeyondBinary/field_notes.md
++++ after/commons/maps/CA_BeyondBinary/field_notes.md
+@@ -9,3 +9,10 @@
+ The tested scope is the primary and a portion of its surrounding route. The retained rear gallery is not fully reviewed for reach or traversal. Existing startup UID diagnostics are recorded in the engine log; runtime script errors must be absent before publication. Headset testing remains deferred.
+ 
+ Source backups and evidence: `doc/space/ca-life-review-2026-09-13/`. The active CA order and all artifact roles remain unchanged. The book hero now agrees with the existing primary role. Next: CA_ExpandingSpace, proximity, surface state and support.
++
++
++## 25 September — a place can keep holding you
++
++Enlarging the Life floor exposed an existing obstruction: the retained hexagonal terrain extended from the rear into the primary bay. The first native walk stopped against that geometry, and floor rays found the terrain above the museum floor. The hex simulation is retained on a new rear table, with a uniformly scaled root and independently human-sized control/status. No cells or layers were removed. The first failed captures and results remain in the review.
++
++The second native run passes 41 checks. A supplied CharacterBody reaches A when empty; the glider occupies it at generation 8 and leaves it empty at generation 12. The body remains supported while the lamp changes. TRACE-off's stale dish colours were separately reproduced and repaired. Fourteen actual desktop pointer events cover the existing controls. The code, neighbour law and fixed floor remain separate from the visitor's presence. Headset/Quest and complete secondary-gallery review remain open.
+--- before/commons/maps/CA_BeyondBinary/encounter-notes.md
++++ after/commons/maps/CA_BeyondBinary/encounter-notes.md
+@@ -0,0 +1,26 @@
++# A place can keep holding you — 25 September 2026
++
++The map opts into `floor:walk` on the existing Life address study. Its 24×24 floor changes from 0.2 m to 0.4 m pitch, spanning 9.6 m. The floor centre moves from local z=3.6 to 6.8 within the existing front bay. Gold squares, labels, wires and lamps follow their original addresses. The dish, Life solver, presets, eight controls, clock and generation limit are retained. Default address-study placements keep the earlier 4.8 m floor.
++
++The receiver source is included in this review's before snapshot and source manifest. The floor changes colour, with no per-cell collision added or removed. The underlying museum floor supports empty and occupied addresses.
++
++## A second artifact was occupying the floor
++
++Native inspection found the rear hexagonal terrain, radius 20 at 0.5 m hex size, spreading roughly 35 m across. The floor approach hit its colliders. The map now places that work at (9,23) with `display:table`. Its full simulation root is uniformly scaled to 0.12 over a 4.5×4 m table. All 1,261 sites, eleven allocated layers, transition law, random flips and existing colliders remain; the control is separately kept at full scale, 1.4 m high, and the status label compensates the scale. Other placements retain the original display. Its slider operation and complete rear-gallery access need their own review; height and footprint alone are not interaction acceptance.
++
++## TRACE repair
++
++Switching TRACE off previously restored floor colours but left the dish showing the old red/blue wake until an update. The native regression reproduced this. TRACE-off now calls the existing display refresh before the shared refresh; neither buffer nor generation changes.
++
++## Evidence
++
++41 native checks pass with 14 actual desktop pointer events. These include the four-generation glider translation, unchanged 576 floor transforms, shared colours, TRACE on/off, blinker centre, LINK and onset counts, a meeting empty at generation 6, replay, RUN, the 48-generation limit and default-display compatibility.
++
++A supplied museum CharacterBody walks to empty A=(10,10), remains supported when it becomes occupied at generation 8, and stays in place when it empties at generation 12. Its lamp follows the state. Rays at all four floor corners and A find museum-floor support. The body does not write into the Life rule. This is a controlled desktop fixture, not a headset session.
++
++First failed run and pictures remain under `doc/book/iterations/2026-09-25-ca-life-floor/first-native`. The final process exits 0 without GDScript errors; existing UID/resource, registry, environment, renderer and generated-art warnings remain in the log. No tracked-hand, comfort, Quest, full-gallery or learner acceptance is claimed. No solver optimisation was attempted.
++
++The chapter gains a bodily encounter and one original native figure. Existing code excerpts, TRACE passage and critical essay remain. Its hex paragraph now names both the changed neighbourhood and birth condition, the optional random flips and the table staging.
++
++
++Runtime staging note: the museum automatically relocates the same generated dream_bodies sculpture from (11.5, 0.42, 23.5) to (2.5, 0.42, 23.5), clearing the new table footprint. Its rotation and scale are unchanged. All other native roots except the deliberately restaged hex retain their positions. The initial overly broad publication assertion and this explicit comparison are retained as diagnostic-verification.json and runtime-restaging.json.
+--- before/commons/maps/CA_BeyondBinary/map_data.json
++++ after/commons/maps/CA_BeyondBinary/map_data.json
+@@ -1092,7 +1092,7 @@
+         "",
+         "",
+         "",
+-        "game_of_life_petri:0:0#study:addresses#plinth:0",
++        "game_of_life_petri:0:0#study:addresses#plinth:0#floor:walk",
+         "",
+         "",
+         "",
+@@ -1418,19 +1418,19 @@
+         "",
+         "",
+         "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "hexagon_ca_vr",
++        "hexagon_ca_vr:0:0#display:table",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        " ",
+         "",
+         "",
+         "",
+--- before/commons/artifacts/game_of_life_petri/address_study.gd
++++ after/commons/artifacts/game_of_life_petri/address_study.gd
+@@ -5,6 +5,9 @@
+ const SITES := [Vector2i(10,10),Vector2i(13,13),Vector2i(16,16)]
+ const FLOOR_CELL := 0.2
+ const FLOOR_Z := 3.6
++var floor_cell: float = FLOOR_CELL
++var floor_z: float = FLOOR_Z
++var walk_floor: bool = false
+ var work: Node3D
+ var running: bool = false
+ var elapsed: float = 0.0
+@@ -29,6 +32,10 @@
+ 
+ func _ready() -> void:
+ 	work = get_parent()
++	walk_floor = str(work.get_meta("config_floor", "")) == "walk"
++	if walk_floor:
++		floor_cell = 0.4
++		floor_z = 6.8
+ 	for name_ in ["Dish","Rim","CellMultiMesh"]:
+ 		work.get_node(name_).position += Vector3(0,1.02,-1.55)
+ 	_build_furniture()
+@@ -99,6 +106,7 @@
+ 
+ func toggle_trace() -> void:
+ 	trace = not trace
++	if not trace: work._update_display()
+ 	_refresh(false)
+ 
+ func _process(delta: float) -> void:
+@@ -108,7 +116,7 @@
+ 		elapsed = 0.0;_advance()
+ 
+ func floor_position(site: Vector2i) -> Vector3:
+-	return Vector3((site.x-11.5)*FLOOR_CELL,0.016,FLOOR_Z+(site.y-11.5)*FLOOR_CELL)
++	return Vector3((site.x-11.5)*floor_cell,0.016,floor_z+(site.y-11.5)*floor_cell)
+ 
+ func _refresh(count_event: bool = true) -> void:
+ 	for y in range(SIZE):
+@@ -143,17 +151,17 @@
+ 
+ func _build_floor() -> void:
+ 	# The coloured present is a finish on a continuous museum floor, not moving support.
+-	_box("FloorInset",Vector3(4.94,0.012,4.94),Vector3(0,0.004,FLOOR_Z),Color("927653"))
++	_box("FloorInset",Vector3(SIZE*floor_cell+0.14,0.012,SIZE*floor_cell+0.14),Vector3(0,0.004,floor_z),Color("927653"))
+ 	floor_view = MultiMeshInstance3D.new()
+ 	floor_view.name = "PresentPlane"
+ 	var mm := MultiMesh.new();mm.transform_format=MultiMesh.TRANSFORM_3D;mm.use_colors=true
+-	var mesh := BoxMesh.new();mesh.size=Vector3(0.185,0.012,0.185)
++	var mesh := BoxMesh.new();mesh.size=Vector3(floor_cell-0.015,0.012,floor_cell-0.015)
+ 	var mat := StandardMaterial3D.new();mat.vertex_color_use_as_albedo=true;mat.roughness=0.55
+ 	mesh.material=mat;mm.mesh=mesh;mm.instance_count=SIZE*SIZE;floor_view.multimesh=mm;add_child(floor_view)
+ 	for y in range(SIZE):
+ 		for x in range(SIZE):mm.set_instance_transform(y*SIZE+x,Transform3D(Basis.IDENTITY,floor_position(Vector2i(x,y))))
+ 	var axis := _label("FloorAxes","X: ACROSS / Y: ALONG / ONE PRESENT",30)
+-	axis.position=Vector3(0,0.03,FLOOR_Z-2.65);axis.rotation_degrees=Vector3(-90,0,0);add_child(axis)
++	axis.position=Vector3(0,0.03,floor_z-SIZE*floor_cell/2-0.25);axis.rotation_degrees=Vector3(-90,0,0);add_child(axis)
+ 
+ func _build_receivers() -> void:
+ 	for i in range(SITES.size()):
+@@ -163,17 +171,20 @@
+ 		receiver.letter = ["A","B","C"][i]
+ 		receiver.site = site
+ 		receiver.position=Vector3(3.35,0,2.5+i*1.45)
++		if walk_floor:
++			receiver.position=Vector3(SIZE*floor_cell/2+0.95,0,floor_position(site).z)
+ 		add_child(receiver);receivers.append(receiver)
+ 		var at: Vector3 = floor_position(site)
+-		_marker("FloorAddress"+receiver.letter,at,0.205)
++		_marker("FloorAddress"+receiver.letter,at,floor_cell+0.005)
+ 		# The small dish and full-size floor retain the same x/y orientation.
+ 		var desk_at := Vector3((site.x-11.5)*work._cell_size,1.041,-1.55+(site.y-11.5)*work._cell_size)
+ 		_marker("DishAddress"+receiver.letter,desk_at,work._cell_size*1.02)
+-		var span: float = 3.1-at.x
++		var wire_x: float = receiver.position.x if walk_floor else 3.1
++		var span: float = wire_x-at.x
+ 		_box("AddressWire"+receiver.letter,Vector3(span,0.009,0.012),Vector3(at.x+span/2,0.03,at.z),Color("d0a571"))
+-		_box("WireElbow"+receiver.letter,Vector3(0.012,0.009,absf(receiver.position.z-at.z)+0.02),Vector3(3.1,0.03,(receiver.position.z+at.z)/2),Color("d0a571"))
++		_box("WireElbow"+receiver.letter,Vector3(0.012,0.009,absf(receiver.position.z-at.z)+0.02),Vector3(wire_x,0.03,(receiver.position.z+at.z)/2),Color("d0a571"))
+ 		var tag := _label("AddressLabel"+receiver.letter,"%s (%d,%d)"%[receiver.letter,site.x,site.y],30)
+-		tag.position=at+Vector3(-0.38,0.023,0);tag.rotation_degrees=Vector3(-90,0,0);add_child(tag)
++		tag.position=at+Vector3(-floor_cell/2-0.28,0.023,0);tag.rotation_degrees=Vector3(-90,0,0);add_child(tag)
+ 
+ func _marker(label: String,at: Vector3,size: float) -> void:
+ 	var line: float = 0.008 if size>0.1 else 0.003
+--- before/algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.gd
++++ after/algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.gd
+@@ -33,9 +33,11 @@
+ var _generation: int = 0
+ var _status_label: Label3D
+ var _static_body: StaticBody3D
++var _controller_root: Node3D
+ 
+ func _ready() -> void:
+ 	_setup_environment()
++	if str(get_meta("config_display", "")) == "table": _table_display()
+ 	_initialize_grid()
+ 	set_process(true)
+ 
+@@ -57,6 +59,7 @@
+ 	_sim_root.add_child(_status_label)
+ 
+ 	var controller_root := Node3D.new()
++	_controller_root = controller_root
+ 	controller_root.position = Vector3(0, 2.0, 0)
+ 	add_child(controller_root)
+ 
+@@ -234,4 +237,24 @@
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	if str(config.get("display", "")) == "table" and is_instance_valid(_sim_root):
++		_table_display()
++
++## Museum-only staging: keep all cells, generations, rules and colliders in one
++## uniformly scaled specimen. The control and status remain human-sized.
++func _table_display() -> void:
++	if has_node("MuseumTable"): return
++	_sim_root.scale = Vector3.ONE * 0.12
++	_sim_root.position.y = 1.0 + layer_height * 0.06
++	_status_label.scale = Vector3.ONE / 0.12
++	_controller_root.position = Vector3(.65,1.4,-2.25)
++	var table := Node3D.new();table.name = "MuseumTable";add_child(table)
++	var kit: GDScript = load("res://commons/artifacts/_hangar/hangar_kit.gd")
++	var material: StandardMaterial3D = kit.painted_metal(Color("394b50"),0.05)
++	# Outside bounds are 4.5 x 4 m, surrounding the scene's retained radius-20 field.
++	var top: MeshInstance3D = kit.box(Vector3(0,.94,0),Vector3(4.5,.12,4.0),material)
++	table.add_child(top)
++	var body := StaticBody3D.new();var collision := CollisionShape3D.new();var shape := BoxShape3D.new()
++	shape.size=Vector3(4.5,.12,4.0);collision.shape=shape;body.add_child(collision);top.add_child(body)
++	for x in [-1.85,1.85]:
++		for z in [-1.6,1.6]:table.add_child(kit.box(Vector3(x,.44,z),Vector3(.10,.88,.10),material))

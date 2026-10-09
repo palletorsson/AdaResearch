@@ -8,6 +8,8 @@ extends SceneTree
 ## TUTORIAL.md claim (positions worked out by hand, the angle after one second,
 ## the cells the lattice loses), and that last chapter's cube and instruments
 ## still stand. Nothing in this run is expected to print an error.
+## The last checks before the second's and the sheet's are of the guest in
+## guests/: the body this chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -23,6 +25,21 @@ const BITE := 0.16
 const CUBE_AT := Vector3(1.05, 1.37, 0.6)
 const RADIUS := 0.1                          # the marble's radius
 const CHAIN := "Organism/Hip/Upper/Lower/Foot/Toe"
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/organism/"      # the body this chapter hands to the room
+const PLACE := 0.8                           # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
 
 func _initialize() -> void: run.call_deferred()
 
@@ -144,6 +161,71 @@ func turn(study: Node3D, step: float) -> int:
 	while organism.angle < TAU:
 		organism._process(step)
 	return lattice.lost.size()
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own. After its two live
+## frames this script calls its _process, so every step is counted.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "organism.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/organism/organism.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var at := Vector3(40, 0, 40)
+	(guest as Node3D).position = at
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	guest.set_process(false)
+	guest.angle = 0.0
+	guest._process(0.0)
+	var toe: MeshInstance3D = guest.get_node("Hip/Upper/Lower/Foot/Toe")
+	var bars: Array = [guest.get_node("Hip/Upper/Bar"), guest.get_node("Hip/Upper/Lower/Bar"), guest.get_node("Hip/Upper/Lower/Foot/Bar")]
+	var one: float = guest.length
+	var made: bool = guest.get_script().resource_path == GUEST + "organism.gd" and guest.pivot == 0 and is_equal_approx(one, 0.24)
+	for bar: MeshInstance3D in bars:
+		made = made and bar.get_script().resource_path == GUEST + "bar.gd" and bar.mesh != null and outward(bar) == 12 \
+			and is_equal_approx(bar.scale.z * 0.5, one) and bar.get_node("Body/CollisionShape3D").shape != null \
+			and bar.material_override.albedo_color.to_html(false) == "c6ff3d"
+	for path: String in ["Hip", "Hip/Upper", "Hip/Upper/Lower", "Hip/Upper/Lower/Foot"]:
+		made = made and (guest.get_node(path) as MeshInstance3D).material_override.albedo_color.to_html(false) == "f4efe6"
+	made = made and toe.material_override.albedo_color.to_html(false) == "22d9ff"
+	check("the guest is the limb: Hip > Upper > Lower > Foot > Toe, three bars of 0.24 m that each run the guest's own bar.gd (12 outward triangles and a Body), the bars in BODY c6ff3d, the hip and the pins in BONE f4efe6, the toe in SECOND 22d9ff", made)
+	var hip_at: Vector3 = guest.get_node("Hip").global_position
+	var rest_ok := near(toe.global_position, hip_at + Vector3(0, 0, 3.0 * one), 0.001)
+	for i in 60:
+		guest._process(1.0 / 60.0)
+	var by_hand := hip_at + one * (heading(0.6) + heading(1.2) + heading(1.8))
+	check("it moves: at rest the toe lies 0.72 m in front of the hip; after one second of steps the angle is 0.6 rad and the toe is where the sum by hand puts it, %s from the guest's origin" % [rounded(toe.global_position - at)],
+		rest_ok and absf(guest.angle - 0.6) < 0.0001 and near(toe.global_position, by_hand, 0.001))
+	var far := 0.0
+	for i in 628:   # one whole turn at 0.6 radians a second, in steps of 1/60 s
+		guest._process(1.0 / 60.0)
+		for bar: MeshInstance3D in bars:
+			for corner: Vector3 in bar.corners:
+				var reached := bar.to_global(corner) - at
+				far = maxf(far, Vector2(reached.x, reached.z).length())
+		var tip := toe.global_position - at
+		far = maxf(far, Vector2(tip.x, tip.z).length() + 0.05)
+	var low := INF
+	for part: MeshInstance3D in guest.find_children("*", "MeshInstance3D", true, false):
+		low = minf(low, (part.global_transform * part.get_aabb()).position.y)
+	check("the guest stands on the ground at its own origin (its pins reach down to %.2f m) and through one whole turn it stays on a place, 1.6 m wide and deep: it reaches %.2f m from its origin" % [low, far],
+		absf(low) < 0.001 and far <= PLACE and is_zero_approx(hip_at.x - at.x) and is_zero_approx(hip_at.z - at.z))
+	measured["guest"] = {"scene": GUEST + "organism.tscn", "bar_m": one, "reach_in_one_turn_m": snappedf(far, 0.001), "lowest_m": snappedf(low, 0.001)}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The Input Map: the nine actions of the Cube study, unchanged.
@@ -514,6 +596,9 @@ func run() -> void:
 	rest = await settle(marble)
 	check("a marble dropped over the passage falls through it to the floor: %.3f m" % rest.y, rest.y < 0.2)
 	await close(study)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The measured second: what second.gd wrote at real fixed frame rates.
 	if FileAccess.file_exists("res://second.json"):

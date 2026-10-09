@@ -1,0 +1,26 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"_build_stock",
+			"_build_spoil_body",
+			"_measure_connectivity"
+		],
+		"centres": 11,
+		"components": 1,
+		"cutters_union": true,
+		"fixture_tolerance": 0.000002,
+		"graph_cycles": 8,
+		"limitation": "The orange body is the full cutter union; it is not clipped to the stock. No traversal claim.",
+		"section_cut": true,
+		"seed": 20260907,
+		"subtraction_operations": 2,
+		"uses_shared_rng": false
+	},
+	"geometry_nodes": 26,
+	"phases": 4,
+	"source_paths": [
+		"res://commons/artifacts/boolean_burrow/boolean_burrow.gd"
+	],
+	"title": "A WALK TAKEN OUT OF A BLOCK"
+}

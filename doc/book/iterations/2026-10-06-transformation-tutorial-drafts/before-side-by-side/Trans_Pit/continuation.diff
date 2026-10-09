@@ -1,0 +1,85 @@
+--- Trans_Body
++++ Trans_Pit/lesson.gd
+@@ -1,37 +1,51 @@
+ extends Node3D
+ 
+-var cube := MeshInstance3D.new()
+-var player: Node3D
+-var near_distance := 1.0
+-var far_distance := 4.0
+-var minimum := 0.25
+-var turn_instead := false
++var leaves: Array[MeshInstance3D] = []
++var sensor := Area3D.new()
++var duration := 3.0
++var progress := 0.0
++var slide := 1.15
+ 
+ func _ready() -> void:
+-    assert(far_distance > near_distance and near_distance >= 0.0)
+-    assert(minimum > 0.0 and minimum <= 1.0)
+-    cube.mesh = BoxMesh.new()
+-    add_child(cube)
+-    cube.position.y = 0.5
+-    player = get_tree().get_first_node_in_group("player_body") as Node3D
+-    if player == null:
+-        player = get_tree().get_first_node_in_group("em_walker") as Node3D
++    assert(duration > 0.0 and slide >= 0.0)
++    box(Vector3(0.25, 2.6, 0.35), Vector3(-1.25, 1.3, 0))
++    box(Vector3(0.25, 2.6, 0.35), Vector3(1.25, 1.3, 0))
++    box(Vector3(2.75, 0.2, 0.35), Vector3(0, 2.7, 0))
++    for side in [-1.0, 1.0]:
++        leaves.append(box(Vector3(1.1, 2.5, 0.18), Vector3(side * 0.55, 1.25, 0)))
+ 
+-func _process(_delta: float) -> void:
+-    if not is_instance_valid(player):
+-        return
+-    var separation := player.global_position - global_position
+-    separation.y = 0.0
+-    respond(separation.length())
++    sensor.collision_layer = 0
++    sensor.collision_mask = 1
++    sensor.set_collision_mask_value(20, true)
++    add_child(sensor)
++    var hitbox := CollisionShape3D.new()
++    var shape := BoxShape3D.new()
++    shape.size = Vector3(5, 3, 4)
++    hitbox.shape = shape
++    hitbox.position.y = 1.5
++    sensor.add_child(hitbox)
+ 
+-func respond(distance: float) -> void:
+-    var closeness := 1.0 - clampf((distance - near_distance) / (far_distance - near_distance), 0.0, 1.0)
+-    if turn_instead:
+-        cube.scale = Vector3.ONE
+-        cube.position.y = 0.5
+-        cube.rotation_degrees.y = 90.0 * closeness
+-    else:
+-        var factor := lerpf(1.0, minimum, closeness)
+-        cube.rotation_degrees.y = 0.0
+-        cube.scale = Vector3.ONE * factor
+-        cube.position.y = factor * 0.5
++func box(size: Vector3, at: Vector3) -> MeshInstance3D:
++    var body := MeshInstance3D.new()
++    var mesh := BoxMesh.new()
++    mesh.size = size
++    body.mesh = mesh
++    body.position = at
++    add_child(body)
++    return body
++
++func _physics_process(delta: float) -> void:
++    var target := 0.0
++    for body in sensor.get_overlapping_bodies():
++        if body.is_in_group("em_walker") or body.is_in_group("player_body"):
++            target = 1.0
++            break
++    progress = move_toward(progress, target, delta / duration)
++    apply_pose(progress)
++
++func apply_pose(t: float) -> void:
++    for i in leaves.size():
++        var side := -1.0 if i == 0 else 1.0
++        leaves[i].position = Vector3(side * (0.55 + slide * t), 1.25 + 0.9 * t, 0)
++        leaves[i].rotation_degrees.z = side * 55.0 * t
++        leaves[i].scale = Vector3.ONE * lerpf(1.0, 0.35, t)

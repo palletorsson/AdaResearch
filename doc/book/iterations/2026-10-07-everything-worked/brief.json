@@ -1,0 +1,49 @@
+{
+  "title": "Everything worked.",
+  "subtitle": "The dark side of The Nature of Code",
+  "status": "Illustrated encounter proposal; causal design has not been tested in Godot.",
+  "principle": "A simple intention meets interacting mechanisms. Each local rule may hold while their combined consequences defeat the goal.",
+  "short_instruction": "Keep the point. Give the student one ordinary goal. Make the attempted help alter the state. Show contact, stored energy and consequence. Stay with the resulting condition. Do not replace process with error signage. Do not script a catastrophe and call it emergent.",
+  "sequence": [
+    {
+      "stage": "Intention",
+      "caption": "Just put the point on the plinth.",
+      "event": "Carry the familiar sphere on a low trolley to a fixed empty plinth."
+    },
+    {
+      "stage": "Intervention",
+      "caption": "A little more pull.",
+      "event": "A caster catches at a floor joint. The student stretches an elastic tether trying to free it."
+    },
+    {
+      "stage": "Consequence",
+      "caption": "Then the wheel comes free.",
+      "event": "The released tether accelerates the trolley; contact stops it at a narrow display block. The sphere continues and the blocks topple."
+    },
+    {
+      "stage": "Condition",
+      "caption": "It has become something we did not name.",
+      "event": "The sphere rests among the fallen blocks. The destination is still empty. The student inspects the unplanned arrangement."
+    }
+  ],
+  "design_checks": [
+    "The initial goal is immediately legible.",
+    "The same objects persist through every frame.",
+    "The learner's intervention changes a relevant state.",
+    "The next event follows from a visible contact or relation.",
+    "The final condition is not automatically called improvement, success or failure.",
+    "Later engine tests must validate local rules and retained state; an exact comic ending is not evidence of emergence."
+  ],
+  "memory_note": "Memory through consequence means that current modeled state carries effects of earlier interactions. It is not a complete recoverable record of the past. Attachments affect mass and inertia only to the extent the implemented model accounts for them.",
+  "tracks": {
+    "museum": "A bounded encounter where mechanisms meet and the student can inspect or reset the result.",
+    "tutorial": "Reconstruct a small working mechanism, verify it, then inspect the consequence when another relation is introduced.",
+    "reflection": "Stay with the gap between intention, valid operation and the condition left behind."
+  },
+  "method": "Built-in OpenAI image generation",
+  "source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-f73d8c60-d4c7-40dd-9a89-f61046ad9406.png",
+  "initial_source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-f200f179-5681-4cba-b6b9-78319189a253.png",
+  "saved_file": "everything-worked.png",
+  "prompt": "Use case: illustration-story. Create a FOUR-PANEL chronological comic titled \"EVERYTHING WORKED.\" Subtitle: \"The dark side of The Nature of Code\". This is one materially continuous causal sequence, NOT an atlas of errors, not labels for concepts. Portrait around 1024x1536, four large frames in a 2x2 grid, black panel borders, warm ivory gutters, readable tall condensed serif title. Beautiful cinematic 3D graphic novel, tactile pale contemporary museum surfaces and sober off-white plinths, with slight hand-drawn edges. Strong clear physical action, deadpan Chaplin-esque timing and a quiet strange aftermath. NOT computer-glitch aesthetics. No error codes, red warnings, holograms, flying architecture or evil machines.\nMuseum and actor: ENDLESS MUSEUM, small wall lettering \"always another room\". Same adult androgynous student in all four panels: short tousled brown hair, rust-red patterned shirt, charcoal trousers, black shoes. Correct anatomy. One palm-size mirror-black sphere throughout. Muted moonlit gray and warm ivory architecture. Museum interior, not a computer screen.\nPhysical set across ALL four panels: a tiny low white TRANSPORT TROLLEY with four caster wheels and a shallow rimmed tray carries the black sphere. This trolley is distinctly DIFFERENT from the tall fixed white DESTINATION PLINTH at the far right, whose top is empty throughout. A narrow sunken floor joint crosses travel path. Three freestanding tall narrow lightweight ivory DISPLAY BLOCKS stand beside the route near destination, distinct from the fixed destination plinth. Student eventually uses an elastic black tether to pull the small trolley from the side, outside trolley's travel line. Keep the sphere, trolley, floor seam, three blocks and fixed destination consistent. Everything proceeds through contact and stored spring energy; no object changes itself by magic.\nPanel 1 upper-left: caption exactly \"Just put the point on the plinth.\" Wide view clearly showing simple task: black sphere resting in low trolley tray, student pushing toward tall fixed EMPTY target plinth in the right distance. Three tall narrow display blocks stand alongside route, subtle obstacles. Trolley front wheel arriving at the floor joint. Calm ordinary intention, nothing wrong with world.\nPanel 2 upper-right: caption exactly \"A little more pull.\" Closer action: front caster is visibly CAUGHT at edge of recessed floor joint. Student has attached a black elastic tether to trolley front and stands AHEAD AND TO THE SIDE, pulling it taut, leaning with mild effort. Draw stretched elastic with visible tension; trolley barely moved, ball still in its shallow rimmed tray. No cord tied to student's body. Goal plinth still visible empty beyond. Friction/contact temporarily prevent progress while the elastic stores energy.\nPanel 3 lower-left: caption exactly \"Then the wheel comes free.\" Trolley wheel has just crossed joint. Stored elastic has shortened and accelerated trolley forward along floor, trolley strikes lowest part of the FIRST nearby narrow display block. First block tilts into second and third; show clear contacts and a small plausible domino cascade, not an explosion. Trolley's sudden stop sends BLACK SPHERE out of tray forward at low height, with one restrained trajectory arc, following inertia. Student at side, holding now slack cord, surprised, safe. Crucial: ONLY ONE SOLID BLACK SPHERE in panel. Three blocks, trolley and sphere continue moving; target plinth stays upright and untouched.\nPanel 4 lower-right: caption exactly \"It has become something we did not name.\" Wide quiet aftermath: same three ivory display blocks now lie and lean in an odd stable interlocked grouping on floor, black sphere resting in a small hollow between TWO fallen blocks. Empty trolley halted nearby. Destination plinth still upright with EMPTY top in background. Student crouches attentively, still holding slack elastic cord, inspecting unexpected grouping, expression uncertain and curious rather than triumphant or devastated. This is neither a successful delivery nor a spectacular disaster. It is the condition left by the process. No new objects, no debris beyond tiny scuffs, no duplicate balls, no injury. Give this panel room and silence.\nFooter: \"Friction. Tension. Release. Collision. A condition remains.\"\nAll text must be exact, legible, confined to captions/title/footer and small museum branding. Make the physical causal sequence easy to read at a glance while leaving the final grouping unnamed.",
+  "revision_prompt": "Preserve the comic's four-panel layout, exact captions, title, protagonist, sphere and museum. Correct ONLY the lower-left third panel so the causal collision is unmistakable: show the FRONT RIGHT CORNER of the low white wheeled trolley visibly contacting the side of the FIRST of the three narrow standing display blocks, around lower-quarter height. Put trolley immediately against that block, with a small contact mark. The first block is tipping against the second, then the third, each contact visible, falling away from trolley to the right. Student stands safely BEHIND and to side, neither foot on trolley, holds SLACK elastic still visibly attached to trolley's front eyelet. Sphere already left tray and is in low forward flight, one sphere only; its curved path begins at trolley tray. This is contact and momentum transfer, not blocks toppling on their own. Preserve the other three panels unchanged. Remove invented extra motivational wall slogans throughout, leaving only ENDLESS MUSEUM / always another room. No other changes."
+}

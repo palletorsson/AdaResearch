@@ -1,0 +1,20 @@
+--- before/commons/maps/Point_One/technical.md
++++ commons/maps/Point_One/technical.md
+@@ -4,13 +4,13 @@
+ 
+ ## Encounter text and making passage
+ 
+-final.md keeps one position line. Its prose can investigate visibility, resistance, holding, reference and acceptance without requiring the first coding exercise to rebuild every exhibit.
++final.md keeps one position line and the continuous bodily encounter. tutorial.md now follows the same corridor order: absent, visible, solid, held, coordinate room, target and pedestal.
+ 
+-The first tutorial now concentrates on a Vector3 position, a supplied marker, one-coordinate variations and a second position in the same reference. doc/book/studies/point-one/coordinates.tscn inherits the Day Zero base and supplies hidden A/B sphere markers, coloured axes and labels. points.gd assigns position and visibility. The markers share a 0.14 m radius SphereMesh, matching the small production points; the code deliberately does not reconstruct that resource.
++The portable project's main scene is again study.tscn. Its unchanged position.gd, visible.gd and solid.gd let the reader inspect and vary the first three conditions. The tutorial uses actual source lines for the local centre, visible position, visible radius and collision radius. It supplies the surrounding mesh/physics construction, rather than returning to a full constructor lesson at each stop.
+ 
+-The earlier study.tscn and position.gd, visible.gd and solid.gd remain unchanged as an optional construction comparison. CONSTRUCTION.md in the study folder retains the previous tutorial, including mesh/collision construction, reporting, conversion and tolerance. These are available for source inspection without becoming prerequisites for Line. This study remains fixed-camera desktop material, not a portable XR interaction kit.
++The held point remains an interaction in the museum. The download contains no walking or pickup system. coordinates.tscn and points.gd are unchanged and used only when the tutorial reaches the coordinate room; their two markers prepare the Line handover. The target's acceptance and the pedestal are observed encounters, not additional implementation assignments.
+ 
+-The current first exercise is tested from its actual code blocks, including the silent position, revealed marker, independent axis changes and two positions. Execution and structural checks do not demonstrate beginner understanding. The museum source and placements are unchanged in this pass.
++The source study still inherits the unchanged Day Zero base. Existing native evidence covers the two studies; this pass reruns the three-condition comparison because it becomes the default starting scene again. No headset or learner claim follows from that check.
+ 
+ ## Carry one body between two addresses
+ 

@@ -1,0 +1,32 @@
+{
+  "room": "WaveFunctions_Intro",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_Intro/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/WaveFunctions_Intro/map_data.json": "680e2fe5414db351be215d9f3020efc3882875cce1cd2ad8e8a5798b50b5889c",
+    "tools/probes/wavefunctions_lessons_museum.gd": "af846679cc6cea074e14940f6ad959d96ded74a4e7f940a53b13716d602cec77",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "f4193017c397f226cab23014101eef6bbf03fadfeda0707d0dccf69efcfb6651",
+    "ada_run/encounter_pilot/WaveFunctions_Intro/control.json": "a1772af3effec9582fa8a5def32515527db35a913b20975e5c0adafb2bc133a7",
+    "ada_run/encounter_pilot/WaveFunctions_Intro/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_Intro/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/WaveFunctions_Intro/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/commons_artifacts.json": "49cb2e2b0a41e794b3d2e77b8605936cc4ca384f23d6d118ab907bfd6998ca83",
+    "commons/artifacts/control_pendulum/control_pendulum.tscn": "06e3ef5bd28d3250d06bb9e034b3a6fa68abc0f6abc850bb0507c2575132fde1",
+    "commons/artifacts/control_pendulum/control_pendulum.gd": "2845432382c9ae08b337e0b604d26f6fc63b3d4df2b28fb5e3566093b63c6cfb",
+    "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd": "0e8a8ffbc24ac98e9205944fce1fc5ca03e21b06bd4b99a555a58aa9b9886077"
+  }
+}

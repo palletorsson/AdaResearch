@@ -1,0 +1,65 @@
+--- before/Color_Walls/final.md
++++ current/Color_Walls/final.md
+@@ -10,30 +10,32 @@
+ 
+ Press once more. The furniture returns to view. No doorway has opened.
+ 
+-![The same furnished cubicle viewed through glass and opaque partitions.](/book-review/doc/book/iterations/2026-09-23-walls-view-and-passage/same-opening.png)
++Now go inside. Stand beside the chair and look back towards the aisle. The glass that let you look in also lets a view reach you here. Would you choose this much openness if you meant to stay?
+ 
+-*The view changes; the opening stays. Both states send the body through the same doorway.*
++![Looking out from inside a furnished cubicle through its coloured glass.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/inside-glass.png)
+ 
+-The switch changes two material properties on each of forty panes:
++*Inside the cubicle, the aisle remains in view. The same doorway serves the glass and opaque states.*
++
++The office has forty panes. The switch changes two material properties on each one:
+ 
+ ```gdscript
+ mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
+ mat.albedo_color.a = 0.26 if glass_visible else 1.0
+ ```
+ 
+-The collision bodies remain where they were. Each cubicle still has its 1.2-metre entrance; the walls still meet at right angles. A change to visibility can alter how you approach a place without changing the geometry that admits you.
++The collision bodies remain where they were. Each cubicle still has its 1.2-metre entrance; the walls still meet at right angles. You may have to find the chair again, but the opening that admitted you is still there.
+ 
+-In Paint, two gestures entered one image. Here the image and the body encounter different accounts of the same wall. Through the glass, you can see the desk from the aisle and the aisle from the desk. Opacity interrupts that view in both directions. The cubicle offers another degree of privacy without another way out.
++In Paint, your gesture joined another painter on a shared surface. Here a coloured surface separates a place to work from a place to pass. Through the glass, each remains visible from the other. Opacity interrupts that exchange in both directions. The cubicle offers another degree of privacy without another way out.
+ 
+-Move until several panes overlap. Their colours enter the renderer's transparency calculation. This glass does not calculate the wavelengths a real pane would absorb. Its clearness is a setting. Even the apparently empty space between you and the desk has been made by a procedure.
++Move until several panes overlap in your view. A colour gathers where you see through more than one. No new pane has appeared there. The renderer combines their colours and transparency; it does not calculate the wavelengths a real pane would absorb. Move again and the overlap shifts.
+ 
+ <!-- @color_space_navigator -->
+ 
+-Leave the cubicle through its opening. At the smaller models, look for red, first in the cube and then in the cylinder. Where could you go from it?
++Leave the cubicle through its opening. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
+ 
+ You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.
+ 
+-![The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples.](/book-review/doc/book/iterations/2026-09-23-walls-view-and-passage/colour-coordinates.png)
++![The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/colour-coordinates.png)
+ 
+ *RGB channels become three straight directions. In HSV, hue goes around, saturation moves outward and value changes height.*
+ 
+@@ -44,13 +46,13 @@
+ colour = Color(r, g, b)
+ ```
+ 
+-Look across to the HSV cylinder. Hue turns around its axis, saturation moves outward, and value changes height. Going around has replaced one of the cube's straight directions. The two models offer different ways to organise colour values.
++Follow the RGB cube upwards: that direction adds green. Across in the HSV cylinder, rising changes value, as height did among the pillars. Hue goes around its axis; saturation moves outward. Up is still up in the room, but the colour rule gives it another job.
+ 
+ Neither contains every colour as a visible point: each holds five hundred samples. The gaps belong to the display we have built. Even the black corner has been brightened slightly so that you can find it. To show a value, the exhibit has already made an accommodation. What would disappear if it refused?
+ 
+ <!-- @gradient_interpolator -->
+ 
+-The next bench starts with red at one end and blue at the other. Sixteen small cubes run from one to the other. Follow them with your eyes, then press **RGB / HSV**. Leave the endpoints alone.
++At the next bench, red and blue mark the ends of a row of sixteen small cubes. Follow the colours between them, then press **RGB / HSV**. Leave the endpoints alone.
+ 
+ The middle changes. The agreement about where to begin and end did not decide how to travel.
+ 
+@@ -70,4 +72,4 @@
+ 
+ <!-- @ -->
+ 
+-A view through glass, a position in a colour model, a calculated passage: similar appearances can conceal different operations. Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?
++Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?

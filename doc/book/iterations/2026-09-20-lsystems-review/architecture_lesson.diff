@@ -1,0 +1,49 @@
+--- before/commons/artifacts/architecture_lesson/architecture_lesson.gd
++++ commons/artifacts/architecture_lesson/architecture_lesson.gd
+@@ -9,6 +9,7 @@
+ var built := false
+ var rooms_enabled := false
+ var show_rule := false
++var address_revealed := false
+ var notice := ""
+ var occupied: Dictionary = {}
+ var room_cells: Dictionary = {}
+@@ -26,7 +27,7 @@
+ 	box(Vector3(0, 0.003, -4), Vector3(11.6, 0.006, 11.6), material("243b41"))
+ 	for x in [-5.8, 5.8]: box(Vector3(x, 0.015, -4), Vector3(0.025, 0.025, 11.6), material("bfa875", true))
+ 	for z in [-9.8, 1.8]: box(Vector3(0, 0.015, z), Vector3(11.6, 0.025, 0.025), material("bfa875", true))
+-	program = label("F[+RF][-RF]F\n4 moves / 2 room records / 1 room address", Vector3(0, 2.65, -4), 0.002)
++	program = label("", Vector3(0, 2.65, -4), 0.002)
+ 	label("ENTER", Vector3(0, 0.025, 0.8), 0.0015).rotation_degrees.x = -90
+ 	label("CONTINUE", Vector3(0, 0.025, -9.35), 0.0015).rotation_degrees.x = -90
+ 	# The retained miniature stands at its old relative place in the rear collection.
+@@ -56,9 +57,11 @@
+ 		"PLAN": built = false
+ 		"BUILD": built = true
+ 		"WIDTH": width_index = (width_index + 1) % WIDTHS.size()
+-		"ROOMS": rooms_enabled = not rooms_enabled
+-		"RESET": width_index = 1; built = false; rooms_enabled = false
+-		"RULE": show_rule = true; refresh(); return
++		"ROOMS":
++			rooms_enabled = not rooms_enabled
++			if rooms_enabled: address_revealed = true
++		"RESET": width_index = 1; built = false; rooms_enabled = false; address_revealed = false
++		"RULE": address_revealed = true; show_rule = true; refresh(); return
+ 	rebuild()
+ 
+ func add_rectangle(target: Dictionary, low: Vector2, high: Vector2) -> void:
+@@ -147,9 +150,12 @@
+ 	wall_count += 1
+ 
+ func refresh() -> void:
++	# Keep the two instructions available to trace before giving their shared address.
++	var answer := " / 1 shared address" if address_revealed else ""
++	program.text = "F[+RF][-RF]F\n4 moves / 2 room records" + answer
+ 	if notice != "": readout.text=notice
+-	elif show_rule: readout.text="F: move / R: mark this position\nWalls border the union; ends have explicit doors."
+-	else: readout.text="%s / clear width %.1f m / rooms %s\n4 segments / 2 R records / 1 shared address" % ["BUILT" if built else "PLAN",WIDTHS[width_index],"ON" if rooms_enabled else "OFF"]
++	elif show_rule: readout.text="F: move / R: mark this position\n2 R records / 1 shared address\nWalls border the union; ends have explicit doors."
++	else: readout.text=("%s / clear width %.1f m / rooms %s\n4 segments / 2 R records" + answer) % ["BUILT" if built else "PLAN",WIDTHS[width_index],"ON" if rooms_enabled else "OFF"]
+ 
+ func _stage_hall() -> void:
+ 	var hall: Node = source

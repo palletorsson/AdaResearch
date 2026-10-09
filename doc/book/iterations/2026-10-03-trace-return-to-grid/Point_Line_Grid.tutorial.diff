@@ -1,0 +1,113 @@
+--- before/Point_Line_Grid/tutorial.md
++++ commons/maps/Point_Line_Grid/tutorial.md
+@@ -1,74 +1,68 @@
+-# Point Grid — a place to return to
++# Point Grid — your trace returns
+ 
+-Move the pink point slowly. A smaller white marker waits, then jumps. Your point can move while the marker keeps its place.
++Find the bend you made in Trace. It is here again. Beside it, the same record has been placed on a grid. Change the spacing and compare what happens to that bend.
+ 
+-Trace kept positions after enough movement. Here we give each position a grid address and keep a new position when that address changes. The list and drawing loop are already ours; the new operation is rounding.
++## 1. Bring the drawing with you
+ 
+-Open `point_grid.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). Edit `studies/point_grid/grid.gd`. The same supplied handle provides the hold. The script creates the white marker as Point One created its sphere. Three readouts show the input in metres, its grid address, and the resulting placement in metres.
++In the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md), open `point_trace.tscn`. Hold the point, draw, then release it. On desktop, mouse movement directs the held point; in VR, your tracked hand moves it. Wait for **Saved for Point Grid**.
+ 
+-## 1. Count steps from an origin
++Stop the scene and run `point_grid.tscn`. It loads that saved trace. If no usable trace has been saved, it asks you to return and draw one. It does not substitute a demonstration for your gesture.
+ 
+-The grid has a chosen spacing:
++The supplied `TraceMemory` keeps the latest released record on this device. It carries positions between the two lessons, including across separate runs. Opening Grid does not change the saved record. Returning to Trace, drawing and releasing saves a new one.
++
++## 2. Keep the source and the result separate
++
++Open `studies/point_grid/grid.gd`. We have two lists:
+ 
+ ```gdscript
++var source_points: Array[Vector3] = []
++var grid_points: Array[Vector3] = []
+ var grid_size := 0.25
+ ```
+ 
+-One step is a quarter of a metre. All positions use Study's frame. Keep its scale at one: one unit represents one metre.
+-
+-Inside `_process()`, we read the point and calculate its address:
++Both hold positions in metres. `source_points` receives the saved trace:
+ 
+ ```gdscript
+-    var p := point.position
+-    var address := Vector3i(
+-        roundi(p.x / grid_size),
+-        roundi(p.y / grid_size),
+-        roundi(p.z / grid_size)
+-    )
++    source_points = TraceMemory.read_trace()
+ ```
+ 
+-For each coordinate, divide by the spacing to count steps. `roundi()` rounds that count to the nearest integer. `Vector3i` holds three integers, while `Vector3` holds three floating-point numbers. The address counts grid intervals; the position measures metres.
++`grid_points` begins empty. We will fill it with new values, leaving the source alone. A quarter of a metre is our chosen grid spacing. All calculations use the Study frame in which Trace recorded the points.
+ 
+-The starting X value is `0.12`. Dividing by `0.25` gives `0.48` steps. The nearest whole number is zero. Y is `1.25` metres, exactly five steps; Z is zero. The address is therefore `(0, 5, 0)`.
++## 3. Give each saved position an address
+ 
+-## 2. Give the address a position
++Trace's drawing loop visited neighbouring entries by index. This loop takes each stored value in turn:
+ 
+ ```gdscript
+-    var placed := Vector3(address) * grid_size
+-    marker.position = placed
++    for p in source_points:
++        var address := Vector3i(
++            roundi(p.x / grid_size),
++            roundi(p.y / grid_size),
++            roundi(p.z / grid_size)
++        )
++        var placed := Vector3(address) * grid_size
++        grid_points.append(placed)
+ ```
+ 
+-`Vector3(address)` converts the integer components into floating-point components. Multiplying by the spacing gives metres again. Address `(0, 5, 0)` becomes position `(0.0, 1.25, 0.0)`.
++For every position `p`, divide each coordinate by the spacing to count grid intervals. `roundi()` gives the nearest integer. `Vector3i` holds these three whole-number counts: the grid address.
+ 
+-We move the marker to this result. The held point keeps its own position. Calculating an address does not force your hand onto it.
++For example, X = `0.12` metres is `0.48` quarter-metre steps, which rounds to zero. X = `0.13` metres is `0.52` steps, which rounds to one. A small difference in the saved input can put two results a quarter of a metre apart.
+ 
+-In `_ready()`, change the point's starting X from `0.12` to `0.13` and run again. The address becomes `(1, 5, 0)`. The input changed by one centimetre; the placed X changed by twenty-five centimetres. You crossed the halfway boundary between two grid positions.
++`Vector3(address)` turns the integer components into floating-point components. Multiplying by `grid_size` gives metres again. `append()` adds that result to the new list. Negative coordinates use the same rule; exact halfway values round away from zero.
+ 
+-Try `-0.12`, then `-0.13`. Negative addresses extend the same rule to the other side of zero. At an exact halfway value, Godot rounds away from zero.
++Each input produces one output. Nearby samples may acquire exactly the same position, but we keep their entries and their order. An array index names a sample in the record; a grid address names a place. Several samples can name that same place.
+ 
+-## 3. Keep an order of visits
++## 4. Change the reading, keep the gesture
+ 
+-We reuse Trace's `Array[Vector3]`. The first frame seeds the empty list. After that, we add a position only when it differs from the last one:
++The supplied display draws the two lists:
+ 
+ ```gdscript
+-    if points.is_empty():
+-        points.append(placed)
+-    if placed != points[-1]:
+-        points.append(placed)
++    comparison.show_traces(source_points, grid_points, grid_size)
+ ```
+ 
+-`is_empty()` tests whether the list has no entries. `!=` means “not equal”. Moving within one address adds nothing. Moving away and returning adds another visit to that address. The record keeps an order, so a place can occur more than once.
++Pink shows your saved trace. White shows the grid version. Both use the same centring and display scale, with a sideways offset so you can compare them. These display adjustments do not edit either list. The faint ruling is one XY section; the rounding still uses all three coordinates.
+ 
+-An array index and a grid address do different jobs. `points[3]` reads the fourth visit; it does not mean the fourth column of the room.
++Change `grid_size` from `0.25` to `0.5` and run Grid again. You do not have to redraw. It rereads the original trace and calculates another result. Pink stays the same while the white drawing changes. Try `0.1` next. Use a positive spacing.
+ 
+-The existing loop joins each retained position to the next. These segments can run diagonally. The code does not fill in skipped addresses or find a route along the ruled lines. Trace's capacity limit still keeps at most 128 positions.
++The display joins consecutive entries directly. Equal neighbours produce no segment; a jump can produce a diagonal. It does not invent samples between those you made. A finer grid can retain more of the saved shape, but it cannot recover movements that Trace never recorded.
+ 
+-## 4. Change the agreement
+-
+-Restore X to `0.12`. Change `grid_size` to `0.5` and restart. Move, pause, and try to return to a place you left. The larger spacing gives a wider region of input positions the same address. Use a positive spacing; zero cannot divide a position into steps.
+-
+-The supplied `GridRuling` redraws the reference lines at the chosen spacing. It shows only the XY section at Z = 0, with grid indices along its edges. Move the point towards you: the third address component changes too. The rounding works in three dimensions even though this section is flat.
+-
+-This is a reduced version of the hall's snapping artifact. Its finer grid, release alignment and table add other ways to inspect the rule. Here the marker shows the result while the held point stays free.
+-
+-A grid can help endpoints find the same place again. It supplies neither a face nor collision. Next we can arrange three points, close their boundary, and ask what it takes to put a surface inside.
++We have reused a drawing as data. Its shape can now be read under another rule without losing the earlier record. In Triangle, we will choose corners and give their connections another job: closing a boundary, then making a face.

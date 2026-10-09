@@ -1,0 +1,21 @@
+{
+  "status": "awaiting clarification about concurrent baseline restoration",
+  "observed": "The artifact scripts, registry, map and roles returned exactly to their before/ snapshots after the first rendered probe. Chapter and book-navigation edits remain.",
+  "first_rendered_run": {
+    "checks": 26,
+    "checks_pass": true,
+    "walks_pass": 10,
+    "walks_total": 11,
+    "failure": [
+      "walk: waypoint-2"
+    ]
+  },
+  "last_run": "Failed to load both works again after the registry returned to baseline; do not present earlier captures as current implementation.",
+  "pending": "Confirm whether another task or author intentionally restored these files before reapplying the scoped encounter.",
+  "preserved": [
+    "before/",
+    "first-attempt/",
+    "checks.gd.txt",
+    "check_hall.py"
+  ]
+}

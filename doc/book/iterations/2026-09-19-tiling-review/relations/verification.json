@@ -1,0 +1,577 @@
+{
+  "runs": [
+    {
+      "phase": "before",
+      "probe": "fixed_motif",
+      "checks": 42,
+      "failures": [],
+      "script_error_count": 7,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "before",
+      "probe": "symmetry_compare",
+      "checks": 42,
+      "failures": [],
+      "script_error_count": 7,
+      "global_transform_tree_error_count": 8445,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "before",
+      "probe": "tunnel_addresses",
+      "checks": 50,
+      "failures": [],
+      "script_error_count": 7,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "after",
+      "probe": "fixed_motif",
+      "checks": 42,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "after",
+      "probe": "symmetry_compare",
+      "checks": 45,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 8445,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "after",
+      "probe": "tunnel_addresses",
+      "checks": 50,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "clean-before",
+      "probe": "fixed_motif",
+      "checks": 45,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "clean-before",
+      "probe": "symmetry_compare",
+      "checks": 49,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 8445,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "clean-before",
+      "probe": "tunnel_addresses",
+      "checks": 53,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "after-inspection",
+      "probe": "symmetry_compare",
+      "checks": 46,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 8445,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "after-overlay-fix",
+      "probe": "symmetry_compare",
+      "checks": 46,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 750,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    },
+    {
+      "phase": "final",
+      "probe": "symmetry_compare",
+      "checks": 46,
+      "failures": [],
+      "script_error_count": 0,
+      "global_transform_tree_error_count": 0,
+      "returncode": 0,
+      "museum_stable_during_run": true
+    }
+  ],
+  "gallery_fixtures": {
+    "overlay-before": {
+      "checks": 6,
+      "failures": [
+        "face 0 world position",
+        "face 1 world position",
+        "face 2 world position",
+        "face 3 world position",
+        "face 4 world position"
+      ],
+      "positions": [
+        {
+          "actual": [
+            33.0,
+            9.0,
+            -6.98000001907349
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "face": 0,
+          "matches": false
+        },
+        {
+          "actual": [
+            33.0,
+            9.0,
+            -9.02000045776367
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "face": 1,
+          "matches": false
+        },
+        {
+          "actual": [
+            31.9799995422363,
+            9.0,
+            -8.0
+          ],
+          "expected": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "face": 2,
+          "matches": false
+        },
+        {
+          "actual": [
+            34.0200004577637,
+            9.0,
+            -8.0
+          ],
+          "expected": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "face": 3,
+          "matches": false
+        },
+        {
+          "actual": [
+            33.0,
+            10.0200004577637,
+            -8.0
+          ],
+          "expected": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "face": 4,
+          "matches": false
+        }
+      ],
+      "translated_parent": [
+        13,
+        3,
+        -3
+      ]
+    },
+    "overlay-after": {
+      "checks": 6,
+      "failures": [],
+      "positions": [
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "face": 0,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "face": 1,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "face": 2,
+          "matches": true
+        },
+        {
+          "actual": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "face": 3,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "expected": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "face": 4,
+          "matches": true
+        }
+      ],
+      "translated_parent": [
+        13,
+        3,
+        -3
+      ]
+    },
+    "ceiling-before": {
+      "checks": 11,
+      "failures": [
+        "ceiling/floor 0 world position",
+        "ceiling/floor 1 world position",
+        "ceiling/floor 2 world position",
+        "ceiling/floor 3 world position"
+      ],
+      "positions": [
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "face": 0,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "face": 1,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "face": 2,
+          "matches": true
+        },
+        {
+          "actual": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "face": 3,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "expected": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "face": 4,
+          "matches": true
+        },
+        {
+          "actual": [
+            31.0,
+            13.0,
+            -8.0
+          ],
+          "ceiling_or_floor": 0,
+          "expected": [
+            18.0,
+            10.0,
+            -5.0
+          ],
+          "matches": false
+        },
+        {
+          "actual": [
+            33.0,
+            13.0,
+            -8.0
+          ],
+          "ceiling_or_floor": 1,
+          "expected": [
+            20.0,
+            10.0,
+            -5.0
+          ],
+          "matches": false
+        },
+        {
+          "actual": [
+            35.0,
+            13.0,
+            -8.0
+          ],
+          "ceiling_or_floor": 2,
+          "expected": [
+            22.0,
+            10.0,
+            -5.0
+          ],
+          "matches": false
+        },
+        {
+          "actual": [
+            33.0,
+            9.0,
+            -8.0
+          ],
+          "ceiling_or_floor": 3,
+          "expected": [
+            20.0,
+            6.0,
+            -5.0
+          ],
+          "matches": false
+        }
+      ],
+      "translated_parent": [
+        13,
+        3,
+        -3
+      ]
+    },
+    "ceiling-after": {
+      "checks": 11,
+      "failures": [],
+      "positions": [
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "face": 0,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "face": 1,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "face": 2,
+          "matches": true
+        },
+        {
+          "actual": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "face": 3,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "expected": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "face": 4,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 0,
+          "expected": [
+            18.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 1,
+          "expected": [
+            20.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            22.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 2,
+          "expected": [
+            22.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 3,
+          "expected": [
+            20.0,
+            6.0,
+            -5.0
+          ],
+          "matches": true
+        }
+      ],
+      "translated_parent": [
+        13,
+        3,
+        -3
+      ]
+    }
+  },
+  "all_comparison_cameras_match": true,
+  "manuscripts_unchanged": true,
+  "headset_tested": false,
+  "learner_verified": false
+}

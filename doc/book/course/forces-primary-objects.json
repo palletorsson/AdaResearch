@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "date": "2026-10-07",
+  "title": "Forces through the hands",
+  "status": "Proposed primary objects and upgrades. Source audit complete; these upgrades are not implemented by this document.",
+  "brief": "Inside Endless Museum. Keep the familiar point, cube, slope and platform. One primary reconstruction per hall; supporting play may show the same principle again. Hands initiate the experiment. Consequences can exceed the intention. Preserve the existing Keep choices.",
+  "interaction_rules": [
+    "Grab, pull, push, swing, aim and release operate the actual object. A button labelled PULL FOOT is a candidate for a removable foot.",
+    "Use a constrained grab or bounded force tether for a jointed handle. Ordinary pose-snapping pickup must not drag the hinge anchor through the room.",
+    "Put reset, comparison and display controls on the existing off-hand interface, or beside the working hand. Show which experiment they control; never reset unrelated bodies.",
+    "Keep triggers for powered actions such as thrust or firing. A held object owns its action so the absorbed catalyst does not fire at the same time.",
+    "Offer one readable trial and a way to escalate it with more bodies, a blocked exit or another constraint. Keep one causal question visible.",
+    "Let misses, fallen bodies and overflow remain. Explicit reset restores the apparatus; lost-body recovery and finite spawn limits are disclosed.",
+    "Use colour from the earlier sequence for consistent roles: source, receiver and trace. Label them as well. Do not communicate force only through colour.",
+    "Use vectors sampled from the actual receiver model. Distinguish force, acceleration, velocity, displacement and display length; a trail records where a body went, not the field itself.",
+    "Entry events release or remove a physical condition once per trial. Subsequent collisions and collapse come from simulation, not a scripted failure animation.",
+    "A headset has no sustained weight feedback. Show mass through response to an equal applied force; do not promise the hand will feel simulated kilograms."
+  ],
+  "object_lineage": "PointBody → movable point → dynamic point → force receiver → source of a field / powered hand tool. Cube → load, obstacle, pin, support and backlog. Spring, hinge, rail and basket constrain these familiar bodies. The final receiver is the player.",
+  "order_judgment": "Eleven active halls. The first contains the three vector operations. Then launch, motion, field, drag, spring, choreography, gravity, support, collision and the player receiver. Other upgrade proposals retain their existing status.",
+  "catalyst_audit": [
+    {
+      "object": "The primitive resolution sphere",
+      "implemented": "Extends resolution_point, which continues PointBody. Holding changes mesh resolution. Its action sends the current sphere form as a projectile and returns the dropped sphere to suspension.",
+      "gap": "Shares catalyst grouping/hit conventions, but is not the full BecomingCatalyst mode controller or the new thrust point.",
+      "sources": [
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd",
+        "commons/artifacts/ignorance_gallery/resolution_point.gd",
+        "commons/artifacts/ignorance_gallery/form_projectile.gd"
+      ]
+    },
+    {
+      "object": "The full Becoming Catalyst",
+      "implemented": "Absorbed hand tool, wrist mode selection, curriculum projectile modes, editing modes, held-field interactions and capability progression. The forces projectile reduces nearby rigid-body velocities and temporarily increases damping. Its README understates the current implementation; source is authoritative here.",
+      "gap": "The inspected Forces mode is a calming shot. A general pull/capture/launch force mode is not implemented in that mode. Mode availability depends on progression and configuration. All listed powers are not necessarily available on entry to Forces.",
+      "sources": [
+        "commons/hazards/becoming_catalyst/becoming_catalyst.gd",
+        "commons/hazards/becoming_catalyst/catalyst_orb.gd",
+        "commons/hazards/becoming_catalyst/modes/forces_projectile.gd",
+        "commons/managers/CatalystCapabilityManager.gd",
+        "commons/hazards/becoming_catalyst/capacity_bracelet/capacity_bracelet.gd"
+      ]
+    },
+    {
+      "object": "Two black flight points",
+      "implemented": "In the final hall, Vectors_Act5_ForceAsPlace, inside force_capability_lab. Both extend PointBody. Point where you want to fly and hold their actions: each supplies 11 m/s² along the hand’s pointing direction. Release ends thrust while velocity and gravity continue. The visor reads that same connection.",
+      "gap": "A separate implementation with a court-local player movement adapter; not a catalyst power carried through every hall. It currently supplies acceleration rather than a force derived from a declared player mass.",
+      "sources": [
+        "commons/artifacts/force_capability_lab/force_point.gd",
+        "commons/artifacts/force_capability_lab/force_capability_lab.gd",
+        "commons/artifacts/force_capability_lab/body_visor.gd"
+      ]
+    },
+    {
+      "object": "Breaking and restoration",
+      "implemented": "The opt-in artifact reaction component already handles tool hits and timed rebuilding. The court contains a real hinged falling pole.",
+      "gap": "The existing reaction component hides a target and shows illustrative debris; it is not physical fracture. The pole is released by a button and is not yet a breakable, hand-released joint. Impact-driven breaking requires a real threshold and released rigid pieces or a released constraint.",
+      "sources": [
+        "commons/interactables/artifact_reactions/README.md",
+        "commons/interactables/artifact_reactions/reaction.gd",
+        "commons/artifacts/force_capability_lab/force_capability_lab.gd"
+      ]
+    }
+  ],
+  "integration_decision": "Continue PointBody for the learner's small reconstructed object. Add bounded capabilities to that object and use an adapter to the existing catalyst input/mode/target protocols. Reuse the bracelet for nearby controls. Do not replace PointBody with the entire editor-heavy BecomingCatalyst script, or present these separate implementations as already unified. Preserve earned modes and existing editor input bindings.",
+  "halls": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "title": "Vectors in your hands",
+      "principle": "Displacement, magnitude and unit direction; addition; signed projection and remainder",
+      "primary": "PointBody: direction, addition and projection",
+      "gesture": "Grab and move the four black points across three stations.",
+      "current": "Three working PointBody stations in one map. Values follow the balls; solid cylinder arrows show direction, head-to-tail addition and signed projection.",
+      "upgrade": "Implemented vector compaction; headset legibility and reach remain for human review.",
+      "wild": "Stretch the relation across the room, bring it almost to zero, then reverse it. The target ring does not magnetically correct the point.",
+      "tutorial": "Carry the known grabbable PointBody through three stations in one room. First move one point relative to its local origin: read displacement, length and a separate unit direction. Next move two points and follow a then b to the rose sum; compare the route length with the direct arrival. Finally project onto the signed X rail and retain the perpendicular remainder. Live labels follow the inputs. Thin cylinders give direction a visible body. These are geometric operations; a moving point does not yet imply a force simulation.",
+      "check": "Choose an unlisted displacement, then zero. Predict length and direction. Swap two displacements and cancel them. Move perpendicular to the X rail, then behind its origin: recover a from projection + remainder.",
+      "support": "No separate comparison machines. Borrowed ruler ticks, head-to-tail construction and signed readings.",
+      "status": "Implemented; see vectors-one-room verification",
+      "sources": [
+        "commons/artifacts/force_halls/point_lesson.gd",
+        "commons/artifacts/force_halls/lesson_point.gd"
+      ]
+    },
+    {
+      "map": "VFM_05_Launch",
+      "title": "Let the point go",
+      "principle": "Initial velocity, gravity and trajectory",
+      "primary": "launch_arc",
+      "gesture": "Load the point, pull the launcher handle, aim and release.",
+      "current": "Give the point an initial velocity and observe how gravity changes its journey. Reconstruct the compact analytic trajectory with its stated constant-acceleration assumptions. Then compare the hinged catapult and the open pipe: their release velocities arise from contacts. The same appearance of a curve need not mean the same mechanism. Compare a gate, seesaw and crank by pulling their rose grips at different distances from the physical pivot. The existing catapult remains the launch comparison.",
+      "upgrade": "Supply the launcher hardware and let the learner own the released point and its trajectory. Replace angle buttons with a constrained hand-aimed barrel/handle. Catch in an actual movable basket. Return the donut mortar as a variant, with a handle-mounted firing action.",
+      "wild": "Move the basket, bank a shot, or place the pipe between launcher and target. A collision invalidates the simple free-flight prediction. Rings can catch on posts because their collision geometry preserves the hole.",
+      "tutorial": "Give the point an initial velocity and observe how gravity changes its journey. Reconstruct the compact analytic trajectory with its stated constant-acceleration assumptions. Then compare the hinged catapult and the open pipe: their release velocities arise from contacts. The same appearance of a curve need not mean the same mechanism. Compare a gate, seesaw and crank by pulling their rose grips at different distances from the physical pivot. The existing catapult remains the launch comparison.",
+      "check": "Compare predicted and actual free flight before contact. Verify changing the aim changes launch direction, not gravity. A miss stays visible.",
+      "support": "Catapult, open pipe and donut mortar are different ways to release the same learned body; no need to build all three in the tutorial.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/artifacts/force_capability_lab/ring_mortar.gd"
+      ]
+    },
+    {
+      "map": "VFM_03_Motion",
+      "title": "Keep pushing, then stop pushing",
+      "principle": "Force, mass, acceleration and retained velocity",
+      "primary": "force_play_mass",
+      "gesture": "Aim the force tool at a point and hold its action to apply a measured push.",
+      "current": "Keep the familiar PointBody, with matched visible radius, height and collision shape. Apply the same one-newton force for one second to 1, 2 and 4 kg spheres; read acceleration and the retained velocity after the push. The loaded trolley and push-box puzzle let the same relation become a task. Reconstruct only the equal-force comparison.",
+      "upgrade": "Put the calibrated push in the hand. Keep an optional equal-duration comparison on the same controller. Free play permits pushing cubes too. Show the selected body, applied force and velocity together.",
+      "wild": "End the push but leave the receiver moving. Add another point in its path. Reverse the tool before contact and try to stop the consequence you started.",
+      "tutorial": "Keep the familiar PointBody, with matched visible radius, height and collision shape. Apply the same one-newton force for one second to 1, 2 and 4 kg spheres; read acceleration and the retained velocity after the push. The loaded trolley and push-box puzzle let the same relation become a task. Reconstruct only the equal-force comparison.",
+      "check": "Under the declared equal-force, equal-time comparison, velocity changes scale inversely with mass. Releasing input must not erase velocity.",
+      "support": "The Newton and velocity benches remain readout comparisons. Hand throws alone are not evidence of equal applied force.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd"
+      ]
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "title": "Enter the swirl",
+      "principle": "Position-dependent force; sampling a vector field",
+      "primary": "force_play_vortex",
+      "gesture": "Move the field source, release a point, then enter the same field as a player receiver.",
+      "current": "Give the known PointBody a position-dependent acceleration with inward and tangential components. Solid cylinder arrows make the field legible; eighteen spheres, cubes and cylinders supply receivers. Walk into it and feel the same acceleration through the existing player movement adapter. Reconstruct the field sample and its receiver, then change the balance without prescribing a path.",
+      "upgrade": "Build one walk-in field using the existing receiver adapters. Draw a sparse arrow lattice from the same field function used by physics; add actual sphere and player trails. Keep a nearby radial/swirl control and separate it from initial velocity so comparisons change one variable.",
+      "wild": "A loose cube joins your orbit; you thrust across the current or overshoot the exit. Move the source and see the pattern move while existing bodies retain their momentum.",
+      "tutorial": "Give the known PointBody a position-dependent acceleration with inward and tangential components. Solid cylinder arrows make the field legible; eighteen spheres, cubes and cylinders supply receivers. Walk into it and feel the same acceleration through the existing player movement adapter. Reconstruct the field sample and its receiver, then change the balance without prescribing a path.",
+      "check": "The displayed field sample matches the applied rule at an arbitrary location. Zero the field: velocity remains. Entry/exit restores ordinary player movement exactly once.",
+      "support": "Keep the existing direct-velocity receiver as one contrast. Do not call it the same dynamics as force integration.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/artifacts/force_field_zone/field_carry_provider.gd",
+        "commons/artifacts/force_capability_lab/body_visor.gd"
+      ]
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "title": "Pull through resistance",
+      "principle": "Velocity-dependent drag",
+      "primary": "force_play_liquids",
+      "gesture": "Push or throw the point into the volume; catch it and try another approach.",
+      "current": "Drop the same PointBody into three large regions and compare speed-dependent drag. Walk through the same coefficients. Distinguish this resistance model and its constant upward buoyancy term from a fluid solver. Then release cubes and balls on four slopes: smooth/rough contact changes sliding and rolling. The tutorial reconstructs the point in one drag region; the ramps are comparisons. Trails retain the consequence.",
+      "upgrade": "Make the drag region unmistakable, with a movable boundary or nearby coefficient control. Carry the point into it by hand and offer a matched release for measurement. Add a rolling/sliding slope within reach as the contact-friction comparison.",
+      "wild": "Try dragging a train of attached bodies through the region; later bodies continue pushing after the first slows. Leave the resulting pile.",
+      "tutorial": "Drop the same PointBody into three large regions and compare speed-dependent drag. Walk through the same coefficients. Distinguish this resistance model and its constant upward buoyancy term from a fluid solver. Then release cubes and balls on four slopes: smooth/rough contact changes sliding and rolling. The tutorial reconstructs the point in one drag region; the ramps are comparisons. Trails retain the consequence.",
+      "check": "The drag force opposes nonzero velocity and is zero at rest. Entering and leaving restores the intended model without double damping.",
+      "support": "The mower and work meter can remain optional. The meanings of drag as resistance, pulling and performance may meet in final.md without becoming the same physical claim.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/maps/Vectors_Act4a_KineticForces/tutorial.md"
+      ]
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "title": "Stretch what will return",
+      "principle": "Restoring force and damping",
+      "primary": "force_play_springs",
+      "gesture": "Pull the point away from equilibrium and let go.",
+      "current": "Return the point to a displaced rest length with a spring force; its position evolves through the physics engine. Pull one of seven hanging points and follow the response through neighbour springs. Compare three connected swing pairs with increasing damping, then basket, chain, plank and arm constraints. Reconstruct one spring first; coupling is one return of the same relation. Hinge grip proxies transmit force while preserving the joint.",
+      "upgrade": "Use the PointBody spring pair as the visual continuation, with a constraint-aware grab. Put damping beside the hand. Bring a hinged pole close enough to poke with the moving point; keep the pole's torque explanation optional until selected as its own lesson.",
+      "wild": "A spring ball hits its neighbour, which knocks a cube, which releases the pole. The endpoint depends on contacts, not a scripted sequence of falls.",
+      "tutorial": "Return the point to a displaced rest length with a spring force; its position evolves through the physics engine. Pull one of seven hanging points and follow the response through neighbour springs. Compare three connected swing pairs with increasing damping, then basket, chain, plank and arm constraints. Reconstruct one spring first; coupling is one return of the same relation. Hinge grip proxies transmit force while preserving the joint.",
+      "check": "Force reverses across equilibrium. With damping, the chosen model loses energy after release. Joint anchors remain fixed while the hand moves a handle.",
+      "support": "The mobile, coupled pendulums and hinged pole show other constraints. A hinge is a constraint; torque is the turning effect of force, not a new name for oscillation.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_capability_lab/force_capability_lab.gd",
+        "commons/maps/Vectors_Act4b_Oscillation/tutorial.md"
+      ]
+    },
+    {
+      "map": "Change_Choreography",
+      "title": "The receiver cannot keep up",
+      "principle": "Rate, phase and accumulating contact",
+      "primary": "The familiar cubes on the conveyor",
+      "gesture": "Feed cubes by hand; hold or swing the receiver gate.",
+      "current": "The selected tutorial is phase_rod_array. force_trial_conveyor is a supporting trial with FEED/GATE buttons. Its receiver currently freezes and arranges accepted cubes into a stack.",
+      "upgrade": "Promote a small conveyor/gate encounter as the proposed lesson; keep the rods as a precise phase comparison. Replace the gate button with a handle. Let received cubes settle in a physical basket instead of arranging them by code. Keep the finite supply visible.",
+      "wild": "Close the receiver while the belt continues. The queue piles, tips and spills. Opening the gate does not undo what has already fallen.",
+      "tutorial": "Return to the cube array, clock and repeated action. Control one feed interval and one gate phase; count arrivals and departures. The belt motion is supplied and prescribed. Collisions produce the backlog. This is a synthesis of earlier timing and contact, not a new fundamental force.",
+      "check": "A faster input than output grows the queue. Changing phase differs from changing rate. Cubes remain real colliders after entering the basket.",
+      "support": "Phase rods retain their clear periodic comparison. Do not make the robot-arm loop or every timing machine another required reconstruction.",
+      "status": "Proposed primary-object change; physical receiver upgrade needed",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/maps/Change_Choreography/tutorial.md"
+      ]
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "title": "The source is also a body",
+      "principle": "Pairwise attraction and initial conditions",
+      "primary": "force_play_mutual",
+      "gesture": "Arrange the points by hand and release them; give one a small sideways start.",
+      "current": "Let five PointBody spheres attract one another with paired forces, softened at close range. Initial tangential velocity and disabled contact keep this an orbital model; entering adds the visitor as a sixth model mass. Compare a selective, three-second magnet and a hand-held gravity point with ordinary gravity: remove a bottom brick, cross a release threshold, and watch existing support cease to hold. Reconstruct the pairwise relation; the other experiments expose different boundary conditions.",
+      "upgrade": "Let hands establish the initial positions; put simultaneous release and the matched-start comparison on the nearby controller. Preserve the collisionless comparison rather than silently adding contacts to its model. In a side bay, use a movable attractor to pull a real doorstop.",
+      "wild": "The point meant to open a route catches the doorstop too; the hinged door moves. That is a receiver-selection consequence, distinct from the clean three-body model.",
+      "tutorial": "Let five PointBody spheres attract one another with paired forces, softened at close range. Initial tangential velocity and disabled contact keep this an orbital model; entering adds the visitor as a sixth model mass. Compare a selective, three-second magnet and a hand-held gravity point with ordinary gravity: remove a bottom brick, cross a release threshold, and watch existing support cease to hold. Reconstruct the pairwise relation; the other experiments expose different boundary conditions.",
+      "check": "Each pair contributes equal opposite force. A changed initial condition leaves the comparison's other state untouched. The nearby contact experiment declares its different receiver rules.",
+      "support": "Keep the fixed-source orbit as a contrast. The model source policy matters as much as the drawing of an orbit.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd"
+      ]
+    },
+    {
+      "map": "VFM_09_Legs",
+      "title": "Remove what holds it up",
+      "principle": "Support, contact and centre of mass",
+      "primary": "force_play_support",
+      "gesture": "Pull a support, move the load, or poke the table with the familiar point/stick.",
+      "current": "Reuse the cube as a leg and the point/cube family as a load. Four actual rigid legs support a table with a tall asymmetric stack. Pull the rose leg away by hand: no fall animation or scripted collapse decides the result. Compare the existing walking bodies as changing support arrangements. The tutorial reconstructs one support-and-load contact experiment.",
+      "upgrade": "Replace PULL FOOT with an actual graspable support. Let the table settle on entry. Add one clear entry-triggered release of a ball onto a marginally supported shelf; subsequent collapse is physical. Add a releasable joint/post only if it produces a legible contact chain.",
+      "wild": "Catch a falling cube or use it as a new prop. The experiment becomes repair, not just destruction. A knocked-out post opens a route and drops what it supported.",
+      "tutorial": "Reuse the cube as a leg and the point/cube family as a load. Four actual rigid legs support a table with a tall asymmetric stack. Pull the rose leg away by hand: no fall animation or scripted collapse decides the result. Compare the existing walking bodies as changing support arrangements. The tutorial reconstructs one support-and-load contact experiment.",
+      "check": "Removing a support actually changes contact geometry. The entry event fires once per trial. Restoring the apparatus waits while a player or held object occupies the return space.",
+      "support": "The walkers remain alternative arrangements. A scripted step does not demonstrate physical balance; disappearance plus decorative fragments does not demonstrate fracture.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/interactables/artifact_reactions/README.md"
+      ]
+    },
+    {
+      "map": "VFM_08_Arena",
+      "title": "Aim at what will move",
+      "principle": "Impulse, collision and recoil",
+      "primary": "force_play_bowling",
+      "gesture": "Aim and fire, throw the point, swing a stick, or push the target directly.",
+      "current": "Roll the known sphere into ten real pins along a long banked lane. The impulse initiates motion; contact distributes it. Compare a free and a braced launcher receiving equal opposite impulses. Keep the target bay as a separate question about what is selected. Reconstruct the sphere impulse and observe the pin contacts; pins need not become ten separate tutorials.",
+      "upgrade": "Make a single range from cube pins, a hinged plate and a catch basket. Adapt the point's shot to one explicit impulse/contact contract; avoid adding an impulse twice if the projectile contact already supplies it. Keep the calming shot as a separate visible operation. A breakable latch releases a real body.",
+      "wild": "Hit the moving plate: it knocks a support; cubes spill into the basket; the full basket changes the next collision. Try to stop the chain with the calming power. Precision and failure share the same rig.",
+      "tutorial": "Roll the known sphere into ten real pins along a long banked lane. The impulse initiates motion; contact distributes it. Compare a free and a braced launcher receiving equal opposite impulses. Keep the target bay as a separate question about what is selected. Reconstruct the sphere impulse and observe the pin contacts; pins need not become ten separate tutorials.",
+      "check": "A hit transfers motion once; a miss does not. Recoil has the opposite sign under the stated model. A hinge stays anchored until its specified release condition. Calming reduces motion without being labelled attraction.",
+      "support": "Start with unarmed mechanical targets; the existing sentry can supply a moving challenge later. No new enemy species is needed to make the range compelling.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_trials/trial.gd",
+        "commons/hazards/becoming_catalyst/modes/forces_projectile.gd",
+        "commons/hazards/becoming_catalyst/catalyst_projectile.gd",
+        "commons/interactables/artifact_reactions/reaction.gd"
+      ]
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "title": "You become the receiver",
+      "principle": "Combined thrust, gravity and player velocity",
+      "primary": "force_capability_lab",
+      "gesture": "Point where you want to fly and hold both triggers to fly; release, coast and land.",
+      "current": "Return to the held black point as a source of thrust. Aim the two spheres down or back and hold the triggers; release stops thrust while motion and gravity continue. The existing local-field crossing compares cube and visitor receiver contracts. In the final court the mortar, pad, moving platform, hinge, springs and loose cubes return as a space for combinations. The tutorial owns only the thrust-point-to-player connection. Wear the body visor to compare world velocity, thrust per unit mass and gravity. Turn your head without changing the world vector, then release the triggers: thrust stops before motion does. The visor reads this same connection; it adds no second movement model. The flying-mat circuit returns those same two trigger-thrust points at four raised gates. The mat is a visual carrier of the player movement model; release stops thrust while gravity remains. The mortar now has nine posts and its controls face the approach.",
+      "upgrade": "Make the spheres the first unmistakable encounter and adapt their input to the shared catalyst capability model. Put visor, reset and trial selection at the wrist or working hand. Add reachable landing targets, baskets and a route over the void. Integrate the swirl only through one player movement owner.",
+      "wild": "Fly while carrying a cube, land on a moving platform, send a ring through a suspended target, or break a latch and improvise a bridge. Let the apparatus combine without requiring all of it in the tutorial.",
+      "tutorial": "Return to the held black point as a source of thrust. Aim the two spheres down or back and hold the triggers; release stops thrust while motion and gravity continue. The existing local-field crossing compares cube and visitor receiver contracts. In the final court the mortar, pad, moving platform, hinge, springs and loose cubes return as a space for combinations. The tutorial owns only the thrust-point-to-player connection. Wear the body visor to compare world velocity, thrust per unit mass and gravity. Turn your head without changing the world vector, then release the triggers: thrust stops before motion does. The visor reads this same connection; it adds no second movement model. The flying-mat circuit returns those same two trigger-thrust points at four raised gates. The mat is a visual carrier of the player movement model; release stops thrust while gravity remains. The mortar now has nine posts and its controls face the approach.",
+      "check": "Aligned inputs add; opposed inputs cancel. Releasing triggers preserves velocity. Only one adapter integrates player motion; teleport/exit clears local ownership and the overlay cleanly.",
+      "support": "A launch pad currently sets initial velocity; it is not sustained upward force. The mortar launches at a declared speed. Keep these distinctions visible while allowing free combinations.",
+      "status": "Implemented prototype; see forces-extravaganza verification. Headset trial remains open.",
+      "sources": [
+        "commons/artifacts/force_capability_lab/force_point.gd",
+        "commons/artifacts/force_capability_lab/force_capability_lab.gd",
+        "commons/artifacts/force_capability_lab/body_visor.gd",
+        "commons/artifacts/force_capability_lab/ring_mortar.gd"
+      ]
+    }
+  ],
+  "build_order": [
+    "Target rig: familiar point, hand action, cube pin, hinged plate, basket, physical release and local reset. Establish the reusable interaction contract here.",
+    "Spring and support: replace proxy buttons with constrained grabs and a removable support. Add one causal arrival event and retain the aftermath.",
+    "Walk-in swirl: share the sampled rule with visible vectors, dynamic points and a declared player adapter; show actual trails.",
+    "Flight and launch: make the existing spheres easy to find, reuse the shared hand controls, then replace mortar angle buttons with direct aiming.",
+    "Bring the remaining halls onto the same interaction conventions. Write/retest each full tutorial only against the working primary object."
+  ],
+  "acceptance": [
+    "The visitor can discover and perform the main action without walking to a remote control panel.",
+    "Actual XR pickup/release and action dispatch are tested, including a hand already holding an object. No double firing or competing grab ownership.",
+    "Each lesson has one independent prediction/change/assertion. The displayed quantity comes from the same code/state as the physical receiver.",
+    "One modest trial is legible; one escalation produces genuine contact, constraint or retained-state consequences. Misses are not secretly corrected.",
+    "Local reset restores only this trial, respects occupied/held bodies and keeps exits usable. Ordinary aftermath persists until reset or hall unload, with bounds disclosed.",
+    "Museum captures demonstrate the real artifact. Headset reach and Quest frame-time testing remain separate from desktop and supplied-rig assertions.",
+    "Update FORCES_LESSON.md, tutorial.md and ghost-student assertions together after a prototype passes. Keep final.md reflective, with claims matching actual behavior."
+  ]
+}

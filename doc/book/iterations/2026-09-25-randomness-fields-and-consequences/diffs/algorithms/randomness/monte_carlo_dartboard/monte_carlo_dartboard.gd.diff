@@ -1,0 +1,26 @@
+--- before/algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd
++++ algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd
+@@ -273,8 +273,13 @@
+ 			_throw_dart()
+ 
+ 
++## Standalone demo keys remain available; museum placements use the console.
++@export var keyboard_shortcuts: bool = true
++
+ func _input(event: InputEvent) -> void:
+-	if event is InputEventKey and event.pressed:
++	if not keyboard_shortcuts:
++		return
++	if event is InputEventKey and event.pressed and not event.echo:
+ 		match event.keycode:
+ 			KEY_SPACE:
+ 				auto_throw = not auto_throw
+@@ -1075,6 +1080,8 @@
+ ## disclosure key; an unconditional rebuild would throw that framing away on every
+ ## curated shelf. Unchanged rung means touch nothing.
+ func apply_grid_config(config: Dictionary) -> void:
++	if config.has("keyboard"):
++		keyboard_shortcuts = str(config["keyboard"]).to_lower() != "off"
+ 	var before: String = disclosure
+ 	var reseed: bool = false
+ 

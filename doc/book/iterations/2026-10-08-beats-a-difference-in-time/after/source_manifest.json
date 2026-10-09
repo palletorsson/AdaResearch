@@ -1,0 +1,29 @@
+{
+  "room": "WaveFunctions_TrigWalkingPath",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json": "0aa8fdce4807a607d00b4ecd785a82205c1c0320bab924238014eed33c22a4dc",
+    "tools/probes/wavefunctions_beats_museum.gd": "425389fea6106257fc0861779593623a1a3b09d20f73dccb70d553f5e688df80",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "94ab25e528f165746559c918f66b98079d26576a50876be40732de2fc5b31cce",
+    "ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/control.json": "b2c895ec01aaba87435f14f3a821f3c52d1531e9890754e0f4cbc09a0b0980f3",
+    "ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_TrigWalkingPath/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn": "7d8a28bcd4d131efc084ca5591feb7cc8242bb4616d4fb500ee5d7e18797270c",
+    "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd": "d5f2c0028624c40c636b452cabb436bf34580aeaa51c0e282559d36886a45836"
+  }
+}

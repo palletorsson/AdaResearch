@@ -1,0 +1,732 @@
+{
+  "chapter": "forces",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "pearl": "vectors act1 whatavectoris",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "lines": [
+        {
+          "token": "VectorBasics",
+          "text": "A vector is not a number and not a point. It is a displacement",
+          "by": "draft",
+          "note": "keeping only which-way requires dividing by how-far, so the one arrow this hall cannot show is the one with no length: direction is separable everywhere except at zero, where the operation quietly fails.",
+          "note_src": {
+            "file": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+            "quote": "Any direction reads, only magnitude is removed; zero vector is the singular case where normalization fails"
+          }
+        },
+        {
+          "token": "vector_normalize_demo"
+        }
+      ],
+      "hero": "VectorBasics",
+      "drop": false
+    },
+    {
+      "pearl": "vfm 02 operations",
+      "map": "VFM_02_Operations",
+      "lines": [
+        {
+          "token": "adder_board",
+          "text": "The carriage comes home. Its displacement is zero; its travelled distance is not.",
+          "by": "source-checked room draft"
+        }
+      ],
+      "hero": "adder_board",
+      "drop": false
+    },
+    {
+      "pearl": "vectors act2 vectorarithmetic",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "lines": [
+        {
+          "token": "vector_add"
+        },
+        {
+          "token": "vector_sub"
+        },
+        {
+          "token": "dot_aligner"
+        },
+        {
+          "token": "projection_shadow"
+        },
+        {
+          "token": "torque_crank"
+        }
+      ],
+      "hero": "vector_sub",
+      "drop": false
+    },
+    {
+      "pearl": "vfm 05 launch",
+      "map": "VFM_05_Launch",
+      "lines": [
+        {
+          "token": "launch_arc"
+        }
+      ],
+      "hero": "launch_arc",
+      "drop": false
+    },
+    {
+      "pearl": "vectors act3 fieldsandmotion",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "lines": [
+        {
+          "token": "VectorFieldFlow"
+        }
+      ],
+      "hero": "VectorFieldFlow",
+      "drop": false
+    },
+    {
+      "pearl": "vectors act4a kineticforces",
+      "map": "Vectors_Act4a_KineticForces",
+      "lines": [
+        {
+          "token": "drag_corridor",
+          "text": "The same launch enters three resistances. Which body receives the rule?",
+          "by": "source-checked room draft"
+        },
+        {
+          "token": "force_mower",
+          "text": "The mower comes back; the cut grass does not.",
+          "by": "source-checked room draft"
+        },
+        {
+          "token": "centrifuge_ring",
+          "text": "Double the speed. The inward acceleration required by the circle grows fourfold.",
+          "by": "source-checked room draft"
+        }
+      ],
+      "hero": "drag_corridor",
+      "drop": false
+    },
+    {
+      "pearl": "vectors act4b oscillation",
+      "map": "Vectors_Act4b_Oscillation",
+      "lines": [
+        {
+          "token": "bounce_well",
+          "text": "Restitution made playable - a console toy for the embodied vectors-forces arc (the clean rebuild of the bouncing-ball sim)",
+          "by": "draft",
+          "note": "a pendulum keeps time as T = 2pi*sqrt(L/g), so the hall's clocks are calibrated by the planet beneath them - the steadiest instruments in the sequence cannot name a second without borrowing a constant the room does not hold.",
+          "note_src": {
+            "file": "commons/maps/Vectors_Act4b_Oscillation/intent.md",
+            "quote": "pendulum_hall (lengthen the string and the swing slows - T = 2pi*sqrt(L/g), restoring force mg sin theta)"
+          }
+        },
+        {
+          "token": "momentum_cradle",
+          "text": "Momentum conservation made playable - Newton's cradle",
+          "by": "draft"
+        },
+        {
+          "token": "weather_vane",
+          "text": "Wind made playable - F_drag = ½ρv²C_dA. A ToyConsole",
+          "by": "draft"
+        },
+        {
+          "token": "lever_balance",
+          "text": "The law of the lever made playable - τ = F·d, balanced when F₁d₁ = F₂d₂",
+          "by": "draft"
+        },
+        {
+          "token": "pendulum_hall",
+          "text": "The body-scale, walk-in twin of pendulum_swing",
+          "by": "draft"
+        },
+        {
+          "token": "spring_tower",
+          "text": "The body-scale, walk-in twin of spring_bob: a heavy mass bobs on a giant coil at its real period T = 2π√(m/k)",
+          "by": "draft"
+        },
+        {
+          "token": "calder_object_mobile",
+          "text": "The balanced Calder mobile (τ = w·d at every arm) but hung with the project's own ordinary objects - point",
+          "by": "draft",
+          "note": "the mobile balances the curriculum's own shapes by tau = w*d, but a point and an arch have no weight - each is handed a plausible mass, so a real equilibrium is computed over invented quantities.",
+          "note_src": {
+            "file": "commons/artifacts/registry/vectors_demos.json",
+            "quote": "Each primitive carries a plausible mass and the arms balance those masses by the lever law, so the foundational shapes of the curriculum drift in equilibrium."
+          }
+        },
+        {
+          "token": "calder_mobile",
+          "text": "A large hanging Calder mobile that is actually balanced",
+          "by": "draft"
+        },
+        {
+          "token": "mass_spring_damper",
+          "text": "Every vibrating system is a mass-spring-damper in disguise",
+          "by": "draft"
+        },
+        {
+          "token": "spring_system",
+          "text": "A spring network is a medium. Perturbation at one point travels through connections",
+          "by": "draft"
+        },
+        {
+          "token": "harmonic_motion_demo",
+          "text": "Interactive simple harmonic motion demonstration",
+          "by": "draft"
+        },
+        {
+          "token": "slingshot_pull",
+          "text": "The slingshot as stored energy - draw the pouch back and the band stores PE = 1/2 k x^2",
+          "by": "draft"
+        },
+        {
+          "token": "ChainSwing",
+          "text": "A chain swing is a conversation between gravity and constraint",
+          "by": "draft",
+          "note": "a chain that swings needs one link that cannot: the anchor is the only part held rigid, so a hall about compliance hangs entirely from the one thing that refuses to give.",
+          "note_src": {
+            "file": "algorithms/joint/07_chain_swing/ChainSwing.gd",
+            "quote": "anchor -> pin -> link -> pin -> link -> pin -> seat. A chain of rigid bodies connected by pin joints, driven by periodic force."
+          }
+        },
+        {
+          "token": "surreal_kinetic_sculpture",
+          "text": "A sculpture is a choreography frozen in materials",
+          "by": "draft"
+        },
+        {
+          "token": "vector_joint_playground"
+        },
+        {
+          "token": "ConeTwistBag",
+          "text": "A cone-twist joint draws an invisible boundary in angle-space",
+          "by": "draft"
+        },
+        {
+          "token": "HingeCrank",
+          "text": "Every engine is a conversation between rotation and translation",
+          "by": "draft"
+        },
+        {
+          "token": "SliderPress",
+          "text": "Sliders translate without rotating. The opposite constraint to the hinge",
+          "by": "draft"
+        },
+        {
+          "token": "spring_network",
+          "text": "Mass-spring lattice — a 6x6 grid of masses connected by springs that deform and oscillate",
+          "by": "draft"
+        },
+        {
+          "token": "coupled_pendulums",
+          "text": "coupled oscillators are the rule that two linked harmonic systems do not",
+          "by": "draft"
+        }
+      ],
+      "hero": "bounce_well",
+      "drop": false
+    },
+    {
+      "map": "Change_Choreography",
+      "pearl": "change choreography",
+      "title": "Together, out of time",
+      "hero": "phase_rod_array",
+      "join": true,
+      "lines": [
+        {
+          "token": "phase_rod_array",
+          "text": "phase rod array",
+          "by": "astra"
+        },
+        {
+          "token": "conveyor_backlog",
+          "text": "conveyor backlog",
+          "by": "astra"
+        }
+      ]
+    },
+    {
+      "pearl": "vfm 07 gravity",
+      "map": "VFM_07_Gravity",
+      "lines": [
+        {
+          "token": "orbital_mechanics_demo",
+          "text": "Interactive orbital mechanics simulation — launch satellites",
+          "by": "draft",
+          "note": "the inverse square divides by distance, so the law has no answer when two bodies meet - the room clamps r to at least one metre, and that clamp is all that stands between Newton and infinity.",
+          "note_src": {
+            "file": "commons/maps/VFM_07_Gravity/tutorial.md",
+            "quote": "var d := clamp(arm.length(), 1.0, 25.0) ... The clamp is honest engineering - without it, close encounters explode."
+          }
+        },
+        {
+          "token": "orbit_pair",
+          "text": "Gravity and orbits made playable - the clean rebuild of the old two-body sim",
+          "by": "draft"
+        },
+        {
+          "token": "grid3d_force_directed",
+          "text": "Force-directed graph layout. Nodes repel, edges attract",
+          "by": "draft"
+        },
+        {
+          "token": "gravity_well",
+          "text": "Gravity is not a force reaching across space — it is the shape of space",
+          "by": "draft"
+        },
+        {
+          "token": "exercise_1_8_solution_attraction_magnitude_vr",
+          "text": "An orbit is a perpetual fall that always misses the ground",
+          "by": "draft"
+        },
+        {
+          "token": "three_body_problem",
+          "text": "Three bodies under gravity have no formula. The future is computable but not predictable",
+          "by": "draft",
+          "note": "three bodies have no formula, so the room can only be watched - and the one thing in it still predictable is the barycentre, which travels in a straight line and belongs to none of them.",
+          "note_src": {
+            "file": "commons/artifacts/registry/physics_simulation.json",
+            "quote": "axiom (the law on a slate, plus the barycentre and its straight track, the one predictable thing in the room)"
+          }
+        },
+        {
+          "token": "chaos_attractor",
+          "text": "An attractor is a memory the system can't escape",
+          "by": "draft"
+        },
+        {
+          "token": "nbody_simulation",
+          "text": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm₁m₂/r²)",
+          "by": "draft"
+        },
+        {
+          "token": "example_2_9_n_body_attraction_vr",
+          "text": "Three bodies cannot be solved — they can only be watched",
+          "by": "draft"
+        },
+        {
+          "token": "forcedirected3d",
+          "text": "A good layout is a force equilibrium. The graph does not know its shape",
+          "by": "draft"
+        },
+        {
+          "token": "example_2_8_two_body_attraction_vr",
+          "text": "An orbit is not a path drawn around a center — it is the trajectory two bodies negotiate when neither wants to let the other …",
+          "by": "draft"
+        }
+      ],
+      "hero": "orbital_mechanics_demo",
+      "drop": false
+    },
+    {
+      "pearl": "vfm 09 legs",
+      "map": "VFM_09_Legs",
+      "lines": [],
+      "hero": "",
+      "drop": false
+    },
+    {
+      "pearl": "vfm 08 arena",
+      "map": "VFM_08_Arena",
+      "lines": [
+        {
+          "token": "collision_carts",
+          "text": "Rigid-body collision made playable - a heavy cart meets a light one and momentum before equals momentum after",
+          "by": "draft",
+          "note": "a bounce is computed from the wall's inward normal, not from the ball - reflection needs a surface that has already declared which way it faces, and the ball supplies only the half that gets flipped.",
+          "note_src": {
+            "file": "commons/artifacts/reflection_hall/reflection_hall.gd",
+            "quote": "critical_parameter: The dot product d.n - the slice of the throw that points into the wall."
+          }
+        },
+        {
+          "token": "vector_arena",
+          "text": "A vector is the difference between two points. Once you can hold both",
+          "by": "draft"
+        },
+        {
+          "token": "turret_targeting"
+        },
+        {
+          "token": "sentry_turret"
+        },
+        {
+          "token": "queer_cylinder_target",
+          "text": "A target does not have an inside and an outside",
+          "by": "draft"
+        },
+        {
+          "token": "reflection_hall",
+          "text": "A mirror does not change a vector's length. It changes the sign of one",
+          "by": "draft",
+          "note": "a trailer depends on the film: the storm, the mortar and the bounce hall borrow their meaning from maps not yet walked, so until then the room is spectacle with nothing to point at.",
+          "note_src": {
+            "file": "commons/maps/Force_Preview/intent.md",
+            "quote": "The risk is the trailer problem: spectacle without structure can leave the learner entertained but ungrounded"
+          }
+        },
+        {
+          "token": "newtons_laws",
+          "text": "Interactive visualization of Newton's three laws of motion",
+          "by": "draft"
+        },
+        {
+          "token": "example_2_1_forces_vr",
+          "text": "A force is not a thing that pushes — it is a vector you decide to add",
+          "by": "draft",
+          "note": "the front door teaches the vocabulary every later hall assumes, but the arrow itself arrives already known from primitives - the room can name a vector's parts and cannot supply the thing they are parts of.",
+          "note_src": {
+            "file": "commons/maps/sequences/forces.json",
+            "quote": "the vector itself is NOT taught here. primitives is sequence 1 ... so an arrow with a length and a direction arrives already known."
+          }
+        },
+        {
+          "token": "momentum_collision",
+          "text": "What one body loses, the other gains. Momentum is the bookkeeping of physics",
+          "by": "draft"
+        }
+      ],
+      "hero": "collision_carts",
+      "drop": false
+    },
+    {
+      "pearl": "vectors act5 forceasplace",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "lines": [
+        {
+          "token": "force_cube",
+          "text": "A grabbable cube that draws the force you apply as an arrow out of its centre",
+          "by": "draft",
+          "note": "the bridge is a vector only because the floor was deleted: the void is height-0 cells someone authored, so what gives a chosen direction its stakes is not physics but a hole in the structure layer.",
+          "note_src": {
+            "file": "commons/maps/Void_Crossing/intent.md",
+            "quote": "Dimensions are 14x18 with the void carved as height-0 cells through the centre rows."
+          }
+        },
+        {
+          "token": "vector_machine",
+          "text": "A console that aims and sizes the one vector ruling every force_field in the room",
+          "by": "draft"
+        },
+        {
+          "token": "force_field_zone",
+          "text": "A 4 m cube of space where one vector replaces gravity",
+          "by": "draft"
+        }
+      ],
+      "drop": false,
+      "edge": "the chosen vector is a bridge only because the zone sets gravity_scale to zero first - a force you can stand inside is not added to the world's rule, it is that rule switched off inside a cube.",
+      "edge_src": {
+        "file": "commons/maps/Vectors_Act5_ForceAsPlace/intent.md",
+        "quote": "sets gravity_scale to 0 and adds its field vector as acceleration each frame ... so the chosen vector becomes the only force in the cube"
+      }
+    },
+    {
+      "pearl": "sky climb",
+      "map": "Sky_Climb",
+      "lines": [],
+      "hero": "calder_object_mobile",
+      "drop": true
+    },
+    {
+      "pearl": "void crossing",
+      "map": "Void_Crossing",
+      "lines": [],
+      "hero": "force_cube",
+      "drop": true
+    },
+    {
+      "pearl": "reformed instruments",
+      "map": "Reformed_Instruments",
+      "lines": [
+        {
+          "token": "russell_paradox_workbench",
+          "text": "self-reference is allowed (cell 4 is a well-formed set with one example)",
+          "by": "draft"
+        },
+        {
+          "token": "complexity_dial_workbench",
+          "text": "polynomial vs exponential isn't a speed difference",
+          "by": "draft"
+        },
+        {
+          "token": "ca_rules_workbench",
+          "text": "a 3-cell neighborhood and 8 transition bits suffice to encode every behavior on the qualitative gradient from frozen to chaotic to …",
+          "by": "draft",
+          "note": "six incommensurable problems depend on one console to be legible, and the console can only offer a dial - so halting, paradox and matrix algebra arrive looking like one question asked at six settings.",
+          "note_src": {
+            "file": "commons/maps/Reformed_Instruments/intent.md",
+            "quote": "It also quietly flattens domains: halting, paradox, and matrix algebra all become \"things you turn a dial on\""
+          }
+        },
+        {
+          "token": "halting_workbench",
+          "text": "every machine is decidable PER STEP — you can always do the next step",
+          "by": "draft"
+        },
+        {
+          "token": "qfep_balance_workbench",
+          "text": "the QFEP formula is not a description of a system",
+          "by": "draft"
+        }
+      ],
+      "hero": "ca_rules_workbench",
+      "drop": true
+    },
+    {
+      "pearl": "force preview",
+      "map": "Force_Preview",
+      "lines": [],
+      "hero": "reflection_hall",
+      "drop": true
+    },
+    {
+      "pearl": "console test",
+      "map": "Console_Test",
+      "lines": [
+        {
+          "token": "triangle_curvature_workbench",
+          "text": "the parallel postulate is not a fact about lines",
+          "by": "draft",
+          "note": "the harness needs payload it does not care about - Cantor's diagonal and a triangle's curvature ride the slider as load, and a room validating its own interface can prove nothing about what it carries.",
+          "note_src": {
+            "file": "commons/maps/Console_Test/intent.md",
+            "quote": "here that flattening is appropriate because the subject is the console, not the math"
+          }
+        },
+        {
+          "token": "cantor_diagonal_workbench",
+          "text": "given any countable list of reals, there is always a real not in that list",
+          "by": "draft"
+        },
+        {
+          "token": "riemann_sum_workbench",
+          "text": "integration is the limit of a polygon. The polygon at N=4 is a coarse approximation",
+          "by": "draft"
+        },
+        {
+          "token": "tangent_slope_workbench",
+          "text": "the derivative is the slope of the line you would draw if you zoomed in until the curve looked straight",
+          "by": "draft"
+        },
+        {
+          "token": "shannon_workbench",
+          "text": "between pure order and pure noise lies a mathematical landscape with a floor Shannon named",
+          "by": "draft"
+        },
+        {
+          "token": "control_console",
+          "text": "Brushed grey-metal CSG cabinet (CSGCombiner3D",
+          "by": "draft"
+        }
+      ],
+      "hero": "triangle_curvature_workbench",
+      "drop": true
+    },
+    {
+      "pearl": "force props sandbox",
+      "map": "Force_Props_Sandbox",
+      "lines": [
+        {
+          "token": "death_pylon",
+          "text": "A pylon stand that breathes death in a cycle. During the charge it drinks energy from the ground - a wide field of grid-cells and energy …",
+          "by": "draft"
+        }
+      ],
+      "hero": "bubble_blaster",
+      "drop": true
+    },
+    {
+      "pearl": "vectorfoundations",
+      "map": "VectorFoundations",
+      "lines": [],
+      "drop": true,
+      "edge": "a coefficient is not a property of the point but of flags someone planted first - the map depends on a basis it did not choose, and the cost is that every later number reads as a measurement.",
+      "edge_src": {
+        "file": "commons/maps/VectorFoundations/critical.md",
+        "quote": "The labels feel like measurements; they are actually projections, and the projections depend on which arrows are planted where."
+      }
+    },
+    {
+      "pearl": "vfm 01 foundations",
+      "map": "VFM_01_Foundations",
+      "lines": [
+        {
+          "token": "graphics_monitor",
+          "text": "3D monitor with frame displaying visualization graphics",
+          "by": "draft"
+        }
+      ],
+      "hero": "example_2_1_forces_vr",
+      "drop": true
+    },
+    {
+      "pearl": "vectoroperations",
+      "map": "VectorOperations",
+      "lines": [
+        {
+          "token": "VectorCrossProduct",
+          "text": "The cross product does not live in the plane of its inputs",
+          "by": "draft"
+        },
+        {
+          "token": "VectorDotProduct",
+          "text": "The dot product does not measure length — it measures how much two directions agree",
+          "by": "draft"
+        }
+      ],
+      "hero": "vector_dot_product_xl",
+      "drop": true
+    },
+    {
+      "pearl": "vectoradvanced",
+      "map": "VectorAdvanced",
+      "lines": [],
+      "hero": "VectorFieldFlow",
+      "drop": true
+    },
+    {
+      "pearl": "vfm 03 motion",
+      "map": "VFM_03_Motion",
+      "lines": [
+        {
+          "token": "VectorMotion"
+        },
+        {
+          "token": "friction_ramp"
+        }
+      ],
+      "hero": "VectorMotion",
+      "drop": false
+    },
+    {
+      "pearl": "foundations",
+      "map": "ForcesFoundations",
+      "lines": [],
+      "drop": true,
+      "edge": "Newton's laws are stated for a surface that does not exist - the third island puts friction back, so every clean equation on the first depends on a floor it had agreed not to mention.",
+      "edge_src": {
+        "file": "commons/maps/ForcesFoundations/critical.md",
+        "quote": "The map treats friction as a first-class force and the frictionless case as the rare exception."
+      }
+    },
+    {
+      "pearl": "forces",
+      "map": "Chamber_Forces",
+      "lines": [],
+      "drop": true,
+      "edge": "the third law pairs every force with an equal and opposite one, and the chamber still cannot pair the two bodies: the learner carries the catalyst and can leave, the kresling belongs to the room.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_Forces/critical.md",
+        "quote": "The learner holds the catalyst; the kresling does not. The learner can enter the chamber and leave; the kresling belongs to it."
+      }
+    },
+    {
+      "pearl": "composition",
+      "map": "ForcesComposition",
+      "lines": [],
+      "hero": "force_field_visualizer",
+      "drop": true
+    },
+    {
+      "pearl": "vectorapplied",
+      "map": "VectorApplied",
+      "lines": [],
+      "hero": "hl_turret_vectors",
+      "drop": true
+    },
+    {
+      "pearl": "vfm 04 fields",
+      "map": "VFM_04_Fields",
+      "lines": [
+        {
+          "token": "flow_field_painter",
+          "text": "noise is not the absence of order but order at a length scale you have",
+          "by": "draft"
+        },
+        {
+          "token": "vector_field_visualizer",
+          "text": "3D arrow field showing flow — vortex, source, sink",
+          "by": "draft"
+        },
+        {
+          "token": "noc_5_04_flow_field",
+          "text": "Agents navigate by following a vector flow field",
+          "by": "draft"
+        }
+      ],
+      "hero": "magnetic_simulation",
+      "drop": true
+    },
+    {
+      "pearl": "systems",
+      "map": "ForcesSystems",
+      "lines": [],
+      "hero": "particle_systems",
+      "drop": true
+    },
+    {
+      "pearl": "vfm 06 springs",
+      "map": "VFM_06_Springs",
+      "lines": [
+        {
+          "token": "spring_demo",
+          "text": "Every oscillation in nature eventually damps — the question is how",
+          "by": "draft"
+        }
+      ],
+      "hero": "ChainSwing",
+      "drop": true
+    },
+    {
+      "pearl": "chaos",
+      "map": "ForcesChaos",
+      "lines": [],
+      "hero": "three_body_problem",
+      "drop": true
+    },
+    {
+      "pearl": "arena",
+      "map": "ForcesArena",
+      "lines": [
+        {
+          "token": "hits_reset_display",
+          "text": "A reset is not a return to nothing — it is the act of restoring an expected state",
+          "by": "draft",
+          "note": "both sides run the same arithmetic, so the arena cannot test understanding, only speed - the drone knows exactly what the learner knows, and the reflex is all that is left to grade.",
+          "note_src": {
+            "file": "commons/maps/ForcesArena/critical.md",
+            "quote": "Both sides are running the same operations. The question is which side has developed the faster habitus."
+          }
+        },
+        {
+          "token": "health_display",
+          "text": "A health display is not a stat — it is a promise that change has consequences and that the world keeps …",
+          "by": "draft"
+        },
+        {
+          "token": "throw_ball",
+          "text": "throw_ball",
+          "by": "draft"
+        },
+        {
+          "token": "grab_sphere_point",
+          "text": "XR Tools pickable sphere with highlight ring for repositioning a reference point",
+          "by": "draft"
+        },
+        {
+          "token": "sphere_splitting_showcase",
+          "text": "There is no single way to break a sphere. Each fracture method is a decomposition basis",
+          "by": "draft"
+        },
+        {
+          "token": "VectorAddition",
+          "text": "Vector addition is not about arrows — it is about the fact that two displacements taken sequentially are equivalent to one …",
+          "by": "draft"
+        }
+      ],
+      "hero": "hits_reset_display",
+      "drop": true
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "library placed in the Cube hall",
+      "passed": true
+    },
+    {
+      "name": "six columns and four shelves hold 24 copies",
+      "passed": true
+    },
+    {
+      "name": "copies share 12 declared source/configuration editions",
+      "passed": true
+    },
+    {
+      "name": "repeated copies are distinct bodies sharing one edition mesh",
+      "passed": true
+    },
+    {
+      "name": "last columns alter the same source rather than disguising new sources",
+      "passed": true
+    },
+    {
+      "name": "altered editions retain distinct configurations",
+      "passed": true
+    },
+    {
+      "name": "authored meshes are batched into one geometry node per copy",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: library-in-the-hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: repetitions-and-variations",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: crate-editions",
+      "passed": true
+    },
+    {
+      "name": "production pickup moves one copy away from its shelf",
+      "passed": true
+    },
+    {
+      "name": "other copies stay in place",
+      "passed": true
+    },
+    {
+      "name": "released copy rests on the worktop",
+      "passed": true
+    },
+    {
+      "name": "different prefab can join the new arrangement",
+      "passed": true
+    },
+    {
+      "name": "two copies physically stack without passing through each other",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: another-arrangement",
+      "passed": true
+    },
+    {
+      "name": "visitor can walk along the full shelf",
+      "passed": true
+    },
+    {
+      "name": "worktable approach has floor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "library_world": [
+      16.5,
+      0.0,
+      7.5
+    ],
+    "render_surfaces": 105
+  },
+  "passed": true,
+  "scope": "Native museum render, supplied production pickup/release, separate instance state, shared meshes, collision and visitor-width access. Headset use remains untested."
+}

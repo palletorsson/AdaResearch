@@ -1,0 +1,26 @@
+--- before/final.md
++++ after/final.md
+@@ -1,10 +1,12 @@
+ # What keeps a body changing?
+ 
+-Can you tell how a body changes just by looking at its strange shape?
++Behind us, a number found a height in a wall. An opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
+ 
+ <!-- @MeltingBerniniScene -->
+ 
+-Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. Stand where you can see all three at once and watch for a while before you press anything.
++Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. The little instrument between the silhouettes offers ways to look; it leaves the names until you ask. Stand where you can see all three at once and watch for a while before you press anything.
++
++![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-review/doc/book/figures/Noise_Columns/three-columns.png)
+ 
+ One silhouette holds. The other two rise and sink. There may be a familiar movement among them, something the wave halls have already taught your body to expect. Choose one to follow. When it comes back, keep watching. Does the return arrive after the same interval?
+ 
+@@ -33,7 +35,7 @@
+ 
+ Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
+ 
+-In the previous hall, each bar received its own draw. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
++The walls behind us gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
+ 
+ ```gdscript
+ var melt_factor = pow(v, 0.5) * melt_strength * melt_phase

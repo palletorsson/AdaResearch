@@ -1,0 +1,32 @@
+--- before/commons/maps/Array/technical.md
++++ commons/maps/Array/technical.md
+@@ -2,9 +2,9 @@
+ 
+ Updated 23 September 2026. The chapter remains in final.md; these notes describe the new Molnár-inspired cube study and its evidence.
+ 
+-## Three encounters
++## Four encounters
+ 
+-The active primary order is row_3_x → grid_2d_4x4 → molnar_cube_study. The row and grid retain their collection/absence behavior and code. The added study separates indexed identity from displayed position, orientation and size, and prepares Tutorial_3D without replacing its full-scale flight encounter.
++The active primary order is row_3_x → grid_2d_4x4 → array_floor_writer → molnar_cube_study. The row and grid retain their collection/absence behavior and code. The added study separates indexed identity from displayed position, orientation and size, and prepares Tutorial_3D without replacing its full-scale flight encounter.
+ 
+ ## Transparent cube study
+ 
+@@ -29,3 +29,17 @@
+ Review: doc/book/iterations/2026-09-23-array-molnar-volume/index.html. Runtime: report.json, source_manifest.json and molnar_volume.gd in that directory. 38 checks pass, including real pointer callbacks for all controls, repeated-setting equivalence, fixed indices, geometry bounds, and supplied walking input for the actual museum body around all sides of the plinth. This is not a continuous entrance-to-exit test, headset comfort check or learner observation.
+ 
+ Existing startup output includes the unrelated unrecognized UID rwex60pqapc and GridStructureComponent invalid-position warnings from gridagent. They did not fail the new study checks; they remain separate follow-ups. No live museum was restarted and no live bake/save was overwritten.
++
++## Changing floor — 24 September 2026
++
++Source: commons/artifacts/array_floor_writer/array_floor_writer.gd and .tscn; registry: commons/artifacts/registry/array_floor_writer.json. The new placement replaces gridagent:copy at (15,17) without moving other artifacts or changing authored floor cells. It subclasses the shared agent; other halls keep their existing agent behavior.
++
++The host binds to its containing GridStructureComponent and snapshots editable occupied cells. The sphere consumes or copies one cell per operation state, with a 2.5-second wandering interval and a one-second operation state. Copies and removals use the live grid's add_cube_at/remove_cube_at methods, including its collision. The original generic agent could mutate once per physics frame while feeding/working; an eight-second observation removed 38 floor cells. The new timed observation wrote three cells in eight seconds.
++
++The edit domain is interior X 2..width-3, Z 3..depth-4, Y 0..2; original upper cells are not candidates. The surrounding perimeter and thresholds remain unchanged. The Molnár pad occupies X 7..13, Z 13..19 and is excluded at all editable heights: it is a separate support surface, so consuming a grid cell beneath it does not open a visible depression. A repeat run caught that covered-cell case; the failed check is preserved in floor-covered-cell/report.json. Candidate cells are within three horizontal grid cells of the agent. A copy is rejected where its physical volume overlaps a CharacterBody3D. This encounter uses this map's one-metre cells.
++
++Two shared physical buttons stand at (12,2), with controls around 1.2 m above the deck: PAUSE / RESUME and RESTORE FLOOR. Restore pauses the agent, repairs only changed cells, and retries every 0.2 seconds where a character occupies a changed volume. It resumes only by explicit input. The row and two-dimensional pickup arrays are separate records; the agent does not update their tables.
++
++Removing a floor cube exposes a separate existing museum surface one metre below. An actual museum body descends onto it; this is a depression, not a hole into nothing. Restoration waited while the body occupied that cell and filled it after departure. A complete headset traverse, recovery from a depression and comfort remain to be tested; no claim of learner acceptance or Quest performance is made.
++
++Evidence: doc/book/iterations/2026-09-24-arrays-review-comments/floor/report.json, floor-probe.gd and source hashes. Twenty-five controlled native checks cover timed writing, once-per-state mutation, pause/resume, copy/consume, protected cells, support removal, actual-body descent, occupancy-aware restoration and native captures. Photographs use explicitly supplied mutations after the timed test, paused for comparison. The earlier Molnár evidence above is preserved and was not rerun in this pass.

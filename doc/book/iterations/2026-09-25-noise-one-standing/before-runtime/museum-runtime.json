@@ -1,0 +1,1260 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "40"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				3.43195509910584,
+				-0.11652247607708,
+				0.431955099105835
+			],
+			"bounds_size": [
+				4.13608932495117,
+				7.90749216079712,
+				4.13608932495117
+			],
+			"cell": [
+				5,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.63039970397949,
+						1.12858080863953,
+						1.98370575904846
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.63039970397949,
+						1.12858080863953,
+						1.98370575904846
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.52960014343262,
+						1.12858080863953,
+						1.98370575904846
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.52960014343262,
+						1.12858080863953,
+						1.98370575904846
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.63039970397949,
+						1.03043246269226,
+						1.93583571910858
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.63039970397949,
+						1.03043246269226,
+						1.93583571910858
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.52960014343262,
+						1.03043246269226,
+						1.93583571910858
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.52960014343262,
+						1.03043246269226,
+						1.93583571910858
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.57999992370605,
+						0.93228417634964,
+						1.88796555995941
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Pair/Panel/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.57999992370605,
+						0.93228417634964,
+						1.88796555995941
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Readout",
+					"position": [
+						6.625,
+						1.0511018037796,
+						1.95367109775543
+					],
+					"text": "RUN  t 1.00s | sample 1/6\nx +0.460 z +0.000 | field value -0.243\nrelief -0.005m | amplitude 0.02\ncolour 0.000 | CLIP (negative to black)\nfrequency 14 | ring: no collider"
+				},
+				{
+					"parent": "Panel",
+					"position": [
+						4.57999992370605,
+						1.18222951889038,
+						2.03977870941162
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				5.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "noisetorus"
+		},
+		{
+			"bounds_position": [
+				3.23000001907349,
+				0.120000272989273,
+				3.25000071525574
+			],
+			"bounds_size": [
+				4.53999996185303,
+				1.87999939918518,
+				4.63007068634033
+			],
+			"cell": [
+				5,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.24600028991699,
+						1.08355617523193,
+						7.81207036972046
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.24600028991699,
+						1.08355617523193,
+						7.81207036972046
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.35400009155273,
+						1.08355617523193,
+						7.81207036972046
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.35400009155273,
+						1.08355617523193,
+						7.81207036972046
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.24600028991699,
+						0.977518081665039,
+						7.86151647567749
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.24600028991699,
+						0.977518081665039,
+						7.86151647567749
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.35400009155273,
+						0.977518081665039,
+						7.86151647567749
+					]
+				},
+				{
+					"disabled": false,
+					"path": "LayerPanel/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.35400009155273,
+						0.977518081665039,
+						7.86151647567749
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "LayerPanel",
+					"position": [
+						6.30000019073486,
+						1.14207661151886,
+						7.75300455093384
+					],
+					"text": ""
+				},
+				{
+					"parent": "LayerReadout",
+					"position": [
+						4.94999980926514,
+						1.06618022918701,
+						7.74902057647705
+					],
+					"text": "SUM | three fields, one height\nweights 12.0 / 6.0 / 1.5\n1:50 model | 101 x 101 samples\nsame three-pass slope lowering"
+				}
+			],
+			"position": [
+				5.5,
+				0.800000011920929,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				0.999999642372131,
+				0.999999642372131
+			],
+			"token": "noiselayers"
+		},
+		{
+			"bounds_position": [
+				8.07999992370605,
+				0.00749999983236194,
+				8.07999992370605
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949242055416107,
+				0.840000152587891
+			],
+			"cell": [
+				8,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				5.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				2.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.0,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.0,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.0,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						7.0,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				7.0,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:noise one"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				12.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				12.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				3.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				13.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				12.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				11.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				5.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				11.4320001602173,
+				0.550000011920929,
+				2.20000004768372
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616199970245361
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.7200002670288,
+				0.850000023841858,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				6.09194707870483,
+				0.419999957084656,
+				9.95038223266602
+			],
+			"bounds_size": [
+				0.841962337493896,
+				1.41515755653381,
+				1.11495208740234
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				165.915649414063,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"name": "pair loaded",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "retained basin and independent orb",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"pair_state": {
+		"amp_index": 2,
+		"amplitude": 0.02,
+		"colour": 0.5597,
+		"freq_index": 1,
+		"frequency": 14.0,
+		"frozen": true,
+		"last_touched": "FREEZE",
+		"relief": 0.0024,
+		"remap": true,
+		"rings": [
+			{
+				"aabb": 0.46,
+				"height_multiplier": 0.02,
+				"hue_shift_speed": 0.725,
+				"kind": "relief",
+				"local_time": 2.0,
+				"marker_at": [
+					0.502,
+					0.0,
+					0.0
+				],
+				"noise_scale": 14.0,
+				"noise_speed": 0.935,
+				"shader": "noiseTorus.gdshader",
+				"show_colour": 0.0,
+				"show_relief": 1.0
+			},
+			{
+				"aabb": 0.46,
+				"height_multiplier": 0.02,
+				"hue_shift_speed": 0.725,
+				"kind": "colour",
+				"local_time": 2.0,
+				"marker_at": [
+					0.5,
+					0.0,
+					0.0
+				],
+				"noise_scale": 14.0,
+				"noise_speed": 0.935,
+				"shader": "noiseTorus.gdshader",
+				"show_colour": 1.0,
+				"show_relief": 0.0
+			}
+		],
+		"sample_at": [
+			0.46,
+			0.0
+		],
+		"sample_index": 0,
+		"stand": "pair",
+		"time": 2.0,
+		"value": 0.1194
+	},
+	"passed": true,
+	"rays": [],
+	"room": "Noise_One",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Noise_One/room.png",
+		"res://ada_run/encounter_pilot/Noise_One/clipped.png",
+		"res://ada_run/encounter_pilot/Noise_One/remapped.png",
+		"res://ada_run/encounter_pilot/Noise_One/basin.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": []
+}

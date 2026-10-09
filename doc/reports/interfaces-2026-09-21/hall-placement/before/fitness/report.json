@@ -1,0 +1,325 @@
+{
+	"approaches": [
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.0,
+				0.0,
+				1.0
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": false,
+			"direction": [
+				-1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": true,
+			"passed": false
+		}
+	],
+	"artifact": {
+		"position": [
+			4.5,
+			0.0,
+			4.5
+		],
+		"rotation": [
+			0.0,
+			0.0,
+			0.0
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Live hall contains the actual console artifact",
+			"passed": true
+		},
+		{
+			"message": "Physical console exists after museum loading",
+			"passed": true
+		},
+		{
+			"message": "Operating position has supporting floor",
+			"passed": true
+		},
+		{
+			"message": "Artifact retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits in front of console",
+			"passed": true
+		},
+		{
+			"message": "A supported, unobstructed final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "Choice_0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Choice_0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Choice_0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Choice_0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Choice_1 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Choice_1 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Choice_1 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Choice_1 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Choice_2 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Choice_2 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Choice_2 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Choice_2 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Choice_3 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Choice_3 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Choice_3 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Choice_3 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "INERTIA endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Reset retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Reset inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Reset within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Reset has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Live controls were measured",
+			"passed": true
+		},
+		{
+			"message": "Museum CharacterBody reaches the operating pose along the measured approach",
+			"passed": true
+		}
+	],
+	"console": {
+		"height_above_floor": 0.759999997913837,
+		"position": [
+			4.5,
+			0.759999990463257,
+			6.34000015258789
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.872096784412861,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Choices/Tilt/Row/Choice_0/InteractableAreaButton",
+			"horizontal_distance": 0.666125297546387,
+			"label": "Choice_0",
+			"position": [
+				4.28999996185303,
+				0.87209677696228,
+				6.20784282684326
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.872096665203571,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Choices/Tilt/Row/Choice_1/InteractableAreaButton",
+			"horizontal_distance": 0.63286828994751,
+			"label": "Choice_1",
+			"position": [
+				4.47000026702881,
+				0.872096657752991,
+				6.20784330368042
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.779596753418446,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Choices/Tilt/Row/Choice_2/InteractableAreaButton",
+			"horizontal_distance": 0.516555368900299,
+			"label": "Choice_2",
+			"position": [
+				4.29000043869019,
+				0.779596745967865,
+				6.36805772781372
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.779596991837025,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Choices/Tilt/Row/Choice_3/InteractableAreaButton",
+			"horizontal_distance": 0.472895473241806,
+			"label": "Choice_3",
+			"position": [
+				4.46999979019165,
+				0.779596984386444,
+				6.36805725097656
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.758856363594532,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Parameter/Face",
+			"horizontal_distance": 0.528841972351074,
+			"label": "INERTIA endpoint 0.0",
+			"position": [
+				4.75,
+				0.758856356143951,
+				6.37398099899292
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.848856396973133,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Parameter/Face",
+			"horizontal_distance": 0.670271933078766,
+			"label": "INERTIA endpoint 1.0",
+			"position": [
+				4.75,
+				0.848856389522552,
+				6.2180962562561
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.695114739239216,
+			"hit": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/FitnessLandscapePolitics/Controls/Reset/InteractableAreaButton",
+			"horizontal_distance": 0.413698107004166,
+			"label": "Reset",
+			"position": [
+				4.75,
+				0.695114731788635,
+				6.51038503646851
+			]
+		}
+	],
+	"failures": [],
+	"feet": [
+		4.5,
+		-0.00000000745058059692383,
+		6.84000015258789
+	],
+	"floor_collider": "/root/EndlessMuseum/Seg0_guggenheim-serpentine/Collision",
+	"passed": true,
+	"plaques": [],
+	"room": "SwarmIntelligence_Particle_Swarm_Optimization",
+	"scope": "Actual museum geometry. Static standing capsule, short approach, control rays and world dimensions; desktop capture, no headset or learner validation.",
+	"shots": [
+		"operating.png",
+		"controls.png",
+		"approach.png"
+	],
+	"standing_obstacles": [],
+	"walk_end": [
+		4.5,
+		0.00082683825166896,
+		6.86499643325806
+	]
+}

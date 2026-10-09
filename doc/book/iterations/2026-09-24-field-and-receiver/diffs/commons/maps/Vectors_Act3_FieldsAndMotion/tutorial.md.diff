@@ -1,0 +1,10 @@
+--- before/commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md
++++ commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md
+@@ -29,3 +29,7 @@
+ The preserved compact VectorFieldFlow blends previous velocity toward a sample with `lerp(sample, 0.35)` and multiplies by 0.985 each rendered update. It retains velocity state and is neither the new direct velocity assignment nor the new acceleration integrator. Its coefficients are per frame. The old chapter's memoryless claim was inaccurate. Its manuscript is backed up with the room's before state.
+ 
+ 39 desktop checks cover the pointer controls, sink overshoot, uniform quantitative predictions, reversal, parameter cycles, pause/reset, timestep partition agreement, history limits, exit convention, stable geometry, sampled approaches, control height and legacy scene creation. Headset reach, comfort and sustained performance remain open.
++
++## Reading and retained detail
++
++The canonical [chapter](final.md) follows approach, overshoot, reversal and the observation boundary. The opening trail comparison concerns overlaid return travel: pink's extent beyond the centre can show that it crossed, while a static line does not by itself show timing, repeated visits or current direction. The exact integration, history, arrow sampling, gain cycle and exit conventions remain above. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-field-and-receiver/before/commons/maps/Vectors_Act3_FieldsAndMotion/final.md) is retained for comparison. This reading pass adds no runtime or headset result.

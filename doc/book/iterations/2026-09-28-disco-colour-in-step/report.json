@@ -1,0 +1,274 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "three placed disco artifacts",
+      "passed": true
+    },
+    {
+      "name": "controls and score bind to the placed floor",
+      "passed": true
+    },
+    {
+      "name": "colour return exposes 144 tiles",
+      "passed": true
+    },
+    {
+      "name": "COLOUR is the fifth real pointer button",
+      "passed": true
+    },
+    {
+      "name": "floor supports a standing body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: palette-navy-pink",
+      "passed": true
+    },
+    {
+      "name": "palette 1 colours each unchanged binary address",
+      "passed": true
+    },
+    {
+      "name": "palette switch 0 preserves values and phase",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: palette-teal-yellow",
+      "passed": true
+    },
+    {
+      "name": "palette 2 colours each unchanged binary address",
+      "passed": true
+    },
+    {
+      "name": "palette switch 1 preserves values and phase",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: palette-violet-mint",
+      "passed": true
+    },
+    {
+      "name": "palette 3 colours each unchanged binary address",
+      "passed": true
+    },
+    {
+      "name": "palette switch 2 preserves values and phase",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: palette-black-white",
+      "passed": true
+    },
+    {
+      "name": "palette 0 colours each unchanged binary address",
+      "passed": true
+    },
+    {
+      "name": "palette switch 3 preserves values and phase",
+      "passed": true
+    },
+    {
+      "name": "palette cycle returns to its starting pair",
+      "passed": true
+    },
+    {
+      "name": "ONE STEP exchanges values while keeping the palette",
+      "passed": true
+    },
+    {
+      "name": "pattern change resets ROWS to phase zero",
+      "passed": true
+    },
+    {
+      "name": "speed change preserves pattern and palette",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: colour-console",
+      "passed": true
+    },
+    {
+      "name": "walk across the coloured rows",
+      "passed": true
+    },
+    {
+      "name": "walk across the direction of the coloured rows",
+      "passed": true
+    },
+    {
+      "name": "walking leaves musical addresses unchanged",
+      "passed": true
+    },
+    {
+      "name": "visual clock advances with music stopped",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: a-band-to-cross",
+      "passed": true
+    },
+    {
+      "name": "fourth pattern change reaches SUPER TRIANGLE",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-pink",
+      "passed": true
+    },
+    {
+      "name": "palette also preserves an unfinished triangle turn",
+      "passed": true
+    },
+    {
+      "name": "shader takes the new two colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-yellow",
+      "passed": true
+    },
+    {
+      "name": "pattern palette tempo and walk preserve tile geometry",
+      "passed": true
+    },
+    {
+      "name": "one note plays while visual movement holds",
+      "passed": true
+    },
+    {
+      "name": "stopping the score lets its flashes expire",
+      "passed": true
+    },
+    {
+      "name": "musical event still addresses a floor column",
+      "passed": true
+    },
+    {
+      "name": "event response expires without moving the held triangles",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sequencer-beside-floor",
+      "passed": true
+    },
+    {
+      "name": "colour return completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "held_triangle_motion": 0.45001,
+    "note_events": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        12
+      ]
+    ],
+    "source_floor_support": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2544",
+    "walk across the coloured rows": {
+      "basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -1.0)]",
+      "collisions": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2544",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "position": [
+            9.5,
+            0.509999990463257,
+            17.4946193695068
+          ]
+        }
+      ],
+      "feet": [
+        0.0,
+        1.01009678840637,
+        3.99461936950684
+      ],
+      "floor_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (9.5, -0.5, 13.5)]",
+      "keys": {
+        "87": false
+      },
+      "maximum_y": 1.01009678840637,
+      "minimum_y": 1.01009678840637,
+      "spine_ui": "<null>",
+      "target": [
+        9.5,
+        0.56000018119812,
+        17.5
+      ],
+      "typing": "<Object#null>",
+      "velocity": [
+        0.000000314722001348855,
+        0.0,
+        3.59999990463257
+      ],
+      "world": [
+        9.5,
+        0.510096728801727,
+        17.4946193695068
+      ]
+    },
+    "walk across the direction of the coloured rows": {
+      "basis": "[X: (-0.999999, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -0.999999)]",
+      "collisions": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2544",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "position": [
+            12.463285446167,
+            0.509999990463257,
+            17.5036907196045
+          ]
+        }
+      ],
+      "feet": [
+        2.96328544616699,
+        1.01009678840637,
+        4.00369071960449
+      ],
+      "floor_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (9.5, -0.5, 13.5)]",
+      "keys": {
+        "87": false
+      },
+      "maximum_y": 1.01009678840637,
+      "minimum_y": 1.01009678840637,
+      "spine_ui": "<null>",
+      "target": [
+        12.5,
+        0.56000018119812,
+        17.5
+      ],
+      "typing": "<Object#null>",
+      "velocity": [
+        3.58194279670715,
+        0.0,
+        -0.360118001699448
+      ],
+      "world": [
+        12.463285446167,
+        0.510096728801727,
+        17.5036907196045
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Pattern_Disco",
+  "scope": "Actual museum, real palette/pattern pointer callbacks, ordinary-controller walks and generated musical events. Audio muted. Eye-height native images; no headset, listening-quality or perceptual response claim."
+}

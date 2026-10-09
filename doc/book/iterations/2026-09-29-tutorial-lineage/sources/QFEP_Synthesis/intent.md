@@ -1,0 +1,7 @@
+Concept: The formula understood — not just intellectually but felt, controlled, lived. QFE = F − λE(S) + φΔE(S,t). The force is yours. Return to the world transformed.
+Sequence role: Eighth and final map in QFEP Lab; the synthesis that closes the penultimate spine sequence. All four terms return as grabbable spheres (F, E, λ, φ) alongside the complete formula. The queer_morphology_specimen embodies the φ > 0 thesis in biological form. After this, only Post-Foundations Crisis remains — the question of what to build with the knowledge; follows QFEP_Sandbox.
+Technical angle: Integration of all QFEP components into a unified interactive system. The four grab_spheres represent the four terms; the qfep_formula_3d shows the complete equation. No new concepts — pure synthesis, the learner demonstrating mastery by manipulating the complete system.
+Critical angle: The synthesis is not conclusion but commencement. The formula is a lens, not an answer. Every system the learner encounters — biological, computational, social, artistic — can be analyzed through QFEP: what is its F-drive, its entropy, its λ, its φ? The queer_morphology_specimen is the final artifact: a form that exists at the edge of chaos, embodying φ > 0, refusing to crystallize or dissolve. The curriculum's thesis made flesh.
+Key artifacts: grab_sphere_E, grab_sphere_F, grab_sphere_lambda, grab_sphere_phi make all four terms physical; qfep_formula_3d renders the complete equation; queer_morphology_specimen embodies the edge-of-chaos thesis biologically; tt for navigation.
+
+Gap: No gap identified.

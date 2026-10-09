@@ -1,0 +1,29 @@
+[
+  {
+    "fault": "same-angle-at-every-height",
+    "rejected": true,
+    "failures": [
+      "bottom keeps its starting corner",
+      "half-height turns first corner ninety degrees",
+      "oval has unequal radii",
+      "upper endpoint makes one complete turn"
+    ]
+  },
+  {
+    "fault": "broken-ring-seam",
+    "rejected": true,
+    "failures": [
+      "half-turn shaft closed seam and caps: every logical edge has two faces",
+      "full-turn shaft closed seam and caps: every logical edge has two faces"
+    ]
+  },
+  {
+    "fault": "animation-rewrites-geometry",
+    "rejected": true,
+    "failures": [
+      "rotation advances at 0.4 radians per second",
+      "rotation moves the rendered body in world space",
+      "rotation leaves stored vertices and mesh resource unchanged"
+    ]
+  }
+]

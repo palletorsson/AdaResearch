@@ -1,0 +1,333 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Connectivity · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Connectivity">← Tutorial lineage</a></p><h1>GT Connectivity</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Connectivity/final.md">Raw captured source</a></p><pre># A way back
+
+If you can travel from one vertex to another, can you necessarily return?
+
+&lt;!-- @tarjan_algorithm --&gt;
+
+Choose two vertices joined by a directed path. Trace the arrow directions from the first to the second, then search for a return route. Keep your proposed group in mind while the traversal assigns colours to completed components.
+
+A strongly connected component is a maximal group in which every vertex can reach every other by directed paths. A one-way bridge can connect two groups visually while leaving them separate in this sense. Proximity, shared colour before the search, or a line with the wrong direction cannot substitute for a return path.
+
+Test your proposed component from more than one starting point. A return route for one pair is necessary but does not settle whether every member of a larger group can reach every other. You can make the check manageable by looking for the paths that join a candidate member to the already considered group in both directions. An incoming connection alone may make the drawing feel joined while still leaving the traveller unable to return.
+
+The exhibit runs a depth-first traversal. Each newly visited vertex receives a discovery number and remains on a stack while its group is unresolved. Another value records how far back the current exploration can connect through the relevant routes. This is the low-link information used to recognise when a component can be completed. A vertex turns yellow when visited and orange when finished but still waiting on the stack; an edge that closes back onto a waiting vertex turns red, and that is the moment the low-link is lowered.
+
+Watch the moment several vertices receive one component colour. They are being discharged together from the unresolved stack. The procedure has found a boundary in reachability, not simply collected the next fixed number of vertices. The stack you met with the two travellers now carries information about a question that remains open during the walk.
+
+Try finding an edge between two completed colours. Follow its direction and ask what would need to be added to make the components mutually reachable. One additional return connection can change the component structure much more than its modest length in the drawing suggests.
+
+Strong connectivity is still a limited promise. It establishes the existence of directed routes, not that those routes have equal cost, sufficient capacity or equal accessibility. A long and fragile return journey counts as a return journey under this definition.
+
+&lt;!-- @ --&gt;
+
+Spanning trees will ask how many connections can be removed while everyone remains connected. The useful return route you just found may look like an expendable cycle under a different objective.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Connectivity/tutorial.md">Raw captured source</a></p><pre># GT Connectivity
+
+Directed edges. Strong components. Tarjan&#x27;s algorithm.
+
+Build a directed graph.
+
+```gdscript
+class_name DirectedGraph
+
+var vertices: Array = []
+var edges_out: Dictionary = {}  # vertex -&gt; array of out-neighbours
+
+func add_edge(from_v, to_v) -&gt; void:
+    if not from_v in vertices: vertices.append(from_v)
+    if not to_v in vertices: vertices.append(to_v)
+    edges_out.get_or_add(from_v, [])
+    edges_out[from_v].append(to_v)
+```
+
+Edges have direction. Out-neighbours and in-neighbours are separate.
+
+Compute Tarjan&#x27;s strongly connected components.
+
+```gdscript
+func tarjan_scc(g: DirectedGraph) -&gt; Array:
+    var index: int = 0
+    var stack: Array = []
+    var on_stack: Dictionary = {}
+    var indices: Dictionary = {}
+    var lowlink: Dictionary = {}
+    var sccs: Array = []
+    
+    var strong_connect = func(v):
+        indices[v] = index
+        lowlink[v] = index
+        index += 1
+        stack.push_back(v)
+        on_stack[v] = true
+        for w in g.edges_out.get(v, []):
+            if not w in indices:
+                strong_connect.call(w)
+                lowlink[v] = min(lowlink[v], lowlink[w])
+            elif on_stack.get(w, false):
+                lowlink[v] = min(lowlink[v], indices[w])
+        if lowlink[v] == indices[v]:
+            var component: Array = []
+            while true:
+                var w = stack.pop_back()
+                on_stack[w] = false
+                component.append(w)
+                if w == v: break
+            sccs.append(component)
+    
+    for v in g.vertices:
+        if not v in indices:
+            strong_connect.call(v)
+    return sccs
+```
+
+Single DFS pass with the lowlink invariant. Components emerge when the DFS returns to a root.
+
+Compute the condensation.
+
+```gdscript
+func condensation(g: DirectedGraph, sccs: Array) -&gt; DirectedGraph:
+    var scc_id: Dictionary = {}
+    for i in sccs.size():
+        for v in sccs[i]:
+            scc_id[v] = i
+    var cond := DirectedGraph.new()
+    for edge_from in g.edges_out:
+        for edge_to in g.edges_out[edge_from]:
+            var a: int = scc_id[edge_from]
+            var b: int = scc_id[edge_to]
+            if a != b:
+                cond.add_edge(a, b)
+    return cond
+```
+
+Each SCC becomes a single vertex. The condensation is always a DAG.
+
+Topological sort via Kahn.
+
+```gdscript
+func topological_sort(g: DirectedGraph) -&gt; Array:
+    var in_degree: Dictionary = {}
+    for v in g.vertices: in_degree[v] = 0
+    for u in g.edges_out:
+        for v in g.edges_out[u]:
+            in_degree[v] = in_degree.get(v, 0) + 1
+    var queue: Array = []
+    for v in g.vertices:
+        if in_degree[v] == 0:
+            queue.push_back(v)
+    var result: Array = []
+    while not queue.is_empty():
+        var u = queue.pop_front()
+        result.push_back(u)
+        for v in g.edges_out.get(u, []):
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.push_back(v)
+    return result
+```
+
+Remove zero-in-degree vertices one at a time. The order is the topological sort.
+
+Spawn component rooms.
+
+```gdscript
+func spawn_scc_rooms(sccs: Array) -&gt; void:
+    for i in sccs.size():
+        var room := COMPONENT_ROOM_SCENE.instantiate()
+        room.position = Vector3(i * 5, 0, 0)
+        room.populate(sccs[i])
+        add_child(room)
+```
+
+Each SCC becomes a physical room. The learner walks between rooms via one-way doors.
+
+Highlight one-way edges.
+
+```gdscript
+func render_inter_room_edges(cond: DirectedGraph, room_positions: Dictionary) -&gt; void:
+    for u in cond.edges_out:
+        for v in cond.edges_out[u]:
+            var start: Vector3 = room_positions[u]
+            var end: Vector3 = room_positions[v]
+            spawn_directional_arrow(start, end)
+```
+
+Arrows between rooms show the directed edges in the condensation. The DAG structure is physically legible.
+
+You can now build a directed graph, find strongly connected components via Tarjan, compute the condensation, topologically sort the DAG, and render SCCs as rooms connected by one-way arrows. GT_Spanning_Trees extends to optimal connection.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Connectivity/technical.md">Raw captured source</a></p><pre># GT Connectivity — Technical
+
+The map introduces directed graphs. An edge from A to B does not imply an edge from B to A, and reachability becomes asymmetric. Three rooms in the map correspond to three strongly connected components: maximal subgraphs in which every vertex can reach every other via directed edges.
+
+Tarjan&#x27;s algorithm finds strongly connected components in O(V + E) time using a single DFS pass with a stack. Kosaraju&#x27;s algorithm achieves the same bound with two DFS passes on the graph and its transpose.
+
+```gdscript
+# Tarjan&#x27;s SCC — simplified
+func tarjan_scc() -&gt; Array:
+    var index := 0
+    var stack := []
+    var on_stack := {}
+    var indices := {}
+    var lowlink := {}
+    var sccs := []
+
+    var dfs := func(v):
+        indices[v] = index
+        lowlink[v] = index
+        index += 1
+        stack.push_back(v)
+        on_stack[v] = true
+        for w in adj_out[v]:
+            if not indices.has(w):
+                dfs.call(w)
+                lowlink[v] = min(lowlink[v], lowlink[w])
+            elif on_stack.get(w, false):
+                lowlink[v] = min(lowlink[v], indices[w])
+        if lowlink[v] == indices[v]:
+            var comp := []
+            while true:
+                var w = stack.pop_back()
+                on_stack[w] = false
+                comp.append(w)
+                if w == v: break
+            sccs.append(comp)
+
+    for v in vertices:
+        if not indices.has(v):
+            dfs.call(v)
+    return sccs
+```
+
+The key insight is the lowlink value: it tracks the earliest reachable index from v through the DFS subtree plus at most one back-edge. When a vertex&#x27;s lowlink equals its own index, the vertex is the root of an SCC, and the elements of the stack above it (up to and including the vertex itself) form the component.
+
+The map&#x27;s three rooms correspond to the three SCCs of a constructed example graph. Within each room the learner can move freely; between rooms the doors are one-way, reflecting the directed inter-component edges. Walking between rooms traces the structure of the directed graph at body scale.
+
+Once components are identified, they collapse to a directed acyclic graph (DAG) in which each component is a single node. The DAG can be topologically sorted with a second pass — Kahn&#x27;s algorithm or a reverse-DFS — in O(V + E) time.
+
+Within the sequence, Connectivity is where direction becomes load-bearing. The edge-list data structure that worked for undirected graphs is replaced by a pair of adjacency lists (out-neighbours and in-neighbours), and the algorithms are rewritten to respect the asymmetry. GT_Spanning_Trees will next ask how to cover a graph most cheaply.
+
+## Weakly vs Strongly Connected
+
+A directed graph is strongly connected if every vertex can reach every other vertex. It is weakly connected if the underlying undirected graph (ignoring directions) is connected but the directed version is not. Most real directed graphs are weakly connected but not strongly connected.
+
+The map&#x27;s three-room architecture corresponds to a graph that is weakly connected globally (you can reach any room from any other if you ignore directions) but contains three strongly connected components internally (within each room, you can reach any vertex from any other).
+
+## Condensation
+
+Collapsing each SCC to a single vertex produces the condensation graph. The condensation is always a DAG — acyclic — because any cycle in the condensation would contradict the maximality of the components it spans.
+
+```gdscript
+func condense(sccs: Array) -&gt; Dictionary:
+    var scc_id := {}
+    for i in range(sccs.size()):
+        for v in sccs[i]:
+            scc_id[v] = i
+    var condensation := {}
+    for e in edges:
+        var a := scc_id[e.u]
+        var b := scc_id[e.v]
+        if a != b:
+            condensation.get_or_add(a, {})[b] = null
+    return condensation
+```
+
+Topological sort on the condensation gives a linear ordering of the components such that every directed edge runs from an earlier component to a later one.
+
+## Articulation Points and Bridges
+
+Tarjan&#x27;s algorithm also finds articulation points (vertices whose removal disconnects the graph) and bridges (edges whose removal disconnects the graph). These are related to SCCs but live in undirected graphs and use the same DFS-with-lowlink machinery.
+
+```gdscript
+func find_bridges(graph) -&gt; Array:
+    var bridges := []
+    var index := 0
+    var indices := {}
+    var lowlink := {}
+    var dfs := func(u, parent):
+        indices[u] = index
+        lowlink[u] = index
+        index += 1
+        for v in graph[u]:
+            if not indices.has(v):
+                dfs.call(v, u)
+                lowlink[u] = min(lowlink[u], lowlink[v])
+                if lowlink[v] &gt; indices[u]:
+                    bridges.append([u, v])
+            elif v != parent:
+                lowlink[u] = min(lowlink[u], indices[v])
+    for u in graph:
+        if not indices.has(u):
+            dfs.call(u, null)
+    return bridges
+```
+
+Within the sequence, Connectivity is where direction becomes load-bearing. GT_Spanning_Trees will next ask how to cover a graph most cheaply.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Connectivity/intent.md">Raw captured source</a></p><pre>Concept: Strongly connected components — maximal subsets where every node can reach every other. Tarjan discovers them, Kosaraju confirms, topological sort orders the resulting DAG. Three rooms, three components, cross the connections between.
+Sequence role: Fifth map in Graph Theory; introduces directed graphs and the asymmetry they create (A can reach B but B cannot reach A). The three rooms physically embody three strongly connected components — within each room you can go anywhere, between rooms the connections are one-way; follows GT_Network_Analysis; leads to GT_Spanning_Trees.
+Technical angle: Strongly connected components (SCCs), Tarjan&#x27;s algorithm (single DFS with lowlink values), Kosaraju&#x27;s algorithm (two-pass DFS), condensation into a directed acyclic graph (DAG), topological sort of the condensed graph. The tarjan_algorithm and kosaraju_algorithm artifacts implement both approaches for comparison.
+Critical angle: Connectivity is not binary in directed graphs — you can have one-way connections that create hierarchy from symmetric parts. The SCC decomposition reveals the deep structure: clusters of mutual reachability connected by one-way bridges. This mirrors social structures (cliques connected by brokers) and information flow (feedback loops connected by feeds).
+Key artifacts: tarjan_algorithm implements SCC discovery via single DFS; kosaraju_algorithm implements the two-pass alternative — same result, different approach, demonstrating that algorithmic diversity exists even for well-defined problems.
+
+Gap: kosaraju_algorithm needs slider_horizontal, push_button; tarjan_algorithm needs slider_horizontal, push_button.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Connectivity/critical.md">Raw captured source</a></p><pre># GT_Connectivity — Critical Reflection
+
+Three rooms. Three strongly connected components. The passages between them run one way. Within each room, you can reach any point from any other point — full reciprocity, mutual access, everyone can get to everyone. Between rooms, the connections are directional. You can pass from A to B but not from B to A. Connection without reciprocity is just direction. The map makes directed graphs architectural by building rooms you can enter but cannot leave the way you came.
+
+Foucault&#x27;s analysis of enclosure — the prison, the hospital, the school, each a space of internal circulation and controlled entry — maps precisely onto the strongly connected component. Inside the component, movement is free. Every node reaches every other. The component is a zone of mutual reachability, a space where communication is symmetric and access is guaranteed. But the boundary of the component is a one-way membrane. You cross into the next room through a narrow passage, and the passage does not work in reverse. The SCC is not a community of equals; it is a zone of internal freedom bounded by irreversible transitions. Foucault would recognize the topology: freedom within the enclosure, discipline at the threshold.
+
+The `tarjan_algorithm` artifact discovers these components in a single DFS pass. Its identity is the lowlink counter: `low_link[v] = min(low_link[v], discovery_time[w])` for back edges, and when `low_link[v] == discovery_time[v]`, pop the stack to extract an SCC. The algorithm descends into the graph, painting vertices yellow, then suddenly flashes an entire component in color when a root vertex is found. The discovery is retroactive — you do not know you are inside a component until you reach its root, the node whose lowlink equals its discovery time. The root is defined by what the algorithm finds after it, not before. Structure is revealed in retreat, not in advance. The SCC exists before the algorithm runs, but it becomes visible only during the backward phase, when the DFS retreats and the stack empties.
+
+The `kosaraju_algorithm` takes the opposite approach: two passes. First, traverse the original graph and record finish times. Second, reverse every edge and traverse again in reverse finish order. What survives the reversal was strongly connected all along. The artifact&#x27;s desire is to see the graph flip — the transpose switches edge directions, and the SCCs survive because mutual reachability is symmetric by definition. If A reaches B and B reaches A, then reversing all edges preserves both connections. The inversion is the proof. The reversal is the test.
+
+Ranciere would find the most political structure in the condensation — the DAG that remains after all SCCs are contracted into single nodes. The strongly connected components become points, and the one-way connections between them become edges in a directed acyclic graph. The condensation strips internal complexity — all the mutual reachability, all the reciprocal communication within each component — and replaces it with a hierarchy of one-way dependencies. The DAG is the graph&#x27;s power structure: an ordering where some components can reach others but not vice versa. Topological sort lays this flat, producing a linear sequence from the most upstream component to the most downstream. The condensation takes a graph with rich internal circulation and reduces it to a pipeline.
+
+This is the operation Ranciere calls the police: the reduction of a complex social field to an ordered distribution of positions. Inside the SCC, politics is possible — everyone can reach everyone, communication is reciprocal, dissent can circulate. Between SCCs, politics is foreclosed — the connection is one-way, the downstream component cannot influence the upstream one, the hierarchy is structural. The condensation literally compresses the spaces of political possibility into points and preserves only the power relations between them.
+
+The map&#x27;s three rooms make this tangible. Room A (left, h1) holds Tarjan. Room B (center, h2) holds Kosaraju. Room C (right, h1) is connected to the exit. The height differences between rooms encode the hierarchy: B is elevated above A and C, the central component literally higher than the peripheral ones. The passages between rooms are narrow, single-cell, one-way. You experience the directed edge as a physical transition — a passage you can walk through but cannot walk back through. The map does not enforce one-way movement mechanically (the grid system does not implement directed edges), but the layout and wall placement create a spatial flow that discourages return. The direction is atmospheric rather than absolute.
+
+What the map normalizes is the clean decomposition of a network into components and hierarchy. Tarjan finds the components. Topological sort orders them. The condensation produces a legible structure from a tangled graph. But the tangling was the point. The original graph had cycles — feedback loops, reciprocal dependencies, mutual influence. The condensation eliminates the cycles. What remains is a DAG, an ordering, a hierarchy. The algorithm that discovers structure also destroys it, replacing the graph&#x27;s messy reciprocity with a clean one-way flow.
+
+Connection without reciprocity is just direction. Structure is what survives when you flip every arrow. The question Tarjan and Kosaraju both answer — where are the strongly connected components? — is also the question they both suppress: what is lost when the components are contracted, the cycles eliminated, and the graph flattened into a sequence that flows one way and cannot talk back?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Connectivity/artifacts.md">Raw captured source</a></p><pre># GT Connectivity — Artifacts
+*Graph Theory: Connections Define Structure · relation · 3 artifacts*
+
+&gt; A directed graph splits into pieces — not by cutting, but by asking: from here, can I reach there *and* come back? A strongly connected component is a maximal set of nodes where every pair answers yes. Mutual reachability. Full reciprocity within the group.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Tarjan&#x27;s Algorithm
+![Tarjan&#x27;s Algorithm](/scene-catalog/tarjan_algorithm.png)
+
+TRACE low-link propagation and see where directed cycles collapse into strongly connected components.
+
+`tarjan_algorithm`
+
+## Kosaraju&#x27;s Algorithm
+![Kosaraju&#x27;s Algorithm](/scene-catalog/kosaraju_algorithm.png)
+
+FOLLOW the two DFS passes and explain why SCCs survive graph transposition.
+
+`kosaraju_algorithm`
+
+## Topological Sort
+![Topological Sort](/scene-catalog/topological_sort.png)
+
+Topological sort — linear ordering of vertices in a directed acyclic graph
+
+`topological_sort`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Connectivity/summary.md">Raw captured source</a></p><pre># GT Connectivity — Summary
+
+GT_Connectivity is the fifth map in the Graph Theory sequence. It introduces directed graphs and the asymmetric reachability that follows from directing edges. Three rooms sit in a row, and the connections between them are one-way rather than bidirectional.
+
+Within each room, the learner can move freely between nodes — a corridor leads from any node to any other. The rooms correspond to strongly connected components: maximal subsets of the graph in which every node can reach every other. Between rooms, the doors are one-way. The learner can walk from Room A to Room B, but the return path is blocked. From Room B, another one-way door leads to Room C. Moving between rooms traces the structure of the directed graph.
+
+A visualisation on one wall shows the whole graph with its three components circled and the direction of each inter-component edge marked with an arrow. A toggle runs Tarjan&#x27;s algorithm live, highlighting nodes in the order they are visited and identifying each component as it is completed. A second toggle runs Kosaraju&#x27;s algorithm as a different route to the same classification.
+
+The components collapse to a directed acyclic graph, which the map displays and topologically sorts on a side panel. Within the sequence, Connectivity is where direction becomes load-bearing. GT_Spanning_Trees will next ask how to cover a graph most cheaply.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Connectivity/blurb.md">Raw captured source</a></p><pre>A directed graph splits into pieces — not by cutting, but by asking: from here, can I reach there *and* come back? A strongly connected component is a maximal set of nodes where every pair answers yes. Mutual reachability. Full reciprocity within the group.
+
+Tarjan finds them in a single pass. One depth-first search, a stack, a lowlink counter — the algorithm discovers components as it retreats, identifying the root of each cluster the moment it finishes exploring. Kosaraju takes two passes: traverse the graph, reverse every edge, traverse again. What survives the reversal was strongly connected all along. Two methods, same truth.
+
+Topological sort orders what remains — the DAG of components, stripped of cycles, laid flat.
+
+Three rooms. Three components. The passages between them run one way. Connection without reciprocity is just direction. Structure is what survives when you flip every arrow.</pre></section></body></html>

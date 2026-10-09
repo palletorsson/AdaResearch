@@ -1,0 +1,359 @@
+--- before/doc/tasks/book_randomness.json
++++ doc/tasks/book_randomness.json
+@@ -192,9 +192,9 @@
+       "effort": "half-day",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Space_Geometry"
+       ],
+@@ -209,9 +209,12 @@
+       "proposal": "Move perlin_noise_bridge and the five works beyond it into the floored room (structure rows 1–22), or extend the structure floor through row 28; then run `python tools/em_map_halls.py --apply` and `python tools/map_pathfinder.py check Random_Space_Geometry --verbose`, and give the chapter one arrival sentence saying where the bench stands.",
+       "evidence": "commons/maps/Random_Space_Geometry/map_data.json: structure and utilities have 24 rows, interactables 30; structure row 23 = `1 1 3 3 3 3 3 3 3 3 1 1` (x=6 is a height-3 wall) while perlin_noise_bridge sits at interactables (6,23); env_one (5,24), curl_noise_particles (9,24), random_transformations_geometric (3,25), sculpt_one (2,26) and dark_sphere (6,27) have no structure row at all. ada_run/em_plan.json plans[72] (authored=map): tile rows 24–28 are `4 1 1 4 4 1 4 4 4 4 4 1 1 4` then four rows of `4 0 0 0 0 1 0 0 0 0 0 0 0 4` (void with a one-cell plank at x=5); the works are dealt at [7,24] (a '4' cell) and [6,25], [10,25], [4,26], [3,27], [7,28] (all '0'). `map_pathfinder.py check` prints OK but counts \"1 artifacts\" of six.",
+       "review": "confirmed by a code checker (cited files only): Random_Space_Geometry map_data.json: structure and utilities have 24 rows, interactables 30; structure row 23 = 1 1 3 3 3 3 3 3 3 3 1 1 (x=6 height-3 wall) under perlin_noise_bridge at interactables (6,23); env_one (5,24), curl_noise_particles (9,24), random_transformations_geometric (3,25), sculpt_one (2,26), dark_sphere (6,27) have no structure row. em_plan.json plans[72] tile row 24 = 41144144444114 and rows 25-28 = 40000100000004; the six works are dealt at [7,24],[6,25],[10,25],[4,26],[3,27],[7,28]. final.md:7 gives the column-comparison instructions. The pathfinder '1 artifacts' count was not re-run (not asked).",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nThe malformed source grid is real: all six tokens now stand in the existing floored second chamber, all layers are 12 by 24, and the pathfinder counts all six. However, the loaded museum already used a separately stamped necklace: its bench stands at (3.5,0,19.5), supported at all three checked standing positions before and after. Retain that placement authority. A local sculpture exclusion clears the unrelated generated sculpture from its approach. Added a brief arrival sentence. No global plan regeneration: it would replace unrelated work and is not needed for this map read. Column/console contrast under the hall lighting remains a visual follow-up; do not read this as headset acceptance.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.491Z"
+     },
+     {
+       "id": "book_randomness.002",
+@@ -282,9 +285,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Mushrooms"
+       ],
+@@ -299,9 +302,12 @@
+       "proposal": "Delete the sentence and change \"In the headset, hold one and bring it close to your face\" to \"Hold one and bring it close to your face\".",
+       "evidence": "commons/maps/Random_Mushrooms/final.md line 70. commons/hazards/mushroom/edible_mushroom.gd:28 `eat_distance = 0.25`, :36 `effect_duration = 10.0`, :69 0.5 s dissolve; :17–18 the desktop branch is a debug 'E' key. mushrooms.gd:1187 `edible == \"some\"` → 3, matching \"Three spotted red-capped mushrooms\".",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nRemoved the desktop-carry exception and the platform label. The act of holding a mushroom close to the face remains in the chapter; no new claim about tracked-hand acceptance is made.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.513Z"
+     },
+     {
+       "id": "book_randomness.005",
+@@ -310,9 +316,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Game"
+       ],
+@@ -327,9 +333,12 @@
+       "proposal": "Replace with \"Arrivals wait while either cube is held.\"",
+       "evidence": "commons/maps/Random_Game/final.md line 98. commons/artifacts/randomness_space/waiting_profile.gd:65–71 `_held()` reads `cube.is_picked_up()` and gates `_spawn`; :86 the plate prints \"Holding a cube suspends arrivals\".",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nRemoved the desktop-carry aside at the podium. The passage follows holding, release and waiting; platform differences belong in implementation notes.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.547Z"
+     },
+     {
+       "id": "book_randomness.006",
+@@ -338,9 +347,9 @@
+       "effort": "10min",
+       "skill": "verify",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Pheromone"
+       ],
+@@ -355,9 +364,12 @@
+       "proposal": "Change to \"signal-guided: 30%\" and \"the five walkers\" (or, if 40 % and four were intended, add `#pheromone_attraction:0.4#walker_count:4` to the map cell — but the museum's bench stamp hands over only a token's first key, so fixing the prose is the safe change).",
+       "evidence": "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd:18 `walker_count: int = 5`, :26 `pheromone_attraction: float = 0.3`, :542–544 label format \"walkers: %d  %s: %.0f%%\" with influence \"signal-guided\" under comparison, :524 the label hangs at max_height + 2 over the field; :566 and :572 are the only assignments and read config keys the map cell `pheromone_terrain#comparison:true#walk_seed:190919` does not carry.",
+       "review": "confirmed by a code checker (cited files only): pheromone_terrain.gd:18 walker_count = 5; :26 pheromone_attraction = 0.3; :542-544 label 'walkers: %d  %s: %.0f%%' with 'signal-guided' when comparison; :524 label at max_height + 2. The only assignments are :566/:572 reading config keys walker_count / pheromone_attraction. Map Random_Pheromone (6,3) 'pheromone_terrain#comparison:true#walk_seed:190919' carries neither. final.md:11 'signal-guided: 40%', :19 'the four walkers'. Label would read 'walkers: 5  signal-guided: 30%'.",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nRetain the existing chapter unchanged. The review read script defaults (five walkers, 30%) but the placed pheromone_terrain.tscn overrides them with four walkers and 40%. The native museum confirms four and 0.4. An initial diagnostic and tentative edit used the review values; the failed assertion led back to the scene, and the chapter was restored byte for byte.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.578Z"
+     },
+     {
+       "id": "book_randomness.007",
+@@ -428,9 +440,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Game"
+       ],
+@@ -445,9 +457,12 @@
+       "proposal": "Insert `<!-- @waiting_profile -->` before \"At the last podium\".",
+       "evidence": "`final_tags.py --map=Random_Game`: 4 tagged works; em_plan plans[76] deals five including waiting_profile; map cell (9,47) `waiting_profile#controls:compact#control_front:-1.7#control_facing:-z`; waiting_profile.gd:20–22 (5 layers, eye 1.7 m), :36 (17 points, seeds 1955+i), :84 (0.3–1.3 s draws) — the numbers the passage quotes.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nAdded the waiting_profile encounter anchor before the last podium. The five profiles remain part of this encounter. Also corrected a separate timing claim: equal rates mean equal expected attempt counts, not identical hourly totals; the podium draws uniform waits rather than using the described Bernoulli tick rule.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.609Z"
+     },
+     {
+       "id": "book_randomness.010",
+@@ -456,9 +471,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Game"
+       ],
+@@ -473,9 +488,12 @@
+       "proposal": "\"After the biome ladder, Noise Types will carry that question between neighbouring places.\"",
+       "evidence": "ada_run/em_plan.json plans[76] Random_Game → plans[77] Biome_Ladder_Randomness (nine biome_vitrine bodies) → plans[78] Random_Noise_Types; commons/maps/sequences/randomness.json museum_interludes: Biome_Ladder_Randomness \"after\": \"Random_Game\"; commons/maps/Random_Mushrooms/final.md line 94 \"Carry that question through the cage interlude.\"",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nThe exit now carries the question about decisions and disclosure through the Randomness biome ladder before Noise Types. No sequence order changed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.638Z"
+     },
+     {
+       "id": "book_randomness.011",
+@@ -484,9 +502,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Randomness_Examples_of_Randomness"
+       ],
+@@ -501,9 +519,12 @@
+       "proposal": "\"Four works share the gallery.\"",
+       "evidence": "commons/maps/Randomness_Examples_of_Randomness/final.md line 3; em_plan plans[73] deals exactly the four works the chapter tags (pollock_painting_in_3d, monte_carlo_dartboard, pipe_dream, extreme_randomness).",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nChanged “Four works have returned” to “Four works share”. The gallery can introduce these works without requiring the reader to have visited them previously.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.654Z"
+     },
+     {
+       "id": "book_randomness.012",
+@@ -512,9 +533,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Space"
+       ],
+@@ -529,9 +550,12 @@
+       "proposal": "Add one short paragraph with `<!-- @worley_noise -->` and `<!-- @shannon_entropy_meter -->`: where each stands, the cellular field's cells against the mixer's layers, and what the gauge's two-hundred-symbol count can and cannot say about a field.",
+       "evidence": "commons/maps/Random_Space/map_data.json interactables: worley_noise (8,4), shannon_entropy_meter (4,9); em_plan plans[75] deals both; `grep -c -i \"worley\\|cellular\\|gauge\" commons/maps/Random_Space/final.md` = 0; commons/maps/sequences/randomness.json artifact_groups Random_Space rationale.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nAdded the cellular field’s nearest/next-nearest distance comparison and the entropy gauge’s limitation: it counts its own symbols, not the surrounding textures. Both keep their existing roles. Native photographs showed the ground crossing them; only these placements now use 0.35 m and 1.05 m supports. A native cellular-field photograph enters the chapter.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.672Z"
+     },
+     {
+       "id": "book_randomness.013",
+@@ -971,9 +995,9 @@
+       "effort": "10min",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Mushrooms"
+       ],
+@@ -988,9 +1012,12 @@
+       "proposal": "The audit's _prepare_stand fix, or delete the prism from mushrooms.tscn.",
+       "evidence": "mushrooms.tscn:5, 25-26",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nSpecimen staging removes the authored demo PrismMesh, Camera3D and FillLight before building the bed. The opt-in stand:specimen path alone changes; the original standalone scene still contains all three. Native SIZE checks preserve specimen positions, types, yaw and ground, then restore the original sizes.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.700Z"
+     },
+     {
+       "id": "book_randomness.028",
+@@ -1000,7 +1027,7 @@
+       "skill": "build",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Space"
+@@ -1016,9 +1043,12 @@
+       "proposal": "A venue flag for floor-like bodies, or accept the log line.",
+       "evidence": "INTEGRATION.md section 7",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. The retained random ground remains physically visible and its separate sampler is described accurately. This pass lifts two obscured exhibits, but does not repair the shared walker’s broad-bounds classification or establish a complete route over that ground. Keep that navigation task separate from the text repair.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.762Z"
+     },
+     {
+       "id": "book_randomness.029",
+@@ -1028,7 +1058,7 @@
+       "skill": "edit",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Space"
+@@ -1044,9 +1074,12 @@
+       "proposal": "Walk the raised ring and reach the mixer's sliders.",
+       "evidence": "Random_Space/hall_plan_map.png",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. Native views confirm the mixer, lifted cellular field and lifted entropy gauge coexist. This is not the requested headset approach and knob-reading test.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.792Z"
+     },
+     {
+       "id": "book_randomness.030",
+@@ -1056,7 +1089,7 @@
+       "skill": "edit",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Pheromone"
+@@ -1072,9 +1105,12 @@
+       "proposal": "Walk in, press the three controls, watch the two trails.",
+       "evidence": "Random_Pheromone/DECISIONS.md readback",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. The native field confirms the scene’s four walkers and 40% guidance, and advances 100 supplied steps. No tracked-pointer ATTRACT/AVOID/REPLAY test was performed. The captured view also shows the terrain close to the end wall and gate; investigate its full exposed footprint before headset acceptance.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.825Z"
+     },
+     {
+       "id": "book_randomness.031",
+@@ -1176,9 +1212,9 @@
+       "effort": "10min",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Randomness_Examples_of_Randomness"
+       ],
+@@ -1193,9 +1229,12 @@
+       "proposal": "Gate the keys on focus, or ignore.",
+       "evidence": "monte_carlo_dartboard.gd:276-284",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nThis museum dartboard opts into keyboard:off so SPACE, D and R cannot operate AUTO/THROW/RESET while the visitor uses walking keys. Direct native input checks preserve count and AUTO; throwing still works. Standalone shortcuts remain enabled by default and repeated key events are ignored.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-fields-and-consequences/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T09:34:48.730Z"
+     },
+     {
+       "id": "book_randomness.035",

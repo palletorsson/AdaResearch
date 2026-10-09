@@ -1,0 +1,26 @@
+--- Point_One.before.md
++++ Point_One.after.md
+@@ -139,7 +139,7 @@
+ 
+ <!-- @drag_point_target -->
+ 
+-The red arrow says “drag point here”. Carry the point towards it. Watch for the falling balls. Leave and return by another route.
++The red arrow says “drag point here”. Carry the point towards it without letting go. Watch for the falling balls.
+ 
+ “Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:
+ 
+@@ -152,11 +152,11 @@
+     return p.distance_to(centre) <= catch_radius
+ ```
+ 
+-The comparison accepts a position within 0.45 metres of a centre 1.20 metres above the target's origin. A hand has room to arrive. The accepted position can be close enough without being identical to the centre.
++`distance_to()` measures the gap between the point and the target's centre. `<=` asks whether that distance is 0.45 metres or less. The centre sits 1.20 metres above the target's origin. A hand has room to arrive. “Here” has become a small region.
+ 
+-The target checks points registered in its coordinate-point group. It requires no release and rearms when the point leaves. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
++The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
+ 
+-Return again, and a destination can become an instrument. The rhythm of your arrivals changes what the room's instruction is useful for. A detour may matter to that rhythm while remaining absent from the success test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.
++Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. A detour may matter to what you are making while remaining absent from the distance test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.
+ 
+ <!-- @ -->
+ 

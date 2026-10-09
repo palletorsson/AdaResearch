@@ -1,0 +1,20 @@
+--- before/commons/data/artifact_roles.json
++++ current/commons/data/artifact_roles.json
+@@ -318,7 +318,8 @@
+       "rotation_wall_crossings": "primary",
+       "rotation_array_compare": "primary",
+       "boolean_tunnel": "primary",
+-      "carousel_cake": "primary"
++      "carousel_cake": "primary",
++      "axial_sweep": "primary"
+     },
+     "Trans_RotationSpectacle": {
+       "boolean_tunnel": "primary",
+@@ -2648,6 +2649,7 @@
+       "primary": [
+         "rotation_wall_crossings",
+         "rotation_array_compare",
++        "axial_sweep",
+         "boolean_tunnel",
+         "carousel_cake"
+       ],

@@ -1,0 +1,104 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "profiles/declared_outline_and_frames",
+      "passed": true
+    },
+    {
+      "id": "profiles/route_endpoints",
+      "passed": true
+    },
+    {
+      "id": "profiles/closed_material_boundary",
+      "passed": true
+    },
+    {
+      "id": "profiles/open_through_centre",
+      "passed": true
+    },
+    {
+      "id": "profiles/lower_sill_exists",
+      "passed": true
+    },
+    {
+      "id": "profiles/route_variant_keeps_outline",
+      "passed": true
+    },
+    {
+      "id": "profiles/lesson_does_not_claim_collision",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Profiles",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "Sweep.profile(FONT, \"O\")",
+      "after": "Sweep.profile(FONT, \"I\")"
+    },
+    "required_failure": "profiles/open_through_centre",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "profiles/declared_outline_and_frames",
+          "passed": false
+        },
+        {
+          "id": "profiles/route_endpoints",
+          "passed": true
+        },
+        {
+          "id": "profiles/closed_material_boundary",
+          "passed": true
+        },
+        {
+          "id": "profiles/open_through_centre",
+          "passed": false
+        },
+        {
+          "id": "profiles/lower_sill_exists",
+          "passed": true
+        },
+        {
+          "id": "profiles/route_variant_keeps_outline",
+          "passed": true
+        },
+        {
+          "id": "profiles/lesson_does_not_claim_collision",
+          "passed": true
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "profiles/declared_outline_and_frames",
+        "profiles/open_through_centre"
+      ],
+      "hall": "Primitives_Profiles",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Profiles/tutorial.md": "c0d5869972022e464e7bbee9780e922e51d777157b256decd7842a67d1a361cc",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/lesson.gd": "b09bc8431e267794abd510cd1ab3fdf72f1999929ff437eaf786c33b21bf3f4d",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/profile_sweep.gd": "00ee671a4146d9d4634e5f5e29016a33982a8229c73e1addb6436ca9a6f70c39"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

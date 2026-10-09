@@ -1,0 +1,227 @@
+{
+  "checks": [
+    {
+      "message": "saved shared museum script compiles",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles commons/artifacts/calder_mobile/calder_mobile.gd",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles commons/primitives/parametric/catenoid.gd",
+      "ok": true
+    },
+    {
+      "message": "saved source compiles algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+      "ok": true
+    },
+    {
+      "message": "actual museum scene uses saved shared loader bytes",
+      "ok": true
+    },
+    {
+      "message": "actual authored museum segment loads: FormFinding_Catenary",
+      "ok": true
+    },
+    {
+      "message": "catenoid inherits pickup contract",
+      "ok": true
+    },
+    {
+      "message": "catenoid permits pickup when not held",
+      "ok": true
+    },
+    {
+      "message": "catenoid hand collision-mask query matches expected source version",
+      "ok": true
+    },
+    {
+      "message": "helicoid inherits pickup contract",
+      "ok": true
+    },
+    {
+      "message": "helicoid permits pickup when not held",
+      "ok": true
+    },
+    {
+      "message": "helicoid hand collision-mask query matches expected source version",
+      "ok": true
+    },
+    {
+      "message": "laundry two crossbars bridge all three anchor pairs",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "analytic laundry curve meets support endpoint",
+      "ok": true
+    },
+    {
+      "message": "laundry plaque distinguishes analytic geometry from settling",
+      "ok": true
+    },
+    {
+      "message": "moving cable bead rebuilds spline through actual control position",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "interaction": "source methods and physics mask queries; no real tracked hand",
+  "observations": {
+    "catenoid": {
+      "can_pick_up": true,
+      "collision_layer": 1,
+      "hand_query_found": false,
+      "original_layer": 1
+    },
+    "helicoid": {
+      "can_pick_up": true,
+      "collision_layer": 1,
+      "hand_query_found": false,
+      "original_layer": 1
+    },
+    "laundry": {
+      "crossbars": 0,
+      "plaque": "A chain settles where tension costs least; nobody drew it, gravity solved\nit. Mirror the sag and the arch STANDS - the ghost above each line is\nGaudi's whole method. The washing knew. The cathedral is implied."
+    },
+    "museum_source_sha256": "3d2977729d506a672583f88932d81c77e330cf77acecfd8f69c623196d7f5c4d",
+    "placements": [
+      {
+        "key": "window",
+        "position": "(7.5, 1.7, -3.5)",
+        "script": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "key": "view",
+        "position": "(7.5, 1.7, -2.0)",
+        "script": "res://commons/primitives/temporal/animated_folding_past.gd"
+      },
+      {
+        "key": "counter",
+        "position": "(11.0, 1.6, -2.94)",
+        "script": "res://commons/visualaid/frame_counter/frame_counter_display.gd"
+      },
+      {
+        "key": "extinguisher",
+        "position": "(1.14, 0.0, -1.4)",
+        "script": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "key": "elevator",
+        "position": "(15.94, 0.0, -1.8)",
+        "script": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "key": "pallet",
+        "position": "(15.1, 0.0, -1.8)",
+        "script": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "key": "point_zero",
+        "position": "(0.0, 0.0, -4.0)",
+        "script": "res://commons/primitives/origin/origin.gd"
+      },
+      {
+        "key": "exit_sign",
+        "position": "(7.0, 3.52, -1.0)",
+        "script": "res://commons/artifacts/exit_sign/exit_sign.gd"
+      },
+      {
+        "key": "wall_clock",
+        "position": "(1.02, 2.25, -3.5)",
+        "script": "res://commons/artifacts/wall_clock/wall_clock.gd"
+      },
+      {
+        "key": "electrical_panel",
+        "position": "(1.0, 1.5, -2.5)",
+        "script": "res://commons/artifacts/electrical_panel/electrical_panel.gd"
+      },
+      {
+        "key": "ceiling_vent",
+        "position": "(3.5, 4.64, 6.225)",
+        "script": "res://commons/artifacts/ceiling_vent/ceiling_vent.gd"
+      },
+      {
+        "key": "fire_hose_box",
+        "position": "(1.28, 0.85, 2.5)",
+        "script": "res://commons/artifacts/fire_hose_box/fire_hose_box.gd"
+      },
+      {
+        "key": "station_plinth",
+        "position": "(11.5, 0.0, 6.5)",
+        "script": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "key": "dream_bodies",
+        "position": "(11.5, 0.42, 6.5)",
+        "script": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "key": "cable_builder",
+        "position": "(4.5, 0.0, 2.5)",
+        "script": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+      },
+      {
+        "key": "catenoid",
+        "position": "(9.59982, 0.190937, 5.60033)",
+        "script": "res://commons/primitives/parametric/catenoid.gd"
+      },
+      {
+        "key": "helicoid",
+        "position": "(4.499995, 0.188085, 7.499989)",
+        "script": "res://commons/primitives/parametric/helicoid.gd"
+      },
+      {
+        "key": "science_screen",
+        "position": "(10.5, 0.0, 7.5)",
+        "script": "res://commons/artifacts/science_screen/science_screen.gd"
+      },
+      {
+        "key": "laundry_line_cathedral",
+        "position": "(2.5, 0.0, 9.5)",
+        "script": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd"
+      }
+    ],
+    "science_screen": {
+      "generic": false,
+      "line": false,
+      "mode": "",
+      "source": "",
+      "triangle": false
+    }
+  },
+  "replay_before": true
+}

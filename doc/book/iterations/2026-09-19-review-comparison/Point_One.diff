@@ -1,0 +1,17 @@
+--- doc\book\iterations\2026-09-19-primitives-review\before\commons\maps\Point_One\final.md
++++ commons\maps\Point_One\final.md
+@@ -123,11 +123,13 @@
+ 
+ `%.2f` rounds each component to two decimal places in the text. The stored position is left alone. The card has made the location easier to read by allowing several nearby positions to share a printed address. The apparent stillness belongs to that report.
+ 
++Now compare it with the card marked `LOCAL`. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?
++
+ <!-- @CoordinateSystem3M -->
+ 
+ Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+ 
+-The frame has its own origin, orientation and scale. Its script uses `to_local()` to express a world position relative to that frame. The white card and the coloured frame can therefore give different addresses for the same place. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.
++The frame has its own origin, orientation and scale. Its script uses `to_local()` to express a world position relative to that frame. The `LOCAL` card prints that address beside `WORLD`: the same place measured from different references. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.
+ 
+ A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^point-one-haraway]
+ 

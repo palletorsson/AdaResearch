@@ -1,0 +1,87 @@
+{
+  "carousel_before_sha256": "43e659eccee4339dbff8515b6915ec67208ef2c6ce12fd9e88f4e1fe6e13d043",
+  "carousel_after_sha256": "eef1c359e5af74e249df172a8a60ae75fa0c4ec1d59ebdc15a4e2aae5cac4602",
+  "carousel_noncomment_bytes_unchanged": true,
+  "carousel_noncomment_sha256_before": "913534c320d391956f467ebd3976d2e2f88563011e4b9b8ad5f0c7ea4b7a0f80",
+  "carousel_noncomment_sha256_after": "913534c320d391956f467ebd3976d2e2f88563011e4b9b8ad5f0c7ea4b7a0f80",
+  "body_probe_only_output_path_changed": true,
+  "source_hashes_match_2026_09_17_before_comment_fix": {
+    "commons/artifacts/rotation_studies/wall_crossings.gd": true,
+    "commons/artifacts/rotation_studies/rotation_rider_deck.gd": true,
+    "commons/artifacts/rotation_studies/array_compare.gd": true,
+    "commons/artifacts/rotation_studies/array_body_comparison.gd": true,
+    "algorithms/transformation/booleanTunnel/booleanTunnel.gd": true,
+    "algorithms/transformation/carousel_cake/carousel_cake.gd": true
+  },
+  "body_probe_checks": 40,
+  "body_probe_failures": [],
+  "gradient_z_exactly_matches_dated_result": {
+    "NARROW": true,
+    "WIDE": true
+  },
+  "body_probe_script_errors": 0,
+  "failed_quick_probe_global_class_paths": {
+    "AudioSynthesizer": "res://doc/book/review-packages/2026-09-18/tiling/sources/commons/audio/generators/AudioSynthesizer.gd",
+    "ModifierStack": "res://doc/book/review-packages/2026-09-18/color/sources/commons/modifiers/modifier_stack.gd",
+    "CarouselCake": "res://doc/book/review-packages/2026-09-18/transformation/sources/algorithms/transformation/carousel_cake/carousel_cake.gd",
+    "BooleanTunnel": "res://doc/book/review-packages/2026-09-18/transformation/sources/algorithms/transformation/booleanTunnel/booleanTunnel.gd",
+    "HangarKit": "res://doc/book/review-packages/2026-09-18/wavefunctions/sources/commons/artifacts/_hangar/hangar_kit.gd",
+    "CubeScene": "res://doc/book/review-packages/2026-09-18/softbodies/sources/commons/primitives/cubes/cube_scene.gd"
+  },
+  "headset_test_performed": false,
+  "repository_zoetrope_path": "doc/research/possible-bodies/transformation-zoetrope.html",
+  "after_isolation_compact": {
+    "run": {
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+        "--xr-mode",
+        "off",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-transformation-review\\rotation\\after-isolation\\compact-probe-engine.log",
+        "--script",
+        "res://doc/book/iterations/2026-09-19-transformation-review/rotation/after-isolation/probe_rotation_compact.gd",
+        "--",
+        "--quick"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.135,
+      "timeout_seconds": 60
+    },
+    "result": {
+      "checks": 33,
+      "failures": [],
+      "limits": [
+        "Source grid, not full museum staging",
+        "Static crossing poses; human timing and headset comfort untested",
+        "Straight capsule walks do not rule out detours or jumping"
+      ],
+      "observations": {
+        "aisle_12.0": [
+          1.0,
+          1.0
+        ],
+        "aisle_26.0": [
+          1.0,
+          1.0
+        ],
+        "tunnel_sweep": [
+          1.0,
+          1.0
+        ]
+      },
+      "quick": true
+    },
+    "log_issues": [
+      "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+      "ERROR: Failed to read the root certificate store.",
+      "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+      "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json"
+    ],
+    "script_error_count": 0
+  }
+}

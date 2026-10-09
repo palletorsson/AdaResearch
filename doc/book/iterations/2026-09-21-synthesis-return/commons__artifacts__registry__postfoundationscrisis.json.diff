@@ -1,0 +1,50 @@
+--- before/commons/artifacts/registry/postfoundationscrisis.json
++++ current/commons/artifacts/registry/postfoundationscrisis.json
+@@ -870,6 +870,47 @@
+         "footprint_cells": 4,
+         "clearance_m": 0.6
+       }
++    },
++    "assembly_return": {
++      "lookup_name": "assembly_return",
++      "name": "The Body That Returned",
++      "scene": "res://commons/artifacts/assembly_return/assembly_return.tscn",
++      "description": "Two standing bodies reconstruct the authored Assembly pose and the latest locally kept visitor pose. If no pose has been kept, the second bay is empty. The record contains positions and connections, not the hand trajectory or intention.",
++      "category": "synthesis",
++      "complexity": "advanced",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "postfoundationscrisis"
++      ],
++      "tags": [
++        "body",
++        "record",
++        "assembly",
++        "geometry",
++        "memory"
++      ],
++      "parameters": {
++        "footprint": [
++          9,
++          3,
++          4
++        ],
++        "size_group": "environment"
++      },
++      "spatial_needs": {
++        "platform": "none",
++        "footprint_cells": 36,
++        "player_position": "around",
++        "wall_backing": false,
++        "clearance": {
++          "front": 1,
++          "back": 1,
++          "left": 1,
++          "right": 1
++        }
++      },
++      "qfep_connection": "An actual change survives the room that produced it. Its retained geometry leaves the gesture, intention and possible alternative connections unrecorded."
+     }
+   }
+ }

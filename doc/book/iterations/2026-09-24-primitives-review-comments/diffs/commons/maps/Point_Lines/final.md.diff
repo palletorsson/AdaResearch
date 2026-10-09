@@ -1,0 +1,29 @@
+--- before/commons/maps/Point_Lines/final.md
++++ commons/maps/Point_Lines/final.md
+@@ -12,7 +12,7 @@
+ 
+ <!-- @do_not_cross_barrier -->
+ 
+-Try crossing where the barrier stood. Before it broke, an invisible collision shape filled the space from the floor to the bar. The space looked open beneath the plank, but the player could not pass through it. The explosion removes that shape too. Disconnecting the points does not put it back.
++Try crossing where the barrier stood. Before it broke, an invisible collision shape filled the space from the floor to the bar. The space looked open beneath the plank, but you could not pass through it. The explosion removes that shape too. Disconnecting the points does not put it back.
+ 
+ On the first connection, the demonstration calls the nearby barrier's `trigger_explosion()`. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.
+ 
+@@ -43,7 +43,7 @@
+ 
+ Two points were enough to begin. They have not made the world small.
+ 
+-Nearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.[^point-lines-ingold]
++Nearby, a ruler offers a measure. Two crosses invite comparison. On the workshop's four monitors, lines turn, cross and pull apart; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.[^point-lines-ingold]
+ 
+ The clock in the first room was already running when we arrived. Beginning required leaving some code unread. Continuing asks us to choose a thread and let other questions remain open.
+ 
+@@ -63,7 +63,7 @@
+ 
+ Turn and look at the route your movement has left behind. Compare it with the stripe. Where do the two lines part company?[^point-lines-ahmed-deviation] One was waiting for you; the other has taken shape while you moved.
+ 
+-The recorder saves positions and joins them with straight segments. In VR, the X and Z come from the headset; the line is drawn near floor level. On desktop it follows the walker. A lean can change the drawing even when your feet stay put.
++The recorder saves positions and joins them with straight segments. The X and Z come from your headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.
+ 
+ Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.
+ 

@@ -1,0 +1,42 @@
+--- before/commons/maps/WaveFunctions_Synthesis_Lab/final.md
++++ commons/maps/WaveFunctions_Synthesis_Lab/final.md
+@@ -2,7 +2,9 @@
+ 
+ In AirMusic one note could begin while another was already fading. Here a wave is waiting to be taken apart.
+ 
+-A bench stands against the north wall of the laboratory. Above it a dark board carries a pale wave with five coloured rows beneath it, and the wave already has a shape when you arrive: a long slope down and a steep rise, four times across the board, drifting to the left. On the bench, at its right end, five sliders stand in a column, one for each row.
++Find the bench with the dark board above it. The board carries a pale wave with five coloured rows beneath it, and the wave already has a shape when you arrive: a long slope down and a steep rise, four times across the board, drifting to the left. On the bench, at its right end, five sliders stand in a column, one for each row.
++
++## Five amounts
+ 
+ <!-- @additive_wave_demo -->
+ 
+@@ -59,7 +61,7 @@
+ 
+ ## What the room keeps
+ 
+-At the bench, one slider changed how much of a wave was present. Another instrument in the laboratory, Slow Circuits, offers ENTER ROOM. Take this short detour with a voice.
++At the bench, one slider changed how much of a wave was present. Another instrument in the laboratory, Slow Circuits, offers ENTER ROOM. It takes you out of this hall and into a listening room. BACK TO HALL will bring you to the museum again. Take a phrase with you.
+ 
+ <!-- @ambient_patch -->
+ 
+@@ -95,9 +97,17 @@
+ 
+ <!-- @ -->
+ 
+-Back at the bench, BASELINE restores the five amounts. While HOLD keeps the phase still, the same curve returns to the same place. Let the clock run and those amounts return as a moving shape. Repeating a recipe and repeating an exact instant ask for different things to be kept. Random_Definition takes that question further: what must we retain to bring an unfamiliar result back?
++## Back at the bench
++
++![The five rows and their restored sum on the synthesis bench inside the museum.](/book-review/doc/book/figures/wavefunctions/synthesis-return-museum.png)
++
++Choose BACK TO HALL and find the five rows again. Press HOLD, then BASELINE. Pick a place on the pale curve and move the fifth slider. Watch that place change. Press BASELINE once more: with the phase held, restoring the five amounts brings the curve back to where you just saw it.
++
++In the listening room, each pass began with the altered result of the last. Here the slider changes an amount used to calculate the sum afresh. The previous curve does not become an ingredient in the next one. Both instruments let us return, but they keep different things available.
++
++Release HOLD. The five amounts stay while the shape moves across the board. BASELINE can restore this recipe without recovering the moment before we left the hall. Repeating a recipe and repeating an exact instant ask for different things to be kept. In Random Definition, that question will meet an unfamiliar result: what would we need to retain to bring it back?
+ 
+ 
+-[^synthesis-lucier]: Alvin Lucier, *I Am Sitting in a Room* (1969). Nicolas Collins's [album notes](https://www.dramonline.org/albums/alvin-lucier-i-am-sitting-in-a-room/notes) (1990) describe the result as an encounter between a particular voice and a particular space, and discuss its realization with digital delays or samplers. Collins also attends to Lucier's stutter as a rhythmic contribution. The description of speech becoming less intelligible should not make that difference into a defect we presume the work repairs.
++[^synthesis-lucier]: Alvin Lucier, *I Am Sitting in a Room* (1969). Nicolas Collins's [album notes](https://www.dramonline.org/albums/alvin-lucier-i-am-sitting-in-a-room/notes) (1990) describe the result as an encounter between a particular voice and a particular space, and discuss its realization with digital delays or samplers. Collins also attends to Lucier's stutter as a rhythmic contribution. Lucier’s stutter is part of the voice the room receives, not a fault the passes correct. “Less intelligible” describes what happens to the recording, not a judgement of its speaker.
+ 
+ [^synthesis-room-model]: Julius O. Smith III, [“Artificial Reverberation,” *Physical Audio Signal Processing*](https://www.dsprelated.com/freebooks/pasp/Artificial_Reverberation.html), explains how delays and filters model propagation, reflections and absorption, and why a response between a source and receiver depends on their positions. Ada's current three-path model is much simpler: it does not calculate reflections from the visible mesh, an open doorway or a moving microphone. The equation above abbreviates `room_memory_audio.gd` and `room_memory_dsp.gd`; the actual processing runs on a background worker.

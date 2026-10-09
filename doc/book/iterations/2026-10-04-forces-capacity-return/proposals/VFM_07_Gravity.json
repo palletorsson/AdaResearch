@@ -1,0 +1,41 @@
+{
+  "id": "VFM_07_Gravity",
+  "title": "Allow the reference to answer",
+  "storyboard": "The gold satellite turns around a held source; at the next station both bodies answer the attraction. Reuse separation, mass and acceleration by completing the two receiver contributions in the existing accelerations() pattern: one shared pair force, opposite signs, each divided by its receiving mass. Supply the softened law, pair loop, state and integrator. Test one pair with unequal masses before summing more pairs; equal forces need not produce equal accelerations. Read the guard that withholds body zero's response. The museum stations also change masses and beginnings, so their paths are not a controlled test of that guard alone. Third-body and NUDGE encounters remain available comparisons. Carry a paired contribution rule and the question of whose response a fixed reference leaves out.",
+  "storyboard_short": "Use the held source and mutual-body stations. Reuse separation and force-to-acceleration. Own the two receiver contributions in the existing pair pattern; supply softened attraction, loop and integrator. Check equal/opposite forces with unequal receiving masses. Read the omitted response for body zero. The stations change beginnings as well as recipients. Keep third-body and NUDGE as comparisons; require no new gravity solver.",
+  "mode": "make",
+  "brings": [
+    "separation vectors and shared coordinate frames",
+    "force divided by receiving mass",
+    "retained velocity and position updates"
+  ],
+  "learns": [
+    "one pair contributes equal and opposite forces to two receivers",
+    "unequal receiving masses give unequal accelerations",
+    "omitting a receiver's contribution is an explicit model choice"
+  ],
+  "carries": "A pair contribution pattern with declared receiving masses and any deliberately omitted response.",
+  "supplied": [
+    "gravity_relations.gd and its existing accelerations() pair loop",
+    "softened attraction with EPS=0.25 and velocity Verlet stepping",
+    "initial states, displays, bounded trails and existing museum controls"
+  ],
+  "artifact_refs": [
+    "orbital_mechanics_demo",
+    "three_body_problem"
+  ],
+  "review_note": "The two-line contribution exercise is a proposed teaching emphasis on existing source, not an already rewritten tutorial or a new solver. Supply the law and integrator intact; assess the contributions before integration. The first station uses 12 kg and 1 kg with a held source; the mutual station starts with equal 4 kg bodies and different positions/velocities. Do not present their paths as an otherwise identical fixed/mutual experiment. Softened markers have no mutual collisions or player coupling. NUDGE's paired beginning and finite observation window warrant a measured comparison, not a proof of chaos or escape.",
+  "prior_maps": [
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_03_Motion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation"
+  ],
+  "independent_check": "For one computed force pair, use receiving masses of 12 kg and 1 kg and allow both contributions. Predict opposite accelerations with magnitudes in a 1:12 ratio, check the two divisions, then identify which contribution the first station's body-zero guard omits.",
+  "source_refs": [
+    "commons/maps/VFM_07_Gravity/final.md",
+    "commons/maps/VFM_07_Gravity/tutorial.md",
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd"
+  ],
+  "change_reason": "The reusable skill is distributing a shared interaction. Naming the stations' different beginnings prevents a misleading comparison and keeps the task smaller than building an orbital solver."
+}

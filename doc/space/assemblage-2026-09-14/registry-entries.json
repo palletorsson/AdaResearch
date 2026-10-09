@@ -1,0 +1,676 @@
+{
+  "grid_substrate_runner": {
+    "category": "emergence",
+    "complexity": "beginner",
+    "description": "Integrated substrate component \u2014 single-cell artifact that mounts visibility (and optionally colour) mutators on the MAP'S existing GridMultiMesh. Same integration shape as gridcolorizer: doesn't build its own multimesh, finds the floor that's already there. Cycles Wolfram CA, fractal, and BFS-frontier expressions on the actual cubes the player walks. Floor-plan SPAWN_LARGEST keeps reachability honest.",
+    "dev_themes": [
+      "cellular_automata",
+      "substrate",
+      "emergence"
+    ],
+    "footprint": [
+      1,
+      1,
+      1
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "grid_substrate_runner",
+    "map_ready": true,
+    "map_sequences": [
+      "cellularautomata",
+      "fractals",
+      "randomness",
+      "patterngeneration",
+      "noise",
+      "lsystems",
+      "transformation",
+      "proceduralgeneration",
+      "mosaicanalysis",
+      "graphtheory",
+      "searchpathfinding"
+    ],
+    "name": "Grid Substrate Runner",
+    "parameters": {
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "small"
+    },
+    "scene": "res://commons/grid/mutators/grid_substrate_runner.tscn",
+    "sequence": "cellularautomata",
+    "size_group": "small",
+    "tags": [
+      "substrate",
+      "emergence",
+      "integrated"
+    ],
+    "measurements": {
+      "aabb_size": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.0,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "qfep_connection": "the substrate mount \u2014 a single cell that plays rule-patterns through the map's own floor grid; infrastructure that lets the room itself be the automaton, never dominant as an object."
+  },
+  "godel_statement_plaque": {
+    "dna": {
+      "axes": {
+        "outside": [
+          "quotation",
+          "margin",
+          "breach",
+          "omission",
+          "habitat"
+        ]
+      }
+    },
+    "lookup_name": "godel_statement_plaque",
+    "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
+    "class_name": "GodelStatementPlaque",
+    "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in G\u00f6del's incompleteness",
+    "gamwell_reference": "Chapter 9: G\u00f6del's Incompleteness Theorem",
+    "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
+    "signals": [
+      "statement_changed",
+      "paradox_triggered"
+    ],
+    "interactions": [
+      "click to advance statement",
+      "grab to cycle"
+    ],
+    "parameters": {
+      "current_index": "Starting statement (0-8)",
+      "grabbable": "Enable XR grab interaction",
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "dev_themes": [
+      "philosophy",
+      "qfep"
+    ],
+    "dev_category": "foundations_crisis",
+    "category": "philosophy",
+    "complexity": "advanced",
+    "tags": [
+      "godel",
+      "self_reference",
+      "paradox",
+      "incompleteness",
+      "interactive"
+    ],
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "foundationscrisis"
+    ],
+    "sequence": "foundationscrisis",
+    "name": "G\u00c3\u00b6del Statement Plaque",
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [
+          "box"
+        ],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": [
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "few",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 2,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "unlocks",
+        "escher_staircase",
+        "visual",
+        "contrasts",
+        "russell_set_box"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.64,
+        0.44,
+        0.05
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.64,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "floor",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.106998Z",
+      "derived_from": "aabb_size + category"
+    },
+    "content": "text"
+  },
+  "incompleteness_scale": {
+    "name": "Incompleteness Scale",
+    "lookup_name": "incompleteness_scale",
+    "description": "A balance that cannot weigh itself, tilting forever \u2014 G\u00f6del as furniture, the limit built into the shape of the thing.",
+    "scene": "res://commons/instruments/incompleteness_scale.tscn",
+    "category": "instruments",
+    "sequence": "foundationscrisis",
+    "artifact_type": "qfep_instrument",
+    "tags": [
+      "qfep",
+      "turing",
+      "instrument",
+      "becoming",
+      "delta"
+    ],
+    "map_ready": true,
+    "include_in_map_data": true,
+    "qfep_connection": "A balance that cannot weigh itself, tilting forever \u2014 G\u00f6del as furniture. In the grammar chapter it stands as the fine print on the whole enterprise: every rewriting system rich enough to describe growth is too rich to certify its own limits. The forest the sentence becomes contains questions the sentence cannot answer.",
+    "measurements": {
+      "aabb_size": [
+        0.74,
+        1.31,
+        0.5
+      ],
+      "aabb_center": [
+        0.0,
+        0.65,
+        0.0
+      ],
+      "grid_cells": [
+        1,
+        1
+      ],
+      "max_dimension_m": 1.31,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1,
+      1,
+      1
+    ]
+  },
+  "dragon_bench": {
+    "lookup_name": "dragon_bench",
+    "scene": "res://commons/artifacts/dragon_bench/dragon_bench.tscn",
+    "class_name": "DragonBench",
+    "name": "Dragon Bench (order as chaos)",
+    "description": "The dragon curve folding into being on a bench - order so deep it reads as chaos.",
+    "category": "lsystems",
+    "complexity": "beginner",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "tags": [
+      "lsystem",
+      "medium",
+      "dragon"
+    ],
+    "parameters": {
+      "emissive": "Bool"
+    },
+    "dev_themes": [
+      "lsystems",
+      "grammar",
+      "biome"
+    ],
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 9,
+      "clearance": {
+        "front": 2,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "front",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 4,
+      "footprint_source": "designed"
+    },
+    "measurements": {
+      "aabb_size": [
+        1.1,
+        1.49,
+        0.7
+      ],
+      "aabb_center": [
+        0.0,
+        0.74,
+        0.0
+      ],
+      "grid_cells": [
+        2,
+        1
+      ],
+      "max_dimension_m": 1.49,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      2,
+      1,
+      1
+    ]
+  },
+  "panel_bridge_loom": {
+    "dna": {
+      "promoted": "2026-07-29",
+      "stage": "2 - variation",
+      "axes": {
+        "threading_draw": [
+          "straight",
+          "point",
+          "block",
+          "broken"
+        ],
+        "treadling_order": [
+          "straight",
+          "point",
+          "block",
+          "broken"
+        ]
+      },
+      "default": "threading_draw=straight, treadling_order=straight - the draft exactly as loom_draft_data.json wrote it. The straight/straight case returns from _apply_draw_axes() before the data store is touched at all, so not one cell is rewritten and the 6 existing placements show the same 4-shaft twill they always did.",
+      "was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. _ready() loaded example 0, the shipped 4-shaft twill sample, and every placement in the project showed the same cloth. The four sample drafts sat in a private examples table reachable only by pressing 1-4 on a desktop keyboard, which no map placement can do.",
+      "note": "Hand promotion. The constants worth lifting were not in the panel chrome but in the draft the panels display, and a weaving draft has exactly two orders in it: the order the warps are drawn onto the shafts and the order the picks press the treadles. Both axes rewrite only their own one-hot matrix; the tie-up and the yarn colours are never touched, and the column period is read off the loaded draft (4 shafts used of 6 treadles wired) rather than assumed. point in the warp is a herringbone, point in both is a diamond twill - same tie-up, same threads, a different cloth. It makes the drawdown argue what the description only asserts: the diagonal is not IN the tie-up, it is in the order of the draw. TRAP HANDLED: apply_grid_config() already existed for the capture audit loop and writes its config dict out as the draft data, so an axis-only token would have blanked the drawdown; axis keys are now peeled off first and an axis-only config never reaches that path."
+    },
+    "name": "Panel Bridge \u2014 Loom Simulator",
+    "lookup_name": "panel_bridge_loom",
+    "description": "Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.",
+    "scene": "res://commons/ui/panel_bridge/test_panel_bridge.tscn",
+    "category": "textile",
+    "artifact_type": "interactive_tool",
+    "tags": [
+      "panel_bridge",
+      "loom",
+      "weaving",
+      "draft",
+      "threading",
+      "tieup",
+      "treadling",
+      "drawdown",
+      "2d_in_3d",
+      "vr_panel"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "testmaps"
+    ],
+    "parameters": {
+      "footprint": [
+        1,
+        2,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "dev_themes": [
+      "biology",
+      "panels",
+      "ui"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": []
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 2,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": true,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 2,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        1.44,
+        0.65,
+        0.0
+      ],
+      "aabb_center": [
+        0.02,
+        1.4,
+        -0.65
+      ],
+      "grid_cells": [
+        2,
+        1
+      ],
+      "max_dimension_m": 1.44,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      2,
+      1,
+      1
+    ],
+    "spatial_profile": {
+      "dir_group": "panel",
+      "range": 4,
+      "density": "high",
+      "min_clearance": 1,
+      "stack_priority": 0.85,
+      "approach_dir": "front",
+      "derived_at": "2026-04-29T09:39:46.168511Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "The oldest L-system in human hands: threading, tie-up, treadling \u2014 a weaving draft is a grammar, and the drawdown is its derivation. Centuries before Lindenmayer, weavers were compiling short symbolic programs into large patterned surfaces. The loom panels stand in the thread as ancestry: grammar was textile before it was text."
+  },
+  "pattern_atlas_gallery": {
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "credit": [
+          "named",
+          "title_only",
+          "redacted",
+          "anonymous"
+        ]
+      },
+      "default": "credit=named - the tradition tag at y=0.42 and the makers tag at y=0.30 beneath every plate, built with make_tag's own default ink and ground, which is board for board what the gallery has always built; the 7 existing placements are untouched and the room keeps its 'the makers, named' headline",
+      "was": "the makers' names were unconditional captions, so the artifact could state its truth - a pattern reproduced without its makers is an enclosure - but had no way to stand the enclosure up beside the return and let a walker see the difference",
+      "refused": "colophon (pattern_loom) and exhibit (pattern_mill, pattern_machine_c) both ask how much of the RULE the goods admit to; three of their four values need each pattern's repeat period or plane symmetry group, which this gallery does not know for nineteen heterogeneous traditions and in several cases (kente strips, batik crackle, hitomezashi) does not have. Adopting either word would have meant inventing the measurements."
+    },
+    "lookup_name": "pattern_atlas_gallery",
+    "scene": "res://commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.tscn",
+    "class_name": "PatternAtlasGallery",
+    "name": "Pattern Atlas Gallery (the makers, named)",
+    "category": "symmetry",
+    "complexity": "intermediate",
+    "description": "Twelve world pattern traditions reproduced AS SHADERS (the rule, not an image), each on an upright plate with its makers named beneath: Kente strip-weavers of Ghana, ikat resist-dyers, bingata stencil-dyers of Ryukyu, kanga printers of the Swahili coast, indigo shibori dyers, Tibetan tiger-rug carpet-knotters, Iznik fritware potters, al-Andalus zellige tile-cutters, the Pompeii mosaic workshops, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley. The commons ledger's return performed in-game, plus Investigation II: Wang tiles (Hao Wang/Berger \u2014 tiling is undecidable), Javanese batik makers (the kawung and the crackle), Kuba/Shoowa weavers of DR Congo, sashiko/hitomezashi stitchers of northern Japan, Sami band weavers of Sapmi, adinkra carvers of Ghana.",
+    "measurements": {
+      "aabb_size": [
+        10.32,
+        2.3,
+        4.7
+      ],
+      "aabb_center": [
+        0.03,
+        1.15,
+        -2.2
+      ],
+      "grid_cells": [
+        11,
+        5
+      ],
+      "max_dimension_m": 10.32,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      11,
+      1,
+      5
+    ]
+  },
+  "mamma_monster_gallery": {
+    "lookup_name": "mamma_monster_gallery",
+    "scene": "res://commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.tscn",
+    "class_name": "MammaMonsterGallery",
+    "name": "Mamma Monster (the origin gallery)",
+    "category": "symmetry",
+    "complexity": "intermediate",
+    "description": "Kristina Torsson's pattern vocabulary as living shaders \u2014 varma backen, Fjader, Bonan, the Mah-Jong stripe (1966, with Helena Henschen and Veronika Nygren), Rutan Oscillerar (the Vamlingbo room's oscillating check), and Moders Drom (Mothers Dream 2023, the img2img oscillation breathing on TIME). Ada Research begins in a landscape of my mother's patterns; this room says so, with her name on it.",
+    "measurements": {
+      "aabb_size": [
+        9.87,
+        2.35,
+        0.32
+      ],
+      "aabb_center": [
+        0.0,
+        1.18,
+        0.0
+      ],
+      "grid_cells": [
+        10,
+        1
+      ],
+      "max_dimension_m": 9.87,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      10,
+      1,
+      1
+    ]
+  },
+  "ten_print_textile": {
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "odds": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "alphabet": [
+          "diagonals",
+          "orthogonals",
+          "blocks"
+        ]
+      },
+      "default": "odds=0.5, alphabet=diagonals - 0.5 is the literal `_rng.randf() < 0.5` fair coin and diagonals returns the same box at the same rotation.z = +/-PI*0.25, so all 7 placements weave exactly the cloth they wove before; apply_grid_config is now guarded and rebuilds only on a real change (it previously tore the loom down on every call, and on a pre-_ready call it built the bolt twice)",
+      "was": "a hard-coded fair coin between two hard-coded +/-45 degree bars. The only exports were cols and rows - the size of the bolt, not what it says.",
+      "fixture": {
+        "weave_seed": 7,
+        "weaving": false
+      },
+      "fixture_note": "weave_seed pins the flip so five odds tiles differ by their bias and not by five different draws; weaving false freezes the scroll so a still is one cloth rather than one mid-scroll frame. Both default to the shipped behaviour (seed 0 = randomize, weaving on).",
+      "vocabulary_note": "alphabet is taken from GeneticProgramming.alphabet - the symbol set a generator draws from - which is precisely the question here. odds is a new word: bias was already spent on pixel_cloud for a spatial lean (rise/none/spire/sprawl) and chance on random_cubes for WHICH property is randomised, neither of which is the weighting of a coin. panel_bridge_loom's threading_draw / treadling_order were considered and declined: those name a deterministic weaving draft, and this loom's whole content is that there is no draft, only a flip.",
+      "declined": "scroll rate and row cadence (_step 0.18 s) are time-domain and invisible to a still; cols and rows are size."
+    },
+    "lookup_name": "ten_print_textile",
+    "scene": "res://commons/artifacts/ten_print_textile/ten_print_textile.tscn",
+    "class_name": "TenPrintTextile",
+    "name": "Ten Print Textile (fabric loom)",
+    "description": "A tool: 10 PRINT as a textile loom, weaving an endless bolt of slash/backslash fabric - the pattern doing a design job.",
+    "category": "randomness",
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "randomness"
+    ],
+    "tags": [
+      "randomness",
+      "applied",
+      "10"
+    ],
+    "parameters": {
+      "emissive": "Bool"
+    },
+    "dev_themes": [
+      "randomness",
+      "noise"
+    ],
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 4,
+      "clearance": {
+        "front": 2,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "front",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 4,
+      "footprint_source": "designed"
+    },
+    "measurements": {
+      "aabb_size": [
+        1.16,
+        1.8,
+        0.1
+      ],
+      "aabb_center": [
+        0.0,
+        0.65,
+        0.0
+      ],
+      "grid_cells": [
+        2,
+        1
+      ],
+      "max_dimension_m": 1.8,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      2,
+      1,
+      1
+    ]
+  },
+  "synthesis_stand": {
+    "dna": {
+      "axes": {
+        "mode": [
+          "auto",
+          "hero",
+          "series"
+        ]
+      }
+    },
+    "name": "Synthesis Stand",
+    "lookup_name": "synthesis_stand",
+    "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+    "category": "synthesis",
+    "complexity": "intermediate",
+    "description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure \u2014 because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands.",
+    "measurements": {
+      "aabb_size": [
+        5.34,
+        1.25,
+        1.31
+      ],
+      "aabb_center": [
+        0.0,
+        0.21,
+        -0.01
+      ],
+      "grid_cells": [
+        6,
+        2
+      ],
+      "max_dimension_m": 5.34,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      6,
+      1,
+      2
+    ],
+    "map_ready": true,
+    "include_in_map_data": true
+  }
+}

@@ -1,0 +1,15 @@
+--- before/commons/artifacts/orbital_mechanics_demo/gravity_relations.gd
++++ after/commons/artifacts/orbital_mechanics_demo/gravity_relations.gd
+@@ -186,8 +186,10 @@
+ func update_text() -> void:
+ 	var status="FRAME EXIT" if frame_exit else ("RUNNING" if running else "PAUSED")
+ 	bank_labels[0].text="%s / t %.2f s\n%s"%[status,elapsed,("%d mutual bodies / nudge %.2f m"%[body_count,nudge()]) if mutual else ("initial speed %.3f m/s"%(circular_speed()*SPEEDS[speed_index]))]
+-	bank_labels[1].text=("Paired X-Z difference %.4f m\nWhite crosses: centres of mass"%separation()) if mutual else "Fixed source / free satellite\nREVERSE changes current velocity"
+-	board.text="Add a body. Which earlier paths change?\nNUDGE starts a second copy with one X position changed.\nTranslucent copy drawn 0.65 m higher; both calculate in X-Z." if mutual else "Change the starting speed, then RUN.\nThe source is held fixed; only the satellite receives acceleration.\nWalk inside the calculation; markers do not collide with you."
++	# This script is the opt-in gravity lesson. Let RULE explain the held source;
++	# PARTS can show acceleration first without naming the implementation choice.
++	bank_labels[1].text=("Paired X-Z difference %.4f m\nWhite crosses: centres of mass"%separation()) if mutual else ("Fixed source / free satellite\nREVERSE changes current velocity" if rule else "Watch both bodies, then reveal RULE.\nREVERSE changes current velocity")
++	board.text="Add a body. Which earlier paths change?\nNUDGE starts a second copy with one X position changed.\nTranslucent copy drawn 0.65 m higher; both calculate in X-Z." if mutual else "Change the starting speed, then RUN.\nWatch both bodies. What moves, and what stays?\nWalk inside the calculation; markers do not collide with you."
+ 	if rule:board.text="Fij = G mi mj r / (r² + epsilon²)^(3/2)\nG = 1 m³/(kg s²); epsilon = 0.25 m\n240 steps/s; acceleration arrows 0.30 m per m/s², capped at 2 m\n"+("Equal and opposite pair forces; both bodies respond." if mutual else "Source mass 12 kg; satellite 1 kg; reaction omitted.")
+ 	if parts:
+ 		var peak:=0.0

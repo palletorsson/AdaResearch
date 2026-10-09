@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "text-diff.html",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "text.diff",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "changes.diff",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "inside.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "inside-grey.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "sphere-and-door.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "before-view/inside.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "before-view/museum-runtime.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "museum-runtime.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "verification.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "museum-log.txt",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "source-manifest.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "figure-provenance.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "first-pointer-check/museum-runtime.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "doc/book/figures/Noise_6_Wall/inside-controls.png",
+      "status": 200,
+      "bytes_match": true
+    }
+  ],
+  "note": "The server excludes .log files. The review links to a byte-identical .txt copy."
+}

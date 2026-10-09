@@ -1,0 +1,80 @@
+{
+  "artifact": "GeneticProgramming",
+  "title": "Building a Population That Evolves Toward a Fitness No Individual Understands",
+  "concept_layer": "genetic programming: population + fitness + selection + crossover + mutation = evolution; designerless optimization; fitness as the only feedback",
+  "technique_first": ["population array of genomes", "fitness function evaluation", "tournament selection", "single-point crossover", "point mutation", "elitism preservation", "generation timer loop"],
+  "technique_reference": ["Random seeding (Random_Definition)", "Parameter sliders (Noise_Perlin_Simplex, Fractal_Recursion)", "Arrays of instances (Tutorial_Single, CA_GameOfLife)", "L-system genomes (LSystems_Grammar_Lab, as genome_type option)"],
+  "domain_deferred": ["gradient descent optimization \u2192 machinelearning (ML_Gradient_Landscape)", "neural network evolution \u2192 ML_Evolution", "swarm optimization \u2192 swarmintelligence (particle_swarm_optimization)", "multi-objective fitness / Pareto fronts \u2192 later ML maps", "co-evolution \u2192 softbodies / swarm"],
+  "capture_leaks": {
+    "fitness_defines_everything": "The entire evolution is shaped by the fitness function. Change the function and you change what 'success' means \u2014 which is a political/ethical question the artifact hints at but defers to criticalalgorithms.",
+    "discrete_generations": "Population updates once per generation, wholesale. Real evolution is continuous, overlapping generations, asynchronous. ABMs (swarm sequence) handle this better.",
+    "no_environment": "Fitness is computed in isolation. No creature interacts with another; no niche, no competition for resources. Ecosystem-level evolution waits for swarm + softbodies.",
+    "fixed_genome_type": "Choose Primitives OR CSG_Tree OR L_System once. Real organisms have multi-level genomes with regulatory networks. Deferred to ML.",
+    "selection_pressure_linear": "Tournament picks the fittest of k random; this gives predictable selection. Real evolution has drift, founder effects, bottlenecks. A more nuanced selection model waits."
+  },
+  "limit": "Twenty creatures, each a genome expressed as geometry. Evolve them toward a target. The artifact captures evolution's deepest lesson: no designer, no foresight, no plan \u2014 just variation and selection accumulating over time. What it refuses: the complexity of actual biology (gene regulation, protein folding, niche construction), the complexity of actual environments (feedback, predation, symbiosis), the ethics of optimizing for a fitness function chosen by someone. These arrive later.",
+  "grammar_alignment": {
+    "sequence": "proceduralgeneration",
+    "operations_taught": ["generate"],
+    "operations_deferred_to_sequence": ["percolate (PG_Percolation_Network)", "colonize (PG_Space_Colonization)", "wfc (wave function collapse artifact)"],
+    "note": "GeneticProgramming teaches the meta-operation 'generate' by showing its most powerful form: evolve a population toward a fitness. Other procgen operations are specializations (percolate = grow connected components with a probability; colonize = grow toward targets; WFC = constrain tile adjacencies). Evolution is procgen's most general case."
+  },
+  "biome_alignment": {
+    "sequence": "proceduralgeneration",
+    "density_at_entry": 0.8,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["evolve_population", "select_fitness"],
+    "catalyst_mode": "generative",
+    "note": "Density 0.8 \u2014 the world is nearly complete. The 'generative' catalyst lets the player instantiate populations of forms and watch them evolve. Biome vegetation now evolves species-like diversity: the same underlying parameters but shifted by noise+fitness result in visible evolutionary pressure."
+  },
+  "stages": [
+    {
+      "title": "From grammar to population",
+      "thinking": "LSystems_Grammar_Lab taught that one rule can generate an organism. But biology isn\u2019t one rule producing one organism \u2014 it\u2019s many genomes producing many variants, filtered by who survives to reproduce. Evolution is a population-level algorithm. You start with random genomes. You evaluate how well each one does. You let the good ones reproduce with small mutations. You do this a hundred times. At the end, the population looks designed \u2014 but nobody designed it.",
+      "code": "# L-systems: one grammar \u2192 one plant\n# Genetic programming: many genomes \u2192 many plants \u2192 a few survive\n#\n# The shift is in the unit of analysis.\n# Not 'the organism' but 'the population.'\n# Not 'the rule' but 'the rule-that-gets-selected.'\n#\n# Evolution is a procedure on COLLECTIONS,\n# not on individuals.",
+      "concepts": ["population thinking", "variation + selection", "emergent design", "algorithm over collections"]
+    },
+    {
+      "title": "Define a genome \u2014 parameters that can mutate",
+      "thinking": "A genome is a list of numbers (and maybe discrete choices) that, when decoded, produces an organism. In this artifact, the genome can be: Primitive parameters (sphere sizes and positions), CSG tree structure (union/intersect/diff ops), parametric mesh params, voxel patterns, or L-system rules. Different genome types give different kinds of organisms. The key is: the genome must be (1) variable, (2) mutable, and (3) decodable into a phenotype.",
+      "code": "class Genome:\n\tvar genes: Array = []       # floats or enums\n\tvar fitness: float = 0.0    # evaluated each generation\n\t\n\tfunc random_init(length: int, genome_type: int) -> void:\n\t\tgenes.clear()\n\t\tfor i in length:\n\t\t\tgenes.append(randf_range(-1.0, 1.0))\n\t\n\tfunc decode() -> Node3D:\n\t\t# Convert genes to geometry (varies by genome_type)\n\t\tmatch genome_type:\n\t\t\t0: return _decode_primitives()\n\t\t\t1: return _decode_csg_tree()\n\t\t\t2: return _decode_parametric()\n\t\t\t3: return _decode_voxel()\n\t\t\t4: return _decode_lsystem()",
+      "concepts": ["genome as parameter vector", "phenotype decoder", "multiple genome representations", "variation vs expression"]
+    },
+    {
+      "title": "Create a random initial population",
+      "thinking": "Twenty genomes, each with random genes. Arrange them in a grid for visual comparison. Because genes are random in [-1, 1], the decoded organisms look wildly different from each other \u2014 some lumpy, some tall, some nearly invisible. This is the 'primordial soup' \u2014 before any selection has happened, the population is uniform chaos. The whole story is what happens when you filter this chaos repeatedly.",
+      "code": "extends Node3D\nclass_name GeneticProgramming\n\n@export var population_size: int = 20\nvar _population: Array[Genome] = []\n\nfunc _init_population() -> void:\n\t_population.clear()\n\tfor i in population_size:\n\t\tvar g = Genome.new()\n\t\tg.random_init(genome_complexity, genome_type)\n\t\t_population.append(g)\n\t\n\t# Display in a grid\n\tfor i in population_size:\n\t\tvar pheno = _population[i].decode()\n\t\tvar row = i / 5\n\t\tvar col = i % 5\n\t\tpheno.position = Vector3(col * spacing, 0, row * spacing)\n\t\tadd_child(pheno)",
+      "concepts": ["population_size", "random initialization", "grid arrangement for visual comparison", "phenotype expression"]
+    },
+    {
+      "title": "Fitness \u2014 the only feedback",
+      "thinking": "The fitness function is evolution\u2019s only input from the world. It takes a phenotype and returns a number: bigger = better. In this artifact, fitness functions include: target volume (organism matches desired mass), target height, symmetry (left/right balance), sphere-likeness, custom. The choice matters enormously \u2014 the population will evolve toward whatever the fitness says, regardless of whether that\u2019s what the designer wanted. This is where generative algorithms meet ethics.",
+      "code": "@export_enum(\"Volume\", \"Height\", \"Symmetry\", \"Sphere\", \"Custom\") var fitness_function: int = 0\n\nfunc _evaluate_fitness(g: Genome) -> float:\n\tvar pheno = g.decode()\n\tmatch fitness_function:\n\t\t0:  # Volume\n\t\t\treturn 1.0 - absf(_compute_volume(pheno) - target_volume)\n\t\t1:  # Height\n\t\t\treturn 1.0 - absf(_compute_height(pheno) - target_height)\n\t\t2:  # Symmetry\n\t\t\treturn _compute_symmetry(pheno)\n\t\t3:  # Sphere-likeness\n\t\t\treturn _compute_spherelike(pheno)\n\t\t_:  # Custom\n\t\t\treturn _compute_custom(pheno)\n\n# The fitness function is the whole story.\n# Change it \u2192 evolution goes somewhere else.",
+      "concepts": ["fitness function", "fitness as pressure", "multiple fitness types", "ethical load of objective choice"]
+    },
+    {
+      "title": "Tournament selection \u2014 survive by competing",
+      "thinking": "To pick parents for the next generation: randomly choose k=3 genomes, keep the one with highest fitness. Repeat until you have a mating pool. Tournament selection is a balance: selects fitter genomes preferentially but still allows less-fit ones occasional wins (preserving diversity). It\u2019s biologically plausible \u2014 predators encounter a few prey at a time and catch the slowest. It\u2019s also computationally cheap.",
+      "code": "func _tournament_select(tournament_size: int = 3) -> Genome:\n\tvar best: Genome = null\n\tfor i in range(tournament_size):\n\t\tvar candidate = _population[randi() % _population.size()]\n\t\tif best == null or candidate.fitness > best.fitness:\n\t\t\tbest = candidate\n\treturn best\n\n# Tournament size = 3:\n#   - low enough to preserve diversity (weak genomes sometimes win)\n#   - high enough for selection pressure (fit genomes usually win)\n#\n# Increase to 10 \u2192 strong pressure, fast convergence, premature optima\n# Decrease to 2 \u2192 weak pressure, drift dominates, slow progress",
+      "concepts": ["tournament selection", "selection pressure", "diversity preservation", "trade-off parameter"]
+    },
+    {
+      "title": "Crossover + mutation \u2014 variation from two parents",
+      "thinking": "Two parents, one offspring. Crossover: at a random cut-point, take genes 0..k from parent A and k..end from parent B. Mutation: for each gene, with probability mutation_rate, perturb it by a small random amount. Crossover explores combinations of existing solutions; mutation explores new regions. The balance between them is everything. Pure crossover \u2192 inbreeding. Pure mutation \u2192 random walk. Together: evolution.",
+      "code": "@export var mutation_rate: float = 0.3\n@export var crossover_rate: float = 0.7\n\nfunc _crossover(parent_a: Genome, parent_b: Genome) -> Genome:\n\tvar child = Genome.new()\n\tchild.genes.resize(parent_a.genes.size())\n\tvar cut = randi() % parent_a.genes.size()\n\tfor i in range(parent_a.genes.size()):\n\t\tchild.genes[i] = parent_a.genes[i] if i < cut else parent_b.genes[i]\n\treturn child\n\nfunc _mutate(g: Genome) -> void:\n\tfor i in range(g.genes.size()):\n\t\tif randf() < mutation_rate:\n\t\t\tg.genes[i] += randf_range(-0.2, 0.2)\n\t\t\tg.genes[i] = clampf(g.genes[i], -1.0, 1.0)\n\n# The edge of chaos is at mutation_rate ~0.3:\n# low enough to preserve good genomes across generations,\n# high enough to keep exploring.",
+      "concepts": ["crossover", "single-point cut", "mutation as perturbation", "edge of chaos (\u03bb from QFEP)", "exploitation vs exploration"]
+    },
+    {
+      "title": "Elitism \u2014 preserve the best",
+      "thinking": "Without elitism, the best genome in generation N might not survive into N+1 (due to mutation or unlucky crossover). Elitism copies the top k genomes unchanged into the next generation. This guarantees monotonic improvement in best-fitness but also risks premature convergence (if the elite dominates too much). elitism_count = 2 is conservative: just the top two survive intact.",
+      "code": "@export var elitism_count: int = 2\n\nfunc _evolve_one_generation() -> void:\n\t# 1. Evaluate all\n\tfor g in _population:\n\t\tg.fitness = _evaluate_fitness(g)\n\t\n\t# 2. Sort by fitness (descending)\n\t_population.sort_custom(func(a, b): return a.fitness > b.fitness)\n\t\n\t# 3. Elitism: top N survive unchanged\n\tvar next_gen: Array[Genome] = []\n\tfor i in range(elitism_count):\n\t\tnext_gen.append(_population[i])\n\t\n\t# 4. Fill rest via tournament + crossover + mutation\n\twhile next_gen.size() < population_size:\n\t\tvar parent_a = _tournament_select()\n\t\tvar parent_b = _tournament_select()\n\t\tvar child = _crossover(parent_a, parent_b)\n\t\t_mutate(child)\n\t\tnext_gen.append(child)\n\t\n\t_population = next_gen",
+      "concepts": ["elitism", "monotonic best fitness", "generation loop structure", "sort_custom"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The genetic programming artifact knows what it is. Not a breeding simulator \u2014 a demonstration that optimization does not require intelligence. Variation + selection + time = design without a designer. The population converges on solutions that seem planned, but no plan exists. The critical parameter is mutation_rate because it sits at the edge of chaos \u2014 too low and evolution stagnates, too high and good solutions dissolve. This is the same \u03bb that appears in QFEP. The sequence is pointing toward that synthesis.",
+      "code": "# @identity\n# essence: population[i].fitness = f(genome) -> select, crossover, mutate, repeat \u2014 evolution without a designer\n# desire: to watch 3D creatures evolve in front of you, generation by generation, toward a fitness goal no individual understands\n# critical_parameter: mutation_rate \u2014 too low and evolution stagnates, too high and good solutions dissolve; 0.3 is the edge of chaos\n# triggers: auto_evolve ticks generations on a timer; evolve_one_generation allows manual stepping; fitness_function selects the selection pressure\n# emerges: creatures converge on similar body plans despite random initialization \u2014 convergent evolution from pure math\n# needs: population grid display [has]; fitness labels [has]; auto-evolve timer [has]; VR selection pressure picker [missing]\n# relationships: opener for proceduralgeneration sequence; contrasts with space_colonization_algorithm (evolution vs growth); genome_type spans primitives to L-systems\n# truth: evolution does not design \u2014 it accumulates accidents that happen to survive",
+      "concepts": ["@identity", "designerless design", "edge of chaos mutation rate", "convergent evolution", "truth"]
+    }
+  ]
+}

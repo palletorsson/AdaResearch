@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flashlight — Endless Museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#25262b;font:17px/1.65 Georgia,serif}a{color:#275d64;text-underline-offset:.2em}header{background:#f4f0e7f5;border-bottom:1px solid #d7d0c5;padding:12px 4vw;position:sticky;top:0;z-index:5;font:14px/1.6 system-ui}header a{margin-right:16px}main{max-width:1260px;margin:auto;padding:40px 4vw 80px}h1,h2,h3{line-height:1.16}h1{font-size:clamp(34px,4vw,64px);font-weight:400;margin:10px 0 24px}h2{font-size:29px;margin-top:2em}h3{font-size:22px}p{max-width:75ch}small,.eyebrow,figcaption,.meta{font:13px/1.55 system-ui;color:#696761}.eyebrow{text-transform:uppercase;letter-spacing:.15em}.lead{font-size:23px;max-width:60ch}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.actions a{background:#22595d;color:white;padding:9px 15px;text-decoration:none;border-radius:3px;font:14px/1.5 system-ui}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:35px}.card{border-top:1px solid #bdb7ac;padding:20px 0}.card h2{margin:12px 0;font-size:30px}.card img{width:100%;height:230px;object-fit:cover;background:#d9d6d0}.card p{font-size:16px}img{max-width:100%;height:auto}figure{margin:20px 0}figcaption{margin-top:7px}pre{background:#e8e5de;padding:18px;overflow:auto;line-height:1.55;font:13px/1.55 Consolas,monospace;border-left:3px solid #608080}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;font:14px/1.5 system-ui;width:100%;margin:25px 0}th,td{padding:10px;border-bottom:1px solid #d0c9be;text-align:left;vertical-align:top}blockquote{border-left:2px solid #b9668c;margin:25px 0;padding-left:22px}nav.halls{display:flex;flex-wrap:wrap;gap:5px}nav.halls a{padding:3px 8px;border:1px solid #d4cec4;margin:0}.selected{background:#275d64;color:white}.spread{max-width:none;padding:0;display:grid;grid-template-columns:1.05fr 1fr;gap:0}.page{padding:30px 3vw;min-width:0;height:calc(100vh - 117px);overflow:auto;scroll-behavior:smooth}.page+.page{border-left:1px solid #ccc4b7;background:#faf7f0}.page h1{font-size:37px}.page h2{font-size:26px}.page pre{font-size:12px}.reading{max-width:880px}.chapter{border-top:1px solid #b9b3a8;margin-top:65px;padding-top:24px;scroll-margin-top:90px}.notice{padding:16px 20px;background:#e7ede7;border-left:3px solid #52705b}.sources{word-break:break-word}details{margin:20px 0}summary{cursor:pointer;font:15px/1.5 system-ui}footer{margin-top:60px;font:13px/1.6 system-ui;color:#696761}@media(max-width:900px){.spread{display:block}.page{height:auto}.page+.page{border-left:0;border-top:1px solid #aaa}.cards{grid-template-columns:1fr}}@media print{header,.actions,nav{display:none}.spread{display:block}.page{height:auto;overflow:visible}.page+.page{border:0}.chapter,.page{break-before:page}pre{white-space:pre-wrap;font-size:10px}body{background:white}main{padding:0}h1{font-size:30px}}</style></head><body><header><div><a href="../index.html">COLOUR · REVIEW DRAFT</a><a href="../all.html">All tutorials</a><a href="../final.html">All reflections</a><a href="../review.html">Reviewer brief & evidence</a><a href="../feedback.html">Feedback revision</a></div><nav class="halls"><a href="../Color_Context_Placed/parallel.html">Colour</a><a href="../Color_Flashlight/parallel.html">Flashlight</a><a href="../Color_Nails/parallel.html">Nails</a><a href="../Color_Rainbow/parallel.html">Rainbow</a><a href="../Color_Pillar/parallel.html">Pillar</a><a href="../Color_Grid_Pallet/parallel.html">Grid</a><a href="../Color_Paint/parallel.html">Paint</a><a href="../Color_Walls/parallel.html">Walls</a></nav></header><main class="spread"><article class="page"><p class="eyebrow">Tutorial · Working in the Endless Museum</p><p class="meta"><a href="../Color_Context_Placed/parallel.html">← Colour</a> · 2 / 8 · <a href="../Color_Nails/parallel.html">Nails →</a></p><details><summary>See the tested code study</summary><figure><img src="separate.png" alt="Flashlight isolated code study"><figcaption>Isolated native Godot study render, 6 October. This is verification of the printed example, not a capture of the installed museum.</figcaption></figure></details><h1>Flashlight — keep the surface</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Light colour and material colour</li>
+<li>A spotlight's position, direction and cone</li>
+<li>A local target used by <code>look_at</code></li>
+<li>Comparing separate and overlapping contributions</li>
+</ul>
+<p>Take one of the coloured lamps in the museum. Aim it across the pale board, then turn it aside. The patch leaves. The board has kept its material.</p>
+<p>In the previous hall, we assigned colours to independent surfaces. Here we keep one surface colour and change a light. The room's handles already let you do this by hand. Our small program reconstructs the light-to-surface relation; we use source edits to hold and compare particular states.</p>
+<h2>A familiar box receives light</h2>
+<p>Work in the existing <code>Color_Flashlight</code> hall. Attach this complete <code>lesson.gd</code> to an empty <code>Node3D</code> named <code>LightStudy</code> on clear floor, with unit scale and local Y upright. Allow about five metres across X and three metres along positive Z. Stand on the positive-Z side of the board. The museum supplies your camera, movement, room and existing illumination.</p>
+<p>The board is the <code>BoxMesh</code> we already know, made wide and shallow. Its material construction returns from the first Colour lesson. The new objects are two <code>SpotLight3D</code> nodes, each aimed at a point on the board. They have no visible handles or pickup bodies in this reduced study; the installed lamps provide that wider interaction. No child nodes, scene paths or helper files are required by this script.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript"># Keep the board's material; change one light's colour or aim.
+extends Node3D
+
+var beam_colour := Color(1, 0, 0)
+var first_target := Vector3(-1, 1.5, 0)
+var board: MeshInstance3D
+var surface: StandardMaterial3D
+var first_light: SpotLight3D
+var second_light: SpotLight3D
+
+func _ready() -&gt; void:
+    board = MeshInstance3D.new()
+    var shape := BoxMesh.new()
+    shape.size = Vector3(4.4, 2.4, 0.12)
+    board.mesh = shape
+    board.position = Vector3(0, 1.5, 0)
+    surface = StandardMaterial3D.new()
+    surface.albedo_color = Color(0.9, 0.9, 0.9)
+    surface.roughness = 1.0
+    board.material_override = surface
+    add_child(board)
+
+    first_light = make_light(beam_colour, Vector3(-1, 1.5, 2.5), first_target)
+    second_light = make_light(Color(0, 1, 0), Vector3(1, 1.5, 2.5), Vector3(1, 1.5, 0))
+
+func make_light(colour: Color, at: Vector3, target: Vector3) -&gt; SpotLight3D:
+    var lamp := SpotLight3D.new()
+    lamp.light_color = colour
+    lamp.light_energy = 2.5
+    lamp.spot_range = 6.0
+    lamp.spot_angle = 18.0
+    lamp.shadow_enabled = true
+    lamp.position = at
+    add_child(lamp)
+    lamp.look_at(to_global(target))
+    return lamp
+</code></pre>
+<h2>Which object receives the value?</h2>
+<p>Run the study. The first lamp makes a red pool on the left; the second makes a green pool on the right. Their positions, ranges and angles are fixed. The board receives both lights wherever their cones reach it.</p>
+<p>Last time, <code>material.albedo_color</code> changed a surface's base colour. Here, <code>lamp.light_color</code> changes a light's RGB contribution. Both accept a <code>Color</code>, but they belong to different objects and affect the scene differently. Our surface keeps <code>Color(0.9, 0.9, 0.9)</code> throughout this lesson.</p>
+<p>Change <code>beam_colour</code> to <code>Color(0, 0, 1)</code> and run again. The left pool becomes blue. The right lamp stays green, and the board's stored material is unchanged. Keep your viewpoint while comparing the two runs.</p>
+<p>Other museum lights still contribute. The pool's edge may make the change easier to see than its brightest centre. The assigned RGB value is not a promise that every receiving pixel will display those same three numbers.</p>
+<h2>Aim is a transformation</h2>
+<p>Restore <code>beam_colour</code> to <code>Color(1, 0, 0)</code>. Change <code>first_target</code> to <code>Vector3(1, 1.5, 0)</code> and run again. The first lamp now points towards the second lamp's target. Look where red and green meet. Their contributions can produce a yellow region on this pale surface. Neither lamp has been assigned yellow, and no yellow has been written into the board's material.</p>
+<p><code>make_light</code> creates a light, adds it to the study and returns its reference. The two variables keep different lights. Their <code>light_energy</code>, <code>spot_range</code> and <code>spot_angle</code> are held fixed so that colour and aim are the choices we compare. Range limits how far the light reaches; angle sets the cone's spread.</p>
+<p>A spotlight shines along its local negative-Z direction. <code>look_at</code> turns that direction towards a world-space target. Our target is written in the study's local coordinates, so <code>to_global(target)</code> converts it before the call. This is the local/world distinction from Point Coordinates doing another job. Placing the study elsewhere in the museum should not make its light aim at an unrelated world origin.</p>
+<p>The lamp must already be in the scene tree for this global aiming operation. That is why <code>add_child(lamp)</code> comes before <code>look_at</code>. This call turns the lamp; it does not move the lamp to the target. In the installed exhibit, turning the grabbable handle turns its child light instead.</p>
+<h2>Withdraw one contribution</h2>
+<p>Keep the first lamp red. Change <code>first_target</code> to <code>Vector3(-1, 1.5, 5)</code> and run again. This target is behind the lamp, on the positive-Z side. The red cone points away from the board. The green pool remains. The board may still be visible under the room's other lights.</p>
+<p>We have not switched off the first lamp: its colour, energy and position remain the same. We have changed where it points. Separating colour from aim lets us name which condition changed.</p>
+<h2>Make another comparison</h2>
+<p>Choose another target on the board: keep X between -2 and 2, Y between 0.4 and 2.6, and Z at zero. Predict which way the first light must turn. Keep its colour and the second lamp fixed, then run your choice. Find what changed without attributing it to a new surface colour.</p>
+<p>Keep the references <code>first_light</code> and <code>surface</code>, and the distinction between their colour properties. Our edits are applied in <code>_ready</code>; later controls could write to those same objects while the scene runs. This lesson does not add a colour picker to the museum's handles.</p>
+<p>Back at the installed exhibit, carry a beam across the coarse sphere. Its faces meet the light in different directions. The side rooms then hold their lamps still while colour changes with time. Those encounters develop the comparison further. We have reconstructed its smallest working relation: a known surface, a light, and an aim.</p>
+<p>In Nails, a hand position will choose a colour for a surface again. Keep asking where the value is written, and what else participates in its appearance.</p></article><article class="page"><p class="eyebrow">Reflection · Existing final.md</p><p class="meta"><a href="../Color_Context_Placed/parallel.html">← Colour</a> · 2 / 8 · <a href="../Color_Nails/parallel.html">Nails →</a></p><h1>What reaches the surface</h1>
+<!-- @flashlight_demo -->
+
+<p>Several pools of colour meet on a pale board. Their edges are easier to follow than their crowded middle. Pick one edge. Which lamp is responsible for it?</p>
+<p>Take the red lamp and turn it aside. Follow what leaves the surface. Bring it back slowly, across the other pools. There is a place where its red becomes difficult to name on its own. Move through that place again. Nothing has been painted over, yet something has appeared that neither lamp makes alone.</p>
+<p>Leave the red lamp aimed at the surface. It stays where you release it. Take the green one and move its pool across the red. Separate them, then let their edges meet. Try the blue. The white lamp begins aimed aside; bring it into the comparison when you want to see what another contribution does. If the middle grows too pale to distinguish, separate the pools again. Their edges give you somewhere to begin.</p>
+<p>In the previous room, colour was assigned to forms and positions. Here you can move one of the conditions of its appearance with your hand. What, exactly, have you changed?</p>
+<p>The receiving surface keeps the same material throughout. Its stored base colour, its <em>albedo</em>, is a near-white value. Each lamp carries a <code>SpotLight3D</code>: a light with a position, a direction and a cone. Turning the handle turns the cone. The surface receives a different contribution because you have changed where that cone falls.</p>
+<p>Aim a beam off the board and onto the floor or the cube standing to its side. The cone can cross the boundary of its intended exhibit. Does the colour still read the same way? Follow a shadow or an edge before giving the result a name. The lamp carries a value, but it cannot carry a complete account of what you will see wherever you point it.</p>
+<p>Beside the board stands a coarse, pale sphere. Carry the red beam across it. One face brightens while its neighbour stays dull. Move the lamp to the other side and watch the difference change places. No face has been repainted.</p>
+<p>We met these flat faces among the primitives, where they interrupted the promise of a smooth sphere. Here they give the light different directions to meet. Each face has a direction, called its <em>normal</em>, which the renderer uses along with the light and material to calculate its appearance. What looked like one pale body begins to answer face by face. Bring a second colour across the first. The construction you could barely see now divides their meeting.</p>
+<p><img alt="The same pale sphere under a red lamp held on either side. The camera, mesh and material stay fixed." src="../assets/b127a9a1a921-same-sphere-moving-light.png" /></p>
+<p>The red lamp has crossed from board to sphere without changing its assigned colour. Inside each lamp, <code>flashlight_color.gd</code> finds the light and gives it its colour:</p>
+<pre><code class="language-gdscript">var spot = _find_spot_light(target_root)
+if spot:
+    spot.light_color = light_color
+</code></pre>
+<p>Four copies of the same scene receive four values. The red instance is given <code>Color(1, 0, 0, 1)</code>; the green instance <code>Color(0, 1, 0, 1)</code>. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The fourth number, alpha, stays at one here.</p>
+<p>The assignment happens when the scene starts. While you move the lamp, its colour value stays fixed. You have changed where its light meets the room.</p>
+<p>There is a useful limit here. These lamps offer RGB values to a renderer. They do not calculate a spectrum of wavelengths. The room also has other illumination: turning the lamps away does not promise darkness. Even the pale surface we have kept fixed is a chosen condition of this experiment. We have made a comparison manageable by leaving much of the world in place.</p>
+<p>Perhaps the surprising body here is the patch of colour. You cannot pick it up separately from the meeting that produces it. Move one participant and its boundary moves; withdraw another and it changes again. The code gives us a way to repeat that meeting. There is still more to ask of it.</p>
+<!-- @colour_light_rooms -->
+
+<p>Through the side opening, a white room waits with a small light hanging near its centre. Stay with one corner as rose passes into violet. The walls keep their edges. Their colour has left one arrangement and entered another.</p>
+<p>Earlier, your hand moved a lamp whose colour stayed fixed. Here the lamp stays in place while its colour changes. You can keep walking, or let the room change around you while you stand still.</p>
+<p>On the far wall, a wide pink rectangle draws you towards it. Its narrow luminous lip gives it an outline. From the middle of the room, how much depth can you find inside that outline?</p>
+<p>Walk closer, then move sideways. A return wall comes into view. There is room to step inside, and a back wall that stops you. The rectangle has become a recess without anything being rebuilt. Its pink sources keep their colour while the light in the room moves on. The surrounding colour changes the meeting you are looking at.</p>
+<p><img alt="The pink recess, photographed from inside the installed white room." src="../assets/da3e9db3039c-pink-threshold.png" /></p>
+<p>The next doorway opens below a tall light well. Three rectangular lips draw the eye upwards. Between them, the walls close around the opening; beyond the last lip is the museum's sky.</p>
+<p>Wait beneath it. Rose leaves the ceiling for violet. The code changes the lights around the opening; it never assigns a new colour to the sky. Does the piece of sky you see still seem to belong to the same distance?</p>
+<p><img alt="The same light well and viewpoint at two moments. The roof and its opening stay fixed while the surrounding lights change." src="../assets/30e1a32c1960-light-well-pair.png" /></p>
+<p>A shallow ramp brings you onto a raised landing. Look back through the well. The nearer edge covers another part of the farther one. The view from below has company now. Neither position can give you every edge at once.</p>
+<p>James Turrell's light rooms and Skyspaces offer a reference for staying with this uncertainty.<sup id="fnref:apertures"><a class="footnote-ref" href="#fn:apertures">1</a></sup> Here a rendered sky meets an enclosure made from engine primitives. We can inspect every wall and still need to move to see how their edges fit together.</p>
+<!-- @ -->
+
+<!-- study-spine:sphere_in_pink -->
+
+<!-- @sphere_in_pink -->
+
+<p>The sphere has returned, pale and still. Five switches offer five directions of pink light. Leave one on and move to the side. The shadow gives the curve an uneven weight.</p>
+<p>Keep the lamps in place and change LIGHT / MATERIAL. The pink now belongs to the sphere; the illumination is white. The floor helps you see what the sphere cannot tell you by itself. This is our five-switch response to LeWitt's light study. Thirty-two possible switch states include all five lamps off. An inventory can be complete while the experience of looking keeps changing.</p>
+<!-- @ -->
+
+<p>Carry the distinction with you: changing the light that reaches a surface and changing the surface's own material can both change its appearance. In the next room, the receiving surface begins to resemble part of the body you act through. What happens when the colour is something you choose to wear?</p>
+<!-- @ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:apertures">
+<p>James Turrell's physical light installations are the reference, not the authorship of this scene. Häusler Contemporary describes <em>Aural</em> as a walk-in Ganzfeld installation; <a href="https://haeusler-contemporary.com/james-turrell-ganzfeld-aural-en">its account of the Berlin presentation</a> does not support the supplied collage's VR description. In <em>Twilight Epiphany</em> (2012), ceiling illumination meets natural twilight through a roof aperture; see <a href="https://moody.rice.edu/james-turrell-twilight-epiphany-skyspace">Rice's Skyspace account</a>. Here RGB lights meet the museum's rendered sky. Neither natural daylight nor a measured perceptual equivalence is simulated.&#160;<a class="footnote-backref" href="#fnref:apertures" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></main></body></html>

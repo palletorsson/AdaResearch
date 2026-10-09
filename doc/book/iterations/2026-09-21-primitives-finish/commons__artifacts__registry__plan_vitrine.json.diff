@@ -1,0 +1,40 @@
+--- before/commons/artifacts/registry/plan_vitrine.json
++++ commons/artifacts/registry/plan_vitrine.json
+@@ -6,8 +6,8 @@
+       "scene": "res://commons/artifacts/plan_vitrine/plan_vitrine.tscn",
+       "class_name": "PlanVitrine",
+       "category": "primitives",
+-      "description": "A glass room you walk into, standing on the five by five simulation plan, which it builds inside itself. No pane carries a collider, so every face is walk-through and the lit doorway is an invitation rather than a gate. In VR, standing inside puts a pen in each hand: the left draws freely in three dimensions, the right is a time-domain trace that stamps every sample on one plane and pushes the tape along world +Z, so the plan's numbered columns become an amplitude ruler and +Z becomes time. Stepping out takes both pens back and the marks hang for a few seconds before clearing. On desktop and in the endless museum the glass and the plan build normally and the hands stay empty, because there is no rig to mount a pen on and the only shared mount is the camera, which would draw a tracer on the visitor's head.",
+-      "qfep_connection": "Two hands given incompatible instruments at the same moment. The left records position, the right records position against time and throws one axis away to do it, so the visitor feels the cost of a projection rather than being told about it.",
++      "description": "An enterable glass room around a five-by-five numbered plan. The panes have no colliders; the plan has a continuous floor. With active VR controllers, entry mounts two drawing pens and exit removes them. The space_grid pair compares a freely sampled cyan trace with an amber trace rounded to local one-metre X/Z addresses, retaining hand height. The legacy space_time pair compares spatial drawing with a time-domain trace. Desktop visitors can walk the plan but receive no mounted pens. Marks linger briefly after exit.",
++      "qfep_connection": "Two recording rules admit different movements into their traces. In Grid the floor supplies shared addresses while the hand can still move within them; what a record retains becomes available for comparison.",
+       "signals": [],
+       "interactions": [
+         "walk in through any face; the lit opening shows the intended front",
+@@ -21,13 +21,14 @@
+         "wrap_plan": "Build simulation_grid inside the box (default true)",
+         "linger_s": "Seconds the marks hang after the visitor steps out (default 6.0)",
+         "left_ink": "Ink name for the free pen: magenta, cyan, amber, lime, white (default cyan)",
+-        "right_ink": "Ink name for the time-domain pen (default amber)",
++        "right_ink": "Ink name for the right-hand pen (default amber)",
+         "footprint": [
+           5,
+           2.8,
+           5
+         ],
+-        "size_group": "large"
++        "size_group": "large",
++        "pen_pair": "space_time (legacy default) or space_grid (Point_Line_Grid: sampled space / local one-metre X/Z rounding, continuous height)"
+       },
+       "size": "large",
+       "interaction": "walk_in",
+@@ -39,7 +40,8 @@
+         "drawing",
+         "time_domain",
+         "vr_hands",
+-        "vitrine"
++        "vitrine",
++        "spatial_rounding"
+       ],
+       "dev_category": "primitives",
+       "complexity": "intermediate",

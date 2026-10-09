@@ -1,0 +1,11 @@
+--- before/final.md
++++ after/final.md
+@@ -47,7 +47,7 @@
+ 
+ You once held a point and decided where it would stay. Two points gave you a span. To make a face, positions needed an order; to make a mesh, faces needed connections. Here two settings ask the engine to distribute positions and connect them across a whole surface. A small decision reaches many places at once.
+ 
+-The vertices remain finite and countable. We can still inspect or move them individually. What changes is the scale at which we choose to work: a hand places a corner; a rule places a family of corners in relation. Increasing the count lets the same rule do more work without asking us to make every placement again. Its regularity comes with that power. Which differences can we make through the rule, and which require us to return to a particular point?
++The vertices remain finite and countable. A hand places a corner; a rule places a family of corners in relation. We choose a procedure, let it make the placements, then return to what appeared. Knowing the rule gives us another way to know the form, while its particular surface still asks to be looked at. Which differences can we make through the rule, and which require us to return to a particular point?
+ 
+ <!-- @sphere_resolution_atlas -->
+ 

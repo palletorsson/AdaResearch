@@ -1,0 +1,36 @@
+{
+  "id": "Color_Nails",
+  "title": "Use a position to choose a colour",
+  "storyboard": "The held point recolours nails on the giant and petite hands and, in the standard VR setup, the choosing hand. Reuse a position in a named local frame and bounded mapping. The student writes one function taking that local position and positive box dimensions, clamping each component to the box and dividing by its dimension: X becomes red, Y green, Z blue. It returns a Color; one named preview material receives it through albedo_color. The grab connection, hand meshes and application signals are supplied. Predict the colour at a different point and revisit it, then keep nail colour fixed while changing rendered skin. Carry the function and a recorded colour. Preserve the critical distinction between these equally easy assignments and their unequal lived meanings.",
+  "storyboard_short": "Use RGB point and salon hands. Reuse local position/bounded mapping. Teach positive box sizes; clamp/divide X→R, Y→G, Z→B; return Color → named preview albedo. Supply grabbing/hands/signals. Predict another point, revisit it; keep nails fixed while changing skin. Carry function + recorded colour. Preserve Lorde/embodied difference. Open: reduced preview binding; no automatic Rainbow transfer.",
+  "mode": "make",
+  "brings": [
+    "held position in a declared local frame",
+    "bounded mapping and function returns"
+  ],
+  "learns": [
+    "local box coordinates normalised to RGB",
+    "returned colour value versus receiving material"
+  ],
+  "carries": "A bounded RGB function and a recorded result that can be reused deliberately.",
+  "supplied": [
+    "grab connection and positive box dimensions",
+    "preview material, hand meshes and application signal route"
+  ],
+  "artifact_refs": [
+    "nail_color_controller",
+    "hand_color_controller"
+  ],
+  "review_note": "The current companion offers observation/source tracing, not this complete authored function. Bind the reduced function to one named preview before expanding the lesson. GameManager already retains hand/nail choices, but that does not feed Rainbow or Grid automatically. Preserve the main text’s Lorde passage.",
+  "prior_maps": [
+    "Point_Coordinates",
+    "Trans_Scale",
+    "Color_Flashlight"
+  ],
+  "independent_check": "Predict the RGB result at a new local point, revisit it, then apply that value to the declared preview without changing the hand geometry.",
+  "source_refs": [
+    "commons/interfaces/value_mapper_3d.gd",
+    "commons/interfaces/nail_color_controller.gd"
+  ],
+  "change_reason": "Give the student a reusable operation without making the salon a wiring lesson."
+}

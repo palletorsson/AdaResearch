@@ -1,0 +1,39 @@
+# Where Claude can make the most useful next contribution
+
+23 September 2026. Editorial judgement from the earlier complete-book reading, a fresh survey of all 24 active sequence openings/order, close reading of current Soft Bodies, Machine Learning, Graph Theory and QFEP Laboratory manuscripts, and targeted reading of Boolean Works. Specific source checks confirm the scripted ML losses, diagrammatic memory, supplied vision labels and assigned network measures. This is not a new complete reading or runtime acceptance of every hall. Word counts did not determine these priorities.
+
+## The clearest individual case: Boolean Works
+
+The opening and the walkable burrow are strong. But `Boolean_Works/final.md` also says “Three hundred and fifty-eight lines and not one input handler” and reports registry tags, code-line distances, removed scripts and placeholder totals. This makes the file's failures the main narrator. There is an interesting critical work here, but too much of the visitor's chapter has become a developer report.
+
+Keep the difference between a visible cavity and a place a body can enter. Keep the existing burrow and its desire for an interior. Use the source findings to repair or curate the encounters, and let the chapter follow the visitor. Do not remove every failure: an unfulfilled promise can itself be a deliberate encounter. Decide which one matters rather than listing them all. The historical line-count claims need current verification; they are quoted here as evidence of voice, not recertified facts.
+
+## Different priorities need different kinds of work
+
+| Assignment | Why it merits attention | First hall / bounded task | Preserve |
+|---|---|---|---|
+| **Soft Bodies — best first writing pilot** | Much of the material works, but close contact repeatedly gives way to settings, solver qualifications and warnings about interpretation. It has unusually good potential for touch, yielding, attachment and desire. This is not a finding that the sequence lacks artifacts. | `SoftBodies_Cloth_Physics`: develop the passage from a full pinned edge to corners and release, asking what support allows the cloth to become. Check the current hanging object and controls; build only the missing comparison if one is actually missing. | Material response versus pinning; the mill and moving support; “A number that helped us look has become a number the body is asked to follow”; recognition and desire in Affect. |
+| **Machine Learning — largest confirmed development gap among these candidates** | Perception juxtaposes real filtering and supplied labels; Memory animates a diagram; Generative animates prescribed losses. Several chapters end by specifying the experiment the hall still needs. Prose cannot alone supply the missing computation. | `ML_Sequence_Memory`: make a tiny computed recurrent state respond differently to two histories with the same final input. Reuse the existing gate diagram, distinguish manually set gates from learned gates, and give the visitor a reason to care which earlier event persists. | The working controlled samples in Gradient Landscape and Classification; the distinction between activation and changed weights; the anomaly question. |
+| **Graph Theory — strongest opportunity to turn displayed relations into consequences** | A good conceptual ladder often remains something watched. Network Analysis still assigns measures; Flow lacks reverse revision. Other encounters already work, particularly Matching. | `GT_Network_Analysis`: expose one computed measure from actual edges and a different measure that can disagree. Choose a concrete relation such as a bridge whose loss separates regions. Develop one spatial consequence without claiming every drawn edge is a walkable path. | Adjacency versus coordinates, directed return, the cost of redundancy, and the tested three-versus-five Matching comparison. |
+| **QFEP Laboratory — concentrated panel-led writing, targeted pass** | Opening arithmetic, Phi's rail and several extended observation instructions repeatedly explain how to qualify a display. The sequence also contains some strong, specific writing. A uniform rewrite would harm it. | `QFEP_Phi_Term`: begin with the same gesture before and after RESIST/EMBRACE are revealed. Let naming alter an interpretation without pretending it alters the neighbouring independent pattern. Tighten repetition about sign/magnitude after confirming what the reader already learned. | EXPECT changing errors while the bits stay; PRUNE's lost endings; the movable recommendation; the connected receiver retaining its last value; the jar's fixed boundary; current Q/Self-Q ethics. |
+| **Boolean Surfaces — highest priority for removing fault-report prose** | Especially `Boolean_Works`, where good spatial inquiry is crowded by implementation complaints. The first two chapters need lighter judgement, not equal pressure. | `Boolean_Works`: choose a short bodily itinerary from apparent interior to the existing traversable burrow; repair or deliberately stage one consequential contrast, then rewrite the relevant passages. | The burrow; subtraction/omission distinctions that matter; the question “can you stand in it?” and strong existing spatial prose. |
+
+## Recommended dispatch
+
+Give Claude **Soft Bodies first**, beginning with Cloth Physics. This tests whether the new instruction produces a stronger voice from already meaningful material. Machine Learning is the next substantial build-and-write assignment. Boolean Works can be a separate focused recovery task. Keep Graph Theory and QFEP ready as further assignments, not a request to rewrite five sequences at once. Each ZIP contains the whole sequence so a one-hall revision respects its direction.
+
+If several people or tasks are used, give each a distinct sequence and one initial hall. Do not have two tasks rewriting shared final.md files or global curriculum data. Shared artifact changes need explicit coordination. These packets commission work; no message has been sent to Claude by their creation.
+
+## What I would protect now
+
+Primitives, Transformation and Arrays have just received the close encounter-and-image pass. Colour's long opening of accumulated stacks should be carried forward. Noise's criticism of the useful organic filter, the inhabitable fractal passages, and the renewed Rhizome/Assembly/return are reference material rather than targets for a blanket tonal rewrite. Change is short and recently tightened. Maturity is local: a developed hall in a weaker sequence still deserves protection.
+
+Swarm and parts of Formfinding are plausible later candidates, but they are not assigned from opening samples alone. The present first-wave selection is sufficiently substantial and better supported. The earlier 20 September whole-book diagnosis predates the rebuilt rhizome and ending; that part of its priority order is superseded.
+
+## Current source opportunities not to overlook
+
+`ComputerVision_VR.gd` already has detection variants named/invented/swarm/whole/bare while preserving its input/edge evidence. The current ML_Perception token does not explicitly select those variants. Investigate exposing this existing comparison before writing a second one.
+
+`NetworkAnalysis.gd` already has optional graph/layout variants under `mutuality` and `graph_seed`. Its variants do not turn assigned centrality into a computed measure. Inspect and reuse their actual graph data; do not treat comments' graph terminology as mathematical authority. The current GT_Network_Analysis token has no explicit mutuality variant.
+
+`LSTMs_VR.gd` advances its displayed training values from elapsed progress; `GenerativeAdversarialNetworksGANs_VR.gd` sets losses from elapsed progress and a sine. These source paths support development assignments, not a claim that the full museum was tested this morning. Historical runtime findings included in the packets remain dated evidence.

@@ -1,0 +1,22 @@
+--- before/commons/primitives/point/point_condition.gd
++++ after/commons/primitives/point/point_condition.gd
+@@ -3,6 +3,7 @@
+ ## The held variant reuses the museum's existing XR/desktop pickable point.
+ @export_enum("absent", "visible", "solid", "held", "pedestal") var condition: String = "absent"
+ const RADIUS := 0.14
++const HELD_RADIUS := 0.07
+ const CENTRE := Vector3(0, 1.12, 0)
+ const PICKABLE := preload("res://commons/primitives/point/interactive_point_origin.tscn")
+ var point: Node3D
+@@ -26,9 +27,9 @@
+ 		held.position = CENTRE
+ 		held.set("coordinate_id", "point_one_main")
+ 		held.set("finish", "dark")
+-		held.get_node("MeshInstance3D/Sphere").set("radius", RADIUS)
++		held.get_node("MeshInstance3D/Sphere").set("radius", HELD_RADIUS)
+ 		var shape := SphereShape3D.new()
+-		shape.radius = RADIUS
++		shape.radius = HELD_RADIUS
+ 		held.get_node("CollisionShape3D").set("shape", shape)
+ 		add_child(held)
+ 		# The lesson's black sphere stays black on pickup; the inherited coordinate

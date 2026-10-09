@@ -1,0 +1,37 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md
++++ current/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md
+@@ -37,14 +37,30 @@
+ 
+ There is also a useful resistance to notice. Moving the hand does not pull the elbow after it. The gold connection follows its endpoints, but it does not enforce the length of a bone. This model can hold a gesture your muscles could not sustain. What looks like a limb is, here, a declared relation drawn across a distance.
+ 
+-The body began with thirteen joints and twelve connections. Those connections remain when you stretch it. You have changed its geometry; you have not yet given it another way to connect. To grow an extra arm would require more than moving the existing hand. The desire is easy to feel before the missing operation is easy to name.
++Now leave the joints where they are. Find the turquoise collar beside the left hand. Take it towards the head. The forearm's connection comes with you; the hand stays behind. A small ring marks the joint the loose end can meet. Release it there.
++
++The line that used to end at the hand now ends at the head. The body still has thirteen joints and twelve connections. Not one point needed to move.
++
++Follow the lines with your eyes. With this change to the starting body, you can go from the head through the torso and left shoulder, down to the elbow, and back to the head. A loop has appeared. The hand waits outside that circuit, with no line reaching it. It has not disappeared from the room. It has disappeared from the body's connected part.
++
++The program changes one entry:
++
++```gdscript
++pairs[bond_index].y = candidate
++```
++
++Here the pair names the two joints a connection joins. Its second entry now names the joint where you let go. A list of positions would miss what happened. To reconstruct this body, we also need to know which points have been made neighbours.
++
++The familiar shape can conceal that change. From far enough away, the isolated sphere may still read as a hand. Come closer and the relation no longer supports the reading. Which account are you following: the outline, the name, or the connection?
++
++You can take the collar back to the hand. You can try another joint. An end released in empty space returns to its previous attachment; this connection still asks for two distinct neighbours. One end has become available to your hand. The other connections remain authored.
+ 
+ In the source, the hand is still called `l_hand`, wherever you put it. A name can survive the proportions that made it seem obvious. How far can this arrangement travel from its familiar outline before you cease to see a body? And how much of that limit belongs to the arrangement, rather than to what you have learned to recognise?
+ 
+-The rhizome gave us passages through connections. Here a connection helps something become legible as a body, and your own body reaches into that description. The catalogue offers spheres, rods and panels. The assembly supplies roles and neighbours. You have been allowed to revise positions. Each permission opens a different part of the question: what bodies are possible?
++The rhizome gave us passages through connections. Here a connection helps something become legible as a body, and your own body reaches into that description. The catalogue offers spheres, rods and panels. The assembly supplies roles and neighbours. You can revise a position, then a neighbour. The two operations change different parts of the description. What other part would have to become available for the body you want to make?
+ 
+-Eventually a joint meets the edge of its working space. There is still a room around this experiment, a limit someone supplied. You can want another connection, a different part, more room. The useful next question is which of these your desired body needs.
++Eventually a joint meets the edge of its working space. There is still a room around this experiment, a limit someone supplied. The catalogue beside it has spare parts. This body cannot yet take one. Perhaps the next desire is another joint, another connection, more room. The useful question is which operation would let that desire take form.
+ 
+ <!-- @ -->
+ 
+-Leave the pose a little unlike the one you found. Releasing a changed joint now keeps it for the final hall, where the pose will stand beside the one this body began with. You can leave the room and meet the difference again. What will have survived the journey?
++Leave the pose a little unlike the one you found. A changed joint or connection is kept for the final hall, where the body will stand beside the one it began with. You can leave the room and meet the difference again. What will have survived the journey?

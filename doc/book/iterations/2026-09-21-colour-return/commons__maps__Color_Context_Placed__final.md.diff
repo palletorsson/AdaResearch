@@ -1,0 +1,18 @@
+--- before/commons/maps/Color_Context_Placed/final.md
++++ current/commons/maps/Color_Context_Placed/final.md
+@@ -45,13 +45,13 @@
+ 
+ <!-- @color_dna_stack -->
+ 
+-The columns grow taller. White, red, blue and yellow blocks separated by thin dark levels carry the gallery's reference to Mondrian. Four diminishing blocks in warm colours come from its Albers study. Pink and teal enter the Memphis stack; eight different primitives gather into the taller Bauhaus study. These are composed adaptations of references. You can inspect their proportions and colour choices even if the names are new to you.
++The columns grow taller. White, red, blue and yellow blocks separated by thin dark levels carry the gallery's reference to Mondrian. Four diminishing blocks in warm colours come from its Albers study. Pink and teal enter the Memphis stack; eight pieces gather into the taller Bauhaus study. These are composed adaptations of references. You can inspect their proportions and colour choices even if the names are new to you.
+ 
+ Recognition adds another kind of company. A palette can arrive with memories of paintings, furniture, toys or interiors. Those associations may draw your attention to a colour before you begin to measure it. They may also make a combination feel familiar so quickly that you stop looking. Stay with one of the columns a little longer. Find a detail its name did not tell you to expect.
+ 
+ The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. New colours come into view. The object has not turned.
+ 
+-This is the gallery's `ps07_kras_rainbow`, with its shaft raised to 6.2 metres. Thirty stripes take their colours from an array of six entries:
++This is the gallery's `ps07_kras_rainbow`, with the whole capped column raised to 6.2 metres. Thirty stripes take their colours from an array of six entries:
+ 
+ ```gdscript
+ var col_idx: int = i % stripe_colors.size()

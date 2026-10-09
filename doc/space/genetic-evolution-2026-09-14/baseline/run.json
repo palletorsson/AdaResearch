@@ -1,0 +1,35 @@
+{
+  "started": "2026-09-14T20:34:19+02:00",
+  "finished": "2026-09-14T20:34:32+02:00",
+  "pid": 30504,
+  "exit": 0,
+  "checks": 2,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/genetic_probe_base.gd": "26c1cc320ab06002e8a549afe1b884df91623f35b452c43157a0087fbd02f664",
+    "ada_run/genetic_acceptance.gd": "7b111a1fbc4da04135a697c5884c5e8c8f05fe9617c9fb125ca453c0e20bf770",
+    "commons/maps/PG_Genetic_Evolution/map_data.json": "6c0295c18415f95ffd683d80aed6adcf04a17e1d24b7a3e8e417c0c9ce208727",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/genetic-review-2026-09-14/review-plan.json": "cc260b20da6e2aabd9990ffde59990177de03127624c5cf4c7d5075eab85e8ca",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn": "94ebeff11132f58e0e035368ee2b9da235e7c55968253e368b3d83fb2a64bde8",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd": "f441c49e9eea4f190d1c77e63725f5f6b5a91ca6954f95dd8adced29ccd9f495",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd": "5635e4f2a208b0b5941833c5e9fd9315e65867475ef4b2f4be10f8c61bd6767b",
+    "commons/artifacts/science_screen/science_screen.tscn": "3c67ce5e09a8a433d75343bc5feb16fb7d3f1ecea208d749477a4e73ac190f96",
+    "commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/proceduralgeneration.json": "391b121d4f7f69eeec759411d6d5ab2c49096886f7558d78554c6b8841696b4d",
+    "commons/data/trunk_branches.json": "fa7dbbd988d7c7fcfcc9c9cf5a4f05d88aff6efa42b8b4602835516cf6e7c344",
+    "commons/maps/PG_Genetic_Evolution/final.md": "5d084c1cf5f159f159442b337fd524845321186f4b73396401135b1c9437c82c"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

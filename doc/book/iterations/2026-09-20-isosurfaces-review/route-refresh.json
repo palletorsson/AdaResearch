@@ -1,0 +1,343 @@
+    RULING VIOLATION ISO_PortalLandscape: final width 20 outside 13-19 (content too large to conform)
+    RULING VIOLATION ISO_RhizomeBody: final width 34 outside 13-19 (content too large to conform)
+{
+  "sequence": "isosurfaces",
+  "maps": [
+    "ISO_PortalLandscape",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "live_sequence_maps": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "museum_template": "castelvecchio-pinch-v2",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json",
+    "commons/data/map_authored.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "2992e5740530f1541c04bd46c9b259fa283ee3c3a0e7b8ee74d3900c51efa9bf",
+    "commons/data/museum/em_plan.json": "2992e5740530f1541c04bd46c9b259fa283ee3c3a0e7b8ee74d3900c51efa9bf",
+    "commons/data/map_authored.json": "cb6c095ca47beea17f08ad6361702e1fafe4ceec63b8c029d59ac23b7cbf02f7",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/isosurfaces.json": "bab9889495188e0e8794388ac301de5db78cc409b7be80bf178ae3b9f9c6498a",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/ISO_PortalLandscape/map_data.json": "d77db5177ae840957367875f86deafcc86a2242da0fabd0a460e446ab246c71d",
+    "commons/maps/ISO_CaveGeneration/map_data.json": "2657480d240860d62ab102e0d8308f81781deb9cb042d3af39dc5fc625835c06",
+    "commons/maps/ISO_AnimatedNoise/map_data.json": "2944dfcaab7813199eae059da473191965683f2cc85a22d4011a9a659a153c3c",
+    "commons/maps/ISO_ImplicitModeling/map_data.json": "6aa23fbdf8e724976e4159643f74377a69b5f53125a8cefe20f53e93fc45c7c0",
+    "commons/maps/ISO_RhizomeBody/map_data.json": "fe120fc5d10a4bee18abfb112f016be9dcab651a0a7ca8f4e90cdace86eb9d59"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "c99b81c72063fccfcfde102817ca4950a5e38b72e8d3c0db859d2542c5d7e8b6",
+    "commons/data/museum/em_plan.json": "c99b81c72063fccfcfde102817ca4950a5e38b72e8d3c0db859d2542c5d7e8b6",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 185,
+    "commons/data/museum/em_plan.json": 185
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [
+      {
+        "map": "ISO_Introduction",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_LookupTable",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_ShapesGallery",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_TorusGyroid",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Sculpting",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_FlatTerrain",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Caves",
+        "before": {
+          "pearl_index": 6,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 7,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Metaballs",
+        "before": {
+          "pearl_index": 7,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 10,
+          "pearls_total": 13
+        }
+      }
+    ],
+    "commons/data/museum/em_plan.json": [
+      {
+        "map": "ISO_Introduction",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_LookupTable",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_ShapesGallery",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_TorusGyroid",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Sculpting",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_FlatTerrain",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Caves",
+        "before": {
+          "pearl_index": 6,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 7,
+          "pearls_total": 13
+        }
+      },
+      {
+        "map": "ISO_Metaballs",
+        "before": {
+          "pearl_index": 7,
+          "pearls_total": 8
+        },
+        "after": {
+          "pearl_index": 10,
+          "pearls_total": 13
+        }
+      }
+    ]
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "ISO_PortalLandscape",
+      "pearl_index": 6,
+      "room": {
+        "w": 20,
+        "h": 20
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 20,
+        "src_h": 20,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "inplace"
+      }
+    },
+    {
+      "map": "ISO_CaveGeneration",
+      "pearl_index": 8,
+      "room": {
+        "w": 15,
+        "h": 16
+      },
+      "artifacts": 2,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 14,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "expand"
+      }
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "pearl_index": 9,
+      "room": {
+        "w": 14,
+        "h": 10
+      },
+      "artifacts": 2,
+      "ruling": {
+        "src_w": 14,
+        "src_h": 10,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ISO_ImplicitModeling",
+      "pearl_index": 11,
+      "room": {
+        "w": 16,
+        "h": 14
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 16,
+        "src_h": 14,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ISO_RhizomeBody",
+      "pearl_index": 12,
+      "room": {
+        "w": 34,
+        "h": 34
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 34,
+        "src_h": 34,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T072543902365Z"
+}

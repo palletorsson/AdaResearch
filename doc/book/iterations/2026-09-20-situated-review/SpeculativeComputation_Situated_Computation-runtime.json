@@ -1,0 +1,2089 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "44"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				2.06159400939941,
+				0.0,
+				1.97674107551575
+			],
+			"bounds_size": [
+				1.42677140235901,
+				1.70000004768372,
+				0.961664915084839
+			],
+			"cell": [
+				2,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.382155418396,
+						1.13723421096802,
+						2.18007397651672
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.382155418396,
+						1.13723421096802,
+						2.18007397651672
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.41045141220093,
+						1.02729022502899,
+						2.20836997032166
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.41045141220093,
+						1.02729022502899,
+						2.20836997032166
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.43874716758728,
+						0.917346119880676,
+						2.23666572570801
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.43874716758728,
+						0.917346119880676,
+						2.23666572570801
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "SituatedReadout",
+					"position": [
+						2.51767778396606,
+						1.56500005722046,
+						2.51767778396606
+					],
+					"text": "SUBJECT #4729"
+				},
+				{
+					"parent": "SituatedReadout",
+					"position": [
+						2.51767778396606,
+						1.29499995708466,
+						2.51767778396606
+					],
+					"text": "ORDERLY"
+				},
+				{
+					"parent": "SituatedReadout",
+					"position": [
+						2.51767778396606,
+						1.07000005245209,
+						2.51767778396606
+					],
+					"text": "confidence 87%"
+				},
+				{
+					"parent": "SituatedReadout",
+					"position": [
+						2.51767778396606,
+						0.935000002384186,
+						2.51767778396606
+					],
+					"text": "view from NW (2.5, 2.5)"
+				},
+				{
+					"parent": "ADDRESS",
+					"position": [
+						3.34415507316589,
+						1.20068001747131,
+						2.14207363128662
+					],
+					"text": "ADDRESS"
+				}
+			],
+			"position": [
+				2.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				45.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "situated_readout"
+		},
+		{
+			"bounds_position": [
+				7.06159400939941,
+				0.0,
+				2.06159377098084
+			],
+			"bounds_size": [
+				0.961665153503418,
+				1.70000004768372,
+				1.42677164077759
+			],
+			"cell": [
+				7,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.8199257850647,
+						1.13723421096802,
+						3.382155418396
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.8199257850647,
+						1.13723421096802,
+						3.382155418396
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.79162979125977,
+						1.02729022502899,
+						3.41045117378235
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.79162979125977,
+						1.02729022502899,
+						3.41045117378235
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.76333427429199,
+						0.917346119880676,
+						3.43874716758728
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.76333427429199,
+						0.917346119880676,
+						3.43874716758728
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "@Node3D@365",
+					"position": [
+						7.48232221603394,
+						1.56500005722046,
+						2.51767778396606
+					],
+					"text": "SUBJECT #4729"
+				},
+				{
+					"parent": "@Node3D@365",
+					"position": [
+						7.48232221603394,
+						1.29499995708466,
+						2.51767778396606
+					],
+					"text": "CREATIVE"
+				},
+				{
+					"parent": "@Node3D@365",
+					"position": [
+						7.48232221603394,
+						1.07000005245209,
+						2.51767778396606
+					],
+					"text": "confidence 64%"
+				},
+				{
+					"parent": "@Node3D@365",
+					"position": [
+						7.48232221603394,
+						0.935000002384186,
+						2.51767778396606
+					],
+					"text": "view from NE (7.5, 2.5)"
+				},
+				{
+					"parent": "ADDRESS",
+					"position": [
+						7.85792636871338,
+						1.20068001747131,
+						3.34415507316589
+					],
+					"text": "ADDRESS"
+				}
+			],
+			"position": [
+				7.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				314.999969482422,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "situated_readout"
+		},
+		{
+			"bounds_position": [
+				6.71255493164063,
+				-0.0179795939475298,
+				4.54419279098511
+			],
+			"bounds_size": [
+				0.701984405517578,
+				0.917979538440704,
+				0.765705108642578
+			],
+			"cell": [
+				7,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.10427618026733,
+				-0.180000096559525,
+				4.90097904205322
+			],
+			"rotation": [
+				0.0,
+				-15.5706653594971,
+				0.0
+			],
+			"scale": [
+				0.149999991059303,
+				0.150000005960464,
+				0.149999991059303
+			],
+			"token": "head_crab"
+		},
+		{
+			"bounds_position": [
+				1.97674107551575,
+				0.0,
+				6.511634349823
+			],
+			"bounds_size": [
+				0.961664915084839,
+				1.70000004768372,
+				1.42677164077759
+			],
+			"cell": [
+				2,
+				7
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						2.18007397651672,
+						1.13723421096802,
+						6.617844581604
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						2.18007397651672,
+						1.13723421096802,
+						6.617844581604
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						2.20836997032166,
+						1.02729022502899,
+						6.58954858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						2.20836997032166,
+						1.02729022502899,
+						6.58954858779907
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						2.23666572570801,
+						0.917346119880676,
+						6.5612530708313
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						2.23666572570801,
+						0.917346119880676,
+						6.5612530708313
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "@Node3D@471",
+					"position": [
+						2.51767778396606,
+						1.56500005722046,
+						7.48232221603394
+					],
+					"text": "SUBJECT #4729"
+				},
+				{
+					"parent": "@Node3D@471",
+					"position": [
+						2.51767778396606,
+						1.29499995708466,
+						7.48232221603394
+					],
+					"text": "DANGEROUS"
+				},
+				{
+					"parent": "@Node3D@471",
+					"position": [
+						2.51767778396606,
+						1.07000005245209,
+						7.48232221603394
+					],
+					"text": "confidence 92%"
+				},
+				{
+					"parent": "@Node3D@471",
+					"position": [
+						2.51767778396606,
+						0.935000002384186,
+						7.48232221603394
+					],
+					"text": "view from SW (2.5, 7.5)"
+				},
+				{
+					"parent": "ADDRESS",
+					"position": [
+						2.14207363128662,
+						1.20068001747131,
+						6.65584516525269
+					],
+					"text": "ADDRESS"
+				}
+			],
+			"position": [
+				2.5,
+				0.0,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				135.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "situated_readout"
+		},
+		{
+			"bounds_position": [
+				6.511634349823,
+				0.0,
+				7.06159400939941
+			],
+			"bounds_size": [
+				1.42677164077759,
+				1.70000004768372,
+				0.961665153503418
+			],
+			"cell": [
+				7,
+				7
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.617844581604,
+						1.13723421096802,
+						7.81992626190186
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.617844581604,
+						1.13723421096802,
+						7.81992626190186
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.58954858779907,
+						1.02729022502899,
+						7.79163026809692
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.58954858779907,
+						1.02729022502899,
+						7.79163026809692
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.5612530708313,
+						0.917346119880676,
+						7.76333475112915
+					]
+				},
+				{
+					"disabled": false,
+					"path": "AddressConsole/ADDRESS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.5612530708313,
+						0.917346119880676,
+						7.76333475112915
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "@Node3D@489",
+					"position": [
+						7.48232221603394,
+						1.56500005722046,
+						7.48232221603394
+					],
+					"text": "SUBJECT #4729"
+				},
+				{
+					"parent": "@Node3D@489",
+					"position": [
+						7.48232221603394,
+						1.29499995708466,
+						7.48232221603394
+					],
+					"text": "IRRELEVANT"
+				},
+				{
+					"parent": "@Node3D@489",
+					"position": [
+						7.48232221603394,
+						1.07000005245209,
+						7.48232221603394
+					],
+					"text": "confidence 22%"
+				},
+				{
+					"parent": "@Node3D@489",
+					"position": [
+						7.48232221603394,
+						0.935000002384186,
+						7.48232221603394
+					],
+					"text": "view from SE (7.5, 7.5)"
+				},
+				{
+					"parent": "ADDRESS",
+					"position": [
+						6.65584516525269,
+						1.20068001747131,
+						7.85792684555054
+					],
+					"text": "ADDRESS"
+				}
+			],
+			"position": [
+				7.5,
+				0.0,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				224.999984741211,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "situated_readout"
+		},
+		{
+			"bounds_position": [
+				2.85999989509583,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000044822693,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						4.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						4.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						4.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						4.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				4.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:speculativecomputation situated computation"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.58000004291534,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				11.0089998245239
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				11.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.00899999961256981,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.99100017547607,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0090000629425,
+				1.58000004291534,
+				12.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.99100017547607,
+				1.58000004291534,
+				11.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.00899999961256981,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.99100017547607,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				4.77500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				0.00499998452141881,
+				2.05920004844666,
+				0.309199988842011
+			],
+			"bounds_size": [
+				0.0300000160932541,
+				0.381599903106689,
+				0.381600022315979
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.0199999995529652,
+				2.25,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				2.02499985694885,
+				4.62799978256226,
+				-0.000000101514160633087
+			],
+			"bounds_size": [
+				0.950000286102295,
+				0.0920000076293945,
+				0.449999988079071
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				4.6399998664856,
+				0.224999904632568
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				9.43200016021729,
+				0.550000011920929,
+				1.20000004768372
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616199851036072
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.72000026702881,
+				0.850000023841858,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				6.02560901641846,
+				0.419999986886978,
+				10.0012807846069
+			],
+			"bounds_size": [
+				0.975708961486816,
+				1.67999994754791,
+				0.975709915161133
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				218.901931762695,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				3.12242984771729,
+				0.43264028429985,
+				8.83827781677246
+			],
+			"bounds_size": [
+				0.760560989379883,
+				1.54427993297577,
+				1.20321846008301
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.419999986886978,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				215.11247253418,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"captured_states": [
+		{
+			"address": "footnote",
+			"fields": [
+				"SUBJECT #4729",
+				"ORDERLY",
+				"confidence 87%",
+				"view from NW (2.5, 2.5)"
+			],
+			"shot": "situated-nw",
+			"station": "NW"
+		},
+		{
+			"address": "footnote",
+			"fields": [
+				"SUBJECT #4729",
+				"CREATIVE",
+				"confidence 64%",
+				"view from NE (7.5, 2.5)"
+			],
+			"shot": "situated-ne",
+			"station": "NE"
+		},
+		{
+			"address": "footnote",
+			"fields": [
+				"SUBJECT #4729",
+				"DANGEROUS",
+				"confidence 92%",
+				"view from SW (2.5, 7.5)"
+			],
+			"shot": "situated-sw",
+			"station": "SW"
+		},
+		{
+			"address": "footnote",
+			"fields": [
+				"SUBJECT #4729",
+				"IRRELEVANT",
+				"confidence 22%",
+				"view from SE (7.5, 7.5)"
+			],
+			"shot": "situated-se",
+			"station": "SE"
+		},
+		{
+			"address": "erasure",
+			"fields": [
+				"SUBJECT #4729",
+				"DANGEROUS",
+				"confidence 92%",
+				"view from SW (2.5, 7.5)"
+			],
+			"shot": "situated-covered",
+			"station": "SW"
+		},
+		{
+			"address": "witness",
+			"fields": [
+				"SUBJECT #4729",
+				"DANGEROUS",
+				"confidence 92%",
+				"view from SW (2.5, 7.5)"
+			],
+			"shot": "situated-witness",
+			"station": "SW"
+		}
+	],
+	"checks": [
+		{
+			"message": "Four independently assigned stations instantiate",
+			"ok": true
+		},
+		{
+			"message": "Supporting creature remains present",
+			"ok": true
+		},
+		{
+			"message": "NW: full-size footnote initially",
+			"ok": true
+		},
+		{
+			"message": "NW: authored subject, verdict and percentage",
+			"ok": true
+		},
+		{
+			"message": "NW: assigned address footer",
+			"ok": true
+		},
+		{
+			"message": "NW: erasure changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NW: controls and four reading fields survive erasure",
+			"ok": true
+		},
+		{
+			"message": "NW: cover stands in front of printed footer",
+			"ok": true
+		},
+		{
+			"message": "NW: witness changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NW: controls and four reading fields survive witness",
+			"ok": true
+		},
+		{
+			"message": "NW: symbolic eye and station structure present",
+			"ok": true
+		},
+		{
+			"message": "NW: footnote changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NW: controls and four reading fields survive footnote",
+			"ok": true
+		},
+		{
+			"message": "NW: button 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "NW: button 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "NW: button 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "NE: full-size footnote initially",
+			"ok": true
+		},
+		{
+			"message": "NE: authored subject, verdict and percentage",
+			"ok": true
+		},
+		{
+			"message": "NE: assigned address footer",
+			"ok": true
+		},
+		{
+			"message": "NE: erasure changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NE: controls and four reading fields survive erasure",
+			"ok": true
+		},
+		{
+			"message": "NE: cover stands in front of printed footer",
+			"ok": true
+		},
+		{
+			"message": "NE: witness changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NE: controls and four reading fields survive witness",
+			"ok": true
+		},
+		{
+			"message": "NE: symbolic eye and station structure present",
+			"ok": true
+		},
+		{
+			"message": "NE: footnote changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "NE: controls and four reading fields survive footnote",
+			"ok": true
+		},
+		{
+			"message": "NE: button 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "NE: button 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "NE: button 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SW: full-size footnote initially",
+			"ok": true
+		},
+		{
+			"message": "SW: authored subject, verdict and percentage",
+			"ok": true
+		},
+		{
+			"message": "SW: assigned address footer",
+			"ok": true
+		},
+		{
+			"message": "SW: erasure changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SW: controls and four reading fields survive erasure",
+			"ok": true
+		},
+		{
+			"message": "SW: cover stands in front of printed footer",
+			"ok": true
+		},
+		{
+			"message": "SW: witness changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SW: controls and four reading fields survive witness",
+			"ok": true
+		},
+		{
+			"message": "SW: symbolic eye and station structure present",
+			"ok": true
+		},
+		{
+			"message": "SW: footnote changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SW: controls and four reading fields survive footnote",
+			"ok": true
+		},
+		{
+			"message": "SW: button 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SW: button 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SW: button 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SE: full-size footnote initially",
+			"ok": true
+		},
+		{
+			"message": "SE: authored subject, verdict and percentage",
+			"ok": true
+		},
+		{
+			"message": "SE: assigned address footer",
+			"ok": true
+		},
+		{
+			"message": "SE: erasure changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SE: controls and four reading fields survive erasure",
+			"ok": true
+		},
+		{
+			"message": "SE: cover stands in front of printed footer",
+			"ok": true
+		},
+		{
+			"message": "SE: witness changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SE: controls and four reading fields survive witness",
+			"ok": true
+		},
+		{
+			"message": "SE: symbolic eye and station structure present",
+			"ok": true
+		},
+		{
+			"message": "SE: footnote changes presentation, not claim or position",
+			"ok": true
+		},
+		{
+			"message": "SE: controls and four reading fields survive footnote",
+			"ok": true
+		},
+		{
+			"message": "SE: button 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SE: button 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "SE: button 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Moving a pinned panel updates its coordinates, not its authored verdict",
+			"ok": true
+		},
+		{
+			"message": "Invalid address preserves selection; restored position restores footer",
+			"ok": true
+		},
+		{
+			"message": "Repeated address changes do not accumulate children",
+			"ok": true
+		},
+		{
+			"message": "Unconfigured readouts retain legacy passive presentation",
+			"ok": true
+		},
+		{
+			"message": "Arrival gate granted before walking",
+			"ok": true
+		}
+	],
+	"collections": [],
+	"creature_scope": "Creature and descendants paused only in this private comparison probe; no live hazard, bite or continuous play verification.",
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"room": "SpeculativeComputation_Situated_Computation",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-nw.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-ne.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-sw.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-se.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-covered.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Situated_Computation/situated-witness.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.0,
+						0.0,
+						3.73333096504211
+					],
+					"shape": "@CollisionShape3D@252:<CollisionShape3D#390741363527>"
+				}
+			],
+			"end": [
+				5.0,
+				0.000936145894229412,
+				3.73333096504211
+			],
+			"passed": true,
+			"tag": "entry",
+			"target": [
+				5.0,
+				0.1,
+				3.8
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						3.67010474205017,
+						0.0,
+						2.53805565834045
+					],
+					"shape": "@CollisionShape3D@241:<CollisionShape3D#390372264753>"
+				}
+			],
+			"end": [
+				3.67010474205017,
+				0.000170901417732239,
+				2.53805565834045
+			],
+			"passed": true,
+			"tag": "NW controls",
+			"target": [
+				3.63,
+				0.1,
+				2.5
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						4.97099924087524,
+						0.0,
+						4.45771980285645
+					],
+					"shape": "@CollisionShape3D@262:<CollisionShape3D#391076907867>"
+				}
+			],
+			"end": [
+				4.97099924087524,
+				0.000360965728759766,
+				4.45771980285645
+			],
+			"passed": true,
+			"tag": "return from NW",
+			"target": [
+				5.0,
+				0.1,
+				4.5
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						7.45557546615601,
+						0.0,
+						3.64546012878418
+					],
+					"shape": "@CollisionShape3D@255:<CollisionShape3D#390842026829>"
+				}
+			],
+			"end": [
+				7.45557546615601,
+				0.000170901417732239,
+				3.64546012878418
+			],
+			"passed": true,
+			"tag": "NE controls",
+			"target": [
+				7.5,
+				0.1,
+				3.63
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.0676417350769,
+						0.0,
+						4.96280431747437
+					],
+					"shape": "@CollisionShape3D@263:<CollisionShape3D#391110462301>"
+				}
+			],
+			"end": [
+				5.0676417350769,
+				0.0000897124409675598,
+				4.96280431747437
+			],
+			"passed": true,
+			"tag": "return from NE",
+			"target": [
+				5.0,
+				0.1,
+				5.0
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						2.54452753067017,
+						0.0,
+						6.34559869766235
+					],
+					"shape": "@CollisionShape3D@280:<CollisionShape3D#391680887679>"
+				}
+			],
+			"end": [
+				2.54452753067017,
+				0.000170901417732239,
+				6.34559869766235
+			],
+			"passed": true,
+			"tag": "SW controls",
+			"target": [
+				2.5,
+				0.1,
+				6.37
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						4.93277025222778,
+						0.0,
+						5.52362585067749
+					],
+					"shape": "@CollisionShape3D@272:<CollisionShape3D#391412452207>"
+				}
+			],
+			"end": [
+				4.93277025222778,
+				0.000171735882759094,
+				5.52362585067749
+			],
+			"passed": true,
+			"tag": "return from SW",
+			"target": [
+				5.0,
+				0.1,
+				5.5
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.33746957778931,
+						0.0,
+						7.45251131057739
+					],
+					"shape": "@CollisionShape3D@294:<CollisionShape3D#392150649755>"
+				}
+			],
+			"end": [
+				6.33746957778931,
+				0.000170901417732239,
+				7.45251131057739
+			],
+			"passed": true,
+			"tag": "SE controls",
+			"target": [
+				6.37,
+				0.1,
+				7.5
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.04566192626953,
+						0.0,
+						8.2732629776001
+					],
+					"shape": "@CollisionShape3D@303:<CollisionShape3D#392452639661>"
+				}
+			],
+			"end": [
+				5.04566192626953,
+				0.000840181077364832,
+				8.2732629776001
+			],
+			"passed": true,
+			"tag": "exit approach",
+			"target": [
+				5.0,
+				0.1,
+				8.3
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.0,
+						0.0,
+						9.60001754760742
+					],
+					"shape": "@CollisionShape3D@313:<CollisionShape3D#392788184001>"
+				}
+			],
+			"end": [
+				5.0,
+				0.000170901417732239,
+				9.60001754760742
+			],
+			"passed": true,
+			"tag": "exit",
+			"target": [
+				5.0,
+				0.1,
+				9.65
+			]
+		}
+	]
+}

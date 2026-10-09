@@ -1,0 +1,369 @@
+{
+  "date": "2026-09-08",
+  "scope": "Manuscripts reconciled against current source files. Root reports engine probes for shared pen/snap behavior and the triangle fan/button; no human room walk or educational acceptance is claimed.",
+  "records": [
+    {
+      "inspected_map_sha256": "c243239ce64ece3e42d9642a9b8773b654f7e36bee3123c7ba426450907c3e69",
+      "room_id": "Point_One",
+      "map_path": "commons/maps/Point_One/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_One/final.md",
+      "original_sha256": "e4de541db397197bf28161d7d939752243694d0a8d19826fe62ddd9885e7d2ed",
+      "source_path": "commons/maps/Point_One/final.md",
+      "staged_sha256": "59a7fa1bea93f7824a34b711e0efca16b57449bcd3b736b6e5efe34c2e3e34e9",
+      "word_count": 1138,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "CoordinateSystem3M",
+        "coordinate_readout",
+        "drag_point_target",
+        "folding_past",
+        "frame_counter_display",
+        "interactive_point_origin_force",
+        "origin"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "8415cba99e4028409e5d1d246eb8d2221bdfff64d2dda9c94b37bf5f3cde52c0",
+      "room_id": "Point_Lines",
+      "map_path": "commons/maps/Point_Lines/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_Lines/final.md",
+      "original_sha256": "f10ea4a0fe09ddc75d04e6f1cda512868efcb32a1c7e468fde1058c5c716182b",
+      "source_path": "commons/maps/Point_Lines/final.md",
+      "staged_sha256": "52df4a9c5fcebdabe9391eb4c78d968f5d7a4d5ba341311a3dbf8227a348eb79",
+      "word_count": 1129,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "do_not_cross_barrier",
+        "grabbable_line",
+        "laser_exploding_sphere",
+        "laser_measure",
+        "line",
+        "line_demo",
+        "parallel_lines",
+        "two_point_ruler",
+        "two_points_line",
+        "walk_this_line_marking"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "b2faed88c51797ffbb37005c0994c7169187ebe2faa6555c9ee8f0d1f180bda5",
+      "room_id": "Point_Trace",
+      "map_path": "commons/maps/Point_Trace/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_Trace/final.md",
+      "original_sha256": "d7f5cbac1f3560042d29202ddd51873fe5a8f6fb9842967cd78fd4d90a805334",
+      "source_path": "commons/maps/Point_Trace/final.md",
+      "staged_sha256": "85c0557b5442426fb9c54cc71881a1205acf4ee02ecb4a897bb56a3b1f7ce593",
+      "word_count": 1178,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "automatic_writing_desk",
+        "draw_dot",
+        "draw_stick",
+        "hand_telemetry_diptych",
+        "whiteboard"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "3cc38535ee06d60ad05b2f79728ee556c9a38c3ebb25cc6bb38170b092cdfe26",
+      "room_id": "Point_Line_Grid",
+      "map_path": "commons/maps/Point_Line_Grid/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_Line_Grid/final.md",
+      "original_sha256": "29eb901553de45c0e8d9663499ab10a24a40644369166c4de27e33b42f8de113",
+      "source_path": "commons/maps/Point_Line_Grid/final.md",
+      "staged_sha256": "076867a36aa90b703682068d05c1b0e2add20b47b873875ec7bfb2be3d785066",
+      "word_count": 1121,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "floating_sphere_field",
+        "grab_sphere_point_snap",
+        "grid_lines",
+        "player_trace",
+        "room_grammar"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "43da38706c3220c73b5db1826c66fc819f1ebd1fe83a13463d249e18c00d9239",
+      "room_id": "Point_Triangle_Context",
+      "map_path": "commons/maps/Point_Triangle_Context/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_Triangle_Context/final.md",
+      "original_sha256": "f77c54ce6671bbd4ae4030350116da78a53a9d679cfbe689d130c2d79d722e3c",
+      "source_path": "commons/maps/Point_Triangle_Context/final.md",
+      "staged_sha256": "df796198b31ac836bc8d9be26946cb20b84ce63a08aa868868f6363749154b98",
+      "word_count": 1230,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "draw_triangle_faces",
+        "folded_strip",
+        "interactivetriangle",
+        "parasol_triangle",
+        "pythagorean_triangle_angles",
+        "quad",
+        "quad_line_puzzle",
+        "triangle",
+        "triangle_line_puzzle",
+        "triangleprofiles"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false,
+      "previous_inspected_map_sha256": "e12919da521fd1a71d43795ff730fd47370acd2a34c2917294af92b0934615ca",
+      "map_reinspection": "Reviewed all current placed tokens and coordinates. Required tagged artifacts remain. New fetish_portal:0:1.5:1#color:eb0d85 at column6,row22 is a faceted non-transporting torus; registry and scene/script inspected. Prose claims no fixed route or teleportation. Physical reachability remains unverified."
+    },
+    {
+      "inspected_map_sha256": "5f3618e9660d5192286f40f9ced1dc48fbfa71264da4c01b422d03992ca653d1",
+      "room_id": "Primitives_Polythedra",
+      "map_path": "commons/maps/Primitives_Polythedra/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Primitives_Polythedra/final.md",
+      "original_sha256": "f4d623850ba7977f1699859eb816529e9e84e2097924b191899b39b9a5b671ba",
+      "source_path": "commons/maps/Primitives_Polythedra/final.md",
+      "staged_sha256": "c3c396b74731d66701773d57a340e45d1df64fdfce2be0dacc65e6151d3e8825",
+      "word_count": 1156,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "cube_scene",
+        "diamonds",
+        "grab_tetrahedron",
+        "grab_trihedron",
+        "prism_block",
+        "pyramid_edit",
+        "rock_scanner",
+        "rock_spawner"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "fbd4a575f99985151911f3297b5eb9519886873ab2f7bbbe6fb44acb08247c96",
+      "room_id": "Point_Animatedcube",
+      "map_path": "commons/maps/Point_Animatedcube/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Point_Animatedcube/final.md",
+      "original_sha256": "3261740546a5b3848bcb2efa9ca2e6ad72bfc2cf9d478650ab30857016259239",
+      "source_path": "commons/maps/Point_Animatedcube/final.md",
+      "staged_sha256": "6b11ecd7cb601627f3136cd6785e4a47c809a762abd7d443cca38d5159d14d1f",
+      "word_count": 1024,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "animatedcubebuilder",
+        "crate",
+        "cube_lines",
+        "first_phosphor",
+        "first_shadow",
+        "glove_box",
+        "hangar_supply_pile",
+        "polyhedron_nets_cube",
+        "station_crates",
+        "wooden_pallet"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "8cbcd5d2ff400e9c7a56050376d06c993d9643a11a25e0046d68eaad07e5652a",
+      "room_id": "Primitives_Ignorance",
+      "map_path": "commons/maps/Primitives_Ignorance/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Primitives_Ignorance/final.md",
+      "original_sha256": "33b465404bf730fe20a542a5e00f75954ad591d529435a75a758898ad6c6cb30",
+      "source_path": "commons/maps/Primitives_Ignorance/final.md",
+      "staged_sha256": "50f5c27364963261313c35ef9b2f31f5dcef8a9f45d17c8451939258f19eea8e",
+      "word_count": 1136,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "budget_of_smoothness",
+        "capsule",
+        "grab_octahedron",
+        "hole_with_cones",
+        "platonic_grabbables",
+        "righttriangle",
+        "roughrock",
+        "sphere",
+        "sphere_high",
+        "sphere_low",
+        "sphere_mid",
+        "star_primitive",
+        "truncatedtetrahedron"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "d53f3585b2c878c14d56a14de82f6598fb65933a2c6f902a08eb9b4b41106528",
+      "room_id": "Primitives_Portals",
+      "map_path": "commons/maps/Primitives_Portals/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Primitives_Portals/final.md",
+      "original_sha256": "1357c7047cf282c3240ef5c9e464f70fd9be405c53ede20cb38f12341aaa2996",
+      "source_path": "commons/maps/Primitives_Portals/final.md",
+      "staged_sha256": "9c121f63027df3b2e4cb998fa51ec0b1f089b71d8932752c3c21f3067e0f3806",
+      "word_count": 907,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "achilles_tortoise",
+        "capsule",
+        "combine_portals"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    },
+    {
+      "inspected_map_sha256": "57e53ec3d4fdb5287dc17668d8ed3279cd109a86b329113a997bfcd60d9f5943",
+      "room_id": "Primitives_Melencolia",
+      "map_path": "commons/maps/Primitives_Melencolia/map_data.json",
+      "staged_path": "ada_run/museum_iteration/prose/Primitives_Melencolia/final.md",
+      "original_sha256": "e7cb8c8e3b9cf741a0aee373e71cdba25f75c0e09f369c607f5ac58e91d6fecb",
+      "source_path": "commons/maps/Primitives_Melencolia/final.md",
+      "staged_sha256": "b768fcd3370019f986f6d78a33f992eeb89fc9e3194569115f6c9d2f08feb363",
+      "word_count": 1272,
+      "source_unchanged_at_staging": true,
+      "inspected_map_still_current": true,
+      "placed_artifact_tags": [
+        "bigframe",
+        "code_display",
+        "diamondtoruscollection",
+        "durer_scene",
+        "prism_block",
+        "pyramid",
+        "pyramidlong",
+        "snap_pyramid_puzzle"
+      ],
+      "unplaced_tags": [],
+      "runtime_verified": false
+    }
+  ],
+  "review_notes": {
+    "scope": "Ten staged primitives manuscripts, no live final.md files edited by this writer. Preserve original SHA-256 guards in manifest.json before integration.",
+    "status": "source_reconciled_manuscripts_for_review",
+    "root_reported_engine_evidence": [
+      "Snap and pen readouts: 66 engine assertions reported passed by root, including transformed-parent tip drop, retained-table visibility and capacity behavior.",
+      "Triangle fan: actual timed placement with one scene, pointer-pressed NEW OUTLINE button, same six-point planar L with starts A/B; root reports both completed faces retained and reproducible overspill for B. This does not establish human gesture usability."
+    ],
+    "rooms": {
+      "Point_One": {
+        "change": "Retain arrival, readable-number, target-as-request and reward-as-material arguments; begin from a movable point and predictions; explain after each gesture. Distinguish position, mesh, collider and force variant. Reference world versus local frame explicitly.",
+        "sources": [
+          "commons/primitives/point/interactive_point_origin.gd",
+          "commons/primitives/point/interactive_point_origin_force.gd",
+          "commons/primitives/point/coordinate_readout.gd",
+          "commons/artifacts/drag_point_target/drag_point_target.gd"
+        ],
+        "check_next": "One held point should stay associated with readout/frame/target; confirm force activation does not obscure essential observation."
+      },
+      "Point_Lines": {
+        "change": "Lead with connection experiment, then segment geometry, instruction/enforcement and measurement; remove absent redline tag. Retain rod address-jitter and destructive measurement as concrete critical variations.",
+        "sources": [
+          "commons/primitives/snappoint/demos/line_demo.gd",
+          "commons/primitives/snappoint/snap_point.gd",
+          "commons/primitives/snappoint/snap_connection_manager.gd",
+          "commons/artifacts/two_point_ruler/two_point_ruler.gd",
+          "commons/primitives/laser_measure/grab_laser_measure.tscn"
+        ],
+        "build_gap": "two_point_ruler still draws a measurement instruction but supplies no hand/proximity connection to measure(). Its intended causal effect on the second block should be made discoverable in a future paired build, not silently treated as finished. The manuscript treats the visible fixed span as support and identifies the unimplemented extension.",
+        "check_next": "Walk connection, paint/barrier and laser; validate that the pointer-versus-measuring-beam distinction is legible."
+      },
+      "Point_Trace": {
+        "change": "Remove every-frame/200-frame/age-fade/permanent-board claims and absent 3t/origin/sphere-field tags. Explain 5mm displacement gate, 4096 accepted-point cap, quantized duplicate suppression and 10/40/80mm variants; retain transmissible-data/irrecoverable-event argument. Add source-aware secondary hand/head recording comparison.",
+        "sources": [
+          "commons/primitives/point/draw_dot.gd",
+          "commons/primitives/point/draw_dot.tscn",
+          "commons/primitives/point/draw_stick.tscn",
+          "commons/primitives/automatic_writing_desk/automatic_writing_desk.gd",
+          "commons/primitives/hand_telemetry_diptych/hand_telemetry_diptych.gd",
+          "commons/primitives/hand_telemetry_display/hand_telemetry_display.gd"
+        ],
+        "check_next": "Free-space loop/pause/coarse gesture on actual held pens; confirm table orientation/legibility; separately verify board projection and TRACKING/DEMO FEED states."
+      },
+      "Point_Line_Grid": {
+        "change": "Match proposed hand-before-walk primary order. Teach 5cm snap tip/table first, 1m X/Z walking lattice second. Replace permanent visited-cell dictionary and axis-only path reconstruction with bounded ordered positions/times/speeds; ghost is a sampled reference, and height is retained with offset. Preserve chosen-purpose challenge without equating quantization with every social use of it.",
+        "sources": [
+          "commons/primitives/point/grab_sphere_point_snap.gd",
+          "commons/primitives/point/grab_sphere_point_snap.tscn",
+          "commons/primitives/point/player_trace.gd",
+          "commons/primitives/point/player_trace.tscn"
+        ],
+        "check_next": "Both snap consumers need live room table visibility; player_trace follows active rig origin, which still requires actual desktop and VR route testing."
+      },
+      "Point_Triangle_Context": {
+        "change": "Establish first triangle and non-collinearity before applications; distinguish editable lengths from rigid rods; add exact L-shaped fan counterexample and new-outline control; retain side/winding and quad-fold relations. Treat wrong fill as a failure to preserve the fixed polygon boundary, not an alternative mathematical interior.",
+        "sources": [
+          "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+          "commons/primitives/interactivetriangle/interactivetriangle.gd",
+          "commons/primitives/point/draw_triangle_faces.gd",
+          "commons/primitives/point/draw_triangle_faces.tscn",
+          "tools/probes/museum_triangle_fan.gd",
+          "ada_run/museum_iteration/evidence/triangle_fan.json"
+        ],
+        "check_next": "A human can reach the new-outline button, release/press/reacquire, place intended points with the one-second cadence and see both retained fills. The concurrently edited map was reinspected: required chapter artifacts remain, their placements moved, and a faceted non-transporting fetish_portal with a pink color override was added at column6,row22. No chapter route or portal claims depend on the earlier layout; physical reachability remains unverified."
+      },
+      "Primitives_Polythedra": {
+        "change": "Retain corner/enclosure argument; fix three-face trihedron with absent base and convex-hull collision; five-handle pyramid; Euler2 and720degree defects restricted to appropriate surface class; prism blocking/support remains an authored investigation. Remove universal closure/volume claims and irregularity-as-uncomputed claim.",
+        "sources": [
+          "commons/primitives/trihedron/grab_trihedron.gd",
+          "commons/primitives/trihedron/grab_trihedron.tscn",
+          "commons/primitives/tetrahedron/grab_tetrahedron.tscn",
+          "commons/primitives/pyramid/pyramid_edit.gd",
+          "commons/primitives/prismes/prism_block.tscn"
+        ],
+        "check_next": "Visual opening must be legible; do not infer hand collision from collider source alone. Validate prism route and actual support before promising traversal."
+      },
+      "Point_Animatedcube": {
+        "change": "Follow outline→repeating net→builder; use two builders as control/deformation comparison. Distinguish six geometric faces from twelve rendering triangles plus diagonals, constant connection list from valid cube/enclosure, and whole-object movement from folding/reveal/deformation. Retain YET/composition argument while admitting current arrangements already compose objects.",
+        "sources": [
+          "commons/primitives/animatedcubebuilder/animatedcubebuilder.gd",
+          "commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn",
+          "commons/infoboards_3d/visualizations/polyhedron_nets.gd"
+        ],
+        "check_next": "No public replay button was established for builder. Manuscript offers counting the completed layers if initial assembly was missed; this preserves encounter but does not solve replay design. Confirm two builder placements reachable and meaningful as control/variation."
+      },
+      "Primitives_Ignorance": {
+        "change": "Make actual sphere trio and budget counter the primary experiment. Correct low1ring/10radials,mid7/7,high16/16; sphere approximation is not generally prism; regular solids do not look identical from every view; odd half-turn failure is a specific symmetry test. Keep omitted-feature and deliberate-facet critical questions.",
+        "sources": [
+          "commons/primitives/godotmeshes/sphere_low.gd",
+          "commons/primitives/godotmeshes/sphere_mid.gd",
+          "commons/primitives/godotmeshes/sphere_high.gd",
+          "commons/primitives/capsule/capsule.tscn",
+          "commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd",
+          "commons/primitives/platonic_grabbables.tscn"
+        ],
+        "check_next": "Counter invoice currently derives from parameters, not mesh buffers; header comment has another count list. Validate actual buffer counts if exact invoices become acceptance criteria. Text calls them calculated displayed budgets."
+      },
+      "Primitives_Portals": {
+        "change": "Retain walk toward finite refinement and reverse-reading challenge. Correct twenty tori final counts22/41; distinguish planar polygon perimeter explanation from actual two-axis torus refinement. Achilles runs ten display stages, not54step rounding arrival. Restrict topology counts and distinguish aperture from teleportation.",
+        "sources": [
+          "commons/primitives/combines/combine_portals.gd",
+          "commons/primitives/combines/combine_portals.tscn",
+          "commons/primitives/combines/achilles_tortoise.gd",
+          "commons/primitives/combines/achilles_tortoise.tscn"
+        ],
+        "check_next": "Portal ladder footprint is large (nineteen4.5m intervals). Verify accessible comparison route and display before claiming all twenty can be walked. Numeric floating saturation remains explicitly optional."
+      },
+      "Primitives_Melencolia": {
+        "change": "Lead with connection-recognition versus geometric/purpose success. Retain mastery/desire/frame/composition readings as interpretations. Fix detector's complete absence of geometry checks, arbitrary4-entry magic-square claim, and collection-wide Euler2 claim. Invite choice of purpose or refusal of further refinement.",
+        "sources": [
+          "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+          "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+          "commons/primitives/snappoint/puzzles/snap_point_puzzle_base.gd",
+          "commons/primitives/snappoint/snap_connection_manager.gd",
+          "commons/scenes/demos/durer/DurerScene.tscn",
+          "commons/scenes/demos/durer/DurerPolyhedron.gd",
+          "commons/scenes/demos/durer/MagicSquare.gd"
+        ],
+        "build_gap": "Original prose/intent promises platform creation, but current scene enable_spawn defaultsfalse,spawn_scene_path empty,trigger_tag empty. Completion locks and then hides puzzle. Root notified so platform can be restored deliberately; until then manuscript identifies it as proposed extension rather than promised result.",
+        "check_next": "Actual puzzle construction/completion and intended support result, bigframe passage, outgoing route; validate historical visual reconstruction separately if exact historical geometry is claimed later."
+      }
+    }
+  }
+}

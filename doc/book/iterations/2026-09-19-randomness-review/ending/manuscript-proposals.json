@@ -1,0 +1,14 @@
+[
+  {
+    "path": "commons/maps/Random_Pheromone/final.md",
+    "old": "Choose a small patch of terrain and follow more than one visit. Compare it with a quieter patch nearby. Watch where traces gather and where the surface begins to rise, then look for later walkers returning through those regions.",
+    "new": "At the console, leave ATTRACT selected and press +1 STEP a few times. Follow one cyan marker from place to place. Use +20 STEPS to watch a longer interval accumulate, then choose a small patch of terrain and compare it with a quieter patch nearby. Watch where traces gather and where the surface begins to rise, then look for later walkers returning through those regions.",
+    "reason": "Expose current visitor steps before explaining their mechanism; apply after actual-museum control validation."
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/final.md",
+    "old": "A walker that avoided the strongest trace would make a different world from the same act of leaving marks. That comparison is an available direction for development rather than a control offered here. Next, the noise mixer returns to field construction: several contributions at different scales will combine without depending on a history of visits.",
+    "new": "Note the step count, press AVOID and advance to the same count. The terrain and scent clear, and the four walkers begin again from the same seeded positions; this time the signal-guided choice favours the weakest scent. Compare the resulting visits before deciding what the changed rule did. REPLAY restarts the selected rule. Both experiments use the same fixed decay interval per step, although their paths can cause later random draws to be used differently at the boundary. Next, the noise mixer returns to field construction: several contributions at different scales will combine without depending on a history of visits.",
+    "reason": "Existing avoidance rule now becomes a bounded comparison, with honest replay scope; apply after runtime validation."
+  }
+]

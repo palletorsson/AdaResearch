@@ -1,0 +1,89 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "name": "commons/artifacts/game_of_life_petri/game_of_life_petri.gd unchanged",
+      "passed": true
+    },
+    {
+      "name": "commons/artifacts/game_of_life_petri/life_address_receiver.gd unchanged",
+      "passed": true
+    },
+    {
+      "name": "commons/artifacts/game_of_life_petri/game_of_life_petri.tscn unchanged",
+      "passed": true
+    },
+    {
+      "name": "commons/maps/CA_BeyondBinary/critical.md unchanged",
+      "passed": true
+    },
+    {
+      "name": "commons/maps/sequences/cellularautomata.json unchanged",
+      "passed": true
+    },
+    {
+      "name": "Code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "Artifact anchors retained",
+      "passed": true
+    },
+    {
+      "name": "Existing TRACE passage retained",
+      "passed": true
+    },
+    {
+      "name": "Map only adds Life flag and restages retained hex",
+      "passed": true
+    },
+    {
+      "name": "All other native roots and placements retained",
+      "passed": false
+    },
+    {
+      "name": "Hex _initialize_grid unchanged",
+      "passed": true
+    },
+    {
+      "name": "Hex _step_generation unchanged",
+      "passed": true
+    },
+    {
+      "name": "Hex _count_neighbors unchanged",
+      "passed": true
+    },
+    {
+      "name": "Hex _update_visuals_layer unchanged",
+      "passed": true
+    },
+    {
+      "name": "Hex _add_colliders_for_current_layer unchanged",
+      "passed": true
+    },
+    {
+      "name": "Primary roles retained",
+      "passed": true
+    },
+    {
+      "name": "Own core mutation touches only this hall",
+      "passed": true
+    },
+    {
+      "name": "Canonical image unmodified native PNG",
+      "passed": true
+    },
+    {
+      "name": "Current hashes match metadata",
+      "passed": true
+    },
+    {
+      "name": "All native checks pass",
+      "passed": true
+    },
+    {
+      "name": "No GDScript errors",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+--- before/doc/book/captures/randomness/randomness-book.manifest.json
++++ doc/book/captures/randomness/randomness-book.manifest.json
+@@ -1,6 +1,6 @@
+ {
+-  "captured_at": "2026-09-25T07:37:18.461924+00:00",
+-  "base_commit": "5440a631279f8e603f93b49ffe92910f25c4ee69",
++  "captured_at": "2026-09-25T08:48:32.418723+00:00",
++  "base_commit": "da1d05422c4dc62d53d7496fe73ba30861c8d181",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+   "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+@@ -30,22 +30,22 @@
+     {
+       "map": "Random_Cubes",
+       "path": "commons/maps/Random_Cubes/final.md",
+-      "sha256": "0d36c9ef8c36a03fecabe5f131c6367503be84c2ae47ce91f90d6b6c514459d6"
++      "sha256": "d83c7d9f2ae33674898bdf6e6667ba32eebffcba4c79f075157d1328bd65d28f"
+     },
+     {
+       "map": "Random_Rotate_Random_XYZ",
+       "path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+-      "sha256": "a418a65eab6c5a7d9bb107880a9e2c9f2c4d126d0f02aca176a55111373bb4b8"
++      "sha256": "dd886638e09496e2e7f21af471d78d58e9882ee36cddc9d0819475ab5b7c023d"
+     },
+     {
+       "map": "Random_Walk",
+       "path": "commons/maps/Random_Walk/final.md",
+-      "sha256": "e56725db298952ca75b484b65804d5d13a1170cb426c4beb87bd7f96e8072faf"
++      "sha256": "4eb597de71413b34bafa9734aac4d0d4d07cd7fe18158726c05be7240f3ac0b9"
+     },
+     {
+       "map": "Random_Gaussian",
+       "path": "commons/maps/Random_Gaussian/final.md",
+-      "sha256": "269ed77abdc4e1eecbe165414cfc4a5447cf83ed1ef3fec721b608b24c7cbcd2"
++      "sha256": "22b1decebfcd8446d76aaf5ceb8ce6f087ead81630db35e00e450c34a7bdb10e"
+     },
+     {
+       "map": "Random_Mushrooms",
+@@ -78,5 +78,5 @@
+       "sha256": "3656ca51bde4cd1b6782f89a043e1ddae13bcb5b7f8a54ad9b47178f064556e6"
+     }
+   ],
+-  "output_sha256": "793639e93a37245f79fc80d44d94cfc497e07b96865740f98f3c5d1b12e1b8f9"
++  "output_sha256": "95710c62cf9adda8bdf5b44e283a2887c3ee509672b4da73dc706821fb4583ac"
+ }

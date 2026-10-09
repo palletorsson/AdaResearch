@@ -1,0 +1,236 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial_Pattern · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Tutorial_Pattern">← Tutorial lineage</a></p><h1>Tutorial Pattern</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Tutorial_Pattern/final.md">Raw captured source</a></p><pre># The mark and its return
+
+What can change when you keep the painted cells exactly as they are?
+
+In the foundry, a surface could keep an earlier version of a pattern. Here two fields stay with the same source. Pass the patterned plates in the main room and take the opening in the east wall into the side bay. Two framed fields flank an editor. Both contain the same red bend, the blue corner and the small ochre interruption. Follow the red bend across each field. Does it always face the same way?
+
+&lt;!-- @pattern_maker_station --&gt;
+
+The sixteen buttons on the console show the source. Read them from the top row down. Find the red bend there, then find it again on the left panel. Follow it one tile to the right. The bend returns with the same facing.
+
+On the other panel, the next bend faces back. The painted source still has only sixteen cells. Nothing in that little grid has turned over. Where did the other facing come from?
+
+Press PM. Look at the floor, then back at the source buttons. Press P1 and return. The floor changes its arrangement; the two wall panels keep their respective rules. They let you compare what the floor has just left with what it has become.
+
+Now press FLIP X. Watch the source this time. Its blue corner crosses to the other side. Both wall fields respond, although their rules remain P1 and PM. One reversal left the painted cells alone; the other has rearranged them. The little grid is where you can tell them apart.
+
+![The same pair of museum panels before and after flipping their shared source.](/book-review/doc/book/iterations/2026-09-28-pattern-a-facing-return/source-pair.png)
+
+*FLIP X changes the little source and both fields. The left field continues to translate; the right continues to reverse alternate columns.*
+
+P1 repeats by translation. In this station&#x27;s PM rule, alternate columns sample the source in reverse across x. The shader begins by separating a position into the tile it belongs to and its position within that tile:
+
+```glsl
+vec2 st = uv * tile_scale;
+int tile_x = int(floor(st.x));
+vec2 local = fract(st);
+```
+
+The whole part counts tiles. The fractional part returns to a place inside one tile. For translation, that local address is enough. For the reflected field, one additional condition changes where the lookup goes:
+
+```glsl
+if (imod(tile_x, 2) == 1) {
+    local.x = 1.0 - local.x;
+}
+```
+
+These lines run in the wallpaper shader used by the station. They change an address before it reads the source texture. They do not repaint the stored cells. The alternating facing belongs to the relation between copies.
+
+FLIP X instead rebuilds the stored rows from the opposite end:
+
+```gdscript
+row.append(_grid_data[y][tile_size - 1 - x])
+```
+
+The line takes a cell from the opposite end of its row. You saw its result in the source buttons. Press FLIP X again. The second reversal brings every cell back. Try ROTATE, then follow the corner through four presses. UNDO takes you back one editing operation; RESET restores the starting mark and the translating floor. Reset can itself be undone.
+
+Choose a paint colour and press a source cell. Put a solitary mark where the motif was quiet. Both fields receive it. Step back. Your interruption has become regular too.
+
+A repeating system can make room for an unexpected mark while giving that mark a schedule. What would it take to let one copy depart without sending the departure everywhere? In the foundry you could hold a receiving surface apart from its source. Here the source is shared deliberately, so an edit travels through every copy. Neither arrangement answers every desire.
+
+The panels and floor give each tile forty centimetres. The floor has more copies because it extends further. On the reflected panel, facing alternates across tile columns: the two-column cycle is wider than the individual tile. A boundary around one copy does not necessarily enclose the whole repeating relation.
+
+&lt;!-- @ --&gt;
+
+The mark is made of cells, but the apparent continuity between copies is another decision. This lesson uses nearest-cell sampling, so a colour holds its square until another cell begins. A softer-looking edge would need a different account of how those stored values become visible. Sixteen cells have never been the whole surface, however completely they seem to occupy it.
+
+A square can turn and seem not to have moved. Here a symmetrical source can conceal a reversal. Add a difference and try again. The useful mark may be the one that refuses to look the same from every direction.
+
+In Array_Patterns, the repeated field extends along an environment. Keep these two questions available as you enter: what rule relates the copies, and what surface gives those relations a place to appear?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Tutorial_Pattern/tutorial.md">Raw captured source</a></p><pre># One source, two rules
+
+Begin at the Pattern Maker in the side bay. Find the red bend in the sixteen source cells, then follow it across the two panels. What stays the same? What changes its facing?
+
+1. Press PM, then P1. Inspect the floor and source after each press. The reference panels keep their rules.
+2. Press FLIP X. This time watch the source cells. Press it again to return.
+3. Follow the blue corner through four ROTATE presses.
+4. Choose a paint colour, then press a source cell. Find its copies in both fields.
+5. Use UNDO to reverse an operation. RESET returns the starting motif and P1 floor; UNDO can reverse that reset too.
+
+Make the floor-rule comparison and the source reflection visible before explaining either address operation. The shader splits a position into a tile index and a local address. Translation keeps that address. This reflection rule reverses x on alternate columns. The source-reflection button instead rebuilds each source row in reverse order. The technical chapter contains the corresponding implementation excerpts.
+
+Each displayed tile spans 40 cm, whether on a panel or the floor. A reflected pair spans two tile columns. Make a source symmetrical enough to conceal a reversal, then break its symmetry with one mark and compare again.
+
+Array_Patterns next asks how these repeated relations meet an environment. Headset and continuous gesture work remain deferred; these controls also accept the desktop pointer.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Tutorial_Pattern/technical.md">Raw captured source</a></p><pre># Tutorial Pattern — keep the source, change the lookup
+
+Pattern_Foundry separated an editable source from its receiving surfaces. Tutorial_Pattern compares two sampling rules for one source; Array_Patterns next extends repetition through an environment.
+
+## The actual station
+
+The primary `pattern_maker_station` is at grid (22,9), rotation 180, floor offset 0. Its `lesson:fixed_motif` configuration attaches `fixed_motif_lesson.gd`. The original exhibits remain in the recovered grid. A three-cell doorway at x17, z10–12 connects the east comparison bay. The map grows from 18 to 28 columns; its 21 rows and previous structure remain, except those doorway cells.
+
+The lesson replaces this instance&#x27;s visible editor with a mounted pointer-capable panel. It disables the old touch polling and old editor collision areas. Unconfigured instances retain their original editor. No shared scene or shader resource is overwritten.
+
+Sixteen buttons edit a 4×4 array of palette indices. Eight paint buttons select a colour. P1 and PM select the floor&#x27;s sampling rule; FLIP X and ROTATE rewrite the source; UNDO restores up to 32 source/rule transactions; RESET restores the asymmetric seed, selected paint and translating floor. Palette selection alone does not add an undo transaction.
+
+## Two fixed references
+
+The framed panels each measure 1.6×1.6 m and show four tile spans per side. The 4×4 m floor shows ten. Both therefore assign 0.4 m to one tile. Each panel owns a separate ShaderMaterial, while both read the same source ImageTexture. The left panel fixes `wallpaper_group=0` (P1); the right fixes `wallpaper_group=2` (PM). Changing the floor&#x27;s rule leaves these references fixed.
+
+The shader addresses a tile using the integer and fractional parts of scaled UV coordinates:
+
+```glsl
+vec2 st = uv * tile_scale;
+int tile_x = int(floor(st.x));
+vec2 local = fract(st);
+```
+
+P1 keeps `local`. PM reverses local x on odd columns:
+
+```glsl
+if (imod(tile_x, 2) == 1) {
+    local.x = 1.0 - local.x;
+}
+```
+
+These excerpts are from `commons/resourses/shaders/wallpaper_tile.gdshader`. They describe this rectangular sampling implementation. The PM field has an alternating two-column cycle; the 40 cm tile span is not a claim that its horizontal translational period is 40 cm.
+
+The lesson creates a local copy of that shader with nearest rather than linear source filtering. This makes each indexed cell legible. Other stations retain their own sampling finish. The shader remains a display tool here; the closing shader room will examine it as its principal object.
+
+## Changing the source
+
+`PatternMakerStation._mirror_x()` constructs new rows from reverse x addresses:
+
+```gdscript
+row.append(_grid_data[y][tile_size - 1 - x])
+```
+
+Its quarter turn uses:
+
+```gdscript
+row.append(_grid_data[tile_size - 1 - x][y])
+```
+
+Both regenerate the small texture, so both fixed reference fields change. A rule switch regenerates that texture too, but its pixel bytes remain identical. The desktop probe checks this distinction directly. A palette value is converted into RGBA8 storage; comparisons allow one byte&#x27;s quantisation.
+
+The implemented lesson exposes source edits and P1/PM comparisons. Earlier descriptions of four stations progressing through waves and a free-form expression parser were not grounded in this station and are preserved in the before snapshot. Supporting exhibits remain independently explorable.
+
+## Verification
+
+`commons/testing/probe_fixed_motif.gd` loads the real museum and presses controls through XRTools pointer events. It verifies source/rule separation, paint, undo, reset, double reflection, four rotations, physical spacing, reachable heights and the bay approach. An unconfigured station retains its legacy editor. Headset comfort and tracked-hand interaction remain deferred at the user&#x27;s request.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Tutorial_Pattern/intent.md">Raw captured source</a></p><pre>Concept: Distinguish changing stored source cells from changing the rule that samples them.
+Sequence role: Third room of tiling, after Pattern_Foundry and before Array_Patterns.
+Primary: pattern_maker_station, with lesson:fixed_motif. One 4x4 source, two fixed P1/PM panels, one selectable floor.
+Discovery: Keep the source fixed and switch the floor rule. Then FLIP X and watch the source itself change. Let both observations precede the code; preserve the red bend, blue corner and ochre interruption as recognisable companions. Paint an interruption and follow it through the repetitions.
+Critical question: What kinds of difference can a shared source distribute, and what happens when a local interruption becomes regular everywhere?
+Next: Carry the rule into Array_Patterns and distinguish repetition from the surface and route that carry it.
+Deferred: tracked-hand gestures, headset comfort, arbitrary contours, garment transfer. A desktop control comparison is available now.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Tutorial_Pattern/critical.md">Raw captured source</a></p><pre># An interruption can acquire a schedule
+
+Paint a difference into the little source. It enters every copy. The system accepts the new mark and immediately makes it regular. This is a specific tension in the station: permission to edit a shared source gives considerable reach, but no control here singles out just one occurrence.
+
+The neighbouring fields also complicate what counts as sameness. Both read the same stored cells; alternate columns in the reflected field face differently. Identity at the source does not require identical orientation at every appearance. Conversely, a symmetrical source can hide an operation. An image that looks unchanged is weak evidence that nothing happened.
+
+These are opportunities for queer reading through an actual intervention. Add an asymmetry that makes a formerly hidden reversal legible. Ask whether a difference belongs to a mark, its facing, its neighbours, or the position from which it is encountered. The apparatus makes some of those relations editable and holds others fixed. It does not assign a degree of queerness to the result.
+
+Keeping the floor and two reference panels together makes the scope of a decision inspectable. The station&#x27;s P1 and PM buttons change the floor while its fixed wall references remain available. FLIP X instead rewrites the source and reaches all three fields. The apparent size of a change does not tell us where it was made or what authority it had.
+
+The source offers sixteen addresses and eight paint values. Its display uses nearest-cell sampling, making the encoding conspicuous. That is a useful choice for this comparison, not a claim that sharp squares are more truthful than filtered edges. A curve, a brush pressure or an irregular seam would require other storage and rendering decisions. There is no unencoded original hiding behind this apparatus that a sufficiently fine grid must finally recover.
+
+The next environment adds another condition: a repeating image can cover a surface whose corners, supports and route do not repeat with it. The rule that organises appearances and the geometry that admits a body may cooperate, or they may disagree. Their disagreement is material for the research.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Tutorial_Pattern/artifacts.md">Raw captured source</a></p><pre># Tutorial Pattern — Artifacts
+*Tiling and Symmetry · second room*
+
+&gt; Arrays hold data. Patterns are data that rhymes. A checkerboard — two values alternating: `grid[y][x] = (x + y) % 2`. A wave — one function swept across indices. Every pattern is an equation the eye solves before the mind catches up.
+
+Primary encounter: `pattern_maker_station` in the east comparison bay, with one editable source, fixed P1/PM reference panels and selectable floor. The book follows this encounter. The other artifacts below remain supporting experiments; this catalogue is not the teaching order.
+
+## Grid Model
+![Grid Model](/scene-catalog/grid_model.png)
+
+Miniature interactive model of the map grid — grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.
+
+`grid_model`
+
+## Pattern Studio Plate
+![Pattern Studio Plate](/scene-catalog/pattern_studio_plate.png)
+
+Full pattern design studio ported from Three.js PatternMaker3D. Cream plate with 4x4 paint grid, 3x3 palette, 6 sliders (motif, group, period, size, zone, site), control buttons, and real-time carpet output using all 17 wallpaper symmetry groups. 10 Italian motifs and 5 historical period palettes.
+
+`pattern_studio_plate`
+
+## Pattern Tile Plate
+![Pattern Tile Plate](/scene-catalog/pattern_tile_plate.png)
+
+Dieter Rams-styled pattern studio. Paint a 4x4 grid, see it tile into a carpet using 17 wallpaper symmetry groups. Integrated cream plate with palette, preview, and symmetry controls.
+
+`pattern_tile_plate`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Mirror Pattern Tile
+![Mirror Pattern Tile](/scene-catalog/pattern_tile_mirror.png)
+
+4x4 tile with mirror symmetry (kaleidoscope effect).
+
+`pattern_tile_mirror`
+
+## Pattern Tile Puzzle
+![Pattern Tile Puzzle](/scene-catalog/pattern_tile_puzzle.png)
+
+Create patterns on a small tile grid. Watch them repeat across a carpet. Handmade meets computational - from textile traditions to pixel art.
+
+`pattern_tile_puzzle`
+
+## Pattern Maker Station
+![Pattern Maker Station](/scene-catalog/pattern_maker_station.png)
+
+Primary in this map. The fixed-motif configuration provides sixteen pointer-capable source cells, eight paints, P1/PM floor selection, source flip/rotation, undo and reset. Two framed panels retain their respective P1 and PM rules. The standard seventeen-group station remains available in other maps.
+
+`pattern_maker_station`
+
+## Panel Bridge — Loom Simulator
+![Panel Bridge — Loom Simulator](/scene-catalog/panel_bridge_loom.png)
+
+Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.
+
+`panel_bridge_loom`
+
+## Script Runner
+![Script Runner](/scene-catalog/script_runner.png)
+
+Live code display with real Expression evaluation! Shows code executing line-by-line with actual results. Scripts: #point, #vector_math, #array, #pattern, #loop. Example: script_runner#point:90:1
+
+`script_runner`
+
+## Pulsar Compact
+![Pulsar Compact](/scene-catalog/pulsar_compact.png)
+
+Smaller pulsar visualization. 20 rows of glass tubes.
+
+`pulsar_compact`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Tutorial_Pattern/summary.md">Raw captured source</a></p><pre># Tutorial Pattern — one source, two rules
+
+The third room in Patterns follows Pattern_Foundry and leads to Array_Patterns. Its primary Pattern Maker stands in an east comparison bay. One editable 4×4 motif feeds a P1 translation panel, a PM reflection panel and a floor that can switch between those rules.
+
+Begin by finding the same asymmetric mark in both panels. Change the floor&#x27;s rule without changing its cells. Then flip or rotate the source and observe all three fields. Paint a local interruption and watch repetition distribute it. Undo and reset make these comparisons reversible.
+
+The sixteen-cell source, eight-colour palette, 40 cm tile span and fixed reference rules delimit this encounter. The original pattern, weaving and array exhibits remain supporting material. Headset and gesture verification are deferred; the book describes the implemented desktop/pointer controls.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Tutorial_Pattern/blurb.md">Raw captured source</a></p><pre>The mark stays; its neighbour turns to face it. Find the reversal without touching the painted cells. Then put one difference into the source and watch the field give it a schedule.
+</pre></section></body></html>

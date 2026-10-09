@@ -1,0 +1,259 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A row with neighbours — tutorial</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#26322e;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1320px;margin:auto;padding:32px}header{padding-top:70px}h1{font-size:clamp(38px,6vw,78px);line-height:1.02;max-width:920px}h2{line-height:1.2;margin-top:2em}p,li{max-width:76ch}.eyebrow,nav,figcaption,label,table,.badge,.legend{font:15px/1.55 system-ui,sans-serif}.eyebrow{letter-spacing:.14em;text-transform:uppercase}nav{display:flex;gap:20px;flex-wrap:wrap}a{color:#256a4e;text-underline-offset:3px}.lead{font-size:26px}.badge{background:#dce9df;padding:9px 15px;display:inline-block;border-radius:4px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:18px 0}img{display:block;width:100%;height:auto}figcaption{padding:10px 0;color:#4f5e56}.viewer{margin:25px 0}.viewer>label{display:inline-block;padding:12px 20px 12px 4px;cursor:pointer}.stage{position:relative}.stage.before{display:none}#before:checked~.after{display:none}#before:checked~.before{display:block}#pins:not(:checked)~.stage .pin{display:none}.pin{position:absolute;transform:translate(-50%,-50%);border:2px solid white;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;background:#9b2852;color:#fff;font:700 15px system-ui;text-decoration:none;box-shadow:0 2px 6px #0008}.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;list-style:none;padding:0}.note{padding:20px;background:#e4e9df;border-left:4px solid #417451}table{border-collapse:collapse;width:100%}th,td{padding:10px;text-align:left;border-bottom:1px solid #bac8bd}pre{background:#192a23;color:#f5f7ec;padding:20px;overflow:auto;font:13px/1.6 Consolas,monospace;tab-size:4}code{font-size:.85em}pre code{font-size:inherit}details{margin:25px 0}footer{border-top:1px solid #c2cabe;font:14px/1.6 system-ui}article{max-width:950px}@media(max-width:800px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}.lead{font-size:23px}}@media print{nav,.viewer>input,.viewer>label{display:none}.stage{display:block!important}body{font-size:11pt}pre{white-space:pre-wrap;color:#111;background:#fff;font-size:8pt}}</style></head><body><header><div class="eyebrow">Endless Museum · Cellular Automata · 8 October 2026</div><h1>A row with neighbours — tutorial</h1><nav><a href="index.html#above">Above the hall</a><a href="index.html#inside">Inside the hall</a><a href="tutorial.html">Full tutorial</a><a href="final.html">Full reflection</a><a href="REPORT.md">Report notes</a></nav></header><main><article><h1>A row with neighbours</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Binary cell state: <code>bool</code>.</li>
+<li>An ordered neighbourhood: left, self, right.</li>
+<li>A rule as eight stored answers.</li>
+<li>A synchronous update: read the old row, then replace it.</li>
+<li>A wrapped boundary.</li>
+<li>Current state and retained history.</li>
+</ul>
+<h2>At the board</h2>
+<p>We are in Endless Museum. The explorer already works. Hold its small black point and move your hand sideways: three marks follow the selected address. The point reads the row; it does not turn a cell on. Press the trigger to advance one generation. The overhead ring receives the same stored rows.</p>
+<p>Choose Rule 90 and a single seed. Pause before stepping. Pick a cell, read its left neighbour, itself and its right neighbour, and predict its next state from the table below. The museum's side plate can check your answer. Our smaller reconstruction leaves that prediction to you.</p>
+<h2>What we carry</h2>
+<p>Trace gave us an array of positions; Grid gave those positions addresses. Arrays let us read and replace stored entries. Here each address holds a Boolean: <code>false</code> or <code>true</code>. The address stays; its state changes. We reuse the pickable sphere from the point lessons as a reader. Its hand position selects an address in the study's local frame.</p>
+<p>Continue on your existing <code>PointStudy</code> node inside the museum, keeping its earlier script as a previous working version. Save both files below in one folder and attach <code>row.gd</code> to that node. Use unit scale. This builds a separate small experiment inside the museum. The camera, lighting, player and XR Tools are already present from Day Zero. No authored mesh, label or scene-child reference is required. Face the node's positive Z side; the board is 0.95 metres above its origin. Keep this experiment separate from the installed explorer while comparing them.</p>
+<h2>Three inputs, eight answers</h2>
+<table>
+<thead>
+<tr>
+<th>Left / self / right</th>
+<th align="right">Address in the answer list</th>
+<th align="right">Next state, Rule 90</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>001</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>010</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>011</td>
+<td align="right">3</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>100</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>101</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>110</td>
+<td align="right">6</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>111</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><code>4 * int(left) + 2 * int(self_cell) + int(right)</code> turns the ordered inputs into an address. <code>int(false)</code> is zero; <code>int(true)</code> is one. Compare <code>100</code> with <code>010</code>: both contain one active cell, but use different entries. A count alone would lose information.</p>
+<p>The installed explorer packs these eight answers into the number 90. We keep them as a readable list. They give the same answers; bit operations can wait.</p>
+<h2>Give every cell the same present</h2>
+<p><code>evolve</code> allocates a separate <code>next</code> array. Its loop reads only <code>old</code>. The result replaces <code>current</code> after all addresses have received an answer. Writing directly into <code>old</code> would allow a freshly changed neighbour to affect a later calculation.</p>
+<p><code>posmod</code> supplies our boundary choice. With 32 cells, the left neighbour of cell 0 is cell 31; the right neighbour of 31 is 0. The calculation joins the ends even when we draw a straight row.</p>
+<p><code>remember</code> puts a copy of the current row at the front of <code>history</code>. This copy is an observation, not another neighbourhood. Twenty-four observations fit on the board. Older ones leave the display while the generation count continues. The newest row is at the far edge; earlier rows extend towards you. History's second dimension describes time, not a second spatial direction in the rule.</p>
+<h2>Complete <code>row.gd</code></h2>
+<p>The first half defines the state and its update. <code>make_display</code> supplies the repeated boxes, marks and label; <code>redraw</code> gives those boxes the stored states. Both are included so the experiment can be reconstructed. MultiMesh is display plumbing here, not another lesson to master before understanding the rule.</p>
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const WIDTH := 32
+const ROWS := 24
+const SPAN := 1.6
+# Inputs:                  000    001   010    011   100   101    110   111
+var answers: Array[bool] = [false, true, false, true, true, false, true, false]
+var seeds: Array[int] = [16]
+var current: Array[bool] = []
+var history: Array[Array] = []
+var generation := 0
+var selected := 16
+var point: XRToolsPickable
+var tiles := MultiMesh.new()
+var reading := Label3D.new()
+var marks: Array[MeshInstance3D] = []
+
+func _ready() -&gt; void:
+    make_display()
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): step())
+    reset()
+    park_point()
+
+func reset() -&gt; void:
+    current = []
+    current.resize(WIDTH)
+    current.fill(false)
+    for address in seeds:
+        assert(address &gt;= 0 and address &lt; WIDTH)
+        current[address] = true
+    generation = 0
+    history.clear()
+    remember()
+    redraw()
+
+func answer(left: bool, self_cell: bool, right: bool) -&gt; bool:
+    var index := 4 * int(left) + 2 * int(self_cell) + int(right)
+    return answers[index]
+
+func evolve(old: Array[bool]) -&gt; Array[bool]:
+    var next: Array[bool] = []
+    next.resize(old.size())
+    for i in range(old.size()):
+        var left := old[posmod(i - 1, old.size())]
+        var right := old[posmod(i + 1, old.size())]
+        next[i] = answer(left, old[i], right)
+    return next
+
+func step() -&gt; void:
+    current = evolve(current)
+    generation += 1
+    remember()
+    redraw()
+
+func remember() -&gt; void:
+    history.push_front(current.duplicate())
+    if history.size() &gt; ROWS:
+        history.pop_back()
+
+func _physics_process(_delta: float) -&gt; void:
+    if point.held():
+        var x := to_local(point.global_position).x
+        selected = clampi(int(floor((x / SPAN + 0.5) * WIDTH)), 0, WIDTH - 1)
+    else:
+        park_point()
+    show_reading()
+
+func park_point() -&gt; void:
+    point.position = Vector3(cell_x(selected), 1.15, 0.90)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ENTER:
+        step()
+        get_viewport().set_input_as_handled()
+
+func cell_x(i: int) -&gt; float:
+    return ((i + 0.5) / WIDTH - 0.5) * SPAN
+
+func make_display() -&gt; void:
+    tiles.transform_format = MultiMesh.TRANSFORM_3D
+    tiles.use_colors = true
+    tiles.instance_count = WIDTH * ROWS
+    var cell := BoxMesh.new()
+    cell.size = Vector3(SPAN / WIDTH * 0.94, 0.014, 1.2 / ROWS * 0.94)
+    tiles.mesh = cell
+    var board := MultiMeshInstance3D.new()
+    board.multimesh = tiles
+    var finish := StandardMaterial3D.new()
+    finish.vertex_color_use_as_albedo = true
+    finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    board.material_override = finish
+    add_child(board)
+    for row in range(ROWS):
+        for col in range(WIDTH):
+            var at := Vector3(cell_x(col), 0.95, -0.6 + (row + 0.5) * 1.2 / ROWS)
+            tiles.set_instance_transform(row * WIDTH + col, Transform3D(Basis.IDENTITY, at))
+    reading.position = Vector3(0, 1.42, -0.66)
+    reading.font_size = 30
+    reading.pixel_size = 0.0017
+    reading.outline_size = 4
+    add_child(reading)
+    for j in range(3):
+        var mark := MeshInstance3D.new()
+        var edge := BoxMesh.new()
+        edge.size = Vector3(SPAN / WIDTH * 0.94, 0.006, 0.006)
+        mark.mesh = edge
+        var ink := StandardMaterial3D.new()
+        ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        ink.albedo_color = Color(&quot;ff80b4&quot;) if j == 1 else Color(&quot;ffd77d&quot;)
+        mark.material_override = ink
+        add_child(mark)
+        marks.append(mark)
+
+func redraw() -&gt; void:
+    tiles.visible_instance_count = history.size() * WIDTH
+    for row in range(history.size()):
+        for col in range(WIDTH):
+            var ink := Color(&quot;87dca5&quot;) if history[row][col] else Color(&quot;243238&quot;)
+            tiles.set_instance_color(row * WIDTH + col, ink)
+    show_reading()
+
+func show_reading() -&gt; void:
+    var left := posmod(selected - 1, WIDTH)
+    var right := posmod(selected + 1, WIDTH)
+    reading.text = &quot;GEN %d / CELL %d\nLEFT %d   SELF %d   RIGHT %d\nMove point: inspect / trigger or Enter: STEP&quot; % [generation, selected, int(current[left]), int(current[selected]), int(current[right])]
+    for j in range(3):
+        marks[j].position = Vector3(cell_x(posmod(selected + j - 1, WIDTH)), 0.963, -0.597)
+</code></pre>
+<h2>Carried <code>point_body.gd</code></h2>
+<p>This is the earlier pickable sphere construction, reduced to an 8.5 cm radius for this desk. The finish and desktop hooks are supplied adapters. <code>held()</code> accepts an XR pickup or the museum's desktop grab; release leaves the reader parked at its selected cell. The point does not collide with or edit the automaton. The complete helper is here so no prior file is silently missing.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Try a change and account for it</h2>
+<ol>
+<li>Keep the table unchanged. Set <code>seeds</code> to <code>[15, 16]</code>. Before running, write the addresses you predict will be active after one step. Run and compare. Explain one address where the two seeds meet.</li>
+<li>Return to <code>[16]</code>. Reverse the traversal by replacing <code>for i in range(old.size()):</code> with <code>for i in range(old.size() - 1, -1, -1):</code>. Predict whether the next row will change. Test both versions from the same seed, keeping the original file.</li>
+<li>Use <code>[0]</code> as the seed. Follow both sides of its first generation and explain where the boundary appears in the drawing.</li>
+</ol>
+<p>Hold the point to inspect. Trigger or Enter advances the reconstruction once. Re-running or calling <code>reset()</code> restores the selected seed and clears its history. Unlike the installed explorer, this small study has no automatic RUN, rule slider or overhead receiver. The same eight-answer list can later receive a different interface.</p>
+<p>Carry the row engine, its explicit boundary and its independent history. In the next hall we will change what a cell can hold and who counts as its neighbour. The rug and growing network remain encounters in the wider museum; we do not need to rebuild them to understand this step.</p></article></main><footer>Native Godot museum captures. Static report controls use CSS. No physical headset or Quest acceptance test.</footer></body></html>

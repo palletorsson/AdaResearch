@@ -1,0 +1,21 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "cube and its desk placed in the requested hall"
+  ],
+  "observations": {
+
+  },
+  "passed": false,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

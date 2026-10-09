@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_Introduction · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_Introduction">← Tutorial lineage</a></p><h1>ISO Introduction</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_Introduction/final.md">Raw captured source</a></p><pre># A boundary made from values
+
+&lt;!-- @voxel_noise_demo --&gt;
+
+Where does this surface come from if nobody drew its outline?
+
+Move around the blue specimen with pink triangle edges. Choose a visible boundary and follow it across several triangular patches. Look for a place where the outline turns sharply, then compare it with a smoother region. The large form is continuous-looking, but its visible surface has been assembled from small pieces.
+
+Choose a short edge between two visible triangles and follow it towards the next patch. Then step back until those small divisions become difficult to distinguish. The overall form remains readable even as its construction recedes from view. Return closer and compare the two readings. Neither distance is the uniquely correct way to see the specimen: one reveals an assembled boundary and the other its larger organisation. What matters is remembering that a smooth-looking silhouette at a distance does not erase the finite pieces from which this display is made.
+
+Before those pieces exist, the generator samples a noise field throughout a volume. Each sample receives a number. A chosen level divides the samples into two classes: values below it and values on the other side. Where neighbouring samples cross that level, the program estimates positions for a boundary.
+
+An isosurface is the set of locations at one selected value of a scalar field. This mesh is a finite approximation to such a set. Its triangles connect estimated crossings; they are not the field itself, and the regions where no triangle appears still have field values.
+
+The porous specimen in the previous room introduced the same distinction between values and visible form. Here, keep it in view while examining the polygon structure. The threshold did not add a decorative skin to a finished cave. It helped determine which boundary would exist in the first place.
+
+Return to the desk. Before pressing LEVEL, choose a neck, an opening or a patch of boundary to watch. LEVEL cycles through 0.50, 0.45 and 0.55. The source field stays fixed: the same seed, noise settings, domain and sample positions. What changes is the value at which we ask for a surface. A piece may retreat, join another or disappear; the button does not promise the same event at every place.
+
+```gdscript
+density = (noise_value + 1.0) * 0.5
+if density &lt; iso_level:
+    config_index |= (1 &lt;&lt; i)
+```
+
+The first line produces a sample value. The comparison in the second classifies one corner; its bit contributes to a local case number. Lowering the level means fewer samples satisfy this particular comparison. It does not mean that every visible opening must grow. Boundary, enclosed volume and passage are different things to inspect.
+
+Press HOLD to leave a second specimen to the right. Then RESET the live one. The held mesh remains where it was: a record of the earlier level and sampling, labelled with both. It has no collision of its own. The live specimen retains its generated collider. CLEAR removes the copy, leaving the live field alone.
+
+SAMPLES asks a different question. It cycles through 24, 16 and 32 sample positions on each axis: 13,824, 4,096 and 32,768 values. The noise recipe and the extent of the sampled box stay the same. The mesh is displayed at 0.18 of its source size, so that box spans 5.76 metres in the hall. More samples refine this approximation; they do not supply knowledge about an original object hidden behind the noise.
+
+A small passage may depend on both level and sampling. Absence from the mesh does not establish absence from the underlying field, particularly where a feature falls between widely separated samples. Nor does a visible hole establish clearance for your body. Hold that uncertainty beside the usefulness of the procedure: a few rules have made a boundary we can encounter, and its exclusions are now specific enough to test.
+
+&lt;!-- @ --&gt;
+
+The next room opens the local construction. Eight corner samples will select a case, and that case will tell the extractor which edges to join.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_Introduction/tutorial.md">Raw captured source</a></p><pre># A boundary made from values
+
+&lt;!-- @voxel_noise_demo --&gt;
+
+Where does this surface come from if nobody drew its outline?
+
+Move around the blue specimen with pink triangle edges. Choose a visible boundary and follow it across several triangular patches. Look for a place where the outline turns sharply, then compare it with a smoother region. The large form is continuous-looking, but its visible surface has been assembled from small pieces.
+
+Choose a short edge between two visible triangles and follow it towards the next patch. Then step back until those small divisions become difficult to distinguish. The overall form remains readable even as its construction recedes from view. Return closer and compare the two readings. Neither distance is the uniquely correct way to see the specimen: one reveals an assembled boundary and the other its larger organisation. What matters is remembering that a smooth-looking silhouette at a distance does not erase the finite pieces from which this display is made.
+
+Before those pieces exist, the generator samples a noise field throughout a volume. Each sample receives a number. A chosen level divides the samples into two classes: values below it and values on the other side. Where neighbouring samples cross that level, the program estimates positions for a boundary.
+
+An isosurface is the set of locations at one selected value of a scalar field. This mesh is a finite approximation to such a set. Its triangles connect estimated crossings; they are not the field itself, and the regions where no triangle appears still have field values.
+
+The porous specimen in the previous room introduced the same distinction between values and visible form. Here, keep it in view while examining the polygon structure. The threshold did not add a decorative skin to a finished cave. It helped determine which boundary would exist in the first place.
+
+Return to the desk. Before pressing LEVEL, choose a neck, an opening or a patch of boundary to watch. LEVEL cycles through 0.50, 0.45 and 0.55. The source field stays fixed: the same seed, noise settings, domain and sample positions. What changes is the value at which we ask for a surface. A piece may retreat, join another or disappear; the button does not promise the same event at every place.
+
+```gdscript
+density = (noise_value + 1.0) * 0.5
+if density &lt; iso_level:
+    config_index |= (1 &lt;&lt; i)
+```
+
+The first line produces a sample value. The comparison in the second classifies one corner; its bit contributes to a local case number. Lowering the level means fewer samples satisfy this particular comparison. It does not mean that every visible opening must grow. Boundary, enclosed volume and passage are different things to inspect.
+
+Press HOLD to leave a second specimen to the right. Then RESET the live one. The held mesh remains where it was: a record of the earlier level and sampling, labelled with both. It has no collision of its own. The live specimen retains its generated collider. CLEAR removes the copy, leaving the live field alone.
+
+SAMPLES asks a different question. It cycles through 24, 16 and 32 sample positions on each axis: 13,824, 4,096 and 32,768 values. The noise recipe and the extent of the sampled box stay the same. The mesh is displayed at 0.18 of its source size, so that box spans 5.76 metres in the hall. More samples refine this approximation; they do not supply knowledge about an original object hidden behind the noise.
+
+A small passage may depend on both level and sampling. Absence from the mesh does not establish absence from the underlying field, particularly where a feature falls between widely separated samples. Nor does a visible hole establish clearance for your body. Hold that uncertainty beside the usefulness of the procedure: a few rules have made a boundary we can encounter, and its exclusions are now specific enough to test.
+
+&lt;!-- @ --&gt;
+
+The next room opens the local construction. Eight corner samples will select a case, and that case will tell the extractor which edges to join.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_Introduction/technical.md">Raw captured source</a></p><pre># One field, multiple decisions
+
+The registered `voxel_noise_demo` scene has an unscripted root and a `VoxelNoiseMarchingCubes` child. The hall desk locates that child; it does not replace the extractor. Ordinary placements keep their existing defaults.
+
+`generate_density_field()` samples a 32-unit cube centred at zero. For n sample positions per axis, spacing is `chunk_size / float(n - 1)` and the flattened index is `x + y*n + z*n*n`. Density is `(noise.get_noise_3d(p) + 1) * 0.5`. The lesson keeps seed 1337 and all noise settings fixed.
+
+`process_cube()` reads eight neighbouring samples. `march_cube()` sets bit i when density i is below `iso_level`, and looks up edges for the resulting mask. `interpolate_vertices()` uses:
+
+```gdscript
+t = (iso_level - v1_density) / (v2_density - v1_density)
+p = v1_pos.lerp(v2_pos, t)
+```
+
+Only edges whose endpoint comparisons differ reach that interpolation. A triangle mesh and a concave collision shape are then created. Regeneration removes only the generator&#x27;s owned nodes.
+
+LEVEL cycles 0.50 / 0.45 / 0.55, remarching the same deterministic samples. SAMPLES cycles 24 / 16 / 32 per axis over the same domain. HOLD deep-copies the current ArrayMesh, offsets its displayed world position by 8m, and gives it a separate material; it adds no collider. RESET restores level .50 and 24 samples per axis without changing HOLD. CLEAR removes the copy. RULE exposes the construction after the encounter.
+
+Source: `res://algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd`; lesson controls: `res://commons/artifacts/timing_machines/iso_workshop.gd`.
+
+The source box is 32 units; uniform display scale .18 makes its width 5.76m. Scaling the display and changing sampling are separate operations. Triangle count is reported, not used as a proxy for topology or physical traversability. The original science_screen remains secondary; no claim is made that its generic field mode reads this model.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ISO_Introduction/intent.md">Raw captured source</a></p><pre>Question → choose a boundary to watch → LEVEL → observe → HOLD and RESET → SAMPLES → inspect code → ask what a sampled opening permits.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_Introduction/critical.md">Raw captured source</a></p><pre># The boundary is a decision we can inspect
+
+The field assigns values where the mesh shows nothing. A missing triangle is not an absence of data; it may be the consequence of a classification shared by neighbouring samples. The rendered object makes one selected relation visible.
+
+Holding the field fixed while changing its level makes that relation available to question. We can identify which choice changed without attributing every difference to an unknowable generator. The level is useful precisely because it is explicit. Its usefulness does not make it a natural division between inside and outside.
+
+Sampling adds another condition. A feature too narrow for the lattice may fail to appear, while a coarse approximation may imply an opening the continuous field does not support. The live collider adds a further bodily condition; the held specimen deliberately has none. Similar images can therefore offer different possibilities of contact.
+
+This is where the tutorial and the question of possible bodies meet. Before naming a form free, closed or queer, follow an operation: which comparison made this boundary, which sample could not carry that detail, and which collision permits or refuses contact? The construction gives us a way to revise a limit. It does not establish that greater complexity or a lower threshold constitutes freedom.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_Introduction/artifacts.md">Raw captured source</a></p><pre>Primary: voxel_noise_demo. Secondary: science_screen (generic display, not claimed as a synchronized field slice). Decoration: iso_workshop_console. Both original artifact tokens remain.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_Introduction/summary.md">Raw captured source</a></p><pre>One fixed noise field is extracted at different levels and sampling densities. Hold a mesh, reset the live model, and distinguish the field from its triangles and collider.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_Introduction/blurb.md">Raw captured source</a></p><pre>A number changes. A boundary moves. The values beneath it remain.
+</pre></section></body></html>

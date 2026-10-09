@@ -1,0 +1,124 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing coordinate station and frame load",
+      "passed": true
+    },
+    {
+      "name": "held point has one stationary podium",
+      "passed": true
+    },
+    {
+      "name": "support belongs to station, never held sphere",
+      "passed": true
+    },
+    {
+      "name": "support uses matching off-white matte finish",
+      "passed": true
+    },
+    {
+      "name": "support height meets existing .07m point",
+      "passed": true
+    },
+    {
+      "name": "point keeps coordinate identity and physical size",
+      "passed": true
+    },
+    {
+      "name": "point keeps black surface",
+      "passed": true
+    },
+    {
+      "name": "support's single label faces front",
+      "passed": true
+    },
+    {
+      "name": "podium supplies physical support at its top",
+      "passed": true
+    },
+    {
+      "name": "podium leaves supported walking approach",
+      "passed": true
+    },
+    {
+      "name": "frame continues tracking existing held point",
+      "passed": true
+    },
+    {
+      "name": "podium capture sees point without a wall obstruction",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinate-podium",
+      "passed": true
+    },
+    {
+      "name": "real near-grab detector selects sphere, not podium",
+      "passed": true
+    },
+    {
+      "name": "existing XR Tools pickup still holds the point",
+      "passed": true
+    },
+    {
+      "name": "gripped point follows controller displacement",
+      "passed": true
+    },
+    {
+      "name": "podium and its label stay behind during pickup",
+      "passed": true
+    },
+    {
+      "name": "coordinate frame stays fixed and keeps the same tracked point",
+      "passed": true
+    },
+    {
+      "name": "both local and world coordinate cards retained",
+      "passed": true
+    },
+    {
+      "name": "world coordinate display follows moved point",
+      "passed": true
+    },
+    {
+      "name": "local coordinate display follows moved point",
+      "passed": true
+    },
+    {
+      "name": "release clears grip and restores frozen point",
+      "passed": true
+    },
+    {
+      "name": "released point stays where visitor left it",
+      "passed": true
+    },
+    {
+      "name": "stationary podium remains after release",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinate-hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "podium_size_m": [
+      0.819999992847443,
+      1.04999995231628,
+      0.819999992847443
+    ],
+    "point_world": [
+      7.5,
+      1.12000000476837,
+      2.5
+    ]
+  },
+  "passed": true,
+  "room": "Point_Coordinates",
+  "scope": "Real museum scene and XR Tools detector/hold/release, with synthetic controller input. Geometry, support collision and local/world displays checked. No physical headset test."
+}

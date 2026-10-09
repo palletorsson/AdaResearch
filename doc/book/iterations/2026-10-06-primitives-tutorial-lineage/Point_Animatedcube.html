@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Eight corners, twelve triangles</title><style>body{margin:0;background:#f2efe9;color:#242322;font:18px/1.65 Georgia,serif}header,main{max-width:1160px;margin:auto;padding:48px 34px}h1{font-size:48px;line-height:1.1}h2{line-height:1.2}a{color:#9c365f}nav{display:flex;gap:15px;flex-wrap:wrap}article{border-top:1px solid #cbc4ba;padding:36px 0}img{width:100%;height:auto;border-radius:6px}small,.meta{font:14px/1.6 system-ui,sans-serif;color:#67615c}.subjects{display:flex;flex-wrap:wrap;gap:8px}.subjects span{background:#e9d8df;padding:4px 10px;border-radius:4px;font:14px system-ui}pre{background:#20272c;color:#eae6de;padding:22px;overflow:auto;font:14px/1.6 Consolas,monospace}code{font-family:Consolas,monospace}.page{max-width:880px;margin:auto}figure{margin:30px 0}summary{cursor:pointer}@media(max-width:600px){h1{font-size:34px}header,main{padding:24px 18px}}</style><main class="page"><nav><a href="index.html#Point_Animatedcube">Route</a><a href="Primitives_Polythedra.html">Previous</a><a href="Primitives_Ignorance.html">Next</a><a href="Point_Animatedcube/lesson-files.zip">Code files</a></nav><h1>Eight corners, twelve triangles</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>A reusable CubeBody class</li>
+<li>Shared corner data</li>
+<li>Two triangles per square side</li>
+<li>Connectivity versus object position</li>
+</ul>
+<h2>In the museum</h2>
+<p>The cube appears simple enough to arrive ready-made. The diagonal study in this hall exposes a decision hidden by that familiar outline: a square surface is represented here by two triangles. Build one cube, then a second with the other diagonal on its front side.</p>
+<p>We keep FaceBody from the preceding halls. CubeBody adds a particular set of eight positions and twelve index triples. It is the cube we can carry into Transformation and Arrays.</p>
+<h2>Make this study</h2>
+<p>Put the four printed files in one lesson folder and attach lesson.gd to an empty unit-scale Node3D named CubeStudy in the museum hall. CubeBody constructs its visible mesh itself. The placements in lesson.gd leave room between two one-metre cubes; they do not alter their local vertex data.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3>The program</h3>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+const CubeBody = preload(&quot;cube_body.gd&quot;)
+var first := CubeBody.new()
+var second := CubeBody.new()
+
+func _ready() -&gt; void:
+    first.position = Vector3(-0.7, 0.7, 0)
+    second.position = Vector3(0.7, 0.7, 0)
+    add_child(first)
+    add_child(second)
+    second.other_diagonal()
+</code></pre>
+<h3>Dependency: cube_body.gd</h3>
+<!-- student-code:cube_body.gd -->
+
+<pre><code class="language-gdscript">extends &quot;face_body.gd&quot;
+# Eight shared positions; each triple addresses three entries.
+var points: Array[Vector3] = [
+    Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5),
+    Vector3(0.5, 1, -0.5), Vector3(-0.5, 1, -0.5),
+    Vector3(-0.5, 0, 0.5), Vector3(0.5, 0, 0.5),
+    Vector3(0.5, 1, 0.5), Vector3(-0.5, 1, 0.5)]
+var faces: Array[Vector3i] = [
+    Vector3i(4, 7, 5), Vector3i(5, 7, 6),
+    Vector3i(0, 4, 1), Vector3i(1, 4, 5),
+    Vector3i(2, 6, 3), Vector3i(3, 6, 7),
+    Vector3i(1, 2, 0), Vector3i(0, 2, 3),
+    Vector3i(0, 3, 4), Vector3i(4, 3, 7),
+    Vector3i(5, 6, 1), Vector3i(1, 6, 2)]
+
+func _init() -&gt; void:
+    super()
+    show_faces(points, faces)
+
+func other_diagonal() -&gt; void:
+    faces[0] = Vector3i(4, 6, 5)
+    faces[1] = Vector3i(4, 7, 6)
+    show_faces(points, faces)
+</code></pre>
+<h3>Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3>Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Read the construction</h2>
+<p>CubeBody extends FaceBody, so it inherits the face renderer. Its <code>_init()</code> first calls <code>super()</code> to attach the parent's surface and edge container, then calls the renderer with this cube's recipe. Each call to <code>CubeBody.new()</code> creates a new object with its own position array, face array and mesh.</p>
+<p>The corners use x and z values of −0.5 or 0.5 and y values of zero or one. The first two triples cover the positive-z side. <code>other_diagonal()</code> changes those two triples, keeping the four corner positions fixed. The black internal line moves to the other diagonal; the square's boundary and area stay the same.</p>
+<p>Node position and vertex position do different jobs. <code>second.position</code> places the whole cube in the study. <code>second.points[6] += Vector3(0, 0, 0.25)</code> changes one local corner; call <code>second.show_faces(second.points, second.faces)</code> afterward to redraw it. Every face using entry six changes. A formerly square side can become two angled planes, making the diagonal matter to the surface itself.</p>
+<p>These cubes have visible edges and faces, without colliders. The wider prefab collection in the museum remains available for reflection; it is not another construction dependency.</p>
+<h2>Make it your own</h2>
+<p>Make a third CubeBody and place it somewhere else. Change one corner on that instance and redraw it. Verify that the first two cubes keep their shapes. Then explain the difference between moving a body and editing the data from which it is made.</p>
+<p>Keep CubeBody. The next hall asks whether a short rule can generate a position list that we have so far written out.</p>
+<h2>Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Godot documents clockwise front faces and ordered vertex submission in <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html">SurfaceTool</a>.</p></main></html>

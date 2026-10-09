@@ -1,0 +1,253 @@
+{
+  "sequence": "boolean_surfaces",
+  "declared_maps": [
+    "Boolean_Verbs",
+    "Boolean_Gallery",
+    "Boolean_Works"
+  ],
+  "museum_map_authored_order": [
+    "Boolean_Verbs",
+    "Boolean_Gallery",
+    "Boolean_Works"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "Boolean_Verbs",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1281,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "csg_union_demo",
+          "csg_intersection_demo",
+          "csg_difference_demo"
+        ],
+        "reason": "The three Boolean verbs require their three parallel examples; the comparison is the core.",
+        "status": "existing_text_retained",
+        "sequence": "boolean_surfaces",
+        "text_path": "commons/maps/Boolean_Verbs/final.md",
+        "text_sha256": "95aa4dac61126eb9f2397c18f468306c3a60a03c55a2623dc4bbf1c9d2e76150",
+        "map_sha256": "ddfd202d9353c8f4797866a201b3ce90f831982f1e040395c631237a770163ba",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "csg_union_demo",
+        "csg_intersection_demo",
+        "csg_difference_demo",
+        "the_argument_of_solids"
+      ],
+      "role_primary_order": [
+        "csg_union_demo",
+        "csg_intersection_demo",
+        "csg_difference_demo"
+      ],
+      "anchors_not_in_primary_roles": [
+        "the_argument_of_solids"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Boolean_Gallery",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1943,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "csg_difference_demo",
+          "removal_room"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "boolean_surfaces",
+        "text_path": "commons/maps/Boolean_Gallery/final.md",
+        "text_sha256": "279e2881bb4af004aeb25453e925ce4e973ff93e3ac2e925bea63880cc8757d7",
+        "map_sha256": "e69fff77aab674f969e50b3b3e91a940fac751c5785ab486797448566696384b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "csg_difference_demo",
+        "csg_union_demo",
+        "csg_intersection_demo",
+        "subtraction_suite",
+        "coincident_face",
+        "removal_room"
+      ],
+      "role_primary_order": [
+        "csg_difference_demo",
+        "removal_room"
+      ],
+      "anchors_not_in_primary_roles": [
+        "coincident_face",
+        "csg_intersection_demo",
+        "csg_union_demo",
+        "subtraction_suite"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Boolean_Works",
+      "recorded_status": "existing_text_retained",
+      "text_words": 2474,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "csg_compose_workbench",
+          "boolean_burrow",
+          "sdf_cavern_room"
+        ],
+        "reason": "Compare the offered workbench, an entered Boolean hollow, and the raised SDF cavern model. The level cutter profile makes the existing burrow a bodily counterexample; outer visibility, collision and clearance remain distinct.",
+        "status": "existing_text_retained",
+        "sequence": "boolean_surfaces",
+        "text_path": "commons/maps/Boolean_Works/final.md",
+        "text_sha256": "24bca9c3449480a02e1386882bc4dc169bbd0394e665d8013e470c109141aa71",
+        "map_sha256": "8d57779cd3e89c1cfe52c0a58c142418f557bbb9f8f421de1d0d333f004b7e3b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "csg_compose_workbench",
+        "subtraction_suite",
+        "sphere_splitting_showcase",
+        "recursive_boolean_cube",
+        "csg_architecture_cavity",
+        "boolean_burrow",
+        "sdf_cavern_room",
+        "booleanvariations",
+        "coincident_face"
+      ],
+      "role_primary_order": [
+        "csg_compose_workbench",
+        "boolean_burrow",
+        "sdf_cavern_room"
+      ],
+      "anchors_not_in_primary_roles": [
+        "booleanvariations",
+        "coincident_face",
+        "csg_architecture_cavity",
+        "recursive_boolean_cube",
+        "sphere_splitting_showcase",
+        "subtraction_suite"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+      "algorithms/boolean_surfaces/csg_architecture_cavity.tscn",
+      "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+      "algorithms/boolean_surfaces/csg_compose_workbench.tscn",
+      "algorithms/boolean_surfaces/csg_difference_demo.gd",
+      "algorithms/boolean_surfaces/csg_difference_demo.tscn",
+      "algorithms/boolean_surfaces/csg_intersection_demo.gd",
+      "algorithms/boolean_surfaces/csg_intersection_demo.tscn",
+      "algorithms/boolean_surfaces/csg_union_demo.gd",
+      "algorithms/boolean_surfaces/csg_union_demo.tscn",
+      "algorithms/booleansurfaces/coincident_face/coincident_face.gd",
+      "algorithms/booleansurfaces/coincident_face/coincident_face.tscn",
+      "algorithms/fractals/cantorset/cantor_set.gd",
+      "algorithms/fractals/recursive_boolean_cube.gd",
+      "algorithms/fractals/recursive_boolean_cube.tscn",
+      "algorithms/primitives/booleans/booleanvariations.gd",
+      "algorithms/primitives/booleans/booleanvariations.tscn",
+      "algorithms/vectors/08_vector_throwing/destructibles/csg_cut_sphere.tscn",
+      "algorithms/vectors/08_vector_throwing/destructibles/octree_sphere.tscn",
+      "algorithms/vectors/08_vector_throwing/destructibles/planar_cut_sphere.tscn",
+      "algorithms/vectors/08_vector_throwing/destructibles/sectored_sphere.tscn",
+      "algorithms/vectors/08_vector_throwing/destructibles/segmented_sphere.tscn",
+      "algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.gd",
+      "algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+      "algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/boolean_burrow/boolean_burrow.gd",
+      "commons/artifacts/boolean_burrow/boolean_burrow.tscn",
+      "commons/artifacts/removal_room/removal_room.gd",
+      "commons/artifacts/removal_room/removal_room.tscn",
+      "commons/artifacts/sdf_cavern_room/sdf_cavern_room.gd",
+      "commons/artifacts/sdf_cavern_room/sdf_cavern_room.tscn",
+      "commons/artifacts/subtraction_suite/subtraction_suite.gd",
+      "commons/artifacts/subtraction_suite/subtraction_suite.tscn",
+      "commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd",
+      "commons/artifacts/the_argument_of_solids/the_argument_of_solids.tscn",
+      "commons/audio/runtime/CubeAudioPlayer.gd",
+      "commons/grid/GridCommon.gd",
+      "commons/grid/GridStructureComponent.gd",
+      "commons/grid/GridUtilitiesComponent.gd",
+      "commons/grid/UtilityRegistry.gd",
+      "commons/primitives/cubes/grab_cube.tscn",
+      "commons/primitives/fontana_puncture/fontana_puncture.gd",
+      "commons/resourses/shaders/PinkTeleport.gdshader",
+      "commons/scenes/endless_museum.gd",
+      "commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "commons/scenes/mapobjects/teleport.gd",
+      "commons/scenes/mapobjects/teleport_scene.tscn",
+      "commons/scenes/mapobjects/word_is.gd",
+      "commons/scenes/mapobjects/word_is.tscn",
+      "commons/ui/text_screen.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://adaresearch/Common/Scripts/Managers/artifact_data.gd",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "res://addons/godot-xr-tools/objects/pickable.tscn",
+      "res://algorithms/vectors/08_vector_throwing/destructibles/csg_cut_sphere.gd",
+      "res://algorithms/vectors/08_vector_throwing/destructibles/octree_sphere.gd",
+      "res://algorithms/vectors/08_vector_throwing/destructibles/planar_cut_sphere.gd",
+      "res://algorithms/vectors/08_vector_throwing/destructibles/sectored_sphere.gd",
+      "res://algorithms/vectors/08_vector_throwing/destructibles/segmented_sphere.gd",
+      "res://algorithms/vectors/08_vector_throwing/throw_ball_sphere.gd",
+      "res://commons/artifacts/cantor_lesson/cantor_lesson.gd",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+      "res://commons/artifacts/large_window/large_window.tscn",
+      "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "res://commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "res://commons/artifacts/station/%s.tscn",
+      "res://commons/artifacts/station/station_door.tscn",
+      "res://commons/artifacts/station/station_plinth.tscn",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+      "res://commons/context/clipboard/codeDisplay.tscn",
+      "res://commons/grid/grid_system.tscn",
+      "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+      "res://commons/movement/museum_flight_box.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/player/costume_wardrobe.gd",
+      "res://commons/primitives/cubes/grab_cube.gd",
+      "res://commons/primitives/origin/origin.tscn",
+      "res://commons/primitives/point/grab_sphere_point.tscn",
+      "res://commons/primitives/temporal/animated_folding_past.tscn",
+      "res://commons/resourses/shaders/SimpleGrid.gdshader",
+      "res://commons/scenes/em/em_cartridge.gd",
+      "res://commons/scenes/em/em_desktop_pointer.gd",
+      "res://commons/scenes/em/em_detail.gd",
+      "res://commons/scenes/em/em_lighting.gd",
+      "res://commons/scenes/em/em_portal_stream.gd",
+      "res://commons/scenes/em/em_simplex_corners.gd",
+      "res://commons/scenes/em/em_simulation_stage.gd",
+      "res://commons/scenes/em/em_splatter.gd",
+      "res://commons/scenes/em/em_transform_gizmo.gd",
+      "res://commons/scenes/em/em_wall_fit.gd",
+      "res://commons/scenes/em/em_weathering_wall.gd",
+      "res://commons/scenes/em/floor_seams.gdshader",
+      "res://commons/scenes/endless_museum.tscn",
+      "res://commons/scenes/mapobjects/bridge_path.tscn",
+      "res://commons/scenes/mapobjects/jump_pad.tscn",
+      "res://commons/scenes/mapobjects/transport_cube.tscn",
+      "res://commons/scenes/mapobjects/walkableprism.tscn",
+      "res://commons/utils/baked_text_albedo.gd",
+      "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "scope": "Primary artifact scenes and active utility scenes plus two static resource-reference hops; utility registry/grid/museum dispatch context copied without further traversal. Text resources only. Dynamic loads, class-name dependencies, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

@@ -1,0 +1,55 @@
+--- before/commons/artifacts/torque_crank/torque_crank.gd
++++ commons/artifacts/torque_crank/torque_crank.gd
+@@ -4,10 +4,11 @@
+ ## @identity
+ ## lineage: the cross product made playable — τ = r × F = |r||F|sinθ — the second
+ ##   half of the operations pair (with dot_aligner) for the embodied vectors-forces arc.
+-## essence: push a lever arm off-axis; the perpendicular torque it produces spins a
+-##   flywheel. Force along the arm does nothing; force across it spins hardest.
++## essence: change the angle between illustrated arm and push directions. Their
++##   normalized cross product sets a static wheel pose; no angular dynamics run.
+ ## truth: the cross product is what's left over when two directions refuse to align —
+-##   a third axis, perpendicular to both, that turns the world.
++##   a perpendicular direction and angular factor; a physical receiver would need
++##   arm length, force magnitude and dynamics to turn this relation into motion.
+ ##
+ ## A ToyConsole: the readout lives on the monitor, the LEVERAGE slider drives the demo.
+ ## DNA: leverage 0..1 is the angle between arm r and push F (0 = along → zero torque,
+@@ -55,7 +56,7 @@
+ ##
+ ## The PRODUCT is the same in all three, and exactly so: the multipliers are 2.0 and 0.5,
+ ## which shift a binary exponent and leave the mantissa alone, so |r||F| is bit-identical
+-## at every value. τ, the wheel angle, the spin sweep, the glow and the rpm therefore do
++## at every value. τ, the wheel angle, the spin sweep, the glow and the readout therefore do
+ ## not move at all — only the bargain that bought them. Under `operands` the parallelogram
+ ## r ∧ F, whose AREA is |τ|, is redrawn in three quite different shapes with one area.
+ @export_enum("balanced", "long", "stub") var purchase: String = "balanced"
+@@ -99,7 +100,7 @@
+ 	var rig := _fresh_demo_rig("TorqueCrankRig")
+ 	_rng.seed = hash(seed)
+ 
+-	# --- the physics ------------------------------------------------------------
++	# --- the geometric relation ------------------------------------------------------------
+ 	var bearing: float = deg_to_rad(_rng.randf_range(-22.0, 22.0))
+ 	# PURCHASE — the lever's bargain. `balanced` never enters the match, so the two shipped
+ 	# literals reach the build untouched; the other arms multiply by exact powers of two, so
+@@ -121,7 +122,7 @@
+ 	var arm_tip: Vector3 = hub + r_dir * arm_len
+ 	var phi: float = leverage * (PI * 0.5)                                        # angle of F from the arm
+ 	var f_dir: Vector3 = r_dir.rotated(Vector3.UP, phi).normalized()             # vector F
+-	var torque_vec: Vector3 = r_dir.cross(f_dir)                                  # τ = r × F
++	var torque_vec: Vector3 = r_dir.cross(f_dir)                                  # unit directions: angular factor, not physical torque
+ 	var torque_mag: float = clampf(torque_vec.length(), 0.0, 1.0)                # = sin(phi)
+ 	var tau_axis: Vector3 = (Vector3.UP if torque_vec.y >= 0.0 else Vector3.DOWN)
+ 	var theta_deg: float = rad_to_deg(phi)
+@@ -159,8 +160,8 @@
+ 		_add_spin_arrows(spin, hub + tau_axis * (tau_len * 0.55), 0.22, torque_mag, _glow_mat(accent, 1.0 + torque_mag * 3.0))
+ 
+ 	# --- readout -> the monitor --------------------------------------------------
+-	var rpm: int = int(roundf(torque_mag * 320.0))
+-	set_readout("CROSS  r × F\n\nτ = %.2f\nθ = %d°\n\n%d rpm" % [torque_mag, int(roundf(theta_deg)), rpm],
++	# This is a static pose derived from the angular factor, not a rotation rate.
++	set_readout("CROSS DIRECTIONS\nsin θ = %.2f\nθ = %d°\n\nwheel pose %d°\nstatic diagram" % [torque_mag, int(roundf(theta_deg)), int(roundf(rad_to_deg(spin_angle)))],
+ 		Color(1.0, 0.85, 0.5))
+ 
+ 	_settle(rig)

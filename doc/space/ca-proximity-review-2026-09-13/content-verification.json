@@ -1,0 +1,50 @@
+[
+  {
+    "check": "seven original artifacts remain",
+    "pass": true
+  },
+  {
+    "check": "layers have matching 15 by 28 dimensions",
+    "pass": true
+  },
+  {
+    "check": "commons/data/artifact_roles.json unchanged",
+    "pass": true
+  },
+  {
+    "check": "commons/data/map_authored.json unchanged",
+    "pass": true
+  },
+  {
+    "check": "ada_run/em_plan.json only this hall changed",
+    "pass": true
+  },
+  {
+    "check": "commons/data/museum/em_plan.json only this hall changed",
+    "pass": true
+  },
+  {
+    "check": "all other book pearls unchanged",
+    "pass": true
+  },
+  {
+    "check": "primary, hero and final marker match",
+    "pass": true
+  },
+  {
+    "check": "book excerpt matches implemented code with formatting whitespace ignored",
+    "pass": true
+  },
+  {
+    "check": "book excerpt matches implemented code with formatting whitespace ignored",
+    "pass": true
+  },
+  {
+    "check": "book excerpt matches implemented code with formatting whitespace ignored",
+    "pass": true
+  },
+  {
+    "check": "next active hall is SoftRules",
+    "pass": true
+  }
+]

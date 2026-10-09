@@ -1,0 +1,85 @@
+{
+  "change": "Four suspended colored pens before Point_Trace whiteboard",
+  "pens": [
+    {
+      "ink": "magenta",
+      "grid_mm": 0
+    },
+    {
+      "ink": "red",
+      "grid_mm": 10
+    },
+    {
+      "ink": "green",
+      "grid_mm": 40
+    },
+    {
+      "ink": "blue",
+      "grid_mm": 80
+    }
+  ],
+  "height_m": 1.1,
+  "spacing_m": 0.4,
+  "board_bottom_m": 0.6,
+  "plinths": false,
+  "changed_source_cells": [
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      6,
+      3
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      6,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      5
+    ]
+  ],
+  "scene_checks": {
+    "checks": 62,
+    "failures": [],
+    "scope": "Actual museum derivation/stamping and packed scenes; synthetic grabber; headset reach and legibility unverified."
+  },
+  "regression_checks": {
+    "snap_and_pen": 76,
+    "trace_grid_discovery": 28,
+    "failures": []
+  },
+  "primary_tokens": [
+    "draw_dot",
+    "draw_stick",
+    "whiteboard",
+    "hand_telemetry_diptych",
+    "automatic_writing_desk"
+  ],
+  "browser": "5 primary, 5 written, text flows with thread",
+  "preview": "ada_run/trace_board_pens/encounter.png",
+  "reusable_config": "draw_dot#pen_display:1#resolution:40#ink:00ff00; existing freeze behavior suspends the pen",
+  "runtime_source": "Verified using endless_museum._derive_map_row and _stamp against the current map. Older generated plan snapshots were left untouched because their room structure differs from the current source.",
+  "limits": "No full-hall or headset acceptance. Preview is the actual stamped board/pen subset after supplied test strokes. Startup UID, certificate, DebugLogger and shader-cache write errors are recorded separately from passing artifact checks."
+}

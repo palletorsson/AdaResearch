@@ -1,0 +1,34 @@
+--- before/array_flight_lab.gd
++++ after/array_flight_lab.gd
+@@ -12,7 +12,7 @@
+ 	enclosure = load("res://commons/movement/museum_flight_box.gd").new()
+ 	enclosure.name = "ArrayFlightBox"
+ 	enclosure.monochrome = true
+-	enclosure.instruction_title = "FLY INTO THE THIRD INDEX"
++	enclosure.instruction_title = "REACH AN ADDRESS"
+ 	add_child(enclosure)
+ 	grid = load("res://algorithms/arrays/grid_3d_4x4x4.gd").new()
+ 	grid.name = "AddressedVolume"
+@@ -23,7 +23,7 @@
+ 		var layer: Array = []
+ 		for z in 4: layer.append([1,1,1,1])
+ 		values.append(layer)
+-	var p := Kit.panel(self,"THREE INDICES",Vector3(3.5,1.2,-6.9))
++	var p := Kit.panel(self,"SELECT AN ADDRESS",Vector3(3.5,1.2,-6.9))
+ 	p.add_button("X +").pressed.connect(func(): select_axis(0))
+ 	p.add_button("Y +").pressed.connect(func(): select_axis(1))
+ 	p.add_button("Z +").pressed.connect(func(): select_axis(2))
+@@ -46,6 +46,13 @@
+ 	await get_tree().process_frame
+ 	for cell in grid.get_children():
+ 		if not str(cell.name).begins_with("Cube_"): continue
++		# These addresses live inside a navigable enclosure. Respect its opaque
++		# instruction panels instead of drawing all 64 labels through them.
++		for child in cell.get_children():
++			if child is Label3D:
++				child.no_depth_test = false
++				# The shared lattice's 0.6m label is inside its pickup cube.
++				child.position.y = 1.0
+ 		var parts := str(cell.name).split("_")
+ 		cell.tree_exiting.connect(_removed.bind(int(parts[1]),int(parts[2]),int(parts[3])))
+ 

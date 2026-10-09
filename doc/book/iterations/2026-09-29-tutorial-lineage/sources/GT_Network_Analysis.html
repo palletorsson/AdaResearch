@@ -1,0 +1,395 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Network_Analysis · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Network_Analysis">← Tutorial lineage</a></p><h1>GT Network Analysis</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Network_Analysis/final.md">Raw captured source</a></p><pre># Important by which measure?
+
+What evidence would justify calling one vertex central?
+
+&lt;!-- @network_analysis --&gt;
+
+Find a large, conspicuous vertex and count its incident edges. Compare it with a smaller one. The large red vertices orbit slowly and pulse harder; the small green ones circle faster and glow less. Ask which of those differences, size, colour, orbit, glow, you could independently check by following the connections.
+
+Degree is one answer to a narrow question: how many edges meet this vertex? Other questions require other measures. A vertex might connect two regions without having the largest number of neighbours, or it might have many neighbours that are already richly connected to one another. “Important” hides these differences until we name the relation we want to measure.
+
+Use two descriptions for the same vertex: one about how it is drawn, another about a connection you have checked. “Large and high” belongs to the first description; “joined to these neighbours” belongs to the second. You can then ask whether the presentation is helping you discover a relation or asking you to accept one. This distinction is especially useful when a size or a glow appears authoritative before you know what events or paths it summarises.
+
+This display arranges vertices in authored layers with different sizes and colours. Its centrality values are assigned from ranges, and the two summary numbers it computes follow a clock rather than the edges, and are never shown. Nothing here is calculated from the displayed connections. The room currently offers a diagram of a network hierarchy; its two meters, a ball on a bar at either side, do not move, and cannot certify that hierarchy through graph analysis.
+
+Your edge count is therefore a useful small piece of evidence. It can be compared with a visual claim without pretending that counting degree settles every possible meaning of centrality. If a large vertex looks authoritative, separate the role of its size, its placement and its actual connections.
+
+The pathfinding room showed how losing an option can alter a route. Extend that thought here: imagine removing your chosen vertex. Which neighbours would still reach one another? Which connection would you need to check before answering? This is a prediction for a future removal experiment, not a claim that the present display performs one.
+
+Beyond these moving vertices, another drawing gives us a named measure and the records it counts. Follow one connection into the next part of the room.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+&lt;!-- @evidence_network --&gt;
+
+A fine curve joins the Studio to the Builder. It seems easy to follow. Select RECORD. A date and a payment appear beneath it. The arrow says which way the payment went; it says nothing about whether the work was done.
+
+Move the arrangement. The Archive travels towards the centre without receiving another report. Its incoming count stays the same. Choose only PAYMENTS and several connections disappear. The people have not ceased to know one another. We have narrowed the question.
+
+Lombardi&#x27;s drawings make the labour behind a connection matter. This small archive is openly fictional. Each line can be traced to one authored record; none can stand as evidence about an actual person. A convincing network can still be a poor account.
+
+&lt;!-- @ --&gt;
+
+Connectivity next gives us one exact question to test: where can a directed traveller go and still return?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Network_Analysis/tutorial.md">Raw captured source</a></p><pre># GT Network Analysis
+
+Which node matters most? Degree, betweenness, eigenvector.
+
+Compute degree centrality.
+
+```gdscript
+func degree_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices:
+        c[v] = float(g.degree(v)) / (g.vertices.size() - 1)
+    return c
+```
+
+Normalised by the maximum possible degree. Values in [0, 1].
+
+Compute betweenness via Brandes.
+
+```gdscript
+func betweenness_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices: c[v] = 0.0
+    for s in g.vertices:
+        var dist: Dictionary = {s: 0}
+        var sigma: Dictionary = {s: 1}
+        var pred: Dictionary = {}
+        var queue: Array = [s]
+        var stack: Array = []
+        while not queue.is_empty():
+            var u = queue.pop_front()
+            stack.push_back(u)
+            for w in g.neighbours(u):
+                if not w in dist:
+                    dist[w] = dist[u] + 1
+                    queue.push_back(w)
+                if dist[w] == dist[u] + 1:
+                    sigma[w] = sigma.get(w, 0) + sigma[u]
+                    pred.get_or_add(w, [])
+                    pred[w].append(u)
+        var delta: Dictionary = {}
+        for v in g.vertices: delta[v] = 0.0
+        while not stack.is_empty():
+            var w = stack.pop_back()
+            for u in pred.get(w, []):
+                delta[u] += sigma[u] / float(sigma[w]) * (1 + delta[w])
+            if w != s:
+                c[w] += delta[w]
+    return c
+```
+
+Brandes&#x27; algorithm computes betweenness in O(V·(V+E)). Counts shortest paths passing through each vertex.
+
+Compute eigenvector centrality via power iteration.
+
+```gdscript
+func eigenvector_centrality(g: Graph, iterations: int = 50) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices: c[v] = 1.0
+    for _i in iterations:
+        var next: Dictionary = {}
+        for v in g.vertices:
+            next[v] = 0.0
+            for u in g.neighbours(v):
+                next[v] += c[u]
+        var norm: float = 0.0
+        for v in g.vertices: norm += next[v] * next[v]
+        norm = sqrt(norm)
+        if norm &gt; 0:
+            for v in g.vertices: next[v] /= norm
+        c = next
+    return c
+```
+
+Power iteration on the adjacency matrix. Converges to the dominant eigenvector.
+
+Compute closeness centrality.
+
+```gdscript
+func closeness_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices:
+        var total: int = 0
+        var distances: Dictionary = bfs_distances(v, g.adjacency_list())
+        for other in distances:
+            total += distances[other]
+        c[v] = 1.0 / total if total &gt; 0 else 0.0
+    return c
+```
+
+Reciprocal of average shortest-path distance. High closeness means short average reach.
+
+Colour vertices by centrality.
+
+```gdscript
+func colour_by_centrality(centrality: Dictionary) -&gt; void:
+    var max_c: float = centrality.values().max()
+    for child in get_children():
+        if child.has_meta(&quot;vertex_id&quot;):
+            var v = child.get_meta(&quot;vertex_id&quot;)
+            var t: float = centrality[v] / max_c if max_c &gt; 0 else 0.0
+            var mat: StandardMaterial3D = child.material_override
+            mat.albedo_color = Color.BLUE.lerp(Color.RED, t)
+```
+
+Blue for low centrality, red for high. Visual ranking of importance.
+
+You can now compute degree, betweenness, eigenvector, and closeness centralities, and colour the graph by any of them. GT_Connectivity extends into directed graphs.
+
+Detect a central node.
+
+```gdscript
+func most_central(centrality: Dictionary):
+    var best = null
+    var best_score: float = -INF
+    for v in centrality:
+        if centrality[v] &gt; best_score:
+            best_score = centrality[v]
+            best = v
+    return best
+```
+
+Return the vertex with highest centrality. Useful as a graph&#x27;s designated hub.
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Return: A relation needs a record
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses graph, line, array. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`network`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Study and making notes](/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html). The display stays fixed while its data, words or images change. RESET returns the original comparison.
+
+&lt;!-- study-edit:evidence_network --&gt;
+
+### One source change: A relation needs a record
+
+In RECORDS, remove this final entry. Predict whose incoming and outgoing counts fall by one. FILTER to payment, then change LAYOUT: a different position must not create a different count. These are fictional source records, not historical evidence. The curved-line renderer is supplied.
+
+```gdscript
+[3,7,&quot;payment&quot;,&quot;04-16&quot;,&quot;P04: Office pays Maintenance 1 unit.&quot;]
+```
+
+Source: `commons/artifacts/spine_studies/evidence_network.gd`. Use the prepared scene to run and compare.
+
+&lt;!-- study-reference:evidence_network --&gt;
+
+### Reference and scope
+
+Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.
+
+[Whitney Museum: Mark Lombardi](https://whitney.org/artists/7340).
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Network_Analysis/technical.md">Raw captured source</a></p><pre># GT Network Analysis — Technical
+
+The map computes several centrality measures on a shared graph and displays them side by side. Degree centrality counts direct edges. Betweenness centrality counts the number of shortest paths that pass through a vertex. Eigenvector centrality rewards vertices connected to other well-connected vertices.
+
+```gdscript
+# Degree centrality: O(V)
+func degree_centrality() -&gt; Dictionary:
+    var c := {}
+    for v in vertices:
+        c[v] = adj[v].size()
+    return c
+
+# Betweenness: O(V * (V + E)) using Brandes&#x27; algorithm
+func betweenness_centrality() -&gt; Dictionary:
+    var b := {}
+    for v in vertices:
+        b[v] = 0.0
+    for s in vertices:
+        var stack := []
+        var preds := {}
+        var sigma := {s: 1}
+        var dist := {s: 0}
+        var queue := [s]
+        # ... shortest-path BFS omitted for brevity ...
+        # Accumulate contributions on the reverse-stack pass
+    return b
+```
+
+Betweenness is the expensive measure. Brandes&#x27; algorithm computes it in O(V·(V+E)) time for unweighted graphs, which is tractable for graphs up to a few thousand vertices. Naive implementations that enumerate all shortest paths are O(V³) and become impractical much sooner. The map uses Brandes because the interactive parameter-tuning the map rewards requires recomputing betweenness frequently.
+
+Eigenvector centrality is computed by power iteration on the adjacency matrix: repeatedly multiply a vector by the adjacency matrix and normalise until the result stabilises. For a graph with N vertices and E edges, each iteration is O(E), and convergence takes O(log(1/ε)/log(λ₁/λ₂)) iterations where λ₁ and λ₂ are the dominant and second eigenvalues. In practice, twenty iterations is usually enough.
+
+The `networkflow3d` artifact adds flow analysis. Pipes replace edges with capacity-bounded throughput; a source-to-sink flow is computed using Ford-Fulkerson or push-relabel. The algorithms differ in their approach: Ford-Fulkerson augments along paths iteratively; push-relabel operates locally by pushing flow to neighbours and relabelling vertices when pushes block.
+
+Within the sequence, Network_Analysis is the measurement chapter. The previous map staged traversal; this map stages quantification. GT_Connectivity will next introduce directed edges and the asymmetric reachability they produce.
+
+## PageRank as Eigenvector Centrality
+
+Google&#x27;s PageRank is the most famous application of eigenvector centrality. The algorithm treats each web page as a vertex and each hyperlink as a directed edge. The PageRank of a page is proportional to the sum of the PageRanks of the pages that link to it, weighted by the out-degree of those pages.
+
+```gdscript
+func pagerank(damping: float = 0.85, tol: float = 1e-6) -&gt; Dictionary:
+    var n := vertices.size()
+    var pr := {}
+    for v in vertices:
+        pr[v] = 1.0 / n
+    while true:
+        var new_pr := {}
+        var diff := 0.0
+        for v in vertices:
+            var s := 0.0
+            for u in in_neighbors(v):
+                s += pr[u] / out_degree(u)
+            new_pr[v] = (1.0 - damping) / n + damping * s
+            diff += abs(new_pr[v] - pr[v])
+        pr = new_pr
+        if diff &lt; tol: break
+    return pr
+```
+
+Damping (typically 0.85) models a random surfer who jumps to a random page with probability 1−damping. Without damping, vertices with no outgoing edges (sinks) accumulate all the rank. The random-jump term ensures the algorithm converges.
+
+## Clustering Coefficient
+
+Local clustering coefficient measures how tightly a vertex&#x27;s neighbours are connected to each other. For vertex v with k neighbours, the coefficient is the number of edges among the neighbours divided by k(k−1)/2, the maximum possible. High clustering indicates communities; low clustering indicates a tree-like or random structure.
+
+The global clustering coefficient averages the local values. Small-world networks, like social graphs, typically have high clustering and short path lengths.
+
+## Structural Holes
+
+Betweenness centrality is closely related to Burt&#x27;s concept of structural holes: vertices that bridge otherwise disconnected communities. A high-betweenness vertex controls information flow because shortest paths between communities must pass through it. The map&#x27;s hub-and-spoke layout is engineered to make such vertices visually dominant.
+
+Within the sequence, Network_Analysis is the measurement chapter. GT_Connectivity will extend measurement into directed graphs where reachability itself is asymmetric.
+
+## One More Note on Weighted Centrality
+
+Closeness centrality — one over the average shortest-path distance from a vertex to all others — is a fourth common measure the map can display. It rewards central vertices in the literal sense: vertices whose average distance to the rest of the graph is small. Computing it requires running shortest-path from every vertex, giving O(V · (V + E)) total.
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+&lt;!-- study-reference:evidence_network --&gt;
+
+### Reference and scope
+
+Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.
+
+[Whitney Museum: Mark Lombardi](https://whitney.org/artists/7340).
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Network_Analysis/intent.md">Raw captured source</a></p><pre>Concept: Which node matters most? Centrality measures — degree, betweenness, eigenvector — answer differently, revealing that importance depends on what you&#x27;re measuring. Hub-and-spoke topology makes the center visible.
+Sequence role: Fourth map in Graph Theory; transitions from traversal (pathfinding) to analysis (measuring structure). The hub-and-spoke layout physically demonstrates centrality — the central platform has the most connections. The networkflow3d artifact adds flow analysis: not just structure but capacity; follows GT_Pathfinding; leads to GT_Connectivity.
+Technical angle: Degree centrality (count connections), betweenness centrality (count shortest paths through node), eigenvector centrality (importance of neighbors matters), PageRank as eigenvector variant. Network flow: max-flow min-cut theorem, capacity constraints. The network_analysis artifact computes all centrality measures; networkflow3d visualizes flow.
+Critical angle: Centrality is political. Who is central depends on what you measure — connections (degree), gatekeeping power (betweenness), or association with other important nodes (eigenvector). Google&#x27;s PageRank made eigenvector centrality the algorithm that organized human knowledge. The choice of metric is a choice of values, not just mathematics.
+Key artifacts: network_analysis computes and visualizes multiple centrality measures; networkflow3d demonstrates flow constraints and bottlenecks — capacity as a distinct structural property from connectivity.
+
+Gap: networkflow3d needs slider_horizontal, push_button, Label3D; rhizomatic_structure needs slider_horizontal, push_button, Label3D.
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Network_Analysis/critical.md">Raw captured source</a></p><pre># GT_Network_Analysis — Critical Reflection
+
+A hub with four arms radiating over void. The central platform is a 3x3 square at h2. The arms extend north, south, east, west — width-1 walkways over h0 emptiness. You arrive from one arm and must cross the hub to exit from another. Three artifacts occupy the central mass: `networkflow3d`, `network_analysis`, and `rhizomatic_structure`. The architecture is the thesis: the hub is central because the arms depend on it. Remove the hub and the network fractures into four disconnected limbs. Centrality is structural before it is measured.
+
+Foucault would see the panopticon. The hub-and-spoke topology is the spatial form of centralized surveillance — one position from which all others are visible, all others dependent, all others reachable only through the center. The `network_analysis` artifact computes exactly this: degree centrality (count connections), betweenness centrality (count shortest paths through a node), eigenvector centrality (importance of neighbors matters). Three metrics, three ways of asking &quot;who matters most,&quot; three different answers. The hub scores highest on all three in this topology because the topology was designed to make the hub central. The map is a tautology dressed as a demonstration.
+
+Ranciere would push harder. Centrality is not a property of a node; it is a metric imposed on a network. The choice of metric is a choice of what counts as importance, and the choice is political before it is mathematical. Degree centrality says: the most connected node is the most important. This rewards those with the most relationships, which in social networks means those with the most access, the most visibility, the most pre-existing privilege. Betweenness centrality says: the node that controls the most paths is the most important.
+
+This rewards gatekeepers — those who sit between communities, controlling what flows between them. Eigenvector centrality says: knowing important people makes you important. This is power by association, prestige by adjacency, the old-boy network formalized as linear algebra. Google&#x27;s PageRank — the algorithm that organized human knowledge on the internet — is an eigenvector centrality variant. The choice to rank web pages by this metric rather than by accuracy, diversity, or representativeness was a decision about values encoded as infrastructure. The metric became the architecture, and the architecture became the world.
+
+The `networkflow3d` artifact introduces capacity. Its identity is Edmonds-Karp max flow via BFS augmenting paths — particles streaming from source to sink, faster through wide pipes, bottlenecked at narrow ones. The critical parameter is `max_capacity`, and combined with `gravity_effect` (which reduces uphill capacity by 30%), it determines the maximum achievable flow. Flow analysis reveals something centrality analysis conceals: the bottleneck. The max-flow min-cut theorem says the maximum flow through a network equals the capacity of the cheapest way to sever source from sink. The bottleneck is not the most connected node or the most central node. It is the weakest link — the edge or set of edges whose removal would disconnect the network most cheaply.
+
+Foucault&#x27;s analysis of power as productive rather than repressive resonates here. The bottleneck does not block flow; it shapes it. The narrow pipe does not prevent passage; it constrains throughput. Power in a network is not located at the hub but at the constraint — the place where capacity is limited, where flow is forced through a narrow channel, where the structure&#x27;s limits become the system&#x27;s limits. The hub looks powerful because it has the most connections. The bottleneck is powerful because it determines how much the entire system can carry. The map&#x27;s architecture, with its narrow arms over void, makes every arm a bottleneck. The hub controls direction. The arms control capacity. The topology distributes power between the visible center and the constrained periphery.
+
+The `rhizomatic_structure` artifact is the map&#x27;s internal dissent. Its identity is recursive branching with lateral reconnection — a structure with no center and no hierarchy, where any point can connect to any other point. The critical parameter is `connection_probability`: at 0 the structure is a tree (hierarchical), at 1.0 every nearby node reconnects (rhizomatic). This is Deleuze and Guattari&#x27;s rhizome rendered as a graph parameter, and its placement on the hub-and-spoke map is deliberate provocation. The hub-and-spoke is the arborescent structure the rhizome was theorized against. The artifact sits inside the architecture that contradicts it, offering an alternative topology from within the topology it critiques.
+
+Ranciere&#x27;s politics of aesthetics — the disruption of the sensible order by those who were not counted within it — finds expression in this placement. The rhizomatic structure is the artifact that does not belong on the hub. It models networks without centers, without hierarchies, without the privileged positions that the hub-and-spoke topology enshrines. Its presence on the central platform is a political act within the map&#x27;s own logic: the thing that argues against centrality placed at the center, visible only because it occupies the position it rejects.
+
+The four arms over void are the map&#x27;s honesty. Every connection to the hub is a single-cell walkway over nothing. Remove one walkway and a quarter of the network is severed. The hub is central but the arms are fragile, and the fragility is the cost of centralization. A decentralized network — a mesh, a rhizome — would not have this vulnerability. The hub-and-spoke is efficient, legible, and catastrophically brittle, and the map forces you to walk the brittleness every time you cross an arm. Your body knows what the centrality metrics do not say: that the center holds only as long as every arm does, and the arms are one cell wide.
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Installed application: A relation needs a record
+
+Lombardi&#x27;s drawings make the labour behind a connection matter. This small archive is openly fictional. Each line can be traced to one authored record; none can stand as evidence about an actual person. A convincing network can still be a poor account.
+
+
+&lt;!-- study-reference:evidence_network --&gt;
+
+### Reference and scope
+
+Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.
+
+[Whitney Museum: Mark Lombardi](https://whitney.org/artists/7340).
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Network_Analysis/artifacts.md">Raw captured source</a></p><pre># GT Network Analysis — Artifacts
+*Graph Theory: Connections Define Structure · relation · 3 artifacts*
+
+&gt; Every network has a center. Find it.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## networkflow3d
+![networkflow3d](/scene-catalog/networkflow3d.png)
+
+IDENTIFY bottlenecks and explain how augmenting paths raise the total flow through a network.
+
+`networkflow3d`
+
+## Rhizomatic Structure
+![Rhizomatic Structure](/scene-catalog/rhizomatic_structure.png)
+
+COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.
+
+`rhizomatic_structure`
+
+## network_analysis
+![network_analysis](/scene-catalog/network_analysis.png)
+
+INTERPRET centrality and community structure from motion, glow, and network hierarchy.
+
+`network_analysis`
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Network_Analysis/summary.md">Raw captured source</a></p><pre># GT Network Analysis — Summary
+
+GT_Network_Analysis is the fourth map in the Graph Theory sequence. It asks a different kind of question than the earlier maps: which node in a graph matters most, and by what measure? Several notions of centrality produce different answers on the same graph, and the map lays them out side by side.
+
+The space is built as a hub-and-spoke network. A central platform sits at the middle of the room, with many edges radiating outward to peripheral nodes. The centrality of the central platform depends on which metric the learner selects. Degree centrality, the count of direct edges, favours it unambiguously. Betweenness centrality, the count of shortest paths that pass through a node, favours it as well, but also lifts any peripheral bridge that sits on a major route. Eigenvector centrality, which rewards nodes connected to other well-connected nodes, redistributes importance toward clusters.
+
+A fourth station runs a network-flow demonstration. Pipes replace edges; a source floods the network with capacity-bounded flow; and the network&#x27;s throughput becomes a different form of importance — structural rather than topological. A panel at each station names the metric and shows its formula.
+
+Within the sequence, Network_Analysis is the measurement chapter. GT_Connectivity will next introduce directed edges and the asymmetries they produce.
+
+
+&lt;!-- study-spine:evidence_network --&gt;
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Network_Analysis/blurb.md">Raw captured source</a></p><pre>Every network has a center. Find it.
+
+Centrality measures ask: which node matters most? Degree counts connections. Betweenness counts how many shortest paths pass through. Eigenvector asks not just who you know, but who *they* know. Different questions, different answers — the most connected node is not always the most important one.
+
+Flow turns structure into capacity. Ford-Fulkerson pushes flow through edges, finds bottlenecks, proves that maximum flow equals minimum cut. The weakest link defines the system&#x27;s throughput. A network&#x27;s power is bounded by its most constrained passage.
+
+Stand on the hub. Arms radiate outward over void — four directions, four dependencies. The center holds because the edges permit it. Remove one bridge and the topology fractures. Graphs don&#x27;t have centers by nature. Centrality is always a question you impose on relation.</pre></section></body></html>

@@ -1,0 +1,146 @@
+    RULING VIOLATION ISO_CaveGeneration: final width 26 outside 13-19 (content too large to conform)
+    RULING VIOLATION ISO_AnimatedNoise: final width 20 outside 13-19 (content too large to conform)
+    RULING VIOLATION ISO_RhizomeBody: final width 34 outside 13-19 (content too large to conform)
+{
+  "sequence": "isosurfaces",
+  "maps": [
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "live_sequence_maps": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "museum_template": "castelvecchio-pinch-v2",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "7c15cd222020744202c3a3cdbab2dd153df518a66d9ea449d6a03ac607512878",
+    "commons/data/museum/em_plan.json": "7c15cd222020744202c3a3cdbab2dd153df518a66d9ea449d6a03ac607512878",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/isosurfaces.json": "bf634fa525b2e1947f4df2ef69da275d4c411933f88c7808ca3bf4421df533f9",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/ISO_CaveGeneration/map_data.json": "177809119495b9569562772080b15c48d175985ee7c8b4f506c23d28d4caea09",
+    "commons/maps/ISO_AnimatedNoise/map_data.json": "849e35bedaf01949595b8fb59cdc82677d47ce5c8577b3b8cb7d641f734b526d",
+    "commons/maps/ISO_ImplicitModeling/map_data.json": "2d347aaa18c9e9292bcf336431ead8c8727cbe2d45e2c402a792f7815e55d07c",
+    "commons/maps/ISO_RhizomeBody/map_data.json": "c2b705176a1a78b66dcada1720a1f7d49c01572c01b76cffbf284e3b4d842566"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "79b27a4c5fee4cd354f0587d82fa5722287bb8e6e7df6158284f97e8d5c98516",
+    "commons/data/museum/em_plan.json": "79b27a4c5fee4cd354f0587d82fa5722287bb8e6e7df6158284f97e8d5c98516",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "ISO_CaveGeneration",
+      "pearl_index": 8,
+      "room": {
+        "w": 26,
+        "h": 22
+      },
+      "artifacts": 3,
+      "ruling": {
+        "src_w": 26,
+        "src_h": 22,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "pearl_index": 9,
+      "room": {
+        "w": 20,
+        "h": 20
+      },
+      "artifacts": 3,
+      "ruling": {
+        "src_w": 20,
+        "src_h": 20,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ISO_ImplicitModeling",
+      "pearl_index": 11,
+      "room": {
+        "w": 16,
+        "h": 18
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 16,
+        "src_h": 18,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "ISO_RhizomeBody",
+      "pearl_index": 12,
+      "room": {
+        "w": 34,
+        "h": 34
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 34,
+        "src_h": 34,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": "inplace"
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T074121870967Z"
+}

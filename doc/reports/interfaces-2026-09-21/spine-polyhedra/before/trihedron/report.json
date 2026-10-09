@@ -1,0 +1,99 @@
+{
+	"approaches": [
+		{
+			"clear": false,
+			"direction": [
+				0.99999874830246,
+				0.0,
+				0.00160557113122195
+			],
+			"passed": false,
+			"supported": false,
+			"travel": 1.0
+		},
+		{
+			"clear": false,
+			"direction": [
+				0.00160552747547627,
+				0.0,
+				-0.99999874830246
+			],
+			"passed": false,
+			"supported": false,
+			"travel": 0.27734375
+		},
+		{
+			"clear": false,
+			"direction": [
+				-0.00160561478696764,
+				0.0,
+				0.99999874830246
+			],
+			"passed": false,
+			"supported": false,
+			"travel": 0.28125
+		}
+	],
+	"artifact_position": [
+		9.33115005493164,
+		1.5401566028595,
+		9.49921607971191
+	],
+	"checks": [
+		{
+			"message": "Requested polyhedra hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored artifact found",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits beside the exhibit",
+			"passed": false
+		},
+		{
+			"message": "A supported clear final metre reaches the object",
+			"passed": false
+		},
+		{
+			"message": "GrabTrihedron in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "GrabTrihedron within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "GrabTrihedron has a clear native grab ray",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 1.49866569042206,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/GrabTrihedron",
+			"horizontal_distance": 0.500000655651093,
+			"label": "GrabTrihedron"
+		}
+	],
+	"failures": [
+		"Standing capsule fits beside the exhibit",
+		"A supported clear final metre reaches the object"
+	],
+	"floor": {
+		"collider": "none",
+		"height": 0.0
+	},
+	"passed": false,
+	"room": "Primitives_Polythedra",
+	"scope": "Actual authored hall; static reach, approach and native grab geometry. Desktop capture, no headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	],
+	"standing_obstacles": [
+		"/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision"
+	]
+}

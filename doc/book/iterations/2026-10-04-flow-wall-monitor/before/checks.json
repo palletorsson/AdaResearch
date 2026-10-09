@@ -1,0 +1,105 @@
+{
+  "checks": [
+    {
+      "label": "museum core ready",
+      "ok": true
+    },
+    {
+      "label": "actual Flow_Field hall loaded",
+      "ok": true
+    },
+    {
+      "label": "retained placement: flow_field_painter",
+      "ok": true
+    },
+    {
+      "label": "retained placement: vector_field_visualizer",
+      "ok": true
+    },
+    {
+      "label": "retained placement: vector_field_grid",
+      "ok": true
+    },
+    {
+      "label": "retained placement: particle_flow_swarm",
+      "ok": true
+    },
+    {
+      "label": "retained placement: noc_5_04_flow_field",
+      "ok": true
+    },
+    {
+      "label": "retained placement: grand_zoetrope",
+      "ok": true
+    },
+    {
+      "label": "shared field host present",
+      "ok": true
+    },
+    {
+      "label": "eighty particles preserved",
+      "ok": true
+    },
+    {
+      "label": "inspection camera retained: standing",
+      "ok": true
+    },
+    {
+      "label": "painter visible: standing",
+      "ok": true
+    },
+    {
+      "label": "capture saved: standing",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "learner_verified": false,
+  "observations": {
+    "capture_state": {
+      "delta": 0.0166666666666667,
+      "field_seed": 43,
+      "field_time": 0,
+      "noise_scale": 3,
+      "seed": 43019,
+      "speed": 0.1,
+      "steps": 120
+    },
+    "painter_position": [
+      5.5,
+      1.04999995231628,
+      5.5
+    ],
+    "painter_scale": [
+      2.5,
+      2.5,
+      2.5
+    ],
+    "placed_artifacts": {
+      "ceiling_vent": 1,
+      "counter": 1,
+      "dream_bodies": 1,
+      "electrical_panel": 1,
+      "elevator": 1,
+      "exit_sign": 2,
+      "extinguisher": 1,
+      "fire_hose_box": 1,
+      "flow_field_painter": 1,
+      "grand_zoetrope": 1,
+      "info_screen": 1,
+      "noc_5_04_flow_field": 1,
+      "pallet": 1,
+      "particle_flow_swarm": 1,
+      "point_zero": 1,
+      "science_screen": 1,
+      "station_plinth": 1,
+      "vector_field_grid": 1,
+      "vector_field_visualizer": 1,
+      "view": 1,
+      "wall_clock": 1,
+      "window": 1
+    }
+  },
+  "phase": "before"
+}

@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "index.html",
+      "passed": true
+    },
+    {
+      "file": "Point_One.final.md",
+      "passed": true
+    },
+    {
+      "file": "Point_One.final.diff",
+      "passed": true
+    },
+    {
+      "file": "point-one-study.zip",
+      "passed": true
+    },
+    {
+      "file": "study/solid.gd",
+      "passed": true
+    },
+    {
+      "file": "study/README.md",
+      "passed": true
+    },
+    {
+      "file": "native-verification.json",
+      "passed": true
+    },
+    {
+      "file": "primitives-book.md",
+      "passed": true
+    },
+    {
+      "rejected_outside_allowed_roots": "commons/primitives/point/point_condition.gd",
+      "passed": true
+    },
+    {
+      "rejected_outside_allowed_roots": "doc/book/STUDENT_TOOLBOX.md",
+      "passed": true
+    }
+  ]
+}

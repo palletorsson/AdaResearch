@@ -1,0 +1,35 @@
+{
+  "id": "Color_Flashlight",
+  "title": "Change what reaches a surface",
+  "storyboard": "The student moves a coloured lamp across the pale board and faceted sphere, then follows the source edit already offered by this hall. They bring material colour and transforms and keep a direct reference to one existing supplied light. Change its colour while leaving the receiving surface alone; then keep the colour and change the lamp’s direction. Predict which condition changed before comparing the result. The fixed lamp in the side room offers a later return to time-varying colour. Grabbing, room geometry and the renderer remain supplied. The student carries a controllable light and the distinction between a value assigned to a material and light reaching it; no new room or lamp assembly is required.",
+  "storyboard_short": "Use existing lamp/board/faceted sphere. Reuse colour assignment and transforms. Follow current bounded light-colour edit; retain named light reference. Vary colour with receiver fixed, then aim with colour fixed. Supply grabbing/room/renderer. Carry illumination versus albedo distinction. Timed lamp optional. No new room; no spectral-optics claim.",
+  "mode": "make",
+  "brings": [
+    "material colour",
+    "position and orientation"
+  ],
+  "learns": [
+    "light colour and aim as different inputs to appearance"
+  ],
+  "carries": "An explained existing light reference and a controlled comparison of receiving conditions.",
+  "supplied": [
+    "existing light, room and grabbing",
+    "renderer and timed side-room comparison"
+  ],
+  "artifact_refs": [
+    "flashlight_demo",
+    "colour_light_rooms",
+    "sphere_in_pink"
+  ],
+  "review_note": "The existing tutorial already provides a small light-colour edit. Retain that entry; do not replace it with a new host or require lighting equations.",
+  "prior_maps": [
+    "Color_Context_Placed",
+    "Trans_Rotation"
+  ],
+  "independent_check": "Choose another light colour, predict its effect on an unchanged surface, then vary aim alone.",
+  "source_refs": [
+    "algorithms/postprocessing/flashlight_demo/flashlight_color.gd",
+    "commons/artifacts/colour_light_rooms/colour_light_rooms.gd"
+  ],
+  "change_reason": "The existing encounter already provides the necessary experiment."
+}

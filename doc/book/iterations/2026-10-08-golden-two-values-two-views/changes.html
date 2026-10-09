@@ -1,0 +1,335 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Golden Spiral — changes</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e8;color:#25222a;font:17px/1.65 system-ui,sans-serif}header,main,footer{max-width:1320px;margin:auto;padding:28px 5vw}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:#853856;text-underline-offset:4px}h1{font:clamp(38px,5vw,70px)/1.06 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}p{max-width:75ch}.lead{font-size:23px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}img{width:100%;display:block}figure{margin:28px 0}figcaption{font-size:14px;color:#605964;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;padding:24px;background:#fffcf6}.reading h1{font-size:38px}.reading h2{font-size:27px}pre{overflow:auto;background:#242129;color:#f5eff1;padding:20px;font:13px/1.6 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}table{border-collapse:collapse;width:100%;background:#fffcf6}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d0c7;padding:16px}blockquote{border-left:4px solid #d292a7;margin:25px 0;padding:12px 22px;font:26px/1.5 Georgia,serif}.pill{background:#25222a;color:#fff;padding:8px 18px;display:inline-block;border-radius:22px;font-size:14px}button{font:inherit;background:#fffcf6;border:1px solid #bfa4af;padding:8px 16px;margin-right:8px;cursor:pointer}button[aria-pressed=true]{background:#25222a;color:white}.notes{background:#e8e0d6;padding:22px}del{background:#ffe3e3}ins{background:#e0efdc;text-decoration:none}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}pre{white-space:pre-wrap}body{background:white}article{break-before:page}}details{border-top:1px solid #d8d0c7;padding:16px 0}summary{cursor:pointer;font-weight:600}.single{max-width:880px}.single h1{font-size:42px} .lead{max-width:850px}.single{max-width:900px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}button[aria-pressed=true]{background:#28232b;color:#fff}figcaption{max-width:900px}pre{overflow:auto} @media print{nav,button{display:none}details{display:block}} .single{max-width:920px}.hero{max-width:1280px;margin:20px auto}table{width:100%;border-collapse:collapse}td,th{padding:12px;border-bottom:1px solid #d8d1ca;text-align:left}img{max-width:100%;height:auto}button{cursor:pointer}a{overflow-wrap:anywhere}.lead{font-size:1.22rem;max-width:850px}.pair article{min-width:0}</style></head><body><header><p class="eyebrow">Endless Museum · Fractals 06 · 8 October 2026</p><nav><a href="index.html">Inside the museum</a><a href="parallel.html">Tutorial / reflection</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="changes.html">Changes</a><a href="student-files.zip">Student files</a></nav></header><main><h1>Before and after</h1><p>One new hand table beside the original numbers desk. All seven specimens, their placement, original generators and existing controls remain. The tutorial now contains a complete tested reconstruction. The reflection follows the point and the simultaneous views.</p><h2>tutorial.md</h2><p><a href="tutorial.md.diff">Plain diff</a></p><details><summary>Read both versions</summary><div class="pair reading"><article><h1>Encounter order</h1>
+<p><strong>Learning elements — proposed focus</strong></p>
+<p><em>The labels below set the revision focus; the existing lesson still needs alignment.</em></p>
+<ul>
+<li>Numerical recurrence</li>
+<li>Value mappings</li>
+<li>
+<p>Geometric interpretation</p>
+</li>
+<li>
+<p>Read the two equal seeds. Predict the next value before NEXT. Reveal up to ten terms and check successive additions from the labels.</p>
+</li>
+<li>HEIGHT keeps those values while changing the height mapping. Compare the same terms. SUM supplies a fixed-unit addition witness beside the row; compare its tops before asking for RULE.</li>
+<li>Walk around the desk and the supported examples. Read the seed, helix, shell-like, layered and branching constructions as different additional mapping rules. They are held still for inspection.</li>
+<li>At the upright rectangle, imagine cutting off a square before NEXT. Follow several cuts. MEASURE reads actual shrinking sides and the remainder ratio.</li>
+<li>ARC makes the circular construction visible. Toggle it off while retaining the partition. RULE gives the equation for the preserved proportion. More cuts introduce a resolution question.</li>
+<li>Continue through the retained room: recursive cabinet, DLA, dark sphere, terrain and Romanesco. Distinguish their procedures. Proceed to Fractal_Synthesis, then LSystems_Grammar_Lab.</li>
+</ul>
+<p>Two primaries, in order: fibonacci_sequences, golden_rectangle. Five secondary/decoration placements remain. Original material is archived; human headset review remains pending.</p></article><article><h1>Two values, two views</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Numerical recurrence: add the previous two values.</li>
+<li>Append to an ordered array; retain its earlier entries.</li>
+<li>Pass the same record to two height functions.</li>
+<li>Detect one contact; release before accepting another.</li>
+</ul>
+<h2>In the museum</h2>
+<p>Menger replaced each cube with a new generation. Here a new entry joins a record whose earlier values remain. At the first desk, two points carry the last two numbers. They begin at one and one. Predict the sum, then move one point against the other. Two appears in the row. Holding them together adds only once. Release both before asking for another sum; one hand can move a point to its resting partner. The held trigger also requests one step. NEXT, BACK and RESET stay beside you.</p>
+<p>The points have the same size. Their labels carry quantities; their distance is only an interaction threshold. The new row on the left gives height a fixed unit. The row on the right compresses the larger values. Both read the same list. The large towers retain HEIGHT, SUM and RULE: SUM provides a fixed-unit witness of the last addition.</p>
+<h2>Continue with the point and the cube</h2>
+<p>Use the prepared Endless Museum workspace. Save the two files below together and attach <code>sum_points.gd</code> to an empty, unit-scale Node3D on the floor of the workspace. Its front is local +Z. The museum supplies the camera, lighting, player and installed XRTools. This example creates its own points, labels and two rows; it needs no named scene children or dollar references. Keep your existing PointBody file if it is identical to the included version.</p>
+<p>The installed artifact uses this same construction through a small adapter. Its values come from the existing Fibonacci desk, and adding calls that desk's NEXT. Your small script owns its list and computes each new value itself. The museum supplies the plinth and nearby buttons. You do not rebuild the surrounding helix, rectangle or player.</p>
+<h2>Read two entries, append one</h2>
+<p><code>values</code> begins as <code>[1, 1]</code>. Negative indices count backwards: <code>values[-1]</code> is the last entry; <code>values[-2]</code> is the preceding one. <code>advance()</code> reads both <strong>before</strong> appending their sum. The first request gives <code>[1, 1, 2]</code>; the next reads 1 and 2, giving <code>[1, 1, 2, 3]</code>. No earlier entry is replaced.</p>
+<p>This is a recurrence: the next value depends on earlier values. The function does not call itself. Each gesture or Enter press asks for one more entry, up to ten. The interaction's <code>latched</code> Boolean keeps a contact lasting many physics frames from producing many sums. Releasing both points returns them to their places and clears the latch. This reuses the threshold and state reasoning from Trace and the interaction lessons.</p>
+<p><code>redraw()</code> loops over this record twice. <code>height_for(value, true)</code> gives each unit 0.05 metres. The other call uses the supplied natural logarithm <code>log</code>: <code>0.5 * log(value) + 0.5</code>. For 1, 2 and 55, those unscaled heights are approximately 0.500, 0.847 and 2.504 metres, compared with 0.050, 0.100 and 2.750 in the linear view. Logarithms need no derivation in this lesson; inspect what this declared mapping does.</p>
+<p>Both rows then use the same <code>DISPLAY_SCALE = 0.2</code> to fit the hand table. The small linear row therefore gives one unit <strong>one centimetre</strong>. This common display reduction is separate from the choice of height rule. Neither mapping writes into <code>values</code>. A BoxMesh gives each entry a body; moving its centre by half its height keeps every base at the same level.</p>
+<h2>The complete small construction</h2>
+<p>Hold a point and bring it to its partner, press its trigger, or use Enter. Release both points between held requests. Run the small study again to reset; the museum installation also has the nearby BACK and RESET buttons. A value is revealed by either request method, never by an automatic timer.</p>
+<h3>sum_points.gd</h3>
+<!-- student-code:sum_points.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LIMIT := 10
+const DISPLAY_SCALE := 0.2
+var values: Array[int] = [1, 1]
+var points: Array[XRToolsPickable] = []
+var names: Array[Label3D] = []
+var drawing: Node3D
+var readout: Label3D
+var latched := false
+
+func _ready() -&gt; void:
+    drawing = Node3D.new()
+    add_child(drawing)
+    for i in 2:
+        var point = PointBody.new()
+        point.tint = Color(&quot;76d9d1&quot;) if i == 0 else Color(&quot;ffa366&quot;)
+        add_child(point)
+        point.position = home(i)
+        point.action_pressed.connect(request_step)
+        points.append(point)
+        names.append(label(&quot;&quot;, home(i) + Vector3.UP * 0.18, self))
+        names[i].pixel_size = 0.0012
+    readout = label(&quot;&quot;, Vector3(0, 1.82, -0.08), self)
+    readout.pixel_size = 0.0012
+    redraw()
+
+func home(i: int) -&gt; Vector3:
+    return Vector3(-0.32 + i * 0.64, 1.25, 0.46)
+
+func any_held() -&gt; bool:
+    return points[0].held() or points[1].held()
+
+func _physics_process(_dt: float) -&gt; void:
+    for i in 2:
+        if not points[i].held():
+            points[i].global_transform = global_transform * Transform3D(Basis.IDENTITY, home(i))
+        names[i].global_position = points[i].global_position + global_basis.y * 0.18
+    if not any_held():
+        latched = false
+        show_pair()
+    elif not latched and points[0].position.distance_to(points[1].position) &lt; 0.19:
+        request_step()
+
+func _process(_dt: float) -&gt; void:
+    if Input.is_action_just_pressed(&quot;ui_accept&quot;):
+        request_step()
+
+func request_step(_body = null) -&gt; void:
+    if latched:
+        return
+    latched = any_held()
+    advance()
+
+func advance() -&gt; void:
+    if values.size() &gt;= LIMIT:
+        readout.text = &quot;Ten terms. Keep this record; run again to reset.&quot;
+        return
+    var a := values[-2]
+    var b := values[-1]
+    values.append(a + b)
+    redraw()
+    names[0].text = str(a)
+    names[1].text = str(b)
+    readout.text = &quot;%d + %d = %d\nRelease both points for the next pair.&quot; % [a, b, a + b]
+
+func height_for(value: int, linear: bool) -&gt; float:
+    if linear:
+        return 0.05 * value
+    return 0.5 * log(float(value)) + 0.5
+
+func redraw() -&gt; void:
+    for child in drawing.get_children():
+        drawing.remove_child(child)
+        child.queue_free()
+    for row in 2:
+        var center_x := -0.64 if row == 0 else 0.64
+        var linear := row == 0
+        for i in values.size():
+            var height := height_for(values[i], linear) * DISPLAY_SCALE
+            var bar := MeshInstance3D.new()
+            var shape := BoxMesh.new()
+            shape.size = Vector3(0.075, height, 0.075)
+            bar.mesh = shape
+            bar.position = Vector3(center_x + (i - 4.5) * 0.10, 1.02 + height * 0.5, 0)
+            var finish := StandardMaterial3D.new()
+            finish.albedo_color = Color(&quot;76d9d1&quot;) if i == values.size() - 2 else Color(&quot;ffa366&quot;) if i == values.size() - 1 else Color(&quot;b3c0e6&quot;)
+            bar.material_override = finish
+            drawing.add_child(bar)
+            label(str(values[i]), bar.position + Vector3(0, height * 0.5 + 0.05, 0), drawing)
+        var heading := label(&quot;LINEAR&quot; if linear else &quot;LOGARITHMIC&quot;, Vector3(center_x, 1.67, 0), drawing)
+        heading.pixel_size = 0.0011
+    show_pair()
+
+func show_pair() -&gt; void:
+    names[0].text = str(values[-2])
+    names[1].text = str(values[-1])
+    readout.text = &quot;Same values / two height rules\n%d terms · bring the last pair together&quot; % values.size()
+    if values.size() == LIMIT:
+        readout.text = &quot;Ten terms · same record in both views\nRun again to reset.&quot;
+
+func label(text: String, at: Vector3, host: Node3D) -&gt; Label3D:
+    var tag := Label3D.new()
+    tag.text = text
+    tag.position = at
+    tag.font_size = 32
+    tag.pixel_size = 0.00065
+    tag.outline_size = 7
+    host.add_child(tag)
+    return tag
+</code></pre>
+<h3>point_body.gd — carried unchanged</h3>
+<p>This is the same small, frozen pickable point used in the preceding hand models. It supplies pickup, release, the action signal and desktop grab hooks. We reuse that interaction so the new lesson can concern the record and its representations.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Check what stays the same</h2>
+<p>After eight requests beyond the two seeds, read:</p>
+<p><code>1, 1, 2, 3, 5, 8, 13, 21, 34, 55</code></p>
+<p>There should be ten bars in each row and the same labels in both. A ninth request changes nothing. The last small linear bar is 0.55 metres high; the corresponding logarithmic bar is about 0.501 metres. Joining the points and keeping them together must append only once. After release, their labels become the new last pair.</p>
+<p>At the large display, reveal ten terms and turn on SUM. The 21-unit and 34-unit pieces together match 55 units at a common scale. Switching HEIGHT leaves the values and this witness unchanged. Logarithmic tower heights do not add this way: the mapping changes the relation between height and addition.</p>
+<p><strong>Make one independent change.</strong> Change only the starting array to <code>[1, 2]</code>. Predict the first five entries and the tenth before running it. The same addition should produce <code>1, 2, 3, 5, 8, …, 89</code>. Both views must receive that new record. You changed the initial conditions, while retaining the operation. Keep positive seeds for this supplied logarithmic mapping.</p>
+<h2>A separate geometric comparison</h2>
+<p>Continue to the upright golden rectangle. NEXT removes a square from the remaining rectangle; MEASURE names actual side lengths. Its five-metre width starts with a height of <code>5 / phi</code>, where <code>phi = (1 + sqrt(5)) / 2</code>. The remainder turns and keeps the long-side/short-side ratio. The squares get smaller while their cut indices increase. They are not the increasing values from your array.</p>
+<p>ARC adds quarter circles through those squares. Turning it off leaves the partition. The joined circular pieces are not an exact logarithmic spiral. The nearby helix, seed pattern and shell-like objects also need their own position and turn rules. Keep their differences visible; this lesson's required construction is the pair, record and two readers.</p>
+<p>Carry this distinction into Synthesis: a procedure makes data, and another procedure gives that data a form. Name both when composing the next work.</p></article></div></details><h2>final.md</h2><p><a href="final.md.diff">Plain diff</a></p><details><summary>Read both versions</summary><div class="pair reading"><article><h1>A number needs a mapping</h1>
+<!-- @fibonacci_sequences -->
+
+<p>Two towers wait at the beginning of the row. Each carries a one. Before asking the machine for another, give it a number yourself. What could follow two equal beginnings?</p>
+<p>Press NEXT. Two appears. Another press brings three. Stay with the numbers for a few steps: one, one, two, three, five. The next tower is already implied by a relation you can test.<sup id="final.md-old-fnref:1"><a class="footnote-ref" href="#final.md-old-fn:1">1</a></sup> Add the preceding pair, then ask the machine to make its next term.</p>
+<p>The row grows, but its heights are suspicious. Eight has not become a tower eight times as high as one. Fifty-five, at the end of this ten-term display, still fits comfortably below the wall. Something has happened between the number and the body that stands for it.</p>
+<p>Press HEIGHT. The small towers sink towards the floor. Later ones keep more of their height. Read the labels again: none of the numbers has changed.</p>
+<p>With the linear mapping, each unit receives five centimetres. A one is now easy to overlook from a distance. The earlier logarithmic mapping gave it half a metre, then compressed the increasing values. One arrangement keeps the small beginnings present. The other lets height carry addition at a common scale. They offer different ways to read the same history.</p>
+<p>Try SUM after revealing at least three terms. Beside the row, two colours share a stack. One colour supplies the earlier value, the other the later one. A separate stack carries their sum. At the last term, twenty-one units and thirty-four units reach the same height as fifty-five. Each unit is still five centimetres. The equality can be checked by looking across their tops.</p>
+<p>Now return to logarithmic heights. The unit stacks remain equal, but adding the corresponding tower heights would not reconstruct the next tower. The display has not broken the recurrence. It has changed what height means.</p>
+<p>Ask for RULE. The source receives two quantities:</p>
+<pre><code class="language-gdscript">var next_fib = fibonacci_numbers[i-1] + fibonacci_numbers[i-2]
+fibonacci_numbers.append(next_fib)
+</code></pre>
+<p>The display receives a value and gives it a height:</p>
+<pre><code class="language-gdscript">var h: float=0.05*n if linear else 0.5*log(float(n))+0.5
+</code></pre>
+<p>HEIGHT flips <code>linear</code>; the recurrence above never sees it. There are two decisions here. We can change the representation without changing the relation it represents. We can also lose sight of a small value without removing it from the sequence. The label and the alternative view let us find that difference again.</p>
+<p>Walk around the desk and continue beside the supported displays. The earlier examples remain: seed points, stacked scales, shell-like chambers, a helix and a branching diagram. They are held still here so their arrangements can be inspected. Read one of their small plates. The seed pattern uses an index to choose a radius and an angle. The branching diagram uses a remainder after division to choose how many children to make. These are further rules.</p>
+<p>The helix is especially useful to look at twice. Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn. A familiar colour and a persuasive title would not make those constructions identical. The plate names what this source actually draws.</p>
+<p><img alt="Plan view of the hall's helix, a golden spiral from the same start, and the rectangle's chain of quarter circles" src="images/helix-against-golden-spiral.png" /></p>
+<p><em>Left: one full turn from the same start. The hall’s helix grows by phi over the whole turn; a golden spiral grows by phi over each quarter. Right: the rectangle’s arcs, quarter circles of fixed radius, one per square. The hall draws the first and the third; the second exists nowhere in the room.</em></p>
+<p>The pleasure of recognition can come before the inspection. A shell! A seed head! We can enjoy that resemblance and still ask which operations supplied it. The two ones did not contain instructions to make a flower. We added a way for numbers to take positions, turns and sizes.</p>
+<!-- @golden_rectangle -->
+
+<p>A rectangle stands upright farther into the hall. This time there are no towers and no curve. Imagine removing a square whose side is the shorter edge. What shape would be left?</p>
+<p>Press NEXT. The square remains visible in one colour; the remainder occupies the other portion. Press again. The next square is smaller and turns the direction of the construction. Follow a few cuts before asking for their measurements.</p>
+<p>MEASURE puts side lengths on the squares. They decrease as the cut numbers increase. The first is about 3.090 metres across, the next 1.910, then 1.180. Those are lengths from this five-metre rectangle. They are not the increasing Fibonacci values painted onto another surface.</p>
+<p>The readout follows the remainder. Its longer side divided by its shorter side stays close to 1.618034. We have changed the dimensions, yet retained a relation between them. Rotate your attention with each cut: the longer edge becomes the shorter one of the next stage.</p>
+<p>For a rectangle of width phi and height one, removing a unit square leaves sides one and phi minus one. To keep the original proportion after turning the remainder, we require:</p>
+<pre><code class="language-text">phi = 1 / (phi - 1)
+phi² = phi + 1
+</code></pre>
+<p>The positive solution supplies the ratio used here. The code still needs to decide which side loses its square, how many cuts to make, how to colour them and how to bring the result into this upright display. The proportion leaves those choices open.</p>
+<p>Try ARC. A line joins circular segments laid through the squares. Turn it off again. The partition remains. Making the curve visible did not cause the subdivisions.</p>
+<p>Each segment is a quarter-circle. The resulting joined curve resembles a logarithmic spiral, but its curvature changes from one circular piece to the next. We can follow it and feel its invitation inward without making it evidence of a universal rule of beauty. Another cut makes a smaller square, another length, another demand on the eye. Eventually the record can name a difference the view barely resolves.</p>
+<p>The sponge made room by discarding material. This rectangle keeps the pieces together and gives the remainder another turn. The towers changed what a quantity looked like. Each procedure carries something forward and makes other differences harder to encounter. Asking what bodies are possible now includes asking what kind of reading our chosen representation permits.</p>
+<p>In the retained room beyond, the recursive cabinet, growing terrain, Romanesco, aggregation study and sphere remain. The Romanesco's cones inherit positions and turns from their parent cones. Its botanical appearance is a construction to inspect, not proof that a plant follows this code. The terrain and aggregation have their own updates. Let their differences interrupt the temptation to call everything here the same pattern.</p>
+<p>Next we gather the procedures. Before naming a desired shape, try saying what one step would receive, retain, change and pass on. After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="final.md-old-fn:1">
+<p>The numbers are Leonardo of Pisa's, from the rabbit problem in <em>Liber abaci</em> (1202), and older than his name for them: Virahanka and Hemachandra had counted the same series for Sanskrit metres centuries before. The ratio the towers approach is Euclid's “extreme and mean ratio”; “golden” is a nineteenth-century word for it.&#160;<a class="footnote-backref" href="#final.md-old-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><h1>A number needs a mapping</h1>
+<!-- @fibonacci_sequences -->
+
+<p>Two towers wait at the beginning of the row. Each carries a one. Before asking the machine for another, give it a number yourself. What could follow two equal beginnings?</p>
+<p>Beside you, two familiar points carry the last two values. Bring one against the other. Two appears in the row. Keeping them together asks for nothing more; release them, and their labels become one and two. The next meeting brings three. NEXT offers the same request. Stay with the numbers for a few steps: one, one, two, three, five. The next tower is already implied by a relation you can test.<sup id="final.md-new-fnref:1"><a class="footnote-ref" href="#final.md-new-fn:1">1</a></sup> Add the preceding pair, then ask the machine to make its next term.</p>
+<p>The points have kept their size. One can carry thirty-four without becoming thirty-four times harder to hold. Their bodies give the quantities a place in your hands. What a value does to the next body is still a choice.</p>
+<p>The row grows, but its heights are suspicious. Eight has not become a tower eight times as high as one. Fifty-five, at the end of this ten-term display, still fits comfortably below the wall. Something has happened between the number and the body that stands for it.</p>
+<p>Press HEIGHT. The small towers sink towards the floor. Later ones keep more of their height. Read the labels again: none of the numbers has changed.</p>
+<p>With the linear mapping, each unit receives five centimetres. A one is now easy to overlook from a distance. The earlier logarithmic mapping gave it half a metre, then compressed the increasing values. One arrangement keeps the small beginnings present. The other lets height carry addition at a common scale. They offer different ways to read the same history.</p>
+<p>The small table keeps both readings beside one another, reduced by the same factor. You can return your eyes to a particular number while its other height remains visible. The comparison asks less of your memory; the disagreement between the views has somewhere to stay.</p>
+<p>Try SUM after revealing at least three terms. Beside the row, two colours share a stack. One colour supplies the earlier value, the other the later one. A separate stack carries their sum. At the last term, twenty-one units and thirty-four units reach the same height as fifty-five. Each unit is still five centimetres. The equality can be checked by looking across their tops.</p>
+<p>Now return to logarithmic heights. The unit stacks remain equal, but adding the corresponding tower heights would not reconstruct the next tower. The display has not broken the recurrence. It has changed what height means.</p>
+<p>Ask for RULE. The source receives two quantities:</p>
+<pre><code class="language-gdscript">var next_fib = fibonacci_numbers[i-1] + fibonacci_numbers[i-2]
+fibonacci_numbers.append(next_fib)
+</code></pre>
+<p>The display receives a value and gives it a height:</p>
+<pre><code class="language-gdscript">var h: float=0.05*n if linear else 0.5*log(float(n))+0.5
+</code></pre>
+<p>HEIGHT flips <code>linear</code>; the recurrence above never sees it. There are two decisions here. We can change the representation without changing the relation it represents. We can also lose sight of a small value without removing it from the sequence. The label and the alternative view let us find that difference again.</p>
+<p>Walk around the desk and continue beside the supported displays. The earlier examples remain: seed points, stacked scales, shell-like chambers, a helix and a branching diagram. They are held still here so their arrangements can be inspected. Read one of their small plates. The seed pattern uses an index to choose a radius and an angle. The branching diagram uses a remainder after division to choose how many children to make. These are further rules.</p>
+<p>The helix is especially useful to look at twice. Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn. A familiar colour and a persuasive title would not make those constructions identical. The plate names what this source actually draws.</p>
+<p><img alt="Plan view of the hall's helix, a golden spiral from the same start, and the rectangle's chain of quarter circles" src="images/helix-against-golden-spiral.png" /></p>
+<p><em>Left: one full turn from the same start. The hall’s helix grows by phi over the whole turn; a golden spiral grows by phi over each quarter. Right: the rectangle’s arcs, quarter circles of fixed radius, one per square. The hall draws the first and the third; the second exists nowhere in the room.</em></p>
+<p>The pleasure of recognition can come before the inspection. A shell! A seed head! We can enjoy that resemblance and still ask which operations supplied it. The two ones did not contain instructions to make a flower. We added a way for numbers to take positions, turns and sizes.</p>
+<!-- @golden_rectangle -->
+
+<p>A rectangle stands upright farther into the hall. This time there are no towers and no curve. Imagine removing a square whose side is the shorter edge. What shape would be left?</p>
+<p>Press NEXT. The square remains visible in one colour; the remainder occupies the other portion. Press again. The next square is smaller and turns the direction of the construction. Follow a few cuts before asking for their measurements.</p>
+<p>MEASURE puts side lengths on the squares. They decrease as the cut numbers increase. The first is about 3.090 metres across, the next 1.910, then 1.180. Those are lengths from this five-metre rectangle. They are not the increasing Fibonacci values painted onto another surface.</p>
+<p>The readout follows the remainder. Its longer side divided by its shorter side stays close to 1.618034. We have changed the dimensions, yet retained a relation between them. Rotate your attention with each cut: the longer edge becomes the shorter one of the next stage.</p>
+<p>For a rectangle of width phi and height one, removing a unit square leaves sides one and phi minus one. To keep the original proportion after turning the remainder, we require:</p>
+<pre><code class="language-text">phi = 1 / (phi - 1)
+phi² = phi + 1
+</code></pre>
+<p>The positive solution supplies the ratio used here. The code still needs to decide which side loses its square, how many cuts to make, how to colour them and how to bring the result into this upright display. The proportion leaves those choices open.</p>
+<p>Try ARC. A line joins circular segments laid through the squares. Turn it off again. The partition remains. Making the curve visible did not cause the subdivisions.</p>
+<p>Each segment is a quarter-circle. The resulting joined curve resembles a logarithmic spiral, but its curvature changes from one circular piece to the next. We can follow it and feel its invitation inward without making it evidence of a universal rule of beauty. Another cut makes a smaller square, another length, another demand on the eye. Eventually the record can name a difference the view barely resolves.</p>
+<p>The sponge made room by discarding material. This rectangle keeps the pieces together and gives the remainder another turn. The towers changed what a quantity looked like. Each procedure carries something forward and makes other differences harder to encounter. Asking what bodies are possible now includes asking what kind of reading our chosen representation permits.</p>
+<p>In the retained room beyond, the recursive cabinet, growing terrain, Romanesco, aggregation study and sphere remain. The Romanesco's cones inherit positions and turns from their parent cones. Its botanical appearance is a construction to inspect, not proof that a plant follows this code. The terrain and aggregation have their own updates. Let their differences interrupt the temptation to call everything here the same pattern.</p>
+<p>Next we gather the procedures. Before naming a desired shape, try saying what one step would receive, retain, change and pass on. After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="final.md-new-fn:1">
+<p>The numbers are Leonardo of Pisa's, from the rabbit problem in <em>Liber abaci</em> (1202), and older than his name for them: Virahanka and Hemachandra had counted the same series for Sanskrit metres centuries before. The ratio the towers approach is Euclid's “extreme and mean ratio”; “golden” is a nineteenth-century word for it.&#160;<a class="footnote-backref" href="#final.md-new-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></details><h2>technical.md</h2><p><a href="technical.md.diff">Plain diff</a></p><details><summary>Read both versions</summary><div class="pair reading"><article><h1>Numerical recurrence, height and geometric remainder</h1>
+<p>Two primary artifacts now have compact physical desks. <code>fibonacci_sequences</code> uses the existing live script at <code>algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd</code>. The scene's text path previously named an inactive copy under stringalgorithms while its UID loaded the fractals copy; path and UID now agree. The inactive file is preserved exactly as archived. Both artifacts opt in with <code>#lesson:true</code>; ordinary scenes retain their automatic behavior.</p>
+<h2>Fibonacci values and height</h2>
+<p>The source starts at [1,1] and generates twenty values by appending the preceding pair's sum. The teaching desk reveals two through ten terms, ending at 55. No automatic step advances this teaching view. NEXT/BACK change only the number of visible terms. HEIGHT switches between <code>h = 0.05 * value</code> and the existing logarithmic rule <code>h = 0.5 * log(value) + 0.5</code>. Indices, values, spacing and colour assignments remain consistent across the comparison. These are mathematical mappings into metres, not physical growth models.</p>
+<p>SUM shows the last available addition as two matching stacks at a fixed 0.05 m per unit: the left stack joins the two summands in separate colours; the right is their sum. It is independent of the tower-height mapping. With fewer than three terms there is no addition to display. At ten terms, both stacks contain 55 units and are 2.75 m high. RESET restores two logarithmic towers and hides SUM/RULE. Ten terms bound the size and draw work of this encounter.</p>
+<p>The original helix, natural-pattern panels and branching diagram are built once from their existing source functions and retained on supports. Their process-driven CSG rebuilding is disabled in the opted-in teaching instance. Their dimensions and construction rules remain. The downward branching diagram is raised so its last generation meets its display rather than being buried below the museum floor. The legacy Godot 3 material property <code>flags_transparent</code> is replaced by Godot 4's transparency enum in the live source.</p>
+<p>The source helix uses <code>r = 0.1 * phi ** (angle / TAU)</code>, with a vertical term; this multiplies radius by phi per full revolution. It is not the conventional golden logarithmic spiral, whose radial multiplier is phi per quarter revolution. The 144 seed points use <code>r = 0.1 * sqrt(i)</code> and <code>angle = i * TAU / phi²</code>. The pinecone-like construction has 8 pieces in each of 13 layers with a 0.3-radian turn between layers. Shell-like chambers and the branching diagram introduce other explicit rules. These are constructed resemblances, not validated biological explanations.</p>
+<h2>Golden rectangle and arcs</h2>
+<p>The second source computes <code>phi = (1 + sqrt(5)) / 2</code>. The initial rectangle is 5 by 5/phi metres. A cut removes a square of side <code>min(width,height)</code> and retains a rectangle with one dimension reduced by that side. The remainder alternates orientation and retains the long/short ratio phi, up to floating-point error. Squares plus the current remainder partition the original area; historical remainder records must not be summed again as additional material.</p>
+<p>The desk permits zero through eight cuts. It presents the existing generated geometry upright, with shallow 0.01 m extrusion. MEASURE labels the actual square side in metres and the cut index. Legacy Fibonacci number labels do not measure these shrinking squares. NEXT/BACK/RESET regenerate bounded geometry and detach old nodes before queueing deletion.</p>
+<p>ARC adds quarter-circle segments through the squares. Corrected arc centres in directions 1 and 3 make adjacent endpoints meet; each complete arc has 20 straight segments and both endpoints. The displayed curve is a polygonal rendering of piecewise circular arcs, not an exact logarithmic spiral. The arc is kept slightly in front of the squares. View toggles do not change the rectangle data. Ordinary source modes retain their auto-generation with the endpoint repair.</p>
+<h2>Retained room and limits</h2>
+<p>The original 17×15 structure is preserved at offset (3,24) in a 23×39 hall. Its five other placements stay at that offset. The two primaries move into the added approach so controls and their studies have space. The old raised sphere cell, gaps and walls remain. This wider hall exceeds the automatic 13–19-cell width recommendation because it stages the retained full-sized diagrams; the authored placement and walking route are checked explicitly.</p>
+<p>The existing recursion cabinet had no map-ready registry flags and was omitted at runtime. Its existing scene is now available. Romanesco's source was trying to add already-parented buds a second time. Reparenting without preserving the global transform now gives each bud its intended local offset under its actual parent: 13, 169 and 2,197 descendants at depths 1–3. This bug repair affects other instances using the same source. The 0.382 scale is approximately 1/phi², not 1/phi. DLA and the Fibonacci terrain retain their own automatic rules; neither receives a new controlled comparison.</p>
+<p>The same six full-size push targets and small transparent tilted screen used in preceding halls serve each desk. The rendered acceptance runner uses synthetic input through the real DesktopPlayer pointer pipeline. Native mouse interaction, human headset reach/comfort/readability and Quest frame time remain separate pending checks. Archive and receipts: <code>doc/space/golden-mapping-2026-09-14/</code>.</p></article><article><h1>Numerical recurrence, height and geometric remainder</h1>
+<p>Two primary artifacts now have compact physical desks. <code>fibonacci_sequences</code> uses the existing live script at <code>algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd</code>. The scene's text path previously named an inactive copy under stringalgorithms while its UID loaded the fractals copy; path and UID now agree. The inactive file is preserved exactly as archived. Both artifacts opt in with <code>#lesson:true</code>; ordinary scenes retain their automatic behavior.</p>
+<h2>Fibonacci values and height</h2>
+<p>The source starts at [1,1] and generates twenty values by appending the preceding pair's sum. The teaching desk reveals two through ten terms, ending at 55. No automatic step advances this teaching view. NEXT/BACK change only the number of visible terms. HEIGHT switches between <code>h = 0.05 * value</code> and the existing logarithmic rule <code>h = 0.5 * log(value) + 0.5</code>. Indices, values, spacing and colour assignments remain consistent across the comparison. These are mathematical mappings into metres, not physical growth models.</p>
+<p>SUM shows the last available addition as two matching stacks at a fixed 0.05 m per unit: the left stack joins the two summands in separate colours; the right is their sum. It is independent of the tower-height mapping. With fewer than three terms there is no addition to display. At ten terms, both stacks contain 55 units and are 2.75 m high. RESET restores two logarithmic towers and hides SUM/RULE. Ten terms bound the size and draw work of this encounter.</p>
+<p>The original helix, natural-pattern panels and branching diagram are built once from their existing source functions and retained on supports. Their process-driven CSG rebuilding is disabled in the opted-in teaching instance. Their dimensions and construction rules remain. The downward branching diagram is raised so its last generation meets its display rather than being buried below the museum floor. The legacy Godot 3 material property <code>flags_transparent</code> is replaced by Godot 4's transparency enum in the live source.</p>
+<p>The source helix uses <code>r = 0.1 * phi ** (angle / TAU)</code>, with a vertical term; this multiplies radius by phi per full revolution. It is not the conventional golden logarithmic spiral, whose radial multiplier is phi per quarter revolution. The 144 seed points use <code>r = 0.1 * sqrt(i)</code> and <code>angle = i * TAU / phi²</code>. The pinecone-like construction has 8 pieces in each of 13 layers with a 0.3-radian turn between layers. Shell-like chambers and the branching diagram introduce other explicit rules. These are constructed resemblances, not validated biological explanations.</p>
+<h2>Hand pair and complete learner construction — 8 October 2026</h2>
+<p>The numbers desk now installs <code>hand_sum.gd</code>, extending the complete small <code>sum_points.gd</code> construction printed in <code>tutorial.md</code>. <code>point_body.gd</code> is carried unchanged from the preceding hand models. The adapter reads a separate prefix of the original source's precomputed Fibonacci array and sends each new request through the existing desk NEXT. The printed learner version owns <code>[1,1]</code> and appends the last two entries' sum itself. Both render the same record twice, through linear and logarithmic height functions, then apply a common factor 0.2. One unit in the small linear view is 0.01 m. The two equal-sized point bodies carry labels; size and contact distance do not encode their quantities.</p>
+<p>One held point within 0.19 m of its partner requests one sum. A latch requires both points released before another held request; this also guards the trigger alternative. Released points return to their reachable homes. A desk edit during a hold synchronises the data and inhibits an additional contact until release. The installed version ignores global Enter; the printed workspace example uses the named <code>ui_accept</code> action. Two simultaneous hand pickups are possible but unnecessary: one hand can bring a point to its resting partner. No new locomotion or cross-hall storage is introduced.</p>
+<p>The new off-white table stands beside the original console at desk-local (-2.15, 0, 2); its NEXT/BACK/RESET controls are adjacent to the points. Small drawings have no collision, while the support and pickable points do. The original six controls, SUM witness, secondary displays, seven placements and map structure remain. Ten terms bound both representations. The independent printed seed variation <code>[1,2]</code> is executed separately and ends at 89. Numerical recurrence, geometric square removal and visual resemblance remain separate claims.</p>
+<h2>Golden rectangle and arcs (existing comparison)</h2>
+<p>The second source computes <code>phi = (1 + sqrt(5)) / 2</code>. The initial rectangle is 5 by 5/phi metres. A cut removes a square of side <code>min(width,height)</code> and retains a rectangle with one dimension reduced by that side. The remainder alternates orientation and retains the long/short ratio phi, up to floating-point error. Squares plus the current remainder partition the original area; historical remainder records must not be summed again as additional material.</p>
+<p>The desk permits zero through eight cuts. It presents the existing generated geometry upright, with shallow 0.01 m extrusion. MEASURE labels the actual square side in metres and the cut index. Legacy Fibonacci number labels do not measure these shrinking squares. NEXT/BACK/RESET regenerate bounded geometry and detach old nodes before queueing deletion.</p>
+<p>ARC adds quarter-circle segments through the squares. Corrected arc centres in directions 1 and 3 make adjacent endpoints meet; each complete arc has 20 straight segments and both endpoints. The displayed curve is a polygonal rendering of piecewise circular arcs, not an exact logarithmic spiral. The arc is kept slightly in front of the squares. View toggles do not change the rectangle data. Ordinary source modes retain their auto-generation with the endpoint repair.</p>
+<h2>Retained room and limits</h2>
+<p>The original 17×15 structure is preserved at offset (3,24) in a 23×39 hall. Its five other placements stay at that offset. The two primaries move into the added approach so controls and their studies have space. The old raised sphere cell, gaps and walls remain. This wider hall exceeds the automatic 13–19-cell width recommendation because it stages the retained full-sized diagrams; the authored placement and walking route are checked explicitly.</p>
+<p>The existing recursion cabinet had no map-ready registry flags and was omitted at runtime. Its existing scene is now available. Romanesco's source was trying to add already-parented buds a second time. Reparenting without preserving the global transform now gives each bud its intended local offset under its actual parent: 13, 169 and 2,197 descendants at depths 1–3. This bug repair affects other instances using the same source. The 0.382 scale is approximately 1/phi², not 1/phi. DLA and the Fibonacci terrain retain their own automatic rules; neither receives a new controlled comparison.</p>
+<p>The same six full-size push targets and small transparent tilted screen used in preceding halls serve each desk. The rendered acceptance runner uses synthetic input through the real DesktopPlayer pointer pipeline. Native mouse interaction, human headset reach/comfort/readability and Quest frame time remain separate pending checks. Archive and receipts: <code>doc/space/golden-mapping-2026-09-14/</code>.</p></article></div></details><h2>The new neighbour</h2><div class="pair"><figure><img src="images/before.png" alt="Existing Fibonacci desk with the new hand table hidden"><figcaption>New hand table hidden for comparison.</figcaption></figure><figure><img src="images/arrival.png" alt="Hand table beside the original Fibonacci desk"><figcaption>Same camera. The new table sits beside the original console.</figcaption></figure></div></main><footer>Native Godot captures. Headset feel, Quest performance and learner understanding remain untested.</footer></body></html>

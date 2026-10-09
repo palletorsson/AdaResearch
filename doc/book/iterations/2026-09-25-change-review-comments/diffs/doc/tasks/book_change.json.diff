@@ -1,0 +1,346 @@
+--- before/doc/tasks/book_change.json
++++ doc/tasks/book_change.json
+@@ -113,9 +113,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -130,9 +130,12 @@
+       "proposal": "At line 34, after 'For now the curve waits while we change the distance across which we read it.' add: 'The clock the last room promised enters in the next hall.'",
+       "evidence": "Ribbon_Patterns_03/final.md:61; tiling.json maps (Ribbon_Patterns_03 last); change.json:12-14; Change_Intro/final.md:11, 34, 110; Flow_Field/final.md:20.",
+       "review": "amended: Quote exact at Change_Intro/final.md:34. The promise is confirmed at Ribbon_Patterns_03/final.md:61 ('how much is changing, and how quickly, here? ... A clock might do more than ease a new hem into place'), Ribbon_Patterns_03 is the last map of tiling (commons/maps/sequences/tiling.json maps) and change requires tiling (change.json:12-14). The clock enters only at Flow_Field/final.md:20 and Change_Intro's own handover at :110 never mentions it, so the seam is real. But the proposed insertion point is wrong: line 11 runs 'Here we ask for a value at one address and another value nearby. Both readings are accurate.' and a sentence about the last room and the clock between them strands 'Both readings' from its antecedent. The refusal is at :34, which already ends with a deferral ('For now the curve waits while we change the distance across which we read it.'); the pointer belongs there.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nThe preceding Tiling ending was already corrected in the completed Tiling pass: it leads to a static curve and two spatial readings, not a promised clock. Retained that transition and did not add a sentence answering an obsolete promise. Ribbon_Patterns_03 is unchanged in this pass.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.392Z"
+     },
+     {
+       "id": "book_change.002",
+@@ -142,7 +145,7 @@
+       "skill": "edit",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Change_Intro"
+@@ -158,9 +161,12 @@
+       "proposal": "On the headset walk, stand at each bench and read the readout without leaning in. If it fails, trim each adapter's text to the numbers the chapter names (x, h, rise, rate on the tangent bench; height × width = area and the total on the Riemann bench), move '/ compare first' and 'HELD' into the panel title, and enlarge the remaining figures, so the chapter's three sentences stay true.",
+       "evidence": "rate_comparison.gd:94 and accumulation_comparison.gd:113 (the printed text); control_panel.gd:186-189 and RackPassiveElements.gd:534-537 (2-slot 2D label in a SubViewport, w = 0.54 m, h = 0.06 m); commons/maps/sequences/change.json:51 '_status … headset and learner verification remain pending'; Change_Intro/final.md:22, 46, 68.",
+       "review": "kept: Confirmed: rate_comparison.gd:94 prints six numbers on two lines (x %.3f, f, h, rise, rate, then analytic f' or 'compare first'); accumulation_comparison.gd:113 prints rule, N, sum, then 'cell i/N: height x width = area' or the 4096 ref and diff. control_panel.gd:189 builds a 2-slot display via RackPassiveElements.build_text_display_2d, which at :534-535 is w = 2*0.28-0.02 = 0.54 m, h = 0.06 m, rendered as a 1296x144 px SubViewport (:551) with a 43 px font (:570). control_panel.gd:578-581 scales it by min(target_w/0.54, 0.105/0.06) = 1.75 on the 1.8-2.0 m boards (rate_comparison.gd:24, accumulation_comparison.gd:18), so the screen is about 0.95 x 0.105 m with roughly 3 cm glyphs. That is probably legible at arm's length, so the conditional trim may never fire, but change.json:51 records headset verification as pending and nothing on disk contradicts it. The check is the task and the fallback is correctly conditional. Minor: x prints at three decimals, not four.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. Native standing and closer console photographs, plus actual readout strings, are provided in intro/. These cannot establish legibility in a headset without leaning. Kept the existing adapters unchanged. A headset walk must read both consoles before deciding whether fewer figures or larger type is needed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.418Z"
+     },
+     {
+       "id": "book_change.003",
+@@ -169,9 +175,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -186,9 +192,12 @@
+       "proposal": "Say where: 'On the line, back in the first sequence, `b - a` gave the same answer for a direct walk and a detour.' (or name **Point_Lines** in bold as the book does for map names).",
+       "evidence": "Change_Intro/final.md:104 versus 53 and 60 (`b - a` as region width); Point_Lines/final.md:68 'The endpoint calculation, `b - a`, gives the same answer for both journeys.'; commons/maps/curriculum_spine.json order 1 = primitives.",
+       "review": "kept: Exact at Change_Intro/final.md:104; Point_Lines/final.md:68 confirmed ('The endpoint calculation, `b - a`, gives the same answer for both journeys'). Spine order (curriculum_spine.json spine.sequences): primitives 1, change 6, so five sequences back. Inside the chapter `b - a` is the region width at :53 and :60, and 'the line' names the curve at :44 and :64, so 'Back at the line' misdirects twice over. Bold map names are the book's convention (Ribbon_Patterns_03:61 'In **Change_Intro**'). Prefer the bold form: 'In **Point_Lines**, `b - a` gave the same answer for a direct walk and a detour.'",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nNamed Point_Lines at the b - a callback. Its current chapter explicitly compares direct movement and a detour; the original signed-change argument is retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.444Z"
+     },
+     {
+       "id": "book_change.004",
+@@ -197,9 +206,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -214,9 +223,12 @@
+       "proposal": "After line 108 add: 'The pump running three rules side by side, the staircase that reads motion at frame ticks, the paper boats on their gutter river and the marble in its swaying bowl remain nearby as supporting encounters; each moves on a clock the benches have set aside.'",
+       "evidence": "Change_Intro/map_data.json interactables (17 cells; riemann_pump :2602, zeno_staircase :2937, paper_regatta :2715, descent_marble_toy :2889, gradient_descent_well :2643); tools/artifact_roles.py --brief --map Change_Intro; registry/change.json (riemann_pump, zeno_staircase, paper_regatta), registry/soft_bodies.json (descent_marble_toy), registry/self_portrait.json (gradient_descent_well); Vectors_Act1_WhatAVectorIs/final.md:31.",
+       "review": "amended: Counts confirmed: 17 interactable cells in Change_Intro/map_data.json, artifact_roles.py --brief --map Change_Intro lists 3 primary and 14 secondary; Vectors_Act1_WhatAVectorIs/final.md:31 convention confirmed. Two facts in the proposed sentence fail. descent_marble_toy is 'A small bowl with a marker carrying position and velocity' (registry/soft_bodies.json) - one marker, one bowl - so 'the marbles rolling into their bowls' describes gradient_descent_well ('a glowing loss basin where marbles fall', registry/self_portrait.json) instead. And 'a clock this hall has not yet used' would land one sentence after 'The pulse begins again' (:108), a clock the hall has just used. riemann_pump ('Three side-by-side strip displays ... left, right, and midpoint sums'), zeno_staircase ('reads at frame ticks') and paper_regatta ('regatta of engineless paper boats') check out against registry/change.json. One sentence, so effort S. If task 8 is taken, the velocity arrow gets its own pointer at :34 and need not join this list.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nAdded an optional return to the existing three-rule pump, frame-sampled staircase, gutter boats and swaying marble bowl. Amended the suggested sentence to avoid calling all of them clock-driven. Four selected comparisons orient the reader without replacing the three main encounters with an inventory.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.474Z"
+     },
+     {
+       "id": "book_change.005",
+@@ -225,9 +237,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -242,9 +254,12 @@
+       "proposal": "Write 'Four blue rectangles reach up towards the same curve.' and leave the rest of the paragraph unchanged.",
+       "evidence": "Change_Intro/final.md:38-44; riemann_sum_workbench.gd:128-130 and tangent_slope_workbench.gd:161-163 define the identical f, so 'the same curve' is true.",
+       "review": "kept: Exact at :44. The antecedent is 'this same curve' at :38, before the H2 (:40) and the tag (:42), and the book hangs each tagged region as its own wall (commons/data/book/change.json, pearl 'change intro', three lines keyed by token), so the Riemann wall opens on 'it'. Identical f confirmed (tangent_slope_workbench.gd:161-163; riemann_sum_workbench.gd:128-130) and identical domain [0,5] (tangent :78-80; riemann :50-52), so 'the same curve' is true.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nChanged the Riemann opening to the same curve, so the paragraph can stand alone without a dangling it.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.506Z"
+     },
+     {
+       "id": "book_change.006",
+@@ -253,9 +268,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -270,9 +285,12 @@
+       "proposal": "After 'The live rectangles take their heights from the right edges instead of the midpoints.' (line 48) add 'A further press takes the left edges; a third returns to the midpoints.' and keep 'Return to MID' as it is.",
+       "evidence": "accumulation_comparison.gd:3-4 (RULES = MID, RIGHT, LEFT; FRACTIONS = 0.5, 1.0, 0.0) and 72-74 (rule = (rule + 1) % 3); Change_Intro/final.md:48, 64.",
+       "review": "kept: accumulation_comparison.gd:3-4 (RULES = MID, RIGHT, LEFT; FRACTIONS = 0.5, 1.0, 0.0) and :72-74 (rule = (rule + 1) % RULES.size()) confirmed; chapter :48 and :64 exact, and :70 repeats 'Return to four rectangles and compare MID with RIGHT'. Stronger than the reader says: RESET (:56-62) does return the rule to MID but also resets N to 4 and clears the held picture (held.clear(); held_root.hide()), so the only way to 'Return to MID' while 'Keep the held four beside them' (:64) is two more RULE presses through LEFT, which the chapter never names.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nExplained RIGHT, LEFT and the return to MID while HOLD stays available. Native button-signal checks confirm the full cycle preserves the held state; the count slider then gives eight live rectangles beside four held.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.539Z"
+     },
+     {
+       "id": "book_change.007",
+@@ -281,9 +299,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Flow_Field"
+       ],
+@@ -298,9 +316,12 @@
+       "proposal": "Add one sentence at the start of the closing region (before line 53): 'The two arrow fields, the swarm riding one of them, the agents steering through another, and the zoetrope turning twelve stillnesses into motion remain nearby; each holds a field or a clock of its own.'",
+       "evidence": "Flow_Field/map_data.json:1140 (vector_field_visualizer), 1258 (vector_field_grid), 1266 (particle_flow_swarm), 1384 (noc_5_04_flow_field), 1392 (grand_zoetrope); registry descriptions in commons/artifacts/registry/change.json (grand_zoetrope 'The change SUPER OBJECT', particle_flow_swarm 'Pairs with the grid'), vectors.json, steering.json; artifact_roles.py --brief --map Flow_Field lists them as secondary.",
+       "review": "kept: Map lines confirmed (Flow_Field/map_data.json:1140 vector_field_visualizer, :1258 vector_field_grid, :1266 particle_flow_swarm, :1384 noc_5_04_flow_field, :1392 grand_zoetrope), all five secondary per artifact_roles.py. Registry: vector_field_visualizer '3D arrow field' (vectors.json), vector_field_grid 'Regular grid of arrows over a plane' (change.json), particle_flow_swarm 'ride the same vector field shown in vector_field_grid' (change.json), noc_5_04_flow_field 'Agents navigate by following a vector flow field' (steering.json), grand_zoetrope 'The change SUPER OBJECT ... twelve stillnesses fast enough to bounce' (change.json). Quote exact at :53; placing the sentence first in the closing region matches Vectors_Act1:31.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nInvited comparison with the existing two arrow displays, particle swarm, steering agents and Grand Zoetrope. The source builds twelve poses around a rotating drum. The prose describes that mechanism and invites a comparison; it does not claim this screenshot proves perceived animation or that all supporting works share the painter’s field.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.567Z"
+     },
+     {
+       "id": "book_change.008",
+@@ -309,9 +330,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -326,9 +347,12 @@
+       "proposal": "After line 34 add: 'Across the hall a puck circles a closed track with an arrow riding on it. The arrow's length is the puck's speed; it needs the clock this bench has set aside.'",
+       "evidence": "Change_Intro/map_data.json:2240, 2399 and structure rows 3-13; commons/grid/GridSystem.gd:30; registry/change.json velocity_arrow description; Change_Intro/final.md:34; Flow_Field/final.md:20; VFM_03_Motion/final.md:7.",
+       "review": "amended: Facts confirmed: velocity_arrow at row 10 col 23 (Change_Intro/map_data.json:2399), tangent bench at row 5 col 9 (:2240); structure rows 3-13 are open floor (1) with walls (4) only at cols 0 and 26 and no utilities, cube_size 1.0 (GridSystem.gd:30), so about 15 m across one open hall; registry description confirmed (change.json velocity_arrow). Two defects in the wording: 'such an arrow' has no antecedent, since :34 mentions no arrow; and 'its clock belongs to Forces' contradicts Flow_Field:20, where `direction * speed` 'gives a velocity' and 'The clock has entered the sum' - velocity and the clock arrive in the next hall, and Forces adds what a push leaves behind (VFM_03_Motion/final.md:7). Overlaps task 4; keep this as the in-place pointer.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nAdded the moving puck and turning arrow across the hall, but amended the review’s proposed speed claim. velocity_arrow.gd estimates change per track angle, scales and clamps its magnitude, and does not multiply by the speed parameter. The clock advances the puck. The new sentence describes that distinction without falsely equating arrow length with speed. Source unchanged; calibration remains possible future artifact work.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.597Z"
+     },
+     {
+       "id": "book_change.009",
+@@ -337,9 +361,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Flow_Field"
+       ],
+@@ -354,9 +378,12 @@
+       "proposal": "Write 'A label above the far edge of the canvas says FIELD HELD.'",
+       "evidence": "shared_field_lesson.gd:33 (status at (0, 0.09, -0.24) over a 0.6 × 0.4 canvas), 46 (refresh every 0.1 s), 49 (text 'FIELD HELD / 80 PARTICLES / ARROWS HIDDEN'); flow_field_painter.gd:229-236 (the rack panel is titled FLOW FIELD and carries SCALE, SPEED, RESET, SEED).",
+       "review": "kept: shared_field_lesson.gd:33 places the status Label3D at (0, 0.09, -0.24) over a 0.6 x 0.4 canvas (flow_field_painter.gd:46), i.e. just beyond the far edge at z = -0.2 and 9 cm up; :13 hides the painter's own title because 'The lesson status occupies this title position'; :49 prints 'FIELD HELD / 80 PARTICLES / ARROWS HIDDEN' (80 from :17); :44-46 refresh every 0.1 s. The rack is `_control_panel`, built by RackTemplates.create_panel('FLOW FIELD', ...) with SCALE, SPEED, RESET, SEED (flow_field_painter.gd:229-237), lowered and tilted -65 degrees (:15-16) beside the ARROWS / FIELD TIME buttons at z +0.51 (:30), the visitor's side. So 'the panel' sends the eyes the wrong way. Dropping the bold is right too: FIELD HELD is a readout, not a control.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nLocated FIELD HELD above the far canvas edge. Native inspection confirms the label is beyond the edge; a closer standing side view shows both canvas and label inside the museum.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.629Z"
+     },
+     {
+       "id": "book_change.010",
+@@ -365,9 +392,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Change_Intro"
+       ],
+@@ -382,9 +409,12 @@
+       "proposal": "Write 'Above the curve, a second plot shows how its local slope varies from place to place.'",
+       "evidence": "tangent_slope_workbench.gd:21, 46, 65, 412-413, 618, 697-701; rate_comparison.gd:29, 93; accumulation_comparison.gd:34; Change_Intro/map_data.json:2240, 2367; Change_Intro/final.md:26.",
+       "review": "amended: tangent_slope_workbench.gd:46 (plot_height 0.5), :65 (derivative_subplot_y 0.78) and :412-413 ('Sits above the main plot in the plot's local frame') confirmed; the header at :21 says the same. Quote exact at :26 and the proposal is right. The why's parenthesis is wrong: the HOLD panel belongs to the Riemann bench (held_root at that bench's plot_offset + (1.3, 0, 0), accumulation_comparison.gd:34), which stands at row 9 col 20, eleven columns from the tangent bench. What sits beside the tangent curve after DERIVATIVE is the slope-sign card: rate_comparison.gd:29 moves _sign_root to (1.05, 1.65, -0.05) and :93 shows it only when revealed - a 0.22 m card with an arrow and 'rising · f' > 0' (tangent_slope_workbench.gd:618, 697-701), not a plot.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nPlaced the second slope plot above the curve rather than beside it. The loaded scene and same-camera comparison confirm that relation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.661Z"
+     },
+     {
+       "id": "book_change.011",
+@@ -393,9 +423,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Flow_Field"
+       ],
+@@ -410,9 +440,12 @@
+       "proposal": "Write 'The bridge and the benches before it read addresses chosen along an interval.'",
+       "evidence": "Change_Intro/final.md:82-108 (ftc_bridge is the last region); ftc_bridge.gd:341-350 (a 'machine' console beside the left pillar, not a workbench preset); Flow_Field/final.md:11.",
+       "review": "kept: Exact at Flow_Field/final.md:11. Change_Intro's last region is ftc_bridge (:82-108); the chapter reserves 'workbench' for the first two works (:38 'The next workbench keeps this same curve') and calls the third 'the bridge'; ftc_bridge.gd:341-350 builds a 'machine' preset console beside the left pillar, not a workbench. The Riemann loop (:52-58) and the bridge's sum (:92-96) both read addresses along an interval, so the proposed plural is accurate and removes the pause.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nReplaced previous workbench with the bridge and the benches before it. This follows the actual reading order without changing the numerical explanation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.690Z"
+     },
+     {
+       "id": "book_change.012",
+@@ -421,9 +454,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Flow_Field"
+       ],
+@@ -438,9 +471,12 @@
+       "proposal": "Write 'Later in Forces, a push will end and a cube will keep going.'",
+       "evidence": "Flow_Field/final.md:57; commons/maps/sequences/forces.json maps (Vectors_Act1_WhatAVectorIs first, VFM_03_Motion fifth); VFM_03_Motion/final.md:1, 7; Vectors_Act1_WhatAVectorIs/final.md:31; VFM_02_Operations/final.md:45.",
+       "review": "amended: Flow_Field/final.md:57 exact and forces.json maps order confirmed with Vectors_Act1_WhatAVectorIs first. The cited evidence is wrong on both counts: 'Today it describes; it does not push.' does not occur in Vectors_Act1_WhatAVectorIs/final.md (neither 'push' nor 'describes' appears in that file; the nearest line is Vectors_Act3_FieldsAndMotion:51 'These controls do not push the player's body'), and the cube that keeps going is in VFM_03_Motion ('# When the push ends'; :7 'The command lasts one second. The cube keeps going.'), fifth in forces.json, not VFM_05_Launch (fourth, an amber marker on a launch arc). The substance survives: Vectors_Act1 is a displacement bench (:31 'The freedom to move a displacement arrow does not make every use of a vector independent of place') and VFM_02_Operations:45 says 'We have not yet needed a push', so the one-word fix is accurate and cheap.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nChanged the closing promise to Later in Forces. The one-second push is in VFM_03_Motion, fifth in that sequence, rather than the first encounter.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-change-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T05:52:30.704Z"
+     }
+   ]
+ }

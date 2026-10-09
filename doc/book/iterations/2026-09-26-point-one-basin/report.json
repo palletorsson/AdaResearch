@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "coordinate frame present",
+      "passed": true
+    },
+    {
+      "name": "coordinate origin sits in the basin",
+      "passed": true
+    },
+    {
+      "name": "frame still follows the carried point",
+      "passed": true
+    },
+    {
+      "name": "glass supports the visitor at deck height",
+      "passed": true
+    },
+    {
+      "name": "basin has a solid floor one metre down",
+      "passed": true
+    },
+    {
+      "name": "visitor can cross the glass without a raised lip",
+      "passed": true
+    },
+    {
+      "name": "pool crossing returns to supported floor",
+      "passed": true
+    },
+    {
+      "name": "world reports the held point in the correct frame",
+      "passed": true
+    },
+    {
+      "name": "local reports the held point in the correct frame",
+      "passed": true
+    },
+    {
+      "name": "both readout cards remain present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: basin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: basin-close",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "frame_position": [
+      4.5,
+      -0.899999976158142,
+      20.5
+    ]
+  },
+  "passed": true,
+  "scope": "Native museum geometry, collision and coordinate readouts. No headset acceptance claimed."
+}

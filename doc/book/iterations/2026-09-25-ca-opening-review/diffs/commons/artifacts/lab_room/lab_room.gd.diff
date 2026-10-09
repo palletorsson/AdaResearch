@@ -1,0 +1,29 @@
+--- before/commons/artifacts/lab_room/lab_room.gd
++++ commons/artifacts/lab_room/lab_room.gd
+@@ -202,6 +202,8 @@
+ ## Which wall the title signage hangs on: "front"/"south", "back"/"north",
+ ## "west", or "east". Default front wall (above the door / accent strip).
+ @export var signage_wall: String = "front"
++## Placement-only offset so a title can clear mounted apparatus and fixtures.
++@export var signage_height_offset: float = 0.0
+ 
+ @export_group("Lighting")
+ ## 0.0 = warm yellow tint, 1.0 = cool blue tint on the directional light.
+@@ -689,6 +691,8 @@
+ 		signage_sub = str(get_meta("config_signage_sub"))
+ 	if has_meta("config_signage_wall"):
+ 		signage_wall = str(get_meta("config_signage_wall")).to_lower()
++	if has_meta("config_signage_height_offset"):
++		signage_height_offset = float(get_meta("config_signage_height_offset"))
+ 	if has_meta("config_annotation_top"):
+ 		annotation_top = str(get_meta("config_annotation_top"))
+ 	if has_meta("config_annotation_bottom"):
+@@ -3723,7 +3727,7 @@
+ 	# +Z by default, so each wall needs its own Y-rotation to read correctly.
+ 	var signage_root := Node3D.new()
+ 	signage_root.name = "Signage"
+-	var y: float = room_height * 0.62
++	var y: float = room_height * 0.62 + signage_height_offset
+ 	var off: float = WALL_THICKNESS + 0.06
+ 	match signage_wall:
+ 		"west":            # -X wall, read from +X side → face +X

@@ -1,0 +1,91 @@
+shader_type spatial;
+render_mode depth_draw_always, cull_back;
+// Fully opaque shader with proper depth for VR - no alpha blending
+
+
+// Uniforms
+uniform vec4 modelColor : source_color = vec4(0.5, 0.5, 0.5, 1.0);       // Main cube color
+uniform vec4 wireframeColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);   // Wireframe color
+uniform vec4 emissionColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);    // Emission color
+uniform float width : hint_range(0.1, 15.0) = 2.0;                       // Edge thickness
+uniform float blur : hint_range(0.1, 5.0) = 1.0;                         // Blur amount
+uniform float emission_strength : hint_range(0.0, 10.0) = 2.0;           // Emission intensity
+uniform bool show_interior = true;                                       // Show cube interior
+
+// Barycentric coordinates
+varying vec3 baryCoord;
+varying vec4 instanceColor;  // Pass instance color from MultiMesh
+varying vec4 customData;     // Pass custom data (e.g., emission) from MultiMesh
+
+void vertex() {
+    // Calculate barycentric coordinates more reliably
+    int vertexIndex = VERTEX_ID % 3;
+    if (vertexIndex == 0) {
+        baryCoord = vec3(1.0, 0.0, 0.0);
+    } else if (vertexIndex == 1) {
+        baryCoord = vec3(0.0, 1.0, 0.0);
+    } else {
+        baryCoord = vec3(0.0, 0.0, 1.0);
+    }
+
+    // Pass instance color (from MultiMesh) to fragment shader
+    instanceColor = COLOR;
+    customData = INSTANCE_CUSTOM;
+}
+
+void fragment() {
+    // Calculate edge distances using barycentric coordinates
+    vec3 dBaryCoordX = dFdx(baryCoord);
+    vec3 dBaryCoordY = dFdy(baryCoord);
+    vec3 dBaryCoord = sqrt(dBaryCoordX * dBaryCoordX + dBaryCoordY * dBaryCoordY);
+
+    // Prevent division by zero
+    dBaryCoord = max(dBaryCoord, vec3(0.0001));
+
+    // Calculate distance to edges
+    vec3 edge_distance = baryCoord / (dBaryCoord * width);
+
+    // Apply smoothstep for edge detection
+    vec3 remap = smoothstep(vec3(0.0), vec3(blur), edge_distance);
+
+    // Find the closest edge (minimum distance means closest to an edge)
+    float closestEdge = min(min(remap.x, remap.y), remap.z);
+
+    // Use instance color if modelColor is white (colorizer mode)
+    // OR if instance color is explicitly set (not default white)
+    vec4 baseColor = modelColor;
+
+    // If modelColor is white, always use instance color (colorizer is active)
+    if (length(modelColor.rgb - vec3(1.0)) < 0.01) {
+        baseColor = instanceColor;
+    }
+    // Otherwise, use instance color only if it's explicitly set (not white)
+    else if (length(instanceColor.rgb - vec3(1.0)) > 0.01 || instanceColor.a < 0.99) {
+        baseColor = instanceColor;
+    }
+
+    // Calculate final color - fully opaque, no alpha
+    vec3 finalColor;
+
+    if (show_interior) {
+        // Mix wireframe and model/instance colors
+        finalColor = mix(wireframeColor.rgb, baseColor.rgb, closestEdge);
+    } else {
+        // Only show wireframe on edges, use base color for interior
+        finalColor = mix(wireframeColor.rgb, baseColor.rgb, closestEdge);
+    }
+
+    // Apply colors - fully opaque
+    ALBEDO = finalColor;
+    // No ALPHA output - fully opaque
+
+    // Add emission to wireframe edges
+    vec3 finalEmission = emissionColor.rgb;
+    
+    // If customData is provided (not zeroed), use it as the emission color
+    if (length(customData.rgb) > 0.001) {
+        finalEmission = customData.rgb;
+    }
+    
+    EMISSION = finalEmission * (1.0 - closestEdge) * emission_strength;
+}

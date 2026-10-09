@@ -1,0 +1,479 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Overhead camera remains active",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "Explorer present with its current shared receiver",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "hall_origin": [
+      0.0,
+      0.0,
+      -4.0
+    ],
+    "inventory": [
+      {
+        "hall_position": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ],
+        "key": "window",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_window",
+        "top_pixel": [
+          900.0,
+          146.999954223633
+        ],
+        "world": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ]
+      },
+      {
+        "hall_position": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ],
+        "key": "view",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_view",
+        "top_pixel": [
+          900.0,
+          220.499954223633
+        ],
+        "world": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ]
+      },
+      {
+        "hall_position": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ],
+        "key": "counter",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_counter",
+        "top_pixel": [
+          1071.5,
+          174.439926147461
+        ],
+        "world": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ]
+      },
+      {
+        "hall_position": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ],
+        "key": "extinguisher",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_extinguisher",
+        "top_pixel": [
+          588.359985351563,
+          249.899963378906
+        ],
+        "world": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ]
+      },
+      {
+        "hall_position": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ],
+        "key": "elevator",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_elevator",
+        "top_pixel": [
+          1313.55993652344,
+          230.299957275391
+        ],
+        "world": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ]
+      },
+      {
+        "hall_position": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ],
+        "key": "pallet",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_pallet",
+        "top_pixel": [
+          1272.40002441406,
+          230.299957275391
+        ],
+        "world": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ]
+      },
+      {
+        "hall_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "key": "point_zero",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_point_zero",
+        "top_pixel": [
+          532.5,
+          122.499938964844
+        ],
+        "world": [
+          0.0,
+          0.0,
+          -4.0
+        ]
+      },
+      {
+        "hall_position": [
+          2.5,
+          0.0,
+          7.5
+        ],
+        "key": "synthesis_stand",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/SynthesisStand",
+        "top_pixel": [
+          655.0,
+          489.999938964844
+        ],
+        "world": [
+          2.5,
+          0.0,
+          3.5
+        ]
+      },
+      {
+        "hall_position": [
+          2.5,
+          0.0599999986588955,
+          7.5
+        ],
+        "key": "dark_sphere",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/SynthesisStand/DarkSphere",
+        "top_pixel": [
+          655.0,
+          489.999938964844
+        ],
+        "world": [
+          2.5,
+          0.0599999986588955,
+          3.5
+        ]
+      },
+      {
+        "hall_position": [
+          4.5,
+          0.025000000372529,
+          8.5
+        ],
+        "key": "persian_rug",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/PersianRug",
+        "top_pixel": [
+          753.0,
+          538.999938964844
+        ],
+        "world": [
+          4.5,
+          0.025000000372529,
+          4.5
+        ]
+      },
+      {
+        "hall_position": [
+          10.5,
+          1.03999996185303,
+          9.5
+        ],
+        "key": "ca_rule_explorer",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CARuleExplorer",
+        "top_pixel": [
+          1047.0,
+          587.999938964844
+        ],
+        "world": [
+          10.5,
+          1.03999996185303,
+          5.5
+        ]
+      },
+      {
+        "hall_position": [
+          10.5,
+          0.0,
+          13.5
+        ],
+        "key": "langton_swarm",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/LangtonSwarm",
+        "top_pixel": [
+          1047.0,
+          783.999938964844
+        ],
+        "world": [
+          10.5,
+          0.0,
+          9.5
+        ]
+      },
+      {
+        "hall_position": [
+          10.5,
+          0.0,
+          16.5
+        ],
+        "key": "line_network_ca",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/LineNetworkCA",
+        "top_pixel": [
+          1047.0,
+          930.999938964844
+        ],
+        "world": [
+          10.5,
+          0.0,
+          12.5
+        ]
+      },
+      {
+        "hall_position": [
+          10.5,
+          0.0,
+          20.5
+        ],
+        "key": "rule110_computer",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Rule110Computer",
+        "top_pixel": [
+          1047.0,
+          1127.0
+        ],
+        "world": [
+          10.5,
+          0.0,
+          16.5
+        ]
+      },
+      {
+        "hall_position": [
+          1.5,
+          0.0,
+          21.5
+        ],
+        "key": "ca_showcase",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CaShowcase",
+        "top_pixel": [
+          606.0,
+          1176.0
+        ],
+        "world": [
+          1.5,
+          0.0,
+          17.5
+        ]
+      },
+      {
+        "hall_position": [
+          6.5,
+          3.51999998092651,
+          3.0
+        ],
+        "key": "exit_sign",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ExitSign",
+        "top_pixel": [
+          851.0,
+          269.499969482422
+        ],
+        "world": [
+          6.5,
+          3.51999998092651,
+          -1.0
+        ]
+      },
+      {
+        "hall_position": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ],
+        "key": "wall_clock",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/WallClock",
+        "top_pixel": [
+          582.480041503906,
+          146.999954223633
+        ],
+        "world": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ]
+      },
+      {
+        "hall_position": [
+          12.0,
+          0.899999976158142,
+          13.5
+        ],
+        "key": "whiteboard",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Whiteboard",
+        "top_pixel": [
+          1120.5,
+          783.999938964844
+        ],
+        "world": [
+          12.0,
+          0.899999976158142,
+          9.5
+        ]
+      },
+      {
+        "hall_position": [
+          1.0,
+          1.5,
+          1.5
+        ],
+        "key": "electrical_panel",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ElectricalPanel",
+        "top_pixel": [
+          581.5,
+          195.999938964844
+        ],
+        "world": [
+          1.0,
+          1.5,
+          -2.5
+        ]
+      },
+      {
+        "hall_position": [
+          3.70000004768372,
+          4.6399998664856,
+          10.2250003814697
+        ],
+        "key": "ceiling_vent",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CeilingVent",
+        "top_pixel": [
+          713.799987792969,
+          623.524963378906
+        ],
+        "world": [
+          3.70000004768372,
+          4.6399998664856,
+          6.22500038146973
+        ]
+      },
+      {
+        "hall_position": [
+          8.5,
+          4.3600001335144,
+          13.0
+        ],
+        "key": "cable_tray",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CableTray",
+        "top_pixel": [
+          949.0,
+          759.499938964844
+        ],
+        "world": [
+          8.5,
+          4.3600001335144,
+          9.0
+        ]
+      },
+      {
+        "hall_position": [
+          8.5,
+          0.0,
+          5.5
+        ],
+        "key": "floor_grate",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/FloorGrate",
+        "top_pixel": [
+          949.0,
+          391.999938964844
+        ],
+        "world": [
+          8.5,
+          0.0,
+          1.5
+        ]
+      },
+      {
+        "hall_position": [
+          9.5,
+          0.0,
+          16.5
+        ],
+        "key": "station_plinth",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ArtPlinth0",
+        "top_pixel": [
+          998.0,
+          930.999938964844
+        ],
+        "world": [
+          9.5,
+          0.0,
+          12.5
+        ]
+      },
+      {
+        "hall_position": [
+          9.5,
+          0.419999986886978,
+          16.5
+        ],
+        "key": "dream_bodies",
+        "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DreamBody0",
+        "top_pixel": [
+          998.0,
+          930.999938964844
+        ],
+        "world": [
+          9.5,
+          0.419999986886978,
+          12.5
+        ]
+      }
+    ],
+    "scope": "Current installed hall from above and a raised oblique viewpoint, using its existing environment. Neighbouring halls and player hidden for capture only. No map arrangement or production logic changed.",
+    "top_camera": {
+      "entry_at": "top; negative Z",
+      "hall_local": [
+        7.5,
+        31,
+        12
+      ],
+      "pixels": [
+        1800,
+        1421
+      ],
+      "size": 29
+    }
+  },
+  "passed": true,
+  "room": "CA_Introduction",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

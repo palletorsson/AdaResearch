@@ -1,0 +1,53 @@
+{
+  "checks": 14,
+  "evidence": {
+    "artifact_global": "(8.5, 0.0, 13.5)",
+    "artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "dark_sphere",
+      "kusama_sine",
+      "wave_propagation_3d",
+      "coupled_oscillator_lattice",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent",
+      "station_plinth",
+      "dream_bodies"
+    ],
+    "console_approaches": {
+      "-0.48": [
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_5_17",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_5_16",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_4_17"
+      ],
+      "0.0": [
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_5_18",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_5_17",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_4_18",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_4_17"
+      ],
+      "0.48": [
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_5_18",
+        "/root/EndlessMuseum/Seg0_louisiana-pavilion-chain/WavePropagation3D/WaveSurface/TileCollision_4_18"
+      ]
+    },
+    "coupling": 1.5,
+    "drive": "Sine",
+    "scale": "(1.0, 1.0, 1.0)",
+    "segment_local": "(8.5, 0.0, 17.5)",
+    "time": 2.49999999999999
+  },
+  "failures": [
+    "clear console standing approach z=-0.48",
+    "clear console standing approach z=0.0",
+    "clear console standing approach z=0.48"
+  ],
+  "headset_tested": false
+}

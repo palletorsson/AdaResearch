@@ -1,0 +1,43 @@
+{
+  "started": "2026-09-14T21:52:12+02:00",
+  "finished": "2026-09-14T21:52:47+02:00",
+  "pid": 42280,
+  "exit": 0,
+  "checks": 42,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/colonization_probe_base.gd": "ccc9f54643ea8b82c03871a81a04385187df9e469494b962a378284a455e73c0",
+    "ada_run/colonization_acceptance.gd": "10074c59e633fe46a51fba220c86c186504e9c03992beb2111408586ec453e78",
+    "commons/maps/PG_Space_Colonization/map_data.json": "23952072647df7cd6d4bbe9c456fce9b18d4bbc91733dfed2912d38866a8cd9f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/colonization-review-2026-09-14/review-plan.json": "b7035bd5ee5129e23ea2c5676a3a5a611e3f46277841589f411e6f15ebf04264",
+    "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn": "00b7b65b8a5c44691bcbbb94b13569fb77b1a421ef9fedc9dd1a174f08548493",
+    "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd": "2252e44f93823663b3a2304950dda9b6c79fa30e37a1ed5216f4bf5afe376676",
+    "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationUI.gd": "ce951853eb8ec91e5f2629267a1b214f40f2a0239ab19a8a5abba3171940bfbd",
+    "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_museum.gd": "24064155e1531b4dc858ca585cb02654b1a96bac668e7f05022cab897365111b",
+    "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd": "c38a81ada4a5528effc407a7eced826fe40e8fac6bdcde811956297f3b6a2572",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/proceduralgeneration.json": "4cb34bd39e928092458716e455a660a21336d4e1cc3eddda1d430cc9bf8c608b",
+    "commons/data/trunk_branches.json": "a44d1d4f6a6301737de8c574db225bc76ed0bac8e64579324da78b0c23e9e5ff",
+    "commons/data/map_authored.json": "54f0da1cec5c7327aae71e8485eaccc54ff3b06268671f3d8d90c81b13c57722",
+    "commons/maps/PG_Space_Colonization/final.md": "dea2441bfe7d513ad6c821c8f719df968206ab54648cedb860fa0f779c26674e",
+    "ada_run/colonization-reference.json": "b51bcb05294448e50f443ea40972370976d12e8b80150116804000e0d804938e",
+    "ada_run/colonization_reference.py": "aabc64068bdd524ced7daf46dddfc818894f920f2684b7e3e271c8e9015458a7",
+    "commons/maps/sequences/proceduralgeneration.json": "b815c68a3c4611f7b4030584fa02cec589f541de748ca45902bbb1c9a78d3da8"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "known_startup_errors": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+  ],
+  "known_startup_error_reason": "Unresolved default audio bus UID in project.godot; exact same diagnostic present before hall changes. Muted capture; human audio unverified."
+}

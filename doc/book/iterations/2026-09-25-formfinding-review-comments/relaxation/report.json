@@ -1,0 +1,89 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cloth and vessel exist in the loaded hall",
+      "passed": true
+    },
+    {
+      "name": "hall enables comparison",
+      "passed": true
+    },
+    {
+      "name": "initial wind and four passes",
+      "passed": true
+    },
+    {
+      "name": "WIND toggles off and resets to 60",
+      "passed": true
+    },
+    {
+      "name": "three presses reach one pass through eight and twelve",
+      "passed": true
+    },
+    {
+      "name": "one-pass count is 420",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cloth-one-pass",
+      "passed": true
+    },
+    {
+      "name": "next press selects four and resets",
+      "passed": true
+    },
+    {
+      "name": "four-pass count is 420",
+      "passed": true
+    },
+    {
+      "name": "extra passes reduce mean and worst error",
+      "passed": true
+    },
+    {
+      "name": "one-pass figures reproduce",
+      "passed": true
+    },
+    {
+      "name": "four-pass figures reproduce",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cloth-four-pass",
+      "passed": true
+    },
+    {
+      "name": "vessel has a two-sided closed collision surface",
+      "passed": true
+    },
+    {
+      "name": "surface answers collision query",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: glass-keeps-a-boundary",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "four_pass": {
+      "drop": 0.607081115245819,
+      "mean_absolute_percent": 0.359176909064085,
+      "worst_absolute_percent": 8.93551627745857
+    },
+    "one_pass": {
+      "drop": 0.64061039686203,
+      "mean_absolute_percent": 1.40894073796988,
+      "worst_absolute_percent": 34.2761151831699
+    },
+    "vessel_bounds": "[P: (-0.382403, -1.265527, -0.378115), S: (0.757733, 1.815527, 0.759477)]"
+  },
+  "passed": true,
+  "room": "FormFinding_Relaxation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

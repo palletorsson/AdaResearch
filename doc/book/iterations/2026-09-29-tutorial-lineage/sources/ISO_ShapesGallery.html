@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_ShapesGallery · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_ShapesGallery">← Tutorial lineage</a></p><h1>ISO ShapesGallery</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_ShapesGallery/final.md">Raw captured source</a></p><pre># The same tool makes a cup
+
+&lt;!-- @mc_shapes_gallery --&gt;
+
+Can the procedure that makes a chair also make a hollow cup?
+
+Compare the labelled Chair and Cup in the shapes gallery. Find a junction between parts of the chair, then look for the cup&#x27;s inner boundary and its handle. Move to a second viewpoint where a hollow and a projecting part are easier to distinguish. Describe those relations before naming their ingredients.
+
+Inspect a junction on the chair from a second angle. A seam can disappear in the combined surface even though the description still contains separate ingredients. Then compare the cup&#x27;s hollow with the empty space around its handle. Both are absences in a familiar object, but they arise from different parts of its description. You need not recognise every primitive to establish that these relations differ. Naming one junction and one opening gives you a smaller, more testable account than saying that the generator understands household objects.
+
+Press HOLD. The middle-column chair and cup are copied beside the desk. They keep their current geometry when the live gallery changes. Choose a gap between the chair&#x27;s legs, or the opening of the cup. What do you expect LEVEL to do there?
+
+Press LEVEL once. The extraction level moves from zero to minus two. Compare the live objects with the held pair. Look for a part that has narrowed or disappeared, then one that still carries the object&#x27;s name. LEVEL affects all six fields; it does not know which part you meant to protect. Further presses choose plus four and plus ten before returning to zero.
+
+The chair is described by combining box-like fields for a seat, back and legs. The cup uses a different composition: an inner cylinder is subtracted from an outer one, then a ring-like handle is joined to the result. These descriptions provide values throughout space. The same extraction apparatus samples them and builds the visible boundary.
+
+In the shader, joining two fields takes their minimum. Subtracting the interior takes the maximum of the outside field and the negated inside field. The cup&#x27;s description can be read in one short expression. Here the variable names stand for the fields evaluated at the same point:
+
+```glsl
+float cup = min(max(-inside, outside), handle);
+```
+
+That line describes a relation at a point. Sampling repeats the question across space; the extractor connects the crossings. Moving the selected level changes the question asked of the whole composition. It is not a command to thicken only the cup wall.
+
+The lookup table does not need to know what a cup is. It receives corner values and performs the local work you examined in the previous room. Recognition belongs to the larger arrangement of those values and to the person reading the resulting form.
+
+This separation makes procedural modelling reusable. A new description can enter an existing extraction process. It also lets us ask whether an error belongs to the description, the sampling, or the way the generated mesh is displayed.
+
+A familiar silhouette is not a complete design for use. A thin handle may disappear at coarse resolution; a chair-like figure may have no suitable support or dimensions for sitting. The label supplies a proposed interpretation, not evidence that the object fulfils every function associated with its name.
+
+Try REPERTOIRE. Household gives way to laboratory, abstract and survey arrangements, using the same extraction machinery. The held pair stays beside you. A field can describe an operator and an instrument through the same numerical substrate; that shared description does not give them the same capabilities.
+
+RESET restores the household at level zero and keeps your comparison. CLEAR removes the held pair. Hold a different pair after changing repertoire, then ask what the new names encourage you to see. At level minus two, the sampled cup disappears entirely. Its labelled place remains empty; a replacement sphere would conceal the result. Even at level zero, gaps in its thin wall expose the coarseness of the mesh. The display samples a finite domain at 64 points per axis. A narrow feature can be absent from the mesh while still present in its formula. Which loss came from the rule you changed, and which was already waiting in the sampling?
+
+We have added another way to make a body, and another way to mistake an available shape for an exhausted possibility. The cup need not remain a cup. But escaping its name will take more than changing the label.
+
+&lt;!-- @ --&gt;
+
+The next room leaves the household repertoire and examines a surface whose repetition extends through three directions without being assembled from separate repeating objects.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_ShapesGallery/tutorial.md">Raw captured source</a></p><pre># The same tool makes a cup
+
+&lt;!-- @mc_shapes_gallery --&gt;
+
+Can the procedure that makes a chair also make a hollow cup?
+
+Compare the labelled Chair and Cup in the shapes gallery. Find a junction between parts of the chair, then look for the cup&#x27;s inner boundary and its handle. Move to a second viewpoint where a hollow and a projecting part are easier to distinguish. Describe those relations before naming their ingredients.
+
+Inspect a junction on the chair from a second angle. A seam can disappear in the combined surface even though the description still contains separate ingredients. Then compare the cup&#x27;s hollow with the empty space around its handle. Both are absences in a familiar object, but they arise from different parts of its description. You need not recognise every primitive to establish that these relations differ. Naming one junction and one opening gives you a smaller, more testable account than saying that the generator understands household objects.
+
+Press HOLD. The middle-column chair and cup are copied beside the desk. They keep their current geometry when the live gallery changes. Choose a gap between the chair&#x27;s legs, or the opening of the cup. What do you expect LEVEL to do there?
+
+Press LEVEL once. The extraction level moves from zero to minus two. Compare the live objects with the held pair. Look for a part that has narrowed or disappeared, then one that still carries the object&#x27;s name. LEVEL affects all six fields; it does not know which part you meant to protect. Further presses choose plus four and plus ten before returning to zero.
+
+The chair is described by combining box-like fields for a seat, back and legs. The cup uses a different composition: an inner cylinder is subtracted from an outer one, then a ring-like handle is joined to the result. These descriptions provide values throughout space. The same extraction apparatus samples them and builds the visible boundary.
+
+In the shader, joining two fields takes their minimum. Subtracting the interior takes the maximum of the outside field and the negated inside field. The cup&#x27;s description can be read in one short expression. Here the variable names stand for the fields evaluated at the same point:
+
+```glsl
+float cup = min(max(-inside, outside), handle);
+```
+
+That line describes a relation at a point. Sampling repeats the question across space; the extractor connects the crossings. Moving the selected level changes the question asked of the whole composition. It is not a command to thicken only the cup wall.
+
+The lookup table does not need to know what a cup is. It receives corner values and performs the local work you examined in the previous room. Recognition belongs to the larger arrangement of those values and to the person reading the resulting form.
+
+This separation makes procedural modelling reusable. A new description can enter an existing extraction process. It also lets us ask whether an error belongs to the description, the sampling, or the way the generated mesh is displayed.
+
+A familiar silhouette is not a complete design for use. A thin handle may disappear at coarse resolution; a chair-like figure may have no suitable support or dimensions for sitting. The label supplies a proposed interpretation, not evidence that the object fulfils every function associated with its name.
+
+Try REPERTOIRE. Household gives way to laboratory, abstract and survey arrangements, using the same extraction machinery. The held pair stays beside you. A field can describe an operator and an instrument through the same numerical substrate; that shared description does not give them the same capabilities.
+
+RESET restores the household at level zero and keeps your comparison. CLEAR removes the held pair. Hold a different pair after changing repertoire, then ask what the new names encourage you to see. At level minus two, the sampled cup disappears entirely. Its labelled place remains empty; a replacement sphere would conceal the result. Even at level zero, gaps in its thin wall expose the coarseness of the mesh. The display samples a finite domain at 64 points per axis. A narrow feature can be absent from the mesh while still present in its formula. Which loss came from the rule you changed, and which was already waiting in the sampling?
+
+We have added another way to make a body, and another way to mistake an available shape for an exhausted possibility. The cup need not remain a cup. But escaping its name will take more than changing the label.
+
+&lt;!-- @ --&gt;
+
+The next room leaves the household repertoire and examines a surface whose repetition extends through three directions without being assembled from separate repeating objects.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_ShapesGallery/technical.md">Raw captured source</a></p><pre># Different fields, one extractor
+
+The lesson binds `MarchingShapesGallery.gd`, retaining its existing four repertoires and four levels: exact=0, broken=-2, padded=4, fused=10. These are preset names, not guarantees of connectivity or usefulness. Six `TerrainGeneratorShapes` instances run `MarchingCubesShapes.glsl` through a local RenderingDevice each. The sampling domain is 120 field units across and 64 samples per axis; rendering scale .09 and spacing 5.5m make the six fields readable in the court.
+
+REPERTOIRE selects household, laboratory, abstract, survey. LEVEL changes the global extraction level for the entire composition. HOLD duplicates the middle-column meshes (slots 1 and 4: Chair and Cup in household), with materials, independent of generator lifetime. Held specimens are visual comparisons without colliders. RESET preserves them; CLEAR removes them. The opt-in `preserve_empty_result` flag intercepts a verified zero raw GPU triangle counter and keeps an empty ArrayMesh, with no collision. Other placements keep their existing fallback behavior. A safety-aborted oversized result does not qualify as empty. The desk reports a failed GPU extraction instead of treating the generator&#x27;s fallback spheres as successful shape results.
+
+In the shader the chair unions a seat, back and four rounded-box legs. The cup subtracts an inner capped cylinder from an outer cylinder and unions a torus handle. Union is min(a,b); subtraction is max(-inside,outside). Compound fields should not be assumed to preserve an exact distance everywhere. Changing level is not a local wall-thickness edit.
+
+Sources: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingShapesGallery.gd; Scripts/TerrainGeneratorShapes.gd; Scripts/TerrainGeneratorBase.gd; Compute/MarchingCubesShapes.glsl. Desk: res://commons/artifacts/timing_machines/iso_shapes_workshop.gd.
+
+The original torus sculpture, VR sculptor and gyroid remain secondary specimens behind the front court. Their separate interactions and headset performance require later review.
+
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ISO_ShapesGallery/intent.md">Raw captured source</a></p><pre>Inspect a junction and opening → HOLD → predict LEVEL → compare actual meshes → read field composition → change repertoire → question names, sampling and use.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_ShapesGallery/critical.md">Raw captured source</a></p><pre># A chair is a proposal
+
+The field makes no categorical distinction between a chair, a cup and a human figure. Their numerical descriptions can enter the same extractor. Yet this shared substrate does not erase differences in what their bodies can do. A chair-shaped mesh is not a demonstrated support for a sitting body.
+
+Hold the chair before changing the level. Its label can remain while a leg disappears. Recognition, connectivity and use need different evidence. The held mesh lets a reader locate the difference without having to trust a memory of the previous frame.
+
+The apparently neutral global adjustment distributes loss unevenly: a narrow handle and a broad seat meet the same threshold with different consequences. The sampling grid adds another selection. What is absent from the visible mesh may still be specified in the field. Here the question “what bodies are possible?” includes the implementation&#x27;s budget and the category we bring to its result.
+
+A different repertoire offers more than another organic coating. It exposes composition as a tool we can alter. To exceed the household vocabulary, we can eventually rewrite the ingredients and their relations; the current desk begins with the smaller, inspectable act of comparing their extracted boundaries.
+
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_ShapesGallery/artifacts.md">Raw captured source</a></p><pre>Primary: mc_shapes_gallery. Secondary preserved: mc_torus_sculpture, mc_sculpt_vr, gyroid_demo. Decoration: iso_shapes_console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_ShapesGallery/summary.md">Raw captured source</a></p><pre>Hold a chair and cup, change the shared extraction level, then compare field repertoires. Separate recognition from composition, sampling and possible use.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_ShapesGallery/blurb.md">Raw captured source</a></p><pre>The same tool makes a cup. Does it know what the cup can hold?
+</pre></section></body></html>

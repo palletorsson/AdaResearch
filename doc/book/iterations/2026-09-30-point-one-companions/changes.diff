@@ -1,0 +1,3144 @@
+--- before/commons/maps/Point_Coordinates/artifacts.md
++++ after/commons/maps/Point_Coordinates/artifacts.md
+@@ -1,21 +1,20 @@
+ # Point Coordinates — current encounters
+ 
+-29 September 2026. Source cells below are not runtime world positions.
++30 September 2026. Generated from the current map_data.json placements. Source cells are not runtime world coordinates.
+ 
+ | Artifact | Cell (x,z) | Configuration |
+-|---|---|---|
+-| `point_corridor_door` | (8, 0) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
++| --- | --- | --- |
++| `point_corridor_door` | (10, 1) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
+ | `point_held` | (7, 2) | `point_held:180#plinth:0#pin:1` |
+-| `street_talker` | (2, 4) | `street_talker:0:0` |
+-| `comment_box` | (15, 4) | `comment_box` |
+-| `the_invisible_point` | (13, 5) | `the_invisible_point` |
+-| `SoundscapeRadioRack` | (3, 6) | `SoundscapeRadioRack:180#plinth:0.85#pin:1#orientation:inclined` |
+-| `interactive_point_origin_force` | (13, 6) | `interactive_point_origin_force:0:0#plinth:0.90#coordinate_id:point_one_force_return` |
+-| `code_evolution_screen` | (15, 7) | `code_evolution_screen:90:1.4:2#evolution_path:res://commons/maps/Point_One/evolution.json` |
++| `fontana_puncture` | (17, 6) | `fontana_puncture:270:0#plinth:1.00#embed_artifact:interactive_point_origin_force#embed_mode:transformation#offset:0.00,0.20,0.00` |
++| `code_evolution_screen` | (15, 8) | `code_evolution_screen:270:1.4:2#evolution_path:res://commons/maps/Point_One/evolution.json` |
+ | `coordinate_readout` | (2, 9) | `coordinate_readout:90:1.4:1#plinth:0#pin:1#display_scale:2.4#readout_channel:point_one_main#space:world` |
+-| `drag_point_target` | (6, 10) | `drag_point_target#text:drag point here ` |
++| `drag_point_target` | (6, 10) | `drag_point_target#text:drag point here` |
++| `comment_box` | (17, 10) | `comment_box:90` |
+ | `coordinate_readout` | (2, 11) | `coordinate_readout:90:1.4:1#plinth:0#pin:1#display_scale:2.4#readout_channel:point_one_main#space:local` |
+-| `fontana_puncture` | (12, 11) | `fontana_puncture:270:0#plinth:1.00#embed_artifact:interactive_point_origin_force#embed_mode:transformation#offset:0.00,0.20,0.00` |
+-| `CoordinateSystem3M` | (4, 12) | `CoordinateSystem3M:0:0#tick_step:0#labels:0#panel:0#floating_point:0#adopt_external_point:1#external_point_id:point_one_main#readout_channel:point_one_main#point_finish:zero#offset:0.00,1.00,0.00#origin_sign_text:#plinth:0#pin:1` |
++| `CoordinateSystem3M` | (4, 12) | `CoordinateSystem3M:0:0#axis_length:3.4#axis_thickness:0.08#axis_palette:pink_grey_black#axis_opacity:1#axis_unshaded:0#tick_step:0#labels:1#panel:0#floating_point:0#adopt_external_point:1#external_point_id:point_one_main#readout_channel:point_one_main#point_finish:zero#offset:0.00,1.00,0.00#origin_sign_text:#plinth:0#pin:1` |
++| `the_invisible_point` | (17, 12) | `the_invisible_point` |
+ | `floating_sphere_field` | (9, 14) | `floating_sphere_field#sphere_count:18#bounds:2.5,1.2,2.5#volume_offset:0,2.4,0` |
+-| `grab_sphere_point_snap` | (7, 15) | `grab_sphere_point_snap:0:0` |
++| `SoundscapeRadioRack` | (16, 14) | `SoundscapeRadioRack:270#plinth:0.85#pin:1#orientation:inclined` |
++
++final.md follows the primary encounter; tutorial.md selects the operations to make. This inventory includes secondary works and practical equipment without making every object a required lesson.
+--- before/commons/maps/Point_Coordinates/map_data.json
++++ after/commons/maps/Point_Coordinates/map_data.json
+@@ -8,7 +8,7 @@
+     "format": "json",
+     "lookup_name": "Point_Coordinates",
+     "metadata": {
+-      "n_artifacts": 15,
++      "n_artifacts": 12,
+       "source": "editor"
+     },
+     "museum": {
+@@ -1359,7 +1359,7 @@
+     "summary": "Take the black point; read one movement from world and local references.",
+     "layout": "19 × 20. Held point at (7,2); corridor opens at z=4. Frame at (4,12), WORLD at (2,9), LOCAL at (2,11), target at (6,10). L-shaped glass basin follows x=4,z=7..12 and z=12,x=4..9; surface stays at floor level.",
+     "objective": "Use a supplied pickup; distinguish one held body from the references used to describe its position.",
+-    "secondary": "Existing invisible point, screen, radio, force comparison, Fontana, floating field and snap point are retained. Distance code belongs to Point_Lines.",
++    "secondary": "The invisible point, code screen, radio, Fontana recess with embedded force comparison, floating field and comment box remain beside the primary route. Distance code belongs to Point_Lines.",
+     "identity": "The production held point keeps coordinate_id point_one_main for compatibility; both cards and the frame select that one identity."
+   }
+ }
+--- before/commons/maps/Point_Coordinates/technical.md
++++ after/commons/maps/Point_Coordinates/technical.md
+@@ -1,10 +1,10 @@
+ # Coordinates — implementation reference
+ 
+-Point_Coordinates was separated from Point_One on 29 September 2026. Its layout preserves the old wider room, shifting all retained coordinates eight source cells towards the entrance. Source cells are not museum world coordinates.
++Point_Coordinates was separated from Point_One on 29 September 2026. Its layout develops the old wider room; artifacts.md records the current placed cells. Source cells are not museum world coordinates.
+ 
+ The first artifact is `point_held` at (7,2). `point_condition.gd` builds its label and instantiates the production `interactive_point_origin.tscn`, an XR Tools pickable. Its black sphere and spherical collider both have a 7 cm radius, half the previous radius; the earlier white points keep theirs. The black sphere keeps `coordinate_id = point_one_main`; this legacy identifier intentionally remains stable across the split.
+ 
+-`CoordinateSystem3M` is at (4,12), with `adopt_external_point:1`, `external_point_id:point_one_main` and `floating_point:0`. WORLD at (2,9) and LOCAL at (2,11) use the same `readout_channel`. The separate force point retains its different identity. The frame's origin sign is suppressed; the actual Point Zero origin remains in the preceding arrival hall.
++`CoordinateSystem3M` is at (4,12), with `adopt_external_point:1`, `external_point_id:point_one_main` and `floating_point:0`. WORLD at (2,9) and LOCAL at (2,11) use the same `readout_channel`. The Fontana recess contains a secondary force comparison; the two cards explicitly select the original held point. The frame's origin sign is suppressed; the actual Point Zero origin remains in the preceding arrival hall.
+ 
+ The L-shaped basin is the union of [4,7,1,6] and [4,12,6,1]: eleven cells, depth one metre, glass collision at deck height, no fire. The coordinate artifact's +1 metre placement offset compensates for the basin floor. Do not raise its frame above the museum floor.
+ 
+--- before/commons/maps/Point_Coordinates/tutorial.md
++++ after/commons/maps/Point_Coordinates/tutorial.md
+@@ -14,7 +14,7 @@
+ 
+ ## Change one component
+ 
+-The study opens with two prepared sphere markers and the familiar coloured guides. Open `points.gd`. The position called `a` is:
++The desktop study opens with two prepared sphere markers and red, green and blue guides for X, Y and Z. The museum uses pink, grey and black; the letters and directions identify the references in either palette. Open `points.gd`. The position called `a` is:
+ 
+ ```gdscript
+ var a := Vector3(-0.75, 1.12, 0.0)
+@@ -61,4 +61,4 @@
+ 
+ Change B while leaving A alone. Then give B the same three numbers as A. One sphere may hide the other; the scene still contains two markers. Restore their separation.
+ 
+-We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold, but we can enjoy its falling response without bringing that calculation into this lesson yet.
++We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold. It asks whether a position is close enough, not whether two objects have the same identity. We can enjoy its falling response before calculating distance in Lines.
+--- before/commons/maps/Point_One/artifacts.md
++++ after/commons/maps/Point_One/artifacts.md
+@@ -1,12 +1,14 @@
+ # Point One — current encounters
+ 
+-29 September 2026. Source cells below are not runtime world positions.
++30 September 2026. Generated from the current map_data.json placements. Source cells are not runtime world coordinates.
+ 
+ | Artifact | Cell (x,z) | Configuration |
+-|---|---|---|
++| --- | --- | --- |
+ | `point_corridor_door` | (8, 0) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
+-| `point_absent` | (7, 1) | `point_absent:180#plinth:0#pin:1` |
+-| `point_visible` | (7, 4) | `point_visible:180#plinth:0#pin:1` |
+-| `point_sun_switch` | (9, 5) | `point_sun_switch:270#plinth:0#pin:1#offset:0.45,0,0` |
+-| `point_solid` | (7, 7) | `point_solid:180#plinth:0#pin:1` |
++| `point_absent` | (7, 2) | `point_absent:180#plinth:0#pin:1` |
++| `point_visible` | (7, 5) | `point_visible:180#plinth:0#pin:1` |
++| `point_sun_switch` | (10, 6) | `point_sun_switch:270#plinth:0#pin:1#offset:0.45,0,0` |
++| `point_solid` | (7, 8) | `point_solid:180#plinth:0#pin:1` |
+ | `point_pedestal` | (8, 12) | `point_pedestal:180#plinth:0#pin:1` |
++
++final.md follows the primary encounter; tutorial.md selects the operations to make. This inventory includes secondary works and practical equipment without making every object a required lesson.
+--- before/commons/maps/Point_One/critical.md
++++ after/commons/maps/Point_One/critical.md
+@@ -1,4 +1,4 @@
+-> Current placement, 29 September 2026: Point One now holds absence, visibility, collision, a removable directional light and the pedestal sphere. Holding, WORLD/LOCAL, the frame and target have moved to Point_Coordinates. The older research below remains as material, not a claim that every referenced artifact still stands in this hall.
++> Current placement, 30 September 2026: Point One holds absence, visibility, collision, a removable directional light and the pedestal sphere. Holding, WORLD/LOCAL, the frame and target belong to Point_Coordinates. [README.md](README.md) identifies the current files. The older research below remains as material, not a claim that every referenced artifact still stands in this hall.
+ 
+ # Point One - Critical Reflection
+ 
+@@ -8,7 +8,7 @@
+ 
+ Some assertions below need revision before reuse. A geometric point does not by itself discretize a continuum or establish a binary classification. The current room does not establish a fixed 90 Hz tracking rate. A position value alone does not record a trajectory, but a surrounding program can record one. Claims about ownership, surveillance and colonial mapping require a particular practice and evidence; they do not follow from the definition of a point alone.
+ 
+-The running-system and inherited-work inquiry now opens Point_Zero. Here, begin with absence, a visible surface that permits passage, an identical surface that resists, and a black body that can be held. Then name the frame behind an address and ask how different arrivals count as the same event. These are investigative leads, not required conclusions. Preserve the rabbit, pleasure, curiosity and the usefulness of the abstraction alongside its limits.
++The running-system and inherited-work inquiry now opens Point_Zero. Here, begin with absence, a visible surface that permits passage, an identical surface that resists, and the removable light. The held black body, reference frames and acceptance of an arrival continue in Point_Coordinates. These are investigative leads, not required conclusions. Preserve the rabbit, pleasure, curiosity and the usefulness of the abstraction alongside its limits.
+ 
+ ---
+ 
+--- before/commons/maps/Point_One/encounter-reference.md
++++ after/commons/maps/Point_One/encounter-reference.md
+@@ -4,8 +4,9 @@
+ 
+ The main text follows those encounters. It keeps one position line but leaves component-by-component coordinates to the next hall. Its critical question is how apparently natural solidity and visibility are constructed separately.
+ 
+-The tutorial changes the visible radius and the collision radius in the supplied three-condition study. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
++The tutorial names the supplied scene and shows three complete scripts. It changes the visible radius and the collision radius independently. A supplied moving feeler makes their disagreement observable in the fixed-camera study through actual physics contact. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
+ 
+ The coordinate frame, cards, target and retained secondary comparisons have moved together to Point_Coordinates. Their removal from this hall is a pedagogical split, not a rejection of their work. The actual origin marker and its Point zero label remain in Point_Zero.
+ 
+-See artifacts.md for current cells and technical.md for implementation.
++
++See artifacts.md for the current placed inventory and technical.md for implementation. The encounter manuscript is final.md; tutorial.md is its making companion. Earlier research drafts do not override that division.
+--- before/commons/maps/Point_One/intent.md
++++ after/commons/maps/Point_One/intent.md
+@@ -4,6 +4,6 @@
+ 
+ The main text follows those encounters. It keeps one position line but leaves component-by-component coordinates to the next hall. Its critical question is how apparently natural solidity and visibility are constructed separately.
+ 
+-The tutorial changes the visible radius and the collision radius in the supplied three-condition study. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
++The tutorial names the supplied scene and shows three complete scripts. It changes the visible radius and the collision radius independently. A supplied moving feeler makes their disagreement observable in the fixed-camera study through actual physics contact. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
+ 
+ The coordinate frame, cards, target and retained secondary comparisons have moved together to Point_Coordinates. Their removal from this hall is a pedagogical split, not a rejection of their work. The actual origin marker and its Point zero label remain in Point_Zero.
+--- before/commons/maps/Point_One/map_data.json
++++ after/commons/maps/Point_One/map_data.json
+@@ -1,1156 +1,1156 @@
+ {
+   "map_info": {
+-	"dimensions": {
+-	  "width": 19,
+-	  "depth": 17,
+-	  "max_height": 5
+-	},
+-	"format": "json",
+-	"lookup_name": "Point_One",
+-	"metadata": {
+-	  "n_artifacts": 6,
+-	  "source": "editor"
+-	},
+-	"museum": {
+-	  "lobby": {
+-		"enabled": false
+-	  },
+-	  "props_deny": [
+-		"wall_clock",
+-		"electrical_panel",
+-		"floor_grate",
+-		"bench",
++    "dimensions": {
++      "width": 19,
++      "depth": 17,
++      "max_height": 5
++    },
++    "format": "json",
++    "lookup_name": "Point_One",
++    "metadata": {
++      "n_artifacts": 6,
++      "source": "editor"
++    },
++    "museum": {
++      "lobby": {
++        "enabled": false
++      },
++      "props_deny": [
++        "wall_clock",
++        "electrical_panel",
++        "floor_grate",
++        "bench",
+         "dream_bodies"
+-	  ],
+-	  "gate": false,
+-	  "piers": false,
+-	  "plinths": false
+-	},
+-	"name": "Point One — A body in the light",
+-	"version": "1.0"
++      ],
++      "gate": false,
++      "piers": false,
++      "plinths": false
++    },
++    "name": "Point One — A body in the light",
++    "version": "1.0"
+   },
+   "layers": {
+-	"structure": [
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"2",
+-		"1",
+-		"1",
+-		"2",
+-		"2",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"w",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"w",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"2",
+-		"2",
+-		"2",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"2",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"2",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"2",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"1",
+-		"2",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ],
+-	  [
+-		"0",
+-		"0",
+-		"0",
+-		"w",
+-		"w",
+-		"w",
+-		"w",
+-		"1",
+-		"1",
+-		"1",
+-		"w",
+-		"w",
+-		"w",
+-		"w",
+-		"0",
+-		"0",
+-		"0",
+-		"0",
+-        "0"
+-	  ]
+-	],
+-	"utilities": [
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"sp",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"t:Point_Coordinates",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ]
+-	],
+-	"interactables": [
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_absent:180#plinth:0#pin:1",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_visible:180#plinth:0#pin:1",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_sun_switch:270#plinth:0#pin:1#offset:0.45,0,0",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_solid:180#plinth:0#pin:1",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		"point_pedestal:180#plinth:0#pin:1",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ],
+-	  [
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-		" ",
+-        " "
+-	  ]
+-	]
++    "structure": [
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "2",
++        "1",
++        "1",
++        "2",
++        "2",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "w",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "w",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "1",
++        "1",
++        "1",
++        "2",
++        "2",
++        "2",
++        "1",
++        "1",
++        "1",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "2",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "2",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ],
++      [
++        "0",
++        "0",
++        "0",
++        "w",
++        "w",
++        "w",
++        "w",
++        "1",
++        "1",
++        "1",
++        "w",
++        "w",
++        "w",
++        "w",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0"
++      ]
++    ],
++    "utilities": [
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "sp",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "t:Point_Coordinates",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ]
++    ],
++    "interactables": [
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_absent:180#plinth:0#pin:1",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_visible:180#plinth:0#pin:1",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_sun_switch:270#plinth:0#pin:1#offset:0.45,0,0",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_solid:180#plinth:0#pin:1",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "point_pedestal:180#plinth:0#pin:1",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ]
++    ]
+   },
+   "settings": {
+-	"cube_size": 1,
+-	"gutter": 0,
+-	"show_grid": true,
+-	"background": {
+-	  "type": "sky",
+-	  "color": [
+-		0.08,
+-		0.1,
+-		0.18
+-	  ]
+-	},
+-	"grid_animation": {
+-	  "enabled": false
+-	},
+-	"initial_tile_visibility": "hidden_except_corners"
++    "cube_size": 1,
++    "gutter": 0,
++    "show_grid": true,
++    "background": {
++      "type": "sky",
++      "color": [
++        0.08,
++        0.1,
++        0.18
++      ]
++    },
++    "grid_animation": {
++      "enabled": false
++    },
++    "initial_tile_visibility": "hidden_except_corners"
+   },
+   "utility_definitions": {
+-	"sp": {
+-	  "type": "spawn"
+-	},
+-	"t": {
+-	  "type": "teleporter"
+-	}
++    "sp": {
++      "type": "spawn"
++    },
++    "t": {
++      "type": "teleporter"
++    }
+   },
+   "spawn_points": {
+-	"default": {
+-	  "position": [
+-		8.5,
+-		0.1,
+-		0.5
+-	  ],
+-	  "rotation": [
+-		0,
+-		180,
+-		0
+-	  ]
+-	}
++    "default": {
++      "position": [
++        8.5,
++        0.1,
++        0.5
++      ],
++      "rotation": [
++        0,
++        180,
++        0
++      ]
++    }
+   },
+   "documentation": {
+-	"summary": "Absence, visible surface and collision, followed by removing the light that casts their shadows.",
+-	"layout": "19 × 15. Corridor: absent (7,1), visible (7,4), solid (7,7). Wall switch (9,5) faces the corridor. A 1.3 m sphere stands at (8,12) in the wider end. Exit to Point_Coordinates.",
+-	"objective": "Distinguish a position, its surface, its physical boundary and the light that makes the surface legible.",
+-	"light": "Dedicated directional sun illuminates the study spheres and casts their shadows onto the existing museum floor. No added floor plates. An unshadowed fill keeps the spheres visible; the wall switch removes only the sun. Other halls retain their lighting."
++    "summary": "Absence, visible surface and collision, followed by removing the light that casts their shadows.",
++    "layout": "19 × 17. Corridor: absent (7,2), visible (7,5), solid (7,8). Wall switch (10,6) faces the corridor. A 1.3 m sphere stands at (8,12). Exit to Point_Coordinates.",
++    "objective": "Distinguish a position, its surface, its physical boundary and the light that makes the surface legible.",
++    "light": "Dedicated directional sun illuminates the study spheres and casts their shadows onto the existing museum floor. No added floor plates. An unshadowed fill keeps the spheres visible; the wall switch removes only the sun. Other halls retain their lighting."
+   }
+ }
+--- before/commons/maps/Point_One/technical.md
++++ after/commons/maps/Point_One/technical.md
+@@ -6,6 +6,6 @@
+ 
+ The wall lever uses the production XRTools area button with pointer support: near-hand entry or pointer press toggles sun.visible. Its 1.28 m control height is a design value, not a headset comfort certification. The plate sits on the inside face of the corridor's right wall. The entry door remains.
+ 
+-The portable Point One study retains its three reduced scripts: position.gd, visible.gd and solid.gd. Its code changes distinguish position, appearance and collision. The sun switch is inspected in the museum; its full lighting rig is not part of that portable kit.
++The portable Point One study retains its three reduced scripts: position.gd, visible.gd and solid.gd. Its complete code examples distinguish point_position (a Vector3) from marker (a MeshInstance3D). The supplied contact_probe.gd creates three small CharacterBody3D feelers. Actual move_and_collide results stop a feeler; the other two cross. Space pauses and R repeats. Changing the authored collision radius changes where contact occurs without changing the rendered radius. The helper stays at height 1.12 m, so the height experiment must be restored before the radius comparison. The sun switch is inspected in the museum; its full lighting rig is not part of that portable kit.
+ 
+ Pickup, WORLD/LOCAL cards, frame, L-shaped basin and target now belong to Point_Coordinates. See its technical.md for the maintained point_one_main channel and all moved placements. Distance is first calculated in the Point_Lines tutorial.
+--- before/commons/maps/Point_One/tutorial.md
++++ after/commons/maps/Point_One/tutorial.md
+@@ -1,12 +1,12 @@
+ # Point One — give the point a body
+ 
+-Point Zero let us recognise an instruction that begins, and one that continues. Now we follow the corridor. Each label says “Point one”, but something different happens above it.
++Point Zero gave us an instruction that runs when the scene is ready. Here we will use that moment to place a marker. The supplied scene already gives us a floor, a light and a view. We will keep those while changing what appears in front of us.
+ 
+-The [supplied study](../../../doc/book/studies/point-one/README.md) lets us inspect the first three conditions together: an absent point, a visible sphere and a solid sphere. Its three scripts are already complete. We will change a few lines as we encounter what they do. The held point and coordinate frame have their own next chapter, Point Coordinates.
++Open [the Point One study project](../../../doc/book/studies/point-one/README.md), then `study.tscn`. Its root is `PointStudy`. The three station nodes, `Position`, `Visible` and `Solid`, have `position.gd`, `visible.gd` and `solid.gd` attached. These are the three scripts we will change. Each station has its own “Point one” label.
++
++Run the study. Above the first label there is nothing; above the next two are white spheres. Three small pink feelers move from left to right. Two cross their stations; the third stops at the solid sphere. The sweep repeats. Space pauses or resumes it; R starts the sweep again. `contact_probe.gd` supplies this contact test. Its movement is borrowed equipment, like the camera. We will change what it can cross.
+ 
+ ## At the first label, nothing appears
+-
+-There is a place to look, but no visible object. A mathematical point has a position and no extent. How can we keep its position before giving it a surface?
+ 
+ Open `position.gd`. This is the whole script:
+ 
+@@ -17,57 +17,86 @@
+     var point_position := Vector3(0.0, 1.12, 0.0)
+ ```
+ 
+-We know `_ready()` from Point Zero; `-> void` says it returns no value. Here it keeps a different kind of value: a `Vector3`, containing three numbers. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.
++We know `_ready()` from Point Zero; `-> void` says the function returns no value. Here we define a `Vector3`, a value containing three numbers, and name it `point_position`. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.
+ 
+-We name that value `point_position`. The middle number places it above the floor. Change `1.12` to `1.7` and run. Nothing appears. We have changed a value without attaching any visible body to it. The editor's unused-variable warning describes that condition.
++Change `1.12` to `1.7` and run. Nothing appears at this station. We have changed a value without attaching a visible body to it. The editor's unused-variable warning describes that condition. The pink feeler still crosses the empty place. It belongs to the supplied test, not to the position we have just defined. Restore `1.12`.
+ 
+-The other stations in the study still show their spheres. This change belongs only to the empty station. Restore `1.12` before continuing.
++## Give the position a surface
+ 
+-## Further along, the point has a surface
+-
+-The next label has a small white sphere above it. Its centre gives our eyes a place to find.
+-
+-Open `visible.gd`. The same position is there, now used by a visible object:
++Open `visible.gd`. Its complete construction runs in the same familiar function:
+ 
+ ```gdscript
+-visible_point.position = point_position
++extends Node3D
++
++func _ready() -> void:
++    var point_position := Vector3(0.0, 1.12, 0.0)
++
++    var radius := 0.14
++    var sphere := SphereMesh.new()
++    sphere.radius = radius
++    sphere.height = radius * 2.0
++
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
+ ```
+ 
+-This line is already inside `_ready()`. `visible_point` names the mesh node created by the supplied script; assigning its `position` puts its centre at our coordinates. We have given the point a body through which it can appear.
++`point_position` is the location. `sphere` describes a spherical surface; `marker` is the node that displays it. `.new()` creates each part. Assigning `marker.mesh` gives that node its surface; assigning `marker.position` places it. `add_child(marker)` joins it to the station. A position and the object placed there are different things.
+ 
+-Change `1.12` to `1.7` in this script. This time the white sphere rises. Restore the height, then change the radius:
++Change `1.12` to `1.7` in this script. Now the white sphere rises. Restore the height, then change `radius` from `0.14` to `0.3`. The sphere grows around the same centre. Its height follows because the script makes it twice the radius.
++
++Watch the feeler cross the larger sphere. A visible surface has still given it nothing to collide with. We can change how much the sphere hides without changing what can pass through it. Restore the radius to `0.14`.
++
++## Give the body a boundary
++
++The third station looks the same. Its feeler stops. Open `solid.gd`:
+ 
+ ```gdscript
+-var radius := 0.14
++extends Node3D
++
++func _ready() -> void:
++    var point_position := Vector3(0.0, 1.12, 0.0)
++
++    var radius := 0.14
++    var sphere := SphereMesh.new()
++    sphere.radius = radius
++    sphere.height = radius * 2.0
++
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
++
++    var solid := StaticBody3D.new()
++    solid.position = point_position
++
++    var sphere_shape := SphereShape3D.new()
++    sphere_shape.radius = radius
++    var collider := CollisionShape3D.new()
++    collider.shape = sphere_shape
++
++    solid.add_child(collider)
++    add_child(solid)
+ ```
+ 
+-Try `0.3`. The sphere becomes larger while its centre stays where it was. The supplied `SphereMesh` uses this radius and a height twice as large. We can inspect its construction later; for now, we can change a position and a surface separately.
++The first part constructs the same marker. The added `StaticBody3D` participates in collision. `SphereShape3D` describes its boundary, and `CollisionShape3D` attaches that shape to the physics body. The visible marker and this body are both placed at `point_position`.
+ 
+-In the museum, try crossing that surface. It is visible, but it does not stop you. Restore the radius to `0.14` before meeting the next sphere.
+-
+-## The next point stops us
+-
+-The next white sphere looks the same. In the museum, approaching it produces a different result: a body meets resistance.
+-
+-Open `solid.gd`. It keeps the visible construction and adds a separate physics body and collision shape. Both are placed at `point_position`. The boundary's size is set here:
++Find `sphere_shape.radius = radius`. Change only that line to:
+ 
+ ```gdscript
+-sphere_shape.radius = radius
++    sphere_shape.radius = 0.35
+ ```
+ 
+-Change only that line to:
++Run again. The white sphere stays small, but the feeler stops earlier, leaving a visible gap. The empty space resists it. **Debug → Visible Collision Shapes** can also reveal the larger boundary; the contact test works without that overlay.
+ 
+-```gdscript
+-sphere_shape.radius = 0.35
+-```
++We have chosen whether the surface we see and the boundary we encounter coincide. In the museum, it is your movement that meets this difference. The fixed-camera study supplies another moving body so we can test the same relation. Restore `sphere_shape.radius = radius`.
+ 
+-The visible sphere stays small. Its collision boundary grows. In the desktop study, turn on **Debug → Visible Collision Shapes** to see the boundary; the fixed camera does not let you walk into it. In the museum, the distinction is something your movement meets.
+-
+-We have chosen whether the surface we see and the boundary we encounter coincide. The full physics construction is supplied; changing this one relation already gives us something consequential to author. Restore the matching radius.
++Try a different disagreement: in `solid.gd`, set the visible `radius` to `0.3` and `sphere_shape.radius` to `0.07`. The feeler disappears into the white surface before the contact label reports “stopped”. The boundary is now inside the body we see. Return both to the matching `0.14` when you finish.
+ 
+ ## Remove the light, keep the body
+ 
+-Use the museum's wall switch. The long shadows disappear, while a dim fill leaves the spheres visible. The collision boundary stays where it was.
++In the museum, use the wall switch. The long shadows disappear while a dim fill leaves the spheres visible. The collision boundary stays where it was.
+ 
+ The decision in the switch is one line:
+ 
+@@ -75,10 +104,10 @@
+ sun.visible = false
+ ```
+ 
+-Here `sun` is the supplied directional light. This is a reading of the museum source, not a line to paste into `visible.gd`, which has no variable named `sun`. We borrow the switch and lighting rig for this encounter. Building shadows is not another task hidden inside learning the point.
++Here `sun` is the museum's directional light. This is a reading of that source, not a line to paste into `visible.gd`, which has no variable named `sun`. The portable study keeps its supplied light. Building the switch and its lighting rig is outside this lesson.
+ 
+-## Before leaving
++## What we can carry forward
+ 
+-The large sphere repeats the same name. Return to the radius we changed: giving a position more surface did not require a new kind of position.
++We can now place a marker, change its surface around the same centre and give it a different physical boundary. The large sphere at the end of the museum corridor asks us to return to those choices: it still says “Point one”. Knowing its construction gives us another way to change the encounter.
+ 
+-We can now change appearance and resistance separately. [Point Coordinates](../Point_Coordinates/tutorial.md) begins with a point we can hold, then reads its movement. It will prepare two positions for the line.
++[Point Coordinates](../Point_Coordinates/tutorial.md) begins with a supplied point we can hold, then reads its movement. It will prepare two positions for the line. The [construction reference](../../../doc/book/studies/point-one/CONSTRUCTION.md) keeps the roles of the supplied parts available without adding another required exercise.
+--- before/doc/book/PRIMITIVES_LINEAGE.md
++++ after/doc/book/PRIMITIVES_LINEAGE.md
+@@ -1,6 +1,6 @@
+ # Primitives: what each next room needs
+ 
+-Working agreement, 29 September 2026. Read against the twelve current `final.md` texts, their intentions, tutorial files, map placements and the tutorial atlas. This tightens the existing order. It does not certify twelve completed making lessons.
++Working agreement, updated 30 September 2026. Read against the twelve current `final.md` texts, their intentions, tutorial files, map placements and the tutorial atlas. This tightens the existing order. It does not certify twelve completed making lessons.
+ 
+ The thread is **what we have to add before a position can become something we encounter, alter and use again**. A new operation changes both the construction and what a body can do with it. The critical question belongs at that change, rather than arriving afterwards as a separate interpretation.
+ 
+@@ -75,3 +75,8 @@
+ The [tutorial atlas](/tutorial-lineage) distinguishes face, enclosure, editable connectivity, instances, primitive configuration and refinement. Its prerequisite links concern each proposed making task; they do not claim universal mathematical necessity. The walking-order view keeps all twelve halls in their current order. Capability status remains proposed until the lesson and its stated starting material have been tried.
+ 
+ The sequence's older `artifact_groups` remain a curation record, not an authoritative list of installed objects. Use each map's current `layers.interactables`, including wrapper scenes, together with its current intent to establish the encounter.
++
++
++## Current opening sources
++
++Point Zero/final.md carries arrival; its tutorial supplies once and again. Point One/final.md is “A body in the light”; its tutorial and the point-one study distinguish position, appearance and collision, with a supplied moving contact test. Point Coordinates owns pickup and references. Use the canonical map folders and current study downloads together. Earlier combined Point One captures remain historical readings, not instructions for the reorganized opening.
+--- before/doc/book/STUDENT_TOOLBOX.md
++++ after/doc/book/STUDENT_TOOLBOX.md
+@@ -28,7 +28,7 @@
+ | --- | --- | --- |
+ | Day Zero (preface) | Establish a working environment and recognise inherited infrastructure | Open, change, save, run and stop the supplied base; establish the separate headset route before its use. |
+ | Point_Zero | Arrival in something already underway; once at readiness and repeatedly during processing | Set a greeting in _ready(), keep an integer between calls, and change a counter in _process(). The display is supplied; engine construction and timing calculations wait. |
+-| Point_One | Encounter appearance, resistance and light | Change the visible and collision radii independently. Inspect the removable sun without teaching its renderer. |
++| Point_One | Encounter appearance, resistance and light | Change the visible and collision radii independently; observe actual contact with a supplied moving feeler. Inspect the removable sun without teaching its renderer. |
+ | Point_Coordinates | Hold a point; name its reference | Use the supplied pickup in Ada; change X/Y/Z in the desktop study; distinguish local and world position and prepare A and B. Portable XR starter pending. |
+ | Point_Lines | Put two known positions into relation | A reusable way to connect and measure between positions, using the points already made. |
+ | Point_Trace | Let successive positions remain | A small introduced list of positions and a supplied or taught way to display it. Do not silently assume the later Array sequence has already been read. |
+--- before/doc/book/studies/point-coordinates/TUTORIAL.md
++++ after/doc/book/studies/point-coordinates/TUTORIAL.md
+@@ -14,7 +14,7 @@
+ 
+ ## Change one component
+ 
+-The study opens with two prepared sphere markers and the familiar coloured guides. Open `points.gd`. The position called `a` is:
++The desktop study opens with two prepared sphere markers and red, green and blue guides for X, Y and Z. The museum uses pink, grey and black; the letters and directions identify the references in either palette. Open `points.gd`. The position called `a` is:
+ 
+ ```gdscript
+ var a := Vector3(-0.75, 1.12, 0.0)
+@@ -61,4 +61,4 @@
+ 
+ Change B while leaving A alone. Then give B the same three numbers as A. One sphere may hide the other; the scene still contains two markers. Restore their separation.
+ 
+-We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold, but we can enjoy its falling response without bringing that calculation into this lesson yet.
++We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold. It asks whether a position is close enough, not whether two objects have the same identity. We can enjoy its falling response before calculating distance in Lines.
+--- before/doc/book/studies/point-one/CONSTRUCTION.md
++++ after/doc/book/studies/point-one/CONSTRUCTION.md
+@@ -1,119 +1,21 @@
+-# Point One — optional construction study
++# Point One — construction reference
+ 
+-Use [the Point One study](README.md) in the environment prepared in [Day Zero](DAY_ZERO.md). Its `study.tscn` inherits the same `base.tscn` and replaces the greeting with three point stations.
++Read TUTORIAL.md for the lesson. The complete runnable scripts are position.gd, visible.gd and solid.gd; their code is also shown there. This reference names the parts we borrow and the distinction each part makes.
+ 
+-The left station has no sphere. The middle and right stations look alike. Only the right one has a collision body. This study supplies a view for making and comparing; walking and grabbing belong to the museum encounter.
++| Part | What it supplies | What the learner changes |
++| --- | --- | --- |
++| base.tscn | Floor, light, fixed camera and an inherited Welcome label, hidden by study.tscn | Nothing in this lesson |
++| study.tscn | Three station nodes and their Point one labels | Each attached script is identified in the tutorial |
++| point_position | A Vector3 location inside a station | The supplied height; detailed component reading follows in Coordinates |
++| SphereMesh | A surface description with radius and height | Visible radius while keeping the centre |
++| marker / MeshInstance3D | The node displaying that surface | Its position is assigned from point_position |
++| StaticBody3D and CollisionShape3D | A fixed body participating in physics and its attached shape | Its sphere radius, independently of the visible radius |
++| contact_probe.gd | Small moving CharacterBody3D feelers and contact reports | Borrowed comparison equipment; pause with Space and repeat with R |
+ 
+-Open `position.gd`. It contains the complete first step:
++The probe uses move_and_collide; a collision returned by the physics engine stops it. Its labels report that result. The helper does not decide whether a station is solid by its name or by the visible sphere's radius. Its fixed height is 1.12 m and its feeler has a small width, so the stopping position includes that width and the physics margin. It is a contact comparison, not a ruler for the sphere's radius.
+ 
+-```gdscript
+-extends Node3D
++The three stations are placed separately by study.tscn. The same point_position value is relative to each station, so the spheres appear side by side. The next chapter makes reference frames explicit.
+ 
+-func _ready() -> void:
+-    var point_position := Vector3(0.0, 1.12, 0.0)
+-```
++The position in position.gd is a local value inside _ready(); with no constructed child it draws nothing. In the later scripts, _ready() constructs nodes and attaches them to the station; those nodes remain in the scene after the function ends.
+ 
+-`extends Node3D` makes the script part of a station with a position in 3D. Godot runs `_ready()` when the station enters the scene. The indented lines go inside that function. `var` gives a value a name; `:=` lets Godot infer the kind of value from what follows. Here that value is a `Vector3`, holding X, Y and Z.
+-
+-Changing these numbers alone draws nothing. Godot may warn that the variable is unused: it is waiting for the next step. The position is local to this station, 1.12 metres up its Y direction. The three stations already occupy different places in the scene.
+-
+-## Give the position a visible body
+-
+-In `visible.gd` the same first line is followed by the construction of a visible sphere. The full file is supplied; these are its additions inside `_ready()`:
+-
+-```gdscript
+-var radius := 0.14
+-var sphere := SphereMesh.new()
+-sphere.radius = radius
+-sphere.height = radius * 2.0
+-
+-var visible_point := MeshInstance3D.new()
+-visible_point.mesh = sphere
+-visible_point.position = point_position
+-add_child(visible_point)
+-```
+-
+-`SphereMesh` is the shape description; `MeshInstance3D` is the node that displays it. `.new()` creates each part. Assigning `mesh` gives the node its shape, and assigning `position` puts it at the place we kept. `add_child()` attaches it to this station in the scene.
+-
+-Change `1.12` in the first line to `1.8` and run again: the middle sphere is higher. Return it to `1.12`. Change `radius` from `0.14` to `0.3`: the sphere is larger, while its centre stays put. Its height follows the radius because the code calculates it as `radius * 2.0`.
+-
+-You have changed a body and an address separately. These same choices will let you arrange more than one point.
+-
+-## Give the visible body a boundary
+-
+-`solid.gd` keeps all of `visible.gd` and adds:
+-
+-```gdscript
+-var solid := StaticBody3D.new()
+-solid.position = point_position
+-
+-var sphere_shape := SphereShape3D.new()
+-sphere_shape.radius = radius
+-var collider := CollisionShape3D.new()
+-collider.shape = sphere_shape
+-
+-solid.add_child(collider)
+-add_child(solid)
+-```
+-
+-The fixed physics body and the visible mesh are separate children of the station. The collision shape belongs to the physics body. Both use `point_position` and `radius`, so their centres and surfaces agree.
+-
+-To see the otherwise invisible boundary, enable **Debug → Visible Collision Shapes** in the Godot editor, then run the study. Change only `sphere_shape.radius = radius` to `sphere_shape.radius = 0.35`. The physics boundary expands; the visible sphere stays small. Undo that change to make them coincide again.
+-
+-This is a choice you can now author: how much room must a body leave around something it sees? A collision test responds to the boundary you supplied.
+-
+-## A first arrangement
+-
+-Select the `Solid` station in `study.tscn` and duplicate it. Move the copy using its Position in the Inspector. Both copies run the same script, so a change to `radius` in that script changes both. Their station positions remain separate.
+-
+-Make a small arrangement from copies of `Visible` and `Solid`. Give them space, crowd them together, or let them overlap. The geometry can look the same while its permissions differ. The inspector moves each station; `point_position` places the sphere within it. You have begun working with two references without needing to construct the whole coordinate room.
+-
+-## What we borrow next
+-
+-The museum's black point uses `commons/primitives/point/interactive_point_origin.tscn` and the held branch of `point_condition.gd`. That branch supplies the dark finish, radius and coordinate identity. Its inherited pickup system manages hands, holding and release. These scripts are part of the full AdaResearch project, with XR Tools and museum dependencies; they are not included in this small standalone study.
+-
+-The first building exercise stops at position, visible shape and fixed collision. A portable pickup starter is a further teaching step. Point Lines can connect positions you already know how to keep and show.
+-
+-## A further look inside the museum
+-
+-These three examples explain the coordinate cards and arrival target in the main text. They belong to the museum's existing components; they are not further lines to paste into `solid.gd`.
+-
+-### A shorter address
+-
+-The report accepts a scene node called `point` and reads its world position:
+-
+-```gdscript
+-func report_position(point: Node3D) -> String:
+-    var p := point.global_position
+-    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
+-```
+-
+-`%.2f` rounds each component to two decimal places in the text: `1.231` and `1.234` both print as `1.23`. The function returns a string. The museum card displays that string; this function alone does not create a card. Formatting leaves the stored position unchanged.
+-
+-### Two references
+-
+-Here `point` is the held body and `frame` is the coordinate frame, both existing `Node3D` objects in the museum:
+-
+-```gdscript
+-var world_p := point.global_position
+-var local_p := frame.to_local(world_p)
+-```
+-
+-`global_position` supplies the world address. `to_local()` expresses it relative to the frame, accounting for its position, orientation and scale. Both readings describe the same body.
+-
+-### Room to arrive
+-
+-This reduced distance test belongs to a target node with its own position:
+-
+-```gdscript
+-@export var catch_radius: float = 0.45
+-@export var catch_height: float = 1.20
+-
+-func accepts_position(p: Vector3) -> bool:
+-    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+-    return p.distance_to(centre) <= catch_radius
+-```
+-
+-`p` is the point's world position. The target's centre is 1.20 metres above its origin. `distance_to()` measures the gap; `<=` accepts 0.45 metres or less. The exported values are editable parameters.
+-
+-The actual museum target also remembers whether the point is already inside, rearms when it leaves, and releases the falling balls on entry. This function isolates the acceptance test; it does not supply those other actions.
++Neither declaring a grabbable group nor connecting unexplained signals creates an XR pickup here. Point Coordinates identifies the supplied museum pickable and keeps the missing portable XR starter explicit. Distance thresholds belong to Lines; proximity is not object identity.
+--- before/doc/book/studies/point-one/README.md
++++ after/doc/book/studies/point-one/README.md
+@@ -1,7 +1,11 @@
+ # Point One — give the point a body
+ 
+-The current tutorial follows absence, visibility and resistance, then encounters removable light and the pedestal sphere in the museum. study.tscn is the portable three-condition comparison. position.gd, visible.gd and solid.gd are its supplied scripts; TUTORIAL.md selects the actual lines to change.
++Current study, 30 September 2026. Open this folder's project.godot; the main scene is study.tscn. Day Zero setup and Point Zero's _ready(), _process() and named values are assumed.
+ 
+-Point_Coordinates now owns the black held point and the component-by-component coordinate lesson. Its dedicated portable kit is ../point-coordinates/. The older coordinates.tscn and points.gd remain here for compatibility, but no longer define the first Point One lesson.
++Start with TUTORIAL.md. PointStudy inherits the supplied base.tscn and contains three stations: Position uses position.gd; Visible uses visible.gd; Solid uses solid.gd. These are complete learner scripts. point_position is a Vector3 value; marker is the node displaying a surface at that position.
+ 
+-Neither desktop kit includes an XR player. The museum supplies pickup. CONSTRUCTION.md preserves the earlier fuller construction notes; current selection and order come from TUTORIAL.md. DAY_ZERO.md and POINT_ZERO.md contain the preceding preparation and game-loop material.
++The supplied contact_probe.gd moves three pink feelers through the stations using actual physics collision. The empty and visible-only stations let them cross; the solid station stops one. The sweep repeats. Space pauses/resumes; R repeats. Changing the collision radius moves the stopping place independently of the visible sphere. The probe stays at the supplied height of 1.12 m; restore the height after the first experiment before comparing boundaries.
++
++CONSTRUCTION.md names the borrowed parts and their roles. The fixed-camera study needs no XR add-on or player. The museum's sun switch, pedestal sphere and bodily traversal remain encounters there. Point Coordinates owns pickup, X/Y/Z and local/world references; its desktop study is supplied separately.
++
++The current download contains only this lesson's scripts, scene, base, project settings and documentation. Older coordinates.tscn, points.gd, DAY_ZERO.md and POINT_ZERO.md remain in the repository as historical copies; they are not this study's starting instructions or part of the new download.
+--- before/doc/book/studies/point-one/solid.gd
++++ after/doc/book/studies/point-one/solid.gd
+@@ -8,10 +8,10 @@
+     sphere.radius = radius
+     sphere.height = radius * 2.0
+ 
+-    var visible_point := MeshInstance3D.new()
+-    visible_point.mesh = sphere
+-    visible_point.position = point_position
+-    add_child(visible_point)
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
+ 
+     var solid := StaticBody3D.new()
+     solid.position = point_position
+--- before/doc/book/studies/point-one/study.tscn
++++ after/doc/book/studies/point-one/study.tscn
+@@ -1,14 +1,19 @@
+-[gd_scene load_steps=5 format=3]
++[gd_scene load_steps=6 format=3]
+ 
+ [ext_resource type="PackedScene" path="res://base.tscn" id="Base"]
+ [ext_resource type="Script" path="res://position.gd" id="1"]
+ [ext_resource type="Script" path="res://visible.gd" id="2"]
+ [ext_resource type="Script" path="res://solid.gd" id="3"]
++[ext_resource type="Script" path="res://contact_probe.gd" id="Probe"]
+ 
+ [node name="PointStudy" instance=ExtResource("Base")]
+ 
+ [node name="Welcome" parent="." index="0"]
+ visible = false
++
++[node name="Camera3D" parent="." index="3"]
++position = Vector3(0, 1.7, 3.4)
++rotation = Vector3(-0.24, 0, 0)
+ 
+ [node name="Position" type="Node3D" parent="."]
+ position = Vector3(-1.25, 0, 0)
+@@ -42,3 +47,12 @@
+ text = "Point one"
+ outline_size = 0
+ 
++[node name="ContactProbe" type="Node3D" parent="."]
++script = ExtResource("Probe")
++
++[node name="ProbeNote" type="Label3D" parent="."]
++position = Vector3(0, 0.19, 0)
++pixel_size = 0.002
++font_size = 40
++outline_size = 0
++text = "Supplied contact test  ·  Space: pause  ·  R: repeat"
+--- before/doc/book/studies/point-one/TUTORIAL.md
++++ after/doc/book/studies/point-one/TUTORIAL.md
+@@ -1,12 +1,12 @@
+ # Point One — give the point a body
+ 
+-Point Zero let us recognise an instruction that begins, and one that continues. Now we follow the corridor. Each label says “Point one”, but something different happens above it.
++Point Zero gave us an instruction that runs when the scene is ready. Here we will use that moment to place a marker. The supplied scene already gives us a floor, a light and a view. We will keep those while changing what appears in front of us.
+ 
+-The [supplied study](README.md) lets us inspect the first three conditions together: an absent point, a visible sphere and a solid sphere. Its three scripts are already complete. We will change a few lines as we encounter what they do. The held point and coordinate frame have their own next chapter, Point Coordinates.
++Open [the Point One study project](README.md), then `study.tscn`. Its root is `PointStudy`. The three station nodes, `Position`, `Visible` and `Solid`, have `position.gd`, `visible.gd` and `solid.gd` attached. These are the three scripts we will change. Each station has its own “Point one” label.
++
++Run the study. Above the first label there is nothing; above the next two are white spheres. Three small pink feelers move from left to right. Two cross their stations; the third stops at the solid sphere. The sweep repeats. Space pauses or resumes it; R starts the sweep again. `contact_probe.gd` supplies this contact test. Its movement is borrowed equipment, like the camera. We will change what it can cross.
+ 
+ ## At the first label, nothing appears
+-
+-There is a place to look, but no visible object. A mathematical point has a position and no extent. How can we keep its position before giving it a surface?
+ 
+ Open `position.gd`. This is the whole script:
+ 
+@@ -17,57 +17,86 @@
+     var point_position := Vector3(0.0, 1.12, 0.0)
+ ```
+ 
+-We know `_ready()` from Point Zero; `-> void` says it returns no value. Here it keeps a different kind of value: a `Vector3`, containing three numbers. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.
++We know `_ready()` from Point Zero; `-> void` says the function returns no value. Here we define a `Vector3`, a value containing three numbers, and name it `point_position`. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.
+ 
+-We name that value `point_position`. The middle number places it above the floor. Change `1.12` to `1.7` and run. Nothing appears. We have changed a value without attaching any visible body to it. The editor's unused-variable warning describes that condition.
++Change `1.12` to `1.7` and run. Nothing appears at this station. We have changed a value without attaching a visible body to it. The editor's unused-variable warning describes that condition. The pink feeler still crosses the empty place. It belongs to the supplied test, not to the position we have just defined. Restore `1.12`.
+ 
+-The other stations in the study still show their spheres. This change belongs only to the empty station. Restore `1.12` before continuing.
++## Give the position a surface
+ 
+-## Further along, the point has a surface
+-
+-The next label has a small white sphere above it. Its centre gives our eyes a place to find.
+-
+-Open `visible.gd`. The same position is there, now used by a visible object:
++Open `visible.gd`. Its complete construction runs in the same familiar function:
+ 
+ ```gdscript
+-visible_point.position = point_position
++extends Node3D
++
++func _ready() -> void:
++    var point_position := Vector3(0.0, 1.12, 0.0)
++
++    var radius := 0.14
++    var sphere := SphereMesh.new()
++    sphere.radius = radius
++    sphere.height = radius * 2.0
++
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
+ ```
+ 
+-This line is already inside `_ready()`. `visible_point` names the mesh node created by the supplied script; assigning its `position` puts its centre at our coordinates. We have given the point a body through which it can appear.
++`point_position` is the location. `sphere` describes a spherical surface; `marker` is the node that displays it. `.new()` creates each part. Assigning `marker.mesh` gives that node its surface; assigning `marker.position` places it. `add_child(marker)` joins it to the station. A position and the object placed there are different things.
+ 
+-Change `1.12` to `1.7` in this script. This time the white sphere rises. Restore the height, then change the radius:
++Change `1.12` to `1.7` in this script. Now the white sphere rises. Restore the height, then change `radius` from `0.14` to `0.3`. The sphere grows around the same centre. Its height follows because the script makes it twice the radius.
++
++Watch the feeler cross the larger sphere. A visible surface has still given it nothing to collide with. We can change how much the sphere hides without changing what can pass through it. Restore the radius to `0.14`.
++
++## Give the body a boundary
++
++The third station looks the same. Its feeler stops. Open `solid.gd`:
+ 
+ ```gdscript
+-var radius := 0.14
++extends Node3D
++
++func _ready() -> void:
++    var point_position := Vector3(0.0, 1.12, 0.0)
++
++    var radius := 0.14
++    var sphere := SphereMesh.new()
++    sphere.radius = radius
++    sphere.height = radius * 2.0
++
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
++
++    var solid := StaticBody3D.new()
++    solid.position = point_position
++
++    var sphere_shape := SphereShape3D.new()
++    sphere_shape.radius = radius
++    var collider := CollisionShape3D.new()
++    collider.shape = sphere_shape
++
++    solid.add_child(collider)
++    add_child(solid)
+ ```
+ 
+-Try `0.3`. The sphere becomes larger while its centre stays where it was. The supplied `SphereMesh` uses this radius and a height twice as large. We can inspect its construction later; for now, we can change a position and a surface separately.
++The first part constructs the same marker. The added `StaticBody3D` participates in collision. `SphereShape3D` describes its boundary, and `CollisionShape3D` attaches that shape to the physics body. The visible marker and this body are both placed at `point_position`.
+ 
+-In the museum, try crossing that surface. It is visible, but it does not stop you. Restore the radius to `0.14` before meeting the next sphere.
+-
+-## The next point stops us
+-
+-The next white sphere looks the same. In the museum, approaching it produces a different result: a body meets resistance.
+-
+-Open `solid.gd`. It keeps the visible construction and adds a separate physics body and collision shape. Both are placed at `point_position`. The boundary's size is set here:
++Find `sphere_shape.radius = radius`. Change only that line to:
+ 
+ ```gdscript
+-sphere_shape.radius = radius
++    sphere_shape.radius = 0.35
+ ```
+ 
+-Change only that line to:
++Run again. The white sphere stays small, but the feeler stops earlier, leaving a visible gap. The empty space resists it. **Debug → Visible Collision Shapes** can also reveal the larger boundary; the contact test works without that overlay.
+ 
+-```gdscript
+-sphere_shape.radius = 0.35
+-```
++We have chosen whether the surface we see and the boundary we encounter coincide. In the museum, it is your movement that meets this difference. The fixed-camera study supplies another moving body so we can test the same relation. Restore `sphere_shape.radius = radius`.
+ 
+-The visible sphere stays small. Its collision boundary grows. In the desktop study, turn on **Debug → Visible Collision Shapes** to see the boundary; the fixed camera does not let you walk into it. In the museum, the distinction is something your movement meets.
+-
+-We have chosen whether the surface we see and the boundary we encounter coincide. The full physics construction is supplied; changing this one relation already gives us something consequential to author. Restore the matching radius.
++Try a different disagreement: in `solid.gd`, set the visible `radius` to `0.3` and `sphere_shape.radius` to `0.07`. The feeler disappears into the white surface before the contact label reports “stopped”. The boundary is now inside the body we see. Return both to the matching `0.14` when you finish.
+ 
+ ## Remove the light, keep the body
+ 
+-Use the museum's wall switch. The long shadows disappear, while a dim fill leaves the spheres visible. The collision boundary stays where it was.
++In the museum, use the wall switch. The long shadows disappear while a dim fill leaves the spheres visible. The collision boundary stays where it was.
+ 
+ The decision in the switch is one line:
+ 
+@@ -75,10 +104,10 @@
+ sun.visible = false
+ ```
+ 
+-Here `sun` is the supplied directional light. This is a reading of the museum source, not a line to paste into `visible.gd`, which has no variable named `sun`. We borrow the switch and lighting rig for this encounter. Building shadows is not another task hidden inside learning the point.
++Here `sun` is the museum's directional light. This is a reading of that source, not a line to paste into `visible.gd`, which has no variable named `sun`. The portable study keeps its supplied light. Building the switch and its lighting rig is outside this lesson.
+ 
+-## Before leaving
++## What we can carry forward
+ 
+-The large sphere repeats the same name. Return to the radius we changed: giving a position more surface did not require a new kind of position.
++We can now place a marker, change its surface around the same centre and give it a different physical boundary. The large sphere at the end of the museum corridor asks us to return to those choices: it still says “Point one”. Knowing its construction gives us another way to change the encounter.
+ 
+-We can now change appearance and resistance separately. [Point Coordinates](../point-coordinates/TUTORIAL.md) begins with a point we can hold, then reads its movement. It will prepare two positions for the line.
++Point Coordinates (the next study, supplied separately) begins with a supplied point we can hold, then reads its movement. It will prepare two positions for the line. The [construction reference](CONSTRUCTION.md) keeps the roles of the supplied parts available without adding another required exercise.
+--- before/doc/book/studies/point-one/visible.gd
++++ after/doc/book/studies/point-one/visible.gd
+@@ -8,7 +8,7 @@
+     sphere.radius = radius
+     sphere.height = radius * 2.0
+ 
+-    var visible_point := MeshInstance3D.new()
+-    visible_point.mesh = sphere
+-    visible_point.position = point_position
+-    add_child(visible_point)
++    var marker := MeshInstance3D.new()
++    marker.mesh = sphere
++    marker.position = point_position
++    add_child(marker)
+--- /dev/null
++++ after/commons/maps/Point_One/README.md
+@@ -0,0 +1,20 @@
++# Point One — current files
++
++Updated 30 September 2026. This hall follows Point Zero and precedes Point Coordinates.
++
++The chapter begins with an undrawn position, gives it a visible sphere, then an independently defined collision boundary. A switch removes the directional light; the large pedestal sphere returns to the name “Point one”. Arrival and the counter belong to Point Zero. Holding, components, WORLD/LOCAL and the target belong to Point Coordinates.
++
++| File | Role |
++| --- | --- |
++| [final.md](final.md) | Current encounter manuscript: **A body in the light** |
++| [tutorial.md](tutorial.md) | Making companion: three complete scripts and a supplied moving contact test |
++| [intent.md](intent.md) | What the hall, manuscript and tutorial each select, and the handover between lessons |
++| [technical.md](technical.md) | Museum implementation and the reduced study's scope |
++| [artifacts.md](artifacts.md) | Current placed inventory, derived from map_data.json |
++| [summary.md](summary.md), [blurb.md](blurb.md) | Short descriptions of the current hall |
++| [encounter-reference.md](encounter-reference.md) | Curatorial agreement beside the source inventory |
++| [critical.md](critical.md), [seed.md](seed.md), [brief.md](brief.md), [walked.md](walked.md), [eye_shot.md](eye_shot.md) | Earlier research and readings; their combined-opening route is historical |
++
++The earlier research can still give us questions and language. It does not override the current lesson or its placements. Read the current manuscript and tutorial together before deciding that either is missing the older opening's material.
++
++The [portable study](../../../doc/book/studies/point-one/README.md) teaches position, surface and collision with a supplied camera and contact probes. It does not include an XR player. Use the separately supplied [Coordinates study](../../../doc/book/studies/point-coordinates/README.md) for components and reference frames.
+--- /dev/null
++++ after/doc/book/studies/point-one/contact_probe.gd
+@@ -0,0 +1,88 @@
++extends Node3D
++## Supplied comparison equipment. Three small feelers move through the stations.
++## Actual physics contact stops each feeler; the repeating sweep lets us compare
++## visible radius and collision radius without supplying an XR player.
++
++const SPEED := 0.4
++const HALF_TRAVEL := 0.5
++const CENTRE_HEIGHT := 1.12
++const CYCLE_SECONDS := 4.5
++const PROBE_SIZE := Vector3(0.035, 0.14, 0.06)
++var probes: Array[CharacterBody3D] = []
++var labels: Array[Label3D] = []
++var origins: Array[Vector3] = []
++var stopped: Array[bool] = []
++var elapsed: float = 0.0
++var paused: bool = false
++
++func _ready() -> void:
++    var material := StandardMaterial3D.new()
++    material.albedo_color = Color(0.95, 0.38, 0.62)
++    material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++    for station_name: String in ["Position", "Visible", "Solid"]:
++        var station := get_parent().get_node(station_name) as Node3D
++        var start := to_local(station.to_global(Vector3(-HALF_TRAVEL, CENTRE_HEIGHT, 0)))
++        origins.append(start)
++        var probe := CharacterBody3D.new()
++        probe.name = station_name + "Probe"
++        probe.collision_layer = 0
++        probe.collision_mask = 1
++        probe.safe_margin = 0.001
++        var shape := BoxShape3D.new()
++        shape.size = PROBE_SIZE
++        var collision := CollisionShape3D.new()
++        collision.shape = shape
++        probe.add_child(collision)
++        var mesh := BoxMesh.new()
++        mesh.size = PROBE_SIZE
++        var visible := MeshInstance3D.new()
++        visible.mesh = mesh
++        visible.material_override = material
++        probe.add_child(visible)
++        add_child(probe)
++        probes.append(probe)
++        stopped.append(false)
++        var label := Label3D.new()
++        label.name = station_name + "Contact"
++        label.font_size = 40
++        label.pixel_size = 0.002
++        label.outline_size = 0
++        label.modulate = Color(0.97, 0.75, 0.83)
++        label.position = to_local(station.to_global(Vector3(0, 0.48, 0)))
++        add_child(label)
++        labels.append(label)
++    reset_sweep()
++
++func _unhandled_key_input(event: InputEvent) -> void:
++    if event is InputEventKey and event.pressed and not event.echo:
++        if event.physical_keycode == KEY_SPACE:
++            paused = not paused
++        elif event.physical_keycode == KEY_R:
++            reset_sweep()
++
++func reset_sweep() -> void:
++    elapsed = 0.0
++    for i in probes.size():
++        probes[i].position = origins[i]
++        probes[i].velocity = Vector3.ZERO
++        stopped[i] = false
++        labels[i].text = "approaching"
++
++func _physics_process(delta: float) -> void:
++    if paused:
++        return
++    elapsed += delta
++    if elapsed >= CYCLE_SECONDS:
++        reset_sweep()
++        return
++    for i in probes.size():
++        if stopped[i]:
++            continue
++        var remaining: float = origins[i].x + 2.0 * HALF_TRAVEL - probes[i].position.x
++        if remaining <= 0.0001:
++            labels[i].text = "crossed"
++            continue
++        var hit := probes[i].move_and_collide(Vector3(minf(SPEED * delta, remaining), 0, 0))
++        if hit:
++            stopped[i] = true
++            labels[i].text = "stopped"

@@ -1,0 +1,201 @@
+{
+  "_meta": {},
+  "roles": {
+    "Random_Definition": {
+      "dark_sphere": "decoration",
+      "slot_machine": "secondary",
+      "prng_crank_machine": "secondary",
+      "entropy_axiom": "secondary",
+      "2d_in_3d_randomness_vis": "secondary",
+      "science_screen": "secondary",
+      "entropy_jar": "secondary",
+      "random_butterflies": "secondary",
+      "seed_replay_demo": "primary",
+      "synthesis_stand": "secondary",
+      "clipboard": "secondary",
+      "digital_materiality_glitch": "secondary",
+      "catalyst_pickup": "secondary",
+      "trng_vs_prng": "secondary",
+      "random_number_book_page_1955": "secondary"
+    },
+    "Random_Entropy": {
+      "dark_sphere": "decoration",
+      "replay_casino": "secondary",
+      "entropy_jar": "secondary",
+      "hardware_entropy_decay": "secondary",
+      "trng_vs_prng": "secondary",
+      "shannon_entropy_meter": "primary",
+      "random_butterflies": "secondary",
+      "entropy_axiom": "secondary",
+      "science_screen": "secondary"
+    },
+    "Random_Remove": {
+      "dark_sphere": "decoration",
+      "remove_random": "primary",
+      "hazards_demo": "secondary"
+    },
+    "Random_Walk": {
+      "dark_sphere": "decoration",
+      "catalyst_prompter_box": "secondary",
+      "catalyst_vent": "secondary",
+      "random_walk_terrarium": "primary",
+      "random_walk_collection": "secondary",
+      "pixel_cloud": "secondary",
+      "lab_room": "secondary",
+      "random_walk_128": "secondary",
+      "random_walk_leash": "secondary",
+      "catalyst_pickup": "secondary"
+    },
+    "Random_Gaussian": {
+      "dark_sphere": "decoration",
+      "GaussianBlurShader": "secondary",
+      "GaussianPaintSplatter": "secondary",
+      "GaussianBlurCircle": "secondary",
+      "random_bell_curve": "secondary",
+      "distribution_comparator": "secondary",
+      "gaussian_random": "secondary",
+      "distribution_sampler": "primary",
+      "galton_board": "secondary"
+    },
+    "Random_Mushrooms": {
+      "dark_sphere": "decoration",
+      "mushrooms": "primary",
+      "bubbles_random": "secondary",
+      "bubble_particles": "secondary",
+      "reaction_diffusion_intro": "secondary",
+      "random_number_book_page_collection": "secondary"
+    },
+    "Random_Game": {
+      "miura_crawler": "secondary",
+      "scissor_stalker": "secondary",
+      "kaleidocycle_enemy": "secondary",
+      "kresling_spire": "secondary",
+      "armadillo_eggling": "secondary",
+      "origami_droideka": "secondary",
+      "monte_carlo": "secondary",
+      "cube_projectile_spawner": "primary",
+      "r_c": "primary"
+    }
+  },
+  "groups": {},
+  "order": {
+    "Random_Definition": {
+      "primary": [
+        "seed_replay_demo"
+      ],
+      "secondary": [
+        "slot_machine",
+        "prng_crank_machine",
+        "entropy_axiom",
+        "2d_in_3d_randomness_vis",
+        "science_screen",
+        "entropy_jar",
+        "random_butterflies",
+        "synthesis_stand",
+        "clipboard",
+        "digital_materiality_glitch",
+        "catalyst_pickup",
+        "trng_vs_prng",
+        "random_number_book_page_1955"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Entropy": {
+      "primary": [
+        "shannon_entropy_meter"
+      ],
+      "secondary": [
+        "replay_casino",
+        "entropy_jar",
+        "hardware_entropy_decay",
+        "trng_vs_prng",
+        "random_butterflies",
+        "entropy_axiom",
+        "science_screen"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Remove": {
+      "primary": [
+        "remove_random"
+      ],
+      "secondary": [
+        "hazards_demo"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Walk": {
+      "primary": [
+        "random_walk_terrarium"
+      ],
+      "secondary": [
+        "catalyst_prompter_box",
+        "catalyst_vent",
+        "random_walk_collection",
+        "pixel_cloud",
+        "lab_room",
+        "random_walk_128",
+        "random_walk_leash",
+        "catalyst_pickup"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Gaussian": {
+      "primary": [
+        "distribution_sampler"
+      ],
+      "secondary": [
+        "GaussianBlurShader",
+        "GaussianPaintSplatter",
+        "GaussianBlurCircle",
+        "random_bell_curve",
+        "distribution_comparator",
+        "gaussian_random",
+        "galton_board"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Mushrooms": {
+      "primary": [
+        "mushrooms"
+      ],
+      "secondary": [
+        "bubbles_random",
+        "bubble_particles",
+        "reaction_diffusion_intro",
+        "random_number_book_page_collection"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "Random_Game": {
+      "primary": [
+        "r_c",
+        "cube_projectile_spawner"
+      ],
+      "secondary": [
+        "miura_crawler",
+        "scissor_stalker",
+        "kaleidocycle_enemy",
+        "kresling_spire",
+        "armadillo_eggling",
+        "origami_droideka",
+        "monte_carlo"
+      ],
+      "decoration": []
+    }
+  },
+  "notes": {},
+  "positions": {}
+}

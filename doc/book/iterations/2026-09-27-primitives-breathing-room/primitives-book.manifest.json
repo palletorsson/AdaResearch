@@ -1,0 +1,67 @@
+{
+  "captured_at": "2026-09-27T09:18:02.967962+00:00",
+  "base_commit": "05b94a776e3de66337c85e41a59e17fec25941f6",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "primitives",
+  "sequence_sha256": "d1e2f9bdb93dd6ff460c44b011a0fbd4575d6869139923fea8e7554cc524503a",
+  "maps": [
+    {
+      "map": "Point_Zero",
+      "path": "commons/maps/Point_Zero/final.md",
+      "sha256": "76f5df115433a529c533b23cb3bf53221cfecd44d2e74c81f3ca2e5f6e9b2c84"
+    },
+    {
+      "map": "Point_One",
+      "path": "commons/maps/Point_One/final.md",
+      "sha256": "b6c025f550123dc33605051dab8c71569274f4677eee6b42ab34e951e8e08f7b"
+    },
+    {
+      "map": "Point_Lines",
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "b9cc54e6497766876510b0e53296257e729d489f28a7c5edb9d7fde1b1b52bd4"
+    },
+    {
+      "map": "Point_Trace",
+      "path": "commons/maps/Point_Trace/final.md",
+      "sha256": "0c3423a8420b2e7f836b638f5893e96f8207945d57e0b31ed4ec2355e97df4d3"
+    },
+    {
+      "map": "Point_Line_Grid",
+      "path": "commons/maps/Point_Line_Grid/final.md",
+      "sha256": "75399a2057a8966c144eebc2c23670f3ff6f2cf9533ee70d06a98f5745163a54"
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "path": "commons/maps/Point_Triangle_Context/final.md",
+      "sha256": "8279535ee877fb96dd5d1a95ea65b382a8aa8e54476854477952d4d8359b63d1"
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "path": "commons/maps/Primitives_Polythedra/final.md",
+      "sha256": "78e5a6eb088807718dc583d6d47a68ca989002204a79b72ad24b0454b78b0ec7"
+    },
+    {
+      "map": "Point_Animatedcube",
+      "path": "commons/maps/Point_Animatedcube/final.md",
+      "sha256": "98c5ef7db7c16cf0c88630028f0aa04c187ecd09204f9cdcf8837cbcf3187e95"
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "path": "commons/maps/Primitives_Ignorance/final.md",
+      "sha256": "88faabf776471ead31fb38c5b43e1c5e512c21cc2797f5a697d12e08ad160ce0"
+    },
+    {
+      "map": "Primitives_Portals",
+      "path": "commons/maps/Primitives_Portals/final.md",
+      "sha256": "94ccbbec6637218aeaf2eb1912be276df4f5fc50d567520a5ecfd7820d1ff7ad"
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "path": "commons/maps/Primitives_Melencolia/final.md",
+      "sha256": "ff2c98ad9a95e62991127f785d6cdaf0aa1b789250a60ac3ad18bf677a2570e8"
+    }
+  ],
+  "output_sha256": "e308cbbecb921fa03798081b76332450cd613d9005fe56f9256dd8f0d57c2ada"
+}

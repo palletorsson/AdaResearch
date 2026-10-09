@@ -1,0 +1,1 @@
+A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.

@@ -1,0 +1,26 @@
+--- before/ada_encyclopedia/book-review/route.ts
++++ ada_encyclopedia/book-review/route.ts
+@@ -35,10 +35,11 @@
+     return new Response("Not found", { status: 404 });
+   }
+   const relative = parts.join("/");
+-  const evidence = relative.startsWith("doc/book/iterations/");
++  const evidence = relative.startsWith("doc/book/iterations/");
++  const figure = relative.startsWith("doc/book/figures/");
+   const manuscript = /^commons\/maps\/[^/]+\/final\.md$/.test(relative);
+   const type = TYPES[path.extname(relative).toLowerCase()];
+-  if ((!evidence && !manuscript) || !type) {
++  if ((!evidence && !figure && !manuscript) || !type) {
+     return new Response("Not found", { status: 404 });
+   }
+   try {
+@@ -47,7 +48,8 @@
+     const inside = path.relative(root, file).replaceAll("\\", "/");
+     // Also reject symlinks/junctions that leave the allowed content roots.
+     if (path.isAbsolute(inside) || inside.startsWith("../") ||
+-        (evidence && !inside.startsWith("doc/book/iterations/")) ||
++        (evidence && !inside.startsWith("doc/book/iterations/")) ||
++        (figure && !inside.startsWith("doc/book/figures/")) ||
+         (manuscript && !/^commons\/maps\/[^/]+\/final\.md$/.test(inside))) {
+       return new Response("Not found", { status: 404 });
+     }

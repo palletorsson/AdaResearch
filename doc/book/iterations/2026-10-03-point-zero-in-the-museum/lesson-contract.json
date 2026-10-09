@@ -1,0 +1,32 @@
+{
+  "map": "Point_Zero",
+  "host": "existing Endless Museum",
+  "artifact": "frame_counter_display",
+  "source": "commons\\visualaid\\frame_counter\\frame_counter_display.gd",
+  "prerequisites": [
+    "working Ada project",
+    "save, stop and rerun from Day Zero"
+  ],
+  "introduced": [
+    "node readiness and repeated process callbacks",
+    "reading an engine total",
+    "assigning its string representation to a label"
+  ],
+  "supplied": [
+    "existing code-built console and label reference",
+    "museum, player, viewing and light",
+    "other readout modes"
+  ],
+  "learner_action": "move the same display assignment between _process and _ready",
+  "observable_difference": "live total versus a single reading; engine continues in both cases",
+  "deferred": [
+    "housing geometry",
+    "frame-rate calculations",
+    "elapsed-time accumulation",
+    "camera and light construction"
+  ],
+  "new_artifacts": [],
+  "next": "Point_One after author reading",
+  "runtime_checks": 26,
+  "physical_headset_tested": false
+}

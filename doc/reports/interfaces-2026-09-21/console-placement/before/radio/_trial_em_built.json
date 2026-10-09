@@ -1,0 +1,2280 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-09-21 13:07:30",
+	"boot_ms": {
+		"autoloads": 2261,
+		"bake_parsed": 982,
+		"boot_tail": 4689,
+		"engine_pak": 1817,
+		"engine_to_ready": 5662,
+		"entry": 1,
+		"first_physics": 4950,
+		"grid_warm": 1475,
+		"guests_loaded": 1841,
+		"loading_shell": 20,
+		"modules_loaded": 324,
+		"modules_pool": 393,
+		"museum_data": 393,
+		"plan_parsed": 942,
+		"pool_done": 858,
+		"scene_chain": 1584,
+		"segment0_built": 4688,
+		"world_ready": 2693
+	},
+	"plan": "res://doc/reports/interfaces-2026-09-21/console-placement/before/radio/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.7,
+						-2.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						0,
+						0
+					],
+					"token": "origin",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						0.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						10,
+						1
+					],
+					"token": "the_invisible_point",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 270.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						1
+					],
+					"token": "you_are_here",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.7,
+						0.2,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 3.0,
+					"tile_cell": [
+						7,
+						1
+					],
+					"token": "frame_counter_display",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						2.0,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 2.0,
+					"tile_cell": [
+						12,
+						1
+					],
+					"token": "code_evolution_screen",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						1.4,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "SoundscapeRadioRack",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						4
+					],
+					"token": "SoundscapeRadioRack",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						1.21,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						1,
+						5
+					],
+					"token": "street_talker",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 2.0,
+					"tile_cell": [
+						8,
+						5
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.99,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						5
+					],
+					"token": "3t",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						14,
+						5
+					],
+					"token": "comment_box",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						14.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						9
+					],
+					"token": "coordinate_readout",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						1.4,
+						9.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						10
+					],
+					"token": "drag_point_target",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						11
+					],
+					"token": "coordinate_readout",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						1.4,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "fontana_puncture",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 270.0,
+					"scale": 1.0,
+					"tile_cell": [
+						12,
+						11
+					],
+					"token": "fontana_puncture",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						1.29,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.5,
+					"tile_cell": [
+						4,
+						12
+					],
+					"token": "CoordinateSystem3M",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						-0.1,
+						12.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						14
+					],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						14.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						15
+					],
+					"token": "grab_sphere_point_snap",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						15.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						8,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						6
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 01",
+					"index": 1,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "01\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.1,
+						1.1,
+						7.0
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						13
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						14
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "02\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.2,
+						1.2,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						15
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "03\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.2,
+						1.2,
+						16.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						16
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 04",
+					"index": 4,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "04\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						16.0
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						3,
+						18
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 05",
+					"index": 5,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "05\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.6,
+						1.1,
+						19.0
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						21
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						3,
+						22
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 06",
+					"index": 6,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "06\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.2,
+						1.2,
+						22.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						26
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 07",
+					"index": 7,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "07\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.6,
+						1.1,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 08",
+					"index": 8,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "08\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						2.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						-1
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						0
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "09\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.2,
+						1.2,
+						0.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "10\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						5.0
+					]
+				},
+				{
+					"backing_cell": [
+						-3,
+						3
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						-2,
+						3
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "11\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						-2.0,
+						1.1,
+						3.6
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 12",
+					"index": 12,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "12\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.0,
+						1.1,
+						7.6
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						23
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						23
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "13\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						23.2
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 14",
+					"index": 14,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "14\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						10,
+						18
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 15",
+					"index": 15,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "15\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.0,
+						18.3
+					]
+				},
+				{
+					"backing_cell": [
+						1,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "16\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.8,
+						1.0,
+						5.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						5
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 17",
+					"index": 17,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "17\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.0,
+						5.3
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 18",
+					"index": 18,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "18\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						15,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 19",
+					"index": 19,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "19\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						0.1,
+						7.2
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						10
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						10
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 20",
+					"index": 20,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "20\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.2,
+						10.2
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						15,
+						5
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 21",
+					"index": 21,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "21\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.0,
+						1.0,
+						5.3
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						15
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 22",
+					"index": 22,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "22\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						17.0,
+						1.0,
+						15.3
+					]
+				},
+				{
+					"backing_cell": [
+						19,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						18,
+						15
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 23",
+					"index": 23,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "23\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						19.0,
+						1.6,
+						15.2
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						9
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						9
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 24",
+					"index": 24,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "24\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						9.6
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						28
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						28
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 25",
+					"index": 25,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "25\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.0,
+						1.1,
+						28.6
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 26",
+					"index": 26,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "26\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.0,
+						1.2,
+						7.2
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						20
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 27",
+					"index": 27,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "27\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.0,
+						1.0,
+						20.3
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						20
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 28",
+					"index": 28,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "28\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.0,
+						1.0,
+						20.3
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						17
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 29",
+					"index": 29,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "29\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						18.0
+					]
+				},
+				{
+					"backing_cell": [
+						7,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						17
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 30",
+					"index": 30,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "30\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						7.2,
+						1.2,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						18
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 31",
+					"index": 31,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "31\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.2,
+						1.2,
+						19.0
+					]
+				},
+				{
+					"backing_cell": [
+						1,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						8
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 32",
+					"index": 32,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "32\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.0,
+						1.0,
+						8.8
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						26
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 33",
+					"index": 33,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "33\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.2,
+						1.2,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point one · 34",
+					"index": 34,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "34\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.6,
+						1.1,
+						2.0
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						3
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point one · 35",
+					"index": 35,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "35\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.3,
+						1.0,
+						3.0
+					]
+				},
+				{
+					"backing_cell": [
+						-3,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						-2,
+						5
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 36",
+					"index": 36,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "36\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						-2.0,
+						1.2,
+						5.2
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						9
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						-1,
+						9
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point one · 37",
+					"index": 37,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "37\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						0.0,
+						1.2,
+						9.2
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						25
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point one · 38",
+					"index": 38,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point one",
+					"segment": 0,
+					"text": "38\nprimitives · point one",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.034341461956501,
+						"pixel_size": 0.00031219512195122,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						25.3
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				".################################",
+				".#..................#############",
+				"....................#############",
+				"....................#############",
+				"...sss....ssss###################",
+				"...sssssssssss###################",
+				"...sss######ss###################",
+				"..........s#.....################",
+				"....s.....s#.#...################",
+				"..##.....ss#.#.s.################",
+				".###......s#.#...################",
+				".##...#...s#.....################",
+				".##s.......#.....################",
+				".##s.........##..################",
+				".##s...s......#..################",
+				".##s.........s#..################",
+				".###..........#..################",
+				".##...sss....##..################",
+				".##...sss.s......#.##############",
+				".##...sss........#.##############",
+				".##..#########..##.##############",
+				".##.........##.....##############",
+				".##.........#......##############",
+				".######...#######################",
+				".######...#######################",
+				".#######..#######################",
+				".#........#######################",
+				".#........#######################",
+				".#........#######################",
+				".#........#######################",
+				".#........#######################",
+				".#..#############################",
+				".#..#############################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 29,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "point one",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"10,0": "the_invisible_point",
+				"10,1": "the_invisible_point",
+				"11,0": "the_invisible_point",
+				"11,1": "the_invisible_point",
+				"11,2": "the_invisible_point",
+				"12,0": "code_evolution_screen",
+				"12,1": "code_evolution_screen",
+				"12,11": "fontana_puncture",
+				"12,2": "code_evolution_screen",
+				"14,5": "comment_box",
+				"2,0": "you_are_here",
+				"2,1": "you_are_here",
+				"2,10": "coordinate_readout",
+				"2,11": "coordinate_readout",
+				"2,2": "you_are_here",
+				"2,8": "coordinate_readout",
+				"2,9": "coordinate_readout",
+				"3,0": "you_are_here",
+				"3,1": "you_are_here",
+				"3,2": "you_are_here",
+				"3,4": "SoundscapeRadioRack",
+				"4,0": "you_are_here",
+				"4,1": "you_are_here",
+				"4,2": "you_are_here",
+				"5,1": "frame_counter_display",
+				"5,13": "grab_sphere_point_snap",
+				"5,14": "grab_sphere_point_snap",
+				"5,15": "grab_sphere_point_snap",
+				"6,1": "frame_counter_display",
+				"6,10": "drag_point_target",
+				"6,13": "grab_sphere_point_snap",
+				"6,14": "grab_sphere_point_snap",
+				"6,15": "grab_sphere_point_snap",
+				"7,1": "frame_counter_display",
+				"7,13": "grab_sphere_point_snap",
+				"7,14": "grab_sphere_point_snap",
+				"7,15": "grab_sphere_point_snap",
+				"8,1": "frame_counter_display",
+				"8,5": "interactive_point_origin_force",
+				"9,0": "the_invisible_point",
+				"9,1": "the_invisible_point",
+				"9,14": "floating_sphere_field",
+				"9,3": "3t",
+				"9,4": "3t",
+				"9,5": "3t",
+				"9,6": "3t",
+				"9,7": "3t"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 20,
+			"z0": -4,
+			"z1": 29
+		}
+	]
+}

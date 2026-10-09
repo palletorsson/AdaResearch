@@ -1,0 +1,226 @@
+--- before/commons/artifacts/registry/commons_artifacts.json
++++ commons/artifacts/registry/commons_artifacts.json
+@@ -4475,122 +4475,129 @@
+ 	"flow_field_painter": {
+ 	  "category": "procedural",
+ 	  "complexity": "intermediate",
+-	  "description": "Paint with vector fields — particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
++	  "description": "Particles sample a Perlin-derived unit direction at their current positions, move at a prescribed speed and leave finite trails. Noise becomes an angle, not a gradient or force calculation. SPEED and SCALE vary movement and spatial variation; RESET and SEED separate new starting positions from a new field. The shared_field lesson adds ARROWS and FIELD TIME so a visitor can compare displayed directions with particles and hold the field clock while movement continues. Wrapping coordinates does not make the field periodic.",
+ 	  "dev_themes": [
+-		"art",
+-		"commons",
+-		"mixed",
+-        "procedural"
++	    "art",
++	    "commons",
++	    "mixed",
++	    "procedural"
+ 	  ],
+ 	  "include_in_map_data": true,
+-	  "interaction": "observe",
++	  "interaction": "controls",
+ 	  "interactions": [
+-        "observe"
++	    "observe",
++	    "adjust_speed",
++	    "adjust_scale",
++	    "reset",
++	    "reseed",
++	    "toggle_arrows",
++	    "toggle_field_time"
+ 	  ],
+ 	  "lookup_name": "flow_field_painter",
+ 	  "map_ready": true,
+ 	  "map_sequences": [
+-        "testmaps"
++	    "change",
++	    "testmaps"
+ 	  ],
+ 	  "name": "Flow Field Painter",
+ 	  "parameters": {
+-		"footprint": [
+-		  1.0,
+-		  1.0,
+-		  1.0
+-		],
+-		"size_group": "compact"
+-	  },
+-	  "qfep_connection": "Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure.",
++	    "footprint": [
++	      1.0,
++	      1.0,
++	      1.0
++	    ],
++	    "size_group": "compact"
++	  },
++	  "qfep_connection": "Research association: structured variation and finite history can open questions about order and remainder. This implementation does not calculate a QFEP entropy threshold or simulate fluid dynamics.",
+ 	  "scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+-	  "sequence": "noise",
+-	  "tags": [
+-		"flow_field",
+-		"painting",
+-		"particles",
+-		"streamlines",
+-        "interactive_art"
++	  "sequence": "change",
++	  "tags": [
++	    "flow_field",
++	    "painting",
++	    "particles",
++	    "streamlines",
++	    "interactive_art"
+ 	  ],
+ 	  "geometry_spec": {
+-		"mesh_type": "hybrid",
+-		"topology": "manifold_closed",
+-		"construction": {
+-		  "method": "unknown",
+-		  "primitives": [
+-			"box",
+-            "plane"
+-		  ],
+-		  "operations": []
+-		},
+-		"material": {
+-		  "type": "vertex_color",
+-		  "shading_model": "unshaded",
+-		  "key_properties": [
+-			"metallic",
+-            "transparency"
+-		  ]
+-		},
+-		"animation": {
+-		  "type": "particle_lifecycle",
+-		  "driven_by": "cpu_simulation",
+-		  "affects": [
+-			"transform",
+-            "color"
+-		  ]
+-		},
+-		"instance_strategy": "multimesh",
+-		"vertex_estimate": "~4 instances"
++	    "mesh_type": "hybrid",
++	    "topology": "manifold_closed",
++	    "construction": {
++	      "method": "unknown",
++	      "primitives": [
++	        "box",
++	        "plane"
++	      ],
++	      "operations": []
++	    },
++	    "material": {
++	      "type": "vertex_color",
++	      "shading_model": "unshaded",
++	      "key_properties": [
++	        "metallic",
++	        "transparency"
++	      ]
++	    },
++	    "animation": {
++	      "type": "particle_lifecycle",
++	      "driven_by": "cpu_simulation",
++	      "affects": [
++	        "transform",
++	        "color"
++	      ]
++	    },
++	    "instance_strategy": "multimesh",
++	    "vertex_estimate": "~4 instances"
+ 	  },
+ 	  "spatial_needs": {
+-		"platform": "none",
+-		"footprint_cells": 1,
+-		"clearance": {
+-		  "front": 1,
+-		  "back": 1,
+-		  "left": 1,
+-		  "right": 1
+-		},
+-		"player_position": "above",
+-		"wall_backing": false,
+-		"orientation": "face_approach",
+-		"isolation": 0,
+-		"cluster_with": [],
+-		"preferred_zone": "any",
+-		"measured_footprint_cells": 1,
+-		"footprint_source": "measured"
++	    "platform": "none",
++	    "footprint_cells": 1,
++	    "clearance": {
++	      "front": 1,
++	      "back": 1,
++	      "left": 1,
++	      "right": 1
++	    },
++	    "player_position": "above",
++	    "wall_backing": false,
++	    "orientation": "face_approach",
++	    "isolation": 0,
++	    "cluster_with": [],
++	    "preferred_zone": "any",
++	    "measured_footprint_cells": 1,
++	    "footprint_source": "measured"
+ 	  },
+ 	  "measurements": {
+-		"aabb_size": [
+-		  0.62,
+-		  0.4,
+-		  0.61
+-		],
+-		"aabb_center": [
+-		  0.0,
+-		  0.0,
+-		  0.1
+-		],
+-		"grid_cells": [
+-		  1.0,
+-		  1.0
+-		],
+-		"max_dimension_m": 0.62,
+-		"measured_at": "2026-04-29T07:09:56.762620Z"
++	    "aabb_size": [
++	      0.62,
++	      0.4,
++	      0.61
++	    ],
++	    "aabb_center": [
++	      0.0,
++	      0.0,
++	      0.1
++	    ],
++	    "grid_cells": [
++	      1.0,
++	      1.0
++	    ],
++	    "max_dimension_m": 0.62,
++	    "measured_at": "2026-04-29T07:09:56.762620Z"
+ 	  },
+ 	  "footprint_measured": [
+-		1.0,
+-		1,
+-		1.0
++	    1.0,
++	    1,
++	    1.0
+ 	  ],
+ 	  "spatial_profile": {
+-		"dir_group": "floor",
+-		"range": 2,
+-		"density": "medium",
+-		"min_clearance": 1,
+-		"stack_priority": 0.5,
+-		"approach_dir": "any",
+-		"derived_at": "2026-04-29T09:39:46.083526Z",
+-		"derived_from": "aabb_size + category"
++	    "dir_group": "floor",
++	    "range": 2,
++	    "density": "medium",
++	    "min_clearance": 1,
++	    "stack_priority": 0.5,
++	    "approach_dir": "any",
++	    "derived_at": "2026-04-29T09:39:46.083526Z",
++	    "derived_from": "aabb_size + category"
+ 	  }
+ 	},
+ 	"fluid_taxonomy_tree": {

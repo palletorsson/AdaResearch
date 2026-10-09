@@ -1,0 +1,132 @@
+{
+  "sequence": "forces",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "VFM_05_Launch",
+      "primary_tokens": [
+        "launch_arc"
+      ],
+      "question": "Does aiming higher always send a launch farther?",
+      "ontology": "A launch velocity has horizontal and vertical components. Gravity changes the vertical component over time, so the initial direction and the resulting curved path are different things.",
+      "action": "Move the ANGLE slider and compare the traced arc, its apex and landing marker. Find a low and a high angle with similar range while the launch power stays fixed.",
+      "observable": "A steeper direction increases the upward share but reduces the horizontal share. Range grows and then shrinks; complementary directions can land at the same horizontal distance by different paths.",
+      "mechanism": "LaunchArc._build_demo calculates vx=v0*cos(theta), vy=v0*sin(theta), landing time=2*vy/g, then draws a stroboscopic parabola. ToyConsole._on_slider_moved rebuilds the model as angle changes from22° to70°. This is a parameter-controlled static diagram, not a launcher that fires the player.",
+      "limit": "The range relationship assumes fixed gravity, no air resistance and landing at launch height. The displayed trace does not demonstrate collision, wind or steering during flight.",
+      "variation": "Choose a high route and a low route to the same landing and compare which would clear an imagined obstacle. An actual obstacle test would require a separate launch simulation.",
+      "prior_bridge": "Live previous room: Vectors_Act2_VectorArithmetic",
+      "next_bridge": "Live next room: VFM_03_Motion",
+      "sources": [
+        "commons/artifacts/launch_arc/launch_arc.gd :: _build_demo, _console_meta",
+        "commons/artifacts/_toy_console/toy_console.gd :: _on_slider_moved"
+      ],
+      "source_files": [
+        "commons/maps/VFM_05_Launch/map_data.json",
+        "commons/artifacts/registry/vectors_demos.json",
+        "commons/artifacts/launch_arc/launch_arc.tscn",
+        "commons/artifacts/launch_arc/launch_arc.gd",
+        "commons/artifacts/_toy_console/toy_console.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/VFM_05_Launch/map_data.json": "ee09ac70530a95027610541880c0d7b1c73e5cb93f49185c5c603347c184d9fb",
+        "commons/artifacts/registry/vectors_demos.json": "25f9ebec36bddf89719c4a223fbf4b807740abea645622401c45262f3588fccd",
+        "commons/artifacts/launch_arc/launch_arc.tscn": "7fc64af9e56402f2c02a8250d5fc57287e133d5099e1ba2368736f9ef254849d",
+        "commons/artifacts/launch_arc/launch_arc.gd": "772345367357eefb0f38d8041fa706c15a054cd5cb95c55e762b65af2b2227b8",
+        "commons/artifacts/_toy_console/toy_console.gd": "d0e633be986ca6ff2680d9efd0baa8a5247f79e360ab7007e06c615639a953c3"
+      },
+      "placements": [
+        {
+          "cell": [
+            14,
+            4
+          ],
+          "value": "launch_arc:90"
+        }
+      ],
+      "cautions": "Do not follow the identity header’s claim that this specific toy throws the visitor. Power is a configuration value; only ANGLE is a visitor slider."
+    },
+    {
+      "room_id": "VFM_03_Motion",
+      "primary_tokens": [
+        "friction_ramp"
+      ],
+      "question": "How can a continuous adjustment produce a sudden start?",
+      "ontology": "A force balance can hold a body still until a threshold is crossed. The component of gravity along a slope competes with a friction bound set by the normal component.",
+      "action": "Keep the ramp angle fixed and move μ until the block changes between STATIC and SLIDING. Then hold μ fixed and vary ANGLE. Use RESET to compare fresh runs.",
+      "observable": "The labels and force arrows change as the block begins to move. Below the threshold the model holds the block; above it the displayed velocity accumulates and the block accelerates down the ramp.",
+      "mechanism": "_update_physics_state compares sin(theta) with μ*cos(theta). When sliding it sets acceleration=g*(sin(theta)−μ*cos(theta)); _physics_process adds acceleration*delta to velocity and velocity*delta to slope position, scaled for display. It automatically resets at the bottom.",
+      "limit": "The model uses one coefficient and a simplified state switch, whereas real contacts may distinguish static and kinetic friction and have more complex material behavior. No movement is not evidence of no forces.",
+      "variation": "Approach the threshold from each side and compare the displayed decision. A separate static/kinetic coefficient pair would be a proposed extension capable of demonstrating hysteresis.",
+      "prior_bridge": "Live previous room: VFM_05_Launch",
+      "next_bridge": "Live next room: Vectors_Act3_FieldsAndMotion",
+      "sources": [
+        "commons/artifacts/friction_ramp/friction_ramp.gd :: _update_physics_state, _physics_process, VR controls"
+      ],
+      "source_files": [
+        "commons/maps/VFM_03_Motion/map_data.json",
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/friction_ramp/friction_ramp.tscn",
+        "commons/artifacts/friction_ramp/friction_ramp.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/VFM_03_Motion/map_data.json": "5f9a7f29f87bec240ac7bd98c412d4f59d6178b9437fb0b874d18f030fddb03a",
+        "commons/artifacts/registry/physics_simulation.json": "370f3d930dc238e27ea67b044818962fdcea13072513ca6c7df446c043cbd0e9",
+        "commons/artifacts/friction_ramp/friction_ramp.tscn": "8dec88e3a8dafe7731eda246463aaf5e0349431e6b9fa93cbe3380be6e13dfdf",
+        "commons/artifacts/friction_ramp/friction_ramp.gd": "b3ce27a9bf1ced15a3ae03145a2f291909da33b5f34315ecf34950e0e1247133"
+      },
+      "placements": [
+        {
+          "cell": [
+            9,
+            13
+          ],
+          "value": "friction_ramp"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "VFM_08_Arena",
+      "primary_tokens": [
+        "collision_carts"
+      ],
+      "question": "If two collisions conserve the same kind of quantity, must their outcomes look alike?",
+      "ontology": "Momentum combines mass with signed velocity. Conservation constrains the sum, while the distribution of velocity between bodies can change.",
+      "action": "Move MASS RATIO on the collision-carts console. Compare the upper before lane with the lower after lane: track the striker’s arrow as it reverses, disappears near equal masses, and points forward for a heavier striker.",
+      "observable": "Changing the mass ratio changes both outgoing arrows. A light striker rebounds, equal masses transfer the incoming motion in this model, and a heavy striker continues forward while the other cart leaves faster.",
+      "mechanism": "_build_demo fixes target mass at1 and initial striker speed at1. It evaluates the one-dimensional elastic collision formulas vA=(mA−mB)/(mA+mB)*u and vB=2*mA/(mA+mB)*u, then draws separate before/after lanes. The console slider rebuilds those static comparison diagrams.",
+      "limit": "This is an ideal elastic, isolated, one-dimensional comparison, not a live collision arena. Arrow lengths include a visual minimum, so their lengths are not an exact ruler for measuring momentum.",
+      "variation": "Predict the sign of the striker’s outgoing velocity before moving through equal masses. A sticky collision would conserve momentum with a different energy result, but no restitution control is available on this console.",
+      "prior_bridge": "Live previous room: VFM_09_Legs",
+      "next_bridge": "Live next room: Vectors_Act5_ForceAsPlace",
+      "sources": [
+        "commons/artifacts/collision_carts/collision_carts.gd :: _build_demo, _lane",
+        "commons/artifacts/_toy_console/toy_console.gd :: slider callback"
+      ],
+      "source_files": [
+        "commons/maps/VFM_08_Arena/map_data.json",
+        "commons/artifacts/registry/vectors_demos.json",
+        "commons/artifacts/collision_carts/collision_carts.tscn",
+        "commons/artifacts/collision_carts/collision_carts.gd",
+        "commons/artifacts/_toy_console/toy_console.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/VFM_08_Arena/map_data.json": "14adf91ff012ae0c38db5316883edef11d7299691974ba4711ffc27e9e83f97b",
+        "commons/artifacts/registry/vectors_demos.json": "25f9ebec36bddf89719c4a223fbf4b807740abea645622401c45262f3588fccd",
+        "commons/artifacts/collision_carts/collision_carts.tscn": "7ae76cc82a67bc39f0f8971aba262e4b7c846db2c45e9b8ab74a2a8502684286",
+        "commons/artifacts/collision_carts/collision_carts.gd": "dfe20a2052fb90a8c7e766f2579a2ab570ff499a15c87f1e2b32b2a62083d083",
+        "commons/artifacts/_toy_console/toy_console.gd": "d0e633be986ca6ff2680d9efd0baa8a5247f79e360ab7007e06c615639a953c3"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            11
+          ],
+          "value": "collision_carts"
+        }
+      ],
+      "cautions": "There are many broader active arena encounters in this developed room. This is a focused initial book route only; retain them as secondary and record later expansion rather than remove them."
+    }
+  ]
+}

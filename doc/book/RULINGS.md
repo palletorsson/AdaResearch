@@ -755,3 +755,11 @@ is, treat any comparison that crosses the ruling with suspicion.
 Implemented in `tools/map_tournament.py` (`is_wall_work`, `hero_candidates`).
 
 <!-- Next: R-033 — friction pass on transformation's walked pages; the blank (counter to transform_composition); and whether to re-run the bred baselines and crowns under R-032 -->
+
+## 2026-09-13 clarification to R-007 — the mental algorithmic wall
+
+Palle clarifies: noise is a useful, easy-to-apply filter that satisfies a first need for an organic body. The blob can signify the queer and give pleasure. Its availability can also cast other possible forms into shadow: "just add noise" becomes a mental algorithmic wall. Cheap names ease of application, not lack of artistic value. Blob culture is the recurring visual vocabulary to investigate, not a blanket empirical assertion about visual culture.
+
+Carry this inquiry into Cellular Automata, the next chapter: learning further capabilities expands the question "what bodies are possible?" Stored state, neighbourhood and update schedule become available. Retain noise as a possible input; avoid a progression from supposedly false appearance to supposedly real life. Apply the critique to the specific implementation. A noise field can be volumetric, and a rendered isosurface does not automatically implement an interior material.
+
+First text bridge: Noise_Perlin_Simplex ending and CA_Introduction opening. Retain the precise experiments and the developed collection. The rug's repeated global mirror and the network's selected parent connections complicate an easy claim that local rules alone author the whole form.

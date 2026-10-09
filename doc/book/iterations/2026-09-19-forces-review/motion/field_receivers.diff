@@ -1,0 +1,33 @@
+--- before/algorithms/vectors/10_vector_field_flow/field_receivers.gd
++++ algorithms/vectors/10_vector_field_flow/field_receivers.gd
+@@ -17,6 +17,7 @@
+ var stopped: Array[bool] = [false, false]
+ var markers: Array[Node3D] = []
+ var wall_markers: Array[Node3D] = []
++var receiver_labels: Array[Label3D] = []
+ var histories: Array = [[], []]
+ var trail_meshes: Array[ImmediateMesh] = []
+ var trail_views: Array[MeshInstance3D] = []
+@@ -66,7 +67,8 @@
+ 		box(Vector3.ZERO, Vector3(0.09, 0.09, 0.02), mat, false, wall_marker)
+ 		var nameplate = Label3D.new()
+ 		marker.add_child(nameplate)
+-		nameplate.text = "SET v" if i == 0 else "ADD to v"
++		nameplate.text = "CYAN" if i == 0 else "PINK"
++		receiver_labels.append(nameplate)
+ 		nameplate.position.y = 0.25
+ 		nameplate.font_size = 38
+ 		nameplate.pixel_size = 0.0014
+@@ -230,8 +232,11 @@
+ 
+ func update_views() -> void:
+ 	update_markers()
++	# Keep body identity visible; the existing RULE control reveals the receiver operation.
++	for i in receiver_labels.size():
++		receiver_labels[i].text = (["SET v", "ADD to v"] if rule_visible else ["CYAN", "PINK"])[i]
+ 	state_label.text = "%s / gain %.1f / sign %+.0f / %.1f s / %s" % [FIELD_NAMES[field_index], gain, sign_value, elapsed, "RUNNING" if running else "PAUSED"]
+-	wall.text = "RUN. Which body crosses the centre?\nCyan: SET velocity. Pink: ADD to velocity.\nBoth sample the same field at their own positions."
++	wall.text = "RUN. Which body crosses the centre?\nFollow cyan and pink; pause and compare their paths.\nRULE reveals how each body receives the field."
+ 	if rule_visible:
+ 		wall.text = "Cyan: v = field(p) * 1 m/s; p += v * dt\nPink: v += field(p) * 1 m/s² * dt; p += v * dt\nThis field has no units; its receivers supply them.\nArrow scale: 0.4 m per field unit / 63 samples"
+ 	wall.text += "\nRESET pauses; edits keep state. Heights separate the views only.\nNo collisions or player force. Frame exit freezes outgoing state.\n120 steps/s; trail 240 samples at 10 Hz; stalls cap at 0.25 s."

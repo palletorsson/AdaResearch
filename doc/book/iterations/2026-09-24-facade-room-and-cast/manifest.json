@@ -1,0 +1,349 @@
+{
+  "scope": "Native isolated desktop study. Supplied camera and capsule routes. Full museum loader, tracked headset and Quest performance remain unverified.",
+  "passed_records": 33,
+  "source": [
+    {
+      "file": "commons/artifacts/facade_room_cast/facade_room_cast.gd",
+      "sha256": "910581da5a3695d645214fe4920ff62797189137d23054effd7c8c13db3aeb87",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/facade_room_cast/facade_room_cast.tscn",
+      "sha256": "725ac60dc2c357b325a27311bf8aed5280e705561e43c45550ee94b850406435",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/facade_room_cast/study.gd",
+      "sha256": "b096dd240538138ee9ca4624e63210cad602b4b239c6d93a8c4d94b8e947877b",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/artifacts/facade_room_cast/study.tscn",
+      "sha256": "47aeffa22dd6f5bfb2321ed885669384a5361ae36d35cbe48297eaa79f7ee811",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/facade_composer.gd",
+      "sha256": "498aeeb0cb326925cf9eca23ab3b81839463a10df328234d01dd0ed58e94aba1",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/facade_composer_demo.gd",
+      "sha256": "147b9f249cf256250e7ad62da6dd082c164e8666d8f2f47101a77bf84c3c5e6a",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/facade_composer_demo.tscn",
+      "sha256": "079cdb5b2e62f59806f65058da6cb136366d2fd4e633c95bf0c413c9fe565297",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/facade_materials.gd",
+      "sha256": "c1c2d7bc8a959a884208c4b5bb18eebf3c2923de11ae8f4a55fdeba569dcbb82",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/facade_part_library.gd",
+      "sha256": "89c88db8460676cdfecbb4618b7d6db562506c91b7caaa576ff65e69abd75cc3",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/marble_surface.gdshader",
+      "sha256": "421f74fc039387bf6c472225390b7d6c66ec95d6e12b69abd45125951b397bea",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/part_catalog.json",
+      "sha256": "6e6a967ac67561cf34f2647247ba594fcbfede7d7661a12ac6b847df154f6e0b",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/arch_parts.gd",
+      "sha256": "761dee7dad076f4f057b28d5646efcb69fda6a333b63efe0cd4af311856a2ec3",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/balcony_parts.gd",
+      "sha256": "4eb2bf33d2a95c5dc8f7717a2a5678cc7cd06c1614be21aff70a358829b52eef",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/column_parts.gd",
+      "sha256": "f8319646302963fb3dbb126c42493d8dc8fb8ddd019b6122daf4ba0fa191d6c3",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/cornice_parts.gd",
+      "sha256": "2979d40ad7463f6dd369e4249db91a350fe220e71ab4156f411361a88ec3c82f",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/frame_parts.gd",
+      "sha256": "6df917727f2fb98a939747b666da3ed3bd8dcbe503e882ab76b58656e3bdddef",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/opening_parts.gd",
+      "sha256": "dcac5f66760042992c6d315391518ab5ff87ae0ebff04546596443479cf5f70c",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/ornament_parts.gd",
+      "sha256": "3dc92e1b7d426a2a56bc97d301cfd6a9598eb86e5f401202ee266a213d36448b",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/railing_parts.gd",
+      "sha256": "73005f88ba7c73f932a8f966c50880f1b88f912e24a5e8cb3515cc67534219dd",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/shutter_parts.gd",
+      "sha256": "107a3ea4fa0360187d8d70099c61cdb4824bb92a9c55e081d08bfb99338cf4c9",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/parts/surface_parts.gd",
+      "sha256": "080be184a70ffa54990d55a380fb0a34ea3f9af14c53a9295c4df4063f00d622",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/baroque.json",
+      "sha256": "6744bb2b2300e1fbd49cb93aa71aaca09c4647ffb1fdb20ead2e32ec1431bf89",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/bernini_colonnade.json",
+      "sha256": "0fcd98c7426cd45fd7efe93c080a0c9c3160010d3a3dd12524c2bde19fcb6422",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/capri_whitewash.json",
+      "sha256": "3e06f80f00db79f1eab6b6f2d33708a663393d16d07abf5e5f6bf1bc4ef2adaf",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/classical.json",
+      "sha256": "e4dbc657482dc02e734b8e40530095ac2cab75a063135caa9d962fefe7c479a8",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/continuous_monument.json",
+      "sha256": "ef631b255bfce83f1c54942352c4213e81b23efdb9dfecaf640dadaaf88763a7",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/decon_fragment.json",
+      "sha256": "ee6276b4df996e6c1368da8789f41f9703edcd76e3e1d3cbbe0b279d1fc45f4c",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/florence_marble.json",
+      "sha256": "cc88d20f60ca1ce5cdc3be83956bd06294002989ba8bcfa20cdd58833f173a33",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/florentine_polychrome.json",
+      "sha256": "bf35d1bdfae3675642bc60b58f2218aa97e8e6eae665a72c31b1f16500a45b4f",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/galleria_vittorio_emanuele.json",
+      "sha256": "77180da34f4dedaf10738cc27a51e5b14fff3cd39ea92efe22e3bb1aad8b1bd4",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/gothic_portal.json",
+      "sha256": "892ad22f79c49c86872354f14a6366f15f6d89fe9071ddfdc9db698671362f1a",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/memphis_totem.json",
+      "sha256": "c03a1f11c99ae846f6bdcdd5f97b642a8e3d3dc7c83cf17eec2590a7822e938f",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/naples_diamond_rustication.json",
+      "sha256": "eef435d7492a0012c72bd910c821c8fcdf431ab895c826211402f82e4fb08514",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/nyc_tenement.json",
+      "sha256": "f98b2dc274de1c31c9f353bafa83a9e10aceafa959fa6f2cb578afcae93b29bd",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/painted_vault.json",
+      "sha256": "d6077b6bed4299300a98746619cfb0bca5b3a6354c6d1a9f13694addc916aadb",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_black_room.json",
+      "sha256": "8107ba6479d079ad72cfb667828c8a4a3d0a6b7eac3f38ec7ea0d7dcab6979ef",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_ceiling_coffers.json",
+      "sha256": "39cda9c49a7033ff571d8b68a922b619e6b9cc99ccc495b6961c7820eb5cc868",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_ceiling_medallion.json",
+      "sha256": "f5754a5a319cb7b1b3e12a5feee6dd8e01001aaa460c2722539ba708ac7c71d1",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_fourth_style.json",
+      "sha256": "d916a96c2ba73a24f2264dd62f436d1ef96e392af11fa955ce21d2074117733b",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_red_room.json",
+      "sha256": "5af1b2df7af9329dc6fc84022ea539e9f4e75d54902b22cac26a86bde3d56848",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/pompeii_second_style.json",
+      "sha256": "be748def75529e9f2c2878eb4aa631edf46c55f237f37b70938d2647ce5414ad",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/superstudio_grid.json",
+      "sha256": "a98c83fd115d173ec219800c13bb9b63b550b1b3a48f7e6f4544414c2d771e0e",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/venetian_gothic.json",
+      "sha256": "668495bbf7f4edad0b08fd33c8a160c6af3122c7ea46c8ca40b19b2b8397814b",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/villa_boscoreale.json",
+      "sha256": "51777b45b7db369cb0134b0eb01c49dee9c8aaa4d4eba22b572418e9507dc428",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/villa_mysteries.json",
+      "sha256": "696d24d8c50ca6942edc841fd1bb221d31144e93198be222313d382caf1b7b35",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/villa_san_michele.json",
+      "sha256": "6bcaee4a560123d021b37c32ca7072a04f003c2fd694d403c1dea1514edd8a29",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/presets/villa_san_michele_exact.json",
+      "sha256": "8c17c0b2ea84ecf1a4bd1c5869011949260bea0816b6ff57fe25149734f48877",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/procedural_columns.gd",
+      "sha256": "0e9ba27494f9c3882d3be75fb4b702ed2a459c40cdb2d45304bff2170da9b3c6",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/facade_parts/shaders/marble.gdshader",
+      "sha256": "318748ce5858892bea0eaa168ac1ae96e2e7b79ea0b46411af72c29cba04d539",
+      "matches_tested_copy": true
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/blurb.md",
+      "sha256": "22777af1d3707d8e072dc11396ab5e746d23449ad3cfd6d6701941df62d78379"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/critical.md",
+      "sha256": "f455096b65daca9ad6abcc5e290c3ae581764b2832c18a0c046b79fa146b1330"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/final.md",
+      "sha256": "886f0136ba835f0e5a24162d948aa3a01c48e53e504299a34bfdb3ddc9c3c1f0"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/intent.md",
+      "sha256": "7d97241f2d156989e48f7f45d45470696a435deba40df61b12fb84eff66cd92c"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/map_data.json",
+      "sha256": "655d0089e7b9dda1b54dc841ab6dd05082494bf4d380b87777bd18a1585532d1"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/summary.md",
+      "sha256": "440511be7675ce1fb870c90f6e3454f243538c4b6b1816504ecaab7a7db22641"
+    },
+    {
+      "file": "commons/maps/Boolean_Facade_Cast/technical.md",
+      "sha256": "08a36895308c20972a6b5c8f6087da224869580f0b5abeb0791eac4b384ea825"
+    },
+    {
+      "file": "commons/artifacts/registry/facade_room_cast.json",
+      "sha256": "ce3d2eff52ed6e16fd29865159000dc53e2d8d2010f0cef5b5b488cbffb82b8a"
+    },
+    {
+      "file": "commons/maps/Boolean_Colour_Spaces_II/map_data.json",
+      "sha256": "f56872a4186794ab95e6bf6a216d1977eb2235c46ba7848780c0ea037ca6a298"
+    }
+  ],
+  "images": [
+    {
+      "file": "facade.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "b0580c38a9649045ebffed4ef5507410c57c9133711fef68159daee41fac1245"
+    },
+    {
+      "file": "inside-return.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "2c38b17bdd2937b1d4b1912f6679dbc822cbf0bc36d31367a07b20ad52b5db40"
+    },
+    {
+      "file": "inside.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "2d4a0ac79ec020e8cffc2b84752a4cf88a9c29585fadbfe959f1e814d8075141"
+    },
+    {
+      "file": "overview.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "3bcf52282d49b92157894eab43a641d900f6de28528818e37e1d0898fe99de36"
+    },
+    {
+      "file": "pair.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "edad0ca886b9747d022164b85a7e9c5e911ef999087aaa0a9d6e996afd87614c"
+    },
+    {
+      "file": "positive-rail.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "2e0a64df8a9787615246a00f95019083c1397326ffe6fb6eee56e1d8b8506823"
+    },
+    {
+      "file": "positive.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "62eec73ec21a98b74c29a94c6c6d0d53cba8ed219704c41c9b7641bb1c7b0d49"
+    },
+    {
+      "file": "room-rail.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "c93eea8064cc6886484b22347f151f3dc803d38624771e098ebf7764f6b18c5d"
+    },
+    {
+      "file": "window-inside.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "47e6a2bc6d3ad953868ad2f837312aa521dc528ddd170b00947d1034d0cc61f7"
+    },
+    {
+      "file": "window-positive.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "fcc8e47fd467e5937863d2ce5fbc4a19406e4d0b42e8d8ce9158d2defe46d7f6"
+    }
+  ]
+}

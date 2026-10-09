@@ -152,6 +152,84 @@
       "why": "--width=2 as a hard floor refused three of three test maps for a pinch that predated the stamp, and would have refused most of the museum: 67 halls already admit exactly one route. As a ratchet - it may not get worse - the same flag lets 8 of 11 forces halls through while still catching every regression.",
       "use": "Before writing an absolute gate, measure how much of the corpus already fails it.",
       "status": "standing"
+    },
+    {
+      "id": "display-the-point-the-tool-keeps",
+      "won": "2026-09-08, primitives snap sphere in Grid and Point One",
+      "principle": "A retained-position display, its lattice index and the released marker must describe the same sampled point.",
+      "why": "One decimal place collapsed adjacent 0.05 m positions. Independently snapping the grab body and its offset tip could disagree. Sampling, drop alignment and readout now use the visible tip; adaptive precision keeps adjacent lattice positions distinct.",
+      "use": "For an instrument that rounds or snaps, compare one adjacent step, a negative position, the final physical marker and a nonzero placement offset before reusing its display.",
+      "evidence": "Real-scene probe passes for both Point_One and Point_Line_Grid placement offsets, negative indices, rotated parent, fractional spacing, retention cap and post-release visibility. doc/book/iterations/2026-09-08-primitives/snap_and_pen.json",
+      "scope": "Shared grab_sphere_point_snap script and inspected configurations. Engine checks establish numerical agreement; they do not establish VR reading distance or the two rooms' educational equivalence.",
+      "confidence": "measured",
+      "test": "godot --headless --path . --xr-mode off --script res://tools/probes/museum_snap_and_pen.gd",
+      "status": "standing",
+      "supersedes": null
+    },
+    {
+      "id": "sampling-contract-follows-the-sampler",
+      "won": "2026-09-08, trace pen and timer-derived pen",
+      "principle": "Shared display code must describe the sampler that actually runs in each derived artifact.",
+      "why": "draw_dot and draw_stick admit movement and reject quantized duplicates; draw_dot_time_domain inherits their display but samples stationary positions on a timer. A universal movement label would teach a false rule in the derived artifact.",
+      "use": "Share the retained-count display while letting each sampler supply its own trigger and retention description. Test a stationary interval in both implementations before generalizing.",
+      "evidence": "76-check scene probe includes timer samples during a stationary interval, capacity/fade updates, and movement/grid labels for the base pens. doc/book/iterations/2026-09-08-primitives/snap_and_pen.json",
+      "scope": "draw_dot.gd family, including the timer-derived scene used in WaveFunctions_Pendulum. Wider recording-contract comparisons remain method candidates; inheritance does not establish semantic equivalence.",
+      "confidence": "measured",
+      "test": "godot --headless --path . --xr-mode off --script res://tools/probes/museum_snap_and_pen.gd",
+      "status": "standing",
+      "supersedes": null
+    },
+    {
+      "id": "speed-needs-the-displacements-interval",
+      "won": "2026-09-08, player_trace transfer into Trans_Translation",
+      "principle": "Divide a measured displacement by the time elapsed over that same measurement interval.",
+      "why": "A supplied body moving at 1 m/s produced 5 m/s when a gate admitted one sample after five 0.1 s frames: the script divided accumulated displacement by the last frame's delta. Accumulating elapsed time with the displacement restores the rate.",
+      "use": "Compare ungated, time-gated, distance-gated and paused movement; reset the interval when resetting the position baseline. State whether speed describes sampled displacement or distance travelled along an unknown intermediate route.",
+      "evidence": "Before probe recorded 5 m/s; corrected scene records approximately 1 m/s in timed, distance-gated and every-frame cases. Clear and aligned capacity eviction also pass. doc/book/iterations/2026-09-08-primitives/trace_speed.json",
+      "scope": "player_trace before spatial duplicate suppression. In the unsnapped Trans_Translation placement, admitted measurement and retained point coincide. Coarse Grid points can omit intermediate measurements; their speed is not necessarily displacement between displayed lattice nodes divided by their timestamps.",
+      "confidence": "measured",
+      "test": "godot --headless --path . --xr-mode off --script res://tools/probes/museum_trace_speed.gd",
+      "status": "standing",
+      "supersedes": null
+    },
+    {
+      "id": "counterexamples-need-a-repeatable-control",
+      "won": "2026-09-08, triangle fan and New Outline button",
+      "principle": "A useful counterexample needs a repeatable operation that changes one assumption while preserving the comparison.",
+      "why": "The same six-corner L yields four fan triangles from either start, but starting at B sends two triangle centroids outside the intended boundary. A New Outline button preserves completed faces and permits choosing the next first corner, making that comparison available through an actual control.",
+      "use": "Keep the boundary fixed, vary the first vertex, and inspect the fill before explaining the rule. Record where the counterexample works; concavity alone does not guarantee failure.",
+      "evidence": "One actual drawing scene, timed placement and real pointer-button events: both starts keep six points and four triangles; start A has no outside centroids, start B has two. Restart preserves the completed faces. doc/book/iterations/2026-09-08-primitives/triangle_fan.json",
+      "scope": "The specified planar six-corner L and draw_triangle_faces. The engine exercise supplies hand positions; a visitor must still reproduce the gesture and interpret the difference. No second representation has yet tested the broader teaching method.",
+      "confidence": "measured",
+      "test": "godot --headless --path . --xr-mode off --script res://tools/probes/museum_triangle_fan.gd",
+      "status": "standing",
+      "supersedes": null
+    },
+    {
+      "id": "recover-lost-spatial-relationships",
+      "won": "2026-09-08, Melencolia restoration and the user's adoption of the method",
+      "principle": "When prose and space disagree, inspect the room's history for a lost spatial relationship before deciding what to rebuild or rewrite.",
+      "why": "Melencolia's remembered raised court, four equal corner pyramids, long centre and separate Dürer deck survived in Git. Their arrangement had already drifted during the promenade adoption before the museum conversion. Restoring the composition resolved a concrete absence between the room and its description; the earlier proposal to make the puzzle spawn a platform had mistaken static architecture for a missing interaction.",
+      "use": "Name the missing relationship from the prose, author notes or remembered encounter. Compare the current map with Git revisions until finding evidence of an intact arrangement. Check that it still serves the room's present question. Adapt the relationship to current artifact footprints, floor heights, ramps and museum connections. Verify the generated room visually and with support, access and exit checks. Then align the room-specific prose and tutorial roles with the installed encounter. If history does not contain the promised arrangement, keep it as a new-build candidate; if an earlier arrangement no longer serves the lesson, revise the design and prose together.",
+      "evidence": "Primitives_Melencolia: historical JSON at 4beaa29b89ea1fe297fab7d747a6c44624d01bb1; restored four equal corners, long centre, four cross cubes and two raised platforms. Actual-museum probe built all 16 placements verbatim and passed six collision rays and five movement trials, including both ramps and the exit. doc/book/iterations/2026-09-08-melencolia-restoration/historical-layout.md; doc/book/iterations/2026-09-08-melencolia-restoration/report.json; doc/book/iterations/2026-09-08-melencolia-restoration/source_manifest.json; Second-room adaptation: doc/book/iterations/2026-09-08-encounter-pilot/random-remove.md; doc/book/iterations/2026-09-08-encounter-pilot/random-museum.json",
+      "scope": "Measured in Melencolia spatial composition and Random_Remove's recovered candidate-grid relationship. Restore the useful relationship with current local ownership and footprints; do not assume every discrepancy is historical. Human learning and comfort remain unverified.",
+      "confidence": "measured",
+      "test": "python ada_run/melencolia_restore/run_museum_probe.py --config=ada_run/melencolia_restore/validation_spec.json",
+      "status": "standing",
+      "supersedes": null
+    },
+    {
+      "id": "keep-an-address-when-its-value-changes",
+      "principle": "Keep the slot identifiable when its occupant or value changes; test the visible address against the resulting data.",
+      "scope": "Measured in Array scene/museum checks and a contrasting Disco scene check. Human understanding and comfort remain unverified. Row labels deliberately provide a contrasting disappearing-address case.",
+      "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/array-runtime.json; doc/book/iterations/2026-09-08-encounter-pilot/array-museum.json; doc/book/iterations/2026-09-08-encounter-pilot/disco-runtime.json",
+      "won": "2026-09-08, Array and Disco encounter pilot",
+      "why": "An empty value and a missing address are different losses. A square fixture also hid a table dimension error exposed by a rectangle.",
+      "use": "Use in encounters where a visitor needs to refer to an empty or inactive slot after changing it. Preserve room-specific meanings and test learner transfer before extending the teaching claim.",
+      "test": "Collect one off-diagonal Array slot, verify the surviving plate and single zero; switch one Disco cell off and verify its same address is read silently. Repeat with a nonsquare grid before generalising dimensions.",
+      "confidence": "measured",
+      "status": "standing",
+      "supersedes": null
     }
   ]
 }

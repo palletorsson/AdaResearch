@@ -1,0 +1,7 @@
+# Point Lines: basin and player trace
+
+User selected this map only. Point_Lines now declares museum.basin with depth 1 m, glass true, fire false. The existing museum basin detector turns enclosed zero regions of at least four cells into basins and excludes regions reaching the map border. It finds all eight cells under walk_this_line_marking (columns 3–10, row 2). The stripe is pinned at deck height; its scale remains 2. No global basin defaults changed.
+
+player_trace is placed at column 6, row 1, pinned without a plinth. Its existing live recorder follows the active museum walker or VR headset projection, retaining the normal bounded sample history. It is primary in the relation-and-instruction group immediately after the stripe; its first appearance in the spine manifest now points here. Existing Grid trace placement is preserved. No artifact scripts changed.
+
+The book adds the basin setting and a short trace encounter. Snapshots preserve all affected files. Seventeen isolated Godot checks passed: basin detection, border exclusion, glass/no-fire configuration, desktop tracking, sampled movement, lateral deviations, no samples at rest, generated trace geometry, and VR headset floor projection. The served Sources and role APIs include the new encounter. Full hall rendering, collision walk-through and headset comfort remain to be checked. The run logged pre-existing UID/certificate startup warnings.

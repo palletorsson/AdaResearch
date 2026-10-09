@@ -1,0 +1,290 @@
+{
+  "sequence": "proceduralgeneration",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "PG_Genetic_Evolution",
+      "primary_tokens": [
+        "GeneticProgramming"
+      ],
+      "question": "What would you choose to keep, and what does the scoring rule choose?",
+      "ontology": "A search population contains candidate descriptions; a fitness function ranks them according to an authored criterion.",
+      "action": "Compare two generated forms and state a reason to prefer one; compare your reason with the displayed fitness if legible.",
+      "observable": "The initial population contains different primitive compositions; a high score means closeness to the selected target rather than general excellence.",
+      "mechanism": "Default fitness is100/(1+abs(estimated_volume-target_volume)); estimate sums primitive volumes. Evolution,when called,retains elites,tournament-selects,crosses over and mutates. auto_evolve=false in the placed scene.",
+      "limit": "Overlapping volumes are counted separately and an author sets the target. The current static population cannot by itself demonstrate improvement over generations.",
+      "variation": "Proposed extension: Expose one generation step and preserve a rejected candidate chosen by a visitor for a different reason.",
+      "prior_bridge": "Assemblage_Same_Desire",
+      "next_bridge": "PG_Space_Colonization",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+          "fact": "evaluate_fitness,estimate_volume,497–554 evolution;auto_evolve=false."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 4,
+          "token": "GeneticProgramming:0:2:0.6"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. CanvasLayer UI creates a3D panel but survival in museum not verified; do not promise EVOLVE controls without runtime. Small repair candidate set nested auto_evolve=true or preserve functional control adapter.",
+      "source_hashes": {
+        "commons/maps/PG_Genetic_Evolution/map_data.json": "555644ad6594a449d85798f704a51074bd2dd8c2afbdeffe64af1db1058afbe0",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn": "94ebeff11132f58e0e035368ee2b9da235e7c55968253e368b3d83fb2a64bde8",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd": "b894e25f6e7021de9aeaa2a4678fac63f2d3ef5a702484feef9b0963a358e0cf",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd": "5635e4f2a208b0b5941833c5e9fd9315e65867475ef4b2f4be10f8c61bd6767b",
+        "commons/maps/PG_Genetic_Evolution/intent.md": "bbaea6d3df3c519478c1c62c6e5ee22e1ff62a10d213080e4131c3ac595c540f",
+        "commons/maps/PG_Genetic_Evolution/blurb.md": "3a8f18b17c58d4647a02a28d1dbdec1bd8bb692c166748fc71a541b1ae2db575",
+        "commons/maps/PG_Genetic_Evolution/critical.md": "89f332fea46e148b83d6a6fdb70a89aaf836fe7f1a536dd0a44c638bdbdea7b7",
+        "commons/maps/PG_Genetic_Evolution/technical.md": "5eabcad10b09756b4a71062cced66737605e110157011ac77cc9eaaa33c2f428"
+      },
+      "core_gap": "Evolution defaults paused; stripped CanvasLayer controls may leave only initial population.",
+      "smallest_repair_candidate": "Verify VR adapter controls or enable bounded auto_evolve before claiming successive generations."
+    },
+    {
+      "room_id": "PG_Space_Colonization",
+      "primary_tokens": [
+        "space_colonization_algorithm"
+      ],
+      "question": "Can a branch find a shape that is described only by points it has not reached?",
+      "ontology": "Attraction points specify targets; a local growth process converts their influence into new branch segments.",
+      "action": "Trace a branch tip toward nearby attraction points and compare it with a tip that has no nearby targets.",
+      "observable": "A finished branching structure grows toward its target distribution, with unreached points marking what the construction has not occupied.",
+      "mechanism": "grow_iteration assigns each attraction point to its nearest leaf within influence_distance; points within kill_distance are removed; accumulated directions produce a new segment.",
+      "limit": "A completed form conceals the sequence of decisions. The targets are authored before growth; the tree is not discovering an independently given natural destination.",
+      "variation": "Proposed extension: Show the same target field with a different starting point, or preserve reached points instead of deleting their evidence.",
+      "prior_bridge": "PG_Genetic_Evolution",
+      "next_bridge": "PG_Percolation_Network",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+          "fact": "128 generate_structure;287–358 nearest-leaf influence and removal."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 6,
+          "token": "space_colonization_algorithm:0:2"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. show_growth_animation=false: finished on arrival. No claimed moving-points interaction; UI survival unverified.",
+      "source_hashes": {
+        "commons/maps/PG_Space_Colonization/map_data.json": "be6b4464714b8a357bef287d0e08e3ffcc55ee7438eccf8b248f1bfae1792133",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn": "f34d078ab35af6621c2a1ccfc0ed27ffb84d4f995dafc1f455ec942cdb81f79f",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd": "42eb495f9d793bad472d864f6093967d15c43a90e3520ab3c09d9a405697fc81",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationUI.gd": "ce951853eb8ec91e5f2629267a1b214f40f2a0239ab19a8a5abba3171940bfbd",
+        "commons/maps/PG_Space_Colonization/intent.md": "d21c532f303089ca911397322e9416ee0a49636b52b34c2fd3421076cba95e7b",
+        "commons/maps/PG_Space_Colonization/blurb.md": "3a4d8fac607988e160e2376afaf9b6e06182bc28377df41b977f236d285ed345",
+        "commons/maps/PG_Space_Colonization/critical.md": "aab544ef2e8abf7438282c7614ac2227ba79673a789528017da04d9d2ee8a42e",
+        "commons/maps/PG_Space_Colonization/technical.md": "5cb0f008722ff78eb24c15a7521c9a658016302fe6b55eafe72625dc4f4c8917"
+      }
+    },
+    {
+      "room_id": "PG_Percolation_Network",
+      "primary_tokens": [
+        "percolationnetwork_ca"
+      ],
+      "question": "When does local contact become a route across a whole field?",
+      "ontology": "Connectivity is a relation among occupied sites; a spanning path requires a connected chain rather than merely many occupied cells.",
+      "action": "Follow the changing flow colours from their source and look for an occupied cluster that remains disconnected.",
+      "observable": "Flow spreads through face-adjacent occupied sites; isolated sites can remain unreached.",
+      "mechanism": "update_percolation_automata uses separate next state and next flow grids; occupied cells activate when a six-neighbour site carries flow; sources stay1.0.",
+      "limit": "One random sample does not measure a percolation threshold. The chosen boundary source and six-neighbour relation decide what counts as connected.",
+      "variation": "Proposed extension: Place matched sparse and dense fields with visible source boundaries, repeating seeds before making a threshold claim.",
+      "prior_bridge": "PG_Space_Colonization",
+      "next_bridge": "PG_Branching_Growth",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+          "fact": "192–262 synchronous flow and six-face connectivity;occupation/inlet config."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 11,
+          "token": "percolationnetwork_ca:0:4.2"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor probability slider. Pink flow cells intentionally lack collision; do not identify a drawn path with a walking route.",
+      "source_hashes": {
+        "commons/maps/PG_Percolation_Network/map_data.json": "c40b5fd9183c9fa68ee5c0226f9537660f7b91742896be116e022e92d1d8db39",
+        "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn": "b4065992bd4aab2f7ec390359f338ce9ac6443c3fd96288784cb2fca8b9c7f62",
+        "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd": "e0ad8acff4e0e4182de3daed8c7830bec0dd943c4a40566aca16e8d1b15285fa",
+        "commons/maps/PG_Percolation_Network/intent.md": "cd2ed497cb2490287f85bb5454c44cf3c5947f3d7c0fa303e2c1e29d712dc4ef",
+        "commons/maps/PG_Percolation_Network/blurb.md": "a9459d5fc5feac18cba744bd00d06a09f0b8d2f8ad067d8083b19754a2db1881",
+        "commons/maps/PG_Percolation_Network/critical.md": "8dce5190656814a568a0709959422ece48987340412217b301b039b420c10331",
+        "commons/maps/PG_Percolation_Network/technical.md": "385668d0ee82b788625d6e3b9a5ef54a241d0a494db665cbe1c5d81b6faed21b"
+      }
+    },
+    {
+      "room_id": "PG_Branching_Growth",
+      "primary_tokens": [
+        "branching_growth_algorithm"
+      ],
+      "question": "How does a branch decide which direction to try next?",
+      "ontology": "A growth tip extends by a local direction rule constrained by target distance and stopping conditions.",
+      "action": "Watch an active tip extend and compare its direction with the nearest visible attractor; look for a tip that stops.",
+      "observable": "Tips bend toward targets with jitter, while reached targets and out-of-range tips stop contributing.",
+      "mechanism": "grow_step chooses nearest unreached attractor,normalises direction,adds timed/random jitter,advances a pulsed step and records parent/generation.",
+      "limit": "This implementation follows a nearest target, unlike the earlier space-colonisation sum of influences. Neither rule gives the branch intention, and the branch cap is a rendering budget rather than exhaustion.",
+      "variation": "Proposed extension: Compare nearest-target and averaged-target growth using the same points and origin, making ignored targets visible.",
+      "prior_bridge": "PG_Percolation_Network",
+      "next_bridge": "PG_Caves_Mazes",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd",
+          "fact": "266–348 nearest-attractor growth andmax_branches termination."
+        }
+      ],
+      "placements": [
+        {
+          "x": 4,
+          "z": 1,
+          "token": "branching_growth_algorithm:0:2:2"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/PG_Branching_Growth/map_data.json": "fd64cdf10263ee50bfaea4f5de75c16b521c61a6f7c5762ab3bac9121cd7a0f0",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn": "e23e58a76909bdd1c092d757513c29fa689b32a125f79098ead46e2dc9100130",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd": "e0278e3999f93fcd988e8c79d2ed7c6dd1837d1f862b2f9f4846ccdf5854fcdf",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingUI.gd": "086df26d79cee9b378a59c7ec3f996247c1a1a1f95b1e4da28b5f84a8e5120fc",
+        "commons/maps/PG_Branching_Growth/intent.md": "0ae1caf2fdfdcb65467b27520b5b2930d98108c7273ec49516f2bc717cd9ceb4",
+        "commons/maps/PG_Branching_Growth/blurb.md": "03223b144dfb51edbb22a6e496d777e4e979be93036632713ad0c54d3aa1c99a",
+        "commons/maps/PG_Branching_Growth/critical.md": "7c19d574dc58a7d829239740c8faebd1da702bea82b4bfde45329d46aa36a641",
+        "commons/maps/PG_Branching_Growth/technical.md": "3b287021e629cfc349e6f6cfe824d336fcedc9aedd35e5e14cdcdbc029ced841"
+      }
+    },
+    {
+      "room_id": "PG_Caves_Mazes",
+      "primary_tokens": [
+        "caverandomwalk"
+      ],
+      "question": "Can removing space leave a memory of the route that removed it?",
+      "ontology": "A carving walk marks visited cells as air in an initially solid grid; its history becomes the shape of a passage.",
+      "action": "Inspect an opening and follow its changes of direction with your eye; find where a passage widens or joins another.",
+      "observable": "The voxel cave contains passages cut from several starting sides toward a centre and upward through levels.",
+      "mechanism": "_carve_cave begins walkers on four sides,uses centre-biased lateral moves,then higher-level wandering;_carve_ball removes a local region and headroom;seed1337 repeats generation.",
+      "limit": "This is a biased authored walk,not an unbiased natural cave model. Empty-cell connectivity and headroom settings do not by themselves establish museum-scale accessibility.",
+      "variation": "Proposed extension: Preserve one walker trace beside the final cave and compare a centre-seeking walk with a walk that refuses that destination.",
+      "prior_bridge": "PG_Branching_Growth",
+      "next_bridge": "PG_Sculpted_Forms",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+          "fact": "69 carving neighbourhood;120–180 multi-phase biased carving;_build_meshes remaining solid cells."
+        }
+      ],
+      "placements": [
+        {
+          "x": 3,
+          "z": 5,
+          "token": "caverandomwalk:0:2:0.5"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not require entering the current scaled cave; inspect from museum floor. Controls live under CanvasLayer and need verification.",
+      "source_hashes": {
+        "commons/maps/PG_Caves_Mazes/map_data.json": "c706ebbd6dcdd0ef8ad2de57a6337dc7184bd744defc6ce3cd76cfa84decfd5d",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn": "5fc03870b54ea82ab8e3b084b2a18b15426003a94f8136fb4393dfb8d9b1b910",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd": "01cbfcdebba560a294dc3328fd76e69e03a46453dbd523cfa1382a1b1a415511",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/CaveUI.gd": "0114ec7a68f546b4ad44a7738d7b58b2003d2ea50bc17722c05cd6640498f936",
+        "commons/maps/PG_Caves_Mazes/intent.md": "c391226ae6f89607b474d3a59749e26d50fe88ca461ea54ed0773f4b1d82da24",
+        "commons/maps/PG_Caves_Mazes/blurb.md": "511a90f778628944e8976b830a9a92a667ac3c9acec5912a4cf688816a4bf8c9",
+        "commons/maps/PG_Caves_Mazes/critical.md": "734ea6131b08dca0f25a4e4e008c5f9023ea079b14eb3fcd3317279323f24f50",
+        "commons/maps/PG_Caves_Mazes/technical.md": "189f55a00fa7541ab35681357e763c275cd28e2b6e586306f028b272c85229ac"
+      }
+    },
+    {
+      "room_id": "PG_Sculpted_Forms",
+      "primary_tokens": [
+        "cube_mound_scene"
+      ],
+      "question": "When does a pile of separate bodies become one surface?",
+      "ontology": "A hybrid generator can use a physical arrangement as input to a later geometric approximation.",
+      "action": "Watch cubes settle if the release is still underway; compare recognisable blocks with the surface surrounding their final positions.",
+      "observable": "A falling pile is followed by a generated voxel surface derived from cube centres.",
+      "mechanism": "_process waits for sleep or settle_time,then generate_mesh_from_cubes samples occupied grid cells around cube positions and builds exposed faces.",
+      "limit": "The mesh records a chosen approximation and moment; it does not preserve every rotated cube face or prove all cubes were fully settled when captured.",
+      "variation": "Proposed extension: Retain the original cubes and surface as selectable readings of the same event, then vary the capture time rather than the release.",
+      "prior_bridge": "PG_Caves_Mazes",
+      "next_bridge": "PG_Mirrored_Patterns",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd",
+          "fact": "178–259 sleep-or-time gate and centre-based voxelisation."
+        }
+      ],
+      "placements": [
+        {
+          "x": 4,
+          "z": 2,
+          "token": "cube_mound_scene:0:1"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Scene generate_on_start runs once; no guaranteed visible release for late arrivals. Do not call resulting mesh a physically exact union.",
+      "source_hashes": {
+        "commons/maps/PG_Sculpted_Forms/map_data.json": "5f38abdf62db38d37dfe870af50699b2dc705ce3770f9ef20d7c2bd9d101d36a",
+        "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn": "4795ddce88a2c67a7ee3f471d7e1311cef00fd02fa77085fadd31a256ca10fab",
+        "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd": "aa230dcfc8c02849acb82a06bc439a09d67859b74bb2cd00a372ba71a408bd55",
+        "commons/maps/PG_Sculpted_Forms/intent.md": "bec57873925e48e24084727b02255abe7f82c7a0f195d993639b8f0dc6277c44",
+        "commons/maps/PG_Sculpted_Forms/blurb.md": "9c94562f041c7d604c68413863df919d56c176bb13ef27ce2b993a01fd585bef",
+        "commons/maps/PG_Sculpted_Forms/critical.md": "baf456e59ab22f0b0ae12fc715d637f50fac2c5f03a3881e4a3e1c05ac75c1b0",
+        "commons/maps/PG_Sculpted_Forms/technical.md": "962d6b70505d9668969ec9ad2871bd0fcbf0948547ec93bcce5d0b0df05e4676"
+      }
+    },
+    {
+      "room_id": "PG_Mirrored_Patterns",
+      "primary_tokens": [
+        "mirror_cellular_texture_for_3d"
+      ],
+      "question": "Which parts of a symmetrical pattern were computed, and which were copied?",
+      "ontology": "A generative rule and a symmetry operation can be separate stages: compute a fragment,then repeat or reflect it.",
+      "action": "Find a small motif on the floor plate and look for its repeats; compare the motif boundary with the whole frame.",
+      "observable": "The default motif repeats across the field,while subsequent evolution changes the displayed cells.",
+      "mechanism": "Wrapper forwards stencil=motif to nested automaton before readiness; default symmetry_type2 generates a5×5 motif and tiles the field. Texture is displayed through a SubViewport.",
+      "limit": "A regular pattern is not evidence that local evolution spontaneously discovered global symmetry. The presentation includes an explicit copier.",
+      "variation": "Proposed extension: Hold the random seed fixed and compare motif,quadrant,octant andnone; let visitors decide whether repetition is a constraint or a material for composition.",
+      "prior_bridge": "PG_Sculpted_Forms",
+      "next_bridge": "SoftBodies_Soft_Body_Deformation",
+      "sources": [
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+          "fact": "STENCIL_MODES and _forward; defaultmotif;scene nested update_interval5s."
+        },
+        {
+          "path": "algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn",
+          "fact": "Nested automaton scene delegated through SubViewport."
+        },
+        {
+          "path": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd",
+          "fact": "generate_rotational_pattern seeds5x5 motif andtiles/mirrors it; moved actualdelegate implementation."
+        }
+      ],
+      "placements": [
+        {
+          "x": 1,
+          "z": 4,
+          "token": "mirror_cellular_texture_for_3d:0:2"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor stencil selector in this primary.",
+      "source_hashes": {
+        "commons/maps/PG_Mirrored_Patterns/map_data.json": "7e2e06ce667892acd25e64162d7be0ebfdc055c7ccf43a4842ad1a0063074c96",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn": "8724a827137a60932010c16b085d9dc72b8bec3900514bba0dd70c630bfb409b",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd": "6b3d556537132421fd94c256d53987b8dea44e9ae691e9a5a1bee782267b17ae",
+        "algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn": "978ed2704f3ab539cf8692248a046289a8a87063850facbcbd8ce50ac57ce970",
+        "commons/maps/PG_Mirrored_Patterns/intent.md": "a3977b6df5bb3ecfe157901476fea5845ad10bf34736f429d697781bb5e1c6de",
+        "commons/maps/PG_Mirrored_Patterns/blurb.md": "ca2e22ac59f3e8a8dbc6da21f7a5218d2a8b23d9228978cdbef343fa3589d44f",
+        "commons/maps/PG_Mirrored_Patterns/critical.md": "b3653190b3ad2297a7b1b47ee77dcd8ca633b71777bcf01737a4214408b22b5a",
+        "commons/maps/PG_Mirrored_Patterns/technical.md": "b8616f98447f7759c185465435575a66f485585d61aad8d6ea87827d7c3fdeb2",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd": "84f5df768257b44283ff3b163e28aafcc4d346be163c5a12fa88d67e06d606c8"
+      },
+      "core_gap": "Delegated PackedScene script path points to missing file; UID may resolve moved script.",
+      "smallest_repair_candidate": "Repair nested scene path to growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd and verify viewport."
+    }
+  ]
+}

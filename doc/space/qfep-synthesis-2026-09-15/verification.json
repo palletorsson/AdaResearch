@@ -1,0 +1,37 @@
+{
+  "hall": "QFEP_Synthesis",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "ten_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "queer_morphology_specimen",
+    "grab_sphere_F",
+    "qfep_formula_3d",
+    "entropy_ceiling",
+    "entropy_meter",
+    "grasp_cabinet",
+    "grab_sphere_E",
+    "grab_sphere_lambda",
+    "grab_sphere_phi"
+  ],
+  "primary_artifacts": [
+    "queer_morphology_specimen"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Synthesis\\map_data.json": "83d9ce1e318c3f2920f87e1897f7348091250c35d5694ae6f37e30f2b2689a49",
+    "commons\\maps\\QFEP_Synthesis\\final.md": "5b9f36701d1416b8fa4b3836659aa9d3e9d1d061354851a0d6b4532d86a3cc25",
+    "commons\\maps\\QFEP_Synthesis\\tutorial.md": "319cc063feee8c24436b7e8664359ef1ef835265c18d70a2d85475cd36ea2c6d",
+    "commons\\maps\\QFEP_Synthesis\\technical.md": "5fdadfa0b548d78fab31394dc14a32e1a59e4538dc35bf1f04c8bb9f29ac7c06",
+    "commons\\maps\\QFEP_Synthesis\\critical.md": "1806c816aa4062f268ff698b76be1c99a60c47fae6eb94c7a96e183ac0b4388f"
+  }
+}

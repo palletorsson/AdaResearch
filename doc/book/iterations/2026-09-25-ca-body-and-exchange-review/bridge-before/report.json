@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "bridge study present",
+      "passed": true
+    },
+    {
+      "name": "initial source is the visitor",
+      "passed": true
+    },
+    {
+      "name": "one SOURCE press selects PROBE / NEAR",
+      "passed": true
+    },
+    {
+      "name": "RUN starts the selected experiment",
+      "passed": true
+    },
+    {
+      "name": "second RUN press holds",
+      "passed": true
+    },
+    {
+      "name": "near probe lowers witness health",
+      "passed": true
+    },
+    {
+      "name": "before: frieze has no backing collision",
+      "passed": true
+    },
+    {
+      "name": "shared coloured panels remain visual only",
+      "passed": true
+    },
+    {
+      "name": "wall W uses the floor cell material",
+      "passed": true
+    },
+    {
+      "name": "gold wall address retained",
+      "passed": true
+    },
+    {
+      "name": "both recovery ramps remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-directions",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: witness-and-frieze",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "frieze_hit": "none"
+  },
+  "passed": true,
+  "room": "CA_ExpandingSpace",
+  "scope": "Focused native museum tests, supplied console signals/body motion/cameras. No headset readability or Quest profiling claim."
+}

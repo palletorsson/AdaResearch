@@ -1,0 +1,26 @@
+{
+	"checks": [
+		{
+			"message": "smooth: shared pointer interface exists",
+			"passed": true
+		},
+		{
+			"message": "snap: shared pointer interface exists",
+			"passed": false
+		},
+		{
+			"message": "zero: shared pointer interface exists",
+			"passed": false
+		},
+		{
+			"message": "Zero variant actually returns to zero degrees",
+			"passed": false
+		}
+	],
+	"failures": [
+		"snap: shared pointer interface exists",
+		"zero: shared pointer interface exists",
+		"Zero variant actually returns to zero degrees"
+	],
+	"headset_tested": false
+}

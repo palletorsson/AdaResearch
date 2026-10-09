@@ -1,0 +1,41 @@
+{
+  "id": "VFM_02_Operations",
+  "title": "Keep the destination and compare routes",
+  "storyboard": "GO carries the cube along A and then B; SWAP changes the corner without changing the destination. Reuse displacement and accumulation in the existing room_sum study. Keep its controls, carriage and drawings supplied. In refresh(), calculate result from a+b, then compare a.length()+b.length() with result.length() before running PATH via A or direct. Read the existing travelled increment to see how the executed route is counted. CANCEL makes the distinction sharp: a nonzero out-and-back journey has zero displacement. Carry endpoint and distance as separate accounts. The local plan's forward component maps to negative Z, and GO's instant return home lies outside its reported trip.",
+  "storyboard_short": "Use GO/SWAP/PATH/CANCEL on room_sum. Reuse displacement and accumulation. Own result=a+b and compare summed leg lengths with direct length in the existing refresh path; keep movement and drawing supplied. Check against the actual travelled counter. Carry destination and distance separately, with local forward mapped to -Z and GO's reset excluded. No new carriage or transport binding.",
+  "mode": "make",
+  "brings": [
+    "displacements with compatible units and frame",
+    "length and finite accumulation",
+    "a distinction between input values and their receiver"
+  ],
+  "learns": [
+    "addition supplies a common endpoint across different routes",
+    "route length and net displacement retain different information"
+  ],
+  "carries": "Two explicit accounts of a route: net displacement and accumulated distance.",
+  "supplied": [
+    "adder_board with lesson:room_sum and A/B/component controls",
+    "existing guarded carriage and waypoint traversal at prescribed speed",
+    "wall/floor drawings, travelled counter and GO/PATH/SWAP/CANCEL/RULE controls",
+    "floor_point() conversion from local plan coordinates to the scene"
+  ],
+  "artifact_refs": [
+    "adder_board"
+  ],
+  "review_note": "The installed room uses buttons, not draggable pins. Vector2 stores local X/forward in metres, and floor_point maps forward to -Z. refresh() already supplies the common result to drawings and the route built by GO. The physics callback counts actual prescribed movement and consumes remaining movement budget across corners; leave it supplied. GO and input/path edits reset the counter, while RULE and selecting A/B do not. Do not claim a learner function is already bound to a separate host.",
+  "prior_maps": [
+    "Vectors_Act1_WhatAVectorIs",
+    "Point_Lines",
+    "Change_Intro",
+    "Trans_Translation"
+  ],
+  "independent_check": "For A=(1,0), B=(0,1), predict the common endpoint and the 2 m versus sqrt(2) m route lengths. Then CANCEL and explain the difference between via A and direct before pressing GO.",
+  "source_refs": [
+    "commons/artifacts/adder_board/room_sum.gd",
+    "commons/artifacts/adder_board/adder_board.gd",
+    "commons/maps/VFM_02_Operations/final.md",
+    "commons/maps/VFM_02_Operations/tutorial.md"
+  ],
+  "change_reason": "The current instrument already makes the distinction tangible. A bounded arithmetic edit avoids adding a second route system before Motion."
+}

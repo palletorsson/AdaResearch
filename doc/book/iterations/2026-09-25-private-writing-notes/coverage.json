@@ -1,0 +1,3032 @@
+{
+  "checked_at": "2026-09-27T13:35:38.911884+00:00",
+  "sequence_count": 25,
+  "hall_count": 203,
+  "notes_present": 203,
+  "missing": [],
+  "format_issues": [
+    {
+      "hall": "Point_Zero",
+      "problem": "Missing Route / writing move."
+    },
+    {
+      "hall": "Point_Zero",
+      "problem": "Missing Encounter to lean on."
+    },
+    {
+      "hall": "Point_Zero",
+      "problem": "Missing Explain / linger."
+    },
+    {
+      "hall": "Point_Zero",
+      "problem": "Missing Rhythm beside its neighbors."
+    },
+    {
+      "hall": "Point_One",
+      "problem": "Missing Route / writing move."
+    },
+    {
+      "hall": "Point_One",
+      "problem": "Missing Encounter to lean on."
+    },
+    {
+      "hall": "Point_One",
+      "problem": "Missing Rhythm beside its neighbors."
+    }
+  ],
+  "grounding_issues": [
+    {
+      "hall": "Point_One",
+      "problem": "No exact quoted manuscript phrase found"
+    },
+    {
+      "hall": "Point_One",
+      "problem": "No manuscript anchor named"
+    }
+  ],
+  "source_changes_since_reading_baseline": [
+    {
+      "hall": "Point_Zero",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_One",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_Lines",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_Trace",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_Line_Grid",
+      "changed": [
+        "manuscript",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_Triangle_Context",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Primitives_Polythedra",
+      "changed": [
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Point_Animatedcube",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Primitives_Ignorance",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Primitives_Portals",
+      "changed": [
+        "manuscript",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Primitives_Melencolia",
+      "changed": [
+        "manuscript",
+        "map",
+        "sequence"
+      ]
+    },
+    {
+      "hall": "Trans_Pre",
+      "changed": [
+        "manuscript"
+      ]
+    },
+    {
+      "hall": "Trans_Introduction",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Trans_Translation",
+      "changed": [
+        "manuscript"
+      ]
+    },
+    {
+      "hall": "Trans_Rotation",
+      "changed": [
+        "manuscript"
+      ]
+    },
+    {
+      "hall": "Trans_Scale",
+      "changed": [
+        "manuscript"
+      ]
+    },
+    {
+      "hall": "Trans_Body",
+      "changed": [
+        "manuscript"
+      ]
+    },
+    {
+      "hall": "Shader_01_Shaping",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Shader_05_Patterns",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Shader_11_QueerRubber",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Shader_09_FBM",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Shader_12_PinkExtravaganza",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    },
+    {
+      "hall": "Shader_10_ReactionDiffusion",
+      "changed": [
+        "manuscript",
+        "map"
+      ]
+    }
+  ],
+  "new_halls": [
+    "Point_Zero"
+  ],
+  "removed_halls": [],
+  "duplicate_spine_halls": [],
+  "extra_notes": [],
+  "notes": [
+    {
+      "hall": "Point_Zero",
+      "sequence": "primitives",
+      "path": "halls/Point_Zero.md",
+      "sha256": "82798027c9141799f7034d326bf45c192d6af56cff5ea3111022dd1340b8d2f9",
+      "words": 101,
+      "matched_quotes": [
+        "are here"
+      ],
+      "named_anchors": [
+        "origin"
+      ]
+    },
+    {
+      "hall": "Point_One",
+      "sequence": "primitives",
+      "path": "halls/Point_One.md",
+      "sha256": "381d0a2dce1fc9e0a89c210ccb80813377d9ba534fe54ebc7594ee73c9090521",
+      "words": 148,
+      "matched_quotes": [],
+      "named_anchors": []
+    },
+    {
+      "hall": "Point_Lines",
+      "sequence": "primitives",
+      "path": "halls/Point_Lines.md",
+      "sha256": "f8f08478a0d0b2754dd095762752eb522bfc2911a8d837a5016c9e9f09eeeb28",
+      "words": 163,
+      "matched_quotes": [
+        "One was waiting for you; the other has taken shape while you moved."
+      ],
+      "named_anchors": [
+        "line_demo",
+        "do_not_cross_barrier",
+        "line",
+        "walk_this_line_marking",
+        "player_trace"
+      ]
+    },
+    {
+      "hall": "Point_Trace",
+      "sequence": "primitives",
+      "path": "halls/Point_Trace.md",
+      "sha256": "3abfc22685f6c5975755a4aa5cb34254ed54a639ef5a4e3021f33f0df49a5db7",
+      "words": 169,
+      "matched_quotes": [
+        "We have given waiting a length."
+      ],
+      "named_anchors": [
+        "draw_dot",
+        "head_trace_projection",
+        "automatic_writing_desk",
+        "trace_short_memory"
+      ]
+    },
+    {
+      "hall": "Point_Line_Grid",
+      "sequence": "primitives",
+      "path": "halls/Point_Line_Grid.md",
+      "sha256": "7ab467980dc3e5ad589d8759d5583431ecf13e07bf876d9915d61dd6b1d08be0",
+      "words": 165,
+      "matched_quotes": [
+        "A rule for making positions agree has also given us something to dance with."
+      ],
+      "named_anchors": [
+        "grab_sphere_point_snap",
+        "grid_lines",
+        "plan_vitrine"
+      ]
+    },
+    {
+      "hall": "Point_Triangle_Context",
+      "sequence": "primitives",
+      "path": "halls/Point_Triangle_Context.md",
+      "sha256": "7ae7f4edc35cbe2c999747dbd5dd0bfe2af732345689eeb96ac610463113136a",
+      "words": 163,
+      "matched_quotes": [
+        "Something is covering a place you left open."
+      ],
+      "named_anchors": [
+        "triangle_line_puzzle",
+        "triangle_line_puzzle",
+        "draw_triangle_faces",
+        "draw_triangle_faces"
+      ]
+    },
+    {
+      "hall": "Primitives_Polythedra",
+      "sequence": "primitives",
+      "path": "halls/Primitives_Polythedra.md",
+      "sha256": "5be0d228db5bbe46dc4383184c50b3403c47223d953e7bc9178100a1384f08cc",
+      "words": 169,
+      "matched_quotes": [
+        "The corner looks cut away because we have filled it."
+      ],
+      "named_anchors": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "polyhedra_boundary_plate",
+        "prism_block"
+      ]
+    },
+    {
+      "hall": "Point_Animatedcube",
+      "sequence": "primitives",
+      "path": "halls/Point_Animatedcube.md",
+      "sha256": "0b01b9af8cd87499c32c1269c0b9116d0e24aa14ee8dc50b7d4070312d870f8d",
+      "words": 266,
+      "matched_quotes": [
+        "Your hand has made one of those divisions matter."
+      ],
+      "named_anchors": [
+        "animatedcubebuilder",
+        "cube_diagonal_plate",
+        "animatedcubebuilder",
+        "polyhedron_nets_cube"
+      ]
+    },
+    {
+      "hall": "Primitives_Ignorance",
+      "sequence": "primitives",
+      "path": "halls/Primitives_Ignorance.md",
+      "sha256": "def914683474244b1db9210b95aa0e9cb1d97e43f531cf3fe745e911c158a808",
+      "words": 169,
+      "matched_quotes": [
+        "What would you miss if you corrected it into the capsule you expected?"
+      ],
+      "named_anchors": [
+        "sphere",
+        "budget_of_smoothness"
+      ]
+    },
+    {
+      "hall": "Primitives_Portals",
+      "sequence": "primitives",
+      "path": "halls/Primitives_Portals.md",
+      "sha256": "7db1e92f09ee9b052ad8fe3b5545560e447214aefc391011888ff9b1b744e0a9",
+      "words": 168,
+      "matched_quotes": [
+        "What the earlier arrangement kept for later has become the entrance."
+      ],
+      "named_anchors": [
+        "combine_portals",
+        "achilles_tortoise"
+      ]
+    },
+    {
+      "hall": "Primitives_Melencolia",
+      "sequence": "primitives",
+      "path": "halls/Primitives_Melencolia.md",
+      "sha256": "59c97f5cd68eb9db95b8f21aff0686945d199dfb3be1737b9b7a6e6189c3125b",
+      "words": 167,
+      "matched_quotes": [
+        "Has that correct answer finished what you came to look at?"
+      ],
+      "named_anchors": [
+        "pyramid",
+        "pyramidlong",
+        "durer_scene",
+        "frame_counter_display"
+      ]
+    },
+    {
+      "hall": "Trans_Pre",
+      "sequence": "transformation",
+      "path": "halls/Trans_Pre.md",
+      "sha256": "2791b1d371d8fffe4c50a2fa59601211b8509895fc91c6c619a5d3890d91ff5b",
+      "words": 163,
+      "matched_quotes": [
+        "The still cube has gone if you collected it; the three moving examples remain."
+      ],
+      "named_anchors": [
+        "pick_up_cube"
+      ]
+    },
+    {
+      "hall": "Trans_Introduction",
+      "sequence": "transformation",
+      "path": "halls/Trans_Introduction.md",
+      "sha256": "9de10980ca510ec8a7501924d6d9726c1189fa0192959afabb24ef9276545ab4",
+      "words": 167,
+      "matched_quotes": [
+        "The crossing has lost one of its agreements."
+      ],
+      "named_anchors": [
+        "tc",
+        "sc",
+        "rc",
+        "adjustable_landing"
+      ]
+    },
+    {
+      "hall": "Trans_Translation",
+      "sequence": "transformation",
+      "path": "halls/Trans_Translation.md",
+      "sha256": "bf53ce5fd46a4c0ef5da500bea05306780b51e30c0303b4274241e687aeedb26",
+      "words": 171,
+      "matched_quotes": [
+        "Your hand can propose a diagonal and leave a vertical line."
+      ],
+      "named_anchors": [
+        "tc",
+        "pick_up_cube",
+        "translation_cube_demo"
+      ]
+    },
+    {
+      "hall": "Trans_Rotation",
+      "sequence": "transformation",
+      "path": "halls/Trans_Rotation.md",
+      "sha256": "397b76c0348ee5d6df28e74803555e8b08bbb4e13352e229499b46fc362d93eb",
+      "words": 165,
+      "matched_quotes": [
+        "What returned depends on what you were following."
+      ],
+      "named_anchors": [
+        "rotation_wall_crossings",
+        "rotation_array_compare",
+        "transform_composition_workbench",
+        "axial_sweep",
+        "boolean_tunnel",
+        "carousel_cake"
+      ]
+    },
+    {
+      "hall": "Trans_Scale",
+      "sequence": "transformation",
+      "path": "halls/Trans_Scale.md",
+      "sha256": "b30bc79a06d2cd7460798748d29829aa55368705c2a540ad8a6e45c76446b741",
+      "words": 162,
+      "matched_quotes": [
+        "What could be read at a glance now asks for a journey."
+      ],
+      "named_anchors": [
+        "scale_me"
+      ]
+    },
+    {
+      "hall": "Trans_Body",
+      "sequence": "transformation",
+      "path": "halls/Trans_Body.md",
+      "sha256": "98a848f5f77e32e758e609bcfc5d55f61c49f4db858177caaac7be1ec4e38c11",
+      "words": 160,
+      "matched_quotes": [
+        "Two boundaries return; one keeps the cut."
+      ],
+      "named_anchors": [
+        "approach_wall",
+        "carve_grid",
+        "approach_scale"
+      ]
+    },
+    {
+      "hall": "Trans_Pit",
+      "sequence": "transformation",
+      "path": "halls/Trans_Pit.md",
+      "sha256": "4c5d1827a677092be7e76424f4aca8882abc07bd8c9d6b36840219dc96581f44",
+      "words": 179,
+      "matched_quotes": [
+        "There they made a small object conspicuous. Here they make room for you."
+      ],
+      "named_anchors": [
+        "pusher_block",
+        "rc",
+        "grower_block",
+        "transformation_airlock"
+      ]
+    },
+    {
+      "hall": "Array",
+      "sequence": "array_tutorial",
+      "path": "halls/Array.md",
+      "sha256": "81da340289e629ac5633d82c2ca15a13bd0a18a0d0f3d45542a00058184dab77",
+      "words": 162,
+      "matched_quotes": [
+        "The sphere is writing into the hall’s own grid."
+      ],
+      "named_anchors": [
+        "array_floor_writer",
+        "molnar_cube_study"
+      ]
+    },
+    {
+      "hall": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "path": "halls/Tutorial_3D.md",
+      "sha256": "2f0dbba60de624c9cd4c47e9ec1b9d449b7651af4fff4712337b2840b4993941",
+      "words": 161,
+      "matched_quotes": [
+        "The gap is not an extra entry."
+      ],
+      "named_anchors": [
+        "array_flight_lab"
+      ]
+    },
+    {
+      "hall": "Tutorial_Tiling_Floor",
+      "sequence": "array_tutorial",
+      "path": "halls/Tutorial_Tiling_Floor.md",
+      "sha256": "fc7c31d2340f30d9dd6093d36eab6ed4d5c1af74cc8d83479ef865573fa0597c",
+      "words": 170,
+      "matched_quotes": [
+        "The unit that you notice need not be the unit stored by the program."
+      ],
+      "named_anchors": [
+        "tiling_principles"
+      ]
+    },
+    {
+      "hall": "Tutorial_Tiling_Walls",
+      "sequence": "array_tutorial",
+      "path": "halls/Tutorial_Tiling_Walls.md",
+      "sha256": "23f82065a7544b90d3306063320855ea592404a3c15dca1b49bf5b9ba8569553",
+      "words": 160,
+      "matched_quotes": [
+        "From here the panel is almost nothing."
+      ],
+      "named_anchors": [
+        "tiling_principles",
+        "wall_exception"
+      ]
+    },
+    {
+      "hall": "Tutorial_Disco",
+      "sequence": "array_tutorial",
+      "path": "halls/Tutorial_Disco.md",
+      "sha256": "223bf5b638cea2a05683d46029573ce746ad017e17b1821fada223b66d22ba80",
+      "words": 162,
+      "matched_quotes": [
+        "Keep it for a few loops before deciding."
+      ],
+      "named_anchors": [
+        "disco_controls",
+        "step_sequencer",
+        "standalone_disco"
+      ]
+    },
+    {
+      "hall": "Color_Context_Placed",
+      "sequence": "color",
+      "path": "halls/Color_Context_Placed.md",
+      "sha256": "be33d26bf079d48f29e57b008b24d55ea99ddc3d873dbec1d48ecc0b10f7d98b",
+      "words": 158,
+      "matched_quotes": [
+        "The object has not turned."
+      ],
+      "named_anchors": [
+        "chroma_stack",
+        "color_dna_stack"
+      ]
+    },
+    {
+      "hall": "Color_Flashlight",
+      "sequence": "color",
+      "path": "halls/Color_Flashlight.md",
+      "sha256": "c598c4559c98ee7083fa04f6042ae91bd5c8de7cf59f28ae2b31df11477b2aec",
+      "words": 160,
+      "matched_quotes": [
+        "No face has been repainted."
+      ],
+      "named_anchors": [
+        "flashlight_demo"
+      ]
+    },
+    {
+      "hall": "Color_Nails",
+      "sequence": "color",
+      "path": "halls/Color_Nails.md",
+      "sha256": "5d371ea0cfbad3c0cbfdc84ddfafd5389c0f64a61aa6011c9789f38eefd9df94",
+      "words": 167,
+      "matched_quotes": [
+        "The colour leaves with you."
+      ],
+      "named_anchors": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ]
+    },
+    {
+      "hall": "Color_Rainbow",
+      "sequence": "color",
+      "path": "halls/Color_Rainbow.md",
+      "sha256": "a0678003f55fccd67d8c3802b68af18170d1221fc069273b8e303e003dc27832",
+      "words": 160,
+      "matched_quotes": [
+        "There is no correct partition to earn first."
+      ],
+      "named_anchors": [
+        "rainbow"
+      ]
+    },
+    {
+      "hall": "Color_Pillar",
+      "sequence": "color",
+      "path": "halls/Color_Pillar.md",
+      "sha256": "62628bccc3ef2e37c6cfc4c416fa9f2963f553bdcb1db9be07b41b12dc47792d",
+      "words": 169,
+      "matched_quotes": [
+        "They are also where you can walk."
+      ],
+      "named_anchors": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ]
+    },
+    {
+      "hall": "Color_Grid_Pallet",
+      "sequence": "color",
+      "path": "halls/Color_Grid_Pallet.md",
+      "sha256": "0efd1588e5e96e17baf36b8c6ea482bbd4aa941315cd2c1ef9cddfaa0ccbbb06",
+      "words": 163,
+      "matched_quotes": [
+        "Your exception has not followed it."
+      ],
+      "named_anchors": [
+        "gridcolorizer"
+      ]
+    },
+    {
+      "hall": "Color_Paint",
+      "sequence": "color",
+      "path": "halls/Color_Paint.md",
+      "sha256": "7f054b5fb3803e0f73f473d87f5f50b7c6aee1c49813f88de36615f724c81db0",
+      "words": 160,
+      "matched_quotes": [
+        "The other painter continues."
+      ],
+      "named_anchors": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ]
+    },
+    {
+      "hall": "Color_Walls",
+      "sequence": "color",
+      "path": "halls/Color_Walls.md",
+      "sha256": "dce28026773897e7c6a60ff87e1e672bd877201cfcfc7d8e3d2722f32cb38c96",
+      "words": 164,
+      "matched_quotes": [
+        "No doorway has opened."
+      ],
+      "named_anchors": [
+        "color_constellation_office",
+        "gradient_interpolator"
+      ]
+    },
+    {
+      "hall": "Pattern_Disco",
+      "sequence": "tiling",
+      "path": "halls/Pattern_Disco.md",
+      "sha256": "b1c895ef6ca9822120b75caf766a4a53f9d220dc11dc756a6355c794d9c82098",
+      "words": 176,
+      "matched_quotes": [
+        "Can an invitation to move be felt"
+      ],
+      "named_anchors": [
+        "standalone_disco",
+        "step_sequencer"
+      ]
+    },
+    {
+      "hall": "Pattern_Foundry",
+      "sequence": "tiling",
+      "path": "halls/Pattern_Foundry.md",
+      "sha256": "bd4458e75f6058aa879122ac253771bdbf11de4cc213b27d81df1cd1065231e7",
+      "words": 171,
+      "matched_quotes": [
+        "The room has separated into two different moments."
+      ],
+      "named_anchors": [
+        "pattern_machine_a"
+      ]
+    },
+    {
+      "hall": "Tutorial_Pattern",
+      "sequence": "tiling",
+      "path": "halls/Tutorial_Pattern.md",
+      "sha256": "a5c02637e8189fe12889a3f0f34141d576afed86ea3229d933e6587f414588de",
+      "words": 174,
+      "matched_quotes": [
+        "Your interruption has become regular too."
+      ],
+      "named_anchors": [
+        "pattern_maker_station"
+      ]
+    },
+    {
+      "hall": "Array_Patterns",
+      "sequence": "tiling",
+      "path": "halls/Array_Patterns.md",
+      "sha256": "7f3984a3e0fa1ff544e7313be337fd1bb518aac0b6c205cbad0d0deb5e313f9d",
+      "words": 174,
+      "matched_quotes": [
+        "Another place can consult the same memory."
+      ],
+      "named_anchors": [
+        "pattern_tunnel_machine"
+      ]
+    },
+    {
+      "hall": "Symmetry_Seventeen",
+      "sequence": "tiling",
+      "path": "halls/Symmetry_Seventeen.md",
+      "sha256": "7ea2ab7263d16885a2934b80d4fc77431f0b8517f7a7bcc7371b0dc56585d07c",
+      "words": 173,
+      "matched_quotes": [
+        "It gives your next change somewhere to return to."
+      ],
+      "named_anchors": [
+        "vr_tile_editor"
+      ]
+    },
+    {
+      "hall": "Ribbon_Patterns_01",
+      "sequence": "tiling",
+      "path": "halls/Ribbon_Patterns_01.md",
+      "sha256": "f301999184811671e156814f2a7b587baacdc5ac8074010f5180babb3b23db16",
+      "words": 173,
+      "matched_quotes": [
+        "sixteen visible, sixty-four stored"
+      ],
+      "named_anchors": [
+        "grid_3d_4x4x4"
+      ]
+    },
+    {
+      "hall": "Ribbon_Patterns_02",
+      "sequence": "tiling",
+      "path": "halls/Ribbon_Patterns_02.md",
+      "sha256": "f008193889ac6611b574640c6b1d958307ce45005885b9ce0c929b6a8607da80",
+      "words": 173,
+      "matched_quotes": [
+        "The contrast has gone; the little bodies remain."
+      ],
+      "named_anchors": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ]
+    },
+    {
+      "hall": "Ribbon_Patterns_03",
+      "sequence": "tiling",
+      "path": "halls/Ribbon_Patterns_03.md",
+      "sha256": "068a2abc61c819a2a7fa41112a22645ed4bf5e73aaac7dae90168d3d1e7aa06f",
+      "words": 170,
+      "matched_quotes": [
+        "part of how you meet yourself."
+      ],
+      "named_anchors": [
+        "super_drag_mirror",
+        "drag_catwalk"
+      ]
+    },
+    {
+      "hall": "Change_Intro",
+      "sequence": "change",
+      "path": "halls/Change_Intro.md",
+      "sha256": "7040bc56b53e19e0e80ab8b9560c6e32b95c249cf216a3b8a0bb426b10a2d2a1",
+      "words": 175,
+      "matched_quotes": [
+        "Zero net change does not mean that nothing happened."
+      ],
+      "named_anchors": [
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ]
+    },
+    {
+      "hall": "Flow_Field",
+      "sequence": "change",
+      "path": "halls/Flow_Field.md",
+      "sha256": "bed494e30ab32a91c6da359294e754721fbccd27c54da2e6403bd932ef77407d",
+      "words": 177,
+      "matched_quotes": [
+        "The boundary has been made into a connection."
+      ],
+      "named_anchors": [
+        "flow_field_painter"
+      ]
+    },
+    {
+      "hall": "Vectors_Act1_WhatAVectorIs",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act1_WhatAVectorIs.md",
+      "sha256": "da9dc376739efd63f5fea6b05bbe479dba274ab99bcfa7ce979b07d2b4d109cd",
+      "words": 160,
+      "matched_quotes": [
+        "The wall answers."
+      ],
+      "named_anchors": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ]
+    },
+    {
+      "hall": "VFM_02_Operations",
+      "sequence": "forces",
+      "path": "halls/VFM_02_Operations.md",
+      "sha256": "4a5719471466ab8a7d1dfde4f5596d7ff041dc3243aeb44d80eb56ed36aa9daa",
+      "words": 169,
+      "matched_quotes": [
+        "Zero has not meant that nothing happened."
+      ],
+      "named_anchors": [
+        "adder_board"
+      ]
+    },
+    {
+      "hall": "Vectors_Act2_VectorArithmetic",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act2_VectorArithmetic.md",
+      "sha256": "2aa0d84d9df8defa75652fc392e0158e162eb46a41bac46c16204449081b6392",
+      "words": 170,
+      "matched_quotes": [
+        "The direction of the question changed."
+      ],
+      "named_anchors": [
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ]
+    },
+    {
+      "hall": "VFM_05_Launch",
+      "sequence": "forces",
+      "path": "halls/VFM_05_Launch.md",
+      "sha256": "3b44a113238da80036579c29ab8b41aa5d0bbf1690942a915597f154a6e39d77",
+      "words": 170,
+      "matched_quotes": [
+        "There is more room above the lane"
+      ],
+      "named_anchors": [
+        "launch_arc"
+      ]
+    },
+    {
+      "hall": "VFM_03_Motion",
+      "sequence": "forces",
+      "path": "halls/VFM_03_Motion.md",
+      "sha256": "cc59488131a9fa1c386dcadbfa1599eb77e4a13ac05ff19960c00bb71699b2e5",
+      "words": 169,
+      "matched_quotes": [
+        "The cube keeps going."
+      ],
+      "named_anchors": [
+        "VectorMotion",
+        "friction_ramp"
+      ]
+    },
+    {
+      "hall": "Vectors_Act3_FieldsAndMotion",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act3_FieldsAndMotion.md",
+      "sha256": "b496737b43f015a0d89b022dd181ee769ca4c1c92f8b12d9fcbd586669fe320c",
+      "words": 169,
+      "matched_quotes": [
+        "only two remember."
+      ],
+      "named_anchors": [
+        "VectorFieldFlow"
+      ]
+    },
+    {
+      "hall": "Vectors_Act4a_KineticForces",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act4a_KineticForces.md",
+      "sha256": "12006ecb5cf5ad9647ee638b3f675073722498fc49d40280ddf94ac077b3fbbe",
+      "words": 164,
+      "matched_quotes": [
+        "The grass does not grow back."
+      ],
+      "named_anchors": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ]
+    },
+    {
+      "hall": "Vectors_Act4b_Oscillation",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act4b_Oscillation.md",
+      "sha256": "f551f12b8c7a2b6f37e58738536cfb03be76f706555d1d70c8d40ca53e664259",
+      "words": 168,
+      "matched_quotes": [
+        "It goes through."
+      ],
+      "named_anchors": [
+        "spring_tower"
+      ]
+    },
+    {
+      "hall": "Change_Choreography",
+      "sequence": "forces",
+      "path": "halls/Change_Choreography.md",
+      "sha256": "51f4d599e2b19c84b310e1d72026659ba73a5e2a6ec4a22b3f62be6d90764292",
+      "words": 163,
+      "matched_quotes": [
+        "Its schedule cannot collect a promise."
+      ],
+      "named_anchors": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ]
+    },
+    {
+      "hall": "VFM_07_Gravity",
+      "sequence": "forces",
+      "path": "halls/VFM_07_Gravity.md",
+      "sha256": "2d10cce674e4360ace8b934772d746785a084e410936be98eb46e9b3860a9c27",
+      "words": 166,
+      "matched_quotes": [
+        "A reference need not be occupied."
+      ],
+      "named_anchors": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ]
+    },
+    {
+      "hall": "VFM_09_Legs",
+      "sequence": "forces",
+      "path": "halls/VFM_09_Legs.md",
+      "sha256": "359db1ee1690a76207c9054fa8a747c10bc4150e1f7ba6875d270cdad91b6a54",
+      "words": 179,
+      "matched_quotes": [
+        "That almost is worth watching"
+      ],
+      "named_anchors": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ]
+    },
+    {
+      "hall": "VFM_08_Arena",
+      "sequence": "forces",
+      "path": "halls/VFM_08_Arena.md",
+      "sha256": "d4dfbaa2429dd374eb83545f420650efafe63ed2eacd6e8b31565c1d31d0a731",
+      "words": 178,
+      "matched_quotes": [
+        "arriving is not yet having eaten."
+      ],
+      "named_anchors": [
+        "arena_relation_lab",
+        "collision_carts"
+      ]
+    },
+    {
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "sequence": "forces",
+      "path": "halls/Vectors_Act5_ForceAsPlace.md",
+      "sha256": "c11df309d7224a6968860385e7ab2086a73dd1d9cbc52a5ba69820bb4dea624b",
+      "words": 164,
+      "matched_quotes": [
+        "The fader is not dead."
+      ],
+      "named_anchors": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ]
+    },
+    {
+      "hall": "FormFinding_Descent",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Descent.md",
+      "sha256": "5fb53e76e37336de9cc3b5eeee26272f548e138e7ff1466eb292fbbcfa0c3f7b",
+      "words": 176,
+      "matched_quotes": [
+        "The pause helps us watch"
+      ],
+      "named_anchors": [
+        "descent_landscape_lab",
+        "descent_marble_toy",
+        "gradient_descent",
+        "gradient_descent_well",
+        "settling_tremble"
+      ]
+    },
+    {
+      "hall": "FormFinding_Catenary",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Catenary.md",
+      "sha256": "d6f717b4d6a1459a7a2dc205c2e7572fcc8fa894a4c9e5588b70e7f5f72d5cd0",
+      "words": 169,
+      "matched_quotes": [
+        "The cathedral is implied."
+      ],
+      "named_anchors": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid",
+        "helicoid"
+      ]
+    },
+    {
+      "hall": "FormFinding_Relaxation",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Relaxation.md",
+      "sha256": "a571905b29b81ac97d6c158783597f8995b5a9438088bbdfd2a41445321fe928",
+      "words": 174,
+      "matched_quotes": [
+        "The clock is part of the genome here."
+      ],
+      "named_anchors": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "hall": "FormFinding_Equilibrium",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Equilibrium.md",
+      "sha256": "75a1dc0c161cb324e94b8bb6ed59e3c1c2f476372637579e003e1a917721f30a",
+      "words": 170,
+      "matched_quotes": [
+        "The heavier child rides the shorter arm"
+      ],
+      "named_anchors": [
+        "calder_mobile",
+        "tensegrity_triangle",
+        "fractal_truss_tower"
+      ]
+    },
+    {
+      "hall": "FormFinding_Annealing",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Annealing.md",
+      "sha256": "8cf1a045c3ca4d541566a0e7a8ab35ae54d91d911d162703a09b99264880cd86",
+      "words": 171,
+      "matched_quotes": [
+        "A teacup on top, unbothered."
+      ],
+      "named_anchors": [
+        "simulated_annealing",
+        "max_q_basin_room",
+        "impossible_end_table"
+      ]
+    },
+    {
+      "hall": "FormFinding_Forge",
+      "sequence": "formfinding",
+      "path": "halls/FormFinding_Forge.md",
+      "sha256": "2e51a928790c9c08b026c6328ae61234088713ece9946d5169675cc06a151e39",
+      "words": 175,
+      "matched_quotes": [
+        "The gathering can still be beautiful."
+      ],
+      "named_anchors": [
+        "balance_puzzle",
+        "self_shaping_forge",
+        "gradient_descent_optimizer"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Intro",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Intro.md",
+      "sha256": "43a3dea921657548bab7a04c43430dfd44ec706aae5a320f0490638db2b500a7",
+      "words": 178,
+      "matched_quotes": [
+        "There are several beginnings here"
+      ],
+      "named_anchors": [
+        "control_pendulum"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Pendulum",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Pendulum.md",
+      "sha256": "0dd149e6903a24e1b891cb237bc3c82af08fe4fca6fe92d2f7b3a913483be732",
+      "words": 169,
+      "matched_quotes": [
+        "An old moment is further away."
+      ],
+      "named_anchors": [
+        "PendulumWave"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Sine_Space",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Sine_Space.md",
+      "sha256": "30a6833d01b41a9c3f0a07564a144c5eedca3171bc9e4eb84c41a19f22f65585",
+      "words": 175,
+      "matched_quotes": [
+        "The walls keep changing the invitation."
+      ],
+      "named_anchors": [
+        "sine_flow_tray",
+        "sine_wall_corridor"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Unit_Circle",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Unit_Circle.md",
+      "sha256": "af395e1982902f6bcc9b9ca8b0f646f1e09972a5dac35f0d8824bbf162b29bef",
+      "words": 173,
+      "matched_quotes": [
+        "The point goes on turning"
+      ],
+      "named_anchors": [
+        "unit_circle_advanced"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_3D_Wave_Propagation",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_3D_Wave_Propagation.md",
+      "sha256": "afdc42db3ad8a055b68f14a07af89e27ae392bdb7e02ff12a84ea2b0f35fda1b",
+      "words": 170,
+      "matched_quotes": [
+        "An edge cell has fewer neighbours."
+      ],
+      "named_anchors": [
+        "coupled_oscillator_lattice"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Effect_Sound",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Effect_Sound.md",
+      "sha256": "f7a9425cc14933970d12472c511c1d92d93c902073854a34a19a68a78722e97a",
+      "words": 179,
+      "matched_quotes": [
+        "A drag can become a run of beginnings."
+      ],
+      "named_anchors": [
+        "DualBallFMController"
+      ]
+    },
+    {
+      "hall": "Wavefunctions_Bernini",
+      "sequence": "wavefunctions",
+      "path": "halls/Wavefunctions_Bernini.md",
+      "sha256": "c51f4c7fa115de6d947c8e0ebce4940a074e7a4661affd53282ba053771552f6",
+      "words": 181,
+      "matched_quotes": [
+        "The words return"
+      ],
+      "named_anchors": [
+        "bernini_columns"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_John_Cage",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_John_Cage.md",
+      "sha256": "5f84a4bbf43a6ee72d74e7aaf035fa55ff5a0c7fc9e9debfdf11b21a025a4dd1",
+      "words": 179,
+      "matched_quotes": [
+        "Then leave an event uncounted"
+      ],
+      "named_anchors": [
+        "john_cage_tech_noir"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_AirMusic",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_AirMusic.md",
+      "sha256": "222f14a5c21feab81651ea2334c8b24d2188d3871cd4faca4ab50f911a26c02f",
+      "words": 179,
+      "matched_quotes": [
+        "the sum is not a third bar."
+      ],
+      "named_anchors": [
+        "resonating_metallophone"
+      ]
+    },
+    {
+      "hall": "Wavefunctions_Sky_Stairs",
+      "sequence": "wavefunctions",
+      "path": "halls/Wavefunctions_Sky_Stairs.md",
+      "sha256": "46171a42e0a2fc5be8b077cf27cfd2eb881698aacba73408e7a4ec098f0f7cd3",
+      "words": 173,
+      "matched_quotes": [
+        "The outline breathes inward and outward"
+      ],
+      "named_anchors": [
+        "sine_cylinder_staircase"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_TrigWalkingPath",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_TrigWalkingPath.md",
+      "sha256": "9be5ad8968cda7dcde57642f33f0cc7ed1cdc0743863f9aa8a399168ba951c91",
+      "words": 173,
+      "matched_quotes": [
+        "It is not a third independent source"
+      ],
+      "named_anchors": [
+        "beat_frequency_demo"
+      ]
+    },
+    {
+      "hall": "WaveFunctions_Synthesis_Lab",
+      "sequence": "wavefunctions",
+      "path": "halls/WaveFunctions_Synthesis_Lab.md",
+      "sha256": "1f173db1ffb1a759a6364d886bccaf0373fb6e2bf8e960adda90b9a4545410f4",
+      "words": 177,
+      "matched_quotes": [
+        "Custom is a place to continue from."
+      ],
+      "named_anchors": [
+        "additive_wave_demo",
+        "ambient_patch"
+      ]
+    },
+    {
+      "hall": "Random_Definition",
+      "sequence": "randomness",
+      "path": "halls/Random_Definition.md",
+      "sha256": "56097de2b14742d5c8fd08d63dac545ff64cedd9ca54885a822019f4cee132e6",
+      "words": 164,
+      "matched_quotes": [
+        "Nothing in a draw says that it is red."
+      ],
+      "named_anchors": [
+        "seed_replay_demo",
+        "textile_comparison",
+        "random_number_book_page_1955",
+        "prng_crank_machine"
+      ]
+    },
+    {
+      "hall": "Random_Entropy",
+      "sequence": "randomness",
+      "path": "halls/Random_Entropy.md",
+      "sha256": "c7acf50dcc8666973e3182dc3f01d8a02c9f74fa890b8c95787d5e57dc534534",
+      "words": 176,
+      "matched_quotes": [
+        "The fallen stone is still here."
+      ],
+      "named_anchors": [
+        "shannon_entropy_meter",
+        "entropy_jar",
+        "entropy_axiom",
+        "entropy_ruin"
+      ]
+    },
+    {
+      "hall": "Random_Remove",
+      "sequence": "randomness",
+      "path": "halls/Random_Remove.md",
+      "sha256": "9ab87b8aa04276a5e0663bf3681a49888f9d248d7c581c65058c1b53335a367f",
+      "words": 173,
+      "matched_quotes": [
+        "Nothing requires another press."
+      ],
+      "named_anchors": [
+        "remove_random",
+        "sampling_hoppers",
+        "random_removal_arena"
+      ]
+    },
+    {
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "sequence": "randomness",
+      "path": "halls/Randomness_10_PRINT_Algorithm.md",
+      "sha256": "3f78dafa533bff562f4836d8943521d7274484a44cbaa4bf7f76ceca27984061",
+      "words": 167,
+      "matched_quotes": [
+        "One tiny character has given the other characters another way to meet."
+      ],
+      "named_anchors": [
+        "ten_print",
+        "composition_stochastique",
+        "ten_print_structure",
+        "ten_print_maze_3d"
+      ]
+    },
+    {
+      "hall": "Random_Cubes",
+      "sequence": "randomness",
+      "path": "halls/Random_Cubes.md",
+      "sha256": "6c392ee69455acfa0e89c797d65544a52702d248dcff80b35ac003e0223ea5e4",
+      "words": 176,
+      "matched_quotes": [
+        "It keeps an instruction open."
+      ],
+      "named_anchors": [
+        "dice_throw",
+        "paired_dice_column",
+        "continuing_die",
+        "coin_toss",
+        "random_edge_profile"
+      ]
+    },
+    {
+      "hall": "Random_Rotate_Random_XYZ",
+      "sequence": "randomness",
+      "path": "halls/Random_Rotate_Random_XYZ.md",
+      "sha256": "5e987ed8a9a2a434081cd730bbfbcefb4330d97fe683c19545745eb808db33db",
+      "words": 177,
+      "matched_quotes": [
+        "Give it minutes."
+      ],
+      "named_anchors": [
+        "hardware_entropy_decay",
+        "random_decay_multimesh",
+        "RotateGridCubes"
+      ]
+    },
+    {
+      "hall": "Random_Walk",
+      "sequence": "randomness",
+      "path": "halls/Random_Walk.md",
+      "sha256": "12e405c1b82f19f25d8d1d2d0afa4fab0e3303e68b58ed239618ce24aaf0361a",
+      "words": 163,
+      "matched_quotes": [
+        "Your hand carries the origin"
+      ],
+      "named_anchors": [
+        "random_walk_terrarium",
+        "pixel_cloud",
+        "random_walk_terrarium",
+        "random_position_rails",
+        "random_draw_dot",
+        "random_walk_128"
+      ]
+    },
+    {
+      "hall": "Random_Gaussian",
+      "sequence": "randomness",
+      "path": "halls/Random_Gaussian.md",
+      "sha256": "088a44ae2c5fa310a509c3be4ef74453e99e61ce8259af094c5cccce0ff470de",
+      "words": 177,
+      "matched_quotes": [
+        "the model's tail is a probability, not an appointment."
+      ],
+      "named_anchors": [
+        "distribution_sampler",
+        "GaussianPaintSplatter"
+      ]
+    },
+    {
+      "hall": "Random_Mushrooms",
+      "sequence": "randomness",
+      "path": "halls/Random_Mushrooms.md",
+      "sha256": "839c22d5d435d361bf648fcdc8cb5501e0fafa6a431a024536c256452934997c",
+      "words": 175,
+      "matched_quotes": [
+        "The table still gives the absent form a place."
+      ],
+      "named_anchors": [
+        "mushrooms",
+        "bubbles_random",
+        "silhouette_arrivals",
+        "couture_comparison"
+      ]
+    },
+    {
+      "hall": "Random_Space_Geometry",
+      "sequence": "randomness",
+      "path": "halls/Random_Space_Geometry.md",
+      "sha256": "b746cb48fd41cf044dfbb1bd7ed61684aad00904e9443ce215ae6a2f17361626",
+      "words": 183,
+      "matched_quotes": [
+        "not one of its columns moves."
+      ],
+      "named_anchors": [
+        "perlin_noise_bridge"
+      ]
+    },
+    {
+      "hall": "Randomness_Examples_of_Randomness",
+      "sequence": "randomness",
+      "path": "halls/Randomness_Examples_of_Randomness.md",
+      "sha256": "057a1ed23465112b9be08805af062f64f07826a012fb1e8279ff591454a98bca",
+      "words": 169,
+      "matched_quotes": [
+        "The limit ends the run"
+      ],
+      "named_anchors": [
+        "pollock_painting_in_3d",
+        "monte_carlo_dartboard",
+        "pipe_dream",
+        "extreme_randomness"
+      ]
+    },
+    {
+      "hall": "Random_Pheromone",
+      "sequence": "randomness",
+      "path": "halls/Random_Pheromone.md",
+      "sha256": "728b327b33507bba5d6e1db3fc3eb708cfbcba71f3069f88180ac7c72264cdce",
+      "words": 179,
+      "matched_quotes": [
+        "The mark has become part of the mechanism."
+      ],
+      "named_anchors": [
+        "pheromone_terrain"
+      ]
+    },
+    {
+      "hall": "Random_Space",
+      "sequence": "randomness",
+      "path": "halls/Random_Space.md",
+      "sha256": "1ec147941cdce610a2230839bcfa584fad35d4e4bc6862389c202e990553b98b",
+      "words": 178,
+      "matched_quotes": [
+        "this field keeps no history"
+      ],
+      "named_anchors": [
+        "noise_mixer",
+        "worley_noise",
+        "shannon_entropy_meter",
+        "noise_mixer"
+      ]
+    },
+    {
+      "hall": "Random_Game",
+      "sequence": "randomness",
+      "path": "halls/Random_Game.md",
+      "sha256": "7b3f7351dd721f8629cf241b3236f949d54b38c65a483cdffecbf8a79746dd5d",
+      "words": 175,
+      "matched_quotes": [
+        "Knowing does not prescribe what you must want."
+      ],
+      "named_anchors": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "door_timing_trials",
+        "cube_projectile_spawner",
+        "waiting_profile"
+      ]
+    },
+    {
+      "hall": "Random_Noise_Types",
+      "sequence": "noise",
+      "path": "halls/Random_Noise_Types.md",
+      "sha256": "38257264f1346905ab9d3c8aeaa2edf846bacff54f25163ad8ebcfd9b8a6de6d",
+      "words": 174,
+      "matched_quotes": [
+        "This passage watches."
+      ],
+      "named_anchors": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D",
+        "related_weather"
+      ]
+    },
+    {
+      "hall": "Noise_Columns",
+      "sequence": "noise",
+      "path": "halls/Noise_Columns.md",
+      "sha256": "36ff09b8cd411111dba77ecb414858cf0bb8247de1a68d987b70b581f9188132",
+      "words": 169,
+      "matched_quotes": [
+        "Put the veining back if you prefer it."
+      ],
+      "named_anchors": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ]
+    },
+    {
+      "hall": "Noise_One",
+      "sequence": "noise",
+      "path": "halls/Noise_One.md",
+      "sha256": "bc6a6134f4cbb525c13dab6d6665efbe118c2d5fac10cdb9f14c54c46fb8f86a",
+      "words": 175,
+      "matched_quotes": [
+        "A mountain can wear violet"
+      ],
+      "named_anchors": [
+        "noisetorus",
+        "noiselayers",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Noise_Voxel",
+      "sequence": "noise",
+      "path": "halls/Noise_Voxel.md",
+      "sha256": "a0891163d0ee82a08cffc95dbca50cb5b6b0b46621fa3e32fe7d0872672c5694",
+      "words": 181,
+      "matched_quotes": [
+        "An empty cell still has a location."
+      ],
+      "named_anchors": [
+        "perlin_terrain_sculptor",
+        "science_screen",
+        "voxelnoise"
+      ]
+    },
+    {
+      "hall": "Noise_6_Wall",
+      "sequence": "noise",
+      "path": "halls/Noise_6_Wall.md",
+      "sha256": "bfe62720fba1233479f14350cff9bed3a4b4157dff43508d7bf9446c463e850f",
+      "words": 180,
+      "matched_quotes": [
+        "Grey is already an interpretation"
+      ],
+      "named_anchors": [
+        "shader_noise_space",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Noise_Inside_Noise",
+      "sequence": "noise",
+      "path": "halls/Noise_Inside_Noise.md",
+      "sha256": "e2f6a275d4f951a586ee3c763a503163c0a83da81d53fc83ef72df4c2a197e1d",
+      "words": 181,
+      "matched_quotes": [
+        "The place stays"
+      ],
+      "named_anchors": [
+        "noisesphere",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Noise_Space_10",
+      "sequence": "noise",
+      "path": "halls/Noise_Space_10.md",
+      "sha256": "c47d3e25bc37fca886e7e1ba5bc7686102eed86c1b8231efe2d164e73ddd30c1",
+      "words": 187,
+      "matched_quotes": [
+        "The pink one had to wait."
+      ],
+      "named_anchors": [
+        "noise_space",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Noise_Perlin_Simplex",
+      "sequence": "noise",
+      "path": "halls/Noise_Perlin_Simplex.md",
+      "sha256": "48b8d7099177d55afbca6a7a26c3f18c6a48daabeeaa727d6aa137888f3f6f47",
+      "words": 181,
+      "matched_quotes": [
+        "There need not be a winner"
+      ],
+      "named_anchors": [
+        "simplex_noise",
+        "perlin_noise",
+        "perlin_noise_terrain"
+      ]
+    },
+    {
+      "hall": "Lab_Path",
+      "sequence": "noise",
+      "path": "halls/Lab_Path.md",
+      "sha256": "9e57c59746208d3074ba73e2de1de8dbeffb5e3d5690fe4c459ba030178ab7d8",
+      "words": 182,
+      "matched_quotes": [
+        "The sphere offers no verdict."
+      ],
+      "named_anchors": [
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Shader_01_Shaping",
+      "sequence": "shaders",
+      "path": "halls/Shader_01_Shaping.md",
+      "sha256": "fe435448a9b88833e6e7cbc49274e693447564d40ca9ac7c5c9e2d330bedce2e",
+      "words": 172,
+      "matched_quotes": [
+        "The step is the subject and smoothstep is the pen."
+      ],
+      "named_anchors": [
+        "shader_01_shaping",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Shader_05_Patterns",
+      "sequence": "shaders",
+      "path": "halls/Shader_05_Patterns.md",
+      "sha256": "b9cb972f400446be4d3631d81d03a4849f46d290d5a620fe031376815bbc8e8e",
+      "words": 181,
+      "matched_quotes": [
+        "Every pixel folded its own address."
+      ],
+      "named_anchors": [
+        "shader_05_patterns",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Shader_11_QueerRubber",
+      "sequence": "shaders",
+      "path": "halls/Shader_11_QueerRubber.md",
+      "sha256": "fad590c4c763bf7108b1efd73f30478cff08618ce495ef7cd7c69cb95dfa6163",
+      "words": 177,
+      "matched_quotes": [
+        "What you have is your feet."
+      ],
+      "named_anchors": [
+        "shader_11_queerrubber",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Shader_09_FBM",
+      "sequence": "shaders",
+      "path": "halls/Shader_09_FBM.md",
+      "sha256": "d49ace0785620b5200ca1868b82b33187b1a181bcdfbfcdc9144b6f6543551fa",
+      "words": 177,
+      "matched_quotes": [
+        "The glass does."
+      ],
+      "named_anchors": [
+        "basin_water",
+        "shader_09_fbm"
+      ]
+    },
+    {
+      "hall": "Shader_12_PinkExtravaganza",
+      "sequence": "shaders",
+      "path": "halls/Shader_12_PinkExtravaganza.md",
+      "sha256": "066e197b7cc28b3af10eacea83e75be17c4b8da2a9d779cbab4951228552cbb2",
+      "words": 188,
+      "matched_quotes": [
+        "The excess is the default."
+      ],
+      "named_anchors": [
+        "shader_12_pinkextravaganza",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "Shader_10_ReactionDiffusion",
+      "sequence": "shaders",
+      "path": "halls/Shader_10_ReactionDiffusion.md",
+      "sha256": "3234d77acae551886600e8cd1e19ceb33f28fd085098b36af5aa2476afc491f2",
+      "words": 186,
+      "matched_quotes": [
+        "it repeats its first step forever."
+      ],
+      "named_anchors": [
+        "shader_10_reactiondiffusion",
+        "dark_sphere"
+      ]
+    },
+    {
+      "hall": "CA_Introduction",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_Introduction.md",
+      "sha256": "f7b2cd3d48aba85821b54cb0378c44e75623061a129ccdd0f67709d3b5f242dd",
+      "words": 156,
+      "matched_quotes": [
+        "Counting the green cells is tempting."
+      ],
+      "named_anchors": [
+        "ca_rule_explorer",
+        "persian_rug",
+        "line_network_ca"
+      ]
+    },
+    {
+      "hall": "CA_ElementaryRules",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_ElementaryRules.md",
+      "sha256": "6bebf656b30e71af55a6a003e82185f66504cea20cf17f6ce0a88fec1ea4cbbf",
+      "words": 162,
+      "matched_quotes": [
+        "Being present and being counted have parted company."
+      ],
+      "named_anchors": [
+        "structure_growth"
+      ]
+    },
+    {
+      "hall": "CA_GameOfLife",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_GameOfLife.md",
+      "sha256": "3554856601f70528c3d686c5840320cbf47a0a77c7ae3cf88666669ae563ef21",
+      "words": 161,
+      "matched_quotes": [
+        "Your return has undone nothing."
+      ],
+      "named_anchors": [
+        "ca_bridge"
+      ]
+    },
+    {
+      "hall": "CA_BeyondBinary",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_BeyondBinary.md",
+      "sha256": "99c53158301bd2274857d223ee8051ddd4964235b40e1358c46268beb538908a",
+      "words": 162,
+      "matched_quotes": [
+        "The pattern visits; the place continues to hold you."
+      ],
+      "named_anchors": [
+        "game_of_life_petri"
+      ]
+    },
+    {
+      "hall": "CA_ExpandingSpace",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_ExpandingSpace.md",
+      "sha256": "2423fd1a371fa20fe7932a218389ff92dcbb62bbcd4c33a828a4253195fb530e",
+      "words": 162,
+      "matched_quotes": [
+        "The faint tile can still be seen after it can no longer carry you."
+      ],
+      "named_anchors": [
+        "decaying_bridge"
+      ]
+    },
+    {
+      "hall": "CA_SoftRules",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_SoftRules.md",
+      "sha256": "1d76d98e4ed45a6c99b6cf501bbba17b6dce9d7ac59219c8c374dd88cfb83e7f",
+      "words": 162,
+      "matched_quotes": [
+        "What has the right-hand square been denied?"
+      ],
+      "named_anchors": [
+        "rd_artifact",
+        "the_clockmaker_of_rules"
+      ]
+    },
+    {
+      "hall": "CA_AgentsCircuits",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_AgentsCircuits.md",
+      "sha256": "e4ffee5e7e055d3dc89dd2b2bfbbb2635221c136c7f9f1b00feebbbcccf3be96",
+      "words": 162,
+      "matched_quotes": [
+        "If one part refuses the match, stay with that part"
+      ],
+      "named_anchors": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ]
+    },
+    {
+      "hall": "CA_EdgeOfChaos",
+      "sequence": "cellularautomata",
+      "path": "halls/CA_EdgeOfChaos.md",
+      "sha256": "b8f898df4111e0ee34684ccc431b018bca4634af4a191591c33bcb1e4b98d18a",
+      "words": 160,
+      "matched_quotes": [
+        "We have moved past the difference, not removed it."
+      ],
+      "named_anchors": [
+        "self_organization_ca"
+      ]
+    },
+    {
+      "hall": "Fractal_Recursion",
+      "sequence": "fractals",
+      "path": "halls/Fractal_Recursion.md",
+      "sha256": "6c191fa6c0f1be49230bd878c685f485c43aa1f88e6950489d038d827ef5ae64",
+      "words": 166,
+      "matched_quotes": [
+        "The count does not fall with their visibility."
+      ],
+      "named_anchors": [
+        "fractal_recursion_2",
+        "recursive_chair"
+      ]
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "sequence": "fractals",
+      "path": "halls/Fractal_RecursiveTrees.md",
+      "sha256": "ca996f01714bb26ace5d2d0f5fbd9c82831e2bea0f5e0c77a2663af206d9fbcb",
+      "words": 170,
+      "matched_quotes": [
+        "The first fork is now above your head."
+      ],
+      "named_anchors": [
+        "recursive_tree_2",
+        "recursive_tree"
+      ]
+    },
+    {
+      "hall": "Fractal_CantorSet",
+      "sequence": "fractals",
+      "path": "halls/Fractal_CantorSet.md",
+      "sha256": "7a204bff99753394fedae4c9cfda7fa2bf04780db3c61c2af2b6ed038550e199",
+      "words": 157,
+      "matched_quotes": [
+        "The whole display has become busier"
+      ],
+      "named_anchors": [
+        "cantor_set",
+        "example_8_4_cantor_pagoda_vr"
+      ]
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "sequence": "fractals",
+      "path": "halls/Fractal_KochSierpinski.md",
+      "sha256": "7d330294bbce7e50b6877461121918b2e785e07841525de6ae75046470770328",
+      "words": 165,
+      "matched_quotes": [
+        "What we had called the waste now holds the room's attention."
+      ],
+      "named_anchors": [
+        "sierpinski_triangle",
+        "sierpinski_pyramid"
+      ]
+    },
+    {
+      "hall": "Fractal_MengerSponge",
+      "sequence": "fractals",
+      "path": "halls/Fractal_MengerSponge.md",
+      "sha256": "827ae9fb0257dc6c9cb132ffb6a27026994f12d266251b1342093644eb120b5f",
+      "words": 156,
+      "matched_quotes": [
+        "let go and you hover."
+      ],
+      "named_anchors": [
+        "menger_sponge"
+      ]
+    },
+    {
+      "hall": "Fractal_GoldenSpiral",
+      "sequence": "fractals",
+      "path": "halls/Fractal_GoldenSpiral.md",
+      "sha256": "23c0cc3380847f63ebf6ff5e3a705cdd560f7140a4f27103567751bb3131c4f3",
+      "words": 158,
+      "matched_quotes": [
+        "The display has not broken the recurrence."
+      ],
+      "named_anchors": [
+        "fibonacci_sequences",
+        "golden_rectangle"
+      ]
+    },
+    {
+      "hall": "Fractal_Synthesis",
+      "sequence": "fractals",
+      "path": "halls/Fractal_Synthesis.md",
+      "sha256": "cc827f33a53df8fb9aad279ff5d20d8d867b75cbd84a725c1ddc6be9eadfd037",
+      "words": 162,
+      "matched_quotes": [
+        "Has another third been removed?"
+      ],
+      "named_anchors": [
+        "cantor_set",
+        "recursive_tree"
+      ]
+    },
+    {
+      "hall": "LSystems_Grammar_Lab",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Grammar_Lab.md",
+      "sha256": "45f3de7e6770a50d7c3df8e71542bf3ae82ad7267be207b28687a8c05517dc05",
+      "words": 163,
+      "matched_quotes": [
+        "A symbol without a replacement passes through as itself."
+      ],
+      "named_anchors": [
+        "lsystem_editor"
+      ]
+    },
+    {
+      "hall": "LSystems_Growth",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Growth.md",
+      "sha256": "2ed9f3cce38655f1bb7a16d993963f83792b37b1ed05ee5f936ec8d20fc7612e",
+      "words": 161,
+      "matched_quotes": [
+        "An operation has taken place without adding anything to the outline."
+      ],
+      "named_anchors": [
+        "parametric_lsystem"
+      ]
+    },
+    {
+      "hall": "LSystems_Grammars_And_Curves",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Grammars_And_Curves.md",
+      "sha256": "4e9681d148621ca924488d4ab9142b138350c882afe6b1ceb72c59b45b06880b",
+      "words": 157,
+      "matched_quotes": [
+        "An angle matters when an instruction uses it."
+      ],
+      "named_anchors": [
+        "the_believing_turtle"
+      ]
+    },
+    {
+      "hall": "LSystems_Architecture",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Architecture.md",
+      "sha256": "92ccfc6f6ccc6c154e71e5d77d3fbc7155785b2e840893422b6adefc4b115a5f",
+      "words": 161,
+      "matched_quotes": [
+        "both room records have the same address."
+      ],
+      "named_anchors": [
+        "lsystem_dungeon"
+      ]
+    },
+    {
+      "hall": "LSystems_Competition",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Competition.md",
+      "sha256": "74817bb09458813d598bde544be1628b57d72a6ed0067361bfde4f06f2456eb3",
+      "words": 159,
+      "matched_quotes": [
+        "Is something wrong with B's instructions?"
+      ],
+      "named_anchors": [
+        "ForestCompetition"
+      ]
+    },
+    {
+      "hall": "LSystems_Living",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Living.md",
+      "sha256": "fe85ebb0c71035a0a03463036f9c3871ffa9fe98a4760be993927a5195f2e778",
+      "words": 161,
+      "matched_quotes": [
+        "There is pleasure in finding a body among these variations."
+      ],
+      "named_anchors": [
+        "genetic_tree_sculptor"
+      ]
+    },
+    {
+      "hall": "LSystems_Shape_Grammars",
+      "sequence": "lsystems",
+      "path": "halls/LSystems_Shape_Grammars.md",
+      "sha256": "6179bc48b2b25a37f5f4af1d0ef338ebcd90b978527fe77516628818b094c27c",
+      "words": 168,
+      "matched_quotes": [
+        "Walk beneath it."
+      ],
+      "named_anchors": [
+        "form_grammar_family",
+        "form_grammar_canopy"
+      ]
+    },
+    {
+      "hall": "Assemblage_Same_Desire",
+      "sequence": "lsystems",
+      "path": "halls/Assemblage_Same_Desire.md",
+      "sha256": "312af998d8947be31397223b9229de3099bcb05880c11f6c05703e7b73f0a458",
+      "words": 162,
+      "matched_quotes": [
+        "The choices have not been made again."
+      ],
+      "named_anchors": [
+        "ten_print_textile"
+      ]
+    },
+    {
+      "hall": "PG_Genetic_Evolution",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Genetic_Evolution.md",
+      "sha256": "958c150dff1c2fd46bed8e518f26d6d7c6b673b1b2cc9460afcde861a6bf2b1f",
+      "words": 164,
+      "matched_quotes": [
+        "Survival does not tell us that every surviving feature was rewarded."
+      ],
+      "named_anchors": [
+        "GeneticProgramming"
+      ]
+    },
+    {
+      "hall": "PG_Space_Colonization",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Space_Colonization.md",
+      "sha256": "de6320f98c4ab2ff10f012eaa996c657b1668f1876d43a21fcbd2b5e8d35493e",
+      "words": 153,
+      "matched_quotes": [
+        "A reached point becomes small and dark."
+      ],
+      "named_anchors": [
+        "space_colonization_algorithm"
+      ]
+    },
+    {
+      "hall": "PG_Branching_Growth",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Branching_Growth.md",
+      "sha256": "209cd648d0ddfb97423ae98d8f8d176a9b905ea2a9719b628172bcb369fda51d",
+      "words": 155,
+      "matched_quotes": [
+        "Several records may occupy one place."
+      ],
+      "named_anchors": [
+        "branching_growth_algorithm"
+      ]
+    },
+    {
+      "hall": "PG_Percolation_Network",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Percolation_Network.md",
+      "sha256": "1cb7c0b42af7049063a933ce294042e376a8d5cdab44e1505ccd49109204ac70",
+      "words": 161,
+      "matched_quotes": [
+        "Their visual contact has not disappeared."
+      ],
+      "named_anchors": [
+        "percolationnetwork_ca"
+      ]
+    },
+    {
+      "hall": "PG_Caves_Mazes",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Caves_Mazes.md",
+      "sha256": "c40a7a1b832b914aa79446b6ecffd9e4d53d50a688521f0a38f11e9052a8414d",
+      "words": 162,
+      "matched_quotes": [
+        "Backtracking is not an error to disguise."
+      ],
+      "named_anchors": [
+        "caverandomwalk",
+        "maze_generation"
+      ]
+    },
+    {
+      "hall": "PG_Sculpted_Forms",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Sculpted_Forms.md",
+      "sha256": "51c6069148dca863f8d4f5168e56eae21164b75a14e90b22af8548af17280993",
+      "words": 168,
+      "matched_quotes": [
+        "It can record a settled pile or an unfinished fall."
+      ],
+      "named_anchors": [
+        "cube_mound_scene",
+        "dome"
+      ]
+    },
+    {
+      "hall": "PG_Mirrored_Patterns",
+      "sequence": "proceduralgeneration",
+      "path": "halls/PG_Mirrored_Patterns.md",
+      "sha256": "fdfca699a51201c51872ad89ae35eef3189b92b3618083ca945b7ce4d2bd4a9d",
+      "words": 160,
+      "matched_quotes": [
+        "A thick skin can obscure connections that were obvious in the skeleton."
+      ],
+      "named_anchors": [
+        "mirror_cellular_texture_for_3d",
+        "rhizomatic_maze_space"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Soft_Body_Deformation",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Soft_Body_Deformation.md",
+      "sha256": "571cf2976bfa771674b160940891e6036757311e6a74caaef40db53db7a7399c",
+      "words": 162,
+      "matched_quotes": [
+        "A small arm holds one point at its top"
+      ],
+      "named_anchors": [
+        "jelly_cube",
+        "softmill"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Cloth_Physics",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Cloth_Physics.md",
+      "sha256": "a383faf69d35faf50fefcc82c6b897a318323610d0f25a7f2f5e5d08586216af",
+      "words": 162,
+      "matched_quotes": [
+        "Three pieces of architecture, and not one of them changes where the cloth is held."
+      ],
+      "named_anchors": [
+        "cloth_straps",
+        "softstopscene"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Carusell",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Carusell.md",
+      "sha256": "39d63ecba07768fbac1e9b04adc5a4a1590d0b6981c817b7f0793afaedcf9c5d",
+      "words": 162,
+      "matched_quotes": [
+        "its consequences continue."
+      ],
+      "named_anchors": [
+        "revolving_joy_ride",
+        "cloth_straps"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Obsticals",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Obsticals.md",
+      "sha256": "24780ebc1363d806598d2304a7dad7d69465b5c39bc010159a6558ecea94ffc2",
+      "words": 161,
+      "matched_quotes": [
+        "the edges do not move, the middles do."
+      ],
+      "named_anchors": [
+        "breathing_room",
+        "softbody_gallery_part2"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Obsticals_Part2",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Obsticals_Part2.md",
+      "sha256": "bc9201b54ecea8d4e044240fb5c6dfb4283b4b453e5298c988682f20317e9d81",
+      "words": 169,
+      "matched_quotes": [
+        "The most interesting result may be an awkward fold"
+      ],
+      "named_anchors": [
+        "softbody_gallery_part2"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Playground_of_Joy",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Playground_of_Joy.md",
+      "sha256": "91f073a548e03cecdfc037bb4bc62462c70b8eea6a12d01602fef0ae190a7e08",
+      "words": 155,
+      "matched_quotes": [
+        "A different stop could have become the sculpture."
+      ],
+      "named_anchors": [
+        "rounded_softbody_test",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "hall": "SoftBodies_Affect_Theory_Visualization",
+      "sequence": "softbodies",
+      "path": "halls/SoftBodies_Affect_Theory_Visualization.md",
+      "sha256": "6ff8b58f31db4469a67348d07938e92bd0166f37df37f4fb0101de32d7d0b26c",
+      "words": 158,
+      "matched_quotes": [
+        "Learning the recipe need not cancel that encounter."
+      ],
+      "named_anchors": [
+        "radiolaria"
+      ]
+    },
+    {
+      "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "sequence": "softbodies",
+      "path": "halls/ProceduralGeneration_Reaction_Diffusion_Systems.md",
+      "sha256": "2eaa2b24000880246809b7d1fef7484c4a3917d441a037df33634fd2dc2eed93",
+      "words": 161,
+      "matched_quotes": [
+        "It takes about a thousand."
+      ],
+      "named_anchors": [
+        "turing_pattern_generator",
+        "reaction_diffusion"
+      ]
+    },
+    {
+      "hall": "Topology_Entropy_Morphogenesis",
+      "sequence": "softbodies",
+      "path": "halls/Topology_Entropy_Morphogenesis.md",
+      "sha256": "7afb63fe0c4a00d4f8a4207c41e7832c62cc72ed687b193b89956e5aa164433d",
+      "words": 161,
+      "matched_quotes": [
+        "Which differences had been bundled into its single gesture?"
+      ],
+      "named_anchors": [
+        "entropy_morphogenesis"
+      ]
+    },
+    {
+      "hall": "ISO_Introduction",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_Introduction.md",
+      "sha256": "eb54af59875dadde4f7a52699bbc8d277590546a2bb6a89d61be4bb63b3e2155",
+      "words": 156,
+      "matched_quotes": [
+        "The source field stays fixed"
+      ],
+      "named_anchors": [
+        "voxel_noise_demo"
+      ]
+    },
+    {
+      "hall": "ISO_LookupTable",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_LookupTable.md",
+      "sha256": "cd08ba664ac1e8c6317a7e7008cd5c3b57f1e726c0e70fe6ec3a7a12983b1452",
+      "words": 156,
+      "matched_quotes": [
+        "Their signs choose a connection pattern"
+      ],
+      "named_anchors": [
+        "fifteen_cases_demo",
+        "the_threshold_opinion"
+      ]
+    },
+    {
+      "hall": "ISO_ShapesGallery",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_ShapesGallery.md",
+      "sha256": "235320fde760d0a2069035d119b43ff4e2ea344ceab04c1f3405e9c043987132",
+      "words": 160,
+      "matched_quotes": [
+        "Its labelled place remains empty"
+      ],
+      "named_anchors": [
+        "mc_shapes_gallery"
+      ]
+    },
+    {
+      "hall": "ISO_TorusGyroid",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_TorusGyroid.md",
+      "sha256": "4f2fa1469c817757f32afe6fdb0f888547e482c9785b9cbcdcca3b1c085d0a79",
+      "words": 161,
+      "matched_quotes": [
+        "Does a repeating surface have to be a collection of repeating objects?"
+      ],
+      "named_anchors": [
+        "mc_torus_sculpture",
+        "GyroidDemo"
+      ]
+    },
+    {
+      "hall": "ISO_Sculpting",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_Sculpting.md",
+      "sha256": "6104ffa7160bdebdc0c3f9cac1e6d231e110010b613ea89089462e8dbd348b3d",
+      "words": 165,
+      "matched_quotes": [
+        "Order has become part of the form."
+      ],
+      "named_anchors": [
+        "mc_sculpt_vr"
+      ]
+    },
+    {
+      "hall": "ISO_FlatTerrain",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_FlatTerrain.md",
+      "sha256": "2d185254c54be8e2a0a836276aa5719a8877f526c26f8a2f7c85768ddcbefb99",
+      "words": 159,
+      "matched_quotes": [
+        "How many times can the ground be above the same place?"
+      ],
+      "named_anchors": [
+        "mc_flat_landscape",
+        "mc_overhang_landscape"
+      ]
+    },
+    {
+      "hall": "ISO_PortalLandscape",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_PortalLandscape.md",
+      "sha256": "ab11d86b39b505689931d6a6b2c0829eb2a557414a9d3ce801eae328134b5a1c",
+      "words": 160,
+      "matched_quotes": [
+        "Some changes are small"
+      ],
+      "named_anchors": [
+        "marchingcubes_portal_landscape"
+      ]
+    },
+    {
+      "hall": "ISO_Caves",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_Caves.md",
+      "sha256": "9849555b55c7e6cc495d8df8ac813fc5c519314e52d290febbf2de562a7f4361",
+      "words": 168,
+      "matched_quotes": [
+        "this one writes seven torus fields into the ground"
+      ],
+      "named_anchors": [
+        "mc_portal_landscape",
+        "mc_inside_cave",
+        "queer_marching_cave"
+      ]
+    },
+    {
+      "hall": "ISO_CaveGeneration",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_CaveGeneration.md",
+      "sha256": "52cf876596aec3cec2ca7fec963a903e8c6743e02f9d9f743d890c1d78442a99",
+      "words": 164,
+      "matched_quotes": [
+        "The striped tunnel beside it is a drawn stand-in"
+      ],
+      "named_anchors": [
+        "marchingcubes_cave"
+      ]
+    },
+    {
+      "hall": "ISO_AnimatedNoise",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_AnimatedNoise.md",
+      "sha256": "ace09726dc3cec6192160f8dd71ed67ba9f01778d14c9102fb7d61ea0e807bc0",
+      "words": 159,
+      "matched_quotes": [
+        "Which block moved?"
+      ],
+      "named_anchors": [
+        "animated_noise_explorer"
+      ]
+    },
+    {
+      "hall": "ISO_Metaballs",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_Metaballs.md",
+      "sha256": "e6bea5f723926e97a8cc9a50bc9a30f63eab98f656db07b2c1bbcaaccd6ec22d",
+      "words": 160,
+      "matched_quotes": [
+        "Can two sources make one body before their centres meet?"
+      ],
+      "named_anchors": [
+        "metaball_world",
+        "nakama_metaballs",
+        "metaballs"
+      ]
+    },
+    {
+      "hall": "ISO_ImplicitModeling",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_ImplicitModeling.md",
+      "sha256": "882d5512811f35c8ce42b961a87192503c390305fc9f27a9226b6f6599319303",
+      "words": 166,
+      "matched_quotes": [
+        "the smoothing constant is 2.6"
+      ],
+      "named_anchors": [
+        "implicit_surface_modeling"
+      ]
+    },
+    {
+      "hall": "ISO_RhizomeBody",
+      "sequence": "isosurfaces",
+      "path": "halls/ISO_RhizomeBody.md",
+      "sha256": "57122a0f45707b0be586d6b12624a15f4b2c9fafa61915fff3580423f19e2abf",
+      "words": 173,
+      "matched_quotes": [
+        "Can you return by a route different from the one you arrived along?"
+      ],
+      "named_anchors": [
+        "rhizome_inside"
+      ]
+    },
+    {
+      "hall": "Boolean_Verbs",
+      "sequence": "boolean_surfaces",
+      "path": "halls/Boolean_Verbs.md",
+      "sha256": "b8a22f3c88d53b5e7d807bf59be04d1821f003f366642b3ae1ab8d4fc0535940",
+      "words": 154,
+      "matched_quotes": [
+        "Absence has been given a surface."
+      ],
+      "named_anchors": [
+        "csg_difference_demo",
+        "the_argument_of_solids"
+      ]
+    },
+    {
+      "hall": "Boolean_Gallery",
+      "sequence": "boolean_surfaces",
+      "path": "halls/Boolean_Gallery.md",
+      "sha256": "99a783946c0a82a7e058331737b87c6720b517e9037ae6d4e59c02a2433eec5e",
+      "words": 165,
+      "matched_quotes": [
+        "Its silence has changed."
+      ],
+      "named_anchors": [
+        "csg_difference_demo",
+        "removal_room"
+      ]
+    },
+    {
+      "hall": "Boolean_Works",
+      "sequence": "boolean_surfaces",
+      "path": "halls/Boolean_Works.md",
+      "sha256": "e1e87ee6c4ed98e336fa5b369b80df27972a6c1411e96bbbdd5c92cfb75f85a8",
+      "words": 164,
+      "matched_quotes": [
+        "a place to withdraw into"
+      ],
+      "named_anchors": [
+        "boolean_burrow"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_PhysarumColony",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_PhysarumColony.md",
+      "sha256": "abb4090c9129b1f7916198d1585c0c11f66a7565218494ba810f7d67f8978274",
+      "words": 163,
+      "matched_quotes": [
+        "a trace that outlasts the arrangement"
+      ],
+      "named_anchors": [
+        "PhysarumColony"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_FlowFields",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_FlowFields.md",
+      "sha256": "33c1fb5dd76f23e2dddde998b170af839cf17cbe7c5ea73bd18f7b1485c47841",
+      "words": 162,
+      "matched_quotes": [
+        "only the field knows which it is."
+      ],
+      "named_anchors": [
+        "FlowFieldMain"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_Boids_Algorithm.md",
+      "sha256": "1794cb57fec064ecfe458a627a411b9fdd2392811d9c8177d421823c8643a761",
+      "words": 166,
+      "matched_quotes": [
+        "the flock needs the disagreement."
+      ],
+      "named_anchors": [
+        "flocking_controls",
+        "boids_aquarium"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_Agent_Based_Modeling_ABM.md",
+      "sha256": "156e0dc36bdb334be08e641e4e267e74fcdbb196031652825149cc1ee0c6778a",
+      "words": 161,
+      "matched_quotes": [
+        "Replacing the travellers and erasing their history are two different acts."
+      ],
+      "named_anchors": [
+        "ant_colony_optimization"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_Ant_Colony_Optimization",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_Ant_Colony_Optimization.md",
+      "sha256": "e3fb7743ead3f3844a552f7103794488ea8ac2c22d43c2c61bc0faa53cc9aa59",
+      "words": 163,
+      "matched_quotes": [
+        "what it seeks and what it leaves."
+      ],
+      "named_anchors": [
+        "AntColonyV2"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_Particle_Swarm_Optimization.md",
+      "sha256": "f24d0a857e087b821e53568c97c127d9e4ea6fb9614a92778cf73d54e98097da",
+      "words": 168,
+      "matched_quotes": [
+        "its claim to be best has to be renewed."
+      ],
+      "named_anchors": [
+        "fitness_landscape_politics"
+      ]
+    },
+    {
+      "hall": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "sequence": "swarmintelligence",
+      "path": "halls/SwarmIntelligence_Swarm_Intelligence_Algorithms.md",
+      "sha256": "d9358ff3865bfc20e2880c40b504da292b5981f8353cfb71f9e394b16caa2c37",
+      "words": 166,
+      "matched_quotes": [
+        "POPULATION SUPPORT"
+      ],
+      "named_anchors": [
+        "ecosystem_simulation"
+      ]
+    },
+    {
+      "hall": "ML_Evolution",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Evolution.md",
+      "sha256": "670dc7a0b1750fca5ade46bafc8a9827595d2fcf029506c0973b9ddd39f8fd79",
+      "words": 171,
+      "matched_quotes": [
+        "There is a finish line after all."
+      ],
+      "named_anchors": [
+        "non_teleological_evolution"
+      ]
+    },
+    {
+      "hall": "ML_Gradient_Landscape",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Gradient_Landscape.md",
+      "sha256": "318a721b6d53b05af1777f97a3567c4bf1a83a0e0edfa4d8932e382f896b470a",
+      "words": 168,
+      "matched_quotes": [
+        "We need something to hold still"
+      ],
+      "named_anchors": [
+        "loss_function_comparator"
+      ]
+    },
+    {
+      "hall": "ML_Classification",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Classification.md",
+      "sha256": "1aafe26c57a64d1f52379a34958f779e42b1ed76eca6f7ae28f0484f1e07a866",
+      "words": 171,
+      "matched_quotes": [
+        "The boundary belongs to that meeting."
+      ],
+      "named_anchors": [
+        "enhanced_kmeans"
+      ]
+    },
+    {
+      "hall": "ML_Neural_Networks",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Neural_Networks.md",
+      "sha256": "b44c278f29374f65b5bfd4795c894f31f444c050904370939ec1c77dc32db08e",
+      "words": 170,
+      "matched_quotes": [
+        "a lasting change to the connection itself."
+      ],
+      "named_anchors": [
+        "neural_network_visualization"
+      ]
+    },
+    {
+      "hall": "ML_Perception",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Perception.md",
+      "sha256": "24a028f320ebb59e4713bf029c8c7031c2285ecccda87b91cd060a59dad19c1c",
+      "words": 167,
+      "matched_quotes": [
+        "one edge fragment that could belong to more than one object."
+      ],
+      "named_anchors": [
+        "computer_vision_vr"
+      ]
+    },
+    {
+      "hall": "ML_Sequence_Memory",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Sequence_Memory.md",
+      "sha256": "d8afc8d061bda9d5a3aff17fad09075380f77c2da602adfbedf235d23408b7ad",
+      "words": 171,
+      "matched_quotes": [
+        "the arithmetic runs out of present tense."
+      ],
+      "named_anchors": [
+        "lstms_vr"
+      ]
+    },
+    {
+      "hall": "ML_Generative",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Generative.md",
+      "sha256": "f9c64de103327946bee26ea0bfb08d34df8bb53ab4439a381429739d987e43d9",
+      "words": 170,
+      "matched_quotes": [
+        "the learning environment is partly made by another learner."
+      ],
+      "named_anchors": [
+        "generative_adversarial_networks_gans_vr"
+      ]
+    },
+    {
+      "hall": "ML_Synthesis",
+      "sequence": "machinelearning",
+      "path": "halls/ML_Synthesis.md",
+      "sha256": "3edd11a647c2cc67b92c3edc13b48ac437d34d314493d8092c56c24c478a24aa",
+      "words": 170,
+      "matched_quotes": [
+        "The population helping define normality"
+      ],
+      "named_anchors": [
+        "anomaly_detection"
+      ]
+    },
+    {
+      "hall": "GT_Foundations",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Foundations.md",
+      "sha256": "ccf5a239e7809ceee44fb29c20ba46e3f6c81164bdb35fa872e40ec5c0bd325e",
+      "words": 165,
+      "matched_quotes": [
+        "unfinished possibilities"
+      ],
+      "named_anchors": [
+        "two_travelers"
+      ]
+    },
+    {
+      "hall": "GT_Layout",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Layout.md",
+      "sha256": "d004417995425c0d4dc49a89ab33a5aefb775781f1111b6461ddaffcdcacb37f",
+      "words": 164,
+      "matched_quotes": [
+        "every vertex in this graph has exactly three neighbours"
+      ],
+      "named_anchors": [
+        "force_directed_layout"
+      ]
+    },
+    {
+      "hall": "GT_Pathfinding",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Pathfinding.md",
+      "sha256": "163fc34c1fb1b3240eb5865c3928143e54056fe3a712fc8f06ec4aa431083239",
+      "words": 159,
+      "matched_quotes": [
+        "some connections can survive a local change"
+      ],
+      "named_anchors": [
+        "impatient_river"
+      ]
+    },
+    {
+      "hall": "GT_Network_Analysis",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Network_Analysis.md",
+      "sha256": "c89d2af690e4231132c6bfcb5f41936055b1bc7d74ee276ec59b869df6c90575",
+      "words": 166,
+      "matched_quotes": [
+        "a useful small piece of evidence"
+      ],
+      "named_anchors": [
+        "network_analysis"
+      ]
+    },
+    {
+      "hall": "GT_Connectivity",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Connectivity.md",
+      "sha256": "e7d95e71e61800b4222fa5a1a85a242b8d81bb4b72e379a0f7afdfb6b2e7152f",
+      "words": 167,
+      "matched_quotes": [
+        "being discharged together from the unresolved stack."
+      ],
+      "named_anchors": [
+        "tarjan_algorithm"
+      ]
+    },
+    {
+      "hall": "GT_Spanning_Trees",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Spanning_Trees.md",
+      "sha256": "fd0598b72a653748dbc292912c4660f08d3cc4d149799d2d840a622b8033426f",
+      "words": 168,
+      "matched_quotes": [
+        "one extra edge to spend"
+      ],
+      "named_anchors": [
+        "mst_visualization"
+      ]
+    },
+    {
+      "hall": "GT_Flow",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Flow.md",
+      "sha256": "32fc02f3f9d2efd3b7f4bdb9b4795f19856be8e6851c736bc917445b35526e62",
+      "words": 165,
+      "matched_quotes": [
+        "could some of what was sent earlier be taken back?"
+      ],
+      "named_anchors": [
+        "push_relabel_algorithm"
+      ]
+    },
+    {
+      "hall": "GT_Matching",
+      "sequence": "graphtheory",
+      "path": "halls/GT_Matching.md",
+      "sha256": "feaca7959daa1c1473837dc9a80a8476c993ed769bbd15fda2e63ecb613f8715",
+      "words": 169,
+      "matched_quotes": [
+        "Nobody has gained a new connection."
+      ],
+      "named_anchors": [
+        "edmonds_algorithm"
+      ]
+    },
+    {
+      "hall": "Euclid_Parallel",
+      "sequence": "foundationscrisis",
+      "path": "halls/Euclid_Parallel.md",
+      "sha256": "2ed2a34a2ed936eb3fb9ae8ff414a44bf6031e1419e1c60cb56864a53a1ca3db",
+      "words": 173,
+      "matched_quotes": [
+        "The gold arrives ahead of the argument."
+      ],
+      "named_anchors": [
+        "euclid_postulates_plaque",
+        "euclid_postulates_plaque"
+      ]
+    },
+    {
+      "hall": "NonEuclidean_Spaces",
+      "sequence": "foundationscrisis",
+      "path": "halls/NonEuclidean_Spaces.md",
+      "sha256": "d3c5b7ba202c35fbe9c99bc5ed23bc0e8303bf35ccec855764443921eb2c923b",
+      "words": 167,
+      "matched_quotes": [
+        "The earlier triangle printed three sixties."
+      ],
+      "named_anchors": [
+        "triangle_curvature_workbench"
+      ]
+    },
+    {
+      "hall": "Russell_Paradox",
+      "sequence": "foundationscrisis",
+      "path": "halls/Russell_Paradox.md",
+      "sha256": "bef850dd2af1594dcde456aa8b58e48384c7ddcb7ec5bf7bf897a9440fba39d8",
+      "words": 170,
+      "matched_quotes": [
+        "Your hand has somewhere to go"
+      ],
+      "named_anchors": [
+        "russell_paradox_workbench"
+      ]
+    },
+    {
+      "hall": "Godel_Incompleteness",
+      "sequence": "foundationscrisis",
+      "path": "halls/Godel_Incompleteness.md",
+      "sha256": "35af9c95cd80f4c6555dff1165d70969a5e74bf3ec829fd2894238930e79ff49",
+      "words": 170,
+      "matched_quotes": [
+        "Adding the sentence moves the gap up."
+      ],
+      "named_anchors": [
+        "godel_sentence_machine",
+        "incompleteness_tower"
+      ]
+    },
+    {
+      "hall": "Escher_Impossible",
+      "sequence": "foundationscrisis",
+      "path": "halls/Escher_Impossible.md",
+      "sha256": "fca4295e692d01d738eb859da0fd37199efa975797202d44df8b05dd46eb19e8",
+      "words": 161,
+      "matched_quotes": [
+        "Which one first persuaded you that it might?"
+      ],
+      "named_anchors": [
+        "escher_staircase",
+        "penrose_triangle"
+      ]
+    },
+    {
+      "hall": "Brouwer_Intuitionism",
+      "sequence": "foundationscrisis",
+      "path": "halls/Brouwer_Intuitionism.md",
+      "sha256": "8ae021f0f218cc4d46080773e7809d11845fd5a3e154a7e877e5177bdca0fbf5",
+      "words": 171,
+      "matched_quotes": [
+        "the clock is not the author of the next term."
+      ],
+      "named_anchors": [
+        "brouwer_choice_sequence",
+        "cantor_diagonal_workbench"
+      ]
+    },
+    {
+      "hall": "Florensky_Paraconsistent",
+      "sequence": "foundationscrisis",
+      "path": "halls/Florensky_Paraconsistent.md",
+      "sha256": "bab5c796a131346e7d05aff64887600cf3acfea00b1cb6b8a84854ac50a9e727",
+      "words": 159,
+      "matched_quotes": [
+        "Q: alarm triggered = NO SUPPORT"
+      ],
+      "named_anchors": [
+        "both_true_gate"
+      ]
+    },
+    {
+      "hall": "Crisis_Synthesis",
+      "sequence": "foundationscrisis",
+      "path": "halls/Crisis_Synthesis.md",
+      "sha256": "90467ada699d71767261df953ade5cef75303957dbf38cef52d5aeba74e3fd5b",
+      "words": 172,
+      "matched_quotes": [
+        "You can look into your description."
+      ],
+      "named_anchors": [
+        "goedel_atrium"
+      ]
+    },
+    {
+      "hall": "QFEP_Introduction",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Introduction.md",
+      "sha256": "9adaddf9d07147690ac940e1639e18ea18d26f26a65956f37735bac011f4f4bd",
+      "words": 173,
+      "matched_quotes": [
+        "The outline remembers what the total cannot."
+      ],
+      "named_anchors": [
+        "qfep_balance_workbench"
+      ]
+    },
+    {
+      "hall": "QFEP_F_Term",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_F_Term.md",
+      "sha256": "1b66760674056807570bf2045b0dd482a4cb024e995c2dbd6c6e0a91131d64ae",
+      "words": 165,
+      "matched_quotes": [
+        "without making the world easier."
+      ],
+      "named_anchors": [
+        "shannon_workbench"
+      ]
+    },
+    {
+      "hall": "QFEP_E_Term",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_E_Term.md",
+      "sha256": "754b7f3192ae419af28511f525c503d747d4b40ab88e18fd2a7987c6e58fdf94",
+      "words": 170,
+      "matched_quotes": [
+        "Eighteen closures remove fifty-four endings"
+      ],
+      "named_anchors": [
+        "entropy_fan"
+      ]
+    },
+    {
+      "hall": "QFEP_Lambda_Spectrum",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Lambda_Spectrum.md",
+      "sha256": "a72177f8bea328192eb4845978dbcf2ec9cf3b92830151d1412a3a11c1d8e282",
+      "words": 169,
+      "matched_quotes": [
+        "Light has made a recommendation"
+      ],
+      "named_anchors": [
+        "lambda_hall"
+      ]
+    },
+    {
+      "hall": "QFEP_Phi_Term",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Phi_Term.md",
+      "sha256": "9600a93f37b626974bef00ac9bdd422a70c372aa02a11315d658963a43740555",
+      "words": 170,
+      "matched_quotes": [
+        "Does the upward movement feel different"
+      ],
+      "named_anchors": [
+        "phi_slider"
+      ]
+    },
+    {
+      "hall": "QFEP_Edge_Of_Chaos",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Edge_Of_Chaos.md",
+      "sha256": "8ee676d7093a2146529935cf4957c6f327dd8e2ac1bf8011c7143db0ca1ecdac",
+      "words": 171,
+      "matched_quotes": [
+        "SAME START / SAME TIME"
+      ],
+      "named_anchors": [
+        "edge_of_chaos_unlocked"
+      ]
+    },
+    {
+      "hall": "QFEP_Sandbox",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Sandbox.md",
+      "sha256": "c24b24e22805b16f1fcfac6d36418d5883099ff65df79ea5d547f800867f0f29",
+      "words": 172,
+      "matched_quotes": [
+        "Disconnection has left a memory of your action."
+      ],
+      "named_anchors": [
+        "qfep_reactor"
+      ]
+    },
+    {
+      "hall": "QFEP_Synthesis",
+      "sequence": "qfeplaboratory",
+      "path": "halls/QFEP_Synthesis.md",
+      "sha256": "5f08ad3a2e2e5047bbd8d08596de0266584144b909e4304b38c821a18ba8f112",
+      "words": 177,
+      "matched_quotes": [
+        "Steady pressure is something you have given it."
+      ],
+      "named_anchors": [
+        "queer_morphology_specimen"
+      ]
+    },
+    {
+      "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/CriticalAlgorithms_Algorithmic_Bias_Visualization.md",
+      "sha256": "e247d838f73bc22fd616a011ca72767be2adef33f76c54728fccf88aedf8a2b0",
+      "words": 172,
+      "matched_quotes": [
+        "Presence in a representation"
+      ],
+      "named_anchors": [
+        "bias_from_inside"
+      ]
+    },
+    {
+      "hall": "CriticalAlgorithms_Applied_Ethics",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/CriticalAlgorithms_Applied_Ethics.md",
+      "sha256": "bf5cc23c02b481b783564ab6710e4601bfce83da80f9f0593d64606281f66c8b",
+      "words": 168,
+      "matched_quotes": [
+        "The ring has returned, but its invitation has changed."
+      ],
+      "named_anchors": [
+        "room_shape_demonstrator"
+      ]
+    },
+    {
+      "hall": "SpeculativeComputation_Paraconsistent_Engineering",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/SpeculativeComputation_Paraconsistent_Engineering.md",
+      "sha256": "52e278f1b8c359bd946be41c158bfa009e7346fecb69f84e2302f5a34f5cb004",
+      "words": 168,
+      "matched_quotes": [
+        "Return to OVERLAP when you want to see what settlement shortened."
+      ],
+      "named_anchors": [
+        "merge_conflict_visualizer"
+      ]
+    },
+    {
+      "hall": "SpeculativeComputation_Situated_Computation",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/SpeculativeComputation_Situated_Computation.md",
+      "sha256": "3dad121639794dbf113c141c21863b6087a015550d56502351a9e3cc88249acd",
+      "words": 168,
+      "matched_quotes": [
+        "an assigned judgement on a screen"
+      ],
+      "named_anchors": [
+        "situated_readout"
+      ]
+    },
+    {
+      "hall": "SpeculativeComputation_Collective_Knowledge",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/SpeculativeComputation_Collective_Knowledge.md",
+      "sha256": "2502adcf8e0117c7be2d46917e5ad6db110d11d8b68a63e1f789140cd2ade75b",
+      "words": 172,
+      "matched_quotes": [
+        "The table has no head."
+      ],
+      "named_anchors": [
+        "the_commons_table"
+      ]
+    },
+    {
+      "hall": "SpeculativeComputation_Rhizome_Network",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/SpeculativeComputation_Rhizome_Network.md",
+      "sha256": "0e810e8c3673c3371cda71f3de0fdc14f26f739f4bbffbb3f7627570e99c06b2",
+      "words": 180,
+      "matched_quotes": [
+        "A place can become familiar before you can draw its position"
+      ],
+      "named_anchors": [
+        "rhizome_cave_demo"
+      ]
+    },
+    {
+      "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/AdvancedLaboratory_Lab_Equipment_Simulation.md",
+      "sha256": "8216ee6586b3d6cb418f7b39d1fa23601a4297ca745fea6d8039e28cde691413",
+      "words": 178,
+      "matched_quotes": [
+        "The hand has come back without going back.",
+        "This elbow comes with it."
+      ],
+      "named_anchors": [
+        "MolecularDesigner"
+      ]
+    },
+    {
+      "hall": "PostCrisis_Synthesis",
+      "sequence": "postfoundationscrisis",
+      "path": "halls/PostCrisis_Synthesis.md",
+      "sha256": "e286f0982455714524b3feeb1164d4d44466d84155ffe6cb7e87a40fcdfef456",
+      "words": 180,
+      "matched_quotes": [
+        "The hand has arrived. Your hand is missing."
+      ],
+      "named_anchors": [
+        "assembly_return",
+        "accountability_ledger"
+      ]
+    }
+  ],
+  "coverage_complete": true,
+  "editorial_checks_pass": false
+}

@@ -1,0 +1,52 @@
+{
+  "captured_at": "2026-10-02T10:00:21.041953+00:00",
+  "base_commit": "5219cbf4ed8faa5c3f441bc6c54d68e8d1955df8",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "graphtheory",
+  "sequence_sha256": "4a52682d804f8a45472af41545017dadc8df46439db6d71fd6ce597d6cc75c58",
+  "maps": [
+    {
+      "map": "GT_Foundations",
+      "path": "commons/maps/GT_Foundations/final.md",
+      "sha256": "57ac8717dc626028bbe393e0ca75ecc46f84149b0f8dcabcfc10f95bb3a65f6f"
+    },
+    {
+      "map": "GT_Layout",
+      "path": "commons/maps/GT_Layout/final.md",
+      "sha256": "0be2e7990d078572bb5cd8092c02023918f4196538f2e2afdfeb78877c7d56b0"
+    },
+    {
+      "map": "GT_Pathfinding",
+      "path": "commons/maps/GT_Pathfinding/final.md",
+      "sha256": "e633372c993e62da327b3ec46dc460985edee310464831b1471b6b07dc234599"
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "path": "commons/maps/GT_Network_Analysis/final.md",
+      "sha256": "a689626d456bbc14b8f935c868efc0cf3988897df48471cfc62f74a254b25bfe"
+    },
+    {
+      "map": "GT_Connectivity",
+      "path": "commons/maps/GT_Connectivity/final.md",
+      "sha256": "f5ac5e0de1af30ad62a5163855c41858f090daddf6edf157a7d74b20bf9d9eb6"
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "path": "commons/maps/GT_Spanning_Trees/final.md",
+      "sha256": "a5a585aa16370d947fa31c78f04a16b2b15c1596724f368afbf2e8b0bfd3df40"
+    },
+    {
+      "map": "GT_Flow",
+      "path": "commons/maps/GT_Flow/final.md",
+      "sha256": "4bc211c5def6430e9bd181359462ab6a7b2ad0471654ed3ccd71e7241f8bb683"
+    },
+    {
+      "map": "GT_Matching",
+      "path": "commons/maps/GT_Matching/final.md",
+      "sha256": "89c3b5158794d327b13bca25b912db843a49ca5e2715e87edb3d60ea5ce335dc"
+    }
+  ],
+  "output_sha256": "60a07948cdf659da1f150285ab08f372a4cda5c10623c54448024d7b34102c2c"
+}

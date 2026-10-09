@@ -1,0 +1,98 @@
+[
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Random_Rotate_Random_XYZ",
+    "new": "What remains in a changing stack"
+  },
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied humanoid_walker engine — constraint 0.708→0.891, walkability 0.583→0.893]",
+    "new": "Two complete MultiMesh stacks fit a shared ten-metre display. Pause accumulated drift, rotation and darkening; compare fixed specimen size with unequal configured rates, then restore the initial arrangement."
+  },
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Separate changes in position, orientation and appearance while specimen size remains fixed",
+      "Pause and resume accumulated perturbation without restarting the onset delay",
+      "Distinguish restoring an initial arrangement from replaying an identical stochastic future",
+      "Recognise unequal configured rates as a limit on attributing differences to shape alone"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Walk/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Compare a proposed step, its reflected endpoint and the stored trail",
+      "Distinguish the 2D, 3D and bounded LEVY rules",
+      "Replay positions at equal step counts and separate visual emphasis from population",
+      "Inspect omitted wall contacts, discarded history and capped simulation time"
+    ],
+    "new": [
+      "Compare a proposed step, its reflected endpoint and the stored trail",
+      "Distinguish 2D, 3D and bounded inverse-square-root LONG STEP rules",
+      "Replay positions at equal step counts and separate visual emphasis from population",
+      "Inspect omitted wall contacts, discarded history and capped simulation time"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Walk/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+    "new": "A seeded glass walk exposes step proposals, reflected endpoints, retained trails and two clocks. A raised-cell terrain and a held drawing point show what happens when the same family of rules meets ground or hand."
+  },
+  {
+    "path": "commons/maps/Random_Mushrooms/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+    "new": "Three encounters compare population recipes, sampled wardrobes and changed constructions: a six-template mushroom bed, six authored arrival slots with DRESS/FORMS, and a three-seed couture comparison."
+  },
+  {
+    "path": "commons/maps/Random_Mushrooms/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Follow template copies and separate their placement routines",
+      "Remove only per-instance scale variation under the same seed",
+      "Distinguish rejected candidates from outside-bed ring members",
+      "Ask which body shapes and interaction capabilities the recipe permits"
+    ],
+    "new": [
+      "Follow template copies and distinguish scattering, rings, clusters and rejected candidates",
+      "Remove per-instance scale variation while retaining the draws that place the population",
+      "Compare resampling a wardrobe with changing its available forms without changing arrivals",
+      "Hold three seeds while changing garment construction, then ask which capabilities remain absent"
+    ]
+  }
+]

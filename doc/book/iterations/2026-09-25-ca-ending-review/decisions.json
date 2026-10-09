@@ -1,0 +1,22 @@
+{
+  "book_cellularautomata.003": {
+    "status": "done",
+    "triage": "comment",
+    "decision": "Already corrected in the current chapter: The next hall, the first of Fractals, changes the instruction. Verified against the current opening of Fractal_Recursion and preserved this paragraph verbatim. No duplicate rewrite needed."
+  },
+  "book_cellularautomata.006": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "The chapter now says the hall was conceived under the name Edge of Chaos, rather than implying the visitor has seen that title in the room. Langton remains a question about retaining, transmitting and changing information. Corrected the lambda footnote: non-quiescent rule-table outputs, not living cells in a field. Removed the overgeneralisation that every image filter is a cellular automaton run once; retained the concrete blur comparison and critical ending."
+  },
+  "book_cellularautomata.019": {
+    "status": "done",
+    "triage": "comment",
+    "decision": "The old plan row does contain 28 piers, but the current museum replaces an authored row with _derive_map_row at build time (endless_museum.gd around 8048). Native queries at the changed cell and across the full B volume find no collider; interior images agree. The old claim that a plan re-apply is required is stale. Kept both failed obstruction hypotheses as diagnostics. No live plan/bake or map rewrite was needed."
+  },
+  "book_cellularautomata.025": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "The newer technical/intent/inventory documents already describe the installed comparison. Archived the remaining older critical essay verbatim in wireworld-proposal.md with an explicit speculative status; current critical.md follows the floor image, recursive volume, recognition, failed correspondence and bodily support. It no longer presents code as verification of philosophical theories. Corrected only the explorer registry description and QFEP connection, which had promised unimplemented custom neighbourhood tables and universal computation visible at an edge. Existing Wireworld material and both primary works remain."
+  }
+}

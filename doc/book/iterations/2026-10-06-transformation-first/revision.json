@@ -1,0 +1,96 @@
+{
+  "sequence": "Bring the familiar cube into the next museum hall. Move it without turning it, turn it without changing its dimensions, then change its size. Compare what each operation preserves and what happens to the space around it. A moving surface can carry you; a turn can align a crossing; an enlarged doorway can admit the same body that could not enter before. Learn to choose displacement, axis, pivot and scale, then let time or proximity vary those choices. At the end, combine the three operations into a passage. Keep the tutorial forms in black, white and grey. Programming develops because it gives the student control over these transformations, while the reflective text follows the possibilities and exclusions they create.",
+  "halls": [
+    {
+      "id": "Trans_Pre", "title": "Move, turn, change size", "plate": "trans-pre.png",
+      "focus": "Position, orientation and size are three different changes.",
+      "extension": "Animate one operation, then combine known ones.",
+      "summary": "Follow the plate's still cube, rising cube, added turn and pulse. Reuse CubeBody and first set its position, orientation and scale separately, returning to the same starting pose between comparisons. Identify translation, rotation and scaling by what changes: centre, facing or dimensions. Translation keeps size and orientation; rotation keeps internal distances; positive uniform scaling keeps proportions. Then use elapsed seconds to animate one of these changes, before adding the others as the hall does. Explain assignment and delta where they become useful. Predict which corner, edge length or face mark will change in a new pose. Collection remains supplied. Carry three distinct operations on the same construction.",
+      "object": "The familiar CubeBody with its grayscale appearance",
+      "change": "Set position, orientation and uniform scale separately; compare what changes and remains. Then animate one operation with elapsed seconds.",
+      "given": "Existing museum room, light and player; collection; a declared face-mark helper if needed. The printed code creates the learner cube and any lesson readout.",
+      "later": "Sine is optional after linear motion; full state-machine design, event architecture and exhaustive reset cases are not the first lesson.",
+      "checks": ["A selected translation changes centre without changing size or orientation; a selected rotation preserves internal distances; a positive uniform scale preserves proportions.", "The optional timed variation reaches the prescribed pose after equal elapsed time at two frame-step sizes; returning to the starting pose restores the comparison."],
+      "transfer": "Choose a new pose using one operation; predict the changed and preserved properties, then verify them.",
+      "carry": "Three distinct transforms of the same constructed body, with one understood timed variation."
+    },
+    {
+      "id": "Trans_Introduction", "title": "Three ways to make a crossing", "plate": "trans-introduction.png",
+      "focus": "Travel, turning and growth make different crossings.",
+      "extension": "Move the bank; connect one control to the changed parameter.",
+      "summary": "Compare the plate's travelling surface, growing cube and quarter-turn plank. Reuse the three operations in a small complete model beside the existing crossings: translation carries a surface between banks; scaling extends its reach about a fixed centre; rotation aligns its length with the gap. Hold a chosen pose and inspect whether the surfaces meet before adding travel, turning time or a pause. Move the far bank while keeping the plank's length and pivot fixed, then predict why the old angle no longer guarantees a crossing. Explain the supplied control's event connection only as needed to change that parameter. Rider transport and physical collision stay supplied. Carry transformation as a spatial relation between bodies.",
+      "object": "Familiar constructions as a carrier, growing support and turning span beside fixed banks",
+      "change": "Compare three transforms by their effect on a crossing; vary one bank position while span length and pivot stay fixed.",
+      "given": "Installed physical crossings, collision and rider transport; declared input controls. The reduced example creates its own visible comparison bodies.",
+      "later": "General event architecture is outside the core comparison. Explain only the connection used; do not rebuild player transport.",
+      "checks": ["Translation, scale and rotation produce their declared poses relative to fixed banks; a changed bank leaves the span's length and pivot unchanged.", "If the control extension is included, slider and home request set the declared target, and gradual return does not teleport the current position."],
+      "transfer": "Choose another bank spacing; predict which transform or dimension would have to change for the visible surfaces to meet.",
+      "carry": "A transform's consequence depends on the surrounding geometry and the body using it."
+    },
+    {
+      "id": "Trans_Translation", "title": "Choose a displacement and a journey", "plate": "trans-translation.png",
+      "focus": "Change position along an axis or a combined direction; keep facing and size.",
+      "extension": "Follow a short stored route.",
+      "summary": "The plate's carrier follows a sloping path while its top stays level: translation changes position without requiring a turn. Move the familiar cube along X, Y and Z, then combine components into a diagonal displacement. Reuse Lines to distinguish direction from distance and name the coordinate frame. First assign the destination; then interpolate between start and finish while retaining orientation and size. Compare a direct diagonal with a journey that rises before moving sideways, as in the two exit handles. A further step uses a short waypoint list: Trace kept movement as data; here data directs movement. Carry the ability to choose both displacement and route; the museum supplies rider carrying.",
+      "object": "The familiar cube translated through a declared local frame",
+      "change": "Add axial and combined displacements; distinguish a destination from its timed journey. A waypoint route is a further step.",
+      "given": "Museum carrier and rider connection; guided and free handle mechanisms. Learner code creates and places the visible route model.",
+      "later": "Do not begin with waypoint bookkeeping. Teach displacement and interpolation first; add route indices and repeated-point guards only for the route extension.",
+      "checks": ["Axial and diagonal displacements reach the declared destinations while orientation and dimensions stay fixed.", "Two selected journeys reach the same endpoint through different intermediate positions. If the waypoint extension is written, its repeated-position guard, final stop and time stepping are tested."],
+      "transfer": "Choose a different displacement, then two different routes to its endpoint; predict what will remain identical.",
+      "carry": "Control of translation direction, distance and journey; stored routes become available when needed."
+    },
+    {
+      "id": "Trans_Rotation", "title": "A turn needs a centre and room", "plate": "trans-rotation.png",
+      "focus": "Change axis, angle or pivot; keep the body's internal distances.",
+      "extension": "Reverse two turns and inspect the marked result.",
+      "summary": "Use the plate's marked cube to distinguish a repeated outline from a returned orientation. Set an angle around X, Y or Z, then move the pivot and compare spinning in place with travelling around another centre. Reuse local coordinates and a small returning function for centre plus rotated offset; explain angle units at their first use. Follow a corner through intermediate poses to see why the swept space exceeds one resting pose. Predict a quarter-turn and verify that the body's dimensions remain fixed. Once this is clear, reverse a chosen X/Y turn pair and compare the face mark. Rider orientation and sweep drawings are supplied. Carry control of axis, angle and pivot.",
+      "object": "The familiar marked cube relative to a chosen pivot",
+      "change": "Compare axis, angle and pivot, then inspect intermediate swept space. Compare a particular reversed turn pair as an extension.",
+      "given": "Museum rides and their upright-rider rules; optional sweep display and face-mark helper; engine rotation operation.",
+      "later": "General matrix algebra, full ride mechanics and rotation of large arrays are not prerequisites. Not every pair of operations fails to commute.",
+      "checks": ["The chosen turn preserves internal distances; rotating the offset preserves its distance from the fixed pivot in the declared frame.", "A chosen non-commuting X/Y pair changes the marked orientation when reversed; predicted intermediate corner positions agree with the calculation."],
+      "transfer": "Move the pivot while keeping the body and angle, then predict the changed path and space required.",
+      "carry": "Deliberate choice of rotation axis, angle, pivot and operation order."
+    },
+    {
+      "id": "Trans_Scale", "title": "The same proportions, another possibility", "plate": "trans-scale.png",
+      "focus": "Equal factors preserve proportions; unequal factors change them.",
+      "extension": "Scale a group while keeping an outside witness fixed.",
+      "summary": "The plate's small doorway becomes usable while the visitor stays the same size. Begin with the familiar cube beside a fixed sphere: multiply all dimensions by one positive factor, then change only one axis and compare proportions. Make the distinction visible before introducing a group. Put two familiar cubes beneath one created parent and scale it; predict their world sizes and spacing while their local positions stay unchanged. Keep the sphere outside the group. Return to the museum's enlarged room and its separate visitor relocation: scaling the surroundings did not scale the visitor or walking speed. The bottle and physics remain supplied. Carry deliberate control of size, proportions and which objects share the change.",
+      "object": "The familiar cube, then a small cube group beside the unchanged sphere",
+      "change": "Compare uniform with single-axis scaling, then group scaling against a fixed reference.",
+      "given": "Museum bottle, enlarged room, visitor relocation and collision; prepared view/player. Learner code creates its group and witness.",
+      "later": "Negative/zero scale, physics-body resizing internals and full scene-graph theory are outside this comparison.",
+      "checks": ["Uniform positive scaling preserves dimension ratios; a single-axis change produces the predicted new ratios.", "A scaled parent changes child world sizes and spacing without editing their local positions; the outside witness stays fixed."],
+      "transfer": "Choose factors that change width while retaining height, then explain why uniform scaling would do something different.",
+      "carry": "Scale factors, preserved or changed proportions, and the scope of a grouped transform."
+    },
+    {
+      "id": "Trans_Body", "title": "Let distance turn into size or angle", "plate": "trans-body.png",
+      "focus": "Replace time with proximity as the driver of turn or size.",
+      "extension": "Compare a returning response with a deliberately retained change.",
+      "summary": "Follow the plate's opening slats and shrinking blocks. Reuse a known rotation or scale, replacing elapsed time with the visitor's distance in a named frame. Give the familiar cube a bounded size response, then use the same input range to turn it instead; predict what happens at near, middle and far positions. The calculation and any reach condition now have an immediate spatial purpose. Leave and see the transform return. Compare this with the lattice's missing cells: removal changes the collection, rather than simply changing a surviving body's pose. A retained flag is an optional way to keep one response after departure. Tracking and collision remain supplied. Carry a transformation driven by bodily relation.",
+      "object": "The familiar cube whose size or turn responds to visitor distance",
+      "change": "Map a declared distance range to scale or angle. Compare return with a retained response only after this works.",
+      "given": "Visitor-position query, tracking, museum collision updates and lattice removal system.",
+      "later": "General state semantics and persistent storage are outside the lesson. A boolean flag is a small optional extension, not a replacement for the spatial comparison.",
+      "checks": ["Near, midpoint and far inputs produce the declared scale or angle in a consistent frame, with bounds held outside the range.", "Moving away restores the reversible transform. If the retained variant is included, only its chosen state persists until reset; removal is never presented as a pose transform."],
+      "transfer": "Apply the same distance range to angle instead of scale and predict the changed opening.",
+      "carry": "A spatial relationship can drive a familiar transform; response and removal remain distinct."
+    },
+    {
+      "id": "Trans_Pit", "title": "Compose an opening", "plate": "trans-pit.png",
+      "focus": "Combine operations; inspect the space left between moving bodies.",
+      "extension": "Choose a different timing or opening rule.",
+      "summary": "The plate returns to translation, rotation and scale as changes in available space: a block arrives, a slab sweeps past, a cube grows into a gap. Inspect an intermediate pose, not just the beginning and end. Then reuse two CubeBody instances to make a small model of the hall's opening leaves, coordinating displacement, angle and scale through one bounded progress value. Keep the frame fixed and predict which operation produces each part of the opening. Supply occupancy and physical contact; choose a new timing or sequence of known operations and compare the resulting gap. Add no required syntax topic here. Carry an authored composition that Arrays can repeat and vary across many bodies.",
+      "object": "Two familiar CubeBody instances forming a small opening mechanism",
+      "change": "Compose translation, rotation and scale, inspecting intermediate space against a fixed frame.",
+      "given": "Museum airlock and physical leaves; declared occupancy input and collision support. The small visual model is constructed by the printed lesson.",
+      "later": "No required new syntax. A visible gap does not certify physical clearance or accessible passage for every body.",
+      "checks": ["Each selected progress value produces the declared displacement, angle and scale on both leaves while the frame stays fixed.", "Intermediate poses differ as predicted when timing/order is varied; declared occupancy and reset behaviour are tested if included."],
+      "transfer": "Choose another timing or ordering of known operations and compare an intermediate opening, not only the final pose.",
+      "carry": "An authored composition of transforms, ready to repeat or vary across a collection."
+    }
+  ]
+}

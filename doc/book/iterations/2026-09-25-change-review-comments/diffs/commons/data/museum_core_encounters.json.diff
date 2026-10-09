@@ -1,0 +1,25 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -11,9 +11,9 @@
+     "reason": "Finite rate, held contributions and requested endpoint comparison; two bench moves support the manuscript order.",
+     "map_sha256": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+     "text_path": "commons/maps/Change_Intro/final.md",
+-    "text_sha256": "a05f06ffada211a6c937bee51934b0518fac6cd902a84b2e92f23e62492bc8c0",
++    "text_sha256": "603a98e70b26c070df203cbe77324bf203ec24313f12593d8e7ca673d5833873",
+     "hash_method": "SHA-256 of raw file bytes",
+-    "local_review": "doc/book/iterations/2026-09-24-change-reading/index.html#reading-Change_Intro"
++    "local_review": "doc/book/iterations/2026-09-25-change-review-comments/index.html#Change_Intro"
+   },
+   "Flow_Field": {
+     "sequence": "change",
+@@ -25,8 +25,8 @@
+     "reason": "Sample direction at the current position, then let the update choose the next address. Status and controls are exposed without changing the particle rule.",
+     "map_sha256": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+     "text_path": "commons/maps/Flow_Field/final.md",
+-    "text_sha256": "999c2421fd4b3d7d4ae610c825bc59379196748a7a7b0ecbcb5cd433d242d92d",
++    "text_sha256": "fdb785529330954c28f55e95165fc6152eba8cce048dbb58db796fde5fd2ee29",
+     "hash_method": "SHA-256 of raw file bytes",
+-    "local_review": "doc/book/iterations/2026-09-24-change-reading/index.html#reading-Flow_Field"
++    "local_review": "doc/book/iterations/2026-09-25-change-review-comments/index.html#Flow_Field"
+   }
+ }

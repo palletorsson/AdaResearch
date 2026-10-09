@@ -1,5 +1,23 @@
 # Short-speak and type-safe text
 
+## Encounter-led progression, 3 October 2026
+
+Teach a programming concept when the current encounter gives the learner a reason to use it. Point introduces variables through a position; Trace introduces an ordered one-dimensional list of positions and a for loop over that list. Later arrays and tiling chapters develop those skills rather than introduce them from nothing. Use Learning Processing and The Nature of Code as teaching references, with the Ada spine as the route.
+
+tutorial.md teaches how to construct, change and inspect the encounter. final.md follows its critical, poetic and associative questions. They share artifacts and accurate claims, but need not carry the same explanations, pace or code. Adding a programming concept to a tutorial does not require adding it to final.md.
+
+This supersedes the 2 October suggestion to leave Trace’s list entirely supplied, and the fixed allocation “loops first in Array, arrays first in Tiling.” Keep the movement and drawing infrastructure supplied; teach the short ordered list and its `for` traversal in Trace itself. Point Zero attends to ready/process; Point explains variables in a concrete construction. An early counter can preview a variable without carrying the full explanation.
+
+Continue one tutorial at a time. The sketch and scaffold record this new progression; the written functional draft, its type declarations and runnable studies must be updated together when each lesson is rewritten. Do not silently change final.md to carry tutorial explanations.
+
+
+## Spine-first correction, 2 October 2026
+
+Use the current spine and each map’s tutorial.md as the scaffold. Programming prerequisites guide the size of each step, not a competing route. Record local exceptions: introduce one essential operation earlier, borrow an explicit component, or return to its implementation later. A reflective hall need not introduce a new coding feature.
+
+The canonical source index and the first chapter's map-by-map decisions are in [sketch/SPINE_SCAFFOLD.md](sketch/SPINE_SCAFFOLD.md). All twelve Primitives tutorials exist. The 25 chapter order already matches the spine; the current chapter-internal draft does not yet. Start the next prose pilot with Point Zero (`_ready`, `_process`, counter), then Point One (code-created visible and solid marker), then Coordinates. Do not treat the earlier sphere-first draft as the final route or rewrite every lesson at once.
+
+
 The form every lesson of the Godot course is written in. Agreed with Palle on 2 October 2026:
 "a compressed poetic technical form", a little less poetic than the first draft.
 
@@ -47,49 +65,15 @@ The run line was a bullet in 2.1 and plain in 2.2 to 2.8: it is plain everywhere
 A lone step reads as a promise of a second one: it is plain now.
 Step 3 of 2.1 had merged two lines into one: they are back as they were, the first a child of step 2.
 
-Section 2.1, as `functional/ch02.md` has it:
+## Making the objects
 
-````markdown
-*[the cube in three stills a second apart, each half a metre higher than the last]*
+Create the teaching nodes and their primitive meshes in code. Do not require editor-made Point, Cube or other mesh nodes or access them with dollar-sign paths. The starter supplies the room, camera and light. Additional supplied parts must be named explicitly; they are not prerequisites silently hidden in a scene.
 
-**Delete a node**: select it, then press Delete.
-1. Delete every node you added: keep the base scene's own.
-2. Add a `MeshInstance3D` named `Cube` with a `BoxMesh`.
-   - Its `position` is in the Inspector, under `Node3D`.
-3. Set it to (0, 0.5, 0).
+Replace the example script between runs. Objects it creates exist in the running scene; stopping it removes them. Do not ask the learner to delete those runtime meshes from the editor.
 
-**Example 2.1: a rising cube**
+The opening lesson creates one sphere. Give the learner a working result before expanding the terminology. Keep the six-part, 25-chapter order in `sketch/sketch.json`. Built-in classes and `_ready()` are used from the opening; writing reusable functions and a class is developed in Colour, chapter 4.
 
-```gdscript
-extends Node3D
-
-var speed := 0.5
-
-func _process(delta):
-	$Cube.position.y += speed * delta
-```
-
-Run the project: the cube rises.
-
-- `delta` is the seconds since the last frame.
-  - It has no underscore here: the code uses it.
-- `*` multiplies.
-- `speed * delta` is the frame's share of `speed`.
-  - After one second, the cube stands 0.5 higher.
-- The frame rate: how many frames Godot draws a second.
-  - A fast machine draws more frames, each a shorter `delta`.
-- Change `speed * delta` to `speed`: the cube shoots away.
-  - It adds 0.5 every frame, not every second.
-  - Restore: `speed * delta`.
-
-Times `delta`: per second, at any frame rate.
-````
-
-The definition opens the section; the three steps follow it.
-Step 2's child says where the `it` of step 3 is.
-The run line stands plain, right under the code.
-The tree explains the run: four parents, three with a child that qualifies them, then an experiment.
-The point stands alone, after a blank line.
+This changes the construction method across the written examples. Continue reviewing the language one lesson at a time.
 
 ## Type-safe text
 

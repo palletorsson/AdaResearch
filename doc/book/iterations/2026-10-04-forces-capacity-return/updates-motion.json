@@ -1,0 +1,162 @@
+[
+  {
+    "id": "VFM_03_Motion",
+    "title": "End the command and keep the motion",
+    "storyboard": "A one-second push ends while the cube continues. Bringing Launch’s initial velocity and Change’s rate and accumulation, the student writes a finite force schedule for a supplied rigid body. Before running, they predict the velocity change: force divided by mass, multiplied by pulse duration. They compare one- and two-kilogram beginnings with drag off, before either cube reaches the frame. The learner owns when the command starts and ends; the engine retains velocity and supplies integration and contact. A perpendicular pulse then meets motion already acquired. COAST cancels the command; it does not erase that history. The kept pulse rule and prediction prepare the next room to expose the state update itself. The friction ramp remains a separate comparison of a threshold and a simplified sliding model.",
+    "storyboard_short": "Reuse Launch’s initial velocity, timed callbacks and Change rates. Own a finite force schedule for a supplied rigid body; predict delta-v = (F/m)T, then compare masses from rest with drag off before contact. COAST ends the command while velocity remains. A perpendicular pulse meets existing motion. Supply engine integration, chamber and readouts. Carry the schedule and prediction into Fields. Keep the friction ramp a separate comparison; do not teach a second solver.",
+    "brings": [
+      "timed callbacks and Launch’s chosen initial velocity",
+      "finite rates and signed accumulation from Change",
+      "vector direction and chosen acceleration from the supplied launch model"
+    ],
+    "learns": [
+      "force in newtons divided by mass in kilograms gives acceleration in metres per second squared",
+      "a finite force command changes retained velocity",
+      "delta-v = (F/m)T before contact with damping absent",
+      "ending a command and stopping a body are separate operations"
+    ],
+    "carries": "A small force schedule, its declared units and a predicted change in velocity, kept in the learner’s own study or notes for the Fields comparison.",
+    "supplied": [
+      "rigid-body integration and bounded collision chamber",
+      "pulse timing adapter, including a partial final physics step",
+      "mass/reset controls, velocity readout and optional trail"
+    ],
+    "prior_maps": [
+      "Change_Intro",
+      "VFM_05_Launch"
+    ],
+    "independent_check": "Before the run, predict a 2 N pulse lasting 1 s from rest: approximately +2 m/s for 1 kg and +1 m/s for 2 kg. Use DRAG off and observe before frame contact. Predict what COAST changes and what remains; then test a perpendicular pulse without resetting. The two pulse buttons replace the active force command rather than adding concurrent commands.",
+    "source_refs": [
+      "commons/maps/VFM_03_Motion/final.md",
+      "commons/maps/VFM_03_Motion/tutorial.md",
+      "commons/maps/VFM_03_Motion/map_data.json",
+      "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+      "algorithms/vectors/08_vector_motion/motion_chamber.gd"
+    ],
+    "review_note": "Summary proposal only. The installed motion_chamber sends force in newtons to apply_central_force; the engine supplies time integration. Do not multiply that force by dt again. Its active/delta factor only averages a partial final pulse step. COAST leaves optional engine damping active, so the controlled comparison explicitly turns DRAG off. Exact binding from a learner-authored pulse function to the supplied receiver remains to be chosen; the current operating/source companion is not evidence of that authoring interface. No new runtime check in this pass.",
+    "before": "A finite pulse exercise already separates ending force from stopping motion, but its prediction conditions and handoff into the common state study remain implicit.",
+    "after": "Make one mass-and-duration prediction before contact, keep drag off for the comparison, and carry the force schedule and observed retained velocity into Fields.",
+    "reason": "A controlled beginning makes the new idea available for reuse without asking the learner to rebuild the engine’s integrator or turning the friction ramp into another required lesson."
+  },
+  {
+    "id": "Vectors_Act3_FieldsAndMotion",
+    "title": "Give the same field two meanings",
+    "storyboard": "Cyan approaches the centre while pink crosses and returns. The student brings Flow Field’s sampled direction and Motion’s retained velocity into one small study with position and velocity as named state. A supplied runner calls their update: one receiver assigns velocity from the field; the other adds acceleration times the step, then both advance position using the new velocity. The same dimensionless field receives different unit conversions. Before trying the sink, they predict two steps in a uniform field from equal beginnings. Reversing the field then asks whether changing an influence erases motion already acquired. Markers, sampling and trails stay supplied; these numerical receivers have neither mass nor collisions. The learner keeps the update convention for Oscillation, through their own notes or companion file, rather than an assumed transfer between halls.",
+    "storyboard_short": "Reuse Flow Field sampling and Motion’s retained velocity. In a proposed small position/velocity study, own assignment versus accumulation and the subsequent position update. Predict two uniform-field steps before the sink comparison; reverse influence without erasing state. Supply dimensionless field, unit adapters, fixed runner, markers and trails. Carry the update convention manually toward Oscillation. Installed markers have no mass or collisions, and no shared learner state travels between halls.",
+    "brings": [
+      "Flow_Field’s position-dependent sampling and follower step",
+      "Motion’s distinction between force ending and velocity persisting",
+      "Change’s rate-times-step accumulation"
+    ],
+    "learns": [
+      "assigning velocity versus accumulating acceleration",
+      "a field value receives units through its receiver",
+      "updating position with newly updated velocity in a fixed-step model"
+    ],
+    "carries": "One declared position/velocity update convention and a prediction table, manually retained in a companion study or notes and adapted to one dimension in Oscillation.",
+    "supplied": [
+      "dimensionless field sampler and stated velocity/acceleration conversions",
+      "fixed 1/120 s runner and reset interface",
+      "two numerical markers, trails and observation cutoff"
+    ],
+    "prior_maps": [
+      "Change_Intro",
+      "Flow_Field",
+      "VFM_03_Motion"
+    ],
+    "independent_check": "For the supplied uniform field at gain 1, let h be the fixed step and start both at rest. Predict displacement after two steps: cyan 1.6h metres, pink 2.4h² metres, with pink velocity 1.6h m/s. Explain the different units of the 0.8 sample conversions. Then reverse a moving run: cyan changes its assigned velocity immediately; pink first changes its acceleration while retaining velocity. These are paper or companion-study predictions; no single-step museum control is claimed.",
+    "source_refs": [
+      "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+      "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+      "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json",
+      "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+      "algorithms/vectors/10_vector_field_flow/field_receivers.gd"
+    ],
+    "review_note": "Summary proposal only. field_receivers already exposes independent positions and velocities and semi-implicit accumulation in source. Each marker samples the same function at its own current position, not necessarily the same value after divergence. FIELD, GAIN and REVERSE keep state; RESET clears state and pauses while retaining parameters. Frame exit freezes outgoing state rather than colliding. A reduced learner edit function and its connection to the supplied runner are still unresolved. The proposed carried study is not an installed persistent record or crosshall transport feature. No runtime or learner-execution claim.",
+    "before": "Two receiver rules are already explicit, but the authored exercise reads as another isolated pair of markers and lacks a small independent prediction.",
+    "after": "Name position and velocity as the common study state, predict two uniform-field steps, and keep that update convention for the later spring model.",
+    "reason": "Assignment versus accumulation becomes something the learner can change and predict, while the runner and display remain supplied and museum state stays honestly separate."
+  },
+  {
+    "id": "Vectors_Act4a_KineticForces",
+    "title": "Make resistance depend on motion",
+    "storyboard": "AIR, WATER and HONEY launch cubes at the same speed, then let them travel different distances. Bringing the pulse receiver and Fields’ distinction between a value and its operation, the student owns one linear drag function: force equals minus coefficient times current velocity. The coefficient has units of kilograms per second. A supplied rigid-body adapter passes that force to the engine; the learner does not integrate the same force again. They predict how doubling mass changes the initial acceleration at fixed speed and coefficient, then compare before either run leaves the frame. The kept resistance function supplies Oscillation’s damping term. Walking resistance, the mower’s signed work and the ring’s prescribed circle remain comparisons: different accounts can describe movement, and a return does not undo the cut lawn.",
+    "storyboard_short": "Own one drag function, F = -b v, with b in kg/s. Reuse Motion’s force receiver and Fields’ operation distinction. Predict initial acceleration for two masses at equal speed and fixed b; compare before frame exit. Supply engine integration, launcher and readouts. Carry resistance into spring damping. Keep walking, mower work and prescribed circular motion optional comparisons; the material names are not measured fluid properties.",
+    "brings": [
+      "force-to-acceleration relation and retained velocity",
+      "the distinction between a sampled value and its receiving operation",
+      "known dot product for the optional work comparison"
+    ],
+    "learns": [
+      "linear resistance as a force computed from current state",
+      "fixed drag coefficient and changed mass produce different acceleration",
+      "an engine force receiver is distinct from a controller speed mapping"
+    ],
+    "carries": "The small force function -b*v with b in kg/s, reused as damping in the proposed scalar spring study; the rigid-body adapter itself need not be carried.",
+    "supplied": [
+      "rigid bodies and engine integration, with gravity and inherited damping removed",
+      "equal-speed launcher and mass/reset controls",
+      "readouts and finite observation window",
+      "existing walking, mower and circular-path comparisons"
+    ],
+    "prior_maps": [
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act2_VectorArithmetic"
+    ],
+    "independent_check": "Before FIRE, use v = +4 m/s and b = 1.3 kg/s to predict F = -5.2 N for both masses. Predict initial acceleration -5.2 m/s² at 1 kg and -2.6 m/s² at 2 kg. Then compare which retains more speed at the same early elapsed time, before frame exit; do not compare different stopping times or treat the cutoff as resistance doing work.",
+    "source_refs": [
+      "commons/maps/Vectors_Act4a_KineticForces/final.md",
+      "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+      "commons/maps/Vectors_Act4a_KineticForces/map_data.json",
+      "commons/artifacts/drag_corridor/drag_corridor.gd",
+      "commons/artifacts/drag_corridor/kinetic_drag.gd",
+      "commons/artifacts/force_mower/force_mower.gd",
+      "commons/artifacts/centrifuge_ring/centrifuge_ring.gd"
+    ],
+    "review_note": "Summary proposal only. Installed kinetic_drag applies -b*body.linear_velocity directly as force; no dt multiplication belongs in that argument. Its rigid bodies ignore contacts and are frozen at the observation cutoff; using a rigid-body engine does not imply this exhibit tests collisions. WALK is a separate chosen controller multiplier; mower work uses a nominal force, not measured hand effort; the ring prescribes a path. Exact learner drag-function binding remains open. Future focused text review: final.md’s categorical claim that air at any throwable cube speed follows a square law is broader than this source comparison establishes; this summary pass does not edit it or claim a replacement empirical result.",
+    "before": "Drag is the principal exercise, but work can become a second required lesson and the mass comparison lacks a concrete predicted quantity.",
+    "after": "Keep one force function and one initial-acceleration prediction, carry it as damping, and leave walking, mower and ring encounters as optional comparisons.",
+    "reason": "The state-update strand gains one reusable force term without turning every artifact into another assignment or conflating engine force, annotated work and prescribed motion."
+  },
+  {
+    "id": "Vectors_Act4b_Oscillation",
+    "title": "Returning does not mean stopping",
+    "storyboard": "The released cube crosses the zero line instead of stopping there. Returning to the position/velocity study from Fields, the student adapts it to one axis and reuses Kinetic Forces’ resistance term. They own the force sum, minus stiffness times displacement minus damping times velocity, and its update: velocity changes by force divided by mass times the step; displacement then uses the new velocity. The runner, rail and handle remain supplied. Before release, they predict the restoring direction and explain why zero spring force at the centre need not mean zero motion. Equal beginnings under two damping settings test the prediction. This computed return differs from Transformation’s prescribed sine. The learner keeps a small oscillator they can vary, without assuming the museum has transported a shared state or transferred a hand throw.",
+    "storyboard_short": "Return to Fields’ proposed position/velocity study in one dimension; add restoration and Kinetic Forces’ damping. Own F = -kx - cv, then v += (F/m)dt and x += vdt. Supply runner, rail and handle; release starts from rest. Predict force direction and crossing, compare damping from equal beginnings, and carry the oscillator toward later waves. Distinguish computed motion from prescribed sine; no shared museum-state or hand-throw transfer is implied.",
+    "brings": [
+      "Fields’ explicit position/velocity update convention",
+      "linear resistance with declared units",
+      "vector/force addition and Transformation’s prescribed sine comparison"
+    ],
+    "learns": [
+      "displacement-dependent restoring force combined with velocity-dependent damping",
+      "equilibrium position and rest are different conditions",
+      "the order of velocity and position updates matters in a numerical model"
+    ],
+    "carries": "A scalar spring-damper update with declared beginning and coefficients, reusable in later oscillator studies; future coupled waves will additionally need separate old/new states across receivers.",
+    "supplied": [
+      "fixed 1/120 s runner and finite observation cutoff",
+      "rail, constrained pickable handle and display",
+      "parameter controls and reset/release adapter; release sets velocity to zero"
+    ],
+    "prior_maps": [
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Trans_Pre"
+    ],
+    "independent_check": "At x = +1.25 m and v = 0, with k = 8 N/m and m = 2 kg, predict restoring force -10 N and initial acceleration -5 m/s². Under FREE damping, predict negative velocity at the first crossing of x = 0 even though spring force is zero there. Repeat from the same displacement, mass and stiffness under LIGHT damping; predict smaller later excursions. Use reset/release between trials, and distinguish a predicted centre crossing from an exactly sampled zero.",
+    "source_refs": [
+      "commons/maps/Vectors_Act4b_Oscillation/final.md",
+      "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+      "commons/maps/Vectors_Act4b_Oscillation/map_data.json",
+      "commons/artifacts/spring_tower/spring_tower.gd",
+      "commons/artifacts/spring_tower/restoring_forces.gd",
+      "commons/artifacts/spring_tower/spring_handle.gd"
+    ],
+    "review_note": "Summary proposal only. The installed restoring_forces variant computes scalar motion; its frozen pickable is input/display, not another body solver. k is N/m, c is kg/s, and F/m is acceleration, not F/dt. DAMP selects a ratio and computes c = 2*ratio*sqrt(k*m); changing mass or stiffness therefore changes c at a fixed nonzero ratio. Hold m and k fixed for the damping comparison. Parameter changes preserve state, whereas release starts from rest. The common learner update and its edit binding remain proposed, with manual reuse rather than automatic transport. Keep legacy cosine towers distinct; do not add a full numerical-methods lesson.",
+    "before": "The spring lesson already combines restoration and damping, but the carried update from Fields and the learner’s independent prediction remain implicit.",
+    "after": "Return explicitly to the same small study convention, own the force sum and ordered update, and predict a release before comparing damping from equal beginnings.",
+    "reason": "The sequence deepens a usable state model rather than restarting with another animation, while preserving the room’s question of return, rest and motion."
+  }
+]

@@ -1,0 +1,964 @@
+{
+	"checks": [
+		{
+			"message": "page0/0 yaw0: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/0 yaw90: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/0 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw0: held control prevents page replacement",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw90: held control prevents page replacement",
+			"passed": false
+		},
+		{
+			"message": "page0/1 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/1 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "Axis automatic motion resumes after release",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw0: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw90: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/2 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/2 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw0: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw90: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page0/3 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page0/3 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw0: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw90: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page1/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page1/0 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw0: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw90: grip starts on the centred front face",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page1/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page1/1 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page2/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page2/0 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page2/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page2/1 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page7/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page7/0 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page7/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page7/1 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page8/0 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page8/0 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw0: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw0: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw0: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw0: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw0: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw0: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw0: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw0: real ray reaches an interactive surface",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw90: grip starts on the centred front face",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw90: physical grab reaches 0.8",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw90: physical grab reaches 0.2",
+			"passed": false
+		},
+		{
+			"message": "page8/1 yaw90: a still hand does not drift",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw90: held control prevents page replacement",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw90: native release respects variant",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw90: manual driver idles after release",
+			"passed": true
+		},
+		{
+			"message": "page8/1 yaw90: real ray reaches an interactive surface",
+			"passed": false
+		}
+	],
+	"failures": [
+		"page0/0 yaw0: physical grab reaches 0.8",
+		"page0/0 yaw0: physical grab reaches 0.2",
+		"page0/0 yaw0: real ray reaches an interactive surface",
+		"page0/0 yaw90: physical grab reaches 0.8",
+		"page0/0 yaw90: physical grab reaches 0.2",
+		"page0/0 yaw90: real ray reaches an interactive surface",
+		"page0/1 yaw0: grip starts on the centred front face",
+		"page0/1 yaw0: physical grab reaches 0.8",
+		"page0/1 yaw0: physical grab reaches 0.2",
+		"page0/1 yaw0: held control prevents page replacement",
+		"page0/1 yaw0: real ray reaches an interactive surface",
+		"page0/1 yaw90: grip starts on the centred front face",
+		"page0/1 yaw90: physical grab reaches 0.8",
+		"page0/1 yaw90: physical grab reaches 0.2",
+		"page0/1 yaw90: held control prevents page replacement",
+		"page0/1 yaw90: real ray reaches an interactive surface",
+		"Axis automatic motion resumes after release",
+		"page0/2 yaw0: physical grab reaches 0.8",
+		"page0/2 yaw0: physical grab reaches 0.2",
+		"page0/2 yaw0: real ray reaches an interactive surface",
+		"page0/2 yaw90: physical grab reaches 0.8",
+		"page0/2 yaw90: physical grab reaches 0.2",
+		"page0/2 yaw90: real ray reaches an interactive surface",
+		"page0/3 yaw0: physical grab reaches 0.8",
+		"page0/3 yaw0: physical grab reaches 0.2",
+		"page0/3 yaw0: real ray reaches an interactive surface",
+		"page0/3 yaw90: physical grab reaches 0.8",
+		"page0/3 yaw90: physical grab reaches 0.2",
+		"page0/3 yaw90: real ray reaches an interactive surface",
+		"page1/0 yaw0: physical grab reaches 0.8",
+		"page1/0 yaw0: physical grab reaches 0.2",
+		"page1/0 yaw0: real ray reaches an interactive surface",
+		"page1/0 yaw90: physical grab reaches 0.8",
+		"page1/0 yaw90: physical grab reaches 0.2",
+		"page1/0 yaw90: real ray reaches an interactive surface",
+		"page1/1 yaw0: physical grab reaches 0.8",
+		"page1/1 yaw0: physical grab reaches 0.2",
+		"page1/1 yaw0: real ray reaches an interactive surface",
+		"page1/1 yaw90: physical grab reaches 0.8",
+		"page1/1 yaw90: physical grab reaches 0.2",
+		"page1/1 yaw90: real ray reaches an interactive surface",
+		"page2/0 yaw0: grip starts on the centred front face",
+		"page2/0 yaw0: physical grab reaches 0.8",
+		"page2/0 yaw0: physical grab reaches 0.2",
+		"page2/0 yaw0: real ray reaches an interactive surface",
+		"page2/0 yaw90: grip starts on the centred front face",
+		"page2/0 yaw90: physical grab reaches 0.8",
+		"page2/0 yaw90: physical grab reaches 0.2",
+		"page2/0 yaw90: real ray reaches an interactive surface",
+		"page2/1 yaw0: grip starts on the centred front face",
+		"page2/1 yaw0: physical grab reaches 0.8",
+		"page2/1 yaw0: physical grab reaches 0.2",
+		"page2/1 yaw0: real ray reaches an interactive surface",
+		"page2/1 yaw90: grip starts on the centred front face",
+		"page2/1 yaw90: physical grab reaches 0.8",
+		"page2/1 yaw90: physical grab reaches 0.2",
+		"page2/1 yaw90: real ray reaches an interactive surface",
+		"page7/0 yaw0: grip starts on the centred front face",
+		"page7/0 yaw0: physical grab reaches 0.8",
+		"page7/0 yaw0: physical grab reaches 0.2",
+		"page7/0 yaw0: real ray reaches an interactive surface",
+		"page7/0 yaw90: grip starts on the centred front face",
+		"page7/0 yaw90: physical grab reaches 0.8",
+		"page7/0 yaw90: physical grab reaches 0.2",
+		"page7/0 yaw90: real ray reaches an interactive surface",
+		"page7/1 yaw0: grip starts on the centred front face",
+		"page7/1 yaw0: physical grab reaches 0.8",
+		"page7/1 yaw0: physical grab reaches 0.2",
+		"page7/1 yaw0: real ray reaches an interactive surface",
+		"page7/1 yaw90: grip starts on the centred front face",
+		"page7/1 yaw90: physical grab reaches 0.8",
+		"page7/1 yaw90: physical grab reaches 0.2",
+		"page7/1 yaw90: real ray reaches an interactive surface",
+		"page8/0 yaw0: grip starts on the centred front face",
+		"page8/0 yaw0: physical grab reaches 0.8",
+		"page8/0 yaw0: physical grab reaches 0.2",
+		"page8/0 yaw0: real ray reaches an interactive surface",
+		"page8/0 yaw90: grip starts on the centred front face",
+		"page8/0 yaw90: physical grab reaches 0.8",
+		"page8/0 yaw90: physical grab reaches 0.2",
+		"page8/0 yaw90: real ray reaches an interactive surface",
+		"page8/1 yaw0: grip starts on the centred front face",
+		"page8/1 yaw0: physical grab reaches 0.8",
+		"page8/1 yaw0: physical grab reaches 0.2",
+		"page8/1 yaw0: real ray reaches an interactive surface",
+		"page8/1 yaw90: grip starts on the centred front face",
+		"page8/1 yaw90: physical grab reaches 0.8",
+		"page8/1 yaw90: physical grab reaches 0.2",
+		"page8/1 yaw90: real ray reaches an interactive surface"
+	],
+	"headset_tested": false
+}

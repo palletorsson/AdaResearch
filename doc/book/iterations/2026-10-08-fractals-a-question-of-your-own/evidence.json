@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-08",
+  "changes": [
+    {
+      "path": "commons/maps/Fractal_Synthesis/tutorial.md",
+      "scope": "file",
+      "before_sha256": "596cf7d845eba4e7c4f503f5c55dd3fe37c11294eae7930744e9cc0bc89fbb05",
+      "after_sha256": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8",
+      "diff": "changes/commons__maps__Fractal_Synthesis__tutorial.md.diff"
+    },
+    {
+      "path": "commons/maps/Fractal_Synthesis/final.md",
+      "scope": "file",
+      "before_sha256": "9b891f4cd63c6dc1c3b204541bc06fd010bc6d1cf9638830f04e1d00b4337a43",
+      "after_sha256": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856",
+      "diff": "changes/commons__maps__Fractal_Synthesis__final.md.diff"
+    },
+    {
+      "path": "commons/maps/Fractal_MengerSponge/final.md",
+      "scope": "file",
+      "before_sha256": "9c77b084ef4001e3852b7fc3317b6a096c2e399cbe3d928b6e30d917cbfbf3ca",
+      "after_sha256": "cee0651046059bd15fd9be85025586631201b75d93c63b791668556901bfa9d1",
+      "diff": "changes/commons__maps__Fractal_MengerSponge__final.md.diff"
+    },
+    {
+      "path": "commons/maps/Fractal_KochSierpinski/final.md",
+      "scope": "file",
+      "before_sha256": "a3790b803915aee33b8a1a18df3de3c06e3004d4996200d99f15ec7c84cfe14d",
+      "after_sha256": "f510896641bd1ec2577b5585daa18f0f28f8c5bafc1bb436c30fa6c57349758e",
+      "diff": "changes/commons__maps__Fractal_KochSierpinski__final.md.diff"
+    },
+    {
+      "path": "doc/book/course/fractals-scale-and-return.md",
+      "scope": "file",
+      "before_sha256": "093e00fefe6b6c8c3fd5811f92673d89dec07fb4ee26a286a15d3d24397ad663",
+      "after_sha256": "fcf122a5fd76047806ccad8427267fa0b00ba38303697b76fc3e768fb37b6d09",
+      "diff": "changes/doc__book__course__fractals-scale-and-return.md.diff"
+    },
+    {
+      "path": "doc/book/course/execution-plan/plan.json",
+      "scope": "Fractal_Synthesis row only; concurrent edits to other rows are excluded",
+      "before_sha256": "483d032dfc15d9841d9fc4eec71ab6592f5bb7e479464de278d28b07e710b795",
+      "after_sha256": "f44db6599f3de15c3895100e6aacdb79d9d538242b94bbc965e61cdcedb7a9b6",
+      "diff": "changes/doc__book__course__execution-plan__plan.json.diff"
+    },
+    {
+      "path": "tools/publish_fractals_complete_readings.py",
+      "scope": "file",
+      "before_sha256": "da6093be3c133a18ca4d73ff95d0edc94fd67860bc2eee25d8db4a49d6cfbe6f",
+      "after_sha256": "3970282c740f12b4a14125c16d686395a5f817f7d7d3212a2848b7e5644eec94",
+      "diff": "changes/tools__publish_fractals_complete_readings.py.diff"
+    }
+  ],
+  "required_printed_code_unchanged": true,
+  "tests": {
+    "composition": 21,
+    "required-recipe": 46
+  },
+  "source_sha256": {
+    "commons/maps/Fractal_Synthesis/tutorial.md": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8",
+    "commons/maps/Fractal_Synthesis/final.md": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856",
+    "commons/maps/Fractal_MengerSponge/final.md": "cee0651046059bd15fd9be85025586631201b75d93c63b791668556901bfa9d1",
+    "commons/maps/Fractal_KochSierpinski/final.md": "f510896641bd1ec2577b5585daa18f0f28f8c5bafc1bb436c30fa6c57349758e"
+  },
+  "scope": "Editorial revision; unchanged required lesson and one agent-authored optional composition executed. No new museum placement, independent ghost student or headset certification."
+}

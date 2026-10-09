@@ -1,0 +1,141 @@
+{
+  "checks": [
+    {
+      "message": "bar PCM uses 44100 Hz",
+      "ok": true
+    },
+    {
+      "message": "bar PCM has one source channel",
+      "ok": true
+    },
+    {
+      "message": "default note buffer is 7.5 seconds of PCM16",
+      "ok": true
+    },
+    {
+      "message": "generated PCM matches assigned sine frequency, decay and final fade",
+      "ok": true
+    },
+    {
+      "message": "glow amplitude reaches exp(-1) after three seconds",
+      "ok": true
+    },
+    {
+      "message": "different bars hold independent source voices",
+      "ok": true
+    },
+    {
+      "message": "same bar resets its age without clearing another bar",
+      "ok": true
+    },
+    {
+      "message": "half hit maps to minus3 dB independently of glow amplitude",
+      "ok": true
+    },
+    {
+      "message": "source-audio window exposes sampled data and player gain",
+      "ok": true
+    },
+    {
+      "message": "beat creates three64-sphere rows",
+      "ok": true
+    },
+    {
+      "message": "beat demonstration has no audio player",
+      "ok": true
+    },
+    {
+      "message": "both real control signals map midrange to5.5 Hz",
+      "ok": true
+    },
+    {
+      "message": "equal frequencies align inputs and half-scaled sum",
+      "ok": true
+    },
+    {
+      "message": "nearby frequency difference is named with one-decimal precision",
+      "ok": true
+    },
+    {
+      "message": "all64 close-frequency output positions checked against half raw sum",
+      "ok": true
+    },
+    {
+      "message": "stair builds one80-tread helix",
+      "ok": true
+    },
+    {
+      "message": "shipped staircase supplies uniform rise and radial amplitude",
+      "ok": true
+    },
+    {
+      "message": "sample radius follows source radial sine formula",
+      "ok": true
+    },
+    {
+      "message": "sample tread top follows uniform rise",
+      "ok": true
+    },
+    {
+      "message": "membranes provide79 connecting colliders; no full walk inferred",
+      "ok": false
+    },
+    {
+      "message": "secondary walkway creates40finite step pairs",
+      "ok": true
+    },
+    {
+      "message": "escalator circulates existing finite steps",
+      "ok": true
+    },
+    {
+      "message": "configured-before-tree bench wires exactly five sliders",
+      "ok": true
+    },
+    {
+      "message": "bench has one readout and no duplicate staging",
+      "ok": true
+    },
+    {
+      "message": "arrival recipe unchanged",
+      "ok": true
+    },
+    {
+      "message": "arrival naming matches opt-in or legacy policy",
+      "ok": true
+    },
+    {
+      "message": "HOLD still freezes the wave",
+      "ok": true
+    },
+    {
+      "message": "all five arrival rows add to total",
+      "ok": true
+    },
+    {
+      "message": "H1 ALONE removes only higher terms",
+      "ok": true
+    },
+    {
+      "message": "H1 ALONE reveals recognition",
+      "ok": true
+    },
+    {
+      "message": "BASELINE restores coefficients and visible recipe name",
+      "ok": true
+    },
+    {
+      "message": "fifth-coefficient mismatch leaves named recipe",
+      "ok": true
+    },
+    {
+      "message": "legacy positive odd recipe is not called a triangle",
+      "ok": true
+    }
+  ],
+  "headset_tested": false,
+  "heard_by_person": false,
+  "values": {
+    "pcm_max_error": 0.0000179500709695211
+  }
+}

@@ -1,0 +1,1064 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,120 +1,291 @@
+-# CA Agents Circuits
+-
+-**Learning elements — proposed focus**
+-
+-_The labels below set the revision focus; the existing lesson still needs alignment._
+-
+-- Procedural comparison
+-- State histories
+-- Repeated construction
+-
+-Wireworld. Cells can be empty, electron head, electron tail, or conductor.
+-
+-Define cell states.
++# Two ways to make
++
++## Learning elements
++
++- Rule 90: a next cell is occupied when its two neighbours differ.
++- Independent rows store successive states; a picture can show time along one axis.
++- A supplied copying recipe places cubes without reading a cellular state.
++- Change one input, then identify which construction responds.
++- A finite boundary limits a pattern that appears to keep growing.
++
++## Return to the row
++
++The previous hall separated what happens at an address from what it receives from neighbours. Here we return to the Boolean row from the CA opening and the saved history from the third hall. We change its rule, then compare its way of making with the pyramid already in the room.
++
++At the explorer, select 90 and replay the single central seed. The stored rows appear both on the desk and on the floor. Take the same black point at the desk's front rail. Moving it sideways selects a current-row address; its trigger advances one generation. Read the neighbours before pressing. The point is an inspector and a STEP control here, not a seed brush.
++
++Follow one triangular gap across the floor toward the pyramid. Both constructions suggest repeated shapes. Find out what each procedure reads before treating that resemblance as an explanation.
++
++## Reconstruct this comparison
++
++Save your earlier study. Put `procedures.gd`, `comparison.gd` and the unchanged `point_body.gd` together. Attach `comparison.gd` to the existing `PointStudy` Node3D in the Day Zero museum, at unit scale. Leave about 4 × 2.5 metres clear and approach its positive Z side. The museum continues to supply the player, camera, lighting and XR Tools. All required study children are built below.
++
++The compact model shows one history table and one fixed cube construction. The museum also enlarges its history onto the floor and supplies richer rule controls. This reconstruction stays with Rule 90. Enter or the held point's trigger steps; R replays the selected seed; C switches between one cell and two adjacent cells and replays. C and R are keyboard controls here; use the installed desk's SEED and RST buttons in the full VR encounter. Walking keys remain available.
++
++## What does a cell read?
++
++For Rule 90 the centre does not affect the answer. Read the old left and right values. If exactly one is true, the next value is true. If they agree, it is false. For Booleans, `left != right` expresses exclusive OR, often called XOR.
++
++| Left | Right | Next |
++| --- | --- | --- |
++| false | false | false |
++| false | true | true |
++| true | false | true |
++| true | true | false |
++
++The existing explorer evaluates a numbered eight-case rule including the centre. Its Rule 90 gives this same answer for all eight cases. The shorter expression below exposes that particular rule; it does not replace the general evaluator in the museum.
++
++`next_row` reads the complete old row and returns a new one. The last address neighbours the first. `history` keeps those rows in chronological order. Each row's horizontal positions are space; advancing along the table shows time. New rows change neither the earlier arrays nor the pyramid's positions.
++
++## What does the copying recipe read?
++
++`copy_positions` is supplied from the installed pyramid's placement logic. It reads a position, spacing and remaining depth. At depth zero it returns one position. Otherwise it calls itself at six offsets with half the spacing and one less depth. A function that calls itself is recursive; we will study that process through the Fractals sequence. Here follow just one call and notice its inputs.
++
++The six placements are four lower corners and two upper positions. This particular recipe has an extra upper branch. It does not inspect neighbouring cubes, read the cellular row, or wait for a clock. The returned list contains one entry per leaf call, including entries that may coincide. Every displayed cube keeps the same size; spacing changes during the construction. The result is a finite collection with overlaps, not a demonstration of an ideal fractal's dimension.
++
++At depth 3 the procedure returns 6 × 6 × 6 = 216 entries. The large museum pyramid uses depth 4: 1,296 entries. The compact model scales all final positions and cube sizes together, so its smaller version retains the recipe's proportions. We supply that recipe to make the comparison inspectable; deriving it is not a prerequisite for the neighbour-rule lesson.
++
++## Complete procedures — procedures.gd
+ 
+ ```gdscript
+-enum Cell { EMPTY, CONDUCTOR, HEAD, TAIL }
++extends RefCounted
++const N := 32
++
++func next_row(old: Array[bool]) -> Array[bool]:
++	var next: Array[bool] = []
++	next.resize(N)
++	for i in N:
++		var left := old[posmod(i - 1, N)]
++		var right := old[(i + 1) % N]
++		next[i] = left != right
++	return next
++
++func copy_positions(at: Vector3, spacing: float, depth: int) -> Array[Vector3]:
++	# Supplied recipe from the installed pyramid; it reads no cell states.
++	if depth == 0:
++		return [at]
++	var half := spacing / 2.0
++	var offset := half / 2.0
++	var shifts: Array[Vector3] = [
++		Vector3(0, half, 0), Vector3(0, offset, 0),
++		Vector3(-offset, -offset, -offset), Vector3(offset, -offset, -offset),
++		Vector3(-offset, -offset, offset), Vector3(offset, -offset, offset)
++	]
++	var positions: Array[Vector3] = []
++	for shift in shifts:
++		positions.append_array(copy_positions(at + shift, half, depth - 1))
++	return positions
+ ```
+ 
+-Four states. Empty never changes; the other three cycle in specific ways.
+-
+-Apply the Wireworld rule.
++## Keep the two constructions independent
++
++`make_display` asks for the cube positions once. `step` asks only for a next cellular row. `reset` restores that history from `seed_sites`. None of those cellular operations rebuilds or edits the cubes.
++
++The same PointBody from the previous room supplies its held world position. Converting to study-local X selects an address along the rail. This changes `selected`, not the cells. The readout predicts that address's next value. Release parks the point at the selected address.
++
++`redraw` places every recorded cell, including zeros. Dark tiles show false; they are not holes. Unrecorded rows have zero-size transforms. The table's collider remains solid beneath both states. The miniature cubes are visual instances on a solid plinth; the installed pyramid uses the museum's cube prefab and its colliders. The compact model does not rebuild that larger climbing geometry.
++
++## Complete study — comparison.gd
++
++Read `reset`, `step` and `readout` first. `draw_instances` and `make_display` include the staging so the example can run without prepared child nodes. There is one `_ready`.
+ 
+ ```gdscript
+-func wireworld_rule(current: int, neighbours: Array) -> int:
+-    match current:
+-        Cell.EMPTY: return Cell.EMPTY
+-        Cell.HEAD: return Cell.TAIL
+-        Cell.TAIL: return Cell.CONDUCTOR
+-        Cell.CONDUCTOR:
+-            var head_count: int = 0
+-            for n in neighbours:
+-                if n == Cell.HEAD: head_count += 1
+-            if head_count == 1 or head_count == 2:
+-                return Cell.HEAD
+-            return Cell.CONDUCTOR
+-    return current
++extends Node3D
++const Procedures = preload("procedures.gd")
++const PointBody = preload("point_body.gd")
++const ROWS := 24
++const PITCH := 0.05
++const DEPTH := 3
++const VIEW_SCALE := 0.18
++var methods := Procedures.new()
++var seed_sites: Array[int] = [16]
++var history: Array[Array] = []
++var cells := MultiMesh.new()
++var copies := MultiMesh.new()
++var positions: Array[Vector3] = []
++var point: XRToolsPickable
++var reading := Label3D.new()
++var selected := 16
++
++func _ready() -> void:
++	make_display()
++	point = PointBody.new()
++	add_child(point)
++	point.action_pressed.connect(func(_body): step())
++	reset()
++	park()
++
++func reset() -> void:
++	var row: Array[bool] = []
++	row.resize(Procedures.N)
++	row.fill(false)
++	for i in seed_sites:
++		row[posmod(i, Procedures.N)] = true
++	history.clear()
++	history.append(row)
++	redraw()
++
++func step() -> void:
++	if history.size() == ROWS:
++		return
++	var old: Array[bool] = []
++	old.assign(history.back())
++	history.append(methods.next_row(old))
++	redraw()
++
++func change_seed() -> void:
++	seed_sites.assign([16, 17] if seed_sites.size() == 1 else [16])
++	reset()
++
++func _physics_process(_delta: float) -> void:
++	if point.held():
++		var x := to_local(point.global_position).x
++		selected = clampi(floori((x + 1.15) / PITCH + 16), 0, 31)
++	else:
++		park()
++	readout()
++
++func park() -> void:
++	point.position = Vector3(-1.15 + (selected - 15.5) * PITCH, 1.15, 0.85)
++
++func _unhandled_key_input(event: InputEvent) -> void:
++	if event is InputEventKey and event.pressed and not event.echo:
++		match event.keycode:
++			KEY_ENTER: step()
++			KEY_R: reset()
++			KEY_C: change_seed()
++			_: return
++		get_viewport().set_input_as_handled()
++
++func at(col: int, row: int) -> Vector3:
++	return Vector3(-1.15 + (col - 15.5) * PITCH, 1.005, (11.5 - row) * PITCH)
++
++func redraw() -> void:
++	for row in ROWS:
++		for col in Procedures.N:
++			var recorded := row < history.size()
++			var alive: bool = recorded and history[row][col]
++			var basis := Basis.IDENTITY if recorded else Basis.IDENTITY.scaled(Vector3.ZERO)
++			cells.set_instance_transform(row * 32 + col, Transform3D(basis, at(col, row)))
++			cells.set_instance_color(row * 32 + col, Color("eadcc1") if alive else Color("183f45"))
++	readout()
++
++func readout() -> void:
++	var row: Array = history.back()
++	var left: bool = row[posmod(selected - 1, 32)]
++	var right: bool = row[(selected + 1) % 32]
++	reading.text = "RULE 90 / GEN %d / CELL %d\nLEFT %d   RIGHT %d   NEXT %d\nENTER / TRIGGER: STEP   R: REPLAY   C: SEED\nHISTORY CHANGES / %d COPY POSITIONS STAY" % [history.size() - 1, selected, int(left), int(right), int(left != right), positions.size()]
++
++func box(size: Vector3, place: Vector3, colour: Color, solid: bool = false) -> MeshInstance3D:
++	var node := MeshInstance3D.new()
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	node.mesh = mesh
++	node.position = place
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = colour
++	node.material_override = finish
++	add_child(node)
++	if solid:
++		var body := StaticBody3D.new()
++		var boundary := CollisionShape3D.new()
++		var shape := BoxShape3D.new()
++		shape.size = size
++		boundary.shape = shape
++		node.add_child(body)
++		body.add_child(boundary)
++	return node
++
++func draw_instances(data: MultiMesh, size: Vector3, colour: Color, colours: bool) -> void:
++	data.transform_format = MultiMesh.TRANSFORM_3D
++	data.use_colors = colours
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	data.mesh = mesh
++	var view := MultiMeshInstance3D.new()
++	view.multimesh = data
++	var material := StandardMaterial3D.new()
++	material.albedo_color = colour
++	material.vertex_color_use_as_albedo = colours
++	view.material_override = material
++	add_child(view)
++
++func make_display() -> void:
++	box(Vector3(1.72, 0.08, 1.32), Vector3(-1.15, 0.96, 0), Color("c9c5bd"), true)
++	box(Vector3(0.6, 0.92, 0.6), Vector3(-1.15, 0.46, 0), Color("aaa89f"))
++	draw_instances(cells, Vector3(PITCH * 0.95, 0.006, PITCH * 0.95), Color.WHITE, true)
++	cells.instance_count = 32 * ROWS
++	box(Vector3(1.25, 1.08, 1.25), Vector3(0.8, 0.54, 0), Color("c9c5bd"), true)
++	draw_instances(copies, Vector3.ONE * VIEW_SCALE, Color("dfacc4"), false)
++	positions = methods.copy_positions(Vector3.ZERO, pow(2, DEPTH - 1), DEPTH)
++	copies.instance_count = positions.size()
++	for i in positions.size():
++		copies.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0.8, 1.50, 0) + positions[i] * VIEW_SCALE))
++	box(Vector3(1.6, 0.006, 0.008), Vector3(-1.15, 1.04, 0.85), Color("ffd77d"))
++	reading.position = Vector3(-0.4, 2.45, -0.5)
++	reading.font_size = 34
++	reading.pixel_size = 0.0015
++	add_child(reading)
+ ```
+ 
+-HEAD decays to TAIL; TAIL to CONDUCTOR; CONDUCTOR ignites when exactly 1 or 2 neighbours are HEAD. This rule supports signal propagation and logic.
+-
+-Draw a wire.
++## Unchanged carried object — point_body.gd
++
++Keep your existing copy from the previous hall. It is repeated here only to make the three-file example complete.
+ 
+ ```gdscript
+-func draw_wire(start: Vector2i, end: Vector2i) -> void:
+-    var current := start
+-    while current != end:
+-        grid[current.y][current.x] = Cell.CONDUCTOR
+-        var diff := end - current
+-        if abs(diff.x) > abs(diff.y):
+-            current.x += sign(diff.x)
+-        else:
+-            current.y += sign(diff.y)
+-    grid[end.y][end.x] = Cell.CONDUCTOR
++extends XRToolsPickable
++## Point Lines' frozen point construction, made smaller for the hand model.
++var tint := Color("25212a")
++var desktop_pointer: WeakRef
++
++func _init() -> void:
++	freeze = true
++	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
++	release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
++	collision_layer = 4
++	collision_mask = 0
++	var surface := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.085
++	sphere.height = 0.17
++	sphere.radial_segments = 24
++	sphere.rings = 12
++	surface.mesh = sphere
++	add_child(surface)
++	var boundary := CollisionShape3D.new()
++	var shape := SphereShape3D.new()
++	shape.radius = 0.085
++	boundary.shape = shape
++	add_child(boundary)
++
++func _ready() -> void:
++	super._ready()
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = tint
++	finish.roughness = 0.24
++	get_child(0).material_override = finish
++
++func held() -> bool:
++	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
++
++func on_desktop_grab(pointer: Node) -> void:
++	desktop_pointer = weakref(pointer)
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_pointer = null
+ ```
+ 
+-Bresenham-style wire drawing. The learner can paint conductors with a controller.
+-
+-Inject a signal.
+-
+-```gdscript
+-func inject_electron(position: Vector2i) -> void:
+-    grid[position.y][position.x] = Cell.HEAD
+-```
+-
+-A single HEAD cell. The signal propagates along any connected conductor.
+-
+-Build an AND gate.
+-
+-```gdscript
+-const AND_GATE := [
+-    [C, C, C, C, C, C, C],
+-    [C, 0, 0, 0, 0, 0, C],
+-    [C, 0, 0, 0, 0, 0, C],
+-    [C, C, C, C, C, C, C],
+-]
+-```
+-
+-Two input wires converge. When both carry signals, the output wire ignites. Single inputs stall.
+-
+-Test the gate.
+-
+-```gdscript
+-func test_gate(gate_pattern: Array, inputs: Dictionary) -> int:
+-    place_pattern(gate_pattern, 0, 0)
+-    for input_pos in inputs:
+-        if inputs[input_pos]:
+-            inject_electron(input_pos)
+-    for _i in 20:  # run for 20 generations
+-        step()
+-    return read_output()
+-```
+-
+-Place the gate; inject signals; run; read the output. Boolean logic via cellular automata.
+-
+-Build a clock.
+-
+-```gdscript
+-const CLOCK_RING := [
+-    [0, C, C, C, 0],
+-    [C, 0, 0, 0, C],
+-    [C, 0, 0, 0, C],
+-    [C, 0, 0, 0, C],
+-    [0, C, C, C, 0],
+-]
+-```
+-
+-A closed loop of conductors. A HEAD placed on the ring circulates forever, producing periodic pulses.
+-
+-You can now implement Wireworld, draw wires, inject signals, build logic gates, and test them via simulation. CA_EdgeOfChaos extends into classification.
+-
+-Reset the grid to random.
+-
+-```gdscript
+-func reset_random(density: float = 0.3) -> void:
+-    for y in size.y:
+-        for x in size.x:
+-            grid[y][x] = 1 if randf() < density else 0
+-```
+-
+-Useful for exploring the rule's behaviour from different starting conditions.
++## One beginning, two kinds of change
++
++Replay the single cell at address 16. Before STEP, predict addresses 15, 16 and 17. After one update, 15 and 17 are occupied; 16 is empty. Both new cells read the old 16. No cube in the pyramid moves.
++
++Advance to generation 15 and compare a gap with the fixed sculpture. Then predict generation 16 before pressing. On this 32-cell ring, both expanding edges reach the same opposite address. That address reads two true neighbours, so XOR returns false. The entire next row is empty and remains empty. The pattern did not reach an infinite limit: the finite periodic boundary changed the situation.
++
++Press C to try two adjacent cells. It restarts the cellular history while keeping the same copying construction. Step and compare. Which resemblance survives? You can test the changed row; a visual match with the sculpture remains a judgment about selected features, not a proof that the procedures agree.
++
++Make one independent edit: set `seed_sites` to **[14, 16, 18]**, then restart the script. Predict the first row before pressing Enter. Only addresses **13 and 19** should be occupied. Addresses 15 and 17 each receive two true neighbours and cancel. Check the readout at either cancelled address, and confirm that the 216 cube transforms stayed the same. R replays your edited seed; C returns to the built-in single/pair choices.
++
++The compact table stops after 24 stored rows, generations 0–23, so the comparison stays inspectable. The installed explorer can continue and scrolls its last 24 rows; it labels that retained range. These are different display budgets for the same row update.
++
++You can now distinguish repeating an update from repeating a placement. The next hall keeps the procedure fixed and changes one starting value, asking how far that difference travels.
+--- before/final.md
++++ after/final.md
+@@ -6,13 +6,15 @@
+ 
+ Press 90 on the explorer’s CA RULES panel, then RST to return to the central seed. Press STEP a few times. Follow the triangular gaps that develop between occupied cells. Choose a larger triangle and look for smaller ones arranged within its boundary. Add rows, up to fifteen steps, when you need more to compare; at the sixteenth the pattern's two diagonal edges meet around the ring and every new row from then on is empty.
+ 
++The small black point is back at the desk. Take it along the rail: the numbers follow an address, while the row stays still. Use its trigger and the next row arrives. In the previous room it placed a seed. Here we have given the same held object another relation to the work: it lets us inspect a place and advance a process.
++
+ Each new cell is still calculated from a local neighbourhood. No instruction tells the display to draw a large triangle and then decorate it with smaller triangles. The repeated structure becomes visible through many applications of the rule.
+ 
+ Choose one triangular gap in the rule display. The same rows lie enlarged on the floor between the desk and the pyramid. Follow them away from the desk: each row takes one more step in the calculation. Walk into a dark triangle. The cells are empty; the floor still holds you. Here, absence is something drawn beneath your feet.
+ 
+ Keep a few occupied cells around the gap in mind, so there is more to recognise than the outline. Carry that small arrangement to the pyramid. Move sideways. The cubes hide and uncover one another; the floor image stays flat. Where would your remembered gap fit, and would your body fit there too? If one part refuses the match, stay with that part before choosing a different resemblance. We have found something the shared appearance did not tell us.
+ 
+-![The explorer’s stored history spreads across the floor toward the recursive cube construction.](images/ca-pattern-correspondence.png)
++![The explorer’s stored history spreads across the floor toward the recursive cube construction.](images/two-procedures.png)
+ 
+ <!-- @sierpinski_pyramid -->
+ 
+--- before/map_data.json
++++ after/map_data.json
+@@ -30,7 +30,22 @@
+       "artifact_placement": "map",
+       "plinths": false,
+       "piers": false,
+-      "gate_depth_rows": 0
++      "gate_depth_rows": 0,
++      "gate": false,
++      "portal_entry": {
++        "cage": false
++      },
++      "portal_exit": {
++        "approach": "from_hall"
++      },
++      "sculpture_clear_rects": [
++        [
++          1,
++          1,
++          11,
++          16
++        ]
++      ]
+     }
+   },
+   "utility_definitions": {
+@@ -362,21 +377,6 @@
+         " ",
+         " ",
+         " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+         "s",
+         " ",
+         " ",
+@@ -392,202 +392,232 @@
+         " ",
+         " ",
+         " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
++        "",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "",
+         " ",
+         " ",
+         " ",
+@@ -603,21 +633,6 @@
+         " ",
+         " ",
+         "t",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+         " ",
+         " ",
+         " ",
+--- before/technical.md
++++ after/technical.md
+@@ -32,3 +32,22 @@
+ ## Evidence
+ 
+ The native museum probe and before/after photographs are in `doc/book/iterations/2026-09-25-ca-pattern-correspondence/`. Checks cover actual mouse-ray controls, an independent Pascal-parity expectation for the first sixteen Rule 90 rows, exact desk/floor correspondence, reset and scrolling, preserved pyramid transforms, and controlled CharacterBody walking. Headset comfort and learner understanding remain to be tested.
++
++
++## Complete learner reconstruction — 8 October 2026
++
++`tutorial.md` now prints `procedures.gd`, `comparison.gd` and unchanged `point_body.gd`, maintained under `doc/book/studies/cellular-automata-through-the-hands/CA_AgentsCircuits`. They run on the existing Day Zero `PointStudy`. The first file owns the two procedures; the second builds the table, plinth, instances, labels, support and input. The third is byte-identical to CA_SoftRules. No prepared study children are required.
++
++The 32-cell rule reads old left/right and writes their Boolean inequality. Centre does not affect Rule 90. The learner stores chronological independent snapshots, stops at 24 rows and renders unused rows at zero scale. The museum retains its existing newest-first storage and scrolling receiver. The supplied recursive function preserves all six installed offsets, including the extra crown; depth three yields 216 leaf entries versus the installed depth four's 1296. Entries may overlap. Every leaf cube keeps a fixed size. Learner cube instances are visual, on a solid plinth; they do not recreate the large prefab's individual colliders.
++
++The comparison branch of `neighbour_study.gd` now mounts the existing `hand_point.gd` adapter, already used by the opening. Moving the held point selects the current row address. Its trigger calls the existing STEP operation and pauses. Release parks it at the selected address. Moving it does not edit state. The compact model uses Enter for STEP, R to replay, C to switch the seed. The installed SEED/RST controls remain VR-operable.
++
++Room changes preserve all three authored artifact tokens, their placements and the level floor. A sculpture reservation clears incidental objects from the approach. The generic gate is disabled; entry and exit move to source(6,0)/(6,17), with supported approaches. Only this hall's generated plan row is rederived.
++
++Validation: 29 learner and 38 museum assertions pass in native Godot 4.6. All eight truth cases and 240 mixed-start updates match the general evaluator. Actual ordered recursive placements at depths 0–4 match the learner recipe. The three-seed transfer predicts [13,19] and unchanged copies. Two deliberate faults are detected. Native supplied XRTools poses test pickup, inspection, trigger and release in both models. A CharacterBody walks over dark floor cells without changing the record. Four routes provide 158 layer-1 capsule and level-floor samples.
++
++The initial learner run found a typed-array ternary assignment; `seed_sites.assign(...)` fixes the printed script. The initial museum colour equality was too strict for native MultiMesh storage. The final measured maximum RGB difference is 0.00009766, below one 8-bit channel step; transforms and Boolean records remain checked independently. First-pass logs are retained in the report's diagnostics.
++
++The main explorer, comparison floor and pyramid scripts remain byte-identical to this pass's baseline. Final runs have no SCRIPT ERROR or Parse Error. No physical headset, Quest performance, independent student, full portal transfer or full secondary-interaction audit is claimed. Existing blank wall frames remain. Image inspection caught an inherited five-copy caption, inconsistent with this configuration's extra crown. Only this hall's two captions and obsolete Wireworld blurb are corrected in the book/source/shipped catalogue records. Native assertions verify both new wall captions. No other hall's catalogue text is changed.
++
++Review: `doc/book/iterations/2026-10-08-ca-two-ways-to-make/index.html`, before/after above and inside images, full texts, exact scripts, native receipts and review ZIP. Next: CA_EdgeOfChaos.
+--- before/encounter-notes.md
++++ after/encounter-notes.md
+@@ -7,3 +7,16 @@
+ The current short chapter changes only the remembered-gap encounter. Its opening, recursive description, seed comparison, classifications discussion, closing and references remain. The older Wireworld companion documents were archived whole as a development proposal instead of being silently discarded or treated as installed work.
+ 
+ Native evidence: doc/book/iterations/2026-09-25-ca-pattern-correspondence/. No headset or learner acceptance is implied by desktop inspection.
++
++
++---
++
++# Two ways to make — 8 October 2026
++
++The source audit confirms the room's existing comparison: Rule 90 history and the six-call recursive pyramid. The stale Wireworld tutorial is replaced with a complete reconstruction of that encounter. Bring the point back as an address inspector and STEP control. Keep the copy recipe supplied, so deriving recursion is not a hidden prerequisite. The independent three-seed edit must change the row without changing the sculpture. The final reflection adds the point's new role and a current museum image; the rest of its inquiry is retained.
++
++Keep the desk, floor history, film and pyramid placements. Clear incidental obstruction and extra gate, put the passages at their thresholds. Native before/after overhead, raised and visitor images record this modest spatial change. The learner miniature is mounted temporarily for its photograph, not added as a duplicate artifact.
++
++29 printed-code + 38 museum checks pass; four routes/158 samples. Exact evaluator and recursive-placement parity, transfer, two fault variants, pickup/step/release and physical support are tested. No headset, independent student or complete portal transition. Blank frames remain. The inherited five-copy wall caption is corrected to six placements at half spacing, and the explorer caption now names the seed comparison. This hall's blurb no longer describes uninstalled Wireworld. Native assertions check the displayed captions; other halls' catalogue records are preserved.
++
++Next CA_EdgeOfChaos: compare two nearly matching beginnings under one procedure, after auditing the installed volumes and controls.
+--- before/blurb.md
++++ after/blurb.md
+@@ -1,3 +1 @@
+-Wireworld: cells can be empty, electron head, electron tail, or conductor. Electrons flow along conductor paths, enabling logic gates, circuits, computers. A cellular automaton that can simulate computers. Turing completeness in four colors.
+-
+-Langton's ant: a single agent on a grid, flipping cells as it walks, turning based on what it finds. Not parallel update but sequential. Simple rules, complex emergent highways. The ant builds order from apparent chaos after thousands of steps. Patience reveals pattern.
++A cellular history and a recursive cube construction resemble one another. Change the seed and compare what each procedure reads.
+--- before/neighbour_study.gd
++++ commons/artifacts/ca_rule_explorer/neighbour_study.gd
+@@ -62,6 +62,7 @@
+ 		floor_history = load("res://commons/artifacts/ca_rule_explorer/comparison_floor.gd").new()
+ 		add_child(floor_history)
+ 		floor_history.build(work)
++		add_child(load("res://commons/artifacts/ca_rule_explorer/hand_point.gd").new())
+ 	refresh()
+ 
+ func next_cell() -> void:
+--- before/commons/data/book/cellularautomata.json
++++ commons/data/book/cellularautomata.json
+@@ -156,18 +156,18 @@
+       "lines": [
+         {
+           "token": "sierpinski_pyramid",
+-          "text": "Five copies of yourself, arranged just so, and you contain yourself forever",
+-          "by": "draft",
+-          "note": "authorship over the rule is the payoff and no procedure comes with it: nothing runs from a wanted behaviour back to a rule number, so writing a rule here is searching 256 of them and looking.",
+-          "note_src": {
+-            "file": "commons/maps/CA_AgentsCircuits/critical.md",
+-            "quote": "The 256-rule space is navigable but not designable."
++          "text": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
++          "by": "codex-ca-comparison-2026-10-08",
++          "note": "This installed configuration uses six recursive calls, including an extra crown. Spacing halves; leaf cube size stays fixed. It is a finite collection with overlapping instances.",
++          "note_src": {
++            "file": "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd",
++            "quote": "_recursive_build(pos + Vector3(0, half_size, 0), half_size, current_depth - 1)"
+           }
+         },
+         {
+           "token": "ca_rule_explorer",
+-          "text": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …",
+-          "by": "draft"
++          "text": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed.",
++          "by": "codex-ca-comparison-2026-10-08"
+         }
+       ],
+       "hero": "sierpinski_pyramid"
+--- before/commons/data/trunk_branches.json
++++ commons/data/trunk_branches.json
+@@ -4091,10 +4091,10 @@
+      "tokens": [
+       "sierpinski_pyramid"
+      ],
+-     "blurb": "Wireworld: cells can be empty, electron head, electron tail, or conductor.",
++     "blurb": "A cellular history and a recursive cube construction resemble one another. Change the seed and compare what each procedure reads.",
+      "says": {
+-      "sierpinski_pyramid": "Five copies of yourself, arranged just so, and you contain yourself forever",
+-      "ca_rule_explorer": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …"
++      "sierpinski_pyramid": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
++      "ca_rule_explorer": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed."
+      },
+      "says_by": {
+       "sierpinski_pyramid": "draft",
+@@ -25148,8 +25148,8 @@
+     "tokens_add": [],
+     "tokens_remove": [],
+     "says": {
+-     "sierpinski_pyramid": "Five copies of yourself, arranged just so, and you contain yourself forever",
+-     "ca_rule_explorer": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …"
++     "sierpinski_pyramid": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
++     "ca_rule_explorer": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed."
+     },
+     "says_by": {
+      "sierpinski_pyramid": "draft",
+--- before/commons/data/museum/trunk_branches.json
++++ commons/data/museum/trunk_branches.json
+@@ -4091,10 +4091,10 @@
+      "tokens": [
+       "sierpinski_pyramid"
+      ],
+-     "blurb": "Wireworld: cells can be empty, electron head, electron tail, or conductor.",
++     "blurb": "A cellular history and a recursive cube construction resemble one another. Change the seed and compare what each procedure reads.",
+      "says": {
+-      "sierpinski_pyramid": "Five copies of yourself, arranged just so, and you contain yourself forever",
+-      "ca_rule_explorer": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …"
++      "sierpinski_pyramid": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
++      "ca_rule_explorer": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed."
+      },
+      "says_by": {
+       "sierpinski_pyramid": "draft",
+@@ -25148,8 +25148,8 @@
+     "tokens_add": [],
+     "tokens_remove": [],
+     "says": {
+-     "sierpinski_pyramid": "Five copies of yourself, arranged just so, and you contain yourself forever",
+-     "ca_rule_explorer": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …"
++     "sierpinski_pyramid": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
++     "ca_rule_explorer": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed."
+     },
+     "says_by": {
+      "sierpinski_pyramid": "draft",

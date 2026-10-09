@@ -1,0 +1,31 @@
+{
+  "room": "Random_Space_Geometry",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Space_Geometry/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d13a57b95217555b48526443477a897e449b785da8a9cd3fe9961f1f19d3ba81",
+    "commons/maps/Random_Space_Geometry/map_data.json": "2dc21d37e0b4c1f5c1a4cd4f951535c037262248dda962984555769e095c3d46",
+    "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/museum-probe.gd": "b85e708449eb27e92d13514f2b58eca727359de798cfe2df1c3de25cdd2e3f79",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Random_Space_Geometry/control.json": "49515abce831185be850bec0d7ca6a9f45ff265c312e3b5dedea10abd3ba1d0a",
+    "ada_run/encounter_pilot/Random_Space_Geometry/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Random_Space_Geometry/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Random_Space_Geometry/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/randomness.json": "a020472029479df1e99409a110e9920dc871632b38db997dddf23d1c6dcbf339",
+    "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn": "31c3b13c6629963970518299c1af44d2be21d58897155dcac159863cac65eda4",
+    "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd": "2d9639deb913cb7d7153f492792a821b01dddc68d4ace9754eef8529e69f94a6"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "room": "Random_Game",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Game/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Game/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Game/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Random_Game/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Game/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Game/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Game/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Game/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Game/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Game/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Game/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d13a57b95217555b48526443477a897e449b785da8a9cd3fe9961f1f19d3ba81",
+    "commons/maps/Random_Game/map_data.json": "d1326e9ca7aa334bdf4921369db6ec249f18805afb755e46ead4005bd176e833",
+    "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/museum-probe.gd": "f71ca22c839e39b77cc05e8c1b055224beef3119a7525f1c595a12aa6752bf07",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Random_Game/control.json": "4c0395e0e1f755254c4d4782187404a38c1ce90d906cc145a66dbdf76cd359fc",
+    "ada_run/encounter_pilot/Random_Game/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Random_Game/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Random_Game/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/random_cubes.json": "300e52e3d34fdda5480641cc4819ca282f325bf05d95b4aa9dd5f1e66e111252",
+    "commons/primitives/cubes/random_cycle_cube.tscn": "3f180a8f17ebdd253d9b09c6a413cff7ea37396c2f80468f2e4e7d6a83f6e7e7",
+    "commons/primitives/cubes/random_cycle_cube.gd": "5bb018f02747f2962b6348ff17b031ab36730798f70f26d5a89518fe7a769b28"
+  }
+}

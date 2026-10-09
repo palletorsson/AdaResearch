@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "boolean_colour_chamber": {
+      "lookup_name": "boolean_colour_chamber",
+      "name": "Boolean Colour Chamber",
+      "scene": "res://commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.tscn",
+      "category": "boolean_surfaces",
+      "description": "Three architectural CSG recipes with a level passage and independent pearl, amber, chrome and chalk finishes. Pointer-selectable materials; optional slow surface drift; geometry remains static.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "auto_ground": false,
+      "footprint": [
+        14,
+        8,
+        17
+      ],
+      "size_group": "environment",
+      "map_sequences": [
+        "boolean_surfaces"
+      ],
+      "tags": [
+        "boolean",
+        "csg",
+        "colour",
+        "shader",
+        "interior",
+        "walkable",
+        "cut"
+      ],
+      "parameters": {
+        "mode": "path, lens or shell; configure before entry",
+        "surface": "0 pearl, 1 amber, 2 chrome, 3 chalk"
+      },
+      "interactions": [
+        "Enter through a carved opening and walk to the other side.",
+        "Point at PEARL, AMBER, CHROME or CHALK on the entrance plinth.",
+        "Use DRIFT to start or hold the surface phase."
+      ],
+      "qfep_connection": "A composed boundary can remain fixed while another rule changes its appearance. Which opening admits a body, a view or concealment depends on dimensions and arrangement.",
+      "validation": "Native desktop study and bounded collision/pointer checks; headset and museum-loader verification remain pending."
+    }
+  }
+}

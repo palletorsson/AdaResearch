@@ -1,0 +1,11 @@
+--- before/commons/maps/Point_One/technical.md
++++ commons/maps/Point_One/technical.md
+@@ -8,7 +8,7 @@
+ 
+ The cumulative construction still reduces point_condition.gd: CENTRE becomes point_position = Vector3(0.0, 1.12, 0.0); RADIUS becomes radius = 0.14; the visible node is renamed visible_point. It retains the mesh instance and attachment, fixed body and separate collision shape. The absent production branch returns after the label and creates no hidden sphere.
+ 
+-doc/book/studies/point-one supplies complete position.gd, visible.gd and solid.gd files and a fixed-camera scene. Executable files are unchanged from the preceding tested study. Labels, finish, resolution, artifact identity and condition branches stay outside the reduced scripts. The study supplies no portable walking or XR pickup.
++doc/book/studies/point-one supplies complete position.gd, visible.gd and solid.gd files and a fixed-camera scene. The three teaching scripts are unchanged from the preceding tested study. study.tscn now inherits the shared Day Zero base.tscn for camera, floor and lighting, with its greeting hidden; this scene integration is checked again. Labels, finish, resolution, artifact identity and condition branches stay outside the reduced scripts. The study supplies no portable walking or XR pickup.
+ 
+ The tutorial's further-reading section preserves the WORLD/LOCAL, formatting and tolerance snippets removed from final.md. These remain explanatory museum reductions, with their inputs and limits stated; they are not additions to the standalone study. No production behavior or placements change in this reading experiment.
+ 

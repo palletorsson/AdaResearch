@@ -1,0 +1,103 @@
+{
+  "checks": [
+    {
+      "name": "Position alone creates no body",
+      "passed": true
+    },
+    {
+      "name": "Visible station only has a marker",
+      "passed": true
+    },
+    {
+      "name": "Three actual moving bodies supplied",
+      "passed": true
+    },
+    {
+      "name": "Visible and physical radii initially coincide",
+      "passed": true
+    },
+    {
+      "name": "Empty station lets the feeler cross",
+      "passed": true
+    },
+    {
+      "name": "Visible surface lets the feeler cross",
+      "passed": true
+    },
+    {
+      "name": "Solid boundary stops its feeler",
+      "passed": true
+    },
+    {
+      "name": "Actual stop is at the authored boundary plus feeler width",
+      "passed": true
+    },
+    {
+      "name": "Screenshot saved: contact-default.png",
+      "passed": true
+    },
+    {
+      "name": "Pause holds the moving bodies still",
+      "passed": true
+    },
+    {
+      "name": "R resets every contact result and position",
+      "passed": true
+    },
+    {
+      "name": "Space resumes the paused sweep",
+      "passed": true
+    },
+    {
+      "name": "Enlarged boundary stops the feeler earlier",
+      "passed": true
+    },
+    {
+      "name": "Enlarged boundary leaves the visible sphere unchanged",
+      "passed": true
+    },
+    {
+      "name": "Screenshot saved: contact-larger-boundary.png",
+      "passed": true
+    },
+    {
+      "name": "Smaller boundary stops the feeler inside the larger visible surface",
+      "passed": true
+    },
+    {
+      "name": "Screenshot saved: contact-smaller-boundary.png",
+      "passed": true
+    },
+    {
+      "name": "Automatic repeat clears the previous stop",
+      "passed": true
+    },
+    {
+      "name": "Learner edit compiles: height",
+      "passed": true
+    },
+    {
+      "name": "Height edit raises the marker",
+      "passed": true
+    },
+    {
+      "name": "Learner edit compiles: visible radius",
+      "passed": true
+    },
+    {
+      "name": "Radius edit expands only the visible marker",
+      "passed": true
+    },
+    {
+      "name": "Learner edit compiles: collision radius",
+      "passed": true
+    },
+    {
+      "name": "Boundary edit retains the original visible radius",
+      "passed": true
+    }
+  ],
+  "engine": "4.6-stable (official)",
+  "passed": true,
+  "scope": "Native portable study: actual moving-body contact, radius edits, pause/repeat and complete learner scripts. No museum or headset test."
+}

@@ -1,0 +1,258 @@
+{
+	"_readme": "Every PLACE in the museum, numbered chapter:NNNN in walking order (z, then x) as each segment is built — a stamped body as much as a wall showing. The number is the handle a ruling uses: em_overrides may `swap_to` another token at a place, move it, or give a showing `text`. Rebuilt every run; the numbering is a function of the plan.",
+	"places": [
+		{
+			"cell": [
+				1,
+				3
+			],
+			"chapter": "forces",
+			"id": "forces:0001",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "VectorBasics",
+			"world": [
+				1.5,
+				0.0,
+				3.5
+			]
+		},
+		{
+			"cell": [
+				13,
+				3
+			],
+			"chapter": "forces",
+			"id": "forces:0002",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "VectorBasics",
+			"world": [
+				13.5,
+				0.0,
+				3.5
+			]
+		},
+		{
+			"cell": [],
+			"chapter": "forces",
+			"id": "forces:0003",
+			"kind": "gate",
+			"pearl": "",
+			"segment": 0,
+			"token": "gate:",
+			"world": [
+				7.5,
+				0.0,
+				4.5
+			]
+		},
+		{
+			"cell": [
+				13,
+				8
+			],
+			"chapter": "forces",
+			"id": "forces:0004",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "vector_normalize_demo",
+			"world": [
+				13.5,
+				0.0,
+				8.5
+			]
+		},
+		{
+			"cell": [
+				2,
+				9
+			],
+			"chapter": "forces",
+			"id": "forces:0005",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "frame_counter_display",
+			"world": [
+				2.5,
+				0.4,
+				9.5
+			]
+		},
+		{
+			"cell": [
+				5,
+				10
+			],
+			"chapter": "forces",
+			"id": "forces:0006",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "vector_normalize_demo",
+			"world": [
+				5.5,
+				0.0,
+				10.5
+			]
+		},
+		{
+			"cell": [
+				1,
+				14
+			],
+			"chapter": "forces",
+			"id": "forces:0007",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "route_vector",
+			"world": [
+				1.5,
+				0.0,
+				14.5
+			]
+		},
+		{
+			"cell": [
+				9,
+				15
+			],
+			"chapter": "forces",
+			"id": "forces:0008",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "adder_board",
+			"world": [
+				9.5,
+				0.0,
+				15.5
+			]
+		},
+		{
+			"cell": [
+				12,
+				15
+			],
+			"chapter": "forces",
+			"id": "forces:0009",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "length_lantern",
+			"world": [
+				12.5,
+				0.4,
+				15.5
+			]
+		},
+		{
+			"cell": [
+				13,
+				20
+			],
+			"chapter": "forces",
+			"id": "forces:0010",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "vector_magnitude_demo",
+			"world": [
+				13.5,
+				0.0,
+				20.5
+			]
+		},
+		{
+			"cell": [
+				1,
+				21
+			],
+			"chapter": "forces",
+			"id": "forces:0011",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "length_lantern",
+			"world": [
+				1.5,
+				0.0,
+				21.5
+			]
+		},
+		{
+			"cell": [
+				5,
+				22
+			],
+			"chapter": "forces",
+			"id": "forces:0012",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "adder_board",
+			"world": [
+				5.5,
+				0.0,
+				22.5
+			]
+		},
+		{
+			"cell": [
+				5,
+				28
+			],
+			"chapter": "forces",
+			"id": "forces:0013",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "dot_product_projector",
+			"world": [
+				5.5,
+				0.4,
+				28.5
+			]
+		},
+		{
+			"cell": [
+				7,
+				28
+			],
+			"chapter": "forces",
+			"id": "forces:0014",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "vector_projection_demo",
+			"world": [
+				7.5,
+				0.8,
+				28.5
+			]
+		},
+		{
+			"cell": [
+				9,
+				28
+			],
+			"chapter": "forces",
+			"id": "forces:0015",
+			"kind": "artifact",
+			"pearl": "",
+			"segment": 0,
+			"token": "2d_in_3d_vectors_vis",
+			"world": [
+				9.5,
+				0.4,
+				28.5
+			]
+		}
+	],
+	"schema": "adaresearch.em_inventory.v1"
+}

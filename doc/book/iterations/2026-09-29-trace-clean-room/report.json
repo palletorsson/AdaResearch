@@ -1,0 +1,235 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "three collection pens remain",
+      "passed": true
+    },
+    {
+      "name": "desk removed",
+      "passed": true
+    },
+    {
+      "name": "head projection removed",
+      "passed": true
+    },
+    {
+      "name": "readout seated and on: DrawDot",
+      "passed": true
+    },
+    {
+      "name": "plain pen replaces held sphere",
+      "passed": true
+    },
+    {
+      "name": "nib supplies trace position",
+      "passed": true
+    },
+    {
+      "name": "readout seated and on: @Node3D@484",
+      "passed": true
+    },
+    {
+      "name": "plain pen replaces held sphere",
+      "passed": true
+    },
+    {
+      "name": "nib supplies trace position",
+      "passed": true
+    },
+    {
+      "name": "readout seated and on: @Node3D@490",
+      "passed": true
+    },
+    {
+      "name": "plain pen replaces held sphere",
+      "passed": true
+    },
+    {
+      "name": "nib supplies trace position",
+      "passed": true
+    },
+    {
+      "name": "whiteboard exists",
+      "passed": true
+    },
+    {
+      "name": "solid wall behind board at -0.9",
+      "passed": true
+    },
+    {
+      "name": "solid wall behind board at 0.0",
+      "passed": true
+    },
+    {
+      "name": "solid wall behind board at 0.9",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: clean-hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: three-pens",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: plain-pen",
+      "passed": true
+    },
+    {
+      "name": "held nib follows forward at 0.0",
+      "passed": true
+    },
+    {
+      "name": "pickup uses authored grip",
+      "passed": true
+    },
+    {
+      "name": "held nib follows forward at 1.97920337176157",
+      "passed": true
+    },
+    {
+      "name": "pickup uses authored grip",
+      "passed": true
+    },
+    {
+      "name": "held pen records nib samples",
+      "passed": true
+    },
+    {
+      "name": "sample follows nib rather than hand centre",
+      "passed": true
+    },
+    {
+      "name": "released pen stops recording",
+      "passed": true
+    },
+    {
+      "name": "four board pens and eraser retained",
+      "passed": true
+    },
+    {
+      "name": "board barrel is simple",
+      "passed": true
+    },
+    {
+      "name": "board barrel is simple",
+      "passed": true
+    },
+    {
+      "name": "board barrel is simple",
+      "passed": true
+    },
+    {
+      "name": "board barrel is simple",
+      "passed": true
+    },
+    {
+      "name": "aligned nib writes on board",
+      "passed": true
+    },
+    {
+      "name": "lifting breaks board stroke",
+      "passed": true
+    },
+    {
+      "name": "board pen returns to its shelf pose",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: wall-board",
+      "passed": true
+    },
+    {
+      "name": "board ground and lifted gap stay white",
+      "passed": true
+    },
+    {
+      "name": "actual canvas retains red ink",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: board-pens",
+      "passed": true
+    },
+    {
+      "name": "eraser removes existing marker ink",
+      "passed": true
+    },
+    {
+      "name": "reset clears the retained image",
+      "passed": true
+    },
+    {
+      "name": "other dot placements retain their sphere",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "board_normal": [
+      -1.0,
+      0.0,
+      0.0000000119248806385031
+    ],
+    "board_position": [
+      7.96000003814697,
+      0.949999988079071,
+      2.5
+    ],
+    "canvas_debug": {
+      "events": 5,
+      "size": "(1024, 614)"
+    },
+    "capture_complete": true,
+    "trace_count": 12,
+    "trace_store_present": true,
+    "wall_support": [
+      {
+        "from": [
+          7.76000022888184,
+          1.54999995231628,
+          1.60000002384186
+        ],
+        "hit": [
+          8.0,
+          1.54999995231628,
+          1.60000002384186
+        ],
+        "x": -0.9
+      },
+      {
+        "from": [
+          7.76000022888184,
+          1.54999995231628,
+          2.5
+        ],
+        "hit": [
+          8.0,
+          1.54999995231628,
+          2.5
+        ],
+        "x": 0.0
+      },
+      {
+        "from": [
+          7.76000022888184,
+          1.54999995231628,
+          3.40000009536743
+        ],
+        "hit": [
+          8.0,
+          1.54999995231628,
+          3.40000009536743
+        ],
+        "x": 0.9
+      }
+    ]
+  },
+  "passed": true,
+  "scope": "Actual museum with supplied pickup transforms and drawing gestures; no headset comfort trial."
+}

@@ -1,0 +1,253 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Gaussian · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Gaussian">← Tutorial lineage</a></p><h1>Random Gaussian</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Gaussian/final.md">Raw captured source</a></p><pre># The shape we counted
+
+What changes when the values stay where they are, but we count them differently?
+
+The two dice could reach the same height by different throws. Their coloured columns kept those ingredients visible. Here we gather values into groups. What will the new picture keep of their differences?
+
+&lt;!-- @distribution_sampler --&gt;
+
+Yellow beads fall toward a row of blue bars. Some bars grow; others wait. An orange line already knows the shape we have come to expect. Look at the beads and the bars before letting that line finish the picture for you.
+
+The cabinet stands in the middle of the hall, its controls facing you as you approach. The other distribution studies stand around it. Its left panel offers UNIFORM, GAUSS, POISSON, EXPON and CLEAR. On the right are BATCH, PAUSE, NEW SEED, BINS and WIDTH. GAUSS is running when you arrive. New beads stop coming after a thousand draws, about twenty seconds; if nothing is falling when you get there, press CLEAR and they begin again.
+
+Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate beside the histogram counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
+
+![The sampler’s numerical record stands beside its histogram, above the compact controls.](/book-review/doc/book/figures/randomness/sampler-visible-record.png)
+
+CLEAR empties the display and restarts its named seed. While paused, it stays empty. Press BATCH. One hundred values are counted immediately, without the falling animation. Describe this particular arrangement. Press twice more, reading the total each time. A gap may close; another bar may fall further short of the pale bar behind it. More evidence does not promise that every part of the picture will improve at the next press.
+
+Those pale bars carry the model&#x27;s expected counts at the current number of landed values. Blue and pale share a count scale. Their disagreement is available to examine; the pale shape does not instruct a blue bar to grow toward it. The disagreement is easiest to read where blue falls short, because the pale then shows above it; a blue bar that exceeds its expected count hides the pale top.
+
+Now press UNIFORM. The bins clear, the seed stays, and three batches again give three hundred values. Keep the same thirty bins. Each pale bar now expects ten. Compare the two arrangements at equal count before deciding which looks more irregular. UNIFORM has used each number directly:
+
+```gdscript
+		DistType.UNIFORM:
+			return _rand()
+```
+
+GAUSS has given two numbers another job:
+
+```gdscript
+		DistType.GAUSSIAN:
+			var u1 := maxf(_rand(), 0.0001)
+			var u2 := _rand()
+			var z := sqrt(-2.0 * log(u1)) * cos(TAU * u2)
+			return _fit(gaussian_mean + z * gaussian_std)
+```
+
+There is the logarithm, the square root, the turning cosine again. The mean is 0.5; the standard deviation is 0.15: two draws in three land within 0.15 of the middle, nineteen in twenty within 0.30, and the rare ones make the tails. Press WIDTH and the deviation cycles through 0.08, 0.15 and 0.25 with a cleared display, so the same two-in-three can be watched staying inside a narrower or a wider band. The code directly transforms draws into an approximation to a normal distribution. It does not wait for an arbitrary collection of values to become Gaussian. UNIFORM will keep its own law as more draws arrive.
+
+Read the small guard on `u1`. Zero cannot enter the logarithm. Values below 0.0001 share that lower bound, limiting the computed reach to about 4.29 standard deviations. Even before a value reaches the screen, the numerical procedure has made a boundary. The ideal orange model and this finite computation are close enough to compare, and still worth distinguishing.
+
+There is another boundary at the screen itself:
+
+```gdscript
+func _fit(raw: float) -&gt; float:
+	if raw &lt; 0.0 or raw &gt; 1.0:
+		_clipped += 1
+	return clampf(raw, 0.0, 1.0)
+```
+
+The previous room&#x27;s glass reflected an overshoot. Here a value past one is kept at one; a value below zero is kept at zero. Its distance beyond the edge is lost from the retained value. Look at the plate&#x27;s clipped count and its two edge-bin counts. They need not agree: an edge bin also contains values that were inside the display all along.
+
+Try EXPON, then press BATCH three times. More values gather near the left. Occasionally a draw from its long right tail is clamped at one. A finite run need not contain such a draw; the model&#x27;s tail is a probability, not an appointment. NEW SEED lets another run take place. Its number differs from the current one, though an older number can return later.
+
+Return to GAUSS or UNIFORM, stay paused (the plate&#x27;s last line should read “paused”; press PAUSE only if it reads “running”), clear, and collect three batches. Now press BINS. Thirty become sixty, then ten, then thirty again. The landed count stays at three hundred. Nothing has been sampled again. The stored values are assigned to new intervals:
+
+```gdscript
+	for v in _values:
+		_bins[clampi(int(v * num_bins), 0, num_bins - 1)] += 1
+```
+
+Watch the mean and the σ marked “binned.” They can change too. The plate estimates each value by the centre of its bin, so changing the intervals changes that estimate. The values have stayed; the account of them has moved. Return to thirty bins and the earlier account returns.
+
+Look back at the height of the picture. Blue bars are scaled against the tallest blue bar, with a small visible baseline even for an empty bin. A handful of values can already occupy almost the whole height. The orange model shape has its own scale. Its curve cannot tell you how much evidence has arrived; the count can.
+
+CLEAR and repeat the batches if you want to point at the same sample twice. That return depends on the seed and the procedure, including which law spends the random draws. It gives a discussion somewhere to stand while the surrounding museum continues.
+
+&lt;!-- @GaussianPaintSplatter --&gt;
+
+A few steps from the cabinet, a white plate collects coloured dots. Their positions come from the same guarded transform you read above, yet no dot lands near the middle: a draw within one standard deviation of the centre is discarded, leaving no mark, and nothing on the plate counts it. That is about two draws in five, taken from the densest part of the model: on a line the same hole would swallow two draws in three, but on a plane it is a disc, and a disc one deviation across holds fewer. Its label calls the hole a “Safe Zone.” From the painting alone, could you tell a centre that was never reached from one that was refused?
+
+&lt;!-- @ --&gt;
+
+We have met a centre, but have not discovered a command to belong to it. Frequent under a chosen model does not mean preferable, healthy or correct. Before carrying this shape onto a body, ask what was measured, what the bins kept, and what the edges absorbed. In Random Mushrooms, sampled numbers become differences among forms. Which features of those bodies will be allowed to vary?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Gaussian/tutorial.md">Raw captured source</a></p><pre># Random Gaussian — a sample and its account
+
+The primary is `distribution_sampler:180#stand:cabinet` at (11,19). This builds on Random Walk&#x27;s distinction between a sampled event and its stored record. The next room, Random Mushrooms, uses sampled parameters to vary forms. All excerpts below are from `commons/artifacts/distribution_sampler/distribution_sampler.gd`.
+
+## Begin with the existing controls
+
+PAUSE toggles new automatic draws. Existing airborne markers still land. CLEAR removes both their records and meshes, resets the counts and re-seeds the current private generator; it preserves the running/paused setting. For an exact comparison, PAUSE then CLEAR, choose a law and press BATCH three times. BATCH lands up to one hundred immediately; the full run reserves capacity at issue time, including draws still in flight, and caps at one thousand.
+
+UNIFORM, GAUSS, POISSON and EXPON each clear when selected. BINS cycles 30 → 60 → 10 → 30 without redrawing stored values. The button marked PAUSE is used again to resume; the readout names running/paused. There is no mean/deviation slider or seed-entry field on the cabinet.
+
+## A uniform number acquires another law
+
+```gdscript
+		DistType.UNIFORM:
+			return _rand()
+```
+
+```gdscript
+		DistType.GAUSSIAN:
+			var u1 := maxf(_rand(), 0.0001)
+			var u2 := _rand()
+			var z := sqrt(-2.0 * log(u1)) * cos(TAU * u2)
+			return _fit(gaussian_mean + z * gaussian_std)
+```
+
+This guarded Box–Muller construction approximates the normal law directly, using two uniform draws per returned value. Mean 0.5 and deviation 0.15 are parameters. Collecting more values does not turn the UNIFORM law into a Gaussian law. The cabinet&#x27;s expected frames use the ideal model; its finite generator and lower guard remain approximations.
+
+The lower guard is applied before the logarithm. Adding epsilon to every draw, as the previous version did, allowed inputs greater than one inside `log`, making the Gaussian square-root argument negative. It also shifted all valid draws. Clamping only the lower input fixes that domain error while preserving the two-draw consumption. The computed standard-normal component is bounded by sqrt(−2 log(0.0001)) ≈ 4.29193.
+
+POISSON counts repeated products until a threshold is crossed, then rescales its integer result:
+
+```gdscript
+		DistType.POISSON:
+			var L := exp(-poisson_lambda)
+			var k := 0
+			var p := 1.0
+			while p &gt; L:
+				k += 1
+				p *= _rand()
+			return _fit(float(k - 1) / maxf(poisson_lambda * 3, 0.0001))
+```
+
+With λ=5, its displayed values lie at integer multiples of 1/15 before clamping. It is a discrete law, even when its bars suggest a continuous mound. The number of random draws consumed per value varies.
+
+EXPON also guards its logarithm:
+
+```gdscript
+		DistType.EXPONENTIAL:
+			var u := maxf(_rand(), 0.0001)
+			var val := -log(u) / maxf(exponential_rate, 0.0001)
+			return _fit(val / 2.0)
+```
+
+At rate 3, the ideal displayed tail beyond one has probability exp(−6) ≈ 0.002479. A sample of a thousand need not include it. The numerical guard bounds the raw result at approximately 1.535 before `_fit` clamps it.
+
+## A boundary and an interval
+
+```gdscript
+func _fit(raw: float) -&gt; float:
+	if raw &lt; 0.0 or raw &gt; 1.0:
+		_clipped += 1
+	return clampf(raw, 0.0, 1.0)
+```
+
+This operation clips rather than reflects. The clipped count concerns issued draws; the bars and edge counts concern landed values. Pause and let the current flight finish before treating them as the same population. Edge bins also contain valid interior values, so their counts are not a count of clipped draws.
+
+A value landing in the histogram uses:
+
+```gdscript
+		var bin_idx := int(sample.value * num_bins)
+		bin_idx = clampi(bin_idx, 0, num_bins - 1)
+```
+
+The value one belongs to the last bin. Landed values are retained as a `PackedFloat32Array`. BINS uses that same stored record to rebuild counts. Under a new partition, the binned mean and deviation can change while the values and number of draws stay fixed.
+
+## Counts, expectation and shape
+
+`expected_counts()` multiplies each ideal-model bin probability by the current landed N. Gaussian and exponential edge probabilities include the model mass beyond the display. Blue bars and pale model bars share the observed-maximum count scale and the 0.01 m baseline. Empty bins still have that baseline.
+
+The orange model curve is divided by its own sampled peak and drawn to 80% of display height. The sign labels it a shape at a separate scale. This keeps it inside the panel; it cannot serve as a count axis. Expected-count frames, rather than the orange line, provide the quantitative comparison.
+
+## What replay keeps
+
+CLEAR resets the named generator and sample timer as well as values, counters and markers. NEW SEED rejects the immediately current number but can revisit an older one. Replaying a law with equal sample count repeats its values in order. Keeping the seed while changing laws changes how draws are consumed. Rebinning is a different operation: no new draw is consumed.
+
+Next: identify which properties of a mushroom a sampled value is allowed to change.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Gaussian/technical.md">Raw captured source</a></p><pre># Random Gaussian — implementation record
+
+Primary: `res://commons/artifacts/distribution_sampler/distribution_sampler.tscn`, with `distribution_sampler.gd` in the same folder. Placed at (11,19), facing north, under `#stand:cabinet`. The 14×22 map, nineteen recovered platform cells, museum floor override at the teleporter (10,3), clear rectangle [[9,16,13,21]] and existing secondary artifacts remain.
+
+The cabinet carries a 0.6×0.4 m display at 0.95 m, with controls on its outboard shoulder. Its housed headline and six lines identify law, landed/in-flight counts, cap, clipped draws, edge-bin counts, binned statistics, seed and cadence. The sign now distinguishes blue sample counts, pale model counts and the orange model shape at a separate scale.
+
+| Quantity | Current setting |
+|---|---|
+| Automatic rate | 50 issued draws/s |
+| Run cap | 1,000 issued draws, including flight |
+| BATCH | Up to 100 draws landed immediately, within remaining reserved capacity |
+| BINS | 30 → 60 → 10 → 30; no redrawing |
+| Gaussian | mean 0.5, deviation 0.15; guarded Box–Muller |
+| Poisson | λ=5; integer result divided by 15 |
+| Exponential | rate 3; sampled time divided by 2 |
+| Stored range | [0,1], clamped rather than reflected |
+| Retained values | PackedFloat32Array, landed values |
+| Bar baseline | 0.01 m, including empty bins |
+| Orange shape | 80% display height at its own sampled peak |
+
+There are nine panel controls: UNIFORM, GAUSS, POISSON, EXPON, CLEAR; BATCH, PAUSE, NEW SEED, BINS. PAUSE toggles issuance; already issued markers continue to land. CLEAR preserves the running flag and re-seeds, resets counters/timer and clears both flight dictionaries and meshes. NEW SEED rejects the immediately current seed. There are no cabinet mean/deviation controls or seed-entry field.
+
+This review repairs Gaussian and exponential logarithm inputs by applying `maxf(u,0.0001)` instead of adding 0.0001. The Gaussian&#x27;s old expression could take the square root of a negative number for u&gt;0.9999; the exponential could return a small negative value near u=1. New endpoint tests call the production transforms with injected inputs 0, 0.00001, 0.5, 0.99995 and 1. Draw consumption is unchanged, but seeded numerical values intentionally change where the old offset shifted them. Historical screenshots are not golden numerical baselines for the corrected transform.
+
+Capacity is reserved at `_drawn` rather than `_total_samples`: automatic/manual issuance and BATCH cannot jointly oversubscribe a run while beads are airborne. Manual negative batch sizes cannot reduce counters. CLEAR detaches old meshes before deferred freeing; landing cleanup does the same so remaining dictionary indices correspond to live marker children. Landing tests the actual drawn bar top, including its baseline, instead of the old independent max_samples-based height.
+
+The ideal Gaussian reference uses `normal_cdf`; EXPON uses differences of exponential survival probabilities. Edge probabilities include ideal mass outside the range. These model expectations are not exact descriptions of every finite generator or guarded tail. The orange line is only a model-shape reference and is scaled independently of counts. Binned mean/standard deviation use interval centres, not exact retained values, so changing bins can change their estimates.
+
+The extended live probe exports four 1,000-value samples under a common seed plus a deliberately selected exponential edge example. Snapshots at 1,12,100,300,1000 and rebinning at 10,30,60 are deep copies; the first export exposed mutable count arrays and was superseded. Initial runtime assertions passed, but that first export must not be used for intermediate counts.
+
+Source tests, fresh Godot receipt, exact count/value checks, screenshots, browser validation and diagnostic limits are recorded in `doc/space/gaussian-review-2026-09-12/README.md`. No headset or Quest-performance verification is claimed.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Gaussian/intent.md">Raw captured source</a></p><pre>Concept: Separate a law, a finite sample and the display that groups it. Keep equal-N comparison and rebinning inspectable before interpreting a familiar silhouette.
+Sequence role: Random Walk separated a proposed step, reflected endpoint and stored trace. Random Gaussian gathers draws by frequency, then exposes clamping, binning and scale. Next: Random Mushrooms, where values acquire consequences for forms.
+Encounter: Preserve the existing distribution_sampler cabinet and other studies. PAUSE stops issuance while flight lands; CLEAR resets without resuming. Three BATCH presses give N=300 after a paused clear. Compare GAUSS/UNIFORM; inspect EXPON&#x27;s possible edge counts; cycle bins with retained values.
+Technical angle: Guarded Box–Muller, Knuth Poisson and inverse exponential transforms. The sample cap reserves issued draws. Flight markers land at actual bar tops and are removed with their records. Pale expected-count bars and blue observed bars share one count scale; the orange model shape has an explicitly separate peak scale inside the panel.
+Critical angle: More samples do not make every law Gaussian, and each batch need not improve every discrepancy. A clipped value loses its overshoot; an edge count includes interior values too. Binned mean/deviation can move while every value stays fixed. Frequency does not prescribe how a body ought to be.
+Primary: distribution_sampler alone; book hero and final anchor agree. The comparator, Galton board and paint application support the central cabinet in an 11×13 hall. The blur demonstrations, second mound and repeated reference sphere are archived.
+Deferred: Tracked-hand approach, small lettering and headset performance. Numerical model references remain ideal approximations to the finite safeguarded generator.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Gaussian/critical.md">Raw captured source</a></p><pre># The account moves
+
+The orange model curve is present before enough beads have landed to make a convincing sample. That anticipation can help us look, and can also finish the observation before it has happened. The opening asks the reader to describe a particular arrangement before naming what it ought to resemble. No particular sparse arrangement is guaranteed. A dozen observations can cluster, scatter or leave the expected centre empty.
+
+The pale frames compare observed counts with the ideal model&#x27;s expected counts at the same N. They are not goals for the blue bars, and the generator does not consult their discrepancy to repair a sample. An individual bin&#x27;s discrepancy need not shrink with each batch. Absolute count deviations and deviations in proportion are different quantities; more data does not make every local difference monotonically smaller.
+
+## More values do not change every law into a bell
+
+GAUSS explicitly applies a guarded Box–Muller transform. UNIFORM retains its uniform law as the sample grows. The cabinet does not demonstrate the claim that all accumulated independence becomes Gaussian. A limit theorem about suitably rescaled sums requires its own construction and assumptions; this artifact is comparing laws of individual returned values.
+
+The normal model is an ideal reference. The generator has finite resolution, and the safeguard at the logarithm limits the possible computed tail. During this review, a guard written as an added offset also admitted a negative square-root argument near the other end of its input range. Repairing it required naming which inputs the operation can accept. Treating such a fault as an interesting residue need not mean leaving a broken sampler in the lesson. The repaired boundary remains available to examine.
+
+## The edge absorbs a distance
+
+In Random Walk an overshoot reflected back. Here an out-of-range value is stored at the edge. Two raw values far apart beyond one can become the same retained value, one. The clipped counter remembers that something crossed, while the stored value loses how far. The first and last bins also contain ordinary in-range values, so an edge count alone cannot reconstruct that loss.
+
+This is a decision made by this implementation, not a necessary property of every bounded display. Another instrument could widen its range or keep overflow bins and raw values. Here the mismatch between the ideal tail and the available screen gives a concrete place to ask what an account should retain.
+
+## A centre that moves without its population
+
+BINS changes the grouping of already retained values. The count stays fixed, but the picture changes. The printed mean and deviation can move because they use bin centres as representatives. Returning to the earlier bins restores the earlier account. A different partition does not become arbitrary just because it is chosen: its interval width and the distinctions it can preserve remain inspectable.
+
+The tallest blue bar nearly fills the frame even with very little evidence. The orange curve has its own height normalisation. These visual choices help keep a small instrument legible and remove absolute magnitude from height alone. The numerical count and the pale expected-count bars supply information that a familiar silhouette cannot.
+
+The queer question can stay at this concrete level: which differences remain possible and legible under a model, a boundary and a partition? Calling one region frequent does not give it authority over how a person ought to be. That further judgement would need purposes and values that the sampler does not compute.
+
+## From numbers to forms
+
+This cabinet&#x27;s PAUSE is local. Beads already issued continue landing; the wider museum keeps running. CLEAR returns a procedure to its named beginning and removes the old markers as well as their records. These affordances let a group compare the same sample without suggesting that all surrounding processes have been suspended.
+
+The next room asks which dimensions of a population can vary. A distribution alone cannot answer that. Someone must connect its values to height, width, colour, spacing or another property. The centre, spread and limits will then acquire consequences for the bodies that can be made.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Gaussian/artifacts.md">Raw captured source</a></p><pre># Artifacts in Random_Gaussian
+
+The instrument and the spatial encounter share a hall. Placements are source-grid metres; the entrance is at -Z.
+
+| Artifact | Role | Position (x, z) |
+|---|---|---|
+| `distribution_sampler` | primary | (5, 6) |
+| `galton_board` | secondary | (2, 10) |
+| `distribution_comparator` | secondary | (8, 10) |
+| `GaussianPaintSplatter` | secondary | (2, 7) |
+
+The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Gaussian/summary.md">Raw captured source</a></p><pre># Random Gaussian
+
+Pause new draws, let flight finish, then compare GAUSS and UNIFORM at three batches of one hundred. The pale frames show ideal-model expected counts at the current N; the orange curve is a separately scaled shape. BINS regroups the same retained values and can change the binned mean and deviation. Clipping parks an out-of-range value at an edge, losing its overshoot. The seed makes the procedure repeatable. Carry the distinction between a value, its grouping and its consequences into Random Mushrooms.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Gaussian/blurb.md">Raw captured source</a></p><pre># The shape we counted
+
+A curve is waiting before the beads arrive. Count what actually lands, then change the bins while keeping every value. Even the printed centre may move. What did the picture preserve, and what did its edges absorb?
+</pre></section></body></html>

@@ -1,0 +1,53 @@
+--- before/exchange_study.gd
++++ commons/artifacts/rd_artifact/exchange_study.gd
+@@ -11,8 +11,10 @@
+ var show_u:bool=false
+ var coating:bool=true
+ var injections:int=0
++var exchange_revealed:bool=false
+ var console:Node3D
+ var reading:Label3D
++var left_title:Label3D
+ var right_title:Label3D
+ var textures:Array[ImageTexture]=[]
+ var materials:Array[StandardMaterial3D]=[]
+@@ -44,6 +46,9 @@
+ 	target=mini(left.ticks+100,LIMIT);running=left.ticks<LIMIT;elapsed=0;_readout()
+ 
+ func toggle_exchange() -> void:
++	# Observation keeps A/B open; the visitor's intervention names the relation.
++	# REPLAY retains this knowledge along with the chosen exchange setting.
++	exchange_revealed=true
+ 	right.exchange=not right.exchange;reset()
+ 
+ func inject() -> void:
+@@ -79,11 +84,13 @@
+ 
+ func _readout() -> void:
+ 	var state:String="LIMIT" if left.ticks==LIMIT else "RUN" if running else "HELD"
+-	reading.text="%s / TICK %d / dt 1\nW (12,15)    U        V\nA             %.3f    %.3f\nB             %.3f    %.3f\nVIEW %s / FEED .037 / KILL .060\nB EXCHANGE %s / INJECTIONS %d"%[state,left.ticks,left.u[WITNESS],left.v[WITNESS],right.u[WITNESS],right.v[WITNESS],"U" if show_u else "V ×2","ON" if right.exchange else "OFF",injections]
+-	right_title.text="B / EXCHANGE " + ("ON" if right.exchange else "OFF")
++	var intervention:String="B EXCHANGE %s / INJECTIONS %d"%["ON" if right.exchange else "OFF",injections] if exchange_revealed else "INJECTIONS %d"%injections
++	reading.text="%s / TICK %d / dt 1\nW (12,15)    U        V\nA             %.3f    %.3f\nB             %.3f    %.3f\nVIEW %s / FEED .037 / KILL .060\n%s"%[state,left.ticks,left.u[WITNESS],left.v[WITNESS],right.u[WITNESS],right.v[WITNESS],"U" if show_u else "V ×2",intervention]
++	left_title.text="A / EXCHANGE ON" if exchange_revealed else "A"
++	right_title.text=("B / EXCHANGE " + ("ON" if right.exchange else "OFF")) if exchange_revealed else "B"
+ 
+ func readback() -> Dictionary:
+-	return {"ticks":left.ticks,"right_ticks":right.ticks,"running":running,"target":target,"exchange":right.exchange,"view_u":show_u,"coating":coating,"injections":injections,"u_a":left.u[WITNESS],"v_a":left.v[WITNESS],"u_b":right.u[WITNESS],"v_b":right.v[WITNESS],"batch_usec":last_batch_usec}
++	return {"ticks":left.ticks,"right_ticks":right.ticks,"running":running,"target":target,"exchange":right.exchange,"exchange_revealed":exchange_revealed,"view_u":show_u,"coating":coating,"injections":injections,"u_a":left.u[WITNESS],"v_a":left.v[WITNESS],"u_b":right.u[WITNESS],"v_b":right.v[WITNESS],"batch_usec":last_batch_usec}
+ 
+ func _build_space() -> void:
+ 	for side in range(2):
+@@ -111,9 +118,10 @@
+ 		st.generate_normals();var wall:=MeshInstance3D.new();wall.name="FieldWall_%d"%side;wall.mesh=st.commit();wall.material_override=mat;add_child(wall);walls.append(wall)
+ 		var title_case:MeshInstance3D=box("TitleCase_%d"%side,Vector3(2.5,0.28,0.06),Vector3(cx,3.43,4.25),Color("122d3d"))
+ 		(title_case.material_override as StandardMaterial3D).shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
+-		var label_:Label3D=label("FieldTitle_%d"%side,"A / EXCHANGE ON" if side==0 else "B / EXCHANGE OFF",48)
++		var label_:Label3D=label("FieldTitle_%d"%side,"A" if side==0 else "B",48)
+ 		label_.pixel_size=0.002;label_.position=Vector3(cx,3.43,4.21);label_.rotation_degrees.y=180;add_child(label_)
+-		if side==1:right_title=label_
++		if side==0:left_title=label_
++		else:right_title=label_
+ 		var note:Label3D=label("DeskTag_%d"%side,"A" if side==0 else "B",55);note.position=Vector3(cx,0.97,-0.41);note.rotation_degrees=Vector3(-90,0,0);add_child(note)
+ 		# W is the first unseeded address beside the square: watch exchange arrive.
+ 		var wx:float=cx+(12.5/32.0-0.5)*1.6;var wz:float=0.5+(15.5/32.0-0.5)*1.6

@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "name": "Throttle produces forward motion",
+      "passed": true
+    },
+    {
+      "name": "Releasing throttle coasts with resistance",
+      "passed": true
+    },
+    {
+      "name": "Brake stops without reversing",
+      "passed": true
+    },
+    {
+      "name": "Rail collision confines the car and reduces speed",
+      "passed": true
+    },
+    {
+      "name": "A swept crossing collects a cube once",
+      "passed": true
+    },
+    {
+      "name": "Pickup does not count again",
+      "passed": true
+    },
+    {
+      "name": "Barrier crossing records a hit and slows the car",
+      "passed": true
+    },
+    {
+      "name": "Nearby desktop visitor can board",
+      "passed": true
+    },
+    {
+      "name": "Boarding preserves museum stream coordinate",
+      "passed": true
+    },
+    {
+      "name": "Cockpit stays far from the hall",
+      "passed": true
+    },
+    {
+      "name": "Road uses a fixed section pool",
+      "passed": true
+    },
+    {
+      "name": "100 km does not grow the road tree",
+      "passed": true
+    },
+    {
+      "name": "Recycled geometry remains close to the cockpit",
+      "passed": true
+    },
+    {
+      "name": "Old collectible state is pruned",
+      "passed": true
+    },
+    {
+      "name": "Desktop locomotion yields to the cockpit",
+      "passed": true
+    },
+    {
+      "name": "Restart returns to a three-second start",
+      "passed": true
+    },
+    {
+      "name": "Exit restores desktop pose",
+      "passed": true
+    },
+    {
+      "name": "Exit removes the whole racing pocket",
+      "passed": true
+    },
+    {
+      "name": "The existing XR body can board",
+      "passed": true
+    },
+    {
+      "name": "Seating installs an exclusive movement provider",
+      "passed": true
+    },
+    {
+      "name": "Right and left trigger inputs map independently to throttle and brake",
+      "passed": true
+    },
+    {
+      "name": "XR thumbstick locomotion cannot drive the collision body out of the car",
+      "passed": true
+    },
+    {
+      "name": "Moving the held XR wheel handle steers right",
+      "passed": true
+    },
+    {
+      "name": "The headset remains free to lean",
+      "passed": true
+    },
+    {
+      "name": "Released grip returns to the wheel",
+      "passed": true
+    },
+    {
+      "name": "XR return restores the original rig and head pose",
+      "passed": true
+    },
+    {
+      "name": "Return removes the seat movement override",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Arcade model, fixed pool over 100 km, desktop transfer, production XRTools body and grab driver with supplied poses. Physical headset feel not tested."
+}

@@ -1,0 +1,205 @@
+{
+  "files": [
+    {
+      "path": "commons/maps/Point_One/final.md",
+      "sha256": "bdd653591fd8379ee5723d3d9bcbe2e5c1a26e9dfa51af1e48decff6d87dd861",
+      "restored": true
+    },
+    {
+      "path": "commons/maps/Point_One/map_data.json",
+      "sha256": "71a1fbfbfb3667f7e57ae7c12242ad9f822b65f1abf891d5a8265d8674ed1f5f",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "17657d72ac5f627fd6ad9cd33545b07b071cd09afb57db70da62668869813643",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Lines/map_data.json",
+      "sha256": "4b26b7a4d12563a60d859109a51e05028866d564b410725cd0a1bc633b14d623",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Trace/final.md",
+      "sha256": "8810c7c190070ab5841e59ea3354a0292430987ef2fd3a5727a500621a9e807a",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Trace/map_data.json",
+      "sha256": "981ee5cddf884f2e8efbfb091477bac12b53b01b23830a0114f2aaa64f954723",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/final.md",
+      "sha256": "624352ddce4c0424cf2f21ade670be62641343bba7c58cbda55574442e6fce9d",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/map_data.json",
+      "sha256": "bf0e10a305c8b4706205af8423c67688a9decb07798f3fb37795d1e56f4b707f",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Triangle_Context/final.md",
+      "sha256": "e0ae1dca3ccd0a0a8a64948bd23b561089ce96466b093e63b282ae8788d7bc21",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Triangle_Context/map_data.json",
+      "sha256": "ac62038524f201011720f82c19be22cfb25957ecf226142fbe28bac296023ea2",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Polythedra/final.md",
+      "sha256": "9263b26bef8b6518f93e4ee7a7d47964b0e2c633381c0ebd2ff26f7418e98385",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Polythedra/map_data.json",
+      "sha256": "b0c68e48eccba767a72e65fdb52f5d0df268d027b3442b3954546efd06130cc8",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/final.md",
+      "sha256": "c726cbae8cd669beae2b53a1175e393a6ee889107c89bc66458c0af077f9a99c",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/map_data.json",
+      "sha256": "5806e445ef6b724ad63a2b0164a0de14a847685550f847a46c0062121e37c346",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Ignorance/final.md",
+      "sha256": "b98f15ff47b9ec335120a54c20b08bce4af3d904a4059010f118bc707bd244c5",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Ignorance/map_data.json",
+      "sha256": "df6904b593f9a8bfca12902c9038cea48dc280ef60cb2fa08d1e069451c53770",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/final.md",
+      "sha256": "8d617797d811beb26e777aa1c5ddaee6106becff9dceaa92a922067d7b4a42ff",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/map_data.json",
+      "sha256": "f2b3a51d4ce38ef310a9c8775cf251becd357b36f3106f902c6c58d436f3589a",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Melencolia/final.md",
+      "sha256": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4",
+      "restored": false
+    },
+    {
+      "path": "commons/maps/Primitives_Melencolia/map_data.json",
+      "sha256": "7a7cc9b667f8381856d096a408be7bcc565aeb311cdb7546ae9e5e3c4bc7b178",
+      "restored": false
+    }
+  ],
+  "six_hall_audit": [
+    {
+      "map": "Point_Triangle_Context",
+      "final_sha256": "e0ae1dca3ccd0a0a8a64948bd23b561089ce96466b093e63b282ae8788d7bc21",
+      "anchors": [
+        "triangle_line_puzzle",
+        "draw_triangle_faces"
+      ],
+      "book_anchors_not_primary": [],
+      "primary_without_anchor": [],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "final_sha256": "9263b26bef8b6518f93e4ee7a7d47964b0e2c633381c0ebd2ff26f7418e98385",
+      "anchors": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "pyramid_edit",
+        "cube_scene",
+        "prism_block",
+        "concrete_barrier",
+        "street_sign",
+        "diamonds",
+        "rock_spawner",
+        "rock_scanner"
+      ],
+      "book_anchors_not_primary": [],
+      "primary_without_anchor": [],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    },
+    {
+      "map": "Point_Animatedcube",
+      "final_sha256": "c726cbae8cd669beae2b53a1175e393a6ee889107c89bc66458c0af077f9a99c",
+      "anchors": [
+        "cube_lines",
+        "polyhedron_nets_cube",
+        "animatedcubebuilder"
+      ],
+      "book_anchors_not_primary": [],
+      "primary_without_anchor": [],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "final_sha256": "b98f15ff47b9ec335120a54c20b08bce4af3d904a4059010f118bc707bd244c5",
+      "anchors": [
+        "sphere_low",
+        "sphere_mid",
+        "sphere_high",
+        "sphere",
+        "budget_of_smoothness"
+      ],
+      "book_anchors_not_primary": [],
+      "primary_without_anchor": [],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    },
+    {
+      "map": "Primitives_Portals",
+      "final_sha256": "8d617797d811beb26e777aa1c5ddaee6106becff9dceaa92a922067d7b4a42ff",
+      "anchors": [
+        "combine_portals",
+        "achilles_tortoise"
+      ],
+      "book_anchors_not_primary": [],
+      "primary_without_anchor": [],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "final_sha256": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4",
+      "anchors": [
+        "snap_pyramid_puzzle",
+        "pyramid",
+        "pyramidlong",
+        "cube_scene",
+        "prism_block",
+        "durer_scene",
+        "bigframe",
+        "code_display",
+        "diamondtoruscollection"
+      ],
+      "book_anchors_not_primary": [
+        "bigframe",
+        "code_display",
+        "cube_scene",
+        "diamondtoruscollection",
+        "prism_block"
+      ],
+      "primary_without_anchor": [
+        "eleven_dots"
+      ],
+      "anchors_not_placed": [],
+      "recommendation": "Keep current chapter as the review baseline; local proposals only."
+    }
+  ]
+}

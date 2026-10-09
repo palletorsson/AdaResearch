@@ -1,0 +1,660 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "all three existing artifacts are placed",
+      "passed": true
+    },
+    {
+      "name": "controller and score are bound to this floor",
+      "passed": true
+    },
+    {
+      "name": "current floor has 144 monochrome tiles",
+      "passed": true
+    },
+    {
+      "name": "four physical floor controls exist",
+      "passed": true
+    },
+    {
+      "name": "HOLD stops the visual clock",
+      "passed": true
+    },
+    {
+      "name": "pattern cycle restores CHECKER at phase zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: checker-zero",
+      "passed": true
+    },
+    {
+      "name": "ONE STEP advances the held pattern",
+      "passed": true
+    },
+    {
+      "name": "checker values switch at every fixed address",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: checker-one",
+      "passed": true
+    },
+    {
+      "name": "second step restores the checker values",
+      "passed": true
+    },
+    {
+      "name": "three speeds preserve the current values",
+      "passed": true
+    },
+    {
+      "name": "ROWS starts at the first row",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 0 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-00",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 1 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-01",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 2 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-02",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 3 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-03",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 4 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-04",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 5 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-05",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 6 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-06",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 7 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-07",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 8 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-08",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 9 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-09",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 10 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-10",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 11 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-11",
+      "passed": true
+    },
+    {
+      "name": "all tile transforms remain fixed",
+      "passed": true
+    },
+    {
+      "name": "score plays while the floor clock holds",
+      "passed": true
+    },
+    {
+      "name": "musical flashes expire while held",
+      "passed": true
+    },
+    {
+      "name": "visual clock runs with the score stopped",
+      "passed": true
+    },
+    {
+      "name": "saved placed sequencer screen",
+      "passed": true
+    },
+    {
+      "name": "placed floor has a physical standing surface",
+      "passed": true
+    },
+    {
+      "name": "walk across the running rows",
+      "passed": true
+    },
+    {
+      "name": "walk across the row direction",
+      "passed": true
+    },
+    {
+      "name": "walking does not write into the score",
+      "passed": true
+    },
+    {
+      "name": "floor keeps its own time during the walks",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: underfoot",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-console",
+      "passed": true
+    },
+    {
+      "name": "PATTERN reaches SUPER TRIANGLE after SNAKE",
+      "passed": true
+    },
+    {
+      "name": "triangle image uses the same floor extent",
+      "passed": true
+    },
+    {
+      "name": "triangle image adds no collision",
+      "passed": true
+    },
+    {
+      "name": "mode starts black and white",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 0",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-00",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-01",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 2",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-02",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 3",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-03",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 4",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-04",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 5",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-05",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 6",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-06",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 7",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-07",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 8",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-08",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 9",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-09",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 10",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-10",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 11",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-11",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 12",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-12",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 13",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-13",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 14",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-14",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 15",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-15",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 16",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-16",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 17",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-17",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 18",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-18",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 19",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-19",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 20",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-20",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 21",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-21",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 22",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-22",
+      "passed": true
+    },
+    {
+      "name": "held triangle pose 23",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-23",
+      "passed": true
+    },
+    {
+      "name": "24 steps return to the first triangle arrangement",
+      "passed": true
+    },
+    {
+      "name": "HOLD freezes the actual intermediate triangle pose",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-held-between",
+      "passed": true
+    },
+    {
+      "name": "ONE STEP reaches the next exact pose from a held turn",
+      "passed": true
+    },
+    {
+      "name": "musical step reaches the triangle image's folded column",
+      "passed": false
+    },
+    {
+      "name": "triangle pulse expires while movement holds",
+      "passed": true
+    },
+    {
+      "name": "triangle mode receives the existing palette selection",
+      "passed": true
+    },
+    {
+      "name": "black and white palette restores",
+      "passed": true
+    },
+    {
+      "name": "leaving triangle mode restores the square checker",
+      "passed": true
+    },
+    {
+      "name": "return reuses one triangle surface",
+      "passed": true
+    },
+    {
+      "name": "triangle choreography preserves all 144 tile transforms",
+      "passed": true
+    },
+    {
+      "name": "the physical standing surface is unchanged",
+      "passed": true
+    },
+    {
+      "name": "cross the running triangle floor",
+      "passed": true
+    },
+    {
+      "name": "triangle crossing leaves the score untouched",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangles-underfoot",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-console",
+      "passed": true
+    },
+    {
+      "name": "encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "musical step reaches the triangle image's folded column"
+  ],
+  "observations": {
+    "commons/artifacts/regularity/disco_controls.gd": "3265cadb228731cc8f1db786e18bfb39b66b4498e06375788ec6b21030ee471d",
+    "commons/artifacts/regularity/super_triangle.gdshader": "c61250ef886aa895bfd88d6916e9843aa15278f3a16886b27513af83688f8104",
+    "commons/artifacts/regularity/super_triangle_surface.gd": "86b0ac8b28e79aea7841fe640be201dca01e829e20c7e2b67d0e9a5f4394a93c",
+    "commons/audio/sequencer/sequencer_ui.gd": "d779ba2b78d1a0cdd5491ce8f000ccf6100f670019315492e444596025d25ed5",
+    "commons/audio/sequencer/step_sequencer.gd": "2117c2d198ffaf79610df7987ae04710cd416aca1961084002ae7baa19bf2ad7",
+    "commons/context/discofloor/DiscoSequencerBridge.gd": "dae7721972aaa4345cbfef5646f1731fbf15b09d5659dbdcc656f8397b660652",
+    "commons/context/discofloor/StandaloneDiscoFloor.gd": "78bd84964e1d69d69e62fca24c324f3bb2dbd1ea3033acc5b9a1880791998427",
+    "cross the running triangle floor": {
+      "basis": "[X: (-0.999999, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -0.999999)]",
+      "collisions": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Tutorial_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2621",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "position": [
+            5.02207946777344,
+            0.509999990463257,
+            9.02660846710205
+          ]
+        }
+      ],
+      "feet": [
+        -3.97792053222656,
+        1.01005876064301,
+        -3.97339153289795
+      ],
+      "floor_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (9.0, -0.5, 13.0)]",
+      "keys": {
+        "87": false
+      },
+      "maximum_y": 1.01005876064301,
+      "minimum_y": 1.01005876064301,
+      "spine_ui": "<null>",
+      "target": [
+        5.0,
+        0.56000018119812,
+        9.0
+      ],
+      "typing": "<Object#null>",
+      "velocity": [
+        -2.35978865623474,
+        0.0,
+        -1.98843288421631
+      ],
+      "world": [
+        5.02207946777344,
+        0.510058760643005,
+        9.02660846710205
+      ]
+    },
+    "floor_world": [
+      9.0,
+      -0.5,
+      13.0
+    ],
+    "held_motion": 0.738968666666668,
+    "score_notes": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        12
+      ]
+    ],
+    "standing_surface": {
+      "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Tutorial_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2621",
+      "floor_y_offset": 1.0,
+      "local_y": 1.01000022888184,
+      "tile_size": 0.8,
+      "world": [
+        9.0,
+        0.510000228881836,
+        9.0
+      ]
+    },
+    "walk across the row direction": {
+      "basis": "[X: (-0.999999, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -0.999999)]",
+      "collisions": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Tutorial_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2621",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "position": [
+            12.9831886291504,
+            0.509999990463257,
+            17.0076885223389
+          ]
+        }
+      ],
+      "feet": [
+        3.98318862915039,
+        1.01005876064301,
+        4.00768852233887
+      ],
+      "floor_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (9.0, -0.5, 13.0)]",
+      "keys": {
+        "87": false
+      },
+      "maximum_y": 1.01005876064301,
+      "minimum_y": 1.01005876064301,
+      "spine_ui": "<null>",
+      "target": [
+        13.0,
+        0.56000018119812,
+        17.0
+      ],
+      "typing": "<Object#null>",
+      "velocity": [
+        3.20455980300903,
+        0.0,
+        0.14963510632515
+      ],
+      "world": [
+        12.9831886291504,
+        0.510058760643005,
+        17.0076885223389
+      ]
+    },
+    "walk across the running rows": {
+      "basis": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -1.0)]",
+      "collisions": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Tutorial_Disco/StandaloneDiscoSetup/DiscoFloor/@StaticBody3D@2621",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "position": [
+            9.0,
+            0.509999990463257,
+            16.9946269989014
+          ]
+        }
+      ],
+      "feet": [
+        0.0,
+        1.01005876064301,
+        3.99462699890137
+      ],
+      "floor_transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (9.0, -0.5, 13.0)]",
+      "keys": {
+        "87": false
+      },
+      "maximum_y": 1.01005876064301,
+      "minimum_y": 1.01005876064301,
+      "spine_ui": "<null>",
+      "target": [
+        9.0,
+        0.56000018119812,
+        17.0
+      ],
+      "typing": "<Object#null>",
+      "velocity": [
+        0.000000314722001348855,
+        0.0,
+        3.59999990463257
+      ],
+      "world": [
+        9.0,
+        0.510058760643005,
+        16.9946269989014
+      ]
+    }
+  },
+  "passed": false,
+  "room": "Tutorial_Disco",
+  "scope": "Isolated production museum, supplied floor pointer events and sequencer UI/events. Original square modes plus 24 held triangle poses, continuous play/hold, original geometry, pulse/palette integration and ordinary-controller walks. Audio muted. Palette method check is not a full colour-hall test. Selected camera states; no headset or learner claim."
+}

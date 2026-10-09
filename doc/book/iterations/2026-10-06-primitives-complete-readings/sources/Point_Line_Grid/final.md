@@ -1,0 +1,92 @@
+# Grid Quantizes Movement
+
+Look for your bend. It may have grown.
+
+This is the drawing you brought from Trace. Your hand made the movement in the previous hall; here its recorded positions give that movement a sculptural form. Over the ruled field, it may have acquired another size. You can walk around a gesture you have finished making.
+
+Keep the original in view. We are going to give its positions grid addresses, then ask what another arrangement can make of the same trace.
+
+## Find somewhere to return
+
+<!-- @grab_sphere_point_snap -->
+
+Pick up the snapping sphere and move it slowly. Its marker follows your hand while the retained line waits, then gains another corner. Between those changes, there is room to move.
+
+Trace already made choices about which positions to keep. Here the table shows the last ten kept positions, naming each in metres and in whole-number steps from the origin. With five centimetres between grid positions, `0.15` metres along X has index `3`: three steps from world zero. The same place has two names.
+
+The calculation, reduced to one axis, is:
+
+```gdscript
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+```
+
+Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, `0.12` becomes `0.10`; `0.13` becomes `0.15`. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.
+
+Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.[^point-grid-bowker-star]
+
+Both columns in the table describe the position the program kept. Your hand can still be somewhere between the addresses.
+
+## Give the interval a rhythm
+
+<!-- @player_trace -->
+
+Walk a small loop, then look behind you. Two accounts of the walk remain: a finer sampled reference and a path rounded to one-metre spacing in the recorder's own frame.
+
+Find a place where you can move while the coarse address holds. Slowly cross into another. Cross back. There is a rhythm in the jump, and room to move within the interval. A rule for making positions agree has also given us something to dance with.[^point-grid-ahmed-return]
+
+A lean with your feet planted can enter this record too: it follows your headset across the floor. It must choose a point before it can draw a path called yours.
+
+The lines connect the positions it keeps. A diagonal can cut across ground you went around. Returning to an earlier address can add another turn to the record; the program keeps an order of visits, not just a collection of places visited once. The address marks a return; your reason for coming back has stayed with you.
+
+## Let the drawing find another use
+
+<!-- @grid_lines -->
+
+Return to the ruled field. Find your bend in pink, then compare green. Is it still your bend at this size?[^point-grid-carry]
+
+This display subtracts the centre of the received drawing's bounds and applies a scale:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+Pink gives the drawing another centre and size. Green rounds those displayed positions onto a new grid. The panel still lists the original positions: the program can give a record another appearance without rewriting what it received.[^point-grid-replay]
+
+Both versions came from your hand; neither contains the whole movement. One bend has become several things we can return to. Keeping them beside one another lets us see what the new rule changed, and leaves the earlier record available for a use we have not chosen yet.
+
+A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.
+
+## Give the address a floor
+
+<!-- @plan_vitrine -->
+
+Step onto the small plan in its glass enclosure. Five rows cross five columns: twenty-five one-metre cells. Their printed indices run from zero to four.
+
+Entering in VR gives each hand a pen. Draw a small circle with the cyan left hand, then try it with the amber right. Cyan follows the sampled movement. Amber places its horizontal positions above the nearest cell centres. A small circle of your hand may leave the amber line waiting at one address.
+
+The floor has entered the drawing. Its addresses reach up into the air, but they have not taken over every direction. Lift the amber hand without moving it sideways: height still has room to vary. Stepping out returns the pens; the traces linger briefly, then clear.
+
+Find a cell using both numbers. Leave it and find it again. You can now describe where a cube might stand without pointing. Two indices can become an instruction for placing it.[^point-grid-scott]
+
+Cross a row, then cut diagonally. The drawn divisions do not stop you. A continuous collision surface supports the plan. Over the other basin, the museum supplies walkable glass; the replayed lines provide no floor of their own.
+
+An address can tell a program where to put something. What lets a body reach it needs further work.[^point-grid-lefebvre]
+
+<!-- @ -->
+
+A shared address can help us repeat a placement or coordinate a meeting. The grid gives us a way to name a place and return to it together.
+
+We can bring endpoints back to places where they meet. Next, join three points that do not all lie on one straight line, and close the last gap. The grid can help the corners meet; it does not fill the space between them. What must we add before there is a face inside?
+
+[^point-grid-bowker-star]: Geoffrey C. Bowker and Susan Leigh Star, [*Sorting Things Out: Classification and Its Consequences*](https://mitpress.mit.edu/9780262024617/sorting-things-out/) (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. The operational comparison here is treating different inputs as equivalent: it can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence.
+
+[^point-grid-ahmed-return]: Return to Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument.
+
+[^point-grid-scott]: James C. Scott, [*Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed*](https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/) (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place.
+
+[^point-grid-lefebvre]: Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&option=com_eshop&title=The+Production+of+Space&view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.
+
+[^point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.
+
+[^point-grid-replay]: Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions with six intervals per metre along each axis. The [technical companion](/book?map=Point_Line_Grid&section=technical) gives the transforms and the panel's page controls.

@@ -1,0 +1,27 @@
+[
+  {
+    "fault": "mixed-old-next",
+    "rejected_for_expected_reason": true,
+    "failures": [
+      "WaveFunctions_3D_Wave_Propagation: first step matches the hand-calculated centre velocity and displacement",
+      "WaveFunctions_3D_Wave_Propagation: first step reaches only immediate neighbours equally",
+      "WaveFunctions_3D_Wave_Propagation: 120 steps preserve symmetry and do not depend on traversal order"
+    ]
+  },
+  {
+    "fault": "replay-redraws",
+    "rejected_for_expected_reason": true,
+    "failures": [
+      "WaveFunctions_John_Cage: replay preserves both score and random state"
+    ]
+  },
+  {
+    "fault": "unsigned-sum",
+    "rejected_for_expected_reason": true,
+    "failures": [
+      "WaveFunctions_Synthesis_Lab: new recipe has predicted signed sum at a quarter cycle",
+      "WaveFunctions_Synthesis_Lab: new odd recipe reverses sign after half a cycle",
+      "WaveFunctions_Synthesis_Lab: baseline action restores new recipe but preserves phase and hold"
+    ]
+  }
+]

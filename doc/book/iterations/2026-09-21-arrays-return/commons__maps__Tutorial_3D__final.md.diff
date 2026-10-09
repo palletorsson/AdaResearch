@@ -1,0 +1,11 @@
+--- before/commons/maps/Tutorial_3D/final.md
++++ current/commons/maps/Tutorial_3D/final.md
+@@ -24,7 +24,7 @@
+ values[y][z][x] = 0
+ ```
+ 
+-The display names coordinates in x, y, z order; the nested storage selects a y layer, then a z row, then an x entry. Those conventions must be connected explicitly. Neither a list nor a number arrives with a direction built into it.
++The row inside an array has gained another enclosing list. Read `values[y][z][x]` from left to right: `values[y]` selects one layer containing rows; `[z]` selects a row in that layer; `[x]` selects its entry. The display names coordinates in x, y, z order, while the storage opens them in y, z, x order. Those conventions must be connected explicitly. Neither a list nor a number arrives with a direction built into it.
+ 
+ <!-- @ -->
+ 

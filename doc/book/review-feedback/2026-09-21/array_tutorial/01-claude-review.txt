@@ -1,0 +1,58 @@
+That works well. One correction matters before Astra acts on it, so let me check the source file first.
+
+Useful: the Point_Line_Grid prose already meets the pens, correctly for the new cyan-and-amber grid pairing. Let me read the rest of the Array check before writing anything for Astra.
+
+Two corrections first, since Astra is acting on these now.
+
+- **Skip Primitives item 1.** Point_Line_Grid's `final.md` already meets the pens, and it does so correctly for the new pairing: cyan samples freely, amber snaps to cell centres, and height stays free. My illustrative paragraph described the old time-domain pen, so Astra should not paste it in.
+- **My line numbers point into the frozen capture file, not into `final.md`.** Astra should find each passage by its quoted text. Every map ID I name does have a `final.md`.
+
+Here is Array, checked against the source and against a second reader who had not seen my notes.
+
+Array's argument is that an address and the value stored at it are separate things, and that the gap between them is where meaning, bodies and pleasure come in. Its two best encounters come straight out of that gap. You hover your body where a cube used to be. Then you step through the turned wall and see the enclosure from outside.
+
+## Passages to protect
+
+- **Array:** "An empty slot can still have an address." "The table knows that its occupant has left, without keeping a destination for it." Also "it does not require them to look alike, stand straight or remain occupied." That is a quiet queer inflection that stays literally true of arrays.
+- **Tutorial_3D:** "The table still says zero: it records cubes, not everything that could exist there. What would have to change for it to notice you?" This is the chapter's best critical turn.
+- **Tutorial_Tiling_Floor:** "No tile has to remember the whole field. Its local address and the rule are enough to decide its turn."
+- **Tutorial_Tiling_Walls:** "From here the panel is almost nothing. A thin sheet, a hinge, the plain reverse of the image. It was enough to stop us." Also "The first changed what we could read; the second changed where we could go," and "Even this little outside has a floor and a rail." I checked the source: the sheet is 2.5 cm, the landing is real, and nothing lies beyond it.
+- **Tutorial_Disco:** "A representation can preserve an event while folding together some of the information about where it came from." The 16-step to 12-column fold is exactly as the text says. Also "Sharing a space with a rhythm is different from being measured by it."
+
+## What is missing, and what repeats
+
+- **The chapter about arrays never shows the loop that makes the many.** It asks what we can do with many copies, and every code block uses `x`, `y` or `z` without the `for` that produces them. A loop does appear earlier in the book, over triangle vertices in Point_Triangle_Context. The first loop over an array's addresses only arrives in Color_Context_Placed. The Array hall's own source has the loop, so the revision can quote true code.
+- **Zero-based indexing is never taught, but Tutorial_3D relies on it.** The console "returns to zero after three."
+- **Nesting is never explained.** `values[y][z][x]` is the reader's first sight of an array in code, and it is already an array of arrays.
+- **Wrap-around runs through the whole chapter without a name.** The 3D console returns to zero, the tiles turn with `%4`, the checker uses `%2`, and sixteen steps fold onto twelve columns. Four separate incidents could become one concept with a single sentence.
+- **"The structure does not decide the meaning" is said three times** in Array, Tutorial_Tiling_Floor and Tutorial_Disco. The first is earned by the ambiguous zero. The later two need a new turn: what would the reader have to add, or who does decide?
+- **Tutorial_Disco reads like an operating manual.** "Track" is used before it is defined. "The bridge" is never introduced, and a museum visitor will picture something to walk on. The independence of the two clocks is presented as a caveat when it could be a discovery.
+- **Two small naming traps.** Array's grid is `[x, z]`, but the tiling code calls the same axes `cx, cy`. And "the first index selects a row" will stall a beginner unless the table's orientation is visible.
+- **One claim is slightly off.** Tutorial_Tiling_Walls says the control "holds it open" while someone is on the landing. In the code, the wall refuses to turn in either direction while anyone stands in its sweep, and stops mid-turn if someone steps in. Saying that the wall will not turn through a body is both more accurate and more interesting.
+
+## Revisions, in order
+
+1. **Array: show the loop, and let it teach zero.** From the hall's own `row_3_x.gd`:
+   ```gdscript
+   array_data = [[1, 1, 1, 1]]
+   for i in range(4):
+       var cube_instance = pickup_cube_scene.instantiate()
+       cube_instance.position = Vector3(i * 1.0, 0, 0)
+   ```
+   > One instruction, repeated with a changing number, makes the row. `range(4)` counts 0, 1, 2, 3: the first address is zero, so the fourth cube lives at index three. Notice the double brackets. Even this row is stored as a grid with one row in it, which is where the next hall begins.
+2. **Tutorial_Tiling_Floor: name the remainder** right after the `%4` line:
+   > You have met this before. The console's index went round to zero after three; here the turn goes round after four. When a count must return rather than run out, `%` sends it back to the start. Listen for it again on the disco floor.
+3. **Tutorial_Disco: define before instructing.** Say what a track, a step and the bridge are before the exercises use them. Turn "stop the sequencer" into the two-clocks discovery rather than a warning.
+4. **Tutorial_Disco, last line.** Make the handoff concrete. For example: next, the value in a slot becomes a colour, and what you read in it will depend on its neighbours.
+5. **Tutorial_Tiling_Walls.** Fix the hold sentence, and clarify "The thin paper followed us along the way." It is the one blurry sentence in the chapter's best paragraph.
+
+## A seam for later
+
+The tiling chapter re-teaches translate against reflect, the edited source, the shifted rows and the single exception as if new, and never refers back to these two halls. I will cover that properly in the tiling review. But it matters here: Array did the groundwork, and tiling should return to it by name rather than start again.
+
+## Questions for you
+
+- Should the array chapter own the first index loop, with colour then reusing it, or is colour's `for i in range(elements.size())` meant to be the moment arrays get their loop?
+- Is `row_3_x`'s name worth fixing, since it builds four cubes? That is not a book issue, only a naming trap for anyone reading the source the book invites them to open.
+
+Colour is next when you want it.

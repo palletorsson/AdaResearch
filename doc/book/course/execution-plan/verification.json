@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-05",
+  "scope": "Editable curriculum plan and its interface; no new Godot lesson execution",
+  "planner_and_hall_card_backend_tests": { "passed": 18, "failed": 0 },
+  "targeted_typescript": { "files": 6, "diagnostics": 0 },
+  "live_sources": { "sequences": 25, "halls": 207, "tutorial_files": 197, "missing_tutorials": 10, "protected_files_unchanged": 637 },
+  "plan": { "source_inventory_topics": 116, "ada_concerns": 10, "specific_proposed_contracts": 30, "source_audit_contracts_remaining": 177 },
+  "existing_evidence_read": { "current_ghost_states": 4, "native_assertions": 400, "rerun_by_this_pass": false },
+  "browser_observed": [
+    "Hall and subject views render; the hall picture and reflective summary are present.",
+    "Sequence filtering and whole-sequence capacity views work.",
+    "Grid support/carry edits saved through the UI and survived reload.",
+    "A topic draft survived switching views; the revised class-placement note saved through the UI.",
+    "Next selects Triangle from Grid; Previous returns to Grid.",
+    "No browser console errors were present at final inspection."
+  ],
+  "limits": [
+    "This does not establish learner understanding or hardware VR interaction.",
+    "Later hall focuses are inherited curated proposals; unresolved construction bindings remain explicit source-audit tasks.",
+    "The source inventory is not the official Nature of Code table of contents.",
+    "The interface keeps the live museum order and preserves old plan versions; plan edits do not rewrite lessons."
+  ],
+  "preview": "preview.png",
+  "http_results": "http-checks.json",
+  "source_validation": "validation.json"
+}

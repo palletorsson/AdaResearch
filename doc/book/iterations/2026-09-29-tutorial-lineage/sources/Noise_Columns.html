@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Noise_Columns · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Noise_Columns">← Tutorial lineage</a></p><h1>Noise Columns</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Noise_Columns/final.md">Raw captured source</a></p><pre># What keeps a body changing?
+
+Behind us, a number found a height in a wall. An opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
+
+&lt;!-- @MeltingBerniniScene --&gt;
+
+Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. The little instrument between the silhouettes offers ways to look; it leaves the names until you ask. Stand where you can see all three at once and watch for a while before you press anything.
+
+![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-review/doc/book/figures/Noise_Columns/three-columns.png)
+
+One silhouette holds. The other two rise and sink. There may be a familiar movement among them, something the wave halls have already taught your body to expect. Choose one to follow. When it comes back, keep watching. Does the return arrive after the same interval?
+
+FREEZE holds the columns&#x27; local clock. You can take time to walk around the shape that was passing. The rest of the museum continues. Even here, stopping has an address.
+
+Try SPIN while the clock is held. The columns turn. A ridge slips out of sight and another arrives. The vertices of each shaft keep their local coordinates; their positions in the room change with the whole column. Transformation has returned as a way to inspect what we thought was deformation.
+
+Stop SPIN and press MARBLE. The shaft loses its veining. The folds remain. The base and capital retain their own patterned materials. Look at the edge of the shaft, then at the surface inside that edge. The veining was never fixed to the stone. Its pattern is sampled from each point&#x27;s position relative to your eyes, so on a frozen shaft the veins slide as you walk around it, and under SPIN they stayed nearly in place while the folds turned through them. A changing appearance has several places to happen, and a picture can encourage us to fold them together.
+
+Put the veining back if you prefer it. The pleasure of the surface need not end when we learn how it works.
+
+Now REVEAL names the three drivers. BASELINE holds a fixed value. PERIODIC follows a sine. FIELD follows a path through a seeded coherent field. Release FREEZE and compare the names with the movement you watched.
+
+```gdscript
+func driver_phase(kind: String, t: float) -&gt; float:
+	match kind:
+		&quot;periodic&quot;:
+			return sin(t * melt_speed) * 0.5 + 0.5          # the shipped driver
+		&quot;field&quot;:
+			return clampf(_noise.get_noise_2d(t * 0.55, 0.0) * 0.5 + 0.5, 0.0, 1.0)
+		_:
+			return TRIO_BASE_PHASE
+```
+
+The sine repeats after a fixed interval. At the room&#x27;s speed of 0.9, that interval is about seven seconds. The field has a different history. Nearby sample coordinates give related values; the path does not carry the sine&#x27;s promise of a seven-second return. That does not make it unknowable. With the same seed, settings and coordinate, this implementation gives the same value again.
+
+Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
+
+The walls behind us gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
+
+```gdscript
+var melt_factor = pow(v, 0.5) * melt_strength * melt_phase
+var height = v * column_height - melt_factor * 2.0
+```
+
+`v` marks progress up the shaft, from zero to one. The square root gives different heights different shares of the same phase. At the top, the mapped drop can reach 0.70 metres. The phase also enters a bulge further down the function. Ribs, twists and offsets were already there before the field arrived.
+
+Look again at BASELINE. It is held at 0.10, and it is already strange. The fixed reference is itself a made body. We have chosen something to keep still so that another change can become legible.
+
+This gives a practical answer to what bodies are possible with the tools we have acquired. A coherent field can supply variation, but it does not contain a column. Rings of vertices, a spiral, a height rule and a material make that variation into this body. Give the same values another recipient and another world can appear.
+
+The recognisable column also brings an expectation: it should hold something up. These display columns have no supporting collision bodies. They carry the appearance of architecture without its load. Calling their movement melting names what we see; it does not establish that stone, heat or erosion is being simulated.
+
+There is a smaller interruption inside the smooth movement. Each moving shaft is rebuilt at most twelve times a second. Between updates, the mesh holds its last shape. The readout reports that budget and the last phase actually used. Our earlier trace had gaps between samples; this surface has intervals between rebuilds. What looks continuous is again being afforded in portions.
+
+&lt;!-- @dark_sphere --&gt;
+
+Leave the columns frozen for a moment and turn to the dark orb. Its sheen shifts. Stay long enough to notice the pulse, and the pool of shadow beneath it slowly deepening and fading. The room has not stopped breathing just because one instrument has stopped counting.
+
+This body uses another local clock. Its script also contains a sine:
+
+```gdscript
+var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+```
+
+This time the value enters brightness and emission. It does not rebuild the sphere&#x27;s mesh. The body also turns slowly, and the pool beneath it pulses in opacity on a slower sine. A single appearance gathers several operations that our earlier halls let us separate.
+
+The dark sphere was described as a neutral anchor. Looking for longer complicates that description. It is active, but its activity is easy to pass over beside the tall columns. The distinction between foreground and background is also a distribution of our attention.
+
+You need not make it illustrate the columns perfectly. It can keep its quieter presence. It gives the local pause an outside: another process goes on while we concentrate on this one.
+
+&lt;!-- @synthesis_stand --&gt;
+
+Nearby, the darkness has become six small orbs. They turn together in a ring, at alternating heights. There is an empty middle. Walk far enough around them for the gaps to change.
+
+This work belongs to the same dark-sphere family. The stand chooses `presence = hush` and `body = swarm` before the scene builds. The first setting makes the presence smaller and quieter. The second chooses a construction with six members. Their common motion is the rotation of their parent; they are not steering themselves around one another.
+
+```gdscript
+var count: int = 6
+var ring: float = _radius * 0.95
+var small: float = _radius * 0.40
+```
+
+The array has come back inside a body. So have the circle and the alternating value. Earlier, a field varied a shaft while its mesh connections remained. Here, selecting a construction changes how many parts the body begins with. These are different kinds of change, and our toolbox contains both.
+
+The plaque&#x27;s 35% comes from comparing a saved image of these six orbs with one of the original orb. The score looks at the pixels that changed most.[^image-score] It helped choose a difference in pictures; it cannot decide what you should want from this body. Perhaps the small gathering holds your attention precisely because it is difficult to resolve at a glance. Perhaps you prefer the solitary orb.
+
+A family offers possibilities, and choosing one still leaves other members unvisited. We can name the choice without closing the family. The same is true of our route through these halls: enough attention to make a discovery, with other directions still available.
+
+Noise One takes the next step. Two surfaces will receive the same field and spend it differently, as relief and as colour. We leave with a question about the receiver as well as the source: what can this body do with the value it has been given?
+
+[^image-score]: The comparison removes each image&#x27;s corner background colour, converts it to greyscale at 160 × 160 pixels, and averages the largest 5% of absolute pixel differences on a scale from 0 to 1. The saved value 0.3509 is rounded to 35% on the plaque. It is not the percentage of the body, or of the pixels, that changed.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Noise_Columns/tutorial.md">Raw captured source</a></p><pre># Noise Columns — follow what receives the value
+
+Begin with the three columns together. Follow an unnamed silhouette through more than one apparent return. FREEZE pauses this instrument&#x27;s local clock. SPIN turns a held shape; MARBLE removes the shaft&#x27;s veining. Let observation precede REVEAL.
+
+The source contains three drivers:
+
+```gdscript
+func driver_phase(kind: String, t: float) -&gt; float:
+	match kind:
+		&quot;periodic&quot;:
+			return sin(t * melt_speed) * 0.5 + 0.5          # the shipped driver
+		&quot;field&quot;:
+			return clampf(_noise.get_noise_2d(t * 0.55, 0.0) * 0.5 + 0.5, 0.0, 1.0)
+		_:
+			return TRIO_BASE_PHASE
+```
+
+The output called phase is a normalized scalar, not necessarily an angular phase. Both moving drivers feed the same shaft recipe; the field samples along time rather than independently at every vertex. The recipe distributes that scalar using longitudinal progress v:
+
+```gdscript
+var melt_factor = pow(v, 0.5) * melt_strength * melt_phase
+var height = v * column_height - melt_factor * 2.0
+```
+
+The shared 0.00–0.70 m range describes mapped drop at the shaft&#x27;s top. Observe that the held reference is already ribbed and twisted. Geometry and its reference state were constructed before the new driver was added.
+
+Keep the columns paused and observe the dark orb. Its own clock continues. Its sine enters brightness rather than shaft height:
+
+```gdscript
+var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+```
+
+Then approach the six-orb variant. The stand chose hush/swarm before construction. Six spheres turn with a parent; their gaps and alternating heights come from an array and a circle, not flocking. Compare the solitary body and the distributed body without requiring one to be an improvement over the other.
+
+The red thread is the value and its recipient: sampled draws in the previous hall; a phase becoming shaft deformation here; another sine becoming light; configuration selecting body parts. Noise_One will give two recipients the same field, as relief and colour. Follow both what changes and what the receiving code keeps fixed.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Noise_Columns/technical.md">Raw captured source</a></p><pre># Noise Columns — a driver needs a recipient
+
+This follows Random_Noise_Types&#x27; spatial samples, height/colour mapping and temporal filters. Noise_One follows with two surfaces reading one field as relief and colour. The room contains three authored artifacts: MeltingBerniniScene, dark_sphere, and synthesis_stand configured with the dark-sphere family. All three have primary book passages.
+
+## One scalar, a whole shaft
+
+The placed MeltingBerniniScene uses `stand:trio`, `speed:0.9` and `seed:31415`. The three drivers are dealt among the slots from the seed and stay unnamed until REVEAL. BASELINE is a constant 0.10; PERIODIC returns `sin(t * melt_speed) * 0.5 + 0.5`; FIELD remaps and clamps `_noise.get_noise_2d(t * 0.55, 0.0)`. The field is FastNoiseLite TYPE_SIMPLEX at frequency 0.35, with the resource&#x27;s existing fractal settings. It is not a per-vertex 3D Perlin erosion process.
+
+The sine has period TAU/0.9, approximately 6.98 seconds. A finite trace can show unequal intervals between the sampled field&#x27;s peaks; it cannot prove that noise never repeats. Given unchanged seed, settings and coordinates, the implementation repeats its samples. The seed also fixes the slot assignment, so the assignment can be learned across visits.
+
+All three shafts use the same mesh function. With 40 vertical segments and 16 radial segments, it creates 697 vertex entries and 1,280 triangles. Each longitudinal value v receives:
+
+```gdscript
+var melt_factor = pow(v, 0.5) * melt_strength * melt_phase
+var height = v * column_height - melt_factor * 2.0
+```
+
+The top, v=1, is lowered by twice melt_strength times phase: 0.70 metres at phase 1. The phase also changes a sinusoidal bulge. Other spiral, rib and offset terms already shape the baseline. A common phase yields an identical shaft mesh, but an instantaneous shape alone does not identify which driver supplied it. Matching individual scalar samples is not matching whole histories.
+
+Rebuilding from saved parameters is not an inverse deformation. The code does not establish a bijection or preserved embedded topology. For example, the square-root height rule can pull an early ring below the base at larger phases. Triangle indices remain the same while a surface can fold or intersect. No load-bearing column collision is implemented.
+
+## Clocks and materials
+
+FREEZE holds the trio&#x27;s time and stops scheduled shaft rebuilding. SPIN uses frame delta independently, so a frozen shape can still be turned deliberately. Moving shafts rebuild at most 12 times per second; the held shaft is not rebuilt after construction. The readout now reports the phase stored with the displayed mesh, rather than evaluating a newer phase between rebuilds. Frame cost is a measurement of the review machine, not a Quest performance guarantee.
+
+The shaft marble shader already takes `u_time`. Bases and capitals use `displacement.gdshader`, which previously read global shader TIME and kept moving under FREEZE. That shared shader now offers opt-in `use_local_time` and `local_time` uniforms. Default consumers continue to use TIME. Only the trio opts in: the held column uses zero, and the other two use the trio clock. The accessory vertex displacement remains present and participates in the local pause.
+
+MARBLE swaps the shaft&#x27;s veined fragment material for a matte material. It does not remove the bases&#x27; and capitals&#x27; separate shaders. The shaft marble shader performs no vertex displacement, so that swap leaves its geometry intact. FREEZE therefore holds all these clock inputs; MARBLE isolates the shaft&#x27;s appearance specifically.
+
+## Two existing dark-sphere bodies
+
+The standalone orb retains its witness/orb settings. Its own `_time_elapsed` advances independently of the trio, driving rotation, a small angular wobble, emission and albedo pulses, and the opacity of a fixed-radius shadow disc. The sine drives appearance; it does not deform sphere vertices. In this hall `_gest_stage()` is empty, so the book promises no catalyst hatching interaction.
+
+The synthesis stand reads the saved dark_sphere verdict: presence=hush, body=swarm. It sets both exports before adding the scene to the tree. The swarm constructor creates six small orbs, with alternating heights, inside a rotating parent. There is no neighbour sensing or agent steering here. The saved score is selection metadata; it is not an objective measure of artistic worth.
+
+The stand moved from (2,9) to (3,4), facing the entrance, with a reserved approach so an automatically placed sculpture cannot conceal it. The three authored works and recovered structure remain. A straight three-metre-wide local passage declaration addresses the earlier route mismatch without changing other halls&#x27; passage code.
+
+## Evidence and limits
+
+See `doc/space/columns-review-2026-09-13/README.md` for the accepted run, failed first run, captures, source hashes, pointer checks, full vertex-array comparison and passage check. The online review plots values sampled from the actual Godot driver functions. Its slider is a browser review tool, not an invented in-game control. Headset reach, comfort and Quest performance remain deferred.
+
+## Instrument and reveal, 24 September 2026
+
+The 0.92 × 0.32 m tilted readout sits between the left and middle shafts (local x −1.10 m, y 1.00 m). The four existing controls remain, with the panel at local x +1.10 m. Driver names and values now wait for REVEAL in the readout as well as the foot plates; hiding REVEAL removes them again. Local time remains visible. Revealed values come from the displayed meshes, and the top-drop range and 12/s rebuild ceiling remain visible. Runtime cost and resolution remain available through trio_state(); they are not extra visitor controls.
+
+The three driver functions, mesh recipe, shader materials and existing local-clock behaviour are unchanged. New native comparison and source-preservation evidence: `doc/book/iterations/2026-09-24-columns-receive/`. Desktop pointer and sampled routes are distinct from a headset test.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Noise_Columns/intent.md">Raw captured source</a></p><pre>Concept: A driver needs a recipient. A periodic or field-derived scalar enters a shaft recipe; a sine elsewhere enters appearance; a construction setting selects one orb or six.
+Sequence role: Follow Random_Noise_Types&#x27; sample relations, height/colour mapping and temporal filters. Prepare Noise_One&#x27;s use of one field as relief and colour.
+Primary works: MeltingBerniniScene, dark_sphere, synthesis_stand configured as dark_sphere/hush/swarm. Inspect all three; no count ceiling.
+Encounter: Observe the unnamed trio, locally freeze, separate whole-body rotation and shaft veining, then reveal. Observe the independent orb during that pause and compare its distributed relative.
+Critical inquiry: A held reference is already constructed. A recognisable column need not support weight. Material pleasure can coexist with inspection. A common code substrate permits both continuous parameters and categorical construction choices.
+Implementation limits: Scalar field sampling along time; no per-vertex 3D Perlin erosion, no terrain in this hall, no force-driven structural simulation, no proved inverse deformation or entropy measurement. Six orbiting parts are not steering agents.
+Retained possibilities: The original multi-column ring remains in the scene&#x27;s non-trio mode. A shader/material laboratory, structural loads, and transitions between body constructions are possible later work, not current controls.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Noise_Columns/critical.md">Raw captured source</a></p><pre># What can a column remain?
+
+Recognizing a column brings an expectation of support. These columns carry that expectation into a scene where they hold nothing up. Their simulation concerns appearance and generated geometry. The discrepancy can be an encounter in its own right: what makes us read a body as architecture before asking what it can carry?
+
+The earlier text imagined erosion, an entrance slider, terrain and reversible damage. Those are worthwhile possible projects, but they were not this implementation. Keeping the question of form&#x27;s apparent permanence means grounding it in the actual moving shafts, their materials and the held comparison. We do not need an invented erosion system for a column to become strange.
+
+The fixed reference is already twisted, ribbed and partly lowered. Its stability is a choice to hold a parameter, not evidence of an original body recovered beneath distortion. A reusable mesh recipe allows several states to be produced again. That reproducibility does not establish that deformation is invertible, nor that changing geometry measures entropy.
+
+The comparison makes one difference easier to attend to by holding others similar. It also leaves things outside its frame. FREEZE has a local scope. Before review, accessory shaders continued to read the engine clock while the shaft clock stopped: a literal remainder of the claim that the column was frozen. The repaired control reaches those shaders. The independent orb still continues, and its continued activity makes the boundary of our attention perceptible.
+
+MARBLE removes the shaft&#x27;s veining, letting the silhouette be examined without that pattern. This is an analytical action, not a demand for an undecorated truth. The material can return. A surface may invite desire, patience or distraction as well as convey a measurement. Understanding its construction should enlarge those possibilities.
+
+The orb also complicates the category of decoration. It was called a neutral anchor, although it rotates, pulses and spreads a ring beneath itself. Its quieter activity can become foreground when we let it. The synthesis stand carries the same family into a smaller, distributed body: six members and an empty centre. The family connects these works while leaving their different presences available.
+
+A saved metric selected the hush/swarm variant. The plaque makes that choice visible, but a score cannot settle what a visitor will value. The categorical choice of orb versus swarm also qualifies the idea that a common computational substrate makes every transformation gradual. Some capabilities are continuous parameters; others select different constructions. Code gives us both, and transitions between those constructions would have to be designed.
+
+This is a methodological connection to the project&#x27;s QFEP inquiry: ask what kinds of body and relation a set of operations admits, which alternatives its defaults suppress, and what a change in those operations enables. No entropy estimate or universal threshold is measured here. We can carry the question forward through specific encounters before claiming a general answer.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Noise_Columns/artifacts.md">Raw captured source</a></p><pre># Noise Columns — three primary encounters
+
+1. **MeltingBerniniScene** — The existing three-column comparison, with held/sine/field drivers, local FREEZE, independent SPIN and shaft MARBLE controls. Same shaft recipe, bounded rebuild rate. Bases and capitals retain their own patterns and now follow the local clock.
+2. **dark_sphere** — Existing witness/orb. An independent clock drives appearance and rotation while the column instrument is paused. Quiet presence can become an encounter; it need not be treated as inert decoration.
+3. **synthesis_stand** — Existing dark-sphere family, hush/swarm selection. Six small orbs in a turning parent. Moved to (3,4) with a clear viewing approach so another sculpture does not conceal it.
+
+All three remain in the room and have matching final.md anchors. The room&#x27;s recovered structure is retained. Additional automatically staged sculptures remain part of the museum atmosphere; the reserved approach prevents them from covering a primary encounter.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Noise_Columns/summary.md">Raw captured source</a></p><pre># Noise Columns
+
+Three shafts share a recipe and a mapped top-drop range, driven by a held value, a sine and a seeded coherent field. Observe before REVEAL; FREEZE holds the local clock, SPIN turns the bodies, and MARBLE isolates shaft veining. The bases and capitals now obey the local freeze too.
+
+The existing dark orb and hush/swarm synthesis remain and join the book as primary works. They extend the room from vertex change to appearance and construction choices. The standalone orb continues during the columns&#x27; pause. The six-orb variant turns as a group; it is not a flocking simulation.
+
+The room follows Random_Noise_Types and leads to Noise_One&#x27;s relief/colour comparison. Its question is where a value enters a body, and what the receiving code allows it to change.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Noise_Columns/blurb.md">Raw captured source</a></p><pre># What keeps a body changing?
+
+Three columns: one holds, two move. Pause their clock, turn a shape, take off its veining, then ask which rule has been acting. Nearby, a dark orb continues; its smaller six-part relative gives the same family another body. Follow the value into geometry, light and the choices made before a scene begins.
+</pre></section></body></html>

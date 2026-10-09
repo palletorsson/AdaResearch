@@ -1,0 +1,39 @@
+{
+  "started": "2026-09-14T13:34:51+02:00",
+  "finished": "2026-09-14T13:35:29+02:00",
+  "pid": 44408,
+  "exit": 0,
+  "checks": 103,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/koch_probe_base.gd": "39e116e04ae7d84285aa208dcc4f592c1465f2f414dac9906c032c514e77cb74",
+    "ada_run/koch_acceptance.gd": "1aab440d26e3f223b1c43504330164933ca73922b21fc8fa2c59ce069ed903df",
+    "commons/maps/Fractal_KochSierpinski/map_data.json": "b648b6e381aab233db893a63d22d1aece6324f9bcaf7c34fc97362e9a1fe4f33",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/koch-review-2026-09-14/review-plan.json": "fd3ee56fb575b7c125e94fc11ef7be455135842c8331d4490f19d3fe4a850cd1",
+    "commons/artifacts/registry/procgen_extra.json": "2e63a9e8370b392be6dc891eab30c079486a0f3b05b8006a4d680c0852b4973c",
+    "commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd": "92bb89f276ab13f37aa7625719e1ce8c78a56fd54b15981f5cf4f029aea817aa",
+    "algorithms/fractals/example_8_5_koch_curve_vr.gd": "1a70917c91ce016a898e8df687090b436106ee7fb4143af0f1138e902594253f",
+    "algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd": "d11bd80a4e198feaf62e7dc8bb0a95cf4c2a5bef9e54c4dd2756740760aaf251",
+    "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd": "84a585896d95cfc326c2944cb13d08c1c3036039ddb3e43567ecdb822658a192",
+    "commons/maps/Fractal_KochSierpinski/final.md": "1bbf37e572fd7a2677a1856231ad6488f7d46603f51e4cb588923c4db9e48342",
+    "commons/data/artifact_roles.json": "9b01206f8e069e0c8a0f1aede9964a4c2eec501277c70acf1db595dbe64c0044",
+    "commons/data/book/fractals.json": "766312a9c9ee917d6db65ccfdbd746b172849e158c85a0a3d26f6fcdd67264f4",
+    "commons/data/trunk_branches.json": "8de97ddf1b4466464a70ab915bff5f65006b4a0f31f761fcf614dd174e23e028"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

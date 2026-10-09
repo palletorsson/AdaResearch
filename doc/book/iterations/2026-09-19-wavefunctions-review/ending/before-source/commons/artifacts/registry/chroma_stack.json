@@ -1,0 +1,112 @@
+{
+	"artifacts": {
+		"chroma_stack": {
+			"dna": {
+				"axes": {
+					"rule": [
+						"one",
+						"by_shape",
+						"by_height",
+						"by_neighbour",
+						"composed"
+					],
+					"stack": [
+						"bauhaus",
+						"turned",
+						"cut",
+						"beads",
+						"discs",
+						"offset",
+						"festival"
+					],
+					"pose": [
+						"aligned",
+						"twist",
+						"taper",
+						"combined"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "rule=one vs rule=by_height at stack=bauhaus",
+					"predicted_focus_pct": 18.0,
+					"arithmetic": "one is a single ochre; by_height paints the five elements on a blue-to-orange ramp sampled at centre height / 4.4, so the third element (hue 0.371, near ochre's 0.104 only in value) and the top two differ most; the base and second element sit close to ochre in value, so the hottest 5% of pixels moves about 18% (a lower bound, one flat light, no shadows). Closest STACK pair: bauhaus vs cut at rule=one, only the sphere/dome vs wedge silhouettes differ, about a quarter of the subject."
+				}
+			},
+			"lookup_name": "chroma_stack",
+			"name": "Chroma Stack",
+			"class_name": "ChromaStack",
+			"scene": "res://commons/artifacts/chroma_stack/chroma_stack.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "Static columns from familiar primitives. Original bauhaus/turned/cut stacks contain five pieces at fixed heights. beads/discs/offset/festival contain 6-8 pieces with explicit heights, widths, depth, local XZ offsets and yaw; inspired by the existing primitive-stack-gallery. rule selects one/by_shape/by_height/by_neighbour/composed; composed reads chosen paint per piece, falling back to shape colour. pose adds fixed Y turns and/or XZ taper, clamped to at least 0.25 for longer recipes. Default bauhaus/one/aligned remains unchanged. Conservative box collision follows each piece position, proportions and yaw. Static, no animation or physical balance simulation.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				2,
+				2,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"stack",
+				"totem",
+				"bauhaus",
+				"kandinsky",
+				"complement",
+				"hue_ramp",
+				"pillar",
+				"dna",
+				"static_transform",
+				"rotation",
+				"scale"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"source": "Recipe bounds including rotated slabs and offsets; conservative 2 m square, 4.4 m tall envelope. Runtime probes and renders in doc/space/color-richer-stacks-2026-09-17/.",
+				"aabb_size": [
+					2,
+					4.4,
+					2
+				]
+			},
+			"interactions": [],
+			"dev_themes": [
+				"Build with primitives and static transformations, then add colour",
+				"Hold geometry fixed while varying colour assignment",
+				"Hold colour assignment fixed while varying rotation and XZ scale",
+				"Compose variable proportions, offsets and paint into richer stacks"
+			],
+			"qfep_connection": "The opening colour hall compares what a fixed construction permits a body to see and walk around. Colour can group its parts differently without changing their geometry or collision; rotated and scaled geometry changes those boundaries independently.",
+			"note": "2026-09-17 richer-stack extension: recipe data extends the existing artifact, not a new generator. Original aligned defaults retained. DNA generated from source exports. Static museum collision/approach and rendered evidence recorded separately; headset not tested."
+		}
+	}
+}

@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Menger — tutorial</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e8;color:#25222a;font:17px/1.65 system-ui,sans-serif}header,main,footer{max-width:1320px;margin:auto;padding:28px 5vw}nav{display:flex;gap:24px;flex-wrap:wrap}a{color:#853856;text-underline-offset:4px}h1{font:clamp(38px,5vw,70px)/1.06 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}p{max-width:75ch}.lead{font-size:23px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}img{width:100%;display:block}figure{margin:28px 0}figcaption{font-size:14px;color:#605964;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;padding:24px;background:#fffcf6}.reading h1{font-size:38px}.reading h2{font-size:27px}pre{overflow:auto;background:#242129;color:#f5eff1;padding:20px;font:13px/1.6 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}table{border-collapse:collapse;width:100%;background:#fffcf6}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d0c7;padding:16px}blockquote{border-left:4px solid #d292a7;margin:25px 0;padding:12px 22px;font:26px/1.5 Georgia,serif}.pill{background:#25222a;color:#fff;padding:8px 18px;display:inline-block;border-radius:22px;font-size:14px}button{font:inherit;background:#fffcf6;border:1px solid #bfa4af;padding:8px 16px;margin-right:8px;cursor:pointer}button[aria-pressed=true]{background:#25222a;color:white}.notes{background:#e8e0d6;padding:22px}del{background:#ffe3e3}ins{background:#e0efdc;text-decoration:none}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}pre{white-space:pre-wrap}body{background:white}article{break-before:page}}details{border-top:1px solid #d8d0c7;padding:16px 0}summary{cursor:pointer;font-weight:600}.single{max-width:880px}.single h1{font-size:42px} .lead{max-width:850px}.single{max-width:900px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}button[aria-pressed=true]{background:#28232b;color:#fff}figcaption{max-width:900px}pre{overflow:auto} @media print{nav,button{display:none}details{display:block}}</style></head><body><header><p class="eyebrow">Endless Museum · Fractals 05 · 8 October 2026</p><nav><a href="index.html">Inside the museum</a><a href="parallel.html">Tutorial / reflection</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="changes.html">Changes</a><a href="student-files.zip">Student files</a></nav></header><main class="reading single"><h1>Menger — a cell and a room</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Three-dimensional cell addresses</li>
+<li>A Boolean selection rule</li>
+<li>Replacing each retained cube</li>
+<li>Count, edge length and retained volume</li>
+<li>Model scale and bodily access</li>
+</ul>
+<p>The nine-metre cube is still solid. Beside its desk, hold the black point and move it through the transparent hand model. A small frame finds one of twenty-seven cells; a larger frame marks the same address on the cube. Read KEEP or REMOVE. The point is inspecting the rule, not cutting a new hole wherever you put it.</p>
+<p>Press its trigger once, or NEXT. The centre and the six face centres disappear. The corner cells and edge middles remain. Follow one of the new openings with your eyes before requesting another cut. The second cut repeats that selection <strong>inside every retained cube</strong>.</p>
+<h2>What continues</h2>
+<p>Keep the museum workspace and the PointBody class from the previous halls. We already have a cube mesh, three coordinates, nested grid loops, and Cantor's pattern of making a separate <code>next</code> array. Koch used an ordered position list to connect neighbours. Here the positions locate <strong>cube centres</strong>; their order does not make a path.</p>
+<p>Save the two files below together. Attach <code>menger.gd</code> to the existing empty, unit-scale <code>PointStudy</code> node in your museum workspace. Keep your Koch script separately. The museum supplies its camera, light, player and XR pickup functions. This script creates every node it needs; it does not refer to hidden scene children.</p>
+<p>Hold the point and press its trigger, or press Enter (<code>ui_accept</code>) on desktop, to replace once. Two cuts are enough. Run the study again to reset. The complete student example makes a small transparent model and a cell reader. The full-size museum adds solid collision, the highlighted cell frames, BACK/RESET and its existing flight enclosure.</p>
+<h2>Which cells remain?</h2>
+<p>Start with one centre at <code>(0, 0, 0)</code> and an edge length of nine represented metres. Divide each edge into three. Every child is three metres wide, and its centre is one child width left, central or right of the parent's centre along each axis.</p>
+<p>The three nested loops try offsets <code>-1</code>, <code>0</code> and <code>1</code>: twenty-seven combinations. Zero means the middle along that axis. Count how many coordinates are zero. The centre has three; a face centre has two; an edge middle has one; a corner has none. <strong>Keep fewer than two middles.</strong> That keeps twelve edge middles and eight corners: twenty children.</p>
+<p><code>keep_cell()</code> is a Boolean function: it answers yes or no. <code>int(true)</code> contributes one to the count, and <code>int(false)</code> contributes zero. The museum's original generator lists the twenty retained indices explicitly. This predicate makes the same selection. Its addresses run from zero to two; add one to each of our offsets to compare them.</p>
+<h2>menger.gd</h2>
+<p>Read <code>keep_cell()</code>, <code>replace_cells()</code> and <code>advance()</code> first. <code>redraw()</code> uses the familiar BoxMesh. The last functions connect the carried point to the first-level address reader.</p>
+<!-- student-code:menger.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LIMIT := 2
+const VIEW_SCALE := 0.09
+const VIEW_CENTER := Vector3(0, 1.43, 0)
+var current: Array[Vector3] = [Vector3.ZERO]
+var edge := 9.0
+var generation := 0
+var drawing := Node3D.new()
+var point := PointBody.new()
+var readout := Label3D.new()
+var selected := Vector3i(0, 0, 1)
+
+func _ready() -&gt; void:
+    add_child(drawing)
+    point.position = Vector3(0, 1.35, 0.56)
+    add_child(point)
+    point.action_pressed.connect(func(_body): advance())
+    readout.position = Vector3(0, 2.05, 0)
+    readout.font_size = 32
+    readout.pixel_size = 0.001
+    add_child(readout)
+    redraw()
+
+func keep_cell(offset: Vector3i) -&gt; bool:
+    var middles := int(offset.x == 0) + int(offset.y == 0) + int(offset.z == 0)
+    return middles &lt; 2
+
+func replace_cells(centres: Array[Vector3], parent_edge: float) -&gt; Array[Vector3]:
+    var next: Array[Vector3] = []
+    var child_edge := parent_edge / 3.0
+    for centre in centres:
+        for z in range(-1, 2):
+            for y in range(-1, 2):
+                for x in range(-1, 2):
+                    var offset := Vector3i(x, y, z)
+                    if keep_cell(offset):
+                        next.append(centre + Vector3(offset) * child_edge)
+    return next
+
+func advance() -&gt; void:
+    if generation == LIMIT:
+        return
+    current = replace_cells(current, edge)
+    edge /= 3.0
+    generation += 1
+    redraw()
+
+func retained_volume() -&gt; float:
+    return current.size() * edge * edge * edge
+
+func redraw() -&gt; void:
+    for old in drawing.get_children():
+        drawing.remove_child(old)
+        old.queue_free()
+    var mesh := BoxMesh.new()
+    mesh.size = Vector3.ONE * edge * VIEW_SCALE
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(0.91, 0.89, 0.86, 0.32)
+    material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    for centre in current:
+        var cube := MeshInstance3D.new()
+        cube.mesh = mesh
+        cube.material_override = material
+        cube.position = VIEW_CENTER + centre * VIEW_SCALE
+        drawing.add_child(cube)
+    update_readout()
+
+func _process(_delta: float) -&gt; void:
+    if Input.is_action_just_pressed(&quot;ui_accept&quot;):
+        advance()
+
+func _physics_process(_delta: float) -&gt; void:
+    if point.held():
+        var p := (to_local(point.global_position) - VIEW_CENTER) / VIEW_SCALE
+        selected = Vector3i(clampi(roundi(p.x / 3.0), -1, 1), clampi(roundi(p.y / 3.0), -1, 1), clampi(roundi(p.z / 3.0), -1, 1))
+        update_readout()
+    else:
+        point.global_transform = global_transform * Transform3D(Basis.IDENTITY, Vector3(0, 1.35, 0.56))
+
+func update_readout() -&gt; void:
+    readout.text = &quot;%d cubes · %.0f m3 retained · cut %d / 2\nFirst-cell offset %s: %s&quot; % [current.size(), retained_volume(), generation, selected, &quot;KEEP&quot; if keep_cell(selected) else &quot;REMOVE&quot;]
+</code></pre>
+<p><code>replace_cells()</code> reads the old centres and returns a new list. Each new position is a parent's centre plus a scaled offset. Only after that list is complete does <code>advance()</code> replace <code>current</code> and divide <code>edge</code> by three. Every current cube has the same size, so one <code>edge</code> value describes them all. Mixed-size cells would need a size stored with each centre.</p>
+<p>Like Cantor and Koch, one action produces one generation. This is repeated replacement, implemented with loops; a function does not need to call itself to make the finite construction.</p>
+<h2>More cubes, less volume</h2>
+<p>Predict the count and edge length before the second cut. Twenty parents each keep twenty children: four hundred cubes, each one metre wide. Their retained volume is four hundred cubic metres. The previous stage had twenty cubes, each three metres wide: <code>20 × 3 × 3 × 3 = 540</code> cubic metres.</p>
+<table>
+<thead>
+<tr>
+<th>Cut</th>
+<th align="right">Cubes</th>
+<th align="right">Edge of each cube</th>
+<th align="right">Retained volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td align="right">1</td>
+<td align="right">9 m</td>
+<td align="right">729 m³</td>
+</tr>
+<tr>
+<td>1</td>
+<td align="right">20</td>
+<td align="right">3 m</td>
+<td align="right">540 m³</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="right">400</td>
+<td align="right">1 m</td>
+<td align="right">400 m³</td>
+</tr>
+</tbody>
+</table>
+<p>The general readings are <code>20^n</code> cubes and <code>729 × (20/27)^n</code> cubic metres. The outside still spans nine metres: all eight outer corners survive. Count, occupied volume and outer bounds answer different questions.</p>
+<p><code>VIEW_SCALE</code> fits those nine represented metres into a hand model 0.81 metres wide. The volume calculation uses the stored geometry, not the display size. Transparency lets you inspect interior addresses; it is a drawing choice. The model has no cube colliders. The large museum sponge does.</p>
+<h2>Read a cell, then enter a space</h2>
+<p>Move the point to a corner of the small model. Its readout says KEEP. Move to the middle of a face: REMOVE. The reader divides by the display scale, then rounds to the nearest first-level cell centre and clamps each coordinate to the three available values. The point stays free in your hand; on release it returns to the near edge so it is available again.</p>
+<p>After the second cut, the reader <strong>still names a first-level cell</strong>, not one of the four hundred tiny children. A kept cell now contains its own removals. KEEP describes its role in the first replacement; it does not promise that the whole selected region remains filled.</p>
+<p>At the museum desk, GHOST reveals the removed volumes and FRAME keeps the original outer bounds visible. These views change neither the retained cubes nor their collision. Turn GHOST off, enter the ground doorway and rise toward the central opening. In VR, tilt the left controller and use its stick; release to hover. On desktop, use WASD, Space to rise and Ctrl to descend. Leave through a ground doorway to walk again.</p>
+<p>The main passage is three metres across. The smaller axial openings after two cuts are one metre across and one metre high. Seeing through an opening does not establish that your body fits. The existing enclosure supplies flight; this lesson does not rebuild the player. The desk refuses solid changes while a visitor remains inside. Leaving does not execute a queued change: press again.</p>
+<h2>Make a different selection</h2>
+<p>Predict what happens if <code>keep_cell()</code> returns <code>middles == 0</code>. Only the eight corners survive. One cut gives eight cubes; two give sixty-four. Their final edges are still one metre, their total volume is sixty-four cubic metres, and the outside still spans nine metres.</p>
+<p>Make that one change in your small study. Compare the result with your prediction, then restore the Menger rule. This produces a different construction, not a more accurate sponge. Its corners preserve the bounds while its face connections disappear. Do not transfer it automatically into the occupied full-size structure.</p>
+<p>You now have a selection function that can be stated, changed and checked independently of its display. The next hall changes the recurrence: a new number comes from the previous two. Before treating its drawing as a spiral, we will ask what the sequence itself supplies.</p>
+<h2>The carried point</h2>
+<p><code>point_body.gd</code> is unchanged from Cantor and Koch. It supplies pickup, release and the trigger signal inherited from XRTools. It is printed again as a complete dependency, not as a new assignment. The prepared museum still supplies XRTools and the player.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre></main><footer>Native Godot evidence. Physical headset feel, Quest performance and learner understanding remain untested.</footer></body></html>

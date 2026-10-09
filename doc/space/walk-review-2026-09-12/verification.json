@@ -1,0 +1,122 @@
+{
+  "hall": "Random_Walk",
+  "run": {
+    "started": "2026-09-12T22:13:32+02:00",
+    "finished": "2026-09-12T22:14:07+02:00",
+    "pid": 33084,
+    "exit": 0,
+    "checks": 129,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_walk_live.gd": "25e90c5ca3d298b43bbfa875c8613a3dc0088510fdd6b0045efb1c2dab81a603",
+      "commons/testing/probe_wcn_walk.gd": "c13bac3f440ec6bfd828e5c697ab0fb6d19479bf916feec4b5b5e45234cd507b",
+      "commons/maps/Random_Walk/map_data.json": "495f621a84d9f32319f392533cbed327d01755852a27c5e98dce7f9d6c3caef5",
+      "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd": "4e497a40663c9a9c575f04cbde6753a340f20de427311a5b519d3b560724b7cf",
+      "commons/artifacts/lab_room/lab_room.gd": "891f26bc040e432e0e821dad4326465fa66505ec8a3037b2a44eb71cbe17b6da",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "source_excerpts": 11,
+  "primary_preserved": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+  "lab_change": "One boolean metadata assignment uses the existing parser",
+  "map_change": "Only descriptive metadata and pavilion annotation; geometry and other tokens preserved",
+  "history_stats": {
+    "2d": {
+      "reflected_steps_walker_0": [],
+      "max_proposed_length": 0.015000000511955911,
+      "msd_min": 8.881782641901768e-18,
+      "msd_max": 0.05553076914855688,
+      "last_position_walker_0": [
+        0.170117363333702,
+        0.200000002980232,
+        -0.0750497356057167
+      ]
+    },
+    "3d": {
+      "reflected_steps_walker_0": [],
+      "max_proposed_length": 0.015000000691823464,
+      "msd_min": 8.881782641901768e-18,
+      "msd_max": 0.05144941764983171,
+      "last_position_walker_0": [
+        0.0764248967170715,
+        0.341208189725876,
+        0.110164642333984
+      ]
+    },
+    "levy": {
+      "reflected_steps_walker_0": [
+        131,
+        222,
+        230,
+        258,
+        259,
+        263,
+        264,
+        295,
+        298,
+        299,
+        300
+      ],
+      "max_proposed_length": 0.1368247206859499,
+      "msd_min": 8.881782641901768e-18,
+      "msd_max": 0.07117443432148818,
+      "last_position_walker_0": [
+        -0.140190482139587,
+        0.00959406513720751,
+        0.162384822964668
+      ]
+    }
+  },
+  "captured_frames": 903,
+  "captured_position_triples": 4515,
+  "primary_book_hero": [
+    "random_walk_terrarium"
+  ],
+  "pack": {
+    "planned": 12,
+    "matched": 12,
+    "extra": 0,
+    "slid": 2,
+    "ringed": 0,
+    "placed": 12,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random walk"
+  },
+  "plan_rows_agree": true,
+  "audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 0
+  },
+  "engine_diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "ERROR: Viewport Texture must be set to use it.",
+    "ERROR: Viewport Texture must be set to use it."
+  ],
+  "script_errors": false,
+  "shutdown_leak_warning": false,
+  "headset_verified": false,
+  "files_prepared": 56,
+  "final_words": 958,
+  "visual_limit": "Fine trails remain pale through the glass; small lettering and tracked-hand approach need a later headset visit."
+}

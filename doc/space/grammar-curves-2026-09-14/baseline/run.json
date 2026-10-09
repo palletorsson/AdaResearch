@@ -1,0 +1,42 @@
+{
+  "started": "2026-09-14T16:37:13+02:00",
+  "finished": "2026-09-14T16:37:34+02:00",
+  "pid": 41920,
+  "exit": 1,
+  "checks": 2,
+  "failures": [
+    "all five original works exist",
+    "SCRIPT ERROR: Invalid access to property or key 'the_believing_turtle' on a base object of type 'Dictionary'."
+  ],
+  "source_sha256": {
+    "ada_run/curves_probe_base.gd": "dd12532249d92d484071fa93b86cf21a7430fb03d50a6692056f0885723e0142",
+    "ada_run/curves_acceptance.gd": "b991220fc3252647667f514b7e58a252396830e8836a60ebf1d34e42404f91d7",
+    "commons/maps/LSystems_Grammars_And_Curves/map_data.json": "25d6d98db42c97000b2b0df79dad6e1fea75fe3b3491579b18da2e3d60dfb2c1",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/curves-review-2026-09-14/review-plan.json": "1209e3ae66a83e90b8ab4464945106a764714bcbcfb6ec645408c031f81be997",
+    "algorithms/lsystems/context_free_grammars/context_free_grammars.tscn": "ec3f34f7029df11d549ccbb333ea937bb783ec51f2e8a3bdae8d51327e331307",
+    "algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd": "268fdc57c61517d8f0c3b6809c3644a50eeb9014ee1d258701410b3b12da9eda",
+    "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn": "ed8b9bb8307e0eb99c2d24036ee08bda2f5d0baaffe2134e37ed6421369f4f27",
+    "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd": "af7272a524dedcbd1091fe0f6c3d6670b2ef7ec38c32e6d536a6c44eb13a0f83",
+    "algorithms/lsystems/Hilbert3D.tscn": "74de30f69f81d92618ace6c70539b526acde5cb4055d1dd1dbc8636d9926ceb2",
+    "commons/artifacts/the_believing_turtle/the_believing_turtle.tscn": "a1f3ecea5a3cb9b8dc2fb7fc3a558c1e2a56630ae0327f86587e2bcb75f40747",
+    "commons/artifacts/the_believing_turtle/the_believing_turtle.gd": "0c79e00378d28269c2d4f68c587707b828d444f854889c0c7b73da540a310836",
+    "commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.tscn": "2e0bf40772349e530dd19e579590ab3316a08a88b895d7c4f9a4b215d76e75d8",
+    "commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.gd": "28ba2da6d4fb41e19bc9a7b26ae5d232b4dfc2cce899412bbc7ed46c8cc2cfc0",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "d3af95e0d30f7ffefa721da91af1f7a661061753db1295f48524cd6d855bf94c",
+    "commons/data/trunk_branches.json": "8dab7804d71a14a59d63d79b38f0c32211e9c9b523911f25a59e9fa7a6a638ba",
+    "commons/maps/LSystems_Grammars_And_Curves/final.md": "98fecdd9e5365db11f2f384fdc44469dd4ca6a73b0d5bc3c40c9b7dfe8464b00"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

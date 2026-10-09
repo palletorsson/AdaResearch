@@ -1,0 +1,87 @@
+    RULING VIOLATION ISO_PortalLandscape: final width 30 outside 13-19 (content too large to conform)
+{
+  "sequence": "isosurfaces",
+  "maps": [
+    "ISO_PortalLandscape"
+  ],
+  "live_sequence_maps": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "museum_template": "castelvecchio-pinch-v2",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "57b43ca489bda5b42463b7764f01009c616468c74630793629e9a205eb8d2ed3",
+    "commons/data/museum/em_plan.json": "57b43ca489bda5b42463b7764f01009c616468c74630793629e9a205eb8d2ed3",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/isosurfaces.json": "bf634fa525b2e1947f4df2ef69da275d4c411933f88c7808ca3bf4421df533f9",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/ISO_PortalLandscape/map_data.json": "f0edc2d0577009079ed42c83e163e516e05c62b974aa4d2cde0c772b452f1c1e"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "50084c95dd02ceaec9cfce74d67b810390b219b9690657ceb134c8e1bfd54839",
+    "commons/data/museum/em_plan.json": "50084c95dd02ceaec9cfce74d67b810390b219b9690657ceb134c8e1bfd54839",
+    "commons/data/map_authored.json": "c7d2490c57ffbe1bc8296dfa31cd4a3d5044d5ecf81f841d3d9e8cead414c764"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 190,
+    "commons/data/museum/em_plan.json": 190
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "ISO_PortalLandscape",
+      "pearl_index": 6,
+      "room": {
+        "w": 30,
+        "h": 24
+      },
+      "artifacts": 2,
+      "ruling": {
+        "src_w": 30,
+        "src_h": 24,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T073347472720Z"
+}

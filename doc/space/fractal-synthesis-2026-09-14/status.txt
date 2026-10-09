@@ -1,0 +1,2687 @@
+ M .claude/flows/pathfinder-validation.json
+ M .claude/settings.local.json
+ D .claude/worktrees/agent-a52e81a8
+ D .claude/worktrees/agent-aab71743
+ D .claude/worktrees/agent-afb2e966
+ m .claude/worktrees/silly-elgamal
+ M CLAUDE.md
+ M ada_run/crab_bite.txt
+ M ada_run/crab_museum_bite.txt
+ M ada_run/dr_control.json
+ M ada_run/dr_open_request.json
+ M ada_run/dr_viewer_alive.txt
+ M ada_run/dr_viewer_state.json
+ M ada_run/em_adoptions.json
+ M ada_run/em_autopilot.json
+ M ada_run/em_bake.json
+ M ada_run/em_basin_plan.txt
+ M ada_run/em_boot_last.json
+ M ada_run/em_built.json
+ M ada_run/em_built_desktop.json
+ M ada_run/em_built_vr.json
+ M ada_run/em_control.json
+ M ada_run/em_detail_plan.txt
+ M ada_run/em_firstroom_report.json
+ M ada_run/em_inventory.json
+ M ada_run/em_live_footprints.json
+ M ada_run/em_overrides.json
+ M ada_run/em_pack_report.json
+ M ada_run/em_plan.json
+ M ada_run/em_showing_cards.json
+ M ada_run/gates.json
+ D ada_run/graft_shots/1_degree_1.png
+ D ada_run/graft_shots/2_degree_3.png
+ D ada_run/graft_shots/3_degree_5.png
+ D ada_run/graft_shots/4_a_visitors_eye.png
+ D ada_run/graft_shots/_index.txt
+ M ada_run/head_crab_deploy.txt
+ M ada_run/journey_narrative.md
+ M ada_run/mapsim_control.json
+ M ada_run/mapsim_viewer_state.json
+ M ada_run/necklace_hand.json
+ M ada_run/necklace_lab.json
+ M ada_run/pointone/hunt.png
+ M ada_run/scene_spatial.md
+ M ada_run/stamp_diff.svg
+ D ada_run/sweep/synthesis_stand__subject-godel_statement_plaque__mode-hero.png
+ D ada_run/sweep/synthesis_stand__subject-godel_statement_plaque__mode-series.png
+ D ada_run/sweep/synthesis_stand__subject-pick_up_cube__mode-hero.png
+ D ada_run/sweep/synthesis_stand__subject-pick_up_cube__mode-series.png
+ M ada_run/sweep_spec.json
+ M ada_run/waves_chance_noise/WaveFunctions_Intro/probe_intro_live.json
+ M ada_run/waves_chance_noise/WaveFunctions_Pendulum/probe_pendulum_live.json
+ M ada_run/waves_chance_noise/WaveFunctions_Sine_Space/probe_sine_space_live.json
+ M algorithms/arrays/grid_2d_4x4.gd
+ M algorithms/arrays/grid_3d_4x4x4.gd
+ M algorithms/cellularautomata/ca_bridge/ca_bridge.gd
+ M algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd
+ M algorithms/cellularautomata/ca_showcase/self_organization_ca.gd
+ M algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd
+ M algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.gd
+ M algorithms/cellularautomata/living_architecture/decaying_bridge.gd
+ M algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.gd
+ M algorithms/color/advancedglitch/advancedglitch.gd
+ M algorithms/color/color_mixing/color_constellation_office.gd
+ M algorithms/color/colorballs/colorballs.gd
+ M algorithms/color/colorlines/coloredlines.gd
+ M algorithms/color/grabcolor/color_sets_overview.gd
+ M algorithms/color/gradient_interpolator/gradient_interpolator.gd
+ M algorithms/color/gridcolorizer/gridcolorizer.gd
+ M algorithms/color/metamerism_lab/MetamerismLab.gd
+ M algorithms/color/minimalglitch/minimalglitch.gd
+ M algorithms/color/pillarcolorcollection/pillarcolorcollection.gd
+ M algorithms/color/simultaneous_contrast/SimultaneousContrast.gd
+ M algorithms/color/spherecolors/spherecolors.gd
+ M algorithms/computationalbiology/radiolaria2/radiolaria.gd
+ M algorithms/fractals/box_counting_dimension/box_counting_dimension.gd
+ M algorithms/fractals/cantorset/cantor_set.gd
+ M algorithms/fractals/cubesubdivision/cube_subdivision.gd
+ M algorithms/fractals/cubesubdivision/recursive_chair.gd
+ M algorithms/fractals/example_8_2_recursion_vr.gd
+ M algorithms/fractals/example_8_3_recursion_circles_vr.gd
+ M algorithms/fractals/example_8_4_cantor_pagoda_vr.gd
+ M algorithms/fractals/example_8_5_koch_curve_vr.gd
+ M algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd
+ M algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn
+ M algorithms/fractals/golden_rectangle/golden_rectangle.gd
+ M algorithms/fractals/mengersponge/menger_sponge.gd
+ M algorithms/fractals/recursive_tree/recursive_tree.gd
+ M algorithms/fractals/recursivetree/recursive_tree.gd
+ M algorithms/fractals/romanesco/romanesco.gd
+ M algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd
+ M algorithms/graphtheory/forcedirected3d/forcedirected3d.gd
+ M algorithms/patterngeneration/fabrics/displacement.gdshader
+ M algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.gd
+ M algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd
+ M algorithms/postprocessing/flashlight_demo/README.md
+ M algorithms/postprocessing/flashlight_demo/flashlight_color.gd
+ M algorithms/postprocessing/flashlight_demo/flashlight_demo.gd
+ M algorithms/primitives/rainbow/rainbow.gd
+ M algorithms/primitives/scaleme/scale_me.gd
+ M algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd
+ M algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd
+ M algorithms/randomness/noiselayers/noiselayers.tscn
+ M algorithms/randomness/noisesphere/noisesphere.gd
+ M algorithms/randomness/noisetorus/noisetorus.gd
+ M algorithms/randomness/perlinnoise/PerlinNoise.gd
+ M algorithms/randomness/randompoint/randompoint.gd
+ M algorithms/randomness/randompoints/randompoints.gd
+ M algorithms/randomness/seed_replay/seed_replay_demo.gd
+ M algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader
+ M algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader
+ M algorithms/randomness/shadernoisespace/noiseroom.gd
+ M algorithms/randomness/simplexnoise/SimplexNoise.gd
+ M algorithms/randomness/voxelnoise/voxelnoise.gd
+ M algorithms/randomness/whitenoise/noise_spectrum_3d.gd
+ M algorithms/randomness/whitenoise/white_noise_spectrum.gd
+ M algorithms/spacetopology/marchingcubes/rhizome/RhizomeCaveGenerator.gd
+ M algorithms/transformation/booleanTunnel/booleanTunnel.gd
+ M algorithms/transformation/carousel_cake/carousel_cake.gd
+ M algorithms/transformation/toruscylinder/toruscylinder.gd
+ M algorithms/vectors/00_coordinates/CoordinateSystem3M.gd
+ M algorithms/vectors/01_vector_basics/VectorBasics.gd
+ M algorithms/vectors/08_vector_motion/VectorMotion.gd
+ M algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd
+ M algorithms/wavefunctions/resonance/CombinedWaveVisualizer.gd
+ M algorithms/wavefunctions/resonance/ResonatingBar.gd
+ M algorithms/wavefunctions/resonance/ResonatingMetallophone.gd
+ M algorithms/wavefunctions/sine_space/SineSpace.gd
+ M commons/artifacts/_embodied/embodied_prop.gd
+ M commons/artifacts/adder_board/adder_board.gd
+ M commons/artifacts/additive_wave_demo/additive_wave_demo.gd
+ M commons/artifacts/assay_wing/assay_wing.gd
+ M commons/artifacts/backpropagation_flow/backpropagation_flow.gd
+ M commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd
+ M commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd
+ M commons/artifacts/catalog/DressingRoomBuilder.gd
+ M commons/artifacts/centrifuge_ring/centrifuge_ring.gd
+ M commons/artifacts/color_space_navigator/color_space_navigator.gd
+ M commons/artifacts/concrete_barrier/concrete_barrier.gd
+ M commons/artifacts/distribution_sampler/distribution_sampler.gd
+ M commons/artifacts/drag_corridor/drag_corridor.gd
+ M commons/artifacts/dream_bodies/bodies/asawa_wire.gd
+ M commons/artifacts/dream_bodies/bodies/batik_beast.gd
+ M commons/artifacts/dream_bodies/bodies/brass_stamen.gd
+ M commons/artifacts/dream_bodies/bodies/ceramic_puppet.gd
+ M commons/artifacts/dream_bodies/bodies/coral_polyp.gd
+ M commons/artifacts/dream_bodies/bodies/couch_lounge.gd
+ M commons/artifacts/dream_bodies/bodies/crackle_peak.gd
+ M commons/artifacts/dream_bodies/bodies/david_drape.gd
+ M commons/artifacts/dream_bodies/bodies/dragon.gd
+ M commons/artifacts/dream_bodies/bodies/dubuffet.gd
+ M commons/artifacts/dream_bodies/bodies/food_table.gd
+ M commons/artifacts/dream_bodies/bodies/garet_still.gd
+ M commons/artifacts/dream_bodies/bodies/gehry_metal.gd
+ M commons/artifacts/dream_bodies/bodies/griffin_plume.gd
+ M commons/artifacts/dream_bodies/bodies/hadid_shell.gd
+ M commons/artifacts/dream_bodies/bodies/hicks_fiber.gd
+ M commons/artifacts/dream_bodies/bodies/hokusai_kimono.gd
+ M commons/artifacts/dream_bodies/bodies/horse_hybrid.gd
+ M commons/artifacts/dream_bodies/bodies/kruger_suit.gd
+ M commons/artifacts/dream_bodies/bodies/lava_bloom.gd
+ M commons/artifacts/dream_bodies/bodies/masked_dancer.gd
+ M commons/artifacts/dream_bodies/bodies/mosaic_body.gd
+ M commons/artifacts/dream_bodies/bodies/nana_gloss.gd
+ M commons/artifacts/dream_bodies/bodies/oni_dragon.gd
+ M commons/artifacts/dream_bodies/bodies/paik_light.gd
+ M commons/artifacts/dream_bodies/bodies/panel_robot.gd
+ M commons/artifacts/dream_bodies/bodies/panton_pop.gd
+ M commons/artifacts/dream_bodies/bodies/pink_scaffold.gd
+ M commons/artifacts/dream_bodies/bodies/piped_icing.gd
+ M commons/artifacts/dream_bodies/bodies/porcelain_doll.gd
+ M commons/artifacts/dream_bodies/bodies/rocaille.gd
+ M commons/artifacts/dream_bodies/bodies/sea_forms.gd
+ M commons/artifacts/dream_bodies/bodies/stella_wall.gd
+ M commons/artifacts/dream_bodies/bodies/stijl_robot.gd
+ M commons/artifacts/dream_bodies/bodies/tatlin_red.gd
+ M commons/artifacts/dream_bodies/bodies/tube_reef.gd
+ M commons/artifacts/dream_bodies/bodies/vasarely_beast.gd
+ M commons/artifacts/dream_bodies/dream_bodies.gd
+ M commons/artifacts/dressing_rooms/CoordinateSystem3M.json
+ M commons/artifacts/dressing_rooms/bias_visualizer.json
+ M commons/artifacts/dressing_rooms/cctv.json
+ M commons/artifacts/dressing_rooms/chladni_plate.json
+ M commons/artifacts/dressing_rooms/control_pendulum.json
+ M commons/artifacts/dressing_rooms/exhibit_vitrine.json
+ M commons/artifacts/dressing_rooms/exit_sign.json
+ M commons/artifacts/dressing_rooms/fire_extinguisher.json
+ M commons/artifacts/dressing_rooms/floating_sphere_field.json
+ M commons/artifacts/dressing_rooms/galton_board.json
+ M commons/artifacts/dressing_rooms/grabbable_line.json
+ M commons/artifacts/dressing_rooms/gradient_descent_visualization.json
+ M commons/artifacts/dressing_rooms/harmonic_distance_table.json
+ M commons/artifacts/dressing_rooms/info_board.json
+ M commons/artifacts/dressing_rooms/lambda_slider.json
+ M commons/artifacts/dressing_rooms/line_builder_3d.json
+ M commons/artifacts/dressing_rooms/matrix_4x4_viewer.json
+ M commons/artifacts/dressing_rooms/neural_network_visualization.json
+ M commons/artifacts/dressing_rooms/newton_cradle.json
+ M commons/artifacts/dressing_rooms/origin.json
+ M commons/artifacts/dressing_rooms/pattern_loom.json
+ M commons/artifacts/dressing_rooms/perspective_lines.json
+ M commons/artifacts/dressing_rooms/phi_slider.json
+ M commons/artifacts/dressing_rooms/pick_up_cube.json
+ M commons/artifacts/dressing_rooms/platonicsolids.json
+ M commons/artifacts/dressing_rooms/prism_block.json
+ M commons/artifacts/dressing_rooms/qfep_formula_3d.json
+ M commons/artifacts/dressing_rooms/random_walk_leash.json
+ M commons/artifacts/dressing_rooms/rotating_cube.json
+ M commons/artifacts/dressing_rooms/science_screen.json
+ M commons/artifacts/dressing_rooms/shannon_entropy_meter.json
+ M commons/artifacts/dressing_rooms/simulated_annealing.json
+ M commons/artifacts/dressing_rooms/situated_bench.json
+ M commons/artifacts/dressing_rooms/wall_clock.json
+ M commons/artifacts/elasticity_press/elasticity_press.gd
+ M commons/artifacts/flow_field_painter/flow_field_painter.gd
+ M commons/artifacts/force_cube/force_cube.gd
+ M commons/artifacts/force_field_zone/force_field_zone.gd
+ M commons/artifacts/force_mower/force_mower.gd
+ M commons/artifacts/friction_ramp/friction_ramp.gd
+ M commons/artifacts/game_of_life_petri/game_of_life_petri.gd
+ M commons/artifacts/health_cross/health_cross.gd
+ M commons/artifacts/lab_room/lab_room.gd
+ M commons/artifacts/launch_arc/launch_arc.gd
+ M commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.gd
+ M commons/artifacts/pattern_machine_a/pattern_machine_a.gd
+ M commons/artifacts/pattern_maker_station/pattern_maker_station.gd
+ M commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd
+ M commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd
+ M commons/artifacts/projection_shadow/projection_shadow.gd
+ M commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd
+ M commons/artifacts/rd_artifact/rd_artifact.gd
+ M commons/artifacts/registry/algorithms_misc.json
+ M commons/artifacts/registry/arrays.json
+ M commons/artifacts/registry/bar_array.json
+ M commons/artifacts/registry/cellular_automata.json
+ M commons/artifacts/registry/change.json
+ M commons/artifacts/registry/color.json
+ M commons/artifacts/registry/commons_artifacts.json
+ M commons/artifacts/registry/computational_biology.json
+ M commons/artifacts/registry/dream_bodies.json
+ M commons/artifacts/registry/foundations.json
+ M commons/artifacts/registry/fractals.json
+ M commons/artifacts/registry/grid3d.json
+ M commons/artifacts/registry/lab.json
+ M commons/artifacts/registry/museum.json
+ M commons/artifacts/registry/primitives.json
+ M commons/artifacts/registry/procgen_extra.json
+ M commons/artifacts/registry/random_cubes.json
+ M commons/artifacts/registry/randomness.json
+ M commons/artifacts/registry/shaders.json
+ M commons/artifacts/registry/synthesis.json
+ M commons/artifacts/registry/transforms.json
+ M commons/artifacts/registry/vectors.json
+ M commons/artifacts/registry/vectors_demos.json
+ M commons/artifacts/registry/wavefunctions.json
+ M commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd
+ M commons/artifacts/schlegel_diagram/schlegel_diagram.gd
+ M commons/artifacts/science_screen/science_screen.gd
+ M commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd
+ M commons/artifacts/sona_floor/sona_floor.tscn
+ M commons/artifacts/spring_tower/spring_tower.gd
+ M commons/artifacts/station/station_plinth.gd
+ M commons/artifacts/street_sign/street_sign.gd
+ M commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd
+ M commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd
+ M commons/artifacts/the_invisible_point/the_invisible_point.gd
+ M commons/artifacts/timbre_sculptor/timbre_sculptor.gd
+ M commons/artifacts/vector_machine/vector_machine.gd
+ M commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd
+ M commons/artifacts/vector_op_console/vector_op_console.gd
+ M commons/artifacts/verlet_workbench/verlet_workbench.gd
+ M commons/artifacts/whiteboard/whiteboard.gd
+ M commons/audio/UniversalVRAudioController.gd
+ M commons/audio/rack_templates/RackTemplates.gd
+ M commons/audio/sequencer/sequencer_ui.gd
+ M commons/audio/sequencer/step_sequencer.gd
+ M commons/body/hands/right_hand.tscn
+ M commons/context/discofloor/DiscoSequencerBridge.gd
+ M commons/context/drawingboard/ball_grab_sphere.gd
+ M commons/context/drawingboard/ball_paint_tip.gd
+ M commons/context/drawingboard/ball_painting_demo_v2.tscn
+ M commons/context/drawingboard/ball_spawner.gd
+ M commons/context/walkgrids/NoiseSpace.gd
+ M commons/data/artifact_roles.json
+ M commons/data/blind_pairs/sheet.md
+ M commons/data/book/boolean_surfaces.json
+ M commons/data/book/cellularautomata.json
+ M commons/data/book/change.json
+ M commons/data/book/color.json
+ M commons/data/book/forces.json
+ M commons/data/book/fractals.json
+ M commons/data/book/isosurfaces.json
+ M commons/data/book/noise.json
+ M commons/data/book/primitives.json
+ M commons/data/book/randomness.json
+ M commons/data/book/transformation.json
+ M commons/data/book/wavefunctions.json
+ M commons/data/long_museum.json
+ M commons/data/map_authored.json
+ M commons/data/museum_wall_physics_contract.json
+ M commons/data/prop_wall_rules.json
+ M commons/data/spine_artifact_order.json
+ M commons/data/staging_dna.json
+ M commons/data/template_shelf.json
+ M commons/data/trunk_branches.json
+ M commons/grid/CubeWrapperLibrary.gd
+ M commons/grid/GridBiomeComponent.gd
+ M commons/grid/GridInteractablesComponent.gd
+ M commons/grid/GridSystem.gd
+ M commons/grid/GridUtilitiesComponent.gd
+ M commons/grid/UtilityRegistry.gd
+ M commons/hazards/becoming_catalyst/becoming_catalyst.gd
+ M commons/hazards/becoming_catalyst/catalyst_target.gd
+ M commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd
+ M commons/hazards/mushroom/mushroom_effect.gd
+ M commons/interfaces/nail_color_controller.gd
+ M commons/maps/Accumulation_Riemann/artifacts.md
+ M commons/maps/Accumulation_Riemann/blurb.md
+ M commons/maps/Accumulation_Riemann/intent.md
+ M commons/maps/Accumulation_Riemann/map_data.json
+ M commons/maps/Accumulation_Riemann/tutorial.md
+ M commons/maps/Accumulation_Riemann/walked.md
+ M commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json
+ M commons/maps/Array/map_data.json
+ M commons/maps/Array_Patterns/blurb.md
+ M commons/maps/Array_Patterns/critical.md
+ M commons/maps/Array_Patterns/intent.md
+ M commons/maps/Array_Patterns/map_data.json
+ M commons/maps/Array_Patterns/summary.md
+ M commons/maps/Array_Patterns/technical.md
+ M commons/maps/Array_Patterns/tutorial.md
+ M commons/maps/Atlas_SDF_Gallery/map_data.json
+ M commons/maps/Boolean_Verbs/map_data.json
+ M commons/maps/Boolean_Works/map_data.json
+ M commons/maps/Brouwer_Intuitionism/map_data.json
+ M commons/maps/CA_BeyondBinary/artifacts.md
+ M commons/maps/CA_BeyondBinary/blurb.md
+ M commons/maps/CA_BeyondBinary/critical.md
+ M commons/maps/CA_BeyondBinary/intent.md
+ M commons/maps/CA_BeyondBinary/map_data.json
+ M commons/maps/CA_BeyondBinary/summary.md
+ M commons/maps/CA_BeyondBinary/technical.md
+ M commons/maps/CA_BeyondBinary/tutorial.md
+ M commons/maps/CA_EdgeOfChaos/artifacts.md
+ M commons/maps/CA_EdgeOfChaos/blurb.md
+ M commons/maps/CA_EdgeOfChaos/critical.md
+ M commons/maps/CA_EdgeOfChaos/eye_shot.md
+ M commons/maps/CA_EdgeOfChaos/intent.md
+ M commons/maps/CA_EdgeOfChaos/map_data.json
+ M commons/maps/CA_EdgeOfChaos/summary.md
+ M commons/maps/CA_EdgeOfChaos/technical.md
+ M commons/maps/CA_EdgeOfChaos/tutorial.md
+ M commons/maps/CA_EdgeOfChaos/walked.md
+ M commons/maps/CA_ElementaryRules/blurb.md
+ M commons/maps/CA_ElementaryRules/critical.md
+ M commons/maps/CA_ElementaryRules/intent.md
+ M commons/maps/CA_ElementaryRules/map_data.json
+ M commons/maps/CA_ElementaryRules/summary.md
+ M commons/maps/CA_ElementaryRules/technical.md
+ M commons/maps/CA_ElementaryRules/tutorial.md
+ M commons/maps/CA_ExpandingSpace/artifacts.md
+ M commons/maps/CA_ExpandingSpace/blurb.md
+ M commons/maps/CA_ExpandingSpace/critical.md
+ M commons/maps/CA_ExpandingSpace/intent.md
+ M commons/maps/CA_ExpandingSpace/map_data.json
+ M commons/maps/CA_ExpandingSpace/summary.md
+ M commons/maps/CA_ExpandingSpace/technical.md
+ M commons/maps/CA_ExpandingSpace/tutorial.md
+ M commons/maps/CA_GameOfLife/artifacts.md
+ M commons/maps/CA_GameOfLife/blurb.md
+ M commons/maps/CA_GameOfLife/critical.md
+ M commons/maps/CA_GameOfLife/intent.md
+ M commons/maps/CA_GameOfLife/map_data.json
+ M commons/maps/CA_GameOfLife/summary.md
+ M commons/maps/CA_GameOfLife/technical.md
+ M commons/maps/CA_GameOfLife/tutorial.md
+ M commons/maps/CA_Introduction/artifacts.md
+ M commons/maps/CA_Introduction/blurb.md
+ M commons/maps/CA_Introduction/critical.md
+ M commons/maps/CA_Introduction/intent.md
+ M commons/maps/CA_Introduction/map_data.json
+ M commons/maps/CA_Introduction/summary.md
+ M commons/maps/CA_Introduction/technical.md
+ M commons/maps/CA_Introduction/tutorial.md
+ M commons/maps/CA_SoftRules/artifacts.md
+ M commons/maps/CA_SoftRules/blurb.md
+ M commons/maps/CA_SoftRules/critical.md
+ M commons/maps/CA_SoftRules/intent.md
+ M commons/maps/CA_SoftRules/map_data.json
+ M commons/maps/CA_SoftRules/summary.md
+ M commons/maps/CA_SoftRules/technical.md
+ M commons/maps/CA_SoftRules/tutorial.md
+ M commons/maps/Chamber_Arrays/map_data.json
+ M commons/maps/Chamber_CA/map_data.json
+ M commons/maps/Chamber_Color.bak.20260429T110640/map_data.json
+ M commons/maps/Chamber_Color/blurb.md
+ M commons/maps/Chamber_Color/intent.md
+ M commons/maps/Chamber_Color/map_data.json
+ M commons/maps/Chamber_Forces/map_data.json
+ M commons/maps/Chamber_Foundations/map_data.json
+ M commons/maps/Chamber_Fractals/map_data.json
+ M commons/maps/Chamber_LSystems/map_data.json
+ M commons/maps/Chamber_ML/map_data.json
+ M commons/maps/Chamber_Noise/map_data.json
+ M commons/maps/Chamber_Primitives/map_data.json
+ M commons/maps/Chamber_ProcGen/map_data.json
+ M commons/maps/Chamber_QFEP/map_data.json
+ M commons/maps/Chamber_Random/map_data.json
+ M commons/maps/Chamber_SoftBodies/map_data.json
+ M commons/maps/Chamber_Swarm/map_data.json
+ M commons/maps/Chamber_Transformation/map_data.json
+ M commons/maps/Chamber_Waves/map_data.json
+ M commons/maps/Change_Intro/artifacts.md
+ M commons/maps/Change_Intro/blurb.md
+ M commons/maps/Change_Intro/intent.md
+ M commons/maps/Change_Intro/map_data.json
+ M commons/maps/Change_Intro/tutorial.md
+ M commons/maps/Change_Reconciliation/map_data.json
+ M commons/maps/Color_Context/map_data.json
+ M commons/maps/Color_Context_Placed/artifacts.md
+ M commons/maps/Color_Context_Placed/eye_shot.md
+ M commons/maps/Color_Context_Placed/map_data.json
+ M commons/maps/Color_Context_Placed/walked.md
+ M commons/maps/Color_Flashlight/blurb.md
+ M commons/maps/Color_Flashlight/critical.md
+ M commons/maps/Color_Flashlight/intent.md
+ M commons/maps/Color_Flashlight/map_data.json
+ M commons/maps/Color_Flashlight/summary.md
+ M commons/maps/Color_Flashlight/technical.md
+ M commons/maps/Color_Flashlight/tutorial.md
+ M commons/maps/Color_Grid_Pallet/artifacts.md
+ M commons/maps/Color_Grid_Pallet/blurb.md
+ M commons/maps/Color_Grid_Pallet/critical.md
+ M commons/maps/Color_Grid_Pallet/intent.md
+ M commons/maps/Color_Grid_Pallet/map_data.json
+ M commons/maps/Color_Grid_Pallet/summary.md
+ M commons/maps/Color_Grid_Pallet/technical.md
+ M commons/maps/Color_Grid_Pallet/tutorial.md
+ M commons/maps/Color_Nails/blurb.md
+ M commons/maps/Color_Nails/critical.md
+ M commons/maps/Color_Nails/intent.md
+ M commons/maps/Color_Nails/map_data.json
+ M commons/maps/Color_Nails/summary.md
+ M commons/maps/Color_Nails/technical.md
+ M commons/maps/Color_Nails/tutorial.md
+ M commons/maps/Color_Paint/artifacts.md
+ M commons/maps/Color_Paint/critical.md
+ M commons/maps/Color_Paint/intent.md
+ M commons/maps/Color_Paint/map_data.json
+ M commons/maps/Color_Paint/summary.md
+ M commons/maps/Color_Paint/technical.md
+ M commons/maps/Color_Paint/tutorial.md
+ M commons/maps/Color_Pillar/artifacts.md
+ M commons/maps/Color_Pillar/eye_shot.md
+ M commons/maps/Color_Pillar/map_data.json
+ M commons/maps/Color_Pillar/summary.md
+ M commons/maps/Color_Pillar/technical.md
+ M commons/maps/Color_Pillar/walked.md
+ M commons/maps/Color_Rainbow/blurb.md
+ M commons/maps/Color_Rainbow/critical.md
+ M commons/maps/Color_Rainbow/intent.md
+ M commons/maps/Color_Rainbow/map_data.json
+ M commons/maps/Color_Rainbow/summary.md
+ M commons/maps/Color_Rainbow/technical.md
+ M commons/maps/Color_Rainbow/tutorial.md
+ M commons/maps/Color_Showcase/map_data.json
+ M commons/maps/Color_Walls/artifacts.md
+ M commons/maps/Color_Walls/blurb.md
+ M commons/maps/Color_Walls/critical.md
+ M commons/maps/Color_Walls/eye_shot.md
+ M commons/maps/Color_Walls/intent.md
+ M commons/maps/Color_Walls/map_data.json
+ M commons/maps/Color_Walls/summary.md
+ M commons/maps/Color_Walls/technical.md
+ M commons/maps/Color_Walls/tutorial.md
+ M commons/maps/Color_Walls/walked.md
+ M commons/maps/Crisis_Synthesis/map_data.json
+ M commons/maps/Escher_Impossible/map_data.json
+ M commons/maps/Euclid_Parallel/map_data.json
+ M commons/maps/Florensky_Paraconsistent/map_data.json
+ M commons/maps/Flow_Field/artifacts.md
+ M commons/maps/Flow_Field/blurb.md
+ M commons/maps/Flow_Field/intent.md
+ M commons/maps/Flow_Field/map_data.json
+ M commons/maps/Flow_Field/tutorial.md
+ M commons/maps/ForcesFoundations/map_data.json
+ M commons/maps/ForcesSystems/map_data.json
+ M commons/maps/Forces_1/map_data.json
+ M commons/maps/Forces_2/map_data.json
+ M commons/maps/Forces_3/map_data.json
+ M commons/maps/Forces_4/map_data.json
+ M commons/maps/FormFinding_Annealing/final.md
+ M commons/maps/FormFinding_Descent/blurb.md
+ M commons/maps/FormFinding_Descent/field_notes.md
+ M commons/maps/FormFinding_Descent/final.md
+ M commons/maps/FormFinding_Descent/map_data.json
+ M commons/maps/FormFinding_Descent/tutorial.md
+ M commons/maps/Fractal_CantorSet/blurb.md
+ M commons/maps/Fractal_CantorSet/critical.md
+ M commons/maps/Fractal_CantorSet/intent.md
+ M commons/maps/Fractal_CantorSet/map_data.json
+ M commons/maps/Fractal_CantorSet/summary.md
+ M commons/maps/Fractal_CantorSet/technical.md
+ M commons/maps/Fractal_CantorSet/tutorial.md
+ M commons/maps/Fractal_CrossSequence/map_data.json
+ M commons/maps/Fractal_GoldenSpiral/blurb.md
+ M commons/maps/Fractal_GoldenSpiral/critical.md
+ M commons/maps/Fractal_GoldenSpiral/intent.md
+ M commons/maps/Fractal_GoldenSpiral/map_data.json
+ M commons/maps/Fractal_GoldenSpiral/summary.md
+ M commons/maps/Fractal_GoldenSpiral/technical.md
+ M commons/maps/Fractal_GoldenSpiral/tutorial.md
+ M commons/maps/Fractal_JuliaSet/map_data.json
+ M commons/maps/Fractal_KochSierpinski/blurb.md
+ M commons/maps/Fractal_KochSierpinski/critical.md
+ M commons/maps/Fractal_KochSierpinski/final.md
+ M commons/maps/Fractal_KochSierpinski/intent.md
+ M commons/maps/Fractal_KochSierpinski/map_data.json
+ M commons/maps/Fractal_KochSierpinski/summary.md
+ M commons/maps/Fractal_KochSierpinski/technical.md
+ M commons/maps/Fractal_KochSierpinski/tutorial.md
+ M commons/maps/Fractal_MandelbrotSet/final.md
+ M commons/maps/Fractal_MandelbrotSet/map_data.json
+ M commons/maps/Fractal_MengerSponge/blurb.md
+ M commons/maps/Fractal_MengerSponge/critical.md
+ M commons/maps/Fractal_MengerSponge/intent.md
+ M commons/maps/Fractal_MengerSponge/map_data.json
+ M commons/maps/Fractal_MengerSponge/summary.md
+ M commons/maps/Fractal_MengerSponge/technical.md
+ M commons/maps/Fractal_MengerSponge/tutorial.md
+ M commons/maps/Fractal_Recursion/blurb.md
+ M commons/maps/Fractal_Recursion/critical.md
+ M commons/maps/Fractal_Recursion/final.md
+ M commons/maps/Fractal_Recursion/map_data.json
+ M commons/maps/Fractal_Recursion/summary.md
+ M commons/maps/Fractal_Recursion/technical.md
+ M commons/maps/Fractal_RecursiveTrees/blurb.md
+ M commons/maps/Fractal_RecursiveTrees/critical.md
+ M commons/maps/Fractal_RecursiveTrees/map_data.json
+ M commons/maps/Fractal_RecursiveTrees/summary.md
+ M commons/maps/Fractal_RecursiveTrees/technical.md
+ M commons/maps/Fractal_RecursiveTrees/tutorial.md
+ M commons/maps/Fractal_Synthesis/map_data.json
+ M commons/maps/GT_Connectivity/map_data.json
+ M commons/maps/GT_Layout/map_data.json
+ M commons/maps/GT_Network_Analysis/map_data.json
+ M commons/maps/GT_Spanning_Trees/map_data.json
+ M commons/maps/Godel_Incompleteness/map_data.json
+ M commons/maps/ISO_AnimatedNoise/map_data.json
+ M commons/maps/ISO_CaveGeneration/map_data.json
+ M commons/maps/ISO_Caves/map_data.json
+ M commons/maps/ISO_FlatTerrain/map_data.json
+ M commons/maps/ISO_Introduction/map_data.json
+ M commons/maps/ISO_LookupTable/map_data.json
+ M commons/maps/ISO_Metaballs/map_data.json
+ M commons/maps/ISO_Sculpting/map_data.json
+ M commons/maps/ISO_ShapesGallery/map_data.json
+ M commons/maps/ISO_TorusGyroid/map_data.json
+ M commons/maps/LSystems_Architecture/map_data.json
+ M commons/maps/LSystems_Grammar_Lab/map_data.json
+ M commons/maps/LSystems_Grammars_And_Curves/map_data.json
+ M commons/maps/LSystems_Growth/map_data.json
+ M commons/maps/LSystems_Living/map_data.json
+ M commons/maps/ML_Classification/map_data.json
+ M commons/maps/ML_Evolution/map_data.json
+ M commons/maps/ML_Generative/map_data.json
+ M commons/maps/ML_Gradient_Landscape/map_data.json
+ M commons/maps/ML_Neural_Networks/map_data.json
+ M commons/maps/ML_Perception/map_data.json
+ M commons/maps/ML_Sequence_Memory/map_data.json
+ M commons/maps/ML_Synthesis/map_data.json
+ M commons/maps/Noise_6_Wall/artifacts.md
+ M commons/maps/Noise_6_Wall/blurb.md
+ M commons/maps/Noise_6_Wall/critical.md
+ M commons/maps/Noise_6_Wall/eye_shot.md
+ M commons/maps/Noise_6_Wall/field_notes.md
+ M commons/maps/Noise_6_Wall/final.md
+ M commons/maps/Noise_6_Wall/intent.md
+ M commons/maps/Noise_6_Wall/map_data.json
+ M commons/maps/Noise_6_Wall/summary.md
+ M commons/maps/Noise_6_Wall/technical.md
+ M commons/maps/Noise_6_Wall/tutorial.md
+ M commons/maps/Noise_6_Wall/walked.md
+ M commons/maps/Noise_Columns/artifacts.md
+ M commons/maps/Noise_Columns/blurb.md
+ M commons/maps/Noise_Columns/critical.md
+ M commons/maps/Noise_Columns/field_notes.md
+ M commons/maps/Noise_Columns/final.md
+ M commons/maps/Noise_Columns/intent.md
+ M commons/maps/Noise_Columns/map_data.json
+ M commons/maps/Noise_Columns/summary.md
+ M commons/maps/Noise_Columns/technical.md
+ M commons/maps/Noise_Columns/tutorial.md
+ M commons/maps/Noise_Inside_Noise/artifacts.md
+ M commons/maps/Noise_Inside_Noise/blurb.md
+ M commons/maps/Noise_Inside_Noise/critical.md
+ M commons/maps/Noise_Inside_Noise/eye_shot.md
+ M commons/maps/Noise_Inside_Noise/intent.md
+ M commons/maps/Noise_Inside_Noise/map_data.json
+ M commons/maps/Noise_Inside_Noise/summary.md
+ M commons/maps/Noise_Inside_Noise/technical.md
+ M commons/maps/Noise_Inside_Noise/tutorial.md
+ M commons/maps/Noise_Inside_Noise/walked.md
+ M commons/maps/Noise_One/artifacts.md
+ M commons/maps/Noise_One/blurb.md
+ M commons/maps/Noise_One/critical.md
+ M commons/maps/Noise_One/field_notes.md
+ M commons/maps/Noise_One/final.md
+ M commons/maps/Noise_One/intent.md
+ M commons/maps/Noise_One/map_data.json
+ M commons/maps/Noise_One/summary.md
+ M commons/maps/Noise_One/technical.md
+ M commons/maps/Noise_One/tutorial.md
+ M commons/maps/Noise_Perlin_Simplex/artifacts.md
+ M commons/maps/Noise_Perlin_Simplex/blurb.md
+ M commons/maps/Noise_Perlin_Simplex/critical.md
+ M commons/maps/Noise_Perlin_Simplex/field_notes.md
+ M commons/maps/Noise_Perlin_Simplex/final.md
+ M commons/maps/Noise_Perlin_Simplex/intent.md
+ M commons/maps/Noise_Perlin_Simplex/map_data.json
+ M commons/maps/Noise_Perlin_Simplex/summary.md
+ M commons/maps/Noise_Perlin_Simplex/technical.md
+ M commons/maps/Noise_Perlin_Simplex/tutorial.md
+ M commons/maps/Noise_Space_10/artifacts.md
+ M commons/maps/Noise_Space_10/blurb.md
+ M commons/maps/Noise_Space_10/critical.md
+ M commons/maps/Noise_Space_10/eye_shot.md
+ M commons/maps/Noise_Space_10/intent.md
+ M commons/maps/Noise_Space_10/map_data.json
+ M commons/maps/Noise_Space_10/summary.md
+ M commons/maps/Noise_Space_10/technical.md
+ M commons/maps/Noise_Space_10/tutorial.md
+ M commons/maps/Noise_Space_10/walked.md
+ M commons/maps/Noise_Voxel/artifacts.md
+ M commons/maps/Noise_Voxel/blurb.md
+ M commons/maps/Noise_Voxel/critical.md
+ M commons/maps/Noise_Voxel/field_notes.md
+ M commons/maps/Noise_Voxel/final.md
+ M commons/maps/Noise_Voxel/intent.md
+ M commons/maps/Noise_Voxel/map_data.json
+ M commons/maps/Noise_Voxel/summary.md
+ M commons/maps/Noise_Voxel/technical.md
+ M commons/maps/Noise_Voxel/tutorial.md
+ M commons/maps/Noise_Voxel/walked.md
+ M commons/maps/NonEuclidean_Spaces/map_data.json
+ M commons/maps/PG_Mirrored_Patterns/map_data.json
+ M commons/maps/PG_Percolation_Network/map_data.json
+ M commons/maps/PG_Sculpted_Forms/map_data.json
+ M commons/maps/Pattern_Foundry/artifacts.md
+ M commons/maps/Pattern_Foundry/blurb.md
+ M commons/maps/Pattern_Foundry/intent.md
+ M commons/maps/Pattern_Foundry/map_data.json
+ M commons/maps/Pattern_Foundry/tutorial.md
+ M commons/maps/Point_Animatedcube/critical.md
+ M commons/maps/Point_Animatedcube/final.md
+ M commons/maps/Point_Animatedcube/intent.md
+ M commons/maps/Point_Animatedcube/map_data.json
+ M commons/maps/Point_Animatedcube/technical.md
+ M commons/maps/Point_Line_Grid/critical.md
+ M commons/maps/Point_Line_Grid/final.md
+ M commons/maps/Point_Line_Grid/map_data.json
+ M commons/maps/Point_Line_Grid/technical.md
+ M commons/maps/Point_Lines/final.md
+ M commons/maps/Point_Lines/intent.md
+ M commons/maps/Point_Lines/map_data.json
+ M commons/maps/Point_One/evolution.json
+ M commons/maps/Point_One/final.md
+ M commons/maps/Point_One/map_data.json
+ M commons/maps/Point_One/walked.md
+ M commons/maps/Point_Trace/critical.md
+ M commons/maps/Point_Trace/final.md
+ M commons/maps/Point_Trace/map_data.json
+ M commons/maps/Point_Trace/technical.md
+ M commons/maps/Point_Triangle_Context/final.md
+ M commons/maps/Point_Triangle_Context/map_data.json
+ M commons/maps/Point_Triangle_Context/technical.md
+ M commons/maps/Point_Zero/map_data.json
+ M commons/maps/PostCrisis_Synthesis/map_data.json
+ M commons/maps/Primitives_2/map_data.json
+ M commons/maps/Primitives_Ignorance/critical.md
+ M commons/maps/Primitives_Ignorance/final.md
+ M commons/maps/Primitives_Ignorance/intent.md
+ M commons/maps/Primitives_Ignorance/map_data.json
+ M commons/maps/Primitives_Ignorance/technical.md
+ M commons/maps/Primitives_Irregular/map_data.json
+ M commons/maps/Primitives_Melencolia/final.md
+ M commons/maps/Primitives_Melencolia/map_data.json
+ M commons/maps/Primitives_Polythedra/critical.md
+ M commons/maps/Primitives_Polythedra/final.md
+ M commons/maps/Primitives_Polythedra/intent.md
+ M commons/maps/Primitives_Polythedra/map_data.json
+ M commons/maps/Primitives_Polythedra/technical.md
+ M commons/maps/Primitives_Portals/critical.md
+ M commons/maps/Primitives_Portals/final.md
+ M commons/maps/Primitives_Portals/intent.md
+ M commons/maps/Primitives_Portals/map_data.json
+ M commons/maps/Primitives_Portals/technical.md
+ M commons/maps/QFEP_E_Term/map_data.json
+ M commons/maps/QFEP_Edge_Of_Chaos/map_data.json
+ M commons/maps/QFEP_F_Term/map_data.json
+ M commons/maps/QFEP_Introduction/map_data.json
+ M commons/maps/QFEP_Lambda_Spectrum/map_data.json
+ M commons/maps/QFEP_Phi_Term/map_data.json
+ M commons/maps/QFEP_Sandbox/map_data.json
+ M commons/maps/QFEP_Synthesis/map_data.json
+ M commons/maps/Random_Cubes/map_data.json
+ M commons/maps/Random_Definition/blurb.md
+ M commons/maps/Random_Definition/critical.md
+ M commons/maps/Random_Definition/field_notes.md
+ M commons/maps/Random_Definition/final.md
+ M commons/maps/Random_Definition/intent.md
+ M commons/maps/Random_Definition/map_data.json
+ M commons/maps/Random_Definition/summary.md
+ M commons/maps/Random_Definition/technical.md
+ M commons/maps/Random_Definition/tutorial.md
+ M commons/maps/Random_Entropy/blurb.md
+ M commons/maps/Random_Entropy/field_notes.md
+ M commons/maps/Random_Entropy/final.md
+ M commons/maps/Random_Entropy/intent.md
+ M commons/maps/Random_Entropy/map_data.json
+ M commons/maps/Random_Entropy/summary.md
+ M commons/maps/Random_Entropy/technical.md
+ M commons/maps/Random_Entropy/tutorial.md
+ M commons/maps/Random_Game/artifacts.md
+ M commons/maps/Random_Game/blurb.md
+ M commons/maps/Random_Game/critical.md
+ M commons/maps/Random_Game/field_notes.md
+ M commons/maps/Random_Game/final.md
+ M commons/maps/Random_Game/intent.md
+ M commons/maps/Random_Game/map_data.json
+ M commons/maps/Random_Game/summary.md
+ M commons/maps/Random_Game/technical.md
+ M commons/maps/Random_Game/tutorial.md
+ M commons/maps/Random_Gaussian/blurb.md
+ M commons/maps/Random_Gaussian/critical.md
+ M commons/maps/Random_Gaussian/field_notes.md
+ M commons/maps/Random_Gaussian/final.md
+ M commons/maps/Random_Gaussian/intent.md
+ M commons/maps/Random_Gaussian/map_data.json
+ M commons/maps/Random_Gaussian/summary.md
+ M commons/maps/Random_Gaussian/technical.md
+ M commons/maps/Random_Gaussian/tutorial.md
+ M commons/maps/Random_Mushrooms/blurb.md
+ M commons/maps/Random_Mushrooms/critical.md
+ M commons/maps/Random_Mushrooms/field_notes.md
+ M commons/maps/Random_Mushrooms/final.md
+ M commons/maps/Random_Mushrooms/intent.md
+ M commons/maps/Random_Mushrooms/map_data.json
+ M commons/maps/Random_Mushrooms/summary.md
+ M commons/maps/Random_Mushrooms/technical.md
+ M commons/maps/Random_Mushrooms/tutorial.md
+ M commons/maps/Random_Noise_Types/artifacts.md
+ M commons/maps/Random_Noise_Types/blurb.md
+ M commons/maps/Random_Noise_Types/critical.md
+ M commons/maps/Random_Noise_Types/field_notes.md
+ M commons/maps/Random_Noise_Types/final.md
+ M commons/maps/Random_Noise_Types/intent.md
+ M commons/maps/Random_Noise_Types/map_data.json
+ M commons/maps/Random_Noise_Types/summary.md
+ M commons/maps/Random_Noise_Types/technical.md
+ M commons/maps/Random_Noise_Types/tutorial.md
+ M commons/maps/Random_Remove/blurb.md
+ M commons/maps/Random_Remove/critical.md
+ M commons/maps/Random_Remove/field_notes.md
+ M commons/maps/Random_Remove/final.md
+ M commons/maps/Random_Remove/intent.md
+ M commons/maps/Random_Remove/map_data.json
+ M commons/maps/Random_Remove/summary.md
+ M commons/maps/Random_Remove/technical.md
+ M commons/maps/Random_Remove/tutorial.md
+ M commons/maps/Random_Rotate_Random_XYZ/map_data.json
+ M commons/maps/Random_Space/map_data.json
+ M commons/maps/Random_Walk/blurb.md
+ M commons/maps/Random_Walk/critical.md
+ M commons/maps/Random_Walk/field_notes.md
+ M commons/maps/Random_Walk/final.md
+ M commons/maps/Random_Walk/intent.md
+ M commons/maps/Random_Walk/map_data.json
+ M commons/maps/Random_Walk/summary.md
+ M commons/maps/Random_Walk/technical.md
+ M commons/maps/Random_Walk/tutorial.md
+ M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json
+ M commons/maps/Randomness_Examples_of_Randomness/map_data.json
+ M commons/maps/Ribbon_Change_01/map_data.json
+ M commons/maps/Ribbon_Change_02/map_data.json
+ M commons/maps/Ribbon_Change_03/map_data.json
+ M commons/maps/Ribbon_Change_04/map_data.json
+ D commons/maps/Ribbon_Color_01/map_data.json
+ D commons/maps/Ribbon_Color_02/map_data.json
+ D commons/maps/Ribbon_Color_03/map_data.json
+ D commons/maps/Ribbon_Color_04/map_data.json
+ D commons/maps/Ribbon_Color_05/map_data.json
+ D commons/maps/Ribbon_Color_06/map_data.json
+ D commons/maps/Ribbon_Color_07/map_data.json
+ M commons/maps/Russell_Paradox/map_data.json
+ M commons/maps/SoftBodies_Cloth_Physics/map_data.json
+ M commons/maps/SoftBodies_Obsticals/final.md
+ M commons/maps/SoftBodies_Soft_Body_Deformation/final.md
+ M commons/maps/SoftBodies_Soft_Body_Deformation/map_data.json
+ M commons/maps/Symmetry_Seventeen/blurb.md
+ M commons/maps/Symmetry_Seventeen/intent.md
+ M commons/maps/Symmetry_Seventeen/map_data.json
+ M commons/maps/Symmetry_Seventeen/tutorial.md
+ M commons/maps/Trans_AxisDecomposition/map_data.json
+ M commons/maps/Trans_Body/map_data.json
+ M commons/maps/Trans_Introduction/blurb.md
+ M commons/maps/Trans_Introduction/field_notes.md
+ M commons/maps/Trans_Introduction/final.md
+ M commons/maps/Trans_Introduction/intent.md
+ M commons/maps/Trans_Introduction/map_data.json
+ M commons/maps/Trans_Pit/final.md
+ M commons/maps/Trans_Pit/map_data.json
+ M commons/maps/Trans_Pre/blurb.md
+ M commons/maps/Trans_Pre/field_notes.md
+ M commons/maps/Trans_Pre/final.md
+ M commons/maps/Trans_Pre/intent.md
+ M commons/maps/Trans_Pre/map_data.json
+ M commons/maps/Trans_Rotation/artifacts.md
+ M commons/maps/Trans_Rotation/blurb.md
+ M commons/maps/Trans_Rotation/critical.md
+ M commons/maps/Trans_Rotation/eye_shot.md
+ M commons/maps/Trans_Rotation/field_notes.md
+ M commons/maps/Trans_Rotation/final.md
+ M commons/maps/Trans_Rotation/intent.md
+ M commons/maps/Trans_Rotation/map_data.json
+ M commons/maps/Trans_Rotation/summary.md
+ M commons/maps/Trans_Rotation/technical.md
+ M commons/maps/Trans_Rotation/tutorial.md
+ M commons/maps/Trans_Rotation/walked.md
+ M commons/maps/Trans_RotationSpectacle/artifacts.md
+ M commons/maps/Trans_RotationSpectacle/blurb.md
+ M commons/maps/Trans_RotationSpectacle/critical.md
+ M commons/maps/Trans_RotationSpectacle/eye_shot.md
+ M commons/maps/Trans_RotationSpectacle/field_notes.md
+ M commons/maps/Trans_RotationSpectacle/final.md
+ M commons/maps/Trans_RotationSpectacle/intent.md
+ M commons/maps/Trans_RotationSpectacle/map_data.json
+ M commons/maps/Trans_RotationSpectacle/summary.md
+ M commons/maps/Trans_RotationSpectacle/technical.md
+ M commons/maps/Trans_RotationSpectacle/tutorial.md
+ M commons/maps/Trans_RotationSpectacle/walked.md
+ M commons/maps/Trans_Scale/artifacts.md
+ M commons/maps/Trans_Scale/blurb.md
+ M commons/maps/Trans_Scale/critical.md
+ M commons/maps/Trans_Scale/eye_shot.md
+ M commons/maps/Trans_Scale/field_notes.md
+ M commons/maps/Trans_Scale/final.md
+ M commons/maps/Trans_Scale/intent.md
+ M commons/maps/Trans_Scale/map_data.json
+ M commons/maps/Trans_Scale/summary.md
+ M commons/maps/Trans_Scale/technical.md
+ M commons/maps/Trans_Scale/tutorial.md
+ M commons/maps/Trans_Scale/walked.md
+ M commons/maps/Trans_Translation/blurb.md
+ M commons/maps/Trans_Translation/critical.md
+ M commons/maps/Trans_Translation/field_notes.md
+ M commons/maps/Trans_Translation/final.md
+ M commons/maps/Trans_Translation/intent.md
+ M commons/maps/Trans_Translation/map_data.json
+ M commons/maps/Trans_Translation/summary.md
+ M commons/maps/Trans_Translation/technical.md
+ M commons/maps/Tutorial_2D_Build/map_data.json
+ M commons/maps/Tutorial_Disco/map_data.json
+ M commons/maps/Tutorial_Pattern/artifacts.md
+ M commons/maps/Tutorial_Pattern/blurb.md
+ M commons/maps/Tutorial_Pattern/critical.md
+ M commons/maps/Tutorial_Pattern/intent.md
+ M commons/maps/Tutorial_Pattern/map_data.json
+ M commons/maps/Tutorial_Pattern/summary.md
+ M commons/maps/Tutorial_Pattern/technical.md
+ M commons/maps/Tutorial_Pattern/tutorial.md
+ M commons/maps/Tutorial_Single/map_data.json
+ M commons/maps/VFM_02_Operations/artifacts.md
+ M commons/maps/VFM_02_Operations/final.md
+ M commons/maps/VFM_02_Operations/intent.md
+ M commons/maps/VFM_02_Operations/map_data.json
+ M commons/maps/VFM_02_Operations/tutorial.md
+ M commons/maps/VFM_03_Motion/artifacts.md
+ M commons/maps/VFM_03_Motion/intent.md
+ M commons/maps/VFM_03_Motion/map_data.json
+ M commons/maps/VFM_03_Motion/tutorial.md
+ M commons/maps/VFM_05_Launch/artifacts.md
+ M commons/maps/VFM_05_Launch/intent.md
+ M commons/maps/VFM_05_Launch/map_data.json
+ M commons/maps/VFM_05_Launch/tutorial.md
+ M commons/maps/VFM_07_Gravity/artifacts.md
+ M commons/maps/VFM_07_Gravity/blurb.md
+ M commons/maps/VFM_07_Gravity/field_notes.md
+ M commons/maps/VFM_07_Gravity/final.md
+ M commons/maps/VFM_07_Gravity/intent.md
+ M commons/maps/VFM_07_Gravity/map_data.json
+ M commons/maps/VFM_07_Gravity/tutorial.md
+ M commons/maps/VFM_08_Arena/artifacts.md
+ M commons/maps/VFM_08_Arena/blurb.md
+ M commons/maps/VFM_08_Arena/intent.md
+ M commons/maps/VFM_08_Arena/map_data.json
+ M commons/maps/VFM_08_Arena/tutorial.md
+ M commons/maps/VFM_09_Legs/artifacts.md
+ M commons/maps/VFM_09_Legs/blurb.md
+ M commons/maps/VFM_09_Legs/field_notes.md
+ M commons/maps/VFM_09_Legs/final.md
+ M commons/maps/VFM_09_Legs/intent.md
+ M commons/maps/VFM_09_Legs/map_data.json
+ M commons/maps/VFM_09_Legs/tutorial.md
+ M commons/maps/VectorAdvanced/map_data.json
+ M commons/maps/VectorApplied/map_data.json
+ M commons/maps/VectorBasics/map_data.json
+ M commons/maps/VectorCrossProduct/map_data.json
+ M commons/maps/VectorFieldFlow/map_data.json
+ M commons/maps/VectorForces/map_data.json
+ M commons/maps/VectorMotion/map_data.json
+ M commons/maps/VectorOperations/map_data.json
+ M commons/maps/VectorProjectionReflection/map_data.json
+ M commons/maps/VectorSubtraction/map_data.json
+ M commons/maps/Vectors_1/map_data.json
+ M commons/maps/Vectors_5/map_data.json
+ M commons/maps/Vectors_6/map_data.json
+ M commons/maps/Vectors_Act1_WhatAVectorIs/artifacts.md
+ M commons/maps/Vectors_Act1_WhatAVectorIs/final.md
+ M commons/maps/Vectors_Act1_WhatAVectorIs/intent.md
+ M commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json
+ M commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md
+ M commons/maps/Vectors_Act2_VectorArithmetic/artifacts.md
+ M commons/maps/Vectors_Act2_VectorArithmetic/final.md
+ M commons/maps/Vectors_Act2_VectorArithmetic/intent.md
+ M commons/maps/Vectors_Act2_VectorArithmetic/map_data.json
+ M commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/artifacts.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/blurb.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/field_notes.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/final.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/intent.md
+ M commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json
+ M commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md
+ M commons/maps/Vectors_Act4a_KineticForces/artifacts.md
+ M commons/maps/Vectors_Act4a_KineticForces/blurb.md
+ M commons/maps/Vectors_Act4a_KineticForces/field_notes.md
+ M commons/maps/Vectors_Act4a_KineticForces/final.md
+ M commons/maps/Vectors_Act4a_KineticForces/intent.md
+ M commons/maps/Vectors_Act4a_KineticForces/map_data.json
+ M commons/maps/Vectors_Act4a_KineticForces/tutorial.md
+ M commons/maps/Vectors_Act4b_Oscillation/artifacts.md
+ M commons/maps/Vectors_Act4b_Oscillation/blurb.md
+ M commons/maps/Vectors_Act4b_Oscillation/field_notes.md
+ M commons/maps/Vectors_Act4b_Oscillation/final.md
+ M commons/maps/Vectors_Act4b_Oscillation/intent.md
+ M commons/maps/Vectors_Act4b_Oscillation/map_data.json
+ M commons/maps/Vectors_Act4b_Oscillation/tutorial.md
+ M commons/maps/Vectors_Act5_ForceAsPlace/blurb.md
+ M commons/maps/Vectors_Act5_ForceAsPlace/field_notes.md
+ M commons/maps/Vectors_Act5_ForceAsPlace/final.md
+ M commons/maps/Vectors_Act5_ForceAsPlace/intent.md
+ M commons/maps/Vectors_Act5_ForceAsPlace/map_data.json
+ M commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md
+ M commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json
+ M commons/maps/WaveFunctions_AirMusic/artifacts.md
+ M commons/maps/WaveFunctions_AirMusic/blurb.md
+ M commons/maps/WaveFunctions_AirMusic/critical.md
+ M commons/maps/WaveFunctions_AirMusic/field_notes.md
+ M commons/maps/WaveFunctions_AirMusic/final.md
+ M commons/maps/WaveFunctions_AirMusic/intent.md
+ M commons/maps/WaveFunctions_AirMusic/map_data.json
+ M commons/maps/WaveFunctions_AirMusic/summary.md
+ M commons/maps/WaveFunctions_AirMusic/technical.md
+ M commons/maps/WaveFunctions_AirMusic/tutorial.md
+ M commons/maps/WaveFunctions_Effect_Sound/artifacts.md
+ M commons/maps/WaveFunctions_Effect_Sound/blurb.md
+ M commons/maps/WaveFunctions_Effect_Sound/critical.md
+ M commons/maps/WaveFunctions_Effect_Sound/field_notes.md
+ M commons/maps/WaveFunctions_Effect_Sound/final.md
+ M commons/maps/WaveFunctions_Effect_Sound/intent.md
+ M commons/maps/WaveFunctions_Effect_Sound/map_data.json
+ M commons/maps/WaveFunctions_Effect_Sound/summary.md
+ M commons/maps/WaveFunctions_Effect_Sound/technical.md
+ M commons/maps/WaveFunctions_Effect_Sound/tutorial.md
+ M commons/maps/WaveFunctions_John_Cage/map_data.json
+ M commons/maps/WaveFunctions_Sine_Space/map_data.json
+ M commons/maps/WaveFunctions_Synthesis_Lab/artifacts.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/blurb.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/critical.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/field_notes.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/final.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/intent.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/map_data.json
+ M commons/maps/WaveFunctions_Synthesis_Lab/summary.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/technical.md
+ M commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md
+ M commons/maps/WaveFunctions_TrigWalkingPath/map_data.json
+ M commons/maps/WaveFunctions_Unit_Circle/map_data.json
+ M commons/maps/Wavefunctions_Bernini/map_data.json
+ M commons/maps/Wavefunctions_Sky_Stairs/map_data.json
+ M commons/maps/curriculum_spine.json
+ M commons/maps/sequences/array_tutorial.json
+ M commons/maps/sequences/change.json
+ M commons/maps/sequences/color.json
+ M commons/maps/sequences/forces.json
+ M commons/maps/sequences/formfinding.json
+ M commons/maps/sequences/fractals.json
+ M commons/maps/sequences/lsystems.json
+ M commons/maps/sequences/patterngeneration.json
+ M commons/maps/sequences/placed_museums.json
+ M commons/maps/sequences/tiling.json
+ M commons/maps/sequences/transformation.json
+ M commons/maps/sequences/wavefunctions.json
+ M commons/player/costume_wardrobe.gd
+ M commons/player/queer_costume.gd
+ M commons/primitives/animatedcubebuilder/animatedcubebuilder.gd
+ M commons/primitives/arrays/pattern_studio_plate.gd
+ M commons/primitives/arrays/vr_tile_editor.gd
+ M commons/primitives/combines/achilles_tortoise.gd
+ M commons/primitives/combines/combine_portals.gd
+ M commons/primitives/cubes/CubeSpawner.gd
+ M commons/primitives/cubes/ProjectileCube.gd
+ M commons/primitives/cubes/random_cycle_cube.gd
+ M commons/primitives/godotmeshes/sphere_high.gd
+ M commons/primitives/godotmeshes/sphere_low.gd
+ M commons/primitives/godotmeshes/sphere_mid.gd
+ M commons/primitives/laser_measure/laser_measure.gd
+ M commons/primitives/line/cube_lines.gd
+ M commons/primitives/line/grid_lines.gd
+ M commons/primitives/line/line_static.gd
+ M commons/primitives/line/puzzles/triangle_line_puzzle.gd
+ M commons/primitives/origin/origin.gd
+ M commons/primitives/point/coordinate_readout.gd
+ M commons/primitives/point/draw_dot.gd
+ M commons/primitives/point/draw_dot_time_domain.gd
+ M commons/primitives/point/draw_triangle_faces.gd
+ M commons/primitives/point/force_catalyst.gdshader
+ M commons/primitives/point/grab_sphere_point_snap.gd
+ M commons/primitives/point/interactive_point_origin.gd
+ M commons/primitives/point/player_trace.gd
+ M commons/primitives/snappoint/demos/line_demo.gd
+ M commons/resourses/shaders/mushroom_trip.gdshader
+ M commons/resourses/shaders/noiseTorus.gdshader
+ M commons/resourses/shaders/wallpaper_tile.gdshader
+ M commons/scenes/DesktopPlayer.gd
+ M commons/scenes/desktop_necklace.gd
+ M commons/scenes/em/em_lighting.gd
+ M commons/scenes/em/em_materials.gd
+ M commons/scenes/endless_museum.gd
+ M commons/scenes/endless_museum.tscn
+ M commons/scenes/map_tool_editor.tscn
+ M commons/scenes/mapobjects/MapInfoLabel.gd
+ M commons/scenes/mapobjects/pick_up_cube.gd
+ M commons/scenes/mapobjects/pick_up_cube.tscn
+ M commons/scenes/mapobjects/rotation_cube.gd
+ M commons/scenes/pearl_dress_lab.tscn
+ M commons/scenes/prop_reference_wall.tscn
+ M commons/substrates/bar_array/bar_array_cell.gdshader
+ M commons/substrates/grid3d/grid3d_node.gdshader
+ M commons/testing/probe_body_view.tscn
+ M commons/testing/probe_dream_bodies.gd
+ M commons/testing/probe_ik_arms.tscn
+ M commons/testing/probe_museum_sculptures.gd
+ M commons/testing/probe_sledgehammer.gd
+ M commons/testing/probe_wcn_air_music.gd
+ M commons/testing/probe_wcn_air_music_live.gd
+ M commons/testing/probe_wcn_entropy.gd
+ M commons/testing/probe_wcn_entropy_live.gd
+ M commons/testing/probe_wcn_gaussian.gd
+ M commons/testing/probe_wcn_gaussian_live.gd
+ M commons/testing/probe_wcn_mushrooms.gd
+ M commons/testing/probe_wcn_mushrooms_live.gd
+ M commons/testing/probe_wcn_random_definition.gd
+ M commons/testing/probe_wcn_random_definition_live.gd
+ M commons/testing/probe_wcn_remove.gd
+ M commons/testing/probe_wcn_remove_live.gd
+ M commons/testing/probe_wcn_sine_space.gd
+ M commons/testing/probe_wcn_sine_space_live.gd
+ M commons/testing/probe_wcn_synthesis_lab.gd
+ M commons/testing/probe_wcn_synthesis_lab_live.gd
+ M commons/testing/probe_wcn_walk.gd
+ M commons/testing/probe_wcn_walk_live.gd
+ M commons/ui/demo/ui_theme_demo.tscn
+ M commons/visualaid/frame_counter/frame_counter_display.gd
+ M commons/visualaid/frame_counter/frame_counter_display.tscn
+ M doc/DRESSING_ROOM_SCHEMA.md
+ M doc/ENTRY.md
+ M doc/PRIMITIVES_TAXONOMY.md
+ M doc/SPEAK.md
+ M doc/auto_research_inventory.json
+ M doc/auto_research_inventory.md
+ M doc/book/LOG.md
+ M doc/book/RULINGS.md
+ M doc/curation_lessons.json
+ M doc/placement_research/results.json
+ M doc/plans/Symmetry_Seventeen.svg
+ M doc/plans/Symmetry_Seventeen_alt.svg
+ M doc/reports/RELEASE_GATES.json
+ M doc/reports/RELEASE_GATES.md
+ M doc/reports/RELEASE_GATES_TOGGLES.json
+ M doc/reports/band_rulings.json
+ M doc/reports/em_fill_report.json
+ M doc/reports/interaction.json
+ M doc/reports/map_quality.json
+ M doc/reports/map_quality.md
+ M doc/reports/museum_match_array_tutorial.json
+ M doc/reports/museum_match_boolean_surfaces.json
+ M doc/reports/museum_match_cellularautomata.json
+ M doc/reports/museum_match_change.json
+ M doc/reports/museum_match_color.json
+ M doc/reports/museum_match_forces.json
+ M doc/reports/museum_match_formfinding.json
+ M doc/reports/museum_match_foundationscrisis.json
+ M doc/reports/museum_match_fractals.json
+ M doc/reports/museum_match_graphtheory.json
+ M doc/reports/museum_match_isosurfaces.json
+ M doc/reports/museum_match_lsystems.json
+ M doc/reports/museum_match_machinelearning.json
+ M doc/reports/museum_match_noise.json
+ M doc/reports/museum_match_postfoundationscrisis.json
+ M doc/reports/museum_match_primitives.json
+ M doc/reports/museum_match_proceduralgeneration.json
+ M doc/reports/museum_match_qfeplaboratory.json
+ M doc/reports/museum_match_randomness.json
+ M doc/reports/museum_match_softbodies.json
+ M doc/reports/museum_match_swarmintelligence.json
+ M doc/reports/museum_match_symmetry.json
+ M doc/reports/museum_match_transformation.json
+ M doc/reports/museum_match_wavefunctions.json
+ M doc/reports/sweep_ElphabaDress_bite.json
+ M doc/reports/sweep_GaussianBlurCircle_bite.json
+ M doc/reports/sweep_basis_vectors_rig_bite.json
+ M doc/reports/sweep_bias_visualizer_bite.json
+ M doc/reports/sweep_catalyst_foe_bite.json
+ M doc/reports/sweep_catalyst_pedestal_bite.json
+ M doc/reports/sweep_catalyst_pickup_bite.json
+ M doc/reports/sweep_catalyst_target_bite.json
+ M doc/reports/sweep_cctv_bite.json
+ M doc/reports/sweep_chladni_plate_bite.json
+ M doc/reports/sweep_control_console_bite.json
+ M doc/reports/sweep_crystal_cluster_bite.json
+ M doc/reports/sweep_csg_compose_workbench_bite.json
+ M doc/reports/sweep_csg_difference_demo_bite.json
+ M doc/reports/sweep_cube_scene_bite.json
+ M doc/reports/sweep_curation_station_bite.json
+ M doc/reports/sweep_dark_sphere_bite.json
+ M doc/reports/sweep_dome_bite.json
+ M doc/reports/sweep_draw_dot_bite.json
+ M doc/reports/sweep_env_one_bite.json
+ M doc/reports/sweep_evolved_creatures_bite.json
+ M doc/reports/sweep_exhibit_furniture_bite.json
+ M doc/reports/sweep_exhibit_podium_bite.json
+ M doc/reports/sweep_exhibit_vitrine_bite.json
+ M doc/reports/sweep_exit_sign_bite.json
+ M doc/reports/sweep_fire_extinguisher_bite.json
+ M doc/reports/sweep_fire_hose_box_bite.json
+ M doc/reports/sweep_flagdancer_bite.json
+ M doc/reports/sweep_floating_sphere_field_bite.json
+ M doc/reports/sweep_fontana_puncture_bite.json
+ M doc/reports/sweep_force_pad_bite.json
+ M doc/reports/sweep_galton_board_bite.json
+ M doc/reports/sweep_godel_statement_plaque_bite.json
+ M doc/reports/sweep_info_board_bite.json
+ M doc/reports/sweep_interactive_point_origin_force_bite.json
+ M doc/reports/sweep_julia_bench_bite.json
+ M doc/reports/sweep_lab_sliding_door_bite.json
+ M doc/reports/sweep_laser_measure_bite.json
+ M doc/reports/sweep_light_sphere_bite.json
+ M doc/reports/sweep_line_builder_3d_bite.json
+ M doc/reports/sweep_mold_network_bite.json
+ M doc/reports/sweep_momentum_cradle_bite.json
+ M doc/reports/sweep_newton_cradle_bite.json
+ M doc/reports/sweep_noisesphere_bite.json
+ M doc/reports/sweep_operational_eye_bite.json
+ M doc/reports/sweep_path_cube_bite.json
+ M doc/reports/sweep_pattern_loom_bite.json
+ M doc/reports/sweep_pattern_mill_bite.json
+ M doc/reports/sweep_pendulum_slap_bite.json
+ M doc/reports/sweep_pick_up_cube_bite.json
+ M doc/reports/sweep_prism_block_bite.json
+ M doc/reports/sweep_random_bell_curve_bite.json
+ M doc/reports/sweep_request_note.png
+ M doc/reports/sweep_request_note_bite.json
+ M doc/reports/sweep_science_screen_bite.json
+ M doc/reports/sweep_shannon_entropy_meter_bite.json
+ M doc/reports/sweep_sim_cube_bite.json
+ M doc/reports/sweep_situated_bench_bite.json
+ M doc/reports/sweep_softmill_bite.json
+ M doc/reports/sweep_softstopscene_bite.json
+ M doc/reports/sweep_station_crates_bite.json
+ M doc/reports/sweep_station_pillar_bite.json
+ M doc/reports/sweep_station_wall_bite.json
+ M doc/reports/sweep_tech_crate_bite.json
+ M doc/reports/sweep_tt_bite.json
+ M doc/reports/sweep_vector_magnitude_demo_bite.json
+ M doc/reports/sweep_voxelnoise_bite.json
+ M doc/reports/sweep_wave_interference_bite.json
+ M doc/reports/temporal_lint.json
+ M scripts/__pycache__/map_checklist.cpython-310.pyc
+ D tools/__pycache__/enrich_registry_metadata.cpython-310.pyc
+ M tools/__pycache__/map_pathfinder.cpython-310.pyc
+ M tools/artifact_roles.py
+ M tools/build_dna_gallery.py
+ M tools/build_spine_artifact_order.py
+ M tools/cabinet_sweep.py
+ M tools/check_offworld_cells.py
+ M tools/edge_gate.py
+ M tools/em_map_halls.py
+ M tools/if_not_exist.py
+ M tools/museum_necklace.py
+ M tools/place.py
+ M tools/place_artifacts.py
+ M tools/place_layers.py
+ M tools/red_thread_page.py
+?? -
+?? .claude/flows/map-token-resolution.json
+?? .rows.json
+?? ada_run/_trial_em_boot_last.json
+?? ada_run/_trial_em_built.json
+?? ada_run/_trial_em_built_desktop.json
+?? ada_run/_trial_em_foes.json
+?? ada_run/air-music-review-2026-09-12/
+?? ada_run/align_columns_review.py
+?? ada_run/align_effect_sound_records.py
+?? ada_run/align_entropy.py
+?? ada_run/align_game_review.py
+?? ada_run/align_gaussian.py
+?? ada_run/align_inside_review.py
+?? ada_run/align_mushrooms.py
+?? ada_run/align_noise_galleries.py
+?? ada_run/align_points_review.py
+?? ada_run/align_random_definition.py
+?? ada_run/align_remove.py
+?? ada_run/align_torus_review.py
+?? ada_run/align_voxel_review.py
+?? ada_run/align_walk.py
+?? ada_run/align_wall_review.py
+?? ada_run/build_descent_hall.py
+?? ada_run/build_force_as_place.py
+?? ada_run/build_landscape_thread.py
+?? ada_run/ca-edge-review-2026-09-14/
+?? ada_run/ca-elementary-review-2026-09-13/
+?? ada_run/ca-forms-review-2026-09-14/
+?? ada_run/ca-history-review-2026-09-13/
+?? ada_run/ca-life-review-2026-09-13/
+?? ada_run/ca-proximity-review-2026-09-13/
+?? ada_run/ca-soft-rules-review-2026-09-14/
+?? ada_run/ca-volume-review-2026-09-14/
+?? ada_run/ca_difference_oracle.py
+?? ada_run/ca_edge_acceptance.gd
+?? ada_run/ca_edge_probe_base.gd
+?? ada_run/ca_elementary_acceptance.gd
+?? ada_run/ca_elementary_probe_base.gd
+?? ada_run/ca_history_acceptance.gd
+?? ada_run/ca_history_probe_base.gd
+?? ada_run/ca_intro_acceptance.gd
+?? ada_run/ca_intro_probe_base.gd
+?? ada_run/ca_life_acceptance.gd
+?? ada_run/ca_life_probe_base.gd
+?? ada_run/ca_proximity_acceptance.gd
+?? ada_run/ca_proximity_probe_base.gd
+?? ada_run/ca_soft_rules_acceptance.gd
+?? ada_run/ca_soft_rules_probe_base.gd
+?? ada_run/ca_volume_oracle.py
+?? ada_run/cantor-baseline-2026-09-14/
+?? ada_run/cantor-review-2026-09-14/
+?? ada_run/cantor_acceptance.gd
+?? ada_run/cantor_probe_base.gd
+?? ada_run/change-guide-inline.js
+?? ada_run/check_cantor_publication.py
+?? ada_run/check_descent_sources.py
+?? ada_run/check_golden_content.py
+?? ada_run/check_koch_content.py
+?? ada_run/check_menger_content.py
+?? ada_run/check_trees_publication.py
+?? ada_run/columns-review-2026-09-13/
+?? ada_run/columns_probe_base.gd
+?? ada_run/columns_review_extra.gd
+?? ada_run/content_golden.py
+?? ada_run/content_koch.py
+?? ada_run/content_menger_encounter.py
+?? ada_run/document_game_review.py
+?? ada_run/edit_torus_review.py
+?? ada_run/edit_voxel_review.py
+?? ada_run/edit_wall_review.py
+?? ada_run/effect-sound-review-2026-09-12/
+?? ada_run/em_boot_reentry.json
+?? ada_run/em_cartridges/
+?? ada_run/em_foes.json
+?? ada_run/entropy-review-2026-09-12/
+?? ada_run/explore_ca_form_strategies.py
+?? ada_run/explore_ca_volume_rules.py
+?? ada_run/extend_points_page.py
+?? ada_run/finalize_inside_docs.py
+?? ada_run/finalize_inside_enclosure.py
+?? ada_run/finalize_pair_review.py
+?? ada_run/finalize_space_review.py
+?? ada_run/finalize_voxel_docs.py
+?? ada_run/finalize_wall_docs.py
+?? ada_run/finalize_wall_shaders.py
+?? ada_run/finish_ca_history_layout.py
+?? ada_run/finish_ca_soft_rules.py
+?? ada_run/finish_cantor_content.py
+?? ada_run/finish_descent.py
+?? ada_run/finish_effect_sound_text.py
+?? ada_run/finish_game_text.py
+?? ada_run/finish_golden.py
+?? ada_run/finish_inside_exit.py
+?? ada_run/finish_koch_content.py
+?? ada_run/finish_menger_encounter.py
+?? ada_run/finish_mushrooms_text.py
+?? ada_run/finish_place_guide.py
+?? ada_run/finish_recursive_trees.py
+?? ada_run/finish_voxel_stage.py
+?? ada_run/fix_golden_new_indent.py
+?? ada_run/fix_inside_access.py
+?? ada_run/fractal-arc-review-2026-09-14/
+?? ada_run/fractal_arc_acceptance.gd
+?? ada_run/fractal_arc_probe_base.gd
+?? ada_run/gallery_probe_base.gd
+?? ada_run/game-review-2026-09-12/
+?? ada_run/game_review_extra.gd
+?? ada_run/gaussian-review-2026-09-12/
+?? ada_run/golden-review-2026-09-14/
+?? ada_run/golden_acceptance.gd
+?? ada_run/golden_probe_base.gd
+?? ada_run/implement_cantor.py
+?? ada_run/implement_golden.py
+?? ada_run/implement_koch.py
+?? ada_run/implement_recursive_trees.py
+?? ada_run/inside-review-2026-09-13/
+?? ada_run/inside_acceptance.gd
+?? ada_run/inside_full_acceptance.gd
+?? ada_run/inside_probe_base.gd
+?? ada_run/interaction_loop.sh
+?? ada_run/koch-baseline-2026-09-14/
+?? ada_run/koch-review-2026-09-14/
+?? ada_run/koch_acceptance.gd
+?? ada_run/koch_probe_base.gd
+?? ada_run/landscape-size-series/
+?? ada_run/landscape_flow_probe.json
+?? ada_run/menger-encounter-review-2026-09-14/
+?? ada_run/menger-flight-review-2026-09-14/
+?? ada_run/menger_encounter_acceptance.gd
+?? ada_run/menger_encounter_probe_base.gd
+?? ada_run/menger_flight_acceptance.gd
+?? ada_run/mushrooms-review-2026-09-12/
+?? ada_run/mushrooms_review_extra.gd
+?? ada_run/noise-galleries-2026-09-13/
+?? ada_run/noise_galleries_extra.gd
+?? ada_run/pair-review-2026-09-13/
+?? ada_run/pair_full_acceptance.gd
+?? ada_run/pair_probe_base.gd
+?? ada_run/place_sine_flow.py
+?? ada_run/points-review-2026-09-13/
+?? ada_run/points_review_extra.gd
+?? ada_run/possible-bodies-inline.js
+?? ada_run/possible_bodies_guide.js
+?? ada_run/prepare_ca_edge.py
+?? ada_run/prepare_ca_history_probe.py
+?? ada_run/prepare_ca_intro_probe.py
+?? ada_run/prepare_ca_soft_rules.py
+?? ada_run/prepare_cantor.py
+?? ada_run/prepare_fractal_arc.py
+?? ada_run/prepare_game_review.py
+?? ada_run/prepare_gaussian_review.py
+?? ada_run/prepare_golden.py
+?? ada_run/prepare_inside_enclosure.py
+?? ada_run/prepare_inside_review.py
+?? ada_run/prepare_koch.py
+?? ada_run/prepare_menger_encounter.py
+?? ada_run/prepare_menger_flight.py
+?? ada_run/prepare_mushrooms_review.py
+?? ada_run/prepare_noise_galleries.py
+?? ada_run/prepare_pair_review.py
+?? ada_run/prepare_points_review.py
+?? ada_run/prepare_recursive_trees.py
+?? ada_run/prepare_space_review.py
+?? ada_run/prepare_synthesis.py
+?? ada_run/prepare_torus_review.py
+?? ada_run/prepare_voxel_review.py
+?? ada_run/prepare_walk_review.py
+?? ada_run/prepare_wall_review.py
+?? ada_run/probe_ca_forms.gd
+?? ada_run/probe_ca_volume.gd
+?? ada_run/publish_ca_edge.ps1
+?? ada_run/publish_ca_elementary.ps1
+?? ada_run/publish_ca_forms.ps1
+?? ada_run/publish_ca_history.ps1
+?? ada_run/publish_ca_intro.ps1
+?? ada_run/publish_ca_life.ps1
+?? ada_run/publish_ca_proximity.ps1
+?? ada_run/publish_ca_soft_rules.ps1
+?? ada_run/publish_ca_volume.ps1
+?? ada_run/publish_cantor.ps1
+?? ada_run/publish_descent_source.py
+?? ada_run/publish_fractal_arc.ps1
+?? ada_run/publish_golden.ps1
+?? ada_run/publish_inside_review.ps1
+?? ada_run/publish_koch.ps1
+?? ada_run/publish_learning_ladder.ps1
+?? ada_run/publish_menger_encounter.ps1
+?? ada_run/publish_menger_flight.ps1
+?? ada_run/publish_pair_review.ps1
+?? ada_run/publish_recursion.ps1
+?? ada_run/publish_recursive_trees.ps1
+?? ada_run/publish_space_review.ps1
+?? ada_run/publish_voxel_review.ps1
+?? ada_run/publish_wall_review.ps1
+?? ada_run/random-definition-review-2026-09-12/
+?? ada_run/record_cantor_handoff.py
+?? ada_run/recursion-baseline-2026-09-14/
+?? ada_run/recursion-review-2026-09-14/
+?? ada_run/recursion_acceptance.gd
+?? ada_run/recursion_baseline_acceptance.gd
+?? ada_run/recursion_probe_base.gd
+?? ada_run/refresh_place_plan.py
+?? ada_run/remove-review-2026-09-12/
+?? ada_run/repair_mushrooms_display.py
+?? ada_run/resolve_golden_source.py
+?? ada_run/resume_voxel_edit.py
+?? ada_run/review_air_music.py
+?? ada_run/review_ca_edge.py
+?? ada_run/review_ca_elementary.py
+?? ada_run/review_ca_forms.py
+?? ada_run/review_ca_history.py
+?? ada_run/review_ca_intro.py
+?? ada_run/review_ca_life.py
+?? ada_run/review_ca_proximity.py
+?? ada_run/review_ca_soft_rules.py
+?? ada_run/review_ca_volume.py
+?? ada_run/review_cantor.py
+?? ada_run/review_cantor_baseline.py
+?? ada_run/review_columns.py
+?? ada_run/review_effect_sound.py
+?? ada_run/review_entropy.py
+?? ada_run/review_fractal_arc.py
+?? ada_run/review_game.py
+?? ada_run/review_gaussian.py
+?? ada_run/review_golden.py
+?? ada_run/review_inside.py
+?? ada_run/review_koch.py
+?? ada_run/review_koch_baseline.py
+?? ada_run/review_menger_encounter.py
+?? ada_run/review_menger_flight.py
+?? ada_run/review_mushrooms.py
+?? ada_run/review_noise_galleries.py
+?? ada_run/review_pair.py
+?? ada_run/review_points.py
+?? ada_run/review_random_definition.py
+?? ada_run/review_recursion.py
+?? ada_run/review_recursion_baseline.py
+?? ada_run/review_remove.py
+?? ada_run/review_space.py
+?? ada_run/review_synthesis_lab.py
+?? ada_run/review_torus.py
+?? ada_run/review_trees.py
+?? ada_run/review_trees_baseline.py
+?? ada_run/review_voxel.py
+?? ada_run/review_walk.py
+?? ada_run/review_wall.py
+?? ada_run/sine-flow-hall/
+?? ada_run/sine_flow_book_opening.md
+?? ada_run/space-review-2026-09-13/
+?? ada_run/space_full_acceptance.gd
+?? ada_run/space_probe_base.gd
+?? ada_run/stage_game_review.py
+?? ada_run/stage_inside_map.py
+?? ada_run/stage_inside_plan.py
+?? ada_run/stage_space_map.py
+?? ada_run/stage_space_plan.py
+?? ada_run/sync_cantor.py
+?? ada_run/sync_golden.py
+?? ada_run/sync_koch.py
+?? ada_run/sync_menger_encounter.py
+?? ada_run/sync_recursive_trees.py
+?? ada_run/synthesis-lab-review-2026-09-12/
+?? ada_run/timing-guide-inline.js
+?? ada_run/torus-review-2026-09-13/
+?? ada_run/torus_full_review.gd
+?? ada_run/torus_probe_base.gd
+?? ada_run/torus_review_extra.gd
+?? ada_run/trees-baseline-2026-09-14/
+?? ada_run/trees-review-2026-09-14/
+?? ada_run/trees_acceptance.gd
+?? ada_run/trees_probe_base.gd
+?? ada_run/trees_review_setup.py
+?? ada_run/update_ca_history_progress.py
+?? ada_run/update_inside_enclosure_text.py
+?? ada_run/update_trees_guide.py
+?? ada_run/vector-guide-inline.js
+?? ada_run/verify_ca_edge.py
+?? ada_run/verify_ca_elementary.py
+?? ada_run/verify_ca_forms.py
+?? ada_run/verify_ca_intro.py
+?? ada_run/verify_ca_soft_rules.py
+?? ada_run/verify_ca_volume.py
+?? ada_run/verify_columns_http.py
+?? ada_run/verify_columns_review.py
+?? ada_run/verify_descent_publication.py
+?? ada_run/verify_entropy_review.py
+?? ada_run/verify_fractal_arc.py
+?? ada_run/verify_game_http.py
+?? ada_run/verify_game_review.py
+?? ada_run/verify_gaussian_http.py
+?? ada_run/verify_gaussian_review.py
+?? ada_run/verify_inside_http.py
+?? ada_run/verify_inside_review.py
+?? ada_run/verify_landscape_thread.py
+?? ada_run/verify_menger_flight.py
+?? ada_run/verify_mushrooms_http.py
+?? ada_run/verify_mushrooms_review.py
+?? ada_run/verify_noise_galleries.py
+?? ada_run/verify_noise_galleries_http.py
+?? ada_run/verify_pair_http.py
+?? ada_run/verify_pair_review.py
+?? ada_run/verify_place_publication.py
+?? ada_run/verify_points_http.py
+?? ada_run/verify_points_review.py
+?? ada_run/verify_random_definition_review.py
+?? ada_run/verify_remove_review.py
+?? ada_run/verify_space_http.py
+?? ada_run/verify_space_review.py
+?? ada_run/verify_torus_http.py
+?? ada_run/verify_torus_review.py
+?? ada_run/verify_voxel_http.py
+?? ada_run/verify_voxel_review.py
+?? ada_run/verify_walk_review.py
+?? ada_run/verify_wall_http.py
+?? ada_run/verify_wall_review.py
+?? ada_run/visual_pass_review_20260912/
+?? ada_run/visual_review_20260912/
+?? ada_run/voxel-review-2026-09-13/
+?? ada_run/voxel_acceptance.gd
+?? ada_run/voxel_full_review.gd
+?? ada_run/voxel_probe_base.gd
+?? ada_run/walk-review-2026-09-12/
+?? ada_run/wall-review-2026-09-13/
+?? ada_run/wall_acceptance.gd
+?? ada_run/wall_full_acceptance.gd
+?? ada_run/wall_probe_base.gd
+?? ada_run/waves_chance_noise/2026-09-10-pilots-batch.md
+?? ada_run/waves_chance_noise/2026-09-10-w1-batch.md
+?? ada_run/waves_chance_noise/2026-09-10-w2-batch.md
+?? ada_run/waves_chance_noise/2026-09-11-w2-completion.md
+?? ada_run/waves_chance_noise/2026-09-11-w3-batch.md
+?? ada_run/waves_chance_noise/Noise_6_Wall/
+?? ada_run/waves_chance_noise/Noise_Perlin_Simplex/
+?? ada_run/waves_chance_noise/Random_Definition/before/
+?? ada_run/waves_chance_noise/Random_Definition/probe_random_definition.json
+?? ada_run/waves_chance_noise/Random_Definition/report.md
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_music.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_BigPipe.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_ResonatingMetallophone.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_SystemsMusic.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_air_music_display_case.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_element_layout_node.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/probe_air_shutdown_none.json
+?? ada_run/waves_chance_noise/WaveFunctions_AirMusic/report.md
+?? ada_run/waves_chance_noise/WaveFunctions_Effect_Sound/probe_effect_sound.json
+?? ada_run/waves_chance_noise/WaveFunctions_Effect_Sound/report.md
+?? ada_run/waves_chance_noise/WaveFunctions_Intro/before/
+?? ada_run/waves_chance_noise/WaveFunctions_Intro/bob_diag.json
+?? ada_run/waves_chance_noise/WaveFunctions_Intro/probe_intro.json
+?? ada_run/waves_chance_noise/WaveFunctions_Intro/report.md
+?? ada_run/waves_chance_noise/WaveFunctions_Pendulum-astra-compose-docs.json
+?? ada_run/waves_chance_noise/WaveFunctions_Pendulum/probe_pendulum.json
+?? ada_run/waves_chance_noise/WaveFunctions_Pendulum/probe_pendulum_live_2037_runner_output.txt
+?? ada_run/waves_chance_noise/WaveFunctions_Pendulum/report.md
+?? ada_run/waves_chance_noise/WaveFunctions_Sine_Space-astra-compose-docs.json
+?? ada_run/waves_chance_noise/WaveFunctions_Sine_Space/probe_sine_space.json
+?? ada_run/waves_chance_noise/WaveFunctions_Sine_Space/report.md
+?? ada_run/waves_chance_noise/_baseline/
+?? ada_run/waves_chance_noise/_baseline_w1/
+?? ada_run/waves_chance_noise/_gdtoolkit_cache/
+?? ada_run/waves_chance_noise/astra-review-publication.json
+?? ada_run/waves_chance_noise/astra-source-checks.json
+?? ada_run/waves_chance_noise/astra-w1-source-checks.json
+?? ada_run/waves_chance_noise/probe_clear_rects.json
+?? ada_run/waves_chance_noise/probe_shutdown_AirPointAudioTest.json
+?? ada_run/waves_chance_noise/probe_shutdown_SystemsMusicTest.json
+?? ada_run/waves_chance_noise/probe_shutdown_air_music_display_case.json
+?? ada_run/waves_chance_noise/probe_shutdown_bus_only.json
+?? ada_run/waves_chance_noise/probe_shutdown_players_only.json
+?? ada_run/waves_chance_noise/probe_shutdown_synth_only.json
+?? ada_run/waves_chance_noise/probe_w1_reload.json
+?? ada_run/waves_chance_noise/w1-handoff-publication.json
+?? ada_run/waves_chance_noise/w1-review-publication.json
+?? ada_run/waves_chance_noise/wcn-probe-control.json
+?? ada_run/waves_chance_noise_plan_browser.js
+?? ada_run/write_air_music_text.py
+?? ada_run/write_ca_edge.py
+?? ada_run/write_ca_edge_texts.py
+?? ada_run/write_ca_elementary.py
+?? ada_run/write_ca_history.py
+?? ada_run/write_ca_history_texts.py
+?? ada_run/write_ca_intro.py
+?? ada_run/write_ca_life.py
+?? ada_run/write_ca_life_texts.py
+?? ada_run/write_ca_proximity_texts.py
+?? ada_run/write_ca_soft_rules.py
+?? ada_run/write_ca_soft_rules_texts.py
+?? ada_run/write_cantor.py
+?? ada_run/write_columns_review.py
+?? ada_run/write_entropy_text.py
+?? ada_run/write_gallery_passages.py
+?? ada_run/write_game_text.py
+?? ada_run/write_gaussian_text.py
+?? ada_run/write_inside_chapter.py
+?? ada_run/write_mushrooms_text.py
+?? ada_run/write_pair_chapter.py
+?? ada_run/write_place_text.py
+?? ada_run/write_points_text.py
+?? ada_run/write_random_definition_text.py
+?? ada_run/write_recursive_trees.py
+?? ada_run/write_remove_text.py
+?? ada_run/write_sine_flow_text.py
+?? ada_run/write_space_chapter.py
+?? ada_run/write_synthesis_lab_text.py
+?? ada_run/write_torus_chapter.py
+?? ada_run/write_voxel_chapter.py
+?? ada_run/write_walk_text.py
+?? ada_run/write_wall_chapter.py
+?? algorithms/arrays/layer_pattern_lesson.gd
+?? algorithms/cellularautomata/ca_bridge/history_study.gd
+?? algorithms/cellularautomata/ca_showcase/difference_model.gd
+?? algorithms/cellularautomata/ca_showcase/difference_study.gd
+?? algorithms/cellularautomata/cellular_automata_3d/structure_study.gd
+?? algorithms/cellularautomata/living_architecture/proximity_study.gd
+?? algorithms/color/carrier_comparison.gd
+?? algorithms/color/carrier_comparison.gdshader
+?? algorithms/color/gridcolorizer/address_lesson.gd
+?? algorithms/primitives/rainbow/CELEBRATION.md
+?? algorithms/primitives/rainbow/rainbow_celebration.gd
+?? algorithms/primitives/scaleme/drink_me_bottle.gd
+?? algorithms/primitives/scaleme/drink_me_room.gd
+?? algorithms/randomness/noiselayers/noiselayers_stage.gd
+?? algorithms/randomness/noisesphere/enclosing_sphere.gd
+?? algorithms/randomness/noisesphere/warp_study.gd
+?? algorithms/randomness/simplexnoise/pair_study.gd
+?? algorithms/randomness/whitenoise/noise_gallery_console.gd
+?? algorithms/vectors/01_vector_basics/room_reading.gd
+?? algorithms/vectors/08_vector_motion/motion_chamber.gd
+?? algorithms/vectors/10_vector_field_flow/field_receivers.gd
+?? algorithms_commit_9afcaade.patch
+?? cand.tsv
+?? commons/artifacts/adder_board/room_sum.gd
+?? commons/artifacts/arena_relation_lab/
+?? commons/artifacts/boolean_burrow/
+?? commons/artifacts/ca_history_vault/
+?? commons/artifacts/ca_rule_explorer/neighbour_study.gd
+?? commons/artifacts/ca_volume_lab/
+?? commons/artifacts/cantor_lesson/
+?? commons/artifacts/descent_landscape_lab/
+?? commons/artifacts/drag_catwalk/
+?? commons/artifacts/drag_corridor/kinetic_drag.gd
+?? commons/artifacts/drag_corridor/kinetic_walk_provider.gd
+?? commons/artifacts/dream_bodies/bodies/bacon_smear.gd
+?? commons/artifacts/dream_bodies/bodies/botanic_mannequin.gd
+?? commons/artifacts/dream_bodies/bodies/clay_splash.gd
+?? commons/artifacts/dream_bodies/bodies/couture_beast.gd
+?? commons/artifacts/dream_bodies/bodies/crystal_suit.gd
+?? commons/artifacts/dream_bodies/bodies/deity_figurine.gd
+?? commons/artifacts/dream_bodies/bodies/dotted_colossus.gd
+?? commons/artifacts/dream_bodies/bodies/fetish_idol.gd
+?? commons/artifacts/dream_bodies/bodies/lilac_quarry.gd
+?? commons/artifacts/dream_bodies/bodies/mannerist_tumble.gd
+?? commons/artifacts/dream_bodies/bodies/obi_frieze.gd
+?? commons/artifacts/dream_bodies/bodies/painted_chorus.gd
+?? commons/artifacts/dream_bodies/bodies/pierced_screen.gd
+?? commons/artifacts/dream_bodies/bodies/print_inflatable.gd
+?? commons/artifacts/dream_bodies/bodies/type_wrap.gd
+?? commons/artifacts/dream_bodies/dream_gloss.gdshader
+?? commons/artifacts/dream_bodies/dream_iso.gd
+?? commons/artifacts/dream_bodies/dream_shaders.gd
+?? commons/artifacts/dream_bodies/dream_skin.gd
+?? commons/artifacts/dream_bodies/figures/
+?? commons/artifacts/dressing_rooms/museum_uffizi_bay_module.json
+?? commons/artifacts/dressing_rooms/walkthrough_shaft_fan.json
+?? commons/artifacts/dressing_rooms/wall_clearance_fan.json
+?? commons/artifacts/fabric_shader_studio/
+?? commons/artifacts/flow_field_painter/shared_field_lesson.gd
+?? commons/artifacts/force_field_zone/field_carry_provider.gd
+?? commons/artifacts/game_of_life_petri/address_study.gd
+?? commons/artifacts/game_of_life_petri/life_address_receiver.gd
+?? commons/artifacts/golden_mapping_lesson/
+?? commons/artifacts/intractable_evidence/
+?? commons/artifacts/koch_sierpinski_lesson/
+?? commons/artifacts/landscape_flow_bench/
+?? commons/artifacts/laser_measure_rack/
+?? commons/artifacts/launch_arc/launch_chamber.gd
+?? commons/artifacts/menger_lesson/
+?? commons/artifacts/milky_glass_window/
+?? commons/artifacts/museum/museum_wall_aaa_showcase.gd
+?? commons/artifacts/museum/museum_wall_aaa_showcase.tscn
+?? commons/artifacts/museum/museum_wall_c27_occupied_gallery.gd
+?? commons/artifacts/museum/museum_wall_c27_occupied_gallery.tscn
+?? commons/artifacts/museum/museum_wall_piece_ideal_context.gd
+?? commons/artifacts/museum/museum_wall_piece_ideal_context.tscn
+?? commons/artifacts/nail_salon/
+?? commons/artifacts/orbital_mechanics_demo/gravity_relations.gd
+?? commons/artifacts/pattern_machine_a/loom_recipe.gd
+?? commons/artifacts/pattern_machine_a/recipe_study.gd
+?? commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd
+?? commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd
+?? commons/artifacts/plan_vitrine/
+?? commons/artifacts/queer_confetti/queer_confetti.tscn
+?? commons/artifacts/radial_inside/
+?? commons/artifacts/rd_artifact/exchange_study.gd
+?? commons/artifacts/rd_artifact/live_field.gd
+?? commons/artifacts/recursion_lesson/
+?? commons/artifacts/recursive_tree_lesson/
+?? commons/artifacts/registry/arena_experiments.json
+?? commons/artifacts/registry/boolean_burrow.json
+?? commons/artifacts/registry/ca_history_vault.json
+?? commons/artifacts/registry/ca_volume_lab.json
+?? commons/artifacts/registry/drag_catwalk.json
+?? commons/artifacts/registry/dream_figures.json
+?? commons/artifacts/registry/fabric_shader_studio.json
+?? commons/artifacts/registry/formfinding_experiments.json
+?? commons/artifacts/registry/landscape_flow_bench.json
+?? commons/artifacts/registry/laser_measure_rack.json
+?? commons/artifacts/registry/milky_glass_window.json
+?? commons/artifacts/registry/nail_salon.json
+?? commons/artifacts/registry/plan_vitrine.json
+?? commons/artifacts/registry/rhizome_architecture.json
+?? commons/artifacts/registry/rotation_studies.json
+?? commons/artifacts/registry/simulation_grid.json
+?? commons/artifacts/registry/super_drag_mirror.json
+?? commons/artifacts/registry/support_experiments.json
+?? commons/artifacts/registry/transformation_utilities.json
+?? commons/artifacts/registry/uniform_scale_marker.json
+?? commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd
+?? commons/artifacts/rotation_studies/
+?? commons/artifacts/simulation_grid/
+?? commons/artifacts/spring_tower/restoring_forces.gd
+?? commons/artifacts/spring_tower/spring_handle.gd
+?? commons/artifacts/super_drag_mirror/
+?? commons/artifacts/support_polygon_lab/
+?? commons/artifacts/tangent_slope_workbench/rate_comparison.gd
+?? commons/artifacts/timing_machines/
+?? commons/artifacts/uniform_scale_marker/
+?? commons/artifacts/vector_op_console/gap_projection_room.gd
+?? commons/artifacts/whiteboard/whiteboard_drawing.gd
+?? commons/artifacts/whiteboard/whiteboard_pen.gd
+?? commons/audio/dark_game_track.tscn
+?? commons/audio/modular_sound_interface.tscn
+?? commons/audio/sound_interface.tscn
+?? commons/context/drawingboard/ball_painting_automation.gd
+?? commons/context/walkgrids/noise_walk_study.gd
+?? commons/data/artifact_roles.json.before
+?? commons/data/book/tiling.json
+?? commons/data/completion_outlines/
+?? commons/data/museum_core_encounters.json
+?? commons/data/museum_dna_wall_envelopes.json
+?? commons/data/museum_improvements.json
+?? commons/data/museum_iteration.json
+?? commons/data/museum_relational_graph.json
+?? commons/data/synthesis_gallery.json
+?? commons/hazards/becoming_catalyst/chromatic_study.gd
+?? commons/maps/Accumulation_Riemann/consolidation.json
+?? commons/maps/Accumulation_Riemann/critical.md
+?? commons/maps/Accumulation_Riemann/final.md
+?? commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md
+?? commons/maps/Array/final.md
+?? commons/maps/Array_Patterns/field_notes.md
+?? commons/maps/Array_Patterns/final.md
+?? commons/maps/Array_Patterns/museum_recovery.md
+?? commons/maps/Assemblage_Same_Desire/final.md
+?? commons/maps/CA_AgentsCircuits/final.md
+?? commons/maps/CA_BeyondBinary/field_notes.md
+?? commons/maps/CA_BeyondBinary/final.md
+?? commons/maps/CA_EdgeOfChaos/field_notes.md
+?? commons/maps/CA_EdgeOfChaos/final.md
+?? commons/maps/CA_EdgeOfChaos/readme.md
+?? commons/maps/CA_ElementaryRules/field_notes.md
+?? commons/maps/CA_ElementaryRules/final.md
+?? commons/maps/CA_ExpandingSpace/field_notes.md
+?? commons/maps/CA_ExpandingSpace/final.md
+?? commons/maps/CA_GameOfLife/field_notes.md
+?? commons/maps/CA_GameOfLife/final.md
+?? commons/maps/CA_Introduction/field_notes.md
+?? commons/maps/CA_Introduction/final.md
+?? commons/maps/CA_SoftRules/field_notes.md
+?? commons/maps/CA_SoftRules/final.md
+?? commons/maps/Chamber_Color/artifacts.md
+?? commons/maps/Chamber_Color/critical.md
+?? commons/maps/Chamber_Color/field_notes.md
+?? commons/maps/Chamber_Color/final.md
+?? commons/maps/Chamber_Color/museum_recovery.md
+?? commons/maps/Chamber_Color/summary.md
+?? commons/maps/Chamber_Color/technical.md
+?? commons/maps/Chamber_Color/tutorial.md
+?? commons/maps/Change_Choreography/
+?? commons/maps/Change_Intro/critical.md
+?? commons/maps/Change_Intro/final.md
+?? commons/maps/Change_Reconciliation/consolidation.json
+?? commons/maps/Change_Reconciliation/final.md
+?? commons/maps/Color_Context_Placed/field_notes.md
+?? commons/maps/Color_Context_Placed/final.md
+?? commons/maps/Color_Context_Placed/museum_recovery.md
+?? commons/maps/Color_Flashlight/field_notes.md
+?? commons/maps/Color_Flashlight/final.md
+?? commons/maps/Color_Flashlight/museum_recovery.md
+?? commons/maps/Color_Grid_Pallet/field_notes.md
+?? commons/maps/Color_Grid_Pallet/final.md
+?? commons/maps/Color_Grid_Pallet/museum_recovery.md
+?? commons/maps/Color_Nails/field_notes.md
+?? commons/maps/Color_Nails/final.md
+?? commons/maps/Color_Nails/museum_recovery.md
+?? commons/maps/Color_Paint/field_notes.md
+?? commons/maps/Color_Paint/final.md
+?? commons/maps/Color_Paint/museum_recovery.md
+?? commons/maps/Color_Pillar/field_notes.md
+?? commons/maps/Color_Pillar/final.md
+?? commons/maps/Color_Pillar/museum_recovery.md
+?? commons/maps/Color_Rainbow/field_notes.md
+?? commons/maps/Color_Rainbow/final.md
+?? commons/maps/Color_Rainbow/museum_recovery.md
+?? commons/maps/Color_Showcase/field_notes.md
+?? commons/maps/Color_Walls/field_notes.md
+?? commons/maps/Color_Walls/final.md
+?? commons/maps/Color_Walls/museum_recovery.md
+?? commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md
+?? commons/maps/CriticalAlgorithms_Applied_Ethics/final.md
+?? commons/maps/Flow_Field/critical.md
+?? commons/maps/Flow_Field/final.md
+?? commons/maps/FormFinding_Descent/critical.md
+?? commons/maps/FormFinding_Descent/intent.md
+?? commons/maps/FormFinding_Descent/landscape_research.md
+?? commons/maps/FormFinding_Forge/final.md
+?? commons/maps/Fractal_CantorSet/final.md
+?? commons/maps/Fractal_CrossSequence/final.md
+?? commons/maps/Fractal_GoldenSpiral/final.md
+?? commons/maps/Fractal_MengerSponge/field_notes.md
+?? commons/maps/Fractal_MengerSponge/final.md
+?? commons/maps/Fractal_RecursiveTrees/final.md
+?? commons/maps/Fractal_Synthesis/final.md
+?? commons/maps/GT_Connectivity/final.md
+?? commons/maps/GT_Flow/final.md
+?? commons/maps/GT_Foundations/final.md
+?? commons/maps/GT_Layout/final.md
+?? commons/maps/GT_Matching/final.md
+?? commons/maps/GT_Network_Analysis/final.md
+?? commons/maps/GT_Pathfinding/final.md
+?? commons/maps/GT_Spanning_Trees/final.md
+?? commons/maps/Godel_Incompleteness/final.md
+?? commons/maps/ISO_AnimatedNoise/final.md
+?? commons/maps/ISO_CaveGeneration/final.md
+?? commons/maps/ISO_Caves/final.md
+?? commons/maps/ISO_FlatTerrain/final.md
+?? commons/maps/ISO_ImplicitModeling/final.md
+?? commons/maps/ISO_Introduction/final.md
+?? commons/maps/ISO_LookupTable/final.md
+?? commons/maps/ISO_Metaballs/final.md
+?? commons/maps/ISO_PortalLandscape/final.md
+?? commons/maps/ISO_RhizomeBody/
+?? commons/maps/ISO_Sculpting/final.md
+?? commons/maps/ISO_ShapesGallery/final.md
+?? commons/maps/ISO_TorusGyroid/final.md
+?? commons/maps/LSystems_Architecture/final.md
+?? commons/maps/LSystems_Competition/final.md
+?? commons/maps/LSystems_Grammar_Lab/final.md
+?? commons/maps/LSystems_Grammars_And_Curves/final.md
+?? commons/maps/LSystems_Growth/final.md
+?? commons/maps/LSystems_Living/final.md
+?? commons/maps/Lab_Path/final.md
+?? commons/maps/ML_Classification/final.md
+?? commons/maps/ML_Evolution/final.md
+?? commons/maps/ML_Generative/final.md
+?? commons/maps/ML_Gradient_Landscape/final.md
+?? commons/maps/ML_Gradient_Landscape/landscape_research.md
+?? commons/maps/ML_Neural_Networks/final.md
+?? commons/maps/ML_Perception/final.md
+?? commons/maps/ML_Sequence_Memory/final.md
+?? commons/maps/ML_Synthesis/final.md
+?? commons/maps/Noise_Inside_Noise/field_notes.md
+?? commons/maps/Noise_Inside_Noise/final.md
+?? commons/maps/Noise_Space_10/field_notes.md
+?? commons/maps/Noise_Space_10/final.md
+?? commons/maps/Noise_Space_10/landscape_research.md
+?? commons/maps/PG_Branching_Growth/final.md
+?? commons/maps/PG_Caves_Mazes/final.md
+?? commons/maps/PG_Genetic_Evolution/final.md
+?? commons/maps/PG_Mirrored_Patterns/final.md
+?? commons/maps/PG_Percolation_Network/final.md
+?? commons/maps/PG_Sculpted_Forms/final.md
+?? commons/maps/PG_Space_Colonization/final.md
+?? commons/maps/PRIM_RhizomeWorld/
+?? commons/maps/Pattern_Foundry/critical.md
+?? commons/maps/Pattern_Foundry/drag_mirror_notes.md
+?? commons/maps/Pattern_Foundry/field_notes.md
+?? commons/maps/Pattern_Foundry/final.md
+?? commons/maps/Pattern_Foundry/museum_recovery.md
+?? commons/maps/Pattern_Foundry/summary.md
+?? commons/maps/Pattern_Foundry/technical.md
+?? commons/maps/Point_One/artifact_proposals.json
+?? commons/maps/Point_One/brief.md
+?? commons/maps/PostCrisis_Synthesis/final.md
+?? commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md
+?? commons/maps/QFEP_E_Term/final.md
+?? commons/maps/QFEP_Edge_Of_Chaos/final.md
+?? commons/maps/QFEP_F_Term/final.md
+?? commons/maps/QFEP_Introduction/final.md
+?? commons/maps/QFEP_Lambda_Spectrum/final.md
+?? commons/maps/QFEP_Phi_Term/final.md
+?? commons/maps/QFEP_Sandbox/final.md
+?? commons/maps/QFEP_Synthesis/final.md
+?? commons/maps/Random_Cubes/final.md
+?? commons/maps/Random_Entropy/critical.md
+?? commons/maps/Random_Pheromone/final.md
+?? commons/maps/Random_Rotate_Random_XYZ/final.md
+?? commons/maps/Random_Space/final.md
+?? commons/maps/Random_Space/landscape_research.md
+?? commons/maps/Random_Space_Geometry/final.md
+?? commons/maps/Random_Space_Geometry/landscape_research.md
+?? commons/maps/Randomness_10_PRINT_Algorithm/final.md
+?? commons/maps/Randomness_Examples_of_Randomness/final.md
+?? commons/maps/Ribbon_Change_01/consolidation.json
+?? commons/maps/Ribbon_Change_02/consolidation.json
+?? commons/maps/Ribbon_Change_03/consolidation.json
+?? commons/maps/Ribbon_Change_04/consolidation.json
+?? commons/maps/Ribbon_Patterns_01/
+?? commons/maps/Ribbon_Patterns_02/
+?? commons/maps/Ribbon_Patterns_03/
+?? commons/maps/SoftBodies_Cloth_Physics/final.md
+?? commons/maps/SoftBodies_Obsticals_Part2/final.md
+?? commons/maps/SoftBodies_Playground_of_Joy/final.md
+?? commons/maps/SpeculativeComputation_Collective_Knowledge/final.md
+?? commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md
+?? commons/maps/SpeculativeComputation_Rhizome_Network/final.md
+?? commons/maps/SpeculativeComputation_Situated_Computation/final.md
+?? commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md
+?? commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md
+?? commons/maps/SwarmIntelligence_Boids_Algorithm/final.md
+?? commons/maps/SwarmIntelligence_FlowFields/final.md
+?? commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md
+?? commons/maps/SwarmIntelligence_PhysarumColony/final.md
+?? commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md
+?? commons/maps/Symmetry_Seventeen/field_notes.md
+?? commons/maps/Symmetry_Seventeen/final.md
+?? commons/maps/Symmetry_Seventeen/museum_recovery.md
+?? commons/maps/Topology_Entropy_Morphogenesis/final.md
+?? commons/maps/Tutorial_Disco/final.md
+?? commons/maps/Tutorial_Pattern/field_notes.md
+?? commons/maps/Tutorial_Pattern/final.md
+?? commons/maps/Tutorial_Pattern/museum_recovery.md
+?? commons/maps/Tutorial_Single/final.md
+?? commons/maps/VFM_02_Operations/addition-draft-note.md
+?? commons/maps/VFM_02_Operations/critical.md
+?? commons/maps/VFM_03_Motion/critical.md
+?? commons/maps/VFM_03_Motion/final.md
+?? commons/maps/VFM_05_Launch/critical.md
+?? commons/maps/VFM_05_Launch/final.md
+?? commons/maps/VFM_07_Gravity/critical.md
+?? commons/maps/VFM_08_Arena/critical.md
+?? commons/maps/VFM_08_Arena/field_notes.md
+?? commons/maps/VFM_08_Arena/final.md
+?? commons/maps/VFM_09_Legs/critical.md
+?? commons/maps/Vectors_Act1_WhatAVectorIs/critical.md
+?? commons/maps/Vectors_Act2_VectorArithmetic/critical.md
+?? commons/maps/Vectors_Act3_FieldsAndMotion/critical.md
+?? commons/maps/Vectors_Act3_FieldsAndMotion/summary.md
+?? commons/maps/Vectors_Act4a_KineticForces/critical.md
+?? commons/maps/Vectors_Act4a_KineticForces/summary.md
+?? commons/maps/Vectors_Act4b_Oscillation/critical.md
+?? commons/maps/Vectors_Act4b_Oscillation/summary.md
+?? commons/maps/Vectors_Act5_ForceAsPlace/critical.md
+?? commons/maps/WaveFunctions_3D_Wave_Propagation/final.md
+?? commons/maps/WaveFunctions_John_Cage/final.md
+?? commons/maps/WaveFunctions_TrigWalkingPath/final.md
+?? commons/maps/WaveFunctions_Unit_Circle/final.md
+?? commons/maps/Wavefunctions_Bernini/final.md
+?? commons/maps/Wavefunctions_Sky_Stairs/final.md
+?? commons/materials/
+?? commons/movement/museum_flight_box.gd
+?? commons/movement/museum_flight_provider.gd
+?? commons/player/super_drag_outfit.gd
+?? commons/primitives/arrays/curved_pattern_room.gd
+?? commons/primitives/arrays/pattern_studio_console.gd
+?? commons/primitives/arrays/studio_surface_controls.gd
+?? commons/primitives/arrays/symmetry_compare_lesson.gd
+?? commons/primitives/shared/mesh_inspection.gd
+?? commons/scenes/em/em_simulation_stage.gd
+?? commons/testing/capture_build_up_museum.gd
+?? commons/testing/compile_em_cartridge.gd
+?? commons/testing/compile_translation_course.py
+?? commons/testing/gaussian_endpoint_sampler.gd
+?? commons/testing/landscape_flow_workshop.gd
+?? commons/testing/landscape_flow_workshop.tscn
+?? commons/testing/look_radial_inside.gd
+?? commons/testing/look_rhizome_inside.gd
+?? commons/testing/look_rhizome_world.gd
+?? commons/testing/probe_accumulation.gd
+?? commons/testing/probe_arena_relations.gd
+?? commons/testing/probe_axis_scale.gd
+?? commons/testing/probe_carrier_comparison.gd
+?? commons/testing/probe_chamber_colour.gd
+?? commons/testing/probe_change_intro.gd
+?? commons/testing/probe_change_two_halls.gd
+?? commons/testing/probe_color_recovery.gd
+?? commons/testing/probe_cube_primary.gd
+?? commons/testing/probe_descent_landscape.gd
+?? commons/testing/probe_drag_catwalk.gd
+?? commons/testing/probe_drag_catwalk_museum.gd
+?? commons/testing/probe_draw_dot_on_hand.gd
+?? commons/testing/probe_dream_iso.gd
+?? commons/testing/probe_dream_shaders.gd
+?? commons/testing/probe_drink_me_room.gd
+?? commons/testing/probe_fabric_studio.gd
+?? commons/testing/probe_field_receivers.gd
+?? commons/testing/probe_fixed_motif.gd
+?? commons/testing/probe_flashlight_lesson.gd
+?? commons/testing/probe_force_as_place.gd
+?? commons/testing/probe_gate_report_stamp.gd
+?? commons/testing/probe_gravity_relations.gd
+?? commons/testing/probe_grid_address_lesson.gd
+?? commons/testing/probe_grid_lines_discovery.gd
+?? commons/testing/probe_health_cross_collision.gd
+?? commons/testing/probe_health_cross_decline.gd
+?? commons/testing/probe_health_cross_in_map.gd
+?? commons/testing/probe_ignorance_primary.gd
+?? commons/testing/probe_introduction_crossings.gd
+?? commons/testing/probe_iso_cell_cost.gd
+?? commons/testing/probe_iso_chunks.gd
+?? commons/testing/probe_iso_rhizomebody.gd
+?? commons/testing/probe_iso_values.gd
+?? commons/testing/probe_kinetic_forces.gd
+?? commons/testing/probe_landscape_flow.gd
+?? commons/testing/probe_laser_burns.gd
+?? commons/testing/probe_launch_chamber.gd
+?? commons/testing/probe_layer_pattern.gd
+?? commons/testing/probe_legs_support.gd
+?? commons/testing/probe_line_demo_tree.gd
+?? commons/testing/probe_line_opens_barrier.gd
+?? commons/testing/probe_motion_chamber.gd
+?? commons/testing/probe_museum_idols.gd
+?? commons/testing/probe_museum_simulation_stages.gd
+?? commons/testing/probe_nail_salon.gd
+?? commons/testing/probe_necklace_air.gd
+?? commons/testing/probe_necklace_bodies.gd
+?? commons/testing/probe_necklace_jam.gd
+?? commons/testing/probe_necklace_storm.gd
+?? commons/testing/probe_null_attach.gd
+?? commons/testing/probe_origin_clutter.gd
+?? commons/testing/probe_paint_encounter.gd
+?? commons/testing/probe_pattern_recipe.gd
+?? commons/testing/probe_pattern_studio.gd
+?? commons/testing/probe_plan_vitrine_hands.gd
+?? commons/testing/probe_point_finish.gd
+?? commons/testing/probe_point_line_wall.gd
+?? commons/testing/probe_polyhedra_flow.gd
+?? commons/testing/probe_portals_primary.gd
+?? commons/testing/probe_radial_inside.gd
+?? commons/testing/probe_radiolaria_seed.gd
+?? commons/testing/probe_rainbow_celebration.gd
+?? commons/testing/probe_restoring_forces.gd
+?? commons/testing/probe_rhizome_inside.gd
+?? commons/testing/probe_rhizome_mouth.gd
+?? commons/testing/probe_rhizome_world.gd
+?? commons/testing/probe_ribbon_compact.gd
+?? commons/testing/probe_ribbon_patterns.gd
+?? commons/testing/probe_rotation_studies.gd
+?? commons/testing/probe_rotation_turn_direction.gd
+?? commons/testing/probe_sequence_platform_recovery.gd
+?? commons/testing/probe_simulation_stage.gd
+?? commons/testing/probe_spectacle_gallery.gd
+?? commons/testing/probe_super_drag.gd
+?? commons/testing/probe_super_drag_museum.gd
+?? commons/testing/probe_symmetry_compare.gd
+?? commons/testing/probe_timing_machines.gd
+?? commons/testing/probe_trace_board_pens.gd
+?? commons/testing/probe_trace_data_panel.gd
+?? commons/testing/probe_trace_grid_discovery.gd
+?? commons/testing/probe_trans_pre_book.gd
+?? commons/testing/probe_trans_pre_build_up.gd
+?? commons/testing/probe_translation_course.gd
+?? commons/testing/probe_triangle_primary.gd
+?? commons/testing/probe_tunnel_addresses.gd
+?? commons/testing/probe_twins_refute.gd
+?? commons/testing/probe_vector_forces_start.gd
+?? commons/testing/probe_vector_gap.gd
+?? commons/testing/probe_vector_sum.gd
+?? commons/testing/probe_verify_addpos.gd
+?? commons/testing/probe_wall_abstract_sheet.gd
+?? commons/testing/probe_wall_window.gd
+?? commons/testing/probe_wall_window_shot.gd
+?? commons/testing/probe_walls_encounter.gd
+?? commons/testing/probe_wave_platform_recovery.gd
+?? commons/testing/probe_wcn_air_shutdown.gd
+?? commons/testing/probe_wcn_clear_rects.gd
+?? commons/testing/probe_wcn_intro_bob_diag.gd
+?? commons/testing/probe_wcn_w1_reload.gd
+?? commons/testing/probe_work_whitelist.gd
+?? commons/testing/probe_zero_controllers.gd
+?? commons/testing/run_landscape_size_series.gd
+?? commons/testing/shoot_em_loading_cell.gd
+?? commons/ui/cube_experiment_panel.gd
+?? commons/ui/instrument_panel_case.gd
+?? commons/ui/limit_experiment_panel.gd
+?? commons/ui/triangle_experiment_panel.gd
+?? doc/MUSEUM_CONTRACT_PILOT.md
+?? doc/PLACEMENT_NEGOTIATION.md
+?? doc/blog/
+?? doc/book/COMPLETION_STRATEGY.md
+?? doc/book/DISCOVERY_AND_REMAINDERS.md
+?? doc/book/VOICE_STUDY.md
+?? doc/book/handoffs/astra-r1-entropy-review-2026-09-11.md
+?? doc/book/handoffs/astra-wcn-pilot-review-2026-09-10.md
+?? doc/book/handoffs/astra-wcn-runtime-review-2026-09-10.md
+?? doc/book/handoffs/astra-wcn-visual-pass-review-2026-09-12.md
+?? doc/book/handoffs/astra-wcn-w1-review-2026-09-10.md
+?? doc/book/handoffs/claude-two-point-ruler.md
+?? doc/book/handoffs/fable-final-discovery-voice.md
+?? doc/book/handoffs/fable-r1-entropy-followup.md
+?? doc/book/handoffs/fable-waves-chance-noise-pilots.md
+?? doc/book/handoffs/fable-waves-chance-noise-w1.md
+?? doc/book/handoffs/fable-waves-chance-noise-w2.md
+?? doc/book/handoffs/fable-waves-chance-noise-w3.md
+?? doc/book/handoffs/fable-wcn-development-w1.md
+?? doc/book/handoffs/fable-wcn-runtime-followup.md
+?? doc/book/handoffs/fable-wcn-visual-improvements-2026-09-12.md
+?? doc/book/handoffs/fable-wcn-w2-completion.md
+?? doc/book/handoffs/wcn-working-rhythm-2026-09-10/
+?? doc/book/iterations/
+?? doc/dressing_rooms/data_labor_counter/
+?? doc/dressing_rooms/data_locality_caching/
+?? doc/dressing_rooms/data_tree_walker/
+?? doc/placement_research/walkability_Vectors_Act5_ForceAsPlace.json
+?? doc/plans/patterns-and-shaders-2026-09-09.md
+?? doc/plans/patterns-dream-dressing-2026-09-09.md
+?? doc/plans/patterns-room-body-shaders-2026-09-10.md
+?? doc/reports/GATE_F_2026-08-19_THE_DOOR_MISSES_THE_BRIDGE.md
+?? doc/reports/GATE_F_PLANNER_DIAGNOSIS.md
+?? doc/reports/SEVERANCE_2026-08-20_THE_BRIDGE_MISSES_THE_DOOR.md
+?? doc/reports/_scorer_post.txt
+?? doc/reports/anamorphic_boolean_burrow.json
+?? doc/reports/biome_cover_budget.txt
+?? doc/reports/breath_baseline_2026-08-16_09-04.json
+?? doc/reports/breath_baseline_2026-08-22_09-05.json
+?? doc/reports/breath_baseline_2026-08-25_09-04.json
+?? doc/reports/breath_baseline_2026-08-27_09-04.json
+?? doc/reports/breath_baseline_2026-08-28_09-04.json
+?? doc/reports/breath_baseline_2026-08-29_09-04.json
+?? doc/reports/breath_baseline_2026-08-30_09-04.json
+?? doc/reports/breath_baseline_2026-09-02_09-04.json
+?? doc/reports/breath_baseline_2026-09-04_09-04.json
+?? doc/reports/breath_baseline_2026-09-09_09-06.json
+?? doc/reports/ceiling_after.json
+?? doc/reports/ceiling_before.json
+?? doc/reports/ceiling_overhead.json
+?? doc/reports/em_wall_merge.json
+?? doc/reports/museum_modularity_prediction.txt
+?? doc/reports/mutation_recession_hall__recession_hall.json
+?? doc/reports/sweep_MarioSoundController_bite.json
+?? doc/reports/sweep_accord_swarm_bite.json
+?? doc/reports/sweep_admission_rack_bite.json
+?? doc/reports/sweep_aftermath_grove_bite.json
+?? doc/reports/sweep_algorithm_menu_bite.json
+?? doc/reports/sweep_alphabet_grammar_bite.json
+?? doc/reports/sweep_anchorage_colony_bite.json
+?? doc/reports/sweep_animated_noise_explorer_bite.json
+?? doc/reports/sweep_arrangement_yard_bite.json
+?? doc/reports/sweep_assay_wing_bite.json
+?? doc/reports/sweep_assembly_stair_bite.json
+?? doc/reports/sweep_assembly_yard_bite.json
+?? doc/reports/sweep_bar_array_bite.json
+?? doc/reports/sweep_basin_field_bite.json
+?? doc/reports/sweep_becoming_jar_bite.json
+?? doc/reports/sweep_boolean_burrow_bite.json
+?? doc/reports/sweep_bottleneck_cut_bite.json
+?? doc/reports/sweep_boundary_tank_bite.json
+?? doc/reports/sweep_boundary_tile_bite.json
+?? doc/reports/sweep_brake_skid_bite.json
+?? doc/reports/sweep_carriage_bench_bite.json
+?? doc/reports/sweep_chapter_arc_bite.json
+?? doc/reports/sweep_cloth_simulation_bite.json
+?? doc/reports/sweep_cohort_bench_bite.json
+?? doc/reports/sweep_coincident_face_bite.json
+?? doc/reports/sweep_component_court_bite.json
+?? doc/reports/sweep_configuration_yard_bite.json
+?? doc/reports/sweep_constant_dispute_bite.json
+?? doc/reports/sweep_construction_pair_bite.json
+?? doc/reports/sweep_course_cube_bite.json
+?? doc/reports/sweep_crossing_bench_bite.json
+?? doc/reports/sweep_csg_architecture_cavity_bite.json
+?? doc/reports/sweep_csg_intersection_demo_bite.json
+?? doc/reports/sweep_csg_union_demo_bite.json
+?? doc/reports/sweep_curve_pair_bite.json
+?? doc/reports/sweep_depth_well_bite.json
+?? doc/reports/sweep_disclosure_cabinet_bite.json
+?? doc/reports/sweep_do_not_cross_barrier_bite.json
+?? doc/reports/sweep_dot_aligner_bite.json
+?? doc/reports/sweep_drag_corridor_bite.json
+?? doc/reports/sweep_dream_asawa_wire_bite.json
+?? doc/reports/sweep_dream_bacon_smear_bite.json
+?? doc/reports/sweep_dream_batik_beast_bite.json
+?? doc/reports/sweep_dream_botanic_mannequin_bite.json
+?? doc/reports/sweep_dream_brass_stamen_bite.json
+?? doc/reports/sweep_dream_ceramic_puppet_bite.json
+?? doc/reports/sweep_dream_clay_splash_bite.json
+?? doc/reports/sweep_dream_coral_polyp_bite.json
+?? doc/reports/sweep_dream_couch_lounge_bite.json
+?? doc/reports/sweep_dream_couture_beast_bite.json
+?? doc/reports/sweep_dream_crackle_peak_bite.json
+?? doc/reports/sweep_dream_crystal_suit_bite.json
+?? doc/reports/sweep_dream_david_drape_bite.json
+?? doc/reports/sweep_dream_deity_figurine_bite.json
+?? doc/reports/sweep_dream_dotted_colossus_bite.json
+?? doc/reports/sweep_dream_dragon_bite.json
+?? doc/reports/sweep_dream_dubuffet_bite.json
+?? doc/reports/sweep_dream_fetish_idol_bite.json
+?? doc/reports/sweep_dream_food_table_bite.json
+?? doc/reports/sweep_dream_garet_still_bite.json
+?? doc/reports/sweep_dream_gehry_metal_bite.json
+?? doc/reports/sweep_dream_griffin_plume_bite.json
+?? doc/reports/sweep_dream_hadid_shell_bite.json
+?? doc/reports/sweep_dream_hicks_fiber_bite.json
+?? doc/reports/sweep_dream_hokusai_kimono_bite.json
+?? doc/reports/sweep_dream_horse_hybrid_bite.json
+?? doc/reports/sweep_dream_kruger_suit_bite.json
+?? doc/reports/sweep_dream_lava_bloom_bite.json
+?? doc/reports/sweep_dream_lilac_quarry_bite.json
+?? doc/reports/sweep_dream_mannerist_tumble_bite.json
+?? doc/reports/sweep_dream_masked_dancer_bite.json
+?? doc/reports/sweep_dream_mosaic_body_bite.json
+?? doc/reports/sweep_dream_nana_gloss_bite.json
+?? doc/reports/sweep_dream_obi_frieze_bite.json
+?? doc/reports/sweep_dream_oni_dragon_bite.json
+?? doc/reports/sweep_dream_paik_light_bite.json
+?? doc/reports/sweep_dream_painted_chorus_bite.json
+?? doc/reports/sweep_dream_panel_robot_bite.json
+?? doc/reports/sweep_dream_panton_pop_bite.json
+?? doc/reports/sweep_dream_pierced_screen_bite.json
+?? doc/reports/sweep_dream_pink_scaffold_bite.json
+?? doc/reports/sweep_dream_piped_icing_bite.json
+?? doc/reports/sweep_dream_porcelain_doll_bite.json
+?? doc/reports/sweep_dream_print_inflatable_bite.json
+?? doc/reports/sweep_dream_rocaille_bite.json
+?? doc/reports/sweep_dream_sea_forms_bite.json
+?? doc/reports/sweep_dream_stella_wall_bite.json
+?? doc/reports/sweep_dream_stijl_robot_bite.json
+?? doc/reports/sweep_dream_tatlin_red_bite.json
+?? doc/reports/sweep_dream_tube_reef_bite.json
+?? doc/reports/sweep_dream_type_wrap_bite.json
+?? doc/reports/sweep_dream_vasarely_beast_bite.json
+?? doc/reports/sweep_edge_ground_bite.json
+?? doc/reports/sweep_elasticity_press_bite.json
+?? doc/reports/sweep_evidence_ladder_bite.json
+?? doc/reports/sweep_face_convention_bite.json
+?? doc/reports/sweep_facets_sphere_bite.json
+?? doc/reports/sweep_facture_bench_bite.json
+?? doc/reports/sweep_field_room_bite.json
+?? doc/reports/sweep_fifteen_cases_demo_bite.json
+?? doc/reports/sweep_foresight_range_bite.json
+?? doc/reports/sweep_formation_field_bite.json
+?? doc/reports/sweep_fountain_demo_bite.json
+?? doc/reports/sweep_frequency_shell_bite.json
+?? doc/reports/sweep_fusion_ladder_bite.json
+?? doc/reports/sweep_generator_bench_bite.json
+?? doc/reports/sweep_ghost_court_bite.json
+?? doc/reports/sweep_grain_block_bite.json
+?? doc/reports/sweep_grasp_cabinet_bite.json
+?? doc/reports/sweep_grid2d_bite.json
+?? doc/reports/sweep_grid3d_bite.json
+?? doc/reports/sweep_ground_layer_bite.json
+?? doc/reports/sweep_gyroid_demo_bite.json
+?? doc/reports/sweep_habit_grove_bite.json
+?? doc/reports/sweep_hand_bench_bite.json
+?? doc/reports/sweep_handed_pair_bite.json
+?? doc/reports/sweep_herbarium_cabinet_bite.json
+?? doc/reports/sweep_instruction_bench_bite.json
+?? doc/reports/sweep_interior_block_bite.json
+?? doc/reports/sweep_intractable_evidence_bite.json
+?? doc/reports/sweep_intrusion_bench_bite.json
+?? doc/reports/sweep_ladder_hall_bite.json
+?? doc/reports/sweep_lambda_promenade_bite.json
+?? doc/reports/sweep_law_bench_bite.json
+?? doc/reports/sweep_line_slack_bite.json
+?? doc/reports/sweep_living_paper_mandelbrot_bite.json
+?? doc/reports/sweep_macrostate_shelf_bite.json
+?? doc/reports/sweep_mc_cave_bite.json
+?? doc/reports/sweep_mc_flat_landscape_bite.json
+?? doc/reports/sweep_mc_inside_cave_bite.json
+?? doc/reports/sweep_mc_overhang_landscape_bite.json
+?? doc/reports/sweep_mc_portal_landscape_bite.json
+?? doc/reports/sweep_mc_sculpt_vr_bite.json
+?? doc/reports/sweep_mc_shapes_gallery_bite.json
+?? doc/reports/sweep_mc_terrain_demo_bite.json
+?? doc/reports/sweep_mc_torus_sculpture_bite.json
+?? doc/reports/sweep_measure_bench_bite.json
+?? doc/reports/sweep_mesh_grammar_bite.json
+?? doc/reports/sweep_metaball_world_bite.json
+?? doc/reports/sweep_mixing_jar_bite.json
+?? doc/reports/sweep_mode_marker_bite.json
+?? doc/reports/sweep_motif_floor_bite.json
+?? doc/reports/sweep_motion_primitive_bite.json
+?? doc/reports/sweep_mounting_yard_bite.json
+?? doc/reports/sweep_mutuality_graph_bite.json
+?? doc/reports/sweep_nakama_metaballs_bite.json
+?? doc/reports/sweep_noise_quarry_bite.json
+?? doc/reports/sweep_occupancy_cloud_bite.json
+?? doc/reports/sweep_octave_stack_bite.json
+?? doc/reports/sweep_opening_pair_bite.json
+?? doc/reports/sweep_operations_gallery_bite.json
+?? doc/reports/sweep_order_matters_bite.json
+?? doc/reports/sweep_order_pair_bite.json
+?? doc/reports/sweep_outside_hall_bite.json
+?? doc/reports/sweep_packing_court_bite.json
+?? doc/reports/sweep_passage_ledger_bite.json
+?? doc/reports/sweep_paused_fountain_bite.json
+?? doc/reports/sweep_pedagogical_sketchbook_bite.json
+?? doc/reports/sweep_phase_field_bite.json
+?? doc/reports/sweep_plumb_room_bite.json
+?? doc/reports/sweep_point_mark_bite.json
+?? doc/reports/sweep_postulate_bench_bite.json
+?? doc/reports/sweep_posture_bench_bite.json
+?? doc/reports/sweep_presence_pipe_bite.json
+?? doc/reports/sweep_pressure_yard_bite.json
+?? doc/reports/sweep_profile_bite.json
+?? doc/reports/sweep_prop_mobile_bite.json
+?? doc/reports/sweep_proportion_bench_bite.json
+?? doc/reports/sweep_queer_marching_cave_bite.json
+?? doc/reports/sweep_rack_room_bite.json
+?? doc/reports/sweep_raymarched_metaballs_bite.json
+?? doc/reports/sweep_readout_bench_bite.json
+?? doc/reports/sweep_recession_hall_bite.json
+?? doc/reports/sweep_record_room_bite.json
+?? doc/reports/sweep_recursion_observatory_bite.json
+?? doc/reports/sweep_refusal_booth_bite.json
+?? doc/reports/sweep_regime_threshold_bite.json
+?? doc/reports/sweep_remainder_box_bite.json
+?? doc/reports/sweep_removal_room_bite.json
+?? doc/reports/sweep_residue_hall_bite.json
+?? doc/reports/sweep_retention_corridor_bite.json
+?? doc/reports/sweep_rhizome_cave_demo_bite.json
+?? doc/reports/sweep_rule_bench_bite.json
+?? doc/reports/sweep_sampling_bench_bite.json
+?? doc/reports/sweep_seam_stair_bite.json
+?? doc/reports/sweep_selection_garden_bite.json
+?? doc/reports/sweep_service_yard_bite.json
+?? doc/reports/sweep_slack_yard_bite.json
+?? doc/reports/sweep_sorting_hall_bite.json
+?? doc/reports/sweep_spring_tower_bite.json
+?? doc/reports/sweep_statute_fitting_bite.json
+?? doc/reports/sweep_stencil_quarter_bite.json
+?? doc/reports/sweep_stick_office_bite.json
+?? doc/reports/sweep_substance_room_bite.json
+?? doc/reports/sweep_subtraction_suite_bite.json
+?? doc/reports/sweep_taxonomy_hall_bite.json
+?? doc/reports/sweep_temperament_table_bite.json
+?? doc/reports/sweep_the_frame_you_were_given_bite.json
+?? doc/reports/sweep_tier_terrarium_bite.json
+?? doc/reports/sweep_topology_net_bite.json
+?? doc/reports/sweep_tug_of_war_bite.json
+?? doc/reports/sweep_umbrella_field_bite.json
+?? doc/reports/sweep_vector_add_bite.json
+?? doc/reports/sweep_verlet_workbench_bite.json
+?? doc/reports/sweep_voxel_noise_demo_bite.json
+?? doc/reports/sweep_wall_abstract_bite.json
+?? doc/reports/sweep_warning_yard_bite.json
+?? doc/reports/sweep_waveform_basis_bite.json
+?? doc/reports/sweep_wfc_tile_bench_bite.json
+?? doc/reports/sweep_wfc_tile_mosaic_bite.json
+?? doc/reports/sweep_where_the_machine_stops_bite.json
+?? doc/reports/sweep_working_shown_bite.json
+?? doc/reports/white_cube_guard_prediction.txt
+?? doc/reports/white_cube_prediction.txt
+?? doc/research/possible-bodies/
+?? doc/research/qfep/
+?? doc/research/waves-chance-noise/ASTRA_VISUAL_PASS_REVIEW.md
+?? doc/research/waves-chance-noise/BOOK_VOICE.md
+?? doc/research/waves-chance-noise/CURRENT_TASK-r1-2026-09-11.md
+?? doc/research/waves-chance-noise/CURRENT_TASK.md
+?? doc/research/waves-chance-noise/HANDOFF.md
+?? doc/research/waves-chance-noise/NEXT_BATCH.md
+?? doc/research/waves-chance-noise/README.md
+?? doc/research/waves-chance-noise/REVIEW_TEMPLATE.md
+?? doc/research/waves-chance-noise/RUNTIME_FOLLOWUP.md
+?? doc/research/waves-chance-noise/VISUAL_IMPROVEMENTS.md
+?? doc/research/waves-chance-noise/all-maps.md
+?? doc/research/waves-chance-noise/astra-visual-pass-review.html
+?? doc/research/waves-chance-noise/audit.json
+?? doc/research/waves-chance-noise/book-voice-evidence.json
+?? doc/research/waves-chance-noise/book-voice-review.md
+?? doc/research/waves-chance-noise/book-voice.html
+?? doc/research/waves-chance-noise/images/WaveFunctions_Effect_Sound.png
+?? doc/research/waves-chance-noise/images/WaveFunctions_Intro.png
+?? doc/research/waves-chance-noise/images/r1-entropy-desktop.png
+?? doc/research/waves-chance-noise/images/r1-entropy-readout.png
+?? doc/research/waves-chance-noise/images/runtime-intro.png
+?? doc/research/waves-chance-noise/images/runtime-noise.png
+?? doc/research/waves-chance-noise/images/runtime-pendulum.png
+?? doc/research/waves-chance-noise/images/runtime-random.png
+?? doc/research/waves-chance-noise/images/runtime-sine.png
+?? doc/research/waves-chance-noise/images/visual-Random_Definition-probe_random_definition_desktop_approach_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Definition-probe_random_definition_desktop_close_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Definition-probe_random_definition_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_approach_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_buttons_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_contrast_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_origin_contrast_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_origin_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_panel_close_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_ribbon_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Entropy-probe_entropy_sorted_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_arena_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_display_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_keypad_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_north_door_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_plan_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_poisson_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_running_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_south_door_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Gaussian-probe_gaussian_uniform_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_bed_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_north_door_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_panel_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_plan_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_rejected_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_south_door_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_specimens_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Mushrooms-probe_mushrooms_west_margin_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_board_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_emptied_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_one_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_panel_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_row_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Remove-probe_remove_status_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_arena_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_keypad_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_logbook_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_north_door_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_plan_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_running_live.png
+?? doc/research/waves-chance-noise/images/visual-Random_Walk-probe_walk_tank_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_AirMusic-probe_air_music_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_AirMusic-probe_air_music_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_AirMusic-probe_air_music_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_AirMusic-probe_air_music_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_AirMusic-probe_air_music_two_voices_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_scope_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Intro-probe_intro_desktop_primary_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Intro-probe_intro_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Pendulum-probe_pendulum_desktop_walk_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Pendulum-probe_pendulum_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Pendulum-probe_pendulum_readout_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_approach_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_bridge_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_desktop_exit_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_desktop_mid_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_inside_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Sine_Space-probe_sine_space_panel_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_console_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_desktop_front_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_h1_alone.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_ladder_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_overview_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_plan_live.png
+?? doc/research/waves-chance-noise/images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_readout_live.png
+?? doc/research/waves-chance-noise/index.html
+?? doc/research/waves-chance-noise/maps/
+?? doc/research/waves-chance-noise/pilot-review.html
+?? doc/research/waves-chance-noise/pilot-review.md
+?? doc/research/waves-chance-noise/plan.json
+?? doc/research/waves-chance-noise/r1-entropy-review.html
+?? doc/research/waves-chance-noise/r1-entropy-review.md
+?? doc/research/waves-chance-noise/recovery.html
+?? doc/research/waves-chance-noise/runtime-evidence.json
+?? doc/research/waves-chance-noise/runtime-review.html
+?? doc/research/waves-chance-noise/runtime-review.md
+?? doc/research/waves-chance-noise/sequence-platform-recovery.json
+?? doc/research/waves-chance-noise/spine-platform-recovery.json
+?? doc/research/waves-chance-noise/spine-recovery.html
+?? doc/research/waves-chance-noise/structure-recovery.html
+?? doc/research/waves-chance-noise/texts/
+?? doc/research/waves-chance-noise/verification.json
+?? doc/research/waves-chance-noise/visual-review-evidence.json
+?? doc/research/waves-chance-noise/visual-review-plan.json
+?? doc/research/waves-chance-noise/visual-review.html
+?? doc/research/waves-chance-noise/w1-review.html
+?? doc/research/waves-chance-noise/w1-review.md
+?? doc/research/waves-chance-noise/w1-source-checks.json
+?? doc/space/accumulation-riemann-2026-09-10/
+?? doc/space/air-music-review-2026-09-12/
+?? doc/space/arena-relations-2026-09-12/
+?? doc/space/array-patterns-2026-09-10/
+?? doc/space/array-patterns-platform-2026-09-10/
+?? doc/space/ca-edge-review-2026-09-14/
+?? doc/space/ca-elementary-review-2026-09-13/
+?? doc/space/ca-forms-review-2026-09-14/
+?? doc/space/ca-history-review-2026-09-13/
+?? doc/space/ca-intro-review-2026-09-13/
+?? doc/space/ca-life-review-2026-09-13/
+?? doc/space/ca-proximity-review-2026-09-13/
+?? doc/space/ca-soft-rules-review-2026-09-14/
+?? doc/space/ca-volume-review-2026-09-14/
+?? doc/space/cantor-encounter-2026-09-14/
+?? doc/space/chamber-colour-2026-09-10/
+?? doc/space/change-intro-2026-09-10/
+?? doc/space/change-two-halls-2026-09-11/
+?? doc/space/color-pattern-removal-2026-09-10/
+?? doc/space/color-recovery-2026-09-09/
+?? doc/space/color-teaching-order-2026-09-09/
+?? doc/space/columns-review-2026-09-13/
+?? doc/space/curved-pattern-room-2026-09-10/
+?? doc/space/descent-landscape-2026-09-12/
+?? doc/space/drag-catwalk-2026-09-09/
+?? doc/space/effect-sound-review-2026-09-12/
+?? doc/space/entropy-review-2026-09-12/
+?? doc/space/field-receivers-2026-09-11/
+?? doc/space/flashlight-lesson-2026-09-10/
+?? doc/space/force-as-place-2026-09-12/
+?? doc/space/fractal-arc-2026-09-14/
+?? doc/space/fractal-synthesis-2026-09-14/
+?? doc/space/game-review-2026-09-12/
+?? doc/space/gaussian-review-2026-09-12/
+?? doc/space/golden-mapping-2026-09-14/
+?? doc/space/gravity-relations-2026-09-11/
+?? doc/space/grid-pallet-addresses-2026-09-10/
+?? doc/space/inside-enclosure-2026-09-13/
+?? doc/space/inside-review-2026-09-13/
+?? doc/space/kinetic-forces-2026-09-11/
+?? doc/space/koch-sierpinski-2026-09-14/
+?? doc/space/landscape-size-series-2026-09-12/
+?? doc/space/landscape-thread-2026-09-12/
+?? doc/space/launch-chamber-2026-09-11/
+?? doc/space/learning-ladder-2026-09-13/
+?? doc/space/legs-support-2026-09-11/
+?? doc/space/menger-encounter-2026-09-14/
+?? doc/space/menger-flight-2026-09-14/
+?? doc/space/motion-chamber-2026-09-11/
+?? doc/space/mushrooms-review-2026-09-12/
+?? doc/space/nail-salon-2026-09-10/
+?? doc/space/noise-galleries-2026-09-13/
+?? doc/space/paint-shared-canvas-2026-09-10/
+?? doc/space/pair-review-2026-09-13/
+?? doc/space/pattern-architecture-2026-09-10/
+?? doc/space/pattern-offset-2026-09-10/
+?? doc/space/pattern-recipe-2026-09-10/
+?? doc/space/pattern-spacing-2026-09-10.md
+?? doc/space/pattern-studio-vr-2026-09-10/
+?? doc/space/pattern-wall-2026-09-10/
+?? doc/space/points-review-2026-09-13/
+?? doc/space/rainbow-celebration-2026-09-10/
+?? doc/space/random-definition-review-2026-09-12/
+?? doc/space/recursion-compact-2026-09-14/
+?? doc/space/recursion-encounter-2026-09-14/
+?? doc/space/recursive-trees-2026-09-14/
+?? doc/space/remove-review-2026-09-12/
+?? doc/space/restoring-forces-2026-09-11/
+?? doc/space/ribbon-compact-2026-09-10/
+?? doc/space/ribbon-pattern-consolidation-2026-09-09/
+?? doc/space/ribbon-patterns-01-2026-09-10/
+?? doc/space/ribbon-patterns-02-2026-09-10/
+?? doc/space/ribbon-patterns-03-2026-09-10/
+?? doc/space/rotation-spectacle-gallery-2026-09-09/
+?? doc/space/rotation-studies-2026-09-09/
+?? doc/space/scale-drink-me-2026-09-09/
+?? doc/space/sequence-platform-recovery-2026-09-10/
+?? doc/space/sine-flow-hall-2026-09-12/
+?? doc/space/space-review-2026-09-13/
+?? doc/space/spine-platform-recovery-2026-09-10/
+?? doc/space/studio-surfaces-2026-09-10/
+?? doc/space/symmetry-seventeen-2026-09-10/
+?? doc/space/synthesis-lab-review-2026-09-12/
+?? doc/space/timing-machines-2026-09-11/
+?? doc/space/torus-review-2026-09-13/
+?? doc/space/transformation-staging-2026-09-09/
+?? doc/space/translation-merge-2026-09-09/
+?? doc/space/tutorial-pattern-2026-09-10/
+?? doc/space/vector-addition-room-2026-09-11/
+?? doc/space/vector-forces-start-2026-09-11/
+?? doc/space/vector-gap-projection-2026-09-11/
+?? doc/space/voxel-review-2026-09-13/
+?? doc/space/walk-review-2026-09-12/
+?? doc/space/wall-review-2026-09-13/
+?? doc/space/walls-partitions-2026-09-10/
+?? doc/space/wave-platform-recovery-2026-09-10/
+?? doc/space/waves-chance-noise-pilots-2026-09-10/
+?? doc/space/waves-chance-noise-r1-entropy-2026-09-11/
+?? doc/space/waves-chance-noise-r4-mushrooms-2026-09-12/
+?? doc/space/waves-chance-noise-w1-2026-09-10/
+?? doc/space/waves-chance-noise-w2-2026-09-10/
+?? doc/space/waves-chance-noise-w3-2026-09-11/
+?? doc/space/waves-chance-noise-w4-2026-09-11/
+?? doc/space/wcn-pilot-review-2026-09-10/
+?? doc/space/wcn-runtime-review-2026-09-10/
+?? doc/space/wcn-w1-review-2026-09-10/
+?? maps.txt
+?? outputs/
+?? reports_tmp/fractal_revision/
+?? tests/test_uffizi_bay_module.py
+?? tools/activation_ladder.py
+?? tools/analyze_landscape_size_series.py
+?? tools/build_air_music_review.py
+?? tools/build_ca_edge_review.py
+?? tools/build_ca_elementary_review.py
+?? tools/build_ca_forms_review.py
+?? tools/build_ca_history_review.py
+?? tools/build_ca_intro_review.py
+?? tools/build_ca_life_review.py
+?? tools/build_ca_proximity_review.py
+?? tools/build_ca_soft_rules_review.py
+?? tools/build_ca_volume_review.py
+?? tools/build_cantor_review.py
+?? tools/build_columns_review.py
+?? tools/build_effect_sound_review.py
+?? tools/build_entropy_review.py
+?? tools/build_fractal_learning_arc.py
+?? tools/build_game_review.py
+?? tools/build_gaussian_review.py
+?? tools/build_golden_mapping_review.py
+?? tools/build_inside_review.py
+?? tools/build_koch_sierpinski_review.py
+?? tools/build_landscape_article.py
+?? tools/build_learning_ladder.py
+?? tools/build_menger_encounter_review.py
+?? tools/build_menger_flight_review.py
+?? tools/build_mushrooms_review.py
+?? tools/build_pair_review.py
+?? tools/build_points_review.py
+?? tools/build_possible_bodies_guide.py
+?? tools/build_random_definition_review.py
+?? tools/build_recursion_review.py
+?? tools/build_recursive_trees_review.py
+?? tools/build_remove_review.py
+?? tools/build_sequence_platform_recovery_report.py
+?? tools/build_sine_contact_guide.py
+?? tools/build_space_review.py
+?? tools/build_spine_platform_recovery_report.py
+?? tools/build_synthesis_lab_review.py
+?? tools/build_torus_review.py
+?? tools/build_voxel_review.py
+?? tools/build_walk_review.py
+?? tools/build_wall_review.py
+?? tools/build_waves_chance_noise_plan.py
+?? tools/build_wcn_visual_review.py
+?? tools/ca_edge_review.js
+?? tools/ca_elementary_model.js
+?? tools/ca_forms_review.js
+?? tools/ca_history_model.js
+?? tools/ca_life_model.js
+?? tools/ca_proximity_model.js
+?? tools/ca_soft_rules_model.js
+?? tools/ca_volume_review.js
+?? tools/capture_wcn_visual_review.py
+?? tools/check_wave_platform_recovery.py
+?? tools/compose_docs.py
+?? tools/dream_bodies_promote.py
+?? tools/em_cartridge.py
+?? tools/em_refresh_sequence.py
+?? tools/museum_actions.py
+?? tools/museum_progress.py
+?? tools/probes/array_encounters.gd
+?? tools/probes/disco_encounter.gd
+?? tools/probes/museum_encounter.gd
+?? tools/probes/museum_snap_and_pen.gd
+?? tools/probes/museum_trace_speed.gd
+?? tools/probes/museum_triangle_fan.gd
+?? tools/probes/pickup_encounter.gd
+?? tools/recover_sequence_platforms.py
+?? tools/recover_spine_platforms.py
+?? tools/recover_wave_platforms.py
+?? tools/run_disco_encounter_probe.py
+?? tools/run_encounter_probe.py
+?? tools/run_pickup_encounter_probe.py
+?? tools/rungs4.json
+?? tools/test_artifact_roles_book_inventory.py
+?? tools/test_build_spine_artifact_order.py
+?? tools/test_museum_actions.py
+?? tools/test_museum_necklace_ledger.py
+?? tools/test_museum_progress.py
+?? tools/test_place_artifacts_room.py
+?? tools/test_recover_spine_platforms.py

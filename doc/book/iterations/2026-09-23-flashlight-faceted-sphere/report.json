@@ -1,0 +1,199 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid completed",
+      "passed": true
+    },
+    {
+      "name": "registered flashlight scene placed",
+      "passed": true
+    },
+    {
+      "name": "map keeps its authored 180-degree orientation",
+      "passed": true
+    },
+    {
+      "name": "authored seven-division receiver built",
+      "passed": true
+    },
+    {
+      "name": "sphere shares the board material",
+      "passed": true
+    },
+    {
+      "name": "shared receiver material is pale and nonemissive",
+      "passed": true
+    },
+    {
+      "name": "board and side cube preserved",
+      "passed": true
+    },
+    {
+      "name": "each triangle has one flat outward normal",
+      "passed": true
+    },
+    {
+      "name": "sphere collision follows visible mesh",
+      "passed": true
+    },
+    {
+      "name": "sphere base meets pedestal",
+      "passed": true
+    },
+    {
+      "name": "floor supports sphere approach (-5.6, 0.0, 1.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports sphere approach (-6.95, 0.0, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports sphere approach (-4.25, 0.0, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "body clearance at receiver approach (-5.6, 0.8, 1.0)",
+      "passed": true
+    },
+    {
+      "name": "body clearance at receiver approach (-6.95, 0.8, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "body clearance at receiver approach (-4.25, 0.8, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "reachable pickable lamp RedFlashlight",
+      "passed": true
+    },
+    {
+      "name": "supplied grabber moves RedFlashlight",
+      "passed": true
+    },
+    {
+      "name": "released lamp stays available RedFlashlight",
+      "passed": true
+    },
+    {
+      "name": "reachable pickable lamp GreenFlashlight",
+      "passed": true
+    },
+    {
+      "name": "supplied grabber moves GreenFlashlight",
+      "passed": true
+    },
+    {
+      "name": "released lamp stays available GreenFlashlight",
+      "passed": true
+    },
+    {
+      "name": "reachable pickable lamp BlueFlashlight",
+      "passed": true
+    },
+    {
+      "name": "supplied grabber moves BlueFlashlight",
+      "passed": true
+    },
+    {
+      "name": "released lamp stays available BlueFlashlight",
+      "passed": true
+    },
+    {
+      "name": "reachable pickable lamp WhiteFlashlight",
+      "passed": true
+    },
+    {
+      "name": "supplied grabber moves WhiteFlashlight",
+      "passed": true
+    },
+    {
+      "name": "released lamp stays available WhiteFlashlight",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sphere-at-arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: red-from-left",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: red-from-right",
+      "passed": true
+    },
+    {
+      "name": "moving held red lamp visibly changes sphere faces",
+      "passed": true
+    },
+    {
+      "name": "receiver remains still and its material unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: board-and-sphere",
+      "passed": true
+    },
+    {
+      "name": "all four lamps retain colour and on state",
+      "passed": true
+    },
+    {
+      "name": "five-division authoring option works",
+      "passed": true
+    },
+    {
+      "name": "seven-division setting restored without duplicate receivers",
+      "passed": true
+    },
+    {
+      "name": "legacy installations do not acquire new receivers",
+      "passed": true
+    },
+    {
+      "name": "focused encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "rendered_comparison": {
+      "changed_red_samples": 1184,
+      "mean_red_difference": 0.492739616527737,
+      "sphere_ray_samples": 1218
+    },
+    "sphere": {
+      "centre_above_floor_m": 1.5,
+      "diameter_m": 1.7,
+      "global_position": [
+        14.6000003814697,
+        1.5,
+        10.0
+      ],
+      "material": "f2f2f2ff",
+      "radial_divisions": 7,
+      "triangles": 42
+    }
+  },
+  "passed": true,
+  "room": "Color_Flashlight",
+  "scope": "Actual isolated museum; native Compatibility renders; supplied XRTools grabber movement, floor rays, flat normals and receiver collision. No tracked hands, headset, learner or performance claim."
+}

@@ -1,0 +1,360 @@
+{
+  "mode": "continuation_complete_script",
+  "lesson": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+  "canonical_lesson": "commons/maps/Point_Coordinates/tutorial.md",
+  "host": "Empty Node3D PointStudy in the prepared Day Zero project; configured XR hands are supplied for Coordinates.",
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/point.gd",
+    "sha256": "604cc74e37a8eed1d7d6b6d9691b0056a7f6045eea45f6651cd00756a51cb484",
+    "provenance": "The exact tested, printed Point One script in this same iteration; no museum construction is assumed."
+  },
+  "operations": [
+    {
+      "id": "body-reference",
+      "kind": "replace",
+      "before": "var point: StaticBody3D\n",
+      "after": "var point: XRToolsPickable\nvar readout: Label3D\n"
+    },
+    {
+      "id": "body-construction",
+      "kind": "replace",
+      "before": "    point = StaticBody3D.new()\n",
+      "after": "    point = XRToolsPickable.new()\n"
+    },
+    {
+      "id": "pickup-settings",
+      "kind": "insert_after",
+      "anchor": "    point.position = CENTRE\n",
+      "text": "    point.freeze = true\n    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC\n    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN\n    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE\n    point.collision_layer = 4\n    point.collision_mask = 196615\n"
+    },
+    {
+      "id": "live-readout",
+      "kind": "insert_after",
+      "anchor": "    add_child(point)\n",
+      "text": "\n    readout = Label3D.new()\n    readout.position = Vector3(0, 1.6, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.005\n    add_child(readout)\n\nfunc _process(_delta: float) -> void:\n    var world_position := point.global_position\n    var local_position := to_local(world_position)\n    readout.text = \"LOCAL \" + str(local_position) + \"\\nWORLD \" + str(world_position)\n"
+    }
+  ],
+  "printed_complete_script_equals_native_input": true,
+  "exercise_variants": {
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/variants/pickup-disabled.gd": {
+      "sha256": "18577a7dc11333430cca16afb4f6fb8d6bf22281e9640e3f68b77f5d7ff7afaf",
+      "native_filename": "point_coordinates_disabled.gd",
+      "edit": {
+        "kind": "replace",
+        "before": "    add_child(point)\n",
+        "after": "    point.enabled = false\n    add_child(point)\n"
+      }
+    }
+  },
+  "composed_equals_printed_complete_script": true,
+  "sources": [
+    {
+      "path": "commons/maps/Point_Coordinates/tutorial.md",
+      "sha256": "0438628e8a37f4e7d602241a967d3db9c99ca06c2a4f4e80af22e7d883d519e5"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/tutorial.md",
+      "sha256": "0438628e8a37f4e7d602241a967d3db9c99ca06c2a4f4e80af22e7d883d519e5"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_One/tutorial.md",
+    "commons/maps/Point_Coordinates/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/run_checks.py",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/verify.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/point.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/expected.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/next-input.json",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/expected.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/next-input.json",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/assembled.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/radius-030.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/centre-170.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/boundary-disabled.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/surface-hidden.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/variants/pickup-disabled.gd"
+  ],
+  "checks": [
+    {
+      "id": "point_coordinates/default/pickable_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The continuation gives the same student construction XR Tools pickup behaviour."
+    },
+    {
+      "id": "point_coordinates/default/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_coordinates/default/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_coordinates/default/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_coordinates/default/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_coordinates/default/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_coordinates/default/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_coordinates/default/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_coordinates/default/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_coordinates/default/geometry_and_pose_carried",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The incoming Point One snapshot and Coordinates construction have identical dimensions, mesh defaults, material state and world pose."
+    },
+    {
+      "id": "point_coordinates/default/near_and_frozen",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point starts frozen, uses near grabbing and freezes after release."
+    },
+    {
+      "id": "point_coordinates/default/settings_before_tree",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "XR Tools cached the configured layers and mask during tree entry."
+    },
+    {
+      "id": "point_coordinates/default/readout_created",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The station owns one readout alongside its single point."
+    },
+    {
+      "id": "point_coordinates/default/readout_settings",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The readout has the size and local placement taught in the continuation."
+    },
+    {
+      "id": "point_coordinates/default/initial_readout",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/default/outside",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The controller begins outside the real near-grab detector."
+    },
+    {
+      "id": "point_coordinates/default/near_eligible",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Actual Area3D overlap selects the constructed point through the real pickup library."
+    },
+    {
+      "id": "point_coordinates/default/disabled_denies_pickup",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Disabling the same point denies selection and pickup."
+    },
+    {
+      "id": "point_coordinates/default/held",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "XR Tools holds the existing student-built point."
+    },
+    {
+      "id": "point_coordinates/default/held_layer",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The held body uses XR Tools' held-object collision settings."
+    },
+    {
+      "id": "point_coordinates/default/body_follows",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The real grab driver moves the body by the controller displacement."
+    },
+    {
+      "id": "point_coordinates/default/children_follow",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The existing surface and boundary follow the held body together."
+    },
+    {
+      "id": "point_coordinates/default/resources_retained",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Holding and movement retain the original child nodes and mesh/shape resources."
+    },
+    {
+      "id": "point_coordinates/default/held_readout",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/default/released",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Library release clears the hold."
+    },
+    {
+      "id": "point_coordinates/default/release_settings",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Release freezes the point and restores its configured layers."
+    },
+    {
+      "id": "point_coordinates/default/release_stays",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point and both children remain where released while the controller leaves."
+    },
+    {
+      "id": "point_coordinates/default/released_readout",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/default/parent_frame_change",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Translating and rotating the unit-scale station preserves the point's local position and changes its world position."
+    },
+    {
+      "id": "point_coordinates/default/changed_frame_readout",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/default/body_change_updates",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Moving the point after release changes the live coordinate text."
+    },
+    {
+      "id": "point_coordinates/default/moved_body_readout",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/fresh_disabled_settings",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The fresh edited script disables pickup before tree entry and retains its collision settings."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/physical_overlap",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The disabled point still enters the real near-grab Area3D through its collider."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/cannot_select_or_hold",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The freshly disabled point cannot be selected or held by the pickup library."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/boundary_remains",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Disabling pickup preserves the point's native physics boundary."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/readout_remains",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The running _process readout matches independent station-frame and world-frame positions."
+    },
+    {
+      "id": "point_coordinates/disabled_before_tree/does_not_follow",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The disabled point remains fixed when the controller leaves."
+    }
+  ],
+  "native_report": "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/report-runtime.json"
+}

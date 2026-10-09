@@ -1,0 +1,41 @@
+{
+  "started": "2026-09-14T21:52:48+02:00",
+  "finished": "2026-09-14T21:53:22+02:00",
+  "pid": 38836,
+  "exit": 0,
+  "checks": 38,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/genetic_probe_base.gd": "26c1cc320ab06002e8a549afe1b884df91623f35b452c43157a0087fbd02f664",
+    "ada_run/genetic_acceptance.gd": "7f170297b9a6aab957b1d929a06e3a6a66b0984b8dcd468a1fcb4500e460aa38",
+    "commons/maps/PG_Genetic_Evolution/map_data.json": "0a233bfdbf5912b511d4bb2c21108e44ac1d23a6e2691b6472f91737d18c1f31",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/genetic-review-2026-09-14/review-plan.json": "b7035bd5ee5129e23ea2c5676a3a5a611e3f46277841589f411e6f15ebf04264",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn": "16a3cbb57982626ab1057e9baced1419dd8af1f03a930cb494a4def15db8e9eb",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd": "f441c49e9eea4f190d1c77e63725f5f6b5a91ca6954f95dd8adced29ccd9f495",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd": "5635e4f2a208b0b5941833c5e9fd9315e65867475ef4b2f4be10f8c61bd6767b",
+    "commons/artifacts/science_screen/science_screen.tscn": "3c67ce5e09a8a433d75343bc5feb16fb7d3f1ecea208d749477a4e73ac190f96",
+    "commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/proceduralgeneration.json": "4cb34bd39e928092458716e455a660a21336d4e1cc3eddda1d430cc9bf8c608b",
+    "commons/data/trunk_branches.json": "a44d1d4f6a6301737de8c574db225bc76ed0bac8e64579324da78b0c23e9e5ff",
+    "commons/maps/PG_Genetic_Evolution/final.md": "6b1ec488e300516648f1de19ae3ae479841e416d590d801debcf43b7a348c2df",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/genetic_museum.gd": "566d22dd5069a7843512b8bc267ca483f31c96a30e465cc7f57b23063c31be6c",
+    "algorithms/proceduralgeneration/growth_systems/genetic_programming/selection_lesson.gd": "1746235e0adf17c2639c2cc536f4e5fe1d07f2b30c5ae3e8540af372e323b650"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "known_startup_errors": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+  ],
+  "known_startup_error_reason": "Unresolved default audio bus UID in project.godot; exact same diagnostic present before hall changes. Muted capture; human audio unverified."
+}

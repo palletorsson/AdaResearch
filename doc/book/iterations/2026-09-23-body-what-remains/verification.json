@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "reading snapshot matches canonical final",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors retained in order",
+      "passed": true
+    },
+    {
+      "name": "three code excerpts retained verbatim",
+      "passed": true
+    },
+    {
+      "name": "opening and closing retained",
+      "passed": true
+    },
+    {
+      "name": "partial body record and following visitor question retained",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/maps/Trans_Body/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/artifacts/carve_grid/carve_grid.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/artifacts/approach_wall/approach_wall.gd",
+      "passed": true
+    },
+    {
+      "name": "current core text hash",
+      "passed": true
+    },
+    {
+      "name": "all other core records retained",
+      "passed": true
+    },
+    {
+      "name": "all 80 museum checks pass",
+      "passed": true
+    },
+    {
+      "name": "all five selected walks complete",
+      "passed": true
+    },
+    {
+      "name": "cut records actual deletion and persists",
+      "passed": true
+    },
+    {
+      "name": "all measured block bases sit on deck",
+      "passed": true
+    },
+    {
+      "name": "final log contains no script or parse error",
+      "passed": true
+    },
+    {
+      "name": "standalone regression passes",
+      "passed": true
+    },
+    {
+      "name": "regression changes only output path",
+      "passed": true
+    },
+    {
+      "name": "book figure exists at full width",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact the-cut-remains.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact Trans_Body.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact SUMMARY.md",
+      "passed": true
+    }
+  ],
+  "visual_inspection": "All eight final native captures and paired book figure inspected. Same camera within each comparison. Controlled walking inputs, not a headset or learner trial."
+}

@@ -1,0 +1,37 @@
+{
+  "corrections": [
+    {
+      "number": 1,
+      "prompt": "Edit the attached six-panel comic with only these two precise diagram corrections. Preserve every title, caption, student, museum, panel border and the entire middle row. TOP LEFT: shorten the separation of the two solid spheres so their centers are about 120 image pixels apart, exactly matching the center-to-center separation of the solid white A and black B in the TOP RIGHT. Both panels have the same tabletop camera scale. Adjust hands naturally. The red arrows in top left and top right must be IDENTICAL LENGTH. Top right grey previous-position spheres also have this identical separation. This depicts translating BOTH endpoints without changing their difference. BOTTOM RIGHT: turn the foreground starting black sphere into a faint translucent GREY GHOST sphere, preserving the one solid black sphere on the destination plinth. The starting sphere is the recorded past position, not a second physical body. Preserve the path diagram and the rest of the image. Do not redesign."
+    },
+    {
+      "number": 5,
+      "prompt": "Edit the attached six-panel comic narrowly, preserving all six scenes, character, typography and architecture. Correct the physics labels in TOP LEFT: white exhaust streams still point DOWN AND BACK; REMOVE both amber downward arrows and their 'F reaction' labels completely. Instead add ONE amber arrow alongside the student's torso pointing UP AND RIGHT, exactly opposite the overall down/back exhaust, labelled 'thrust'. This arrow is force on the student. TOP RIGHT keep cyan velocity right and downward g unchanged. MIDDLE LEFT: remove the two large red vector 'F' labels above the identical arrow fields, because these are generic direction samples, not claimed forces. Replace with the small neutral word 'field' on each tray. Keep tray labels velocity / acceleration and every small field arrow. MIDDLE RIGHT clarify the grey ghost dots: in velocity tray make their center separations exactly equal; in acceleration tray their separations increase successively. Preserve only one solid black current point on each tray. BOTTOM ROW unchanged. Every correction must remain perfectly integrated into the same illustrated print style."
+    },
+    {
+      "number": 7,
+      "prompt": "Edit only the BOTTOM LEFT panel (idea 21 setup) of the attached comic, leaving the other FIVE panels, all captions and lettering completely unchanged. The setup must have exactly the same apparatus as bottom right: two fixed end posts at far left and far right; left coiled spring attached from LEFT post to left black sphere; right coiled spring attached from right black sphere to RIGHT post. Remove the erroneous central post and the extra spring extending leftwards from the right sphere. No post or spring between the two balls. The two black spheres face each other with a clear small air gap between them, each tethered ONLY to its own outer post. Keep the student watching at left and the same museum table. Match bottom right perfectly for apparatus continuity, but balls are separated before contact. Preserve all top/middle rows and bottom right."
+    }
+  ],
+  "additional_corrections": [
+    {
+      "number": 1,
+      "pass": 2,
+      "source": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-faa4442d-9550-4f09-9321-dcd852e32c43.png",
+      "prompt": "Preserve this comic exactly except redraw TOP RIGHT PANEL idea 01. Critical correction: keep A and B the SAME DISTANCE APART as top left. Make the solid white sphere A at image x700 and solid black sphere B at x925, both centers y488. These centers are 225 pixels apart, exactly matching TOP LEFT x145 to x370. Put same-size red arrow between them. Repose student's arms to these sphere centers. The GREY GHOST old A and B centers are x550 and x775, y488: also 225 pixels apart. Ghosts may overlap the new diagram but remain fully transparent, and the new pair is solid. Both endpoints have translated exactly150 pixels, same direction. Red arrows same length, old ghost connecting arrow same length. Keep middle and bottom rows completely unchanged. Do not shrink A-to-B spacing in the new position."
+    },
+    {
+      "number": 9,
+      "pass": 1,
+      "source": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-de98b9df-797f-4d66-9313-bc4fbca34723.png",
+      "prompt": "Edit only TOP ROW idea25 of attached comic; all other panels and text unchanged. This is ATTRACTION TOWARD THE STUDENT'S HELD SPHERE, not repulsion. TOP LEFT: reverse both dashed amber arrowheads so they point from the small sphere and doorstop cube TOWARD the held black catalyst in student's hand at left. TOP RIGHT: the smaller sphere now floats just left of its vacated plinth, on its way toward student. The doorstop cube slides LEFT away from the door toward student. Draw two separate cyan arrows that point LEFT TOWARD THE HELD SPHERE: one from the small floating sphere left/up toward hand, one from cube diagonally left/up toward hand. Remove all right-facing cyan arrows and the spurious connecting path from hand to sphere to cube. The hand sphere stays exactly held. Door behind the vacated cube visibly begins swinging closed, same hinge and frame. Preserve headline, captions, student and museum style. Middle and bottom rows unchanged."
+    },
+    {
+      "number": 10,
+      "pass": 1,
+      "source": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-7d990d8f-0d68-49d9-af74-fd5771373ade.png",
+      "prompt": "Preserve the attached comic and ALL text. Edit BOTTOM RIGHT PANEL ONLY. There must be ONE solid black point: it is resting on the final high off-white plinth at the right. The extra black ball by the student's hand must instead be a very faint translucent grey recorded previous position, not a second solid black ball. Keep the rising metal pole ramp hinged at left and supported near final plinth. Remove the erroneous duplicate pole that extends from lower left hinge across the floor through bottom-right panel border; the single pole has been raised and reused as the ramp, so there cannot also be another copy lying across floor. Preserve the cubes and conveyor in the aftermath, the student, all other panels and the captions. Make the final delivery read as one object moved to its destination via reused physical materials."
+    }
+  ],
+  "review_note": "Corrected thrust direction, generic field labels, spring attachment, attraction direction and duplicate solid point. Translation panel perspectives remain schematic; numeric comparison belongs to an engine test or exact diagram."
+}

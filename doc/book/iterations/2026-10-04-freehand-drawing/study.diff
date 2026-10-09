@@ -1,0 +1,23 @@
+--- study.gd before
++++ study.gd after
+@@ -57,6 +57,7 @@
+ const SAVE_PATH := "user://painting-space-v2.save"
+ 
+ func _ready() -> void:
++    get_window().focus_exited.connect(_end_stroke)
+     font.load_dynamic_font("res://JetBrainsMono-Medium.ttf")
+     target_root = self
+     _room()
+@@ -634,6 +635,12 @@
+             if t > 0:
+                 return {"position": origin + ray * t}
+     return {}
++
++func _end_stroke() -> void:
++    # A mouse release outside the window may never reach this scene.
++    drawing = false
++    has_last_sample = false
++    tick = 0.0
+ 
+ func _input(event: InputEvent) -> void:
+     if event is InputEventMouse:

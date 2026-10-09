@@ -1,0 +1,11 @@
+--- Trans_Pre/before
++++ Trans_Pre/final.md
+@@ -24,6 +24,8 @@
+ rotate_y(rotation_speed * delta)
+ ```
+ 
++In the first room, the counter received `delta` without using it. Here that interval has a job: multiplying the turning speed by the elapsed seconds gives the turn to add now. A longer interval calls for a larger turn.
++
+ The cube can rise and turn at the same time. Both movements belong to the animation you are watching.
+ 
+ At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is **scale**.

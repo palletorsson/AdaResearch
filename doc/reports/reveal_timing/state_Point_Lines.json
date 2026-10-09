@@ -1,0 +1,549 @@
+{
+ "hall": "Point_Lines",
+ "hall_description": "",
+ "chapter_opening": "",
+ "stations": [
+  {
+   "token": "line_proof_pair",
+   "cell": [
+    11,
+    1
+   ],
+   "what_it_is": "Two adjacent PlusLinePuzzle copies start with the same scattered endpoints and visible target rings. A tests target positions, perpendicular directions and coincident centres; B tests only the latter two relations. Grab endpoints to build each cross, then use the move buttons to translate both lines",
+   "readable_text": [
+    {
+     "text": "WHAT COUNTS AS A PLUS?",
+     "set_in": "_ready"
+    },
+    {
+     "text": "Make a cross. Move both lines. Compare the answers.",
+     "set_in": "_ready"
+    },
+    {
+     "text": "if i == 0 else",
+     "set_in": "_ready"
+    },
+    {
+     "text": "NOT YET",
+     "set_in": "_ready"
+    },
+    {
+     "text": "MOVE LEFT",
+     "set_in": "_ready"
+    },
+    {
+     "text": "RESET",
+     "set_in": "_ready"
+    },
+    {
+     "text": "MOVE RIGHT",
+     "set_in": "_ready"
+    },
+    {
+     "text": "ACCEPTED",
+     "set_in": "_show_verdict"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/artifacts/line_proof_pair/line_proof_pair.gd"
+  },
+  {
+   "token": "player_trace",
+   "cell": [
+    2,
+    0
+   ],
+   "what_it_is": "A recorder that turns the player's motion into a visible line in space. Every step writes another point, so translation through the room becomes geometry rather than a forgotten action. The artifact makes path and trajectory tangible, especially when compared against grids and axis-constrained motio",
+   "readable_text": [],
+   "captions_beside_it": [
+    "opening"
+   ],
+   "chapter_passage": "Turn and look at the route your movement has left behind. Compare it with the stripe. That small sideways step is visible now.[^point-lines-ahmed-deviation]\n\nThe recorder saves sampled positions and joins them. In VR it follows the headset's horizontal position at the rig's floor height; on desktop it follows the walker. The resulting line records one part of your movement.\n\nChoose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.\n\nThe trace has kept more positions. How many did it need? What happened between the ones it kept?",
+   "source": "commons/primitives/point/player_trace.gd"
+  },
+  {
+   "token": "line_demo",
+   "cell": [
+    5,
+    2
+   ],
+   "what_it_is": "snap_connection(pointA, pointB) → line — demonstrate the SnapConnectionManager wiring",
+   "readable_text": [],
+   "captions_beside_it": [
+    "opening",
+    "crossing"
+   ],
+   "chapter_passage": "Two black points wait beside a barrier: **DO NOT CROSS.** Bring them near one another and release to request a connection. Watch for the segment between them. What else moved?\n\nThe barrier flies apart.\n\nKeep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.\n\nAlready something else has attached itself to the lesson. Joining two points has opened a passage.",
+   "source": "commons/primitives/snappoint/snap_connection_manager.gd"
+  },
+  {
+   "token": "do_not_cross_barrier",
+   "cell": [
+    7,
+    2
+   ],
+   "what_it_is": "A line you must not cross, rebuilt PROCEDURALLY - no glb, every mesh built in _ready(). Two forms as a declared axis: `sawhorse` (the New York police barricade - a straight wooden plank painted NYPD blue on A-frame legs, the legend stencilled white on both faces) and `tape` (two steel posts and a ri",
+   "readable_text": [],
+   "captions_beside_it": [
+    "crossing"
+   ],
+   "chapter_passage": "Try crossing where the barrier stood. While intact, its collider reached from the floor to the bar; the visible gap beneath the plank did not let you through. Disconnecting the points does not rebuild it.\n\nOn the first connection, the demonstration calls the nearby barrier's `trigger_explosion()`. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.\n\nThe words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.\n\nThere is a whole inquiry waiting there. Keep the question with you as you move to the next pair of endpoints.",
+   "source": "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd"
+  },
+  {
+   "token": "line",
+   "cell": [
+    16,
+    2
+   ],
+   "what_it_is": "Interactive measuring line linking two grab spheres and rendering a cylinder with live distance text.",
+   "readable_text": [
+    {
+     "text": "none",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "numeral",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "gradation",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "lattice",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "readout",
+     "set_in": "_read_readout"
+    },
+    {
+     "text": "%.2f",
+     "set_in": "_build_rule"
+    },
+    {
+     "text": "Length: 0.00m",
+     "set_in": "create_length_label"
+    },
+    {
+     "text": "Length: %.2fm",
+     "set_in": "update_length_label"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "This line has two ends you can hold. Pull them apart, then bring them closer. Watch the length display. Can you find a span of one metre?\n\nHold one end still and move the other around it. Try keeping the same distance. The segment can turn while its length stays steady. Once we choose to go from A to B, we can calculate a displacement with a distance and a direction.\n\nHere is an example using the positions we began learning to write in the first room:\n\n```gdscript\nvar a := Vector3(0, 0, 0)\nvar b := Vector3(1, 0, 0)\nvar displacement := b - a\nvar distance := displacement.length()\n```\n\n`b - a` gives the displacement from the first position to the second: here, one unit along X. In this room we use that unit as a metre. `length()` gives the magnitude of that displacement, the straight distance between the endpoints.\n\nChange either position and calculate again. The coordinates can change; we still have two endpoints and the segment between them. We have a small way to describe something that our hands can alter.\n\nEven here, another question appears. Your hand may keep moving while the rounded number stays the same. How much difference can a display show? Remember it when we reach Trace and Grid.\n\nTwo points were enough to begin. They have not made the world small.\n\nNearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.[^point-lines-ingold]\n\nFor now, hold on to the connection you made and the distance you changed. The other experiments remain available for a return.\n\nThe clock in the first room was already running when we arrived. Beginning required leaving some code unread. Continuing asks us to choose a thread and let other questions remain open.\n\nAhead, a line has acquired words.",
+   "source": "commons/primitives/line/line.gd"
+  },
+  {
+   "token": "scale_lines",
+   "cell": [
+    17,
+    2
+   ],
+   "what_it_is": "[100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible",
+   "readable_text": [
+    {
+     "text": "Label",
+     "set_in": "setup_scale_lines"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/scale_lines.gd"
+  },
+  {
+   "token": "laser_measure",
+   "cell": [
+    8,
+    4
+   ],
+   "what_it_is": "Handheld laser distance measurement tool with LCD display",
+   "readable_text": [
+    {
+     "text": "Display Settings",
+     "set_in": "(top level)"
+    }
+   ],
+   "captions_beside_it": [
+    "crossing"
+   ],
+   "chapter_passage": "",
+   "source": "commons/primitives/laser_measure/laser_measure.gd"
+  },
+  {
+   "token": "modulor_man_demo",
+   "cell": [
+    5,
+    5
+   ],
+   "what_it_is": "Le Corbusier Modulor-proportioned human figure used as a scale reference in line-builder and proportion-study scenes.",
+   "readable_text": [],
+   "captions_beside_it": [
+    "crossing"
+   ],
+   "chapter_passage": "",
+   "source": "algorithms/wavefunctions/line_builder_3d/modulor_man_demo.gd"
+  },
+  {
+   "token": "parallel_line_puzzle",
+   "cell": [
+    12,
+    5
+   ],
+   "what_it_is": "Interactive puzzle: drag line endpoints to align two lines to be parallel.",
+   "readable_text": [
+    {
+     "text": "ParallelLogicDisplay",
+     "set_in": "_complete_puzzle"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/puzzles/parallel_line_puzzle.gd"
+  },
+  {
+   "token": "laser_measure",
+   "cell": [
+    8,
+    6
+   ],
+   "what_it_is": "Handheld laser distance measurement tool with LCD display",
+   "readable_text": [
+    {
+     "text": "Display Settings",
+     "set_in": "(top level)"
+    }
+   ],
+   "captions_beside_it": [
+    "crossing"
+   ],
+   "chapter_passage": "",
+   "source": "commons/primitives/laser_measure/laser_measure.gd"
+  },
+  {
+   "token": "grabbable_line",
+   "cell": [
+    15,
+    6
+   ],
+   "what_it_is": "A line segment you grab as one object — pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
+   "readable_text": [
+    {
+     "text": "Display",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "%.2fm",
+     "set_in": "_rebuild"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/grabbable_line.gd"
+  },
+  {
+   "token": "laser_measure",
+   "cell": [
+    16,
+    8
+   ],
+   "what_it_is": "Handheld laser distance measurement tool with LCD display",
+   "readable_text": [
+    {
+     "text": "Display Settings",
+     "set_in": "(top level)"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/laser_measure/laser_measure.gd"
+  },
+  {
+   "token": "line",
+   "cell": [
+    1,
+    11
+   ],
+   "what_it_is": "Interactive measuring line linking two grab spheres and rendering a cylinder with live distance text.",
+   "readable_text": [
+    {
+     "text": "none",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "numeral",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "gradation",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "lattice",
+     "set_in": "(top level)"
+    },
+    {
+     "text": "readout",
+     "set_in": "_read_readout"
+    },
+    {
+     "text": "%.2f",
+     "set_in": "_build_rule"
+    },
+    {
+     "text": "Length: 0.00m",
+     "set_in": "create_length_label"
+    },
+    {
+     "text": "Length: %.2fm",
+     "set_in": "update_length_label"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "This line has two ends you can hold. Pull them apart, then bring them closer. Watch the length display. Can you find a span of one metre?\n\nHold one end still and move the other around it. Try keeping the same distance. The segment can turn while its length stays steady. Once we choose to go from A to B, we can calculate a displacement with a distance and a direction.\n\nHere is an example using the positions we began learning to write in the first room:\n\n```gdscript\nvar a := Vector3(0, 0, 0)\nvar b := Vector3(1, 0, 0)\nvar displacement := b - a\nvar distance := displacement.length()\n```\n\n`b - a` gives the displacement from the first position to the second: here, one unit along X. In this room we use that unit as a metre. `length()` gives the magnitude of that displacement, the straight distance between the endpoints.\n\nChange either position and calculate again. The coordinates can change; we still have two endpoints and the segment between them. We have a small way to describe something that our hands can alter.\n\nEven here, another question appears. Your hand may keep moving while the rounded number stays the same. How much difference can a display show? Remember it when we reach Trace and Grid.\n\nTwo points were enough to begin. They have not made the world small.\n\nNearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.[^point-lines-ingold]\n\nFor now, hold on to the connection you made and the distance you changed. The other experiments remain available for a return.\n\nThe clock in the first room was already running when we arrived. Beginning required leaving some code unread. Continuing asks us to choose a thread and let other questions remain open.\n\nAhead, a line has acquired words.",
+   "source": "commons/primitives/line/line.gd"
+  },
+  {
+   "token": "wall_abstract",
+   "cell": [
+    7,
+    11
+   ],
+   "what_it_is": "Fifteen framed abstract works for a wall. Four hard divisions (horizontal, vertical, diagonal, off-centre) and one soft one (horizon_soft, a vertex-colour gradient with no edge at all). Three states of the corpus's first argument: point_one, two_points, segment_drawn. The chapter's fork as a pair: g",
+   "readable_text": [],
+   "captions_beside_it": [
+    "projection"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/wall_abstract/wall_abstract.gd"
+  },
+  {
+   "token": "axis_line",
+   "cell": [
+    8,
+    11
+   ],
+   "what_it_is": "A single emissive bar of length_m x thickness_m, positioned at cross_height_m and rotated about Z by the orientation axis: horizontal 0, vertical 90, diagonal +45, diagonal_2 -45. Knobs: orientation, length_m, thickness_m, cross_height_m, line_color, glow.",
+   "readable_text": [],
+   "captions_beside_it": [
+    "projection"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/axis_line/axis_line.gd"
+  },
+  {
+   "token": "wall_abstract",
+   "cell": [
+    9,
+    11
+   ],
+   "what_it_is": "Fifteen framed abstract works for a wall. Four hard divisions (horizontal, vertical, diagonal, off-centre) and one soft one (horizon_soft, a vertex-colour gradient with no edge at all). Three states of the corpus's first argument: point_one, two_points, segment_drawn. The chapter's fork as a pair: g",
+   "readable_text": [],
+   "captions_beside_it": [
+    "projection"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/wall_abstract/wall_abstract.gd"
+  },
+  {
+   "token": "two_point_ruler",
+   "cell": [
+    13,
+    11
+   ],
+   "what_it_is": "Two brass marks 0.5 m apart on a thin bar at reading height, a TextScreen readout above, and two blocks on the floor: Subject (pale, measured, never altered) and Witness (blue, unmeasured, scaled by every reading, labelled 'the other block'). measure() returns the reading in metres and tweens the wi",
+   "readable_text": [
+    {
+     "text": "READS",
+     "set_in": "_build"
+    }
+   ],
+   "captions_beside_it": [
+    "projection"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/two_point_ruler/two_point_ruler.gd"
+  },
+  {
+   "token": "perspective_lines",
+   "cell": [
+    5,
+    14
+   ],
+   "what_it_is": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
+   "readable_text": [],
+   "captions_beside_it": [
+    "violence"
+   ],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/perspective_lines.gd"
+  },
+  {
+   "token": "perspective_lines",
+   "cell": [
+    5,
+    15
+   ],
+   "what_it_is": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
+   "readable_text": [],
+   "captions_beside_it": [
+    "violence"
+   ],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/perspective_lines.gd"
+  },
+  {
+   "token": "anamorphic_cross",
+   "cell": [
+    7,
+    15
+   ],
+   "what_it_is": "Two emissive bars, orthogonal, separated along -Z by depth_gap_m (2.6). An Area3D at the midpoint charges the player once on entry via arrive(), fading both bars to 0.85 transparency rather than deleting them - they stop pretending rather than vanish. Health is reached BY CAPABILITY (/root/GameManag",
+   "readable_text": [],
+   "captions_beside_it": [
+    "violence"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/anamorphic_cross/anamorphic_cross.gd"
+  },
+  {
+   "token": "axis_line",
+   "cell": [
+    10,
+    15
+   ],
+   "what_it_is": "A single emissive bar of length_m x thickness_m, positioned at cross_height_m and rotated about Z by the orientation axis: horizontal 0, vertical 90, diagonal +45, diagonal_2 -45. Knobs: orientation, length_m, thickness_m, cross_height_m, line_color, glow.",
+   "readable_text": [],
+   "captions_beside_it": [
+    "violence"
+   ],
+   "chapter_passage": "",
+   "source": "commons/artifacts/axis_line/axis_line.gd"
+  },
+  {
+   "token": "perspective_lines",
+   "cell": [
+    5,
+    16
+   ],
+   "what_it_is": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
+   "readable_text": [],
+   "captions_beside_it": [
+    "violence"
+   ],
+   "chapter_passage": "",
+   "source": "commons/primitives/line/perspective_lines.gd"
+  },
+  {
+   "token": "science_screen",
+   "cell": [
+    16,
+    17
+   ],
+   "what_it_is": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+   "readable_text": [
+    {
+     "text": "tags",
+     "set_in": "spine_hints"
+    },
+    {
+     "text": "label",
+     "set_in": "spine_hints"
+    },
+    {
+     "text": "static",
+     "set_in": "spine_hints"
+    },
+    {
+     "text": "else",
+     "set_in": "_draw"
+    },
+    {
+     "text": "DATA",
+     "set_in": "_draw_data_panel"
+    },
+    {
+     "text": "X POSITION",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "value",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "color",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "Y POSITION",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "DISTANCE",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "%.3f",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "TRAIL",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "SCORE",
+     "set_in": "_draw_point_tracker"
+    },
+    {
+     "text": "|AB| LENGTH",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "THETA ANGLE",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "DELTA X",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "%+.3f",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "DELTA Y",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "MIDPOINT",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "(%.2f, %.2f)",
+     "set_in": "_draw_line_tracker"
+    },
+    {
+     "text": "POINTS",
+     "set_in": "_draw_dot_tracker"
+    },
+    {
+     "text": "PATH LENGTH",
+     "set_in": "_draw_dot_tracker"
+    },
+    {
+     "text": "%.3f m",
+     "set_in": "_draw_dot_tracker"
+    },
+    {
+     "text": "ZOOM",
+     "set_in": "_draw_dot_tracker"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/artifacts/science_screen/science_screen.gd"
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -9,11 +9,11 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Mushrooms/final.md",
+-    "text_sha256": "673ef28041b76753d319aed4e9c0b50d65797c8efda8d294a95bc53fbeed54da",
++    "text_sha256": "4dd782143a1fe5953230da9837a3eae0370b86fc8a680db4426e799a2f7da904",
+     "map_sha256": "7b331ea18775e648a74b0f574c7bbcc7bd2fbf142a697005b43bd13f74e40cde",
+     "learner_verified": false,
+     "verification_scope": "Fresh wardrobe/replay/construction checks and bounded actual-museum staging/approach checks. No eating effect or headset validation.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Mushrooms/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   },
+   "Random_Space_Geometry": {
+     "primary_tokens": [
+@@ -23,11 +23,11 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Space_Geometry/final.md",
+-    "text_sha256": "5a4da0bac6a3b7fc22c1c796c54342b96b86a96ae57f7ecc6866f344f957cbf9",
+-    "map_sha256": "623f375fab280f2b8f80d98749e9a6704569df68b7103ae66d3a14f96a12ae40",
++    "text_sha256": "a1c6b125423fb29314b40c675295bb9a1441c62152430c192581d9873b4b9643",
++    "map_sha256": "674104d67894c18a2652cbbf9433e09ca9778593ec95e030111e95a556897f60",
+     "learner_verified": false,
+     "verification_scope": "Current source and restored navigation contract. Five companions lie beyond the source structure rectangle; museum derivation retains them, but their support and approaches need a dedicated physical check.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space_Geometry/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   },
+   "Randomness_Examples_of_Randomness": {
+     "primary_tokens": [
+@@ -40,11 +40,11 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+-    "text_sha256": "2a5c95fbf29e2522f260d7fd076f15f2fa2ec43f1ed62149374cfbb6fe124302",
+-    "map_sha256": "c09c7196da0d1dcdebe2c13d6a1f6cc94e3ba0309aeccd5065ab7ce6381d3fce",
++    "text_sha256": "1696c987d0c44693128c4a3da594bedfdabbf32bbe518f9d73cb08c49cb45062",
++    "map_sha256": "3fbc176ab65e1bb7abea9b69bc3b64d09b29bd751345b780edfc43d2035bd554",
+     "learner_verified": false,
+     "verification_scope": "Source audit of retained procedures and narrow display correction; no new full gallery learning or listening validation.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Randomness_Examples_of_Randomness/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   },
+   "Random_Pheromone": {
+     "primary_tokens": [
+@@ -58,7 +58,7 @@
+     "map_sha256": "2283ff15d3743a64c70a477b58f524f40f6d74dd52ac635a38e0405958f91901",
+     "learner_verified": false,
+     "verification_scope": "Fresh deterministic-step/reset/law comparison and actual-museum display/controls tests; rendered display scale differs from simulation-domain coordinates. No headset or full terrain traversal claim.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Pheromone/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   },
+   "Random_Space": {
+     "primary_tokens": [
+@@ -68,11 +68,11 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Space/final.md",
+-    "text_sha256": "b4e80de791aac355e329f9a110d6e65b6efa1ccc4208255c726500a0983aa642",
+-    "map_sha256": "8c6d4707ab9c2c1ae08265b865b9653777460e733c0020a0d17c570352cef765",
++    "text_sha256": "3750b3b7ea693fbfc2e8f1f766959afa3803fd1dd2e97bfa40edb89a2c008885",
++    "map_sha256": "8789bf0f24dcd8ce9aa7588de02c786ac15a045b97a1f6dd15adf7e8139af1a5",
+     "learner_verified": false,
+     "verification_scope": "Current source and restored route. The adjacent Pheromone capture emitted a 77-cell route warning in this streamed hall; investigate it in a dedicated physical traversal. No complete museum interaction or headset claim.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   },
+   "Random_Game": {
+     "primary_tokens": [
+@@ -86,10 +86,10 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Game/final.md",
+-    "text_sha256": "0ec3fc9b487bdaf6107066e765f7203037bbaeb4c16aef1b221b8126e33b05e5",
++    "text_sha256": "5a3220a1f42de10c868851eaaaedb0fca9cc38cb18a7338027e18e14b84cc6a3",
+     "map_sha256": "d1326e9ca7aa334bdf4921369db6ec249f18805afb755e46ead4005bd176e833",
+     "learner_verified": false,
+     "verification_scope": "Door timing addition: 64 native control/state/collision checks; actual museum player plate entry, direct and detour walks, reset refusal and sampled gallery bypasses. No headset/learner or whole-hall hazard/performance acceptance. Earlier encounter evidence retained in previous reviews.",
+-    "local_review": "doc/book/iterations/2026-09-24-door-timing/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+   }
+ }

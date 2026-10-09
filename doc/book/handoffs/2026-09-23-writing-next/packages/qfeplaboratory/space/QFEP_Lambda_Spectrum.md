@@ -1,0 +1,26 @@
+# QFEP_Lambda_Spectrum
+
+Authored dimensions: {"width": 17, "depth": 24, "max_height": 1}
+
+![Source plan](QFEP_Lambda_Spectrum.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/QFEP_Lambda_Spectrum/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/QFEP_Lambda_Spectrum/map_data.json)
+
+Text: [commons/maps/QFEP_Lambda_Spectrum/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/QFEP_Lambda_Spectrum/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 3,2 | `qfep_chalkboard:180:0:1` | secondary | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/qfep_chalkboard/qfep_chalkboard.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/qfep_chalkboard/qfep_chalkboard.tscn) |
+| A2 | 2,4 | `crystal_formation:0:0.5` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/primitives/crystalcluster/crystalcluster.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/crystalcluster/crystalcluster.tscn) |
+| A3 | 14,5 | `edge_particles:0:0.8:0.4` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/reactive_particle_field.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/reactive_particle_field.tscn) |
+| A4 | 2,6 | `ordered_grid:0:0.5` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/ordered_grid.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/ordered_grid.tscn) |
+| A5 | 14,10 | `chaos_particles:0:0.8:0.4` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/chaos_particles.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/chaos_particles.tscn) |
+| A6 | 8,12 | `lambda_hall:180:0:1#recommendation_control:on#recommendation_position:0.35` | primary | [commons/artifacts/registry/concept_architecture.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/concept_architecture.json) → [commons/artifacts/lambda_hall/lambda_hall.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/lambda_hall/lambda_hall.tscn) |
+| A7 | 14,15 | `phase_cube:180:0.8:1` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/phase_cube.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/phase_cube.tscn) |
+| A8 | 2,18 | `bifurcation_walkway:90:0:0.8` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/bifurcation_walkway.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/bifurcation_walkway.tscn) |
+| A9 | 14,19 | `dissolving_form:180:0.8:1` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/dissolving_form.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/dissolving_form.tscn) |
+| A10 | 5,21 | `complexity_pattern:180:0.8:1` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/complexity_pattern.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/complexity_pattern.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. `utility-index.json` resolves active codes to the literal utility registry and scene, separately from the ordinary artifact registry. Their scene sources and the grid/museum dispatch context are included. Unresolved/special dispatch stays explicitly labelled. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

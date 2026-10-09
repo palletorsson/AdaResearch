@@ -1,0 +1,30 @@
+--- before/commons/maps/Array/final.md
++++ commons/maps/Array/final.md
+@@ -44,4 +44,26 @@
+ 
+ The regular spacing helps you find a slot, but the address and the spacing are different decisions. We could place the same indexed cubes at unequal distances. An array needs a way to distinguish its entries; it does not require them to look alike, stand straight or remain occupied.
+ 
+-Carry forward two separate questions: where is the slot, and what happened to its occupant? In the next hall the copies rise above your head. A third index names a layer. To visit those layers, your body will need a permission that the array itself cannot give.
++<!-- @molnar_cube_study -->
++
++We have repeated the cube, but we do not have to repeat its fate. At each address, another decision becomes possible.
++
++The transparent study takes its starting point from Vera Molnár’s *(Des)Ordres*: concentric squares disturbed within a repeated arrangement.[^molnar] Here the squares have become nested cubes. Select one layer and reset the changes. Face it squarely, then move to one side. The drawing has depth. Lines that seemed to meet separate as you walk.
++
++Turn a little. Translate a little. Change the scale. These are the operations we brought from Transformation, now applied throughout an array. Each nested cube has its own assigned departures; the three controls let you increase or reduce them. Returning a control to the same setting brings back the same arrangement. You can compare a change without losing it to another roll of the dice.
++
++Watch one of the small grey points. Its surrounding frames can drift away, but the point stays at the indexed site. The address gives us somewhere to return and something to disagree with. How far can the frames depart before you lose the place you were following?
++
++![One layer of ordered nested cubes, the same sites with translation, rotation and scale, then four layers seen from the side.](/book-review/doc/book/iterations/2026-09-23-array-molnar-volume/array-departures.png)
++
++*The same working Godot artifact supplies these three views. Sixteen visible sites become sixty-four when all four layers are shown; each holds four nested cubes. An Ada Research spatial interpretation after Molnár.*
++
++Add the other layers. Through the transparent faces, nearby edges cross distant ones. A small displacement that was easy to follow alone can disappear among the others. More copies give us more places for difference, and more work to distinguish them. Their transparency lets us see through the structure without promising that we can read it.
++
++The rule has admitted variation, but it has also set its limits: how far to move, how much to turn, which sizes remain possible. We can open those ranges in the program. Each additional site will still ask for storage, and the machine must draw what we ask it to show. The invitation to continue has a material cost.
++
++<!-- @ -->
++
++Carry forward two separate questions: where is the slot, and what can happen at it? We have looked through layers. In the next hall the copies rise above your head, and you can enter their arrangement. To visit those layers, your body will need a permission that the array itself cannot give.
++
++[^molnar]: Vera Molnár, *(Des)Ordres*, 1974. The [Digital Art Museum](https://dam.org/museum/artists_ui/artists/molnar-vera/des-ordres/) describes the disruption of concentric squares within a repeated structure. The cubes, depth and controls here are our interpretation, not a reconstruction of her drawing or algorithm.

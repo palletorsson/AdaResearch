@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "Change_Choreography assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "paired_time full size",
+      "passed": true
+    },
+    {
+      "name": "paired_time visible",
+      "passed": true
+    },
+    {
+      "name": "paired_time controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "pair advances through the production game loop",
+      "passed": true
+    },
+    {
+      "name": "reset matches phase and rate",
+      "passed": true
+    },
+    {
+      "name": "drift changes rate without jumping either hand",
+      "passed": true
+    },
+    {
+      "name": "four percent difference gains 36 degrees in 30 seconds",
+      "passed": true
+    },
+    {
+      "name": "same rate preserves the existing gap",
+      "passed": true
+    },
+    {
+      "name": "offset changes only right phase by 45 degrees",
+      "passed": true
+    },
+    {
+      "name": "align preserves left time and unequal rates",
+      "passed": true
+    },
+    {
+      "name": "alignment with unequal rates drifts again",
+      "passed": true
+    },
+    {
+      "name": "hold freezes both local angles",
+      "passed": true
+    },
+    {
+      "name": "run resumes from retained angles",
+      "passed": true
+    },
+    {
+      "name": "reading reveals the actual state",
+      "passed": true
+    },
+    {
+      "name": "frame rates agree after equal elapsed time",
+      "passed": true
+    },
+    {
+      "name": "invalid time cannot corrupt the pair",
+      "passed": true
+    },
+    {
+      "name": "long elapsed interval remains bounded",
+      "passed": true
+    },
+    {
+      "name": "reset also restores hidden readout",
+      "passed": true
+    },
+    {
+      "name": "native paired time capture together",
+      "passed": true
+    },
+    {
+      "name": "native paired time capture drift",
+      "passed": true
+    },
+    {
+      "name": "native paired time capture same-rate",
+      "passed": true
+    },
+    {
+      "name": "paired_time bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "paired_time bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "paired_time standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "paired_time support along side 2",
+      "passed": true
+    },
+    {
+      "name": "paired_time standing clearance along side 22",
+      "passed": true
+    },
+    {
+      "name": "paired_time support along side 22",
+      "passed": true
+    },
+    {
+      "name": "paired_time capture",
+      "passed": true
+    }
+  ],
+  "map": "Change_Choreography",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

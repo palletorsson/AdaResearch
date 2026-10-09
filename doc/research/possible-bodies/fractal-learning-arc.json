@@ -1,0 +1,216 @@
+{
+  "date": "2026-09-14",
+  "route": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_CantorSet",
+    "Fractal_KochSierpinski",
+    "Fractal_MengerSponge",
+    "Fractal_GoldenSpiral",
+    "Fractal_Synthesis"
+  ],
+  "following_sequence": "lsystems",
+  "next_work": "Fractal_Synthesis",
+  "thesis": "What bodies become possible with the tools we have learned, their combinations and the resources we can afford?",
+  "halls": [
+    {
+      "map": "Fractal_Recursion",
+      "title": "A rule calls again",
+      "capability": "Repeat within a form, then branch.",
+      "carry": "From CA: a held beginning, an explicit update and attention to what a difference can retain.",
+      "question": "What is passed into another call, and what makes it stop?",
+      "encounter": "Four reachable desks compare one self-call, four self-calls, selected subdivision and an authored chair. Add levels, rearrange, change packing, choose where to split, and reveal excluded cells. All ten existing works remain. The four principal book passages follow the controls.",
+      "cost": "A call count, number of objects, smallest drawn feature and measured build time are different costs. A single selected split does not multiply the whole population.",
+      "pressure": "Does another level make a useful difference, or a difference too small for this encounter to reveal?",
+      "status": "REVIEWED · 110 Godot checks pass; physical desktop pointer, counts, repeated conditions and central aisle. Headset review remains pending.",
+      "candidates": [
+        "fractal_recursion_2",
+        "example_8_3_recursion_circles_vr",
+        "cube_subdivision",
+        "recursive_chair"
+      ],
+      "artifact_count": 10,
+      "primaries": [
+        "fractal_recursion_2",
+        "example_8_3_recursion_circles_vr",
+        "cube_subdivision",
+        "recursive_chair"
+      ],
+      "next_map": "Fractal_RecursiveTrees"
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "title": "Where growth goes",
+      "capability": "Branch, transform and vary.",
+      "carry": "From Recursion: the difference between one descendant and several, plus a stopping condition.",
+      "question": "Which paths receive further growth?",
+      "encounter": "A waiting trunk: grow one generation, then vary angle, inherited length and two/three descendants. Compare 31 and 121 segments at four generations. Across the approach, strata, bounds and terminal marks reveal a fixed-seed block tree without rebuilding it. All twelve placements remain.",
+      "cost": "Branch count can increase while individual branches become shorter. Dense drawing, collision and useful support are separate decisions.",
+      "pressure": "Which body could shelter in these branches? Which routes finish early, and why?",
+      "status": "REVIEWED · 54 rendered checks: growth, held-variable comparisons, replay, twelve placements, two physical desks and a walk around the enclosure. Headset testing remains pending.",
+      "candidates": [
+        "recursive_tree",
+        "recursive_tree_2",
+        "inverted_tree_cloud"
+      ],
+      "artifact_count": 12,
+      "primaries": [
+        "recursive_tree_2",
+        "recursive_tree"
+      ],
+      "next_map": "Fractal_CantorSet"
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "title": "What the rule keeps",
+      "capability": "Construct through repeated removal.",
+      "carry": "From Trees: descendants. From Arrays: addresses. Now descendants retain selected portions of a parent interval.",
+      "question": "What survives, and what becomes a gap?",
+      "encounter": "Advance one cut. Separate the latest intervals from their history and mark the new removals. On the retained deck, give those intervals thickness; compare three-metre, one-metre and third-metre gaps with the player body. All eight placements remain.",
+      "cost": "More intervals can coexist with less total retained length. The displayed finite construction keeps positive length; its infinite limit is a different claim.",
+      "pressure": "Can removal make room? What would count as a passage when the construction is given thickness?",
+      "status": "REVIEWED · 66 rendered checks: two physical desks, finite counts, history and ghost modes, extrusion, three gap widths, ramp and exit. Headset testing remains pending.",
+      "candidates": [
+        "cantor_set",
+        "example_8_4_cantor_set_vr",
+        "example_8_4_cantor_pagoda_vr"
+      ],
+      "artifact_count": 8,
+      "primaries": [
+        "cantor_set",
+        "example_8_4_cantor_pagoda_vr"
+      ],
+      "next_map": "Fractal_KochSierpinski"
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "title": "Detail changes measurement",
+      "capability": "Replace a segment; remove parts of a surface.",
+      "carry": "From Trace: sample resolution. From Cantor: repeated selection. From Transformation: scale and turns.",
+      "question": "How does finer detail change what can be measured?",
+      "encounter": "Follow the Koch detour between fixed endpoints. Cut a triangle, then make its removed middles the visible work. Hold an 8,000-point sample while comparing six grid sizes and three fitting ranges. All ten placements remain; the old rear room and its raised cell are retained.",
+      "cost": "Geometry, sample scale and display resolution affect different parts of the result. The equal-copy dimension formula has conditions; a non-integer dimension is not a universal definition of every fractal.",
+      "pressure": "What can we infer beyond the last visible feature? Where does this instrument stop supporting the inference?",
+      "status": "REVIEWED · 103 rendered checks: three desks, growth and removal, held-sample counts and fits, retained specimens and walking route. Headset testing remains pending.",
+      "candidates": [
+        "fractal_koch_curve",
+        "sierpinski_triangle",
+        "box_counting_dimension",
+        "sierpinski_pyramid"
+      ],
+      "artifact_count": 10,
+      "primaries": [
+        "fractal_koch_curve",
+        "sierpinski_triangle",
+        "box_counting_dimension"
+      ],
+      "next_map": "Fractal_MengerSponge"
+    },
+    {
+      "map": "Fractal_MengerSponge",
+      "title": "A hole becomes a place",
+      "capability": "Carry repeated removal into a volume.",
+      "carry": "From Koch/Sierpinski: replacement and removal. From Scale: a player has finite dimensions.",
+      "question": "Which opening can this body enter?",
+      "encounter": "The nine-metre specimen and all five works are retained. A twelve-metre glass cube lends flight: enter at floor level, rise through the central passage, circle above the sponge, then descend to leave. The movement capability belongs to the installation; the retained cubes remain solid.",
+      "cost": "The existing second generation has 400 retained cubes. A third would have 8,000. Neither count establishes acceptable headset performance or bodily access.",
+      "pressure": "A visible opening, a connected passage and an accessible route are three things to test separately.",
+      "status": "FLIGHT ADDED · museum walker and simulated XR controls checked; headset experience and the wider teaching encounter remain to develop.",
+      "candidates": [
+        "menger_sponge",
+        "diffusion_limited_aggregation"
+      ],
+      "artifact_count": 5,
+      "primaries": [
+        "menger_sponge"
+      ],
+      "next_map": "Fractal_GoldenSpiral"
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "title": "A number needs a mapping",
+      "capability": "Relate recurrence, proportion and spatial arrangement.",
+      "carry": "From the sponge: repeat within retained volumes. Here the input is a short numerical history.",
+      "question": "How does a numerical relationship become a form?",
+      "encounter": "Predict the next sum. Hold ten Fibonacci values while switching logarithmic and linear heights; compare their fixed-unit addition stacks. Inspect the retained spatial examples, then cut the upright golden rectangle, measure its remainder and add circular arcs. All seven existing artifacts remain.",
+      "cost": "Compression keeps more values in view while changing which differences are easy to compare. Repeating an arithmetic operation alone does not establish fractal geometry.",
+      "pressure": "What did the mapping make legible? What did its attractiveness persuade us to assume?",
+      "status": "REVIEWED · 93 rendered checks: two desks, values and height mappings, fixed-unit sums, rectangle proportions and arcs, retained specimens and walking route. Headset testing remains pending.",
+      "candidates": [
+        "fibonacci_sequences",
+        "golden_rectangle",
+        "fibonacci_terrain",
+        "romanesco"
+      ],
+      "artifact_count": 7,
+      "primaries": [
+        "fibonacci_sequences",
+        "golden_rectangle"
+      ],
+      "next_map": "Fractal_Synthesis"
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "title": "Choose a procedure",
+      "capability": "Compare constructions and prepare symbolic rewriting.",
+      "carry": "Bring calls, branching, removal, scale, measurement and numerical history into one comparison.",
+      "question": "Which rule could produce the space we want?",
+      "encounter": "Describe one step without using the artifact’s name. Specify what is received, retained, transformed and stopped. Carry the familiar Koch construction into the first L-system editor.",
+      "cost": "Compare procedures at declared budgets. A complex outline by itself is not evidence of entropy, accessibility or freedom.",
+      "pressure": "What must change for a different body to have room here?",
+      "status": "TRANSITION REPAIRED · now leads directly to the Koch preset in Grammar Lab.",
+      "candidates": [
+        "cantor_set",
+        "recursive_tree",
+        "koch_curve"
+      ],
+      "artifact_count": 11,
+      "primaries": [
+        "recursive_tree",
+        "cantor_set"
+      ],
+      "next_map": "LSystems_Grammar_Lab"
+    }
+  ],
+  "menger_restoration_verified": false,
+  "runtime_checks": null,
+  "interior_access_verified": false,
+  "player_input_verified": false,
+  "headset_verified": false,
+  "extensions": [
+    "Fractal_JuliaSet",
+    "Fractal_MandelbrotSet",
+    "Fractal_CrossSequence"
+  ],
+  "recursion_verified": true,
+  "recursion_checks": 110,
+  "recursion_review": "recursion-encounter.html",
+  "trees_verified": true,
+  "trees_checks": 54,
+  "trees_review": "recursive-trees.html",
+  "cantor_verified": true,
+  "cantor_checks": 66,
+  "cantor_review": "cantor-encounter.html",
+  "koch_verified": true,
+  "koch_checks": 103,
+  "koch_review": "koch-sierpinski.html",
+  "golden_verified": true,
+  "golden_checks": 93,
+  "golden_review": "golden-mapping.html",
+  "iteration_strategy": {
+    "pass_one": "Reach the end of the active spine with a grounded encounter and matching book per hall.",
+    "threshold": [
+      "observable question and feasible action",
+      "primary artifacts in both room and book",
+      "prose and code match runtime",
+      "entry, controls and exit usable in available testing",
+      "existing material preserved; unknowns recorded"
+    ],
+    "next_pass": [
+      "review transitions across sequences",
+      "fix repeated accessibility and performance problems",
+      "develop the most promising rule changes and recombinations"
+    ],
+    "headset_review": "pending; do not block desktop-supported work"
+  }
+}

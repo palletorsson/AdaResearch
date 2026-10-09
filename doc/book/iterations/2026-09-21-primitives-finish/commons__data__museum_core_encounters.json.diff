@@ -1,0 +1,124 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -60,16 +60,14 @@
+         "grab_sphere_point_snap",
+         "player_trace",
+         "grid_lines",
+-        "floating_sphere_field",
+-        "room_grammar",
+-        "simulation_grid"
+-      ],
+-      "reason": "The book follows hand and walking grids, the released trace display and supporting encounters, then introduces a walkable five-by-five plan.",
++        "plan_vitrine"
++      ],
++      "reason": "Follow held and walking addresses, replay a released trace, then enter the five-by-five plan. Its VR pens compare sampled movement with local floor addresses while retaining height.",
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Line_Grid/final.md",
+-      "text_sha256": "852cbe8a77229ef6223460a1445b29eced5cdbbd9fbc5462c0b272832a890081",
+-      "map_sha256": "1292c9fe5be130ef141812202a25b750a5854cfae7701f8a7e6f4fea1fbb8ed4",
++      "text_sha256": "b134318a11247b149f31dbe9581f58c83dc9dbd1e85dc80ad6b60f4b932c8b74",
++      "map_sha256": "bbfbfe6df30991997a87e1d2f5648dfb2e7b5682b23235a8ad1a4a1f0660116a",
+       "learner_verified": false
+     },
+     "Point_Triangle_Context": {
+@@ -77,63 +75,59 @@
+         "triangle_line_puzzle",
+         "draw_triangle_faces"
+       ],
+-      "reason": "Two principal encounters: close the triangle boundary, explicitly reveal its fill, then draw and inspect first-corner triangle fans. Other room objects remain optional comparisons.",
++      "reason": "Close a boundary and reveal its face; draw an L and shift the fan start to observe overspill without moving the boundary. The precise construction remains in the technical companion.",
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Triangle_Context/final.md",
+-      "text_sha256": "e0ae1dca3ccd0a0a8a64948bd23b561089ce96466b093e63b282ae8788d7bc21",
+-      "map_sha256": "2fe68f2e38b3314ef631347c9cb8ac109764399fc65d8ece5c5bbda0a2ac8014",
++      "text_sha256": "aaf2030cc962a6468684cd41f8774724200f1e5faed9ba4de3da3dd3b98b0ce2",
++      "map_sha256": "3abcccc1ae0abe8df5516804f9fad5e37fd02d3a53b0c562503a9028957fafba",
+       "learner_verified": false
+     },
+     "Primitives_Polythedra": {
+       "primary_tokens": [
+         "grab_trihedron",
+         "grab_tetrahedron",
+-        "pyramid_edit",
+-        "cube_scene",
+         "prism_block",
+         "concrete_barrier",
+-        "street_sign",
+-        "diamonds",
+-        "rock_spawner",
+-        "rock_scanner"
+-      ],
+-      "reason": "Preserve developed basic-polyhedra encounters and align the book with a new prism/barrier/slope/sign comparison; grouped primary artifacts follow the manuscript.",
++        "street_sign"
++      ],
++      "reason": "From open corner to enclosed tetrahedron, then compare a prism, a barrier, a slope and signs through the movements they permit or suggest. Other forms remain secondary.",
+       "status": "implemented_component_verified",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Primitives_Polythedra/final.md",
+-      "text_sha256": "9263b26bef8b6518f93e4ee7a7d47964b0e2c633381c0ebd2ff26f7418e98385",
+-      "map_sha256": "735ce11251a401cfbab04af5e0efc4dfff947eb253bc202863f0cd9933941bab",
++      "text_sha256": "e667b0ebdd52451d5fee27dfa4977839e07d2cb06e3e4e0dd32531f352dec35a",
++      "map_sha256": "c5f1b85492fe53063b0aa0234af5139bb22d2dc1c1833281c7b8c9cb845853fd",
+       "learner_verified": false
+     },
+     "Point_Animatedcube": {
+       "primary_tokens": [
+         "cube_lines",
+-        "polyhedron_nets_cube",
+-        "animatedcubebuilder"
+-      ],
+-      "reason": "Three primary encounters distinguish outline, hinged net and editable assembly. The two builder placements now expose replay, pause, restoration and triangle diagonals.",
++        "animatedcubebuilder",
++        "polyhedron_nets_cube"
++      ],
++      "reason": "Follow outline, editable assembly and hinged net in the authored order; carry the crease into the next question about smoothness.",
+       "status": "implemented_component_verified",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Animatedcube/final.md",
+-      "text_sha256": "c726cbae8cd669beae2b53a1175e393a6ee889107c89bc66458c0af077f9a99c",
++      "text_sha256": "be0b8a11652ceec72d858c551284c569ac9210f1b46701ecdacf29c9d39efd6e",
+       "map_sha256": "5806e445ef6b724ad63a2b0164a0de14a847685550f847a46c0062121e37c346",
+       "learner_verified": false
+     },
+     "Primitives_Ignorance": {
+       "primary_tokens": [
++        "sphere",
++        "sphere_high",
++        "sphere_mid",
+         "sphere_low",
+-        "sphere_mid",
+-        "sphere_high",
+-        "sphere",
+-        "budget_of_smoothness"
+-      ],
+-      "reason": "Five primary tokens form a resolution comparison: three matched marked/plain mesh pairs, an ordinary sphere and a counter that exposes actual triangle entries and area-bearing patches after visual judgment.",
++        "budget_of_smoothness",
++        "capsule"
++      ],
++      "reason": "Compare apparent smoothness and its cost, then use the five-sided capsule to test rotational sameness. Existing primary roles are retained.",
+       "status": "implemented_component_verified",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Primitives_Ignorance/final.md",
+-      "text_sha256": "b98f15ff47b9ec335120a54c20b08bce4af3d904a4059010f118bc707bd244c5",
+-      "map_sha256": "bfba7a3cc86adeb0761bedd8cd9b03a44ed9978c9c54f02484f1bfb293862a2f",
++      "text_sha256": "496428f67fdf9767b9de3eefd09e1ba81f768a038cebfcd9ed6627ca39d7e502",
++      "map_sha256": "41100bba1dcd2999d9512ef1736a58ad3462e3f4d581f790ace23b0de6f998ce",
+       "learner_verified": false
+     },
+     "Primitives_Portals": {
+@@ -168,11 +162,11 @@
+       "primary_tokens": [
+         "pick_up_cube"
+       ],
+-      "reason": "Observe the still cube before collecting it; three moving demonstrations remain. Add translation, rotation and scale, then climb to four finished pickups.",
++      "reason": "Carry Melencolia's question about what survives into the still collectible cube, then add vertical movement, turning and uniform scale before the small pickup level.",
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Pre/final.md",
+-      "text_sha256": "250748b3aa518b718da48b755f19c8811ce8f8a76bc6cbf757d7188e09582bab",
++      "text_sha256": "205e7063239dc8aab2daddb30f6495e5fb4d84e49d20b41fc7a947f7a1a998cc",
+       "map_sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+       "learner_verified": false
+     },

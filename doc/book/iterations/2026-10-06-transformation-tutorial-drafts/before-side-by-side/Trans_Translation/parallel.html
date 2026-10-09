@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Position, then route</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../Trans_Introduction/tutorial.html">Previous</a><a href="../Trans_Rotation/tutorial.html">Next</a></nav></header><main class="spread"><article><p class="badge">Tutorial · draft</p><h1>A level body on a sloping journey</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Displacement in a named coordinate frame</li>
+<li>Vector interpolation</li>
+<li>A destination and a route to it</li>
+<li>A condition selecting two parts of a journey</li>
+</ul>
+<p>Watch the carrier that travels diagonally. Its route slopes; its top stays level. Translation changes position without requiring a turn. At the exit, compare the guided handle's bend with the freer handle's diagonal.</p>
+<p>Continue with the travelling box from the previous lesson. Keep its mesh and position change; remove the other two studies and their banks. This time choose a destination and the route. The museum supplies the installed ride. Our reduced study displays its movement without rider physics.</p>
+<h2>The complete study</h2>
+<p>Put an empty <code>TransformStudy</code> on clear museum floor, with zero rotation and unit scale, and attach this <code>lesson.gd</code>. The positions are local metres. <code>BoxMesh.size</code> gives the familiar cube a broad, low shape once; the journey then leaves that shape unchanged.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0)
+    var mesh := BoxMesh.new()
+    mesh.size = Vector3(1.2, 0.2, 1.2)
+    cube.mesh = mesh
+    add_child(cube)
+    cube.position = start
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var t := clampf(elapsed / duration, 0.0, 1.0)
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t &lt; 0.5:
+            cube.position = start.lerp(corner, t * 2.0)
+        else:
+            cube.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        cube.position = start.lerp(finish, t)
+</code></pre>
+<p><code>finish - start</code> is the displacement: here <code>(4, 2, 0)</code>, four metres along X and two upward. Lines introduced the length of such a vector. Its components describe one combined change, not an instruction to finish X before starting Y.</p>
+<p><code>start.lerp(finish, t)</code> interpolates all three components together. At <code>t = 0.5</code>, the cube is at <code>(0, 2, 0)</code>, halfway along the diagonal. Neither rotation nor scale is assigned during the journey. The carrier remains level.</p>
+<p>The fraction reaches one after four seconds. Clamping holds the destination even as elapsed time continues. A direct assignment to <code>finish</code> would reach the same place immediately and omit the journey.</p>
+<h2>Give the same displacement another route</h2>
+<p>Set <code>via_corner</code> to <code>true</code>. The first half of the time takes the cube to <code>corner</code>, directly above its start. The second half takes it to the same destination as before. The <code>if</code> chooses which segment currently supplies the position; multiplying each half's fraction by two stretches it back to the range zero to one.</p>
+<p>At two seconds, the direct version is at <code>(0, 2, 0)</code>. The corner version is at <code>(-2, 3, 0)</code>. At four seconds they agree again. A shared destination does not require a shared journey.</p>
+<p>This version gives each segment two seconds. The upward segment is two metres; the horizontal one is four, so their speeds differ. Constant speed along routes of different lengths would need time allocated by distance. We leave that calculation for a later movement study.</p>
+<h2>Choose another destination</h2>
+<p>Keep <code>via_corner</code> true and change <code>finish</code> to <code>Vector3(2, 3, 2)</code>. Predict the new corner and final position. The first leg stays vertical; the second now crosses both X and Z. The body still does not turn to face its travel.</p>
+<p>The next hall makes that turn a deliberate choice, with an axis and a centre of its own.</p></article><article><p class="badge">Reflection · existing final.md</p><h1>Translation: seven journeys</h1>
+<p>The far bank is familiar now. In the last hall, a moving surface carried you across. Here seven carriers link a chain of islands, rising to an upper route and descending again.</p>
+<p>Before boarding, follow the small waiting cubes with your eyes. Some hang over the fire basin. Others mark the upper route, beyond the reach of a hand from the floor. The carriers give you a way to meet them.</p>
+<!-- @tc -->
+
+<p>The first carrier travels into depth. Step aboard and let the room pass. Look at the cube under your feet: it keeps its facing and size. Along this journey, only its z coordinate changes.</p>
+<p>At the next island, the route turns sideways. The carrier moves along x. You can keep looking towards the far end of the hall while travelling across it. Direction of travel and direction of attention have separated.</p>
+<p>Then the way goes up.</p>
+<p>Stand on the lift and watch the lower landing descend from view. It is still where it was. The carrier changes y; the room gives that change a consequence. You arrive beside an upper platform, three metres above the ground route.</p>
+<p>Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth.</p>
+<p>The transport script calculates a destination from a starting position, a direction and a distance:</p>
+<pre><code class="language-gdscript">target_position = initial_position + (move_direction * move_distance)
+</code></pre>
+<p>The direction is normalised: its vector is given a length of one. Multiplying it by <code>move_distance</code> sets how far the carrier will go. Adding that displacement to <code>initial_position</code> gives its destination. Three metres up and three metres forward use the same addition, with different directions.</p>
+<p>On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.</p>
+<p>A sideways return carries you back across x in the opposite direction. Then the next carrier moves down and forward together, like an escalator. Its surface stays level while its path slopes: three metres down, two metres further along z. Watch the pickup approach as the lower landing comes towards you.</p>
+<!-- @pick_up_cube -->
+
+<p>The small pickups have been waiting along these journeys. They rise and fall without turning. Their small vertical loop continues as the carrier brings you into contact with them, and each collected cube disappears with a sound.</p>
+<p>Take one, then look back while the carrier moves on.</p>
+<p>The carrier brings your body to a pickup by sharing its displacement:</p>
+<pre><code class="language-gdscript">var movement_delta = global_position - previous_position
+_translate_rider(carried_player, movement_delta)
+</code></pre>
+<p>For each small move of the carrier, your position moves with it. A pickup detects the arriving body and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.</p>
+<!-- @ -->
+
+<p>At the last crossing, the waiting cubes run diagonally over the pit. Watch an edge of the carrier as you travel. It does not turn.</p>
+<p>This direction changes x and z together. The destination lies eight metres across and eight metres further into the hall. Both coordinates change during the same journey. We have combined directions without adding rotation.</p>
+<p>Thirteen pickups mark this passage through seven rides. By the final terrace, the cubes you collected have left empty places along the route. Another arrangement of carriers and pickups could lead you elsewhere using the same operations.</p>
+<!-- @translation_cube_demo -->
+
+<p>Step onto the final terrace. Two pairs of small doors stand on plinths, a left door and a right door in each frame. One pair has rails; the other shows translucent panels where its doors can end up. Try the same upward-and-sideways gesture on a square handle in each frame. A pale line stays behind the moving handle.</p>
+<p>At the rail-guided door, the line rises. The sideways part of your gesture has gone missing. Beside it, the other mechanism lets the handle move in both directions together. Its line can cross the opening diagonally.</p>
+<p>Lift the guided handle to the corner of its rail, then move it sideways. A bend leads to the place the other handle could reach directly. The translucent panel beside the second door marks its destination. Compare the two handles in their frames: they have the same distance to travel up and across.</p>
+<p>The guided door retains the part of a displacement that runs along its current axis:</p>
+<pre><code class="language-gdscript">var t = (knob_pos - start).dot(phase1_dir)
+knob_pos = start + phase1_dir * t
+</code></pre>
+<p>Here <code>phase1_dir</code> points upwards. <code>.dot()</code> extracts the part of your movement along that direction; the next line puts the handle there. The full implementation also limits how far it can go.</p>
+<p>The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.</p>
+<p>In the trace hall, movement left positions behind. Here the handle has already been corrected before its position is kept. The line can be an accurate record of where the handle went without showing everything your hand tried.</p>
+<p>Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.</p>
+<p><img alt="Two door mechanisms leave different traces for different permitted paths." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png" /></p>
+<p><em>A guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel records a separate gesture at the handle.</em></p>
+<p>Up followed by sideways reaches the same position as sideways followed by up. Translation itself does not impose this order. The first mechanism does. The second gives both freedoms together. A destination can be shared by journeys with very different permissions.</p>
+<!-- @ -->
+
+<p>The torus beside the course already turns while its cylinder rises and falls. It offers a glimpse of the next question. Our carriers have kept their facing throughout; this neighbouring object combines the operations. Keep the difference between travelling and facing in mind. In the next hall, the turn itself will become the question.</p></article></main></body></html>

@@ -1,0 +1,215 @@
+{
+	"checks": [
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "unbound_external_target_fails_closed"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 16,
+				"generation": 1,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Range",
+				"remaining": 16,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "local_grid_starts_with_64_and_16_candidates"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 16,
+				"generation": 2,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Range",
+				"remaining": 16,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "button_mode_0_has_16_candidates"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 8,
+				"generation": 3,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Row",
+				"remaining": 8,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "button_mode_1_has_8_candidates"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 8,
+				"generation": 4,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Column",
+				"remaining": 8,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "button_mode_2_has_8_candidates"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 64,
+				"generation": 5,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "All",
+				"remaining": 64,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "button_mode_3_has_64_candidates"
+		},
+		{
+			"details": {
+				"draw_order": [
+					36,
+					26,
+					19,
+					37,
+					34,
+					45,
+					18,
+					28,
+					44,
+					20,
+					43,
+					29,
+					27,
+					21,
+					42,
+					35
+				],
+				"initial": [
+					18,
+					19,
+					20,
+					21,
+					26,
+					27,
+					28,
+					29,
+					34,
+					35,
+					36,
+					37,
+					42,
+					43,
+					44,
+					45
+				],
+				"state": {
+					"bound": true,
+					"busy": false,
+					"eligible_at_start": 16,
+					"generation": 6,
+					"last_removed": 35,
+					"last_selected": 35,
+					"mode": "Range",
+					"remaining": 0,
+					"removed": 16,
+					"total": 64
+				}
+			},
+			"passed": true,
+			"tag": "exhaust_range_exactly_16_distinct_candidates"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "exhausted_remove_has_no_effect"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "other_room_and_foreign_objects_unchanged"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "reset_restores_all_64_and_candidate_set"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 0,
+				"generation": 8,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Range",
+				"remaining": 0,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "empty_selection_stays_empty_even_with_legacy_expand_flag"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "draw_highlights_a_real_candidate_before_removal"
+		},
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 16,
+				"generation": 10,
+				"last_removed": -1,
+				"last_selected": -1,
+				"mode": "Range",
+				"remaining": 16,
+				"removed": 0,
+				"total": 64
+			},
+			"passed": true,
+			"tag": "reset_cancels_pending_removal"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "owned_node_duplicates_shared_multimesh_resource"
+		}
+	],
+	"failures": [],
+	"passed": true,
+	"scope": "Godot runtime; buttons exercised through live InteractableAreaButton signal. No headset acceptance."
+}

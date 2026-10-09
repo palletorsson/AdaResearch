@@ -1,0 +1,68 @@
+{
+  "derived_museum_order": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Biome_Cage",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game",
+    "Biome_Ladder_Randomness"
+  ],
+  "declared_chapters": 14,
+  "derived_placements": 133,
+  "eligible_placements": 132,
+  "comparison_sections": [
+    "Point_One",
+    "Point_Triangle_Context",
+    "transformation",
+    "arrays",
+    "color",
+    "tiling",
+    "change",
+    "forces",
+    "formfinding",
+    "wavefunctions",
+    "randomness"
+  ],
+  "section_references": 38,
+  "missing_links": [],
+  "production_files": 38,
+  "scoped_diff_check_exit": 0,
+  "source_checks": 79,
+  "navigation_checks": 71,
+  "helper_checks": 11,
+  "opening_checks": 34,
+  "middle_focused_checks": 49,
+  "ending_accepted_checks": [
+    32,
+    36
+  ],
+  "external_registry_changes_preserved": [
+    {
+      "path": "commons/artifacts/registry/biome_inheritance.json",
+      "before_sha256": "08c641c03293a64002a111d61cca892317283b529b7a1aa539a438e9f6d76e36",
+      "current_sha256": "a8f6006feee2dcbaf391cb17d6bc00d369b155100664f1816407f334f37d546f"
+    }
+  ],
+  "headset_tested": false,
+  "physical_route_followups": [
+    "Random_Space neighbouring77-cell route warning",
+    "Random_Space_Geometry five companions beyond source floor rectangle",
+    "Random_Rotate_Random_XYZ mismatched source layer extents"
+  ],
+  "existing_other_layer_warnings": [
+    "WaveFunctions_Unit_Circle",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_TrigWalkingPath",
+    "Noise_Inside_Noise"
+  ]
+}

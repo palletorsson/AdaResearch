@@ -1,0 +1,46 @@
+{
+  "checks": 18,
+  "evidence": {
+    "artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "silhouette_arrivals",
+      "station_plinth",
+      "bubbles_random",
+      "mushrooms",
+      "couture_comparison",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent"
+    ],
+    "spawn": "(7.5, 0.000683, 5.5)",
+    "stations": {
+      "couture_comparison": {
+        "collision": [],
+        "origin": "(8.5, 0.0, 24.5)",
+        "standing": "(8.5, 0.0, 22.23)",
+        "standing_z": 22.2299995422363
+      },
+      "mushrooms": {
+        "collision": [],
+        "origin": "(8.5, 0.0, 15.5)",
+        "standing": "(8.5, 0.0, 9.83)",
+        "standing_z": 9.82999992370605
+      },
+      "silhouette_arrivals": {
+        "collision": [],
+        "origin": "(13.5, 0.0, 8.5)",
+        "standing": "(13.5, 0.0, 6.28)",
+        "standing_z": 6.27999973297119
+      }
+    }
+  },
+  "failures": [],
+  "headset_tested": false
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "seed_replay_demo",
+      "description"
+    ],
+    "old": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+    "new": "Two seeded colour grids can replay the same draw procedure or compare it with one discarded draw before RGB assignment. The same seed is not sufficient when the procedure changes. A slider selects an integer seed; REPLAY rebuilds, RANDOM chooses a seed, and optional draw strips expose the stream offset."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "shannon_entropy_meter",
+      "description"
+    ],
+    "old": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+    "new": "Measures the empirical categorical Shannon entropy of a seeded sample from its symbol counts. The optional ledger retains the ordered tiles, compares a second weighted sample and sorts a display copy without changing counts or H. Disclosure reveals or withholds the measurement; it does not measure spatial disorder or thermodynamic entropy."
+  },
+  {
+    "path": "commons/artifacts/registry/algorithms_misc.json",
+    "keys": [
+      "artifacts",
+      "entropy_axiom",
+      "description"
+    ],
+    "old": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
+    "new": "A field of points whose random displacement grows along the grid’s z direction. It contrasts lattice alignment with positional variation; this artifact does not calculate Shannon entropy."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "ten_print_maze_3d",
+      "description"
+    ],
+    "old": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+    "new": "A standing field of binary diagonal marks, with a separate ant search on a finer raster. The shipped stroke scene changes one diagonal every 0.08 seconds; its stored orientation and navigation update together. A visual contour is not a guarantee of a bodily passage. Character, wall and tile impressions are additional representations; the tile variant needs a separate orientation review."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "dice_throw",
+      "description"
+    ],
+    "old": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+    "new": "A physical simulated die on a felt table, with face frequencies and a running mean read from settled orientation. Equal face probabilities and mean 3.5 are comparison hypotheses, not guarantees about a user’s throwing procedure. Rewards default to 16 balls per pip: 96 for a six and 16 for a one."
+  },
+  {
+    "path": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "13x13 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "Independent diagonal marks form contours that can look like a maze. Compare those contours with the ant’s separately computed navigation; the linked screen/floor print and exact-count diagonal board remain companion investigations."
+  },
+  {
+    "path": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Identify the two local diagonal choices and follow how their endpoints meet",
+      "Distinguish a drawn contour from an open passage and a computed route",
+      "Follow a local replacement through the ant’s refreshed navigation model",
+      "Compare independent choices with a prepared count of changed marks in retained companion works"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Cubes/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "A user-thrown simulated die connects a physical outcome to a retained statistical record and an authored reward. Compare one result, a face frequency and the running mean while keeping the throwing procedure in view."
+  },
+  {
+    "path": "commons/maps/Random_Cubes/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Compare the upward physical face with the reported result after settlement",
+      "Track one face’s frequency separately from the running numerical mean",
+      "Use the equal-face mean of 3.5 as a distribution hypothesis rather than a possible face",
+      "Keep the throwing method and reward rule distinct from a claim of fairness"
+    ]
+  }
+]

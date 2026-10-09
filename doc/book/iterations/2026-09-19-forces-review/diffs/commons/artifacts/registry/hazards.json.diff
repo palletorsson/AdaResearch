@@ -1,0 +1,251 @@
+--- before/commons/artifacts/registry/hazards.json
++++ commons/artifacts/registry/hazards.json
+@@ -4061,127 +4061,127 @@
+ 			}
+ 		},
+ 		"four_leg_critter": {
+-			"category": "hazards",
+-			"complexity": "intermediate",
+-			"description": "Four-legged procedural walker. Quadruped gait with diagonal pairing \u2014 walk, trot, gallop emerge from phase relationships between legs.",
+-			"dev_themes": [
+-				"gameplay",
+-				"hazards"
+-			],
+-			"include_in_map_data": true,
+-			"lookup_name": "four_leg_critter",
+-			"map_ready": true,
+-			"map_sequences": [
+-				"hazards"
+-			],
+-			"name": "Four Leg Critter",
+-			"parameters": {
+-				"footprint": [
+-					2.0,
+-					1.0,
+-					2.0
+-				],
+-				"size_group": "compact"
+-			},
+-			"scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn",
+-			"tags": [
+-				"procedural",
+-				"ik",
+-				"legs",
+-				"locomotion",
+-				"quadruped"
+-			],
+-			"geometry_spec": {
+-				"mesh_type": "parametric_surface",
+-				"topology": "manifold_closed",
+-				"construction": {
+-					"method": "uv_grid_triangulation",
+-					"primitives": [
+-						"box",
+-						"sphere"
+-					],
+-					"operations": [
+-						"compute_vertices",
+-						"generate_triangles",
+-						"compute_normals"
+-					]
+-				},
+-				"material": {
+-					"type": "standard",
+-					"shading_model": "emissive",
+-					"key_properties": [
+-						"emission",
+-						"double_sided"
+-					]
+-				},
+-				"animation": {
+-					"type": "physics",
+-					"driven_by": "physics_engine",
+-					"affects": [
+-						"transform"
+-					]
+-				},
+-				"instance_strategy": "array",
+-				"vertex_estimate": "unknown"
+-			},
+-			"spatial_needs": {
+-				"platform": "none",
+-				"footprint_cells": 9,
+-				"clearance": {
+-					"front": 1,
+-					"back": 1,
+-					"left": 1,
+-					"right": 1
+-				},
+-				"player_position": "front",
+-				"wall_backing": false,
+-				"orientation": "face_approach",
+-				"isolation": 0,
+-				"cluster_with": [
+-					"fourth",
+-					"progression",
+-					"introduces",
+-					"diagonal",
+-					"symmetry"
+-				],
+-				"preferred_zone": "any",
+-				"measured_footprint_cells": 16,
+-				"footprint_source": "measured_capped"
+-			},
+-			"measurements": {
+-				"aabb_size": [
+-					3.45,
+-					7.32,
+-					4.49
+-				],
+-				"aabb_center": [
+-					0.0,
+-					3.54,
+-					-0.52
+-				],
+-				"grid_cells": [
+-					4,
+-					5
+-				],
+-				"max_dimension_m": 7.32,
+-				"measured_at": "2026-08-12T04:39:51.280397Z"
+-			},
+-			"footprint_measured": [
+-				4,
+-				1,
+-				5
+-			],
+-			"spatial_profile": {
+-				"dir_group": "floor",
+-				"range": 18,
+-				"density": "high",
+-				"min_clearance": 2,
+-				"stack_priority": 0.85,
+-				"approach_dir": "any",
+-				"derived_at": "2026-04-29T09:39:46.120712Z",
+-				"derived_from": "aabb_size + category"
+-			},
+-			"qfep_connection": "The feet sit at the four corners and none is told about the others: each simply steps when the body's drift stretches it past its threshold. Whatever reads as a trot is a settlement among four independent deadlines \u2014 the vertebrate gait recovered as emergence, not choreography."
++		  "category": "hazards",
++		  "complexity": "intermediate",
++		  "description": "Four-legged procedural walker. A prescribed body drift stretches the planted feet; the gait code selects the most stretched eligible leg and moves one leg at a time. In VFM_09_Legs this visible walking is compared with physical support, which this walker does not solve.",
++		  "dev_themes": [
++		    "gameplay",
++		    "hazards"
++		  ],
++		  "include_in_map_data": true,
++		  "lookup_name": "four_leg_critter",
++		  "map_ready": true,
++		  "map_sequences": [
++		    "hazards"
++		  ],
++		  "name": "Four Leg Critter",
++		  "parameters": {
++		    "footprint": [
++		      2.0,
++		      1.0,
++		      2.0
++		    ],
++		    "size_group": "compact"
++		  },
++		  "scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn",
++		  "tags": [
++		    "procedural",
++		    "ik",
++		    "legs",
++		    "locomotion",
++		    "quadruped"
++		  ],
++		  "geometry_spec": {
++		    "mesh_type": "parametric_surface",
++		    "topology": "manifold_closed",
++		    "construction": {
++		      "method": "uv_grid_triangulation",
++		      "primitives": [
++		        "box",
++		        "sphere"
++		      ],
++		      "operations": [
++		        "compute_vertices",
++		        "generate_triangles",
++		        "compute_normals"
++		      ]
++		    },
++		    "material": {
++		      "type": "standard",
++		      "shading_model": "emissive",
++		      "key_properties": [
++		        "emission",
++		        "double_sided"
++		      ]
++		    },
++		    "animation": {
++		      "type": "physics",
++		      "driven_by": "physics_engine",
++		      "affects": [
++		        "transform"
++		      ]
++		    },
++		    "instance_strategy": "array",
++		    "vertex_estimate": "unknown"
++		  },
++		  "spatial_needs": {
++		    "platform": "none",
++		    "footprint_cells": 9,
++		    "clearance": {
++		      "front": 1,
++		      "back": 1,
++		      "left": 1,
++		      "right": 1
++		    },
++		    "player_position": "front",
++		    "wall_backing": false,
++		    "orientation": "face_approach",
++		    "isolation": 0,
++		    "cluster_with": [
++		      "fourth",
++		      "progression",
++		      "introduces",
++		      "diagonal",
++		      "symmetry"
++		    ],
++		    "preferred_zone": "any",
++		    "measured_footprint_cells": 16,
++		    "footprint_source": "measured_capped"
++		  },
++		  "measurements": {
++		    "aabb_size": [
++		      3.45,
++		      7.32,
++		      4.49
++		    ],
++		    "aabb_center": [
++		      0.0,
++		      3.54,
++		      -0.52
++		    ],
++		    "grid_cells": [
++		      4,
++		      5
++		    ],
++		    "max_dimension_m": 7.32,
++		    "measured_at": "2026-08-12T04:39:51.280397Z"
++		  },
++		  "footprint_measured": [
++		    4,
++		    1,
++		    5
++		  ],
++		  "spatial_profile": {
++		    "dir_group": "floor",
++		    "range": 18,
++		    "density": "high",
++		    "min_clearance": 2,
++		    "stack_priority": 0.85,
++		    "approach_dir": "any",
++		    "derived_at": "2026-04-29T09:39:46.120712Z",
++		    "derived_from": "aabb_size + category"
++		  },
++		  "qfep_connection": "The comparison exposes a choice hidden by a convincing gait: a branch selects one foot, and a commanded body does not negotiate support forces. The form is an opportunity to inspect that rule, not evidence that a diagonal trot or stable gait emerged from physics."
+ 		},
+ 		"fractal_hydra": {
+ 			"dna": {

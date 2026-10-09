@@ -1,0 +1,577 @@
+{
+  "date": "2026-10-04",
+  "status": "Proposed foundation plan; no lessons or runtime changed",
+  "title": "Before Randomness",
+  "purpose": "Establish the programming fundamentals by the end of Colour. Reuse them through Tiling, Change, Forces, Form Finding and Waves before the deep study of Randomness.",
+  "principle": "Use the existing Endless Museum. Select a small operation from its artifacts, explain its supplied surroundings, then let the student vary and reuse it. The tutorial, reflective writing and museum remain overlapping sets.",
+  "scope": "Planning only. This document adds a proposed foundation layer to the current hall summaries. It does not approve proposals, rewrite tutorials, change code, or move maps.",
+  "baseline": {
+    "url": "https://natureofcode.com/introduction/#what-do-you-need-to-know",
+    "text": "The Nature of Code assumes variables, conditionals, loops, functions, objects and arrays, with familiarity with object-oriented programming. Ada must teach these before treating them as prerequisites. The target is usable foundations, not all of computer science."
+  },
+  "sequences": [
+    {
+      "id": "primitives",
+      "title": "Primitives",
+      "promise": "Name, connect, keep and generate.",
+      "exit": "Use named positions, a short list, a condition, a loop and a returning function to make a small geometric arrangement. Explain which values describe it and which objects display it.",
+      "halls": [
+        {
+          "map": "Point_Zero",
+          "mode": "Introduce",
+          "introduce": "Initialization and repeated execution; read a call and its argument.",
+          "practice": "Compare one reading with repeated readings in the existing counter. A frame callback and a list loop are different forms of repetition.",
+          "check": "Predict which instruction runs once and which runs again.",
+          "supplied": "Existing counter, display, player, camera and room."
+        },
+        {
+          "map": "Point_One",
+          "mode": "Introduce",
+          "introduce": "Named values, assignment, basic types, arithmetic; resource and node references.",
+          "practice": "Separate the variable holding a position from the sphere displaying it. Read .new(), property assignment and add_child in the existing construction; give var and const distinct meanings.",
+          "check": "Change radius once and predict which visible and physical parts use it.",
+          "supplied": "Existing corridor conditions; collision construction can be read before it is authored."
+        },
+        {
+          "map": "Point_Coordinates",
+          "mode": "Reuse",
+          "introduce": "A changing property in one reference frame; persistent script state versus a local temporary.",
+          "practice": "Read the held point's X, Y and Z. Keep the object reference available to the callback that needs it; explain scope when the code crosses callbacks.",
+          "check": "Move along one named axis and explain the changed value.",
+          "supplied": "Hold connection, input and coordinate readout."
+        },
+        {
+          "map": "Point_Lines",
+          "mode": "Introduce",
+          "introduce": "Expressions and returned values: subtract positions, then obtain length.",
+          "practice": "Reuse variables and method calls. Distinguish position, displacement and scalar distance before normalizing anything.",
+          "check": "Choose two other endpoints with the same separation in another direction.",
+          "supplied": "Existing segment renderer and endpoint input."
+        },
+        {
+          "map": "Point_Trace",
+          "mode": "Introduce in three beats",
+          "introduce": "A one-dimensional list, first comparison/if, then indexed for traversal.",
+          "practice": "Beat 1: append and read a position. Beat 2: keep a sample only when distance reaches spacing. Beat 3: join neighbours. Explain true/false, indentation, zero-based indices and range bounds beside their first use.",
+          "check": "Predict the retained points for stop–move–return, then the number and order of joined segments.",
+          "supplied": "Pen/point input, segment renderer and session record. Align the eventual lesson with the museum, not the older starter host."
+        },
+        {
+          "map": "Point_Line_Grid",
+          "mode": "Reuse",
+          "introduce": "List order versus spatial address; original data versus a derived display.",
+          "practice": "Follow the museum's fit-then-round operation in three dimensions. Read/traverse known data; preserve its source.",
+          "check": "Find two recorded visits that occupy one displayed address and show that the original remains distinct.",
+          "supplied": "Existing session transfer and grid receiver; no promise of persistence after restart."
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "mode": "Introduce",
+          "introduce": "A face as three ordered positions.",
+          "practice": "Reuse a short position list and a supplied face submission call. Inspect winding without rebuilding the renderer.",
+          "check": "Make another non-collinear triangle; reverse its order and predict the visible side.",
+          "supplied": "Mesh submission/display support."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "mode": "Introduce",
+          "introduce": "Indices refer to shared positions; a face list describes connectivity.",
+          "practice": "Close a tetrahedron using a small known vertex list. Reuse index reading and traversal.",
+          "check": "Alter one corner and identify every face that refers to it.",
+          "supplied": "Mesh assembler; no long factory data dump."
+        },
+        {
+          "map": "Point_Animatedcube",
+          "mode": "Reuse",
+          "introduce": "Shared corners, face connectivity and a diagonal.",
+          "practice": "Reuse position and face lists. Separate editing their data from moving the whole node.",
+          "check": "Change the diagonal while retaining the same outer corners.",
+          "supplied": "Existing cube comparison and display."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "mode": "Introduce",
+          "introduce": "Author a small function: parameters, local values and a return.",
+          "practice": "Turn a repeated geometric construction into a reusable position generator. Distinguish defining a function from calling it. Use a small subset of the existing forms.",
+          "check": "Call the same generator twice with different inputs and explain the two returned results.",
+          "supplied": "Display/mesh assembly and any not-yet-taught formula."
+        },
+        {
+          "map": "Primitives_Godot",
+          "mode": "Reuse",
+          "introduce": "Engine class, instance, resource and scene have different roles.",
+          "practice": "Relate the resource instances already met in Point One to one documented parameter. Authoring a new class comes later.",
+          "check": "Make two resources with different settings; identify which object an edit affects.",
+          "supplied": "Museum presentation and collision support."
+        },
+        {
+          "map": "Primitives_Columns",
+          "mode": "Reuse",
+          "introduce": "Functions plus nested repetition generate a family.",
+          "practice": "Vary profile, height and radial count separately. Explain each loop's job; this is construction using known pieces.",
+          "check": "Use the same rule for another column and compare resolution at fixed shape.",
+          "supplied": "Mesh stitching/receiver where not already understood."
+        },
+        {
+          "map": "Primitives_Profiles",
+          "mode": "Selected exploration",
+          "introduce": "Source outline versus construction along a route.",
+          "practice": "Change one disclosed recipe input. Reuse functions/lists without requiring font extraction, triangulation and sweeping at once.",
+          "check": "Predict which feature follows the outline and which follows the route.",
+          "supplied": "Font outlines, hole processing and sweep construction."
+        },
+        {
+          "map": "Primitives_Portals",
+          "mode": "Reuse",
+          "introduce": "A running total and a stopping comparison express a chosen tolerance.",
+          "practice": "Reuse neighbour traversal, arithmetic and a returning function. Explain any accumulation before using it as a result.",
+          "check": "Choose a different tolerance and justify a finite resolution.",
+          "supplied": "Comparison display; no proof that more segments make better art."
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "mode": "Compose / reflect",
+          "introduce": "No required new syntax.",
+          "practice": "Arrange a small family made with known values, lists, loops and generators. Preserve the reflective question about geometry and desire.",
+          "check": "Make and explain one arrangement without copying the previous example exactly.",
+          "supplied": "Museum staging; unfamiliar scale controls remain supplied until Transformation."
+        }
+      ]
+    },
+    {
+      "id": "transformation",
+      "title": "Transformation",
+      "promise": "Make a rule run, decide and remember.",
+      "exit": "Write a timed or input-responsive rule with a branch and retained state. Reset it deliberately; explain whether the state is recomputed or remembered.",
+      "halls": [
+        {
+          "map": "Trans_Pre",
+          "mode": "Develop",
+          "introduce": "delta, elapsed time, comparisons and if/else.",
+          "practice": "Begin with one familiar cube moving or holding at a duration boundary. Reuse Trace's first if. Size, turns and a supplied sine call become separate variations after this works.",
+          "check": "Change duration and endpoints; predict start, middle and finish.",
+          "supplied": "Museum collection and readout; circular derivation of sine waits for Waves."
+        },
+        {
+          "map": "Trans_Introduction",
+          "mode": "Develop",
+          "introduce": "An event invokes a handler; a reset assigns known starting state.",
+          "practice": "A supplied connection calls the learner's reset function. Reuse timing on one deck with declared input/output.",
+          "check": "Restart twice and account for what returns to its start.",
+          "supplied": "Event wiring, collision, physical deck and rider transport."
+        },
+        {
+          "map": "Trans_Translation",
+          "mode": "Reuse",
+          "introduce": "Guard an invalid operation; keep a waypoint index.",
+          "practice": "Read a short route. Check length before division, then advance the index at the end of a leg. Contrast per-frame stepping with traversing the whole list in one call.",
+          "check": "Include a repeated waypoint and explain how the rule handles a zero-length leg.",
+          "supplied": "Preview marker; use carrying only after its deck contract is settled."
+        },
+        {
+          "map": "Trans_Rotation",
+          "mode": "Reuse",
+          "introduce": "Pivot and order of operations.",
+          "practice": "Reuse a returning position function, known offsets and timed angles.",
+          "check": "Reverse two turns and predict when their results differ.",
+          "supplied": "Ride physics and readouts."
+        },
+        {
+          "map": "Trans_Scale",
+          "mode": "Reuse",
+          "introduce": "Parent-child transform ownership.",
+          "practice": "Use direct references to a small group. Scaling its parent changes placement and size relative to a fixed comparison.",
+          "check": "Predict which child distances change and which outside object stays fixed.",
+          "supplied": "Museum room, bottle and relocation."
+        },
+        {
+          "map": "Trans_Body",
+          "mode": "Develop",
+          "introduce": "A current boolean versus a retained flag; combine simple conditions.",
+          "practice": "Compute proximity afresh, then compare it with a remembered visit. Introduce and/not only where the chosen rule needs them.",
+          "check": "Walk away and predict reversible response versus remembered change.",
+          "supplied": "Visitor-position query, collision update and carving infrastructure."
+        },
+        {
+          "map": "Trans_Pit",
+          "mode": "Compose",
+          "introduce": "No required new syntax.",
+          "practice": "Compose two leaves from one opening fraction using known functions, timing and an occupancy input.",
+          "check": "Choose an opening/reset rule, predict an intermediate pose and test it.",
+          "supplied": "Airlock frame, event/input binding and physical leaf wrapper."
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial",
+      "title": "Arrays",
+      "promise": "Organize many things without losing one.",
+      "exit": "Read and change one entry in a collection, distinguish a value from an object reference, and write a repeatable spatial or timed rule over the collection.",
+      "halls": [
+        {
+          "map": "Array",
+          "mode": "Develop in two beats",
+          "introduce": "Independent objects, stored references and indexed writes; then nested traversal.",
+          "practice": "Start with a short row made through a named creation function. Compare two references to one object with references to separate objects. Keep occupancy records distinct from display references; extend to a plane only afterwards.",
+          "check": "Change one object and one occupancy entry; predict their separate effects while addresses stay fixed.",
+          "supplied": "Creation/display adapter and collection event. The full tutorial is currently missing."
+        },
+        {
+          "map": "Tutorial_3D",
+          "mode": "Reuse",
+          "introduce": "An extra index and explicit storage order.",
+          "practice": "Use distinct rows/layers. Explain conversion from the earlier [x][z] plane to the installed values[y][z][x] representation.",
+          "check": "Write/read one slot with unequal x, y, z; preserve its neighbours.",
+          "supplied": "Flight, selection and collection; no matrix-algebra detour."
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "mode": "Develop",
+          "introduce": "Remainder gives a repeating address-to-turn rule.",
+          "practice": "Reuse nested traversal, a function and a conditional exception; zero now means orientation, not vacancy.",
+          "check": "Predict a 4×4 sample, then expand the same rule and preserve one chosen exception.",
+          "supplied": "Asymmetric motif and raster-image renderer."
+        },
+        {
+          "map": "Tutorial_Tiling_Walls",
+          "mode": "Reuse / reflect",
+          "introduce": "No required new syntax.",
+          "practice": "Use the same image on another supplied receiver. Compare image rotation with movement of the wall.",
+          "check": "Explain what changes in appearance and what changes in passage.",
+          "supplied": "Upright receiver, hinge and collision."
+        },
+        {
+          "map": "Tutorial_Disco",
+          "mode": "Compose",
+          "introduce": "Read a boolean record through time.",
+          "practice": "Start with one short score. Reuse elapsed time, retained index and remainder; a true entry triggers a supplied sound operation.",
+          "check": "Move an event while holding tempo fixed, then change tempo while preserving the score.",
+          "supplied": "Sound and display; robust catch-up scheduling remains supplied."
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "title": "Colour",
+      "promise": "Calculate a value, assign it, give it state.",
+      "exit": "Use a returning function and a small authored class. Create two instances with independent state, apply results to known receivers, and use the foundation concepts together.",
+      "halls": [
+        {
+          "map": "Color_Context_Placed",
+          "mode": "Reuse",
+          "introduce": "Palette lookup and assignment.",
+          "practice": "Apply known loops and indices to existing parts while retaining geometry. Avoid introducing dictionaries here.",
+          "check": "Regroup separated parts by colour without moving them; inspect the selected index.",
+          "supplied": "Direct part/material references and optional numeric categories."
+        },
+        {
+          "map": "Color_Flashlight",
+          "mode": "Reuse / reflect",
+          "introduce": "An object's property and its receiver are distinct.",
+          "practice": "Change the existing light's colour, then its aim with colour held fixed.",
+          "check": "Explain why an equal numeric colour need not look equal on different surfaces.",
+          "supplied": "Light reference, grabbing and renderer."
+        },
+        {
+          "map": "Color_Nails",
+          "mode": "Develop",
+          "introduce": "A complete position-to-Color function with a stated contract.",
+          "practice": "Reuse functions authored in Primitives. Name positive box dimensions, parameters, locals, clamping and return. Separate calculation from assigning albedo.",
+          "check": "Check origin, opposite corner and an outside point; change one coordinate and predict one channel.",
+          "supplied": "Input/hand support and one explicitly bound preview receiver; full function binding is proposed."
+        },
+        {
+          "map": "Color_Rainbow",
+          "mode": "Optional / reflect",
+          "introduce": "No required new syntax.",
+          "practice": "Reuse a hand-picked palette if desired. Keep the celebration independent of completing an exercise.",
+          "check": "Optionally vary palette length at fixed total width.",
+          "supplied": "Arch construction and accessible route; automatic colour transfer is not assumed."
+        },
+        {
+          "map": "Color_Pillar",
+          "mode": "Reuse",
+          "introduce": "Same function contract, another coordinate-to-colour rule.",
+          "practice": "Return Color from HSV-based inputs; caller/receiver can stay the same. Explain the hand-height adapter.",
+          "check": "Vary value alone, then diagnose a wrong coordinate frame separately from a wrong formula.",
+          "supplied": "HSV conversion and explicit height adapter."
+        },
+        {
+          "map": "Color_Grid_Pallet",
+          "mode": "Introduce a small class",
+          "introduce": "One class defines state and methods; separate instances keep separate current indices.",
+          "practice": "Propose Palette with a colour list and index, current_colour() and next_colour(). Start with a nonempty palette; create two instances and advance one. Reuse known modulo/functions and send the result through the existing floor receiver.",
+          "check": "Predict both instances after separate advances, then store and revisit a colour at an address.",
+          "supplied": "Class shell and address-to-MultiMesh receiver. This learner class and binding are proposed; there is no material/node per cell."
+        },
+        {
+          "map": "Color_Paint",
+          "mode": "Reuse / reflect",
+          "introduce": "Known time, functions and bounded surface coordinates.",
+          "practice": "Change one existing automatic path rate/amplitude; compare its calls with the manual cans' shared paint operation.",
+          "check": "Predict narrow/wide or slow/fast path changes without confusing the evolving image with a retained gesture list.",
+          "supplied": "UV-to-hit conversion, spraying and feedback shader."
+        },
+        {
+          "map": "Color_Walls",
+          "mode": "Compose / reflect",
+          "introduce": "Combine known palettes, instances, functions and assignments.",
+          "practice": "Use a small existing part list or pane arrangement to make an independent variation. Keep transparency and lighting implementation supplied.",
+          "check": "Use a different palette length, a returning function and a bounded condition; explain which objects share values and which keep state.",
+          "supplied": "Pane receiver, collision and rendering; preserve privacy/authority inquiry."
+        }
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "subject": "Execution and calls",
+      "first": [
+        "Point_Zero"
+      ],
+      "practice": [
+        "Point_Trace",
+        "Trans_Pre"
+      ],
+      "demonstrate": [
+        "Trans_Pit"
+      ],
+      "criterion": "Distinguish initialization, repeated frames, a list traversal and an invoked handler."
+    },
+    {
+      "subject": "Variables, assignment and basic types",
+      "first": [
+        "Point_One"
+      ],
+      "practice": [
+        "Point_Coordinates",
+        "Point_Trace"
+      ],
+      "demonstrate": [
+        "Primitives_Melencolia"
+      ],
+      "criterion": "Name and change a value; distinguish a number, bool, position, list and object reference."
+    },
+    {
+      "subject": "Arithmetic, expressions and returned values",
+      "first": [
+        "Point_One",
+        "Point_Lines"
+      ],
+      "practice": [
+        "Primitives_Portals",
+        "Trans_Translation"
+      ],
+      "demonstrate": [
+        "Color_Nails"
+      ],
+      "criterion": "Follow inputs through a calculation and predict its returned type and value."
+    },
+    {
+      "subject": "Comparisons and conditions",
+      "first": [
+        "Point_Trace"
+      ],
+      "practice": [
+        "Trans_Pre",
+        "Trans_Translation",
+        "Trans_Body"
+      ],
+      "demonstrate": [
+        "Tutorial_Tiling_Floor",
+        "Trans_Pit"
+      ],
+      "criterion": "Write if/else, explain the bool, and handle a relevant boundary or invalid input."
+    },
+    {
+      "subject": "Lists and indexed data",
+      "first": [
+        "Point_Trace"
+      ],
+      "practice": [
+        "Point_Line_Grid",
+        "Array"
+      ],
+      "demonstrate": [
+        "Tutorial_Disco"
+      ],
+      "criterion": "Read, append and change entries while keeping order and bounds explicit."
+    },
+    {
+      "subject": "Loops and accumulation",
+      "first": [
+        "Point_Trace"
+      ],
+      "practice": [
+        "Primitives_Columns",
+        "Primitives_Portals",
+        "Array"
+      ],
+      "demonstrate": [
+        "Tutorial_Tiling_Floor"
+      ],
+      "criterion": "Predict iteration bounds; traverse neighbours, a row and a small nested collection."
+    },
+    {
+      "subject": "Functions: parameters, locals and return",
+      "first": [
+        "Primitives_Ignorance"
+      ],
+      "practice": [
+        "Primitives_Columns",
+        "Trans_Rotation",
+        "Color_Nails"
+      ],
+      "demonstrate": [
+        "Color_Pillar",
+        "Color_Walls"
+      ],
+      "criterion": "Write a small function, call it with other inputs and reuse its contract."
+    },
+    {
+      "subject": "Scope and retained state",
+      "first": [
+        "Point_Coordinates"
+      ],
+      "practice": [
+        "Trans_Pre",
+        "Trans_Body"
+      ],
+      "demonstrate": [
+        "Tutorial_Disco",
+        "Color_Grid_Pallet"
+      ],
+      "criterion": "Explain what survives a callback and what is recomputed; reset deliberately."
+    },
+    {
+      "subject": "Objects, properties and references",
+      "first": [
+        "Point_One"
+      ],
+      "practice": [
+        "Primitives_Godot",
+        "Trans_Scale",
+        "Array"
+      ],
+      "demonstrate": [
+        "Color_Grid_Pallet"
+      ],
+      "criterion": "Distinguish class/resource/node/value; predict shared references versus independent instances."
+    },
+    {
+      "subject": "An authored class with state and methods",
+      "first": [
+        "Color_Grid_Pallet"
+      ],
+      "practice": [
+        "Color_Walls"
+      ],
+      "demonstrate": [
+        "Color_Walls"
+      ],
+      "criterion": "Make two instances, invoke their methods and explain their independent state."
+    },
+    {
+      "subject": "Events and input",
+      "first": [
+        "Point_Coordinates"
+      ],
+      "practice": [
+        "Trans_Introduction"
+      ],
+      "demonstrate": [
+        "Tutorial_Disco"
+      ],
+      "criterion": "Explain supplied input and handler calls without rebuilding XR or signal infrastructure."
+    },
+    {
+      "subject": "Observation and debugging",
+      "first": [
+        "Point_Zero",
+        "Point_One"
+      ],
+      "practice": [
+        "Point_Trace",
+        "Trans_Translation",
+        "Color_Nails"
+      ],
+      "demonstrate": [
+        "Color_Walls"
+      ],
+      "criterion": "Predict, inspect a value, isolate one change, identify a mismatch and check the correction."
+    }
+  ],
+  "consolidation": [
+    {
+      "id": "tiling",
+      "title": "Tiling",
+      "reuse": "Return to palette instances, addressed reads, copies and references. Let the same record acquire another reader.",
+      "limit": "Supply serialization and complex rendering; do not add a language prerequisite merely because it appears in the artifact."
+    },
+    {
+      "id": "change",
+      "title": "Change",
+      "reuse": "Use known functions, loops and running totals for a finite difference and finite sum. Keep a position through repeated field steps.",
+      "limit": "The mathematical relationship is new; programming basics should be familiar. Choose exact learner edit bindings before writing."
+    },
+    {
+      "id": "forces",
+      "title": "Forces",
+      "reuse": "Keep position and velocity as separate state; update several independent bodies using the same small rule.",
+      "limit": "Make state-plus-update reusable for particles and agents. Engine physics and the learner's explicit update remain different operations."
+    },
+    {
+      "id": "formfinding",
+      "title": "Form Finding",
+      "reuse": "Reuse conditions, functions, state and repeated updates to search or satisfy a constraint.",
+      "limit": "Annealing needs a local bounded-random-draw introduction: range, when a draw occurs and one acceptance comparison. Do not pretend Arrays already taught it."
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Waves",
+      "reuse": "Reuse elapsed time, the short sine preview, lists, functions and independent state. Return to traces through sampling.",
+      "limit": "Give new signal/coupling concepts room. Event selection may reuse the bounded draw; distributions and seeds wait for Randomness."
+    }
+  ],
+  "ready": {
+    "title": "At the entrance to Randomness",
+    "task": "Given the working museum, named input/display interfaces and a changed requirement, make a small study with several independently stored bodies or marks. Use a list, a loop, a returning function, a condition and two class instances. Add a reset, predict an outcome, inspect values and explain a correction. Then replace one deterministic choice with a supplied bounded random draw and state what remains unchanged.",
+    "meaning": "Passing this practical review would support foundation readiness; appearing in code, a summary or a completed reading does not. The task can build on the student's existing work and need not become another museum artifact.",
+    "if_not_ready": "Return to the named first lesson or practice hall for the missing operation; do not solve a language difficulty by adding another algorithm.",
+    "not_required": [
+      "Inheritance hierarchies or polymorphism",
+      "Dictionaries before a lesson needs them",
+      "General matrix algebra",
+      "Manual memory management or asynchronous programming",
+      "Implementing the renderer, XR player, physics engine or shader system",
+      "A full theory of probability before Randomness"
+    ]
+  },
+  "workflow": [
+    "Review these placements as a proposed foundation layer; retain current accepted summaries until a deliberate revision is agreed.",
+    "For the next hall, write its short storyboard with: brings, first new operation, practice, supplied interface and one independent variation.",
+    "Check the existing artifact and identify the exact learner edit location before expanding that single tutorial.",
+    "Read the next two halls to ensure they reuse the result rather than silently adding prerequisites. Update both full and compact summaries when a choice is adopted.",
+    "After each sequence, assess the small independent work. Record observed difficulty and adjust the next introduction; no invented time estimate or mastery score.",
+    "At Colour, check the six NOC fundamentals together. Practise them further in the intervening sequences before the Randomness checkpoint."
+  ],
+  "open": [
+    "Point Trace's current companion uses a starter scene and persisted TraceMemory, while the museum notes describe the existing pen and session transfer. Preserve the museum's source record and fit-then-round Grid behavior; reconcile the teaching host before promoting the lesson.",
+    "The current Point One source edit starts with a constant. Make the intended variable/assignment learning explicit without falsely presenting the corridor as a live draggable point.",
+    "Array's reduced creation/display binding and Tutorial_3D's storage conversion need concrete lesson contracts. A visible collection alone does not teach independent object ownership.",
+    "Nails' complete authored function, Grid's proposed Palette class and custom colour receiver are not delivered learner exercises yet.",
+    "The older subject register still assigns first conditions to Translation and a random draw to Array. Reconcile it only when these proposed teaching placements are adopted.",
+    "Core by Colour is a curriculum target, not evidence of a tested beginner course or a claim that all 35 full tutorials already meet it."
+  ],
+  "sources": [
+    "doc/book/iterations/2026-10-04-museum-tutorial-storyboards/route.json",
+    "doc/book/course/storyboards/BRIEF.md",
+    "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+    "doc/book/course/sketch/subject_lineage.json",
+    "commons/maps/Point_One/tutorial.md",
+    "commons/maps/Point_Trace/tutorial.md",
+    "algorithms/color/gridcolorizer/address_lesson.gd",
+    "algorithms/color/pillarcolorcollection/field_sampler.gd",
+    "commons/maps/Color_Nails/tutorial.md"
+  ]
+}

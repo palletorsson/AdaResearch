@@ -1,0 +1,100 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Follow the cube through the room</title><style>
+:root{color-scheme:light;--ink:#302c32;--paper:#f2eee6;--rose:#c65b86}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 Georgia,serif}
+main{max-width:1160px;margin:auto;padding:46px 30px 80px}a{color:inherit;text-underline-offset:4px}
+nav,.kicker,figcaption,.sequence,summary,footer{font:13px/1.65 system-ui,sans-serif}
+nav{display:flex;gap:24px;flex-wrap:wrap;border-bottom:1px solid #cfc4c8;padding-bottom:14px}
+.kicker{text-transform:uppercase;letter-spacing:.14em;color:#83556b;margin-top:42px}
+h1{font-weight:400;font-size:clamp(42px,6vw,78px);line-height:1.06;margin:10px 0 22px}
+h2{font-weight:400;font-size:32px;margin-top:46px}.lede{max-width:690px;font-size:23px}
+video{display:block;width:100%;background:#292630;aspect-ratio:3/2;max-height:76vh}
+figure{margin:30px 0}figcaption{margin:10px 0;color:#665b61}img{width:100%;display:block}
+.sequence{letter-spacing:.05em;border-block:1px solid #cfc4c8;padding:18px 0;text-align:center}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.strip figure{margin:0}
+article{max-width:690px;margin:48px auto}article p{margin:0 0 22px}details{margin:26px 0}
+summary{cursor:pointer}pre{overflow:auto;padding:20px;background:#e7e1db;font-size:13px}
+table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui,sans-serif}td,th{border-bottom:1px solid #ccc;padding:10px;text-align:left}
+footer{border-top:1px solid #cfc4c8;margin-top:60px;padding-top:20px}
+@media(max-width:650px){main{padding:24px 16px}.strip{grid-template-columns:1fr}.lede{font-size:20px}}
+</style><main><nav>
+<a href="index.html#museum">The museum</a><a href="index.html#reading">The passage</a>
+<a href="making.html">Museum companion</a><a href="technical.html">How it works</a>
+</nav><article><blockquote>
+<p>Museum return: assembly timing, the two builders, folding nets, prefabs and architecture. Start with the <a href="tutorial.md">shared-diagonal tutorial</a> in the student starter. This page describes the larger museum implementation.</p>
+</blockquote>
+<h1>Follow a corner through the cube</h1>
+<p>The small experiment is this: move one vertex and find which surfaces must follow. This room builds on the triangle hall's three positions per face and the polyhedra hall's distinction between a visible boundary and a physical obstacle.</p>
+<h2>Begin with connections</h2>
+<p>At <code>cube_lines</code>, follow the three edges meeting at one corner. The complete outline shows twelve edges. Faces are not needed for you to recognise the cube, although its wire outline has not closed a surface around an interior.</p>
+<p>The builder stores two kinds of information separately: where the vertices are, and which ones form edges or triangle patches. A list of positions by itself is not a surface.</p>
+<h2>Replay before editing</h2>
+<p>Both <code>animatedcubebuilder</code> placements have the discovery instrument. Keep one unchanged so you have a reference.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>What it does here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REPLAY</td>
+<td>Hides and reveals corners, edges and patches using the current vertex positions.</td>
+</tr>
+<tr>
+<td>PAUSE / RESUME</td>
+<td>Stops or resumes this builder's assembly steps. Replay first if assembly has finished.</td>
+</tr>
+<tr>
+<td>RESTORE CUBE</td>
+<td>Returns the eight initial corner positions and shows the completed cube.</td>
+</tr>
+<tr>
+<td>DIAGONALS</td>
+<td>Shows or hides six face diagonals after assembly completes.</td>
+</tr>
+</tbody>
+</table>
+<p>Replay the builder and pause when the shape becomes recognisable. Resume and let it finish. Corner handles can be picked up after completion; they are disabled during assembly. Release a held corner before using replay or restore.</p>
+<p>The source constructs the hidden geometry at setup. Its timed steps change visibility. This is not the same operation as translating a finished cube across the room. Pausing this sequence does not stop the room clock or the neighbouring net.</p>
+<h2>Make the seam visible</h2>
+<p>Find the face containing <code>v4</code>, <code>v5</code>, <code>v6</code> and <code>v7</code>. Before moving anything, trace its boundary and predict what will follow <code>v6</code>. Pull that corner a little out of the face's plane, leaving the others unchanged. Look for a crease, then use DIAGONALS to check it.</p>
+<p>The two triangle entries for that face are:</p>
+<pre><code class="language-gdscript">[4, 5, 7]
+[5, 6, 7]
+</code></pre>
+<p>The numbers are indices into the builder's vertex list. Both triangles use vertices 5 and 7, so that pair forms their common edge. Only the second triangle uses vertex 6. Moving it out of the original plane tilts that triangle while the other remains in place. Moving it only within the plane would not demonstrate this crease.</p>
+<p>The update reads a changed handle position into the stored geometry:</p>
+<pre><code class="language-gdscript">vertices[i] = handle_nodes[i].position / cube_size
+</code></pre>
+<p><code>i</code> identifies the handle and its corresponding vertex. <code>position</code> is local to the builder; dividing by <code>cube_size</code> converts it back to the builder's stored coordinates. The edges and patches are rebuilt from those coordinates using the same connection lists.</p>
+<p>Release the handle. Predict what REPLAY will show, then test it. Predict what RESTORE CUBE will change, then test that. One repeats the presentation; the other restores the original coordinates.</p>
+<h2>Compare a different operation</h2>
+<p>At <code>polyhedron_nets_cube</code>, follow the pink square. Predict which faces will meet before the net closes. Watch the finished cube shrink, drop, settle and wait. A new net opens above it. After a second cycle, count the cubes on the floor. Folding changes hinge angles through <code>fold_progress</code>; shrinking scales the completed form.</p>
+<p>The room's cross-shaped net enables <code>fall_cycle:true</code>. At release, a copy of its closed faces gains a rigid body and fitted box collider. The fallen copy stays while the working net grows and unfolds above it. These faces are not six separately simulated physical panels. The pause and reopening are authored states. The collection keeps up to 24 bodies before retiring the oldest; it lasts for the current hall session. Other net configurations exist in the source but are not additional displays here.</p>
+<p>In your edited builder a corner moved relative to its neighbours. In the net, an entire face rotates around a hinge. Use this difference to explain why one square creased and the other stayed flat.</p>
+<p>The detailed timing, triangle counts and folding code are in the <a href="/book?map=Point_Animatedcube&amp;section=technical">technical chapter</a>. More general position, rotation and scale experiments belong to the transformation sequence.</p>
+<h2>Recognise the room that carries you</h2>
+<p>After comparing the builder and the folding net, look at the museum floor and walls. Follow the box form from an exhibit into the surrounding structure. In the endless museum, floor slabs and wall blocks use scaled box meshes, with separate box-shaped collision geometry. The editable builder offers corner handles; the architecture participates in the movement of the visitor's body.</p>
+<p>Compare a crate's planks and reinforcing strips with the builder's triangle pairs. Six geometric faces do not prescribe one mesh budget. A detailed box-shaped prefab can contain many pieces and many more triangles while remaining recognisable as a box.</p>
+<p>This recognition belongs to the main walk. Composing new arrangements can develop later. For now, connect the object you are examining with the construction you are already inside. The <a href="/book?map=Point_Animatedcube&amp;section=technical">technical chapter</a> follows the shared box mesh and its separate colliders in the museum source.</p>
+<h2>Return visits</h2>
+<p>These comparisons remain in the room. Choose one if it helps the question you are following; none is an additional requirement for finishing the main walk.</p>
+<h3>A world without composition yet</h3>
+<p>Read the pallet's <strong>A WORLD / WITHOUT / COMPOSITION</strong>, the supply pile's <strong>WITHOUT COMPOSITION / YET</strong>, and the single crate's <strong>YET</strong>. Their arrangement already composes a scene. The admission concerns what we have learned to choose and examine so far.</p>
+<p>Compare the pallet, supply pile and two <code>station_crates</code> placements as arrangements. Which box seems accessible, protected, ready to move or forgotten? Identify the position, spacing or surrounding object that produces your reading. The box shape alone cannot account for all of it.</p>
+<p>Compare a detailed crate with the bare builder. Both may be recognisable as boxes, but that resemblance does not require an identical mesh or triangle budget. The <a href="/book?map=Point_Animatedcube&amp;section=technical">technical chapter</a> counts the builder's particular representation; it does not assign that count to every crate.</p>
+<h3>The glove between bodies</h3>
+<p>The single-glove chamber offers a different encounter with an enclosure. A glove stands between an imagined worker and the contents. Compare the kind of access its design suggests with the exposed handles on the cube. This is a comparison of represented access; the glove is not an additional working sculpting control.</p>
+<h3>A shadow with a setting</h3>
+<p>In <code>first_shadow</code>, compare the turning triangle with the thin line beside it. Then inspect <code>_build_line()</code> in its source. The line is a narrow cylinder, and its <code>cast_shadow</code> setting is explicitly OFF. The triangle's is ON.</p>
+<p>The missing line shadow therefore cannot establish that every line lacks a shadow because it has no area. This rendered line has thickness, and the program has disabled its shadow. The comparison exposes a setting as well as a shape. A later experiment could change that setting while keeping the same geometry; no switch for it is installed here.</p>
+<h3>The point returns through an instrument</h3>
+<p>The dark glass of <code>first_phosphor</code> carries a green dot. Follow its repeating light and fading glow. The program changes material emission over time; this is a representation of a phosphor display, not an electron-beam simulation. What was added to make the point visible, and what does that addition let you notice?</p>
+<h3>Another neighbour list</h3>
+<p>The nearby pyramid is configured <code>#base_sides:8</code>. Follow its apex connections and compare them with the three cube edges meeting at a corner. Its different pattern of neighbours provides a comparison for the builder, whose edits keep the old connections. The pyramid has no matching corner-editing instrument here.</p>
+<p>The floating sphere field remains decoration. Its presence need not become another compulsory lesson before the next room's investigation of the sphere.</p>
+<h2>For a second pass</h2>
+<p>The existing instruments support deformation and comparison. They do not validate an enclosure, save a collection of altered forms or make the surface into walkable collision geometry. Keep those possible developments distinct from actions available now. A headset visit still needs to check reach and sightlines between the two builders and the net.</p></article><footer>Point_Animatedcube · Primitives · 4 October 2026<br>
+Native Godot captures from the endless museum. <a href="evidence.json">29 checks</a> · <a href="source-hashes.json">Source record</a></footer></main></html>

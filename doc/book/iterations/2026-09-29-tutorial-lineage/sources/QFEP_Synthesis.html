@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_Synthesis · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_Synthesis">← Tutorial lineage</a></p><h1>QFEP Synthesis</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_Synthesis/final.md">Raw captured source</a></p><pre># What should this body keep?
+
+Which kind of stability are you asking this body to preserve?
+
+&lt;!-- @queer_morphology_specimen --&gt;
+
+Use the specimen’s own LAMBDA and PHI sliders. Hold one steady while changing the other, and compare the body’s shape and continuing movement. Watch for long enough to separate a persistent response from the timed breathing already present in the specimen.
+
+Choose PAIR B and watch the pressure reading while it says PULSE. Press PULSE / STEADY. The number settles at its baseline. Has the body finished moving? Stay with one part of it for a moment. You have stopped the imposed breathing; the specimen remains subject to its other forces. Steady pressure is something you have given it. Stillness would be something else.
+
+LAMBDA changes the mapping to stiffness and pressure. PHI changes damping and drag. These properties affect different aspects of the response: resisting a deformation is not the same operation as reducing ongoing motion. A body can resist changing shape while still retaining movement, or deform readily while movement dissipates quickly.
+
+Watch a change settle over time rather than comparing only two instantaneous shapes. A shape can look similar at two moments while the continuing movement differs. Conversely, a temporarily different shape may return towards a familiar arrangement. The separate controls invite you to name these distinctions: resistance to deformation, persistence of motion, and the effects of pressure. Following one region of the specimen through several moments can make the comparison easier than watching every moving surface at once.
+
+The mapping is authored for this specimen. Stiffness decreases across the lambda range, pressure has a designed peak near the middle, and signed phi changes the damping and drag values. Breathing runs only while LAMBDA sits between 0.3 and 0.7, and within an amplitude the maker selected; outside that band the plate says STEADY whatever the button says. The plate shows what the body receives. It does not establish that nature uses the same numerical scale.
+
+Compare two combinations outside the named presets: relatively high stiffness with low damping, and relatively low stiffness with high damping. Which difference do you notice first? Avoid reducing both observations to one word such as rigid or fluid. Naming the distinct mechanical properties gives you a more useful account of what changed.
+
+The name above the glass stays. Inside, the terms of holding together have changed. The jar supplies another set of terms: a bottom, sides, a lid. Its clear surface lets you watch while its boundaries limit where the specimen can go. The sliders do not move those boundaries.
+
+The laboratory has now used its terms in several ways: arithmetic weights on a console, spatial analogies in a hall, and controls mapped to a body’s mechanics. Their shared vocabulary invites comparison, but the mappings need to remain explicit. Even PHI’s signed range here differs from its range on the introductory console.
+
+A responsive specimen is not an assay of queerness or a test for life. The floor still promises an imago and a return transformed; the plate promises less, and says what it measures. The question its name opens is what forms of continuity and variation a model makes available. A future observation could preserve a trace of deformation over time, letting different responses be compared beyond their immediately attractive appearance.
+
+&lt;!-- @ --&gt;
+
+Self-Q turns the investigation back towards the maker. After giving this body a name, a container and a range of responses, what have we trained ourselves to recognise as possible? Which part of the apparatus would we change next?
+
+Post-crisis begins with representation itself. After learning to name a model’s choices, ask whose distinctions those choices make clear and whose they compress.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_Synthesis/tutorial.md">Raw captured source</a></p><pre># Follow one response
+
+Choose PAIR B. Compare pressure base with pressure now. Use PULSE / STEADY to hold pressure at its baseline; keep watching the body rather than assuming it was paused.
+
+Keep Phi steady and change Lambda. Compare stiffness and baseline pressure. Then hold Lambda and move Phi across zero: damping and drag change while that pressure baseline remains. Compare one visible region through time.
+
+The three PAIR buttons select examples. They do not reset the body&#x27;s previous motion. The live plate reports coefficients, not measured entropy or a biological state. The implementation is in technical.md; the earlier imagined noise-deformed specimen is preserved in design-proposals.md.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_Synthesis/technical.md">Raw captured source</a></p><pre># A body receives the mapping
+
+Sandbox separated a moving handle from the values another object receives. Synthesis uses a specimen with its own two local sliders. Neither control is broadcast to the surrounding formula, spheres, ceiling or meter.
+
+Lambda maps to two SoftBody3D coefficients:
+
+```gdscript
+stiffness = lerpf(0.9, 0.1, lambda)
+midpoint_weight = 1.0 - abs(lambda - 0.5) * 2.0
+pressure_baseline = base_pressure * (1.0 + midpoint_weight * 0.5)
+```
+
+With the default base pressure of 1, the baseline is 1 at the endpoints and 1.5 at the midpoint. This triangular peak is authored. No phase transition or entropy estimate is detected by it.
+
+When pulsing is enabled and 0.3 &lt; lambda &lt; 0.7, the pressure used by the body is baseline * (1 + sin(time * speed) * amplitude), with speed interpolated from 0.5 to 2.0 and amplitude from 0.02 to 0.1 across the lambda range. At lambda 0.5 the pressure varies between 1.41 and 1.59 around 1.5. The former frame callback overwrote this baseline with values near 1. The repaired physics callback preserves the mapped baseline and advances elapsed simulation time independently of rendered frames.
+
+PULSE / STEADY disables or enables this imposed modulation and restarts its phase. It leaves the body&#x27;s mesh, existing motion, gravity, stiffness, damping and drag intact. It does not pause or reset the physics engine. PAIR A, B and C select (lambda, phi) = (0.1, -0.8), (0.5, 0), (0.8, 0.6). They are sample combinations, not classified biological states.
+
+Phi ranges from -1 to +1. Its normalized coordinate u=(phi+1)/2 maps damping from 0.2 to 0.001 and drag from 0.3 to 0. The controls also change material colour and shader parameters, so a changing image is not by itself evidence of mechanical deformation. The plate reads the actual body coefficients, while the framed viewport updates text without rebuilding baked meshes every tick.
+
+The jar previously had only a floor collider. A sixteen-part side shell and lid now match the closed jar. The cracked variant has a shorter open shell; escaped retains only the base; clouded retains its fixed 160-grain MultiMesh and has no deformable body. The live plate identifies that distinction. A glass shader is not a fluid solver: there is no buoyancy calculation here.
+
+In this hall the specimen stands at full scale on two adjacent support cells, facing the entry, with the controls to its side. Other placements and the central terraces remain. The selection labels, live readout and causal mapping support a comparison; they do not establish a universal correspondence between a coefficient and an identity.
+
+The specimen uses an opaque material behind transparent glass and fluid; refraction is disabled to keep those nested layers readable on the mobile renderer. Phi&#x27;s small control display shares the signed range shown on the plate.
+
+The main manuscript retains the proposal to record deformation histories. Such a trace is not yet implemented. Headset comfort and whether learners can distinguish the responses remain open checks.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_Synthesis/intent.md">Raw captured source</a></p><pre>Concept: The formula understood — not just intellectually but felt, controlled, lived. QFE = F − λE(S) + φΔE(S,t). The force is yours. Return to the world transformed.
+Sequence role: Eighth and final map in QFEP Lab; the synthesis that closes the penultimate spine sequence. All four terms return as grabbable spheres (F, E, λ, φ) alongside the complete formula. The queer_morphology_specimen embodies the φ &gt; 0 thesis in biological form. After this, only Post-Foundations Crisis remains — the question of what to build with the knowledge; follows QFEP_Sandbox.
+Technical angle: Integration of all QFEP components into a unified interactive system. The four grab_spheres represent the four terms; the qfep_formula_3d shows the complete equation. No new concepts — pure synthesis, the learner demonstrating mastery by manipulating the complete system.
+Critical angle: The synthesis is not conclusion but commencement. The formula is a lens, not an answer. Every system the learner encounters — biological, computational, social, artistic — can be analyzed through QFEP: what is its F-drive, its entropy, its λ, its φ? The queer_morphology_specimen is the final artifact: a form that exists at the edge of chaos, embodying φ &gt; 0, refusing to crystallize or dissolve. The curriculum&#x27;s thesis made flesh.
+Key artifacts: grab_sphere_E, grab_sphere_F, grab_sphere_lambda, grab_sphere_phi make all four terms physical; qfep_formula_3d renders the complete equation; queer_morphology_specimen embodies the edge-of-chaos thesis biologically; tt for navigation.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_Synthesis/critical.md">Raw captured source</a></p><pre># The name above the glass
+
+A specimen is already a decision about how to look. A name, a container, a selected body: the display makes something available to attention by making it stand apart. Its edges are also conditions placed upon the thing we hope to understand.
+
+Here Lambda changes stiffness and pressure; Phi changes damping and drag. Neither rail can remove the lid. The visitor can select a response within the apparatus while the apparatus retains authority over the available responses. Its generosity has a shape.
+
+Stopping the pressure pulse does not stop physics. The body continues to inherit its previous motion and its contact with the container. This is a small distinction, but one the hand can investigate: changing an ongoing condition is different from erasing what happened under it. The nearby controls give access to the former.
+
+The title Queer Morphology opens a question; the coefficients cannot certify its answer. Why should persistent motion signify freedom, or settling signify submission? A boundary may confine, sustain or shelter. That judgment requires attention to consequences the pressure reading alone cannot supply.
+
+Self-Q asks what building this specimen does to its maker. Do we become better at noticing how a body is supported, or quicker to read our own parameter choices as its nature? Keeping that question open means carrying the frame, the lid and the chosen mappings into the account of what we see.
+
+The next sequence begins with the distinctions a representation permits. We leave this specimen with a more specific question for that work: what else would have to change for another kind of body to become possible here?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_Synthesis/artifacts.md">Raw captured source</a></p><pre># QFEP Synthesis — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 7 artifacts*
+
+&gt; *You understand it now.*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Queer Morphology Specimen
+![Queer Morphology Specimen](/scene-catalog/queer_morphology_specimen.png)
+
+A procedural specimen that defies binary classification — its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework&#x27;s challenge to normative boundaries in biological and computational classification.
+
+`queer_morphology_specimen`
+
+## F Term Sphere
+![F Term Sphere](/scene-catalog/grab_sphere_F.png)
+
+Grabbable sphere representing F (Free Energy) - the order-seeking, pattern-finding drive. Blue glow.
+
+`grab_sphere_F`
+
+## E Term Sphere
+![E Term Sphere](/scene-catalog/grab_sphere_E.png)
+
+Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space. Red glow.
+
+`grab_sphere_E`
+
+## Lambda Term Sphere
+![Lambda Term Sphere](/scene-catalog/grab_sphere_lambda.png)
+
+Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.
+
+`grab_sphere_lambda`
+
+## Phi Term Sphere
+![Phi Term Sphere](/scene-catalog/grab_sphere_phi.png)
+
+Grabbable sphere representing φ (phi) - the rate sensitivity, the queer signature. Magenta glow.
+
+`grab_sphere_phi`
+
+## QFEP Formula 3D
+![QFEP Formula 3D](/scene-catalog/qfep_formula_3d.png)
+
+SEE the theory
+
+`qfep_formula_3d`
+
+## Tutorial Text Display
+![Tutorial Text Display](/scene-catalog/tt.png)
+
+In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.
+
+`tt`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_Synthesis/summary.md">Raw captured source</a></p><pre># What should this body keep?
+
+The last of eight QFEP Laboratory halls compares authored mechanical mappings on one deformable specimen. Its local Lambda rail controls stiffness and pressure baseline; signed Phi controls damping and drag. PULSE / STEADY separates an imposed pressure wave from the body&#x27;s continuing physics. The live plate names these quantities instead of certifying a life regime.
+
+The specimen is full size on an accessible west-side display. All ten original artifact families and the central terraces remain. The formula and grabbable terms return as supporting works. The current continuous museum proceeds to Post-Crisis; the old standalone return-to-lab teleporter remains a legacy utility, not that museum crossing.
+
+The question moves from varying an input to asking who can revise the container and response law. Headset comfort and learner understanding remain unverified.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_Synthesis/blurb.md">Raw captured source</a></p><pre>*The name stays. The body has other work to do.*
+
+Stop the imposed breath. Watch what continues.
+
+What should this body keep?
+</pre></section></body></html>

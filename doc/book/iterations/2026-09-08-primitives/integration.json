@@ -1,0 +1,128 @@
+{
+  "date": "2026-09-08",
+  "scope": "Integrated source/data relationships, not human room acceptance.",
+  "checks": [
+    {
+      "room": "Point_One",
+      "words": 1088,
+      "primary_order": [
+        "interactive_point_origin_force",
+        "origin",
+        "coordinate_readout",
+        "CoordinateSystem3M",
+        "drag_point_target"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Point_Lines",
+      "words": 1059,
+      "primary_order": [
+        "line_demo",
+        "line",
+        "walk_this_line_marking"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Point_Trace",
+      "words": 1133,
+      "primary_order": [
+        "draw_dot"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Point_Line_Grid",
+      "words": 1072,
+      "primary_order": [
+        "grab_sphere_point_snap",
+        "player_trace",
+        "grid_lines"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Point_Triangle_Context",
+      "words": 1168,
+      "primary_order": [
+        "triangle_line_puzzle",
+        "interactivetriangle",
+        "triangle",
+        "draw_triangle_faces"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Primitives_Polythedra",
+      "words": 1091,
+      "primary_order": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "pyramid_edit",
+        "prism_block"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Point_Animatedcube",
+      "words": 959,
+      "primary_order": [
+        "cube_lines",
+        "polyhedron_nets_cube",
+        "animatedcubebuilder"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Primitives_Ignorance",
+      "words": 1070,
+      "primary_order": [
+        "sphere_low",
+        "sphere_mid",
+        "sphere_high",
+        "sphere",
+        "budget_of_smoothness"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Primitives_Portals",
+      "words": 857,
+      "primary_order": [
+        "combine_portals",
+        "achilles_tortoise"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    },
+    {
+      "room": "Primitives_Melencolia",
+      "words": 1213,
+      "primary_order": [
+        "snap_pyramid_puzzle",
+        "pyramid",
+        "pyramidlong",
+        "prism_block",
+        "durer_scene",
+        "bigframe"
+      ],
+      "unplaced_tags": [],
+      "baseline_ready": false
+    }
+  ],
+  "other_room_roles_and_existing_notes_preserved": true,
+  "curated_actions_with_current_evidence": 5,
+  "total_rooms": 190,
+  "outcomes": 10,
+  "python_fixture_tests": 28,
+  "app_type_diagnostics": 0
+}

@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Worley, gauge and retained random ground present",
+      "passed": true
+    },
+    {
+      "name": "gauge counts its own two hundred symbols",
+      "passed": true
+    },
+    {
+      "name": "cellular field raised above the retained ground",
+      "passed": true
+    },
+    {
+      "name": "gauge raised to standing reading height",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cellular-field",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: returning-gauge",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "positions": {
+      "floor": [
+        6.5,
+        0.0,
+        6.5
+      ],
+      "gauge": [
+        4.5,
+        1.3400000333786,
+        9.5
+      ],
+      "worley": [
+        8.5,
+        0.375000029802322,
+        4.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Random_Space",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

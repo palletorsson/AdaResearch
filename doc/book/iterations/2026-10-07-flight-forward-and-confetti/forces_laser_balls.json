@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "label": "wrong pool cannot hide or recycle another pool's ball",
+      "passed": true
+    },
+    {
+      "label": "actual ray finds the ball's physics child",
+      "passed": true
+    },
+    {
+      "label": "measurement without burn permission leaves ball intact",
+      "passed": true
+    },
+    {
+      "label": "half dwell does not destroy",
+      "passed": true
+    },
+    {
+      "label": "looking away resets accumulated dwell",
+      "passed": true
+    },
+    {
+      "label": "continuous ray burn destroys and removes the active ball",
+      "passed": true
+    },
+    {
+      "label": "destroyed ball has no ghost collider",
+      "passed": true
+    },
+    {
+      "label": "one death produces one confetti burst",
+      "passed": true
+    },
+    {
+      "label": "repeat hits cannot duplicate confetti or pool entries",
+      "passed": true
+    },
+    {
+      "label": "confetti really moves and uses four shape batches",
+      "passed": true
+    },
+    {
+      "label": "confetti starts at the destroyed body's world location",
+      "passed": true
+    },
+    {
+      "label": "confetti cleans itself up",
+      "passed": true
+    },
+    {
+      "label": "same ball returns with full health and collisions",
+      "passed": true
+    },
+    {
+      "label": "reset does not celebrate undamaged balls",
+      "passed": true
+    },
+    {
+      "label": "range configured for damaging laser and no player target",
+      "passed": true
+    },
+    {
+      "label": "autonomous laser removes health once per tick",
+      "passed": true
+    },
+    {
+      "label": "autonomous laser destroys a ball and creates confetti",
+      "passed": true
+    },
+    {
+      "label": "laser preserves reusable pool identities",
+      "passed": true
+    },
+    {
+      "label": "false config really selects projectile mode",
+      "passed": true
+    },
+    {
+      "label": "real projectiles fly out of muzzle and finish a ball",
+      "passed": true
+    },
+    {
+      "label": "rotated tracking laser aims up and destroys via shared receiver",
+      "passed": true
+    },
+    {
+      "label": "tracking laser never frees the pooled ball",
+      "passed": true
+    },
+    {
+      "label": "unloading hall removes pooled world bodies",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "physics": "Jolt Physics"
+}

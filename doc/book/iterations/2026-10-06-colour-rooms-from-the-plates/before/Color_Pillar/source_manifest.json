@@ -1,0 +1,34 @@
+{
+  "room": "Color_Pillar",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Pillar/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Pillar/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Pillar/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Pillar/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Pillar/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Pillar/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Pillar/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Pillar/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Pillar/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Pillar/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Pillar/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "657765bbdd9100d9a027f0570955bd7e4b30abd47e9951d4480ba69cddadd6a2",
+    "commons/maps/Color_Pillar/map_data.json": "1c650917910a0507685b26e91fc4f085e458ebe041bc6d3ebc6cfaa01ef207fc",
+    "tools/probes/colour_gallery.gd": "fcf4dbe159bce40b7867f701b1a3c3664bc69387e4a28e33841e5173a9103319",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "56c949ebb87f6436abc2ee1e0b125682ab0d003d28dc3ba64a5be9c2eb5218a6",
+    "ada_run/encounter_pilot/Color_Pillar/control.json": "2dbeb082f22a443dfbb6936e1d2edf87ea7dbbd6a23c81540a4b288fe99873d2",
+    "ada_run/encounter_pilot/Color_Pillar/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Color_Pillar/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Pillar/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/color.json": "77b59859a9f4db9c5be073060ed645c09084392186b97117c2fdd386baa1e507",
+    "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn": "3dc213d01edeb255f91978684ad3f4ef65bc31fd822a61ccf0665e9934a7a69f",
+    "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd": "92e2d161ec632f730f3954d736a50821de89b72ac0ec68dc6aef4e67594f3b7d",
+    "commons/artifacts/registry/composition_twins.json": "eed00aa56d973cf68a348da758fd1b0579ee8679dd0dd991aeec0f869ad30bcb",
+    "commons/artifacts/composition_twins/composition_twins.tscn": "c529dce0c7fa4c2348d48d1b0d158c37b30acae3d9000d1e47b358761c6d99a7",
+    "commons/artifacts/composition_twins/composition_twins.gd": "92fe906963f3737bbb340f68d419f4fe4cb5521689cac9ca11da355d35f7f16c"
+  }
+}

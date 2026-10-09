@@ -1,0 +1,436 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Primitives_Polythedra · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Primitives_Polythedra">← Tutorial lineage</a></p><h1>Primitives Polythedra</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Primitives_Polythedra/final.md">Raw captured source</a></p><pre># Trihedra and First Solids
+
+The face you made in the last room could be seen from either side. Now let faces meet. When do they begin to enclose something?
+
+&lt;!-- @grab_trihedron --&gt;
+
+Pick up the open corner and turn it. Follow the three triangles toward the point they share. Then look through the opening opposite that point. Something suggests an inside, although one side is missing.
+
+Count the faces before looking at the code. Three. The artifact is a finite model of a trihedral corner: three faces meeting at one vertex. Its four stored positions are connected like this:
+
+```gdscript
+[0, 1, 2]
+[0, 2, 3]
+[0, 3, 1]
+```
+
+Position `0` belongs to all three triangles. The other positions make a rim around the opening. No row joins those three rim points into a base.
+
+We have turned the face into a corner. We have not yet closed a surface around a volume.
+
+&lt;!-- @grab_tetrahedron --&gt;
+
+Turn the tetrahedron a few steps on. Find a face where the first object has an opening. Follow its edges toward the opposite vertex. Four faces now complete the enclosure.[^polyhedra-separation]
+
+Adding a base to the open corner would close a tetrahedron. This neighbouring example is regular, with four congruent equilateral faces. Its proportions differ, so compare how the faces connect before comparing their shapes.
+
+Look at the tetrahedron as a little room with no door. Imagine it large enough to stand inside: where would you enter? The renderer draws the boundary without filling the interior with material. Enclosing a region has not supplied a way into it.
+
+Now look back through the open corner. Would a small object fit through its missing side?
+
+The same four positions used for drawing enter another construction:
+
+```gdscript
+var convex_shape = ConvexPolygonShape3D.new()
+convex_shape.points = geometry[&quot;vertices&quot;]
+collision_shape.shape = convex_shape
+```
+
+The convex collision hull spans the four positions, including the base absent from the drawing.[^polyhedra-hull] Rendering leaves an opening; physics receives a closed shape. The points have entered two rules and acquired different boundaries.
+
+&lt;!-- @polyhedra_boundary_plate --&gt;
+
+Look at the two versions on the wall. The amber base makes visible a boundary you could not see on the object in your hand.
+
+![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/figures/Primitives_Polythedra/polyhedra-boundaries.png)
+
+*Four positions, two boundaries. The amber face shows where the convex hull closes the opening.*
+
+That does not mean your tracked hand must stop there. Which body collides, with which layers, matters too. The geometric surface remains open; passage for a particular simulated body is another question.
+
+## A corner makes room
+
+Walk toward a pink corner. A triangular face meets you before the two walls do. Follow its lower edge across the floor, then look up to the point where it ends. The corner looks cut away because we have filled it.
+
+Imagine four points: one at the old floor corner, one farther along each wall at floor level, and one directly above the corner. Join every pair. Three triangular faces lie against the floor and the two walls. The fourth faces you. Behind it, the collision hull occupies the enclosed volume.
+
+This tetrahedron is a **three-dimensional simplex**. We have been approaching it all along: a point, a line segment, a triangle, a tetrahedron. Each step adds a point outside the space spanned by the previous ones. Here four points that do not lie in one plane are enough to enclose a volume.
+
+The small regular tetrahedron has equal edges. This one takes its proportions from the room: three edges leave the old corner at right angles. Follow the pink face into the walls. Its fit depends on their agreement.
+
+Walk up to it. The room has gained a solid and lost a little space for your walk. To make one body fit, we have changed the room available to another.
+
+## A face meets the floor
+
+&lt;!-- @prism_block --&gt;
+
+Find the bare prism examples toward the entrance side of the room. Follow a triangular end, then an edge joining it to the other end. The triangle has acquired a length. Two triangular ends and three connecting faces bound a triangular prism.
+
+Compare the whole block with the quartered version and the open frame. Their visible construction changes; all three retain the original prism&#x27;s collision surface. The gaps offered to your eye have no corresponding cutouts in that surface.
+
+Approach a utility wedge from its low end and try walking toward the raised floor. Compare that approach with an upright face. Where can forward movement become upward movement?
+
+The museum builds these wedges from a walkable prism scene, scaling the rise and the run:
+
+```gdscript
+w.scale = Vector3(1.0, maxf(0.05, rise), maxf(0.2, run_cells))
+```
+
+The low edge must meet the floor; the upper edge needs somewhere to arrive. The moving body&#x27;s collision and slope settings also participate.[^polyhedra-gibson] If a join catches you, notice where. A continuous-looking route still has to work as a route.
+
+You can hold a small solid and inspect it. A larger arrangement of faces begins to carry the inspector. The lesson has moved from the object in your hand to the conditions of your own movement.
+
+&lt;!-- @concrete_barrier --&gt;
+
+Approach the striped concrete enclosure and follow its outside edge. Its stepped profile is carried along a length too, with a collision body added. Related constructions can offer ascent or interrupt a route. Geometry does not decide the use.
+
+A barrier might protect a place to stand; a slope might lead somewhere difficult to leave. Follow what this arrangement permits before deciding what you would change.
+
+&lt;!-- @street_sign --&gt;
+
+STOP stands beside the concrete. Did you pause at the word or at the physical boundary? Recall WALK THIS LINE: an instruction can orient you without enforcing collision. This sign has no collision body of its own.[^polyhedra-ahmed]
+
+Read one arrow on its blue disc, then look where it points. An arrow can propose a direction without knowing whether the route is traversable.
+
+Look back at the barrier and the slope. Which would you change, and whose movement would it change? The fixtures are fixed here; this is a proposal to carry onward.
+
+Keep the distinction: enclosing a region, admitting a body and suggesting a direction require different decisions. Next, take hold of a cube&#x27;s corner. Several faces will answer the same movement. We know how faces can close around a space; now we can ask what keeps them together when their positions change.
+
+[^polyhedra-separation]: For the Jordan–Brouwer separation theorem, see Zuoqin Wang&#x27;s [Topology lecture 23](https://staff.ustc.edu.cn/~wangzuoq/Courses/20S-Topology/Notes/Lec23.pdf), Theorem 2.7 (2020). In three dimensions, a surface embedded in Euclidean space and homeomorphic to a sphere separates its complement into two components, one bounded and one unbounded. The tetrahedron&#x27;s boundary fits these conditions. This establishes separation, not a collider, an entrance or habitability.
+
+[^polyhedra-hull]: Godot&#x27;s [ConvexPolygonShape3D](https://docs.godotengine.org/en/4.6/classes/class_convexpolygonshape3d.html) is a solid collision shape. The opening here belongs to the rendered mesh, not to that hull. A collision model assembled from surface triangles is a different construction; Godot&#x27;s [ConcavePolygonShape3D](https://docs.godotengine.org/en/4.6/classes/class_concavepolygonshape3d.html) is intended chiefly for static geometry. This is not an instruction to replace a held object&#x27;s hull with a concave shape without considering its physics behavior.
+
+[^polyhedra-gibson]: James J. Gibson, [The Ecological Approach to Visual Perception](https://memoof.me/download/1058/pdf/1058.pdf) (1979; linked Classic Edition), chapter 8, relates a surface&#x27;s affordance of support to the animal&#x27;s size, weight and behavior. The wedge invites a computational comparison: passage depends on the surface and the moving body&#x27;s implementation. The engine&#x27;s settings do not exhaust Gibson&#x27;s account of perception or the visitor&#x27;s bodily experience.
+
+[^polyhedra-ahmed]: See Sara Ahmed, [Queer Phenomenology](https://www.dukeupress.edu/queer-phenomenology) (2006), Introduction; the fuller discussion accompanies WALK THIS LINE. Here orientation returns through a sign beside a physical boundary. Reading an instruction and meeting collision remain different operations.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Primitives_Polythedra/tutorial.md">Raw captured source</a></p><pre># Enclose a region, then meet a body
+
+Triangle separated closing a loop from drawing its face. This hall follows faces into an open corner, a closed surface and a route through the room. The next hall, Point_Animatedcube, makes the construction of a cube available for inspection.
+
+## Inspect the opening
+
+Turn `grab_trihedron`. Count three faces sharing an apex and locate the missing base. Compare `grab_tetrahedron`, whose fourth face completes a closed surface. The regular tetrahedron has different proportions from the open corner; the comparison concerns closure, not a live before/after button.
+
+The trihedron&#x27;s actual face indices are:
+
+```gdscript
+[0, 1, 2]
+[0, 2, 3]
+[0, 3, 1]
+```
+
+Its renderer emits those faces. Separately, the script gives its collision shape all four positions:
+
+```gdscript
+var convex_shape = ConvexPolygonShape3D.new()
+convex_shape.points = geometry[&quot;vertices&quot;]
+collision_shape.shape = convex_shape
+```
+
+The hull includes the missing base. This is a reason to distinguish visible opening and physical passage. A test must identify a colliding body and its layers; the behavior of an unconstrained tracked hand cannot settle that question.
+
+## Carry the comparison into the room
+
+At `prism_block`, compare the whole block, quartered version and shell. Each is a placed configuration. Changing the visible grain leaves the original static collision surface. There is no visitor grain selector here.
+
+Try the utility wedges from the low end. Their rise and run are scaled by the museum builder, but successful ascent also needs connected floors and suitable movement settings. Compare with approaching an upright face. Report a failed join as a failed join.
+
+Follow the concrete enclosure&#x27;s outside edge. Its striped material and extruded profile make a visible boundary; `#blocking:1` supplies a physical one. Then read STOP and the arrows. Those sign scenes contain no collision object. Ask where a pause began, and inspect a suggested route before trusting it.
+
+We can now distinguish a surface&#x27;s enclosure, a body&#x27;s collision and a reader&#x27;s response to a sign. All participate in this room, with different rules. The [technical reference](technical.md) unfolds the source and calculations behind the comparison.
+
+## Return visits
+
+These works remain in their original positions. Choose a question; their secondary role does not make them disposable.
+
+### Barrier and sign: stay with the arrangement
+
+The first passage touches these briefly. To continue, follow the stepped end profile of `concrete_barrier` and compare it with the bare prism. Both use a cross-section carried along a length; their profiles differ. The technical reference shows the actual extrusion code.
+
+At `street_sign`, find ahead, left, right and both ways. Stand where one becomes legible, then inspect its route. The rectangular shaft and triangular head form a geometric mark; the mark does not check the floor. Choose one pause you would preserve, one arrow you would turn or one barrier you would move. Whose movement would change? The installed fixtures remain fixed, so distinguish a proposal from an available grab control.
+
+The critical text develops continuity, division and the question of who benefits from an arrangement. This later reading does not require deciding that barriers are intrinsically oppressive or that every opening is beneficial.
+
+### Pyramid: change a corner
+
+At `pyramid_edit`, find the apex handle and four base handles. Keep the base still and raise the apex. Predict which faces change before lowering it again. Then change a base corner. The placed editor allows independent movement; its other constraint modes are source configuration options, not promised buttons.
+
+A crossing or collapsed set of faces can outlive the name we gave it. The editor updates positions without certifying every result as an enclosed pyramid. A changed apex can still make a perfectly valid pyramid. The question is which relations remain, not how far the handle moved.
+
+Source: [pyramid_edit.gd](../../primitives/pyramid/pyramid_edit.gd).
+
+### Cube: count and compare
+
+At `cube_scene`, count eight vertices, twelve edges and six geometric square faces. Compare the tetrahedron&#x27;s four, six and four. Both give `V - E + F = 2`. Be explicit about whether you count square faces or rendering triangles: introducing a face diagonal adds an edge as well as a face.
+
+The technical reference keeps this calculation and angular defect. Neither measures volume. These are useful questions to revisit after the small enclosure lesson, without requiring the visitor to learn every invariant before leaving.
+
+### Diamonds: a relation repeated
+
+Follow how successive units turn along the stack. The configured default accumulates an angle from one unit to the next. Distinguish the shape of a unit from the rule arranging several. The source offers fixed, alternating and accelerating arrangements too; this room does not supply a switch between them. Those would make a comparison for a later iteration.
+
+Source: [diamonds.gd](../../primitives/combines/diamonds.gd).
+
+### Rocks: a boundary between neighbours
+
+The `rock_spawner` placement requests thirty irregular rocks. Look for gaps between their boundaries. Shape, arrangement, gravity and collision all contribute to the pile. Irregularity does not by itself establish that no denser packing is possible. The existing wall phrase “thirty rocks that never pack” is an invitation to investigate, not a mathematical result.
+
+Source: [RockSpawner.gd](../../primitives/rockfactory/RockSpawner.gd).
+
+### Scanner: what would a section retain?
+
+At `rock_scanner`, watch the cyan plane move through its height range. Predict how a cut through a rock would change as the height changes. The current scene moves the plane and its thin collision box. Its own ready/process path does not call the separate display-creation and cross-section-update functions, so do not expect an active measured contour display.
+
+The unused display code is also an approximation, not a mesh-intersection algorithm. A future comparison should hold one rock still, expose the cut height, and distinguish its geometric intersection from any approximation. The plane currently has a collider, so a later slicing experiment must decide whether the instrument should also move the objects it is meant to examine.
+
+Source: [RockScanner.gd](../../primitives/rockfactory/RockScanner.gd).
+
+### Other systems and a request
+
+`interactive_point_origin_force` and `becoming_catalyst` retain a route toward acting on other bodies. `path_watchdog` and `path_game_controller` retain the older path-game layer. They are not prerequisites for this geometric walk, and their presence alone does not demonstrate an active path game in the endless museum. Inspect their integration before giving visitors a challenge that depends on it.
+
+The `if_not_exist_create` marker requests a primitive gallery. It records work still to make. Two traffic cones remain part of the room&#x27;s directional vocabulary. None of these has been removed to narrow the book.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Primitives_Polythedra/technical.md">Raw captured source</a></p><pre># Polyhedra: source and further calculations
+
+This reference supports the encounter in final.md and the tutorial&#x27;s return visits. It builds on Triangle&#x27;s indexed faces and prepares the mesh assembly in Point_Animatedcube. Source excerpts below describe the installed implementation; the mathematical functions are separate reference calculations, not live room readouts.
+
+## Four positions, two constructions
+
+[grab_trihedron.gd](../../primitives/trihedron/grab_trihedron.gd) constructs four positions and three faces, all sharing vertex 0. Its default wedge shape leaves the rim triangle undrawn. All figure configurations retain that three-face connectivity. The name `regular` changes proportions; it does not add a fourth rendered face.
+
+```gdscript
+[0, 1, 2]
+[0, 2, 3]
+[0, 3, 1]
+```
+
+The separate collision shape is a ConvexPolygonShape3D through the four positions. It closes their convex hull. The leading identity comment&#x27;s older description of a quad base does not match the face-building function; a three-point rim would require a triangular base.
+
+[grab_tetrahedron.gd](../../primitives/tetrahedron/grab_tetrahedron.gd) uses scaled sign combinations `(1,1,1)`, `(1,-1,-1)`, `(-1,1,-1)`, `(-1,-1,1)` and four faces:
+
+```gdscript
+[0, 2, 1]
+[0, 1, 3]
+[0, 3, 2]
+[1, 2, 3]
+```
+
+Its edges have equal length. A general tetrahedron need not be regular. Both scenes are pickable and may snap to nearby shelf points. Neither placed scene supplies an alternate material, so its inherited material-button handler is not a usable surface toggle here.
+
+Godot distinguishes [solid convex collision shapes](https://docs.godotengine.org/en/4.6/classes/class_convexpolygonshape3d.html) from [triangle-based concave shapes](https://docs.godotengine.org/en/4.6/classes/class_concavepolygonshape3d.html). The latter are chiefly appropriate for static geometry. Choosing a collision representation requires considering the moving body&#x27;s physics, not only matching a visible hole.
+
+## A simplex fitted to the room
+
+The museum&#x27;s [corner builder](../../scenes/em/em_simplex_corners.gd) reads nine `map_info.museum.simplex_corners` entries in this map. Each supplies a floor-corner coordinate, two inward signs, a reach and a pink finish (`#ee5599`). All use the museum wall height, currently 4.5 m. Main-hall reaches are 1.5 m; side-room reaches are 1.1 m, with 0.9 m beside a doorway. These fixed architectural pieces have no grab or resize control.
+
+The four local vertices are the floor corner, the two floor intercepts and the upper wall junction:
+
+```gdscript
+var points := PackedVector3Array([Vector3.ZERO, Vector3(sx * reach, 0, 0),
+    Vector3(0, 0, sz * reach), Vector3(0, height, 0)])
+```
+
+Four triangular faces close the mesh; the same points define a `ConvexPolygonShape3D`. The three edges from the floor corner are mutually perpendicular. This is a right tetrahedron, not the regular equal-edge tetrahedron on the plinth. Its volume is `reach * reach * height / 6.0`. Rendering describes the boundary; the convex collision shape treats the enclosed volume as solid for colliding simulated bodies.
+
+The corner builder checks that both backing walls are continuous and the bordering cells are floor. It rejects cuts across a doorway. Navigation reserves the corner footprint, while trim and automatic service props avoid the fill. The pink material belongs to each piece and does not mutate the shared wall material. The map&#x27;s underlying grid cells and existing artifacts are unchanged.
+
+## A prism&#x27;s grain and its retained collision
+
+[prism_block.gd](../../primitives/prismes/prism_block.gd) changes visible geometry for `grain:solid`, `quartered` and `shell`, the three values already placed in this room. [The scene](../../primitives/prismes/prism_block.tscn) retains one StaticBody3D with its original ConcavePolygonShape3D. That surface is closed like the original prism; it has no cutouts corresponding to gaps in the shell drawing. This is a retained surface collider, not the trihedron&#x27;s convex-hull implementation.
+
+The museum&#x27;s four `wp` utilities instantiate the walkable prism through `endless_museum.gd::_stamp_wedge`. Rise and run are scaled, with lower bounds preventing collapsed dimensions. Width is one metre; the source scene&#x27;s baked orientation must be included when reading the dimensions. Neighboring floor heights, join continuity and the player&#x27;s movement settings still determine a usable ascent.
+
+## Extrusion and instruction
+
+[concrete_barrier.gd](../../artifacts/concrete_barrier/concrete_barrier.gd) sweeps a Jersey-style profile along local X:
+
+```gdscript
+var outline := MF.jersey_outline(base_width, top_width, barrier_height)
+body.mesh = MF.extrude_profile(outline, barrier_length, barrier_height)
+```
+
+The twelve placed sections request lengths of 1 m, height 0.85 m, base width 0.60 m and `blocking:1`. The hull generated by `body.mesh.create_convex_shape()` can span details of that profile. The default elsewhere remains non-blocking unless configured.
+
+[street_sign.gd](../../artifacts/street_sign/street_sign.gd) supplies STOP plus the placed `ahead`, `left`, `right` and `both` arrow configurations. The sign&#x27;s front is local +Z; the five placements rotate it 180 degrees. No collision object is added. The arrows are geometric marks, not pathfinding results or visitor controls.
+
+## Count a closed surface
+
+The following counts refer to geometric polygon faces, not GPU vertex submissions:
+
+| Convex regular polyhedron | V | E | F | V − E + F |
+| --- | ---: | ---: | ---: | ---: |
+| Tetrahedron | 4 | 6 | 4 | 2 |
+| Cube | 8 | 12 | 6 | 2 |
+| Octahedron | 6 | 12 | 8 | 2 |
+| Dodecahedron | 20 | 30 | 12 | 2 |
+| Icosahedron | 12 | 30 | 20 | 2 |
+
+The tetrahedron and cube are current comparison objects. This table is not a claim that all five are placed. For these sphere-topology boundaries the Euler characteristic is 2. A toroidal boundary has a different value. Triangulating a square by inserting a diagonal raises both E and F by one, preserving the characteristic.
+
+The condition on a convex regular vertex is that its incident face angles sum to less than 360 degrees. Three, four or five equilateral triangles; three squares; or three regular pentagons give the five possible local patterns. These statements concern convex regular polyhedra, not every folded arrangement of faces.
+
+## Angular defect does not measure volume
+
+For an ordinary polyhedral vertex, subtract the incident face angles from 360 degrees. A cube corner gives `360 - 3*90 = 90`; a regular tetrahedron corner gives `360 - 3*60 = 180`. Summing the defects over a closed convex polyhedron gives 720 degrees. Scaling a cube changes its volume while leaving those angles unchanged. The earlier tutorial&#x27;s claim that this is where a solid “keeps its volume” was incorrect.
+
+In a convex setting, zero defect marks a locally flat intrinsic neighborhood. It does not guarantee that an arbitrary folded embedding lies in one plane. Likewise, dragging unconstrained handles can produce crossing faces for which the original solid interpretation needs reconsideration.
+
+## Measure a tetrahedron&#x27;s volume separately
+
+These reference calculations use lengths and positions:
+
+```gdscript
+func regular_tetrahedron_volume(edge_length: float) -&gt; float:
+    return pow(edge_length, 3) / (6.0 * sqrt(2.0))
+
+func tetrahedron_volume(v0: Vector3, v1: Vector3, v2: Vector3, v3: Vector3) -&gt; float:
+    var a := v1 - v0
+    var b := v2 - v0
+    var c := v3 - v0
+    return absf(a.dot(b.cross(c))) / 6.0
+```
+
+The first assumes a regular tetrahedron and a nonnegative edge length. The second handles four arbitrary positions and gives zero when they are coplanar. Neither is installed as a readout in this hall.
+
+## Scope of verification
+
+The existing `commons/testing/probe_polyhedra_flow.gd` loads the room&#x27;s barrier/sign placements through the museum stamper. It tests an isolated ascent with the museum wedge builder and supplied capsule motion. It does not establish full-room accessibility, live tracked-hand collision, scanner measurements or visitor comprehension. The dated iteration record holds the current run and remaining checks.
+
+## Museum corner construction — review clarification, 24 September 2026
+
+The chapter follows the endless museum build. Its pink architectural corners are created by `endless_museum.gd` through `em_simplex_corners.gd`, reading the map&#x27;s `museum.simplex_corners` configuration. They are part of the room, not independently placed artifact tokens. A grid-only load does not construct those corners. The chapter&#x27;s small held polyhedra and the architectural corner therefore need separate source lookup paths.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Primitives_Polythedra/intent.md">Raw captured source</a></p><pre># From enclosure to passage
+
+Follows Point_Triangle_Context, where closing a loop, emitting faces and displaying them became separable operations. Here faces meet at a corner, enclose a region, then support or interrupt a body&#x27;s movement. Point_Animatedcube follows by exposing the construction of a familiar closed mesh.
+
+The first passage asks: **what must be constructed before a boundary encloses space, and what must be added before it directs a body?**
+
+Primary encounters, in book order:
+
+1. `grab_trihedron`: inspect three faces and the missing base; distinguish its visible opening from its convex collision hull.
+2. `grab_tetrahedron`: compare with a regular four-face enclosure. This is a comparison between held objects, not an installed assembly puzzle.
+3. `prism_block`: compare the solid, quartered and shell versions, whose collision surface is retained. Existing `wp` utilities carry the question into ascent.
+4. `concrete_barrier`: follow the striped enclosure, inspect its extruded profile and distinguish material from collision.
+5. `street_sign`: compare the STOP instruction and four arrow configurations with the physical routes.
+
+The five former additional primaries remain placed and become return visits: `pyramid_edit`, `cube_scene`, `diamonds`, `rock_spawner`, `rock_scanner`. They keep separate questions about editable corners, counting, repetition, packing and sections. The tutorial carries these encounters; the technical reference retains the deeper mathematics. No artifact, utility or floor cell is removed or moved.
+
+Critical opening: a visually open form may retain a closed collision model; a sign can influence movement without imposing collision. A useful barrier need not be oppressive and an open route need not be beneficial. Ask whose action a proposed change would allow. The map does not currently let visitors rearrange the fixed barriers or signs.
+
+The current inventory has 35 placements and four utility wedges. The whole-room walk and headset reach remain review tasks. Existing component checks cover barrier stamping and blocking, a museum wedge ascent with a supplied capsule, and the sign&#x27;s lack of collision. They do not establish that a tracked hand is stopped by the trihedron or that all floor joins are traversable. See the dated iteration record for current evidence.
+
+## Shared book illustration, 23 September
+
+`polyhedra_boundary_plate` supports the first two encounters in their existing primary group. It depicts the default open trihedron and the convex hull of the same four points, viewed from the opening. The amber base exposes where the hull closes the missing mesh face. This static native scene supplies both the wall work and the book render. The original figures remain grabbable; the plate adds no controls. Nine authored pink corner fills remain intact.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Primitives_Polythedra/critical.md">Raw captured source</a></p><pre># A boundary has more than one account
+
+Turn the open trihedron until its missing base faces you. Three visible triangles suggest a corner and an inside. The source gives its physics body a convex hull around all four vertices. That hull closes the opening which the rendering leaves open.
+
+This is a useful place to begin criticism because the disagreement can be located. It belongs to two constructions of the artifact, not to a vague claim that all simulation is false. A mesh answers what to draw; a collision shape participates in deciding what can pass. Which body, which layer and which motion must still be specified before a blocked passage becomes an observation.
+
+## The solid does not choose its purpose
+
+The closed tetrahedron has four vertices, six edges and four faces. The cube has eight, twelve and six. Both give `V - E + F = 2`. That relationship is exact for these geometric boundaries. Its application to a rendered object depends on what we count: square faces, rendering triangles, or a damaged mesh are different descriptions which need checking.
+
+Regularity does not remove remainders from implementation. Nor does a finite list of vertices make every measurement rational: the diagonal of a unit square is already the square root of two. We can count parts exactly while storing their positions with finite precision. Mathematics and its implementation need not be collapsed into the same claim.
+
+The editable pyramid makes this distinction practical. Its handles can move a familiar square-based form into a collapsed or crossing configuration. Updating the points does not certify the result as a valid enclosed solid. The editor continues where a name may cease to fit. That continuation is something to examine, rather than automatically an error to suppress or a liberation to celebrate.
+
+## The same vocabulary, another movement
+
+A triangular prism can supply a wedge. With a low end meeting the floor and a suitable collision surface, forward movement can become ascent. An upright surface can stop that movement. The concrete enclosure develops the extrusion further: a stepped, tapered profile is carried along a length and given a convex collision hull.
+
+These are related constructions, not identical cross-sections. Their uses also depend on arrangement, approach and the movement system. Calling an object a barrier describes a relation to a possible passage. Calling it a slope describes a relation which might support passage. A body still has to encounter those relations.
+
+Smooth and striated space enter this room as a working lens: follow continuity, then locate the divisions which make it possible or interrupt it. The apparently smooth ascent is still produced through a faceted collision surface and discrete movement updates. A repeated barrier line can restrict movement while helping someone orient. An opening can invite movement while failing to support it. The task is to find who benefits, who is stopped, and which alternative the arrangement makes difficult to imagine.
+
+## An instruction is not a collision
+
+The STOP sign has no collision body of its own. The striped barriers in this room do. A visitor who pauses at the word participates in an instruction through reading it; the player&#x27;s physics body meets a different rule at the concrete. If we call both effects control without distinguishing their mechanisms, we lose the most useful part of the encounter.
+
+The blue arrows add another dependence. Left and right are offered from a face oriented in the room. The mark does not contain a route or check whether it remains usable. An arrow can be legible and misleading. Two arrows can offer a choice whose branches do not serve the same bodies.
+
+The queer possibility here need not take the form of destroying every boundary. It might be a barrier becoming a resting edge, a pause becoming deliberate, or a familiar direction becoming available to another use. Those are proposals to test, not properties secretly guaranteed by the shapes. Ask which change would let someone act differently, and what would have to change in both the visible room and its implementation.
+
+We leave with several accounts still in play: what looks open, what admits a body, what asks us to move, and what we choose to do. The next room will continue before we have exhausted them.
+
+## Implementation anchors
+
+- `commons/primitives/trihedron/grab_trihedron.gd`: three rendered faces and a convex hull collision shape.
+- `commons/primitives/pyramid/pyramid_edit.gd`: independently movable apex and base handles.
+- `commons/artifacts/concrete_barrier/concrete_barrier.gd`: profile extrusion; optional `blocking` hull, enabled on this room&#x27;s barriers.
+- `commons/artifacts/street_sign/street_sign.gd`: text or geometric arrow variants, without a collision body.
+- `commons/scenes/endless_museum.gd`, `_stamp_wedge`: the museum&#x27;s walkable wedge construction.
+
+The component probe checks physical blocking and ascent with supplied capsule movement. It does not establish full-room accessibility or the experience of a visitor in a headset.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Primitives_Polythedra/artifacts.md">Raw captured source</a></p><pre># Primitives_Polythedra — current inventory
+
+23 September 2026. All 34 earlier placements remain, with a native reference plate added as placement 35. Five hands-on/architectural artifact types and the shared illustration carry the book&#x27;s first passage; repeated instances keep their configurations. Role order is the authored route, while the grid coordinates below record actual placement. Coordinates are (column, row).
+
+| Artifact | Role | Positions | Scene |
+| --- | --- | --- | --- |
+| `grab_trihedron` | primary | (9, 5) | [source](../../../commons/primitives/trihedron/grab_trihedron.tscn) |
+| `grab_tetrahedron` | primary | (6, 7) | [source](../../../commons/primitives/tetrahedron/grab_tetrahedron.tscn) |
+| `polyhedra_boundary_plate` | primary reference | (1, 5) | [source](../../artifacts/polyhedra_boundary_plate/polyhedra_boundary_plate.tscn) |
+| `prism_block` | primary | (5, 1), (2, 5), (3, 5) | [source](../../../commons/primitives/prismes/prism_block.tscn) |
+| `concrete_barrier` | primary | (5, 10), (6, 10), (7, 10), (4, 11), (8, 11), (4, 12), (8, 12), (4, 13), (8, 13), (5, 14), (6, 14), (7, 14) | [source](../../../commons/artifacts/concrete_barrier/concrete_barrier.tscn) |
+| `street_sign` | primary | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | [source](../../../commons/artifacts/street_sign/street_sign.tscn) |
+| `path_watchdog` | secondary | (4, 1) | [source](../../../commons/hazards/path_watchdog/path_watchdog.tscn) |
+| `path_game_controller` | secondary | (6, 2) | [source](../../../commons/hazards/path_game/path_game_controller.tscn) |
+| `interactive_point_origin_force` | secondary | (4, 4) | [source](../../../commons/primitives/point/interactive_point_origin_force.tscn) |
+| `becoming_catalyst` | secondary | (6, 4) | [source](../../../commons/hazards/becoming_catalyst/becoming_catalyst.tscn) |
+| `pyramid_edit` | secondary | (4, 7) | [source](../../../commons/primitives/pyramid/pyramid_edit.tscn) |
+| `cube_scene` | secondary | (8, 7) | [source](../../../commons/primitives/cubes/cube_scene.tscn) |
+| `diamonds` | secondary | (6, 12) | [source](../../../commons/primitives/combines/diamonds.tscn) |
+| `trafficcone` | decoration | (3, 16), (7, 16) | [source](../../../commons/primitives/trafficcone/trafficcone.tscn) |
+| `if_not_exist_create` | secondary | (10, 18) | [source](../../../commons/artifacts/if_not_exist_create/if_not_exist_create.tscn) |
+| `rock_spawner` | secondary | (4, 20) | [source](../../../commons/primitives/rockfactory/RockSpawner.tscn) |
+| `rock_scanner` | secondary | (4, 22) | [source](../../../commons/primitives/rockfactory/RockScanner.tscn) |
+
+## Configuration and purpose
+
+- `prism_block`: the example at (5, 1) is solid; (2, 5) is quartered; (3, 5) is a shell. Their visible grain differs while the original collision surface remains.
+- `grab_trihedron`: rotated 180 degrees with a 0.90 m plinth request; `grab_tetrahedron` requests a 0.90 m plinth. These are token parameters, not a measured reach result.
+- Twelve `concrete_barrier` sections: 1 m long, 0.85 m high, 0.60 m wide at the base, with blocking enabled. They surround the preserved central opening.
+- Five `street_sign` placements: STOP/WAIT at (6, 9); both ways at (3, 9); ahead at (2, 11); left at (3, 15); right at (7, 15). All face toward earlier rows by a 180-degree rotation and request 1.70 m poles.
+- `pyramid_edit`, `cube_scene`, `diamonds`, `rock_spawner` and `rock_scanner` are now secondary return visits. Their placements and settings have not changed. See [tutorial.md](tutorial.md#return-visits) for what to try and which claims remain unverified.
+- `rock_spawner` requests thirty rocks. `rock_scanner` animates a plane with a collider; its own process path does not activate the cross-section display.
+- `if_not_exist_create` requests a future primitive gallery. Its presence does not mean that gallery has been constructed.
+
+Four `wp` utility wedges remain at (1, 3), (1, 12), (2, 12), (3, 12). They are floor infrastructure supporting the prism encounter, not extra artifact cards. Entry is (7, 0), exit (4, 27). The three text utilities and their wording remain unchanged.
+
+The old inventory listed `lab_room`, `snap_tetrahedron_puzzle`, `floating_sphere_field` and `tentacle_placer`; none is a current interactable placement here. The stored role file also retains some dormant historical entries. They are not counted as present objects. All original text is retained in the iteration archive.
+
+The reference plate faces into the hall from the west wall, at 0.8 scale, offset (-0.30, 0.34, 0) from source cell (1,5). A local sculpture-clear rectangle keeps generated decoration out of its reading area. Its same native meshes supply the book figure; existing corner fills and floor geometry remain.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Primitives_Polythedra/summary.md">Raw captured source</a></p><pre># Primitives_Polythedra — enclosure and passage
+
+This is room 6 of the current ten-room primitives sequence, between Point_Triangle_Context and Point_Animatedcube. It connects an open corner and a closed surface with the uses of those forms around a moving body.
+
+The map is 13 by 28 cells. Entry is `sp` at (7, 0); the exit `t` is at (4, 27). Coordinates below are (column, row), not world positions. The existing floor heights and museum placement rules still determine actual height.
+
+## The first passage
+
+| Encounter | Grid positions | Question |
+| --- | --- | --- |
+| Open corner: `grab_trihedron` | (9, 5) | Which face is missing, and does its collision model also leave it out? |
+| Closed surface: `grab_tetrahedron` | (6, 7) | What does another face enclose? |
+| Prism variants: `prism_block` | (5, 1), (2, 5), (3, 5) | What changes visually while the collision surface stays the same? |
+| Utility wedges: `wp` | (1, 3), (1, 12), (2, 12), (3, 12) | Where can forward movement become ascent? |
+| Twelve concrete sections | ring along columns 4–8, rows 10–14 | Where does the physical boundary redirect movement? |
+| STOP and four arrows | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | What is requested, and what is mechanically enforced? |
+
+The book visits the corner and tetrahedron before returning to the prism examples near the entrance. This is an authored comparison route, not a claim that the current floor automatically presents everything in that order.
+
+## Work to return to
+
+The five-handle pyramid and cube remain near the held solids. The diamond stack, thirty-rock spawner and scanner extend the lesson into repeated forms, gaps and sections. The scanner currently animates a cyan plane with a collider; its separate cross-section display is not activated by its own ready/process path. The legacy path-game nodes and catalyst objects remain available for a later gameplay review. The gallery request marker is a proposal, not a built gallery.
+
+[The tutorial](tutorial.md) includes return-visit questions for these works. [The technical reference](technical.md) retains face counts, angular defect, regular solids and volume calculations. [The inventory](artifacts.md) records all 34 current placements, including repeated objects.
+
+The former 7×9 layout and snap-tetrahedron puzzle described in earlier drafts are historical. The puzzle is absent from this room. Earlier drafts are preserved in the dated iteration archive.
+
+## Review still needed
+
+Inspect plinth reach, sign legibility, the backtrack to the prisms, the preserved central opening and the joins at each utility wedge in the actual museum. Component physics checks do not establish these full-room conditions. No layout or runtime behavior is changed by this editorial pass.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Primitives_Polythedra/blurb.md">Raw captured source</a></p><pre>Three faces meet and leave an opening. A fourth can enclose a region, but the body may already meet a boundary the eye cannot see. Follow a prism into a slope, concrete into a detour, and a triangle into an arrow asking you to move.
+</pre></section></body></html>

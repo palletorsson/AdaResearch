@@ -1,0 +1,16 @@
+{
+  "map": "Point_Lines",
+  "status": "verified",
+  "predecessor": "point-coordinates",
+  "provenance": "The complete printed line.gd continues the actual tested Coordinates output by exact declared edits. The existing point, shape construction and LOCAL/WORLD readout remain; a duplicate endpoint and live distance are added. The supplied renderer is printed in full, unchanged, and bound to this new native report.",
+  "brief": {
+    "bring": "The tested Coordinates point.gd with its point, surface, collider and LOCAL/WORLD readout.",
+    "make": "Two held endpoints, a live segment, and the distance between them.",
+    "given": "Configured XR hands, a unit-scale study, and the complete supplied line_skin.gd renderer.",
+    "build": "Keep point and readout; duplicate the point once; convert both ends into the study frame; subtract, measure, and update the same visible segment each frame.",
+    "check": "Either endpoint moves; both readings and distance follow; release stays; coincident endpoints hide the segment; pairs can be parallel, +, X or separated in depth.",
+    "later": "Trace stores positions in order. Grid will reuse points and relations without a pickup body at every position."
+  },
+  "carry": "A line study with two pickable endpoints, a live segment, the original coordinate readout and a distance reading. Pair exercises reuse this same line.",
+  "nextStatus": "Trace continues this exact script by keeping the original held point and recording accepted local positions. Grid remains planned."
+}

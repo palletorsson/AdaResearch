@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_SoftRules · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_SoftRules">← Tutorial lineage</a></p><h1>CA SoftRules</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_SoftRules/final.md">Raw captured source</a></p><pre># What can a cell receive?
+
+&lt;!-- @rd_artifact --&gt;
+
+Two small squares wait on the tables. Behind them, the same squares wait on curved walls. The room has already enlarged their answer, although neither field has taken a step.
+
+Find the small gold frame on either table, just outside the seeded square. This is W; the side desk reads its values. V is zero there in both fields. Press STEP once. On the left, a little arrives. On the right, nothing. Look back at the pictures: can you find that difference without the numbers?
+
+Press +100 and let the local clock complete its hundred updates. The fields begin to part. They began with the same values, at the same addresses. They have the same reaction. What has the right-hand square been denied?
+
+EXCHANGE B turns its neighbourhood exchange on and restores both beginnings. Advance again. The two fields now agree. Switch exchange off, replay, and look for the first place where they differ. We can locate the missing relation before giving the result a name.
+
+In the previous hall a neighbour above half health counted as one contribution to recovery. Here a cell stores two concentrations, U and V. It receives differences in concentration from the four sites beside it. For each field, the sum is its neighbours minus four copies of itself:
+
+```gdscript
+return a[y*N+(x+N-1)%N]+a[y*N+(x+1)%N]+a[((y+N-1)%N)*N+x]+a[((y+1)%N)*N+x]-4.0*a[y*N+x]
+```
+
+The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Each cell now holds two fractions, and a neighbour matters by how much its concentration differs.
+
+There is also a reaction at the address itself. The product U × V × V removes some U and adds some V. A feed term replenishes U; another term removes V. The installation uses the same arithmetic as the project&#x27;s existing Gray–Scott generator,[^ca-gray-scott] now exposed one update at a time:
+
+```gdscript
+var uvv:float=a*b*b
+```
+
+```gdscript
+next_u[i]=clampf(a+coupling*0.16*lap_u-uvv+FEED*(1.0-a),0.0,1.0)
+next_v[i]=clampf(b+coupling*0.08*lap_v+uvv-(KILL+FEED)*b,0.0,1.0)
+```
+
+With exchange off, the right-hand field still reacts. But at an unseeded address V is zero, so U × V × V is also zero. Nothing in that local reaction can make its first V arrive. The left-hand field can receive it. This difference is small enough to calculate and large enough to alter the wall. Even the right-hand square&#x27;s seeded cells cannot keep their V: at feed .037 and kill .060 the reaction alone has no resting state other than full U and no V, so by the end of the first hundred updates that square has nearly faded.
+
+Keep that distinction in hand. “Soft” is not a promise that the rule is gentle or that every boundary has disappeared. Both fields still occupy a 32-by-32 grid. The arithmetic writes into separate next arrays before swapping them into the present. Values are clamped between zero and one. At an edge, the remainder operator wraps the neighbour index to the opposite side. The wall has a visible border that the calculation does not share.
+
+Use VIEW U/V. Another distribution appears without a single new update. The initial view doubles V before mapping it into colour; the U view has its own palette. A colour can saturate while the stored value still has room to change. An image is already an interpretation of the field.
+
+Now walk between the two curved displays. Find a patch on a wall, then look for it on the table. Each pair shares the same texture. At the desk you could take in the small field; here you turn within its enlarged image.
+
+Press COAT. The colour surfaces disappear while the table fields continue. Bring them back. The fixed museum floor carries you through both views.[^ca-soft-coating] The field has become something the room can wear. Perhaps you would keep it here, or want it closer, as a lining against a body. What would you change for that other use?
+
+Between the displays, a small floor mark says **STEP IN / LEAVE A SEED**. Cross it. Both fields receive the same small second patch. With the clock running, watch beyond its edge as well as at its centre. Exchange lets some concentration leave the place where you put it. Try this after the first hundred updates: the new patch thins in A while the earlier pattern continues to spread. What lets something travel can also let it disperse.
+
+Stay on the mark. It does not keep replenishing the seed. Leave and return to place it again. INJECT makes the same intervention from the desk. We are no longer only watching a prepared beginning; we have entered another event into its history. REPLAY can restore that beginning. It cannot make our first encounter with the difference happen again.
+
+![A floor crossing places the same small patch on both curved field displays.](images/ca-seed-crossing.png)
+
+*The floor receives your arrival. What happens to the seed continues through the field&#x27;s own relations.*
+
+&lt;!-- @the_clockmaker_of_rules --&gt;
+
+Further on, the clockmaker has laid out trays, stencils and small worlds. The brass shapes make reading and writing almost look like trades we could perform with our hands. Find the fractional ring. It is a still radial diagram. Its graded appearance does not demonstrate a running Lenia field,[^ca-lenia] and the ornamental crank cannot advance it.
+
+Compare that invitation with the walls we have just left. Both offer pleasure in a patterned body; their means of producing it differ. We need neither reject the ornament nor grant it an operation it does not have. A diagram can help us imagine the machine, then leave us with something still to build.
+
+&lt;!-- @ --&gt;
+
+The local study holds after 2,400 updates. The museum goes on. We have watched a field change and a room wear its image. Carry a question from those surfaces: could a similar form have another way of becoming?
+
+[^ca-soft-coating]: COAT toggles the wall display meshes. Their geometry stays fixed and has no collision shapes; the museum floor supplies support. Sharing a field texture does not create a sensing or growing body. Those would require additional operations.
+
+[^ca-gray-scott]: The reaction is Peter Gray and Stephen Scott&#x27;s (*Chemical Engineering Science* 39, 1984), diffused across a grid; the feed .037 and kill .060 the readout prints lie in the range John Pearson mapped in “Complex patterns in a simple system” (*Science* 261, 1993).
+
+[^ca-lenia]: Lenia (Bert Wang-Chak Chan, *Complex Systems* 28, 2019) is a continuous automaton: its cells hold fractions, read a ring-shaped neighbourhood weighted by distance, and grow by a smooth function of what they find there. The still ring on the tray pictures that neighbourhood; nothing in it is being updated.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_SoftRules/tutorial.md">Raw captured source</a></p><pre># Try one missing relation
+
+1. Carry in graded health, synchronous updates and the distinction between appearance and support.
+2. Find W outside the beginning square. Predict which field can give it V; press STEP and read both concentrations.
+3. Use +100. Then switch EXCHANGE B on; both beginnings are restored. Compare equal ticks before attributing a difference to exchange.
+4. Switch exchange off and repeat. The reaction remains active in B. Explain why an unseeded site with V=0 cannot supply its own first V through U×V×V.
+5. Change VIEW while held. Follow the changed colour map and unchanged numerical state. Hide and restore COAT; the floor and table experiments remain.
+6. Inject the same patch into both current fields. Observe, then replay. Distinguish an intervention from a new rule.
+7. Visit the clockmaker bench. Identify stencils, buffer trays, calculated histories and still illustrations. The crank is ornamental.
+
+Extension: nominate what another body should receive from the field—a colour, displacement, force or control signal. Those are distinct mappings requiring distinct implementation and evidence. The current installation applies colour to tables and walls.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_SoftRules/technical.md">Raw captured source</a></p><pre># Incremental exchange in two fields
+
+`rd_artifact:0:0#study:exchange#plinth:0` mounts the optional live study. The original configured batch-heightmap path remains available and unchanged. The bare wrapper still requires a config outside study mode. This is a Gray–Scott reaction–diffusion discretisation, not an implementation of Lenia or stochastic CA.
+
+## State and update
+
+`live_field.gd` stores two 32×32 PackedFloat32Arrays U,V and separate next buffers. Beginning: U=1,V=0 except x,y=13..18 inclusive, where U=.5,V=.25. Both fields use the same fixed beginning. No random input is added. Five-point periodic Laplacian: left+right+above+below−4×centre. Du=.16,Dv=.08,F=.037,K=.060,dt=1. Explicit synchronous updates clamp each concentration to [0,1], then swap buffers. Exchange OFF sets both diffusion contributions to zero; reaction, feed and removal continue.
+
+W=(12,15) lies directly outside the seed. One update gives A: U=.92,V=.02; B with exchange off: U=1,V=0. At a uniform interior seed address, the first update is U=.48725,V=.257. The unchanged legacy batch implementation is `commons/graph_grammar/operations/rd_displace_op.gd`; the incremental solver is compared against it using exactly the same eight seeded disks in the runtime probe.
+
+## Controls
+
+STEP advances one update and holds. RUN toggles continuous stepping; at most four updates execute per 0.1-second opportunity, without catching up a delayed frame. Ticks denote numerical updates, not real seconds. +100 schedules exactly one hundred further updates (limited by the 2,400 total observation budget). REPLAY restores both fields and clears the intervention count while retaining view, coating and B exchange selection. EXCHANGE B toggles B&#x27;s diffusion and restores both beginnings. A always has diffusion enabled. INJECT sets U=.5,V=.25 at x=3..5,y=14..16 in both current fields, without advancing their clocks. VIEW U/V and COAT do not change stored values or time.
+
+## Spatial mapping
+
+Two 1.6 m table fields share their respective textures with two curved 3 m tall wall displays. Their grid edges are visible, but simulation edges wrap. Each CPU ImageTexture is 32² RGBA8, nearest filtered; no smoothing conceals the lattice. V colours interpolate from dark blue to pink using clamp(2V,0,1); U colours interpolate from violet to green using U. The wall surfaces have no changing collision. Plinths and the museum floor provide fixed support. A mounted witness instrument and eight pointer-compatible rack buttons stand to the side. The gold table frame nominates W; it does not follow a moving feature.
+
+## Preservation and limits
+
+The old 13×10 map&#x27;s retained gallery is carried into a 17×26 hall, with an added front bay and eastern aisle. All six authored works remain. rd_artifact and the_clockmaker_of_rules are primary and each has a book passage. Four other works remain secondary for later interaction review. The clockmaker lacked map_ready in the museum registry; its scene is restored and its labels now distinguish calculated histories from static illustrations. Current sequence order is unchanged. Desktop evidence accompanies the review page; headset reach, readability and performance remain unverified.
+
+## 25 September: a body leaves a seed
+
+The map adds `#seed:walk` to its existing exchange-study token. `walk_seed.gd` adds a flush visual mark, 1.5 × 1 m, centred at local (0,0,2.15). Its 1.8 m high Area3D receives the actual museum CharacterBody or XRToolsPlayerBody. Props, hands and unrelated characters are ignored. This measures body-volume overlap, not foot pressure or a chemical response to weight. The ordinary museum floor remains the collider beneath it.
+
+The first accepted arrival calls the existing `inject()` once. Both fields receive U=.5,V=.25 at the existing nine addresses x=3..5,y=14..16. No numerical time advances. Remaining in the mark does not replenish the patch; after all visitors leave, another arrival can inject again. REPLAY while occupied restores and holds the clean beginning until a fresh entrance. VIEW and COAT retain the body input and stored values. The original eight controls and solver are unchanged; the unconfigured exchange study has no floor receiver.
+
+After the first hundred updates, the controlled body enters and leaves this second patch. One further update transports V outside its original edge in A relative to a matched no-entry control; B&#x27;s unseeded neighbour stays zero. After a hundred further updates, the patch centre is weaker in A than B. This is dispersal as well as propagation, not evidence that exchange guarantees a seed&#x27;s persistence. Current native checks and limits are recorded in `encounter-notes.md`.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_SoftRules/intent.md">Raw captured source</a></p><pre>Concept: one cell stores two concentrations and receives differences from neighbouring sites.
+Sequence role: build on graded health and synchronous buffers; prepare matched interventions for CA_EdgeOfChaos.
+Primary encounter: rd_artifact&#x27;s optional exchange study; the_clockmaker_of_rules remains a second primary diagram.
+Experiment: same initial field, same reaction, feed, removal and time; disable only B&#x27;s diffusion. Follow W before interpreting the images.
+Application: the same field texture dresses a table and curved wall. Fixed museum support remains.
+Critical question: what becomes possible through exchange, and what does the displayed surface hide about state, boundaries and its mechanism?
+Retained works: lattice_gas_pump, ca_sphere, crack_propagation_ca and rule_30_110_gravity; they require their own later reviews.
+
+Body intervention: cross a floor mark to place the existing matched second seed, once per arrival. Standing does not replenish it. Follow what leaves the patch as well as what remains. Exchange permits propagation and dispersal; the visitor supplies an event without determining its continuation.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_SoftRules/critical.md">Raw captured source</a></p><pre># A softer image is not a softer rule
+
+The bridge counted neighbours above a health threshold. Here every concentration difference can enter an exchange term. The change is in the relation a site can participate in. It should be encountered through the paired calculation before becoming a story about softness, care or organic life.
+
+With exchange disabled, the seeded region still reacts. Outside it, zero V remains zero. The comparison gives a precise case where a site&#x27;s possibilities depend on what can reach it. It does not establish a universal account of social isolation: feed and removal already connect every site to modelled external reservoirs.
+
+The wall wears the same field as the table. The desire for a living room can begin there, but colour is one declared mapping. The room has no sensory feedback into these concentrations; the visitor&#x27;s INJECT action is a separate discrete input. Resemblance, responsiveness, reproduction and agency should remain questions with different tests.
+
+The apparently continuous body is held in floating-point values on a finite periodic lattice. Its public image is quantised again into an 8-bit texture. Values above .5 all reach the bright end of the V palette. A saturated picture can conceal numerical distinctions. VIEW lets another stored quantity become visible without changing the process. Neither view is the whole state.
+
+The clockmaker&#x27;s fractional ring is beautiful as a still illustration. Labelling it as an evolving Lenia organism would trade on a resemblance the code cannot support. Keeping the diagram beside a working field leaves its invitation intact while making the missing operation discussable. A future Lenia comparison must implement its own neighbourhood kernel and growth function; this Gray–Scott study cannot stand in for it.
+
+Ask what bodies are possible with these capabilities: graded state, local exchange, reaction, maintained feed, removal, history and a chosen material projection. The question stays open without treating a familiar blob as its exhaustive answer.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_SoftRules/artifacts.md">Raw captured source</a></p><pre># Retained collection
+
+| Work | Role | Place in this pass |
+|---|---|---|
+| rd_artifact | Primary | Live matched Gray–Scott fields; eight controls; table/wall mapping; a body crossing performs the existing matched injection once |
+| the_clockmaker_of_rules | Primary | Restored diagram bench; stencils, trays, computed histories and labelled static ring |
+| lattice_gas_pump | Secondary | Preserved in rear gallery; interaction review pending |
+| ca_sphere | Secondary | Preserved in rear gallery; topology/control review pending |
+| crack_propagation_ca | Secondary | Preserved in rear gallery; interaction review pending |
+| rule_30_110_gravity | Secondary | Preserved in rear gallery; interaction review pending |
+
+The earlier served museum plan placed only two of the six map works. Both plan copies now derive this room from its current authored map. The clockmaker also lacked the registry&#x27;s map_ready flag. No authored artifact is removed.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_SoftRules/summary.md">Raw captured source</a></p><pre># What can a cell receive?
+
+Two equal beginnings part when neighbour exchange is disabled in one field. Follow a marked address, restore the comparison, add a local patch and inspect U and V separately. The same reaction–diffusion state dresses table fields and curved room walls. The clockmaker&#x27;s bench provides a second primary: a spatial diagram whose still illustrations must be distinguished from a running process.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_SoftRules/blurb.md">Raw captured source</a></p><pre>Two equal squares. One can receive something from outside itself. Step, compare, and follow the difference from a table onto the room&#x27;s curved walls.
+</pre></section></body></html>

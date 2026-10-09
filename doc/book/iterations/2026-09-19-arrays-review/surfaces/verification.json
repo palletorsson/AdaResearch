@@ -1,0 +1,145 @@
+{
+  "date": "2026-09-19",
+  "scope": "Actual endless museum; Vulkan/mobile renders, no headset. Same camera, source probe, runtime flags in before/after.",
+  "checks": [
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor collision-producing structure unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor utilities unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor all 15 existing museum/interaction assertions passed"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor runtime neutral base and wireframe uniforms"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor runtime zero emission"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor no script errors"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor manuscript unchanged from frozen review"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor matched entrance captures present"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Floor matched inside captures present"
+    },
+    {
+      "ok": true,
+      "label": "all six floor images overlapped their floor before repair"
+    },
+    {
+      "ok": true,
+      "label": "all six floor images retain 2.5 cm clearance after repair"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls collision-producing structure unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls utilities unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls all 15 existing museum/interaction assertions passed"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls runtime neutral base and wireframe uniforms"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls runtime zero emission"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls no script errors"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls manuscript unchanged from frozen review"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls matched entrance captures present"
+    },
+    {
+      "ok": true,
+      "label": "Tutorial_Tiling_Walls matched inside captures present"
+    }
+  ],
+  "source_hashes": {
+    "commons\\maps\\Tutorial_Tiling_Floor\\map_data.json": {
+      "before": "f17848eb65b216c08399a683c00125f11269d59e5d19a8f79af2abd2d8b0b001",
+      "after": "85b0ac706bf6d27e2e1453435731db873c12dbf61530cd858033d34c9568bbe6"
+    },
+    "commons\\maps\\Tutorial_Tiling_Walls\\map_data.json": {
+      "before": "a8913bbb9ebbe946f79bac01eabfaa8cea23749659650ca60820e12b69eb3f85",
+      "after": "684a6b0825128420b98fda179d982b9f8c5e7807f90b97e64b68f76203f0b3ae"
+    },
+    "commons/artifacts/regularity/tiling_principles.gd": {
+      "observed": "c037f336e0ac3a1b0e0c8222d98ad761ec742f4dcf7f8bf18f84cd243b2e22f8",
+      "changed_by_this_agent": false
+    },
+    "commons/artifacts/regularity/room_tools.gd": {
+      "observed": "ef8fdf5be340f3f29f2182a01c0a1860a0a8c5aa5db5803769677b2e082d8c67",
+      "changed_by_this_agent": false
+    },
+    "commons/grid/GridStructureComponent.gd": {
+      "observed": "7d33537b5e0d0c9bfe9c94e314a70596a83b2dd91485c8063bbee4bcf92efc99",
+      "changed_by_this_agent": false
+    },
+    "commons/grid/GridInteractablesComponent.gd": {
+      "observed": "1bd3d188d7d910fb20d126e448f6b9ab80f1130b066befed66cab8db86ed10c9",
+      "changed_by_this_agent": false
+    },
+    "commons/resourses/shaders/Grid.gdshader": {
+      "observed": "149e54e8a149c9a7c9852419cca1b40bd6edc9be8393fa7e31342fb56bc7ba3b",
+      "changed_by_this_agent": false
+    },
+    "commons/primitives/cubes/cube_scene.tscn": {
+      "observed": "8fb5db55fb30bc9580593c93732eeb089873f6be3ff154a61e5517ac12a2f755",
+      "changed_by_this_agent": false
+    },
+    "ada_run/runtime_flags.json": {
+      "observed": "6121f14486f3d9a08db944df991fe93bb7b5053aa97e5fd058ead1cd8a55a662",
+      "changed_by_this_agent": false
+    }
+  },
+  "final_texts": {
+    "Tutorial_Tiling_Floor": {
+      "current_sha256": "ed5b723510dc25c3146752eed153663501d670e0a969a5a4bfe5375b05f3a113",
+      "frozen_20260918_sha256": "ed5b723510dc25c3146752eed153663501d670e0a969a5a4bfe5375b05f3a113"
+    },
+    "Tutorial_Tiling_Walls": {
+      "current_sha256": "62c95f4cb872cee8bf0b0ff402610e368d21ca95dc1140e5c02b7e533f2fbc8f",
+      "frozen_20260918_sha256": "62c95f4cb872cee8bf0b0ff402610e368d21ca95dc1140e5c02b7e533f2fbc8f"
+    }
+  },
+  "runtime_flags": {
+    "biome_enabled": true,
+    "artifacts_enabled": true,
+    "_capture_active": true,
+    "systems_render": true
+  },
+  "summary": {
+    "godot_checks": 30,
+    "godot_failures": 0,
+    "evidence_assertions": 20
+  }
+}

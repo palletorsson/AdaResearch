@@ -1,0 +1,245 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_E_Term · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_E_Term">← Tutorial lineage</a></p><h1>QFEP E Term</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_E_Term/final.md">Raw captured source</a></p><pre># Counting what could happen
+
+How quickly can a few choices become many possible futures?
+
+&lt;!-- @entropy_fan --&gt;
+
+Start with CYCLE. Follow the fan with your eyes, from its narrow origin to a leaf. Count how many choices appear at each level. As the display cycles through its branching arrangements, predict the number of final leaves before checking the readout. ONE holds a single path; OPEN holds the widest fan so you can take your time.
+
+With one continuation at each of four levels, there is one final path. Two continuations per level give sixteen possible leaves. Three give eighty-one. The number of outcomes grows by multiplication because each earlier choice can be followed by several later choices.
+
+Pick two leaves that share the beginning of their paths. Trace backwards until you find the last common branch, then forwards to see where their futures separate. The leaves are different outcomes even though much of their history is identical. This gives you a way to count without treating every end as an unrelated event: shared beginnings organise the possibilities, while later branches multiply the distinct completions that can follow from those beginnings.
+
+The display reports an entropy based on the logarithm of the number of available outcomes. It says “equal leaf weights”: every ending has been assigned the same probability. Its natural logarithm gives nats; the bit workbench used bits. The unit changes the number, not which endings are counted. The logarithm turns multiplication across independent choice stages into addition, making the total easier to compare across different depths of branching.
+
+The assumption about equal possibilities matters. Eighty-one drawn leaves do not tell you that a traveller is equally likely to arrive at each one. A strongly preferred branch could make the actual distribution much more concentrated. To model that situation, we would need probabilities as well as an inventory of paths.
+
+Compare this with the bit workbench. There, the probability changed while the possible bit values remained the same. Here, the fan changes the number of continuations that the diagram offers. Both affect uncertainty, but they are different operations on a model.
+
+Press PRUNE. Amber caps appear where branches stop. The fan has twenty-seven leaves now, where OPEN offered eighty-one. Eighteen closures remove fifty-four endings: a cut made earlier takes several later possibilities with it. Follow one of the amber stops. You can see where continuation was refused, even though the missing subtree is no longer drawn.
+
+Press OPEN again. Here the same endings return at a touch. Outside this little machine, reopening a route may not restore the lives or histories lost when it closed. The ease of the button is part of the experiment’s limit.
+
+Distinguish an option that was available and then prohibited from an option never drawn at all. A picture of the permitted future can hide the history of how the permissions were chosen. Counting its leaves cannot recover those omitted alternatives.
+
+This is where QFEP’s Q reaches into the diagram. Who drew the tree? Who can request another branch, or refuse the condition for reaching it? The project’s research documents ask that what a model leaves out retain the capacity to challenge and change its terms.[^q] Our four buttons still belong to a tree someone else specified. You can reopen it. You cannot yet ask it to grow otherwise.
+
+Keeping every branch open is not automatically care. A closure might protect a place in which a more vulnerable body can continue. The count cannot decide that for us. Stay with the difference between more endings on a screen and more ways to live.
+
+Lambda’s hall will turn a balance between repetition and variation into a spatial invitation. Ask what its preferred route leaves to either side.
+
+[^q]: See the project’s [QFEP development notes](../../../doc/research/qfep/README.md) and [Entropic morality](../../../doc/research/qfep/entropic-morality.md). QFEP means Queer Free Energy Principle; revisability and responsibility for excluded capacities are explicit commitments of the project, not quantities measured by this fan.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_E_Term/tutorial.md">Raw captured source</a></p><pre># E Term
+
+E(S) is the size of the possibility space. Build a room where freedom is felt as cubes refusing to stay still.
+
+Declare the entropy meter.
+
+```gdscript
+class_name EMeter
+extends Node3D
+
+@export var sample_count: int = 256
+var positions: PackedVector3Array = PackedVector3Array()
+
+func entropy() -&gt; float:
+    return _spread(positions)
+```
+
+The meter holds recent positions and computes their spread. Spread is the entropy proxy; more spread means more possibility.
+
+Spawn a cloud of random cubes.
+
+```gdscript
+func spawn_random() -&gt; void:
+    for i in sample_count:
+        var cube := preload(&quot;res://commons/artifacts/qfep/entropy_cube.tscn&quot;).instantiate()
+        cube.position = _sample_in_box()
+        add_child(cube)
+        positions.append(cube.position)
+```
+
+Each cube is placed inside the room&#x27;s volume by rejection sampling. No two cubes share a target. The room begins in high entropy.
+
+Kick every cube randomly per frame.
+
+```gdscript
+func _physics_process(_dt: float) -&gt; void:
+    for cube in cubes:
+        cube.linear_velocity += Vector3(
+            randf_range(-1.0, 1.0),
+            randf_range(-0.5, 0.5),
+            randf_range(-1.0, 1.0)
+        )
+```
+
+Brownian kicks keep the entropy alive. Nothing settles. The room refuses to predict itself.
+
+Compute spread as a proxy for E(S).
+
+```gdscript
+func _spread(pts: PackedVector3Array) -&gt; float:
+    if pts.is_empty(): return 0.0
+    var mean := Vector3.ZERO
+    for p in pts: mean += p
+    mean /= pts.size()
+    var total := 0.0
+    for p in pts: total += mean.distance_squared_to(p)
+    return sqrt(total / pts.size())
+```
+
+Standard deviation from the centre of mass. Not true Shannon entropy, but proportional in this volume. The meter updates each physics frame.
+
+Render the meter as a glass column.
+
+```gdscript
+func update_visual(level: float) -&gt; void:
+    var mapped: float = clamp(level / max_spread, 0.0, 1.0)
+    column.scale.y = mapped
+    column.position.y = mapped * 0.5
+```
+
+The column rises and falls with the cloud. Entropy becomes posture in the room.
+
+Offer a freeze button.
+
+```gdscript
+func _on_freeze_pressed() -&gt; void:
+    for cube in cubes:
+        cube.freeze = true
+    meter.update_visual(0.01)
+```
+
+Freezing the cubes collapses the cloud. The column shrinks. The learner sees that entropy is a rate, not a property.
+
+Offer a release button.
+
+```gdscript
+func _on_release_pressed() -&gt; void:
+    for cube in cubes:
+        cube.freeze = false
+```
+
+Released cubes resume Brownian motion. Entropy returns. The two buttons make the dialectic interactive.
+
+You have built the E side of the dialectic. The next map, Lambda Spectrum, combines F and E into a walkable gradient.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Clamp cubes to the room.
+
+```gdscript
+func clamp_to_room(cube: Node3D) -&gt; void:
+    cube.position.x = clamp(cube.position.x, -5.0, 5.0)
+    cube.position.z = clamp(cube.position.z, -5.0, 5.0)
+```
+
+Walls keep the cloud inside the readable volume. Entropy stays bounded by the room&#x27;s geometry.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_E_Term/technical.md">Raw captured source</a></p><pre># Count the endings before weighting them
+
+The previous hall varied a binary source probability while preserving its two possible symbols. Here the entropy fan varies the number of available endings.
+
+Four levels, each offering b continuations, produce b^4 leaves: 1, 16 or 81 for b=1, 2 or 3. The running CYCLE visits those three branching factors. ONE holds a single continuous stem. OPEN holds the full ternary tree. PRUNE uses the existing pruned prospect: at the third level, each of nine parents retains one child instead of three. Eighteen amber branch caps remain visible; their removed subtrees would have contributed fifty-four leaves. Twenty-seven leaves survive.
+
+The implementation counts leaf meshes as it builds them. Its readout then uses:
+
+```gdscript
+var s_val: float = log(float(futures))
+```
+
+This is H=ln(N), the Shannon entropy of a uniform distribution over N leaves, in nats. It is not a measured distribution of visits. For 1, 16, 81 and 27 leaves the readings are approximately 0, 2.77, 4.39 and 3.30 nats. Unequal probabilities would require a different calculation, -sum(p*ln(p)). The display now states its equal-weight assumption and distinguishes branch closures from missing leaf outcomes.
+
+This map enables visitor_control:on. Four canonical physical buttons select CYCLE, ONE, OPEN and PRUNE. The console remains alive while the diagram rebuilds, so pressing a button does not free the node emitting its signal. The fan and adjacent readout are raised on a stand; the control surface is at 0.95 m above the map floor. Placements without the option retain automatic cycling and no console. Existing prospect and emissive configurations remain supported.
+
+The fourteen-by-fourteen hall has a level floor and clear side passages. Seven placed works remain. Counter, cloud, particles, cubes and the independent lambda rail are secondary comparisons; none supplies the fan with probabilities. The legacy tt text token remains in the map but does not currently instantiate as a museum artifact. Lambda&#x27;s ignored value:1.0 configuration and the dissolution caption are removed. Its rail remains movable with no preferred-band marking here.
+
+OPEN restores an authored diagram. It does not model ecological repair or give the visitor authority to invent another branching rule. That difference is the chapter&#x27;s next research question, connected to QFEP&#x27;s revisable terms in the project documents.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_E_Term/intent.md">Raw captured source</a></p><pre>Concept: E(S) is entropy — the size of the possibility space. High entropy means freedom, openness, many configurations. But pure chaos dissolves structure entirely. Entropy is not just disorder; it is potential.
+Sequence role: Third map in QFEP Lab; isolates the entropy term after the F term. The dialectic emerges: F seeks order, E offers freedom. The particle_chaos and random_cubes artifacts demonstrate maximum entropy — everything possible, nothing stable. The learner has seen this before (Randomness sequence) but now it has a name and a place in the formula; follows QFEP_F_Term; leads to QFEP_Lambda_Spectrum.
+Technical angle: Entropy as log of the number of accessible microstates, the -λE(S) term as the entropic drive that opposes F-minimization. High λ weights entropy heavily (chaos dominates); low λ weights it weakly (order dominates). The particle_chaos artifact shows unconstrained entropy; random_cubes show disordered structure.
+Critical angle: Entropy is where the Randomness, Noise, and Cellular Automata sequences find their formal home. The E_entropy phase of the curriculum was always this term. Pure entropy — λ→1 — is dissolution, not freedom. Freedom requires enough structure to make choices meaningful. The λ parameter mediates: how much entropy does the system tolerate?
+Key artifacts: particle_chaos demonstrates maximum entropy (no structure, pure randomness); random_cubes show disordered geometric form; lambda_slider controls the E-term weight in the formula; tt for navigation.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_E_Term/critical.md">Raw captured source</a></p><pre># Who may add a branch?
+
+The fan can count what it has been allowed to draw. It cannot count the request it never received.
+
+At first the amber caps make absence unusually legible. A branch reaches a point and stops; its neighbours continue. The remaining leaves are no longer an innocent picture of everything that could happen. Someone has intervened upstream.
+
+Yet the visitor&#x27;s apparent authority is also bounded. Four buttons, four authored responses. Reopening the tree restores the same alternatives, not an alternative to the tree. The machine cannot hear a request for another kind of ending.
+
+This is a concrete place for the project&#x27;s Queer Free Energy Principle. In the QFEP research documents, Q asks that models remain revisable while the beings and capacities they leave out can continue to act and change those terms. Self-Q returns that question to the maker: which future habits of thought does this apparatus train in us? We may become very good at choosing among branches and forget to ask who drew them.
+
+The older draft&#x27;s question about who specifies a state survives. Its equation of high entropy with freedom does not. A protective closure can sustain a vulnerable life; an abundance of offered choices can leave the conditions of choosing untouched. Neither amber nor green settles the matter. Entropy is computed over specified alternatives. Care involves consequences for others that this count does not contain.
+
+Keep the pleasure of the returning fan. Then ask what OPEN has made too easy. A restored diagram carries no debt for its missing time. Bodies may.
+
+Sources: [QFEP development notes](../../../doc/research/qfep/README.md), [Entropic morality](../../../doc/research/qfep/entropic-morality.md), and [Self-Q](../../../doc/ENTRY.md#the-self-q-recursive-qfep). These formulate the project&#x27;s ethical proposal; the artifact does not prove it.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_E_Term/artifacts.md">Raw captured source</a></p><pre># QFEP E Term — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 7 artifacts*
+
+&gt; *High entropy = many possible states = freedom.*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## MicrostateCounter
+![MicrostateCounter](/scene-catalog/microstate_counter.png)
+
+Entropy counts the ways: S = k log W - one macrostate, astronomically many microstates.
+
+`microstate_counter`
+
+## Random Cubes
+![Random Cubes](/scene-catalog/random_cubes.png)
+
+Chaotically arranged cubes representing high entropy. Random positions, rotations, scales.
+
+`random_cubes`
+
+## Particle Chaos
+![Particle Chaos](/scene-catalog/particle_chaos.png)
+
+High-entropy particle system. Maximum spread, random velocities, dissolution.
+
+`particle_chaos`
+
+## EntropyFan
+![EntropyFan](/scene-catalog/entropy_fan.png)
+
+More ways to be is more entropy - possibility itself is what S measures.
+
+`entropy_fan`
+
+## PossibilitySpaceCloud
+![PossibilitySpaceCloud](/scene-catalog/possibility_space_cloud.png)
+
+Entropy is the size of the space of what could be - few accessible states vs many.
+
+`possibility_space_cloud`
+
+## Lambda Slider
+![Lambda Slider](/scene-catalog/lambda_slider.png)
+
+TUNE entropy drive
+
+`lambda_slider`
+
+## Tutorial Text Display
+![Tutorial Text Display](/scene-catalog/tt.png)
+
+In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.
+
+`tt`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_E_Term/summary.md">Raw captured source</a></p><pre># E Term — counting what could happen
+
+Third of eight declared QFEP Laboratory halls. Seven of those halls currently appear in the authored route; Sandbox remains a later restoration task.
+
+The primary entropy fan now has CYCLE, ONE, OPEN and PRUNE controls. Compare one, sixteen and eighty-one leaves, then hold the open tree and close eighteen branches, leaving twenty-seven leaves. The readout reports equal-weight entropy in nats and distinguishes closures from removed endings. OPEN returns the authored tree.
+
+A level fourteen-by-fourteen gallery holds all seven existing placements. The independent lambda rail and other secondary comparisons remain. The main text keeps its shared-history/counting argument and brings the research documents&#x27; QFEP question into the encounter: who can revise the alternatives, and what capacities survive exclusion? Headset interaction and learner understanding remain to be checked.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_E_Term/blurb.md">Raw captured source</a></p><pre>*The branch stops. Its neighbours continue.*
+
+Watch a few continuations multiply into a crown. Close some branches. Reopen them.
+
+Who gave you these choices? Could you ask for another kind of ending?
+</pre></section></body></html>

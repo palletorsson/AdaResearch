@@ -1,0 +1,100 @@
+--- before/algorithms/color/color_mixing/color_constellation_office.gd
++++ after/algorithms/color/color_mixing/color_constellation_office.gd
+@@ -1,17 +1,17 @@
+ extends Node3D
+ 
+ # @identity
+-# essence: coloured partitions; Color_Walls selects eight orthogonal, furnished cubicles
++# essence: coloured partitions; Color_Walls selects an open field of twelve filtering planes
+ # desire: compare the route a view can take with the doorway a body must use
+-# critical_parameter: glass/opaque visibility changes material alpha while cubicle collision remains fixed
+-# triggers: the cubicle entrance button toggles GLASS / OPAQUE; the legacy installation has separate mixture variants
++# critical_parameter: filter/opaque changes the view while the physical gaps and pane collision remain fixed
++# triggers: the open office entrance button toggles FILTER / OPAQUE; the legacy installation has separate mixture variants
+ # emerges: seeing a chair through a pane does not let the visitor walk through that pane
+ # needs: headset walkthrough remains a separate check from source and collision probes
+ # relationships: Color_Paint brings neighbours into one image; this office gives neighbours partitions and bodily routes
+-# truth: the cubicle configuration uses renderer transparency, not wavelength-dependent absorption
+-
+-## Color_Walls uses layout=cubicles and compare=visibility.
+-## Without that configuration, the older angled installation and its mixture variants remain available.
++# truth: the open office layers RGB tints; it does not simulate wavelength-dependent absorption
++
++## Color_Walls uses layout=planes and compare=visibility.
++## layout=cubicles retains the former arrangement; no layout selects the legacy mixture installation.
+ 
+ @export var wall_size: Vector2 = Vector2(2.0, 2.4)
+ @export var wall_thickness: float = 0.03
+@@ -54,8 +54,8 @@
+ #            pure hues, which is the same count as the family's mosaic.
+ #
+ # `pigment` IS DELIBERATELY ABSENT and the reason is in the registry's `declines`:
+-# subtractive mixing needs a white ground to subtract FROM, and a room of
+-# freestanding partitions has none. The sibling solved this with a white TABLE.
++# this legacy installation has no white ground. The later layout=planes adds
++# a pale architectural backing, but does not add a spectral pigment model.
+ @export_enum("bench", "light", "retina") var mixture: String = "bench"
+ 
+ ## Allow-list. An unknown word in a map token keeps the shipped room rather than
+@@ -66,6 +66,7 @@
+ ## the first build must not tear down panes that do not exist yet.
+ var _built: bool = false
+ var cubicle_office := false
++var open_office := false
+ var office_panes: Array[MeshInstance3D] = []
+ var glass_visible := true
+ var glass_button: Node3D
+@@ -73,10 +74,14 @@
+ 
+ func _ready() -> void:
+ 	cubicle_office = str(get_meta("config_layout", "")) == "cubicles"
++	open_office = str(get_meta("config_layout", "")) == "planes"
+ 	_build_office_walls()
+ 	_built = true
+ 
+ func _build_office_walls() -> void:
++	if open_office:
++		preload("res://algorithms/color/color_mixing/office_planes.gd").build(self)
++		return
+ 	if cubicle_office:
+ 		_build_cubicles()
+ 		return
+@@ -183,13 +188,21 @@
+ ## from what is in play, and the rebuild only runs once _ready has built, because
+ ## the grid calls this deferred.
+ func apply_grid_config(config: Dictionary) -> void:
++	if str(config.get("layout", "")) == "planes" and not open_office:
++		open_office = true
++		cubicle_office = false
++		if _built:
++			for child in get_children(): remove_child(child); child.queue_free()
++			_build_office_walls()
++		return
+ 	if str(config.get("layout", "")) == "cubicles" and not cubicle_office:
+ 		cubicle_office = true
++		open_office = false
+ 		if _built:
+ 			for child in get_children(): remove_child(child); child.queue_free()
+ 			_build_cubicles()
+ 		return
+-	if not config.has("mixture"):
++	if not config.has("mixture") or cubicle_office or open_office:
+ 		return
+ 	var want: String = str(config["mixture"]).strip_edges().to_lower()
+ 	if not MIXTURES.has(want) or want == mixture:
+@@ -265,6 +278,15 @@
+ 
+ func toggle_office_glass() -> void:
+ 	glass_visible = not glass_visible
++	if open_office:
++		for pane in office_panes:
++			var surface: StandardMaterial3D = pane.material_override
++			surface.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
++			surface.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
++			surface.albedo_color.a = 0.52 if glass_visible else 1.0
++			pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF if glass_visible else GeometryInstance3D.SHADOW_CASTING_SETTING_ON
++		if glass_readout: glass_readout.text = "FILTER / SAME PASSAGES" if glass_visible else "OPAQUE / SAME PASSAGES"
++		return
+ 	for pane in office_panes:
+ 		var mat: StandardMaterial3D = pane.material_override
+ 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED

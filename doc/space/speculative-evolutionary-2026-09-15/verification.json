@@ -1,0 +1,28 @@
+{
+  "hall": "SpeculativeComputation_Evolutionary_Algorithms",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "one_artifact": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "evolutionary_algorithms"
+  ],
+  "primary_artifacts": [
+    "evolutionary_algorithms"
+  ],
+  "source_sha256": {
+    "commons\\maps\\SpeculativeComputation_Evolutionary_Algorithms\\map_data.json": "5c882482d67e4ff69bc02fa88c416996ef4bfd219f7fd82af646edc87393b130",
+    "commons\\maps\\SpeculativeComputation_Evolutionary_Algorithms\\final.md": "4e46a25964d97079e78833e0c74878c31664433f73fdab33c5f6ee7e23b6847e",
+    "commons\\maps\\SpeculativeComputation_Evolutionary_Algorithms\\tutorial.md": "053e9e81e3b3c29f175cfbd3670e57255c93bbfc4e3a3e23c3a0399f83980d5f",
+    "commons\\maps\\SpeculativeComputation_Evolutionary_Algorithms\\technical.md": "195daca25cb7f6ac53afd429131241b9034384e7208690d6c7ec680ec304109a",
+    "commons\\maps\\SpeculativeComputation_Evolutionary_Algorithms\\critical.md": "e799713ca92195555c97d868a53cdde378f9ab64cd8f598b8ce5be3920b3c5dc"
+  }
+}

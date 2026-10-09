@@ -1,0 +1,46 @@
+[
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      18,
+      6
+    ],
+    "make": "floor_eyes_delayed_attention",
+    "why": "Twenty boxed floor eyes follow the player with different delays",
+    "footprint": "4x4",
+    "like": "phase_rod_array"
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      18,
+      11
+    ],
+    "make": "late_connection_platform",
+    "why": "Two platforms miss each other until the player adjusts phase",
+    "footprint": "4x3",
+    "like": "phase_rod_array"
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      5,
+      18
+    ],
+    "make": "escalator_wrong_destination",
+    "why": "An escalator meets a wall with a clear alternate exit",
+    "footprint": "5x4",
+    "like": "conveyor_belt"
+  },
+  {
+    "map": "Change_Choreography",
+    "cell": [
+      6,
+      24
+    ],
+    "make": "mutual_cleanup_machines",
+    "why": "Two sweepers deliver their remainder into each others patch",
+    "footprint": "5x2",
+    "like": "conveyor_backlog"
+  }
+]

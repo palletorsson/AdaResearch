@@ -1,0 +1,124 @@
+{
+  "shots": [
+    {
+      "tag": "court-entry",
+      "from": [
+        5.5,
+        1.7,
+        1.4
+      ],
+      "look_at": [
+        5.5,
+        2.4,
+        5.5
+      ],
+      "fov": 70
+    },
+    {
+      "tag": "court-side",
+      "from": [
+        10.5,
+        2.8,
+        3
+      ],
+      "look_at": [
+        5.5,
+        2,
+        5.5
+      ],
+      "fov": 65
+    },
+    {
+      "tag": "both-platforms",
+      "from": [
+        11,
+        10,
+        1.5
+      ],
+      "look_at": [
+        5.5,
+        1.5,
+        10
+      ],
+      "fov": 70
+    },
+    {
+      "tag": "durer-encounter",
+      "from": [
+        10.7,
+        3.9,
+        11.1
+      ],
+      "look_at": [
+        5.5,
+        3,
+        14.0
+      ],
+      "fov": 65
+    },
+    {
+      "tag": "counter-return",
+      "from": [
+        3.5,
+        1.7,
+        18.5
+      ],
+      "look_at": [
+        3.5,
+        1.7,
+        20.5
+      ],
+      "fov": 65
+    }
+  ],
+  "walks": [
+    {
+      "tag": "west-ramp-to-court",
+      "from": [
+        1.4,
+        0.05,
+        5.5
+      ],
+      "to": [
+        3.6,
+        1,
+        5.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "bridge-to-durer",
+      "from": [
+        5.5,
+        1.05,
+        12.4
+      ],
+      "to": [
+        5.5,
+        2,
+        14.2
+      ],
+      "seconds": 3
+    }
+  ],
+  "rays": [
+    {
+      "tag": "court-floor",
+      "x": 4.5,
+      "z": 3.5,
+      "top": 1
+    },
+    {
+      "tag": "bridge-floor",
+      "x": 5.5,
+      "z": 10.5,
+      "top": 1
+    },
+    {
+      "tag": "durer-floor",
+      "x": 3.2,
+      "z": 18.7,
+      "top": 2
+    }
+  ]
+}

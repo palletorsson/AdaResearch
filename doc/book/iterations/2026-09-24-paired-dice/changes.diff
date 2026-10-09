@@ -1,0 +1,575 @@
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -15682,6 +15682,57 @@
+         "ONE STONE places the next exposed piece in rubble",
+         "RESTORE rebuilds and resets seed 79, paused"
+       ]
++    },
++    "paired_dice_column": {
++      "lookup_name": "paired_dice_column",
++      "name": "Two throws, one height",
++      "scene": "res://commons/artifacts/paired_dice_column/paired_dice_column.tscn",
++      "category": "randomness",
++      "sequence": "randomness",
++      "map_sequences": [
++        "randomness"
++      ],
++      "complexity": "beginner",
++      "include_in_map_data": true,
++      "map_ready": true,
++      "interaction": "grab",
++      "interactions": [
++        "Throw each die into its own tray",
++        "Compare the coloured sum column with the two faces",
++        "Inspect the twelve most recent paired results",
++        "Return loose dice or clear the record"
++      ],
++      "description": "Two physical dice, reused from dice_throw, make one coloured unit column after both releases settle. Retains twelve recent pairs and a total count; no generated throws or model histogram. Loose dice recover without contributing a result.",
++      "qfep_connection": "Different ordered pairs can share a total. The column keeps each contribution in colour while its overall height merges them. Equal independent face probabilities remain a hypothesis about the throws.",
++      "tags": [
++        "dice",
++        "sum",
++        "composition",
++        "probability",
++        "physical",
++        "distribution"
++      ],
++      "parameters": {
++        "footprint": [
++          4,
++          3,
++          3
++        ],
++        "size_group": "room_scale"
++      },
++      "spatial_needs": {
++        "platform": "none",
++        "footprint_cells": 4,
++        "clearance": {
++          "front": 1,
++          "back": 1,
++          "left": 1,
++          "right": 1
++        },
++        "player_position": "front",
++        "wall_backing": false,
++        "orientation": "face_approach"
++      }
+     }
+   }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -2,19 +2,20 @@
+   "Random_Cubes": {
+     "primary_tokens": [
+       "dice_throw",
++      "paired_dice_column",
+       "coin_toss",
+       "random_object_spawner",
+       "random_edge_profile"
+     ],
+-    "reason": "Throw a die and a coin into two records that forget different things; walk through forty-eight bounded draws that show one rule in space.",
++    "reason": "A die, a paired sum and a coin retain different accounts of their throws; the heap forgets and the field holds one bounded arrangement.",
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Cubes/final.md",
+-    "text_sha256": "725d56d0bd902a237cdf80d298e7ba86fec2279505db96baa54fb2bf3857ce22",
+-    "map_sha256": "b90c08efcc188867994a514aecc34bcd5900abeee7ea09208b521c1dd9412415",
++    "text_sha256": "4957b6db7bb52aaa977c322a0980b4dc22b9ae597d5708c5e50a32f247134c9c",
++    "map_sha256": "c0a53172f72ec7a9d025b69e4c8b2fa364c15f8dc17bf5566f330baee4568098",
+     "learner_verified": false,
+-    "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw.",
+-    "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Random_Cubes"
++    "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review.",
++    "local_review": "doc/book/iterations/2026-09-24-paired-dice/index.html"
+   },
+   "Random_Gaussian": {
+     "primary_tokens": [
+@@ -24,10 +25,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Gaussian/final.md",
+-    "text_sha256": "c31b41764113d4a1ee3edb0aa20c752fac8abf95e51a1055f745e9fa7ecf7100",
++    "text_sha256": "669913fdf82c0e686518fc83d9fd8d71c6084bbc2c3691a5bf9d4cfb4dc97f87",
+     "map_sha256": "fdf8781e1981448b7efa811203590a282ee05cc1aff26a8b934ff242b329e032",
+     "learner_verified": false,
+     "verification_scope": "Fresh focused rebinning of a retained sample; no complete museum or headset visit.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Gaussian/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-24-paired-dice/index.html"
+   }
+ }
+--- before/commons/maps/Random_Cubes/encounter-notes.md
++++ after/commons/maps/Random_Cubes/encounter-notes.md
+@@ -11,3 +11,10 @@
+ Prior repair record: `doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Cubes/DECISIONS.md`.
+ 
+ Primary encounters in this pass: `dice_throw`, `coin_toss`, `random_object_spawner`, `random_edge_profile`. Existing secondary works remain unless specifically noted above.
++
++
++## Addition — two throws, one height
++
++A fifth primary encounter, paired_dice_column, stands at (5,4), facing the entrance. The legacy dark_sphere remains secondary and moves from (6,4) to (9,5) to clear its working area. Existing die, coin, spawners and all forty-eight edge profiles remain. Declared width now matches the twelve cells in every row of all three existing layers; no floor rows were rebuilt.
++
++The new passage preserves the existing prose and asks what equal height retains of different pairs. Random_Gaussian gains a brief return to this encounter. Runtime and publication evidence is retained with the new review; neither the column nor the mathematical model certifies fairness of the simulated throws.
+--- before/commons/maps/Random_Cubes/final.md
++++ after/commons/maps/Random_Cubes/final.md
+@@ -22,9 +22,23 @@
+ 
+ <!-- @ -->
+ 
++<!-- @paired_dice_column -->
++
++Two more dice wait in separate trays, one blue, one pink. Throw each into its own tray. A column stands up behind them when both results have arrived. Count its blue blocks, then its pink ones. The faces have become parts of a height.
++
++Three and four make seven. Five and two make seven too. Can you bring the column back with different ingredients? The dice need not give you the pair you want. On the shelf, small copies keep the last twelve pairs in order, each colour still carrying its share. Two columns can reach the same level without looking the same.
++
++Look only at their tops. Now look at the join between the colours. Each view lets you call something different the same. A total keeps an answer and gives up how it was assembled; the colours let some of that difference return.
++
++How many pairs could make two? How many could make seven? Keep the order of the dice: blue one and pink six is another pair from blue six and pink one. If every face were equally likely and the two throws independent, seven would have six routes out of thirty-six, while two would have one. The middle would occur more often without either die preferring it. Your throws may not yet make that shape. Their conditions still matter.
++
++The shelf eventually lets its oldest pair go. The total count continues. A history needs room; this one has been given twelve places. The larger column waits while you begin again. Returning a loose die adds nothing to it.
++
++<!-- @ -->
++
+ <!-- @coin_toss -->
+ 
+-Further along the entrance wall, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out.
++Across from the first die, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out.
+ 
+ Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing. On a desktop, these are drops: the hand's throw is unavailable.
+ 
+@@ -52,4 +66,4 @@
+ 
+ <!-- @ -->
+ 
+-The die and the coin gathered throws into different records. The heap kept losing pieces. The field held one arrangement still. In the next room every piece remains, and what accumulates is its turning. We will have to look for a history that has left no trail.
++The die and the coin gathered throws into different records. The paired dice let the same height keep different ingredients. The heap kept losing pieces. The field held one arrangement still. In the next room every piece remains, and what accumulates is its turning. We will have to look for a history that has left no trail.
+--- before/commons/maps/Random_Cubes/map_data.json
++++ after/commons/maps/Random_Cubes/map_data.json
+@@ -7,7 +7,7 @@
+     "version": "1.0",
+     "format": "json",
+     "dimensions": {
+-      "width": 13,
++      "width": 12,
+       "depth": 20,
+       "max_height": 3
+     },
+@@ -19,7 +19,8 @@
+         "Compare the upward physical face with the reported result after settlement",
+         "Track one face’s frequency separately from the running numerical mean",
+         "Use the equal-face mean of 3.5 as a distribution hypothesis rather than a possible face",
+-        "Keep the throwing method and reward rule distinct from a claim of fairness"
++        "Keep the throwing method and reward rule distinct from a claim of fairness",
++        "Build a sum from two physically read faces and compare equal heights with different contributing pairs"
+       ]
+     },
+     "museum": {
+@@ -709,25 +710,25 @@
+         " ",
+         " ",
+         " ",
++        "paired_dice_column:180",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
+         " ",
+         "dark_sphere",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+         " ",
+         " "
+       ],
+--- before/commons/maps/Random_Cubes/technical.md
++++ after/commons/maps/Random_Cubes/technical.md
+@@ -181,3 +181,14 @@
+ Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+ 
+ The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
++
++
++## Paired dice column — 24 September 2026
++
++`paired_dice_column:180` at grid (5,4) adds two XRTools dice derived from `dice_throw`. The original die scene/script are unchanged. The local variant keeps its pips, release hooks and mature settle test, using 11 cm dice in 90 cm-high trays and no reward rain. Desktop input remains a release without a tracked throw.
++
++Only a released die settling in its own tray supplies a value. Both fresh values are required; grabbing a pending die invalidates that value, and the next pair cannot reuse the previous pair's other face. A full-size column uses 18 cm per pip, blue A below pink B, on a 20 cm base. Its collision height follows the total. Twelve miniature columns retain the recent ordered pairs; the total count can exceed twelve. Two MultiMeshes bound the shelf's coloured-unit rendering.
++
++RETURN DICE preserves the last column and history. CLEAR RECORD also cancels pending results and removes the record. A loose die below 18 cm or over 3 m from its tray returns after 0.7 seconds; a held die is never reclaimed. Recovery does not produce a throw. The ideal independent fair-dice model has a triangular sum distribution; physical throws do not automatically validate that model.
++
++Review and native evidence: `doc/book/iterations/2026-09-24-paired-dice/`.
+--- before/commons/maps/Random_Gaussian/final.md
++++ after/commons/maps/Random_Gaussian/final.md
+@@ -1,6 +1,8 @@
+ # The shape we counted
+ 
+ What changes when the values stay where they are, but we count them differently?
++
++The two dice could reach the same height by different throws. Their coloured columns kept those ingredients visible. Here we gather values into groups. What will the new picture keep of their differences?
+ 
+ <!-- @distribution_sampler -->
+ 
+--- before/commons/maps/sequences/randomness.json
++++ after/commons/maps/sequences/randomness.json
+@@ -127,13 +127,14 @@
+           "position": "foundation",
+           "artifacts": [
+             "dice_throw",
++            "paired_dice_column",
+             "coin_toss",
+             "random_object_spawner",
+             "random_edge_profile",
+             "dark_sphere"
+           ],
+           "size_budget": "mixed",
+-          "rationale": "Throw a die and a coin into two records that forget different things; walk through forty-eight bounded draws that show one rule in space.",
++          "rationale": "Read one throw, then combine two physical faces into one coloured column; compare the coin, changing heap and bounded field.",
+           "grammar": "metropolitan"
+         },
+         {
+--- /dev/null
++++ after/commons/artifacts/paired_dice_column/paired_dice_column.gd
+@@ -0,0 +1,226 @@
++extends Node3D
++## @identity
++## essence: two physically read faces become a sum; coloured units retain the ingredients
++## desire: the same height returns by another pair of throws
++## truth: equal face probabilities are a model to test, not a property promised by the engine
++## needs: XR and desktop release [has], pair transaction [has], bounded record [has]
++const Tray = preload("res://commons/artifacts/paired_dice_column/paired_die.gd")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++const A := Color(0.26, 0.77, 0.88)
++const B := Color(0.96, 0.39, 0.62)
++const DARK := Color(0.075, 0.09, 0.115)
++const HISTORY_LIMIT := 12
++const UNIT_HEIGHT := 0.18
++signal pair_recorded(a: int, b: int)
++var trays: Array[Node3D] = []
++var pending: Array[int] = [0, 0]
++var armed: Array[bool] = [false, false]
++var committed := false
++var total_pairs := 0
++var history: Array[Vector2i] = []
++var last_pair := Vector2i.ZERO
++var _column: Node3D
++var _record: Node3D
++var _status: Label3D
++var _equation: Label3D
++var _history_label: Label3D
++
++func _ready() -> void:
++	_box(self, "Base", Vector3(0.0,0.10,-0.55), Vector3(0.62,0.20,0.62), DARK, true)
++	_box(self, "Shelf", Vector3(0,0.88,-1.08), Vector3(3.05,0.09,0.52), DARK, true)
++	for x in [-1.4, 1.4]:
++		_box(self,"ShelfLeg",Vector3(x,0.42,-1.08),Vector3(0.055,0.84,0.055),DARK,false)
++	_column = Node3D.new()
++	_column.name = "SumColumn"
++	add_child(_column)
++	_record = Node3D.new()
++	_record.name = "RecentPairs"
++	add_child(_record)
++	for i in range(2):
++		var tray := Tray.new()
++		tray.name = "DieA" if i == 0 else "DieB"
++		tray.position = Vector3(-0.70 if i == 0 else 0.70, 0, 0.18)
++		tray.dice_color = A if i == 0 else B
++		tray.felt_color = Color(0.06,0.19,0.22) if i == 0 else Color(0.23,0.075,0.13)
++		tray.lifted.connect(_on_lifted.bind(i))
++		tray.released.connect(_on_released.bind(i))
++		tray.landed.connect(_on_landed.bind(i))
++		tray.returned.connect(_on_returned.bind(i))
++		trays.append(tray)
++		add_child(tray)
++	_label("TWO THROWS / ONE HEIGHT", Vector3(0,2.67,-1.10), 0.052)
++	_status = _label("Throw both dice into their trays", Vector3(0,1.25,0.67),0.024)
++	_box(self,"ReadoutCase",Vector3(0,1.20,0.64),Vector3(0.62,0.25,0.04),DARK,false)
++	_equation = _label("? + ?",Vector3(0,1.14,0.67),0.042)
++	_history_label = _label("RECENT PAIRS / empty",Vector3(0,1.66,-1.10),0.029)
++	_label("Each colour keeps its contribution",Vector3(0,1.80,-1.10),0.025)
++	var panel := Rack.create_panel("", [[{"type":"button","label":"RETURN DICE"},{"type":"button","label":"CLEAR RECORD"}]],true)
++	panel.position = Vector3(0,0.96,0.66)
++	panel.rotation_degrees.x = -65
++	panel.scale = Vector3.ONE * 1.75
++	add_child(panel)
++	_box(self,"ControlShelf",Vector3(0,0.85,0.61),Vector3(0.61,0.10,0.29),DARK,true)
++	for i in range(2):
++		var button := panel.find_child("Btn_%d" % i,true,false)
++		if button != null:
++			var area := button.get_node_or_null("InteractableAreaButton")
++			if area != null:
++				if i == 0: area.button_pressed.connect(func(_b): return_dice())
++				else: area.button_pressed.connect(func(_b): clear_record())
++
++func _on_lifted(index: int) -> void:
++	if committed:
++		pending = [0, 0]
++		armed = [false, false]
++		committed = false
++	pending[index] = 0
++	armed[index] = false
++	_update_pending()
++
++func _on_released(index: int) -> void:
++	# Handles direct desktop drops as well as the XR pickup/release pair.
++	if committed:
++		pending = [0,0]
++		armed = [false,false]
++		committed = false
++	pending[index] = 0
++	armed[index] = true
++	_update_pending()
++
++func _on_returned(index: int) -> void:
++	armed[index] = false
++	pending[index] = 0
++	_update_pending()
++
++func _on_landed(value: int, index: int) -> void:
++	if committed or not armed[index] or value < 1 or value > 6: return
++	pending[index] = value
++	armed[index] = false
++	if pending[0] > 0 and pending[1] > 0:
++		committed = true
++		last_pair = Vector2i(pending[0],pending[1])
++		total_pairs += 1
++		history.append(last_pair)
++		if history.size() > HISTORY_LIMIT: history.pop_front()
++		_rebuild_column()
++		_rebuild_record()
++		pair_recorded.emit(last_pair.x,last_pair.y)
++	_update_pending()
++
++func _update_pending() -> void:
++	if _status == null: return
++	if committed:
++		_status.text = "Pair %d / lift both for another pair" % total_pairs
++		_equation.text = "%d + %d = %d" % [last_pair.x,last_pair.y,last_pair.x+last_pair.y]
++	else:
++		_status.text = "Throw both / previous column stays" if total_pairs > 0 else "Throw both dice into their trays"
++		_equation.text = "%s + %s" % [str(pending[0]) if pending[0] else "?",str(pending[1]) if pending[1] else "?"]
++
++func return_dice() -> void:
++	for tray in trays: tray.return_to_tray()
++	pending = [0,0]
++	armed = [false,false]
++	committed = false
++	_update_pending()
++
++func clear_record() -> void:
++	# Cancel in-flight results: both dice must be released again after clearing.
++	return_dice()
++	total_pairs = 0
++	last_pair = Vector2i.ZERO
++	history.clear()
++	_clear_children(_column)
++	_clear_children(_record)
++	_history_label.text = "RECENT PAIRS / empty"
++	_update_pending()
++
++func _rebuild_column() -> void:
++	_clear_children(_column)
++	var total := last_pair.x + last_pair.y
++	for j in range(total):
++		_box(_column,"Unit_%02d" % j,Vector3(0,0.20+(j+0.5)*UNIT_HEIGHT,-0.55),Vector3(0.40,UNIT_HEIGHT-0.008,0.40),A if j < last_pair.x else B,false)
++	var support := StaticBody3D.new()
++	support.name = "ColumnSupport"
++	var shape := CollisionShape3D.new()
++	var box := BoxShape3D.new()
++	box.size = Vector3(0.40,total*UNIT_HEIGHT,0.40)
++	shape.shape = box
++	shape.position = Vector3(0,0.20+total*UNIT_HEIGHT*0.5,-0.55)
++	support.add_child(shape)
++	_column.add_child(support)
++
++func _rebuild_record() -> void:
++	_clear_children(_record)
++	# Two bounded draw calls for all miniature coloured units.
++	for side in range(2):
++		var transforms: Array[Transform3D] = []
++		for i in range(history.size()):
++			var pair: Vector2i = history[i]
++			var count := pair.x if side == 0 else pair.y
++			var first := 0 if side == 0 else pair.x
++			for j in range(count):
++				transforms.append(Transform3D(Basis.IDENTITY,Vector3(-1.375+i*0.25,0.935+(first+j+0.5)*0.04,-1.08)))
++		var mesh := BoxMesh.new()
++		mesh.size = Vector3(0.12,0.036,0.12)
++		var mm := MultiMesh.new()
++		mm.transform_format = MultiMesh.TRANSFORM_3D
++		mm.mesh = mesh
++		mm.instance_count = transforms.size()
++		for i in range(transforms.size()): mm.set_instance_transform(i,transforms[i])
++		var instance := MultiMeshInstance3D.new()
++		instance.multimesh = mm
++		instance.material_override = _material(A if side == 0 else B)
++		_record.add_child(instance)
++	for i in range(history.size()):
++		var pair: Vector2i = history[i]
++		var label := _label("%d+%d" % [pair.x,pair.y],Vector3(-1.375+i*0.25,0.85,-0.80),0.023)
++		remove_child(label)
++		_record.add_child(label)
++	_history_label.text = "LAST %d PAIRS / %d TOTAL" % [history.size(),total_pairs]
++
++func _clear_children(node: Node) -> void:
++	for child in node.get_children():
++		node.remove_child(child)
++		child.queue_free()
++
++func _material(colour: Color) -> StandardMaterial3D:
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = colour
++	mat.roughness = 0.36
++	mat.metallic = 0.12
++	return mat
++
++func _box(host: Node3D, title: String, pos: Vector3, size: Vector3, colour: Color, solid: bool) -> void:
++	var mesh := MeshInstance3D.new()
++	mesh.name = title
++	var box := BoxMesh.new()
++	box.size = size
++	mesh.mesh = box
++	mesh.material_override = _material(colour)
++	mesh.position = pos
++	host.add_child(mesh)
++	if solid:
++		var body := StaticBody3D.new()
++		var shape := CollisionShape3D.new()
++		var bounds := BoxShape3D.new()
++		bounds.size = size
++		shape.shape = bounds
++		body.position = pos
++		body.add_child(shape)
++		host.add_child(body)
++
++func _label(text: String, pos: Vector3, height: float) -> Label3D:
++	var label := Label3D.new()
++	label.text = text
++	label.font_size = 40
++	label.pixel_size = height / 40.0
++	label.position = pos
++	label.modulate = Color(0.90,0.91,0.88)
++	label.outline_size = 5
++	add_child(label)
++	return label
++
++func get_state() -> Dictionary:
++	var rows: Array = []
++	for pair in history: rows.append([pair.x,pair.y])
++	return {"pending":pending.duplicate(),"armed":armed.duplicate(),"committed":committed,"pairs":total_pairs,"last":[last_pair.x,last_pair.y],"history":rows,"unit_height":UNIT_HEIGHT}
+--- /dev/null
++++ after/commons/artifacts/paired_dice_column/paired_dice_column.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/paired_dice_column/paired_dice_column.gd" id="1"]
++
++[node name="PairedDiceColumn" type="Node3D"]
++script = ExtResource("1")
+--- /dev/null
++++ after/commons/artifacts/paired_dice_column/paired_die.gd
+@@ -0,0 +1,77 @@
++extends "res://algorithms/randomness/dice_throw/dice_throw.gd"
++## The existing pickable die and settle test, in a small tray for a paired trial.
++signal lifted
++signal released
++signal landed(value: int)
++signal returned
++var _away_seconds := 0.0
++
++func _ready() -> void:
++	dice_size = 0.11
++	dice_bounce = 0.22
++	table_width = 0.82
++	table_depth = 0.66
++	table_height = 0.90
++	balls_per_pip = 0
++	_create_table()
++	_create_rim()
++	_create_dice()
++	_dice_spawn_pos = Vector3(0, table_height + dice_size, 0)
++	_result_label = Label3D.new()
++	_result_label.text = "?"
++	_result_label.font_size = 42
++	_result_label.pixel_size = 0.0016
++	_result_label.modulate = dice_color
++	_result_label.position = Vector3(0, 1.09, -0.32)
++	add_child(_result_label)
++	_stats_label = Label3D.new()
++	_stats_label.visible = false
++	add_child(_stats_label)
++
++func _process(delta: float) -> void:
++	if not is_instance_valid(_dice_body): return
++	# Held objects belong to the hand, even when far away from their tray.
++	if _dice_body.freeze or (_dice_body.has_method("is_picked_up") and _dice_body.is_picked_up()):
++		_away_seconds = 0.0
++		return
++	var p: Vector3 = to_local(_dice_body.global_position)
++	if p.y < 0.18 or p.length() > 3.0:
++		_away_seconds += minf(delta, 0.1)
++		if _away_seconds > 0.7: return_to_tray()
++		return
++	_away_seconds = 0.0
++	# A die on the floor, a rim, or a neighbour is not a throw into this tray.
++	var on_tray := absf(p.x) < table_width * 0.5 - dice_size * 0.48 and absf(p.z) < table_depth * 0.5 - dice_size * 0.48 and p.y > table_height and p.y < table_height + dice_size * 0.9
++	if not on_tray:
++		_settle_timer = 0.0
++		_still_armed = false
++		return
++	super._process(delta)
++
++func _on_dice_picked_up(pickable) -> void:
++	super._on_dice_picked_up(pickable)
++	_result_label.text = "?"
++	lifted.emit()
++
++func _on_dice_dropped(pickable) -> void:
++	super._on_dice_dropped(pickable)
++	released.emit()
++
++func _read_dice_result() -> void:
++	super._read_dice_result()
++	landed.emit(_last_result)
++
++func return_to_tray() -> bool:
++	if _dice_body.freeze or (_dice_body.has_method("is_picked_up") and _dice_body.is_picked_up()): return false
++	_is_rolling = false
++	_settle_timer = 0.0
++	_still_armed = false
++	_away_seconds = 0.0
++	_dice_body.freeze = true
++	_dice_body.global_transform = Transform3D(global_basis.orthonormalized(), to_global(_dice_spawn_pos))
++	_dice_body.linear_velocity = Vector3.ZERO
++	_dice_body.angular_velocity = Vector3.ZERO
++	_dice_body.set_deferred("freeze", false)
++	_result_label.text = "?"
++	returned.emit()
++	return true

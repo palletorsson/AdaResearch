@@ -1,0 +1,141 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -6,8 +6,8 @@
+   "status": "source_checked_draft",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_6_Wall/final.md",
+-  "text_sha256": "fc9bc18446aff43a62e6700aa7ce2fe2ce73323ba2572ae8c7272f8b4f8addcb",
+-  "map_sha256": "63dc252b334ea6af29028239ff0bec504e5b80e15c488ca2c5cdc3020f539169",
++  "text_sha256": "39ec8eb5cd5afdab59ba788fe29ad3400ce29a5f25b3a7e2873b28ef1d849029",
++  "map_sha256": "2e0b4e845e66fd2a5ce44319544ca268af800d84e06f5b40cabfa9fb1f9b1cad",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_6_Wall/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-noise-wall-inside/index.html"
+ }
+--- before/commons/maps/Noise_6_Wall/artifacts.md
++++ after/commons/maps/Noise_6_Wall/artifacts.md
+@@ -1,9 +1,9 @@
+-# Noise 6 Wall — two primary works, three placements
++# Noise 6 Wall — one primary encounter, three placements
+ 
+-`shader_noise_space:180#stand:panel` at (9,2) is the supported four-patch instrument. LAYERS, BASIS, FREEZE and DRESS control only receivers in this museum hall. The cased, tilted plate states the held/live phase, term counts, weights, gain and finish.
++`shader_noise_space#stand:panel` at (6,4) is the supported four-patch instrument, facing inward from the north wall. Its controls can be reached while standing inside the enclosure. LAYERS, BASIS, FREEZE and DRESS control only receivers in this museum hall. The cased, tilted plate states the held/live phase, term counts, weights, gain and finish.
+ 
+-`shader_noise_space#stand:room` at (6,6) is the same primary work at bodily scale. Its five-metre floor bridges the existing central opening. A 4.8 m enclosure has a 2.8 m ceiling and opposing 1.6 m wide, 2.3 m high door openings. The original internal sphere is retained and now receives the material at its combined CSG root. Each wall piece uses its own UV chart. Legacy standalone enclosure geometry remains available in the unchanged scene resource.
++`shader_noise_space#stand:room` at (6,6) is the same primary work at bodily scale. Its five-metre floor sits over the current level floor. A 4.8 m enclosure has a 2.8 m ceiling and opposing 1.6 m wide, 2.3 m high door openings. The original internal sphere is retained and now receives the material at its combined CSG root. Each wall piece uses its own UV chart. Legacy standalone enclosure geometry remains available in the unchanged scene resource.
+ 
+-`dark_sphere` at (10,10) is the second primary work, moved from the central opening to solid floor near the exit. Its original material, rotation and independent sine-driven pulse remain. FREEZE at the panel does not stop this orb.
++`dark_sphere` at (10,10) is a supporting work on solid floor near the exit. Its original material, rotation and independent sine-driven pulse remain. FREEZE at the panel does not stop this orb.
+ 
+-Book anchors and primary order are shader_noise_space, dark_sphere. The two shader placements share a passage; the internal sphere is part of that scene, not an additional map token. Recovered structure and utilities are unchanged. See `/research/possible-bodies/noise-six-wall.html` for photographs and evidence.
++The primary token is shader_noise_space. The book also briefly returns to the supporting dark_sphere; that encounter anchor is retained. The two shader placements share a passage; the internal sphere is part of that scene, not an additional map token. Recovered structure and utilities are unchanged. See `/research/possible-bodies/noise-six-wall.html` for photographs and evidence.
+--- before/commons/maps/Noise_6_Wall/field_notes.md
++++ after/commons/maps/Noise_6_Wall/field_notes.md
+@@ -46,3 +46,12 @@
+ Final run: 39 checks, no failures, PID 26032, 12:52:11–12:52:37 +02:00. Actual shader readback, four pointer controls, cross-hall exclusion, current-time hold/resume and a desktop body crossing both doors pass. Source fingerprints and the original saved hand remain unchanged. Headset reach, comfort and Quest performance remain pending. The shared normal-map repair can change other consumers' shading.
+ 
+ The chapter follows discovery through apparent depth, abs accumulation, display clipping, material dressing and coordinate seams. The independent orb keeps another clock and another way to receive a scalar. Future world-space mapping, editable weights and actual displacement remain proposals.
++
++
++## 2026-09-25 — Stay inside while the room changes
++
++Moved the existing four-window panel from (9,2), yaw 180, to (6,4), yaw 0, against the enclosure's north wall. The room remains at (6,6), with both side doors and its original sphere. The visitor can compare the finish from within the space it changes. No new artifact, interface, shader or geometry was added. All floor/utility cells and the other two placements are retained.
++
++The chapter now keeps the reader inside when they press FREEZE and DRESS, then turns from the small windows to the adjoining wall. The code excerpts and critical argument remain. Current companion notes now match the existing core role: shader_noise_space primary, dark_sphere supporting. Earlier references to a central pit describe previous map versions; the current structure layer is level. Historical entries above are retained as history.
++
++Native before/after views, controlled desktop pointer and traversal checks, exact text differences and limitations: doc/book/iterations/2026-09-25-noise-wall-inside/index.html. Headset comfort and reach remain open.
+--- before/commons/maps/Noise_6_Wall/final.md
++++ after/commons/maps/Noise_6_Wall/final.md
+@@ -6,11 +6,15 @@
+ 
+ What would have to change for those folds to carry your feet?
+ 
+-Keep that question while you return to the panel. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
++Keep that question as you turn towards the panel on the inner wall. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
+ 
+-Press DRESS, then enter again. Grey has taken the place of pink. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
++Press DRESS without leaving the room. Grey takes the place of pink around you. Your hand has changed the enclosure while your body stays inside it. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+ 
+ We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What the player can physically cross and what the player imagines crossing need not arrive together.
++
++![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
++
++*The small windows keep their different counts while the room wears the chosen sum. The doorway remains in place when the finish changes.*
+ 
+ At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The four- and six-term windows add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
+ 
+@@ -53,7 +57,7 @@
+ 
+ Colour mixing, edge and corner shading, roughness and small changes to the lighting normal follow. LAYERS changes the cloud sum; that separate detail loop still has four terms. A one-term cloud can therefore wear a detailed finish. The button's number names one part of a construction.
+ 
+-Take this knowledge inside. The material has crossed from a small square to an enclosure and a sphere. Can you follow one cloud around a corner?
++Turn from the small windows towards the wall beside them. The material has crossed from a small square to an enclosure and a sphere. Can you follow one cloud around a corner?
+ 
+ Each wall piece starts its own UV coordinates. The sphere wraps a different coordinate chart around itself. The same calculation can stretch, repeat or meet a seam when another surface receives it. The room is surrounded by a shared procedure, but it is not an unbroken sample of a world-space cloud.
+ 
+--- before/commons/maps/Noise_6_Wall/intent.md
++++ after/commons/maps/Noise_6_Wall/intent.md
+@@ -4,7 +4,7 @@
+ 
+ Encounter: enter the pink enclosure, hold its current moment, remove and restore the finish, compare cumulative cloud terms, then inspect the mapping seams. Apparent folds do not supply physical support. The orb's independent sine-driven emission lets the visitor encounter the boundary of the room's local clock.
+ 
+-Primary works: shader_noise_space (panel and room placements, including the room's original sphere); dark_sphere. Retain all three placements and recovered structure/utilities. The room's new floor bridges its existing central opening.
++Primary encounter: shader_noise_space (panel and room placements, including the room's original sphere). Supporting comparison: dark_sphere; retain its short book return without promoting it. Retain all three placements and recovered structure/utilities. The room's own floor sits over the current level map floor. Its panel now stands inside, at (6,4), so changing the material does not require leaving the room.
+ 
+ Critical opening: absolute value folds sign, summation merges contributions, the display clips a range and UV charts redistribute a field over surfaces. Every view has an encoding. Surface pleasure remains available after its construction is understood. Ask how apparent depth or darkness affects approach without claiming a measured change in visitor behaviour or geometry.
+ 
+--- before/commons/maps/Noise_6_Wall/map_data.json
++++ after/commons/maps/Noise_6_Wall/map_data.json
+@@ -106,9 +106,9 @@
+   "interactables": [
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "shader_noise_space:180#stand:panel", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
++   ["", "", "", "", "", "", "shader_noise_space#stand:panel", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "shader_noise_space#stand:room", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+--- before/commons/maps/Noise_6_Wall/summary.md
++++ after/commons/maps/Noise_6_Wall/summary.md
+@@ -1,6 +1,6 @@
+ # The room wears the sum
+ 
+-Noise_6_Wall carries the field from the voxel room's occupancy decisions into a material. Two placements of shader_noise_space form one primary encounter: a four-patch panel and an enterable enclosure with its retained sphere. The independent dark_sphere is a second primary reading. All three authored placements remain.
++Noise_6_Wall carries the field from the voxel room's occupancy decisions into a material. Two placements of shader_noise_space form one primary encounter: a four-patch panel inside an enterable enclosure with its retained sphere. The independent dark_sphere remains a supporting comparison, with its brief return in the text retained. All three authored placements remain.
+ 
+ FREEZE holds the current local phase, colours and density. LAYERS sends 1, 2, 4 or 6 cumulative cloud terms to the enclosure and sphere. BASIS changes the shader generator. DRESS compares the greyscale cloud sum with the complete pink finish at the same held moment. The four patches retain their fixed counts.
+ 
+--- before/commons/maps/Noise_6_Wall/technical.md
++++ after/commons/maps/Noise_6_Wall/technical.md
+@@ -28,7 +28,7 @@
+ 
+ ## Stage and preservation
+ 
+-stand:panel removes its unused large enclosure and builds the supported instrument. stand:room opts into a five-metre floor and 4.8 m wide room, with a 2.8 m ceiling and opposing 1.6 × 2.3 m door clearances. Its floor bridges the map's existing central opening. Quads have matching static box colliders; DRESS changes neither those shapes nor their positions. The original internal sphere remains, with the controlled material applied at the actual CSG combiner root. The orb has moved to solid floor near the exit. Recovered structure and utilities are unchanged.
++stand:panel removes its unused large enclosure and builds the supported instrument. stand:room opts into a five-metre floor and 4.8 m wide room, with a 2.8 m ceiling and opposing 1.6 × 2.3 m door clearances. Its floor sits over the current level map floor; the central pit described in earlier reviews has since been filled. Quads have matching static box colliders; DRESS changes neither those shapes nor their positions. The original internal sphere remains, with the controlled material applied at the actual CSG combiner root. The orb has moved to solid floor near the exit. The panel now stands at (6,4), facing inward from the north wall; the room remains at (6,6). This placement revision changes no structure, utilities, shader source, geometry or controller behaviour.
+ 
+ ## Evidence and limits
+ 
+--- before/commons/maps/Noise_6_Wall/tutorial.md
++++ after/commons/maps/Noise_6_Wall/tutorial.md
+@@ -1,8 +1,8 @@
+ # Noise 6 Wall — hold, accumulate, dress
+ 
+ 1. Enter through either side door. Look along the floor towards the other opening and notice the cloud finish on the room's sphere.
+-2. Return to the panel and press FREEZE. Compare the current moment before and after the press; it should hold without jumping to time zero.
+-3. Press DRESS and revisit the room. Compare greyscale cloud accumulation with the full pink material. Check the same doorway and floor; the controls change material parameters, not collision.
++2. Turn to the panel on the inner wall and press FREEZE. Compare the current moment before and after the press; it should hold without jumping to time zero.
++3. Press DRESS while staying inside the room. Compare greyscale cloud accumulation with the full pink material. Check the same doorway and floor; the controls change material parameters, not collision.
+ 4. At the panel, compare the fixed 1/2/4/6 windows. Press LAYERS to carry each cumulative bound into the enclosure. Keep BASIS and the moment fixed for this comparison.
+ 5. Read the loop below. Each term folds noise through abs, adds a weighted magnitude, halves amplitude and doubles frequency. The sine/cosine offsets are held by the same local clock.
+ 
+@@ -25,6 +25,6 @@
+ 8. Follow a cloud towards a door or corner. Each quad restarts its UV chart; the sphere has another chart. A shared procedure does not guarantee continuity between those surfaces.
+ 9. Watch the independent dark orb while the room is held. Resume with FREEZE again. The room continues from its held phase; the orb has been advancing throughout.
+ 
+-Both shaders expose the same cloud term bound and sum-only mode. The comparison patches always show the sum at gain 2, while DRESS selects what the enclosure and its sphere wear. The actual desktop pointer operates all four controls in the accepted rendered run. Human VR reach and comfort remain for the deferred headset session.
++Both shaders expose the same cloud term bound and sum-only mode. The comparison patches always show the sum at gain 2, while DRESS selects what the enclosure and its sphere wear. The actual desktop pointer operates all four controls in the accepted rendered run. The current panel is at (6,4), facing into the room; earlier entrance photographs describe the previous placement. Human VR reach and comfort remain for the deferred headset session.
+ 
+ Next: Noise_Inside_Noise. Keep the distinction between changing the value returned at a coordinate and changing the coordinate at which the question is asked.

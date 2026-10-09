@@ -1,8 +1,8 @@
 {
  "sweep": "cctv",
- "peak_changed_pct": 0.171,
- "subject_pct": 0.821,
- "verdict": "faint - under 2% of the frame moved",
+ "peak_changed_pct": 3.199,
+ "subject_pct": 82.843,
+ "verdict": "BITES",
  "variants": [
   {
    "a": {
@@ -11,8 +11,8 @@
    "b": {
     "oversight": "housing"
    },
-   "changed_px": 200,
-   "changed_pct": 0.035
+   "changed_px": 11312,
+   "changed_pct": 1.958
   },
   {
    "a": {
@@ -21,8 +21,8 @@
    "b": {
     "oversight": "sightline"
    },
-   "changed_px": 459,
-   "changed_pct": 0.079
+   "changed_px": 18477,
+   "changed_pct": 3.199
   },
   {
    "a": {
@@ -31,38 +31,38 @@
    "b": {
     "oversight": "tally"
    },
-   "changed_px": 566,
-   "changed_pct": 0.098
-  },
-  {
-   "a": {
-    "oversight": "monitor"
-   },
-   "b": {
-    "oversight": "dome"
-   },
-   "changed_px": 121,
-   "changed_pct": 0.021
-  },
-  {
-   "a": {
-    "oversight": "housing"
-   },
-   "b": {
-    "oversight": "sightline"
-   },
-   "changed_px": 409,
+   "changed_px": 410,
    "changed_pct": 0.071
   },
   {
    "a": {
+    "oversight": "monitor"
+   },
+   "b": {
+    "oversight": "dome"
+   },
+   "changed_px": 9415,
+   "changed_pct": 1.63
+  },
+  {
+   "a": {
+    "oversight": "housing"
+   },
+   "b": {
+    "oversight": "sightline"
+   },
+   "changed_px": 17467,
+   "changed_pct": 3.024
+  },
+  {
+   "a": {
     "oversight": "housing"
    },
    "b": {
     "oversight": "tally"
    },
-   "changed_px": 766,
-   "changed_pct": 0.133
+   "changed_px": 11640,
+   "changed_pct": 2.015
   },
   {
    "a": {
@@ -71,8 +71,8 @@
    "b": {
     "oversight": "dome"
    },
-   "changed_px": 190,
-   "changed_pct": 0.033
+   "changed_px": 4196,
+   "changed_pct": 0.726
   },
   {
    "a": {
@@ -81,8 +81,8 @@
    "b": {
     "oversight": "tally"
    },
-   "changed_px": 990,
-   "changed_pct": 0.171
+   "changed_px": 18473,
+   "changed_pct": 3.198
   },
   {
    "a": {
@@ -91,8 +91,8 @@
    "b": {
     "oversight": "dome"
    },
-   "changed_px": 447,
-   "changed_pct": 0.077
+   "changed_px": 17817,
+   "changed_pct": 3.085
   },
   {
    "a": {
@@ -101,8 +101,8 @@
    "b": {
     "oversight": "dome"
    },
-   "changed_px": 687,
-   "changed_pct": 0.119
+   "changed_px": 9754,
+   "changed_pct": 1.689
   }
  ]
 }

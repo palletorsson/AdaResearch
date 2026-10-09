@@ -1,0 +1,124 @@
+--- before/commons/maps/Vectors_Act2_VectorArithmetic/final.md
++++ commons/maps/Vectors_Act2_VectorArithmetic/final.md
+@@ -4,91 +4,89 @@
+ 
+ The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.
+ 
+-Move one pad. The sum moves with it. At this scale there is no carriage to wait for. That absence matters: the result appears immediately, although a body given that destination would still need a way to get there.
+-
+-Keep the distinction as we walk. These operations give us relationships. A simulation has to decide what to do with them.
++Move one pad. The sum moves with it. There is no carriage to wait for. A body given that destination would still need a way to get there.
+ 
+ <!-- @vector_sub -->
+ 
+ Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.
+ 
+-Press **SWAP**. The arrow reverses.
++With **SWAP**, the arrow reverses.
+ 
+ In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.
+ 
+-**A/B** chooses an address; **X−**, **X+**, **F−**, **F+** move it in half-metre coordinate steps. Try **SHIFT** instead. Both addresses move sideways together, while the gap between them stays the same. That is the first vector room returning inside a new operation.
++**SHIFT** moves both addresses sideways together. The gap stays the same: the first vector room returns inside this new operation. **SAME** brings B to A, leaving no length for the cyan arrow to draw.
+ 
+-Then **SAME** brings B to A. The two addresses coincide. The cyan arrow has no length to draw.
+-
+-Press **RULE**:
++Behind **RULE** is the subtraction:
+ 
+ ```gdscript
+ gap = a - b
+ ```
+ 
+-From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have not introduced another kind of number; we have asked a different question of the same coordinates.
++From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have asked a different question of the same coordinates.
+ 
+-The diagram has a scale of its own. Each coordinate metre is drawn as half a metre, on the floor and on the wall. X goes across; F goes forward on the floor and upward on the wall. An upward arrow in the drawing still does not authorize a climb. The little blocks are representations of addresses, not a measurement of the visitor's position.
+-
+-The controls stop at ±1.5 metres per component. SHIFT refuses the whole move if either address would cross that boundary. It does not quietly move one and spoil the comparison. A limit chosen for the exhibit is already shaping which questions can be asked without rebuilding it.
++The blocks and their wall picture use a reduced scale. They represent addresses on the stage, not the visitor's position. The arrow can tell the little block how to reach its neighbour. Applying it to our own body would require another connection.
+ 
+ <!-- @dot_aligner -->
+ 
+-Between the gap and its next use, a small aiming console makes a decision from an angle. Move its **ALIGNMENT** slider. The drawn aim changes relative to a target; the readout moves toward *FRIEND* as their directions approach one another.
++## When an angle becomes agreement
+ 
+-The source compares normalized directions. Their dot product is one at complete alignment, zero at a right angle, negative when they point sufficiently against each other. This placement's ordinary slider covers only a limited angular range; it does not offer the whole operation. The larger dot-product exhibit beside it is a separate comparison, not another control for this console.
++Between the gap and its next use, a small aiming console makes a decision from an angle. Its **ALIGNMENT** slider brings the drawn aim toward a target direction. As they approach one another, the target acquires the name *FRIEND*.
+ 
+-A threshold of `0.985` divides the illustrated target's status. The directions vary continuously, but the name changes at a boundary someone selected. The target is not learning to trust the turret. A drawing is being classified by a rule.
++The console compares normalised directions. Their dot product reaches one when they align. In the wider operation it is zero at a right angle and negative when the directions point sufficiently against each other; this slider explores only a limited angular range.
+ 
+-That is a useful place to pause before calling a number agreement. What relation have we measured, and what extra story did the label attach to it?
++Here `0.985` is enough to cross the threshold. The direction changes continuously. The name changes at once.
++
++Nothing about the target's intentions entered the calculation. It became a friend by pointing nearly the same way. The number measures alignment; the label supplies a story about whom to welcome. What happens to that story if agreement stops being our condition for approach?
+ 
+ <!-- @projection_shadow -->
+ 
+-At the next wall, the cyan gap has arrived before us. This station reads the actual A and B values from the subtraction station in this hall. It has not invented a similar-looking example.
++## Somewhere for the remainder
+ 
+-A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. Press **RESET** to return both stations to their opening coordinates and the rail to X. Then **SLIDE**.
++At the next wall, the cyan gap has arrived before us. This station reads A and B from the subtraction stage we just left.
+ 
+-A moves in the source. The cyan gap changes. Gold stays where it was. Pink grows.
++A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. **RESET** returns both stations to their opening coordinates, with the rail along X. Then **SLIDE** moves A across the rail.
+ 
+-SLIDE moves A half a coordinate metre perpendicular to the rail, reversing that step on the next press. The rail cannot register this part of the movement in its along-rail reading. Here the remainder remains visible beside the answer.
++The cyan gap changes. Gold stays where it was. Pink grows.
+ 
+-Now **TURN**. The rail turns thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.
++The rail's along-direction reading cannot register this movement. Beside it, the remainder makes the change visible. A second SLIDE reverses the step.
+ 
+-When you press **RULE**, three short lines hold the experiment together:
++Now **TURN** moves the rail thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.
++
++The rule separates the gap into two parts:
+ 
+ ```gdscript
+ kept = axis * gap.dot(axis)
+ remainder = gap - kept
+ ```
+ 
+-The axis is maintained at unit length. `gap.dot(axis)` gives a signed distance along it. Multiplying by the axis turns that number back into a vector. Subtracting the kept part leaves the perpendicular remainder.
++The axis has unit length. `gap.dot(axis)` gives a signed distance along it. Multiplying by the axis makes that number into the gold vector. Subtracting gold from the gap leaves the perpendicular pink remainder.
+ 
+-And the addition we already know can check the result:
++The addition we already know can put them together again:
+ 
+ ```gdscript
+ kept + remainder
+ ```
+ 
+-It gives the gap back. To ordinary floating-point precision, the remainder's dot with the rail is zero. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.
++It gives the gap back. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.
+ 
+-Try **FLIP**. The signed distance changes sign, but the gold vector stays in place: both the axis and its scalar coordinate reverse. Even a negative number cannot tell its whole story without the frame it belongs to.
++**FLIP** reverses the rail's orientation. The signed distance changes sign, but gold stays in place: both the axis and its coordinate reverse. A negative number needs its frame before it can tell us where to go.
+ 
+ There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail's account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.
+ 
+ <!-- @torque_crank -->
+ 
+-The crank farther along takes the question toward turning. Its **LEVERAGE** slider changes the angle between an illustrated arm and push. Along the arm, the normalized cross-product magnitude is zero. Across it, the value grows toward one.
++## Across the arm
+ 
+-The source contains a compact expression of the geometric relation:
++The crank farther along brings this perpendicular part to a different question. Its **LEVERAGE** slider changes the angle between an illustrated arm and push. Along the arm, the cross-product magnitude is zero. Across it, the value grows toward one.
+ 
+ ```gdscript
+ var torque_vec: Vector3 = r_dir.cross(f_dir)
+ ```
+ 
+-These are unit directions. Their cross product supplies an axis and an angular factor. Physical torque would also need the actual arm length and force magnitude. The exhibit draws its wheel at an angle derived from that factor; it does not accumulate a wheel's angular velocity through time.
++These are unit directions. Their cross product supplies an axis and an angular factor. For physical torque we would also need the actual arm length and force magnitude. A push directed through the pivot supplies no torque about it; the perpendicular part can turn the arm.
+ 
+-The readout names its quantity: sin θ, a unitless factor, beside the chosen angle. It also reports the wheel's static pose. Move the slider, then leave it alone. The wheel holds that pose; time has not been made part of this model.
++The readout names the factor, sin θ, beside the chosen angle. The wheel changes its pose as the slider moves. Let go and it holds still.
+ 
+-The diagram shows a relation worth learning, and also where a future simulation must do more work. What the rail keeps of a push along an arm contributes no torque about that arm's origin; the perpendicular part can. Yet neither a projection nor a cross product, by itself, makes a body move.
++We can study the relation here without waiting for a wheel to accelerate. But setting a pose has not yet given the wheel momentum. To let it keep turning, we would have to give it a state that carries from one moment into the next.
+ 
+-The larger comparisons and the distant laser-operated diagrams remain around this route. We need not finish every version before continuing. The next hall in the current sequence is Launch. Carry the gap, its components and this unfinished wheel with you: a destination, a direction, an initial velocity and a force may all be written with vectors, but they ask different things of time.
++The larger comparisons and the distant laser-operated diagrams remain around this route. Ahead, in Launch, a vector will be given another job. It will leave the diagram and become an initial velocity for a moving body.

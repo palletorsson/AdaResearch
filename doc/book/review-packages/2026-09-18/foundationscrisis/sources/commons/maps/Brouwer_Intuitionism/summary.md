@@ -1,0 +1,9 @@
+# Brouwer_Intuitionism — Summary
+
+The sixth map in the foundationscrisis sequence. An 11x14 grid, max height 2, built as fragmented stepping-stone platforms over void. The map uses auto-reveal mechanics: platforms are invisible until the player approaches, constructing the space in real time. Bridges connect certain islands. The gaps between platforms are honest — they represent what has not been constructed.
+
+Three artifacts occupy separate islands. `excluded_middle_demo` presents two spheres (P and not-P) with a toggleable disjunction: switch to intuitionistic mode and the law of excluded middle fades, the spheres dim, certainty retreats. `constructive_proof` contrasts classical and constructive existence proofs side by side — one panel names the witness, the other proves only that nonexistence is absurd. `brouwer_choice_sequence` displays an infinite sequence generating in real time, each term appearing when chosen, the sequence always unfinished, always open.
+
+Brouwer rejected proof by contradiction and the law of excluded middle. If you cannot construct a mathematical object, you may not assert it exists. The cost is real: large parts of classical analysis dissolve without constructive replacements. The gain is equally real: constructive proofs are programs (the Curry-Howard correspondence), and existence claims become algorithms. Brouwer's intuitionism, once a fringe position, is the logical foundation of modern type theory and proof assistants.
+
+Position: map 6 of 8 in foundationscrisis. Difficulty: expert. Estimated time: 5-6 minutes. Follows Escher_Impossible (visual paradox) and Godel_Incompleteness (formal limits). Leads to Florensky_Paraconsistent, which proposes the opposite response: rather than restricting logic to avoid contradiction, embrace contradiction and refuse to let it spread.

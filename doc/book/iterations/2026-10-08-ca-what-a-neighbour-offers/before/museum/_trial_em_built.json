@@ -1,0 +1,1471 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-08 18:57:27",
+	"boot_ms": {
+		"autoloads": 2857,
+		"bake_parsed": 1561,
+		"boot_tail": 4654,
+		"engine_pak": 859,
+		"engine_to_ready": 5707,
+		"entry": 1,
+		"first_frame": 4873,
+		"first_physics": 3240,
+		"grid_warm": 2237,
+		"guests_loaded": 2369,
+		"loading_shell": 30,
+		"modules_loaded": 341,
+		"modules_pool": 450,
+		"museum_data": 450,
+		"plan_parsed": 1512,
+		"pool_done": 1423,
+		"scene_chain": 1991,
+		"segment0_built": 4654,
+		"world_ready": 3240
+	},
+	"plan": "res://doc/book/iterations/2026-10-08-ca-what-a-neighbour-offers/before/museum/plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						5
+					],
+					"token": "rd_artifact",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						13
+					],
+					"token": "the_clockmaker_of_rules",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						13.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						10,
+						17
+					],
+					"token": "lattice_gas_pump",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						17.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						20
+					],
+					"token": "ca_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						20.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						1,
+						24
+					],
+					"token": "crack_propagation_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.5,
+						0.0,
+						24.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						24
+					],
+					"token": "rule_30_110_gravity",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						24.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "gate",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "gate:ca softrules",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						0.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						15
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 01",
+					"index": 1,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "01\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						16.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						17
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 02",
+					"index": 2,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "02\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						24
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "03\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 04",
+					"index": 4,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "04\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 05",
+					"index": 5,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "05\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						18
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca softrules · 06",
+					"index": 6,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "06\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.2,
+						18.2
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						18
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 07",
+					"index": 7,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "07\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.1,
+						18.6
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						15,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca softrules · 08",
+					"index": 8,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "08\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						15
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 09",
+					"index": 9,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "09\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						16.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						17
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 10",
+					"index": 10,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "10\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						24
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 11",
+					"index": 11,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "11\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 12",
+					"index": 12,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "12\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 13",
+					"index": 13,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "13\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						20
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca softrules · 14",
+					"index": 14,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "14\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.0,
+						20.3
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						20
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "15\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.2,
+						20.2
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						15,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca softrules · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "16\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						15
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 17",
+					"index": 17,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "17\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.6,
+						1.1,
+						16.0
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						17
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 18",
+					"index": 18,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "18\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.3,
+						1.0,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						24
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca softrules · 19",
+					"index": 19,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "19\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.2,
+						1.2,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca softrules · 20",
+					"index": 20,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "20\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 21",
+					"index": 21,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "21\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						22
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						22
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca softrules · 22",
+					"index": 22,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "22\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.1,
+						22.6
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						22
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						22
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca softrules · 23",
+					"index": 23,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca softrules",
+					"segment": 0,
+					"text": "23\ncellularautomata · ca softru",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0264165103435516,
+						"pixel_size": 0.00024015009380863,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.0,
+						22.3
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.###########################",
+				"................p#############",
+				"##..............p#############",
+				"##...............#############",
+				"######.....###################",
+				"##...............#############",
+				"##...............#############",
+				"##..sssssssss....#############",
+				"##..sssssssss....#############",
+				"##..sssssssss....#############",
+				"##..sssssssss....#############",
+				"##..sssssssss....#############",
+				"##..sssssssss....#############",
+				"##...............#############",
+				"##...............#############",
+				"##...............#############",
+				"##.....sssss.....#############",
+				"##.....sssss.....#############",
+				"##.....sssss.....#############",
+				"##...............#############",
+				"######...####....#############",
+				"##........sss#...#############",
+				"##...........#...#############",
+				"##.#sss#...#.#...#############",
+				"##..sss......#...#############",
+				"##..sss......#...#############",
+				"##...........#...#############",
+				"##.....#...#.....#############",
+				"##s.s............#############",
+				"######.....###################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": true
+			},
+			"h": 26,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "neue-nationalgalerie-free-plan",
+			"pearl": "ca softrules",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,24": "crack_propagation_ca",
+				"10,12": "the_clockmaker_of_rules",
+				"10,13": "the_clockmaker_of_rules",
+				"10,14": "the_clockmaker_of_rules",
+				"10,17": "lattice_gas_pump",
+				"10,3": "rd_artifact",
+				"10,4": "rd_artifact",
+				"10,5": "rd_artifact",
+				"10,6": "rd_artifact",
+				"10,7": "rd_artifact",
+				"10,8": "rd_artifact",
+				"11,17": "lattice_gas_pump",
+				"11,3": "rd_artifact",
+				"11,4": "rd_artifact",
+				"11,5": "rd_artifact",
+				"11,6": "rd_artifact",
+				"11,7": "rd_artifact",
+				"11,8": "rd_artifact",
+				"3,19": "ca_sphere",
+				"3,20": "ca_sphere",
+				"3,21": "ca_sphere",
+				"3,24": "rule_30_110_gravity",
+				"3,3": "rd_artifact",
+				"3,4": "rd_artifact",
+				"3,5": "rd_artifact",
+				"3,6": "rd_artifact",
+				"3,7": "rd_artifact",
+				"3,8": "rd_artifact",
+				"4,19": "ca_sphere",
+				"4,20": "ca_sphere",
+				"4,21": "ca_sphere",
+				"4,3": "rd_artifact",
+				"4,4": "rd_artifact",
+				"4,5": "rd_artifact",
+				"4,6": "rd_artifact",
+				"4,7": "rd_artifact",
+				"4,8": "rd_artifact",
+				"5,19": "ca_sphere",
+				"5,20": "ca_sphere",
+				"5,21": "ca_sphere",
+				"5,3": "rd_artifact",
+				"5,4": "rd_artifact",
+				"5,5": "rd_artifact",
+				"5,6": "rd_artifact",
+				"5,7": "rd_artifact",
+				"5,8": "rd_artifact",
+				"6,12": "the_clockmaker_of_rules",
+				"6,13": "the_clockmaker_of_rules",
+				"6,14": "the_clockmaker_of_rules",
+				"6,3": "rd_artifact",
+				"6,4": "rd_artifact",
+				"6,5": "rd_artifact",
+				"6,6": "rd_artifact",
+				"6,7": "rd_artifact",
+				"6,8": "rd_artifact",
+				"7,12": "the_clockmaker_of_rules",
+				"7,13": "the_clockmaker_of_rules",
+				"7,14": "the_clockmaker_of_rules",
+				"7,3": "rd_artifact",
+				"7,4": "rd_artifact",
+				"7,5": "rd_artifact",
+				"7,6": "rd_artifact",
+				"7,7": "rd_artifact",
+				"7,8": "rd_artifact",
+				"8,12": "the_clockmaker_of_rules",
+				"8,13": "the_clockmaker_of_rules",
+				"8,14": "the_clockmaker_of_rules",
+				"8,3": "rd_artifact",
+				"8,4": "rd_artifact",
+				"8,5": "rd_artifact",
+				"8,6": "rd_artifact",
+				"8,7": "rd_artifact",
+				"8,8": "rd_artifact",
+				"9,12": "the_clockmaker_of_rules",
+				"9,13": "the_clockmaker_of_rules",
+				"9,14": "the_clockmaker_of_rules",
+				"9,17": "lattice_gas_pump",
+				"9,3": "rd_artifact",
+				"9,4": "rd_artifact",
+				"9,5": "rd_artifact",
+				"9,6": "rd_artifact",
+				"9,7": "rd_artifact",
+				"9,8": "rd_artifact"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 17,
+			"z0": -4,
+			"z1": 26
+		}
+	]
+}

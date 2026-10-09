@@ -1,0 +1,413 @@
+{
+  "check_count": 71,
+  "checks": [
+    {
+      "detail": "",
+      "name": "empty input has no surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "one point has no surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "repeated point has no surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "duplicates are removed",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "nonfinite samples are removed",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "vertical: finite orthonormal frames",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "horizontal fallback: finite orthonormal frames",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial curve: finite orthonormal frames",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "exact reversal: finite orthonormal frames",
+      "passed": true
+    },
+    {
+      "detail": "0.9944549202919",
+      "name": "transport is continuous on smooth spatial curve",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "sampling ignores input event density",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial resampling ignores collinear subdivisions",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "resampling retains exact endpoints",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "resampling uses world distance",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "invalid spacing uses safe default",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "straight ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "straight ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "straight ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "straight ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "ribbon full width is in metres",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "ribbon shares adjacent cross sections",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "ribbon UV spans width and arc",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "uneven sample ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "uneven sample ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "uneven sample ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "uneven sample ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "UV along stroke uses arc length rather than sample index",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tapered ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tapered ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tapered ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tapered ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "taper keeps nonzero endpoints",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "taper retains full middle width",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "twisted ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "twisted ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "twisted ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "twisted ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "total twist reaches requested angle",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "taper and twist invariant after distance resampling",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "duplicate ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "duplicate ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "duplicate ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "duplicate ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal tube: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal tube: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal tube: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "reversal tube: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial twisted ribbon: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial twisted ribbon: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial twisted ribbon: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial twisted ribbon: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial tube: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial tube: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial tube: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial tube: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tube capped vertex count",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tube complete triangle count",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tube radius and outward radial normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tube seam closes position while splitting UV",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "tube caps have separate flat outward normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "capped tube has no geometric boundary edges",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "spatial sweep occupies all three dimensions",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "triangle section tube: one surface",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "triangle section tube: finite vertices and unit normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "triangle section tube: no degenerate triangles",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "triangle section tube: clockwise faces agree with normals",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "optional open tube omits caps",
+      "passed": true
+    }
+  ],
+  "meshes": [
+    {
+      "name": "straight ribbon",
+      "triangles": 4,
+      "vertices": 6
+    },
+    {
+      "name": "uneven sample ribbon",
+      "triangles": 6,
+      "vertices": 8
+    },
+    {
+      "name": "tapered ribbon",
+      "triangles": 4,
+      "vertices": 6
+    },
+    {
+      "name": "twisted ribbon",
+      "triangles": 4,
+      "vertices": 6
+    },
+    {
+      "name": "duplicate ribbon",
+      "triangles": 4,
+      "vertices": 6
+    },
+    {
+      "name": "reversal ribbon",
+      "triangles": 6,
+      "vertices": 8
+    },
+    {
+      "name": "reversal tube",
+      "triangles": 64,
+      "vertices": 56
+    },
+    {
+      "name": "spatial twisted ribbon",
+      "triangles": 120,
+      "vertices": 122
+    },
+    {
+      "name": "spatial tube",
+      "triangles": 1464,
+      "vertices": 821
+    },
+    {
+      "name": "triangle section tube",
+      "triangles": 12,
+      "vertices": 12
+    }
+  ],
+  "passed": true
+}

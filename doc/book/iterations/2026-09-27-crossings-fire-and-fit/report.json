@@ -1,0 +1,170 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "landing and rotating bridge exist",
+      "passed": true
+    },
+    {
+      "name": "comparison uses the aligned quarter-turn",
+      "passed": true
+    },
+    {
+      "name": "control relocated to near bank",
+      "passed": true
+    },
+    {
+      "name": "landing home kept independently",
+      "passed": true
+    },
+    {
+      "name": "control approach has support",
+      "passed": true
+    },
+    {
+      "name": "bank slider remains at reachable height",
+      "passed": true
+    },
+    {
+      "name": "real slider signal changes destination",
+      "passed": true
+    },
+    {
+      "name": "bank moves one metre",
+      "passed": true
+    },
+    {
+      "name": "landing stays level",
+      "passed": true
+    },
+    {
+      "name": "control move never changes bridge transform",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-gap",
+      "passed": true
+    },
+    {
+      "name": "RESET restores bank home",
+      "passed": true
+    },
+    {
+      "name": "RESET returns slider",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-at-crossing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bank-control-close",
+      "passed": true
+    },
+    {
+      "name": "aligned plank is three metres long",
+      "passed": true
+    },
+    {
+      "name": "plank end meets landing without overlap or gap",
+      "passed": true
+    },
+    {
+      "name": "plank and landing supporting faces share deck height",
+      "passed": true
+    },
+    {
+      "name": "near bank reaches the plank at the same height",
+      "passed": true
+    },
+    {
+      "name": "bank readout starts at meeting edges",
+      "passed": true
+    },
+    {
+      "name": "full bank displacement opens a one-metre gap",
+      "passed": true
+    },
+    {
+      "name": "basin fire exists in the actual museum hall",
+      "passed": true
+    },
+    {
+      "name": "fire has an active fall detector",
+      "passed": true
+    },
+    {
+      "name": "fire remains below the crossing deck",
+      "passed": true
+    },
+    {
+      "name": "fire has a physical detector",
+      "passed": true
+    },
+    {
+      "name": "fire covers the basin under /transport_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "fire covers the basin under /scale_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "fire covers the basin under /rotation_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "capsule crosses meeting edges in direction 1.0",
+      "passed": true
+    },
+    {
+      "name": "capsule crosses meeting edges in direction -1.0",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rotation-eye-level",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fire-under-the-ferry",
+      "passed": true
+    },
+    {
+      "name": "museum has the actual desktop player for fall test",
+      "passed": true
+    },
+    {
+      "name": "entering fire invokes the museum death and reset",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "aligned_overlap_m": 0.0,
+    "bridge_size_m": [
+      1.0,
+      0.199999988079071,
+      3.0
+    ],
+    "controls_world": [
+      9.5,
+      0.0,
+      20.5
+    ],
+    "fire_reset_position": [
+      25.0,
+      0.300000011920929,
+      -1.5
+    ],
+    "fire_top_below_deck_m": [
+      -1.90000009536743
+    ],
+    "slider_height_m": 1.13358438014984
+  },
+  "passed": true,
+  "room": "Trans_Introduction",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,1130 @@
+extends Node3D
+class_name QFEPBalanceWorkbench
+
+# @identity
+# essence: Four normalised controls evaluate F - lambda*E + phi*0.3.
+# desire: Compare different arrangements that return the same scalar total.
+# critical_parameter: F, E, lambda and phi, all in [0,1]; delta E is a configured constant.
+# triggers: The console polls controls and refreshes arithmetic and its four-axis diagram.
+# emerges: A total can hide compensation between contributions. At lambda=0, E drops out.
+# needs: Headset reach and reading checks. No entropy sensor or physical phase detector is implemented.
+# relationships: Returns the Crisis_Synthesis proposal as arithmetic; leads to shannon_workbench.
+# truth: Nearest project reference means Manhattan distance to one of seven authored tuples.
+
+## comparison:on adds KEEP and a retained outline/total. The pale shape records the
+## tuple as it stood when pressed; the coloured shape continues to follow the rails.
+## The legacy settling axis selects initial examples, not physical phases.
+## Phi stays normalised [0,1] on this instrument, unlike the separate signed rail.
+
+# ── Configuration ─────────────────────────────────────────────────────
+
+@export_group("Plate")
+## Tilt of the slider plate toward the player.
+@export var plate_tilt_deg: float = -25.0
+## Plate height above the artifact origin.
+@export var plate_height: float = 0.95
+@export var plate_offset_z: float = 0.0
+@export var plate_scale: float = 2.0
+
+@export_group("Radar")
+## Where the radar floats relative to artifact origin.
+@export var radar_offset: Vector3 = Vector3(0.0, 1.55, -0.20)
+## Maximum half-extent of the radar (in radar-local meters, before scale).
+@export var radar_max: float = 0.42
+## Sample resolution of the radar guide rings (4 = diamond, 24 = ~circle).
+@export var radar_ring_sides: int = 4
+
+@export_group("Readout panel")
+## Where the readout sits relative to artifact origin.
+@export var readout_offset: Vector3 = Vector3(0.75, 1.05, 0.05)
+
+@export_group("Phase bar")
+## Where the tall phase color bar sits relative to artifact origin.
+@export var phase_bar_offset: Vector3 = Vector3(-0.7, 1.1, 0.05)
+@export var phase_bar_size: Vector2 = Vector2(0.10, 0.85)
+
+@export_group("Halo")
+## Halo radius (the backdrop emissive panel).
+@export var halo_size: Vector2 = Vector2(2.2, 1.7)
+## Halo Z offset behind everything else.
+@export var halo_offset: Vector3 = Vector3(0.0, 1.1, -0.4)
+
+@export_group("Defaults")
+## Default starting knob values — lambda_edge (the project's organizing phase).
+@export var default_F: float = 0.55
+@export var default_E: float = 0.58
+@export var default_lambda: float = 0.4
+@export var default_phi: float = 0.35
+## The ΔE(S, t) constant the φ knob multiplies. Holding this fixed is honest:
+## the player does not turn this input. It is a supplied change value, not
+## a measured entropy change or rate.
+@export var rate_delta_e: float = 0.30
+
+## Optional retained reading for the introduction's equal-total experiment.
+@export var comparison: bool = false
+var _kept: Array = []
+var _kept_qfe: float = 0.0
+var _kept_outline: MeshInstance3D
+var _keep_button: Node3D
+var _readout_lines: Array = []
+
+# ── Stage-2 DNA axis ──────────────────────────────────────────────────
+
+## Which of the four terms the console is settled on — i.e. which characteristic
+## settling of (F, E, λ, φ) the instrument is showing when you walk up to it.
+##
+## The header of this file claims the seven phases are "the seven characteristic
+## ways those knobs can settle", and then the object settles them once, forever.
+## This is that knob, exposed as one thing. It moves radar polygon vertices by up
+## to 0.40 m on a 0.84 m radar AND recolours the 2.2 x 1.7 m halo, the readout
+## border and the phase bar — no new geometry, all of it already meant.
+##
+##   edge        λ ≈ 0.4 — the near-symmetric kite (top 0.23 / right 0.24 /
+##               bottom 0.17 / left 0.15 m), hub letter λ, crimson #E63946.
+##               THE SHIPPED DEFAULT — identical to the pre-axis build.
+##   order       F alone — a 0.40 m spike straight up, the other three vertices
+##               collapsed inside 0.03 m of the hub, letter F, blue #3A7BFF.
+##   entropy     λE(S) dominant — a broad right-and-down wedge (right 0.39 m,
+##               bottom 0.40 m, top only 0.15 m), letter E, amber #F4A261.
+##   integration φΔE dominant — the left (φ) vertex swings out to 0.36 m so the
+##               kite leans hard left instead of standing up, letter φ,
+##               violet #9B5DE5.
+##   synthesis   the whole formula — a near-regular diamond, 0.50 m vertical by
+##               0.57 m horizontal, letter Q, white, darkened-letter branch on.
+@export_enum("edge", "order", "entropy", "integration", "synthesis") var settling: String = "edge"
+
+## The allow-list. A token outside it falls back to whatever is already set —
+## a half-recognised value would strand a placement on an unbuilt settling.
+const SETTLINGS: PackedStringArray = ["edge", "order", "entropy", "integration", "synthesis"]
+
+## settling value → index into PHASE_DATA. Only five of the seven phases are on
+## the axis, and that is deliberate: `oscillation` (index 1) and `relation`
+## (index 5) have knob signatures that sit within ~0.15 Manhattan of `edge` and
+## `integration` respectively, so their polygons would render as near-duplicates
+## of tiles already on the sheet. Declaring them would advertise two variants the
+## camera cannot tell apart — the inert-axis failure. They stay reachable through
+## initial_F/E/lambda/phi, which is where a hand-tuned in-between belongs.
+const SETTLING_PHASE: Dictionary = {
+	"edge": 3,          # lambda_edge
+	"order": 0,         # F_order
+	"entropy": 2,       # E_entropy
+	"integration": 4,   # integration
+	"synthesis": 6,     # synthesis
+}
+
+# ── Phase data (mirrors capture_qfep_balance_gallery.gd PHASES) ───────
+# Each phase: id, display name, color (timeline PHASE_COLORS), F/E/λ/φ
+# signature, dominant letter, formula readout, caption.
+
+const PHASE_DATA: Array = [
+	{
+		"id": "F_order",
+		"display": "F — Order",
+		"color": Color(0.227, 0.482, 1.0),     # #3A7BFF
+		"F": 0.95, "E": 0.05, "lambda": 0.05, "phi": 0.0,
+		"letter": "F",
+		"formula": "QFE ≈ F",
+	},
+	{
+		"id": "oscillation",
+		"display": "F ↔ E — Oscillation",
+		"color": Color(0.490, 1.0, 0.659),     # #7DFFA8
+		"F": 0.65, "E": 0.55, "lambda": 0.4, "phi": 0.3,
+		"letter": "ω",
+		"formula": "QFE = F − 0.4·E(S) + 0.3·ΔE",
+	},
+	{
+		"id": "E_entropy",
+		"display": "λE(S) — Entropy",
+		"color": Color(0.957, 0.635, 0.380),   # #F4A261
+		"F": 0.35, "E": 0.92, "lambda": 0.95, "phi": 0.15,
+		"letter": "E",
+		"formula": "QFE = F − 0.95·E(S)",
+	},
+	{
+		"id": "lambda_edge",
+		"display": "λ ≈ 0.4 — Edge of Chaos",
+		"color": Color(0.902, 0.224, 0.275),   # #E63946
+		"F": 0.55, "E": 0.58, "lambda": 0.4, "phi": 0.35,
+		"letter": "λ",
+		"formula": "QFE = F − 0.4·E(S) + 0.35·ΔE",
+	},
+	{
+		"id": "integration",
+		"display": "φΔE — Integration",
+		"color": Color(0.608, 0.365, 0.898),   # #9B5DE5
+		"F": 0.55, "E": 0.62, "lambda": 0.55, "phi": 0.85,
+		"letter": "φ",
+		"formula": "QFE = F − 0.55·E(S) + 0.85·ΔE",
+	},
+	{
+		"id": "relation",
+		"display": "(•—•) — Relation",
+		"color": Color(0.984, 0.890, 0.541),   # #FBE38A
+		"F": 0.6, "E": 0.4, "lambda": 0.4, "phi": 0.55,
+		"letter": "G",
+		"formula": "QFE on a graph",
+	},
+	{
+		"id": "synthesis",
+		"display": "QFE — Synthesis",
+		"color": Color(1.0, 1.0, 1.0),         # #FFFFFF
+		"F": 0.7, "E": 0.65, "lambda": 0.5, "phi": 0.7,
+		"letter": "Q",
+		"formula": "QFE = F − λE(S) + φΔE(S,t)",
+	},
+]
+
+const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
+const DisplayMount = preload("res://commons/ui/display_mount.gd")
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+## Preloaded, not referenced by class_name — the headless capture path resolves
+## global classes late and a bare `TextScreen` here has bitten other artifacts.
+const TextScreenScript = preload("res://commons/ui/text_screen.gd")
+
+# Knob labels (top → right → bottom → left)
+const KNOB_NAMES: Array = ["F", "E(S)", "λ", "φ"]
+
+## The promoted phase-name board. 0.46 m of text width becomes a 0.496 x 0.321 m
+## framed screen; PHASE_SCREEN_GAP lifts its centre above the bar's top edge so
+## the board's lower edge clears the bar by 0.054 m and covers nothing.
+const PHASE_SCREEN_WIDTH := 0.46
+const PHASE_SCREEN_GAP := 0.215
+
+# ── Internal state ────────────────────────────────────────────────────
+
+var _F: float = 0.55
+var _E: float = 0.58
+var _lambda: float = 0.4
+var _phi: float = 0.35
+var _qfe: float = 0.0
+var _phase_index: int = 3  # lambda_edge default
+
+var _plate_root: Node3D
+var _display_root: Node3D            # anchor that carries the viz cluster
+var _halo_inst: MeshInstance3D       # background glow, mounted with the cluster
+var _sliders: Array = []  # 4 slider instances, in order [F, E, λ, φ]
+var _plate_readout
+var _viz_dirty := false
+var _viz_cooldown := 0.0
+const VIZ_REFRESH_INTERVAL := 0.12
+
+var _radar_root: Node3D
+var _radar_polygon_mesh: ImmediateMesh
+var _radar_polygon_mesh_inst: MeshInstance3D
+var _radar_polygon_material: StandardMaterial3D
+var _radar_outline_mesh: ImmediateMesh
+var _radar_outline_mesh_inst: MeshInstance3D
+var _radar_outline_material: StandardMaterial3D
+var _radar_knob_dots: Array = []  # 4 MeshInstance3Ds + their materials
+var _radar_knob_materials: Array = []
+var _radar_hub_material: StandardMaterial3D
+var _radar_letter_label: Label3D
+
+var _readout_root: Node3D
+var _readout_card_material: StandardMaterial3D
+var _readout_border_material: StandardMaterial3D
+var _readout_block: Node3D            # one consolidated multi-line baked-text board
+const READOUT_BLOCK_WIDTH := 0.60     # meters, inside the 0.66-wide card
+const READOUT_LINE_H := 0.045         # per-line height in meters
+
+var _phase_bar_root: Node3D
+var _phase_bar_material: StandardMaterial3D
+## The phase name used to be a bare hanging Label3D ("PhaseDisplay") floating
+## 0.06 m over the bar's top edge on nothing. It is now a canonical TextScreen
+## board. See _build_phase_bar for the placement note. Deliberately untyped: the
+## TextScreen properties (mode/width_m/title/title_color) are not on Node3D, and
+## typing it against the global class name would make this file fail to compile
+## wherever that class has not been registered yet.
+var _phase_screen = null
+## Kept as the text source only — invisible, billboard disabled. Never deleted:
+## scripts and tooling that read `.text` off "PhaseDisplay" keep working.
+var _phase_bar_label_top: Label3D
+var _phase_bar_label_letter: Label3D
+
+var _halo_material: StandardMaterial3D
+
+# ── Build bookkeeping ─────────────────────────────────────────────────
+
+## True once the synchronous first build has completed.
+var _built: bool = false
+## Every node THIS script added to the tree, in creation order. _rebuild_now frees
+## exactly these — never get_children(), which by then also holds the grid's own
+## framed label plates and the auto-grounding it did after us.
+var _owned: Array = []
+## Guards the one deferred call in this file (the DisplayMount re-parent, which
+## must stay deferred — it measures a global AABB). A rebuild does the mount
+## inline and clears this so the still-queued call from _ready no-ops.
+var _mount_scheduled: bool = false
+## Explicit per-knob overrides from apply_grid_config's initial_F/E/lambda/phi.
+## Held separately so they survive a settling rebuild instead of being wiped by it.
+var _knob_override: Dictionary = {}
+## plate_scale defaults to 2.0 but the shipped _ready never applied it — only
+## apply_grid_config did. This records whether a map actually asked, so a rebuild
+## reproduces the look the placement had rather than the export's stale value.
+var _plate_scale_configured: bool = false
+
+
+# ── Lifecycle ─────────────────────────────────────────────────────────
+
+func _ready() -> void:
+	_build_all()
+	_built = true
+	_mount_scheduled = true
+	_mount_display.call_deferred()
+
+
+## The whole console, synchronously, from the @export values alone.
+func _build_all() -> void:
+	settling = _pick_axis(settling, SETTLINGS, "edge")
+	_apply_settling()
+
+	_build_halo()
+	_build_plate_and_sliders()
+	_build_radar()
+	_build_readout_panel()
+	_build_phase_bar()
+	_build_comparison()
+	_refresh_all()
+
+
+## Seat the four knobs on the named settling.
+##
+## This ONE assignment is the entire axis. Polygon vertices are radar_max × the
+## knob value; the hub letter, the halo tint, the readout border and the phase bar
+## all come from _detect_phase()'s Manhattan match against PHASE_DATA, which the
+## settled tuple hits exactly (distance 0). Nothing else needed changing.
+func _apply_settling() -> void:
+	if settling == "edge":
+		# The shipped look, byte-for-byte: the author-set defaults ARE the
+		# lambda_edge signature, and a map that tunes default_F keeps tuning it.
+		_F = clampf(default_F, 0.0, 1.0)
+		_E = clampf(default_E, 0.0, 1.0)
+		_lambda = clampf(default_lambda, 0.0, 1.0)
+		_phi = clampf(default_phi, 0.0, 1.0)
+	else:
+		var p: Dictionary = PHASE_DATA[int(SETTLING_PHASE.get(settling, 3))]
+		_F = clampf(float(p.F), 0.0, 1.0)
+		_E = clampf(float(p.E), 0.0, 1.0)
+		_lambda = clampf(float(p["lambda"]), 0.0, 1.0)
+		_phi = clampf(float(p.phi), 0.0, 1.0)
+
+	# A hand-set knob still wins over the settling it was placed inside.
+	if _knob_override.has("F"):
+		_F = float(_knob_override["F"])
+	if _knob_override.has("E"):
+		_E = float(_knob_override["E"])
+	if _knob_override.has("lambda"):
+		_lambda = float(_knob_override["lambda"])
+	if _knob_override.has("phi"):
+		_phi = float(_knob_override["phi"])
+
+	_phase_index = _detect_phase()
+
+
+## Push the current knob tuple back into the four faders.
+##
+## Load-bearing for the axis, not cosmetic: _process reads the faders every frame
+## and writes them into _F.._phi, so a settling that only touched the internal
+## state would revert to the fader defaults on frame 2 and every value would
+## photograph identically.
+func _seat_sliders() -> void:
+	var vals: Array = [_F, _E, _lambda, _phi]
+	for i in range(_sliders.size()):
+		var s = _sliders[i]
+		if s != null and is_instance_valid(s) and s.has_method("set_normalized_value"):
+			s.call("set_normalized_value", float(vals[i]))
+
+
+## Gather the viz roots onto a composer-placed anchor + floor stand (DisplayMount).
+func _mount_display() -> void:
+	if not _mount_scheduled:
+		return
+	_mount_scheduled = false
+	_mount_now()
+
+
+func _mount_now() -> void:
+	var center := radar_offset
+	_display_root = DisplayMount.make_anchor(self, "qfep_balance_workbench", center, 1.0, 0.0)
+	_owned.append(_display_root)
+	DisplayMount.mount_cluster(_display_root, [_radar_root, _readout_root, _phase_bar_root, _halo_inst], center)
+	# build_stand adds its three boxes straight onto us — claim them so a rebuild
+	# does not leave an orphan stand under a display that no longer exists.
+	var before: Array = get_children()
+	DisplayMount.build_stand(self, _display_root)
+	for c in get_children():
+		if not before.has(c):
+			_owned.append(c)
+
+
+func _process(_delta: float) -> void:
+	# Poll all 4 sliders each frame. Cheaper than signal connections in a
+	# 4-knob setup and avoids dependency on slider_moved emit timing.
+	var changed: bool = false
+	if _sliders.size() == 4:
+		var new_F: float = _read_slider(0, _F)
+		var new_E: float = _read_slider(1, _E)
+		var new_L: float = _read_slider(2, _lambda)
+		var new_P: float = _read_slider(3, _phi)
+		if not is_equal_approx(new_F, _F) or not is_equal_approx(new_E, _E) \
+				or not is_equal_approx(new_L, _lambda) or not is_equal_approx(new_P, _phi):
+			_F = new_F
+			_E = new_E
+			_lambda = new_L
+			_phi = new_P
+			changed = true
+	if changed:
+		_viz_dirty = true
+	# Throttled rebuild — values update every frame, but the radar/readout rebuild
+	# runs at most every VIZ_REFRESH_INTERVAL so it never fights the grab.
+	if _viz_cooldown > 0.0:
+		_viz_cooldown -= _delta
+	if _viz_dirty and _viz_cooldown <= 0.0:
+		_viz_dirty = false
+		_viz_cooldown = VIZ_REFRESH_INTERVAL
+		_refresh_all()
+
+
+func _read_slider(idx: int, default: float) -> float:
+	var s = _sliders[idx]
+	if s != null and s.has_method("get_normalized_value"):
+		return clampf(float(s.call("get_normalized_value")), 0.0, 1.0)
+	return default
+
+
+# ── QFE computation + phase detection ─────────────────────────────────
+
+func _compute_qfe() -> float:
+	# QFE = F − λ·E(S) + φ·ΔE(S, t)
+	return _F - _lambda * _E + _phi * rate_delta_e
+
+
+func _detect_phase() -> int:
+	# Manhattan distance to seven authored references. This does not detect a physical phase.
+	var best_idx: int = 0
+	var best_d: float = 1.0e9
+	for i in range(PHASE_DATA.size()):
+		var p: Dictionary = PHASE_DATA[i]
+		var d: float = abs(_F - float(p.F)) + abs(_E - float(p.E)) \
+				+ abs(_lambda - float(p.lambda)) + abs(_phi - float(p.phi))
+		if d < best_d:
+			best_d = d
+			best_idx = i
+	return best_idx
+
+
+# ── Halo (emissive backdrop) ──────────────────────────────────────────
+
+func _build_halo() -> void:
+	var halo := MeshInstance3D.new()
+	halo.name = "Halo"
+	var qm := QuadMesh.new()
+	qm.size = halo_size
+	halo.mesh = qm
+	halo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	halo.position = halo_offset
+
+	_halo_material = StandardMaterial3D.new()
+	_halo_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_halo_material.albedo_color = Color(0.05, 0.06, 0.10, 0.0)
+	_halo_material.emission_enabled = true
+	_halo_material.emission = Color(0.5, 0.5, 0.5)
+	_halo_material.emission_energy_multiplier = 0.6
+	_halo_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	halo.material_override = _halo_material
+	add_child(halo)
+	_owned.append(halo)
+	_halo_inst = halo
+
+
+# ── Plate + 4 sliders ─────────────────────────────────────────────────
+
+func _build_plate_and_sliders() -> void:
+	# Canonical desktop ControlConsole (workbench principal): the 4 QFEP knobs
+	# (F · E · λ · φ) as a slider row + a summary readout. The radar / phase bar /
+	# detail readout stay as world-space viz. Replaces the hand-built plate + jumpy
+	# slider_horizontal with the canonical slider_smooth row.
+	# Keep the four rails and optional KEEP comparison at their authored size.
+	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height, "braun", "instrument")
+	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
+	add_child(_plate_root)
+	_owned.append(_plate_root)
+	# plate_scale is applied ONLY when a map actually set it. The export defaults
+	# to 2.0 but the shipped build never applied it, so scaling here unasked would
+	# double the console the moment anything else triggered a rebuild.
+	if _plate_scale_configured:
+		_plate_root.scale = Vector3.ONE * plate_scale
+	_plate_readout = _plate_root.add_readout("")
+	_sliders.clear()
+	for i in range(4):
+		var s = _plate_root.add_slider(KNOB_NAMES[i], KNOB_NAMES[i])
+		_sliders.append(s)
+	if comparison:
+		_keep_button = _plate_root.add_button("KEEP")
+		_keep_button.pressed.connect(_keep_reading)
+	# Seat the faders on the settled tuple — see _seat_sliders.
+	_seat_sliders()
+
+
+# ── Radar (4-axis, F top / E right / λ down / φ left) ─────────────────
+
+func _build_radar() -> void:
+	_radar_root = Node3D.new()
+	_radar_root.name = "Radar"
+	_radar_root.position = radar_offset
+	add_child(_radar_root)
+	_owned.append(_radar_root)
+
+	# Backplate — a tinted square behind the radar
+	var back := MeshInstance3D.new()
+	back.name = "RadarBackplate"
+	var back_mesh := QuadMesh.new()
+	back_mesh.size = Vector2(radar_max * 2.4, radar_max * 2.4)
+	back.mesh = back_mesh
+	back.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var back_mat := StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.02, 0.03, 0.05)
+	back_mat.roughness = 0.95
+	back_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	back.material_override = back_mat
+	back.position = Vector3(0.0, 0.0, -0.01)
+	_radar_root.add_child(back)
+
+	# Guide rings (concentric diamonds at 0.25, 0.5, 0.75, 1.0).
+	for r_frac in [0.25, 0.5, 0.75, 1.0]:
+		var r: float = radar_max * float(r_frac)
+		var ring_color := Color(0.32, 0.34, 0.42, 0.55)
+		if r_frac == 1.0:
+			ring_color = Color(0.46, 0.50, 0.60, 0.85)
+		_radar_root.add_child(_make_diamond_outline(r, ring_color, 0.0, 0.005))
+
+	# Axes (4 spokes from center)
+	var axis_color := Color(0.42, 0.46, 0.56, 0.75)
+	_radar_root.add_child(_make_line(Vector2.ZERO, Vector2(0, radar_max), axis_color, 0.005, 0.005))
+	_radar_root.add_child(_make_line(Vector2.ZERO, Vector2(radar_max, 0), axis_color, 0.005, 0.005))
+	_radar_root.add_child(_make_line(Vector2.ZERO, Vector2(0, -radar_max), axis_color, 0.005, 0.005))
+	_radar_root.add_child(_make_line(Vector2.ZERO, Vector2(-radar_max, 0), axis_color, 0.005, 0.005))
+
+	# Axis labels at the tips — integrated 2D-in-3D TAG boards, one per axis, pushed
+	# clear of the radar rim and each other (top/right/bottom/left, no overlap).
+	var tag_h: float = 0.075
+	var tag_gap: float = 0.12    # distance from the ring tip to the board center
+	_radar_root.add_child(_mk_axis_tag("F",    Color(0.227, 0.482, 1.0),   Vector3(0.0,  radar_max + tag_gap, 0.02), tag_h))
+	_radar_root.add_child(_mk_axis_tag("E(S)", Color(0.957, 0.635, 0.380), Vector3(radar_max + tag_gap + 0.06, 0.0, 0.02), tag_h))
+	_radar_root.add_child(_mk_axis_tag("λ",    Color(0.902, 0.224, 0.275), Vector3(0.0, -radar_max - tag_gap, 0.02), tag_h))
+	_radar_root.add_child(_mk_axis_tag("φ",    Color(0.608, 0.365, 0.898), Vector3(-radar_max - tag_gap - 0.06, 0.0, 0.02), tag_h))
+
+	# Polygon fill — translucent, gets retinted per phase
+	_radar_polygon_mesh = ImmediateMesh.new()
+	_radar_polygon_mesh_inst = MeshInstance3D.new()
+	_radar_polygon_mesh_inst.name = "RadarPolygon"
+	_radar_polygon_mesh_inst.mesh = _radar_polygon_mesh
+	_radar_polygon_mesh_inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_radar_polygon_material = StandardMaterial3D.new()
+	_radar_polygon_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_radar_polygon_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_radar_polygon_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_radar_polygon_material.albedo_color = Color(0.902, 0.224, 0.275, 0.45)
+	_radar_polygon_mesh_inst.material_override = _radar_polygon_material
+	_radar_root.add_child(_radar_polygon_mesh_inst)
+
+	# Polygon outline — opaque, brighter
+	_radar_outline_mesh = ImmediateMesh.new()
+	_radar_outline_mesh_inst = MeshInstance3D.new()
+	_radar_outline_mesh_inst.name = "RadarOutline"
+	_radar_outline_mesh_inst.mesh = _radar_outline_mesh
+	_radar_outline_mesh_inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_radar_outline_material = StandardMaterial3D.new()
+	_radar_outline_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_radar_outline_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_radar_outline_material.emission_enabled = true
+	_radar_outline_material.emission = Color(0.902, 0.224, 0.275)
+	_radar_outline_material.emission_energy_multiplier = 1.8
+	_radar_outline_material.albedo_color = Color(0.902, 0.224, 0.275)
+	_radar_outline_mesh_inst.material_override = _radar_outline_material
+	_radar_root.add_child(_radar_outline_mesh_inst)
+
+	# Knob dots at each vertex (F, E, λ, φ)
+	_radar_knob_dots.clear()
+	_radar_knob_materials.clear()
+	for i in range(4):
+		var dot := MeshInstance3D.new()
+		dot.name = "KnobDot_%s" % KNOB_NAMES[i]
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.018
+		sphere.height = 0.036
+		sphere.radial_segments = 12
+		sphere.rings = 6
+		dot.mesh = sphere
+		dot.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		var dot_mat := StandardMaterial3D.new()
+		dot_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		dot_mat.emission_enabled = true
+		dot_mat.emission = Color(0.902, 0.224, 0.275)
+		dot_mat.emission_energy_multiplier = 2.0
+		dot_mat.albedo_color = Color(0.902, 0.224, 0.275)
+		dot.material_override = dot_mat
+		_radar_root.add_child(dot)
+		_radar_knob_dots.append(dot)
+		_radar_knob_materials.append(dot_mat)
+
+	# Center hub — solid dark circle with the dominant phase letter
+	var hub := MeshInstance3D.new()
+	hub.name = "Hub"
+	var hub_sphere := SphereMesh.new()
+	hub_sphere.radius = 0.05
+	hub_sphere.height = 0.1
+	hub_sphere.radial_segments = 24
+	hub_sphere.rings = 12
+	hub.mesh = hub_sphere
+	hub.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_radar_hub_material = StandardMaterial3D.new()
+	_radar_hub_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_radar_hub_material.albedo_color = Color(0.10, 0.12, 0.16, 1.0)
+	_radar_hub_material.emission_enabled = true
+	_radar_hub_material.emission = Color(0.902, 0.224, 0.275)
+	_radar_hub_material.emission_energy_multiplier = 0.6
+	hub.material_override = _radar_hub_material
+	hub.position = Vector3(0, 0, 0.005)
+	_radar_root.add_child(hub)
+
+	# Letter at center
+	_radar_letter_label = Label3D.new()
+	_radar_letter_label.name = "RadarLetter"
+	_radar_letter_label.text = "λ"
+	_radar_letter_label.font_size = 48
+	_radar_letter_label.outline_size = 4
+	_radar_letter_label.pixel_size = 0.001
+	_radar_letter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_radar_letter_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_radar_letter_label.modulate = Color(0.902, 0.224, 0.275)
+	_radar_letter_label.position = Vector3(0, 0, 0.06)
+	_radar_root.add_child(_radar_letter_label)
+
+
+func _refresh_radar() -> void:
+	if _radar_polygon_mesh == null:
+		return
+	# Vertex positions in radar-local 2D, with the 4 knobs at the 4 axes.
+	var top := Vector2(0.0, radar_max * _F)
+	var right := Vector2(radar_max * _E, 0.0)
+	var bottom := Vector2(0.0, -radar_max * _lambda)
+	var left := Vector2(-radar_max * _phi, 0.0)
+	var z: float = 0.01
+	var outline_z: float = 0.02
+
+	# Polygon fill
+	_radar_polygon_mesh.clear_surfaces()
+	_radar_polygon_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	_radar_polygon_mesh.surface_add_vertex(Vector3(top.x, top.y, z))
+	_radar_polygon_mesh.surface_add_vertex(Vector3(right.x, right.y, z))
+	_radar_polygon_mesh.surface_add_vertex(Vector3(bottom.x, bottom.y, z))
+	_radar_polygon_mesh.surface_add_vertex(Vector3(top.x, top.y, z))
+	_radar_polygon_mesh.surface_add_vertex(Vector3(bottom.x, bottom.y, z))
+	_radar_polygon_mesh.surface_add_vertex(Vector3(left.x, left.y, z))
+	_radar_polygon_mesh.surface_end()
+
+	# Polygon outline as 4 quads (thick lines)
+	_radar_outline_mesh.clear_surfaces()
+	if maxf(maxf(_F,_E),maxf(_lambda,_phi))*radar_max >= 0.0001:
+		_radar_outline_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		_append_thick_line(_radar_outline_mesh, top, right, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, right, bottom, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, bottom, left, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, left, top, outline_z, 0.008)
+		_radar_outline_mesh.surface_end()
+
+	# Move knob dots to the vertices
+	if _radar_knob_dots.size() == 4:
+		(_radar_knob_dots[0] as MeshInstance3D).position = Vector3(top.x, top.y, outline_z + 0.005)
+		(_radar_knob_dots[1] as MeshInstance3D).position = Vector3(right.x, right.y, outline_z + 0.005)
+		(_radar_knob_dots[2] as MeshInstance3D).position = Vector3(bottom.x, bottom.y, outline_z + 0.005)
+		(_radar_knob_dots[3] as MeshInstance3D).position = Vector3(left.x, left.y, outline_z + 0.005)
+
+
+func _append_thick_line(im: ImmediateMesh, a: Vector2, b: Vector2, z: float, thickness: float) -> void:
+	# Adds two triangles forming a thick line segment from a → b.
+	var d := (b - a)
+	if d.length() < 0.0001:
+		return
+	d = d.normalized()
+	var p := Vector2(-d.y, d.x) * (thickness * 0.5)
+	var v1 := a + p
+	var v2 := a - p
+	var v3 := b - p
+	var v4 := b + p
+	im.surface_add_vertex(Vector3(v1.x, v1.y, z))
+	im.surface_add_vertex(Vector3(v2.x, v2.y, z))
+	im.surface_add_vertex(Vector3(v3.x, v3.y, z))
+	im.surface_add_vertex(Vector3(v1.x, v1.y, z))
+	im.surface_add_vertex(Vector3(v3.x, v3.y, z))
+	im.surface_add_vertex(Vector3(v4.x, v4.y, z))
+
+
+# ── Readout panel ─────────────────────────────────────────────────────
+
+func _build_readout_panel() -> void:
+	_readout_root = Node3D.new()
+	_readout_root.name = "Readout"
+	_readout_root.position = readout_offset
+	add_child(_readout_root)
+	_owned.append(_readout_root)
+
+	# Dark backing card
+	var card := MeshInstance3D.new()
+	card.name = "Card"
+	var card_mesh := QuadMesh.new()
+	card_mesh.size = Vector2(0.66, 0.62)
+	card.mesh = card_mesh
+	card.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_readout_card_material = StandardMaterial3D.new()
+	_readout_card_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_readout_card_material.albedo_color = Color(0.03, 0.05, 0.08)
+	card.material_override = _readout_card_material
+	card.position = Vector3(0.0, 0.0, -0.005)
+	_readout_root.add_child(card)
+
+	# Phase-color border (a slightly larger card behind, gets retinted)
+	var border := MeshInstance3D.new()
+	border.name = "Border"
+	var border_mesh := QuadMesh.new()
+	border_mesh.size = Vector2(0.69, 0.65)
+	border.mesh = border_mesh
+	border.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_readout_border_material = StandardMaterial3D.new()
+	_readout_border_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_readout_border_material.albedo_color = Color(0.902, 0.224, 0.275)
+	_readout_border_material.emission_enabled = true
+	_readout_border_material.emission = Color(0.902, 0.224, 0.275)
+	_readout_border_material.emission_energy_multiplier = 0.8
+	border.material_override = _readout_border_material
+	border.position = Vector3(0.0, 0.0, -0.012)
+	_readout_root.add_child(border)
+
+	# The readout body is ONE consolidated multi-line baked-text board (built in
+	# _refresh_readout so the values stay live). No stack of floating Label3Ds.
+	_readout_block = null
+
+
+func _refresh_readout() -> void:
+	var phase: Dictionary = PHASE_DATA[_phase_index]
+	var phase_color: Color = phase.color
+
+	# Numeric expansion of the whole formula, on ONE panel:
+	#   QFE = F − λ·E(S) + φ·ΔE
+	#   = 0.55 − 0.40·0.58 + 0.35·0.30 = 0.42
+	#   Nearest project reference: lambda_edge
+	#   The ranges and fixed delta are shown beside the arithmetic.
+	var sign_str: String = "" if _qfe >= 0.0 else "−"
+	var lines: Array = [
+		"QFE = F − λ·E(S) + φ·ΔE",
+		"= %.2f − %.2f·%.2f + %.2f·%.2f = %s%.2f" % [
+			_F, _lambda, _E, _phi, rate_delta_e, sign_str, abs(_qfe)],
+		"All four controls: 0 to 1",
+		"Delta E = %.2f (fixed, not measured)" % rate_delta_e,
+		"Nearest project reference:",
+		str(phase.id),
+	]
+	if comparison:
+		lines.append("KEEP a reading, then change the knobs" if _kept.is_empty() else "Kept %+.3f / difference %+.3f" % [_kept_qfe, _qfe-_kept_qfe])
+	_readout_lines = lines.duplicate()
+
+	# Rebuild the consolidated board in the phase color. Rebuild-on-change is
+	# fine — _refresh_readout only runs on the throttled viz tick, not per frame.
+	if _readout_block != null and is_instance_valid(_readout_block):
+		_readout_block.queue_free()
+	_readout_block = BakedText.make_text_block(
+		lines, Color(0.93,0.95,1.0), READOUT_LINE_H, READOUT_BLOCK_WIDTH, READOUT_LINE_H * 0.35, true)
+	if _readout_block != null:
+		_readout_block.name = "ReadoutBlock"
+		_readout_block.position = Vector3(0.0, 0.0, 0.002)
+		_readout_root.add_child(_readout_block)
+
+	# Retint the border to the phase color
+	_readout_border_material.albedo_color = phase_color
+	_readout_border_material.emission = phase_color
+
+
+# ── Phase bar (tall colored bar to the side) ──────────────────────────
+
+func _build_phase_bar() -> void:
+	_phase_bar_root = Node3D.new()
+	_phase_bar_root.name = "PhaseBar"
+	_phase_bar_root.position = phase_bar_offset
+	add_child(_phase_bar_root)
+	_owned.append(_phase_bar_root)
+
+	# The tall bar
+	var bar := MeshInstance3D.new()
+	bar.name = "Bar"
+	var bar_mesh := QuadMesh.new()
+	bar_mesh.size = phase_bar_size
+	bar.mesh = bar_mesh
+	bar.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_phase_bar_material = StandardMaterial3D.new()
+	_phase_bar_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_phase_bar_material.albedo_color = Color(0.902, 0.224, 0.275)
+	_phase_bar_material.emission_enabled = true
+	_phase_bar_material.emission = Color(0.902, 0.224, 0.275)
+	_phase_bar_material.emission_energy_multiplier = 1.4
+	bar.material_override = _phase_bar_material
+	_phase_bar_root.add_child(bar)
+
+	# Phase name — PROMOTED from a bare Label3D to the canonical TextScreen board.
+	#
+	# It was the one piece of text on this artifact that lay on nothing: a
+	# billboard-disabled Label3D at local (0, 0.485, 0.01) → world
+	# (-0.70, 1.585, 0.06), hanging 0.06 m over the bar's top edge with open air
+	# behind it, and carrying a live readout up to 24 characters wide ("λ ≈ 0.4 —
+	# Edge of Chaos" measures ~0.66 m at font 22 / pixel_size 0.001, six times the
+	# 0.10 m bar it belongs to). The framer skips it — billboard is disabled — so
+	# nothing was ever going to give it a surface. This does: a 0.50 x 0.31 m
+	# SCREEN sitting at local (0, 0.64, 0.0) → world (-0.70, 1.74, 0.05), its
+	# bottom edge at 1.5795 clear of the bar top at 1.525. It covers nothing; the
+	# move is for legibility, not rescue.
+	# Configure BEFORE add_child — TextScreen's setters rebuild only when in-tree.
+	_phase_screen = TextScreenScript.new()
+	_phase_screen.name = "PhaseScreen"
+	_phase_screen.mode = 0                  # TextScreen.Mode.SCREEN
+	_phase_screen.width_m = PHASE_SCREEN_WIDTH
+	_phase_screen.title = ""
+	_phase_screen.body = ""
+	_phase_screen.position = Vector3(0.0, phase_bar_size.y * 0.5 + PHASE_SCREEN_GAP, 0.0)
+	_phase_bar_root.add_child(_phase_screen)
+
+	# The Label3D survives as the text source, so anything reading .text on
+	# "PhaseDisplay" keeps working. It hangs on nothing now: billboard DISABLED
+	# means the framer skips it (its own skip rule), and invisible means it adds
+	# no glyphs of its own in front of the bar.
+	_phase_bar_label_top = Label3D.new()
+	_phase_bar_label_top.name = "PhaseDisplay"
+	_phase_bar_label_top.font_size = 22
+	_phase_bar_label_top.outline_size = 4
+	_phase_bar_label_top.pixel_size = 0.001
+	_phase_bar_label_top.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_phase_bar_label_top.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_phase_bar_label_top.visible = false
+	_phase_bar_label_top.modulate = Color(0.902, 0.224, 0.275)
+	_phase_bar_label_top.position = Vector3(0.0, phase_bar_size.y * 0.5 + 0.06, 0.01)
+	_phase_bar_root.add_child(_phase_bar_label_top)
+
+	# Letter on the bar (large)
+	_phase_bar_label_letter = Label3D.new()
+	_phase_bar_label_letter.name = "PhaseLetter"
+	_phase_bar_label_letter.font_size = 80
+	_phase_bar_label_letter.outline_size = 6
+	_phase_bar_label_letter.pixel_size = 0.001
+	_phase_bar_label_letter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_phase_bar_label_letter.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_phase_bar_label_letter.modulate = Color(1.0, 1.0, 1.0)
+	_phase_bar_label_letter.position = Vector3(0.0, 0.0, 0.012)
+	_phase_bar_root.add_child(_phase_bar_label_letter)
+
+
+func _refresh_phase_bar() -> void:
+	var phase: Dictionary = PHASE_DATA[_phase_index]
+	var c: Color = phase.color
+	_phase_bar_material.albedo_color = c
+	_phase_bar_material.emission = c
+	# The phase name is a TextScreen now — same live readout, on a real board.
+	# The hidden Label3D keeps carrying the same string for anything reading .text.
+	if _phase_bar_label_top != null and is_instance_valid(_phase_bar_label_top):
+		_phase_bar_label_top.text = "PROJECT REFERENCE\n" + str(phase.display)
+		_phase_bar_label_top.modulate = c
+	if _phase_screen != null and is_instance_valid(_phase_screen):
+		_phase_screen.title_color = c
+		_phase_screen.set_text("PROJECT REFERENCE", str(phase.display))
+	_phase_bar_label_letter.text = str(phase.letter)
+	# Pure white phase (synthesis): use a darker letter for legibility
+	if phase.id == "synthesis":
+		_phase_bar_label_letter.modulate = Color(0.1, 0.1, 0.13)
+	else:
+		_phase_bar_label_letter.modulate = Color(1.0, 1.0, 1.0)
+
+
+# ── Halo refresh ──────────────────────────────────────────────────────
+
+func _refresh_halo() -> void:
+	if _halo_material == null:
+		return
+	var phase: Dictionary = PHASE_DATA[_phase_index]
+	var c: Color = phase.color
+	_halo_material.emission = c
+	# Hold the halo gentle so it tints the backdrop rather than dominating
+	_halo_material.emission_energy_multiplier = 0.55
+	# Faint translucent tint of the albedo too, for any non-emissive viewport
+	var faint: Color = c
+	faint.a = 0.08
+	_halo_material.albedo_color = faint
+
+
+# ── Radar tint refresh ────────────────────────────────────────────────
+
+func _refresh_radar_tint() -> void:
+	var phase: Dictionary = PHASE_DATA[_phase_index]
+	var c: Color = phase.color
+	# Fill
+	var fill: Color = c
+	fill.a = 0.45
+	# Synthesis is pure white — keep it readable
+	if phase.id == "synthesis":
+		fill = Color(0.9, 0.9, 0.9, 0.4)
+	_radar_polygon_material.albedo_color = fill
+	# Outline
+	var outline: Color = c
+	if phase.id == "synthesis":
+		outline = Color(0.95, 0.95, 0.95, 1.0)
+	_radar_outline_material.albedo_color = outline
+	_radar_outline_material.emission = outline
+	# Knob dots
+	for i in range(_radar_knob_materials.size()):
+		var m: StandardMaterial3D = _radar_knob_materials[i]
+		m.albedo_color = outline
+		m.emission = outline
+	# Hub
+	_radar_hub_material.emission = outline
+	# Center letter
+	_radar_letter_label.text = str(phase.letter)
+	if phase.id == "synthesis":
+		_radar_letter_label.modulate = Color(0.95, 0.95, 0.95)
+	else:
+		_radar_letter_label.modulate = outline
+
+
+# ── Refresh-all ───────────────────────────────────────────────────────
+
+func _refresh_all() -> void:
+	_qfe = _compute_qfe()
+	_phase_index = _detect_phase()
+	if _plate_readout:
+		_plate_readout.text = "QFE %+.3f / controls 0..1" % _qfe
+		if comparison:
+			_plate_readout.text += "\nKEEP a reading" if _kept.is_empty() else "\nKept %+.3f / diff %+.3f" % [_kept_qfe, _qfe-_kept_qfe]
+	_refresh_radar()
+	_refresh_radar_tint()
+	_refresh_readout()
+	_refresh_phase_bar()
+	_refresh_halo()
+
+
+# ── Primitive builders ────────────────────────────────────────────────
+
+func _make_diamond_outline(r: float, color: Color, z: float, thickness: float) -> Node3D:
+	var holder := Node3D.new()
+	holder.name = "Diamond"
+	var top := Vector2(0, r)
+	var right := Vector2(r, 0)
+	var bottom := Vector2(0, -r)
+	var left := Vector2(-r, 0)
+	holder.add_child(_make_line(top, right, color, z, thickness))
+	holder.add_child(_make_line(right, bottom, color, z, thickness))
+	holder.add_child(_make_line(bottom, left, color, z, thickness))
+	holder.add_child(_make_line(left, top, color, z, thickness))
+	return holder
+
+
+func _make_line(a: Vector2, b: Vector2, color: Color, z: float, thickness: float) -> MeshInstance3D:
+	var d := (b - a).normalized()
+	var p := Vector2(-d.y, d.x) * (thickness * 0.5)
+	var v1 := a + p
+	var v2 := a - p
+	var v3 := b - p
+	var v4 := b + p
+	var im := ImmediateMesh.new()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = color
+	if color.a < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES, mat)
+	im.surface_add_vertex(Vector3(v1.x, v1.y, z))
+	im.surface_add_vertex(Vector3(v2.x, v2.y, z))
+	im.surface_add_vertex(Vector3(v3.x, v3.y, z))
+	im.surface_add_vertex(Vector3(v1.x, v1.y, z))
+	im.surface_add_vertex(Vector3(v3.x, v3.y, z))
+	im.surface_add_vertex(Vector3(v4.x, v4.y, z))
+	im.surface_end()
+	var mi := MeshInstance3D.new()
+	mi.mesh = im
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	return mi
+
+
+func _mk_axis_tag(s: String, c: Color, pos: Vector3, world_h: float) -> Node3D:
+	# An integrated 2D-in-3D display board (dark face + lit accent edge + baked text)
+	# in the axis color, replacing a bare floating Label3D at the radar tip.
+	var tag: Node3D = BakedText.make_tag(s, c, world_h, Color(0.06, 0.07, 0.10), false, c)
+	if tag == null:
+		# Defensive fallback (e.g. no font) so the radar always builds.
+		tag = Node3D.new()
+	tag.name = "AxisTag_%s" % s
+	tag.position = pos
+	return tag
+
+
+func _color_to_hex(c: Color) -> String:
+	return "#%02X%02X%02X" % [
+		int(round(c.r * 255.0)),
+		int(round(c.g * 255.0)),
+		int(round(c.b * 255.0)),
+	]
+
+
+# ── Grid system integration ───────────────────────────────────────────
+
+## Accept an axis value only if it names something we actually build. A typo in a
+## map token has to fall back to the shipped look — a half-recognised value would
+## strand a placement on a settling with no signature behind it.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_comparison: bool = comparison
+	if config_data.has("comparison"):
+		comparison = str(config_data.comparison).to_lower() in ["on", "true", "1"]
+	var before_settling: String = settling
+	var before_F: float = _F
+	var before_E: float = _E
+	var before_lambda: float = _lambda
+	var before_phi: float = _phi
+	var before_rate: float = rate_delta_e
+
+	# Stage-2 DNA axis — #settling:entropy
+	if config_data.has("settling"):
+		settling = _pick_axis(str(config_data["settling"]), SETTLINGS, settling)
+
+	# ── keys applied IN PLACE, before any early return ────────────────
+	# plate_scale never needed a rebuild and must not start needing one: the
+	# curation station calls apply_grid_config with no axis key at all, and a
+	# rebuild there would free the label plates the grid added one line earlier.
+	if config_data.has("plate_scale"):
+		plate_scale = float(config_data["plate_scale"])
+		_plate_scale_configured = true
+		if _plate_root and is_instance_valid(_plate_root):
+			_plate_root.scale = Vector3.ONE * plate_scale
+	if config_data.has("rate_delta_e"):
+		rate_delta_e = clampf(float(config_data["rate_delta_e"]), 0.0, 1.0)
+	if config_data.has("initial_F"):
+		_knob_override["F"] = clampf(float(config_data["initial_F"]), 0.0, 1.0)
+	if config_data.has("initial_E"):
+		_knob_override["E"] = clampf(float(config_data["initial_E"]), 0.0, 1.0)
+	if config_data.has("initial_lambda"):
+		_knob_override["lambda"] = clampf(float(config_data["initial_lambda"]), 0.0, 1.0)
+	if config_data.has("initial_phi"):
+		_knob_override["phi"] = clampf(float(config_data["initial_phi"]), 0.0, 1.0)
+
+	if not _built:
+		return
+	if comparison != before_comparison:
+		_rebuild_now()
+		return
+
+	# The knobs are state, not geometry — reseat them without tearing anything
+	# down, then decide whether the settling itself moved.
+	_apply_settling()
+	_seat_sliders()
+
+	if settling == before_settling:
+		# Same settling. If a knob or the ΔE constant moved, the console is a
+		# live instrument: refresh in place. If nothing moved (the curation
+		# station's {"emissive": false}), do nothing at all.
+		if not is_equal_approx(_F, before_F) or not is_equal_approx(_E, before_E) \
+				or not is_equal_approx(_lambda, before_lambda) \
+				or not is_equal_approx(_phi, before_phi) \
+				or not is_equal_approx(rate_delta_e, before_rate):
+			_refresh_all()
+		return
+
+	_rebuild_now()
+
+
+## Tear down only what this script built, then build again — synchronously, so
+## the auto-grounding pass that runs after us still measures a real AABB.
+func _rebuild_now() -> void:
+	for n in _owned:
+		if n != null and is_instance_valid(n):
+			var node: Node = n
+			var p: Node = node.get_parent()
+			if p != null:
+				p.remove_child(node)
+			node.queue_free()
+	_owned.clear()
+
+	_plate_root = null
+	_plate_readout = null
+	_sliders.clear()
+	_display_root = null
+	_halo_inst = null
+	_halo_material = null
+	_radar_root = null
+	_radar_polygon_mesh = null
+	_radar_polygon_mesh_inst = null
+	_radar_polygon_material = null
+	_radar_outline_mesh = null
+	_radar_outline_mesh_inst = null
+	_radar_outline_material = null
+	_radar_knob_dots.clear()
+	_radar_knob_materials.clear()
+	_radar_hub_material = null
+	_radar_letter_label = null
+	_readout_root = null
+	_readout_card_material = null
+	_readout_border_material = null
+	_readout_block = null
+	_kept_outline = null
+	_keep_button = null
+	_phase_bar_root = null
+	_phase_bar_material = null
+	_phase_screen = null
+	_phase_bar_label_top = null
+	_phase_bar_label_letter = null
+	_viz_dirty = false
+	_viz_cooldown = 0.0
+
+	_build_all()
+	# Mount inline — no deferral in the build path. Clearing the flag makes any
+	# call still sitting in the queue from _ready a no-op instead of a second mount.
+	_mount_scheduled = false
+	_mount_now()
+
+func _build_comparison() -> void:
+	if not comparison: return
+	_kept_outline = MeshInstance3D.new()
+	_kept_outline.name = "KeptReading"
+	_kept_outline.mesh = ImmediateMesh.new()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1.0, 0.95, 0.70)
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_kept_outline.material_override = mat
+	_radar_root.add_child(_kept_outline)
+	_refresh_kept_outline()
+
+func _keep_reading() -> void:
+	# Read the controls now, including a change made since the last render tick.
+	_F = _read_slider(0, _F)
+	_E = _read_slider(1, _E)
+	_lambda = _read_slider(2, _lambda)
+	_phi = _read_slider(3, _phi)
+	_kept = [_F, _E, _lambda, _phi]
+	_kept_qfe = _compute_qfe()
+	_refresh_kept_outline()
+	_refresh_all()
+
+func _refresh_kept_outline() -> void:
+	if not is_instance_valid(_kept_outline): return
+	_kept_outline.visible = not _kept.is_empty()
+	var mesh: ImmediateMesh = _kept_outline.mesh
+	mesh.clear_surfaces()
+	if _kept.is_empty() or float(_kept.max())*radar_max < 0.0001: return
+	var points: Array[Vector2] = [
+		Vector2(0,radar_max*_kept[0]),Vector2(radar_max*_kept[1],0),
+		Vector2(0,-radar_max*_kept[2]),Vector2(-radar_max*_kept[3],0)]
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in 4:
+		_append_thick_line(mesh,points[i],points[(i+1)%4],0.04,0.010)
+	mesh.surface_end()

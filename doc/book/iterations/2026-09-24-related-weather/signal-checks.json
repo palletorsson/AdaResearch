@@ -1,0 +1,48 @@
+{
+  "source": "actual Godot weather_signals.gd export",
+  "seed": 4321,
+  "samples": 65536,
+  "preparation_samples": 4096,
+  "spectral_scope": "Raw signal before fixed display gains, clipping or motor interpolation. Not the eight visible apertures or a spectrum of the sound gallery. Walk is unbounded and nonstationary; its fitted finite-record slope is descriptive.",
+  "method": {
+    "estimator": "Welch",
+    "window": "Hann",
+    "nperseg": 8192,
+    "overlap": 4096,
+    "detrend": "linear",
+    "band_cycles_per_sample": [
+      0.01,
+      0.2
+    ],
+    "slope_fit": "unweighted log power versus log frequency within band"
+  },
+  "results": [
+    {
+      "channel": "Fresh draws",
+      "slope": 0.006048905347034152,
+      "raw_std": 0.5783605512536545,
+      "lag1": 0.004941912122509054
+    },
+    {
+      "channel": "Accumulated steps",
+      "slope": -1.9467795181266883,
+      "raw_std": 4.861720947369626,
+      "lag1": 0.9999292397211658
+    },
+    {
+      "channel": "Filtered / pink",
+      "slope": -0.9920956268716079,
+      "raw_std": 0.04938679834269775,
+      "lag1": 0.7923439072293664
+    }
+  ],
+  "independent_iir_max_error": 3.182977839633061e-11,
+  "sum_max_error": 1.4568790618341154e-11,
+  "pink_transfer_power_times_f_spread_db": 0.4702959923150445,
+  "first_128_display_clipped_counts": [
+    0,
+    0,
+    4
+  ],
+  "passed": true
+}

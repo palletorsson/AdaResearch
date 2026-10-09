@@ -1,0 +1,853 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Ada — Eight interactions through the museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#f4f1ea;color:#292b2d;font:16px/1.65 system-ui,sans-serif}a{color:inherit;text-underline-offset:4px}a:focus-visible,summary:focus-visible{outline:3px solid #c04775;outline-offset:4px}nav{position:fixed;width:250px;inset:0 auto 0 0;padding:36px 22px;background:#242a2c;color:#f7f3e9;overflow:auto}nav>p{font:24px/1.25 Georgia,serif;margin-bottom:30px}nav a{display:block;text-decoration:none;padding:13px 0;border-top:1px solid #50565a;font-size:13px}nav small{display:block;color:#dda2b6;letter-spacing:.15em}nav .meta{font-size:11px;color:#c0c2bd;margin-top:32px}main{margin-left:250px;padding:54px 5vw;max-width:1550px}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.14;letter-spacing:-.025em}h1{font-size:clamp(40px,5vw,76px);max-width:13ch;margin:20px 0}h2{font-size:clamp(32px,4vw,53px);margin:10px 0}h3{font-size:32px}h4{font-size:21px;line-height:1.3;margin:32px 0 14px}.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#726565}.lead{font:23px/1.5 Georgia,serif;max-width:58ch}.method{max-width:86ch;font-size:13px;color:#63666a;border-left:3px solid #c69bae;padding-left:18px;margin:28px 0 42px}table{border-collapse:collapse;width:100%;font-size:13px;margin:32px 0 48px}th,td{text-align:left;vertical-align:top;padding:13px;border-bottom:1px solid #d6d0c9}th{font-weight:600}table th:first-child{min-width:145px}.hall{border-top:2px solid #3b4445;padding-top:32px;margin-top:70px}.topics{color:#934563;font-size:14px}figure{margin:28px 0}figure img{width:100%;height:auto;display:block;background:#262c33}figcaption{font-size:12px;line-height:1.55;color:#696766;margin-top:10px;max-width:95ch}.change{padding:18px 28px;background:#ebe5db;border-left:3px solid #ab7a8d;font-size:14px}.change p{margin:12px 0}.reading{max-width:77ch;margin:45px auto;padding:35px 44px;background:#fffdf8;border:1px solid #dfdad0}.reading p,.reading li{font-family:Georgia,serif;font-size:18px;line-height:1.75}.reading .eyebrow{font-family:system-ui,sans-serif;font-size:10px}.reading code{font:13px/1.6 Consolas,monospace;overflow-wrap:anywhere;background:#f0ede7;padding:1px 3px}.reading pre{background:#222b2e;color:#f0f0e7;overflow:auto;padding:18px;max-width:100%;border-left:3px solid #d291ab}.reading pre code{background:none;color:inherit;padding:0;overflow-wrap:normal}.reading ul{padding-left:24px}details{border-top:1px solid #cfc9c2;padding:15px 0;font-size:13px}summary{cursor:pointer;font-weight:600}.sources{overflow-wrap:anywhere}.diff{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:580px;overflow:auto;padding:18px;background:#e9e7e2}.hall footer{display:flex;justify-content:space-between;margin:26px 0;font-size:13px}.end{margin-top:65px;border-top:1px solid #aaa;padding:28px 0;font-size:13px}@media(max-width:850px){nav{position:static;width:100%;padding:22px}nav a{display:inline-block;margin:5px 14px 5px 0;padding:8px 0}nav small{display:inline;margin-right:7px}nav>p{margin:0 0 16px}nav .meta{display:none}main{margin:0;padding:28px 18px}.reading{padding:22px}table{display:block;overflow:auto}.change{padding:14px 18px}}@media print{nav,details,.hall footer{display:none}main{margin:0;padding:0;max-width:none}.hall{break-before:page}.reading{border:0;padding:0;margin:25px auto}.reading pre{white-space:pre-wrap}figure{break-inside:avoid}h2,h3,h4{break-after:avoid}body{background:white}a{text-decoration:none}}</style></head><body>
+    <nav aria-label='Report chapters'><p>Ada /<br>Eight interactions</p><a href='#overview'>Overview and placement</a><a href='#Point_Coordinates'><small>01</small>Point Coordinates</a><a href='#Point_Trace'><small>02</small>Point Trace</a><a href='#Point_Line_Grid'><small>03</small>Point Line Grid</a><a href='#Trans_Introduction'><small>04</small>Trans Introduction</a><a href='#Color_Paint'><small>05</small>Color Paint</a><a href='README.md'>Complete Markdown report</a><p class='meta'>5 October 2026<br>Five tutorials · eight topics<br>Existing museum · selected learning</p></nav>
+    <main><header id='overview'><p class='eyebrow'>ENDLESS MUSEUM / TUTORIAL REVISION / 05 OCTOBER 2026</p><h1>From carrying a point to leaving a mark.</h1><p class='lead'>Eight interaction topics are now taught through five existing halls. Each lesson selects a small operation, names the supplied machinery and carries a usable distinction onward. The complete revised tutorial text follows each hall image.</p><p class='method'>This pass changes tutorial.md and its teaching metadata. It leaves final.md and museum runtime code intact. The images are earlier captures from inside the Endless Museum, with dates and provenance; they are not new playtests. Student code edits are exercises described in the lessons, not changes applied to the museum. Source reading supports the explanations; hands-on learning and headset comfort still need a trial.</p></header>
+    <table><caption class='eyebrow'>Where each requested topic is taught</caption><thead><tr><th>Topic</th><th>Hall</th><th>Teaching choice</th></tr></thead><tbody><tr><th scope='row'>Pickup / release</th><td><a href='#Point_Coordinates'>Point Coordinates</a></td><td>Separate the body from its connection to the hand; release restores this sphere&#x27;s frozen state.</td></tr><tr><th scope='row'>Grip alignment</th><td><a href='#Point_Trace'>Point Trace</a></td><td>Move the grip relative to the nib, keeping the recorded tip explicit.</td></tr><tr><th scope='row'>Named actions</th><td><a href='#Color_Paint'>Color Paint</a></td><td>Follow trigger_click press/release and trigger pressure through the supplied input route.</td></tr><tr><th scope='row'>Interaction states</th><td><a href='#Trans_Introduction'>Trans Introduction</a></td><td>Introduce target/current state; Paint returns to held, active and receiving states.</td></tr><tr><th scope='row'>Targeting</th><td><a href='#Color_Paint'>Color Paint</a></td><td>Follow the nozzle ray, first eligible collision, receiving surface and range checks.</td></tr><tr><th scope='row'>Snapping</th><td><a href='#Point_Line_Grid'>Point Line Grid</a></td><td>Round fitted display coordinates in XYZ while preserving the source drawing.</td></tr><tr><th scope='row'>Feedback</th><td><a href='#Trans_Introduction'>Trans Introduction</a></td><td>Read actual bank motion; Paint distinguishes valve feedback from successful deposition.</td></tr><tr><th scope='row'>Surface painting</th><td><a href='#Color_Paint'>Color Paint</a></td><td>Convert a world hit into surface UV and call the existing shared drawing operation.</td></tr></tbody></table>
+    <section class='hall' id='Point_Coordinates'>
+          <header><p class='eyebrow'>01 / Point_Coordinates</p><h2>Carry a position</h2><p class='topics'>Pickup / release</p></header>
+          <figure><a href='figures/coordinates.png'><img src='figures/coordinates.png' alt='The black held point is in the foreground. Its coordinate frame and LOCAL readout remain in the room.' loading='lazy'></a><figcaption>The black held point is in the foreground. Its coordinate frame and LOCAL readout remain in the room. Archive: 2026-10-03. <a href='../../../../doc/book/iterations/2026-10-03-coordinates-existing-point/source_manifest.json'>Capture record</a></figcaption></figure>
+          <div class='change'><p><b>Changed.</b> Keep that focus. Explain that releasing ends the hold and restores this point&#x27;s frozen state. The sphere stays in the room; its own held-state guide disappears.</p><p><b>Try.</b> Disable pickup, restore it, choose another starting position, then carry and release the point while naming each coordinate frame.</p><p><b>Carries forward.</b> A held body and a position can be connected without treating the hand, mesh, collider and coordinate frame as one thing.</p></div>
+          <div class='reading'><p class='eyebrow'>NEW TUTORIAL · 837 words · <a href='../../../../commons/maps/Point_Coordinates/tutorial.md'>Open current tutorial.md</a></p><h3>Point Coordinates — carry a position</h3>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickable</li>
+<li>3D coordinate system</li>
+<li>Local and world position</li>
+</ul>
+<p>Take the black sphere at the entrance. Its label stays behind. The point follows your hand.</p>
+<p>Point One separated a position, a surface and a physical boundary. Here we learn what makes that body grabbable, then read its position in local and global coordinates.</p>
+<p>Work with the existing sphere and coordinate frame in the Endless Museum. The player and XR controls are already configured. The excerpts below come from the artifact's scripts; make the small edits in your working copy.</p>
+<h4>What makes it grabbable?</h4>
+<p>Open <code>commons/primitives/point/interactive_point_origin.gd</code>. Near the top is:</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+</code></pre>
+<p><code>extends</code> gives this script the behaviour of an existing class. <code>XRToolsPickable</code> is a physics body with pickup behaviour. Our point keeps that behaviour and adds its own appearance and feedback.</p>
+<p>The sphere's mesh makes it visible. Its collision shape gives it a physical boundary. The pickable behaviour lets the prepared grab system take hold of the body. A mesh or collider alone does not supply that interaction.</p>
+<p>Take the sphere, move it and release it. The mesh and collider belong to the held body, so they move together. The station's label belongs elsewhere and stays behind.</p>
+<p>Release ends the connection to the hand. This point's scene starts with <code>freeze = true</code>, and the pickable's release mode restores that original setting. It stays where you leave it; letting go does not necessarily mean falling. In <code>interactive_point_origin.gd</code>, <code>_on_picked_up()</code> sets <code>_is_held = true</code>; <code>_on_dropped()</code> sets it to <code>false</code> and hides the point's own position label and guide. The body remains in the room. The supplied grab system moves the body; these handlers respond to the beginning and end of that hold.</p>
+<p>Open <code>commons/primitives/point/point_condition.gd</code>. In the <code>held</code> branch, find <code>held.position = CENTRE</code>. Immediately below it, add:</p>
+<pre><code class="language-gdscript">held.set(&quot;enabled&quot;, false)
+</code></pre>
+<p><code>held</code> refers to the existing pickable instance. <code>set()</code> changes a named property; <code>false</code> switches its pickup permission off. Restart your working copy and try taking the sphere. Its surface and collision shape remain, but the XR grab system refuses the pickup.</p>
+<p>Remove the added line and restart. The sphere can be held again. You changed its availability to the hand without rebuilding its shape.</p>
+<h4>Local to what?</h4>
+<p>In the same branch, the original assignment is:</p>
+<pre><code class="language-gdscript">held.position = CENTRE
+</code></pre>
+<p><code>CENTRE</code> is <code>Vector3(0, 1.12, 0)</code>. A node's <code>position</code> is local to its parent. Here that parent is the point's station: the sphere starts at X = 0, Y = 1.12, Z = 0 in the station's frame.</p>
+<p>Replace the assignment with:</p>
+<pre><code class="language-gdscript">held.position = CENTRE + Vector3(0, 0.5, 0)
+</code></pre>
+<p>The corresponding components add together. Only Y changes, from <code>1.12</code> to <code>1.62</code>. Predict where the sphere will appear, then restart. It begins higher along the station's Y direction; the label stays put.</p>
+<p>Restore <code>held.position = CENTRE</code>.</p>
+<h4>One point, two addresses</h4>
+<p>Carry the sphere towards the coloured frame in the basin. Pink marks X, grey marks Y and black marks Z. Move along one direction, then another, watching the LOCAL card. Moving from the origin along the labelled Z arm increases local Z.</p>
+<p>Compare LOCAL with WORLD while holding the sphere still. The same point can have different coordinates because the readings use different frames.</p>
+<p>Open <code>algorithms/vectors/00_coordinates/CoordinateSystem3M.gd</code>. These two lines occur at separate places in <code>_process()</code>:</p>
+<pre><code class="language-gdscript">var world_p: Vector3 = pt.global_position
+</code></pre>
+<pre><code class="language-gdscript">var lp: Vector3 = to_local(pt.global_position)
+</code></pre>
+<p><code>pt</code> refers to the sphere we are holding. <code>global_position</code> gives its position in the scene's world frame. The first line keeps that value in <code>world_p</code>.</p>
+<p>The second line converts that world position into the coordinate frame running this script: the coloured frame. <code>lp</code> holds the result. <code>: Vector3</code> states that each variable contains three components.</p>
+<p>The conversion accounts for the frame's position, orientation and scale. Here the frame has a scale of <code>1.5</code>, so one local unit spans 1.5 world units. Converting between these frames involves more than choosing another zero.</p>
+<p>The sphere's parent and the coloured frame are different nodes. Reading <code>pt.position</code> would give coordinates relative to its parent. <code>to_local(pt.global_position)</code> deliberately asks for coordinates relative to the coloured frame, wherever the sphere is parented.</p>
+<p>Point Zero introduced <code>_process()</code>. Here it keeps reading while the grab system moves the body. Holding and reporting are separate jobs connected by the same point.</p>
+<h4>Beyond the drawn frame</h4>
+<p>Carry the sphere beyond an arrow's end. The drawing stops, but its coordinate system still describes positions beyond it. Watch the guides and readings continue to follow your hand.</p>
+<p>Choose another starting position in the station. Predict which component will change, try it, then carry the sphere to the frame. Release it and move your empty hand: which object stops following? Explain what WORLD and LOCAL each measure from. You can now change where a body begins, control whether it can be grabbed, and name the frame used to read its position.</p>
+<p>In Point Lines, we will keep two positions and examine what joins them. Distance calculation begins there.</p></div>
+          <details><summary>Before this pass and exact text changes</summary><p>The lesson already followed the black sphere and compared local with world coordinates. Release was mentioned without explaining what happens to the body.</p><p><a href='before/Point_Coordinates.md'>Before</a> · <a href='after/Point_Coordinates.md'>Revised snapshot</a> · <a href='diffs/Point_Coordinates.diff'>Text diff</a></p><pre class='diff'>--- before/Point_Coordinates.md
++++ after/Point_Coordinates.md
+@@ -25,6 +25,8 @@
+ The sphere&#x27;s mesh makes it visible. Its collision shape gives it a physical boundary. The pickable behaviour lets the prepared grab system take hold of the body. A mesh or collider alone does not supply that interaction.
+ 
+ Take the sphere, move it and release it. The mesh and collider belong to the held body, so they move together. The station&#x27;s label belongs elsewhere and stays behind.
++
++Release ends the connection to the hand. This point&#x27;s scene starts with `freeze = true`, and the pickable&#x27;s release mode restores that original setting. It stays where you leave it; letting go does not necessarily mean falling. In `interactive_point_origin.gd`, `_on_picked_up()` sets `_is_held = true`; `_on_dropped()` sets it to `false` and hides the point&#x27;s own position label and guide. The body remains in the room. The supplied grab system moves the body; these handlers respond to the beginning and end of that hold.
+ 
+ Open `commons/primitives/point/point_condition.gd`. In the `held` branch, find `held.position = CENTRE`. Immediately below it, add:
+ 
+@@ -86,6 +88,6 @@
+ 
+ Carry the sphere beyond an arrow&#x27;s end. The drawing stops, but its coordinate system still describes positions beyond it. Watch the guides and readings continue to follow your hand.
+ 
+-Choose another starting position in the station. Predict which component will change, try it, then carry the sphere to the frame. Explain what WORLD and LOCAL each measure from. You can now change where a body begins, control whether it can be grabbed, and name the frame used to read its position.
++Choose another starting position in the station. Predict which component will change, try it, then carry the sphere to the frame. Release it and move your empty hand: which object stops following? Explain what WORLD and LOCAL each measure from. You can now change where a body begins, control whether it can be grabbed, and name the frame used to read its position.
+ 
+ In Point Lines, we will keep two positions and examine what joins them. Distance calculation begins there.
+</pre></details>
+          <details><summary>Inspected museum sources</summary><ul class='sources'><li><a href='../../../../commons/primitives/point/point_condition.gd'>commons/primitives/point/point_condition.gd</a></li><li><a href='../../../../commons/primitives/point/interactive_point_origin.gd'>commons/primitives/point/interactive_point_origin.gd</a></li><li><a href='../../../../commons/primitives/point/interactive_point_origin.tscn'>commons/primitives/point/interactive_point_origin.tscn</a></li><li><a href='../../../../addons/godot-xr-tools/objects/pickable.gd'>addons/godot-xr-tools/objects/pickable.gd</a></li><li><a href='../../../../algorithms/vectors/00_coordinates/CoordinateSystem3M.gd'>algorithms/vectors/00_coordinates/CoordinateSystem3M.gd</a></li></ul></details>
+          <footer><a href='#overview'>← Overview</a><a href='#Point_Trace'>Next hall →</a></footer></section><section class='hall' id='Point_Trace'>
+          <header><p class='eyebrow'>02 / Point_Trace</p><h2>A grip, a tip, a retained line</h2><p class='topics'>Grip alignment</p></header>
+          <figure><a href='figures/trace.png'><img src='figures/trace.png' alt='The museum&#x27;s pens and plinth readouts. The lesson follows the red pen and its retained positions; the other exhibits remain part of the encounter.' loading='lazy'></a><figcaption>The museum&#x27;s pens and plinth readouts. The lesson follows the red pen and its retained positions; the other exhibits remain part of the encounter. Archive: 2026-09-29. <a href='../../../../doc/book/iterations/2026-09-29-trace-clean-room/source_manifest.json'>Capture record</a></figcaption></figure>
+          <div class='change'><p><b>Changed.</b> Follow the existing red pen: movement gate, shaped world position, ordered list and neighbour traversal. Distinguish WritingGrip from WritingTip; release copies the retained record into session storage.</p><p><b>Try.</b> Move the grip three centimetres towards the nib, compare the held reach with each hand, then restore it. Draw and release a bend for Grid.</p><p><b>Carries forward.</b> A relation between hand and tool, and the student&#x27;s cumulative ordered drawing. The list is bounded and lasts for this game session.</p></div>
+          <div class='reading'><p class='eyebrow'>NEW TUTORIAL · 685 words · <a href='../../../../commons/maps/Point_Trace/tutorial.md'>Open current tutorial.md</a></p><h3>Point Trace — keep the way through</h3>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Ordered position lists</li>
+<li>Sampling conditions</li>
+<li>Indices and neighbour loops</li>
+<li>Pen grip and writing tip</li>
+</ul>
+<p>In the Endless Museum's Trace hall, take the red pen from its plinth. Draw a bend, pause, then return towards its beginning. Release the pen. The line remains. Read the retained count and the last ten positions on its plinth.</p>
+<p>Lines gave us a segment between two positions. Here we keep positions in order and connect each one to its neighbour. The museum supplies the player, pickup system, pen, renderer and session storage. Work in the existing project; this lesson follows the pen's record.</p>
+<h4>Keep accepted positions</h4>
+<p>Open <code>commons/primitives/point/draw_dot.gd</code>. Its list is declared near the top:</p>
+<p><strong>Museum code excerpt</strong></p>
+<pre><code class="language-gdscript">var _trail_points: Array[Vector3] = []
+</code></pre>
+<p>An <code>Array</code> is an ordered list. Each entry holds a <code>Vector3</code>: three coordinates describing one position. The list has one index, even though each position has three components.</p>
+<p>In <code>_process()</code>, <code>_draw_sphere</code> refers to this pen's <code>WritingTip</code>. The recorder reads its world position. While held, recording waits for the grip to arrive; the pickup approach does not become a line. The movement gate then decides whether to consider another reading. The placed pens use a five-millimetre threshold.</p>
+<p><strong>Reduced code excerpt</strong> — the central recording steps in <code>_process()</code>, with guards and display work omitted:</p>
+<pre><code class="language-gdscript">var current_global = _draw_sphere.global_position
+var dist = current_global.distance_to(_last_global_position)
+if dist &lt; min_segment_distance:
+    return
+_last_global_position = current_global
+var rec: Vector3 = _shape_sample(current_global)
+_trail_points.append(rec)
+</code></pre>
+<p><code>append()</code> adds a value at the end. <code>_shape_sample()</code> gives the red pen's positions a ten-millimetre spacing in free space; the green and blue pens use forty and eighty millimetres. The full function also rejects a shaped position equal to the previous retained one. The movement threshold and the shaping grid make different decisions. The comparison position updates when the movement gate passes, even if shaping later rejects that reading.</p>
+<p>Keep this experiment away from the whiteboard, where samples can instead be projected onto its face. Pause with a steady hand: time alone adds no entry.</p>
+<h4>Follow the order</h4>
+<p><code>_trail_points[0]</code> reads the first retained position. <code>_trail_points[1]</code> reads the second. The plinth numbers these as rows 1 and 2; code indices start at zero.</p>
+<p>In <code>_rebuild_trail()</code>, the non-fading branch sends the values to a line strip:</p>
+<p><strong>Museum code excerpt</strong></p>
+<pre><code class="language-gdscript">for point in _trail_points:
+    _trail_mesh.surface_add_vertex(point)
+</code></pre>
+<p>The renderer connects consecutive vertices. With four entries, it joins 0–1, 1–2 and 2–3. To inspect these pairs explicitly, the existing walking recorder uses this loop in <code>commons/primitives/point/player_trace.gd</code>, <code>get_trail_length()</code>:</p>
+<p><strong>Museum code excerpt</strong></p>
+<pre><code class="language-gdscript">for i in range(1, _trail_points.size()):
+    length += _trail_points[i].distance_to(_trail_points[i - 1])
+</code></pre>
+<p><code>range()</code> stops before the size. Beginning at 1 makes <code>i - 1</code> the preceding valid index. This loop visits a retained list; <code>_process()</code> revisits the moving pen over time.</p>
+<p>Trace your bend in its drawing order. Returning to an earlier place can add another entry there. Release and pick up again: the pen continues its retained list rather than starting a new stroke. Its capacity is 4096 positions; adding beyond that removes the oldest entry.</p>
+<h4>Seat the pen in your hand</h4>
+<p>Open <code>commons/primitives/point/drawing_pen.gd</code>, <code>build_body()</code>. <code>WritingGrip</code> determines the pen's held alignment. <code>WritingTip</code> is a separate marker at local Z = −0.155 metres; that is the position we record. Local −Z points towards the nib.</p>
+<p><strong>Student edit</strong> — insert one line after <code>grip.name = "WritingGrip"</code>, before <code>pen.add_child(grip)</code>:</p>
+<pre><code class="language-gdscript">grip.position.z = -0.03
+</code></pre>
+<p>Re-run Trace and pick up the pen with each hand. The grip is now three centimetres towards the nib, shortening the tip's reach from the pickup frame. Turn your wrist and draw another bend. Does the visible nib still meet the start you intended? Compare with the original, then remove the line. This shared helper also builds the board's simple pens.</p>
+<p>You have adjusted the held tool while following the same ordered record. Release a drawing with at least two positions before entering Grid. Release copies the whole retained list into <code>TraceData</code> for this running session; it does not save a file. Grid will give that record another arrangement without changing its source positions.</p></div>
+          <details><summary>Before this pass and exact text changes</summary><p>The earlier lesson taught a portable starter and a different persistence arrangement. The museum pen&#x27;s grip and shaped, cumulative record were not the teaching host.</p><p><a href='before/Point_Trace.md'>Before</a> · <a href='after/Point_Trace.md'>Revised snapshot</a> · <a href='diffs/Point_Trace.diff'>Text diff</a></p><pre class='diff'>--- before/Point_Trace.md
++++ after/Point_Trace.md
+@@ -1,85 +1,82 @@
+ # Point Trace — keep the way through
+ 
+-**Learning elements — proposed focus**
+-
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++**Learning elements**
+ 
+ - Ordered position lists
+ - Sampling conditions
+-- Indexed traversal
+-- Neighbour connections
++- Indices and neighbour loops
++- Pen grip and writing tip
+ 
+-Move the point in a loop. Let go. The point stops, but the loop remains: a line through positions the point has left behind.
++In the Endless Museum&#x27;s Trace hall, take the red pen from its plinth. Draw a bend, pause, then return towards its beginning. Release the pen. The line remains. Read the retained count and the last ten positions on its plinth.
+ 
+-In Point Lines, two positions were enough to draw a segment. Each frame replaced the previous reading. Here we keep readings in order, so the route can outlast the movement.
++Lines gave us a segment between two positions. Here we keep positions in order and connect each one to its neighbour. The museum supplies the player, pickup system, pen, renderer and session storage. Work in the existing project; this lesson follows the pen&#x27;s record.
+ 
+-Open `point_trace.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). The lesson script is `studies/point_trace/trace.gd`. Hold the point as you did in Lines. This study makes one continuous record; releasing holds the point still, and taking it again continues that record. Restart the scene for a fresh drawing. Releasing also saves a copy for Point Grid; look for **Saved for Point Grid**. The supplied `TraceMemory` carries the list between scenes and separate runs.
++## Keep accepted positions
+ 
+-## 1. Give positions somewhere to stay
++Open `commons/primitives/point/draw_dot.gd`. Its list is declared near the top:
++
++**Museum code excerpt**
+ 
+ ```gdscript
+-var points: Array[Vector3] = []
+-var spacing := 0.08
+-var capacity := 128
++var _trail_points: Array[Vector3] = []
+ ```
+ 
+-`points` is an **Array**: an ordered list. `Array[Vector3]` says what it can hold. Each entry is one position, with three coordinates. The list itself has one index: first entry, second entry, third entry. It is a one-dimensional list of three-dimensional positions.
++An `Array` is an ordered list. Each entry holds a `Vector3`: three coordinates describing one position. The list has one index, even though each position has three components.
+ 
+-`[]` starts it empty. Inside `_ready()`, after placing the point, we keep its first position:
++In `_process()`, `_draw_sphere` refers to this pen&#x27;s `WritingTip`. The recorder reads its world position. While held, recording waits for the grip to arrive; the pickup approach does not become a line. The movement gate then decides whether to consider another reading. The placed pens use a five-millimetre threshold.
++
++**Reduced code excerpt** — the central recording steps in `_process()`, with guards and display work omitted:
+ 
+ ```gdscript
+-    points.append(point.position)
++var current_global = _draw_sphere.global_position
++var dist = current_global.distance_to(_last_global_position)
++if dist &lt; min_segment_distance:
++    return
++_last_global_position = current_global
++var rec: Vector3 = _shape_sample(current_global)
++_trail_points.append(rec)
+ ```
+ 
+-`append()` adds a value at the end. It stores the position at that moment. Moving the point later does not move that saved position.
++`append()` adds a value at the end. `_shape_sample()` gives the red pen&#x27;s positions a ten-millimetre spacing in free space; the green and blue pens use forty and eighty millimetres. The full function also rejects a shaped position equal to the previous retained one. The movement threshold and the shaping grid make different decisions. The comparison position updates when the movement gate passes, even if shaping later rejects that reading.
+ 
+-## 2. Decide when to keep another
++Keep this experiment away from the whiteboard, where samples can instead be projected onto its face. Pause with a steady hand: time alone adds no entry.
+ 
+-These lines run inside `_process()`:
++## Follow the order
++
++`_trail_points[0]` reads the first retained position. `_trail_points[1]` reads the second. The plinth numbers these as rows 1 and 2; code indices start at zero.
++
++In `_rebuild_trail()`, the non-fading branch sends the values to a line strip:
++
++**Museum code excerpt**
+ 
+ ```gdscript
+-    var displacement := point.position - points[-1]
+-    if displacement.length() &gt;= spacing:
+-        points.append(point.position)
++for point in _trail_points:
++    _trail_mesh.surface_add_vertex(point)
+ ```
+ 
+-`points[-1]` reads the last entry. We reuse Lines&#x27; subtraction and length to measure from that saved position to the point now.
++The renderer connects consecutive vertices. With four entries, it joins 0–1, 1–2 and 2–3. To inspect these pairs explicitly, the existing walking recorder uses this loop in `commons/primitives/point/player_trace.gd`, `get_trail_length()`:
+ 
+-`if` introduces a condition. `&gt;=` means “greater than or equal to”. The indented line runs only when the distance reaches `spacing`: here, 0.08 metres, or eight centimetres. Smaller movements accumulate as a separation from the last saved position; they do not each become entries.
+-
+-Move slowly, then stop. The count stops increasing. Point Zero&#x27;s frames still pass, but this list records positions rather than elapsed time. A long pause leaves no extra entry to show how long you waited.
+-
+-## 3. Join neighbours in the list
+-
+-After adding a position, the script redraws the retained route:
++**Museum code excerpt**
+ 
+ ```gdscript
+-        drawing.clear()
+-        for i in range(1, points.size()):
+-            drawing.join(points[i - 1], points[i])
++for i in range(1, _trail_points.size()):
++    length += _trail_points[i].distance_to(_trail_points[i - 1])
+ ```
+ 
+-`size()` gives the number of entries. Their indexes start at zero. With four positions, the indexes are `0, 1, 2, 3`.
++`range()` stops before the size. Beginning at 1 makes `i - 1` the preceding valid index. This loop visits a retained list; `_process()` revisits the moving pen over time.
+ 
+-The **for loop** repeats its indented line. `range(1, points.size())` supplies indexes from 1 up to, but excluding, the size. With four entries, `i` becomes 1, then 2, then 3. The pairs are therefore `0–1`, `1–2`, `2–3`: three segments through four positions.
++Trace your bend in its drawing order. Returning to an earlier place can add another entry there. Release and pick up again: the pen continues its retained list rather than starting a new stroke. Its capacity is 4096 positions; adding beyond that removes the oldest entry.
+ 
+-This loop finishes a traversal of the saved list. `_process()` returns each frame to inspect movement. One repeats through entries; the other repeats over time.
++## Seat the pen in your hand
+ 
+-`TraceDrawing` is the supplied display. `clear()` clears the drawing; it leaves `points` alone. Each `join(a, b)` reuses Lines&#x27; segment renderer and marks its endpoints with small pink dots. Drawing thickness and mesh construction stay in that helper. The loop deciding which positions to join is yours.
++Open `commons/primitives/point/drawing_pen.gd`, `build_body()`. `WritingGrip` determines the pen&#x27;s held alignment. `WritingTip` is a separate marker at local Z = −0.155 metres; that is the position we record. Local −Z points towards the nib.
+ 
+-## 4. Change what the route can retain
+-
+-Change `spacing` to `0.25`. Run again and make a similar loop. Fewer positions are kept; the straight connections cut across more of the curve. Restore `0.08` and compare.
+-
+-Spacing is a minimum separation, not a guarantee that every eight centimetres is recorded. We inspect once per frame. A fast move can leave a larger gap, and the drawing joins its ends without knowing what happened between them.
+-
+-The record also has a limit:
++**Student edit** — insert one line after `grip.name = &quot;WritingGrip&quot;`, before `pen.add_child(grip)`:
+ 
+ ```gdscript
+-        if points.size() &gt; capacity:
+-            points.pop_front()
++grip.position.z = -0.03
+ ```
+ 
+-`pop_front()` removes the oldest entry. The remaining entries keep their order. Change `capacity` to `32` and continue drawing. Once the count reaches 32, a new position replaces the oldest; the far end of the route begins to disappear. Waiting alone removes nothing. Restore `128` when you want a longer record.
++Re-run Trace and pick up the pen with each hand. The grip is now three centimetres towards the nib, shortening the tip&#x27;s reach from the pickup frame. Turn your wrist and draw another bend. Does the visible nib still meet the start you intended? Compare with the original, then remove the line. This shared helper also builds the board&#x27;s simple pens.
+ 
+-The museum&#x27;s pens combine a movement threshold with a grid that shapes each saved position. This smaller study follows the handle&#x27;s centre without snapping it to a grid. All positions use Study&#x27;s reference frame. Release your drawing before leaving. Grid will reuse this saved list, keeping the original beside a version given grid addresses. You will change the rule without having to make the gesture again.
++You have adjusted the held tool while following the same ordered record. Release a drawing with at least two positions before entering Grid. Release copies the whole retained list into `TraceData` for this running session; it does not save a file. Grid will give that record another arrangement without changing its source positions.
+</pre></details>
+          <details><summary>Inspected museum sources</summary><ul class='sources'><li><a href='../../../../commons/primitives/point/draw_dot.gd'>commons/primitives/point/draw_dot.gd</a></li><li><a href='../../../../commons/primitives/point/draw_dot.tscn'>commons/primitives/point/draw_dot.tscn</a></li><li><a href='../../../../commons/primitives/point/drawing_pen.gd'>commons/primitives/point/drawing_pen.gd</a></li><li><a href='../../../../commons/primitives/point/player_trace.gd'>commons/primitives/point/player_trace.gd</a></li><li><a href='../../../../commons/globals/trace_data.gd'>commons/globals/trace_data.gd</a></li></ul></details>
+          <footer><a href='#Point_Coordinates'>← Previous hall</a><a href='#Point_Line_Grid'>Next hall →</a></footer></section><section class='hall' id='Point_Line_Grid'>
+          <header><p class='eyebrow'>03 / Point_Line_Grid</p><h2>One record, another spacing</h2><p class='topics'>Snapping</p></header>
+          <figure><a href='figures/grid.png'><img src='figures/grid.png' alt='The ruled basin, pink and green trace display, and source readout inside the museum. This older capture includes an earlier plinth design.' loading='lazy'></a><figcaption>The ruled basin, pink and green trace display, and source readout inside the museum. This older capture includes an earlier plinth design. Archive: 2026-09-21. <a href='../../../../doc/book/iterations/2026-09-21-interface-spine-primitives-review/sources.json'>Capture record</a></figcaption></figure><figure><a href='figures/grid-reading.png'><img src='figures/grid-reading.png' alt='The panel separates source world positions from the centred, scaled display and its 0.1667 m snap pitch. This is an archived demonstration record.' loading='lazy'></a><figcaption>The panel separates source world positions from the centred, scaled display and its 0.1667 m snap pitch. This is an archived demonstration record. Archive: 2026-09-21. <a href='../../../../doc/book/iterations/2026-09-21-interface-spine-primitives-review/after-grid-checks.json'>Capture record</a></figcaption></figure>
+          <div class='change'><p><b>Changed.</b> Use the actual museum handoff: preserve the released world-position list, fit it for the display, then snap XYZ display positions. An index names a sample; a spatial address names a place.</p><p><b>Try.</b> Set three display subdivisions before starting a new run. Draw and release a fresh trace; compare its fitted pink and snapped green versions beside the unchanged source rows.</p><p><b>Carries forward.</b> Source and derived data remain separate. Snapping here is coordinate quantization, not an XR docking zone; finer pitch cannot recover unrecorded movement.</p></div>
+          <div class='reading'><p class='eyebrow'>NEW TUTORIAL · 774 words · <a href='../../../../commons/maps/Point_Line_Grid/tutorial.md'>Open current tutorial.md</a></p><h3>Point Grid — give the record addresses</h3>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Reusing a retained list</li>
+<li>Display coordinates</li>
+<li>Snapping in X, Y and Z</li>
+<li>Source and derived positions</li>
+</ul>
+<p>Release a drawing pen in Trace, then enter Grid in the same running Endless Museum session. Find your bend above the ruled field. Pink displays the recorded shape; green gives it another spacing. The nearby panel says <strong>THIS SESSION</strong> and lists the source world positions.</p>
+<p>Trace taught us to append positions, read an index and traverse neighbours. Here we reuse that list. The museum supplies its session transfer, display fitting, meshes and page controls. The snapping sphere and walking trail have their own records; this lesson follows the released pen drawing.</p>
+<h4>Receive a copy</h4>
+<p><code>commons/globals/trace_data.gd</code>, <code>add_trace()</code>, accepts at least two positions and stores a snapshot:</p>
+<p><strong>Museum code excerpt</strong></p>
+<pre><code class="language-gdscript">var new_trace = points.duplicate()
+saved_traces.append(new_trace)
+</code></pre>
+<p>Each release adds a snapshot of the pen's retained list. Because the pen continues across pickups, a later release can include positions from earlier drawing. <code>TraceData</code> survives room changes in this game process. Stopping the game loses this session store.</p>
+<p>Open <code>commons/primitives/line/grid_lines.gd</code>. <code>_ready()</code> reads existing snapshots and listens for later releases. <code>_create_trace_mesh()</code> receives one list as <code>points</code>. Its loop reads values without assigning new positions into that source array.</p>
+<h4>Fit before rounding</h4>
+<p>The source positions are world coordinates from Trace. <code>_display_frame()</code> finds their bounding-box centre and a display scale: normally fivefold, reduced when needed to fit the largest dimension within five metres.</p>
+<p><strong>Museum code excerpt</strong> — the pink rendering loop in <code>_create_trace_mesh()</code>:</p>
+<pre><code class="language-gdscript">for p in points:
+    mesh.surface_add_vertex((p - center) * final_scale)
+</code></pre>
+<p>Subtracting <code>center</code> moves the drawing's centre to local zero. Multiplying by <code>final_scale</code> changes its size. Both pink and green use this same fit, then both are lifted above the field. The original entries stay in world coordinates. Pink is already a display transformation of the source, rather than a second record of your hand.</p>
+<p>The green version starts with that fitted position:</p>
+<p><strong>Museum code excerpt</strong> — inside <code>_create_shadow_trace()</code>:</p>
+<pre><code class="language-gdscript">var scaled = (p - center) * scale_factor
+var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
+var snapped = scaled.snapped(Vector3.ONE * snap_step)
+</code></pre>
+<p>The scene sets six subdivisions of each one-metre interval, giving a pitch of one sixth of a metre <strong>in display space</strong>. <code>Vector3.ONE</code> applies that pitch to X, Y and Z. The floor ruling is flat; the operation is three-dimensional.</p>
+<p><strong>Reduced code excerpt</strong> — an integer-address illustration for values away from exact halfway boundaries, not replacement code:</p>
+<pre><code class="language-gdscript">var address := Vector3i(
+    roundi(scaled.x / snap_step),
+    roundi(scaled.y / snap_step),
+    roundi(scaled.z / snap_step)
+)
+var placed := Vector3(address) * snap_step
+</code></pre>
+<p>Divide to count intervals, round to whole-number counts, then multiply to place the result. At a pitch of one third of a metre, displayed X = 0.15 rounds to address 0, while 0.18 rounds to address 1.</p>
+<p>An array index tells us <em>which retained sample</em>. An address tells us <em>which place on this display lattice</em>. Several samples may acquire the same address. The museum's green builder filters consecutive results using a squared-distance threshold of 0.001; at the pitches used here, equal neighbours are removed and distinct neighbours pass. A later return to an earlier address remains possible. Fewer than two surviving positions produce no green line.</p>
+<h4>Change one interval</h4>
+<p>Use PREVIOUS or NEXT on the panel to hold a page of source positions. Choose a bend in pink and note which green corners coincide. AUTO resumes paging; these controls leave the record intact.</p>
+<p><strong>Student edit</strong> — in <code>grid_lines.gd</code>, add this line at the start of <code>_ready()</code>, before <code>setup_grid()</code>:</p>
+<pre><code class="language-gdscript">shadow_snap_subdivisions = 3
+</code></pre>
+<p>This overrides the scene's value of six. It changes the green pitch to one third of a display metre and keeps the panel's pitch calculation consistent. Merely changing the script's exported default would leave the scene override in force.</p>
+<p>Save the edit before running the museum. Make and release a new drawing in Trace, then enter Grid in that same session. Compare its pink bend with the coarser green result; the source rows still describe the retained drawing. Predict which nearby displayed positions will share an address using the one-third-metre example above. A restart loses the earlier session's drawing, so different runs are not a comparison of the same source. Remove the added line to restore six subdivisions for the next run.</p>
+<p>The green line joins accepted neighbours directly, so a segment can be diagonal. Finer addresses cannot recover movement Trace never kept. You can now transform a retained drawing while preserving its source. Triangle will give a few chosen positions a new relation: a closed boundary and then a face.</p></div>
+          <details><summary>Before this pass and exact text changes</summary><p>The starter-based account rounded source coordinates before display fitting and described persistence across runs.</p><p><a href='before/Point_Line_Grid.md'>Before</a> · <a href='after/Point_Line_Grid.md'>Revised snapshot</a> · <a href='diffs/Point_Line_Grid.diff'>Text diff</a></p><pre class='diff'>--- before/Point_Line_Grid.md
++++ after/Point_Line_Grid.md
+@@ -1,77 +1,83 @@
+-# Point Grid — your trace returns
++# Point Grid — give the record addresses
+ 
+-**Learning elements — proposed focus**
++**Learning elements**
+ 
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- Reusing a retained list
++- Display coordinates
++- Snapping in X, Y and Z
++- Source and derived positions
+ 
+-- List indices
+-- Spatial addresses
+-- Rounding
+-- Source and derived data
++Release a drawing pen in Trace, then enter Grid in the same running Endless Museum session. Find your bend above the ruled field. Pink displays the recorded shape; green gives it another spacing. The nearby panel says **THIS SESSION** and lists the source world positions.
+ 
+-Find the bend you made in Trace. It is here again. Beside it, the same record has been placed on a grid. Change the spacing and compare what happens to that bend.
++Trace taught us to append positions, read an index and traverse neighbours. Here we reuse that list. The museum supplies its session transfer, display fitting, meshes and page controls. The snapping sphere and walking trail have their own records; this lesson follows the released pen drawing.
+ 
+-## 1. Bring the drawing with you
++## Receive a copy
+ 
+-In the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md), open `point_trace.tscn`. Hold the point, draw, then release it. On desktop, mouse movement directs the held point; in VR, your tracked hand moves it. Wait for **Saved for Point Grid**.
++`commons/globals/trace_data.gd`, `add_trace()`, accepts at least two positions and stores a snapshot:
+ 
+-Stop the scene and run `point_grid.tscn`. It loads that saved trace. If no usable trace has been saved, it asks you to return and draw one. It does not substitute a demonstration for your gesture.
+-
+-The supplied `TraceMemory` keeps the latest released record on this device. It carries positions between the two lessons, including across separate runs. Opening Grid does not change the saved record. Returning to Trace, drawing and releasing saves a new one.
+-
+-## 2. Keep the source and the result separate
+-
+-Open `studies/point_grid/grid.gd`. We have two lists:
++**Museum code excerpt**
+ 
+ ```gdscript
+-var source_points: Array[Vector3] = []
+-var grid_points: Array[Vector3] = []
+-var grid_size := 0.25
++var new_trace = points.duplicate()
++saved_traces.append(new_trace)
+ ```
+ 
+-Both hold positions in metres. `source_points` receives the saved trace:
++Each release adds a snapshot of the pen&#x27;s retained list. Because the pen continues across pickups, a later release can include positions from earlier drawing. `TraceData` survives room changes in this game process. Stopping the game loses this session store.
++
++Open `commons/primitives/line/grid_lines.gd`. `_ready()` reads existing snapshots and listens for later releases. `_create_trace_mesh()` receives one list as `points`. Its loop reads values without assigning new positions into that source array.
++
++## Fit before rounding
++
++The source positions are world coordinates from Trace. `_display_frame()` finds their bounding-box centre and a display scale: normally fivefold, reduced when needed to fit the largest dimension within five metres.
++
++**Museum code excerpt** — the pink rendering loop in `_create_trace_mesh()`:
+ 
+ ```gdscript
+-    source_points = TraceMemory.read_trace()
++for p in points:
++    mesh.surface_add_vertex((p - center) * final_scale)
+ ```
+ 
+-`grid_points` begins empty. We will fill it with new values, leaving the source alone. A quarter of a metre is our chosen grid spacing. All calculations use the Study frame in which Trace recorded the points.
++Subtracting `center` moves the drawing&#x27;s centre to local zero. Multiplying by `final_scale` changes its size. Both pink and green use this same fit, then both are lifted above the field. The original entries stay in world coordinates. Pink is already a display transformation of the source, rather than a second record of your hand.
+ 
+-## 3. Give each saved position an address
++The green version starts with that fitted position:
+ 
+-Trace&#x27;s drawing loop visited neighbouring entries by index. This loop takes each stored value in turn:
++**Museum code excerpt** — inside `_create_shadow_trace()`:
+ 
+ ```gdscript
+-    for p in source_points:
+-        var address := Vector3i(
+-            roundi(p.x / grid_size),
+-            roundi(p.y / grid_size),
+-            roundi(p.z / grid_size)
+-        )
+-        var placed := Vector3(address) * grid_size
+-        grid_points.append(placed)
++var scaled = (p - center) * scale_factor
++var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
++var snapped = scaled.snapped(Vector3.ONE * snap_step)
+ ```
+ 
+-For every position `p`, divide each coordinate by the spacing to count grid intervals. `roundi()` gives the nearest integer. `Vector3i` holds these three whole-number counts: the grid address.
++The scene sets six subdivisions of each one-metre interval, giving a pitch of one sixth of a metre **in display space**. `Vector3.ONE` applies that pitch to X, Y and Z. The floor ruling is flat; the operation is three-dimensional.
+ 
+-For example, X = `0.12` metres is `0.48` quarter-metre steps, which rounds to zero. X = `0.13` metres is `0.52` steps, which rounds to one. A small difference in the saved input can put two results a quarter of a metre apart.
+-
+-`Vector3(address)` turns the integer components into floating-point components. Multiplying by `grid_size` gives metres again. `append()` adds that result to the new list. Negative coordinates use the same rule; exact halfway values round away from zero.
+-
+-Each input produces one output. Nearby samples may acquire exactly the same position, but we keep their entries and their order. An array index names a sample in the record; a grid address names a place. Several samples can name that same place.
+-
+-## 4. Change the reading, keep the gesture
+-
+-The supplied display draws the two lists:
++**Reduced code excerpt** — an integer-address illustration for values away from exact halfway boundaries, not replacement code:
+ 
+ ```gdscript
+-    comparison.show_traces(source_points, grid_points, grid_size)
++var address := Vector3i(
++    roundi(scaled.x / snap_step),
++    roundi(scaled.y / snap_step),
++    roundi(scaled.z / snap_step)
++)
++var placed := Vector3(address) * snap_step
+ ```
+ 
+-Pink shows your saved trace. White shows the grid version. Both use the same centring and display scale, with a sideways offset so you can compare them. These display adjustments do not edit either list. The faint ruling is one XY section; the rounding still uses all three coordinates.
++Divide to count intervals, round to whole-number counts, then multiply to place the result. At a pitch of one third of a metre, displayed X = 0.15 rounds to address 0, while 0.18 rounds to address 1.
+ 
+-Change `grid_size` from `0.25` to `0.5` and run Grid again. You do not have to redraw. It rereads the original trace and calculates another result. Pink stays the same while the white drawing changes. Try `0.1` next. Use a positive spacing.
++An array index tells us *which retained sample*. An address tells us *which place on this display lattice*. Several samples may acquire the same address. The museum&#x27;s green builder filters consecutive results using a squared-distance threshold of 0.001; at the pitches used here, equal neighbours are removed and distinct neighbours pass. A later return to an earlier address remains possible. Fewer than two surviving positions produce no green line.
+ 
+-The display joins consecutive entries directly. Equal neighbours produce no segment; a jump can produce a diagonal. It does not invent samples between those you made. A finer grid can retain more of the saved shape, but it cannot recover movements that Trace never recorded.
++## Change one interval
+ 
+-We have reused a drawing as data. Its shape can now be read under another rule without losing the earlier record. In Triangle, we will choose corners and give their connections another job: closing a boundary, then making a face.
++Use PREVIOUS or NEXT on the panel to hold a page of source positions. Choose a bend in pink and note which green corners coincide. AUTO resumes paging; these controls leave the record intact.
++
++**Student edit** — in `grid_lines.gd`, add this line at the start of `_ready()`, before `setup_grid()`:
++
++```gdscript
++shadow_snap_subdivisions = 3
++```
++
++This overrides the scene&#x27;s value of six. It changes the green pitch to one third of a display metre and keeps the panel&#x27;s pitch calculation consistent. Merely changing the script&#x27;s exported default would leave the scene override in force.
++
++Save the edit before running the museum. Make and release a new drawing in Trace, then enter Grid in that same session. Compare its pink bend with the coarser green result; the source rows still describe the retained drawing. Predict which nearby displayed positions will share an address using the one-third-metre example above. A restart loses the earlier session&#x27;s drawing, so different runs are not a comparison of the same source. Remove the added line to restore six subdivisions for the next run.
++
++The green line joins accepted neighbours directly, so a segment can be diagonal. Finer addresses cannot recover movement Trace never kept. You can now transform a retained drawing while preserving its source. Triangle will give a few chosen positions a new relation: a closed boundary and then a face.
+</pre></details>
+          <details><summary>Inspected museum sources</summary><ul class='sources'><li><a href='../../../../commons/globals/trace_data.gd'>commons/globals/trace_data.gd</a></li><li><a href='../../../../commons/primitives/line/grid_lines.gd'>commons/primitives/line/grid_lines.gd</a></li><li><a href='../../../../commons/primitives/line/grid_lines.tscn'>commons/primitives/line/grid_lines.tscn</a></li></ul></details>
+          <footer><a href='#Point_Trace'>← Previous hall</a><a href='#Trans_Introduction'>Next hall →</a></footer></section><section class='hall' id='Trans_Introduction'>
+          <header><p class='eyebrow'>04 / Trans_Introduction</p><h2>Ask the bank to move</h2><p class='topics'>Interaction states · Feedback</p></header>
+          <figure><a href='figures/bank.png'><img src='figures/bank.png' alt='MOVE THE BANK and its readout beside the crossing, captured in the Endless Museum. The triangulated floor belongs to this hall&#x27;s existing scene.' loading='lazy'></a><figcaption>MOVE THE BANK and its readout beside the crossing, captured in the Endless Museum. The triangulated floor belongs to this hall&#x27;s existing scene. Archive: 2026-09-28. <a href='../../../../doc/book/iterations/2026-09-27-crossings-fire-and-fit/source_manifest.json'>Capture record</a></figcaption></figure>
+          <div class='change'><p><b>Changed.</b> Trace the slider and RESET signals into one shared setter. Separate requested from current displacement; explain the physics update and feedback of actual motion.</p><p><b>Try.</b> Double SPEED and predict a full journey of about two seconds instead of four. RESET returns gradually to the same home position. Restore the original value.</p><p><b>Carries forward.</b> A request can change immediately while the body takes time to fulfil it. A readout must say which state it reports.</p></div>
+          <div class='reading'><p class='eyebrow'>NEW TUTORIAL · 690 words · <a href='../../../../commons/maps/Trans_Introduction/tutorial.md'>Open current tutorial.md</a></p><h3>Transformation Introduction</h3>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Signals and event handlers</li>
+<li>One function for shared behaviour</li>
+<li>Target and current state</li>
+<li>Gradual reset</li>
+<li>Readout feedback</li>
+</ul>
+<p>Trans_Pre used elapsed time to change a cube's pose. Here, an action chooses where a surface should go. Work with the existing MOVE THE BANK panel beside the rotation crossing. Its BANK slider and RESET button control the far landing.</p>
+<p>First watch the three supplied crossings: a transport cube moves, a growing cube reaches floor height, and a plank turns to meet the banks. Their automatic motion supplies the encounter. This lesson follows the landing's controls, from an event to a visible change.</p>
+<p>Move BANK toward its maximum, then release it. Watch the landing continue toward the requested position. Press RESET before it arrives. The slider returns immediately; the landing changes direction and travels home. Use the fixed side aisle to compare the bank edge and readout while the plank keeps turning.</p>
+<p>The excerpts below come from <code>commons/artifacts/adjustable_landing/adjustable_landing.gd</code>. They explain the installed artifact; its geometry, controls and object references are already supplied.</p>
+<h4>The panel announces an event</h4>
+<p>In <code>_ready()</code>, <code>RackTemplates.gd</code> creates the panel. The script finds its slider as <code>Param_0</code> and the RESET button's <code>InteractableAreaButton</code> as <code>reset</code>, then connects their signals:</p>
+<pre><code class="language-gdscript">slider.slider_moved.connect(_on_slider)
+reset.button_pressed.connect(func(_button): reset_landing())
+</code></pre>
+<p>A signal announces that something happened. Connecting it names the code to run when that event occurs. Moving the slider calls <code>_on_slider</code>; pressing the panel button calls <code>reset_landing</code> through the short anonymous function. The button signal includes a button argument, which this function accepts but does not use.</p>
+<h4>Both paths reach one function</h4>
+<pre><code class="language-gdscript">func _on_slider(_value: Variant) -&gt; void:
+    if not _syncing:
+        set_bank_fraction(float(slider.get_normalized_value()))
+
+func reset_landing() -&gt; void:
+    set_bank_fraction(0.0)
+</code></pre>
+<p>The slider wrapper converts its physical position to a fraction from zero to one. <code>_on_slider</code> reads that fraction rather than using the signal's raw value. RESET requests the same operation with zero as its argument. Both events therefore share the named function <code>set_bank_fraction</code>:</p>
+<pre><code class="language-gdscript">func set_bank_fraction(fraction: float) -&gt; void:
+    target_displacement = clampf(fraction,0.0,1.0) * TRAVEL
+    if is_instance_valid(slider) and not _syncing:
+        _syncing = true
+        slider.set_normalized_value(target_displacement/TRAVEL)
+        _syncing = false
+</code></pre>
+<p><code>TRAVEL</code> is one metre. Clamping bounds the request, so a fraction of <code>0.5</code> requests half a metre. The function also puts the slider at the requested fraction, which matters when RESET calls it. <code>_syncing</code> prevents a slider event during that update from repeating the request.</p>
+<h4>Separate the request from the motion</h4>
+<p><code>target_displacement</code> stores the requested offset. <code>displacement</code> stores the current offset. The physics callback brings the current value toward the target:</p>
+<pre><code class="language-gdscript">func _physics_process(delta: float) -&gt; void:
+    displacement = move_toward(displacement,target_displacement,SPEED * delta)
+    landing.position = HOME + Vector3.BACK * displacement
+    _update_readout()
+</code></pre>
+<p><code>SPEED</code> is <code>0.25</code> metres per second; <code>delta</code> is the time since the previous physics tick. Multiplying them gives this tick's maximum movement. <code>Vector3.BACK</code> means local positive Z. Adding that offset to <code>HOME</code> moves the landing along its existing route.</p>
+<p>RESET changes the target to zero. It never assigns zero directly to the current displacement, so returning home remains gradual. Once the target is reached, <code>move_toward</code> leaves the bank there.</p>
+<h4>Read what has happened</h4>
+<p><code>_update_readout()</code> formats the current <code>displacement</code> as <code>BANK +… m</code>. It reports “edges meet” at zero and otherwise gives the gap for the plank's aligned pose. Immediately after RESET, the slider can show zero while this readout still shows a positive distance. Those displays describe the request and the moving bank respectively. The gap label describes the surfaces; crossing also depends on the player's body and movement.</p>
+<h4>Try one source parameter</h4>
+<p>For a local experiment, change only <code>const SPEED := 0.25</code> to <code>const SPEED := 0.50</code> in the landing script, then rerun the existing scene. Predict the result before moving BANK fully from home: one metre should take about two seconds instead of four. RESET from the far endpoint should take the same reduced time. The endpoints and final gap stay the same. Compare the readout during travel, then restore <code>0.25</code>.</p>
+<p>Trans_Translation extends this distinction between a destination and the journey to it through carrier routes. Carry forward the question established here: which function changes the request, and which callback performs the movement?</p></div>
+          <details><summary>Before this pass and exact text changes</summary><p>The intended event/reset focus was not yet anchored to the installed MOVE THE BANK controls.</p><p><a href='before/Trans_Introduction.md'>Before</a> · <a href='after/Trans_Introduction.md'>Revised snapshot</a> · <a href='diffs/Trans_Introduction.diff'>Text diff</a></p><pre class='diff'>--- before/Trans_Introduction.md
++++ after/Trans_Introduction.md
+@@ -1,143 +1,77 @@
+ # Transformation Introduction
+ 
+-**Learning elements — proposed focus**
++**Learning elements**
+ 
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- Signals and event handlers
++- One function for shared behaviour
++- Target and current state
++- Gradual reset
++- Readout feedback
+ 
+-- Event handlers
+-- Reset state
+-- Moving surfaces
+-- Carried displacement
++Trans_Pre used elapsed time to change a cube&#x27;s pose. Here, an action chooses where a surface should go. Work with the existing MOVE THE BANK panel beside the rotation crossing. Its BANK slider and RESET button control the far landing.
+ 
+-Three gaps in sequence: translation, scale, rotation. First watch what changes, then cross during the opening. The source scenes are `transport_cube.tscn`, `scale_cube.tscn` and `rotation_cube.tscn` in `commons/scenes/mapobjects/`.
++First watch the three supplied crossings: a transport cube moves, a growing cube reaches floor height, and a plank turns to meet the banks. Their automatic motion supplies the encounter. This lesson follows the landing&#x27;s controls, from an event to a visible change.
+ 
+-Define a transform from scratch.
++Move BANK toward its maximum, then release it. Watch the landing continue toward the requested position. Press RESET before it arrives. The slider returns immediately; the landing changes direction and travels home. Use the fixed side aisle to compare the bank edge and readout while the plank keeps turning.
++
++The excerpts below come from `commons/artifacts/adjustable_landing/adjustable_landing.gd`. They explain the installed artifact; its geometry, controls and object references are already supplied.
++
++## The panel announces an event
++
++In `_ready()`, `RackTemplates.gd` creates the panel. The script finds its slider as `Param_0` and the RESET button&#x27;s `InteractableAreaButton` as `reset`, then connects their signals:
+ 
+ ```gdscript
+-var t := Transform3D.IDENTITY
++slider.slider_moved.connect(_on_slider)
++reset.button_pressed.connect(func(_button): reset_landing())
+ ```
+ 
+-The identity transform: origin at zero, no rotation, unit scale.
++A signal announces that something happened. Connecting it names the code to run when that event occurs. Moving the slider calls `_on_slider`; pressing the panel button calls `reset_landing` through the short anonymous function. The button signal includes a button argument, which this function accepts but does not use.
+ 
+-Apply translation.
++## Both paths reach one function
+ 
+ ```gdscript
+-func translate(t: Transform3D, offset: Vector3) -&gt; Transform3D:
+-    return t.translated(offset)
++func _on_slider(_value: Variant) -&gt; void:
++    if not _syncing:
++        set_bank_fraction(float(slider.get_normalized_value()))
++
++func reset_landing() -&gt; void:
++    set_bank_fraction(0.0)
+ ```
+ 
+-Adds the offset to the origin. The orientation and scale are preserved.
+-
+-Apply rotation.
++The slider wrapper converts its physical position to a fraction from zero to one. `_on_slider` reads that fraction rather than using the signal&#x27;s raw value. RESET requests the same operation with zero as its argument. Both events therefore share the named function `set_bank_fraction`:
+ 
+ ```gdscript
+-func rotate_y(t: Transform3D, angle_rad: float) -&gt; Transform3D:
+-    return t.rotated(Vector3.UP, angle_rad)
++func set_bank_fraction(fraction: float) -&gt; void:
++    target_displacement = clampf(fraction,0.0,1.0) * TRAVEL
++    if is_instance_valid(slider) and not _syncing:
++        _syncing = true
++        slider.set_normalized_value(target_displacement/TRAVEL)
++        _syncing = false
+ ```
+ 
+-Rotates around the Y axis by the given angle. Other axes work the same way.
++`TRAVEL` is one metre. Clamping bounds the request, so a fraction of `0.5` requests half a metre. The function also puts the slider at the requested fraction, which matters when RESET calls it. `_syncing` prevents a slider event during that update from repeating the request.
+ 
+-Apply scale.
++## Separate the request from the motion
++
++`target_displacement` stores the requested offset. `displacement` stores the current offset. The physics callback brings the current value toward the target:
+ 
+ ```gdscript
+-func scale(t: Transform3D, factors: Vector3) -&gt; Transform3D:
+-    return t.scaled(factors)
++func _physics_process(delta: float) -&gt; void:
++    displacement = move_toward(displacement,target_displacement,SPEED * delta)
++    landing.position = HOME + Vector3.BACK * displacement
++    _update_readout()
+ ```
+ 
+-Scales each axis independently. Uniform scale uses Vector3.ONE times a single factor.
++`SPEED` is `0.25` metres per second; `delta` is the time since the previous physics tick. Multiplying them gives this tick&#x27;s maximum movement. `Vector3.BACK` means local positive Z. Adding that offset to `HOME` moves the landing along its existing route.
+ 
+-Compose three transforms in order.
++RESET changes the target to zero. It never assigns zero directly to the current displacement, so returning home remains gradual. Once the target is reached, `move_toward` leaves the bank there.
+ 
+-```gdscript
+-func srt(position: Vector3, rotation_rad: Vector3, scale_factors: Vector3) -&gt; Transform3D:
+-    var t := Transform3D.IDENTITY
+-    t = t.scaled(scale_factors)
+-    t = t.rotated(Vector3.UP, rotation_rad.y)
+-    t = t.rotated(Vector3.RIGHT, rotation_rad.x)
+-    t = t.rotated(Vector3.FORWARD, rotation_rad.z)
+-    t.origin = position
+-    return t
+-```
++## Read what has happened
+ 
+-Scale, then rotate, then translate. The order matters: different orders produce different final transforms.
++`_update_readout()` formats the current `displacement` as `BANK +… m`. It reports “edges meet” at zero and otherwise gives the gap for the plank&#x27;s aligned pose. Immediately after RESET, the slider can show zero while this readout still shows a positive distance. Those displays describe the request and the moving bank respectively. The gap label describes the surfaces; crossing also depends on the player&#x27;s body and movement.
+ 
+-The first crossing changes position.
++## Try one source parameter
+ 
+-```gdscript
+-global_position = global_position.move_toward(target_position, move_speed * delta)
+-var movement_delta = global_position - previous_position
+-_translate_rider(carried_player, movement_delta)
+-```
++For a local experiment, change only `const SPEED := 0.25` to `const SPEED := 0.50` in the landing script, then rerun the existing scene. Predict the result before moving BANK fully from home: one metre should take about two seconds instead of four. RESET from the far endpoint should take the same reduced time. The endpoints and final gap stay the same. Compare the readout during travel, then restore `0.25`.
+ 
+-These are excerpts from `transport_cube.gd`. The hall&#x27;s `tc:2:z:auto` places a one-metre cube over a three-metre gap and moves its centre two metres along Z. At each endpoint one edge meets the bank. Automatic motion lets the visitor watch first and board when it returns. `_translate_rider` applies each small displacement to the supported rider; in VR it keeps the collision body and the camera&#x27;s rig together. Moving only an image, or only the player&#x27;s collision body, would leave part of the crossing behind.
+-
+-The second crossing changes size.
+-
+-```gdscript
+-var scale_vec: Vector3 = Vector3(safe_scale, safe_scale, safe_scale)
+-mesh_instance.scale = scale_vec
+-box_shape.size = scale_vec
+-```
+-
+-In `scale_cube.gd`, `current_scale` travels between 0.5 and 3.0, then holds at full size for four seconds. The centre is 1.5 metres below the bank. At maximum size its top reaches the floor; at minimum it withdraws below it. Both the visible mesh and the collision box change size. The map uses `#seat:deck` with zero additional Y offset: seating already accounts for the box&#x27;s half-height.
+-
+-The third crossing changes orientation.
+-
+-```gdscript
+-mesh_instance.rotation_degrees = rotation_axis * current_angle
+-static_body.transform = mesh_instance.transform
+-```
+-
+-These excerpts from `rotation_cube.gd` connect the visible angle to the physical surface. The hall opts into `profile:bridge`: a plank three metres long, one metre wide and 0.2 metres thick. Its centre stays fixed. At zero degrees it lies across the route, with a gap ahead and behind; at ninety degrees its length reaches across the three-metre opening, meeting both banks edge to edge. Its top stays level with the floor throughout the Y turn. The four-second pauses give time to cross while aligned.
+-
+-Now compare the three events. Translation carries the surface between banks. Scale grows a surface until it meets them. Rotation aligns a length with them. The banks supply a shared reference, while the player&#x27;s body tests whether the apparent opening is physically usable.
+-
+-The helpers below concern transforms as data. They are additional experiments for the nearby matrix and composition artifacts, rather than the controls of these three crossings.
+-
+-Check identity.
+-
+-```gdscript
+-func is_identity(t: Transform3D) -&gt; bool:
+-    return t.is_equal_approx(Transform3D.IDENTITY)
+-```
+-
+-Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
+-
+-Invert a transform.
+-
+-```gdscript
+-func invert(t: Transform3D) -&gt; Transform3D:
+-    return t.affine_inverse()
+-```
+-
+-Undo the transform. Composing t with t.affine_inverse() produces identity.
+-
+-Compose with multiplication.
+-
+-```gdscript
+-func combine(a: Transform3D, b: Transform3D) -&gt; Transform3D:
+-    return a * b
+-```
+-
+-Right-to-left application order. a * b applies b first, then a.
+-
+-Extract the origin.
+-
+-```gdscript
+-func get_origin(t: Transform3D) -&gt; Vector3:
+-    return t.origin
+-```
+-
+-The origin is the translation part of the transform. Ignore the basis to get just the position.
+-
+-## Change the reference: an adjustable landing
+-
+-After the third crossing, MOVE THE BANK gives the far landing a one-metre range along local +z. Its top remains at the grid deck. A single slider sets `target_displacement`; `_physics_process` advances at 0.25 m/s. RESET returns both the target and slider to zero. The three-metre plank and its timer are unchanged.
+-
+-At the aligned pose, the three-metre plank meets the original bank with zero overlap. The surface separation is `displacement`: zero means the edges meet, positive means an open gap. This is not a traversal predicate. Body radius, floor snapping, gravity and movement all enter the crossing test. Walk the side aisle to compare settings and return without crossing the moving joint.
+-
+-Source: `commons/artifacts/adjustable_landing/adjustable_landing.gd`. The artifact owns the movable slab and its controls; the map leaves a recess for it and supplies fixed side aisles. It does not resize or rotate the bridge.
+-
+-## Move the destination — 23 September
+-
+-At the approach to the rotation crossing, MOVE THE BANK translates the landing through one metre while the plank keeps its existing turn. Compare the originally meeting edges with the gap after moving the bank, then RESET. The control is about 1.13 m above the floor; the still side aisles remain available. The production artifact separates control placement from the landing transform.
++Trans_Translation extends this distinction between a destination and the journey to it through carrier routes. Carry forward the question established here: which function changes the request, and which callback performs the movement?
+</pre></details>
+          <details><summary>Inspected museum sources</summary><ul class='sources'><li><a href='../../../../commons/artifacts/adjustable_landing/adjustable_landing.gd'>commons/artifacts/adjustable_landing/adjustable_landing.gd</a></li><li><a href='../../../../commons/interactables/slider_horizontal.gd'>commons/interactables/slider_horizontal.gd</a></li><li><a href='../../../../commons/audio/rack_templates/RackTemplates.gd'>commons/audio/rack_templates/RackTemplates.gd</a></li></ul></details>
+          <footer><a href='#Point_Line_Grid'>← Previous hall</a><a href='#Color_Paint'>Next hall →</a></footer></section><section class='hall' id='Color_Paint'>
+          <header><p class='eyebrow'>05 / Color_Paint</p><h2>Aim, activate, leave a mark</h2><p class='topics'>Named actions · Interaction states · Targeting · Feedback · Surface painting</p></header>
+          <figure><a href='figures/paint.png'><img src='figures/paint.png' alt='The manual cans, their tray and shared canvas in the museum. Mist, deposits and accumulated colour are different stages of the interaction.' loading='lazy'></a><figcaption>The manual cans, their tray and shared canvas in the museum. Mist, deposits and accumulated colour are different stages of the interaction. Archive: 2026-09-28. <a href='../../../../doc/book/iterations/2026-09-28-paint-aerosol-and-runs/source_manifest.json'>Capture record</a></figcaption></figure>
+          <div class='change'><p><b>Changed.</b> Start with the manual can. Distinguish trigger_click events from trigger pressure, held from active, and mist from a successful hit. Convert world hit to local surface UV and return to the shared draw_spray method.</p><p><b>Try.</b> Halve manual spray reach. From beyond and within that range, predict when mist becomes a canvas deposit; restore the original reach.</p><p><b>Carries forward.</b> A reusable input-to-receiver chain. Manual and automatic callers share an operation, while the image they alter is not a recoverable list of gestures.</p></div>
+          <div class='reading'><p class='eyebrow'>NEW TUTORIAL · 781 words · <a href='../../../../commons/maps/Color_Paint/tutorial.md'>Open current tutorial.md</a></p><h3>Aim, activate, leave a mark</h3>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Named actions and interaction states</li>
+<li>Ray targets</li>
+<li>Surface coordinates</li>
+<li>Shared drawing methods</li>
+<li>Interaction feedback</li>
+</ul>
+<p>Pick up a colour from the tray. Aim at the canvas without pressing the trigger: your hand moves the can, but leaves no mark. Hold the trigger, make a short pass, then release it while keeping the can in your hand. Finally, let go of the can; it returns to its dock. On desktop, right-click carries or returns a can; holding the left mouse button sprays.</p>
+<p>Coordinates taught you to carry an object; Trace made repeated positions visible. Here the moving nozzle must reach a receiving surface with its ray. The local/world transforms and function calls you already know connect the nozzle to that surface.</p>
+<p>The museum supplies the can, controller rig, collision shapes, particles and canvas renderer. Open <code>commons/context/drawingboard/spray_can.gd</code> to follow the interaction. Its <code>nozzle</code> variable references a child created in <code>_ready()</code>; its inherited <code>_current_controller</code> references the controller holding this can. The excerpts below belong to those existing objects.</p>
+<p><strong>Separate carrying from activation</strong></p>
+<p>The OpenXR action map, <code>openxr_action_map.tres</code>, names two inputs: <code>trigger_click</code> reports a pressed/released state; <code>trigger</code> supplies a scalar value. The pickup function routes <code>trigger_click</code> to the held object's <code>action()</code> or <code>action_release()</code>. These emit the pickable signals connected by the can's <code>_ready()</code>.</p>
+<p>The press handler sets <code>_pressed = true</code>. The release handler clears it and calls <code>_stop_spray()</code>. The desktop pointer calls the same action methods from mouse events; its input route is separate from the OpenXR bindings.</p>
+<p>This is the opening of the can's existing physics update:</p>
+<pre><code class="language-gdscript">func _physics_process(delta: float) -&gt; void:
+    if not (is_picked_up() or _desktop_held) or not _pressed:
+        _stop_spray(); return
+    var pressure := 1.0
+    if is_instance_valid(_current_controller):
+        pressure = clampf(_current_controller.get_float(&quot;trigger&quot;), 0.0, 1.0)
+    if pressure &lt;= 0.02:
+        _stop_spray(); return
+</code></pre>
+<p>Read the condition aloud: the can must be held <strong>and</strong> its action pressed. <code>return</code> ends this update when either condition fails. Pressing starts permission to spray; repeated physics updates keep depositing while the conditions hold. Release stops that repetition. Dropping also clears the action.</p>
+<p>The tracked trigger's scalar is polled on each update to adjust pressure. Desktop uses <code>1.0</code>. Treat this as one additional input value for now; the state sequence remains docked → held → active → held.</p>
+<p><strong>Find a receiver</strong></p>
+<p>Keep spraying and turn the nozzle beside the canvas. Mist and hiss continue, but your marks stop. <code>is_spraying</code> describes the open valve; <code>is_painting</code> describes a successful canvas sample. Feedback can confirm different parts of an interaction.</p>
+<p>The nozzle's world position supplies <code>origin</code>; its rotated local negative Z axis supplies the normalized <code>direction</code>. <code>_sample_nozzle()</code> begins with this ray query:</p>
+<pre><code class="language-gdscript">var query := PhysicsRayQueryParameters3D.create(
+    origin, origin + direction * max_distance, 1, [get_rid()])
+query.collide_with_areas = true
+var collision := get_world_3d().direct_space_state.intersect_ray(query)
+</code></pre>
+<p>The endpoint uses the direction-and-distance calculation from Lines. The <code>1</code> selects collision layer 1; the exclusion list contains this can's physics identifier. Areas participate because the canvas receiver is an <code>Area3D</code>.</p>
+<p>The first eligible hit must belong to <code>drawing_area</code> and contain a <code>PaperDrawSurface</code> with <code>draw_spray()</code>. A nearer collider on that layer blocks the canvas. The code then intersects the visible canvas plane, checks its front-facing angle and rejects points beyond its edges or range. Seeing the canvas does not guarantee that this ray reaches it.</p>
+<p><strong>Convert the hit</strong></p>
+<p>The receiver uses <code>paper_draw_surface.gd</code> in the same directory. Its <code>get_uv_from_world_pos()</code> first removes the surface's world transform, then measures across its rectangular mesh. This reduced equivalent shows the conversion for the supplied <code>PlaneMesh</code>:</p>
+<pre><code class="language-gdscript">var local_hit := surface.to_local(world_hit)
+var size := (surface.mesh as PlaneMesh).size
+var uv := Vector2(
+    local_hit.x / size.x + 0.5,
+    local_hit.z / size.y + 0.5)
+</code></pre>
+<p>Here <code>surface</code> is the accepted <code>PaperDrawSurface</code> and <code>world_hit</code> is the plane intersection. The mesh lies in its own XZ plane, even though it stands upright in the room. Its centre becomes <code>(0.5, 0.5)</code>; each coordinate spans zero to one. The four-by-two-and-a-half-metre mesh needs separate width and height. The renderer converts UV into texture pixels without snapping spray input to grid cells.</p>
+<p><strong>Change one boundary</strong></p>
+<p>Change the exported <code>max_distance</code> default in <code>spray_can.gd</code> from <code>3.0</code> to <code>1.5</code>, then reload the encounter. Spray from roughly two metres away, then approach within one metre. Predict which attempt leaves paint. Mist and hiss should continue in both; only the closer aim can reach. Restore <code>3.0</code> afterward. This changes manual cans' reach without changing their held/action states.</p>
+<p>Now cross the automatic painter's line. It calls the same surface method, <code>draw_spray()</code>, with a calculated position; your can supplies a ray hit. Both modify one evolving image. Unlike Trace's ordered position list, this canvas does not keep recoverable gestures. Carry that distinction into Color_Walls: a surface can change what an operation becomes.</p></div>
+          <details><summary>Before this pass and exact text changes</summary><p>The automatic UV path led the lesson. The hand&#x27;s route from pickup through activation to a valid receiving surface was secondary.</p><p><a href='before/Color_Paint.md'>Before</a> · <a href='after/Color_Paint.md'>Revised snapshot</a> · <a href='diffs/Color_Paint.diff'>Text diff</a></p><pre class='diff'>--- before/Color_Paint.md
++++ after/Color_Paint.md
+@@ -1,26 +1,75 @@
+-# Enter an ongoing painting
++# Aim, activate, leave a mark
+ 
+-**Learning elements — proposed focus**
++**Learning elements**
+ 
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- Named actions and interaction states
++- Ray targets
++- Surface coordinates
++- Shared drawing methods
++- Interaction feedback
+ 
+-- Surface coordinates
+-- Timed paths
+-- Shared operations
+-- Evolving images
++Pick up a colour from the tray. Aim at the canvas without pressing the trigger: your hand moves the can, but leaves no mark. Hold the trigger, make a short pass, then release it while keeping the can in your hand. Finally, let go of the can; it returns to its dock. On desktop, right-click carries or returns a can; holding the left mouse button sprays.
+ 
+-Watch the automatic can before taking a colour from the two-row tray. Hold a can, aim its nozzle at the canvas and hold the trigger. On desktop, right-click carries or returns the can and holding the left mouse button sprays. Merely picking it up makes no marks.
++Coordinates taught you to carry an object; Trace made repeated positions visible. Here the moving nozzle must reach a receiving surface with its ray. The local/world transforms and function calls you already know connect the nozzle to that surface.
+ 
+-Try the same colour close to the canvas, then farther away. The closer mark is tighter and denser; the farther mark spreads thinner. Keep the nozzle still to build coverage. Tilt it to stretch the footprint. Release the trigger while keeping the can in your hand, then let go to return it to its dock.
++The museum supplies the can, controller rig, collision shapes, particles and canvas renderer. Open `commons/context/drawingboard/spray_can.gd` to follow the interaction. Its `nozzle` variable references a child created in `_ready()`; its inherited `_current_controller` references the controller holding this can. The excerpts below belong to those existing objects.
+ 
+-The nozzle ray must hit this canvas without a wall or another object in between. Its range is three metres. The actual surface transform and four-by-two-and-a-half-metre mesh determine UV coordinates and the projected footprint. No coarse grid snap is applied to spray input.
++**Separate carrying from activation**
++
++The OpenXR action map, `openxr_action_map.tres`, names two inputs: `trigger_click` reports a pressed/released state; `trigger` supplies a scalar value. The pickup function routes `trigger_click` to the held object&#x27;s `action()` or `action_release()`. These emit the pickable signals connected by the can&#x27;s `_ready()`.
++
++The press handler sets `_pressed = true`. The release handler clears it and calls `_stop_spray()`. The desktop pointer calls the same action methods from mouse events; its input route is separate from the OpenXR bindings.
++
++This is the opening of the can&#x27;s existing physics update:
+ 
+ ```gdscript
+-last_radius_m = 0.012 + distance * tan(deg_to_rad(7.0))
++func _physics_process(delta: float) -&gt; void:
++    if not (is_picked_up() or _desktop_held) or not _pressed:
++        _stop_spray(); return
++    var pressure := 1.0
++    if is_instance_valid(_current_controller):
++        pressure = clampf(_current_controller.get_float(&quot;trigger&quot;), 0.0, 1.0)
++    if pressure &lt;= 0.02:
++        _stop_spray(); return
+ ```
+ 
+-This rule makes distance visible as the size of a mark. The pigment budget spreads over that area; trigger pressure and time spent in place affect coverage. The current code approximates a spray cone, not aerosol physics.
++Read the condition aloud: the can must be held **and** its action pressed. `return` ends this update when either condition fails. Pressing starts permission to spray; repeated physics updates keep depositing while the conditions hold. Release stops that repetition. Dropping also clears the action.
+ 
+-The automatic painter supplies its position from two oscillations and deposits through the same surface method. Its prescribed motion continues beside your gesture. The canvas stores the resulting image, not a recoverable list of strokes.
++The tracked trigger&#x27;s scalar is polled on each update to adjust pressure. Desktop uses `1.0`. Treat this as one additional input value for now; the state sequence remains docked → held → active → held.
+ 
+-Compare that changing surface with a fixed arrangement in the Albers gallery. Continue into Color_Walls with the difference between a colour value, its neighbours and its receiving surface in mind.
++**Find a receiver**
++
++Keep spraying and turn the nozzle beside the canvas. Mist and hiss continue, but your marks stop. `is_spraying` describes the open valve; `is_painting` describes a successful canvas sample. Feedback can confirm different parts of an interaction.
++
++The nozzle&#x27;s world position supplies `origin`; its rotated local negative Z axis supplies the normalized `direction`. `_sample_nozzle()` begins with this ray query:
++
++```gdscript
++var query := PhysicsRayQueryParameters3D.create(
++    origin, origin + direction * max_distance, 1, [get_rid()])
++query.collide_with_areas = true
++var collision := get_world_3d().direct_space_state.intersect_ray(query)
++```
++
++The endpoint uses the direction-and-distance calculation from Lines. The `1` selects collision layer 1; the exclusion list contains this can&#x27;s physics identifier. Areas participate because the canvas receiver is an `Area3D`.
++
++The first eligible hit must belong to `drawing_area` and contain a `PaperDrawSurface` with `draw_spray()`. A nearer collider on that layer blocks the canvas. The code then intersects the visible canvas plane, checks its front-facing angle and rejects points beyond its edges or range. Seeing the canvas does not guarantee that this ray reaches it.
++
++**Convert the hit**
++
++The receiver uses `paper_draw_surface.gd` in the same directory. Its `get_uv_from_world_pos()` first removes the surface&#x27;s world transform, then measures across its rectangular mesh. This reduced equivalent shows the conversion for the supplied `PlaneMesh`:
++
++```gdscript
++var local_hit := surface.to_local(world_hit)
++var size := (surface.mesh as PlaneMesh).size
++var uv := Vector2(
++    local_hit.x / size.x + 0.5,
++    local_hit.z / size.y + 0.5)
++```
++
++Here `surface` is the accepted `PaperDrawSurface` and `world_hit` is the plane intersection. The mesh lies in its own XZ plane, even though it stands upright in the room. Its centre becomes `(0.5, 0.5)`; each coordinate spans zero to one. The four-by-two-and-a-half-metre mesh needs separate width and height. The renderer converts UV into texture pixels without snapping spray input to grid cells.
++
++**Change one boundary**
++
++Change the exported `max_distance` default in `spray_can.gd` from `3.0` to `1.5`, then reload the encounter. Spray from roughly two metres away, then approach within one metre. Predict which attempt leaves paint. Mist and hiss should continue in both; only the closer aim can reach. Restore `3.0` afterward. This changes manual cans&#x27; reach without changing their held/action states.
++
++Now cross the automatic painter&#x27;s line. It calls the same surface method, `draw_spray()`, with a calculated position; your can supplies a ray hit. Both modify one evolving image. Unlike Trace&#x27;s ordered position list, this canvas does not keep recoverable gestures. Carry that distinction into Color_Walls: a surface can change what an operation becomes.
+</pre></details>
+          <details><summary>Inspected museum sources</summary><ul class='sources'><li><a href='../../../../commons/context/drawingboard/spray_can.gd'>commons/context/drawingboard/spray_can.gd</a></li><li><a href='../../../../commons/context/drawingboard/paper_draw_surface.gd'>commons/context/drawingboard/paper_draw_surface.gd</a></li><li><a href='../../../../commons/context/drawingboard/ball_painting_automation.gd'>commons/context/drawingboard/ball_painting_automation.gd</a></li><li><a href='../../../../commons/context/drawingboard/ball_painting_demo_v2.tscn'>commons/context/drawingboard/ball_painting_demo_v2.tscn</a></li><li><a href='../../../../addons/godot-xr-tools/functions/function_pickup.gd'>addons/godot-xr-tools/functions/function_pickup.gd</a></li><li><a href='../../../../openxr_action_map.tres'>openxr_action_map.tres</a></li></ul></details>
+          <footer><a href='#Trans_Introduction'>← Previous hall</a><a href='#overview'>Back to overview ↑</a></footer></section><div class='end'><p>The next useful trial is a learner carrying these skills through the rooms: draw a bend, find its retained source in Grid, distinguish a requested movement from the current one, and make paint reach a chosen surface.</p><p><a href='report.json'>Revision and image provenance</a> · <a href='checks.json'>Verification record</a> · <a href='../../course/hall-cards/index.html'>Whole tutorial lineage</a></p></div></main></body></html>

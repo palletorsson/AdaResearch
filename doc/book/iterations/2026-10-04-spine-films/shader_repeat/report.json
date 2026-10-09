@@ -1,0 +1,119 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Source-specific validation"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@2271"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@2273"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@2274"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@2277"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@2279"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@2273"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@2279"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@2273"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@2279"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@2270"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@2273"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@2276"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@2279"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 28.0,
+	"evidence": {
+		"animation_uniform": 0.0,
+		"clock_adapter": "TIME replaced by film_time only",
+		"grid_sizes": [
+			1,
+			4,
+			8
+		],
+		"shared_mesh_instances": 3,
+		"source_has_fract": true,
+		"spatial_transfer": "Original flat display shader on a sphere with unchanged UV mapping",
+		"triangles": 1088,
+		"vertices": 594
+	},
+	"id": "shader_repeat",
+	"passed": true,
+	"phases": [
+		"THE SAME MESH",
+		"A SINGLE UV DOMAIN",
+		"FOLD THE COORDINATES",
+		"ONE / FOUR / EIGHT"
+	],
+	"source_paths": [
+		"res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+		"res://algorithms/shaders/book_of_shaders/shader_05_patterns.gd"
+	]
+}

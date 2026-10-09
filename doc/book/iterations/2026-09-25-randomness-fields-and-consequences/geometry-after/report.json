@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "comparison bench present",
+      "passed": true
+    },
+    {
+      "name": "three standing positions in front of comparison have floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison-approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: neighbouring-columns",
+      "passed": true
+    },
+    {
+      "name": "frequency changes coherent columns while white heights hold",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "bench_world": [
+      3.5,
+      0.0,
+      19.5
+    ],
+    "standing_support": [
+      true,
+      true,
+      true
+    ]
+  },
+  "passed": true,
+  "room": "Random_Space_Geometry",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

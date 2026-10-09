@@ -1,0 +1,19 @@
+--- before/commons/maps/Noise_Voxel/final.md
++++ commons/maps/Noise_Voxel/final.md
+@@ -66,7 +66,7 @@
+ 
+ Step through a ground-level opening in the glass. Your feet no longer have to ask for a floor. Rise along the edge, then approach a gap. Release the movement and hang there. The blue blocks still stop you; an opening has to admit your body before it can become a route. The glass lends this movement a boundary. Descend to either doorway and leave: the museum asks for your weight again.
+ 
+-The plate counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
++The plate at the bench counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
+ 
+ There is pleasure in a cavity before its usefulness is settled. Try looking from another side. The blocks need not become an enemy, a resource or a successful level to hold your attention. They can make you curious about what sort of body would find a way here. Our own body gives one answer, with particular dimensions and particular permissions.
+ 
+@@ -87,6 +87,6 @@
+ 
+ Carry a rejected value towards Noise 6 Wall. What else could receive it?
+ 
+-[^voxel-pieces]: In the recorded desktop comparison of 13 September 2026, seed 31415 produced 4, 15, 25, 21 and 32 face-connected pieces at thresholds −0.20, −0.10, 0, +0.10 and +0.20. Occupied counts fell throughout. These are observations of that configuration, not required outcomes for every seed.
++[^voxel-pieces]: In the recorded comparison of 13 September 2026, seed 31415 produced 4, 15, 25, 21 and 32 face-connected pieces at thresholds −0.20, −0.10, 0, +0.10 and +0.20. Occupied counts fell throughout. These are observations of that configuration, not required outcomes for every seed.
+ 
+ [^voxel-screen]: The screen keeps the value, biased score and stored occupancy together: `row.append({"value":value,"score":value-PerlinTerrainSculptor.contract_bias(v),"occupied":source.get("_voxels")[x][cell.y][z]})`. The short threshold function earlier in the chapter makes the decision; this line gathers its two readings for display.

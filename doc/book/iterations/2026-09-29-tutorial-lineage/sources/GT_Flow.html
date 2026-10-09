@@ -1,0 +1,284 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Flow · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Flow">← Tutorial lineage</a></p><h1>GT Flow</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Flow/final.md">Raw captured source</a></p><pre># What a junction cannot pass on
+
+Where does the excess go when a junction receives more than it can send onwards?
+
+&lt;!-- @push_relabel_algorithm --&gt;
+
+Follow the initial flow leaving the source. Choose a junction that accumulates excess and compare its readout with the available outgoing edges. Watch for a PUSH or RELABEL step. Predict whether the next action can send material towards a neighbour or must first change the junction’s label.
+
+Capacity limits how much an edge can carry. Flow is the amount currently assigned to it. Excess records a temporary imbalance at a vertex: more has arrived than has yet left. The source shows a negative excess: it is the total it has sent out and will not receive back. The height label gives the local procedure a direction in which to attempt a push; it is an algorithmic value, not the physical altitude of the drawn vertex.
+
+Separate an edge that is full from a vertex that has excess. The first describes a limit on one connection; the second describes a temporary balance at a junction. A vertex can have more than one outgoing option, and those options can have different amounts of room left. Following that distinction makes a local PUSH easier to interpret: it transfers an available amount through a particular edge, rather than declaring that the entire junction is solved.
+
+The exhibit begins by filling outgoing source edges. It then tries to move excess through remaining outgoing capacity towards lower labelled neighbours, changing labels when a push is unavailable. Those local changes help make congestion and temporary storage visible.
+
+A junction can run out of forward capacity while still holding excess. If the display stops at BLOCKED, find that junction. Its neighbours have not vanished; the remaining space on its outgoing edges has run out. The readout keeps the excess visible and reports how much reached the sink. It leaves us with a question: could some of what was sent earlier be taken back?
+
+A complete maximum-flow method also needs a way to revise earlier allocations. Residual reverse capacity represents that possibility: some previously sent flow can be undone so that a better arrangement becomes available. The display is labelled a forward-only study because it has no such reverse adjustments. What reached the sink records this run; it does not settle how much could reach it under another allocation.
+
+Keep the observation smaller and exact: which vertex held excess, which original edge still had room, and what local operation followed? Those are relationships you can inspect without treating every accepted push as an irrevocable good decision.
+
+The next useful experiment would expose a case that requires rerouting and make the reverse adjustment visible. The comparison would show why revision is part of the algorithm’s power. It would also prevent a blocked intermediate allocation being mistaken for a physical impossibility.
+
+&lt;!-- @ --&gt;
+
+Matching will impose a different limit: each vertex may have only one selected partner. Once again, an early acceptable choice may need to be undone.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Flow/tutorial.md">Raw captured source</a></p><pre># GT Flow
+
+Max flow from source to sink. Edmonds-Karp via BFS.
+
+Build a flow network.
+
+```gdscript
+class_name FlowNetwork
+
+var capacity: Dictionary = {}  # [u, v] -&gt; capacity
+var flow: Dictionary = {}       # [u, v] -&gt; current flow
+
+func add_edge(u, v, cap: float) -&gt; void:
+    capacity[[u, v]] = cap
+    flow[[u, v]] = 0.0
+    flow[[v, u]] = 0.0  # reverse edge with zero capacity
+    if not capacity.has([v, u]):
+        capacity[[v, u]] = 0.0
+```
+
+Each edge has a capacity. Reverse edges are created automatically for residual flow.
+
+Residual capacity.
+
+```gdscript
+func residual(u, v) -&gt; float:
+    return capacity.get([u, v], 0.0) - flow.get([u, v], 0.0)
+```
+
+How much more can flow along (u, v). Forward flow reduces it; reverse flow increases it.
+
+BFS for augmenting path.
+
+```gdscript
+func bfs_augmenting(source, sink) -&gt; Array:
+    var came_from: Dictionary = {source: null}
+    var queue: Array = [source]
+    while not queue.is_empty():
+        var u = queue.pop_front()
+        if u == sink: break
+        for v in all_vertices():
+            if v in came_from: continue
+            if residual(u, v) &gt; 0:
+                came_from[v] = u
+                queue.push_back(v)
+    if not sink in came_from: return []
+    return reconstruct_path(came_from, sink)
+```
+
+Standard BFS; edges are considered only if they have residual capacity. Returns the shortest augmenting path.
+
+Push flow along the path.
+
+```gdscript
+func push_flow(path: Array) -&gt; float:
+    var bottleneck: float = INF
+    for i in range(path.size() - 1):
+        bottleneck = min(bottleneck, residual(path[i], path[i + 1]))
+    for i in range(path.size() - 1):
+        flow[[path[i], path[i + 1]]] += bottleneck
+        flow[[path[i + 1], path[i]]] -= bottleneck
+    return bottleneck
+```
+
+Find the path&#x27;s bottleneck and push that amount. Reverse edges track allowing flow to be undone.
+
+Edmonds-Karp loop.
+
+```gdscript
+func max_flow(source, sink) -&gt; float:
+    var total: float = 0.0
+    while true:
+        var path := bfs_augmenting(source, sink)
+        if path.is_empty(): break
+        total += push_flow(path)
+    return total
+```
+
+Push flow along augmenting paths until no more exist. The total is the maximum flow.
+
+Find the min cut.
+
+```gdscript
+func min_cut(source) -&gt; Array:
+    var reachable: Array = [source]
+    var visited: Dictionary = {source: true}
+    var queue: Array = [source]
+    while not queue.is_empty():
+        var u = queue.pop_front()
+        for v in all_vertices():
+            if v in visited: continue
+            if residual(u, v) &gt; 0:
+                visited[v] = true
+                reachable.append(v)
+                queue.push_back(v)
+    var cut: Array = []
+    for u in reachable:
+        for v in all_vertices():
+            if not v in visited and capacity.get([u, v], 0) &gt; 0:
+                cut.append([u, v])
+    return cut
+```
+
+After max flow, the min cut is the set of saturated edges from reachable to unreachable vertices. Their total capacity equals the max flow.
+
+Animate flow propagation.
+
+```gdscript
+func animate_push(path: Array, amount: float) -&gt; void:
+    for i in range(path.size() - 1):
+        var start: Vector3 = position_of(path[i])
+        var end: Vector3 = position_of(path[i + 1])
+        spawn_flow_particle(start, end, amount)
+```
+
+Particles travel along the augmenting path. Scale reflects the flow amount.
+
+You can now build a flow network, find augmenting paths via BFS, push flow along them, compute the max flow via Edmonds-Karp, extract the min cut, and animate flow propagation. GT_Matching closes the sequence.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Flow/technical.md">Raw captured source</a></p><pre># GT Flow — Technical
+
+A flow network is a directed graph with a source vertex s, a sink vertex t, and a capacity c(u,v) on every edge. The max-flow problem finds the maximum amount of flow that can be pushed from s to t without exceeding any edge&#x27;s capacity.
+
+Ford-Fulkerson repeatedly finds an augmenting path (a source-to-sink path with positive residual capacity) and pushes flow along it. With BFS-based augmentation (Edmonds-Karp), the running time is O(V·E²). Push-relabel algorithms are asymptotically faster — O(V²·E) or O(V³) in the standard variants — and often faster in practice because they operate locally.
+
+```gdscript
+# Edmonds-Karp — BFS augmentation
+func max_flow(source, sink) -&gt; float:
+    var flow: Dictionary = {}  # edge -&gt; amount
+    var residual := build_residual()
+    var total := 0.0
+    while true:
+        var path := bfs_augmenting_path(residual, source, sink)
+        if path.is_empty(): break
+        var bottleneck := INF
+        for e in path:
+            bottleneck = min(bottleneck, residual[e])
+        for e in path:
+            residual[e] -= bottleneck
+            residual[reverse(e)] = residual.get(reverse(e), 0) + bottleneck
+            flow[e] = flow.get(e, 0) + bottleneck
+        total += bottleneck
+    return total
+```
+
+The key data structure is the residual graph. For every edge (u,v) with capacity c and current flow f, the residual graph contains (u,v) with capacity c − f and (v,u) with capacity f. The reverse edges allow the algorithm to undo previously routed flow when a better routing becomes available.
+
+The max-flow min-cut theorem says that the maximum flow equals the minimum s-t cut — the smallest total edge capacity whose removal disconnects s from t. The map displays the cut visibly as a line across the network, and the cut&#x27;s capacity matches the flow on every frame.
+
+The funnel geometry in the map makes the bottleneck physical. The narrowing exit means the flow is capped by the exit&#x27;s capacity regardless of the internal network, and the learner can feel the constraint as a physical architecture rather than as a numerical bound.
+
+Within the sequence, Flow is the throughput chapter. The next and final map, GT_Matching, closes the sequence by turning the flow machinery toward a different kind of optimisation.
+
+## Dinic&#x27;s Algorithm
+
+Dinic&#x27;s algorithm is a faster alternative to Ford-Fulkerson for max-flow. It runs in O(V²·E) for general graphs and O(E·√V) for unit-capacity graphs, which is a substantial improvement over Edmonds-Karp&#x27;s O(V·E²).
+
+The algorithm operates in phases. Each phase builds a layered graph (BFS levels from the source) and finds a blocking flow in it — a flow that saturates at least one edge on every source-to-sink path. The blocking flow is found by repeated DFS. After the phase, the distance from source to sink in the residual graph increases, and the algorithm terminates when no path remains.
+
+```gdscript
+func dinic(source, sink) -&gt; float:
+    var total := 0.0
+    while true:
+        var levels := bfs_levels(source)
+        if not levels.has(sink): break
+        var blocking := find_blocking_flow(levels, source, sink)
+        if blocking == 0: break
+        total += blocking
+    return total
+```
+
+## Min-Cost Max-Flow
+
+A natural extension is to minimise cost subject to achieving maximum flow. This combines the max-flow problem with a shortest-path computation on a cost-weighted residual graph. The successive-shortest-path algorithm solves min-cost max-flow in O(F·V·E) where F is the flow value; cycle-cancelling algorithms achieve better worst-case bounds at the cost of more complex implementations.
+
+## Applications Beyond Flow
+
+Max-flow and min-cut have surprising applications. Bipartite matching reduces to max-flow. Graph partitioning uses min-cut to decompose large graphs. Image segmentation can be cast as a min-cut problem where pixels are vertices and colour similarities determine edge weights.
+
+```gdscript
+# Bipartite matching via max-flow
+func bipartite_matching_via_flow(left, right, edges_lr) -&gt; Dictionary:
+    var s := &quot;source&quot;
+    var t := &quot;sink&quot;
+    var capacity := {}
+    for u in left:
+        capacity[[s, u]] = 1
+    for v in right:
+        capacity[[v, t]] = 1
+    for e in edges_lr:
+        capacity[[e.left, e.right]] = 1
+    var _flow = max_flow_edmonds_karp(s, t, capacity)
+    var matching := {}
+    for e in edges_lr:
+        if flow_on_edge[[e.left, e.right]] &gt; 0:
+            matching[e.right] = e.left
+    return matching
+```
+
+Within the sequence, Flow&#x27;s max-flow min-cut duality is the sequence&#x27;s most elegant result. GT_Matching will next close the sequence by turning flow toward allocation.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Flow/intent.md">Raw captured source</a></p><pre>Concept: How much can pass through? Flow problems find the bottleneck — the narrowest passage between source and sink. Push-relabel works locally; max-flow equals min-cut globally.
+Sequence role: Seventh map in Graph Theory; introduces capacity constraints. After spanning trees optimized structure, flow optimizes throughput. The funnel narrows from wide entrance to tight exit — the learner physically feels the constraint that the algorithm navigates. Connects to Forces (flow as vector field) and to network analysis (bottleneck as structural vulnerability); follows GT_Spanning_Trees; leads to GT_Matching.
+Technical angle: Max-flow min-cut theorem (maximum flow equals minimum cut capacity), push-relabel algorithm (local excess management, height-based routing), augmenting paths (Ford-Fulkerson). The push_relabel_algorithm artifact demonstrates the local operations that produce global optimality.
+Critical angle: Every network has a throat. The max-flow min-cut theorem reveals that the bottleneck is not where you think (not the longest path or the most connections) but the cheapest way to disconnect source from sink. This is infrastructure critique: the weakest point in a network determines its total capacity. No amount of bandwidth elsewhere compensates for a single narrow passage.
+Key artifacts: push_relabel_algorithm demonstrates flow optimization — excess accumulation, height relabeling, and local push operations that converge to globally optimal flow.
+
+Gap: push_relabel_algorithm needs slider_horizontal, push_button.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Flow/critical.md">Raw captured source</a></p><pre># GT_Flow — Critical Reflection
+
+A funnel. Wide entrance, progressive narrowing, tight exit. Walls converge like a flow bottleneck, and you feel the constraint tighten as you walk from the open mouth at h1 through converging h5 walls down to the narrow throat at the bottom. The `push_relabel_algorithm` artifact sits in the wide upper section, where there is still room. The exit squeezes through a gap barely wider than your body. The map is a pipe, and the pipe teaches what every network engineer knows and every planner forgets: the capacity of a system is determined by its narrowest passage.
+
+The push-relabel algorithm works by flooding. Its identity is local panic: saturate source edges, let excess pile up at nodes, push downhill toward the sink. When flow cannot move forward, the node rises — relabels itself higher — and pushes back. `height[source] = |V|` — the source starts at maximum height, creating initial pressure, and excess flow accumulates at the sink into `max_flow`. No global view. Just pressure and elevation and the desperate physics of too much trying to fit through too little. Foucault would recognize the disciplinary mechanism: each node manages its own excess according to local rules, and the global optimum emerges without any node knowing the global state. The system solves congestion through local compliance, not central planning. Order from obedience.
+
+The max-flow min-cut theorem says the answer was always in the walls. Maximum flow equals the capacity of the cheapest way to sever source from sink. The most you can push through is exactly what it would cost to cut apart. Optimization and destruction yield the same number. This is the theorem&#x27;s uncanny symmetry, and Foucault&#x27;s analysis of power/knowledge gives it teeth. To know the maximum flow is to know the minimum cut — to know where the network is most vulnerable, where the cheapest incision would disconnect source from sink entirely. The same knowledge that enables optimization enables sabotage. The engineer who maximizes throughput and the adversary who plans disruption are solving the same problem from opposite directions.
+
+Ranciere would notice what the funnel normalizes: the assumption that flow has a source and a sink. The network has a beginning and an end, a producer and a consumer, a point of origin and a point of arrival. This is not a property of networks in general; it is a property of the flow problem&#x27;s formulation. Real networks — communication networks, social networks, ecological networks — often have no source and no sink. Flow circulates rather than transits. The funnel imposes a directionality that the underlying graph may not possess, and the directionality determines the analysis. The max-flow min-cut theorem applies only to networks with designated source and sink. Without the designation, the theorem is meaningless. The most fundamental result in network flow theory depends on a framing choice that the theory treats as given.
+
+The converging walls make the bottleneck visceral. You walk from a wide-open space at the top — room to move, room to breathe — into progressively tighter corridors. By the time you reach the lower section, the walls are h5 on both sides and the walkable space is three or four cells wide. At the exit, it narrows to two. The experience is claustrophobic, and the claustrophobia is the content. A bottleneck is not an abstract property of a graph; it is the lived experience of constraint. The funnel forces your body through the same narrowing that the algorithm computes, and the computation — optimal flow allocation, efficient routing, maximum throughput — strips away everything the body knows about narrowing: the anxiety, the loss of options, the feeling of being forced.
+
+The push-relabel algorithm&#x27;s relabeling operation is the map&#x27;s most Ranciere-inflected mechanism. When a node cannot push its excess forward — when all admissible edges are saturated — it raises its height and tries to push backward. The relabeling is an act of refusal: the node refuses to accept the current arrangement of heights and pressures, declares itself above its neighbors, and forces flow in a new direction. This is not cooperation; it is local insurrection. The node that relabels is the node that says: the current distribution is unacceptable, and I will change my position until flow finds another path. The global optimum emerges from a sequence of local refusals, each node rising until the system has no choice but to route flow efficiently.
+
+But the refusals are bounded. The algorithm converges. The relabeling terminates. The excess drains to the sink and the system reaches maximum flow. The insurrections are temporary, the disruptions are productive, and the final state is optimal throughput. Foucault would note that this is precisely how disciplinary power absorbs resistance: by allowing local disturbances that ultimately serve the system&#x27;s efficiency. The node that relabels itself is not rebelling against the flow problem; it is solving it. The refusal is a computation, and the computation is in service of the same maximum flow that the system was designed to achieve.
+
+The funnel empties into a narrow exit above a void cell. The sink is almost invisible — a teleporter squeezed between walls. Everything the network pushed through ends here, compressed into the smallest possible space. What moves through a system is defined by what refuses to. The max-flow is the bottleneck&#x27;s permission. The min-cut is the bottleneck&#x27;s confession: this is how little it would take to stop everything.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Flow/artifacts.md">Raw captured source</a></p><pre># GT Flow — Artifacts
+*Graph Theory: Connections Define Structure · relation · 2 artifacts*
+
+&gt; Every network has a throat. Flow problems ask: how much can pass through? Not how fast — how much. The answer lives in the bottleneck, the narrowest passage between source and sink.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Push-Relabel Algorithm
+![Push-Relabel Algorithm](/scene-catalog/push_relabel_algorithm.png)
+
+EXPLAIN how excess flow and height labels solve max flow without searching complete augmenting paths.
+
+`push_relabel_algorithm`
+
+## Karger&#x27;s Algorithm
+![Karger&#x27;s Algorithm](/scene-catalog/karger_algorithm.png)
+
+Randomized algorithm for finding minimum cut in undirected graphs
+
+`karger_algorithm`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Flow/summary.md">Raw captured source</a></p><pre># GT Flow — Summary
+
+GT_Flow is the seventh map in the Graph Theory sequence. It introduces capacity as a first-class property of edges and asks how much can pass from a source to a sink before the network saturates. The answer lives in the narrowest passage the graph contains.
+
+The room is shaped as a funnel. A wide entrance holds many incoming pipes; a narrow exit at the far end holds few. Between them, a network of intermediate pipes with different capacities routes the flow. The learner walks the funnel and feels the constraint: the exit is tight, and whatever the network&#x27;s internal capacity, the total throughput cannot exceed it.
+
+A live simulation pushes flow from source to sink. Pipes fill until they saturate; saturated pipes glow and cap their throughput at their capacity. A running total above the sink reports the current flow. The algorithm is selectable — the map runs push-relabel or Ford-Fulkerson on demand, and both converge to the same answer.
+
+The max-flow value is compared to a min-cut display on the side wall. The cut is drawn as a coloured line across the network separating source from sink; its total capacity equals the flow rate. The identity that max-flow equals min-cut becomes visible rather than memorised. Within the sequence, Flow is the throughput chapter. GT_Matching will next bring the sequence to its close.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Flow/blurb.md">Raw captured source</a></p><pre>Every network has a throat. Flow problems ask: how much can pass through? Not how fast — how much. The answer lives in the bottleneck, the narrowest passage between source and sink.
+
+Push-relabel works by flooding. Excess piles up at nodes, gets shoved downhill toward the drain. When it can&#x27;t move forward, the node rises — relabels itself higher — and pushes back. A system that solves congestion through local panic. No global view. Just pressure and elevation and the desperate physics of too much trying to fit through too little.
+
+The max-flow min-cut theorem says the answer was always in the walls. Maximum flow equals the capacity of the cheapest way to sever source from sink. Optimization and destruction yield the same number. The most you can push through is exactly what it would cost to cut apart.
+
+A funnel narrows. Feel the constraint tighten. What moves through a system is defined by what refuses to.</pre></section></body></html>

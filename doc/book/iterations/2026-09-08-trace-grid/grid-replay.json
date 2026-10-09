@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-08",
+  "room": "Point_Line_Grid",
+  "changes": [
+    "Discovery-led replay passage and source-grounded technical/critical chapters",
+    "Cased source readout outside the right grid edge; source coordinates distinguished from display transform",
+    "No false zero-axis highlight on half-metre-offset rulings",
+    "Five tagged book artifacts aligned with primary order"
+  ],
+  "replay_probe": {
+    "checks": 23,
+    "failures": [],
+    "scope": "Museum stamp at declared basin depth, actual dot drop signal and session store, replay mesh vertices, panel fit. Supplied motion; full museum access and headset reading unverified."
+  },
+  "hand_and_walking_checks": 28,
+  "hand_and_walking_failures": [],
+  "primary_order": [
+    "grab_sphere_point_snap",
+    "player_trace",
+    "grid_lines",
+    "floating_sphere_field",
+    "room_grammar"
+  ],
+  "preview": "ada_run/grid_lines_discovery/preview.png",
+  "next_action": "Human pass in the museum: release a dot in Trace, enter Grid, read the side panel and compare replay with walking path; verify headset reach and sightlines."
+}

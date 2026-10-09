@@ -1,0 +1,17 @@
+--- before/commons/maps/Color_Walls/tutorial.md
++++ after/commons/maps/Color_Walls/tutorial.md
+@@ -1,8 +1,12 @@
+ # Three ways to pass
+ 
+-Begin with the office. Look through a pane toward a chair, then use the doorway to enter. From beside the chair, look back towards the aisle and notice that the view is reciprocal. Return to the entrance console and press GLASS / OPAQUE. Repeat the route. Compare what became hidden with what became impassable before explaining either.
++Begin with a chair seen through two coloured panes. Step sideways until only one pane covers it. The chair, its position and its material have stayed fixed. Follow the edge to a gap and walk around the pane. A view through a surface does not promise passage through it.
+ 
+-The button changes transparency and alpha; it never rebuilds a collision shape. Inspect `toggle_office_glass()` in `algorithms/color/color_mixing/color_constellation_office.gd`. Ask which part of the implementation the eye encounters and which part the body encounters. Move until panes overlap; this view is produced by rendering several transparent materials.
++Return to the entrance and press FILTER / OPAQUE. Repeat your route. Inspect `toggle_office_glass()` in `algorithms/color/color_mixing/color_constellation_office.gd`: it changes the surface material and shadow setting, without rebuilding the collider. The twelve panes are positioned by `PANES` in `office_planes.gd`. Each row contains x, z, yaw, width, height and colour. The geometry uses transforms already introduced in Transformation and a repeated construction already introduced in Arrays.
++
++The new decision is how the surface combines with the view behind it. Both states use `BLEND_MODE_MIX`. Filter mode enables alpha transparency with alpha 0.52; opaque mode disables transparency and sets alpha to 1.0. Start with one pane. Change only its colour, then compare the same chair with and without a second pane in front of it. Keep the supplied pale backing so dark surroundings do not obscure the furniture. This operation blends rendered RGB colours; it is not a model of spectral absorption. Transparent surfaces are sorted for rendering, so their order contributes to the result.
++
++For a first alteration, change one row's yaw, rebuild, and find a new overlap by walking. Keep widths and gaps fixed until you have checked which routes remain possible. The furniture, support geometry and comparison button are supplied apparatus; rebuilding them is not the learning target here.
+ 
+ At the navigator, identify the RGB axes. Each displayed sample uses its three channels as coordinates relative to the model centre. Locate the same general colour region in the HSV cylinder. Hue is now an angle, saturation a radius, value a height. Compare up in each model: RGB increases green, while HSV increases value, returning to the vertical rule of the Pillar field. Each model shows 500 samples, not every colour. Inspect the black corner's deliberate brightness adjustment.
+ 

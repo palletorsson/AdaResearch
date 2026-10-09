@@ -1,0 +1,171 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,94 +1,119 @@
+-# One stream, different beginnings
++# Make a colour return
+ 
+-In Synthesis Lab we kept five amounts and a phase to repeat a shape at a chosen instant. Here we keep a seed and a procedure. The primary is `seed_replay_demo:180#comparison:replicas#stand:table`, at (5,6), in the middle of Random_Definition. Its controls face −Z, toward the entrance. All excerpts below come from `algorithms/randomness/seed_replay/seed_replay_demo.gd`.
++In the room, a seed helped us recover a colour arrangement. Here we will make that return ourselves: give one cube a generated colour, repeat it, then change the result without changing the seed.
+ 
+-## Look, remember, return
++This builds on `_ready()` from Point Zero, arrays and loops from Array, and material colour from Colour. The new tool is a local `RandomNumberGenerator`. We borrow its internal algorithm, just as we borrow the renderer. What we will control is when it draws and what those draws become. Random Entropy will ask what remains when we count the values instead of keeping their arrangement.
+ 
+-Find a patch in one grid and check the same place in the other. Press REPLAY. Choose a seed with the slider or RANDOM, find another patch, and replay it. The comparison supplies the same integer to both grids:
++Use the [standalone study](/book-review/doc/book/iterations/2026-09-30-random-definition-making/random-definition-study.zip), with Day Zero's editor and run workflow already in place. Work in `study.gd`; keep `study.tscn` as the main scene. `display.gd` supplies the cubes, one material per cube and a REPLAY button. It does not request random values. Each numbered file in `steps/` is a complete version you can copy into `study.gd` if you lose your place.
++
++## 1. Give one cube three values
++
++The project opens at this first step. Its complete script is:
+ 
+ ```gdscript
+-func _column_seeds() -> Array:
+-    match comparison:
+-        "replicas", "offset":
+-            return [_current_seed, _current_seed]
++extends Node3D
++
++var rng := RandomNumberGenerator.new()
++
++func _ready() -> void:
++	$Display.build(1, false)
++	replay()
++
++func replay() -> void:
++	var cube: MeshInstance3D = $Display.left[0]
++	var material: StandardMaterial3D = cube.material_override
++	var a := rng.randf()
++	var b := rng.randf()
++	var c := rng.randf()
++	material.albedo_color = Color(a, b, c)
+ ```
+ 
+-This is the beginning of a longer function with other comparison modes. The placed room uses `replicas`.
++`$Display.build(1, false)` asks the supplied display for one cube and no second grid. The cube is the first member, `[0]`, of its `left` array. `material` refers to that cube's own material. These are the things already prepared for us; the three calls to `rng.randf()` are our new work.
+ 
+-Before colouring each grid, `_regenerate` restores the local generator:
++Each call returns one number between zero and one. `Color(a, b, c)` assigns them to red, green and blue, in that order. Press REPLAY or Space. The helper calls `replay()` again; the generator continues from where the previous calls left it. Repetition is possible, but we have given it no instruction to recover a chosen colour.
++
++## 2. Give the return a beginning
++
++Add this variable beside `rng`:
+ 
+ ```gdscript
+-_rng.seed = s
++var seed_value := 42
+ ```
+ 
+-Each `_rng.randf()` call requests one value between zero and one and advances the generator. The returned value has no colour-channel role until the program assigns it one. The code visits the cubes in their construction order, row by row, requesting three values per cell:
++Then make this the first line inside `replay()`:
+ 
+ ```gdscript
+-for mi in cubes:
+-    var mat: StandardMaterial3D = (mi as MeshInstance3D).material_override
+-    mat.albedo_color = Color(
+-        _rng.randf(),
+-        _rng.randf(),
+-        _rng.randf()
+-    )
++rng.seed = seed_value
+ ```
+ 
+-Eight rows of eight cubes consume 192 draws. These are material colour values; the room's lighting also affects the colour that reaches the eye. Wait before pressing REPLAY. Elapsed room time does not consume this colour generator's stream: regeneration is requested by controls and configuration changes.
++Press REPLAY several times. Nothing appears to happen, although the code has requested three values again. Setting the seed puts this generator back at the same beginning. Change `42` to `137` and run again. Keep a colour you like by keeping its seed and this procedure. The complete version is `steps/02-seed.gd`.
+ 
+-## Change the procedure before changing the seed
++## 3. Let the array receive the sequence
+ 
+-Press +1 DRAW. Look at the seed captions and cube positions before comparing their colours. Between restoring the seed and colouring the last grid, the program performs this operation:
++Change the display request to `$Display.build(4, false)`. It now gives us a 4 × 4 grid. In `replay()`, keep the seed reset once at the start, then colour each cube:
+ 
+ ```gdscript
+-if _extra_on and i == _columns.size() - 1:
+-    for k in range(extra_draws):
+-        _rng.randf()
++rng.seed = seed_value
++for cube in $Display.left:
++	var a := rng.randf()
++	var b := rng.randf()
++	var c := rng.randf()
++	var colour := Color(a, b, c)
++	var material: StandardMaterial3D = cube.material_override
++	material.albedo_color = colour
+ ```
+ 
+-This room uses `extra_draws = 1`. The right grid consumes 193 draws in total, but still assigns only 192 values to its colours. If the stream begins a, b, c, d, e, f, g, the left begins (a,b,c), (d,e,f); the right begins (b,c,d), (e,f,g). No cube changes its position. Grouping the stream by threes creates the channel boundaries that one extra draw disrupts.
++The loop reuses Array's ordered collection. Three draws per cube, sixteen cubes: forty-eight values receive a place. The supplied display orders cubes left to right, bottom row first, as the museum instrument does. REPLAY keeps the arrangement. The complete version is `steps/03-grid.gd`.
+ 
+-Press REPLAY with the extra draw still on. The difference returns too. The button does not restore the original procedure. +1 DRAW switches the choice on or off:
++Try moving the seed reset inside the loop, just before `var a`. Every cube now starts at the same three values. Move the reset back outside. Its position changes the pattern without changing the seed.
++
++## 4. Put two beginnings beside each other
++
++Use `steps/04-pair.gd`. Its display request is `$Display.build(4, true)`. The same colouring loop is now a function called `colour_grid(cubes)`. `replay()` calls it once with the left array and once with the right:
+ 
+ ```gdscript
+-_extra_on = not _extra_on
+-_regenerate()
++colour_grid($Display.left)
++colour_grid($Display.right)
+ ```
+ 
+-Press +1 DRAW again to restore the match. Repeated presses toggle one discarded draw; they do not accumulate two, three or four discarded values.
++The function resets the generator **before each grid**. Check the same cell on both sides. Press REPLAY and check another. If we reset only once before both grids, the right would continue after the left's forty-eight draws. Equal seeds are useful here because we also keep the requests and their assignment equal.
+ 
+-## A continuous gesture chooses an integer
++## 5. Spend one value without colouring anything
+ 
+-Move the slider slowly enough to see its number change. The actual handle supplies a normalized position; the receiver rounds that position to an integer:
++Use `steps/05-unused-draw.gd`. A `skip_first` argument tells `colour_grid` whether to make this extra request, after resetting the seed and before entering the cube loop:
+ 
+ ```gdscript
+-var norm: float = clampf(slider.get_normalized_value(), 0.0, 1.0)
+-_current_seed = roundi(norm * 999.0)
++if skip_first:
++    rng.randf()
+ ```
+ 
+-The current panel offers 1,000 seed values, 0 through 999. Neighbouring handle positions can choose the same integer. A neighbouring integer need not produce a visually neighbouring palette. This range counts available seeds, not a proof that every resulting palette is distinct.
++`replay()` passes `false` for the left grid and `true` for the right. The left uses forty-eight draws; the right consumes forty-nine but still gives forty-eight to its colours. REPLAY now recovers the difference too.
+ 
+-RANDOM uses a second generator belonging to this artifact:
++Follow the first cube: the left takes `(a, b, c)`; the right takes `(b, c, d)`. No value has changed its position in the generated stream. A different part of that stream is being assigned to each channel.
++
++## 6. Keep the draws. Change their roles.
++
++Return to the matched pair from step 4, removing the unused draw. This time keep both beginnings equal and swap the right grid's red and blue assignments. `steps/06-channel-roles.gd` is the complete version. Its loop first constructs:
+ 
+ ```gdscript
+-_current_seed = _pick.randi() % 1000
+-_regenerate()
++var colour := Color(a, b, c)
+ ```
+ 
+-It can choose an earlier seed, including the current one. It does not guarantee a new picture. This separate picker is randomized once on arrival; the colour generator is reset for each grid. These controls do not advance Godot's shared global random generator.
++Then, only for the right grid:
+ 
+-The slider now reads `Panel/Param_0`, matching the actual panel node. Its earlier receiver used an obsolete node path: a moving handle could leave the seed unchanged. Programmatic seed changes synchronize the handle under a guard, so an update is not misread as a new gesture. The number on the slider and the captions now agree after arrival, RANDOM and rebuilding.
++```gdscript
++if swap_channels:
++    colour = Color(c, b, a)
++```
+ 
+-## What must be kept?
++Find a cube with visibly different red and blue amounts. Its green stays the same. Both grids consumed the same forty-eight values. We changed what a value does, without requesting another one.
+ 
+-Record the integer and whether the extra draw is on. To reproduce the picture, also keep the generator implementation, draw order and assignment to RGB. The in-hall REPLAY button reconstructs that current procedure. There is no save-seed control here; rebuilding the hall starts again from its configured seed, 42, and its configured comparison. Cross-version or cross-generator identity has not been established by this encounter.
++Choose which comparison you want to keep. Then replace the right-hand assignment with `Color(a, a, a)`: one requested value now supplies all three channels. The other two requests remain in the loop, so later cells still begin at the same place in the stream.
+ 
+-Try using the offset palette as something you want to retain. The next room, Random_Entropy, changes the question: what can a histogram and one number retain when the order of a sequence changes?
++You now have a small construction you can alter: a generator, a repeatable beginning, an ordered array and a choice about what each value becomes. The colour grids are one use of those parts. Their arrangement no longer has to exhaust what the program can do.
+ 
++## Beside this lesson
+ 
+-## Spatial staging — 16 September 2026
++The museum has 8 × 8 grids and twenty-four-draw bar strips; this study uses 4 × 4 grids so individual cells stay easy to compare. Both use Godot's generator and the same reset → request → assign order. The bars show a short prefix, not evidence from which to infer the generator's period. Godot documents reproducible seeded sequences but treats the underlying algorithm as an implementation detail: keep the engine version with a study you need to reproduce.
+ 
+-The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+-
+-### DNA comparison
+-
+-Three frozen ten_print_textile instances share seed 41, with diagonals, orthogonals and blocks. NEXT SEED advances all by three; RESET restores 41. Each cell consumes a choice and a tint draw. Controls share the compact console.
++[Technical companion](/book-review/commons/maps/Random_Definition/technical.md): current placement, controls, state restoration and implementation references. [Godot's generator reference](https://docs.godotengine.org/en/stable/classes/class_randomnumbergenerator.html).

@@ -1,0 +1,238 @@
+{
+  "sequence": "cellularautomata",
+  "maps": [
+    "CA_AgentsCircuits"
+  ],
+  "live_sequence_maps": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+  ],
+  "museum_template": "neue-nationalgalerie-free-plan",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json",
+    "commons/data/map_authored.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/museum/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/map_authored.json": "1fbac1d5df3aaf1db8eae54630dbdcc3414dcd5388d164c9daca71f55c9e7302",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/cellularautomata.json": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd",
+    "tools/em_map_halls.py": "40a11f4a0c9bc19f0ab9a9def6f32bbd91fb8cd087348e9c1107023a0ebacf19",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/CA_AgentsCircuits/map_data.json": "6d541a69376409f179fa526fd7b3364fb6c90bf9e7d964d312e354dc16e72d43"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "336acabc74ef0e875b7521970bcdfc1355f531527bc0df2a8cfeea599990481a",
+    "commons/data/museum/em_plan.json": "336acabc74ef0e875b7521970bcdfc1355f531527bc0df2a8cfeea599990481a",
+    "commons/data/map_authored.json": "f74f8e3e862b03c9d407d2d615db882c93a699e9a17ddc38b30680f15801fb5a"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 183,
+    "commons/data/museum/em_plan.json": 183
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 184,
+    "commons/data/museum/em_plan.json": 184
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [
+      {
+        "map": "CA_Introduction",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_ElementaryRules",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_GameOfLife",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_BeyondBinary",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_ExpandingSpace",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_SoftRules",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_EdgeOfChaos",
+        "before": {
+          "pearl_index": 6,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 7,
+          "pearls_total": 8
+        }
+      }
+    ],
+    "commons/data/museum/em_plan.json": [
+      {
+        "map": "CA_Introduction",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_ElementaryRules",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_GameOfLife",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_BeyondBinary",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_ExpandingSpace",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_SoftRules",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 5,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "CA_EdgeOfChaos",
+        "before": {
+          "pearl_index": 6,
+          "pearls_total": 7
+        },
+        "after": {
+          "pearl_index": 7,
+          "pearls_total": 8
+        }
+      }
+    ]
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "CA_AgentsCircuits",
+      "pearl_index": 6,
+      "room": {
+        "w": 13,
+        "h": 18
+      },
+      "artifacts": 2,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 18,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260919T202636685644Z"
+}

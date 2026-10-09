@@ -1,0 +1,1 @@
+Choose a cube that cannot disappear. Sixteen amber cubes can be drawn; forty-eight grey cubes cannot. Remove one, inspect the surviving address, then replay the run. ROW and COLUMN offer eight choices each while making different places available. Keep a pattern before the set empties: what did the rule decide before chance began?

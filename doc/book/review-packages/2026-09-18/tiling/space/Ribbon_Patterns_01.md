@@ -1,0 +1,27 @@
+# Ribbon_Patterns_01
+
+Authored dimensions: {"width": 25, "depth": 25, "max_height": 4}
+
+![Source plan](Ribbon_Patterns_01.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/Ribbon_Patterns_01/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Ribbon_Patterns_01/map_data.json)
+
+Text: [commons/maps/Ribbon_Patterns_01/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Ribbon_Patterns_01/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 2,4 | `grid_2d_4x4#pin:1#plinth:0#notation:none#show_binary_table:false` | primary | [commons/artifacts/registry/arrays.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/arrays.json) → [algorithms/arrays/grid_2d_4x4.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/arrays/grid_2d_4x4.tscn) |
+| A2 | 7,4 | `grid_3d_4x4x4#pin:1#plinth:0#lesson:layer_pattern` | primary | [commons/artifacts/registry/arrays.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/arrays.json) → [algorithms/arrays/grid_3d_4x4x4.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/arrays/grid_3d_4x4x4.tscn) |
+| A3 | 18,4 | `column_3_z#pin:1#plinth:0` | secondary | [commons/artifacts/registry/arrays.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/arrays.json) → [algorithms/arrays/column_3_z.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/arrays/column_3_z.tscn) |
+| A4 | 18,11 | `row_3_x:270#pin:1#plinth:0` | secondary | [commons/artifacts/registry/arrays.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/arrays.json) → [algorithms/arrays/row_3_x.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/arrays/row_3_x.tscn) |
+| A5 | 5,12 | `xyz_coordinates:90#pin:1#plinth:0` | secondary | [commons/artifacts/registry/commons_artifacts.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/commons_artifacts.json) → [commons/context/XYZcoordinates/xyz_gadget.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/context/XYZcoordinates/xyz_gadget.tscn) |
+| A6 | 6,17 | `grid3d#pin:1#plinth:0` | secondary | [commons/artifacts/registry/grid3d.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/grid3d.json) → [commons/substrates/grid3d/grid3d_substrate.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/substrates/grid3d/grid3d_substrate.tscn) |
+| A7 | 18,17 | `bar_array#pin:1#plinth:0` | secondary | [commons/artifacts/registry/bar_array.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/bar_array.json) → [commons/substrates/bar_array/bar_array_substrate.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/substrates/bar_array/bar_array_substrate.tscn) |
+| A8 | 6,20 | `bar_array_bubble_sort#pin:1#plinth:0` | secondary | [commons/artifacts/registry/bar_array.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/bar_array.json) → [commons/substrates/bar_array/bar_array_substrate.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/substrates/bar_array/bar_array_substrate.tscn) |
+| A9 | 18,20 | `sorting_algorithm_race#pin:1#plinth:0` | secondary | [commons/artifacts/registry/arrays.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/arrays.json) → [algorithms/arrays/sorting_race/sorting_algorithm_race.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/arrays/sorting_race/sorting_algorithm_race.tscn) |
+| A10 | 5,22 | `shelf#pin:1#plinth:0` | secondary | [commons/artifacts/registry/color.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/color.json) → [algorithms/color/grabcolor/shelf.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/color/grabcolor/shelf.tscn) |
+| A11 | 19,22 | `shelf_with_stickers#pin:1#plinth:0` | secondary | [commons/artifacts/registry/color.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/color.json) → [algorithms/color/grabcolor/shelf_with_stickers.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/color/grabcolor/shelf_with_stickers.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

@@ -1,0 +1,92 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Keep the best; let the search move</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><article><h1>Keep the best; let the search move</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Random proposals</li>
+<li>Acceptance probability</li>
+<li>Cooling</li>
+<li>Current versus best</li>
+<li>Repeatable comparison</li>
+</ul>
+<p>Watch the search point change its mind. At the annealing cabinet, some accepted moves raise the displayed cost. The lower region it has already found remains worth keeping even while the current candidate explores elsewhere.</p>
+<h2>What you bring</h2>
+<p>Return to the two-valley function and point marker from Descent. Keep the objective unchanged so the new rule, rather than a new landscape, carries the comparison. Conditionals, saved values and bounded loops are already available.</p>
+<h2>Build inside the museum</h2>
+<p>Propose a nearby address, accept improvements, sometimes accept a worse move, and gradually reduce that willingness. Store current and best separately. The smaller raised marker records the best address found so far.</p>
+<p>Save <code>05_annealing.gd</code> beside the <a href="../../../doc/book/course/formfinding-shared-code.md">complete shared code</a>, on your existing <code>PointStudy</code> Node3D. The inspected working bay is hall-local <code>(16, 0, 7)</code> metres, floor level, upright, unit scale. The museum supplies the floor, camera, light, hands and button scene. The larger artifact remains available for comparison.</p>
+<h2>Complete code — 05_annealing.gd</h2>
+<!-- student-code:05_annealing.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+const Landscape = preload(&quot;landscape.gd&quot;)
+var rng := RandomNumberGenerator.new()
+var current := Vector2(2, 0)
+var best := current
+var temperature := 0.5
+var cooling := 0.98
+var attempts := 0
+var status := &quot;READY&quot;
+var point: Node3D
+var best_point: Node3D
+var readout: Label3D
+
+func _ready() -&gt; void:
+    landscape_surface(true)
+    point = make_point(Vector3.ZERO, false)
+    best_point = make_point(Vector3.ZERO, false)
+    point.scale = Vector3.ONE * 0.45
+    best_point.scale = Vector3.ONE * 0.3
+    readout = caption(&quot;&quot;, Vector3(0, 2.1, 0))
+    button(&quot;PROPOSE&quot;, Vector3(-0.3, 1, -1.65), step_once)
+    button(&quot;RESET&quot;, Vector3(0.3, 1, -1.65), restart)
+    restart()
+
+func restart() -&gt; void:
+    rng.seed = 7
+    current = Vector2(2, 0)
+    best = current
+    temperature = 0.5
+    attempts = 0
+    status = &quot;READY&quot;
+    refresh()
+
+func accepts(change: float, draw: float) -&gt; bool:
+    return change &lt;= 0 or (temperature &gt; 0 and draw &lt; exp(-change / temperature))
+
+func step_once() -&gt; void:
+    if temperature &lt; 0.01 or attempts &gt;= 240:
+        status = &quot;STOPPED&quot;
+        refresh()
+        return
+    var candidate := current + Vector2(rng.randf_range(-0.5, 0.5), rng.randf_range(-0.5, 0.5))
+    var draw := rng.randf()
+    status = &quot;OUTSIDE&quot;
+    if absf(candidate.x) &lt;= 3 and absf(candidate.y) &lt;= 3:
+        var change := Landscape.cost(candidate, true) - Landscape.cost(current, true)
+        status = &quot;REJECTED&quot;
+        if accepts(change, draw):
+            current = candidate
+            status = &quot;ACCEPTED&quot;
+            if Landscape.cost(current, true) &lt; Landscape.cost(best, true):
+                best = current
+    attempts += 1
+    temperature *= cooling
+    refresh()
+
+func refresh() -&gt; void:
+    point.position = Landscape.plot(current, true)
+    best_point.position = Landscape.plot(best, true) + Vector3.UP * 0.12
+    readout.text = &quot;%s | attempt %d | T %.3f\nCurrent %.3f / best %.3f\nSmall raised point keeps the best address&quot; % [status, attempts,
+        temperature, Landscape.cost(current, true), Landscape.cost(best, true)]
+</code></pre>
+<h2>Read the operation</h2>
+<p>RandomNumberGenerator supplies the proposals. seed = 7 restarts its sequence for repeatable comparisons in this engine version. randf_range(-0.5, 0.5) chooses each coordinate offset; randf() supplies the acceptance draw. This is a first use of random sampling, before the later Randomness sequence studies its varieties.</p>
+<p>change is candidate cost minus current cost. A nonpositive change is accepted. For a positive change and positive temperature, exp(-change / temperature) gives an acceptance probability between zero and one. Compare the random draw with that threshold. At change 0.05 and temperature 0.2, the threshold is about 0.779: a draw of 0.7 accepts and 0.9 rejects.</p>
+<p>Current may become worse. Best only changes when the accepted current cost improves on it. Cooling multiplies temperature by 0.98 after each attempt, including rejected and out-of-frame proposals. The counter counts attempts, not accepted moves. Below 0.01, or at 240 attempts, the search stops. A reset restores the seed, both addresses, temperature and counter.</p>
+<h2>Predict, then change</h2>
+<p>Keep the initial state and proposal rule. Set cooling to 0.9 and compare with 0.98. Predict which schedule stops sooner, then record both attempt counts and best costs. A faster cooling schedule gives fewer opportunities; one result does not establish that every slower run will be better.</p>
+<h2>Build another experiment</h2>
+<p>Add counters for accepted improvements, accepted worse moves and rejected in-frame proposals. Define where equal-cost moves belong. Verify that their sum plus out-of-frame proposals equals the attempt count. Run several distinct seeds and keep a small table of best costs. Explain why keeping a best record is different from forcing current to move only downhill.</p>
+<h2>Carry onward</h2>
+<p>A stopping rule finishes a search; it does not decide whether its result serves your purpose. Forge makes that decision into visible code.</p>
+<h2>Model notes</h2>
+<p>The installed cabinet uses another objective and a richer adaptive algorithm, including occasional forced hops and reheating. This study isolates basic acceptance and cooling on the earlier landscape. Temperature here is an algorithmic parameter, not a measured material temperature. Finite runs provide no guarantee of the global optimum.</p></article></main>

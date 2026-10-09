@@ -1,0 +1,230 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_AgentsCircuits · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_AgentsCircuits">← Tutorial lineage</a></p><h1>CA AgentsCircuits</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_AgentsCircuits/final.md">Raw captured source</a></p><pre># The same pattern, different work
+
+&lt;!-- @ca_rule_explorer --&gt;
+
+Can two constructions resemble one another without doing the same calculation?
+
+Press 90 on the explorer’s CA RULES panel, then RST to return to the central seed. Press STEP a few times. Follow the triangular gaps that develop between occupied cells. Choose a larger triangle and look for smaller ones arranged within its boundary. Add rows, up to fifteen steps, when you need more to compare; at the sixteenth the pattern&#x27;s two diagonal edges meet around the ring and every new row from then on is empty.
+
+Each new cell is still calculated from a local neighbourhood. No instruction tells the display to draw a large triangle and then decorate it with smaller triangles. The repeated structure becomes visible through many applications of the rule.
+
+Choose one triangular gap in the rule display. The same rows lie enlarged on the floor between the desk and the pyramid. Follow them away from the desk: each row takes one more step in the calculation. Walk into a dark triangle. The cells are empty; the floor still holds you. Here, absence is something drawn beneath your feet.
+
+Keep a few occupied cells around the gap in mind, so there is more to recognise than the outline. Carry that small arrangement to the pyramid. Move sideways. The cubes hide and uncover one another; the floor image stays flat. Where would your remembered gap fit, and would your body fit there too? If one part refuses the match, stay with that part before choosing a different resemblance. We have found something the shared appearance did not tell us.
+
+![The explorer’s stored history spreads across the floor toward the recursive cube construction.](images/ca-pattern-correspondence.png)
+
+&lt;!-- @sierpinski_pyramid --&gt;
+
+Now turn to the Sierpinski pyramid. Find a small pyramid and compare where its neighbours sit. Then step back and look for the same arrangement at the next scale. This construction repeats its arrangement recursively at half the spacing: four copies at the lower corners, one at the apex and one more directly above it, which lifts the top into a spire. The cubes do not shrink with the spacing, so neighbouring copies overlap. Its procedure begins with a shape and a copying arrangement, rather than a row whose next state must be calculated. The cubes inherit a position in a copying arrangement; they do not consult a neighbourhood to decide their next state.
+
+The resemblance is useful because it gives you a question to test. At which scales do gaps correspond? Which relations are altered by moving from a flat history to a volume? You need not force every visible feature into a match. A failed correspondence tells you where the analogy stops.
+
+The row&#x27;s next state and the pyramid&#x27;s smaller copies can lead the eye towards a related form. The pleasure of recognising it gives us a reason to compare their making. A name for the resemblance can accompany that inquiry without finishing it.[^ca-resemblance]
+
+Keep the pyramid fixed and press SEED at the desk. Two adjacent cells now begin the history. Build a few rows again. Where do the familiar triangular relations return, and do they ever overlap? Press SEED once more to return to the single cell. How much of the resemblance belonged to the rule, and how much to the beginning we gave it?
+
+Before leaving the desk, turn RULE until the plate reads 222 and step from the single seed. A filled triangle spreads until its edges meet around this ring. One dark address remains; the rest has stopped changing. Try 190, then the 30 and 110 buttons. Follow a small patch rather than the whole picture. Does it return, travel, disappear? How many rows would you need before trusting that description?
+
+Stephen Wolfram proposed four broad kinds of behaviour: settling into uniformity, repeating, appearing random, and sustaining local structures that interact.[^ca-classes] These names make differences easier to discuss. Our short history, from one chosen seed, cannot settle how a rule behaves from other beginnings. Nor does the plate&#x27;s “Turing Complete” turn the picture into a demonstrated computer. We can let the name give us another task.
+
+&lt;!-- @ --&gt;
+
+We will return to the pyramid&#x27;s way of making in Fractals. First, two almost matching volumes will let us follow one changed value through the same procedure. We have asked how similar appearances can be made differently. What happens when we keep the making the same and alter one small part of the beginning?
+
+[^ca-resemblance]: The explorer&#x27;s plate captions Rule 90 “Sierpiński” and Rule 110 “Turing Complete”. This comparison earns the first word only as a question about resemblance. The second is a theorem rather than a caption: Matthew Cook proved in 2004 that Rule 110 can carry out any computation ([“Universality in elementary cellular automata”](https://www.complex-systems.com/abstracts/v15_i01_a01/), *Complex Systems* 15), by reading its persisting structures as signals and their collisions as logic — an account of states, operations and results that no organised appearance supplies on its own. The Rule 110 display in the first hall is where to begin asking for it.
+
+[^ca-classes]: Stephen Wolfram, [“Universality and complexity in cellular automata”](https://doi.org/10.1016/0167-2789(84)90245-8), *Physica D* 10 (1984). The classification concerns broad behaviour across initial conditions; his [later account](https://www.wolframscience.com/nks/p231--four-classes-of-behavior/) illustrates it from random beginnings. A finite, single-seed run supplies an example to investigate, not a proof of a class.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_AgentsCircuits/tutorial.md">Raw captured source</a></p><pre># CA Agents Circuits
+
+Wireworld. Cells can be empty, electron head, electron tail, or conductor.
+
+Define cell states.
+
+```gdscript
+enum Cell { EMPTY, CONDUCTOR, HEAD, TAIL }
+```
+
+Four states. Empty never changes; the other three cycle in specific ways.
+
+Apply the Wireworld rule.
+
+```gdscript
+func wireworld_rule(current: int, neighbours: Array) -&gt; int:
+    match current:
+        Cell.EMPTY: return Cell.EMPTY
+        Cell.HEAD: return Cell.TAIL
+        Cell.TAIL: return Cell.CONDUCTOR
+        Cell.CONDUCTOR:
+            var head_count: int = 0
+            for n in neighbours:
+                if n == Cell.HEAD: head_count += 1
+            if head_count == 1 or head_count == 2:
+                return Cell.HEAD
+            return Cell.CONDUCTOR
+    return current
+```
+
+HEAD decays to TAIL; TAIL to CONDUCTOR; CONDUCTOR ignites when exactly 1 or 2 neighbours are HEAD. This rule supports signal propagation and logic.
+
+Draw a wire.
+
+```gdscript
+func draw_wire(start: Vector2i, end: Vector2i) -&gt; void:
+    var current := start
+    while current != end:
+        grid[current.y][current.x] = Cell.CONDUCTOR
+        var diff := end - current
+        if abs(diff.x) &gt; abs(diff.y):
+            current.x += sign(diff.x)
+        else:
+            current.y += sign(diff.y)
+    grid[end.y][end.x] = Cell.CONDUCTOR
+```
+
+Bresenham-style wire drawing. The learner can paint conductors with a controller.
+
+Inject a signal.
+
+```gdscript
+func inject_electron(position: Vector2i) -&gt; void:
+    grid[position.y][position.x] = Cell.HEAD
+```
+
+A single HEAD cell. The signal propagates along any connected conductor.
+
+Build an AND gate.
+
+```gdscript
+const AND_GATE := [
+    [C, C, C, C, C, C, C],
+    [C, 0, 0, 0, 0, 0, C],
+    [C, 0, 0, 0, 0, 0, C],
+    [C, C, C, C, C, C, C],
+]
+```
+
+Two input wires converge. When both carry signals, the output wire ignites. Single inputs stall.
+
+Test the gate.
+
+```gdscript
+func test_gate(gate_pattern: Array, inputs: Dictionary) -&gt; int:
+    place_pattern(gate_pattern, 0, 0)
+    for input_pos in inputs:
+        if inputs[input_pos]:
+            inject_electron(input_pos)
+    for _i in 20:  # run for 20 generations
+        step()
+    return read_output()
+```
+
+Place the gate; inject signals; run; read the output. Boolean logic via cellular automata.
+
+Build a clock.
+
+```gdscript
+const CLOCK_RING := [
+    [0, C, C, C, 0],
+    [C, 0, 0, 0, C],
+    [C, 0, 0, 0, C],
+    [C, 0, 0, 0, C],
+    [0, C, C, C, 0],
+]
+```
+
+A closed loop of conductors. A HEAD placed on the ring circulates forever, producing periodic pulses.
+
+You can now implement Wireworld, draw wires, inject signals, build logic gates, and test them via simulation. CA_EdgeOfChaos extends into classification.
+
+Reset the grid to random.
+
+```gdscript
+func reset_random(density: float = 0.3) -&gt; void:
+    for y in size.y:
+        for x in size.x:
+            grid[y][x] = 1 if randf() &lt; density else 0
+```
+
+Useful for exploring the rule&#x27;s behaviour from different starting conditions.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_AgentsCircuits/technical.md">Raw captured source</a></p><pre># One history, two receivers; one resemblance, two procedures
+
+The active hall compares `ca_rule_explorer` with `sierpinski_pyramid`. Its stable ID, CA_AgentsCircuits, retains an older circuit proposal. Wireworld and CellularAutomata3DStacked are not installed in this map. Their earlier notes and code examples remain in [wireworld-proposal.md](wireworld-proposal.md), as development material.
+
+## Start with the same state
+
+The explorer’s `#study:neighbours#rule:90` configuration begins paused with 32 cells, one central occupied cell, and space for 24 stored rows. The usual panel selects a rule; STEP applies one synchronous neighbourhood update. SEED switches between one cell and two adjacent cells, resets the history and pauses. RST replays the selected seed; it does not override that choice.
+
+The actual evaluator in `commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd` is:
+
+```gdscript
+var neighborhood = (int(left) &lt;&lt; 2) | (int(center) &lt;&lt; 1) | int(right)
+return (rule &gt;&gt; neighborhood) &amp; 1 == 1
+```
+
+Indices wrap. From the single seed under Rule 90, generations 0–15 display triangular relationships. At generation 16 the two expanding edges meet on the 32-cell ring and cancel. Subsequent rows are empty. This is a finite periodic demonstration, not an indefinitely growing triangle.
+
+## Let the history occupy the comparison space
+
+This map alone adds `#room:comparison`. `neighbour_study.gd` installs `comparison_floor.gd`, a read-only receiver with 32 × 24 available sites at 0.18 m pitch. It covers 5.76 × 4.32 m between the desk and the pyramid. At most 768 small tiles are drawn with one MultiMesh. Unused history rows have zero-size transforms.
+
+The desk stores newest first. The floor reverses that stored order so walking away from the desk follows the oldest retained row toward the newest. After 24 rows it displays a moving window, not the complete history. The caption gives the actual retained generation range. Colours come from the same explorer values. Rule, seed, reset, step and run remain the existing controls; the receiver has no rule evaluator, clock, random input, buttons or collision.
+
+A dark cell is a drawn zero, not a hole cut through the museum floor. Walking into it introduces a comparison of representation and bodily support without changing the automaton’s meaning.
+
+## Compare making, not just outlines
+
+The pyramid uses `algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd`. Its inherited recipe makes six calls at each depth: four lower corners and two upper placements. Depth four gives 6⁴ = 1,296 cube instances. Descendant spacing halves while leaf size stays fixed. Some cubes overlap. The hall keeps the existing .42 scale, plinth and placement; the optional later comparison controls are not enabled here.
+
+Changing the explorer’s seed changes its history and the floor image. It does not rebuild the pyramid. A related triangular appearance does not establish the same computation, topology, or traversable openings. Neither this finite image nor the pyramid establishes computational universality; that requires a separate construction and argument.
+
+## Evidence
+
+The native museum probe and before/after photographs are in `doc/book/iterations/2026-09-25-ca-pattern-correspondence/`. Checks cover actual mouse-ray controls, an independent Pascal-parity expectation for the first sixteen Rule 90 rows, exact desk/floor correspondence, reset and scrolling, preserved pyramid transforms, and controlled CharacterBody walking. Headset comfort and learner understanding remain to be tested.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_AgentsCircuits/intent.md">Raw captured source</a></p><pre># The same pattern, different work
+
+Keep the comparison between local state updates and recursive copying. The explorer and pyramid are both primary. The enlarged history is another receiver of the existing explorer, not a third algorithm or a new control station.
+
+The visitor builds a short Rule 90 history, steps onto its enlarged triangular gaps, and approaches the pyramid carrying a remembered arrangement. A blank in the floor image still supports the body. Around the cubes, moving sideways changes occlusion and the apparent openings. Recognition starts the investigation; it does not settle whether the two constructions work alike.
+
+Keep the pyramid fixed while changing the explorer’s seed. The next hall can reverse the comparison: hold a procedure fixed and change one small part of its beginning. The recursive recipe returns in Fractals.
+
+The older Wireworld circuit proposal remains in wireworld-proposal.md. Develop a real circuit encounter before presenting it as an installed lesson. The earlier critical essay is retained there too as speculative research. Current critical.md follows the installed comparison; final.md is the visitor-facing account.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_AgentsCircuits/critical.md">Raw captured source</a></p><pre># What does a resemblance let us assume?
+
+The explorer gives a cell its next state through a neighbourhood. The pyramid places another copy through a recursive arrangement. Their triangular gaps invite the same eye. A likeness can bring us close enough to notice that the procedures differ.
+
+The floor adds another difference. We can stand in a dark triangle without falling. Its emptiness belongs to the recorded row; support belongs to the museum floor. At the pyramid, a sideways movement changes which cubes hide one another. The same word, *gap*, has not guaranteed the same relation to a body.
+
+Recognition is useful, but it can finish the encounter too early. Calling both works Sierpiński may let a shared name stand in for the comparison. We could ask instead what the name helped us see, and what became harder to notice once the match seemed settled. Keeping a failed correspondence in view gives it a chance to teach us something.
+
+There is a queer possibility in that unfinished likeness: relation without requiring one body to reproduce another&#x27;s conditions. The flat history and the overlapping copies can belong in the same inquiry while refusing a complete match. This is a way to arrange and attend to them. No transition rule certifies it as a property of the pattern.
+
+Change the seed while leaving the pyramid fixed. Some of the resemblance returns; some depends on the particular beginning we supplied. The visitor takes part in selecting the evidence. That selection should remain available to question, including when a familiar silhouette makes the result feel inevitable.
+
+“Turing Complete” on a plate names a mathematical result about Rule 110. It does not show an encoded task, an input, or how to read its answer. A circuit encounter could make those relations available to inspect. The present hall asks a prior question: how much of our account came from following the making, and how much from recognising the image?
+
+The earlier Wireworld essay is retained whole in [wireworld-proposal.md](wireworld-proposal.md), alongside its proposed technical lesson. It contains speculative links to thrownness, performativity, agential realism and QFEP. Those links need their own arguments and encounters; they are not verified by a neighbour count. The current hall retains both the explorer and pyramid as primary works.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_AgentsCircuits/artifacts.md">Raw captured source</a></p><pre># CA_AgentsCircuits — current encounters
+
+Two authored primary artifacts remain in their existing locations.
+
+| Artifact | Placement | Work in the encounter |
+| --- | --- | --- |
+| ca_rule_explorer | Cell (3,5), 180°, 1.04 m | A held 32-cell Rule 90 history; original rule, seed and time controls; the same stored rows enlarged on the floor through `room:comparison`. |
+| sierpinski_pyramid | Cell (9,12), scale .42, plinth .25 m | A fixed recursive construction to compare with the remembered gaps. Six calls per level, four levels; it stays unchanged when the explorer’s seed changes. |
+
+The floor is a read-only part of ca_rule_explorer. It introduces no new collision, rule, clock or control panel. Decorative museum furnishing is retained. Wireworld and CellularAutomata3DStacked belong to the earlier proposal saved in wireworld-proposal.md, not the current placement inventory.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_AgentsCircuits/summary.md">Raw captured source</a></p><pre># CA Agents Circuits — Summary
+
+CA_AgentsCircuits is the twelfth and final map in the Cellular Automata sequence. It stages Wireworld — a four-state cellular automaton designed to simulate digital logic — and hands the learner an open editor for defining their own rules.
+
+A Wireworld circuit takes up the main floor. Cells can be empty, conductor, electron head, or electron tail. Electrons travel along conductor paths according to a short rule: a head becomes a tail, a tail becomes a conductor, and a conductor becomes a head when exactly one or two of its neighbours are heads. That short rule supports logic gates, delay lines, and clocks; a small demonstration builds an AND, an OR, and a clocked ring, and wires them into a visible binary counter.
+
+Along one wall, a Wolfram CA explorer lets the learner define any rule over any neighbourhood. Sliders set the state count, the neighbourhood size, and the individual rule entries. Running the rule on a small canvas shows its behaviour in real time, and the learner can save configurations to a small gallery.
+
+Within the sequence, this map is the synthesis and the sandbox. The sequence has argued that simple local rules can compute anything; Wireworld makes that argument concrete, and the explorer invites the learner to find the next example.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_AgentsCircuits/blurb.md">Raw captured source</a></p><pre>Wireworld: cells can be empty, electron head, electron tail, or conductor. Electrons flow along conductor paths, enabling logic gates, circuits, computers. A cellular automaton that can simulate computers. Turing completeness in four colors.
+
+Langton&#x27;s ant: a single agent on a grid, flipping cells as it walks, turning based on what it finds. Not parallel update but sequential. Simple rules, complex emergent highways. The ant builds order from apparent chaos after thousands of steps. Patience reveals pattern.
+</pre></section></body></html>

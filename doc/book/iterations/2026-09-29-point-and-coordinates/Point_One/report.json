@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "appearance hall has absent, visible, solid and pedestal",
+      "passed": true
+    },
+    {
+      "name": "held point belongs to next hall",
+      "passed": true
+    },
+    {
+      "name": "wall switch placed",
+      "passed": true
+    },
+    {
+      "name": "sun uses existing museum floor without added plates",
+      "passed": true
+    },
+    {
+      "name": "sun casts directional shadows",
+      "passed": true
+    },
+    {
+      "name": "sun lights floor but only study bodies cast its shadows",
+      "passed": true
+    },
+    {
+      "name": "global lights neither light study bodies nor cast their shadows",
+      "passed": true
+    },
+    {
+      "name": "empty station contains no sphere",
+      "passed": true
+    },
+    {
+      "name": "visible and solid sphere radii match",
+      "passed": true
+    },
+    {
+      "name": "visible has correct collision",
+      "passed": true
+    },
+    {
+      "name": "solid has correct collision",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sun-on",
+      "passed": true
+    },
+    {
+      "name": "pointer press removes sun",
+      "passed": true
+    },
+    {
+      "name": "fill and sphere remain",
+      "passed": true
+    },
+    {
+      "name": "physical boundary remains with sun removed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sun-off",
+      "passed": true
+    },
+    {
+      "name": "second pointer press restores sun",
+      "passed": true
+    },
+    {
+      "name": "near-hand entry uses same switch",
+      "passed": true
+    },
+    {
+      "name": "wall switch has supported approach",
+      "passed": true
+    },
+    {
+      "name": "door retained",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: wall-switch",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: point-corridor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pedestal",
+      "passed": true
+    },
+    {
+      "name": "unloading restores shared light and floor masks",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "switch_world": [
+      10.9499998092651,
+      0.0,
+      6.5
+    ]
+  },
+  "passed": true,
+  "room": "Point_One",
+  "scope": "Real museum render; native pointer and area event routes, pickup, coordinates, collision, basin and lighting. No headset or learner acceptance claimed."
+}

@@ -1,0 +1,582 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SwarmIntelligence_Boids_Algorithm · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SwarmIntelligence_Boids_Algorithm">← Tutorial lineage</a></p><h1>SwarmIntelligence Boids Algorithm</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/final.md">Raw captured source</a></p><pre># Three ways to be near
+
+&lt;!-- @boid_manager --&gt;
+
+Something is already through the room when you arrive. A hundred grey prisms, each about the length of an arm, moving at anything between a run and a sprint — through the walls, through the floor, through you. They came in through the wall: they were dealt into a box twenty metres wide inside a hall thirteen across, half the school began under the floor, and some of it is outside the hall now. Hold out your hand. Nothing turns. Not one prism changes its heading for a body, and none of them has ever met a wall. The only edge they answer to is a box fifty metres on a side, and they feel it only in its last five.[^containment]
+
+That is the encounter, and it is a refusal. Whatever holds this flock together, it is not the room and it is not you.
+
+&lt;!-- @flocking_controls --&gt;
+
+Go to the panel with the sliders. A smaller flock lives there, thirty of them in a box you can lean over, eighty centimetres wide and sixty high. Here something does happen at the edge, and it is not a wall either: a boid that leaves the right side is at once on the left. Watch one cross. The neighbours it was flying with are now on the far side of the box, and it can no longer see them — its sight reaches twenty centimetres and the box is eighty wide. Its arrows swing. The rule did not change; who is inside the rule did.
+
+Find the boid with the yellow ring. Its three arrows are the three things it is being asked to do. Red is separation, the push away from anyone too close. Blue is alignment, the turn towards the headings nearby. Green is cohesion, the pull towards the middle of the local group. They need not agree. Choose an instant when two of them disagree and say the disagreement in ordinary words: too close here, group centre there, neighbours heading elsewhere.
+
+Now move one slider and leave the other two alone. SEP first. Watch the arrow at your ringed boid before you look for a change in the whole flock; a small local change is real even when the population stays recognisably flock-like throughout. Return the slider to where it was, then try ALIGN, then COH. One change at a time is what lets a local response be connected to the population&#x27;s movement. Then keep the three weights where they are and move RADIUS. The same three requests, the same weights, and a different flock — because a different set of neighbours is now inside each boid&#x27;s calculation. Before asking what the flock wants, ask who each agent is able to see.
+
+Here is the rule you have been watching. Each boid, on its own, looks at the neighbours inside its radius and adds up three requests, each multiplied by a weight.[^cost] It moves along the sum. A slider changes the weight of one request for everyone; it does not tell the flock anything. The large moving shape is what those many small calculations look like when they meet.
+
+Craig Reynolds set the three down in 1987 and called the agents boids: separation, alignment, cohesion.[^1] The name arrives late here on purpose. You have already watched all three disagree, and you have already seen that the same three words make a different animal when the radius changes.
+
+&lt;!-- @boids_aquarium --&gt;
+
+Now ask where the rule ends, because in this hall it ends three different ways. The tank in the middle is a metre of glass, five panes and no lid. Nothing leaves through the open top. The fish turn back at a ceiling five centimetres below the rim that is not there: the boundary is in the numbers, and the glass agrees with it on five sides only. At the panel, the edge is a seam, and the seam is where a boid loses its neighbours without either of them moving. In the open flock the boundary is nearly four times wider than the hall, so the rule&#x27;s edge is never where the architecture&#x27;s is, and there is no term in the rule for you at all. Three flocks, one rule, three edges, and not one of the edges belongs to the rule.
+
+Alignment is not consent, and cohesion is not a complete account of belonging. These agents have no way to refuse a relation, remember harm or ask another agent for space. The model makes a few geometrical relationships legible because it omits many other kinds.
+
+Try letting separation win for a while. Instead of judging every dispersed flock as failed, ask what the extra distance lets you see. Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight, a gas. Put them back and take SEP to nothing: they close on their middle and stay there, a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement. When you want to compare, return the slider rather than pressing RESET: the panel&#x27;s RESET deals a fresh scatter, not the same one, while the tank&#x27;s RESET deals the same scatter every time. Two buttons with one name, and only one of them gives you back your starting point. It gives you back the start and nothing after it. Run the tank twice from that scatter and time the schools: no two frames are the same length, a flock magnifies any difference it is given, and within five seconds the two runs have nothing in common. Lorenz found this in 1961 by retyping a number to three decimals instead of six.[^lorenz]
+
+![Two runs of the tank from one scatter: identical steps stay identical, frames of uneven length part within seconds](/book-review/doc/book/figures/swarmintelligence/tank-two-runs-part.png)
+
+*The measurement behind the sentence. From one seeded scatter, thirty fish were run twice: once with identical fixed steps, once with frames that differ in length by up to a fifth. The widest separation of the same fish after one step, a sixth of a second, one second, five seconds and twenty: two millimetres, seven, sixteen centimetres, over a metre, the width of the tank.*
+
+&lt;!-- @ --&gt;
+
+The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.
+
+[^lorenz]: Measured with `commons/testing/probe_boids_tank_divergence.gd`: from one seeded scatter, two runs with identical fixed steps stay identical to the byte for twenty seconds, and two runs whose frames differ in length by up to a fifth part by two millimetres after one step, sixteen centimetres after one second and more than a metre, the width of the tank, after five. Edward Lorenz, &quot;Deterministic Nonperiodic Flow&quot; (1963), and the 1961 rerun typed to three decimals that led to it.
+
+[^1]: Craig W. Reynolds, &quot;Flocks, Herds, and Schools: A Distributed Behavioral Model&quot;, *Computer Graphics* 21(4), SIGGRAPH 1987. The three rules and the word &quot;boids&quot; are his.
+
+[^containment]: The push begins at zero on the margin and reaches its full strength at the wall, so a boid meets the box gradually; Reynolds called this containment. *Nature of Code* builds it as a desire to move away from the wall that is switched off everywhere else, because a desire for zero speed would be a brake, not an absence.
+
+[^cost]: To know who is inside its radius, each boid measures its distance to every other, so a hundred boids make nearly ten thousand measurements a tick. The tank cheats honestly: it sorts its fish into cells and asks only the neighbouring cells. Flocks of thousands exist only that way.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/tutorial.md">Raw captured source</a></p><pre># Boids Algorithm
+
+Reynolds&#x27; three rules. Separation, alignment, cohesion.
+
+Define a boid.
+
+```gdscript
+class_name Boid
+
+var position: Vector3
+var velocity: Vector3
+
+func random_boid(bounds: AABB, max_speed: float) -&gt; Boid:
+    var b := Boid.new()
+    b.position = Vector3(
+        randf_range(bounds.position.x, bounds.end.x),
+        randf_range(bounds.position.y, bounds.end.y),
+        randf_range(bounds.position.z, bounds.end.z)
+    )
+    b.velocity = Vector3(randfn(0, 1), randfn(0, 1), randfn(0, 1)).normalized() * max_speed
+    return b
+```
+
+Position and velocity. No acceleration — the steering forces drive the velocity directly.
+
+Compute separation.
+
+```gdscript
+@export var separation_radius: float = 1.0
+
+func separation(self_boid: Boid, flock: Array) -&gt; Vector3:
+    var steer := Vector3.ZERO
+    var count: int = 0
+    for other in flock:
+        if other == self_boid: continue
+        var distance: float = self_boid.position.distance_to(other.position)
+        if distance &lt; separation_radius and distance &gt; 0:
+            var away: Vector3 = (self_boid.position - other.position).normalized() / distance
+            steer += away
+            count += 1
+    if count &gt; 0: steer /= count
+    return steer
+```
+
+Push away from close neighbours. Weighted by inverse distance — closer neighbours repel harder.
+
+Compute alignment.
+
+```gdscript
+@export var perception_radius: float = 3.0
+
+func alignment(self_boid: Boid, flock: Array) -&gt; Vector3:
+    var avg_velocity := Vector3.ZERO
+    var count: int = 0
+    for other in flock:
+        if other == self_boid: continue
+        if self_boid.position.distance_to(other.position) &lt; perception_radius:
+            avg_velocity += other.velocity
+            count += 1
+    if count == 0: return Vector3.ZERO
+    return (avg_velocity / count - self_boid.velocity).normalized()
+```
+
+Match the average velocity of nearby boids. The boid turns toward the flock&#x27;s shared direction.
+
+Compute cohesion.
+
+```gdscript
+func cohesion(self_boid: Boid, flock: Array) -&gt; Vector3:
+    var centre := Vector3.ZERO
+    var count: int = 0
+    for other in flock:
+        if other == self_boid: continue
+        if self_boid.position.distance_to(other.position) &lt; perception_radius:
+            centre += other.position
+            count += 1
+    if count == 0: return Vector3.ZERO
+    return ((centre / count) - self_boid.position).normalized()
+```
+
+Move toward the centre of nearby boids. The flock stays together.
+
+Combine the three forces.
+
+```gdscript
+@export var separation_weight: float = 1.5
+@export var alignment_weight: float = 1.0
+@export var cohesion_weight: float = 1.0
+
+func compute_steering(self_boid: Boid, flock: Array) -&gt; Vector3:
+    return (
+        separation(self_boid, flock) * separation_weight +
+        alignment(self_boid, flock) * alignment_weight +
+        cohesion(self_boid, flock) * cohesion_weight
+    )
+```
+
+Three rules, three weights. Tuning the weights changes the flock&#x27;s character.
+
+Update all boids.
+
+```gdscript
+@export var max_speed: float = 4.0
+
+func _physics_process(delta: float) -&gt; void:
+    for boid in flock:
+        var steering: Vector3 = compute_steering(boid, flock)
+        boid.velocity += steering * delta
+        boid.velocity = boid.velocity.limit_length(max_speed)
+        boid.position += boid.velocity * delta
+```
+
+Each boid computes its steering independently. O(N²) for a naive implementation; spatial partitioning reduces this.
+
+You can now build boids, compute Reynolds&#x27; three rules, combine them with weights, and update the flock. SwarmIntelligence_Agent_Based_Modeling_ABM extends into stateful agents.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/technical.md">Raw captured source</a></p><pre># Each boid sees only neighbors, applies three forces, and a flock emerges across the open arena
+
+Physarum agents coordinated through the environment. They deposited trail, sensed trail, and the grid carried every message. No agent ever perceived another agent. The medium was the channel — stigmergy, indirect communication, the world as shared memory.
+
+Boids break that indirection. A boid perceives its neighbors directly. It reads their positions and velocities without any intermediary substance. The coordination channel shifts from environment to peer — from trail on a grid to vectors between agents. The three rules Craig Reynolds published in 1987 formalize this: separation, alignment, cohesion.
+
+Each computes a steering force from the local neighborhood. The weighted sum of those forces drives the boid&#x27;s velocity. No leader assigns headings. No global planner routes the flock. Each individual runs the same three calculations, and the collective motion — wheeling, splitting, reforming — is a side effect.
+
+The shift matters. Physarum&#x27;s trail persisted — agents communicated across time. Boids communicate across space but not across time. A boid has no memory of where its neighbors were last frame. It reacts to the present configuration every frame, from scratch.
+
+The flock&#x27;s coherence is maintained not by accumulated history but by continuous, instantaneous mutual adjustment. Remove the trail map. Replace it with neighbor queries. The computation changes. The principle — local rules producing global order — stays.
+
+## The Boid
+
+A boid is a position, a velocity, and perception radii. Nothing else.
+
+```gdscript
+var positions: PackedVector3Array
+var velocities: PackedVector3Array
+var accelerations: PackedVector3Array
+
+var num_boids: int = 200
+var max_speed: float = 8.0
+var max_force: float = 4.0
+
+func _ready() -&gt; void:
+    positions.resize(num_boids)
+    velocities.resize(num_boids)
+    accelerations.resize(num_boids)
+
+    for i in num_boids:
+        positions[i] = Vector3(
+            randf_range(-20.0, 20.0),
+            randf_range(2.0, 10.0),
+            randf_range(-20.0, 20.0))
+        velocities[i] = Vector3(
+            randf_range(-1.0, 1.0),
+            randf_range(-0.5, 0.5),
+            randf_range(-1.0, 1.0)).normalized() * max_speed * 0.5
+        accelerations[i] = Vector3.ZERO
+```
+
+Three parallel arrays — structure-of-arrays, same layout as the Physarum colony. Positions scatter across the arena volume. Velocities start at half max speed in random directions. Accelerations reset to zero each frame before forces accumulate. The boid carries no heading angle — velocity is the heading. Direction and speed are one vector, not two separate quantities.
+
+The `boids_aquarium` artifact in this map spawns these arrays and renders each boid as a small oriented mesh. The mesh&#x27;s forward axis aligns with the velocity vector using `look_at` or a basis rotation — the visual pointing matches the physical heading without any separate facing variable. Velocity is truth. The mesh follows.
+
+## Neighbor Queries: Who Is Nearby
+
+Before computing any steering force, each boid must identify its neighbors. A neighbor is any other boid within a specified perception radius. The naive approach compares every pair.
+
+```gdscript
+var perception_radius: float = 10.0
+
+func get_neighbors(i: int, radius: float) -&gt; PackedInt32Array:
+    var neighbors: PackedInt32Array = PackedInt32Array()
+    var radius_sq: float = radius * radius
+
+    for j in num_boids:
+        if j == i:
+            continue
+        var offset: Vector3 = positions[j] - positions[i]
+        if offset.length_squared() &lt; radius_sq:
+            neighbors.append(j)
+
+    return neighbors
+```
+
+O(n^2) per frame. For 200 boids, that is 39,800 distance checks — fast enough. For 2,000 boids, it becomes 3,998,000 — too slow. The `boid_manager` artifact addresses this with spatial partitioning. A uniform grid divides the arena into cells. Each boid registers in the cell containing its position. Neighbor queries check only the current cell and its 26 adjacent cells in 3D (or 8 in 2D). The cost drops from O(n^2) to approximately O(n * k) where k is the average number of boids per cell neighborhood.
+
+```gdscript
+var cell_size: float = 10.0
+var grid: Dictionary = {}
+
+func update_grid() -&gt; void:
+    grid.clear()
+    for i in num_boids:
+        var key: Vector3i = Vector3i(
+            int(floor(positions[i].x / cell_size)),
+            int(floor(positions[i].y / cell_size)),
+            int(floor(positions[i].z / cell_size)))
+        if not grid.has(key):
+            grid[key] = PackedInt32Array()
+        grid[key].append(i)
+
+func get_neighbors_grid(i: int, radius: float) -&gt; PackedInt32Array:
+    var neighbors: PackedInt32Array = PackedInt32Array()
+    var radius_sq: float = radius * radius
+    var center: Vector3i = Vector3i(
+        int(floor(positions[i].x / cell_size)),
+        int(floor(positions[i].y / cell_size)),
+        int(floor(positions[i].z / cell_size)))
+
+    for dx in range(-1, 2):
+        for dy in range(-1, 2):
+            for dz in range(-1, 2):
+                var key: Vector3i = center + Vector3i(dx, dy, dz)
+                if grid.has(key):
+                    for j in grid[key]:
+                        if j == i:
+                            continue
+                        if (positions[j] - positions[i]).length_squared() &lt; radius_sq:
+                            neighbors.append(j)
+
+    return neighbors
+```
+
+The cell size should match or exceed the largest perception radius. Smaller cells waste time checking empty neighbors. Larger cells include too many distant boids. The grid rebuilds every frame — boids move fast enough that caching across frames introduces stale data. Rebuild is cheap. Stale neighbors are not.
+
+## Separation: Avoid Crowding
+
+Separation prevents collision. Each boid computes a vector pointing away from neighbors that are too close — within a short separation radius, tighter than the general perception radius.
+
+```gdscript
+var separation_radius: float = 4.0
+var separation_weight: float = 2.5
+
+func compute_separation(i: int, neighbors: PackedInt32Array) -&gt; Vector3:
+    var steer: Vector3 = Vector3.ZERO
+    var count: int = 0
+
+    for j in neighbors:
+        var offset: Vector3 = positions[i] - positions[j]
+        var dist: float = offset.length()
+        if dist &lt; separation_radius and dist &gt; 0.001:
+            steer += offset.normalized() / dist
+            count += 1
+
+    if count &gt; 0:
+        steer /= float(count)
+        steer = steer.normalized() * max_speed
+        steer -= velocities[i]
+        steer = steer.limit_length(max_force)
+
+    return steer
+```
+
+The repulsion vector divides by distance — closer neighbors push harder. A boid 0.5 units away contributes four times the repulsion of one 2 units away. The inverse weighting creates a steep gradient near the boid&#x27;s body — soft at range, sharp at contact. This is the same inverse-distance falloff seen in gravitational and electrostatic forces, applied here as a social force.
+
+The `steer.normalized() * max_speed` step is Reynolds&#x27; steering formula. The desired velocity points away from crowding at full speed. Subtract the current velocity to get the force needed to redirect the boid. Clamp to `max_force` — the boid cannot turn instantaneously. It leans into the correction over multiple frames. The force limit produces smooth curves rather than jerky snapping.
+
+Separation is the flock&#x27;s collision avoidance. Without it, boids pile into clumps and overlap. With it, they maintain personal space — a minimum distance that gives the flock its visible structure of distinct, spaced individuals moving in concert.
+
+## Alignment: Match the Flock&#x27;s Heading
+
+Alignment steers each boid toward the average velocity of its neighbors. Not toward their position — toward their heading and speed.
+
+```gdscript
+var alignment_radius: float = 8.0
+var alignment_weight: float = 1.0
+
+func compute_alignment(i: int, neighbors: PackedInt32Array) -&gt; Vector3:
+    var avg_velocity: Vector3 = Vector3.ZERO
+    var count: int = 0
+
+    for j in neighbors:
+        var dist: float = (positions[j] - positions[i]).length()
+        if dist &lt; alignment_radius:
+            avg_velocity += velocities[j]
+            count += 1
+
+    if count == 0:
+        return Vector3.ZERO
+
+    avg_velocity /= float(count)
+    avg_velocity = avg_velocity.normalized() * max_speed
+    var steer: Vector3 = avg_velocity - velocities[i]
+    return steer.limit_length(max_force)
+```
+
+The average velocity is a consensus direction. Alignment pushes each boid toward that consensus — not rigidly, not instantly, but with the same steering-force mechanism. The boid wants to go where its neighbors are going, at the speed they are going. The subtraction `avg_velocity - velocities[i]` is the discrepancy between the local consensus and the individual&#x27;s current state. The force acts to close that gap.
+
+Alignment produces the flock&#x27;s most visible feature: parallel motion. A group of boids all running alignment converges on a uniform heading within a few seconds. They stream together like a river. Without alignment, separation and cohesion alone produce a jittery cloud that stays together but never flows. Alignment is what makes a flock look like a flock.
+
+The alignment radius is typically larger than the separation radius but smaller than or equal to the cohesion radius. A boid aligns with neighbors it can see but does not need to avoid. The layered radii create concentric zones of influence — a tight repulsive core, a mid-range alignment band, and a wide cohesive shell.
+
+## Cohesion: Stay With the Group
+
+Cohesion steers each boid toward the average position of its neighbors — the centroid of its local group.
+
+```gdscript
+var cohesion_radius: float = 10.0
+var cohesion_weight: float = 1.0
+
+func compute_cohesion(i: int, neighbors: PackedInt32Array) -&gt; Vector3:
+    var center_of_mass: Vector3 = Vector3.ZERO
+    var count: int = 0
+
+    for j in neighbors:
+        var dist: float = (positions[j] - positions[i]).length()
+        if dist &lt; cohesion_radius:
+            center_of_mass += positions[j]
+            count += 1
+
+    if count == 0:
+        return Vector3.ZERO
+
+    center_of_mass /= float(count)
+    var desired: Vector3 = (center_of_mass - positions[i]).normalized() * max_speed
+    var steer: Vector3 = desired - velocities[i]
+    return steer.limit_length(max_force)
+```
+
+The target is the centroid — the geometric center of all neighbors within range. The desired velocity points from the boid&#x27;s position toward that centroid at max speed. Steering subtracts current velocity. The force pulls the boid inward, toward the group&#x27;s center of mass.
+
+Cohesion is what prevents dissolution. Without it, separation pushes boids apart and alignment makes them parallel, but nothing holds the group together. They drift apart into parallel lines that never reconverge. Cohesion is the counter-force — the social gravity that binds the flock into a persistent cluster.
+
+The interplay between separation and cohesion creates an equilibrium distance. Separation pushes out. Cohesion pulls in. The boid settles where the forces balance — not at any fixed distance but at a dynamic equilibrium that shifts as the neighborhood changes. The flock breathes. It compresses when cohesion dominates a turn, expands when separation fires during crowding. The breathing is not programmed. It is the residual oscillation of opposing forces.
+
+## The Weighted Sum: Three Forces, One Acceleration
+
+Each frame, the three steering forces combine into a single acceleration.
+
+```gdscript
+func _process(delta: float) -&gt; void:
+    update_grid()
+
+    for i in num_boids:
+        var neighbors: PackedInt32Array = get_neighbors_grid(i, cohesion_radius)
+
+        var sep: Vector3 = compute_separation(i, neighbors) * separation_weight
+        var ali: Vector3 = compute_alignment(i, neighbors) * alignment_weight
+        var coh: Vector3 = compute_cohesion(i, neighbors) * cohesion_weight
+
+        accelerations[i] = sep + ali + coh
+
+    for i in num_boids:
+        velocities[i] += accelerations[i] * delta
+        velocities[i] = velocities[i].limit_length(max_speed)
+        positions[i] += velocities[i] * delta
+        accelerations[i] = Vector3.ZERO
+```
+
+The weights are the system&#x27;s personality. High separation weight with low cohesion produces a loose, skittish flock that fragments under pressure. High cohesion with low alignment produces a tight ball that rolls more than flows. Equal weights produce the classic Reynolds flock — smooth, organic, birdlike. The `boid_flocking` artifact exposes these weights as sliders, letting the learner sculpt flock behavior in real time.
+
+Three weights and three radii form a six-dimensional parameter space. Qualitatively different behaviors cluster in distinct regions. Some combinations produce tight schooling — fish. Others produce wide wheeling — starlings. Others produce parallel streams — migrating geese. The boids algorithm does not model any particular species. It models the abstract structure of flocking itself, and the parameters tune it toward particular expressions.
+
+The two-pass loop matters. First pass: compute all forces using current positions and velocities. Second pass: integrate. If forces and positions updated in the same pass, early boids would move before late boids computed their forces, introducing order-dependent artifacts. The separation into force-computation and integration passes ensures all boids see the same snapshot of the world — the same double-buffer principle that governs cellular automaton updates.
+
+## The Arena and Observation
+
+The map places four artifact stations across a flat 11x11 arena with observation platforms at varying heights. The `boids_aquarium` sits at grid position (3, 3) — a bounded volume where boids demonstrate flocking within visible walls. The `boid_flocking` station at (7, 3) exposes the weight and radius sliders. The `boid_manager` at (3, 7) visualizes the spatial grid — cells lighting up as boids enter and leave. The `boids_2d_in_3d` at (7, 7) projects the same three rules onto a flat plane, collapsing the y-axis to show 2D flocking rendered in the 3D arena.
+
+From the elevated platforms, the flock reveals patterns invisible at ground level. A stream of boids viewed from above shows lane formation — parallel tracks that self-organize without any lane-assignment logic. Viewed from the side, the same stream shows vertical stratification — boids at different altitudes aligning with altitude-mates more than with boids directly above or below. The three-dimensional flock has structure along every axis. The observation platforms exist to make that structure legible.
+
+## Prediction Error and the Flock
+
+Each boid expects its neighbors to be there. Cohesion encodes this — the force toward the centroid is a correction applied when the boid&#x27;s position deviates from the expected center of the group. Alignment encodes a velocity prediction — the boid expects its neighbors to move in a certain direction and steers to match. Separation encodes a proximity boundary — the boid predicts a minimum safe distance and corrects when that boundary is violated.
+
+The three forces are three prediction errors, measured against three different expectations. Cohesion minimizes positional surprise. Alignment minimizes directional surprise. Separation minimizes proximity surprise. The weighted sum is a composite error signal that the boid corrects by adjusting its own velocity. Over many frames, the flock converges toward a state where all three prediction errors are minimized simultaneously — a dynamic equilibrium where each boid&#x27;s expectations about its neighbors are approximately satisfied.
+
+This maps directly onto the free energy principle&#x27;s formulation of active inference. The boid does not passively observe and react. It steers — it acts on the world to bring sensory input into alignment with its generative model. The generative model is implicit: &quot;neighbors should be at moderate distance, moving in similar directions, not too close.&quot; The steering forces are the actions that minimize the divergence between this model and reality. The flock is the collective fixed point where every agent&#x27;s model is simultaneously satisfied.
+
+No boid represents the flock. No boid stores a model of the flock&#x27;s shape or trajectory. The flock is a higher-order structure that exists only in the aggregate — an attractor in the joint state space of all boids. Reynolds demonstrated that this attractor requires only three local forces and a handful of parameters.
+
+The gap between the simplicity of the rules and the complexity of the emergent motion is the central lesson. Physarum computed with trail. Boids compute with proximity. The substrate differs. The principle — local error minimization producing global coordination — persists.
+
+## From Flocking to General Agent Models
+
+The boids algorithm fixes the three forces. Separation, alignment, cohesion — always these three, always weighted and summed. But many collective behaviors require different forces. Predator evasion adds a fourth: flee from threats. Obstacle avoidance adds a fifth: steer around geometry. Goal seeking adds a sixth: move toward a target. Each new force slots into the same weighted-sum architecture, but the system is no longer &quot;boids&quot; — it is agent-based modeling.
+
+The next map in the sequence, Agent-Based Modeling, generalizes this pattern. Agents carry arbitrary state. Forces are replaced by rules that can reference any combination of agent properties, environmental conditions, and stochastic processes. The three-force structure of boids becomes a special case within a broader framework. But boids remain the clearest demonstration of the core mechanism: per-agent local computation, no global coordination, emergent collective behavior. Every agent-based model inherits this DNA.
+
+## Possible Artifacts
+
+**predator_evader** — Introduces a single predator agent into the flock. The predator moves toward the nearest boid at higher-than-flock speed. Boids within a fear radius add a fourth steering force: flee, weighted heavily. The flock splits around the predator, reforms behind it, and exhibits the characteristic wave-like compression seen in real starling murmurations under falcon attack. Sliders control predator speed, fear radius, and flee weight. Demonstrates that flocking is not merely aesthetic — it is a survival geometry where interior boids gain protection from the collective body.
+
+**weight_sculptor** — Three large sliders mapped to separation, alignment, and cohesion weights, plus three sliders for radii. A phase-space indicator plots the current configuration against known behavioral regimes: schooling, streaming, swarming, dispersal. Preset buttons load parameter sets labeled &quot;starlings,&quot; &quot;fish school,&quot; &quot;migrating geese,&quot; &quot;mosquito swarm.&quot; Each preset produces visibly distinct flock character from the same three rules — the parameter space explored as a design tool.
+
+**neighbor_visualizer** — Selects a single boid and renders its three perception radii as concentric transparent spheres. Lines connect it to neighbors within each radius, color-coded by which force they contribute to — red for separation, green for alignment, blue for cohesion. The force vectors themselves render as arrows on the selected boid, showing the real-time steering computation. Toggling forces on and off reveals each rule&#x27;s contribution to the composite behavior — alignment alone produces parallel streams, cohesion alone produces collapse, separation alone produces explosion.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/intent.md">Raw captured source</a></p><pre>Concept: A flock, a school, a swarm — Craig Reynolds&#x27; three rules (separation, alignment, cohesion) prove that coordinated group motion needs no choreographer. Each boid sees only its neighbors, applies three weighted forces, and the flock emerges. The boids algorithm is the founding demonstration that local rules produce global intelligence.
+Sequence role: Third map in Swarm Intelligence (14th spine sequence, integration phase), intermediate difficulty. After Physarum (biological swarm) and flow fields (field-based navigation), this map introduces agent-to-agent interaction — the classic flocking model where the swarm behavior emerges from peer relationships rather than environmental fields. Connects forward to SwarmIntelligence_Agent_Based_Modeling_ABM where the agent model generalizes beyond flocking; follows SwarmIntelligence_FlowFeilds.
+Technical angle: Three steering behaviors computed per frame for each boid: separation (steer away from nearby neighbors within a short radius), alignment (steer toward the average heading of neighbors within a medium radius), cohesion (steer toward the average position of neighbors within a long radius). Weighted sum of the three forces drives velocity update. Spatial partitioning (grid or k-d tree) for efficient neighbor queries. The three radii and three weights form a six-dimensional parameter space that produces qualitatively different swarm behaviors.
+Critical angle: Reynolds published the boids paper in 1987 and proved that flocking is not a collective decision but an emergent property of individual rules. No bird knows the flock exists; the flock is a side effect of each bird knowing its neighbors. This is the philosophical core of swarm intelligence: the whole is not directed by any part, yet the whole exhibits properties no part possesses. The three rules are also a minimal ontology of social physics: avoid collision, match velocity, stay together.
+Key artifacts: BoidsAlgorithm implements Reynolds&#x27; flocking model with configurable separation, alignment, and cohesion weights and radii, visualizing emergent flock behavior from individual agent rules.
+Gap: Needs a predator-prey extension — an artifact that introduces a predator agent, triggering evasion behavior and revealing how the flock&#x27;s shape changes under threat, demonstrating that flocking is also a survival strategy, not just an aesthetic phenomenon.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/critical.md">Raw captured source</a></p><pre># The boid has no identity until it counts its neighbors — agential realism returns, and the flock is a side effect nobody computed
+
+Every theoretical claim in this document is tested in code. The boid is the first interactive system after Forces_1. Noise and waves broke agential realism and performativity — both were autonomous, context-free, stateless. The boid is none of those. Its steering equation takes a `neighbors` parameter. Its velocity accumulates across frames. Its behavior depends on who is nearby. If agential realism and performativity have scope conditions, boids should reveal them.
+
+## Thrownness: Random Scatter, Permanent Consequences
+
+Heidegger: initial conditions are given, not chosen. The boid&#x27;s position and velocity at frame 0 are assigned by `randf_range`, not computed from any decision procedure.
+
+The thrown condition is strong. Unlike waves (where different phase produces the same trajectory shifted in time), different initial scatter produces structurally different flocks. Some seeds produce one unified group. Others produce two or three sub-flocks that never merge. The initial velocity distribution determines the early consensus heading — boids that start with roughly aligned velocities coalesce faster than boids pointing in all directions.
+
+But there is a convergence effect that weakens thrownness over time. Regardless of initial scatter, the three steering forces push toward a common attractor: cohesive, aligned, separated motion. Two very different initial configurations may converge to similar flock shapes after enough frames. Thrownness determines the transient, not the steady state. This is the opposite of waves, where the phase offset persists forever. In boids, the thrown condition is strong but temporary — the system forgets its initial conditions.
+
+**Verdict:** Thrownness confirmed, strong but decaying. Initial scatter determines flock topology during the transient period. Over time, the steering forces erode the thrown condition — the flock converges toward attractors that are properties of the algorithm, not the initialization. Heidegger does not account for systems that overcome their thrownness.
+
+## Agential Realism: The Boid Has No Identity Alone
+
+Barad: properties are enacted through interaction, not possessed intrinsically. The boid is the cleanest test case. Every steering function takes a `neighbors` parameter.
+
+This is agential realism in its most transparent form. The function signature tells the story: `compute_separation(i, neighbors)`. Remove the `neighbors` parameter and the function cannot execute. The boid&#x27;s acceleration is undefined without context. Not unknown — undefined. There is no value to compute. The steering force is not a property of the boid that context modifies. It is a property that context creates.
+
+Compare to noise, where `get_noise_2d(x, z)` required no neighbor list, no environmental field, nothing but coordinates. The noise value existed intrinsically. The boid&#x27;s acceleration does not.
+
+The isolated boid is a ballistic particle. The surrounded boid is a flocking agent. Same code, same parameters, same internal state — but the presence of neighbors transforms the entity from one category to another. This is not a difference of degree (flies faster, turns more). It is a difference of kind (drifts vs. flocks). Barad would say: the boid does not pre-exist its interactions. The interactions constitute what the boid is.
+
+But the Baradian limit from CA_11 reappears. The steering rules themselves — separation, alignment, cohesion — are not relationally produced. They are fixed, imposed, non-negotiable. A boid cannot learn a new steering rule from its neighbors. It cannot modify the `if count == 0: return Vector3.ZERO` threshold through experience. The relational agency operates within a fixed rule framework.
+
+**Verdict:** Agential realism confirmed — the strongest confirmation in the pilot batch. Boid properties are genuinely relational: acceleration is undefined without neighbors, and isolation changes the entity&#x27;s category. The Baradian limit persists: the rules themselves are not relational. But within fixed rules, the boid demonstrates intra-action in Barad&#x27;s precise sense: the interaction constitutes the properties, not merely modifies pre-existing ones.
+
+## Performativity: Velocity Accumulates, But Memory Does Not
+
+Butler: identity through constrained repetition. Does the boid&#x27;s frame-by-frame steering constitute performance?
+
+Velocity is performative, exactly as in Forces_1. The boid&#x27;s heading at frame 100 reflects every steering correction from frames 0 through 99. Reset the velocity and the boid behaves differently — it turns from its reset heading instead of from its accumulated heading. History is encoded in the velocity vector.
+
+But boids add a complication that Forces_1 did not have. The neighbor list rebuilds every frame from scratch.
+
+The boid performs its trajectory (velocity accumulates, position changes, max_force constrains turning rate) but does not perform its relationships (neighbor list recalculated from scratch each frame). This is a split that Butler&#x27;s framework does not anticipate. Physical identity is performative — the boid is where its history put it. Social identity is not — the boid has no memory of social context. It flocks with whoever is nearby right now.
+
+The flock itself is performative, though, at the emergent level. The flock&#x27;s shape at frame N constrains frame N+1 — positions determine neighbor lists, which determine forces, which determine new positions. The flock cannot jump to an arbitrary configuration. It evolves through continuous deformation. But no individual boid carries this history. The performance is distributed across the collective state, stored in no single agent.
+
+**Verdict:** Performativity split. Physical state (velocity, position) accumulates performatively — each frame constrains the next through max_force turning limits. Social state (neighbor identity, interaction history) is memoryless — rebuilt from scratch each frame. The flock itself performs at the emergent level, but individual boids do not perform their relationships. Butler&#x27;s framework needs a level-of-analysis qualifier.
+
+## Boundary as Politics: Radii and Weights Define Social Physics
+
+The boid algorithm has six thresholds: three radii and three weights. Each is a political choice.
+
+The radii define who counts as a neighbor. This is a political boundary in the most literal sense — it determines the constituency. A boid with `perception_radius = 2.0` is an isolated individual. A boid with `perception_radius = 50.0` is a citizen of a totalitarian flock. The same three rules, the same steering algorithm, produce atomization or fascism depending on a single parameter.
+
+The six parameters (three radii, three weights) form a political design space. Reynolds chose one point in this space — balanced separation, moderate radii — and produced bird-like flocking. Other points produce fish schooling, insect swarming, herd behavior, dispersal. The algorithm is the same. The politics differ. No configuration is &quot;correct.&quot; Each is a different theory of collective life, expressed as six floating-point numbers.
+
+**Verdict:** Boundary as politics confirmed. Perception radius determines constituency (who counts as a neighbor). Weights determine social physics (which forces dominate). Both are chosen, not derived. Five weight configurations produce five qualitatively different collective behaviors from the same three rules.
+
+## Finitude as Constitutive: max_speed and max_force
+
+The speed limit is constitutive. Remove it and the flock dissolves — boids move faster than the neighbor query can track. This is the same Nyquist-like condition seen in waves and the CFL condition in Forces_1: the entity&#x27;s movement per frame must be smaller than the spatial resolution of the interaction mechanism. The perception radius is the spatial &quot;sampling rate.&quot; max_speed must be low enough that boids remain within each other&#x27;s perception across frames.
+
+max_force is the most interesting limit. It produces the organic quality of flocking — the lag between wanting to turn and completing the turn. This lag creates the sweeping curves, the gradual consensus, the banking turns. Remove it (max_force = ∞) and boids snap to desired headings instantaneously. The motion becomes a series of discrete direction changes. The beauty disappears. The limit is not a deficiency — it is the source of the aesthetic.
+
+Chirimuuta: &quot;Understanding is enacted, not extracted.&quot; The flocking behavior does not exist in the rules alone. It is enacted through the constraints. max_force limits what the boid can do per frame. That limitation produces the temporal smoothing that makes the motion look alive. The finite turning rate is as constitutive as the steering rules themselves.
+
+**Verdict:** Finitude confirmed, constitutive at both levels. max_speed is constitutive in the same way as the CFL condition — exceeding it causes the interaction mechanism to fail. max_force is constitutive in a deeper way — it produces the aesthetic character of flocking. The limits are not practical compromises. They are design elements as fundamental as the three steering rules.
+
+## Emergence: Three Rules Plus Scatter Equals Flock
+
+Emergence is refined, not simply confirmed. The flock does not require a specific initial geometry — any scattered arrangement works. But it requires SOME asymmetry. Perfectly symmetric initial conditions (same position, same velocity) produce no flocking because no force can break the symmetry. The rules need geometric variation to operate on, but almost any variation suffices.
+
+The emergence test is more nuanced than expected. One rule produces degenerate behavior. Two rules produce partial flocking — some characteristics but not all. Three rules produce the full flock: it flows (alignment), breathes (separation vs cohesion), and coheres (cohesion). This is stronger than CA_11 where rules + geometry were binary (both needed or not). In boids, rules have a gradient — more rules produce more emergence. The three-rule system is the minimum for the full behavioral repertoire.
+
+**Verdict:** Emergence confirmed with gradient. Rules require asymmetric geometry (but not specific geometry). Geometry without rules produces nothing. Each individual rule produces a degenerate behavior. Pairs produce partial flocking. All three produce the full emergent flock. Emergence is not binary (present/absent) but graded (how many of the rules operate).
+
+## QFEP Coordinates
+
+Boids at λ=0.35, φ=+0.2: edge of chaos with weak order amplification. This is the first system in the pilot batch with positive phi. Forces_1 dissipated (restitution reduced energy, phi negative). Noise was stateless (phi undefined/neutral). Waves were rigid (phi neutral — no gain, no loss). Boids actively create order through alignment feedback, bounded by separation. The positive phi predicts self-organization — which is exactly what flocking is.
+
+The lambda value places boids near Rule 110 and Game of Life on the Langton axis — systems at the edge of chaos where computation and emergence coexist. This is consistent with the observation that boids produce complex, unpredictable but structured behavior. Not random (lambda &lt; 1). Not frozen (lambda &gt; 0). The sweet spot where interesting things happen.
+
+**Verdict:** QFEP confirmed. λ=0.35 correctly predicts edge-of-chaos sensitivity and structured variation. φ=+0.2 correctly predicts self-organizing behavior — the flock creates order that was not present in the initial scatter. First positive phi in the pilot batch; first system that is generative rather than conservative or neutral.
+
+## Summary of Tests
+
+| Claim | Source | Code Test | Verdict |
+|-------|--------|-----------|---------|
+| Thrownness | Heidegger | Random scatter determines flock topology; but steering forces erode thrown condition over time | **Confirmed, decaying.** Strong initially, convergent long-term |
+| Agential Realism | Barad | Steering requires `neighbors` parameter; isolated boid changes category (ballistic vs flocking) | **Confirmed.** Strongest case in pilot — interaction constitutes properties |
+| Performativity | Butler | Velocity accumulates (physical performativity); neighbor list recalculated from scratch (no social memory) | **Split.** Physical yes, social no. Butler needs level-of-analysis qualifier |
+| Boundary as Politics | Critical theory | Perception radius = constituency; weights = social physics; 5 configurations → 5 regimes | **Confirmed.** Six parameters, each a political choice |
+| Finitude | Heidegger/Chirimuuta | max_speed constitutive (CFL-like); max_force constitutive (produces organic aesthetic) | **Confirmed.** Both limits are design elements, not compromises |
+| QFEP Location | QFEP | λ=0.35 (edge of chaos), φ=+0.2 (weak order amplification, self-organizing) | **Confirmed.** First positive phi — generative, not conservative |
+| Emergence | Systems theory | Three rules + asymmetric geometry → full flock; rules have gradient (1→2→3 = degenerate→partial→full) | **Confirmed, gradient.** Emergence is graded, not binary |
+
+Boids reverse the pattern from noise and waves. Those autonomous systems broke agential realism and performativity — they had no context parameter, no feedback, no neighbor dependence. Boids confirm both (with qualifications). The emerging pattern: agential realism requires relational function signatures (`f(state, context) → outcome`). Performativity requires state accumulation (`state_n+1 = f(state_n, ...)`). Unconditional systems have neither. Interactive systems have both.
+
+The new finding from boids: thrownness decays. In waves, phase persists forever. In physics, initial velocity persists until a force acts. In boids, the steering forces actively erode the initial conditions — the flock converges toward attractors independent of initialization. This is a new category: systems that overcome their thrownness. Heidegger assumed thrownness was permanent. The boid flock suggests that strong enough relational forces can wash out the thrown condition.
+
+The deepest finding: finitude as aesthetic. max_force does not merely prevent computational failure (as CFL does). It produces the visual character of flocking — the smooth curves, the gradual turns, the organic feel. The limit is not a constraint on the system&#x27;s behavior. It is the source of the behavior&#x27;s beauty. Chirimuuta&#x27;s enactivism is confirmed at the strongest level: the limit does not restrict what the boid can do. The limit IS what the boid does.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/artifacts.md">Raw captured source</a></p><pre># SwarmIntelligence Boids Algorithm — Artifacts
+*Swarm Intelligence: No Leader, Yet Coordinated · lambda_edge · 5 artifacts*
+
+&gt; Separation, alignment, cohesion. Three rules, applied locally, produce flocking globally. Each boid sees only neighbors, yet the flock moves as one. No leader, no plan, no communication beyond proximity. Emergence: complex collective behavior from simple individual rules.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Boids Aquarium
+![Boids Aquarium](/scene-catalog/boids_aquarium.png)
+
+A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.
+
+`boids_aquarium`
+
+## Boid Flocking
+![Boid Flocking](/scene-catalog/boid_flocking.png)
+
+Emergent flocking behavior simulation using Craig Reynolds&#x27; boids algorithm
+
+`boid_flocking`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## boid_manager
+![boid_manager](/scene-catalog/boid_manager.png)
+
+f_i = Σ(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] — three weighted averages over a local neighborhood
+
+`boid_manager`
+
+## boids_2d_in_3d
+![boids_2d_in_3d](/scene-catalog/boids_2d_in_3d.png)
+
+boids_2d_in_3d
+
+`boids_2d_in_3d`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/summary.md">Raw captured source</a></p><pre># SwarmIntelligence_Boids_Algorithm — Summary
+
+Separation, alignment, cohesion. Three rules, applied locally, produce flocking globally. Craig Reynolds&#x27; 1987 algorithm proves that coordinated group motion needs no choreographer — each boid sees only its neighbors, computes three weighted steering forces, and the flock emerges as a side effect.
+
+The `boids_aquarium` artifact renders 200 boids in a glass tank. Separation steers away from neighbors within a short radius. Alignment steers toward the average heading of neighbors within a medium radius. Cohesion steers toward the average position of neighbors within a long radius. The weighted sum drives velocity. Three VR sliders control the weights, and the flock&#x27;s character shifts in real time: separation dominant produces cold dispersal; cohesion dominant produces a pulsing sphere; alignment dominant produces a synchronized arrow. The narrow band between extremes is where the flock lives — rotating toroids, figure-eight loops, and sudden directional consensus events that no parameter setting predicted.
+
+The shift from Physarum and flow fields is fundamental. Physarum agents communicated through the environment — trail persisted across time. Boids communicate through space but not through time. No memory. No trail. Each frame, every boid recomputes its forces from the current neighbor configuration. The flock&#x27;s coherence comes from continuous mutual adjustment, not accumulated history. Spatial hashing replaces the trail map for efficient O(n) neighbor queries.
+
+This is the third map in the Swarm Intelligence sequence. The wide-open arena with scattered observation platforms provides multiple vantage points for watching the flock. The teleporter leads to SwarmIntelligence_Agent_Based_Modeling_ABM, where the boid framework generalizes to agents with arbitrary rule sets.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SwarmIntelligence_Boids_Algorithm/blurb.md">Raw captured source</a></p><pre>Separation, alignment, cohesion. Three rules, applied locally, produce flocking globally. Each boid sees only neighbors, yet the flock moves as one. No leader, no plan, no communication beyond proximity. Emergence: complex collective behavior from simple individual rules.
+
+`BoidsAlgorithm` computes three steering forces per boid per frame: steer away from close neighbors, match heading with mid-range neighbors, drift toward the average position of distant neighbors. Six parameters — three radii, three weights — define the entire flock&#x27;s character. Craig Reynolds published the paper in 1987 and proved that flocking is not a collective decision but an emergent property of individual rules. No bird knows the flock exists; the flock is a side effect of each bird knowing its neighbors. The whole not directed by any part, yet exhibiting properties no part possesses.
+</pre></section></body></html>

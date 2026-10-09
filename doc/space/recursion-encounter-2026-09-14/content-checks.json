@@ -1,0 +1,54 @@
+[
+  {
+    "check": "all ten prior tokens retained once",
+    "pass": true
+  },
+  {
+    "check": "four primary roles match the book markers",
+    "pass": true
+  },
+  {
+    "check": "other roles unchanged",
+    "pass": true
+  },
+  {
+    "check": "four compiled book lines match primary roles",
+    "pass": true
+  },
+  {
+    "check": "other book pearls unchanged",
+    "pass": true
+  },
+  {
+    "check": "ada_run/em_plan.json other rows unchanged",
+    "pass": true
+  },
+  {
+    "check": "commons/data/museum/em_plan.json other rows unchanged",
+    "pass": true
+  },
+  {
+    "check": "both current museum rows agree",
+    "pass": true
+  },
+  {
+    "check": "museum plan retains all ten works",
+    "pass": true
+  },
+  {
+    "check": "saved hand byte-identical",
+    "pass": true
+  },
+  {
+    "check": "other compiled trunk records unchanged",
+    "pass": true
+  },
+  {
+    "check": "arc advances to Recursive Trees with current recursion evidence",
+    "pass": true
+  },
+  {
+    "check": "Menger evidence still valid",
+    "pass": true
+  }
+]

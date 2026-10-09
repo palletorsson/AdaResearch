@@ -1,0 +1,32 @@
+--- before/algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd
++++ after/algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd
+@@ -1,14 +1,12 @@
+-# wallpaper_cage.gd — REACH FOR 5-FOLD AND THE PLANE WON'T CLOSE.
++# wallpaper_cage.gd — ROTATION UNDER PERIODIC LATTICE ASSUMPTIONS.
+ #
+ # The symmetry seam. Rotation is a continuous dial — turn by any real angle and
+ # the circle is unchanged (SO(2), a smooth infinity of symmetries). But a
+-# periodic tiling of the plane cannot use just any angle: the crystallographic
+-# restriction allows only 1, 2, 3, 4, and 6-fold rotation. Five-fold, seven-fold
+-# — the gaps never close, the lattice never repeats. Amber: the continuous dial,
+-# every angle a symmetry. Blue: the five orders the plane permits. Red: the
+-# forbidden ones. From this cage falls a finite catalogue — exactly 17 wallpaper
+-# groups, the complete list of ways a pattern can repeat. The continuum walks in
+-# and a countable law walks out.
++# periodic planar lattice cannot preserve just any rotation: the crystallographic
++# restriction permits only orders 1, 2, 3, 4, and 6. Amber: the continuous dial.
++# Blue: compatible lattice rotation orders. Red: excluded orders 5 and 7,
++# not forbidden shapes within a motif. This diagram states one restriction;
++# it does not derive the complete classification of 17 wallpaper groups.
+ extends Node3D
+ class_name WallpaperCage
+ 
+@@ -47,7 +45,7 @@
+ 	_dot(Vector2.ZERO, Color(0.95, 0.96, 1.0), 0.01)
+ 	_tag("any angle turns the circle", Vector2(0.0, -radius - 0.07), color_cont, 28)
+ 	_plate("SYMMETRY",
+-		"rotation is a continuous dial — every angle a symmetry\na periodic tiling admits only 1, 2, 3, 4, 6-fold\nexactly 17 wallpaper groups fall out — reach for 5 and it won't close",
++		"the circle admits every rotation angle\nperiodic planar lattices allow orders 1, 2, 3, 4, 6\nrotation restriction only — not a derivation of the 17 groups",
+ 		Vector3(0.0, radius + 0.2, 0.0), color_ok)
+ 
+ 

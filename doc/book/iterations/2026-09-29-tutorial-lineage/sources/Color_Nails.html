@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Nails · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Nails">← Tutorial lineage</a></p><h1>Color Nails</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Nails/final.md">Raw captured source</a></p><pre># The choosing hand
+
+What changes when a colour becomes part of the body you act through?
+
+The lamps changed what reached a surface. Here a hand has outgrown the furniture. A small manicure table stands before it, complete with bottles, stools and another hand small enough to rest between the tools. Which of these bodies are you about to dress?
+
+&lt;!-- @nail_color_controller --&gt;
+
+Find the movable point in the RGB box on its open plinth beside the manicure table. Take it along one axis, then bring it back. A colour you left can be found again at the same place.
+
+Look up at the giant nails, then down at the petite hand on the table. Both answer the same choice. A movement small enough for your hand to make crosses two very different scales. Does the colour feel equally delicate on both?
+
+![The giant hand and the petite hand on the manicure table, seen from inside the museum salon.](/book-review/doc/book/figures/Color_Nails/salon-red.png)
+
+Raise the hand you are choosing with and turn its nails toward you. Compare them with the petite hand, the giant nails and the swatch. The colour has reached the hand you use to choose it. What seemed like dressing an object now includes the body doing the dressing.
+
+The nail material adds its own response to light. A colour selected in the box can look different on a small glossy surface from the way it appears on the flat preview.
+
+The point&#x27;s three coordinates are constrained to the box and converted into red, green and blue channel values, each between zero and one. Moving along one axis changes one channel. Moving diagonally can change several at once. The box turns a colour choice into a position that your hand can revisit.
+
+This is a three-channel description of colour. It does not divide every difference you can perceive into three equally noticeable kinds. Equal distances in the box need not feel like equal changes in the preview.
+
+&lt;!-- @hand_color_controller --&gt;
+
+At the controller for the hand surface, leave the nails at the colour you chose and move the point for the skin. Look again at the nails against this new background. Their assigned colour has stayed fixed. Do they still look the same?
+
+The two stations use the same position-to-colour mechanism but target different surfaces. The salon hands are two copies of the same source mesh. Their nail materials receive the nail-colour signal; their skin materials receive the hand-colour signal. Each receiving material is assigned the selected value:
+
+```gdscript
+material.albedo_color = colour
+```
+
+The scale difference lives in the geometry&#x27;s transform. It does not require a second colour recipe. A nail can become monumental while its material still receives the same three channels as the small one on the cushion.
+
+The two points move with the same ease. Changing polish and changing skin can feel like neighbouring choices. Yet changing a rendered skin colour does not give us another person&#x27;s lived history, or undo the racism through which skin is read. Polish is read through the body too: a colour may be called elegant, excessive or defiant according to whose hand wears it.
+
+Audre Lorde asks us to recognise difference while confronting the power that turns it into inferiority.[^color-nails-lorde] Look again at the hand you have chosen. Which colours feel available to you? Which seem to require an explanation, and to whom?
+
+The bottles never need opening. No brush crosses these nails, and no polish has to dry. The room keeps the cushion, the stools, the promise of a hand being attended to. The application has become an assignment. What remains of the manicure in the pleasure of choosing?
+
+The colour leaves with you. Your hands carry it into the halls ahead.
+
+&lt;!-- @ --&gt;
+
+Choose a colour because you want it, without requiring a naturalistic match. Try a nail or hand that interrupts the palette you expected from this body. Reach for the point again. The hand making the next choice is already wearing the last one.
+
+You have chosen their colour. The fingers have kept their length. What else might you want to change?
+
+Carry one of those chosen colours toward the rainbow. Where would you put it among the bands? The next room gives colour a familiar order; look for the decisions that hold that order in place.
+
+[^color-nails-lorde]: Audre Lorde, [“Age, Race, Class, and Sex: Women Redefining Difference”](https://www.ualberta.ca/en/institute-intersectionality-studies/media-library/intersectionality-readings/lorde-age-race-class-and-sex.pdf), in *Sister Outsider* (Crossing Press, 1984), pp. 114–123, especially 115–116 and 120–121. Lorde examines the unequal power attached to difference and refuses to let one aspect of a person stand for their whole life. The comparison between this salon&#x27;s skin and nail controls is the book&#x27;s application of her argument.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Nails/tutorial.md">Raw captured source</a></p><pre># A small gesture, a very large nail
+
+1. Approach the manicure table. Compare the giant hand with the petite hand on the cushion before choosing a colour.
+2. Grab the point in the NAILS RGB box. Move mainly along one axis. Watch the swatch, then compare the nails at both scales.
+3. Repeat at SKIN while keeping the selected nail colour. Look again at the same nails against their changed background; distinguish the fixed assignment from what you perceive.
+4. Return to one colour. Trace the coordinate-to-RGB mapping, the GameManager signal and the material albedo assignment.
+5. Compare the same selected value on the swatch, the small hand and the giant. Equal channel values do not promise identical viewed appearance.
+6. In the museum&#x27;s standard VR controller setup, raise the controller hand and compare its nails and skin. On desktop, use the two salon displays. Receiver wiring is checked; physical headset reach and wearer experience remain untested.
+
+Primary encounters: nail_color_controller and hand_color_controller. Their shared receiving installation, nail_salon, is secondary. Tiny bottles and the file stage the salon but are not interactive palette tools. Carry a chosen colour toward Rainbow&#x27;s ordering of colour; this room does not establish an automatic handoff to its bands.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Nails/technical.md">Raw captured source</a></p><pre># One colour address, display hands and the player
+
+Color_Nails follows the illumination comparison in Color_Flashlight. This time the operation changes material albedo.
+
+The map&#x27;s nail_salon at (7,9) uses the existing ArrayMesh from `commons/body/hands/right_hand.tscn`. The mesh is shown in its rest pose at 4.3 metres and 0.32 metres high. It is not a tracked skeleton. Surface names identify `Hand` and `Nails.001`; each display mesh receives its own material overrides, leaving the shared source resource intact.
+
+The primary controls stand on separate plinths: `nail_color_controller` at (9,4) and `hand_color_controller` at (5,4). Both use `commons/interfaces/nail_color_controller.gd`; target_surface distinguishes nails from skin. Their half-metre ValueMapper3D boxes convert point coordinates into RGB. In the salon mounting, root y=1.2 places each box from y=0.9 to 1.4, above an approximately 0.8 m plinth. Front and top access remain open. The optional `#mount:salon` hides the generic canopy/light and reduces the swatch; other placements retain their existing presentation.
+
+The existing controller writes its selected colour through GameManager. The salon connects once to `nail_color_changed` and `hand_color_changed`, then updates only the appropriate material list:
+
+```gdscript
+func _nail_colour(colour: Color) -&gt; void:
+    for material in nail_materials:
+        material.albedo_color = colour
+```
+
+The matching skin handler uses skin_materials. There is no per-frame salon loop. Geometry scale is independent of the material&#x27;s RGB values. Gloss, lighting and the size of the viewed patch can still make the two appearances differ.
+
+The table, plinths and stool seats have collision. Brass legs, cushion, tiny bottles and file are set dressing; the bottles are not extra controls. The map leaves a route along either side and reserves this room against automatic sculpture placement. The neighbouring colorballs uses `#case:salon`, constructing a closed glass case before spawning its balls so they cannot bounce into the plinth approach. Other colorballs placements retain their open physics display.
+
+Verification uses `commons/testing/probe_nail_salon.gd`: actual museum loading, dimensions, two controllers, named material surfaces, standing reach, supplied pickup motion through each RGB box, colour propagation and side-route capsule sweeps. The probe restores the user&#x27;s saved colours after its samples. Tracked controller ergonomics and headset comfort remain untested.
+
+## The player receiver (21 September source check)
+
+The default museum scene inherits `base.tscn`, which mounts both production hand scenes under XRController3D collision hands. Each hand scene has a `PresistNailColor` child using its corresponding `left_hand_nails.gd` / `right_hand_nails.gd`. After one frame, these receivers find the named skin and nail surfaces, apply GameManager&#x27;s current colours, and subscribe to both change signals. Left and right surface order differs; the receivers use names rather than assuming one shared index.
+
+The station always writes the selected colour through GameManager. Its shallow direct-hand lookup can fail in the museum hierarchy without preventing the hand-owned receivers from working. The current default is a controller-driven, grip/trigger-animated hand mesh; this evidence does not establish a bare-hand skeletal-tracking implementation. DesktopHand is a pointer adapter without equivalent player skin/nail materials. The salon&#x27;s two display hands remain its visible comparison.
+
+Colours survive scene changes in the current process. The colour setters do not immediately save to disk; persistence across launches depends on a separate save event. The chapter invites carrying colour beyond the salon within the visit, not guaranteed persistence after quitting.
+
+The raw saved plan still contains the older control coordinates. For authored-map rooms, `endless_museum.gd` derives artifact rows from the current map when building the hall. The positions above describe that current authored configuration, not an inspection of an already-built live scene or a visitor override.
+
+A new isolated Godot probe passed 35 checks, including selection before hands appear, independent nail/skin updates on both real embedded meshes, replacement hand scenes, and coexistence with direct station discovery. The copied receiver/station scripts and colour-only GameManager methods were unchanged; XR animation was omitted and the mapper used a signal fixture. No production autoload, save state or live museum was loaded. This tests material/state wiring, not physical input, wearer perception or comfort. See [the report and reproducible probe](../../../doc/book/iterations/2026-09-21-colour-return/nails/verification.md).
+
+## Native encounter and book figure — 23 September
+
+`doc/book/iterations/2026-09-23-nails-the-choosing-hand/probe.gd` runs the actual hall through the isolated museum runner. A supplied XRTools grabber moves each actual RGB point: red `(0.8, 0.08, 0.12)` becomes violet `(0.8, 0.08, 0.8)` by changing only the blue coordinate; a separate skin edit leaves the chosen nail value in place. Returning to the original point recovers its colour. The two salon meshes and their transforms stay unchanged.
+
+Both production left/right hand scenes are also instantiated as invisible receiver fixtures. Their XR pose-driving root scripts are omitted and animation trees disabled; the original meshes and `PresistNailColor` children receive the same GameManager signals emitted by the real museum controls. This joins the real point gesture to the hand-material receivers without claiming tracked motion or wearer perception. Selected colours are restored after the run; no save is requested.
+
+59 focused checks pass. The initial cross-surface assertion compared against an ideal decimal after several world/local coordinate conversions; the actual blue value differed by about 0.00002. The corrected independence check compares the actual selected colour immediately before and after the skin edit and records both values. Production source was not changed.
+
+The shared book illustration pairs the native giant and petite display-hand captures with height labels (4.3 m and 0.32 m). Views are composed at different scales so the small nails are readable. These are actual placed museum meshes, not photos of the headset experience. The review also shows red/violet choices from fixed cameras and the real RGB plinth. No walking, tracked reach, comfort or performance test is claimed by this pass.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Nails/intent.md">Raw captured source</a></p><pre># Grand / Petit — intent
+
+Third in Colour, between Flashlight and Rainbow. Introduce colour as an addressable material choice after distinguishing it from illumination.
+
+Stage the contrast as a 4.3-metre hand behind a fine manicure table, with a 32-centimetre copy on its cushion. Keep the RGB controls at human reach. The same coordinate gesture should visibly address the nails or skin at both scales.
+
+Primary encounters remain nail_color_controller and hand_color_controller. Their receiving installation, nail_salon, is secondary. Preserve the distinction between the two display hands and any connected tracked player hand. Bottles are set dressing; no scanner or prism is part of this placement.
+
+The question is what the same implementation permits to become bodily: small and intimate, oversized and unfamiliar, with colour choices that need not imitate skin. Let the reader test that difference before explaining the shared mesh, transform and material addresses. Carry the chosen colour toward Rainbow&#x27;s ordering without claiming automatic transfer.
+
+23 September return: preserve the working salon and both controllers. Let the small coordinate gesture, its return to the same colour and the giant/petite contrast carry the inquiry. A paragraph recovered from critical.md notices what the salon borrows and omits: furniture and the wish to attend to a hand remain, while brushwork and drying become a material assignment. End with the concrete unchanged finger length rather than a request to list freedoms and limits. Native display-hand figures belong in the book; supplied receiver tests must not be presented as headset photographs.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Nails/critical.md">Raw captured source</a></p><pre># A manicure too large for the table
+
+The table offers a familiar scale of care: a cushion, bottles, somewhere to sit. The hand behind it exceeds that arrangement. Another hand fits on the cushion. They receive the same colour choice, but it is difficult to regard the same patch of polish in exactly the same way when it becomes large enough to dominate the room.
+
+This is a specific use of the shared computational substrate. The two hands use one source mesh. Their transforms differ; their nail and skin materials receive the same selected channel values. Enlarging the hand does not require inventing another colour mechanism. A familiar operation can reach an unfamiliar body.
+
+The connection had to be made. Two objects being written in code does not, by itself, mean that a control will address them both. Here the salon subscribes to the existing nail and hand colour signals, then assigns the selected value to named material surfaces. The possibility is located in that connection, and can be inspected there.
+
+Try a colour that makes the hand stranger to you. Then return to a familiar one without changing its scale. What remains unfamiliar? The controller can change a surface while leaving the fingers, pose and division between nail and skin fixed. Its adjustable channels do not contain the whole question of what bodies are possible.
+
+The furniture also leaves a remainder. There is no salon worker at this table. The bottles do not need opening; the material changes without a brush crossing the nail. The scene borrows the signs of manicure while replacing its application with an assignment. That omission is available to notice, rather than a reason to call this a complete simulation of a salon.
+
+Both display hands work without a tracked player body, making their material comparison available on desktop. In the museum&#x27;s standard VR controller setup, the player hand is another receiver. That connection leaves another difference open: dressing a figure before you and recognising an appearance as yours. The later mirror can return to that question.
+
+
+## Colour and permission — 28 September 2026
+
+The two RGB controls have equal mechanical reach while their targets carry different social histories. Nail colour also acquires meaning through the body wearing it. The chapter now brings this tension into the act of choosing, without treating an avatar&#x27;s changed appearance as possession of another person&#x27;s experience. Its invitation to enjoy an unfamiliar hand remains.
+
+Audre Lorde&#x27;s [“Age, Race, Class, and Sex: Women Redefining Difference”](https://www.ualberta.ca/en/institute-intersectionality-studies/media-library/intersectionality-readings/lorde-age-race-class-and-sex.pdf) supplies the reference for questioning how difference becomes a hierarchy. The salon comparison is our application. Keep the argument answerable to the two controls and the visitor&#x27;s sense of permission; avoid adding a general survey of identity theory to the encounter.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Nails/artifacts.md">Raw captured source</a></p><pre># Color Nails — Artifacts
+*Color and Composition · F_order · 9 artifacts*
+
+&gt; A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity. In this studio, color is not observed but worn - decoration for a body that exists only as data.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## nail_color_controller
+![nail_color_controller](/scene-catalog/nail_color_controller.png)
+
+Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.
+
+`nail_color_controller`
+
+## hand_model
+![hand_model](/scene-catalog/hand_model.png)
+
+Static hand-model reference for VR scale and positioning — provides a human-proportioned anchor for sizing artifacts in the scene.
+
+`hand_model`
+
+## hand_color_controller
+![hand_color_controller](/scene-catalog/hand_color_controller.png)
+
+Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.
+
+`hand_color_controller`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## dark_side_prism
+![dark_side_prism](/scene-catalog/dark_side_prism.png)
+
+Snell&#x27;s law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle
+
+`dark_side_prism`
+
+## grab_stick_scannerk
+![grab_stick_scannerk](/scene-catalog/grab_stick_scanner.png)
+
+Grabbable stick with a UV-based texture-pixel scanner — samples the hit-point colour from any surface the tip touches, displaying the RGB value live.
+
+`grab_stick_scanner`
+
+## colorballs
+![colorballs](/scene-catalog/colorballs.png)
+
+N rigid spheres sampled from named color palettes — physics + palette = chromatic rain
+
+`colorballs`
+
+## brick_wall_factory
+![brick_wall_factory](/scene-catalog/brick_wall_factory.png)
+
+grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern
+
+`brick_wall_factory`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Nails/summary.md">Raw captured source</a></p><pre># Grand / Petit — Nail Salon
+
+Color_Nails is third in Colour, after Color_Flashlight and before Color_Rainbow. The lamps changed illumination; the salon changes the receiving material.
+
+A 4.3-metre hand rises behind a fine-legged manicure table. A 32-centimetre copy rests on its cushion. Tiny polish bottles, a file and two velvet stools give the oversized client a familiar, intimate setting. Both display hands use the existing right-hand mesh, with independent nail and skin material overrides.
+
+The existing nail_color_controller and hand_color_controller remain primary. Their RGB boxes stand at 0.9–1.4 metres on separate plinths, clear of the table and stools, open for the player&#x27;s hand to reach in. Move either point to recolour the corresponding surfaces on both display hands. The salon subscribes to the same GameManager colour signals already used for persistent player appearance. Updating the display hands does not establish that a tracked player hand is connected.
+
+The room remains 15 by 21 metres, enclosed by its recovered outer walls. Internal grid obstacles and the dark dome were removed to stage the salon on a level floor. The salon replaces the disconnected hand_model exhibit. The colour balls, science screen and a smaller brick-wall study remain at the sides. Automatic sculptures are excluded from the salon&#x27;s working area. Both side routes admit the tested body capsule.
+
+The book invites a comparison between a small coordinate gesture and the same colour becoming intimate or monumental. See final.md for that passage and field_notes.md for verification and the archived previous arrangement.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Nails/blurb.md">Raw captured source</a></p><pre># Grand / Petit
+
+A hand has outgrown the furniture. Before it, a manicure table holds tiny bottles and another hand small enough for a cushion. Move one point in the colour box. The small nail and the giant one answer together. Does the same colour feel equally delicate on both?
+</pre></section></body></html>

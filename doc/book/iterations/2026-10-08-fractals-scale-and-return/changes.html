@@ -1,0 +1,331 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractals — before and after</title><style>
+:root{--paper:#f6f2eb;--ink:#24222a;--rose:#b6577f;--line:#d8cdc9}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}header,main,footer{max-width:1320px;margin:auto;padding:28px 5vw}nav{display:flex;flex-wrap:wrap;gap:22px}a{color:#803652;text-underline-offset:4px}h1{font:clamp(36px,5.3vw,68px)/1.06 Georgia,serif;max-width:950px}h2{font:34px/1.2 Georgia,serif;margin-top:54px}h3{font-size:21px}p{max-width:74ch}.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:12px}.lead{font:24px/1.5 Georgia,serif;max-width:65ch}.route{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:32px 0}.route span{border:1px solid var(--line);padding:12px 18px;background:#fffdf8}blockquote{font:26px/1.45 Georgia,serif;margin:30px 0;padding:10px 24px;border-left:4px solid var(--rose)}figure{margin:26px 0}img{width:100%;display:block}figcaption{font-size:14px;color:#645761;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:25px}.pair article{background:#fffdf8;padding:24px;min-width:0}.pair h1{font-size:30px}.pair p{font-size:16px}.reading{max-width:880px}.reading article{margin:55px 0;padding-top:10px;border-top:1px solid var(--line)}.reading article h1{font-size:40px}table{border-collapse:collapse;width:100%;background:#fffdf8}td,th{padding:15px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:13px;text-transform:uppercase}button{padding:10px 18px;border:1px solid var(--line);font:inherit;background:white;cursor:pointer;margin:5px 8px 5px 0}button[aria-pressed=true]{background:var(--ink);color:white}pre{background:#25232b;color:#f5edf0;padding:18px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.88em}details{border-top:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:650}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:8px 15px;font-size:14px}.notes{background:#eae2dc;padding:24px}.notes p{margin:8px 0}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}td,th{padding:10px}}@media print{nav,button{display:none}body{background:white}.pair{display:block}article{break-before:page}pre{white-space:pre-wrap}}
+</style></head><body><header><p class="kicker">Endless Museum · Fractals · 8 October 2026</p><nav><a href="index.html">Museum experiment</a><a href="final.html">Whole reflective sequence</a><a href="changes.html">Before / after texts</a><a href="method.html">Working method</a></nav></header><main><h1>Four changes through seven halls.</h1><p>These are the full texts before and after this pass. Cantor, Koch / Sierpinski and Golden Spiral retain their existing reflections. Tutorial files are unchanged.</p><p><a href="final-changes.diff">Plain-text diff</a></p><section id="Fractal_Recursion"><h2>Recursion</h2><p>Finite calls give us somewhere to begin. Walking through a construction and changing its rule open different possibilities.</p><details><summary>Read the full before and after</summary><div class="pair"><article><p class="kicker">Before this pass</p><h1>How many times can <em>again</em> happen?</h1>
+<!-- @fractal_recursion_2 -->
+
+<p>A square waits above the first desk. Press MORE. Another square appears inside it, half as wide. Ask again. The instruction is brief enough to hold in your head; the shrinking squares soon become harder to hold in your eyes.</p>
+<p>Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.</p>
+<p>Here is the self-call from the artifact:<sup id="Fractal_Recursion-before-fnref:noc"><a class="footnote-ref" href="#Fractal_Recursion-before-fn:noc">2</a></sup></p>
+<pre><code class="language-gdscript">var new_size: float = size * size_reduction
+_draw_recursive_pattern(center, new_size, d - 1)
+</code></pre>
+<p>The function has just drawn a square. It now calls itself with a smaller size and one less level to spend. At the beginning of each call, this condition can return it to the caller:</p>
+<pre><code class="language-gdscript">if d &lt;= 0 or size &lt; TERM_MIN_SIZE:
+    return
+</code></pre>
+<p><code>TERM_MIN_SIZE</code> is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.</p>
+<p>Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.</p>
+<p>Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.</p>
+<p><img alt="The same shrinking terms become doorframes on the museum floor." src="images/Fractal_Recursion-recursion-thresholds.png" /></p>
+<p>Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.<sup id="Fractal_Recursion-before-fnref:1"><a class="footnote-ref" href="#Fractal_Recursion-before-fn:1">1</a></sup> Here we reach a last square. The room has stopped where a rule could go on.</p>
+<p>We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.</p>
+<!-- @example_8_3_recursion_circles_vr -->
+
+<p>The other desk begins with one ring. Predict the count after MORE. Five. Once more: twenty-one. The footprint remains roughly the same while the number of things occupying it changes quickly.</p>
+<p>Each call draws its ring, then makes four smaller calls, shifting their centres right, left, up and down. Four levels leave <code>1 + 4 + 16 + 64</code> rings: eighty-five. The fifth leaves three hundred and forty-one. “One more” has acquired a different cost.</p>
+<p>Return to depth four and try PACKING. The child radius changes; the number of rings stays. Press PACKING until the readout says dust, then ask for depth five: the fifth ring’s requested radius, two metres times 0.25 four times over, is about eight millimetres, below the source’s one-centimetre cutoff, and a whole level is lost. A depth allowance does not guarantee that every call will draw. Some overlap, some meet, some separate. TURN releases their planes into the artifact's rotating motion. Stop it to return to the frontal comparison. An apparent tangle can come from placement and pose as well as from adding more things.</p>
+<p>The room can accommodate three hundred and forty-one rings. That does not mean it has made three hundred and forty-one distinctions easy to read. We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.</p>
+<!-- @cube_subdivision -->
+
+<p>Now a cube waits on a plinth. Press SPLIT. Eight smaller cubes take its place. Press again. Fifteen, not sixty-four. This machine divides one selected cell at a time.</p>
+<p>Choose DRILL and spend the twelve splits. Then choose SPREAD and spend the same allowance. Both end with eighty-five cells. DRILL follows one corner into smaller and smaller scales; SPREAD chooses a cell from the shallowest remaining level. The readout reaches depth twelve in one case and depth three in the other. Equal counts have bought different bodies.</p>
+<p>LOTS draws from the remaining population. Its seed is fixed here. BEGIN lets you repeat the same choices and inspect something you missed. Repetition becomes a way of paying attention.</p>
+<p>The source sets a child's scale like this:</p>
+<pre><code class="language-gdscript">var new_scale = cube_scale * 0.5 * 0.9
+</code></pre>
+<p>Half, then a little smaller. The gaps that make the division legible are authored too. And the tiny cell that DRILL keeps choosing still costs something even after its difference becomes difficult to see. More work need not yield more experience. Where would you spend the next split?</p>
+<!-- @recursive_chair -->
+
+<p>At the last desk, NEXT starts to make a chair. After the first cut, press GHOST. Eleven pale cells return around the sixteen that were kept. SCAR marks the discarded centres; GONE hides those witnesses again. The choice of what to keep has become visible beside its result.</p>
+<p>Something else moved. The first stage lifts the divided lattice; subsequent stages flatten the seat, extend legs and back, then add armrests. The chair was not simply waiting inside the original cube. Parts are selected, translated, stretched and added according to an intention about chairs.</p>
+<p>This artifact carries “recursive” in its name, but its construction runs through five authored stages. There is no self-call in that sequence. Its presence beside the squares is useful precisely because a familiar appearance can conceal a different procedure.</p>
+<!-- @ -->
+
+<p>The table, staircase, pagoda and other works remain beyond the desks, a collection to return to with these distinctions in hand. We do not have to make every object evidence for the same claim.</p>
+<p>A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_Recursion-before-fn:1">
+<p>Benoît Mandelbrot coined <em>fractal</em> in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in <a href="https://natureofcode.com/fractals/#what-is-a-fractal">“What Is a Fractal?”, <em>The Nature of Code</em></a>. It is a way into the examples, not a complete mathematical definition.&#160;<a class="footnote-backref" href="#Fractal_Recursion-before-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="Fractal_Recursion-before-fn:noc">
+<p>The square and ring source files credit Daniel Shiffman's <em>The Nature of Code</em>, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.&#160;<a class="footnote-backref" href="#Fractal_Recursion-before-fnref:noc" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><p class="kicker">Current final.md</p><h1>How many times can <em>again</em> happen?</h1>
+<!-- @fractal_recursion_2 -->
+
+<p>A square waits above the first desk. Press MORE. Another square appears inside it, half as wide. Ask again. The instruction is brief enough to hold in your head; the shrinking squares soon become harder to hold in your eyes.</p>
+<p>Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.</p>
+<p>Here is the self-call from the artifact:<sup id="Fractal_Recursion-after-fnref:noc"><a class="footnote-ref" href="#Fractal_Recursion-after-fn:noc">2</a></sup></p>
+<pre><code class="language-gdscript">var new_size: float = size * size_reduction
+_draw_recursive_pattern(center, new_size, d - 1)
+</code></pre>
+<p>The function has just drawn a square. It now calls itself with a smaller size and one less level to spend. At the beginning of each call, this condition can return it to the caller:</p>
+<pre><code class="language-gdscript">if d &lt;= 0 or size &lt; TERM_MIN_SIZE:
+    return
+</code></pre>
+<p><code>TERM_MIN_SIZE</code> is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.</p>
+<p>Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.</p>
+<p>Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.</p>
+<p><img alt="The same shrinking terms become doorframes on the museum floor." src="images/Fractal_Recursion-recursion-thresholds.png" /></p>
+<p>Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.<sup id="Fractal_Recursion-after-fnref:1"><a class="footnote-ref" href="#Fractal_Recursion-after-fn:1">1</a></sup> Here we reach a last square. The room has stopped where a rule could go on.</p>
+<p>We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.</p>
+<!-- @example_8_3_recursion_circles_vr -->
+
+<p>The other desk begins with one ring. Predict the count after MORE. Five. Once more: twenty-one. The footprint remains roughly the same while the number of things occupying it changes quickly.</p>
+<p>Each call draws its ring, then makes four smaller calls, shifting their centres right, left, up and down. Four levels leave <code>1 + 4 + 16 + 64</code> rings: eighty-five. The fifth leaves three hundred and forty-one. “One more” has acquired a different cost.</p>
+<p>Return to depth four and try PACKING. The child radius changes; the number of rings stays. Press PACKING until the readout says dust, then ask for depth five: the fifth ring’s requested radius, two metres times 0.25 four times over, is about eight millimetres, below the source’s one-centimetre cutoff, and a whole level is lost. A depth allowance does not guarantee that every call will draw. Some overlap, some meet, some separate. TURN releases their planes into the artifact's rotating motion. Stop it to return to the frontal comparison. An apparent tangle can come from placement and pose as well as from adding more things.</p>
+<p>The room can accommodate three hundred and forty-one rings. That does not mean it has made three hundred and forty-one distinctions easy to read. We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.</p>
+<!-- @cube_subdivision -->
+
+<p>Now a cube waits on a plinth. Press SPLIT. Eight smaller cubes take its place. Press again. Fifteen, not sixty-four. This machine divides one selected cell at a time.</p>
+<p>Choose DRILL and spend the twelve splits. Then choose SPREAD and spend the same allowance. Both end with eighty-five cells. DRILL follows one corner into smaller and smaller scales; SPREAD chooses a cell from the shallowest remaining level. The readout reaches depth twelve in one case and depth three in the other. Equal counts have bought different bodies.</p>
+<p>LOTS draws from the remaining population. Its seed is fixed here. BEGIN lets you repeat the same choices and inspect something you missed. Repetition becomes a way of paying attention.</p>
+<p>The source sets a child's scale like this:</p>
+<pre><code class="language-gdscript">var new_scale = cube_scale * 0.5 * 0.9
+</code></pre>
+<p>Half, then a little smaller. The gaps that make the division legible are authored too. And the tiny cell that DRILL keeps choosing still costs something even after its difference becomes difficult to see. More work need not yield more experience. Where would you spend the next split?</p>
+<!-- @recursive_chair -->
+
+<p>At the last desk, NEXT starts to make a chair. After the first cut, press GHOST. Eleven pale cells return around the sixteen that were kept. SCAR marks the discarded centres; GONE hides those witnesses again. The choice of what to keep has become visible beside its result.</p>
+<p>Something else moved. The first stage lifts the divided lattice; subsequent stages flatten the seat, extend legs and back, then add armrests. The chair was not simply waiting inside the original cube. Parts are selected, translated, stretched and added according to an intention about chairs.</p>
+<p>This artifact carries “recursive” in its name, but its construction runs through five authored stages. There is no self-call in that sequence. Its presence beside the squares is useful precisely because a familiar appearance can conceal a different procedure.</p>
+<!-- @ -->
+
+<p>The table, staircase, pagoda and other works remain beyond the desks, a collection to return to with these distinctions in hand. We do not have to make every object evidence for the same claim.</p>
+<p>A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?</p>
+<p>There are two ways to leave this room with something changed. Walk to another frame, and the same construction meets you elsewhere. Return to the desk and change its rule, and another construction becomes available. The museum is one arrangement of these possibilities. Its finite rooms give us somewhere to begin looking; they need not settle where the inquiry ends.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_Recursion-after-fn:1">
+<p>Benoît Mandelbrot coined <em>fractal</em> in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in <a href="https://natureofcode.com/fractals/#what-is-a-fractal">“What Is a Fractal?”, <em>The Nature of Code</em></a>. It is a way into the examples, not a complete mathematical definition.&#160;<a class="footnote-backref" href="#Fractal_Recursion-after-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="Fractal_Recursion-after-fn:noc">
+<p>The square and ring source files credit Daniel Shiffman's <em>The Nature of Code</em>, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.&#160;<a class="footnote-backref" href="#Fractal_Recursion-after-fnref:noc" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></details></section><section id="Fractal_RecursiveTrees"><h2>Recursive Trees</h2><p>Turn one branch; keep a drawing; walk below its descendants; return with a more situated description.</p><details><summary>Read the full before and after</summary><div class="pair"><article><p class="kicker">Before this pass</p><h1>Where will the next branch go?</h1>
+<!-- @recursive_tree_2 -->
+
+<p>A trunk waits. Where would you put its first fork?</p>
+<p>Press GROW. Two branches appear at its tip. Press again, following one of those branches rather than the outline of the whole tree. Each new pair begins where a previous segment ends. Predict the next fork before asking for it.</p>
+<p>The previous room let one call become several. Here we give those calls a place to start, a direction and a length. Four presses leave thirty-one segments, including the trunk. The fourth generation contains sixteen of them. Shorter branches do not mean fewer branches.</p>
+<p>Beside the desk, the same tree fits between your hands. A rose point and a black point mark its first fork. Take one. Turn it sideways. Its children move with it; the other family of branches stays. You have changed one attachment, and the change has travelled further than your hand. Look up at the large canopy. It has received the same turn.</p>
+<p>The grip lets you turn a branch within a bounded arc. It keeps the length. On release the sphere returns to that branch's tip. There are two kinds of reach here: where your hand can go, and what we allow that movement to alter. A local decision can have many descendants without reaching everything. Release the point before returning to the desk. Its ANGLE and LENGTH controls rebuild the whole specimen; they leave your local edit behind.</p>
+<p>Leave the generation count where it is and press ANGLE. The tree opens. Press again: its branches draw closer to the direction their parents were taking. The button cycles through three turns, measured from the parent direction. Follow the same first fork. Its descendants have moved, but none has been added or removed.</p>
+<p>Now press LENGTH. The ratio changes from 0.70 to 0.85: each child inherits more of its parent's length. The next press takes it to 0.50. You can make a crowded body or a much smaller one without changing the number of segments. Walk around it. A branch that seemed short from the desk may have been pointing towards you.</p>
+<p>These lines come from the growing tree's implementation:</p>
+<pre><code class="language-gdscript">var new_length = parent_data.length * length_reduction
+</code></pre>
+<p>And, after the new direction has been calculated:</p>
+<pre><code class="language-gdscript">var end_position = parent_pos + branch_direction * new_length
+</code></pre>
+<p>The second line hands the next fork its beginning. A vector, a multiplication and an addition carry the body further. What looked like a tree can be followed as a succession of these handovers.</p>
+<p>Press FORKS at the fourth generation. Three descendants now leave each tip. The display rises from thirty-one to one hundred and twenty-one segments. This change adds connections to the branching graph; turning or lengthening its existing edges did not. A visible crossing of two branches still does not join them in the program.</p>
+<p>RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Now press GROW once more and watch where the new branches appear. Every unfinished tip advances in the same press. The desk holds those tips in a queue and works through one generation at a time.</p>
+<p>We could instead follow one branch all the way to its last twig before returning for its siblings. A self-call can take that route. With the same fixed angles and lengths, the completed tree could look the same; watching it being made would be a different encounter. Here the next generation waits for your hand. The surrounding museum continues.</p>
+<p>There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. At the desk, the branches are visible meshes; they do not offer the player's body a climbable support. In the aisle, the same branch geometry has been enlarged and made solid. Walk towards its trunk. It stops you. Step beside it and look up. The first fork is now above your head.</p>
+<p>Grow to the fourth generation again, then return to ANGLE and LENGTH. Open the turn to sixty-five degrees and let each child keep 0.85 of its parent's length. Some tips turn down towards the floor. The count has stayed at thirty-one, but the space beneath them has changed. Walk back among them. What looked like a small adjustment at the desk changes how far the branches reach over you.</p>
+<p>The same fork can be something to stand beneath or something to get past. Those meanings arrive with us. The instruction contains neither. We have given the branches size and solidity; we have not taught them to make room for us.</p>
+<p><img alt="Looking up from beneath the enlarged, solid tree in the museum aisle." src="images/Fractal_RecursiveTrees-tree-canopy.png" /></p>
+<!-- @recursive_tree -->
+
+<p>Across the approach, the red block tree has already spent its calls. Choose a large branch and follow it towards its smaller descendants. At a fork, predict the next division, then find another fork at a similar depth. A shared procedure need not give them the same dimensions or the same number of children.</p>
+<p>Press STRATA. Colour separates three branching levels from the trunk. Follow a route to its last visible block. REACH draws the accumulated bounds; ENDS adds marks at the handover and terminal branches. FORM returns the original colours. These readings belong to the same built geometry. Changing the view does not draw another tree.</p>
+<p>This tree does use random choices, from the seed shown on its desk. The choices vary its branches within a fixed construction rule. A seed can repeat an arrangement; it cannot tell us which arrangements the rule never permits. Even the blunt boxes can persuade us to call it organic. We can enjoy that recognition and still ask what it has made too easy to recognise.</p>
+<!-- @ -->
+
+<p>The small tree further in begins with a sentence. A short string is rewritten four times, then read as steps and turns. Its angle control changes how those turns are drawn. The letters can stay while the branches move.</p>
+<p>Look back at the two studies near the entrance: the growing tree keeps its proportions; the red tree repeats a seeded draw. Beside them, the little grammar tree gives instructions letters we will learn to read in a later hall. Which one most readily becomes a tree in your eyes? That recognition arrives before any of them has met soil, light or wind.</p>
+<p>Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view. They need not all answer the same question. The old enclosure remains a detour around something we cannot see from every position. We have more procedures to learn before resemblance becomes our only way to choose a body.</p>
+<p>Next comes Cantor: another generation, this time made by deciding what will be removed.</p></article><article><p class="kicker">Current final.md</p><h1>Where will the next branch go?</h1>
+<!-- @recursive_tree_2 -->
+
+<p>A trunk waits. Where would you put its first fork?</p>
+<p>Press GROW. Two branches appear at its tip. Press again, following one of those branches rather than the outline of the whole tree. Each new pair begins where a previous segment ends. Predict the next fork before asking for it.</p>
+<p>The previous room let one call become several. Here we give those calls a place to start, a direction and a length. Four presses leave thirty-one segments, including the trunk. The fourth generation contains sixteen of them. Shorter branches do not mean fewer branches.</p>
+<p>Beside the desk, the same tree fits between your hands. A rose point and a black point mark its first fork. Take one. Turn it sideways. Its children move with it; the other family of branches stays. You have changed one attachment, and the change has travelled further than your hand. Look up at the large canopy. It has received the same turn.</p>
+<p>The grip lets you turn a branch within a bounded arc. It keeps the length. On release the sphere returns to that branch's tip. There are two kinds of reach here: where your hand can go, and what we allow that movement to alter. A local decision can have many descendants without reaching everything. Release the point before returning to the desk. Its ANGLE and LENGTH controls rebuild the whole specimen; they leave your local edit behind.</p>
+<p>Leave the generation count where it is and press ANGLE. The tree opens. Press again: its branches draw closer to the direction their parents were taking. The button cycles through three turns, measured from the parent direction. Follow the same first fork. Its descendants have moved, but none has been added or removed.</p>
+<p>Now press LENGTH. The ratio changes from 0.70 to 0.85: each child inherits more of its parent's length. The next press takes it to 0.50. You can make a crowded body or a much smaller one without changing the number of segments. Walk around it. A branch that seemed short from the desk may have been pointing towards you.</p>
+<p>These lines come from the growing tree's implementation:</p>
+<pre><code class="language-gdscript">var new_length = parent_data.length * length_reduction
+</code></pre>
+<p>And, after the new direction has been calculated:</p>
+<pre><code class="language-gdscript">var end_position = parent_pos + branch_direction * new_length
+</code></pre>
+<p>The second line hands the next fork its beginning. A vector, a multiplication and an addition carry the body further. What looked like a tree can be followed as a succession of these handovers.</p>
+<p>Press FORKS at the fourth generation. Three descendants now leave each tip. The display rises from thirty-one to one hundred and twenty-one segments. This change adds connections to the branching graph; turning or lengthening its existing edges did not. A visible crossing of two branches still does not join them in the program.</p>
+<p>RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Now press GROW once more and watch where the new branches appear. Every unfinished tip advances in the same press. The desk holds those tips in a queue and works through one generation at a time.</p>
+<p>We could instead follow one branch all the way to its last twig before returning for its siblings. A self-call can take that route. With the same fixed angles and lengths, the completed tree could look the same; watching it being made would be a different encounter. Here the next generation waits for your hand. The surrounding museum continues.</p>
+<p>There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. At the desk, the branches are visible meshes; they do not offer the player's body a climbable support. In the aisle, the same branch geometry has been enlarged and made solid. Walk towards its trunk. It stops you. Step beside it and look up. The first fork is now above your head.</p>
+<p>Grow to the fourth generation again, then return to ANGLE and LENGTH. Open the turn to sixty-five degrees and let each child keep 0.85 of its parent's length. Some tips turn down towards the floor. The count has stayed at thirty-one, but the space beneath them has changed. Walk back among them. What looked like a small adjustment at the desk changes how far the branches reach over you.</p>
+<p>The same fork can be something to stand beneath or something to get past. Those meanings arrive with us. The instruction contains neither. We have given the branches size and solidity; we have not taught them to make room for us.</p>
+<p>Beside the controls, two flat drawings follow the tree. The plan keeps its spread and leaves out height; the side view keeps height and leaves out depth. A branch can become a short mark, or a dot, by pointing along the direction that drawing omits. Nothing has been cut from the tree. Something has been left out of the account.</p>
+<p>Press KEEP before turning a point. Rose lines retain that view while black lines follow the present branches. Walk beneath the canopy, then return. Which difference mattered while you were there? The drawings remember endpoints, not the way you ducked or the branch you thought would stop you. Try describing the tree again. “A smaller branch follows a larger one” may now need a place, a direction, and a body to which it matters.</p>
+<p>KEEP does not undo the turn, save this room for another visit, or choose the better tree. It holds one comparison until you replace or clear it. Something caught your attention; the instrument gives you time to decide what to do with that difference.</p>
+<p><img alt="Looking up from beneath the enlarged, solid tree in the museum aisle." src="images/Fractal_RecursiveTrees-tree-canopy.png" /></p>
+<!-- @recursive_tree -->
+
+<p>Across the approach, the red block tree has already spent its calls. Choose a large branch and follow it towards its smaller descendants. At a fork, predict the next division, then find another fork at a similar depth. A shared procedure need not give them the same dimensions or the same number of children.</p>
+<p>Press STRATA. Colour separates three branching levels from the trunk. Follow a route to its last visible block. REACH draws the accumulated bounds; ENDS adds marks at the handover and terminal branches. FORM returns the original colours. These readings belong to the same built geometry. Changing the view does not draw another tree.</p>
+<p>This tree does use random choices, from the seed shown on its desk. The choices vary its branches within a fixed construction rule. A seed can repeat an arrangement; it cannot tell us which arrangements the rule never permits. Even the blunt boxes can persuade us to call it organic. We can enjoy that recognition and still ask what it has made too easy to recognise.</p>
+<!-- @ -->
+
+<p>The small tree further in begins with a sentence. A short string is rewritten four times, then read as steps and turns. Its angle control changes how those turns are drawn. The letters can stay while the branches move.</p>
+<p>Look back at the two studies near the entrance: the growing tree keeps its proportions; the red tree repeats a seeded draw. Beside them, the little grammar tree gives instructions letters we will learn to read in a later hall. Which one most readily becomes a tree in your eyes? That recognition arrives before any of them has met soil, light or wind.</p>
+<p>Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view. They need not all answer the same question. The old enclosure remains a detour around something we cannot see from every position. We have more procedures to learn before resemblance becomes our only way to choose a body.</p>
+<p>Next comes Cantor: another generation, this time made by deciding what will be removed.</p></article></div></details></section><section id="Fractal_MengerSponge"><h2>Menger Sponge</h2><p>Finding a hole becomes finding a route. Bring the bodily question back to the construction.</p><details><summary>Read the full before and after</summary><div class="pair"><article><p class="kicker">Before this pass</p><h1>A hole becomes a place</h1>
+<!-- @menger_sponge -->
+
+<p>The cube has no entrance. Nine metres high, nine across, nine deep. Its surface faces us without offering a way in.</p>
+<p>At the desk to the right, press NEXT. Find the opening before counting the blocks. A square of the far side has become visible. Move a little: something opens across it, sideways. The removal did more than shorten the route between two faces. It made a crossing inside the cube.</p>
+<p>Press NEXT again. Keep the large opening as a reference and look at the blocks around it. Each now carries smaller openings in the same relation. FRAME marks the outside of the original cube. The construction still reaches those edges, although more of its interior has become air.</p>
+<p>The display counts the solids: one, twenty, four hundred. Beside the count, retained volume falls from 729 to 540 to 400 cubic metres. More objects have been made to represent less material. We met that difference in Cantor's rows. Now its gaps have acquired depth.</p>
+<p>The source addresses twenty-seven positions, three along each axis:</p>
+<pre><code class="language-gdscript">var x: int = i % 3
+var y: int = (i / 3) % 3
+var z: int = i / 9
+</code></pre>
+<p>Each coordinate runs from zero to two. The retained-position table skips the centre and the six face centres: seven cells making a cross through the parent. Twenty remain. The next call receives each of those twenty cubes, with its scale divided by three. The same selection can now make an opening inside something that was previously kept.</p>
+<p>Try GHOST. Pale volumes occupy the removals. After two cuts, seven large ghosts mark the first cross and 140 smaller ones mark the next. These marks have no collision. They are a record of what the construction discarded, drawn in the places our bodies might use.</p>
+<p>In the previous hall, the removed middles could become the work. Here the removed volumes may become somewhere to be. Turn GHOST off again and approach the frame at floor level.</p>
+<p>The glass cube offers another way of moving. Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.</p>
+<p>Rise towards the large opening. What looked like a dark square becomes a passage, with smaller openings in its sides. Try going through, then circle above the sponge and approach from another face. Choose one small retained cube and try identifying it in both views. The openings rearrange in projection even though their positions in the object remain fixed.</p>
+<p>Look into a smaller copy of the passage. Its axial opening is a metre across and a metre high. Light can travel through where a standing body cannot. The body the sponge collides with is a capsule forty centimetres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.</p>
+<p>There was a connection in the geometry. There was not yet a route for every body.</p>
+<p>We changed locomotion without changing the sponge's selection rule. We could also ask what a smaller body would encounter, or what would happen if the opening were enlarged. These would be further experiments. The present room gives us one specific comparison: a large passage we can fly through and a smaller, visibly connected opening that a standing capsule cannot enter.</p>
+<p>The glass, the support below us and the borrowed flight belong to the installation. The glass confines that movement to a place where its beginning and ending can be found. At the desk, NEXT, BACK and RESET wait while a visitor remains inside; another press is needed after everyone leaves. GHOST and FRAME can still change the reading. We can discuss a different solid shape without rebuilding it around someone already inhabiting the last one.</p>
+<p>Two cuts are enough for this encounter. A third would ask for eight thousand retained cubes with edges a third of a metre long. It would bring further openings, each smaller again. That is a cost and a possibility to investigate, not evidence that the next generation would be a better room. The infinite Menger construction<sup id="Fractal_MengerSponge-before-fnref:1"><a class="footnote-ref" href="#Fractal_MengerSponge-before-fn:1">1</a></sup> has a zero-volume limit; these four hundred one-metre cubes retain positive volume and real collision. The limit is not what our body is touching.</p>
+<p>The neighbouring aggregation study remains another way for form to begin: wandering particles can attach to an existing cluster. It has its own clock and rules. The catalyst installations and the dark sphere remain too. They offer detours from the cut-and-repeat procedure; this desk does not control them.</p>
+<p>Next, repetition takes a numerical form. Instead of retaining twenty descendants, we will generate each new quantity from the preceding two and inspect how its representation changes what we can compare.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_MengerSponge-before-fn:1">
+<p>Karl Menger described the sponge in 1926 (“Allgemeine Räume und Cartesische Räume”, <em>Proceedings of the Amsterdam Academy</em> 29) as a universal curve: every curve, however tangled, fits inside it.&#160;<a class="footnote-backref" href="#Fractal_MengerSponge-before-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><p class="kicker">Current final.md</p><h1>A hole becomes a place</h1>
+<!-- @menger_sponge -->
+
+<p>The cube has no entrance. Nine metres high, nine across, nine deep. Its surface faces us without offering a way in.</p>
+<p>At the desk to the right, press NEXT. Find the opening before counting the blocks. A square of the far side has become visible. Move a little: something opens across it, sideways. The removal did more than shorten the route between two faces. It made a crossing inside the cube.</p>
+<p>Press NEXT again. Keep the large opening as a reference and look at the blocks around it. Each now carries smaller openings in the same relation. FRAME marks the outside of the original cube. The construction still reaches those edges, although more of its interior has become air.</p>
+<p>The display counts the solids: one, twenty, four hundred. Beside the count, retained volume falls from 729 to 540 to 400 cubic metres. More objects have been made to represent less material. We met that difference in Cantor's rows. Now its gaps have acquired depth.</p>
+<p>The source addresses twenty-seven positions, three along each axis:</p>
+<pre><code class="language-gdscript">var x: int = i % 3
+var y: int = (i / 3) % 3
+var z: int = i / 9
+</code></pre>
+<p>Each coordinate runs from zero to two. The retained-position table skips the centre and the six face centres: seven cells making a cross through the parent. Twenty remain. The next call receives each of those twenty cubes, with its scale divided by three. The same selection can now make an opening inside something that was previously kept.</p>
+<p>Try GHOST. Pale volumes occupy the removals. After two cuts, seven large ghosts mark the first cross and 140 smaller ones mark the next. These marks have no collision. They are a record of what the construction discarded, drawn in the places our bodies might use.</p>
+<p>In the previous hall, the removed middles could become the work. Here the removed volumes may become somewhere to be. Turn GHOST off again and approach the frame at floor level.</p>
+<p>The glass cube offers another way of moving. Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.</p>
+<p>Rise towards the large opening. What looked like a dark square becomes a passage, with smaller openings in its sides. Try going through, then circle above the sponge and approach from another face. Choose one small retained cube and try identifying it in both views. The openings rearrange in projection even though their positions in the object remain fixed.</p>
+<p>Look into a smaller copy of the passage. Its axial opening is a metre across and a metre high. Light can travel through where a standing body cannot. The body the sponge collides with is a capsule forty centimetres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.</p>
+<p>There was a connection in the geometry. There was not yet a route for every body.</p>
+<p>From outside, we asked where the hole was. Inside, we ask where we can turn, see ahead, or get out. Moving closer has changed the question as well as the view. A diagram can keep the opening's dimensions; it needs more decisions before it can answer for this journey. Carry that difference back to the desk before asking for another cut.</p>
+<p>We changed locomotion without changing the sponge's selection rule. We could also ask what a smaller body would encounter, or what would happen if the opening were enlarged. These would be further experiments. The present room gives us one specific comparison: a large passage we can fly through and a smaller, visibly connected opening that a standing capsule cannot enter.</p>
+<p>The glass, the support below us and the borrowed flight belong to the installation. The glass confines that movement to a place where its beginning and ending can be found. At the desk, NEXT, BACK and RESET wait while a visitor remains inside; another press is needed after everyone leaves. GHOST and FRAME can still change the reading. We can discuss a different solid shape without rebuilding it around someone already inhabiting the last one.</p>
+<p>Two cuts are enough for this encounter. A third would ask for eight thousand retained cubes with edges a third of a metre long. It would bring further openings, each smaller again. That is a cost and a possibility to investigate, not evidence that the next generation would be a better room. The infinite Menger construction<sup id="Fractal_MengerSponge-after-fnref:1"><a class="footnote-ref" href="#Fractal_MengerSponge-after-fn:1">1</a></sup> has a zero-volume limit; these four hundred one-metre cubes retain positive volume and real collision. The limit is not what our body is touching.</p>
+<p>The neighbouring aggregation study remains another way for form to begin: wandering particles can attach to an existing cluster. It has its own clock and rules. The catalyst installations and the dark sphere remain too. They offer detours from the cut-and-repeat procedure; this desk does not control them.</p>
+<p>Next, repetition takes a numerical form. Instead of retaining twenty descendants, we will generate each new quantity from the preceding two and inspect how its representation changes what we can compare.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_MengerSponge-after-fn:1">
+<p>Karl Menger described the sponge in 1926 (“Allgemeine Räume und Cartesische Räume”, <em>Proceedings of the Amsterdam Academy</em> 29) as a universal curve: every curve, however tangled, fits inside it.&#160;<a class="footnote-backref" href="#Fractal_MengerSponge-after-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></details></section><section id="Fractal_Synthesis"><h2>Synthesis</h2><p>Name the research method: describe, draw, inhabit, revise. Ask what warrants carrying a local finding into a room, sequence or book.</p><details><summary>Read the full before and after</summary><div class="pair"><article><p class="kicker">Before this pass</p><h1>What, exactly, is repeated?</h1>
+<!-- @cantor_set -->
+
+<p>Can you explain two recursive constructions without using their names?</p>
+<p>Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Point to an example of the input, the descendants and the gap. Then identify where the displayed construction stops.</p>
+<p>Try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. After one cut there are two pieces, each two metres long. Before the second cut, predict both the number of pieces and their combined length. They will not change in the same direction.</p>
+<p>Here is the step that actually creates a descendant's size:</p>
+<pre><code class="language-gdscript">var new_length = bar_length / 3.0
+</code></pre>
+<p>In <code>cantor_set.gd</code>, <code>perform_iteration()</code> creates a left bar and a right bar of that length, each centred a third of the parent's length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.</p>
+<p>After three cuts, press HISTORY. The upper rows disappear. Has another third been removed?</p>
+<p>The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What disappeared was the visible record of earlier stages. Bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.</p>
+<p>This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.</p>
+<p>The fifth cut is the desk's last. It leaves thirty-two finite pieces. The stopping point gives our attention and this instrument somewhere to stand. It does not establish that further difference is impossible. RESET returns to the uncut beginning; it does not rewind the museum.</p>
+<!-- @recursive_tree -->
+
+<p>The red block tree has already branched. Find a fork that seems to end, and follow it backward. What would a call have to remember to place a smaller branch there?</p>
+<p>Press STRATA. The blocks change colour according to their recorded branch levels. Press REACH and volumes enclose the extents accumulated through those levels. ENDS marks the joint where the trunk hands off and every deepest recorded block. FORM brings the solid reading back. Compare the same fork through these views: none of these buttons grows a new tree.</p>
+<p>The source receives a parent, an origin, a number of branches and two depth values. Its stopping condition is small enough to read in one breath:</p>
+<pre><code class="language-gdscript">if current_depth &gt;= max_depth:
+    return
+</code></pre>
+<p>Later in <code>recursive_tree.gd</code>, <code>generate_branches()</code> passes the continuation on:</p>
+<pre><code class="language-gdscript">generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
+</code></pre>
+<p>The surrounding code chooses dimensions, directions and descendant counts with a local random-number generator. This placement starts from seed 12345. The nested calls stop after three branching levels. A seed is one part of that recipe; the generator, draw order and ranges also matter. The desk's changing colours and cages read the resulting geometry without drawing those random choices again.</p>
+<p>Try the incomplete description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. A cage around its reach adds another representation: it encloses empty space as well as blocks. It is not a new shelter with solid walls.</p>
+<p>We have accumulated ways to make form, and ways to mistake a reading for the form. The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those are different interventions, with different consequences.</p>
+<!-- @ -->
+
+<p>The collection beyond offers further procedures to compare. Its held examples leave time for looking; the moving works keep their own clocks. We do not need to turn every resemblance into the same law.</p>
+<p>The trees around this hall were grown by a rule too, and it is not any of the desks’. The biome’s own generator writes a sentence with an L-system and reads it with a turtle in three dimensions; how many generations, how many branches at a fork, the angle and the taper come from that plant’s own genes, so no two are the same tree. The flag in the stage file that calls this flora fractal is a name nothing reads. What the ring inherits that the desks do not show is a body per plant: a different sentence for each, and a reader that gives it tubes and leaves. That grammar is where the next sequence begins.</p>
+<p>The names on these desks arrived late in another sense. Cantor's set is dated 1883, Koch's curve 1904, Sierpinski's triangle 1915, Menger's sponge 1926, and the word that gathers them, <em>fractal</em>, 1975. The structure is older than any of them. The Ba-ila settlements of what is now Zambia were built as a ring of enclosures, each enclosure itself a ring, with the chief's ring at the back of the village repeating the whole at a smaller scale, long before a mathematician called the arrangement self-similar,<sup id="Fractal_Synthesis-before-fnref:1"><a class="footnote-ref" href="#Fractal_Synthesis-before-fn:1">1</a></sup> and the geometric ornament of Islamic architecture repeats a motif inside itself at descending scales for reasons of its own. A rule can be practised for centuries before it is written down. These desks show the written form. They do not show who was already building it.</p>
+<p>Carry one explicit rule into the grammar laboratory. There, a string is rewritten before it is read as movement, and the interval you cut five times in the Cantor hall is two letters and two rules: <code>F</code> draws a step, <code>f</code> walks one without drawing, and every rewrite turns <code>F</code> into <code>FfF</code> and <code>f</code> into <code>fff</code>. Read the sentence after five rewrites and the bar's thirty-two pieces and their gaps are already in it, in order, before any turtle has moved; the lab keeps it as the preset called “Cantor”. Its preset called “Koch Curve” is a different Koch from our snowflake, one that replaces <code>F</code> with <code>F+F-F-F+F</code> and turns ninety degrees, so even a familiar name leaves work for us to do. What does an instruction become when another reader gives it a body?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_Synthesis-before-fn:1">
+<p>Ron Eglash, <em>African Fractals: Modern Computing and Indigenous Design</em> (Rutgers University Press, 1999).&#160;<a class="footnote-backref" href="#Fractal_Synthesis-before-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><p class="kicker">Current final.md</p><h1>What, exactly, is repeated?</h1>
+<!-- @cantor_set -->
+
+<p>Can you explain two recursive constructions without using their names?</p>
+<p>Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Point to an example of the input, the descendants and the gap. Then identify where the displayed construction stops.</p>
+<p>Try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. After one cut there are two pieces, each two metres long. Before the second cut, predict both the number of pieces and their combined length. They will not change in the same direction.</p>
+<p>Here is the step that actually creates a descendant's size:</p>
+<pre><code class="language-gdscript">var new_length = bar_length / 3.0
+</code></pre>
+<p>In <code>cantor_set.gd</code>, <code>perform_iteration()</code> creates a left bar and a right bar of that length, each centred a third of the parent's length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.</p>
+<p>After three cuts, press HISTORY. The upper rows appear. Has any material returned to the current generation?</p>
+<p>The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What returned was the visible record of earlier stages. Hide it and bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.</p>
+<p>This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.</p>
+<p>The fifth cut is the desk's last. It leaves thirty-two finite pieces. The stopping point gives our attention and this instrument somewhere to stand. It does not establish that further difference is impossible. RESET returns to the uncut beginning; it does not rewind the museum.</p>
+<!-- @recursive_tree -->
+
+<p>The red block tree has already branched. Find a fork that seems to end, and follow it backward. What would a call have to remember to place a smaller branch there?</p>
+<p>Press STRATA. The blocks change colour according to their recorded branch levels. Press REACH and volumes enclose the extents accumulated through those levels. ENDS marks the joint where the trunk hands off and every deepest recorded block. FORM brings the solid reading back. Compare the same fork through these views: none of these buttons grows a new tree.</p>
+<p>The source receives a parent, an origin, a number of branches and two depth values. Its stopping condition is small enough to read in one breath:</p>
+<pre><code class="language-gdscript">if current_depth &gt;= max_depth:
+    return
+</code></pre>
+<p>Later in <code>recursive_tree.gd</code>, <code>generate_branches()</code> passes the continuation on:</p>
+<pre><code class="language-gdscript">generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
+</code></pre>
+<p>The surrounding code chooses dimensions, directions and descendant counts with a local random-number generator. This placement starts from seed 12345. The nested calls stop after three branching levels. A seed is one part of that recipe; the generator, draw order and ranges also matter. The desk's changing colours and cages read the resulting geometry without drawing those random choices again.</p>
+<p>Try the incomplete description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. A cage around its reach adds another representation: it encloses empty space as well as blocks. It is not a new shelter with solid walls.</p>
+<p>We have accumulated ways to make form, and ways to mistake a reading for the form. The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those are different interventions, with different consequences.</p>
+<!-- @ -->
+
+<p>The collection beyond offers further procedures to compare. Its held examples leave time for looking; the moving works keep their own clocks. We do not need to turn every resemblance into the same law.</p>
+<p>Think back to the tree between your hands, its two drawings, and the canopy above you. The endpoints travelled between them. Solidity, reach and the room available to your body did not follow from those endpoints alone. Each version made something available to inspect and required other choices. Returning to the little tree after walking beneath it, you could ask for a different turn for a reason you had not found at the desk.</p>
+<p>That return is part of how this museum is written. A sentence proposes an encounter. A drawing gives it positions and edges. Code gives those arrangements behaviour, and a body discovers what the proposal did not describe. We return to the sentence with something to change. The plan did not contain the walk in full; the revised words will not contain it either. What survives the passage matters, and so does what has become newly noticeable.</p>
+<p>I call this movement <em>fractal thinking</em>: returning to a question at another scale, with another way to act upon it. It names a research practice here, not a mathematical property proved by putting rooms inside sequences or objects inside rooms. A scene hierarchy is not enough to make a fractal. What can recur is the work of setting a boundary, changing something within it, attending to the consequence, and deciding what deserves another encounter.</p>
+<p>Walking explores the world we have made. Changing a generating rule explores worlds it could become. Neither route lets us examine everything. We keep a few versions, arrange a comparison, choose where to spend another call. The frame that helps us notice one difference also leaves others outside it.</p>
+<p>An unexpected branch need not reorganise the book. It might remain a pleasure in this room. It might expose a mismatch between what we wrote and what the body could do. If that mismatch returns elsewhere, it can change the question that carries us through the sequence. The program can reproduce the difference and an AI can help us search for it. Neither repetition nor the number of variants decides its importance. We still have to say what it changes, for whom, and why we choose to follow it.</p>
+<p>The trees around this hall were grown by a rule too, and it is not any of the desks’. The biome’s own generator writes a sentence with an L-system and reads it with a turtle in three dimensions; how many generations, how many branches at a fork, the angle and the taper come from that plant’s own genes, so no two are the same tree. The flag in the stage file that calls this flora fractal is a name nothing reads. What the ring inherits that the desks do not show is a body per plant: a different sentence for each, and a reader that gives it tubes and leaves. That grammar is where the next sequence begins.</p>
+<p>The names on these desks arrived late in another sense. Cantor's set is dated 1883, Koch's curve 1904, Sierpinski's triangle 1915, Menger's sponge 1926, and the word that gathers them, <em>fractal</em>, 1975. The structure is older than any of them. The Ba-ila settlements of what is now Zambia were built as a ring of enclosures, each enclosure itself a ring, with the chief's ring at the back of the village repeating the whole at a smaller scale, long before a mathematician called the arrangement self-similar,<sup id="Fractal_Synthesis-after-fnref:1"><a class="footnote-ref" href="#Fractal_Synthesis-after-fn:1">1</a></sup> and the geometric ornament of Islamic architecture repeats a motif inside itself at descending scales for reasons of its own. A rule can be practised for centuries before it is written down. These desks show the written form. They do not show who was already building it.</p>
+<p>Carry one explicit rule into the grammar laboratory. There, a string is rewritten before it is read as movement, and the interval you cut five times in the Cantor hall is two letters and two rules: <code>F</code> draws a step, <code>f</code> walks one without drawing, and every rewrite turns <code>F</code> into <code>FfF</code> and <code>f</code> into <code>fff</code>. Read the sentence after five rewrites and the bar's thirty-two pieces and their gaps are already in it, in order, before any turtle has moved; the lab keeps it as the preset called “Cantor”. Its preset called “Koch Curve” is a different Koch from our snowflake, one that replaces <code>F</code> with <code>F+F-F-F+F</code> and turns ninety degrees, so even a familiar name leaves work for us to do. What does an instruction become when another reader gives it a body?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="Fractal_Synthesis-after-fn:1">
+<p>Ron Eglash, <em>African Fractals: Modern Computing and Indigenous Design</em> (Rutgers University Press, 1999).&#160;<a class="footnote-backref" href="#Fractal_Synthesis-after-fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></details></section></main><footer>Production museum captures; no generated images. In-engine input and geometry checks; physical headset comfort and learner understanding remain untested.</footer></body></html>

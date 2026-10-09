@@ -1,0 +1,17 @@
+--- before/commons/maps/Change_Intro/tutorial.md
++++ commons/maps/Change_Intro/tutorial.md
+@@ -2,7 +2,7 @@
+ 
+ # Two samples before the tangent
+ 
+-This room carries the position/address reasoning of Ribbon_Patterns_03 into a rate with respect to position. Its independent variable is x, not elapsed time. It prepares for Accumulation_Riemann.
++This room carries the position/address reasoning of Ribbon_Patterns_03 into a rate with respect to position. Its independent variable is x, not elapsed time. It prepares for the accumulation workbench later in this same hall.
+ 
+ The primary is `tangent_slope_workbench`, with the map-only `comparison:true` adapter in `rate_comparison.gd`. The existing slider and five buttons share a widened console. The base workbench retains its single smooth function and analytic derivative:
+ 
+@@ -49,4 +49,4 @@
+ The third bay is the ftc_bridge. Compare its signed derivative contributions with its endpoint height difference. Its arch is a different function from the two workbenches. Flow_Field follows this encounter, introducing trajectories whose sampling addresses depend on prior movement.
+ 
+ 
+-The ftc_bridge now uses evidence:longhand: signed derivative strips, endpoint labels and a 512-interval trapezoid sum. Keep its different source function explicit. The consolidated final.md supplies the traversal order and transitions.
++The ftc_bridge uses evidence:longhand with reveal_on_request:true. The arch and signed derivative strips remain visible; COMPARE TOTALS reveals or hides the endpoint height readings, difference marker and 512-interval trapezoid comparison. Other placements retain their configured evidence behavior unless they opt into this reveal. Keep its different source function explicit. The consolidated final.md supplies the traversal order and transitions.

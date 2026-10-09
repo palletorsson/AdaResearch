@@ -1,0 +1,185 @@
+{
+  "baseline": false,
+  "checks": 49,
+  "failures": [],
+  "headset_tested": false,
+  "inventory": {
+    "expected": {
+      "arena_relation_lab": 1,
+      "brake_skid": 1,
+      "collision_carts": 1,
+      "example_2_1_forces_vr": 1,
+      "head_crab": 2,
+      "momentum_collision": 1,
+      "momentum_cradle": 1,
+      "newtons_laws": 1,
+      "parlour_orbits": 1,
+      "paused_fountain": 1,
+      "prop_mobile": 1,
+      "prop_spigot": 1,
+      "queer_cylinder_target": 1,
+      "reflection_hall": 1,
+      "revolving_door": 1,
+      "sentry_turret": 1,
+      "three_gravities": 1,
+      "tug_of_war": 1,
+      "turret_targeting": 1,
+      "umbrella_field": 1,
+      "vector_arena": 1
+    },
+    "headless": true,
+    "missing": [
+      "momentum_collision"
+    ],
+    "placements": [
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/ArenaRelationLab",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "arena_relation_lab",
+        "world_position": "(13.5, 0.0, 8.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/BrakeSkid",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "brake_skid",
+        "world_position": "(11.5, 0.0, 16.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/ParlourOrbits",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "parlour_orbits",
+        "world_position": "(13.5, 0.0, 16.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/NewtonsLaws",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "newtons_laws",
+        "world_position": "(1.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/PausedFountain",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "paused_fountain",
+        "world_position": "(4.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/PropMobile",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "prop_mobile",
+        "world_position": "(6.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/PropSpigot",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "prop_spigot",
+        "world_position": "(8.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/RevolvingDoor",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "revolving_door",
+        "world_position": "(15.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/ThreeGravities",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "three_gravities",
+        "world_position": "(17.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/TugOfWar",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "tug_of_war",
+        "world_position": "(19.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/UmbrellaField",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "umbrella_field",
+        "world_position": "(21.5, 0.0, 17.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/TurretTargeting",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "turret_targeting",
+        "world_position": "(11.5, 0.0, 18.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/ReflectionHall",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "reflection_hall",
+        "world_position": "(22.5, 0.0, 19.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/QueerCylinderTarget",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "queer_cylinder_target",
+        "world_position": "(13.5, 0.0, 24.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/VectorArena",
+        "scale": "(0.5, 0.5, 0.5)",
+        "token": "vector_arena",
+        "world_position": "(5.5, 0.0, 25.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/CollisionCarts",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "collision_carts",
+        "world_position": "(6.5, 0.0, 27.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MomentumCradle",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "momentum_cradle",
+        "world_position": "(16.5, 0.0, 29.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SentryTurret",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "sentry_turret",
+        "world_position": "(16.5, 0.0, 30.5)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/HeadCrab",
+        "scale": "(0.15, 0.15, 0.15)",
+        "token": "head_crab",
+        "world_position": "(9.424478, -0.18, 31.44937)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@MeshInstance3D@2967",
+        "scale": "(0.11, 0.11, 0.11)",
+        "token": "head_crab",
+        "world_position": "(20.54939, -0.132, 32.56545)"
+      },
+      {
+        "node": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Example_2_1_Forces",
+        "scale": "(1.0, 1.0, 1.0)",
+        "token": "example_2_1_forces_vr",
+        "world_position": "(24.5, 0.0, 34.5)"
+      }
+    ],
+    "present": {
+      "arena_relation_lab": 1,
+      "brake_skid": 1,
+      "collision_carts": 1,
+      "example_2_1_forces_vr": 1,
+      "head_crab": 2,
+      "momentum_cradle": 1,
+      "newtons_laws": 1,
+      "parlour_orbits": 1,
+      "paused_fountain": 1,
+      "prop_mobile": 1,
+      "prop_spigot": 1,
+      "queer_cylinder_target": 1,
+      "reflection_hall": 1,
+      "revolving_door": 1,
+      "sentry_turret": 1,
+      "three_gravities": 1,
+      "tug_of_war": 1,
+      "turret_targeting": 1,
+      "umbrella_field": 1,
+      "vector_arena": 1
+    }
+  }
+}

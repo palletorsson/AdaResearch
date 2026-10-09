@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-08",
+  "room": "Primitives_Polythedra",
+  "primary": [
+    "grab_trihedron",
+    "grab_tetrahedron",
+    "pyramid_edit",
+    "cube_scene",
+    "prism_block",
+    "concrete_barrier",
+    "street_sign",
+    "diamonds",
+    "rock_spawner",
+    "rock_scanner"
+  ],
+  "improvements": [
+    "Twelve striped Jersey-profile concrete barriers replace the former prism enclosure in the same cells; raw prisms and utility wedges retained",
+    "Opt-in physical barrier hulls",
+    "Five signs: STOP/WAIT, ahead, left, right, both ways; two cones",
+    "Book, tutorial, critical text and primary groups aligned around closure, counting, blocking, supporting and asking"
+  ],
+  "interaction_checks": {
+    "checks": 37,
+    "failures": [],
+    "scope": "Current-map stamping, barrier hull and museum wedge with supplied capsule movement; full-room/headset routes unverified."
+  },
+  "preview": "ada_run/polyhedra_flow/preview.png",
+  "remaining": "Human full-museum/headset walk for approach, ramp continuity, clearance and sign legibility; preview is a component assembly.",
+  "content_checks": {
+    "book_primary_agreement": true,
+    "encyclopedia_primary_count": 10,
+    "new_primary_passages_visible": [
+      "concrete_barrier",
+      "street_sign"
+    ]
+  },
+  "reusable_pattern": "Distinguish a visual direction from physical permission: configurable arrow signs and opt-in barrier collision can be reused per map; verify route and approach locally rather than assuming the same geometry guarantees the same use."
+}

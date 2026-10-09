@@ -1,0 +1,14 @@
+--- before/commons/maps/SpeculativeComputation_Rhizome_Network/summary.md
++++ commons/maps/SpeculativeComputation_Rhizome_Network/summary.md
+@@ -6,9 +6,9 @@
+ 
+ Primary: `rhizome_grower`.
+ 
+-Watch a new shoot and trace its links. Compare a crowded region with a sparse one. Predict which nearby nodes the next shoot could reach, then inspect what actually appears.
++Watch a new shoot and trace its links. Hold growth, switch between one and three links on the same points, then predict what happens when a busy node is temporarily removed. Trace the surviving routes before reading the component count.
+ 
+-New nodes connect by distance. They have no designated root, but some nodes accumulate more links than others. The little graph sways as a whole; that motion is separate from the creation of edges.
++New nodes connect by distance within a fixed region. They have no designated root, but some nodes accumulate more links than others. NODE exposes birth index and degree. CUT leaves a ghost and permits restoration; the graph does not repair itself. REPLAY retains the sample sequence. The absence of a named root does not establish equal influence.
+ 
+ The assembly laboratory replaces nearest-neighbour growth with a catalogue and an authored target.
+ 

@@ -1,0 +1,5 @@
+{
+  "greeting": "extends Node3D\n\nvar display := Label3D.new()\n\nfunc _ready():\n    display.position.y = 1.5\n    display.text = \"Hello, world.\"\n    add_child(display)\n",
+  "counter": "extends Node3D\n\nvar display := Label3D.new()\nvar count := 0\n\nfunc _ready():\n    display.position.y = 1.5\n    display.text = str(count)\n    add_child(display)\n\nfunc _process(_delta):\n    count += 1\n    display.text = str(count)\n",
+  "once": "extends Node3D\n\nvar display := Label3D.new()\nvar count := 0\n\nfunc _ready():\n    display.position.y = 1.5\n    count += 1\n    display.text = str(count)\n    add_child(display)\n"
+}

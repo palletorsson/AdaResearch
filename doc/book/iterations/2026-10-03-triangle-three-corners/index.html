@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Triangle — three corners, then a face</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the lesson</a><a href="#code">Complete code</a><a href="#scope">Lineage and scope</a><a href="#checked">Checks</a><a href="../2026-10-03-trace-return-to-grid/index.html#reading">Previous: Trace returns in Grid</a></nav><p>ADA / TUTORIAL PILOT / 3 OCTOBER 2026</p></header>
+<article id="reading"><h1>Triangle — three corners, then a face</h1>
+<p>Your trace has already become a grid drawing. Now choose three of its stored positions. Join them into a closed boundary. Then give that boundary a visible face.</p>
+<p>Open <code>point_triangle.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>, using <strong>Run Current Scene</strong> (F6). Edit <code>studies/point_triangle/triangle.gd</code>. If the room asks for a trace, draw a bend in <code>point_trace.tscn</code> and release to save it first.</p>
+<p>The lesson reuses Trace's original record, as Grid did. It does not read Grid's rounded display or replace your gesture with an example. <code>PointHandle</code>, <code>Segment</code> and <code>TraceMemory</code> are the supplied components we already use. The room and two appearance materials are supplied too.</p>
+<h2>1. Choose three positions</h2>
+<p>The script reads the saved list into <code>source_points</code>. With at least three entries, it selects these:</p>
+<pre><code class="language-gdscript">    var third := source_points.size() / 3
+    a.position = source_points[0]
+    b.position = source_points[third]
+    c.position = source_points[third * 2]
+</code></pre>
+<p>Both values in the division are integers, so the result is an integer: any fractional part is discarded. With ten entries, <code>third</code> is <code>3</code>. We select entries <code>0</code>, <code>3</code> and <code>6</code>.</p>
+<p>These are three places in the list, not three equal distances along the drawing. The rule does not recognise corners. Each selected <code>Vector3</code> becomes the position of a new grabbable handle. Moving a handle changes that copy; the saved trace stays intact.</p>
+<h2>2. Close the boundary</h2>
+<p>Each frame, reuse Lines' <code>show_between()</code>:</p>
+<pre><code class="language-gdscript">    ab.show_between(a.position, b.position)
+    bc.show_between(b.position, c.position)
+    ca.show_between(c.position, a.position)
+</code></pre>
+<p>The third segment returns from C to A. Hold a pink corner and move it. The two segments meeting there follow. On desktop, aim and press E; in VR, use the near grip.</p>
+<p>Look through the centre. The boundary is closed, but we have made no face. If your selected positions lie along one line, move a corner away from it.</p>
+<div class="pair"><figure><img src="outline.png" alt="Three pink corners joined by dark edges, with an empty centre."><figcaption>The same trace supplies three corners. Closing their boundary adds no face.</figcaption></figure><figure><img src="face.png" alt="The same corners and edges, now surrounding one off-white triangular face."><figcaption>One explicit triangle submission. The corner positions and viewpoint are unchanged.</figcaption></figure></div><h2>3. Add the face</h2>
+<p>Point One used <code>SphereMesh</code> to supply a surface. Here we specify its vertices ourselves. A <strong>vertex</strong> is a position used to construct a mesh.</p>
+<pre><code class="language-gdscript">var face_mesh := ImmediateMesh.new()
+var face := MeshInstance3D.new()
+</code></pre>
+<p><code>ImmediateMesh</code> is a mesh resource we can build by adding vertices. <code>MeshInstance3D</code> displays it. The script assigns <code>face_mesh</code> to <code>face.mesh</code> and adds the node to the room.</p>
+<p>Change <code>show_face</code> from <code>false</code> to <code>true</code> and run again. These lines now execute each frame:</p>
+<pre><code class="language-gdscript">    face_mesh.clear_surfaces()
+    if show_face:
+        face_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+        face_mesh.surface_add_vertex(a.position)
+        face_mesh.surface_add_vertex(b.position)
+        face_mesh.surface_add_vertex(c.position)
+        face_mesh.surface_end()
+</code></pre>
+<p><code>clear_surfaces()</code> removes the previous mesh surfaces. <code>surface_begin()</code> starts a surface; <code>Mesh.PRIMITIVE_TRIANGLES</code> tells Godot to interpret each group of three vertices as a triangle. We add our three positions, then <code>surface_end()</code> finishes it.</p>
+<p>The face and segments read the same corners. Hold one again: both follow. Setting <code>show_face</code> back to <code>false</code> leaves the boundary available without the face.</p>
+<h2>4. Change the view, then the shape</h2>
+<p>Leave the corners still and walk towards an edge-on view. The visible face narrows. Walk back: it returns.</p>
+<p>Now move one corner onto the line between the other two. The triangle has zero area. Another viewpoint cannot recover it; move the corner away to open the face again.</p>
+<p>The supplied off-white material shows both sides without lighting variation, so this comparison does not depend on a dark back or back-face culling. It adds neither thickness nor collision. The handles have colliders; the face does not.</p>
+<p>Three non-collinear positions define one triangular face. They do not fill the whole trace we selected them from. Longer outlines need another decision about how to connect their corners.</p>
+<p>Next, Polyhedra asks how these faces can meet to enclose a volume.</p><figure><img src="collinear.png" alt="The three corners now lie along one line; no triangle area remains."><figcaption>Move the third corner onto the baseline: the submitted triangle has zero area. These are native views from the shared student room, using the same 41-position synthetic XR release record tested in Trace and Grid.</figcaption></figure><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></p><p class="small">Release a drawing in point_trace.tscn first. Then open point_triangle.tscn with Run Current Scene. The shared starter contains both lessons.</p></article>
+<details id="code"><summary>triangle.gd · the complete lesson</summary><div><p>Every lesson object is constructed in this script. PointHandle, Segment and TraceMemory are the same supplied components already used; the two material resources set appearance. The missing-record guard and readout support the lesson.</p><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const Segment = preload(&quot;res://prepared/segment.gd&quot;)
+const TraceMemory = preload(&quot;res://prepared/trace_memory.gd&quot;)
+const FaceMaterial = preload(&quot;res://prepared/triangle_face.tres&quot;)
+const EdgeMaterial = preload(&quot;res://prepared/triangle_edge.tres&quot;)
+
+var source_points: Array[Vector3] = []
+var a := PointHandle.new()
+var b := PointHandle.new()
+var c := PointHandle.new()
+var ab := Segment.new()
+var bc := Segment.new()
+var ca := Segment.new()
+var face_mesh := ImmediateMesh.new()
+var face := MeshInstance3D.new()
+var readout := Label3D.new()
+var show_face := false
+
+func _ready():
+    for node in [a, b, c, ab, bc, ca, face, readout]:
+        add_child(node)
+    face.mesh = face_mesh
+    face.material_override = FaceMaterial
+    for edge in [ab, bc, ca]:
+        edge.material_override = EdgeMaterial
+    readout.position = Vector3(0.0, 2.4, -0.6)
+    readout.font_size = 24
+    source_points = TraceMemory.read_trace()
+    if source_points.size() &lt; 3:
+        readout.text = &quot;Draw a bend in Point Trace, then release to save.\nTriangle needs at least three stored positions.&quot;
+        for node in [a, b, c, ab, bc, ca, face]:
+            node.hide()
+        set_process(false)
+        return
+    var third := source_points.size() / 3
+    a.position = source_points[0]
+    b.position = source_points[third]
+    c.position = source_points[third * 2]
+    readout.text = &quot;From your trace: entries 0, %d, %d&quot; % [third, third * 2]
+
+func _process(_delta):
+    ab.show_between(a.position, b.position)
+    bc.show_between(b.position, c.position)
+    ca.show_between(c.position, a.position)
+    face_mesh.clear_surfaces()
+    if show_face:
+        face_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+        face_mesh.surface_add_vertex(a.position)
+        face_mesh.surface_add_vertex(b.position)
+        face_mesh.surface_add_vertex(c.position)
+        face_mesh.surface_end()
+</code></pre><p><a href="triangle.gd" download>Download triangle.gd</a> · <a href="tutorial.md">Tutorial source</a> · <a href="tutorial.diff">Text diff</a></p></div></details>
+<details id="scope"><summary>What this adds to the lineage</summary><div><p>Point stores a position. Lines connect two positions. Trace retains positions in order. Grid maps that original list into a second list. Triangle returns to the same original and chooses three positions, then gives their relationship an explicit surface.</p><p>Selection is by list index. It does not recognise corners, space them evenly by distance, project a drawing into a plane or reconstruct the entire gesture. We keep these limits visible. Editing a corner changes a copy; it does not overwrite Trace.</p><p>The new mesh operation belongs to the learner. Appearance, pickup and file transport remain named supplied parts. The next lesson can reuse a triangular face to ask about enclosure.</p><p>The longer hall walkthrough and concave-fan experiment are preserved as a <a href="tutorial-museum.md">museum return</a>. The critical chapter and live hall are unchanged. Coordinates retains its earlier place in the spine; its shared-starter writing pass is still pending.</p><p><a href="lesson-contract.json">Teaching contract</a> · <a href="DECISIONS.md">Decisions</a></p></div></details>
+<details id="checked"><summary>27 native checks passed</summary><div><p>Checked in a freshly extracted starter with Godot 4.6: exact saved-source selection, no face before submission, unchanged source, face rebuilding after mouse and simulated XR grip movement, release, collinear and coincident corners, recovery, no surface accumulation, no interior collision, empty state, minimum record and construction on a bare Node3D.</p><p>All four printed code excerpts match the tested script. The images show the actual native student room. Synthetic controller poses and injected mouse events exercise the real pickup path; physical headset use and beginner comprehension remain untested.</p><p><a href="verification.json">Results</a> · <a href="verify.gd">Reproducible harness</a> · <a href="back.png">Back view</a> · <a href="empty.png">Missing-record state</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

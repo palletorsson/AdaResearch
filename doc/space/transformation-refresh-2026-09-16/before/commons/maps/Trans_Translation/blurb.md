@@ -1,0 +1,1 @@
+A small floor carries you into depth, sideways, then upwards. Thirteen cubes wait along the journeys. Follow their positions through seven rides, and notice what changes when the same displacement happens above the ground.

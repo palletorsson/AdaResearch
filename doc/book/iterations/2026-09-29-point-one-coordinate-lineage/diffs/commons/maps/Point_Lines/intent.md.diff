@@ -1,0 +1,12 @@
+--- before/commons/maps/Point_Lines/intent.md
++++ commons/maps/Point_Lines/intent.md
+@@ -1,3 +1,9 @@
++## Tutorial handover — 29 September 2026
++
++Point One now hands over a and b, two Vector3 positions in the same scene reference, plus supplied markers A and B. Day Zero already handles opening, editing and running. The first Line exercise should connect these known positions, then let an endpoint change. Its line renderer can be supplied and inspected before teaching its whole construction.
++
++The current tutorial.md still begins with an 8-by-8 grid, nested arrays and undefined drawing/spawning helpers. It does not yet fulfil this handover and must not be described as a tested continuation. Begin the next pass with a single segment; defer grid adjacency, triangulation and graph statistics until they have a reason and introduced prerequisites. Preserve the hall's bodily and critical encounters independently of that small construction lesson.
++
+ ## Current encounter — 26 September 2026
+ 
+ After making, measuring and walking a line, the room opens into four paths of looking: plus/X, parallel bodies, vertical/horizon, and a grid opening into depth. Twenty pickable segments can be rearranged. Their five skins preserve endpoint span while changing visible thickness, proportions, emission and graduation. The luminous rod is not a ray-cast laser; the earlier laser_measure remains the actual measurement instrument.

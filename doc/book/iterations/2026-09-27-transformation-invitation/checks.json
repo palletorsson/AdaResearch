@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Encounter marker unchanged",
+      "passed": true
+    },
+    {
+      "name": "Three code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "Recognisable operations retained",
+      "passed": true
+    },
+    {
+      "name": "Conditional first collection retained",
+      "passed": true
+    },
+    {
+      "name": "Melencolia handover retained",
+      "passed": true
+    },
+    {
+      "name": "Next-hall handover retained",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/maps/Trans_Pre/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/maps/Trans_Pre/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "Preserved commons/scenes/mapobjects/pick_up_cube.gd",
+      "passed": true
+    },
+    {
+      "name": "First cube collectible at (4,3)",
+      "passed": true
+    },
+    {
+      "name": "Three moving demonstrations remain",
+      "passed": true
+    }
+  ],
+  "scope": "Text, authored placement and relevant source branches; no new runtime or headset test"
+}

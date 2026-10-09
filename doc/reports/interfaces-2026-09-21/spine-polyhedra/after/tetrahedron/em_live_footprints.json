@@ -1,0 +1,5880 @@
+{
+	"_readme": "Bodies whose LIVE extent, measured by the museum at stamp, exceeded their planned footprint by more than 2 cells. Provenance walked. Read by tools/spatial_contract.py: the next negotiation uses the larger of measurements.aabb_size and live_aabb. walk_inside = no collider: the seal takes no cells.",
+	"bodies": {
+		"2d_in_3d_vectors_vis": {
+			"at": "2026-09-11 08:12:22",
+			"cell": [
+				3.0,
+				36.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				5.7,
+				3.0,
+				36.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 4.0,
+			"walk_inside": false
+		},
+		"3t": {
+			"at": "2026-08-28 12:05:44",
+			"cell": [
+				6.0,
+				1174.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				13.8,
+				0.4,
+				0.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"9_3_smart_rockets_vr": {
+			"at": "2026-08-19 08:06:47",
+			"cell": [
+				11.0,
+				11767.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				12.8,
+				1.4,
+				11767.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 6.0,
+			"walk_inside": false
+		},
+		"AntColonyV2": {
+			"at": "2026-08-18 18:12:05",
+			"cell": [
+				33.0,
+				11579.0
+			],
+			"chapter": "swarmintelligence",
+			"has_collider": true,
+			"live_aabb": [
+				50.0,
+				2.0,
+				50.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 106.0,
+			"walk_inside": false
+		},
+		"CityGenerator": {
+			"at": "2026-08-18 18:11:14",
+			"cell": [
+				16.0,
+				9015.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				16.1,
+				21.5,
+				16.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": false
+		},
+		"ConnectedTriangles": {
+			"at": "2026-08-20 16:54:43",
+			"cell": [
+				1.0,
+				41.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				2.4,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 149.0,
+			"walk_inside": false
+		},
+		"CoordinateSystem3M": {
+			"at": "2026-08-21 14:36:09",
+			"cell": [
+				32.0,
+				53.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				28.7,
+				20.1,
+				20.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 339.0,
+			"walk_inside": false
+		},
+		"CrosswayCA": {
+			"at": "2026-08-18 18:10:50",
+			"cell": [
+				5.0,
+				7512.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				1.0,
+				16.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 35.0,
+			"walk_inside": false
+		},
+		"DoublePendulum": {
+			"at": "2026-08-20 12:22:22",
+			"cell": [
+				7.0,
+				4304.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				2.1,
+				16.0,
+				16.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 27.0,
+			"walk_inside": false
+		},
+		"FlowFieldMain": {
+			"at": "2026-08-18 18:12:04",
+			"cell": [
+				33.0,
+				11374.0
+			],
+			"chapter": "swarmintelligence",
+			"has_collider": true,
+			"live_aabb": [
+				50.0,
+				1.1,
+				50.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 117.0,
+			"walk_inside": false
+		},
+		"ForceMagnitudeDemo": {
+			"at": "2026-09-03 09:10:42",
+			"cell": [
+				15.0,
+				1172.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				16.4,
+				1.2,
+				1172.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 84.0,
+			"walk_inside": false
+		},
+		"ForestCompetition": {
+			"at": "2026-09-14 18:13:52",
+			"cell": [
+				9.0,
+				8.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				7.5,
+				1.6,
+				7.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 46.0,
+			"walk_inside": false
+		},
+		"GaussianBlurCircle": {
+			"at": "2026-08-18 18:10:41",
+			"cell": [
+				12.0,
+				6526.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				11.0,
+				0.3,
+				21.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"GeneticProgramming": {
+			"at": "2026-09-14 21:52:58",
+			"cell": [
+				9.0,
+				5.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				29.7,
+				6.2,
+				27.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 50.0,
+			"walk_inside": false
+		},
+		"GyroidDemo": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				17.0,
+				10600.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				40.0,
+				40.0,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"MeltingBerniniScene": {
+			"at": "2026-08-18 18:10:48",
+			"cell": [
+				13.0,
+				7171.0
+			],
+			"chapter": "noise",
+			"has_collider": false,
+			"live_aabb": [
+				12.7,
+				7.1,
+				12.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 44.0,
+			"walk_inside": true
+		},
+		"MetamerismLab": {
+			"at": "2026-09-10 19:03:04",
+			"cell": [
+				32.0,
+				24.0
+			],
+			"chapter": "tiling",
+			"has_collider": true,
+			"live_aabb": [
+				9.4,
+				3.3,
+				2.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"PhysarumColony": {
+			"at": "2026-08-18 18:12:04",
+			"cell": [
+				33.0,
+				11274.0
+			],
+			"chapter": "swarmintelligence",
+			"has_collider": true,
+			"live_aabb": [
+				50.0,
+				6.4,
+				50.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 51.0,
+			"walk_inside": false
+		},
+		"RotateGridCubes": {
+			"at": "2026-08-18 18:10:39",
+			"cell": [
+				6.0,
+				6334.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				7.0,
+				1.0,
+				30.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 178,
+			"walk_inside": false
+		},
+		"RotatingLaser": {
+			"at": "2026-08-26 15:22:11",
+			"cell": [
+				7.0,
+				266.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				14.2,
+				0.1,
+				6.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 23.0,
+			"walk_inside": true
+		},
+		"SierpinskiPyramid": {
+			"at": "2026-08-18 18:11:09",
+			"cell": [
+				6.0,
+				8354.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				10.0,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"SimpleOscillatingBridge": {
+			"at": "2026-08-18 18:09:10",
+			"cell": [
+				7.0,
+				5206.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				1.5,
+				0.3,
+				39.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 96.0,
+			"walk_inside": false
+		},
+		"SimultaneousContrast": {
+			"at": "2026-09-10 19:03:03",
+			"cell": [
+				11.0,
+				24.0
+			],
+			"chapter": "tiling",
+			"has_collider": true,
+			"live_aabb": [
+				9.4,
+				3.3,
+				2.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"TrigWalkingPath": {
+			"at": "2026-08-18 18:10:31",
+			"cell": [
+				7.0,
+				5720.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				6.0,
+				3.3,
+				36.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 125.0,
+			"walk_inside": false
+		},
+		"VectorFieldFlow": {
+			"at": "2026-09-11 13:07:15",
+			"cell": [
+				9.0,
+				7.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				4.8,
+				9.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"VectorMotion": {
+			"at": "2026-09-11 11:47:58",
+			"cell": [
+				12.0,
+				7.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				10.6,
+				4.5,
+				9.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"WavePaintings": {
+			"at": "2026-09-03 09:11:03",
+			"cell": [
+				2.0,
+				1604.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				21.4,
+				4.4,
+				1.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 114.0,
+			"walk_inside": false
+		},
+		"adder_board": {
+			"at": "2026-09-11 08:41:15",
+			"cell": [
+				12.0,
+				6.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.9,
+				3.9,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"albers_wall_gallery": {
+			"at": "2026-08-18 18:07:19",
+			"cell": [
+				7.0,
+				2596.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				7.8,
+				4.5,
+				0.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 66.0,
+			"walk_inside": true
+		},
+		"anomaly_detection": {
+			"at": "2026-08-18 18:12:13",
+			"cell": [
+				16.0,
+				12598.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": false,
+			"live_aabb": [
+				18.0,
+				0.2,
+				18.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 60.0,
+			"walk_inside": true
+		},
+		"arena_relation_lab": {
+			"at": "2026-09-12 09:00:28",
+			"cell": [
+				13.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				11.0,
+				4.6,
+				11.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"art_history_gallery": {
+			"at": "2026-08-18 10:00:15",
+			"cell": [
+				23.0,
+				306.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				31.7,
+				0.0,
+				18.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 24.0,
+			"walk_inside": true
+		},
+		"bell_alley": {
+			"at": "2026-08-18 18:10:37",
+			"cell": [
+				22.0,
+				6178.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				29.0,
+				2.0,
+				60.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": false
+		},
+		"bernini_columns": {
+			"at": "2026-08-18 18:09:41",
+			"cell": [
+				7.0,
+				5419.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				11.0,
+				9.4,
+				11.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 168.0,
+			"walk_inside": false
+		},
+		"blockbuilderentity": {
+			"at": "2026-08-18 10:01:17",
+			"cell": [
+				2.0,
+				394.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				40.0,
+				40.0,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 17.0,
+			"walk_inside": false
+		},
+		"boid_manager": {
+			"at": "2026-08-19 08:06:44",
+			"cell": [
+				19.0,
+				11504.0
+			],
+			"chapter": "swarmintelligence",
+			"has_collider": false,
+			"live_aabb": [
+				29.6,
+				10.3,
+				11514.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 8.0,
+			"walk_inside": true
+		},
+		"boolean_tunnel": {
+			"at": "2026-09-09 12:55:11",
+			"cell": [
+				1.0,
+				88.0
+			],
+			"chapter": "transformation",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				10.0,
+				43.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"box_counting_dimension": {
+			"at": "2026-09-14 13:22:11",
+			"cell": [
+				6.0,
+				14.0
+			],
+			"chapter": "fractals",
+			"has_collider": false,
+			"live_aabb": [
+				11.0,
+				6.0,
+				6.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"breathing_room": {
+			"at": "2026-09-15 06:51:16",
+			"cell": [
+				8.0,
+				12.0
+			],
+			"chapter": "softbodies",
+			"has_collider": false,
+			"live_aabb": [
+				6.9,
+				4.0,
+				7.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 28.0,
+			"walk_inside": true
+		},
+		"brick_wall_factory": {
+			"at": "2026-08-26 09:07:25",
+			"cell": [
+				9.0,
+				1152.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				8.4,
+				5.2,
+				0.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 52.0,
+			"walk_inside": true
+		},
+		"ca_bridge": {
+			"at": "2026-09-13 22:45:20",
+			"cell": [
+				6.0,
+				5.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				7.0,
+				4.0,
+				12.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"cantor_pagoda_vr": {
+			"at": "2026-08-20 12:22:55",
+			"cell": [
+				6.0,
+				7244.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				4.0,
+				15.0,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"cantor_set": {
+			"at": "2026-09-14 12:47:04",
+			"cell": [
+				5.0,
+				4.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				9.0,
+				0.3,
+				0.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 65.0,
+			"walk_inside": false
+		},
+		"carousel_cake": {
+			"at": "2026-08-18 14:34:08",
+			"cell": [
+				14.0,
+				1254.0
+			],
+			"chapter": "transformation",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				5.7,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 251.0,
+			"walk_inside": false
+		},
+		"carpet_cove_gallery": {
+			"at": "2026-08-18 10:00:33",
+			"cell": [
+				13.0,
+				374.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				12.1,
+				4.0,
+				30.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 22.0,
+			"walk_inside": true
+		},
+		"catapult": {
+			"at": "2026-08-28 12:05:49",
+			"cell": [
+				12.0,
+				1308.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				10.9,
+				4.1,
+				1.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 70.0,
+			"walk_inside": false
+		},
+		"centrifuge_ring": {
+			"at": "2026-09-11 14:06:01",
+			"cell": [
+				9.0,
+				24.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.1,
+				1.8,
+				8.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 52.0,
+			"walk_inside": false
+		},
+		"chapter_arc": {
+			"at": "2026-08-24 22:03:34",
+			"cell": [
+				1.0,
+				4548.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				1.2,
+				1.7,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 40.0,
+			"walk_inside": true
+		},
+		"color_constellation_office": {
+			"at": "2026-08-18 18:07:22",
+			"cell": [
+				9.0,
+				2665.0
+			],
+			"chapter": "change",
+			"has_collider": false,
+			"live_aabb": [
+				10.9,
+				2.8,
+				7.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 63.0,
+			"walk_inside": true
+		},
+		"color_mixing": {
+			"at": "2026-08-18 18:07:23",
+			"cell": [
+				6.0,
+				2715.0
+			],
+			"chapter": "change",
+			"has_collider": false,
+			"live_aabb": [
+				11.6,
+				3.5,
+				0.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 30.0,
+			"walk_inside": true
+		},
+		"color_scanner": {
+			"at": "2026-08-18 18:07:23",
+			"cell": [
+				6.0,
+				2727.0
+			],
+			"chapter": "change",
+			"has_collider": true,
+			"live_aabb": [
+				12.0,
+				8.0,
+				17.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 29.0,
+			"walk_inside": false
+		},
+		"coloredlines": {
+			"at": "2026-08-22 14:02:33",
+			"cell": [
+				1.0,
+				2601.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				26.2,
+				16.8,
+				26.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 61.0,
+			"walk_inside": true
+		},
+		"combine_capsule": {
+			"at": "2026-08-18 11:05:38",
+			"cell": [
+				7.0,
+				667.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				9.6,
+				1.5,
+				9.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": true
+		},
+		"combine_portals": {
+			"at": "2026-09-08 18:08:12",
+			"cell": [
+				3.0,
+				4.0
+			],
+			"chapter": "",
+			"has_collider": false,
+			"live_aabb": [
+				8.0,
+				8.0,
+				87.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 33.0,
+			"walk_inside": true
+		},
+		"combined_forces_demo": {
+			"at": "2026-09-11 09:16:27",
+			"cell": [
+				15.0,
+				58.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				16.2,
+				1.7,
+				58.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 90.0,
+			"walk_inside": false
+		},
+		"computer_vision_vr": {
+			"at": "2026-08-31 21:48:53",
+			"cell": [
+				7.0,
+				211.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				24.6,
+				6.2,
+				1.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": false
+		},
+		"constraints": {
+			"at": "2026-08-18 18:08:14",
+			"cell": [
+				7.0,
+				4102.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.9,
+				2.6,
+				6.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"constructive_room": {
+			"at": "2026-08-18 18:12:18",
+			"cell": [
+				6.0,
+				13389.0
+			],
+			"chapter": "foundationscrisis",
+			"has_collider": false,
+			"live_aabb": [
+				7.0,
+				0.8,
+				12.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 5.0,
+			"walk_inside": true
+		},
+		"conveyor_backlog": {
+			"at": "2026-09-11 07:40:40",
+			"cell": [
+				18.0,
+				18.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.6,
+				1.8,
+				4.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"convolutional_neural_networks_cnns_vr": {
+			"at": "2026-08-31 21:48:53",
+			"cell": [
+				7.0,
+				205.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				51.0,
+				53.3,
+				1.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": false
+		},
+		"crossway_ca": {
+			"at": "2026-08-18 11:15:36",
+			"cell": [
+				4.0,
+				123.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				1.0,
+				16.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 70.0,
+			"walk_inside": false
+		},
+		"cube_mound_scene": {
+			"at": "2026-09-03 09:12:57",
+			"cell": [
+				9.0,
+				2598.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				7.2,
+				3.6,
+				7.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 69.0,
+			"walk_inside": false
+		},
+		"dark_side_prism": {
+			"at": "2026-08-18 18:07:08",
+			"cell": [
+				7.0,
+				2360.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				9.5,
+				3.3,
+				0.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": true
+		},
+		"decaying_bridge": {
+			"at": "2026-09-13 23:42:13",
+			"cell": [
+				7.0,
+				4.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				6.8,
+				3.2,
+				11.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 46.0,
+			"walk_inside": false
+		},
+		"descent_landscape_lab": {
+			"at": "2026-09-12 11:58:22",
+			"cell": [
+				6.0,
+				8.0
+			],
+			"chapter": "formfinding",
+			"has_collider": true,
+			"live_aabb": [
+				7.9,
+				4.2,
+				8.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"destructibles_test_scene": {
+			"at": "2026-08-18 18:08:30",
+			"cell": [
+				11.0,
+				4474.0
+			],
+			"chapter": "formfinding",
+			"has_collider": true,
+			"live_aabb": [
+				5.1,
+				2.1,
+				7.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 540.0,
+			"walk_inside": false
+		},
+		"distribution_visualization": {
+			"at": "2026-08-20 12:22:38",
+			"cell": [
+				6.0,
+				5452.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				2.2,
+				10.0,
+				12.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"dna_facade_classical": {
+			"at": "2026-08-18 18:06:52",
+			"cell": [
+				7.0,
+				2087.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				0.3,
+				14.0,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"drag_catwalk": {
+			"at": "2026-09-10 19:56:25",
+			"cell": [
+				58.0,
+				24.0
+			],
+			"chapter": "tiling",
+			"has_collider": true,
+			"live_aabb": [
+				6.9,
+				3.2,
+				11.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"drag_corridor": {
+			"at": "2026-09-11 13:55:54",
+			"cell": [
+				15.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				9.1,
+				3.2,
+				10.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 59.0,
+			"walk_inside": false
+		},
+		"draw_dot": {
+			"at": "2026-08-20 21:31:03",
+			"cell": [
+				6.0,
+				7370.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				6.8,
+				1.2,
+				7370.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 72.0,
+			"walk_inside": false
+		},
+		"draw_dot_time_domain": {
+			"at": "2026-08-21 22:01:16",
+			"cell": [
+				6.0,
+				2338.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				6.8,
+				1.2,
+				2338.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"draw_stick": {
+			"at": "2026-09-01 17:45:18",
+			"cell": [
+				6.0,
+				38.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				7.1,
+				1.4,
+				38.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": false
+		},
+		"draw_triangle_faces": {
+			"at": "2026-09-08 12:01:14",
+			"cell": [
+				6.0,
+				17.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				6.7,
+				1.6,
+				17.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 32.0,
+			"walk_inside": false
+		},
+		"dual_display_test": {
+			"at": "2026-08-21 22:01:36",
+			"cell": [
+				6.0,
+				2562.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				9.5,
+				1.5,
+				2562.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"durer_scene": {
+			"at": "2026-08-18 11:05:42",
+			"cell": [
+				7.0,
+				912.0
+			],
+			"chapter": "transformation",
+			"has_collider": false,
+			"live_aabb": [
+				5.5,
+				8.3,
+				6.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 29.0,
+			"walk_inside": true
+		},
+		"enhanced_kmeans": {
+			"at": "2026-08-18 18:12:09",
+			"cell": [
+				33.0,
+				12100.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				50.0,
+				9.4,
+				50.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 9.0,
+			"walk_inside": true
+		},
+		"entropy_axiom": {
+			"at": "2026-08-21 22:02:01",
+			"cell": [
+				6.0,
+				2749.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				2.9,
+				2.9,
+				7.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 38.0,
+			"walk_inside": true
+		},
+		"env_one": {
+			"at": "2026-08-20 17:12:32",
+			"cell": [
+				37.0,
+				5784.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				68.6,
+				21.3,
+				5806.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 32.0,
+			"walk_inside": true
+		},
+		"escher_room": {
+			"at": "2026-08-18 18:12:19",
+			"cell": [
+				6.0,
+				13446.0
+			],
+			"chapter": "foundationscrisis",
+			"has_collider": false,
+			"live_aabb": [
+				7.0,
+				7.2,
+				7.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 5.0,
+			"walk_inside": true
+		},
+		"evolved_creatures": {
+			"at": "2026-08-18 18:12:07",
+			"cell": [
+				27.0,
+				11744.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				40.0,
+				2.8,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 196.0,
+			"walk_inside": false
+		},
+		"evolving_flowers": {
+			"at": "2026-08-18 18:12:08",
+			"cell": [
+				17.0,
+				11897.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				0.0,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 10.0,
+			"walk_inside": true
+		},
+		"evolvingflowers": {
+			"at": "2026-08-18 18:12:08",
+			"cell": [
+				17.0,
+				11837.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				0.0,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
+			"at": "2026-08-21 22:01:00",
+			"cell": [
+				12.0,
+				1885.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				13.6,
+				1.1,
+				1885.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 32.0,
+			"walk_inside": false
+		},
+		"example_3_3_pointing_in_the_direction_of_motion_vr": {
+			"at": "2026-08-21 22:01:00",
+			"cell": [
+				13.0,
+				1885.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				14.4,
+				1.2,
+				1885.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 16.0,
+			"walk_inside": false
+		},
+		"example_8_4_cantor_pagoda_vr": {
+			"at": "2026-09-03 09:12:32",
+			"cell": [
+				8.0,
+				2248.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				20.0,
+				15.0,
+				4.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 181.0,
+			"walk_inside": false
+		},
+		"explainable_ai_xai_vr": {
+			"at": "2026-08-31 21:48:58",
+			"cell": [
+				4.0,
+				228.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				29.4,
+				16.0,
+				6.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 16.0,
+			"walk_inside": false
+		},
+		"fabric_shader_studio": {
+			"at": "2026-09-10 19:57:26",
+			"cell": [
+				22.0,
+				26.0
+			],
+			"chapter": "tiling",
+			"has_collider": true,
+			"live_aabb": [
+				8.5,
+				3.3,
+				3.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"facade_builder": {
+			"at": "2026-08-18 18:06:52",
+			"cell": [
+				7.0,
+				2068.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				0.3,
+				14.0,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"facade_grammar_demo": {
+			"at": "2026-08-18 14:35:27",
+			"cell": [
+				14.0,
+				1402.0
+			],
+			"chapter": "symmetry",
+			"has_collider": true,
+			"live_aabb": [
+				14.0,
+				1.7,
+				16.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": false
+		},
+		"fetish_portal": {
+			"at": "2026-09-08 06:56:49",
+			"cell": [
+				6.0,
+				15.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				19.5,
+				16.9,
+				2.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"fibonacci_terrain": {
+			"at": "2026-08-18 18:11:10",
+			"cell": [
+				1.0,
+				8363.0
+			],
+			"chapter": "fractals",
+			"has_collider": false,
+			"live_aabb": [
+				8.0,
+				0.0,
+				4.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"fifteen_cases_demo": {
+			"at": "2026-09-15 08:27:59",
+			"cell": [
+				12.0,
+				11.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				11.9,
+				1.9,
+				6.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 17.0,
+			"walk_inside": true
+		},
+		"force_fields": {
+			"at": "2026-08-19 08:02:53",
+			"cell": [
+				9.0,
+				4049.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.3,
+				5.1,
+				2.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 55.0,
+			"walk_inside": false
+		},
+		"force_room": {
+			"at": "2026-08-26 16:18:39",
+			"cell": [
+				5.0,
+				1628.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				7.1,
+				1.9,
+				7.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": true
+		},
+		"forcedirected3d": {
+			"at": "2026-09-11 16:45:53",
+			"cell": [
+				14.0,
+				35.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				23.3,
+				19.5,
+				20.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 69.0,
+			"walk_inside": true
+		},
+		"foresight_range": {
+			"at": "2026-08-26 16:18:20",
+			"cell": [
+				16.0,
+				1314.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				6.8,
+				7.4,
+				18.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 16.0,
+			"walk_inside": true
+		},
+		"foucault_pendulum": {
+			"at": "2026-08-18 18:08:59",
+			"cell": [
+				7.0,
+				5116.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				7.6,
+				11.4,
+				7.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 140.0,
+			"walk_inside": false
+		},
+		"fountain_demo": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				7.0,
+				10657.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				40.0,
+				100.0,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": true
+		},
+		"fourier_transform": {
+			"at": "2026-08-18 18:10:33",
+			"cell": [
+				6.0,
+				5810.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				9.6,
+				1.0,
+				0.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": true
+		},
+		"game_of_life_petri": {
+			"at": "2026-09-13 23:17:34",
+			"cell": [
+				6.0,
+				4.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				6.1,
+				1.9,
+				8.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"generative_adversarial_networks_gans_vr": {
+			"at": "2026-08-20 12:24:09",
+			"cell": [
+				6.0,
+				11776.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": true,
+			"live_aabb": [
+				10.1,
+				6.1,
+				18.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 36.0,
+			"walk_inside": false
+		},
+		"genetic_programming": {
+			"at": "2026-08-28 15:40:50",
+			"cell": [
+				22.0,
+				6734.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": false,
+			"live_aabb": [
+				30.6,
+				6.5,
+				24.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": true
+		},
+		"genetic_tree_sculptor": {
+			"at": "2026-09-14 19:41:13",
+			"cell": [
+				9.0,
+				8.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				7.6,
+				3.6,
+				16.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"grab_sphere_point_snap": {
+			"at": "2026-09-15 14:54:11",
+			"cell": [
+				7.0,
+				15.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				7.5,
+				0.0,
+				15.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 118.0,
+			"walk_inside": false
+		},
+		"grab_stick": {
+			"at": "2026-08-26 15:22:22",
+			"cell": [
+				3.0,
+				298.0
+			],
+			"chapter": "color",
+			"has_collider": true,
+			"live_aabb": [
+				0.2,
+				0.1,
+				15.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"grab_stick_scanner": {
+			"at": "2026-08-21 22:00:22",
+			"cell": [
+				5.0,
+				802.0
+			],
+			"chapter": "color",
+			"has_collider": true,
+			"live_aabb": [
+				14.7,
+				0.2,
+				0.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 95.0,
+			"walk_inside": false
+		},
+		"gradient_descent": {
+			"at": "2026-08-18 18:07:23",
+			"cell": [
+				17.0,
+				2836.0
+			],
+			"chapter": "change",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				3.7,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 60.0,
+			"walk_inside": true
+		},
+		"gradient_descent_visualization": {
+			"at": "2026-08-18 18:12:07",
+			"cell": [
+				7.0,
+				11774.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				8.8,
+				1.0,
+				8.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 29.0,
+			"walk_inside": false
+		},
+		"grain_block": {
+			"at": "2026-08-19 13:28:06",
+			"cell": [
+				13.0,
+				111.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				7.8,
+				1.0,
+				1.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"grammar_provenance": {
+			"at": "2026-09-03 09:12:37",
+			"cell": [
+				2.0,
+				2369.0
+			],
+			"chapter": "lsystems",
+			"has_collider": false,
+			"live_aabb": [
+				17.7,
+				9.2,
+				0.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"graphspace": {
+			"at": "2026-08-21 22:07:32",
+			"cell": [
+				4.0,
+				5994.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": true,
+			"live_aabb": [
+				71.6,
+				2.6,
+				68.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 3.0,
+			"walk_inside": false
+		},
+		"gyroid_demo": {
+			"at": "2026-08-18 18:11:59",
+			"cell": [
+				17.0,
+				10527.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				40.0,
+				40.0,
+				40.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"hexagon_ca_vr": {
+			"at": "2026-08-18 11:15:36",
+			"cell": [
+				11.0,
+				119.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				35.6,
+				2.2,
+				31.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 74.0,
+			"walk_inside": false
+		},
+		"hl_turret_vectors": {
+			"at": "2026-08-28 13:04:22",
+			"cell": [
+				1.0,
+				7670.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7676.6,
+				7674.4,
+				7671.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 121.0,
+			"walk_inside": false
+		},
+		"human_catapult": {
+			"at": "2026-08-26 08:08:01",
+			"cell": [
+				12.0,
+				29.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				15.6,
+				5.5,
+				3.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": false
+		},
+		"implicit_surface_modeling": {
+			"at": "2026-08-18 18:12:02",
+			"cell": [
+				7.0,
+				11062.0
+			],
+			"chapter": "boolean_surfaces",
+			"has_collider": false,
+			"live_aabb": [
+				12.0,
+				12.0,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": true
+		},
+		"inverted_tree_cloud": {
+			"at": "2026-08-18 18:11:08",
+			"cell": [
+				13.0,
+				8090.0
+			],
+			"chapter": "fractals",
+			"has_collider": false,
+			"live_aabb": [
+				11.4,
+				14.2,
+				14.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 66.0,
+			"walk_inside": true
+		},
+		"john_cage_tech_noir": {
+			"at": "2026-08-28 13:37:02",
+			"cell": [
+				13.0,
+				2593.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				15.3,
+				3.8,
+				15.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"joint_learn_walk": {
+			"at": "2026-08-18 18:12:13",
+			"cell": [
+				48.0,
+				12698.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": true,
+			"live_aabb": [
+				80.0,
+				2.2,
+				80.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 152.0,
+			"walk_inside": false
+		},
+		"julia_set": {
+			"at": "2026-08-18 18:11:11",
+			"cell": [
+				13.0,
+				8563.0
+			],
+			"chapter": "fractals",
+			"has_collider": false,
+			"live_aabb": [
+				12.0,
+				0.1,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 44.0,
+			"walk_inside": true
+		},
+		"koch_curve": {
+			"at": "2026-08-24 22:04:01",
+			"cell": [
+				6.0,
+				6761.0
+			],
+			"chapter": "lsystems",
+			"has_collider": false,
+			"live_aabb": [
+				0.0,
+				35.2,
+				40.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"kusama_sine": {
+			"at": "2026-08-18 18:09:22",
+			"cell": [
+				7.0,
+				5298.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				7.3,
+				2.6,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"lab_room": {
+			"at": "2026-09-13 22:45:20",
+			"cell": [
+				6.0,
+				22.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				10.6,
+				5.4,
+				7.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 89.0,
+			"walk_inside": false
+		},
+		"lambda_hall": {
+			"at": "2026-09-03 11:39:17",
+			"cell": [
+				11.0,
+				63.0
+			],
+			"chapter": "qfeplaboratory",
+			"has_collider": true,
+			"live_aabb": [
+				7.1,
+				3.2,
+				14.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"laser_measure": {
+			"at": "2026-09-19 17:00:58",
+			"cell": [
+				8.0,
+				39.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				35.5,
+				0.1,
+				35.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1632.0,
+			"walk_inside": false
+		},
+		"launch_arc": {
+			"at": "2026-09-11 09:16:16",
+			"cell": [
+				17.0,
+				7.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				12.5,
+				6.7,
+				10.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"light_sphere": {
+			"at": "2026-08-18 14:30:15",
+			"cell": [
+				48.0,
+				757.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				79.9,
+				40.0,
+				79.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"line_space_workshop": {
+			"at": "2026-09-15 20:45:22",
+			"cell": [
+				16.0,
+				16.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				20.3,
+				1.8,
+				18.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"lstms_vr": {
+			"at": "2026-08-18 18:12:12",
+			"cell": [
+				6.0,
+				12472.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				4.3,
+				10.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 20.0,
+			"walk_inside": false
+		},
+		"lsystem_dungeon": {
+			"at": "2026-09-14 17:32:23",
+			"cell": [
+				9.0,
+				7.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				11.6,
+				1.4,
+				25.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"lsystem_editor": {
+			"at": "2026-09-14 15:28:59",
+			"cell": [
+				9.0,
+				7.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				7.8,
+				2.8,
+				2.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"mamma_monster_gallery": {
+			"at": "2026-09-14 20:03:59",
+			"cell": [
+				8.0,
+				29.0
+			],
+			"chapter": "lsystems",
+			"has_collider": false,
+			"live_aabb": [
+				9.9,
+				2.4,
+				0.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"marching_cubes": {
+			"at": "2026-08-18 18:11:59",
+			"cell": [
+				45.0,
+				10433.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				73.4,
+				0.0,
+				73.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 9.0,
+			"walk_inside": true
+		},
+		"marchingcave": {
+			"at": "2026-08-21 22:06:40",
+			"cell": [
+				4.0,
+				5203.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				91.7,
+				79.5,
+				200.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 27.0,
+			"walk_inside": false
+		},
+		"marchingcubes_cave": {
+			"at": "2026-08-21 22:06:41",
+			"cell": [
+				9.0,
+				5203.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				91.7,
+				79.5,
+				200.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 143.0,
+			"walk_inside": false
+		},
+		"marchingcubes_portal_landscape": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				6.0,
+				10673.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				600.0,
+				20.0,
+				600.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 136.0,
+			"walk_inside": false
+		},
+		"mario_cube_time_trace": {
+			"at": "2026-08-19 08:03:14",
+			"cell": [
+				11.0,
+				4910.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				11.8,
+				0.8,
+				4910.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"mario_test_sound_ui": {
+			"at": "2026-08-21 22:01:29",
+			"cell": [
+				13.0,
+				2499.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				14.1,
+				1.1,
+				2499.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 80.0,
+			"walk_inside": false
+		},
+		"markov_chains_tree": {
+			"at": "2026-08-20 21:31:08",
+			"cell": [
+				6.0,
+				8048.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				7.7,
+				5.1,
+				8048.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": false
+		},
+		"math_objects": {
+			"at": "2026-08-18 18:10:07",
+			"cell": [
+				7.0,
+				5562.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				4.8,
+				4.7,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 631.0,
+			"walk_inside": false
+		},
+		"math_objects_gallery": {
+			"at": "2026-08-18 18:08:32",
+			"cell": [
+				7.0,
+				4642.0
+			],
+			"chapter": "formfinding",
+			"has_collider": true,
+			"live_aabb": [
+				4.8,
+				4.7,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"max_q_basin_room": {
+			"at": "2026-09-03 09:11:00",
+			"cell": [
+				2.0,
+				1538.0
+			],
+			"chapter": "formfinding",
+			"has_collider": false,
+			"live_aabb": [
+				7.0,
+				2.3,
+				7.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": true
+		},
+		"maze_generation": {
+			"at": "2026-08-18 18:11:17",
+			"cell": [
+				22.0,
+				9502.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				34.0,
+				3.0,
+				34.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": false
+		},
+		"maze_generator": {
+			"at": "2026-08-18 18:11:22",
+			"cell": [
+				14.0,
+				9626.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				15.0,
+				1.0,
+				15.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"mc_base": {
+			"at": "2026-08-21 22:06:48",
+			"cell": [
+				5.0,
+				5240.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				91.7,
+				79.5,
+				200.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 51.0,
+			"walk_inside": false
+		},
+		"mc_cave": {
+			"at": "2026-08-31 22:04:46",
+			"cell": [
+				12.0,
+				2.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				300.0,
+				300.0,
+				300.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 45.0,
+			"walk_inside": false
+		},
+		"mc_flat_landscape": {
+			"at": "2026-08-21 22:06:20",
+			"cell": [
+				3.0,
+				5094.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				200.0,
+				20.5,
+				200.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": false
+		},
+		"mc_inside_cave": {
+			"at": "2026-08-21 22:06:27",
+			"cell": [
+				10.0,
+				5166.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				91.7,
+				79.5,
+				200.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 173.0,
+			"walk_inside": true
+		},
+		"mc_overhang_landscape": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				6.0,
+				10621.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				600.0,
+				20.0,
+				600.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 144.0,
+			"walk_inside": false
+		},
+		"mc_portal_landscape": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				6.0,
+				10799.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				600.0,
+				20.0,
+				600.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 25.0,
+			"walk_inside": false
+		},
+		"mc_shapes_gallery": {
+			"at": "2026-09-15 08:45:38",
+			"cell": [
+				14.0,
+				21.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				14.8,
+				7.0,
+				8.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 17.0,
+			"walk_inside": false
+		},
+		"mc_terrain_demo": {
+			"at": "2026-08-18 18:12:00",
+			"cell": [
+				45.0,
+				10746.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				73.4,
+				0.0,
+				73.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": true
+		},
+		"mc_torus_sculpture": {
+			"at": "2026-08-31 22:04:57",
+			"cell": [
+				3.0,
+				26.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				158.1,
+				59.5,
+				146.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 133.0,
+			"walk_inside": false
+		},
+		"menger_sponge": {
+			"at": "2026-08-18 18:11:10",
+			"cell": [
+				6.0,
+				8432.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				9.0,
+				9.0,
+				9.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 44.0,
+			"walk_inside": false
+		},
+		"metaballs": {
+			"at": "2026-08-18 18:12:02",
+			"cell": [
+				7.0,
+				11044.0
+			],
+			"chapter": "boolean_surfaces",
+			"has_collider": false,
+			"live_aabb": [
+				12.0,
+				12.0,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 12.0,
+			"walk_inside": true
+		},
+		"mirror_cellular_texture_for_3d": {
+			"at": "2026-08-21 22:05:51",
+			"cell": [
+				4.0,
+				4583.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": false,
+			"live_aabb": [
+				6.9,
+				0.2,
+				4585.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 4.0,
+			"walk_inside": true
+		},
+		"mirrored_cellular_automata": {
+			"at": "2026-08-21 22:02:48",
+			"cell": [
+				7.0,
+				3515.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": false,
+			"live_aabb": [
+				9.9,
+				0.2,
+				3517.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 18.0,
+			"walk_inside": true
+		},
+		"mobius_world": {
+			"at": "2026-08-18 18:11:09",
+			"cell": [
+				42.0,
+				8207.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				68.3,
+				16.0,
+				71.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 384.0,
+			"walk_inside": false
+		},
+		"monte_carlo_protein": {
+			"at": "2026-08-18 18:11:48",
+			"cell": [
+				8.0,
+				10128.0
+			],
+			"chapter": "softbodies",
+			"has_collider": false,
+			"live_aabb": [
+				0.8,
+				2.4,
+				34.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 18.0,
+			"walk_inside": true
+		},
+		"mortar_vector_siege": {
+			"at": "2026-08-21 22:00:58",
+			"cell": [
+				1.0,
+				1838.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				119.5,
+				120.0,
+				1898.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 3.0,
+			"walk_inside": false
+		},
+		"mst_visualization": {
+			"at": "2026-08-18 18:12:18",
+			"cell": [
+				22.0,
+				13302.0
+			],
+			"chapter": "foundationscrisis",
+			"has_collider": false,
+			"live_aabb": [
+				30.0,
+				20.0,
+				35.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 5.0,
+			"walk_inside": true
+		},
+		"mushrooms": {
+			"at": "2026-09-03 09:11:28",
+			"cell": [
+				11.0,
+				1860.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				10.6,
+				1.1,
+				10.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 582.0,
+			"walk_inside": false
+		},
+		"network_analysis": {
+			"at": "2026-09-03 09:14:14",
+			"cell": [
+				6.0,
+				3452.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": false,
+			"live_aabb": [
+				9.9,
+				9.6,
+				4.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": true
+		},
+		"networkflow3d": {
+			"at": "2026-08-18 18:12:17",
+			"cell": [
+				23.0,
+				13159.0
+			],
+			"chapter": "foundationscrisis",
+			"has_collider": false,
+			"live_aabb": [
+				31.2,
+				16.2,
+				31.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 7.0,
+			"walk_inside": true
+		},
+		"neural_network_visualization": {
+			"at": "2026-08-31 21:48:47",
+			"cell": [
+				7.0,
+				183.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				9.6,
+				8.1,
+				0.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"neural_networks_vr": {
+			"at": "2026-08-31 21:48:47",
+			"cell": [
+				7.0,
+				176.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": true,
+			"live_aabb": [
+				27.4,
+				14.2,
+				8.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 112.0,
+			"walk_inside": false
+		},
+		"newton_raphson_visualization": {
+			"at": "2026-08-18 18:08:34",
+			"cell": [
+				7.0,
+				4811.0
+			],
+			"chapter": "formfinding",
+			"has_collider": false,
+			"live_aabb": [
+				0.3,
+				16.0,
+				16.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": true
+		},
+		"noc_5_04_flow_field": {
+			"at": "2026-08-21 22:00:57",
+			"cell": [
+				12.0,
+				1820.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				13.7,
+				1.1,
+				1820.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 16.0,
+			"walk_inside": false
+		},
+		"noise_space": {
+			"at": "2026-08-18 18:10:51",
+			"cell": [
+				7.0,
+				7539.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				3.0,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 134.0,
+			"walk_inside": false
+		},
+		"noise_terrain": {
+			"at": "2026-08-21 22:02:37",
+			"cell": [
+				7.0,
+				3417.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				100.0,
+				15.1,
+				100.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 90.0,
+			"walk_inside": false
+		},
+		"noise_terrain_with_blobs": {
+			"at": "2026-08-18 11:03:07",
+			"cell": [
+				18.0,
+				11.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				9988.7,
+				10000.0,
+				9988.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 20.0,
+			"walk_inside": false
+		},
+		"noiselayers": {
+			"at": "2026-08-21 22:02:27",
+			"cell": [
+				7.0,
+				3264.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				220.0,
+				99.8,
+				204.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 220.0,
+			"walk_inside": false
+		},
+		"noisesphere": {
+			"at": "2026-09-13 14:28:50",
+			"cell": [
+				5.0,
+				5.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				124.2,
+				124.2,
+				120.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": false
+		},
+		"normal_force_demo": {
+			"at": "2026-09-03 09:10:43",
+			"cell": [
+				29.0,
+				1171.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				29.7,
+				1.1,
+				1171.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 590.0,
+			"walk_inside": false
+		},
+		"numerical_integration": {
+			"at": "2026-08-18 18:08:10",
+			"cell": [
+				8.0,
+				3992.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				8.0,
+				3.5,
+				4.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"orbital_mechanics_demo": {
+			"at": "2026-09-11 16:44:27",
+			"cell": [
+				11.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				11.2,
+				4.3,
+				11.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"organic_space": {
+			"at": "2026-08-28 14:07:01",
+			"cell": [
+				20.0,
+				7278.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				28.2,
+				25.0,
+				25.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 58.0,
+			"walk_inside": false
+		},
+		"parametric_lsystem": {
+			"at": "2026-09-14 16:12:24",
+			"cell": [
+				9.0,
+				7.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				9.8,
+				8.4,
+				2.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"pathfinding3d": {
+			"at": "2026-08-18 18:12:15",
+			"cell": [
+				6.0,
+				12941.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": false,
+			"live_aabb": [
+				9.9,
+				14.9,
+				9.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": true
+		},
+		"pattern_atlas_gallery": {
+			"at": "2026-09-14 20:03:59",
+			"cell": [
+				8.0,
+				26.0
+			],
+			"chapter": "lsystems",
+			"has_collider": false,
+			"live_aabb": [
+				10.3,
+				2.3,
+				4.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"pattern_compositor": {
+			"at": "2026-08-18 18:06:47",
+			"cell": [
+				7.0,
+				1751.0
+			],
+			"chapter": "array_tutorial",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				0.0,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": true
+		},
+		"pattern_machine_c": {
+			"at": "2026-08-24 22:02:37",
+			"cell": [
+				2.0,
+				690.0
+			],
+			"chapter": "color",
+			"has_collider": true,
+			"live_aabb": [
+				7.6,
+				2.5,
+				9.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 93.0,
+			"walk_inside": false
+		},
+		"pattern_machine_d": {
+			"at": "2026-08-26 08:05:00",
+			"cell": [
+				9.0,
+				5.0
+			],
+			"chapter": "color",
+			"has_collider": true,
+			"live_aabb": [
+				3.5,
+				2.5,
+				7.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1087.0,
+			"walk_inside": false
+		},
+		"pattern_tunnel_machine": {
+			"at": "2026-08-24 22:02:30",
+			"cell": [
+				7.0,
+				443.0
+			],
+			"chapter": "array_tutorial",
+			"has_collider": true,
+			"live_aabb": [
+				3.6,
+				3.2,
+				16.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 76.0,
+			"walk_inside": false
+		},
+		"pca_visualization": {
+			"at": "2026-08-18 18:12:08",
+			"cell": [
+				7.0,
+				11948.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				12.0,
+				5.1,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"percolationnetwork_ca": {
+			"at": "2026-08-18 18:11:16",
+			"cell": [
+				7.0,
+				9365.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				9.0,
+				9.0,
+				9.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 79.0,
+			"walk_inside": false
+		},
+		"phase_rod_array": {
+			"at": "2026-09-11 07:40:40",
+			"cell": [
+				6.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				6.6,
+				2.2,
+				6.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"pheromone_terrain": {
+			"at": "2026-08-18 18:10:46",
+			"cell": [
+				17.0,
+				6879.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				20.0,
+				0.1,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 595.0,
+			"walk_inside": false
+		},
+		"pillarcolorcollection": {
+			"at": "2026-08-18 18:07:19",
+			"cell": [
+				7.0,
+				2575.0
+			],
+			"chapter": "color",
+			"has_collider": true,
+			"live_aabb": [
+				9.0,
+				4.0,
+				15.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 105.0,
+			"walk_inside": false
+		},
+		"pixel_carpet_gallery": {
+			"at": "2026-08-18 18:06:47",
+			"cell": [
+				7.0,
+				1814.0
+			],
+			"chapter": "array_tutorial",
+			"has_collider": false,
+			"live_aabb": [
+				9.0,
+				8.0,
+				31.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": true
+		},
+		"pixel_cloud": {
+			"at": "2026-09-11 16:48:17",
+			"cell": [
+				11.0,
+				1.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				8.0,
+				9.0,
+				6.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 7.0,
+			"walk_inside": false
+		},
+		"plane": {
+			"at": "2026-08-18 18:08:40",
+			"cell": [
+				7.0,
+				4997.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				0.0,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 53.0,
+			"walk_inside": true
+		},
+		"platonicsolids": {
+			"at": "2026-08-18 18:07:15",
+			"cell": [
+				7.0,
+				2521.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				3.5,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": true
+		},
+		"probability_distributions_3d": {
+			"at": "2026-08-18 18:10:42",
+			"cell": [
+				17.0,
+				6585.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				10.0,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": true
+		},
+		"projection_shadow": {
+			"at": "2026-09-11 08:56:33",
+			"cell": [
+				6.0,
+				21.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.4,
+				3.8,
+				5.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"queer_marching_cave": {
+			"at": "2026-08-21 22:06:35",
+			"cell": [
+				6.0,
+				5172.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				19.5,
+				11.5,
+				19.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 102.0,
+			"walk_inside": false
+		},
+		"rainbow": {
+			"at": "2026-08-21 22:00:24",
+			"cell": [
+				7.0,
+				878.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				139.8,
+				140.0,
+				149.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 61.0,
+			"walk_inside": true
+		},
+		"random_bell_curve": {
+			"at": "2026-08-18 18:10:40",
+			"cell": [
+				17.0,
+				6464.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				20.0,
+				5.2,
+				20.1
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 605.0,
+			"walk_inside": false
+		},
+		"random_color_book_page_collection": {
+			"at": "2026-08-18 18:10:43",
+			"cell": [
+				6.0,
+				6657.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				0.1,
+				6.0,
+				12.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		},
+		"random_doors": {
+			"at": "2026-09-16 16:39:23",
+			"cell": [
+				9.0,
+				29.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				8.6,
+				3.3,
+				4.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"random_draw_dot": {
+			"at": "2026-09-19 20:55:26",
+			"cell": [
+				6,
+				37
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				7.3,
+				1.5,
+				37.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 3,
+			"walk_inside": false
+		},
+		"random_forest_visualization": {
+			"at": "2026-08-18 18:12:10",
+			"cell": [
+				17.0,
+				12180.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				7.9,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"random_space": {
+			"at": "2026-09-19 20:40:18",
+			"cell": [
+				6.0,
+				21.0
+			],
+			"chapter": "randomness",
+			"has_collider": true,
+			"live_aabb": [
+				15.4,
+				0.3,
+				28.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 948.0,
+			"walk_inside": false
+		},
+		"randomup": {
+			"at": "2026-08-28 15:39:41",
+			"cell": [
+				7.0,
+				4417.0
+			],
+			"chapter": "noise",
+			"has_collider": true,
+			"live_aabb": [
+				12.0,
+				21.0,
+				13.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 31.0,
+			"walk_inside": false
+		},
+		"raymarched_metaballs": {
+			"at": "2026-08-18 18:12:02",
+			"cell": [
+				7.0,
+				10990.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": false,
+			"live_aabb": [
+				12.0,
+				12.0,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 12.0,
+			"walk_inside": true
+		},
+		"rd_artifact": {
+			"at": "2026-09-14 06:17:45",
+			"cell": [
+				8.0,
+				5.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				10.0,
+				3.2,
+				6.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": false
+		},
+		"recursive_tree": {
+			"at": "2026-09-14 11:23:26",
+			"cell": [
+				1.0,
+				47.0
+			],
+			"chapter": "fractals",
+			"has_collider": false,
+			"live_aabb": [
+				15.4,
+				16.2,
+				15.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 65.0,
+			"walk_inside": true
+		},
+		"revolving_joy_ride": {
+			"at": "2026-08-18 18:11:34",
+			"cell": [
+				8.0,
+				9877.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				9.3,
+				5.0,
+				9.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 29.0,
+			"walk_inside": false
+		},
+		"rhizomatic_maze_space": {
+			"at": "2026-09-03 09:13:01",
+			"cell": [
+				10.0,
+				2624.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": true,
+			"live_aabb": [
+				65.9,
+				40.5,
+				57.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 517.0,
+			"walk_inside": false
+		},
+		"rhizomatic_structure": {
+			"at": "2026-08-18 18:12:16",
+			"cell": [
+				17.0,
+				13022.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": false,
+			"live_aabb": [
+				19.6,
+				17.4,
+				16.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 10.0,
+			"walk_inside": true
+		},
+		"riemann_pi": {
+			"at": "2026-09-10 21:33:55",
+			"cell": [
+				2.0,
+				5.0
+			],
+			"chapter": "change",
+			"has_collider": false,
+			"live_aabb": [
+				25.5,
+				15.6,
+				8.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": true
+		},
+		"rigid_body": {
+			"at": "2026-08-18 18:08:17",
+			"cell": [
+				17.0,
+				4157.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				16.2,
+				4.0,
+				16.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"river_crossing": {
+			"at": "2026-08-26 16:18:41",
+			"cell": [
+				11.0,
+				1654.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				8.0,
+				0.6,
+				4.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": true
+		},
+		"scale_lines": {
+			"at": "2026-09-09 09:55:23",
+			"cell": [
+				8.0,
+				2.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				0.0,
+				3.5,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 215.0,
+			"walk_inside": true
+		},
+		"scale_me": {
+			"at": "2026-09-16 21:27:17",
+			"cell": [
+				10.0,
+				2.0
+			],
+			"chapter": "transformation",
+			"has_collider": true,
+			"live_aabb": [
+				7.9,
+				3.3,
+				17.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"self_organization_ca": {
+			"at": "2026-09-14 08:50:18",
+			"cell": [
+				9.0,
+				5.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": true,
+			"live_aabb": [
+				12.9,
+				4.0,
+				8.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"self_organizing_patterns": {
+			"at": "2026-08-31 21:48:21",
+			"cell": [
+				3.0,
+				85.0
+			],
+			"chapter": "swarmintelligence",
+			"has_collider": true,
+			"live_aabb": [
+				0.1,
+				8.9,
+				6.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": false
+		},
+		"shader_arch_gallery": {
+			"at": "2026-08-18 18:10:50",
+			"cell": [
+				7.0,
+				7417.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": false,
+			"live_aabb": [
+				7.0,
+				5.0,
+				25.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 25.0,
+			"walk_inside": true
+		},
+		"sierpinski_pyramid": {
+			"at": "2026-08-18 18:10:54",
+			"cell": [
+				6.0,
+				7928.0
+			],
+			"chapter": "fractals",
+			"has_collider": true,
+			"live_aabb": [
+				8.5,
+				12.3,
+				8.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 207.0,
+			"walk_inside": false
+		},
+		"sierpinski_triangle": {
+			"at": "2026-08-18 18:10:53",
+			"cell": [
+				1.0,
+				7759.0
+			],
+			"chapter": "cellularautomata",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				8.7,
+				0.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 141.0,
+			"walk_inside": true
+		},
+		"silhouette_gate": {
+			"at": "2026-09-08 15:53:15",
+			"cell": [
+				10.0,
+				20.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				12.6,
+				5.3,
+				22.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 11.0,
+			"walk_inside": false
+		},
+		"sine_cylinder_staircase": {
+			"at": "2026-08-18 18:10:06",
+			"cell": [
+				7.0,
+				5546.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				7.4,
+				9.2,
+				12.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 224.0,
+			"walk_inside": false
+		},
+		"sine_space": {
+			"at": "2026-08-18 18:09:22",
+			"cell": [
+				7.0,
+				5278.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				11.0,
+				11.0,
+				11.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 46.0,
+			"walk_inside": true
+		},
+		"sine_wall_corridor": {
+			"at": "2026-09-12 12:28:58",
+			"cell": [
+				6.0,
+				4.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				7.5,
+				4.0,
+				2.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 49.0,
+			"walk_inside": false
+		},
+		"slingshot_launcher": {
+			"at": "2026-08-28 12:05:49",
+			"cell": [
+				12.0,
+				1315.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				27.0,
+				14.1,
+				1.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 50.0,
+			"walk_inside": false
+		},
+		"soft_mushroom": {
+			"at": "2026-09-03 09:13:29",
+			"cell": [
+				10.0,
+				2673.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				19.2,
+				2.5,
+				17.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 66.0,
+			"walk_inside": false
+		},
+		"soft_mushrooms": {
+			"at": "2026-08-28 15:41:18",
+			"cell": [
+				18.0,
+				7292.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				18.4,
+				2.5,
+				19.4
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 40.0,
+			"walk_inside": false
+		},
+		"soft_trampoline": {
+			"at": "2026-08-18 18:08:03",
+			"cell": [
+				17.0,
+				3768.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				20.0,
+				7.3,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"softbody3d": {
+			"at": "2026-08-18 18:07:54",
+			"cell": [
+				9.0,
+				3572.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				400.0,
+				5.1,
+				400.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"softbody_gallery_part1": {
+			"at": "2026-08-20 12:21:51",
+			"cell": [
+				7.0,
+				2987.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				6.0,
+				3.5,
+				26.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": false
+		},
+		"softbody_gallery_part2": {
+			"at": "2026-09-15 06:52:02",
+			"cell": [
+				9.0,
+				10.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				9.7,
+				4.7,
+				13.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 27.0,
+			"walk_inside": false
+		},
+		"softbody_gallery_part3": {
+			"at": "2026-08-20 12:23:42",
+			"cell": [
+				8.0,
+				9279.0
+			],
+			"chapter": "softbodies",
+			"has_collider": true,
+			"live_aabb": [
+				6.3,
+				3.0,
+				26.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": false
+		},
+		"space_colonization_algorithm": {
+			"at": "2026-08-18 18:11:16",
+			"cell": [
+				7.0,
+				9252.0
+			],
+			"chapter": "proceduralgeneration",
+			"has_collider": false,
+			"live_aabb": [
+				8.0,
+				10.0,
+				8.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 44.0,
+			"walk_inside": true
+		},
+		"spectrum_forest": {
+			"at": "2026-08-18 18:07:08",
+			"cell": [
+				17.0,
+				2344.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				20.0,
+				3.0,
+				20.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 62.0,
+			"walk_inside": true
+		},
+		"sphere_splitting_showcase": {
+			"at": "2026-08-18 18:08:30",
+			"cell": [
+				3.0,
+				4473.0
+			],
+			"chapter": "formfinding",
+			"has_collider": true,
+			"live_aabb": [
+				6.6,
+				2.1,
+				3.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 81.0,
+			"walk_inside": false
+		},
+		"spring_system": {
+			"at": "2026-09-19 17:46:32",
+			"cell": [
+				21.0,
+				76.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				8.9,
+				2.6,
+				11.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 74.0,
+			"walk_inside": true
+		},
+		"spring_tower": {
+			"at": "2026-09-11 15:33:53",
+			"cell": [
+				15.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				9.4,
+				4.7,
+				7.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 8.0,
+			"walk_inside": false
+		},
+		"support_polygon_lab": {
+			"at": "2026-09-11 22:28:43",
+			"cell": [
+				16.0,
+				8.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				10.5,
+				5.7,
+				10.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"surreal_kinetic_sculpture": {
+			"at": "2026-08-18 18:08:24",
+			"cell": [
+				9.0,
+				4395.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				14.0,
+				2.0,
+				15.9
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 299.0,
+			"walk_inside": false
+		},
+		"svm_visualization": {
+			"at": "2026-08-18 18:12:09",
+			"cell": [
+				7.0,
+				12059.0
+			],
+			"chapter": "machinelearning",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				4.3,
+				10.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": true
+		},
+		"synthesis_stand": {
+			"at": "2026-09-11 08:42:55",
+			"cell": [
+				10.0,
+				23.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				80.5,
+				0.1,
+				80.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"ten_print_maze_3d": {
+			"at": "2026-09-16 22:06:31",
+			"cell": [
+				1.0,
+				12.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				10.3,
+				10.0,
+				0.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 89.0,
+			"walk_inside": true
+		},
+		"ten_print_structure": {
+			"at": "2026-09-16 21:51:19",
+			"cell": [
+				11.0,
+				12.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				10.0,
+				0.3,
+				3.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"ten_print_textile": {
+			"at": "2026-09-14 20:09:12",
+			"cell": [
+				9.0,
+				8.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				10.5,
+				4.9,
+				16.3
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 3.0,
+			"walk_inside": false
+		},
+		"ten_tulip_buckets": {
+			"at": "2026-08-19 17:01:18",
+			"cell": [
+				8.0,
+				10120.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				13.3,
+				0.6,
+				4.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 13.0,
+			"walk_inside": false
+		},
+		"the_believing_turtle": {
+			"at": "2026-09-14 16:46:49",
+			"cell": [
+				9.0,
+				7.0
+			],
+			"chapter": "lsystems",
+			"has_collider": true,
+			"live_aabb": [
+				13.9,
+				5.2,
+				9.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"three_body_problem": {
+			"at": "2026-09-11 16:44:27",
+			"cell": [
+				11.0,
+				24.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				11.2,
+				4.3,
+				11.2
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 54.0,
+			"walk_inside": false
+		},
+		"tiling_demo": {
+			"at": "2026-09-09 14:10:58",
+			"cell": [
+				11.0,
+				116.0
+			],
+			"chapter": "color",
+			"has_collider": false,
+			"live_aabb": [
+				18.4,
+				5.8,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 84.0,
+			"walk_inside": true
+		},
+		"torque_demo": {
+			"at": "2026-09-11 08:12:23",
+			"cell": [
+				13.0,
+				48.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				13.8,
+				0.9,
+				48.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 78.0,
+			"walk_inside": false
+		},
+		"transformers_vr": {
+			"at": "2026-08-24 22:05:01",
+			"cell": [
+				7.0,
+				10468.0
+			],
+			"chapter": "graphtheory",
+			"has_collider": true,
+			"live_aabb": [
+				10.6,
+				20.7,
+				15.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 96.0,
+			"walk_inside": false
+		},
+		"trng_vs_prng": {
+			"at": "2026-09-03 09:11:22",
+			"cell": [
+				8.0,
+				1769.0
+			],
+			"chapter": "randomness",
+			"has_collider": false,
+			"live_aabb": [
+				22.2,
+				6.8,
+				0.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 64.0,
+			"walk_inside": true
+		},
+		"tug_of_war": {
+			"at": "2026-08-26 16:18:44",
+			"cell": [
+				3.0,
+				1689.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				8.0,
+				0.8,
+				6.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 4.0,
+			"walk_inside": true
+		},
+		"umbrella_field": {
+			"at": "2026-09-19 17:50:07",
+			"cell": [
+				21.0,
+				17.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				6.7,
+				2.8,
+				7.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"vector_fields": {
+			"at": "2026-08-18 18:08:17",
+			"cell": [
+				2.0,
+				4111.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.2,
+				4.8,
+				4.8
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 915.0,
+			"walk_inside": false
+		},
+		"vector_joint_playground": {
+			"at": "2026-08-18 18:08:27",
+			"cell": [
+				16.0,
+				4460.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				18.0,
+				5.7,
+				18.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 734.0,
+			"walk_inside": false
+		},
+		"vector_sub": {
+			"at": "2026-09-11 08:56:33",
+			"cell": [
+				6.0,
+				9.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				7.4,
+				3.8,
+				5.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": false
+		},
+		"verlet_integration": {
+			"at": "2026-08-18 18:07:46",
+			"cell": [
+				7.0,
+				3434.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				8.6,
+				2.5,
+				0.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 15.0,
+			"walk_inside": true
+		},
+		"voxel_noise_demo": {
+			"at": "2026-08-18 18:11:58",
+			"cell": [
+				23.0,
+				10286.0
+			],
+			"chapter": "isosurfaces",
+			"has_collider": true,
+			"live_aabb": [
+				32.0,
+				32.0,
+				32.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 14.0,
+			"walk_inside": false
+		},
+		"wall_abstract": {
+			"at": "2026-09-14 16:23:59",
+			"cell": [
+				11.0,
+				38.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				12.5,
+				2.5,
+				39.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 6.0,
+			"walk_inside": true
+		},
+		"warning_yard": {
+			"at": "2026-09-01 14:18:30",
+			"cell": [
+				4.0,
+				15.0
+			],
+			"chapter": "primitives",
+			"has_collider": false,
+			"live_aabb": [
+				7.5,
+				3.3,
+				7.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 1.0,
+			"walk_inside": true
+		},
+		"wave_interference": {
+			"at": "2026-08-18 18:10:19",
+			"cell": [
+				14.0,
+				5618.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": false,
+			"live_aabb": [
+				14.0,
+				8.2,
+				12.0
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 44.0,
+			"walk_inside": true
+		},
+		"wave_propagation_3d": {
+			"at": "2026-08-18 18:09:29",
+			"cell": [
+				18.0,
+				5358.0
+			],
+			"chapter": "wavefunctions",
+			"has_collider": true,
+			"live_aabb": [
+				12.5,
+				0.1,
+				12.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 791.0,
+			"walk_inside": false
+		},
+		"weather_vector_field": {
+			"at": "2026-08-28 12:05:50",
+			"cell": [
+				7.0,
+				1326.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				6.6,
+				3.0,
+				5.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 367.0,
+			"walk_inside": false
+		},
+		"work_energy_demo": {
+			"at": "2026-09-03 09:10:49",
+			"cell": [
+				27.0,
+				1294.0
+			],
+			"chapter": "forces",
+			"has_collider": true,
+			"live_aabb": [
+				28.4,
+				1.2,
+				1294.7
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 138.0,
+			"walk_inside": false
+		},
+		"work_room": {
+			"at": "2026-08-26 16:18:43",
+			"cell": [
+				1.0,
+				1660.0
+			],
+			"chapter": "forces",
+			"has_collider": false,
+			"live_aabb": [
+				7.8,
+				1.1,
+				1.6
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 2.0,
+			"walk_inside": true
+		},
+		"xyz_slider_plate": {
+			"at": "2026-08-18 09:58:36",
+			"cell": [
+				16.0,
+				108.0
+			],
+			"chapter": "primitives",
+			"has_collider": true,
+			"live_aabb": [
+				19.1,
+				13.4,
+				17.5
+			],
+			"planned_aabb": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"provenance": "walked",
+			"seen": 26.0,
+			"walk_inside": false
+		}
+	},
+	"schema": "adaresearch.em_live_footprints.v1"
+}

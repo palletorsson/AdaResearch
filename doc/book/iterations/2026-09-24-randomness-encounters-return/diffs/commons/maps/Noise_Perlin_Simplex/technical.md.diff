@@ -1,0 +1,8 @@
+--- before/commons/maps/Noise_Perlin_Simplex/technical.md
++++ commons/maps/Noise_Perlin_Simplex/technical.md
+@@ -1,3 +1,5 @@
++> Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
++
+ # A live comparison contract
+ 
+ Current sources are SimplexNoise.gd, SimplexVisualizer.gd, PerlinNoise.gd, NoiseVisualizer.gd and the optional pair_study.gd. The original visualizer and scene resources remain unchanged in this pass. Map structure and utilities remain unchanged. The current authored row replaces the museum's stale six-work row.

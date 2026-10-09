@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02. Pendulum</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}
+.reading{max-width:900px;margin:auto}.reading article{margin:32px 0}
+.chapter{scroll-margin-top:20px}.chapter>h2{border-top:2px solid #809289;padding-top:28px}
+.thread{font:15px/1.6 system-ui;background:#e2ebe7;padding:16px;max-width:none}
+.parallel article>h1{font-size:30px}.parallel{align-items:start}
+.toc{columns:3;column-gap:32px}.toc a{display:block;margin-bottom:12px;break-inside:avoid}
+.interlude{border-top:2px solid #809289;margin-top:3em;padding-top:2em}
+.pictures{margin:28px 0}.pictures img{aspect-ratio:16/10;object-fit:cover}
+details{margin:20px 0}summary{cursor:pointer;font:16px system-ui}pre{tab-size:4}
+@media(max-width:950px){.toc{columns:1}.parallel article>h1{font-size:26px}}
+@media print{.chapter{break-before:page}.reading article{break-inside:auto}details{display:none}}
+</style><header><div class="tag">Endless Museum · Wavefunctions · Reading pass</div><h1>02. Pendulum</h1><nav><a href="index.html">Sequence & changes</a><a href="tutorial.html">Whole tutorial</a><a href="final.html">Whole reflection</a><a href="wavefunctions-readings.zip">Download texts & code</a></nav></header><main><nav><a href="WaveFunctions_Intro.html">← Cube</a><a href="WaveFunctions_Sine_Space.html">Sine Space →</a></nav><p class="thread">Movement → record · A responding swing; positions and timestamps kept together.</p><div class="parallel"><article><div class="tag">Tutorial · build and investigate</div><h1>A swing keeps a record</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Angular state and a restoring acceleration</li>
+<li>Records with named position and time fields</li>
+<li>Sampling intervals</li>
+<li>Count and age limits</li>
+<li>Drawing time as distance</li>
+</ul>
+<p>Watch the pendulum in its frame. Choose one teal mark behind it. The bob turns back; the mark keeps travelling down the hall. The bob has not visited that depth. The drawing gives its past somewhere to go.</p>
+<h2>What you bring</h2>
+<p>Keep the cube from the previous hall and the list from Trace. There, a distance condition decided when to keep another position. Here a time condition does that job. Each entry needs both the position and the time it was observed.</p>
+<p><strong>Build:</strong> let the familiar cube swing beneath a pivot, then keep a bounded record of its positions. The installed exhibit uses a spherical bob; our cube remains a recognisable marker for the same point-mass model.</p>
+<p><strong>Investigate:</strong> change the recording interval while keeping the movement rule. Predict whether you will retain more detail, more duration, or both.</p>
+<h2>Work inside the museum</h2>
+<p>Keep the opening script. Save this next version as <code>02_pendulum_record.gd</code> and attach it to your <code>PointStudy</code> Node3D in the Pendulum hall. Use hall-local position <code>(10, 0, 21.8)</code>, zero rotation and unit scale. Its history extends towards local negative Z. The museum supplies the room, light, camera and player.</p>
+<p>The complete script below creates every object it uses. The cube construction returns unchanged at 0.4 metres across. A pivot and a thin rod give it a constraint. Small teal copies mark the recorded positions; their meshes are allocated once, then reused. No named scene children, external classes or scene references are required.</p>
+<h2>Complete code — 02_pendulum_record.gd</h2>
+<!-- student-code:02_pendulum_record.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+class Sample:
+    var position: Vector3
+    var time: float
+
+    func _init(at: Vector3, seconds: float) -&gt; void:
+        position = at
+        time = seconds
+
+@export var sample_interval := 0.025
+@export var trail_speed := 0.6
+var length := 1.0
+var gravity := 9.8
+var initial_angle := PI / 4.0
+var angle := initial_angle
+var angular_velocity := 0.0
+var elapsed := 0.0
+var sample_clock := 0.0
+var max_samples := 120
+var max_age := 6.0
+var history: Array[Sample] = []
+var marks: Array[MeshInstance3D] = []
+var pivot := Node3D.new()
+var cube := MeshInstance3D.new()
+var label := Label3D.new()
+
+func _ready() -&gt; void:
+    assert(sample_interval &gt; 0.0 and length &gt; 0.0)
+    var mesh := BoxMesh.new()
+    pivot.position = Vector3(0, 2.0, 0)
+    add_child(pivot)
+    cube.mesh = mesh
+    cube.scale = Vector3.ONE * 0.4
+    cube.position.y = -length
+    pivot.add_child(cube)
+    var rod := MeshInstance3D.new()
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.008
+    cylinder.bottom_radius = 0.008
+    cylinder.height = length
+    rod.mesh = cylinder
+    rod.position.y = -length / 2.0
+    pivot.add_child(rod)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.08, 0.65, 0.7)
+    ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    for i in range(max_samples):
+        var mark := MeshInstance3D.new()
+        mark.mesh = mesh
+        mark.material_override = ink
+        mark.scale = Vector3.ONE * 0.035
+        mark.visible = false
+        add_child(mark)
+        marks.append(mark)
+    label.position = Vector3(0, 2.35, 0)
+    label.font_size = 36
+    label.pixel_size = 0.0025
+    label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(label)
+    draw_state()
+
+func _physics_process(delta: float) -&gt; void:
+    var acceleration := -(gravity / length) * sin(angle)
+    angular_velocity += acceleration * delta
+    angle += angular_velocity * delta
+    elapsed += delta
+    pivot.rotation.z = angle
+    sample_clock += delta
+    if sample_clock &gt;= sample_interval:
+        sample_clock = fmod(sample_clock, sample_interval)
+        history.append(Sample.new(to_local(cube.global_position), elapsed))
+    while history.size() &gt; max_samples:
+        history.pop_front()
+    while not history.is_empty() and elapsed - history[0].time &gt; max_age:
+        history.pop_front()
+
+func _process(_delta: float) -&gt; void:
+    draw_state()
+
+func display_position(sample: Sample) -&gt; Vector3:
+    var age := elapsed - sample.time
+    return sample.position + Vector3.FORWARD * age * trail_speed
+
+func draw_state() -&gt; void:
+    pivot.rotation.z = angle
+    for i in range(marks.size()):
+        marks[i].visible = i &lt; history.size()
+        if i &lt; history.size():
+            marks[i].position = display_position(history[i])
+    label.text = &quot;swing %.2f rad   time %.2f s\n%d marks   request %.3f s&quot; % [
+        angle, elapsed, history.size(), sample_interval]
+
+func set_sampling(seconds: float) -&gt; void:
+    assert(seconds &gt; 0.0)
+    sample_interval = seconds
+    sample_clock = 0.0
+    history.clear()
+    draw_state()
+
+func reset_experiment() -&gt; void:
+    angle = initial_angle
+    angular_velocity = 0.0
+    elapsed = 0.0
+    sample_clock = 0.0
+    history.clear()
+    draw_state()
+</code></pre>
+<h2>From a prescribed cycle to a responding swing</h2>
+<p>In the opening, elapsed time directly supplied a height. Here the next angle depends on the current angle and angular velocity. The update follows the integration we used in Forces: acceleration changes velocity; velocity changes position. Both steps multiply by <code>delta</code> in seconds. Angle is measured in radians and angular velocity in radians per second.</p>
+<p>The acceleration <code>-(gravity / length) * sin(angle)</code> points back towards the hanging position. Start on the right: acceleration is negative. At the bottom it is zero, but the accumulated velocity carries the cube through. The cube slows on the other side before returning. Change its angular velocity and you change what follows; a clock prescribing its position would overwrite that intervention.</p>
+<p>The pivot rotates around Z. Its child cube stays one metre below it in the pivot's coordinates. We therefore need <code>to_local(cube.global_position)</code> to record the moving centre in the <strong>study's</strong> coordinates. Recording <code>cube.position</code> would repeatedly save the unchanged offset beneath the pivot.</p>
+<p>This is a numerical, undamped, fixed-length pendulum model. The cube represents a point mass; its shape, rotational inertia, air resistance and collisions are absent. It is not a Jolt rigid body and cannot be grabbed. Small numerical energy errors remain. Keep the room's existing pendulum as the encounter; the small reconstruction isolates its update and recorder.</p>
+<h2>One observation has two fields</h2>
+<p><code>Sample</code> groups a position with a time. <code>Array[Sample]</code> says what kind of entry belongs in <code>history</code>. Position is a three-dimensional vector in metres; time is a separate number in seconds. Z remains a spatial coordinate.</p>
+<p>Each physics update advances the local clock. When the sampling interval has elapsed, <code>append</code> saves the cube's current centre and the current time. Oldest records stay at the beginning of the list, so <code>pop_front</code> removes the oldest.</p>
+<p><code>fmod</code> keeps the unused fraction of the sampling interval. We save at most one observation per physics update. If an update is late, we keep the position actually observed; we do not invent several earlier positions from that one observation.</p>
+<p>With a 60 Hz physics tick, a requested interval of 0.025 seconds falls between ticks. Actual gaps alternate between approximately 0.0167 and 0.0333 seconds. A headset's display rate does not, by itself, set the physics tick rate. The timestamps describe the observations we obtained, not the ideal schedule we requested.</p>
+<h2>Two limits on a record</h2>
+<p>The first <code>while</code> loop keeps no more than 120 entries. The second removes entries older than six seconds. Either condition can shorten the history.</p>
+<p>At 0.025 seconds per sample, 120 entries cover about three seconds. At 0.2 seconds, the six-second age limit is reached with about thirty entries. The exact oldest-to-newest span depends on the retained timestamps. The count limit gives fine sampling less duration here.</p>
+<p><code>set_sampling</code> clears the record and sampling clock while keeping angle, angular velocity and elapsed time. <code>reset_experiment</code> also resets those movement variables. The museum's own clock continues in either case.</p>
+<h2>Give age a direction</h2>
+<p><code>display_position</code> starts from a stored position, then displaces its <strong>drawing</strong> along negative Z. Age in seconds times <code>trail_speed</code> in metres per second becomes distance in metres. At 0.6 metres per second, a two-second-old mark is drawn 1.2 metres behind its recorded position.</p>
+<p>The stored position never changes. Changing the display speed rearranges the same record; it does not make the pendulum swing faster. This distinction carries Trace's original-data rule into another representation.</p>
+<h2>Build and compare</h2>
+<p>Run the original values. Predict where a mark will be drawn two seconds after its timestamp. Check a record in Godot's Remote Inspector: compare its saved position with the corresponding mesh in <code>marks</code>.</p>
+<p>Place a second study across the hall, at <code>(2.5, 0, 22.2)</code>, with the same script and initial state. Set its exported sampling interval to <code>0.2</code> before running. After eight seconds, both cubes should still swing together. The coarse record should contain fewer marks and reach further back. Explain both results using the two limits, not the appearance alone.</p>
+<p>Now set the second study's <code>trail_speed</code> to <code>0.3</code>. Its history occupies half as much depth for the same ages. The period, stored positions and sample count do not change. This is a change to the drawing.</p>
+<p>For an independent variation, edit the second script to request <code>0.1</code> seconds and retain at most twenty samples. Predict which limit will end its history. Then change only the count limit until all six seconds fit. Use the actual timestamps to judge the result.</p>
+<h2>Read the installed exhibit</h2>
+<p>The hall's enlarged <code>PendulumWave</code> uses the same update and recording principle with a 2.8-metre pendulum, up to 300 records and ten seconds of history. Its FINE, COARSE and RESET controls make the comparisons available in the existing museum. Our shorter study uses smaller limits so the record fits beside it.</p>
+<p>The floor beneath the installation carries a second drawing of its record. It retains horizontal position and age while omitting height. Compare that projection with the suspended marks. The floor drawing and measured-period control belong to the installed exhibit; the printed reconstruction builds the small swing and its suspended record.</p>
+<p>The exhibit also has STROBE: it measures a period from successive crossings in the same direction, then samples approximately once per return. Watch the moving bob while its marks almost line up. Much of the motion happened between observations. That measured-period control is an encounter here; it is not concealed inside the printed reconstruction.</p>
+<h2>What travels onward</h2>
+<p>Keep the timestamped list and the distinction between data and its drawing. The next hall, Sine Space, gives a repeating rule a spatial coordinate directly. Here depth described a record's age; there position in space will be an input to the rule.</p></article><article><div class="tag">Reflection · encounter and question</div><h1>Where a swing leaves its past</h1>
+<p>Behind the bob, something is leaving the room very slowly.</p>
+<!-- @PendulumWave -->
+
+<p>Stand beside the frame and follow the swing. Then choose one teal mark just behind it. The bob turns. Keep looking at your mark: does it turn too?</p>
+<p>It continues away along the hall. Walk beside it. From here the whole record resembles a wave, although the bob has only swung in one plane. The long direction belongs to something the bob did not do.</p>
+<p>Each mark keeps a position and a time. The drawing subtracts that time from the present and gives the resulting age a distance: six-tenths of a metre for every second. An old moment is further away. We can walk beside a duration because a direction has been given another job.</p>
+<p>Two moments one swing apart leave a repeated shape along that direction. Its spacing depends on how quickly we send the record into depth. We could double the spacing without changing the swing. This length belongs to our way of showing the return; it is not evidence that a disturbance travelled down the hall.</p>
+<p>Look down. The same record lies across a dark surface beneath the swing. Its horizontal position remains, and so does its age. Height has been left out. You can move between the hanging account and the flattened one, checking what each makes easier to see.</p>
+<p>Look at the requested interval and the actual gaps on the plate. FINE asks for a mark every twenty-five milliseconds. With a sixty-tick physics clock, some gaps are shorter and some longer. The request falls between the available observations. A smooth join can make that mismatch difficult to see.</p>
+<p>Press COARSE and let a few swings leave their marks. There are fewer positions to count. Follow the oldest one: it can reach further into the past.</p>
+<p>The list has room for three hundred entries and allows none older than ten seconds. Fine sampling fills its places sooner. Coarse sampling keeps less of each swing and more swings within reach. A person looking for a small tremor and a person looking for a long return would have different reasons to choose.</p>
+<p>Wait with one mark. It is there, then absent. No fading gives it a farewell. The pendulum carries on from its current angle and speed; this little piece of its accessible past has gone.</p>
+<p>Now press STROBE. The sampler uses the period measured from the pendulum's own crossings. After a few swings, compare the moving bob with the sparse record behind it. The marks nearly line up. Tick-sized differences remain, but much of the movement has vanished from what was kept.</p>
+<p>This can become an instrument for finding repetition. It can also make repetition look like stillness. Try reading the marks before glancing back at the bob. The same setting helps with one question and makes another difficult to answer.</p>
+<p>RESET begins this experiment again: starting angle, local time, empty list. The museum continues. We have already seen how useful it is to make a beginning without beginning everything.</p>
+<!-- @ -->
+
+<p>In the point rooms, the drawing dot asked whether a hand had moved far enough to keep another position. Here the recorder waits for time to pass. Both leave things out. The choice becomes easier to notice when a moving body and its account remain beside one another.</p>
+<p>At the plinth, take the point and move your hand. Your own record extends along the open side of the room. Further on, three double pendulums paint on separate canvases. The marks stay on those surfaces while the bodies continue. There is space to approach each account and return to what is making it.</p>
+<p>We could stay and change what a record values. Ahead, rising and falling are being given yet another direction. A repeating rule will take position in space as its input. We leave this hall knowing that a wave-shaped drawing can tell us about a movement, a clock, and the decisions that let one stand for the other.</p></article></div><nav><a href="WaveFunctions_Intro.html">← Cube</a><a href="WaveFunctions_Sine_Space.html">Sine Space →</a></nav></main></html>

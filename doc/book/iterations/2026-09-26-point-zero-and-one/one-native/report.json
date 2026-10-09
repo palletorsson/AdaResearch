@@ -1,0 +1,189 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "all five point conditions placed",
+      "passed": true
+    },
+    {
+      "name": "absent uses the same Point one label",
+      "passed": true
+    },
+    {
+      "name": "visible uses the same Point one label",
+      "passed": true
+    },
+    {
+      "name": "solid uses the same Point one label",
+      "passed": true
+    },
+    {
+      "name": "held uses the same Point one label",
+      "passed": true
+    },
+    {
+      "name": "pedestal uses the same Point one label",
+      "passed": true
+    },
+    {
+      "name": "empty station has no point mesh or collision",
+      "passed": true
+    },
+    {
+      "name": "white mesh sizes identical",
+      "passed": true
+    },
+    {
+      "name": "visible point has no collision shape",
+      "passed": true
+    },
+    {
+      "name": "visible physical ray matches condition",
+      "passed": true
+    },
+    {
+      "name": "visible capsule passage matches condition",
+      "passed": true
+    },
+    {
+      "name": "solid physical ray matches condition",
+      "passed": true
+    },
+    {
+      "name": "solid capsule passage matches condition",
+      "passed": true
+    },
+    {
+      "name": "walking capsule can approach the final pedestal from the corridor",
+      "passed": true
+    },
+    {
+      "name": "pedestal approach has a supporting floor",
+      "passed": true
+    },
+    {
+      "name": "black point uses production pickup",
+      "passed": true
+    },
+    {
+      "name": "black point has exact coordinate identity",
+      "passed": true
+    },
+    {
+      "name": "black point matches the white sphere size",
+      "passed": true
+    },
+    {
+      "name": "black point material is dark",
+      "passed": true
+    },
+    {
+      "name": "coordinate frame configured to follow corridor point",
+      "passed": true
+    },
+    {
+      "name": "Point zero sign removed from coordinate frame",
+      "passed": true
+    },
+    {
+      "name": "coordinate frame adopts the actual black point",
+      "passed": true
+    },
+    {
+      "name": "actual grab driver carries the point",
+      "passed": true
+    },
+    {
+      "name": "two coordinate cards available",
+      "passed": true
+    },
+    {
+      "name": "world reports actual carried point",
+      "passed": true
+    },
+    {
+      "name": "local reports actual carried point",
+      "passed": true
+    },
+    {
+      "name": "carried point activates existing target",
+      "passed": true
+    },
+    {
+      "name": "point releases and remains available",
+      "passed": true
+    },
+    {
+      "name": "closing sphere diameter is 1.3 m",
+      "passed": true
+    },
+    {
+      "name": "closing sphere sits exactly on pedestal",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corridor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: absent",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: visible",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: solid",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinates",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pedestal",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "stations": {
+      "absent": [
+        7.5,
+        0.0,
+        1.5
+      ],
+      "held": [
+        7.5,
+        0.0,
+        10.5
+      ],
+      "pedestal": [
+        8.5,
+        0.0,
+        26.5
+      ],
+      "solid": [
+        7.5,
+        0.0,
+        7.5
+      ],
+      "visible": [
+        7.5,
+        0.0,
+        4.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Point_One",
+  "scope": "Native museum render, physical rays and capsule motion; pickup availability and coordinate identity inspected. No headset acceptance claimed."
+}

@@ -1,0 +1,217 @@
+--- before/commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd
++++ after/commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd
+@@ -2,22 +2,20 @@
+ # Random walk visualization in a glass terrarium
+ # Shows 2D and 3D random walks with trails
+ #
+-# Algorithm: Simulates random walks (uniform 2D, uniform 3D, and Lévy flight)
+-# inside a bounded glass terrarium. Each walker takes discrete steps in uniformly
+-# random directions; boundary reflection keeps walkers contained. Mean squared
+-# displacement (MSD) is tracked to demonstrate diffusion scaling laws.
+-#
+-# QFEP: Random walk as pure E(S) — no memory, no direction, maximum entropy
++# Algorithm: Uniform headings in 2D or 3D, plus a bounded long-step mode.
++# Each walker retains its current position and RNG state. The displayed trail
++# is recorded but is not consulted by the next step; glass reflects endpoints.
++# MSD reports the five walkers' squared displacement inside this finite box.
+ #
+ # @identity
+-# essence: E[|r|²] = n·d·σ² — mean squared displacement scales linearly with step count
+-# desire: peer into a glass box and watch colored particles wander without purpose or memory
+-# critical_parameter: walk_mode — switches between WALK_2D (planar), WALK_3D (volumetric), LEVY_FLIGHT (heavy-tailed jumps)
+-# triggers: mode switch buttons change step generator; each step calls _generate_step() with boundary reflection
+-# emerges: Levy flights produce dramatically different trail topology — rare giant leaps amid local clusters
++# essence: next_position = reflect(position + sampled_step)
++# desire: follow one walk, then compare its current position with its partial record
++# critical_parameter: walk_mode — planar, volumetric, or capped inverse-square-root step lengths
++# triggers: mode buttons change the generator; RESET replays a named seed with the same settings
++# emerges: changing a direction or length rule changes the retained tangle within the same glass
+ # needs: VR mode buttons [has], reset button [has], trail rendering via ImmediateMesh [has]
+ # relationships: contrasts with random_walk_leash (observed vs felt); feeds random_walk_collection and pixel_cloud
+-# truth: A random walk has no destination — yet it explores space more honestly than any planned path.
++# truth: A visible history is not yet a history the next step can use.
+ 
+ extends Node3D
+ 
+@@ -456,7 +454,7 @@
+ 		[
+ 			{"type": "button", "label": "2D"},
+ 			{"type": "button", "label": "3D"},
+-			{"type": "button", "label": "LEVY"},
++			{"type": "button", "label": "LONG STEP"},
+ 		],
+ 		[{"type": "button", "label": "RESET"}],
+ 	], case_body)
+@@ -483,7 +481,7 @@
+ 		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+ 		add_child(_control_panel)
+ 
+-	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LEVY (Btn_2)
++	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LONG STEP (Btn_2)
+ 	for i in range(3):
+ 		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+ 		if btn:
+@@ -581,7 +579,7 @@
+ 			) * step_size
+ 
+ 		WalkMode.LEVY_FLIGHT:
+-			# Lévy flight: occasional large jumps
++			# Bounded long-step sampler; the legacy enum name is retained for saved configurations.
+ 			var angle = _rand() * TAU
+ 			var phi = acos(2.0 * _rand() - 1.0)
+ 			var direction = Vector3(
+@@ -654,7 +652,7 @@
+ 		sum_sq_disp += disp.length_squared()
+ 	var msd = sum_sq_disp / maxf(num_walkers, 1)
+ 
+-	var mode_names = ["2D", "3D", "Lévy"]
++	var mode_names = ["2D", "3D", "Long step"]
+ 	_stats_label.text = "%s Walk\nSteps: %d\nMSD: %.4f" % [mode_names[walk_mode], _total_steps, msd]
+ 
+ func _input(event):
+@@ -879,8 +877,8 @@
+ 			rule = "3D · fixed %.3f m steps in the volume" % step_size
+ 			glass = "glass folds a step back at every wall"
+ 		_:
+-			rule = "LEVY · 3D · step %.3f m × (u+%.2f)^%.1f" % [step_size, LEVY_OFFSET, LEVY_EXPONENT]
+-			glass = "glass folds a step back · LEVY cap %d×" % int(LEVY_STEP_CAP)
++			rule = "LONG STEP · 3D · step %.3f m × (u+%.2f)^%.1f" % [step_size, LEVY_OFFSET, LEVY_EXPONENT]
++			glass = "glass folds a step back · length cap %d×" % int(LEVY_STEP_CAP)
+ 	var kept: int = _walker_trails[0].size() if _walker_trails.size() > 0 else 0
+ 	var who: String = "one followed, %d dimmed" % (num_walkers - 1) if follow_one else "%d walkers" % num_walkers
+ 	var seed_line: String = "seed %d · RESET replays it" % walk_seed if walk_seed >= 0 \
+@@ -940,7 +938,7 @@
+ 
+ 
+ func get_logbook_state() -> Dictionary:
+-	return {"stand": stand, "mode": int(walk_mode), "mode_name": ["2D", "3D", "LEVY"][int(walk_mode)], "steps": _total_steps,
++	return {"stand": stand, "mode": int(walk_mode), "mode_name": ["2D", "3D", "LONG STEP"][int(walk_mode)], "steps": _total_steps,
+ 		"sim_time": float(_total_steps) / maxf(steps_per_second, 0.001), "steps_per_second": steps_per_second, "clock": _run_clock,
+ 		"frames": _run_frames, "catchup_cap": MAX_CATCHUP_STEPS, "trail_kept": _walker_trails[0].size() if _walker_trails.size() > 0 else 0,
+ 		"trail_length": trail_length, "seed": walk_seed, "replay": walk_seed >= 0, "follow_one": follow_one, "num_walkers": num_walkers,
+--- before/algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd
++++ after/algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd
+@@ -1,19 +1,19 @@
+ # @identity
+ # essence: d(decay)/dt = growth_rate · (0.2 + decay · 0.8) — autocatalytic decay
+-# desire: watch two pristine stacks slowly crumble — drift, darken, sink — and feel entropy win
++# desire: watch two arranged stacks drift, darken and sink under different configured rates
+ # critical_parameter: decay_growth_rate — controls how fast decay accelerates once seeded
+ # triggers: injection_accumulator randomly seeds decay into instances; decay_start_delay gates the onset
+-# emerges: each instance decays at its own rate — the grid becomes a ruin uniquely every time
++# emerges: bounded stochastic perturbations accumulate; the fixed sizes and unequal rates constrain the comparison
+ # needs: VR push buttons for TOGGLE/RESET [has]; Grid.gdshader for wireframe overlay [has]
+ # relationships: contrasts with Random_Rotate_Random_XYZ (rotation without destruction); feeds hardware_entropy_decay
+-# truth: Decay is not failure — it is matter remembering that arrangement is improbable.
++# truth: This authored decay process is not a measurement of thermodynamic entropy.
+ 
+ extends Node3D
+ 
+ # Random decay demo built with MultiMesh-only stacks.
+ # Two standing 2D stacks are generated:
+ # - 1m cubes with small gutter spacing
+-# - 1dm prisms with smaller spacing
++# - prisms with smaller spacing; force_uniform_item_size makes these 1m too
+ # Instances drift, rotate, sink, and darken over time.
+ 
+ @export_category("Simulation")
+@@ -63,6 +63,7 @@
+ var _rng := RandomNumberGenerator.new()
+ var _layers: Array[Dictionary] = []
+ var _decay_elapsed: float = 0.0
++var _stack_fit: float = 0.0
+ 
+ 
+ func _ready() -> void:
+@@ -88,9 +89,11 @@
+ 	if event.is_action_pressed("ui_home"):
+ 		_reset_layers()
+ 	elif event.is_action_pressed("ui_accept"):
+-		decay_active = not decay_active
+-		if decay_active:
+-			_decay_elapsed = 0.0
++		_toggle_decay()
++
++# Pause preserves the accumulated startup/ramp time; only RESET starts it over.
++func _toggle_decay() -> void:
++	decay_active = not decay_active
+ 
+ func _create_vr_controls() -> void:
+ 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+@@ -98,8 +101,12 @@
+ 		[{"type": "button", "label": "TOGGLE"}, {"type": "button", "label": "RESET"}],
+ 	])
+ 	var mid_x := (cube_origin.x + prism_origin.x) / 2.0
+-	panel.position = Vector3(mid_x, 0.85, 1.2)
++	panel.name = "DecayControls"
++	panel.position = Vector3(0.0 if _stack_fit > 0.0 else mid_x, 0.85, 1.2)
+ 	panel.rotation_degrees = Vector3(-25, 0, 0)
++	if _stack_fit > 0.0:
++		panel.position.z = -1.2
++		panel.rotation.y = PI
+ 	add_child(panel)
+ 
+ 	var toggle_btn: Node = panel.find_child("Btn_0", true, false)
+@@ -107,9 +114,7 @@
+ 		var area: Node = toggle_btn.get_node_or_null("InteractableAreaButton")
+ 		if area:
+ 			area.button_pressed.connect(func(_b):
+-				decay_active = not decay_active
+-				if decay_active:
+-					_decay_elapsed = 0.0
++				_toggle_decay()
+ 			)
+ 
+ 	var reset_btn: Node = panel.find_child("Btn_1", true, false)
+@@ -124,6 +129,42 @@
+ 	_clear_layers()
+ 	_layers.append(_create_cube_layer())
+ 	_layers.append(_create_prism_layer())
++	_fit_stacks()
++
++# Museum-only opt-in: fit the two complete displays, retaining a common unit
++# size and a clear gap. Instance simulation coordinates and controls stay intact.
++func _fit_stacks() -> void:
++	if _layers.size() != 2:
++		return
++	var nodes: Array[MultiMeshInstance3D] = []
++	var boxes: Array[AABB] = []
++	for child in get_children():
++		if child is MultiMeshInstance3D and String(child.name).begins_with("DecayLayer_"):
++			nodes.append(child)
++	for i in range(_layers.size()):
++		var layer: Dictionary = _layers[i]
++		var mesh_bounds: AABB = layer.multimesh.mesh.get_aabb()
++		var bounds: AABB
++		for j in range(layer.base_positions.size()):
++			var box := AABB(mesh_bounds.position + layer.base_positions[j], mesh_bounds.size)
++			bounds = box if j == 0 else bounds.merge(box)
++		boxes.append(bounds)
++		if _stack_fit <= 0.0:
++			nodes[i].transform = Transform3D.IDENTITY
++	if _stack_fit <= 0.0:
++		return
++	var gap := 0.6
++	var unit_scale := (_stack_fit - gap) / (boxes[0].size.x + boxes[1].size.x)
++	var left := -_stack_fit * 0.5
++	for i in range(nodes.size()):
++		nodes[i].scale = Vector3.ONE * unit_scale
++		nodes[i].position = Vector3(left - boxes[i].position.x * unit_scale, -boxes[i].position.y * unit_scale, 0.0)
++		left += boxes[i].size.x * unit_scale + gap
++	var panel := get_node_or_null("DecayControls")
++	if panel:
++		panel.position.x = 0.0
++		panel.position.z = -1.2
++		panel.rotation.y = PI
+ 
+ func _clear_layers() -> void:
+ 	for child in get_children():
+@@ -476,4 +517,7 @@
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	if config.has("stack_fit"):
++		_stack_fit = clampf(float(config.stack_fit), 2.0, 30.0)
++		if is_node_ready():
++			_fit_stacks()

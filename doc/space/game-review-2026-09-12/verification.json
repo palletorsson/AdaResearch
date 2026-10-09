@@ -1,0 +1,74 @@
+{
+  "run": {
+    "started": "2026-09-13T00:13:45+02:00",
+    "finished": "2026-09-13T00:15:18+02:00",
+    "pid": 38856,
+    "exit": 0,
+    "checks": 88,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_game_live.gd": "6da9eccd366cf9df2c72ca30ea12e91411e60fe12ac76ee99f37ab8845ddd6c9",
+      "commons/primitives/cubes/random_cycle_cube.gd": "5bb018f02747f2962b6348ff17b031ab36730798f70f26d5a89518fe7a769b28",
+      "commons/primitives/cubes/CubeSpawner.gd": "147cfb9ae69374119ba4c7ac9b275d15fe6b3fcd29fcdcac360821a0f31fd548",
+      "commons/primitives/cubes/ProjectileCube.gd": "3f84adfa6d4355da35caadb763a908e908c964eea83168e6058747ea475531eb",
+      "commons/maps/Random_Game/map_data.json": "479ab2e3dddbe3cf7f0bfe9971547141314b08349ae6de37f3df61752f92b899",
+      "ada_run/game_review_extra.gd": "d76337e7b82f0b636938614fcd2f9bd5f53a5475c4f6bc574c74ecf6ddb1ca17",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "primary": [
+    "r_c",
+    "cube_projectile_spawner"
+  ],
+  "excerpts": 11,
+  "final_words": 967,
+  "pack": {
+    "planned": 9,
+    "matched": 9,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 8,
+    "refused": 1,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random game"
+  },
+  "audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 1
+  },
+  "map_geometry_unchanged": true,
+  "token_change": [
+    [
+      6,
+      12,
+      "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24",
+      "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24#stand:field"
+    ]
+  ],
+  "diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: ObjectDB instances leaked at exit (run with --verbose for details)."
+  ],
+  "publication_files": 63
+}

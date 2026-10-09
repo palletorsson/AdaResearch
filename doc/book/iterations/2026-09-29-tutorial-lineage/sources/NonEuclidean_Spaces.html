@@ -1,0 +1,433 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NonEuclidean_Spaces · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=NonEuclidean_Spaces">← Tutorial lineage</a></p><h1>NonEuclidean Spaces</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="NonEuclidean_Spaces/final.md">Raw captured source</a></p><pre># Curvature as Choice
+
+The triangle has followed us. Three corners again, but this time the number underneath is waiting on the shape.
+
+&lt;!-- @triangle_curvature_workbench --&gt;
+
+Start with PLANE at the bench near the entrance. Follow each yellow edge with your eye. Before moving the slider, predict what will happen to the angle sum when the triangle sits on a sphere. More than 180°? Less? The same, because it is still a triangle?
+
+Move to SPHERE. The edges take the short great-circle routes between their endpoints. Look at a corner: each incoming direction has to be read on the sphere, where the corner lives. The total rises. Move back to PLANE. It returns to 180°.
+
+Now try DISK. The triangle lies inside a circle; its sides curve towards the centre. Its angles add to less than 180°. The disk looks flat. That is already a complication worth staying with.
+
+## What counts as straight here?
+
+In the previous room, bowing an edge changed a picture. Here each model specifies which paths count as straight within it. These are *geodesics*: locally shortest paths, measured using that space&#x27;s own distances. On the plane they are straight segments. On the sphere they follow great circles. In the Poincaré disk they follow diameters or circular arcs that would meet the boundary at right angles.
+
+The curved arc in the disk is not a detour through its geometry. It is the direct route. Your eye is looking from the surrounding Euclidean room, using a different account of distance.
+
+There are three settings, not a continuous dial for the curvature of the whole museum. Each rebuilds its own example triangle. We are comparing hosts; we have not carried an unchanged triangle between them.
+
+```gdscript
+# triangle_curvature_workbench.gd — the angle at corner v between edges to u and w
+return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))
+```
+
+The tangents are unit directions. Their dot product tells us the cosine of the angle between them. Do this at all three corners and add the results. On a sphere the directions lie in the corner&#x27;s tangent plane; the disk model preserves angles, so we can measure them in its drawing.
+
+The earlier triangle printed three sixties. This bench has to ask its edges. A small difference in how a number arrives can open a large difference in what we are able to question.
+
+## What the corners can tell us
+
+For a geodesic triangle bounding a disk-like patch of a smooth surface, Gauss–Bonnet relates the angle sum to the curvature enclosed: in radians, the sum minus π equals the integral of Gaussian curvature over that patch. With constant curvature this becomes curvature times area. The plane gives zero; the spherical example gives an excess; the hyperbolic example a deficit.[^1]
+
+The bench measures the angles. It does not independently measure that integral, and one changing display is not a proof of the theorem. What it offers is an encounter with the question: what did our familiar 180° depend on?
+
+Flatness has become one of the available answers. You can return to it, but it no longer arrives alone.
+
+## The surfaces at the far end
+
+&lt;!-- @hyperbolic_surface --&gt;
+&lt;!-- @elliptic_surface --&gt;
+&lt;!-- @curvature_slider --&gt;
+
+A saddle, a dome, and another slider keep the comparison open. Their surfaces are useful things to look around: how does a curve present itself from above, then from the side? Where does the drawing suggest a route for your body?
+
+The saddle is built from `y = a * (x*x - z*z)`. The coefficient controls its bend; it is not the Gaussian curvature at every point. A dome-like graph is not automatically a sphere either. Similar silhouettes can conceal different measurements. We met that danger with noise: a convincing appearance can satisfy the first desire to understand, then stand in the way of the next question.
+
+The separate curvature slider changes its own surface sketch. It does not command all the other exhibits. Try it, then look across the room. The fixed studies remain fixed. For the measured three-way comparison, return to the bench with HOST on its control. The distinction matters because an available gesture can promise more authority than it has been given.
+
+## A boundary you can see and cannot reach
+
+&lt;!-- @poincare_disk --&gt;
+
+Look towards the rim of the Poincaré disk. In its hyperbolic metric the distance to that boundary is infinite, although its Euclidean drawing fits inside a finite circle. A step of the same hyperbolic length occupies less and less of the drawing as it approaches the rim. The representation can keep a world close to your hand while its own distances keep the edge away.
+
+&lt;!-- @riemann_sphere --&gt;
+
+The Riemann sphere offers a different operation. Stereographic projection puts the complex plane on a sphere with one point missing; adding a point at infinity completes it. The disk&#x27;s entire boundary and this added point are not the same kind of outside. One remains infinitely far away in the model&#x27;s metric; the other belongs to a compactified space.
+
+You can walk around the displayed sphere. You are walking in the museum, not around the infinity of the complex plane. Still, something has happened: an operation we could only name now has a surface we can approach. The gain is real, and so is the difference between the two journeys.
+
+## What the control cannot decide
+
+Mathematics lets us specify different geometries. Which geometry models a physical situation is a further question, answered with measurements and assumptions; a slider cannot settle it. Nor does one curvature value specify every possible space.
+
+Here the question is close enough to touch. When we change the host, what must a line do to remain straight? What have we kept, and what have we quietly replaced?
+
+The next hall moves from a rule for space to a rule for membership. It asks what happens when we try to collect all the sets that do not contain themselves. Choosing the rule will no longer be enough to make its promised collection possible.
+
+For now, return the slider to PLANE. The floor has not moved. Your account of it has.
+
+[^1]: See Mark Powell, [*Differential Geometry*, chapter 6: Gauss–Bonnet, Corollary 7.2](https://www.maths.gla.ac.uk/~mpowell/M435-chapter-6-gauss-bonnet.pdf). Angles in the equation are radians; the exhibit displays degrees. For the disk&#x27;s geodesics and angle-preserving representation, see Cornell&#x27;s [*Geometries of Surfaces*](https://pi.math.cornell.edu/~mec/Winter2009/Victor/part4.htm).
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="NonEuclidean_Spaces/tutorial.md">Raw captured source</a></p><pre># NonEuclidean Spaces
+
+Two alternatives, equally consistent with the first four postulates. Build a curvature slider that moves continuously between hyperbolic, Euclidean, and elliptic space.
+
+Declare the curvature state.
+
+```gdscript
+class_name CurvatureField
+extends Node3D
+
+@export var curvature: float = 0.0
+
+func set_curvature(k: float) -&gt; void:
+    curvature = clamp(k, -1.0, 1.0)
+    _update_grid()
+```
+
+A single scalar controls everything. Negative is hyperbolic, zero is Euclidean, positive is elliptic. The slider is the curvature.
+
+Build the base grid.
+
+```gdscript
+func _update_grid() -&gt; void:
+    for i in grid_vertices.size():
+        var v := grid_vertices[i]
+        grid_vertices[i] = _warp(v, curvature)
+    grid_mesh.update_from(grid_vertices)
+```
+
+The grid starts flat. Each frame, vertices warp according to the current curvature. The mesh is the same vertex list differently placed.
+
+Warp a vertex.
+
+```gdscript
+func _warp(v: Vector3, k: float) -&gt; Vector3:
+    var r := v.length()
+    var factor: float = 1.0 + k * r * r * 0.02
+    return v * factor
+```
+
+Parabolic scaling with distance from origin. Close to the slider, the warp is subtle; far away, it bends dramatically.
+
+Draw two parallel geodesics.
+
+```gdscript
+func draw_parallels(k: float) -&gt; void:
+    var a := _geodesic(Vector3(-2, 0, -5), Vector3.FORWARD, k)
+    var b := _geodesic(Vector3(2, 0, -5), Vector3.FORWARD, k)
+    parallels_mesh.draw(a, b)
+```
+
+Two lines start parallel. At k=-1 they diverge.
+
+At k=0 they stay parallel. At k=+1 they converge and meet.
+
+Integrate a geodesic step by step.
+
+```gdscript
+func _geodesic(start: Vector3, direction: Vector3, k: float) -&gt; PackedVector3Array:
+    var points := PackedVector3Array()
+    var pos := start
+    var dir := direction
+    for i in 40:
+        pos += dir * 0.2
+        dir = (_warp(pos + dir * 0.1, k) - _warp(pos, k)).normalized()
+        points.append(_warp(pos, k))
+    return points
+```
+
+Forty steps per geodesic. Direction updates each step by tangent to the warped grid. The line walks the curvature rather than assuming it.
+
+Label the three regimes.
+
+```gdscript
+func label_regime(k: float) -&gt; void:
+    if k &lt; -0.1: regime_label.text = &quot;hyperbolic&quot;
+    elif k &gt; 0.1: regime_label.text = &quot;elliptic&quot;
+    else: regime_label.text = &quot;euclidean&quot;
+```
+
+Hyperbolic, euclidean, elliptic. The slider passes through all three continuously. No regime is privileged.
+
+Colour the floor by curvature sign.
+
+```gdscript
+func tint_floor(k: float) -&gt; void:
+    var mat: StandardMaterial3D = floor.material_override
+    mat.albedo_color = Color(0.5 - k * 0.3, 0.5, 0.5 + k * 0.3)
+```
+
+Cool toward negative, warm toward positive. The learner&#x27;s steps tell them which geometry they&#x27;re inside.
+
+You have moved continuously through three geometries. The next map, Russell Paradox, turns from geometry to logic and finds the first genuine contradiction.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="NonEuclidean_Spaces/technical.md">Raw captured source</a></p><pre># NonEuclidean_Spaces — Technical
+
+## Two Geometries from One Denial
+
+When the parallel postulate falls, it does not leave a vacuum. It leaves a spectrum. The fifth postulate&#x27;s negation splits into two cases:
+
+- **Hyperbolic**: Through a point not on a given line, infinitely many lines can be drawn that never intersect the given line. Gaussian curvature K &lt; 0.
+- **Elliptic**: Through a point not on a given line, no parallel line exists — every pair of lines eventually meets. Gaussian curvature K &gt; 0.
+
+Euclidean geometry sits at K = 0, a single point on a continuous axis. Flatness is not the default. It is the degenerate case.
+
+## Gaussian Curvature
+
+Gauss&#x27;s *Theorema Egregium* (1827) established that curvature is an intrinsic property of a surface — it can be measured by creatures living on the surface without reference to any embedding space. The Gaussian curvature K at a point is the product of the two principal curvatures:
+
+```
+K = kappa_1 * kappa_2
+```
+
+- K &gt; 0: the surface curves the same way in all directions (sphere, dome). Principal curvatures have the same sign.
+- K &lt; 0: the surface curves oppositely in perpendicular directions (saddle, Pringle chip). Principal curvatures have opposite signs.
+- K = 0: at least one principal curvature is zero (plane, cylinder).
+
+The angle sum of a geodesic triangle encodes curvature directly via the Gauss-Bonnet theorem:
+
+```
+alpha + beta + gamma = pi + K * A
+```
+
+where A is the triangle&#x27;s area. On a sphere (K &gt; 0), triangles are &quot;fat&quot; — their angles exceed 180 degrees. On a saddle (K &lt; 0), triangles are &quot;thin&quot; — their angles fall short of 180 degrees.
+
+## Map Architecture: Split Dual Landscape
+
+The NonEuclidean_Spaces map is a 15x13 grid, max height 4. Its layout is a split dual: the left half forms a hyperbolic bowl (heights descending toward center), the right half forms an elliptic dome (heights rising toward center), connected by a narrow bridge at the midline.
+
+The structure layer encodes the curvature through height gradients:
+- **Left bowl (hyperbolic)**: heights descend from 2 at the rim to 1 at the bowl floor, with void (0) at the edges — a concave depression.
+- **Right dome (elliptic)**: heights rise from 1 at the rim through 2, 3, and up to 4 at the peak — a convex protrusion.
+- **Bridge (rows 6-8, col 6-8)**: a narrow isthmus at height 2, connecting the two geometries.
+
+The asymmetry between the halves is deliberate. Hyperbolic space feels expansive — you descend into openness. Elliptic space feels convergent — you climb toward a peak where all paths meet. The spatial experience mirrors the mathematical content.
+
+## Artifact Analysis
+
+### hyperbolic_surface (row 4, col 4)
+**@identity essence**: `y = K(x^2 - z^2) — saddle surface with negative Gaussian curvature K &lt; 0`
+
+A room-scale saddle surface generated procedurally. The implementation creates a `SurfaceTool` mesh by iterating over a grid of (x, z) coordinates and computing `y = curvature * (x*x - z*z)`. The curvature parameter defaults to -0.3, producing a pronounced saddle. Geodesic lines on this surface diverge — two initially parallel paths curve away from each other, visible as colored arcs on the mesh.
+
+The critical parameter is `curvature`, which controls the depth of the saddle. More negative values produce more dramatic divergence. The mesh is rendered with a blue-tinted material, visually distinguishing it from the elliptic surface&#x27;s warm tones.
+
+### elliptic_surface (row 4, col 10)
+**@identity essence**: `K &gt; 0 — positive Gaussian curvature; parallel lines converge, triangles have angle sum &gt; 180 degrees`
+
+A dome surface generated as a hemisphere section. The implementation uses spherical coordinates:
+```
+x = radius * sin(theta) * cos(phi)
+y = radius * cos(theta)
+z = radius * sin(theta) * sin(phi)
+```
+
+The radius parameter controls the curvature: smaller radius means tighter curvature (more dramatic convergence). Geodesics on the sphere are great circles, and any two great circles intersect at exactly two antipodal points. The artifact shows geodesic lines that start parallel at the equator and converge toward the poles.
+
+### curvature_slider (row 6, col 7)
+**@identity essence**: `K in [-1, +1] — Gaussian curvature as continuous parameter`
+
+Positioned at the bridge between the two halves, this slider parametrizes the entire space of constant-curvature geometries. Drag left for K &lt; 0 (hyperbolic), center for K = 0 (Euclidean), right for K &gt; 0 (elliptic).
+
+The slider emits a `curvature_changed(value)` signal that both surface artifacts can connect to. When connected, dragging the slider morphs the surfaces in real time: the saddle flattens through K = 0 and inflates into a dome; the dome deflates through flatness and inverts into a saddle. The transition is continuous — there is no discontinuity between geometries, only a smooth parameter sweep.
+
+The implementation maps the slider&#x27;s normalized position [0, 1] to curvature [-1, +1] via linear interpolation. The color gradient shifts from deep blue (K = -1) through white (K = 0) to warm red (K = +1).
+
+### poincare_disk (row 8, col 3)
+**@identity essence**: `geodesics as circular arcs meeting the boundary at right angles; the boundary circle IS infinity`
+
+The Poincare disk model maps the entire infinite hyperbolic plane into a finite circular disk. The implementation draws:
+- A boundary circle (the &quot;circle at infinity&quot;)
+- Geodesics as circular arcs that intersect the boundary at right angles
+- Hyperbolic tilings (optional) showing how tiles become infinitely small near the boundary
+
+The disk radius parameter sets the display size. The key insight is metric distortion: equal hyperbolic distances near the center appear as longer Euclidean distances than equal hyperbolic distances near the boundary. Objects near the edge are the same &quot;size&quot; in hyperbolic terms but appear infinitely compressed in the Euclidean embedding.
+
+The model demonstrates that hyperbolic geometry can be consistently embedded within Euclidean geometry — which is the core of Beltrami&#x27;s consistency proof. If Euclidean geometry is consistent, so is hyperbolic geometry, because here it is, living inside it.
+
+### riemann_sphere (row 8, col 11)
+**@identity essence**: `C union {infinity} — the complex plane plus a point at infinity, wrapped onto a sphere via stereographic projection`
+
+The Riemann sphere wraps the infinite complex plane onto a finite sphere using stereographic projection:
+```
+For point (x, y, z) on the sphere (excluding north pole):
+z_complex = (x + iy) / (1 - z)
+```
+
+The north pole maps to the point at infinity. The implementation renders a translucent sphere with projected grid lines from the complex plane visible on its surface. Great circles on the sphere correspond to lines and circles in the complex plane.
+
+This artifact complements the Poincare disk: where the disk compresses hyperbolic infinity into a finite region, the Riemann sphere compresses Euclidean-and-beyond infinity onto a closed surface. Both are models that demonstrate how alternative geometries can be visualized within familiar frameworks.
+
+## The Curvature Spectrum
+
+The three constant-curvature geometries form a one-parameter family indexed by K:
+
+| K | Geometry | Parallels | Triangle Sum | Model |
+|---|----------|-----------|-------------|-------|
+| K &lt; 0 | Hyperbolic | Infinitely many | &lt; 180 deg | Poincare disk |
+| K = 0 | Euclidean | Exactly one | = 180 deg | Standard plane |
+| K &gt; 0 | Elliptic | None | &gt; 180 deg | Riemann sphere |
+
+The curvature slider makes this family navigable. The learner does not read about three separate geometries — they drag a single parameter and watch one geometry dissolve into another. The continuity is the argument: there is nothing special about K = 0 except that it is familiar.
+
+## Metric Tensors and the Machinery Beneath
+
+Each constant-curvature geometry has a distinct metric tensor that determines distances and angles. In two dimensions:
+
+**Euclidean** (K = 0):
+```
+ds^2 = dx^2 + dy^2
+```
+
+**Hyperbolic** (K = -1, Poincare disk model):
+```
+ds^2 = 4(dx^2 + dy^2) / (1 - x^2 - y^2)^2
+```
+
+**Elliptic** (K = +1, spherical):
+```
+ds^2 = d(theta)^2 + sin^2(theta) d(phi)^2
+```
+
+The metric tensor is the engine that converts the parallel postulate from a logical axiom into a lived spatial experience. When the learner walks the hyperbolic bowl and feels space expanding, they are traversing a metric where distances grow near boundaries. When they climb the elliptic dome and feel convergence, they are in a metric where great circles pull together. The map&#x27;s height gradients are a crude but effective proxy for these metric effects.
+
+## Independence and Consistency
+
+The existence of these models proves two things:
+
+1. **Independence**: The parallel postulate cannot be derived from the other four, because both its assertion and its negation produce consistent systems.
+2. **Relative consistency**: If Euclidean geometry is consistent, so are the alternatives. The models live inside Euclidean space — any contradiction in hyperbolic geometry would propagate into a contradiction in Euclidean geometry.
+
+This is the same model-theoretic technique that will recur throughout the sequence: constructing alternative worlds within familiar ones to establish independence. Godel used it. Cohen used it. The method was born here, in the geometry of curvature.
+
+## Metric Tensor Sampling
+
+```gdscript
+# Hyperbolic metric in Poincaré disc model
+static func hyperbolic_metric(p: Vector2) -&gt; float:
+    var denom: float = 1.0 - p.length_squared()
+    return 4.0 / (denom * denom)  # scale factor
+
+# Elliptic (spherical) metric
+static func spherical_metric(p: Vector2) -&gt; float:
+    return 1.0 / (1.0 + p.length_squared())
+
+# Geodesic distance in hyperbolic plane
+static func hyperbolic_distance(a: Vector2, b: Vector2) -&gt; float:
+    var a_norm: float = a.length_squared()
+    var b_norm: float = b.length_squared()
+    var diff: float = (a - b).length_squared()
+    return acosh(1.0 + 2.0 * diff / ((1.0 - a_norm) * (1.0 - b_norm)))
+```
+
+## Sum of Angles in Curved Spaces
+
+```gdscript
+# In hyperbolic geometry, triangle angle sums are less than PI.
+# In spherical geometry, they exceed PI.
+# The deficit/excess is proportional to the triangle&#x27;s area times its curvature.
+static func hyperbolic_triangle_angle_sum(vertices: Array) -&gt; float:
+    var excess: float = spherical_excess(vertices, -1.0)  # negative curvature
+    return PI + excess  # less than PI when excess is negative
+
+static func spherical_triangle_angle_sum(vertices: Array) -&gt; float:
+    return PI + spherical_excess(vertices, 1.0)  # greater than PI
+
+static func spherical_excess(vertices: Array, curvature: float) -&gt; float:
+    var area: float = compute_triangle_area(vertices)
+    return curvature * area
+```
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="NonEuclidean_Spaces/intent.md">Raw captured source</a></p><pre>Concept: What happens when parallel lines diverge (hyperbolic) or converge (elliptic) — two alternative geometries equally consistent with Euclid&#x27;s first four postulates, proving geometry is a choice, not a truth.
+Sequence role: Second map in Foundations Crisis; the constructive proof that alternatives exist. After Euclid_Parallel established the independence of the fifth postulate, this map builds the alternatives. The curvature_slider makes the transition continuous — Euclidean geometry is just one point on a spectrum; leads to Russell_Paradox.
+Technical angle: Negative curvature (hyperbolic: saddle geometry, triangle angles sum to less than 180°), positive curvature (elliptic: sphere geometry, angles sum to more than 180°), Poincaré disk model, Riemann sphere. The curvature_slider parametrizes the entire space of constant-curvature geometries.
+Critical angle: If geometry itself — the most certain branch of mathematics — turns out to be a matter of choice, what else is? This map demonstrates that axioms are not discovered but declared. Multiple self-consistent worlds coexist. The Foundations Crisis begins not with contradiction but with abundance: too many truths, not too few.
+Key artifacts: curvature_slider parametrizes the geometry continuously; hyperbolic_surface and elliptic_surface provide immersive examples; poincare_disk shows the hyperbolic plane in finite form; riemann_sphere shows the elliptic model.
+
+Gap: elliptic_surface needs VR controls; hyperbolic_surface needs VR controls; poincare_disk needs VR controls; riemann_sphere needs VR controls.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="NonEuclidean_Spaces/critical.md">Raw captured source</a></p><pre># NonEuclidean_Spaces — Critical Reflection
+
+## The Abundance That Precedes the Crisis
+
+The foundations crisis begins not with absence but with surplus. Euclid_Parallel showed a system resting on a choice it mistook for necessity. This map builds the alternatives and makes the choice visible. Two geometries, equally consistent, equally rigorous, occupying the same conceptual space. The crisis is not that one is wrong. The crisis is that both are right.
+
+Wittgenstein argued that the limits of language are the limits of the world. In *Philosophical Investigations*, he asked: what happens when a word that seemed univocal turns out to belong to multiple language games? &quot;Parallel&quot; meant one thing for twenty-three centuries. Now it means at least three things — never meeting (Euclidean), meeting eventually (elliptic), diverging infinitely (hyperbolic) — and the word itself has not changed. The curvature slider at the bridge literalizes this: one gesture, one continuous motion, and the meaning of &quot;parallel&quot; transforms under your hand. There is no moment of transition, no click between language games. The slider is smooth. The conceptual rupture is not.
+
+## Sovereign Ground
+
+Giorgio Agamben&#x27;s sovereign is the one who decides the exception — who stands at the threshold of the legal order, simultaneously inside and outside it. In Euclid_Parallel, the fifth postulate occupied this sovereign position: inside the system (every theorem depends on it) and outside it (no theorem produces it). NonEuclidean_Spaces deposes the sovereign. The parallel postulate no longer reigns because the alternatives have been built, and they stand. The bowl and the dome are two states that have declared independence from the same constitution.
+
+Walk the hyperbolic bowl and the space opens outward. Geodesics flee from each other. The Poincare disk shows an infinite plane compressed into a finite circle — boundlessness contained, but never tamed. Cross the bridge. Climb the elliptic dome. Now lines converge, triangles fatten, every path meets every other path eventually. The Riemann sphere wraps infinity around itself and seals it shut. These are not metaphors. They are constructions: rigorous, self-consistent, inhabitable.
+
+The political resonance is structural, not analogical. When a system that claimed universality turns out to be one option among several, the question shifts from &quot;what is true?&quot; to &quot;who decided?&quot; The ground you stand on — literal ground, spatial ground, the K = 0 flatness that felt like the floor of reality — is revealed as a parameter setting. Someone set it to zero. It could have been otherwise.
+
+## The Performativity of Curvature
+
+Judith Butler&#x27;s account of gender performativity applies here with uncomfortable precision. Gender, Butler argues, is not expressed but iterated — a sequence of acts that congeal into the appearance of substance. Euclidean geometry congealed in exactly this way. Every right angle drawn, every building squared, every coordinate grid plotted performed flatness until flatness felt like nature. The K = 0 setting was not discovered. It was rehearsed into inevitability.
+
+The curvature slider breaks the rehearsal. When the learner drags K away from zero and watches the saddle inflate into a dome, they see the performance interrupted. The surface has no preferred state. It accepts any curvature with equal mathematical grace. The preference for flatness was always ours — inherited, taught, sedimented into intuition through millennia of repetition.
+
+This is not relativism. Hyperbolic geometry is not Euclidean geometry, and the distinction matters: GPS satellites compute in the curved spacetime of general relativity, not in Euclid&#x27;s flat plane. The point is that the choice between geometries is made on pragmatic grounds — which model fits the phenomenon — not on logical grounds. Logic does not prefer K = 0. Physics does, sometimes. And sometimes it does not.
+
+## The Ground Is a Variable
+
+The map sits at position two in the foundationscrisis sequence, and its work is to convert a philosophical suspicion into a mathematical certainty. Euclid_Parallel raised the question: what if the fifth postulate is a choice? NonEuclidean_Spaces answers: it is. Here are the alternatives. They work. They are beautiful. They are just as consistent as the original.
+
+The question that carries forward is not about geometry. It is about any system that claims its foundations are necessary rather than chosen. If the ground itself can curve, what else that felt solid is actually a parameter?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="NonEuclidean_Spaces/artifacts.md">Raw captured source</a></p><pre># NonEuclidean Spaces — Artifacts
+*Foundations Crisis: The Limits of Formalization · synthesis · 5 artifacts*
+
+&gt; Euclid&#x27;s fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don&#x27;t behave? Two answers emerged — one where parallels diverge without limit, one where they always meet.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Hyperbolic Surface
+![Hyperbolic Surface](/scene-catalog/hyperbolic_surface.png)
+
+Saddle-shaped surface demonstrating negative Gaussian curvature (K &lt; 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.
+
+`hyperbolic_surface`
+
+## Elliptic Surface
+![Elliptic Surface](/scene-catalog/elliptic_surface.png)
+
+Dome/sphere-like surface demonstrating positive Gaussian curvature (K &gt; 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.
+
+`elliptic_surface`
+
+## Curvature Slider
+![Curvature Slider](/scene-catalog/curvature_slider.png)
+
+VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.
+
+`curvature_slider`
+
+## Poincare Disk
+![Poincare Disk](/scene-catalog/poincare_disk.png)
+
+Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum &lt; 180°
+
+`poincare_disk`
+
+## Riemann Sphere
+![Riemann Sphere](/scene-catalog/riemann_sphere.png)
+
+The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.
+
+`riemann_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="NonEuclidean_Spaces/summary.md">Raw captured source</a></p><pre># NonEuclidean_Spaces — Summary
+
+The second map in the foundationscrisis sequence. A 15x13 grid, max height 4, built as a split dual landscape: a hyperbolic bowl on the left (heights descending to center, negative curvature) and an elliptic dome on the right (heights rising to center, positive curvature), connected by a narrow bridge at the midline.
+
+Five artifacts span the two halves. `hyperbolic_surface` renders a room-scale saddle where geodesics diverge and triangle angles sum to less than 180 degrees. `elliptic_surface` renders a dome where all lines converge and triangles exceed 180 degrees. At the bridge, `curvature_slider` parametrizes the entire space of constant-curvature geometries along a continuous axis from K = -1 to K = +1, letting the learner morph one geometry into the other with a single drag. `poincare_disk` maps the infinite hyperbolic plane into a finite circle. `riemann_sphere` wraps the complex plane plus infinity onto a closed surface.
+
+The map&#x27;s argument is constructive: rather than asserting that the parallel postulate is independent, it builds the alternatives and lets them stand. Euclidean geometry is one point on a continuous spectrum of geometries, all equally consistent. The curvature slider makes this palpable — flatness is a parameter setting, not a law of nature.
+
+Position: map 2 of 8 in foundationscrisis. Difficulty: advanced. Estimated time: 5-6 minutes. Follows Euclid_Parallel. Leads to Russell_Paradox, where the crisis shifts from geometry to logic.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="NonEuclidean_Spaces/blurb.md">Raw captured source</a></p><pre>Euclid&#x27;s fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don&#x27;t behave? Two answers emerged — one where parallels diverge without limit, one where they always meet.
+
+The bowl on the left is hyperbolic space. Negative curvature. The Poincaré disk maps infinity into a finite circle — geodesics curve away from each other, triangles sum to less than 180°. Cross the bridge. The dome on the right is elliptic space. Positive curvature. On the Riemann sphere, every pair of lines intersects. Triangles sum to more than 180°. Drag the curvature slider at the midpoint and watch one geometry dissolve into the other.
+
+Geometry was never discovered. It was chosen. The parallel postulate is independent of the other four — not wrong, not right, just one option among several. Flatness is a special case. The ground itself is a variable.</pre></section></body></html>

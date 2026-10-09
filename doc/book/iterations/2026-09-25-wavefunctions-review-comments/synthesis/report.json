@@ -1,0 +1,93 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "placed synthesis bench exists",
+      "passed": true
+    },
+    {
+      "name": "bench begins with five baseline amounts",
+      "passed": true
+    },
+    {
+      "name": "bench begins running",
+      "passed": true
+    },
+    {
+      "name": "real fifth slider changes one coefficient",
+      "passed": true
+    },
+    {
+      "name": "HOLD keeps phase while coefficients change",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sum-fifth-raised",
+      "passed": true
+    },
+    {
+      "name": "BASELINE restores coefficients and held marker values",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sum-returned",
+      "passed": true
+    },
+    {
+      "name": "BASELINE leaves advancing phase alone",
+      "passed": true
+    },
+    {
+      "name": "room entry artifact remains in this hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "bench_return": {
+      "advanced_time": 3.34034266666666,
+      "baseline": [
+        1.0,
+        0.5,
+        0.333,
+        0.25,
+        0.2
+      ],
+      "held_marker": {
+        "index": 159,
+        "phase": 34.6672255761465,
+        "rows": [
+          {
+            "drawn": true,
+            "value": -0.109486457338445
+          },
+          {
+            "drawn": true,
+            "value": 0.108828256232757
+          },
+          {
+            "drawn": true,
+            "value": -0.107628793747433
+          },
+          {
+            "drawn": true,
+            "value": 0.106219145729266
+          },
+          {
+            "drawn": true,
+            "value": -0.104287020652039
+          }
+        ],
+        "sum_of_drawn_rows": -0.106354869775894,
+        "total": -0.106354869775894
+      },
+      "held_time": 3.02334266666666
+    }
+  },
+  "passed": true,
+  "room": "WaveFunctions_Synthesis_Lab",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Counts and default selection",
+      "passed": true
+    },
+    {
+      "name": "All configured tree targets render",
+      "passed": true
+    },
+    {
+      "name": "Select a dependency",
+      "passed": true
+    },
+    {
+      "name": "Coordinates owns the held point",
+      "passed": true
+    },
+    {
+      "name": "Narrow to the selected branch",
+      "passed": true
+    },
+    {
+      "name": "Reset restores all capabilities",
+      "passed": true
+    },
+    {
+      "name": "Walk includes all halls",
+      "passed": true
+    },
+    {
+      "name": "Sequence filter contains eight CA halls",
+      "passed": true
+    },
+    {
+      "name": "Hall source links resolve to captured files",
+      "passed": true
+    },
+    {
+      "name": "Search can locate a single hall",
+      "passed": true
+    },
+    {
+      "name": "Gaps include source-conflict evidence",
+      "passed": true
+    },
+    {
+      "name": "Missing lessons are explicitly an inventory",
+      "passed": true
+    },
+    {
+      "name": "Desktop has no page-width overflow",
+      "passed": true
+    },
+    {
+      "name": "Mobile has no page-width overflow",
+      "passed": true
+    },
+    {
+      "name": "Direct hall link opens the correct detail",
+      "passed": true
+    }
+  ],
+  "scope": "Isolated headless Chromium UI verification; not the in-app browser, no museum runtime or headset test."
+}

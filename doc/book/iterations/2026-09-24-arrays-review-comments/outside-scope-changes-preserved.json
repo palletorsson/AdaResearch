@@ -1,0 +1,112 @@
+{
+  "Random_Cubes": {
+    "baseline": {
+      "primary_tokens": [
+        "dice_throw",
+        "paired_dice_column",
+        "coin_toss",
+        "random_object_spawner",
+        "random_edge_profile"
+      ],
+      "reason": "A die, a paired sum and a coin retain different accounts of their throws; the heap forgets and the field holds one bounded arrangement.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Cubes/final.md",
+      "text_sha256": "4957b6db7bb52aaa977c322a0980b4dc22b9ae597d5708c5e50a32f247134c9c",
+      "map_sha256": "c0a53172f72ec7a9d025b69e4c8b2fa364c15f8dc17bf5566f330baee4568098",
+      "learner_verified": false,
+      "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review.",
+      "local_review": "doc/book/iterations/2026-09-24-paired-dice/index.html"
+    },
+    "current": {
+      "primary_tokens": [
+        "dice_throw",
+        "paired_dice_column",
+        "continuing_die",
+        "coin_toss",
+        "random_object_spawner",
+        "random_edge_profile"
+      ],
+      "reason": "A physical face becomes reward, part of a sum or permission to continue. Coin, heap and bounded field retain other consequences.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Cubes/final.md",
+      "text_sha256": "19fd20ec07102ed9971eb4c94a2e8bcf8753fe17c54f8f3579b18a68a84c764e",
+      "map_sha256": "3be60c2a723e240748a0684e98b0a58c414619d96f0e7459ebc7c050678f83f7",
+      "learner_verified": false,
+      "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review. Continuing-die checks and isolated museum evidence: doc/book/iterations/2026-09-24-continuing-die/; controlled physical faces, fresh-release ownership, continuation, closure and explicit unfinished cap. No headset or fairness claim.",
+      "local_review": "doc/book/iterations/2026-09-24-continuing-die/index.html"
+    }
+  },
+  "Random_Game": {
+    "baseline": {
+      "primary_tokens": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "cube_projectile_spawner"
+      ],
+      "reason": "Separate already sampled deadlines from undrawn waits and connect random events to bodily support.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Game/final.md",
+      "text_sha256": "7ebe94c86cb420a0864fcecd656aa1c38cb1d245998dc7b2f5569fa99c5bd760",
+      "map_sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
+      "learner_verified": false,
+      "verification_scope": "Current source including previously omitted projectile dependency, plus qualified historical evidence. No new bodily crossing, headset or safety-performance validation.",
+      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Game/DECISIONS.md"
+    },
+    "current": {
+      "primary_tokens": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "cube_projectile_spawner"
+      ],
+      "reason": "Separate already sampled deadlines from undrawn waits and connect random events to bodily support.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Game/final.md",
+      "text_sha256": "1afd7b95fe97e865002b8f4820d047211af3d12ebcc3babcbd79abde32ff7137",
+      "map_sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
+      "learner_verified": false,
+      "verification_scope": "Current source including previously omitted projectile dependency, plus qualified historical evidence. No new bodily crossing, headset or safety-performance validation.",
+      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Game/DECISIONS.md"
+    }
+  },
+  "Random_Walk": {
+    "baseline": {
+      "primary_tokens": [
+        "random_walk_terrarium",
+        "random_walk_128",
+        "random_draw_dot"
+      ],
+      "reason": "Compare direction sets, a capped long-step law and boundaries; distinguish a retained trail from a next-step rule.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Walk/final.md",
+      "text_sha256": "a9aceb72597616386492bb6737021b3ba34bc3f5339b4b049eb49c751ff7698c",
+      "map_sha256": "bb7b9a11ecf811817344ae8d5e93986a684f0dea8e2bef52167608f217d50030",
+      "learner_verified": false,
+      "verification_scope": "Fresh unchanged-sampler and accumulated-position comparisons; actual-museum label capture. Headset controls not tested.",
+      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Walk/DECISIONS.md"
+    },
+    "current": {
+      "primary_tokens": [
+        "random_walk_terrarium",
+        "random_position_rails",
+        "random_draw_dot",
+        "random_walk_128"
+      ],
+      "reason": "Compare a retained trail, fresh destinations, accumulated steps, a hand-carried origin and a ground that retains visits.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Walk/final.md",
+      "text_sha256": "8e6f78b1c9c96335988270e8465ebe9fb7881696cbae64680074ced89c50a0a0",
+      "map_sha256": "d9724f0258e6b2c45c164336682e61266129481fb84079cf7527030beb8ab541",
+      "learner_verified": false,
+      "verification_scope": "Production rail controls, shared draw, revealed targets, matched easing, bounded record, replay and museum placement. Headset pending; see dated evidence.",
+      "local_review": "doc/book/iterations/2026-09-24-random-walk-rails/DECISIONS.md"
+    }
+  }
+}

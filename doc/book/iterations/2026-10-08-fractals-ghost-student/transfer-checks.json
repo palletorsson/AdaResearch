@@ -1,0 +1,104 @@
+{
+  "checks": [
+    {
+      "name": "Independent count: original and composition each have fifteen segments",
+      "passed": true
+    },
+    {
+      "name": "Same segment lengths, finite rendered cylinders and attached joints",
+      "passed": true
+    },
+    {
+      "name": "All seven fork openings remain seventy degrees before hand editing",
+      "passed": true
+    },
+    {
+      "name": "Depth samples are twelve, zero and minus twelve degrees",
+      "passed": true
+    },
+    {
+      "name": "First fork angles are minus twenty-three and plus forty-seven degrees",
+      "passed": true
+    },
+    {
+      "name": "All eight terminal directions return while their endpoints move",
+      "passed": true
+    },
+    {
+      "name": "Zero amplitude reconstructs original geometry",
+      "passed": true
+    },
+    {
+      "name": "Identical settings reproduce local geometry",
+      "passed": true
+    },
+    {
+      "name": "Changing phase moves endpoints and retains count, lengths and openings",
+      "passed": true
+    },
+    {
+      "name": "Requested depth -3 is bounded with attached geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 1 is bounded with attached geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 4 is bounded with attached geometry",
+      "passed": true
+    },
+    {
+      "name": "Requested depth 999 is bounded with attached geometry",
+      "passed": true
+    },
+    {
+      "name": "Moving the station preserves local construction",
+      "passed": true
+    },
+    {
+      "name": "Idle frames do not animate the static wave",
+      "passed": true
+    },
+    {
+      "name": "Student's carried PointBody acquires the actual XRTools pickup",
+      "passed": true
+    },
+    {
+      "name": "Synthetic hand moves the composed fork in a rotated station",
+      "passed": true
+    },
+    {
+      "name": "Hand edit preserves the other subtree, lengths and attachments",
+      "passed": true
+    },
+    {
+      "name": "Released grip returns to the edited branch tip",
+      "passed": true
+    },
+    {
+      "name": "Original remains unchanged after all composition experiments",
+      "passed": true
+    },
+    {
+      "name": "Independent four-cut check: sixteen intervals totalling 32/27",
+      "passed": true
+    },
+    {
+      "name": "Predicted RESET asymmetry: live returns to three, kept stays at four",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "depth_offsets_degrees": [
+      12.0,
+      0.00000000000000146952762458685,
+      -12.0
+    ],
+    "max_terminal_direction_vector_difference": 0.000000133280039449346,
+    "max_terminal_tip_shift_metres": 0.166341513395309
+  },
+  "passed": true,
+  "scope": "Independent execution of fresh reader files, geometry and synthetic XRTools hand interaction; no physical headset or human learning claim."
+}

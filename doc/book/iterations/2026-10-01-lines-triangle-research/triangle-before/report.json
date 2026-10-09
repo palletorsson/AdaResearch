@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "triangle and twin loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-entrance",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-room",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: triangle-two-scales",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "cameras": [
+      {
+        "eye": [
+          11.5,
+          1.75,
+          3.69999980926514
+        ],
+        "fov": 70.0,
+        "id": "triangle-entrance",
+        "target": [
+          8.5,
+          1.5,
+          2.5
+        ]
+      },
+      {
+        "eye": [
+          4.40000009536743,
+          1.70000004768372,
+          11.3000001907349
+        ],
+        "fov": 63.0,
+        "id": "triangle-room",
+        "target": [
+          5.90000009536743,
+          1.89999997615814,
+          14.8000001907349
+        ]
+      },
+      {
+        "eye": [
+          3.0,
+          1.70000004768372,
+          11.8999996185303
+        ],
+        "fov": 72.0,
+        "id": "triangle-two-scales",
+        "target": [
+          5.5,
+          1.70000004768372,
+          14.8999996185303
+        ]
+      }
+    ],
+    "engine": {
+      "build": "official",
+      "hash": "89cea143987d564363e15d207438530651d943ac",
+      "hex": 263680,
+      "major": 4,
+      "minor": 6,
+      "patch": 0,
+      "status": "stable",
+      "string": "4.6-stable (official)",
+      "timestamp": 0
+    },
+    "points": 3,
+    "scope": "Native room baseline captures; no visitor or headset trial.",
+    "source_position": [
+      3.5,
+      1.46499991416931,
+      13.5
+    ],
+    "twin_transform": {
+      "basis": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0)]",
+      "origin": [
+        6.5,
+        0.0,
+        15.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Point_Triangle_Context"
+}

@@ -1,0 +1,28 @@
+--- Point_Trace.before.md
++++ Point_Trace.after.md
+@@ -20,7 +20,7 @@
+ 
+ `_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^point-trace-sampling]
+ 
+-The dot compares its present position with the one where it last passed the movement test. Less than five millimetres apart, and no new position is added. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
++The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
+ 
+ Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.
+ 
+@@ -38,13 +38,13 @@
+ rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+ ```
+ 
+-Each component moves to the nearest multiple of the spacing. If the result repeats the last stored position, the recorder does not add it again. The movement gate decides whether to consider a reading; the grid helps decide where that reading can stand. These are different choices.[^point-trace-quantisation]
++With the blue dot, `s` is `0.08`: an X reading of `0.05` metres is stored as `0.08`. The program rounds Y and Z in the same way. If the resulting position matches the last one kept, it adds nothing to the list. Passing the five-millimetre movement test does not guarantee a new corner; the grid can send different readings to the same address.[^point-trace-quantisation]
+ 
+-The segments can cross the grid diagonally. Follow one of those shortcuts. Even the finest dot reads positions during successive calls while the rest of the museum runs between them.
++The saved positions lie on the grid, but the segments between them can cut across it diagonally. Look for a diagonal in your drawing. A grid of corners does not require a drawing made only of right angles.
+ 
+ Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+ 
+-The list is finite too: beyond 4096 accepted positions, keeping a new one means dropping the oldest. A longer drawing can begin to lose its beginning. These dots do not fade their live trails merely because time passes.
++The list can hold 4096 positions. Keep drawing beyond that and each new position replaces the oldest: the line can begin to lose its beginning. You do not have to fill it now. Looking at the line need not spend another place in it.
+ 
+ ## Move the place that draws
+ 

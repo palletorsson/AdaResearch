@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Colour — Endless Museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#25262b;font:17px/1.65 Georgia,serif}a{color:#275d64;text-underline-offset:.2em}header{background:#f4f0e7f5;border-bottom:1px solid #d7d0c5;padding:12px 4vw;position:sticky;top:0;z-index:5;font:14px/1.6 system-ui}header a{margin-right:16px}main{max-width:1260px;margin:auto;padding:40px 4vw 80px}h1,h2,h3{line-height:1.16}h1{font-size:clamp(34px,4vw,64px);font-weight:400;margin:10px 0 24px}h2{font-size:29px;margin-top:2em}h3{font-size:22px}p{max-width:75ch}small,.eyebrow,figcaption,.meta{font:13px/1.55 system-ui;color:#696761}.eyebrow{text-transform:uppercase;letter-spacing:.15em}.lead{font-size:23px;max-width:60ch}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.actions a{background:#22595d;color:white;padding:9px 15px;text-decoration:none;border-radius:3px;font:14px/1.5 system-ui}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:35px}.card{border-top:1px solid #bdb7ac;padding:20px 0}.card h2{margin:12px 0;font-size:30px}.card img{width:100%;height:230px;object-fit:cover;background:#d9d6d0}.card p{font-size:16px}img{max-width:100%;height:auto}figure{margin:20px 0}figcaption{margin-top:7px}pre{background:#e8e5de;padding:18px;overflow:auto;line-height:1.55;font:13px/1.55 Consolas,monospace;border-left:3px solid #608080}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;font:14px/1.5 system-ui;width:100%;margin:25px 0}th,td{padding:10px;border-bottom:1px solid #d0c9be;text-align:left;vertical-align:top}blockquote{border-left:2px solid #b9668c;margin:25px 0;padding-left:22px}nav.halls{display:flex;flex-wrap:wrap;gap:5px}nav.halls a{padding:3px 8px;border:1px solid #d4cec4;margin:0}.selected{background:#275d64;color:white}.spread{max-width:none;padding:0;display:grid;grid-template-columns:1.05fr 1fr;gap:0}.page{padding:30px 3vw;min-width:0;height:calc(100vh - 117px);overflow:auto;scroll-behavior:smooth}.page+.page{border-left:1px solid #ccc4b7;background:#faf7f0}.page h1{font-size:37px}.page h2{font-size:26px}.page pre{font-size:12px}.reading{max-width:880px}.chapter{border-top:1px solid #b9b3a8;margin-top:65px;padding-top:24px;scroll-margin-top:90px}.notice{padding:16px 20px;background:#e7ede7;border-left:3px solid #52705b}.sources{word-break:break-word}details{margin:20px 0}summary{cursor:pointer;font:15px/1.5 system-ui}footer{margin-top:60px;font:13px/1.6 system-ui;color:#696761}@media(max-width:900px){.spread{display:block}.page{height:auto}.page+.page{border-left:0;border-top:1px solid #aaa}.cards{grid-template-columns:1fr}}@media print{header,.actions,nav{display:none}.spread{display:block}.page{height:auto;overflow:visible}.page+.page{border:0}.chapter,.page{break-before:page}pre{white-space:pre-wrap;font-size:10px}body{background:white}main{padding:0}h1{font-size:30px}}</style></head><body><header><div><a href="../index.html">COLOUR · REVIEW DRAFT</a><a href="../all.html">All tutorials</a><a href="../final.html">All reflections</a><a href="../review.html">Reviewer brief & evidence</a><a href="../feedback.html">Feedback revision</a></div><nav class="halls"><a href="../Color_Context_Placed/parallel.html">Colour</a><a href="../Color_Flashlight/parallel.html">Flashlight</a><a href="../Color_Nails/parallel.html">Nails</a><a href="../Color_Rainbow/parallel.html">Rainbow</a><a href="../Color_Pillar/parallel.html">Pillar</a><a href="../Color_Grid_Pallet/parallel.html">Grid</a><a href="../Color_Paint/parallel.html">Paint</a><a href="../Color_Walls/parallel.html">Walls</a></nav></header><main class="spread"><article class="page"><p class="eyebrow">Tutorial · Working in the Endless Museum</p><p class="meta"><a href="../index.html">← Colour</a> · 1 / 8 · <a href="../Color_Flashlight/parallel.html">Flashlight →</a></p><h1>Colour — the same parts</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>RGB colour values</li>
+<li>A palette and an assignment to each part</li>
+<li>Independent material resources</li>
+<li>Changing colour while keeping geometry fixed</li>
+</ul>
+<p>Find the first four columns in the Colour hall. They have the same five parts. One coat of ochre gathers the first column into a single body. Beside it, red connects three blocks across a blue sphere. Colour gives your eye another way to group what is there.</p>
+<p>We bring the <code>BoxMesh</code> and <code>SphereMesh</code> constructions from Primitives, their positions and sizes from Transformation, and indexed references from Array. This lesson adds a material colour to each part. The construction stays still while we change the assignment.</p>
+<h2>Keep the construction</h2>
+<p>Work in the existing Endless Museum, beside the entrance columns in <code>Color_Context_Placed</code>. Attach this complete <code>lesson.gd</code> to an empty <code>Node3D</code> named <code>ColourStudy</code>, with unit scale and its origin on clear floor. It builds one 4.4-metre column, 1.1 metres wide. Leave room to walk around it. The museum supplies the room, camera, player and light. The script creates every part and material; it needs no child nodes or companion scripts. This reduced colour study has no collision or pickup behaviour.</p>
+<p>The five construction calls reproduce the opening column's dimensions and order: broad block, block, sphere, block, dome. They gather familiar mesh creation into two small helpers. The last sphere uses Godot's hemisphere option; its origin sits at the dome's base. Those dimensions are already chosen here. Begin by changing only the two lists at the top.</p>
+<p>The palette holds the available colour values. The assignment says where they go: <code>colour_slots</code> chooses a palette entry for each part. Changing a value and changing its destination are separate decisions.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript"># Five familiar parts; colour changes their grouping without changing their geometry.
+extends Node3D
+
+var palette: Array[Color] = [
+    Color(0.78, 0.60, 0.30), # 0: ochre
+    Color(0.80, 0.16, 0.16), # 1: red
+    Color(0.16, 0.36, 0.80), # 2: blue
+]
+var colour_slots: Array[int] = [0, 0, 0, 0, 0]
+var parts: Array[MeshInstance3D] = []
+
+func _ready() -&gt; void:
+    add_box(Vector3(1.10, 0.60, 1.10), Vector3(0, 0.30, 0))
+    add_box(Vector3(0.95, 0.95, 0.95), Vector3(0, 1.075, 0))
+    add_round(0.475, 0.95, Vector3(0, 2.025, 0))
+    add_box(Vector3(0.85, 0.95, 0.85), Vector3(0, 2.975, 0))
+    add_round(0.425, 0.95, Vector3(0, 3.45, 0), true)
+    apply_colours()
+
+func add_box(size: Vector3, at: Vector3) -&gt; void:
+    var shape := BoxMesh.new()
+    shape.size = size
+    add_part(shape, at)
+
+func add_round(radius: float, height: float, at: Vector3, hemisphere := false) -&gt; void:
+    var shape := SphereMesh.new()
+    shape.radius = radius
+    shape.height = height
+    shape.is_hemisphere = hemisphere
+    add_part(shape, at)
+
+func add_part(shape: Mesh, at: Vector3) -&gt; void:
+    var part := MeshInstance3D.new()
+    part.mesh = shape
+    part.position = at
+    var material := StandardMaterial3D.new()
+    material.roughness = 0.55
+    part.material_override = material
+    add_child(part)
+    parts.append(part)
+
+func apply_colours() -&gt; void:
+    assert(colour_slots.size() == parts.size(), &quot;Give every part a palette index.&quot;)
+    for i in parts.size():
+        var slot: int = colour_slots[i]
+        assert(slot &gt;= 0 and slot &lt; palette.size(), &quot;Palette index outside the list.&quot;)
+        var material: StandardMaterial3D = parts[i].material_override
+        material.albedo_color = palette[slot]
+</code></pre>
+<h2>Give a surface a colour</h2>
+<p>Run the study with its five zeroes. Every part receives <code>palette[0]</code>, the ochre. Walk around it. Different sides catch different light although their assigned colour is the same.</p>
+<p><code>Color(r, g, b)</code> supplies red, green and blue channel values. We use values between zero and one. Alpha is omitted, so these colours are opaque. <code>StandardMaterial3D</code> describes how a surface is rendered; <code>albedo_color</code> sets its base colour. Here roughness stays at 0.55 and the other material settings keep their defaults.</p>
+<p>Each call to <code>add_part</code> creates a fresh material and assigns it to that mesh instance. This matters even when all five colours are equal. If all parts shared one material, changing that resource would change every part using it. Independent materials let us address their colours separately, just as independent cube instances let us change one transform in Array.</p>
+<h2>Give the parts another company</h2>
+<p>Replace the five zeroes in <code>colour_slots</code> with <code>[1, 1, 2, 1, 2]</code> and run again. The three blocks become red; the sphere and dome become blue. Their meshes, sizes and positions are unchanged.</p>
+<p>There are two addresses here. <code>i</code> selects a part, counting upwards from zero. <code>colour_slots[i]</code> selects an entry in the palette for that part. At part 2, the slot is 2, so the sphere receives the blue value in <code>palette[2]</code>. At part 3, the slot is 1, so the next block returns to red. Several parts can choose the same palette entry while keeping separate materials.</p>
+<p>The list records our choice. It does not inspect a mesh and discover its category. We chose these five indices to make the same grouping as the hall's shape-based rule. An automatic shape rule would need to examine a declared kind; it is a possible extension once this assignment is clear.</p>
+<p><code>apply_colours()</code> traverses the existing parts and writes each chosen value into its material. It constructs no new geometry. Its assertions check that every part has an assignment and that each palette index exists. They catch an invalid list, not an unsuccessful composition.</p>
+<h2>Change the palette; keep the assignment</h2>
+<p>Keep <code>[1, 1, 2, 1, 2]</code>. Replace the red entry with <code>Color(0.90, 0.22, 0.48)</code> and run again. The three blocks become pink together. The blue parts stay blue. One palette edit reaches several independent surfaces through the assignment list.</p>
+<p>A <code>Color</code> is a value copied into <code>albedo_color</code>; the material does not keep a live link to the palette entry. Running again calls <code>apply_colours()</code> after construction. If a later control changes the palette while the study is running, it must call that function again to update the surfaces.</p>
+<p>Now restore the original red and change the assignment to <code>[1, 2, 1, 2, 1]</code>. Colour alternates up the stack. The sphere joins the base and dome in red; the other two blocks become blue. This is an authored alternation, not the hall's calculation of a complementary colour from its neighbour. We can make the comparison without introducing that second algorithm here.</p>
+<h2>Compose a grouping</h2>
+<p>Choose two non-neighbouring parts to share one colour, and give an intervening part another colour. Write your five palette indices and predict the result before running. Explain which list changes a colour value and which list changes where that value goes. Check that the construction itself has stayed the same.</p>
+<p>Keep the palette, assignment and <code>apply_colours()</code> function. They give later work a way to put a chosen colour on a known surface. The larger stacks elsewhere in this hall develop other compositions; this lesson has selected the smaller operation beneath them.</p>
+<p>In the next hall, the surface can keep its material while we change the light reaching it. We have assigned an exact value. We have not fixed everything that makes it look the way it does.</p></article><article class="page"><p class="eyebrow">Reflection · Existing final.md</p><p class="meta"><a href="../index.html">← Colour</a> · 1 / 8 · <a href="../Color_Flashlight/parallel.html">Flashlight →</a></p><h1>Before we ask what colour is</h1>
+<!-- @chroma_stack -->
+
+<p>Colour has been here all along. It was in the rooms before we gave it a chapter. Now walk into this long hall and look at what we have brought with us.</p>
+<p>A block, a sphere, a wedge: the primitives. Their positions, turns and proportions: transformation. One piece followed by another, each with an address in a list: arrays. The columns gather these earlier lessons into bodies we can walk around. The turns are already over. The movement is yours.</p>
+<p>On the disco floor, you held an arrangement before advancing to the next. Here, the choices stand beside one another. One column can remain in view while you look at its neighbour.</p>
+<p><img alt="The columns seen from the entrance aisle inside the museum." src="../assets/f66e0ce29e49-colour-hall.png" /></p>
+<p>Begin with the four columns near the entrance. Each has the same five pieces in the same positions. One ochre covers the first from foot to crown. Beside it, the blocks are red and the round forms blue. Follow a block from one column to the other. Does it still belong to the whole in the same way?</p>
+<p>Follow the red past the blue sphere to the next block. The sphere keeps those two red parts apart, yet your eye can bring them together. The parts touch in one order; colour lets you gather them in another.</p>
+<p>The third column assigns colour by height. A block near the floor and a block near the top receive different colours. Sharing a shape no longer gives them the same colour. In the fourth, each colour is calculated from the one below: the hue moves halfway around the hue circle, then halfway again. Ochre, blue, ochre again. The alternation is held in the column, for your eye to climb. A neighbour has become an input.</p>
+<p><img alt="Four native museum views of the same five forms under four colour rules." src="../assets/75777d69564b-four-colour-rules.png" /></p>
+<p><em>The four columns near the entrance. Their local geometry is the same; each rule gives their pieces a different colour assignment.</em></p>
+<p>The pieces are stored in an array. The builder begins each turn through it like this:</p>
+<pre><code class="language-gdscript">for i in range(elements.size()):
+    var e: Dictionary = elements[i]
+</code></pre>
+<p><code>i</code> is the address; <code>e</code> is the piece found there. The rest of the loop builds its shape, assigns its colour and places it above the previous piece. An array has an order. The builder makes that order climb. We could read the same list into another arrangement; here, <em>next</em> becomes <em>above</em>.</p>
+<p>Further down, the colour assignment stays while the alphabet changes. Blocks and round forms give way to cylinders, a ring and a cone, then to blocks and wedges. The cone and wedge share yellow. Their grouping is a choice in the code. Nothing in a triangle requires yellow; here, yellow helps us recognise a relation someone has chosen to make.<sup id="fnref:bauhaus"><a class="footnote-ref" href="#fn:bauhaus">1</a></sup></p>
+<p>Now find the four columns made from blocks and wedges. One keeps its levels aligned. In the next, each level has been turned another twenty-two and a half degrees. The third narrows successive levels across X and Z. The fourth combines the turns and narrowing. Follow the yellow through the changing silhouette. What remains easy to recognise?</p>
+<p>The first four columns kept their geometry while the colour assignment changed. These turned and narrowed stacks keep their colour assignment while the geometry changes. In each case, a material receives its base colour through one small line:</p>
+<pre><code class="language-gdscript">m.albedo_color = c
+</code></pre>
+<p>That gives the surface a base colour for the renderer to work with. Illumination, the surrounding scene and the display still participate in its appearance. The assignment is precise; it gives us something we can return to when the appearance raises a question.</p>
+<p>Colour is deeply scientific and deeply associative. We can ask how light, surfaces and vision make a colour available to us, and how to measure it under specified conditions. We can also find ourselves remembering a room, wanting a garment, recognising a warning. Both kinds of attention can begin at the same patch of colour. A value in the material gives us a handle on the construction. What the colour calls up may lead elsewhere.</p>
+<p>The next four stacks loosen the proportions. A large red sphere meets a small red sphere, with a dark cap between them. The red lets you follow a relation across a difference in size. Beside it, thin discs interrupt heavier forms. A narrow stem carries a broad crown. Your eye may supply a weight that the code has not calculated: these objects are fixed in place, with no simulation of balance.</p>
+<p>Further across, slabs turn and pieces leave the centre. It is still a stack, but being above no longer means sharing an axis. In the fourth construction, pink, teal, yellow and blue accompany wedges, discs, a block and round beads. Colour is now chosen piece by piece. What might the same forms become in another palette?</p>
+<p>The vocabulary is familiar. The combinations are beginning to exceed what we first asked it to do.</p>
+<!-- @color_dna_stack -->
+
+<p>Four taller columns carry their names on their plates. Each plate says what its column borrows; the shapes and colours are there to inspect even when the name is new.</p>
+<p>Recognition adds another kind of company. A palette can arrive with memories of paintings, furniture, toys or interiors. Those associations may draw your attention to a colour before you begin to measure it. They may also make a combination feel familiar so quickly that you stop looking. Stay with one of the columns a little longer. Find a detail its name did not tell you to expect.</p>
+<p>The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. Stripes disappear at one edge and enter at the other. The object has not turned.</p>
+<p><img alt="Two views around the fixed rainbow column, with its broad cap overhead." src="../assets/c1898082cf6f-around-the-rainbow.png" /></p>
+<p><em>The same column seen from two sides. The stripes keep their places while their arrangement in the view changes.</em></p>
+<p>This column began as a table-sized study, 72 centimetres tall; here it is raised to 6.2 metres. Thirty stripes take their colours from an array of six entries:</p>
+<pre><code class="language-gdscript">var col_idx: int = i % stripe_colors.size()
+var col_val = stripe_colors[col_idx]
+</code></pre>
+<p>The remainder sends the index back to the start of the palette after every six stripes. The six-colour order repeats five times around the shaft. Arrays and transformations have brought us here again: a list of colours, repeated pieces, positions and turns around a circle.</p>
+<p>If a Pride flag, a sweet wrapper or a fairground comes to mind, the array has not stored that memory. The arrangement meets something you bring. Someone else may arrive at another association, or stay with the stripes. Learning the rule gives us more to notice in that meeting.</p>
+<p>The broad cap once belonged to a table-sized construction. Now it is overhead. A change in height has changed its relation to your reach. At the end of the hall, that cap carries another stack. The rainbow shaft and eight-piece Bauhaus crown become a 7.2-metre column. Beside it, Memphis blocks, a striped shaft and red beads rise to 7.4 metres. Whole configurations become parts of another body.</p>
+<p>The saved description of a stack is what this project calls its DNA. Later we will open the rules that turn such a description into a body; here we can walk among its relatives.</p>
+<!-- @ -->
+
+<!-- study-spine:reference_landscape -->
+
+<!-- @reference_landscape -->
+
+<p>A cone returns as a tree. Three cones become its tiers; forty-eight places become a forest. The little pavilion shares their vocabulary. Change the height and the same sites seem to belong to another scale of world.</p>
+<p>The supplied Alex McLeod image offered a way into this abundance. Here it takes surprisingly few kinds of part to make somewhere you want to look into. Gold, water and a pastel arch invite a belief that the geometry alone never required. Keep the sites and alter one proportion. Notice when a collection begins to feel like a place.</p>
+<!-- @ -->
+
+<p>We have brought primitives, transformations and arrays into composition. They let us specify what is built, keep a choice, vary it and share the construction with someone else. Colour enters that structure and opens further relations: between parts, between a surface and its surroundings, between something seen and something remembered.</p>
+<p>We can begin with those relations before we know how to account for them. In the next hall, keep the surface and move the light. What happens to the colour then?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:bauhaus">
+<p>The assignment draws on <a href="https://www.bauhaus.de/en/sammlung/highlights/204_unterricht/444">Kandinsky’s Bauhaus colour teaching</a>: yellow triangle, red square, blue circle. Our five-form stack loosely recalls Alma Siedhoff-Buscher’s building games for the <a href="https://www.klassik-stiftung.de/service/presse/pressemitteilung/bauhaus-welt-fuer-kinder/">1923 Haus am Horn</a>; it does not reproduce their set of pieces.&#160;<a class="footnote-backref" href="#fnref:bauhaus" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></main></body></html>

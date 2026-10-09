@@ -1,0 +1,22 @@
+{
+  "scope": "Visual inspection of the four published comparison frames; native camera/mount assertions alone do not establish visibility.",
+  "accepted": {
+    "still.png": {
+      "sha256": "a99d3936a5924a396688e7352e19ed0d287a6d3dfbfe9317e79d3537d8c96b27",
+      "visible": true
+    },
+    "translate.png": {
+      "sha256": "5d1138137a7e4de76b8c92910721f718ccc5da5e0a79b54cf8a6afd1c996b763",
+      "visible": true
+    },
+    "turn.png": {
+      "sha256": "f38bac3f76f83089f55bb848f82eb36858d4803011699cf5a31fae9c4dbcf40f",
+      "visible": true
+    },
+    "scale.png": {
+      "sha256": "929af316cebcef263e2f383807f5107eeadfe506d84763fce29067272dda3961",
+      "visible": true
+    }
+  },
+  "note": "Fixed camera looking toward the entrance. The pale learner cube is fully visible in each frame; translation, facing and scale can be compared. Alternate forward-facing cameras were obstructed and replaced before delivery. Back faces of existing room signs are visible; no permanent exhibit changes."
+}

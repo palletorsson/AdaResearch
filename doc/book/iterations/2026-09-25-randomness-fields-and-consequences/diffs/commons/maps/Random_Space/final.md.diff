@@ -1,0 +1,21 @@
+--- before/commons/maps/Random_Space/final.md
++++ commons/maps/Random_Space/final.md
+@@ -14,6 +14,18 @@
+ 
+ Look down: the pale patches breaking through the grey floor are the tops of a random surface you walk across, built another way. It is made of small triangles, and the height of every corner is drawn on its own, as each column was on the WHITE NOISE side in Random Space Geometry: one corner's height tells you nothing about the next. Where the surface rises above the floor it shows pale; where it dips below, the floor shows through, so the jagged outline of a patch is where chance heights cross the floor's level, not the edge of a feature. In the picture on the plinth, neighbouring pixels are samples of the same smooth sum taken a short distance apart, so they mostly agree, and a broad feature carries across many of them.
+ 
++<!-- @worley_noise -->
++
++Beside the mixer, a small blue cellular field on a low stand offers another way for neighbours to belong together. Here the value comes from a difference between distances: how far away are the nearest scattered point and the next nearest? Along a seam those distances nearly agree. Follow one seam, then look back at the mixer's broad layers. Both can suggest a landscape, but their neighbours have been related by different rules.
++
++![A blue cellular field on its low stand, clear of the pale random ground around it.](/book-review/doc/book/figures/randomness/cellular-field-uncovered.png)
++
++<!-- @shannon_entropy_meter -->
++
++Farther along, the entropy gauge returns from the second room. It counts its own two hundred symbols; it is not measuring either field around it. Recall what its number kept of an arrangement and what it lost. A count of symbol shares cannot tell you whether similar values lie together, make a seam, or have been scattered apart. Here the familiar instrument gives us a limit to carry back to the images.
++
++<!-- @noise_mixer -->
++
+ Back at the plinth, colour supplies another part of the picture's reading. Low and high values are mapped through an earth-toned palette, encouraging you to see water, vegetation, rock or peaks. Those interpretations are useful associations, but the program has not thereby simulated water movement or the growth of plants.
+ 
+ Describe the picture once using landscape names and once using only high values, low values and spatial variation. Notice what the first description adds. The texture is also normalised to its own range, so a strong colour contrast need not indicate a large absolute numerical difference from another setting.

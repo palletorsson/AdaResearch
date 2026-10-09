@@ -1,0 +1,245 @@
+{
+  "attract_signature": "81625733333439f185d7b8084120884571e122325f4e6c5bac84da37ba9039c2",
+  "avoid_signature": "b075a12c93e9ce4d0353cf1e89b05bd7b23598f1521cd44790405ee89d51d051",
+  "checks": [
+    {
+      "message": "frozen current loader compiles",
+      "ok": true
+    },
+    {
+      "message": "restored authored Pheromone hall loads",
+      "ok": true
+    },
+    {
+      "message": "actual scene uses frozen loader",
+      "ok": true
+    },
+    {
+      "message": "authored pheromone terrain instantiates",
+      "ok": true
+    },
+    {
+      "message": "standing capsule clears museum obstructions",
+      "ok": true
+    },
+    {
+      "message": "whole4.8metre display clears other collision above floor",
+      "ok": false
+    },
+    {
+      "message": "control at standing reach height: 0",
+      "ok": true
+    },
+    {
+      "message": "control at standing reach height: 1",
+      "ok": true
+    },
+    {
+      "message": "control at standing reach height: 2",
+      "ok": true
+    },
+    {
+      "message": "control at standing reach height: 3",
+      "ok": true
+    },
+    {
+      "message": "control at standing reach height: 4",
+      "ok": true
+    },
+    {
+      "message": "display footprint clears retained secondary artifact extents",
+      "ok": true
+    },
+    {
+      "message": "five control sightlines clear solid museum geometry",
+      "ok": false
+    },
+    {
+      "message": "actual token enables comparison controls",
+      "ok": true
+    },
+    {
+      "message": "comparison waits at reset before visitor steps",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: arrival-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: arrival-standing",
+      "ok": true
+    },
+    {
+      "message": "fifteen20-step presses yield300fixed steps",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: attract-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: attract-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: attract-overview",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: attract-overview",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: attract-side-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: attract-side-standing",
+      "ok": true
+    },
+    {
+      "message": "AVOID resets chosen law and history",
+      "ok": true
+    },
+    {
+      "message": "same-seed alternate law creates different history",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: avoid-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: avoid-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: avoid-overview",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: avoid-overview",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: avoid-side-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: avoid-side-standing",
+      "ok": true
+    },
+    {
+      "message": "REPLAY resets current law without changing it",
+      "ok": true
+    },
+    {
+      "message": "four position markers remain after repeated resets",
+      "ok": true
+    },
+    {
+      "message": "museum ATTRACT matches pre-change fixed-step fixture",
+      "ok": true
+    },
+    {
+      "message": "museum AVOID matches pre-change fixed-step fixture",
+      "ok": true
+    }
+  ],
+  "control_sightline_blockers": [
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PheromonesTerrain/StepComparison/ComparisonPanel/Btn_0/Button",
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PheromonesTerrain/StepComparison/ComparisonPanel/Btn_1/Button",
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PheromonesTerrain/StepComparison/ComparisonPanel/Btn_2/Button",
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PheromonesTerrain/StepComparison/ComparisonPanel/Btn_3/Button",
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PheromonesTerrain/StepComparison/ComparisonPanel/Btn_4/Button"
+  ],
+  "controls": [
+    {
+      "distance_from_standing_eye": 1.44005727767944,
+      "height": 1.09156918525696,
+      "index": 0,
+      "position": "(5.356, 1.091569, 6.302756)"
+    },
+    {
+      "distance_from_standing_eye": 1.44005727767944,
+      "height": 1.09156918525696,
+      "index": 1,
+      "position": "(5.644, 1.091569, 6.302756)"
+    },
+    {
+      "distance_from_standing_eye": 1.31229436397552,
+      "height": 0.935569226741791,
+      "index": 2,
+      "position": "(5.212, 0.935569, 6.572957)"
+    },
+    {
+      "distance_from_standing_eye": 1.28030169010162,
+      "height": 0.935569226741791,
+      "index": 3,
+      "position": "(5.5, 0.935569, 6.572957)"
+    },
+    {
+      "distance_from_standing_eye": 1.31229436397552,
+      "height": 0.935569226741791,
+      "index": 4,
+      "position": "(5.788, 0.935569, 6.572957)"
+    }
+  ],
+  "extent": "[P: (3.1, 0.0, 1.1), S: (4.799999, 1.293569, 5.658802)]",
+  "footprint_obstructions": [
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/Wedge_7_10/StaticBody3D",
+    "/root/EndlessMuseum/Seg0_soane-cabinet-vista/Collision"
+  ],
+  "headset_tested": false,
+  "inventory": [
+    {
+      "cell": [
+        5,
+        3
+      ],
+      "extent": "[P: (3.1, 0.0, 1.1), S: (4.799999, 1.293569, 5.658802)]",
+      "key": "pheromone_terrain",
+      "position": "(5.5, 0.0, 3.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        5
+      ],
+      "extent": "[P: (2.060229, 0.0075, 5.052092), S: (0.879542, 0.954797, 0.895816)]",
+      "key": "dark_sphere",
+      "position": "(2.5, 0.0, 5.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        6
+      ],
+      "extent": "[P: (2.298, -0.161276, 6.290479), S: (0.416227, 0.322552, 0.419042)]",
+      "key": "clipboard",
+      "position": "(2.5, 0.0, 6.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        3,
+        7
+      ],
+      "extent": "[P: (3.298, -0.161276, 7.290479), S: (0.416227, 0.322552, 0.419042)]",
+      "key": "clipboard",
+      "position": "(3.5, 0.0, 7.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    }
+  ],
+  "loaded_museum_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+  "model_segments": 80,
+  "model_width": 20.0,
+  "origin": "(5.5, 0.0, 3.5)",
+  "rendered_width": 4.8,
+  "retained_artifact_overlaps": [],
+  "scale": "(1.0, 1.0, 1.0)",
+  "standing_hits": []
+}

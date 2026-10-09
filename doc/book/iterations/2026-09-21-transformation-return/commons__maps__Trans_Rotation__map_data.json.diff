@@ -1,0 +1,45 @@
+--- before/commons/maps/Trans_Rotation/map_data.json
++++ current/commons/maps/Trans_Rotation/map_data.json
+@@ -2,7 +2,7 @@
+   "map_info": {
+     "name": "Rotation: crossings, arrays and inhabited repetition",
+     "lookup_name": "Trans_Rotation",
+-    "description": "One compact hall moves from three full-size centre-pivot crossings to four 2 by 6 rotated cube arrays, then a five-segment hollow tunnel and five smaller carousel profiles. Axis, fixed centre, order, spatial increment and angular speed have distinct encounters.",
++    "description": "One compact hall moves from three full-size centre-pivot crossings to four 2 by 6 rotated cube arrays, then a compact axial-sweep study, a five-segment hollow tunnel and five smaller carousel profiles. Axis, fixed centre, order, spatial increment and angular speed have distinct encounters.",
+     "version": "1.0",
+     "format": "json",
+     "dimensions": {
+@@ -20,7 +20,7 @@
+         "Distinguish angle distributed through space from angular speed through time",
+         "Compare five silhouettes under one angular-speed rule and carry the relation between object size and body into scale"
+       ],
+-      "n_artifacts": 8
++      "n_artifacts": 9
+     },
+     "title": "Rotation: crossings, arrays and inhabited repetition",
+     "museum": {
+@@ -53,12 +53,13 @@
+     }
+   },
+   "documentation": {
+-    "summary": "One compact hall moves from three full-size centre-pivot crossings to four 2 by 6 rotated cube arrays, then a five-segment hollow tunnel and five smaller carousel profiles. Axis, fixed centre, order, spatial increment and angular speed have distinct encounters.",
+-    "layout": "39 x 60 source grid. Centre blades at (19,11); arrays at (19,25); central tunnel at (19,42); five 0.4-scale cakes in side niches. Grid banks and return wedges remain physical; side aisles bypass moving geometry.",
++    "summary": "One compact hall moves from three full-size centre-pivot crossings to four 2 by 6 rotated cube arrays, then a compact axial-sweep study, a five-segment hollow tunnel and five smaller carousel profiles. Axis, fixed centre, order, spatial increment and angular speed have distinct encounters.",
++    "layout": "39 x 60 source grid. Centre blades at (19,11); arrays at (19,25); axial sweep at (14,39); central tunnel at (19,42); five 0.4-scale cakes in side niches. Grid banks and return wedges remain physical; side aisles bypass moving geometry.",
+     "objective": "Follow one rotation operation from crossing to obstacle to architectural repetition, then distinguish spatial angle from time-driven speed.",
+     "primary": [
+       "rotation_wall_crossings",
+       "rotation_array_compare",
++      "axial_sweep",
+       "boolean_tunnel",
+       "carousel_cake"
+     ],
+@@ -6642,7 +6643,7 @@
+         "",
+         "",
+         "",
+-        "",
++        "axial_sweep:0:0#plinth:0",
+         "",
+         "",
+         "",

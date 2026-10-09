@@ -1,0 +1,18 @@
+{
+  "change": "Rounded charcoal instrument casing with metal rim and ink-colored inlay; Trace manuscript continued from observed count/excerpt anomaly into sampling, finite attention and whiteboard projection.",
+  "reusable_component": "commons/ui/instrument_panel_case.gd",
+  "source_files": [
+    "commons/primitives/point/draw_dot.gd",
+    "commons/maps/Point_Trace/final.md",
+    "commons/maps/Point_Trace/technical.md",
+    "commons/maps/Point_Trace/critical.md"
+  ],
+  "verification": {
+    "casing_and_panel": 19,
+    "shared_recorder": 76,
+    "book_primary_parity": true,
+    "render_reviewed": true
+  },
+  "preview": "ada_run/trace_data_panel/preview.png",
+  "limits": "No headset acceptance or simultaneous-display crowding test. Casing adds no interactive controls or collision."
+}

@@ -1,0 +1,168 @@
+{
+ "chapter": "formfinding",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "descent",
+   "map": "FormFinding_Descent",
+   "lines": [
+    {
+     "token": "gradient_descent",
+     "text": "Gradient descent optimization demo — a ball rolling downhill on a loss surface",
+     "by": "draft"
+    },
+    {
+     "token": "descent_marble_toy",
+     "text": "A held marble-in-a-bowl rolling down to its minimum",
+     "by": "draft"
+    },
+    {
+     "token": "gradient_descent_well",
+     "text": "falling is how it learns. Gradient descent never sees the landscape",
+     "by": "draft",
+     "note": "the marble solves a minimization it did not pose: the bowl is authored — seed 46, one deep well, two shallow dips — so descent supplies the rule and never the surface, and the placer it dissolves only moves up a level.",
+     "note_src": {
+      "file": "commons/artifacts/gradient_descent_well/gradient_descent_well.gd",
+      "quote": "Gradient descent never sees the landscape — only the slope underfoot"
+     }
+    }
+   ],
+   "hero": "gradient_descent_well"
+  },
+  {
+   "pearl": "catenary",
+   "map": "FormFinding_Catenary",
+   "lines": [
+    {
+     "token": "catenoid",
+     "text": "Minimal surface formed by rotating a catenary curve",
+     "by": "draft",
+     "note": "the chain solves for its curve but not for its anchors, and this one does not solve at all — a cubic spline sagged by a hand-set 0.5, so the map's proof that shape is computed rather than drawn is itself drawn.",
+     "note_src": {
+      "file": "algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+      "quote": "catenary(x) approximated by cubic spline through grabbable control points"
+     }
+    },
+    {
+     "token": "helicoid",
+     "text": "Ruled minimal surface — a plane rotating as it rises",
+     "by": "draft"
+    },
+    {
+     "token": "cable_builder"
+    }
+   ],
+   "hero": "cable_builder"
+  },
+  {
+   "pearl": "relaxation",
+   "map": "FormFinding_Relaxation",
+   "lines": [
+    {
+     "token": "mass_spring_bench",
+     "text": "A grid of masses and springs settling on a bench - each spring pulling to rest length",
+     "by": "draft",
+     "note": "nobody modelled the slump but somebody wired the net — 4 by 3 by 4, cell 0.16 — and somebody set 80 pre-steps, deciding when settled counts as settled, so the fossil records the forces and the clock equally.",
+     "note_src": {
+      "file": "commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "quote": "NOBODY MODELLED THIS SHAPE — THE SPRINGS DID"
+     }
+    },
+    {
+     "token": "verlet_workbench",
+     "text": "A cloth relaxing under a Verlet integrator with a constraint-pass dial - integrate position from position",
+     "by": "draft"
+    },
+    {
+     "token": "frozen_glass_vessel",
+     "text": "Duration is DNA. The clock is part of the genome",
+     "by": "draft"
+    }
+   ],
+   "hero": "mass_spring_bench"
+  },
+  {
+   "pearl": "equilibrium",
+   "map": "FormFinding_Equilibrium",
+   "lines": [
+    {
+     "token": "fractal_truss_tower",
+     "text": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick",
+     "by": "draft",
+     "note": "strength from geometry needs somewhere to stop recursing and the principle does not say where: depth is 3, clamped to 4 from outside, and below the last split the strut is solid again and the material comes back.",
+     "note_src": {
+      "file": "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "quote": "max strength, min material — a strut that is struts"
+     }
+    },
+    {
+     "token": "tensegrity_triangle",
+     "text": "a point is position; a line is relation; a triangle is the relation made rigid",
+     "by": "draft"
+    }
+   ],
+   "hero": "fractal_truss_tower"
+  },
+  {
+   "pearl": "annealing",
+   "map": "FormFinding_Annealing",
+   "lines": [
+    {
+     "token": "max_q_basin_room",
+     "text": "Two wells with different receivers: compare the responses before INTERPRET.",
+     "by": "draft",
+     "note": "energy has no opinion about which minimum is alive, so the room supplies the verdict the landscape cannot — dead well grey at x −2, alive well green at x +2 — then reads it back off the floor as physics.",
+     "note_src": {
+      "file": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "quote": "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST"
+     }
+    },
+    {
+     "token": "energy_landscape_bench",
+     "text": "A soft body settling on a wavy energy-landscape surface where height is energy",
+     "by": "draft"
+    },
+    {
+     "token": "simulated_annealing",
+     "text": "Adaptive thermal optimization with basin-hopping",
+     "by": "draft"
+    }
+   ],
+   "hero": "max_q_basin_room"
+  },
+  {
+   "pearl": "formfinding",
+   "map": "Chamber_FormFinding",
+   "lines": [],
+   "drop": true,
+   "edge": "the chamber's verb is to settle, and nothing in it settles: the forces stone fires an amber mortar that adds damping for three seconds inside two metres. a hung point needs a solver the bracelet does not have.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_FormFinding/blurb.md",
+    "quote": "You place a block on the target not as a fixed thing but as a hung point — and then you let go."
+   }
+  },
+  {
+   "pearl": "forge",
+   "map": "FormFinding_Forge",
+   "lines": [
+    {
+     "token": "self_shaping_forge",
+     "text": "A forge where raw matter descends toward max Q",
+     "by": "draft",
+     "note": "found not imposed, except the form is imposed — _build_form_targets writes the answer before the run and Q is a sine rather than a measurement, so the forge stages the descent whose whole claim is that it cannot be staged.",
+     "note_src": {
+      "file": "commons/artifacts/self_shaping_forge/self_shaping_forge.gd",
+      "quote": "GRADIENT DESCENT TOWARD MAX Q — STRUCTURE THAT PERSISTS BY MOVING, FOUND NOT IMPOSED"
+     }
+    },
+    {
+     "token": "gradient_descent_optimizer",
+     "text": "A soft body descending an energy landscape toward max Q with a step/energy readout - the same motion as training a model",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_shaping_forge"
+  }
+ ]
+}

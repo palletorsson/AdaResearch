@@ -1,0 +1,844 @@
+{
+  "reports": {
+    "ada_run/waves_chance_noise/Random_Definition/probe_random_definition_live.json": {
+      "checks": 32,
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    },
+    "ada_run/waves_chance_noise/Random_Entropy/probe_entropy_live.json": {
+      "checks": 144,
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    },
+    "ada_run/waves_chance_noise/Random_Remove/probe_remove_live.json": {
+      "checks": 79,
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    },
+    "doc/space/randomness-spatial-2026-09-16/Random_Definition-runtime.json": {
+      "checks": [
+        {
+          "check": "seed_replay_demo/Btn_0 reachable from one mark: 0.563 m",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo/Btn_0 hand height",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo/Btn_1 reachable from one mark: 0.540 m",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo/Btn_1 hand height",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo/Btn_2 reachable from one mark: 0.563 m",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo/Btn_2 hand height",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo has touch buttons on its compact console",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo: console survives every button action",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo: controls stay at hand height after rebuilds",
+          "passed": true
+        },
+        {
+          "check": "seed_replay_demo: no missing or duplicated buttons after actions",
+          "passed": true
+        }
+      ],
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    },
+    "doc/space/randomness-spatial-2026-09-16/Random_Entropy-runtime.json": {
+      "checks": [
+        {
+          "check": "shannon_entropy_meter/Btn_0 reachable from one mark: 0.570 m",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter/Btn_0 hand height",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter/Btn_1 reachable from one mark: 0.547 m",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter/Btn_1 hand height",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter/Btn_2 reachable from one mark: 0.570 m",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter/Btn_2 hand height",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter has touch buttons on its compact console",
+          "passed": true
+        },
+        {
+          "check": "Entropy field has square plan",
+          "passed": true
+        },
+        {
+          "check": "Square field holds 16 x 5 x 16 points",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter: console survives every button action",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter: controls stay at hand height after rebuilds",
+          "passed": true
+        },
+        {
+          "check": "shannon_entropy_meter: no missing or duplicated buttons after actions",
+          "passed": true
+        }
+      ],
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    },
+    "doc/space/randomness-spatial-2026-09-16/Random_Remove-runtime.json": {
+      "checks": [
+        {
+          "check": "remove_random/Btn_0 reachable from one mark: 0.616 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_0 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_1 reachable from one mark: 0.573 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_1 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_2 reachable from one mark: 0.573 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_2 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_3 reachable from one mark: 0.616 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_3 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_4 reachable from one mark: 0.563 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_4 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_5 reachable from one mark: 0.540 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_5 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_6 reachable from one mark: 0.563 m",
+          "passed": true
+        },
+        {
+          "check": "remove_random/Btn_6 hand height",
+          "passed": true
+        },
+        {
+          "check": "remove_random has touch buttons on its compact console",
+          "passed": true
+        },
+        {
+          "check": "random_removal_arena/Btn_0 reachable from one mark: 0.553 m",
+          "passed": true
+        },
+        {
+          "check": "random_removal_arena/Btn_0 hand height",
+          "passed": true
+        },
+        {
+          "check": "random_removal_arena/Btn_1 reachable from one mark: 0.553 m",
+          "passed": true
+        },
+        {
+          "check": "random_removal_arena/Btn_1 hand height",
+          "passed": true
+        },
+        {
+          "check": "random_removal_arena has touch buttons on its compact console",
+          "passed": true
+        },
+        {
+          "check": "remove_random: console survives every button action",
+          "passed": true
+        },
+        {
+          "check": "remove_random: controls stay at hand height after rebuilds",
+          "passed": true
+        },
+        {
+          "check": "remove_random: no missing or duplicated buttons after actions",
+          "passed": true
+        },
+        {
+          "check": "Arena cells restored to museum floor height",
+          "passed": true
+        },
+        {
+          "check": "Entering removes one cell AND its collider",
+          "passed": true
+        },
+        {
+          "check": "Walking requests a second removal",
+          "passed": true
+        },
+        {
+          "check": "Removed cell has a real hole, not museum floor beneath it",
+          "passed": true
+        },
+        {
+          "check": "Replay restores every physical cell",
+          "passed": true
+        },
+        {
+          "check": "Replay repeats the first draw",
+          "passed": true
+        },
+        {
+          "check": "Reset cancels pending draw without losing support",
+          "passed": true
+        },
+        {
+          "check": "Twelve removals leave twelve gaps",
+          "passed": true
+        }
+      ],
+      "failures": [],
+      "headset_verified": false,
+      "has_source_hashes": false
+    }
+  },
+  "definition_sept12": {
+    "commons/testing/probe_wcn_random_definition_live.gd": {
+      "reported_sha256": "dc5989d811cefdb66fe4268e71d9634afcdf2eb501160a9bdd10a883f074a572",
+      "prepass_sha256": null,
+      "same_as_prepass": null
+    },
+    "commons/maps/Random_Definition/map_data.json": {
+      "reported_sha256": "b637936719c349cd4945a444447a5616e96400d6c5be5d628ccdefd30f04f51b",
+      "prepass_sha256": "9345ed71e5f76dbd341a4d6fef475d0a825518dedbc9ec6f94764952f2f4c411",
+      "same_as_prepass": false
+    },
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": {
+      "reported_sha256": "8d829f5541365231643a8347fe98f546443806f4c7c0efc4e0c83140935865cf",
+      "prepass_sha256": "8e97fb19789146c0266106e40355b8dec2b969b8ffe785da9307d36d6dd0aa05",
+      "same_as_prepass": false
+    },
+    "commons/testing/wcn_desktop_driver.gd": {
+      "reported_sha256": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+      "prepass_sha256": null,
+      "same_as_prepass": null
+    },
+    "commons/interactables/slider_horizontal.gd": {
+      "reported_sha256": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206",
+      "prepass_sha256": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206",
+      "same_as_prepass": true
+    }
+  },
+  "package_source_comparison": {
+    "addons/godot-xr-tools/hands/poses/hand_pose_settings.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/hands/poses/pose_point_left.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/hands/poses/pose_point_right.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/interactables/interactable_area_button.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/interactables/interactable_handle.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/interactables/interactable_hinge.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/interactables/interactable_slider.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/hand_pose_area.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/hand_pose_area.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "addons/godot-xr-tools/objects/pickable.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/pickable.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/rumble/rumble_event.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/rumble/rumbler.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "addons/godot-xr-tools/rumble/tap_rumble.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/nature_system/demo/nature_system_demo.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/nature_system/demo/nature_system_demo.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/coin_toss/coin_toss.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/coin_toss/coin_toss.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/dice_throw/dice_throw.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/dice_throw/dice_throw.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/entropy_axiom/entropy_axiom.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/entropy_axiom/entropy_axiom.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/entropy_jar/entropy_jar.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/entropy_jar/entropy_jar.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/pickup_cube_placer.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/PickupCubePlacer.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/prng_crank_machine/prng_crank_machine.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterfly.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/randommovementbutterfly.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/profile_random.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/ProfileRandom.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/random_object_spawner.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/remove_random.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/remove_random_fixture.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/RemoveRandom.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/seed_replay/seed_replay_demo.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "algorithms/randomness/slot_machine/slot_machine.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/slot_machine/slot_machine.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/ten_print/ten_print.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/ten_print/TenPrint.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "algorithms/randomness/trng_vs_prng/TrngVsPrng.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/_embodied/embodied_prop.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/_hangar/hangar_kit.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/catalyst_pickup/catalyst_pickup.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/catalyst_pickup/catalyst_pickup.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/composition_stochastique/composition_stochastique.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/composition_stochastique/composition_stochastique.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dark_sphere/dark_sphere.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dark_sphere/gest_triangle_weaver.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dream_bodies/bodies/couture_beast.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dream_bodies/dream_skin.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dream_bodies/figures/couture_beast.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/dream_bodies/figures/couture_beast.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/randomness_space/dna_comparison.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/randomness_space/entropy_ruin.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/randomness_space/entropy_ruin.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/randomness_space/museum_exhibit_stage.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/randomness_space/removal_arena.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/randomness_space/removal_arena.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/randomness_space/textile_comparison.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/science_screen/science_screen.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/science_screen/science_screen.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/artifacts/ten_print_structure/ten_print_structure.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/ten_print_structure/ten_print_structure.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/ten_print_textile/assemblage_lesson.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/ten_print_textile/ten_print_textile.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/ten_print_textile/ten_print_textile.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/artifacts/timing_machines/machine_stage.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/audio/rack_templates/RackTemplates.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/context/clipboard/clipboard.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/context/clipboard/clipboard.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/context/clipboard/clipboard_text_frame.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/context/clipboard/code_snippet_library.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/context/clipboard/codeDisplay.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/context/clipboard/tutorial_text_library.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/head_crab/head_crab.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/head_crab/head_crab.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/octapod_crawler/csg_body_builder.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/octapod_crawler/csg_four_leg_walker.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/octapod_crawler/csg_walker.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/hazards/octapod_crawler/leg_walker_base.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/dial_smooth.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/dial_smooth.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/interactable_area_button_pointer.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/materials/ui_shadow.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/push_button.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/push_button.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/RackPassiveElements.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/slider_horizontal.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/slider_horizontal.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/slider_smooth.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/interactables/slider_smooth.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/lab/booleancase/exempelbool.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/cubes/grab_cube.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/cubes/grab_cube_wood.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/cubes/grab_plane.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/cubes/random_object_spawner.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/panels/DigitalPaper/TextUIControl.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/panels/DigitalPaper/TouchScrollContainer.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/point/grab_sphere.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/point/grab_sphere_point.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/primitives/point/grab_sphere_point_with_color.tscn": {
+      "package_exists": true,
+      "same_as_prepass": true
+    },
+    "commons/primitives/point/point_color.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/point/point_mesh.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/primitives/point/qfep_term_grasp.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/render/pbr_kit.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/scenes/mapobjects/pick_up_cube.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/scenes/mapobjects/pick_up_cube.tscn": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/materials/accent_orange.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/materials/handle_glow.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/materials/metal_dark.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/materials/panel_white.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/materials/track_groove.tres": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/ui/text_screen.gd": {
+      "package_exists": false,
+      "same_as_prepass": null
+    },
+    "commons/utils/baked_text_albedo.gd": {
+      "package_exists": true,
+      "same_as_prepass": true
+    }
+  }
+}

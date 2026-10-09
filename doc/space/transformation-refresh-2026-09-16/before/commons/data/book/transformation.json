@@ -1,0 +1,188 @@
+{
+ "chapter": "transformation",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "trans pre",
+   "map": "Trans_Pre",
+   "lines": [
+    {
+     "text": "Forms and a grid are already available. Build the pickup: still, rise and fall, add turning, add swelling; then walk wedges to five completed cubes on a platform.",
+     "by": "codex"
+    },
+    {
+     "token": "pick_up_cube",
+     "text": "Four cumulative demonstrations remain available. Five completed pickups make the same operations an encounter in a small level.",
+     "by": "codex"
+    }
+   ],
+   "hero": "pick_up_cube",
+   "simulations": []
+  },
+  {
+   "pearl": "trans introduction",
+   "map": "Trans_Introduction",
+   "lines": [
+    {
+     "text": "Three gaps: a floor carries you, a cube grows to meet the banks, a plank turns into a passage. What relation makes each crossing possible?",
+     "by": "codex"
+    },
+    {
+     "token": "tc",
+     "text": "Moving the cube is not yet carrying the rider.",
+     "by": "codex"
+    },
+    {
+     "token": "sc",
+     "text": "The visible surface and the collision have to grow together.",
+     "by": "codex"
+    },
+    {
+     "token": "rc",
+     "text": "The centre stays; the ends travel.",
+     "by": "codex"
+    }
+   ],
+   "hero": "tc",
+   "simulations": [
+    {
+     "map": "Trans_Translation",
+     "scale": 1.0
+    }
+   ]
+  },
+  {
+   "pearl": "trans translation",
+   "map": "Trans_Translation",
+   "lines": [
+    {
+     "token": "tc",
+     "text": "Into depth, sideways, upwards. The same carrier makes a different journey when one coordinate changes.",
+     "by": "codex"
+    },
+    {
+     "token": "pick_up_cube",
+     "text": "Cubes rise and fall along the route. Transport makes contact possible; collection leaves a difference behind.",
+     "by": "codex"
+    }
+   ],
+   "hero": "tc",
+   "simulations": [
+    {
+     "map": "Trans_Translation",
+     "scale": 1.0
+    }
+   ],
+   "join": true
+  },
+  {
+   "pearl": "trans rotation",
+   "map": "Trans_Rotation",
+   "lines": [
+    {
+     "token": "rotation_wall_crossings",
+     "text": "The middle stays. One end rises while the other descends; a centred blade can become a climb to another grid level.",
+     "by": "codex"
+    },
+    {
+     "token": "rotation_array_compare",
+     "text": "Walk through x, y, z and their combination. Ten degrees with each row: the far end can look flat while the route to it has become difficult.",
+     "by": "codex"
+    }
+   ],
+   "hero": "rotation_wall_crossings",
+   "join": true,
+   "simulations": [
+    {
+     "map": "Trans_Rotation",
+     "scale": 1.0
+    }
+   ]
+  },
+  {
+   "pearl": "trans rotationspectacle",
+   "map": "Trans_RotationSpectacle",
+   "lines": [
+    {
+     "token": "boolean_tunnel",
+     "text": "A repeated angle makes a corridor. You need time to walk what the program has already assembled.",
+     "by": "codex"
+    },
+    {
+     "token": "carousel_cake",
+     "text": "Five profiles, one layered speed rule. What does the shape make you notice about the same motion?",
+     "by": "codex"
+    }
+   ],
+   "hero": "boolean_tunnel"
+  },
+  {
+   "pearl": "trans scale",
+   "map": "Trans_Scale",
+   "lines": [
+    {
+     "text": "The proportions survive. The door becomes possible.",
+     "by": "astra"
+    },
+    {
+     "token": "scale_me",
+     "text": "Drink me: the room grows, the body stays, the table becomes a descent.",
+     "by": "astra"
+    }
+   ],
+   "hero": "scale_me",
+   "join": true
+  },
+  {
+   "pearl": "transformation",
+   "map": "Chamber_Transformation",
+   "drop": true,
+   "lines": [
+    {
+     "text": "transformation: one matrix, three moves.",
+     "by": "claude"
+    },
+    {
+     "token": "proximity_spawner",
+     "text": "come close — something appears",
+     "by": "claude",
+     "note": "The catalyst does not damage the creature, it changes its state, and the whole argument of the chamber is that folded is not less: a transformation done to a body is contact, not harm.",
+     "note_src": {
+      "file": "commons/maps/Chamber_Transformation/critical.md",
+      "quote": "the catalyst's effect on the creature is a state transition rather than damage"
+     }
+    }
+   ],
+   "hero": "proximity_spawner",
+   "join": true
+  },
+  {
+   "pearl": "trans pit",
+   "map": "Trans_Pit",
+   "lines": [
+    {
+     "text": "the pit: push and grow. a transform done to you.",
+     "by": "claude"
+    },
+    {
+     "token": "pusher_block",
+     "text": "pushed — translated by the room",
+     "by": "claude",
+     "note": "Here the transform is done to you, and the arithmetic that was neutral while it acted on objects is not neutral once the space it acts on is inhabited.",
+     "note_src": {
+      "file": "commons/maps/Trans_Pit/critical.md",
+      "quote": "Trans_Pit refuses the neutrality."
+     }
+    },
+    {
+     "token": "grower_block",
+     "text": "grown — scaled by the room",
+     "by": "claude"
+    }
+   ],
+   "hero": "pusher_block",
+   "join": true
+  }
+ ]
+}

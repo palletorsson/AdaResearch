@@ -1,0 +1,95 @@
+{
+  "date": "2026-09-08",
+  "scope": "Recorded automated and rendered checks. Human learning, continuous gameplay and headset acceptance remain open.",
+  "reports": {
+    "array-runtime.json": {
+      "passed": true,
+      "checks": 21,
+      "rays": 0,
+      "walks": 0,
+      "sha256": "4f4ff6f9ec74e948a737c22cc2e5db00a5fb5f4f1b961e8bcf3d1ead50340c10"
+    },
+    "array-museum.json": {
+      "passed": true,
+      "checks": null,
+      "rays": 4,
+      "walks": 4,
+      "sha256": "654de6a68c5c1999c4833b295999a5d65f1fc71c66c370d559a7db0b20dde21b"
+    },
+    "pickup-after.json": {
+      "passed": true,
+      "checks": null,
+      "rays": 0,
+      "walks": 0,
+      "sha256": "b17ed756890972f8dece8ae7cbcf7df5998405dfb8388077adcf59af9de1ecdb"
+    },
+    "single-museum.json": {
+      "passed": true,
+      "checks": null,
+      "rays": 3,
+      "walks": 4,
+      "sha256": "b065665b69504778d301247b0a0f79042ddb8686492f40551d261816b5d49051"
+    },
+    "disco-runtime.json": {
+      "passed": true,
+      "checks": 17,
+      "rays": 0,
+      "walks": 0,
+      "sha256": "a04bf8777b1440aa23453c18119bb8f263a836f7280b280bffda768cf4c78cab"
+    },
+    "disco-museum.json": {
+      "passed": true,
+      "checks": null,
+      "rays": 1,
+      "walks": 1,
+      "sha256": "df1320e1c73d6f9a24f787947ee96e5334628d253c95754bb69f25646890b602"
+    },
+    "random-runtime.json": {
+      "passed": true,
+      "checks": 14,
+      "rays": 0,
+      "walks": 0,
+      "sha256": "b2e3392548fb79bc12d15db1446f82f25996bc21ac7d2469a7d9b3b7ded169f8"
+    },
+    "random-museum.json": {
+      "passed": true,
+      "checks": 12,
+      "rays": 0,
+      "walks": 0,
+      "sha256": "8af616be3daa236c5b6dccc4cce840c06c1e1481f688d96d3231cc1013cd8fe9"
+    }
+  },
+  "progress": {
+    "rooms": 190,
+    "written": 190,
+    "with_artifacts": 190,
+    "learner_baselines": 0,
+    "new_actions": 4,
+    "preserved_actions": 5,
+    "all_new_action_evidence_current": true
+  },
+  "python_tests": {
+    "command": "python -m unittest tools.test_museum_actions tools.test_museum_progress",
+    "passed": 22
+  },
+  "plan_audit": {
+    "live_and_shipped_rows": 154,
+    "pilot_rooms": 4,
+    "pilot_placements": 24,
+    "changed_files_on_dry_run": 0,
+    "retired_stamps_inactive": 3,
+    "other_randomness_rooms_still_missing": 7
+  },
+  "diff_check": "Passed for scoped changed production files; Git emitted line-ending notices.",
+  "browser": {
+    "url": "http://localhost:3003/museum-progress?sequence=array_tutorial&room=Array&action=array-addresses-persist",
+    "checked": [
+      "Current iteration title and 190/190 text count",
+      "Authored Array action and next visitor task",
+      "Expanded criteria, critical question, Disco method comparison and runtime observation",
+      "Other Array sequence pilot actions visible"
+    ],
+    "result": "passed"
+  },
+  "progress_diff_check": "Passed for all updated progress, outline, core and lesson JSON."
+}

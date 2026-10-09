@@ -1,0 +1,38 @@
+{
+  "id": "Color_Paint",
+  "title": "Give a mark somewhere to remain",
+  "storyboard": "The automatic can is painting before the student takes a manual one. Bring elapsed time, sine and the distinction between an address and the value kept there. Read the existing two-coordinate automatic path, then change one rate or amplitude while keeping the other coordinate unchanged. Predict whether the path becomes narrower or turns at another pace. The supplied host converts surface coordinates into a hit and sends deposits to the same draw_spray operation used by the manual cans. Compare a quick pass with staying in one place. Carry the path rule and the distinction between replacing a grid entry and contributing to an image that spreads and fades. The shader and spray apparatus remain supplied; no second brush is required.",
+  "storyboard_short": "Use existing automatic path/manual cans. Reuse time/sine/address distinctions. Edit one UV rate or amplitude; predict path width or pace with other coordinate fixed. Supply UV→hit mapping and shared draw_spray surface. Compare quick versus repeated deposits. Carry path rule and evolving-image distinction, not recoverable gesture history. No second brush; defer spray/feedback shader. Albers remains an encounter.",
+  "mode": "make",
+  "brings": [
+    "elapsed time and sine",
+    "coordinate mapping and retained traces"
+  ],
+  "learns": [
+    "bounded two-coordinate surface path",
+    "deposit versus replacement",
+    "evolving image versus stored gesture list"
+  ],
+  "carries": "An editable path and an explicit account of what the canvas keeps and changes.",
+  "supplied": [
+    "existing automatic caller and surface-coordinate conversion",
+    "shared spray operation, ray hits and evolving-image renderer"
+  ],
+  "artifact_refs": [
+    "ball_painting_demo",
+    "albers_wall_gallery"
+  ],
+  "review_note": "Both automatic and manual callers already reach draw_spray. Keep that shared operation rather than proposing another brush system. Its retained image spreads and fades; it is not permanent storage or a lossless list of strokes. UVs are introduced as two bounded surface coordinates; shader implementation comes later.",
+  "prior_maps": [
+    "Trans_Pre",
+    "Point_Trace",
+    "Color_Grid_Pallet"
+  ],
+  "independent_check": "Change one amplitude without changing either rate; predict the path’s extent, then compare a faster pass with repeated deposits at a place.",
+  "source_refs": [
+    "commons/context/drawingboard/ball_painting_automation.gd",
+    "commons/context/drawingboard/paper_draw_surface.gd",
+    "commons/context/drawingboard/spray_can.gd"
+  ],
+  "change_reason": "Use the implemented encounter to teach one meaningful change, with less machinery."
+}

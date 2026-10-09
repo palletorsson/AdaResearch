@@ -1,0 +1,15 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -6,9 +6,9 @@
+   "status": "source_checked_draft",
+   "sequence": "randomness",
+   "text_path": "commons/maps/Random_Space/final.md",
+-  "text_sha256": "3750b3b7ea693fbfc2e8f1f766959afa3803fd1dd2e97bfa40edb89a2c008885",
+-  "map_sha256": "8789bf0f24dcd8ce9aa7588de02c786ac15a045b97a1f6dd15adf7e8139af1a5",
++  "text_sha256": "32e210aa458267293f7f9ba477c43cd87f608f13c82913237126140776f3303c",
++  "map_sha256": "abad6b726a282b7e6197fcbde396e42e71dcfaf9dab5161e31556722670b4360",
+   "learner_verified": false,
+   "verification_scope": "Current source and restored route. The adjacent Pheromone capture emitted a 77-cell route warning in this streamed hall; investigate it in a dedicated physical traversal. No complete museum interaction or headset claim.",
+-  "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-random-floor-relief/DECISIONS.md"
+ }

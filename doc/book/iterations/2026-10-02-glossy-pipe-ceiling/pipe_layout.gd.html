@@ -1,0 +1,309 @@
+<!doctype html><meta charset="utf-8"><title>pipe_layout.gd</title><style>body{margin:3rem;background:#f1ede7;color:#222}pre{white-space:pre-wrap;font:14px/1.7 monospace}</style><h1>pipe_layout.gd</h1><pre># PipeLayout - High-level controller for pipe network layouts
+# Manages multiple pipe systems, anchors, and path connections
+# Supports JSON-based layout definitions with anchor points
+extends Node3D
+class_name PipeLayout
+
+signal layout_built
+signal path_completed(path_id: String)
+
+@export_category(&quot;Layout Settings&quot;)
+@export_file(&quot;*.json&quot;) var layout_config_path: String = &quot;&quot;
+@export var auto_build: bool = true
+@export var show_anchors: bool = false
+@export var anchor_color: Color = Color(1.0, 0.5, 0.0, 0.6)
+
+@export_category(&quot;Pipe Type&quot;)
+@export_enum(&quot;glass&quot;, &quot;drain&quot;, &quot;tube&quot;, &quot;pipe&quot;, &quot;cable&quot;, &quot;custom&quot;) var pipe_type: String = &quot;glass&quot;
+@export var custom_pipe_scene: PackedScene
+
+# Layout data
+var anchors: Dictionary = {}  # name -&gt; Vector3
+var paths: Array = []  # Array of path definitions
+var pipe_systems: Dictionary = {}  # path_id -&gt; renderer Node3D
+var anchor_markers: Dictionary = {}  # name -&gt; MeshInstance3D
+var dimensions: Dictionary = {}
+var _loading := false
+var _next_id := 0
+const RUN = preload(&quot;res://commons/primitives/pipes/swept_run.gd&quot;)
+
+# Pipe system references
+const GLASS_PIPE_SCRIPT = preload(&quot;res://commons/glass_rack/GlassRackController.gd&quot;)
+const BIG_PIPE_SCRIPT = preload(&quot;res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd&quot;)
+
+func _ready() -&gt; void:
+	if auto_build and layout_config_path != &quot;&quot;:
+		load_layout(layout_config_path)
+
+# =============================================================================
+# LAYOUT LOADING
+# =============================================================================
+
+func load_layout(path: String) -&gt; void:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		push_error(&quot;PipeLayout: Failed to open layout: %s&quot; % path)
+		return
+
+	var json = JSON.new()
+	var parse_result = json.parse(file.get_as_text())
+	file.close()
+
+	if parse_result != OK:
+		push_error(&quot;PipeLayout: JSON parse error: %s&quot; % json.get_error_message())
+		return
+
+	if json.data is Dictionary: load_layout_from_dict(json.data)
+
+func load_layout_from_dict(data: Dictionary) -&gt; void:
+	clear_layout()
+	_loading = true
+	dimensions = data.get(&quot;layout&quot;,{}).duplicate(true)
+
+	# Load layout settings
+	if data.has(&quot;settings&quot;):
+		var settings = data[&quot;settings&quot;]
+		if settings.has(&quot;pipe_type&quot;):
+			pipe_type = settings[&quot;pipe_type&quot;]
+		if settings.has(&quot;show_anchors&quot;):
+			show_anchors = settings[&quot;show_anchors&quot;]
+
+	# Load anchors
+	if data.has(&quot;anchors&quot;):
+		for anchor_name in data[&quot;anchors&quot;]:
+			var pos = data[&quot;anchors&quot;][anchor_name]
+			if pos is Array and pos.size() &gt;= 3:
+				set_anchor(anchor_name, Vector3(pos[0], pos[1], pos[2]))
+
+	# Load paths
+	if data.has(&quot;paths&quot;):
+		paths = data[&quot;paths&quot;].duplicate(true)
+
+	# Build the layout
+	_loading = false
+	build_layout()
+
+# =============================================================================
+# BUILDING
+# =============================================================================
+
+func build_layout() -&gt; void:
+	_clear_pipe_systems()
+	_update_anchor_markers()
+
+	for i in range(paths.size()):
+		var path_def = paths[i]
+		var path_id = path_def.get(&quot;id&quot;, &quot;path_%d&quot; % i)
+		path_def[&quot;id&quot;] = path_id
+		_build_path(path_id, path_def)
+
+	layout_built.emit()
+
+func _build_path(path_id: String, path_def: Dictionary) -&gt; void:
+	var from_name: String = path_def.get(&quot;from&quot;,&quot;&quot;)
+	var to_name: String = path_def.get(&quot;to&quot;,&quot;&quot;)
+	for anchor in [from_name,to_name]:
+		if not anchor.is_empty() and not anchors.has(anchor):
+			push_warning(&quot;PipeLayout: missing anchor &#x27;%s&#x27; for &#x27;%s&#x27;&quot; % [anchor,path_id]); return
+	var origin: Vector3 = anchors.get(from_name,Vector3.ZERO)
+	var code: String = path_def.get(&quot;code&quot;,&quot;&quot;)
+	var kind: String = path_def.get(&quot;kind&quot;,pipe_type)
+	var radius: float = path_def.get(&quot;pipe_radius&quot;,dimensions.get(&quot;pipe_radius&quot;,0.8 if kind == &quot;drain&quot; else 0.02 if kind == &quot;glass&quot; else 0.08))
+	var system: Node3D
+	if code.is_empty() or kind in [&quot;tube&quot;,&quot;pipe&quot;,&quot;cable&quot;]:
+		var points := PackedVector3Array()
+		for point in path_def.get(&quot;points&quot;,[]):
+			if point is Vector3: points.append(point)
+			elif point is Array and point.size() &gt;= 3: points.append(Vector3(point[0],point[1],point[2]))
+		if points.is_empty() and not to_name.is_empty(): points = PackedVector3Array([origin,anchors[to_name]])
+		if points.size() &lt; 2: return
+		if not from_name.is_empty(): points[0] = origin
+		if not to_name.is_empty(): points[-1] = anchors[to_name]
+		system = RUN.new(); add_child(system)
+		system.configure(points,radius,&quot;pipe&quot; if kind in [&quot;glass&quot;,&quot;drain&quot;] else kind,path_def.get(&quot;sides&quot;,16),Color(path_def.get(&quot;colour&quot;,&quot;d877a2&quot;)),path_def.get(&quot;sag&quot;,0.5))
+	else:
+		match kind:
+			&quot;glass&quot;: system = GLASS_PIPE_SCRIPT.new()
+			&quot;drain&quot;: system = BIG_PIPE_SCRIPT.new()
+			&quot;custom&quot;:
+				if custom_pipe_scene: system = custom_pipe_scene.instantiate()
+		if system == null: return
+		if &quot;auto_build&quot; in system: system.auto_build = false
+		add_child(system) # Glass sets its defaults in _ready; dimensions follow it.
+		system.position = origin
+		if &quot;pipe_radius&quot; in system: system.pipe_radius = radius
+		if &quot;segment_length&quot; in system: system.segment_length = path_def.get(&quot;segment_length&quot;,dimensions.get(&quot;segment_length&quot;,system.segment_length))
+		if not system.has_method(&quot;generate_from_code&quot;):
+			remove_child(system); system.queue_free(); return
+		system.generate_from_code(code)
+		# Neither current renderer accepts @anchor/&gt;anchor tokens. Layout owns the
+		# anchor transform and the explicit final connector instead of inventing APIs.
+		if not to_name.is_empty():
+			var endpoint: Vector3 = system.get(&quot;cursor_pos&quot;) if kind == &quot;glass&quot; else system.get(&quot;_pos&quot;) if kind == &quot;drain&quot; else Vector3.ZERO
+			var valid_endpoint := kind in [&quot;glass&quot;,&quot;drain&quot;]
+			if kind == &quot;custom&quot;:
+				var ports: Dictionary = system.get_meta(&quot;ports&quot;,{})
+				valid_endpoint = ports.has(&quot;out&quot;) and ports.out.get(&quot;position&quot;) is Vector3
+				if valid_endpoint: endpoint = ports.out.position
+			if valid_endpoint:
+				var connector = RUN.new(); system.add_child(connector)
+				connector.configure(PackedVector3Array([endpoint,anchors[to_name]-origin]),radius,&quot;pipe&quot;)
+			else: push_warning(&quot;PipeLayout: custom renderer needs an out port to connect to an anchor&quot;)
+	if pipe_systems.has(path_id):
+		remove_child(pipe_systems[path_id]); pipe_systems[path_id].queue_free()
+	system.name = path_id; pipe_systems[path_id] = system
+	path_completed.emit(path_id)
+
+# =============================================================================
+# ANCHOR MANAGEMENT
+# =============================================================================
+
+func set_anchor(anchor_name: String, pos: Vector3) -&gt; void:
+	anchors[anchor_name] = pos
+	if show_anchors:
+		_update_anchor_marker(anchor_name)
+	if not _loading:
+		for path in paths:
+			if path.get(&quot;from&quot;,&quot;&quot;) == anchor_name or path.get(&quot;to&quot;,&quot;&quot;) == anchor_name:
+				_build_path(path.id,path)
+
+func get_anchor(anchor_name: String) -&gt; Vector3:
+	return anchors.get(anchor_name, Vector3.ZERO)
+
+func remove_anchor(anchor_name: String) -&gt; void:
+	for path in paths.duplicate():
+		if path.get(&quot;from&quot;,&quot;&quot;) == anchor_name or path.get(&quot;to&quot;,&quot;&quot;) == anchor_name: remove_path(path.id)
+	anchors.erase(anchor_name)
+	if anchor_markers.has(anchor_name):
+		anchor_markers[anchor_name].queue_free()
+		anchor_markers.erase(anchor_name)
+
+func _update_anchor_markers() -&gt; void:
+	# Clear old markers
+	for marker in anchor_markers.values():
+		marker.queue_free()
+	anchor_markers.clear()
+
+	if not show_anchors:
+		return
+
+	# Create new markers
+	for anchor_name in anchors:
+		_update_anchor_marker(anchor_name)
+
+func _update_anchor_marker(anchor_name: String) -&gt; void:
+	if not show_anchors:
+		return
+
+	var marker: MeshInstance3D
+	if anchor_markers.has(anchor_name):
+		marker = anchor_markers[anchor_name]
+	else:
+		marker = MeshInstance3D.new()
+		marker.name = &quot;Anchor_&quot; + anchor_name
+		var sphere = SphereMesh.new()
+		sphere.radius = 0.1
+		sphere.height = 0.2
+		marker.mesh = sphere
+
+		var material = StandardMaterial3D.new()
+		material.albedo_color = anchor_color
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.emission_enabled = true
+		material.emission = anchor_color
+		material.emission_energy_multiplier = 0.5
+		marker.material_override = material
+
+		# Add label
+		var label = Label3D.new()
+		label.name = &quot;Label&quot;
+		label.text = anchor_name
+		label.font_size = 32
+		label.pixel_size = 0.005
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.position = Vector3(0, 0.2, 0)
+		label.modulate = Color.WHITE
+		marker.add_child(label)
+
+		add_child(marker)
+		anchor_markers[anchor_name] = marker
+
+	marker.position = anchors[anchor_name]
+
+# =============================================================================
+# PATH MANAGEMENT
+# =============================================================================
+
+func add_path(path_def: Dictionary) -&gt; String:
+	path_def = path_def.duplicate(true)
+	while pipe_systems.has(&quot;path_%d&quot; % _next_id): _next_id += 1
+	var path_id = path_def.get(&quot;id&quot;, &quot;path_%d&quot; % _next_id)
+	_next_id += 1
+	remove_path(path_id)
+	path_def[&quot;id&quot;] = path_id
+	paths.append(path_def)
+	_build_path(path_id, path_def)
+	return path_id
+
+func remove_path(path_id: String) -&gt; void:
+	# Remove from paths array
+	for i in range(paths.size() - 1, -1, -1):
+		if paths[i].get(&quot;id&quot;, &quot;&quot;) == path_id:
+			paths.remove_at(i)
+			break
+
+	# Remove pipe system
+	if pipe_systems.has(path_id):
+		remove_child(pipe_systems[path_id])
+		pipe_systems[path_id].queue_free()
+		pipe_systems.erase(path_id)
+
+func get_pipe_system(path_id: String) -&gt; Node3D:
+	return pipe_systems.get(path_id, null)
+
+# =============================================================================
+# UTILITY
+# =============================================================================
+
+func clear_layout() -&gt; void:
+	_clear_pipe_systems()
+	anchors.clear()
+	paths.clear()
+	dimensions.clear()
+	_update_anchor_markers()
+
+func _clear_pipe_systems() -&gt; void:
+	for system in pipe_systems.values():
+		remove_child(system)
+		system.queue_free()
+	pipe_systems.clear()
+
+## Called by grid system when placed on map
+func apply_grid_config(config: Dictionary) -&gt; void:
+	if config.has(&quot;layout&quot;):
+		var layout_file = &quot;res://commons/primitives/pipes/layouts/%s.json&quot; % config[&quot;layout&quot;]
+		load_layout(layout_file)
+	if config.has(&quot;pipe_type&quot;):
+		pipe_type = config[&quot;pipe_type&quot;]
+	if config.has(&quot;show_anchors&quot;):
+		show_anchors = config[&quot;show_anchors&quot;]
+	build_layout()
+
+# =============================================================================
+# QUICK BUILD API
+# =============================================================================
+
+## Quick method to build a simple linear pipe from code
+static func quick_build(parent: Node3D, code: String, type: String = &quot;glass&quot;) -&gt; Node3D:
+	var layout = PipeLayout.new()
+	layout.pipe_type = type
+	layout.auto_build = false
+	parent.add_child(layout)
+
+	layout.add_path({&quot;code&quot;: code})
+
+	# Return the first pipe system
+	if layout.pipe_systems.size() &gt; 0:
+		return layout.pipe_systems.values()[0]
+	return null
+</pre>

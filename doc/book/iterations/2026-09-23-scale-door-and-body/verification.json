@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "reading snapshot equals canonical final.md",
+      "passed": true
+    },
+    {
+      "name": "all encounter anchors retained",
+      "passed": true
+    },
+    {
+      "name": "both code excerpts retained verbatim",
+      "passed": true
+    },
+    {
+      "name": "opening and ending retained",
+      "passed": true
+    },
+    {
+      "name": "crystal figure and flowering food paragraph retained",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/maps/Trans_Scale/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithms/primitives/scaleme/drink_me_room.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithms/primitives/scaleme/drink_me_bottle.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithms/primitives/scaleme/scale_me.gd",
+      "passed": true
+    },
+    {
+      "name": "core text hash matches final",
+      "passed": true
+    },
+    {
+      "name": "other core records retained",
+      "passed": true
+    },
+    {
+      "name": "all 17 runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "comparison capsule has intended fourfold size",
+      "passed": true
+    },
+    {
+      "name": "no script or parse errors",
+      "passed": true
+    },
+    {
+      "name": "book figure valid and readable size",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact door-and-body.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact Trans_Scale.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact SUMMARY.md",
+      "passed": true
+    }
+  ],
+  "visual_inspection": "Native room, arrival and doorway views inspected. Final door pair fully frames both openings with equal height, distance and aim. Not a headset/learner test."
+}

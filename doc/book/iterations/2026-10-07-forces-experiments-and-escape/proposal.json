@@ -1,0 +1,390 @@
+{
+  "title": "The experiment leaves the apparatus",
+  "subtitle": "Fourteen Forces encounters for Endless Museum",
+  "date": "2026-10-07",
+  "status": "Design proposal. Existing source inspected; proposed interactions have not been implemented or tested. Canonical hall order, tutorial.md, final.md and museum code are unchanged.",
+  "premise": "Carry the familiar black point into experiments that work within a limit. Change one relation. The apparatus still follows its rules, but the consequence may leave the job, the receiver or the room we assigned to it.",
+  "route_note": "These are encounter candidates within existing halls, not fourteen new maps or fourteen compulsory lessons. The proposed ability route still starts with the sphere, then launch, two-hand flight, release/braking, fields, deflection and return. Motion-before-Launch remains a proposal; the canonical thirteen-hall spine has not been reordered.",
+  "theory": [
+    {
+      "text": "Cybernetics has a precise account of limits to regulation. Ashby's requisite variety relates the disturbances a regulator must answer to the distinctions and responses available to it. Under the stated conditions, too little regulatory variety leaves some variation in the outcomes. This is a limit relative to a regulator and a task, not proof of an absolutely uncontainable entity.",
+      "source": "https://ashby.info/Ashby-Introduction-to-Cybernetics.pdf",
+      "label": "Ashby, An Introduction to Cybernetics, chapter 11"
+    },
+    {
+      "text": "Our design inference: make the missing capacity playable. A collector cannot distinguish cargo from furniture; a stabilizer measures position but ignores velocity; an outlet cannot process the incoming stock. Ask what the controller can sense, affect and preserve. Increasing power alone need not supply the missing distinction.",
+      "source": null
+    },
+    {
+      "text": "The Nature of Code supplies a useful mechanism vocabulary: accumulated forces change a body's motion, spring forces introduce restoring relations, and steering provides another contribution to motion. Ada can let those mechanisms meet in a shared room. The instability is not evidence that a physics bug is desirable.",
+      "source": "https://natureofcode.com/forces/",
+      "label": "The Nature of Code: Forces"
+    },
+    {
+      "text": "Your Half-Life reading gives the dramatic structure: an experiment opens conditions it can no longer manage. Here the first escaped 'monster' can be the same sphere the student built. It becomes threatening through mass, momentum, attachment or a goal that persists after circumstances change. This is our interpretation and design proposal, not a claim about a historical influence.",
+      "source": null
+    }
+  ],
+  "evidence": [
+    {
+      "title": "The conveyor you named is in the cube hall",
+      "text": "Point_Animatedcube contains cube_sorting_line. It feeds grabbable rigid cubes on a moving-surface belt; unsorted stock accumulates and can end the round. Settled cubes can be stored as backlog and reclaimed. That storage policy matters: it is not an unlimited pile of simultaneously active rigid bodies.",
+      "paths": [
+        "commons/maps/Point_Animatedcube/map_data.json",
+        "commons/artifacts/cube_sorting_line/cube_sorting_line.gd",
+        "commons/artifacts/cube_sorting_line/cube_sorter_backlog.gd"
+      ]
+    },
+    {
+      "title": "Forces already has another useful conveyor",
+      "text": "Change_Choreography contains conveyor_backlog: rigid boxes, a timed receiver, a visible 48-body limit and held admission when full or obstructed. Feed and receiver rates can differ. These are strong foundations for the proposed overflow encounter; an expanded room-spanning cascade is still new work.",
+      "paths": [
+        "commons/artifacts/timing_machines/conveyor_backlog.gd"
+      ]
+    },
+    {
+      "title": "Existing diagrams are not automatically interacting apparatus",
+      "text": "collision_carts shows calculated before/after lanes; tug_of_war directly positions a load; force_vortex assigns player velocity. They can inform the lessons, but they do not yet prove contact-driven collisions, a jointed tug or additive vortex forces.",
+      "paths": [
+        "commons/artifacts/collision_carts/collision_carts.gd",
+        "commons/artifacts/tug_of_war/tug_of_war.gd",
+        "commons/artifacts/force_vortex/force_vortex.gd"
+      ]
+    },
+    {
+      "title": "The returning point needs a deliberate state policy",
+      "text": "resolution_catalyst returns home after release, while interactive_point_origin_force already applies bounded attraction to nearby rigid bodies. Two-sphere flight, persistent consequences and the proposed receiver behavior need explicit implementation; sharing the point's appearance does not establish those abilities.",
+      "paths": [
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd",
+        "commons/primitives/point/interactive_point_origin_force.gd"
+      ]
+    }
+  ],
+  "design_rules": [
+    "Each encounter begins with one ordinary task and a baseline that can succeed.",
+    "First isolate the mechanism; then change one declared condition. A funny outcome is possible, not a required scripted ending.",
+    "The same black sphere, grey cubes, off-white trolley, tray, tether and receiving plinth recur. Ability changes are readable before new decoration is added.",
+    "A source of energy is visible: trigger thrust, powered belt, hand work, gravity or a preloaded spring. Nothing launches merely because the story needs a surprise.",
+    "The player can intervene: cut power, restrain, redirect, let go, use the result differently or reset explicitly. Preserve an aftermath long enough to inspect.",
+    "Keep body state and force input distinct. Position, velocity and spring extension carry consequences; do not accidentally keep accumulating a past force after it has stopped.",
+    "In Godot, declare who integrates motion. Use the engine for free rigid-body contacts; use one receiver owner for XR player movement. Do not apply a second custom integration to the same body.",
+    "The tutorial prints the minimal complete continuation and tests its rule. The reflection asks what the rule permitted, omitted and made costly. The museum can contain further experiments.",
+    "Technical failure, numerical instability and unexpected lawful behavior are different. Verify the first two before claiming an emergent consequence.",
+    "Noise, flocking, learning and soft bodies can return to these apparatus later. They are not hidden prerequisites for this Forces pass."
+  ],
+  "scenes": [
+    {
+      "id": "01",
+      "title": "The point does not stop",
+      "chapter": "I · Acquire a capacity",
+      "role": "Core mechanism",
+      "halls": [
+        "VFM_03_Motion"
+      ],
+      "task": "Push the familiar sphere onto a marked place.",
+      "focus": "Velocity, force and mass; distinguish a brief impulse from a sustained push.",
+      "event": "The push ends, but the point crosses its target and strikes a loose stop block. The stop becomes another moving body.",
+      "choice": "Use a smaller push, oppose its motion, or arrange a receiver. Compare the same impulse on equal-sized bodies with different declared masses.",
+      "onward": "The same point keeps its motion after input ends. This is what the launch and flight encounters depend on.",
+      "check": "In the isolated test, with gravity and damping disabled, ending the applied input does not zero velocity; the same impulse produces the expected inverse-mass change. Contact is a separate test.",
+      "sources": [
+        "commons/primitives/point/interactive_point_origin_force.gd"
+      ],
+      "gap": "Existing point lineage; the controlled push/impulse comparison and movable stop are proposed.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/01-push.png"
+    },
+    {
+      "id": "02",
+      "title": "Perfect delivery, moving destination",
+      "chapter": "I · Acquire a capacity",
+      "role": "Core mechanism",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "task": "Launch the point into a receiving tray; then use a pad to cross the gap yourself.",
+      "focus": "Impulse, gravity and trajectory; a receiver also has mass and contact.",
+      "event": "The point lands correctly in a loose tray. Its arrival slides the tray off the intended display position.",
+      "choice": "Change launch direction, secure the tray or allow a longer stopping distance. A correct trajectory need not make a successful delivery.",
+      "onward": "A launch starts a motion whose later contacts belong to the world.",
+      "check": "Specify whether the launcher sets velocity or applies an impulse. Fire once per activation. The baseline reaches a fixed tray; the loose-tray variant retains contact response.",
+      "sources": [
+        "commons/artifacts/force_pad/force_pad.gd"
+      ],
+      "gap": "Installed pad is a reference, not proof of the movable-tray encounter.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/02-launch.png"
+    },
+    {
+      "id": "03",
+      "title": "Two points carry a body",
+      "chapter": "I · Acquire a capacity",
+      "role": "Ability / combination",
+      "halls": [
+        "VFM_05_Launch",
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "task": "Hold a point in each hand and reach a balcony.",
+      "focus": "Sum two force contributions; separate input from retained velocity.",
+      "event": "One hand stops thrusting while the other continues. The intended straight flight becomes a curved approach.",
+      "choice": "Aim down/back and hold triggers to thrust up/forward, as already agreed. Release one trigger, compare, then counter-thrust to land.",
+      "onward": "The point is now a tool that acts on the player's motion. Release still leaves a moving body.",
+      "check": "A single movement owner adds both inputs; release or drop clears only that input. Neither event zeros the player's velocity. Keep firing a separate action or explicit mode.",
+      "sources": [
+        "commons/artifacts/force_field_zone/field_carry_provider.gd"
+      ],
+      "gap": "Two-sphere flight remains proposed. The adapter is an integration seam, not the completed ability.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/03-flight.png"
+    },
+    {
+      "id": "04",
+      "title": "The brake has a length",
+      "chapter": "I · Acquire a capacity",
+      "role": "Core mechanism",
+      "halls": [
+        "VFM_03_Motion",
+        "Vectors_Act4a_KineticForces"
+      ],
+      "task": "Release thrust and settle onto a narrow landing shelf.",
+      "focus": "Gravity, opposing force and drag; stopping takes time and distance.",
+      "event": "Entering a drag zone slows the approach but does not freeze it. A late correction carries the point or visitor beyond the shelf.",
+      "choice": "Brake earlier, change the declared drag coefficient, or approach with less speed. First observe the ball, then feel the same relation through movement.",
+      "onward": "A boundary drawn on the floor is not an instantaneous change in a body's state.",
+      "check": "Name the chosen drag model rather than imply one universal air law. At nonzero relative velocity its force opposes that motion; it vanishes at zero relative velocity.",
+      "sources": [
+        "commons/artifacts/force_field_zone/field_carry_provider.gd"
+      ],
+      "gap": "Proposed matched ball/player comparison.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/04-fall.png"
+    },
+    {
+      "id": "05",
+      "title": "The trolley refuses",
+      "chapter": "II · The room participates",
+      "role": "Core mechanism",
+      "halls": [
+        "VFM_03_Motion",
+        "Vectors_Act4a_KineticForces"
+      ],
+      "task": "Move a trolley carrying the point across a floor seam.",
+      "focus": "Contact, friction and a threshold for motion.",
+      "event": "A wheel catches or a high-friction patch holds the trolley. More push initially achieves no movement; once it clears, the same input is excessive.",
+      "choice": "Reduce the sustained push, change the contact route or unload the trolley. Later, after the spring lesson, return with an elastic pull.",
+      "onward": "The floor is part of the experiment. A blocked body is not necessarily an unresponsive program.",
+      "check": "Provide a successful baseline. Distinguish geometric wheel obstruction from friction. In the friction-only comparison change one material parameter; do not pre-script the release.",
+      "sources": [
+        "commons/artifacts/friction_ramp/friction_ramp.gd"
+      ],
+      "gap": "The current ramp is a reduced one-axis model. A free trolley/contact encounter must be made and tested.",
+      "image": null
+    },
+    {
+      "id": "06",
+      "title": "Retrieve the point, collect the room",
+      "chapter": "II · The room participates",
+      "role": "Core mechanism",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion",
+        "VFM_07_Gravity"
+      ],
+      "task": "Use the catalyst to retrieve a point beyond reach.",
+      "focus": "Direction to a source, distance-dependent attraction and affected-body selection.",
+      "event": "Loose blocks and a nearby tray satisfy the same receiver rule. They move toward the collector too, interfering with the retrieval.",
+      "choice": "Move the source, lower its strength, narrow the eligible receiver set, or use the gathered objects as a new structure.",
+      "onward": "A force has a scope. 'Bring it here' contains an unresolved 'it'.",
+      "check": "Use a declared bounded force model; handle zero separation. Verify which receivers are affected and which are excluded. Do not call a one-way powered attractor mutual gravity.",
+      "sources": [
+        "commons/primitives/point/interactive_point_origin_force.gd"
+      ],
+      "gap": "Real rigid-body attraction exists; the staged retrieval and comparison remain proposed.",
+      "image": "../2026-10-07-forces-the-unintended/images/03-the-body-carries-its-history.png"
+    },
+    {
+      "id": "07",
+      "title": "The drain that will not empty",
+      "chapter": "II · The room participates",
+      "role": "Field combination",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "task": "Clear floating debris through a collection opening.",
+      "focus": "Radial and tangential vector components; velocity entering a field.",
+      "event": "The tangential component keeps debris circulating around the opening. The mechanism moves everything vigorously while removing very little.",
+      "choice": "Reduce circulation, increase the inward component, or place a receiver along the orbit. Enter the field after observing its effect on the point.",
+      "onward": "Movement and completion are different measures. Additive influences must meet the velocity already present.",
+      "check": "Show inward-only and tangent-only comparisons before combining. Do not overwrite incoming velocity and describe that as force accumulation.",
+      "sources": [
+        "commons/artifacts/force_vortex/force_vortex.gd"
+      ],
+      "gap": "Existing vortex assigns player velocity. An additive version with interacting debris is new work.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/05-vortex.png"
+    },
+    {
+      "id": "08",
+      "title": "The shot opens another problem",
+      "chapter": "III · Relations fight back",
+      "role": "Core contact / opponent",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "task": "Clear a rolling sphere from a passage with the catalyst.",
+      "focus": "Impulse, mass and transfer of momentum through contact.",
+      "event": "The shot diverts the sphere successfully; the sphere strikes a second prop across the route. The obstruction has changed location and shape.",
+      "choice": "Aim to redirect, catch or wedge it. In the first trial it is passive; only later enable a visible bounded approach force.",
+      "onward": "The opponent is the familiar point with motion and a relation to the route, not a separate health-bar lesson.",
+      "check": "Use actual dynamic receivers. Disable the driving force in the mass comparison. Account for gravity, floor impulses and restitution before making conservation claims.",
+      "sources": [
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd",
+        "commons/artifacts/collision_carts/collision_carts.gd"
+      ],
+      "gap": "Projectile appearance exists; collision_carts is a before/after display. The proposed contact encounter needs a tested dynamic target.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/06-shoot.png"
+    },
+    {
+      "id": "09",
+      "title": "Home comes to the point",
+      "chapter": "III · Relations fight back",
+      "role": "Core mechanism / returning opponent",
+      "halls": [
+        "Vectors_Act4b_Oscillation"
+      ],
+      "task": "Pull a tethered sphere aside so you can cross.",
+      "focus": "Rest length, restoring force and damping; a fixed versus movable anchor.",
+      "event": "With the sphere caught, releasing the anchor's floor lock allows the rolling base to move toward it. The return mechanism changes what 'home' means.",
+      "choice": "Anchor the base, shorten the extension, damp the return, or use the moving base as transport. The same sphere can be a gate, tool or load.",
+      "onward": "A restoring relation connects two bodies. The tutorial's fixed anchor was an assumption.",
+      "check": "Begin with F = -kx in one axis. The dynamic-anchor variant applies equal and opposite spring forces. Track energy supplied by pulling or preloading; do not add a launch impulse for the gag.",
+      "sources": [
+        "commons/artifacts/spring_tower/restoring_forces.gd"
+      ],
+      "gap": "Existing one-axis spring/damper supplies a study, not this free two-body apparatus.",
+      "image": "../2026-10-07-forces-fail-shorts/images/01-return-to-base.png"
+    },
+    {
+      "id": "10",
+      "title": "The door opens too well",
+      "chapter": "III · Relations fight back",
+      "role": "Optional angular study",
+      "halls": [
+        "Vectors_Act2_VectorArithmetic",
+        "VFM_08_Arena"
+      ],
+      "task": "Open a heavy revolving door with the point.",
+      "focus": "Lever arm, torque and angular response.",
+      "event": "A push far from the hinge opens it efficiently, but the sweeping leaf carries a tray or closes a neighbouring route.",
+      "choice": "Change where the push is applied, restrain the swing or time the crossing. The door's function does not end at its handle.",
+      "onward": "A force's point of application matters as well as its direction and magnitude.",
+      "check": "Compare equal forces at different perpendicular lever arms. The door must have contact and angular response; a prescribed animation cannot validate the collision claim.",
+      "sources": [
+        "commons/artifacts/revolving_door/revolving_door.gd"
+      ],
+      "gap": "Current door uses a manually integrated angular demonstration. A hinged contact version is proposed.",
+      "image": null
+    },
+    {
+      "id": "11",
+      "title": "The well-equipped body",
+      "chapter": "III · Relations fight back",
+      "role": "Optional assemblage after angular study",
+      "halls": [
+        "Vectors_Act4b_Oscillation",
+        "VFM_08_Arena"
+      ],
+      "task": "Attach useful pieces to a suspended point without letting it touch the floor.",
+      "focus": "Mass distribution, balance and rotational inertia.",
+      "event": "An off-centre shelf improves carrying capacity but tips the body; adding a counterweight restores one relation while increasing the load.",
+      "choice": "Detach, redistribute, rebalance or keep the unexpected orientation as a sculpture. The accumulated body need not be restored to a perfect sphere.",
+      "onward": "A capacity changes what else a body can do. The finished assemblage records choices through its current structure.",
+      "check": "Attachments must contribute to the chosen compound mass/inertia or declared joint model. Fixed visual children alone do not prove the effect.",
+      "sources": [
+        "commons/artifacts/calder_mobile/calder_mobile.gd",
+        "commons/artifacts/prop_mobile/prop_mobile.gd"
+      ],
+      "gap": "Current mobile references are not evidence of this freely composed physical body.",
+      "image": "../2026-10-07-forces-the-unintended/images/03-the-body-carries-its-history.png"
+    },
+    {
+      "id": "12",
+      "title": "The successful factory",
+      "chapter": "IV · A limit becomes visible",
+      "role": "Return to the cube / system combination",
+      "halls": [
+        "Change_Choreography"
+      ],
+      "task": "Keep the exit clear while the familiar conveyor supplies cubes.",
+      "focus": "Production and collection rates, finite stock, contact and accumulated load.",
+      "event": "Every box arrives correctly, but the receiver is slower. Stock occupies the floor, meets other stock, and changes the route. Stopping production does not remove the backlog.",
+      "choice": "Pause admission, increase collection, redirect stock or turn a pile into a route. Keep the capacity bound visible; the engine itself need not be overwhelmed.",
+      "onward": "The cube returns from Primitives as an accumulating consequence. A rate difference becomes an architectural condition.",
+      "check": "Retain the accounting relation admitted - collected = present. Distinguish physical active stock from stored backlog. Verify the full/blocked policy instead of silently deleting boxes.",
+      "sources": [
+        "commons/artifacts/cube_sorting_line/cube_sorting_line.gd",
+        "commons/artifacts/timing_machines/conveyor_backlog.gd"
+      ],
+      "gap": "Two existing source-backed foundations; the combined room-scale encounter is proposed.",
+      "image": null
+    },
+    {
+      "id": "13",
+      "title": "The assistant that overcorrects",
+      "chapter": "IV · A limit becomes visible",
+      "role": "Optional control study / later tutorial return",
+      "halls": [
+        "Vectors_Act4b_Oscillation",
+        "VFM_08_Arena"
+      ],
+      "task": "Ask a powered platform to keep the point over its centre.",
+      "focus": "Position error, feedback gain, velocity damping and limited actuation.",
+      "event": "A position-only controller corrects after the point is already moving. Corrections carry it back across the target. A later delay variant makes the consequence of acting on old information visible.",
+      "choice": "Reduce gain, include velocity in the control rule, reduce the task's demand or stop the controller and balance manually.",
+      "onward": "More corrective power is not the same as better regulation. This can return in learning and adaptive-control sequences.",
+      "check": "Declare a powered controller and force cap. Establish the no-delay baseline first. Distinguish modeled oscillation from numerical instability; test timestep sensitivity before interpreting an apparent runaway.",
+      "sources": [],
+      "gap": "New apparatus and optional teaching concept. Do not make a full control-theory lesson a hidden prerequisite for completing Forces.",
+      "image": null
+    },
+    {
+      "id": "14",
+      "title": "Containment / carry one point across",
+      "chapter": "V · Live with the consequence",
+      "role": "Capstone / no new force law",
+      "halls": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "task": "Carry one point to the plinth across a laboratory using the tools already learned.",
+      "focus": "Select and combine known forces; observe state, dependencies and the limits of the task.",
+      "event": "Use only a few active systems: a feeding belt, a movable receiver, a tether and a passing field. Clearing one obstruction changes what the next system receives. A spill can become a ramp, an anchor or a continuing blockage.",
+      "choice": "Fly, redirect, hold admission, restrain a body, make another path, or preserve an unexpected arrangement. The final condition may deserve a name the instruction did not supply.",
+      "onward": "Leave the scene available to inspect. Later noise, agents or learning can revisit this same apparatus and introduce one new cause.",
+      "check": "An ordinary successful delivery must be possible. Test component rules, retained state, body bounds and deliberate reset. Never require one collapse or comic ending to prove emergence.",
+      "sources": [
+        "commons/artifacts/timing_machines/conveyor_backlog.gd",
+        "commons/artifacts/force_field_zone/field_carry_provider.gd"
+      ],
+      "gap": "Composed encounter is a proposal. Existing artifacts do not yet share a verified force/receiver contract.",
+      "image": "../2026-10-07-everything-worked/everything-worked.png"
+    }
+  ],
+  "priorities": [
+    "Prototype 12 first: the conveyor already connects known cubes, rates, contact and a room that changes. Compare matched throughput with backlog, preserving the visible finite bound.",
+    "Prototype 9 next: fixed anchor → rolling anchor makes one changed assumption unmistakable and reuses the returning point.",
+    "Develop 3 alongside them as the accepted player ability: two trigger-controlled sphere contributions, one movement owner, gravity and retained velocity.",
+    "Use 14 to combine only the strongest verified encounters. Keep angular assemblage and the feedback platform optional until the core route is clear."
+  ],
+  "sources": [
+    {
+      "label": "Ashby: limits of regulation and requisite variety, chapter 11",
+      "url": "https://ashby.info/Ashby-Introduction-to-Cybernetics.pdf"
+    },
+    {
+      "label": "The Nature of Code: Forces",
+      "url": "https://natureofcode.com/forces/"
+    },
+    {
+      "label": "The Nature of Code: Oscillation / spring forces",
+      "url": "https://natureofcode.com/oscillation/"
+    },
+    {
+      "label": "The Nature of Code: Autonomous Agents / steering",
+      "url": "https://natureofcode.com/autonomous-agents/"
+    }
+  ]
+}

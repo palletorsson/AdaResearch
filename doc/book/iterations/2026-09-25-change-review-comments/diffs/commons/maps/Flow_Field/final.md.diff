@@ -1,0 +1,37 @@
+--- before/commons/maps/Flow_Field/final.md
++++ commons/maps/Flow_Field/final.md
+@@ -4,11 +4,11 @@
+ 
+ A coloured line bends across the little canvas. At its leading end, a particle keeps moving. Choose one and stay with it while its neighbours spread into the picture.
+ 
+-The panel says **FIELD HELD**. Something is held still here, but it is not the particles.
++A label above the far edge of the canvas says FIELD HELD. Something is held still here, but it is not the particles.
+ 
+ Press **ARROWS**. Directions appear across the canvas. An arrow stays at its address while a particle passes nearby. The particle asks for a direction where it is now, moves a little, then asks again from the place it has reached.
+ 
+-The previous workbench read a series of addresses chosen along an interval. Here the calculation can be condensed into two lines:
++The bridge and the benches before it read addresses chosen along an interval. Here the calculation can be condensed into two lines:
+ 
+ ```gdscript
+ var direction = field_direction(position)
+@@ -46,12 +46,18 @@
+ 
+ A long stroke can suddenly cross the canvas. The recorder has joined the last position before the wrap to the first one after it. Its line suggests a journey through the middle that the particle did not make. The same drawing operation that helped us follow a bend has drawn across this jump too.
+ 
++![Arrows and particle trails on the canvas inside the Flow Field hall](/book-review/doc/book/figures/change/flow-field-near-museum.png)
++
++*The arrows keep their places. Long strokes across the canvas join positions on opposite sides of its frame.*
++
+ Opposite edges are joined for movement, but their field values need not match. Follow a return and look for a change of direction. A world can provide a return route and still contain a seam.
+ 
+ <!-- @ -->
+ 
+-From a little distance the trails can suggest a current. Come closer and follow two particles passing near one another. Neither has to make room. They read the field without reading each other; their proximity changes the picture without changing their instructions.
++Elsewhere in this hall, two arrow displays, a particle swarm and steering agents offer other ways to follow a field. The Grand Zoetrope puts twelve poses around a turning drum. Compare its repeated return with a particle’s path across the canvas.
++
++Back at the canvas, the trails can suggest a current from a little distance. Come closer and follow two particles passing near one another. Neither has to make room. They read the field without reading each other; their proximity changes the picture without changing their instructions.
+ 
+ What would it take for one to disturb another's route? We would have to give the neighbour a part in the next calculation. The flowing image makes that possibility tempting before the bodies possess it.
+ 
+-There is another relation missing from their movement. Each new direction replaces the last; no accumulated velocity resists the turn. In Forces, a push will end and a cube will keep going. Something it received earlier will still be crossing the room.
++There is another relation missing from their movement. Each new direction replaces the last; no accumulated velocity resists the turn. Later in Forces, a push will end and a cube will keep going. Something it received earlier will still be crossing the room.

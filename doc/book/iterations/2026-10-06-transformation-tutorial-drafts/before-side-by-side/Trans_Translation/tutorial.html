@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Position, then route</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../Trans_Introduction/tutorial.html">Previous</a><a href="../Trans_Rotation/tutorial.html">Next</a><a href="parallel.html">Facing texts</a></nav></header><main><h1>A level body on a sloping journey</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Displacement in a named coordinate frame</li>
+<li>Vector interpolation</li>
+<li>A destination and a route to it</li>
+<li>A condition selecting two parts of a journey</li>
+</ul>
+<p>Watch the carrier that travels diagonally. Its route slopes; its top stays level. Translation changes position without requiring a turn. At the exit, compare the guided handle's bend with the freer handle's diagonal.</p>
+<p>Continue with the travelling box from the previous lesson. Keep its mesh and position change; remove the other two studies and their banks. This time choose a destination and the route. The museum supplies the installed ride. Our reduced study displays its movement without rider physics.</p>
+<h2>The complete study</h2>
+<p>Put an empty <code>TransformStudy</code> on clear museum floor, with zero rotation and unit scale, and attach this <code>lesson.gd</code>. The positions are local metres. <code>BoxMesh.size</code> gives the familiar cube a broad, low shape once; the journey then leaves that shape unchanged.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0)
+    var mesh := BoxMesh.new()
+    mesh.size = Vector3(1.2, 0.2, 1.2)
+    cube.mesh = mesh
+    add_child(cube)
+    cube.position = start
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var t := clampf(elapsed / duration, 0.0, 1.0)
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t &lt; 0.5:
+            cube.position = start.lerp(corner, t * 2.0)
+        else:
+            cube.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        cube.position = start.lerp(finish, t)
+</code></pre>
+<p><code>finish - start</code> is the displacement: here <code>(4, 2, 0)</code>, four metres along X and two upward. Lines introduced the length of such a vector. Its components describe one combined change, not an instruction to finish X before starting Y.</p>
+<p><code>start.lerp(finish, t)</code> interpolates all three components together. At <code>t = 0.5</code>, the cube is at <code>(0, 2, 0)</code>, halfway along the diagonal. Neither rotation nor scale is assigned during the journey. The carrier remains level.</p>
+<p>The fraction reaches one after four seconds. Clamping holds the destination even as elapsed time continues. A direct assignment to <code>finish</code> would reach the same place immediately and omit the journey.</p>
+<h2>Give the same displacement another route</h2>
+<p>Set <code>via_corner</code> to <code>true</code>. The first half of the time takes the cube to <code>corner</code>, directly above its start. The second half takes it to the same destination as before. The <code>if</code> chooses which segment currently supplies the position; multiplying each half's fraction by two stretches it back to the range zero to one.</p>
+<p>At two seconds, the direct version is at <code>(0, 2, 0)</code>. The corner version is at <code>(-2, 3, 0)</code>. At four seconds they agree again. A shared destination does not require a shared journey.</p>
+<p>This version gives each segment two seconds. The upward segment is two metres; the horizontal one is four, so their speeds differ. Constant speed along routes of different lengths would need time allocated by distance. We leave that calculation for a later movement study.</p>
+<h2>Choose another destination</h2>
+<p>Keep <code>via_corner</code> true and change <code>finish</code> to <code>Vector3(2, 3, 2)</code>. Predict the new corner and final position. The first leg stays vertical; the second now crosses both X and Z. The body still does not turn to face its travel.</p>
+<p>The next hall makes that turn a deliberate choice, with an axis and a centre of its own.</p></main></body></html>

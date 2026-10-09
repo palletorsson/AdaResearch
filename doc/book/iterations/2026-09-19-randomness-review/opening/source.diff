@@ -1,0 +1,176 @@
+--- before/algorithms/randomness/dice_throw/dice_throw.gd
++++ algorithms/randomness/dice_throw/dice_throw.gd
+@@ -1,19 +1,19 @@
+ # dice_throw.gd
+ # VR Dice Throw — grab a physical dice, throw it, see the result
+-# Roll a 6 → 100 balls rain from the sky. Roll a 1 → 1 ball.
+-# Demonstrates discrete uniform distribution and expected value.
++# At the default 16 balls per pip, a 6 releases 96 balls and a 1 releases 16.
++# Compares a record of physical throws with the equal-probability model.
+ #
+-# QFEP: Equiprobability — each face equally likely. Fairness as symmetry.
++# QFEP: Cube symmetry offers a fairness hypothesis; the throwing procedure remains part of the experiment.
+ #
+ # @identity
+-# essence: P(X=k) = 1/6 for k ∈ {1,...,6} — discrete uniform distribution
++# essence: six physical faces, an orientation readout and an empirical record; P(X=k)=1/6 is the comparison model
+ # desire: grab a die, throw it physically, and be showered with reward balls proportional to the result
+ # critical_parameter: balls_per_pip — multiplier that makes a 6 spectacular (96 balls) and a 1 humbling (16 balls)
+ # triggers: _on_dice_dropped() starts settle detection; velocity < 0.02 for 0.8s triggers _read_dice_result()
+-# emerges: the histogram converges to E[X]=3.5 — fairness is not felt in one throw but in the accumulation
++# emerges: face counts and the running mean retain outcomes beyond one spectacular throw; convergence to 3.5 is not guaranteed by this apparatus
+ # needs: XRToolsPickable grab + throw [has]; pip rendering on 6 faces [has]; ball rain physics [has]
+ # relationships: contrasts with coin_toss (6 outcomes vs 2); feeds slot_machine (compound dice)
+-# truth: Fairness is not a single outcome — it is the symmetry of the generating process.
++# truth: A symmetric body does not by itself establish equally likely outcomes under every way of throwing it.
+ 
+ extends Node3D
+ 
+@@ -55,9 +55,9 @@
+ #
+ # The crank machine's axis is `disclosure`: how much a DETERMINISTIC source will
+ # admit about where its numbers came from. A die is the other pole of the same
+-# argument — the canonical FAIR source, trusted not because it explains itself
+-# but because of two properties you can check with your eyes before it is
+-# thrown: it is a CUBE (symmetric under 24 rotations, so no face is privileged)
++# argument — a familiar candidate for a fair source, whose equal-face model
++# draws on two properties visible before it is thrown: it is a CUBE (its
++# shape has 24 rotational symmetries; a launch need not share them)
+ # and it CARRIES ITS OWN SAMPLE SPACE ON ITS SKIN (six faces, 1..6, all present).
+ #
+ # But this table does not actually show you either of those things. It shows you
+@@ -103,7 +103,7 @@
+ # NOT TOUCHED, AND NOT NEGOTIABLE: the throw. The die is the same cube with the
+ # same pips, the same mass, the same felt friction and the same face-normal
+ # read at every value. `_read_dice_result` is byte for byte what it was, the
+-# counts still accumulate internally at every rung, and P(X=k) is still 1/6.
++# counts still accumulate internally at every rung; the equal-face model remains a hypothesis.
+ # This axis changes what the TABLE SAYS about the die, never the die.
+ # ─────────────────────────────────────────────────────────────────────────────
+ 
+
+--- before/algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd
++++ algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd
+@@ -5,8 +5,8 @@
+ #
+ # @identity
+ # essence: cell = RND(1) < 0.5 ? CHR$(205) : CHR$(206) — one random bit per cell of a
+-#   grid, drawn as one of two diagonals, and nothing else. Four bytes of entropy per cell,
+-#   repeated until the screen fills.
++#   grid, drawn as one of two diagonals. One unbiased binary choice has one bit
++#   of Shannon entropy; that is distinct from its storage representation.
+ # desire: to see that a structure nobody designed can fall out of a coin flip repeated in
+ #   a grid — and to notice how quickly we start calling it a maze
+ # critical_parameter: impression — what the one random bit is drawn AS (stroke | character
+@@ -27,8 +27,8 @@
+ # ─────────────────────────────────────────────────────────────────────────────
+ # STAGE-2 DNA PROMOTION (2026-08-02).
+ #
+-# 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 is the most famous four bytes of
+-# generative art, and its whole claim lives in ONE decision: what a single
++# 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 makes generative art from one
++# repeated decision: what a single
+ # random bit is PRINTED AS. On a C64 it was a character — a glyph fetched from
+ # the character ROM and stamped into a cell of a 40×25 text screen. Everything
+ # people have since read into it (a maze, a labyrinth, a textile, a lattice) is
+@@ -209,18 +209,17 @@
+ 		for x in range(grid_width):
+ 			var cell_type = maze[z][x]
+ 			
+-			if cell_type == 0:  # / diagonal
+-				# Add wall for / line
++			if cell_type == 0:  # Rising diagonal in the rendered local ZY plane.
++				# Local +Y is upward; unlike a screen row index, it is not downward.
++				for i in range(nav_grid_scale):
++					var nx = x * nav_grid_scale + i
++					var nz = z * nav_grid_scale + i
++					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
++						nav_grid[nz][nx] = 1  # 1 = wall
++			else:  # Falling diagonal in the same local frame.
+ 				for i in range(nav_grid_scale):
+ 					var nx = x * nav_grid_scale + i
+ 					var nz = z * nav_grid_scale + (nav_grid_scale - 1 - i)
+-					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
+-						nav_grid[nz][nx] = 1  # 1 = wall
+-			else:  # \ diagonal
+-				# Add wall for \ line
+-				for i in range(nav_grid_scale):
+-					var nx = x * nav_grid_scale + i
+-					var nz = z * nav_grid_scale + i
+ 					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
+ 						nav_grid[nz][nx] = 1  # 1 = wall
+ 
+@@ -494,7 +493,8 @@
+ 		return
+ 
+ 	# Pick a random wall
+-	var random_wall = wall_nodes[randi() % wall_nodes.size()]
++	var wall_index := randi() % wall_nodes.size()
++	var random_wall = wall_nodes[wall_index]
+ 
+ 	# Get the wall's mesh instance
+ 	var wall_instance = random_wall.get_child(0) as MeshInstance3D
+@@ -503,6 +503,17 @@
+ 
+ 	# Rotate the wall by 90 degrees around X axis (switching between / and \ in ZY plane)
+ 	wall_instance.rotate_x(PI/2)
++	# Geometry and the ant's discrete map must describe the same replacement.
++	var cell_x := wall_index % grid_width
++	var cell_z := wall_index / grid_width
++	maze[cell_z][cell_x] = 1 - maze[cell_z][cell_x]
++	build_navigation_grid()
++	# A cell rejected by the old search may now be open. Start a new search from
++	# the current ant position; do not carry obsolete exclusions or teleport it.
++	visited.clear()
++	visited[ant_nav_pos] = true
++	ant_path.clear()
++	ant_path.append(ant_nav_pos)
+ 
+ func _exit_tree() -> void:
+ 	for child in get_children():
+
+--- before/algorithms/randomness/seed_replay/seed_replay_demo.gd
++++ algorithms/randomness/seed_replay/seed_replay_demo.gd
+@@ -1,17 +1,17 @@
+ # seed_replay_demo.gd
+ # Seed Replay Demo — demonstrates seed reproducibility
+ # An 8x8 grid of colored cubes generated from a seed.
+-# Same seed always produces the exact same pattern.
++# Replay repeats a pattern when the generator, seed and draw procedure are held fixed.
+ #
+ # @identity
+-# essence: deterministic chaos — identical seeds yield identical worlds
++# essence: a seeded pseudorandom stream, replayed with or without one discarded draw
+ # desire: slide the seed, watch the grid repaint; hit Replay, see it unchanged
+ # critical_parameter: comparison — whether the claim gets a second panel to be checked against; then the RNG seed, one integer controlling 64 colors
+ # triggers: slider_moved updates seed live; Replay regenerates same pattern; Random picks new seed; apply_grid_config({comparison, seed, contrast_seed}) rebuilds the columns
+-# emerges: the grid looks random but is perfectly repeatable — chaos and order coexist
++# emerges: the same seed can dress the grid differently when draw consumption changes
+ # needs: RackTemplates panel [has]; BoxMesh cubes [has]; Label3D seed display [has]
+ # relationships: feeds into monte_carlo (seed control for reproducible sampling); sibling to coin_toss (both explore RNG)
+-# truth: Pseudorandomness is determinism wearing a mask — the seed is the face underneath.
++# truth: Nothing in a draw says that it is red; the program assigns that role by where the draw falls.
+ 
+ extends Node3D
+ 
+
+--- before/commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd
++++ commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd
+@@ -8,13 +8,13 @@
+ 
+ # @identity
+ # essence: a wall gauge that turns a random sequence into a number — the average information per symbol, in bits
+-# desire: to make the abstract "amount of randomness" a thing on a wall the player can read like a thermometer
++# desire: to make a sample’s symbol-frequency entropy inspectable beside the ordered record it does not measure
+ # critical_parameter: num_symbols — sets the maximum possible entropy log₂(N), the ceiling against which the actual is measured; disclosure — how much of the measurement the gauge shows behind the number (oracle | tally | ledger | works | origin)
+-# triggers: continuous re-sampling of a random stream, frequency histogram bars updating, entropy bar climbing toward log₂(N)
+-# emerges: the visual fact that uniform distributions have HIGHER entropy than skewed ones — randomness IS evenness; at disclosure:oracle the same H arrives with the histogram gone, and the gauge asks to be believed instead of read
++# triggers: a seeded sample is measured at build; ledger controls sort its display, compare a second sample and disclose the measurement
++# emerges: equal symbol shares maximize this categorical entropy; sorting leaves it unchanged, while disclosure:oracle withholds the histogram behind the same reading
+ # needs: num_symbols[has] sequence_length[has] entropy_label[has] frequency_bars[has] vr_distribution_picker[missing]
+ # relationships: the measurement instrument for the randomness sequence — pairs with distribution_sampler and entropy_jar; shares the `disclosure` ladder word for word with [[prng_crank_machine]], [[coin_toss]] and [[monte_carlo_dartboard]]
+-# truth: information IS uncertainty resolved — H = -Σ p(x) log₂ p(x) is the formula for "how surprised should you be?"
++# truth: This H averages surprise from the observed symbol shares; it does not inspect neighbours, spatial disorder or thermodynamic entropy.
+ 
+ # ─────────────────────────────────────────────────────────────────────────────
+ # DNA PROMOTION (2026-08-02) — disclosure

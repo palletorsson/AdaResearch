@@ -1,0 +1,43 @@
+{
+  "canonical_hashes": true,
+  "source_provenance": true,
+  "native_capture_checks": 17,
+  "html_anchors": true,
+  "http": [
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/index.html",
+      "status": 200
+    },
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/capture-checks.json",
+      "status": 200
+    },
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/provenance.json",
+      "status": 200
+    },
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png",
+      "status": 200
+    },
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/triangle-plate-in-hall.jpg",
+      "status": 200
+    },
+    {
+      "path": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/triangle-hall-context.jpg",
+      "status": 200
+    },
+    {
+      "path": "/api/compose-docs?map=Point_Triangle_Context",
+      "status": 200
+    }
+  ],
+  "chapter_sha256": "5fd2520092e69a3082876422f99c9ef671e3b9f2e3d407e291b84e40a8df7d65",
+  "map_sha256": "e9185abda69aa37c5f8c69ca5f25ec8039f48dcbf19ca8a6e02c90ed1da9aba5",
+  "headset_tested": false,
+  "visual_inspection": "Native clean Godot figure and actual museum photographs",
+  "browser_ui_inspection": "Unavailable: Windows sandbox launcher error",
+  "purpose_notes": "Triangle-only update saved; shared rebuild awaits independent Polyhedra reconciliation",
+  "note": "Discarded trial cell restored from empty string to its original space after museum capture; both represent an empty cell."
+}

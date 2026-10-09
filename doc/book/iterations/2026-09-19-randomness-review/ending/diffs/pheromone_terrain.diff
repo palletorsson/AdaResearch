@@ -1,0 +1,354 @@
+--- before/algorithms/randomness/pheromone_terrain/pheromone_terrain.gd
++++ after/algorithms/randomness/pheromone_terrain/pheromone_terrain.gd
+@@ -4,7 +4,7 @@
+ # critical_parameter: pheromone_attraction — the probability a walker follows pheromone vs moves randomly (0 = pure random, 1 = pure trail-following)
+ # triggers: _walk_step() deposits pheromone, raises terrain, then _choose_next_position() balances attraction vs random
+ # emerges: path networks self-organize — walkers converge on trails they collectively created without communication
+-# needs: PlaneMesh child with dynamic vertex modification [has]; VR observation [has]; controls [missing]
++# needs: PlaneMesh child with dynamic vertex modification [has]; opt-in fixed-step ATTRACT/AVOID comparison [has]
+ # relationships: feeds Random_Pheromone map; depends on random walk concept; contrasts with pixel_cloud (self-avoiding vs self-attracting)
+ # truth: Stigmergy is memory without a brain — the environment itself becomes the communication channel.
+ 
+@@ -49,9 +49,9 @@
+ ##          (turn left, straight on, turn right). It cannot double back on itself, so
+ ##          the same attraction lays long smooth arcs instead of knots. This is the
+ ##          Physarum reading of stigmergy: the environment remembers, and so does the body.
+-##   avoid  the sign of the gradient flipped — flee the strongest scent. Anti-stigmergy:
+-##          a trail as a record of where you no longer need to go. The ridges never form;
+-##          the walkers spread and the plot churns evenly.
++##   avoid  choose the weakest sensed concentration instead of the strongest.
++##          Deposits now discourage a return; the resulting coverage and ridges depend
++##          on the seed, boundary, random branch and observation interval.
+ ##   grid   the same following law over the four CARDINAL neighbours only. The lattice
+ ##          stops being a substrate and becomes visible in the result: right-angled
+ ##          ridges, a street plan rather than a delta.
+@@ -64,11 +64,26 @@
+ @export var walk_seed: int = -1
+ 
+ ## Steps to run before the first frame is shown, each one decaying by the real step
+-## interval so the dynamics are the shipped dynamics played fast. 0 is the shipped
++## interval for a fixed-step comparison. The live frame-based decay schedule can differ.
++## 0 is the shipped
+ ## behaviour: nothing has happened when the map opens and the trails grow while you watch.
+ ## Not an axis either — a still photographed 0.35 s after spawn shows a flat white plane
+ ## under every value, which is a fact about the bench and not about the rule.
+-@export var warmup_steps: int = 0
++@export var warmup_steps: int = 0
++
++## Opt-in museum comparison. The visitor advances fixed source steps; other
++## placements retain the live frame-based decay and walking schedule.
++@export var comparison: bool = false
++var _terrain_ready: bool = false
++var _comparison_steps: int = 0
++var _comparison_root: Node3D
++var _comparison_panel: Node3D
++var _comparison_readout: Label3D
++var _walker_markers: Array[MeshInstance3D] = []
++const COMPARISON_DISPLAY_SIZE: float = 4.8
++var _plane_transform_before_comparison: Transform3D
++var _material_override_before_comparison: Material
++var _comparison_carrier_fitted: bool = false
+ 
+ ## The eight compass steps, in the order the shipped `_choose_next_position` built them
+ ## every call. Hoisted to a constant so the candidate set can be narrowed per rule; the
+@@ -154,9 +169,14 @@
+ 	_initialize_grids()
+ 	_create_walkers()
+ 
+-	_add_info_label()
+-	_warmup()
+-	set_process(true)
++	_add_info_label()
++	_terrain_ready = true
++	if comparison:
++		_build_comparison()
++		replay_comparison()
++	else:
++		_warmup()
++	set_process(not comparison)
+ 
+ 
+ func _init_rng() -> void:
+@@ -178,8 +198,8 @@
+ 
+ 
+ ## Run the simulation forward before anything is shown, decaying by the REAL step
+-## interval each step so this is the shipped dynamics played fast rather than a
+-## different process. At the shipped 0 it returns before touching anything.
++## interval each step. This fixes the decay schedule; the live frame-based schedule
++## may differ. At the shipped 0 it returns before touching anything.
+ func _warmup() -> void:
+ 	if warmup_steps <= 0:
+ 		return
+@@ -276,8 +296,10 @@
+ 			"hy": head.y
+ 		})
+ 
+-func _process(delta: float) -> void:
+-	if not mesh_instance or vertex_grid.is_empty():
++func _process(delta: float) -> void:
++	if comparison:
++		return
++	if not mesh_instance or vertex_grid.is_empty():
+ 		return
+ 	
+ 	# Decay pheromones
+@@ -368,8 +390,9 @@
+ 	`trail` is the shipped law, line for line: eight compass directions in the order they
+ 	were always built, the seed value best_pheromone = -1.0, a STRICT > so ties fall to
+ 	the first entry, the same bounds test, and the same single randf() before it. The
+-	other three values change WHICH neighbours are candidates (sniff, grid) or the SIGN
+-	of the comparison (avoid), and nothing else — same draws, same order, same count.
++	other three values change WHICH neighbours are candidates (sniff, grid) or the SIGN
++	of the comparison (avoid). This call has the same draw structure; divergent paths
++	can later hit the border, whose correction skips this call and its draws.
+ 	"""
+ 	var x: int = int(walker["x"])
+ 	var y: int = int(walker["y"])
+@@ -490,7 +513,8 @@
+ 	return x < border_size or x > x_segments - border_size or \
+ 		   y < border_size or y > y_segments - border_size
+ 
+-var _info_label: Label3D
++var _info_label: Label3D
++var _title_label: Label3D
+ 
+ func _add_info_label() -> void:
+ 	_info_label = Label3D.new()
+@@ -500,7 +524,8 @@
+ 	_info_label.position = Vector3(0, max_height + 2.0, 0)
+ 	add_child(_info_label)
+ 
+-	var title := Label3D.new()
++	var title := Label3D.new()
++	_title_label = title
+ 	title.text = "Pheromone Terrain"
+ 	title.font_size = 24
+ 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+@@ -514,31 +539,29 @@
+ 		for row in pheromone_grid:
+ 			for val in row:
+ 				total_phero += val
+-		_info_label.text = "walkers: %d  attraction: %.0f%%  pheromone: %.0f" % [
+-			walker_count, pheromone_attraction * 100, total_phero
++		var influence: String = "signal-guided" if comparison else "attraction"
++		_info_label.text = "walkers: %d  %s: %.0f%%  pheromone: %.0f" % [
++			walker_count, influence, pheromone_attraction * 100, total_phero
+ 		]
+ 
+-## ASSIGNS ONLY — nothing here rebuilds. GridInteractablesComponent reaches this through
+-## call_deferred, so it lands AFTER _ready has already built the grids and the walkers;
+-## a rebuild would wipe a terrain the room has been growing since the player walked in,
+-## which is force_pad's mistake and the reason this is a pure assignment. `rule` is read
+-## live by _choose_next_position, so it bites from the next step under either ordering.
+-## walk_seed and warmup_steps only mean anything before _ready — the capture bench sets
+-## them as properties before add_child, which is where they belong.
+-##
+-## All three placements (Random_Pheromone, Room_Random_Pheromone, Corridor_Random_Pheromone)
+-## carry the bare token with no config keys at all, so not one of these branches is
+-## reachable from any map that exists today.
+-func apply_grid_config(config: Dictionary) -> void:
++## Existing live configuration remains assignment-only. The optional comparison
++## builds once after terrain initialization, including configure-before-tree use.
++## Entering comparison or changing its seed explicitly resets the experiment.
++func apply_grid_config(config: Dictionary) -> void:
++	var was_comparison: bool = comparison
++	var old_seed: int = walk_seed
++	if config.has("comparison"):
++		comparison = str(config["comparison"]).to_lower() in ["true", "1", "yes"]
+ 	# An unknown word is ignored rather than assigned, so a typo falls back to the
+ 	# shipped law instead of stalling the walkers.
+ 	if config.has("rule"):
+ 		var want: String = String(config["rule"]).strip_edges().to_lower()
+ 		if RULES.has(want):
+ 			rule = want
+-	if config.has("walk_seed"):
+-		walk_seed = int(config["walk_seed"])
+-		_init_rng()
++	if config.has("walk_seed"):
++		walk_seed = int(config["walk_seed"])
++		if not (comparison and _terrain_ready and old_seed == walk_seed):
++			_init_rng()
+ 	if config.has("warmup_steps"): warmup_steps = maxi(0, int(config["warmup_steps"]))
+ 	if config.has("walker_count"): walker_count = maxi(1, int(config["walker_count"]))
+ 	if config.has("walk_speed"): walk_speed = maxf(0.001, float(config["walk_speed"]))
+@@ -548,8 +571,177 @@
+ 	if config.has("pheromone_decay_rate"): pheromone_decay_rate = maxf(0.0, float(config["pheromone_decay_rate"]))
+ 	if config.has("pheromone_attraction"): pheromone_attraction = clampf(float(config["pheromone_attraction"]), 0.0, 1.0)
+ 	if config.has("sensor_distance"): sensor_distance = maxi(1, int(config["sensor_distance"]))
+-	if config.has("pheromone_color"):
+-		pheromone_color = _parse_color(config["pheromone_color"], pheromone_color)
++	if config.has("pheromone_color"):
++		pheromone_color = _parse_color(config["pheromone_color"], pheromone_color)
++	if comparison:
++		_fit_comparison_carrier()
++	if _terrain_ready and comparison:
++		_build_comparison()
++		if not was_comparison or old_seed != walk_seed:
++			replay_comparison()
++		set_process(false)
++	elif _terrain_ready and was_comparison:
++		plane_node.transform = _plane_transform_before_comparison
++		mesh_instance.material_override = _material_override_before_comparison
++		_comparison_carrier_fitted = false
++		_info_label.position = Vector3(0, max_height + 2.0, 0)
++		_title_label.position = Vector3(0, max_height + 3.5, 0)
++		if is_instance_valid(_comparison_root):
++			remove_child(_comparison_root)
++			_comparison_root.queue_free()
++		_comparison_root = null
++		_comparison_panel = null
++		_comparison_readout = null
++		_walker_markers.clear()
++		set_process(true)
++
++
++## Reset both kinds of history and the local generator, not merely the height mesh.
++func replay_comparison() -> void:
++	if not comparison or not _terrain_ready:
++		return
++	if walk_seed < 0:
++		walk_seed = 190919
++	_init_rng()
++	_initialize_grids()
++	_create_walkers()
++	time_accumulator = 0.0
++	_comparison_steps = 0
++	_update_mesh()
++	_update_info_label()
++	_update_comparison()
++
++
++func select_comparison_rule(next_rule: String) -> void:
++	if not comparison or next_rule not in ["trail", "avoid"]:
++		return
++	rule = next_rule
++	replay_comparison()
++
++
++## Same per-step decay/walk order as _warmup. Boundary correction can skip a
++## walker's later draws, so equal seeds do not promise identical draw use by two laws.
++func advance_comparison(count: int = 1) -> void:
++	if not comparison or not _terrain_ready:
++		return
++	for _i in clampi(count, 1, 20):
++		_decay_pheromones(1.0 / maxf(walk_speed, 0.001))
++		_walk_step()
++		_comparison_steps += 1
++	_update_mesh()
++	_update_info_label()
++	_update_comparison()
++
++
++## The museum measures collision before _ready. Fit the existing carrier during
++## configuration too, so its navigation reservation uses the displayed footprint.
++func _fit_comparison_carrier() -> void:
++	if _comparison_carrier_fitted:
++		return
++	var carrier: Node3D = get_node_or_null("Plane")
++	var field: MeshInstance3D = _find_mesh_instance(carrier) if carrier else null
++	if not field:
++		return
++	# Keep the simulation coordinates and values; fit their rendered carrier to this
++	# room. Collision remains the original flat box, scaled with the plane, not a
++	# walkable copy of the growing visual surface.
++	_plane_transform_before_comparison = carrier.transform
++	var width: float = field.mesh.size.x if field.mesh is PlaneMesh else float(field.get_meta("plane_width", 20.0))
++	carrier.scale = Vector3.ONE * (COMPARISON_DISPLAY_SIZE / width)
++	carrier.position.y = 0.03
++	# The live scene's magenta wire emission colours every edge, including cells
++	# with no scent. In this comparison the existing vertex colours carry scent
++	# alone, so a faded signal can be distinguished from a lasting raised surface.
++	_material_override_before_comparison = field.material_override
++	var field_material := StandardMaterial3D.new()
++	field_material.vertex_color_use_as_albedo = true
++	field_material.albedo_color = Color.WHITE
++	field_material.roughness = 1.0
++	field_material.cull_mode = BaseMaterial3D.CULL_DISABLED
++	field.material_override = field_material
++	_comparison_carrier_fitted = true
++
++
++func _build_comparison() -> void:
++	if is_instance_valid(_comparison_root):
++		return
++	_comparison_root = Node3D.new()
++	_comparison_root.name = "StepComparison"
++	add_child(_comparison_root)
++	_fit_comparison_carrier()
++	if _info_label:
++		_info_label.position = Vector3(0, 1.5, -1.6)
++	if _title_label:
++		_title_label.position = Vector3(0, 1.8, -1.6)
++	# A full-size console stands just beyond the front of the reduced display.
++	var cabinet := MeshInstance3D.new()
++	var box := BoxMesh.new()
++	box.size = Vector3(1.2, 0.65, 0.6)
++	cabinet.mesh = box
++	cabinet.position = Vector3(0, 0.325, 2.9)
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = Color(0.10, 0.11, 0.13)
++	finish.roughness = 0.8
++	cabinet.material_override = finish
++	_comparison_root.add_child(cabinet)
++	var body := StaticBody3D.new()
++	body.name = "ConsoleBody"
++	body.position = cabinet.position
++	var shape := CollisionShape3D.new()
++	var bounds := BoxShape3D.new()
++	bounds.size = box.size
++	shape.shape = bounds
++	body.add_child(shape)
++	_comparison_root.add_child(body)
++	var rack: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
++	_comparison_panel = rack.create_panel("TRAIL COMPARISON", [
++		[{"type": "button", "label": "ATTRACT"}, {"type": "button", "label": "AVOID"}],
++		[{"type": "button", "label": "+1 STEP"}, {"type": "button", "label": "+20 STEPS"}, {"type": "button", "label": "REPLAY"}],
++	])
++	_comparison_panel.name = "ComparisonPanel"
++	_comparison_panel.set_meta("em_local_instrument", true)
++	_comparison_panel.position = Vector3(0, 0.98, 2.9)
++	_comparison_panel.rotation_degrees.x = -60
++	_comparison_panel.scale = Vector3.ONE * 4.0
++	_comparison_root.add_child(_comparison_panel)
++	var actions: Array[Callable] = [
++		func(): select_comparison_rule("trail"), func(): select_comparison_rule("avoid"),
++		func(): advance_comparison(1), func(): advance_comparison(20), func(): replay_comparison()]
++	for i in actions.size():
++		var area: Node = _comparison_panel.find_child("Btn_%d" % i, true, false).get_node("InteractableAreaButton")
++		var action: Callable = actions[i]
++		area.button_pressed.connect(func(_button): action.call())
++	_comparison_readout = Label3D.new()
++	_comparison_readout.name = "ComparisonReadout"
++	_comparison_readout.font_size = 18
++	_comparison_readout.pixel_size = 0.0014
++	_comparison_readout.position = Vector3(0, 1.4, 2.7)
++	_comparison_readout.billboard = BaseMaterial3D.BILLBOARD_ENABLED
++	_comparison_readout.no_depth_test = false
++	_comparison_readout.modulate = Color(0.85, 0.95, 1.0)
++	_comparison_root.add_child(_comparison_readout)
++	for i in walker_count:
++		var marker := MeshInstance3D.new()
++		marker.name = "WalkerPosition%d" % (i + 1)
++		var sphere := SphereMesh.new()
++		sphere.radius = 0.045
++		sphere.height = 0.09
++		marker.mesh = sphere
++		var material := StandardMaterial3D.new()
++		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		material.albedo_color = Color(0.1, 0.9, 1.0)
++		marker.material_override = material
++		_comparison_root.add_child(marker)
++		_walker_markers.append(marker)
++
++
++func _update_comparison() -> void:
++	if _comparison_readout:
++		var law: String = "AVOID" if rule == "avoid" else "ATTRACT"
++		_comparison_readout.text = "%s | seed %d | step %d\nCyan: current walker positions\nHeight: visits | pink: current scent" % [law, walk_seed, _comparison_steps]
++	for i in mini(walkers.size(), _walker_markers.size()):
++		var walker: Dictionary = walkers[i]
++		_walker_markers[i].position = plane_node.transform * vertex_grid[walker.y][walker.x] + Vector3(0, 0.06, 0)
+ 
+ 
+ func _parse_color(value: Variant, fallback: Color) -> Color:

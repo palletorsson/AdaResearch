@@ -1,0 +1,168 @@
+{
+ "map_info": {
+  "name": "Sine Space: The Eternal Return",
+  "title": "Walking Through Sine",
+  "lookup_name": "WaveFunctions_Sine_Space",
+  "description": "What kinds of passage can a repeating rule make. In the antechamber a corridor of two facing sine walls runs east-west, 7 m long and 2 m wide, entered from its west mouth and leaving at its east mouth beside the head of the bridge. A panel at the entrance holds two sliders, AMP (both walls' amplitude) and PHASE (the offset between them), and two buttons, FREEZE and RESET; a readout prints the values in force and the narrowest and widest gap they make. The walls are visible surfaces only: they do not collide, and the passage that supports a body is the museum deck. The basin below the bridge keeps the sine_space floor and the dark sphere as the developed secondary arena. Structure recovered 2026-09-10: interior 2 = platform, perimeter w, wall_height 3.",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 14,
+   "depth": 30,
+   "max_height": 8
+  },
+  "metadata": {
+   "difficulty": "beginner",
+   "category": "wavefunctions",
+   "estimated_time": "6-8 minutes",
+   "learning_objectives": [ "Sine wave fundamentals: sin(t) oscillation", "Simple harmonic motion (SHM)", "Amplitude and frequency parameters", "Multiple oscillators and phase relationships", "Spatial phase offset creating wave propagation" ]
+  },
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0,
+   "sculpture_clear_rects": [[1, 1, 11, 6]],
+   "artifact_placement": "map"
+  }
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next Lesson",
+   "description": "Continue to the next algorithm demonstration",
+   "properties": {
+    "action": "next_in_sequence"
+   }
+  },
+  "s": {
+   "properties": {
+    "height": 5.5
+   }
+  }
+ },
+ "documentation": {
+  "summary": "WaveFunctions Sine Space",
+  "layout": "14x30 hall: a four-row antechamber with the corridor across it, then an 18-row basin crossed by a one-cell bridge at x=10, then the exit rows.",
+  "objective": "Enter the corridor at its west mouth, walk it, and then change one thing at a time from the entrance panel: AMP, then PHASE. Freeze the walls and walk again; run them and stand still. Put a hand through a crest before trusting the wall.",
+  "key_elements": [ "sine_wall_corridor at (6,4), rotated 90: a 7 m passage across the antechamber, west mouth at x=3 and east mouth at x=10 beside the bridge head; entrance panel and readout at the west mouth", "sine_wall_explanation (1,1): the display case in the antechamber's north-west nook (sine_space_explanation left this hall on 2026-09-10: its display stands 4 m from its origin and 27 cm tall as placed; the colorballs left too, they rolled out of the basin into the passage)", "sine_space and dark_sphere in the basin below the bridge", "the bridge at x=10 over the basin to the south door" ]
+ },
+ "lighting": {
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1.0, 0.9, 0.8 ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [ 0.2, 0.3, 0.7 ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "8", "8", "8", "8", "1", "8", "8", "8", "8", "8", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "8", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "8", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "8", "w" ],
+   [ "w", "1", "2", "1", "1", "1", "1", "1", "1", "2", "1", "1", "8", "w" ],
+   [ "w", "8", "8", "8", "8", "8", "8", "8", "8", "2", "1", "1", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "0", "0", "0", "0", "0", "0", "0", "0", "1", "0", "8", "w" ],
+   [ "w", "8", "8", "8", "8", "8", "8", "8", "8", "8", "1", "8", "8", "w" ],
+   [ "w", "8", "8", "8", "8", "8", "8", "8", "8", "1", "1", "1", "1", "w" ],
+   [ "w", "8", "8", "8", "8", "8", "8", "1", "1", "1", "1", "0", "1", "w" ],
+   [ "w", "8", "8", "8", "8", "8", "8", "1", "8", "8", "1", "1", "1", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "sp", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "tc:7:y:auto", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "t", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "sine_wall_explanation:90:-.4", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "sine_wall_corridor:90", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", " ", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", " ", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", " ", "", "", "dark_sphere", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", " ", "", "", "sine_space", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", " ", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
+}

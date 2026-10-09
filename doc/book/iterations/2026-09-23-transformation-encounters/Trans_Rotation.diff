@@ -1,0 +1,51 @@
+--- commons\maps\Trans_Rotation\final.md (before)
++++ commons\maps\Trans_Rotation\final.md (now)
+@@ -28,7 +28,7 @@
+ 
+ Both rides pause for twelve seconds, then take twelve for the half-turn. After the high pause they retrace the upper arc. Staying aboard brings you back above the basin. The grid wedges and still aisles offer other returns.
+ 
+-The blades remain 8.4 metres long and 2.4 wide. A centre, an axis and a length describe their turn. A standing surface, a body and a receiving bank make it a passage.
++The blades remain 8.4 metres long and 2.4 wide. Look back at the bank where your ride began.
+ 
+ <!-- @ -->
+ 
+@@ -57,7 +57,7 @@
+ return Basis(Vector3.BACK, radians) * Basis(Vector3.UP, radians) * Basis(Vector3.RIGHT, -radians)
+ ```
+ 
+-The rightmost matrix acts first: x, then y, then z. In the previous hall, the same upward and sideways displacements could exchange order and still reach the same destination. Turns about different axes need not finish in the same orientation when their order is reversed. This band fixes its order in the code.
++The rightmost matrix acts first: x, then y, then z. This band keeps that order. At the comparison beyond it, we can see what exchanging two turns does.
+ 
+ These angles are assigned by position, not accumulated while you wait.
+ 
+@@ -73,13 +73,28 @@
+ 
+ The final row reaches ninety degrees. A cube can recover an axis-aligned outline there. The way to that flat-looking end still passes through everything before it. More rotation does not promise more obstruction.
+ 
+-Compare the first and last orientations. A plain cube turned ninety degrees about an axis through the centres of two opposite faces occupies the same shape. Yet a corner has changed places. A mark on one face would make the return a difference you could follow.
++Compare the first and last orientations in the Y band. The cube's outline returns after ninety degrees. Find the pale L on the top face: the top stays level, but the mark points another way. The occupied shape can be the same while its marked positions have changed places.
+ 
+ The array holds these orientations still. The blades let you encounter the journey between them. A shape can return without giving back the time it took, or undoing where it carried you. What would you need to keep in order to notice that something happened?
+ 
++<!-- @transform_composition_workbench -->
++
++Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. The blue form receives X first; the red form receives Y first. Both use the same angles and axes.
++
++Follow the fin through the smaller intermediate forms. Then compare where it points in the two results. The columns separate the pictures for us; the calculation uses the same origin for both.
++
++```gdscript
++var left_xform: Transform3D = t2 * t1
++var right_xform: Transform3D = t1 * t2
++```
++
++As in the array, the operation on the right acts first. These two turns leave the fin facing different ways. The upward and sideways translations in the previous hall could exchange order and share a destination. Here exchanging the order changes the result.
++
++Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. Return to four and follow the fin again. Order matters through the operations we put in it.
++
+ <!-- @axial_sweep -->
+ 
+-A small cube turns on a spindle beside the way onward. Walk up to it and follow one bright edge. The cube stays a cube; the edge keeps arriving somewhere else.
++A small cube turns on a spindle beside the way onward. Walk up to it and follow the same pale L on its face, then one bright edge. The cube stays a cube; the mark and the edge keep arriving somewhere else.
+ 
+ Press **BOUNDARY**. A cylinder appears around the turn. Look for the corner that reaches its round side. Then watch that corner leave: the contour keeps the place even when the corner is elsewhere.
+ 

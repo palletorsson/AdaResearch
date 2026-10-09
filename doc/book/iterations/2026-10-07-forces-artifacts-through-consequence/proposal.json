@@ -1,0 +1,177 @@
+{
+  "title": "Forces: artifacts through consequence",
+  "date": "2026-10-07",
+  "scope": "Design proposal grounded in current source inspection; no museum/runtime/manuscript/order changes, no new Godot tests.",
+  "principle": "One familiar point acquires abilities. Each encounter starts with an ordinary task; added relations produce consequences the task did not specify.",
+  "route_note": "Keep the earlier proposed ability progression: push → launch → two-hand flight → release/brake → vortex → deflect → tethered return → combination. This proposal does not promote that order into the canonical thirteen-hall spine. The mobile is optional; the reluctant plinth returns after spring force rather than smuggling springs into the first motion lesson.",
+  "kit": [
+    "The familiar black PointBody and explicit receiver behavior",
+    "A plain off-white movable plinth or trolley",
+    "A tether with an explicit fixed or dynamic anchor",
+    "A bounded field source and declared affected bodies",
+    "A few loose blocks plus an inspectable reset"
+  ],
+  "priority": [
+    "plinth",
+    "retrieve",
+    "return"
+  ],
+  "tests_overview": "Verify mechanisms independently, then their interaction. Keep one baseline success possible. Preserve state between action and aftermath. Test local laws and reset without prescribing an emergent outcome.",
+  "cards": [
+    {
+      "id": "point",
+      "title": "The point that can carry you",
+      "role": "Continuing object / ability spine",
+      "halls": [
+        "VFM_03_Motion",
+        "VFM_05_Launch",
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "goal": "Push the familiar sphere; later use two instances to reach a ledge yourself.",
+      "learn": "Finite push → retained velocity → two contributions to thrust. Teach these in successive encounters.",
+      "turn": "One hand lets go while the other still thrusts. You continue drifting; the remaining contribution changes the journey rather than cancelling it.",
+      "agency": "Release, counter-thrust or use the landing court; camera orientation remains level.",
+      "reuse": [
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd",
+        "commons/artifacts/force_field_zone/field_carry_provider.gd"
+      ],
+      "status": "Existing point lineage and field receiver adapter; two-sphere flight remains proposed. The current catalyst auto-returns after a drop, which needs a deliberate policy for the force continuation.",
+      "check": "One movement owner sums contributions; release removes only that hand's thrust. Accepted control stays aim down/back + triggers → thrust up/forward. Firing is a separate action or explicit mode.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/03-flight.png"
+    },
+    {
+      "id": "pad",
+      "title": "The launch pad and the landing tray",
+      "role": "Ability / room fixture",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "goal": "Send the point to a nearby tray, then make the crossing yourself.",
+      "learn": "Launch state, gravity and contact at landing. Distinguish setting velocity from applying an impulse.",
+      "turn": "A successful landing strikes a loose tray, which slides into another body. Arrival becomes the start of a second event.",
+      "agency": "Adjust launch direction, restrain the tray or change the landing surface.",
+      "reuse": [
+        "commons/artifacts/force_pad/force_pad.gd"
+      ],
+      "status": "Installed launch pad exists; a movable receiving tray and freely interacting landing encounter are new.",
+      "check": "One launch per entry; retain post-launch motion. A floor sensor applies its declared rule to allowed body types, not only a theatrical player trigger.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/02-launch.png"
+    },
+    {
+      "id": "plinth",
+      "title": "The reluctant plinth",
+      "role": "Priority prototype / small task",
+      "halls": [
+        "VFM_03_Motion",
+        "Vectors_Act4b_Oscillation"
+      ],
+      "goal": "Move the point on a small trolley to its display plinth.",
+      "learn": "Begin with contact and friction. Return after spring force is introduced to add an elastic pull.",
+      "turn": "The wheel catches; pulling stores energy. When it comes free the trolley reaches a second object before the player has caught up with the consequence.",
+      "agency": "Change route, reduce the pull, move the obstruction or brake. A quiet successful delivery must also be possible.",
+      "reuse": [
+        "commons/artifacts/friction_ramp/friction_ramp.gd",
+        "commons/artifacts/spring_tower/restoring_forces.gd",
+        "commons/artifacts/collision_carts/collision_carts.gd"
+      ],
+      "status": "These are reference studies, not a reusable interacting trolley. Friction ramp integrates a prescribed lane, spring tower uses a one-axis solver, collision carts display ideal outcomes. A coupled room-scale receiver must be built.",
+      "check": "The held tether stores energy; removing the pull does not erase motion. No collision animation determines the ending. First test one catch and one free run before adding loose blocks.",
+      "image": "../2026-10-07-everything-worked/everything-worked.png"
+    },
+    {
+      "id": "retrieve",
+      "title": "The retrieving point",
+      "role": "Closest existing force foundation",
+      "halls": [
+        "VFM_07_Gravity"
+      ],
+      "goal": "Bring a loose sphere back to your hand using the held catalyst.",
+      "learn": "A position-dependent attraction acts on declared receivers; the source does not understand the player's preferred target.",
+      "turn": "The field also pulls a doorstop or movable support. The requested sphere comes closer while something else changes the passage.",
+      "agency": "Move the source, shorten the radius, use a target filter or release attraction and watch the remaining motion.",
+      "reuse": [
+        "commons/primitives/point/interactive_point_origin_force.gd"
+      ],
+      "status": "The existing held point already queries nearby rigid bodies and applies bounded central forces. Consistent receiver props and the doorstop encounter are proposed.",
+      "check": "Test the mask/filter explicitly; separate source position from target intention. Release removes attraction, not the receiver's accumulated velocity. Keep the inverse-distance term finite near the source.",
+      "image": "../2026-10-07-forces-the-unintended/images/03-the-body-carries-its-history.png"
+    },
+    {
+      "id": "vortex",
+      "title": "The collecting room",
+      "role": "Field / accumulated consequence",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "goal": "Gather scattered spheres into a shallow central basin; later enter the field yourself.",
+      "learn": "Radial and tangential field contributions act on existing velocity. Change one term at a time.",
+      "turn": "Gathering becomes orbiting or crowding. The same rule catches loose supports as well as the intended collection; entry speed changes the result.",
+      "agency": "Alter the field, move its centre or counter-thrust through it. The field is not guaranteed to tidy the room.",
+      "reuse": [
+        "commons/artifacts/force_vortex/force_vortex.gd",
+        "commons/artifacts/force_field_zone/force_field_zone.gd"
+      ],
+      "status": "The installed vortex replaces player velocity. This continuation requires a force/acceleration contribution that preserves incoming motion; it is a new variant, not an already available emergent field.",
+      "check": "Entry/exit do not clear velocity; centre remains finite; receiver rules are explicit. Begin with loose points before adding the player.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/05-vortex.png"
+    },
+    {
+      "id": "return",
+      "title": "The point that insists on returning",
+      "role": "Spring / force-based adversary",
+      "halls": [
+        "Vectors_Act4b_Oscillation",
+        "VFM_08_Arena"
+      ],
+      "goal": "Deflect a tethered sphere to open a passage.",
+      "learn": "Restoring force, damping and a visible anchor. Reuse the same target body from the shooting study.",
+      "turn": "The point swings back. In a later version the anchor sits on a movable plinth, so the place it returns to also moves.",
+      "agency": "Time a crossing, move the anchor, damp the return or wedge the target aside. Destruction need not be the only solution.",
+      "reuse": [
+        "commons/artifacts/spring_tower/restoring_forces.gd",
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd"
+      ],
+      "status": "A clear one-axis spring study and form-firing catalyst exist. A free spatial tether, movable anchor and true impulse target require new receiver work.",
+      "check": "Compare fixed and movable anchors explicitly. Equal-and-opposite spring response when both ends are dynamic; no double-counted shot impulse. Opponent variants: free point, tethered point, then optional bounded pursuing point.",
+      "image": "../2026-10-06-forces-illustrated-atlas/images/07-return.png"
+    },
+    {
+      "id": "mobile",
+      "title": "The body you keep adding to",
+      "role": "Optional reflective encounter",
+      "halls": [
+        "Vectors_Act4b_Oscillation"
+      ],
+      "goal": "Hang the point so that it rests level; add one familiar object.",
+      "learn": "Support, torque and mass distribution. Add a rigid wind-catching plate only after the balance is legible.",
+      "turn": "The addition shifts the balance. A powered fan then acts on the added plate and sets the rest moving; the body now responds differently because of what it carries.",
+      "agency": "Move an attachment, add a counterweight or keep an asymmetry. No perfect balance is required for the object to be worth keeping.",
+      "reuse": [
+        "commons/artifacts/prop_mobile/prop_mobile.gd",
+        "commons/artifacts/calder_mobile/calder_mobile.gd"
+      ],
+      "status": "Existing mobile references provide a visual vocabulary. The inspected prop_mobile freezes its nested rigid bodies and arranges balance; a freely joined kinetic assemblage would be a new physical variant. Other mobile implementations need separate inspection.",
+      "check": "Attachments must actually participate in mass/inertia and constraints. State the fan's force model. Begin with rigid parts; cloth and soft-body simulation can wait.",
+      "image": "../2026-10-07-forces-the-unintended/images/03-the-body-carries-its-history.png"
+    },
+    {
+      "id": "delivery",
+      "title": "The delivery room",
+      "role": "Final combination / no new compulsory law",
+      "halls": [
+        "Change_Choreography",
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "goal": "Carry one point across a room using the abilities and tools already learned.",
+      "learn": "Composition and observation: launch, brake, gather, redirect and return remain the same operations.",
+      "turn": "An automated conveyor keeps delivering props while the receiver slows. Moving one jam changes what meets the next body. A blockage may become a support or just remain a blockage.",
+      "agency": "Stop a feed, take another route, retrieve the point or preserve an interesting arrangement. A manual reset starts a new experiment; it should not silently erase the aftermath.",
+      "reuse": [
+        "commons/artifacts/timing_machines/conveyor_backlog.gd"
+      ],
+      "status": "Existing conveyor_backlog uses actual rigid boxes, a moving-surface collider, a timed receiver and a finite pool. A complete carrying task combining the selected artifacts remains a proposal.",
+      "check": "Reuse the learned rules; bound the number of bodies visibly. Validate restart and retained state. Do not demand a particular collapse or funny ending as the success criterion.",
+      "image": "../2026-10-07-everything-worked/everything-worked.png"
+    }
+  ]
+}

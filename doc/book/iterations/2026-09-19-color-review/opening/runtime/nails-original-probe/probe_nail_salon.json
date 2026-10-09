@@ -1,0 +1,9 @@
+{
+  "checks": 35,
+  "failures": [
+    "body can walk past salon on side -1",
+    "body can walk past salon on side 1"
+  ],
+  "headset_tested": false,
+  "input": "Supplied grabber moves the real RGB points; ValueMapper3D and GameManager signals update both hands. Tracked hands untested."
+}

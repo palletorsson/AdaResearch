@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Curvature as Choice · Ada Research</title><style>*{box-sizing:border-box}body{margin:0;background:#13212a;color:#eee9df;font:18px/1.7 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:32px 24px 80px}a{color:#f4b8c7}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font:clamp(36px,6vw,70px)/1.1 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}h3{font:24px/1.3 Georgia,serif}.lead{font:25px/1.5 Georgia,serif;max-width:860px}.date,figcaption{color:#b2c0c5;font-size:14px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}.card{border:1px solid #51606b;border-radius:6px;padding:24px;background:#1b303a}.card h2{margin:0 0 16px}img{width:100%;height:auto;display:block}figure{margin:30px 0}figcaption{margin-top:10px}pre{background:#081720;padding:20px;overflow:auto}code{font-size:.9em}details{border-top:1px solid #51606b;padding:24px 0}summary{cursor:pointer;font-size:24px}article{max-width:790px;margin:30px auto}p{max-width:880px}.tag{font-size:13px;color:#a9d8c9}.table{overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:15px;border-bottom:1px solid #51606b;text-align:left;vertical-align:top}small{color:#b2c0c5}</style><main><nav><a href="/museum-progress?sequence=foundationscrisis">Museum progress</a><a href="boolean-works.html">Previous chapter</a></nav><p class="date">Foundational crises · Hall 1 · 15 September 2026</p><h1>Curvature as Choice</h1><p class="lead">The ground has a setting. A single number decides whether parallel lines diverge, meet, or never exist as parallels at all.</p><p><a href="/necklace/thread?map=NonEuclidean_Spaces&amp;role=primary">Primary artifacts and book</a> · <a href="/museum-progress?sequence=foundationscrisis">Museum progress</a></p><figure><svg viewBox="0 0 900 280" role="img" aria-labelledby="geometry-title geometry-desc" xmlns="http://www.w3.org/2000/svg"><title id="geometry-title">Curvature as a choice</title><desc id="geometry-desc">A hyperbolic bowl, a flat bridge and an elliptic dome with triangle angle sums.</desc><rect width="900" height="280" rx="18" fill="#101d38"/><g fill="none" stroke="#8ec9c1" stroke-width="4"><path d="M65 76 Q190 232 315 76"/><path d="M65 76 Q190 170 315 76" stroke="#f58b8b" stroke-dasharray="8 8"/><path d="M335 150h230"/><path d="M585 76 Q710 -10 835 76"/><path d="M585 76 Q710 125 835 76" stroke="#f58b8b" stroke-dasharray="8 8"/></g><g fill="#eaf4f1" font-family="system-ui,sans-serif" text-anchor="middle"><text x="190" y="255" font-size="20">K &lt; 0 · HYPERBOLIC</text><text x="450" y="185" font-size="18">K = 0 · FLAT</text><text x="710" y="130" font-size="20">K &gt; 0 · ELLIPTIC</text><text x="190" y="48" font-size="15">angle sum &lt; 180°</text><text x="710" y="48" font-size="15">angle sum &gt; 180°</text></g></svg><figcaption>The same triangle question lands differently when the host surface changes.</figcaption></figure><details><summary>Read the book passage</summary><p>A bowl on your left, a dome on your right, and a flat plate between them that no longer looks like the default.</p>
+<p>The previous room let you stand inside an assumption until it stopped feeling like one. This room puts the assumption on a dial. There is a slider here with a number on it, and the number is the curvature of space — negative to the left, zero in the middle, positive to the right. Flatness is the detent at zero. It is not the centre because it is correct; it is the centre because it is zero.</p>
+<h2>One number, and it is not a metaphor</h2>
+<!-- @curvature_slider -->
+
+<pre><code class="language-gdscript"># curvature_slider.gd:10
+# critical_parameter: curvature — the ONE number that determines the entire geometry
+</code></pre>
+<p>Gaussian curvature, K, running from −1 to +1. That single scalar decides whether parallel lines diverge, stay apart, or converge; whether a triangle's angles sum to less than, exactly, or more than 180°; whether the shortest path between two points looks straight to you from outside. Not three geometries with three rulebooks. One rulebook with one free parameter.</p>
+<p>This is the nineteenth century's actual discovery, and it is more unsettling than "there are other geometries." Gauss, Bolyai and Lobachevsky did not find a strange new space next door to the real one. They found that the space we were in had a setting, and that nothing in mathematics specifies which value it should take. Euclid's fifth postulate turns out to be the statement <em>K = 0</em> — not an axiom about parallels, a choice about curvature, wearing a sentence about lines.</p>
+<h2>Where the wire is missing</h2>
+<!-- @poincare_disk -->
+
+<pre><code class="language-gdscript"># curvature_slider.gd:110
+curvature_changed.emit(curvature)
+
+# poincare_disk.gd:19 — and the only other place this signal name appears
+signal curvature_changed(value: float)
+</code></pre>
+<p>Here is the room's own honest gap, and it is worth knowing before you turn anything.</p>
+<p>The slider emits. Its registry entry says so plainly — <em>emits curvature_changed signal for linked surfaces</em> — and line 110 does exactly that, every time you move it. Search the rest of the project for anything that connects to it and you find one hit: the Poincaré disk, which declares the identical signal and emits it too. Two objects broadcasting the same message into a room where nothing is subscribed.</p>
+<p>So the four surfaces standing around you — the saddle, the dome, the disk, the sphere — do not move when you turn the dial. Each one says so in its own header, in the same four words: <em>VR controls [missing]</em>. They are four fixed illustrations of four values of a parameter that is, in this room, unconnected to them.</p>
+<p>Do not file that as a defect and move on. Notice what it makes the room into. You have a control that publishes a number, and a set of worlds that were each built at one value of it and cannot hear. That is a fairly exact picture of the situation the chapter is describing: the parameter is real, the consistency of each setting is real, and the passage between them is the thing nobody has built.</p>
+<h2>The one that listens to itself</h2>
+<!-- @triangle_curvature_workbench -->
+
+<pre><code class="language-gdscript"># triangle_curvature_workbench.gd:7
+# critical_parameter: K — discrete in {-2, -1, -0.5, 0, +0.5, +1, +2}. Drives surface
+#   choice, edge geodesic type, angle measurement, and the excess/deficit readout
+</code></pre>
+<p>At the far corner, one bench does work. It carries its own slider — seven detents rather than a continuum — and when you turn it the surface underneath the triangle changes, the edges are rebuilt as geodesics <em>on that surface</em>, and the angle sum is measured and printed.</p>
+<p>Measured. This is the payoff for the room you just left, where the angle sum was a hard-coded string reading <code>"60° + 60° + 60° = 180°"</code>. Here the number comes out of the geometry, and at K = 0 it lands on 180 not because anyone typed it but because that is what the flat case computes to. The same claim, arrived at two different ways, one room apart — and only one of them could ever have come out differently.</p>
+<p>What it is showing you is the Gauss–Bonnet theorem: the amount by which a triangle's angles overshoot or fall short of 180° is exactly the curvature enclosed. Angle sum is not a fact about triangles. It is a measurement of the space the triangle is lying in, which is what the artifact's own header says: <em>the triangle doesn't know it's "in 3D"; it only knows its host</em>.</p>
+<h2>Both neighbours of zero</h2>
+<!-- @hyperbolic_surface -->
+
+<pre><code class="language-gdscript"># hyperbolic_surface.gd:9
+# essence: y = K(x² - z²) — saddle surface with negative Gaussian curvature K &lt; 0
+</code></pre>
+<p>The saddle. Space curving outward, so that two geodesics starting parallel drift apart, and a triangle's angles fall short. Its header says something quietly good: <em>"straight" on a saddle looks curved from outside</em>. Straightness is not a property of the line. It is a relationship between the line and the surface it is confined to, and there is no outside vantage from which the surface is wrong.</p>
+<!-- @elliptic_surface -->
+
+<pre><code class="language-gdscript"># elliptic_surface.gd:13
+# emerges: the realization that on a positively curved surface there are NO parallel lines at all
+</code></pre>
+<p>The dome, and the opposite. Geodesics that begin parallel converge and cross, and the angle sum overshoots. On a sphere, the fifth postulate is not merely false — the thing it asserts cannot happen at all, because every pair of great circles meets. Twice.</p>
+<p>Stand between the two and the point of the chapter is available without argument. These are not deformations of a correct space. Each is internally consistent, each has been formalised, each has physical realisations, and neither can be reached from the other by fixing an error. Flatness is the one in the middle. That is a fact about the number line, not about the world.</p>
+<h2>The finite that holds the infinite</h2>
+<!-- @riemann_sphere -->
+
+<pre><code class="language-gdscript"># riemann_sphere.gd:10
+# desire: see the infinite complex plane folded onto a finite sphere — the north pole IS infinity
+</code></pre>
+<p>Two objects here do the same trick from different directions and it is worth catching. The Poincaré disk compresses an entire infinite hyperbolic plane inside a finite circle: geodesics are arcs meeting the rim at right angles, and the rim is not an edge, it is infinity, which is why the tiles crowd and never arrive. The Riemann sphere does the mirror of it — the whole complex plane wrapped onto a ball by stereographic projection, with infinity as a single point you can walk around and look at from behind.</p>
+<p>Both are saying that "infinite" and "unbounded" are not the same word, and that where you put the boundary is a modelling decision rather than a discovery. Which is the same sentence as the slider, one level up.</p>
+<h2>What the dial cannot decide</h2>
+<p>Geometry was chosen, not found. That is settled by the time you leave this room, and it is settled without anyone having to be wrong.</p>
+<p>But notice the shape of what just happened, because the next room breaks it. Every question here was answered by picking a value: what is the angle sum, do parallels meet, is the space finite — each one becomes answerable the moment K is fixed. The crisis so far is only that <em>we</em> pick K, and nothing outside picks it for us.</p>
+<p>The next question does not have that form. It is not about which setting to choose. It is what happens to a rule that includes itself in the range of things it applies to — and there is no value of any parameter that makes that come out.</p>
+<p>Flatness is a special case. The ground itself is a variable.</p></details><h2>One dial, two witnesses</h2><p>The primary pair carries the lesson at two scales. The triangle workbench computes angle sums from the host curvature; the Riemann sphere folds the infinite plane onto a finite body. Around them, the slider, bowl, dome, and Poincaré disk keep the alternatives visible.</p><p>The hall starts the Foundations Crisis with abundance rather than contradiction. Geometry is not corrected from outside; it is selected, inhabited, and measured. Next comes <strong>Russell_Paradox</strong>, where a rule turns back on the set that contains it.</p><p>6/6 static checks passed. <a href="foundations-non-euclidean-verification.json">Verification record</a></p></main></html>

@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_Metaballs · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_Metaballs">← Tutorial lineage</a></p><h1>ISO Metaballs</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_Metaballs/final.md">Raw captured source</a></p><pre># A neck between sources
+
+&lt;!-- @metaball_world --&gt;
+
+Can two sources make one body before their centres meet? Walk the primary field and look for the narrow neck between rounded regions. The surface does not mark ownership: it is the place where a sum crosses a threshold.
+
+At the desk, press EMPLACE. The same ten sources move from a column to a ring, a pair, a shell and a scatter. Then press KERNEL. The contribution of each source changes from inverse square to Wyvill, Gaussian or cone. Keep the source count fixed while you change the arrangement; keep the arrangement fixed while you change the falloff. That separation is the lesson.
+
+```gdscript
+# metaballgenerator.gd
+total_field += mb_sr2[m] / dist_sq
+if cv0 &gt; iso_level: cube_index |= 1
+```
+
+Each source adds its strength times its radius squared over the square of the distance, and each corner above the level sets one bit of the case.
+
+Press HOLD before making a change. The earlier boundary stays behind the live field, so a neck can be read as a relation rather than a special object. When a bridge pinches off, nothing has been cut from a mesh. A different set of samples simply crosses the same threshold in a different place.
+
+&lt;!-- @raymarched_metaballs --&gt;
+
+The raymarched specimen nearby makes a related surface by another route: signed distance functions are blended while a ray advances. Its smoothness is not evidence that it shares the same field. Look for what the extracted field can show that a ray step keeps implicit, and what the ray can make continuous without storing triangles.
+
+&lt;!-- @nakama_metaballs --&gt;
+
+Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field’s value, so the body can breathe but no neck can ever pinch off. That is the comparison, and it is not a third control on the desk.
+
+&lt;!-- @metaballs --&gt;
+
+At the back the same raymarched body stands again at full size, twelve metres of it. It is not a sum: the threshold that ends it is where the ray stops. What the small copy nearby let you walk round, this one lets you stand under.
+
+&lt;!-- @ --&gt;
+
+A metaball has no outline to defend. It is a negotiation among sources, kernel, sampling grid and threshold. The next hall asks whether we need to store a boundary as triangles before we can see it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_Metaballs/tutorial.md">Raw captured source</a></p><pre># Influence, summed
+
+A metaball is a source, not a small solid. At every sample position the generator adds the source contributions, then extracts the surface at one threshold.
+
+```gdscript
+var total := 0.0
+for source in sources:
+    total += kernel(source, p)
+return total - iso_level
+```
+
+Start with EMPLACE. The count remains ten while the same sources are arranged as column, ring, pair, shell or scatter. This is a change in provenance: where the contributors stand. KERNEL changes the falloff while the positions remain fixed. Compare the neck, the isolated lobes and the points where a bridge disappears.
+
+HOLD keeps a copy of the earlier mesh. RULE opens the short statement that the visible surface is a threshold event, not a census of objects. The raymarched and Nakama specimens keep alternative implementations in view without collapsing them into one answer.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_Metaballs/technical.md">Raw captured source</a></p><pre># ISO_Metaballs technical
+
+The map preserves the original 18 × 17 structure at offset (6, 7) inside a longer 30 × 32 museum room. `metaball_world` is the single book-primary field; `raymarched_metaballs`, `nakama_metaballs` and `metaballs` remain secondary comparisons. `iso_metaball_console` is a decoration and forwards no field state of its own.
+
+The console binds the `MetaballGenerator` child of `metaball_world`. EMPLACE cycles the exported `emplacement` enum; KERNEL cycles `kernel`; both call the generator&#x27;s guarded `apply_grid_config`. HOLD duplicates the current ArrayMesh as a visible earlier boundary. RESET returns the shipped column/inverse-square pair. Controls use the project&#x27;s pointer-aware push buttons and forgiving touch volumes.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_Metaballs/critical.md">Raw captured source</a></p><pre># The body after the boundary
+
+A merged metaball surface looks organic, but the appearance does not tell us which source owns a patch of skin. The field erases that division by summing before extraction. This is useful and restrictive: it permits a neck without a seam, while hiding provenance inside the result.
+
+The desk separates arrangement from kernel so the smooth body cannot be mistaken for a natural body. A shell and a scatter can share a silhouette under one falloff and separate under another. The threshold is a decision that appears as geometry. It makes a body possible, and it withholds the reasons from the surface that body sees.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_Metaballs/artifacts.md">Raw captured source</a></p><pre># ISO_Metaballs artifacts
+
+- **metaball_world** — primary summed field and book anchor.
+- **raymarched_metaballs** — secondary distance-field comparison.
+- **nakama_metaballs** — secondary alternate implementation.
+- **metaballs** — secondary compact specimen.
+- **iso_metaball_console** — source arrangement and kernel controls.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_Metaballs/summary.md">Raw captured source</a></p><pre># ISO_Metaballs - Summary
+
+Prototype layout for `isosurfaces`.
+Document spatial logic, core interaction loop, and sequence connection here.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_Metaballs/blurb.md">Raw captured source</a></p><pre>Each metaball is a point radiating influence. A distance field — strongest at center, fading outward. One sphere alone is trivial. But place two near each other and their fields sum. Where combined density crosses the threshold, a surface appears. Not two objects touching. One object, born from proximity.
+
+The marching algorithm traces this threshold — finds the skin where inside becomes outside. Move the sources closer: the surface bulges, stretches, merges. Pull them apart: it pinches, thins, splits. No mesh editing. No vertex welding. The geometry is a consequence of relationship.
+
+Metaballs are the implicit surface at its most liquid. Form without skeleton. Identity without boundary. Two fields overlapping don&#x27;t collide — they become one body, then separate again, unchanged. Merging is not loss. It&#x27;s the native state.
+
+---
+
+Two methods. Same phenomenon. Sixty CPU-driven blobs approximate organic form through sphere deformation — Kouhei Nakama&#x27;s approach, where geometry chases the field. Nine shader-driven balls bypass geometry entirely — SDF raymarching renders the implicit surface directly on the GPU, never extracting a mesh at all.
+
+Metaballs are isosurfaces of summed radial functions. Where influence overlaps, surfaces merge. Separation and fusion governed by a single threshold. The math doesn&#x27;t distinguish between one blob and two — only whether the field exceeds the boundary.
+
+One method builds triangles to describe the surface. The other evaluates the field per pixel and stops when it hits the edge. Both find the same thing: the contour where inside becomes outside. The surface was always there. The question is whether you extract it or just look until you see it.
+</pre></section></body></html>

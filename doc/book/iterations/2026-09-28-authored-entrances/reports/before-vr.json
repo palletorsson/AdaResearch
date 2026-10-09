@@ -1,0 +1,147 @@
+{
+  "events": [
+    {
+      "halls": 0,
+      "ms": 6329,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 9264,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 9321,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 9850,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 9868,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 9894,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 9894,
+      "phase": "architecture"
+    },
+    {
+      "ms": 312,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 10213,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 10490,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 11562,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 11597,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 11617,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 12122,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 12156,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 12169,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 12169,
+      "phase": "architecture"
+    },
+    {
+      "ms": 235,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 12412,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 12430,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 12940,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 12969,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 12983,
+      "phase": "idle"
+    }
+  ],
+  "failures": [
+    "Rig bounds checker does not reset museum arrival"
+  ],
+  "landing_checks": [
+    {
+      "pad": "(14.5, 0.05, 2.65)",
+      "settled_feet": "(14.49998, 0.0, 2.75)",
+      "slabs": 2,
+      "stage": "Direct launch"
+    },
+    {
+      "pad": "(10.5, 0.05, 43.65)",
+      "settled_feet": "(10.5, 0.0, 43.75)",
+      "slabs": 2,
+      "stage": "Forward arrival"
+    },
+    {
+      "pad": "(13.5, 0.05, 33.35)",
+      "settled_feet": "(13.49998, 0.0, 33.45)",
+      "slabs": 2,
+      "stage": "Return arrival"
+    }
+  ],
+  "next": "Point_Trace",
+  "observed_bounds_reset": true,
+  "passed": false,
+  "peak_resident_halls": 1,
+  "room": "Point_Lines",
+  "vr_simulated": true,
+  "xr_physics_body": true
+}

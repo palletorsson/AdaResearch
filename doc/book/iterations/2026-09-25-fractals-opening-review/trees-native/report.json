@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "three differently constructed trees placed",
+      "passed": true
+    },
+    {
+      "name": "growth begins with one stationary trunk",
+      "passed": true
+    },
+    {
+      "name": "four binary generations have 31 segments",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-descendants",
+      "passed": true
+    },
+    {
+      "name": "opening angle changes placement without adding segments",
+      "passed": true
+    },
+    {
+      "name": "third child raises count to 121",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: three-descendants",
+      "passed": true
+    },
+    {
+      "name": "tree branches have no physical support",
+      "passed": true
+    },
+    {
+      "name": "red tree strata is a view of its fixed seed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: red-tree-strata",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: grammar-tree",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "grammar_source": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.gd"
+  },
+  "passed": true,
+  "room": "Fractal_RecursiveTrees",
+  "scope": "Native museum and supplied existing button signals; interior camera. No headset, controller reach, Quest performance or learner acceptance."
+}

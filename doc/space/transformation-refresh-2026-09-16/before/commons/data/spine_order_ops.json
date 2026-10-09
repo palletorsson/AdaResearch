@@ -1,0 +1,12 @@
+{
+ "schema": "spine_order_ops/1",
+ "_readme": "THE NECKLACE'S HAND - ordered edits replayed ON TOP OF the generated spine order (commons/data/spine_artifact_order.json), never a copy of it. The generated order is rewritten from 261 maps whenever any interactables layer changes, so a snapshot would freeze the walk at the artifacts that existed the day it was saved. Ops are replayed in file order by `python tools/necklace_order.py --apply`, which re-reads the generated order every run and derives commons/data/spine_order_effective.json (read by the Godot necklace scene) and commons/data/spine_artifact_order_hand.json (read FIRST by endless_museum.gd:2324). Delete the ops, re-apply, and the generated order returns. Positions are anchor-relative - `after`/`before` name a lookup, `first_in`/`last_in` name a sequence - never an index, because an index re-targets in silence when the order regenerates.",
+ "_meta": {
+  "generated": "2026-08-27 00:15:26",
+  "generator": "tools/necklace_order.py",
+  "base_generated": "2026-08-24 15:32:05",
+  "ops_revision": 0,
+  "ops": 0
+ },
+ "ops": []
+}

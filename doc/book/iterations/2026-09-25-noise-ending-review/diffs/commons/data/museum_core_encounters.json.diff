@@ -1,0 +1,28 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -8,10 +8,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "noise",
+     "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+-    "text_sha256": "81cc4b5833a214b824027b2b98739e6d37d6df3116e01ea3bbf87201af415310",
++    "text_sha256": "7ce7a016fd13b1125829e36ffe3482a879fd8ce80b5be6ebd642cd320bbccccd",
+     "map_sha256": "8deab0d6e8907b0ac25d9d968cb38dbe93f61b2b01086eb5e3f530fec4e0d894",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-noise-archways/index.html",
++    "local_review": "doc/book/iterations/2026-09-25-noise-ending-review/DECISIONS.md",
+     "verification_scope": "Native authored museum: 44 checks and nine real mouse-ray clicks; paired arches sample existing generators, use vertex displacement with matching collision, preserve fields through VIEW, follow SAMPLE/MATCH/REGEN/FREQ and hold occupied geometry. Supplied CharacterBody walks through both; wall rays hit from inside. Native GPU/CPU reference mean RGB difference 0.000011514. No tracked headset, comfort, learner or Quest acceptance."
+   },
+   "Lab_Path": {
+@@ -22,9 +22,9 @@
+     "status": "source_checked_draft",
+     "sequence": "noise",
+     "text_path": "commons/maps/Lab_Path/final.md",
+-    "text_sha256": "f566363c70e8f4bdadb93630784b462da8751cdaa7cdd8127d3b9187a2b8ee6e",
+-    "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
++    "text_sha256": "29ff7776d6c0d5e96ac673f8503a774e7122d17bacbbce2faaa1fd065d1416e3",
++    "map_sha256": "6a4416ae1d01c33b84024b8d63bf06c8e262d034f796013751d10266f8a84b11",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Lab_Path/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-noise-ending-review/DECISIONS.md"
+   }
+ }

@@ -1,0 +1,132 @@
+{
+ "chapter": "boolean_surfaces",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "boolean verbs",
+   "map": "Boolean_Verbs",
+   "lines": [
+    {
+     "token": "csg_union_demo",
+     "text": "Union is the generous operator. It keeps everything either shape claims",
+     "by": "draft",
+     "note": "union depends on a yes/no crossing test with no middle: at one float the solids are two, at the next they are one — and the seam it advertises as dissolved is the curve it had to compute first.",
+     "note_src": {
+      "file": "algorithms/boolean_surfaces/csg_union_demo.gd",
+      "quote": "CSG union has no k: it fuses absolutely"
+     }
+    },
+    {
+     "token": "csg_intersection_demo",
+     "text": "Intersection is the shape of consensus. What both shapes agree on is always less than either …",
+     "by": "draft",
+     "note": "intersection depends on an interior the renderer never draws, and it is the one operator whose lawful answer can be nothing: two solids that miss return the empty solid, indistinguishable from a build that failed.",
+     "note_src": {
+      "file": "commons/maps/Boolean_Intersection/tutorial.md",
+      "quote": "the boundary was just the only part that ever got rendered"
+     }
+    },
+    {
+     "token": "csg_difference_demo",
+     "text": "To make a room, subtract a void from a solid. Architecture is difference",
+     "by": "draft",
+     "note": "difference depends on a face neither solid brought: the cavity wall is B inverted, and it can only be dressed in A's outer skin — a boundary model stores no interior, so the carved inside is the outside, relabelled.",
+     "note_src": {
+      "file": "commons/maps/Boolean_Difference/tutorial.md",
+      "quote": "That wall belongs to neither input; it is B's shape, inverted, wearing A's material."
+     }
+    },
+    {
+     "token": "the_argument_of_solids"
+    }
+   ],
+   "hero": "the_argument_of_solids"
+  },
+  {
+   "pearl": "boolean gallery",
+   "map": "Boolean_Gallery",
+   "lines": [
+    {
+     "token": "csg_difference_demo"
+    },
+    {
+     "token": "csg_union_demo"
+    },
+    {
+     "token": "csg_intersection_demo"
+    },
+    {
+     "token": "subtraction_suite"
+    },
+    {
+     "token": "coincident_face"
+    },
+    {
+     "token": "removal_room"
+    }
+   ],
+   "hero": "csg_difference_demo"
+  },
+  {
+   "pearl": "boolean works",
+   "map": "Boolean_Works",
+   "lines": [
+    {
+     "token": "csg_compose_workbench",
+     "text": "Three operators, one algebra. Composition is a choice",
+     "by": "draft",
+     "note": "the bench calls three operators an algebra, but the three are an enum on a Godot property: the set is what the engine exposes, not what the algebra holds — no complement, no XOR, closure bought by leaving them out.",
+     "note_src": {
+      "file": "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+      "quote": "The set as tooling defines it."
+     }
+    },
+    {
+     "token": "subtraction_suite"
+    },
+    {
+     "token": "sphere_splitting_showcase"
+    },
+    {
+     "token": "recursive_boolean_cube"
+    },
+    {
+     "token": "csg_architecture_cavity"
+    },
+    {
+     "token": "sdf_cavern_room"
+    },
+    {
+     "token": "booleanvariations"
+    },
+    {
+     "token": "coincident_face"
+    }
+   ],
+   "hero": "csg_compose_workbench"
+  },
+  {
+   "pearl": "boolean",
+   "map": "Chamber_Boolean",
+   "lines": [],
+   "drop": true,
+   "edge": "the chamber's verb is to compose, and composition needs an order the finished solid cannot keep: the block handed back has no memory of which verb came first, so the room depends on you remembering.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Boolean/blurb.md",
+    "quote": "the order of your verbs matters the way it does in arithmetic"
+   }
+  },
+  {
+   "pearl": "boolean architecture cavity",
+   "map": "Boolean_Architecture_Cavity",
+   "lines": [],
+   "drop": true,
+   "edge": "the map claims a room is a wall subtracted from, but one difference makes a hole, not an inside: an interior needs three more runs of solid the map never places — the payoff is read from outside.",
+   "edge_src": {
+    "file": "algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+    "quote": "never delivers the truth line: a wall has no interior."
+   }
+  }
+ ]
+}

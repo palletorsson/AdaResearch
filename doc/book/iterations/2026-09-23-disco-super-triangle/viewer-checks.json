@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "play starts",
+      "passed": true
+    },
+    {
+      "name": "play advances a native frame",
+      "passed": true
+    },
+    {
+      "name": "pause stops",
+      "passed": true
+    },
+    {
+      "name": "scrub selects family and pauses",
+      "passed": true
+    },
+    {
+      "name": "next pose skips to the next exact pose",
+      "passed": true
+    },
+    {
+      "name": "last frame loops",
+      "passed": true
+    },
+    {
+      "name": "hidden tab pauses",
+      "passed": true
+    }
+  ],
+  "scope": "DOM event harness; not a browser rendering or click-session test."
+}

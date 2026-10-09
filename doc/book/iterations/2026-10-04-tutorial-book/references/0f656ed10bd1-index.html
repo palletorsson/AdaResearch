@@ -1,0 +1,168 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A pose left — after Lygia Clark / Ada</title><style>
+:root{--bg:#f4f0e9;--ink:#252723;--muted:#5d615b;--line:#ccc6bb;--rose:#ae3457}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:45px 30px 90px}
+a{color:inherit;text-underline-offset:4px}a:hover{color:var(--rose)}header{max-width:880px;margin:30px 0 50px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700}h1{font-size:clamp(52px,7.5vw,96px);letter-spacing:-.065em;line-height:1;margin:25px 0}h2{font-size:32px;letter-spacing:-.04em;line-height:1.2}h3{font-size:22px;line-height:1.3}.lead{font-size:24px;line-height:1.5;max-width:750px}
+nav,.actions{display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}nav a,.actions a{font-size:14px;padding:8px 14px;border:1px solid var(--line);text-decoration:none}.primary{background:var(--ink);color:var(--bg)}section{margin-top:64px;border-top:1px solid var(--line);padding-top:32px;scroll-margin-top:25px}.prose{max-width:750px}.reading{font:23px/1.75 Georgia,serif}.reading h1{font-size:42px;letter-spacing:-.035em}.reading .footnote{font:14px/1.6 system-ui,sans-serif;margin-top:40px}.small,figcaption{color:var(--muted);font-size:14px}.note{border-left:3px solid var(--rose);padding:3px 0 3px 20px;max-width:800px}.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{border:1px solid var(--line);padding:24px}.card h3{margin-top:0}
+figure{margin:20px 0}figure img{display:block;width:100%;height:auto}figcaption{padding-top:12px;max-width:850px}.switch{margin-top:22px}.switch input{position:absolute;width:1px;height:1px;clip-path:inset(50%)}.switch .options{display:flex;gap:8px;flex-wrap:wrap}.options label{padding:9px 15px;border:1px solid var(--line);cursor:pointer;font-size:14px}.switch figure{display:none}.switch input:focus-visible~.options{outline:2px solid var(--rose)}
+#pose-start:checked~.options label[for=pose-start],#pose-left:checked~.options label[for=pose-left],#pose-return:checked~.options label[for=pose-return],#path-a:checked~.options label[for=path-a],#path-b:checked~.options label[for=path-b]{background:var(--ink);color:var(--bg)}
+#pose-start:checked~.start,#pose-left:checked~.left,#pose-return:checked~.returned,#path-a:checked~.path-a,#path-b:checked~.path-b{display:block}
+pre{background:#e8e2d7;padding:22px;white-space:pre-wrap;font:14px/1.65 Consolas,monospace;overflow-wrap:anywhere}code{font-size:.87em}table{border-collapse:collapse;font-size:14px}th,td{border-bottom:1px solid var(--line);padding:12px;text-align:left;vertical-align:top}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;font-weight:600}.making h1,.research h1,.lineage h1{font-size:38px;letter-spacing:-.04em;line-height:1.15}.making h2,.research h2{font-size:25px;margin-top:34px}.research{max-width:800px}.wide-scroll{overflow-x:auto}
+@media(max-width:760px){main{padding:25px 18px 70px}.cols{grid-template-columns:1fr}.reading{font-size:20px}.lead{font-size:21px}pre{font-size:12px}}
+</style><body><main><header><p class="eyebrow">Ada / one work, followed / 1 October 2026</p><h1>A pose left.</h1><p class="lead">A hinge makes room for a change. A release rule decides whether it may remain.</p><p>A working study after Lygia Clark’s <em>Bichos</em>, starting with the existing hinged-plate artifact and following what its code actually permits.</p><nav><a href="#room">The study</a><a href="#reading">Read</a><a href="#paths">Same pose, another path</a><a href="#making">Make</a><a href="#research">Research notebook</a></nav></header><figure class=""><a href="arrival.png"><img src="arrival.png" alt="Actual Godot capture of our original six-plate study. The rose plate is selected. The support and starting configuration are authored choices." loading="lazy"></a><figcaption>Actual Godot capture of our original six-plate study. The rose plate is selected. The support and starting configuration are authored choices.</figcaption></figure><div class="actions"><a class="primary" href="hinge-and-return.zip">Download the Godot study</a><a href="score.gd">The editable score</a><a href="results.json">29 native checks</a></div><p class="small">Desktop companion, Godot 4.6. A prepared viewer and specimen are supplied. The main museum has not been rearranged.</p><section id="room"><h2>One object. Two release rules.</h2><div class="prose"><p>Turn the selected plate and let go. With <b>Leave it</b>, its angle remains. With <b>Return it</b>, the same object moves back to the starting angles. The difference is a policy we can locate in the code.</p><p>These are three recorded states from the same camera. Use the Godot kit for live manipulation.</p></div><div class="switch"><input type="radio" name="pose" id="pose-start" checked><input type="radio" name="pose" id="pose-left"><input type="radio" name="pose" id="pose-return"><div class="options"><label for="pose-start">On arrival</label><label for="pose-left">Left by the visitor</label><label for="pose-return">Returned by the rule</label></div><figure class="start"><a href="arrival.png"><img src="arrival.png" alt="The chosen starting angles. The initial-pose search selects a configuration; it is not a privileged shape of Clark’s work." loading="lazy"></a><figcaption>The chosen starting angles. The initial-pose search selects a configuration; it is not a privileged shape of Clark’s work.</figcaption></figure><figure class="left"><a href="left.png"><img src="left.png" alt="Joint one has moved to 50°. Its descendants travel with it. The other local joint angles remain unchanged." loading="lazy"></a><figcaption>Joint one has moved to 50°. Its descendants travel with it. The other local joint angles remain unchanged.</figcaption></figure><figure class="returned"><a href="returned.png"><img src="returned.png" alt="The imposed return restores the same angle vector. Our test confirms all six plate transforms return to their starting values." loading="lazy"></a><figcaption>The imposed return restores the same angle vector. Our test confirms all six plate transforms return to their starting values.</figcaption></figure></div><div class="note"><b>The distinction matters.</b> These are kinematic plates. Their stored angles remain without a gravity or friction calculation. The fixed base cannot be lifted, and editing a hinge does not reject intersections.</div></section><section id="reading"><p class="eyebrow">Draft encounter / read without the code</p><div class="reading prose"><h1>A pose left</h1>
+<p>Turn the rose-coloured plate. Three others travel with it. A fifth stays beside the support. The joint gives your movement a place to begin and a limit at which to stop.</p>
+<p>Let go. The plates remain where you left them. From this side they shelter a small pocket of air. Look from the other side and the pocket opens. There was more room in the shape than its first outline allowed you to see.</p>
+<p>Lygia Clark made metal planes available to the hand through hinges. In her <em>Bichos</em>, handling becomes part of the work.<sup id="fnref:clark"><a class="footnote-ref" href="#fn:clark">1</a></sup> Here, five stored angles hold a configuration. Someone has chosen the joints, their limits and the starting pose. Your movement enters that arrangement and leaves it changed.</p>
+<p>Choose <strong>Return it</strong>. Turn the plate again and release it. The object slowly restores its starting angles. What looked like an invitation now has an expiry: you may change the shape while you hold it. Afterward, the room takes the change back.</p>
+<p>Choose <strong>Leave it</strong>. There is no completed silhouette to recover. There are still limits. The fixed support cannot be lifted, and every hinge has its stops. An unfinished form can be made from quite definite decisions.</p>
+<p>Follow one corner as you turn a parent joint and then its child. Start again, reverse the order, and give both joints the same final angles. The plates meet the same pose. The corner has drawn another path through the air.</p>
+<p>The shape keeps where you left it. The line keeps something of how you arrived.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:clark">
+<p>The reference is Clark’s <em>Bichos</em> series, with <em>Bicho desfolhado</em> (1960; the museum’s example produced in 1973) as a documented anchor. <a href="https://www.museoreinasofia.es/en/collections/artwork/bicho-desfolhado-husked-creature/">Museo Reina Sofía</a> identifies aluminium sheet and hinges and describes the participant’s interaction. Our six rectangular plates, fixed support, pink selection and release comparison are a new study. They do not reconstruct that work’s plate geometry, weight or handling.&#160;<a class="footnote-backref" href="#fnref:clark" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div></section><section id="paths"><h2>The shape forgets a path.</h2><div class="prose"><p>The old artifact description claimed that reversing the order of two joint adjustments must give a different final shape. The native test contradicted it. For this hierarchy, identical final local angles produce identical final plate transforms.</p><p>The corner trace reveals what the final pose leaves out. Joint 1 then joint 2, and joint 2 then joint 1, take different paths through the room. Both end at the same angles: 50° and 30°. Other joints keep their starting values.</p></div><div class="switch"><input type="radio" name="path" id="path-a" checked><input type="radio" name="path" id="path-b"><div class="options"><label for="path-a">Parent, then child</label><label for="path-b">Child, then parent</label></div><figure class="path-a"><a href="parent-then-child.png"><img src="parent-then-child.png" alt="Joint 1, then joint 2. The rose line records successive world positions of the same corner. Camera, final angles and selected plate are held fixed." loading="lazy"></a><figcaption>Joint 1, then joint 2. The rose line records successive world positions of the same corner. Camera, final angles and selected plate are held fixed.</figcaption></figure><figure class="path-b"><a href="child-then-parent.png"><img src="child-then-parent.png" alt="Joint 2, then joint 1. A different path reaches the same corner position and plate configuration." loading="lazy"></a><figcaption>Joint 2, then joint 1. A different path reaches the same corner position and plate configuration.</figcaption></figure></div><p class="note">This brings <b>Point Trace</b> back into <b>Rotation</b>. A record of movement can distinguish experiences whose final shapes are identical.</p></section><section id="making"><p class="eyebrow">Making / a different reading mode</p><div class="making prose"><h1>What happens after you let go?</h1>
+<p>This study comes after <strong>Rotation</strong>. It uses the retained values and <code>_process(delta)</code> introduced in Point Zero, local frames from Coordinates, and a turn about an axis. The optional corner record returns to Point Trace. Day Zero supplies a project you can open and run.</p>
+<p>The room, plates, hinges, mouse input and camera are supplied. The code you change is <a href="score.gd">score.gd</a>. It is the actual policy used by the study, separated from the fabrication and viewer.</p>
+<h2>First, keep a change</h2>
+<p>Open <code>project.godot</code> and run the supplied scene. Select a joint, move its slider, and let go. You can also drag a plate directly. The rose colour identifies the selected plate. Other plates can move because they are descendants of its joint.</p>
+<p>The score gives an angle to the existing artifact:</p>
+<pre><code class="language-gdscript">specimen.set_hinge(joint, degrees)
+</code></pre>
+<p>The artifact clamps that angle to the joint’s limits and writes its rotation. No instruction returns it afterward. Remaining still here is a retained value; the program has not calculated the friction needed to hold real metal up.</p>
+<h2>Then, decide what release means</h2>
+<p>These lines in the learner score determine what follows a release:</p>
+<pre><code class="language-gdscript">var return_on_release := false
+
+func release() -&gt; void:
+    returning = return_on_release
+</code></pre>
+<p>The buttons choose this policy without replacing the shape. <strong>Return it</strong> sets the policy; the next release starts the return. <strong>Leave it</strong> cancels any return and keeps the current pose. Change <code>degrees_per_second</code> from <code>45.0</code> to <code>15.0</code>, run again, choose Return it and repeat the same movement. The target stays the same; the time allowed for your intervention changes.</p>
+<p>The return uses this line for each joint:</p>
+<pre><code class="language-gdscript">var next := move_toward(float(current[joint]), float(starting_pose[joint]), degrees_per_second * delta)
+</code></pre>
+<p><code>current</code> and <code>starting_pose</code> are arrays of angles in degrees. Their indices refer to the same five joints. <code>delta</code> converts the chosen angular speed into this frame’s step. <code>move_toward</code> stops at the target rather than overshooting it. The rest of <code>advance()</code> applies those values and stops once they all arrive. Read the complete executable <a href="score.gd">score</a> after making the comparison.</p>
+<p>The stored starting pose is a reference selected by us. There is no mathematical requirement for the object to return to it.</p>
+<h2>Carry the trace into a new problem</h2>
+<p>With Leave it selected, enable <strong>Follow one corner</strong>. The marker belongs to the far corner of plate 5. Keep the camera still.</p>
+<ol>
+<li>Start again. Set joint 1 to 50 degrees, then joint 2 to 30 degrees.</li>
+<li>Keep a screenshot or note of the corner’s path.</li>
+<li>Start again. Set joint 2 to 30 degrees, then joint 1 to 50 degrees.</li>
+</ol>
+<p>The final local angles are identical. So is the final pose. The intermediate positions and their traces differ. This is not the earlier experiment of applying world-X and world-Y rotations in opposite orders to the same rigid body. Here you assign values to two different joints in a fixed hierarchy.</p>
+<p><strong>A first work:</strong> keep this joint tree and give it your own starting pose, reachable-angle choices and release rule. Make two versions with identical geometry and ask someone to describe what each allows their action to leave behind. Show their actions before explaining your rule.</p>
+<h2>What remains supplied</h2>
+<p>The production specimen builds the meshes and their parent-child transforms. Its local hinges can be inspected later; you do not need to reproduce its material library, initial-pose search, thick XR pickup volumes or caption system for this exercise. The desktop kit intentionally runs without the XR addon.</p>
+<p>The model does not solve gravity, plate-to-plate contact or contact with the plinth while a hinge is moved. The initial pose is checked by sampling; a later edit can still pass through another surface. Studying those physical constraints is a later Form Finding task. A typed angle and a valid transform do not, by themselves, make a physically possible object.</p><details><summary>The full editable score — used by this study</summary><pre><code>extends RefCounted
+## The editable lesson. Plate fabrication, camera and input are supplied.
+var specimen
+var starting_pose: Array = []
+var return_on_release := false
+var returning := false
+var degrees_per_second := 45.0
+
+func setup(body) -&gt; void:
+	specimen = body
+	starting_pose = specimen.hinge_angles()
+
+func turn(joint: int, degrees: float) -&gt; void:
+	returning = false
+	specimen.set_hinge(joint, degrees)
+
+func release() -&gt; void:
+	returning = return_on_release
+
+func advance(delta: float) -&gt; void:
+	if not returning:
+		return
+	var current: Array = specimen.hinge_angles()
+	var complete := true
+	for joint in current.size():
+		var next := move_toward(float(current[joint]), float(starting_pose[joint]), degrees_per_second * delta)
+		specimen.set_hinge(joint, next)
+		complete = complete and is_equal_approx(next, float(starting_pose[joint]))
+	returning = not complete
+
+func reset() -&gt; void:
+	returning = false
+	for joint in starting_pose.size():
+		specimen.set_hinge(joint, float(starting_pose[joint]))
+</code></pre></details></div><figure class=""><a href="controls.png"><img src="controls.png" alt="The working desktop controls. Move a plate directly or choose a joint and slider; release applies the chosen policy." loading="lazy"></a><figcaption>The working desktop controls. Move a plate directly or choose a joint and slider; release applies the chosen policy.</figcaption></figure></section><section id="lineage"><div class="lineage"><h1>Where the hinge belongs</h1>
+<p><strong>Proposed first encounter: a focused return just after Trans_Rotation.</strong> One small study bay is enough. The current Rotation hall already contains several large comparisons; do not add this in a passage merely because the registry says transformation. The study is presently a standalone companion, not an installed map.</p>
+<table>
+<thead>
+<tr>
+<th>Earlier capacity</th>
+<th>What returns here</th>
+<th>What is new</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point Zero: retained state and repeated updates</td>
+<td>Five angles persist; <code>_process(delta)</code> can update them</td>
+<td>An update can undo an intervention</td>
+</tr>
+<tr>
+<td>Coordinates: local and world frames</td>
+<td>A child joint is located relative to its parent</td>
+<td>The same local angle can travel in world space</td>
+</tr>
+<tr>
+<td>Line and face</td>
+<td>Edges relate neighbouring plates</td>
+<td>An edge becomes an axis of permitted movement</td>
+</tr>
+<tr>
+<td>Trace</td>
+<td>Retain a corner’s successive positions</td>
+<td>Equal final poses can have different histories</td>
+</tr>
+<tr>
+<td>Rotation</td>
+<td>Turn about a specified axis</td>
+<td>Turning one part carries a branch while another stays still</td>
+</tr>
+<tr>
+<td>Later: Form Finding</td>
+<td>Revisit support, constraint and contact</td>
+<td>Release the fixed root; investigate a physical assembly</td>
+</tr>
+</tbody>
+</table>
+<p>The first making task borrows the assembled object. It requires <code>loop</code>, <code>coordinates</code> and <code>rotation</code>; <code>trace</code> enables the optional path comparison. It changes a release policy and its rate, rather than teaching the entire recursive fabrication code. Rebuilding constraints and contacts remains a later task. The artist-capacity atlas’s broader hinge profile deliberately includes that later construction work.</p>
+<p>The short encounter, the tutorial and the hall have different roles. The encounter stays with what an action leaves behind. The tutorial lets the student author a release rule. The room offers enough space to inspect the plates from another side. None needs a row of additional sculptures to explain the same point.</p>
+<p>No active sequence, map token, prerequisite node or <code>final.md</code> was changed in this study.</p></div></section><section id="research"><p class="eyebrow">Research notebook / source, code, observation, revision</p><div class="research"><h1>Following Clark into the code</h1>
+<h2>A work, not an artist-shaped category</h2>
+<p>The documented anchor is Lygia Clark’s <strong>Bicho desfolhado (Husked Creature)</strong>, dated 1960, with the Reina Sofía example produced in 1973. Its recorded materials are aluminium sheet and hinges. The museum connects its organic character to the participant’s interaction, rather than resemblance to an animal. <a href="https://www.museoreinasofia.es/en/collections/artwork/bicho-desfolhado-husked-creature/">Collection record</a>.</p>
+<p>MoMA’s discussion of the <em>Bichos</em> emphasises instability, manipulability and the absence of an ideal shape or privileged front and back. These conditions matter when translating the work into an interface: a fixed root and a reset command are substantial additions. <a href="https://www.moma.org/audio/playlist/181/2429">MoMA audio transcript, in Portuguese</a>.</p>
+<p>Luis Pérez-Oramas places Clark’s hinge in relation to the seam or interval between surfaces. His account also questions a simple story in which flat painting merely escapes into three dimensions. This gives the study a more precise question: what can a relation between planes do? <a href="https://post.moma.org/part-2-lygia-clark-if-you-hold-a-stone/">MoMA, “If You Hold a Stone,” part 2</a>.</p>
+<p>These sources establish a working relation, not an exact digital reconstruction. Another catalogue entry, <em>Máquina</em> (1962), describes 24 shaped plates; our existing artifact uses six identical rectangles. A visual resemblance cannot establish equivalence of construction. <a href="https://portal.lygiaclark.org.br/acervo/124/maquina">Clark archive</a>.</p>
+<h2>What the existing artifact supplied</h2>
+<p><code>bicho_hinge</code> already constructs six plates in a branching tree, with five bounded rotations. Child plates inherit their ancestors’ transforms. Releasing a plate retains the last angle. The initial pose is selected by a deterministic search that rejects sampled clashes with the plinth and floor.</p>
+<p>It also fixes the root to a support, gives thin plates a larger XR grab volume, assigns angular stops and searches for an opening pose that reads well. The object already carries editorial decisions. They are useful to inspect because they are concrete.</p>
+<h2>Three possible studies, and the one we chose</h2>
+<ul>
+<li><strong>Widen one stop.</strong> Keep the tree and change one angular limit. This exposes what the joint permits, but current kinematics can allow plates to intersect.</li>
+<li><strong>Remove the fixed support.</strong> Allow the whole assembly to be handled. This would move closer to physical handling, but requires a tested arrangement of bodies, joints, contact and pickup.</li>
+<li><strong>Change what happens after release.</strong> Keep the same assembly and compare a retained pose with a return to its starting angles. This can be tested with the existing artifact and makes an interface decision consequential.</li>
+</ul>
+<p>We chose the third. It does not require a reward, a target silhouette or another object. One setting changes what the visitor’s action is allowed to leave behind.</p>
+<h2>The code changed the argument</h2>
+<p>The previous source and registry described the reachable angles as a transformation group and claimed that adjusting a parent and child in reverse order must produce different final poses. The implementation did not support that claim.</p>
+<p>For this model, every plate transform is computed from the same final joint-angle vector. Assigning those independent values in a different order does not change the resulting product. The order of factors in the hierarchy remains fixed. Bounded angles form a configuration domain; they are not a group closed under composition.</p>
+<p>The native probe confirms the same final plate transforms for both adjustment orders. Recording one corner reveals different intermediate paths. The trace therefore gives us a stronger connection to the earlier chapter: a final shape does not contain a complete account of the movement that reached it.</p>
+<p>The pointer test found a second, practical error. Godot’s positive local-X rotation takes +Z toward −Y. The old <code>atan2(p.y, p.z)</code> reversed that convention, so the mouse gesture and hinge motion opposed one another. A direction-sensitive test failed before the correction; <code>atan2(-p.y, p.z)</code> follows the intended turn and passes the native pointer and actual mouse-routing tests.</p>
+<h2>The critical opening</h2>
+<p>“Leave it” permits a range of forms to remain without grading them against a completed silhouette. “Return it” allows a visitor’s action for a while and then reinstates a chosen state. That distinction is our question for the digital study, not an intention retrospectively attributed to Clark.</p>
+<p>A queer reading can begin with that absence of a required final body and then inspect the limits that remain. Which relations are permitted? What is fixed so firmly that the visitor cannot put it into question? Five flexible joints still depend on a root we have bolted down. Openness is particular, designed and testable.</p>
+<h2>What the evidence supports</h2>
+<p>The native report records 29 focused checks: production scene transforms against their solver; carried and unaffected branches; retained angles; authored limits; return policy; equal endpoints and unequal corner paths; production pointer direction and release; physics-ray picking; real mouse events; and GUI selection. Captures were rendered in Godot 4.6 with GL Compatibility on the available desktop GPU.</p>
+<p>The portable project copies the production specimen and three dependencies byte-for-byte. The viewer substitutes a quieter metallic finish, highlights one plate and supplies the room, camera, input panel, return policy and optional trace. Those are declared apparatus, not changes to Clark’s work. The return is a timed interpolation, not a spring simulation.</p>
+<p>No headset, main-museum installation, material validation or learner trial was performed. No plate-to-plate collision solver was added. Pose retention lasts within this running scene; it is not a saved record across sessions.</p>
+<h2>Where it leads next</h2>
+<p>The next substantial experiment is <strong>releasing the fixed root</strong>. Keep the existing joint arrangement and compare the supported assembly with a whole object that can be lifted. The test must include its weight, contact and how the hand transfers motion through it. That belongs with Form Finding and physical constraints. It should begin with a small two-plate system before extending the full tree.</p>
+<p>The writing can then ask what changed when the support stopped being guaranteed. That question will follow the tested behaviour.</p></div></section><section><h2>What changed in the project</h2><div class="cols"><div class="card"><h3>The existing artifact</h3><p>Corrected the desktop pointer angle sign. Revised unsupported claims about a transformation group and adjustment order. The caption now states the actual behaviour: “no automatic return”.</p></div><div class="card"><h3>The companion</h3><p>Added two release policies, a corner trace, desktop controls, native evidence, a short encounter and a focused making exercise. The specimen’s production code is copied exactly; the neutral display finish and room are supplied by the study.</p></div></div><div class="actions"><a href="changes.diff">Exact artifact changes</a><a href="RESEARCH.md">Research notes</a><a href="source-hashes.json">Specimen provenance</a><a href="results.json">Native evidence</a><a href="pointer-before.log">The failing pointer test before correction</a><a href="/book-review/doc/book/iterations/2026-10-01-artist-capacity/index.html#profile-hinge">Back to the capacity atlas</a></div><p class="small">The kit ran without the XR addon. No headset, installed-hall, student or physical-material trial is claimed. The next investigation is a free assembly with weight and contact, beginning with two plates.</p></section></main></body></html>

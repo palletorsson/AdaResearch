@@ -1,0 +1,16 @@
+--- before/Tutorial_Tiling_Walls/map_data.json
++++ after/Tutorial_Tiling_Walls/map_data.json
+@@ -2044,6 +2044,13 @@
+     "show_grid": false,
+     "grid_animation": {
+       "enabled": false
++    },
++    "color_overrides": {
++      "model_color": "0.69, 0.69, 0.69, 1.0",
++      "wireframe_color": "0.69, 0.69, 0.69, 1.0",
++      "emission_color": "0.0, 0.0, 0.0, 1.0",
++      "emission_strength": 0.0,
++      "width": 0.1
+     }
+   },
+   "utility_definitions": {

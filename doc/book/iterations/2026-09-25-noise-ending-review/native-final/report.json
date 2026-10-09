@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Simplex and the shared comparison are present",
+      "passed": true
+    },
+    {
+      "name": "both walk-through arches remain",
+      "passed": true
+    },
+    {
+      "name": "actual REGEN signal changes seed",
+      "passed": true
+    },
+    {
+      "name": "REGEN changes sampled values",
+      "passed": true
+    },
+    {
+      "name": "readout-only configuration preserves regenerated seed",
+      "passed": true
+    },
+    {
+      "name": "readout-only configuration preserves all 49 sampled values",
+      "passed": true
+    },
+    {
+      "name": "readout-only configuration preserves generator properties",
+      "passed": true
+    },
+    {
+      "name": "plate flattens every displayed cube",
+      "passed": true
+    },
+    {
+      "name": "display colours survive flattening",
+      "passed": true
+    },
+    {
+      "name": "return to relief restores all cube heights",
+      "passed": true
+    },
+    {
+      "name": "return to relief preserves field",
+      "passed": true
+    },
+    {
+      "name": "empty, unchanged and unrelated configurations preserve generator",
+      "passed": true
+    },
+    {
+      "name": "explicit seed and view change remain effective",
+      "passed": true
+    },
+    {
+      "name": "explicit seed changes the field",
+      "passed": true
+    },
+    {
+      "name": "explicit restoration reproduces original field",
+      "passed": true
+    },
+    {
+      "name": "actual shared VIEW signal selects plate",
+      "passed": true
+    },
+    {
+      "name": "shared VIEW preserves regenerated field",
+      "passed": true
+    },
+    {
+      "name": "arch retains sampled values and colours",
+      "passed": true
+    },
+    {
+      "name": "plate arch retains its supplied curve",
+      "passed": true
+    },
+    {
+      "name": "shared VIEW restores relief",
+      "passed": true
+    },
+    {
+      "name": "actual MATCH signal restores declared Simplex field",
+      "passed": true
+    },
+    {
+      "name": "MATCH restores the Perlin seed too",
+      "passed": true
+    },
+    {
+      "name": "matched seeds do not make the two bases equal",
+      "passed": true
+    },
+    {
+      "name": "configuration before ready retains declared seed and size",
+      "passed": true
+    },
+    {
+      "name": "configuration before ready retains display and parameters",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arches-relief",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arches-colour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-simplex",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "arch_count": 2,
+    "final_generator": {
+      "basis": "simplex",
+      "fractal_gain": 0.5,
+      "fractal_lacunarity": 2.0,
+      "fractal_octaves": 4,
+      "fractal_type": 1,
+      "gen_frequency": 0.0500000007450581,
+      "noise_type": 0,
+      "sample_offset": 0.0,
+      "sample_scale": 10.0,
+      "seed": 20260910
+    },
+    "initial_seed": 20260910,
+    "regenerated_seed": 2780373237,
+    "sample_count": 49,
+    "scope": "Real isolated museum. Supplied actual console signals, config API, sample/geometry readback and native cameras; no headset traversal claim."
+  },
+  "passed": true,
+  "room": "Noise_Perlin_Simplex"
+}

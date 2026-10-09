@@ -1,0 +1,110 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -8,9 +8,10 @@
+     "status": "draft",
+     "sequence": "color",
+     "text_path": "commons/maps/Color_Context_Placed/final.md",
+-    "text_sha256": "f95217e94581ebae84e2c9a5a3e8f359949174fe5c3792e32a0aa8cd6fc82a9c",
++    "text_sha256": "ca4c988582f069dc98246636922a11e12733be492d729e0bd52c74cff05f0be5",
+     "map_sha256": "245287308f12494d7e3df1fed6578046c2a616304007b861498d7dd7cf71bdc6",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Flashlight": {
+     "primary_tokens": [
+@@ -19,10 +20,11 @@
+     "sequence": "color",
+     "status": "draft",
+     "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+-    "map_sha256": "d976651a2b33a7874dc4415c73ac4344f257a8242356ab4cf72f5b7b085240dc",
++    "map_sha256": "40810cba31a7346e2873ce410593bd5857ad5f379659ab9509d1c286a1cbc68e",
+     "learner_verified": false,
+     "text_path": "commons/maps/Color_Flashlight/final.md",
+-    "text_sha256": "65aeaa7b29ec6094dc2ebb33e645558821d5982ef50c9935d77d7b1c501df377"
++    "text_sha256": "65aeaa7b29ec6094dc2ebb33e645558821d5982ef50c9935d77d7b1c501df377",
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Nails": {
+     "primary_tokens": [
+@@ -33,9 +35,10 @@
+     "status": "draft",
+     "sequence": "color",
+     "text_path": "commons/maps/Color_Nails/final.md",
+-    "text_sha256": "f25a5cc517bbb2ef76d6c2efae707814357144cff0534ffe4667a18cc9c68759",
+-    "map_sha256": "0f5b5843b16578ddbe395267a7f413a42817e29683eefb81151928272e975067",
+-    "learner_verified": false
++    "text_sha256": "01722198f7d5a2c2423f982040e6bed6d4817e829fb4e15662f84dce45b1ea44",
++    "map_sha256": "5e51c030c5df630affe069e1160089cd44196b546bbc2b6a7043386cd3d0efec",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Rainbow": {
+     "primary_tokens": [
+@@ -44,10 +47,11 @@
+     "sequence": "color",
+     "status": "draft",
+     "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+-    "map_sha256": "86a0d12b4a69ed9b24271deff703d302475c8e1f5dd8e1ed04c9eb43ae9e2e4c",
++    "map_sha256": "a7e26310de601a500d6c75adfac7b1d2e524c3e3b12c8243a3708ad84e160d8b",
+     "learner_verified": false,
+     "text_path": "commons/maps/Color_Rainbow/final.md",
+-    "text_sha256": "2294d321e44b8cccaba9f5e1d680f7a122902fdf842b05774d0a090999780a3e"
++    "text_sha256": "a2d40e9efcbd6b52e617a81ca1e1ec50e2fc1612f61a495534cc393611cb331f",
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Pillar": {
+     "primary_tokens": [
+@@ -60,7 +64,8 @@
+     "text_path": "commons/maps/Color_Pillar/final.md",
+     "text_sha256": "bd88b571c6a6769d1610c282a017912434afbe765a5ad11c0f10c108d998d0bd",
+     "map_sha256": "02d6e14dca7e1be71b2d60f42e5de8e4addc84e8db312b908ddb04966af49d16",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Grid_Pallet": {
+     "primary_tokens": [
+@@ -72,7 +77,8 @@
+     "map_sha256": "9b5b3e58b5f31d7550cf223f26b911de6f90d4f055b31345c48af231792450e0",
+     "learner_verified": false,
+     "text_path": "commons/maps/Color_Grid_Pallet/final.md",
+-    "text_sha256": "ed773523af115589e9fd3c402d9be5cf449e7adeefcd3c802613af6dada76347"
++    "text_sha256": "54e4b0123bb210455d5c7d653ddf5aff66e444fd4f00db7a3ed6e881aa9b0b61",
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Paint": {
+     "primary_tokens": [
+@@ -85,7 +91,8 @@
+     "map_sha256": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+     "learner_verified": false,
+     "text_path": "commons/maps/Color_Paint/final.md",
+-    "text_sha256": "796903cc78f5542b16d5c6c9acb9d94496f23ec3a6f4f8a6668b37566114c022"
++    "text_sha256": "6cb012e31a21fdb1cbb09a50801165bed4a3c3d4f1762a1d850772b358d5ece1",
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Color_Walls": {
+     "primary_tokens": [
+@@ -97,9 +104,10 @@
+     "status": "draft",
+     "sequence": "color",
+     "text_path": "commons/maps/Color_Walls/final.md",
+-    "text_sha256": "30cb9cc52157c121d64dff9f7178876a3943db1006653b1b12b4c4b8390f02e9",
+-    "map_sha256": "0defd72227afdd82cb6d47ca63ba8f857b0a752971c6a950483645ead04d723d",
+-    "learner_verified": false
++    "text_sha256": "7f6b3aece0541c673d02d8eab638c2fff3eadfe2aa994c4e43484a3004993f2c",
++    "map_sha256": "cc8fc41cdafb354118c05c6b62864efb829fd2dc2d13891dda66ff33512b2aff",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-colour-review-comments/index.html"
+   },
+   "Array": {
+     "primary_tokens": [
+@@ -112,7 +120,7 @@
+     "status": "source_checked_draft",
+     "sequence": "array_tutorial",
+     "text_path": "commons/maps/Array/final.md",
+-    "text_sha256": "3043c95e16632de6a52c555a83f54a9473d6f4cca3f1c31387af715cc8a4b861",
++    "text_sha256": "40c06e16bae31f06db1238455bb8bdc8ca3c0277ca4bdd36391d584677dc3bf5",
+     "map_sha256": "7b989857e1da6f9f93c0dc2ebf9171298eb2f76bae8df24e25650ddc712c57f6",
+     "learner_verified": false,
+     "pilot_action_id": "array-addresses-persist",

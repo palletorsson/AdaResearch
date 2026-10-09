@@ -1,0 +1,46 @@
+{
+  "Point_One": [
+    "Code. Extend Node three D. Declare a variable, underscore count, starting at zero. Define the function, underscore process, with delta as a floating point parameter, returning void. Inside this function, add one to underscore count.",
+    "Code. Declare frames as an integer. Set it to the integer returned by Engine dot get process frames.",
+    "Code. Declare origin, set to Vector three dot ZERO.",
+    "Code. Declare a constant, FOCUS, set to Vector three: zero point zero, one point two five, zero point zero.",
+    "Code. Declare p, set to Vector three: one point zero, zero point five, zero point zero.",
+    "Code. Define report position, taking a point of type Node three D, and returning a string. Set p to point dot global position. Return p dot x, p dot y, and p dot z, enclosed in parentheses and separated by commas. Format each component to two decimal places.",
+    "Code. Export catch radius as a floating point variable, set to zero point four five. Export catch height as a floating point variable, set to one point two zero. Define accepts position, taking p as a Vector three, and returning a boolean. Set centre to global position plus Vector three: zero, catch height, zero. Return whether the distance from p to centre is less than or equal to catch radius."
+  ],
+  "Point_Lines": [
+    "Code. Set a to Vector three: zero, zero, zero. Set b to Vector three: one, zero, zero. Set displacement to b minus a. Set distance to displacement dot length."
+  ],
+  "Point_Trace": [
+    "Code. Set point count to the size of underscore trail points.",
+    "Code. Set rec to a Vector three whose components are rec dot x, rec dot y, and rec dot z, each rounded by the snapped f function to the interval s."
+  ],
+  "Point_Line_Grid": [
+    "Code. Set index to the nearest integer to position dot x divided by grid size. Set placed x to index multiplied by grid size.",
+    "Code. Call mesh dot surface add vertex, with p minus center, all multiplied by final scale."
+  ],
+  "Point_Triangle_Context": [
+    "Code. Begin the mesh surface using primitive triangles. For each Vector three, p, in target positions, add p as a surface vertex. End the mesh surface.",
+    "The triangles are: B, C, D. B, D, E. B, E, F. B, F, A."
+  ],
+  "Primitives_Polythedra": [
+    "The face indices are: zero, one, two. Zero, two, three. Zero, three, one.",
+    "Code. Create a new convex polygon shape three D, named convex shape. Set its points to the vertices stored in geometry. Set collision shape dot shape to this convex shape.",
+    "Code. Set w dot scale to Vector three: one point zero; the greater of zero point zero five and rise; the greater of zero point two and run cells."
+  ],
+  "Point_Animatedcube": [
+    "The two triangles use indices four, five, seven; and five, six, seven.",
+    "Code. Set vertices at index i to the position of handle nodes at index i, divided by cube size."
+  ],
+  "Primitives_Ignorance": [
+    "Code. Set sphere mesh dot radial segments to segment count. Set sphere mesh dot rings to ring count."
+  ],
+  "Primitives_Portals": [
+    "Code. Set perimeter, a floating point value, to two times mesh dot rings, times the sine of pi divided by mesh dot rings.",
+    "Code. Set a z to negative track length, multiplied by one minus one divided by two raised to the floating point value of n."
+  ],
+  "Primitives_Melencolia": [
+    "Code. Append the ring array to vertices. Then append the apex position of that ring.",
+    "The square reads: first row, sixteen, three, two, thirteen. Second row, five, ten, eleven, eight. Third row, nine, six, seven, twelve. Fourth row, four, fifteen, fourteen, one."
+  ]
+}

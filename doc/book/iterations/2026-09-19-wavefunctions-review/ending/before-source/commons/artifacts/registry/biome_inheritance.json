@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "biome_inheritance": {
+      "lookup_name": "biome_inheritance",
+      "name": "What a form leaves room for",
+      "scene": "res://commons/artifacts/biome_inheritance/biome_inheritance.tscn",
+      "category": "biome",
+      "artifact_type": "installation",
+      "complexity": "intermediate",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "description": "Standalone bridge: a primitive encounter's five panel records constrain actual BiomeObject ground cover. Candidate identities remain fixed as the panels widen. Full-size comparison, no in-world interface. Geometry-based occupancy; no growth simulation.",
+      "qfep_connection": "A continuous change in one form crosses discrete occupancy thresholds for other bodies. The clearance rule and excluded candidate identities are recorded, making the chosen norm inspectable.",
+      "interactions": ["Observe narrow and wide panels on the same terrain; compare which cover members can stand."],
+      "tags": ["biome", "inheritance", "sculpture", "clearance", "prototype"],
+      "spatial_needs": {"footprint_cells": 12, "height_m": 6, "approach": "walk in"}
+    }
+  }
+}

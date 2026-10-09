@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>tension_fabric.gdshader</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eeeae3;color:#302830;font:17px/1.65 system-ui}header,main,footer{max-width:1180px;margin:auto;padding:42px 30px}h1{font:clamp(58px,8vw,100px)/1.02 Georgia;margin:24px 0}h2{font:38px/1.2 Georgia}a{color:#873c59;text-underline-offset:4px}nav{display:flex;gap:25px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:770px}.reading{font:24px/1.65 Georgia;max-width:760px;margin:65px auto}.reading p{margin:0 0 28px}section{padding:32px 0;scroll-margin-top:25px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small{font-size:13px;color:#71636a}details{background:#e4dcd5;padding:22px;margin:25px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a242b;color:#ffe0ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 20px;border:1px solid #9c8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ad5178}.states figure{display:none}.states #rest:checked~.rest,.states #pull:checked~.pull,.states #loaded:checked~.loaded{display:block}.states input:checked+label{background:#853b58;color:white}.note{border-left:3px solid #b66584;padding:5px 23px}code{font-size:.9em}@media(max-width:650px){header,main,footer{padding:28px 17px}.reading{font-size:21px}}</style><main><a href="index.html#making">Back to the study</a><h1>tension_fabric.gdshader</h1><pre>shader_type spatial;
+render_mode cull_disabled;
+void fragment() {
+	vec2 thread = abs(fract(UV * vec2(180.0,32.0)) - 0.5);
+	vec2 aa = max(fwidth(UV * vec2(180.0,32.0)), vec2(0.015));
+	float weave = max(1.0-smoothstep(0.10-aa.x,0.10+aa.x,thread.x),1.0-smoothstep(0.10-aa.y,0.10+aa.y,thread.y));
+	ALBEDO = mix(vec3(0.22,0.12,0.15), vec3(0.54,0.32,0.36), weave*0.48+0.25);
+	ROUGHNESS = 0.82;
+}
+</pre></main></html>

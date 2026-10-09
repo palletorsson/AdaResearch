@@ -1,0 +1,3758 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "40"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				1.39999985694885,
+				0.0,
+				3.25250005722046
+			],
+			"bounds_size": [
+				7.29800033569336,
+				2.51999998092651,
+				4.44549942016602
+			],
+			"cell": [
+				4,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "TreeLesson/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1311/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1311/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1313/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1313/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.61999988555908
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1315/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1315/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.81999969482422,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1317/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1317/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1319/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1319/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.17999982833862,
+						1.07260000705719,
+						3.39000010490417
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "GROW"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "ANGLE"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						3.52999997138977
+					],
+					"text": "LENGTH"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.81999969482422,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "FORKS"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.5,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "RESET"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.17999982833862,
+						1.05499994754791,
+						3.30000019073486
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						4.5,
+						0.899999976158142,
+						3.24799990653992
+					],
+					"text": "01 / WHERE WILL IT GO?"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						4.5,
+						1.27516222000122,
+						3.91262769699097
+					],
+					"text": "generation 0 / 4 | 1 segments\nturn 35 deg | length x 0.70 | 2 forks"
+				}
+			],
+			"position": [
+				4.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "recursive_tree_2"
+		},
+		{
+			"bounds_position": [
+				9.090651512146,
+				0.0,
+				3.16822528839111
+			],
+			"bounds_size": [
+				6.63642501831055,
+				3.88887166976929,
+				5.10953330993652
+			],
+			"cell": [
+				12,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "TreeLesson/PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1346/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.5,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1346/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.5,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1348/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1348/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.0725998878479,
+						3.62000012397766
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1350/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.0725998878479,
+						3.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1350/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.8199996948242,
+						1.0725998878479,
+						3.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1352/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.5,
+						1.0725998878479,
+						3.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1352/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.5,
+						1.0725998878479,
+						3.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1354/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.0725998878479,
+						3.39000034332275
+					]
+				},
+				{
+					"disabled": false,
+					"path": "TreeLesson/@Node3D@1354/HandPoseArea/CollisionShape3D",
+					"position": [
+						12.1800003051758,
+						1.0725998878479,
+						3.39000034332275
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.8199996948242,
+						1.05499982833862,
+						3.53000020980835
+					],
+					"text": "FORM"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.5,
+						1.05499982833862,
+						3.53000020980835
+					],
+					"text": "STRATA"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.1800003051758,
+						1.05499982833862,
+						3.53000020980835
+					],
+					"text": "REACH"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.8199996948242,
+						1.05499982833862,
+						3.30000042915344
+					],
+					"text": "ENDS"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.5,
+						1.05499982833862,
+						3.30000042915344
+					],
+					"text": "RESET"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.1800003051758,
+						1.05499982833862,
+						3.30000042915344
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "TreeLesson",
+					"position": [
+						12.5,
+						0.899999916553497,
+						3.2480001449585
+					],
+					"text": "02 / FIND THE LAST CALL"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						12.5,
+						1.27516210079193,
+						3.91262769699097
+					],
+					"text": "seed 12345 | FORM\nFollow a fork to its last visible branch."
+				}
+			],
+			"position": [
+				12.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.419999986886978,
+				0.419999986886978,
+				0.419999986886978
+			],
+			"token": "recursive_tree"
+		},
+		{
+			"bounds_position": [
+				6.91999959945679,
+				0.0,
+				11.3906135559082
+			],
+			"bounds_size": [
+				1.16000032424927,
+				1.61000001430511,
+				0.179386138916016
+			],
+			"cell": [
+				7,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "living_paper"
+		},
+		{
+			"bounds_position": [
+				11.3514003753662,
+				-0.250400006771088,
+				11.4934997558594
+			],
+			"bounds_size": [
+				0.297199249267578,
+				0.020799994468689,
+				0.0156002044677734
+			],
+			"cell": [
+				11,
+				11
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Example_8_9_LSystem_Tree",
+					"position": [
+						11.5,
+						0.280000001192093,
+						11.5
+					],
+					"text": "L-System Tree\nGeneration: 0 / 4\nInstructions: 1"
+				},
+				{
+					"parent": "Example_8_9_LSystem_Tree",
+					"position": [
+						11.5,
+						0.240000009536743,
+						11.5
+					],
+					"text": "L-System: Simple Plant"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						11.3800001144409,
+						-0.232720002532005,
+						11.5020799636841
+					],
+					"text": "25.0"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						11.3800001144409,
+						-0.247280016541481,
+						11.5020799636841
+					],
+					"text": "Angle"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						11.6199998855591,
+						-0.232720002532005,
+						11.5020799636841
+					],
+					"text": "0.05"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						11.6199998855591,
+						-0.247280016541481,
+						11.5020799636841
+					],
+					"text": "Length"
+				}
+			],
+			"position": [
+				11.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.400000005960464,
+				0.400000005960464,
+				0.400000005960464
+			],
+			"token": "fractal_lsystem_tree"
+		},
+		{
+			"bounds_position": [
+				2.44999289512634,
+				0.998998522758484,
+				14.4500093460083
+			],
+			"bounds_size": [
+				0.100003242492676,
+				0.100006341934204,
+				0.100004196166992
+			],
+			"cell": [
+				2,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.49999451637268,
+				1.04900169372559,
+				14.5000114440918
+			],
+			"rotation": [
+				0.00201444025151432,
+				0.000375866366084665,
+				-0.00170138268731534
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "small_subdivision_cube"
+		},
+		{
+			"bounds_position": [
+				3.44999289512634,
+				0.998998522758484,
+				14.4500093460083
+			],
+			"bounds_size": [
+				0.100003242492676,
+				0.100006341934204,
+				0.100004196166992
+			],
+			"cell": [
+				3,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.49999451637268,
+				1.04900169372559,
+				14.5000114440918
+			],
+			"rotation": [
+				0.00201444025151432,
+				0.000375866366084665,
+				-0.00170138268731534
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "small_subdivision_cube"
+		},
+		{
+			"bounds_position": [
+				1.92647564411163,
+				1.40000009536743,
+				13.2464838027954
+			],
+			"bounds_size": [
+				3.64887523651123,
+				4.66606473922729,
+				4.65926837921143
+			],
+			"cell": [
+				3,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				3.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.319999992847443,
+				0.319999992847443,
+				0.319999992847443
+			],
+			"token": "inverted_tree_cloud"
+		},
+		{
+			"bounds_position": [
+				8.07999992370605,
+				0.00749999983236194,
+				16.0799999237061
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949261903762817,
+				0.840000152587891
+			],
+			"cell": [
+				8,
+				16
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				16.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				1.29999995231628,
+				0.0,
+				16.8999996185303
+			],
+			"bounds_size": [
+				2.40000009536743,
+				0.840000033378601,
+				1.20000076293945
+			],
+			"cell": [
+				2,
+				17
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				0.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cube_desk"
+		},
+		{
+			"bounds_position": [
+				11.9264755249023,
+				1.40000009536743,
+				15.2464838027954
+			],
+			"bounds_size": [
+				3.64887619018555,
+				4.66606473922729,
+				4.65926647186279
+			],
+			"cell": [
+				13,
+				17
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.5,
+				3.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.319999992847443,
+				0.319999992847443,
+				0.319999992847443
+			],
+			"token": "inverted_tree_cloud"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [
+				5,
+				20
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				1.0,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.649999976158142,
+				0.649999976158142,
+				0.649999976158142
+			],
+			"token": "fractal_scene"
+		},
+		{
+			"bounds_position": [
+				1.68455350399017,
+				0.769999980926514,
+				20.3547229766846
+			],
+			"bounds_size": [
+				4.09544658660889,
+				0.960000038146973,
+				4.29055404663086
+			],
+			"cell": [
+				3,
+				22
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				1.25,
+				22.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.0599999986588955,
+				0.0599999986588955,
+				0.0599999986588955
+			],
+			"token": "mobius_world"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				12.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				14.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				18.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				20.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				22.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				25.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				25.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.99100017547607,
+				1.58000004291534,
+				24.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0089998245239,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.9910001754761,
+				1.58000004291534,
+				26.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.99100017547607,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.00899982452393,
+				1.58000004291534,
+				25.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				12.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				14.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				18.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				20.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				22.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				17.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0089998245239,
+				1.58000004291534,
+				16.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				8.27499961853027,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				8.27499961853027,
+				2.91000008583069,
+				25.9169998168945
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				3.0,
+				26.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				9.92199993133545,
+				2.31000018119812,
+				0.409999996423721
+			],
+			"bounds_size": [
+				0.0780000686645508,
+				0.179999828338623,
+				0.18000003695488
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				2.40000009536743,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "emergency_button"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.975000023841858,
+				1.38500010967255,
+				21.9599990844727
+			],
+			"bounds_size": [
+				0.0509999990463257,
+				0.629999995231628,
+				1.08000183105469
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.70000004768372,
+				22.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				10.8999996185303,
+				0.810000002384186,
+				15.25
+			],
+			"bounds_size": [
+				0.100000381469727,
+				1.34000015258789,
+				2.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				0.899999976158142,
+				16.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "whiteboard"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				15.91100025177,
+				1.23000001907349,
+				-1.5900000333786
+			],
+			"bounds_size": [
+				0.0639991760253906,
+				0.240000009536743,
+				0.180000066757202
+			],
+			"cell": [],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Panel/HandPoseArea/@CollisionShape3D@1407",
+					"position": [
+						15.8169994354248,
+						1.35000002384186,
+						-1.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Panel/ScanArea/@CollisionShape3D@1408",
+					"position": [
+						15.826000213623,
+						1.36440002918243,
+						-1.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				15.9499998092651,
+				1.35000002384186,
+				-1.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "palm_scanner"
+		},
+		{
+			"bounds_position": [
+				3.77499985694885,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.950000047683716,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.25,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				3.77499985694885,
+				4.62799978256226,
+				12.0000009536743
+			],
+			"bounds_size": [
+				0.950000047683716,
+				0.0920000076293945,
+				0.44999885559082
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.25,
+				4.6399998664856,
+				12.2250003814697
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				7.40999984741211,
+				4.32000017166138,
+				0.25
+			],
+			"bounds_size": [
+				0.180000305175781,
+				0.0799999237060547,
+				12.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				4.3600001335144,
+				6.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				-0.0500000007450581,
+				1.0
+			],
+			"bounds_size": [
+				1.0,
+				0.0500000007450581,
+				1.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "floor_grate"
+		}
+	],
+	"checks": [
+		{
+			"name": "opt-in solid receiver loaded",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "source and canopy begin with one trunk",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "enlargement is uniform at 1.8",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "canopy root occupies central floor",
+			"passed": true,
+			"value": [
+				8.5,
+				0.0,
+				7.49999952316284
+			]
+		},
+		{
+			"name": "original specimen retains visual-only branches",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates GROW",
+			"passed": true,
+			"value": {
+				"button": "GROW",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "GROW 1 shares exact count",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates GROW",
+			"passed": true,
+			"value": {
+				"button": "GROW",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "GROW 2 shares exact count",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates GROW",
+			"passed": true,
+			"value": {
+				"button": "GROW",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "GROW 3 shares exact count",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates GROW",
+			"passed": true,
+			"value": {
+				"button": "GROW",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "GROW 4 shares exact count",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "binary tree shares actual meshes, transforms and materials",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "binary tree uses one solid hull per source segment",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates GROW",
+			"passed": true,
+			"value": {
+				"button": "GROW",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144526481628,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "fifth GROW retains four-generation budget",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual standing body meets solid trunk",
+			"passed": true,
+			"value": [
+				8.5,
+				0.000842652865685523,
+				6.98933124542236
+			]
+		},
+		{
+			"name": "standing body steps beside trunk",
+			"passed": true,
+			"value": {
+				"end": [
+					9.36999225616455,
+					0.000842652865685523,
+					6.98933124542236
+				],
+				"passed": true,
+				"target": [
+					9.39999961853027,
+					0.0,
+					6.98933124542236
+				]
+			}
+		},
+		{
+			"name": "standing body walks beneath default branches",
+			"passed": true,
+			"value": {
+				"end": [
+					9.39987945556641,
+					0.000842652865685523,
+					9.68915176391602
+				],
+				"passed": true,
+				"target": [
+					9.39999961853027,
+					0.0,
+					9.69999980926514
+				]
+			}
+		},
+		{
+			"name": "body rejoins approach to retained rear collection",
+			"passed": true,
+			"value": {
+				"end": [
+					8.50530529022217,
+					0.000842652865685523,
+					10.3958082199097
+				],
+				"passed": true,
+				"target": [
+					8.5,
+					0.0,
+					10.3999996185303
+				]
+			}
+		},
+		{
+			"name": "actual museum mouse ray operates ANGLE",
+			"passed": true,
+			"value": {
+				"button": "ANGLE",
+				"button_position": [
+					4.5,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.49763965606689,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1311/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "ANGLE spreads the same 31 segments",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates LENGTH",
+			"passed": true,
+			"value": {
+				"button": "LENGTH",
+				"button_position": [
+					4.17999982833862,
+					1.04499995708466,
+					3.61999988555908
+				],
+				"clear_to_button": true,
+				"distance": 1.53144538402557,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1313/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "LENGTH preserves count and inherits .85",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates FORKS",
+			"passed": true,
+			"value": {
+				"button": "FORKS",
+				"button_position": [
+					4.81999969482422,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.32967102527618,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1315/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "FORKS gives 121 source and solid segments",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "three-fork tree shares actual meshes, transforms and materials",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "three-fork tree uses one solid hull per source segment",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates RULE",
+			"passed": true,
+			"value": {
+				"button": "RULE",
+				"button_position": [
+					4.17999982833862,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.32967114448547,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1319/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "RULE retains queue budget explanation",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates RESET",
+			"passed": true,
+			"value": {
+				"button": "RESET",
+				"button_position": [
+					4.5,
+					1.04499995708466,
+					3.39000010490417
+				],
+				"clear_to_button": true,
+				"distance": 1.29059112071991,
+				"emissions": 1,
+				"eye": [
+					4.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					4.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1317/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "RESET removes old branches and colliders",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "supported canopy fits front room 2/15/0.50",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					9.51792240142822,
+					4.82883262634277,
+					7.69799947738647
+				],
+				"min": [
+					7.48207855224609,
+					0.0,
+					7.30199956893921
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/15/0.70",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					10.7268152236938,
+					6.89865207672119,
+					7.69799947738647
+				],
+				"min": [
+					6.27318572998047,
+					0.0,
+					7.30199956893921
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/15/0.85",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					12.2159461975098,
+					9.22003078460693,
+					7.69799947738647
+				],
+				"min": [
+					4.78405475616455,
+					0.0,
+					7.30199956893921
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/35/0.50",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					10.2180938720703,
+					4.59766387939453,
+					7.83954572677612
+				],
+				"min": [
+					6.78190565109253,
+					0.0,
+					7.16045331954956
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/35/0.70",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					11.9444398880005,
+					6.51287841796875,
+					8.54247570037842
+				],
+				"min": [
+					5.05555963516235,
+					0.0,
+					6.45752191543579
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/35/0.85",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					13.9457855224609,
+					8.67849540710449,
+					9.54997158050537
+				],
+				"min": [
+					3.05421376228333,
+					0.0,
+					5.45002603530884
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/65/0.50",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					10.3127822875977,
+					3.28600788116455,
+					8.46277523040771
+				],
+				"min": [
+					6.68721723556519,
+					0.0,
+					6.53722333908081
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/65/0.70",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					11.7562389373779,
+					3.76293706893921,
+					9.81405258178711
+				],
+				"min": [
+					5.24376106262207,
+					0.0,
+					5.18594789505005
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 2/65/0.85",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 31,
+				"forks": 2,
+				"max": [
+					13.333101272583,
+					4.25164556503296,
+					11.4832954406738
+				],
+				"min": [
+					3.66689825057983,
+					0.0,
+					3.5167031288147
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/15/0.50",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					9.05245494842529,
+					4.82604837417603,
+					8.38859176635742
+				],
+				"min": [
+					7.48207855224609,
+					0.0,
+					6.6114068031311
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/15/0.70",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					9.6877908706665,
+					6.88047981262207,
+					9.41612720489502
+				],
+				"min": [
+					6.27318572998047,
+					0.0,
+					5.58387136459351
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/15/0.85",
+			"passed": true,
+			"value": {
+				"angle": 15.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					10.4770650863647,
+					9.1832160949707,
+					10.6775712966919
+				],
+				"min": [
+					4.78405475616455,
+					0.0,
+					4.32242679595947
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/35/0.50",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					9.54370498657227,
+					4.56672286987305,
+					9.0742654800415
+				],
+				"min": [
+					6.72771453857422,
+					0.0,
+					5.9257345199585
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/35/0.70",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					10.7008628845215,
+					6.43506622314453,
+					10.7369565963745
+				],
+				"min": [
+					4.93740701675415,
+					0.0,
+					4.26304340362549
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/35/0.85",
+			"passed": true,
+			"value": {
+				"angle": 35.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					12.100546836853,
+					8.54618835449219,
+					12.698766708374
+				],
+				"min": [
+					2.86660766601563,
+					0.0,
+					2.30123281478882
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/65/0.50",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					9.77415752410889,
+					3.98930335044861,
+					9.34967994689941
+				],
+				"min": [
+					6.46775913238525,
+					0.0,
+					5.65031862258911
+				],
+				"ratio": 0.5
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/65/0.70",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					10.9771976470947,
+					5.45012426376343,
+					10.960991859436
+				],
+				"min": [
+					4.74624872207642,
+					0.0,
+					4.03900718688965
+				],
+				"ratio": 0.7
+			}
+		},
+		{
+			"name": "supported canopy fits front room 3/65/0.85",
+			"passed": true,
+			"value": {
+				"angle": 65.0,
+				"count": 121,
+				"forks": 3,
+				"max": [
+					12.3565692901611,
+					7.19459819793701,
+					12.756067276001
+				],
+				"min": [
+					2.84020233154297,
+					0.0,
+					2.24393200874329
+				],
+				"ratio": 0.85
+			}
+		},
+		{
+			"name": "external source reset also clears receiver",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "red block study receives no canopy",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates STRATA",
+			"passed": true,
+			"value": {
+				"button": "STRATA",
+				"button_position": [
+					12.5,
+					1.04499983787537,
+					3.62000012397766
+				],
+				"clear_to_button": true,
+				"distance": 1.49763989448547,
+				"emissions": 1,
+				"eye": [
+					12.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					12.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/@Node3D@702/TreeLesson/@Node3D@1346/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "retained red tree still exposes strata",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates FORM",
+			"passed": true,
+			"value": {
+				"button": "FORM",
+				"button_position": [
+					12.8199996948242,
+					1.04499983787537,
+					3.62000012397766
+				],
+				"clear_to_button": true,
+				"distance": 1.53144550323486,
+				"emissions": 1,
+				"eye": [
+					12.5,
+					1.64999997615814,
+					2.25
+				],
+				"feet": [
+					12.5,
+					0.0,
+					2.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/@Node3D@702/TreeLesson/PushButton/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "retained red tree restores form",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ordinary lesson opt-in does not add architecture",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"desktop_input": [
+		{
+			"button": "GROW",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "GROW",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "GROW",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "GROW",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "GROW",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144526481628,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "ANGLE",
+			"button_position": [
+				4.5,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.49763965606689,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1311/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "LENGTH",
+			"button_position": [
+				4.17999982833862,
+				1.04499995708466,
+				3.61999988555908
+			],
+			"clear_to_button": true,
+			"distance": 1.53144538402557,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1313/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "FORKS",
+			"button_position": [
+				4.81999969482422,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.32967102527618,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1315/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "RULE",
+			"button_position": [
+				4.17999982833862,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.32967114448547,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1319/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "RESET",
+			"button_position": [
+				4.5,
+				1.04499995708466,
+				3.39000010490417
+			],
+			"clear_to_button": true,
+			"distance": 1.29059112071991,
+			"emissions": 1,
+			"eye": [
+				4.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				4.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/RecursiveTree/TreeLesson/@Node3D@1317/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "STRATA",
+			"button_position": [
+				12.5,
+				1.04499983787537,
+				3.62000012397766
+			],
+			"clear_to_button": true,
+			"distance": 1.49763989448547,
+			"emissions": 1,
+			"eye": [
+				12.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				12.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/@Node3D@702/TreeLesson/@Node3D@1346/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "FORM",
+			"button_position": [
+				12.8199996948242,
+				1.04499983787537,
+				3.62000012397766
+			],
+			"clear_to_button": true,
+			"distance": 1.53144550323486,
+			"emissions": 1,
+			"eye": [
+				12.5,
+				1.64999997615814,
+				2.25
+			],
+			"feet": [
+				12.5,
+				0.0,
+				2.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_pompidou-plateau-libre/@Node3D@702/TreeLesson/PushButton/Button",
+			"hover_matches": true
+		}
+	],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"parameter_bounds": [
+		{
+			"angle": 15.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				9.51792240142822,
+				4.82883262634277,
+				7.69799947738647
+			],
+			"min": [
+				7.48207855224609,
+				0.0,
+				7.30199956893921
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 15.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				10.7268152236938,
+				6.89865207672119,
+				7.69799947738647
+			],
+			"min": [
+				6.27318572998047,
+				0.0,
+				7.30199956893921
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 15.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				12.2159461975098,
+				9.22003078460693,
+				7.69799947738647
+			],
+			"min": [
+				4.78405475616455,
+				0.0,
+				7.30199956893921
+			],
+			"ratio": 0.85
+		},
+		{
+			"angle": 35.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				10.2180938720703,
+				4.59766387939453,
+				7.83954572677612
+			],
+			"min": [
+				6.78190565109253,
+				0.0,
+				7.16045331954956
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 35.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				11.9444398880005,
+				6.51287841796875,
+				8.54247570037842
+			],
+			"min": [
+				5.05555963516235,
+				0.0,
+				6.45752191543579
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 35.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				13.9457855224609,
+				8.67849540710449,
+				9.54997158050537
+			],
+			"min": [
+				3.05421376228333,
+				0.0,
+				5.45002603530884
+			],
+			"ratio": 0.85
+		},
+		{
+			"angle": 65.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				10.3127822875977,
+				3.28600788116455,
+				8.46277523040771
+			],
+			"min": [
+				6.68721723556519,
+				0.0,
+				6.53722333908081
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 65.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				11.7562389373779,
+				3.76293706893921,
+				9.81405258178711
+			],
+			"min": [
+				5.24376106262207,
+				0.0,
+				5.18594789505005
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 65.0,
+			"count": 31,
+			"forks": 2,
+			"max": [
+				13.333101272583,
+				4.25164556503296,
+				11.4832954406738
+			],
+			"min": [
+				3.66689825057983,
+				0.0,
+				3.5167031288147
+			],
+			"ratio": 0.85
+		},
+		{
+			"angle": 15.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				9.05245494842529,
+				4.82604837417603,
+				8.38859176635742
+			],
+			"min": [
+				7.48207855224609,
+				0.0,
+				6.6114068031311
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 15.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				9.6877908706665,
+				6.88047981262207,
+				9.41612720489502
+			],
+			"min": [
+				6.27318572998047,
+				0.0,
+				5.58387136459351
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 15.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				10.4770650863647,
+				9.1832160949707,
+				10.6775712966919
+			],
+			"min": [
+				4.78405475616455,
+				0.0,
+				4.32242679595947
+			],
+			"ratio": 0.85
+		},
+		{
+			"angle": 35.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				9.54370498657227,
+				4.56672286987305,
+				9.0742654800415
+			],
+			"min": [
+				6.72771453857422,
+				0.0,
+				5.9257345199585
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 35.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				10.7008628845215,
+				6.43506622314453,
+				10.7369565963745
+			],
+			"min": [
+				4.93740701675415,
+				0.0,
+				4.26304340362549
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 35.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				12.100546836853,
+				8.54618835449219,
+				12.698766708374
+			],
+			"min": [
+				2.86660766601563,
+				0.0,
+				2.30123281478882
+			],
+			"ratio": 0.85
+		},
+		{
+			"angle": 65.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				9.77415752410889,
+				3.98930335044861,
+				9.34967994689941
+			],
+			"min": [
+				6.46775913238525,
+				0.0,
+				5.65031862258911
+			],
+			"ratio": 0.5
+		},
+		{
+			"angle": 65.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				10.9771976470947,
+				5.45012426376343,
+				10.960991859436
+			],
+			"min": [
+				4.74624872207642,
+				0.0,
+				4.03900718688965
+			],
+			"ratio": 0.7
+		},
+		{
+			"angle": 65.0,
+			"count": 121,
+			"forks": 3,
+			"max": [
+				12.3565692901611,
+				7.19459819793701,
+				12.756067276001
+			],
+			"min": [
+				2.84020233154297,
+				0.0,
+				2.24393200874329
+			],
+			"ratio": 0.85
+		}
+	],
+	"passed": true,
+	"rays": [],
+	"room": "Fractal_RecursiveTrees",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/arrival.png",
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/grown.png",
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/side.png",
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/under-canopy.png",
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/wide-low.png",
+		"res://ada_run/encounter_pilot/Fractal_RecursiveTrees/three-forks.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": []
+}

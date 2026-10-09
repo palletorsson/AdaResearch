@@ -1,0 +1,13 @@
+# Handoff reply
+
+The next tutorial-planning pass should revise summaries within the existing Endless Museum. Preserve code, hall order and the existing counter. First settle where the learner’s reduced code runs inside the museum; the packet leaves that teaching choice open. Then reconcile the older subject register’s counter-building exercise and “reversing” Grid mapping with the source-constrained summaries. Point Zero already supplies the frame counter: teach from its arrival recording and per-frame updating without treating its presence as proof that a learner can build it.
+
+What carries between halls is an accepted position list, saved by the pen on release—not every raw hand position. Acceptance may project, quantize or filter samples. The script’s default keeps the list across pickups, so one released record can span pickups; scene overrides remain unverified. The selected TraceData store holds copies in memory. Grid reads existing records and listens for additions, supporting retention within a session.
+
+At map level, explain that Grid centres and fits the record before rounding display positions in XYZ, while retaining source data separately. Keep list index, accepted source position and fitted/rounded display address distinct. At sequence level, preserve the progression segment → recorded list → lattice address; later Arrays can reuse traversal and generate positions from indices. At project level, distinguish supplied, encountered and learned. These findings constrain factual summaries without determining artistic meaning, imposing identical lessons on tutorial and critical-poetic work, or establishing a better hall order.
+
+To a colleague asking whether Arrays reverses Grid: generating positions from indices cannot recover arbitrary original positions. Rounding is many-to-one, and adjacent snapped duplicates can disappear. Preserved source data is a separate resource, not evidence that the mapping is invertible; even that source contains accepted samples, not necessarily raw movement.
+
+To “Does the saved drawing survive restarting?”: the packet establishes session retention only. No disk save/reload appears in the inspected store, but other project mechanisms were not inspected, so restart persistence remains unestablished.
+
+My evidence is solely this packet’s report of static inspection of thirteen frozen files; I have not independently checked those files or run Godot. My authority here extends to this handoff and summary-planning recommendations, not code changes or curriculum redesign. Actual headset transfer, beginner understanding, optimal ordering and quality across all 204 halls remain unestablished. Source changes call for review of affected evidence; a changed hash alone does not falsify a claim.

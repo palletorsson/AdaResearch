@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "name": "source grid finished",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "real spawn resolver uses utility not centroid",
+      "passed": true,
+      "value": "{ \"position\": (1.0, 1.8, 1.0), \"rotation\": (0.0, 180.0, 0.0), \"rotation_is_auto\": false, \"source\": \"utility_spawn\" }"
+    },
+    {
+      "name": "resolved start equals entrance cell",
+      "passed": true,
+      "value": "(1, 1)"
+    },
+    {
+      "name": "faces forward into sequence",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "start cell is solid level-one floor",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Pit",
+  "standalone": true
+}

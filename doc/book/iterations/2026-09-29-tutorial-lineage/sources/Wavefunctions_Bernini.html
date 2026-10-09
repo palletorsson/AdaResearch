@@ -1,0 +1,295 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wavefunctions_Bernini · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Wavefunctions_Bernini">← Tutorial lineage</a></p><h1>Wavefunctions Bernini</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Wavefunctions_Bernini/final.md">Raw captured source</a></p><pre># A movement kept in a column
+
+Can a shape keep the rhythm of a movement without travelling along it?
+
+&lt;!-- @bernini_columns --&gt;
+
+Choose one ridge on a twisting shaft and follow it upward. Notice how it moves around the vertical axis as height increases. Change your viewpoint and find the ridge again. Then compare it with a neighbouring column.
+
+There are two different changes to disentangle. The shaft is already twisted as a shape: its profile varies from one height to another. It also rotates slowly as a whole. Watching that rotation does not explain how the twist was made, and following the twist does not require the column to rotate.
+
+Look at the shaft at a low level, then at a higher level, keeping its central axis in mind. Where has the ridge moved around that axis? Continue upward until you recognise a comparable orientation again. You are reading a repeated turn through height. Next keep your attention at one level and let the column&#x27;s slow rotation bring the surface past you. This second observation follows change through time. The two readings can resemble one another while using different coordinates. Say which reading you are making before comparing two columns; otherwise a turning shaft can disguise a difference already built into their profiles.
+
+Circular coordinates provide sine and cosine values around an axis. Combining those changing coordinates with height produces a helix. Further variations in the radius and surface give the shaft its richer profile. A periodic function that previously described movement through time now helps specify where parts of a solid belong.
+
+Look at the columns together. Their repetition creates intervals and sight lines that a single shaft cannot. The form and its arrangement contribute different things: one supplies the twist, the other decides whether you meet a field of objects, a threshold or an aisle. This version presents a repeated set rather than a control for rearranging the plan.
+
+The scene is inspired by spiral architectural columns. Its mathematical construction does not account for the whole history of a building, the labour of making it, or what it means to those who use it. A low generated hum accompanies the columns; its level is tied to their rotation speed. Touching a shaft does not play it.
+
+From the wall, a synthetic voice attempts “right here, right now”, pauses, then begins again. This is a separate instrument. The words return while the columns keep turning. Which “now” has the repeated phrase brought back?
+
+&lt;!-- @ --&gt;
+
+Try reading the shaft once as a solid and once as a sequence of changing cross-sections. The next room leaves more of its temporal composition to chance. A rule can preserve a recognisable form while allowing individual events to arrive differently.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Wavefunctions_Bernini/tutorial.md">Raw captured source</a></p><pre># Bernini
+
+Solomonic columns are sines wrapped around cylinders. Build the vertex displacement that turns stone into frozen motion.
+
+Declare the column generator.
+
+```gdscript
+class_name SolomonicColumn
+extends MeshInstance3D
+
+@export var height: float = 4.0
+@export var base_radius: float = 0.3
+@export var twist_amount: float = 0.4
+@export var twist_frequency: float = 3.0
+```
+
+Height, base radius, twist amount, twist frequency. The solomonic spiral is two sines along the vertical axis.
+
+Build the ring loop.
+
+```gdscript
+func ring_at(y: float) -&gt; PackedVector3Array:
+    var ring := PackedVector3Array()
+    var twist_x: float = twist_amount * sin(TAU * twist_frequency * y / height)
+    var twist_z: float = twist_amount * cos(TAU * twist_frequency * y / height)
+    for i in 24:
+        var angle := TAU * i / 24.0
+        var x := base_radius * cos(angle) + twist_x
+        var z := base_radius * sin(angle) + twist_z
+        ring.append(Vector3(x, y, z))
+    return ring
+```
+
+Each ring is 24 vertices around the central axis, with its centre displaced by a small sine. The stack of displaced rings produces the helix.
+
+Stack the rings into a mesh.
+
+```gdscript
+func build_mesh() -&gt; void:
+    var st := SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+    for i in 40:
+        var y := float(i) / 40.0 * height
+        for v in ring_at(y):
+            st.add_vertex(v)
+    mesh = st.commit()
+```
+
+Forty rings yield a smooth column. Each ring is the same size; the centres spiral. Baroque geometry with twenty-odd lines.
+
+Add vertex colours for depth.
+
+```gdscript
+func colour_vertex(st: SurfaceTool, pos: Vector3) -&gt; void:
+    var t: float = clamp(pos.y / height, 0.0, 1.0)
+    st.set_color(Color(0.8 - t * 0.2, 0.7 - t * 0.1, 0.6))
+```
+
+The column darkens slightly at the top. Ambient light reads as contour. Bernini&#x27;s drama becomes geometric tinting.
+
+Layer noise on the surface.
+
+```gdscript
+func perturb(vertex: Vector3, noise: FastNoiseLite) -&gt; Vector3:
+    var offset: float = noise.get_noise_3dv(vertex * 4.0) * 0.02
+    return vertex + vertex.normalized() * offset
+```
+
+Tiny perturbations break the mathematical smoothness. The column reads as stone, not plastic.
+
+Animate the twist over time.
+
+```gdscript
+func animate_twist(t: float) -&gt; void:
+    twist_amount = 0.3 + 0.1 * sin(t * 0.5)
+    build_mesh()
+```
+
+The column breathes. It rebuilds slowly as if still being carved. The studio becomes active.
+
+Place a candle at the base for raking light.
+
+```gdscript
+func place_candle_light() -&gt; void:
+    var light := OmniLight3D.new()
+    light.position = Vector3(1.5, 0.3, 0.0)
+    light.light_color = Color(1.0, 0.85, 0.6)
+    add_child(light)
+```
+
+A warm off-centre light grazes the surface. Highlights trace the spiral. Baroque lighting completes the effect.
+
+You have cast sine into stone. The next map, John Cage, turns from oscillation to silence.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Wavefunctions_Bernini/technical.md">Raw captured source</a></p><pre># Wavefunctions Bernini — Technical
+
+Baroque columns are generated procedurally by displacing cylinder vertices according to helical sine functions plus noise layers.
+
+```gdscript
+class_name BerniniColumn extends MeshInstance3D
+
+@export var height: float = 5.0
+@export var base_radius: float = 0.5
+@export var twist_rate: float = 2.0          # revolutions per column
+@export var swirl_amplitude: float = 0.2
+@export var swirl_frequency: float = 6.0
+@export var noise_scale: float = 0.05
+
+func generate_mesh() -&gt; ArrayMesh:
+    var array_mesh := ArrayMesh.new()
+    var surface_tool := SurfaceTool.new()
+    surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+    var rings: int = 64
+    var sides: int = 24
+    var noise := FastNoiseLite.new()
+    for ring in range(rings + 1):
+        var t: float = float(ring) / rings
+        var y: float = t * height
+        var angle_offset: float = twist_rate * TAU * t
+        for side in range(sides + 1):
+            var angle: float = float(side) / sides * TAU + angle_offset
+            var radial_swirl: float = swirl_amplitude * sin(swirl_frequency * y)
+            var current_radius: float = base_radius + radial_swirl
+            var noise_offset: float = noise.get_noise_2d(angle, y) * noise_scale
+            current_radius += noise_offset
+            var x: float = cos(angle) * current_radius
+            var z: float = sin(angle) * current_radius
+            surface_tool.add_vertex(Vector3(x, y, z))
+    # Generate triangle indices ...
+    surface_tool.commit(array_mesh)
+    return array_mesh
+```
+
+## Parameter Interactions
+
+The twist_rate parameter produces the solomonic spiral — the defining feature of Bernini&#x27;s Baldachin columns. A twist_rate of 2.0 produces two full revolutions from base to top; 1.0 produces a single twist; 0.5 produces a half-twist only.
+
+The swirl_amplitude and swirl_frequency produce the secondary undulation along the column&#x27;s length. Setting swirl_amplitude to zero produces a straight twisted column; higher values produce more organic sculpted forms.
+
+## Mesh Complexity
+
+A column with 64 rings and 24 sides has 1560 vertices and 3072 triangles. Ten columns fill the map; total geometry is about 15,000 vertices. Godot renders this comfortably at 60 fps.
+
+## Normal Smoothing
+
+Procedurally generated meshes need smoothed normals for consistent shading. Surface tool&#x27;s `generate_normals` computes per-vertex normals by averaging adjacent face normals, producing smooth shading without visible facets.
+
+```gdscript
+surface_tool.generate_normals()
+```
+
+## LOD
+
+Distant columns can use reduced mesh resolution. Godot 4&#x27;s built-in MeshInstance3D.lod_bias controls automatic LOD switching. The map uses three LOD levels: full detail at close range, half detail at medium, quarter detail at long distance.
+
+Within the sequence, Bernini applies wave mathematics to sculptural form. Cage will next withdraw oscillation to ask what remains.
+
+## Solomonic Spiral Parameters
+
+Bernini&#x27;s Baldachin columns have specific proportions. Each column is about 20 metres tall, twisted through approximately 1.5 full revolutions. The map&#x27;s twist_rate parameter defaults to 2.0 for visual clarity at room scale, but settings around 1.5 produce the historically accurate profile.
+
+## Surface Normal Computation
+
+Smooth shading on procedural geometry requires per-vertex normals. For a surface parameterised by (u, v), the normal is the cross product of the two partial derivatives:
+
+```gdscript
+func compute_normal_at(ring: int, side: int, rings: int, sides: int) -&gt; Vector3:
+    var t_current := float(ring) / rings
+    var t_next := float(ring + 1) / rings
+    var angle_current := float(side) / sides * TAU + twist_rate * TAU * t_current
+    var angle_next := float(side + 1) / sides * TAU + twist_rate * TAU * t_current
+    var p0 := vertex_at(t_current, angle_current)
+    var p1 := vertex_at(t_next, angle_current)
+    var p2 := vertex_at(t_current, angle_next)
+    var du := p1 - p0
+    var dv := p2 - p0
+    return du.cross(dv).normalized()
+```
+
+## Tessellation-Free Approach
+
+For extreme close-ups, mesh tessellation produces visible polygonal facets. A displacement shader can perform the column deformation on the GPU at rendering time, preserving smooth curvature at any zoom level.
+
+```glsl
+// Shader vertex displacement
+vec3 displaced_vertex(vec3 base_vertex, float twist_rate) {
+    float t = (base_vertex.y + HEIGHT * 0.5) / HEIGHT;
+    float angle = base_vertex.x * TAU + twist_rate * TAU * t;
+    float radius = BASE_RADIUS + SWIRL_AMPLITUDE * sin(SWIRL_FREQUENCY * base_vertex.y);
+    return vec3(cos(angle) * radius, base_vertex.y, sin(angle) * radius);
+}
+```
+
+## Material Properties
+
+Bernini&#x27;s bronze Baldachin is reflective and moderately rough — a physically-based material with metallic = 1.0 and roughness = 0.4. The map uses this exact material on the procedural columns for visual continuity with the historical reference.
+
+## Reference Photograph Panel
+
+A photograph of the Baldachin in Saint Peter&#x27;s Basilica is displayed alongside the procedural column. The comparison makes the procedural reinterpretation visible as a decomposition of the baroque form into tunable parameters.
+
+## Export Format
+
+The generated column mesh can be exported as OBJ or GLTF for external rendering. Godot 4 supports mesh export via ResourceSaver; the map exposes a save-to-disk button for authors who want to use the procedural columns in other contexts.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Wavefunctions_Bernini/intent.md">Raw captured source</a></p><pre>Concept: Baroque columns as frozen waves — Bernini&#x27;s solomonic spirals are sine functions wrapped around cylinders. Vertex displacement via rotation matrices transforms rigid geometry into twisting organic forms. Procedural geometry as the new Baroque.
+Sequence role: Seventh map in Wavefunctions; the first art-historical map. After five maps of wave mechanics and one of sound, this map applies oscillation to sculptural form. The advanced difficulty signals that the learner must compose techniques: vertex displacement, rotation matrices, noise layering. Connects to Primitives&#x27; geometric heritage while radically deforming it; follows WaveFunctions_Effect_Sound; leads to WaveFunctions_John_Cage.
+Technical angle: Vertex displacement: VERTEX.xz = rotate(VERTEX.xz, VERTEX.y * twist_rate) in shader, rotation matrix around Y-axis with angle proportional to height. Adding noise for organic erosion: VERTEX += NORMAL * noise(VERTEX). Animating the twist parameter creates breathing, living columns. The bernini_columns artifact implements the full technique.
+Critical angle: Baroque was a glitch in Renaissance order — excess, movement, and emotion disrupting classical restraint. Bernini&#x27;s twisted columns encode oscillation in stone, freezing a wave mid-dance. Procedural geometry is the new Baroque: favoring the variable, mutating, and complex over the static and ideal. The ElphabaDress artifact extends this to fabric — another medium where wave-driven displacement creates form.
+Key artifacts: bernini_columns implements the solomonic spiral via vertex displacement; ElphabaDress extends wave-driven deformation to fabric; vowel_sound_board connects oscillation to vocal resonance; dark_sphere anchors the space.
+Gap: A twist_parameter_slider letting the learner adjust twist rate and noise amplitude on the columns in real time would make the procedural-baroque thesis interactive.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Wavefunctions_Bernini/critical.md">Raw captured source</a></p><pre># The column is the wave — procedural baroque and the politics of excess
+
+Baroque architecture was accused of excess. Its critics called it overwrought, undisciplined, a break with classical restraint. Bernini&#x27;s solomonic columns — the twisting spirals that support the Baldachin at Saint Peter&#x27;s — were the most-accused examples of this excess. They did not behave like columns. They wavered. They turned as they rose. They refused the straight vertical line.
+
+This map takes the accusation seriously and converts it. A procedural colonnade stands in the space; each column is generated at run time from a base cylinder whose vertices have been displaced according to a helical rule. The rule is a sine function wrapped around the cylinder&#x27;s vertical axis. The excess the baroque was accused of is here shown to be a small amount of code.
+
+Gilles Deleuze&#x27;s reading of the baroque in *The Fold* argues that the fold is what the baroque contributed to ontology. Classical form is discrete and planar; baroque form is continuous and folded. The twisted column is not a stack of separate shapes but a single surface curving around itself. Deleuze argues that the fold generalises beyond architecture: it is a mode of thought, a way of producing complexity without breaking continuity.
+
+The procedural implementation confirms Deleuze at the level of vertex arithmetic. A cylinder is a flat sheet rolled into a tube; the twist is another fold applied to that sheet; the noise layer is a third fold that breaks the twist&#x27;s regularity without breaking the surface. Each fold is a small operation on the vertex buffer, and the combination produces the finely detailed form that reads to the eye as baroque excess. The excess is not waste. It is composition.
+
+The politics of the map are visible in the parameter bench. The twist rate, the amplitude, the radius modulation, and the noise scale are all sliders, and turning them reshapes the colonnade live. The baroque is legible as a particular region of this parameter space, and neighbouring regions produce classical colonnades, modernist abstractions, or incoherent distortion. The map does not claim that the baroque is better than the others; it claims that all of them are points in a shared space and that choosing one is a political act rather than an aesthetic given.
+
+A reference panel at the entrance holds a photograph of the Baldachin so the procedural version can be compared with its source. The comparison matters because the procedural column is not a reproduction. It is a generative reinterpretation: the source&#x27;s silhouette reverse-engineered into a small set of parameters. Whether this reinterpretation is a homage or a colonisation is a question the map poses without answering. The baroque had its own politics; the procedural baroque inherits them and invents new ones.
+
+Within the sequence, Bernini is the first art-historical map. It argues that sculptural form can be a wave, and that the baroque&#x27;s contribution to architecture is a specific kind of folded continuity. The map is pitched between reverence and analysis, and the parameter sliders are what keep the reverence from becoming nostalgia.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Wavefunctions_Bernini/artifacts.md">Raw captured source</a></p><pre># Wavefunctions Bernini — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 4 artifacts*
+
+&gt; Baroque columns twist like frozen waves. Bernini&#x27;s solomonic spirals are sine functions wrapped around cylinders — architecture as helical oscillation, stone as solidified motion. The wave captured mid-dance, held for centuries.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Elphaba Dress
+![Elphaba Dress](/scene-catalog/ElphabaDress.png)
+
+Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.
+
+`ElphabaDress`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Bernini Columns
+![Bernini Columns](/scene-catalog/bernini_columns.png)
+
+Baroque architectural wave patterns
+
+`bernini_columns`
+
+## vowel_sound_board
+![vowel_sound_board](/scene-catalog/vowel_sound_board.png)
+
+vowel(formant1, formant2) -&gt; pulse_train filtered through formant resonances
+
+`vowel_sound_board`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Wavefunctions_Bernini/summary.md">Raw captured source</a></p><pre># Wavefunctions Bernini — Summary
+
+Bernini&#x27;s solomonic columns twist as they rise. The spiral is not decorative relief on a straight column; it is the column. This map treats those columns as sine functions wrapped around cylinders — a sculptural reading of oscillation that connects the wave mathematics of the earlier maps to procedural geometry.
+
+A colonnade stands in the space. Each column is generated at run time by displacing the vertices of a base cylinder according to a helical rule: offset the lateral position by a sine of the vertical coordinate, modulate the radius by another sine at a different frequency, layer a small amount of noise for stone-like imperfection. The result is a twisting form that reads as carved marble but is computed, not modelled.
+
+A pair of benches at the front of the space expose the parameters: twist rate, amplitude, radius modulation, and noise scale. Turning the dials reshapes the colonnade live. A reference panel shows the original Saint Peter&#x27;s Baldachin so the procedural version can be held against its source.
+
+Within the sequence, Bernini is the first art-historical map. It shifts the reader from mechanism to form and argues that the baroque was already doing vertex displacement, just in stone.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Wavefunctions_Bernini/blurb.md">Raw captured source</a></p><pre>Baroque columns twist like frozen waves. Bernini&#x27;s solomonic spirals are sine functions wrapped around cylinders — architecture as helical oscillation, stone as solidified motion. The wave captured mid-dance, held for centuries.
+
+The `bernini_columns` artifact implements the technique as vertex displacement: rotate each vertex&#x27;s horizontal position by an angle proportional to its height, add layered noise for organic erosion, and a straight cylinder becomes a twisting column. `ElphabaDress` extends the same wave-driven deformation to fabric; `vowel_sound_board` couples oscillation to vocal resonance. Baroque was a glitch in Renaissance order — excess, movement, emotion disrupting classical restraint. Procedural geometry is the new Baroque: favoring the variable and mutating over the static and ideal. Stone can still dance if you write the shader.
+</pre></section></body></html>

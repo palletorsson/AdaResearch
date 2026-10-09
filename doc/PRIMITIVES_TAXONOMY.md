@@ -22,8 +22,9 @@ inserted, six heroes built, everything else untouched. Live at
 ## The six heroes (probe 0 broken, captured, registered in primitives.json 259→265)
 
 1. **the_invisible_point** *(Point)* — a vitrine exhibiting NOTHING: brass arrows and
-   crossing lasers mark a `Vector3` the engine cannot draw; the stand-in sphere blinks
-   out on a seeded cycle and the readout testifies: *the address remains*.
+   crossing lines locate a `Vector3` without giving it a visible body. The point is
+   never rendered; its local address remains readable. Palle's 2026-09-08 correction
+   removes the original blinking stand-in entirely.
 2. **first_shadow** *(Triangle)* — three vertices by `SurfaceTool`, the smallest surface
    the engine accepts, casting the room's first real shadow beside a line that casts none.
 3. **seven_words_choir** *(The seven words)* — the whole vocabulary on choir risers,

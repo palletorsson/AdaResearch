@@ -1,0 +1,156 @@
+--- before/ada_run/em_plan.json
++++ after/ada_run/em_plan.json
+@@ -13,31 +13,44 @@
+     {
+       "museum": "sainsbury-false-perspective-enfilade",
+       "piers": false,
++      "basin": {
++        "rects": [
++          [
++            -2,
++            -2,
++            4,
++            4
++          ]
++        ],
++        "depth": 2,
++        "glass": true,
++        "fire": false
++      },
+       "gate": false,
+       "tile": [
+         [
+-          "4",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "1",
+-          "4"
+-        ],
+-        [
+-          "4",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "1",
++          "4"
++        ],
++        [
++          "1",
+           "1",
+           "1",
+           "1",
+@@ -208,6 +221,36 @@
+       "h": 9,
+       "rooms": 0,
+       "artifacts": [
++        {
++          "token": "origin",
++          "cell": [
++            0,
++            0
++          ],
++          "tile_cell": [
++            0,
++            0
++          ],
++          "rotation": 0,
++          "mode": "freestanding",
++          "venue": "interior",
++          "support_height_m": 0.0,
++          "hand": false,
++          "ruled": {
++            "by": "map: Point_Zero",
++            "cell": [
++              0,
++              0
++            ]
++          },
++          "config": {
++            "plinth": "0",
++            "pin": "1",
++            "offset": "-0.50,2.00,-0.50",
++            "beam_height": "0.8",
++            "beam_label": "Point zero"
++          }
++        },
+         {
+           "token": "arrival_shaft",
+           "cell": [
+@@ -265,40 +308,6 @@
+           "offset": [
+             0.0,
+             1.65,
+-            0.0
+-          ]
+-        },
+-        {
+-          "token": "origin",
+-          "cell": [
+-            3,
+-            5
+-          ],
+-          "tile_cell": [
+-            3,
+-            5
+-          ],
+-          "rotation": 180,
+-          "mode": "freestanding",
+-          "venue": "interior",
+-          "support_height_m": 0.0,
+-          "hand": false,
+-          "ruled": {
+-            "by": "map: Point_Zero",
+-            "cell": [
+-              3,
+-              5
+-            ]
+-          },
+-          "config": {
+-            "plinth": "0",
+-            "pin": "1",
+-            "beam_height": "0.8",
+-            "beam_label": "Point zero"
+-          },
+-          "offset": [
+-            0.0,
+-            1.0,
+             0.0
+           ]
+         },
+@@ -341,7 +350,7 @@
+         "h": 9
+       },
+       "apron": 0,
+-      "interior_count": 139,
++      "interior_count": 141,
+       "ordered": true,
+       "pages": [],
+       "sequence": "primitives",

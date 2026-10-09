@@ -1,0 +1,191 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Grid_Pallet · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Grid_Pallet">← Tutorial lineage</a></p><h1>Color Grid Pallet</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Grid_Pallet/final.md">Raw captured source</a></p><pre># Find the colour again
+
+&lt;!-- @gridcolorizer --&gt;
+
+Choose a square before you choose a colour. The white outline marks one piece of the floor. On the console, two numbers give its address. X + moves the outline across the floor; Z + moves it along the other direction. Choose a place you will recognise when you come back.
+
+At the pillars, moving the sampler changed its colour. Here you can leave a colour behind.
+
+Press COLOUR. The outlined square turns pink. Another press gives it another of four inks. Stop at one you want to leave here.
+
+Move the outline away. Your colour stays behind, now one square among the others. Each coordinate cycles through five positions. Keep going until the outline comes back to the place you chose. The colour is still waiting.
+
+The white outline has travelled. Your exception has not followed it.
+
+![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-review/doc/book/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png)
+
+*Write, leave, return, rewrite. The pink square keeps its colour while the white outline moves. RULE replaces that value; the same cube still supports you.*
+
+```gdscript
+colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
+```
+
+Godot draws these cubes together in a `multimesh`, but each cube has its own colour entry. `selected` holds the two coordinates you chose; `cells[selected]` finds the corresponding cube. This line changes that cube&#x27;s colour. Moving the outline reads another entry and leaves the previous one alone.
+
+Look from the small swatch beside the controls to the floor. Both receive the stored value. Their size, angle, light and neighbours differ. A matching number does not settle how the colour will meet you. The room where colour needed company has followed us here.
+
+Walk over to your square. You can stand on a value you have just changed.
+
+Return to the console and press RULE.
+
+Your exception gives way to the floor&#x27;s repeating assignment. The address remains. Walk back to the place you changed: the same cube still supports you. Its colour has been replaced; the ground has not given way.
+
+```gdscript
+var colour_index: int = (address.x + address.y) % palette.size()
+colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
+```
+
+In this two-coordinate address, `address.y` names the room&#x27;s z direction. Add the coordinates. `%` keeps the remainder after division by the number of colours in the palette. Another cell can have the same remainder and receive the same colour. Compare addresses (8, 9) and (9, 8) after applying the rule: both sums are seventeen. The diagonal relationships were already inside that addition.
+
+Try PALETTE. The collection changes; the assignment keeps its form. The floor finds another appearance without learning another way to stand.
+
+We could mistake this regularity for a requirement of the grid. Yet you have just made an exception. The cube held it perfectly well. The rule did not return because the exception was impossible. It returned because you pressed a button that wrote across the floor again.
+
+Try to choose a square farther away. X + and Z + bring you back through the same twenty-five addresses. RULE reaches beyond that region, across the interior floor. You can walk to a square whose colour the program can change and whose address the console will not let you choose. The floor carries you beyond the reach of your edits. Why should the program&#x27;s reach exceed yours?
+
+Each address keeps only its current colour. An edit remains while you look elsewhere, but RULE replaces it and reloading the room starts again. To remember more would require another place to keep what has been overwritten.
+
+&lt;!-- @ --&gt;
+
+Ahead, a spray can is already moving across a canvas. We leave the address with its current value and approach a surface on which marks accumulate. What will that surface keep of a movement after the body has passed?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Grid_Pallet/tutorial.md">Raw captured source</a></p><pre># Find the colour again
+
+1. Read the two-coordinate address on the console. Follow the outlined floor cell.
+2. Press X +, then Z +. Notice which direction each changes. Each coordinate wraps through five positions.
+3. Press COLOUR to assign an ink. Move away through five X steps and return. The edited colour stays at its address.
+4. Walk to the edited square and stand on it. Return to the console and press RULE. The colour returns to the coordinate-based assignment; the same floor still supports you.
+5. Press PALETTE. A different collection supplies the same assignment rule.
+
+The selected coordinate maps to an actual room-floor instance. This room does not infer cell coordinates from a square instance count: stacked walls and gaps make that inference unreliable.
+
+```gdscript
+colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
+```
+
+That write changes one instance. The rule visits all mapped floor cells:
+
+```gdscript
+var colour_index: int = (address.x + address.y) % palette.size()
+colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
+```
+
+In this Vector2i, y stands for room z. The remainder chooses the palette entry. Equal remainders give different cells the same colour.
+
+Compare the scope of the two actions. You can edit twenty-five addresses; the rule reaches the interior floor. What would need to change to let your exception survive a rule pass?
+
+Follow the current value into Color_Paint, where successive marks can accumulate on a surface.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Grid_Pallet/technical.md">Raw captured source</a></p><pre># Colour at an address
+
+Pillar evaluated colour at spatial sample positions. Here the same coordinate can receive an explicit edit, then receive a computed value again. The next room, Color_Paint, accumulates strokes.
+
+## The actual implementation
+
+`algorithms/color/gridcolorizer/gridcolorizer.gd` remains the legacy GridColorMutator alias for ordinary placements. Only `#lesson:addresses` activates `address_lesson.gd`, hides the obsolete desktop overlay and disables automatic/global NextCube cycling for this encounter.
+
+The lesson finds its room&#x27;s GridMultiMesh and GridStructureComponent. It maps each interior floor coordinate to the corresponding instance using `cube_positions`. This matters: the room is rectangular, has stacked boundary walls and omitted cells. A square inferred from instance count does not encode those addresses.
+
+```gdscript
+cells[Vector2i(xyz.x, xyz.z)] = i
+```
+
+The dictionary includes floor cubes at y=0 with 0&lt;x&lt;18 and 0&lt;z&lt;20. It excludes wall columns on the perimeter. Selection is restricted to x/z 8 through 12; each button wraps that coordinate over five values.
+
+```gdscript
+colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
+```
+
+COLOUR cycles pink, teal, yellow and white. Reading another cell does not rewrite the previous one. The swatch reads the actual stored instance colour, rather than assuming that the requested value was stored at infinite precision.
+
+```gdscript
+var colour_index: int = (address.x + address.y) % palette.size()
+colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
+```
+
+Here Vector2i.y represents room z. RULE applies this coordinate-sum assignment to every mapped floor cube. PALETTE selects another existing palette resource and applies the same rule. A single edit is one instance write; a rule pass visits all mapped floor instances. Neither operation changes transforms or collision.
+
+## What this does not implement
+
+There is no ImageTexture palette editor, texture export, palette_changed broadcast, undo stack or saved edit history here. These were generic examples in the former tutorial, not the running artifact. This lesson writes MultiMesh instance colours. Renderer storage has finite precision; focused checks allow a channel error of 1/255 and separately check that only the selected instance changes.
+
+## Verification
+
+`commons/testing/probe_grid_address_lesson.gd` loads the actual museum, emits the real console button signals, inspects buffer writes, checks returning to an address, rule replacement, palette evaluation, preserved geometry, standing reach and a body-sized approach. Tracked-controller pressing and headset comfort require a separate walkthrough.
+
+## Native sequence and ordinary walk, 23 September 2026
+
+The shared illustration captures the actual floor from one fixed camera after COLOUR, X+, a full address return and RULE. The final frame is taken while the ordinary museum walker stands on the rewritten square. The small swatch and readout are captured separately. No source, geometry or placement changed.
+
+36 focused assertions pass in the isolated production museum. Supplied pressed/released pointer events operate the five actual console buttons. COLOUR changes exactly one MultiMesh instance; selection changes on both axes preserve it. The swatch reads the stored value. RULE restores the original value, and equal coordinate sums agree. PALETTE retains the assignment across every mapped floor address, including addresses outside the manual selection region. Three palette changes restore the starting collection; the probe also restores the initial ink index.
+
+Supplied key input drives the ordinary controller from the console approach to the selected cell and back, passing beside the plinth. The same floor supports the body before and after RULE; all instance transforms remain unchanged. Evidence is in `doc/book/iterations/2026-09-23-grid-colour-kept/`. The checks retain a per-channel colour tolerance of 1/255. Tracked pressing/reach, headset comfort, colour calibration, learner response and performance are not established.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Grid_Pallet/intent.md">Raw captured source</a></p><pre>Question: what remains at an address when attention moves elsewhere?
+
+Do: select a floor cell, change its colour, leave the address and return. Then apply the rule again.
+
+Observe: the stored exception persists through selection changes; the rule overwrites it without changing the cube&#x27;s shape or support.
+
+Explain: a spatial coordinate is resolved through GridStructureComponent.cube_positions to a MultiMesh instance index. The rule chooses a palette entry using the remainder of a coordinate sum.
+
+Question the apparatus: the visitor can edit a five-by-five region, while the rule reaches the whole interior floor. Neither permission follows inevitably from a grid. This implementation provides four inks and no history; extensions require code.
+
+Handoff: Color_Pillar supplies position and sampling. Color_Paint supplies a surface on which marks accumulate.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Grid_Pallet/critical.md">Raw captured source</a></p><pre># The exception and the rewrite
+
+One cell can depart from the surrounding colour assignment without becoming unable to support a body. Colour and collision are different parts of this implementation. The visible regularity is not a physical necessity of the floor.
+
+An exception persists while the visitor selects another address. RULE then overwrites it. This gives the reader a specific event to examine: the exception disappears because a routine assigns another value, not because the grid cannot hold difference. Repetition has an author, a trigger and a scope.
+
+The console also distributes unequal permissions. The visitor can edit twenty-five positions using four inks; the rule addresses the interior floor. This asymmetry is visible and changeable in source. A wider edit region, arbitrary colours or protected exceptions would require further implementation. Shared substrate makes such changes thinkable; it does not implement them for us.
+
+Neither the address nor its hexadecimal colour exhausts the encounter. The swatch and the floor receive the same stored value under different lighting and viewing conditions. In the desktop compatibility renderer, requested and retrieved channels can also differ slightly through storage precision. That discrepancy should be measured before being given a metaphor.
+
+The lesson retains a current value, not a history of its replacements. An undo stack or save file would be another design decision. The next room&#x27;s accumulating painting makes a different decision about what a surface keeps.
+
+## Further encounters — proposals retained outside the chapter
+
+An exception that travels, an exception protected from a rewrite, or a change to the assignment rule could each make a different encounter. These possibilities remain development questions, not capabilities of the current console. The current final.md stays with what can already be experienced: the edit persists through a change of attention, an explicit rewrite replaces it, and the rule reaches addresses the visitor cannot select.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Grid_Pallet/artifacts.md">Raw captured source</a></p><pre># Color Grid Pallet — Artifacts
+*Color and Composition · F_order · 4 artifacts*
+
+&gt; A colour waits at an address. Leave it, find it again, then ask the rule to run once more. The floor keeps supporting you while the exception disappears.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## gridcolorizer
+![gridcolorizer](/scene-catalog/gridcolorizer.png)
+
+Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.
+
+`gridcolorizer`
+
+## spectrum_forest
+![spectrum_forest](/scene-catalog/spectrum_forest.png)
+
+hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum
+
+`spectrum_forest`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Grid_Pallet/summary.md">Raw captured source</a></p><pre># Find the colour again
+
+Color_Grid_Pallet follows Pillar&#x27;s spatial samples and precedes Paint&#x27;s accumulating marks. Its primary encounter is `gridcolorizer`, configured with `#lesson:addresses`.
+
+The original 19 by 21 metre grid remains the receiving surface. A standing console at (7,15), centred at 1.15 m, selects cells with x and z from 8 through 12. X + and Z + cycle independently; COLOUR writes one of four inks into the selected instance. The outlined cell and cased RGB swatch reveal what is selected and stored. Moving the selection does not move its colour.
+
+RULE rewrites the interior floor from `(x + z) % palette.size()`. PALETTE cycles Stonewall Freedom, Starry Night and Mondrian Grid collections through the same rule. Walls, transforms and collision are not changed. Reapplying a rule replaces local edits; the lesson has no undo history or save file.
+
+The old NextCube was removed from this room in favour of local console controls. The science screen moves to (15,15), leaving the approach open. Spectrum forest and the existing transport cube remain secondary context. This is a colour-assignment lesson on the existing floor, not a separate pattern machine.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Grid_Pallet/blurb.md">Raw captured source</a></p><pre>A colour waits at an address. Leave it, find it again, then ask the rule to run once more. The floor keeps supporting you while the exception disappears.
+</pre></section></body></html>

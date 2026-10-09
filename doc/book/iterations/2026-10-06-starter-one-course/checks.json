@@ -1,0 +1,208 @@
+{
+  "archive_sha256": "d5c8dc63854bed73419ac69ea2475c08663c155b419c3a6ee02fa6df60970e69",
+  "checks": [
+    {
+      "id": "zero/creates_label",
+      "passed": true
+    },
+    {
+      "id": "zero/reads_advancing_frame_count",
+      "passed": true
+    },
+    {
+      "id": "zero/once_edit_holds_one_reading",
+      "passed": true
+    },
+    {
+      "id": "point_one/static_body",
+      "passed": true
+    },
+    {
+      "id": "point_one/sphere_radius",
+      "passed": true
+    },
+    {
+      "id": "coordinates/pickup_is_present",
+      "passed": true
+    },
+    {
+      "id": "coordinates/local_survives_moved_frame",
+      "passed": true
+    },
+    {
+      "id": "coordinates/world_includes_frame",
+      "passed": true
+    },
+    {
+      "id": "coordinates/readout_both_frames",
+      "passed": true
+    },
+    {
+      "id": "lines/one_metre",
+      "passed": true
+    },
+    {
+      "id": "lines/calculation_reaches_b",
+      "passed": true
+    },
+    {
+      "id": "lines/reversal_visibly_misses_b",
+      "passed": true
+    },
+    {
+      "id": "lines/reversal_keeps_length",
+      "passed": true
+    },
+    {
+      "id": "cube/crease_changes_lighting_normals",
+      "passed": true
+    },
+    {
+      "id": "cube/other_instance_unchanged",
+      "passed": true
+    },
+    {
+      "id": "cube/lit_surface",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_rules_builds",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_godot_builds",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_column_builds",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_profiles_builds",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_portals_builds",
+      "passed": true
+    },
+    {
+      "id": "route/primitive_composition_builds",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_1_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_2_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_3_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_4_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_5_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_6_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_7_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_8_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_9_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_10_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_11_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_12_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_13_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_14_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_15_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_16_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_17_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_18_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_19_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_20_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_21_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_22_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_23_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_24_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/card_25_height_contrast",
+      "passed": true
+    },
+    {
+      "id": "colonnade/every_body_has_card",
+      "passed": true
+    },
+    {
+      "id": "motion/no_untaught_t_at_stage_zero",
+      "passed": true
+    },
+    {
+      "id": "motion/t_appears_with_motion",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "mode": "checks",
+  "passed": true
+}

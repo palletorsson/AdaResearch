@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Affect_Theory_Visualization · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Affect_Theory_Visualization">← Tutorial lineage</a></p><h1>SoftBodies Affect Theory Visualization</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/final.md">Raw captured source</a></p><pre># What makes this look alive?
+
+&lt;!-- @radiolaria --&gt;
+
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.[^haeckel] Let that recognition arrive, then keep it beside the question of how these objects were made. There are six of them, and the program builds each from a different recipe: a plain body, a spiked one, a polyhedron, a lattice sphere, a ringed form and a pollen grain. Walk the row and say which you would call alive first, before you know how any of them was made.
+
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+
+The program constructs those families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. A spike is a cone between twenty centimetres and a metre and a half long, placed wherever a draw beats a probability of seven in ten; the lattice is an icosahedron half a metre across, subdivided as often as the detail number allows. Press SPIKES and the probability moves; press SEED and the same draws come back in the same order. These names describe decisions available to the generator. They are not measured properties of a living radiolarian, and that is the whole of the biology here: a list of numbers and a random number generator you can pin.
+
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+
+&lt;!-- @ --&gt;
+
+[^haeckel]: Ernst Haeckel, *Kunstformen der Natur* (1899–1904), the Radiolaria plates. This generator’s families echo the geometric vocabulary of those drawings: a drawn vocabulary, not a measured organism. No parameter here is a property of a living radiolarian.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/tutorial.md">Raw captured source</a></p><pre># What makes this look alive?
+
+&lt;!-- @radiolaria --&gt;
+
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
+
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+
+The program constructs several families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. These names describe decisions available to the generator. They are not measured properties of a living radiolarian.
+
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/technical.md">Raw captured source</a></p><pre># What makes this look alive? — implementation
+
+Primary source scenes:
+
+- `res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers ROTATION, COLOUR, EFFECTS, SEED, SPIKES, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
+
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+
+The program constructs several families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. These names describe decisions available to the generator. They are not measured properties of a living radiolarian.
+
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/intent.md">Raw captured source</a></p><pre># Intent
+
+What can the image of a living body tell us about the mechanism?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/critical.md">Raw captured source</a></p><pre># What makes this look alive? — question the construction
+
+What can the image of a living body tell us about the mechanism?
+
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
+
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+
+The program constructs several families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. These names describe decisions available to the generator. They are not measured properties of a living radiolarian.
+
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `radiolaria` — primary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/summary.md">Raw captured source</a></p><pre># What makes this look alive?
+
+What can the image of a living body tell us about the mechanism?
+
+Primary encounters: radiolaria. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Affect_Theory_Visualization/blurb.md">Raw captured source</a></p><pre># What makes this look alive?
+
+What can the image of a living body tell us about the mechanism?
+</pre></section></body></html>

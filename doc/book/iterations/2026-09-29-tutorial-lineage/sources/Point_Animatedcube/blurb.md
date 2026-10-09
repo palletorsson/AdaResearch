@@ -1,0 +1,1 @@
+A cube assembles from corners, edges and triangular patches. Move one numbered corner and find the crease in what looked like a flat square. The connections remain while the shape changes. Replay keeps your alteration; restore returns the initial cube. A folding net offers another way for faces to meet.

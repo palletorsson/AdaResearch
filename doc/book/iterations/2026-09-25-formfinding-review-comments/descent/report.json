@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "retained comparison present: /descent_marble_toy.gd",
+      "passed": true
+    },
+    {
+      "name": "retained comparison present: /GradientDescentDemo.gd",
+      "passed": true
+    },
+    {
+      "name": "retained comparison present: /gradient_descent_well.gd",
+      "passed": true
+    },
+    {
+      "name": "retained comparison present: /settling_tremble.gd",
+      "passed": true
+    },
+    {
+      "name": "retained comparison present: /science_screen.gd",
+      "passed": true
+    },
+    {
+      "name": "controlled landscape present",
+      "passed": true
+    },
+    {
+      "name": "bowl cost is quarter of the sum",
+      "passed": true
+    },
+    {
+      "name": "two starts end at small slope",
+      "passed": true
+    },
+    {
+      "name": "recorded costs reproduce",
+      "passed": true
+    },
+    {
+      "name": "well LOSS display reports the current first marble",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: descent-comparison",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "descent_runs": [
+      {
+        "cost": -0.30425735225346,
+        "start": 0,
+        "status": "SMALL SLOPE",
+        "steps": 66
+      },
+      {
+        "cost": 0.295496103044766,
+        "start": 1,
+        "status": "SMALL SLOPE",
+        "steps": 13
+      }
+    ],
+    "well_readout": "LOSS 0.000"
+  },
+  "passed": true,
+  "room": "FormFinding_Descent",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

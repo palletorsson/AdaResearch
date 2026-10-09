@@ -1,0 +1,311 @@
+{
+	"approach": {
+		"clear_fraction": 1.0,
+		"level": true
+	},
+	"artifact": {
+		"position": [
+			3.5,
+			1.20500004291534,
+			8.5
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"checks": [
+		{
+			"message": "Point_One built from the current map",
+			"passed": true
+		},
+		{
+			"message": "Exactly one live radio in Point_One",
+			"passed": true
+		},
+		{
+			"message": "Radio faces the minus-Z approach",
+			"passed": true
+		},
+		{
+			"message": "Standing position has a floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule clears plinth and neighboring geometry",
+			"passed": true
+		},
+		{
+			"message": "Last metre of approach is supported and clear",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle1 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle1 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle1 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle1 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle3 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle3 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle3 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle3 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle5 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle5 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle5 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle5 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle7 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle7 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle7 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel Handle7 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "TuningWheel real pickup operates under map rotation",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle1 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle1 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle1 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle1 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle3 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle3 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle3 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle3 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle5 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle5 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle5 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle5 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle7 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle7 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle7 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel Handle7 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "VolumeWheel real pickup operates under map rotation",
+			"passed": true
+		},
+		{
+			"message": "Tuning reaches station two in the museum",
+			"passed": true
+		},
+		{
+			"message": "Volume reading follows the museum wheel",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 1.05916569381952,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/TuningWheel/HingeOrigin/InteractableHinge/Handles/Handle1/InteractableHandle",
+			"horizontal_distance": 0.689089894294739,
+			"label": "TuningWheel Handle1",
+			"position": [
+				3.66107487678528,
+				1.05916571617126,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.0310749784112,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/TuningWheel/HingeOrigin/InteractableHinge/Handles/Handle3/InteractableHandle",
+			"horizontal_distance": 0.677545070648193,
+			"label": "TuningWheel Handle3",
+			"position": [
+				3.60083436965942,
+				1.03107500076294,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.970834530889988,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/TuningWheel/HingeOrigin/InteractableHinge/Handles/Handle5/InteractableHandle",
+			"horizontal_distance": 0.682291328907013,
+			"label": "TuningWheel Handle5",
+			"position": [
+				3.62892508506775,
+				0.97083455324173,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.998925127089024,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/TuningWheel/HingeOrigin/InteractableHinge/Handles/Handle7/InteractableHandle",
+			"horizontal_distance": 0.69619208574295,
+			"label": "TuningWheel Handle7",
+			"position": [
+				3.6891655921936,
+				0.998925149440765,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.01131246238947,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/VolumeWheel/HingeOrigin/InteractableHinge/Handles/Handle1/InteractableHandle",
+			"horizontal_distance": 0.677150070667267,
+			"label": "VolumeWheel Handle1",
+			"position": [
+				3.40185523033142,
+				1.01131248474121,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.06185517460108,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/VolumeWheel/HingeOrigin/InteractableHinge/Handles/Handle3/InteractableHandle",
+			"horizontal_distance": 0.68474006652832,
+			"label": "VolumeWheel Handle3",
+			"position": [
+				3.35868763923645,
+				1.06185519695282,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.0186877027154,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/VolumeWheel/HingeOrigin/InteractableHinge/Handles/Handle5/InteractableHandle",
+			"horizontal_distance": 0.696927666664124,
+			"label": "VolumeWheel Handle5",
+			"position": [
+				3.30814480781555,
+				1.01868772506714,
+				8.38999938964844
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.968144990503788,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack/VolumeWheel/HingeOrigin/InteractableHinge/Handles/Handle7/InteractableHandle",
+			"horizontal_distance": 0.686300039291382,
+			"label": "VolumeWheel Handle7",
+			"position": [
+				3.35131239891052,
+				0.96814501285553,
+				8.38999938964844
+			]
+		}
+	],
+	"failures": [],
+	"feet": [
+		3.5,
+		0.0000000223517417907715,
+		7.72000026702881
+	],
+	"obstacles": [],
+	"passed": true,
+	"radio_instances": [
+		{
+			"id": 438489321684,
+			"path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/SoundscapeRadioRack",
+			"position": [
+				3.5,
+				1.20500004291534,
+				4.5
+			]
+		}
+	],
+	"room": "Point_One",
+	"scope": "Actual museum, production radio, static clearance and ray tests. No headset or listening validation.",
+	"shots": [
+		"radio-operating.png",
+		"radio-approach.png"
+	]
+}

@@ -1,0 +1,470 @@
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -15784,6 +15784,27 @@
+         "wall_backing": false,
+         "orientation": "face_approach"
+       }
++    },
++    "random_position_rails": {
++      "lookup_name": "random_position_rails",
++      "name": "Somewhere to start",
++      "scene": "res://commons/artifacts/random_position_rails/random_position_rails.tscn",
++      "category": "procedural",
++      "sequence": "randomness",
++      "map_sequences": [
++        "randomness"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "parameters": {
++        "footprint": [
++          6,
++          3,
++          3
++        ],
++        "size_group": "room_scale"
++      },
++      "description": "Paired rail carriages compare fresh positions with accumulated steps. Shared sampled input, advance targets, matched motor timing and a grabbable prediction marker."
+     }
+   }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -1,16 +1,17 @@
+ {
+   "primary_tokens": [
+     "random_walk_terrarium",
+-    "random_walk_128",
+-    "random_draw_dot"
++    "random_position_rails",
++    "random_draw_dot",
++    "random_walk_128"
+   ],
+-  "reason": "Compare direction sets, a capped long-step law and boundaries; distinguish a retained trail from a next-step rule.",
++  "reason": "Compare a retained trail, fresh destinations, accumulated steps, a hand-carried origin and a ground that retains visits.",
+   "status": "desktop_checked_headset_pending",
+   "sequence": "randomness",
+   "text_path": "commons/maps/Random_Walk/final.md",
+-  "text_sha256": "a9aceb72597616386492bb6737021b3ba34bc3f5339b4b049eb49c751ff7698c",
+-  "map_sha256": "bb7b9a11ecf811817344ae8d5e93986a684f0dea8e2bef52167608f217d50030",
++  "text_sha256": "8e6f78b1c9c96335988270e8465ebe9fb7881696cbae64680074ced89c50a0a0",
++  "map_sha256": "d9724f0258e6b2c45c164336682e61266129481fb84079cf7527030beb8ab541",
+   "learner_verified": false,
+-  "verification_scope": "Fresh unchanged-sampler and accumulated-position comparisons; actual-museum label capture. Headset controls not tested.",
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Walk/DECISIONS.md"
++  "verification_scope": "Production rail controls, shared draw, revealed targets, matched easing, bounded record, replay and museum placement. Headset pending; see dated evidence.",
++  "local_review": "doc/book/iterations/2026-09-24-random-walk-rails/DECISIONS.md"
+ }
+--- before/commons/maps/Random_Walk/final.md
++++ after/commons/maps/Random_Walk/final.md
+@@ -64,6 +64,22 @@
+ 
+ Below, MSD measures the five beads' average squared distance from their release point. Watch it increase or decrease. The glass bounds it; the number does not report how much trail has accumulated or how far the beads have travelled. A return toward the centre can lower it while adding more line.
+ 
++<!-- @random_position_rails -->
++
++## Somewhere to start
++
++Two rails stretch beside the tank. Each carries a block. Slide the white marker to a place you think one will reach, then pull NEXT. Two empty frames appear before either body moves. The machine has made its choices. For a moment, you can see where it intends to put them.
++
++The blue block can cross almost the whole rail. The pink one stays near where it was. Follow a few turns. Try another guess. What does knowing the last position give you?
++
++Both receive the same new number, drawn between minus one and one. Blue uses it to choose a place along the rail. Pink uses it to propose a step of at most forty centimetres from its current place. The small addition carries a past into the next move. A walk needs somewhere to start.
++
++At the rail ends, an outward step folds back, as it did at the terrarium glass. These bodies have not been offered an endless line. Their twelve most recent landing pairs collect below, newest at the top. Older marks disappear while the pink block keeps the position those movements helped it reach. Erase the record and that next step can still be taken.
++
++Watch the journeys between the empty frames. Both motors take one second, with the same easing. Even blue's fresh destinations arrive by a smooth movement. Looking continuous is not enough to tell us what a process remembers.
++
++RUN repeats the experiment; HOLD lets the revealed move finish and stops the next draw. REPLAY brings both bodies to the centre and repeats their choices. Your marker can move elsewhere. It changes neither rule. A prediction has entered the room, but the machine has no obligation to meet it.
++
+ <!-- @random_draw_dot -->
+ 
+ ## A hand with company
+--- before/commons/maps/Random_Walk/intent.md
++++ after/commons/maps/Random_Walk/intent.md
+@@ -1,8 +1,9 @@
+-Concept: A proposed step, a reflected endpoint, an ordered record. The trail does not feed the heading rule; the implementation still retains position, generator and timing state.
+-Sequence role: Active randomness hall 4. After Random Remove's candidate set, follow a choice that moves a body. Hand the distinction between samples and their display to Random Gaussian.
+-Encounter: Preserve the existing logbook terrarium, dark backboard, enlarged red bead, seven buttons and recovered floor. Compare 2D/3D/LEVY, inspect a crossing from another angle, follow a return near the glass, replay a named seed at equal step counts. ONE/ALL changes visual emphasis while all five walkers continue.
+-Technical angle: Five 0.015 m proposed steps per batch at 30 batches/s; LEVY varies the proposed length up to 0.15 m. Reflection folds overshoots. At step 300 the default trail keeps positions 100..299 and the bead is at 300. A two-second frame accepts at most five batches; its unspent excess is discarded. The frame clock still advances by two seconds. RESET retains the fractional step timer, so replay claims concern step counts.
+-Critical angle: Let an apparent intention raise a question about the relation that would implement it. The line omits wall contacts, drops its oldest positions and can project separated stretches onto an apparent crossing. Those are different omissions with different remedies. The bounded five-walker MSD is not distance travelled or entropy.
+-Primary: random_walk_terrarium alone is the book hero, at (5,6), facing −Z. The 11×13 hall retains the sheet collection, leash, floor path and one compact pixel cloud. The two extra pixel clouds, repeated catalyst, apparatus launchers and Monte Carlo pavilion are archived.
+-Next: Random_Gaussian. A collection of draws acquires another visible shape when gathered by frequency.
+-Deferred: Tracked-hand approach, fine trail/lettering visibility and Quest performance. No headset claim is made by the desktop review.
++Concept: A proposed step needs a current position. A stored drawing, a new target and an animated journey retain different things.
++Sequence role: Active randomness hall 7 of 14, after Random_Rotate_Random_XYZ and before Random_Gaussian. Preserve the detailed terrarium encounter and add a bodily comparison of fresh positions with accumulated steps.
++Encounter: Terrarium → paired rails → hand-carried drawing dot → terrain recording visits. The rails reveal targets before a shared-duration animation; a grabbable marker lets the visitor make a prediction without changing either generator rule.
++Primary: random_walk_terrarium (9,5), random_position_rails (13,8), random_draw_dot (6,8), random_walk_128 (9,17), in that book order. Current hall is 19×26. Existing collection (3,5), leash (15,5), pixel cloud (3,9), floors, basin and bridges remain.
++Technical angle: The terrarium retains five bounded walkers, its frame cap and a limited trail. The new rails share a PRNG draw in [-1,1]: blue chooses x=2.2u; pink folds its previous x+0.4u into ±2.2m. Targets appear for 0.65s before a 1s cubic-eased journey. Neither rule consults its twelve-row landing record. RUN repeats; HOLD finishes the active move; REPLAY cancels it and restores seed 79 and both centres.
++Critical angle: A smooth visible journey does not prove that targets were correlated. The small addition gives the next step a relation to its past, while the animation can lend continuity to a fresh destination. Prediction does not obligate the rule. The terrarium's omitted wall contacts and vanishing early trail remain distinct, material questions.
++Preservation: No earlier artifact or paragraph is removed. This is an additional comparison, not a new curriculum prerequisite. The same-input coupling is intentional; these are not independent experimental populations or physical entropy sources.
++Next: Random_Gaussian gathers outcomes by frequency. Later noise can return to correlations across time with a different question.
++Deferred: Tracked-hand reach, text visibility and comfort need headset review. Desktop/native checks and museum images are kept with the dated rail review.
+--- before/commons/maps/Random_Walk/map_data.json
++++ after/commons/maps/Random_Walk/map_data.json
+@@ -1379,7 +1379,7 @@
+         " ",
+         " ",
+         " ",
+-        " ",
++        "random_position_rails:180",
+         " ",
+         " ",
+         " ",
+--- before/commons/maps/Random_Walk/technical.md
++++ after/commons/maps/Random_Walk/technical.md
+@@ -32,3 +32,16 @@
+ Validation: `commons/testing/probe_wcn_walk.gd`, its generated live port, and isolated runner `ada_run/review_walk.py`. The extension captures three complete 300-step, five-walker histories at seed 31415, records actual proposals for walker zero without consuming extra draws, and verifies every frame against a replay that erases trail history at step 60 and selects ALL. Separate assertions cover frame-time loss and the pavilion's boolean metadata. Existing tests cover seven controls, desktop pointer input, bounds, seed replay, physical routes, reach and unload/rebuild.
+ 
+ Runtime evidence, final assertion count, images and diagnostic limits belong to `doc/space/walk-review-2026-09-12/README.md` and the illustrated `random-walk.html` review. Headset use remains pending.
++
++
++## Paired positions and steps — 2026-09-24
++
++`random_position_rails` stands at (13,8), facing the first chamber. Its production source is `commons/artifacts/random_position_rails/random_position_rails.gd`.
++
++One private RNG draw u in [-1,1] serves both rails per accepted NEXT. Blue's destination is 2.2u metres. Pink proposes previous_position + 0.4u metres, folded into [-2.2,2.2] at the ends. This intentionally coupled comparison is a bounded random walk versus fresh positions, not an unbounded Brownian process or a physical randomness source. The generator does not consult the record of twelve landing pairs or the prediction marker.
++
++Targets appear immediately; a 0.65s reveal precedes a shared 1s cubic ease-in/out. Both use the same interpolation weight, not equal speeds. Pink's folded destination is joined directly to its previous position; the motor does not visit an omitted wall contact. NEXT is latched at 28 degrees and rearms below 8 degrees. Busy input cannot consume another draw. RUN requests every 2.8s. HOLD prevents future requests while letting the current move finish. REPLAY kills pending movement, stops RUN, clears the record, recentres the guess and restores seed 79.
++
++The marker uses the existing horizontal slider with explicit metre-sized meshes, shapes and limits; its root is not scaled. Native grab handles and desktop pointer input share the production control. Stationary feet/posts/stands have collision; the carriage blocks and thin prediction needle are visual markers, not rideable transport or barriers.
++
++Current book primaries: terrarium → paired rails → random drawing dot → visited-cell terrain. Original placements and map floor/utility layers are retained. Native checks, isolated actual-museum captures and remaining headset questions: `doc/book/iterations/2026-09-24-random-walk-rails/`.
+--- before/commons/maps/sequences/randomness.json
++++ after/commons/maps/sequences/randomness.json
+@@ -157,13 +157,15 @@
+           "position": "exploration",
+           "artifacts": [
+             "random_walk_terrarium",
++            "random_position_rails",
++            "random_draw_dot",
++            "random_walk_128",
+             "random_walk_collection",
+             "random_walk_leash",
+-            "random_walk_128",
+             "pixel_cloud"
+           ],
+           "size_budget": "mixed",
+-          "rationale": "Follow accumulated steps in the central terrarium, then compare paper traces, a leash and a self-avoiding path.",
++          "rationale": "Follow steps in the terrarium; compare fresh positions and accumulated steps on paired rails; carry a walking tip by hand, then enter a terrain that retains visits.",
+           "grammar": "central_hero"
+         },
+         {
+--- before/commons/artifacts/random_position_rails/random_position_rails.gd
++++ after/commons/artifacts/random_position_rails/random_position_rails.gd
+@@ -0,0 +1,286 @@
++extends Node3D
++## @identity
++## essence: a new position discards the old one; a step needs somewhere to start
++## desire: put your marker where the next carriage might arrive
++## truth: shared PRNG input; targets are sampled before a matched-duration motor animation
++const LeverScene = preload("res://commons/interactables/lever_zero.tscn")
++const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++const LIMIT := 2.2
++const STEP := 0.4
++const SEED := 79
++const MEMORY := 12
++const REVEAL_SECONDS := 0.65
++const MOVE_SECONDS := 1.0
++const INK := Color(0.075,0.10,0.13)
++const BLUE := Color(0.25,0.76,0.89)
++const PINK := Color(0.96,0.40,0.61)
++signal move_finished(index: int)
++var generator := RandomNumberGenerator.new()
++var committed := Vector2.ZERO
++var targets := Vector2.ZERO
++var start_positions := Vector2.ZERO
++var sample := 0.0
++var raw_step_target := 0.0
++var tick := 0
++var busy := false
++var running := false
++var armed := true
++var resetting := false
++var history: Array = []
++var carriages: Array[Node3D] = []
++var target_marks: Array[Node3D] = []
++var lever: Node3D
++var prediction: Node3D
++var record: Node3D
++var status: Label3D
++var mode_label: Label3D
++var fold_label: Label3D
++var timer: Timer
++var motion: Tween
++
++func _ready() -> void:
++	_make_frame()
++	_make_prediction()
++	_make_controls()
++	timer = Timer.new()
++	timer.wait_time = 2.8
++	timer.timeout.connect(func(): advance())
++	add_child(timer)
++	replay()
++
++func _make_frame() -> void:
++	for x in [-2.46,2.46]:
++		_box(self,"Foot",Vector3(x,0.06,0),Vector3(0.28,0.12,0.80),INK,true)
++		_box(self,"Post",Vector3(x,1.25,0),Vector3(0.08,2.50,0.10),INK,true)
++	_box(self,"Top",Vector3(0,2.48,0),Vector3(5.0,0.20,0.12),INK,true)
++	_box(self,"RailBacking",Vector3(0,1.64,-0.105),Vector3(4.80,1.42,0.035),Color(0.91,0.91,0.83),false)
++	_label(self,"WHERE NEXT?",Vector3(0,2.48,0.065),0.085)
++	_label(self,"One new number. Two ways to use it.",Vector3(0,2.29,0.07),0.043,INK)
++	for side in range(2):
++		var y := _height(side)
++		var colour := BLUE if side == 0 else PINK
++		_box(self,"Rail",Vector3(0,y,-0.01),Vector3(4.6,0.035,0.035),INK,false)
++		for x in [-LIMIT,0.0,LIMIT]:
++			_box(self,"RailTick",Vector3(x,y,0),Vector3(0.013,0.16,0.025),INK,false)
++		var block := Node3D.new()
++		block.name = "Carriage%d" % side
++		block.position = Vector3(0,y,0.09)
++		add_child(block)
++		_box(block,"Body",Vector3.ZERO,Vector3(0.24,0.24,0.18),colour,false)
++		_label(block,"NEW" if side == 0 else "+",Vector3(0,0,0.093),0.05,INK)
++		carriages.append(block)
++		var target := Node3D.new()
++		target.name = "Target%d" % side
++		target.position = Vector3(0,y,0.20)
++		add_child(target)
++		for dx in [-0.155,0.155]:
++			_box(target,"Side",Vector3(dx,0,0),Vector3(0.015,0.325,0.015),colour,false)
++		for dy in [-0.155,0.155]:
++			_box(target,"Edge",Vector3(0,dy,0),Vector3(0.325,0.015,0.015),colour,false)
++		target_marks.append(target)
++		_label(self,"FRESH POSITION" if side == 0 else "ADD A STEP",Vector3(-1.55,y+0.245,0.07),0.058,INK)
++		_label(self,"anywhere on this rail" if side == 0 else "up to 40 cm from here / fold at the ends",Vector3(0.80,y+0.245,0.07),0.032,INK)
++	_box(self,"RecordBack",Vector3(0,0.48,-0.09),Vector3(4.58,0.80,0.055),INK,false)
++	for i in range(MEMORY):
++		_box(self,"RecordRow",Vector3(0,0.77-i*0.05,-0.053),Vector3(4.4,0.004,0.006),Color(0.19,0.23,0.25),false)
++	record = Node3D.new()
++	record.name = "LastTwelveLandings"
++	add_child(record)
++	_label(self,"LAST 12 LANDINGS / NEWEST AT THE TOP",Vector3(0,0.12,-0.045),0.028)
++	status = _label(self,"",Vector3(0,1.12,0.05),0.035,INK)
++	fold_label = _label(self,"",Vector3(1.0,1.01,0.05),0.027,INK)
++
++func _height(side: int) -> float:
++	return 1.96 if side == 0 else 1.43
++
++func _make_prediction() -> void:
++	prediction = SliderScene.instantiate()
++	prediction.name = "PredictionMarker"
++	prediction.position = Vector3(0,0.92,0.51)
++	prediction.get_node("SliderOrigin").position.x = -LIMIT
++	var driver: Node3D = prediction.get_node("SliderOrigin/InteractableSlider")
++	driver.set("slider_limit_max",2.0*LIMIT)
++	driver.set("slider_position",LIMIT)
++	driver.set("default_position",LIMIT)
++	driver.set("default_on_release",false)
++	_resize_mesh(prediction.get_node("Frame/BaseMesh"),Vector3(4.60,0.12,0.025))
++	_resize_mesh(prediction.get_node("Frame/TrackMesh"),Vector3(4.40,0.012,0.008))
++	_resize_shape(prediction.get_node("Frame/CollisionShape3D"),Vector3(4.60,0.12,0.045))
++	prediction.get_node("Frame/LabelName").hide()
++	prediction.get_node("Frame/Label3DValue").hide()
++	_resize_mesh(driver.get_node("SliderBody/AccentMesh"),Vector3(0.14,0.15,0.10))
++	_resize_shape(driver.get_node("SliderBody/HandleCollision"),Vector3(0.15,0.16,0.11))
++	_resize_shape(driver.get_node("HandleOrigin/InteractableHandle/CollisionShape3D"),Vector3(0.17,0.18,0.12))
++	driver.get_node("SliderBody/ShadowMesh").hide()
++	_box(driver,"PredictionNeedle",Vector3(0,0.68,0.06),Vector3(0.012,1.30,0.012),Color.WHITE,false)
++	_label(driver,"?",Vector3(0,1.37,0.06),0.085,INK)
++	add_child(prediction)
++	prediction.set_range(-LIMIT,LIMIT)
++	_label(self,"DRAG A GUESS",Vector3(0,0.87,0.545),0.028,INK)
++	for x in [-2.30,2.30]:
++		_box(self,"MarkerSupport",Vector3(x,0.45,0.48),Vector3(0.05,0.90,0.08),INK,true)
++
++func _resize_mesh(node: MeshInstance3D, size: Vector3) -> void:
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	node.mesh = mesh
++
++func _resize_shape(node: CollisionShape3D, size: Vector3) -> void:
++	var shape := BoxShape3D.new()
++	shape.size = size
++	node.shape = shape
++
++func _make_controls() -> void:
++	lever = LeverScene.instantiate()
++	lever.name = "NextLever"
++	lever.position = Vector3(-2.70,1.10,0.55)
++	lever.scale = Vector3.ONE*1.5
++	add_child(lever)
++	lever.set_caption("NEXT")
++	lever.set_readout_visible(false)
++	lever.hinge_moved.connect(_lever_moved)
++	_box(self,"LeverStand",Vector3(-2.70,0.5,0.53),Vector3(0.22,1.0,0.20),INK,true)
++	var panel := Rack.create_panel("",[[{"type":"button","label":"RUN / HOLD"},{"type":"button","label":"REPLAY"}]],true)
++	panel.name = "RunReplay"
++	panel.position = Vector3(2.73,1.02,0.55)
++	panel.rotation_degrees.x = -65
++	panel.scale = Vector3.ONE*1.7
++	add_child(panel)
++	panel.find_child("Btn_0",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): set_running(not running))
++	panel.find_child("Btn_1",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): replay())
++	_box(self,"ButtonStand",Vector3(2.73,0.46,0.53),Vector3(0.32,0.92,0.22),INK,true)
++	mode_label = _label(self,"HOLD",Vector3(2.73,1.23,0.57),0.034,INK)
++
++func _lever_moved(angle: float) -> void:
++	if resetting: return
++	if angle < 8.0: armed = true
++	if angle >= 28.0 and armed:
++		armed = false
++		advance()
++
++func advance() -> bool:
++	if busy or resetting: return false
++	busy = true
++	start_positions = committed
++	sample = generator.randf_range(-1.0,1.0)
++	raw_step_target = committed.y + sample*STEP
++	targets = Vector2(sample*LIMIT,reflect_position(raw_step_target))
++	for side in range(2):
++		target_marks[side].position.x = targets[side]
++		target_marks[side].show()
++	status.text = "NEXT TARGETS / the motor has not moved yet"
++	fold_label.text = "STEP FOLDED AT THE END" if not is_equal_approx(raw_step_target,targets.y) else ""
++	motion = create_tween()
++	motion.tween_interval(REVEAL_SECONDS)
++	motion.tween_callback(func(): status.text = "ONE SECOND / same easing, different distances")
++	motion.tween_method(_travel,0.0,1.0,MOVE_SECONDS).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
++	motion.tween_callback(_finish)
++	return true
++
++static func reflect_position(value: float) -> float:
++	# Triangular folding also handles overshoots larger than this exhibit allows.
++	var along := fposmod(value+LIMIT,4.0*LIMIT)
++	return -LIMIT+along if along <= 2.0*LIMIT else 3.0*LIMIT-along
++
++func _travel(weight: float) -> void:
++	for side in range(2):
++		carriages[side].position.x = lerpf(start_positions[side],targets[side],weight)
++
++func _finish() -> void:
++	committed = targets
++	tick += 1
++	history.append([committed.x,committed.y])
++	if history.size() > MEMORY: history.pop_front()
++	_refresh_record()
++	busy = false
++	motion = null
++	status.text = "%d MOVES / blue chooses a place; pink adds to its place" % tick
++	move_finished.emit(tick)
++
++func _refresh_record() -> void:
++	for child in record.get_children():
++		record.remove_child(child)
++		child.queue_free()
++	for i in range(history.size()):
++		var pair: Array = history[history.size()-1-i]
++		for side in range(2):
++			_box(record,"Landing",Vector3(float(pair[side]),0.77-i*0.05,-0.025+side*0.012),Vector3(0.045,0.038,0.02),BLUE if side == 0 else PINK,false)
++
++func set_running(value: bool) -> void:
++	running = value
++	mode_label.text = "RUN" if running else "HOLD"
++	if running:
++		timer.start()
++		advance()
++	else:
++		timer.stop() # A move already revealed finishes; HOLD stops future draws.
++
++func replay() -> void:
++	resetting = true
++	if motion != null: motion.kill()
++	motion = null
++	set_running(false)
++	generator.seed = SEED
++	committed = Vector2.ZERO
++	targets = Vector2.ZERO
++	start_positions = Vector2.ZERO
++	sample = 0.0
++	raw_step_target = 0.0
++	tick = 0
++	busy = false
++	armed = true
++	history.clear()
++	_refresh_record()
++	for side in range(2):
++		carriages[side].position.x = 0.0
++		target_marks[side].hide()
++	prediction.set_normalized_value(0.5)
++	lever.set_angle_degrees(0.0)
++	status.text = "Put your marker where the next carriage might land. Pull NEXT."
++	fold_label.text = ""
++	resetting = false
++
++func get_state() -> Dictionary:
++	return {"tick":tick,"busy":busy,"running":running,"seed":SEED,"sample":sample,
++		"from":[start_positions.x,start_positions.y],"targets":[targets.x,targets.y],
++		"committed":[committed.x,committed.y],"raw_step_target":raw_step_target,
++		"carriages":[carriages[0].position.x,carriages[1].position.x],
++		"prediction":lerpf(-LIMIT,LIMIT,prediction.get_normalized_value()),
++		"history":history.duplicate(true),"limit":LIMIT,"step":STEP,"memory":MEMORY}
++func _label(host: Node3D, text: String, pos: Vector3, height: float, colour: Color = Color(0.93,0.95,0.92)) -> Label3D:
++	var label := Label3D.new()
++	label.text = text
++	label.position = pos
++	label.font_size = 48
++	label.pixel_size = height / 48.0
++	label.modulate = colour
++	label.outline_size = 0 if colour == INK else 4
++	host.add_child(label)
++	return label
++
++func _box(host: Node3D, title: String, pos: Vector3, size: Vector3, colour: Color, solid: bool) -> void:
++	var mesh := MeshInstance3D.new()
++	mesh.name = title
++	mesh.position = pos
++	var shape := BoxMesh.new()
++	shape.size = size
++	mesh.mesh = shape
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = colour
++	mat.roughness = 0.35
++	if colour.a < 1.0:
++		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
++		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++		mat.no_depth_test = false
++	mesh.material_override = mat
++	host.add_child(mesh)
++	if solid:
++		var body := StaticBody3D.new()
++		body.position = pos
++		var collision := CollisionShape3D.new()
++		var box := BoxShape3D.new()
++		box.size = size
++		collision.shape = box
++		body.add_child(collision)
++		host.add_child(body)
+--- before/commons/artifacts/random_position_rails/random_position_rails.tscn
++++ after/commons/artifacts/random_position_rails/random_position_rails.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/random_position_rails/random_position_rails.gd" id="1"]
++
++[node name="RandomPositionRails" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/artifacts/random_position_rails/README.md
++++ after/commons/artifacts/random_position_rails/README.md
+@@ -0,0 +1,17 @@
++# Somewhere to start
++
++A paired rail exhibit for Random_Walk. One seeded random number drives two rules: fresh absolute position, and a bounded increment from the previous position.
++
++Scene: `random_position_rails.tscn`. Registry key: `random_position_rails`. Placement: Random_Walk (13,8), yaw 180 degrees.
++
++- NEXT: native lever; one draw per pull, busy draws refused.
++- White marker: native grab slider / desktop pointer. Prediction only; does not affect the random stream.
++- RUN / HOLD: repeat every 2.8 seconds / finish current movement and stop future draws.
++- REPLAY: restore seed 79, two centres, empty twelve-pair record, marker centre.
++
++Targets are exposed for 0.65 seconds before a matched 1-second cubic animation. Both have equal interpolation weights, not equal speed. Pink folds a proposed endpoint at the rail ends. Carriages are visual, not rideable physics bodies. The frame and supports have fixed collision.
++
++Review, preserved text, actual museum photographs and reproducible tests:
++`doc/book/iterations/2026-09-24-random-walk-rails/index.html`
++
++Pending: headset grip/reach/comfort, reader and learner observations.

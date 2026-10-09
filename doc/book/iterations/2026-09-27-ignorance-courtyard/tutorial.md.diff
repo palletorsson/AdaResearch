@@ -1,0 +1,38 @@
+--- before/tutorial.md
++++ current/tutorial.md
+@@ -6,7 +6,7 @@
+ 
+ Begin with the ordinary `sphere` near the entrance. Approach and inspect its outline. Treat it as an example of what the name leaves unspecified. It is smaller than the later resolution pairs: its default radius is 0.25, while those pairs have radius 0.5. Do not interpret this initial encounter as a controlled resolution comparison.
+ 
+-Proceed to `sphere_high`, `sphere_mid` and `sphere_low`, at rows 11, 13 and 15. This follows the actual order of their placements. At each pair, compare the edge-marked surface with its plain neighbour, then compare with the preceding pair from a similar distance.
++Proceed to `sphere_high`, `sphere_mid` and `sphere_low`, at rows 18, 21 and 24. This follows the actual order of their placements. At each pair, compare the edge-marked surface with its plain neighbour, then compare with the preceding pair from a similar distance.
+ 
+ | Pair | Rings | Radial segments | Radius / height |
+ | --- | ---: | ---: | ---: |
+@@ -33,9 +33,9 @@
+ 
+ Choose one facet or ridge you would keep for a particular visual use. This is a design proposal about an existing form, not a request to operate an editing control that the display does not have.
+ 
+-## Return to the counter
++## Continue to the counter
+ 
+-The counter sits at (5,9), by the inscription, so this comparison deliberately returns toward the earlier rows. Choose one of its four numbered spheres for a distant background, then one for close inspection, before revealing the counts.
++The counter sits at (9,26), near the rear of the second room. Choose one of its four numbered spheres for a distant background, then one for close inspection, before revealing the counts.
+ 
+ | Control | What changes | What stays |
+ | --- | --- | --- |
+@@ -57,7 +57,7 @@
+ 
+ ## The capsule: the side you have not seen
+ 
+-Continue to the existing `capsule` at (0,16). Its long axis is vertical and it turns at 45 degrees per second. Watch a ridge face you and predict what is opposite it. Observe the changing silhouette while the object turns; no pause or grab control is assumed.
++The `capsule_reliquary` at (9,22) contains the enlarged original capsule. Its long axis is vertical and it turns at 45 degrees per second. Watch a ridge face you and predict what is opposite it. Observe the changing silhouette while the object turns; no pause or grab control is assumed.
+ 
+ The scene's authored resource contains:
+ 
+@@ -106,4 +106,4 @@
+ 
+ ## Scope of this pass
+ 
+-All twenty-six artifact placements remain. The book and primary-card order changes to ordinary sphere → high → middle → low → counter → capsule. The capsule is now primary, giving six types across nine primary placements. The counter has no resize control or frame-time meter, and its samples are not grabbable. Full-room headset routes, reach and legibility remain unverified.
++The three-room arrangement contains 28 placements. The five regular solids can be picked up; the twelve new sphere examples vary rings and segments independently. The existing counter has no resize control or frame-time meter, and its samples are not grabbable. Eight additional PrimitiveMesh prefab scenes are displayed at rest in the third room. The sixteen older secondary/decorative placements remain in the side alcove. Native desktop approach and supplied pickup were tested; headset reach and legibility remain unverified.

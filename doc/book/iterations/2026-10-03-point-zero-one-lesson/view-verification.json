@@ -1,0 +1,63 @@
+{
+  "bright_text_pixels_in_both": 917,
+  "checks": [
+    {
+      "name": "Greeting code compiles",
+      "passed": true
+    },
+    {
+      "name": "Camera starts at the stated z position",
+      "passed": true
+    },
+    {
+      "name": "Directional energy starts at 1.2",
+      "passed": true
+    },
+    {
+      "name": "No ambient fill masks the light experiment",
+      "passed": true
+    },
+    {
+      "name": "Label is unshaded by default",
+      "passed": true
+    },
+    {
+      "name": "Captured camera-light-default.png",
+      "passed": true
+    },
+    {
+      "name": "Nearer camera enlarges the projected span",
+      "passed": true
+    },
+    {
+      "name": "Moving the camera leaves the display transform unchanged",
+      "passed": true
+    },
+    {
+      "name": "Captured camera-nearer.png",
+      "passed": true
+    },
+    {
+      "name": "Captured light-off.png",
+      "passed": true
+    },
+    {
+      "name": "Floor pixels darken when the light is off",
+      "passed": true
+    },
+    {
+      "name": "Bright text pixels remain when the light is off",
+      "passed": true
+    }
+  ],
+  "engine": "4.6-stable (official)",
+  "floor_luminance_sum": {
+    "lit": 196.962642490864,
+    "unlit": 0.0
+  },
+  "passed": true,
+  "projected_span": {
+    "near": 265.886596679688,
+    "original": 171.541259765625
+  }
+}

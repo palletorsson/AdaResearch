@@ -1,0 +1,150 @@
+--- before/commons/artifacts/registry/commons_artifacts.json
++++ after/commons/artifacts/registry/commons_artifacts.json
+@@ -16312,6 +16312,147 @@
+       ],
+       "map_ready": true,
+       "include_in_map_data": true
++    },
++    "point_absent": {
++      "lookup_name": "point_absent",
++      "name": "Point one — absent",
++      "category": "primitives",
++      "complexity": "beginner",
++      "scene": "res://commons/primitives/point/point_absent.tscn",
++      "description": "The same labelled position, absent.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        0.7,
++        1.5,
++        0.7
++      ],
++      "tags": [
++        "point",
++        "visibility",
++        "collision",
++        "embodiment"
++      ]
++    },
++    "point_visible": {
++      "lookup_name": "point_visible",
++      "name": "Point one — visible",
++      "category": "primitives",
++      "complexity": "beginner",
++      "scene": "res://commons/primitives/point/point_visible.tscn",
++      "description": "The same labelled position, visible.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        0.7,
++        1.5,
++        0.7
++      ],
++      "tags": [
++        "point",
++        "visibility",
++        "collision",
++        "embodiment"
++      ]
++    },
++    "point_solid": {
++      "lookup_name": "point_solid",
++      "name": "Point one — solid",
++      "category": "primitives",
++      "complexity": "beginner",
++      "scene": "res://commons/primitives/point/point_solid.tscn",
++      "description": "The same labelled position, solid.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        0.7,
++        1.5,
++        0.7
++      ],
++      "tags": [
++        "point",
++        "visibility",
++        "collision",
++        "embodiment"
++      ]
++    },
++    "point_held": {
++      "lookup_name": "point_held",
++      "name": "Point one — held",
++      "category": "primitives",
++      "complexity": "beginner",
++      "scene": "res://commons/primitives/point/point_held.tscn",
++      "description": "The same labelled position, held.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        0.7,
++        1.5,
++        0.7
++      ],
++      "tags": [
++        "point",
++        "visibility",
++        "collision",
++        "embodiment"
++      ]
++    },
++    "point_pedestal": {
++      "lookup_name": "point_pedestal",
++      "name": "Point one — pedestal",
++      "category": "primitives",
++      "complexity": "beginner",
++      "scene": "res://commons/primitives/point/point_pedestal.tscn",
++      "description": "The same labelled position, pedestal.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        1.5,
++        2.1,
++        1.5
++      ],
++      "tags": [
++        "point",
++        "visibility",
++        "collision",
++        "embodiment"
++      ]
++    },
++    "arrival_shaft": {
++      "lookup_name": "arrival_shaft",
++      "name": "Late arrival",
++      "category": "primitives",
++      "scene": "res://commons/primitives/point/arrival_shaft.tscn",
++      "description": "An open shaft over the museum arrival floor.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        2.6,
++        6.7,
++        2.6
++      ],
++      "tags": [
++        "arrival",
++        "time"
++      ]
+     }
+   },
+   "registry_info": {

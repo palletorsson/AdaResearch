@@ -1,0 +1,207 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A difference in time</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}</style><header><div class="tag">Endless Museum · Wavefunctions · Hall 11</div><h1>A difference in time</h1><nav><a href="index.html">Room & evidence</a><a href="parallel.html">Tutorial left · reflection right</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="../2026-10-08-sky-stairs-a-place-for-a-foot/index.html">Previous: Sky Stairs</a></nav></header><main><div class="parallel"><article><div class="tag">tutorial.md</div><h1>A difference in time</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Adding two signed signals</li>
+<li>Frequency difference and beat period</li>
+<li>A shared start and changing relative phase</li>
+<li>Keeping raw values separate from display gain</li>
+</ul>
+<p>At the beat display, bring the two frequency controls close together. A and B move quickly. Their sum grows and shrinks more slowly. At a quiet moment in the lower row, the sources above it can still be moving.</p>
+<p>Air Music kept two voices and their playback ages. Here we isolate their relationship: two unit-amplitude sines, started together, at slightly different frequencies. The black PointBody chooses B; the familiar LineSkin draws A, B and their sum. Sky Stairs gave samples solid support. These samples make a visual comparison again. They do not form a floor or produce sound.</p>
+<h2>Continue inside the museum</h2>
+<p>Use the prepared Endless Museum project, with its player, XR pickup, lighting and camera. Save the three scripts below together. Keep <code>point_body.gd</code> and <code>line_skin.gd</code> unchanged. Attach <code>11_two_cycles.gd</code> to an empty Node3D in this hall's learner bay: <strong>hall-local (23, 0, 12), Y rotation 180 degrees, unit scale</strong>. Run the museum scene as before. The program creates its own point, lines and labels; no named scene children are required.</p>
+<p>Grab the black point. Its local height previews B between 0.5 Hz below and 0.5 Hz above A. At 1.2 metres, B equals A. Press the held object's established trigger action to apply the preview and restart both waves together. Moving the point alone leaves the current pair running. This keeps the chosen frequency fixed during each observation.</p>
+<h2>Two sources, one sum</h2>
+<p><code>values_at()</code> returns three signed values: A, B and their raw sum. Negative values matter. A positive value and an equal negative value cancel; neither source has disappeared. With unit-amplitude inputs, the raw sum lies between −2 and +2.</p>
+<!-- student-code:11_two_cycles.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+var frequency_a := 4.0
+var frequency_b := 4.5
+var elapsed := 0.0
+var segments := 64
+var width := 3.2
+var height_gain := 0.22
+var row_heights := [2.35, 1.75, 1.15]
+var rows: Array = []
+var point: RigidBody3D
+var label: Label3D
+var values_label: Label3D
+
+func text_at(words: String, at: Vector3, size: int = 24) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = size
+    text.pixel_size = 0.002
+    add_child(text)
+    return text
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = Vector3(-2.1, 1.7, 0.5)
+    add_child(point)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.04, 0.04, 0.045)
+    ink.roughness = 0.2
+    point.get_child(0).material_override = ink
+    point.action_pressed.connect(on_action)
+    label = text_at(&quot;&quot;, Vector3(0, 2.95, 0), 26)
+    values_label = text_at(&quot;&quot;, Vector3(0, 0.7, 0), 21)
+    text_at(&quot;Raise point to choose B. Trigger starts both together.&quot;, Vector3(0, 0.43, 0), 21)
+    var colours := [Color(0.55, 0.7, 1), Color(0.82, 0.88, 0.8), Color(0.98, 0.7, 0.82)]
+    var names := [&quot;A&quot;, &quot;B&quot;, &quot;(A+B) / 2&quot;]
+    for row in range(3):
+        var lines: Array = []
+        var finish := StandardMaterial3D.new()
+        finish.albedo_color = colours[row]
+        for i in range(segments):
+            var line := LineSkin.new()
+            line.material_override = finish
+            add_child(line)
+            lines.append(line)
+        rows.append(lines)
+        text_at(names[row], Vector3(-2.0, row_heights[row], 0), 20)
+    restart_pair()
+
+func candidate_frequency() -&gt; float:
+    return frequency_a + clampf(point.position.y - 1.2, -0.5, 0.5)
+
+func on_action(_held: Variant) -&gt; void:
+    restart_pair()
+
+func restart_pair() -&gt; void:
+    frequency_b = candidate_frequency()
+    elapsed = 0.0
+    draw_state()
+
+func values_at(time: float, phase: float) -&gt; Vector3:
+    var a := sin(TAU * frequency_a * time + phase)
+    var b := sin(TAU * frequency_b * time + phase)
+    return Vector3(a, b, a + b)
+
+func plot_position(row: int, u: float) -&gt; Vector3:
+    var values := values_at(elapsed, u * TAU * 2.0)
+    var value: float = values[row]
+    if row == 2:
+        value *= 0.5
+    return Vector3(-width * 0.5 + u * width, row_heights[row] + height_gain * value, 0)
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    draw_state()
+
+func draw_state() -&gt; void:
+    for row in range(3):
+        var previous := plot_position(row, 0.0)
+        for i in range(segments):
+            var next := plot_position(row, float(i + 1) / segments)
+            var displacement := next - previous
+            rows[row][i].show_segment(previous, displacement, displacement.length())
+            previous = next
+    var difference := absf(frequency_a - frequency_b)
+    var beat_text := &quot;equal frequencies: no drifting envelope&quot;
+    if difference &gt; 0.00001:
+        beat_text = &quot;beat %.2f Hz | repeats every %.2f s&quot; % [difference, 1.0 / difference]
+    label.text = &quot;A %.2f Hz | B %.2f Hz\n%s\nB preview %.2f Hz | trigger to apply&quot; % [frequency_a, frequency_b, beat_text, candidate_frequency()]
+    var values := values_at(elapsed, PI * 0.5)
+    values_label.text = &quot;At phase PI/2: A %+.2f | B %+.2f | raw sum %+.2f\nBottom row drawn at half the raw sum&quot; % [values.x, values.y, values.z]
+</code></pre>
+<p>Both waves use the same elapsed time and the same added phase at each horizontal position. Two turns of that shared phase fill each row. This is a set of phase-shifted copies of the same comparison, not a simulation of a wave travelling through material. Follow one fixed horizontal position to compare the fast oscillation with its slower envelope.</p>
+<p><code>plot_position()</code> applies half gain only when drawing the bottom row. <code>values_at()</code> and the numeric readout retain the raw sum. If the bottom row reaches the same height as A, that does not mean their raw amplitudes are equal: the drawing scales differ. The label says <code>(A+B) / 2</code> for this reason.</p>
+<p>The PointBody signal passes the held object to <code>on_action()</code>. We do not need that argument here; the callback simply starts a new comparison. Restarting resets the common clock as well as applying B. Equal frequencies therefore begin aligned in this study. Two equal-frequency sources started with different phases would retain that difference; equal frequency alone does not guarantee reinforcement.</p>
+<h2>What changes slowly?</h2>
+<p>Begin with A = 4 Hz and B = 4.5 Hz. Their phase difference grows by half a turn each second. One second after the shared start, they oppose one another throughout the rows. After two seconds they align again. The large changes in amplitude repeat every two seconds: <strong>0.5 beats per second</strong>.</p>
+<p>In general, the beat rate is <code>abs(A − B)</code> and the period is its reciprocal. The equal-frequency case needs a separate branch: there is no finite beat period to calculate. In the sum identity, a signed cosine factor changes sign; the visible amplitude follows its absolute size. Count successive loud-looking envelopes, not only positive peaks of that factor.</p>
+<p>The existing museum exhibit updates its frequencies continuously as you move its sliders. Our trigger commits a pair and resets its start, making the predicted one-second cancellation easy to repeat. Both displays are visual. A later audible experiment would need an audio source; moving a visible sphere does not create sound.</p>
+<h2>The carried pieces</h2>
+<p>These are the same grabbable sphere and finite-cylinder line renderer. Their full files are included so the reconstruction is complete. The main script applies the black finish and the three row colours.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Predict, change, return</h2>
+<ol>
+<li>Start the default pair. Follow one horizontal position through narrowing and widening. At the narrow moment, inspect both inputs and the raw sum readout.</li>
+<li>Hold the point at local height 1.45 metres: B previews 4.25 Hz. Trigger. Predict the new period before watching: four seconds, with opposition after two.</li>
+<li>Move the point to 0.95 metres and trigger. B is now 3.75 Hz. The absolute difference is still 0.25 Hz. The beat period stays four seconds although the faster source has changed.</li>
+<li>Set the point to 1.2 metres and trigger. Both frequencies are 4 Hz. The sum keeps twice either source's raw value; half gain makes the lower row's excursion match the upper ones.</li>
+</ol>
+<p>For an independent variation, set <code>frequency_a</code> to <code>5.0</code> and the point's initial Y to <code>1.45</code>. Before running, predict B = 5.25 Hz and the same four-second envelope period despite the faster sources. The complete <code>11_faster_pair.gd</code> variation is included; attach it instead of the original.</p>
+<p>Native assertions run the exact printed files. They test the PointBody action callback, local-height mapping in a moved and rotated host, values at known phases, cancellation and reinforcement, the four-second variation, equal frequencies and display gain. Deliberate sign, gain and restart faults must fail. This verifies the program's behaviour, not a reader's understanding or headset comfort.</p>
+<p>The red-and-blue paths remain a different comparison: sine and cosine distributed through finite circulating rows. The Lissajous figure gives separate coordinates to oscillations instead of adding them on one axis. Keep these constructions distinct. In Synthesis Lab, we will retain the signed sum and change how much several harmonic components contribute.</p></article><article><div class="tag">final.md</div><h1>A slow pulse from fast motions</h1>
+<p>How can two quick repetitions produce one slow pulse?</p>
+<!-- @beat_frequency_demo -->
+
+<p>Look at the rows labelled A, B and (A+B)/2. Use the two frequency controls to bring A and B close together. Follow one part of the lower row long enough to see its movement grow and shrink, then compare that slower change with the quicker movement above.</p>
+<p>Make the frequency difference smaller while keeping both sources moving. The envelope changes more slowly. At equal frequencies, this version's initially aligned waves reinforce one another without the same slow pattern of beating.</p>
+<p>Keep A fixed and move B towards it from one side. Watch a single location on the lower row through a broadening and a narrowing of its motion. Now move B away again and compare how quickly that alternation returns. Avoid counting every small rise as a separate beat; you are following the larger change in how much motion is available. At a moment when the lower row is quiet, inspect A and B above it. Their contributions can remain substantial while opposing one another. A small sum therefore does not establish that both inputs have become small or that either source has stopped oscillating.</p>
+<p>The lower row combines the two values at each sampled position and moment. When the sources are near alignment, their contributions reinforce. As their phases drift apart, they increasingly cancel; later they approach alignment again. The slow pulse belongs to this changing relationship. It is not a third independent source secretly supplying a new rhythm.</p>
+<p>The beat readout gives the absolute difference between the two frequencies. This makes a small difference conspicuous in another form: two individually quick oscillations reveal their separation through a slow envelope. The lower row is drawn at half the raw sum's height so it fits the display. Its apparent equality with another row can therefore conceal a difference in what was calculated. The scale is part of the account the display gives us.</p>
+<p>Try predicting how the envelope will change before moving one control. Then reverse which source has the higher frequency. The absolute difference can remain the same even though you have exchanged the roles of A and B.</p>
+<!-- @ -->
+
+<p>This display does not generate an audible beat. Elsewhere in the hall, the paired red and blue steps give sine and cosine another body. Their quarter-turn difference sets two rows at different heights; here the question of where a curve lies can become a question of where support will be.</p>
+<p>The glowing figure across the hall gives oscillations separate coordinates instead of adding them on one row. Its three axes make a spatial figure; changing phase changes its shape. For fixed phases, a rational ratio can close a curve. The ideal irrational case does not exactly repeat. But a finite drawing cannot demonstrate “never”, however long we watch it. The rows made a pulse from a relation; the figure makes that relation into a different kind of object.</p>
+<p>At the synthesis lab, you will change the contributions of several harmonics and ask how their sum can acquire a shape that no single component has.</p></article></div></main></html>

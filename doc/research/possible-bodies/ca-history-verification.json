@@ -1,0 +1,31 @@
+{
+  "checks": 29,
+  "failures": [],
+  "headset_verified": false,
+  "desktop_pointer": "synthetic mouse events through the real project pointer, inside the actual museum",
+  "support_rays": {
+    "0": {
+      "collider": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/Basin/@StaticBody3D@784",
+      "height": -0.600000083446503
+    },
+    "1": {
+      "collider": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistorySupport",
+      "height": 1.49011611938477e-08
+    }
+  },
+  "margin_walk": {
+    "finish": "(-4.773999, 0.000941, 7.292203)",
+    "start": "(-4.8, 0.05, -0.2)"
+  },
+  "last_step_ms": 0.509,
+  "scope": "One desktop measurement, coexisting editor and game; not a headset frame-budget result",
+  "source_sha256": {
+    "ada_run/ca_history_probe_base.gd": "0f36309b8bbf46523ad09b1291c6ca0bd013df639156a5c255e6a0ce3df31807",
+    "ada_run/ca_history_acceptance.gd": "3245cbabdcbc19c966a99f159375a3428bdc8603963a0f259d501475d33bb430",
+    "commons/maps/CA_GameOfLife/map_data.json": "a4486083e834db8061f919ed37388069bf6cd64a51ca9ac1dda58d12e5d81808",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-history-review-2026-09-13/review-plan.json": "abc9371340d6b26701109d504c1e4936d75b90569632df5605e0f9ead5417156",
+    "algorithms/cellularautomata/ca_bridge/ca_bridge.gd": "cee89d78394e16f3071eb7baec51e7916975ac990feae7e1be5a1d9321ef2e99",
+    "algorithms/cellularautomata/ca_bridge/history_study.gd": "786eb3e68cab10ce0da72cb46bdb0cb0170bc31bc5bc79aae834d7b63e99c47b"
+  }
+}

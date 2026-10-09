@@ -1,0 +1,103 @@
+{
+  "recordedControls": [
+    [
+      {
+        "image": "noise-inside-noise-warped_0.png",
+        "p": [
+          "87.99999713897719",
+          "63.999996185302805"
+        ],
+        "q": [
+          "87.99999713897719",
+          "63.999996185302805"
+        ],
+        "readout": "Sample 1/5 · warp 0.00\n\np (-1.800, 2.400) → q (-1.800, 2.400)\n\nN(p) -0.8294 · N(q) -0.8294\n\n0 / 9,216 image samples differ from baseline",
+        "warp": "0"
+      },
+      {
+        "image": "noise-inside-noise-warped_1.png",
+        "p": [
+          "87.99999713897719",
+          "63.999996185302805"
+        ],
+        "q": [
+          "84.9048233032228",
+          "62.827415466308395"
+        ],
+        "readout": "Sample 1/5 · warp 0.35\n\np (-1.800, 2.400) → q (-1.877, 2.429)\n\nN(p) -0.8294 · N(q) -0.7813\n\n9,216 / 9,216 image samples differ from baseline",
+        "warp": "1"
+      },
+      {
+        "image": "noise-inside-noise-warped_2.png",
+        "p": [
+          "87.99999713897719",
+          "63.999996185302805"
+        ],
+        "q": [
+          "80.925316810608",
+          "61.319818496703995"
+        ],
+        "readout": "Sample 1/5 · warp 0.80\n\np (-1.800, 2.400) → q (-1.977, 2.467)\n\nN(p) -0.8294 · N(q) -0.6632\n\n9,216 / 9,216 image samples differ from baseline",
+        "warp": "2"
+      },
+      {
+        "image": "noise-inside-noise-warped_3.png",
+        "p": [
+          "87.99999713897719",
+          "63.999996185302805"
+        ],
+        "q": [
+          "75.6193065643312",
+          "59.309682846069194"
+        ],
+        "readout": "Sample 1/5 · warp 1.40\n\np (-1.800, 2.400) → q (-2.110, 2.517)\n\nN(p) -0.8294 · N(q) -0.4490\n\n9,216 / 9,216 image samples differ from baseline",
+        "warp": "3"
+      },
+      {
+        "sample": "Sample 2/5 · warp 1.40\n\np (0.000, 2.400) → q (-0.088, 2.254)\n\nN(p) -0.2799 · N(q) -0.0756\n\n9,216 / 9,216 image samples differ from baseline"
+      },
+      {
+        "sample": "Sample 3/5 · warp 1.40\n\np (1.800, 2.400) → q (2.058, 2.027)\n\nN(p) -0.7879 · N(q) -0.3461\n\n9,216 / 9,216 image samples differ from baseline"
+      },
+      {
+        "sample": "Sample 4/5 · warp 1.40\n\np (1.200, 1.342) → q (1.421, 1.853)\n\nN(p) 0.5196 · N(q) 0.2624\n\n9,216 / 9,216 image samples differ from baseline"
+      },
+      {
+        "sample": "Sample 5/5 · warp 1.40\n\np (-1.200, 1.342) → q (-1.056, 1.723)\n\nN(p) 0.6571 · N(q) 0.7871\n\n9,216 / 9,216 image samples differ from baseline"
+      },
+      {
+        "sample": "Sample 1/5 · warp 1.40\n\np (-1.800, 2.400) → q (-2.110, 2.517)\n\nN(p) -0.8294 · N(q) -0.4490\n\n9,216 / 9,216 image samples differ from baseline"
+      },
+      {
+        "image": "noise-inside-noise-relief.png",
+        "relief": "RELIEF · warp 0.8 · colour and signed radial displacement"
+      }
+    ]
+  ],
+  "pageLayout": [
+    {
+      "type": "text",
+      "text": "{\n  bookHasAddressCode: true,\n  bookHasOrb: true,\n  bookOpen: true,\n  heading: 'Borrow an address',\n  images: [\n    { loaded: true, src: 'noise-inside-noise-skin_2.png' },\n    { loaded: true, src: 'noise-inside-noise-skin_2.png' },\n    { loaded: true, src: 'noise-inside-noise-instrument.png' },\n    { loaded: true, src: 'noise-inside-noise-orb.png' },\n    { loaded: true, src: 'noise-inside-noise-plan.png' }\n  ],\n  overflow: false,\n  page: 'http://localhost:3003/research/possible-bodies/noise-inside-noise.html'\n}"
+    }
+  ],
+  "primaryCards": [
+    {
+      "cards": [
+        "1. noisesphere",
+        "2. dark_sphere"
+      ],
+      "coordinatePassage": true,
+      "openPassages": 2,
+      "orbPassage": true,
+      "overflow": true,
+      "page": "http://localhost:3003/necklace/thread?map=Noise_Inside_Noise&role=primary"
+    }
+  ],
+  "finalPage": [
+    {
+      "type": "text",
+      "text": "{\"imagesLoaded\":true,\"overflow\":false,\"page\":\"http://localhost:3003/research/possible-bodies/noise-inside-noise.html\",\"warp\":\"2\"}"
+    }
+  ],
+  "notes": "Recorded comparison controls, expanded chapter, image loading and two primary book cards checked in the existing tab. The research page has no horizontal overflow. The existing necklace editor overflows horizontally at the narrow browser viewport; no general editor layout change was made in this hall review."
+}

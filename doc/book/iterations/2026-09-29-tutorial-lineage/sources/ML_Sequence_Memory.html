@@ -1,0 +1,289 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Sequence_Memory · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Sequence_Memory">← Tutorial lineage</a></p><h1>ML Sequence Memory</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Sequence_Memory/final.md">Raw captured source</a></p><pre># What should survive the next input?
+
+How can a learner use the past without keeping every past event equally active?
+
+&lt;!-- @lstms_vr --&gt;
+
+Three spheres float at the edges of a cell you can walk into. Take one and lift it. Nothing about it is trained: its height *is* its value, and the only thing that decides it is where your hand leaves it. The scale is coarser than floor-to-head, though. A sphere reads nought anywhere below a metre, reaches one only at three metres, where no hand goes, and where the three hang, two metres up, it reads one half.
+
+The cell is open at one end. Beside it a rack holds pale tokens and dark ones. Carry a pale token in.
+
+Something changes as it crosses: the cell shifts colour, and out at the far end a slab rides up a post. Above the post a readout prints the step, the retained term f*c, the admitted term i*x, and c and h to three decimals. Carry a second pale token in after the first. The slab climbs again, by less.
+
+Now clear the cell and run a different history. The rule contains its own reset: put the forget sphere and the input sphere on the floor, carry any token through once, and the readout shows c back at nought, whatever it held. Hang the two spheres back where they were, as near as your hand allows; the numbers below assume exactly half, and the readout will show you how far off you are. Then a dark token, and a pale one after it.
+
+Both runs ended with the same pale token. The slab is not in the same place.
+
+That difference is the whole subject of this hall, and it is arithmetic you can follow. Each crossing runs one step:
+
+```
+c = f*c + i*x    h = o*c
+```
+
+`x` is the token that just crossed — pale is `+1`, dark is `−1`. `c` is what the last crossing left behind, `h` is what the slab shows, and `f`, `i` and `o` are the three spheres, wherever you put them. With all three at half height, two pale tokens leave the slab at 0.375; a dark token then a pale one leave it at 0.125. Same last input, different output, because the first term carried something.
+
+Only the first term reads the past. So the gap in `c` between two histories that differ at one earlier step is exactly twice the forget gate times the input gate — nothing else in the rule can produce it — and the slab shows that gap scaled once more by the exposing gate. Here: one half in `c`, a quarter on the post.
+
+Put the forget sphere on the floor and run both histories again; no clearing is needed now, because nothing is kept. They land in the same place, to every decimal the readout prints. With nothing retained, the last token is all there is, and a history stops being a history.
+
+Raise it instead, and the difference opens. The sphere in your hand is the coefficient on everything that already happened.
+
+A band is painted up the post. From a cleared state no single token can reach it: the admitted term is at most one, and the exposing gate cannot enlarge what it is given. Anything above that line was carried there. The band is not a threshold anyone set — it is where the arithmetic runs out of present tense.
+
+The three kinds of decision are separate, and the readout keeps them separate: what to retain, what to admit, what to expose. A memory has to preserve something while permitting something else to change.
+
+What this is not: the gates are set by hand and nothing here learns. The rule is linear, where a trained network squashes each step through a curve and computes its gates from the input rather than from your arm. Keeping it linear is what lets you predict the next slab height before it moves — and a model you can predict is a model you can be wrong about in a way you can check.
+
+Take the sentence &quot;the key beside the cabinets is missing&quot;. Which earlier distinction decides &quot;is&quot; rather than &quot;are&quot;? Something has to survive the intervening words. You have just set, by hand, how much of it does.
+
+&lt;!-- @ --&gt;
+
+Generative learning next changes the task again: a model produces candidates, while another source of feedback judges them.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Sequence_Memory/tutorial.md">Raw captured source</a></p><pre># ML Sequence Memory
+
+Recurrent network. The hidden state carries the past forward.
+
+Build a simple RNN cell.
+
+```gdscript
+class_name RNNCell
+
+var W_xh: Array
+var W_hh: Array
+var W_hy: Array
+var h: Array
+
+func step(x: Array) -&gt; Array:
+    var pre_activation: Array = []
+    for i in h.size():
+        var sum: float = 0.0
+        for j in x.size(): sum += W_xh[i][j] * x[j]
+        for j in h.size(): sum += W_hh[i][j] * h[j]
+        pre_activation.append(sum)
+    var h_new: Array = []
+    for v in pre_activation: h_new.append(tanh(v))
+    h = h_new
+    var y: Array = []
+    for i in W_hy.size():
+        var sum: float = 0.0
+        for j in h.size(): sum += W_hy[i][j] * h[j]
+        y.append(sum)
+    return y
+```
+
+Three weight matrices: input-to-hidden, hidden-to-hidden, hidden-to-output. The state h carries forward.
+
+Build an LSTM cell.
+
+```gdscript
+class_name LSTMCell
+
+var W_f: Array; var b_f: Array  # forget gate
+var W_i: Array; var b_i: Array  # input gate
+var W_o: Array; var b_o: Array  # output gate
+var W_g: Array; var b_g: Array  # candidate
+var h: Array
+var c: Array
+
+func step(x: Array) -&gt; Array:
+    var combined := concat(x, h)
+    var f := sigmoid_vector(add_bias(matmul_vec(W_f, combined), b_f))
+    var i := sigmoid_vector(add_bias(matmul_vec(W_i, combined), b_i))
+    var o := sigmoid_vector(add_bias(matmul_vec(W_o, combined), b_o))
+    var g := tanh_vector(add_bias(matmul_vec(W_g, combined), b_g))
+    c = add_element(multiply_element(f, c), multiply_element(i, g))
+    h = multiply_element(o, tanh_vector(c))
+    return h
+```
+
+Three gates control the cell state. Forget drops information; input adds; output reads.
+
+Concatenate vectors.
+
+```gdscript
+func concat(a: Array, b: Array) -&gt; Array:
+    var result: Array = []
+    for x in a: result.append(x)
+    for x in b: result.append(x)
+    return result
+```
+
+Side-by-side. Used wherever two inputs must be combined into one.
+
+Process a sequence.
+
+```gdscript
+func process_sequence(sequence: Array) -&gt; Array:
+    var outputs: Array = []
+    for x in sequence:
+        outputs.append(step(x))
+    return outputs
+```
+
+One step per input. The outputs together form the network&#x27;s response.
+
+Detect vanishing gradient.
+
+```gdscript
+func measure_gradient_over_time(sequence: Array) -&gt; Array:
+    var gradients: Array = []
+    for t in sequence.size():
+        var g: float = gradient_at_timestep(t, sequence)
+        gradients.append(g)
+    return gradients
+```
+
+Trace how much influence each earlier input has on the final output. Decays exponentially in vanilla RNNs; much slower in LSTMs.
+
+Teacher forcing.
+
+```gdscript
+func train_with_teacher_forcing(inputs: Array, targets: Array) -&gt; void:
+    for t in inputs.size():
+        step(inputs[t])
+        var target: Array = targets[t]
+        # Use target rather than prediction as next input
+```
+
+During training, the model always sees the true previous token. Stabilises training; creates an inference-time discrepancy.
+
+You can now build RNN and LSTM cells, process sequences, measure gradient decay, and train with teacher forcing. ML_Generative extends into models that produce new data.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Sequence_Memory/technical.md">Raw captured source</a></p><pre># ML Sequence Memory — Technical
+
+The map stages recurrence — the practice of feeding a network&#x27;s hidden state back into its own input at the next step — as a corridor whose narrow passages enforce sequential processing.
+
+A vanilla RNN has one set of weights applied at every time step. The hidden state h_t depends on the current input x_t and the previous hidden state h_{t-1} through a shared transformation.
+
+```gdscript
+class_name VanillaRNN extends Node
+
+var W_xh: Array  # input to hidden
+var W_hh: Array  # hidden to hidden
+var W_hy: Array  # hidden to output
+var h: Array    # current hidden state
+
+func step(x: Array) -&gt; Array:
+    var h_new: Array = vec_add(matmul(W_xh, x), matmul(W_hh, h))
+    h_new = h_new.map(func(v): return tanh(v))
+    h = h_new
+    var y: Array = matmul(W_hy, h)
+    return y
+```
+
+## Vanishing Gradient
+
+Training RNNs by backpropagation through time unrolls the recurrence into a deep feedforward network (one layer per time step) and applies standard backprop. The gradient at step t-T depends on the product of T Jacobians, each of which has spectral radius typically less than 1. The product decays exponentially, so gradients from distant past steps become negligibly small.
+
+The map&#x27;s diagnostic panel traces the influence of each input token on the final output. The trace decays as inputs recede into the past; by ten steps back, the influence is nearly zero.
+
+## LSTM
+
+The LSTM cell introduces gated memory. Three gates — forget, input, output — and a cell state c_t let the network preserve information across many time steps without gradient decay.
+
+```gdscript
+func lstm_step(x: Array) -&gt; Array:
+    var f: Array = sigmoid(vec_add(matmul(W_f, concat(x, h)), b_f))
+    var i: Array = sigmoid(vec_add(matmul(W_i, concat(x, h)), b_i))
+    var o: Array = sigmoid(vec_add(matmul(W_o, concat(x, h)), b_o))
+    var g: Array = tanh(vec_add(matmul(W_g, concat(x, h)), b_g))
+    c = vec_add(mul_elementwise(f, c), mul_elementwise(i, g))
+    h = mul_elementwise(o, tanh(c))
+    return h
+```
+
+The forget gate controls how much of the previous cell state is retained; the input gate controls how much new information enters; the output gate controls how much of the cell state is exposed as the hidden state. The architecture was introduced by Hochreiter and Schmidhuber in 1997 and remains competitive for sequence tasks where attention-based models have excessive data requirements.
+
+## Complexity
+
+Per-step cost is O(N²) for N hidden units (one matrix multiply per weight matrix). Training over T steps is O(T·N²) forward and O(T·N²) backward. LSTM adds a constant factor (~4× for the four gates) but the asymptotic cost is unchanged.
+
+Within the sequence, Sequence_Memory introduces the temporal dimension. ML_Generative will next build generation on top of it.
+
+## GRU as Simplification
+
+The Gated Recurrent Unit (GRU) is a simpler alternative to LSTM, with two gates (update and reset) instead of three, and a single state vector instead of separate cell and hidden states. It often matches LSTM performance with fewer parameters.
+
+```gdscript
+func gru_step(x: Array) -&gt; Array:
+    var z: Array = sigmoid(vec_add(matmul(W_z, concat(x, h)), b_z))  # update gate
+    var r: Array = sigmoid(vec_add(matmul(W_r, concat(x, h)), b_r))  # reset gate
+    var h_tilde: Array = tanh(vec_add(matmul(W_h, concat(x, mul_elementwise(r, h))), b_h))
+    h = vec_add(mul_elementwise(vec_sub(ones(h.size()), z), h), mul_elementwise(z, h_tilde))
+    return h
+```
+
+## Attention
+
+Transformer architectures replaced RNNs for most sequence tasks. Attention lets each position in the output attend to all positions in the input simultaneously, removing the sequential bottleneck that RNNs enforce. The scaled dot-product attention is the core operation.
+
+```gdscript
+func scaled_dot_product_attention(Q: Array, K: Array, V: Array) -&gt; Array:
+    var d_k: int = K[0].size()
+    var scores: Array = matmul(Q, transpose(K))
+    for i in range(scores.size()):
+        for j in range(scores[i].size()):
+            scores[i][j] /= sqrt(d_k)
+    var weights: Array = softmax(scores)
+    return matmul(weights, V)
+```
+
+Transformers are dramatically more parallelisable than RNNs because they process all positions at once. The cost is quadratic in sequence length — attention over L positions is O(L²) — which has motivated a literature on efficient attention variants.
+
+## Teacher Forcing
+
+Training RNNs on autoregressive tasks (generating a sequence one token at a time) uses teacher forcing: during training, the model receives the ground-truth previous token rather than its own previous prediction. This stabilises training but produces exposure bias at inference time, when the model must condition on its own mistakes.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Sequence_Memory/intent.md">Raw captured source</a></p><pre>Concept: Recurrence as memory — when a network&#x27;s hidden state feeds back into itself, the present computation carries traces of the past. Sequence processing requires the network to remember, and the hidden state is where memory lives.
+Sequence role: Sixth map in the Machine Learning sequence (15th spine sequence, integration phase). Introduces the temporal dimension that was absent from feedforward networks. After ML_Perception showed the static neuron, this map adds the recurrent connection that makes the neuron aware of history. Connects back to ML_Neural_Networks (feedforward architecture) and forward to ML_Generative (where memory enables generation). The hidden state concept bridges to QFEP&#x27;s phi term — sensitivity to rate of change.
+Technical angle: Recurrent neural networks (RNNs) with hidden state h(t) = f(W_h * h(t-1) + W_x * x(t)). Backpropagation through time (BPTT) unrolls the recurrence into a deep feedforward network. Vanishing and exploding gradients in long sequences. LSTM gates (forget, input, output) as learned memory management. GRU as a simplified gating mechanism.
+Critical angle: Memory transforms a function into a process — the same input produces different outputs depending on what came before. This is the computational form of context-dependence, which is also the condition of meaning. A word means nothing without the sentence; a note means nothing without the phrase. Recurrence is how machines begin to approximate the temporal thickness of experience that Brouwer&#x27;s intuitionism insisted was foundational to mathematics itself.
+Key artifacts: rnn_visualization provides an interactive recurrent network showing hidden state evolution over time, gate activations in LSTM cells, and the effect of sequence length on gradient flow.
+Gap: Needs a vanishing gradient artifact — a visualization showing gradient magnitude decaying exponentially as it propagates backward through time steps, making the memory limitation concrete.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Sequence_Memory/critical.md">Raw captured source</a></p><pre># ML_Sequence_Memory — Critical Reflection
+
+A long narrow corridor. Time flows from spawn to exit. Two artifacts at regular intervals like timesteps: LSTMs first, transformers second. The width varies — walls close in then open, creating rhythm. You walk forward and cannot go back. The corridor is time made spatial, and the map&#x27;s thesis is that sequence processing is a one-way passage through a narrowing architecture.
+
+The LSTM artifact sits early in the corridor. Its architecture is gates — forget, input, output — three learned filters that decide what to keep, what to discard, what to pass on. The cell state runs like a conveyor belt through time, modified but never fully overwritten. Hayles recognizes this as the computational unconscious operating in its temporal mode: the gates decide what the network remembers without any external agent specifying the criteria. The forget gate is the most revealing. It learns, through gradient descent on task performance, which parts of the past are irrelevant to the present. Forgetting is not loss; it is curation. And the curation criteria are determined by the loss function, which means the network forgets whatever failing to remember would not increase the error. Memory is shaped by what the system was trained to care about. Everything else leaks through the forget gate like water through a sieve shaped by someone else&#x27;s priorities.
+
+The transformer artifact sits deeper in the corridor. Attention lets every position in a sequence look at every other position simultaneously. No conveyor belt. No sequential processing. Time collapses into weighted relationships. Chun would identify this as the shift from habitual memory to sovereign vision — from the LSTM&#x27;s patient accumulation to the transformer&#x27;s panoptic glance. The transformer does not remember by carrying state forward; it remembers by looking backward from every position at once. This is not memory in any human sense. It is simultaneous access, the computational form of omniscience applied to a finite sequence.
+
+The corridor&#x27;s narrowing architecture contradicts the transformer&#x27;s logic. You walk through a tight passage that enforces sequence — this step, then this step, then this step — while the artifact inside demonstrates an architecture that abolishes sequence. The transformer attends to position 1 and position 100 with equal ease. The corridor does not. You cannot jump from the LSTM chamber to the exit; you must pass through every intermediate cell. The map&#x27;s body-logic is recurrent even when its content is attentional. This is not a flaw. It is the map&#x27;s deepest admission: that embodied experience is sequential even when computation is not, and that teaching temporal architectures through spatial traversal always imposes a linearity the most powerful models have learned to escape.
+
+Hayles&#x27; concept of intermediation — the recursive feedback between human cognition and computational processes — finds precise expression in the corridor&#x27;s rhythm. The walls close in then open, creating a breathing pattern that mirrors the LSTM&#x27;s gating mechanism. Tight passage: forget gate closed, information compressed. Wide chamber: input gate open, new state absorbed. The architecture teaches through somatic rhythm what the equations describe through linear algebra. The intermediation goes further. The learner walking the corridor is performing a sequence task — moving through a temporal environment with memory of previous rooms and anticipation of the next — using exactly the kind of recurrent, state-carrying cognition that the LSTM models computationally. You are the hidden state. Your memory of the previous chamber is the cell state. Your decision about what to attend to in the current room is the attention mechanism.
+
+Chun&#x27;s analysis of software temporality applies to the gap between the two artifacts. The LSTM processes time honestly — it carries state forward, and the vanishing gradient problem means distant memories genuinely fade. The transformer processes time without temporal experience — it flattens the entire sequence into a single attention matrix, abolishing temporal distance. There is no vanishing gradient in a transformer because there is no temporal chain. Every position is equally close to every other position, weighted only by learned relevance. This is what Chun calls the enduring ephemeral: a structure that preserves everything not because it remembers but because it never experienced sequence as passage, only as static structure to be queried.
+
+The corridor ends. Two architectures for memory — one that carries and one that looks — and the space between them is the distance between two ways of being in time. The LSTM lives in time and pays the cost: vanishing gradients, decaying memory, the struggle to connect the distant past to the present. The transformer escapes time and pays a different cost: quadratic attention complexity, the assumption that the whole sequence is available before processing begins. One architecture remembers by suffering through sequence. The other remembers by surveilling it. Neither remembers the way a body remembers — through rhythm, through habit, through the corridor that your feet have learned.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Sequence_Memory/artifacts.md">Raw captured source</a></p><pre># ML Sequence Memory — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 2 artifacts*
+
+&gt; Order depends on what came before. Recurrent networks process sequences by carrying state forward — each output shaped by every prior input. But memory decays. Gradients vanish. The signal from ten steps ago dissolves into noise.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## LSTMs_VR
+![LSTMs_VR](/scene-catalog/lstms_vr.png)
+
+Interactive LSTM cell with walkable memory flow
+
+`lstms_vr`
+
+## Transformers_VR
+![Transformers_VR](/scene-catalog/transformers_vr.png)
+
+Interactive transformer with attention beam visualization
+
+`transformers_vr`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Sequence_Memory/summary.md">Raw captured source</a></p><pre># ML Sequence Memory — Summary
+
+ML_Sequence_Memory is the sixth map in the Machine Learning sequence. It introduces recurrence — the practice of feeding a network&#x27;s hidden state back into its own input at the next step — and makes memory a property of a shared connection rather than a separate module.
+
+A recurrent network sits at the centre of the space. Its hidden state is drawn as a coloured bar above the neuron body, and the feedback connection loops visibly from the output back to the input. Short text sequences scroll into the network one token at a time; the hidden state changes with each input and carries traces of previous tokens forward. A readout panel at the output shows the network&#x27;s prediction for the next token in the sequence.
+
+A second station demonstrates the vanishing-gradient problem. The same network is run on longer sequences, and a diagnostic panel traces how much influence each input token still has on the final output. The trace decays as inputs recede into the past; by ten steps back, the influence is nearly zero. A toggle swaps in an LSTM cell, whose gated memory decays much more slowly.
+
+Within the sequence, this map adds the temporal dimension that feedforward networks lack. ML_Generative will next build generation on top of it.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Sequence_Memory/blurb.md">Raw captured source</a></p><pre>Order depends on what came before. Recurrent networks process sequences by carrying state forward — each output shaped by every prior input. But memory decays. Gradients vanish. The signal from ten steps ago dissolves into noise.
+
+LSTMs solve this with gates — forget, input, output — three learned filters that decide what to keep, what to discard, what to pass on. Memory becomes selective. A cell state runs like a conveyor belt through time, modified but never fully overwritten. Transformers abandon recurrence entirely. Attention lets every position in a sequence look at every other position simultaneously. No conveyor belt — a hall of mirrors. Time collapses into weighted relationships.
+
+One architecture remembers by carrying. The other remembers by looking. Both answer the same question: what in the past matters now? Sequence models don&#x27;t process time — they argue with it.</pre></section></body></html>

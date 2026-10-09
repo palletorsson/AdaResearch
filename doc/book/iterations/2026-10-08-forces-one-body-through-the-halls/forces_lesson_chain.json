@@ -1,0 +1,288 @@
+{
+  "checks": [
+    {
+      "label": "point_body.gd loads",
+      "passed": true
+    },
+    {
+      "label": "free_point.gd loads",
+      "passed": true
+    },
+    {
+      "label": "study.gd loads",
+      "passed": true
+    },
+    {
+      "label": "01_vectors.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "3-4 displacement has length 5 and a unit direction",
+      "passed": true
+    },
+    {
+      "label": "common translation preserves displacement",
+      "passed": true
+    },
+    {
+      "label": "projection plus remainder returns original vector",
+      "passed": true
+    },
+    {
+      "label": "coincident endpoints return finite zero direction",
+      "passed": true
+    },
+    {
+      "label": "02_launch.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "launch begins at its stated address",
+      "passed": true
+    },
+    {
+      "label": "landing returns to launch height",
+      "passed": true
+    },
+    {
+      "label": "actual marker reaches the analytical apex",
+      "passed": true
+    },
+    {
+      "label": "long frame clamps landing and stops playback",
+      "passed": true
+    },
+    {
+      "label": "independent doubled horizontal speed doubles range",
+      "passed": true
+    },
+    {
+      "label": "03_mass.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "real Jolt bodies receive 1 N s with inverse-mass response",
+      "passed": true
+    },
+    {
+      "label": "ending the force retains velocity",
+      "passed": true
+    },
+    {
+      "label": "familiar point mesh and collision have the same radius",
+      "passed": true
+    },
+    {
+      "label": "04_field.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "vortex has no undefined centre direction",
+      "passed": true
+    },
+    {
+      "label": "one sample contains inward and tangential acceleration",
+      "passed": true
+    },
+    {
+      "label": "field force changes solver velocity",
+      "passed": true
+    },
+    {
+      "label": "05_drag.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "drag at rest is zero",
+      "passed": true
+    },
+    {
+      "label": "uncapped drag quadruples when speed doubles",
+      "passed": true
+    },
+    {
+      "label": "drag cannot deliberately reverse velocity in one step",
+      "passed": true
+    },
+    {
+      "label": "released point actually falls into the drag region",
+      "passed": true
+    },
+    {
+      "label": "06_spring.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "rest length with no velocity produces no spring force",
+      "passed": true
+    },
+    {
+      "label": "extension pulls towards anchor",
+      "passed": true
+    },
+    {
+      "label": "compression pushes away from anchor",
+      "passed": true
+    },
+    {
+      "label": "damping opposes motion even at zero offset",
+      "passed": true
+    },
+    {
+      "label": "released spring point turns back towards anchor",
+      "passed": true
+    },
+    {
+      "label": "07_phase.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "same rate preserves the chosen phase offset",
+      "passed": true
+    },
+    {
+      "label": "4 percent rate difference accumulates 72 degrees in 30 seconds",
+      "passed": true
+    },
+    {
+      "label": "08_attraction.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "softened coincident pair is finite",
+      "passed": true
+    },
+    {
+      "label": "pair force reverses with displacement",
+      "passed": true
+    },
+    {
+      "label": "real isolated pair retains zero total momentum",
+      "passed": true
+    },
+    {
+      "label": "both bodies curve; no fixed source",
+      "passed": true
+    },
+    {
+      "label": "09_support.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "actual contact supports the cube",
+      "passed": true
+    },
+    {
+      "label": "removing support lets Jolt produce the fall",
+      "passed": true
+    },
+    {
+      "label": "10_impulse.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "one 3 N s impulse gives a 1 kg point about 3 m/s",
+      "passed": true
+    },
+    {
+      "label": "held/repeated action does not stack the one-shot impulse",
+      "passed": true
+    },
+    {
+      "label": "collision transfers motion to the second point",
+      "passed": true
+    },
+    {
+      "label": "11_flight.gd constructs inside a supplied world",
+      "passed": true
+    },
+    {
+      "label": "both student points find the real XRTools receiver",
+      "passed": true
+    },
+    {
+      "label": "two held points request forward 22 m/s²",
+      "passed": true
+    },
+    {
+      "label": "actual museum receiver applies thrust and gravity exactly once",
+      "passed": true
+    },
+    {
+      "label": "release ends acceleration, not incoming motion",
+      "passed": true
+    },
+    {
+      "label": "springs: starts with a legible primary comparison",
+      "passed": true
+    },
+    {
+      "label": "springs: hidden bodies are frozen without collision layers",
+      "passed": true
+    },
+    {
+      "label": "spring focus hides and disables unused hand grips",
+      "passed": true
+    },
+    {
+      "label": "spring anchor remains; coupling rods are hidden",
+      "passed": true
+    },
+    {
+      "label": "springs: local control restores the whole experiment",
+      "passed": true
+    },
+    {
+      "label": "springs: reset preserves the selected starting mode",
+      "passed": true
+    },
+    {
+      "label": "mutual: starts with a legible primary comparison",
+      "passed": true
+    },
+    {
+      "label": "mutual: hidden bodies are frozen without collision layers",
+      "passed": true
+    },
+    {
+      "label": "mutual: local control restores the whole experiment",
+      "passed": true
+    },
+    {
+      "label": "mutual: reset preserves the selected starting mode",
+      "passed": true
+    },
+    {
+      "label": "vortex: starts with a legible primary comparison",
+      "passed": true
+    },
+    {
+      "label": "vortex: hidden bodies are frozen without collision layers",
+      "passed": true
+    },
+    {
+      "label": "vortex: local control restores the whole experiment",
+      "passed": true
+    },
+    {
+      "label": "vortex: reset preserves the selected starting mode",
+      "passed": true
+    },
+    {
+      "label": "liquid starts with drag separated from buoyancy",
+      "passed": true
+    },
+    {
+      "label": "nearby button adds the second force explicitly",
+      "passed": true
+    },
+    {
+      "label": "mass push and reset are adjacent",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "physics": "Jolt Physics",
+  "scope": "Exact student scripts, real Jolt integration/contact, production focus controls and XRTools pickup/receiver with supplied controller poses. No physical-headset claim."
+}

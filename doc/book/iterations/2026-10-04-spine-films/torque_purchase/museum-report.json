@@ -1,0 +1,75 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Actual authored museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Registered monitor appears in its hall"
+		},
+		{
+			"passed": true,
+			"test": "Private film camera remains current after hall embedding"
+		},
+		{
+			"passed": true,
+			"test": "Private film captions survive hall embedding"
+		},
+		{
+			"passed": true,
+			"test": "Standing space in front of monitor is clear"
+		},
+		{
+			"passed": true,
+			"test": "Clear viewing position"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible (-1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible (1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible (-1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible (1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Control reachable pause"
+		},
+		{
+			"passed": true,
+			"test": "Control reachable replay"
+		},
+		{
+			"passed": true,
+			"test": "Control reachable step"
+		},
+		{
+			"passed": true,
+			"test": "Control reachable route"
+		},
+		{
+			"passed": true,
+			"test": "Gaze starts the film"
+		},
+		{
+			"passed": true,
+			"test": "Looking away freezes the film"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause survives returning gaze"
+		}
+	],
+	"id": "torque_purchase",
+	"map": "Vectors_Act2_VectorArithmetic",
+	"passed": true
+}

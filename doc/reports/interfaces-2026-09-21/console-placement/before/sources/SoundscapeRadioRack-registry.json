@@ -1,0 +1,134 @@
+{
+  "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+      "face": [
+        "scale",
+        "presets",
+        "list",
+        "void"
+      ]
+    },
+    "default": "face=scale - a flat degree band and needle agree with the physical tuning wheel. The 2026-09-21 interface pass replaces the fictitious FM units and enlarges the case for full-size controls; authored placements require a fresh reach check.",
+    "was": "a hand-built front panel with no exports the sweep could turn: a Label3D reading '88 | 92 | 96 | 100 | 104 | 108' and a 1 cm needle box, both hard-coded in the scene, plus a display whose only vocabulary was a fake FM number. The tuning maths (station = round(angle / 40°), clarity = 1 - |offset|) was already an argument about continuum versus discrete stations, and the panel could only ever tell one side of it. apply_grid_config() did not exist.",
+    "note": "the axis does not touch the tuning maths — station index, proximity threshold and selected preset are identical across all four values. What changes is the panel's ACCOUNT of the spectrum: a continuum you can read a number off (scale), a row of discrete lamps where the between does not appear at all though you still hear it (presets), a stocked menu of nine proper nouns (list), or no map whatsoever, wheels and a dark display, find a station by ear (void). Same signal, four claims about what a station is."
+  },
+  "capacity": "TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise",
+  "category": "waves",
+  "complexity": "beginner",
+  "description": "Turn a full-size physical wheel through preset centres and their gaps; a second wheel controls live attenuation in dB. Four flat panel faces expose a degree band, station lamps, a named list, or no readings for tuning by ear. Station selection uses a distance threshold; gaps request the existing drone preset. Sound generation follows the latest queued selection.",
+  "dev_themes": [
+    "music",
+    "oscillation",
+    "physics",
+    "waves"
+  ],
+  "gamwell_reference": "Fourier analysis, signal processing, wave interference",
+  "include_in_map_data": true,
+  "interactions": [
+    "turn VR hinge wheel to tune stations",
+    "adjust volume wheel",
+    "listen for static between stations"
+  ],
+  "lookup_name": "SoundscapeRadioRack",
+  "map_ready": true,
+  "map_sequences": [
+    "wavefunctions"
+  ],
+  "name": "SoundscapeRadioRack",
+  "qfep_connection": "Lambda as tuning — the wheel angle IS lambda, sweeping through a spectrum of possible sounds. Between stations is noise (high E). At station center is signal (high F). The threshold parameter controls how sharp the transition is.",
+  "scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
+  "sequence": "wavefunctions",
+  "tags": [
+    "audio",
+    "radio",
+    "tuning",
+    "soundscape",
+    "vr",
+    "interactive",
+    "frequency",
+    "analog"
+  ],
+  "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+      "method": "primitive_assembly",
+      "primitives": [],
+      "operations": [
+        "create_primitives",
+        "position_children"
+      ]
+    },
+    "material": {
+      "type": "standard",
+      "shading_model": "pbr",
+      "key_properties": []
+    },
+    "animation": {
+      "type": "static",
+      "driven_by": null,
+      "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+  },
+  "spatial_needs": {
+    "platform": "table",
+    "footprint_cells": 1,
+    "clearance": {
+      "front": 2,
+      "back": 1,
+      "left": 2,
+      "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 1,
+    "cluster_with": [
+      "depends",
+      "presets",
+      "contrasts",
+      "audio_catalog_tablet",
+      "browsing"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+  },
+  "measurements": {
+    "aabb_size": [
+      0.5,
+      0.3,
+      0.12
+    ],
+    "aabb_center": [
+      0.0,
+      0.0,
+      0.02
+    ],
+    "grid_cells": [
+      1.0,
+      1.0
+    ],
+    "max_dimension_m": 0.5,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+  },
+  "footprint_measured": [
+    1.0,
+    1,
+    1.0
+  ],
+  "spatial_profile": {
+    "dir_group": "floor",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.305598Z",
+    "derived_from": "aabb_size + category"
+  }
+}

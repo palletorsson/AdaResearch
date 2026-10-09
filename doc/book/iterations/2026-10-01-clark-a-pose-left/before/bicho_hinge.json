@@ -1,0 +1,74 @@
+{
+	"artifacts": {
+		"bicho_hinge": {
+			"lookup_name": "bicho_hinge",
+			"name": "Bicho Hinge",
+			"class_name": "BichoHinge",
+			"scene": "res://commons/artifacts/bicho_hinge/bicho_hinge.tscn",
+			"category": "transforms",
+			"artifact_type": "interactive_algorithm",
+			"complexity": "intermediate",
+			"sequence": "transformation",
+			"map_sequences": [
+				"transformation"
+			],
+			"description": "Lygia Clark, Bichos, 1960 — hinged aluminium plates with no fixed shape and no right way up. Six identical 3 mm sheets, 0.26 x 0.18 m, joined by piano hinges into a tree on a museum plinth at 0.82 m, the root standing on edge and facing the approach. It has no canonical pose: _ready() searches a deterministic sequence for a configuration that is legibly bent, clears the floor and misses the plinth, opens the object into it, and nothing ever returns it there — the hinges have default_on_release false, so a released plate stays where the hand left it. The transformation sequence next door teaches rotation and scale as things DONE TO a rigid body, where the group lives in the matrix and is the same group for every body. Here the group is the object's own articulation: five joints, each with its own limits, composing in an order you can feel because turning the root and then the leaf does not land where turning the leaf and then the root does. And the reachable set is a proper subset of the imaginable one, twice over — once because the joints have stops, and once because the object is standing on something. Measured over 4000 draws per setting: at #mode:tight the joints cannot reach the plinth at all (0.00% of draws clash), at open 17.73% of draws put a plate through it, at free 68.75%. Widening a transformation group does not widen the set of things the object can be, because the group does not know about the plinth. A caption plate beside it (commons/ui/text_screen.gd, unrotated, on its own post at reading height) reads back the live angle vector, how many hinges are sitting on a stop, and the words 'no home pose'; it refreshes when a plate is released, not per frame, because text_screen rebuilds by baking a new albedo. Clark held that the work does not exist as an image — every photograph of a Bicho is a photograph of one accident — so the still this artifact ships in the gallery is, by its own argument, a photograph of seed 0 and nothing more authoritative than that.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "medium",
+			"tags": [
+				"transformation",
+				"articulation",
+				"configuration_space",
+				"hinge",
+				"kinematics",
+				"lygia_clark",
+				"bicho",
+				"neoconcrete",
+				"grabbable"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.075,
+					1.304,
+					0.381
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"source": "SOLVED, NOT MEASURED. Godot could not be run in the session that wrote this artifact (the editor held the user:// lock), so the forward kinematics, the pose search and the sample geometry were re-implemented in Python at the shipped numbers and the extents read off that. The replica composes the same Transform3D order, draws the same Kronecker sequence and tests the same eighteen sample points per plate, so the engine's pose should be identical rather than similar — but nobody has photographed it. Defaults: plate_count 6, swing open, pose_seed 0, plate_w 0.26, plinth_height 0.82, caption on. Solved pose, degrees, in link order: -15.0, +116.8, -50.1, +27.7, -34.8, with hinge 0 sitting on its lower stop. Plates occupy x [-0.246, +0.290], y [+0.800, +1.304], z [-0.190, +0.191]; the plinth is 0.2392 square from y 0 to 0.82; the caption post carries its screen from y 0.908 to 1.192 at x 0.610, placed at the object's own reach plus 0.10 m. REPLACE THIS BLOCK with a real capture measurement at the first opportunity."
+			},
+			"relationships": {
+				"pairs_with": [
+					"carve_grid"
+				],
+				"argues_with": [
+					"approach_scale"
+				]
+			},
+			"dev_themes": [
+				"the transformation group belongs to the object, not to the matrix",
+				"composition is order-dependent and you can feel it",
+				"the reachable set is smaller than the imaginable one",
+				"no canonical pose, so no canonical photograph"
+			],
+			"qfep_connection": "The transformation arc opens on affine transforms — translate, rotate, scale — applied to rigid bodies that have no say in the matter. The group is external, universal and identical for every object it is applied to; what survives is called the invariant and the object is only the thing the operation happened to. Clark's Bichos refuse the arrangement at the joint. The critter's transformations are its own, they are FEWER than the ones you can name for it, and which ones are available is a fact about where it is standing as much as about what it is. That is the same move QFEP makes on identity: not a set of properties acted on from outside by a general rule, but a body whose available becomings are constituted by its own structure and its own situation together, with a reachable set that is nobody's to widen from the outside. The plinth is in the argument on purpose. Half the poses this object cannot reach are unreachable not because of anything in the object but because of the thing it has been put on.",
+			"note": "ADDED 2026-09-09. THE ORIGIN IS THE FLOOR at the plinth's centre; min_y is exactly 0 (plinth base and caption foot), so the grid's auto-grounding is a no-op and no auto_ground opt-out is needed. The object runs to +X: place the token with a clear cell to its right or the caption post lands in a wall. Config keys, every numeric one drawn from CONFIG_PARAM_NAMES because GridInteractablesComponent.gd:1705 reads an unlisted #key:<number> as the tutorial's positional shorthand: #count:6 (plates, 4-7) - #mode:open (tight | open | free, the reachable set) - #generation_seed:0 (which accident; `seed` is NOT on the list and `generation_seed` is, which is the whole reason for the ugly name) - #size:0.26 (plate width, metres; everything else scales off it) - #height:0.82 (plinth) - #screen:false (hide the caption). The boolean must take a WORD: #screen:0 is a lone numeric on an unlisted key and is eaten as a rotation, and the word arrives as the STRING 'false', for which bool() returns TRUE - hence the _flag helper. NO dna.axes block: `swing` is a real three-value family and the honest thing is to promote it after somebody has swept it, not to declare it from a keyboard. THREE THINGS A LATER SESSION SHOULD CHECK FIRST, because none of them could be run here. (1) THE ADDON. The VR grab needs res://addons/godot-xr-tools/interactables/interactable_hinge.gd and interactable_handle.gd, and /addons is gitignored (.gitignore:13). Both are load()ed BY PATH behind a ResourceLoader.exists guard, never named as classes, so a clean checkout loses the grab and nothing else - but it means the grab has never been tested and cannot be tested by the compile gate. VRAudioControlDial.tscn is the only other consumer of that hinge in this repo and is the pattern this follows; note that interactable_hinge.tscn itself is Godot 3 wreckage (its root node is type=\"Spatial\") and is deliberately NOT instanced - the script is attached to a plain Node3D. (2) THE HOOK PRUNE. XRToolsInteractableHandleDriven._hook_child_handles recurses into every descendant, so in a CHAIN of hinges each ancestor also subscribes to its descendants' handles and one grab would drive four joints at once. _prune_hooks disconnects the surplus in a deferred pass after the build. If a grab feels like it is multiplying, that pass is what to look at. (3) THE DESKTOP LANE. Plate colliders carry layer 19 as well as layer 1 so DesktopInteractionPointer's raycast (collision_mask_value 1310720 = layers 19 + 21) finds them, and pointer_event() lives on the ROOT because _resolve_pointer_target walks up from the collider to the first ancestor that has it. Untested. A wrong guess there costs a drag that does not track, never an error - every lookup is guarded and the model only ever changes through set_hinge, which clamps to the limits. GEOMETRY THAT IS LOAD-BEARING AND WILL LOOK ARBITRARY: PLINTH_RATIO 0.46 (plinth half-width as a fraction of plate width). The root plate stands on edge, so its side hinges are VERTICAL lines at x = +/- plate_w/2 and a plate hung there hangs at |x| >= plate_w/2. A plinth wider than that is a plinth the wings swing into: at half-width 0.577*w - a 0.30 m plinth under a 0.26 m plate - 4000 of 4000 draws clashed and the search returned nothing for every seed. The vertical root is load-bearing for the same reason and was chosen over a flat one on measurement: 51% of draws pass at open against 20% flat, and 61% against 0.2% at tight. Tree depth is capped at 3 links because one link reaches sqrt(d^2 + (w/2)^2) = 0.222 m and three of them is 0.666 m, which leaves 0.154 m of air under a 0.82 m plinth; a fourth level would reach -0.068 and put a plate through the floor. The pose search is a Kronecker sequence on sqrt(2), sqrt(3), sqrt(5), sqrt(7), sqrt(11), sqrt(13) rather than a RandomNumberGenerator, and that is not aesthetics: it is what let the shipped configuration be solved in Python before this file was ever parsed. Verified over 600 combinations (seeds 0-49 x counts 4-7 x all three swings): every one found a pose, worst case at attempt 26 of 240. REVIEWED 2026-09-09 by a second agent against an independently written forward-kinematics replica. Reproduced: min_y exactly 0.000000 (plinth column base and caption post foot), root basis determinant +1 (a rotation, not a mirror), the shipped pose -15.0 / +116.8 / -50.1 / +27.7 / -34.8 found at attempt 0 with 1 of 5 hinges on a stop, and AABB [1.0746, 1.3039, 0.3814] against the [1.075, 1.304, 0.381] recorded above. The clash rates came back 0.00 / 17.65 / 68.67 against the 0.00 / 17.73 / 68.75 written here - a 0.08 percentage-point gap, three draws in four thousand, between two Python replicas neither of which is the engine; the headline (none / about one in six / about two in three) is unaffected and BOTH sets of decimals are still unmeasured. TWO DEFECTS WERE FOUND AND FIXED IN THE .gd. (1) The standing test was a flat 0.20 m above the plinth top, which is a constant about one plate width. Swept across the whole clamp range - swing x plate_w x plate_count x plinth_height, 300 combinations - 30 of them could not satisfy it at all: at plate_w 0.08 with 4 or 5 plates the best max_y over all 240 draws is 1.0057 against a bar of 1.0200, short by 14 mm for every seed and every swing, so the search exhausted its guard and shipped the flat fallback. A folded stack, a push_warning, nothing else visibly wrong. It is now STAND_LINKS (0.90) of one link's reach: 0.19983 m at the shipped plate, which restates the old bar to within 0.16 mm. Measured after the change - the shipped pose is identical, all 50 seeds at the defaults are identical, the only poses that move are at plate_w 0.08 and 0.16, and failures go 30/300 to 0/300. The original 600-combination sweep held plate_w at its default, which is how this shipped. (2) apply_grid_config accepted the property-name aliases plate_w, plinth_height and pose_seed, none of which is in CONFIG_PARAM_NAMES - so #plate_w:0.3 was eaten by the shorthand branch, arrived as the BOOL true, and float(true)=1.0 clamped to 0.60, more than doubling the plate while the map file read 0.3. That is the #levels:4 failure. A _num() helper now refuses any value that is not a parseable number, so the mangled form is inert instead of wrong and the alias still works from a bench that passes a real float; a bool on #mode is refused for the same reason. Only #count, #size, #height, #generation_seed and the word-valued #mode / #screen are safe from a MAP TOKEN. STILL UNVERIFIED, in order of risk: the VR grab (needs the gitignored xr-tools addon; the handle wiring was checked line-for-line against VRAudioControlDial.tscn and matches - layer 262144, mask 0, freeze true, picked_up_layer 0 - and the @onready/limits/position ordering in interactable_hinge.gd was traced and is correct), _prune_hooks (the over-collection it fixes is real - _hook_child_handles does recurse into every descendant - and the method names and signal names it disconnects were confirmed against the addon source), and the desktop drag (the layer, the mask 1310720, the XRToolsPointerEvent enum ENTERED/EXITED/PRESSED/RELEASED/MOVED = 0/1/2/3/4 and the unbounded upward walk in _resolve_pointer_target were all confirmed; the drag arithmetic has still never run). ONE COMPOSITION NOTE for whoever shoots this: the caption post is half the AABB. The Bicho itself spans x [-0.2465, 0.2901] and the caption frame spans x [0.3921, 0.8281], so a fit-by-diagonal capture frames a 1.07 m box of which the subject is 0.54 m. Not broken, but if the still reads small, dna.framing or a closer caption is the lever, not the artifact."
+		}
+	}
+}

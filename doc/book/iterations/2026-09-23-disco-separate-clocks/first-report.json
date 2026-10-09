@@ -1,0 +1,208 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "all three existing artifacts are placed",
+      "passed": true
+    },
+    {
+      "name": "controller and score are bound to this floor",
+      "passed": true
+    },
+    {
+      "name": "current floor has 144 monochrome tiles",
+      "passed": true
+    },
+    {
+      "name": "four physical floor controls exist",
+      "passed": true
+    },
+    {
+      "name": "HOLD stops the visual clock",
+      "passed": true
+    },
+    {
+      "name": "pattern cycle restores CHECKER at phase zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: checker-zero",
+      "passed": true
+    },
+    {
+      "name": "ONE STEP advances the held pattern",
+      "passed": true
+    },
+    {
+      "name": "checker values switch at every fixed address",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: checker-one",
+      "passed": true
+    },
+    {
+      "name": "second step restores the checker values",
+      "passed": true
+    },
+    {
+      "name": "three speeds preserve the current values",
+      "passed": true
+    },
+    {
+      "name": "ROWS starts at the first row",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 0 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-00",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 1 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-01",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 2 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-02",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 3 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-03",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 4 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-04",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 5 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-05",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 6 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-06",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 7 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-07",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 8 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-08",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 9 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-09",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 10 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-10",
+      "passed": true
+    },
+    {
+      "name": "ROW phase 11 lights its own row",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rows-11",
+      "passed": true
+    },
+    {
+      "name": "all tile transforms remain fixed",
+      "passed": true
+    },
+    {
+      "name": "score plays while the floor clock holds",
+      "passed": true
+    },
+    {
+      "name": "musical flashes expire while held",
+      "passed": true
+    },
+    {
+      "name": "visual clock runs with the score stopped",
+      "passed": true
+    },
+    {
+      "name": "saved placed sequencer screen",
+      "passed": true
+    },
+    {
+      "name": "walk across the running rows",
+      "passed": false
+    },
+    {
+      "name": "encounter completed",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "walk across the running rows",
+    "encounter completed"
+  ],
+  "observations": {
+    "score_notes": [
+      [
+        1,
+        0
+      ]
+    ],
+    "walk across the running rows": {
+      "feet": [
+        0.0,
+        0.121487498283386,
+        -4.0
+      ],
+      "maximum_y": 0.121487498283386,
+      "minimum_y": 0.121487498283386
+    }
+  },
+  "passed": false,
+  "room": "Tutorial_Disco",
+  "scope": "Isolated production museum. Floor controls receive supplied pointer events; sequencer controls receive UI signals. Selected key-input walks use the ordinary museum controller. Held phases and staged cameras supply the illustrations. Audio bus muted; generated note events do not establish listening quality, headset comfort or learner understanding."
+}

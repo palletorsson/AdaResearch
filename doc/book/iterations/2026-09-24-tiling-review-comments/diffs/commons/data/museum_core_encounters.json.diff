@@ -1,0 +1,105 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -9,9 +9,10 @@
+     "status": "source_checked_draft",
+     "sequence": "tiling",
+     "text_path": "commons/maps/Pattern_Disco/final.md",
+-    "text_sha256": "508d7cbc06927da571a4e6a679baf03726f5c347df4955b351397b011bf14b83",
+-    "map_sha256": "dd651b4afd2870da18a8666592231429e3ed43edbe5bf2df6c3260777ab10c89",
+-    "learner_verified": false
++    "text_sha256": "a2330aa0911a92cefc6959fb90b6e393d5e41626726d9cfe156f017533b841c4",
++    "map_sha256": "970cd722d675738af9331b4678eba9d4a9164ed9125451d3ba9fbd10bbfb0ade",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Pattern_Disco"
+   },
+   "Pattern_Foundry": {
+     "primary_tokens": [
+@@ -24,9 +25,10 @@
+     "status": "source_checked_draft",
+     "sequence": "tiling",
+     "text_path": "commons/maps/Pattern_Foundry/final.md",
+-    "text_sha256": "415c1b854c1129b217c7a55a1b164b0c67a24e700e5cd2cf37c7326981d83f4a",
++    "text_sha256": "3a09a305e1f6a7f249edcb2ff3beabdd16072315b87562ea0ac9d97cbc3ca108",
+     "map_sha256": "e4aed04049a9ad9a2d70cfa77e3a35bc0959ebfec33dcae507f4a0a220357b57",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Pattern_Foundry"
+   },
+   "Tutorial_Pattern": {
+     "primary_tokens": [
+@@ -36,9 +38,10 @@
+     "status": "source_checked_draft",
+     "sequence": "tiling",
+     "text_path": "commons/maps/Tutorial_Pattern/final.md",
+-    "text_sha256": "83d4ad634e1e3805f97de643de691a7beeb134760bfd91e531e0b8a91cd57fed",
+-    "map_sha256": "09d0c6788dd0cea82de96d404fdcd6284c81793f5c3f37fa55d8d56b8a6b1314",
+-    "learner_verified": false
++    "text_sha256": "a639a36c67ca06ee2ec5e8e86c0f8004613b894a34b848b3a17dc3c27672d44c",
++    "map_sha256": "1fc9b8d4467cece6921d155e06209b844bbd2211de725db2208d9ed732644a4c",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Tutorial_Pattern"
+   },
+   "Array_Patterns": {
+     "primary_tokens": [
+@@ -49,9 +52,10 @@
+     "status": "source_checked_draft",
+     "sequence": "tiling",
+     "text_path": "commons/maps/Array_Patterns/final.md",
+-    "text_sha256": "a8a77345b0f4e88596455b06b67d3b83d2cf966b6e8df511314d79aac9208052",
+-    "map_sha256": "259969aef0af13121dce65b0520441b39f8e0042dae9b8fabc12ae14890a9e8c",
+-    "learner_verified": false
++    "text_sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84",
++    "map_sha256": "3b3fe75974df6f020a3c0f107b1cdd695c8c5fe1636bad611a6f7c11200e1e01",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Array_Patterns"
+   },
+   "Symmetry_Seventeen": {
+     "primary_tokens": [
+@@ -62,9 +66,10 @@
+     "status": "source_checked_draft",
+     "sequence": "tiling",
+     "text_path": "commons/maps/Symmetry_Seventeen/final.md",
+-    "text_sha256": "9d9e3d5d8ec8afe0aac8d46688c12cebbe27c31664e4ac101f8b55162ae7ee60",
+-    "map_sha256": "8967f5270c051b6adc8bd779b222fb8be4bd7b82a07f17db14be9fb2eba28e55",
+-    "learner_verified": false
++    "text_sha256": "421b083cb03b5ef4c264092f9adabf6afea93d6c46608e4d6673185a85ef77ea",
++    "map_sha256": "633e1bafa47c7b3a42d5a051745ea4f2cf713d84d64f5c4a666c0467636c1cae",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Symmetry_Seventeen"
+   },
+   "Ribbon_Patterns_01": {
+     "sequence": "tiling",
+@@ -75,7 +80,9 @@
+     ],
+     "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+     "learner_verified": false,
+-    "map_sha256": "6ec9274a57a55ff1734dffefa2f395562f23ec0ff8f8d3467a011643fac85352"
++    "map_sha256": "db587570b0f260889c87664c6cc664ee5efa5e8e0fd0593e9bf4e1c4fc9362cf",
++    "text_sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e",
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_01"
+   },
+   "Ribbon_Patterns_02": {
+     "sequence": "tiling",
+@@ -86,7 +93,9 @@
+     ],
+     "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+     "learner_verified": false,
+-    "map_sha256": "7a08388ae374d73a081376e81e70b00a8f507ef7bbf132335b6246d09ed18a18"
++    "map_sha256": "1e803ac63f9f8ff1eb66bdb9b8bed069cfcc3be7e2a311c9dc0a08a07446dda9",
++    "text_sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af",
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_02"
+   },
+   "Ribbon_Patterns_03": {
+     "sequence": "tiling",
+@@ -98,8 +107,9 @@
+     ],
+     "reason": "Current manuscript and placed roles follow fabric source editing, deliberate saved-recipe wear, live mirror comparison and a shared recipe on four runway bodies. Legacy glitch and light works remain secondary; headset and learner verification remain pending.",
+     "learner_verified": false,
+-    "map_sha256": "769ed2dfd6ee3f2cd5d91e23183af272941a8114de85fbdf0678e30ca7753d01",
++    "map_sha256": "3513f6784e72cc7b4f73cf38e5e1aea64a7da63eb3cffe3a2338af030db7f9b2",
+     "text_path": "commons/maps/Ribbon_Patterns_03/final.md",
+-    "text_sha256": "486ee71d4e2ed173c6b2ef381b5de2faa935a8b8d27edab4dacc51be98153d6e"
++    "text_sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4",
++    "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_03"
+   }
+ }

@@ -1,0 +1,22 @@
+--- before/commons/artifacts/flow_field_painter/shared_field_lesson.gd
++++ commons/artifacts/flow_field_painter/shared_field_lesson.gd
+@@ -10,6 +10,10 @@
+ func _ready() -> void:
+ 	painter = get_parent()
+ 	painter._canvas_mesh.rotation_degrees.x = 0 # Match the actual XZ trail plane.
++	painter._info_label.hide() # The lesson status occupies this title position.
++	# Rest the existing controls above this lesson's tabletop, including RESET/SEED.
++	painter._control_panel.position.y = -0.015
++	painter._control_panel.rotation_degrees.x = -65
+ 	painter.num_particles = 80
+ 	painter._noise.seed = 43
+ 	painter._update_noise()
+@@ -42,7 +46,7 @@
+ 	if age>=0.1:age=0;refresh()
+ 
+ func refresh() -> void:
+-	status.text="FIELD %s / %d PARTICLES\nARROWS = PARTICLE SAMPLER" % ["EVOLVING" if painter.field_evolving else "HELD",painter._particles.size()]
++	status.text="FIELD %s / %d PARTICLES\nARROWS %s" % ["EVOLVING" if painter.field_evolving else "HELD",painter._particles.size(),"SHOWN" if arrows.visible else "HIDDEN"]
+ 	if not arrows.visible:return
+ 	var mesh=ImmediateMesh.new();mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+ 	for z in 4:

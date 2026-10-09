@@ -1,0 +1,71 @@
+{
+  "schema": "tutorial-cards/1",
+  "updatedAt": "2026-10-06T07:24:10.209Z",
+  "cards": {
+    "Point_Coordinates": {
+      "subjects": [
+        "Pickable",
+        "3D coordinate system",
+        "Local and world position"
+      ],
+      "focus": "Carry the existing black sphere and compare LOCAL with WORLD. Read what makes the body grabbable and how its position is expressed in each coordinate frame. The XR player setup is supplied; the pickable-body connection is part of this lesson. Distance calculation belongs in Point Lines.",
+      "updatedAt": "2026-10-05T07:07:34.056Z"
+    },
+    "Primitives_Godot": {
+      "subjects": [
+        "Extending the existing PointBody class",
+        "SphereMesh rings and radial segments",
+        "Held and released state",
+        "Elapsed time and integer steps",
+        "Bounded resource properties",
+        "Independent mesh resources",
+        "Visible mesh and collision shape"
+      ],
+      "focus": "Continue the carried PointBody sphere. While held, reduce its rings and radial segments in timed integer steps; release pauses, re-grab continues and reset restores. Stop at rings 1 and radial segments 4. Keep size, material and collider fixed; compare the two resolution settings separately. Carry a familiar object whose construction can change through interaction, on its way toward the catalyst.",
+      "updatedAt": "2026-10-06T05:13:21.097Z"
+    },
+    "Point_Line_Grid": {
+      "subjects": [
+        "Loading your saved trace",
+        "Reusing a drawing as a sculpture",
+        "Source positions and grid addresses",
+        "Integer coordinates and rounding",
+        "Changing a copy while keeping the original"
+      ],
+      "focus": "Load the existing sculpture and positions in Grid without making another point or recording another gesture. Keep the original pink. Duplicate its segments with independent meshes/materials, derive integer XYZ addresses, and use the carried renderer to place only the green copy. Compare 0.25 and 0.50 metre pitches.",
+      "updatedAt": "2026-10-06T06:30:48.181Z"
+    },
+    "Point_Trace": {
+      "subjects": [
+        "Reusing the point class",
+        "Arrays of positions",
+        "Appending and reading an index",
+        "A distance condition with if",
+        "Neighbour loops with for",
+        "Saving the drawing for the next hall"
+      ],
+      "focus": "Inside the Trace hall, retain local positions in metres with an array, minimum-distance condition and neighbour loop. Connect the existing release event to the supplied archive. Save the visible segments as a static sculpture with their position record; carry it to Grid in the same project.",
+      "updatedAt": "2026-10-06T06:30:40.454Z"
+    },
+    "Point_Triangle_Context": {
+      "subjects": [
+        "Three selected array entries",
+        "A closed boundary and a face",
+        "Clockwise vertex order",
+        "A guard for a collapsed triangle"
+      ],
+      "focus": "Bring the original saved Trace positions through Grid. Choose three entries, reuse PointBody as temporary handles, and connect them with one ordered triangular face. Move a corner, reverse the front, and collapse the triangle to see why a guard is needed. The archive stays intact. Carry positions and a face recipe into the first enclosure.",
+      "updatedAt": "2026-10-06T07:23:59.627Z"
+    },
+    "Primitives_Polythedra": {
+      "subjects": [
+        "Shared vertices",
+        "A list of face-index triples",
+        "Tetrahedron connectivity",
+        "Surface enclosure versus collision"
+      ],
+      "focus": "Reload the same three selected Trace positions and add an apex behind their plane. Store four positions once and address them with four face-index triples. Move the shared apex and see three faces change together; distinguish a closed visible surface from a collider. Carry the position/connectivity separation and FaceBody into Cube.",
+      "updatedAt": "2026-10-06T07:24:10.209Z"
+    }
+  }
+}

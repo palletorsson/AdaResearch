@@ -1,0 +1,404 @@
+{
+  "aabb_position": [
+    -2.65000009536743,
+    -0.474999994039536,
+    -0.0179999992251396
+  ],
+  "aabb_size": [
+    5.30000019073486,
+    1.81000006198883,
+    0.217544227838516
+  ],
+  "groups": [
+    {
+      "collision_objects": 4,
+      "meshes": 3,
+      "node": "Control_0",
+      "nodes": 14,
+      "rigid_bodies": 0,
+      "script_paths": [
+        "res://commons/interactables/push_button.gd",
+        "res://addons/godot-xr-tools/objects/hand_pose_area.gd",
+        "res://commons/interactables/interactable_area_button_pointer.gd",
+        "res://addons/godot-xr-tools/rumble/rumbler.gd"
+      ]
+    },
+    {
+      "collision_objects": 4,
+      "meshes": 2,
+      "node": "Control_1",
+      "nodes": 13,
+      "rigid_bodies": 0,
+      "script_paths": [
+        "res://commons/interactables/push_button.gd",
+        "res://addons/godot-xr-tools/objects/hand_pose_area.gd",
+        "res://commons/interactables/interactable_area_button_pointer.gd",
+        "res://addons/godot-xr-tools/rumble/rumbler.gd"
+      ]
+    },
+    {
+      "collision_objects": 9,
+      "meshes": 4,
+      "node": "Control_2",
+      "nodes": 36,
+      "rigid_bodies": 8,
+      "script_paths": [
+        "res://commons/interactables/dial_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_hinge.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd"
+      ]
+    },
+    {
+      "collision_objects": 2,
+      "meshes": 3,
+      "node": "Control_3",
+      "nodes": 15,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 5,
+      "node": "Control_4",
+      "nodes": 19,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://commons/interactables/slider_horizontal.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 7,
+      "node": "Control_5",
+      "nodes": 20,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 5,
+      "node": "Control_6",
+      "nodes": 17,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 3,
+      "node": "Control_7",
+      "nodes": 15,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://addons/godot-xr-tools/interactables/interactable_hinge.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 7,
+      "meshes": 7,
+      "node": "Control_8",
+      "nodes": 29,
+      "rigid_bodies": 4,
+      "script_paths": [
+        "res://addons/godot-xr-tools/objects/hand_pose_area.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_hinge.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 3,
+      "node": "Control_9",
+      "nodes": 15,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://addons/godot-xr-tools/interactables/interactable_joystick.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 3,
+      "meshes": 3,
+      "node": "Control_10",
+      "nodes": 17,
+      "rigid_bodies": 1,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://commons/interactables/slider_plane.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "ExtraBtn_0",
+      "nodes": 3,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 3,
+      "node": "ExtraBtn_1",
+      "nodes": 4,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "ExtraBtn_2",
+      "nodes": 3,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "ExtraBtn_3",
+      "nodes": 3,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 4,
+      "meshes": 6,
+      "node": "Compound_0",
+      "nodes": 31,
+      "rigid_bodies": 2,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 6,
+      "meshes": 9,
+      "node": "Compound_1",
+      "nodes": 46,
+      "rigid_bodies": 3,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 8,
+      "meshes": 12,
+      "node": "Compound_2",
+      "nodes": 61,
+      "rigid_bodies": 4,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 6,
+      "meshes": 10,
+      "node": "Compound_3",
+      "nodes": 39,
+      "rigid_bodies": 2,
+      "script_paths": [
+        "res://commons/interactables/slider_horizontal.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 9,
+      "meshes": 15,
+      "node": "Compound_4",
+      "nodes": 58,
+      "rigid_bodies": 3,
+      "script_paths": [
+        "res://commons/interactables/slider_horizontal.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 12,
+      "meshes": 20,
+      "node": "Compound_5",
+      "nodes": 77,
+      "rigid_bodies": 4,
+      "script_paths": [
+        "res://commons/interactables/slider_horizontal.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd"
+      ]
+    },
+    {
+      "collision_objects": 6,
+      "meshes": 12,
+      "node": "Compound_6",
+      "nodes": 52,
+      "rigid_bodies": 3,
+      "script_paths": [
+        "res://commons/interactables/slider_smooth.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+        "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+        "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd",
+        ""
+      ]
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 241,
+      "node": "Compound_7",
+      "nodes": 245,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 51,
+      "node": "Compound_8",
+      "nodes": 55,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 14,
+      "node": "NewModule_0",
+      "nodes": 15,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 11,
+      "node": "NewModule_1",
+      "nodes": 12,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 14,
+      "node": "NewModule_2",
+      "nodes": 15,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 17,
+      "node": "NewModule_3",
+      "nodes": 20,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_4",
+      "nodes": 4,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_5",
+      "nodes": 4,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_6",
+      "nodes": 4,
+      "rigid_bodies": 0,
+      "script_paths": []
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_7",
+      "nodes": 5,
+      "rigid_bodies": 0,
+      "script_paths": [
+        ""
+      ]
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_8",
+      "nodes": 5,
+      "rigid_bodies": 0,
+      "script_paths": [
+        ""
+      ]
+    },
+    {
+      "collision_objects": 0,
+      "meshes": 2,
+      "node": "NewModule_9",
+      "nodes": 5,
+      "rigid_bodies": 0,
+      "script_paths": [
+        ""
+      ]
+    }
+  ],
+  "scope": "Default demo instantiated in a studio capture; no player input or headset test",
+  "total": {
+    "collision_objects": 95,
+    "meshes": 1105,
+    "node": "@Node3D@14",
+    "nodes": 1702,
+    "rigid_bodies": 40,
+    "script_paths": [
+      "res://commons/interactables/InteractableDemo.gd",
+      "",
+      "res://commons/interactables/slider_smooth.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd",
+      "res://commons/interactables/slider_horizontal.gd",
+      "res://commons/interactables/slider_plane.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_joystick.gd",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_hinge.gd",
+      "res://commons/interactables/dial_smooth.gd",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd"
+    ]
+  }
+}

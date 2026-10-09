@@ -1,0 +1,3594 @@
+{
+  "QFEP_Introduction": {
+    "map_source": "commons/maps/QFEP_Introduction/map_data.json",
+    "text_source": "commons/maps/QFEP_Introduction/final.md",
+    "map_sha256": "9579b04f8cb7a1282e2fd1cd180dba5d73f88dc52ad309dcbc60a15dc8abf9ba",
+    "text_sha256": "c768c5bb38adc6ea85cdb257517c5bf3be0cdc69f0cc3e26bf3646f2b0246f2a",
+    "map_info": {
+      "name": "QFEP Introduction",
+      "lookup_name": "QFEP_Introduction",
+      "description": "The formula that unifies everything. QFE = F − λE(S) + φΔE(S,t). See it. Touch it. Begin to understand.\n\n[Placement applied humanoid_walker engine — constraint 0.717→0.899, walkability 0.419→0.393]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "See the QFEP formula as unified framework",
+          "Understand F as order-seeking drive",
+          "Understand E(S) as entropy/freedom",
+          "First encounter with λ and φ sliders"
+        ]
+      },
+      "title": "The Unifying Formula",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "visible",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.05,
+          0.05,
+          0.15
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue",
+        "description": "Explore the F term",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:180:qfep_introduction:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "qfep_balance_workbench:0:0",
+        "commented_out": false,
+        "lookup_hint": "qfep_balance_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "grab_sphere_F:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_F",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "lambda_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 2,
+        "raw_token": "science_screen:180:1.5#mode:wave",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "phi_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 4,
+        "raw_token": "synthesis_stand#subject:tt#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "qfep_formula_3d:0:1.5",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "orange_and_apples:270",
+        "commented_out": false,
+        "lookup_hint": "orange_and_apples",
+        "role": "unassigned",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "grab_sphere_E:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_E",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "raw_token": "grab_sphere_lambda:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_lambda",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "3t:THE FORMULA",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 5,
+        "raw_token": "el:2",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "raw_token": "el:2",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 2,
+        "z": 6,
+        "raw_token": "3t:TUNE λ AND φ",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "3t:GRAB THE TERMS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Introduction",
+      "recorded_status": "source_checked_draft",
+      "text_words": 416,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "qfep_balance_workbench"
+        ],
+        "reason": "Can two different settings produce the same result?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Introduction/final.md",
+        "text_sha256": "c768c5bb38adc6ea85cdb257517c5bf3be0cdc69f0cc3e26bf3646f2b0246f2a",
+        "map_sha256": "a9fb851dbfe5ea24a46be18562db3ae8e29188041d16eee2628319b3dc743d63",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "qfep_balance_workbench"
+      ],
+      "role_primary_order": [
+        "qfep_balance_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_F_Term": {
+    "map_source": "commons/maps/QFEP_F_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_F_Term/final.md",
+    "map_sha256": "acc356d72af92e114ba728c858fa2bec1e898c6f69fa13f9fa0f910981801305",
+    "text_sha256": "db3e855ee8ee0bd10b5850a202ab459792189145e0c15a07bdce6d9f6c08fb98",
+    "map_info": {
+      "name": "F Term: The Drive Toward Order",
+      "lookup_name": "QFEP_F_Term",
+      "description": "F is Free Energy — the prediction error. Systems minimize F by finding patterns, reducing surprise. But pure order is a trap.\n\n[Placement applied humanoid_walker engine — constraint 0.862→0.977, walkability 0.509→0.443]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 10,
+        "depth": 14,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "F = prediction error, surprise",
+          "Systems seek to minimize F",
+          "Order, pattern, crystallization",
+          "The dark room problem: pure F-minimization fails"
+        ]
+      },
+      "title": "Free Energy and Order",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.1,
+          0.2
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Escape the Dark Room",
+        "description": "Pure order is a trap. Continue to entropy.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "tt:180:free_energy:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "decoration",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 1,
+        "raw_token": "lambda_slider:0:0.5#locked:0",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 1,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 3,
+        "raw_token": "shannon_workbench:0:0",
+        "commented_out": false,
+        "lookup_hint": "shannon_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 4,
+        "raw_token": "snap_cube_puzzle:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "snap_cube_puzzle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 4,
+        "raw_token": "snap_tetra_puzzle:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "snap_tetra_puzzle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 9,
+        "raw_token": "crystal_cluster:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "crystal_cluster",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 4,
+        "z": 1,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 1,
+        "z": 3,
+        "raw_token": "3t:F — FREE ENERGY",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "el:3",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 1,
+        "z": 7,
+        "raw_token": "3t:PATTERNS SATISFY",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 1,
+        "z": 10,
+        "raw_token": "3t:λ=0 PURE ORDER",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 4,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_F_Term",
+      "recorded_status": "source_checked_draft",
+      "text_words": 408,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shannon_workbench"
+        ],
+        "reason": "What makes the next mark easy to predict?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_F_Term/final.md",
+        "text_sha256": "db3e855ee8ee0bd10b5850a202ab459792189145e0c15a07bdce6d9f6c08fb98",
+        "map_sha256": "540d4c281d0761c4fde7050cdc0631afe945f65fc84eac39e18373b75afd2a07",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "shannon_workbench"
+      ],
+      "role_primary_order": [
+        "shannon_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_E_Term": {
+    "map_source": "commons/maps/QFEP_E_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_E_Term/final.md",
+    "map_sha256": "8d138d023a01b221c3c888b24a47f506df2f34c0c4c2966b6dd8cdff37758f84",
+    "text_sha256": "4b6e0ea0d9b5cfe06cd4c3922fbe411626802356d9d1f8b0eafd4f22504ee1dc",
+    "map_info": {
+      "description": "E(S) is Entropy — the space of possibilities. High entropy means freedom from pattern, openness to becoming. But pure chaos dissolves.\n\n[Placement applied humanoid_walker engine — constraint 0.867→0.900, walkability 0.407→0.373]",
+      "dimensions": {
+        "width": 14,
+        "depth": 14,
+        "max_height": 3
+      },
+      "format": "json",
+      "lookup_name": "QFEP_E_Term",
+      "metadata": {
+        "category": "qfep",
+        "difficulty": "advanced",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "E(S) = entropy, possibility space",
+          "High entropy = freedom, randomness",
+          "λE(S) = the entropy drive in the formula",
+          "Pure chaos also fails — dissolution"
+        ]
+      },
+      "name": "E(S) Term: Entropy as Freedom",
+      "title": "Entropy as Possibility Space",
+      "version": "placed-humanoid_walker",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.15,
+          0.05,
+          0.1
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "grid_animation": {
+        "delay_between": 0.01,
+        "duration": 0.5,
+        "easing": "elastic_out",
+        "enabled": true,
+        "order": "random",
+        "type": "random_pop"
+      },
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "Neither pure order nor pure chaos. Continue to the spectrum.",
+        "name": "Find the Balance",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:180:entropy_axioms:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "microstate_counter:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "microstate_counter",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "entropy_fan:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "entropy_fan",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "possibility_space_cloud:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "possibility_space_cloud",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "particle_chaos:0:1",
+        "commented_out": false,
+        "lookup_hint": "particle_chaos",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 2,
+        "raw_token": "lambda_slider:0:0.5#value:1.0",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "random_cubes:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "random_cubes",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "3t:E — ENTROPY",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "el:1:1",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "3t:POSSIBILITY SPACE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "3t:λ=1 DISSOLUTION",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_E_Term",
+      "recorded_status": "source_checked_draft",
+      "text_words": 423,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "entropy_fan"
+        ],
+        "reason": "How many endings remain possible before one is chosen?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_E_Term/final.md",
+        "text_sha256": "4b6e0ea0d9b5cfe06cd4c3922fbe411626802356d9d1f8b0eafd4f22504ee1dc",
+        "map_sha256": "7c71b092d63872a5887b566e17cef4256ec2d9c2e2ac983769f02bdcf7805187",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "entropy_fan"
+      ],
+      "role_primary_order": [
+        "entropy_fan"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Lambda_Spectrum": {
+    "map_source": "commons/maps/QFEP_Lambda_Spectrum/map_data.json",
+    "text_source": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+    "map_sha256": "801549fb482638ff48ad5c68e0ea7ba7c9425ded2ce01959aaa48955351a2cbd",
+    "text_sha256": "d9c6a196f31f52fc58b861a2a7cbaf5555cca54bd2b0a4dc712a22e9c3d8eb4e",
+    "map_info": {
+      "name": "Lambda Spectrum: Walking the Edge",
+      "lookup_name": "QFEP_Lambda_Spectrum",
+      "description": "Walk the spectrum from order to chaos. Your position IS the λ value. Find where complexity emerges — the edge of chaos at λ ≈ 0.4.\n\n[Placement applied promenade engine — constraint 0.645→0.754, walkability 0.420→0.612]",
+      "version": "placed-promenade",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 22,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "λ = 0: crystal, rigid, dead",
+          "λ = 0.3-0.5: edge of chaos, complexity, life",
+          "λ = 1: dissolution, chaos, death",
+          "Walk the spectrum, feel the transitions"
+        ]
+      },
+      "title": "Walking Order to Chaos",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "gradient",
+        "color_top": [
+          0.1,
+          0.1,
+          0.3
+        ],
+        "color_bottom": [
+          0.3,
+          0.1,
+          0.1
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "wave",
+        "duration": 0.3,
+        "delay_between": 0.05,
+        "order": "front_to_back",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue",
+        "description": "Now explore the φ term — rate of change.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "qfep_chalkboard",
+        "commented_out": false,
+        "lookup_hint": "qfep_chalkboard",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 11,
+        "raw_token": "edge_particles:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "edge_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 11,
+        "raw_token": "lambda_hall",
+        "commented_out": false,
+        "lookup_hint": "lambda_hall",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 14,
+        "raw_token": "chaos_particles:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "chaos_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 16,
+        "raw_token": "phase_cube",
+        "commented_out": false,
+        "lookup_hint": "phase_cube",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 17,
+        "raw_token": "bifurcation_walkway:90:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "bifurcation_walkway",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 18,
+        "raw_token": "dissolving_form:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "dissolving_form",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 19,
+        "raw_token": "ordered_grid:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "ordered_grid",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 20,
+        "raw_token": "complexity_pattern:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "complexity_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 20,
+        "raw_token": "crystal_formation:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "crystal_formation",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "3t:λ=0.0 ORDER",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "3t:λ=0.3",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "3t:EDGE OF CHAOS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "3t:λ=0.5",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 14,
+        "raw_token": "3t:λ=0.7",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 17,
+        "raw_token": "3t:λ=1.0 CHAOS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 3,
+        "z": 18,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Lambda_Spectrum",
+      "recorded_status": "source_checked_draft",
+      "text_words": 420,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_hall"
+        ],
+        "reason": "Where does this corridor tell you to stand between stillness and motion?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+        "text_sha256": "d9c6a196f31f52fc58b861a2a7cbaf5555cca54bd2b0a4dc712a22e9c3d8eb4e",
+        "map_sha256": "7dd94aace534b5afa669a77468475058c9a90fa2366cea55c5ed350eea4e527b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "lambda_hall"
+      ],
+      "role_primary_order": [
+        "lambda_hall"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Phi_Term": {
+    "map_source": "commons/maps/QFEP_Phi_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_Phi_Term/final.md",
+    "map_sha256": "a8bb23ba4667b938596120265323063a662bfdce7151b63606cd77bfdc2bb533",
+    "text_sha256": "207244a11537a994772442c850d74b68b010448eb2fef08a4d2cc93738661b3a",
+    "map_info": {
+      "name": "Phi Term: The Queer Signature",
+      "lookup_name": "QFEP_Phi_Term",
+      "description": "φΔE(S,t) — sensitivity to rate of change. Negative φ resists change (conservative). Positive φ embraces becoming (queer).",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "φ = rate sensitivity",
+          "Negative φ: resist change, conserve patterns",
+          "Positive φ: embrace change, welcome becoming",
+          "φ > 0 is the queer signature in the formula"
+        ]
+      },
+      "title": "Rate Sensitivity and Becoming",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.08,
+          0.15
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "split_reveal",
+        "duration": 0.4,
+        "delay_between": 0.03,
+        "order": "center_out",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Find the Edge",
+        "description": "Now: the sweet spot where λ and φ create life.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "rigid_sculpture:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "rigid_sculpture",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 3,
+        "raw_token": "fluid_form:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "fluid_form",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "phi_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "preserved_pattern:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "preserved_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 7,
+        "raw_token": "lambda_promenade:0:0",
+        "commented_out": false,
+        "lookup_hint": "lambda_promenade",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "transforming_pattern:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "transforming_pattern",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "raw_token": "tt:90:phi_conservative:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "tt:90:phi_queer:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "3t:φ < 0",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 8,
+        "z": 4,
+        "raw_token": "3t:φ > 0",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 5,
+        "raw_token": "3t:RESIST",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "raw_token": "3t:EMBRACE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Phi_Term",
+      "recorded_status": "source_checked_draft",
+      "text_words": 410,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "phi_slider",
+          "transforming_pattern"
+        ],
+        "reason": "Can change have a direction without one direction being intrinsically better?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Phi_Term/final.md",
+        "text_sha256": "207244a11537a994772442c850d74b68b010448eb2fef08a4d2cc93738661b3a",
+        "map_sha256": "432bdd29c25e48a2cb592e30804bc24151a9eb2ca466a0f8faf3d6ed3d06ec03",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "role_primary_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Edge_Of_Chaos": {
+    "map_source": "commons/maps/QFEP_Edge_Of_Chaos/map_data.json",
+    "text_source": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+    "map_sha256": "c75985c55d2c5bd8c0e960a7c2b958788f79bdb928d2da06d2286eddaf9645f8",
+    "text_sha256": "8009d98019dee94d7af9f418e9dbe2bff90926f93dcf8b8629076121825b1c59",
+    "map_info": {
+      "name": "QFEP_Edge_Of_Chaos",
+      "lookup_name": "QFEP_Edge_Of_Chaos",
+      "description": "λ ≈ 0.3-0.5. The sweet spot. Not frozen order, not dissolved chaos. Here, at the edge, complexity emerges. Life happens.\n\n[Placement applied humanoid_walker engine — constraint 0.793→0.920, walkability 0.478→0.304]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 16,
+        "depth": 15,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Edge of chaos: λ ≈ 0.3-0.5",
+          "Langton's discovery: complexity emerges here",
+          "Not too ordered, not too chaotic",
+          "This is where adaptation, learning, life happens"
+        ]
+      },
+      "title": "QFEP_Edge_Of_Chaos",
+      "eye_shot_adopted": "Trial_eye_QFEP_Edge_Of_Chaos",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.05,
+          0.12,
+          0.1
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "organic_grow",
+        "duration": 0.5,
+        "delay_between": 0.02,
+        "order": "radial_center",
+        "easing": "ease_in_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4",
+        "4",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4",
+        "4",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "To the Sandbox",
+        "description": "You've felt the edge. Now control it yourself.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:180:edge_of_chaos:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "emergence_zone:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "emergence_zone",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "turing_pattern:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "turing_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "edge_core:0:1.5",
+        "commented_out": false,
+        "lookup_hint": "edge_core",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 2,
+        "raw_token": "lambda_slider:0:0.5#locked:0.4",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 13,
+        "z": 4,
+        "raw_token": "edge_of_chaos_unlocked:90",
+        "commented_out": false,
+        "lookup_hint": "edge_of_chaos_unlocked",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "el:2:1",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 7,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Edge_Of_Chaos",
+      "recorded_status": "source_checked_draft",
+      "text_words": 429,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "edge_of_chaos_unlocked"
+        ],
+        "reason": "Which changes belong to the pattern, and which to the way we drive it?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+        "text_sha256": "8009d98019dee94d7af9f418e9dbe2bff90926f93dcf8b8629076121825b1c59",
+        "map_sha256": "6c4b7c923668899ba4680f6fbc9a2dffaae64e3f5d9d67c8f523d12691de2fa2",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "role_primary_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Sandbox": {
+    "map_source": "commons/maps/QFEP_Sandbox/map_data.json",
+    "text_source": "commons/maps/QFEP_Sandbox/final.md",
+    "map_sha256": "fcaec5c9793a635cc83b3bc8a89af2169e44de00e7e43d079898f2a821d2e6ff",
+    "text_sha256": "83f19c6d22526e30b752d9ecac115b28d2116fc3edd43a36ea8e08793dca736f",
+    "map_info": {
+      "name": "QFEP Sandbox: Full Control",
+      "lookup_name": "QFEP_Sandbox",
+      "description": "You've earned the force. All parameters at your command. λ, φ, and the world responds. Find YOUR edge of chaos.\n\n[Placement applied humanoid_walker engine — constraint 0.721→0.922, walkability 0.429→0.408]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 16,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "10+ minutes",
+        "learning_objectives": [
+          "Full parameter control",
+          "λ and φ work together",
+          "Find your personal edge",
+          "You have earned the force of QFEP"
+        ]
+      },
+      "title": "Full Parameter Control",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.08,
+          0.08,
+          0.12
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "scale_up",
+        "duration": 0.4,
+        "delay_between": 0.02,
+        "order": "radial_center",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Synthesis",
+        "description": "Integrate everything you've learned.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "tt:180:qfep_mastery:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "reactive_particles:0:1",
+        "commented_out": false,
+        "lookup_hint": "reactive_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 1,
+        "raw_token": "lambda_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 1,
+        "raw_token": "phi_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 12,
+        "z": 3,
+        "raw_token": "qfep_formula_3d:0:1",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 4,
+        "raw_token": "qfep_reactor:0:1.5",
+        "commented_out": false,
+        "lookup_hint": "qfep_reactor",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 6,
+        "z": 1,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "el:3:1",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 6,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Sandbox",
+      "recorded_status": "source_checked_draft",
+      "text_words": 423,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_slider",
+          "phi_slider"
+        ],
+        "reason": "How do we tell a control that changes a number from one that changes a system?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Sandbox/final.md",
+        "text_sha256": "83f19c6d22526e30b752d9ecac115b28d2116fc3edd43a36ea8e08793dca736f",
+        "map_sha256": "588ad04da5f7bb2a070ad748be32bf127e6099c047b44169649fecb56677f8d9",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "role_primary_order": [
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Synthesis": {
+    "map_source": "commons/maps/QFEP_Synthesis/map_data.json",
+    "text_source": "commons/maps/QFEP_Synthesis/final.md",
+    "map_sha256": "83d9ce1e318c3f2920f87e1897f7348091250c35d5694ae6f37e30f2b2689a49",
+    "text_sha256": "5b9f36701d1416b8fa4b3836659aa9d3e9d1d061354851a0d6b4532d86a3cc25",
+    "map_info": {
+      "name": "QFEP_Synthesis",
+      "lookup_name": "QFEP_Synthesis",
+      "description": "QFE = F − λE(S) + φΔE(S,t). The formula is not a static equation — it is a metamorphosis. Walk the egg → larva → imago strip; collect F, E, λ, φ along the path; the formula unfolds atop the plinth; the imago you return as is what the force has earned. Merian's lifecycle plate, mid-fold.\n\n[Placement applied humanoid_walker engine — constraint 0.889→0.943, walkability 0.458→0.544]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 14,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Integration of all QFEP concepts",
+          "The formula as lived experience",
+          "You have the capacity to oscillate consciously",
+          "Return to the lab transformed"
+        ]
+      },
+      "title": "QFEP_Synthesis",
+      "eye_shot_adopted": "Trial_eye_QFEP_Synthesis",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.1,
+          0.15
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "scale_up",
+        "duration": 0.5,
+        "delay_between": 0.03,
+        "order": "radial_center",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Return to Lab",
+        "description": "Return transformed. The lab has changed.",
+        "properties": {
+          "destination": "Lab",
+          "lab_variant": "post_qfeplaboratory"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:270:qfep_synthesis:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 1,
+        "raw_token": "queer_morphology_specimen:0:0.05:0.25",
+        "commented_out": false,
+        "lookup_hint": "queer_morphology_specimen",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "grab_sphere_F:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_F",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "qfep_formula_3d:0:2.0",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "entropy_ceiling",
+        "commented_out": false,
+        "lookup_hint": "entropy_ceiling",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 7,
+        "raw_token": "entropy_meter",
+        "commented_out": false,
+        "lookup_hint": "entropy_meter",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 8,
+        "raw_token": "grasp_cabinet:0:0",
+        "commented_out": false,
+        "lookup_hint": "grasp_cabinet",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "grab_sphere_E:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_E",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 10,
+        "raw_token": "grab_sphere_lambda:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_lambda",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 10,
+        "raw_token": "grab_sphere_phi:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_phi",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 4,
+        "z": 3,
+        "raw_token": "3t:EGG",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "3t:F",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "3t:E(S)",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "3t:THE PLINTH OF BECOMING",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "3t:λ",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "el:3:1",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 9,
+        "z": 6,
+        "raw_token": "3t:φ",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "3t:FORMULA UNFOLDS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "3t:IMAGO",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "3t:RETURN TRANSFORMED",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "t:lab",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Synthesis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 418,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "queer_morphology_specimen"
+        ],
+        "reason": "Which kind of stability are you asking this body to keep?",
+        "status": "source_checked_draft",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Synthesis/final.md",
+        "text_sha256": "5b9f36701d1416b8fa4b3836659aa9d3e9d1d061354851a0d6b4532d86a3cc25",
+        "map_sha256": "a5b39c7373a571d695057fcc38a8bad7b29f6a099a1831410d91e24e04b31859",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "queer_morphology_specimen"
+      ],
+      "role_primary_order": [
+        "queer_morphology_specimen"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

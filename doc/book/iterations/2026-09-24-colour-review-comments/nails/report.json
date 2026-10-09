@@ -1,0 +1,304 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid completed",
+      "passed": true
+    },
+    {
+      "name": "salon and both separate surface controls placed",
+      "passed": true
+    },
+    {
+      "name": "the two scales use the same source mesh",
+      "passed": true
+    },
+    {
+      "name": "the display hands retain 4.3m and 0.32m heights",
+      "passed": true
+    },
+    {
+      "name": "left production receiver found named skin and nail surfaces",
+      "passed": true
+    },
+    {
+      "name": "right production receiver found named skin and nail surfaces",
+      "passed": true
+    },
+    {
+      "name": "RGB volume remains at standing reach 0",
+      "passed": true
+    },
+    {
+      "name": "open control mounting retained 0",
+      "passed": true
+    },
+    {
+      "name": "RGB volume remains at standing reach 1",
+      "passed": true
+    },
+    {
+      "name": "open control mounting retained 1",
+      "passed": true
+    },
+    {
+      "name": "point picked up for surface 1",
+      "passed": true
+    },
+    {
+      "name": "real RGB point reaches requested value 1",
+      "passed": true
+    },
+    {
+      "name": "preview shares selected value 1",
+      "passed": true
+    },
+    {
+      "name": "both salon hands receive value 1",
+      "passed": true
+    },
+    {
+      "name": "Fixture_left receives selected surface 1",
+      "passed": true
+    },
+    {
+      "name": "Fixture_right receives selected surface 1",
+      "passed": true
+    },
+    {
+      "name": "point picked up for surface 0",
+      "passed": true
+    },
+    {
+      "name": "real RGB point reaches requested value 0",
+      "passed": true
+    },
+    {
+      "name": "preview shares selected value 0",
+      "passed": true
+    },
+    {
+      "name": "both salon hands receive value 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_left receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_right receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: salon-red",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: petite-red",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: giant-red",
+      "passed": true
+    },
+    {
+      "name": "point picked up for surface 0",
+      "passed": true
+    },
+    {
+      "name": "real RGB point reaches requested value 0",
+      "passed": true
+    },
+    {
+      "name": "preview shares selected value 0",
+      "passed": true
+    },
+    {
+      "name": "both salon hands receive value 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_left receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_right receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "blue-only change leaves red and green coordinates fixed",
+      "passed": true
+    },
+    {
+      "name": "nail edit leaves all skin receivers unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: salon-violet",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: petite-violet",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: giant-violet",
+      "passed": true
+    },
+    {
+      "name": "point picked up for surface 1",
+      "passed": true
+    },
+    {
+      "name": "real RGB point reaches requested value 1",
+      "passed": true
+    },
+    {
+      "name": "preview shares selected value 1",
+      "passed": true
+    },
+    {
+      "name": "both salon hands receive value 1",
+      "passed": true
+    },
+    {
+      "name": "Fixture_left receives selected surface 1",
+      "passed": true
+    },
+    {
+      "name": "Fixture_right receives selected surface 1",
+      "passed": true
+    },
+    {
+      "name": "skin edit leaves all nails unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: salon-turquoise",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: petite-turquoise",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: giant-turquoise",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rgb-choice",
+      "passed": true
+    },
+    {
+      "name": "point picked up for surface 0",
+      "passed": true
+    },
+    {
+      "name": "real RGB point reaches requested value 0",
+      "passed": true
+    },
+    {
+      "name": "preview shares selected value 0",
+      "passed": true
+    },
+    {
+      "name": "both salon hands receive value 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_left receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "Fixture_right receives selected surface 0",
+      "passed": true
+    },
+    {
+      "name": "return to same address restores same nail value",
+      "passed": true
+    },
+    {
+      "name": "colour edits preserve both body transforms and shared geometry",
+      "passed": true
+    },
+    {
+      "name": "original loaded colour choices restored",
+      "passed": true
+    },
+    {
+      "name": "focused comparison completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "control_0": {
+      "box_size": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "local_position": [
+        -2.00000095367432,
+        1.20000004768372,
+        5.0
+      ]
+    },
+    "control_1": {
+      "box_size": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "local_position": [
+        1.99999952316284,
+        1.20000004768372,
+        5.00000047683716
+      ]
+    },
+    "nails_at_skin_edit": {
+      "after": [
+        0.799999237060547,
+        0.0800000429153442,
+        0.80001974105835
+      ],
+      "before": [
+        0.799999237060547,
+        0.0800000429153442,
+        0.800017356872559
+      ]
+    },
+    "selected_colours": {
+      "nails_a": [
+        0.8,
+        0.08,
+        0.12
+      ],
+      "nails_b": [
+        0.8,
+        0.08,
+        0.8
+      ],
+      "skin_a": [
+        0.65,
+        0.4,
+        0.25
+      ],
+      "skin_b": [
+        0.12,
+        0.56,
+        0.68
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Color_Nails",
+  "scope": "Isolated production museum. Supplied XRTools grabber moves actual RGB points. Native display-hand captures. Original production left/right meshes and receiver children verify material propagation with their XR pose drivers omitted, invisible to the camera. No headset, tracked pose, physical reach, walking, learner or performance claim. Colours restored; no save requested."
+}

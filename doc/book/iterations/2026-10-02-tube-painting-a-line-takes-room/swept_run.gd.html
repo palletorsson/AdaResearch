@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>swept_run.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f1eee7;color:#302a31;font:17px/1.65 system-ui}header,main,footer{max-width:1160px;margin:auto;padding:42px 28px}h1{font:clamp(50px,8vw,94px)/1.02 Georgia;margin:24px 0}h2{font:36px/1.2 Georgia}a{color:#8a3f5d;text-underline-offset:4px}nav{display:flex;gap:24px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:750px}.reading{font:23px/1.65 Georgia;max-width:760px;margin:55px auto}.reading p{margin:0 0 27px}section{padding:32px 0;scroll-margin-top:20px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small,.footnote{font:13px/1.6 system-ui;color:#6a5e67}details{background:#e7e0d8;padding:22px;margin:26px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a252c;color:#ffe2ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 17px;border:1px solid #9a8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ac4d75}.states figure{display:none}.states #together:checked~.together,.states #drift:checked~.drift,.states #same-rate:checked~.same-rate{display:block}.states input:checked+label{background:#873c59;color:white}.note{border-left:3px solid #b66888;padding:5px 23px}code{font-size:.9em}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #c9bec4;padding:12px;text-align:left} @media(max-width:650px){header,main,footer{padding:25px 17px}.reading{font-size:21px}.states label{font-size:14px}}.states #skin:checked~.skin{display:block}.states #path:checked~.path{display:block}.states #rings:checked~.rings{display:block}.states #continued:checked~.continued{display:block}.states #network:checked~.network{display:block}.states #network-joined:checked~.network-joined{display:block}.states #parts-0:checked~.parts-0{display:block}.states #parts-1:checked~.parts-1{display:block}.states #parts-2:checked~.parts-2{display:block}.states #parts-3:checked~.parts-3{display:block}.states #parts-4:checked~.parts-4{display:block}.states #parts-extended:checked~.parts-extended{display:block}.states #parts-connected:checked~.parts-connected{display:block}</style></head><body><main><a href="index.html#making">Back to the work</a><h2>swept_run.gd</h2><pre>extends Node3D
+## Reusable pipe, tube or cable with the existing glassware port contract.
+const Surface = preload(&quot;res://commons/primitives/pipes/swept_tube.gd&quot;)
+const Network = preload(&quot;res://commons/primitives/pipes/run_network.gd&quot;)
+const Ports = preload(&quot;res://commons/glass_rack/GlassSegmentPorts.gd&quot;)
+var record: Dictionary = {}
+var skin: MeshInstance3D
+
+func configure(points: PackedVector3Array, radius := 0.08, kind := &quot;tube&quot;, sides := 16, colour := Color(&quot;d877a2&quot;), sag := 0.5) -&gt; void:
+	record = {&quot;points&quot;:points,&quot;radius&quot;:radius,&quot;kind&quot;:kind,&quot;sides&quot;:sides,&quot;colour&quot;:colour}
+	if kind == &quot;cable&quot;: Network.shape_cable(record,sag)
+	if skin: remove_child(skin); skin.queue_free(); skin = null
+	var built: Dictionary = Surface.build(record.points,radius,sides,radius*0.22 if kind == &quot;pipe&quot; else 0.0)
+	if built.is_empty(): return
+	skin = MeshInstance3D.new(); skin.mesh = built.mesh; add_child(skin)
+	var material := StandardMaterial3D.new(); material.albedo_color = colour
+	material.roughness = 0.65 if kind == &quot;cable&quot; else 0.28
+	material.metallic = 0.5 if kind == &quot;pipe&quot; else 0.0
+	skin.material_override = material
+	var path: PackedVector3Array = record.points
+	Ports.apply_ports(self,{&quot;in&quot;:Ports.create_port(path[0],path[0]-path[1],radius),&quot;out&quot;:Ports.create_port(path[-1],path[-1]-path[-2],radius)})
+</pre></main></body></html>

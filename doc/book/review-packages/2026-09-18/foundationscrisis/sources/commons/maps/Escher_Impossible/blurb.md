@@ -1,0 +1,5 @@
+Each step makes sense. North side, height one. East side, height two. South, three. West, four. Climb the perimeter clockwise and every transition feels valid — just stairs, just geometry, just one foot after the other. Complete the loop. Arrive back at one. The contradiction isn't in any single step. It's in the whole.
+
+Penrose and Escher found the visual form of Gödel's incompleteness: systems where every local proof checks out but the global structure is impossible. Walk the staircase. Inspect the triangle — three right angles, three bars, each corner coherent, the object nonexistent. Read the plaque that describes itself describing itself. Stand before the pipe that is not a pipe.
+
+Local validity does not guarantee global consistency. The staircase knows this. Formal systems learned it the hard way.

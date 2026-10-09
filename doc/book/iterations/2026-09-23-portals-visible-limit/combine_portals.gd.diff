@@ -1,0 +1,15 @@
+--- before/commons/primitives/combines/combine_portals.gd
++++ commons/primitives/combines/combine_portals.gd
+@@ -173,6 +173,12 @@
+ ## map is the first configuration it has ever been able to hear.
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	var dirty: bool = false
++	# Map-local spacing fits the complete sequence without changing its meshes.
++	if config_data.has("portal_spacing"):
++		var wanted := clampf(float(config_data["portal_spacing"]), 1.1, 10.0)
++		if not is_equal_approx(wanted, portal_spacing):
++			portal_spacing = wanted
++			dirty = true
+ 	if config_data.has("discovery"):
+ 		discovery = str(config_data["discovery"]) in ["1","true"]
+ 		if discovery and not _portals.is_empty():

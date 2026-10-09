@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "only the two intended placement cells changed",
+      "passed": true
+    },
+    {
+      "name": "three placements retained",
+      "passed": true
+    },
+    {
+      "name": "implementation unchanged: noiseroom.gd",
+      "passed": true
+    },
+    {
+      "name": "implementation unchanged: noiseroom.tscn",
+      "passed": true
+    },
+    {
+      "name": "implementation unchanged: WallNoiseShader.gdshader",
+      "passed": true
+    },
+    {
+      "name": "implementation unchanged: QueerNoiseShader.gdshader",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Noise_6_Wall/critical.md",
+      "passed": true
+    },
+    {
+      "name": "no new artifact role override",
+      "passed": true
+    },
+    {
+      "name": "primary selection and all other target metadata retained",
+      "passed": true
+    },
+    {
+      "name": "current hash final.md",
+      "passed": true
+    },
+    {
+      "name": "current hash map_data.json",
+      "passed": true
+    },
+    {
+      "name": "all code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors and order retained",
+      "passed": true
+    },
+    {
+      "name": "original opening retained",
+      "passed": true
+    },
+    {
+      "name": "critical seam, orb and closing retained",
+      "passed": true
+    },
+    {
+      "name": "all other original paragraphs retained",
+      "passed": true
+    },
+    {
+      "name": "current notes keep dark orb supporting",
+      "passed": true
+    },
+    {
+      "name": "passing native run museum-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "passing native run before-view/museum-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "37 focused native assertions",
+      "passed": true
+    },
+    {
+      "name": "real body route: arrival to east aisle",
+      "passed": true
+    },
+    {
+      "name": "real body route: along east side",
+      "passed": true
+    },
+    {
+      "name": "real body route: enter east doorway",
+      "passed": true
+    },
+    {
+      "name": "real body route: reach inside controls",
+      "passed": true
+    },
+    {
+      "name": "real body route: return from controls",
+      "passed": true
+    },
+    {
+      "name": "real body route: cross room and leave west door",
+      "passed": true
+    },
+    {
+      "name": "real body route: west aisle toward exit",
+      "passed": true
+    },
+    {
+      "name": "real body route: return to spine exit",
+      "passed": true
+    },
+    {
+      "name": "floor ray: east doorway threshold",
+      "passed": true
+    },
+    {
+      "name": "floor ray: west exit aisle",
+      "passed": true
+    },
+    {
+      "name": "12 synthetic mouse clicks through actual museum pointer",
+      "passed": true
+    },
+    {
+      "name": "no script or shader compile errors",
+      "passed": true
+    },
+    {
+      "name": "published image is byte-identical to native capture",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: res://algorithms/randomness/shadernoisespace/noiseroom.tscn:4 - ext_resource, invalid UID: uid://cipfbdt0qd24h - using text path instead: res://algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader",
+    "WARNING: res://algorithms/randomness/shadernoisespace/noiseroom.tscn:4 - ext_resource, invalid UID: uid://cipfbdt0qd24h - using text path instead: res://algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader"
+  ],
+  "other_core_records_changed_concurrently": [],
+  "scope": "Private actual museum. Synthetic mouse clicks through the museum's own DesktopHand ray; camera smoothing/input navigation paused for repeatable aim. Sampled routes use the real museum CharacterBody against real collision. No headset, learner, Quest or live-save acceptance."
+}

@@ -1,0 +1,30 @@
+{
+  "hall": "Boolean_Verbs",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "three_primary_tokens": true,
+    "closing_secondary": true,
+    "role_alignment": true,
+    "registers_present": true,
+    "registry_resolution": true
+  },
+  "primary_artifacts": [
+    "csg_union_demo",
+    "csg_intersection_demo",
+    "csg_difference_demo"
+  ],
+  "secondary_artifacts": [
+    "the_argument_of_solids"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Boolean_Verbs\\map_data.json": "1700dd07babbd25fa250501ceb03d911893c2eaa39cbd91a77d45671efcafd18",
+    "commons\\maps\\Boolean_Verbs\\final.md": "f6029c352fd8965410788bef510863cdfe08ef4e0c7708ae29df46981ba28cf3",
+    "commons\\maps\\Boolean_Verbs\\tutorial.md": "f19bf75011e0cfd6b1627ec6be92074bec831a24c9605a3910fc4c176b934373",
+    "commons\\maps\\Boolean_Verbs\\technical.md": "abce01a4266e7b6f589a464efd48d0313f5d972d94dd0a95330388f47e87a6ed",
+    "commons\\maps\\Boolean_Verbs\\critical.md": "b9cbf17db991f50660e9bbbf4edf8162a6c27af2b788933f5969bf9d0feaa666"
+  }
+}

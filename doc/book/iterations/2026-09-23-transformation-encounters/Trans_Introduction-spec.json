@@ -1,0 +1,62 @@
+{
+  "shots": [
+    {
+      "tag": "bank-at-crossing",
+      "from": [
+        6.5,
+        1.75,
+        14.3
+      ],
+      "look_at": [
+        4.7,
+        1,
+        17.5
+      ],
+      "fov": 66
+    },
+    {
+      "tag": "bank-control-close",
+      "from": [
+        4.5,
+        1.7,
+        14.3
+      ],
+      "look_at": [
+        4.5,
+        1.15,
+        15.4
+      ],
+      "fov": 58
+    }
+  ],
+  "rays": [
+    {
+      "tag": "control-floor",
+      "x": 4.5,
+      "z": 15.4,
+      "top": 0
+    },
+    {
+      "tag": "crossing-approach",
+      "x": 5.5,
+      "z": 15.4,
+      "top": 0
+    }
+  ],
+  "walks": [
+    {
+      "tag": "approach-bank",
+      "from": [
+        4.5,
+        0.05,
+        14.3
+      ],
+      "to": [
+        4.5,
+        0,
+        15.0
+      ],
+      "seconds": 2
+    }
+  ]
+}

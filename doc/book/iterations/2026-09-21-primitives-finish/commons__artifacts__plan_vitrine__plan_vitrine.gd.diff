@@ -1,0 +1,75 @@
+--- before/commons/artifacts/plan_vitrine/plan_vitrine.gd
++++ commons/artifacts/plan_vitrine/plan_vitrine.gd
+@@ -7,12 +7,12 @@
+ # @identity
+ # essence: enter(area) -> both controllers carry a draw_dot; exit(area) -> they give them back
+ # desire: the visitor stops reading the plan and starts drawing on it, with two incompatible pens at once
+-# critical_parameter: door_side — where the glass opens, which decides which way the time axis unrolls
++# critical_parameter: pen_pair — compare sampled space with plan addresses here, or time-domain drawing in a later hall
+ # triggers: a visitor standing inside the box, polled at 10 Hz; not a signal, so an exit cannot be missed
+-# emerges: the difference between drawing IN space and drawing space AGAINST time, felt in two hands at the same moment
+-# needs: a live OpenXR rig for the pens [absent on desktop and in the museum, where the glass still builds and the hands stay empty]
+-# relationships: wraps simulation_grid, whose numbered rows become the amplitude ruler; arms draw_dot and draw_dot_time_domain, editing neither
+-# truth: two hands given different instruments will discover the difference faster than a label can state it
++# emerges: two different records of hand movement can be compared while standing in their frame
++# needs: a live OpenXR rig and both tracked controllers; desktop retains the glass plan without mounted pens
++# relationships: wraps simulation_grid; reuses draw_dot sampling through spatial or time-domain subclasses
++# truth: controller entry/exit and emitted positions are testable; ease of comparison requires a visitor
+ 
+ ## 2026-09-09, Palle: "For the simulation_grid add a glass box around that we can
+ ## enter and inside make both hand paint in the air with the two different
+@@ -48,7 +48,7 @@
+ #
+ # The result: neither draw_dot.gd nor draw_dot_time_domain.gd is edited.
+ 
+-# ── WHICH PEN GOES IN WHICH HAND, AND WHY IT IS NOT ARBITRARY ────────────────
++# ── LEGACY space_time PAIR (space_grid uses the local floor instead) ────────────────
+ #
+ # The time-domain pen does not paint in the air. It throws the hand's z away and
+ # stamps every sample on one frozen plane (draw_dot_time_domain.gd:69), then
+@@ -67,6 +67,7 @@
+ 
+ const PLAN_SCENE := preload("res://commons/artifacts/simulation_grid/simulation_grid.tscn")
+ const SCRIPT_FREE := preload("res://commons/primitives/point/draw_dot.gd")
++const SCRIPT_GRID := preload("res://commons/artifacts/plan_vitrine/plan_grid_pen.gd")
+ const SCRIPT_TAPE := preload("res://commons/primitives/point/draw_dot_time_domain.gd")
+ 
+ ## The grid player's body sits on physics layer 20; the museum's Walker on layer
+@@ -91,6 +92,7 @@
+ @export var edge_glow: float = 1.4
+ @export var edge_m: float = 0.018
+ ## Ink names, not colours — draw_dot.gd:70 declares ink as an enum of STRINGS, and a Color here would be refused in silence.
++@export_enum("space_time", "space_grid") var pen_pair: String = "space_time"
+ @export var left_ink: String = "cyan"
+ @export var right_ink: String = "amber"
+ ## Seconds the marks hang in the air after the visitor steps out. 0 clears them with the hands.
+@@ -130,6 +132,10 @@
+ 	for key in ["wrap_plan", "lid"]:
+ 		if config_data.has(key):
+ 			set(key, bool(config_data[key]))
++	if config_data.has("pen_pair"):
++		var pair := String(config_data["pen_pair"])
++		if pair in ["space_time", "space_grid"]:
++			pen_pair = pair
+ 	if config_data.has("door"):
+ 		var d := String(config_data["door"])
+ 		if d in ["-x", "+x", "-z", "+z", "none"]:
+@@ -444,11 +450,16 @@
+ 		_claims[ctrl.get_instance_id()] = me
+ 
+ 	if _left_pen == null or not is_instance_valid(_left_pen):
+-		_left_pen = _make_pen(SCRIPT_FREE, left_ink, false)
++		_left_pen = _make_pen(SCRIPT_GRID if pen_pair == "space_grid" else SCRIPT_FREE, left_ink, false)
++		if pen_pair == "space_grid":
++			_left_pen.set("grid_frame", self)
++			_left_pen.set("snap_to_plan", false)
+ 		_left_pen.name = "PlanPen_L"
+ 		_hold.add_child(_left_pen)
+ 	if _right_pen == null or not is_instance_valid(_right_pen):
+-		_right_pen = _make_pen(SCRIPT_TAPE, right_ink, true)
++		_right_pen = _make_pen(SCRIPT_GRID if pen_pair == "space_grid" else SCRIPT_TAPE, right_ink, pen_pair == "space_time")
++		if pen_pair == "space_grid":
++			_right_pen.set("grid_frame", self)
+ 		_right_pen.name = "PlanPen_R"
+ 		_hold.add_child(_right_pen)
+ 

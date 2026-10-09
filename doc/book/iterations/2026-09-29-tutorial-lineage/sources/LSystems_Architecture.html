@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LSystems_Architecture · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=LSystems_Architecture">← Tutorial lineage</a></p><h1>LSystems Architecture</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="LSystems_Architecture/final.md">Raw captured source</a></p><pre># When a line acquires walls
+
+&lt;!-- @lsystem_dungeon --&gt;
+
+Can a line admit you?
+
+Four pale segments lie on the floor. One leads from the entrance to a junction; two turn away from it; the fourth continues ahead. You can already follow them with your eyes. On the flat plan, your feet can also ignore them. There is no wall asking you to choose.
+
+Press BUILD. A low solid base and glass rise along the boundary. Enter beside the control desk, take a side branch and come back. The junction is open; the side branch ends against a wall. The straight continuation has another opening. Those different endings were decisions someone had to supply.
+
+We have brought the turtle&#x27;s saved position and direction from Growth. The previous hall changed how it read forward. Here we keep one reading and ask what must be added around it. The dungeon&#x27;s branch rule rewrites F once into this short program:
+
+```text
+F[+RF][-RF]F
+```
+
+The first F reaches the junction. The bracket saves that position and direction. A turn, a room marker and another F make the first side branch; closing the bracket returns the turtle to the junction. The second bracketed group does the same on the other side. The last F continues the stem. Each movement becomes four metres in this study.
+
+Two Rs appear in the sentence. Find the two places they mark. Follow the brackets carefully before deciding that there must be two rooms.
+
+In the dungeon&#x27;s actual interpreter, R does this:
+
+```gdscript
+rooms.append(pos)
+```
+
+It records the current position without moving. Both branches begin at the same saved junction, so both room records have the same address. A list can count two instructions while the floor contains one shared place.
+
+Leave the brass frame and press ROOMS. The junction spreads into a square, 2.8 metres across. Enter again and step away from its centreline. There is now somewhere to pause while another route continues through. The program has acquired a spatial use through the footprint we assigned to a mark. The mark itself did not contain a gathering, a cupboard or a private retreat.
+
+The construction collects the floor cells covered by all corridor and room footprints. Shared cells are kept once. At each cell edge it asks whether another occupied cell lies beyond it:
+
+```gdscript
+if occupied.has(cell + direction): continue
+```
+
+An internal edge receives no wall. That small refusal keeps the junction open. At exposed edges the builder places walls, except at the two deliberately chosen main entrances. The grammar supplies the records; the construction supplies a boundary policy. Calling the records architecture did not perform this work for us.
+
+Return outside the frame and try WIDTH. The clear width cycles through 2.2 metres, 0.4 metres and back to 1.4. Watch the pale centrelines: they stay where they were. Try entering the narrow version. Your body’s collision capsule is forty centimetres across, and so is the gap. The line continues without a break; whether you pass is decided by the disagreement between a capsule and two walls, a few centimetres the plan does not show. Opening the junction into a room will not repair that entrance.
+
+This gives us two descriptions of connectivity. Every branch still meets the same junction in the plan. The space available to this body has changed. Its size participates in what counts as a passage. A different body would require another test. More branches would not answer the question that width has made concrete.
+
+The controls refuse construction changes while a visitor remains within the study. Leave its frame, then press again. That rule belongs to this space too: the person at the desk cannot silently rebuild the walls around someone inside. We can examine the rule and imagine other arrangements for agreeing to a change.
+
+PLAN removes the walls and lowers the footprints to a drawing you can walk across; RESET returns to the opening comparison. The museum floor remains beneath every state. Behind the study, the original miniature dungeon rests on its plinth. Its more elaborate grammar fits into a small display. Look down at it with the narrow entrance still in mind. A plan can be legible to an eye long before it is usable by a body.
+
+&lt;!-- @ --&gt;
+
+The retained orthogonal structure, folded dragon path, seed and mesh studies offer further readings. We will return to them. Beyond the seed study a floor hatch opens as you approach and offers a crystal; lift it and, five seconds on, a vent nearby answers with three walking bodies, an encounter another chapter will read. Next, in Competition, we ask what happens when a rule&#x27;s next move must meet a world that other growth already occupies.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="LSystems_Architecture/tutorial.md">Raw captured source</a></p><pre># When a line acquires walls — encounter
+
+Primary: `lsystem_dungeon`. All nine authored works remain; the miniature has an opt-in full-size lesson.
+
+1. Read the four centrelines and predict the route before pressing BUILD.
+2. Enter at 1.4 m clear width. Follow a side branch, return and take the other main opening.
+3. Read `F[+RF][-RF]F`. Trace the two R instructions through the saved state. The opening labels give their count without giving the address count. RULE or the first enabling of ROOMS reveals that they mark the same junction.
+4. Leave the brass frame. ROOMS adds one 2.8×2.8 m footprint at that shared address. Walk off the centreline there.
+5. WIDTH cycles 1.4 → 2.2 → 0.4 → 1.4 m. Compare the same plan with the same 0.6 m diameter desktop collision body.
+6. PLAN removes the construction; RESET restores the initial plan, 1.4 m width, rooms off and the undisclosed address count. RULE explains the two operations without rebuilding. A discovered address remains visible through subsequent changes until RESET.
+
+All construction controls refuse while a player is inside the fixed study bounds; they require another press after exit. The desk stands outside. Museum support stays under the whole experiment. A clear outer route continues past the retained gallery.
+
+The next room is LSystems_Competition. Carry the distinction between a generated instruction and the conditions that let it take effect. Headset reach, comfort and performance remain for later testing.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="LSystems_Architecture/technical.md">Raw captured source</a></p><pre># Architecture — records, footprints, boundaries
+
+Growth supplied position/direction and a stack. Grammars and Curves separated the sentence from its interpretation. Architecture uses the existing dungeon interpreter and adds an explicit construction stage. Competition next investigates conditions on further growth.
+
+## Follow the actual program
+
+`commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd` is the registered source. Its four GRAMMARS entries remain unchanged: warren, spiral, branch and meander. Ordinary placements retain warren at depth 3, fitted to display_size 0.7. Both ordinary and lesson paths use `produce_string` and `_interpret_turtle`; `plan_records` returns their sentence, segments and room positions without changing the miniature&#x27;s settings.
+
+The lesson selects branch at one rewrite: `F[+RF][-RF]F`. There are twelve symbols, four F movements and two R records. Initial position is zero and direction is +X on the XZ plane. The first F reaches (1,0,0). Both bracketed groups restore that junction; their Rs each mark it before the next movement. The two room records therefore share one address. The final endpoints are (2,0,0), (1,0,1) and (1,0,-1).
+
+These are excerpts of the actual source:
+
+```gdscript
+var new_pos = pos + dir * step
+segments.append([pos, new_pos])
+pos = new_pos
+```
+
+```gdscript
+rooms.append(pos)
+```
+
+`+` maps direction to (-z,0,x); `-` maps it to (z,0,-x). Brackets push/pop position and direction. Context-free rewriting alone does not guarantee an acyclic spatial graph: paths may revisit positions. This particular one-rewrite cross has a junction and four edges.
+
+## Construction in metres
+
+`commons/artifacts/architecture_lesson/architecture_lesson.gd` maps a raw point to `(p.z,-p.x)*4` in its local horizontal plane. All four segments are four metres long. There is no display fitting in this study.
+
+Each segment receives an axis-aligned rectangle with square end caps. Clear widths are 0.4, 1.4 and 2.2 m. Optional rooms receive a 2.8 m square at each unique room address. On a fixed 0.2 m construction grid, footprints become occupied cells; dictionary union keeps shared cells once. The room is exactly 14×14 cells. Greedy rectangles merge floor cells to reduce geometry/collider count. This discretization is another policy, not a property of L-systems.
+
+For every occupied cell, inspect its four adjacent cells:
+
+```gdscript
+if occupied.has(cell + direction): continue
+```
+
+Only exposed edges become walls. Collinear edges merge into runs; two explicit exceptions leave the main stem&#x27;s ends open. Side ends remain closed. Wall thickness extends outward from the footprint, preserving the stated inner clear width. Walls rise 1.7 m above the 0.08 m slab and combine a low opaque base with translucent glass. Floor and wall colliders match those dimensions. The decorative centreline and brass margin have no collision.
+
+PLAN displays a footprint and the unchanged centrelines without adding collision. BUILD supplies slabs and walls. WIDTH and ROOMS change the construction while retaining the records. RESET returns to PLAN, width 1.4 and rooms off. RULE changes only the small transparent readout. A fixed occupation check covers player groups em_walker, player_body and player; rebuilding refuses while a visitor is inside, with no deferred automatic change after exit.
+
+The museum&#x27;s continuous floor supports every state. The separate DesktopPlayer test body uses a capsule with radius 0.3 m and height 1.8 m. It can traverse the wide corridor and turn at its junction; the 0.4 m entrance stops it. This is a body-specific access test, not proof of accessibility for every avatar or headset movement system.
+
+## Retained collection and limits
+
+The original miniature remains on a rear plinth. It independently fits its records, renders slabs and side walls per segment and gives room markers larger tiles. Its walls do not implement the lesson&#x27;s union/junction/door construction, and its meshes have no player collision. Dense miniatures are not certified navigable plans.
+
+CityGenerator uses `X → F[+X]F[-X][^X][&amp;X]` and `F → FF`, with 90-degree turns and pitch/yaw through Turtle3D. It creates a rotating 3D branch structure; the source does not extract city blocks or zone building plots. Dragon Room retains its fitted finite folded floor curve. The remaining seed, mesh grammar and catalyst works retain their original algorithms.
+
+All nine artifact tokens remain. The original 13×12 structure is embedded at (3,23) in a 19×39 hall; raised cells and the other placements retain their relative arrangement, and the obsolete teleporter hole is filled. All roles and sequence order remain. More elaborate grammars, arbitrary corridor angles, moving walls with consent and deeper secondary encounters remain for a later pass. Headset reach, comfort and Quest timing remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="LSystems_Architecture/intent.md">Raw captured source</a></p><pre>Concept: Separate grammar, interpretation, footprint, boundary and bodily access.
+Sequence role: After a changed reading in Grammars and Curves; before conditions on growth in Competition.
+Primary: lsystem_dungeon, with a four-segment full-size study and its original miniature retained.
+Encounter: PLAN → BUILD; enter and return; read duplicate room addresses; ROOMS; WIDTH; compare access without rewriting.
+Preserve: nine artifacts, four existing dungeon grammars, ordinary miniature, original raised structure, roles and route order.
+Critical pressure: Connected for which body? Who can rebuild a shared space? A room record has neither an automatic footprint nor a use.
+Next: LSystems_Competition; inspect actual conditions on growth before promising an ecological model.
+Later: shared consent for rebuilding, arbitrary-angle construction, richer grammars, secondary encounters, headset tests.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="LSystems_Architecture/critical.md">Raw captured source</a></p><pre># A connected plan for which body?
+
+The preceding room let a direction convention become strange without changing branch connections. This room holds one four-segment plan steady while constructing different boundaries around it. The distinction becomes bodily: a line continues through an entrance that the desktop collision capsule cannot cross.
+
+Width is not a minor finish added after the important geometry. It helps determine whether the plan&#x27;s connections are available to a particular body. The forty-centimetre passage is connected as an empty region and as a centreline graph. For a sixty-centimetre collision body, the entrance offers no route. We should specify which space and which body we mean before claiming that topology has changed. The practical topology of available movement can differ while the grammatical graph remains fixed.
+
+The two R instructions also complicate counting. Their saved state places both at one junction. Two records are not two distinct locations, and a location is not yet a room with a use. The added square might permit a pause, a meeting or an obstruction. A label such as room does not decide those activities. Nor does a dead end announce whether it is a failed route or a desired retreat.
+
+The boundary is constructed from a union of floor footprints. This policy omits walls at shared edges and explicitly opens two ends. Other policies could keep partitions, mark ownership, open every branch or provide a second route back. The grammar does not silently absolve the builder of these choices. The original miniature makes the gap visible: its side walls and room slabs suggest architecture, but it neither reconciles all junctions nor provides collision for a visitor.
+
+Changing the same substrate can be pleasurable and useful. A narrow branch can become a generous shared place without acquiring an entirely new symbolic identity. Yet the easy parameter change should not conceal who can request it. The desk refuses to rebuild while someone remains in the study. That is a limited arrangement for cohabiting the experiment, not a complete consent system. A later version might let an occupant authorize a change, preserve an alternative route, or retain a private enclosure while widening shared circulation.
+
+The earlier essay&#x27;s questions about individuation, technical environments and which interpreters get written remain research leads in the archive. This encounter does not claim that changing a renderer establishes a distinct cosmotechnics, or that every architectural use follows from identical grammars. Its narrower evidence is useful: records, interpretation, construction and bodily passage are different stages that can be inspected and revised.
+
+For the book&#x27;s larger question, what bodies are possible, the hallway adds a condition: possible in relation to which clearance, support and authority to alter a rule? Neither extra branching nor a larger room count alone measures that possibility. No numerical entropy or QFEP threshold is inferred from the plan. Competition takes this question into a world where several growing forms must meet conditions beyond their own next instruction.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="LSystems_Architecture/artifacts.md">Raw captured source</a></p><pre># Architecture — nine retained works
+
+1. **lsystem_dungeon**, primary: fixed program, full-size footprint and collision study; original miniature retained.
+2. **CityGenerator**: rotating orthogonal 3D branch structure and existing complexity controller.
+3. **dark_sphere**: existing contrasting form.
+4. **dragon_room**: existing folded floor curve and endpoint beacons.
+5. **grammar_seed**: existing grammar specimen.
+6. **mesh_grammar_petal_flower**: existing mesh grammar form.
+7. **mesh_grammar_coral_fingers**: existing mesh grammar form.
+8. **catalyst_vent**: retained catalyst emitter.
+9. **catalyst_prompter_box**: retained catalyst interface.
+
+Roles and ordering retain their authored values. The eight other works keep their relative map placements and source algorithms. The active book passage is anchored to lsystem_dungeon; deeper encounters with the collection remain available for later development.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="LSystems_Architecture/summary.md">Raw captured source</a></p><pre># When a line acquires walls
+
+One short branch program becomes a full-size floor plan and a built corridor. Six compact controls separate construction, width and room footprint while preserving the four segment records. Two R instructions share one junction. A 0.6 m desktop body traverses the 1.4 m corridor and stops at the 0.4 m entrance. All nine original works remain; the original miniature stands behind the experiment. Existing structure is preserved at offset (3,23) in a 19×39 hall. Headset checks remain pending. Next: LSystems_Competition.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="LSystems_Architecture/blurb.md">Raw captured source</a></p><pre># When a line acquires walls
+
+The line reaches the other side. Your body stops at the entrance. Follow the same short program through a change of width and find the decisions that turn its records into a place.
+</pre></section></body></html>

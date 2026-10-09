@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "name": "Engine processing predates this study instance",
+      "passed": true
+    },
+    {
+      "name": "Project selects the supplied hello-world scene",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Ready assigns the greeting to the supplied display",
+      "passed": true
+    },
+    {
+      "name": "The inherited greeting is hidden",
+      "passed": true
+    },
+    {
+      "name": "Greeting-only lesson leaves the number empty",
+      "passed": true
+    },
+    {
+      "name": "Base camera remains current",
+      "passed": true
+    },
+    {
+      "name": "Ready does not overwrite the display on later frames",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "An authored greeting reaches the display",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "A fresh node starts its own count at zero",
+      "passed": true
+    },
+    {
+      "name": "Real process callbacks increase the retained count",
+      "passed": true
+    },
+    {
+      "name": "The supplied display reports the same count",
+      "passed": true
+    },
+    {
+      "name": "The engine total has an earlier starting reference",
+      "passed": true
+    },
+    {
+      "name": "Counting preserves the greeting",
+      "passed": true
+    },
+    {
+      "name": "Two manual calls add two despite different time intervals",
+      "passed": true
+    },
+    {
+      "name": "Text follows both retained updates",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Moving the update into ready counts once",
+      "passed": true
+    },
+    {
+      "name": "The engine continues while the lesson count stays one",
+      "passed": true
+    },
+    {
+      "name": "Actual lesson block compiles",
+      "passed": true
+    },
+    {
+      "name": "Changing the increment produces two",
+      "passed": true
+    },
+    {
+      "name": "The next call continues from two to four",
+      "passed": true
+    },
+    {
+      "name": "The downloaded scene starts a fresh greeting and count",
+      "passed": true
+    },
+    {
+      "name": "The downloaded complete script runs its counter",
+      "passed": true
+    }
+  ],
+  "engine": "4.6-stable (official)",
+  "passed": true,
+  "scope": "Actual tutorial code, lifecycle, live processing and lesson variations. No rendered-browser, learner or headset trial."
+}

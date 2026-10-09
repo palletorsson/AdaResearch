@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="af9abb58f1529afa86c49201fbdaf1da51937884efbded33342bab6b92b91a0c"><title>commons/artifacts/reference_studies/passage.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/reference_studies/passage.gd</p><pre><code>extends &quot;./build.gd&quot;
+## An original passage study prompted by the user&#x27;s Bałka photograph.
+## The title, dimensions and material of the photographed work are not established.
+func build() -&gt; void:
+	var width := lerpf(0.48, 1.68, amount)
+	var plaster := material(Color(0.69, 0.65, 0.54), 0.93)
+	var cut := material(Color(0.15, 0.13, 0.105), 0.83)
+	var wall_width := 5.2
+	var side_width := (wall_width - width) * 0.5
+	for sign_value in [-1, 1]:
+		box(Vector3(sign_value * (width + side_width) * 0.5, 1.75, 0), Vector3(side_width, 3.5, 0.36), plaster, true)
+		box(Vector3(sign_value * (width * 0.5 + 0.012), 1.02, 0), Vector3(0.018, 2.04, 0.38), cut)
+	box(Vector3(0, 2.775, 0), Vector3(width, 1.45, 0.36), plaster, true)
+	box(Vector3(0, 2.045, 0), Vector3(width, 0.022, 0.38), cut)
+	# One displaced architectural element and an empty approach.
+	cylinder(Vector3(-2.2, 0.10, 2.4), 0.57, 0.20, material(Color(0.05, 0.046, 0.042)), 64)
+	box(Vector3(0, 0.006, 0), Vector3(0.56, 0.008, 7.0), material(Color(0.42, 0.40, 0.36)))
+	box(Vector3(0, 0.01, -2.0), Vector3(0.56, 0.012, 0.05), material(Color(0.91, 0.38, 0.54)))
+	plaque(&quot;WHO FITS THROUGH?&quot;, Vector3(0, 4.25, -4.84))
+	evidence = {&quot;opening_width&quot;: width, &quot;opening_height&quot;: 2.05, &quot;probe_diameter&quot;: 0.56, &quot;wall_collision&quot;: true}
+</code></pre></body></html>

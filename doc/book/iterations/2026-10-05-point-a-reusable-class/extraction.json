@@ -1,0 +1,26 @@
+[
+  {
+    "id": "move-radius-into-point-class",
+    "kind": "replace",
+    "before": "const RADIUS := 0.14\n",
+    "after": ""
+  },
+  {
+    "id": "load-point-class",
+    "kind": "insert_after",
+    "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+    "text": "\nconst PointBody = preload(\"point_body.gd\")\n"
+  },
+  {
+    "id": "construct-class-instance",
+    "kind": "replace",
+    "before": "    point = XRToolsPickable.new()\n",
+    "after": "    point = PointBody.new()\n"
+  },
+  {
+    "id": "move-construction-into-point-class",
+    "kind": "replace",
+    "before": "    point.freeze = true\n    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC\n    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN\n    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE\n    point.collision_layer = 4\n    point.collision_mask = 196615\n\n    var surface := MeshInstance3D.new()\n    var sphere := SphereMesh.new()\n    sphere.radius = RADIUS\n    sphere.height = RADIUS * 2.0\n    surface.mesh = sphere\n    point.add_child(surface)\n\n    var boundary := CollisionShape3D.new()\n    var shape := SphereShape3D.new()\n    shape.radius = RADIUS\n    boundary.shape = shape\n    point.add_child(boundary)\n\n",
+    "after": ""
+  }
+]

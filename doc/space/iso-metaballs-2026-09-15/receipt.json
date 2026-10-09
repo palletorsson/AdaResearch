@@ -1,0 +1,36 @@
+{
+  "started": "2026-09-15T11:21:03+02:00",
+  "finished": "2026-09-15T11:21:21+02:00",
+  "pid": 40708,
+  "exit": 0,
+  "checks": 21,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/iso_metaballs_probe_base.gd": "68e53aa0817ff591e325caf18ca116d401e5a74b58661ea6103d29fe2ce8a3e7",
+    "commons/maps/ISO_Metaballs/map_data.json": "b71864f421c0134a81104d6d1711399957fa9a0e89210028bd14a43270ed84b2",
+    "commons/maps/ISO_Metaballs/final.md": "992f8bd63ab0445be928573edc502036d6fa42e51e64abc1da7a5f7296c5ef9c",
+    "commons/artifacts/timing_machines/iso_metaball_workshop.gd": "0b9e6951e74836268015ae54cecfbf1f78335cc379f9e7f77f58dd4b4350831f",
+    "commons/artifacts/timing_machines/iso_metaball_workshop.tscn": "20d1aca2c998ce5823fa5cade5fde6e24f1b9a1d11fd30d26a3ad2873ff36ae0",
+    "commons/data/artifact_roles.json": "0133f312998feac050eea1b7e7125bcdeb040f759a290c6293a64257eba27b7c",
+    "commons/data/book/isosurfaces.json": "d9963843e02017b383a0939a93c8f909ef03266c437ce43da3d7ce4ec3a9f19f",
+    "commons/data/trunk_branches.json": "88b092af1eb276274f07e67538b8a619e1ec389641a6ac6eb0668dd6bfa06ac7",
+    "commons/data/map_authored.json": "5f1af2c9c97c79e8a8a8e81b8da1ba65f4fd75ba9a0565ecf5e35ee91c7e2463",
+    "commons/data/museum/em_plan.json": "850cdc67a9da318601f6dc17a53c23db3150cbd4c335009760ac73777bdc218f",
+    "commons/artifacts/registry/isosurfaces.json": "5a2789057313f7983ea41cc603ef580fbba7f33c7d3b4b139361351f7e6ad12b"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 29764,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "known_startup_errors": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+  ],
+  "known_shutdown_errors": [],
+  "known_startup_error_reason": "Unresolved default audio bus UID; exact baseline diagnostic; review muted."
+}

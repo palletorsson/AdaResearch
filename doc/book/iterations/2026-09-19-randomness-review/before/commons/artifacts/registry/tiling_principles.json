@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "tiling_principles": {
+      "lookup_name": "tiling_principles",
+      "name": "One motif, six relations",
+      "scene": "res://commons/artifacts/regularity/tiling_principles.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        15,
+        23,
+        6
+      ],
+      "parameters": {
+        "footprint": [
+          15,
+          23,
+          6
+        ],
+        "size_group": "large"
+      },
+      "description": "Six deterministic black and white fields: translation, alternation, quarter turns, reflection, shifted rows and one local exception. Floor and wall installations share exactly the same generator.",
+      "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+    }
+  }
+}

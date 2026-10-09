@@ -1,0 +1,202 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid complete",
+      "passed": true
+    },
+    {
+      "name": "both existing primary encounters are placed",
+      "passed": true
+    },
+    {
+      "name": "thirty pigments remain on their tray",
+      "passed": true
+    },
+    {
+      "name": "unheld pigments have written no samples",
+      "passed": true
+    },
+    {
+      "name": "placed canvas uses its rectangular wet white-ground configuration",
+      "passed": true
+    },
+    {
+      "name": "automatic painter advances before any pickup",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: studio",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before-hand",
+      "passed": true
+    },
+    {
+      "name": "actual pigment can be picked up",
+      "passed": true
+    },
+    {
+      "name": "held pigment paints through the actual canvas ray",
+      "passed": true
+    },
+    {
+      "name": "manual UV matches final rectangular target",
+      "passed": true
+    },
+    {
+      "name": "automatic brush continues during the supplied gesture",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shared-canvas",
+      "passed": true
+    },
+    {
+      "name": "release stops manual input",
+      "passed": true
+    },
+    {
+      "name": "release restores the ball's own dock",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-release",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-wait",
+      "passed": true
+    },
+    {
+      "name": "automatic brush and image continue after release",
+      "passed": true
+    },
+    {
+      "name": "with both inputs quiet feedback still changes the image",
+      "passed": true
+    },
+    {
+      "name": "quiet feedback reduces mean distance from white",
+      "passed": true
+    },
+    {
+      "name": "brush queue is consumed instead of retaining gesture history",
+      "passed": true
+    },
+    {
+      "name": "existing Albers studies remain present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: albers-studies",
+      "passed": true
+    },
+    {
+      "name": "tray approach has supporting floor",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker approaches the tray",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: at-the-tray",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns from tray",
+      "passed": true
+    },
+    {
+      "name": "focused encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "chosen_pigment": {
+      "brush_radius_px": 24,
+      "colour": "ff9900",
+      "node": "Ball_3",
+      "scale": [
+        0.750790238380432,
+        0.750790238380432,
+        0.750790238380432
+      ],
+      "snap_divisions": 64
+    },
+    "feedback_diagnostic": {
+      "after_mean_distance_from_white": 0.159499645852581,
+      "automatic_input_paused_only_for_diagnostic": true,
+      "before_mean_distance_from_white": 0.214129857419539,
+      "rendered_frame_difference": 120
+    },
+    "manual_samples": 79,
+    "states": [
+      {
+        "automatic_strokes": 66,
+        "elapsed": 2.7,
+        "rendered_frames": 134,
+        "state": "before-hand"
+      },
+      {
+        "automatic_strokes": 118,
+        "elapsed": 4.54999999999999,
+        "rendered_frames": 238,
+        "state": "shared-canvas"
+      },
+      {
+        "automatic_strokes": 132,
+        "elapsed": 5.14999999999999,
+        "rendered_frames": 267,
+        "state": "after-release"
+      },
+      {
+        "automatic_strokes": 230,
+        "elapsed": 8.55163233333334,
+        "rendered_frames": 464,
+        "state": "after-wait"
+      }
+    ],
+    "walks": [
+      {
+        "arrived": true,
+        "reached": [
+          12.0,
+          0.000839395856019109,
+          17.0548648834229
+        ],
+        "target": [
+          12.0,
+          0.0500000007450581,
+          17.0499992370605
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          12.0,
+          0.000839395856019109,
+          18.4772205352783
+        ],
+        "target": [
+          12.0,
+          0.0500000007450581,
+          18.5
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Paint",
+  "scope": "Isolated production museum. Existing ball settings; supplied grabber with real ray hits, native GPU images, a separately labelled quiet-input feedback diagnostic, and ordinary-controller approach. No tracked hand, headset, colour calibration, learner or performance claim."
+}

@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FormFinding_Annealing · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=FormFinding_Annealing">← Tutorial lineage</a></p><h1>FormFinding Annealing</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="FormFinding_Annealing/final.md">Raw captured source</a></p><pre># Willing to get worse
+
+You have to be willing to get worse to get better. And then the room asks a harder question: how far down do you actually want to go?
+
+The first stable shape you fall into need not be the one you want. The point in the first hall could finish in different valleys, and the rooms since have changed what makes a shape hold: a drafted curve, a formula, a finite relaxation, an encoded relation. This is the room that knows the trick for getting out, and the room that argues the trick can be taken too far.
+
+## Getting out
+
+&lt;!-- @energy_landscape_bench --&gt;
+
+A bench with a wrinkled tabletop: four hundred and eighty-four little boxes standing at the height of an energy field, three sine waves crossed, coloured from blue in the troughs to violet on the ridges. A soft yellow blob sits in one of the hollows. Gravity and local downhill nudges draw it toward lower parts of the surface; no rule surveys all the basins for the deepest one. The first hall&#x27;s question returns in another body: what can a local move discover, and what can it miss?
+
+&lt;!-- @simulated_annealing --&gt;
+
+The cabinet that fixes it: a dark survey table, waist high, with a milled basin holding a metre and a half of glowing relief. The surface is the Rastrigin function, the particular cruelty here: a smooth bowl with a cosine corrugation laid over it so that it has one true bottom and a regular grid of decoys all the way out. A temperature starts at a hundred; the run stops at a tenth or at its step limit. The rail&#x27;s histogram groups the acceptance probabilities assigned to uphill proposals. The separate accept percentage counts all accepted proposals, including downhill ones.
+
+Run it hot and larger uphill proposals can be accepted. As it cools, the random proposals shrink and costly ones become less likely to pass. This is still a search through random neighbours, not the gradient rule from the first hall. START T sets the next reset&#x27;s temperature; moving it during a run also changes the proposal scale, without directly replacing the current temperature.
+
+```gdscript
+var delta_energy: float = neighbor_energy - current_energy
+var accept: bool = false
+if delta_energy &lt; 0:
+    accept = true
+else:
+    var probability: float = exp(-delta_energy / maxf(current_temperature, 0.0001))
+    accept = randf() &lt; probability
+```
+
+A better move is always taken. A worse move is taken with a probability that depends on how much worse it is and how hot things are. That second branch is annealing&#x27;s central permission, and it is a strange thing to write down: a rule that sometimes accepts a worse outcome so that a local improvement need not become a prison.
+
+The numbers behind the gauge are worth a moment. A move costing five hundredths of an energy unit has an acceptance probability of about 0.779 at a temperature of a fifth. At two thousandths it would be about 1.39 × 10⁻¹¹: extraordinarily unlikely, not zero, and below this run&#x27;s stopping temperature. The cabinet also watches recent acceptance and adjusts its cooling rate. After eighty successive proposals without a downhill improvement, a separate rule can force a random relocation and reheat the search. HOP invokes that relocation directly; it does not ask the acceptance branch for permission. This is a machine built around the admission that its own local rule can get stuck.
+
+&lt;!-- @max_q_basin_room --&gt;
+
+And then the turn toward two wells in a low, open tank. Approach the narrow well from its outside edge and look down into it. Compare them before pressing INTERPRET. What stays still? What keeps changing? The lower result and the more responsive result have been placed beside one another, but have they been given the same conditions?
+
+![Looking into the deep well from its outside edge inside the museum](/book-review/doc/book/figures/formfinding/deep-well-museum.png)
+
+*The deep well from its outside edge at standing eye height. The cube at the bottom does not move.*
+
+On one side a deep, narrow pit holds a static cube. On the other a broad, shallow basin holds something soft that keeps moving, finding a shape and losing it and finding it again. The difference is staged: the cube is a mesh with no motion assigned, while the soft lattice receives a random jostle every two and a half seconds. Its floor constraint and the drawn bowl are separate constructions. These are different receivers under different conditions, not two runs of one measured objective.
+
+Press INTERPRET after the comparison. The work proposes that the more responsive form is the better minimum, and gives that preference the name Q. Its dead-perfect crystal and its still-changing body are roles in an argument: low enough to hold, high enough to be moved. The installation has authored those roles; it has not measured a universal boundary between life and rest.
+
+&lt;!-- @impossible_end_table --&gt;
+
+A further image, standing in the room as furniture: an end table whose top never touches its base. Two steel brackets overlap in plan with sixteen centimetres of daylight between them, joined in the drawing by one central cable and three perimeter cables. A teacup on top, unbothered. The pose refers to tension-supported furniture, but no force or contact solver tests whether this pictured arrangement can stand.
+
+Islands of compression in a sea of tension is the invitation. Here the brackets and cables are meshes placed at chosen addresses. Their stillness does not establish cancelling forces; the scene never lets gravity trouble the teacup. What would a physical version have to demonstrate that this image can only ask?
+
+&lt;!-- @science_screen --&gt;
+
+A screen, washing the wall green. Its diagram is another representation, not a measurement of Q in the two wells. Depth alone would leave out the different receivers and the disturbance supplied to one of them. The comparison asks which of those differences matters to the purpose we have chosen.
+
+&lt;!-- @ --&gt;
+
+## Low enough to hold, high enough to be moved
+
+That is the chapter, and it ends by turning against its own first sentence. Finding a form has meant several different operations: a point following a local slope, a cable drafted between controls, a surface generated from a formula, a mesh retaining a finite relaxation, a mobile drawn to satisfy ideal moments. None gives us permission to treat every still shape as the least-cost answer to the same problem.
+
+Then this one. Reaching the lowest value in a model is not the same as finding the form you want. A shallow basin can preserve a useful response to disturbance even when a deeper basin gives a lower score. That comparison is a choice about this model&#x27;s purpose, not a test that separates living matter from dead matter.
+
+Next: build a form and inspect the rule that decides whether it has settled well enough.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="FormFinding_Annealing/tutorial.md">Raw captured source</a></p><pre># Form-Finding: Annealing
+
+Descent is greedy and gets stuck. Before this map, a landscape with more than one valley.
+
+Wrinkle the surface so it has many rests.
+
+```gdscript
+@export var amp: float = 0.09
+
+func _energy(x: float, z: float) -&gt; float:
+    return amp * (sin(x * 9.0) * 0.6 + cos(z * 7.0) * 0.5 + sin((x + z) * 5.0) * 0.4)
+```
+
+Three sines at different frequencies. Height is energy, so every trough is a possible rest. The annealing table uses Rastrigin for the same job — a bowl with a cosine lattice milled into it, one global minimum in a regular grid of traps.
+
+Drop a body on it and nudge it downhill.
+
+```gdscript
+var p: Vector3 = _sim.positions[i]
+var floor_h: float = _energy(p.x, p.z) + blob_size * 0.28
+if p.y &lt; floor_h:
+    _sim.positions[i].y = floor_h
+    var gx: float = (_energy(p.x + 0.01, p.z) - _energy(p.x - 0.01, p.z)) / 0.02
+    var gz: float = (_energy(p.x, p.z + 0.01) - _energy(p.x, p.z - 0.01)) / 0.02
+    _sim.positions[i].x -= gx * 0.0008
+    _sim.positions[i].z -= gz * 0.0008
+```
+
+It finds the nearest valley, not the deepest. Descent is local and has no view of the map.
+
+Propose a jump instead of taking a step.
+
+```gdscript
+var strength: float = current_temperature / initial_temperature * search_space_size * 0.3
+var neighbor := Vector2(
+    current_solution.x + randf_range(-strength, strength),
+    current_solution.y + randf_range(-strength, strength)
+)
+```
+
+The step size is the temperature. Hot proposes wildly, cold barely moves. No gradient is read at all — the candidate is guessed, then asked its energy.
+
+Accept a worse position with a probability.
+
+```gdscript
+var delta_energy: float = neighbor_energy - current_energy
+var accept: bool = false
+if delta_energy &lt; 0:
+    accept = true
+else:
+    var probability: float = exp(-delta_energy / maxf(current_temperature, 0.0001))
+    accept = randf() &lt; probability
+```
+
+Downhill is always taken. Uphill is taken with probability `exp(-ΔE/T)`. You have to be willing to get worse to get better, and that willingness gets dearer as the system cools.
+
+Cool.
+
+```gdscript
+match cooling_schedule:
+    &quot;exponential&quot;:
+        current_temperature *= cooling_rate
+    &quot;logarithmic&quot;:
+        current_temperature = initial_temperature / log(2.0 + current_iteration)
+```
+
+Anneal, do not quench. At `cooling_rate = 0.95` the shaking dies slowly enough to still leave a shallow trap; cool fast and you freeze into whichever valley you were shaken into. The adaptive schedule tunes the rate to hold acceptance near 0.44.
+
+Hop when nothing has improved for a while.
+
+```gdscript
+if basin_hop_enabled and steps_since_improvement &gt;= stagnation_threshold:
+    if basin_hops_performed &lt; max_hops:
+        _perform_basin_hop()
+```
+
+Stagnation is information. A run that stops improving is not converged but trapped, and the cure is a deliberate throw.
+
+Cut two wells and choose between them.
+
+```gdscript
+var depth_f: float = (sqrt(f) if narrow else (f * f))
+var y: float = -depth * depth_f
+```
+
+`sqrt(f)` drops fast — a deep narrow pit, radius 0.9, depth 2.2, holding one rigid cube that will never move again. `f * f` is a soft parabola: radius 2.2, depth 0.7, holding a body that keeps re-finding a slightly different rest.
+
+Jostle the live one so it never finishes.
+
+```gdscript
+if fmod(_t, 2.5) &lt; delta:
+    for i in _sim.positions.size():
+        _sim.positions[i] += Vector3(_rng.randf_range(-0.08, 0.08), _rng.randf_range(0.02, 0.12), _rng.randf_range(-0.08, 0.08))
+_constrain_alive()
+_sim.step()
+```
+
+You can now build a landscape with many rests, propose by temperature instead of gradient, accept a worse position on purpose, cool on a schedule and hop when you stall. But the deepest well is a dead-perfect crystal — finished, frozen, incapable of the next change. Max Q is the liveliest minimum, not the deepest: low enough to hold a shape, high enough to still be moved. FormFinding_Forge hands you the landscape and asks you to let something fall down it.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="FormFinding_Annealing/blurb.md">Raw captured source</a></p><pre>The first stable shape you fall into is rarely the best one — you land in a local minimum and stick, a good-enough form with a better one just over the ridge. Annealing shakes the system with heat so it can climb out and settle deeper. But the room holds the chapter&#x27;s sharpest turn: the deepest well of all is a dead-perfect crystal, frozen, finished, incapable of change. The alive form is the one that stops short of the bottom — resting at the edge, low enough to hold, high enough to still be moved.
+</pre></section></body></html>

@@ -1,0 +1,1 @@
+We have forms and a grid. A still cube rises and falls, adds a turn, then begins to swell. Follow what each operation changes and preserves, then walk the ramp to four collectible cubes along a raised route.

@@ -1,0 +1,134 @@
+--- before/Point_Line_Grid.md
++++ after/Point_Line_Grid.md
+@@ -1,77 +1,83 @@
+-# Point Grid — your trace returns
++# Point Grid — give the record addresses
+ 
+-**Learning elements — proposed focus**
++**Learning elements**
+ 
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- Reusing a retained list
++- Display coordinates
++- Snapping in X, Y and Z
++- Source and derived positions
+ 
+-- List indices
+-- Spatial addresses
+-- Rounding
+-- Source and derived data
++Release a drawing pen in Trace, then enter Grid in the same running Endless Museum session. Find your bend above the ruled field. Pink displays the recorded shape; green gives it another spacing. The nearby panel says **THIS SESSION** and lists the source world positions.
+ 
+-Find the bend you made in Trace. It is here again. Beside it, the same record has been placed on a grid. Change the spacing and compare what happens to that bend.
++Trace taught us to append positions, read an index and traverse neighbours. Here we reuse that list. The museum supplies its session transfer, display fitting, meshes and page controls. The snapping sphere and walking trail have their own records; this lesson follows the released pen drawing.
+ 
+-## 1. Bring the drawing with you
++## Receive a copy
+ 
+-In the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md), open `point_trace.tscn`. Hold the point, draw, then release it. On desktop, mouse movement directs the held point; in VR, your tracked hand moves it. Wait for **Saved for Point Grid**.
++`commons/globals/trace_data.gd`, `add_trace()`, accepts at least two positions and stores a snapshot:
+ 
+-Stop the scene and run `point_grid.tscn`. It loads that saved trace. If no usable trace has been saved, it asks you to return and draw one. It does not substitute a demonstration for your gesture.
+-
+-The supplied `TraceMemory` keeps the latest released record on this device. It carries positions between the two lessons, including across separate runs. Opening Grid does not change the saved record. Returning to Trace, drawing and releasing saves a new one.
+-
+-## 2. Keep the source and the result separate
+-
+-Open `studies/point_grid/grid.gd`. We have two lists:
++**Museum code excerpt**
+ 
+ ```gdscript
+-var source_points: Array[Vector3] = []
+-var grid_points: Array[Vector3] = []
+-var grid_size := 0.25
++var new_trace = points.duplicate()
++saved_traces.append(new_trace)
+ ```
+ 
+-Both hold positions in metres. `source_points` receives the saved trace:
++Each release adds a snapshot of the pen's retained list. Because the pen continues across pickups, a later release can include positions from earlier drawing. `TraceData` survives room changes in this game process. Stopping the game loses this session store.
++
++Open `commons/primitives/line/grid_lines.gd`. `_ready()` reads existing snapshots and listens for later releases. `_create_trace_mesh()` receives one list as `points`. Its loop reads values without assigning new positions into that source array.
++
++## Fit before rounding
++
++The source positions are world coordinates from Trace. `_display_frame()` finds their bounding-box centre and a display scale: normally fivefold, reduced when needed to fit the largest dimension within five metres.
++
++**Museum code excerpt** — the pink rendering loop in `_create_trace_mesh()`:
+ 
+ ```gdscript
+-    source_points = TraceMemory.read_trace()
++for p in points:
++    mesh.surface_add_vertex((p - center) * final_scale)
+ ```
+ 
+-`grid_points` begins empty. We will fill it with new values, leaving the source alone. A quarter of a metre is our chosen grid spacing. All calculations use the Study frame in which Trace recorded the points.
++Subtracting `center` moves the drawing's centre to local zero. Multiplying by `final_scale` changes its size. Both pink and green use this same fit, then both are lifted above the field. The original entries stay in world coordinates. Pink is already a display transformation of the source, rather than a second record of your hand.
+ 
+-## 3. Give each saved position an address
++The green version starts with that fitted position:
+ 
+-Trace's drawing loop visited neighbouring entries by index. This loop takes each stored value in turn:
++**Museum code excerpt** — inside `_create_shadow_trace()`:
+ 
+ ```gdscript
+-    for p in source_points:
+-        var address := Vector3i(
+-            roundi(p.x / grid_size),
+-            roundi(p.y / grid_size),
+-            roundi(p.z / grid_size)
+-        )
+-        var placed := Vector3(address) * grid_size
+-        grid_points.append(placed)
++var scaled = (p - center) * scale_factor
++var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
++var snapped = scaled.snapped(Vector3.ONE * snap_step)
+ ```
+ 
+-For every position `p`, divide each coordinate by the spacing to count grid intervals. `roundi()` gives the nearest integer. `Vector3i` holds these three whole-number counts: the grid address.
++The scene sets six subdivisions of each one-metre interval, giving a pitch of one sixth of a metre **in display space**. `Vector3.ONE` applies that pitch to X, Y and Z. The floor ruling is flat; the operation is three-dimensional.
+ 
+-For example, X = `0.12` metres is `0.48` quarter-metre steps, which rounds to zero. X = `0.13` metres is `0.52` steps, which rounds to one. A small difference in the saved input can put two results a quarter of a metre apart.
+-
+-`Vector3(address)` turns the integer components into floating-point components. Multiplying by `grid_size` gives metres again. `append()` adds that result to the new list. Negative coordinates use the same rule; exact halfway values round away from zero.
+-
+-Each input produces one output. Nearby samples may acquire exactly the same position, but we keep their entries and their order. An array index names a sample in the record; a grid address names a place. Several samples can name that same place.
+-
+-## 4. Change the reading, keep the gesture
+-
+-The supplied display draws the two lists:
++**Reduced code excerpt** — an integer-address illustration for values away from exact halfway boundaries, not replacement code:
+ 
+ ```gdscript
+-    comparison.show_traces(source_points, grid_points, grid_size)
++var address := Vector3i(
++    roundi(scaled.x / snap_step),
++    roundi(scaled.y / snap_step),
++    roundi(scaled.z / snap_step)
++)
++var placed := Vector3(address) * snap_step
+ ```
+ 
+-Pink shows your saved trace. White shows the grid version. Both use the same centring and display scale, with a sideways offset so you can compare them. These display adjustments do not edit either list. The faint ruling is one XY section; the rounding still uses all three coordinates.
++Divide to count intervals, round to whole-number counts, then multiply to place the result. At a pitch of one third of a metre, displayed X = 0.15 rounds to address 0, while 0.18 rounds to address 1.
+ 
+-Change `grid_size` from `0.25` to `0.5` and run Grid again. You do not have to redraw. It rereads the original trace and calculates another result. Pink stays the same while the white drawing changes. Try `0.1` next. Use a positive spacing.
++An array index tells us *which retained sample*. An address tells us *which place on this display lattice*. Several samples may acquire the same address. The museum's green builder filters consecutive results using a squared-distance threshold of 0.001; at the pitches used here, equal neighbours are removed and distinct neighbours pass. A later return to an earlier address remains possible. Fewer than two surviving positions produce no green line.
+ 
+-The display joins consecutive entries directly. Equal neighbours produce no segment; a jump can produce a diagonal. It does not invent samples between those you made. A finer grid can retain more of the saved shape, but it cannot recover movements that Trace never recorded.
++## Change one interval
+ 
+-We have reused a drawing as data. Its shape can now be read under another rule without losing the earlier record. In Triangle, we will choose corners and give their connections another job: closing a boundary, then making a face.
++Use PREVIOUS or NEXT on the panel to hold a page of source positions. Choose a bend in pink and note which green corners coincide. AUTO resumes paging; these controls leave the record intact.
++
++**Student edit** — in `grid_lines.gd`, add this line at the start of `_ready()`, before `setup_grid()`:
++
++```gdscript
++shadow_snap_subdivisions = 3
++```
++
++This overrides the scene's value of six. It changes the green pitch to one third of a display metre and keeps the panel's pitch calculation consistent. Merely changing the script's exported default would leave the scene override in force.
++
++Save the edit before running the museum. Make and release a new drawing in Trace, then enter Grid in that same session. Compare its pink bend with the coarser green result; the source rows still describe the retained drawing. Predict which nearby displayed positions will share an address using the one-third-metre example above. A restart loses the earlier session's drawing, so different runs are not a comparison of the same source. Remove the added line to restore six subdivisions for the next run.
++
++The green line joins accepted neighbours directly, so a segment can be diagonal. Finer addresses cannot recover movement Trace never kept. You can now transform a retained drawing while preserving its source. Triangle will give a few chosen positions a new relation: a closed boundary and then a face.

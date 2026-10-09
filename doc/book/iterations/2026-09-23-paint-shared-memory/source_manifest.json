@@ -1,0 +1,39 @@
+{
+  "room": "Color_Paint",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Paint/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Paint/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Paint/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Paint/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Paint/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Paint/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Paint/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Paint/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Paint/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Paint/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Paint/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Color_Paint/map_data.json": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+    "doc/book/iterations/2026-09-23-paint-shared-memory/probe.gd": "ed10790824f84bb1ecc1d43babb9e48c6a183bc47bd519303f5025bd8f008ac4",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "e20161f1b5ed577468470020233793d05d9ef31fbe24acb38fa8c181c00cf774",
+    "ada_run/encounter_pilot/Color_Paint/control.json": "096672c0992411a900f73c8e27ff3cff1ae22a2edf925821201e54f127d7f795",
+    "ada_run/encounter_pilot/Color_Paint/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Color_Paint/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Paint/em_bake.json": "b148cfcc716b29b5f3d6e8f9ad1aa73a48082e7ddeb81b5545bb8b13dfbb04a9",
+    "commons/context/drawingboard/ball_painting_automation.gd": "c4011a0d7cce02875657bca4d32bad558f631960b86a6fb39d16ea055a67d30c",
+    "commons/context/drawingboard/paper_draw_surface.gd": "f7855cb39a7a657ccc3688bafc83c72e64bcac94c783aca9b046d55a32e5cefc",
+    "commons/context/drawingboard/ball_paint_tip.gd": "dee479b55abf24a382902c2a034096aee76a122294c1ec316c379d7797e40530",
+    "commons/context/drawingboard/ball_grab_sphere.gd": "7d9c65bf9ec60daa239bbcf1cfef3c419f64891c0c5f9c046caba2a39a80f8b1",
+    "commons/context/drawingboard/ball_spawner.gd": "04e4493c3f4c9349f242c5cb1c7e5cbefd9bbc474897f0744f114004817be039",
+    "commons/context/drawingboard/brush_layer.gd": "3de188d11595a9bbb6f34cde589a52c286f7327c197cd89dc21d8b364780268d",
+    "commons/context/drawingboard/ball_painting_demo_v2.tscn": "b852188f67512c68f359f5ea891224d5c78090509bf8eafe8496bc0aafcb363b",
+    "commons/context/drawingboard/wet_paint_canvas.tscn": "df235b6eaff12bf2d82c809ba9a25317d19c52bf4dabb4eb35b6cc7bf5b4bb73",
+    "algorithms/color/drawing/wet_paint_simulation.gdshader": "abd9688c50922ea768c71e13415eaf86899ee32c9f5d59da3c6a8ebdab9dcecc",
+    "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd": "32e7d9558e3e81ebb2f5ea9ae9ff2a48d80fb5d0e9a64f3c1d0dfadc6e4b7f8b",
+    "tools/probes/transformation_encounters.gd": "8b811e7b86f86512d989bc252db7128aeb5e1e9b9e17731b82faa3a9ef829d38"
+  }
+}

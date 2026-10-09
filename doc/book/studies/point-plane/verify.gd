@@ -5,6 +5,8 @@ extends SceneTree
 ## Headless draws no frames, so what the eye gets is measured by sheet.gd instead;
 ## here we check the ingredients of visibility (winding, normals, cull mode) and
 ## everything a body can feel (the collider, a dropped marble, rays).
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -12,6 +14,21 @@ var measured := {}
 const RADIUS := 0.1       # the marble's radius
 const HEIGHT := 1.12      # the height B walks at, so the plane's height
 const CENTRE := Vector3(0.15, HEIGHT, 0.5)   # the middle of the fixed walk
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/point-plane/"    # the body this chapter hands to the room
+const PLACE := 0.8                            # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
 
 func _initialize() -> void: run.call_deferred()
 
@@ -81,6 +98,64 @@ func all_y(normals: PackedVector3Array, sign: float) -> bool:
 		if nrm.y * sign < 0.999:
 			return false
 	return true
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own. It is checked far
+## from the study, so that no ray meets the study's floor or its plane.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "point-plane.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/point-plane/point-plane.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var at := Vector3(40, 0, 40)
+	(guest as Node3D).position = at
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	var face: MeshInstance3D = guest.get_node("Face")
+	var mesh := face.mesh as ArrayMesh
+	var shape := guest.get_node("FaceBody/CollisionShape3D").shape as ConcavePolygonShape3D
+	var triangles := 0
+	if mesh != null:
+		triangles = mesh.get_faces().size() / 3
+	check("the guest is a walked plane with its body: Face holds the mesh saved in my_plane.tres, a fan of %d triangles with normals, painted BODY c6ff3d, one side drawn; FaceBody holds a trimesh of the same triangles with backface collision on" % triangles,
+		mesh != null and mesh.resource_path == GUEST + "my_plane.tres" and triangles >= 1
+		and mesh.surface_get_primitive_type(0) == Mesh.PRIMITIVE_TRIANGLES and (mesh.surface_get_format(0) & Mesh.ARRAY_FORMAT_NORMAL) != 0
+		and face.material_override.albedo_color.to_html(false) == "c6ff3d" and face.material_override.cull_mode == BaseMaterial3D.CULL_BACK
+		and shape != null and shape.get_faces().size() == triangles * 3 and shape.backface_collision)
+	if mesh == null:
+		guest.free()
+		return
+	var box: AABB = face.global_transform * mesh.get_aabb()
+	box.position -= at
+	var lies: float = guest.height
+	check("the guest lies %.2f m above the ground, its middle over its own origin, and fits on a place, 1.6 m wide and deep: its box runs from (%.2f, %.2f, %.2f) to (%.2f, %.2f, %.2f)" % [
+		lies, box.position.x, box.position.y, box.position.z, box.end.x, box.end.y, box.end.z],
+		absf(lies - 0.12) < 0.0001 and absf(box.position.y - lies) < 0.001 and absf(box.end.y - lies) < 0.001
+		and box.position.x >= -PLACE and box.position.z >= -PLACE and box.end.x <= PLACE and box.end.z <= PLACE
+		and absf(box.get_center().x) < 0.001 and absf(box.get_center().z) < 0.001)
+	var space := root.get_world_3d().direct_space_state
+	var from_above: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(at + Vector3(0, 2, 0), at + Vector3(0, -2, 0)))
+	var from_below: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(at + Vector3(0, -2, 0), at + Vector3(0, 2, 0)))
+	check("a ray from above and a ray from below both meet the guest's plane at %.2f m: it has a body, and the body has a back" % lies,
+		from_above.has("position") and absf(from_above["position"].y - lies) < 0.001
+		and from_below.has("position") and absf(from_below["position"].y - lies) < 0.001)
+	measured["guest"] = {"scene": GUEST + "point-plane.tscn", "triangles": triangles, "height_m": lies,
+		"box": [[snappedf(box.position.x, 0.001), snappedf(box.position.y, 0.001), snappedf(box.position.z, 0.001)], [snappedf(box.end.x, 0.001), snappedf(box.end.y, 0.001), snappedf(box.end.z, 0.001)]]}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The Input Map: Trace's five actions and four new ones.
@@ -375,6 +450,9 @@ func run() -> void:
 		faces_l == 4 and absf(rest_b - (HEIGHT + RADIUS)) < 0.02 and rest_a < 0.2)
 	measured["L_from_B_marble_in_notch_m"] = snappedf(rest_b, 0.001)
 	measured["L_from_A_marble_in_notch_m"] = snappedf(rest_a, 0.001)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

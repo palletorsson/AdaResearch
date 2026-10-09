@@ -1,0 +1,19 @@
+--- before/commons/maps/sequences/primitives.json
++++ commons/maps/sequences/primitives.json
+@@ -31,14 +31,12 @@
+ 		"Point_Lines: Lines, Networks, Measure",
+ 		"Point_Trace: Duration and Residue",
+ 		"Point_Line_Grid: Grid Quantizes Movement",
+-		"Point_Triangle: Three Points Close a Boundary",
+-		"Point_Triangle_Context: Triangles Applied",
++		"Point_Triangle_Context: Closing a boundary, adding a face",
+ 		"Primitives_Polythedra: Trihedra and First Solids",
+ 		"Point_Animatedcube: Cube Assembly from Primitives",
+ 		"Primitives_Ignorance: Limits of Geometric Knowledge",
+ 		"Primitives_Portals: Circular Approximation and Limits",
+-		"Primitives_Melencolia: Melancholy of Finitude",
+-		"Chamber_Primitives: Catalyst chamber \u2014 first mark. Receive the bracelet, fire at targets, meet the FOE."
++		"Primitives_Melencolia: Melancholy of Finitude"
+ 		],
+ 	  "maps": [
+ 

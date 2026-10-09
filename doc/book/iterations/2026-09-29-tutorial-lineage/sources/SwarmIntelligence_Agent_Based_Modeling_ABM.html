@@ -1,0 +1,374 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SwarmIntelligence_Agent_Based_Modeling_ABM · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SwarmIntelligence_Agent_Based_Modeling_ABM">← Tutorial lineage</a></p><h1>SwarmIntelligence Agent Based Modeling ABM</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/final.md">Raw captured source</a></p><pre># Change a rule, watch a population
+
+How much of a collective pattern changes when one local rule changes?
+
+&lt;!-- @ant_colony_optimization --&gt;
+
+Watch the colony long enough to recognise a trail. Use RESET and watch the beginning again. The food returns to the same places, with the same qualities; the ants begin with the same headings. Now raise EVAPORATE, reset, and compare. Keep ANTS steady at first. You are changing how quickly the ground forgets, while giving the next colony the same beginning.
+
+The trail image is a record of deposits that are also disappearing. With faster evaporation, continued traffic matters more to keeping a route visible. A line that looks like a stable piece of the environment is actually being maintained by repeated events.
+
+A useful comparison separates a trail’s width from its persistence. A busy route can spread across several cells while individual marks still disappear quickly. A narrower route can remain visible between relatively infrequent visits. Try describing both qualities before judging which colony is more organised. The heatmap lets many overlapping events become one visible pattern, so two similar-looking patches need not have been maintained by the same number of agents or the same timing of visits.
+
+This is an agent-based model: individuals carry state and follow rules, while their interactions produce a population-level picture. Here those rules include movement, sensing, depositing traces and responding to food. The field is shared state. Changing evaporation changes what every agent can encounter without directly changing every agent’s position.
+
+Next vary ANTS. The control replaces the population but leaves its field behind. The new ants arrive in a world marked by ants that are no longer there. Watch whether they pick up an old route. Then RESET: this time the marks disappear too. Replacing the travellers and erasing their history are two different acts. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks; similar pictures can have different histories.
+
+The MODE control offers three behaviours within this model family. Colony is the foraging you have been watching. Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem. Multi-Source nudges foragers towards richer food and draws each source’s quality as a ring around it. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
+
+An agent can be a convenient unit without being an adequate model of a person.[^braitenberg] These agents inherit the same limited sensory world, and the shared grid decides which traces can count. A simulation of people would need an argument for those omissions, not simply a change of labels from ants to citizens.
+
+As a proposed extension, give two groups different sensing capacities while keeping the environment shared. Would a path that looks equally available from above remain equally available from within each agent’s world?
+
+&lt;!-- @ --&gt;
+
+The next colony makes one relation particularly clear: information about home and food travels in different channels.
+
+[^braitenberg]: Valentino Braitenberg built the classic version of this warning in 1984: vehicles with two sensors and two motors, wired straight or crosswise, that any observer describes as fearful, aggressive or loving. He called it synthetic psychology, and noted that it is downhill to invent such a creature and uphill to analyse one; the attribution comes free with the watching. Reynolds&#x27;s vehicles, and these ants, descend from his.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/tutorial.md">Raw captured source</a></p><pre># Agent Based Modeling
+
+Stateful agents with perception radius. Each acts on local information.
+
+Define a stateful agent.
+
+```gdscript
+class_name ABMAgent extends CharacterBody3D
+
+@export var perception_radius: float = 3.0
+@export var max_speed: float = 2.0
+
+enum State { FORAGING, FOLLOWING, RESTING }
+var current_state: int = State.FORAGING
+```
+
+State machine. The state determines behaviour; transitions happen based on perception.
+
+Perceive neighbours.
+
+```gdscript
+func perceive() -&gt; Array:
+    var neighbours: Array = []
+    for other in get_tree().get_nodes_in_group(&quot;abm_agents&quot;):
+        if other == self: continue
+        if global_position.distance_to(other.global_position) &lt; perception_radius:
+            neighbours.append(other)
+    return neighbours
+```
+
+Local view. Agents don&#x27;t know about other agents outside the radius.
+
+State transitions.
+
+```gdscript
+func update_state(neighbours: Array) -&gt; void:
+    var nearby_states: Dictionary = {}
+    for n in neighbours:
+        nearby_states[n.current_state] = nearby_states.get(n.current_state, 0) + 1
+    var dominant: int = dominant_state(nearby_states)
+    if nearby_states.get(dominant, 0) &gt; 3:
+        current_state = dominant  # copy the local majority
+```
+
+Copy the majority. Social conformity at the local scale; polarisation at the global scale.
+
+Behaviour by state.
+
+```gdscript
+func _physics_process(delta: float) -&gt; void:
+    var neighbours := perceive()
+    update_state(neighbours)
+    match current_state:
+        State.FORAGING: forage(delta)
+        State.FOLLOWING: follow(neighbours, delta)
+        State.RESTING: rest(delta)
+    move_and_slide()
+```
+
+Different behaviours per state. The state machine drives the agent&#x27;s action.
+
+Foraging: random walk.
+
+```gdscript
+func forage(delta: float) -&gt; void:
+    if randf() &lt; 0.1:
+        var new_direction := Vector3(randfn(0, 1), 0, randfn(0, 1)).normalized()
+        velocity = new_direction * max_speed
+```
+
+Random direction changes every few frames. The agent wanders.
+
+Following: move toward neighbours&#x27; centroid.
+
+```gdscript
+func follow(neighbours: Array, delta: float) -&gt; void:
+    if neighbours.is_empty(): return
+    var centroid := Vector3.ZERO
+    for n in neighbours:
+        centroid += n.global_position
+    centroid /= neighbours.size()
+    var direction: Vector3 = (centroid - global_position).normalized()
+    velocity = direction * max_speed
+```
+
+Head toward where the crowd is. Produces clumping.
+
+Resting: stay still.
+
+```gdscript
+func rest(delta: float) -&gt; void:
+    velocity = Vector3.ZERO
+    if randf() &lt; 0.005:  # occasionally wake up
+        current_state = State.FORAGING
+```
+
+Zero velocity. Low wake probability means rest is the default stable state once entered.
+
+Count agents by state.
+
+```gdscript
+func population_by_state() -&gt; Dictionary:
+    var counts: Dictionary = {}
+    for agent in get_tree().get_nodes_in_group(&quot;abm_agents&quot;):
+        counts[agent.current_state] = counts.get(agent.current_state, 0) + 1
+    return counts
+```
+
+Global statistics. Tracks the population&#x27;s state distribution over time.
+
+You can now build stateful ABM agents with perception, majority-based state transitions, per-state behaviours, and global state statistics. SwarmIntelligence_Ant_Colony_Optimization extends into path-finding via pheromones.
+
+Reset the simulation.
+
+```gdscript
+func reset_swarm(count: int, bounds: Rect2) -&gt; Array:
+    return initialise_swarm(count, bounds)
+```
+
+Fresh start. Same bounds, new random initial conditions.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/technical.md">Raw captured source</a></p><pre># Give agents rules, let them interact, watch what emerges — the ABM framework generalizes every swarm before it
+
+Physarum was specific: sense trail, deposit trail, turn toward concentration. Boids were specific: separate, align, cohere. Each algorithm solved a particular coordination problem with a particular mechanism. Agent-based modeling abstracts the pattern. An ABM is not a specific algorithm. It is a framework: any number of agents, each carrying its own state and rules, interacting through a shared environment, producing system-level behavior that is whatever emerges.
+
+The prior swarm maps were all ABMs without naming themselves as such. Physarum agents with position, heading, and a sense-turn-deposit loop — that is an ABM. Boids with position, velocity, and three steering forces — that is an ABM. The flow field particles, stripped to position alone, following a pre-built field — even that is a minimal ABM. This map names the pattern and generalizes it.
+
+## The Agent Architecture
+
+An ABM agent has four components: state, perception, decision, and action.
+
+```gdscript
+var agents: Array[Dictionary] = []
+
+func _ready() -&gt; void:
+    for i in num_agents:
+        agents.append({
+            &quot;position&quot;: Vector3(randf_range(-10, 10), 0, randf_range(-10, 10)),
+            &quot;velocity&quot;: Vector3.ZERO,
+            &quot;state&quot;: &quot;exploring&quot;,     # finite state machine
+            &quot;energy&quot;: 100.0,
+            &quot;carrying&quot;: false,
+            &quot;memory&quot;: []              # recent observations
+        })
+```
+
+State goes beyond position and velocity. An ABM agent can carry internal variables — energy, mood, inventory, memory. The `state` field is a finite state machine label: &quot;exploring,&quot; &quot;gathering,&quot; &quot;fleeing,&quot; &quot;resting.&quot; Different states activate different decision rules. The agent&#x27;s behavior is not a fixed formula applied every frame. It is a conditional program that branches on internal state and sensory input.
+
+## Perception
+
+Each agent perceives its environment within a limited radius. The perception model defines what the agent can sense.
+
+```gdscript
+func perceive(agent: Dictionary, all_agents: Array, environment: Dictionary) -&gt; Dictionary:
+    var nearby_agents: Array = []
+    var nearby_resources: Array = []
+    var pos: Vector3 = agent[&quot;position&quot;]
+
+    for other in all_agents:
+        if other == agent:
+            continue
+        var dist: float = pos.distance_to(other[&quot;position&quot;])
+        if dist &lt; perception_radius:
+            nearby_agents.append({&quot;agent&quot;: other, &quot;distance&quot;: dist})
+
+    for resource in environment[&quot;resources&quot;]:
+        var dist: float = pos.distance_to(resource[&quot;position&quot;])
+        if dist &lt; perception_radius:
+            nearby_resources.append({&quot;resource&quot;: resource, &quot;distance&quot;: dist})
+
+    return {
+        &quot;neighbors&quot;: nearby_agents,
+        &quot;resources&quot;: nearby_resources,
+        &quot;local_density&quot;: nearby_agents.size()
+    }
+```
+
+The agent senses neighbors and resources within its radius. Perception is the bottleneck — what the agent cannot sense, it cannot respond to. The perception radius is the first constraint on intelligence. A large radius approximates omniscience. A small radius forces local decision-making. The interesting behavior emerges from intermediate radii, where agents know enough to coordinate but not enough to optimize globally.
+
+## Decision Rules
+
+The decision function maps perception to action. In a finite state machine model, the current state and the sensory input determine the next state and the next action.
+
+```gdscript
+func decide(agent: Dictionary, perception: Dictionary) -&gt; Dictionary:
+    var action := {&quot;type&quot;: &quot;move&quot;, &quot;direction&quot;: Vector3.ZERO, &quot;speed&quot;: 1.0}
+
+    match agent[&quot;state&quot;]:
+        &quot;exploring&quot;:
+            action[&quot;direction&quot;] = _random_walk_direction()
+            if perception[&quot;resources&quot;].size() &gt; 0:
+                agent[&quot;state&quot;] = &quot;gathering&quot;
+                action[&quot;direction&quot;] = _toward_nearest(
+                    agent, perception[&quot;resources&quot;])
+
+        &quot;gathering&quot;:
+            if agent[&quot;carrying&quot;]:
+                agent[&quot;state&quot;] = &quot;returning&quot;
+                action[&quot;direction&quot;] = _toward_base(agent)
+            elif perception[&quot;resources&quot;].size() &gt; 0:
+                action[&quot;direction&quot;] = _toward_nearest(
+                    agent, perception[&quot;resources&quot;])
+            else:
+                agent[&quot;state&quot;] = &quot;exploring&quot;
+
+        &quot;fleeing&quot;:
+            if perception[&quot;local_density&quot;] &lt; crowd_threshold:
+                agent[&quot;state&quot;] = &quot;exploring&quot;
+            else:
+                action[&quot;direction&quot;] = _away_from_crowd(agent, perception)
+                action[&quot;speed&quot;] = 2.0
+
+        &quot;returning&quot;:
+            action[&quot;direction&quot;] = _toward_base(agent)
+            if _at_base(agent):
+                agent[&quot;carrying&quot;] = false
+                agent[&quot;state&quot;] = &quot;exploring&quot;
+
+    return action
+```
+
+Four states, four behavioral modes. The transitions are condition-gated: finding a resource triggers &quot;gathering,&quot; picking it up triggers &quot;returning,&quot; crowding triggers &quot;fleeing.&quot; The agent&#x27;s behavior over time traces a path through state space — exploring, finding, gathering, returning, exploring again. The macro pattern (agents distributing resources, avoiding crowds, covering territory) emerges from these micro-level state transitions.
+
+## Environment Interaction
+
+The shared environment is the coordination medium. Agents modify it — consuming resources, depositing markers, altering terrain — and sense the modifications made by others.
+
+```gdscript
+func act(agent: Dictionary, action: Dictionary, environment: Dictionary) -&gt; void:
+    agent[&quot;velocity&quot;] = action[&quot;direction&quot;].normalized() * action[&quot;speed&quot;]
+    agent[&quot;position&quot;] += agent[&quot;velocity&quot;] * delta_time
+
+    # Clamp to map bounds
+    agent[&quot;position&quot;].x = clampf(agent[&quot;position&quot;].x, -bounds, bounds)
+    agent[&quot;position&quot;].z = clampf(agent[&quot;position&quot;].z, -bounds, bounds)
+
+    # Energy cost of movement
+    agent[&quot;energy&quot;] -= action[&quot;speed&quot;] * energy_cost_per_meter * delta_time
+
+    # Resource pickup
+    if agent[&quot;state&quot;] == &quot;gathering&quot;:
+        for resource in environment[&quot;resources&quot;]:
+            if agent[&quot;position&quot;].distance_to(resource[&quot;position&quot;]) &lt; pickup_radius:
+                agent[&quot;carrying&quot;] = true
+                resource[&quot;amount&quot;] -= 1
+                if resource[&quot;amount&quot;] &lt;= 0:
+                    environment[&quot;resources&quot;].erase(resource)
+                break
+```
+
+Movement costs energy. Resources are finite and depletable. An agent that moves fast burns energy quickly. An agent that gathers resources restores its capacity. The energy budget creates a constraint that shapes macro behavior: agents cannot explore forever. They must find resources or die. The population stabilizes when the rate of resource consumption matches the rate of resource regeneration.
+
+## The Simulation Loop
+
+The full loop runs perceive-decide-act for every agent, then updates the environment.
+
+```gdscript
+func _process(delta: float) -&gt; void:
+    for agent in agents:
+        var perception: Dictionary = perceive(agent, agents, environment)
+        var action: Dictionary = decide(agent, perception)
+        act(agent, action, environment)
+
+    # Environment updates: resource respawn, pheromone decay
+    _update_environment(delta)
+
+    # Remove dead agents, spawn new ones at base
+    _population_dynamics()
+
+    update_display()
+```
+
+The order of operations matters. All agents perceive the same environment state (no double-buffering of agent positions in the naive loop). Each agent acts on its perception of the world before the next agent perceives. This is sequential update — different from Physarum&#x27;s effectively parallel agent loop. The ordering creates subtle asymmetries: early agents in the loop array see the pre-action state; late agents see modifications from earlier agents. For small populations this matters little. For large ones, it can create spatial biases.
+
+## The Map as Petri Dish
+
+The 8x8 grid of corridors and pillars creates a structured environment that constrains agent movement. Pillars block sight lines. Corridors channel flow. Intersections force decisions. The regularity mirrors the grid-based ABM tradition — NetLogo, Sugarscape, Schelling — where agents move on discrete lattices.
+
+The `ABMSimulation` artifact uses this corridor structure as the interaction arena. Agents navigate intersections, choose corridors, encounter each other at junctions. The architectural constraint transforms abstract agent dynamics into spatial navigation. The learner watches agents make corridor choices, cluster at resource-rich junctions, flee from overcrowded intersections, and trace out territorial patterns that reflect the grid&#x27;s topology.
+
+## From Specific to General
+
+Boids had three rules. Physarum had one loop. ABM has arbitrary rules — any finite state machine, any perception model, any action set. This generality is the point. Every swarm intelligence algorithm is a special case of ABM. The sequence moves from specific to general: Physarum (stigmergy), flow fields (field following), boids (peer interaction), and now ABM (any combination). The next maps — ant colony optimization and particle swarm optimization — are specific ABMs applied to optimization problems, re-specializing the general framework for particular tasks.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/intent.md">Raw captured source</a></p><pre>Concept: Agent-based models as the universal framework — each agent carries its own state, rules, and perception, and the system-level behavior is whatever emerges from their interactions. Two raised platforms bracket an arena where agents run, collide, cooperate, and compete, making the gap between individual rules and collective dynamics physically visible.
+Sequence role: Fourth map in Swarm Intelligence (14th spine sequence, integration phase), intermediate difficulty. After the specific case of boids, this map generalizes to the ABM framework: agents with arbitrary rule sets interacting in a shared environment. The arena geometry (two platforms bracketing a central ring) creates spatial structure that constrains and channels agent behavior. Connects forward to SwarmIntelligence_Ant_Colony_Optimization where agents gain a specific optimization objective; follows SwarmIntelligence_Boids_Algorithm.
+Technical angle: Agent architecture with state variables (position, velocity, internal state), perception model (radius-based neighbor sensing or raycast), decision rules (finite state machine or rule-based), and environment interaction (stigmergic trail deposition, resource consumption). The simulation loop: perceive, decide, act, update environment. The two-platform geometry introduces elevation as a constraint — agents must navigate vertical transitions, adding spatial complexity to their decision-making.
+Critical angle: ABM is the methodological revolution of complexity science: instead of writing equations for the system, you write rules for the individual and let the system happen. This inverts the reductionist program — you cannot derive the macro from the micro analytically, but you can simulate it. The arena is a petri dish for artificial societies, and the integration phase recognizes that intelligence, like form, is not imposed from above but emerges from below.
+Key artifacts: ABMSimulation implements a general agent-based model in the two-platform arena environment, with configurable agent rules, perception models, and environment interaction mechanisms.
+Gap: Needs a rule editor — an artifact that lets the learner modify individual agent rules in real time and see the macro-level behavior shift, making the micro-macro link interactive rather than observational.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md">Raw captured source</a></p><pre># SwarmIntelligence_Agent_Based_Modeling_ABM — Critical Reflection
+
+## The Undercommons of the Grid
+
+Fred Moten writes about social life that persists in the spaces institutions were not designed to accommodate — in the breaks, the corridors, the places between official rooms. The ABM grid of corridors and pillars is an institutional architecture. The corridors channel movement. The pillars block perception. The intersections are decision points designed into the space. Agents navigate this architecture, but they do not simply obey it. They cluster at junctions the grid was not designed to privilege. They create traffic patterns that the corridor layout did not intend. They find niches in the gaps between pillars.
+
+This is the undercommons of the simulation: behavior that emerges from the interaction between agent rules and spatial structure, belonging to neither. The grid constrains. The agents adapt. The emergent patterns — territorial clusters, resource queues, fleeing cascades — are produced by neither the architecture nor the agent rules alone. They exist in the relation between the two, in the space Moten would call the break: the productive excess that institutions generate but cannot govern.
+
+## Opacity at the Agent Level
+
+Glissant&#x27;s opacity insists that every being has the right to remain irreducible to external categories. The ABM agent&#x27;s finite state machine — exploring, gathering, fleeing, returning — is a categorization imposed by the programmer. Real social agents do not carry state labels. They do not transition between named behavioral modes at discrete thresholds. The FSM is a transparency forced onto the agent&#x27;s inner life — a demand that it be legible, classifiable, governable.
+
+The critical tension: the simulation needs categories to function. Without named states, the code cannot branch on behavior. The `match agent[&quot;state&quot;]` block requires that the agent&#x27;s condition be compressible into a label. But the emergent behavior of the population resists the same compression. You cannot predict the macro pattern from the state labels. A population of &quot;exploring&quot; agents does not produce random walks — it produces territorial partitioning, because exploration in a finite space with finite resources and limited perception is not random but competitive. The macro is opaque even when the micro is transparent.
+
+Glissant would say: the simulation gets the relation right (agents interact and produce unpredictable collective behavior) but gets the individual wrong (agents are fully transparent to the code that runs them). Real social agents are opaque to each other and to the observer. The ABM erases this opacity at the agent level in order to produce it at the system level. This is a trade — legible parts for opaque wholes — and it is a trade that every model makes.
+
+## Creolization of Rule Systems
+
+The ABM framework does not prescribe specific rules. It provides a container: state, perception, decision, action. What goes inside is open. This openness is the framework&#x27;s creolizing capacity. Different rule sets can coexist in the same simulation. One agent population can run boid-like alignment rules. Another can run Physarum-like trail deposition. A third can run economic resource-maximization. They share the same grid, the same time, the same environment, but their internal logics are different languages.
+
+Glissant&#x27;s creolization is not mere mixing. It is the production of something new from the encounter of different systems — a language that neither parent system contained. When boid-like agents and forager agents share a corridor grid, their interaction produces spatial patterns that neither rule set would generate alone. The boid agents create flocking streams that the foragers exploit as resource-transport corridors. The foragers create resource depletion zones that the boid agents avoid. The ecology of rule systems produces collective behavior that was present in neither system&#x27;s grammar.
+
+This is the integration phase thesis made structural: intelligence does not reside in any single agent or any single rule set. It resides in the relation between multiple interacting systems, each opaque to the others, producing a tout-monde that exceeds the sum of its parts.
+
+## The Politics of the Perception Radius
+
+The perception radius is the simulation&#x27;s most politically loaded parameter. A large radius means the agent can sense most of the environment — it approximates a panoptic observer, one who sees all and can optimize globally. A small radius means the agent operates in near-blindness — it can respond only to its immediate vicinity, groping through the grid without overview.
+
+Moten&#x27;s critique of the university as an institution that claims to see everything — to survey, classify, and manage all knowledge — resonates here. The large-radius agent is the institutional subject: maximally informed, strategically rational, capable of planning. The small-radius agent is the fugitive: locally responsive, socially dependent on encounters it cannot predict, moving by feel rather than by plan.
+
+The simulation&#x27;s interesting behavior — emergence, surprise, self-organization — occurs predominantly in the small-radius regime. When agents can see everything, they optimize individually and the collective pattern is merely the sum of individual optima. When agents are nearly blind, they must rely on environmental signals and chance encounters, and the collective pattern is genuinely novel — a structure that no agent computed and no designer intended.
+
+The ABM framework thus contains a counterintuitive lesson: less information produces more intelligence. Or rather: the intelligence that matters — the emergent, collective, structural intelligence — requires that individual agents not know what they are collectively producing. The undercommons is not an accident of limited perception. It is constituted by it.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/artifacts.md">Raw captured source</a></p><pre># SwarmIntelligence Agent Based Modeling ABM — Artifacts
+*Swarm Intelligence: No Leader, Yet Coordinated · lambda_edge · 1 artifacts*
+
+&gt; Give agents rules. Let them interact. Watch what emerges. Agent-based modeling makes no assumptions about aggregate behavior — it builds the aggregate from individuals. Markets, epidemics, ecosystems: when the whole is too complex to model, model the parts.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Ant Colony Optimization
+![Ant Colony Optimization](/scene-catalog/ant_colony_optimization.png)
+
+Ant colony optimization with pheromone evaporation gradient heatmap, multi-source quality-weighted foraging, tandem running communication, and 3 modes (Colony/Communication/Multi-Source).
+
+`ant_colony_optimization`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/summary.md">Raw captured source</a></p><pre># SwarmIntelligence_Agent_Based_Modeling_ABM — Summary
+
+Give agents rules. Let them interact. Watch what emerges. Agent-based modeling makes no assumptions about aggregate behavior — it builds the aggregate from individuals. Each agent carries state (position, velocity, energy, inventory), perceives its local environment within a limited radius, decides via a finite state machine (exploring, gathering, fleeing, returning), and acts by moving, consuming resources, or depositing markers.
+
+The `ABMSimulation` artifact runs in a grid of corridors and pillars where agents navigate intersections, cluster at resource-rich junctions, and trace territorial patterns shaped by the architecture. The simulation loop is perceive-decide-act per agent, then update the environment — resource respawn, signal decay, population dynamics. The corridor layout constrains movement and blocks sight lines, transforming abstract agent dynamics into spatial navigation problems.
+
+The framework generalizes every swarm that came before. Physarum is an ABM with sense-turn-deposit rules and a trail grid. Boids are an ABM with three steering forces and a spatial hash. Flow field particles are a minimal ABM with no internal state. The ABM map names the pattern and opens it to arbitrary rule sets — any finite state machine, any perception model, any action set. Multiple agent populations with different internal logics can share the same environment, producing collective behavior that neither rule set would generate alone.
+
+This is the fourth map in the Swarm Intelligence sequence. After Physarum (stigmergy), flow fields (field following), and boids (peer interaction), ABM provides the general container. The next maps — ant colony optimization and particle swarm optimization — re-specialize the framework for optimization problems.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SwarmIntelligence_Agent_Based_Modeling_ABM/blurb.md">Raw captured source</a></p><pre>Give agents rules. Let them interact. Watch what emerges. Agent-based modeling makes no assumptions about aggregate behavior — it builds the aggregate from individuals. Markets, epidemics, ecosystems: when the whole is too complex to model, model the parts.
+
+`ABMSimulation` stages a general agent model between two elevated platforms. Each agent has state, perception, rules, and environment interaction; the simulation loop runs perceive → decide → act → update every frame. The arena geometry adds elevation as a constraint, channelling agents through spatial complexity. ABM is complexity science&#x27;s methodological revolution: instead of writing equations for the system, write rules for the individual and let the system happen. The macro cannot be derived from the micro analytically — but it can be simulated. Petri dish for artificial societies.
+</pre></section></body></html>

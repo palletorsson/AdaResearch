@@ -1,0 +1,206 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/final.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/intent.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/technical.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/critical.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/field_notes.md",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/maps/Color_Paint/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/ball_painting_automation.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/paper_draw_surface.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/ball_paint_tip.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/ball_grab_sphere.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/ball_spawner.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/brush_layer.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/ball_painting_demo_v2.tscn",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/context/drawingboard/wet_paint_canvas.tscn",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: algorithms/color/drawing/wet_paint_simulation.gdshader",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: algorithms/primitives/homagetothesquare/albers_wall_gallery.gd",
+      "passed": true
+    },
+    {
+      "name": "before snapshot: commons/data/museum_core_encounters.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Paint/intent.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Paint/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Paint/critical.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Paint/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/ball_painting_automation.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/paper_draw_surface.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/ball_paint_tip.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/ball_grab_sphere.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/ball_spawner.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/brush_layer.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/ball_painting_demo_v2.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/context/drawingboard/wet_paint_canvas.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged: algorithms/color/drawing/wet_paint_simulation.gdshader",
+      "passed": true
+    },
+    {
+      "name": "unchanged: algorithms/primitives/homagetothesquare/albers_wall_gallery.gd",
+      "passed": true
+    },
+    {
+      "name": "all earlier prose preserved exactly",
+      "passed": true
+    },
+    {
+      "name": "published chapter equals canonical",
+      "passed": true
+    },
+    {
+      "name": "code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "manuscript hash current",
+      "passed": true
+    },
+    {
+      "name": "only selected core hash changed",
+      "passed": true
+    },
+    {
+      "name": "30 runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "no runtime script errors",
+      "passed": true
+    },
+    {
+      "name": "captured source hashes still current",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: the-surface-keeps-working.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: feedback-diagnostic.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: Color_Paint.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "scoped git diff whitespace",
+      "passed": true
+    },
+    {
+      "name": "chapter figure is served path",
+      "passed": true
+    }
+  ],
+  "scope": "Preservation, captured-source identity, scoped whitespace and exact local HTTP publication. Native/composed images inspected separately; no browser interaction or headset claim."
+}

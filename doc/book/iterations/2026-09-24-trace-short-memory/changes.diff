@@ -1,0 +1,325 @@
+--- before/commons/maps/Point_Trace/map_data.json
++++ commons/maps/Point_Trace/map_data.json
+@@ -10,7 +10,7 @@
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:0:0.5#offset:0.50,1.45,0.47#support:pylon#screen_width:2.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", "trace_short_memory:90:1#plinth:0.90#offset:0.00,-0.03,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+ 		],
+@@ -64,7 +64,7 @@
+ 		"format": "json",
+ 		"lookup_name": "Point_Trace",
+ 		"metadata": {
+-			"n_artifacts": 9,
++			"n_artifacts": 10,
+ 			"source": "editor"
+ 		},
+ 		"name": "Point_Trace",
+--- before/commons/maps/Point_Trace/final.md
++++ commons/maps/Point_Trace/final.md
+@@ -44,7 +44,7 @@
+ 
+ Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+ 
+-The list can hold 4096 positions. Keep drawing beyond that and each new position replaces the oldest: the line can begin to lose its beginning. You do not have to fill it now. Looking at the line need not spend another place in it.
++These dots can hold 4096 positions each. Beyond that, a new position replaces the oldest. Near the exit, another dot will let us meet that limit sooner.
+ 
+ ## Move the place that draws
+ 
+@@ -66,9 +66,30 @@
+ 
+ The board brings the nib's world position into its own frame with `to_local(world_tip)`, then turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. For now, try making something with the lift between strokes.
+ 
++## A line with a short memory
++
++<!-- @trace_short_memory -->
++
++The amber point near the exit has room for thirty-two positions. Draw a loop, then lead it away. Small beads mark the positions the cord joins. Watch its far end.
++
++At first you make more line. Then you begin to unmake it.
++
++Hold your hand still. Does the remaining line wait with you?
++
++This recorder uses the same movement gate as the first dot. We have given its list less room. When a new position takes it over that limit, the oldest goes:
++
++```gdscript
++if _trail_points.size() > trail_max_points:
++    _trail_points.pop_front()
++```
++
++Here, `trail_max_points` is `32`. Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.
++
++Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?
++
+ <!-- @ -->
+ 
+-Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. A whiteboard image is kept differently and will not take this route.
++Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. With the amber dot, only the surviving positions travel. A whiteboard image is kept differently and will not take this route.
+ 
+ We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+ 
+--- before/commons/maps/Point_Trace/technical.md
++++ commons/maps/Point_Trace/technical.md
+@@ -46,6 +46,14 @@
+ 
+ The automatic-writing desk uses changes of an available headset camera's position to vary the amplitude of wordless marks, with fallback demonstration motion. This mapping supports an experiment in interpreting marks; it does not measure confession, attention or intention.
+ 
++## Short-memory companion
++
++`trace_short_memory` inherits the existing draw-dot scene and recorder. Its capacity is 32 instead of 4096, its ink is amber, and its static plaque states the capacity. The extra data panel is disabled so it cannot obscure the drawing. A local display override draws each retained position as a 12 mm bead and each adjacent connection as a 7 mm cord. Two small MultiMeshes render the same list; there is no additional trajectory record. The 5 mm movement gate, unsnapped positions, pickup requirement, lack of time fading and release-to-TraceData behaviour are inherited unchanged. The original four dots and stick retain their configurations.
++
++The companion stands in the exit bay at cell (2,9), facing the approach from the central passage. A visitor can draw beyond the bay while carrying the point. Continuing a gesture eventually removes earlier positions, whereas a stationary pause leaves the retained list unchanged. Capacity counts accepted positions; its duration and spatial length depend on the movement and process callbacks. It is not a fixed-time trail.
++
++The controlled Godot comparison supplies the same 72 positions through two held tools and their real recorder callbacks. The original keeps 72; the companion keeps exactly the last 32. A four-second synthetic pause does not remove any; a later accepted position removes one. Releasing copies the remaining 32 positions to TraceData. This establishes the mechanism, not headset comfort or whether a visitor enjoys drawing with it.
++
+ ## Transfer into Grid
+ 
+ On release, the dot or stick calls [TraceData.add_trace()](../../globals/trace_data.gd). That function requires at least two positions and duplicates the list. Its autoload storage survives room changes in the running game. It has no trace disk-save operation here and does not copy pen colour, identity or per-point timestamps. The whiteboard and player_trace do not publish their records to this store.
+--- before/commons/maps/Point_Trace/tutorial.md
++++ commons/maps/Point_Trace/tutorial.md
+@@ -51,7 +51,11 @@
+ 
+ The mesh uses `Mesh.PRIMITIVE_LINE_STRIP` and supplies the retained positions in order. Each adjacent pair gives a straight segment. The list supplies endpoints for that segment; it does not establish the intervening route of the hand.
+ 
+-The instrument displays the last ten positions while the larger count includes the whole retained list. At most 4096 positions are kept. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
++The instrument displays the last ten positions while the larger count includes the whole retained list. The four original dots and stick keep at most 4096 positions each. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
++
++## Meet the limit sooner
++
++The amber `trace_short_memory` point inherits the same recorder with `trail_max_points = 32`. Its plaque names the capacity. Keep drawing until the beginning is removed, then pause. Fading is off: elapsed time alone does not delete a point. The limit counts accepted positions, not seconds or metres. On release, only the surviving positions are copied onward.
+ 
+ ## Move the observed point
+ 
+--- before/commons/maps/Point_Trace/critical.md
++++ commons/maps/Point_Trace/critical.md
+@@ -26,6 +26,12 @@
+ 
+ Queer possibility can appear in that change of use: an interval treated as inadequate for faithful capture becomes material for another drawing. This does not make coarseness inherently queer or finer recording inherently oppressive. It keeps open the question of who gets to define the task, choose the grain, and refuse the instrument's account.
+ 
++## A limit that changes the task
++
++The amber companion keeps only thirty-two positions. It makes the loss of a beginning encounterable during a short drawing, while the original dots still offer longer records. A pause leaves its tail intact; further accepted positions make room by removing older ones. Time passing and a record changing are different events here.
++
++A visitor may want to preserve a loop, or discover a use for a line that clears space as it travels. Neither purpose settles which capacity is right. The comparison makes the question answerable through another gesture. Its small memory is a chosen limit we can change, not a measured limit of the headset and not an entropy measure.
++
+ ## Which point stands for the body?
+ 
+ The stick keeps the same movement threshold while observing a point farther from the fist. Turning the wrist can move that point through an arc. The resulting line describes the trajectory of the chosen tip; it does not become a complete description of the hand.
+--- before/commons/maps/Point_Trace/detours.md
++++ commons/maps/Point_Trace/detours.md
+@@ -20,6 +20,6 @@
+ 
+ ## The finite list
+ 
+-The drawing instrument's capacity is 4096 positions. Keeping a new point beyond that limit removes the oldest. Current list indices change when the front is removed; the table's last ten rows are another, smaller window onto that list.
++The original drawing instruments keep 4096 positions each. Keeping a new point beyond that limit removes the oldest. Current list indices change when the front is removed; the table's last ten rows are another, smaller window onto that list.
+ 
+-Lowering the capacity would make this easier to observe quickly, but the room does not currently offer that control. The idea is retained as a future experiment, not an instruction the visitor can perform now.
++The amber companion near the exit now makes this comparison available with 32 positions and the same movement gate. There is no capacity menu: take the other tool, draw, and pause. The book follows this encounter; a return can try different speeds and ask why the same capacity holds different lengths and durations.
+--- before/commons/artifacts/registry/primitives.json
++++ commons/artifacts/registry/primitives.json
+@@ -1,5 +1,42 @@
+ {
+   "artifacts": {
++    "trace_short_memory": {
++      "lookup_name": "trace_short_memory",
++      "name": "A line with a short memory",
++      "scene": "res://commons/artifacts/trace_short_memory/trace_short_memory.tscn",
++      "description": "An amber drawing point keeps the last 32 accepted positions. Continuing a gesture removes its beginning; holding still keeps the remaining line. The working draw_dot recorder is inherited unchanged.",
++      "category": "primitives",
++      "complexity": "beginner",
++      "dev_themes": [
++        "primitives",
++        "sampling",
++        "memory"
++      ],
++      "map_sequences": [
++        "primitives"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "footprint": [
++        1,
++        1,
++        1
++      ],
++      "size_group": "compact",
++      "tags": [
++        "trace",
++        "memory",
++        "drawing",
++        "capacity"
++      ],
++      "interactions": [
++        "Pick up the amber point and draw a loop.",
++        "Keep drawing and watch the beginning disappear.",
++        "Pause: the retained line waits.",
++        "Release to send only the surviving positions to Grid."
++      ],
++      "qfep_connection": "A bounded record can become a moving tail. The encounter asks what a limit lets a body make; the point count is not an entropy measure."
++    },
+   "polyhedra_boundary_plate": {
+     "lookup_name": "polyhedra_boundary_plate",
+     "name": "An opening for the eye",
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -45,14 +45,15 @@
+       "primary_tokens": [
+         "draw_dot",
+         "draw_stick",
+-        "whiteboard"
+-      ],
+-      "reason": "The first walk follows spatial recording, the displaced sampling tip and contact with the whiteboard. Telemetry and automatic writing remain secondary; their questions are retained in detours.md.",
++        "whiteboard",
++        "trace_short_memory"
++      ],
++      "reason": "The first walk follows spatial recording, the displaced sampling tip and contact with the whiteboard, then a 32-position companion makes finite memory available as a moving tail. Telemetry and automatic writing remain secondary; their questions are retained in detours.md.",
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Trace/final.md",
+-      "text_sha256": "8f28f93f44c50c80d4dd475a4755f5296655fc0979f871d36286b340de1dfaaa",
+-      "map_sha256": "cda711135f28ab3ff4deaef108a77f3f152c4860180b930c09ec294b9c648a15",
++      "text_sha256": "3e84756363a0f374f3fa27e8c1bcb61714813d6efcf762c767c17c4ab2c8979a",
++      "map_sha256": "3b0963f54ab53e367b0cba84e8a00f4b1c9e0bdeaf4f71ca84142a088c82ac2e",
+       "learner_verified": false
+     },
+     "Point_Line_Grid": {
+--- before/commons/artifacts/trace_short_memory/trace_short_memory.tscn
++++ commons/artifacts/trace_short_memory/trace_short_memory.tscn
+@@ -0,0 +1,65 @@
++[gd_scene load_steps=7 format=3]
++
++[ext_resource type="PackedScene" path="res://commons/primitives/point/draw_dot.tscn" id="1_dot"]
++
++[ext_resource type="Script" path="res://commons/artifacts/trace_short_memory/trace_short_memory.gd" id="2_trace"]
++
++[sub_resource type="StandardMaterial3D" id="Amber"]
++albedo_color = Color(1, 0.72, 0.15, 1)
++emission_enabled = true
++emission = Color(1, 0.50, 0.08, 1)
++emission_energy_multiplier = 1.0
++
++[sub_resource type="StandardMaterial3D" id="PlaqueMaterial"]
++albedo_color = Color(0.11, 0.08, 0.12, 1)
++metallic = 0.45
++roughness = 0.5
++
++[sub_resource type="BoxMesh" id="PlaqueMesh"]
++material = SubResource("PlaqueMaterial")
++size = Vector3(0.43, 0.16, 0.02)
++
++[sub_resource type="TorusMesh" id="DockMesh"]
++material = SubResource("Amber")
++inner_radius = 0.035
++outer_radius = 0.043
++rings = 24
++ring_segments = 8
++
++[node name="TraceShortMemory" instance=ExtResource("1_dot")]
++script = ExtResource("2_trace")
++trail_max_points = 32
++show_data_table = false
++ink = "amber"
++
++[node name="GrabPoint" parent="." index="0"]
++glow_color = Color(1, 0.72, 0.15, 1)
++
++[node name="MeshInstance3D" parent="GrabPoint" index="1"]
++material_override = SubResource("Amber")
++
++[node name="Dock" type="MeshInstance3D" parent="."]
++position = Vector3(0, -0.035, 0)
++mesh = SubResource("DockMesh")
++
++[node name="Plaque" type="MeshInstance3D" parent="."]
++position = Vector3(0, -0.18, 0.12)
++rotation = Vector3(-0.959931, 0, 0)
++mesh = SubResource("PlaqueMesh")
++
++[node name="Title" type="Label3D" parent="Plaque"]
++position = Vector3(0, 0.025, 0.012)
++pixel_size = 0.001
++font_size = 38
++outline_size = 0
++text = "32 POSITIONS"
++modulate = Color(1, 0.78, 0.31, 1)
++
++[node name="Invitation" type="Label3D" parent="Plaque"]
++position = Vector3(0, -0.035, 0.012)
++pixel_size = 0.001
++font_size = 24
++outline_size = 0
++text = "Keep drawing."
++
++[editable path="GrabPoint"]
+--- before/commons/artifacts/trace_short_memory/trace_short_memory.gd
++++ commons/artifacts/trace_short_memory/trace_short_memory.gd
+@@ -0,0 +1,65 @@
++extends "res://commons/primitives/point/draw_dot.gd"
++## The inherited recorder keeps 32 positions. This variant only thickens their
++## display: one bead per retained point, one cord segment per adjacent pair.
++## No separate position history, replay, time fade or fabricated reference stroke.
++var _beads: MultiMeshInstance3D
++var _cord: MultiMeshInstance3D
++
++func _setup_trail() -> void:
++	super()
++	_trail_instance.visible = false
++	var material := StandardMaterial3D.new()
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.albedo_color = trail_color
++	material.emission_enabled = true
++	material.emission = trail_color
++	material.emission_energy_multiplier = 0.8
++	var bead := SphereMesh.new()
++	bead.radius = 0.006
++	bead.height = 0.012
++	bead.radial_segments = 8
++	bead.rings = 4
++	bead.material = material
++	_beads = _instances("RetainedPositions", bead, trail_max_points)
++	var strand := CylinderMesh.new()
++	strand.top_radius = 0.0035
++	strand.bottom_radius = 0.0035
++	strand.height = 1.0
++	strand.radial_segments = 8
++	strand.rings = 1
++	strand.material = material
++	_cord = _instances("JoinedPositions", strand, maxi(0, trail_max_points - 1))
++
++func _instances(label: String, mesh: Mesh, capacity: int) -> MultiMeshInstance3D:
++	var node := MultiMeshInstance3D.new()
++	node.name = label
++	node.multimesh = MultiMesh.new()
++	node.multimesh.transform_format = MultiMesh.TRANSFORM_3D
++	node.multimesh.mesh = mesh
++	node.multimesh.instance_count = capacity
++	node.multimesh.visible_instance_count = 0
++	node.top_level = true
++	add_child(node)
++	node.global_transform = Transform3D.IDENTITY
++	return node
++
++func _rebuild_trail() -> void:
++	# Render directly from the inherited list: the geometry forgets when it does.
++	if not is_instance_valid(_beads) or not is_instance_valid(_cord): return
++	var count := _trail_points.size()
++	_beads.multimesh.visible_instance_count = count
++	_cord.multimesh.visible_instance_count = maxi(0, count - 1)
++	for i in range(count):
++		_beads.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, _trail_points[i]))
++		if i == 0: continue
++		var span: Vector3 = _trail_points[i] - _trail_points[i - 1]
++		var length := span.length()
++		var y := span / length if length > 0.000001 else Vector3.UP
++		var helper := Vector3.RIGHT if absf(y.dot(Vector3.UP)) > 0.98 else Vector3.UP
++		var x := helper.cross(y).normalized()
++		var z := x.cross(y).normalized()
++		_cord.multimesh.set_instance_transform(i - 1, Transform3D(Basis(x, y * length, z), (_trail_points[i] + _trail_points[i - 1]) * 0.5))
++
++func clear_trail() -> void:
++	super()
++	_rebuild_trail()

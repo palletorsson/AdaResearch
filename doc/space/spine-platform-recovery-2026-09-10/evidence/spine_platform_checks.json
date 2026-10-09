@@ -1,0 +1,1093 @@
+{
+  "maps": 62,
+  "checked_cells": 1606,
+  "source_geometry": "pass",
+  "grid_access_non_regression": "pass",
+  "route": "unchanged",
+  "runtime": "not run",
+  "later_artifact_and_text_edits": "allowed",
+  "details": [
+    {
+      "map": "Change_Reconciliation",
+      "grid_reachable_before": 88,
+      "grid_reachable_after": 88,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (5,1) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (5,1) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "Ribbon_Change_01",
+      "grid_reachable_before": 81,
+      "grid_reachable_after": 81,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Ribbon_Change_03",
+      "grid_reachable_before": 60,
+      "grid_reachable_after": 60,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "VFM_02_Operations",
+      "grid_reachable_before": 309,
+      "grid_reachable_after": 309,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_Recursion",
+      "grid_reachable_before": 92,
+      "grid_reachable_after": 92,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "grid_reachable_before": 9,
+      "grid_reachable_after": 9,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 0,
+      "rules_before": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (14,12) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'living_paper' at (7,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fractal_lsystem_tree' at (11,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'recursive_tree_2' at (9,2) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'small_subdivision_cube' at (2,4) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'small_subdivision_cube' at (3,4) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'inverted_tree_cloud' at (11,4) h=3 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'recursive_tree' at (13,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'cube_desk' at (2,7) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'inverted_tree_cloud' at (11,8) h=3 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fractal_scene' at (5,10) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mobius_world' at (3,12) h=1 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (14,12) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'living_paper' at (7,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fractal_lsystem_tree' at (11,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'recursive_tree_2' at (9,2) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'small_subdivision_cube' at (2,4) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'small_subdivision_cube' at (3,4) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'inverted_tree_cloud' at (11,4) h=3 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'recursive_tree' at (13,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'cube_desk' at (2,7) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'inverted_tree_cloud' at (11,8) h=3 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fractal_scene' at (5,10) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mobius_world' at (3,12) h=1 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "grid_reachable_before": 352,
+      "grid_reachable_after": 352,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "grid_reachable_before": 98,
+      "grid_reachable_after": 98,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "grid_reachable_before": 189,
+      "grid_reachable_after": 189,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_JuliaSet",
+      "grid_reachable_before": 74,
+      "grid_reachable_after": 74,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_MandelbrotSet",
+      "grid_reachable_before": 74,
+      "grid_reachable_after": 74,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "grid_reachable_before": 328,
+      "grid_reachable_after": 328,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Fractal_CrossSequence",
+      "grid_reachable_before": 52,
+      "grid_reachable_after": 52,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "LSystems_Grammar_Lab",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "LSystems_Growth",
+      "grid_reachable_before": 106,
+      "grid_reachable_after": 106,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "LSystems_Grammars_And_Curves",
+      "grid_reachable_before": 115,
+      "grid_reachable_after": 115,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "LSystems_Architecture",
+      "grid_reachable_before": 54,
+      "grid_reachable_after": 54,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'catalyst_vent' at (1,1) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mesh_grammar_petal_flower' at (10,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'dragon_room' at (9,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mesh_grammar_coral_fingers' at (11,8) h=1 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'catalyst_vent' at (1,1) h=2 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mesh_grammar_petal_flower' at (10,1) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'dragon_room' at (9,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'mesh_grammar_coral_fingers' at (11,8) h=1 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "LSystems_Living",
+      "grid_reachable_before": 75,
+      "grid_reachable_after": 75,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "grid_reachable_before": 164,
+      "grid_reachable_after": 164,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "grid_reachable_before": 105,
+      "grid_reachable_after": 105,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "grid_reachable_before": 65,
+      "grid_reachable_after": 65,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "grid_reachable_before": 89,
+      "grid_reachable_after": 89,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "SoftBodies_Cloth_Physics",
+      "grid_reachable_before": 62,
+      "grid_reachable_after": 62,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_Introduction",
+      "grid_reachable_before": 95,
+      "grid_reachable_after": 95,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 3,
+      "rules_before": [
+        {
+          "rule": 6,
+          "severity": "WARN",
+          "msg": "Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 6,
+          "severity": "WARN",
+          "msg": "Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1"
+        }
+      ]
+    },
+    {
+      "map": "ISO_LookupTable",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_ShapesGallery",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_TorusGyroid",
+      "grid_reachable_before": 181,
+      "grid_reachable_after": 181,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_Sculpting",
+      "grid_reachable_before": 93,
+      "grid_reachable_after": 93,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_FlatTerrain",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_Caves",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "grid_reachable_before": 93,
+      "grid_reachable_after": 93,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ISO_Metaballs",
+      "grid_reachable_before": 182,
+      "grid_reachable_after": 182,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Boolean_Verbs",
+      "grid_reachable_before": 254,
+      "grid_reachable_after": 254,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (6,24) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (6,24) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "ML_Evolution",
+      "grid_reachable_before": 65,
+      "grid_reachable_after": 65,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 0,
+      "rules_before": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (11,9) is NOT reachable from spawn via walking"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (11,9) is NOT reachable from spawn via walking"
+        }
+      ]
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "grid_reachable_before": 61,
+      "grid_reachable_after": 61,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Classification",
+      "grid_reachable_before": 89,
+      "grid_reachable_after": 89,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Neural_Networks",
+      "grid_reachable_before": 149,
+      "grid_reachable_after": 149,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Perception",
+      "grid_reachable_before": 81,
+      "grid_reachable_after": 81,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "grid_reachable_before": 31,
+      "grid_reachable_after": 27,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Generative",
+      "grid_reachable_before": 49,
+      "grid_reachable_after": 41,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "ML_Synthesis",
+      "grid_reachable_before": 63,
+      "grid_reachable_after": 63,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "GT_Layout",
+      "grid_reachable_before": 64,
+      "grid_reachable_after": 64,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "grid_reachable_before": 53,
+      "grid_reachable_after": 53,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "GT_Connectivity",
+      "grid_reachable_before": 43,
+      "grid_reachable_after": 43,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 0,
+      "rules_before": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (11,7) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'kosaraju_algorithm' at (6,2) h=2 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (11,7) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'kosaraju_algorithm' at (6,2) h=2 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "grid_reachable_before": 26,
+      "grid_reachable_after": 26,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Euclid_Parallel",
+      "grid_reachable_before": 80,
+      "grid_reachable_after": 80,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "NonEuclidean_Spaces",
+      "grid_reachable_before": 146,
+      "grid_reachable_after": 146,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (8,12) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (8,12) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "Russell_Paradox",
+      "grid_reachable_before": 67,
+      "grid_reachable_after": 67,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (6,11) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (6,11) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "Godel_Incompleteness",
+      "grid_reachable_before": 5,
+      "grid_reachable_after": 5,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 0,
+      "rules_before": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (6,13) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'negative_control_fixture' at (4,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'critic_regress_stack' at (10,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'godel_sentence_machine' at (7,4) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'rice_verifier_booth' at (3,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'print_gallery_recursion' at (10,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'synthesis_stand' at (2,8) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fluency_seam' at (11,9) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'godel_statement_plaque' at (4,10) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'provability_sorter' at (5,11) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'incompleteness_tower' at (9,11) h=1 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 3,
+          "severity": "WARN",
+          "msg": "Teleport at (6,13) is NOT reachable from spawn via walking"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'negative_control_fixture' at (4,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'critic_regress_stack' at (10,3) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'godel_sentence_machine' at (7,4) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'rice_verifier_booth' at (3,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'print_gallery_recursion' at (10,5) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'synthesis_stand' at (2,8) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'fluency_seam' at (11,9) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'godel_statement_plaque' at (4,10) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'provability_sorter' at (5,11) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'incompleteness_tower' at (9,11) h=1 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "Escher_Impossible",
+      "grid_reachable_before": 30,
+      "grid_reachable_after": 30,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Florensky_Paraconsistent",
+      "grid_reachable_before": 112,
+      "grid_reachable_after": 112,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "Crisis_Synthesis",
+      "grid_reachable_before": 241,
+      "grid_reachable_after": 241,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "QFEP_Introduction",
+      "grid_reachable_before": 66,
+      "grid_reachable_after": 66,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (5,10) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (5,10) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "QFEP_F_Term",
+      "grid_reachable_before": 102,
+      "grid_reachable_after": 102,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 2,
+          "severity": "WARN",
+          "msg": "Teleport at (4,11) — no structure row at z=12 to catch player"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 2,
+          "severity": "WARN",
+          "msg": "Teleport at (4,11) — no structure row at z=12 to catch player"
+        }
+      ]
+    },
+    {
+      "map": "QFEP_E_Term",
+      "grid_reachable_before": 104,
+      "grid_reachable_after": 104,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "grid_reachable_before": 54,
+      "grid_reachable_after": 54,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'lambda_hall' at (11,11) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'phase_cube' at (9,16) h=1 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'lambda_hall' at (11,11) h=1 unreachable"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'phase_cube' at (9,16) h=1 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "grid_reachable_before": 72,
+      "grid_reachable_after": 72,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "grid_reachable_before": 91,
+      "grid_reachable_after": 91,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "grid_reachable_before": 92,
+      "grid_reachable_after": 92,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 2,
+          "severity": "WARN",
+          "msg": "Teleport at (6,13) — no structure row at z=14 to catch player"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'qfep_reactor' at (7,4) h=3 unreachable"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 2,
+          "severity": "WARN",
+          "msg": "Teleport at (6,13) — no structure row at z=14 to catch player"
+        },
+        {
+          "rule": 4,
+          "severity": "WARN",
+          "msg": "Artifact 'qfep_reactor' at (7,4) h=3 unreachable"
+        }
+      ]
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "grid_reachable_before": 81,
+      "grid_reachable_after": 81,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    },
+    {
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "grid_reachable_before": 37,
+      "grid_reachable_after": 36,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (7,6) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ],
+      "rules_after": [
+        {
+          "rule": 5,
+          "severity": "WARN",
+          "msg": "Teleport at (7,6) has height 1, should be 0 (void)",
+          "fix": "set_teleport_void"
+        }
+      ]
+    },
+    {
+      "map": "PostCrisis_Synthesis",
+      "grid_reachable_before": 202,
+      "grid_reachable_after": 202,
+      "lost_reachable_interior": [],
+      "lost_reachable_exits": [],
+      "previously_reachable_exits": 1,
+      "rules_before": [],
+      "rules_after": []
+    }
+  ]
+}

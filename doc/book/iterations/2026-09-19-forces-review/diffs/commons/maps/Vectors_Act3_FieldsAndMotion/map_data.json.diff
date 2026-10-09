@@ -1,0 +1,16 @@
+--- before/commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json
++++ commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json
+@@ -30,9 +30,10 @@
+       "estimated_time": "7-10 minutes",
+       "act": "III â€” fields and motion",
+       "learning_objectives": [
+-        "Vector field / flow",
+-        "Motion / velocity decomposition",
+-        "Projectile arcs"
++        "Sample the same vector field with two receivers",
++        "Compare setting velocity with accumulating acceleration",
++        "Test how retained state changes the response to reversal and gain",
++        "Reveal the receiver rules after observing trajectories"
+       ],
+       "n_artifacts": 13
+     },

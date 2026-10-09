@@ -1,0 +1,234 @@
+{
+	"approaches": [
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.0,
+				0.0,
+				1.0
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": true,
+			"passed": true
+		},
+		{
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"direction": [
+				-1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"level_support": true,
+			"passed": true
+		}
+	],
+	"artifact": {
+		"position": [
+			6.5,
+			0.0,
+			19.5
+		],
+		"rotation": [
+			0.0,
+			0.0,
+			0.0
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Live hall contains the actual console artifact",
+			"passed": true
+		},
+		{
+			"message": "Physical console exists after museum loading",
+			"passed": true
+		},
+		{
+			"message": "Operating position has supporting floor",
+			"passed": true
+		},
+		{
+			"message": "Artifact retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits in front of console",
+			"passed": true
+		},
+		{
+			"message": "A supported, unobstructed final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 0.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 0.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 0.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 0.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 1.0 retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 1.0 inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 1.0 within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "DEPTH endpoint 1.0 has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Live controls were measured",
+			"passed": true
+		},
+		{
+			"message": "Provenance_0 lettering and casing stand above the floor",
+			"passed": true
+		},
+		{
+			"message": "Provenance_0 casing clears the hall structure",
+			"passed": true
+		},
+		{
+			"message": "Provenance_1 lettering and casing stand above the floor",
+			"passed": true
+		},
+		{
+			"message": "Provenance_1 casing clears the hall structure",
+			"passed": true
+		},
+		{
+			"message": "Provenance_2 lettering and casing stand above the floor",
+			"passed": true
+		},
+		{
+			"message": "Provenance_2 casing clears the hall structure",
+			"passed": true
+		},
+		{
+			"message": "Museum CharacterBody reaches the operating pose along the measured approach",
+			"passed": true
+		},
+		{
+			"message": "DEPTH real grab reaches chosen value in the rotated hall",
+			"passed": true
+		},
+		{
+			"message": "DEPTH release retains restored value in the hall",
+			"passed": true
+		}
+	],
+	"console": {
+		"height_above_floor": 0.860000021755695,
+		"position": [
+			6.5,
+			0.860000014305115,
+			21.2000007629395
+		],
+		"scale": [
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.808378107845783,
+			"hit": "/root/EndlessMuseum/Seg0_grande-galerie-axial/GrammarProvenance/Controls/Physical_DEPTH/Face",
+			"horizontal_distance": 0.426277160644531,
+			"label": "DEPTH endpoint 0.0",
+			"position": [
+				6.5,
+				0.808378100395203,
+				21.2737236022949
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.911621935665607,
+			"hit": "/root/EndlessMuseum/Seg0_grande-galerie-axial/GrammarProvenance/Controls/Physical_DEPTH/Face",
+			"horizontal_distance": 0.573722839355469,
+			"label": "DEPTH endpoint 1.0",
+			"position": [
+				6.5,
+				0.911621928215027,
+				21.126277923584
+			]
+		}
+	],
+	"failures": [],
+	"feet": [
+		6.5,
+		-0.00000000745058059692383,
+		21.7000007629395
+	],
+	"floor_collider": "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision",
+	"passed": true,
+	"plaques": [
+		{
+			"bottom": 0.232103101909161,
+			"node": "Provenance_0",
+			"top": 0.518067069351673
+		},
+		{
+			"bottom": 0.232103101909161,
+			"node": "Provenance_1",
+			"top": 0.518067069351673
+		},
+		{
+			"bottom": 0.232103101909161,
+			"node": "Provenance_2",
+			"top": 0.518067069351673
+		}
+	],
+	"room": "LSystems_Grammar_Lab",
+	"scope": "Actual museum geometry. Static standing capsule, short approach, control rays and world dimensions; desktop capture, no headset or learner validation.",
+	"shots": [
+		"operating.png",
+		"controls.png",
+		"approach.png",
+		"plaques-detail.png"
+	],
+	"standing_obstacles": [],
+	"walk_end": [
+		6.5,
+		0.00083997193723917,
+		21.7250156402588
+	]
+}

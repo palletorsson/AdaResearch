@@ -1,0 +1,28 @@
+{
+  "room": "Vectors_Act1_WhatAVectorIs",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json": "05c5dca61283435cacf45033bcd29e6c5c90fd8252b7ff67c48bed7f90638065",
+    "tools/probes/forces_teleport_buttons.gd": "d69098e62770a24bf5c4a590e4e79a0530eea0322eaa080a0a0b1c205a8563e9",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "0a7a0535d46b57756ecd6915b3f2db273e9d2ba2c34b67dd1f7eff3157e40fe3",
+    "ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/control.json": "b0ee35e317670b5ade64326e779c5d9049dbb5f805228d5e2b7190e2292710e1",
+    "ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Vectors_Act1_WhatAVectorIs/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0"
+  }
+}

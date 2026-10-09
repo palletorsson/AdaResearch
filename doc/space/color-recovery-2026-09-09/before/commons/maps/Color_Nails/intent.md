@@ -1,0 +1,6 @@
+Concept: Introduces color as a selectable, applicable property through a nail salon metaphor — decoration for a body that exists only as data.
+Sequence role: First map in Color sequence; bridges from Trans_Scale (geometric transformation) to perceptual color work. Establishes color as something you choose and apply, not something inherent; leads to Color_Grid_Pallet.
+Technical angle: Precise hue selection via nail_color_controller, RGB color space navigation, applying color to mesh surfaces (hand_model). The dark_side_prism hints at spectral decomposition.
+Critical angle: Color as digital materiality — painting a virtual body foregrounds that color in computation is always a choice, never a given. The salon metaphor makes color personal before it becomes systematic.
+Key artifacts: nail_color_controller and hand_color_controller drive the interaction loop; colorballs provide a tactile color palette; dark_side_prism foreshadows the spectrum work ahead; grab_stick_scanner introduces color as readable data.
+Gap: No explicit connection between the RGB values being selected and the perceptual experience of those values — the "RGB is a lie" thesis from the sequence truth could be surfaced here.

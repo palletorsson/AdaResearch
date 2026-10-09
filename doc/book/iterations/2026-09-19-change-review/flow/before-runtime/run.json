@@ -1,0 +1,44 @@
+{
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-change-review\\flow\\before-runtime\\engine.log",
+    "--rendering-method",
+    "mobile",
+    "--rendering-driver",
+    "vulkan",
+    "--resolution",
+    "1600x1000",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-change-review/flow/probe_flow.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-change-review/flow/before-runtime/",
+    "--capture",
+    "--replay-before"
+  ],
+  "pid": 49068,
+  "returncode": 0,
+  "seconds": 16.018625020980835,
+  "source_sha256_before": {
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba",
+    "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+    "commons/maps/Flow_Field/final.md": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482"
+  },
+  "source_sha256_after": {
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba",
+    "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+    "commons/maps/Flow_Field/final.md": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482"
+  }
+}

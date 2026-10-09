@@ -1,0 +1,13 @@
+--- before/preview-route.ts
++++ current/preview-route.ts
+@@ -37,6 +37,10 @@
+   ".json": "application/json; charset=utf-8",
+ 
+   ".txt": "text/plain; charset=utf-8",
++
++  ".gd": "text/plain; charset=utf-8",
++
++  ".zip": "application/zip",
+ 
+   ".mp3": "audio/mpeg",
+ 

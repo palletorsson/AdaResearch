@@ -1,0 +1,190 @@
+{
+  "structure": {
+    "source_scope": [
+      "commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+      "commons/artifacts/calder_mobile/calder_mobile.gd",
+      "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+      "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+      "commons/primitives/parametric/catenoid.gd",
+      "commons/primitives/parametric/catenoid.tscn",
+      "commons/primitives/parametric/helicoid.tscn",
+      "algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+    ],
+    "pairs": [
+      {
+        "hall": "FormFinding_Catenary",
+        "before": "capture-before-accepted-FormFinding_Catenary",
+        "after": "capture-after-verified-FormFinding_Catenary",
+        "camera_matches": {
+          "laundry-standing": true,
+          "laundry-plaque": true
+        },
+        "shared_source_matches": {
+          "commons/primitives/parametric/helicoid.gd": true,
+          "commons/maps/FormFinding_Catenary/map_data.json": true,
+          "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+          "commons/artifacts/registry/primitives.json": true,
+          "commons/scenes/endless_museum.gd": true,
+          "commons/scenes/em/em_detail.gd": true,
+          "commons/artifacts/science_screen/science_screen.gd": true,
+          "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+        },
+        "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+      },
+      {
+        "hall": "FormFinding_Equilibrium",
+        "before": "capture-before-verified-FormFinding_Equilibrium",
+        "after": "capture-after-verified-FormFinding_Equilibrium",
+        "camera_matches": {
+          "calder-standing": true,
+          "calder-plaque": true,
+          "truss-standing": true
+        },
+        "shared_source_matches": {
+          "commons/primitives/parametric/helicoid.gd": true,
+          "commons/maps/FormFinding_Catenary/map_data.json": true,
+          "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+          "commons/artifacts/registry/primitives.json": true,
+          "commons/scenes/endless_museum.gd": true,
+          "commons/scenes/em/em_detail.gd": true,
+          "commons/artifacts/science_screen/science_screen.gd": true,
+          "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+        },
+        "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+      }
+    ],
+    "headset_tested": false,
+    "accepted_runs": {
+      "museum-baseline-final-FormFinding_Catenary": {
+        "checks": 16,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      },
+      "headless-after-FormFinding_Catenary": {
+        "checks": 25,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      },
+      "capture-before-accepted-FormFinding_Catenary": {
+        "checks": 28,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      },
+      "capture-after-verified-FormFinding_Catenary": {
+        "checks": 22,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      },
+      "capture-before-verified-FormFinding_Equilibrium": {
+        "checks": 25,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      },
+      "capture-after-verified-FormFinding_Equilibrium": {
+        "checks": 19,
+        "failures": 0,
+        "returncode": 0,
+        "sources_stable": true,
+        "script_errors": false
+      }
+    }
+  },
+  "relaxation_controls": {
+    "scope": "Isolated controls and configuration lifecycle",
+    "result": "relaxation/control-final-v3/controls-checks.json",
+    "run": "relaxation/control-final-v3/controls-run.json",
+    "checks": 26,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "relaxation_before": {
+    "scope": "Original-script replay in actual museum",
+    "result": "relaxation/paired-before/museum-checks.json",
+    "run": "relaxation/paired-before/museum-run.json",
+    "checks": 13,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "relaxation_after": {
+    "scope": "Actual museum, final visible controls and matched experiments",
+    "result": "relaxation/final-visible-after/museum-checks.json",
+    "run": "relaxation/final-visible-after/museum-run.json",
+    "checks": 25,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "diagram": {
+    "scope": "Isolated actual static artifact; same-camera original/current labels",
+    "result": "diagram/check.json",
+    "run": "diagram/run.json",
+    "checks": 7,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "optimizer": {
+    "scope": "Isolated repaired optimizer, boundary and small-slope branches",
+    "result": "search/after/optimizer/optimizer.json",
+    "run": "search/after/optimizer/run.json",
+    "checks": 10,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "annealing_q_isolated_unresolved": {
+    "scope": "Behavior checks completed; native access violation during teardown; NOT a clean passing run",
+    "result": "search/after/annealing_q/focused.json",
+    "run": "search/after/annealing_q/run.json",
+    "checks": 20,
+    "failed_checks": [],
+    "returncode": 3221225477,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": false
+  },
+  "annealing_museum": {
+    "scope": "Actual museum under frozen shared loader; world camera y=1.7 m. Q installed at half authored scale, explicitly recorded; see audit for footprint scope",
+    "result": "search/standing/Annealing/museum.json",
+    "run": "search/standing/Annealing/run.json",
+    "checks": 26,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": true,
+    "clean_exit_and_assertions": true
+  },
+  "forge_museum": {
+    "scope": "Actual museum optimizer behavior; shared source changed during run, excluded from matched visual comparisons",
+    "result": "search/after/Forge/museum.json",
+    "run": "search/after/Forge/run.json",
+    "checks": 10,
+    "failed_checks": [],
+    "returncode": 0,
+    "watched_sources_stable": false,
+    "clean_exit_and_assertions": true
+  },
+  "historical_descent": {
+    "checks": 36,
+    "fresh_run": false,
+    "fingerprints": "descent-historical-evidence.json"
+  },
+  "headset_tested": false,
+  "learner_tested": false,
+  "diagram_wrapper_note": "Godot completed all seven checks and exited 0. A subsequent Python console print failed on a Unicode checkmark under cp1252; the wrapper now selects UTF-8. Saved native results are unaffected."
+}

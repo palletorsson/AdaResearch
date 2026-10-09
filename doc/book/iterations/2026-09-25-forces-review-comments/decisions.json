@@ -1,0 +1,62 @@
+{
+  "book_forces.001": {
+    "layer": "body",
+    "decision": "Replaced the desktop-first sentence with the same movement of the stick carrying the visitor progressively less quickly. Kept the explicit distinction from physical tracked walking and from rigid-body drag. Existing WALK controls and three speed multipliers pass native checks; no human resistance or headset comfort claim.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.002": {
+    "layer": "body",
+    "decision": "Removed keyboard language, but did not adopt the proposed immediate return of stick steering at the boundary. Leaving ends the field override; the default XR body also requires ground contact for stick control. That condition now appears in the chapter.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.003": {
+    "layer": "handoff",
+    "decision": "Replaced the desktop-specific exit with the actual XR relation: the field yields, velocity is retained in the air under ordinary gravity, and stick steering becomes available at ground contact. A nontracked XRToolsPlayerBody fixture exercises the production provider and default ground-control gate. Its move_player supplies a contact result; this is not a tracked or collision-solver test.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.004": {
+    "layer": "transition",
+    "decision": "Added a short bridge from Choreography to Gravity. The spring’s reference now acquires a body, and the question is whether that centre can respond. Kept Gravity’s deliberate return to the spring and the conveyor’s critical close.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.005": {
+    "layer": "precision",
+    "decision": "Removed the claim that a tiny lift makes yaw the most powerful control. Described the growing horizontal component instead, and named the display’s small near-pole idle region. Native slider checks confirm both the unchanged vector at the pole and the held bearing, the idle band and full horizontal yaw.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.006": {
+    "layer": "artifact + prose",
+    "decision": "Reproduced the old retained-arrow bug in the loaded hall: after 0.03 m/s, a supplied zero-motion step retained a roughly 0.015 m arrow. Added a lesson-only 0.02 m arrow threshold (0.04 m/s) before the redraw deadband, clearing collapsed component geometry as well. Low, zero, renewed and just-above-threshold movements pass; the legacy resting-vector mode remains. The text now identifies a threshold for displayed stillness instead of promising exact physical rest. Actual controller jitter and headset legibility remain to be assessed.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.007": {
+    "layer": "continuity",
+    "decision": "The preceding Change pass already deferred the push to Later in Forces. Added the particles in the last room to the opening’s recall of points and transformations. Kept the encounter’s immediate start with pins and the arrow; no four-hall itinerary inserted.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.008": {
+    "layer": "units",
+    "decision": "Named the acceleration limit as fifteen metres per second squared. The loaded machine and readout confirm the value and units. No change to the slider or field.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.009": {
+    "layer": "reference",
+    "decision": "Named Plummer softening at the existing EPS explanation and added a short linked footnote. The project source declares EPS = 0.25 metres and uses the softened inverse-cube factor. The galpy Plummer potential documentation supplies a primary implementation reference without burdening the encounter with another derivation.",
+    "status": "done",
+    "triage": "fix"
+  },
+  "book_forces.010": {
+    "layer": "title",
+    "decision": "Added What carries you across? above the closing hall. Kept its opening hole, two routes, plank, local field and difference between receivers.",
+    "status": "done",
+    "triage": "fix"
+  }
+}

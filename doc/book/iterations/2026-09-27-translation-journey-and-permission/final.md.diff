@@ -1,0 +1,80 @@
+--- before/final.md
++++ current/final.md
+@@ -1,8 +1,8 @@
+ # Translation: seven journeys
+ 
+-The far bank is familiar now. In the last hall, a moving surface carried you across. Here that small surface becomes the thread through a longer space.
++The far bank is familiar now. In the last hall, a moving surface carried you across. Here seven carriers link a chain of islands, rising to an upper route and descending again.
+ 
+-Before boarding, follow the line of waiting cubes with your eyes. Some hang over the pit. Others are high above the floor. Which ones could you reach from where you stand?
++Before boarding, follow the small waiting cubes with your eyes. Some hang over the fire basin. Others mark the upper route, beyond the reach of a hand from the floor. The carriers give you a way to meet them.
+ 
+ <!-- @tc -->
+ 
+@@ -14,7 +14,7 @@
+ 
+ Stand on the lift and watch the lower landing descend from view. It is still where it was. The carrier changes y; the room gives that change a consequence. You arrive beside an upper platform, three metres above the ground route.
+ 
+-The three small axis markers near the entrance have made these directions visible one at a time. Now the same distinctions have carried your body.
++Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth.
+ 
+ The transport script calculates a destination from a starting position, a direction and a distance:
+ 
+@@ -22,9 +22,9 @@
+ target_position = initial_position + (move_direction * move_distance)
+ ```
+ 
+-The direction is normalised before this calculation. It says which way; the distance says how far. A displacement of three metres upwards is written with a different direction from three metres forwards. The addition is the same kind of operation.
++The direction is normalised: its vector is given a length of one. Multiplying it by `move_distance` sets how far the carrier will go. Adding that displacement to `initial_position` gives its destination. Three metres up and three metres forward use the same addition, with different directions.
+ 
+-On the upper route, another carrier travels along z. You have done this before, but there is more space below your feet. What changed in the operation? What changed in the encounter?
++On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.
+ 
+ A sideways return carries you back across x in the opposite direction. Then the next carrier moves down and forward together, like an escalator. Its surface stays level while its path slopes: three metres down, two metres further along z. Watch the pickup approach as the lower landing comes towards you.
+ 
+@@ -34,7 +34,7 @@
+ 
+ Take one, then look back while the carrier moves on.
+ 
+-The transport does not collect them at a distance. It adds its own movement to the detected rider:
++The carrier brings your body to a pickup by sharing its displacement:
+ 
+ ```gdscript
+ var movement_delta = global_position - previous_position
+@@ -49,28 +49,30 @@
+ 
+ This direction changes x and z together. The destination lies eight metres across and eight metres further into the hall. Both coordinates change during the same journey. We have combined directions without adding rotation.
+ 
+-Thirteen pickups mark one possible passage through seven rides. Their positions make some encounters easy and leave other parts of the arena untouched. Another arrangement could ask for another journey using exactly the same operations.
++Thirteen pickups mark this passage through seven rides. By the final terrace, the cubes you collected have left empty places along the route. Another arrangement of carriers and pickups could lead you elsewhere using the same operations.
+ 
+ <!-- @translation_cube_demo -->
+ 
+-Step onto the final terrace. Two small door mechanisms wait at hand height. Take a square handle and try moving it upwards and sideways in the same gesture. A pale line stays behind it.
++Step onto the final terrace. Two pairs of small doors stand on plinths, a red door and a blue door in each frame. One pair has rails; the other shows translucent panels where its doors can end up. Try the same upward-and-sideways gesture on a square handle in each frame. A pale line stays behind the moving handle.
+ 
+ At the rail-guided door, the line rises. The sideways part of your gesture has gone missing. Beside it, the other mechanism lets the handle move in both directions together. Its line can cross the opening diagonally.
+ 
+ Lift the guided handle to the corner of its rail, then move it sideways. A bend leads to the place the other handle could reach directly. The translucent panel beside the second door marks its destination. Compare the two handles in their frames: they have the same distance to travel up and across.
+ 
+-What do the lines record? Here is the guided door retaining the part of a displacement that runs along its current axis:
++The guided door retains the part of a displacement that runs along its current axis:
+ 
+ ```gdscript
+ var t = (knob_pos - start).dot(phase1_dir)
+ knob_pos = start + phase1_dir * t
+ ```
+ 
+-The full implementation also clamps the distance. The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.
++Here `phase1_dir` points upwards. `.dot()` extracts the part of your movement along that direction; the next line puts the handle there. The full implementation also limits how far it can go.
+ 
+-In the trace hall, movement left positions behind. Here the recorded positions belong to a handle whose movement has already been constrained. The line can be an accurate record without showing everything you tried.
++The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.
+ 
+-Bring the free handle back towards its starting corner, then try a curved route to the ghost. The lines can remain together as you try another way. There is room to take the long way, within the movement this frame allows.
++In the trace hall, movement left positions behind. Here the handle has already been corrected before its position is kept. The line can be an accurate record of where the handle went without showing everything your hand tried.
++
++Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.
+ 
+ ![Two door mechanisms leave different traces for different permitted paths.](/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png)
+ 

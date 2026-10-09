@@ -1,0 +1,305 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Primitives — form and desire</title><link rel="stylesheet" href="style.css"></head><body><main><header><nav><a href="#lineage">Closing progression</a><a href="#gallery">Column passage</a><a href="#reading">Read the chapters</a><a href="SOURCE-NOTES.md">Sources and decisions</a></nav><p>ADA / MANUSCRIPT PASS / 3 OCTOBER 2026</p></header><article id="lineage"><h1>What do we want a form to give us?</h1>
+<p>The closing Primitives rooms move from making a body to choosing what matters about it. The tools become more useful while their purpose remains ours to decide.</p>
+<table><thead><tr><th>Encounter</th><th>Making</th><th>Reading</th></tr></thead><tbody>
+<tr><td>Ignorance and the columns</td><td>A rule, a profile, parameters.</td><td>Why seek regularity? What makes a body seem worth revering?</td></tr>
+<tr><td>Portals</td><td>A measurement and a tolerance.</td><td>Enough for which purpose? What remains to choose?</td></tr>
+<tr><td>Melencolia</td><td>Compose with the constructions we know.</td><td>What did we hope a correct answer would resolve?</td></tr>
+</tbody></table><p>This is a small pass in the three canonical <code>final.md</code> files. Existing encounters, code excerpts and historical examples remain. The single-column tutorial is the next proposed exercise; its scope is recorded in the <a href="../../course/PRIMITIVES-CLOSING-LINEAGE.md">closing lineage agreement</a>.</p>
+<p><a href="#Primitives_Ignorance">Read Ignorance</a> · <a href="#Primitives_Portals">Read Portals</a> · <a href="#Primitives_Melencolia">Read Melencolia</a></p></article><article id="gallery"><h2>The column companion</h2><p class="small">Existing native Godot capture of the revised gallery. Its physical place in the museum is still to be chosen.</p><figure><img src="../2026-10-03-resolution-colonnade/colonnade.png" alt="Different pale column profiles and heights in the red-walled Rings of Ash gallery."><figcaption>The varied composition. The equal-form arrangement remains available for a controlled comparison.</figcaption></figure><h1>A body given a place</h1>
+<p><em>Proposed passage for Rings of Ash. The gallery is built as a standalone companion; this passage is held outside the map manuscripts until its placement is settled.</em></p>
+<p>A narrow stem rises beside a swollen body. Farther along, a column opens like a bell. The pale surfaces catch the same light, but their edges break it differently. Each plinth names the profile, height and divisions used to make the body above it.</p>
+<p>Four sides can be enough to make a form you want. Sixteen can bring another outline into view. Height changes what you look up to; a wider middle changes what you can see beyond it. These decisions meet in one body without becoming the same decision.</p>
+<p>The loop closes each ring. It asks for no ceremony. We gave its result a pedestal, a place among other bodies, a distant light. How much of what holds you here have we built between you?</p>
+<p>You can follow the construction and still find something you had not expected. Choose one column to keep looking at. What would you change first, and what has already become worth preserving?</p><p><a href="../2026-10-03-resolution-colonnade/index.html">Walkable gallery and download</a></p></article><div id="reading"><section id="Primitives_Ignorance"><article><h1>Limits of Geometric Knowledge</h1>
+<p>You left a cube whose connections could outlast its name. Now try the name sphere. What are you accepting when you recognise something as round?</p>
+<!-- @sphere -->
+
+<p>Begin with the ordinary sphere near the entrance. Look at it from a distance, then approach. Follow its silhouette against the room beyond it. Where does the outline give you something to inspect that the name had allowed you to pass over?</p>
+<p>Above the entrance: <strong>Let No One Ignorant of Geometry Enter.</strong> It recalls the motto traditionally associated with Plato's Academy.<sup id="fnref:ignorance-inscription"><a class="footnote-ref" href="#fn:ignorance-inscription">1</a></sup> Here we have entered with a little geometry. We will use it to inspect the limits of the forms that seemed to admit us.</p>
+<!-- @geometry_courtyard -->
+
+<p>Inside, five solids have been given five places. Tetrahedron, cube, octahedron, dodecahedron, icosahedron. Off-white and almost black, each rests on a plain block. You can lift one and bring a face toward you. Its edges remain sharp. There is nothing unfinished about that sharpness.</p>
+<p>Columns surround the group. Near the entrance their sides are easy to count; farther along, the corners draw closer together. Four divisions, then five, six, eight. Eventually the column looks round. Walking along the court, you pass through several constructions of the same architectural name.</p>
+<p>Four sides can be a poor approximation to a round column and the outline we wanted to keep. A proportion gives us a relation between dimensions. It does not tell us whether that relation is beautiful. Before asking for more detail, what are we asking the form to give us?</p>
+<p>The solids do not take that journey. An icosahedron has twenty faces because it is an icosahedron. Adding more would give you something else. In the next room, the sphere keeps its name while the number of faces changes. What did the name ask us to preserve?</p>
+<!-- @sphere_high -->
+
+<p>The next room holds three pairs of spheres. Start with the first pair in the resolution display. One sphere wears lines along its triangle edges; the other has plain shading. Predict whether removing the lines also changes the sphere's outline. Walk around the pair and compare.</p>
+<p>The two meshes have the same vertex positions and triangle connections. The lines are an added overlay. They make a construction easier to follow without rebuilding its surface.</p>
+<p>Choose one place where the silhouette changes direction. Step back until that distinction becomes difficult to see, then approach again. Your distance changed. The mesh did not.</p>
+<!-- @sphere_mid -->
+
+<p>Continue to the middle pair. Inspect it from a comparable distance. Which distinctions are easier to find now? Compare the marked example with its plain neighbour before comparing it with the finer pair behind you.</p>
+<p>The finer pair uses sixteen rings and sixteen radial segments; this pair uses seven of each. Those two settings divide different directions of the surface. Changing them changes the positions and connections available for making it.</p>
+<!-- @sphere_low -->
+
+<p>At the coarsest pair, follow one flat patch toward its edge. Is this merely a sphere missing something, or is there a feature here you would choose to keep?</p>
+<p>Its construction uses one ring and ten radial segments. One direction is divided more often than in the middle example, the other much less. Resolution has a distribution. It does not arrive as a single quantity called detail.</p>
+<p>The script gives the two choices separate names:</p>
+<pre><code class="language-gdscript">sphere_mesh.radial_segments = segment_count
+sphere_mesh.rings = ring_count
+</code></pre>
+<!-- @sphere_resolution_atlas -->
+
+<p>Across the room, twelve smaller spheres spread the two choices out in space. Across each row, more rings divide the height. Along each column, more segments divide the circumference. Their triangle edges remain visible. You can follow one change while the other holds still.</p>
+<p>A crowded equator can belong to a sparsely divided body. One figure has a broad flat face where another gathers many narrow triangles. Both answer to sphere. Before deciding which is more convincing, look for a shape you had not expected to find there.</p>
+<p>A mathematical sphere consists of points at a fixed distance from a centre. The mesh joins sampled positions with flat triangles. Adding triangles can improve that approximation; no finite collection of flat patches acquires the sphere's continuous curvature. Shading can soften their appearance while the polygonal outline remains.</p>
+<p><img alt="The existing high, middle and low sphere artifacts in matched views: triangle edges visible above, hidden below. Each column keeps the same mesh." src="../../figures/Primitives_Ignorance/sphere-visible-construction.png" /></p>
+<p><em>The lower row keeps every triangle in the upper row. The lines disappear; the construction remains.</em></p>
+<p>This is where ignorance turns around. Plato distinguishes the drawn figure from the geometric object considered in thought. Here we turn our attention toward the constructed figure: what its polygons leave out, and what their particular arrangement makes available.<sup id="fnref:ignorance-plato"><a class="footnote-ref" href="#fn:ignorance-plato">2</a></sup></p>
+<p>The formula specifies a sphere. The mesh gives us one finite construction through which to encounter it. The ridge is available too. We can learn from its shape without requiring it to disappear into a smoother answer.</p>
+<!-- @budget_of_smoothness -->
+
+<p>At the far end of this room, a counter makes the cost of these choices countable. Four numbered spheres turn at the same rate. Keep the counts hidden at first. Choose one for a distant background and one for someone to inspect close to their face. The spheres stay on their stands; you are choosing possible uses.</p>
+<p>Press <strong>SHOW / HIDE COUNTS</strong>. Did the numbers change your choice? Then press <strong>SHOW / HIDE EDGES</strong> and follow the lines toward a pole.</p>
+<p>Each tag gives two triangle counts. Even counting depends on what the instrument agrees to include.<sup id="fnref:ignorance-counts"><a class="footnote-ref" href="#fn:ignorance-counts">3</a></sup></p>
+<p>Hide the counts while keeping the edges visible, then try the reverse. What becomes easier to judge? Both controls alter what is shown while keeping the sphere meshes in place.</p>
+<p>A triangle count does not measure frame time or tell us which object deserves to exist. For your proposed use, name the distinction worth spending geometry on. You might spend more on a close silhouette, or keep a facet because it makes this body recognisable.</p>
+<!-- @capsule_reliquary -->
+
+<p>At the centre, the five-sided capsule turns above a stepped pedestal. Eight pale tiers carry it: cylinders with four divisions through eleven, each smaller than the one beneath. Corners shift around the stack. The support is making its own argument about roundness.</p>
+<p>The capsule is taller now, nearly the height of a person. Its dark surface receives the light slowly as it turns. A small, awkward construction has been given the place of an object worth lingering before. Its five divisions did not require this ceremony. We gave it height, a pedestal, room around it. How much of what holds your attention have we built between you and the object?</p>
+<p>When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view. The arrangement draws you closer to a construction you can inspect. Knowing how the encounter was made can give you another reason to stay.</p>
+<p>Five segments divide the body around its long axis. Opposite a ridge is the middle of a facet. Half a turn does not bring this cross-section back onto itself. The divisions are evenly spaced, but their odd number interrupts that particular symmetry.<sup id="fnref:ignorance-capsule"><a class="footnote-ref" href="#fn:ignorance-capsule">4</a></sup></p>
+<p>You cannot fold your understanding around this corner by simply repeating the front at the back. The shortcut fails. You have to follow another side, or learn the rule well enough to work it out. The object remains knowable; recognising a capsule was not yet knowing this one.</p>
+<p>Stay with what the five divisions produced. Between the familiar pill and its polygonal construction, a body appears that the name did not prepare you for. Its surprise is made within the restriction. What would you miss if you corrected it into the capsule you expected?</p>
+<p>This gives ignorance another direction: a limit in our expectation becomes somewhere to look. The same small set of instructions that confines the form can make more available than we first knew to ask of it.</p>
+<p><img alt="The five-segment capsule raised on eight cylinders, with resolutions four through eleven." src="../2026-09-27-ignorance-courtyard/five-on-four-to-eleven.png" /></p>
+<p><em>The capsule keeps its five divisions. The pedestal changes the attention we give them.</em></p>
+<!-- @primitive_mesh_library -->
+
+<p>The third room has another collection of beginnings. A wedge, a ring, a plane. A pair of letters with depth. The engine supplies these constructions before we decide what to make of them. Each has been wrapped in a reusable scene, like the boxes in the previous hall. The mesh supplies a surface; the scene can bring its material, collision and behaviour along. Choosing a shape and choosing what an object can do are still different decisions.</p>
+<p>Here, even the word primitive has practical habits. A plane offers a surface to subdivide. A quad supplies two triangles. Move beside them and their broad faces narrow toward an edge. The letters already carry a language; their geometry lets that language cast a shadow.</p>
+<p>One stand holds a point drawn twenty-two screen pixels wide. Approach it: its mark keeps that pixel width while the stand grows in your view. This is another way of giving a point a visible body. It does not behave like the sphere we first called Point One.<sup id="fnref:ignorance-prefabs"><a class="footnote-ref" href="#fn:ignorance-prefabs">5</a></sup></p>
+<p>Two longer forms belong to the engine's trail meshes. Here they are shown at rest, before particles or moving bones would shape them into trails. Some of the engine's simplest forms are beginnings of movement.</p>
+<p>The old studies remain through the side opening: the rock, the star, the choir, the extra cubes. The court has made a clear arrangement without exhausting what these forms might become.</p>
+<!-- @ -->
+
+<p>Carry a more specific question than whether the sphere is good enough: <strong>enough to hold which distinction, for whom, at what distance?</strong></p>
+<p>The polygonal model has a limit; our first understanding of its possibilities has one too. The next room follows a finite sequence of round-looking objects toward a boundary none of its examples reaches.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:ignorance-inscription">
+<p>The Academy motto is a later tradition, not a securely documented inscription from Plato's lifetime. See <a href="https://mathshistory.st-andrews.ac.uk/Societies/Plato/">The Academy of Plato</a>, MacTutor History of Mathematics. The museum stages the familiar wording as an instruction whose authority we can question.&#160;<a class="footnote-backref" href="#fnref:ignorance-inscription" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ignorance-plato">
+<p>Plato, <a href="https://classics.mit.edu/Plato/republic.7.vi.html">Republic, Book VI</a>, Benjamin Jowett translation, the divided-line discussion: drawn figures serve reasoning about geometric objects rather than being its ultimate objects. Ada's reversal is methodological: stay with the implemented figure and investigate its limits and possibilities. This does not establish that Plato was unaware of imperfect drawings, or that geometry cannot describe curves.&#160;<a class="footnote-backref" href="#fnref:ignorance-plato" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ignorance-counts">
+<p>Some generated triangle triples collapse at the poles. The counter distinguishes all submitted triples from those with measurable area in <a href="https://docs.godotengine.org/en/4.6/classes/class_spheremesh.html">Godot 4.6 SphereMesh</a> arrays. “With area” excludes triangles below a local squared-cross-product tolerance of <code>1e-16</code>; it is a practical threshold. The <a href="http://localhost:3003/book?map=Primitives_Ignorance&amp;section=technical">technical chapter</a> records all four measured pairs of counts. Overlays and counter furniture are excluded. Analytic sphere descriptions and this finite polygonal rendering are different representations.&#160;<a class="footnote-backref" href="#fnref:ignorance-counts" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ignorance-capsule">
+<p>The central installation reuses <code>capsule.tscn</code>, enlarged uniformly to 1.6 times its authored size. It uses a <a href="https://docs.godotengine.org/en/4.6/classes/class_capsulemesh.html">CapsuleMesh</a> with five radial segments and five rings. Its regular pentagonal cross-section repeats after 72 degrees, but not after 180 degrees about the long axis. The absent half-turn symmetry does not make all symmetry disappear. The scene turns at 45 degrees per second. These are the authored mesh and spin settings, not controls available on the plinth.&#160;<a class="footnote-backref" href="#fnref:ignorance-capsule" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ignorance-prefabs">
+<p>Godot 4.6 <a href="https://docs.godotengine.org/en/4.6/classes/class_primitivemesh.html">PrimitiveMesh</a> is a family of generated mesh resources. The new room wraps PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh in reusable scenes. Box, cylinder, sphere and capsule have already appeared; a cone is a CylinderMesh with one radius set to zero. QuadMesh inherits PlaneMesh. The <a href="https://docs.godotengine.org/en/4.6/classes/class_pointmesh.html">PointMesh</a> display uses a point-size material: its 22 pixels describe the rendered mark, not a world-space diameter. Trail specimens show their undeformed rest geometry.&#160;<a class="footnote-backref" href="#fnref:ignorance-prefabs" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><details><summary>What changed in Primitives_Ignorance</summary><pre><span class="remove">--- Primitives_Ignorance/before/final.md</span>
+<span class="add">+++ Primitives_Ignorance/final.md</span>
+<span class="">@@ -13,6 +13,8 @@</span>
+<span class=""> Inside, five solids have been given five places. Tetrahedron, cube, octahedron, dodecahedron, icosahedron. Off-white and almost black, each rests on a plain block. You can lift one and bring a face toward you. Its edges remain sharp. There is nothing unfinished about that sharpness.</span>
+<span class=""> </span>
+<span class=""> Columns surround the group. Near the entrance their sides are easy to count; farther along, the corners draw closer together. Four divisions, then five, six, eight. Eventually the column looks round. Walking along the court, you pass through several constructions of the same architectural name.</span>
+<span class="add">+</span>
+<span class="add">+Four sides can be a poor approximation to a round column and the outline we wanted to keep. A proportion gives us a relation between dimensions. It does not tell us whether that relation is beautiful. Before asking for more detail, what are we asking the form to give us?</span>
+<span class=""> </span>
+<span class=""> The solids do not take that journey. An icosahedron has twenty faces because it is an icosahedron. Adding more would give you something else. In the next room, the sphere keeps its name while the number of faces changes. What did the name ask us to preserve?</span>
+<span class=""> </span>
+<span class="">@@ -75,7 +77,9 @@</span>
+<span class=""> </span>
+<span class=""> At the centre, the five-sided capsule turns above a stepped pedestal. Eight pale tiers carry it: cylinders with four divisions through eleven, each smaller than the one beneath. Corners shift around the stack. The support is making its own argument about roundness.</span>
+<span class=""> </span>
+<span class="remove">-The capsule is taller now, nearly the height of a person. Its dark surface receives the light slowly as it turns. A small, awkward construction has been given the place of an object worth lingering before. When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view.</span>
+<span class="add">+The capsule is taller now, nearly the height of a person. Its dark surface receives the light slowly as it turns. A small, awkward construction has been given the place of an object worth lingering before. Its five divisions did not require this ceremony. We gave it height, a pedestal, room around it. How much of what holds your attention have we built between you and the object?</span>
+<span class="add">+</span>
+<span class="add">+When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view. The arrangement draws you closer to a construction you can inspect. Knowing how the encounter was made can give you another reason to stay.</span>
+<span class=""> </span>
+<span class=""> Five segments divide the body around its long axis. Opposite a ridge is the middle of a facet. Half a turn does not bring this cross-section back onto itself. The divisions are evenly spaced, but their odd number interrupts that particular symmetry.[^ignorance-capsule]</span>
+<span class=""> </span></pre><p><a href="Primitives_Ignorance/final.diff">Text diff</a> · <a href="Primitives_Ignorance/final.md">Revised source</a> · <a href="before/Primitives_Ignorance/final.md">Before</a></p></details></section><section id="Primitives_Portals"><article><h1>Circular Approximation and Limits</h1>
+<p>The previous room asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. <strong>What would count as arriving?</strong></p>
+<!-- @combine_portals -->
+
+<p>Begin beside an early faceted ring. Follow a straight edge around its opening, then look along the progression. Choose a later ring that seems round enough from where you stand. Keep that choice in mind as you approach it. Does the edge you had stopped seeing return?</p>
+<p>These are portals for looking through: twenty rings that frame the space beyond. Near the beginning, their flat patches are easy to see. Each following member divides both surface directions more finely.<sup id="fnref:portals-mesh"><a class="footnote-ref" href="#fn:portals-mesh">1</a></sup></p>
+<p>At the side instrument, use <strong>NEXT RING</strong> and <strong>PREVIOUS</strong> to select a member. It turns gold. Find the selected ring in the space. The button directs your attention while leaving your body where it is.</p>
+<p>Beside the counts, a rose-coloured polygon sits inside a grey circle. Selecting a finer ring adds sides to the polygon while the circle stays. This separate, flat figure borrows one of the torus's subdivision counts to ask a simpler question: how closely can straight sides approach a circle?</p>
+<p>The circle has radius one. For its inscribed polygon, the code calculates:</p>
+<pre><code class="language-gdscript">var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
+</code></pre>
+<p>Each straight side is a chord between two points on the circle. Adding sides brings their total length closer to the circumference, which the panel labels <strong>Circle</strong>. The positive gap belongs to this planar comparison; a measure of the whole torus's accuracy would need its own definition.<sup id="fnref:portals-circle"><a class="footnote-ref" href="#fn:portals-circle">2</a></sup></p>
+<p><img alt="Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle." src="../../figures/Primitives_Portals/portals-visible-limit.png" /></p>
+<p><em>The corner becomes harder to see. The gap remains. These are three states of the same diagram beside the rings; the numbers compare boundary lengths.</em></p>
+<p>This is <strong>convergence</strong>: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.</p>
+<p>Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a <strong>tolerance</strong>. It might lead you to a different choice from the ring that first looked round enough. The comparison answers to a requirement you supplied. Passing it leaves other decisions open: the corner you like, the view through the opening, the place this ring might have beside another.</p>
+<p>Press <strong>REVERSE</strong> and return to the beginning. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.</p>
+<p>The sequence had quietly given refinement a direction. Walking the other way, corners become available again. You might want one of those corners. Adding more sides would take it away.</p>
+<p>Through this change, the openings remain. More divisions need not give the body another kind of passage.<sup id="fnref:portals-hole"><a class="footnote-ref" href="#fn:portals-hole">3</a></sup></p>
+<!-- @achilles_tortoise -->
+
+<p>Two figures wait along the next instrument's track. Press <strong>NEXT STEP</strong> and watch the space between them.</p>
+<p>Achilles is placed where the tortoise was. The tortoise moves ahead again. In this construction the gaps halve at each stage. The marked end of the track stays where it is.<sup id="fnref:portals-zeno"><a class="footnote-ref" href="#fn:portals-zeno">4</a></sup></p>
+<p>The first stage carries Achilles halfway along the track, the second three quarters of the way. Each new stage leaves half the remaining distance. The endpoint is close enough to point to. The rule keeps putting him short of it.</p>
+<p>At stage ten, the instrument holds. The bodies may look as though they have arrived together, but Achilles' anchor is still less than six millimetres from the limit. His visible body is larger than the gap. The display has a last stage. Does the sequence it represents have one?</p>
+<p>Use <strong>RESTART</strong>, then <strong>PLAY</strong> to let the figures move between stages. Pause them partway through a movement. The panel keeps both distances in view: where Achilles is now, and where this step was taking him.</p>
+<p>The program gives these stages a regular schedule and adds movement between them. That schedule does not reproduce the shrinking durations of a continuous runner's journey. An infinite subdivision can have a finite total; it does not make ordinary motion impossible.</p>
+<p>This instrument can pause while the museum continues. We have held one process still long enough to ask about it.</p>
+<!-- @ -->
+
+<p>Twenty rings. Ten stages. Each display has a last member because someone chose where to stop building it. Neither mathematical approach acquires a last step merely because its display has ended.</p>
+<p><strong>The limit gives the sequence a direction. It does not tell us where to stop.</strong></p>
+<p>There may already be a ring you want to return to. A finite encounter can teach us something without exhausting what its rules make possible.</p>
+<p>Melencolia gathers the tools we have learned to use. They can give exact answers. What would make the work complete?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:portals-mesh">
+<p>The installed <code>combine_portals</code> uses <a href="https://docs.godotengine.org/en/4.6/classes/class_torusmesh.html">Godot 4.6 TorusMesh</a>. <code>rings</code> divides the torus around its opening; <code>ring_segments</code> divides the tube's cross-section. The authored linear rule uses <code>(3 + i, 3 + 2i)</code> for indices 0–19. The panel calls the latter <strong>Tube sides</strong>. Its selection highlights a mesh; these rings do not implement teleportation.&#160;<a class="footnote-backref" href="#fnref:portals-mesh" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:portals-circle">
+<p>For a regular <code>n</code>-gon inscribed in a unit circle, each chord has length <code>2 * sin(PI/n)</code>, giving perimeter <code>2 * n * sin(PI/n)</code>. <code>TAU = 2 * PI</code> is the circle's circumference. In exact mathematics the perimeter is smaller for every finite <code>n ≥ 3</code> and converges to <code>TAU</code>. A useful tolerance can be met before equality. A floating-point calculation may eventually round a gap away; that is a separate computational event. The <a href="http://localhost:3003/book?map=Primitives_Portals&amp;section=technical">technical chapter</a> explains what the instrument measures.&#160;<a class="footnote-backref" href="#fnref:portals-circle" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:portals-hole">
+<p>These subdivisions preserve the torus surface's central opening. Resolution and topology are different questions: more triangles do not give this surface another hole. Whether an opening is a usable passage also depends on scale, placement and collision. Keep that distinction for the later investigations of possible spaces.&#160;<a class="footnote-backref" href="#fnref:portals-hole" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:portals-zeno">
+<p>Aristotle discusses the Achilles argument and the bisection argument in <a href="https://classics.mit.edu/Aristotle/physics.6.vi.html">Physics, Book VI, parts 2 and 9</a>, translated by R. P. Hardie and R. K. Gaye. This exhibit stages a particular halving construction: <code>A_n = L(1 − 2⁻ⁿ)</code> and <code>T_n = L(1 − 2⁻⁽ⁿ⁺¹⁾)</code>. Its six-metre track ends the display at stage ten, leaving <code>6/1024</code> metres between Achilles' anchor and the limit. Autoplay schedules stages two seconds apart and eases movement for one second. That theatrical timing is part of the implementation, not a proof about the duration of a physical race.&#160;<a class="footnote-backref" href="#fnref:portals-zeno" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><details><summary>What changed in Primitives_Portals</summary><pre><span class="remove">--- Primitives_Portals/before/final.md</span>
+<span class="add">+++ Primitives_Portals/final.md</span>
+<span class="">@@ -26,7 +26,7 @@</span>
+<span class=""> </span>
+<span class=""> This is **convergence**: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.</span>
+<span class=""> </span>
+<span class="remove">-Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a **tolerance**. It might lead you to a different choice from the ring that first looked round enough.</span>
+<span class="add">+Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a **tolerance**. It might lead you to a different choice from the ring that first looked round enough. The comparison answers to a requirement you supplied. Passing it leaves other decisions open: the corner you like, the view through the opening, the place this ring might have beside another.</span>
+<span class=""> </span>
+<span class=""> Press **REVERSE** and return to the beginning. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.</span>
+<span class=""> </span></pre><p><a href="Primitives_Portals/final.diff">Text diff</a> · <a href="Primitives_Portals/final.md">Revised source</a> · <a href="before/Primitives_Portals/final.md">Before</a></p></details></section><section id="Primitives_Melencolia"><article><h1>Melancholy of Finitude</h1>
+<p>What keeps you looking after you know the form?</p>
+<!-- @pyramid -->
+
+<p>Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?</p>
+<p>Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.</p>
+<p>Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.</p>
+<!-- @pyramidlong -->
+
+<p>The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?</p>
+<p>Its base is still square. Its apex is still a single point above it. The tall pyramid's source collects the base vertices and then adds that point:</p>
+<pre><code class="language-gdscript">vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+</code></pre>
+<p>The same connections can carry a different height. In this version the pyramid's base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.</p>
+<!-- @cube_scene -->
+
+<p>Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?</p>
+<p>The arrangement returns to the room's earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.<sup id="fnref:solids"><a class="footnote-ref" href="#fn:solids">1</a></sup> Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.</p>
+<p>Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.</p>
+<p><img alt="The museum court from three viewpoints: aligned, oblique and a plan from above." src="../../figures/Primitives_Melencolia/melencolia-one-arrangement.png" /></p>
+<p><em>The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.</em></p>
+<!-- @snap_pyramid_puzzle -->
+
+<p>Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.</p>
+<p>Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.</p>
+<!-- @ -->
+
+<h2>The tools are still here</h2>
+<!-- @durer_scene -->
+
+<p>Follow the raised connection to the next platform. The large stone stands to the left; the winged figure sits to the right, her head resting on a fist. A sphere lies near the sleeping dog. Above them, the ladder, scales, hourglass and bell give the wall its own order. Beneath them, a saw and a carpenter's plane lie among the small tools. Here the forms have company.<sup id="fnref:durer"><a class="footnote-ref" href="#fn:durer">2</a></sup></p>
+<p>The compass is in her hand. She has not lost the instrument. A book lies on her lap, and the skirt falls in heavy folds over her knees. Beside her, a smaller winged figure bends over a tablet. One is drawing. The other looks away.</p>
+<p>Earlier, a sphere could introduce a primitive. Here it occupies ground beside a tired animal. Nothing has happened to the sphere's definition. Much has happened to what we can see in it.</p>
+<p>We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it <em>geometric desire</em>: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.</p>
+<p>Perhaps we had hoped that getting the form right would put something else right with it. The compass can give a circle a radius. What should we make with the circle? That question stays with the hand holding the instrument.</p>
+<p>Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.</p>
+<p><img alt="The reconstructed Melencolia tableau inside the museum." src="../../figures/Primitives_Melencolia/melencolia-tableau.png" /></p>
+<p><em>After Dürer's engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.</em></p>
+<p>The stone has six pentagonal faces and two triangular ends. Its mesh begins with a rhombohedron and cuts off two opposite corners. The proportions are one possible reading of the printed form. We can make a closed solid without claiming to have recovered the only solid the image permits.</p>
+<p>Now look up at the numbered square. Choose a row and add it before reading further.</p>
+<pre><code class="language-text">16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+</code></pre>
+<p>Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.</p>
+<p>Stay a little longer. Has that correct answer finished what you came to look at?</p>
+<h2>What do we want a form to promise?</h2>
+<p>We have learned to recognise a construction and change its rule. The reasons for choosing it have histories too.<sup id="fnref:geometric-desire"><a class="footnote-ref" href="#fn:geometric-desire">7</a></sup></p>
+<p>This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher's study of its mosaics later fed his own investigations of repeating figures.<sup id="fnref:pattern"><a class="footnote-ref" href="#fn:pattern">4</a></sup> A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.</p>
+<p>Malevich's tilted square in <em>White on White</em> offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint's <em>Paintings for the Temple</em> give abstract forms a different task, within a spiritual inquiry.<sup id="fnref:abstraction"><a class="footnote-ref" href="#fn:abstraction">5</a></sup> The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.</p>
+<p>And abstraction need not carry us away from the body. Lygia Clark's hinged metal <em>Bichos</em> ask for hands: a flat arrangement opens into a changing object.<sup id="fnref:clark"><a class="footnote-ref" href="#fn:clark">6</a></sup> To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?</p>
+<p>These histories meet here because we have placed them beside one another. Their different desires remain. Keep that question beside the seated figure. The tools are here. Their next use is not settled.</p>
+<h2>The number that was already running</h2>
+<!-- @frame_counter_display -->
+
+<p>By the way out, a number is changing. It is the same counter you met on your first step into this chapter: <code>Engine.get_process_frames()</code>, process frames since the engine started, read fresh on every call.</p>
+<p>It is much larger now. Some of that is yours — the picking up, the drawing, the walking, the shifting of a start. A fixed quantity of it is not, and never will be. The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference.</p>
+<p>In the first room we said that its first number for you was not its first number. That is still the one thing it will not tell you, and you now know several reasons why. A record keeps what its rule admits. Someone chose the rule. The number keeps growing while you read it.</p>
+<h2>Enough to continue</h2>
+<p>Dürer's engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.</p>
+<p>A few tools, and more possible constructions than we have time to pursue.<sup id="fnref:sublime"><a class="footnote-ref" href="#fn:sublime">3</a></sup></p>
+<p>Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.</p>
+<p>We leave with enough to continue. There is still something here we have not finished looking at.</p>
+<!-- @ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:solids">
+<p>Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See <a href="https://publicdomainreview.org/collection/solid-objects/"><em>Solid Objects</em></a> and the <a href="https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/">image selected for this room</a>. The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.&#160;<a class="footnote-backref" href="#fnref:solids" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:durer">
+<p>Albrecht Dürer, <em>Melencolia I</em> (1514), <a href="https://www.metmuseum.org/art/collection/search/360018">Metropolitan Museum of Art</a>. The museum describes several interpretations rather than a settled key. The <a href="https://www.nga.gov/artworks/6641-melencolia-i">National Gallery of Art</a> provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention.&#160;<a class="footnote-backref" href="#fnref:durer" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sublime">
+<p>Kant's <a href="https://www.gutenberg.org/files/48433/48433-h/48433-h.htm"><em>Critique of Judgement</em></a>, §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.&#160;<a class="footnote-backref" href="#fnref:sublime" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:pattern">
+<p>The <a href="https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art">Metropolitan Museum's account of geometric pattern</a> describes its construction and combination with other ornament. It does not license a single spiritual meaning for all Islamic geometry. <a href="https://escherinhetpaleis.nl/en/about-escher/timeline">Escher in The Palace's timeline</a> records his sustained study of the Alhambra and Córdoba mosaics in 1936; tessellation already appeared in his earlier work.&#160;<a class="footnote-backref" href="#fnref:pattern" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:abstraction">
+<p>Kazimir Malevich, <a href="https://www.moma.org/collection/works/80385"><em>Suprematist Composition: White on White</em> (1918)</a>, MoMA; Hilma af Klint, <a href="https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple"><em>Paintings for the Temple</em></a>, Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence.&#160;<a class="footnote-backref" href="#fnref:abstraction" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:clark">
+<p>Lygia Clark, <a href="https://www.moma.org/collection/works/91767"><em>Poetic Shelter</em> (1964)</a>, MoMA, and the museum's account of <a href="https://www.moma.org/collection/terms/neo-concrete-art">Neo-Concrete art</a>. Clark's participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book's proposal.&#160;<a class="footnote-backref" href="#fnref:clark" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:geometric-desire">
+<p>Lynn Gamwell, <em>Mathematics and Art: A Cultural History</em> (Princeton University Press), especially the preface, the account of chapter 2 on proportion, and the discussions of mathematical models and Minimal Art. Read in the <a href="https://docs.google.com/document/d/1CaUhLfk_CvbcpKYPoIcafWBVoxSZvnw8NujHhC2thIQ/edit?tab=t.0">project's study copy</a>. These discussions inform our distinction between constructing a relationship and assigning it aesthetic or cultural authority. The reading of Ada's pedestals, columns and geometric desire is our own. It does not establish a common intention or a line of influence among the artists brought together here.&#160;<a class="footnote-backref" href="#fnref:geometric-desire" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><details><summary>What changed in Primitives_Melencolia</summary><pre><span class="remove">--- Primitives_Melencolia/before/final.md</span>
+<span class="add">+++ Primitives_Melencolia/final.md</span>
+<span class="">@@ -55,6 +55,8 @@</span>
+<span class=""> </span>
+<span class=""> We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it *geometric desire*: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.</span>
+<span class=""> </span>
+<span class="add">+Perhaps we had hoped that getting the form right would put something else right with it. The compass can give a circle a radius. What should we make with the circle? That question stays with the hand holding the instrument.</span>
+<span class="add">+</span>
+<span class=""> Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.</span>
+<span class=""> </span>
+<span class=""> ![The reconstructed Melencolia tableau inside the museum.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-tableau.png)</span>
+<span class="">@@ -78,13 +80,15 @@</span>
+<span class=""> </span>
+<span class=""> ## What do we want a form to promise?</span>
+<span class=""> </span>
+<span class="add">+We have learned to recognise a construction and change its rule. The reasons for choosing it have histories too.[^geometric-desire]</span>
+<span class="add">+</span>
+<span class=""> This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher&#x27;s study of its mosaics later fed his own investigations of repeating figures.[^pattern] A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.</span>
+<span class=""> </span>
+<span class=""> Malevich&#x27;s tilted square in *White on White* offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint&#x27;s *Paintings for the Temple* give abstract forms a different task, within a spiritual inquiry.[^abstraction] The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.</span>
+<span class=""> </span>
+<span class=""> And abstraction need not carry us away from the body. Lygia Clark&#x27;s hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?</span>
+<span class=""> </span>
+<span class="remove">-Keep that question beside the seated figure. The tools are here. Their next use is not settled.</span>
+<span class="add">+These histories meet here because we have placed them beside one another. Their different desires remain. Keep that question beside the seated figure. The tools are here. Their next use is not settled.</span>
+<span class=""> </span>
+<span class=""> ## The number that was already running</span>
+<span class=""> </span>
+<span class="">@@ -119,3 +123,5 @@</span>
+<span class=""> [^abstraction]: Kazimir Malevich, [*Suprematist Composition: White on White* (1918)](https://www.moma.org/collection/works/80385), MoMA; Hilma af Klint, [*Paintings for the Temple*](https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple), Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence.</span>
+<span class=""> </span>
+<span class=""> [^clark]: Lygia Clark, [*Poetic Shelter* (1964)](https://www.moma.org/collection/works/91767), MoMA, and the museum&#x27;s account of [Neo-Concrete art](https://www.moma.org/collection/terms/neo-concrete-art). Clark&#x27;s participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book&#x27;s proposal.</span>
+<span class="add">+</span>
+<span class="add">+[^geometric-desire]: Lynn Gamwell, *Mathematics and Art: A Cultural History* (Princeton University Press), especially the preface, the account of chapter 2 on proportion, and the discussions of mathematical models and Minimal Art. Read in the [project&#x27;s study copy](https://docs.google.com/document/d/1CaUhLfk_CvbcpKYPoIcafWBVoxSZvnw8NujHhC2thIQ/edit?tab=t.0). These discussions inform our distinction between constructing a relationship and assigning it aesthetic or cultural authority. The reading of Ada&#x27;s pedestals, columns and geometric desire is our own. It does not establish a common intention or a line of influence among the artists brought together here.</span></pre><p><a href="Primitives_Melencolia/final.diff">Text diff</a> · <a href="Primitives_Melencolia/final.md">Revised source</a> · <a href="before/Primitives_Melencolia/final.md">Before</a></p></details></section></div></main></body></html>

@@ -1,0 +1,1608 @@
+extends Node3D
+
+# @identity
+# essence: assign each point to nearest centroid; move centroids to cluster means; repeat until convergence
+# desire: watch colored clusters crystallize from unlabeled chaos as centroids drift to their resting places
+# critical_parameter: cluster_count (K) — choosing K is the fundamental unsupervised learning decision
+# triggers: iteration step reassigns points and moves centroids; convergence stops when movement < threshold
+# emerges: Voronoi tessellation of space; initialization sensitivity (K-means++ vs random); the elbow in the inertia curve
+# needs: VR controls [missing] — has 2D UI buttons but no spatial VR sliders
+# relationships: contrasts svm_visualization (supervised boundaries vs unsupervised clustering); unlocks random_forest_visualization (ensemble methods)
+# truth: clustering does not discover structure in data — it imposes structure by choosing K
+
+# Enhanced K-Means Clustering Algorithm Visualization
+# Educational tool with advanced features and interactive controls
+
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — axis: cohort
+# ═══════════════════════════════════════════════════════════════════
+#
+# The shape of the population the method is asked to divide. The data here was
+# authored to flatter the method — three tidy gaussian discs, which k-means was
+# built to find — and this is the knob that stops it flattering. The algorithm is
+# untouched at every value: it produces whatever boundary it produces, including
+# a wrong one.
+#
+#   blobs  the shipped case. Three discs of ~30 points at up to 4.0 m radius,
+#          centres anywhere within +/-8.3 m, plus 10 noise points loose in the
+#          25 x 8 x 25 m box. k = 4 asked to find 3 clusters that genuinely exist.
+#   block  100 points filling the whole box uniformly, no cluster structure at
+#          all. The four pucks still land, still claim four territories: a method
+#          returning a confident answer to a question the data did not ask.
+#   rings  two concentric shells — 60 points on a 10.0 m ring 1.0 m thick around
+#          a 3.0 m core of 40. A Voronoi cell cannot express a shell, so the four
+#          pucks quarter the ring like a pie.
+#   braid  two interleaved spiral arms of 50, two turns across a 22 m span and
+#          1.5 m apart at closest approach — every point's nearest neighbour
+#          belongs to the other arm.
+#   skew   one dominant cluster of 88 at 5.0 m radius with two 6-point clusters
+#          11 m away; the pucks crowd the majority and the two small groups end
+#          up sharing one centroid between them.
+#
+# REFUSED as axes: iteration_speed, animate_clustering, convergence_threshold,
+# step_by_step_mode. All four govern how fast grey points turn colour, and the
+# evidence is a still — it would catch the recolouring mid-phase at random.
+@export_enum("blobs", "block", "rings", "braid", "skew") var cohort: String = "blobs"
+
+## Allow-list for the axis. A token outside it falls back to the shipped look
+## rather than stranding a placement with an empty cloud.
+const COHORTS: PackedStringArray = ["blobs", "block", "rings", "braid", "skew"]
+
+## Every random draw in the build path comes from _rng, seeded from this. Two
+## builds of one cohort value are pixel-identical; without it the pixel critic
+## reads gaussian noise as an axis signal.
+const RNG_SEED: int = 20260730
+
+# rings — the shell k-means cannot say
+const RING_N: int = 60
+const RING_RADIUS: float = 10.0
+const RING_THICK: float = 1.0
+const CORE_N: int = 40
+const CORE_RADIUS: float = 3.0
+
+# braid — two Archimedean arms, phase-offset by PI. The radial growth per radian
+# is BRAID_GAP / PI, which makes the two arms exactly BRAID_GAP apart at any
+# shared angle. Over BRAID_TURNS the radius therefore grows by
+# (BRAID_GAP / PI) * BRAID_TURNS * TAU = 6.0 m, taking the outer arm from
+# BRAID_INNER_RADIUS 5.0 m to 11.0 m: a 22 m span.
+const BRAID_ARM_N: int = 50
+const BRAID_TURNS: float = 2.0
+const BRAID_GAP: float = 1.5
+const BRAID_INNER_RADIUS: float = 5.0
+const BRAID_Y_JITTER: float = 0.4
+
+# skew — the majority that eats the centroids
+const SKEW_MAJOR_N: int = 88
+const SKEW_MAJOR_RADIUS: float = 5.0
+const SKEW_MINOR_N: int = 6
+const SKEW_MINOR_RADIUS: float = 1.2
+const SKEW_MINOR_DISTANCE: float = 11.0
+const SKEW_MINOR_BEARINGS: Array = [0.35, -0.35]
+
+@export_category("Algorithm Parameters")
+@export var data_point_count: int = 100:
+	set(value):
+		data_point_count = max(10, min(500, value))
+		if is_inside_tree():
+			regenerate_data()
+
+@export var cluster_count: int = 4:
+	set(value):
+		cluster_count = max(2, min(8, value))
+		if is_inside_tree():
+			restart_clustering()
+
+@export var iteration_speed: float = 1.5:
+	set(value):
+		iteration_speed = max(0.1, min(5.0, value))
+
+@export var convergence_threshold: float = 0.1
+
+@export_category("Data Generation")
+@export var data_space_size: float = 25.0
+@export var generate_clustered_data: bool = true:
+	set(value):
+		generate_clustered_data = value
+		if is_inside_tree():
+			regenerate_data()
+
+@export var natural_cluster_count: int = 3:
+	set(value):
+		natural_cluster_count = max(2, min(6, value))
+		if is_inside_tree() and generate_clustered_data:
+			regenerate_data()
+
+@export var cluster_spread: float = 4.0
+@export var noise_points_percentage: float = 0.1
+
+@export_category("Visualization Controls")
+@export var show_centroids: bool = true:
+	set(value):
+		show_centroids = value
+		update_centroid_visibility()
+
+@export var show_connections: bool = false:
+	set(value):
+		show_connections = value
+		update_connection_visibility()
+
+@export var show_voronoi_regions: bool = false:
+	set(value):
+		show_voronoi_regions = value
+		update_voronoi_visibility()
+
+@export var animate_clustering: bool = true
+@export var show_iteration_stats: bool = true
+@export var show_convergence_graph: bool = true
+@export var point_size_scale: float = 1.0:
+	set(value):
+		point_size_scale = max(0.5, min(3.0, value))
+		update_point_sizes()
+
+@export_category("Educational Features")
+@export var step_by_step_mode: bool = false
+@export var highlight_moving_centroids: bool = true
+@export var show_distance_calculations: bool = false
+@export var pause_on_convergence: bool = true
+
+# Build state
+## True once _ready() has run a full synchronous build. apply_grid_config arrives
+## via call_deferred AFTER _ready(), so it can only ever rebuild — never build.
+var _built: bool = false
+## Lights, camera and the screen-space UI are built once and survive a rebuild;
+## a second camera or a second CanvasLayer would be a bug, not a variant.
+var _chrome_built: bool = false
+## Only nodes THIS script parented to self. _rebuild_now frees these and nothing
+## else — freeing get_children() would destroy the caption plates the grid adds.
+var _spawned: Array = []
+## Deterministic source for every draw in the build path.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+## Bumped by the user-facing restart (ESC) so a restart still means "new random
+## initialisation" while staying reproducible: seed = RNG_SEED + cohort + n.
+## A build always resets it to 0.
+var _restart_count: int = 0
+## The `emissive` key curation_station hands every artifact. Default true = the
+## glowing pucks of the shipped look.
+var _emissive: bool = true
+
+# Algorithm state
+var data_points: Array = []
+var centroids: Array = []
+var assignments: Array = []
+var previous_assignments: Array = []
+var iteration: int = 0
+var converged: bool = false
+var algorithm_timer: float = 0.0
+var total_distance: float = 0.0
+var distance_history: Array = []
+var centroid_movement_history: Array = []
+
+# Visual elements
+var point_meshes: Array = []
+var centroid_meshes: Array = []
+var connection_lines: Array = []
+var voronoi_planes: Array = []
+var ui_container: Control
+var iteration_label: Label
+var distance_label: Label
+var status_label: Label
+var convergence_graph: Panel
+var control_panel: VBoxContainer
+
+# Interactive controls
+var is_paused: bool = false
+var manual_step: bool = false
+
+# Spatial lesson controls are opt-in; standalone desktop UI stays available.
+var _lesson_controls: Node3D
+var _lesson_label: Label3D
+var _lesson_mode: bool = false
+const LESSON_COHORTS: Array[String] = ["blobs", "rings", "block"]
+
+# Enhanced cluster colors with better contrast
+var cluster_colors: Array = [
+	Color(1.0, 0.3, 0.3),  # Bright Red
+	Color(0.3, 1.0, 0.3),  # Bright Green
+	Color(0.3, 0.3, 1.0),  # Bright Blue
+	Color(1.0, 1.0, 0.3),  # Bright Yellow
+	Color(1.0, 0.3, 1.0),  # Bright Magenta
+	Color(0.3, 1.0, 1.0),  # Bright Cyan
+	Color(1.0, 0.6, 0.2),  # Orange
+	Color(0.7, 0.3, 1.0)   # Purple
+]
+
+# Data structures
+class DataPoint:
+	var position: Vector3
+	var cluster_id: int = -1
+	var previous_cluster_id: int = -1
+	var mesh_instance: MeshInstance3D
+	var distance_to_centroid: float = 0.0
+	
+	func _init(pos: Vector3) -> void:
+		position = pos
+
+class Centroid:
+	var position: Vector3
+	var previous_position: Vector3
+	var cluster_id: int
+	var mesh_instance: MeshInstance3D
+	var assigned_points: Array = []
+	var movement_distance: float = 0.0
+	
+	func _init(pos: Vector3, id: int) -> void:
+		position = pos
+		previous_position = pos
+		cluster_id = id
+
+func _ready() -> void:
+	_build_all()
+	_built = true
+
+## The whole body, synchronously, from @export values alone — the sweep sets
+## `cohort` and adds the node, never calls apply_grid_config, so frame one must
+## already hold the full cloud and all four pucks.
+func _build_all() -> void:
+	if not _chrome_built:
+		setup_environment()
+		setup_ui()
+		_chrome_built = true
+	_restart_count = 0
+	_seed_rng()
+	generate_data()
+	initialize_centroids()
+	create_visuals()
+	update_ui()
+	# So a rebuild honours flags that arrived with the config dict. All three are
+	# no-ops at the shipped defaults (centroids visible, nothing else built yet).
+	update_centroid_visibility()
+	update_connection_visibility()
+	update_voronoi_visibility()
+
+	if animate_clustering and not step_by_step_mode:
+		start_clustering()
+	if _lesson_mode:
+		for child in get_children():
+			if child is CanvasLayer: child.hide()
+		var ground := get_node_or_null("Ground")
+		if ground is MeshInstance3D: ground.hide()
+		is_paused = true
+		_update_lesson_label()
+
+## Seed from the cohort so the five values do not share a draw sequence, and from
+## the restart counter so ESC still reshuffles.
+func _seed_rng() -> void:
+	var idx: int = COHORTS.find(cohort)
+	if idx < 0:
+		idx = 0
+	_rng.seed = RNG_SEED + idx * 1013 + _restart_count
+
+func _process(delta: float) -> void:
+	if animate_clustering and not converged and not is_paused and not step_by_step_mode:
+		algorithm_timer += delta
+		if algorithm_timer >= iteration_speed:
+			perform_clustering_step()
+			algorithm_timer = 0.0
+	
+	update_ui()
+	handle_input()
+	_update_lesson_label()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):  # Space key
+		if step_by_step_mode or is_paused:
+			manual_step = true
+	elif event.is_action_pressed("ui_cancel"):  # Escape key
+		restart_clustering()
+	elif event.is_action_pressed("ui_select"):  # Enter key
+		is_paused = !is_paused
+
+func handle_input() -> void:
+	if manual_step:
+		manual_step = false
+		if not converged:
+			perform_clustering_step()
+
+func setup_environment() -> void:
+	# Enhanced lighting setup
+	var light = DirectionalLight3D.new()
+	light.light_energy = 0.8
+	light.rotation_degrees = Vector3(-30, 45, 0)
+	light.shadow_enabled = true
+	add_child(light)
+	
+	# Additional fill light
+	var fill_light = DirectionalLight3D.new()
+	fill_light.light_energy = 0.3
+	fill_light.rotation_degrees = Vector3(30, -45, 0)
+	add_child(fill_light)
+	
+
+	
+	# Camera with better positioning
+	var camera = Camera3D.new()
+	camera.position = Vector3(0, 20, 30)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
+	camera.fov = 65
+	add_child(camera)
+
+func setup_ui() -> void:
+	# Create UI container
+	ui_container = Control.new()
+	ui_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.add_child(ui_container)
+	add_child(canvas_layer)
+	
+	# Main stats panel
+	var stats_panel = create_stats_panel()
+	ui_container.add_child(stats_panel)
+	
+	# Control panel
+	var controls_panel = create_control_panel()
+	ui_container.add_child(controls_panel)
+	
+	# Convergence graph
+	if show_convergence_graph:
+		convergence_graph = create_convergence_graph()
+		ui_container.add_child(convergence_graph)
+
+func create_stats_panel() -> Panel:
+	var panel = Panel.new()
+	panel.position = Vector2(20, 20)
+	panel.size = Vector2(280, 150)
+	
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.1, 0.1, 0.1, 0.8)
+	panel_style.border_width_left = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.3, 0.3, 0.3)
+	panel_style.corner_radius_top_left = 8
+	panel_style.corner_radius_top_right = 8
+	panel_style.corner_radius_bottom_left = 8
+	panel_style.corner_radius_bottom_right = 8
+	panel.add_theme_stylebox_override("panel", panel_style)
+	
+	var vbox = VBoxContainer.new()
+	vbox.position = Vector2(10, 10)
+	vbox.size = Vector2(260, 130)
+	panel.add_child(vbox)
+	
+	# Title
+	var title = Label.new()
+	title.text = "K-Means Clustering"
+	title.add_theme_font_size_override("font_size", 18)
+	title.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(title)
+	
+	# Stats labels
+	iteration_label = Label.new()
+	iteration_label.text = "Iteration: 0"
+	iteration_label.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(iteration_label)
+	
+	distance_label = Label.new()
+	distance_label.text = "Total Distance: 0.0"
+	distance_label.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(distance_label)
+	
+	status_label = Label.new()
+	status_label.text = "Status: Initializing"
+	status_label.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(status_label)
+	
+	var cluster_info = Label.new()
+	cluster_info.text = "Clusters: " + str(cluster_count) + " | Points: " + str(data_point_count)
+	cluster_info.add_theme_color_override("font_color", Color.LIGHT_GRAY)
+	vbox.add_child(cluster_info)
+	
+	return panel
+
+func create_control_panel() -> Panel:
+	var panel = Panel.new()
+	panel.position = Vector2(20, 190)
+	panel.size = Vector2(280, 200)
+	
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.1, 0.1, 0.1, 0.8)
+	panel_style.border_width_left = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.3, 0.3, 0.3)
+	panel_style.corner_radius_top_left = 8
+	panel_style.corner_radius_top_right = 8
+	panel_style.corner_radius_bottom_left = 8
+	panel_style.corner_radius_bottom_right = 8
+	panel.add_theme_stylebox_override("panel", panel_style)
+	
+	control_panel = VBoxContainer.new()
+	control_panel.position = Vector2(10, 10)
+	control_panel.size = Vector2(260, 180)
+	panel.add_child(control_panel)
+	
+	# Controls title
+	var title = Label.new()
+	title.text = "Controls"
+	title.add_theme_font_size_override("font_size", 16)
+	title.add_theme_color_override("font_color", Color.WHITE)
+	control_panel.add_child(title)
+	
+	# Control buttons
+	var restart_btn = Button.new()
+	restart_btn.text = "Restart (ESC)"
+	restart_btn.pressed.connect(restart_clustering)
+	control_panel.add_child(restart_btn)
+	
+	var pause_btn = Button.new()
+	pause_btn.text = "Pause/Resume (ENTER)"
+	pause_btn.pressed.connect(func(): is_paused = !is_paused)
+	control_panel.add_child(pause_btn)
+	
+	var step_btn = Button.new()
+	step_btn.text = "Step Forward (SPACE)"
+	step_btn.pressed.connect(func(): manual_step = true)
+	control_panel.add_child(step_btn)
+	
+	# Toggle switches
+	var connections_toggle = CheckBox.new()
+	connections_toggle.text = "Show Connections"
+	connections_toggle.button_pressed = show_connections
+	connections_toggle.toggled.connect(func(pressed): show_connections = pressed)
+	control_panel.add_child(connections_toggle)
+	
+	var voronoi_toggle = CheckBox.new()
+	voronoi_toggle.text = "Show Voronoi Regions"
+	voronoi_toggle.button_pressed = show_voronoi_regions
+	voronoi_toggle.toggled.connect(func(pressed): show_voronoi_regions = pressed)
+	control_panel.add_child(voronoi_toggle)
+	
+	return panel
+
+func create_convergence_graph() -> Panel:
+	var panel = Panel.new()
+	panel.position = Vector2(get_viewport().get_visible_rect().size.x - 320, 20)
+	panel.size = Vector2(300, 200)
+	
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.1, 0.1, 0.1, 0.8)
+	panel_style.border_width_left = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.3, 0.3, 0.3)
+	panel_style.corner_radius_top_left = 8
+	panel_style.corner_radius_top_right = 8
+	panel_style.corner_radius_bottom_left = 8
+	panel_style.corner_radius_bottom_right = 8
+	panel.add_theme_stylebox_override("panel", panel_style)
+	
+	# Graph will be drawn in _draw method
+	return panel
+
+## The cohort axis lives here. `blobs` keeps the legacy path exactly, including
+## the generate_clustered_data toggle; the other four are explicit layouts that
+## supersede the generate_clustered_data / natural_cluster_count / cluster_spread
+## / noise_points_percentage combination, because a shell or a spiral is not a
+## setting of a gaussian.
+func generate_data() -> void:
+	clear_data()
+
+	match cohort:
+		"block":
+			generate_random_dataset()
+		"rings":
+			generate_ring_dataset()
+		"braid":
+			generate_braid_dataset()
+		"skew":
+			generate_skewed_dataset()
+		_:
+			if generate_clustered_data:
+				generate_clustered_dataset()
+			else:
+				generate_random_dataset()
+
+
+func generate_clustered_dataset() -> void:
+	var points_per_cluster: int = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
+
+	# Generate natural clusters
+	for cluster_idx in range(natural_cluster_count):
+		var cluster_center: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/3, data_space_size/3),
+			_rng.randf_range(-3, 3),
+			_rng.randf_range(-data_space_size/3, data_space_size/3)
+		)
+
+		for i in range(points_per_cluster):
+			var angle: float = _rng.randf() * TAU
+			var distance: float = _rng.randf_range(0, cluster_spread)
+			var height_offset: float = _rng.randf_range(-cluster_spread/3, cluster_spread/3)
+
+			var offset: Vector3 = Vector3(
+				cos(angle) * distance,
+				height_offset,
+				sin(angle) * distance
+			)
+
+			var point: DataPoint = DataPoint.new(cluster_center + offset)
+			data_points.append(point)
+
+	# Add noise points
+	var noise_count: int = data_point_count - data_points.size()
+	for i in range(noise_count):
+		var random_pos: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
+		)
+		var point2: DataPoint = DataPoint.new(random_pos)
+		data_points.append(point2)
+
+func generate_random_dataset() -> void:
+	for i in range(data_point_count):
+		var random_pos: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
+		)
+		var point: DataPoint = DataPoint.new(random_pos)
+		data_points.append(point)
+
+## rings — 60 points on a 10.0 m shell 1.0 m thick around a 3.0 m core of 40.
+## Angles are evenly spaced with a sub-spacing jitter so the shell reads as a
+## shell rather than as a random annulus.
+func generate_ring_dataset() -> void:
+	var half_thick: float = RING_THICK * 0.5
+	var step: float = TAU / float(RING_N)
+	for i in range(RING_N):
+		var shell_angle: float = float(i) * step + _rng.randf_range(-step * 0.35, step * 0.35)
+		var shell_r: float = RING_RADIUS + _rng.randf_range(-half_thick, half_thick)
+		data_points.append(DataPoint.new(Vector3(
+			cos(shell_angle) * shell_r,
+			_rng.randf_range(-0.5, 0.5),
+			sin(shell_angle) * shell_r
+		)))
+
+	for j in range(CORE_N):
+		var core_angle: float = _rng.randf() * TAU
+		# sqrt keeps the core an even disc instead of a centre-heavy smear
+		var core_r: float = sqrt(_rng.randf()) * CORE_RADIUS
+		data_points.append(DataPoint.new(Vector3(
+			cos(core_angle) * core_r,
+			_rng.randf_range(-1.5, 1.5),
+			sin(core_angle) * core_r
+		)))
+
+## braid — two interleaved spiral arms of 50, two turns, 1.5 m apart at closest
+## approach. The arms are the same spiral rotated by PI, which is what makes the
+## nearest neighbour of nearly every point a member of the other arm.
+func generate_braid_dataset() -> void:
+	var pitch: float = BRAID_GAP / PI
+	var sweep: float = BRAID_TURNS * TAU
+	for arm in range(2):
+		var phase: float = float(arm) * PI
+		for i in range(BRAID_ARM_N):
+			var t: float = float(i) / float(BRAID_ARM_N - 1)
+			var theta: float = t * sweep
+			var r: float = BRAID_INNER_RADIUS + pitch * theta
+			var a: float = theta + phase
+			data_points.append(DataPoint.new(Vector3(
+				cos(a) * r,
+				_rng.randf_range(-BRAID_Y_JITTER, BRAID_Y_JITTER),
+				sin(a) * r
+			)))
+
+## skew — 88 points in one dominant disc at the origin, plus two 6-point clusters
+## 11 m out and 7.6 m apart from each other. Four centroids over three groups of
+## wildly unequal mass.
+func generate_skewed_dataset() -> void:
+	for i in range(SKEW_MAJOR_N):
+		var major_angle: float = _rng.randf() * TAU
+		var major_r: float = sqrt(_rng.randf()) * SKEW_MAJOR_RADIUS
+		data_points.append(DataPoint.new(Vector3(
+			cos(major_angle) * major_r,
+			_rng.randf_range(-2.0, 2.0),
+			sin(major_angle) * major_r
+		)))
+
+	for bearing in SKEW_MINOR_BEARINGS:
+		var b: float = float(bearing)
+		var cx: float = cos(b) * SKEW_MINOR_DISTANCE
+		var cz: float = sin(b) * SKEW_MINOR_DISTANCE
+		for j in range(SKEW_MINOR_N):
+			var minor_angle: float = _rng.randf() * TAU
+			var minor_r: float = sqrt(_rng.randf()) * SKEW_MINOR_RADIUS
+			data_points.append(DataPoint.new(Vector3(
+				cx + cos(minor_angle) * minor_r,
+				_rng.randf_range(-0.8, 0.8),
+				cz + sin(minor_angle) * minor_r
+			)))
+
+func initialize_centroids() -> void:
+	clear_centroids()
+	
+	# K-means++ initialization for better initial centroid placement
+	if data_points.size() > 0:
+		# Choose first centroid randomly
+		var first_centroid = Centroid.new(data_points[_rng.randi() % data_points.size()].position, 0)
+		centroids.append(first_centroid)
+		
+		# Choose remaining centroids with probability proportional to squared distance
+		for i in range(1, cluster_count):
+			var distances: Array = []
+			var total_distance = 0.0
+			
+			for point in data_points:
+				var min_dist = INF
+				for centroid in centroids:
+					var dist = point.position.distance_squared_to(centroid.position)
+					min_dist = min(min_dist, dist)
+				distances.append(min_dist)
+				total_distance += min_dist
+			
+			var random_value = _rng.randf() * total_distance
+			var cumulative = 0.0
+			
+			for j in range(distances.size()):
+				cumulative += distances[j]
+				if cumulative >= random_value:
+					var centroid = Centroid.new(data_points[j].position, i)
+					centroids.append(centroid)
+					break
+	
+	# Initialize assignments
+	assignments.clear()
+	previous_assignments.clear()
+	for i in range(data_points.size()):
+		assignments.append(-1)
+		previous_assignments.append(-1)
+
+func create_visuals() -> void:
+	clear_visuals()
+	
+	# Create data point visuals
+	for point in data_points:
+		var mesh_instance = MeshInstance3D.new()
+		var sphere = SphereMesh.new()
+		sphere.radius = 0.3 * point_size_scale
+		sphere.height = 0.6 * point_size_scale
+		mesh_instance.mesh = sphere
+		
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color(0.8, 0.8, 0.8)
+		material.metallic = 0.3
+		material.roughness = 0.7
+		mesh_instance.material_override = material
+		mesh_instance.position = point.position
+		
+		point.mesh_instance = mesh_instance
+		add_child(mesh_instance)
+		_spawned.append(mesh_instance)
+		point_meshes.append(mesh_instance)
+	
+	# Create centroid visuals
+	for centroid in centroids:
+		var mesh_instance = MeshInstance3D.new()
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = 0.8
+		cylinder.bottom_radius = 0.8
+		cylinder.height = 0.4
+		mesh_instance.mesh = cylinder
+		
+		var material = StandardMaterial3D.new()
+		material.albedo_color = cluster_colors[centroid.cluster_id]
+		material.emission_enabled = _emissive
+		material.emission = material.albedo_color * 0.6
+		material.metallic = 0.8
+		material.roughness = 0.2
+		mesh_instance.material_override = material
+		mesh_instance.position = centroid.position
+
+		centroid.mesh_instance = mesh_instance
+		add_child(mesh_instance)
+		_spawned.append(mesh_instance)
+		centroid_meshes.append(mesh_instance)
+
+func start_clustering() -> void:
+	iteration = 0
+	converged = false
+	is_paused = false
+	distance_history.clear()
+	centroid_movement_history.clear()
+	
+
+func perform_clustering_step() -> void:
+	if converged:
+		return
+	
+	iteration += 1
+	
+	# Store previous assignments
+	previous_assignments = assignments.duplicate()
+	
+	# Store previous centroid positions
+	for centroid in centroids:
+		centroid.previous_position = centroid.position
+	
+	# Assignment step
+	total_distance = 0.0
+	for i in range(data_points.size()):
+		var point = data_points[i]
+		var min_distance = INF
+		var nearest_cluster = 0
+		
+		for j in range(centroids.size()):
+			var distance = point.position.distance_to(centroids[j].position)
+			if distance < min_distance:
+				min_distance = distance
+				nearest_cluster = j
+		
+		assignments[i] = nearest_cluster
+		point.cluster_id = nearest_cluster
+		point.distance_to_centroid = min_distance
+		total_distance += min_distance
+	
+	# Update step
+	var total_movement = 0.0
+	for i in range(centroids.size()):
+		var centroid = centroids[i]
+		var sum_pos = Vector3.ZERO
+		var count = 0
+		centroid.assigned_points.clear()
+		
+		for j in range(data_points.size()):
+			if assignments[j] == i:
+				sum_pos += data_points[j].position
+				count += 1
+				centroid.assigned_points.append(data_points[j])
+		
+		if count > 0:
+			var new_position = sum_pos / count
+			centroid.movement_distance = centroid.position.distance_to(new_position)
+			total_movement += centroid.movement_distance
+			centroid.position = new_position
+	
+	# Record statistics
+	distance_history.append(total_distance)
+	centroid_movement_history.append(total_movement)
+	
+	# Check convergence
+	if total_movement < convergence_threshold or iteration >= 50:
+		converged = true
+		if pause_on_convergence:
+			is_paused = true
+	
+	# Update visuals
+	update_visuals()
+
+func update_visuals() -> void:
+	# Update point colors and highlight changes
+	for i in range(data_points.size()):
+		var point = data_points[i]
+		var cluster_id = assignments[i]
+		var changed = (previous_assignments[i] != cluster_id)
+		
+		if cluster_id >= 0 and cluster_id < cluster_colors.size():
+			var material = point.mesh_instance.material_override
+			material.albedo_color = cluster_colors[cluster_id]
+			
+			if _emissive and changed and iteration > 1:
+				# Highlight recently changed points
+				material.emission_enabled = true
+				material.emission = Color.WHITE * 0.5
+				# Remove highlight after brief period
+				create_tween().tween_callback(func(): 
+					if material:
+						material.emission_enabled = false
+				).set_delay(0.3)
+			else:
+				material.emission_enabled = false
+	
+	# Update centroid positions with smooth animation
+	for centroid in centroids:
+		if centroid.mesh_instance:
+			var tween = create_tween()
+			tween.tween_property(centroid.mesh_instance, "position", centroid.position, 0.5)
+			
+			# Highlight moving centroids
+			if _emissive and highlight_moving_centroids and centroid.movement_distance > 0.1:
+				var material = centroid.mesh_instance.material_override
+				var original_emission = material.emission
+				material.emission = Color.WHITE
+				tween.tween_callback(func(): 
+					if material:
+						material.emission = original_emission
+				).set_delay(0.5)
+	
+	# Update connections
+	if show_connections:
+		update_connection_lines()
+	
+	# Update voronoi regions
+	if show_voronoi_regions:
+		update_voronoi_regions()
+
+func update_connection_lines() -> void:
+	clear_connections()
+	
+	# Limit connections for performance
+	var max_connections = min(50, data_points.size())
+	for i in range(max_connections):
+		var point = data_points[i]
+		var cluster_id = assignments[i]
+		
+		if cluster_id >= 0 and cluster_id < centroids.size():
+			var line = create_connection_line(
+				point.position, 
+				centroids[cluster_id].position, 
+				cluster_colors[cluster_id]
+			)
+			connection_lines.append(line)
+
+func create_connection_line(from: Vector3, to: Vector3, color: Color) -> MeshInstance3D:
+	var line_mesh = MeshInstance3D.new()
+	var cylinder = CylinderMesh.new()
+	cylinder.top_radius = 0.03
+	cylinder.bottom_radius = 0.03
+	cylinder.height = 1.0
+	line_mesh.mesh = cylinder
+	
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(color.r, color.g, color.b, 0.4)
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.no_depth_test = true
+	line_mesh.material_override = material
+	
+	# Position and orient line
+	var center = (from + to) / 2
+	var direction = (to - from).normalized()
+	var distance = from.distance_to(to)
+	
+	line_mesh.position = center
+	line_mesh.look_at_from_position(line_mesh.position, center + direction, Vector3.UP)
+	line_mesh.rotate_object_local(Vector3(1, 0, 0), PI/2)
+	line_mesh.scale.y = distance
+
+	add_child(line_mesh)
+	_spawned.append(line_mesh)
+	return line_mesh
+
+func update_voronoi_regions() -> void:
+	clear_voronoi()
+	
+	# Create simplified voronoi visualization using planes
+	for i in range(centroids.size()):
+		var centroid = centroids[i]
+		var plane_mesh = MeshInstance3D.new()
+		var plane = PlaneMesh.new()
+		plane.size = Vector2(data_space_size / 2, data_space_size / 2)
+		plane_mesh.mesh = plane
+		
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color(cluster_colors[i].r, cluster_colors[i].g, cluster_colors[i].b, 0.1)
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		plane_mesh.material_override = material
+		
+		plane_mesh.position = centroid.position
+		add_child(plane_mesh)
+		_spawned.append(plane_mesh)
+		voronoi_planes.append(plane_mesh)
+
+func update_ui() -> void:
+	if not ui_container:
+		return
+	
+	if iteration_label:
+		iteration_label.text = "Iteration: " + str(iteration)
+	
+	if distance_label:
+		distance_label.text = "Total Distance: " + str(snapped(total_distance, 0.1))
+	
+	if status_label:
+		var status = ""
+		if converged:
+			status = "Status: Converged! ✓"
+		elif is_paused:
+			status = "Status: Paused"
+		elif iteration >= 50:
+			status = "Status: Max iterations reached"
+		else:
+			status = "Status: Clustering..."
+		status_label.text = status
+
+# Utility functions
+func clear_data() -> void:
+	data_points.clear()
+
+func clear_centroids() -> void:
+	centroids.clear()
+
+## Un-parent then free, and forget it. queue_free alone leaves the node in the
+## tree for the rest of the frame, which is how a rebuild ends up measured with
+## stale geometry; remove_child makes the AABB honest immediately.
+func _despawn(node: Node) -> void:
+	if node == null:
+		return
+	_spawned.erase(node)
+	if node.get_parent() == self:
+		remove_child(node)
+	node.queue_free()
+
+func clear_visuals() -> void:
+	for mesh in point_meshes:
+		_despawn(mesh)
+	point_meshes.clear()
+
+	for mesh2 in centroid_meshes:
+		_despawn(mesh2)
+	centroid_meshes.clear()
+
+	clear_connections()
+	clear_voronoi()
+
+func clear_connections() -> void:
+	for line in connection_lines:
+		_despawn(line)
+	connection_lines.clear()
+
+func clear_voronoi() -> void:
+	for plane in voronoi_planes:
+		_despawn(plane)
+	voronoi_planes.clear()
+
+func update_centroid_visibility() -> void:
+	for mesh in centroid_meshes:
+		if mesh:
+			mesh.visible = show_centroids
+
+func update_connection_visibility() -> void:
+	for line in connection_lines:
+		if line:
+			line.visible = show_connections
+
+func update_voronoi_visibility() -> void:
+	for plane in voronoi_planes:
+		if plane:
+			plane.visible = show_voronoi_regions
+
+func update_point_sizes() -> void:
+	for point in data_points:
+		if point.mesh_instance and point.mesh_instance.mesh:
+			var sphere = point.mesh_instance.mesh as SphereMesh
+			if sphere:
+				sphere.radius = 0.3 * point_size_scale
+				sphere.height = 0.6 * point_size_scale
+
+## ESC in the standalone demo. Advances the seed so a restart really is a new
+## initialisation, and stays reproducible: restart n of cohort c is always the
+## same cloud. A build resets the counter, so the evidence never sees n > 0.
+func restart_clustering() -> void:
+	_restart_count += 1
+	_seed_rng()
+	clear_visuals()
+	generate_data()
+	initialize_centroids()
+	create_visuals()
+	start_clustering()
+
+func regenerate_data() -> void:
+	if not is_inside_tree():
+		return
+	_restart_count += 1
+	_seed_rng()
+	clear_visuals()
+	generate_data()
+	initialize_centroids()
+	create_visuals()
+	if animate_clustering:
+		start_clustering()
+
+# Educational helper functions
+func get_algorithm_explanation() -> String:
+	return """
+K-Means Clustering Algorithm:
+
+1. Initialize: Place K centroids randomly in the data space
+2. Assignment: Assign each data point to the nearest centroid
+3. Update: Move each centroid to the center of its assigned points
+4. Repeat: Continue steps 2-3 until convergence
+
+Convergence occurs when centroids stop moving significantly
+or when point assignments no longer change.
+
+Controls:
+- SPACE: Step forward (in step-by-step mode)
+- ENTER: Pause/Resume
+- ESC: Restart with new random initialization
+"""
+
+func get_current_stats() -> Dictionary:
+	return {
+		"iteration": iteration,
+		"total_distance": total_distance,
+		"converged": converged,
+		"cluster_count": cluster_count,
+		"data_point_count": data_point_count,
+		"centroid_movement": centroid_movement_history[-1] if centroid_movement_history.size() > 0 else 0.0
+	}
+
+# Advanced educational features
+func analyze_cluster_quality() -> Dictionary:
+	if not converged or centroids.size() == 0:
+		return {}
+	
+	var inertia = 0.0  # Within-cluster sum of squares
+	var silhouette_scores = []
+	var cluster_densities = []
+	
+	# Calculate inertia (WCSS - Within-Cluster Sum of Squares)
+	for i in range(data_points.size()):
+		var point = data_points[i]
+		var cluster_id = assignments[i]
+		if cluster_id >= 0 and cluster_id < centroids.size():
+			var distance = point.position.distance_squared_to(centroids[cluster_id].position)
+			inertia += distance
+	
+	# Calculate cluster densities
+	for centroid in centroids:
+		var points_in_cluster = centroid.assigned_points.size()
+		var avg_distance = 0.0
+		
+		if points_in_cluster > 0:
+			for point in centroid.assigned_points:
+				avg_distance += point.distance_to_centroid
+			avg_distance /= points_in_cluster
+		
+		cluster_densities.append({
+			"cluster_id": centroid.cluster_id,
+			"point_count": points_in_cluster,
+			"avg_distance_to_centroid": avg_distance
+		})
+	
+	return {
+		"inertia": inertia,
+		"cluster_densities": cluster_densities,
+		"iterations_to_converge": iteration,
+		"final_centroid_movement": centroid_movement_history[-1] if centroid_movement_history.size() > 0 else 0.0
+	}
+
+func export_clustering_data() -> Dictionary:
+	var export_data = {
+		"metadata": {
+			"algorithm": "K-Means",
+			"timestamp": Time.get_datetime_string_from_system(),
+			"parameters": {
+				"k": cluster_count,
+				"data_points": data_point_count,
+				"convergence_threshold": convergence_threshold,
+				"max_iterations": 50
+			}
+		},
+		"results": {
+			"converged": converged,
+			"iterations": iteration,
+			"final_inertia": total_distance,
+			"convergence_history": distance_history.duplicate(),
+			"centroid_movement_history": centroid_movement_history.duplicate()
+		},
+		"data_points": [],
+		"centroids": [],
+		"cluster_assignments": assignments.duplicate()
+	}
+	
+	# Export data point positions
+	for point in data_points:
+		export_data.data_points.append({
+			"position": [point.position.x, point.position.y, point.position.z],
+			"cluster_id": point.cluster_id
+		})
+	
+	# Export final centroid positions
+	for centroid in centroids:
+		export_data.centroids.append({
+			"position": [centroid.position.x, centroid.position.y, centroid.position.z],
+			"cluster_id": centroid.cluster_id,
+			"assigned_points": centroid.assigned_points.size()
+		})
+	
+	return export_data
+
+# Performance monitoring
+var performance_metrics = {
+	"frame_times": [],
+	"update_times": [],
+	"render_times": []
+}
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		# Clean up resources
+		clear_visuals()
+		get_tree().quit()
+
+# Advanced visualization features
+func create_3d_convergence_visualization() -> void:
+	"""Create a 3D trail showing centroid movement over time"""
+	if centroid_movement_history.size() < 2:
+		return
+	
+	for i in range(centroids.size()):
+		var centroid = centroids[i]
+		# Store historical positions for trail rendering
+		if not centroid.has_method("position_history"):
+			centroid.set_meta("position_history", [])
+		
+		var history = centroid.get_meta("position_history", [])
+		history.append(centroid.position)
+		
+		# Keep only last 10 positions
+		if history.size() > 10:
+			history.pop_front()
+		
+		centroid.set_meta("position_history", history)
+		
+		# Create trail visualization
+		create_centroid_trail(centroid, history)
+
+func create_centroid_trail(centroid: Centroid, positions: Array) -> void:
+	if positions.size() < 2:
+		return
+	
+	for i in range(positions.size() - 1):
+		var from = positions[i]
+		var to = positions[i + 1]
+		
+		var trail_line = MeshInstance3D.new()
+		var cylinder = CylinderMesh.new()
+		cylinder.top_radius = 0.05
+		cylinder.bottom_radius = 0.05
+		cylinder.height = 1.0
+		trail_line.mesh = cylinder
+		
+		var material = StandardMaterial3D.new()
+		var alpha = float(i) / float(positions.size() - 1) * 0.6
+		material.albedo_color = Color(cluster_colors[centroid.cluster_id].r, 
+									  cluster_colors[centroid.cluster_id].g, 
+									  cluster_colors[centroid.cluster_id].b, alpha)
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		trail_line.material_override = material
+		
+		var center = (from + to) / 2
+		var direction = (to - from).normalized()
+		var distance = from.distance_to(to)
+		
+		trail_line.position = center
+		trail_line.look_at_from_position(trail_line.position, center + direction, Vector3.UP)
+		trail_line.rotate_object_local(Vector3(1, 0, 0), PI/2)
+		trail_line.scale.y = distance
+		
+		add_child(trail_line)
+		
+		# Auto-remove after some time
+		var timer = Timer.new()
+		timer.wait_time = 3.0
+		timer.timeout.connect(func(): trail_line.queue_free())
+		timer.one_shot = true
+		add_child(timer)
+		timer.start()
+
+# Interactive features
+func _on_data_point_clicked(point: DataPoint) -> void:
+	"""Handle clicking on data points for detailed information"""
+	show_point_info(point)
+
+func show_point_info(point: DataPoint) -> void:
+	var info_panel = create_info_panel(point)
+	ui_container.add_child(info_panel)
+	
+	# Auto-remove after 3 seconds
+	var timer = Timer.new()
+	timer.wait_time = 3.0
+	timer.timeout.connect(func(): info_panel.queue_free())
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+
+func create_info_panel(point: DataPoint) -> Panel:
+	var panel = Panel.new()
+	panel.position = Vector2(get_viewport().get_visible_rect().size.x / 2 - 150, 50)
+	panel.size = Vector2(300, 120)
+	
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.2, 0.2, 0.2, 0.9)
+	panel_style.border_width_left = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = cluster_colors[point.cluster_id] if point.cluster_id >= 0 else Color.WHITE
+	panel_style.corner_radius_top_left = 8
+	panel_style.corner_radius_top_right = 8
+	panel_style.corner_radius_bottom_left = 8
+	panel_style.corner_radius_bottom_right = 8
+	panel.add_theme_stylebox_override("panel", panel_style)
+	
+	var vbox = VBoxContainer.new()
+	vbox.position = Vector2(10, 10)
+	vbox.size = Vector2(280, 100)
+	panel.add_child(vbox)
+	
+	var title = Label.new()
+	title.text = "Data Point Information"
+	title.add_theme_font_size_override("font_size", 14)
+	title.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(title)
+	
+	var position_label = Label.new()
+	position_label.text = "Position: (%.1f, %.1f, %.1f)" % [point.position.x, point.position.y, point.position.z]
+	position_label.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(position_label)
+	
+	var cluster_label = Label.new()
+	cluster_label.text = "Cluster: " + str(point.cluster_id)
+	cluster_label.add_theme_color_override("font_color", cluster_colors[point.cluster_id] if point.cluster_id >= 0 else Color.WHITE)
+	vbox.add_child(cluster_label)
+	
+	var distance_label = Label.new()
+	distance_label.text = "Distance to Centroid: %.2f" % point.distance_to_centroid
+	distance_label.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(distance_label)
+	
+	return panel
+
+# Educational assessment features
+func generate_learning_report() -> Dictionary:
+	var quality_metrics = analyze_cluster_quality()
+	
+	var report = {
+		"student_performance": {
+			"understanding_level": "intermediate",  # Would be determined by interaction patterns
+			"key_concepts_grasped": [
+				"centroid_movement",
+				"iterative_convergence",
+				"cluster_assignment"
+			],
+			"areas_for_improvement": [
+				"optimal_k_selection",
+				"initialization_sensitivity"
+			]
+		},
+		"algorithm_performance": quality_metrics,
+		"recommendations": [
+			"Try different values of K to see how it affects clustering",
+			"Compare clustered vs random data generation",
+			"Observe how initialization affects final results"
+		]
+	}
+	
+	return report
+
+# Experiment modes for educational purposes
+func run_k_comparison_experiment() -> void:
+	"""Run clustering with different K values to demonstrate elbow method"""
+	var k_values = [2, 3, 4, 5, 6, 7, 8]
+	var inertias = []
+	
+	for k in k_values:
+		var original_k = cluster_count
+		cluster_count = k
+		
+		restart_clustering()
+		
+		# Run to convergence (simplified for demo)
+		while not converged and iteration < 50:
+			perform_clustering_step()
+		
+		var quality = analyze_cluster_quality()
+		inertias.append(quality.get("inertia", 0.0))
+		
+		# Restore original K
+		cluster_count = original_k
+	
+	# Display results
+	show_elbow_analysis(k_values, inertias)
+
+func show_elbow_analysis(k_values: Array, inertias: Array) -> void:
+	pass
+
+# Advanced initialization methods
+func initialize_centroids_plus_plus() -> void:
+	"""K-means++ initialization - already implemented in initialize_centroids()"""
+	pass
+
+func initialize_centroids_random() -> void:
+	"""Pure random initialization"""
+	clear_centroids()
+	
+	for i in range(cluster_count):
+		var random_pos = Vector3(
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
+		)
+		var centroid = Centroid.new(random_pos, i)
+		centroids.append(centroid)
+	
+	# Initialize assignments
+	assignments.clear()
+	previous_assignments.clear()
+	for i in range(data_points.size()):
+		assignments.append(-1)
+		previous_assignments.append(-1)
+
+func initialize_centroids_data_points() -> void:
+	"""Initialize centroids at random data point positions"""
+	clear_centroids()
+	
+	if data_points.size() >= cluster_count:
+		var selected_indices = []
+		
+		for i in range(cluster_count):
+			var random_index = _rng.randi() % data_points.size()
+			while random_index in selected_indices:
+				random_index = _rng.randi() % data_points.size()
+			
+			selected_indices.append(random_index)
+			var centroid = Centroid.new(data_points[random_index].position, i)
+			centroids.append(centroid)
+	
+	# Initialize assignments
+	assignments.clear()
+	previous_assignments.clear()
+	for i in range(data_points.size()):
+		assignments.append(-1)
+		previous_assignments.append(-1)
+
+# Save/Load functionality
+func save_clustering_session(filename: String) -> void:
+	var save_data = export_clustering_data()
+	var file = FileAccess.open("user://clustering_sessions/" + filename + ".json", FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(save_data))
+		file.close()
+		print("Session saved to: ", filename)
+
+func load_clustering_session(filename: String) -> bool:
+	var file = FileAccess.open("user://clustering_sessions/" + filename + ".json", FileAccess.READ)
+	if not file:
+		print("Could not load session: ", filename)
+		return false
+	
+	var json_string = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	
+	if parse_result != OK:
+		print("Error parsing session file")
+		return false
+	
+	var data = json.data
+	
+	# Restore parameters
+	cluster_count = data.metadata.parameters.k
+	data_point_count = data.metadata.parameters.data_points
+	convergence_threshold = data.metadata.parameters.convergence_threshold
+	
+	# Restore state
+	converged = data.results.converged
+	iteration = data.results.iterations
+	distance_history = data.results.convergence_history
+	centroid_movement_history = data.results.centroid_movement_history
+	assignments = data.cluster_assignments
+	
+	return true
+
+# Performance optimization
+func optimize_rendering_for_large_datasets() -> void:
+	"""Implement LOD (Level of Detail) for large datasets"""
+	var camera_pos = get_viewport().get_camera_3d().global_position
+	
+	for i in range(data_points.size()):
+		var point = data_points[i]
+		var distance = point.position.distance_to(camera_pos)
+		
+		if distance > 50:
+			# Use lower detail mesh or hide completely
+			point.mesh_instance.visible = false
+		elif distance > 25:
+			# Use medium detail
+			point.mesh_instance.visible = true
+			point.mesh_instance.scale = Vector3(0.5, 0.5, 0.5)
+		else:
+			# Use full detail
+			point.mesh_instance.visible = true
+			point.mesh_instance.scale = Vector3(1.0, 1.0, 1.0)
+
+# Additional utility functions
+func get_cluster_statistics() -> Array:
+	var stats = []
+	
+	for centroid in centroids:
+		var cluster_stats = {
+			"cluster_id": centroid.cluster_id,
+			"centroid_position": centroid.position,
+			"point_count": centroid.assigned_points.size(),
+			"average_distance": 0.0,
+			"variance": 0.0
+		}
+		
+		if centroid.assigned_points.size() > 0:
+			var total_distance = 0.0
+			for point in centroid.assigned_points:
+				total_distance += point.distance_to_centroid
+			cluster_stats.average_distance = total_distance / centroid.assigned_points.size()
+			
+			# Calculate variance
+			var variance_sum = 0.0
+			for point in centroid.assigned_points:
+				var diff = point.distance_to_centroid - cluster_stats.average_distance
+				variance_sum += diff * diff
+			cluster_stats.variance = variance_sum / centroid.assigned_points.size()
+		
+		stats.append(cluster_stats)
+	
+	return stats
+
+func print_algorithm_summary() -> void:
+	print("\n=== K-Means Clustering Summary ===")
+	print("Clusters: ", cluster_count)
+	print("Data Points: ", data_point_count)
+	print("Iterations: ", iteration)
+	print("Converged: ", converged)
+	print("Final Inertia: ", snapped(total_distance, 0.01))
+	print("================================\n")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+## Arrives via call_deferred from GridInteractablesComponent, after _ready() and
+## first in the deferred queue — so the body already exists and this can only
+## ever be a rebuild.
+##
+## curation_station hands every artifact it curates {"emissive": false}. That
+## dict carries no axis key, so it must change nothing about the layout — and
+## `emissive` itself is applied IN PLACE, above the early returns, because a key
+## that is accepted and then dropped by a return is worse than a key refused.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_cohort: String = cohort
+	var before_count: int = natural_cluster_count
+	if config_data.has("natural_cluster_count"):
+		natural_cluster_count = int(config_data["natural_cluster_count"])
+	if str(config_data.get("lesson_controls", "off")).to_lower() in ["on", "true", "1"]:
+		_lesson_mode = true
+		_create_lesson_controls()
+
+	if config_data.has("cohort"):
+		cohort = _pick_axis(str(config_data["cohort"]), COHORTS, cohort)
+
+	# Non-geometry keys, applied in place before any return.
+	if config_data.has("emissive"):
+		_set_emissive(bool(config_data["emissive"]))
+	if config_data.has("show_centroids"):
+		show_centroids = bool(config_data["show_centroids"])
+	if config_data.has("show_connections"):
+		show_connections = bool(config_data["show_connections"])
+	if config_data.has("show_voronoi_regions"):
+		show_voronoi_regions = bool(config_data["show_voronoi_regions"])
+
+	if not _built:
+		return
+	if cohort == before_cohort and natural_cluster_count == before_count:
+		return
+
+	_rebuild_now()
+
+func _create_lesson_controls() -> void:
+	if is_instance_valid(_lesson_controls):
+		return
+	if is_instance_valid(ui_container):
+		ui_container.hide()
+	for child in get_children():
+		if child is CanvasLayer: child.hide()
+	_lesson_controls = Node3D.new()
+	_lesson_controls.name = "LessonControls"
+	# Map scale is 0.2: controls are at 1.15 m including the 0.15 m display lift.
+	_lesson_controls.position = Vector3(0, 5, -13)
+	_lesson_controls.scale = Vector3.ONE * 10.0
+	_lesson_controls.rotation.y = PI
+	add_child(_lesson_controls)
+	var actions: Array[Callable] = [_lesson_next_dataset, _lesson_reset, _lesson_pause, _lesson_step]
+	var names: Array[String] = ["DATASET", "RESET", "PAUSE / RUN", "STEP"]
+	for i in range(names.size()):
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = names[i].replace(" / ", "_")
+		button.position = Vector3((i % 2 - 0.5) * 0.28, -floori(i / 2.0) * 0.16, 0)
+		_lesson_controls.add_child(button)
+		button.pressed.connect(actions[i])
+		var label := Label3D.new()
+		label.text = names[i]
+		label.font_size = 20
+		label.pixel_size = 0.001
+		label.position = button.position + Vector3(0, 0.06, 0.02)
+		_lesson_controls.add_child(label)
+	_lesson_label = Label3D.new()
+	_lesson_label.font_size = 22
+	_lesson_label.pixel_size = 0.001
+	_lesson_label.position = Vector3(0, 0.18, 0)
+	_lesson_controls.add_child(_lesson_label)
+	_update_lesson_label()
+
+func _lesson_next_dataset() -> void:
+	var index := LESSON_COHORTS.find(cohort)
+	cohort = LESSON_COHORTS[(index + 1) % LESSON_COHORTS.size()]
+	_lesson_reset()
+
+func _lesson_reset() -> void:
+	_rebuild_now()
+	is_paused = true
+	_update_lesson_label()
+
+func _lesson_pause() -> void:
+	is_paused = not is_paused
+	_update_lesson_label()
+
+func _lesson_step() -> void:
+	is_paused = true
+	perform_clustering_step()
+	_update_lesson_label()
+
+func _update_lesson_label() -> void:
+	if is_instance_valid(_lesson_label):
+		_lesson_label.text = "%s  /  K = %d\n%s  /  step %d\nTotal distance: %.1f" % [cohort.to_upper(), cluster_count, "PAUSED" if is_paused else "RUNNING", iteration, total_distance]
+
+## Accept an axis value only if it names something we actually build. A typo has
+## to land on the shipped look rather than on an empty 25 m room.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## The only emissive surfaces on this artifact are the four centroid pucks (and
+## the brief white flash on reassigned points). Applied live to the materials
+## that already exist, and remembered so a later rebuild honours it.
+func _set_emissive(enabled: bool) -> void:
+	_emissive = enabled
+	for mesh in centroid_meshes:
+		if mesh == null:
+			continue
+		var mat: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+		if mat:
+			mat.emission_enabled = enabled
+
+## SYNCHRONOUS. No call_deferred anywhere in the build path: a deferred rebuild
+## that removes children first leaves auto-grounding measuring a zero AABB, and
+## it bails. Frees only what this script parented to self.
+func _rebuild_now() -> void:
+	for c in _spawned.duplicate():
+		_despawn(c)
+	_spawned.clear()
+
+	point_meshes.clear()
+	centroid_meshes.clear()
+	connection_lines.clear()
+	voronoi_planes.clear()
+	data_points.clear()
+	centroids.clear()
+	assignments.clear()
+	previous_assignments.clear()
+	distance_history.clear()
+	centroid_movement_history.clear()
+	iteration = 0
+	converged = false
+	total_distance = 0.0
+	algorithm_timer = 0.0
+
+	_build_all()

@@ -1,0 +1,42 @@
+	report["checks"]=[]
+	var study: Node3D=nodes.get("MolecularDesigner")
+	check(report,is_instance_valid(study),"Assembly instantiates")
+	if not is_instance_valid(study):
+		quit(1)
+		return
+	study.set_process(false)
+	for part in study.parts: part.set_process(false)
+	check(report,study.body_study and study.scale.is_equal_approx(Vector3.ONE*2),"Enlarged automatic body study configured")
+	check(report,study.float_duration==8 and study.assemble_duration==18,"Hall gives assembled forms eighteen seconds")
+	check(report,study.parts.size()==40,"Forty initial carriers")
+	var nearby: bool=true
+	for p in study.parts: nearby=nearby and p.global_position.distance_to(study.global_position)<9
+	check(report,nearby,"Initial inventory stands in this hall instead of at world origin")
+	var part: Node3D=study.parts[0]
+	var identity: int=part.get_instance_id()
+	study._assemble("VRBody")
+	var n: Dictionary=study.assemblies.VRBody.nodes[0]
+	var expected: Vector3=study.to_global(Vector3(n.pos[0],n.pos[1],n.pos[2])*float(study.assemblies.VRBody.scale))
+	check(report,part.target_pos.is_equal_approx(expected),"Assembly targets honor root scale and hall transform")
+	var body_mesh: Mesh=part.mesh_node.mesh
+	check(report,study._witness.get_parent()==part,"Amber witness belongs to the persistent part instance")
+	settle(study,18)
+	check(report,part.global_position.distance_to(part.target_pos)<.2,"Body reaches its authored target neighbourhood during the displayed phase")
+	study._assemble("Chair")
+	check(report,part.get_instance_id()==identity and part.mesh_node.mesh.get_class()!=body_mesh.get_class(),"The same carrier changes catalogue mesh for the chair")
+	check(report,study._witness.get_parent()==part,"Witness remains with the carrier after retyping")
+	var count: int=study.assemblies.Chair.nodes.size()
+	var surplus_clear: bool=true
+	for i in range(count,study.parts.size()):surplus_clear=surplus_clear and not study.parts[i].target_active
+	check(report,surplus_clear,"Shorter assembly releases surplus carriers from old targets")
+	check(report,study.bond_pairs.size()==study.assemblies.Chair.bonds.size(),"Bond count matches authored relations")
+	settle(study,18)
+	check(report,abs(study.parts[count].position.x)>1.5,"Surplus parts move visibly to the side")
+	study._set_float_mode()
+	check(report,study.parts[count].is_processing(),"Released surplus resumes floating")
+	check(report,study.bonds.is_empty() and not part.target_active,"Floating releases targets and bonds")
+	var pos: Vector3=part.position
+	part._float_idle(0)
+	check(report,part.position.is_equal_approx(pos),"Zero elapsed time cannot cause floating displacement")
+	study._assemble("VRBody")
+	settle(study,18)

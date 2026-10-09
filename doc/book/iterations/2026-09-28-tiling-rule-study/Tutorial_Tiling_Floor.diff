@@ -1,0 +1,26 @@
+--- before/Tutorial_Tiling_Floor/final.md
++++ current/Tutorial_Tiling_Floor/final.md
+@@ -6,11 +6,21 @@
+ 
+ <!-- @tiling_principles -->
+ 
+-Begin at TRANSLATE. Follow the diagonal through a row. The same square returns at the next address with the same orientation. A single tile has become a field through placement.
++At the entrance, two four-by-four samples sit beside a short instruction. For now, both repeat the same tile. Press APPLY / UNDO. The left sample holds still; on the right, each address receives an extra turn. A figure crosses the joints. No larger tile has been added.
++
++The larger field beside the desk changes with it. An orange outline marks the same sixteen addresses inside a field of 256. The instruction has not grown longer. It is being asked again at more places.
++
++NEXT TILE moves a small outline through the samples. Beside it, the rule works out what happens at that address. At [1, 0], the added turn is one quarter-turn; at [2, 0], it is two. Undo the instruction and those differences disappear together. NEXT RULE offers another small alteration: exchange black and white, reflect a column, shift a row. ONE EXCEPTION lets the change stay at one address. A local edit and a rule repeated everywhere need not have the same reach.
++
++![The four-by-four rule study inside the museum, with unchanged and changed samples beside the instruction.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/floor-rule-after.png)
++
++*The same tile before and after adding an address-dependent quarter-turn. The marked address can be followed through all sixteen places. The larger floor field uses the same calculation.*
++
++Carry one of these changes into the six comparison fields. Begin at TRANSLATE. Follow the diagonal through a row. The same square returns at the next address with the same orientation. A single tile has become a field through placement.
+ 
+ At ALTERNATE, neighbouring tiles exchange black and white. At QUARTER TURN, the tile's orientation advances with its address. REFLECT reverses it in alternate columns. SHIFT ROWS displaces every other row by half a tile. Walk between these fields before trying to name the larger shapes you see. A chevron or a band may belong to several tiles together. The unit that you notice need not be the unit stored by the program.
+ 
+-At the entrance console, press TURN MOTIF. The source triangle turns ninety degrees in all six fields. Their arrangement rules remain in place. Return to the two fields you first compared. Does the resemblance survive? One changed source can have different consequences under different rules.
++At the console for the six fields, press TURN MOTIF. The source triangle turns ninety degrees in all six fields. Their arrangement rules remain in place. Return to the two fields you first compared. Does the resemblance survive? One changed source can have different consequences under different rules.
+ 
+ This is one of the instructions making those differences:
+ 

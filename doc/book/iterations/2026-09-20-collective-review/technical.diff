@@ -1,0 +1,50 @@
+--- before/commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md
++++ commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md
+@@ -1,10 +1,14 @@
+-# Contribute — implementation and encounter
++# Contribute, preserve a source, revise a piece
+ 
+-The primary artifact is `peer_production_tool`. Its [scene](../../../commons/artifacts/peer_production_tool/peer_production_tool.tscn) and [implementation](../../../commons/artifacts/peer_production_tool/peer_production_tool.gd) supply the behaviour described here.
++This hall follows Situated Computation's four separate claims and leads to Rhizome Network's changing connections. Its primary is `peer_production_tool`; the [scene](../../../commons/artifacts/peer_production_tool/peer_production_tool.tscn) and [source](../../../commons/artifacts/peer_production_tool/peer_production_tool.gd) implement the encounter.
+ 
+-Twelve generated peer positions send packets by default every 0.16 seconds. Each packet's life advances by delta*4; arrival calls _place_facet(). Sixty facets fill the display. Facet positions follow a prescribed helix, not negotiated knowledge. _reset_artifact() clears the form and _seen_peers but does not zero _edits or _contributors. The current contributor label counts source-version participation over time. This is recorded as a next improvement, not silently treated as a count of unique people.
++## First comparison
+ 
+-## Operation to read after the encounter
++The hall uses twelve generated sources, sixty-piece capacity and a 0.7-second interval between packet launches. A packet advances with `delta * 4` and retains its sender index when it lands. The program chooses senders; they are not people choosing to participate. Piece positions follow an authored helix.
++
++FLOW holds or resumes both packet motion and new launches. PIECE also holds flow and selects the next landed piece. A connecting line and P1–P12 identifiers let the visitor recover the selected source without relying on colour alone. COLOUR switches between the original purple-to-teal arrival-order gradient and source colours without changing geometry. Each landed record retains its source in either view.
++
++## What the counts count
+ 
+ ```gdscript
+ _placed += 1
+@@ -15,18 +19,20 @@
+     _contributors += 1
+ ```
+ 
+-Every accepted facet increments the edit count. The Boolean array _seen_peers lets the same source count only once within a version. On the next version those flags clear while the totals persist. A number labelled CONTRIBUTORS can therefore outgrow the twelve source positions. The code tells us what was counted more precisely than the label does.
++The historic `_contributors` counter remains cumulative source-version participation. It is labelled PARTICIPATIONS, correcting the earlier CONTRIBUTORS display without discarding its history. PIECES is the current form's occupancy; ADDITIONS is the lifetime arrival count. SOURCES counts distinct sources in this version; EVER counts distinct sources since this artifact's last rebuild. REVISIONS counts visitor revision operations separately. None counts unique humans.
+ 
+-## What to compare
++VERSION retains one previous version in memory, clears the current records, pending packets and per-version flags, and waits for FLOW. Lifetime counts persist. At capacity, interactive placements hold the form; passive placements retain their automatic release behaviour. Configuration rebuild starts a fresh session, so these are not persistent saved totals.
+ 
+-Follow a packet from a rim node to the central form. Look for a second contribution from a source you have already seen. Watch a full version fill and restart; compare the new form with the counters that remain.
++## Dispute and revision
+ 
+-A returning source can add another facet without adding a new distinct source within that version. On reset the seen-peer flags clear, but the contributor counter persists. Across versions that number counts repeated participation, not unique people.
++DISPUTE toggles a red outline on the selected existing record. REVISE rotates that piece another thirty degrees and alternates its height between original and 1.5 times original. Its source, location, addition count and current piece count do not change. Original and immediately previous transforms remain available in the record; `revised_by` records VISITOR and a revision number increments. Revision does not clear the dispute. This is a geometric editing demonstration, without semantic validation, agreement or a full history browser.
+ 
+-## Limits and next test
++The central form uses a MultiMesh. Selection/dispute outlines share another MultiMesh so marking many pieces does not create twelve draw calls per outline. Source tracing is one cylinder. Dynamic counters use depth-tested Label3D text instead of caching an unbounded set of baked counter textures. Source records, packets, current geometry and retained previous version are bounded by the configured capacities. Rebuilding frees only owned children, preserving the museum's attached nodes.
+ 
+-Separate lifetime edits, distinct sources in this version, and lifetime distinct sources in the readout. Check two complete cycles with a repeated source. Then add one disputed contribution whose revision changes an existing facet rather than increasing the pile.
++## Placement and evidence
+ 
+-This source audit does not establish headset readability, comfortable reach, collision clearance or frame rate. Those remain runtime observations. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
++The full-size workbench remains at (6,5), now facing arrival. Two central pier cells become floor so that its front controls and central form can be reached and seen; four side piers remain. An explicit spawn at (6,1) and local dressing exclusions support approach. The other three authored tokens remain exactly placed.
+ 
+-[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
++The controlled museum probe tests actual button signals, repeated-source counting across versions, packet sender identity, held motion, colour-independent geometry, disputed revisions, capacity, safe empty operations, rebuild ownership, legacy behaviour and selected walks. Rendered desktop views are evidence of these selected states, not headset comfort, Quest performance or learning. See the [pass report](../../../doc/book/iterations/2026-09-20-collective-review/SUMMARY.md).
++
++The existing wiki fragment and two other supporting tokens remain an ecology to develop. A single NORTH fragment still points to an absent EAST panel; this pass does not claim to complete that separate reading circuit. The earlier theoretical/design material remains in the [preserved proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md).

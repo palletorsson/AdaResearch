@@ -1,0 +1,231 @@
+{
+  "sequence": "array_tutorial",
+  "declared_maps": [
+    "Array",
+    "Tutorial_3D",
+    "Tutorial_Tiling_Floor",
+    "Tutorial_Tiling_Walls",
+    "Tutorial_Disco"
+  ],
+  "museum_map_authored_order": [
+    "Array",
+    "Tutorial_3D",
+    "Tutorial_Tiling_Floor",
+    "Tutorial_Tiling_Walls",
+    "Tutorial_Disco"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "Array",
+      "recorded_status": "source_checked_draft",
+      "text_words": 620,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "row_3_x",
+          "grid_2d_4x4"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "array_tutorial",
+        "text_path": "commons/maps/Array/final.md",
+        "text_sha256": "284c994eb651878a5566e2b118143ea6b835c641e63ea09e5ead46674601bada",
+        "map_sha256": "145c2a42631238031ab3884ab7a2fcaf640f512122c6582bccdb2a375a7247f2",
+        "learner_verified": false,
+        "pilot_action_id": "array-addresses-persist",
+        "runtime_check": {
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+          "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+        }
+      },
+      "manuscript_artifact_order": [
+        "row_3_x",
+        "grid_2d_4x4"
+      ],
+      "role_primary_order": [
+        "row_3_x",
+        "grid_2d_4x4"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Tutorial_3D",
+      "recorded_status": "source_checked_draft",
+      "text_words": 438,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "array_flight_lab"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "array_tutorial",
+        "text_path": "commons/maps/Tutorial_3D/final.md",
+        "text_sha256": "631a0b9e559b4b203c42862654f3a8c34f8de7725097caa4eb5f71889e57af8d",
+        "map_sha256": "be5c9daee7c3bd35be2c592b21cb6ae582f94343542122f68757ad99865844fd",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "array_flight_lab"
+      ],
+      "role_primary_order": [
+        "array_flight_lab"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "recorded_status": "source_checked_draft",
+      "text_words": 423,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tiling_principles"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "array_tutorial",
+        "text_path": "commons/maps/Tutorial_Tiling_Floor/final.md",
+        "text_sha256": "ed5b723510dc25c3146752eed153663501d670e0a969a5a4bfe5375b05f3a113",
+        "map_sha256": "f17848eb65b216c08399a683c00125f11269d59e5d19a8f79af2abd2d8b0b001",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tiling_principles"
+      ],
+      "role_primary_order": [
+        "tiling_principles"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "recorded_status": "source_checked_draft",
+      "text_words": 370,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tiling_principles"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "array_tutorial",
+        "text_path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+        "text_sha256": "62c95f4cb872cee8bf0b0ff402610e368d21ca95dc1140e5c02b7e533f2fbc8f",
+        "map_sha256": "a8913bbb9ebbe946f79bac01eabfaa8cea23749659650ca60820e12b69eb3f85",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tiling_principles"
+      ],
+      "role_primary_order": [
+        "tiling_principles"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Tutorial_Disco",
+      "recorded_status": "source_checked_draft",
+      "text_words": 813,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "disco_controls",
+          "step_sequencer",
+          "standalone_disco"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "array_tutorial",
+        "text_path": "commons/maps/Tutorial_Disco/final.md",
+        "text_sha256": "c4ee9f710640b8543cff6a0370def14ba21b85200b84b256a1d27e0803f14729",
+        "map_sha256": "929feaa72a4c8a31908e0bcfae0f4e1a393c35fe84beda8072c3c825dfd698f9",
+        "learner_verified": false,
+        "pilot_action_id": "disco-stored-step-trace",
+        "runtime_check": {
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+          "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+        }
+      },
+      "manuscript_artifact_order": [
+        "disco_controls",
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "role_primary_order": [
+        "disco_controls",
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn",
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd",
+      "algorithms/arrays/binary_table/binary_table_display.tscn",
+      "algorithms/arrays/grid_2d_4x4.gd",
+      "algorithms/arrays/grid_2d_4x4.tscn",
+      "algorithms/arrays/grid_3d_4x4x4.gd",
+      "algorithms/arrays/row_3_x.gd",
+      "algorithms/arrays/row_3_x.tscn",
+      "commons/artifacts/regularity/array_flight_lab.gd",
+      "commons/artifacts/regularity/array_flight_lab.tscn",
+      "commons/artifacts/regularity/disco_controls.gd",
+      "commons/artifacts/regularity/disco_controls.tscn",
+      "commons/artifacts/regularity/room_tools.gd",
+      "commons/artifacts/regularity/tiling_principles.gd",
+      "commons/artifacts/regularity/tiling_principles.tscn",
+      "commons/audio/generators/AudioSynthesizer.gd",
+      "commons/audio/generators/CustomSoundGenerator.gd",
+      "commons/audio/sequencer/sequencer_ui.gd",
+      "commons/audio/sequencer/sequencer_ui.tscn",
+      "commons/audio/sequencer/step_sequencer.gd",
+      "commons/audio/sequencer/step_sequencer.tscn",
+      "commons/context/discofloor/DiscoSequencerBridge.gd",
+      "commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "commons/context/discofloor/standalone_disco_floor.tscn",
+      "commons/movement/museum_flight_box.gd",
+      "commons/scenes/mapobjects/pick_up_cube.tscn"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://algorithms/arrays/binary_table/binary_table_display.gd",
+      "res://algorithms/arrays/layer_pattern_lesson.gd",
+      "res://commons/audio/AudioSynthesizer.gd",
+      "res://commons/movement/museum_flight_provider.gd",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/scenes/mapobjects/pick_up_cube.gd",
+      "res://commons/ui/control_panel.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

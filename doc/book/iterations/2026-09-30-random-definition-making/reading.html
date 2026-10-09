@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A pattern that returns · revised encounter</title><style>
+:root{color-scheme:light;--paper:#f5f1e8;--ink:#222725;--accent:#7b423f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.75 Georgia,serif}a{color:var(--accent);text-underline-offset:4px}nav{position:sticky;top:0;z-index:5;background:#f5f1e8f5;border-bottom:1px solid #cec9bd;padding:13px max(24px,calc((100vw - 1100px)/2));font:14px/1.5 system-ui;display:flex;gap:24px;flex-wrap:wrap}main{max-width:1100px;margin:55px auto;padding:0 28px 70px}.reading{max-width:740px;margin:auto}.kicker{font:12px/1.5 system-ui;letter-spacing:.17em;text-transform:uppercase;color:#725a52}h1{font-weight:normal;font-size:clamp(36px,5vw,60px);line-height:1.12;margin:18px 0 30px}h2{font-weight:normal;line-height:1.3;margin-top:50px}h3{font:600 20px/1.5 system-ui}p{margin:1.15em 0}pre{overflow:auto;border-left:3px solid #bf9882;padding:19px 22px;background:#e9e5db;font:14px/1.65 Consolas,monospace;tab-size:4}code{font-size:.85em}pre code{font-size:inherit}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border-radius:3px}figcaption,.note{font:14px/1.6 system-ui;color:#53605b;margin:10px 0}.panel{padding:20px 25px;background:#e9e5db;margin:22px 0}summary{cursor:pointer;font:16px/1.6 system-ui}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #cec9bd;padding:10px;text-align:left}.footnote{font-size:15px;border-top:1px solid #cec9bd;margin-top:40px}details{margin:15px 0}footer{margin-top:50px;font:13px/1.7 system-ui;color:#53605b}@media(max-width:700px){.pair{grid-template-columns:1fr}main{margin-top:28px}body{font-size:18px}}
+</style><nav><a href="index.html">Review</a><a href="reading.html#reading">Read the encounter</a><a href="making.html#making">Make the study</a><a href="random-definition-study.zip">Download Godot project</a><a href="index.html#changes">Exact changes</a></nav><main><article class="reading" id="reading"><p class="kicker">Random Definition · Encounter · 30 September 2026</p><h1>A pattern that returns</h1>
+<p>In Synthesis Lab, five amounts could bring a familiar curve back.</p>
+<!-- @seed_replay_demo -->
+<p>Here, two grids of coloured cubes stand above the controls. Choose a small patch you would not have thought to put together. Find it in the other grid.</p>
+<p>Press REPLAY.</p>
+<p>The colours stay where they were.</p>
+<p>The program has coloured every cube again. The seed sets this generator's starting state; start it there again and make the same requests, and the same values return. Press RANDOM, find something in the arrangement it gives you, and replay that one. RANDOM can choose an earlier seed, including the one already here. A result can surprise us and still know the way back to itself.</p>
+<p>The seed readout offers a tempting name for the picture. Remember it. Then press +1 DRAW.</p>
+<p>The right-hand grid changes while the left keeps its arrangement. The seed has not changed. Look at the cube positions too: nothing has moved sideways to make this difference.</p>
+<p>Above the grids, two strips turn the first twenty-four draws into bar heights. Switch the extra draw off, then on. The right strip now starts with the second bar on the left. Find the next two matches.</p>
+<p>With the extra draw enabled, the right-hand grid makes one request before colouring its first cube:</p>
+<pre><code class="language-gdscript">_rng.randf()  # Request one value without using it for a colour.
+</code></pre>
+<p>Each call requests a number between zero and one. A cube takes three: red, green, blue. One unused draw shifts where that grouping begins:</p>
+<pre><code class="language-text">Draws:       a  b  c  d  e  f  g ...
+Left grid:  (a, b, c)  (d, e, f)
+Right grid: (b, c, d)  (e, f, g)
+</code></pre>
+<p>Nothing in a draw says that it is red. Red is the use made of its place in these three calls.</p>
+<p>Look back at your patch. Perhaps the misplaced beginning gives you a relation you want. There is no need to prefer the matched pair. The line that interrupts a demonstration of sameness can also be used to make another palette.</p>
+<p>Press +1 DRAW again. The match returns. The button toggles one discarded draw; it does not keep adding more. REPLAY repeats whichever procedure is selected. We needed more than the seed's number: which generator, which calls, and which use of their results. The picture's name had left out part of its making.</p>
+<p>Choose another seed, then wait. The room continues around you. Press REPLAY. The same patch returns; waiting has not spent another draw from this generator. Difficulty guessing from a picture and the ability to repeat its construction are different things we can encounter here.</p>
+<p>Move the seed slider slowly. The handle travels smoothly; the readout chooses whole numbers. A neighbouring seed can give you a very different palette. The controls offer a thousand seeds, yet every result still arrives as sixty-four cubes with three varying colour channels. Another seed cannot add a cube or let one leave its cell. Those would be other changes to the program. Here, randomness varies what the program has made variable.</p>
+<!-- @textile_comparison -->
+<p>The three textile panels offer another comparison. Each begins with seed 41. Diagonals, upright and horizontal marks, then blocks: three pairs of signs receive the same draws. Follow one cell across the panels, then step back to see the larger figures those marks make. NEXT SEED changes the draws in all three; RESET returns to 41. These bolts are held still so their marks can be compared. Chance has not chosen what a mark means. The program supplied that vocabulary before drawing.</p>
+<!-- @random_number_book_page_1955 -->
+<p>Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits published in 1955, a table anyone could open at the same line and read the same digits again.<sup id="n1-fnref:rand-1955"><a class="footnote-ref" href="#n1-fn:rand-1955">1</a></sup> This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away. The page draws from the game's shared generator and keeps no record of a number once it has gone.</p>
+<!-- @prng_crank_machine -->
+<p>On your way back towards the entrance, stop at the crank. One press of its CRANK button, one state. It gives each request a gesture. We could follow every request at the colour grids too, but one picture has already asked for 192 of them. What can we leave unexamined and still recognise how it was made?</p>
+<!-- @ -->
+<p>The next room gathers a sequence into a histogram and an entropy reading. Carry one small patch with you. We are about to ask what a number can retain of an arrangement that was worth looking at.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="n1-fn:rand-1955">
+<p><em>A Million Random Digits with 100,000 Normal Deviates</em> (RAND Corporation, 1955). RAND's <a href="https://www.rand.org/pubs/monograph_reports/MR1418.html">introduction</a> describes a basic table generated by an electronic roulette wheel in 1947, tested and transformed before publication. Choosing a starting place in a fixed table can help us imagine a repeatable beginning. The table retrieves stored digits; a seeded generator calculates its sequence. Repeatability in this room depends on the generator and procedure being kept with the seed. <a class="footnote-backref" href="#n1-fnref:rand-1955" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></article></main></html>

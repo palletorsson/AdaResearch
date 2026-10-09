@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>paired_time.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f1eee7;color:#302a31;font:17px/1.65 system-ui}header,main,footer{max-width:1160px;margin:auto;padding:42px 28px}h1{font:clamp(50px,8vw,94px)/1.02 Georgia;margin:24px 0}h2{font:36px/1.2 Georgia}a{color:#8a3f5d;text-underline-offset:4px}nav{display:flex;gap:24px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:750px}.reading{font:23px/1.65 Georgia;max-width:760px;margin:55px auto}.reading p{margin:0 0 27px}section{padding:32px 0;scroll-margin-top:20px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small,.footnote{font:13px/1.6 system-ui;color:#6a5e67}details{background:#e7e0d8;padding:22px;margin:26px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a252c;color:#ffe2ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 17px;border:1px solid #9a8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ac4d75}.states figure{display:none}.states #together:checked~.together,.states #drift:checked~.drift,.states #same-rate:checked~.same-rate{display:block}.states input:checked+label{background:#873c59;color:white}.note{border-left:3px solid #b66888;padding:5px 23px}code{font-size:.9em}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #c9bec4;padding:12px;text-align:left} @media(max-width:650px){header,main,footer{padding:25px 17px}.reading{font-size:21px}.states label{font-size:14px}}</style></head><body><main><a href="index.html#making">Back to the encounter</a><h2>paired_time.gd</h2><pre>extends &quot;res://commons/artifacts/spine_studies/study_forms.gd&quot;
+## An original Ada application in relation to Gonzalez-Torres&#x27;s paired clocks.
+## All input is supplied by the museum&#x27;s pointer buttons; no new player/camera.
+var score = preload(&quot;res://commons/artifacts/spine_studies/paired_time_score.gd&quot;).new()
+var hands: Array[Node3D] = []
+var readout: Label3D
+var reveal := false
+
+func _ready() -&gt; void:
+	block(Vector3(0,2.3,-3.5),Vector3(8.2,4.6,0.18),Color(&quot;eeeae2&quot;),true)
+	inscription(&quot;A SECOND TOGETHER&quot;,Vector3(0,4.15,-3.38),0.0034)
+	for i in 2: make_dial(Vector3(-0.97 if i == 0 else 0.97,2.8,-3.25))
+	inscription(&quot;12 s / TURN  ·  SIMULATED TIME&quot;,Vector3(0,1.55,-3.36),0.0021,Color(&quot;68616b&quot;))
+	readout = inscription(&quot;&quot;,Vector3(0,0.85,-3.35),0.0028,Color(&quot;8b3c5b&quot;))
+	sync_display()
+
+func disc(at: Vector3, radius: float, depth: float, colour: Color) -&gt; void:
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = radius; cylinder.bottom_radius = radius
+	cylinder.height = depth; cylinder.radial_segments = 96; cylinder.rings = 1
+	var mesh := MeshInstance3D.new(); mesh.mesh = cylinder
+	mesh.material_override = material(colour); mesh.position = at
+	mesh.rotation.x = PI / 2.0; add_child(mesh)
+
+func make_dial(at: Vector3) -&gt; void:
+	disc(at,0.97,0.15,Color(&quot;29272b&quot;))
+	disc(at+Vector3(0,0,0.086),0.9,0.018,Color(&quot;f7f4ec&quot;))
+	for i in 60:
+		var angle := TAU * i / 60.0
+		var major := i % 5 == 0
+		var radial := Vector3(sin(angle),cos(angle),0)
+		var mark := block(at + radial * 0.81 + Vector3(0,0,0.103),Vector3(0.023 if major else 0.009,0.11 if major else 0.035,0.008),Color(&quot;3a373e&quot;))
+		mark.rotation.z = -angle
+	var pivot := Node3D.new(); add_child(pivot); pivot.position = at+Vector3(0,0,0.13)
+	var needle := block(Vector3(0,0.29,0),Vector3(0.025,0.78,0.014),Color(&quot;28252d&quot;))
+	needle.reparent(pivot,false)
+	var tip := block(Vector3(0,0.67,0.004),Vector3(0.033,0.12,0.018),Color(&quot;b34e78&quot;))
+	tip.reparent(pivot,false)
+	disc(at+Vector3(0,0,0.15),0.043,0.025,Color(&quot;b34e78&quot;))
+	hands.append(pivot)
+
+func _process(delta: float) -&gt; void:
+	score.advance(delta)
+	sync_display()
+
+func sync_display() -&gt; void:
+	hands[0].rotation.z = -score.left_angle
+	hands[1].rotation.z = -score.right_angle
+	readout.visible = reveal
+	readout.text = &quot;LEFT × 1.00    RIGHT × %.2f\nRIGHT AHEAD: %.1f°    %s&quot; % [score.right_ratio,score.gap_degrees(),&quot;HELD&quot; if score.paused else &quot;RUNNING&quot;]
+
+func control(index: int) -&gt; void:
+	match index:
+		0: score.drift()
+		1: score.same_rate()
+		2: score.offset()
+		3: score.align()
+		4: score.paused = not score.paused
+		5: reveal = not reveal
+		6: score.reset(); reveal = false
+	sync_display()
+</pre></main></body></html>

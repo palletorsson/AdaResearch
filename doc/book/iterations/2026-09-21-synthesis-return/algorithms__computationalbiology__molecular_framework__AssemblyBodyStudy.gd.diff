@@ -1,0 +1,84 @@
+--- before/algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd
++++ current/algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd
+@@ -2,6 +2,8 @@
+ ## Opt-in, body-size editing beside MolecularDesigner's authored cycle.
+ ## Same VRBody nodes and edges; moving a joint changes geometry, not adjacency.
+ const JointScript = preload("res://algorithms/computationalbiology/molecular_framework/AssemblyJoint.gd")
++const Store = preload("res://algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd")
++const DATA := "res://algorithms/computationalbiology/molecular_framework/assemblies.json"
+ const BODY_SCALE := 1.12
+ const REACH := Vector3(1.9, 2.35, 1.9)
+ var joints: Array[XRToolsPickable] = []
+@@ -13,6 +15,8 @@
+ var names: Array[String] = []
+ var edit_count := 0
+ var caption: Label3D
++var radii: Array[float] = []
++var last_keep_error: Error = OK
+ 
+ func build(catalog: Dictionary, assembly: Dictionary) -> void:
+ 	# The study is positioned after map configuration. Its dimensions stay in metres.
+@@ -28,6 +32,7 @@
+ 		var ball := SphereMesh.new()
+ 		ball.radius = float(catalog[node.part].get("radius", .08)) * BODY_SCALE
+ 		ball.height = ball.radius * 2
++		radii.append(ball.radius)
+ 		ball.radial_segments = 20
+ 		ball.rings = 10
+ 		mesh.mesh = ball
+@@ -78,6 +83,7 @@
+ 	caption.outline_size = 4
+ 	caption.double_sided = true
+ 	add_child(caption)
++	_restore_pose()
+ 	_update_rods()
+ 
+ func material(color: Color, glow: float) -> StandardMaterial3D:
+@@ -95,9 +101,39 @@
+ 
+ func finish_edit(index: int) -> void:
+ 	store_joint(index)
+-	if active.has(index) and targets[index].distance_to(active[index]) > .01:
++	var changed: bool = active.has(index) and targets[index].distance_to(active[index]) > .01
++	active.erase(index)
++	if changed:
+ 		edit_count += 1
+-	active.erase(index)
++		last_keep_error = Store.keep(get_tree(),_record())
++		caption.text = "LEAVE A BODY DIFFERENT\n" + ("Pose kept for the final hall." if last_keep_error==OK else "Pose kept for this session only.")
++
++func _record() -> Dictionary:
++	var nodes: Array = []
++	var edges: Array = []
++	for i in range(names.size()):
++		var a := original[i]
++		# A second held hand is not yet a released decision.
++		var b: Vector3 = active.get(i, targets[i])
++		nodes.append({"id":names[i],"radius":radii[i],"start":[a.x,a.y,a.z],"end":[b.x,b.y,b.z]})
++	for pair in pairs: edges.append([names[pair.x],names[pair.y]])
++	return {"schema":1,"source_map":"AdvancedLaboratory_Lab_Equipment_Simulation",
++		"assembly":"VRBody","source_hash":FileAccess.get_sha256(DATA),"nodes":nodes,
++		"edges":edges,"completed_edits":edit_count}
++
++func _restore_pose() -> void:
++	var record := Store.read(get_tree())
++	if record.is_empty() or record.source_hash != FileAccess.get_sha256(DATA): return
++	var saved: Dictionary = {}
++	for node in record.nodes: saved[node.id] = node.end
++	# A matching source hash is necessary; verify names too before changing anything.
++	for id in names:
++		if not saved.has(id): return
++	for i in range(names.size()):
++		joints[i].position = Store.vector(saved[names[i]])
++		store_joint(i)
++	edit_count = int(record.get("completed_edits",0))
++	caption.text = "LEAVE A BODY DIFFERENT\nLast kept pose restored. Take a joint."
+ 
+ func store_joint(index: int) -> void:
+ 	var handle := joints[index]
+@@ -139,4 +175,4 @@
+ 		var p := targets[i]
+ 		positions[names[i]] = [p.x,p.y,p.z]
+ 	return {"assembly":"VRBody", "positions":positions,"completed_edits":edit_count,
+-		"scope":"Current hall visit; adjacency and catalogue unchanged."}
++		"scope":"Latest released pose kept locally; adjacency and catalogue unchanged."}

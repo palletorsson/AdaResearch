@@ -1,0 +1,494 @@
+{
+  "checks": 17,
+  "failures": [],
+  "headset_verified": false,
+  "map": "Fractal_MengerSponge",
+  "measurements": {
+    "captures": {
+
+    },
+    "east approach": {
+      "finish": "(12.82591, 0.000842, 5.616636)",
+      "frames": 107,
+      "method": "CharacterBody3D.move_and_slide; no simulated keyboard input",
+      "start": "(7.5, 0.05, 5.6)",
+      "target": "(13.0, 0.0, 5.6)"
+    },
+    "east side of specimen": {
+      "finish": "(12.99764, 0.000927, 19.31566)",
+      "frames": 274,
+      "method": "CharacterBody3D.move_and_slide; no simulated keyboard input",
+      "start": "(12.82591, 0.000842, 5.616636)",
+      "target": "(13.0, 0.0, 19.5)"
+    },
+    "exit opening": {
+      "finish": "(7.512688, 0.00083, 21.23948)",
+      "frames": 35,
+      "method": "CharacterBody3D.move_and_slide; no simulated keyboard input",
+      "start": "(7.650608, 0.000836, 19.49495)",
+      "target": "(7.5, 0.0, 21.4)"
+    },
+    "inventory": [
+      {
+        "meshes": [],
+        "position": "(4.5, 0.0, 8.5)",
+        "token": "diffusion_limited_aggregation"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@771",
+            "position": [
+              1.0,
+              0.0,
+              6.0
+            ],
+            "size": [
+              1.0,
+              0.100000001490116,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@772",
+            "position": [
+              1.0,
+              0.100000001490116,
+              6.93000030517578
+            ],
+            "size": [
+              1.0,
+              0.0199999958276749,
+              0.0699996948242188
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@773",
+            "position": [
+              1.0,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              1.0,
+              0.0199999958276749,
+              0.0699996948242188
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@774",
+            "position": [
+              1.9300000667572,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              0.0699999332427979,
+              0.0199999958276749,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@775",
+            "position": [
+              0.999999940395355,
+              0.100000001490116,
+              6.0
+            ],
+            "size": [
+              0.0699999928474426,
+              0.0199999958276749,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@776",
+            "position": [
+              1.0900000333786,
+              0.103000000119209,
+              6.09000015258789
+            ],
+            "size": [
+              0.819999933242798,
+              0.00599999725818634,
+              0.819999694824219
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@777",
+            "position": [
+              1.0699999332428,
+              0.125,
+              6.06999969482422
+            ],
+            "size": [
+              0.860000133514404,
+              0.0180000066757202,
+              0.860000610351563
+            ]
+          }
+        ],
+        "position": "(1.5, 0.0, 10.5)",
+        "token": "catalyst_prompter_box"
+      },
+      {
+        "meshes": [
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              -2.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              6.0,
+              -2.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              -2.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              1.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              1.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              4.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              6.0,
+              4.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              4.0,
+              5.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              -2.0,
+              8.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              -2.0,
+              8.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              4.0,
+              8.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              4.0,
+              8.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              -2.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              6.0,
+              -2.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              -2.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              1.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              1.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              3.0,
+              4.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              6.0,
+              4.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          {
+            "name": "CubeBaseMesh",
+            "position": [
+              9.0,
+              4.0,
+              11.0
+            ],
+            "size": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          }
+        ],
+        "position": "(7.5, -2.0, 13.5)",
+        "token": "menger_sponge"
+      },
+      {
+        "meshes": [
+          {
+            "name": "SphereDisplay",
+            "position": [
+              7.07895565032959,
+              -1.75988364219666,
+              10.0715532302856
+            ],
+            "size": [
+              0.84208869934082,
+              0.719767332077026,
+              0.856894493103027
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              7.07999992370605,
+              -1.9925000667572,
+              10.0799999237061
+            ],
+            "size": [
+              0.840000152587891,
+              0.00500011444091797,
+              0.840000152587891
+            ]
+          }
+        ],
+        "position": "(7.5, -2.0, 14.5)",
+        "token": "dark_sphere"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@778",
+            "position": [
+              1.20000004768372,
+              0.0,
+              13.2000007629395
+            ],
+            "size": [
+              0.600000023841858,
+              4.0,
+              0.599998474121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@779",
+            "position": [
+              1.03999996185303,
+              -0.0200000032782555,
+              13.0400009155273
+            ],
+            "size": [
+              0.920000076293945,
+              0.120000019669533,
+              0.919998168945313
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@780",
+            "position": [
+              1.14040780067444,
+              0.0899999737739563,
+              13.1404075622559
+            ],
+            "size": [
+              0.719184398651123,
+              0.720000028610229,
+              0.719184875488281
+            ]
+          }
+        ],
+        "position": "(1.5, 0.0, 17.5)",
+        "token": "catalyst_vent"
+      }
+    ],
+    "rear margin": {
+      "finish": "(7.650608, 0.000836, 19.49495)",
+      "frames": 107,
+      "method": "CharacterBody3D.move_and_slide; no simulated keyboard input",
+      "start": "(12.99764, 0.000927, 19.31566)",
+      "target": "(7.5, 0.0, 19.5)"
+    },
+    "restoration_scope": "Existing specimen and full collection restored. Physical capsule clearance tested; player input and elevated central passage still need a dedicated encounter review.",
+    "sponge": {
+      "bounds": "[P: (-4.5, 0.0, -4.5), S: (9.0, 9.0, 9.0)]",
+      "collision_shapes": 400,
+      "cubes": 400,
+      "interior_access_verified": false,
+      "position": "(7.5, -2.0, 13.5)"
+    }
+  }
+}

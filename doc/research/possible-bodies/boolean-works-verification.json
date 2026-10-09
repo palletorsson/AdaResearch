@@ -1,0 +1,36 @@
+{
+  "hall": "Boolean_Works",
+  "date": "2026-09-15",
+  "checks": 5,
+  "total_checks": 5,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "authored_tokens": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "csg_compose_workbench",
+    "subtraction_suite",
+    "sphere_splitting_showcase",
+    "recursive_boolean_cube",
+    "csg_architecture_cavity",
+    "boolean_burrow",
+    "sdf_cavern_room",
+    "booleanvariations",
+    "coincident_face"
+  ],
+  "primary_artifacts": [
+    "csg_compose_workbench",
+    "sdf_cavern_room"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Boolean_Works\\map_data.json": "e6e4a26f8ef8b57a7e0b143d83a668b7c1cef8e123d49a9b82a96f17b80947ab",
+    "commons\\maps\\Boolean_Works\\final.md": "59b3e5b0809ca20248f56157c5fdc97fe9279d742b17ead465f4826444eb0085",
+    "commons\\maps\\Boolean_Works\\tutorial.md": "886ef18dc246bdb6c83ef91840700634102920f97b949ba4528cac830b8cabd4",
+    "commons\\maps\\Boolean_Works\\technical.md": "aeddbaa9dd8356523ee3ec160b398575cff8da4065bc80b87d36536eb2bba235",
+    "commons\\maps\\Boolean_Works\\critical.md": "7fcf055eed76693747179df0f25b4f3992b8bcc2bb3e376208518ea595e8faaa"
+  }
+}

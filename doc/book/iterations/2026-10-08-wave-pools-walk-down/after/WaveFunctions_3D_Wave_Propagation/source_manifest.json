@@ -1,0 +1,31 @@
+{
+  "room": "WaveFunctions_3D_Wave_Propagation",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d61b6a45936327e1a1322111f4d3916a9d31d405e666b03684fff0d056dd7711",
+    "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json": "15f10babcc6f38ab444d7f02d7a5dfcc9b342334f47af26805f6d7ec73354ba8",
+    "tools/probes/wave_pool_access.gd": "03d3df019ff62169764821cbd1eeb2e63127ce6022fecc08f9e407e18dd7828d",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "12b49d930eb83a4238944433d7debea459f9aa5db93974801f4bd4b1def2fb0e",
+    "ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/control.json": "242063923c4fbccaf0420d45e1ef9804c79b3bb3e8cc204973d7afc0aa03b2d2",
+    "ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/WaveFunctions_3D_Wave_Propagation/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn": "c64b890b2af79e91156a4b849ab5168d539ac37191f03610ee9ed9b03529dd0f",
+    "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd": "c82f4978cf730ec30de9b395933babba269a03d74deb98aa57398f00a9bfac72"
+  }
+}

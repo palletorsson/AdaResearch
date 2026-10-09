@@ -1,0 +1,246 @@
+{
+	"bodies": [
+		{
+			"closed_edges": true,
+			"components": 1,
+			"euler": 0,
+			"finite_nondegenerate": true,
+			"glyph": "O",
+			"min_double_area": 0.0000148062972584739,
+			"min_normal_length": 0.999999940395355,
+			"name": "01  /  A PASSAGE",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 1,
+			"triangles": 824,
+			"vertices_welded": 412
+		},
+		{
+			"closed_edges": true,
+			"components": 1,
+			"euler": 0,
+			"finite_nondegenerate": true,
+			"glyph": "O",
+			"min_double_area": 0.000002688670747375,
+			"min_normal_length": 0.99999988079071,
+			"name": "02  /  A FLARED VESSEL",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 1,
+			"triangles": 20188,
+			"vertices_welded": 10094
+		},
+		{
+			"closed_edges": true,
+			"components": 1,
+			"euler": -2,
+			"finite_nondegenerate": true,
+			"glyph": "B",
+			"min_double_area": 0.0000194262593140593,
+			"min_normal_length": 0.99999988079071,
+			"name": "03  /  TWO WELLS",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 2,
+			"triangles": 18428,
+			"vertices_welded": 9212
+		},
+		{
+			"closed_edges": true,
+			"components": 1,
+			"euler": 2,
+			"finite_nondegenerate": true,
+			"glyph": "C",
+			"min_double_area": 0.00000617271962255472,
+			"min_normal_length": 0.99999988079071,
+			"name": "04  /  A CURLED CHANNEL",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 0,
+			"triangles": 19988,
+			"vertices_welded": 9996
+		},
+		{
+			"closed_edges": true,
+			"components": 1,
+			"euler": 0,
+			"finite_nondegenerate": true,
+			"glyph": "I",
+			"min_double_area": 0.0204728599637747,
+			"min_normal_length": 0.99999988079071,
+			"name": "05  /  A NEW HOLE",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 1,
+			"triangles": 2304,
+			"vertices_welded": 1152
+		},
+		{
+			"closed_edges": true,
+			"components": 2,
+			"euler": 4,
+			"finite_nondegenerate": true,
+			"glyph": ":",
+			"min_double_area": 0.000179437192855403,
+			"min_normal_length": 0.99999988079071,
+			"name": "06  /  TWO BODIES",
+			"oriented_edges": true,
+			"tiny_faces": 0,
+			"total_genus": 0,
+			"triangles": 9400,
+			"vertices_welded": 4704
+		}
+	],
+	"checks": [
+		{
+			"check": "Body 0: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 0: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 0: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 0: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Body 1: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 1: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 1: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 1: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Body 2: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 2: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 2: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 2: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Body 3: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 3: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 3: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 3: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Body 4: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 4: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 4: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 4: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Body 5: each welded edge has two faces",
+			"passed": true
+		},
+		{
+			"check": "Body 5: consistent face winding",
+			"passed": true
+		},
+		{
+			"check": "Body 5: finite vertices and nondegenerate triangles",
+			"passed": true
+		},
+		{
+			"check": "Body 5: expected separate components and handles",
+			"passed": true
+		},
+		{
+			"check": "Straight I has no handle; closing its sweep creates one",
+			"passed": true
+		},
+		{
+			"check": "O preserves an open sightline through its centre",
+			"passed": true
+		},
+		{
+			"check": "O retains a solid lower rim",
+			"passed": true
+		},
+		{
+			"check": "A raised 1.7m capsule fits in the O opening",
+			"passed": true
+		},
+		{
+			"check": "A capsule at floor level meets the O sill",
+			"passed": true
+		},
+		{
+			"check": "Native capture: overview.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: passage.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: vessel.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: wells.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: channel.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: loop.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: two-bodies.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: inside-o.png",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"scope": "Native geometry and selected physics checks; no general self-intersection, fabrication or XR certification"
+}

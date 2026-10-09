@@ -1,0 +1,11 @@
+# A family and its missing requests
+
+The saved values matter, but they do not alone define the field of possible forms. A builder has already decided which primitives and operations are available. The selector further decides where an operation can act. In this exhibit a square appearance contains two independently operated triangles. Representation participates in the result before a visitor requests a variation.
+
+The distinction gives the project’s queer enquiry something specific to investigate. An unwanted limit may sit in a number, a face selection or the available operations. A hole or a connection between separate tips requires work that changing the inset amount cannot supply. This is not a claim that every unusual form is queer, or that adding operations abolishes all limits. It is a way to locate which decision a desired body asks us to revisit.
+
+The fixed comparisons allow pleasure and judgement to remain separate for a while. None is named the winner. The later genetic hall introduces a score and asks which differences it recognises. Form Finding has already distinguished construction, physical support and an authored success condition. These are related questions, not interchangeable uses of the word growth.
+
+The new comparison asks the missing-operation question in the room. Curved strips are supplied by a different operation, not by increasing the extrusion count. Keeping one result at two scales separates the construction from the visitor's relation to it. The same points that make a small decorative form can lie overhead. That spatial change creates an opportunity to pause beneath them without certifying the result as a complete shelter.
+
+The name petal brings a familiar reading to the generated surface. Its exposed edges allow another reading at the same time: these are sampled strips, with open boundaries and a separately authored support. The viewer need not abandon pleasure in the resemblance to inspect its construction. Nor does a more elaborate shape automatically provide more freedom. We can now ask which gaps should stay open, which boundaries would need joining, and who can change the stand or the rule. Those questions arise from a body under the surface.

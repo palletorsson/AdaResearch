@@ -1,0 +1,62 @@
+{
+  "snapshots": [
+    {
+      "path": "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "before_sha256": "6b4f3b828c7812781549672bcfbd952518b7a1dab0e1a0cd94f1a9b8affc7938",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+      "changed": true
+    },
+    {
+      "path": "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+      "before_sha256": "6ea6797eda63fb25d80d87ab2d1f77a860335cce7c7e6a82f908e106da526518",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba",
+      "changed": true
+    },
+    {
+      "path": "commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+      "before_sha256": "64cc6d61a619d5a48b40d4d281361186008e26efe1005bfb253a17254e9d3c26",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "64cc6d61a619d5a48b40d4d281361186008e26efe1005bfb253a17254e9d3c26",
+      "changed": false
+    },
+    {
+      "path": "commons/maps/Flow_Field/map_data.json",
+      "before_sha256": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+      "changed": false
+    },
+    {
+      "path": "commons/maps/Flow_Field/final.md",
+      "before_sha256": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+      "changed": false
+    },
+    {
+      "path": "commons/maps/Flow_Field/tutorial.md",
+      "before_sha256": "58b78f70ec765677ee72912d2ca95e8269927f9602526368df3f964802ed79b5",
+      "recorded_snapshot_matches": true,
+      "after_sha256": "58b78f70ec765677ee72912d2ca95e8269927f9602526368df3f964802ed79b5",
+      "changed": false
+    }
+  ],
+  "inspected_sources_sha256": {
+    "commons/data/artifact_roles.json": "cf8fb35a84bd68e735a2e778fadf5a1feb1fa5b00e03fe1f8d2adc26a4ee5859",
+    "commons/data/museum_core_encounters.json": "5566195d7d9f1896820abe6d92483cdb84d0886c28b2846dc34bbcb61989e0e8",
+    "commons/artifacts/vector_field_visualizer/vector_field_visualizer.gd": "393605bb1de4db734b958e5c777b2a04615c898d8c29b54aa4635344af7d8925",
+    "algorithms/change/vector_field_grid.gd": "c8525e40d758fc0634ac022f61688ff1b804da9ff5d2c77a31eb6665f6da1a20",
+    "algorithms/change/particle_flow_swarm.gd": "dde300e1f45b8d5c1eca9ec2766846ec728bbd2658c6f24326915d450f2335d1",
+    "algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.gd": "548923f36e125306136aab54dc7f26d3770c25a3412c2336694b254142418cba",
+    "commons/artifacts/grand_zoetrope/grand_zoetrope.gd": "f68d9dd5e65e04de1de43c875bc62278f15976d5acf65d7bda4b6da866e6f7dc",
+    "commons/interactables/slider_horizontal.gd": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "doc/book/REVIEW_PRINCIPLES.md": "5be8628dc009c5bd1f28d1f78590e2c23d7a49a55ec0bf0a51cf19488b07e7fc",
+    "doc/book/review-feedback/2026-09-18/change/01-review.md": "847f20f8bca4d046b080535a5d669ada7c98a7ef6ee762b3198316035a985f2a",
+    "doc/book/iterations/2026-09-19-change-review/flow/probe_flow.gd": "cbc7bf708e00753e915b7aa8c735241331555627d8fe554ee8c8c89b5fb2e017",
+    "doc/book/iterations/2026-09-19-change-review/flow/run_probe.py": "f4d681249fa6f26193e01c6c2df7ac8b78ae83ad37feb9bd9d3ab5f587027447"
+  }
+}

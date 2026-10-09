@@ -1,0 +1,18 @@
+{
+  "canonical_ControlPanel_cache_path": true,
+  "archive_ignored": true,
+  "completed_repository_scan": {
+    "scanned_scripts": 2754,
+    "ControlPanel_duplicates": [
+      "doc/reports/interfaces-2026-09-20/compact-pilot/before/control_panel.gd",
+      "doc/reports/interfaces-2026-09-20/console-finish/before/control_panel.gd",
+      "doc/reports/interfaces-2026-09-20/console-pilot/before/control_panel.gd"
+    ]
+  },
+  "additional_ignores_written": [
+    "doc/reports/interfaces-2026-09-20/compact-pilot/before/.gdignore",
+    "doc/reports/interfaces-2026-09-20/console-finish/before/.gdignore",
+    "doc/reports/interfaces-2026-09-20/console-pilot/before/.gdignore"
+  ],
+  "verification": "All reported archival ControlPanel duplicates now sit in ignored folders. Native run already passed 36 checks with canonical ControlPanel; production code unchanged."
+}

@@ -1,0 +1,39 @@
+{
+	"baseline": true,
+	"checks": [
+		{
+			"message": "Radio text is flat on surfaces",
+			"passed": false
+		},
+		{
+			"message": "Tuning control keeps its authored physical size",
+			"passed": false
+		},
+		{
+			"message": "Volume control keeps its authored physical size",
+			"passed": false
+		},
+		{
+			"message": "Initial between-stations sound agrees with wheel position",
+			"passed": false
+		},
+		{
+			"message": "Initial noise uses the selected volume",
+			"passed": false
+		},
+		{
+			"message": "Station shortcut synchronizes the physical wheel",
+			"passed": false
+		}
+	],
+	"failures": [
+		"Radio text is flat on surfaces",
+		"Tuning control keeps its authored physical size",
+		"Volume control keeps its authored physical size",
+		"Initial between-stations sound agrees with wheel position",
+		"Initial noise uses the selected volume",
+		"Station shortcut synchronizes the physical wheel"
+	],
+	"headset_tested": false,
+	"silent_radio_test_double": true
+}

@@ -1,0 +1,38 @@
+{
+	"_readme": "DERIVED, never edit: what _dress_foes did per hall, keyed chapter|pearl. grey = the chapter passed the grey rule; silhouettes = WORLD cells [x, z] the bodies were stood on; gun = the vestibule cell of the pink gun's plinth, or null.",
+	"at": "2026-09-21 16:12:58",
+	"halls": {
+		"primitives|point line grid": {
+			"cabinets": [
+				{
+					"style": "emergency",
+					"weapon": "line_sledgehammer",
+					"x": 0.09,
+					"z": -2.5
+				},
+				{
+					"style": "velvet",
+					"weapon": "pink_gun",
+					"x": 0.08,
+					"z": -0.5
+				}
+			],
+			"chapter": "primitives",
+			"grey": true,
+			"gun": null,
+			"h": 24,
+			"map": "Point_Line_Grid",
+			"pearl": "point line grid",
+			"seg": 0,
+			"silhouettes": [
+				[
+					6,
+					3
+				]
+			],
+			"w": 20,
+			"zbase": -4
+		}
+	},
+	"schema": "adaresearch.em_foes.v1"
+}

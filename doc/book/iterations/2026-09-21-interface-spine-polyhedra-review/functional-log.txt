@@ -1,0 +1,70 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS Pyramid retains six rendered triangles
+PASS Recovery panel excluded from specimen seating
+PASS All recovery text is flat texture geometry
+PASS The two status lines occupy separate readable planes
+PASS base_back_left visible grip enlarged
+PASS base_back_left native grab collider unchanged
+PASS base_back_right visible grip enlarged
+PASS base_back_right native grab collider unchanged
+PASS base_front_right visible grip enlarged
+PASS base_front_right native grab collider unchanged
+PASS base_front_left visible grip enlarged
+PASS base_front_left native grab collider unchanged
+PASS apex visible grip enlarged
+PASS apex native grab collider unchanged
+PASS Native grab owns the apex
+PASS Native hand movement rebuilds the real pyramid mesh
+PASS Reset is quiet while a vertex is held
+PASS Held state explains unavailable reset
+PASS Pointer reset cannot snatch a held vertex
+PASS Native drop releases the vertex
+PASS Physical reset restores the authored mesh after release
+PASS Reset becomes available after release
+PASS Free mode preserves independent movement
+PASS Reset preserves free rule and restores the vertices
+PASS Apex-only still fixes the base
+PASS Reset preserves apex_only rule and restores the vertices
+PASS Base-only still fixes the apex
+PASS Reset preserves base_only rule and restores the vertices
+PASS Symmetric mode still centres the apex
+PASS Reset preserves symmetric rule and restores the vertices
+PASS Reset respects a newly authored size
+PASS Console keeps unit physics scale at yaw 0
+PASS Support stays upright at yaw 0
+PASS Console keeps unit physics scale at yaw 90
+PASS Support stays upright at yaw 90
+PASS Console keeps unit physics scale at yaw 180
+PASS Support stays upright at yaw 180
+PASS Console keeps unit physics scale at yaw 270
+PASS Support stays upright at yaw 270
+PASS Other placements retain direct manipulation without an added panel
+PASS Other placements retain their authored grip size
+PASS Repeated configuration builds only one recovery panel
+PASS Disabling workbench removes the optional console
+PASS Disabling workbench restores the original grip radius
+PASS Re-enabling workbench creates one live console
+PASS Re-enabling restores the larger visible grip
+PYRAMID_RESULT 46 []

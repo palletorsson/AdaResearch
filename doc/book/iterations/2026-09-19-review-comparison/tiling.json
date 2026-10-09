@@ -1,0 +1,119 @@
+{
+  "status": "targeted repair and preservation",
+  "summary": "A small source can reach a floor, a wall, a volume or a garment. This pass makes its comparisons easier to discover, repairs the held-floor musical flash, and gives Foundry a shorter first route without cutting its experiments.",
+  "items": [
+    {
+      "title": "Eight halls, one cumulative inquiry",
+      "description": "The order is retained. We distinguish a source, its copying rule, the surface that receives it, and the body that encounters it. Seven book chapters are unchanged; Foundry gains two short route signposts while retaining every original paragraph.",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/SUMMARY.md"
+    },
+    {
+      "title": "Disco: let the floor carry the comparison",
+      "description": "The same arrangement can receive another palette without rebuilding the floor. Neutral hall-local materials quiet the bright wireframe that competed with that comparison.",
+      "images": [
+        "doc/book/iterations/2026-09-19-tiling-review/opening/baseline/Pattern_Disco-inside.png",
+        "doc/book/iterations/2026-09-19-tiling-review/opening/pulse-visual-after/Pattern_Disco-held-pulse.png"
+      ],
+      "captions": [
+        "Before · saturated wireframe surrounds the returning floor.",
+        "After · the same held checker sits within quieter surroundings."
+      ],
+      "image_note": "Actual museum renders at matching camera, FOV and phase-zero checker state. The final image is captured after the repaired musical flashes expire. No global shader, capture flag or floor geometry was changed.",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/opening/DECISIONS.md"
+    },
+    {
+      "title": "A musical flash should not become a permanent stripe",
+      "description": "While HOLD stopped visual-step repaints, musical flashes had no separate expiry. The repaired controller restores a flashed column after 150 ms while leaving the visual clock held. Both the colour Disco and its earlier monochrome counterpart were checked.",
+      "images": [
+        "doc/book/iterations/2026-09-19-tiling-review/opening/pulse-visual-before/Pattern_Disco-held-pulse.png",
+        "doc/book/iterations/2026-09-19-tiling-review/opening/pulse-visual-after/Pattern_Disco-held-pulse.png"
+      ],
+      "captions": [
+        "Original controller replay · two white bands remain after the musical events.",
+        "Repaired controller · the flashes expire; the held checker returns."
+      ],
+      "image_note": "Two actual-museum processes use the same neutral hall and camera. The first re-instantiates the saved original controller, rather than claiming to reproduce an entire old project build. Both receive four events each on columns 3 and 7, wait 0.8 seconds and keep visual phase zero.",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/opening/DECISIONS.md"
+    },
+    {
+      "title": "Foundry: a first route through a large system",
+      "description": "The opening now names three encounters. All longer experiments stay available; the visitor can return to source memory, spacing, offset and receiver groups.",
+      "before": "How many places can one small decision change?\n\nThe returning disco let us separate a pattern, its palette and its clock. Here a small arrangement supplies a much larger field. Make one decision where you can see exactly where it began, then let it reach the architecture around you.",
+      "after": "How many places can one small decision change?\n\nThe returning disco let us separate a pattern, its palette and its clock. Here a small arrangement supplies a much larger field. Make one decision where you can see exactly where it began, then let it reach the architecture around you.\n\nTake this room in three passes. First follow a source decision into its copies. Then let one receiving surface keep an earlier image. Finally, visit the studio in the annex and let it take over a wall and the room around you. The source memory, spacing, offset and group experiments can wait for a return visit.",
+      "text_kind": "final.md opening",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/Pattern_Foundry.diff"
+    },
+    {
+      "title": "Keep the held-surface discovery; offer a return",
+      "description": "This second insertion gives a first-time visitor a concrete continuation after the curve keeps its earlier image. No original paragraph or artifact is removed.",
+      "before": "With CURVE selected on the display, press LINK / HOLD. Now press MARK again. The flat sample follows; the curve keeps what it had. There is a difference between them, and the loom has continued running. Holding this sample means declining the next image. It does not stop time or let you edit just one of its repeated marks.",
+      "after": "With CURVE selected on the display, press LINK / HOLD. Now press MARK again. The flat sample follows; the curve keeps what it had. There is a difference between them, and the loom has continued running. Holding this sample means declining the next image. It does not stop time or let you edit just one of its repeated marks.\n\nFor a first visit, link the curve again and continue to the studio in the runway annex, where the third pass begins. When you return to the loom, the following experiments ask what a saved source remembers, and which receivers accept a change in spacing or position.",
+      "text_kind": "final.md route insertion",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/Pattern_Foundry.diff"
+    },
+    {
+      "title": "Tutorial Pattern: find the difference before its name",
+      "description": "The P1 and PM identifiers still connect panels to controls. The expanded names no longer answer the manuscript’s opening comparison before the visitor looks.",
+      "images": [
+        "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/fixed_motif_bay.png",
+        "doc/book/iterations/2026-09-19-tiling-review/relations/after/fixed_motif_bay.png"
+      ],
+      "captions": [
+        "Original headings replayed · P1 / TRANSLATION and PM / REFLECTION.",
+        "Current headings · P1 and PM, with the same source and copies."
+      ],
+      "image_note": "Actual museum, identical recorded camera/FOV. The before process loads the preserved original lesson source into its local resource cache; current production files were not reverted. This reconstructs the original labels after a shared compile error was repaired.",
+      "before": "P1 / TRANSLATION\nPM / REFLECTION",
+      "after": "P1\nPM",
+      "text_kind": "artifact headings",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/relations/AUDIT.md"
+    },
+    {
+      "title": "Array Patterns: invite an observation at the corner",
+      "description": "FOLLOW AN ADDRESS stays. The second entrance line invites an action instead of announcing the result about independent face grids. The corridor and its address inspector are retained.",
+      "before": "EACH FACE STARTS ITS OWN GRID",
+      "after": "FOLLOW A LINE TO THE CORNER",
+      "text_kind": "artifact invitation",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/relations/AUDIT.md"
+    },
+    {
+      "title": "Symmetry: show the whole diagram; delimit its claim",
+      "description": "The cage was partly buried. Its hall-local mounting is raised, and its plate and registry now distinguish a periodic-lattice rotation restriction from a proof of all seventeen wallpaper groups. The careful book chapter stays intact. A separate placement bug also displaced the surrounding gallery patterns: those now meet their intended wall and floor surfaces.",
+      "images": [
+        "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/wallpaper_cage.png",
+        "doc/book/iterations/2026-09-19-tiling-review/relations/final/wallpaper_cage.png"
+      ],
+      "captions": [
+        "Old source and placement replayed · part of the cage lies below the floor.",
+        "Raised encounter · the full diagram can be inspected from a standing approach."
+      ],
+      "image_note": "Actual museum views with matching camera at 1.65 m, target and FOV. The before process reconstructs the saved source and old mounting height in memory. It is a labelled reconstruction, not an independently preserved old project build. The final view also includes the gallery placement repair, so the background changes as well as the cage. The patterned finish is the gallery’s existing authored material.",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/relations/AUDIT.md"
+    },
+    {
+      "title": "Volume, appearance and a recipe worn by bodies",
+      "description": "The three Ribbon chapters retain their existing encounters. The final hall’s role assignments already promoted the studio, mirror and runway, but a separate primary-order list still selected the old glitch pair. Correcting that list and the core-encounter record makes the recorded route agree with the book; secondary works remain.",
+      "before": "minimalglitch → textureglitch",
+      "after": "fabric_shader_studio → super_drag_mirror → drag_catwalk",
+      "text_kind": "primary-order metadata",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/bodies/AUDIT.md",
+      "images": [
+        "doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/fabric_mirror.png",
+        "doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/fabric_runway_standing.png"
+      ],
+      "captions": [
+        "Current encounter · the stored recipe worn at the mirror.",
+        "Current encounter · the same recipe shared with four runway bodies."
+      ],
+      "image_note": "These are two existing encounters in the current museum, not before/after software versions. The desktop probe uses an isolated saved recipe; no headset comfort or cloth-physics claim is made."
+    },
+    {
+      "title": "Update the overview without rewriting the history",
+      "description": "Current sequence notes now follow all eight halls, including volume, shaders and dressed bodies. Original four-room curation notes are retained verbatim as dated history. Map order, prerequisites and artifact-group membership are unchanged.",
+      "before": "The seventeen wallpaper groups, and why there are exactly seventeen",
+      "after": "Distinguish the periodic-lattice rotation restriction from a proof of the full seventeen-group classification",
+      "text_kind": "sequence learning objective",
+      "report": "doc/book/iterations/2026-09-19-tiling-review/sequence.diff"
+    }
+  ]
+}

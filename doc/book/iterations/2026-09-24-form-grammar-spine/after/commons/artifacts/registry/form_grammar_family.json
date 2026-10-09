@@ -1,0 +1,37 @@
+{
+  "artifacts": {
+    "form_grammar_family": {
+      "lookup_name": "form_grammar_family",
+      "name": "A Family the Cube Can Become",
+      "scene": "res://commons/artifacts/form_grammar_family/form_grammar_family.tscn",
+      "category": "lsystems",
+      "description": "Six retained constructions made by the existing MeshData, InsetFaceOp and ExtrudeFaceOp. Two inset amounts and two initial selections separate variation from rule scope. Walk around the exact rendered meshes; each and its plinth have collision.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "auto_ground": false,
+      "footprint": [
+        14.1,
+        4.4,
+        10.5
+      ],
+      "size_group": "environment",
+      "map_sequences": [
+        "lsystems"
+      ],
+      "tags": [
+        "dna",
+        "mesh_grammar",
+        "composition",
+        "inset",
+        "extrude",
+        "triangles"
+      ],
+      "interactions": [
+        "Walk around six fixed specimens and return to earlier stages.",
+        "Compare the two top triangles and the shape of their descendants."
+      ],
+      "qfep_connection": "A finite rule vocabulary permits some bodies and leaves others unexpressed. Parameter changes and selection changes have different consequences. The study makes no entropy measurement or biological-growth claim.",
+      "validation": "Native isolated source/geometry/collision checks recorded with the study; full museum-loader and tracked-headset acceptance remain separate."
+    }
+  }
+}

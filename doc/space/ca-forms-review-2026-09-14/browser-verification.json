@@ -1,0 +1,141 @@
+{
+  "checks": 9,
+  "failures": [],
+  "results": [
+    {
+      "name": "Initial bent history loads with measurements",
+      "passed": true,
+      "state": {
+        "generation": "Generation 14 / 27 · z = 7.0–7.5 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Sine bend"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Sine rule exposes blocked walk",
+      "passed": true,
+      "state": {
+        "generation": "Generation 14 / 27 · z = 7.0–7.5 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Sine in the rule"
+        ],
+        "section": "This section: 354 occupied sites. 0 sites changed since the previous generation. Birth threshold: 6 of 8 neighbours; survival threshold: 4.",
+        "totals": "8,289 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: stopped at z = 3.20 m. No complete passage in this test."
+      }
+    },
+    {
+      "name": "Reserved corridor exposes 160 suppressions and complete walk",
+      "passed": true,
+      "state": {
+        "generation": "Generation 14 / 27 · z = 7.0–7.5 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Sine in the rule"
+        ],
+        "section": "This section: 324 occupied sites. 0 sites changed since the previous generation. Birth threshold: 6 of 8 neighbours; survival threshold: 4.",
+        "totals": "7,710 occupied cells across 28 generations · 160 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Breathing form preserves occupied count and passage",
+      "passed": true,
+      "state": {
+        "generation": "Generation 14 / 27 · z = 7.0–7.5 m",
+        "images": false,
+        "overflow": false,
+        "pressed": [
+          "Sine breath"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Previous generation changes the section",
+      "passed": true,
+      "state": {
+        "generation": "Generation 13 / 27 · z = 6.5–7.0 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Straight"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Next generation restores the section",
+      "passed": true,
+      "state": {
+        "generation": "Generation 14 / 27 · z = 7.0–7.5 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Straight"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Seed is disclosed without a fictitious update",
+      "passed": true,
+      "state": {
+        "generation": "Generation 0 / 27 · z = 0.0–0.5 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Straight"
+        ],
+        "section": "This section: 133 occupied sites. Authored seed; no update yet.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Slider reaches last recorded generation",
+      "passed": true,
+      "state": {
+        "generation": "Generation 27 / 27 · z = 13.5–14.0 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Straight"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    },
+    {
+      "name": "Images load and responsive page does not overflow",
+      "passed": true,
+      "state": {
+        "generation": "Generation 7 / 27 · z = 3.5–4.0 m",
+        "images": true,
+        "overflow": false,
+        "pressed": [
+          "Sine bend"
+        ],
+        "section": "This section: 142 occupied sites. 0 sites changed since the previous generation. Birth threshold: 5 of 8 neighbours; survival threshold: 4.",
+        "totals": "3,965 occupied cells across 28 generations · 0 births or survivals suppressed",
+        "walk": "Desktop walk: crossed the full 14 m vault."
+      }
+    }
+  ]
+}

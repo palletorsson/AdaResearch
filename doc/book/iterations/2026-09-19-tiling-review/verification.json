@@ -1,0 +1,224 @@
+{
+  "scope": "Eight Tiling halls; preservation and evidence checks, not a new runtime or learner trial",
+  "sequence_membership_and_history_preserved": true,
+  "chapters": {
+    "Pattern_Disco": {
+      "unchanged": true,
+      "current_sha256": "508d7cbc06927da571a4e6a679baf03726f5c347df4955b351397b011bf14b83"
+    },
+    "Pattern_Foundry": {
+      "unchanged": false,
+      "current_sha256": "0d4cbe0f81432fb69694d9978c638e98167f549fb37144bab43a4158475eab86"
+    },
+    "Tutorial_Pattern": {
+      "unchanged": true,
+      "current_sha256": "897d88c50dff322e9a9d6dedf0a88e65985c8bfef7b196119a42917cbc5a2373"
+    },
+    "Array_Patterns": {
+      "unchanged": true,
+      "current_sha256": "67cfa28ed8b81221a14c2ce061ace7930b806d57eef920a076f70e818ec2f032"
+    },
+    "Symmetry_Seventeen": {
+      "unchanged": true,
+      "current_sha256": "ed35f6d3e880e8a5e6af2353cf71860e49e66a7c0a396574800ad25e52d1c798"
+    },
+    "Ribbon_Patterns_01": {
+      "unchanged": true,
+      "current_sha256": "494882d0579203c1678cbfea061bd57a40cb4b90430061c1cf92dd64640e1cc2"
+    },
+    "Ribbon_Patterns_02": {
+      "unchanged": true,
+      "current_sha256": "738c850adf0b894d24386b5030ebde05df99e79b8d64f51d875042c115cb5040"
+    },
+    "Ribbon_Patterns_03": {
+      "unchanged": true,
+      "current_sha256": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8"
+    }
+  },
+  "foundry_only_two_paragraph_insertions": true,
+  "frozen_inputs_preserved": {
+    "doc\\book\\review-packages\\2026-09-18\\tiling\\review.md": "fc901dc259051d5468d865d30b74fc0622e915b12958495331c9c2811b3dde83",
+    "doc\\book\\review-packages\\2026-09-18\\tiling-review.zip": "8de87f703d01d4566507476f4c9bf397abf0e6c52c148ada3b5c14fbb96fa234",
+    "doc\\book\\review-feedback\\2026-09-18\\tiling\\01-review.md": "835c7ae598c8486fe4cefff0b3f01b3d9b967d617667a94f9c77b5c11ab3ab89"
+  },
+  "resolved_placed_instances": 98,
+  "source_chain_scope": "Registry/delegate resolution and book-anchor placement; not execution of every secondary artifact",
+  "opening": {
+    "assertions": 318,
+    "includes_replay_assertions": 22,
+    "failures": 0
+  },
+  "relations": {
+    "after/probe_fixed_motif.json": {
+      "checks": 42,
+      "failures": [],
+      "headset_tested": false
+    },
+    "after/probe_tunnel_addresses.json": {
+      "checks": 50,
+      "failures": [],
+      "headset_tested": false
+    },
+    "final/probe_symmetry_compare.json": {
+      "checks": 46,
+      "failures": [],
+      "headset_tested": false
+    },
+    "ceiling-after/probe_overlay_positions.json": {
+      "checks": 11,
+      "failures": [],
+      "positions": [
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -3.98000001907349
+          ],
+          "face": 0,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "expected": [
+            20.0,
+            6.0,
+            -6.01999998092651
+          ],
+          "face": 1,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            18.9799995422363,
+            6.0,
+            -5.0
+          ],
+          "face": 2,
+          "matches": true
+        },
+        {
+          "actual": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "expected": [
+            21.0200004577637,
+            6.0,
+            -5.0
+          ],
+          "face": 3,
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "expected": [
+            20.0,
+            7.01999998092651,
+            -5.0
+          ],
+          "face": 4,
+          "matches": true
+        },
+        {
+          "actual": [
+            18.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 0,
+          "expected": [
+            18.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 1,
+          "expected": [
+            20.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            22.0,
+            10.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 2,
+          "expected": [
+            22.0,
+            10.0,
+            -5.0
+          ],
+          "matches": true
+        },
+        {
+          "actual": [
+            20.0,
+            6.0,
+            -5.0
+          ],
+          "ceiling_or_floor": 3,
+          "expected": [
+            20.0,
+            6.0,
+            -5.0
+          ],
+          "matches": true
+        }
+      ],
+      "translated_parent": [
+        13,
+        3,
+        -3
+      ]
+    }
+  },
+  "final_symmetry_scene_tree_and_compile_errors": 0,
+  "bodies_runtime_assertions": 116,
+  "ribbon_metadata_checks": 20,
+  "selected_image_sha256": {
+    "doc/book/iterations/2026-09-19-tiling-review/opening/baseline/Pattern_Disco-inside.png": "a8f71a43678141745fb830f10dff0e53fc3914daba33805d8c7600c50132c6e1",
+    "doc/book/iterations/2026-09-19-tiling-review/opening/pulse-visual-after/Pattern_Disco-held-pulse.png": "03ee0d1a04c6dc7d2546bec99f25e61af0643655ba691afbd66fbcf0558f2c6d",
+    "doc/book/iterations/2026-09-19-tiling-review/opening/pulse-visual-before/Pattern_Disco-held-pulse.png": "102693517b04fced7134303ba6805acdf98b035bfdd130baa533ba493ed8eba4",
+    "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/fixed_motif_bay.png": "544cbefc6f818c1716a08ff0c1d72ed48e6ecbfc465a26e40e627112b9982fc6",
+    "doc/book/iterations/2026-09-19-tiling-review/relations/after/fixed_motif_bay.png": "fa9f7e29264f2874d199e4071277d4347672655590826034125897cb4506d6c6",
+    "doc/book/iterations/2026-09-19-tiling-review/relations/clean-before/wallpaper_cage.png": "860a43e4932268d098156c660d16a8eabfbd5b726bc23bb2389ee1dd1b0bf2b5",
+    "doc/book/iterations/2026-09-19-tiling-review/relations/final/wallpaper_cage.png": "50cf2160cf5f7ee531cec480fc1674cafcef7a65b6be2e9038fba4ae60ce0992",
+    "doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/fabric_mirror.png": "7a62f16e1e2634c1eb0dd03a4ad343dcc3493317412684a80a9f10458ea21713",
+    "doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/fabric_runway_standing.png": "538a88f6f51debda42d838ca90723d8fd5c76b95b5c834b62ba58ca2a487a312"
+  },
+  "comparison_local_links_checked": 93,
+  "headset_tested": false,
+  "learner_verified": false,
+  "browser_layout_verified": false,
+  "remaining_diagnostics": "Startup UID/certificate, renderer-feature and cache warnings remain documented in the local audits; no globally clean log claim."
+}

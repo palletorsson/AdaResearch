@@ -1,0 +1,6 @@
+MAKE: Black sphere; grab, carry, release in place.
+BRING: _ready; variables; mesh/node; collider; local position.
+GIVEN: Museum; configured XR hand; XRToolsPickable; collision settings; black material settings.
+BUILD: Body; matching mesh/shape; direct refs; frozen release.
+CHECK: Hold moves both; release stays; disabled refuses; new radius matches.
+LATER: Grip pose; trigger action; labels; coordinate readouts.

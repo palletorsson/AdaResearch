@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reading a rule — Ada</title><style>
+:root{color-scheme:light;--paper:#f2f0e9;--ink:#232926;--muted:#59635c;--accent:#9d285c;--line:#d1d2c8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.7 Georgia,serif}
+a{color:var(--accent);text-underline-offset:4px}a:hover{color:#651639}header{border-bottom:1px solid var(--line);padding:20px 5vw;font:13px/1.5 system-ui,sans-serif;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+header nav{display:flex;gap:22px}.brand{letter-spacing:.12em;font-weight:650}main{max-width:860px;margin:70px auto;padding:0 26px}
+h1{font-weight:400;font-size:clamp(48px,7vw,88px);line-height:1.05;letter-spacing:-.035em;margin:0 0 20px}h2{font-weight:400;font-size:31px;line-height:1.25;margin:64px 0 22px}
+p{margin:18px 0 24px}main>p:first-of-type{font:13px/1.6 system-ui;color:var(--muted);letter-spacing:.055em}
+figure{margin:0}img{display:block;width:100%;height:auto}figcaption,.small{font:14px/1.6 system-ui,sans-serif;color:var(--muted);margin:12px 0 0}
+.pair,.wide,.experiment{width:min(1240px,calc(100vw - 52px));position:relative;left:50%;transform:translateX(-50%);margin:38px 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair img{height:360px;object-fit:contain;background:#e8e8e1}.wide img{max-height:650px;object-fit:contain;background:#e8e8e1}
+table{border-collapse:collapse;width:100%;font:15px/1.6 system-ui,sans-serif;margin:28px 0}th,td{border-bottom:1px solid var(--line);text-align:left;padding:14px 12px;vertical-align:top}th{font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+code{font: .84em/1.5 Consolas,monospace;background:#e7e7df;padding:2px 5px;border-radius:3px}pre{background:#232926;color:#f5f2e9;padding:24px;overflow:auto}pre code{padding:0;background:none;color:inherit}
+.experiment{background:#e5e6dd;padding:24px;max-width:1060px}.experiment img{max-height:650px;object-fit:contain}.eyebrow{font:11px/1.4 system-ui;letter-spacing:.14em;margin:0 0 15px}.switches{display:flex;gap:10px;flex-wrap:wrap}button{font:15px/1.4 system-ui;padding:10px 18px;border:1px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;border-radius:3px}button[aria-pressed=true]{background:var(--ink);color:var(--paper)}button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.rule{margin:18px 0;font:20px/1.5 Consolas,monospace}
+footer{border-top:1px solid var(--line);padding:25px 5vw;font:13px/1.6 system-ui;color:var(--muted)}li{padding-left:5px;margin:8px 0}
+@media(max-width:700px){main{margin-top:42px;padding:0 22px}body{font-size:18px}.pair{grid-template-columns:1fr}.pair img{height:auto;max-height:390px}.pair,.wide,.experiment{width:calc(100vw - 28px)}table{font-size:13px}td,th{padding:10px 6px}h2{font-size:28px}.experiment{padding:15px}}
+@media print{header,footer,.switches{display:none}body{background:white;font-size:11pt}main{max-width:none;margin:0}.pair,.wide,.experiment{width:100%;left:0;transform:none;break-inside:avoid}.pair img{height:200px}h2{margin-top:30px}.experiment{max-width:100%}}
+</style></head>
+<body><header><span class="brand">ADA / IMAGE · RULE · ROOM</span><nav><a href="index.html">Reading the image</a><a href="making.html">Making</a><a href="open-structures.zip">Godot project ↓</a></nav></header><main id="reading"><h1>Reading a rule</h1>
+<p><em>A study after Sol LeWitt · 1 October 2026</em></p>
+<p>At first the room seems full of different objects. Look again at the five forms on the long support. The white member keeps returning. Four corners stay on the ground. Above them, another four spread, contract or move aside. Much of the difference can be made by deciding where those corners go.</p>
+<p>This is a useful image to carry through Ada. We can meet it before we know how to build it, return with a few operations, and discover that we can make something the image does not contain.</p>
+<div class="pair">
+<figure><img src="reference-five-forms.png" alt="Supplied photograph: five white open geometric forms on one long plinth."><figcaption>The supplied five-form photograph. LeWitt's <em>Five Open Geometric Structures</em> is documented by <a href="https://www.lissongallery.com/artists/sol-lewitt/artworks/five-open-geometric-structures?image_id=3605">Lisson Gallery</a> as a 1979 work in acrylic on mahogany.</figcaption></figure>
+<figure><img src="five-forms.png" alt="Native Godot study of a cube, pyramid, narrow box, truncated pyramid and sheared box."><figcaption>Our native Godot study. A chosen vocabulary of positions and connections; dimensions and joinery are approximations. This is a standalone scene, not a museum screenshot.</figcaption></figure>
+</div>
+
+<h2>Begin with what the image gives us</h2>
+<p>We can see repeated white members, open interiors, five related forms and a common support. We can infer a family of connections. We cannot measure every concealed joint from the photograph, or recover a unique instruction that must have produced it.</p>
+<p>The distinction matters. We are making an executable interpretation and comparing its consequences with the image. Getting a similar view is one test. Turning the camera and finding that the construction still makes sense is another.</p>
+<p>For the cube frame, eight positions and twelve connections are enough. Four connections close the base, four close the top, and four join them. We already know how to join two positions from Point Lines. Giving the connection a white, square section lets us see it; the section is a material decision added to the abstract line.</p>
+<p>The cube's twelve edges are not its twelve triangles. We do not need to fill the six openings with faces to make this work. Godot supplies a mesh for each bar; the learner supplies the relations between the corners.</p>
+<h2>Five forms, three decisions</h2>
+<table>
+<thead>
+<tr>
+<th>In our study</th>
+<th>Decision</th>
+<th>What stays fixed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cube</td>
+<td>Keep both squares the same size</td>
+<td>Height, connections, member thickness</td>
+</tr>
+<tr>
+<td>Narrow box</td>
+<td>Reduce both horizontal coordinates</td>
+<td>Height and member thickness</td>
+</tr>
+<tr>
+<td>Truncated pyramid</td>
+<td>Shrink the upper square</td>
+<td>Base and height</td>
+</tr>
+<tr>
+<td>Pyramid</td>
+<td>Bring the upper corners together</td>
+<td>Base; four edges now reach one apex</td>
+</tr>
+<tr>
+<td>Sheared box</td>
+<td>Move the upper square sideways</td>
+<td>Base; parallel upper and lower squares</td>
+</tr>
+</tbody>
+</table>
+<p>The tapered form reveals a real gap in the lineage. Scaling the whole cube shrinks its base too. To keep the base and narrow the top, we must select which positions change. Shearing is also a new operation, not another name for rotating the object.</p>
+<p>At the pyramid's apex, four stored addresses coincide. The top edges have become zero length. Our renderer omits them, leaving five distinct positions and eight visible edges. We can still keep eight entries in the list, but the list no longer counts the distinct places in the object. The familiar cube description has reached one of its limits.</p>
+<h2>An array gives each decision an address</h2>
+<div class="pair">
+<figure><img src="reference-combinations.png" alt="Supplied photograph of white open forms arranged on individual plinths in a square array."><figcaption>The supplied arrangement. MCA Chicago catalogues LeWitt's 1979 book <a href="https://mcachicago.org/art-artists/collection/open-geometric-structures-five-geometric-structures-and-their-combinations/">Five Geometric Structures and their Combinations</a>. This reference does not establish the exact placement rule of this photograph.</figcaption></figure>
+<figure><img src="cyclic-array.png" alt="Our five-by-five Godot array with a cyclic selection of five forms."><figcaption>Our proposed cyclic arrangement: twenty-five addresses, five available forms. The rule is ours, not a recovered LeWitt instruction.</figcaption></figure>
+</div>
+
+<p>The existing Chessboard study asks for a colour at each address. Here we ask for a form. The placement can remain unchanged while the answer at every place changes.</p>
+<div class="experiment" data-comparison="array">
+<p class="eyebrow">ONE CHANGE / SAME CAMERA</p>
+<div class="switches"><button type="button" data-choice="cyclic" aria-pressed="true">Shift each row</button><button type="button" data-choice="repeat" aria-pressed="false">Repeat the row</button></div>
+<p class="rule"><code data-rule>(column + row) % 5</code></p>
+<img data-result src="cyclic-array.png" alt="Native Godot capture of the cyclic array; the five forms shift by one place in each successive row.">
+<p data-note aria-live="polite">Each new row begins one form later. Five forms return in another order.</p>
+<p class="small">These buttons compare two recorded Godot states. Open the downloadable project to orbit and change the live scene.</p>
+</div>
+
+<p><code>% 5</code> makes the count wrap after five choices. It is a compact rule with a large visible consequence. We do not have to introduce randomness to make variation, or choose twenty-five objects independently to make a complex arrangement.</p>
+<h2>A footprint, then a height</h2>
+<div class="pair">
+<figure><img src="reference-modules.png" alt="Supplied photograph of five white stepped cube lattices on a wooden floor."><figcaption>The first photograph appears to show <em>Five Modular Structures (Sequential Permutations on the Number Five)</em>, 1972. The <a href="https://www.nationalgalleries.org/art-and-artists/313/five-modular-structures-sequential-permutations-number-five">National Galleries of Scotland</a> describes a shared ground plan and structures rising in steps to five units, with the fifth uniformly five units tall.</figcaption></figure>
+<figure><img src="five-height-rules.png" alt="Native Godot capture of five cross-footprint lattices generated by different height rules."><figcaption>Our response: one cross-shaped footprint, five explicit height rules. The exact footprint and functions are hypotheses for this study, not a measured reconstruction.</figcaption></figure>
+</div>
+
+<p>The first photograph looks more complicated, but the unit is simpler: keep the same cube frame and repeat it. At each ground address, decide whether a column exists. If it does, decide its height. A third loop places the units above one another.</p>
+<p>Our five height functions are <code>x + 1</code>, <code>5 - x</code>, <code>z + 1</code>, <code>5 - z</code>, and <code>5</code>. The first four climb in different directions. The fifth holds every occupied column at five units. Now change only which ground addresses are occupied.</p>
+<div class="experiment" data-comparison="footprint">
+<p class="eyebrow">ONE CHANGE / SAME HEIGHT RULES</p>
+<div class="switches"><button type="button" data-choice="cross" aria-pressed="true">Cross footprint</button><button type="button" data-choice="square" aria-pressed="false">Filled square</button></div>
+<p class="rule"><code data-rule>x == 2 or z == 2</code></p>
+<img data-result src="five-height-rules.png" alt="Five stepped lattices built on cross-shaped footprints.">
+<p data-note aria-live="polite">Nine ground addresses per structure. Much of the square is left empty.</p>
+<p class="small">Recorded native Godot views. The change adds occupied columns while preserving each structure's height function.</p>
+</div>
+
+<p>The footprint changes how much of the room the structure occupies and how much of another structure we can see through it. “More” is not only a larger count. It is a different relation between an object, its neighbours and the observer.</p>
+<h2>When are we ready in the spine?</h2>
+<p><strong>The full project belongs in Arrays, completed at Tutorial_3D.</strong> We can introduce the photograph much earlier. Recognising a connection is a useful first achievement; independently generating a family is a later one.</p>
+<table>
+<thead>
+<tr>
+<th>Return in the spine</th>
+<th>What the student can now contribute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Point One → Coordinates</td>
+<td>Distinguish a position from its visible body; place the corners.</td>
+</tr>
+<tr>
+<td>Point Lines</td>
+<td>Join two positions; give a line length, direction and thickness. Begin reading the photograph.</td>
+</tr>
+<tr>
+<td>Trace → Grid</td>
+<td>Keep positions in a list; use repeated addresses. These are dependencies, not permission to skip ahead.</td>
+</tr>
+<tr>
+<td>Triangle → Polyhedra → Cube</td>
+<td>Read connections and faces; construct an enclosure from shared corners. Make an individual open frame using the supplied bar renderer.</td>
+</tr>
+<tr>
+<td>Transformation</td>
+<td>Place, rotate and scale instances. Add a short bridge for changing selected corners: taper and shear.</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Make a row, then a table; choose a form at each address. This is the five-form arrangement's teaching home.</td>
+</tr>
+<tr>
+<td>Tutorial_3D</td>
+<td>Add the third index and an occupancy or height rule. Make the stepped structures.</td>
+</tr>
+</tbody>
+</table>
+<p>The current <strong>Chessboard</strong> kit already makes the transfer concrete: change <code>colour_of(x, z)</code> into a function that chooses a form or a height. But the map folder for <strong>Array</strong> does not yet contain its own <code>tutorial.md</code>, and the existing Tutorial_3D technical text mainly describes the production artifact. Conceptual placement is not the same as a finished learner route. This portable study supplies a bounded bridge; it should not be treated as proof that the whole curriculum already teaches every step.</p>
+<p>For the hall, I would first show the five-form row together, then the array, with space to look back at the row. Keep the larger lattice for the return in Tutorial_3D. In Point Lines, one frame or one reference image is enough: showing the whole vocabulary there would make the first line carry too much.</p>
+<h2>What can we make that is not in the photograph?</h2>
+<figure class="wide"><img src="between-forms.png" alt="Seven Godot frames progressing from pyramid to cube by increasing only the upper square's size."><figcaption>Our variation: seven sampled upper widths. Base, height and bar thickness stay fixed.</figcaption></figure>
+
+<p>Between the named forms there is room. We can let the upper square grow through seven sizes. We can leave out one connection and find the view from which its absence disappears. We can use the same height rule on a diagonal, a border or a footprint with a gap. These are small, explainable decisions with different spatial consequences.</p>
+<p>There is a critical question inside that pleasure. Why these five forms? What did the vocabulary make easy to see, and what did it leave unnamed? A system can be open to view and still allow only a narrow set of answers. The intermediate forms give us a way to press on the selection without abandoning the rule.</p>
+<p>Making an inhabitable version is a further step. Scale alone will not tell us which openings admit a body. We would need to choose collision boundaries and test passage. That is a possible return to the museum, not something the current desktop study claims to have established.</p>
+<h2>Try, compare, keep the result</h2>
+<p>Start with one form. Predict which corners will move, change one value, and inspect from two sides. Then change a selection rule while keeping the addresses still. Save the original, your inferred rule and one variation together. The image gives the investigation somewhere to begin; it does not have to be its final answer.</p>
+<p><a href="making.html">Open the short making study</a> · <a href="open-structures.zip">Download the complete Godot project</a> · <a href="README.md">Read the project notes</a> · <a href="report.json">Inspect the native test report</a></p>
+<p><strong>Built and checked:</strong> four scene modes, eight native captures and 27 passing checks in Godot 4.6. Checks cover edge counts, coincident apex positions, finite transforms, fixed bases, unchanged grid addresses and the two rule changes. No existing hall or canonical manuscript was changed by this study. No learner or physical headset trial has been made.</p></main><footer>1 October 2026 · Native Godot study after supplied photographs of Sol LeWitt's work. Original arrangement rules are distinguished from our proposals. <a href="report.json">Software evidence</a></footer><script>
+const states={
+cyclic:{image:'cyclic-array.png',rule:'(column + row) % 5',note:'Each new row begins one form later. Five forms return in another order.',alt:'Native Godot cyclic array: five forms shift by one place in each successive row.'},
+repeat:{image:'repeated-array.png',rule:'column',note:'Every row repeats the same five choices. All twenty-five addresses and their spacing stay fixed.',alt:'Native Godot array: five identical rows, with each form repeated down its column.'},
+cross:{image:'five-height-rules.png',rule:'x == 2 or z == 2',note:'Nine ground addresses per structure. Much of the square is left empty.',alt:'Five native Godot stepped lattices on cross-shaped footprints.'},
+square:{image:'expanded-footprint.png',rule:'true',note:'Twenty-five ground addresses per structure. The five height functions are unchanged.',alt:'Five native Godot lattices with full square footprints and the same five height functions.'}
+};
+document.querySelectorAll('[data-comparison]').forEach(group=>{
+group.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>{
+const state=states[button.dataset.choice];
+group.querySelector('[data-result]').src=state.image;group.querySelector('[data-result]').alt=state.alt;
+group.querySelector('[data-rule]').textContent=state.rule;group.querySelector('[data-note]').textContent=state.note;
+group.querySelectorAll('[data-choice]').forEach(peer=>peer.setAttribute('aria-pressed',String(peer===button)));
+}));});
+</script></body></html>

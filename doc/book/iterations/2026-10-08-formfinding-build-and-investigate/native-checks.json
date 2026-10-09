@@ -1,0 +1,197 @@
+{
+  "checks": [
+    {
+      "name": "bowl gradient matches analytic x/2,z/2",
+      "passed": true
+    },
+    {
+      "name": "descent first point is predicted (-1.82,-1.3)",
+      "passed": true
+    },
+    {
+      "name": "bowl stops at small slope",
+      "passed": true
+    },
+    {
+      "name": "outside proposal not clamped or committed",
+      "passed": true
+    },
+    {
+      "name": "step budget distinct",
+      "passed": true
+    },
+    {
+      "name": "left start stays in lower left basin",
+      "passed": true
+    },
+    {
+      "name": "curve exact first endpoint",
+      "passed": true
+    },
+    {
+      "name": "curve exact last endpoint",
+      "passed": true
+    },
+    {
+      "name": "two-metre span midpoint is 1.225 m",
+      "passed": true
+    },
+    {
+      "name": "zero sag gives straight line",
+      "passed": true
+    },
+    {
+      "name": "moved 3D endpoint retained",
+      "passed": true
+    },
+    {
+      "name": "coincident endpoints hide zero rods",
+      "passed": true
+    },
+    {
+      "name": "pins retained 1",
+      "passed": true
+    },
+    {
+      "name": "chain hangs without nonfinite values 1",
+      "passed": true
+    },
+    {
+      "name": "pins retained 12",
+      "passed": true
+    },
+    {
+      "name": "chain hangs without nonfinite values 12",
+      "passed": true
+    },
+    {
+      "name": "higher correction budget reduces final length error",
+      "passed": true
+    },
+    {
+      "name": "zero-distance correction remains finite",
+      "passed": true
+    },
+    {
+      "name": "held endpoint becomes new pin",
+      "passed": true
+    },
+    {
+      "name": "arm span retained (1.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "opposed mass moments equal (1.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "heavier mass has shorter arm (1.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "arm span retained (4.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "opposed mass moments equal (4.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "heavier mass has shorter arm (4.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "arm span retained (3.0, 7.0)",
+      "passed": true
+    },
+    {
+      "name": "opposed mass moments equal (3.0, 7.0)",
+      "passed": true
+    },
+    {
+      "name": "heavier mass has shorter arm (3.0, 7.0)",
+      "passed": true
+    },
+    {
+      "name": "improvement always accepted",
+      "passed": true
+    },
+    {
+      "name": "uphill accepted below threshold",
+      "passed": true
+    },
+    {
+      "name": "uphill rejected above threshold",
+      "passed": true
+    },
+    {
+      "name": "zero temperature never accepts worse",
+      "passed": true
+    },
+    {
+      "name": "best retained monotonically",
+      "passed": true
+    },
+    {
+      "name": "current can worsen",
+      "passed": true
+    },
+    {
+      "name": "bounded proposal and finite stopping",
+      "passed": true
+    },
+    {
+      "name": "seeded reset repeats experiment",
+      "passed": true
+    },
+    {
+      "name": "quiet low heap rejected",
+      "passed": true
+    },
+    {
+      "name": "tall short observation insufficient",
+      "passed": true
+    },
+    {
+      "name": "movement drains twice as fast",
+      "passed": true
+    },
+    {
+      "name": "lost height clears credit",
+      "passed": true
+    },
+    {
+      "name": "tall quiet interval accepted",
+      "passed": true
+    },
+    {
+      "name": "reset clears acceptance",
+      "passed": true
+    },
+    {
+      "name": "real three-cube Jolt stack reaches criterion",
+      "passed": true
+    },
+    {
+      "name": "real separate floor cubes remain rejected",
+      "passed": true
+    }
+  ],
+  "count": 44,
+  "failures": [],
+  "observations": {
+    "12pass": {
+      "error": 0.000118123160468109,
+      "middle_y": 0.882475078105927
+    },
+    "1pass": {
+      "error": 0.00532452265421557,
+      "middle_y": 0.865169286727905
+    },
+    "annealing_best": [
+      1.93928003311157,
+      0.00873193144798279
+    ]
+  },
+  "passed": true
+}

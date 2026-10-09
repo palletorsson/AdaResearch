@@ -1,0 +1,33 @@
+{
+  "started": "2026-09-14T10:39:59+02:00",
+  "finished": "2026-09-14T10:40:59+02:00",
+  "pid": 41228,
+  "exit": 0,
+  "checks": 50,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/fractal_arc_probe_base.gd": "786320ea9c88a7120f0bf0d8322ab5c2ad968b1cdc53e2d939bf050f5dd33d48",
+    "ada_run/menger_flight_acceptance.gd": "ede6c265803afeb25bc1f1b6d82757e8573fcb9fd8bd8d64f6ec2eafdac3222e",
+    "commons/maps/Fractal_MengerSponge/map_data.json": "f790edc15f1e1687e45175d92a75ed8f52a0794c4124d434d06ba708b86294f7",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/menger-flight-review-2026-09-14/review-plan.json": "c1a79e84eb2483cf46a7373134729e77740cf9c58219883773e58d4774b09398",
+    "commons/movement/museum_flight_box.gd": "1b406fc917e2320e9d04a2100573a346971f26aaf9839cb709d4b6bdbadb095f",
+    "commons/movement/museum_flight_provider.gd": "a42443aca3a3bdd475ed97ef7614c2ce242aa4dc5329ef26a4fcc812fcdc9804",
+    "commons/scenes/endless_museum.gd": "69c8eb9b82bb13f474a9ce5475f9a9e680c4a028b5c348252f993e67c2f2d897",
+    "commons/scenes/DesktopPlayer.gd": "38c6da96f7b5dcaabb0f48cf53f270b5a3d1ab5af8b075924967ed9aafd8828e",
+    "algorithms/fractals/mengersponge/menger_sponge.gd": "7c5b05621b4c1e4058655622443834d15542d5f5baba1012b07c4340d8f2f2b4",
+    "algorithms/fractals/mengersponge/menger_sponge.tscn": "cb740970d6b41cb1cda0f6fbdbdfbc694734defdce549353150ec2f3c586497f",
+    "commons/data/map_authored.json": "791f0e25e183b0ef2537ed2170bee6c54c03940aa795581d1c63634c8750d722"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

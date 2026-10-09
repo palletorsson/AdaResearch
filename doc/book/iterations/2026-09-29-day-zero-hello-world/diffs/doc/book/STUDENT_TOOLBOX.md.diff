@@ -1,0 +1,22 @@
+--- before/doc/book/STUDENT_TOOLBOX.md
++++ doc/book/STUDENT_TOOLBOX.md
+@@ -24,7 +24,7 @@
+ 
+ | Hall | Main work here | What can enter the student's toolbox |
+ | --- | --- | --- |
+-| Point_Zero | Arrival in something already underway; choosing somewhere to count from | Permission to begin with inherited work. The counter is available to inspect; building its whole system is not an entrance requirement. |
++| Day Zero (preface) | Establish a working environment and recognise inherited infrastructure | Open, change, save, run and stop the supplied base; establish the separate headset route before its use. |\n| Point_Zero | Arrival in something already underway; choosing somewhere to count from | Permission to begin with inherited work. The counter is available to inspect; building its whole system is not an entrance requirement. |
+ | Point_One | Distinguish a position, visible shape, collision and pickup; locate the same body in two references | A supplied starting scene in which the student can place and vary a point, then compare visible-only, solid and borrowed pickable versions. |
+ | Point_Lines | Put two known positions into relation | A reusable way to connect and measure between positions, using the points already made. |
+ | Point_Trace | Let successive positions remain | A small introduced list of positions and a supplied or taught way to display it. Do not silently assume the later Array sequence has already been read. |
+@@ -55,3 +55,10 @@
+ Point One is testing two consecutive readings. The main chapter sustains the bodily, critical and poetic encounter; a separate making passage teaches its construction. Syntax such as constructors, resource types and scene attachment carries its own learning load even in a short block. Avoid treating a line limit as an adequate measure of difficulty.
+ 
+ Keep only code whose wording helps the current encounter. Put the longer reduced implementation after the encounter, with the working parts explicitly supplied. The reader should be able to follow the main chapter without switching into code analysis. Every hall can add an ability to make, notice or question; it does not require an equal allocation of prose and code. This remains a local Point One trial before wider adoption.
++
++
++## Preparation is a prerequisite, not a repeated lesson
++
++Day Zero (doc/book/day-zero.md) carries environment setup as a practical chapter of the preface. Later making passages assume the student can open the supplied project, select the intended scene, edit, save, run and stop. The initial editor, scene and device setup does not recur inside each artifact explanation.
++
++doc/book/studies/day-zero supplies project.godot and a self-contained base.tscn for desktop testing. Point One inherits an identical copy of this base. The player, XR Tools and Quest deployment are named as a separate borrowed system and preparation route; they are not silently implied by the desktop base. No headset acceptance claim follows from a desktop test.

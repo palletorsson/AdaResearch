@@ -1,0 +1,16 @@
+--- before/commons/maps/Point_One/technical.md
++++ commons/maps/Point_One/technical.md
+@@ -91,3 +91,13 @@
+ Point One has introduced a position, a representation, a reference and a test for proximity. Point Lines adds a second position. Subtracting one position from another will give a displacement; drawing between them will give a segment. Remember the changing point: its coordinates alone have not kept the path your hand took. That question will return in Trace.
+ 
+ [Encounter reference](encounter-reference.md) records the first-walk order and additional implementation distinctions. [Current inventory](artifacts.md) distinguishes primary encounters from retained secondary works. Desktop/source evidence exists for the paired cards; physical reach, headset legibility and an unassisted beginner's walk remain observations to make.
++
++## Secondary point and the shared entrance — review decision, 24 September 2026
++
++The entrance window and Point One are read as one arrival, as the author requests. `folding_past` remains museum lobby furniture; the book anchor does not imply a token in the grid map. Loading only the grid hall omits that window.
++
++The Fontana puncture at source cell `(12,11)` retains its embedded `interactive_point_origin_force` as a secondary encounter. The main reading follows the named `point_one_main` point between the cards and frame. It need not enumerate both bodies. The target accepts either eligible point, as described above; this is an additional way to play with the existing arrival, not an error requiring the secondary work's removal. A dedicated “move this point there” encounter at the puncture is an optional future development, not a control added in this pass.
++
++The pickup label currently cycles plain coordinates, named X/Y/Z components, a `Vector3(...)` spelling, and no label. Older source-header shorthand describing integer/scientific/word formats is inaccurate; the executable match in `interactive_point_origin.gd` is the evidence.
++
++The coloured frame previously confined the point to its displayed axis span. That implementation history belongs here; the current chapter asks the visitor to carry the point beyond an arrow's end and watch the guides continue.

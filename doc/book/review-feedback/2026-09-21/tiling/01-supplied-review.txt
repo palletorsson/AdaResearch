@@ -1,0 +1,70 @@
+Tiling. I haven't read this one yet, so I'll read it myself while the second reader and the source verifiers work in parallel. First, the hall list so I can split the verification.
+
+While the checks run, I'm reading the chapter myself.
+
+Read it. Tiling is the strongest chapter since Transformation, and it contains something that changes my Colour review. Saving notes while the verifiers finish.
+
+I'll check the source material to confirm whether the reader's skirt was established earlier, since Ribbon_Patterns_03 references it without prior setup in the first five chapters.
+
+The costume is real. In VR you wear it by default, and since late August the museum's desktop walker wears it too, a garment that grows a trophy for each sequence you complete. So Ribbon_Patterns_03 isn't inventing a skirt. The book just never tells the reader they have been dressed since the first room. That is a real gap, and one of the book's most body-centred systems stays invisible in the prose until chapter five.
+
+The verifiers are still checking the tiling claims hall by hall. I'll bring the full Tiling review when they report, including a correction to what I told you about Colour: the one-grey-on-two-surrounds encounter I said was missing does exist. It lives in Ribbon_Patterns_02, not in the colour chapter.
+
+Two of the three problematic rooms fail for the same reason — an unread registry `config` block. I'll check if this pattern is corpus-wide and look for a safe fix.
+
+Thirty-five registry entries carry a `config` block that nothing reads, and `albers_relief` is one of them. Colour's unexplained "Albers studies" may be exactly that, so one more check.
+
+Color_Paint places `albers_wall_gallery`, which is not one of the unread blocks, so Colour's Albers gap is a prose gap only. Here is Tiling.
+
+Tiling is the strongest capture since Transformation. Its protagonist is one small mark, a red bend with a blue corner and an ochre interruption, and every hall asks that mark a different question: its palette, its reach into the architecture, lookup against rewrite, its address on a surface, its classification, its depth, its appearance, and finally a body. "The mark has acquired an inside" is a line only a chapter with a single protagonist could earn.
+
+The source check confirmed 87 of 104 concrete claims. Three rooms cannot show what the prose asks for, and one number is wrong. Those are artifact problems for you, listed separately below.
+
+**A correction to the Colour review.** The missing encounter exists. Ribbon_Patterns_02 puts two equal greys on dark and light surrounds, with SWAP and CONNECT. So Colour item 4 should not build a new exhibit: either Colour points forward to this station, or the station moves. But one of its controls is broken, as explained below.
+
+## Passages to protect
+
+- **Tutorial_Pattern:** "They change an address before it reads the source texture. They do not repaint the stored cells." Then, at FLIP X, "Here the operation really does rewrite the array." That is the chapter's key distinction. Also "Your interruption has become regular too," and "A repeating system can make room for an unexpected mark while giving that mark a schedule."
+- **Pattern_Foundry:** "Returning to an appearance need not undo the process that brought you there." And "These names describe memberships we have made, and can revise."
+- **Array_Patterns:** "A room does not owe the pattern an integer number of repeats." And "A conspicuous seam can reveal the rule more clearly than a perfect join."
+- **Symmetry_Seventeen:** "The selected button names a construction; it does not prove that the finished image has exactly that symmetry group." And "The catalogue closes under its assumptions. This finite carpet still ends."
+- **Ribbon_Patterns_01:** "Pale does not mean absent." Zero as a pale body rather than no body brings back Array's ambiguous zero with a new consequence.
+- **Ribbon_Patterns_03:** "A visible opening has made a promise that the movement system does not keep." Also the mesh named `Skirt`, which leads to asking who gets to define the parts of a body. And "Repetition can make a group legible without making its members look identical."
+
+## What the rooms cannot do
+
+These are yours to decide rather than Astra's to write.
+
+- **Pattern_Foundry's mirror station builds as plain repetition.** Its mirror mode sits in a registry `config` block that no loader reads, so the comparison the prose asks for cannot be made.
+- **Array_Patterns' brick preview fails the same way.** It builds as plain repetition with a blank motif: a uniform cream square with no seam to follow.
+- **Ribbon_Patterns_02's SURROUNDS makes both targets vanish.** The neutral surround is the same grey as the targets, and both are unshaded, so the CONNECT bar disappears too. A surround of 0.3 or 0.7, or a thin outline, fixes it. This is the station Colour needs.
+- **The studio's WALL target cannot be seen from the studio.** It is the loom's low wall in the main hall, behind a partition, so the prose's "The wall follows it now" is invisible from where you edit.
+- **Symmetry_Seventeen's backing wall hides half the carpet** from the console, and the carpet carries the hall's closing thought.
+
+The config problem is wider than two tiles. 35 registry entries carry such blocks, including every pattern tile, three reliefs and several puzzles. None of those blocks is read, so each artifact builds at its script default. The fix belongs in the grid loader or in `CONFIG_PARAM_NAMES`, which is your call under your grid rule. One trap for whoever tries a map-token fix instead: `repeat_mode` is not in that list, so `#repeat_mode:3` would be read as a rotation.
+
+## Prose revisions, in order
+
+1. **Ribbon_Patterns_03: establish the costume, and link it to the nails.** The hall puts fabric on "your skirt", but the book has never said the visitor is dressed. In VR, and on the museum's walker, you wear a garment by default, and it grows as you complete sequences. And Colour's nail colour has already travelled with you. The book's dressing thread runs from nails to skirt and is never named. Illustratively:
+   > In VR you have been dressed since the first room, and the garment has been growing as you walk. Your nails still carry the colour you chose in the salon. Here the surface is waiting beside a body. What else can you take with you?
+2. **Tutorial_Pattern: name the return.** The chapter re-teaches reflection, the edited source, the shifted row and the single exception as new, and never names the two tiling halls in Array. "The names can wait" stages PM as a discovery the reader already walked. Name the earlier button, and the new thing stands out:
+   > You walked this reversal on the floor before Colour, where REFLECT turned alternate columns. What is new is where it happens. Neither panel's painted cells have turned over.
+3. **Symmetry_Seventeen: give the words before using them.** Lattice, unit cell and rotation order all appear undefined. "Cell" has meant a stored pixel all chapter, while the repeat unit goes by seven different names. The reader has already lived an order-four rotation in QUARTER TURN, so use it:
+   > The tiles on the array floor turned a quarter at a time and came home after four turns: a rotation of order four. A lattice, a grid of places where the same thing can start again, admits turns of order one, two, three, four and six. Try a fifth of a turn and the copies no longer land on the grid. The cage marks that limit.
+   
+   Also gloss P, M and G in one line, and introduce the cage before "Return to the cage."
+4. **Pattern_Foundry: restore its own plan.** It promises three passes and defers spacing, offset and memory to a return visit. It then performs that return visit before the studio arrives, as a control manual. Move that block after the studio as a short coda that keeps its two best lines.
+5. **Fix the facts.**
+   - In Ribbon_Patterns_03 the wall is 3 metres wide, so four copies sit 0.75 metres apart, not a metre.
+   - WEAR SAVED also changes your silhouette to the preview's look, not just the skirt.
+   - In Pattern_Disco the sequencer arrives stopped and empty, so "stop the sequencer" does nothing, and hearing a note needs Play and a lit cell.
+6. **Cut the status leaks.** These are the MetamerismLab history in Ribbon_Patterns_02, "up to thirty-two" and "still needs our return" in Ribbon_Patterns_03, and "the earlier automatic reveal" in Array_Patterns. Explain UNDO and RESET once, not at every station.
+7. **Thin the image-is-not-collision beats** in Pattern_Foundry and Array_Patterns. They restate the idea just before Ribbon_Patterns_03's `discard` finally gives it a new consequence.
+
+**Questions for you**
+
+- Should Tutorial_Pattern come before Pattern_Foundry? The Foundry uses the loom's GROUP control and a mirror station before any rule has a name.
+- Should the seventeen be met or only named? The hall shows three groups. The rotational families, where the cage's argument actually lives, are not in the room.
+- Should the equal-greys station stay in Ribbon_Patterns_02, with Colour pointing forward to it, or move to Colour, where the claim it proves is made?
+
+Change is next.

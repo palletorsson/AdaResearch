@@ -1,0 +1,1715 @@
+{
+  "checks": 49,
+  "failures": [],
+  "headset_verified": false,
+  "map": "Noise_One",
+  "measurements": {
+    "captures": {
+
+    },
+    "freeze": {
+      "before": {
+        "amp_index": 2,
+        "amplitude": 0.02,
+        "colour": 0.0,
+        "freq_index": 1,
+        "frequency": 14.0,
+        "frozen": false,
+        "last_touched": "nothing yet",
+        "relief": -0.0072,
+        "remap": false,
+        "rings": [
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.02,
+            "hue_shift_speed": 0.725,
+            "kind": "relief",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.493,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 14.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 0.0,
+            "show_relief": 1.0
+          },
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.02,
+            "hue_shift_speed": 0.725,
+            "kind": "colour",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.5,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 14.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 1.0,
+            "show_relief": 0.0
+          }
+        ],
+        "sample_at": [
+          0.46,
+          0.0
+        ],
+        "sample_index": 0,
+        "stand": "pair",
+        "time": 1.5,
+        "value": -0.3617
+      },
+      "held": {
+        "amp_index": 2,
+        "amplitude": 0.02,
+        "colour": 0.0,
+        "freq_index": 1,
+        "frequency": 14.0,
+        "frozen": true,
+        "last_touched": "FREEZE",
+        "relief": -0.0072,
+        "remap": false,
+        "rings": [
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.02,
+            "hue_shift_speed": 0.725,
+            "kind": "relief",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.493,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 14.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 0.0,
+            "show_relief": 1.0
+          },
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.02,
+            "hue_shift_speed": 0.725,
+            "kind": "colour",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.5,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 14.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 1.0,
+            "show_relief": 0.0
+          }
+        ],
+        "sample_at": [
+          0.46,
+          0.0
+        ],
+        "sample_index": 0,
+        "stand": "pair",
+        "time": 1.5,
+        "value": -0.3617
+      },
+      "remap_after": {
+        "amp_index": 3,
+        "amplitude": 0.04,
+        "colour": 0.5994,
+        "freq_index": 2,
+        "frequency": 24.0,
+        "frozen": true,
+        "last_touched": "FREQUENCY",
+        "relief": 0.008,
+        "remap": true,
+        "rings": [
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.04,
+            "hue_shift_speed": 0.725,
+            "kind": "relief",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.508,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 24.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 0.0,
+            "show_relief": 1.0
+          },
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.04,
+            "hue_shift_speed": 0.725,
+            "kind": "colour",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.5,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 24.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 1.0,
+            "show_relief": 0.0
+          }
+        ],
+        "sample_at": [
+          0.46,
+          0.0
+        ],
+        "sample_index": 0,
+        "stand": "pair",
+        "time": 1.5,
+        "value": 0.1988
+      },
+      "remap_before": {
+        "amp_index": 3,
+        "amplitude": 0.04,
+        "colour": 0.1988,
+        "freq_index": 2,
+        "frequency": 24.0,
+        "frozen": true,
+        "last_touched": "FREQUENCY",
+        "relief": 0.008,
+        "remap": false,
+        "rings": [
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.04,
+            "hue_shift_speed": 0.725,
+            "kind": "relief",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.508,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 24.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 0.0,
+            "show_relief": 1.0
+          },
+          {
+            "aabb": 0.46,
+            "height_multiplier": 0.04,
+            "hue_shift_speed": 0.725,
+            "kind": "colour",
+            "local_time": 1.50015966666667,
+            "marker_at": [
+              0.5,
+              0.0,
+              0.0
+            ],
+            "noise_scale": 24.0,
+            "noise_speed": 0.935,
+            "shader": "noiseTorus.gdshader",
+            "show_colour": 1.0,
+            "show_relief": 0.0
+          }
+        ],
+        "sample_at": [
+          0.46,
+          0.0
+        ],
+        "sample_index": 0,
+        "stand": "pair",
+        "time": 1.5,
+        "value": 0.1988
+      }
+    },
+    "gpu_readback": {
+      "max_error": 0.0000152787389484654,
+      "samples": 256,
+      "tolerance": 0.0001
+    },
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D3",
+            "position": [
+              4.8562159538269,
+              6.79096984863281,
+              2.0
+            ],
+            "size": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@366",
+            "position": [
+              4.19999980926514,
+              0.740000009536743,
+              2.05000019073486
+            ],
+            "size": [
+              2.60000038146973,
+              0.0399999618530273,
+              0.899999618530273
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@367",
+            "position": [
+              4.32999992370605,
+              0.0,
+              2.23000001907349
+            ],
+            "size": [
+              2.34000015258789,
+              0.740000009536743,
+              0.539999961853027
+            ]
+          },
+          {
+            "name": "Torus",
+            "position": [
+              5.69000005722046,
+              1.08000004291534,
+              2.03999996185303
+            ],
+            "size": [
+              0.920000076293945,
+              0.279999971389771,
+              0.920000076293945
+            ]
+          },
+          {
+            "name": "Marker",
+            "position": [
+              5.62227392196655,
+              1.18500006198883,
+              2.46503973007202
+            ],
+            "size": [
+              0.069920539855957,
+              0.0699999332427979,
+              0.069920539855957
+            ]
+          },
+          {
+            "name": "Post_relief",
+            "position": [
+              6.11999988555908,
+              0.729999959468842,
+              2.46999979019165
+            ],
+            "size": [
+              0.0600004196166992,
+              0.0800000429153442,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "Caption_relief",
+            "position": [
+              5.69000005722046,
+              0.850000023841858,
+              2.07999992370605
+            ],
+            "size": [
+              0.920000076293945,
+              0.0399999618530273,
+              0.0
+            ]
+          },
+          {
+            "name": "Torus",
+            "position": [
+              4.3899998664856,
+              1.08000004291534,
+              2.03999996185303
+            ],
+            "size": [
+              0.920000076293945,
+              0.279999971389771,
+              0.920000076293945
+            ]
+          },
+          {
+            "name": "Marker",
+            "position": [
+              4.31503963470459,
+              1.18500006198883,
+              2.46503973007202
+            ],
+            "size": [
+              0.069920539855957,
+              0.0699999332427979,
+              0.069920539855957
+            ]
+          },
+          {
+            "name": "Post_colour",
+            "position": [
+              4.81999969482422,
+              0.729999959468842,
+              2.46999979019165
+            ],
+            "size": [
+              0.0600004196166992,
+              0.0800000429153442,
+              0.0600004196166992
+            ]
+          },
+          {
+            "name": "Caption_colour",
+            "position": [
+              4.3899998664856,
+              0.850000023841858,
+              2.07999992370605
+            ],
+            "size": [
+              0.920000076293945,
+              0.0399999618530273,
+              0.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@369",
+            "position": [
+              5.34000015258789,
+              0.773478806018829,
+              1.87175941467285
+            ],
+            "size": [
+              1.31999969482422,
+              0.293042480945587,
+              0.116480827331543
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.6072998046875,
+              1.10140538215637,
+              1.97288703918457
+            ],
+            "size": [
+              0.0461997985839844,
+              0.0482749938964844,
+              0.0340948104858398
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.59959983825684,
+              1.09568381309509,
+              1.97612333297729
+            ],
+            "size": [
+              0.0615997314453125,
+              0.0576927661895752,
+              0.0317745208740234
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@370",
+            "position": [
+              4.57999992370605,
+              1.06127727031708,
+              1.9652099609375
+            ],
+            "size": [
+              0.100799560546875,
+              0.0301995277404785,
+              0.0147294998168945
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.50650024414063,
+              1.10140538215637,
+              1.97288703918457
+            ],
+            "size": [
+              0.0461997985839844,
+              0.0482749938964844,
+              0.0340948104858398
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.49880027770996,
+              1.09568381309509,
+              1.97612333297729
+            ],
+            "size": [
+              0.0615997314453125,
+              0.0576927661895752,
+              0.0317745208740234
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@371",
+            "position": [
+              4.47920036315918,
+              1.06127727031708,
+              1.9652099609375
+            ],
+            "size": [
+              0.100799560546875,
+              0.0301995277404785,
+              0.0147294998168945
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.6072998046875,
+              1.00325703620911,
+              1.9250168800354
+            ],
+            "size": [
+              0.0461997985839844,
+              0.0482749938964844,
+              0.0340948104858398
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.59959983825684,
+              0.997535526752472,
+              1.92825317382813
+            ],
+            "size": [
+              0.0615997314453125,
+              0.0576927065849304,
+              0.0317745208740234
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@372",
+            "position": [
+              4.57999992370605,
+              0.963128924369812,
+              1.91733980178833
+            ],
+            "size": [
+              0.100799560546875,
+              0.0301995277404785,
+              0.0147294998168945
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.50650024414063,
+              1.00325703620911,
+              1.9250168800354
+            ],
+            "size": [
+              0.0461997985839844,
+              0.0482749938964844,
+              0.0340948104858398
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.49880027770996,
+              0.997535526752472,
+              1.92825317382813
+            ],
+            "size": [
+              0.0615997314453125,
+              0.0576927065849304,
+              0.0317745208740234
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@373",
+            "position": [
+              4.47920036315918,
+              0.963128924369812,
+              1.91733980178833
+            ],
+            "size": [
+              0.100799560546875,
+              0.0301995277404785,
+              0.0147294998168945
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.55690002441406,
+              0.905108630657196,
+              1.87714672088623
+            ],
+            "size": [
+              0.0461997985839844,
+              0.0482752323150635,
+              0.0340948104858398
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.5492000579834,
+              0.899387300014496,
+              1.88038301467896
+            ],
+            "size": [
+              0.0615997314453125,
+              0.0576926469802856,
+              0.0317745208740234
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@374",
+            "position": [
+              4.52960014343262,
+              0.864980638027191,
+              1.86946964263916
+            ],
+            "size": [
+              0.100799560546875,
+              0.0301995277404785,
+              0.0147294998168945
+            ]
+          }
+        ],
+        "position": "(5.5, 0.0, 6.5)",
+        "token": "noisetorus"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              3.5,
+              0.340250045061111,
+              3.50000095367432
+            ],
+            "size": [
+              4.0,
+              0.589167475700378,
+              3.99999809265137
+            ]
+          },
+          {
+            "name": "GridStructure",
+            "position": [
+              3.5,
+              0.800999999046326,
+              3.50000095367432
+            ],
+            "size": [
+              4.0,
+              0.0,
+              3.99999809265137
+            ]
+          },
+          {
+            "name": "GridStructureCeiling",
+            "position": [
+              3.5,
+              1.31999981403351,
+              3.50000095367432
+            ],
+            "size": [
+              4.0,
+              0.0,
+              3.99999809265137
+            ]
+          },
+          {
+            "name": "GridStructureWall",
+            "position": [
+              3.29999995231628,
+              0.800000071525574,
+              4.70000076293945
+            ],
+            "size": [
+              4.39999961853027,
+              1.19999957084656,
+              0.0
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@377",
+            "position": [
+              3.25,
+              0.120000272989273,
+              3.25000095367432
+            ],
+            "size": [
+              4.5,
+              0.0999999642372131,
+              4.49999809265137
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@378",
+            "position": [
+              3.23000001907349,
+              0.185000211000443,
+              3.25000095367432
+            ],
+            "size": [
+              0.059999942779541,
+              0.549999833106995,
+              4.49999809265137
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@379",
+            "position": [
+              7.70999956130981,
+              0.185000211000443,
+              3.25000095367432
+            ],
+            "size": [
+              0.0600004196166992,
+              0.549999833106995,
+              4.49999809265137
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              6.22125005722046,
+              1.05450046062469,
+              7.78740501403809
+            ],
+            "size": [
+              0.0495004653930664,
+              0.0518355369567871,
+              0.0358734130859375
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              6.21300029754639,
+              1.0482622385025,
+              7.78657531738281
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0622198581695557,
+              0.0330467224121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@380",
+            "position": [
+              6.19200038909912,
+              1.01111030578613,
+              7.81541156768799
+            ],
+            "size": [
+              0.107999801635742,
+              0.0326271057128906,
+              0.0152149200439453
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              6.3292498588562,
+              1.05450046062469,
+              7.78740501403809
+            ],
+            "size": [
+              0.0495004653930664,
+              0.0518355369567871,
+              0.0358734130859375
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              6.32100009918213,
+              1.0482622385025,
+              7.78657531738281
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0622198581695557,
+              0.0330467224121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@381",
+            "position": [
+              6.30000019073486,
+              1.01111030578613,
+              7.81541156768799
+            ],
+            "size": [
+              0.107999801635742,
+              0.0326271057128906,
+              0.0152149200439453
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              6.22125005722046,
+              0.948462426662445,
+              7.83685111999512
+            ],
+            "size": [
+              0.0495004653930664,
+              0.0518353581428528,
+              0.0358734130859375
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              6.21300029754639,
+              0.942224323749542,
+              7.83602142333984
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0622197985649109,
+              0.0330467224121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@382",
+            "position": [
+              6.19200038909912,
+              0.905072391033173,
+              7.86485767364502
+            ],
+            "size": [
+              0.107999801635742,
+              0.0326271057128906,
+              0.0152149200439453
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              6.3292498588562,
+              0.948462426662445,
+              7.83685111999512
+            ],
+            "size": [
+              0.0495004653930664,
+              0.0518353581428528,
+              0.0358734130859375
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              6.32100009918213,
+              0.942224323749542,
+              7.83602142333984
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0622197985649109,
+              0.0330467224121094
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@383",
+            "position": [
+              6.30000019073486,
+              0.905072391033173,
+              7.86485767364502
+            ],
+            "size": [
+              0.107999801635742,
+              0.0326271057128906,
+              0.0152149200439453
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@384",
+            "position": [
+              4.27499961853027,
+              0.927744626998901,
+              7.67639350891113
+            ],
+            "size": [
+              1.35000038146973,
+              0.264510631561279,
+              0.107212066650391
+            ]
+          }
+        ],
+        "position": "(5.5, 0.8, 9.5)",
+        "token": "noiselayers"
+      },
+      {
+        "meshes": [
+          {
+            "name": "SphereDisplay",
+            "position": [
+              8.08034324645996,
+              0.240300834178925,
+              8.07301998138428
+            ],
+            "size": [
+              0.839313507080078,
+              0.719398438930511,
+              0.853960037231445
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              8.07999992370605,
+              0.00749999983236194,
+              8.07999992370605
+            ],
+            "size": [
+              0.840000152587891,
+              0.00499999942258,
+              0.840000152587891
+            ]
+          }
+        ],
+        "position": "(8.5, 0.0, 12.5)",
+        "token": "dark_sphere"
+      }
+    ],
+    "museum_walk_severed": [],
+    "pointer": [
+      {
+        "control": "frozen",
+        "hover": "om-matrix/Noisetorus/Pair/Panel/Btn_0/InteractableAreaButton",
+        "now": false,
+        "ray": {
+          "camera_dir": [
+            0.07,
+            -0.7,
+            0.71
+          ],
+          "camera_from": [
+            4.58,
+            1.6,
+            1.52
+          ],
+          "independent_ray": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.63,
+            1.15,
+            1.97
+          ]
+        },
+        "was": true
+      },
+      {
+        "control": "sample_index",
+        "hover": "om-matrix/Noisetorus/Pair/Panel/Btn_1/InteractableAreaButton",
+        "now": 1,
+        "ray": {
+          "camera_dir": [
+            -0.07,
+            -0.74,
+            0.67
+          ],
+          "camera_from": [
+            4.58,
+            1.6,
+            1.52
+          ],
+          "independent_ray": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.53,
+            1.12,
+            1.96
+          ]
+        },
+        "was": 0
+      },
+      {
+        "control": "amp_index",
+        "hover": "om-matrix/Noisetorus/Pair/Panel/Btn_2/InteractableAreaButton",
+        "now": 0,
+        "ray": {
+          "camera_dir": [
+            0.07,
+            -0.82,
+            0.57
+          ],
+          "camera_from": [
+            4.58,
+            1.6,
+            1.52
+          ],
+          "independent_ray": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_2/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_2/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.63,
+            1.03,
+            1.91
+          ]
+        },
+        "was": 3
+      },
+      {
+        "control": "freq_index",
+        "hover": "om-matrix/Noisetorus/Pair/Panel/Btn_3/InteractableAreaButton",
+        "now": 2,
+        "ray": {
+          "camera_dir": [
+            -0.07,
+            -0.82,
+            0.57
+          ],
+          "camera_from": [
+            4.58,
+            1.6,
+            1.52
+          ],
+          "independent_ray": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_3/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_3/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.53,
+            1.03,
+            1.91
+          ]
+        },
+        "was": 1
+      },
+      {
+        "control": "remap",
+        "hover": "om-matrix/Noisetorus/Pair/Panel/Btn_4/InteractableAreaButton",
+        "now": false,
+        "ray": {
+          "camera_dir": [
+            0.0,
+            -0.88,
+            0.47
+          ],
+          "camera_from": [
+            4.58,
+            1.6,
+            1.52
+          ],
+          "independent_ray": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_4/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "anazawa-room-matrix/Noisetorus/Pair/Panel/Btn_4/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.58,
+            0.94,
+            1.87
+          ]
+        },
+        "was": true
+      },
+      {
+        "control": "SUM",
+        "hover": "m-matrix/Noiselayers/LayerPanel/Btn_0/InteractableAreaButton",
+        "now": 0,
+        "ray": {
+          "camera_dir": [
+            -0.06,
+            -0.66,
+            -0.75
+          ],
+          "camera_from": [
+            6.3,
+            1.6,
+            8.45
+          ],
+          "independent_ray": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.25,
+            1.07,
+            7.84
+          ]
+        },
+        "was": 0
+      },
+      {
+        "control": "LOW",
+        "hover": "m-matrix/Noiselayers/LayerPanel/Btn_1/InteractableAreaButton",
+        "now": 1,
+        "ray": {
+          "camera_dir": [
+            0.06,
+            -0.66,
+            -0.75
+          ],
+          "camera_from": [
+            6.3,
+            1.6,
+            8.45
+          ],
+          "independent_ray": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.35,
+            1.07,
+            7.84
+          ]
+        },
+        "was": 0
+      },
+      {
+        "control": "MIDDLE",
+        "hover": "m-matrix/Noiselayers/LayerPanel/Btn_2/InteractableAreaButton",
+        "now": 2,
+        "ray": {
+          "camera_dir": [
+            -0.06,
+            -0.75,
+            -0.66
+          ],
+          "camera_from": [
+            6.3,
+            1.6,
+            8.45
+          ],
+          "independent_ray": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_2/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_2/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.25,
+            0.97,
+            7.89
+          ]
+        },
+        "was": 1
+      },
+      {
+        "control": "HIGH",
+        "hover": "m-matrix/Noiselayers/LayerPanel/Btn_3/InteractableAreaButton",
+        "now": 3,
+        "ray": {
+          "camera_dir": [
+            0.06,
+            -0.75,
+            -0.66
+          ],
+          "camera_from": [
+            6.3,
+            1.6,
+            8.45
+          ],
+          "independent_ray": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_3/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "nazawa-room-matrix/Noiselayers/LayerPanel/Btn_3/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.35,
+            0.97,
+            7.89
+          ]
+        },
+        "was": 2
+      }
+    ],
+    "samples": {
+      "amplitude": 0.04,
+      "frequency": 24.0,
+      "samples": [
+        {
+          "angle": 0.0,
+          "clipped": 0.738637933814207,
+          "relief": 0.0295455173525683,
+          "remapped": 0.869318966907103,
+          "value": 0.738637933814207
+        },
+        {
+          "angle": 0.0872664625997165,
+          "clipped": 0.0,
+          "relief": -0.0127835542624905,
+          "remapped": 0.340205571718869,
+          "value": -0.319588856562262
+        },
+        {
+          "angle": 0.174532925199433,
+          "clipped": 0.0,
+          "relief": -0.033460790531509,
+          "remapped": 0.081740118356138,
+          "value": -0.836519763287724
+        },
+        {
+          "angle": 0.261799387799149,
+          "clipped": 0.0,
+          "relief": -0.014880408817881,
+          "remapped": 0.313994889776488,
+          "value": -0.372010220447025
+        },
+        {
+          "angle": 0.349065850398866,
+          "clipped": 0.387614466318886,
+          "relief": 0.0155045786527554,
+          "remapped": 0.693807233159443,
+          "value": 0.387614466318886
+        },
+        {
+          "angle": 0.436332312998582,
+          "clipped": 0.447984901838005,
+          "relief": 0.0179193960735202,
+          "remapped": 0.723992450919003,
+          "value": 0.447984901838005
+        },
+        {
+          "angle": 0.523598775598299,
+          "clipped": 0.0,
+          "relief": -0.0148870139635705,
+          "remapped": 0.313912325455368,
+          "value": -0.372175349089263
+        },
+        {
+          "angle": 0.610865238198015,
+          "clipped": 0.0,
+          "relief": -0.0237190767198182,
+          "remapped": 0.203511541002272,
+          "value": -0.592976917995456
+        },
+        {
+          "angle": 0.698131700797732,
+          "clipped": 0.807154147197335,
+          "relief": 0.0322861658878934,
+          "remapped": 0.903577073598668,
+          "value": 0.807154147197335
+        },
+        {
+          "angle": 0.785398163397448,
+          "clipped": 0.565688407403324,
+          "relief": 0.0226275362961329,
+          "remapped": 0.782844203701662,
+          "value": 0.565688407403324
+        },
+        {
+          "angle": 0.872664625997165,
+          "clipped": 0.180290171134907,
+          "relief": 0.00721160684539628,
+          "remapped": 0.590145085567453,
+          "value": 0.180290171134907
+        },
+        {
+          "angle": 0.959931088596881,
+          "clipped": 0.833813702732771,
+          "relief": 0.0333525481093108,
+          "remapped": 0.916906851366386,
+          "value": 0.833813702732771
+        },
+        {
+          "angle": 1.0471975511966,
+          "clipped": 0.330614654377503,
+          "relief": 0.0132245861751001,
+          "remapped": 0.665307327188752,
+          "value": 0.330614654377503
+        },
+        {
+          "angle": 1.13446401379631,
+          "clipped": 0.202363144787234,
+          "relief": 0.00809452579148935,
+          "remapped": 0.601181572393617,
+          "value": 0.202363144787234
+        },
+        {
+          "angle": 1.22173047639603,
+          "clipped": 0.0,
+          "relief": -0.0022389889702791,
+          "remapped": 0.472012637871511,
+          "value": -0.0559747242569774
+        },
+        {
+          "angle": 1.30899693899575,
+          "clipped": 0.0983298164021392,
+          "relief": 0.00393319265608557,
+          "remapped": 0.54916490820107,
+          "value": 0.0983298164021392
+        },
+        {
+          "angle": 1.39626340159546,
+          "clipped": 0.222008427912697,
+          "relief": 0.00888033711650787,
+          "remapped": 0.611004213956348,
+          "value": 0.222008427912697
+        },
+        {
+          "angle": 1.48352986419518,
+          "clipped": 0.0,
+          "relief": -0.0285602616365565,
+          "remapped": 0.142996729543044,
+          "value": -0.714006540913912
+        },
+        {
+          "angle": 1.5707963267949,
+          "clipped": 0.0,
+          "relief": -0.0331497068420215,
+          "remapped": 0.0856286644747308,
+          "value": -0.828742671050538
+        },
+        {
+          "angle": 1.65806278939461,
+          "clipped": 0.863898107061349,
+          "relief": 0.034555924282454,
+          "remapped": 0.931949053530674,
+          "value": 0.863898107061349
+        },
+        {
+          "angle": 1.74532925199433,
+          "clipped": 0.0,
+          "relief": -0.0245814511118832,
+          "remapped": 0.192731861101461,
+          "value": -0.614536277797079
+        },
+        {
+          "angle": 1.83259571459405,
+          "clipped": 0.11738099211683,
+          "relief": 0.00469523968467318,
+          "remapped": 0.558690496058415,
+          "value": 0.11738099211683
+        },
+        {
+          "angle": 1.91986217719376,
+          "clipped": 0.61329230950398,
+          "relief": 0.0245316923801592,
+          "remapped": 0.80664615475199,
+          "value": 0.61329230950398
+        },
+        {
+          "angle": 2.00712863979348,
+          "clipped": 0.488670318169414,
+          "relief": 0.0195468127267766,
+          "remapped": 0.744335159084707,
+          "value": 0.488670318169414
+        },
+        {
+          "angle": 2.0943951023932,
+          "clipped": 0.0,
+          "relief": -0.00563077356327496,
+          "remapped": 0.429615330459063,
+          "value": -0.140769339081874
+        },
+        {
+          "angle": 2.18166156499291,
+          "clipped": 0.0,
+          "relief": -0.0113694801012583,
+          "remapped": 0.357881498734272,
+          "value": -0.284237002531457
+        },
+        {
+          "angle": 2.26892802759263,
+          "clipped": 0.0,
+          "relief": -0.0185654322489977,
+          "remapped": 0.267932096887529,
+          "value": -0.464135806224943
+        },
+        {
+          "angle": 2.35619449019234,
+          "clipped": 0.0,
+          "relief": -0.0125669610146302,
+          "remapped": 0.342912987317122,
+          "value": -0.314174025365756
+        },
+        {
+          "angle": 2.44346095279206,
+          "clipped": 0.0382379517728795,
+          "relief": 0.00152951807091518,
+          "remapped": 0.51911897588644,
+          "value": 0.0382379517728795
+        },
+        {
+          "angle": 2.53072741539178,
+          "clipped": 0.262229301679967,
+          "relief": 0.0104891720671987,
+          "remapped": 0.631114650839984,
+          "value": 0.262229301679967
+        },
+        {
+          "angle": 2.61799387799149,
+          "clipped": 0.195174012224705,
+          "relief": 0.0078069604889882,
+          "remapped": 0.597587006112352,
+          "value": 0.195174012224705
+        },
+        {
+          "angle": 2.70526034059121,
+          "clipped": 0.0,
+          "relief": -0.00544354416835985,
+          "remapped": 0.431955697895502,
+          "value": -0.136088604208996
+        },
+        {
+          "angle": 2.79252680319093,
+          "clipped": 0.0,
+          "relief": -0.0139922922147623,
+          "remapped": 0.325096347315471,
+          "value": -0.349807305369057
+        },
+        {
+          "angle": 2.87979326579064,
+          "clipped": 0.0,
+          "relief": -0.00675000070659782,
+          "remapped": 0.415624991167527,
+          "value": -0.168750017664945
+        },
+        {
+          "angle": 2.96705972839036,
+          "clipped": 0.0,
+          "relief": -0.0294218469903721,
+          "remapped": 0.132226912620349,
+          "value": -0.735546174759302
+        },
+        {
+          "angle": 3.05432619099008,
+          "clipped": 0.571628861873265,
+          "relief": 0.0228651544749306,
+          "remapped": 0.785814430936633,
+          "value": 0.571628861873265
+        },
+        {
+          "angle": 3.14159265358979,
+          "clipped": 0.309922085220271,
+          "relief": 0.0123968834088108,
+          "remapped": 0.654961042610135,
+          "value": 0.309922085220271
+        },
+        {
+          "angle": 3.22885911618951,
+          "clipped": 0.0,
+          "relief": -0.0323092208585554,
+          "remapped": 0.0961347392680577,
+          "value": -0.807730521463885
+        },
+        {
+          "angle": 3.31612557878923,
+          "clipped": 0.0,
+          "relief": -0.0268327349620782,
+          "remapped": 0.164590812974022,
+          "value": -0.670818374051955
+        },
+        {
+          "angle": 3.40339204138894,
+          "clipped": 0.352980098358444,
+          "relief": 0.0141192039343377,
+          "remapped": 0.676490049179222,
+          "value": 0.352980098358444
+        },
+        {
+          "angle": 3.49065850398866,
+          "clipped": 0.427708772685133,
+          "relief": 0.0171083509074053,
+          "remapped": 0.713854386342567,
+          "value": 0.427708772685133
+        },
+        {
+          "angle": 3.57792496658838,
+          "clipped": 0.453557022075652,
+          "relief": 0.0181422808830261,
+          "remapped": 0.726778511037826,
+          "value": 0.453557022075652
+        },
+        {
+          "angle": 3.66519142918809,
+          "clipped": 0.491433714124048,
+          "relief": 0.0196573485649619,
+          "remapped": 0.745716857062024,
+          "value": 0.491433714124048
+        },
+        {
+          "angle": 3.75245789178781,
+          "clipped": 0.00388239434482884,
+          "relief": 0.000155295773793154,
+          "remapped": 0.501941197172414,
+          "value": 0.00388239434482884
+        },
+        {
+          "angle": 3.83972435438752,
+          "clipped": 0.0159277679094477,
+          "relief": 0.000637110716377908,
+          "remapped": 0.507963883954724,
+          "value": 0.0159277679094477
+        },
+        {
+          "angle": 3.92699081698724,
+          "clipped": 0.334884116306233,
+          "relief": 0.0133953646522493,
+          "remapped": 0.667442058153116,
+          "value": 0.334884116306233
+        },
+        {
+          "angle": 4.01425727958696,
+          "clipped": 0.0,
+          "relief": -0.00408990523686293,
+          "remapped": 0.448876184539213,
+          "value": -0.102247630921573
+        },
+        {
+          "angle": 4.10152374218668,
+          "clipped": 0.593980923818137,
+          "relief": 0.0237592369527255,
+          "remapped": 0.796990461909068,
+          "value": 0.593980923818137
+        },
+        {
+          "angle": 4.18879020478639,
+          "clipped": 0.0687217417188828,
+          "relief": 0.00274886966875531,
+          "remapped": 0.534360870859441,
+          "value": 0.0687217417188828
+        },
+        {
+          "angle": 4.27605666738611,
+          "clipped": 0.457031281526025,
+          "relief": 0.018281251261041,
+          "remapped": 0.728515640763013,
+          "value": 0.457031281526025
+        },
+        {
+          "angle": 4.36332312998582,
+          "clipped": 0.0,
+          "relief": -0.00762042493825549,
+          "remapped": 0.404744688271806,
+          "value": -0.190510623456387
+        },
+        {
+          "angle": 4.45058959258554,
+          "clipped": 0.00975897123769911,
+          "relief": 0.000390358849507964,
+          "remapped": 0.50487948561885,
+          "value": 0.00975897123769911
+        },
+        {
+          "angle": 4.53785605518526,
+          "clipped": 0.0,
+          "relief": -0.0206425583323841,
+          "remapped": 0.241968020845198,
+          "value": -0.516063958309603
+        },
+        {
+          "angle": 4.62512251778497,
+          "clipped": 0.889601524873073,
+          "relief": 0.0355840609949229,
+          "remapped": 0.944800762436536,
+          "value": 0.889601524873073
+        },
+        {
+          "angle": 4.71238898038469,
+          "clipped": 0.294620588075813,
+          "relief": 0.0117848235230325,
+          "remapped": 0.647310294037907,
+          "value": 0.294620588075813
+        },
+        {
+          "angle": 4.79965544298441,
+          "clipped": 0.0,
+          "relief": -0.0146252467827301,
+          "remapped": 0.317184415215874,
+          "value": -0.365631169568252
+        },
+        {
+          "angle": 4.88692190558412,
+          "clipped": 0.758373970727779,
+          "relief": 0.0303349588291111,
+          "remapped": 0.879186985363889,
+          "value": 0.758373970727779
+        },
+        {
+          "angle": 4.97418836818384,
+          "clipped": 0.0,
+          "relief": -0.00398991688874553,
+          "remapped": 0.450126038890681,
+          "value": -0.0997479222186382
+        },
+        {
+          "angle": 5.06145483078356,
+          "clipped": 0.0,
+          "relief": -0.00471195362997821,
+          "remapped": 0.441100579625272,
+          "value": -0.117798840749455
+        },
+        {
+          "angle": 5.14872129338327,
+          "clipped": 0.0,
+          "relief": -0.00913927023817448,
+          "remapped": 0.385759122022819,
+          "value": -0.228481755954362
+        },
+        {
+          "angle": 5.23598775598299,
+          "clipped": 0.0,
+          "relief": -0.00585165217151363,
+          "remapped": 0.42685434785608,
+          "value": -0.146291304287841
+        },
+        {
+          "angle": 5.32325421858271,
+          "clipped": 0.0,
+          "relief": -0.0192193206433791,
+          "remapped": 0.259758491957761,
+          "value": -0.480483016084478
+        },
+        {
+          "angle": 5.41052068118242,
+          "clipped": 0.0,
+          "relief": -0.0283092554412723,
+          "remapped": 0.146134306984096,
+          "value": -0.707731386031808
+        },
+        {
+          "angle": 5.49778714378214,
+          "clipped": 0.18949232069287,
+          "relief": 0.00757969282771479,
+          "remapped": 0.594746160346435,
+          "value": 0.18949232069287
+        },
+        {
+          "angle": 5.58505360638185,
+          "clipped": 0.428788757437661,
+          "relief": 0.0171515502975065,
+          "remapped": 0.714394378718831,
+          "value": 0.428788757437661
+        },
+        {
+          "angle": 5.67232006898157,
+          "clipped": 0.0,
+          "relief": -0.00407682487864408,
+          "remapped": 0.449039689016949,
+          "value": -0.101920621966102
+        },
+        {
+          "angle": 5.75958653158129,
+          "clipped": 0.179441738856481,
+          "relief": 0.00717766955425923,
+          "remapped": 0.58972086942824,
+          "value": 0.179441738856481
+        },
+        {
+          "angle": 5.846852994181,
+          "clipped": 0.800847342863106,
+          "relief": 0.0320338937145243,
+          "remapped": 0.900423671431553,
+          "value": 0.800847342863106
+        },
+        {
+          "angle": 5.93411945678072,
+          "clipped": 0.283411556126261,
+          "relief": 0.0113364622450505,
+          "remapped": 0.641705778063131,
+          "value": 0.283411556126261
+        },
+        {
+          "angle": 6.02138591938044,
+          "clipped": 0.0198779401223585,
+          "relief": 0.000795117604894338,
+          "remapped": 0.509938970061179,
+          "value": 0.0198779401223585
+        },
+        {
+          "angle": 6.10865238198015,
+          "clipped": 0.801286371172932,
+          "relief": 0.0320514548469173,
+          "remapped": 0.900643185586466,
+          "value": 0.801286371172932
+        },
+        {
+          "angle": 6.19591884457987,
+          "clipped": 0.0,
+          "relief": -0.0163640399815693,
+          "remapped": 0.295449500230384,
+          "value": -0.409100999539232
+        }
+      ],
+      "time": 4.25
+    },
+    "terrain_fields": [
+      {
+        "frequency": 0.00559999980032444,
+        "key": "low_freq_noise",
+        "octaves": 4,
+        "seed": 54321,
+        "type": 1
+      },
+      {
+        "frequency": 0.00570000009611249,
+        "key": "med_freq_noise",
+        "octaves": 1,
+        "seed": 98765,
+        "type": 2
+      },
+      {
+        "frequency": 0.0175000000745058,
+        "key": "high_freq_noise",
+        "octaves": 3,
+        "seed": 12345,
+        "type": 1
+      }
+    ],
+    "weights": [
+      [
+        12.0,
+        6.0,
+        1.5
+      ],
+      [
+        12.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        6.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.5
+      ]
+    ]
+  }
+}

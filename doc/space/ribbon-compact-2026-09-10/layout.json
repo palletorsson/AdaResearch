@@ -1,0 +1,364 @@
+[
+  {
+    "map": "Ribbon_Patterns_01",
+    "before": [
+      27,
+      49
+    ],
+    "after": [
+      25,
+      25
+    ],
+    "area_reduction_percent": 53,
+    "placements": [
+      {
+        "token": "grid_2d_4x4",
+        "cell": [
+          2,
+          4
+        ],
+        "scale": 1
+      },
+      {
+        "token": "grid_3d_4x4x4",
+        "cell": [
+          7,
+          4
+        ],
+        "scale": 1
+      },
+      {
+        "token": "column_3_z",
+        "cell": [
+          18,
+          4
+        ],
+        "scale": 1
+      },
+      {
+        "token": "xyz_coordinates",
+        "cell": [
+          5,
+          12
+        ],
+        "scale": 1
+      },
+      {
+        "token": "row_3_x",
+        "cell": [
+          18,
+          11
+        ],
+        "scale": 1
+      },
+      {
+        "token": "grid3d",
+        "cell": [
+          6,
+          17
+        ],
+        "scale": 1
+      },
+      {
+        "token": "bar_array",
+        "cell": [
+          18,
+          17
+        ],
+        "scale": 1
+      },
+      {
+        "token": "bar_array_bubble_sort",
+        "cell": [
+          6,
+          20
+        ],
+        "scale": 1
+      },
+      {
+        "token": "sorting_algorithm_race",
+        "cell": [
+          18,
+          20
+        ],
+        "scale": 1
+      },
+      {
+        "token": "shelf",
+        "cell": [
+          5,
+          22
+        ],
+        "scale": 1
+      },
+      {
+        "token": "shelf_with_stickers",
+        "cell": [
+          19,
+          22
+        ],
+        "scale": 1
+      }
+    ]
+  },
+  {
+    "map": "Ribbon_Patterns_02",
+    "before": [
+      45,
+      74
+    ],
+    "after": [
+      27,
+      31
+    ],
+    "area_reduction_percent": 75,
+    "placements": [
+      {
+        "token": "SimultaneousContrast",
+        "cell": [
+          6,
+          5
+        ],
+        "scale": 1
+      },
+      {
+        "token": "MetamerismLab",
+        "cell": [
+          20,
+          5
+        ],
+        "scale": 1
+      },
+      {
+        "token": "spherecolors",
+        "cell": [
+          6,
+          11
+        ],
+        "scale": 0.8
+      },
+      {
+        "token": "hue_carousel",
+        "cell": [
+          20,
+          11
+        ],
+        "scale": 0.8
+      },
+      {
+        "token": "grabcolorcollection",
+        "cell": [
+          5,
+          15
+        ],
+        "scale": 1
+      },
+      {
+        "token": "color_mixing",
+        "cell": [
+          20,
+          16
+        ],
+        "scale": 0.55
+      },
+      {
+        "token": "dark_side_prism",
+        "cell": [
+          6,
+          19
+        ],
+        "scale": 0.6
+      },
+      {
+        "token": "prism",
+        "cell": [
+          20,
+          20
+        ],
+        "scale": 1
+      },
+      {
+        "token": "grab_stick_scanner",
+        "cell": [
+          2,
+          23
+        ],
+        "scale": 0.4
+      },
+      {
+        "token": "color_scanner",
+        "cell": [
+          20,
+          25
+        ],
+        "scale": 0.45
+      },
+      {
+        "token": "two_roads",
+        "cell": [
+          6,
+          25
+        ],
+        "scale": 0.45
+      },
+      {
+        "token": "grab_stick",
+        "cell": [
+          24,
+          28
+        ],
+        "scale": 0.4
+      }
+    ]
+  },
+  {
+    "map": "Ribbon_Patterns_03",
+    "before": [
+      79,
+      113
+    ],
+    "after": [
+      31,
+      49
+    ],
+    "area_reduction_percent": 83,
+    "placements": [
+      {
+        "token": "fabric_shader_studio",
+        "cell": [
+          6,
+          5
+        ],
+        "scale": 1
+      },
+      {
+        "token": "super_drag_mirror",
+        "cell": [
+          12,
+          7
+        ],
+        "scale": 1
+      },
+      {
+        "token": "drag_catwalk",
+        "cell": [
+          23,
+          3
+        ],
+        "scale": 1
+      },
+      {
+        "token": "pulsar_visualizer",
+        "cell": [
+          6,
+          18
+        ],
+        "scale": 1
+      },
+      {
+        "token": "standalone_disco",
+        "cell": [
+          23,
+          18
+        ],
+        "scale": 0.7
+      },
+      {
+        "token": "coloredlines",
+        "cell": [
+          6,
+          24
+        ],
+        "scale": 0.2
+      },
+      {
+        "token": "RotatingLaser",
+        "cell": [
+          23,
+          24
+        ],
+        "scale": 0.6
+      },
+      {
+        "token": "minimalglitch",
+        "cell": [
+          6,
+          28
+        ],
+        "scale": 0.6
+      },
+      {
+        "token": "textureglitch",
+        "cell": [
+          23,
+          28
+        ],
+        "scale": 0.45
+      },
+      {
+        "token": "glitchcolor",
+        "cell": [
+          6,
+          32
+        ],
+        "scale": 0.65
+      },
+      {
+        "token": "advancedglitch",
+        "cell": [
+          23,
+          32
+        ],
+        "scale": 0.65
+      },
+      {
+        "token": "colortrails",
+        "cell": [
+          6,
+          36
+        ],
+        "scale": 0.5
+      },
+      {
+        "token": "neon_garden",
+        "cell": [
+          23,
+          36
+        ],
+        "scale": 0.65
+      },
+      {
+        "token": "strobe_lasers",
+        "cell": [
+          6,
+          41
+        ],
+        "scale": 0.4
+      },
+      {
+        "token": "disco_lights",
+        "cell": [
+          23,
+          41
+        ],
+        "scale": 1
+      },
+      {
+        "token": "one_bulb_room",
+        "cell": [
+          6,
+          45
+        ],
+        "scale": 0.6
+      },
+      {
+        "token": "laser_turret",
+        "cell": [
+          23,
+          45
+        ],
+        "scale": 1
+      }
+    ]
+  }
+]

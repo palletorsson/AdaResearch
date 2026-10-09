@@ -1,0 +1,1218 @@
+[
+  {
+    "sequence": "transformation",
+    "judgment": "holds",
+    "strength": {
+      "finding": "Operations introduced on a pickup return as a usable airlock. Fixed references, rider support, relative scale and reversible versus retained change give invariance a bodily consequence.",
+      "references": [
+        "commons/maps/Trans_Pre/final.md",
+        "commons/maps/Trans_Introduction/final.md",
+        "commons/maps/Trans_Scale/final.md",
+        "commons/maps/Trans_Body/final.md",
+        "commons/maps/Trans_Pit/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "The actual incremental Trans_Pre study is not yet followed by a consistently retained learner construction. Translation companion ranges across API examples and later mathematics; the authored waypoint generator is a more focused proposal.",
+      "references": [
+        "commons/maps/Trans_Pre/tutorial.md",
+        "commons/maps/Trans_Translation/tutorial.md",
+        "commons/maps/Trans_Rotation/tutorial.md",
+        "doc/book/course/storyboards/early.json#transformation"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "created primitives and retained node references",
+        "positions and frame callbacks"
+      ],
+      "available_in_current_text": [
+        "animate one supplied cube by stages",
+        "vary duration separately from extent",
+        "compare dimensions and proportions against fixed surroundings",
+        "distinguish reversible response from retained removal"
+      ],
+      "learner_owned_current": "Trans_Pre names a study scene/script and supplies staged edits; the sine companion alters one expression. Rotation also offers a bounded hinge-speed source edit. No lesson execution was performed.",
+      "authored_plan_not_demonstrated": [
+        "waypoint generator with explicit frame",
+        "pivoted point construction",
+        "grouped scale and proximity function",
+        "composed inspectable opening"
+      ],
+      "carries": [
+        "timed transforms into Array",
+        "relative arrangement into Color",
+        "usable sine returned to in Wavefunctions"
+      ]
+    },
+    "focused_intervention": "Develop one retained waypoint/pivot construction from the existing animated cube, then repeat it in Array. Keep larger crossings and the hinge as encounters.",
+    "neighbor_crossings": {
+      "incoming": "Primitives assembled forms acquire transforms; current opening makes that relationship explicit.",
+      "outgoing": "Array opens with the same cube, distinguishing copies and addresses. The conceptual crossing is stronger than the current lesson-file continuity."
+    },
+    "confidence": "High for textual arc and actual staged instructions; moderate for pacing and learner transfer.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Trans_Pre",
+      "Trans_Introduction",
+      "Trans_Translation",
+      "Trans_Rotation",
+      "Trans_Scale",
+      "Trans_Body",
+      "Trans_Pit"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/transformation.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Trans_Pre/final.md",
+        "commons/maps/Trans_Introduction/final.md",
+        "commons/maps/Trans_Translation/final.md",
+        "commons/maps/Trans_Rotation/final.md",
+        "commons/maps/Trans_Scale/final.md",
+        "commons/maps/Trans_Body/final.md",
+        "commons/maps/Trans_Pit/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/Trans_Pre/tutorial.md",
+        "commons/maps/Trans_Translation/tutorial.md",
+        "commons/maps/Trans_Rotation/tutorial.md",
+        "commons/maps/Trans_Pit/tutorial.md"
+      ],
+      "additional_read_full": [
+        "commons/maps/Trans_Pre/tutorial-sine.md"
+      ],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "transformation",
+        "hall_records": [
+          "Trans_Pre",
+          "Trans_Introduction",
+          "Trans_Translation",
+          "Trans_Rotation",
+          "Trans_Scale",
+          "Trans_Body",
+          "Trans_Pit"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [
+        "commons/maps/Trans_Introduction/tutorial.md",
+        "commons/maps/Trans_Scale/tutorial.md",
+        "commons/maps/Trans_Body/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Trans_Pre/final.md": "4c3feef19920bbaf00326aba4093b26fbe9b85dec62b4b3f128ee5062ff1b535",
+        "commons/maps/Trans_Introduction/final.md": "b7b1bc4143cd18e11641e41b03df325c191649acc8e9391f3435a88d4dde5d43",
+        "commons/maps/Trans_Translation/final.md": "ff9d5754996fc1089cceb6733a5ec329b2f8a081306a0aa40744736c749b9a33",
+        "commons/maps/Trans_Rotation/final.md": "87924bd9ecbdf1e6052f1d6ea43fbc30a45e35b127e48359aab4d1f8c6f1fe9f",
+        "commons/maps/Trans_Scale/final.md": "e0dd72ce05f964bec07b77166dac6923683e94431d989b20d9a663c2138a0be9",
+        "commons/maps/Trans_Body/final.md": "fb5f0c695a85aa20bf90e8064596e4448c89168deb9018cebd9bdd6eb20f7c98",
+        "commons/maps/Trans_Pit/final.md": "40d1fe70daf701072794aa80abac624f97fdbb61a7684a69dd7241fc1583d167",
+        "commons/maps/Trans_Pre/tutorial.md": "26940be60bcb1b1e750ecf79596657d944d01ccb28a4f8ba70cc07af83847796",
+        "commons/maps/Trans_Translation/tutorial.md": "c881a66a286d48ca60c21afe3878037ec2dba8e67fb53b40e0da7ba3ab23f6db",
+        "commons/maps/Trans_Rotation/tutorial.md": "50b33d34a2d7a1ad58923f5d5f7b86a6584f328ccdac4003b1ebd1738774eb0a",
+        "commons/maps/Trans_Pit/tutorial.md": "f54f6b846cffcbbde844438a72f63644598939e0c2f804deab594564116de7ad",
+        "commons/maps/Trans_Pre/tutorial-sine.md": "ef55f410520fb6ac8a4f78206472f458a3e1b06828da77b6a4e2e5b8728b0262"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "array_tutorial",
+    "judgment": "needs-focus",
+    "strength": {
+      "finding": "The sequence separates index, occupant, visible position and access. Floor-to-wall reuse makes image orientation differ from moving a colliding carrier; the exterior landing is a meaningful reflective interruption.",
+      "references": [
+        "commons/maps/Array/final.md",
+        "commons/maps/Tutorial_3D/final.md",
+        "commons/maps/Tutorial_Tiling_Floor/final.md",
+        "commons/maps/Tutorial_Tiling_Walls/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Array has no tutorial companion; Floor and Walls mainly redirect to finals. Disco companion teaches a 17x17 footstep-recording floor and names deferred Chamber_Arrays, contradicting the current final which separates the floor and score clocks and excludes footstep recording.",
+      "references": [
+        "commons/maps/Tutorial_Tiling_Floor/tutorial.md",
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md",
+        "commons/maps/Tutorial_Disco/tutorial.md",
+        "commons/maps/Tutorial_Disco/final.md",
+        "commons/maps/sequences/array_tutorial.json"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "lists and traversal",
+        "created objects and transforms"
+      ],
+      "available_in_current_text": [
+        "read two and three indices without confusing storage and axes",
+        "write an empty occupancy without shifting its address",
+        "compare an address rule with a local exception",
+        "edit a score independently of tempo"
+      ],
+      "learner_owned_current": "Tutorial_3D has small actual source alterations to open structures and suspended fragments. These do not constitute a lesson in constructing nested storage.",
+      "authored_plan_not_demonstrated": [
+        "small retained occupancy/reference grid",
+        "stored random offsets whose strength changes without redraw",
+        "quarter-turn rule with one exception",
+        "short timed score reader"
+      ],
+      "carries": [
+        "indexed assignments into Color",
+        "cyclic lookups and source arrangements into Tiling"
+      ]
+    },
+    "focused_intervention": "Use a small retained grid/score across the lessons: change one value without moving its address, then give it a separate reader. Align Disco with the current encounter instead of making floor recording its lesson.",
+    "neighbor_crossings": {
+      "incoming": "Transformation supplies repeated objects and placement, but a value is not a node reference; this must be made explicit.",
+      "outgoing": "Color begins with arrays of familiar stacked forms. Tiling later reuses both source values and timing."
+    },
+    "confidence": "High for final/companion mismatch and missing file; learner code not executed.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Array",
+      "Tutorial_3D",
+      "Tutorial_Tiling_Floor",
+      "Tutorial_Tiling_Walls",
+      "Tutorial_Disco"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/array_tutorial.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Array/final.md",
+        "commons/maps/Tutorial_3D/final.md",
+        "commons/maps/Tutorial_Tiling_Floor/final.md",
+        "commons/maps/Tutorial_Tiling_Walls/final.md",
+        "commons/maps/Tutorial_Disco/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/Tutorial_3D/tutorial.md",
+        "commons/maps/Tutorial_Tiling_Floor/tutorial.md",
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md",
+        "commons/maps/Tutorial_Disco/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "array_tutorial",
+        "hall_records": [
+          "Array",
+          "Tutorial_3D",
+          "Tutorial_Tiling_Floor",
+          "Tutorial_Tiling_Walls",
+          "Tutorial_Disco"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [
+        "commons/maps/Array/tutorial.md"
+      ],
+      "tutorials_present_not_read": [],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Array/final.md": "65c7f52d3fe627ac484a92d27a2cb281ab40f89d1fdf675bed3926b5f9a3206b",
+        "commons/maps/Tutorial_3D/final.md": "236f19bae87624f61a9a3d8915d0460242659f5f432f020f128deec034bd5962",
+        "commons/maps/Tutorial_Tiling_Floor/final.md": "dbae51c3653ff8cb3ca73a7f21bef0f7eb9fbd1eae3d17855a37f05acd2f123a",
+        "commons/maps/Tutorial_Tiling_Walls/final.md": "6a559e56ca13cfc622a6484e8a121a1bf3def85ae2bf2252f38c620e8e404a8e",
+        "commons/maps/Tutorial_Disco/final.md": "580d7e5b0d5177778743e7553ed6c3d0482ce54d40e6d4c81e9d3390f64890d5",
+        "commons/maps/Tutorial_3D/tutorial.md": "1b19132a2d35f55bcb299feaa766021600cfb5e829cead1c7ff60af08fab8a2a",
+        "commons/maps/Tutorial_Tiling_Floor/tutorial.md": "01abf86bd51201f4b14c21d3808659dc18c11ff67ab016b2cbf582f3b3cf6e71",
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "6c8d9f89eb734d8d487b4a5468a07352a661233bf085324cf2fd5d6218dbe21d",
+        "commons/maps/Tutorial_Disco/tutorial.md": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "color",
+    "judgment": "holds",
+    "strength": {
+      "finding": "Assignments become illumination, chosen bodily appearance, position sampling, stored colour, accumulated paint and partitions. Each changes the operation while preserving a concrete encounter; the sequence starts by gathering earlier constructions.",
+      "references": [
+        "commons/maps/Color_Context_Placed/final.md",
+        "commons/maps/Color_Flashlight/final.md",
+        "commons/maps/Color_Nails/final.md",
+        "commons/maps/Color_Pillar/final.md",
+        "commons/maps/Color_Grid_Pallet/final.md",
+        "commons/maps/Color_Paint/final.md",
+        "commons/maps/Color_Walls/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Observation and source tracing are sometimes promised as construction. Nails companion contains six visitor instructions, not the storyboard position-to-RGB authoring lesson. Prerequisite metadata lists only primitives although the actual opening uses transforms and arrays.",
+      "references": [
+        "commons/maps/Color_Nails/tutorial.md",
+        "commons/maps/Color_Walls/tutorial.md",
+        "doc/book/course/storyboards/early.json#color",
+        "commons/maps/sequences/color.json"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "transformed compositions",
+        "arrays and address rules",
+        "bounded coordinates"
+      ],
+      "available_in_current_text": [
+        "hold geometry while changing colour assignment",
+        "separate surface material from illumination",
+        "sample a colour field and distinguish its visible samples",
+        "write and revisit a stored exception",
+        "compare view permission and physical passage"
+      ],
+      "learner_owned_current": "Walls specifies one pane row/yaw alteration and concrete palette/rail source changes. Nails and Pillar companions are primarily encounter and source-reading guides.",
+      "authored_plan_not_demonstrated": [
+        "one explained position-to-colour function",
+        "direct receiver connection",
+        "colour grid with an explicit exception-preservation policy"
+      ],
+      "carries": [
+        "palette-versus-pattern separation into Pattern_Disco",
+        "surface and receiver comparisons through Tiling"
+      ]
+    },
+    "focused_intervention": "Provide the small position-to-colour function with one explained receiver, then reuse its result at a stored grid address. Keep Nails as an embodied and critical encounter, without teaching the full signal system.",
+    "neighbor_crossings": {
+      "incoming": "Context_Placed explicitly reuses primitives, transforms and array order.",
+      "outgoing": "Walls asks for the same Pattern_Disco arrangement with another palette, a clear controlled comparison."
+    },
+    "confidence": "High on textual coherence and selected bounded edits; moderate on independent construction continuity.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Color_Context_Placed",
+      "Color_Flashlight",
+      "Color_Nails",
+      "Color_Rainbow",
+      "Color_Pillar",
+      "Color_Grid_Pallet",
+      "Color_Paint",
+      "Color_Walls"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/color.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Color_Context_Placed/final.md",
+        "commons/maps/Color_Flashlight/final.md",
+        "commons/maps/Color_Nails/final.md",
+        "commons/maps/Color_Rainbow/final.md",
+        "commons/maps/Color_Pillar/final.md",
+        "commons/maps/Color_Grid_Pallet/final.md",
+        "commons/maps/Color_Paint/final.md",
+        "commons/maps/Color_Walls/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/Color_Nails/tutorial.md",
+        "commons/maps/Color_Pillar/tutorial.md",
+        "commons/maps/Color_Walls/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "color",
+        "hall_records": [
+          "Color_Context_Placed",
+          "Color_Flashlight",
+          "Color_Nails",
+          "Color_Rainbow",
+          "Color_Pillar",
+          "Color_Grid_Pallet",
+          "Color_Paint",
+          "Color_Walls"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [
+        "commons/maps/Color_Context_Placed/tutorial.md",
+        "commons/maps/Color_Flashlight/tutorial.md",
+        "commons/maps/Color_Rainbow/tutorial.md",
+        "commons/maps/Color_Grid_Pallet/tutorial.md",
+        "commons/maps/Color_Paint/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Color_Context_Placed/final.md": "80873d7a9e82bbe459fc8c9d20e89e0536e29e38e1ad92e8e0749bf57a0f8c2d",
+        "commons/maps/Color_Flashlight/final.md": "408b58ceecf5b96bffe4abe3444666526bea88644994f1cd485c30d6d6012a8f",
+        "commons/maps/Color_Nails/final.md": "227dd0299c9386774b4593bce2ca02e10e62f020a19757941f36ef1962389208",
+        "commons/maps/Color_Rainbow/final.md": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+        "commons/maps/Color_Pillar/final.md": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+        "commons/maps/Color_Grid_Pallet/final.md": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+        "commons/maps/Color_Paint/final.md": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+        "commons/maps/Color_Walls/final.md": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b",
+        "commons/maps/Color_Nails/tutorial.md": "5437ec1394fbec1f4c3c0f481e7d99bec52101c36cd449984a3439c8e48aeab4",
+        "commons/maps/Color_Pillar/tutorial.md": "6b8597c49a074760e92aef5df5007b9b2d947f5ca9da02d9a8d5f047a4161945",
+        "commons/maps/Color_Walls/tutorial.md": "04bb373e9a49b6de7c059d12f4a724b1f9679315a5d477f6d7e939b19737ad86"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "tiling",
+    "judgment": "holds",
+    "strength": {
+      "finding": "A small source travels through altered reading rules, architectural and volume receivers, and a saved garment recipe. Tutorial_Pattern distinguishes source mutation from lookup reversal; Array_Patterns explicitly refuses an unimplemented cross-room edit transfer.",
+      "references": [
+        "commons/maps/Pattern_Disco/final.md",
+        "commons/maps/Pattern_Foundry/final.md",
+        "commons/maps/Tutorial_Pattern/final.md",
+        "commons/maps/Array_Patterns/final.md",
+        "commons/maps/Symmetry_Seventeen/final.md",
+        "commons/maps/Ribbon_Patterns_01/final.md",
+        "commons/maps/Ribbon_Patterns_02/final.md",
+        "commons/maps/Ribbon_Patterns_03/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Foundry has a long menu beyond its effective first route; its return-visit distinction should remain. All three Ribbon tutorial companions are absent, so the planned learner-written closing shader is not established by the present controls or excerpts.",
+      "references": [
+        "commons/maps/Pattern_Foundry/final.md",
+        "commons/maps/Pattern_Foundry/tutorial.md",
+        "doc/book/course/storyboards/early.json#tiling"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "arrays",
+        "cyclic rules",
+        "colour mappings",
+        "transforms"
+      ],
+      "available_in_current_text": [
+        "author an asymmetric source that reveals a rule",
+        "keep source and lookup separate",
+        "hold a receiver image apart from live updates",
+        "reason about repeat units and finite boundaries",
+        "save and apply a scoped garment recipe"
+      ],
+      "learner_owned_current": "Museum source edits and saved recipes are concrete authored operations; selected companions mainly describe these controls and the implementation.",
+      "authored_plan_not_demonstrated": [
+        "small deep copy versus live source",
+        "GDScript reflected and glide sampler",
+        "tiny UV repeat/offset/texture shader"
+      ],
+      "carries": [
+        "appearance recipe toward Shaders",
+        "controlled receiver comparison",
+        "address-based function evaluation toward Change"
+      ]
+    },
+    "focused_intervention": "Implement the proposed tiny UV lookup at the close, using one texture on two supplied receivers. Leave full garment, loom and rendering infrastructure supplied; protect Foundry first-visit versus return pacing.",
+    "neighbor_crossings": {
+      "incoming": "Pattern_Disco explicitly reuses Array Disco and Color palette separation.",
+      "outgoing": "Ribbon_Patterns_03 anticipates nearby-address readings in Change. Use a new smooth curve explicitly; a repeating texture lookup is not automatically differentiable."
+    },
+    "confidence": "High on textual route and scoped authorship; runtime and cross-room persistence not independently verified.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Pattern_Disco",
+      "Pattern_Foundry",
+      "Tutorial_Pattern",
+      "Array_Patterns",
+      "Symmetry_Seventeen",
+      "Ribbon_Patterns_01",
+      "Ribbon_Patterns_02",
+      "Ribbon_Patterns_03"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/tiling.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Pattern_Disco/final.md",
+        "commons/maps/Pattern_Foundry/final.md",
+        "commons/maps/Tutorial_Pattern/final.md",
+        "commons/maps/Array_Patterns/final.md",
+        "commons/maps/Symmetry_Seventeen/final.md",
+        "commons/maps/Ribbon_Patterns_01/final.md",
+        "commons/maps/Ribbon_Patterns_02/final.md",
+        "commons/maps/Ribbon_Patterns_03/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/Pattern_Foundry/tutorial.md",
+        "commons/maps/Tutorial_Pattern/tutorial.md",
+        "commons/maps/Array_Patterns/tutorial.md",
+        "commons/maps/Symmetry_Seventeen/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "tiling",
+        "hall_records": [
+          "Pattern_Disco",
+          "Pattern_Foundry",
+          "Tutorial_Pattern",
+          "Array_Patterns",
+          "Symmetry_Seventeen",
+          "Ribbon_Patterns_01",
+          "Ribbon_Patterns_02",
+          "Ribbon_Patterns_03"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [
+        "commons/maps/Ribbon_Patterns_01/tutorial.md",
+        "commons/maps/Ribbon_Patterns_02/tutorial.md",
+        "commons/maps/Ribbon_Patterns_03/tutorial.md"
+      ],
+      "tutorials_present_not_read": [
+        "commons/maps/Pattern_Disco/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Pattern_Disco/final.md": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987",
+        "commons/maps/Pattern_Foundry/final.md": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb",
+        "commons/maps/Tutorial_Pattern/final.md": "6bc8163b46ff43d54a1b1ade2f9bc1fbce69542212d1e990274f4625ab495f03",
+        "commons/maps/Array_Patterns/final.md": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84",
+        "commons/maps/Symmetry_Seventeen/final.md": "79bd5b7f9f75f06ac3524e0c4c2cb7ed928e34c0b55bf27c27be7ffe6de2aeb6",
+        "commons/maps/Ribbon_Patterns_01/final.md": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e",
+        "commons/maps/Ribbon_Patterns_02/final.md": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af",
+        "commons/maps/Ribbon_Patterns_03/final.md": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4",
+        "commons/maps/Pattern_Foundry/tutorial.md": "018061a5b6cb9c17425afdff19f4e807102766deeeb7247a500f5e2fb02d8bb5",
+        "commons/maps/Tutorial_Pattern/tutorial.md": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f",
+        "commons/maps/Array_Patterns/tutorial.md": "f7e4eea41859a769da644fd8db45e307f464d1c873572a8aabbb031d3fb5aa1d",
+        "commons/maps/Symmetry_Seventeen/tutorial.md": "a65fa4f95c20b54d3e22e9dafd23af32be54d44ebb21a7117385826248e35d8a"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "change",
+    "judgment": "needs-focus",
+    "strength": {
+      "finding": "Finite rate, sampled area, signed net change and path-dependent sampling remain precisely distinguished. The held comparisons give prior judgments somewhere to remain; Flow_Field anticipates inertia without claiming it.",
+      "references": [
+        "commons/maps/Change_Intro/final.md",
+        "commons/maps/Flow_Field/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Two halls compress several new models. Companions explain controls, formulas and recorded implementation measurements rather than realising the small reusable rate/sum/follower studies proposed by the storyboard. Recognising a plot does not establish the ability to calculate a new case.",
+      "references": [
+        "commons/maps/Change_Intro/tutorial.md",
+        "commons/maps/Flow_Field/tutorial.md",
+        "doc/book/course/storyboards/early.json#change"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "functions and coordinates",
+        "differences",
+        "loops and retained traces"
+      ],
+      "available_in_current_text": [
+        "identify independent variable and units",
+        "compare finite secant and analytic tangent",
+        "change a sampling rule without changing the function",
+        "separate finite reference from limiting integral",
+        "distinguish signed net change from journey",
+        "understand a repeated sample-and-move update"
+      ],
+      "learner_owned_current": "Readable teaching sketches and detailed comparison instructions; no reviewed companion supplies a complete incremental learner study.",
+      "authored_plan_not_demonstrated": [
+        "finite-difference function",
+        "finite sum with chosen interval and sample rule",
+        "field follower with step-size and wrap-record comparison"
+      ],
+      "carries": [
+        "numerical rates and accumulation into Forces",
+        "two-axis local differences into Form Finding"
+      ]
+    },
+    "focused_intervention": "Split Change_Intro teaching into two short steps around one callable curve: finite difference first, weighted sum second. Let the same loop become Flow_Field by changing how the next sample address is chosen.",
+    "neighbor_crossings": {
+      "incoming": "Tiling made functions of addresses familiar; Change must name the change to a smooth numerical height function.",
+      "outgoing": "Flow_Field ends by contrasting replacement of velocity with the persistent velocity to come in Forces. Descent later reuses local differences without time."
+    },
+    "confidence": "High on concepts and stated limitations; no learner execution or spatial pacing test.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Change_Intro",
+      "Flow_Field"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/change.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Change_Intro/final.md",
+        "commons/maps/Flow_Field/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/Change_Intro/tutorial.md",
+        "commons/maps/Flow_Field/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "change",
+        "hall_records": [
+          "Change_Intro",
+          "Flow_Field"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Change_Intro/final.md": "603a98e70b26c070df203cbe77324bf203ec24313f12593d8e7ca673d5833873",
+        "commons/maps/Flow_Field/final.md": "fdb785529330954c28f55e95165fc6152eba8cce048dbb58db796fde5fd2ee29",
+        "commons/maps/Change_Intro/tutorial.md": "24c2e4cc6cbb615a08938c45ca415f8662887bb2c65f675131cad513c19743a5",
+        "commons/maps/Flow_Field/tutorial.md": "61c93a074d1f3086778da1840795f0e752cde3e2d86e3faf6737fad088201d86"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "forces",
+    "judgment": "needs-focus",
+    "strength": {
+      "finding": "The sequence earns the assignment/accumulation distinction through Motion and Fields, then reuses it for drag and restoration. ForceAsPlace gives the receiver argument a bodily consequence while preserving cube/controller differences.",
+      "references": [
+        "commons/maps/VFM_03_Motion/final.md",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "commons/maps/Vectors_Act5_ForceAsPlace/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Thirteen halls include many different modelling competencies. A shared question about receivers holds the museum together but does not establish each construction. Selected companions are operating/source accounts, while reduced authoring tasks remain plans. Metadata omits Change despite actual dependence on its rates.",
+      "references": [
+        "commons/maps/VFM_05_Launch/tutorial.md",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+        "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+        "doc/book/course/storyboards/early.json#forces",
+        "commons/maps/sequences/forces.json"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "position differences",
+        "time and rates",
+        "signed accumulation",
+        "arrays"
+      ],
+      "available_in_current_text": [
+        "attach units and reference frame to a vector",
+        "recover a vector from projection and remainder",
+        "distinguish analytic trajectory from integrated state",
+        "compare a velocity setter with acceleration accumulation",
+        "distinguish forces, controller decisions and observation cutoffs"
+      ],
+      "learner_owned_current": "Museum control experiments include reset, shared beginnings and changed receivers. Reviewed companions expose actual model formulas but do not establish a retained learner program.",
+      "authored_plan_not_demonstrated": [
+        "measurement/projection functions",
+        "finite force schedule",
+        "two-receiver integrator",
+        "spring with restoration and damping",
+        "scoped selection rule"
+      ],
+      "carries": [
+        "state updates into Wavefunctions",
+        "ability to recognise missing velocity in Descent",
+        "contact and receiver distinctions toward later simulation"
+      ]
+    },
+    "focused_intervention": "Develop one supplied-runner state study across Fields and Oscillation: assignment versus accumulation, then restoration and damping. Ask for a prediction from one changed initial state; keep Legs/Arena as comparisons rather than mandatory controller builds.",
+    "neighbor_crossings": {
+      "incoming": "Flow_Field provides the memoryless follower. Forces opening explicitly remembers that field and later reconstructs its update difference.",
+      "outgoing": "FormFinding_Descent explicitly removes stored velocity and separates optimiser step count from time. Wavefunctions returns to the spring state through angle."
+    },
+    "confidence": "High textual dependency evidence; moderate estimate of the long route’s load. No runtime verification.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic",
+      "VFM_05_Launch",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation",
+      "Change_Choreography",
+      "VFM_07_Gravity",
+      "VFM_09_Legs",
+      "VFM_08_Arena",
+      "Vectors_Act5_ForceAsPlace"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/forces.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+        "commons/maps/VFM_02_Operations/final.md",
+        "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+        "commons/maps/VFM_05_Launch/final.md",
+        "commons/maps/VFM_03_Motion/final.md",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "commons/maps/Change_Choreography/final.md",
+        "commons/maps/VFM_07_Gravity/final.md",
+        "commons/maps/VFM_09_Legs/final.md",
+        "commons/maps/VFM_08_Arena/final.md",
+        "commons/maps/Vectors_Act5_ForceAsPlace/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/VFM_05_Launch/tutorial.md",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+        "commons/maps/Vectors_Act4b_Oscillation/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "forces",
+        "hall_records": [
+          "Vectors_Act1_WhatAVectorIs",
+          "VFM_02_Operations",
+          "Vectors_Act2_VectorArithmetic",
+          "VFM_05_Launch",
+          "VFM_03_Motion",
+          "Vectors_Act3_FieldsAndMotion",
+          "Vectors_Act4a_KineticForces",
+          "Vectors_Act4b_Oscillation",
+          "Change_Choreography",
+          "VFM_07_Gravity",
+          "VFM_09_Legs",
+          "VFM_08_Arena",
+          "Vectors_Act5_ForceAsPlace"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [
+        "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+        "commons/maps/VFM_02_Operations/tutorial.md",
+        "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+        "commons/maps/VFM_03_Motion/tutorial.md",
+        "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+        "commons/maps/Change_Choreography/tutorial.md",
+        "commons/maps/VFM_07_Gravity/tutorial.md",
+        "commons/maps/VFM_09_Legs/tutorial.md",
+        "commons/maps/VFM_08_Arena/tutorial.md",
+        "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/Vectors_Act1_WhatAVectorIs/final.md": "ca8fea625467648ac58d714696e5331a0d4eb320abb36e38eeb14940a143284c",
+        "commons/maps/VFM_02_Operations/final.md": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d",
+        "commons/maps/Vectors_Act2_VectorArithmetic/final.md": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5",
+        "commons/maps/VFM_05_Launch/final.md": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd",
+        "commons/maps/VFM_03_Motion/final.md": "5c26fa4807d44fb4ee645cdae9f33e8f9a551506755fe30235b729af83679f9b",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/final.md": "9b080531fb62be6f8344fff1055290e3043e488bcbc1364105ae90ad0852c53b",
+        "commons/maps/Vectors_Act4a_KineticForces/final.md": "70c6e2f8e8e31de062f7a07b9dc3d08388d05b6a8e2fa3903fcf9a472eddc95c",
+        "commons/maps/Vectors_Act4b_Oscillation/final.md": "0f771da76884988def6a0d554e52802ee9ced20877f6b21ff375e800a3240922",
+        "commons/maps/Change_Choreography/final.md": "7bdd0bf49cfad2f6b9636629114e900dcad81b46c70dfebfe066325e2ce701a6",
+        "commons/maps/VFM_07_Gravity/final.md": "8e7d2278b9ad81b224e39b29ee2a6d62e6efb3839ebbf8017b804e6a75505ab2",
+        "commons/maps/VFM_09_Legs/final.md": "b1394a502a0fdfba9c05f6cdb9931e4c6a55544e00cce2a46f3a4ce1aa20e457",
+        "commons/maps/VFM_08_Arena/final.md": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+        "commons/maps/Vectors_Act5_ForceAsPlace/final.md": "a237bc14c03750b853c0e629795620e8352899512c9f6ea9a693662183ad786b",
+        "commons/maps/VFM_05_Launch/tutorial.md": "829513da55c12ee2399d84860e0f8361b551417979d6451f457fd1a3086d3a57",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md": "3149384db6890fd55f649be165450c18fecd41fe76b0cd02de528774b691f6e0",
+        "commons/maps/Vectors_Act4b_Oscillation/tutorial.md": "3d81aef75d088c15a002bffa638696e7e0d4caa15bec8c655f4560596be73441"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "formfinding",
+    "judgment": "rethink-handoff",
+    "strength": {
+      "finding": "Finals distinguish drawn curve, evaluated formula, finite correction, encoded balance, search and acceptance criterion. Relaxation’s vessel retains a chosen duration; Forge lets a useful low stack fail an authored requirement without becoming a failure of the visitor.",
+      "references": [
+        "commons/maps/FormFinding_Descent/final.md",
+        "commons/maps/FormFinding_Catenary/final.md",
+        "commons/maps/FormFinding_Relaxation/final.md",
+        "commons/maps/FormFinding_Equilibrium/final.md",
+        "commons/maps/FormFinding_Annealing/final.md",
+        "commons/maps/FormFinding_Forge/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Forge companion contradicts the final: equates soft-body settling/training, recasts a specified target cloud as unprescribed emergence, merges jitter with annealing temperature, overlooks height in its success explanation, and hands off to minimisation/standing-wave rest instead of Wavefunctions’ angular state. Relaxation companion asserts a one-over-passes law and shows division by an unguarded constraint length.",
+      "references": [
+        "commons/maps/FormFinding_Forge/tutorial.md",
+        "commons/maps/FormFinding_Forge/final.md",
+        "commons/maps/FormFinding_Relaxation/tutorial.md",
+        "commons/maps/FormFinding_Relaxation/final.md",
+        "commons/maps/WaveFunctions_Intro/final.md",
+        "doc/book/course/storyboards/early.json#formfinding"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "finite differences",
+        "vector updates",
+        "motion history",
+        "indexed positions"
+      ],
+      "available_in_current_text": [
+        "distinguish objective, constraints and update",
+        "identify distinct stopping reasons",
+        "compare local and global claims",
+        "separate drawn/analytic/settled shape",
+        "question a success condition with a concrete counterexample"
+      ],
+      "learner_owned_current": "Forge invites visitor-authored stacks, including useful rejected ones. The companion’s code montage overclaims what its disparate models establish.",
+      "authored_plan_not_demonstrated": [
+        "guarded short-chain distance correction",
+        "small lever balance function",
+        "annealing with current versus best-so-far records",
+        "explicit editable success predicate"
+      ],
+      "carries": [
+        "declared stopping criteria into later simulation",
+        "state versus prescribed pose into Wavefunctions",
+        "model-purpose judgment beyond optimization"
+      ]
+    },
+    "focused_intervention": "Reconcile Forge tutorial around the planned success predicate: test a low stack, change the criterion and state what remains unmeasured. Repair the exit to continued motion. Keep the museum route and its varied sculptures; do not force one common solver.",
+    "neighbor_crossings": {
+      "incoming": "Descent clearly departs from ForceAsPlace by removing momentum and physical time.",
+      "outgoing": "Forge final links rest to returning motion. Its tutorial instead asserts an unsupported minimisation/standing-wave link; reconcile that teaching contract with WaveFunctions_Intro."
+    },
+    "confidence": "High: direct current-document contradictions. No claim that code or runtime changed.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "FormFinding_Descent",
+      "FormFinding_Catenary",
+      "FormFinding_Relaxation",
+      "FormFinding_Equilibrium",
+      "FormFinding_Annealing",
+      "FormFinding_Forge"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/formfinding.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/FormFinding_Descent/final.md",
+        "commons/maps/FormFinding_Catenary/final.md",
+        "commons/maps/FormFinding_Relaxation/final.md",
+        "commons/maps/FormFinding_Equilibrium/final.md",
+        "commons/maps/FormFinding_Annealing/final.md",
+        "commons/maps/FormFinding_Forge/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/FormFinding_Descent/tutorial.md",
+        "commons/maps/FormFinding_Relaxation/tutorial.md",
+        "commons/maps/FormFinding_Annealing/tutorial.md",
+        "commons/maps/FormFinding_Forge/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "formfinding",
+        "hall_records": [
+          "FormFinding_Descent",
+          "FormFinding_Catenary",
+          "FormFinding_Relaxation",
+          "FormFinding_Equilibrium",
+          "FormFinding_Annealing",
+          "FormFinding_Forge"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [
+        "commons/maps/FormFinding_Catenary/tutorial.md",
+        "commons/maps/FormFinding_Equilibrium/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/FormFinding_Descent/final.md": "001ccbe611d8c3a5fc14c32127329bb9fbaba3c0a332e0c066f1299739f59be3",
+        "commons/maps/FormFinding_Catenary/final.md": "f827dc82debd297fc996e2311ba68499355d247ae45ff98062a4b2ea05d0541f",
+        "commons/maps/FormFinding_Relaxation/final.md": "733b3d7d15e8bc3e3b7364d65770a878f6742a4449b6e80f1ca3750fbffb1ace",
+        "commons/maps/FormFinding_Equilibrium/final.md": "d5253a28a4060b9585909d15c092e9df444aa2b9fe5d78638225488269b04f1b",
+        "commons/maps/FormFinding_Annealing/final.md": "c090a2395b79370f5fd40d0ff34f5c4e9344798d11a287035fa7e268d5742b6d",
+        "commons/maps/FormFinding_Forge/final.md": "5bc0dcae07ffd7654926d0f25b8d41bd1d36a2612efe2d6a72b39f848187355a",
+        "commons/maps/FormFinding_Descent/tutorial.md": "cad3c6072ed8a3902c62b58471c2b9047f46582e32fb9a1c6fdc5edffa52ed34",
+        "commons/maps/FormFinding_Relaxation/tutorial.md": "21075942806c3dc35a8637d4aa9b0934215fce49b47c929e9c29a98e0735b56c",
+        "commons/maps/FormFinding_Annealing/tutorial.md": "bb415e56210542a17e7ec8f33b9a87655f582e52fb976efc43272cbe6e70d545",
+        "commons/maps/FormFinding_Forge/tutorial.md": "b1dbf107f0d779379783353f150b1536834dd31b662521b4eaae30162f3ae423"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  },
+  {
+    "sequence": "wavefunctions",
+    "judgment": "needs-focus",
+    "strength": {
+      "finding": "Returning value versus state develops into temporal sampling, spatial samples, independent voice beginnings, beats and a finite sum. Synthesis distinguishes fresh recipe evaluation from processing the previous audio result, preparing reproducibility in Randomness.",
+      "references": [
+        "commons/maps/WaveFunctions_Intro/final.md",
+        "commons/maps/WaveFunctions_Pendulum/final.md",
+        "commons/maps/WaveFunctions_Sine_Space/final.md",
+        "commons/maps/WaveFunctions_AirMusic/final.md",
+        "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md"
+      ]
+    },
+    "weakness": {
+      "finding": "Propagation tutorial teaches imposed distance-delay waves and pebble sources while final and storyboard concern neighbour coupling. Bernini tutorial offers an incomplete triangle-strip ring construction and changing mesh, rather than the proposed reduced connected shaft and independent whole-object rotation. Current AirMusic and Synthesis companions are much more faithful.",
+      "references": [
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+        "commons/maps/Wavefunctions_Bernini/tutorial.md",
+        "commons/maps/Wavefunctions_Bernini/final.md",
+        "commons/maps/WaveFunctions_AirMusic/tutorial.md",
+        "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md",
+        "doc/book/course/storyboards/early.json#wavefunctions"
+      ]
+    },
+    "capacity": {
+      "brings": [
+        "usable sine",
+        "position/velocity updates",
+        "dot projection",
+        "arrays",
+        "sampling"
+      ],
+      "available_in_current_text": [
+        "distinguish equal values from different states",
+        "compare sample interval and retained duration",
+        "interpret phase and frequency",
+        "compare independent and coupled motion",
+        "distinguish phase modulation from addition",
+        "compose five bounded harmonic coefficients and inspect recipe limits"
+      ],
+      "learner_owned_current": "Visitor controls support real sound/shape composition. Reviewed companions explain current audio and sum state, but do not implement the storyboard’s minimal learner constructions.",
+      "authored_plan_not_demonstrated": [
+        "timestamped recorder with named fields",
+        "short coupled row reading old states before commit",
+        "finite audio sample function",
+        "connected reduced ring mesh",
+        "retained chance score"
+      ],
+      "carries": [
+        "event and state retention into Randomness",
+        "prepared vocabulary versus chosen sequence",
+        "finite signal composition toward later audio"
+      ]
+    },
+    "focused_intervention": "Prioritise the short coupled oscillator row using the Forces runner. Read all prior states before updating any. Keep architectural and listening encounters as meaningful capacities rather than imposing one technical format.",
+    "neighbor_crossings": {
+      "incoming": "Form Finding final permits persistence through motion; Intro reuses Forces spring state and projection.",
+      "outgoing": "Synthesis asks what must be retained to reproduce a result in Random_Definition; Cage has already separated chosen sequence from authored vocabulary. Randomness itself was outside this review."
+    },
+    "confidence": "High on current text and plan comparisons; audio, runtime, headset and learning outcomes unverified.",
+    "review_date": "2026-10-04",
+    "canonical_map_order": [
+      "WaveFunctions_Intro",
+      "WaveFunctions_Pendulum",
+      "WaveFunctions_Sine_Space",
+      "WaveFunctions_Unit_Circle",
+      "WaveFunctions_3D_Wave_Propagation",
+      "WaveFunctions_Effect_Sound",
+      "Wavefunctions_Bernini",
+      "WaveFunctions_John_Cage",
+      "WaveFunctions_AirMusic",
+      "Wavefunctions_Sky_Stairs",
+      "WaveFunctions_TrigWalkingPath",
+      "WaveFunctions_Synthesis_Lab"
+    ],
+    "coverage": {
+      "sequence_file": "commons/maps/sequences/wavefunctions.json",
+      "sequence_fields_reviewed": [
+        "maps",
+        "truth",
+        "description",
+        "learning_objectives",
+        "prerequisites",
+        "unlocks"
+      ],
+      "finals_read_full": [
+        "commons/maps/WaveFunctions_Intro/final.md",
+        "commons/maps/WaveFunctions_Pendulum/final.md",
+        "commons/maps/WaveFunctions_Sine_Space/final.md",
+        "commons/maps/WaveFunctions_Unit_Circle/final.md",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+        "commons/maps/WaveFunctions_Effect_Sound/final.md",
+        "commons/maps/Wavefunctions_Bernini/final.md",
+        "commons/maps/WaveFunctions_John_Cage/final.md",
+        "commons/maps/WaveFunctions_AirMusic/final.md",
+        "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+        "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md"
+      ],
+      "tutorials_read_full": [
+        "commons/maps/WaveFunctions_Intro/tutorial.md",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md",
+        "commons/maps/Wavefunctions_Bernini/tutorial.md",
+        "commons/maps/WaveFunctions_AirMusic/tutorial.md",
+        "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md"
+      ],
+      "additional_read_full": [],
+      "authored_plan": {
+        "file": "doc/book/course/storyboards/early.json",
+        "sequence_record": "wavefunctions",
+        "hall_records": [
+          "WaveFunctions_Intro",
+          "WaveFunctions_Pendulum",
+          "WaveFunctions_Sine_Space",
+          "WaveFunctions_Unit_Circle",
+          "WaveFunctions_3D_Wave_Propagation",
+          "WaveFunctions_Effect_Sound",
+          "Wavefunctions_Bernini",
+          "WaveFunctions_John_Cage",
+          "WaveFunctions_AirMusic",
+          "Wavefunctions_Sky_Stairs",
+          "WaveFunctions_TrigWalkingPath",
+          "WaveFunctions_Synthesis_Lab"
+        ],
+        "scope": "Sequence arc and every hall storyboard and/or compressed storyboard, with review notes. Ancillary brings/learns/carries/supplied arrays were not comprehensively reviewed."
+      },
+      "tutorials_absent": [],
+      "tutorials_present_not_read": [
+        "commons/maps/WaveFunctions_Pendulum/tutorial.md",
+        "commons/maps/WaveFunctions_Sine_Space/tutorial.md",
+        "commons/maps/WaveFunctions_Unit_Circle/tutorial.md",
+        "commons/maps/WaveFunctions_Effect_Sound/tutorial.md",
+        "commons/maps/WaveFunctions_John_Cage/tutorial.md",
+        "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md",
+        "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md"
+      ],
+      "source_code_read": [],
+      "sha256_at_report_for_full_read_files": {
+        "commons/maps/WaveFunctions_Intro/final.md": "782001703dad59d881663ff578918ef409198d0219576ff0070cd4230db94441",
+        "commons/maps/WaveFunctions_Pendulum/final.md": "52ff8d6f2f9d3188950c45ab641d488b05494ed3971680952e2f218b48e84475",
+        "commons/maps/WaveFunctions_Sine_Space/final.md": "66cc463057429bb80d4dae4f8931edfc78675e537a87187a11b2bbd554e32701",
+        "commons/maps/WaveFunctions_Unit_Circle/final.md": "b43559b3f868c57648919b177bd729901ce29ded60e3cb317e3a2a58ffede8a6",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md": "a79bfa00b056537a37de42aef09f48f21d15d21db88b0a29c5ed2476a0dd8d3f",
+        "commons/maps/WaveFunctions_Effect_Sound/final.md": "5fb517cce6fcab8945a932a3b88f28a6131880627d8270a350b06b8051f64b4a",
+        "commons/maps/Wavefunctions_Bernini/final.md": "29d793cc377198087ab432679a610ea0df38c8b5e6e5fba24f8510633f215279",
+        "commons/maps/WaveFunctions_John_Cage/final.md": "16a16df2bd92561ab237bd1e14d59e2c5ddfa36c6d28d325389686271ee323f4",
+        "commons/maps/WaveFunctions_AirMusic/final.md": "d8361d44cf392c1aad70c89ef149a547a8e614337514b0b71ab881e7288b98f6",
+        "commons/maps/Wavefunctions_Sky_Stairs/final.md": "58549b1b4ace5e614fd34e36ef5e9c9879927f7f75dabdd5681f84829d99f079",
+        "commons/maps/WaveFunctions_TrigWalkingPath/final.md": "7959db17f9218184243a9b335a09a9ec9f53559b15e4a2eed9c6feab532c9492",
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md": "6f844d746042cbcb3e2a38d7d9808f68e9eda705a258d394fa7579bfcf69ff6f",
+        "commons/maps/WaveFunctions_Intro/tutorial.md": "30b88139d316f3e005a3be0510afdadca0398cc04ed555e254109b3e7aa2bc97",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md": "ea132a847b89577536ce332cf22024473674c25b93e567b34bd209f2ba7ec4cf",
+        "commons/maps/Wavefunctions_Bernini/tutorial.md": "c1beb872bce14059745d3099d511b9f086d36b05685eaf3e94d6243eb68d5d9e",
+        "commons/maps/WaveFunctions_AirMusic/tutorial.md": "8df5b66afff45a34cc52db63d9450158746512d08694f36bb622e060f8fd3794",
+        "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md": "90a24357f279a402506c28760fd2c2767d2b6e29c55c3711ae45906d6d11e986"
+      }
+    },
+    "evidence_status": {
+      "text_evidence": "Current finals and explicitly listed companions read in full. Findings distinguish observation, source tracing, small edits and construction instructions.",
+      "authored_plan": "Storyboards propose reduced learner studies and supply boundaries; a plan is not evidence those studies are built or learned.",
+      "runtime_verified": false,
+      "learner_transfer_verified": false,
+      "external_claims_freshly_verified": false,
+      "limits": [
+        "No scene execution or headset session.",
+        "No learner observation or completed learner artefact.",
+        "No underlying artifact-source audit; code fragments discussed only where quoted in reviewed documents.",
+        "Unread companions are listed explicitly; conclusions about teaching gaps apply to reviewed materials, not every file in the project.",
+        "Neighbor conclusions outside these eight sequences use explicit transitions in reviewed text; adjacent sequences were not independently reviewed."
+      ]
+    },
+    "review_method": {
+      "skills_read": [
+        "C:/Users/palle/.codex/skills/ada-phylogenist/SKILL.md",
+        "C:/Users/palle/.codex/skills/ada-navigator/SKILL.md"
+      ],
+      "criterion": "Trace enabling concepts and altered models rather than infer skill from title order. Credit critical, perceptual and authoring capacity without requiring every museum work to be a coding exercise.",
+      "proposed_change_status": "Recommendation only; source/map/code/order not edited."
+    }
+  }
+]

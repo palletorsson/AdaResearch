@@ -1,0 +1,16 @@
+--- before/commons/maps/Tutorial_Tiling_Floor/final.md
++++ current/commons/maps/Tutorial_Tiling_Floor/final.md
+@@ -16,9 +16,11 @@
+ if rule == 2: rotation += (cx+cy)%4
+ ```
+ 
+-The cell address contributes an orientation. The remainder after division by four gives four returning positions. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn.
++Here `cx` and `cy` count columns and rows in the tile image. They name directions across that image, which can lie on a floor or stand on a wall; `cy` does not mean height in the room.
+ 
+-Now look at ONE EXCEPTION. Initially it repeats the unexceptional translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. Find the difference from a distance, then approach it. Does it read as a direction, an error, an opening? The code supplies a difference without deciding what it should mean to you.
++The `%` sign gives the remainder after division. As these non-negative counts increase, `%4` returns 0, 1, 2, 3, then 0 again. You met that return at the flight console: after index three, the selection came back to zero. Here the remainder chooses a quarter-turn. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn. Keep this way of returning in mind when repetition begins to sound.
++
++Now look at ONE EXCEPTION. Initially it repeats the unexceptional translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. Find the difference from a distance, then approach it. Does it read as a direction, an error, an opening? Choose one reading. What would you have to add to make that reading available to someone else?
+ 
+ These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous.
+ 

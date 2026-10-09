@@ -1,0 +1,510 @@
+{
+	"checks": [
+		{
+			"detail": null,
+			"name": "origin: four rotating drums exist",
+			"passed": true
+		},
+		{
+			"detail": [
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214
+			],
+			"name": "origin: every platform plane is exactly 1.7m above local floor",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: all 48 frames belong to rotating drums",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: seeking moves every frame in world space",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: seeking preserves every frame and mount local pose",
+			"passed": true
+		},
+		{
+			"detail": [
+				0.0000000437113882867379,
+				0.0000000437113882867379,
+				0.0000000437113882867379,
+				0.0000000437113882867379
+			],
+			"name": "origin: six-second drum period makes a quarter turn in 1.5 seconds",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: six seconds returns every indexed frame to its world pose",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: original five controls remain wired",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: real PLAY turns all drums through elapsed time",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: real running drum leaves local pose archive unchanged",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: real PAUSE holds clock and whole drum",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin: RESET restores original drum orientation without resuming",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					2.20000004768372,
+					0.000839630782138556,
+					-1.30666744709015
+				],
+				"floor_height_error_m": 0.000827302574180067,
+				"lateral_drift_m": 0.0,
+				"mode": "translate",
+				"supported_ticks": 38,
+				"target_local": [
+					2.20000004768372,
+					0.00999999977648258,
+					-1.3400000333786
+				],
+				"travel_m": 1.33333241939545
+			},
+			"name": "origin: visitor can walk up to translate platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					-2.20000004768372,
+					0.000839630782138556,
+					-1.30666744709015
+				],
+				"floor_height_error_m": 0.000827302574180067,
+				"lateral_drift_m": 0.0,
+				"mode": "rotate",
+				"supported_ticks": 38,
+				"target_local": [
+					-2.20000004768372,
+					0.00999999977648258,
+					-1.3400000333786
+				],
+				"travel_m": 1.33333241939545
+			},
+			"name": "origin: visitor can walk up to rotate platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					2.20000004768372,
+					0.000835105078294873,
+					4.66000080108643
+				],
+				"floor_height_error_m": 0.00178651325404644,
+				"lateral_drift_m": 0.0,
+				"mode": "scale",
+				"supported_ticks": 37,
+				"target_local": [
+					2.20000004768372,
+					0.00999999977648258,
+					4.65999984741211
+				],
+				"travel_m": 1.3000009059906
+			},
+			"name": "origin: visitor can walk up to scale platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					-2.20000004768372,
+					0.000789144774898887,
+					4.6933331489563
+				],
+				"floor_height_error_m": 0.00178923434577882,
+				"lateral_drift_m": 0.0,
+				"mode": "combine",
+				"supported_ticks": 38,
+				"target_local": [
+					-2.20000004768372,
+					0.00999999977648258,
+					4.65999984741211
+				],
+				"travel_m": 1.33333325386047
+			},
+			"name": "origin: visitor can walk up to combine platform rim",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: four rotating drums exist",
+			"passed": true
+		},
+		{
+			"detail": [
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214
+			],
+			"name": "translated_yaw180: every platform plane is exactly 1.7m above local floor",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: all 48 frames belong to rotating drums",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: seeking moves every frame in world space",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: seeking preserves every frame and mount local pose",
+			"passed": true
+		},
+		{
+			"detail": [
+				0.0000000437113811813106,
+				0.0000000437113811813106,
+				0.0000000437113811813106,
+				0.0000000437113811813106
+			],
+			"name": "translated_yaw180: six-second drum period makes a quarter turn in 1.5 seconds",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: six seconds returns every indexed frame to its world pose",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: original five controls remain wired",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: real PLAY turns all drums through elapsed time",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: real running drum leaves local pose archive unchanged",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: real PAUSE holds clock and whole drum",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180: RESET restores original drum orientation without resuming",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					2.20000171661377,
+					0.000839710235595703,
+					-1.33998680114746
+				],
+				"floor_height_error_m": 0.000825405120849609,
+				"lateral_drift_m": 0.00000095367431640625,
+				"mode": "translate",
+				"supported_ticks": 37,
+				"target_local": [
+					2.20000076293945,
+					0.00999999977648258,
+					-1.33999907970428
+				],
+				"travel_m": 1.30001163482666
+			},
+			"name": "translated_yaw180: visitor can walk up to translate platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					-2.19999885559082,
+					0.000839710235595703,
+					-1.33998489379883
+				],
+				"floor_height_error_m": 0.000827312469482422,
+				"lateral_drift_m": 0.0000019073486328125,
+				"mode": "rotate",
+				"supported_ticks": 37,
+				"target_local": [
+					-2.20000076293945,
+					0.00999999977648258,
+					-1.3400000333786
+				],
+				"travel_m": 1.30001449584961
+			},
+			"name": "translated_yaw180: visitor can walk up to rotate platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					2.20000171661377,
+					0.00078582763671875,
+					4.66001033782959
+				],
+				"floor_height_error_m": 0.00179028511047363,
+				"lateral_drift_m": 0.00000095367431640625,
+				"mode": "scale",
+				"supported_ticks": 37,
+				"target_local": [
+					2.20000076293945,
+					0.00999999977648258,
+					4.65999984741211
+				],
+				"travel_m": 1.30000972747803
+			},
+			"name": "translated_yaw180: visitor can walk up to scale platform rim",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": true,
+				"disc_radius_m": 1.10000002384186,
+				"end_local": [
+					-2.19999885559082,
+					0.000783205032348633,
+					4.66000843048096
+				],
+				"floor_height_error_m": 0.00633335113525391,
+				"lateral_drift_m": 0.0,
+				"mode": "combine",
+				"supported_ticks": 36,
+				"target_local": [
+					-2.19999885559082,
+					0.00999999977648258,
+					4.65999984741211
+				],
+				"travel_m": 1.30000782012939
+			},
+			"name": "translated_yaw180: visitor can walk up to combine platform rim",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"limits": [
+		"Standalone real artifact on a supplied flat floor; this does not prove a complete museum route.",
+		"Real CharacterBody capsule and pointer-button wiring; no headset comfort or tracked-hand reach test.",
+		"Local immutable poses moving through world space prove spinning geometry, not perceptual fusion or a strobe illusion."
+	],
+	"observations": {
+		"origin": {
+			"approaches": [
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						2.20000004768372,
+						0.000839630782138556,
+						-1.30666744709015
+					],
+					"floor_height_error_m": 0.000827302574180067,
+					"lateral_drift_m": 0.0,
+					"mode": "translate",
+					"supported_ticks": 38,
+					"target_local": [
+						2.20000004768372,
+						0.00999999977648258,
+						-1.3400000333786
+					],
+					"travel_m": 1.33333241939545
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						-2.20000004768372,
+						0.000839630782138556,
+						-1.30666744709015
+					],
+					"floor_height_error_m": 0.000827302574180067,
+					"lateral_drift_m": 0.0,
+					"mode": "rotate",
+					"supported_ticks": 38,
+					"target_local": [
+						-2.20000004768372,
+						0.00999999977648258,
+						-1.3400000333786
+					],
+					"travel_m": 1.33333241939545
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						2.20000004768372,
+						0.000835105078294873,
+						4.66000080108643
+					],
+					"floor_height_error_m": 0.00178651325404644,
+					"lateral_drift_m": 0.0,
+					"mode": "scale",
+					"supported_ticks": 37,
+					"target_local": [
+						2.20000004768372,
+						0.00999999977648258,
+						4.65999984741211
+					],
+					"travel_m": 1.3000009059906
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						-2.20000004768372,
+						0.000789144774898887,
+						4.6933331489563
+					],
+					"floor_height_error_m": 0.00178923434577882,
+					"lateral_drift_m": 0.0,
+					"mode": "combine",
+					"supported_ticks": 38,
+					"target_local": [
+						-2.20000004768372,
+						0.00999999977648258,
+						4.65999984741211
+					],
+					"travel_m": 1.33333325386047
+				}
+			],
+			"plane_height_errors": [
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214
+			]
+		},
+		"translated_yaw180": {
+			"approaches": [
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						2.20000171661377,
+						0.000839710235595703,
+						-1.33998680114746
+					],
+					"floor_height_error_m": 0.000825405120849609,
+					"lateral_drift_m": 0.00000095367431640625,
+					"mode": "translate",
+					"supported_ticks": 37,
+					"target_local": [
+						2.20000076293945,
+						0.00999999977648258,
+						-1.33999907970428
+					],
+					"travel_m": 1.30001163482666
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						-2.19999885559082,
+						0.000839710235595703,
+						-1.33998489379883
+					],
+					"floor_height_error_m": 0.000827312469482422,
+					"lateral_drift_m": 0.0000019073486328125,
+					"mode": "rotate",
+					"supported_ticks": 37,
+					"target_local": [
+						-2.20000076293945,
+						0.00999999977648258,
+						-1.3400000333786
+					],
+					"travel_m": 1.30001449584961
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						2.20000171661377,
+						0.00078582763671875,
+						4.66001033782959
+					],
+					"floor_height_error_m": 0.00179028511047363,
+					"lateral_drift_m": 0.00000095367431640625,
+					"mode": "scale",
+					"supported_ticks": 37,
+					"target_local": [
+						2.20000076293945,
+						0.00999999977648258,
+						4.65999984741211
+					],
+					"travel_m": 1.30000972747803
+				},
+				{
+					"arrived": true,
+					"disc_radius_m": 1.10000002384186,
+					"end_local": [
+						-2.19999885559082,
+						0.000783205032348633,
+						4.66000843048096
+					],
+					"floor_height_error_m": 0.00633335113525391,
+					"lateral_drift_m": 0.0,
+					"mode": "combine",
+					"supported_ticks": 36,
+					"target_local": [
+						-2.19999885559082,
+						0.00999999977648258,
+						4.65999984741211
+					],
+					"travel_m": 1.30000782012939
+				}
+			],
+			"plane_height_errors": [
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214,
+				0.0000000476837158647214
+			]
+		}
+	},
+	"source_sha256": "09d199d9393822a2d34a9f01dce321eaae162fcd5614f24c33a01cd91f612e81",
+	"source_sha256_at_finish": "09d199d9393822a2d34a9f01dce321eaae162fcd5614f24c33a01cd91f612e81"
+}

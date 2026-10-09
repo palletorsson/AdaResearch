@@ -1,0 +1,744 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "placed: force_point_direction",
+      "passed": true
+    },
+    {
+      "name": "placed: force_point_addition",
+      "passed": true
+    },
+    {
+      "name": "placed: force_point_projection",
+      "passed": true
+    },
+    {
+      "name": "supported route [8.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [13.5, 3.5]",
+      "passed": true
+    },
+    {
+      "name": "supported route [13.5, 16.5]",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 0",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 0",
+      "passed": true
+    },
+    {
+      "name": "continuous route floor 1",
+      "passed": true
+    },
+    {
+      "name": "standing capsule clearance 1",
+      "passed": true
+    },
+    {
+      "name": "exit identified and clear",
+      "passed": true
+    },
+    {
+      "name": "primary lesson artifact is present: force_point_direction",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: primary",
+      "passed": true
+    },
+    {
+      "name": "exact printed student script constructs in its actual museum hall",
+      "passed": true
+    },
+    {
+      "name": "student study has the museum floor under its origin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          1.73999989032745,
+          0.0,
+          3.22749996185303
+        ],
+        "bounds_size": [
+          12.7825012207031,
+          4.17500019073486,
+          15.727499961853
+        ],
+        "position": [
+          0.5,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_hall_01"
+      },
+      {
+        "bounds_position": [
+          2.49499988555908,
+          -0.5,
+          5.49499988555908
+        ],
+        "bounds_size": [
+          4.01000022888184,
+          2.24000000953674,
+          4.01000022888184
+        ],
+        "position": [
+          4.5,
+          0.0,
+          7.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_point_direction"
+      },
+      {
+        "bounds_position": [
+          9.49499988555908,
+          -0.5,
+          5.49499988555908
+        ],
+        "bounds_size": [
+          4.01000022888184,
+          2.54500007629395,
+          4.01000022888184
+        ],
+        "position": [
+          11.5,
+          0.0,
+          7.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_point_addition"
+      },
+      {
+        "bounds_position": [
+          6.09999990463257,
+          -0.5,
+          12.4949998855591
+        ],
+        "bounds_size": [
+          4.40500020980835,
+          2.24000000953674,
+          4.00999927520752
+        ],
+        "position": [
+          8.5,
+          0.0,
+          14.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "force_point_projection"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          18.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          2.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          18.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          4.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.0,
+          1.58000004291534,
+          18.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.9910001754761,
+          1.58000004291534,
+          6.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          14.0,
+          1.58000004291534,
+          18.9909992218018
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          7.77500009536743,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.450000286102295,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          8.0,
+          3.51999998092651,
+          -1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          3.52499985694885,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.950000047683716,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          4.0,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "token": "ceiling_vent"
+      }
+    ],
+    "exit": {
+      "cell": "(13, 16)",
+      "door": "(13.5, 0.05, 16.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(13.5, 0.05, 16.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "lesson_primary": "force_point_direction",
+    "route_obstructions": [],
+    "scope": "Primary artifact and actual local controls, museum desktop renders; no headset test."
+  },
+  "passed": true,
+  "room": "Vectors_Act1_WhatAVectorIs",
+  "scope": "Actual museum placement, elevated and eye-height renders, floor support and standing capsule sampled every 0.4 m along the stated perimeter route. Does not test every possible path or headset reach."
+}

@@ -1,0 +1,20 @@
+--- before/Tutorial_Disco/technical.md
++++ Tutorial_Disco/technical.md
+@@ -45,3 +45,17 @@
+ ## Retained proposal: the walk becomes a score
+ 
+ The previous technical draft described a different, unimplemented encounter: contact-sensitive tiles recording a walk, then interpreting it as sound, light or neighbour propagation. That proposal remains intact in this iteration's before/commons/maps/Tutorial_Disco/technical.md. It could return after the current distinction between score, clock and body is established. It must not be described as the present floor's behaviour.
++
++## Optional comparison recipe — 24 September
++
++The main chapter now follows making a rhythm with less repeated setup. For an isolated comparison:
++
++1. Choose the empty sequencer pattern, activate one cell, let its immediate preview finish, then start playback. Compare the note’s return with the playhead reaching that column.
++2. Turn the cell off and follow the same column on the next loop. Its address remains, but that visit requests no new note. Restore it, add a second cell in the same track, and relocate the second event by switching its old cell off and another on. Keep the tempo fixed for this comparison.
++3. Change tempo with the chosen cells unchanged. Then leave the floor on PLAY and stop the sequencer; let any sustained sound fade. Restart the sequencer and HOLD the floor pattern. The two clocks can be stopped separately; sounding steps still cause brief column flashes while the visual pattern is held.
++4. For a clearer view, return to one active cell. Compare its sequencer column with the flash while the floor is held, then while the floor is running. A repaint can overtake the flash; HOLD does not stop its expiry.
++5. In the second track, try step index 0 alone, then 12 alone. Both brighten floor column 0 because the bridge uses `step % 12`. They remain different positions in the sixteen-step score.
++
++A gesture falling between steps would need another representation to retain that timing. This remains a development question alongside the earlier walk-as-score proposal; the current floor does not record footsteps. The main chapter leaves the visitor free to walk across the sounding score in their own time.
++
++This is a prose and reading-order revision. No sequencer, floor, shader, bridge, controls or runtime configuration changed; earlier evidence remains dated to its original checks.

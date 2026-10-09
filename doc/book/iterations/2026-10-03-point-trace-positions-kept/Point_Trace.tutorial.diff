@@ -1,0 +1,122 @@
+--- before/Point_Trace/tutorial.md
++++ commons/maps/Point_Trace/tutorial.md
+@@ -1,72 +1,76 @@
+-# Point Trace
++# Point Trace — keep the way through
+ 
+-Point_Lines gave us a segment between two positions. Here we keep intermediate positions in order. The lesson is how a reading becomes part of that list, and how the list becomes a drawing.
++Move the point in a loop. Let go. The point stops, but the loop remains: a line through positions the point has left behind.
+ 
+-## Watch a position enter
++In Point Lines, two positions were enough to draw a segment. Each frame replaced the previous reading. Here we keep readings in order, so the route can outlast the movement.
+ 
+-Draw a short loop with the red pen. Pause, then move again. Compare the point count with two neighbouring rows on the tilted display.
++Open `point_trace.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). The lesson script is `studies/point_trace/trace.gd`. Hold the point as you did in Lines. This study makes one continuous record; releasing holds the point still, and taking it again continues that record. Restart the scene for a fresh drawing.
+ 
+-The installed scenes use a 5 mm movement gate. The script can inspect the held point during process callbacks, but a callback need not add a position. This excerpt reduces the recording branch in draw_dot.gd by leaving out display updates, fading and progress bookkeeping:
++## 1. Give positions somewhere to stay
+ 
+ ```gdscript
+-var current_global = _draw_sphere.global_position
+-var dist = current_global.distance_to(_last_global_position)
+-
+-if dist < min_segment_distance:
+-    return
+-
+-_last_global_position = current_global
+-var rec: Vector3 = _shape_sample(current_global)
+-
+-if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
+-    return
+-
+-_trail_points.append(rec)
++var points: Array[Vector3] = []
++var spacing := 0.08
++var capacity := 128
+ ```
+ 
+-The first return declines movement below the threshold. Passing that test updates the comparison position before shaping the sample. The second return declines a shaped position that repeats the preceding saved one. `append()` puts a new accepted position at the end of the list.
++`points` is an **Array**: an ordered list. `Array[Vector3]` says what it can hold. Each entry is one position, with three coordinates. The list itself has one index: first entry, second entry, third entry. It is a one-dimensional list of three-dimensional positions.
+ 
+-The comparison position therefore need not be the last saved position. Movement can pass the first test and still produce a duplicate after shaping. While the tool is released, recording is disabled and the comparison position follows the resting tool.
+-
+-## Change where a sample can stand
+-
+-The red, green and blue pens use 10, 40 and 80 mm spacing. In free space, the shaping operation rounds each world-coordinate component:
++`[]` starts it empty. Inside `_ready()`, after placing the point, we keep its first position:
+ 
+ ```gdscript
+-var s: float = resolution_mm / 1000.0
+-rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
++    points.append(point.position)
+ ```
+ 
+-These lines show the free-space rounding operation with the position named `rec`. The complete helper also handles nearby whiteboard surfaces. A recording lattice changes spatial grain; it does not set a fixed number of samples per second.
++`append()` adds a value at the end. It stores the position at that moment. Moving the point later does not move that saved position.
+ 
+-Repeat a small bend, then enlarge it for the coarse recorder. Try deliberately returning to an address. Only consecutive duplicates are rejected: an ordered trace can revisit an earlier position after visiting others.
++## 2. Decide when to keep another
+ 
+-## Join what was kept
+-
+-The count is the size of the retained list:
++These lines run inside `_process()`:
+ 
+ ```gdscript
+-var point_count = _trail_points.size()
++    var displacement := point.position - points[-1]
++    if displacement.length() >= spacing:
++        points.append(point.position)
+ ```
+ 
+-The mesh uses `Mesh.PRIMITIVE_LINE_STRIP` and supplies the retained positions in order. Each adjacent pair gives a straight segment. The list supplies endpoints for that segment; it does not establish the intervening route of the hand.
++`points[-1]` reads the last entry. We reuse Lines' subtraction and length to measure from that saved position to the point now.
+ 
+-The instrument displays the last ten positions while the larger count includes the whole retained list. The three drawing pens keep at most 4096 positions each. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
++`if` introduces a condition. `>=` means “greater than or equal to”. The indented line runs only when the distance reaches `spacing`: here, 0.08 metres, or eight centimetres. Smaller movements accumulate as a separation from the last saved position; they do not each become entries.
+ 
+-## Meet the limit sooner
++Move slowly, then stop. The count stops increasing. Point Zero's frames still pass, but this list records positions rather than elapsed time. A long pause leaves no extra entry to show how long you waited.
+ 
+-The amber `trace_short_memory` point inherits the same recorder with `trail_max_points = 32`. Its plaque names the capacity. Keep drawing until the beginning is removed, then pause. Fading is off: elapsed time alone does not delete a point. The limit counts accepted positions, not seconds or metres. On release, only the surviving positions are copied onward.
++## 3. Join neighbours in the list
+ 
+-## Move the observed point
++After adding a position, the script redraws the retained route:
+ 
+-The pen uses the same recorder and threshold, but `WritingTip` is the observed point. Turning the barrel moves its nib even when the grip changes position very little. Its fixed XRTools grab point aligns the nib with the hand's forward direction on pickup.
++```gdscript
++        drawing.clear()
++        for i in range(1, points.size()):
++            drawing.join(points[i - 1], points[i])
++```
+ 
+-At the whiteboard, lift a pen between two marks. The board's separate pen script writes only while held, within the surface bounds and contact allowance. It starts a fresh stroke after the nib leaves. The drawing can omit the journey across the gap.
++`size()` gives the number of entries. Their indexes start at zero. With four positions, the indexes are `0, 1, 2, 3`.
+ 
+-## Carry the record onward
++The **for loop** repeats its indented line. `range(1, points.size())` supplies indexes from 1 up to, but excluding, the size. With four entries, `i` becomes 1, then 2, then 3. The pairs are therefore `0–1`, `1–2`, `2–3`: three segments through four positions.
+ 
+-Releasing a drawing pen calls `TraceData.add_trace(_trail_points)`. The store copies lists containing at least two positions. It survives room changes during the running game; it does not save these traces to disk. Whiteboard pixels follow another storage route.
++This loop finishes a traversal of the saved list. `_process()` returns each frame to inspect movement. One repeats through entries; the other repeats over time.
+ 
+-The copied list contains positions without per-point timestamps. Grid can display and reshape those positions, but cannot recover the timing of a pause from them. That is the record we take into Point_Line_Grid.
++`TraceDrawing` is the supplied display. `clear()` clears the drawing; it leaves `points` alone. Each `join(a, b)` reuses Lines' segment renderer and marks its endpoints with small pink dots. Drawing thickness and mesh construction stay in that helper. The loop deciding which positions to join is yours.
+ 
+-See [technical.md](technical.md) for exact source paths, surface rules and the optional timed recorder. Earlier extension sketches are retained in [the previous tutorial](../../../doc/space/point-trace-focus-2026-09-16/previous/tutorial.md).
++## 4. Change what the route can retain
++
++Change `spacing` to `0.25`. Run again and make a similar loop. Fewer positions are kept; the straight connections cut across more of the curve. Restore `0.08` and compare.
++
++Spacing is a minimum separation, not a guarantee that every eight centimetres is recorded. We inspect once per frame. A fast move can leave a larger gap, and the drawing joins its ends without knowing what happened between them.
++
++The record also has a limit:
++
++```gdscript
++        if points.size() > capacity:
++            points.pop_front()
++```
++
++`pop_front()` removes the oldest entry. The remaining entries keep their order. Change `capacity` to `32` and continue drawing. Once the count reaches 32, a new position replaces the oldest; the far end of the route begins to disappear. Waiting alone removes nothing. Restore `128` when you want a longer record.
++
++The museum's pens combine a movement threshold with a grid that shapes each saved position. This smaller study follows the handle's centre without snapping it to a grid. All positions use Study's reference frame. Grid is the next distinction: keeping a position and assigning it to a cell are different decisions.

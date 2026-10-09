@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_Sculpting · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_Sculpting">← Tutorial lineage</a></p><h1>ISO Sculpting</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_Sculpting/final.md">Raw captured source</a></p><pre># Add a contribution
+
+&lt;!-- @mc_sculpt_vr --&gt;
+
+When two rounded deposits meet, where does their seam go?
+
+Begin with the two deposits inside the framed volume. Their centres are 0.90 metres apart and each radius is 0.30 metres. There is room between them. Press PAIR to bring their centres to 0.65 metres apart, then 0.45. Before each change, predict whether a neck will appear. The deposits keep their radii; the relation between them changes.
+
+HOLD keeps the current surface beside the live volume. Now press ADD. A gold point marks where the desk places its quarter-metre brush contribution. Inspect the join from another angle before adding again. A short, located edit gives you something you can explain; repeated deposits combine before their effects become easy to separate.
+
+Move a controller into the framed volume and hold its trigger briefly. The active ADD or ERASE mode also applies to this hand gesture. The desk offers a repeatable location for comparison; the controller supplies your own. Move outside the volume and the brush no longer deposits. That frame is a limit of this instrument, not the edge of space.
+
+The brush does not push a particular triangle into a new position. Its location is translated into the generator&#x27;s coordinates and stored as a contribution with a centre and radius. The field combines sphere-like distance descriptions with a smooth blending operation, then extracts the surface again.
+
+The changed join is therefore a result of several decisions: where you deposited, how wide the contribution is, how contributions are blended and how finely the field is sampled. Your gesture participates in the form without directly specifying every point of its boundary.
+
+The gyroid changed a repeating spatial expression. This sculptor adds local descriptions to a collection. Both approaches return to the same task of finding a visible boundary from values, but they distribute authorship differently across the volume.
+
+Press ERASE. It uses the same marked centre and nominal radius as ADD. Look for the new inward-facing boundary, then compare with your held surface. A cut is a deposit with a negative radius; the sign travels into the field, where it turns the operation from a smooth union into a subtraction.
+
+At the lesson&#x27;s selected level of zero, the distinction can be written as two operations. The brush field is distance from its centre minus its radius:
+
+```glsl
+// deposit
+field = smooth_union(field, brush, blend);
+// cut
+field = max(field, -brush);
+```
+
+The cut is a new contribution to the recorded history. It does not remove a record of the earlier gesture. ADD after ERASE can fill some of the cut again; ERASE after ADD leaves the cut. Order has become part of the form. Subtraction also has a sharper junction here than the smooth addition. They are different operations, not perfect opposites or an undo command.
+
+PAIR replaces the live history with the next pair of deposits. RESET returns the wide pair and ADD mode; both keep the held surface. The display records how many contributions remain. Two different histories can leave a similar-looking boundary, and the same number of records can describe quite different bodies.
+
+The extractor still samples 64 points per axis. Your hand moves between samples and between recorded strokes. The brush cannot promise to keep every distinction in the gesture. There is also a less visible limit: after five hundred contributions the generator drops the oldest. A cut may remain in the history after the deposit it once cut has been forgotten. This instrument&#x27;s memory helps make the body, and also decides what it can cease to remember.
+
+&lt;!-- @ --&gt;
+
+The next room scales the same field-making idea towards terrain. Ask what additional relations a volume can describe beyond the single upper height of a conventional landscape.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_Sculpting/tutorial.md">Raw captured source</a></p><pre># Add a contribution
+
+&lt;!-- @mc_sculpt_vr --&gt;
+
+When two rounded deposits meet, where does their seam go?
+
+Begin with the two deposits inside the framed volume. Their centres are 0.90 metres apart and each radius is 0.30 metres. There is room between them. Press PAIR to bring their centres to 0.65 metres apart, then 0.45. Before each change, predict whether a neck will appear. The deposits keep their radii; the relation between them changes.
+
+HOLD keeps the current surface beside the live volume. Now press ADD. A gold point marks where the desk places its quarter-metre brush contribution. Inspect the join from another angle before adding again. A short, located edit gives you something you can explain; repeated deposits combine before their effects become easy to separate.
+
+In VR, move a controller into the framed volume and hold its trigger briefly. The active ADD or ERASE mode also applies to this hand gesture. The desk offers a repeatable location for comparison; the controller supplies your own. Move outside the volume and the brush no longer deposits. That frame is a limit of this instrument, not the edge of space.
+
+The brush does not push a particular triangle into a new position. Its location is translated into the generator&#x27;s coordinates and stored as a contribution with a centre and radius. The field combines sphere-like distance descriptions with a smooth blending operation, then extracts the surface again.
+
+The changed join is therefore a result of several decisions: where you deposited, how wide the contribution is, how contributions are blended and how finely the field is sampled. Your gesture participates in the form without directly specifying every point of its boundary.
+
+The gyroid changed a repeating spatial expression. This sculptor adds local descriptions to a collection. Both approaches return to the same task of finding a visible boundary from values, but they distribute authorship differently across the volume.
+
+Press ERASE. It uses the same marked centre and nominal radius as ADD. Look for the new inward-facing boundary, then compare with your held surface. The earlier implementation accidentally turned erasure into another addition by discarding a negative sign. Here that sign survives into the field calculation.
+
+At the lesson&#x27;s selected level of zero, the distinction can be written as two operations. The brush field is distance from its centre minus its radius:
+
+```glsl
+// deposit
+field = smooth_union(field, brush, blend);
+// cut
+field = max(field, -brush);
+```
+
+The cut is a new contribution to the recorded history. It does not remove a record of the earlier gesture. ADD after ERASE can fill some of the cut again; ERASE after ADD leaves the cut. Order has become part of the form. Subtraction also has a sharper junction here than the smooth addition. They are different operations, not perfect opposites or an undo command.
+
+PAIR replaces the live history with the next pair of deposits. RESET returns the wide pair and ADD mode; both keep the held surface. The display records how many contributions remain. Two different histories can leave a similar-looking boundary, and the same number of records can describe quite different bodies.
+
+The extractor still samples 64 points per axis. Your hand moves between samples and between recorded strokes. The brush cannot promise to keep every distinction in the gesture. There is also a less visible limit: after five hundred contributions the generator drops the oldest. A cut may remain in the history after the deposit it once cut has been forgotten. This instrument&#x27;s memory helps make the body, and also decides what it can cease to remember.
+
+&lt;!-- @ --&gt;
+
+The next room scales the same field-making idea towards terrain. Ask what additional relations a volume can describe beyond the single upper height of a conventional landscape.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_Sculpting/technical.md">Raw captured source</a></p><pre># Signed contributions in recorded order
+
+The restored hall uses existing MarchingCubesSculptVR and TerrainGeneratorSculpt, with a local compact PAIR/ADD/ERASE/HOLD/RESET/RULE desk. The original2m volume remains unscaled. Lesson extraction level0 makes the isolated sphere radius equal to the nominal radius; other scene placements retain level.3. PAIR centres are .90/.65/.45m apart, two radii.30. Smooth-union k is chunk_scale*.06=.12. ADD/ERASE target(0,0,.22), radius.25. Both buttons set the active mode and record one stroke through the same _paint_at_position path as controller input. Controller world positions are transformed into the artifact volume; out-of-volume strokes are rejected.
+
+Repair: _paint_at_position no longer takes abs(effective_radius). The shader uses abs(radius) for the sphere and branches on a negative sign. Addition keeps the existing smooth union; subtraction uses max(dist,2*isoLevel-sphere_distance), which reduces to max(dist,-sphere_distance) at lesson level0. At the inherited level.3 the cut radius receives the same level offset as an isolated additive sphere. Operations are sequential; erasure is not deletion or undo. Positive-only histories preserve the original path.
+
+A verified raw GPU counter of zero now clears old surfaces and colliders rather than leaving a ghost sculpture. Safety-aborted oversized output cannot qualify as empty. edit_revision tracks add/clear operations. The local desk completes initial outstanding compute, disables continuous generation on this instance, and rebuilds on revision changes at most once per.15s in its frame loop. Explicit desk actions rebuild immediately. This coalesces controller updates; it is not a proven Quest frame budget. Controller interaction remains active, while the instance&#x27;s global keyboard/random-click handler is disabled to avoid painting when clicking the desk. The legacy tall panel is hidden with collision disabled here.
+
+HOLD deep-copies mesh/material4m beside the live volume without collision. RESET and PAIR preserve it. Both original artifact instances and all14x10 historical structure cells remain; the fountain is secondary. Eight active museum halls now include Sculpting between TorusGyroid and FlatTerrain; all13 curriculum maps remain.
+
+Sources: res://commons/artifacts/timing_machines/iso_sculpt_workshop.gd; res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd; Scripts/TerrainGeneratorSculpt.gd; Compute/MarchingCubesSculpt.glsl.
+
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ISO_Sculpting/intent.md">Raw captured source</a></p><pre>Predict the join → PAIR → HOLD → ADD → observe → ERASE → compare → explain sequential field operations → question frame, sampling and memory limits.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_Sculpting/critical.md">Raw captured source</a></p><pre># What the instrument remembers
+
+The gesture does not select a triangle. It records a centre and radius that a field calculation interprets. A seam can disappear because smooth union makes a neck; a surface can acquire a cavity because a later signed contribution cuts the earlier field. Both changes keep a history that the visible boundary alone does not disclose.
+
+The old ERASE control added material. Its name promised a power the implementation did not provide. Repairing the sign makes that difference available as an operation, not merely an accusation against an interface. Addition and subtraction still differ: one blends, the other cuts sharply. Neither returns an untouched original by necessity.
+
+The frame rejects strokes outside its domain. Sampling discards distinctions smaller than its spacing. At500 records the oldest contribution is dropped. That memory policy can change a sculpture far from the current gesture. A tool&#x27;s practical budget becomes a rule about which past remains capable of shaping this body.
+
+Hold an earlier mesh before cutting. The comparison keeps a consequence available for thought. To ask what bodies are possible here is to ask what can be deposited, joined, removed and remembered—and which of those decisions this interface lets us revise.
+
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_Sculpting/artifacts.md">Raw captured source</a></p><pre>Primary: mc_sculpt_vr. Secondary retained: fountain_demo. Decoration: iso_sculpt_console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_Sculpting/summary.md">Raw captured source</a></p><pre>Restore local field editing after the periodic gyroid. Compare equal deposits at three separations, add and subtract at one repeatable point, preserve a held surface, and inspect the cost of finite sampling and edit history.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_Sculpting/blurb.md">Raw captured source</a></p><pre>Your gesture changes the field. Which past does the new boundary remember?
+</pre></section></body></html>

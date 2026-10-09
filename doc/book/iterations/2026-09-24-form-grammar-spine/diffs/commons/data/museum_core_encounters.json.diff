@@ -1,0 +1,63 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -343,7 +343,7 @@
+       "status": "draft",
+       "sequence": "color",
+       "text_path": "commons/maps/Color_Context_Placed/final.md",
+-      "text_sha256": "be71ac82edd194d677c02f074c36158ecb37e846f61f9bffe513848f95c59d6a",
++      "text_sha256": "f95217e94581ebae84e2c9a5a3e8f359949174fe5c3792e32a0aa8cd6fc82a9c",
+       "map_sha256": "245287308f12494d7e3df1fed6578046c2a616304007b861498d7dd7cf71bdc6",
+       "learner_verified": false
+     },
+@@ -748,7 +748,7 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "formfinding",
+       "text_path": "commons/maps/FormFinding_Forge/final.md",
+-      "text_sha256": "3741c4e456fc72e8b2d12d6a44db040564bdfd55e3cf2e96dd2f13ea34386409",
++      "text_sha256": "6d9bf4a31906d8ce3a7994607c85fffa17151b697bf5fdd1e60109ab3a887e37",
+       "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+       "learner_verified": false,
+       "local_review": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md",
+@@ -1539,8 +1539,8 @@
+       "status": "source_checked_draft",
+       "sequence": "lsystems",
+       "text_path": "commons/maps/LSystems_Living/final.md",
+-      "text_sha256": "7b59f87fa27857d50aa4befdefa32cc09846772f5cf596a326e68f089fc430f6",
+-      "map_sha256": "3dea13559e019a9ff9a3222ff764ff172ca76c519f5a5a941c8f6004a2e8f8a1",
++      "text_sha256": "f62a9e9f3f184ea0b9e1862cfee83ebf826de7ca05f5f336d8ec6c612d67b934",
++      "map_sha256": "939c10391f2c625e7542d1eb852c4eb430de781aef2cb267630a895a05c14a75",
+       "learner_verified": false
+     },
+     "Assemblage_Same_Desire": {
+@@ -1563,8 +1563,8 @@
+       "status": "source_checked_draft",
+       "sequence": "proceduralgeneration",
+       "text_path": "commons/maps/PG_Genetic_Evolution/final.md",
+-      "text_sha256": "5d084c1cf5f159f159442b337fd524845321186f4b73396401135b1c9437c82c",
+-      "map_sha256": "555644ad6594a449d85798f704a51074bd2dd8c2afbdeffe64af1db1058afbe0",
++      "text_sha256": "66822a68900b786c6ac0283ceb3f2d05f6056d8fe3de8ae6badc3726d59732ab",
++      "map_sha256": "0a233bfdbf5912b511d4bb2c21108e44ac1d23a6e2691b6472f91737d18c1f31",
+       "learner_verified": false
+     },
+     "PG_Space_Colonization": {
+@@ -2756,6 +2756,20 @@
+       "text_sha256": "508d7cbc06927da571a4e6a679baf03726f5c347df4955b351397b011bf14b83",
+       "map_sha256": "dd651b4afd2870da18a8666592231429e3ed43edbe5bf2df6c3260777ab10c89",
+       "learner_verified": false
++    },
++    "LSystems_Shape_Grammars": {
++      "primary_tokens": [
++        "form_grammar_family"
++      ],
++      "reason": "Follow a cube through face operations, then separate parameter variation from changed selection; name a form the current rules cannot make.",
++      "status": "desktop_checked_headset_pending",
++      "sequence": "lsystems",
++      "text_path": "commons/maps/LSystems_Shape_Grammars/final.md",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-form-grammar-spine/index.html",
++      "text_sha256": "9073477b1242a5e5eb2921c4c9a5f1d88d5eddb8fce32c5bb1c5113effc89671",
++      "map_sha256": "1749c27a28295c364c526affe4c56483eee6ba9010dfd3f5cab18d3e0ea24e5a",
++      "verification_scope": "Isolated production mesh/operation import, finite geometry, six surface collision rays, continuous capsule route, plinth refusal and five native images. Museum loader, tracked-headset, Quest and learner checks remain pending."
+     }
+   }
+ }

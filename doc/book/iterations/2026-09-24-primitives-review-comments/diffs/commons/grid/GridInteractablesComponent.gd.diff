@@ -1,0 +1,10 @@
+--- before/commons/grid/GridInteractablesComponent.gd
++++ commons/grid/GridInteractablesComponent.gd
+@@ -14,6 +14,7 @@
+ # Known config parameter names (NOT to be treated as tutorial shorthand)
+ # These are artifact configuration keys that can have numeric values
+ const CONFIG_PARAM_NAMES = [
++	"discovery", # numeric encounter opt-in, not tutorial yaw shorthand
+ 	"hits", # target hit threshold; never a tutorial rotation shorthand
+ 	"radial", "rings", "inner", "outer", "config", "height", "radius",
+ 	"receiver_sides", # flashlight receiver divisions, never a tutorial rotation

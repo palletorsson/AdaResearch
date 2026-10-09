@@ -1,0 +1,20 @@
+--- before/commons/artifacts/registry/postfoundationscrisis.json
++++ current/commons/artifacts/registry/postfoundationscrisis.json
+@@ -875,7 +875,7 @@
+       "lookup_name": "assembly_return",
+       "name": "The Body That Returned",
+       "scene": "res://commons/artifacts/assembly_return/assembly_return.tscn",
+-      "description": "Two standing bodies reconstruct the authored Assembly pose and the latest locally kept visitor pose. If no pose has been kept, the second bay is empty. The record contains positions and connections, not the hand trajectory or intention.",
++      "description": "Two standing bodies reconstruct the original Assembly body and the latest locally kept body, including coordinates and connections. A changed connection is turquoise. With no record, the second bay stays empty. The hand trajectory and intention are not retained.",
+       "category": "synthesis",
+       "complexity": "advanced",
+       "map_ready": true,
+@@ -910,7 +910,7 @@
+           "right": 1
+         }
+       },
+-      "qfep_connection": "An actual change survives the room that produced it. Its retained geometry leaves the gesture, intention and possible alternative connections unrecorded."
++      "qfep_connection": "An actual alteration survives the room that produced it. The same points and connection count can conceal different connected groups. Both graphs are retained; the gesture and reasons remain absent."
+     }
+   }
+ }

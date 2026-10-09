@@ -1,0 +1,71 @@
+{
+  "shots": [
+    {
+      "tag": "room",
+      "from": [
+        7.3,
+        2.0,
+        1.8
+      ],
+      "look_at": [
+        5.2,
+        1.2,
+        7.0
+      ],
+      "fov": 75
+    }
+  ],
+  "rays": [
+    {
+      "tag": "hopper approach floor",
+      "x": 3.5,
+      "z": 4.8,
+      "top": 0,
+      "tolerance": 0.15
+    }
+  ],
+  "walks": [
+    {
+      "tag": "approach left and right handles",
+      "from": [
+        3.5,
+        0.1,
+        2.3
+      ],
+      "to": [
+        3.5,
+        0.1,
+        4.8
+      ],
+      "seconds": 2
+    },
+    {
+      "tag": "across front of cases",
+      "from": [
+        1.5,
+        0.1,
+        4.7
+      ],
+      "to": [
+        5.7,
+        0.1,
+        4.7
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "pass between cases and existing board",
+      "from": [
+        5.7,
+        0.1,
+        4.7
+      ],
+      "to": [
+        5.7,
+        0.1,
+        8.8
+      ],
+      "seconds": 3
+    }
+  ]
+}

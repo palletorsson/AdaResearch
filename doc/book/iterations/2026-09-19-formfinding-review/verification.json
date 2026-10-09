@@ -1,0 +1,334 @@
+{
+  "scope": "Six-hall Form Finding source and bounded desktop pass; recorded numerical/visual evidence, no headset or learner claim",
+  "chapters": {
+    "FormFinding_Descent": "byte unchanged",
+    "FormFinding_Catenary": "encounter and source revision",
+    "FormFinding_Relaxation": "encounter and source revision",
+    "FormFinding_Equilibrium": "encounter and source revision",
+    "FormFinding_Annealing": "encounter and source revision",
+    "FormFinding_Forge": "one stop-condition correction"
+  },
+  "maps": {
+    "FormFinding_Descent": {
+      "artifacts_retained": 6,
+      "changed_cells": []
+    },
+    "FormFinding_Catenary": {
+      "artifacts_retained": 5,
+      "changed_cells": []
+    },
+    "FormFinding_Relaxation": {
+      "artifacts_retained": 4,
+      "changed_cells": [
+        [
+          6,
+          2,
+          "verlet_workbench:90",
+          "verlet_workbench:90#comparison:true"
+        ]
+      ]
+    },
+    "FormFinding_Equilibrium": {
+      "artifacts_retained": 4,
+      "changed_cells": []
+    },
+    "FormFinding_Annealing": {
+      "artifacts_retained": 5,
+      "changed_cells": [
+        [
+          2,
+          2,
+          "max_q_basin_room:270",
+          ""
+        ],
+        [
+          3,
+          2,
+          "",
+          "energy_landscape_bench:90"
+        ],
+        [
+          6,
+          2,
+          "energy_landscape_bench:90",
+          ""
+        ],
+        [
+          6,
+          3,
+          "",
+          "max_q_basin_room:0#reveal_on_request:true#floor_size:4.9"
+        ]
+      ]
+    },
+    "FormFinding_Forge": {
+      "artifacts_retained": 4,
+      "changed_cells": []
+    }
+  },
+  "promoted": [
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Annealing"
+  ],
+  "registry_entries_changed": {
+    "algorithms_misc.json": [
+      "simulated_annealing"
+    ],
+    "biome_primitives.json": [
+      "biome_primitives"
+    ],
+    "formfinding.json": [
+      "settling_tremble"
+    ],
+    "fractals.json": [
+      "fractal_truss_tower"
+    ],
+    "machinelearning.json": [
+      "gradient_descent"
+    ],
+    "parametric.json": [
+      "catenoid",
+      "helicoid"
+    ],
+    "primitives.json": [
+      "tensegrity_triangle",
+      "laundry_line_cathedral",
+      "impossible_end_table"
+    ],
+    "soft_bodies.json": [
+      "frozen_glass_vessel",
+      "mass_spring_bench",
+      "verlet_workbench",
+      "descent_marble_toy",
+      "max_q_basin_room",
+      "gradient_descent_optimizer",
+      "self_shaping_forge"
+    ],
+    "vectors_demos.json": [
+      "calder_mobile"
+    ],
+    "wavefunctions.json": [
+      "cable_builder"
+    ]
+  },
+  "all_28_source_chains_eligible": true,
+  "unchanged_descent_historical_hashes": 10,
+  "mean_worst_comparison": {
+    "one_pass": {
+      "lowest_y": -0.64061039686203,
+      "mean_absolute_percent": 1.40894073796988,
+      "particles": 80,
+      "passes": 1,
+      "signed_mean_percent": 0.700740239052268,
+      "springs": 392,
+      "steps": 420,
+      "worst_absolute_percent": 34.2761151831699,
+      "worst_spring_index": 1
+    },
+    "four_passes": {
+      "lowest_y": -0.607081115245819,
+      "mean_absolute_percent": 0.359176909064085,
+      "particles": 80,
+      "passes": 4,
+      "signed_mean_percent": 0.167673130351827,
+      "springs": 392,
+      "steps": 420,
+      "worst_absolute_percent": 8.93551627745857,
+      "worst_spring_index": 1
+    }
+  },
+  "comparison_local_links_checked": 158,
+  "diagram_checks": 7,
+  "headset_tested": false,
+  "runtime_evidence": {
+    "structure": {
+      "source_scope": [
+        "commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+        "commons/artifacts/calder_mobile/calder_mobile.gd",
+        "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+        "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+        "commons/primitives/parametric/catenoid.gd",
+        "commons/primitives/parametric/catenoid.tscn",
+        "commons/primitives/parametric/helicoid.tscn",
+        "algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+      ],
+      "pairs": [
+        {
+          "hall": "FormFinding_Catenary",
+          "before": "capture-before-accepted-FormFinding_Catenary",
+          "after": "capture-after-verified-FormFinding_Catenary",
+          "camera_matches": {
+            "laundry-standing": true,
+            "laundry-plaque": true
+          },
+          "shared_source_matches": {
+            "commons/primitives/parametric/helicoid.gd": true,
+            "commons/maps/FormFinding_Catenary/map_data.json": true,
+            "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+            "commons/artifacts/registry/primitives.json": true,
+            "commons/scenes/endless_museum.gd": true,
+            "commons/scenes/em/em_detail.gd": true,
+            "commons/artifacts/science_screen/science_screen.gd": true,
+            "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+          },
+          "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+        },
+        {
+          "hall": "FormFinding_Equilibrium",
+          "before": "capture-before-verified-FormFinding_Equilibrium",
+          "after": "capture-after-verified-FormFinding_Equilibrium",
+          "camera_matches": {
+            "calder-standing": true,
+            "calder-plaque": true,
+            "truss-standing": true
+          },
+          "shared_source_matches": {
+            "commons/primitives/parametric/helicoid.gd": true,
+            "commons/maps/FormFinding_Catenary/map_data.json": true,
+            "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+            "commons/artifacts/registry/primitives.json": true,
+            "commons/scenes/endless_museum.gd": true,
+            "commons/scenes/em/em_detail.gd": true,
+            "commons/artifacts/science_screen/science_screen.gd": true,
+            "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+          },
+          "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+        }
+      ],
+      "headset_tested": false,
+      "accepted_runs": {
+        "museum-baseline-final-FormFinding_Catenary": {
+          "checks": 16,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        },
+        "headless-after-FormFinding_Catenary": {
+          "checks": 25,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        },
+        "capture-before-accepted-FormFinding_Catenary": {
+          "checks": 28,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        },
+        "capture-after-verified-FormFinding_Catenary": {
+          "checks": 22,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        },
+        "capture-before-verified-FormFinding_Equilibrium": {
+          "checks": 25,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        },
+        "capture-after-verified-FormFinding_Equilibrium": {
+          "checks": 19,
+          "failures": 0,
+          "returncode": 0,
+          "sources_stable": true,
+          "script_errors": false
+        }
+      }
+    },
+    "relaxation_controls": {
+      "scope": "Isolated controls and configuration lifecycle",
+      "result": "relaxation/control-final-v3/controls-checks.json",
+      "run": "relaxation/control-final-v3/controls-run.json",
+      "checks": 26,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "relaxation_before": {
+      "scope": "Original-script replay in actual museum",
+      "result": "relaxation/paired-before/museum-checks.json",
+      "run": "relaxation/paired-before/museum-run.json",
+      "checks": 13,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "relaxation_after": {
+      "scope": "Actual museum, final visible controls and matched experiments",
+      "result": "relaxation/final-visible-after/museum-checks.json",
+      "run": "relaxation/final-visible-after/museum-run.json",
+      "checks": 25,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "diagram": {
+      "scope": "Isolated actual static artifact; same-camera original/current labels",
+      "result": "diagram/check.json",
+      "run": "diagram/run.json",
+      "checks": 7,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "optimizer": {
+      "scope": "Isolated repaired optimizer, boundary and small-slope branches",
+      "result": "search/after/optimizer/optimizer.json",
+      "run": "search/after/optimizer/run.json",
+      "checks": 10,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "annealing_q_isolated_unresolved": {
+      "scope": "Behavior checks completed; native access violation during teardown; NOT a clean passing run",
+      "result": "search/after/annealing_q/focused.json",
+      "run": "search/after/annealing_q/run.json",
+      "checks": 20,
+      "failed_checks": [],
+      "returncode": 3221225477,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": false
+    },
+    "annealing_museum": {
+      "scope": "Actual museum under frozen shared loader; world camera y=1.7 m. Q installed at half authored scale, explicitly recorded; see audit for footprint scope",
+      "result": "search/standing/Annealing/museum.json",
+      "run": "search/standing/Annealing/run.json",
+      "checks": 26,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": true,
+      "clean_exit_and_assertions": true
+    },
+    "forge_museum": {
+      "scope": "Actual museum optimizer behavior; shared source changed during run, excluded from matched visual comparisons",
+      "result": "search/after/Forge/museum.json",
+      "run": "search/after/Forge/run.json",
+      "checks": 10,
+      "failed_checks": [],
+      "returncode": 0,
+      "watched_sources_stable": false,
+      "clean_exit_and_assertions": true
+    },
+    "historical_descent": {
+      "checks": 36,
+      "fresh_run": false,
+      "fingerprints": "descent-historical-evidence.json"
+    },
+    "headset_tested": false,
+    "learner_tested": false,
+    "diagram_wrapper_note": "Godot completed all seven checks and exited 0. A subsequent Python console print failed on a Unicode checkmark under cp1252; the wrapper now selects UTF-8. Saved native results are unaffected."
+  }
+}

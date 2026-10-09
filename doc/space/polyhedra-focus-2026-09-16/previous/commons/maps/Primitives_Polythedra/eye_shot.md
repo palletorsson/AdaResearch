@@ -26,7 +26,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 11→1
 - **becoming_catalyst** — Embodies the full QFEP trajectory: from order (primitives) through entropy (randomness) to the edge of chaos (
 - **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
 - **grab_trihedron** — The wedge as 3D primitive — 4 vertices, three triangular faces on a quad base. The catalyst bracelet's walkabl
-- **interactive_point_origin_force** — F_force: the origin point that becomes a force field in the hand — picked up, its surface morphs to a pulsing
+- **interactive_point_origin_force** — F_force: the origin point that becomes a force field in the hand — picked up, its surface morphs to a pulsing 
 
 ## The text vs the space
 walked.md exists — the writing names 7/9 of the cast; dwells declared for 1.

@@ -1,0 +1,586 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Source-specific validation"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@420"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@420"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@421"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@422"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@468"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@420"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@422"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@423"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@424"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@446"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@468"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@469"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@470"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@492"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@420"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@422"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@424"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@426"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@428"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@432"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@436"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@438"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@442"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@446"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@448"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@450"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@454"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@458"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@460"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@464"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@468"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@470"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@472"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@474"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@478"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@482"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@484"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@488"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@492"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@494"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@496"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@500"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@504"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@506"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@510"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@515"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"calls": "original _build → _draw_cantor",
+		"counts": [
+			1,
+			2,
+			4,
+			8,
+			16,
+			32
+		],
+		"initial_width": 5.4,
+		"lengths": [
+			5.40000009536743,
+			3.59999990463257,
+			2.40000009536743,
+			1.60000002384186,
+			1.06666672229767,
+			0.711111128330231
+		],
+		"records": [
+			{
+				"depth": 0,
+				"length": 5.40000009536743,
+				"x": 0.0
+			},
+			{
+				"depth": 1,
+				"length": 1.79999995231628,
+				"x": -1.80000007152557
+			},
+			{
+				"depth": 2,
+				"length": 0.600000023841858,
+				"x": -2.40000009536743
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": -2.60000014305115
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -2.66666674613953
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.68888902664185
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.64444446563721
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -2.53333330154419
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.55555558204651
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.51111102104187
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": -2.20000004768372
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -2.26666665077209
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.28888893127441
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.24444437026978
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -2.13333320617676
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.15555548667908
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -2.11111092567444
+			},
+			{
+				"depth": 2,
+				"length": 0.600000023841858,
+				"x": -1.20000004768372
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": -1.39999997615814
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -1.46666669845581
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.48888885974884
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.44444441795349
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -1.33333337306976
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.35555553436279
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.31111109256744
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": -1.0
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -1.06666672229767
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.0888888835907
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -1.04444444179535
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": -0.933333337306976
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -0.955555558204651
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": -0.911111116409302
+			},
+			{
+				"depth": 1,
+				"length": 1.79999995231628,
+				"x": 1.79999995231628
+			},
+			{
+				"depth": 2,
+				"length": 0.600000023841858,
+				"x": 1.20000004768372
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": 1.0
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 0.933333337306976
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 0.911111116409302
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 0.955555558204651
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 1.06666660308838
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.04444444179535
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.0888888835907
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": 1.39999997615814
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 1.33333325386047
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.31111109256744
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.35555553436279
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 1.46666657924652
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.44444441795349
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 1.48888885974884
+			},
+			{
+				"depth": 2,
+				"length": 0.600000023841858,
+				"x": 2.39999985694885
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": 2.19999980926514
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 2.13333320617676
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.11111092567444
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.15555548667908
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 2.26666665077209
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.24444437026978
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.28888893127441
+			},
+			{
+				"depth": 3,
+				"length": 0.200000002980232,
+				"x": 2.59999990463257
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 2.53333330154419
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.51111102104187
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.55555558204651
+			},
+			{
+				"depth": 4,
+				"length": 0.0666666701436043,
+				"x": 2.66666674613953
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.64444446563721
+			},
+			{
+				"depth": 5,
+				"length": 0.0222222227603197,
+				"x": 2.68888902664185
+			}
+		],
+		"source_never_entered_tree": true
+	},
+	"id": "cantor_thirds",
+	"passed": true,
+	"phases": [
+		"A whole interval",
+		"The middle third leaves",
+		"Apply the same cut to both survivors",
+		"Five finite rounds of removal"
+	],
+	"source_paths": [
+		"res://algorithms/fractals/example_8_4_cantor_set_vr.gd"
+	]
+}

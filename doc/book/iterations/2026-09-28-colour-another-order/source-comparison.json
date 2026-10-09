@@ -1,0 +1,38 @@
+{
+  "scope": "Compared recorded runtime sources and map with current files. Gallery config files are preserved in this pass, but were not separately hashed in that earlier runtime report. Existing figures retain their original date. No runtime replay.",
+  "earlier_report": "doc/book/iterations/2026-09-23-colour-gathering/report.json",
+  "sources": [
+    {
+      "path": "commons/artifacts/chroma_stack/chroma_stack.gd",
+      "recorded_sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+      "current_sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+      "unchanged": true
+    },
+    {
+      "path": "commons/artifacts/color_dna_stack/color_dna_stack.gd",
+      "recorded_sha256": "9b8e88fbe70152d6d57c8bea4eb701968acc4b2bf0c9de16ba171d95a7b2cf96",
+      "current_sha256": "9b8e88fbe70152d6d57c8bea4eb701968acc4b2bf0c9de16ba171d95a7b2cf96",
+      "unchanged": true
+    },
+    {
+      "path": "commons/artifacts/color_dna_stack/studies.json",
+      "recorded_sha256": "40570ac488061e733f0fae1ba7ebaa38200804909ca0e0e22f24d5b7f436a5a4",
+      "current_sha256": "e438b45a5cb76bc1ace0598b64dc96538fabb488b5e85f11683c1f00bb0f4c6a",
+      "unchanged": false,
+      "only_difference": "kras_rainbow.body plate wording",
+      "before": "ps07_kras_rainbow, raised to 6.2 metres. Thirty fixed stripes carry six colours around the shaft.",
+      "after": "A table-sized study, 72 centimetres tall, raised to 6.2 metres. Thirty fixed stripes carry six colours around the shaft."
+    },
+    {
+      "path": "commons/primitive_grammar/primitive_stack.gd",
+      "recorded_sha256": "7acefdcfd1023297f52e06f7532a8174c5c6dda6b20aac994d21559c2950fc8f",
+      "current_sha256": "7acefdcfd1023297f52e06f7532a8174c5c6dda6b20aac994d21559c2950fc8f",
+      "unchanged": true
+    },
+    {
+      "path": "commons/maps/Color_Context_Placed/map_data.json",
+      "unchanged": true,
+      "sha256": "245287308f12494d7e3df1fed6578046c2a616304007b861498d7dd7cf71bdc6"
+    }
+  ]
+}

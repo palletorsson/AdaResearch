@@ -1,0 +1,101 @@
+{
+	"checks": [
+		{
+			"check": "absent: one plain box support",
+			"passed": true
+		},
+		{
+			"check": "absent: support reaches the point's lower edge",
+			"passed": true
+		},
+		{
+			"check": "absent: off-white matte support",
+			"passed": true
+		},
+		{
+			"check": "absent: single label on front face",
+			"passed": true
+		},
+		{
+			"check": "absent: only the solid point stops the ray above its support",
+			"passed": true
+		},
+		{
+			"check": "absent: no hidden surface or sphere body",
+			"passed": true
+		},
+		{
+			"check": "visible: one plain box support",
+			"passed": true
+		},
+		{
+			"check": "visible: support reaches the point's lower edge",
+			"passed": true
+		},
+		{
+			"check": "visible: off-white matte support",
+			"passed": true
+		},
+		{
+			"check": "visible: single label on front face",
+			"passed": true
+		},
+		{
+			"check": "visible: only the solid point stops the ray above its support",
+			"passed": true
+		},
+		{
+			"check": "visible: original .14m white point preserved",
+			"passed": true
+		},
+		{
+			"check": "solid: one plain box support",
+			"passed": true
+		},
+		{
+			"check": "solid: support reaches the point's lower edge",
+			"passed": true
+		},
+		{
+			"check": "solid: off-white matte support",
+			"passed": true
+		},
+		{
+			"check": "solid: single label on front face",
+			"passed": true
+		},
+		{
+			"check": "solid: only the solid point stops the ray above its support",
+			"passed": true
+		},
+		{
+			"check": "solid: original .14m white point preserved",
+			"passed": true
+		},
+		{
+			"check": "future: original 1.3m diameter and 1.4m centre",
+			"passed": true
+		},
+		{
+			"check": "future: sphere still solid",
+			"passed": true
+		},
+		{
+			"check": "future: black polished material",
+			"passed": true
+		},
+		{
+			"check": "future: original support dimensions retained",
+			"passed": true
+		},
+		{
+			"check": "future: lower edge meets its support",
+			"passed": true
+		}
+	],
+	"limits": [
+		"Native scene geometry/material and physics ray checks only",
+		"No headset or aesthetic acceptance test"
+	],
+	"passed": true
+}

@@ -1,0 +1,157 @@
+{
+  "at": "2026-09-15T15:45:09.885Z",
+  "version": "5dc2c6185fa3fce4e7f146c225bd69b03deef171ddd4337e014bfe0a7e8589b5",
+  "previous": "{\n  \"schema\": \"encounter-route/1\",\n  \"map\": \"Point_Lines\",\n  \"status\": \"proposed\",\n  \"note\": \"The primary Line Space Workshop and its book passage now proceed by count: two, three, four, more. The first three stations keep count and rod lengths fixed. The associated bounded geometry experiment checks 29 arrangements; headset reach and comfort remain unverified. Older line studies remain available.\",\n  \"stops\": [\n    {\n      \"id\": \"connect\",\n      \"title\": \"Connect two points\",\n      \"action\": \"Bring the two points together. Watch the line appear and the barrier fly apart.\",\n      \"question\": \"What did connecting two positions allow you to do?\",\n      \"stage\": \"opening applied to book\",\n      \"members\": [\n        \"line_demo\",\n        \"do_not_cross_barrier\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"line_demo\"\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"measure\",\n      \"title\": \"Give a span a measure\",\n      \"action\": \"Move the measuring line's endpoints. Compare the changing distance with one metre.\",\n      \"question\": \"What does a unit let us compare?\",\n      \"stage\": \"opening applied to book\",\n      \"members\": [\n        \"line\",\n        \"scale_lines\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"line\",\n          \"at\": [\n            16,\n            2\n          ]\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"red-line\",\n      \"title\": \"Cross a red line\",\n      \"action\": \"Approach the red line, then cross it and look back.\",\n      \"question\": \"What does this division change, and what do we bring to it?\",\n      \"stage\": \"opening applied to book\",\n      \"members\": [\n        \"redline\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"redline\"\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"walk\",\n      \"title\": \"Walk this line; read your trace\",\n      \"action\": \"Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.\",\n      \"question\": \"What kind of line does your movement leave?\",\n      \"stage\": \"existing encounter\",\n      \"members\": [\n        \"walk_this_line_marking\",\n        \"player_trace\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"walk_this_line_marking\"\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"combine\",\n      \"title\": \"Two lines, three, four, more\",\n      \"action\": \"Keep count and lengths fixed while changing relations: two can cross or be skew; three can close a planar triangle; four can fold a closed outline out of the plane. Then compare six-rod grids and a tetrahedron before adding a twelve-edge cube.\",\n      \"question\": \"What becomes possible when we add a segment, and what can change without adding one?\",\n      \"stage\": \"count-led artifact and book; 29-case geometric study; headset review pending\",\n      \"members\": [\n        \"line_space_workshop\",\n        \"axis_line\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"line_space_workshop\",\n          \"at\": [\n            12,\n            11\n          ]\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"depth\",\n      \"title\": \"Carry a fixed span\",\n      \"action\": \"Carry and turn the original grabbable line. Compare its fixed length with the independently movable segments in the workshop.\",\n      \"question\": \"What changes when the arrangement no longer shares one plane?\",\n      \"stage\": \"existing extension\",\n      \"members\": [\n        \"grabbable_line\",\n        \"line_collection\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"grabbable_line\"\n        }\n      ],\n      \"draft\": \"\"\n    },\n    {\n      \"id\": \"viewpoint\",\n      \"title\": \"Compare viewpoints\",\n      \"action\": \"Walk around the existing perspective arrangements and parallel lines. Compare their views with the rails and drawing in the workshop.\",\n      \"question\": \"What appears joined from here, and separates when you move?\",\n      \"stage\": \"existing extension\",\n      \"members\": [\n        \"perspective_lines\",\n        \"parallel_lines\"\n      ],\n      \"visits\": [\n        {\n          \"lookup\": \"perspective_lines\",\n          \"at\": [\n            5,\n            14\n          ]\n        }\n      ],\n      \"draft\": \"\"\n    }\n  ],\n  \"basedOn\": [\n    {\n      \"path\": \"commons/maps/Point_Lines/map_data.json\",\n      \"sha256\": \"39bb2b440b3f5c7bdd9b62c7cda9cfeb8418fb1786669bc52f82f9e9766634ed\"\n    },\n    {\n      \"path\": \"commons/maps/Point_Lines/final.md\",\n      \"sha256\": \"e88ab1d4c4fd810a89e661d44ff7dce8626404fbb45cf9c4ec3b8dd9098a7894\"\n    },\n    {\n      \"path\": \"commons/data/artifact_roles.json\",\n      \"sha256\": \"eb2c6e178bcd3d18ad5a71752cb5dd1fc9006ed58472d837a33a627ba914bbc5\"\n    }\n  ]\n}\n",
+  "next": {
+    "schema": "encounter-route/1",
+    "map": "Point_Lines",
+    "status": "proposed",
+    "note": "The primary workshop now animates automatically through two, three, four and more segments. Six-second holds and five-second rigid movements replace button panels. Grabbing pauses a station; release gives twelve seconds to inspect the arrangement before smooth recovery. Static geometry research and runtime motion tests are separate evidence. Headset comfort remains unverified.",
+    "stops": [
+      {
+        "id": "connect",
+        "title": "Connect two points",
+        "action": "Bring the two points together. Watch the line appear and the barrier fly apart.",
+        "question": "What did connecting two positions allow you to do?",
+        "stage": "opening applied to book",
+        "members": [
+          "line_demo",
+          "do_not_cross_barrier"
+        ],
+        "visits": [
+          {
+            "lookup": "line_demo"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "measure",
+        "title": "Give a span a measure",
+        "action": "Move the measuring line's endpoints. Compare the changing distance with one metre.",
+        "question": "What does a unit let us compare?",
+        "stage": "opening applied to book",
+        "members": [
+          "line",
+          "scale_lines"
+        ],
+        "visits": [
+          {
+            "lookup": "line",
+            "at": [
+              16,
+              2
+            ]
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "red-line",
+        "title": "Cross a red line",
+        "action": "Approach the red line, then cross it and look back.",
+        "question": "What does this division change, and what do we bring to it?",
+        "stage": "opening applied to book",
+        "members": [
+          "redline"
+        ],
+        "visits": [
+          {
+            "lookup": "redline"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "walk",
+        "title": "Walk this line; read your trace",
+        "action": "Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.",
+        "question": "What kind of line does your movement leave?",
+        "stage": "existing encounter",
+        "members": [
+          "walk_this_line_marking",
+          "player_trace"
+        ],
+        "visits": [
+          {
+            "lookup": "walk_this_line_marking"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "combine",
+        "title": "Two lines, three, four, more",
+        "action": "Watch two, three, four and more rods move between arrangements without changing their lengths. Follow the square folding while its corners stay joined. Grab a rod to pause its station; after release, wait twelve seconds before it gently resumes.",
+        "question": "What becomes possible when we add a segment, and what can change without adding one?",
+        "stage": "automatic animation and book aligned; headset review pending",
+        "members": [
+          "line_space_workshop",
+          "axis_line"
+        ],
+        "visits": [
+          {
+            "lookup": "line_space_workshop",
+            "at": [
+              12,
+              11
+            ]
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "depth",
+        "title": "Carry a fixed span",
+        "action": "Carry and turn the original grabbable line. Compare its fixed length with the independently movable segments in the workshop.",
+        "question": "What changes when the arrangement no longer shares one plane?",
+        "stage": "existing extension",
+        "members": [
+          "grabbable_line",
+          "line_collection"
+        ],
+        "visits": [
+          {
+            "lookup": "grabbable_line"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "viewpoint",
+        "title": "Compare viewpoints",
+        "action": "Walk around the existing perspective arrangements and parallel lines. Compare their views with the rails and drawing in the workshop.",
+        "question": "What appears joined from here, and separates when you move?",
+        "stage": "existing extension",
+        "members": [
+          "perspective_lines",
+          "parallel_lines"
+        ],
+        "visits": [
+          {
+            "lookup": "perspective_lines",
+            "at": [
+              5,
+              14
+            ]
+          }
+        ],
+        "draft": ""
+      }
+    ],
+    "basedOn": [
+      {
+        "path": "commons/maps/Point_Lines/map_data.json",
+        "sha256": "39bb2b440b3f5c7bdd9b62c7cda9cfeb8418fb1786669bc52f82f9e9766634ed"
+      },
+      {
+        "path": "commons/maps/Point_Lines/final.md",
+        "sha256": "4a6bf43031ad60c739f9304cd7810001be5159407848bf15f03b73b357b33e7c"
+      },
+      {
+        "path": "commons/data/artifact_roles.json",
+        "sha256": "eb2c6e178bcd3d18ad5a71752cb5dd1fc9006ed58472d837a33a627ba914bbc5"
+      }
+    ]
+  }
+}

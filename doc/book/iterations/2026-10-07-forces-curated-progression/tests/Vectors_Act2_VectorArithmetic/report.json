@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "lesson placed in the museum",
+      "passed": true
+    },
+    {
+      "name": "point inherits the earlier pickable body",
+      "passed": true
+    },
+    {
+      "name": "visible point has a matching spherical boundary",
+      "passed": true
+    },
+    {
+      "name": "x rail keeps 3 and leaves 4",
+      "passed": true
+    },
+    {
+      "name": "perpendicular move preserves projection",
+      "passed": true
+    },
+    {
+      "name": "parts reconstruct displacement",
+      "passed": true
+    },
+    {
+      "name": "desktop grab marks held point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves desktop-held point alone",
+      "passed": true
+    },
+    {
+      "name": "desktop drop leaves a frozen readable point",
+      "passed": true
+    },
+    {
+      "name": "actual XRTools pickup owns the point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves XR-held point alone",
+      "passed": true
+    },
+    {
+      "name": "XR drop preserves frozen reading",
+      "passed": true
+    },
+    {
+      "name": "reset restores initial point",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "expected_reset": [
+      1.79999995231628,
+      1.54999995231628,
+      0.800000011920929
+    ],
+    "point_parent": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/PointLesson",
+    "principle": "projection",
+    "reset_after_tick": [
+      0.699999809265137,
+      1.60000002384186,
+      0.800000190734863
+    ],
+    "reset_immediate": [
+      1.79999995231628,
+      1.54999995231628,
+      0.800000011920929
+    ],
+    "reset_settled": [
+      1.80000019073486,
+      1.54999995231628,
+      0.800000190734863
+    ]
+  },
+  "passed": true,
+  "room": "Vectors_Act2_VectorArithmetic",
+  "scope": "Actual museum lesson, numeric assertions, button events, desktop pointer and supplied XRTools rig. Physical headset tracking untested."
+}

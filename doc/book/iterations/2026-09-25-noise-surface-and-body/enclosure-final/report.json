@@ -1,0 +1,152 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "enclosing study loaded",
+      "passed": true
+    },
+    {
+      "name": "museum retains original artifact scale",
+      "passed": true
+    },
+    {
+      "name": "study is not shrunk to eighty percent",
+      "passed": true
+    },
+    {
+      "name": "enclosing body keeps unit world scale",
+      "passed": true
+    },
+    {
+      "name": "base sphere retains five metre radius",
+      "passed": true
+    },
+    {
+      "name": "enclosure begins in relief",
+      "passed": true
+    },
+    {
+      "name": "world base radius is five metres",
+      "passed": true
+    },
+    {
+      "name": "circular floor supports doorway approach",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side -1.0 height 0.45",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side -1.0 height 1.35",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side -1.0 height 2.2",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side 1.0 height 0.45",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side 1.0 height 1.35",
+      "passed": true
+    },
+    {
+      "name": "shell doorway clear at side 1.0 height 2.2",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: enclosing-relief",
+      "passed": true
+    },
+    {
+      "name": "actual RELIEF button returns to skin",
+      "passed": true
+    },
+    {
+      "name": "skin returns enclosing radius to five metres",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: enclosing-skin",
+      "passed": true
+    },
+    {
+      "name": "comparison can return to relief",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "door_rays": [
+      {
+        "height": 0.45,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": -1.0
+      },
+      {
+        "height": 1.35,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": -1.0
+      },
+      {
+        "height": 2.2,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": -1.0
+      },
+      {
+        "height": 0.45,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": 1.0
+      },
+      {
+        "height": 1.35,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": 1.0
+      },
+      {
+        "height": 2.2,
+        "hit": "none",
+        "path": "none",
+        "position": [],
+        "side": 1.0
+      }
+    ],
+    "doorway_top_m": 2.5,
+    "enclosure_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "host_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "scope": "Current native museum, measured scale, doorway/floor rays, actual console signal, fixed-camera photographs. No headset/body traversal claim.",
+    "study_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "world_base_radius_m": 5.0
+  },
+  "passed": true,
+  "room": "Noise_Inside_Noise",
+  "scope": "Current native geometry, supplied control signal and fixed cameras; no headset or learner acceptance."
+}

@@ -1,0 +1,339 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          4.0,
+          0.5,
+          6.0
+        ],
+        "name": "ChromaStack",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          6.0
+        ],
+        "name": "@Node3D@10015",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.5,
+          6.0
+        ],
+        "name": "@Node3D@10028",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          6.0
+        ],
+        "name": "@Node3D@10041",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          4.0,
+          0.5,
+          12.0
+        ],
+        "name": "@Node3D@10054",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          12.0
+        ],
+        "name": "@Node3D@10067",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          16.0,
+          0.5,
+          12.0
+        ],
+        "name": "@Node3D@10080",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          4.0,
+          0.5,
+          18.0
+        ],
+        "name": "@Node3D@10093",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          18.0
+        ],
+        "name": "@Node3D@10106",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.5,
+          18.0
+        ],
+        "name": "@Node3D@10120",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          18.0
+        ],
+        "name": "@Node3D@10133",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          4.0,
+          0.5,
+          26.0
+        ],
+        "name": "@Node3D@10146",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          26.0
+        ],
+        "name": "@Node3D@10162",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.5,
+          26.0
+        ],
+        "name": "@Node3D@10180",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          26.0
+        ],
+        "name": "@Node3D@10197",
+        "source": "res://commons/artifacts/chroma_stack/chroma_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          4.0,
+          0.5,
+          35.0
+        ],
+        "name": "ColorDNAStack",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          0.5,
+          35.0
+        ],
+        "name": "@Node3D@10239",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.5,
+          35.0
+        ],
+        "name": "@Node3D@10260",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          35.0
+        ],
+        "name": "@Node3D@10284",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          6.0,
+          0.5,
+          44.0
+        ],
+        "name": "@Node3D@10312",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          16.0,
+          0.5,
+          44.0
+        ],
+        "name": "@Node3D@10333",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          6.0,
+          0.5,
+          53.0
+        ],
+        "name": "@Node3D@10406",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          16.0,
+          0.5,
+          53.0
+        ],
+        "name": "@Node3D@10495",
+        "source": "res://commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      },
+      {
+        "local_to_grid": [
+          11.0,
+          0.5,
+          71.0
+        ],
+        "name": "ReferenceStudy",
+        "source": "res://commons/artifacts/spine_studies/station.gd"
+      },
+      {
+        "local_to_grid": [
+          11.0,
+          0.5,
+          71.0
+        ],
+        "name": "Study",
+        "source": "res://commons/artifacts/reference_studies/landscape.gd"
+      },
+      {
+        "local_to_grid": [
+          16.0,
+          0.5,
+          60.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          16.0,
+          0.919999957084656,
+          60.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          10.0,
+          0.5,
+          60.0
+        ],
+        "name": "ArtPlinth1",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          10.0,
+          0.919999957084656,
+          60.0
+        ],
+        "name": "DreamBody1",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.5,
+          60.0
+        ],
+        "name": "ArtPlinth2",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.919999957084656,
+          60.0
+        ],
+        "name": "DreamBody2",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Context_Placed",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

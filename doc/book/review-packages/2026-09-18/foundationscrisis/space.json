@@ -1,0 +1,3780 @@
+{
+  "Euclid_Parallel": {
+    "map_source": "commons/maps/Euclid_Parallel/map_data.json",
+    "text_source": "commons/maps/Euclid_Parallel/final.md",
+    "map_sha256": "32fc438e6c6820c021be42478f8bef4841b06cf18ed167f9ec741389fa2fc4a3",
+    "text_sha256": "24219c28503d382a8bd6fab129aa8c58f7350729e7a7295049c58fb4ed1d7fcb",
+    "map_info": {
+      "description": "The fifth postulate that held geometry together for 2000 years. Through one point, exactly one line parallel to a given line. What if it weren't true?\n\n[Placement applied humanoid_walker engine — constraint 0.918→0.872, walkability 0.586→0.762]",
+      "dimensions": {
+        "depth": 15.0,
+        "max_height": 3.0,
+        "width": 11.0
+      },
+      "format": "json",
+      "lookup_name": "Euclid_Parallel",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "intermediate",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Understand Euclid's five postulates",
+          "See parallel lines as the foundation of flat space",
+          "Question what seems self-evident",
+          "Prepare for the crisis of non-Euclidean geometry"
+        ]
+      },
+      "name": "Euclid's Parallel Postulate",
+      "version": "placed-humanoid_walker",
+      "title": "The Fifth Postulate",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.15,
+          0.12,
+          0.1
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "3",
+        "0",
+        "3",
+        "1",
+        "3",
+        "0",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "0",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "0",
+        "0"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "What if parallel lines could meet?",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "euclid_postulates_plaque:0:1.2:1",
+        "commented_out": false,
+        "lookup_hint": "euclid_postulates_plaque",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 0,
+        "z": 1,
+        "raw_token": "science_screen:180:1.5#mode:grid",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "parallel_lines:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "parallel_lines",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "angle_sum_triangle:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "angle_sum_triangle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 3,
+        "z": 11,
+        "raw_token": "tt:euclid_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 7,
+        "z": 11,
+        "raw_token": "tt:euclid_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 5,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Euclid_Parallel",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1734,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "euclid_postulates_plaque",
+          "parallel_lines"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Euclid_Parallel/final.md",
+        "text_sha256": "24219c28503d382a8bd6fab129aa8c58f7350729e7a7295049c58fb4ed1d7fcb",
+        "map_sha256": "790f5367e304ca17da1d88500339f0cbc733127479b394d0d1e6fa362c2ece4d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "euclid_postulates_plaque",
+        "parallel_lines",
+        "angle_sum_triangle",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "euclid_postulates_plaque",
+        "parallel_lines"
+      ],
+      "anchors_not_in_primary_roles": [
+        "angle_sum_triangle",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "NonEuclidean_Spaces": {
+    "map_source": "commons/maps/NonEuclidean_Spaces/map_data.json",
+    "text_source": "commons/maps/NonEuclidean_Spaces/final.md",
+    "map_sha256": "1f924c844ea9a640f0ed92f283408b1b6356febe94fc9bfa63f64e69f99d8f59",
+    "text_sha256": "c52511e05a8b13f1a544812a9031df8d33c6c4a7949c8e3f75caa9ab8792fe9a",
+    "map_info": {
+      "description": "What happens when parallel lines meet? Or diverge infinitely? Walk through hyperbolic and elliptic geometries where the sum of angles in a triangle isn't 180°.\n\n[Placement applied humanoid_walker engine — constraint 0.939→0.958, walkability 0.774→0.767]",
+      "dimensions": {
+        "width": 17,
+        "depth": 15,
+        "max_height": 3
+      },
+      "format": "json",
+      "lookup_name": "NonEuclidean_Spaces",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "advanced",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Experience hyperbolic space (negative curvature)",
+          "Experience elliptic space (positive curvature)",
+          "See triangle angle sums change with curvature",
+          "Understand that geometry is a choice,not a truth"
+        ]
+      },
+      "name": "Non-Euclidean Spaces",
+      "title": "Curvature as Choice",
+      "version": "placed-humanoid_walker",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.02,
+          0.02,
+          0.08
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "2",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "2",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "3",
+        "1",
+        "3",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "3",
+        "1",
+        "3",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "To the paradox of self-reference",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 14,
+        "z": 2,
+        "raw_token": "triangle_curvature_workbench",
+        "commented_out": false,
+        "lookup_hint": "triangle_curvature_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "curvature_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "curvature_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 11,
+        "raw_token": "elliptic_surface:0:0.5:1",
+        "commented_out": false,
+        "lookup_hint": "elliptic_surface",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 11,
+        "raw_token": "poincare_disk:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "poincare_disk",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 12,
+        "raw_token": "hyperbolic_surface:0:0.5:1",
+        "commented_out": false,
+        "lookup_hint": "hyperbolic_surface",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 13,
+        "raw_token": "riemann_sphere:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "riemann_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 8,
+        "z": 3,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 9,
+        "z": 7,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "tt:noneuclidean_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 11,
+        "z": 10,
+        "raw_token": "tt:noneuclidean_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 8,
+        "z": 12,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "NonEuclidean_Spaces",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1301,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "triangle_curvature_workbench",
+          "riemann_sphere"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/NonEuclidean_Spaces/final.md",
+        "text_sha256": "c52511e05a8b13f1a544812a9031df8d33c6c4a7949c8e3f75caa9ab8792fe9a",
+        "map_sha256": "bbe7c21e81f5470f3b88a895a9a5d7d21854e96ab9c7f8c0ddc953e3cc8b997d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "curvature_slider",
+        "poincare_disk",
+        "triangle_curvature_workbench",
+        "hyperbolic_surface",
+        "elliptic_surface",
+        "riemann_sphere"
+      ],
+      "role_primary_order": [
+        "triangle_curvature_workbench",
+        "riemann_sphere"
+      ],
+      "anchors_not_in_primary_roles": [
+        "curvature_slider",
+        "elliptic_surface",
+        "hyperbolic_surface",
+        "poincare_disk"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Russell_Paradox": {
+    "map_source": "commons/maps/Russell_Paradox/map_data.json",
+    "text_source": "commons/maps/Russell_Paradox/final.md",
+    "map_sha256": "9562cba2eafd6e3dc76aa375f0d36a6d1ca9ada32a8a7b2d1acdd5f23a2161a9",
+    "text_sha256": "e548e10b8e76d79e198099afd722985c0eac90fe239ca484ddf8d1c5244df4ce",
+    "map_info": {
+      "description": "The set of all sets that don't contain themselves. Does it contain itself? If yes, then no. If no, then yes. Self-reference breaks logic.",
+      "dimensions": {
+        "width": 13,
+        "depth": 14,
+        "max_height": 3
+      },
+      "format": "json",
+      "lookup_name": "Russell_Paradox",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "advanced",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Experience Russell's Paradox viscerally",
+          "Understand how self-reference creates edges",
+          "See why naive set theory collapsed",
+          "Connect to QFEP: systems have outsides"
+        ]
+      },
+      "name": "Russell's Paradox",
+      "version": "1.0",
+      "title": "The Self-Containing Set",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.08,
+          0.05,
+          0.12
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "1",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "1",
+        "3",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "3",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "3",
+        "3",
+        "1",
+        "3",
+        "3",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "To Gödel's theorem",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 11,
+        "z": 2,
+        "raw_token": "euclid_postulates_plaque",
+        "commented_out": false,
+        "lookup_hint": "euclid_postulates_plaque",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "self_membership_set:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "self_membership_set",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "barber_paradox:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "barber_paradox",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "russell_set_box:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "russell_set_box",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 6,
+        "raw_token": "liar_loop:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "liar_loop",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 8,
+        "raw_token": "hilbert_hotel",
+        "commented_out": false,
+        "lookup_hint": "hilbert_hotel",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "3t:THE SET OF ALL SETS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "3t:THAT DO NOT CONTAIN THEMSELVES",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 3,
+        "z": 7,
+        "raw_token": "3t:IF IT DOES",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 9,
+        "z": 7,
+        "raw_token": "3t:IT DOESN'T",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 9,
+        "raw_token": "tt:russell_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "tt:russell_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 3,
+        "z": 10,
+        "raw_token": "3t:IF IT DOESN'T",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "3t:IT DOES",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Russell_Paradox",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1158,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "russell_set_box",
+          "barber_paradox"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Russell_Paradox/final.md",
+        "text_sha256": "e548e10b8e76d79e198099afd722985c0eac90fe239ca484ddf8d1c5244df4ce",
+        "map_sha256": "ce5c25308fc1bed5e105e4801fd39340d0aef77ce674deefe7bf7f24e58090ee",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "russell_set_box",
+        "barber_paradox",
+        "liar_loop",
+        "self_membership_set",
+        "hilbert_hotel",
+        "euclid_postulates_plaque"
+      ],
+      "role_primary_order": [
+        "russell_set_box",
+        "barber_paradox"
+      ],
+      "anchors_not_in_primary_roles": [
+        "euclid_postulates_plaque",
+        "hilbert_hotel",
+        "liar_loop",
+        "self_membership_set"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Godel_Incompleteness": {
+    "map_source": "commons/maps/Godel_Incompleteness/map_data.json",
+    "text_source": "commons/maps/Godel_Incompleteness/final.md",
+    "map_sha256": "4a05e4ba8ed43dfc2e8023b9a1a795f35f1cfe2de9756a233600c1900b6e645e",
+    "text_sha256": "5b0be4a63f7de2c246cf04c4a888a9d412abc183dc6b15b882ecab5842a39b6c",
+    "map_info": {
+      "description": "This statement cannot be proven within this system. Gödel showed that any consistent formal system powerful enough to describe arithmetic contains true statements it cannot prove.",
+      "dimensions": {
+        "width": 15,
+        "depth": 16,
+        "max_height": 3
+      },
+      "format": "json",
+      "lookup_name": "Godel_Incompleteness",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "expert",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Experience Gödel's self-referential construction",
+          "Understand why formal systems have limits",
+          "See the connection between self-reference and incompleteness",
+          "QFEP: pure F-minimization is impossible"
+        ]
+      },
+      "name": "Gödel's Incompleteness",
+      "version": "1.0",
+      "title": "True But Unprovable",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.03,
+          0.03,
+          0.08
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "2",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "0",
+        "2",
+        "2",
+        "2",
+        "0",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "2",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "3",
+        "3",
+        "3",
+        "0",
+        "1",
+        "0",
+        "3",
+        "3",
+        "3",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "To impossible geometries",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 4,
+        "z": 3,
+        "raw_token": "negative_control_fixture:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "negative_control_fixture",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 3,
+        "raw_token": "critic_regress_stack:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "critic_regress_stack",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 4,
+        "raw_token": "godel_sentence_machine:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "godel_sentence_machine",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "raw_token": "rice_verifier_booth:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "rice_verifier_booth",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 5,
+        "raw_token": "print_gallery_recursion:90",
+        "commented_out": false,
+        "lookup_hint": "print_gallery_recursion",
+        "role": "unassigned",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "synthesis_stand#subject:godel_statement_plaque#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "fluency_seam:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "fluency_seam",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 10,
+        "raw_token": "godel_statement_plaque:0:1.2:1",
+        "commented_out": false,
+        "lookup_hint": "godel_statement_plaque",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 11,
+        "raw_token": "provability_sorter:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "provability_sorter",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 11,
+        "raw_token": "incompleteness_tower:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "incompleteness_tower",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "3t:EVERY FORMAL SYSTEM",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 3,
+        "raw_token": "3t:CAN NAME ITSELF",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 4,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 7,
+        "z": 6,
+        "raw_token": "3t:G — I AM UNPROVABLE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "3t:TRUE — BUT UNDECIDABLE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 11,
+        "raw_token": "tt:godel_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 9,
+        "z": 11,
+        "raw_token": "tt:godel_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 7,
+        "z": 12,
+        "raw_token": "3t:SELF-REFERENCE IS THE EDGE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Godel_Incompleteness",
+      "recorded_status": "source_checked_draft",
+      "text_words": 443,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "godel_sentence_machine",
+          "provability_sorter"
+        ],
+        "reason": "Does a machine failing to find a proof show that no proof exists?",
+        "status": "source_checked_draft",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Godel_Incompleteness/final.md",
+        "text_sha256": "5b0be4a63f7de2c246cf04c4a888a9d412abc183dc6b15b882ecab5842a39b6c",
+        "map_sha256": "66b66fb794e972e07c939da6e23e5c14e5877c045bf4f6c9d69e0e0b09e0d97c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "role_primary_order": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Escher_Impossible": {
+    "map_source": "commons/maps/Escher_Impossible/map_data.json",
+    "text_source": "commons/maps/Escher_Impossible/final.md",
+    "map_sha256": "51409c0327f9c99b615fa275e5818ab0c1d6c31e88fa008747c9cfb504b4b929",
+    "text_sha256": "52cd6050a999a1fbb8833f2220876120b7f741111e795735a8505007358def89",
+    "map_info": {
+      "name": "Escher's Impossible Objects",
+      "lookup_name": "Escher_Impossible",
+      "description": "The staircase that goes up forever and ends where it began. Locally coherent, globally impossible. Visual Gödel.\n\n[Placement applied humanoid_walker engine — constraint 0.781→0.955, walkability 0.755→0.668]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 14,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "foundations",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Walk the impossible staircase",
+          "See how local validity fails globally",
+          "Connect to Gödel: local proofs, global incompleteness",
+          "Understand Penrose and Escher's collaboration"
+        ]
+      },
+      "title": "Locally Valid, Globally Impossible",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.08,
+          0.12
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "4",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "4",
+        "4",
+        "4",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3",
+        "3",
+        "3",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "4",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "3",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "4",
+        "4",
+        "1",
+        "0",
+        "0",
+        "3",
+        "3",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "4",
+        "4",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue",
+        "description": "To intuitionistic logic",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "escher_staircase:0:0.5:1",
+        "commented_out": false,
+        "lookup_hint": "escher_staircase",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "magritte_pipe:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "magritte_pipe",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 4,
+        "raw_token": "penrose_triangle:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "penrose_triangle",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "impossible_trident:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "impossible_trident",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "tt:escher_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 8,
+        "z": 10,
+        "raw_token": "tt:escher_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Escher_Impossible",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1297,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "escher_staircase",
+          "penrose_triangle"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Escher_Impossible/final.md",
+        "text_sha256": "52cd6050a999a1fbb8833f2220876120b7f741111e795735a8505007358def89",
+        "map_sha256": "d56edc7d947587a4d62cb78f4d219938c0a0d70c4e0f1a88e7ba0c0920965a63",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "escher_staircase",
+        "penrose_triangle",
+        "impossible_trident",
+        "magritte_pipe"
+      ],
+      "role_primary_order": [
+        "escher_staircase",
+        "penrose_triangle"
+      ],
+      "anchors_not_in_primary_roles": [
+        "impossible_trident",
+        "magritte_pipe"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Brouwer_Intuitionism": {
+    "map_source": "commons/maps/Brouwer_Intuitionism/map_data.json",
+    "text_source": "commons/maps/Brouwer_Intuitionism/final.md",
+    "map_sha256": "e6db443d58b4c2a965c942143b33256772a4ca0f8c37465f0eadf45ee440f930",
+    "text_sha256": "0007c103b870c74b5166cb6f56eeb095b33282bddc3d47744edd387d9f683fd0",
+    "map_info": {
+      "description": "What if we can't use proof by contradiction? Brouwer rejected the law of excluded middle. Math must be constructed, not just proven to exist.\n\n[Placement applied humanoid_walker engine — constraint 0.964→0.962, walkability 0.641→0.883]",
+      "dimensions": {
+        "width": 13,
+        "depth": 16,
+        "max_height": 3
+      },
+      "format": "json",
+      "lookup_name": "Brouwer_Intuitionism",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "expert",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Understand constructive vs classical logic",
+          "Experience the rejection of excluded middle",
+          "See how some proofs become impossible",
+          "Connect to computation: constructive proofs are programs"
+        ]
+      },
+      "name": "Brouwer's Intuitionism",
+      "version": "placed-humanoid_walker",
+      "title": "Only What You Can Construct"
+    },
+    "settings": {
+      "auto_reveal_on_entry": true,
+      "background": {
+        "color": [
+          0.08,
+          0.1,
+          0.06
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "initial_tile_visibility": "hidden_except_start",
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "w",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "To paraconsistent logic",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "cantor_diagonal_workbench",
+        "commented_out": false,
+        "lookup_hint": "cantor_diagonal_workbench",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 10,
+        "raw_token": "intractable_evidence:0:0",
+        "commented_out": false,
+        "lookup_hint": "intractable_evidence",
+        "role": "unassigned",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 11,
+        "raw_token": "angle_sum_triangle",
+        "commented_out": false,
+        "lookup_hint": "angle_sum_triangle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 12,
+        "raw_token": "constructive_proof:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "constructive_proof",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "brouwer_choice_sequence:0:1",
+        "commented_out": false,
+        "lookup_hint": "brouwer_choice_sequence",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 13,
+        "raw_token": "constructive_staircase:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "constructive_staircase",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 13,
+        "raw_token": "excluded_middle_demo:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "excluded_middle_demo",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 14,
+        "raw_token": "parallel_lines",
+        "commented_out": false,
+        "lookup_hint": "parallel_lines",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "br:z:3",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "br:-x:2",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 7,
+        "z": 5,
+        "raw_token": "br:x:2",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 6,
+        "z": 7,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "br:z:2",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "tt:brouwer_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 5,
+        "z": 11,
+        "raw_token": "br:-x:2",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 7,
+        "z": 11,
+        "raw_token": "br:x:2",
+        "commented_out": false,
+        "lookup_hint": "br"
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "raw_token": "tt:brouwer_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 6,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Brouwer_Intuitionism",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1486,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "constructive_proof",
+          "brouwer_choice_sequence"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Brouwer_Intuitionism/final.md",
+        "text_sha256": "0007c103b870c74b5166cb6f56eeb095b33282bddc3d47744edd387d9f683fd0",
+        "map_sha256": "935ef967270289b2467531142aa26968bf7aae74eab8e0f51bbd147d3c1523d5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "excluded_middle_demo",
+        "constructive_proof",
+        "brouwer_choice_sequence",
+        "constructive_staircase",
+        "cantor_diagonal_workbench",
+        "angle_sum_triangle",
+        "parallel_lines"
+      ],
+      "role_primary_order": [
+        "constructive_proof",
+        "brouwer_choice_sequence"
+      ],
+      "anchors_not_in_primary_roles": [
+        "angle_sum_triangle",
+        "cantor_diagonal_workbench",
+        "constructive_staircase",
+        "excluded_middle_demo",
+        "parallel_lines"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Florensky_Paraconsistent": {
+    "map_source": "commons/maps/Florensky_Paraconsistent/map_data.json",
+    "text_source": "commons/maps/Florensky_Paraconsistent/final.md",
+    "map_sha256": "0328afd23a150b5c35fa21fa57b2ce5bc9fe793cde7e145581398a9e1116bf5d",
+    "text_sha256": "d83ca81cc54c89cdb3063afc981587d2748c67ad12d4e1150f8aa98a17360c18",
+    "map_info": {
+      "description": "What if contradictions don't destroy everything? Florensky's supralogic holds A and not-A without collapse. Quantum states exist in superposition.\n\n[Placement applied humanoid_walker engine — constraint 0.980→0.965, walkability 0.727→0.915]",
+      "dimensions": {
+        "depth": 12.0,
+        "max_height": 3.0,
+        "width": 13.0
+      },
+      "format": "json",
+      "lookup_name": "Florensky_Paraconsistent",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "expert",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Experience paraconsistent logic viscerally",
+          "Hold contradictions without triviality",
+          "Connect to quantum superposition",
+          "QFEP: order (F) and disorder (-lambda E) coexist"
+        ]
+      },
+      "name": "Florensky's Paraconsistent Logic",
+      "version": "placed-humanoid_walker",
+      "title": "Holding Contradiction Without Collapse",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.05,
+          0.02,
+          0.1
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "To the synthesis",
+        "name": "Continue",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 4,
+        "z": 9,
+        "raw_token": "schrodinger_box:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "schrodinger_box",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 10,
+        "raw_token": "both_true_gate:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "both_true_gate",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "florensky_sphere:0:1:1",
+        "commented_out": false,
+        "lookup_hint": "florensky_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 11,
+        "raw_token": "superposition_display:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "superposition_display",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 6,
+        "z": 1,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 4,
+        "z": 9,
+        "raw_token": "tt:florensky_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "tt:florensky_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Florensky_Paraconsistent",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1061,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "both_true_gate",
+          "florensky_sphere"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Florensky_Paraconsistent/final.md",
+        "text_sha256": "d83ca81cc54c89cdb3063afc981587d2748c67ad12d4e1150f8aa98a17360c18",
+        "map_sha256": "0221a080257da0cfc55a22d1b7abd89246b38d5f0f07c34585913f6b9cc6dc70",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "both_true_gate",
+        "florensky_sphere",
+        "schrodinger_box",
+        "superposition_display"
+      ],
+      "role_primary_order": [
+        "both_true_gate",
+        "florensky_sphere"
+      ],
+      "anchors_not_in_primary_roles": [
+        "schrodinger_box",
+        "superposition_display"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Crisis_Synthesis": {
+    "map_source": "commons/maps/Crisis_Synthesis/map_data.json",
+    "text_source": "commons/maps/Crisis_Synthesis/final.md",
+    "map_sha256": "74ab106e35e57dcc5824e7054fe8c9bc7cb5aa4fddd4c7300316cebd7d3aaeaf",
+    "text_sha256": "0ac964e00ea1ba1baf047bb1de87f1b0a009aacb204dcc8b534a0e79e886f953",
+    "map_info": {
+      "description": "The foundations crisis revealed: every formal system has limits. Self-reference creates edges. Contradictions can coexist. The territory exceeds any map.\n\n[Placement applied pacing_arc engine — constraint 0.869→0.891, walkability 0.504→0.738]",
+      "dimensions": {
+        "width": 19,
+        "depth": 20,
+        "max_height": 4
+      },
+      "format": "json",
+      "lookup_name": "Crisis_Synthesis",
+      "metadata": {
+        "category": "foundations",
+        "difficulty": "expert",
+        "estimated_time": "6-8 minutes",
+        "learning_objectives": [
+          "Synthesize the foundations crisis insights",
+          "See how QFEP embraces these limits",
+          "Understand that edges are generative",
+          "Move from crisis to creativity"
+        ]
+      },
+      "name": "Crisis Synthesis",
+      "version": "placed-pacing_arc",
+      "title": "The Edge Is the Engine",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.1,
+          0.05,
+          0.15
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "4",
+        "3",
+        "4",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "Return to QFEP Laboratory",
+        "name": "Complete",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 3,
+        "raw_token": "lambda_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 5,
+        "raw_token": "phi_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "goedel_atrium",
+        "commented_out": false,
+        "lookup_hint": "goedel_atrium",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 14,
+        "z": 7,
+        "raw_token": "russell_paradox_workbench",
+        "commented_out": false,
+        "lookup_hint": "russell_paradox_workbench",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "raw_token": "godel_statement_plaque:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "godel_statement_plaque",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "russell_set_box:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "russell_set_box",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 11,
+        "raw_token": "bifurcation_diagram:0:1",
+        "commented_out": false,
+        "lookup_hint": "bifurcation_diagram",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 11,
+        "raw_token": "qfep_formula_3d:0:1.5:1",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 12,
+        "raw_token": "florensky_sphere:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "florensky_sphere",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 13,
+        "raw_token": "escher_staircase:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "escher_staircase",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 9,
+        "z": 3,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "tc:y:1",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 11,
+        "z": 7,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 6,
+        "z": 16,
+        "raw_token": "tt:crisis_technical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 12,
+        "z": 16,
+        "raw_token": "tt:crisis_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt"
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Crisis_Synthesis",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1530,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "qfep_formula_3d",
+          "lambda_slider",
+          "phi_slider"
+        ],
+        "reason": "The formula and its two controls are one model-reading encounter in the existing synthesis.",
+        "status": "existing_text_retained",
+        "sequence": "foundationscrisis",
+        "text_path": "commons/maps/Crisis_Synthesis/final.md",
+        "text_sha256": "0ac964e00ea1ba1baf047bb1de87f1b0a009aacb204dcc8b534a0e79e886f953",
+        "map_sha256": "fe88cb7abc4f4bc5a380f44de33124360b58e3fa8af11bae9c2a7ccb2eb7fef2",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "qfep_formula_3d",
+        "lambda_slider",
+        "phi_slider",
+        "bifurcation_diagram",
+        "goedel_atrium",
+        "godel_statement_plaque",
+        "russell_set_box",
+        "escher_staircase",
+        "florensky_sphere",
+        "russell_paradox_workbench"
+      ],
+      "role_primary_order": [
+        "qfep_formula_3d",
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "anchors_not_in_primary_roles": [
+        "bifurcation_diagram",
+        "escher_staircase",
+        "florensky_sphere",
+        "godel_statement_plaque",
+        "goedel_atrium",
+        "russell_paradox_workbench",
+        "russell_set_box"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

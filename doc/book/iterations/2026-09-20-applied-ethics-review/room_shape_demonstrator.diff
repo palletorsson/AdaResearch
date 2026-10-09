@@ -1,0 +1,235 @@
+--- before/algorithms/postfoundationscrisis/room_shape_demonstrator.gd
++++ algorithms/postfoundationscrisis/room_shape_demonstrator.gd
+@@ -1,23 +1,14 @@
+-# Room Shape Demonstrator — the room's geometry IS the policy
+-#
+-# A scale model of a room sits on a pedestal. The room has two seating arrangements
+-# visible: a long table with one chair at the head (centralized authority) and the same
+-# room with seats arranged in a circle (distributed). Toggle indicators show which
+-# arrangement each implies — a *who can speak first* question encoded in the floor plan.
+-#
+-# Pairs with ethical_design_clipboard: the clipboard names the principles, this artifact
+-# shows the geometry. Room shape is not neutral.
+-#
++# Room Shape Demonstrator — furniture proposes relations before anyone speaks.
+ # @identity
+-# essence: one scale-model room seated twice — a long table with a single chair at its head, and the same walls with the chairs in a circle — so the floor plan itself answers who may speak first
+-# desire: to make architecture confess that it is policy; the ethics room needs an object where the moral variable is furniture, not text
+-# critical_parameter: the seating arrangement — head-of-table versus circle; nothing else differs between the two model rooms, so the arrangement carries the whole argument
+-# triggers: _ready() builds the pedestal, both room models, and the toggle indicators; passive exhibit, read by walking around it
+-# emerges: the recognition that neutrality was never on the menu — every room you have ever entered had already decided its politics before you arrived
+-# needs: BoxMesh walls and chairs [Godot built-ins]; a pedestal at examination height; pairs with ethical_design_clipboard which names the principles this shows
+-# relationships: the applied rung of the ethics ladder — bias_from_inside says the classifier has an inside, this says the meeting room does too
+-# truth: room shape is not neutral. Who can speak first is encoded in the floor plan, and redesign is therefore a moral act, not a decorative one.
+-# @qfep_term: Edge — what the architecture forecloses.
++# essence: authored miniature seating plans; count, scale, table geometry and facing can change together
++# desire: compare the invitations a plan makes, then question the comparison itself
++# critical_parameter: plan; palette separately exposes the original red/green persuasion
++# triggers: optional visitor panel selects five existing plans and two palettes
++# emerges: equal angular spacing is visible; equal participation requires evidence with people
++# needs: model pedestals, accessible controls and room to view the models from several sides
++# relationships: word positions in the previous hall become possible participant positions here
++# truth: these models contain no speech, listening, assigned turn or measured accessibility
++# @qfep_term: Edge — what an arrangement offers and what the model leaves out.
+ 
+ extends Node3D
+ class_name RoomShapeDemonstrator
+@@ -36,8 +27,7 @@
+ ## whether it is offered as a COMPARISON or as the way things are. The artifact used to
+ ## be permanently two-up with the good option colour-coded green, which makes the moral
+ ## argument for the viewer before they have looked at anything. `head` and `circle` put
+-## ONE plan on ONE pedestal at 1.5x, so the plan has to be inhabited rather than scored
+-## against its neighbour. `panopticon` supplies the arrangement the pair conspicuously
++## ONE miniature plan on ONE pedestal at 1.5x, examined on its own before comparison. `panopticon` supplies the arrangement the pair conspicuously
+ ## omits. `vacant` builds both rooms with no furniture at all — the neutral floor plan
+ ## whose neutrality is the exact fiction this artifact exists to attack.
+ ##
+@@ -64,9 +54,16 @@
+ 
+ ## Pale tan — the colour the long-table room already uses for everyone who is not at
+ ## the head. Reused on the panopticon rim so the two rooms speak one colour grammar:
+-## red is whoever the geometry hands the floor to, tan is everybody else.
++## red marks the author-designated head or centre; it does not grant a speaking turn.
+ const CHAIR_COLOR_SUBORDINATE: Color = Color(0.7, 0.6, 0.55, 1.0)
+ 
++@export var interactive: bool = false
++@export_enum("authored", "neutral") var palette: String = "authored"
++const NEUTRAL_CHAIR := Color(0.65, 0.7, 0.75)
++const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
++var _console: Node3D
++var _panel: Node3D
++var _status: MeshInstance3D
+ var _built: bool = false
+ 
+ ## Every node THIS script parented to self, in creation order. The rebuild frees this
+@@ -78,6 +75,7 @@
+ func _ready() -> void:
+ 	_build_all()
+ 	_built = true
++	_sync_console()
+ 
+ 
+ # ═══════════════════════════════════════════════════════════════════
+@@ -87,8 +85,15 @@
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	# Stage-2 DNA axis — #plan:panopticon
+ 	var before_plan: String = plan
++	var before_palette: String = palette
++	var before_interactive: bool = interactive
+ 	if config_data.has("plan"):
+ 		plan = _pick_axis(str(config_data["plan"]), PLANS, plan)
++
++	if config_data.has("palette"):
++		palette = _pick_axis(str(config_data["palette"]), PackedStringArray(["authored", "neutral"]), palette)
++	if config_data.has("interactive"):
++		interactive = str(config_data["interactive"]).to_lower() in ["true", "1"]
+ 
+ 	# On the normal grid path this runs BEFORE add_child, so _ready has not fired and
+ 	# there is nothing built to rebuild. _ready will build with the values just set.
+@@ -96,9 +101,9 @@
+ 		return
+ 	# curation_station hands us {"emissive": false} after it has already framed our
+ 	# labels. Nothing geometric changed, so we touch nothing and say nothing.
+-	if plan == before_plan:
+-		return
+-	_rebuild_now()
++	if plan != before_plan or palette != before_palette or interactive != before_interactive:
++		_rebuild_now()
++	_sync_console()
+ 
+ 
+ ## Accept an axis value only if it names something we actually build. A typo in a
+@@ -136,7 +141,7 @@
+ 	match plan:
+ 		"head":
+ 			# One plan, one pedestal, 1.5x. Nothing to compare it against — you are
+-			# standing in the room that has a head of the table, not judging it.
++			# examining a miniature with a head position before seeing its partner.
+ 			_build_pedestals([0.0], SOLO_SCALE)
+ 			_build_centralized_room(_origin_for(0.0, SOLO_SCALE), SOLO_SCALE, true)
+ 			_build_label("centralized", 0.0, SOLO_SCALE, chair_color_authority)
+@@ -185,6 +190,16 @@
+ 		ped.material_override = mat
+ 		ped.position = Vector3(float(x_off), pedestal_height * 0.5, 0)
+ 		_add_part(ped)
++		if interactive:
++			var body := StaticBody3D.new()
++			body.name = "ModelPedestal"
++			body.position = ped.position
++			var collider := CollisionShape3D.new()
++			var shape := BoxShape3D.new()
++			shape.size = box.size
++			collider.shape = shape
++			body.add_child(collider)
++			_add_part(body)
+ 
+ 
+ func _build_centralized_room(origin: Vector3, s: float, furnished: bool) -> void:
+@@ -244,8 +259,8 @@
+ 
+ 
+ ## The plan the comparison leaves out. A drum wall instead of a rectangle, no table at
+-## all, eight occupants pushed to the rim FACING OUT so none of them can see each other,
+-## and a single tall chair on the centre line that can see all eight. Backs are modelled
++## all, eight backed seats face outward and a tall block marks the centre.
++## There are no occupants, sightline sensors or actual watchers in this model. Backs are modelled
+ ## here (they are not on the other chairs) because facing is the whole argument and a
+ ## featureless cube has no front.
+ func _build_panopticon_room(origin: Vector3, s: float) -> void:
+@@ -281,7 +296,8 @@
+ 		seg_mat.roughness = 0.9
+ 		seg.material_override = seg_mat
+ 		seg.position = origin + Vector3(cos(a) * radius, 0, sin(a) * radius)
+-		seg.rotation.y = -a
++		# A wall follows the tangent, rather than pointing radially into the room.
++		seg.rotation.y = PI * 0.5 - a
+ 		_add_part(seg)
+ 
+ 	# Eight cells at the rim, every one of them facing outward at the wall.
+@@ -324,7 +340,9 @@
+ 
+ 
+ func _make_chair(color: Color) -> MeshInstance3D:
++	if palette == "neutral": color = NEUTRAL_CHAIR
+ 	var chair := MeshInstance3D.new()
++	chair.set_meta("room_shape_chair", true)
+ 	var box := BoxMesh.new()
+ 	box.size = Vector3(0.1, 0.18, 0.1)
+ 	chair.mesh = box
+@@ -341,6 +359,7 @@
+ ## A chair with a back, so which way it points is legible. Only the panopticon uses it —
+ ## the other rooms keep their featureless cubes exactly as before.
+ func _make_facing_chair(color: Color) -> Node3D:
++	if palette == "neutral": color = NEUTRAL_CHAIR
+ 	var root := Node3D.new()
+ 	root.add_child(_make_chair(color))
+ 	var back := MeshInstance3D.new()
+@@ -360,6 +379,13 @@
+ 
+ 
+ func _build_label(text: String, x_off: float, s: float, color: Color) -> void:
++	if interactive:
++		var names := {"centralized":"LONG TABLE · 7", "distributed":"CIRCLE · 6", "panopticon":"RIM + CENTRE · 9", "unfurnished":"UNFURNISHED · 0"}
++		var plate := BakedText.make_panel_mesh(names.get(text,text),Color(.07,.08,.1),Color(.9,.92,.95),Vector2(.65,.07),900,true)
++		plate.position=Vector3(x_off,pedestal_height+room_size.y*s+.15,0)
++		plate.material_override.billboard_mode=BaseMaterial3D.BILLBOARD_ENABLED
++		_add_part(plate)
++		return
+ 	var l := Label3D.new()
+ 	l.text = text
+ 	l.font_size = 22
+@@ -367,3 +393,54 @@
+ 	l.position = Vector3(x_off, pedestal_height + room_size.y * s + 0.25, 0)
+ 	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+ 	_add_part(l)
++
++
++func _sync_console() -> void:
++	if not interactive:
++		if is_instance_valid(_console): _console.hide()
++		return
++	if not is_instance_valid(_console):
++		_console=Node3D.new()
++		_console.name="PlanConsole"
++		add_child(_console)
++		var rack: GDScript=load("res://commons/audio/rack_templates/RackTemplates.gd")
++		_panel=rack.create_panel("ARRANGE",[
++			[{"type":"button","label":"HEAD"},{"type":"button","label":"CIRCLE"},{"type":"button","label":"PAIR"}],
++			[{"type":"button","label":"WATCH"},{"type":"button","label":"VACANT"}],
++			[{"type":"button","label":"NEUTRAL"},{"type":"button","label":"COLOUR"}]
++		])
++		_panel.position=Vector3(0,1.02,1.18)
++		_panel.rotation_degrees.x=-20
++		_panel.scale=Vector3.ONE*1.5
++		_console.add_child(_panel)
++		var choices: Array[String]=["head","circle","pair","panopticon","vacant"]
++		for i in range(5):
++			_panel.find_child("Btn_%d" % i,true,false).get_node("InteractableAreaButton").button_pressed.connect(_choose_plan.bind(choices[i]))
++		_panel.find_child("Btn_5",true,false).get_node("InteractableAreaButton").button_pressed.connect(_choose_palette.bind("neutral"))
++		_panel.find_child("Btn_6",true,false).get_node("InteractableAreaButton").button_pressed.connect(_choose_palette.bind("authored"))
++		var stand:=MeshInstance3D.new()
++		var mesh:=CylinderMesh.new()
++		mesh.height=.9
++		mesh.top_radius=.06
++		mesh.bottom_radius=.15
++		stand.mesh=mesh
++		stand.position=Vector3(0,.45,1.09)
++		var mat:=StandardMaterial3D.new()
++		mat.albedo_color=Color(.2,.22,.25)
++		stand.material_override=mat
++		_console.add_child(stand)
++	_console.show()
++	if is_instance_valid(_status):
++		_console.remove_child(_status)
++		_status.queue_free()
++	_status=BakedText.make_panel_mesh(plan.to_upper()+" · "+palette.to_upper(),Color(.07,.08,.1),Color(.9,.92,.95),Vector2(.55,.055),900,true)
++	_status.position=Vector3(0,1.38,1.18)
++	_console.add_child(_status)
++
++
++func _choose_plan(_body: Variant, choice: String) -> void:
++	apply_grid_config({"plan":choice})
++
++
++func _choose_palette(_body: Variant, choice: String) -> void:
++	apply_grid_config({"palette":choice})

@@ -1,0 +1,55 @@
+--- before/doc/book/captures/noise/noise-book.md
++++ doc/book/captures/noise/noise-book.md
+@@ -757,13 +757,13 @@
+ 
+ The Simplex visualizer chooses `TYPE_SIMPLEX`, which this engine implements as OpenSimplex2. The plate reads the choices back from the instantiated generators. Names can help us find a work; here we also have a way to check what they claim.
+ 
+-Both belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear. [The engine's noise definitions](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations).
++Both belong to gradient noise: a local direction contributes through its relation to a displacement, and contributions are combined into the value at an address. Perlin's lattice and OpenSimplex2's construction organise those contributions differently. The dot product from Vectors is still in the toolbox. The library has folded a longer calculation into the small call above; the call has not made that calculation disappear.[^Noise_Perlin_Simplex--engine-noise]
+ 
+ Choose one comparison to keep in view: the turn of a ridge, the spacing of hollows, or the difference between answers at one coordinate. The shared seed makes each field repeatable. It does not make a ridge on one side the partner of a ridge on the other.
+ 
+ Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.
+ 
+-Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colours keep their values. The seed stays where you left it, even after REGEN; only the way a value occupies space has changed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
++Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colours keep their values. VIEW leaves the seed alone. If you used REGEN, you keep that new field; only the way its values occupy space has changed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
+ 
+ The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.
+ 
+@@ -806,6 +806,8 @@
+ 
+ Look again at the hollow that first caught your attention. If you were choosing a landscape in which to hide, it might matter for a different reason than if you wanted a clear view. There need not be a winner on either side of the aisle. Keep the ability to repeat a field, change a condition and recognise what the comparison supports.
+ 
++Try two tellings of the encounter: what you saw, and the operation you learned to recognise. Where they do not quite meet, you have a reason to return. Hold a seed. Change a threshold. Look at an edge after the veining is gone.
++
+ The small sheet keeps changing. A little noise, and something begins to feel organic. Perhaps that is the body we wanted. Its swelling can carry pleasure, uncertainty or a queer promise of becoming. The ease of the operation is useful: we can put a similar gesture on many different objects.
+ 
+ After several rooms, that usefulness can become a mental algorithmic wall. The familiar answer arrives before we have worked out the next question. Different bodies acquire a family resemblance. We can call this tendency blob culture and begin investigating it here, among our own objects. Its cheapness is the ease with which we can add the filter; what someone makes of that gesture can still matter deeply.
+@@ -814,13 +816,17 @@
+ 
+ In the next chapter, Cellular Automata, a row waits for its first update. We will let a cell's next state depend on the states beside it. Bring the pleasure of the moving surface, and leave room for another form.
+ 
++[^Noise_Perlin_Simplex--engine-noise]: The [Godot 4.6 FastNoiseLite reference](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations) distinguishes TYPE_PERLIN from TYPE_SIMPLEX, which uses OpenSimplex2, and TYPE_SIMPLEX_SMOOTH, which uses OpenSimplex2S.
++
+ ---
+ 
+ ## Lab Path
+ 
+ *Lab_Path*
+ 
+-What has followed you out of the room?
++### What has followed you out of the room?
++
++*An optional return to the Noise rooms.*
+ 
+ A dark patch that returned with REMAP. A connection that broke when the threshold moved. A ridge that caught your foot. Let one encounter come back before you try to explain the whole sequence.
+ 
+@@ -838,8 +844,6 @@
+ Perhaps what stays with you is the small sheet's swelling surface. You wanted to remain near it, or to make a body that could live in its folds. Knowing its operation gives you something to change. It need not settle what the encounter was worth to you.
+ 
+ 
+-In the cellular-automata rooms, a cell's next state will depend on what its neighbours were doing in the previous step. That previous step has to be kept while the next one is written. The neighbourhood we have been learning to recognise acquires another task. What kinds of bodies could come from that dependence?
+-
+ Bring one of your unfinished questions with you.
+ 
+ ---

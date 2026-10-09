@@ -1,0 +1,620 @@
+--- Vectors_Act1_WhatAVectorIs/storyboard/before
++++ Vectors_Act1_WhatAVectorIs/storyboard/after
+@@ -1 +1 @@
+-SHIFT moves both pins while the wall's displacement arrows stay fixed. Bringing two positions and the direction-distance separation from Translation, the student writes one measurement function and draws its result at a chosen display origin. Supplied pins and wall planes provide input and projection; the learner chooses which components each view keeps. They then normalise nonzero displacements and give coincident points an explicit zero result rather than inventing a direction. The reusable outcome is a vector measurement whose placement, display scale, magnitude and direction can be distinguished.
++SHIFT moves both pins while the wall arrows keep their displacement. Reuse positions and translation by reading the existing sample_vector(): end minus start in world coordinates. Predict one tip movement in the XY view and the XZ view, then reveal PARTS to check what each picture omits. SHORT, LONG and ZERO separate magnitude from direction without another drawing exercise. At the normalization companion, briefly explain division by nonzero length and its chosen small-input threshold; do not assume an earlier mention established the skill. Carry a measured displacement whose frame, origin and display scale are stated. Keep the other instruments available as returns.
+--- Vectors_Act1_WhatAVectorIs/storyboard_short/before
++++ Vectors_Act1_WhatAVectorIs/storyboard_short/after
+@@ -1 +1 @@
+-Use SHIFT moving both pins while displacement stays fixed. Reuse Translation's direction/distance calculation. Write a measurement function, choose display origin and retained projection components, then normalise nonzero displacement; return explicit zero for coincident pins. Supply pins and wall planes. Carry distinctions among vector placement, display scale, magnitude and direction. Treat normalisation as reuse.
++Use SHIFT and the existing sample_vector(); reuse positions and translation. Predict a tip movement in supplied XY/XZ views, then reveal PARTS. Use SHORT/LONG/ZERO to distinguish magnitude and direction. Briefly explain normalization and its threshold at the companion. Carry a world displacement with stated display scale; require no new projection display or force controller.
+--- Vectors_Act1_WhatAVectorIs/brings/before
++++ Vectors_Act1_WhatAVectorIs/brings/after
+@@ -1 +1 @@
+-["position subtraction", "direction and distance"]
++["positions in a named frame", "translation and displacement", "Flow_Field's supplied unit direction"]
+--- Vectors_Act1_WhatAVectorIs/learns/before
++++ Vectors_Act1_WhatAVectorIs/learns/after
+@@ -1 +1 @@
+-["projection by components", "explicit zero-direction handling"]
++["common translation preserves displacement", "a component view omits one direction", "normalization needs a declared small-input policy"]
+--- Vectors_Act1_WhatAVectorIs/carries/before
++++ Vectors_Act1_WhatAVectorIs/carries/after
+@@ -1 +1 @@
+-A vector measurement with a declared display frame.
++A displacement measurement with its frame and display scale stated; direction and magnitude remain distinct.
+--- Vectors_Act1_WhatAVectorIs/supplied/before
++++ Vectors_Act1_WhatAVectorIs/supplied/after
+@@ -1 +1 @@
+-["movable pins", "wall projection planes"]
++["VectorBasics with lesson:room_reading, existing pins and sample_vector()", "XY/XZ wall drawings and SHORT/LONG/SHIFT/ZERO/PARTS controls", "vector_normalize_demo and its unit-length reference"]
+--- Vectors_Act1_WhatAVectorIs/independent_check/before
++++ Vectors_Act1_WhatAVectorIs/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Predict a tip movement visible in XZ but absent from XY; verify it, then shift both pins and explain why the measured vector stays unchanged.
+--- Vectors_Act1_WhatAVectorIs/prior_maps/before
++++ Vectors_Act1_WhatAVectorIs/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Point_Lines", "Trans_Translation", "Flow_Field"]
+--- Vectors_Act1_WhatAVectorIs/review_note/before
++++ Vectors_Act1_WhatAVectorIs/review_note/after
+@@ -1 +1 @@
+-Normalisation is a return to the Translation calculation, not a first appearance inferred from a reflective mention.
++Keep this opening a short return. sample_vector() measures world positions; wall drawings scale by 0.85 and clip to radius 1.05 without clipping the numeric vector. SHORT/LONG supply the diagonal below 0.0001, whereas the separate normalization companion returns zero at or below 0.001. Translation's final explains direction and distance, but its present tutorial does not establish normalization practice. No new display binding is implied.
+--- VFM_02_Operations/storyboard/before
++++ VFM_02_Operations/storyboard/after
+@@ -1 +1 @@
+-The carriage follows two legs; exchanging them changes its corner but leaves the destination. Reusing route lists, displacement and accumulated length, the student writes a function that sums compatible displacement vectors and another that totals the distances actually travelled. A supplied carriage and wall plot read the same outputs. They compare the two-leg route, its direct connection and an out-and-back pair whose displacement cancels. The learner leaves with two useful accounts of a journey and an explicit reason to keep both: a shared endpoint does not recover path length or intermediate places.
++GO carries the cube along A and then B; SWAP changes the corner without changing the destination. Reuse displacement and accumulation in the existing room_sum study. Keep its controls, carriage and drawings supplied. In refresh(), calculate result from a+b, then compare a.length()+b.length() with result.length() before running PATH via A or direct. Read the existing travelled increment to see how the executed route is counted. CANCEL makes the distinction sharp: a nonzero out-and-back journey has zero displacement. Carry endpoint and distance as separate accounts. The local plan's forward component maps to negative Z, and GO's instant return home lies outside its reported trip.
+--- VFM_02_Operations/storyboard_short/before
++++ VFM_02_Operations/storyboard_short/after
+@@ -1 +1 @@
+-Use the carriage's exchanged legs. Reuse routes, displacement and accumulated length. Teach compatible vector sums separately from travelled-distance totals; compare two-leg, direct and cancelling out-and-back routes. Supply prescribed carriage and wall plot. Carry endpoint displacement and path length as separate accounts; neither intermediate places nor distance follows from the endpoint alone. No force/transport mechanism is established.
++Use GO/SWAP/PATH/CANCEL on room_sum. Reuse displacement and accumulation. Own result=a+b and compare summed leg lengths with direct length in the existing refresh path; keep movement and drawing supplied. Check against the actual travelled counter. Carry destination and distance separately, with local forward mapped to -Z and GO's reset excluded. No new carriage or transport binding.
+--- VFM_02_Operations/brings/before
++++ VFM_02_Operations/brings/after
+@@ -1 +1 @@
+-["displacement vectors", "routes and accumulation"]
++["displacements with compatible units and frame", "length and finite accumulation", "a distinction between input values and their receiver"]
+--- VFM_02_Operations/learns/before
++++ VFM_02_Operations/learns/after
+@@ -1 +1 @@
+-["vector sum versus accumulated distance"]
++["addition supplies a common endpoint across different routes", "route length and net displacement retain different information"]
+--- VFM_02_Operations/carries/before
++++ VFM_02_Operations/carries/after
+@@ -1 +1 @@
+-Separate displacement and travelled-distance accounts.
++Two explicit accounts of a route: net displacement and accumulated distance.
+--- VFM_02_Operations/supplied/before
++++ VFM_02_Operations/supplied/after
+@@ -1 +1 @@
+-["carriage", "wall plot"]
++["adder_board with lesson:room_sum and A/B/component controls", "existing guarded carriage and waypoint traversal at prescribed speed", "wall/floor drawings, travelled counter and GO/PATH/SWAP/CANCEL/RULE controls", "floor_point() conversion from local plan coordinates to the scene"]
+--- VFM_02_Operations/independent_check/before
++++ VFM_02_Operations/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++For A=(1,0), B=(0,1), predict the common endpoint and the 2 m versus sqrt(2) m route lengths. Then CANCEL and explain the difference between via A and direct before pressing GO.
+--- VFM_02_Operations/prior_maps/before
++++ VFM_02_Operations/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Vectors_Act1_WhatAVectorIs", "Point_Lines", "Change_Intro", "Trans_Translation"]
+--- VFM_02_Operations/review_note/before
++++ VFM_02_Operations/review_note/after
+@@ -1 +1 @@
+-Keep the carriage a prescribed receiver; no force or player transport mechanism is established by this lesson.
++The installed room uses buttons, not draggable pins. Vector2 stores local X/forward in metres, and floor_point maps forward to -Z. refresh() already supplies the common result to drawings and the route built by GO. The physics callback counts actual prescribed movement and consumes remaining movement budget across corners; leave it supplied. GO and input/path edits reset the counter, while RULE and selecting A/B do not. Do not claim a learner function is already bound to a separate host.
+--- Vectors_Act2_VectorArithmetic/storyboard/before
++++ Vectors_Act2_VectorArithmetic/storyboard/after
+@@ -1 +1 @@
+-At the connected subtraction and projection stations, sliding an endpoint across the rail changes the gap while its along-rail part stays fixed. With displacement and unit direction available, the student computes a dot product, uses it to construct the retained vector, then subtracts that vector to recover the remainder. The paired stations and rail controls are supplied. Recombining the parts checks their function at several angles. The FRIEND threshold and torque diagram remain comparisons about what an operation is asked to mean. The useful result is a projection tool, ready for motion and release gestures.
++Start with SWAP, SHIFT and SAME at the subtraction stage, reusing the measured gap rather than adding another construction. The projection station already reads this source within the same hall. RESET gives it a unit rail; SLIDE moves A across that rail while the gold part stays fixed and the pink remainder changes. In the supplied refresh path, compute gap.dot(axis), form kept=axis*gap.dot(axis), then remainder=gap-kept. Recombine the parts before trying TURN and FLIP. Carry a signed along-axis reading and the remainder it cannot describe. The FRIEND threshold and stationary torque wheel remain short comparisons about the uses of a calculation; neither adds a required controller or cross-product lesson.
+--- Vectors_Act2_VectorArithmetic/storyboard_short/before
++++ Vectors_Act2_VectorArithmetic/storyboard_short/after
+@@ -1 +1 @@
+-Use connected gap/projection stations. Reuse displacement and unit direction. Teach dot product, retained projection and subtracted remainder; recombine at several angles. Supply stations and rail controls. Carry a projection tool for motion/release. Keep FRIEND threshold and torque wheel as meaning comparisons: the wheel is a static direction diagram, not physical torque, and cross products remain untaught.
++Return to SWAP/SHIFT/SAME, then use the actual gap-to-projection connection. Teach signed dot reading, kept vector and subtracted remainder in the existing refresh path; recombine and predict SLIDE/TURN/FLIP. Supply unit rail, controls and diagrams. Carry a projection plus remainder. Keep FRIEND and torque as brief comparisons, not extra builds or evidence of mastered cross products.
+--- Vectors_Act2_VectorArithmetic/brings/before
++++ Vectors_Act2_VectorArithmetic/brings/after
+@@ -1 +1 @@
+-["subtraction", "nonzero unit direction"]
++["displacement subtraction", "compatible vector addition", "magnitude and a nonzero unit direction"]
+--- Vectors_Act2_VectorArithmetic/learns/before
++++ Vectors_Act2_VectorArithmetic/learns/after
+@@ -1 +1 @@
+-["dot product and vector projection"]
++["dot product as signed distance along a unit axis", "projection and perpendicular remainder", "changing the receiving axis changes the retained component"]
+--- Vectors_Act2_VectorArithmetic/carries/before
++++ Vectors_Act2_VectorArithmetic/carries/after
+@@ -1 +1 @@
+-A projection and remainder that recombine to the input.
++An along-axis scalar and projection/remainder pair that reconstruct the input.
+--- Vectors_Act2_VectorArithmetic/supplied/before
++++ Vectors_Act2_VectorArithmetic/supplied/after
+@@ -1 +1 @@
+-["connected gap station", "unit rail controls"]
++["vector_sub with lesson:room_gap and projection_shadow with lesson:room_projection", "same-hall source lookup and contributions_changed connection", "nonzero unit rail and RESET/SLIDE/TURN/FLIP/RULE controls", "scaled floor/wall diagrams; existing dot_aligner and torque_crank comparisons"]
+--- Vectors_Act2_VectorArithmetic/independent_check/before
++++ Vectors_Act2_VectorArithmetic/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++After RESET, predict what SLIDE changes and check kept+remainder=gap. Then FLIP: explain why the signed coordinate reverses while the kept vector does not.
+--- Vectors_Act2_VectorArithmetic/prior_maps/before
++++ Vectors_Act2_VectorArithmetic/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Vectors_Act1_WhatAVectorIs", "VFM_02_Operations", "Trans_Translation"]
+--- Vectors_Act2_VectorArithmetic/review_note/before
++++ Vectors_Act2_VectorArithmetic/review_note/after
+@@ -1 +1 @@
+-The torque wheel is a static direction-based diagram. Do not promote it to a physical torque lesson or assume cross products are mastered here.
++This is a real same-hall connection, not transport from the previous room: connect_source() finds the source under the same em_map owner and subscribes refresh(). Coordinates are model X/forward, displayed at half scale, not visitor positions. TURN changes the rail by 30 degrees; bounded SLIDE requests move source A perpendicular by 0.5. FRIEND's 0.985 threshold and torque's unit-direction cross product are independent demonstrations, not subscribers. Keep normalization and subtraction as returns; the substantial new lesson is projection with its remainder.
+--- VFM_05_Launch/title/before
++++ VFM_05_Launch/title/after
+@@ -1 +1 @@
+-Calculate a flight from its beginning
++Read a flight from its beginning
+--- VFM_05_Launch/mode/before
++++ VFM_05_Launch/mode/after
+@@ -1 +1 @@
+-make
++deepen
+--- VFM_05_Launch/storyboard/before
++++ VFM_05_Launch/storyboard/after
+@@ -1 +1 @@
+-The two launch lanes reach equal ranges at different times. Bringing position functions and velocity as displacement per second, the student constructs a sampled trajectory from a start, initial velocity, downward acceleration and elapsed time. The angle-to-velocity conversion, playback marker and plot are supplied; acceleration is introduced as change in velocity per second before its quadratic position contribution is used. They compare two beginnings under the same declared gravity and endpoint height. The result is a reusable analytic path with visible assumptions, distinct from a collision simulation or a command to launch the visitor.
++FIRE sends the marker through a curve; PAIR offers equal ranges with different flight times. Reuse elapsed time, vector components and the distinction between a position and its rate. Introduce acceleration's units, then supply the constant-acceleration position formula, angle conversion and landing-time calculation already used by launch_chamber. Trace flight_position() and change one initial condition, keeping gravity fixed. PATH shows its sampled prediction; PARTS lets the student compare zero vertical velocity at the apex with continuing downward acceleration. SLOW changes playback time without changing the path. Carry a usable position-at-time function and its assumptions into Motion, where retaining and updating velocity becomes the new task.
+--- VFM_05_Launch/storyboard_short/before
++++ VFM_05_Launch/storyboard_short/after
+@@ -1 +1 @@
+-Use equal-range launch lanes with different arrival times. Reuse position functions and velocity. Teach acceleration as velocity change per second before its quadratic position contribution; sample an analytic path from start, velocity and time. Compare beginnings under declared gravity/endpoint height. Supply angle conversion, marker and plot. Carry assumptions explicitly; defer numerical integration. Launch precedes Motion and supplies no collision simulation.
++Use FIRE/PAIR, then trace existing flight_position(). Reuse time, vector components and rate. Supply the analytic position formula, angle conversion, duration and receiver; introduce acceleration's units without deriving a ballistic solver. Vary one beginning, inspect PATH/PARTS and distinguish SLOW from changed gravity. Carry a position-at-time function with assumptions. Launch stays before Motion; no integration or collision response is claimed.
+--- VFM_05_Launch/brings/before
++++ VFM_05_Launch/brings/after
+@@ -1 +1 @@
+-["position functions", "velocity and elapsed time"]
++["position functions and elapsed seconds", "vector components and addition", "Flow_Field's velocity-as-displacement-per-second relation", "Change's distinction between value and rate"]
+--- VFM_05_Launch/learns/before
++++ VFM_05_Launch/learns/after
+@@ -1 +1 @@
+-["acceleration", "analytic trajectory"]
++["acceleration as velocity change per second", "evaluating a supplied analytic position function", "trajectory shape, duration and playback time are distinct"]
+--- VFM_05_Launch/carries/before
++++ VFM_05_Launch/carries/after
+@@ -1 +1 @@
+-A sampled projectile path with stated assumptions.
++A supplied analytic path the learner can evaluate and vary under stated gravity, drag and endpoint assumptions.
+--- VFM_05_Launch/supplied/before
++++ VFM_05_Launch/supplied/after
+@@ -1 +1 @@
+-["angle-to-velocity conversion", "trajectory drawing and playback"]
++["launch_arc with lesson:launch_chamber and its flight markers", "launch_velocity() angle conversion and duration() equal-height landing time", "flight_position() constant-acceleration formula and flight_velocity()", "64-segment PATH drawing and FIRE/PAIR/SLOW/PARTS/GRAVITY/SPEED controls"]
+--- VFM_05_Launch/independent_check/before
++++ VFM_05_Launch/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++At the opening 30/60-degree pair and fixed speed, predict equal horizontal range but unequal landing times. Explain why SLOW leaves the path unchanged, then use PARTS to distinguish velocity and acceleration at the apex.
+--- VFM_05_Launch/prior_maps/before
++++ VFM_05_Launch/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Change_Intro", "Flow_Field", "Vectors_Act1_WhatAVectorIs", "VFM_02_Operations"]
+--- VFM_05_Launch/review_note/before
++++ VFM_05_Launch/review_note/after
+@@ -1 +1 @@
+-Active route places Launch before Motion. Keep this analytic introduction self-contained and do not assume numerical integration was taught already.
++Launch precedes Motion. Supply p(t)=origin+v0*t+0.5*g*t*t, angle-to-velocity conversion and duration rather than asking for their derivation. The existing host clamps each lane to its own equal-height landing time; the frozen velocity is pre-impact. PATH is 64 equal-time segments, while live markers are evaluated analytically. PAIR has separate lane origins, so equal range does not mean the same world endpoint. Parameter edits reset the flight; SLOW only rescales its local clock. No learner-path binding or ballistic solver is newly installed.
+--- VFM_03_Motion/storyboard/before
++++ VFM_03_Motion/storyboard/after
+@@ -1 +1 @@
+-A one-second push ends while the cube continues, and COAST leaves its acquired velocity intact. The student brings timed events and the distinction between velocity and acceleration, then writes a finite force pulse for a supplied rigid-body receiver. They predict the velocity change from force, mass and duration before comparing one- and two-kilogram runs. The engine supplies contact and integration; the learner controls the force schedule and reads the resulting velocity. A second perpendicular pulse meets existing motion. The reusable outcome is an explicit force command whose ending is separate from stopping the body.
++A one-second push ends while the cube continues. Bringing Launch’s initial velocity and Change’s rate and accumulation, the student writes a finite force schedule for a supplied rigid body. Before running, they predict the velocity change: force divided by mass, multiplied by pulse duration. They compare one- and two-kilogram beginnings with drag off, before either cube reaches the frame. The learner owns when the command starts and ends; the engine retains velocity and supplies integration and contact. A perpendicular pulse then meets motion already acquired. COAST cancels the command; it does not erase that history. The kept pulse rule and prediction prepare the next room to expose the state update itself. The friction ramp remains a separate comparison of a threshold and a simplified sliding model.
+--- VFM_03_Motion/storyboard_short/before
++++ VFM_03_Motion/storyboard_short/after
+@@ -1 +1 @@
+-Use the one-second push and COAST preserving velocity. Reuse timed events, velocity and acceleration. Write a finite force pulse; predict velocity change from force/mass/duration, compare masses and add a perpendicular pulse. Supply rigid-body contact, integration, chamber and readout. Carry an explicit force schedule; ending force does not stop motion. Explain apply_central_force as force, not direct position/velocity assignment.
++Reuse Launch’s initial velocity, timed callbacks and Change rates. Own a finite force schedule for a supplied rigid body; predict delta-v = (F/m)T, then compare masses from rest with drag off before contact. COAST ends the command while velocity remains. A perpendicular pulse meets existing motion. Supply engine integration, chamber and readouts. Carry the schedule and prediction into Fields. Keep the friction ramp a separate comparison; do not teach a second solver.
+--- VFM_03_Motion/brings/before
++++ VFM_03_Motion/brings/after
+@@ -1 +1 @@
+-["timed commands", "velocity and acceleration"]
++["timed callbacks and Launch’s chosen initial velocity", "finite rates and signed accumulation from Change", "vector direction and chosen acceleration from the supplied launch model"]
+--- VFM_03_Motion/learns/before
++++ VFM_03_Motion/learns/after
+@@ -1 +1 @@
+-["force divided by mass", "persistent velocity after a pulse"]
++["force in newtons divided by mass in kilograms gives acceleration in metres per second squared", "a finite force command changes retained velocity", "delta-v = (F/m)T before contact with damping absent", "ending a command and stopping a body are separate operations"]
+--- VFM_03_Motion/carries/before
++++ VFM_03_Motion/carries/after
+@@ -1 +1 @@
+-A finite force-pulse controller.
++A small force schedule, its declared units and a predicted change in velocity, kept in the learner’s own study or notes for the Fields comparison.
+--- VFM_03_Motion/supplied/before
++++ VFM_03_Motion/supplied/after
+@@ -1 +1 @@
+-["rigid body and physics integration", "bounded chamber", "velocity readout"]
++["rigid-body integration and bounded collision chamber", "pulse timing adapter, including a partial final physics step", "mass/reset controls, velocity readout and optional trail"]
+--- VFM_03_Motion/independent_check/before
++++ VFM_03_Motion/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Before the run, predict a 2 N pulse lasting 1 s from rest: approximately +2 m/s for 1 kg and +1 m/s for 2 kg. Use DRAG off and observe before frame contact. Predict what COAST changes and what remains; then test a perpendicular pulse without resetting. The two pulse buttons replace the active force command rather than adding concurrent commands.
+--- VFM_03_Motion/prior_maps/before
++++ VFM_03_Motion/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Change_Intro", "VFM_05_Launch"]
+--- VFM_03_Motion/review_note/before
++++ VFM_03_Motion/review_note/after
+@@ -1 +1 @@
+-Expose the engine's role explicitly; do not present apply_central_force as a direct position or velocity assignment.
++Summary proposal only. The installed motion_chamber sends force in newtons to apply_central_force; the engine supplies time integration. Do not multiply that force by dt again. Its active/delta factor only averages a partial final pulse step. COAST leaves optional engine damping active, so the controlled comparison explicitly turns DRAG off. Exact binding from a learner-authored pulse function to the supplied receiver remains to be chosen; the current operating/source companion is not evidence of that authoring interface. No new runtime check in this pass.
+--- Vectors_Act3_FieldsAndMotion/storyboard/before
++++ Vectors_Act3_FieldsAndMotion/storyboard/after
+@@ -1 +1 @@
+-Cyan approaches the centre while pink crosses and returns. Reusing the field follower and persistent velocity, the student makes two small markers sample the same supplied field: one replaces velocity with the sample, while the other adds sample-times-step to its retained velocity. They then update both positions, naming the different units assigned by each receiver. A fixed-step runner, markers and trail display are supplied. Resetting both to the same beginning makes the difference inspectable. The learner carries an explicit integration update and the habit of specifying what a field value does.
++Cyan approaches the centre while pink crosses and returns. The student brings Flow Field’s sampled direction and Motion’s retained velocity into one small study with position and velocity as named state. A supplied runner calls their update: one receiver assigns velocity from the field; the other adds acceleration times the step, then both advance position using the new velocity. The same dimensionless field receives different unit conversions. Before trying the sink, they predict two steps in a uniform field from equal beginnings. Reversing the field then asks whether changing an influence erases motion already acquired. Markers, sampling and trails stay supplied; these numerical receivers have neither mass nor collisions. The learner keeps the update convention for Oscillation, through their own notes or companion file, rather than an assumed transfer between halls.
+--- Vectors_Act3_FieldsAndMotion/storyboard_short/before
++++ Vectors_Act3_FieldsAndMotion/storyboard_short/after
+@@ -1 +1 @@
+-Use cyan approaching and pink crossing the centre. Reuse field following and persistent velocity. Sample one field: assign one marker's velocity, add sample-times-step to the other's retained velocity, then update positions. Name each receiver's units; compare equal resets. Supply field, fixed-step runner, markers and trails. Carry explicit integration. These markers lack collision; pink acceleration introduces neither mass nor physical force.
++Reuse Flow Field sampling and Motion’s retained velocity. In a proposed small position/velocity study, own assignment versus accumulation and the subsequent position update. Predict two uniform-field steps before the sink comparison; reverse influence without erasing state. Supply dimensionless field, unit adapters, fixed runner, markers and trails. Carry the update convention manually toward Oscillation. Installed markers have no mass or collisions, and no shared learner state travels between halls.
+--- Vectors_Act3_FieldsAndMotion/brings/before
++++ Vectors_Act3_FieldsAndMotion/brings/after
+@@ -1 +1 @@
+-["field sampling", "persistent velocity"]
++["Flow_Field’s position-dependent sampling and follower step", "Motion’s distinction between force ending and velocity persisting", "Change’s rate-times-step accumulation"]
+--- Vectors_Act3_FieldsAndMotion/learns/before
++++ Vectors_Act3_FieldsAndMotion/learns/after
+@@ -1 +1 @@
+-["velocity assignment versus acceleration integration"]
++["assigning velocity versus accumulating acceleration", "a field value receives units through its receiver", "updating position with newly updated velocity in a fixed-step model"]
+--- Vectors_Act3_FieldsAndMotion/carries/before
++++ Vectors_Act3_FieldsAndMotion/carries/after
+@@ -1 +1 @@
+-Two declared receivers for one spatial field.
++One declared position/velocity update convention and a prediction table, manually retained in a companion study or notes and adapted to one dimension in Oscillation.
+--- Vectors_Act3_FieldsAndMotion/supplied/before
++++ Vectors_Act3_FieldsAndMotion/supplied/after
+@@ -1 +1 @@
+-["fixed-step runner", "markers and trails", "field sampler"]
++["dimensionless field sampler and stated velocity/acceleration conversions", "fixed 1/120 s runner and reset interface", "two numerical markers, trails and observation cutoff"]
+--- Vectors_Act3_FieldsAndMotion/independent_check/before
++++ Vectors_Act3_FieldsAndMotion/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++For the supplied uniform field at gain 1, let h be the fixed step and start both at rest. Predict displacement after two steps: cyan 1.6h metres, pink 2.4h² metres, with pink velocity 1.6h m/s. Explain the different units of the 0.8 sample conversions. Then reverse a moving run: cyan changes its assigned velocity immediately; pink first changes its acceleration while retaining velocity. These are paper or companion-study predictions; no single-step museum control is claimed.
+--- Vectors_Act3_FieldsAndMotion/prior_maps/before
++++ Vectors_Act3_FieldsAndMotion/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Change_Intro", "Flow_Field", "VFM_03_Motion"]
+--- Vectors_Act3_FieldsAndMotion/review_note/before
++++ Vectors_Act3_FieldsAndMotion/review_note/after
+@@ -1 +1 @@
+-These are collision-free numerical markers; the pink one has acceleration but no mass or applied physical force.
++Summary proposal only. field_receivers already exposes independent positions and velocities and semi-implicit accumulation in source. Each marker samples the same function at its own current position, not necessarily the same value after divergence. FIELD, GAIN and REVERSE keep state; RESET clears state and pauses while retaining parameters. Frame exit freezes outgoing state rather than colliding. A reduced learner edit function and its connection to the supplied runner are still unresolved. The proposed carried study is not an installed persistent record or crosshall transport feature. No runtime or learner-execution claim.
+--- Vectors_Act4a_KineticForces/storyboard/before
++++ Vectors_Act4a_KineticForces/storyboard/after
+@@ -1 +1 @@
+-The air, water and honey strips launch identical cubes with different resistance, while the optional walking passage feels slower through another mechanism. Bringing force pulses and current velocity, the student writes a linear drag function returning a force opposite to velocity, then adds it to a supplied rigid-body update. They compare mass while keeping the coefficient fixed. The chamber, launch and readouts are supplied. At the mower they contrast signed work with path and the cut that remains. The useful outcome is a state-dependent force, without treating the strip names as measured material properties.
++AIR, WATER and HONEY launch cubes at the same speed, then let them travel different distances. Bringing the pulse receiver and Fields’ distinction between a value and its operation, the student owns one linear drag function: force equals minus coefficient times current velocity. The coefficient has units of kilograms per second. A supplied rigid-body adapter passes that force to the engine; the learner does not integrate the same force again. They predict how doubling mass changes the initial acceleration at fixed speed and coefficient, then compare before either run leaves the frame. The kept resistance function supplies Oscillation’s damping term. Walking resistance, the mower’s signed work and the ring’s prescribed circle remain comparisons: different accounts can describe movement, and a return does not undo the cut lawn.
+--- Vectors_Act4a_KineticForces/storyboard_short/before
++++ Vectors_Act4a_KineticForces/storyboard_short/after
+@@ -1 +1 @@
+-Use air/water/honey launch strips. Reuse pulses and velocity; teach linear drag opposing velocity in a supplied rigid-body update. Compare masses at fixed coefficient. Supply chamber, launcher and readouts. Carry a state-dependent force; material names are not measurements. Compare the separate walking mechanism and mower's signed work/path/retained cut. Open: separate work lesson if needed; reuse its known dot product.
++Own one drag function, F = -b v, with b in kg/s. Reuse Motion’s force receiver and Fields’ operation distinction. Predict initial acceleration for two masses at equal speed and fixed b; compare before frame exit. Supply engine integration, launcher and readouts. Carry resistance into spring damping. Keep walking, mower work and prescribed circular motion optional comparisons; the material names are not measured fluid properties.
+--- Vectors_Act4a_KineticForces/brings/before
++++ Vectors_Act4a_KineticForces/brings/after
+@@ -1 +1 @@
+-["force and mass", "velocity state"]
++["force-to-acceleration relation and retained velocity", "the distinction between a sampled value and its receiving operation", "known dot product for the optional work comparison"]
+--- Vectors_Act4a_KineticForces/learns/before
++++ Vectors_Act4a_KineticForces/learns/after
+@@ -1 +1 @@
+-["linear drag as a feedback force"]
++["linear resistance as a force computed from current state", "fixed drag coefficient and changed mass produce different acceleration", "an engine force receiver is distinct from a controller speed mapping"]
+--- Vectors_Act4a_KineticForces/carries/before
++++ Vectors_Act4a_KineticForces/carries/after
+@@ -1 +1 @@
+-A resistance function with explicit units.
++The small force function -b*v with b in kg/s, reused as damping in the proposed scalar spring study; the rigid-body adapter itself need not be carried.
+--- Vectors_Act4a_KineticForces/supplied/before
++++ Vectors_Act4a_KineticForces/supplied/after
+@@ -1 +1 @@
+-["rigid-body chamber", "equal-speed launcher", "readouts"]
++["rigid bodies and engine integration, with gravity and inherited damping removed", "equal-speed launcher and mass/reset controls", "readouts and finite observation window", "existing walking, mower and circular-path comparisons"]
+--- Vectors_Act4a_KineticForces/independent_check/before
++++ Vectors_Act4a_KineticForces/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Before FIRE, use v = +4 m/s and b = 1.3 kg/s to predict F = -5.2 N for both masses. Predict initial acceleration -5.2 m/s² at 1 kg and -2.6 m/s² at 2 kg. Then compare which retains more speed at the same early elapsed time, before frame exit; do not compare different stopping times or treat the cutoff as resistance doing work.
+--- Vectors_Act4a_KineticForces/prior_maps/before
++++ Vectors_Act4a_KineticForces/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["VFM_03_Motion", "Vectors_Act3_FieldsAndMotion", "Vectors_Act2_VectorArithmetic"]
+--- Vectors_Act4a_KineticForces/review_note/before
++++ Vectors_Act4a_KineticForces/review_note/after
+@@ -1 +1 @@
+-Signed mower work is a return using the known dot product; teaching both it and drag in depth may require two short lessons.
++Summary proposal only. Installed kinetic_drag applies -b*body.linear_velocity directly as force; no dt multiplication belongs in that argument. Its rigid bodies ignore contacts and are frozen at the observation cutoff; using a rigid-body engine does not imply this exhibit tests collisions. WALK is a separate chosen controller multiplier; mower work uses a nominal force, not measured hand effort; the ring prescribes a path. Exact learner drag-function binding remains open. Future focused text review: final.md’s categorical claim that air at any throwable cube speed follows a square law is broader than this source comparison establishes; this summary pass does not edit it or claim a replacement empirical result.
+--- Vectors_Act4b_Oscillation/title/before
++++ Vectors_Act4b_Oscillation/title/after
+@@ -1 +1 @@
+-A restoring force can pass through rest
++Returning does not mean stopping
+--- Vectors_Act4b_Oscillation/storyboard/before
++++ Vectors_Act4b_Oscillation/storyboard/after
+@@ -1 +1 @@
+-The released cube crosses the zero line instead of stopping there. Reusing linear drag, force addition and the explicit velocity update, the student makes a one-dimensional spring model: displacement supplies a restoring force, velocity supplies damping, and their sum changes the next state. The rail, pickable handle and fixed-step runner are supplied, with release explicitly starting from rest. They compare equal beginnings under different damping and separate reaching equilibrium from losing motion. The reusable result is an oscillator computed from state, a useful counterpoint to the sine animation already made in Transformation.
++The released cube crosses the zero line instead of stopping there. Returning to the position/velocity study from Fields, the student adapts it to one axis and reuses Kinetic Forces’ resistance term. They own the force sum, minus stiffness times displacement minus damping times velocity, and its update: velocity changes by force divided by mass times the step; displacement then uses the new velocity. The runner, rail and handle remain supplied. Before release, they predict the restoring direction and explain why zero spring force at the centre need not mean zero motion. Equal beginnings under two damping settings test the prediction. This computed return differs from Transformation’s prescribed sine. The learner keeps a small oscillator they can vary, without assuming the museum has transported a shared state or transferred a hand throw.
+--- Vectors_Act4b_Oscillation/storyboard_short/before
++++ Vectors_Act4b_Oscillation/storyboard_short/after
+@@ -1 +1 @@
+-Use the released spring_tower cube crossing zero. Reuse drag, force addition and velocity update. Teach displacement restoring force plus velocity damping in a one-dimensional state model. Supply rail, handle and fixed-step runner; release from rest without hand-velocity transfer. Compare damping from equal beginnings. Carry computed oscillation; distinguish equilibrium from rest and this model from prescribed sine or legacy cosine towers.
++Return to Fields’ proposed position/velocity study in one dimension; add restoration and Kinetic Forces’ damping. Own F = -kx - cv, then v += (F/m)dt and x += vdt. Supply runner, rail and handle; release starts from rest. Predict force direction and crossing, compare damping from equal beginnings, and carry the oscillator toward later waves. Distinguish computed motion from prescribed sine; no shared museum-state or hand-throw transfer is implied.
+--- Vectors_Act4b_Oscillation/brings/before
++++ Vectors_Act4b_Oscillation/brings/after
+@@ -1 +1 @@
+-["drag and force addition", "explicit integration"]
++["Fields’ explicit position/velocity update convention", "linear resistance with declared units", "vector/force addition and Transformation’s prescribed sine comparison"]
+--- Vectors_Act4b_Oscillation/learns/before
++++ Vectors_Act4b_Oscillation/learns/after
+@@ -1 +1 @@
+-["spring restoring force", "equilibrium versus rest"]
++["displacement-dependent restoring force combined with velocity-dependent damping", "equilibrium position and rest are different conditions", "the order of velocity and position updates matters in a numerical model"]
+--- Vectors_Act4b_Oscillation/carries/before
++++ Vectors_Act4b_Oscillation/carries/after
+@@ -1 +1 @@
+-A spring-damper state update.
++A scalar spring-damper update with declared beginning and coefficients, reusable in later oscillator studies; future coupled waves will additionally need separate old/new states across receivers.
+--- Vectors_Act4b_Oscillation/supplied/before
++++ Vectors_Act4b_Oscillation/supplied/after
+@@ -1 +1 @@
+-["rail and handle", "fixed-step runner"]
++["fixed 1/120 s runner and finite observation cutoff", "rail, constrained pickable handle and display", "parameter controls and reset/release adapter; release sets velocity to zero"]
+--- Vectors_Act4b_Oscillation/independent_check/before
++++ Vectors_Act4b_Oscillation/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++At x = +1.25 m and v = 0, with k = 8 N/m and m = 2 kg, predict restoring force -10 N and initial acceleration -5 m/s². Under FREE damping, predict negative velocity at the first crossing of x = 0 even though spring force is zero there. Repeat from the same displacement, mass and stiffness under LIGHT damping; predict smaller later excursions. Use reset/release between trials, and distinguish a predicted centre crossing from an exactly sampled zero.
+--- Vectors_Act4b_Oscillation/prior_maps/before
++++ Vectors_Act4b_Oscillation/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Vectors_Act3_FieldsAndMotion", "Vectors_Act4a_KineticForces", "Trans_Pre"]
+--- Vectors_Act4b_Oscillation/review_note/before
++++ Vectors_Act4b_Oscillation/review_note/after
+@@ -1 +1 @@
+-Keep the current spring_tower lesson variant distinct from the legacy cosine tower; hand velocity is deliberately not transferred here.
++Summary proposal only. The installed restoring_forces variant computes scalar motion; its frozen pickable is input/display, not another body solver. k is N/m, c is kg/s, and F/m is acceleration, not F/dt. DAMP selects a ratio and computes c = 2*ratio*sqrt(k*m); changing mass or stiffness therefore changes c at a fixed nonzero ratio. Hold m and k fixed for the damping comparison. Parameter changes preserve state, whereas release starts from rest. The common learner update and its edit binding remain proposed, with manual reuse rather than automatic transport. Keep legacy cosine towers distinct; do not add a full numerical-methods lesson.
+--- Change_Choreography/title/before
++++ Change_Choreography/title/after
+@@ -1 +1 @@
+-Make the difference between clocks visible
++Keep an offset, change a rate
+--- Change_Choreography/storyboard/before
++++ Change_Choreography/storyboard/after
+@@ -1 +1 @@
+-Twenty rods can share a period while their phases form a travelling pattern; a conveyor can receive less than it admits. Bringing arrays, timed loops and accumulation, the student assigns a phase by column to their own short row of turning markers, then gives one group a slightly different frequency. The marker geometry and common clock are supplied. They predict whether a difference stays fixed or grows, then compare that reasoning with the conveyor's backlog. The reusable outcome is a coordinated timed arrangement and a distinction between an offset and a rate mismatch.
++Twenty rods turn together, form a wave, then drift apart; the conveyor gives a rate mismatch a different material consequence. Reuse indexed repetition and rate over elapsed time; introduce period and phase with the rods before returning to the supplied paired dials. Make the existing tutorial's one source edit: halve DRIFT_RATIO's excess above one, keeping the twelve-second period. Predict the gap after thirty seconds, then use SAME RATE to stop its growth without closing it. Carry a tested distinction between changing a stored angle and changing the rate added to it. Keep the conveyor as a comparison with contact, arrival and finite capacity. The paired-clock reference remains open to interpretation; this shared engine clock supplies neither independent ageing nor the bodily history of its reference.
+--- Change_Choreography/storyboard_short/before
++++ Change_Choreography/storyboard_short/after
+@@ -1 +1 @@
+-Use phased rods and conveyor backlog. Reuse arrays, timed loops and accumulation. Assign phase by column in a short marker row, then change one group's frequency; predict fixed versus growing differences. Supply marker geometry and common clock. Carry coordinated timing and offset/rate distinction. Keep conveyor ledger a comparison or separate exercise; rotor phases and physical contacts use different models.
++Keep rods, conveyor and paired dials in their existing order. Reuse indexed repetition and elapsed time; introduce period and phase at the rods. Follow the existing DRIFT_RATIO edit from 1.04 to 1.02; predict thirty seconds of separation, then preserve the gap with SAME RATE. Supply display and controls. Carry offset versus accumulated rate difference. Conveyor contacts and the clocks' historical reference remain comparisons, not extra builds or claims of bodily simulation.
+--- Change_Choreography/brings/before
++++ Change_Choreography/brings/after
+@@ -1 +1 @@
+-["arrays and timed transforms", "rate and accumulation"]
++["indexed repetition and timed transforms", "rate multiplied by elapsed time", "Oscillation's returning movement, without assuming period or phase has been taught"]
+--- Change_Choreography/learns/before
++++ Change_Choreography/learns/after
+@@ -1 +1 @@
+-["phase offset versus frequency difference"]
++["period names a cycle's duration and phase names its angular offset", "a rate change preserves the existing angle in the paired score", "equal rates preserve a phase gap without closing it", "prescribed rotation and a contact-driven queue need different accounts"]
+--- Change_Choreography/carries/before
++++ Change_Choreography/carries/after
+@@ -1 +1 @@
+-A phase-pattern generator for repeated motion.
++A small tested rate edit and an explanation of which difference stays fixed, grows or is erased by an assignment.
+--- Change_Choreography/supplied/before
++++ Change_Choreography/supplied/after
+@@ -1 +1 @@
+-["marker geometry and clock", "conveyor comparison"]
++["phase_rod_array, conveyor_backlog and the paired_time museum study", "paired_time_score.gd with its twelve-second base period and stored angles", "dial geometry, controls, museum player and conveyor contact model"]
+--- Change_Choreography/independent_check/before
++++ Change_Choreography/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Change DRIFT_RATIO from 1.04 to 1.02 in the supplied study. Before RESET and DRIFT RIGHT, predict an 18-degree gap after thirty seconds rather than 36 degrees; explain why SAME RATE then keeps that gap instead of aligning the hands.
+--- Change_Choreography/prior_maps/before
++++ Change_Choreography/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Array", "Change_Intro", "Vectors_Act4b_Oscillation"]
+--- Change_Choreography/review_note/before
++++ Change_Choreography/review_note/after
+@@ -1 +1 @@
+-Keep the conveyor ledger a comparison or separate short exercise; prescribed rotor phase and physical parcel contacts are different models.
++This uses an actual authored source exercise already present in tutorial.md, replacing the proposed extra marker-row build. Oscillation does not establish period and phase; introduce those terms at the rods. The rods assign absolute angle from elapsed time, so configuration changes may jump; the paired score instead advances stored angles, and SAME RATE preserves them. The conveyor has finite rigid parcels, contact and admission limits. Both dials share engine delta and discard whole-turn counts; neither battery ageing nor the material and bodily conditions of the Gonzalez-Torres reference are simulated. No new runtime or tutorial work is applied by this summary.
+--- VFM_07_Gravity/storyboard/before
++++ VFM_07_Gravity/storyboard/after
+@@ -1 +1 @@
+-The gold satellite circles a held pink source; at the next station both masses respond. Reusing gaps, force-to-acceleration and state updates, the student writes a two-body interaction that returns equal and opposite forces from one shared separation. A supplied softened attraction function and integrator handle close approaches and stepping; the learner decides which bodies receive each contribution and compares a fixed source with mutual response. The displays and trail buffers are supplied. They leave with a paired interaction pattern and a clear distinction between an immobile reference and a body permitted to move.
++The gold satellite turns around a held source; at the next station both bodies answer the attraction. Reuse separation, mass and acceleration by completing the two receiver contributions in the existing accelerations() pattern: one shared pair force, opposite signs, each divided by its receiving mass. Supply the softened law, pair loop, state and integrator. Test one pair with unequal masses before summing more pairs; equal forces need not produce equal accelerations. Read the guard that withholds body zero's response. The museum stations also change masses and beginnings, so their paths are not a controlled test of that guard alone. Third-body and NUDGE encounters remain available comparisons. Carry a paired contribution rule and the question of whose response a fixed reference leaves out.
+--- VFM_07_Gravity/storyboard_short/before
++++ VFM_07_Gravity/storyboard_short/after
+@@ -1 +1 @@
+-Use fixed-source orbit and mutually responding masses. Reuse separation, force-to-acceleration and state updates. Teach equal/opposite force distribution from one shared gap; compare recipients in fixed and mutual cases. Supply softened attraction, integrator, displays and trails. Carry paired interaction accumulation, distinguishing immobile reference from movable body. Keep third-body comparison an encounter; no new high-accuracy orbital solver is required.
++Use the held source and mutual-body stations. Reuse separation and force-to-acceleration. Own the two receiver contributions in the existing pair pattern; supply softened attraction, loop and integrator. Check equal/opposite forces with unequal receiving masses. Read the omitted response for body zero. The stations change beginnings as well as recipients. Keep third-body and NUDGE as comparisons; require no new gravity solver.
+--- VFM_07_Gravity/brings/before
++++ VFM_07_Gravity/brings/after
+@@ -1 +1 @@
+-["separation vectors", "force and acceleration"]
++["separation vectors and shared coordinate frames", "force divided by receiving mass", "retained velocity and position updates"]
+--- VFM_07_Gravity/learns/before
++++ VFM_07_Gravity/learns/after
+@@ -1 +1 @@
+-["paired interaction accumulation"]
++["one pair contributes equal and opposite forces to two receivers", "unequal receiving masses give unequal accelerations", "omitting a receiver's contribution is an explicit model choice"]
+--- VFM_07_Gravity/carries/before
++++ VFM_07_Gravity/carries/after
+@@ -1 +1 @@
+-A two-body force exchange with explicit receiver choices.
++A pair contribution pattern with declared receiving masses and any deliberately omitted response.
+--- VFM_07_Gravity/supplied/before
++++ VFM_07_Gravity/supplied/after
+@@ -1 +1 @@
+-["softened attraction function", "integrator", "display and traces"]
++["gravity_relations.gd and its existing accelerations() pair loop", "softened attraction with EPS=0.25 and velocity Verlet stepping", "initial states, displays, bounded trails and existing museum controls"]
+--- VFM_07_Gravity/independent_check/before
++++ VFM_07_Gravity/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++For one computed force pair, use receiving masses of 12 kg and 1 kg and allow both contributions. Predict opposite accelerations with magnitudes in a 1:12 ratio, check the two divisions, then identify which contribution the first station's body-zero guard omits.
+--- VFM_07_Gravity/prior_maps/before
++++ VFM_07_Gravity/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Vectors_Act2_VectorArithmetic", "VFM_03_Motion", "Vectors_Act4a_KineticForces", "Vectors_Act4b_Oscillation"]
+--- VFM_07_Gravity/review_note/before
++++ VFM_07_Gravity/review_note/after
+@@ -1 +1 @@
+-The student owns force distribution, not a new high-accuracy orbital solver. A third-body comparison can remain an encounter.
++The two-line contribution exercise is a proposed teaching emphasis on existing source, not an already rewritten tutorial or a new solver. Supply the law and integrator intact; assess the contributions before integration. The first station uses 12 kg and 1 kg with a held source; the mutual station starts with equal 4 kg bodies and different positions/velocities. Do not present their paths as an otherwise identical fixed/mutual experiment. Softened markers have no mutual collisions or player coupling. NUDGE's paired beginning and finite observation window warrant a measured comparison, not a proof of chaos or escape.
+--- VFM_09_Legs/storyboard/before
++++ VFM_09_Legs/storyboard/after
+@@ -1 +1 @@
+-A released plate barely moves on four posts, then tips differently when a post or load position changes. The student brings arrays of points and the separation between shape and physical properties. They arrange a small set of supplied support pads, mark a chosen mass centre and compare its floor projection with a supplied support-outline calculation before releasing the existing plate. The solver and hull routine remain supplied. The procedural walker then tests the limits of that account. No new syntax is needed: the reusable outcome is a stated support hypothesis, not a gait controller inferred from leg count.
++A plate rests on four posts; removing support or shifting its mass centre changes what happens after RELEASE. Bring the distinction between geometry, physical properties and a body's received forces. Use the existing FEET and SHIFT controls to state a support hypothesis before the plate moves. Compare adjacent and diagonal pairs at the same centred mass setting: the number of posts alone cannot explain the difference. The supplied outline encloses finite pad corners and describes the initial horizontal arrangement, not every later contact. Then watch the procedural walker and inspect how its body and feet are commanded. Carry a comparison of two accounts of standing, with their limits named. No new hull routine or gait controller is required, and limb count need not become a rule for viable bodies.
+--- VFM_09_Legs/storyboard_short/before
++++ VFM_09_Legs/storyboard_short/after
+@@ -1 +1 @@
+-Use the plate on four posts. Reuse point arrays and shape/physical-property distinctions. Arrange supplied pads, choose mass centre and compare its floor projection with a supplied support outline before release; vary post/load placement. Supply plate, hull calculation and solver. Carry a static support hypothesis without new syntax. Use the kinematic walker to question scope, not validate balance or teach gait.
++Use FEET, SHIFT and RELEASE on the existing plate. Reuse geometry, mass centre and physical response. Predict adjacent versus diagonal support with the same centred mass; check the initial finite-pad outline against release. Supply hull and solver. Compare the commanded walker without treating it as balance validation. Carry an explicit support hypothesis and its limits; add no hull or gait implementation obligation.
+--- VFM_09_Legs/brings/before
++++ VFM_09_Legs/brings/after
+@@ -1 +1 @@
+-["point arrays", "mass and collision"]
++["point arrangements and the distinction between shape and physical properties", "a declared mass centre", "forces and the conditions under which a body may respond"]
+--- VFM_09_Legs/learns/before
++++ VFM_09_Legs/learns/after
+@@ -1 +1 @@
+-["static support assumptions"]
++["support depends on arrangement and mass projection rather than post count alone", "an initial support outline is not a live account of changing contacts", "commanded walking and contact-supported balance provide different evidence"]
+--- VFM_09_Legs/carries/before
++++ VFM_09_Legs/carries/after
+@@ -1 +1 @@
+-A support comparison with explicit geometric and physical assumptions.
++A stated support hypothesis, one observed comparison and a boundary on what that comparison establishes.
+--- VFM_09_Legs/supplied/before
++++ VFM_09_Legs/supplied/after
+@@ -1 +1 @@
+-["support pads and plate", "hull calculation", "physics solver"]
++["support_polygon_lab's finite pads, plate and FEET/SHIFT/RELEASE controls", "initial support hull, mass-centre projection and rigid-body solver", "the existing four-leg walker and its supplied gait and body movement"]
+--- VFM_09_Legs/independent_check/before
++++ VFM_09_Legs/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Keep the mass centre centred and compare the existing adjacent-pair and diagonal-pair FEET settings. Predict the initial support difference before releasing each plate, then state why the walker cannot confirm the same hypothesis merely by remaining upright.
+--- VFM_09_Legs/prior_maps/before
++++ VFM_09_Legs/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Array", "Vectors_Act4a_KineticForces", "VFM_07_Gravity"]
+--- VFM_09_Legs/review_note/before
++++ VFM_09_Legs/review_note/after
+@@ -1 +1 @@
+-Do not treat the kinematic walker as a physical validation of the plate's static support criterion.
++Preserve this hall as comparison and independent judgement. The actual plate is a rigid body; the pads have finite square tops, and the hull uses their corners. The outline is an initial horizontal support estimate, not a changing contact solver. SHIFT changes the custom mass centre while keeping the configured inertia; scope the claim accordingly. The walker advances its body and places feet through authored rules without a hull-based balance test. Do not infer a required anatomy, demand that learners build a controller, or use the walker as physical validation of the plate.
+--- VFM_08_Arena/title/before
++++ VFM_08_Arena/title/after
+@@ -1 +1 @@
+-Choose a target and keep an event
++Ask what an encounter keeps
+--- VFM_08_Arena/mode/before
++++ VFM_08_Arena/mode/after
+@@ -1 +1 @@
+-make
++reflect
+--- VFM_08_Arena/storyboard/before
++++ VFM_08_Arena/storyboard/after
+@@ -1 +1 @@
+-The crab changes course toward a beacon or mushroom, and a screen can remove a candidate from view. Bringing lists, distances and conditions, the student writes a small selector that returns the nearest eligible candidate from supplied positions and visibility results. The creature's steering, legs and contact behaviour are supplied. They distinguish the current selected target from a count updated only after a completed meal, then compare the carts' separately supplied collision account. The learner carries an inspectable selection rule and event-based state, without mistaking an authored controller for learned intent or a conservation law.
++The crab turns toward a beacon or mushroom; a screen can remove a candidate from view. Bring distance comparisons, conditions and the previous hall's distinction between commanded movement and physical response. Before a meal starts, keep candidate positions fixed and insert the screen: predict what selection may change and what completed-meal history cannot. Read the supplied selector and feeding record to check that account. The learner need not rebuild steering, legs or an event system. The five-meal stop is authored, while the meaning of this apparent relationship remains open to discussion. Keep the collision carts as a separate, optional comparison with an explicit one-dimensional model. Carry a distinction between present eligibility, retained events and an interpretation of agency; none alone establishes the others.
+--- VFM_08_Arena/storyboard_short/before
++++ VFM_08_Arena/storyboard_short/after
+@@ -1 +1 @@
+-Use crab targets and the occluding screen. Reuse lists, distances and conditions. Teach nearest eligible selection from supplied positions/visibility; distinguish current target from completed-meal count. Supply steering, legs, contacts and feeding events; compare the separate collision carts. Carry a scoped selector and event-based state. The five-meal stop is authored, not learned policy; selection establishes no conservation law.
++Keep Arena a comparison. Reuse distances, conditions and commanded-body distinctions. Before feeding starts, hold positions fixed, insert the screen and predict selection versus completed-meal history. Read the supplied selector and event record; build no new controller. The five-meal stop is authored. Keep collision carts a separate model and interpretation open. Carry a distinction between eligibility, retained events and attributed agency.
+--- VFM_08_Arena/brings/before
++++ VFM_08_Arena/brings/after
+@@ -1 +1 @@
+-["lists and conditional comparison", "distance"]
++["lists, distance comparisons and conditions", "the distinction between a current input and retained state", "Legs' comparison of commanded and physically supported movement"]
+--- VFM_08_Arena/learns/before
++++ VFM_08_Arena/learns/after
+@@ -1 +1 @@
+-["candidate selection", "state updated by completed events"]
++["a candidate must remain eligible before distance can select it", "a completed-event count differs from the current target", "an authored threshold and an interpretation of agency answer different questions"]
+--- VFM_08_Arena/carries/before
++++ VFM_08_Arena/carries/after
+@@ -1 +1 @@
+-A target selector and completed-event counter.
++An inspectable account of a choice, the event history it retains and the interpretive claims that remain open.
+--- VFM_08_Arena/supplied/before
++++ VFM_08_Arena/supplied/after
+@@ -1 +1 @@
+-["candidate visibility results", "creature movement and feeding events", "collision-cart comparison"]
++["lesson_crab's existing eligible-candidate selector and line-of-sight query", "museum beacon, mushroom, screen and controls", "feeding events, steering and gait; the separate analytic collision-cart comparison"]
+--- VFM_08_Arena/independent_check/before
++++ VFM_08_Arena/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++Start before a meal is underway. With candidate positions unchanged, insert the screen and predict which candidate remains eligible. Explain why an occlusion may change the selected target but cannot itself increase the completed-meal count; use the existing rules to check both claims.
+--- VFM_08_Arena/prior_maps/before
++++ VFM_08_Arena/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Array", "VFM_02_Operations", "VFM_03_Motion", "VFM_09_Legs"]
+--- VFM_08_Arena/review_note/before
++++ VFM_08_Arena/review_note/after
+@@ -1 +1 @@
+-Keep the selector scoped to this station. The five-meal stop is authored state, not policy learning.
++Change the former make obligation to reflect: the current final/tutorial support an encounter and source comparison, not a prerequisite to author a new selector, gait or event framework. Selection uses a strict six-metre candidate range and a supplied visibility test; active feeding and temporary ignoring affect when selection resumes. The five completed meals trigger an authored stop, not learned policy. The carts display a supplied analytic elastic-collision account rather than measuring the crab's collisions. Keep critical interpretation available without presenting friendship, intent or conservation as facts proved by target selection.
+--- Vectors_Act5_ForceAsPlace/title/before
++++ Vectors_Act5_ForceAsPlace/title/after
+@@ -1 +1 @@
+-Connect a field to a particular body
++Declare what receives the field
+--- Vectors_Act5_ForceAsPlace/storyboard/before
++++ Vectors_Act5_ForceAsPlace/storyboard/after
+@@ -1 +1 @@
+-A direction waits beside the gap, and released glass cubes reveal what it does before the visitor enters. The student brings field receivers and acceleration integration, then composes an up-and-forward acceleration for one supplied cube receiver and predicts a short route from its initial velocity. The angle controls, bounded field and body-membership detection are supplied. Comparing a zero field with a stopped cube tests what state persists; comparing the cube with the visitor exposes different receiver contracts. The useful outcome is a local field application whose scope and units are explicit.
++Glass cubes show the bounded field before the visitor tries the gap. Reuse the sampled-field question from Flow Field and Forces' retained velocity: what receives this vector, in what units, and what changes? Compose an up-and-forward acceleration through the supplied controls, then read the cube's velocity increment. Set field strength to zero while a cube moves and predict why it does not stop immediately; damping and contacts still matter. Compare the visitor's separately supplied carrying rule without treating the two bodies as interchangeable. Carry a field with declared membership, units and retained state. Form Finding will reuse a direction through a different receiver: descent updates a point from a gradient without retaining velocity. Its trail records past positions, and its step size is not elapsed physical time.
+--- Vectors_Act5_ForceAsPlace/storyboard_short/before
++++ Vectors_Act5_ForceAsPlace/storyboard_short/after
+@@ -1 +1 @@
+-Use glass cubes in the bounded field before the visitor crossing. Reuse field receivers and acceleration integration. Compose up/forward acceleration for a supplied cube; predict from initial velocity and compare zero field with stopped motion. Supply controls, membership detection and body adapters. Carry explicit scope/units. Keep visitor crossing a comparison with its supplied locomotion contract.
++Use cubes before the visitor crossing. Reuse sampled fields and retained velocity; compose acceleration with supplied controls and inspect the cube update. Predict zero field versus immediate stopping, keeping damping and contacts explicit. Compare the visitor's separate receiver. Carry membership, units and state. Prepare the change to Form Finding: its gradient descent stores no velocity, and its step size is not elapsed physical time.
+--- Vectors_Act5_ForceAsPlace/brings/before
++++ Vectors_Act5_ForceAsPlace/brings/after
+@@ -1 +1 @@
+-["field receiver contracts", "acceleration integration"]
++["Flow Field's distinction between a sampled vector and its receiver", "retained velocity changed by acceleration over time", "a comparison of explicit models, physical bodies and controller decisions"]
+--- Vectors_Act5_ForceAsPlace/learns/before
++++ Vectors_Act5_ForceAsPlace/learns/after
+@@ -1 +1 @@
+-["scoped field application"]
++["bounded membership determines which receiver gets the field update", "zero acceleration does not assign zero velocity", "a field can feed different updates with different units and retained state"]
+--- Vectors_Act5_ForceAsPlace/carries/before
++++ Vectors_Act5_ForceAsPlace/carries/after
+@@ -1 +1 @@
+-A field rule attached to one declared receiver.
++A declared field receiver: its membership rule, vector units, state update and other influences, ready to compare with gradient descent's position-only update.
+--- Vectors_Act5_ForceAsPlace/supplied/before
++++ Vectors_Act5_ForceAsPlace/supplied/after
+@@ -1 +1 @@
+-["direction controls", "field membership query", "cube and visitor adapters"]
++["vector_machine's angle and magnitude controls", "force_field_zone's membership detection and cube receiver", "force_cube's damping and collision behaviour; the separate visitor carry provider", "the next hall's existing gradient descent as a source comparison, not an added Forces build"]
+--- Vectors_Act5_ForceAsPlace/independent_check/before
++++ Vectors_Act5_ForceAsPlace/independent_check/after
+@@ -1 +1 @@
+-(not previously declared)
++While a cube is still moving inside the field, set its magnitude to zero. Predict no immediate assignment to zero velocity and explain the remaining damping/contact influences; contrast that receiver with FormFinding_Descent, whose next point uses the current gradient and no retained velocity.
+--- Vectors_Act5_ForceAsPlace/prior_maps/before
++++ Vectors_Act5_ForceAsPlace/prior_maps/after
+@@ -1 +1 @@
+-(not previously declared)
++["Flow_Field", "VFM_03_Motion", "Vectors_Act3_FieldsAndMotion", "Vectors_Act4a_KineticForces", "VFM_08_Arena"]
+--- Vectors_Act5_ForceAsPlace/review_note/before
++++ Vectors_Act5_ForceAsPlace/review_note/after
+@@ -1 +1 @@
+-Use the cube for the authored exercise. The existing visitor crossing is a comparison, and its locomotion adapter is supplied.
++The cube receiver adds field_vector * delta directly to linear_velocity; field_vector is acceleration, with no division by mass. Inside the zone ordinary gravity is suppressed, but damping and contacts remain; leaving restores saved gravity. The visitor has a separate locomotion/carry contract. Both can retain motion, so zero field does not mean stopped body. The next hall instead evaluates point - rate * gradient(point), with no velocity term or physics-delta factor; its display trail is history, not momentum. Preserve that change of model and do not promise a new receiver or descent implementation in this summary.

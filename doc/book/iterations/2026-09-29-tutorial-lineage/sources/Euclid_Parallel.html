@@ -1,0 +1,504 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Euclid_Parallel · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Euclid_Parallel">← Tutorial lineage</a></p><h1>Euclid Parallel</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Euclid_Parallel/final.md">Raw captured source</a></p><pre># The Fifth Postulate
+
+Press NEXT on the plaque five times and you arrive back at the first postulate. The counter wraps:
+
+```gdscript
+# euclid_postulates_plaque.gd
+func next_postulate():
+	current_postulate = (current_postulate + 1) % 5
+```
+
+Five presses, five postulates, one closed loop. Four of them fit on two short lines. The fifth needs four lines and a parenthesis. Before measuring anything, we have agreed to begin here. The room gives us flat coordinates; the plaque gives us sentences about what can be done in them. Walk between the columns. How much of that agreement already feels like the world?
+
+## The five, stored as text
+
+&lt;!-- @euclid_postulates_plaque --&gt;
+&lt;!-- ~tutorial#p2 ~tutorial#p4 ~critical#the-rule-that-could-not-be-proven --&gt;
+
+Start where the build starts. The tutorial keeps the five postulates as strings in a constant array: text, not logic, so a plinth can show them without a parser. The shipped plaque makes the same choice, and bakes its own line breaks in:
+
+```gdscript
+# euclid_postulates_plaque.gd
+	&quot;IV. All right angles are\nequal to one another.&quot;,
+	&quot;V. If a line crosses two lines\nand interior angles sum &lt; 180°,\nthe two lines meet on that side.\n\n(The Parallel Postulate)&quot;
+```
+
+Read those two as sentences. The fourth states an equality and stops. The fifth carries a condition, a threshold, a prediction — and then names itself.
+
+The difference is not length. The first four hand you permissions: what a hand with a straightedge may do. The fifth tells you what will happen once your hand has done it. It is a rule shaped like a forecast, and a forecast asks to be checked. For centuries, attempts to derive the fifth from the others failed. A rule can feel inevitable long before we have established that it follows.
+
+The array says the same in its own way. The fifth is the only entry carrying a blank line inside itself.
+
+It uses that blank line to introduce itself. Nothing else on the plaque has to.
+
+## Marked before anyone argues
+
+&lt;!-- @euclid_postulates_plaque --&gt;
+&lt;!-- ~tutorial#p10 ~tutorial#p11 ~critical#performativity-of-the-obvious --&gt;
+
+Before you have read a word, the room has told you which postulate matters. The gold arrives ahead of the argument.
+
+The line that does it can be pointed at. The tutorial tints the fifth plinth and scales it by 1.2; the shipped plaque runs the same move as a branch:
+
+```gdscript
+# euclid_postulates_plaque.gd
+	var is_fifth = current_postulate == 4
+	var title_color: Color
+	var text_color: Color
+	if is_fifth and highlight_fifth:
+		title_color = Color(1.0, 0.7, 0.3)
+		text_color = Color(1.0, 0.9, 0.7)
+```
+
+Two conditions, not one. The same pair guards the announcement further down: `parallel_highlighted.emit()` sits inside `if is_fifth and highlight_fifth:`. Colour and signal come out of one branch.
+
+Repetition is how obviousness gets made — every grid, every Cartesian axis, every drawn pair of parallels performs the fifth postulate again. Here the performance is one branch, repeated on every press. You are asked to follow the gold, and following feels like noticing.
+
+Now press GOLD. It switches `highlight_fifth` off: the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.
+
+## Three lines that never meet
+
+&lt;!-- @parallel_lines --&gt;
+&lt;!-- ~tutorial#p13 ~tutorial#p14 ~artifacts#parallel-lines ~critical#the-state-of-exception --&gt;
+
+The tutorial draws five lines at `y := -2.0 + i * 1.0` — even spacing, one unit apart, a picture in which Euclid&#x27;s claim looks like a property of the world. The shipped scene has three, placed by hand:
+
+```gdscript
+# parallel_lines.tscn:7
+[node name=&quot;Line1&quot; parent=&quot;.&quot; instance=ExtResource(&quot;1_line&quot;)]
+transform = Transform3D(0.258819, 0, 0.965926, 0.965926, 0, -0.258819, 0, 1, 0, -0.0648265, 0, 0)
+```
+
+Count the gaps. Line2 sits at 0.204004, Line3 at 0.305252. The first gap is about 0.27, the second about 0.10. The registry calls this artifact three line modules arranged to visualize equidistant lines. The transforms are not equidistant.
+
+The parallelism survives. All three share a basis: extend the segments along those directions and their supporting lines do not meet. Each pair keeps a constant perpendicular separation. That does not require the gap between the first and second to equal the gap between the second and third. Uneven spacing breaks an evenly spaced pattern; it does not break parallelism. We have to decide which regularity we were looking for.
+
+Imagine Line3 pushed out to 0.4: the gaps change, and the lines still never meet. Spacing you can set by hand; parallelism comes from the shared basis.
+
+And nothing in the room says the word out loud: the scene&#x27;s `Label3D` ships with `visible = false`.
+
+So you supply it. You look at three lines, name them parallel, and the naming arrives as sight.
+
+## The triangle that says sixty
+
+&lt;!-- @angle_sum_triangle --&gt;
+&lt;!-- ~summary#p3 ~blurb#p3 ~critical#what-the-axiom-conceals --&gt;
+
+The triangle&#x27;s three corners are literals — apex at `size * 0.5`, base corners at `-size * 0.4` and `size * 0.4`. Then the labels are handed their text:
+
+```gdscript
+# angle_sum_triangle.gd
+	var angles = [&quot;60°&quot;, &quot;60°&quot;, &quot;60°&quot;]
+	var sum_text = &quot;60° + 60° + 60° = 180°&quot;
+```
+
+The shape those vertices make is isosceles, not equilateral. The file records its own measured corners: 53.1, 63.4, 63.4. Both triples sum to 180. The three sixties are shipped bytes, handed back rather than measured.
+
+So the sum is true and the parts are ornament. Three equal numbers describe a triangle you are not looking at. It is the plaque&#x27;s move again in another material: one surface makes unlike things look alike — five postulates in a single row, three identical angles under one figure. What gets hidden is not a falsehood. It is a difference.
+
+The file already knows better, in a function just above. `_angles()` reads each corner off the polyline it actually drew, and at any curved opening the labels print what was measured. At `flat` it prints the shipped strings; the file says three maps ship them, and today two halls of the walk do.
+
+Keeping those halls byte-identical is a reason to print sixty. It is a reason about shipping, not about triangles. The geometry never asked for it.
+
+## Bowing a line is not enough
+
+&lt;!-- @angle_sum_triangle --&gt;
+&lt;!-- ~tutorial#p16 ~tutorial#p17 ~critical#performativity-of-the-obvious --&gt;
+
+Measure how far the other spaces sit from this floor. The tutorial toggles the fifth and a second preview fractures. The shipped artifact has three named settings:
+
+```gdscript
+# angle_sum_triangle.gd
+@export_enum(&quot;flat&quot;, &quot;hyperbolic&quot;, &quot;elliptic&quot;) var opening: String = &quot;flat&quot;
+```
+
+Map tokens reach it only through one gate:
+
+```gdscript
+# angle_sum_triangle.gd
+	if config_data.has(&quot;opening&quot;):
+		var want: String = str(config_data[&quot;opening&quot;]).strip_edges().to_lower()
+		if OPENING_VALUES.has(want) and want != opening:
+```
+
+The triangle here receives no `opening` setting, so its edges remain segments. In the source, selecting `elliptic` bows the edges outward; `hyperbolic` bows them inward. The corner labels change because the directions at the corners change.
+
+But the drawing still lies in one flat plane. Curved sides can make a triangle-shaped outline whose corner sum is not 180°. That alone does not demonstrate spherical or hyperbolic geometry: we have changed the lines without specifying a different way of measuring space.
+
+This is a useful limit to meet before the next room. A name can promise a world; a bend can make the promise look convincing. What else must change for a line to count as straight there?
+
+## A screen with nothing to flatten
+
+&lt;!-- @science_screen --&gt;
+&lt;!-- ~artifacts#science-screen ~summary#p2 ~critical#the-state-of-exception --&gt;
+
+The screen scans eight metres for neighbours that answer `get_grid_data()` and paints their cells at 768 by 576. Neither script here defines that method. The plaque offers configuration and selection signals; the triangle offers `apply_grid_config` and two exports, `opening` and `size`. Nothing offers the one call the screen makes. And the map asked for a grid anyway: the screen&#x27;s token carries `#mode:grid`. So it looked eight metres for anything with a grid to give it, found nothing, and drew what it was asked for with nothing behind it, sixteen by sixteen dead cells:
+
+```gdscript
+# science_screen.gd
+	_point_mode = true
+```
+
+What it draws is not a blank panel. It is a grid: white, square, right-angled, drawn before anything arrives to be drawn. The screen does not wait to learn what space it is in. It draws right angles whether or not anything is there, and right angles are this room&#x27;s postulate in pixels.
+
+Test it. Cross the room and watch the picture: it does not change, because nothing here gives it anything to change into.
+
+A declaration outrunning its code: the token asked for a grid, and the grid arrived as a white picture rather than an error, which is how such things usually arrive.
+
+## What the spec asked for and what stands here
+
+&lt;!-- @angle_sum_triangle --&gt;
+&lt;!-- ~intent#p1 ~tutorial#p19 ~walked#what-it-opens ~summary#p4 ~blurb#p2 ~critical#the-state-of-exception --&gt;
+
+The tutorial closes with a scroll — 300 BCE Euclid, 1733 Saccheri, 1829 Lobachevsky, 1832 Bolyai, 1854 Riemann — and a door that unlocks after two seconds of reading. The spec asked for two interactive demos that let you drag the lines. Neither is placed.
+
+The plaque now lets you cycle the sentences and remove their gold emphasis. The lines and triangle remain comparisons to look at; they do not yet offer a handhold for changing their geometry. A control for reading is not a control for bending space.
+
+What stands here is a plaque, three lines, a triangle, a screen — and the building itself: an eleven by fifteen floor, a colonnade along the approach, a walkway between its repeated uprights. Walk that walkway and the assumption acquires the size of a body.
+
+You can follow the path without agreeing that it is the only possible one. Carry that distinction through the exit. In the next room, the triangle gets a different host, and we can ask its corners again.
+
+Count once more: five postulates, three lines, one triangle, one screen, two rows of pillars. Every number is true. Not one of them is necessary.
+
+You can stand on a floor and still ask what is holding it up.</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Euclid_Parallel/tutorial.md">Raw captured source</a></p><pre># Euclid Parallel
+
+Five postulates. The first four feel inevitable. Build a room that exposes the fifth as a choice.
+
+Declare the five postulates as data.
+
+```gdscript
+const POSTULATES := [
+    &quot;Any two points can be joined by a straight line.&quot;,
+    &quot;Any finite line can be extended indefinitely.&quot;,
+    &quot;Any line segment and radius define a circle.&quot;,
+    &quot;All right angles are equal.&quot;,
+    &quot;Through a point not on a line, exactly one parallel can be drawn.&quot;,
+]
+```
+
+Text, not logic. The postulates live as strings in a constant array so the room can render them on five plinths without a parser.
+
+Lay the plinths in a horseshoe.
+
+```gdscript
+func place_plinths(parent: Node3D) -&gt; void:
+    var count := POSTULATES.size()
+    for i in count:
+        var angle := PI * (i + 1) / (count + 1)
+        var p := preload(&quot;res://commons/maps/elements/text_plinth.tscn&quot;).instantiate()
+        p.position = Vector3(cos(angle) * 4.0, 0.0, -sin(angle) * 4.0)
+        p.text = POSTULATES[i]
+        parent.add_child(p)
+```
+
+The horseshoe lets the learner read the sequence by walking it. Four feel like description; the fifth feels like an extra step.
+
+Mark the fifth plinth.
+
+```gdscript
+func emphasize_fifth(plinth: Node3D) -&gt; void:
+    var label: Label3D = plinth.get_node(&quot;Label3D&quot;)
+    label.modulate = Color(0.9, 0.7, 0.3)
+    plinth.scale = Vector3.ONE * 1.2
+```
+
+Gold tint and a slightly larger scale. The fifth is set apart before any argument is made. The architecture performs the claim.
+
+Animate parallel lines that actually stay parallel.
+
+```gdscript
+func draw_parallels(mesh: ImmediateMesh) -&gt; void:
+    mesh.clear_surfaces()
+    mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+    for i in 5:
+        var y := -2.0 + i * 1.0
+        mesh.surface_add_vertex(Vector3(-5, y, 0))
+        mesh.surface_add_vertex(Vector3(5, y, 0))
+    mesh.surface_end()
+```
+
+Five lines, all parallel, all horizontal. The demonstration is quiet. Euclid&#x27;s claim looks like a property of the world.
+
+Toggle the fifth postulate.
+
+```gdscript
+func toggle_fifth() -&gt; void:
+    fifth_active = not fifth_active
+    if fifth_active:
+        parallel_preview.visible = true
+    else:
+        parallel_preview.visible = false
+        chaos_preview.visible = true
+```
+
+Turn the fifth off and a second preview appears. Lines that should stay parallel begin to diverge. The postulate was doing work; without it, the picture fractures.
+
+Record the 2300-year history on a scroll.
+
+```gdscript
+func populate_history(scroll: Label3D) -&gt; void:
+    scroll.text = &quot;300 BCE Euclid\n1733 Saccheri\n1829 Lobachevsky\n1832 Bolyai\n1854 Riemann&quot;
+```
+
+Five names across two millennia. Every one tried to prove the fifth from the first four. Every one failed — because it is independent.
+
+Open the door once the learner reads the scroll.
+
+```gdscript
+func _on_scroll_read(duration_ms: int) -&gt; void:
+    if duration_ms &gt; 2000:
+        door.unlock()
+```
+
+The door waits until the scroll has been dwelt with. Reading is the action, not clicking.
+
+You have seen geometry as a list of choices. The next map, NonEuclidean Spaces, turns the fifth postulate off and walks what remains.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Euclid_Parallel/technical.md">Raw captured source</a></p><pre># Euclid_Parallel — Technical
+
+## The Axiomatic Method and Its Fifth Pillar
+
+Euclid&#x27;s *Elements* (c. 300 BCE) codified geometry as a deductive system: definitions, common notions, five postulates, and from these, 465 propositions derived by pure logic. The first four postulates are constructive imperatives:
+
+1. A straight line can be drawn between any two points.
+2. A line segment can be extended indefinitely.
+3. A circle can be drawn with any center and any radius.
+4. All right angles are equal.
+
+Then the fifth:
+
+&gt; If a straight line falling on two straight lines makes the interior angles on the same side less than two right angles, the two straight lines, if produced indefinitely, meet on that side on which the angles are less than two right angles.
+
+The asymmetry is structural. Postulates 1-4 are short, local, constructive — they describe operations you can perform with compass and straightedge. The fifth makes a claim about infinity: lines *will* meet, somewhere, eventually. It is an existential assertion embedded in a constructive framework.
+
+## The 2000-Year Proof Attempt
+
+The history of the parallel postulate is a history of failed reductions. Ptolemy, Proclus, Nasir al-Din al-Tusi, Girolamo Saccheri, Adrien-Marie Legendre, and dozens of others tried to derive the fifth postulate from the first four. Each attempt either smuggled in an equivalent assumption or produced a valid proof of something weaker.
+
+Saccheri&#x27;s approach (1733) is instructive. He assumed the negation of the fifth postulate and attempted proof by contradiction. Instead of finding a contradiction, he generated an internally consistent geometry — what we now call hyperbolic geometry — and, unable to accept it, declared it &quot;repugnant to the nature of the straight line.&quot; The proof was there. He rejected it.
+
+The independence of the fifth postulate was established rigorously in the 19th century by three independent lines of work:
+
+- **Lobachevsky (1829)** and **Bolyai (1832)**: constructed hyperbolic geometry, where through a point not on a line, infinitely many parallels exist.
+- **Riemann (1854)**: constructed elliptic geometry, where through a point not on a line, no parallels exist.
+- **Beltrami (1868)**: proved that if Euclidean geometry is consistent, so are the non-Euclidean alternatives, by constructing models of hyperbolic geometry within Euclidean space.
+
+The fifth postulate is independent: it cannot be proved or disproved from the other four. It is a genuine choice point in the foundations of geometry.
+
+## Equivalent Formulations
+
+The parallel postulate has over a dozen equivalent formulations, each revealing a different aspect of what &quot;Euclidean&quot; means:
+
+- **Playfair&#x27;s axiom**: Through a point not on a given line, exactly one line can be drawn parallel to the given line.
+- **Triangle angle sum**: The angles of every triangle sum to exactly 180 degrees (pi radians).
+- **Pythagorean theorem**: In a right triangle, a^2 + b^2 = c^2.
+- **Similar triangles**: Triangles with equal angles need not be congruent (scaling exists).
+- **Rectangle existence**: A quadrilateral with four right angles exists.
+
+Each equivalence means: deny the parallel postulate and all of these collapse simultaneously. The angle sum of a triangle is not a free-standing fact. It is a consequence of a single axiomatic choice.
+
+## Map Architecture: Colonnade as Axiom
+
+The Euclid_Parallel map is an 11x15 grid with max height 3. Its structure is a classical colonnade — bilateral symmetry around a central axis, height-3 pillars flanking a height-1 path. The symmetry is deliberate: Euclidean geometry feels inevitable, orderly, necessary. The map performs this feeling spatially.
+
+The structure layer encodes the colonnade through alternating height-3 columns and height-1 walkable space. The bilateral symmetry maps Euclid&#x27;s aesthetic: geometry as the most certain knowledge, organized in the most certain way.
+
+Three artifacts populate the interactables layer:
+
+### parallel_lines (row 5, col 3)
+Demonstrates the geometric content of the postulate: two lines and a transversal, with the interior angle condition visible. The lines extend and meet (or don&#x27;t) based on the angle sum.
+
+### angle_sum_triangle (row 5, col 7)
+**@identity essence**: `alpha + beta + gamma = 180 degrees (Euclidean angle sum theorem)`
+
+A triangle whose three interior angles are measured and summed in real time. The sum reads 180 — always, exactly. The critical parameter is curvature: at K=0 (flat, Euclidean), the sum is precisely pi. The artifact makes visible a consequence of the fifth postulate that most people mistake for an independent fact.
+
+The implementation builds a triangle from three `MeshInstance3D` vertices connected by line geometry, with arc meshes at each vertex displaying the angle. A label at the centroid sums the three measurements. In Euclidean space, the sum is always `180.0` regardless of the triangle&#x27;s shape — the artifact can be resized, stretched, rotated, and the sum holds. This invariance IS the postulate, rendered as spatial experience.
+
+### euclid_postulates_plaque (row 7, col 5)
+**@identity essence**: `five axioms; four self-evident, the fifth (parallel postulate) independent and contingent`
+
+A plaque cycling through all five postulates. The critical parameter is `current_postulate`: when it reaches 4 (the fifth postulate, zero-indexed), the color scheme shifts — a warmer, more insistent glow. The design choice is pedagogically precise: the first four read as clean grammar, the fifth as something heavier. The plaque lets the learner feel the asymmetry that generated twenty-three centuries of unease.
+
+The implementation uses `TextMesh` nodes in 3D space, with a cycling mechanism triggered by proximity or interaction. Each postulate appears as a separate text, with the fifth receiving distinct material properties (`emission_energy` boost, color shift to amber). The cycling is deliberate — you cannot skip to the fifth. You must read the ordinary ones first.
+
+## The Formal Structure of Independence
+
+Independence proofs in axiomatic systems follow a template:
+
+1. Start with axiom set {A1, A2, A3, A4, P5}.
+2. Construct a model M1 where {A1, A2, A3, A4, P5} all hold (Euclidean geometry).
+3. Construct a model M2 where {A1, A2, A3, A4, not-P5} all hold (hyperbolic or elliptic geometry).
+4. If both models are consistent, P5 is independent of {A1, A2, A3, A4}.
+
+This is the method of models, and it is the foundational technique for all independence results in mathematics, including those by Godel and Cohen. The Euclid_Parallel map shows only one side — the model where P5 holds. The next map, NonEuclidean_Spaces, shows the other.
+
+## Computational Encoding
+
+The grid system represents the map as three layers (structure, utilities, interactables) on an 11-column, 15-row matrix. Height values in the structure layer encode geometry: `&quot;0&quot;` is void (impassable), `&quot;1&quot;` is floor, `&quot;2&quot;` is wall at height 2, `&quot;3&quot;` is wall at height 3.
+
+The colonnade is encoded as:
+- Row 2-3: alternating `&quot;3&quot;` (pillars) and `&quot;0&quot;` (void outside) with `&quot;1&quot;` (walkable) between pillars
+- Rows 4-13: a wider chamber with `&quot;2&quot;` walls flanking `&quot;1&quot;` floor
+- Row 14: narrowing to an exit gap
+
+The spawn point (`sub:map` at row 2, col 5) places the learner at the colonnade&#x27;s entry, looking down the axis of symmetry. The teleporter (`t` at row 13, col 5) exits to NonEuclidean_Spaces with the prompt: &quot;What if parallel lines could meet?&quot;
+
+## The Angle Sum as Diagnostic
+
+The angle sum of a triangle is the simplest diagnostic for the curvature of the space it inhabits:
+
+| Space | Curvature K | Angle Sum | Parallels through a point |
+|-------|-------------|-----------|---------------------------|
+| Hyperbolic | K &lt; 0 | &lt; 180 degrees | Infinitely many |
+| Euclidean | K = 0 | = 180 degrees | Exactly one |
+| Elliptic | K &gt; 0 | &gt; 180 degrees | None |
+
+The `angle_sum_triangle` artifact in this map always reads 180 degrees because the map exists in Euclidean space. The number is not a measurement of the triangle — it is a measurement of the space. This distinction is the entire point. The triangle does not determine the angle sum. The axiom determines the angle sum. The triangle merely reveals it.
+
+The formula relating angle excess to curvature (the Gauss-Bonnet theorem for a geodesic triangle):
+
+```
+alpha + beta + gamma = pi + integral(K dA)
+```
+
+where K is Gaussian curvature and the integral is over the triangle&#x27;s area. When K = 0, the integral vanishes and the sum is exactly pi. When K is nonzero, the angle sum depends on both curvature and area — larger triangles on a curved surface show more deviation.
+
+This map presents the K = 0 case and lets it feel like the only case. That feeling — of geometric necessity — is what the next six maps systematically dismantle.
+
+## Parallel Axiom in Code
+
+```gdscript
+# The parallel postulate (Euclid&#x27;s 5th): given a line and a point not on it,
+# exactly one line through the point is parallel to the given line.
+class_name EuclideanGeometry
+
+static func parallel_through_point(line_direction: Vector2, through_point: Vector2, point_on_line: Vector2) -&gt; Array:
+    # A line through `through_point` parallel to the given line
+    return [through_point, through_point + line_direction]
+
+static func lines_meet(a_origin: Vector2, a_dir: Vector2, b_origin: Vector2, b_dir: Vector2) -&gt; Vector2:
+    # Intersection of two lines by solving a linear system
+    var det: float = a_dir.x * b_dir.y - a_dir.y * b_dir.x
+    if abs(det) &lt; 0.0001: return Vector2.INF  # parallel
+    var diff: Vector2 = b_origin - a_origin
+    var t: float = (diff.x * b_dir.y - diff.y * b_dir.x) / det
+    return a_origin + a_dir * t
+```
+
+## Testing Parallelism
+
+```gdscript
+static func are_parallel(a_dir: Vector2, b_dir: Vector2) -&gt; bool:
+    var det: float = a_dir.x * b_dir.y - a_dir.y * b_dir.x
+    return abs(det) &lt; 0.0001
+```
+
+## Sum of Angles in a Triangle
+
+```gdscript
+# Euclid&#x27;s 5th postulate implies the triangle angle sum is 180°.
+# In non-Euclidean geometries this fails.
+static func triangle_angle_sum_euclidean(a: Vector2, b: Vector2, c: Vector2) -&gt; float:
+    var ab: Vector2 = b - a
+    var ac: Vector2 = c - a
+    var ba: Vector2 = a - b
+    var bc: Vector2 = c - b
+    var ca: Vector2 = a - c
+    var cb: Vector2 = b - c
+    var angle_a: float = ab.angle_to(ac)
+    var angle_b: float = ba.angle_to(bc)
+    var angle_c: float = ca.angle_to(cb)
+    return abs(angle_a) + abs(angle_b) + abs(angle_c)  # always PI
+```
+
+## Playfair&#x27;s Axiom Restated
+
+```gdscript
+# Playfair&#x27;s axiom (equivalent to Euclid&#x27;s 5th):
+# Given a line and a point not on it, exactly one line through the point is parallel to the given line.
+static func playfair_check(given_line: Array, point: Vector2) -&gt; bool:
+    # Returns true if exactly one parallel exists (always true in Euclidean plane).
+    return true
+```
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Euclid_Parallel/intent.md">Raw captured source</a></p><pre>Concept: The fifth postulate — 2000 years of mathematicians trying to prove that parallel lines never meet, and the discovery that the postulate is independent, not derivable from the other four.
+Sequence role: Opens the Foundations Crisis sequence; the gentlest entry point into formalization&#x27;s limits. Euclid&#x27;s geometry feels obvious, inevitable — which makes the revelation that its fifth axiom is a choice, not a truth, genuinely destabilizing. Prepares NonEuclidean_Spaces by establishing what will be broken.
+Technical angle: Euclid&#x27;s five postulates, the logical structure of axiomatic systems, attempts at proof by contradiction that accidentally generated non-Euclidean geometries. The parallel_line_demo and euclid_parallel_demo make the postulate interactive — drag the lines and observe.
+Critical angle: The fifth postulate&#x27;s 2000-year resistance to proof is the first hint that formal systems have structural limits. What feels like geometric truth is actually a contingent choice. This is the QFEP F-term at its most seductive: order so compelling it appears necessary rather than constructed.
+Key artifacts: euclid_parallel_demo demonstrates the postulate interactively; parallel_line_demo provides the geometric construction.
+Gap: A side-by-side showing the same construction with the fifth postulate true vs false would make the independence dramatically visible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Euclid_Parallel/critical.md">Raw captured source</a></p><pre># Euclid_Parallel — Critical Reflection
+
+## The Rule That Could Not Be Proven
+
+For twenty-three centuries, mathematicians treated Euclid&#x27;s fifth postulate as an embarrassment — not wrong, but ungainly. The first four postulates are clean: a line can be drawn between any two points; a line segment can be extended; a circle can be drawn with any center and radius; all right angles are equal. Then the fifth: if a line crosses two other lines and the interior angles on one side sum to less than two right angles, the two lines will meet on that side. It reads like a theorem masquerading as an axiom. It protests too much.
+
+Ludwig Wittgenstein would hear in this a language game breaking down. The first four postulates function as grammar — they define what counts as a geometric move, the way rules of chess define what counts as a legal move. The fifth postulate tries to be grammar but behaves like a proposition. It makes a claim about what will happen (the lines will meet) rather than defining what is permitted. The discomfort mathematicians felt for two millennia was the discomfort of a rule that does not sit cleanly in its own language game. It works. Everyone uses it. But it sounds like it should be provable, and it isn&#x27;t.
+
+## The State of Exception
+
+Giorgio Agamben writes about the state of exception — the moment when the law suspends itself to preserve itself. The parallel postulate is the geometric state of exception. Euclidean geometry cannot function without it (parallel lines, similar triangles, the Pythagorean theorem all depend on it), but the system cannot generate it from within. It must be declared. The postulate is sovereign in Agamben&#x27;s sense: it stands both inside and outside the system. Inside, because every proof uses it. Outside, because no proof produces it.
+
+The room makes this visible. The colonnade of parallel pillars — height-3, bilateral symmetry, stone-certain — is the geometry performing its own stability. Walk between the pillars and you are inside the assumption. The angle-sum triangle reads 180°. Always. This is not measurement. It is consequence. The walls are parallel because the postulate says they are. The architecture is the axiom made spatial.
+
+## Performativity of the Obvious
+
+Judith Butler argues that gender is not expressed but performed — repeated acts that create the appearance of a stable identity. The parallel postulate performs geometric certainty in exactly this way. Every time a student draws parallel lines, every time an architect lays a grid, every time a programmer initializes a Cartesian coordinate system, the fifth postulate is performed. Through repetition, it becomes obvious. Through obviousness, it becomes invisible. Through invisibility, it becomes necessary.
+
+But it is not necessary. Lobachevsky, Bolyai, and Riemann each showed that you can build consistent geometries where the fifth postulate is false — where lines through a point can diverge infinitely or where all lines eventually meet. The postulate is a choice. The room does not show the alternatives (that comes in the next map, NonEuclidean_Spaces). Here, the learner stands inside the assumption and feels how solid it is. The critical move is recognizing that solidity is not proof. It is performance.
+
+## What the Axiom Conceals
+
+The plaque artifact presents all five postulates. The learner can cycle through them. The design choice — one plaque, all five — implies equivalence. But the postulates are not equivalent. The first four are constructive: they say what you can do. The fifth is existential: it says what will happen. This category error — smuggling an existential claim into a constructive framework — is what generated twenty-three centuries of failed proofs. Everyone could see the fifth was different. Nobody could say precisely how, until the independence proofs made the difference structural.
+
+The QFEP connection is direct. The F-term (free energy, order, prediction) is the drive toward certainty — toward systems where everything follows from first principles. Euclid&#x27;s geometry is the most successful F-term system in human history. The fifth postulate is the crack in that success. Not a contradiction (the system is consistent) but a limit (the system cannot justify its own foundation). This is the foundationscrisis sequence&#x27;s opening move: showing that the most stable structure in mathematics stands on a decision, not a truth.
+
+The angle sum of a triangle is not a fact about triangles. It is a fact about the space they inhabit. And the space is a choice.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Euclid_Parallel/artifacts.md">Raw captured source</a></p><pre># Euclid Parallel — Artifacts
+*Foundations Crisis: The Limits of Formalization · synthesis · 4 artifacts*
+
+&gt; Five axioms. Four are obvious. The fifth is not.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## parallel_lines
+![parallel_lines](/scene-catalog/parallel_lines.png)
+
+Three line modules arranged in parallel to visualize equidistant lines.
+
+`parallel_lines`
+
+## Angle Sum Triangle
+![Angle Sum Triangle](/scene-catalog/angle_sum_triangle.png)
+
+Demonstrates that triangle angles sum to 180° in Euclidean space — a fact that fails in non-Euclidean geometries
+
+`angle_sum_triangle`
+
+## Euclid Postulates Plaque
+![Euclid Postulates Plaque](/scene-catalog/euclid_postulates_plaque.png)
+
+Interactive plaque displaying Euclid&#x27;s five postulates, highlighting the controversial fifth (parallel) postulate
+
+`euclid_postulates_plaque`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Euclid_Parallel/summary.md">Raw captured source</a></p><pre># Euclid_Parallel — Summary
+
+The opening map of the foundationscrisis sequence. An 11x15 grid, max height 3, shaped as a classical colonnade with bilateral symmetry — height-3 pillars flanking a central walkway that opens into a wider chamber. The map performs Euclidean certainty as spatial experience: parallel walls, right angles, geometric order so complete it feels inevitable.
+
+Three artifacts occupy the chamber. `parallel_lines` demonstrates the parallel postulate geometrically — two lines and a transversal with the angle condition visible. `angle_sum_triangle` displays a triangle whose angles always sum to 180 degrees, making the axiom&#x27;s consequence tangible. `euclid_postulates_plaque` at the center cycles through all five of Euclid&#x27;s postulates; the first four read as terse grammar, the fifth — the parallel postulate — glows differently, longer and more elaborate, the one axiom that could not be proved from the others despite twenty-three centuries of attempts.
+
+The map&#x27;s role in the sequence is to establish what will break. Euclid&#x27;s geometry is the most successful formal system in human history, and the parallel postulate is its load-bearing assumption. The learner stands inside the assumption and feels how solid it is. The critical insight — that this solidity rests on a choice, not a proof — unfolds across the maps that follow. The teleporter at the exit asks: &quot;What if parallel lines could meet?&quot;
+
+Position: map 1 of 8 in foundationscrisis. Difficulty: intermediate. Estimated time: 4-5 minutes. Follows from the primitives and randomness prerequisites. Leads directly to NonEuclidean_Spaces, where the fifth postulate is denied and alternatives are built.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Euclid_Parallel/blurb.md">Raw captured source</a></p><pre>Five axioms. Four are obvious. The fifth is not.
+
+Through a point not on a line, exactly one parallel can be drawn. Euclid stated it. Twenty-three centuries of mathematicians tried to prove it from the other four. None succeeded. The colonnade frames this certainty in stone — height-3 pillars running parallel, bilateral symmetry so total it feels inevitable. A plaque presents all five postulates. Cycle through them. The first four are terse, self-evident. The fifth is longer, more elaborate, almost defensive. It protests too much.
+
+Triangles here sum to 180°. Always. That fact is not a discovery — it is a consequence of the postulate you haven&#x27;t questioned yet. The geometry feels stable because you are standing inside its assumption. What holds the walls parallel is not proof but axiom. An axiom is a decision dressed as a truth.</pre></section></body></html>

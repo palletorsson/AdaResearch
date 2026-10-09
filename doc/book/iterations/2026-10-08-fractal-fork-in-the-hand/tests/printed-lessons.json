@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "name": "Recursion printed default makes exactly three frames",
+      "passed": true
+    },
+    {
+      "name": "Default frame sizes follow the printed reduction",
+      "passed": true
+    },
+    {
+      "name": "Independent half-size exercise produces 1.8, 0.9, 0.45",
+      "passed": true
+    },
+    {
+      "name": "Zero depth emits no geometry",
+      "passed": true
+    },
+    {
+      "name": "Negative scripted depth is safely bounded",
+      "passed": true
+    },
+    {
+      "name": "Scripted excess depth and ratio stop after seven frames",
+      "passed": true
+    },
+    {
+      "name": "Small-size cutoff can stop before the depth budget",
+      "passed": true
+    },
+    {
+      "name": "Complete supplied line renderer produces finite nonzero sides",
+      "passed": true
+    },
+    {
+      "name": "Rebuilding retains exactly four sides per recorded frame",
+      "passed": true
+    },
+    {
+      "name": "Printed tree generation 1 produces expected count",
+      "passed": true
+    },
+    {
+      "name": "Printed tree generation 3 produces expected count",
+      "passed": true
+    },
+    {
+      "name": "Printed tree generation 4 produces expected count",
+      "passed": true
+    },
+    {
+      "name": "Printed PointBody acquires actual XRTools hand driver",
+      "passed": true
+    },
+    {
+      "name": "Supplied hand pose turns the student subtree under rotated station",
+      "passed": true
+    },
+    {
+      "name": "Student's untouched subtree retains all world endpoints",
+      "passed": true
+    },
+    {
+      "name": "Local inheritance preserves all parent attachments and count",
+      "passed": true
+    },
+    {
+      "name": "Coincident input has no arbitrary direction",
+      "passed": true
+    },
+    {
+      "name": "Downward input obeys stated interface bound",
+      "passed": true
+    },
+    {
+      "name": "Released student point returns to its fixed-length tip",
+      "passed": true
+    },
+    {
+      "name": "Printed desktop adapter also steers the same fork",
+      "passed": true
+    },
+    {
+      "name": "Desktop drop clears student held state",
+      "passed": true
+    },
+    {
+      "name": "Independent ratio exercise changes child length without changing count",
+      "passed": true
+    },
+    {
+      "name": "Student tree clamps scripted generation excess to 31",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Code extracted verbatim from both tutorial.md files; real Godot execution and actual XRTools/desktop pickup paths with supplied poses. Does not establish human comprehension."
+}

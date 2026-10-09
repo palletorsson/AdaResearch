@@ -1,0 +1,62 @@
+{
+	"cases": [
+		{
+			"body_group": "",
+			"body_layer": 1,
+			"case": "unrelated_layer1",
+			"detector_entered": false,
+			"detector_mask": 524288,
+			"expected_collection": false,
+			"identity_recognised": false,
+			"outside_unchanged": true,
+			"passed": false,
+			"removed": false,
+			"score_delta": 0
+		},
+		{
+			"body_group": "em_walker",
+			"body_layer": 1,
+			"case": "museum_walker_layer1",
+			"detector_entered": false,
+			"detector_mask": 524288,
+			"expected_collection": true,
+			"identity_recognised": false,
+			"outside_unchanged": true,
+			"passed": false,
+			"removed": false,
+			"score_delta": 0
+		},
+		{
+			"body_group": "player_body",
+			"body_layer": 524288,
+			"case": "xr_player_layer20",
+			"detector_entered": true,
+			"detector_mask": 524288,
+			"expected_collection": true,
+			"identity_recognised": true,
+			"outside_unchanged": true,
+			"passed": true,
+			"removed": true,
+			"score_delta": 1
+		},
+		{
+			"body_group": "em_walker",
+			"body_layer": 1,
+			"case": "museum_demo_stays",
+			"detector_entered": false,
+			"detector_mask": 524288,
+			"expected_collection": false,
+			"identity_recognised": false,
+			"outside_unchanged": true,
+			"passed": true,
+			"removed": false,
+			"score_delta": 0
+		}
+	],
+	"failures": [
+		"unrelated_layer1",
+		"museum_walker_layer1"
+	],
+	"passed": false,
+	"scope": "Actual pickup packed scene; genuine Area3D body_entered overlap from teleported capsules. No collect/handler forcing. Test body uses the museum capsule dimensions but does not prove approach or exit."
+}

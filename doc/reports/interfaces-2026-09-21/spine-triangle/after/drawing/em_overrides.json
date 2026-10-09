@@ -1,0 +1,1113 @@
+{
+ "_readme": "Hand placement rulings over em_plan.json, written by the in-museum editor (--em-edit). Applied by _deal_from_plan on top of the negotiated plan; keyed (chapter, token, from-cell) so they survive plan regeneration. An override whose row the negotiator no longer places is reported idle, never guessed.",
+ "overrides": [
+  {
+   "chapter": "primitives",
+   "from": [
+    12.0,
+    15.0
+   ],
+   "offset": [
+    0.0,
+    0.8,
+    0.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 0.0,
+   "to": [
+    12.0,
+    15.0
+   ],
+   "token": "VectorBasics"
+  },
+  {
+   "chapter": "primitives",
+   "index": 25.0,
+   "kind": "showing",
+   "offset": [
+    2.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 15.0,
+   "kind": "furniture",
+   "offset": [
+    2.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "rotation": 345.0,
+   "token": "lab_stool"
+  },
+  {
+   "chapter": "primitives",
+   "index": 13.0,
+   "kind": "furniture",
+   "provenance": "hand",
+   "remove": true,
+   "token": "floor_grate"
+  },
+  {
+   "chapter": "primitives",
+   "index": 32.0,
+   "kind": "showing",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 14.0,
+   "kind": "furniture",
+   "offset": [
+    0.0,
+    -0.2,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "fire_hose_box"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    12.0
+   ],
+   "offset": [
+    0.0,
+    1.4,
+    0.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 15.0,
+   "to": [
+    7.0,
+    12.0
+   ],
+   "token": "fontana_puncture"
+  },
+  {
+   "chapter": "primitives",
+   "index": 16.0,
+   "kind": "showing",
+   "offset": [
+    -3.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "gate_x": 10.0,
+   "gate_z": 4.0,
+   "index": 0.0,
+   "kind": "gate",
+   "pearl": "point lines",
+   "provenance": "web",
+   "token": "gate:point lines"
+  },
+  {
+   "chapter": "",
+   "from": [
+    3.0,
+    3.0
+   ],
+   "kind": "plinth",
+   "offset": [
+    7.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "to": [
+    7.0,
+    -1.0
+   ],
+   "token": "origin"
+  },
+  {
+   "chapter": "primitives",
+   "index": 17.0,
+   "kind": "showing",
+   "offset": [
+    -8.0,
+    0.0,
+    -3.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 9.0,
+   "kind": "showing",
+   "offset": [
+    3.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 22.0,
+   "kind": "showing",
+   "offset": [
+    1.0,
+    0.4,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.4,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "gate_x": 20.0,
+   "gate_z": 0.5,
+   "index": 0.0,
+   "kind": "gate",
+   "provenance": "hand",
+   "token": "gate:point one"
+  },
+  {
+   "chapter": "",
+   "from": [
+    10.0,
+    10.0
+   ],
+   "offset": [
+    0.0,
+    0.2,
+    0.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 0.0,
+   "to": [
+    7.0,
+    12.0
+   ],
+   "token": "you_are_here"
+  },
+  {
+   "chapter": "",
+   "from": [
+    10.0,
+    10.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 135.0,
+   "to": [
+    6.0,
+    9.0
+   ],
+   "token": "you_are_here"
+  },
+  {
+   "chapter": "primitives",
+   "index": 28.0,
+   "kind": "showing",
+   "offset": [
+    -1.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 8.0,
+   "kind": "prop",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "electrical_panel"
+  },
+  {
+   "chapter": "primitives",
+   "index": 23.0,
+   "kind": "showing",
+   "offset": [
+    -1.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "prop",
+   "offset": [
+    -8.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "exit_sign"
+  },
+  {
+   "chapter": "",
+   "index": 11.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "cable_tray"
+  },
+  {
+   "chapter": "",
+   "from": [
+    6.0,
+    8.0
+   ],
+   "kind": "plinth",
+   "offset": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "rotation": 30.0,
+   "token": "parallel_line_puzzle"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    8.0
+   ],
+   "kind": "plinth",
+   "offset": [
+    0.0,
+    2.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "parallel_line_puzzle"
+  },
+  {
+   "chapter": "",
+   "index": 14.0,
+   "kind": "furniture",
+   "offset": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "lab_stool"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 0.0,
+   "scale": 1.9,
+   "to": [
+    7.0,
+    3.0
+   ],
+   "token": "walk_this_line_marking"
+  },
+  {
+   "chapter": "primitives",
+   "index": 7.0,
+   "kind": "showing",
+   "offset": [
+    6.0,
+    0.0,
+    -5.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    0.0,
+    -1.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:extinguisher"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -2.0,
+    0.0,
+    4.0
+   ],
+   "provenance": "hand",
+   "rotation": 90.0,
+   "token": "lobby:elevator"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "furniture",
+   "provenance": "hand",
+   "rotation": 305.0,
+   "token": "lobby:pallet"
+  },
+  {
+   "chapter": "",
+   "from": [
+    13.0,
+    5.0
+   ],
+   "kind": "plinth",
+   "offset": [
+    -1.0,
+    0.0,
+    -3.0
+   ],
+   "provenance": "hand",
+   "token": "origin"
+  },
+  {
+   "chapter": "primitives",
+   "index": 6.0,
+   "kind": "showing",
+   "offset": [
+    -2.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "from": [
+    10.0,
+    3.0
+   ],
+   "kind": "plinth",
+   "provenance": "hand",
+   "token": "origin"
+  },
+  {
+   "chapter": "",
+   "index": 7.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "ceiling_vent"
+  },
+  {
+   "chapter": "primitives",
+   "index": 4.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 90.0,
+   "scale": 1.7,
+   "to": [
+    7.0,
+    2.0
+   ],
+   "token": "walk_this_line_marking"
+  },
+  {
+   "chapter": "",
+   "from": [
+    1.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 0.0,
+   "scale": 2.0,
+   "to": [
+    1.0,
+    3.0
+   ],
+   "token": "line"
+  },
+  {
+   "chapter": "",
+   "from": [
+    3.0,
+    2.0
+   ],
+   "kind": "plinth",
+   "provenance": "hand",
+   "token": "modulor_man_demo"
+  },
+  {
+   "chapter": "primitives",
+   "index": 18.0,
+   "kind": "showing",
+   "offset": [
+    2.0,
+    -1.4,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 90.0,
+   "scale": 1.5,
+   "to": [
+    7.0,
+    3.0
+   ],
+   "token": "walk_this_line_marking"
+  },
+  {
+   "chapter": "",
+   "from": [
+    8.0,
+    3.0
+   ],
+   "kind": "plinth",
+   "provenance": "hand",
+   "token": "origin"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "furniture",
+   "provenance": "hand",
+   "token": "lobby:point_zero"
+  },
+  {
+   "chapter": "",
+   "index": 4.0,
+   "kind": "prop",
+   "offset": [
+    0.0,
+    0.0,
+    4.0
+   ],
+   "provenance": "hand",
+   "token": "info_screen"
+  },
+  {
+   "chapter": "",
+   "index": 5.0,
+   "kind": "prop",
+   "offset": [
+    -1.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "whiteboard"
+  },
+  {
+   "chapter": "primitives",
+   "index": 14.0,
+   "kind": "showing",
+   "offset": [
+    -4.0,
+    0.0,
+    -4.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 7.0,
+   "kind": "prop",
+   "offset": [
+    -1.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "large_window"
+  },
+  {
+   "chapter": "",
+   "index": 10.0,
+   "kind": "furniture",
+   "offset": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "fire_hose_box"
+  },
+  {
+   "chapter": "",
+   "index": 13.0,
+   "kind": "furniture",
+   "offset": [
+    0.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "fire_hose_box"
+  },
+  {
+   "chapter": "",
+   "index": 11.0,
+   "kind": "furniture",
+   "offset": [
+    2.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "floor_grate"
+  },
+  {
+   "chapter": "primitives",
+   "index": 20.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 6.0,
+   "kind": "prop",
+   "provenance": "hand",
+   "remove": true,
+   "token": "electrical_panel"
+  },
+  {
+   "chapter": "",
+   "index": 6.0,
+   "kind": "furniture",
+   "offset": [
+    -4.0,
+    0.0,
+    9.0
+   ],
+   "provenance": "hand",
+   "token": "ceiling_vent"
+  },
+  {
+   "chapter": "primitives",
+   "index": 5.0,
+   "kind": "showing",
+   "offset": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "from": [
+    6.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 90.0,
+   "scale": 1.5,
+   "to": [
+    6.0,
+    3.0
+   ],
+   "token": "walk_this_line_marking"
+  },
+  {
+   "chapter": "",
+   "from": [
+    7.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "remove": false,
+   "rotation": 90.0,
+   "scale": 1.8,
+   "to": [
+    7.0,
+    3.0
+   ],
+   "token": "walk_this_line_marking"
+  },
+  {
+   "chapter": "transformation",
+   "index": 11.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 4.0,
+   "kind": "prop",
+   "offset": [
+    0.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "electrical_panel"
+  },
+  {
+   "chapter": "",
+   "index": 2.0,
+   "kind": "prop",
+   "provenance": "hand",
+   "remove": true,
+   "token": "wall_clock"
+  },
+  {
+   "chapter": "",
+   "index": 6.0,
+   "kind": "furniture",
+   "offset": [
+    0.2,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "fire_hose_box"
+  },
+  {
+   "chapter": "transformation",
+   "index": 1.0,
+   "kind": "showing",
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "transformation",
+   "index": 2.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "transformation",
+   "index": 0.0,
+   "kind": "showing",
+   "offset": [
+    1.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "transformation",
+   "index": 3.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:view"
+  },
+  {
+   "chapter": "",
+   "index": 5.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "cable_tray"
+  },
+  {
+   "chapter": "",
+   "index": 9.0,
+   "kind": "furniture",
+   "offset": [
+    8.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "ceiling_vent"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -3.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:window"
+  },
+  {
+   "chapter": "primitives",
+   "index": 11.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "floor_grate"
+  },
+  {
+   "chapter": "primitives",
+   "index": 1.0,
+   "kind": "showing",
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 4.0,
+   "kind": "prop",
+   "offset": [
+    9.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "rotation": 180.0,
+   "token": "info_screen"
+  },
+  {
+   "chapter": "primitives",
+   "index": 10.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "remove": true,
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 15.0,
+   "kind": "showing",
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:extinguisher"
+  },
+  {
+   "chapter": "primitives",
+   "index": 8.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    -2.0
+   ],
+   "provenance": "hand",
+   "token": "fire_hose_box"
+  },
+  {
+   "chapter": "primitives",
+   "gate_x": 5.0,
+   "index": 0.0,
+   "kind": "gate",
+   "provenance": "hand",
+   "token": "gate:primitives melencolia"
+  },
+  {
+   "chapter": "primitives",
+   "index": 3.0,
+   "kind": "showing",
+   "offset": [
+    1.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 6.0,
+   "kind": "prop",
+   "offset": [
+    -4.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "electrical_panel"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    4.0,
+    0.0,
+    2.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:point_zero"
+  },
+  {
+   "chapter": "primitives",
+   "index": 2.0,
+   "kind": "prop",
+   "offset": [
+    -3.0,
+    0.0,
+    -1.0
+   ],
+   "provenance": "hand",
+   "token": "emergency_button"
+  },
+  {
+   "chapter": "primitives",
+   "index": 12.0,
+   "kind": "furniture",
+   "offset": [
+    -2.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "cable_tray"
+  },
+  {
+   "chapter": "primitives",
+   "index": 5.0,
+   "kind": "prop",
+   "offset": [
+    12.0,
+    0.0,
+    -2.0
+   ],
+   "provenance": "hand",
+   "rotation": 180.0,
+   "token": "info_screen"
+  },
+  {
+   "chapter": "primitives",
+   "index": 8.0,
+   "kind": "prop",
+   "offset": [
+    -4.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "electrical_panel"
+  },
+  {
+   "chapter": "primitives",
+   "index": 11.0,
+   "kind": "showing",
+   "offset": [
+    2.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 8.0,
+   "kind": "showing",
+   "offset": [
+    0.0,
+    0.0,
+    -3.0
+   ],
+   "provenance": "hand",
+   "token": "showing"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "lobby:view"
+  },
+  {
+   "chapter": "primitives",
+   "index": 10.0,
+   "kind": "furniture",
+   "offset": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "provenance": "hand",
+   "token": "ceiling_vent"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "prop",
+   "offset": [
+    0.0,
+    0.0,
+    -3.0
+   ],
+   "provenance": "hand",
+   "token": "exit_sign"
+  },
+  {
+   "chapter": "primitives",
+   "index": 11.0,
+   "kind": "furniture",
+   "offset": [
+    3.0,
+    0.0,
+    1.0
+   ],
+   "provenance": "hand",
+   "token": "ceiling_vent"
+  },
+  {
+   "chapter": "primitives",
+   "index": 0.0,
+   "kind": "furniture",
+   "offset": [
+    -7.0,
+    0.0,
+    3.0
+   ],
+   "provenance": "hand",
+   "token": "pink_gun"
+  },
+  {
+   "chapter": "transformation",
+   "gate_x": 10,
+   "index": 0,
+   "kind": "gate",
+   "provenance": "hand",
+   "token": "gate:trans rotationspectacle"
+  }
+ ],
+ "schema": "adaresearch.em_overrides.v1"
+}

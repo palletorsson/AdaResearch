@@ -1,0 +1,132 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -15,9 +15,10 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_One/final.md",
+-    "text_sha256": "d95396170ac5e826cd4013b9963ca17d1472dab369031c46b68b0830af0dd4d7",
++    "text_sha256": "c2535d3e2200087b57aa497db5447561600922e8f87fb3f65eb8f74e5386feb2",
+     "map_sha256": "3205471c1850d7e5b8618fb03c69ab76bce17981d4d2db9567e50b0a0d772689",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_One"
+   },
+   "Point_Lines": {
+     "primary_tokens": [
+@@ -31,9 +32,10 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_Lines/final.md",
+-    "text_sha256": "813522cc9fbb898583c37dbeb7c6d5fb969fd52019c15e975ff94a64cb3c7933",
++    "text_sha256": "70aca9269910ee3de32941495c9ff3f8342f36ae72719aab43c7ad4d9a94d22a",
+     "map_sha256": "24be7cf9844a669f31a0128ba8c3468ca1a10256b9f1eae48fb9384227ed0107",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_Lines"
+   },
+   "Point_Trace": {
+     "primary_tokens": [
+@@ -48,9 +50,10 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_Trace/final.md",
+-    "text_sha256": "79f0f423314a742d7ff5c2e2c7f9656b7cac61c6e6ecbfc3666f0657fd3e24ea",
++    "text_sha256": "282e0f90d92923e4c9a60ec9f3116e93b283de272a93b16ffe7111242535d25c",
+     "map_sha256": "b8148605426c230b334917862c4b72f31ebb285885c627c6723cd279863d7974",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_Trace"
+   },
+   "Point_Line_Grid": {
+     "primary_tokens": [
+@@ -63,9 +66,10 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_Line_Grid/final.md",
+-    "text_sha256": "4b555b97d34557bb830e03a8c69b073a791e81ae734fbba7cb31a48152d6c5d1",
++    "text_sha256": "99275a5b4e6c62b40fc695e422265a1e13e5dfa93f565275e11f4420d8f28361",
+     "map_sha256": "bbfbfe6df30991997a87e1d2f5648dfb2e7b5682b23235a8ad1a4a1f0660116a",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_Line_Grid"
+   },
+   "Point_Triangle_Context": {
+     "primary_tokens": [
+@@ -77,9 +81,10 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_Triangle_Context/final.md",
+-    "text_sha256": "6d932ef3d8873827c760d28b55cc54e3d17ccd1b02b9bd335dd2fcb4a8e1cef3",
++    "text_sha256": "0c260d2d9e55008064c0c48e1a9f118558f4814b3169f96d0e748e66014bbcf8",
+     "map_sha256": "0f7a8c372a1397d37f3056140c7d08fc582b1ad4c0ae5702dcc7dae45bd56112",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_Triangle_Context"
+   },
+   "Primitives_Polythedra": {
+     "primary_tokens": [
+@@ -94,9 +99,10 @@
+     "status": "implemented_component_verified",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Primitives_Polythedra/final.md",
+-    "text_sha256": "d75c4fe6ba5e1c6032bed9d53f9e4b44b6a66fdccee83e2e771103f880c03966",
++    "text_sha256": "0fb816feeb652c101e979705e8e8877088bc2ebde6f9939be76e8553fb6ad52b",
+     "map_sha256": "a8f6d88b3693af029a4e0f4673c41d168bd6bfc1e8f43d555950d8a3a119af30",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Primitives_Polythedra"
+   },
+   "Point_Animatedcube": {
+     "primary_tokens": [
+@@ -109,9 +115,10 @@
+     "status": "implemented_component_verified",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Point_Animatedcube/final.md",
+-    "text_sha256": "a9d0ab768cc1f520138462d7d5049424d0645874d2d43fc7418892ca1f376af1",
++    "text_sha256": "11f26aedca132d594d201e437f86cf45813c6e24a785888ce46cb44552371a2f",
+     "map_sha256": "558ae666fe715888ab6396804d78ced4299df8af873727e906acc68e99cebb52",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_Animatedcube"
+   },
+   "Primitives_Ignorance": {
+     "primary_tokens": [
+@@ -126,9 +133,10 @@
+     "status": "implemented_component_verified",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Primitives_Ignorance/final.md",
+-    "text_sha256": "6220cac4cf90073132ff99faec2af67a95fc1876619420d27c9815ea33e82401",
++    "text_sha256": "e6331557fa746746796884d30e8c38f9e4c922c5f4512a48f23e4c6ce7edc376",
+     "map_sha256": "41100bba1dcd2999d9512ef1736a58ad3462e3f4d581f790ace23b0de6f998ce",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Primitives_Ignorance"
+   },
+   "Primitives_Portals": {
+     "primary_tokens": [
+@@ -139,9 +147,10 @@
+     "status": "implemented_component_verified",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Primitives_Portals/final.md",
+-    "text_sha256": "0d0b868043217c1ae0a460a1eedc0d1b5039ba3fe80f370cd06ab0164bc8cc21",
+-    "map_sha256": "2d9b67d3e1a4cf54078fcdddd69f816af10ee59a0826c3f9427d85b4bc5bf171",
+-    "learner_verified": false
++    "text_sha256": "35d5bac65b9fc01fab09c142c74f52190f86986f7d51ab50dc4466dc6692bcf7",
++    "map_sha256": "361ea85006f73673447b111225801be17a8bc83ac327e4a3471c7922bc4e60ff",
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Primitives_Portals"
+   },
+   "Primitives_Melencolia": {
+     "primary_tokens": [
+@@ -156,8 +165,9 @@
+     "status": "existing_text_retained",
+     "sequence": "primitives",
+     "text_path": "commons/maps/Primitives_Melencolia/final.md",
+-    "text_sha256": "710223a39ee1ad19c84e6eedcb9f6898d6f459a52f17fd12b80788e6e620aef6",
++    "text_sha256": "a30a1c46288cf308e9d0be6bf2982442e18288e939e8d81c851f0a54c5702916",
+     "map_sha256": "663f2cd9c0a800d52323c739478b84bc3a267f0bfd8d8c614d3677bd469da613",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Primitives_Melencolia"
+   }
+ }

@@ -1,0 +1,47 @@
+{
+  "checks": 20,
+  "evidence": {
+    "arrival_body_bounds": "[P: (12.33, 0.03, 20.95), S: (2.34, 1.8, 1.099998)]",
+    "artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "station_plinth",
+      "bubbles_random",
+      "mushrooms",
+      "silhouette_arrivals",
+      "couture_comparison",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent"
+    ],
+    "spawn": "(7.5, 0.000683, 5.5)",
+    "stations": {
+      "couture_comparison": {
+        "collision": [],
+        "origin": "(8.5, 0.0, 24.5)",
+        "standing": "(8.5, 0.0, 22.23)",
+        "standing_z": 22.2299995422363
+      },
+      "mushrooms": {
+        "collision": [],
+        "origin": "(8.5, 0.0, 15.5)",
+        "standing": "(8.5, 0.0, 9.83)",
+        "standing_z": 9.82999992370605
+      },
+      "silhouette_arrivals": {
+        "collision": [],
+        "origin": "(13.5, 0.0, 21.5)",
+        "standing": "(13.5, 0.0, 19.28)",
+        "standing_z": 19.2800006866455
+      }
+    }
+  },
+  "failures": [],
+  "headset_tested": false
+}

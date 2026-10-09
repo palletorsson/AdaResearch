@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "name": "Printed construction creates eighty states, supports, point and label",
+      "passed": true
+    },
+    {
+      "name": "Four axial neighbours, no centre or diagonals",
+      "passed": true
+    },
+    {
+      "name": "Only health strictly above half contributes",
+      "passed": true
+    },
+    {
+      "name": "Boundary has no wraparound contribution",
+      "passed": true
+    },
+    {
+      "name": "Presence subtracts .04 without simultaneous recovery",
+      "passed": true
+    },
+    {
+      "name": "Update preserves previous dictionary",
+      "passed": true
+    },
+    {
+      "name": "Exactly radius is outside decay; vertical separation counts",
+      "passed": true
+    },
+    {
+      "name": "Missing input permits .04 recovery from four neighbours",
+      "passed": true
+    },
+    {
+      "name": "Decay clamps at zero",
+      "passed": true
+    },
+    {
+      "name": "Recovery clamps at one",
+      "passed": true
+    },
+    {
+      "name": "Entirely depleted field stays empty after withdrawal",
+      "passed": true
+    },
+    {
+      "name": "SYNC chain middle rises but next neighbour waits",
+      "passed": true
+    },
+    {
+      "name": "SYNC reverse gives identical field",
+      "passed": true
+    },
+    {
+      "name": "Forward SCAN permits within-pass propagation",
+      "passed": true
+    },
+    {
+      "name": "Reverse SCAN makes that neighbour wait",
+      "passed": true
+    },
+    {
+      "name": "160 updates across sources and schedules match installed solver",
+      "passed": false
+    },
+    {
+      "name": "Twenty-one nearby updates remove W support at .16",
+      "passed": true
+    },
+    {
+      "name": "Healthy boundary permits recovery after withdrawal",
+      "passed": true
+    },
+    {
+      "name": "Native floor support crosses at .2; lower tray always receives",
+      "passed": true
+    },
+    {
+      "name": "Wall backing stays solid for every health",
+      "passed": true
+    },
+    {
+      "name": "Floor and wall W share one changing material",
+      "passed": true
+    },
+    {
+      "name": "Independent .49 beginning reaches .5 but cannot pass recovery onward",
+      "passed": true
+    },
+    {
+      "name": "Using new buffer for SYNC fails third-cell prediction",
+      "passed": true
+    },
+    {
+      "name": "Ignoring height fails out-of-radius prediction",
+      "passed": true
+    },
+    {
+      "name": "Held point converts world position back through table scale",
+      "passed": true
+    },
+    {
+      "name": "Held trigger advances once using its current centre",
+      "passed": true
+    },
+    {
+      "name": "Moving held point upward switches decay to recovery",
+      "passed": true
+    },
+    {
+      "name": "Release parks locally in a rotated study",
+      "passed": true
+    },
+    {
+      "name": "Released point has no proximity influence",
+      "passed": true
+    },
+    {
+      "name": "Enter steps once and ignores repeat",
+      "passed": true
+    },
+    {
+      "name": "Order controls reset time and preserve CHAIN",
+      "passed": true
+    },
+    {
+      "name": "Full reset clears chain; capacity holds at thirty seconds",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "160 updates across sources and schedules match installed solver"
+  ],
+  "passed": false,
+  "scope": "Exact printed blocks, installed solver parity, native renderer/collision, supplied XRTools poses, transfer and two deliberate faults. No physical headset or independent student."
+}

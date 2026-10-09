@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "transformation",
+    "phase": "F_order",
+    "description": "Seven halls: operations, passage, permission, rotated space, relative scale, bodily input and timed obstruction. Scale is not a rigid motion."
+  },
+  "beats": [
+    {
+      "id": "T0",
+      "role": "GATEWAY",
+      "concept": "arrival from primitives — the static shape is about to move",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "bleed_from": [
+        "primitives"
+      ],
+      "next": "T0b"
+    },
+    {
+      "id": "T0b",
+      "role": "INTRODUCE",
+      "concept": "Collect a still cube. Add rising, turning and swelling to its moving demonstrations, then walk a ramp to the completed pickups.",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "Trans_Pre"
+      ],
+      "next": "T1"
+    },
+    {
+      "id": "T1",
+      "role": "INTRODUCE",
+      "concept": "Cross by translation, scale and rotation; then slide the far bank while the plank keeps its original motion. Which part of the crossing did the background supply?",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Introduction"
+      ],
+      "bleed_to": [
+        "primitives"
+      ],
+      "next": "T2"
+    },
+    {
+      "id": "T2",
+      "role": "DEMONSTRATE",
+      "concept": "Seven journeys separate and combine x, y and z. At the exit, two hand-operated mechanisms share a destination but permit different paths.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Translation"
+      ],
+      "next": "T4"
+    },
+    {
+      "id": "T4",
+      "role": "DEMONSTRATE",
+      "concept": "Cross a level Y bridge; ride an upright end-platform forward around X or sideways around Z. Compare two body widths in the rotated arrays, then enter the tunnel and repeated cake profiles.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Rotation"
+      ],
+      "bleed_to": [
+        "wavefunctions"
+      ],
+      "next": "T6"
+    },
+    {
+      "id": "T6",
+      "role": "DEMONSTRATE",
+      "concept": "A four-metre room grows fourfold. The body keeps its size; descend the serving tower and compare a growing doorway with a fixed museum frame.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Scale"
+      ],
+      "next": "T6b"
+    },
+    {
+      "id": "T6b",
+      "role": "DEMONSTRATE",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Body"
+      ],
+      "concept": "Approach turns slats, contact removes cells, proximity shrinks blocks. Two openings close behind you; one records your passage.",
+      "next": "T7"
+    },
+    {
+      "id": "T7",
+      "role": "LIMIT",
+      "concept": "Position, orientation and size follow clocks. Read the moving obstacles and find when your body can pass.",
+      "register": "reflecting",
+      "intensity": "high",
+      "maps": [
+        "Trans_Pit"
+      ],
+      "bleed_from": [
+        "foundationscrisis"
+      ],
+      "next": "T8"
+    },
+    {
+      "id": "T8",
+      "role": "CHAMBER",
+      "concept": "synthesis — the player carries translation + rotation + scale forward as a unified vocabulary",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "randomness"
+      ],
+      "note": "A vocabulary of operations carried into repeated and generated arrangements.",
+      "next": null
+    }
+  ]
+}

@@ -1,0 +1,951 @@
+--- before/algorithms/randomness/noisetorus/noisetorus.gd
++++ after/algorithms/randomness/noisetorus/noisetorus.gd
+@@ -153,7 +153,7 @@
+ @export_enum("none", "pair") var stand: String = "none"
+ 
+ const PAIR_GAP: float = 1.30
+-const PAIR_H: float = 1.22          # the rings' centre height, a standing eye
++const PAIR_H: float = 1.40          # upright rings span roughly 0.94–1.86 m
+ const PAIR_INNER: float = 0.18    # a tube of radius 0.14: wide enough that the relief
+ const PAIR_OUTER: float = 0.46    # corrugates the surface instead of folding it through itself
+ const PAIR_BENCH_W: float = 2.60
+@@ -394,6 +394,7 @@
+ 		var holder := Node3D.new()
+ 		holder.name = "Ring_%s" % kind
+ 		holder.position = Vector3(x, PAIR_H, 0.0)
++		holder.rotation.x = PI * 0.5 # Turn the mesh and its coordinate marker together.
+ 		_pair_root.add_child(holder)
+ 		var ring := MeshInstance3D.new()
+ 		ring.name = "Torus"
+@@ -411,9 +412,10 @@
+ 		mat.resource_local_to_scene = true
+ 		ring.material_override = mat
+ 		holder.add_child(ring)
+-		# a post, so the ring stands rather than floats
+-		var post: MeshInstance3D = HangarKit.box(Vector3(x, (PAIR_H - PAIR_OUTER + PAIR_BENCH_H) * 0.5, 0.0),
+-				Vector3(0.06, PAIR_H - PAIR_OUTER - PAIR_BENCH_H + 0.1, 0.06), stone)
++		# A display mount reaches into the lowest tube, including its relief range.
++		var mount_top: float = PAIR_H - PAIR_OUTER + float(PAIR_AMPS.back())
++		var post: MeshInstance3D = HangarKit.box(Vector3(x, (mount_top + PAIR_BENCH_H) * 0.5, 0.0),
++				Vector3(0.06, mount_top - PAIR_BENCH_H, 0.06), stone)
+ 		post.name = "Post_%s" % kind
+ 		_pair_root.add_child(post)
+ 		# the marker: one on each ring, at the same coordinate of the same field
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -4946,7 +4946,7 @@
+       },
+       "category": "procedural",
+       "complexity": "advanced",
+-      "description": "A value-noise torus. Optional stand:pair compares matching relief and colour rings with a shared local clock, CPU/GPU-checked integer lattice values, sample markers, cased readout and FREEZE/SAMPLE/AMPLITUDE/FREQUENCY/REMAP controls. Signed remapping changes colour encoding without changing relief. Legacy single-ring mode retains its original field.",
++      "description": "A value-noise torus. Optional stand:pair compares matching upright relief and colour rings with a shared local clock, CPU/GPU-checked integer lattice values, sample markers, cased readout and FREEZE/SAMPLE/AMPLITUDE/FREQUENCY/REMAP controls. Signed remapping changes colour encoding without changing relief. Legacy single-ring mode retains its original field.",
+       "dev_themes": [
+         "probability",
+         "procedural",
+@@ -5029,7 +5029,7 @@
+         "derived_at": "2026-04-29T09:39:46.246941Z",
+         "derived_from": "aabb_size + category"
+       },
+-      "qfep_connection": "Kept in permanent mild weather: animated noise displaces the torus's vertices while the hue drifts, and TIME is wrapped at 3600 seconds so the flux never accumulates. Endless change engineered to loop — E_flux on a one-hour lease."
++      "qfep_connection": "A shared value can become a fold or a brightness. Clipping erases signed distinctions from colour; remapping makes them available without altering the relief. Rotating the recipient preserves its local coordinate rule. The pair owns a local clock; the inherited one-hour offset wrap is not a proven seamless loop."
+     },
+     "omoss": {
+       "category": "procedural",
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -1219,10 +1219,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_One/final.md",
+-      "text_sha256": "b0f02dc3f2a7bcbb9671432b4df4ed442e8ba5c07e58efa5f2f46f1b28098536",
+-      "map_sha256": "6c8620e7368a67b4a648389f12602fd49995a8f6a7fcb5fa2db1f85ce0e7ce0d",
+-      "learner_verified": false,
+-      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_One/DECISIONS.md"
++      "text_sha256": "451baf391ad4258e250da2a041bbe893e80b3b1d0fda9fec176df4b9b34da125",
++      "map_sha256": "8d0139114af3ea7792163ec81f7605d33b60aec5f1e87fe1bee4ffb4dc21e886",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-25-noise-one-standing/index.html"
+     },
+     "Noise_Voxel": {
+       "primary_tokens": [
+--- before/commons/maps/Noise_One/artifacts.md
++++ after/commons/maps/Noise_One/artifacts.md
+@@ -1,7 +1,7 @@
+ # Primary works
+ 
+-1. **noisetorus** — paired field readings, with FREEZE, SAMPLE, AMPLITUDE, FREQUENCY and REMAP. Map (5,2), facing north.
+-2. **noiselayers** — the existing three-resource terrain, staged as a compact basin with SUM, LOW, MIDDLE and HIGH. Map (5,5); controls face south. Original generator, source settings and coordinate planes retained.
+-3. **dark_sphere** — independent periodic brightness and rotation. Map (8,8), near the exit; no new interaction is claimed.
++1. **noisetorus** — paired field readings, with FREEZE, SAMPLE, AMPLITUDE, FREQUENCY and REMAP. Map (5,4), facing north.
++2. **noiselayers** — the existing three-resource terrain, staged as a compact basin with SUM, LOW, MIDDLE and HIGH. Map (5,7); controls face south. Original generator, source settings and coordinate planes retained.
++3. **dark_sphere** — independent periodic brightness and rotation. Map (8,10), near the exit; no new interaction is claimed.
+ 
+ The map's recovered structure and utilities remain intact. Optional automatically dealt museum sculpture is not counted as one of these authored works. Previous texts and map are archived under `doc/space/torus-review-2026-09-13/before/`.
+--- before/commons/maps/Noise_One/field_notes.md
++++ after/commons/maps/Noise_One/field_notes.md
+@@ -26,3 +26,7 @@
+ ## 13 September 2026 — whole-hall review
+ 
+ All three authored works retained as primary: noisetorus, noiselayers, dark_sphere. Shared local phase fixes the ring pause; REMAP exposes signed colour encoding; a rendered GPU readback checks CPU agreement. The original three-source terrain generator and grids return at 1:50 with contribution controls. The orb moves onto the perimeter. Recovered structure and utilities unchanged. 49 rendered checks passed; headset pending. See doc/space/torus-review-2026-09-13/README.md and /research/possible-bodies/noise-one.html. Noise_Voxel is next.
++
++## 25 September — standing comparison and entrance clearance
++
++The pair's holders now turn mesh and sample marker together into an upright view at 1.40 m centre height. The field and its two receiving operations are unchanged. Two floor rows inserted inside the entrance let the visitor see both rings beyond the doorway piers. All old rows and works remain; current coordinates are in artifacts.md. Native paired captures, pointer checks and walking routes: doc/book/iterations/2026-09-25-noise-one-standing/index.html. The historical notes above remain intact. Artifact roles are unchanged in this pass.
+--- before/commons/maps/Noise_One/final.md
++++ after/commons/maps/Noise_One/final.md
+@@ -2,7 +2,9 @@
+ 
+ <!-- @noisetorus -->
+ 
+-Two rings hover above a bench. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
++Two rings stand upright on a bench. There is room to stop and see both before moving closer. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
++
++![The upright relief and colour rings seen together from the standing approach inside the museum.](/book-review/doc/book/figures/Noise_One/standing-pair.png)
+ 
+ Watch a bright patch arrive. Then press FREEZE. The rings hold that moment; the museum carries on. Two pale markers indicate matching coordinates. SAMPLE moves them together around the rings. Before reading the plate, look for a place where the folded ring turns inward and its coloured neighbour goes dark.
+ 
+@@ -40,7 +42,7 @@
+ 
+ The field is sampled through the ring's local `x` and `z`. Multiplying those coordinates makes more or less of the field pass across the same small body. Adding the time offset moves the sampling window diagonally. Release FREEZE and that addition resumes from the held moment. A wave of apparent change can come from travelling through values that are already determined by their coordinates.
+ 
+-There is a quiet omission in the expression: no `y`. Two places above and below one another, sharing the same local `x` and `z`, consult the same value. The ring is three-dimensional; this field is addressed in two dimensions. Its normals still point in different directions. One value can therefore move two parts of the body differently.
++There is a quiet omission in the expression: no `y`. These are the ring's own coordinates. We stood it upright; its addresses came with it. Two places on the front and back, sharing the same local `x` and `z`, consult the same value. The ring is three-dimensional; this field is addressed in two dimensions. Its normals still point in different directions. One value can therefore move two parts of the body differently.
+ 
+ Look at the rings again. We began by treating their appearances as separate events. We can now follow a shared computation into different recipients. Yet the two views are not identical measurements: relief is evaluated at mesh vertices, while colour is evaluated across rendered fragments. The smooth skin and the bright skin spend different sampling budgets.
+ 
+--- before/commons/maps/Noise_One/intent.md
++++ after/commons/maps/Noise_One/intent.md
+@@ -4,3 +4,4 @@
+ Encounter: Observe, hold the present, compare amplitude with coordinate frequency, change clipping to signed remapping, isolate the terrain's existing contributions, notice the orb's independent clock.
+ Critical opening: A difference can be computed and then hidden by an encoding; changing the encoding can reveal it. Names such as LOW, MIDDLE and erosion remain open to inspection against implementation.
+ Limits: No brush or octave sliders. Rings have no collider. The compact terrain is a 1:50 model. Terrain layering retains different source algorithms/settings rather than claiming a controlled octave comparison. Headset testing remains for later.
++Staging: Upright paired rings share a standing approach beyond the entrance piers. The holders turn both mesh and marker; the two-coordinate field remains unchanged.
+--- before/commons/maps/Noise_One/map_data.json
++++ after/commons/maps/Noise_One/map_data.json
+@@ -1,106 +1,687 @@
+ {
+- "map_info": {
+-  "name": "Noise: What Does a Value Become?",
+-  "title": "Field, Reading, Combination",
+-  "lookup_name": "Noise_One",
+-  "description": "Three authored works: matching torus rings read a shared field as relief or colour; a compact basin retains the existing three-source terrain and exposes its weighted contributions; the dark orb keeps an independent pulse. FREEZE holds the current local moment, REMAP makes signed differences visible in colour, AMPLITUDE changes relief gain and FREQUENCY changes sampling coordinates. Terrain controls isolate resources before the original slope-lowering pass. Rings have no colliders; the terrain has a matching triangle collider.",
+-  "manual_file": "res://commons/context/clipboard/tutorial_text/noise_layers_axioms.md",
+-  "version": "1.0",
+-  "format": "json",
+-  "dimensions": {
+-   "width": 13,
+-   "depth": 11,
+-   "max_height": 5
++  "map_info": {
++    "name": "Noise: What Does a Value Become?",
++    "title": "Field, Reading, Combination",
++    "lookup_name": "Noise_One",
++    "description": "Three authored works: matching torus rings read a shared field as relief or colour; a compact basin retains the existing three-source terrain and exposes its weighted contributions; the dark orb keeps an independent pulse. FREEZE holds the current local moment, REMAP makes signed differences visible in colour, AMPLITUDE changes relief gain and FREQUENCY changes sampling coordinates. Terrain controls isolate resources before the original slope-lowering pass. Rings have no colliders; the terrain has a matching triangle collider.",
++    "manual_file": "res://commons/context/clipboard/tutorial_text/noise_layers_axioms.md",
++    "version": "1.0",
++    "format": "json",
++    "dimensions": {
++      "width": 13,
++      "depth": 13,
++      "max_height": 5
++    },
++    "metadata": {
++      "difficulty": "intermediate",
++      "category": "noise",
++      "estimated_time": "7-10 minutes",
++      "learning_objectives": [
++        "Separate a field from its receiving operation",
++        "Compare clipped and signed colour mappings",
++        "Distinguish displacement gain from coordinate scale",
++        "Inspect three retained terrain contributions and their combination",
++        "Distinguish shader relief from collision geometry"
++      ]
++    },
++    "museum": {
++      "wall_height": 3,
++      "gate_depth_rows": 0,
++      "artifact_placement": "map",
++      "sculpture_clear_rects": [
++        [
++          3,
++          1,
++          9,
++          11
++        ]
++      ]
++    }
+   },
+-  "metadata": {
+-   "difficulty": "intermediate",
+-   "category": "noise",
+-   "estimated_time": "7-10 minutes",
+-   "learning_objectives": [ "Separate a field from its receiving operation", "Compare clipped and signed colour mappings", "Distinguish displacement gain from coordinate scale", "Inspect three retained terrain contributions and their combination", "Distinguish shader relief from collision geometry" ]
++  "utility_definitions": {
++    "t": {
++      "type": "teleporter",
++      "name": "Next Lesson",
++      "description": "Continue to the next algorithm demonstration",
++      "properties": {
++        "action": "next_in_sequence"
++      }
++    },
++    "s": {
++      "properties": {
++        "height": 5.5
++      }
++    }
+   },
+-  "museum": {
+-   "wall_height": 3,
+-   "gate_depth_rows": 0,
+-   "artifact_placement": "map",
+-   "sculpture_clear_rects": [[3, 1, 9, 9]]
++  "lighting": {
++    "ambient_color": [
++      0.4,
++      0.4,
++      0.5
++    ],
++    "ambient_energy": 0.6,
++    "directional_light": {
++      "enabled": true,
++      "direction": [
++        -0.4,
++        -0.7,
++        -0.4
++      ],
++      "color": [
++        1,
++        0.9,
++        0.8
++      ],
++      "energy": 1.2
++    }
++  },
++  "settings": {
++    "cube_size": 1,
++    "gutter": 0,
++    "show_grid": true,
++    "enable_physics": true,
++    "auto_reveal_on_entry": false,
++    "initial_tile_visibility": "hidden_except_corners",
++    "background": {
++      "type": "sky",
++      "color": [
++        0.2,
++        0.3,
++        0.7
++      ]
++    }
++  },
++  "layers": {
++    "structure": [
++      [
++        "1",
++        "1",
++        "w",
++        "w",
++        "w",
++        "w",
++        "1",
++        "w",
++        "w",
++        "w",
++        "w",
++        "w",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "0",
++        "0",
++        "0",
++        "0",
++        "0",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "1",
++        "w"
++      ],
++      [
++        "5",
++        "w",
++        "w",
++        "w",
++        "w",
++        "1",
++        "1",
++        "1",
++        "w",
++        "w",
++        "5",
++        "w",
++        "w"
++      ]
++    ],
++    "utilities": [
++      [
++        "sp",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "an:-90",
++        "",
++        ""
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "t",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ]
++    ],
++    "interactables": [
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "noisetorus:180#stand:pair",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "noiselayers:0:0.8#stand:basin",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "dark_sphere",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ]
++    ]
+   }
+- },
+- "utility_definitions": {
+-  "t": {
+-   "type": "teleporter",
+-   "name": "Next Lesson",
+-   "description": "Continue to the next algorithm demonstration",
+-   "properties": {
+-	"action": "next_in_sequence"
+-   }
+-  },
+-  "s": {
+-   "properties": {
+-	"height": 5.5
+-   }
+-  }
+- },
+- "lighting": {
+-  "ambient_color": [ 0.4, 0.4, 0.5 ],
+-  "ambient_energy": 0.6,
+-  "directional_light": {
+-   "enabled": true,
+-   "direction": [ -0.4, -0.7, -0.4 ],
+-   "color": [ 1, 0.9, 0.8 ],
+-   "energy": 1.2
+-  }
+- },
+- "settings": {
+-  "cube_size": 1,
+-  "gutter": 0,
+-  "show_grid": true,
+-  "enable_physics": true,
+-  "auto_reveal_on_entry": false,
+-  "initial_tile_visibility": "hidden_except_corners",
+-  "background": {
+-   "type": "sky",
+-   "color": [ 0.2, 0.3, 0.7 ]
+-  }
+- },
+- "layers": {
+-  "structure": [
+-   [ "1", "1", "w", "w", "w", "w", "1", "w", "w", "w", "w", "w", "w" ],
+-   [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "0", "0", "0", "0", "0", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "w" ],
+-   [ "5", "w", "w", "w", "w", "1", "1", "1", "w", "w", "5", "w", "w" ]
+-  ],
+-  "utilities": [
+-   [ "sp", "", "", "", "", "", "", "", "", "", "an:-90", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "t", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+-  ],
+-  "interactables": [
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "noisetorus:180#stand:pair", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "noiselayers:0:0.8#stand:basin", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "dark_sphere", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+-  ]
+- }
+ }
+--- before/commons/maps/Noise_One/technical.md
++++ after/commons/maps/Noise_One/technical.md
+@@ -2,7 +2,7 @@
+ 
+ ## Torus instrument
+ 
+-`noisetorus:180#stand:pair` at (5,2). Two equal TorusMesh objects, 96 rings and 40 ring segments, inner radius 0.18 m and outer radius 0.46 m. Both use `noiseTorus.gdshader`. The left relief/right colour assignment follows each holder, not the viewer's camera orientation.
++`noisetorus:180#stand:pair` at (5,4). Two equal TorusMesh objects, 96 rings and 40 ring segments, inner radius 0.18 m and outer radius 0.46 m. Both use `noiseTorus.gdshader`. The left relief/right colour assignment follows each holder, not the viewer's camera orientation.
+ 
+ FREEZE holds an artifact-owned accumulated time used by both shader stages and the CPU coordinate readout. Noise speed remains 0.935 and hue speed 0.725. The old approach set those speeds to zero, which reset the shader to time zero instead of preserving the displayed moment. Other shader consumers still default to engine TIME. The inherited one-hour offset wrap is not a proven seamless loop.
+ 
+@@ -14,7 +14,7 @@
+ 
+ ## Retained terrain
+ 
+-`noiselayers:0:0.8#stand:basin` at (5,5) attaches an optional staging script to the existing scene root. It retains the complete terrain generator and all three supplied FastNoiseLite resources. Scene cameras, environment and directional light are omitted only in this museum mode, where the museum supplies those services. Original meshes and all three grid planes are retained at 0.02 scale; grid material copies use fewer and fainter lines. The original root tilt is removed in the basin.
++`noiselayers:0:0.8#stand:basin` at (5,7) attaches an optional staging script to the existing scene root. It retains the complete terrain generator and all three supplied FastNoiseLite resources. Scene cameras, environment and directional light are omitted only in this museum mode, where the museum supplies those services. Original meshes and all three grid planes are retained at 0.02 scale; grid material copies use fewer and fainter lines. The original root tilt is removed in the basin.
+ 
+ | Contribution | Runtime noise type | Seed | Base frequency | Octaves | Weight |
+ |---|---:|---:|---:|---:|---:|
+@@ -26,8 +26,16 @@
+ 
+ The terrain generator and all its height functions are unchanged. Basin mode disables automatic LOD because the legacy LOD meshes bypass the lowering pass. It uses one triangle collider generated from the displayed mesh, rebuilt when a layer changes, instead of the legacy extra walkability collider. Shader normals are a lighting approximation and do not establish whether a slope is traversable.
+ 
+-The landscape spans four metres plus its surrounding case and coordinate frame. It is a model viewed from the room perimeter. The recovered 13×11 map structure, five-by-five opening, raised east strip and utilities are unchanged. The dark orb moves from over the opening to (8,8); its independent animation is unchanged. Hall controls reserve a clear area against automatically dealt sculpture plinths.
++The landscape spans four metres plus its surrounding case and coordinate frame. It is a model viewed from the room perimeter. The recovered map grows from 13×11 to 13×13 by inserting two floor rows immediately inside the entrance. Every old row remains, with the central five-by-five opening, raised east strip, artifacts and utilities shifted together below the insertion. The dark orb is at (8,10); its independent animation is unchanged. Hall controls reserve a clear area against automatically dealt sculpture plinths.
+ 
+ ## Verification
+ 
+ Evidence: `doc/space/torus-review-2026-09-13/`. An isolated rendered Godot museum run checks all authored works, CPU/GPU field agreement, local clock hold, signed remapping, amplitude/frequency separation, terrain restoration, triangle collision equality, desktop pointer controls and museum route continuity. The saved necklace hand remains unchanged. Desktop rendering does not establish Quest performance, physical hand reach or headset comfort.
++
++## Standing comparison, 25 September 2026
++
++Pair-mode holders now turn both rings and their child coordinate markers by +90 degrees around local X. Their centres are 1.40 m high. The unchanged 0.46 m outer radius gives an undisplaced vertical span of 0.94–1.86 m. Each small display mount reaches from the bench top at 0.78 m into the lower tube. The rings still have no collider.
++
++The shader, CPU field functions, sample positions, amplitude/frequency choices and clock are unchanged. Local XZ is still the sampling plane; the holder transform changes its orientation in the room. Equal local XZ positions now lie toward/away from the viewer on the upright tube, rather than above/below a flat tube. No extra field dimension has been introduced.
++
++The two new approach rows move the instrument beyond the entrance piers and reserve a standing view of both recipients. Native evidence, before/after views at a declared held t=2 seconds, scope and limits: `doc/book/iterations/2026-09-25-noise-one-standing/`.

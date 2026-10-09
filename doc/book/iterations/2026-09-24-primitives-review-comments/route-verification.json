@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png",
+    "status": 200,
+    "expected": 200,
+    "content_type": "image/png"
+  },
+  {
+    "path": "/book-review/commons/maps/Point_One/map_data.json",
+    "status": 404,
+    "expected": 404,
+    "content_type": "text/plain;charset=UTF-8"
+  },
+  {
+    "path": "/book-review/doc/book/figures/%2e%2e/%2e%2e/tasks/book_primitives.json",
+    "status": 404,
+    "expected": 404,
+    "content_type": "text/plain;charset=UTF-8"
+  }
+]

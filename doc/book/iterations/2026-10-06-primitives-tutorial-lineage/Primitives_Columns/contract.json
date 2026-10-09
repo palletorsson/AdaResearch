@@ -1,0 +1,186 @@
+{
+  "incoming": {
+    "sha256": "cdd4835dbcd5e78e37a2b4ccdccf691317a202d7f9743fc71623467b62613238"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst ResolutionPoint = preload(\"resolution_point.gd\")\nvar point := ResolutionPoint.new()\nvar comparison := ResolutionPoint.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    point.position = Vector3(-0.3, 1.12, 0)\n    comparison.position = Vector3(0.3, 1.12, 0)\n    add_child(point)\n    add_child(comparison)\n    add_child(message)\n    message.position = Vector3(0, 1.65, 0)\n    message.pixel_size = 0.002\n\nfunc _process(delta: float) -> void:\n    point.advance(delta)\n    comparison.advance(delta)\n    if Input.is_action_just_pressed(\"ui_accept\"):\n        point.reset_resolution()\n        comparison.reset_resolution()\n    message.text = \"RINGS %d   SEGMENTS %d\" % [point.sphere.rings, point.sphere.radial_segments]\n",
+      "after": "extends Node3D\nconst Circle = preload(\"circle_samples.gd\")\nconst ColumnSurface = preload(\"column_surface.gd\")\nconst PROFILE: Array[float] = [0.35, 0.35, 0.18, 0.25, 0.4, 0.4]\nconst HEIGHT := 2.2\n\nfunc _ready() -> void:\n    var choices := [4, 6, 8, 12, 16]\n    for i in range(choices.size()):\n        var column := MeshInstance3D.new()\n        var points := column_positions(PROFILE, HEIGHT, choices[i])\n        column.mesh = ColumnSurface.make(points, choices[i])\n        column.position.x = (i - 2) * 1.0\n        var finish := StandardMaterial3D.new()\n        finish.albedo_color = Color(0.92, 0.91, 0.87)\n        finish.roughness = 0.7\n        column.material_override = finish\n        add_child(column)\n\nfunc column_positions(profile: Array[float], height: float, sides: int) -> Array[Vector3]:\n    assert(profile.size() >= 2 and height > 0.0 and sides >= 3)\n    var result: Array[Vector3] = []\n    for ring in range(profile.size()):\n        var y := height * ring / (profile.size() - 1)\n        for point in Circle.make(sides, profile[ring]):\n            result.append(point + Vector3(0, y, 0))\n    return result\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "circle_samples.gd",
+      "sha256": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57"
+    },
+    {
+      "path": "column_surface.gd",
+      "sha256": "b6f7efbb53a55dec22b8ed102129f05e8e8fe70648125ec9ee882a8e2f81b8f6"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Columns/tutorial.md",
+      "sha256": "a7fc0f305bb3e54965203e16217c5a6e07153d9665ddf1e68c5329dda0c34526"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/circle_samples.gd",
+      "sha256": "b1d8e1e66ce6bf61f5e3c3de0efbf7cf8bbe9cc662d7e3aeb154343061d5ed57"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/column_surface.gd",
+      "sha256": "b6f7efbb53a55dec22b8ed102129f05e8e8fe70648125ec9ee882a8e2f81b8f6"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/lesson.gd",
+      "sha256": "108fad54e6a19c47127d90e182d5000ce554af42766273a364be926a708217c0"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "columns/count_4",
+      "kind": "native"
+    },
+    {
+      "id": "columns/height_and_profile_4",
+      "kind": "native"
+    },
+    {
+      "id": "columns/sides_and_caps_4",
+      "kind": "native"
+    },
+    {
+      "id": "columns/closed_mesh_4",
+      "kind": "native"
+    },
+    {
+      "id": "columns/count_6",
+      "kind": "native"
+    },
+    {
+      "id": "columns/height_and_profile_6",
+      "kind": "native"
+    },
+    {
+      "id": "columns/sides_and_caps_6",
+      "kind": "native"
+    },
+    {
+      "id": "columns/closed_mesh_6",
+      "kind": "native"
+    },
+    {
+      "id": "columns/count_8",
+      "kind": "native"
+    },
+    {
+      "id": "columns/height_and_profile_8",
+      "kind": "native"
+    },
+    {
+      "id": "columns/sides_and_caps_8",
+      "kind": "native"
+    },
+    {
+      "id": "columns/closed_mesh_8",
+      "kind": "native"
+    },
+    {
+      "id": "columns/count_12",
+      "kind": "native"
+    },
+    {
+      "id": "columns/height_and_profile_12",
+      "kind": "native"
+    },
+    {
+      "id": "columns/sides_and_caps_12",
+      "kind": "native"
+    },
+    {
+      "id": "columns/closed_mesh_12",
+      "kind": "native"
+    },
+    {
+      "id": "columns/count_16",
+      "kind": "native"
+    },
+    {
+      "id": "columns/height_and_profile_16",
+      "kind": "native"
+    },
+    {
+      "id": "columns/sides_and_caps_16",
+      "kind": "native"
+    },
+    {
+      "id": "columns/closed_mesh_16",
+      "kind": "native"
+    },
+    {
+      "id": "columns/independent_profile_height_variant",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Columns/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/circle_samples.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/column_surface.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Columns/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

@@ -1,0 +1,143 @@
+--- before/commons/maps/Point_One/tutorial.md
++++ commons/maps/Point_One/tutorial.md
+@@ -1,66 +1,102 @@
+-# Point One — give a position a place
++# Point One — follow the point
+ 
+-Day Zero has prepared the environment. Open `points.gd` in [the Point One study](../../../doc/book/studies/point-one/README.md). The supplied `coordinates.tscn` uses the same base and adds two small white markers, named `A` and `B`, and three coloured coordinate guides. The downloaded script shows both markers; we will build up to it.
++Point Zero let us recognise an instruction that begins, and one that continues. Now we follow the corridor. Each label says “Point one”, but something different happens above it.
+ 
+-The guides and markers are supplied objects. Here we learn to place them. The first change is deliberately invisible.
++The [supplied study](../../../doc/book/studies/point-one/README.md) lets us inspect the first three conditions together: an absent point, a visible sphere and a solid sphere. Its three scripts are already complete. We will change a few lines as we encounter what they do. The black point and the wider room continue in the museum.
+ 
+-## Keep a position
++## At the first label, nothing appears
+ 
+-Replace the contents of `points.gd` with:
++There is a place to look, but no visible object. A mathematical point has a position and no extent. How can we keep its position before giving it a surface?
++
++Open `position.gd`. This is the whole script:
+ 
+ ```gdscript
+ extends Node3D
+ 
+ func _ready() -> void:
+-    var a := Vector3(-0.75, 1.12, 0.0)
++    var point_position := Vector3(0.0, 1.12, 0.0)
+ ```
+ 
+-Run it. The floor and guides remain; neither white marker appears. We have kept three numbers without giving either marker that position.
++We know `_ready()` from Point Zero; `-> void` says it returns no value. Here it keeps a different kind of value: a `Vector3`, containing three numbers. Used as a position, these numbers are X, Y and Z coordinates relative to an origin.
+ 
+-`extends Node3D` gives this script a place in the 3D scene. Godot calls `_ready()` when the scene is ready; our instructions go inside it, indented. `var` gives a value a name. `:=` lets Godot infer its type: here, `Vector3`, which holds three numbers. Used as a position, those numbers are X, Y and Z coordinates relative to an origin.
++For this station, they mean no shift along X, 1.12 metres up Y, and no shift along Z. We name that value `point_position`. Change `1.12` to `1.7` and run. Nothing appears. We have changed a value without attaching any visible body to it. The editor's unused-variable warning describes that condition.
+ 
+-The origin is where the three supplied guides meet. From there, `a` is 0.75 metres along negative X, 1.12 metres up Y, and zero along Z. The editor may warn that `a` is unused. That describes exactly what we have done so far: keep a value without using it.
++The other stations in the study still show their spheres. This change belongs only to the empty station. Restore `1.12` before continuing.
+ 
+-## Let a marker show it
++## Further along, the point has a surface
+ 
+-Add these two lines beneath the position, with the same indentation:
++The next label has a small white sphere above it. Its centre gives our eyes a place to find.
++
++Open `visible.gd`. The same position is there, now used by a visible object:
+ 
+ ```gdscript
+-    $A.position = a
+-    $A.visible = true
++visible_point.position = point_position
+ ```
+ 
+-`$A` refers to the existing marker named `A` in this scene. The first line puts its centre at `a`; the second makes it visible.
++This line is already inside `_ready()`. `visible_point` names the mesh node created by the supplied script; assigning its `position` puts its centre at our coordinates. We have given the point a body through which it can appear.
+ 
+-A small sphere now marks the position. Its surface helps us find a centre that has no surface of its own. The sphere has a radius; the position has three coordinates. Changing one need not change the other. We borrow the sphere's construction for this first exercise.
+-
+-Change only `-0.75` to `0.75`. The marker crosses to the other side of the Y guide. Restore X, then change `1.12` to `1.7`. It rises. Restore Y, then change the last number from `0.0` to `0.7`. It moves along positive Z, towards the camera in this prepared view.
+-
+-The red guide marks X, green Y and blue Z. Their labels identify the positive directions. Follow one change at a time. The marker moves between runs because the saved coordinates changed; we have not yet written movement over time.
+-
+-## Keep another position
+-
+-Restore `a` and add a second position and its marker. The complete script is now:
++Change `1.12` to `1.7` in this script. This time the white sphere rises. Restore the height, then change the radius:
+ 
+ ```gdscript
+-extends Node3D
+-
+-func _ready() -> void:
+-    var a := Vector3(-0.75, 1.12, 0.0)
+-    var b := Vector3(0.75, 1.12, 0.0)
+-
+-    $A.position = a
+-    $A.visible = true
+-    $B.position = b
+-    $B.visible = true
++var radius := 0.14
+ ```
+ 
+-Both markers use the same supplied sphere. Their different coordinates put them on opposite sides of the origin. Change only `b`: `a` stays where it was.
++Try `0.3`. The sphere becomes larger while its centre stays where it was. The supplied `SphereMesh` uses this radius and a height twice as large. We can inspect its construction later; for now, we can change a position and a surface separately.
+ 
+-Try putting B above A. Try putting it behind A. Finally give `b` the same coordinates as `a`. The two objects occupy the same place, so this view can show one sphere where the script still names two. Separate them again.
++In the museum, try crossing that surface. It is visible, but it does not stop you. Restore the radius to `0.14` before meeting the next sphere.
+ 
+-You can now make an arrangement by choosing two positions. The markers and coordinate guides help you see that choice. Their construction is available to inspect, but neither the distance arrow nor the coordinate labels need to become a programming task here.
++## The next point stops us
+ 
+-The museum's solid and held points ask further questions about what a visible body permits. We keep those encounters in the main text. Their physics and pickup systems are outside this first exercise; [the optional construction study](../../../doc/book/studies/point-one/CONSTRUCTION.md) retains the earlier mesh and collision examples.
++The next white sphere looks the same. In the museum, approaching it produces a different result: a body meets resistance.
+ 
+-We leave with `a` and `b` expressed in the same coordinate frame. Point Lines can begin by connecting them. The relation has two ends before we give it a visible body.
++Open `solid.gd`. It keeps the visible construction and adds a separate physics body and collision shape. Both are placed at `point_position`. The boundary's size is set here:
++
++```gdscript
++sphere_shape.radius = radius
++```
++
++Change only that line to:
++
++```gdscript
++sphere_shape.radius = 0.35
++```
++
++The visible sphere stays small. Its collision boundary grows. In the desktop study, turn on **Debug → Visible Collision Shapes** to see the boundary; the fixed camera does not let you walk into it. In the museum, the distinction is something your movement meets.
++
++We have chosen whether the surface we see and the boundary we encounter coincide. The full physics construction is supplied; changing this one relation already gives us something consequential to author. Restore the matching radius.
++
++## At the fourth label, the point can leave
++
++The sphere is black. Take hold of it in the museum. It follows your hand while “Point one” stays at the station.
++
++Its small size is familiar. Its new behavior comes from the supplied pickup system. A position alone could not make it follow a hand, just as a visible sphere alone could not stop a body.
++
++Here we borrow the working interaction. The desktop study contains the first three comparisons; it does not contain a simulated hand or the museum's pickup system. We do not need to write that system before recognising the relation it adds.
++
++Keep the black point and carry it into the next room. Now the coordinates have something moving to describe.
++
++## The corridor opens into coordinates
++
++Move the point up, sideways and towards you. Watch the guides separate that gesture into X, Y and Z. The point we held at a station now has an address that changes.
++
++For a desktop comparison, open the supplied `coordinates.tscn` and use Run Current Scene, introduced in Day Zero. Its `points.gd` places two prepared sphere markers. Begin with the position named `a`: change one coordinate at a time and watch marker A. The red guide marks X, green Y and blue Z. The guides help us read the movement; constructing the arrows is outside this lesson.
++
++The museum's WORLD and LOCAL cards describe the same held point from different references. Rounded numbers can remain still through a small movement. We can notice those limits without writing the reporting system here.
++
++A point needs coordinates to be located in this scene. The coordinates need a reference to be understood. Neither tells us whether its visible body will resist or follow a hand.
++
++## Carry it to “here”
++
++The target asks for the point. Carry it into the marked place and watch the balls fall. Leave and return.
++
++“Here” allows a little room. The target supplies a distance test and remembers whether the point has already entered. We keep this as an encounter for now. Its machinery will not become another task before we have finished learning the point.
++
++## Before leaving, the point is larger than your hand
++
++A sphere stands on a pedestal, still called “Point one”. Its centre can be described in the same way as the small sphere's. Its size changes what we can do around it.
++
++Return to the radius change we made earlier. That choice gave a position more visible space without changing its address. Here the room lets us feel how far that choice can go.
++
++We have followed a position through absence, surface, resistance and holding, then read it through coordinates. We have changed the point's position, its visible radius and its physical boundary without having to construct every system attached to it.
++
++The prepared two-marker study keeps positions `a` and `b` for the next lesson. Change B while leaving A in place. Point Lines will begin by connecting them. We reach that relation after meeting what each point has been given.

@@ -1,0 +1,160 @@
+{
+  "events": [
+    {
+      "halls": 0,
+      "ms": 6692,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 9432,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 9498,
+      "phase": "idle"
+    },
+    {
+      "landing": "(2.5, 0.05, -1.35)",
+      "map": "Point_Lines",
+      "phase": "fall_recovered"
+    },
+    {
+      "halls": 1,
+      "ms": 12702,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 12720,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 12747,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 12747,
+      "phase": "architecture"
+    },
+    {
+      "ms": 316,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 13068,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 13215,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 14269,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 14301,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 14314,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 14825,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 14851,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 14873,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 14873,
+      "phase": "architecture"
+    },
+    {
+      "ms": 239,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 15118,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 15129,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 15633,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 15670,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 15684,
+      "phase": "idle"
+    }
+  ],
+  "failures": [],
+  "landing_checks": [
+    {
+      "cage": true,
+      "entry_cell": "(2, 0)",
+      "entry_source": "sp",
+      "pad": "(2.5, 0.05, -1.35)",
+      "settled_feet": "(2.5, 0.0, -1.25)",
+      "slabs": 2,
+      "stage": "Direct launch"
+    },
+    {
+      "cage": true,
+      "entry_cell": "(3, 0)",
+      "entry_source": "sp",
+      "pad": "(3.5, 0.05, 39.65)",
+      "settled_feet": "(3.499976, 0.0, 39.75)",
+      "slabs": 2,
+      "stage": "Forward arrival"
+    },
+    {
+      "cage": true,
+      "entry_cell": "(2, 0)",
+      "entry_source": "sp",
+      "pad": "(13.5, 0.05, 33.35)",
+      "settled_feet": "(13.49998, 0.0, 33.45)",
+      "slabs": 2,
+      "stage": "Return arrival"
+    }
+  ],
+  "next": "Point_Trace",
+  "observed_bounds_reset": false,
+  "passed": true,
+  "peak_resident_halls": 1,
+  "room": "Point_Lines",
+  "staged_rig": true,
+  "vr_simulated": true,
+  "xr_physics_body": true
+}

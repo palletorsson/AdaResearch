@@ -1,0 +1,344 @@
+--- before/commons/maps/Point_Trace/map_data.json
++++ commons/maps/Point_Trace/map_data.json
+@@ -4,11 +4,11 @@
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", "automatic_writing_desk", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", "whiteboard:270:0#board_width:1.6#offset:0.00,0.60,0.00#pens:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", "hand_telemetry_diptych:180:1", " ", " ", " ", "science_screen:180:3:0.5#offset:0.00,-2.95,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:3:0.5#offset:0.00,-2.95,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+@@ -53,6 +53,9 @@
+ 		]
+ 	},
+ 	"map_info": {
++		"museum": {
++			"props_deny": ["bench"]
++		},
+ 		"dimensions": {
+ 			"depth": 12.0,
+ 			"max_height": 5.0,
+--- before/commons/maps/Point_Trace/final.md
++++ commons/maps/Point_Trace/final.md
+@@ -58,7 +58,7 @@
+ 
+ <!-- @whiteboard -->
+ 
+-Four pens hang in front of the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
++Four pens wait on the shelf beneath the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
+ 
+ Your hand travelled across the gap. The picture leaves it white.
+ 
+--- before/commons/maps/Point_Trace/technical.md
++++ commons/maps/Point_Trace/technical.md
+@@ -28,7 +28,15 @@
+ 
+ A nib outside the bounds or more than 0.035 m from the plane ends the stroke. The next valid contact starts another stroke. The four pens use 0/10/40/80 mm positional spacing before conversion to canvas coordinates. NO GRID omits that rounding; the image still consists of pixels.
+ 
+-At this board's 1.6 by 1.2 m size, the canvas is 1024 by 768 pixels. A three-pixel brush connects valid contacts; the eraser paints white with a 22-pixel radius. The adapter disables the prior wet-paint simulation and renders the canvas when a stroke changes. Its image stays with the board during this visit.
++At this board's 2.0 by 1.2 m size, the canvas is 1024 by 614 pixels. A three-pixel brush connects valid contacts; the eraser paints white with a 22-pixel radius. The adapter disables the prior wet-paint simulation and renders the canvas when a stroke changes. Its image stays with the board during this visit.
++
++## Room arrangement and tool return
++
++The four drawing dots and the stick occupy five equally spaced plinths centred on the room at X = 4.5 m. Their recording configuration is unchanged. The whiteboard faces into the room from the east wall; its lower edge is 0.95 m above the floor, with a 0.925 m shelf. The hand-telemetry diptych sits 0.45 m higher than before, against the rear wall. The map excludes automatically placed benches because one blocked the drawing aisle.
++
++`#pen_shelf:1` enables the board's shelf and return behaviour in this map. Four grips distinguish the existing inks and resolutions: beads, a loop, fins and a stepped sleeve. Labels stay on the shelf. The eraser has its own place. Each tool remains the same rigid body throughout pickup, release and return.
++
++Released shelf tools fall under physics. A tool more than 0.25 m below its dock or more than 3 m away returns after 1.25 seconds in that condition. Its home transform is relative to the board, so wall rotation and placement are respected. Held tools never return. Both XRTools pickup and the desktop pointer's grab/drop hooks are supported. Other boards retain the floating-tool arrangement unless they opt into the shelf.
+ 
+ ## Optional comparisons
+ 
+--- before/commons/artifacts/whiteboard/whiteboard.gd
++++ commons/artifacts/whiteboard/whiteboard.gd
+@@ -40,6 +40,8 @@
+ @export var show_tray: bool = true
+ ## Opt-in working drawing-paper surface and separate suspended board pens.
+ @export var pens_enabled: bool = false
++## Opt-in reachable shelf, sculptural handles and dropped-tool recovery.
++@export var pen_shelf: bool = false
+ 
+ # ── Constants ─────────────────────────────────────────────────────────
+ 
+@@ -89,6 +91,8 @@
+ 
+ 
+ func _read_metadata_overrides() -> void:
++	if has_meta("config_pen_shelf"):
++		pen_shelf = str(get_meta("config_pen_shelf")).to_lower() in ["1", "true"]
+ 	if has_meta("config_pens"):
+ 		pens_enabled = str(get_meta("config_pens")).to_lower() in ["1", "true"]
+ 	if has_meta("config_board_width"):
+@@ -122,7 +126,7 @@
+ 	_built = true
+ 	_build_surface()
+ 	_build_frame()
+-	if show_tray:
++	if show_tray and not (pens_enabled and pen_shelf):
+ 		_build_tray()
+ 	_build_text_lines()
+ 	if pens_enabled:
+@@ -130,6 +134,7 @@
+ 		drawing.name = "DrawingTools"
+ 		drawing.board_width = board_width
+ 		drawing.board_height = board_height
++		drawing.shelf_enabled = pen_shelf
+ 		add_child(drawing)
+ 
+ 
+--- before/commons/artifacts/whiteboard/whiteboard_drawing.gd
++++ commons/artifacts/whiteboard/whiteboard_drawing.gd
+@@ -8,6 +8,7 @@
+ var canvas: MeshInstance3D
+ var pens: Array[XRToolsPickable] = []
+ var stroke_events: int = 0
++var shelf_enabled := false
+ 
+ func _ready() -> void:
+ 	# The existing canvas expects a sibling status label; keep its debug text off
+@@ -29,6 +30,8 @@
+ 	canvas.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+ 	var surface_material := canvas.material_override as StandardMaterial3D
+ 	surface_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	if shelf_enabled:
++		_build_shelf()
+ 	for i in range(5):
+ 		var pen = Pen.new()
+ 		pen.name = "Eraser" if i == 4 else "BoardPen%d" % i
+@@ -37,13 +40,17 @@
+ 		pen.resolution_mm = [0.0,10.0,40.0,80.0,0.0][i]
+ 		pen.eraser = i == 4
+ 		pen.freeze = true
+-		pen.release_mode = XRToolsPickable.ReleaseMode.FROZEN
++		pen.release_mode = XRToolsPickable.ReleaseMode.UNFROZEN if shelf_enabled else XRToolsPickable.ReleaseMode.FROZEN
+ 		pen.collision_layer = 4
+-		pen.collision_mask = 0
+-		pen.position = Vector3((i - 2) * minf(0.30, board_width / 5.5), 0.50, 0.50)
++		pen.collision_mask = 1 | 4 if shelf_enabled else 0
++		pen.return_enabled = shelf_enabled
++		pen.mass = 0.08 if shelf_enabled else 1.0
++		pen.continuous_cd = shelf_enabled
++		var slot_x := (i - 2) * minf(0.34, board_width / 5.5)
++		pen.position = Vector3(slot_x, -0.018, 0.22) if shelf_enabled else Vector3((i - 2) * minf(0.30, board_width / 5.5), 0.50, 0.50)
+ 		var collision := CollisionShape3D.new()
+ 		var shape := CapsuleShape3D.new()
+-		shape.radius = 0.026
++		shape.radius = 0.041 if shelf_enabled else 0.026
+ 		shape.height = 0.22
+ 		collision.shape = shape
+ 		collision.position.y = 0.1
+@@ -78,13 +85,21 @@
+ 			felt.albedo_color = Color(0.16,0.18,0.21)
+ 			block.material_override = felt
+ 			pen.add_child(block)
++		if shelf_enabled and not pen.eraser:
++			_dress_handle(pen, i)
+ 		var label := Label3D.new()
+ 		label.text = "ERASE" if pen.eraser else ("NO GRID" if i == 0 else "%d mm" % pen.resolution_mm)
+ 		label.font_size = 36
+ 		label.pixel_size = 0.001
+-		label.position.y = 0.26
+ 		label.outline_size = 8
+-		pen.add_child(label)
++		if shelf_enabled:
++			label.font_size = 24
++			label.position = Vector3(slot_x, -0.082, 0.374)
++			add_child(label)
++			_build_dock(slot_x, pen.ink, pen.eraser)
++		else:
++			label.position.y = 0.26
++			pen.add_child(label)
+ 		add_child(pen)
+ 		pens.append(pen)
+ 
+@@ -107,3 +122,93 @@
+ 		canvas.draw_line(previous, uv, ink, radius, 1000000)
+ 	canvas.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+ 	stroke_events += 1
++
++
++func _finish(color: Color, metallic: float = 0.0) -> StandardMaterial3D:
++	var material := StandardMaterial3D.new()
++	material.albedo_color = color
++	material.metallic = metallic
++	material.roughness = 0.42
++	return material
++
++
++func _piece(parent: Node3D, mesh: Mesh, at: Vector3, material: Material) -> MeshInstance3D:
++	var part := MeshInstance3D.new()
++	part.mesh = mesh
++	part.position = at
++	part.material_override = material
++	parent.add_child(part)
++	return part
++
++
++func _box(parent: Node3D, at: Vector3, size: Vector3, material: Material) -> MeshInstance3D:
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	return _piece(parent, mesh, at, material)
++
++
++func _build_shelf() -> void:
++	var shelf := StaticBody3D.new()
++	shelf.name = "PenShelf"
++	shelf.collision_layer = 1
++	shelf.collision_mask = 0
++	add_child(shelf)
++	var size := Vector3(board_width + 0.1, 0.075, 0.36)
++	var at := Vector3(0, -0.0625, 0.18)
++	_box(shelf, at, size, _finish(Color(0.16, 0.08, 0.18)))
++	var shape := BoxShape3D.new()
++	shape.size = size
++	var collision := CollisionShape3D.new()
++	collision.shape = shape
++	collision.position = at
++	shelf.add_child(collision)
++	var brass := _finish(Color(0.76, 0.5, 0.22), 0.65)
++	_box(shelf, Vector3(0, -0.021, 0.355), Vector3(size.x, 0.009, 0.015), brass)
++	for x in [-board_width * 0.35, board_width * 0.35]:
++		_box(shelf, Vector3(x, -0.16, 0.035), Vector3(0.035, 0.24, 0.055), brass)
++		_box(shelf, Vector3(x, -0.11, 0.18), Vector3(0.035, 0.035, 0.29), brass)
++
++
++func _build_dock(x: float, ink: Color, erase: bool) -> void:
++	var ring := TorusMesh.new()
++	ring.inner_radius = 0.027 if not erase else 0.045
++	ring.outer_radius = 0.039 if not erase else 0.053
++	ring.rings = 16
++	ring.ring_segments = 8
++	_piece(self, ring, Vector3(x, -0.018, 0.22), _finish(ink.lightened(0.15), 0.3))
++
++
++func _dress_handle(pen: Node3D, index: int) -> void:
++	# Same working nib, four tactile silhouettes; ornament stays below its tip.
++	var body := Node3D.new()
++	body.name = "SculpturalGrip"
++	pen.add_child(body)
++	var metal := _finish(Color(0.88, 0.65, 0.28), 0.55)
++	var ink := _finish(pen.ink.lightened(0.10), 0.18)
++	match index:
++		0: # Pearl-ended drawing pen.
++			for y in [0.035, 0.085, 0.135]:
++				var pearl := SphereMesh.new()
++				pearl.radius = 0.027 if y == 0.085 else 0.02
++				pearl.height = pearl.radius * 2.0
++				pearl.radial_segments = 16
++				pearl.rings = 8
++				_piece(body, pearl, Vector3(0, y, 0), ink)
++		1: # A small tilted ribbon-loop around the barrel.
++			var loop := TorusMesh.new()
++			loop.inner_radius = 0.027
++			loop.outer_radius = 0.035
++			loop.rings = 24
++			loop.ring_segments = 8
++			var part := _piece(body, loop, Vector3(0, 0.105, 0), metal)
++			part.rotation.z = PI / 2.0
++			part.scale.y = 1.4
++		2: # Three fins rising around the grip.
++			for i in range(3):
++				var fin := _box(body, Vector3(0, 0.055 + i * 0.04, 0), Vector3(0.065, 0.022, 0.028), ink)
++				fin.rotation.y = i * TAU / 3.0
++		3: # A stepped, square sleeve.
++			for i in range(4):
++				var width := 0.060 - i * 0.006
++				var step := _box(body, Vector3(0, 0.038 + i * 0.031, 0), Vector3(width, 0.029, width), ink)
++				step.rotation.y = PI / 4.0
+--- before/commons/artifacts/whiteboard/whiteboard_pen.gd
++++ commons/artifacts/whiteboard/whiteboard_pen.gd
+@@ -5,13 +5,22 @@
+ var resolution_mm: float = 0.0
+ var eraser: bool = false
+ var _previous := Vector2(-1, -1)
++var return_enabled := false
++var return_delay := 1.25
++var desktop_held := false
++var docked := true
++var return_count := 0
++var _home_transform := Transform3D.IDENTITY
++var _lost_time := 0.0
+ 
+ func _ready() -> void:
+ 	super()
++	_home_transform = transform
++	picked_up.connect(func(_item): docked = false; _lost_time = 0.0)
+ 	dropped.connect(func(_item): _previous = Vector2(-1,-1))
+ 
+ func _process(_delta: float) -> void:
+-	if not is_picked_up() or not is_instance_valid(board):
++	if not (is_picked_up() or desktop_held) or not is_instance_valid(board):
+ 		_previous = Vector2(-1,-1)
+ 		return
+ 	var uv: Vector2 = board.sample_uv($WritingTip.global_position, resolution_mm)
+@@ -22,3 +31,51 @@
+ 		return
+ 	board.paint(_previous, uv, ink, eraser)
+ 	_previous = uv
++
++
++func on_desktop_grab(_pointer: Node) -> void:
++	desktop_held = true
++	docked = false
++	_lost_time = 0.0
++
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_held = false
++	_previous = Vector2(-1, -1)
++	_lost_time = 0.0
++	if return_enabled:
++		freeze = false
++
++
++func home_global_transform() -> Transform3D:
++	return (get_parent() as Node3D).global_transform * _home_transform
++
++
++func _physics_process(delta: float) -> void:
++	if not return_enabled or docked or not is_instance_valid(board): return
++	if is_picked_up() or desktop_held:
++		_lost_time = 0.0
++		return
++	var home := home_global_transform().origin
++	var fallen := global_position.y < home.y - 0.25
++	var lost := global_position.distance_to(home) > 3.0
++	_lost_time = _lost_time + delta if fallen or lost else 0.0
++	if _lost_time >= return_delay:
++		return_to_shelf()
++
++
++func return_to_shelf() -> bool:
++	# Return the existing body, never duplicate it or take it from a hand.
++	if is_picked_up() or desktop_held: return false
++	freeze = true
++	linear_velocity = Vector3.ZERO
++	angular_velocity = Vector3.ZERO
++	global_transform = home_global_transform()
++	force_update_transform()
++	PhysicsServer3D.body_set_state(get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, global_transform)
++	reset_physics_interpolation()
++	_previous = Vector2(-1, -1)
++	_lost_time = 0.0
++	docked = true
++	return_count += 1
++	return true
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -51,8 +51,8 @@
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Trace/final.md",
+-      "text_sha256": "d3a048cc9e3830ef5ad467bfdbd521a31f6c00ff9646dbd92350327d14b36c75",
+-      "map_sha256": "eb8d332fc8c45554131b28dbee419a5dd80b66a2fa6f0957d89d90126fff1cf6",
++      "text_sha256": "8f28f93f44c50c80d4dd475a4755f5296655fc0979f871d36286b340de1dfaaa",
++      "map_sha256": "6bed9d1effac961bd58f3b497b5c533f2e4ce09c4f76492e023718deb0644d4b",
+       "learner_verified": false
+     },
+     "Point_Line_Grid": {

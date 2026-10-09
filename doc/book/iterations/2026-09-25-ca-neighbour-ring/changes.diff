@@ -1,0 +1,2148 @@
+--- before/commons/artifacts/ca_rule_explorer/neighbour_ring.gd
++++ after/commons/artifacts/ca_rule_explorer/neighbour_ring.gd
+@@ -0,0 +1,98 @@
++extends Node3D
++## The explorer's stored rows wrapped around the visitor; never a second automaton.
++const RADIUS := 1.65
++const CURRENT_Y := 2.02
++const ROW_PITCH := 0.095
++var work: Node3D
++var cells: MultiMesh
++var witness: Array[MeshInstance3D] = []
++var rendered: Array[Array] = []
++var _signature := ""
++
++func build(source: Node3D) -> void:
++	name = "NeighbourRing"
++	work = source
++	# CA_Introduction: beside the board, above the clear right-hand corridor.
++	position = Vector3(1.6, -1.04, 0.5)
++	cells = MultiMesh.new()
++	cells.transform_format = MultiMesh.TRANSFORM_3D
++	cells.use_colors = true
++	cells.instance_count = work.cells_x * work.rows_visible
++	var tile := BoxMesh.new()
++	tile.size = Vector3(2 * RADIUS * sin(PI / work.cells_x) * .95, ROW_PITCH * .87, .035)
++	cells.mesh = tile
++	var view := MultiMeshInstance3D.new()
++	view.name = "StoredRows"
++	view.multimesh = cells
++	var material := StandardMaterial3D.new()
++	material.vertex_color_use_as_albedo = true
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	view.material_override = material
++	add_child(view)
++	# Numbering locates the seam in the straight board, not a break in the ring.
++	for col in range(work.cells_x):
++		var label := Label3D.new()
++		label.text = str(col)
++		label.font_size = 30
++		label.pixel_size = .0018
++		label.modulate = Color("ffd77d") if col in [0, work.cells_x - 1] else Color("b5c3bd")
++		label.position = at(col, -2, RADIUS - .04)
++		label.rotation.y = angle(col) + PI
++		label.outline_size = 2
++		label.double_sided = false
++		add_child(label)
++	for j in range(3):
++		var mark := MeshInstance3D.new()
++		var mesh := BoxMesh.new()
++		mesh.size = Vector3(tile.size.x, .028, .028)
++		mark.mesh = mesh
++		var mat := StandardMaterial3D.new()
++		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		mat.albedo_color = Color("ff80b4") if j == 1 else Color("ffd77d")
++		mark.material_override = mat
++		add_child(mark)
++		witness.append(mark)
++	# The support stays still. No shifting floor or generated collision.
++	var outline := ImmediateMesh.new()
++	var frame := MeshInstance3D.new()
++	frame.mesh = outline
++	var rim := StandardMaterial3D.new()
++	rim.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	rim.albedo_color = Color("626d68")
++	outline.surface_begin(Mesh.PRIMITIVE_LINES, rim)
++	for row in [-.6, work.rows_visible - .4]:
++		for col in range(work.cells_x):
++			outline.surface_add_vertex(at(col, row, RADIUS + .03))
++			outline.surface_add_vertex(at(col + 1, row, RADIUS + .03))
++	for col in [0, 8, 16, 24]:
++		outline.surface_add_vertex(at(col, -.6, RADIUS + .03))
++		outline.surface_add_vertex(at(col, work.rows_visible - .4, RADIUS + .03))
++	outline.surface_end()
++	add_child(frame)
++	refresh()
++
++func angle(col: int) -> float:
++	return TAU * float(col) / work.cells_x
++
++func at(col: int, row: float, radius: float = RADIUS) -> Vector3:
++	var a := angle(col)
++	return Vector3(sin(a) * radius, CURRENT_Y + row * ROW_PITCH, cos(a) * radius)
++
++func refresh() -> void:
++	# Only this readout changes: all rule evaluation and stored history belong to work.
++	var signature := str(work.generation) + ":" + str(work.rule) + ":" + str(work.seed_pair)
++	if signature != _signature:
++		rendered = work._grid.duplicate(true)
++		for row in range(work.rows_visible):
++			for col in range(work.cells_x):
++				var present: bool = row < rendered.size()
++				var state: bool = present and bool(rendered[row][col])
++				var basis := Basis(Vector3.UP, angle(col))
++				if not present: basis = basis.scaled(Vector3.ZERO)
++				cells.set_instance_transform(row * work.cells_x + col, Transform3D(basis, at(col, row)))
++				cells.set_instance_color(row * work.cells_x + col, work.alive_color if state else work.dead_color)
++		_signature = signature
++	for j in range(3):
++		var col: int = posmod(work.sample_cell + j - 1, work.cells_x)
++		witness[j].position = at(col, -.7, RADIUS - .04)
++		witness[j].rotation.y = angle(col)
+--- before/commons/artifacts/ca_rule_explorer/neighbour_study.gd
++++ after/commons/artifacts/ca_rule_explorer/neighbour_study.gd
+@@ -4,6 +4,7 @@
+ var reading: Label3D
+ var markers: Array[MeshInstance3D] = []
+ var elapsed: float = 0.0
++var room_ring: Node3D
+ 
+ func _ready() -> void:
+ 	work = get_parent()
+@@ -51,12 +52,17 @@
+ 		marker.material_override = mat
+ 		add_child(marker)
+ 		markers.append(marker)
++	if str(work.get_meta("config_room", "")) == "ring":
++		room_ring = load("res://commons/artifacts/ca_rule_explorer/neighbour_ring.gd").new()
++		add_child(room_ring)
++		room_ring.build(work)
+ 	refresh()
+ 
+ func next_cell() -> void:
+ 	work.sample_cell = (work.sample_cell + 1) % work.cells_x
+ 
+ func refresh() -> void:
++	if is_instance_valid(room_ring): room_ring.refresh()
+ 	var d: Dictionary = work.neighbourhood_readback()
+ 	reading.text = "THREE CELLS\n\nGEN %d / %s\nCELL %d OF %d\n\nLEFT  SELF  RIGHT\n%d       %d       %d\n\nNEXT: %d\nRULE %d\n\nSEED: %s\nEDGES WRAP" % [d.generation, "RUN" if d.running else "HELD", d.cell, d.width, d.inputs[0], d.inputs[1], d.inputs[2], d.next, d.rule, d.seed.to_upper()]
+ 	for j in range(3):
+--- before/commons/maps/CA_Introduction/artifacts.md
++++ after/commons/maps/CA_Introduction/artifacts.md
+@@ -2,7 +2,7 @@
+ 
+ | Artifact | Role | What it contributes |
+ |---|---|---|
+-| ca_rule_explorer | primary | Held elementary row, inspectable triplet, one-step update, rule/seed comparison |
++| ca_rule_explorer | primary | Held elementary row, inspectable triplet, one-step update, rule/seed comparison; the same history wraps around the visitor overhead |
+ | persian_rug | primary | Two-dimensional local rules with a repeatedly imposed mirror and frame |
+ | line_network_ca | primary | Persistent occupancy, stochastic growth and a separately drawn connection history |
+ | dark_sphere | secondary | A continuing visual rhythm; no claim to cell-state computation |
+@@ -12,4 +12,4 @@
+ | rule110_computer | secondary | Existing Rule 110 display; a display alone does not demonstrate universality |
+ | ca_showcase | secondary | Existing collection; retain and review its footprint/performance in the runtime pass |
+ 
+-All nine placements are retained. The rule explorer moves to the entrance side and gains local furniture; the rug plane is lifted above the deck. The text does not promise controls on the rug or network that they do not have.
++All nine placements are retained. The rule explorer stands at (10,5), one cell clear of the entrance wall, and supplies the overhead ring; the rug plane is lifted above the deck. The text does not promise controls on the rug or network that they do not have.
+--- before/commons/maps/CA_Introduction/encounter-notes.md
++++ after/commons/maps/CA_Introduction/encounter-notes.md
+@@ -1,3 +1,17 @@
++# The row was already a ring — 25 September 2026
++
++`ca_rule_explorer#study:neighbours#room:ring` extends the existing neighbour study in this map only. The explorer remains the sole automaton. Its `_grid`, current state, rule, seed, stepping and wrap code are untouched. NeighbourStudy attaches the opt-in ring and refreshes its readout through its existing refresh path.
++
++Thirty-two columns wrap around a 1.65 m radius. The lowest band, 2.02 m above the floor, is current. Up to twenty-three older rows stand above it at .095 m intervals; no uncomputed row is shown as a dead generation. The 768-instance MultiMesh copies the explorer's alive/dead colours. STEP, RUN, SEED, RST and the rule controls act on the same stored data. CELL carries the existing pink/gold triplet across the seam. Number labels face inward; they have no mirrored back face. The ring is a visual receiver and introduces no collision, sensors, controls or second clock.
++
++The map moves only the explorer: (10,4) to (10,5), with the same height, yaw and existing configuration plus `room:ring`. The baseline position overlapped the museum entrance wall: the interaction pointer could still press buttons through geometry. The revised standing approach is clear of that wall. The ring occupies the corridor beyond the desk, centred near map (10,7.1); its placement compensates for the desk's one-cell move. All nine authored works, structure cells and utilities remain.
++
++Current native review, before/after photographs and test report: `doc/book/iterations/2026-09-25-ca-neighbour-ring/index.html`. The first baseline assertion counted generated museum fixtures as authored works; the report includes all nine actual placements and that mistaken assertion is retained. The initial interaction run correctly exposed the entrance-wall obstruction. Final checks and limitations are reported on the review page. No tracked headset comfort, learner or Quest acceptance follows from supplied desktop-body and pointer tests.
++
++The manuscript gains a spatial encounter after its existing wrapped-boundary paragraph and corrects the mistaken NEXT button name to STEP. Prior code excerpts, artifact returns, references and ending are retained. Ring height represents past generations, not a second spatial dimension of the automaton. The visitor can stand inside its representation without becoming a neighbour in the update rule.
++
++---
++
+ # Arrive in time to see a history — encounter notes
+ 
+ 24 September 2026. Current implementation and verification for this pass.
+--- before/commons/maps/CA_Introduction/field_notes.md
++++ after/commons/maps/CA_Introduction/field_notes.md
+@@ -1,3 +1,9 @@
++# 25 September — a row around the body
++
++The current map moves the explorer one cell inward to clear the museum entrance wall and opts into a 32-cell overhead ring. It reads the explorer’s existing bounded history; the state update remains untouched. Native images, pointer and body checks, earlier fixture errors and source snapshots are recorded at `doc/book/iterations/2026-09-25-ca-neighbour-ring/index.html`. See [encounter notes](encounter-notes.md) for dimensions and current scope. Earlier placement/test claims below describe their dated passes.
++
++---
++
+ # CA Introduction — the next row and the blob-culture transition
+ 
+ 13 September 2026. The user asked to continue into Cellular Automata after clarifying that the easy noise filter can become a mental algorithmic wall. Its organic or queer gesture remains valuable; learning further capabilities keeps other forms possible.
+--- before/commons/maps/CA_Introduction/final.md
++++ after/commons/maps/CA_Introduction/final.md
+@@ -6,7 +6,7 @@
+ 
+ <!-- @ca_rule_explorer -->
+ 
+-The board waits in the left-hand corridor near the entrance. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?
++The board waits in the left-hand corridor near the entrance. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave STEP for a moment. What would you make from these three?
+ 
+ Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.
+ 
+@@ -43,6 +43,16 @@
+ Press SEED. Two adjacent cells now occupy the starting row. The rule has stayed where you left it. Advance again and compare what happens where their consequences meet. Changing the beginning explores something that changing the rule alone could leave unseen. RST returns to the selected beginning and clears the visible history.
+ 
+ Keep stepping until a pattern reaches the boundary. The witness can cross it too: after cell 31 comes cell 0. The modulo operations in the loop join the two ends. What looks like a line on the desk is a ring to the calculation. Twenty-four rows fit on this board; older rows leave the display while their consequences remain in the current state. Once again, the visible past is smaller than the past that brought us here.
++
++Just beyond the desk, the same row hangs overhead in a ring. Step underneath and find cells 31 and 0. They stand beside each other, as close as any other pair. The end of the line was where we had cut the picture. The calculation had already joined it.
++
++STEP changes the lowest band as well as the board. Older rows rise above it. Let RUN continue while you walk underneath: the history gathers around an opening you can look through. Height marks how many updates ago a row was current. We have given time a direction in the room; the cells still belong to a one-dimensional neighbourhood. RST leaves only the starting ring again.
++
++![Stored cellular-automaton rows hanging around the museum visitor](images/neighbour-ring.png)
++
++*The board and ring show the same held Rule 90 history. The lowest band is current; the bands above retain earlier rows.*
++
++The ring does not ask where you stand. You can feel enclosed by a neighbourhood without belonging to it. Our body receives the rule’s consequences as light; the cells still consult only other cells. That distance is also something we have built.
+ 
+ <!-- @persian_rug -->
+ 
+--- before/commons/maps/CA_Introduction/intent.md
++++ after/commons/maps/CA_Introduction/intent.md
+@@ -1,3 +1,5 @@
+ # Intent
+ 
+ A row can wait for an answer, a rug can impose symmetry, and a network can retain a growth history. Let the visitor arrive in time to see the last unfold. A finite saved history should not pretend that growth exhausted all possibilities.
++
++Let the row’s wrapped boundary become visible around the visitor. The overhead ring reads the same state and history as the desk; it adds no second automaton. Standing inside a drawn neighbourhood does not yet make the body an input to its rule.
+--- before/commons/maps/CA_Introduction/map_data.json
++++ after/commons/maps/CA_Introduction/map_data.json
+@@ -1,943 +1,943 @@
+ {
+-  "map_info": {
+-    "title": "Introduction",
+-    "name": "CA_Introduction",
+-    "lookup_name": "CA_Introduction",
+-    "description": "Begin with a held row of cells, then compare a mirrored two-dimensional rug and a growing line network.",
+-    "manual_file": "res://commons/context/clipboard/tutorial_text/elementary_ca_axioms.md",
+-    "version": "1.0",
+-    "format": "json",
+-    "dimensions": {
+-      "width": 13,
+-      "depth": 19,
+-      "max_height": 5
+-    },
+-    "metadata": {
+-      "difficulty": "intermediate",
+-      "category": "cellular_automata",
+-      "estimated_time": "5 minutes",
+-      "learning_objectives": [
+-        "Artistic CA",
+-        "Structural CA",
+-        "Complex patterns"
+-      ]
+-    },
+-    "museum": {
+-      "artifact_placement": "map",
+-      "props_deny": [
+-        "bench"
+-      ]
+-    }
++ "map_info": {
++  "title": "Introduction",
++  "name": "CA_Introduction",
++  "lookup_name": "CA_Introduction",
++  "description": "Begin with a held row of cells, then compare a mirrored two-dimensional rug and a growing line network.",
++  "manual_file": "res://commons/context/clipboard/tutorial_text/elementary_ca_axioms.md",
++  "version": "1.0",
++  "format": "json",
++  "dimensions": {
++   "width": 13,
++   "depth": 19,
++   "max_height": 5
+   },
+-  "utility_definitions": {
+-    "t": {
+-      "type": "teleporter",
+-      "name": "Next",
+-      "description": "Continue to next step",
+-      "properties": {
+-        "action": "next_in_sequence"
+-      }
+-    }
++  "metadata": {
++   "difficulty": "intermediate",
++   "category": "cellular_automata",
++   "estimated_time": "5 minutes",
++   "learning_objectives": [
++    "Artistic CA",
++    "Structural CA",
++    "Complex patterns"
++   ]
+   },
+-  "lighting": {
+-    "ambient_color": [
+-      0.4,
+-      0.4,
+-      0.5
+-    ],
+-    "ambient_energy": 0.6,
+-    "directional_light": {
+-      "enabled": true,
+-      "direction": [
+-        -0.4,
+-        -0.7,
+-        -0.4
+-      ],
+-      "color": [
+-        1.0,
+-        0.9,
+-        0.8
+-      ],
+-      "energy": 1.2
+-    }
+-  },
+-  "settings": {
+-    "cube_size": 1.0,
+-    "gutter": 0.0,
+-    "show_grid": true,
+-    "enable_physics": true,
+-    "auto_reveal_on_entry": false,
+-    "initial_tile_visibility": "hidden_except_corners",
+-    "background": {
+-      "type": "sky",
+-      "color": [
+-        0.2,
+-        0.3,
+-        0.7
+-      ]
+-    }
+-  },
+-  "layers": {
+-    "structure": [
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "4",
+-        "4",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "4",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "3",
+-        "1",
+-        "1",
+-        "3",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "4",
+-        "1",
+-        "4",
+-        "4",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "5",
+-        "1",
+-        "5",
+-        "3",
+-        "4",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "4",
+-        "3",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "5",
+-        "1",
+-        "1",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "0",
+-        "1",
+-        "4",
+-        "4",
+-        "3",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "4",
+-        "4",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ]
+-    ],
+-    "utilities": [
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "m:2:6:8:1.0",
+-        "sp",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "t",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ]
+-    ],
+-    "interactables": [
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "synthesis_stand#subject:dark_sphere#mode:hero",
+-        "",
+-        " ",
+-        "dark_sphere",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "persian_rug:0:0.025#plinth:0",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "ca_rule_explorer:270:1.04#study:neighbours#rule:90#speed:4#plinth:0",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        " ",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "grid_substrate_runner",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "langton_swarm",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "line_network_ca:0:0#size:2.0#study:arrival",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "rule110_computer",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "ca_showcase",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ]
+-    ]
++  "museum": {
++   "artifact_placement": "map",
++   "props_deny": [
++    "bench"
++   ]
+   }
++ },
++ "utility_definitions": {
++  "t": {
++   "type": "teleporter",
++   "name": "Next",
++   "description": "Continue to next step",
++   "properties": {
++    "action": "next_in_sequence"
++   }
++  }
++ },
++ "lighting": {
++  "ambient_color": [
++   0.4,
++   0.4,
++   0.5
++  ],
++  "ambient_energy": 0.6,
++  "directional_light": {
++   "enabled": true,
++   "direction": [
++    -0.4,
++    -0.7,
++    -0.4
++   ],
++   "color": [
++    1.0,
++    0.9,
++    0.8
++   ],
++   "energy": 1.2
++  }
++ },
++ "settings": {
++  "cube_size": 1.0,
++  "gutter": 0.0,
++  "show_grid": true,
++  "enable_physics": true,
++  "auto_reveal_on_entry": false,
++  "initial_tile_visibility": "hidden_except_corners",
++  "background": {
++   "type": "sky",
++   "color": [
++    0.2,
++    0.3,
++    0.7
++   ]
++  }
++ },
++ "layers": {
++  "structure": [
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "4",
++    "4",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "4",
++    "4",
++    "4",
++    "4",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "4",
++    "4",
++    "4",
++    "4",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "4",
++    "4",
++    "4",
++    "4",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "3",
++    "1",
++    "1",
++    "3",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "4",
++    "1",
++    "4",
++    "4",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "5",
++    "1",
++    "5",
++    "3",
++    "4",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "4",
++    "3",
++    "1",
++    "4",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "5",
++    "1",
++    "1",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "0",
++    "1",
++    "4",
++    "4",
++    "3",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "4",
++    "4",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w"
++   ]
++  ],
++  "utilities": [
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "m:2:6:8:1.0",
++    "sp",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "t",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ]
++  ],
++  "interactables": [
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "synthesis_stand#subject:dark_sphere#mode:hero",
++    "",
++    " ",
++    "dark_sphere",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "persian_rug:0:0.025#plinth:0",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "ca_rule_explorer:270:1.04#study:neighbours#rule:90#speed:4#plinth:0#room:ring",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    " ",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "grid_substrate_runner",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "langton_swarm",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "line_network_ca:0:0#size:2.0#study:arrival",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "rule110_computer",
++    "",
++    ""
++   ],
++   [
++    "",
++    "ca_showcase",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ]
++  ]
++ }
+ }
+--- before/commons/maps/CA_Introduction/summary.md
++++ after/commons/maps/CA_Introduction/summary.md
+@@ -1,7 +1,7 @@
+ # CA Introduction
+ 
+-The first hall follows the Noise chapter's question of what forms remain beyond the familiar organic filter. The rule explorer begins with a held row and lets the visitor inspect three inputs before advancing a generation. A second seed, wrapped boundary and bounded history make the experiment more specific.
++The first hall follows the Noise chapter's question of what forms remain beyond the familiar organic filter. The rule explorer begins with a held row and lets the visitor inspect three inputs before advancing a generation. A second seed, wrapped boundary and bounded history make the experiment more specific. Beyond the desk, those same stored rows hang in a body-sized ring: 31 stands beside 0, and earlier generations rise above the current row.
+ 
+ The rug is a two-dimensional multistate automaton with separate frame/interior rules and an explicitly repeated mirror operation. The line network grows occupied positions and draws selected neighbour connections. Three primary passages compare these mechanisms. All nine original placements remain.
+ 
+-Game source and placement changes are prepared; in-engine and headset checks remain pending. The illustrated web page provides an independently computed elementary-rule exercise and identifies its status separately from Godot.
++The explorer sits one cell clear of the museum entrance. Native museum checks and photographs are recorded in the current encounter notes; tracked headset and Quest acceptance remain pending. The earlier illustrated web exercise remains separate from Godot.
+--- before/commons/maps/CA_Introduction/technical.md
++++ after/commons/maps/CA_Introduction/technical.md
+@@ -1,3 +1,5 @@
++> Current spatial extension and verification (25 September 2026): [encounter notes](encounter-notes.md). The earlier implementation account below remains historical where placement differs.
++
+ > Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+ 
+ # The row, the rug and the network
+--- before/commons/maps/CA_Introduction/tutorial.md
++++ after/commons/maps/CA_Introduction/tutorial.md
+@@ -5,9 +5,9 @@
+ 3. Switch to Rule 30 with the same seed. Use RUN/hold to vary observation time; speed does not select the rule.
+ 4. Inspect `_apply_rule`: three input bits select one of eight answer bits. Trace the separate old and new arrays through `_advance`.
+ 5. SEED changes one cell into an adjacent pair while retaining the rule. STEP through the consequence. RST clears both stored and visible history.
+-6. CELL reaches the edge: index 31 is adjacent to index 0. Distinguish the wrapped row from the rectangular time history.
++6. CELL reaches the edge: index 31 is adjacent to index 0. Find the pair on the overhead ring. STEP moves the same stored history on both displays; RUN lets it unfold while you stand beneath it. Distinguish the current one-dimensional row from the time history rising above it.
+ 7. Examine the rug's four matching quarters. Read `_enforce_quadrant` and the border/interior rules; the symmetry is reimposed each step.
+ 8. Walk around the line network. Compare stored occupancy, the growth proposal and the renderer's later choice of a parent. A connecting line is not a complete causal record.
+ 9. Carry state, neighbourhood and update schedule into the next hall's three-dimensional specimen.
+ 
+-Three principal works teach different mechanisms. The remaining six placements stay in the hall as secondary encounters. Headset verification and the prepared runtime probe remain pending while the existing Godot session is active.
++Three principal works teach different mechanisms. The remaining six placements stay in the hall as secondary encounters. Native museum evidence is in the current encounter notes. Tracked headset comfort, reach and Quest performance remain pending.
+--- core-before-update/CA_Introduction
++++ core-current/CA_Introduction
+@@ -8,9 +8,9 @@
+   "status": "desktop_checked_headset_pending",
+   "sequence": "cellularautomata",
+   "text_path": "commons/maps/CA_Introduction/final.md",
+-  "text_sha256": "837bd0dff953a6c9674b1a49456a877aa61983608d923afff182a73092d5105b",
+-  "map_sha256": "78deb24278c364a31751d235a3cca88b1189097f3d7c18456cde07f28b26ef8f",
++  "text_sha256": "cd137efb21d49fd96756429ca964fa9341823cefa8c2420b0d570a173aeb05ff",
++  "map_sha256": "3b62773b6bf0f0fe1e63e243da34fba0dfc0620290d29f5acf886c7c793dd21a",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#CA_Introduction",
+-  "verification_scope": "Claude museum placement/readback retained. This pass adds #study:arrival to line_network_ca; native studio checks compare connections against ordinary growth on three seeds, retain twenty stages, test arrival and physical replay signal, preserve old vertex positions in a fixed final fit. Default placements remain unchanged. No new full-museum walk or headset test."
++  "local_review": "doc/book/iterations/2026-09-25-ca-neighbour-ring/index.html",
++  "verification_scope": "Native authored museum: 45 checks, seven actual mouse-ray clicks. Same 32-cell row and 24-row history drive an overhead ring; colours, missing-history visibility, wrap witnesses, STEP/SEED/RUN/RST/preset, bounded history and legacy opt-in verified. Explorer moved one cell clear of entrance collision; actual museum body passes beneath ring. Supplied desktop inputs, no tracked headset/Quest/learner acceptance."
+ }

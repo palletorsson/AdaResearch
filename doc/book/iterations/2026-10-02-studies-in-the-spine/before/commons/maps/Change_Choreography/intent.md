@@ -1,0 +1,1 @@
+Make phase, frequency difference and unequal throughput observable through two primary machines. Ask the visitor to predict and change one relation before revealing its equation. Preserve the distinction between prescribed rotation and physical contacts.

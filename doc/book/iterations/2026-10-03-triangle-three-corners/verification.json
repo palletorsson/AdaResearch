@@ -1,0 +1,122 @@
+{
+	"checks": [
+		{
+			"check": "A two-position record stops honestly without inventing a triangle",
+			"passed": true
+		},
+		{
+			"check": "Capture empty.png",
+			"passed": true
+		},
+		{
+			"check": "Prior Trace release record exists",
+			"passed": true
+		},
+		{
+			"check": "Triangle reads the same original used by Grid",
+			"passed": true
+		},
+		{
+			"check": "Selection takes original indices without snapping, flattening or fitting",
+			"passed": true
+		},
+		{
+			"check": "Closed outline alone creates no face",
+			"passed": true
+		},
+		{
+			"check": "Capture outline.png",
+			"passed": true
+		},
+		{
+			"check": "Explicit triangle submission uses the same three positions",
+			"passed": true
+		},
+		{
+			"check": "Face material displays both sides and needs no normals",
+			"passed": true
+		},
+		{
+			"check": "Capture face.png",
+			"passed": true
+		},
+		{
+			"check": "Capture back.png",
+			"passed": true
+		},
+		{
+			"check": "Changing the view leaves submitted positions unchanged",
+			"passed": true
+		},
+		{
+			"check": "Collinear corners retain three vertices with zero area",
+			"passed": true
+		},
+		{
+			"check": "Capture collinear.png",
+			"passed": true
+		},
+		{
+			"check": "Coincident corner hides its zero-length boundary segment",
+			"passed": true
+		},
+		{
+			"check": "Separating corners recovers the face without accumulating surfaces",
+			"passed": true
+		},
+		{
+			"check": "Removing fill preserves the handles and segments",
+			"passed": true
+		},
+		{
+			"check": "Visible face has no collision at its interior",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim picks up a triangle corner",
+			"passed": true
+		},
+		{
+			"check": "Mouse-driven corner movement rebuilds the face",
+			"passed": true
+		},
+		{
+			"check": "Release retains the edited corner and leaves the original record untouched",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR grip picks up the same kind of corner",
+			"passed": true
+		},
+		{
+			"check": "XR corner movement changes depth and preserves the shared frame",
+			"passed": true
+		},
+		{
+			"check": "XR release keeps the edited corner without saving over Trace",
+			"passed": true
+		},
+		{
+			"check": "Restart selects the original saved corners again",
+			"passed": true
+		},
+		{
+			"check": "Exactly three entries select three distinct list indices",
+			"passed": true
+		},
+		{
+			"check": "Lesson constructs all its objects on a bare Node3D",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"physical_headset_tested": false,
+	"selected_indices": [
+		0,
+		13,
+		26
+	],
+	"source_points": 41,
+	"source_record": "Exact synthetic XR release record from trace-return-to-grid",
+	"source_sha256": "d7a334b32fdf7e3787d66cae6b8a8cbcb7412c25859740d77199274ae5619bbb"
+}

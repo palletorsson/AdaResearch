@@ -1,0 +1,6 @@
+{
+  "incoming": {
+    "sha256": "abdc3bd88aa92977446cc1b71af385a0fad01978c8ef4dca31329f4257fb3a9d"
+  },
+  "carry": "Reuse the supplied circle sampler and LineSkin to measure a closed polygon. Sum neighbour lengths, including last to first, and compare with the finite TAU-based circumference reference. Increase sides until the metre tolerance is met or the sample budget is spent. Trigonometric derivation stays supplied. Test a tighter tolerance and an unattainable request; carry a stopping rule that names both error and cost."
+}

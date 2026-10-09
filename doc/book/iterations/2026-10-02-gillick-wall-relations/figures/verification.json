@@ -1,0 +1,129 @@
+{
+	"checks": [
+		{
+			"check": "48 persistent bars across three studies",
+			"pass": true
+		},
+		{
+			"check": "saved wall-overview",
+			"pass": true
+		},
+		{
+			"check": "tight control sets 0.11 m pitch",
+			"pass": true
+		},
+		{
+			"check": "saved intervals-tight",
+			"pass": true
+		},
+		{
+			"check": "open control preserves 24 bars and spreads their centres",
+			"pass": true
+		},
+		{
+			"check": "spacing changes keep the collection centred",
+			"pass": true
+		},
+		{
+			"check": "spacing leaves colours fixed",
+			"pass": true
+		},
+		{
+			"check": "saved intervals-open",
+			"pass": true
+		},
+		{
+			"check": "saved crossings-shallow",
+			"pass": true
+		},
+		{
+			"check": "deep control moves vertical members forward",
+			"pass": true
+		},
+		{
+			"check": "depth change retains the frontal XY arrangement",
+			"pass": true
+		},
+		{
+			"check": "depth leaves colour fixed",
+			"pass": true
+		},
+		{
+			"check": "saved crossings-deep",
+			"pass": true
+		},
+		{
+			"check": "saved crossings-oblique",
+			"pass": true
+		},
+		{
+			"check": "saved line-complete",
+			"pass": true
+		},
+		{
+			"check": "selected top rail has physical depth",
+			"pass": true
+		},
+		{
+			"check": "omission removes both visible rail and its collision",
+			"pass": true
+		},
+		{
+			"check": "omission retains the array identity for restoration",
+			"pass": true
+		},
+		{
+			"check": "saved line-omitted",
+			"pass": true
+		},
+		{
+			"check": "restore brings back the same rail and collider",
+			"pass": true
+		},
+		{
+			"check": "saved wall-sequence",
+			"pass": true
+		},
+		{
+			"check": "all-pink comparison keeps every transform",
+			"pass": true
+		},
+		{
+			"check": "all materials receive the same pink",
+			"pass": true
+		},
+		{
+			"check": "saved wall-pink",
+			"pass": true
+		},
+		{
+			"check": "group assignment keeps every transform",
+			"pass": true
+		},
+		{
+			"check": "saved wall-groups",
+			"pass": true
+		},
+		{
+			"check": "Walk selects the visitor camera",
+			"pass": true
+		},
+		{
+			"check": "structure change is refused beside the wall",
+			"pass": true
+		},
+		{
+			"check": "reset restores geometry, colour, rail and overview",
+			"pass": true
+		},
+		{
+			"check": "all study identities persist through controls and reset",
+			"pass": true
+		},
+		{
+			"check": "saved controls",
+			"pass": true
+		}
+	],
+	"scope": "Native companion; real button signals, stable identities, material/geometry independence, collision rays, view/guard/reset. No headset or physical-keyboard test."
+}

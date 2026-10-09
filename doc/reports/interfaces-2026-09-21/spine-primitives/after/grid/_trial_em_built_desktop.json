@@ -1,0 +1,1349 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-09-21 16:12:58",
+	"boot_ms": {
+		"autoloads": 2290,
+		"bake_parsed": 1053,
+		"boot_tail": 3466,
+		"engine_pak": 810,
+		"engine_to_ready": 4551,
+		"entry": 1,
+		"first_physics": 3577,
+		"grid_warm": 1574,
+		"guests_loaded": 1696,
+		"loading_shell": 22,
+		"modules_loaded": 295,
+		"modules_pool": 366,
+		"museum_data": 366,
+		"plan_parsed": 1016,
+		"pool_done": 947,
+		"scene_chain": 1451,
+		"segment0_built": 3465,
+		"world_ready": 2341
+	},
+	"plan": "res://doc/reports/interfaces-2026-09-21/spine-primitives/after/grid/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.7,
+						-2.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.14,
+						0.0,
+						1.6
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.0,
+						0.0,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						1
+					],
+					"token": "player_trace",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.5,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						5
+					],
+					"token": "grid_lines",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						-1.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						15,
+						7
+					],
+					"token": "plan_vitrine",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						10
+					],
+					"token": "grab_sphere_point_snap",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.7,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						10
+					],
+					"token": "floating_sphere_field",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						13
+					],
+					"token": "modulor_man_demo",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						13.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						13
+					],
+					"token": "room_grammar",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.3,
+						13.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "gate",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "gate:point line grid",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.0,
+						0.0,
+						-3.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						12,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						11
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 01",
+					"index": 1,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "01\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.2,
+						1.6,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						13
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 02",
+					"index": 2,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "02\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						17
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 03",
+					"index": 3,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "03\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						21
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						20
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 04",
+					"index": 4,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "04\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.3,
+						1.0,
+						21.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 05",
+					"index": 5,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "05\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						3
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 06",
+					"index": 6,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "06\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.2,
+						1.2,
+						3.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point line grid · 07",
+					"index": 7,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "07\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point line grid · 08",
+					"index": 8,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "08\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						1
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point line grid · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "09\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.2,
+						1.2
+					]
+				},
+				{
+					"backing_cell": [
+						19,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						18,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point line grid · 10",
+					"index": 10,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "10\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						19.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						7,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						15
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point line grid · 11",
+					"index": 11,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "11\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.0,
+						1.0,
+						15.3
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						16,
+						11
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 12",
+					"index": 12,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "12\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.3,
+						1.0,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						13
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "13\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						17
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 14",
+					"index": 14,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "14\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						22
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						21
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · point line grid · 15",
+					"index": 15,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "15\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						22.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "16\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						3
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · point line grid · 17",
+					"index": 17,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "17\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.3,
+						1.0,
+						3.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point line grid · 18",
+					"index": 18,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "18\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						6
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point line grid · 19",
+					"index": 19,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "19\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						0.2,
+						6.3
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						10
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						10
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · point line grid · 20",
+					"index": 20,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "20\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.2,
+						10.2
+					]
+				},
+				{
+					"backing_cell": [
+						19,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						18,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · point line grid · 21",
+					"index": 21,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "point line grid",
+					"segment": 0,
+					"text": "21\nprimitives · point line grid",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0285020247101784,
+						"pixel_size": 0.000259109311740891,
+						"w": 0.128000006079674
+					},
+					"world": [
+						19.0,
+						1.1,
+						7.6
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.##############################",
+				"................p...#############",
+				"##..............p...#############",
+				"##..................#############",
+				"########..#######################",
+				"##........s######################",
+				"##.........######################",
+				"##.........#........#############",
+				"##.........#........#############",
+				"##.........#..sssss.#############",
+				"##............sssss.#############",
+				"##............sssss.#############",
+				"##sss.........sssss.#############",
+				"##sss......#..sssss.#############",
+				"##s#s.s....#........#############",
+				"##.........#........#############",
+				"##.........######################",
+				"##.ss...s..######################",
+				"#########..######################",
+				"#########..######################",
+				"#########..######################",
+				"##.........######################",
+				"##.........######################",
+				"##.........######################",
+				"##.........######################",
+				"##.........######################",
+				"##..#############################",
+				"##...############################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": true
+			},
+			"h": 24,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "point line grid",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,10": "grab_sphere_point_snap",
+				"1,8": "grab_sphere_point_snap",
+				"1,9": "grab_sphere_point_snap",
+				"13,5": "plan_vitrine",
+				"13,6": "plan_vitrine",
+				"13,7": "plan_vitrine",
+				"13,8": "plan_vitrine",
+				"13,9": "plan_vitrine",
+				"14,5": "plan_vitrine",
+				"14,6": "plan_vitrine",
+				"14,7": "plan_vitrine",
+				"14,8": "plan_vitrine",
+				"14,9": "plan_vitrine",
+				"15,5": "plan_vitrine",
+				"15,6": "plan_vitrine",
+				"15,7": "plan_vitrine",
+				"15,8": "plan_vitrine",
+				"15,9": "plan_vitrine",
+				"16,5": "plan_vitrine",
+				"16,6": "plan_vitrine",
+				"16,7": "plan_vitrine",
+				"16,8": "plan_vitrine",
+				"16,9": "plan_vitrine",
+				"17,5": "plan_vitrine",
+				"17,6": "plan_vitrine",
+				"17,7": "plan_vitrine",
+				"17,8": "plan_vitrine",
+				"17,9": "plan_vitrine",
+				"2,13": "modulor_man_demo",
+				"2,8": "grab_sphere_point_snap",
+				"2,9": "grab_sphere_point_snap",
+				"3,10": "grab_sphere_point_snap",
+				"3,13": "modulor_man_demo",
+				"3,8": "grab_sphere_point_snap",
+				"3,9": "grab_sphere_point_snap",
+				"5,10": "floating_sphere_field",
+				"7,13": "room_grammar",
+				"9,1": "player_trace"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 20,
+			"z0": -4,
+			"z1": 24
+		}
+	]
+}

@@ -1,0 +1,21 @@
+--- before/commons/maps/QFEP_F_Term/final.md
++++ commons/maps/QFEP_F_Term/final.md
+@@ -12,12 +12,14 @@
+ 
+ The workbench calculates binary Shannon entropy from the chosen probability: H(p) = −p log₂ p − (1−p) log₂(1−p). The grid is one finite sample of the specified source. H describes uncertainty under that source model; it is not a guarantee about the exact shortest encoding of this particular displayed grid.
+ 
+-The room’s F term asks a related but different question about a model’s fit and prediction. Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities. This display computes the first of those. It gives us a precise starting observation without pretending its H readout is already a measurement of F.
++The room’s F term asks a related but different question about a model’s fit and prediction. Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities. The entropy readout computes the first of those. It gives us a precise starting observation without pretending its H readout is already a measurement of F.
+ 
+-Imagine a predictor that always expects zero. It would usually succeed near one end of the rail and usually fail near the other, although the entropy can be the same at those two settings. The example separates uncertainty in a source from mismatch between a source and a particular predictor.
++Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compare p near 0.1 with p near 0.9 again. The entropy returns to almost the same height, but the mistakes spread. The source is no more uncertain; this predictor is less suited to it.
+ 
+-The next useful addition would display that predictor’s expectations and errors beside the grid. It could then change its expectations while the source stays fixed. A learner would see whether improvement came from an easier world or from a better model of it.
++Leave p near 0.9 and press EXPECT 1. Keep your eye on the bits, not only the number. Their colours stay; the amber marks change sides. You have improved this predictor’s performance without making the world easier.
+ 
+-<!-- @ -->
++The screen distinguishes expected errors under the chosen probability from mistakes counted in this particular grid. They need not agree exactly. The smaller experiment is enough to ask something consequential: when we call a world difficult, whose expectation is meeting it?
++
++Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.
+ 
+ The entropy room next counts alternatives explicitly, asking which possibilities the model has allowed into its world.

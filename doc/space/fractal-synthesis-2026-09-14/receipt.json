@@ -1,0 +1,62 @@
+{
+  "started": "2026-09-14T15:08:14+02:00",
+  "finished": "2026-09-14T15:08:47+02:00",
+  "pid": 22460,
+  "exit": 0,
+  "checks": 73,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/synthesis_probe_base.gd": "4bc802b4157bdf3b0de9f38bceabaade930eee8b46d2b03816dc4792d5f18a27",
+    "ada_run/synthesis_acceptance.gd": "8e01b7bdcfa33d3e66ef3f6018989e47267aa82f68c13f3f6f0d58ec813c7f37",
+    "commons/maps/Fractal_Synthesis/map_data.json": "1f90c268585175b66e9a658777d324a31ac6e8f55db270d087bfee6e232e472f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/synthesis-review-2026-09-14/review-plan.json": "5e7695fe77da3897e64c4895e6f7bafd2bc742c3b6ce1d48fb2afb2b520f1b98",
+    "algorithms/fractals/koch_curve/koch_curve.tscn": "75675cfba8c82729a804939776f4fd2a0237d7d59e9949e385cc9f2c12269c91",
+    "algorithms/fractals/koch_curve/KochCurve.gd": "bd94c3399a039bd88c75849d5c6907729a048e1e9e28aeea39063606cf623761",
+    "algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn": "57e44f585c0af738d28a019e56ccc9d1a3d6652fcec5c105dd56a835b3698f14",
+    "algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd": "5cce9f38f281e23ce6ac80b7796863b7f14aa4649c822e8bf8ec8650513bad32",
+    "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibUI.gd": "e38cbe7eee4687d3481065e82c06bf396a3bbfb3daf91a482cb36f06d286231a",
+    "algorithms/chaos/strangeattractors/strange_attractors.tscn": "b46d43b4104a4e380310e68fa5e67a77c62664d80e17ad68d82bb38a70aa04a3",
+    "algorithms/chaos/strangeattractors/strange_attractors.gd": "81622fc68054f6ef4bba312635416c60a582650342ad6552ccfa606213a0d179",
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "algorithms/fractals/example_8_1_recursion_vr.tscn": "26a76132393c01fd7b0a0a88c386c3d7dd1d5c3f1e440743844a6c55042b1e8a",
+    "algorithms/fractals/example_8_1_recursion_vr.gd": "8e4422441183f842b4b0eae486860a2ef97cee488879dc99983dd45d155b7870",
+    "algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn": "db8e734c773bf88427e83838295ce0c62a29ae1326759e631d5f69f9b618518c",
+    "algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd": "d11bd80a4e198feaf62e7dc8bb0a95cf4c2a5bef9e54c4dd2756740760aaf251",
+    "algorithms/fractals/recursive_tree/recursive_tree.tscn": "ffe51441cb067f24dd9014a6d65c13dce53ee059fed6a2bbc426a3f2f8ea762d",
+    "algorithms/fractals/recursive_tree/recursive_tree.gd": "6dd8aa587fd8758124a7e6a664f90021dff8dcbb76c27aa5a3bda997608da3de",
+    "algorithms/fractals/recursive_tree/RecursiveTreeUI.gd": "fbcafd58c23c791056cfaad028d63d5b4cc5101594acd1ce4b6320bbc1ec1289",
+    "algorithms/fractals/cantorset/cantor_set.tscn": "8807807cda505bf6a89e06d7655bf4db95140278bb85634e3bf73e04229d61a5",
+    "algorithms/fractals/cantorset/cantor_set.gd": "f5b34e7e1bd8930a1102b8d3aa6c4d0dd15de04a2640062c15eac754fb4daed4",
+    "algorithms/fractals/fractal_clouds/fractal_clouds.tscn": "56613abdbfaa3b08f0eadbd1bbb45253bce78121524d06aff986e62157b11053",
+    "algorithms/fractals/fractal_clouds/fractal_clouds.gd": "9dae7b061c34448551bf647be4dd860fd9b6b1fa84102bff3961f0da02ae95ed",
+    "algorithms/fractals/romanesco/romanesco.tscn": "597701675b0bc16cdab48ee07f1eb78ac63c3d5282e69bdc76a5c09d40e053f9",
+    "algorithms/fractals/romanesco/romanesco.gd": "d9b61729f763f1ce350ddd43cd7cc4fe270ea32854f9d070c44a20631d7b0671",
+    "commons/artifacts/cantor_lesson/cantor_lesson.gd": "836e2cfd61b308f7f1fb8be6e55d45ead9e9a6f6d657840bea27e7e07ee0beab",
+    "commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd": "e831b04c7ef3c05497fb0c5c59faa60ff31a725a67cc05bfd905cebeb34b1b9e",
+    "commons/artifacts/lsystem_editor/lsystem_editor.gd": "4c330483e53cdef8bd74705be28b52e6f42d78130dd8197d4f710c1d2bbd8abe",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/fractals.json": "4bca76c534c612b0d6d27d5affb8edb9e04922e5cddc7ab3dbb156df5b2579a3",
+    "commons/data/trunk_branches.json": "39c690bb1869f99f2014e96fe7c692f363c759294e93ef05d9c8886eaf8bb2fe",
+    "commons/maps/Fractal_Synthesis/final.md": "c4fbd115d47f1fea9b5dff76dc6d0db298da8660cda835f9b42c787029ab3268",
+    "commons/artifacts/fractal_procedure_gallery/fractal_procedure_gallery.gd": "34059533a4de2664c4f85f9161c0dcd16e3da5c7d9fe920a1d414a9e19b1914c",
+    "commons/artifacts/fractal_procedure_gallery/fractal_procedure_gallery.tscn": "d782b49d25ff236a9410aa65fca0cf0ba0b2029d73fcf285ad70e4f5c9440d19",
+    "commons/artifacts/registry/fractal_procedure_gallery.json": "8f4b74b4fed00d0b0749ef90d1f11b0946e4b39ccef46e7e9f55bfa11f96f6e0"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

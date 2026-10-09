@@ -1,0 +1,92 @@
+--- before-pink/commons/maps/Primitives_Polythedra/map_data.json
++++ after-pink/commons/maps/Primitives_Polythedra/map_data.json
+@@ -22,7 +22,8 @@
+             1,
+             1
+           ],
+-          "reach_m": 1.5
++          "reach_m": 1.5,
++          "color": "#ee5599"
+         },
+         {
+           "name": "first-east-return",
+@@ -34,7 +35,8 @@
+             -1,
+             1
+           ],
+-          "reach_m": 1.5
++          "reach_m": 1.5,
++          "color": "#ee5599"
+         },
+         {
+           "name": "first-east-end",
+@@ -46,7 +48,8 @@
+             -1,
+             -1
+           ],
+-          "reach_m": 1.5
++          "reach_m": 1.5,
++          "color": "#ee5599"
+         },
+         {
+           "name": "exit-west",
+@@ -58,7 +61,8 @@
+             1,
+             -1
+           ],
+-          "reach_m": 1.5
++          "reach_m": 1.5,
++          "color": "#ee5599"
+         },
+         {
+           "name": "exit-east",
+@@ -70,7 +74,8 @@
+             -1,
+             -1
+           ],
+-          "reach_m": 1.5
++          "reach_m": 1.5,
++          "color": "#ee5599"
+         },
+         {
+           "name": "side-entry-west",
+@@ -82,7 +87,8 @@
+             1,
+             1
+           ],
+-          "reach_m": 0.9
++          "reach_m": 0.9,
++          "color": "#ee5599"
+         },
+         {
+           "name": "side-entry-east",
+@@ -94,7 +100,8 @@
+             -1,
+             1
+           ],
+-          "reach_m": 1.1
++          "reach_m": 1.1,
++          "color": "#ee5599"
+         },
+         {
+           "name": "side-exit-west",
+@@ -106,7 +113,8 @@
+             1,
+             -1
+           ],
+-          "reach_m": 1.1
++          "reach_m": 1.1,
++          "color": "#ee5599"
+         },
+         {
+           "name": "side-exit-east",
+@@ -118,7 +126,8 @@
+             -1,
+             -1
+           ],
+-          "reach_m": 1.1
++          "reach_m": 1.1,
++          "color": "#ee5599"
+         }
+       ]
+     },

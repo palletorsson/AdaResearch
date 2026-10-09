@@ -1,0 +1,49 @@
+# One throw and many throws
+
+How much can one throw tell you about a die?
+
+You come in at one corner of the hall. Along the wall you came through, to your left, stand two instruments for throwing: a small table and, further along, a pedestal. Both are played from the hall side, facing back the way you came.
+
+<!-- @dice_throw -->
+
+The table is covered in green felt, and on it lies a white die, eight centimetres on a side, six pips up. Pick it up and throw it onto the felt. It may go on rocking slowly on its face after it lands. When the same face has stayed on top for most of a second, the number on the glass at the far rail changes to that face, and orange balls rain down onto and around the table: sixteen for every pip, so sixteen for a one and ninety-six for a six. When they have landed, look at the die again and compare its top face with the number on the glass. A larger reward tells you about the rule converting pips into falling balls. It does not make one outcome more earned than another, and the most spectacular result should not stand in for the whole experiment.
+
+No random number on this table decides the face; the only draws here scatter and tint the reward balls. The face comes from how your hand let go and from what the die and the felt did afterwards. Press **RESET**, lift the die a few centimetres and let it go dead level: it lands six up and reports six. Tilt it by ten degrees before you let go and it can bounce onto another face, even the one you held underneath. On a screen nothing is thrown: the carried die turns to face your view and falls without spin, so the face it lands on depends on how far you are looking down when you let go. Here the result is read from the settled orientation of a simulated physical die. Its shape, contact with the table and the way you throw all contribute to what happens. A cube's symmetry is a reason to investigate fairness, not a proof that every practical way of throwing it produces equal probabilities.
+
+Throw again, and keep going. The glass keeps a record: how many throws, their running mean beside the model's 3.50, and a bar for each face with its share of the throws so far. A short sequence can contain repetitions or missing faces without settling the question of whether the die is fair. The record becomes useful because it keeps outcomes that your attention might otherwise replace with the newest one.
+
+Pick a face and watch its percentage. It falls on every throw that is not that face, and the mean may barely move while it does. Watch the mean after a high throw and after a low one. An outcome above the current mean pulls it upwards; an outcome below pulls it downwards. Neither direction alone tells you whether the die became fairer. This small record separates a face's frequency from the numerical average of all faces.
+
+There are six possible reported faces. If each were equally likely, their mean value would be 3.5. That is a statement about a distribution, not a face you can roll and not a promise that every small batch averages exactly 3.5. The observed mean belongs to the throws made so far.
+
+Notice what the record lets go. It keeps how often each face came up and forgets the order in which they came and where on the felt each one lay: the glass cannot tell you whether your last three throws were sixes. **RESET** brings the die back and keeps the record. **CLEAR** empties it. Nothing is kept once you leave the hall.
+
+<!-- @ -->
+
+<!-- @coin_toss -->
+
+Further along the same wall, the pedestal holds eight coins in a tray: the last room's two-way choice as an object you can throw. Toss one onto the dark felt pad on the floor beside it. When it lies still, the console adds it to the heads or the tails, and to a ribbon of the last thirty results in the order they came. A coin that comes to rest on its edge is left out without comment. This record keeps what the die's glass forgot, the order, though only for the last thirty tosses.
+
+Here the console also shows three gauges, SPIN, DROP and TILT, read off the coin at the moment it leaves your hand. They describe only the most recent throw, and nothing reads them back. Nothing in the pedestal draws a random number either. Toss all eight coins gently and read the ribbon. Press **REFILL**, then toss all eight hard: the ribbon keeps both runs in order, one after the other, and the gauges show how differently each coin left your hand. Keep track of which method produced which outcomes; combining the records immediately would erase the intervention you are testing. On a screen the coin is only let go, never thrown: SPIN reads zero, and TILT is how far you are looking down. The gauges do not predict the next toss. They show that each toss had conditions, and that the tally keeps none of them.
+
+The console's ratio points at 0.5000. In the last room, the number on the console set the odds once the breathing stopped. Nothing in this pedestal reads 0.5000: it is the model's claim, printed beside the count.
+
+<!-- @ -->
+
+<!-- @random_object_spawner -->
+
+Further in stands a waist-high block, a dark sphere just in front of it. Above it, at two points side by side, small wooden cubes appear out of the air, each with a knock, one every second or so, and drop onto the block. You can pick them up. Each point keeps at most twenty. After that, every new arrival makes one of that point's cubes vanish, chosen at random, even the one in your hand. Chance decides when a cube arrives and which one goes. Nothing here shows a count of either.
+
+<!-- @ -->
+
+<!-- @random_edge_profile -->
+
+Beyond the block, forty-eight red slabs stand across the middle of the hall in eight rows of six, each slab a metre wide and about waist high. The top edge of every slab is drawn through five points. The two end points are fixed at one metre. The three between them are drawn at random: the middle one within thirty centimetres of that height, the two beside it within twenty-five. The slabs of a row stand edge to edge, so a row reads as one ridge that returns to the same height at every metre and wanders only in between.
+
+One slab shows you one draw. The field shows you the rule. Look along a row: however the middles rise and fall, the ridge comes back to its height at every metre, and no peak or dip strays far from it. What many observations can establish that one cannot is laid out here in space instead of in time, and it is a rule about what was allowed to vary: the middles, not the ends.
+
+The field is dealt again every time the hall is built, so these ridges are not the ones the last visitor saw. They are only drawn. Nothing in them stops your body, and you can walk straight through.
+
+<!-- @ -->
+
+The die and the coin kept records of outcomes, each forgetting something different. The cubes on the block changed by losing pieces at random and kept no account of it. The field kept a single deal, laid out all at once and then left alone. In the next room every piece stays, and what builds up is how far each has turned. Carry forward the habit of naming what is allowed to vary before calling the whole result random.

@@ -1,0 +1,104 @@
+--- before/commons/artifacts/rhizome_vault/rhizome_vault.gd
++++ commons/artifacts/rhizome_vault/rhizome_vault.gd
+@@ -41,7 +41,7 @@
+ 
+ # ── Architectural constants ─────────────────────────────────────────────────
+ const FOOTPRINT_HALF: float = 5.0       # ~10x10 m footprint
+-const GROUND_TOP: float = 0.03          # top surface of the ground plate
++@export var ground_top: float = 0.03          # top surface of the ground plate
+ const TUNNEL_WIDTH: float = 1.6         # outer arch width
+ const TUNNEL_HEIGHT: float = 2.2        # arch crown height
+ const DOOR_CLEAR_HALF: float = 0.72     # half clear width of dome openings
+@@ -76,6 +76,8 @@
+ 
+ # ── Grid integration ─────────────────────────────────────────────────────────
+ func apply_grid_config(config_data: Dictionary) -> void:
++	if config_data.has("ground_top"):
++		ground_top = clampf(float(config_data["ground_top"]), -0.2, 0.2)
+ 	if config_data.has("pod_count"):
+ 		pod_count = int(config_data["pod_count"])
+ 	if config_data.has("connection_density"):
+@@ -300,7 +302,10 @@
+ 	plate_mat.albedo_color = Color(0.055, 0.06, 0.055, 1.0)
+ 	plate_mat.roughness = 0.95
+ 	plate.material_override = plate_mat
+-	plate.position = Vector3(0.0, GROUND_TOP - 0.03, 0.0)
++	plate.position = Vector3(0.0, ground_top - 0.03, 0.0)
++	# A flush museum placement uses the museum's visible floor. Two surfaces at
++	# exactly zero otherwise flicker against each other; collision stays available.
++	plate.visible = not is_zero_approx(ground_top)
+ 	_build_root.add_child(plate)
+ 
+ 	var floor_body: StaticBody3D = StaticBody3D.new()
+@@ -309,7 +314,7 @@
+ 	var fbox: BoxShape3D = BoxShape3D.new()
+ 	fbox.size = Vector3(FOOTPRINT_HALF * 2.0, 0.1, FOOTPRINT_HALF * 2.0)
+ 	fshape.shape = fbox
+-	fshape.position = Vector3(0.0, GROUND_TOP - 0.05, 0.0)
++	fshape.position = Vector3(0.0, ground_top - 0.05, 0.0)
+ 	floor_body.add_child(fshape)
+ 	_build_root.add_child(floor_body)
+ 
+@@ -328,7 +333,7 @@
+ 
+ 		var pod_node: Node3D = Node3D.new()
+ 		pod_node.name = "Pod%d" % i
+-		pod_node.position = Vector3(pos.x, GROUND_TOP, pos.z)
++		pod_node.position = Vector3(pos.x, ground_top, pos.z)
+ 		_build_root.add_child(pod_node)
+ 
+ 		# Dome shell with real holes at every opening.
+@@ -402,7 +407,7 @@
+ 				outward = outward.normalized()
+ 			else:
+ 				outward = Vector3(1, 0, 0)
+-			var arch_pos: Vector3 = Vector3(pos.x, GROUND_TOP, pos.z) + outward * pod_r
++			var arch_pos: Vector3 = Vector3(pos.x, ground_top, pos.z) + outward * pod_r
+ 			_add_arch_rib(_build_root, arch_pos, outward, 1.55, minf(TUNNEL_HEIGHT, door_h + 0.25), _tunnel_mat())
+ 
+ 
+@@ -438,7 +443,7 @@
+ 		strip.mesh = sbox
+ 		strip.material_override = strip_mat
+ 		var mid: Vector3 = (start_p + end_p) * 0.5
+-		strip.transform = Transform3D(Basis.looking_at(dirn, Vector3.UP), Vector3(mid.x, GROUND_TOP + 0.012, mid.z))
++		strip.transform = Transform3D(Basis.looking_at(dirn, Vector3.UP), Vector3(mid.x, ground_top + 0.012, mid.z))
+ 		_build_root.add_child(strip)
+ 		# Arch rib pairs along the gap — open-ended, walk straight through.
+ 		if gap < 0.5:
+@@ -447,7 +452,7 @@
+ 		for st_i in range(stations):
+ 			var f: float = (float(st_i) + 0.5) / float(stations)
+ 			var base_p: Vector3 = start_p.lerp(end_p, f)
+-			base_p.y = GROUND_TOP
++			base_p.y = ground_top
+ 			_add_arch_rib(_build_root, base_p - dirn * 0.12, dirn, TUNNEL_WIDTH, TUNNEL_HEIGHT, rib_mat)
+ 			_add_arch_rib(_build_root, base_p + dirn * 0.12, dirn, TUNNEL_WIDTH, TUNNEL_HEIGHT, rib_mat)
+ 
+@@ -457,7 +462,7 @@
+ 	var n: int = _pods.size()
+ 	if n < 2:
+ 		return
+-	var ground_y: float = GROUND_TOP + 0.05
++	var ground_y: float = ground_top + 0.05
+ 	var runner_total: int = clampi(n - 1, 3, 6)
+ 	for _rk in range(runner_total):
+ 		var ia: int = rng.randi_range(0, n - 1)
+@@ -500,7 +505,7 @@
+ 		for c in range(1, climb_steps + 1):
+ 			var elev: float = 0.95 * float(c) / float(climb_steps + 1)
+ 			var sp: Vector3 = b_pos + _dome_point(r_b * 1.03, h_b * 1.03, elev, az_b)
+-			sp.y += GROUND_TOP
++			sp.y += ground_top
+ 			pts.append(sp)
+ 
+ 		# Render strips.
+@@ -608,7 +613,7 @@
+ 		lp.y = 0.0
+ 		if lp.length() > FOOTPRINT_HALF - 0.4:
+ 			lp = lp.normalized() * (FOOTPRINT_HALF - 0.4)
+-		lp.y = GROUND_TOP + 0.025
++		lp.y = ground_top + 0.025
+ 		lbl.position = lp
+ 		lbl.rotation_degrees = Vector3(-90.0, rad_to_deg(atan2(out_dir.x, out_dir.z)), 0.0)
+ 		_build_root.add_child(lbl)

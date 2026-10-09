@@ -1,0 +1,68 @@
+{
+ "sweep": "operations_gallery",
+ "peak_changed_pct": 11.312,
+ "subject_pct": 70.257,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "divisibility": "adversarial"
+   },
+   "b": {
+    "divisibility": "exact"
+   },
+   "changed_px": 60980,
+   "changed_pct": 10.557
+  },
+  {
+   "a": {
+    "divisibility": "adversarial"
+   },
+   "b": {
+    "divisibility": "shared"
+   },
+   "changed_px": 48289,
+   "changed_pct": 8.36
+  },
+  {
+   "a": {
+    "divisibility": "adversarial"
+   },
+   "b": {
+    "divisibility": "coprime"
+   },
+   "changed_px": 41432,
+   "changed_pct": 7.173
+  },
+  {
+   "a": {
+    "divisibility": "exact"
+   },
+   "b": {
+    "divisibility": "shared"
+   },
+   "changed_px": 65336,
+   "changed_pct": 11.312
+  },
+  {
+   "a": {
+    "divisibility": "exact"
+   },
+   "b": {
+    "divisibility": "coprime"
+   },
+   "changed_px": 35009,
+   "changed_pct": 6.061
+  },
+  {
+   "a": {
+    "divisibility": "shared"
+   },
+   "b": {
+    "divisibility": "coprime"
+   },
+   "changed_px": 55227,
+   "changed_pct": 9.561
+  }
+ ]
+}

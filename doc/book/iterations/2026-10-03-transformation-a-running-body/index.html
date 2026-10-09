@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Pre — a body that changes</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">Read the lesson</a><a href="#motion">See the movement</a><a href="#sine">Sine comparison</a><a href="#code">Complete code</a><a href="#decisions">Decisions and checks</a></nav><p>ADA / TRANSFORMATION / 3 OCTOBER 2026</p></header>
+<article><p class="step">Trans_Pre · the first Transformation tutorial</p><h1>Keep the cube.<br>Change what it does.</h1><p class="subtitle">A position becomes a journey. Add a turn, then a change in size. Follow each operation in the same body.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></p><p class="quiet">Open <code>trans_pre.tscn</code>. The default is a still cube with a running clock. Change <code>stage</code> as you read. The film below shows stage 3.</p></article>
+<section id="motion" class="screen"><figure><video controls playsinline preload="metadata" poster="large.png" aria-label="Eight seconds of the cube rising, turning and changing size in the Godot student room"><source src="three-operations.mp4" type="video/mp4"></video><figcaption class="video-caption">Eight seconds in the prepared student room. Native Godot rendering of the lesson's stage 3, sampled at 30 frames per second. No sound. <a href="three-operations.mp4" download>Download the film</a>.</figcaption></figure>
+<div class="pair"><figure><a href="rise.png"><img loading="lazy" src="rise.png" alt="Stage 1, 0.75 s: the centre reaches 1.55 m. Mesh size stays fixed."></a><figcaption>Stage 1, 0.75 s: the centre reaches 1.55 m. Mesh size stays fixed.</figcaption></figure><figure><a href="fall.png"><img loading="lazy" src="fall.png" alt="Stage 1, 2.25 s: the centre reaches 1.05 m. Its orientation stays fixed."></a><figcaption>Stage 1, 2.25 s: the centre reaches 1.05 m. Its orientation stays fixed.</figcaption></figure></div>
+<div class="pair"><figure><a href="large.png"><img loading="lazy" src="large.png" alt="Stage 3, 0.75 s: scale 1.3 at the upper end, with rotation continuing."></a><figcaption>Stage 3, 0.75 s: scale 1.3 at the upper end, with rotation continuing.</figcaption></figure><figure><a href="small.png"><img loading="lazy" src="small.png" alt="Stage 3, 2.25 s: scale 0.7 at the lower end. The same mesh remains."></a><figcaption>Stage 3, 2.25 s: scale 0.7 at the lower end. The same mesh remains.</figcaption></figure></div></section>
+<article id="reading" class="chapter"><h1>A body that changes</h1>
+<p>In the last lesson, you placed three bodies. They stayed where you put them. Now keep one cube and change its position while the scene runs. Then add a turn and a change in size.</p>
+<p>Open <code>trans_pre.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">shared starter</a>. Edit <code>studies/trans_pre/motion.gd</code>. The supplied <code>Cube</code> makes a 0.6-metre box with a dark mark on one face. The room and the small numerical display are also supplied. Every lesson object is created in code.</p>
+<h2>1. Let the clock run</h2>
+<p>The study starts with:</p>
+<pre><code class="language-gdscript">var stage := 0
+var elapsed := 0.0
+</code></pre>
+<p>Run it. The cube stays still, but the elapsed time below it increases.</p>
+<p>Point Zero counted frames. Here <code>_process(delta)</code> receives the time since the previous frame, in seconds:</p>
+<pre><code class="language-gdscript">    elapsed += delta
+</code></pre>
+<p>Adding those intervals gives us a clock. The animation will use seconds, so rendering more frames does not make it run faster.</p>
+<h2>2. Move between two heights</h2>
+<p>Set <code>stage</code> to <code>1</code> and run again. The cube rises, reverses and returns. These variables determine its journey:</p>
+<pre><code class="language-gdscript">var centre := Vector3(0, 1.3, 0)
+var travel := 0.25
+var leg_seconds := 1.5
+</code></pre>
+<p>The centre starts 1.3 metres above the floor. Its lower and upper limits are 1.05 and 1.55 metres. <code>travel</code> is the distance from the middle to either end.</p>
+<p>Inside <code>_process</code>, one value carries time into position:</p>
+<pre><code class="language-gdscript">    var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)
+    if stage &gt;= 1:
+        cube.position.y = lerp(centre.y - travel, centre.y + travel, t)
+</code></pre>
+<p><code>pingpong</code> produces a value that travels from 0 to 1 and back at a steady rate. The added <code>0.5</code> starts it halfway up. <code>lerp</code> uses that value to choose a position between the two heights: 0 gives the lower end, 1 the upper end, and 0.5 their midpoint.</p>
+<p><code>if stage &gt;= 1</code> runs this indented line whenever the stage is at least 1. The later stages will keep this movement.</p>
+<p>Set <code>travel</code> to <code>0.4</code>. The cube now reaches 0.9 and 1.7 metres. Restore <code>0.25</code>, then set <code>leg_seconds</code> to <code>3.0</code>. The distance stays fixed; the journey slows. This value is the time between the ends. A complete return takes twice as long. Because we start in the middle, the first arrival takes only half a leg.</p>
+<p>Restore <code>leg_seconds</code> to <code>1.5</code> before continuing.</p>
+<h2>3. Add a turn</h2>
+<p>Set <code>stage</code> to <code>2</code>. The same cube keeps rising and falling, and now turns:</p>
+<pre><code class="language-gdscript">    if stage &gt;= 2:
+        cube.rotate_y(turn_speed * delta)
+</code></pre>
+<p>The dark mark lets you follow a particular face. The turn is around the cube's centre, about the vertical Y axis. Its centre still follows the same path.</p>
+<p><code>turn_speed</code> is <code>TAU / 8.0</code> radians per second. <code>TAU</code> is one complete turn in radians, so this setting takes eight seconds per turn. Multiplying by <code>delta</code> gives the angle to add in this frame. Change the divisor to <code>4.0</code> for a four-second turn, then restore <code>8.0</code>.</p>
+<h2>4. Change size as well</h2>
+<p>Set <code>stage</code> to <code>3</code>:</p>
+<pre><code class="language-gdscript">    if stage &gt;= 3:
+        var factor: float = lerp(1.0 - pulse, 1.0 + pulse, t)
+        cube.scale = Vector3.ONE * factor
+</code></pre>
+<p>With <code>pulse</code> at <code>0.3</code>, the factor travels between 0.7 and 1.3. <code>Vector3.ONE</code> is <code>(1, 1, 1)</code>: multiplying all three components by the same factor preserves the cube's proportions. Its mesh remains 0.6 metres wide; the displayed width ranges from 0.42 to 0.78 metres.</p>
+<p>The assignment writes a new scale each frame. It does not keep multiplying the previous scale. The same <code>t</code> drives height and size, so the cube is largest at the top. Turning has its own rate.</p>
+<p>Try <code>pulse</code> at <code>0.1</code>. Keep a version whose timing and extent you like. You can now change a body's position, orientation and size without rebuilding its mesh.</p>
+<p>For a short comparison, <a href="#sine">replace steady travel with sine</a>. The endpoints stay fixed; the way the cube arrives changes.</p>
+<p>The museum adds touch detection and collection to these operations. This reduced study animates a visible body. In the next hall, a moving surface will also have to support the visitor.</p><p class="quiet"><a href="tutorial.md">Tutorial source</a> · <a href="Trans_Pre.diff">Exact text diff</a> · <a href="../2026-10-03-primitives-closing-tutorials/index.html#composition">Previous: placing bodies</a></p></article>
+<article id="sine" class="chapter"><p class="step">Optional comparison · one changed expression</p><h1>A different way to arrive</h1>
+<p>The cube rises at a steady speed and reverses at the top. What changes if it slows before turning back?</p>
+<p>In <code>studies/trans_pre/motion.gd</code>, set <code>stage</code> to <code>1</code>. Replace the line that calculates <code>t</code> with:</p>
+<pre><code class="language-gdscript">    var t := (sin(TAU * elapsed / (2.0 * leg_seconds)) + 1.0) / 2.0
+</code></pre>
+<p>Run again. The cube has the same lower and upper heights. It reaches them at the same times. Between them, its speed changes: fastest through the middle, slowing to zero at each end.</p>
+<p><code>sin()</code> returns the sine of an angle in radians, a value between −1 and 1. <code>TAU</code> is a full turn. The expression inside <code>sin()</code> advances one turn over <code>2.0 * leg_seconds</code>, which is three seconds here. Adding 1 and dividing by 2 changes the output range to 0–1, ready for our existing <code>lerp</code>.</p>
+<p>Set <code>leg_seconds</code> to <code>3.0</code>. The complete cycle takes six seconds. The height range stays fixed. Restore <code>1.5</code>, then set <code>travel</code> to <code>0.4</code>. The movement reaches farther, but its cycle still takes three seconds.</p>
+<p>We can use a periodic function before studying how it relates to a circle, other waves or sound. Here we have learned to change its duration and extent. The later Wave Functions sequence returns to its structure.</p>
+<p>The museum's Trans_Pre cubes keep the linear version. This is a comparison you can make in the student study. Restore the <code>pingpong</code> line before continuing the main lesson, or retain the sine version in a separate saved copy.</p><div class="pair"><figure><a href="linear.png"><img loading="lazy" src="linear.png" alt="Linear, 0.375 s: centre height 1.425 m."></a><figcaption>Linear, 0.375 s: centre height 1.425 m.</figcaption></figure><figure><a href="sine.png"><img loading="lazy" src="sine.png" alt="Sine, the same 0.375 s: centre height about 1.477 m. It then slows towards the top."></a><figcaption>Sine, the same 0.375 s: centre height about 1.477 m. It then slows towards the top.</figcaption></figure></div><p class="quiet"><a href="tutorial-sine.md">Comparison source</a></p></article>
+<section id="code"><article><h2>The complete study</h2><p>The first script contains the operations taught here. The other two supply the marked cube and its readout. All are included in the starter. The lesson uses direct references to objects created in code.</p></article><details><summary>motion.gd</summary><div><pre><code>extends Node3D
+
+const Cube = preload(&quot;res://studies/trans_pre/marked_cube.gd&quot;)
+const MotionReadout = preload(&quot;res://studies/trans_pre/motion_readout.gd&quot;)
+
+var stage := 0
+var elapsed := 0.0
+var centre := Vector3(0, 1.3, 0)
+var travel := 0.25
+var leg_seconds := 1.5
+var turn_speed := TAU / 8.0
+var pulse := 0.3
+var cube := Cube.new()
+var readout := MotionReadout.new()
+
+func _ready():
+    # Supplied guards keep this study within its intended working range.
+    assert(stage &gt;= 0 and stage &lt;= 3, &quot;Use stage 0, 1, 2 or 3.&quot;)
+    assert(leg_seconds &gt;= 0.25, &quot;Use at least 0.25 seconds for each leg.&quot;)
+    assert(travel &gt;= 0.0 and travel &lt;= 0.5, &quot;Use a travel extent from 0 to 0.5 metres.&quot;)
+    assert(pulse &gt;= 0.0 and pulse &lt;= 0.5, &quot;Use a pulse extent from 0 to 0.5.&quot;)
+    cube.position = centre
+    add_child(cube)
+    add_child(readout)
+    readout.configure(centre, travel)
+    _process(0.0)
+
+func _process(delta: float):
+    elapsed += delta
+    var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)
+    if stage &gt;= 1:
+        cube.position.y = lerp(centre.y - travel, centre.y + travel, t)
+    if stage &gt;= 2:
+        cube.rotate_y(turn_speed * delta)
+    if stage &gt;= 3:
+        var factor: float = lerp(1.0 - pulse, 1.0 + pulse, t)
+        cube.scale = Vector3.ONE * factor
+    # Supplied annotation observes the values. It does not drive the animation.
+    readout.show_values(stage, elapsed, t, cube.position.y)
+</code></pre><p><a href="motion.gd" download>Download script</a></p></div></details><details><summary>marked_cube.gd</summary><div><pre><code>extends MeshInstance3D
+## Supplied visible body, created entirely in code. No collider or collection.
+## The corner mark lets a learner follow a particular face as the cube turns.
+
+func _init():
+    var box := BoxMesh.new()
+    box.size = Vector3.ONE * 0.6
+    mesh = box
+    var stone := StandardMaterial3D.new()
+    stone.albedo_color = Color(&quot;e7ddd2&quot;)
+    stone.roughness = 0.7
+    material_override = stone
+    var mark := MeshInstance3D.new()
+    var patch := BoxMesh.new()
+    patch.size = Vector3(0.09, 0.09, 0.006)
+    mark.mesh = patch
+    mark.position = Vector3(0.16, 0.16, 0.302)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(&quot;26232c&quot;)
+    ink.roughness = 0.9
+    mark.material_override = ink
+    add_child(mark)
+</code></pre><p><a href="marked_cube.gd" download>Download script</a></p></div></details><details><summary>motion_readout.gd</summary><div><pre><code>extends Node3D
+## Supplied annotation: stage, time and two height ticks. No animation state is changed.
+
+var title := Label3D.new()
+var values := Label3D.new()
+
+func _init():
+    title.position = Vector3(0, 2.25, 0)
+    title.font_size = 29
+    title.pixel_size = 0.0025
+    title.outline_size = 0
+    title.modulate = Color(&quot;ddadbe&quot;)
+    add_child(title)
+    values.position = Vector3(0, 0.57, 0)
+    values.font_size = 22
+    values.pixel_size = 0.003
+    values.outline_size = 0
+    add_child(values)
+
+func configure(centre: Vector3, travel: float):
+    for height in [centre.y - travel, centre.y + travel]:
+        var tick := Label3D.new()
+        tick.position = Vector3(-0.86, height, 0)
+        tick.text = &quot;%.2f  ─&quot; % height
+        tick.font_size = 20
+        tick.pixel_size = 0.0025
+        tick.outline_size = 0
+        tick.modulate = Color(&quot;c8c0c4&quot;)
+        add_child(tick)
+
+func show_values(stage: int, elapsed: float, t: float, height: float):
+    title.text = [&quot;0 / STILL&quot;, &quot;1 / RISE AND FALL&quot;, &quot;2 / ADD A TURN&quot;, &quot;3 / ADD A CHANGE IN SIZE&quot;][stage]
+    values.text = &quot;%.2f seconds    t = %.2f\ncentre height = %.2f m&quot; % [elapsed, t, height]
+</code></pre><p><a href="motion_readout.gd" download>Download script</a></p></div></details></section>
+<details id="decisions"><summary>What changed and what was checked</summary><div><p>Trans_Pre now has an executable tutorial in the shared starter. The original museum implementation notes are preserved. The main lesson follows the museum's linear timing; the optional sine comparison is a separate student experiment.</p><p>61 checks passed in Godot 4.6 against a fresh extraction of the download. These cover actual printed edits, elapsed time, endpoint timing, turn periods, uniform scale, frame partition independence, unchanged mesh data and the sine comparison. Images and film come from the running student room, not the map grid.</p><p>The critical manuscript and museum placement are unchanged. Physical headset use and beginner comprehension remain untested. Coordinates' earlier starter revision is still pending. Local-file browser inspection was blocked by policy; review links and anchors were checked programmatically.</p><p><a href="lesson-contract.json">Teaching contract</a> · <a href="DECISIONS.md">Decisions and source references</a> · <a href="verification.json">Runtime checks</a> · <a href="package-verification.json">Download checks</a> · <a href="verify.gd">Test harness</a></p><p>Next: Trans_Introduction — when the animated surface must also carry a body across a gap.</p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

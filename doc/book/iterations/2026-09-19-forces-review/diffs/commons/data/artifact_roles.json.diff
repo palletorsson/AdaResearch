@@ -1,0 +1,23 @@
+--- before/commons/data/artifact_roles.json
++++ commons/data/artifact_roles.json
+@@ -1843,7 +1843,8 @@
+     "Change_Choreography": {
+       "phase_rod_array": "primary",
+       "conveyor_backlog": "primary",
+-      "if_not_exist_create": "decoration"
++      "if_not_exist_create": "decoration",
++      "parametric_pendulum_waves": "secondary"
+     },
+     "Trans_Body": {
+       "dark_sphere": "secondary",
+@@ -4695,7 +4696,9 @@
+         "phase_rod_array",
+         "conveyor_backlog"
+       ],
+-      "secondary": [],
++      "secondary": [
++        "parametric_pendulum_waves"
++      ],
+       "decoration": [
+         "if_not_exist_create"
+       ]

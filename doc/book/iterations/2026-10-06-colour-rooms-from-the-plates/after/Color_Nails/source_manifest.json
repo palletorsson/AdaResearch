@@ -1,0 +1,33 @@
+{
+  "room": "Color_Nails",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Nails/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Nails/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Nails/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Nails/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Nails/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Nails/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Nails/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Nails/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Nails/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Nails/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Nails/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/Color_Nails/map_data.json": "2640fdf12d4500377cca3c705b70d2866aa800bb480bb103cedeb9d6583ca489",
+    "tools/probes/colour_gallery.gd": "c0641f62a2cdfa1600efe7b6c94c2c88c1576598389460f759f41b683b1dce05",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "56c949ebb87f6436abc2ee1e0b125682ab0d003d28dc3ba64a5be9c2eb5218a6",
+    "ada_run/encounter_pilot/Color_Nails/control.json": "2b29adb944e218470c694edee637c72ee3c3341f3373e23c1a089d971356fdda",
+    "ada_run/encounter_pilot/Color_Nails/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Color_Nails/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Nails/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/commons_artifacts.json": "49cb2e2b0a41e794b3d2e77b8605936cc4ca384f23d6d118ab907bfd6998ca83",
+    "commons/interfaces/nail_color_controller.tscn": "2c109866c27d3a0258064f1f956c52ab685e7e739fd4d30bacc51505fe2b0bdc",
+    "commons/interfaces/nail_color_controller.gd": "90a30fe1d07c80845f00591ac3df5360295b935c74c4b1a232239ddb95ffeffa",
+    "commons/interfaces/hand_color_controller.tscn": "3ef98ef28cb63e401711ea86225ec04640f0f9e63d46140d85bba29471f40e2a",
+    "commons/interfaces/value_mapper_3d.gd": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265"
+  }
+}

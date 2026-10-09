@@ -1,0 +1,105 @@
+{
+  "checks": [
+    {
+      "message": "pre-ready configuration starts at unrestricted question",
+      "ok": true
+    },
+    {
+      "message": "question precedes the animated contradiction",
+      "ok": true
+    },
+    {
+      "message": "physical button forwards assumed answer true",
+      "ok": true
+    },
+    {
+      "message": "unrestricted answer true contradicts itself",
+      "ok": true
+    },
+    {
+      "message": "physical button forwards assumed answer false",
+      "ok": true
+    },
+    {
+      "message": "unrestricted answer false contradicts itself",
+      "ok": true
+    },
+    {
+      "message": "finite filter agrees with independent bitmask membership",
+      "ok": true
+    },
+    {
+      "message": "result mask 1111 is not a member of the four-element domain",
+      "ok": true
+    },
+    {
+      "message": "physical slider reaches restricted case and resets prediction",
+      "ok": true
+    },
+    {
+      "message": "restricted case accepts OUT only",
+      "ok": true
+    },
+    {
+      "message": "restricted case stops contradiction orbit and explains domain",
+      "ok": true
+    },
+    {
+      "message": "restricted case accepts OUT only",
+      "ok": true
+    },
+    {
+      "message": "restricted case stops contradiction orbit and explains domain",
+      "ok": true
+    },
+    {
+      "message": "return hides explanation and asks afresh",
+      "ok": true
+    },
+    {
+      "message": "definition 1 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "definition 2 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "definition 3 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "definition 4 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "Foundation example is empty, not a fictitious self-member",
+      "ok": true
+    },
+    {
+      "message": "definition 5 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "definition 6 shows appropriate controls",
+      "ok": true
+    },
+    {
+      "message": "reconfiguration does not duplicate controls",
+      "ok": true
+    },
+    {
+      "message": "other placements have no added buttons unless enabled",
+      "ok": true
+    },
+    {
+      "message": "legacy slider still illustrates Russell contradiction",
+      "ok": true
+    },
+    {
+      "message": "legacy sixth cell now illustrates separation",
+      "ok": true
+    }
+  ],
+  "failures": []
+}

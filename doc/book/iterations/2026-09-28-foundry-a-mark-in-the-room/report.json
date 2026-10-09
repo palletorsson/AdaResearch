@@ -1,0 +1,215 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "loom study studio and architecture are placed",
+      "passed": true
+    },
+    {
+      "name": "curved room is built",
+      "passed": true
+    },
+    {
+      "name": "loom starts with a five-cell translation card",
+      "passed": true
+    },
+    {
+      "name": "flat and curved sheets begin with the same image",
+      "passed": true
+    },
+    {
+      "name": "curved sheet retains the flat sheet UV addresses",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: samples-before",
+      "passed": true
+    },
+    {
+      "name": "pointer mark changes both live samples",
+      "passed": true
+    },
+    {
+      "name": "same mark also changes the registered low wall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: samples-marked",
+      "passed": true
+    },
+    {
+      "name": "held curve keeps the older mark while flat follows",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: curve-keeps-a-mark",
+      "passed": true
+    },
+    {
+      "name": "edits and hold preserve both sample transforms",
+      "passed": true
+    },
+    {
+      "name": "relinked curve catches up",
+      "passed": true
+    },
+    {
+      "name": "whole-hall controller reads the loom carpet output",
+      "passed": true
+    },
+    {
+      "name": "hall pattern skins add no collision",
+      "passed": true
+    },
+    {
+      "name": "room starts live with the studio as source",
+      "passed": true
+    },
+    {
+      "name": "ROOM initially selected on its surface console",
+      "passed": true
+    },
+    {
+      "name": "hall floor skin stays on grid despite raised console",
+      "passed": true
+    },
+    {
+      "name": "room domain texture is available",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-before",
+      "passed": true
+    },
+    {
+      "name": "one painted source cell reaches wall and floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-one-mark",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-one-mark",
+      "passed": true
+    },
+    {
+      "name": "source edit changes the visible floor pixels",
+      "passed": true
+    },
+    {
+      "name": "held floor stays while the room wall follows",
+      "passed": true
+    },
+    {
+      "name": "room keeps its physical wall and floor geometry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-two-moments",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-held",
+      "passed": true
+    },
+    {
+      "name": "held floor retains its visible pixels after source edit",
+      "passed": true
+    },
+    {
+      "name": "ordinary body enters the patterned room",
+      "passed": true
+    },
+    {
+      "name": "ordinary body moves sideways inside",
+      "passed": true
+    },
+    {
+      "name": "ordinary body returns to its approach",
+      "passed": true
+    },
+    {
+      "name": "ordinary body leaves through the same opening",
+      "passed": true
+    },
+    {
+      "name": "walking does not relink the held floor",
+      "passed": true
+    },
+    {
+      "name": "APPLY LIVE catches the floor up to its wall",
+      "passed": true
+    },
+    {
+      "name": "UNDO LINK restores the held floor image",
+      "passed": true
+    },
+    {
+      "name": "Foundry encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "architecture_global": [
+      10.5,
+      0.5,
+      5.5
+    ],
+    "covering_meshes": [
+      {
+        "bounds": "[P: (1.0, 0.026, 0.0), S: (35.0, 0.00001, 38.0)]",
+        "name": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Foundry/pattern_architecture/ArchitectureFLOOR",
+        "visible": true
+      },
+      {
+        "bounds": "[P: (1.0, 0.0, 0.0), S: (36.0, 7.0, 38.0)]",
+        "name": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Foundry/pattern_architecture/ArchitectureWALLS",
+        "visible": true
+      },
+      {
+        "bounds": "[P: (26.5, 0.0, 6.5), S: (8.0, 3.2, 7.464102)]",
+        "name": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Foundry/PatternStudioPlate/CurvedPatternRoom/RoomWall",
+        "visible": true
+      },
+      {
+        "bounds": "[P: (26.34, 0.0, 6.34), S: (8.32, 3.2, 7.762666)]",
+        "name": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Foundry/PatternStudioPlate/CurvedPatternRoom/OuterWall",
+        "visible": true
+      },
+      {
+        "bounds": "[P: (26.5, 0.04, 6.5), S: (8.0, 0.00001, 8.0)]",
+        "name": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Pattern_Foundry/PatternStudioPlate/CurvedPatternRoom/RoomFloor",
+        "visible": true
+      }
+    ],
+    "hall_floor_skin_height": 0.0259999930858612,
+    "held_floor_changed_bytes": 0,
+    "room_floor_aabb": "[P: (-4.0, 0.04, -4.0), S: (8.0, 0.00001, 8.0)]",
+    "room_floor_global": [
+      30.5,
+      0.0,
+      10.5
+    ],
+    "room_floor_shader": "shader_type spatial;\r\n\r\n// Wallpaper Tile Shader -- GPU implementation of all 17 wallpaper groups\r\n//\r\n// Tiles a fundamental domain texture across a surface using mathematically\r\n// correct plane symmetry operations. Direct port of WallpaperGroups.gd\r\n// to GLSL for real-time GPU rendering.\r\n//\r\n//",
+    "room_floor_visible": true,
+    "room_start": [
+      30.5,
+      0.0,
+      10.5
+    ],
+    "source_count": 4,
+    "visible_floor_changed_bytes": 633747
+  },
+  "passed": true,
+  "room": "Pattern_Foundry",
+  "scope": "Real museum, pointer callbacks at source/receiver controls, material-domain comparisons and ordinary-controller entry/return. No saved recipes written. Standing-height native images. Headset comfort and learner reading remain untested."
+}

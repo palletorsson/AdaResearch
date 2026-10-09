@@ -1,0 +1,579 @@
+This seven-hall Transformation draft is much more mature than the earlier summaries. The sequence is coherent, executable, and—crucially—**Transformation remains the subject throughout**. The draft explicitly frames each hall as a reduced study inside the existing museum, with complete code and clear boundaries between reconstructed tutorial logic and supplied museum infrastructure. Pasted text
+
+My overall judgment is:
+
+**1 KEEP · 2 KEEP · 3 CHANGE · 4 KEEP · 5 KEEP · 6 CHANGE · 7 KEEP**
+
+The two changes are small and conceptual, not structural.
+
+| Hall | Verdict | Why |
+|---|---|---|
+| 1. Trans_Pre | **KEEP** | Excellent opening: pose → time → overlap/event |
+| 2. Introduction | **KEEP** | Strong comparative transform lesson; shared `t` is very useful |
+| 3. Translation | **CHANGE** | Good lesson, but currently weaker than the proposed waypoint/state version |
+| 4. Rotation | **KEEP** | Clear pivot/axis/frame lesson |
+| 5. Scale | **KEEP** | Excellent transform ownership/hierarchy lesson |
+| 6. Body | **CHANGE** | Strong distance mapping, but loses the crucial present-vs-memory distinction |
+| 7. Pit | **KEEP** | Very strong composition/closure |
+
+## 1. Trans_Pre — KEEP
+
+This is now a different lesson from the earlier cube-based draft, but it works extremely well.
+
+The learner gets a one-metre `BoxMesh`, then sees three transforms accumulate:
+
+```text
+translation
++ rotation
++ uniform scale
+```
+
+and all three are driven from a common elapsed clock. Pasted text
+
+The explanation of the wave is appropriately bounded. You use `sin()` as a timing device and explicitly postpone the mathematical explanation until Waves. Pasted text
+
+That is good prerequisite discipline.
+
+The hall also introduces its first event without letting events take over the lesson:
+
+```text
+Area3D overlap
+→ body_entered
+→ handler
+→ queue_free()
+```
+
+The signal is concrete because the learner physically walks into the cube. Pasted text
+
+### Smallest improvement
+
+I would add one sentence after:
+
+> “Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift.”
+
+Something like:
+
+> **The clock is retained state; `wave`, position, rotation and scale are recalculated from it each frame.**
+
+That makes the chapter's state model explicit immediately.
+
+Otherwise: **KEEP**.
+
+---
+
+# 2. Three ways to make a crossing — KEEP
+
+This may be the strongest hall in the sequence.
+
+It takes the three operations from Pre and gives each a **spatial purpose**:
+
+- translation reaches,
+- scaling spans,
+- rotation aligns.
+
+That is substantially better than teaching them as three unrelated API properties. Pasted text
+
+The key technical abstraction is excellent:
+
+```gdscript
+apply_pose(t)
+```
+
+with one bounded fraction controlling three different transforms. Pasted text
+
+This introduces a very reusable idea:
+
+> **normalized state can drive heterogeneous properties.**
+
+That will return beautifully in the final doorway.
+
+The `far_gap` experiment is also particularly good. Instead of changing the transformation, you change **the condition it must satisfy**. The transform still executes correctly but no longer solves the spatial problem. Pasted text
+
+That is an excellent distinction:
+
+**correct execution ≠ successful relation**
+
+### Smallest improvement
+
+After the `far_gap` experiment, explicitly state:
+
+> **A transform has no success criterion by itself; success depends on the relation we ask it to produce.**
+
+That's already implicit. One sentence would make the idea portable.
+
+Otherwise: **KEEP**.
+
+---
+
+# 3. Translation — CHANGE, but only slightly
+
+The current lesson is good.
+
+It teaches:
+
+- a start and finish,
+- displacement,
+- vector interpolation,
+- direct versus corner route,
+- `if/else`,
+- same destination / different journey. Pasted text
+
+The comparison at two seconds is especially effective:
+
+```text
+direct:  (0, 2, 0)
+corner: (-2, 3, 0)
+```
+
+Same start and finish, different intermediate state. Pasted text
+
+That is definitely worth keeping.
+
+But compared with the earlier plan, this hall has lost something important:
+
+> **retained route state.**
+
+The earlier proposal had a waypoint array and a persistent route index. That made Translation the first lesson where an ordered record controls future movement.
+
+The current implementation uses only two analytically prescribed segments and one boolean:
+
+```gdscript
+via_corner
+```
+
+This means it teaches branching very well, but not **stateful traversal**.
+
+I would not replace this lesson. It is too clear.
+
+I would make the smallest possible addition at the end:
+
+### Add a tiny route extension
+
+After the current `via_corner` experiment, add something like:
+
+```gdscript
+var route := [
+    Vector3(-2, 1, 0),
+    Vector3(-2, 3, 0),
+    Vector3(2, 3, 0)
+]
+```
+
+Then ask:
+
+> Which entries correspond to `start`, `corner`, and `finish`?
+
+You do **not** need to implement the full route-index animator here.
+
+Just state:
+
+> In this example the route is still encoded in two branches. Later, an indexed route will allow the same movement rule to traverse an arbitrary list.
+
+That preserves a bridge toward Arrays without bloating the hall.
+
+So:
+
+**KEEP the executable lesson. CHANGE the closing conceptual handoff.**
+
+---
+
+# 4. Rotation — KEEP
+
+This is very clean.
+
+The hall separates:
+
+- axis,
+- angle,
+- pivot,
+- child's offset from pivot,
+- orientation marker. Pasted text
+
+The parent-child setup is exactly the right way to make pivot behaviour tangible.
+
+The transition:
+
+```text
+offset = Vector3.ZERO
+```
+
+to
+
+```text
+offset = Vector3(2, 0, 0)
+```
+
+cleanly distinguishes:
+
+**spin around centre**
+
+from:
+
+**orbit around another centre**. Pasted text
+
+And this returns naturally to Coordinates:
+
+> child's local position stays fixed while its world position changes. Pasted text
+
+That is excellent curricular reuse.
+
+The axis experiment then lets the same relation become horizontal or vertical orbit without general matrix teaching. Pasted text
+
+No substantive change needed.
+
+One sentence I might add:
+
+> **The pivot owns the changing orientation; the child inherits it.**
+
+That foreshadows Scale's transform ownership.
+
+**KEEP.**
+
+---
+
+# 5. Scale — KEEP
+
+This is probably the most conceptually precise lesson after Crossing.
+
+The doorway parent and outside sphere make hierarchy visible:
+
+```text
+doorway parent
+ ├─ post
+ ├─ post
+ └─ lintel
+
+sphere witness
+```
+
+Scaling `doorway` reaches its children and the spacing between them, but not the sibling sphere. Pasted text
+
+That's a very good scene-graph lesson disguised as a scale experiment.
+
+The progression is also excellent:
+
+```text
+(1,1,1)
+→ (4,4,4)
+→ (4,1,1)
+→ (2,2,1)
+```
+
+So the learner moves from:
+
+**identity**
+
+to:
+
+**uniform scale**
+
+to:
+
+**nonuniform scale**
+
+to:
+
+**purposeful anisotropic scale**. Pasted text
+
+The explanation that the threshold origin stays at floor level is especially valuable because it continues the origin/pivot theme from Rotation.
+
+This sentence is key:
+
+> “Each box keeps its local position and mesh dimensions. Its world dimensions change through the parent.” Pasted text
+
+That's exactly what the learner should carry.
+
+**KEEP.**
+
+---
+
+# 6. Body — CHANGE
+
+The current lesson itself is good.
+
+Very good, actually.
+
+It teaches a bodily relation:
+
+```text
+player distance
+→ normalized closeness
+→ scale or rotation
+```
+
+and correctly ensures the subtraction happens in world space before flattening Y. Pasted text
+
+The mapping:
+
+```gdscript
+1.0 - clampf((distance - near) / (far - near), 0, 1)
+```
+
+is explained very clearly through concrete distances. Pasted text
+
+And keeping the cube's base on the floor by setting:
+
+```gdscript
+cube.position.y = factor * 0.5
+```
+
+is a lovely little consequence of transform origin.
+
+So why CHANGE?
+
+Because the earlier sequence architecture had an unusually important distinction here:
+
+> **what is true now versus what remains true because it happened before.**
+
+The current lesson only teaches present response.
+
+The cube shrinks while near and restores while far.
+
+That is:
+
+```text
+current input → current response
+```
+
+But Transformation still lacks an explicit lesson in:
+
+```text
+current condition
+versus
+stored history
+```
+
+That's too valuable to lose.
+
+### Smallest correction
+
+Do not redesign the hall.
+
+Add one member:
+
+```gdscript
+var visited := false
+```
+
+Then in `_process()` or `respond()`:
+
+```gdscript
+if distance <= near_distance:
+    visited = true
+```
+
+And display or materialize it minimally—perhaps print once, add a simple label, or make a tiny marker remain visible.
+
+Then teach:
+
+```text
+closeness changes when you move.
+visited does not change back when you leave.
+```
+
+That gives you:
+
+**present state**
+```text
+How near am I now?
+```
+
+versus:
+
+**historical state**
+```text
+Have I ever come near?
+```
+
+Then add a deliberate reset:
+
+```gdscript
+visited = false
+```
+
+This costs almost nothing and gives the entire chapter a deeper notion of state.
+
+I strongly recommend restoring it.
+
+So **CHANGE**, but only by adding persistent encounter memory.
+
+---
+
+# 7. Pit — KEEP
+
+Excellent closing hall.
+
+The opening fraction:
+
+```gdscript
+progress
+```
+
+becomes the single source for:
+
+- translation,
+- rotation,
+- scale. Pasted text
+
+This elegantly returns to Hall 2's shared `t`, but now `t` is not a free animation. It is driven by **occupancy**.
+
+The logic:
+
+```text
+who is overlapping?
+    ↓
+target = 0 or 1
+    ↓
+move_toward(progress, target)
+    ↓
+apply_pose(progress)
+```
+
+is a very nice culmination of the entire sequence. Pasted text
+
+It combines:
+
+- condition,
+- collection traversal,
+- state,
+- bounded temporal change,
+- functions,
+- translation,
+- rotation,
+- scale.
+
+Without looking like a syntax recap.
+
+And this is especially good:
+
+> leaving halfway reverses from the current pose rather than jumping to an endpoint. Pasted text
+
+That demonstrates why retained `progress` exists.
+
+The intermediate-pose warning is also excellent:
+
+> endpoints alone do not describe the space available during movement. Pasted text
+
+That is both spatially and computationally important.
+
+**KEEP.**
+
+---
+
+# What is currently missing from the whole sequence?
+
+Only one thing is materially missing:
+
+## Persistent historical state
+
+Everything else is now covered surprisingly well:
+
+**time**
+Pre
+
+**events**
+Pre
+
+**normalized control**
+Crossing
+
+**functions**
+Crossing
+
+**branching**
+Translation
+
+**frames**
+Rotation
+
+**hierarchy**
+Scale
+
+**continuous bodily input**
+Body
+
+**collections + repeated condition**
+Pit
+
+**composition**
+Pit
+
+But without `visited`, the chapter's state progression is mostly:
+
+> compute current transform from current/elapsed input.
+
+Adding one remembered flag makes the learner understand that behaviour can depend on **what happened before**, not merely what is true now.
+
+That becomes essential later.
+
+---
+
+# One broader structural observation
+
+This draft no longer follows the earlier architecture exactly, but I think it is actually better in one important way.
+
+The seven halls now form:
+
+### 1. Combine transforms
+Pre
+
+### 2. Compare transforms
+Crossing
+
+### 3. Control translation
+Translation
+
+### 4. Control rotation
+Rotation
+
+### 5. Control scale
+Scale
+
+### 6. Map body relation into transform
+Body
+
+### 7. Compose transforms into behaviour
+Pit
+
+That's a very readable shape:
+
+**encounter → comparison → isolate → isolate → isolate → input → composition**
+
+That may be stronger pedagogically than the earlier:
+
+**time → event → route → rotation → scale → memory → composition**
+
+because students first see the whole family, then unpack it.
+
+I would therefore **not revert to the earlier sequence proposal**.
+
+---
+
+# My recommended final status
+
+**Trans_Pre — KEEP**  
+Add one sentence distinguishing retained `elapsed` from recalculated pose.
+
+**Crossing — KEEP**  
+Possibly add one explicit sentence: transform correctness and spatial success are different.
+
+**Translation — CHANGE**  
+Keep all code; add a small conceptual bridge from the two-segment route to ordered route data.
+
+**Rotation — KEEP**  
+No substantive revision.
+
+**Scale — KEEP**  
+No substantive revision.
+
+**Body — CHANGE**  
+Add a retained `visited` state and explicit reset.
+
+**Pit — KEEP**  
+No substantive revision.
+
+And nothing is **MISSING** as a whole hall.
+
+The draft's executable evidence is also unusually strong: 176 native checks, nine deliberately rejected faults, and nineteen exercise variants, while correctly stating that this still does not prove human comprehension or headset comfort. Pasted text
+
+With the small `visited` addition, I would consider the Transformation sequence architecturally ready.

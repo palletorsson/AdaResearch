@@ -1,0 +1,2785 @@
+--- before/commons/artifacts/registry/noise.json
++++ after/commons/artifacts/registry/noise.json
+@@ -1,78 +1,116 @@
+ {
+-	"version": "1.0",
+-	"format": "lab_artifacts",
+-	"description": "Noise artifacts \u2014 the entropy floor and its seeded imitators.",
+-	"artifacts": {
+-		"noise_floor": {
+-			"category": "noise",
+-			"complexity": "intermediate",
+-			"description": "The noise seam. Left: gradient (simplex) noise - the smooth seeded field procgen calls 'noise', the same every run, rewindable, ownable. Right: white noise - a fresh value per cell, structureless, the incompressible entropy floor. The left is a crank in a smoother coat; the right is real noise, and it is the one procgen never uses because a shapeless field builds no world.",
+-			"dev_themes": [
+-				"digital_bias",
+-				"seam"
+-			],
+-			"include_in_map_data": true,
+-			"interaction": "ambient",
+-			"lookup_name": "noise_floor",
+-			"map_ready": true,
+-			"map_sequences": [
+-				"noise"
+-			],
+-			"name": "Noise Floor",
+-			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for noise. Bias is conserved; show the seam.",
+-			"scene": "res://algorithms/noise/noise_floor/noise_floor.tscn",
+-			"sequence": "noise",
+-			"tags": [
+-				"noise",
+-				"perlin",
+-				"simplex",
+-				"white_noise",
+-				"entropy",
+-				"determinism",
+-				"seam",
+-				"digital_bias"
+-			],
+-			"measurements": {
+-				"aabb_size": [
+-					0.92,
+-					0.61,
+-					0.02
+-				],
+-				"aabb_center": [
+-					-0.01,
+-					0.12,
+-					0.0
+-				],
+-				"grid_cells": [
+-					1,
+-					1
+-				],
+-				"max_dimension_m": 0.92,
+-				"measured_at": "2026-08-12T04:39:51.280397Z"
+-			},
+-			"footprint_measured": [
+-				1,
+-				1,
+-				1
+-			]
+-		},
+-		"the_same_cloud": {
+-			"name": "The Same Cloud",
+-			"class_name": "TheSameCloud",
+-			"scene": "res://commons/artifacts/the_same_cloud/the_same_cloud.tscn",
+-			"description": "The noise SUPER OBJECT: a weather bureau where every station reads ONE FastNoiseLite (seed 4) and disagrees only about how - white scream vs coherent promise, three frequency zooms, an octave stair, four noise_type temperaments, a vane field of samples-as-angles, a relief bench, a real domain_warp pair, and a thresholded coastline. Noise is a function, not a dice cup. 2026-08-27.",
+-			"category": "noise",
+-			"tags": [
+-				"noise",
+-				"super",
+-				"synthesis",
+-				"fastnoiselite",
+-				"surreal"
+-			],
+-			"spatial_needs": {
+-				"footprint_cells": 4,
+-				"clearance_m": 0.6
+-			}
+-		}
+-	}
++  "version": "1.0",
++  "format": "lab_artifacts",
++  "description": "Noise artifacts — the entropy floor and its seeded imitators.",
++  "artifacts": {
++    "noise_floor": {
++      "category": "noise",
++      "complexity": "intermediate",
++      "description": "The noise seam. Left: gradient (simplex) noise - the smooth seeded field procgen calls 'noise', the same every run, rewindable, ownable. Right: white noise - a fresh value per cell, structureless, the incompressible entropy floor. The left is a crank in a smoother coat; the right is real noise, and it is the one procgen never uses because a shapeless field builds no world.",
++      "dev_themes": [
++        "digital_bias",
++        "seam"
++      ],
++      "include_in_map_data": true,
++      "interaction": "ambient",
++      "lookup_name": "noise_floor",
++      "map_ready": true,
++      "map_sequences": [
++        "noise"
++      ],
++      "name": "Noise Floor",
++      "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for noise. Bias is conserved; show the seam.",
++      "scene": "res://algorithms/noise/noise_floor/noise_floor.tscn",
++      "sequence": "noise",
++      "tags": [
++        "noise",
++        "perlin",
++        "simplex",
++        "white_noise",
++        "entropy",
++        "determinism",
++        "seam",
++        "digital_bias"
++      ],
++      "measurements": {
++        "aabb_size": [
++          0.92,
++          0.61,
++          0.02
++        ],
++        "aabb_center": [
++          -0.01,
++          0.12,
++          0.0
++        ],
++        "grid_cells": [
++          1,
++          1
++        ],
++        "max_dimension_m": 0.92,
++        "measured_at": "2026-08-12T04:39:51.280397Z"
++      },
++      "footprint_measured": [
++        1,
++        1,
++        1
++      ]
++    },
++    "the_same_cloud": {
++      "name": "The Same Cloud",
++      "class_name": "TheSameCloud",
++      "scene": "res://commons/artifacts/the_same_cloud/the_same_cloud.tscn",
++      "description": "The noise SUPER OBJECT: a weather bureau where every station reads ONE FastNoiseLite (seed 4) and disagrees only about how - white scream vs coherent promise, three frequency zooms, an octave stair, four noise_type temperaments, a vane field of samples-as-angles, a relief bench, a real domain_warp pair, and a thresholded coastline. Noise is a function, not a dice cup. 2026-08-27.",
++      "category": "noise",
++      "tags": [
++        "noise",
++        "super",
++        "synthesis",
++        "fastnoiselite",
++        "surreal"
++      ],
++      "spatial_needs": {
++        "footprint_cells": 4,
++        "clearance_m": 0.6
++      }
++    },
++    "related_weather": {
++      "lookup_name": "related_weather",
++      "name": "Related weather",
++      "scene": "res://commons/artifacts/related_weather/related_weather.tscn",
++      "category": "noise",
++      "sequence": "noise",
++      "map_sequences": [
++        "noise"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "parameters": {
++        "footprint": [
++          10,
++          4,
++          12
++        ],
++        "size_group": "environment"
++      },
++      "description": "Three glazed viewing walls expose the latest eight samples as sight slits. Shared uniform innovations drive a fresh signal, accumulated steps and an approximate pink filter. Identical travel and aperture limits; fixed glass retains body collision. Local run/hold, single step, replay and fresh-seed controls. Raw signal verification and limits documented separately.",
++      "interactions": [
++        "Start the shared clock",
++        "Walk alongside the eight retained moments",
++        "Look through the aligned or separated slits",
++        "Hold during motion and finish a step",
++        "Replay the seeded record or choose a new seed"
++      ],
++      "qfep_connection": "Memory can be written into a process and into its display. A smooth-looking wall may owe its agreement to filtering, to the shared motor, or to clipping at a limit. Different relations admit different views.",
++      "tags": [
++        "temporal_correlation",
++        "white_noise",
++        "random_walk",
++        "pink_noise",
++        "display_bounds",
++        "sight",
++        "history"
++      ]
++    }
++  }
+ }
+--- before/commons/artifacts/related_weather/README.md
++++ after/commons/artifacts/related_weather/README.md
+@@ -0,0 +1,15 @@
++# Related weather
++
++Three full-size glazed viewing walls for `Random_Noise_Types`. Fresh samples, accumulated steps and an approximate pink filter share uniform innovations. Only sight apertures move; glass and floor collision stay fixed.
++
++- `weather_signals.gd`: raw model, explicit filter preparation, no display clamp.
++- `related_weather.gd`: eight visible moments, fixed display gain and bounds, identical travel, 128-sample record budget, production pointer/VR-area buttons.
++- `related_weather.tscn`: registered artifact scene.
++
++RUN / HOLD shares one clock. NEXT starts one sample or completes the paused stroke. REPLAY clears and reseeds, including 4096 preparation samples for the pink filter. NEW SEED selects a different seed; no promise that a short run must look different. Orange markers identify clipped target values. The gold sight target and all glass collision remain fixed.
++
++The filter coefficients come from [Julius O. Smith, Spectral Audio Signal Processing: Example, Synthesis of 1/F Noise](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). The production model uses uniform innovations, while the reference example uses Gaussian innovations. The linear filter response is unchanged; marginal distributions differ. The filter is finite and approximately pink only over a verified band.
++
++`doc/book/iterations/2026-09-24-related-weather/` contains native controls/collision checks, actual museum captures and routes, raw production-model samples, independent recurrence and spectral checks, source snapshots and exact book differences. The measured band is 0.01–0.20 cycles per sample, before display gain, clamp and easing. Eight apertures are not enough evidence to certify a spectrum. The other hall's audio filters and illustrated spectral curves remain separate constructions.
++
++Headset reach, comfort, group interpretation and Quest performance remain open. This scene makes no audio, natural weather, geology or physical entropy claim.
+--- before/commons/artifacts/related_weather/related_weather.gd
++++ after/commons/artifacts/related_weather/related_weather.gd
+@@ -0,0 +1,143 @@
++extends Node3D
++## Three walk-along viewing walls. Glass collision stays fixed; only the sight slits move.
++const Stage = preload("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++const Signals = preload("res://commons/artifacts/related_weather/weather_signals.gd")
++const HISTORY := 8
++const LIMIT := 128
++const TRAVEL := 1.0
++const DWELL := 1.0
++const COLOURS := [Color(0.89,0.91,0.86),Color(0.78,0.48,0.23),Color(0.93,0.31,0.57)]
++const INK := Color(0.07,0.11,0.15)
++@export var run_seed:int=4321
++var source=Signals.new()
++var records:Array=[]
++var running:=false
++var stepping:=false
++var moving:=false
++var phase:=0.0
++var dwell:=0.0
++var shutters:Array=[]
++var starts:Array=[]
++var targets:Array=[]
++var states:Array=[]
++var status:Label3D
++var values:Label3D
++var controls:Node3D
++signal record_changed(state:Dictionary)
++func _ready()->void:
++	_build();replay()
++func _label(text:String,pos:Vector3,height:float,yaw:float=PI)->Label3D:
++	var node:=Label3D.new();node.text=text;node.position=pos;node.font_size=44;node.pixel_size=height/44;node.outline_size=4;node.rotation.y=yaw;add_child(node);return node
++func _build()->void:
++	var titles:=["FRESH DRAW","ACCUMULATED STEP","FILTERED / PINK"]
++	for channel in range(3):
++		var x:float=(1-channel)*3.30
++		var colour:Color=COLOURS[channel]
++		Stage.box(self,Vector3(x,0.12,0),Vector3(0.40,0.24,8.10),INK,true)
++		Stage.box(self,Vector3(x,3.35,0),Vector3(0.34,0.10,8.10),INK,true)
++		# A visibly glazed viewing wall, never a timed walking gate.
++		var glass:=Stage.box(self,Vector3(x,1.78,0),Vector3(0.025,3.10,8.0),Color(0.40,0.79,0.85,0.075),true)
++		glass.name="FixedGlass%d"%channel
++		for z in [-4.08,4.08]:Stage.box(self,Vector3(x,1.78,z),Vector3(0.24,3.1,0.14),INK,true)
++		Stage.box(self,Vector3(x,2.95,-4.25),Vector3(3.05,0.63,0.09),INK)
++		_label(titles[channel],Vector3(x,3.10,-4.31),0.090)
++		_label("NEWEST HERE / 8 MOMENTS HELD",Vector3(x,2.88,-4.31),0.048)
++		_label("GLAZED VIEWING WALL",Vector3(x,2.72,-4.31),0.04)
++		for slot in range(HISTORY):
++			var z:float=-3.5+slot
++			var lower:=Stage.box(self,Vector3(x,0.8,z),Vector3(0.18,1.1,0.91),colour)
++			var upper:=Stage.box(self,Vector3(x,2.6,z),Vector3(0.18,1.1,0.91),colour)
++			for edge in [-0.495,0.495]:Stage.box(self,Vector3(x,1.78,z+edge),Vector3(0.26,3.1,0.04),INK)
++			var flag:=Stage.box(self,Vector3(x,0.30,z),Vector3(0.30,0.055,0.86),Color(0.16,0.22,0.25))
++			var label:=_label("—",Vector3(x+0.16,0.46,z),0.065,PI/2)
++			var back:=_label("—",Vector3(x-0.16,0.46,z),0.065,-PI/2)
++			shutters.append({"lower":lower,"upper":upper,"flag":flag,"labels":[label,back],"channel":channel,"slot":slot})
++			states.append(Vector2(1.70,0.0));targets.append(Vector2(1.70,0.0));starts.append(Vector2(1.70,0.0))
++		# A path on either side, extending beyond the fixed glass.
++		for side in [-1.0,1.0]:Stage.box(self,Vector3(x+side*0.75,0.016,0),Vector3(0.04,0.018,9.20),colour)
++	# Fixed sight target beyond all three walls, keeping seeing separate from their moving apertures.
++	Stage.box(self,Vector3(-4.8,1.70,0),Vector3(0.08,0.11,7.7),Color(1.0,0.78,0.25))
++	for z in [-3.7,3.7]:Stage.box(self,Vector3(-4.8,0.85,z),Vector3(0.10,1.70,0.10),INK,true)
++	controls=Rack.create_panel("",[[{"type":"button","label":"RUN / HOLD"},{"type":"button","label":"NEXT"},{"type":"button","label":"REPLAY"},{"type":"button","label":"NEW SEED"}]],true)
++	controls.name="WeatherControls";controls.position=Vector3(0,1.12,-5.65);controls.rotation=Vector3(deg_to_rad(-50),PI,0);controls.scale=Vector3.ONE*1.65;add_child(controls)
++	Stage.box(self,Vector3(0,0.48,-5.6),Vector3(1.30,0.96,0.35),INK,true)
++	Stage.box(self,Vector3(0,1.70,-5.6),Vector3(3.3,0.58,0.075),INK)
++	status=_label("",Vector3(0,1.87,-5.65),0.057)
++	values=_label("",Vector3(0,1.67,-5.65),0.046)
++	_label("ORANGE EDGE = DISPLAY LIMIT",Vector3(0,1.49,-5.65),0.039)
++	_label("PINK FILTER / 4096 PREPARATION SAMPLES",Vector3(0,0.74,-5.9),0.045)
++	for i in range(4):controls.find_child("Btn_%d"%i,true,false).get_node("InteractableAreaButton").button_pressed.connect(_button.bind(i))
++func _button(_node,index:int)->void:
++	match index:
++		0:toggle_run()
++		1:step()
++		2:replay()
++		3:new_seed()
++func replay()->void:
++	running=false;stepping=false;moving=false;phase=0;dwell=0;records.clear();source.reset(run_seed)
++	for i in range(states.size()):states[i]=Vector2(1.7,0);starts[i]=states[i];targets[i]=states[i]
++	_render();_record_labels();_notice()
++func new_seed()->void:
++	var rng:=RandomNumberGenerator.new();rng.randomize();var value:=run_seed
++	while value==run_seed:value=rng.randi_range(10000,99999)
++	run_seed=value;replay()
++func toggle_run()->void:
++	if records.size()>=LIMIT and not moving:return
++	running=not running;stepping=false
++	if running and not moving:_begin_step()
++	_notice()
++func step()->void:
++	running=false;stepping=true
++	if not moving:_begin_step()
++	_notice()
++func _begin_step()->void:
++	if records.size()>=LIMIT:running=false;stepping=false;_notice();return
++	records.append(source.next_sample());moving=true;phase=0;dwell=0
++	starts=states.duplicate()
++	for i in range(shutters.size()):
++		var channel:int=shutters[i].channel;var index:int=records.size()-1-int(shutters[i].slot)
++		if index<0:targets[i]=Vector2(1.7,0)
++		else:
++			var display:Array=Signals.display_values(records[index])
++			targets[i]=Vector2(1.7+0.75*clampf(display[channel],-1,1),0.64)
++	_record_labels();record_changed.emit(get_state());_notice()
++func _process(delta:float)->void:
++	if not running and not stepping:return
++	if moving:
++		phase=minf(1.0,phase+delta/TRAVEL)
++		var smooth:=phase*phase*(3-2*phase)
++		for i in range(states.size()):states[i]=(starts[i] as Vector2).lerp(targets[i],smooth)
++		_render()
++		if phase>=1.0:
++			moving=false;stepping=false;dwell=0
++			if records.size()>=LIMIT:running=false
++			_notice()
++	elif running:
++		dwell+=delta
++		if dwell>=DWELL:_begin_step()
++func _render()->void:
++	for i in range(shutters.size()):
++		var centre:float=states[i].x;var gap:float=states[i].y
++		var bottom_height:=centre-gap/2-0.25
++		var top_height:=3.30-(centre+gap/2)
++		var lower:MeshInstance3D=shutters[i].lower;var upper:MeshInstance3D=shutters[i].upper
++		lower.scale.y=bottom_height/1.1;lower.position.y=0.25+bottom_height/2
++		upper.scale.y=top_height/1.1;upper.position.y=centre+gap/2+top_height/2
++func _record_labels()->void:
++	for data in shutters:
++		var index:int=records.size()-1-int(data.slot);var text:="—";var clipped:=false
++		if index>=0:
++			var display:Array=Signals.display_values(records[index]);clipped=absf(display[data.channel])>1.0
++			text="%d%s"%[index+1," / LIMIT" if clipped else ""]
++		for label in data.labels:label.text=text
++		data.flag.material_override.albedo_color=Color(1,0.54,0.12) if clipped else Color(0.16,0.22,0.25)
++	if records.is_empty():values.text="FRESH —     SUM —     FILTER —"
++	else:
++		var v:Array=Signals.display_values(records.back());values.text="TARGET / %.2f     %.2f     %.2f"%[v[0],v[1],v[2]]
++func _notice()->void:
++	var mode:="RUN" if running else ("STEP" if stepping else "HOLD")
++	if records.size()>=LIMIT and not moving:mode="RECORD FULL"
++	status.text="%s / %d OF %d / SEED %d"%[mode,records.size(),LIMIT,run_seed]
++func get_state()->Dictionary:
++	return {"seed":run_seed,"count":records.size(),"running":running,"moving":moving,"stepping":stepping,"phase":phase,"last":records.back().duplicate() if not records.is_empty() else [],"targets":targets.duplicate(),"visible":states.duplicate(),"display_gain":[1,1,Signals.PINK_GAIN],"warmup":Signals.WARMUP,"history":HISTORY,"limit":LIMIT,"scope":"Raw independent, accumulated and filtered signals; fixed display gain, clamp and matched travel. Glass collision is fixed."}
+--- before/commons/artifacts/related_weather/related_weather.tscn
++++ after/commons/artifacts/related_weather/related_weather.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/related_weather/related_weather.gd" id="1"]
++
++[node name="RelatedWeather" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/artifacts/related_weather/weather_signals.gd
++++ after/commons/artifacts/related_weather/weather_signals.gd
+@@ -0,0 +1,27 @@
++extends RefCounted
++## Raw signals; no geometry bounds or display gain in this model.
++## Pink approximation: Julius O. Smith, Spectral Audio Signal Processing,
++## Example: Synthesis of 1/F Noise. Uniform innovations replace Gaussian ones;
++## this changes the distribution, not the linear filter transfer function.
++const WARMUP := 4096
++const PINK_GAIN := 11.6 # Fixed display gain; not a per-run normalization.
++const STEP_GAIN := 0.10
++var rng := RandomNumberGenerator.new()
++var x_history := [0.0,0.0,0.0]
++var y_history := [0.0,0.0,0.0]
++var sum := 0.0
++var count := 0
++func reset(seed_value:int) -> void:
++	rng.seed=seed_value;x_history=[0.0,0.0,0.0];y_history=[0.0,0.0,0.0];sum=0.0;count=0
++	# Only the filter receives this preparation history. The visible walk starts at zero.
++	for i in range(WARMUP): _pink(rng.randf_range(-1.0,1.0))
++func _pink(x:float) -> float:
++	var y:float=0.049922035*x-0.095993537*x_history[0]+0.050612699*x_history[1]-0.004408786*x_history[2]+2.494956002*y_history[0]-2.017265875*y_history[1]+0.522189400*y_history[2]
++	x_history=[x,x_history[0],x_history[1]];y_history=[y,y_history[0],y_history[1]]
++	return y
++func next_sample() -> Array:
++	var white:=rng.randf_range(-1.0,1.0)
++	sum+=STEP_GAIN*white;count+=1
++	return [white,sum,_pink(white)]
++static func display_values(raw:Array) -> Array:
++	return [raw[0],raw[1],raw[2]*PINK_GAIN]
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -1,14 +1,20 @@
+ {
+   "Random_Noise_Types": {
+     "primary_tokens": [
+-      "randompoints"
++      "randompoint",
++      "randompoints",
++      "WhiteNoiseGallery",
++      "NoiseColors3D",
++      "related_weather"
+     ],
+-    "reason": "Can random positions still refuse to be neighbours?",
++    "reason": "Constraint can act on position, admission, temporal state or the view. Preserve all four established studies and add the embodied temporal comparison.",
+     "status": "source_checked_draft",
+     "sequence": "noise",
+     "text_path": "commons/maps/Random_Noise_Types/final.md",
+-    "text_sha256": "f94fc7ff88835c253ca2622e2a638acb6729b057176fe15a3bef42b55b818f30",
+-    "map_sha256": "81fefdb5c28f4943ea912123791c6dff61ab2938182ff6adfa03166bf51a9466",
+-    "learner_verified": false
++    "text_sha256": "da1db9a6f5c272cab75b4345d2397f374a1308b06b9b8fcf217e7bf6e32c929c",
++    "map_sha256": "79186d10ba18849d79d880ba012b3babeebdcfbc9ec150c24d389f880465dd37",
++    "learner_verified": false,
++    "local_review": "doc/book/iterations/2026-09-24-related-weather/DECISIONS.md",
++    "verification_scope": "Related-weather addition: 44 native control/state/glass checks, 65,536 raw production samples and independent filter/PSD checks; actual museum controls, sight views, six sampled aisles/exit walks and two floor rays. Existing studies retained. No headset, group-use, learner or Quest acceptance."
+   }
+ }
+--- before/commons/maps/Random_Noise_Types/final.md
++++ after/commons/maps/Random_Noise_Types/final.md
+@@ -119,8 +119,34 @@
+ 
+ These are the shipped filters behind the names. The curves above them are illustrations, not measurements of the sound coming from the speakers. Even BLUE's sound uses subtraction from a running low-pass value rather than the exact rising curve that its row illustrates. A name brings several implementations into company; inspecting them keeps that company from becoming an identity claim.
+ 
++<!-- @related_weather -->
++
++Three walls wait beyond the listening benches. Their faces are closed. A narrow gold line stands on the far side. Start the clock and the walls acquire slits. A fragment of the line appears, disappears, returns somewhere else. Walk alongside it. Can you find a place from which the openings agree?
++
++Each wall keeps eight moments. The newest arrives at the near end; earlier values move back through the display until the oldest leaves it. Your walk can take the opposite direction from the clock. Beyond eight, an earlier value has already left the wall.
++
++The pale wall takes a fresh draw. The brown wall adds a little of that same draw to its previous value:
++
++```gdscript
++sum += 0.10 * white
++```
++
++Here the last place helps make the next one. Follow a run of openings along the brown wall, then return to the pale one. What does each let you anticipate? An independent sequence can also make a run. A few agreeable neighbours do not prove a rule.
++
++The pink wall filters the shared draws. It carries several earlier inputs and outputs into each new value. It already had a past before you pressed RUN: the filter received 4,096 preparation samples. Those samples are not among the eight moments in front of you. We prepared this beginning; we did not remove its history.[^weather-filter]
++
++All three walls travel with the same easing and the same clock. Watch a single opening in the pale wall move. Even independent targets can glide smoothly between their addresses. The motor can make continuity without giving the next draw any memory. Hold the motion, then finish one step with NEXT. Compare where the slit was going with how it got there.
++
++An orange edge sometimes lights beneath an opening. The value wanted a place beyond the display's range. The raw calculation continues; the slit stays within its frame. Two different numbers can meet the same limit and appear to agree. A tidy row is not always a shared tendency. Sometimes it is a ceiling.
++
++Lean toward the gold line again. The slits admit a view; fixed glass keeps them from becoming passages. These walls alter what your position lets you see while keeping another boundary in place. The same rule could have been given doors, sound, ground. Here it is given sight.
++
++REPLAY empties the record and restores the local seed. It repeats the targets and the filter's preparation, but you are now standing somewhere else. Stay there for another run. Which relation belongs to the numbers, which to the machine that presents them, and which only becomes possible from here?
++
+ We can leave this hall with more than one discovery. A plane maintained by clipping. A spacing rule that finishes its work. A field that ties colour to height. A sound that holds a previous value, or answers it with a difference. Each gives a different place for a relation to land.
+ 
+ In the next hall, a column is already waiting. What will happen when variation is given an existing form to act on?
+ 
+ [^cloud-replay]: The seed repeats this local construction when its settings and calls repeat; it does not replay the museum. The left cloud consumes the first part of one generator's stream and the right continues it. These are not identical candidates subjected to different rules.
++
++[^weather-filter]: This is a finite filter approximating pink noise, following [Julius O. Smith’s synthesis example](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). The signal is checked separately from the moving, bounded display; the measured frequency range and preparation are recorded in the tutorial companion. A pink colour does not establish a pink spectrum.
+--- before/commons/maps/Random_Noise_Types/intent.md
++++ after/commons/maps/Random_Noise_Types/intent.md
+@@ -2,5 +2,8 @@
+ Sequence role: First active noise hall, after Random_Game and before Noise_Columns. Move from random choices within a procedure to the relationships a procedure imposes on positions.
+ Technical angle: Repeated local-coordinate clipping; finite minimum-distance rejection sampling; full candidate accounting; replay by seed and call order; clamped Gaussian comparison; uniform heights and gradient colours; illustrated spectral curves; accumulation, difference and approximate temporal filters.
+ Critical angle: Distinguish an admission condition from ongoing enforcement, and a finite search failure from a proof of impossibility. The visual record has its own explicit display budget. Investigate what proximity and shared names suggest between separately generated images and sounds; leave room for pleasure and different kinds of attention.
+-Key artifacts: randompoint, randompoints, WhiteNoiseGallery and NoiseColors3D are primary, in that order. The galleries extend the questions; their displays do not measure the bench or audio spectrum.
++Key artifacts: randompoint, randompoints, WhiteNoiseGallery and NoiseColors3D remain primary, followed by related_weather. The galleries extend the questions; their displays do not measure the bench or audio spectrum.
+ Gap: Headset reach and comfort remain untested. The galleries now have accessible side consoles and tested source previews; perceived sound and headset interaction still need a human pass.
++
++
++24 September — Related weather extends the existing encounters into three full-size viewing walls. Shared innovations, accumulated steps and a finite pink approximation move eight sight slits per wall. The visitor walks alongside recorded time and looks for alignment through the walls. Separate signal memory, display memory, matched motor smoothing, fixed gains and clipped aperture bounds. Glass collision stays fixed; an opening for sight is not a passage for the body. Preserve the listening studies and their distinction between illustrated curves and actual sound. Hall extends 13×10 to 13×28 without changing previous artifacts or structure rows; the exit moves from (6,7) to (6,27). New artifact at (6,18). Headset experience remains open.
+--- before/commons/maps/Random_Noise_Types/map_data.json
++++ after/commons/maps/Random_Noise_Types/map_data.json
+@@ -1,556 +1,1373 @@
+ {
+- "layers": {
+-  "interactables": [
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "randompoint:90:1.25:1#stand:bounds#size:0.6",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "randompoints:180#stand:compare#count:24#size:0.9",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "WhiteNoiseGallery:180:-0.500:0.050#stand:gallery#seed:31415",
+-    "",
+-    "NoiseColors3D:180:-0.500:0.100#stand:gallery#seed:31415",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ]
+-  ],
+-  "structure": [
+-   [
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "2",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "2",
+-    "1",
+-    "2",
+-    "1",
+-    "2",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "6",
+-    "6",
+-    "1",
+-    "6",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "6",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "1",
+-    "w"
+-   ],
+-   [
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "1",
+-    "1",
+-    "1",
+-    "w",
+-    "w",
+-    "w",
+-    "w",
+-    "w"
+-   ]
+-  ],
+-  "utilities": [
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "sp",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "an:-90",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "t",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ],
+-   [
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    "",
+-    ""
+-   ]
+-  ]
+- },
+- "lighting": {
+-  "ambient_color": [
+-   0.4,
+-   0.4,
+-   0.5
+-  ],
+-  "ambient_energy": 0.6,
+-  "directional_light": {
+-   "color": [
+-    1.0,
+-    0.9,
+-    0.8
+-   ],
+-   "direction": [
+-    -0.4,
+-    -0.7,
+-    -0.4
+-   ],
+-   "enabled": true,
+-   "energy": 1.2
++  "layers": {
++    "interactables": [
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "randompoint:90:1.25:1#stand:bounds#size:0.6",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "randompoints:180#stand:compare#count:24#size:0.9",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "WhiteNoiseGallery:180:-0.500:0.050#stand:gallery#seed:31415",
++        "",
++        "NoiseColors3D:180:-0.500:0.100#stand:gallery#seed:31415",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "related_weather",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ]
++    ],
++    "structure": [
++      [
++        "w",
++        "w",
++        "w",
++        "w",
++        "w",
++        "1",
++        "1",
++        "1",
++        "w",
++        "w",
++        "w",
++        "w",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "2",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "2",
++        "1",
++        "2",
++        "1",
++        "2",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "6",
++        "6",
++        "1",
++        "6",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "6",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "w",
++        "w",
++        "w",
++        "w",
++        "1",
++        "1",
++        "1",
++        "w",
++        "w",
++        "w",
++        "w",
++        "w"
++      ]
++    ],
++    "utilities": [
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "sp",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "an:-90",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        " ",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "t",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ]
++    ]
++  },
++  "lighting": {
++    "ambient_color": [
++      0.4,
++      0.4,
++      0.5
++    ],
++    "ambient_energy": 0.6,
++    "directional_light": {
++      "color": [
++        1.0,
++        0.9,
++        0.8
++      ],
++      "direction": [
++        -0.4,
++        -0.7,
++        -0.4
++      ],
++      "enabled": true,
++      "energy": 1.2
++    }
++  },
++  "map_info": {
++    "description": "White noise vs blue noise — compare uniform random points with structured randomness. Gallery of noise color types with interactive specimens.",
++    "dimensions": {
++      "width": 13,
++      "depth": 28,
++      "max_height": 6
++    },
++    "format": "json",
++    "lookup_name": "Random_Noise_Types",
++    "metadata": {
++      "category": "noise",
++      "difficulty": "beginner",
++      "estimated_time": "3-4 minutes",
++      "learning_objectives": [
++        "White noise characteristics",
++        "Blue noise and structured randomness",
++        "Noise color spectrum",
++        "Visual comparison of noise types",
++        "Distinguish raw temporal relationships from aperture limits, display history and smoothing"
++      ]
++    },
++    "name": "Random Noise Types",
++    "title": "Which rules keep acting?",
++    "version": "1.0",
++    "museum": {
++      "wall_height": 3,
++      "gate_depth_rows": 0,
++      "artifact_placement": "map",
++      "sculpture_clear_rects": [
++        [
++          9,
++          2,
++          12,
++          6
++        ],
++        [
++          2,
++          1,
++          5,
++          4
++        ],
++        [
++          1,
++          9,
++          11,
++          26
++        ]
++      ]
++    }
++  },
++  "settings": {
++    "auto_reveal_on_entry": false,
++    "background": {
++      "color": [
++        0.2,
++        0.3,
++        0.7
++      ],
++      "type": "sky"
++    },
++    "cube_size": 1.0,
++    "enable_physics": true,
++    "gutter": 0.0,
++    "initial_tile_visibility": "hidden_except_corners",
++    "show_grid": true
++  },
++  "utility_definitions": {
++    "s": {
++      "properties": {
++        "height": 5.5
++      }
++    },
++    "t": {
++      "description": "Continue to next step",
++      "name": "Next",
++      "properties": {
++        "action": "next_in_sequence"
++      },
++      "type": "teleporter"
++    }
+   }
+- },
+- "map_info": {
+-  "description": "White noise vs blue noise — compare uniform random points with structured randomness. Gallery of noise color types with interactive specimens.",
+-  "dimensions": {
+-   "width": 13,
+-   "depth": 10,
+-   "max_height": 6
+-  },
+-  "format": "json",
+-  "lookup_name": "Random_Noise_Types",
+-  "metadata": {
+-   "category": "noise",
+-   "difficulty": "beginner",
+-   "estimated_time": "3-4 minutes",
+-   "learning_objectives": [
+-    "White noise characteristics",
+-    "Blue noise and structured randomness",
+-    "Noise color spectrum",
+-    "Visual comparison of noise types"
+-   ]
+-  },
+-  "name": "Random Noise Types",
+-  "title": "White Noise vs Blue Noise",
+-  "version": "1.0",
+-  "museum": {
+-   "wall_height": 3,
+-   "gate_depth_rows": 0,
+-   "artifact_placement": "map",
+-   "sculpture_clear_rects": [
+-    [
+-     9,
+-     2,
+-     12,
+-     6
+-    ],
+-    [
+-     2,
+-     1,
+-     5,
+-     4
+-    ]
+-   ]
+-  }
+- },
+- "settings": {
+-  "auto_reveal_on_entry": false,
+-  "background": {
+-   "color": [
+-    0.2,
+-    0.3,
+-    0.7
+-   ],
+-   "type": "sky"
+-  },
+-  "cube_size": 1.0,
+-  "enable_physics": true,
+-  "gutter": 0.0,
+-  "initial_tile_visibility": "hidden_except_corners",
+-  "show_grid": true
+- },
+- "utility_definitions": {
+-  "s": {
+-   "properties": {
+-    "height": 5.5
+-   }
+-  },
+-  "t": {
+-   "description": "Continue to next step",
+-   "name": "Next",
+-   "properties": {
+-    "action": "next_in_sequence"
+-   },
+-   "type": "teleporter"
+-  }
+- }
+ }
+--- before/commons/maps/Random_Noise_Types/technical.md
++++ after/commons/maps/Random_Noise_Types/technical.md
+@@ -56,3 +56,19 @@
+ The point sampler's enum name BLUE_NOISE and legacy `mode:pink` alias remain for compatibility; the latter selects the clamped Gaussian, while the bench UI names it clustered. The distance sampler has no spectral quality certificate. The galleries' model curves and audio filters are separate constructions. No entropy estimate or numerical QFEP lambda is assigned to them.
+ 
+ Headset comfort, direct hand presses, perceived timbre in the room and Quest performance remain unverified. The desktop interaction lane and generated audio records establish narrower facts, listed in the review receipt.
++
++
++## Related weather — 24 September 2026
++
++`related_weather` at (6,18) adds three fixed glazed walls to the extended 13×28 hall. Their eight slits each show the newest eight accepted targets; the oldest visible slot is seven samples behind the newest. Opaque panels move but the glass collision stays fixed. Side and end aisles allow the body to move around the walls. Existing four artifacts, their configurations and all prior structure rows remain. Eighteen rows are inserted before former row 9; the teleporter moves from (6,7) to the final doorway (6,27).
++
++`weather_signals.gd` supplies a seeded uniform innovation u in [-1,1] to all three channels. White returns u. The walk adds 0.10u to its unbounded sum. Pink uses the third-order IIR coefficients in [Julius O. Smith, Example: Synthesis of 1/F Noise](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). It receives 4096 preparation samples; the visible walk starts at zero afterward. Uniform rather than Gaussian innovations change the marginal distribution, not the filter transfer function. Neither the raw walk nor the raw pink output is clamped in the model.
++
++The display uses fixed gains [1,1,11.6], then y = 1.70 + 0.75 * clamp(value,-1,1), with a 0.64 m sight slit. Orange slot markers identify target clipping. The gain is fixed for every seed, not recalculated to fit each run. Values on the console are before this clamp, with the pink display gain applied. No claim that these three marginal distributions are equal. Raw values, bounds and visible motor motion are distinct layers.
++
++All channels share a one-second cubic smoothstep movement and a one-second dwell. RUN starts or resumes, HOLD pauses both pending travel and clock. NEXT starts one sample or finishes the currently paused stroke without drawing again. REPLAY cancels pending motion, clears the record and repeats filter preparation and visible targets from the same seed. NEW SEED clears with a different seed, which does not guarantee a different-looking short run. The record stops explicitly at 128 samples; the display retains eight and does not silently loop. Glass collision does not move during these controls.
++
++The spectral check exports actual production-model samples, before gain, clipping or motor motion. It uses a stated Welch estimate and frequency band; the report accompanies this review. No spectral claim is made about eight visible targets, eased shutter trajectories or the older unmeasured audio filters. The new record is an architectural time-series display, not an acoustic measurement or a new proof of blue-noise spacing.
++
++
++Measured signal receipt: production seed 4321, 65,536 accepted samples after 4,096 filter-preparation samples. Welch estimate: Hann window, 8192-sample segments, 4096 overlap, linear detrending; fit over 0.01–0.20 cycles per sample. Fitted power slopes: fresh +0.006, accumulated −1.947, filtered −0.992. The unbounded walk is nonstationary; its finite-record fit is descriptive. The filter's power×frequency response varies by 0.471 dB across that band. An independent SciPy recurrence agrees within 3.2e-11 after its transient. These checks support the raw pink approximation over the stated band, not an exact all-frequency process or a spectrum for the eased apertures. In the first 128 targets of this seed, clipping counts are [0,0,4]. See `doc/book/iterations/2026-09-24-related-weather/signal-checks.json` and `signal-study.png`.
+--- before/commons/maps/sequences/noise.json
++++ after/commons/maps/sequences/noise.json
+@@ -1,178 +1,180 @@
+ {
+- "sequences": {
+-  "noise": {
+-   "name": "Noise: Entropy with Memory",
+-   "truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
+-   "qfep_term": "Î»E(S)",
+-   "qfep_connection": "Noise is the Î» parameter tuned for coherence: entropy constrained by smoothness. The edge of chaos made continuous.",
+-   "formula": "noise(p) = Î£ amplitude^i Ã— perlin(frequency^i Ã— p)",
+-   "description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuityâ€”each value smoothly related to those around it. This is the Î» parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usableâ€”random enough to be surprising, continuous enough to be natural.",
+-   "layer": "E_entropy",
+-   "prerequisites": [
+-    "randomness"
+-   ],
+-   "unlocks": [
+-	"proceduralgeneration",
+-    "morphogenesis"
+-   ],
+-   "difficulty": "intermediate",
+-   "estimated_time": "30-40 minutes",
+-   "learning_objectives": [
+-	"Noise as structured entropy: randomness with continuity constraints",
+-	"White noise vs. smooth noise: the Î» spectrum of coherence",
+-	"Octaves as fractal layering: multiple scales of structured randomness",
+-	"Perlin/Simplex: grid + gradient + interpolation algorithms",
+-	"Vector fields: noise as flow direction",
+-    "Procedural generation: noise as substrate for worlds"
+-   ],
+-   "content": [
+-	"Random_Noise_Types: White Noise vs Blue Noise",
+-	"Noise_Columns: Noise Extruded to Terrain",
+-	"Noise_One: Coherent Noise Fundamentals",
+-	"Noise_Voxel: Noise Carved into Blocks",
+-	"Noise_6_Wall: Fractal Octave Layering",
+-	"Noise_Inside_Noise: Domain Warping",
+-	"Noise_Space_10: Noise Parameter Space",
+-	"Noise_Perlin_Simplex: Perlin vs Simplex",
+-	"Chamber_Noise: The Walker Writes the Field",
+-    "Lab_Path: Return Corridor"
+-   ],
+-   "maps": [
+-	"Random_Noise_Types",
+-	"Noise_Columns",
+-	"Noise_One",
+-	"Noise_Voxel",
+-	"Noise_6_Wall",
+-	"Noise_Inside_Noise",
+-	"Noise_Space_10",
+-	"Noise_Perlin_Simplex",
+-    "Lab_Path"
+-   ],
+-   "deferred_maps": [
+-	"Noise_Blue",
+-	"Noise_Functions",
+-	"Noise_Volume",
+-   	"Chamber_Noise"
+-   ],
+-   "deferred_reason": {
+-   	"Chamber_Noise": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+-   },
+-   "axiom_files": [
+-	"res://commons/context/clipboard/tutorial_text/noise_axioms.md",
+-    "res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
+-   ],
+-   "algorithm_paths": {
+-	"Noise_Perlin_Simplex": "res://algorithms/noise/",
+-	"VectorFieldFlow": "res://algorithms/vectors/flowfield/"
+-   },
+-   "return_to": "lab",
+-   "lab_map": "Lab/map_data_post_noise",
+-   "unlock_requirements": [],
+-   "completion_rewards": [
+-	"noise_architect_badge",
+-	"coherent_chaos_badge",
+-	"procedural_mind_badge",
+-    "flow_field_badge"
+-   ],
+-   "artifact_groups": [
+-	{
+-	 "map": "Random_Noise_Types",
+-	 "position": "intro",
+-	 "artifacts": [
+-	  "randompoint",
+-	  "randompoints",
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "compact_only",
+-	 "rationale": "White noise vs blue noise comparison; introduces structured randomness concept"
+-	},
+-	{
+-	 "map": "Noise_Columns",
+-	 "position": "intro",
+-	 "artifacts": [
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "compact_only",
+-	 "rationale": "3D Perlin noise as erosion sculptor on classical columns; visual intro to coherent noise"
+-	},
+-	{
+-	 "map": "Noise_One",
+-	 "position": "foundation",
+-	 "artifacts": [
+-	  "noisetorus",
+-	  "noiselayers",
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "mixed",
+-	 "rationale": "Noise octaves and fractal summation through interactive torus and layered visualization"
+-	},
+-	{
+-	 "map": "Noise_Voxel",
+-	 "position": "exploration",
+-	 "artifacts": [
+-	  "perlin_terrain_sculptor",
+-	  "voxelnoise",
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "environment",
+-	 "rationale": "Continuous noise discretized into voxel space; procedural terrain generation algorithm"
+-	},
+-	{
+-	 "map": "Noise_6_Wall",
+-	 "position": "exploration",
+-	 "artifacts": [
+-	  "shader_noise_space",
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "mixed",
+-	 "rationale": "GPU-based shader noise: hash functions and massively parallel noise computation"
+-	},
+-	{
+-	 "map": "Noise_Inside_Noise",
+-	 "position": "integration",
+-	 "artifacts": [
+-	  "dark_sphere",
+-      "noisesphere"
+-	 ],
+-	 "size_budget": "mixed",
+-	 "rationale": "Domain warping: noise modulating noise coordinates for organic swirling patterns"
+-	},
+-	{
+-	 "map": "Noise_Space_10",
+-	 "position": "integration",
+-	 "artifacts": [
+-	  "dark_sphere",
+-      "noise_space"
+-	 ],
+-	 "size_budget": "mixed",
+-	 "rationale": "Interactive noise parameter manipulation with real-time visualization"
+-	},
+-	{
+-	 "map": "Noise_Perlin_Simplex",
+-	 "position": "synthesis",
+-	 "artifacts": [
+-	  "simplex_noise",
+-	  "perlin_noise",
+-	  "noise_terrain",
+-	  "dark_sphere",
+-	  "perlin_noise_terrain",
+-      "configurable_portal"
+-	 ],
+-	 "size_budget": "environment",
+-	 "rationale": "Culmination comparing Perlin vs Simplex with terrain generation; portal back to lab"
+-	},
+-	{
+-	 "map": "Lab_Path",
+-	 "position": "synthesis",
+-	 "artifacts": [
+-      "dark_sphere"
+-	 ],
+-	 "size_budget": "compact_only",
+-	 "rationale": "Transition corridor back to lab; minimal navigation-only map"
+-	}
+-   ]
+-  }
+- },
+- "world_phase": "transition",
+- "artifact_groups": []
++  "sequences": {
++    "noise": {
++      "name": "Noise: Entropy with Memory",
++      "truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
++      "qfep_term": "Î»E(S)",
++      "qfep_connection": "Noise is the Î» parameter tuned for coherence: entropy constrained by smoothness. The edge of chaos made continuous.",
++      "formula": "noise(p) = Î£ amplitude^i Ã— perlin(frequency^i Ã— p)",
++      "description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuityâ€”each value smoothly related to those around it. This is the Î» parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usableâ€”random enough to be surprising, continuous enough to be natural.",
++      "layer": "E_entropy",
++      "prerequisites": [
++        "randomness"
++      ],
++      "unlocks": [
++        "proceduralgeneration",
++        "morphogenesis"
++      ],
++      "difficulty": "intermediate",
++      "estimated_time": "30-40 minutes",
++      "learning_objectives": [
++        "Noise as structured entropy: randomness with continuity constraints",
++        "White noise vs. smooth noise: the Î» spectrum of coherence",
++        "Octaves as fractal layering: multiple scales of structured randomness",
++        "Perlin/Simplex: grid + gradient + interpolation algorithms",
++        "Vector fields: noise as flow direction",
++        "Procedural generation: noise as substrate for worlds"
++      ],
++      "content": [
++        "Random_Noise_Types: White Noise vs Blue Noise",
++        "Noise_Columns: Noise Extruded to Terrain",
++        "Noise_One: Coherent Noise Fundamentals",
++        "Noise_Voxel: Noise Carved into Blocks",
++        "Noise_6_Wall: Fractal Octave Layering",
++        "Noise_Inside_Noise: Domain Warping",
++        "Noise_Space_10: Noise Parameter Space",
++        "Noise_Perlin_Simplex: Perlin vs Simplex",
++        "Chamber_Noise: The Walker Writes the Field",
++        "Lab_Path: Return Corridor"
++      ],
++      "maps": [
++        "Random_Noise_Types",
++        "Noise_Columns",
++        "Noise_One",
++        "Noise_Voxel",
++        "Noise_6_Wall",
++        "Noise_Inside_Noise",
++        "Noise_Space_10",
++        "Noise_Perlin_Simplex",
++        "Lab_Path"
++      ],
++      "deferred_maps": [
++        "Noise_Blue",
++        "Noise_Functions",
++        "Noise_Volume",
++        "Chamber_Noise"
++      ],
++      "deferred_reason": {
++        "Chamber_Noise": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
++      },
++      "axiom_files": [
++        "res://commons/context/clipboard/tutorial_text/noise_axioms.md",
++        "res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
++      ],
++      "algorithm_paths": {
++        "Noise_Perlin_Simplex": "res://algorithms/noise/",
++        "VectorFieldFlow": "res://algorithms/vectors/flowfield/"
++      },
++      "return_to": "lab",
++      "lab_map": "Lab/map_data_post_noise",
++      "unlock_requirements": [],
++      "completion_rewards": [
++        "noise_architect_badge",
++        "coherent_chaos_badge",
++        "procedural_mind_badge",
++        "flow_field_badge"
++      ],
++      "artifact_groups": [
++        {
++          "map": "Random_Noise_Types",
++          "position": "intro",
++          "artifacts": [
++            "randompoint",
++            "randompoints",
++            "WhiteNoiseGallery",
++            "NoiseColors3D",
++            "related_weather"
++          ],
++          "size_budget": "environment",
++          "rationale": "From enforced coordinates and initial spacing to independent image/audio constructions, then temporal relationships embodied as moving views."
++        },
++        {
++          "map": "Noise_Columns",
++          "position": "intro",
++          "artifacts": [
++            "dark_sphere"
++          ],
++          "size_budget": "compact_only",
++          "rationale": "3D Perlin noise as erosion sculptor on classical columns; visual intro to coherent noise"
++        },
++        {
++          "map": "Noise_One",
++          "position": "foundation",
++          "artifacts": [
++            "noisetorus",
++            "noiselayers",
++            "dark_sphere"
++          ],
++          "size_budget": "mixed",
++          "rationale": "Noise octaves and fractal summation through interactive torus and layered visualization"
++        },
++        {
++          "map": "Noise_Voxel",
++          "position": "exploration",
++          "artifacts": [
++            "perlin_terrain_sculptor",
++            "voxelnoise",
++            "dark_sphere"
++          ],
++          "size_budget": "environment",
++          "rationale": "Continuous noise discretized into voxel space; procedural terrain generation algorithm"
++        },
++        {
++          "map": "Noise_6_Wall",
++          "position": "exploration",
++          "artifacts": [
++            "shader_noise_space",
++            "dark_sphere"
++          ],
++          "size_budget": "mixed",
++          "rationale": "GPU-based shader noise: hash functions and massively parallel noise computation"
++        },
++        {
++          "map": "Noise_Inside_Noise",
++          "position": "integration",
++          "artifacts": [
++            "dark_sphere",
++            "noisesphere"
++          ],
++          "size_budget": "mixed",
++          "rationale": "Domain warping: noise modulating noise coordinates for organic swirling patterns"
++        },
++        {
++          "map": "Noise_Space_10",
++          "position": "integration",
++          "artifacts": [
++            "dark_sphere",
++            "noise_space"
++          ],
++          "size_budget": "mixed",
++          "rationale": "Interactive noise parameter manipulation with real-time visualization"
++        },
++        {
++          "map": "Noise_Perlin_Simplex",
++          "position": "synthesis",
++          "artifacts": [
++            "simplex_noise",
++            "perlin_noise",
++            "noise_terrain",
++            "dark_sphere",
++            "perlin_noise_terrain",
++            "configurable_portal"
++          ],
++          "size_budget": "environment",
++          "rationale": "Culmination comparing Perlin vs Simplex with terrain generation; portal back to lab"
++        },
++        {
++          "map": "Lab_Path",
++          "position": "synthesis",
++          "artifacts": [
++            "dark_sphere"
++          ],
++          "size_budget": "compact_only",
++          "rationale": "Transition corridor back to lab; minimal navigation-only map"
++        }
++      ]
++    }
++  },
++  "world_phase": "transition",
++  "artifact_groups": []
+ }

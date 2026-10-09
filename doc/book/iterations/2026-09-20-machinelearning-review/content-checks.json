@@ -1,0 +1,339 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "check": "Eight declared halls"
+    },
+    {
+      "passed": true,
+      "check": "Declared order retained"
+    },
+    {
+      "passed": true,
+      "check": "Authored route matches declaration"
+    },
+    {
+      "passed": true,
+      "check": "Active book pearls follow route"
+    },
+    {
+      "passed": true,
+      "check": "Off-route book entries retained"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: eight halls in order"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: eight halls in order"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "Local and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "All artifact roles byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Evolution: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Neural_Networks: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Perception: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "ML_Synthesis: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "Classification: existing structure preserved behind new bay"
+    },
+    {
+      "passed": true,
+      "check": "Classification: supporting placement retained at (6, 4)"
+    },
+    {
+      "passed": true,
+      "check": "Classification: supporting placement retained at (10, 5)"
+    },
+    {
+      "passed": true,
+      "check": "commons/artifacts/registry/machinelearning.json: registry preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/artifacts/registry/machinelearning_extra.json: registry preserved"
+    },
+    {
+      "passed": true,
+      "check": "model-checks.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "navigation.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "ML_Gradient_Landscape: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "Loss comparison reset above floor and within reach"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "ML_Classification: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "Classification controls between 0.8 and 1.4 m"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "ML_Sequence_Memory: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "ML_Generative: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "All frozen before-files still match their recorded hashes"
+    }
+  ],
+  "count": 83,
+  "failures": [],
+  "passed": true
+}

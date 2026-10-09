@@ -1,0 +1,82 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+DrawTriangleFaces: Ready! Pick up the sphere and start drawing.
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS empty fill button cannot hide future faces
+PASS unavailable fill action is quiet
+PASS empty shift action is unavailable and quiet
+DrawTriangleFaces: Grabbed! Continue drawing.
+DrawTriangleFaces: Created point 0 at (7.000000, 1.400000, 6.000000)
+DrawTriangleFaces: Created point 1 at (8.200000, 1.400000, 6.000000)
+DrawTriangleFaces: Created point 2 at (8.200000, 1.400000, 6.400000)
+DrawTriangleFaces: Created point 3 at (7.400000, 1.400000, 6.400000)
+DrawTriangleFaces: Created point 4 at (7.400000, 1.400000, 7.200000)
+DrawTriangleFaces: Created point 5 at (7.000000, 1.400000, 7.200000)
+DrawTriangleFaces: Loop closed with 7 points!
+⚠️ Unknown AudioSynthesizer sound: COIN_COLLECT
+⚠️ Failed to generate sound: AudioSynthesizer.COIN_COLLECT
+⚠️ Unknown AudioSynthesizer sound: BLIP_SELECT
+⚠️ Failed to generate sound: AudioSynthesizer.BLIP_SELECT
+DrawTriangleFaces: Creating triangles from 6-point loop
+DrawTriangleFaces: Created 4 triangles from loop
+DrawTriangleFaces: Snapped to point 0
+DrawTriangleFaces: Cannot snap to the last placed point.
+PASS timed drawing makes one six-corner loop
+PASS released closed loop enables shift
+PASS visible fill has persistent selected feedback
+PASS original fan fills the L with 0.8 square metres
+PASS physical shift advances the first vertex
+PASS shift preserves the fan's deliberate overspill comparison
+PASS shift does not move any boundary corner
+PASS readout reports four triangles and new start
+PASS flat corner tag follows selected start
+PASS fill cap tracks actual hidden state
+PASS six boundary edges remain visible while fill is hidden
+PASS six shifts return to the original fan without drift
+DrawTriangleFaces: Grabbed! Continue drawing.
+PASS held pen blocks shift at the input boundary
+DrawTriangleFaces: Cannot snap to the last placed point.
+DrawTriangleFaces: Editing point 0
+PASS held corner blocks shift at the input boundary
+DrawTriangleFaces: Point 0 moved to (7.000000, 1.400000, 6.000000)
+PASS relocated outline button preserves the finished face
+DrawTriangleFaces: Grabbed! Continue drawing.
+DrawTriangleFaces: Created point 6 at (9.000000, 1.400000, 8.000000)
+DrawTriangleFaces: Cannot snap to the last placed point.
+PASS unfinished outline blocks shifting the previous loop
+PASS mount stays stable at yaw 0
+PASS outline cap keeps frame and metre scale at yaw 0
+PASS support stays upright at yaw 0
+PASS mount stays stable at yaw 90
+PASS outline cap keeps frame and metre scale at yaw 90
+PASS support stays upright at yaw 90
+PASS mount stays stable at yaw 180
+PASS outline cap keeps frame and metre scale at yaw 180
+PASS support stays upright at yaw 180
+PASS mount stays stable at yaw 270
+PASS outline cap keeps frame and metre scale at yaw 270
+PASS support stays upright at yaw 270
+PASS longest active status fits the fixed display
+PASS all console captions and readout are flat surfaces
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object/object.cpp:2641)

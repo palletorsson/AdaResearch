@@ -1,0 +1,1838 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,20 +1,254 @@
+-# A cell with a past
+-
+-**Learning elements — proposed focus**
+-
+-_The labels below set the revision focus; the existing lesson still needs alignment._
+-
+-- Three-state transitions
+-- Neighbour counts
+-- State and display
+-
+-1. Walk around the retained volume from the floor rim. Separate apparent neighbours by changing viewpoint.
+-2. At the held console, STEP once. Find pink active and green fading cells; follow a green cell to empty on the next step.
+-3. Walk between the enlarged 3×3×3 positions beside the specimen. Gold marks the centre. Remove it from the count: 26 neighbours. Inspect the source's `== 1` comparison.
+-4. REPLAY then STEP: the golden centre is green beside seven pink neighbours. STEP again: it empties. Empty can be born, active can survive, fading must finish its interval before rebirth is considered.
+-5. VIEW changes state colours into height colours without advancing or resetting the automaton. Compare what each finish reveals.
+-6. Compare ACTIVE + FADING with DRAWN. Six-face shell culling hides occupied interior cells while they remain in the 26-neighbour calculation.
+-7. RUN and hold; REPLAY repeats the same seed. At the twenty-step budget, +20 permits further observation without restarting. Compare CHANGED with mere stillness.
+-8. Carry state, neighbourhood, edge and time into CA_GameOfLife's generation-as-space comparison.
+-
+-All five controls have passed real desktop pointer checks in Godot. The supplied walking body passes through the enlarged neighbourhood on the existing floor. Full-route and headset acceptance, plus update-cost optimisation, remain pending. The web exercise is an independent smaller model for remote review.
++# A state that lingers
++
++## Learning elements
++
++- Three cell states: empty, active, fading.
++- A three-dimensional address stored in one array.
++- A neighbourhood of 26 positions; count only active cells.
++- A transition function: the current state changes which answer is possible.
++- A synchronous update and an empty outer boundary.
++- State, visible surface and colour as separate decisions.
++
++## Follow the cell
++
++We are still in Endless Museum. The small volume and the enlarged neighbourhood show the same running calculation. Gold marks one address. Pick up the black point beside the console; its trigger advances one generation. You can carry the control while walking around a cube that hides another. The console's STEP does the same job.
++
++Press REPLAY. The gold-framed centre begins active, with eleven active neighbours. STEP makes it green: fading. Now it has seven active neighbours. Predict its next state before stepping again. Does enough company make it active, or does its present state prevent that?
++
++## What we carry
++
++The last hall read an old row and wrote a separate next row. We keep that agreement, along with arrays, loops and the PointBody class. An integer now replaces each Boolean: `0` means empty, `1` active, `2` fading. One address still holds one value. A visible green cell holds a value that the active-neighbour count excludes.
++
++The point now carries the step action. Moving it does not edit the cells or select a different address. We keep watching one centre, so its history can be followed without moving the question.
++
++Continue on the existing `PointStudy` node in the museum, saving the row script as a previous working version. Put the two files below together and attach `volume.gd`. Keep the node at unit scale on level floor, with clear space around it; face its positive Z side. The museum already supplies camera, light, player and XR Tools. This construction supplies its own geometry, label and pickable point. No authored scene children are assumed.
++
++Our study is a **7 × 7 × 7 volume with twelve deliberately placed active cells**. The installed work is a 50 × 50 × 50 seeded volume. They share the three-state rule and empty outer shell, but their beginnings and resulting shapes differ. We reconstruct the operation, then return to the larger encounter.
++
++## Give a volume addresses
++
++`index(p)` stores X positions next to each other. Moving one step in Y skips `SIZE` entries; one step in Z skips `SIZE * SIZE`. This is still one array. `Vector3i` keeps the address integer-valued; the drawn position uses metres separately.
++
++The three nested loops in `active_neighbours` visit offsets −1, 0 and 1 on each axis: 27 combinations. Excluding `(0, 0, 0)` leaves 26 neighbours. Face, edge and corner neighbours each count once. Only entries equal to `1` count. This function is called for interior addresses, whose whole neighbourhood fits inside the array.
++
++## One function chooses the next state
++
++| Current state | Active neighbours | Next state |
++|---|---|---|
++| Empty, 0 | 6, 7 or 8 | Active, 1 |
++| Empty, 0 | Any other count | Empty, 0 |
++| Active, 1 | 6, 7 or 8 | Active, 1 |
++| Active, 1 | Any other count | Fading, 2 |
++| Fading, 2 | Any count | Empty, 0 |
++
++`next_state` checks fading first. That is why a green cell with seven active neighbours empties. Moving the neighbour-count branch ahead of the fading branch would change the rule. The function assumes the three valid states listed above and a count from zero through twenty-six.
++
++`evolve` creates a fresh, empty array and fills only its interior. It reads every answer from `old`, then `step` replaces `current`. The outer shell remains zero. Unlike the previous row, these edges do not wrap. Traversing the interior backwards should produce the same result.
++
++## The complete construction — volume.gd
++
++The update functions are the lesson. `make_display` builds its viewing apparatus; `redraw` reads the state without changing it. A gold frame holds the central address. Empty cells are hidden; pink and green cells remain visible. This small version draws all occupied cells, without the installed work's hidden-interior optimisation.
++
++```gdscript
++extends Node3D
++const PointBody = preload("point_body.gd")
++const SIZE := 7
++const SPACING := 0.18
++const CENTRE := Vector3i(3, 3, 3)
++const COLOURS := [Color("53616b"), Color("df76b4"), Color("89d7a3")]
++var current: Array[int] = []
++var generation := 0
++var point: XRToolsPickable
++var reading := Label3D.new()
++var cells := MultiMesh.new()
++
++func _ready() -> void:
++	make_display()
++	point = PointBody.new()
++	add_child(point)
++	point.action_pressed.connect(func(_body): step())
++	reset()
++	park()
++
++func index(p: Vector3i) -> int:
++	return p.x + SIZE * p.y + SIZE * SIZE * p.z
++
++func reset() -> void:
++	current.resize(SIZE * SIZE * SIZE)
++	current.fill(0)
++	# Nine cells in a flat square; three more just above its middle row.
++	for z in range(2, 5):
++		for x in range(2, 5):
++			current[index(Vector3i(x, 3, z))] = 1
++	for x in range(2, 5):
++		current[index(Vector3i(x, 4, 3))] = 1
++	generation = 0
++	redraw()
++
++func active_neighbours(old: Array[int], p: Vector3i) -> int:
++	var count := 0
++	for z in range(-1, 2):
++		for y in range(-1, 2):
++			for x in range(-1, 2):
++				var offset := Vector3i(x, y, z)
++				if offset != Vector3i.ZERO and old[index(p + offset)] == 1:
++					count += 1
++	return count
++
++func next_state(state: int, neighbours: int) -> int:
++	if state == 2:
++		return 0
++	if neighbours >= 6 and neighbours <= 8:
++		return 1
++	if state == 1:
++		return 2
++	return 0
++
++func evolve(old: Array[int]) -> Array[int]:
++	var next: Array[int] = []
++	next.resize(old.size())
++	next.fill(0)
++	# The outer shell stays empty; only interior addresses receive answers.
++	for z in range(1, SIZE - 1):
++		for y in range(1, SIZE - 1):
++			for x in range(1, SIZE - 1):
++				var p := Vector3i(x, y, z)
++				next[index(p)] = next_state(old[index(p)], active_neighbours(old, p))
++	return next
++
++func step() -> void:
++	current = evolve(current)
++	generation += 1
++	redraw()
++
++func _physics_process(_delta: float) -> void:
++	if not point.held():
++		park()
++
++func park() -> void:
++	point.position = Vector3(0.8, 1.05, 0.65)
++
++func _unhandled_key_input(event: InputEvent) -> void:
++	if event is InputEventKey and event.pressed and not event.echo:
++		if event.keycode == KEY_ENTER:
++			step()
++			get_viewport().set_input_as_handled()
++		elif event.keycode == KEY_R:
++			reset()
++			get_viewport().set_input_as_handled()
++
++func make_display() -> void:
++	cells.transform_format = MultiMesh.TRANSFORM_3D
++	cells.use_colors = true
++	cells.instance_count = SIZE * SIZE * SIZE
++	var cube := BoxMesh.new()
++	cube.size = Vector3.ONE * SPACING * 0.65
++	cells.mesh = cube
++	var view := MultiMeshInstance3D.new()
++	view.multimesh = cells
++	var finish := StandardMaterial3D.new()
++	finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	finish.vertex_color_use_as_albedo = true
++	view.material_override = finish
++	add_child(view)
++	reading.position = Vector3(0, 1.9, 0)
++	reading.font_size = 30
++	reading.pixel_size = 0.0015
++	reading.outline_size = 4
++	add_child(reading)
++	# A gold address stays after the central cell disappears.
++	for axis in range(3):
++		for a in [-1, 1]:
++			for b in [-1, 1]:
++				var edge := MeshInstance3D.new()
++				var bar := BoxMesh.new()
++				bar.size = Vector3.ONE * 0.006
++				bar.size[axis] = SPACING
++				edge.mesh = bar
++				edge.position = Vector3(0, 1.05, 0)
++				edge.position[(axis + 1) % 3] += a * SPACING / 2
++				edge.position[(axis + 2) % 3] += b * SPACING / 2
++				var gold := StandardMaterial3D.new()
++				gold.albedo_color = Color("ffd77d")
++				edge.material_override = gold
++				add_child(edge)
++
++func redraw() -> void:
++	for z in SIZE:
++		for y in SIZE:
++			for x in SIZE:
++				var p := Vector3i(x, y, z)
++				var i := index(p)
++				var basis := Basis.IDENTITY if current[i] > 0 else Basis.IDENTITY.scaled(Vector3.ZERO)
++				var at := Vector3(p - CENTRE) * SPACING + Vector3(0, 1.05, 0)
++				cells.set_instance_transform(i, Transform3D(basis, at))
++				cells.set_instance_color(i, COLOURS[current[i]])
++	var words := ["EMPTY", "ACTIVE", "FADING"]
++	reading.text = "GEN %d / CENTRE %s\n%d ACTIVE NEIGHBOURS\nHOLD POINT + TRIGGER: STEP\nENTER: STEP / R: REPLAY" % [generation, words[current[index(CENTRE)]], active_neighbours(current, CENTRE)]
++```
++
++## Carry the point — point_body.gd
++
++This is the same small PointBody from the previous hall, unchanged. It contains the sphere and its pickup boundary. The new volume connects its existing action signal to `step`. Release returns the point to its resting place. With a keyboard, Enter steps and R replays the twelve-cell beginning.
++
++```gdscript
++extends XRToolsPickable
++## Point Lines' frozen point construction, made smaller for the hand model.
++var tint := Color("25212a")
++var desktop_pointer: WeakRef
++
++func _init() -> void:
++	freeze = true
++	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
++	release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
++	collision_layer = 4
++	collision_mask = 0
++	var surface := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.085
++	sphere.height = 0.17
++	sphere.radial_segments = 24
++	sphere.rings = 12
++	surface.mesh = sphere
++	add_child(surface)
++	var boundary := CollisionShape3D.new()
++	var shape := SphereShape3D.new()
++	shape.radius = 0.085
++	boundary.shape = shape
++	add_child(boundary)
++
++func _ready() -> void:
++	super._ready()
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = tint
++	finish.roughness = 0.24
++	get_child(0).material_override = finish
++
++func held() -> bool:
++	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
++
++func on_desktop_grab(pointer: Node) -> void:
++	desktop_pointer = weakref(pointer)
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_pointer = null
++```
++
++## Try a change you can account for
++
++Before running the script, predict the central cell's first two states. The twelve-cell beginning gives it eleven active neighbours at generation zero. Record your prediction, the observed states and the line that explains any difference. The readout always reports the current generation's neighbours, not the count used to produce that generation.
++
++Then replace the twelve-cell beginning with just two adjacent active cells: the centre and one face neighbour. Predict two generations for the whole volume before running it. Keep the rule unchanged. Explain why a visible fading cell does not keep the other one active. This is your own seed, not a change to the museum installation.
++
++Finally, ask the transition function for the next state of an empty cell with seven active neighbours and a fading cell with seven. Their counts match. Explain why their answers differ. A good test checks both cases; a successful screenshot alone does not establish that distinction.
++
++## Return to the larger work
++
++REPLAY returns the installed volume to its own seed. The chosen address `(26, 22, 24)` goes from active with eleven active neighbours, to fading with seven, to empty with five. Its surrounding cells keep evolving too. The gold frame keeps the question at the same address.
++
++VIEW changes the colours without advancing a generation. DRAWN can be smaller than ACTIVE plus FADING because the installed renderer hides occupied cells enclosed on all six faces. That is a drawing decision; the state array still includes them. The six-face visibility test and the twenty-six-neighbour update answer different questions.
++
++RUN, the twenty-step budget and the height-colour view belong to the installed observation apparatus. Our reconstruction needs only a step and a replay. Keep them distinct from the rule you have just written.
++
++Carry onward a transition function that distinguishes presence from participation, and an update that gives every cell the same old world. In **CA_GameOfLife**, a retained generation will become a layer of a structure. Here we replace the array; there we will also keep a history we can approach.
+--- before/final.md
++++ after/final.md
+@@ -2,36 +2,19 @@
+ 
+ How would you recognise a cell that has stopped being active but has not yet disappeared?
+ 
+-The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. Two of the four choices change at once: a cell can hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
++The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. A cell can now hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
+ 
+ <!-- @structure_growth -->
+ 
+ Beside the volume, twenty-seven positions have been pulled apart. You can walk between them. They show one cell and its neighbours from the small structure, enlarged enough to follow without losing the address. The central position wears a golden frame; the finer outlines keep the empty places visible. Move around a cube that blocks your view. What looked like a crowded surface begins to give up its separate positions.
+ 
+-Begin at the console. The structure is held at its starting generation. Pink means active. Press STEP once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours' active count. Follow it through another step. What does it leave available?
++Begin at the console. The structure is held at its starting generation. Pink means active. Lift the familiar black point beside the controls. Carry it with you; its trigger gives the structure one step while you keep looking at the cells. Press once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours' active count. Follow it through another step. What does it leave available?
+ 
+-Each position consults a cube of three by three by three positions. Remove the position itself and twenty-six neighbours remain: through faces, along edges, across corners. The source gathers their activity with this test:
+-
+-```gdscript
+-for offset in neighbor_offsets:
+-    if current_state[idx + offset] == 1:
+-        neighbors += 1
+-```
+-
+-The comparison is to `1`. A green neighbour holds `2`. Being present and being counted have parted company.
++Each position consults a cube of three by three by three positions. Remove the position itself and twenty-six neighbours remain: through faces, along edges, across corners. Only the active state, numbered one, contributes to the count. A green neighbour holds state two. Being present and being counted have parted company.
+ 
+ The inscription `6-8/6-8/3/M` names this installation's agreement. An active cell survives with six, seven or eight active neighbours. An empty cell becomes active with those same counts. Three states are available: empty, active, fading. `M` denotes the surrounding Moore neighbourhood, which this implementation fixes at twenty-six positions.
+ 
+-REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but the code has already sent it down another branch. These are the lines for a state above one:
+-
+-```gdscript
+-if state < rule_states - 1:
+-    next_state[idx] = state + 1
+-else:
+-    next_state[idx] = 0
+-```
+-
+-Here `rule_states` is three, so state two goes to zero. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
++REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but its present state sends it down another branch. In this three-state rule, fading must become empty, however many active neighbours it has. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
+ 
+ ![The enlarged address is green after the first step, with seven active neighbours.](images/lingering-cell.png)
+ 
+@@ -51,4 +34,4 @@
+ 
+ <!-- @ -->
+ 
+-The dark orb remains beside the route as a further encounter. For now, carry the difference between an active cell, a lingering cell and a cell hidden by the drawing. The familiar wish to give something life has opened into more particular questions. What must remain? What must become available again? In the next hall, generations will themselves become a structure laid out in space. A past we have just replaced will become something we can approach.
++The floor opens into a level gallery beyond the volume. The dark orb remains beside the route as a further encounter. For now, carry the difference between an active cell, a lingering cell and a cell hidden by the drawing. The familiar wish to give something life has opened into more particular questions. What must remain? What must become available again? In the next hall, generations will themselves become a structure laid out in space. A past we have just replaced will become something we can approach.
+--- before/map_data.json
++++ after/map_data.json
+@@ -1,727 +1,734 @@
+ {
+-  "map_info": {
+-    "title": "A cell with a past",
+-    "name": "CA_ElementaryRules",
+-    "lookup_name": "CA_ElementaryRules",
+-    "description": "A cell with a past: 26 neighbours, three states, and the difference between a visible body and its active cells.",
+-    "version": "1.0",
+-    "format": "json",
+-    "dimensions": {
+-      "width": 13,
+-      "depth": 14,
+-      "max_height": 6
+-    },
+-    "metadata": {
+-      "difficulty": "intermediate",
+-      "category": "cellular_automata",
+-      "estimated_time": "5 minutes",
+-      "learning_objectives": [
+-        "Read a 26-neighbour volume",
+-        "Distinguish active, fading and empty states",
+-        "Separate rendering choices from state updates",
+-        "Distinguish an observation budget from a fixed point"
+-      ]
+-    },
+-    "museum": {
+-      "wall_height": 7,
+-      "open_roof": true,
+-      "artifact_placement": "map",
+-      "plinths": false,
+-      "sculpture_clear_rects": [
+-        [
+-          1,
+-          1,
+-          11,
+-          12
+-        ]
+-      ],
+-      "gate_depth_rows": 0
+-    }
++ "map_info": {
++  "title": "A cell with a past",
++  "name": "CA_ElementaryRules",
++  "lookup_name": "CA_ElementaryRules",
++  "description": "A cell with a past: 26 neighbours, three states, and the difference between a visible body and its active cells.",
++  "version": "1.0",
++  "format": "json",
++  "dimensions": {
++   "width": 13,
++   "depth": 14,
++   "max_height": 6
+   },
+-  "utility_definitions": {
+-    "t": {
+-      "type": "teleporter",
+-      "name": "Next",
+-      "description": "Continue to next step",
+-      "properties": {
+-        "action": "next_in_sequence"
+-      }
+-    }
++  "metadata": {
++   "difficulty": "intermediate",
++   "category": "cellular_automata",
++   "estimated_time": "5 minutes",
++   "learning_objectives": [
++    "Read a 26-neighbour volume",
++    "Distinguish active, fading and empty states",
++    "Separate rendering choices from state updates",
++    "Distinguish an observation budget from a fixed point"
++   ]
+   },
+-  "lighting": {
+-    "ambient_color": [
+-      0.4,
+-      0.4,
+-      0.5
+-    ],
+-    "ambient_energy": 0.6,
+-    "directional_light": {
+-      "enabled": true,
+-      "direction": [
+-        -0.4,
+-        -0.7,
+-        -0.4
+-      ],
+-      "color": [
+-        1,
+-        0.9,
+-        0.8
+-      ],
+-      "energy": 1.2
+-    }
+-  },
+-  "settings": {
+-    "cube_size": 1,
+-    "gutter": 0,
+-    "show_grid": true,
+-    "enable_physics": true,
+-    "auto_reveal_on_entry": false,
+-    "initial_tile_visibility": "hidden_except_corners",
+-    "background": {
+-      "type": "sky",
+-      "color": [
+-        0.2,
+-        0.3,
+-        0.7
+-      ]
+-    }
+-  },
+-  "layers": {
+-    "structure": [
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "3",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "0",
+-        "3",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "3",
+-        "3",
+-        "6",
+-        "w",
+-        "w",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ]
+-    ],
+-    "utilities": [
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        "sp",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        "t",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ]
+-    ],
+-    "interactables": [
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        "structure_growth:0:0#study:states#plinth:0#room:neighbours",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        "dark_sphere:0:0#plinth:0",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ],
+-      [
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " ",
+-        " "
+-      ]
++  "museum": {
++   "wall_height": 7,
++   "open_roof": true,
++   "artifact_placement": "map",
++   "plinths": false,
++   "sculpture_clear_rects": [
++    [
++     1,
++     1,
++     11,
++     12
+     ]
++   ],
++   "gate_depth_rows": 0,
++   "gate": false,
++   "portal_entry": {
++    "cage": false
++   },
++   "portal_exit": {
++    "approach": "from_hall"
++   }
+   }
++ },
++ "utility_definitions": {
++  "t": {
++   "type": "teleporter",
++   "name": "Next",
++   "description": "Continue to next step",
++   "properties": {
++    "action": "next_in_sequence"
++   }
++  }
++ },
++ "lighting": {
++  "ambient_color": [
++   0.4,
++   0.4,
++   0.5
++  ],
++  "ambient_energy": 0.6,
++  "directional_light": {
++   "enabled": true,
++   "direction": [
++    -0.4,
++    -0.7,
++    -0.4
++   ],
++   "color": [
++    1,
++    0.9,
++    0.8
++   ],
++   "energy": 1.2
++  }
++ },
++ "settings": {
++  "cube_size": 1,
++  "gutter": 0,
++  "show_grid": true,
++  "enable_physics": true,
++  "auto_reveal_on_entry": false,
++  "initial_tile_visibility": "hidden_except_corners",
++  "background": {
++   "type": "sky",
++   "color": [
++    0.2,
++    0.3,
++    0.7
++   ]
++  }
++ },
++ "layers": {
++  "structure": [
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w"
++   ]
++  ],
++  "utilities": [
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "sp",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "t",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ]
++  ],
++  "interactables": [
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "structure_growth:0:0#study:states#plinth:0#room:neighbours",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    "dark_sphere:0:0#plinth:0",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ],
++   [
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " ",
++    " "
++   ]
++  ]
++ }
+ }
+--- before/technical.md
++++ after/technical.md
+@@ -1,4 +1,6 @@
+ # A three-dimensional Generations study
++
++**8 October update:** the tutorial now prints a complete 7-cubed reconstruction, carrying PointBody as a held STEP control. `room:neighbours` also mounts `state_hand.gd` on the installed work and displays a live central-state/count caption. The far gallery is level; the central opening and both authored works remain. Current evidence: 27 construction checks and 30 native museum checks, including four sampled walking routes. Physical headset and full-volume performance remain open. See [encounter-notes.md](encounter-notes.md).
+ 
+ **25 September encounter update:** `room:neighbours` adds an enlarged reading of 27 existing positions, sharing the original solver and console. Current implementation, native results and limitations are in [encounter-notes.md](encounter-notes.md). The dated implementation record below is retained.
+ 
+--- before/encounter-notes.md
++++ after/encounter-notes.md
+@@ -23,3 +23,18 @@
+ The full 125,000-cell update took 153.009 ms in the final run; the pre-change measurement was 166.710 ms. This variation is not an optimisation result. The solver is unchanged and its single-frame cost remains a VR problem. Existing missing-UID, environment, registry and renderer warnings, plus generated-art build warnings, remain in the log.
+ 
+ The narrow supplied desktop walking/input tests do not establish whole-route traversal, tracked-hand reach, headset comfort, Quest performance or learner acceptance. The first outside camera hid the chosen cell; later views approach it through a gap. Diagnostic captures are retained.
++
++
++## 8 October 2026 — A state that lingers
++
++The next lesson follows CA_Introduction's old/next arrays into three-state 3D cells. `tutorial.md` prints complete `volume.gd` and the unchanged carried `point_body.gd`; maintained sources are in `doc/book/studies/cellular-automata-through-the-hands/CA_ElementaryRules/`. The study uses 7³ cells, a stated 12-cell seed and the installed 6–8/6–8/3 rule. Its seed and uncullled rendering differ explicitly from the museum's 50³ installation. A two-cell seed is the independent transfer task.
++
++The installed `room:neighbours` opt-in adds `state_hand.gd`: a frozen pickable point resting at 1.12 m, trigger connected to the existing study's `step_once`, release parks. Moving it does not select or edit a cell. One fixed gold address supports successive observation. The neighbourhood caption reports generation, centre state and active-neighbour count. The base solver file and its rule/seed are unchanged by this pass.
++
++Source-grid rows 9–12 are level floor inside the outer walls; this removes the disconnected rear pits and tiers while retaining the central opening. Both authored works remain. Entry moves to (6,0), exit to (6,13), both at the central thresholds. Entry cage and generic extra gate are disabled for this map; exit approach is from the hall. Only its generated museum-plan row was replaced in live and shipped plans.
++
++27 construction checks pass using exact extracted printed code: 81 transition cases, 26-neighbour active-only count, distinct old/next, independent seed, all faces empty, 8 mixed-state seeds × 8 updates matching the installed solver, reverse traversal, two faulty variants rejected, renderer/state separation and actual XRTools with supplied poses. 30 native museum checks include camera retention, installed pickup/action/release, same-volume neighbourhood, VIEW/replay and four walking routes: 197 samples, layer-1 capsule width .56 m/height 1.7 m, level-floor rays. Supported portal approaches pass; actual portal transfer is untested.
++
++Before/after overhead and raised views, visitor views and temporary mounting of the printed study are in `doc/book/iterations/2026-10-08-ca-a-state-that-lingers/index.html`. Early learner framing confused the two volumes; it was moved for capture into the clear gallery. A later angle avoids a foreground neighbour covering the empty centre. Diagnostics retained. The learner study is not permanently added to the map.
++
++The full installed update measured 212.7 ms in the final desktop run; it still needs performance work before smooth VR playback can be claimed. No physical headset, Quest or independent ghost-student test. No GDScript/parse errors in successful logs; existing project warnings remain.
+--- before/structure_study.gd
++++ after/structure_study.gd
+@@ -43,6 +43,10 @@
+ 		neighbour_room = load("res://algorithms/cellularautomata/cellular_automata_3d/neighbour_room.gd").new()
+ 		add_child(neighbour_room)
+ 		neighbour_room.build(self)
++		var hand := Node3D.new()
++		hand.set_script(load("res://algorithms/cellularautomata/cellular_automata_3d/state_hand.gd"))
++		hand.name = "StateHand"
++		add_child(hand)
+ 
+ func replay() -> void:
+ 	running = false
+--- before/neighbour_room.gd
++++ after/neighbour_room.gd
+@@ -96,6 +96,8 @@
+ 		var basis:=Basis.IDENTITY if state>0 else Basis.IDENTITY.scaled(Vector3.ZERO)
+ 		cells.set_instance_transform(i,Transform3D(basis,Vector3(offsets[i])*SPACING))
+ 		cells.set_instance_color(i,colour)
++	var words := ["EMPTY", "ACTIVE", "FADING"]
++	caption.text="CELL (26, 22, 24) / GEN %d\nCENTRE: %s / %d ACTIVE NEIGHBOURS" % [work.generation, words[states[13]], active_neighbours]
+ 
+ func readback() -> Dictionary:
+ 	return {"address":[ADDRESS.x,ADDRESS.y,ADDRESS.z],"generation":work.generation,

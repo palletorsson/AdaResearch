@@ -1,0 +1,330 @@
+{
+  "sequence": "cellularautomata",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "CA_Introduction",
+      "primary_tokens": [
+        "ca_rule_explorer"
+      ],
+      "question": "How much of the next row can you predict from three cells?",
+      "ontology": "A cellular automaton is a set of states, a neighbourhood, a local update rule and an update schedule.",
+      "action": "Select30 or90, lower SPEED, and use RST to restart; predict one next cell from its left,centre,right neighbourhood.",
+      "observable": "The same restart recreates a single central seed; different rule presets produce different histories.",
+      "mechanism": "_apply_rule forms a3-bit neighbourhood index and reads that bit of the rule integer; _advance writes a fresh row using wrapped neighbours.",
+      "limit": "A rule number is a compact truth table, not a ranking from simple to advanced. Changing the display speed changes viewing time rather than the update relation.",
+      "variation": "Proposed extension: Expose the eight neighbourhood cases as visitor-editable switches, preserving the starting row.",
+      "prior_bridge": "Lab_Path",
+      "next_bridge": "CA_ElementaryRules",
+      "sources": [
+        {
+          "path": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+          "fact": "226 control labels RULE/SPEED/30/90/110/184/RST;335–368 reset/bit lookup/wrapped evolution."
+        }
+      ],
+      "placements": [
+        {
+          "x": 10,
+          "z": 12,
+          "token": "ca_rule_explorer"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/CA_Introduction/map_data.json": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn": "26e7cdcacff05cb468ccb38506d0835108979992aef3ff2910a97010993edbe2",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd": "87f99f53f15ba6a7ee3f881b370a81a4750947ca0475a75796800f2554243f4a",
+        "commons/maps/CA_Introduction/intent.md": "9895827372ab0b8c8d474488d416eb5cf5ea9c5745f058b7692f593bad7de90b",
+        "commons/maps/CA_Introduction/blurb.md": "57fc6ab8e9427b0341cbe64fa89baa9e842515b2195d36aa48c464ab2a04e257",
+        "commons/maps/CA_Introduction/critical.md": "ab5b0e2630e751e48f8e52dc29bb795a7ac38b5e27b55b926b5427ea611e1725",
+        "commons/maps/CA_Introduction/technical.md": "533ac6de5c99e5bf2b00e7e8211a2723d7cba74c0f3584199903a5bcb7e7658e"
+      }
+    },
+    {
+      "room_id": "CA_ElementaryRules",
+      "primary_tokens": [
+        "structure_growth"
+      ],
+      "question": "What changes when a cell can have neighbours around it in three dimensions?",
+      "ontology": "A local rule depends on its neighbourhood and available states; an elementary1D rule is only one possible family.",
+      "action": "Observe the growing volume from two sides, identifying occupied clusters and the edges between them.",
+      "observable": "A three-dimensional set evolves and stops after20 generations; it carries active and dying-state colours.",
+      "mechanism": "StructureGrowth scene overrides rule6-8/6-8/3/M, grid50³,random start,max_generations20. Flexible script counts26 Moore neighbours, applies birth/survival, then a dying state and double-buffer swap.",
+      "limit": "Despite this room name, this is a3D multi-state Generations automaton, not a row of elementary Wolfram cases. A stopped display may be its generation cap rather than a stable state.",
+      "variation": "Proposed extension: Place a1D truth-table strip beside one explicit3D neighbourhood to compare what each rule can read.",
+      "prior_bridge": "CA_Introduction",
+      "next_bridge": "CA_GameOfLife",
+      "sources": [
+        {
+          "path": "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd",
+          "fact": "_parse_rule and343–393 multi-state update; scene overrides important."
+        }
+      ],
+      "placements": [
+        {
+          "x": 0,
+          "z": 0,
+          "token": "structure_growth"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor rule editor in this placed scene.",
+      "source_hashes": {
+        "commons/maps/CA_ElementaryRules/map_data.json": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+        "algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn": "9b0ffb6bc306aad59a5ae329a46423064be9b83107ce58886071a23519bce16c",
+        "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd": "039fb3f306020476854b70b0dc7c74a64dea95d66a87d736168e949388a7ebd0",
+        "commons/maps/CA_ElementaryRules/intent.md": "ab88db6505139a2cad401989fbf1fbca5157b28f15b79e1ef96600e5d5bd8c58",
+        "commons/maps/CA_ElementaryRules/blurb.md": "7f3887f27fc50ac93b23af6cf9941b00d902102e4d47185e7445193f338bae06",
+        "commons/maps/CA_ElementaryRules/critical.md": "59f42e7daffcac905438f50c2e2b15a8a03fd713d0914921a679d4c19353e617",
+        "commons/maps/CA_ElementaryRules/technical.md": "6d14a10c3a87059138b779d7537c56954b66db70379d8ba2870a20ceb5c126fa"
+      },
+      "core_gap": "Placed structure_growth is 3D Generations rather than a 1D elementary rule table.",
+      "smallest_repair_candidate": "Add a second ca_rule_explorer with a controlled rule/seed comparison or make explorer primary here."
+    },
+    {
+      "room_id": "CA_GameOfLife",
+      "primary_tokens": [
+        "ca_bridge"
+      ],
+      "question": "What happens when the record of time becomes a structure in space?",
+      "ontology": "A space-time diagram keeps each successive generation as another row; rendered cells may also become physical supports.",
+      "action": "Read from the starting row toward later rows of the bridge, comparing a repeated neighbourhood with the cell it produces.",
+      "observable": "Occupied cells become cubes with colliders; absent cells leave gaps in the sequence of rows.",
+      "mechanism": "ca_bridge starts with a central cell, advances a1D three-neighbour bit rule and spawns each row alongZ; modulo wraps row ends.",
+      "limit": "The bridge currently implements an elementary rule(default30), not Conway B3/S23. A pattern called a bridge does not guarantee a traversable route.",
+      "variation": "Proposed extension: Add a matching B3/S23 dish and explicitly contrast evolving a plane with laying out a row history.",
+      "prior_bridge": "CA_ElementaryRules",
+      "next_bridge": "CA_BeyondBinary",
+      "sources": [
+        {
+          "path": "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+          "fact": "147–210 central seed, historical rows, colliders and bit rule."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 16,
+          "token": "ca_bridge:0:-5"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not promise crossing; actual museum gaps/scale untested. Room title and placed mechanism differ.",
+      "source_hashes": {
+        "commons/maps/CA_GameOfLife/map_data.json": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+        "algorithms/cellularautomata/ca_bridge/ca_bridge.tscn": "7afc6b400ee6fb83e7e4164b647ebfd8d7a400420b7909367776d2a4f6cf548e",
+        "algorithms/cellularautomata/ca_bridge/ca_bridge.gd": "912ebc7e286c2eb992b8bc1a1a7ad61bfbeda6b5e80f7fba5ae8c539366359c9",
+        "commons/maps/CA_GameOfLife/intent.md": "fe166e939ba9ded1436b5bf53ecbb6c081ba8cbb4aefa5d5883cc3eab4372b04",
+        "commons/maps/CA_GameOfLife/blurb.md": "797faebb0b1b2e3031c0d59d2bce5785a37cc468fa8eabe6e6cfa237734b5c3b",
+        "commons/maps/CA_GameOfLife/critical.md": "41e04f5c83f8a03a03488608e099abcf62894c6fb4ec3157a171b4d99b05e3fb",
+        "commons/maps/CA_GameOfLife/technical.md": "6d364800bd216d514420c558a1e25a68b8847a60035470e850f8f74bf8c02796"
+      },
+      "core_gap": "Chosen bridge is Rule30, not B3/S23.",
+      "smallest_repair_candidate": "Bring game_of_life_petri into this room or select a verified existing B3/S23 alternative."
+    },
+    {
+      "room_id": "CA_BeyondBinary",
+      "primary_tokens": [
+        "game_of_life_petri"
+      ],
+      "question": "Can one rule support both something that repeats and something that travels?",
+      "ontology": "A pattern is a relation among cell states over time, not an extra moving body.",
+      "action": "Use the pattern buttons to compare a glider and pulsar; reduce SPEED and watch several generations.",
+      "observable": "The glider changes cells while shifting location; the pulsar cycles through shapes near its starting region.",
+      "mechanism": "Petri dish applies B3/S23 synchronously with8 wrapped neighbours; patterns are inserted into a64×64 boolean grid.",
+      "limit": "The primary remains binary despite the room title. Calling a pattern alive does not give its cells metabolism or intention. Pattern buttons insert and may interact with existing cells.",
+      "variation": "Proposed extension: Compare the binary dish with an explicit third resting state, keeping initial geometry and clock visible.",
+      "prior_bridge": "CA_GameOfLife",
+      "next_bridge": "CA_ExpandingSpace",
+      "sources": [
+        {
+          "path": "commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+          "fact": "_create_vr_controls pattern buttons;_spawn_pattern;_count_neighbors;_advance B3/S23."
+        }
+      ],
+      "placements": [
+        {
+          "x": 4,
+          "z": 2,
+          "token": "game_of_life_petri:0:0.5:1"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/CA_BeyondBinary/map_data.json": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+        "commons/artifacts/game_of_life_petri/game_of_life_petri.tscn": "a11fd8917fca307c42e6c189c3f8f805506001b06256a8f340fbfe360935ada7",
+        "commons/artifacts/game_of_life_petri/game_of_life_petri.gd": "a72f16fad833f24b603c41fcc9fee0157ef389868065df198976f4c1a3e6fa8a",
+        "commons/maps/CA_BeyondBinary/intent.md": "8f7ba78258557d408524df3971ed6565c0ad5bdc3863884a3fa7dcf34b9e9ab5",
+        "commons/maps/CA_BeyondBinary/blurb.md": "fdf176df0e68069da4461de2b24a5ebd11379477db0d826bdcdeab459521e83e",
+        "commons/maps/CA_BeyondBinary/critical.md": "f3856a1683fb0c8d0b356799a532e7b05bd48f543be8b212eae390ff04f94e92",
+        "commons/maps/CA_BeyondBinary/technical.md": "36bcb2b1274c62a2dd62f9a197cc350d5cbfb41867e02052d8f30907338cbcab"
+      },
+      "core_gap": "Primary petri artifact remains binary; graded-state lesson needs a real comparison.",
+      "smallest_repair_candidate": "Add a working multistate or continuous automaton beside the verified binary baseline."
+    },
+    {
+      "room_id": "CA_ExpandingSpace",
+      "primary_tokens": [
+        "decaying_bridge"
+      ],
+      "question": "Does a route remain the same route after somebody occupies it?",
+      "ontology": "Here each bridge cell carries a continuous health value; proximity and neighbouring cells update that value.",
+      "action": "Approach the bridge from its side, pause near an edge, then withdraw and watch that region.",
+      "observable": "Nearby cells lose health and change appearance; away from the visitor they can recover when adjacent cells remain healthy.",
+      "mechanism": "Every0.1s local distance<decay_radius decreases health; four-neighbour health>0.5 supports regrowth. Collision turns off below0.2.",
+      "limit": "The rule sees proximity to a player-group position, not footsteps, pressure or care. Regrowth requires healthy neighbours; removing all support need not recover.",
+      "variation": "Proposed extension: Compare lingering, quickly passing and returning; record whose presence the player selector uses in a group.",
+      "prior_bridge": "CA_BeyondBinary",
+      "next_bridge": "CA_SoftRules",
+      "sources": [
+        {
+          "path": "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+          "fact": "49–63 first player-group tracking;105–161 proximity decay/neighbour regrowth/collision threshold."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 8,
+          "token": "decaying_bridge:90"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Player group and museum access unverified. Observe from stable museum floor before claiming a safe crossing.",
+      "source_hashes": {
+        "commons/maps/CA_ExpandingSpace/map_data.json": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+        "algorithms/cellularautomata/living_architecture/decaying_bridge.tscn": "c8ab8e6bd65f43ed7aa81d4ad124266b3c62702baed15c0e219f4652f7b62b2d",
+        "algorithms/cellularautomata/living_architecture/decaying_bridge.gd": "67157d8068d0a61cbbe87e7e2c53541094a25b0493f4f0e33a68d4a5d427402e",
+        "commons/maps/CA_ExpandingSpace/intent.md": "c88fde77b8abaa8b7c90781854330d176c7dae88645fee4feb56144250bf23de",
+        "commons/maps/CA_ExpandingSpace/blurb.md": "0c9f8313f6f2be9c6e228795d26b09cd83c0f85417868b5b92eaac6f84be3703",
+        "commons/maps/CA_ExpandingSpace/critical.md": "3938737dce366a8c5c23160ffe37175f495ac368fc71259d3b3655a7457b898a",
+        "commons/maps/CA_ExpandingSpace/technical.md": "029fb6d8a7ecb404b4ba8637267d6aae19fa1c5ae1f1494443414dd875ad44ab"
+      }
+    },
+    {
+      "room_id": "CA_SoftRules",
+      "primary_tokens": [
+        "the_clockmaker_of_rules"
+      ],
+      "question": "What must remain separate for all cells to share the same present?",
+      "ontology": "Double buffering stores an old state and a next state separately so one update cannot read a neighbour already changed during that same step.",
+      "action": "Compare the two trays, then trace two neighbouring outputs on the rule90 display back to the preceding row.",
+      "observable": "The bench shows separate read/write trays and computed elementary histories alongside other rule-family representations.",
+      "mechanism": "_build_elementary starts25 cells, computes each nxt from cur, and swaps only after the whole row. The visible crank and levers are constructed meshes.",
+      "limit": "A mechanical-looking crank is not necessarily an operable control. The bench represents the update mechanism; it does not prove every depicted rule-family claim by a live experiment.",
+      "variation": "Proposed extension: Make the crank operable and offer one intentionally sequential update beside synchronous update, keeping the seed identical.",
+      "prior_bridge": "CA_ExpandingSpace",
+      "next_bridge": "CA_AgentsCircuits",
+      "sources": [
+        {
+          "path": "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd",
+          "fact": "29–43 builds stations;122–144 levers are meshes;177–198 computes and swaps rows."
+        }
+      ],
+      "placements": [
+        {
+          "x": 9,
+          "z": 4,
+          "token": "the_clockmaker_of_rules"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not claim grab/crank interaction. rd_artifact is bare with empty config_path and builds nothing; leave it outside the core.",
+      "source_hashes": {
+        "commons/maps/CA_SoftRules/map_data.json": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+        "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn": "ca601239ecc801e646521f47b94b02191de0eaa2afc0cbfcaa9a59cedf9d84d6",
+        "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd": "81868d06279a461c79c5ef85cb5e04638770c4891252f83fa8c847e3e55a795f",
+        "commons/maps/CA_SoftRules/intent.md": "6c0bd99dad1610201cfd0997cb6d2d35b49837dc70a165a9f3428836c328c5e1",
+        "commons/maps/CA_SoftRules/blurb.md": "2954f6f921bc91e744526483d90aa66765c034cb95f416de7aa76b97ae7e85cf",
+        "commons/maps/CA_SoftRules/critical.md": "a3b2bceba9b06971f8ea4ce8ddd4712d9094bb30f8db1d116c42e8ecc4754fb5",
+        "commons/maps/CA_SoftRules/technical.md": "dd758f34bb473010d4b50d4f116456cf7a24090e7a99f9fc5106c352c38df06a"
+      },
+      "core_gap": "rd_artifact has no configuration and builds no visible field; Clockmaker Lenia/Wireworld are static illustrations.",
+      "smallest_repair_candidate": "Configure rd_artifact with a supported real preset, verify runtime andcontrols, then promote it; preserve Clockmaker as contextual diagram."
+    },
+    {
+      "room_id": "CA_AgentsCircuits",
+      "primary_tokens": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "question": "Can similar patterns come from different ways of building them?",
+      "ontology": "A resemblance between shapes does not imply the same computation: local temporal updates and recursive spatial copying can share structure.",
+      "action": "Select90 on the rule explorer and compare its repeated triangular gaps with the pyramid; inspect a smaller part of each.",
+      "observable": "Rule90 grows a patterned row history; the pyramid repeats smaller corner forms in three-dimensional space.",
+      "mechanism": "Explorer uses bit-table updates; SierpinskiPyramid _recursive_build divides current_size and recursively places corner children until depth0.",
+      "limit": "The pyramid is built by recursion, not agents exchanging messages, and the visible likeness does not establish a working circuit or universal computer.",
+      "variation": "Proposed extension: Expose one construction step on each artifact so visitors can match a local update with a recursive level.",
+      "prior_bridge": "CA_SoftRules",
+      "next_bridge": "CA_EdgeOfChaos",
+      "sources": [
+        {
+          "path": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+          "fact": "_apply_rule and _advance;90 preset."
+        },
+        {
+          "path": "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd",
+          "fact": "88–112 recursive build;depth/tick/packing exports."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "sierpinski_pyramid:0:6"
+        },
+        {
+          "x": 1,
+          "z": 6,
+          "token": "ca_rule_explorer:0:0.5:1#mount:wall"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/CA_AgentsCircuits/map_data.json": "0bd90c88a790dabe974396630b2c610852d7118db8913b897d2d62f886b8d457",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn": "26e7cdcacff05cb468ccb38506d0835108979992aef3ff2910a97010993edbe2",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd": "87f99f53f15ba6a7ee3f881b370a81a4750947ca0475a75796800f2554243f4a",
+        "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn": "3e0202eeb39256d6903a87e0d830da3c543b8dd2857cfb3e33acb5cbb4f8473f",
+        "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd": "79aca3e6815f01290a86ec98af9be5b85f6b33f05186469394891794d64a0347",
+        "commons/maps/CA_AgentsCircuits/intent.md": "0ce31838f399e3c4c30a723bf53aa02bae8dcdb44c1b6a9ee25efee5488ae78d",
+        "commons/maps/CA_AgentsCircuits/blurb.md": "7acf74bee810dcac65e2651210f8974f6f14d30f3db6b034520b6a3cb7fa77d2",
+        "commons/maps/CA_AgentsCircuits/critical.md": "d365821cb8224947fec109102e95bde58dd1d5fb2d281413d81651736a908fb3",
+        "commons/maps/CA_AgentsCircuits/technical.md": "6971244a08adfba8a080f3aaa480939e22292e399842d75e9b4da34bdf9c5229"
+      }
+    },
+    {
+      "room_id": "CA_EdgeOfChaos",
+      "primary_tokens": [
+        "self_organization_ca"
+      ],
+      "question": "What evidence would distinguish persistent organisation from a changing picture?",
+      "ontology": "A local state can be updated by neighbour averaging plus perturbation; a regime label is a hypothesis about its resulting behaviour.",
+      "action": "Watch a region over several updates and describe what persists, what changes and what disappears from view.",
+      "observable": "Coloured state clusters evolve under averaging and random perturbation; the visualiser samples every third cell.",
+      "mechanism": "evolve_self_organization creates a next grid using neighbour average and noise; lambda interpolates coupling0.35→0 and randomness0→4. Hard-coded band0.35–0.65 supplies the regime name.",
+      "limit": "This parameter is not a measurement of Langton rule-table lambda or proof that life exists only in a numerical interval. Display subsampling can hide state changes.",
+      "variation": "Proposed extension: Add matched-seed low/mid/high parameter fields and measure a defined persistence statistic before naming a critical regime.",
+      "prior_bridge": "CA_AgentsCircuits",
+      "next_bridge": "Fractal_Recursion",
+      "sources": [
+        {
+          "path": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+          "fact": "37–41 parameter interpolation;67–99 update;100–120 sampled display;174 band classification."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 3,
+          "token": "self_organization_ca"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor lambda slider; do not turn speculative identity comments into empirical claims.",
+      "source_hashes": {
+        "commons/maps/CA_EdgeOfChaos/map_data.json": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+        "algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn": "cdc537b48a56dc43ad77973ab4e7e7ddc9445db5b8c95ec6e424645284e25399",
+        "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd": "4aaeeea75ce1b742dfdd88bd909cef817ea476a669993fb406fb3ad4827fc3fc",
+        "commons/maps/CA_EdgeOfChaos/intent.md": "a4e36518335abf1de7d2b0a2d23739bde85651b6846efacadf464b1b57906b83",
+        "commons/maps/CA_EdgeOfChaos/blurb.md": "aae5d45f7dfb511582f7e9996c207a664f6782af4bec2db6d25681e37269a4d3",
+        "commons/maps/CA_EdgeOfChaos/critical.md": "cf9382b8eeec66b6d1a8e05ff37bb7836a51bcf123704d47e074beaa036f455b",
+        "commons/maps/CA_EdgeOfChaos/technical.md": "f61fa519b4cfee1a50a29f913d317581f664506b5bdf936c08405968e3203772"
+      }
+    }
+  ]
+}

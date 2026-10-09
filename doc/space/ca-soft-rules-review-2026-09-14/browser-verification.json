@@ -1,0 +1,130 @@
+{
+  "checks": [
+    {
+      "name": "first exchange arrival",
+      "ok": true,
+      "data": {
+        "a": "W (12,15): U 0.920 · V 0.020",
+        "b": "W (12,15): U 1.000 · V 0.000",
+        "bTitle": "B · exchange OFF",
+        "clock": "HELD · tick 1 / 2400 · dt 1 · injections 0",
+        "coat": "Wall coating linked: the same field also fills the tall panels below.",
+        "view": "Showing V ×2 · blue → pink; feed .037, removal K .060. Edges wrap."
+      }
+    },
+    {
+      "name": "matched exchange beginnings",
+      "ok": true
+    },
+    {
+      "name": "display preserves clock and concentrations",
+      "ok": true
+    },
+    {
+      "name": "intervention without advancing",
+      "ok": true
+    },
+    {
+      "name": "exact scheduled hundred",
+      "ok": true,
+      "data": {
+        "a": "W (12,15): U 0.259 · V 0.379",
+        "b": "W (12,15): U 0.259 · V 0.379",
+        "bTitle": "B · exchange ON",
+        "clock": "HELD · tick 100 / 2400 · dt 1 · injections 0",
+        "coat": "Wall coating hidden; both table fields keep their state.",
+        "view": "Showing U · violet → green; feed .037, removal K .060. Edges wrap."
+      }
+    },
+    {
+      "name": "RUN toggle",
+      "ok": true
+    },
+    {
+      "name": "photographs loaded",
+      "ok": true,
+      "data": [
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-exchange.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-walls.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-clockmaker.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-entrance.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-controls.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-readout.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-soft-rules-whole-hall.png"
+        }
+      ]
+    },
+    {
+      "name": "real code excerpts rendered",
+      "ok": true
+    },
+    {
+      "name": "no horizontal page overflow",
+      "ok": true,
+      "data": {
+        "code": 3,
+        "images": [
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-exchange.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-walls.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-clockmaker.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-entrance.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-controls.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-readout.png"
+          },
+          {
+            "loaded": true,
+            "src": "ca-soft-rules-whole-hall.png"
+          }
+        ],
+        "scroll": 676,
+        "width": 691
+      }
+    },
+    {
+      "name": "primary book UI agrees",
+      "ok": true
+    }
+  ],
+  "primaryWords": [
+    616,
+    110
+  ],
+  "headset_verified": false
+}

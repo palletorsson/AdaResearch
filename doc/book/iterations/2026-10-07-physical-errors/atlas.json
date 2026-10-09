@@ -1,0 +1,143 @@
+{
+  "title": "The dark side of The Nature of Code",
+  "status": "Sixteen original physical metaphors; concept illustrations, not tested museum behavior. Four HTTP status codes are distinct from the programming and simulation failures.",
+  "method": "Built-in OpenAI image generation",
+  "plates": [
+    {
+      "id": "01-the-room-refuses",
+      "title": "I. The room refuses",
+      "family": "Requests and permissions",
+      "items": [
+        {
+          "label": "404 — NOT FOUND",
+          "caption": "The address remains. The room does not.",
+          "situation": "An intact numbered doorway and its threshold survive; beyond them there is no room, only a vast dark architectural void. The student stops with their black sphere at the edge.",
+          "meaning": "A requested resource has no available representation, or its existence is not disclosed. The missing architecture is our interpretation."
+        },
+        {
+          "label": "403 — FORBIDDEN",
+          "caption": "You fit. You are not permitted.",
+          "situation": "A transparent closed door reveals an inviting empty gallery. The student's body clearly fits through the opening but a red lock refuses entry.",
+          "meaning": "The request is understood but refused. Exclusion is a permission decision, not a geometric incapacity."
+        },
+        {
+          "label": "408 — REQUEST TIMEOUT",
+          "caption": "The room stopped waiting.",
+          "situation": "A very long entry slot requires the student to insert a rigid black rod; a mechanical shutter closes while the rod is still being offered, with a drained hourglass above.",
+          "meaning": "A complete request was not received within the allowed time. The interrupted physical submission translates that deadline."
+        },
+        {
+          "label": "429 — TOO MANY REQUESTS",
+          "caption": "Each attempt becomes another weight.",
+          "situation": "The student repeatedly pulls a request cord at a closed gate. Each attempt adds another small black sphere to a suspended bucket, which now weighs down the gate's lock.",
+          "meaning": "Too many requests within a time interval. The accumulation and weight are artistic inventions, not an HTTP mechanism."
+        }
+      ],
+      "prompt": "Use case: illustration-story. Create a museum comic atlas plate titled exactly \"THE DARK SIDE OF THE NATURE OF CODE\", with subtitle specified below. Four large panels in a 2 by 2 grid, PORTRAIT page around 1024x1536. Each panel is a DIFFERENT physical software-error encounter, labelled with its exact error name in a small clean ivory header and a short caption at the bottom. Extremely legible typography; keep captions exact. Strong black panel borders, warm ivory gutters, condensed black serif main headline. Rich cinematic 3D graphic-novel rendering, faint drawn edges, tactile stone and plaster, beautiful dark architectural space. Endless Museum: sober off-white plinths, tall pale walls, classical openings meeting austere contemporary geometry, dark recesses and cool moonlight. Keep action legible, not uniformly black. No digital screens, no floating computer windows, no code rain, no generic cyberpunk. The error MUST BE IN THE PHYSICAL ROOM. Same protagonist in all panels: an adult androgynous art student, short tousled brown hair, rust-red patterned shirt, charcoal trousers, black shoes; correct anatomy. Recurring object: a palm-size mirror-black sphere. Surreal, unsettling, occasionally deadpan funny. No gore or monsters. One coherent physical cause or predicament per panel, clear silhouette and point of contact. This is original art for the Endless Museum research, not an official book cover or literal software documentation. In one architectural wall, discreet lettering \"ENDLESS MUSEUM\" / \"always another room\". No other writing beyond requested labels/captions/necessary small prop symbols. Subtitle: \"I. THE ROOM REFUSES\". Panel order top-left, top-right, bottom-left, bottom-right.\n1. Header \"404 — NOT FOUND\". Caption \"The address remains. The room does not.\" Large white museum portal opens directly onto a pitch-dark void with NO FLOOR beyond threshold. Student stands safely at threshold holding sphere, stunned. A small 404 carved into lintel is allowed. Architecture's missing continuation, not simply a dark unlit room. Broken floor ends at doorway with visible thickness.\n2. Header \"403 — FORBIDDEN\". Caption \"You fit. You are not permitted.\" Student's palm meets locked perfectly transparent glass gate, with an obvious small red closed-padlock mechanism, a beautifully lit empty gallery plainly visible beyond. Gate is wide and tall, no physical shape-fit problem. Student still has sphere in other hand. Control rather than ruin.\n3. Header \"408 — REQUEST TIMEOUT\". Caption \"The room stopped waiting.\" A museum wall's mechanical receiving slot snaps closed before student has finished feeding a long thin rigid black rod through it. Show rod halfway inserted, student puzzled, small spent hourglass mounted above slot and bright remaining gap shrinking; no harm or crushed hands. ONE clear receiving aperture and rod.\n4. Header \"429 — TOO MANY REQUESTS\". Caption \"Each attempt becomes another weight.\" Student pulling a doorbell-like request rope beside enormous locked gate; a wall-mounted dispenser drops small glossy black spheres into one suspended bucket mechanically connected to gate bolt. Bucket overflowing and pulling bolt downward. Every attempt makes entry harder. Close enough to see sphere dropping and bucket/bolt linkage; restrained ominous comedy.",
+      "source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-c84d2551-2f68-4984-89db-74978c068dc8.png",
+      "saved_file": "images/01-the-room-refuses.png"
+    },
+    {
+      "id": "02-the-rule-never-ends",
+      "title": "II. The rule never ends",
+      "family": "Iteration, retention and waiting",
+      "items": [
+        {
+          "label": "INFINITE LOOP",
+          "caption": "The exit brings you back.",
+          "situation": "A narrow looping corridor returns the student to the same scratched plinth and black point.",
+          "meaning": "An iteration never reaches a terminating condition. A spatial circuit lets the body feel repetition without progress."
+        },
+        {
+          "label": "MEMORY LEAK",
+          "caption": "Nothing here is allowed to leave.",
+          "situation": "Black spheres left by previous visits accumulate in unreachable glass compartments until the gallery is crowded out.",
+          "meaning": "Allocated memory is unintentionally retained instead of being reclaimed when no longer needed. The inaccessible balls stand for unreclaimed allocations."
+        },
+        {
+          "label": "STACK OVERFLOW",
+          "caption": "Another room inside another room.",
+          "situation": "Each doorway produces a smaller doorway and its frame. The expanding stack exhausts the available space and wedges against the ceiling.",
+          "meaning": "Nested calls can exhaust a finite call stack. Recursive frames are a spatial analogy, not a literal memory layout."
+        },
+        {
+          "label": "DEADLOCK",
+          "caption": "I wait for what you hold.",
+          "situation": "Two locked display carts each hold the key required to open the other. The student looks from one to the other.",
+          "meaning": "Each participant holds a resource while waiting for another held by the other; neither can progress."
+        }
+      ],
+      "prompt": "Use case: illustration-story. Create a museum comic atlas plate titled exactly \"THE DARK SIDE OF THE NATURE OF CODE\", with subtitle specified below. Four large panels in a 2 by 2 grid, PORTRAIT page around 1024x1536. Each panel is a DIFFERENT physical software-error encounter, labelled with its exact error name in a small clean ivory header and a short caption at the bottom. Extremely legible typography; keep captions exact. Strong black panel borders, warm ivory gutters, condensed black serif main headline. Rich cinematic 3D graphic-novel rendering, faint drawn edges, tactile stone and plaster, beautiful dark architectural space. Endless Museum: sober off-white plinths, tall pale walls, classical openings meeting austere contemporary geometry, dark recesses and cool moonlight. Keep action legible, not uniformly black. No digital screens, no floating computer windows, no code rain, no generic cyberpunk. The error MUST BE IN THE PHYSICAL ROOM. Same protagonist in all panels: an adult androgynous art student, short tousled brown hair, rust-red patterned shirt, charcoal trousers, black shoes; correct anatomy. Recurring object: a palm-size mirror-black sphere. Surreal, unsettling, occasionally deadpan funny. No gore or monsters. One coherent physical cause or predicament per panel, clear silhouette and point of contact. This is original art for the Endless Museum research, not an official book cover or literal software documentation. In one architectural wall, discreet lettering \"ENDLESS MUSEUM\" / \"always another room\". No other writing beyond requested labels/captions/necessary small prop symbols. Subtitle: \"II. THE RULE NEVER ENDS\". Four separate physical scenes.\n1. Header \"INFINITE LOOP\". Caption \"The exit brings you back.\" Slight elevated three-quarter view of museum corridor built as a closed square loop, with cutaway enough to see its course. Same rust-shirt student arrives at a familiar scratched white plinth with one black sphere, a dark thread trail on floor has already made several circuits. Small plain door marked EXIT opens onto this same circuit. The body is trapped by repetition, not a bottomless void.\n2. Header \"MEMORY LEAK\". Caption \"Nothing here is allowed to leave.\" Long immaculate glass storage alcoves overflowing with hundreds of shiny black spheres, the storage growing into visitor space and narrowing corridor. Student clutching the newest sphere stands at tiny remaining passage. Balls behind sealed glass unmistakably inaccessible, dusty old ones behind shiny recent ones. Beautiful but suffocating, no water leak.\n3. Header \"STACK OVERFLOW\". Caption \"Another room inside another room.\" Piled nested rigid ivory architectural door frames, like a recursive dollhouse stair of portals, multiply upward until pressed hard against low ceiling; a last tilted frame cannot fit. Student beneath at safe distance looks up holding point. Finite physical room overwhelmed by repeated nested frames. No infinite fractal background; the finite limit must be visible.\n4. Header \"DEADLOCK\". Caption \"I wait for what you hold.\" Two simple museum glass display boxes on little carts face one another. Each box has a lock and contains one huge key behind glass. Left box lock unmistakably TRIANGULAR, but inside is a ROUND-headed key; right lock ROUND, inside TRIANGULAR key. Thus each box holds the other box's key. Student kneels between them, hands open, black sphere beside knee. Show both locks and both keys clearly, reciprocal dependency with no magical third key.",
+      "source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-f7c2fdc1-9762-4c6d-b915-e4d684eb41f3.png",
+      "saved_file": "images/02-the-rule-never-ends.png"
+    },
+    {
+      "id": "03-the-parts-disagree",
+      "title": "III. The parts disagree",
+      "family": "References, types, order and boundaries",
+      "items": [
+        {
+          "label": "TYPE MISMATCH",
+          "caption": "Fits the hand. Rejected by the slot.",
+          "situation": "The familiar sphere meets an intake that only accepts a tightly fitted triangular prism.",
+          "meaning": "An operation expects a different kind of value. The shape sorter is an analogy; data types are not geometric shapes."
+        },
+        {
+          "label": "NULL REFERENCE",
+          "caption": "The instruction points to nobody.",
+          "situation": "A heavy instruction arrow directs the student's hand toward the empty mounting holes where a handle should be.",
+          "meaning": "Code tries to use an object reference that does not refer to an object. Naming an expected thing does not supply it."
+        },
+        {
+          "label": "RACE CONDITION",
+          "caption": "Who moved first changed the floor.",
+          "situation": "Two independent arms move the same bridge slab in conflicting directions just as the student approaches.",
+          "meaning": "The result depends on the relative timing of concurrent actions. The arms translate unsynchronised access into a shared surface."
+        },
+        {
+          "label": "INDEX OUT OF BOUNDS",
+          "caption": "One step beyond what was stored.",
+          "situation": "Four floor cells numbered 0 through 3 end abruptly; the visitor follows the next address over empty space.",
+          "meaning": "The requested position is outside the valid index range. A four-element zero-based list has indices 0–3."
+        }
+      ],
+      "prompt": "Use case: illustration-story. Create a museum comic atlas plate titled exactly \"THE DARK SIDE OF THE NATURE OF CODE\", with subtitle specified below. Four large panels in a 2 by 2 grid, PORTRAIT page around 1024x1536. Each panel is a DIFFERENT physical software-error encounter, labelled with its exact error name in a small clean ivory header and a short caption at the bottom. Extremely legible typography; keep captions exact. Strong black panel borders, warm ivory gutters, condensed black serif main headline. Rich cinematic 3D graphic-novel rendering, faint drawn edges, tactile stone and plaster, beautiful dark architectural space. Endless Museum: sober off-white plinths, tall pale walls, classical openings meeting austere contemporary geometry, dark recesses and cool moonlight. Keep action legible, not uniformly black. No digital screens, no floating computer windows, no code rain, no generic cyberpunk. The error MUST BE IN THE PHYSICAL ROOM. Same protagonist in all panels: an adult androgynous art student, short tousled brown hair, rust-red patterned shirt, charcoal trousers, black shoes; correct anatomy. Recurring object: a palm-size mirror-black sphere. Surreal, unsettling, occasionally deadpan funny. No gore or monsters. One coherent physical cause or predicament per panel, clear silhouette and point of contact. This is original art for the Endless Museum research, not an official book cover or literal software documentation. In one architectural wall, discreet lettering \"ENDLESS MUSEUM\" / \"always another room\". No other writing beyond requested labels/captions/necessary small prop symbols. Subtitle: \"III. THE PARTS DISAGREE\". Four physical error situations.\n1. Header \"TYPE MISMATCH\". Caption \"Fits the hand. Rejected by the slot.\" Close-medium view student offers shiny black sphere into a tightly fitted TRIANGULAR receiving socket on austere wall; ball plainly too broad for that triangle, a reference triangular prism rests on little ledge next to socket. Strong felt contrast between hand's generous grip and exact rejecting slot.\n2. Header \"NULL REFERENCE\". Caption \"The instruction points to nobody.\" Student reaches to turn a door handle that IS ABSENT. Only two screw holes and a pale outline where handle used to be on black door. A large solid white carved directional arrow on wall directs hand exactly to this absence. Student open fingers poised in empty air, sphere in other hand. Do not render a ghost handle or hologram; it truly is missing.\n3. Header \"RACE CONDITION\". Caption \"Who moved first changed the floor.\" Over shallow dark gap, two off-white robotic museum maintenance arms each grasp an opposite end of SAME single white bridge slab. Left arm placing it, right arm already lifting it away. Tilted slab, student pauses at threshold with one foot lifted but safe, looking at contested surface. Two actions, one resource, timing embodied; no violence, no weapons.\n4. Header \"INDEX OUT OF BOUNDS\". Caption \"One step beyond what was stored.\" Four narrow pale stone stepping platforms labelled clearly in reading order \"0\", \"1\", \"2\", \"3\", cross part of dark shallow void and end. Student stands safely on tile 3, testing next step with a toe, next tile entirely missing. On far wall a small arrow marked \"4\" points into missing tile location. Exactly four tiles, no duplicated/missing numerals, make empty fifth position unmistakable.",
+      "source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-965ff739-5d40-4de8-9d49-de92a5146fe1.png",
+      "saved_file": "images/03-the-parts-disagree.png"
+    },
+    {
+      "id": "04-the-simulation-breaks",
+      "title": "IV. The simulation breaks",
+      "family": "Arithmetic, time steps and control",
+      "items": [
+        {
+          "label": "DIVISION BY ZERO",
+          "caption": "The denominator disappears.",
+          "situation": "Two measured points collapse to the same place; a large mechanical divider has a zero-sized receiving gap and its operation has no defined continuation.",
+          "meaning": "A formula dividing by zero needs explicit handling. The resulting exception or non-finite value depends on the language and operation; no physical explosion is implied."
+        },
+        {
+          "label": "NUMERICAL INSTABILITY",
+          "caption": "A small error grows a body.",
+          "situation": "A gently bouncing sphere leaves successively larger trajectory traces; the last bounce reaches the ceiling.",
+          "meaning": "Approximation errors may grow under unstable numerical evolution. Growing traces are a visual metaphor, not measured simulation evidence."
+        },
+        {
+          "label": "TUNNELING",
+          "caption": "The wall missed the crossing.",
+          "situation": "A fast sphere appears on opposite sides of an intact thin wall at consecutive sampled positions.",
+          "meaning": "Discrete collision checks can miss a fast body crossing a thin barrier between samples; this is not quantum tunneling."
+        },
+        {
+          "label": "RUNAWAY FEEDBACK",
+          "caption": "Every correction asks for more.",
+          "situation": "A motor trying to centre a hanging sphere swings it farther each time, pulling the surrounding supports with it.",
+          "meaning": "A feedback system can amplify a deviation instead of reducing it. The scene needs a powered actuator; a passive spring is not an unlimited energy source."
+        }
+      ],
+      "prompt": "Use case: illustration-story. Create a museum comic atlas plate titled exactly \"THE DARK SIDE OF THE NATURE OF CODE\", with subtitle specified below. Four large panels in a 2 by 2 grid, PORTRAIT page around 1024x1536. Each panel is a DIFFERENT physical software-error encounter, labelled with its exact error name in a small clean ivory header and a short caption at the bottom. Extremely legible typography; keep captions exact. Strong black panel borders, warm ivory gutters, condensed black serif main headline. Rich cinematic 3D graphic-novel rendering, faint drawn edges, tactile stone and plaster, beautiful dark architectural space. Endless Museum: sober off-white plinths, tall pale walls, classical openings meeting austere contemporary geometry, dark recesses and cool moonlight. Keep action legible, not uniformly black. No digital screens, no floating computer windows, no code rain, no generic cyberpunk. The error MUST BE IN THE PHYSICAL ROOM. Same protagonist in all panels: an adult androgynous art student, short tousled brown hair, rust-red patterned shirt, charcoal trousers, black shoes; correct anatomy. Recurring object: a palm-size mirror-black sphere. Surreal, unsettling, occasionally deadpan funny. No gore or monsters. One coherent physical cause or predicament per panel, clear silhouette and point of contact. This is original art for the Endless Museum research, not an official book cover or literal software documentation. In one architectural wall, discreet lettering \"ENDLESS MUSEUM\" / \"always another room\". No other writing beyond requested labels/captions/necessary small prop symbols. Subtitle: \"IV. THE SIMULATION BREAKS\". Four invented physical metaphors, not diagrams of real evidence.\n1. Header \"DIVISION BY ZERO\". Caption \"The denominator disappears.\" Austere mechanical museum measuring/dividing device: two upright ivory jaws labeled A and B close completely onto same single black sphere position; the measuring strip below reads \"0\". Beyond closed jaws, an elaborate narrow bridge stops abruptly, output mechanism suspended without a next support. Student studies zero gap with black-sphere position centred in jaws; no explosion, no number infinity, no cosmic vortex. Deliberately silent loss of a valid next operation.\n2. Header \"NUMERICAL INSTABILITY\". Caption \"A small error grows a body.\" Student releases familiar black sphere a small distance above plinth. In the same panel show pale translucent sequential trajectory arcs growing larger and larger across room, last solid black sphere contacting high ceiling with a tiny crack, student below staring. One real final ball, earlier positions are faint outlines. The unnatural escalation should read as a simulation losing energy accounting, not many physical balls. No gore.\n3. Header \"TUNNELING\". Caption \"The wall missed the crossing.\" Side-on cutaway view thin but fully intact ivory divider. Shiny black sphere already on right side, pale outlined preceding sphere on left, tiny discrete dot markers before and after but NO hole in wall, NO glass break, NO blast. Student peers around divider astonished. Floor marks \"t\" on left and \"t+1\" on right allowed. Reality sampled too coarsely, not a projectile boring a hole.\n4. Header \"RUNAWAY FEEDBACK\". Caption \"Every correction asks for more.\" Black sphere suspended between two long springs on powered white motor columns, visible compact electric motor and cable at base. Amplifying swinging paths, columns pulled inward, wide sculpture becoming unstable while the student at safe edge reaches for a big accessible stop lever. Depict clear increasing oscillation and loaded supports. Uncanny museum automaton losing its composure, not combat.",
+      "source_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10d5d-fc78-7de0-818d-a4e56f3c12e4\\exec-f10298ca-fd2d-4f70-9b7b-edbd2a282ba5.png",
+      "saved_file": "images/04-the-simulation-breaks.png"
+    }
+  ]
+}

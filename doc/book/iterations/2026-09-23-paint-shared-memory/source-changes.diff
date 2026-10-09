@@ -1,0 +1,41 @@
+--- before/commons/maps/Color_Paint/technical.md
++++ commons/maps/Color_Paint/technical.md
+@@ -24,3 +24,12 @@
+ The retained image is viewport feedback, not a stroke-history stack. The shader's five-sample blur, vertical shift and fade toward white are applied per rendered frame; flow_speed is not multiplied by delta. Automatic path time is accumulated from delta, so rendering rate can alter their relationship. This is not a physical pigment or fluid simulation.
+ 
+ The probe moves a real pickable pigment with a supplied grabber, tests its ray against the real canvas, deliberately supplies a wrong cached receiver to verify retargeting, and checks manual pigment in GPU output after release. Brush size and snap resolution are fixed in that fixture for a repeatable comparison; live balls retain varied settings. Tracked-controller usability remains untested.
++
++
++## Shared native illustration, 23 September 2026
++
++The four-state book figure follows one actual canvas through automatic painting, supplied pickup and ray-directed movement of an existing pigment, release to its dock, and a later frame. The live pigment settings are unchanged: this captured run selected Ball_3, orange ff9900, a 24-pixel radius and 64 snap divisions. Manual input produced 79 samples. The automatic brush continued throughout these four views. Images share one camera; the capture does not establish tracked-controller reach.
++
++A separate diagnostic stopped only the automatic process after manual release and allowed its queued brush input to clear. Over 120 rendered frames, mean RGB distance from white fell from 0.21413 to 0.15950. The GPU image changed while both inputs were quiet; the brush queue was empty. This pause belongs to the probe and is not a visitor control. The test supports feedback and fading, not physical pigment mixing.
++
++Thirty focused assertions pass in the isolated production museum, including the real pickup/ray/UV/release path, unchanged dock transforms, 98 existing Albers studies and an ordinary-controller approach to the tray and return. Evidence and the reproducible probe are in doc/book/iterations/2026-09-23-paint-shared-memory/. Production scenes, scripts, shader, map and artifact roles remain unchanged.
+--- before/commons/maps/Color_Paint/field_notes.md
++++ commons/maps/Color_Paint/field_notes.md
+@@ -27,3 +27,12 @@
+ The focused museum probe exercises a real pickable ball with a supplied grabber, a real area ray hit, deliberately incorrect cached receiver, rectangular UV mapping, automatic continuation, release and return, rendered red pigment after release, sightline and a body-sized approach. Brush radius and snap are controlled in the fixture; live balls retain variation. Headset interaction remains untested. The existing unknown UID warning remains.
+ 
+ Before-state: doc/space/paint-shared-canvas-2026-09-10/before/. Evidence: ada_run/probe_paint_encounter.json and ada_run/paint_encounter_museum.png.
++
++
++## 2026-09-23 — Let the changing image carry the explanation
++
++The current chapter already joins the bodily encounter to its computational conditions: one canvas receives two inputs and keeps changing after a ball is returned. Kept every existing paragraph, code excerpt, artifact anchor and the Albers comparison. Added a shared four-state illustration captured from the working museum. Intent, tutorial and critical companion remain unchanged.
++
++The focused run passes 30 assertions using an existing pigment without brush overrides. Actual pickup, ray hits, rectangular UV conversion and release work; automation continues after manual input ends. A separate, explicitly labelled quiet-input diagnostic confirms image feedback and fading toward white. Supplied keys drive the ordinary controller to the tray and back. This does not establish headset comfort, physical hand reach, colour calibration or learner experience.
++
++The Albers capture shows several studies through the existing opening, not an unobstructed survey of all 98. It remains supplementary evidence. No production repair, live restart, live bake/save replacement or full-book/audio regeneration was needed. Before sources, native images, report and manuscript diff are preserved in doc/book/iterations/2026-09-23-paint-shared-memory/. Next: Color_Walls, where colour helps organise the room.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2611,7 +2611,7 @@
+       "map_sha256": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+       "learner_verified": false,
+       "text_path": "commons/maps/Color_Paint/final.md",
+-      "text_sha256": "0cf6ab6d222184186abbf89c982ac24972db7a47642928cf0213b7b5a6a5e62d"
++      "text_sha256": "796903cc78f5542b16d5c6c9acb9d94496f23ec3a6f4f8a6668b37566114c022"
+     },
+     "Color_Flashlight": {
+       "primary_tokens": [

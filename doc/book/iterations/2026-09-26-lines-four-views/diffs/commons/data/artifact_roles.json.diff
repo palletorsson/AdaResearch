@@ -1,0 +1,25 @@
+--- before/commons/data/artifact_roles.json
++++ after/commons/data/artifact_roles.json
+@@ -86,7 +86,11 @@
+       "line_space_workshop": "secondary",
+       "redline": "secondary",
+       "line_proof_pair": "secondary",
+-      "line_collection": "secondary"
++      "line_collection": "secondary",
++      "line_relations_gallery": {
++        "role": "primary",
++        "group": "body-and-record"
++      }
+     },
+     "Point_Trace": {
+       "origin": "secondary",
+@@ -2069,7 +2073,8 @@
+       ],
+       "primary|body-and-record": [
+         "walk_this_line_marking",
+-        "player_trace"
++        "player_trace",
++        "line_relations_gallery"
+       ]
+     },
+     "Point_One": {

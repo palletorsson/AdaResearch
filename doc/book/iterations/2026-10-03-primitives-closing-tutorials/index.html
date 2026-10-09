@@ -1,0 +1,181 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Primitives — make a form, choose an arrangement</title><link rel="stylesheet" href="style.css"></head><body><main>
+<header><nav><a href="#reading">One column</a><a href="#portals">Portals</a><a href="#composition">Melencolia</a><a href="#code">Complete code</a><a href="#decisions">Lineage and checks</a></nav><p>ADA / TWO MAKING STUDIES / 3 OCTOBER 2026</p></header>
+<article><p class="step">The end of Primitives</p><h1>Make a form.<br>Choose an arrangement.</h1><p>A list becomes a column. A measurement gives one way to decide when to stop. The forms we can construct become material for a composition.</p><p class="quiet">These lessons follow the existing octahedron function. Each uses the prepared student world. The critical chapters keep their own pace and historical questions.</p><div class="route"><a href="#reading">1 / Profile</a><a href="#portals">2 / Tolerance</a><a href="#composition">3 / Placement</a></div><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></article>
+<article id="reading" class="chapter"><h1>One column — an outline made of numbers</h1>
+<p>The octahedron used a rule to place six corners. Now we give a rule an outline to work with.</p>
+<p>Open <code>primitive_column.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>. One pale column stands in the room. Its sides catch the light differently as you walk around it.</p>
+<figure><a href="column.png"><img loading="lazy" src="column.png" alt="The column in the prepared student room: seven rings, eight positions around each ring."></a><figcaption>The column in the prepared student room: seven rings, eight positions around each ring.</figcaption></figure><h2>1. Read the outline</h2>
+<p>Open <code>studies/primitive_column/column.gd</code>:</p>
+<pre><code class="language-gdscript">var profile: Array[float] = [0.50, 0.50, 0.32, 0.22, 0.32, 0.50, 0.50]
+var height := 2.2
+var sides := 8
+</code></pre>
+<p>The <strong>profile</strong> describes the column from bottom to top. Each entry is a radius in metres. <code>Array[float]</code> holds numbers where Trace's <code>Array[Vector3]</code> held positions.</p>
+<p>Each radius makes one horizontal ring of positions. Seven entries give seven rings, equally spaced over the full height. The first two have radius <code>0.50</code>. The middle ring has radius <code>0.22</code>: that is the narrow waist. Straight strips join neighbouring rings.</p>
+<p>Change only <code>0.22</code> to <code>0.55</code> and run again. The waist becomes a bulge. The neighbouring strips change slope. Height and the number of sides stay the same.</p>
+<div class="pair"><figure><a href="column.png"><img loading="lazy" src="column.png" alt="Middle radius 0.22 m. The waist narrows."></a><figcaption>Middle radius 0.22 m. The waist narrows.</figcaption></figure><figure><a href="bulge.png"><img loading="lazy" src="bulge.png" alt="Middle radius 0.55 m. Only that ring expands."></a><figcaption>Middle radius 0.55 m. Only that ring expands.</figcaption></figure></div><h2>2. Follow one entry into space</h2>
+<p>This function turns the radii into positions:</p>
+<pre><code class="language-gdscript">func column_positions(radii: Array[float], full_height: float, divisions: int) -&gt; Array[Vector3]:
+    var circle := CircleSamples.points_on_circle(divisions, 1.0)
+    var step := full_height / (radii.size() - 1)
+    var points: Array[Vector3] = []
+    for i in range(radii.size()):
+        for p in circle:
+            points.append(Vector3(p.x * radii[i], i * step, p.y * radii[i]))
+    return points
+</code></pre>
+<p><code>CircleSamples</code> is supplied. It returns equally spaced positions around a circle of radius one in the XY plane. Here we use its X and Y values for the column's X and Z. The ring lies horizontally; the column's Y comes from <code>i * step</code>.</p>
+<p>Seven rings leave six intervals, so <code>step</code> divides the height by <code>radii.size() - 1</code>. The outer loop visits each radius. The inner loop places its ring. With seven radii and eight sides, the function returns 56 positions, starting at the bottom.</p>
+<p>In <code>_ready()</code>, the returned positions become a surface:</p>
+<pre><code class="language-gdscript">    positions = column_positions(profile, height, sides)
+    surface.mesh = ColumnSurface.make(positions, sides)
+</code></pre>
+<p><code>ColumnSurface</code> is a supplied builder. It connects adjacent rings with triangles and closes the top and bottom. Its source is included; lighting normals and seam closure stay inside it for now. The position function returns data. The builder makes the mesh from that data.</p>
+<h2>3. Separate height from resolution</h2>
+<p>Restore the middle radius to <code>0.22</code>. Change <code>height</code> to <code>1.6</code> and run again. Every ring keeps its radius. Only the spacing between rings changes.</p>
+<p>Restore <code>2.2</code>. Now try <code>sides</code> at <code>4</code>, <code>6</code>, <code>8</code>, <code>12</code> and <code>16</code>, running after each change. The profile and height stay fixed. The circular cross-sections gain sides; the straight intervals up the outline remain straight.</p>
+<p>More rings would not automatically make this outline smoother. Adding an entry also changes the equal spacing. This reduced lesson joins specified radii with straight intervals; the larger Rings of Ash gallery uses curved profiles and a separate setting for sampling those curves.</p>
+<div class="pair"><figure><a href="sides-4.png"><img loading="lazy" src="sides-4.png" alt="Four sides. The profile and full height are unchanged."></a><figcaption>Four sides. The profile and full height are unchanged.</figcaption></figure><figure><a href="sides-16.png"><img loading="lazy" src="sides-16.png" alt="Sixteen sides. Additional divisions around each ring."></a><figcaption>Sixteen sides. Additional divisions around each ring.</figcaption></figure></div><h2>4. Keep an outline of your own</h2>
+<p>Change two radii. Keep the height and side count fixed while you decide whether to keep the result. Then try it at another height.</p>
+<p>Use 2–32 radii, each above zero and at most <code>0.8</code> metres. Keep the full height above zero and at most <code>2.5</code> metres in this room. The supplied sampler accepts 3–256 sides. These are the study's working bounds, not definitions of a column.</p>
+<p>The column is a visible surface without a collider. The room, input, material and mesh builder are supplied. Your list and position rule produce its form; no prepared mesh is fetched from a scene.</p>
+<p>Four sides can be the shape you want. Sixteen can suit another purpose. In Portals we will give one comparison a measurable requirement. That requirement will still be ours to choose.</p><p class="quiet"><a href="column-tutorial.md">Tutorial source</a> · <a href="../2026-10-03-primitives-a-rule-for-positions/index.html#reading">Previous: a function returns positions</a></p></article>
+<article id="portals" class="chapter"><p class="step">Between these two studies</p><h2>How close is useful?</h2><p>The existing Portals tutorial stays in place. Measure the closed polygon. Increase its side count. Then change the tolerance without changing the shape.</p><p><a href="../2026-10-03-portals-a-useful-limit/index.html#reading">Read Portals and run primitive_portals.tscn →</a></p><p class="quiet">Meeting a requirement, defining an exact form and deciding to keep an object are different acts.</p></article>
+<article id="composition" class="chapter"><h1>Melencolia — arrange what you can make</h1>
+<p>We can place points, connect faces and generate a form. Portals gave us a way to check one requirement. Now make an arrangement with the constructions we know.</p>
+<p>Open <code>primitive_composition.tscn</code> in the <a href="../../studies/ada-xr-starter/README.md">Ada student starter</a>. Three identical pyramids stand on the floor. The middle one is farther away. Walk to the side and compare their outlines.</p>
+<figure><a href="arrangement.png"><img loading="lazy" src="arrangement.png" alt="Three identical pyramids. The middle one begins farther away."></a><figcaption>Three identical pyramids. The middle one begins farther away.</figcaption></figure><h2>1. Place the same form three times</h2>
+<p>Open <code>studies/primitive_composition/arrangement.gd</code>:</p>
+<pre><code class="language-gdscript">var positions: Array[Vector3] = [
+    Vector3(-1.15, 0, 0),
+    Vector3(0, 0, -0.8),
+    Vector3(1.15, 0, 0),
+]
+</code></pre>
+<p>These are positions for whole bodies. They are measured from the study's origin, which the scene places 0.7 metres behind the room's centre. Each pyramid's local origin is at the centre of its base. Keeping Y at zero leaves its base on the floor.</p>
+<p>The familiar list and loop now arrange objects:</p>
+<pre><code class="language-gdscript">func _ready():
+    for at in positions:
+        var body := Pyramid.new()
+        body.position = at
+        add_child(body)
+        bodies.append(body)
+</code></pre>
+<p><code>Pyramid</code> is the supplied script in <code>pyramid.gd</code>. Each call to <code>Pyramid.new()</code> creates a mesh instance and builds its geometry in code. It uses five positions and a face list, as in Polyhedra. Its square base uses two triangles, as in Cube.</p>
+<p>The six render triangles make five geometric faces. Every copy has the same dimensions and material. The loop gives each copy a different position and keeps its reference in <code>bodies</code>.</p>
+<h2>2. Bring the centre forward</h2>
+<p>Change the middle entry's Z value from <code>-0.8</code> to <code>0.8</code> and run again. From the entrance, the middle pyramid is now closer than its neighbours.</p>
+<p>Its vertex positions inside the mesh have not changed. Its size on the screen has. Walk around it: which overlaps belong to this viewpoint?</p>
+<p>Moving a body places its local construction elsewhere. In Cube, moving a corner changed the construction itself. Those operations can look related while changing different data.</p>
+<div class="pair"><figure><a href="arrangement.png"><img loading="lazy" src="arrangement.png" alt="Middle Z = −0.8: the body stands behind its neighbours."></a><figcaption>Middle Z = −0.8: the body stands behind its neighbours.</figcaption></figure><figure><a href="forward.png"><img loading="lazy" src="forward.png" alt="Middle Z = 0.8: the unchanged body moves forward."></a><figcaption>Middle Z = 0.8: the unchanged body moves forward.</figcaption></figure></div><h2>3. Change the distance between neighbours</h2>
+<p>Keep the centre forward. Change the outer X values from <code>-1.15</code> and <code>1.15</code> to <code>-0.55</code> and <code>0.55</code>. Run again.</p>
+<p>The arrangement becomes tighter. From some positions the outlines overlap; from others they separate. No pyramid has gained a vertex, and no face has been removed. The gaps and the view have changed.</p>
+<p>These surfaces have no colliders. The gaps are visual and spatial relationships, not a tested walking clearance. The museum's raised court and solid obstacles are separate constructions.</p>
+<div class="pair"><figure><a href="close.png"><img loading="lazy" src="close.png" alt="The outer bodies are closer together. View from the entrance."></a><figcaption>The outer bodies are closer together. View from the entrance.</figcaption></figure><figure><a href="side.png"><img loading="lazy" src="side.png" alt="The same arrangement seen from the side. No body moved."></a><figcaption>The same arrangement seen from the side. No body moved.</figcaption></figure></div><h2>4. Make one arrangement to keep</h2>
+<p>Restore the outer X values to <code>-1.15</code> and <code>1.15</code>. Place the middle pyramid somewhere else on the floor. Keep its Y value at zero and its X and Z values between <code>-2</code> and <code>2</code> for this room.</p>
+<p>Look from the entrance, then from one side. Keep an arrangement that gives you something different from both positions. Save the script: restarting rebuilds the positions you wrote. Walking changes your view, not the saved arrangement.</p>
+<p>This is a reduced study of the museum's geometric court. It does not reconstruct Dürer's engraving. The court, the tableau and the magic square have different tasks; the <a href="../../../../commons/maps/Primitives_Melencolia/tutorial-museum.md">museum source notes</a> keep those distinctions available.</p>
+<p>We have made something exact enough to inspect and open enough to compose. Nothing in the pyramid's face list decided where it should stand. The critical text follows the desire invested in such forms. Here we have a small means of acting on it.</p>
+<p>Transformation begins with these bodies. Next, their positions can change while the program runs.</p><p class="quiet"><a href="composition-tutorial.md">Tutorial source</a> · <a href="melencolia.diff">Before and after</a></p></article>
+<section id="code"><article><h2>The code beside the lesson</h2><p>Read the small operation in the lesson. Open the complete script when you want to follow its attachments. The ZIP includes all helpers, materials and the prepared world.</p></article><details><summary>column.gd</summary><div><pre><code>extends Node3D
+
+const CircleSamples = preload(&quot;res://prepared/circle_samples.gd&quot;)
+const ColumnSurface = preload(&quot;res://studies/primitive_column/column_surface.gd&quot;)
+
+var profile: Array[float] = [0.50, 0.50, 0.32, 0.22, 0.32, 0.50, 0.50]
+var height := 2.2
+var sides := 8
+var positions: Array[Vector3] = []
+var surface := MeshInstance3D.new()
+
+func column_positions(radii: Array[float], full_height: float, divisions: int) -&gt; Array[Vector3]:
+    var circle := CircleSamples.points_on_circle(divisions, 1.0)
+    var step := full_height / (radii.size() - 1)
+    var points: Array[Vector3] = []
+    for i in range(radii.size()):
+        for p in circle:
+            points.append(Vector3(p.x * radii[i], i * step, p.y * radii[i]))
+    return points
+
+func _ready():
+    # Supplied guards name this study&#x27;s usable range before constructing a mesh.
+    assert(profile.size() &gt;= 2 and profile.size() &lt;= 32, &quot;Use 2 to 32 radii.&quot;)
+    assert(height &gt; 0.0 and height &lt;= 2.5, &quot;Use a height above zero and at most 2.5 metres in this room.&quot;)
+    for radius in profile:
+        assert(radius &gt; 0.0 and radius &lt;= 0.8, &quot;Use radii above zero and at most 0.8 metres.&quot;)
+    positions = column_positions(profile, height, sides)
+    surface.mesh = ColumnSurface.make(positions, sides)
+    surface.material_override = preload(&quot;res://studies/primitive_column/stone.tres&quot;)
+    add_child(surface)
+</code></pre><p><a href="column.gd" download>Download column.gd</a></p></div></details><details><summary>column_surface.gd</summary><div><pre><code>extends RefCounted
+## Supplied renderer. Consecutive rings have the same number and order of samples.
+## It joins neighbours, closes the seam, and adds two planar caps. No collider.
+
+static func make(points: Array[Vector3], sides: int) -&gt; ArrayMesh:
+    assert(sides &gt;= 3 and points.size() &gt;= 2 * sides and points.size() % sides == 0)
+    var rings: int = points.size() / sides
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for ring in range(rings - 1):
+        for side in range(sides):
+            var next := (side + 1) % sides
+            var a := points[ring * sides + side]
+            var b := points[(ring + 1) * sides + side]
+            var c := points[ring * sides + next]
+            var d := points[(ring + 1) * sides + next]
+            triangle(builder, a, b, c)
+            triangle(builder, c, b, d)
+    var bottom := Vector3(0, points[0].y, 0)
+    var top := Vector3(0, points[-1].y, 0)
+    var last := (rings - 1) * sides
+    for side in range(sides):
+        var next := (side + 1) % sides
+        triangle(builder, bottom, points[side], points[next])
+        triangle(builder, top, points[last + next], points[last + side])
+    return builder.commit()
+
+static func triangle(builder: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -&gt; void:
+    # Outward normal from the ordered construction; Godot front faces are clockwise.
+    var normal := (b - a).cross(c - a).normalized()
+    for point in [a, c, b]:
+        builder.set_normal(normal)
+        builder.add_vertex(point)
+</code></pre><p><a href="column_surface.gd" download>Download column_surface.gd</a></p></div></details><details><summary>arrangement.gd</summary><div><pre><code>extends Node3D
+
+const Pyramid = preload(&quot;res://studies/primitive_composition/pyramid.gd&quot;)
+
+var positions: Array[Vector3] = [
+    Vector3(-1.15, 0, 0),
+    Vector3(0, 0, -0.8),
+    Vector3(1.15, 0, 0),
+]
+var bodies: Array[MeshInstance3D] = []
+
+func _ready():
+    for at in positions:
+        var body := Pyramid.new()
+        body.position = at
+        add_child(body)
+        bodies.append(body)
+</code></pre><p><a href="arrangement.gd" download>Download arrangement.gd</a></p></div></details><details><summary>pyramid.gd</summary><div><pre><code>extends MeshInstance3D
+## Supplied construction: five positions, four side faces and a triangulated base.
+## All dimensions are local metres. This visible enclosure has no collider.
+
+const SurfaceBuilder = preload(&quot;res://studies/primitive_column/column_surface.gd&quot;)
+var vertices: Array[Vector3] = [
+    Vector3(-0.4, 0, -0.4), Vector3(0.4, 0, -0.4),
+    Vector3(0.4, 0, 0.4), Vector3(-0.4, 0, 0.4),
+    Vector3(0, 1.5, 0),
+]
+var faces := [[0, 4, 1], [1, 4, 2], [2, 4, 3], [3, 4, 0], [0, 1, 2], [0, 2, 3]]
+
+func _init():
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        SurfaceBuilder.triangle(builder, vertices[face[0]], vertices[face[1]], vertices[face[2]])
+    mesh = builder.commit()
+    material_override = preload(&quot;res://studies/primitive_column/stone.tres&quot;)
+</code></pre><p><a href="pyramid.gd" download>Download pyramid.gd</a></p></div></details></section>
+<details id="decisions"><summary>What changed, what was checked</summary><div><p>Ignorance gains a column companion; its existing function lesson gains one link. Melencolia gains a short composition tutorial; its earlier museum implementation notes are preserved. Portals is unchanged.</p><p>No critical manuscript or museum placement changed. The straight profile is an explicit reduction of the curved gallery. The pyramids study the museum's geometric court, not the Dürer tableau.</p><p>55 checks passed in Godot 4.6 against a freshly extracted starter. They include actual printed edits, closed meshes, independent volume, unchanged widths under height edits, placement without mesh deformation and camera projection. Screenshots are native renders from the running student room.</p><p>Physical headset use and beginner comprehension remain untested. Coordinates still needs its earlier starter pass. The local contracts do not certify the old numeric taxonomy.</p><p><a href="lesson-contract.json">Teaching contracts</a> · <a href="DECISIONS.md">Decisions and source</a> · <a href="verification.json">Runtime results</a> · <a href="package-verification.json">Package checks</a> · <a href="verify.gd">Test harness</a></p><p><a href="ignorance.diff">Primitives_Ignorance: exact diff</a></p><p><a href="melencolia.diff">Primitives_Melencolia: exact diff</a></p></div></details>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

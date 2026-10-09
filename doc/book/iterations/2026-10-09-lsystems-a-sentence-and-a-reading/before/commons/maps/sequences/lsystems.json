@@ -1,0 +1,274 @@
+{
+  "sequences": {
+	"lsystems": {
+	  "name": "L-Systems: Rules Grow Structure",
+	  "truth": "A sentence can become a forest. Grammar is generative.",
+	  "qfep_term": "Lambda_Edge",
+	  "qfep_connection": "Separate symbol rewriting from spatial interpretation, then investigate which forms, relations and exclusions each permits. Generation count is a construction parameter, not by itself an entropy measurement or a criticality threshold.",
+	  "description": "Rewrite a sentence, follow its spatial interpretation, test the width of a passage and the conditions of growth. Change stored genes, compare a family built by face operations, then find paths in two repeated marks.",
+	  "layer": "lambda_edge",
+	  "prerequisites": [
+		"fractals",
+        "randomness"
+	  ],
+	  "unlocks": [
+        "proceduralgeneration"
+	  ],
+	  "difficulty": "intermediate",
+	  "estimated_time": "30-40 minutes",
+	  "learning_objectives": [
+		"String rewriting as generative process",
+		"Turtle graphics interpretation of L-system strings",
+		"Context-sensitive vs context-free rules",
+		"Formal grammars and space-filling curves",
+		"L-systems beyond biology â€” architecture and space-filling",
+		"Emergence from competing growth systems",
+		"Grammar as world-building principle â€” ecosystem transition",
+        "Distinguish stored form parameters, face operations and the choice of where a rule applies"
+	  ],
+	  "content": [
+		"LSystems_Grammar_Lab: The whole concept in miniature â€” axiom, rules, tree, string",
+		"LSystems_Growth: Follow saved state into a branch and back; compare length inheritance in common metre units",
+		"LSystems_Grammars_And_Curves: One sentence, equal strides, different readers; finite curve studies remain in the gallery",
+		"LSystems_Architecture: One fixed plan acquires width, room footprints and collision; a body tests its routes",
+		"LSystems_Competition: Equal grammars, shared soil, different turns; winter can stop rewriting after consumption",
+		"LSystems_Living: Raw genes, integer grammar, held witness and stable planted snapshot",
+		"LSystems_Shape_Grammars: Cube family, face operations and selected tips; add curved strips and walk beneath the same generated surface at four times scale",
+        "Assemblage_Same_Desire: Fixed samples, different decisions and marks; perceived paths and a supporting floor"
+	  ],
+	  "maps": [
+		"LSystems_Grammar_Lab",
+		"LSystems_Growth",
+		"LSystems_Grammars_And_Curves",
+		"LSystems_Architecture",
+		"LSystems_Competition",
+		"LSystems_Living",
+		"LSystems_Shape_Grammars",
+        "Assemblage_Same_Desire"
+	  ],
+	  "audio": {
+		"ambient_preset": "minimal_drone",
+		"volume": -10.0
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_lsystems",
+	  "completion_rewards": [
+        "grammarian_badge"
+	  ],
+	  "deferred_maps": [
+		"LSystems_Tree_L_Systems",
+		"LSystems_AnimatedTree",
+		"LSystems_ContextSensitiveTree",
+		"LSystems_ForestCompetition",
+		"LSystems_Context_Free_Grammars_CFG",
+		"LSystems_CityGenerator",
+		"LSystems_Hilbert3D",
+		"LSystems_Different_Grammar_Types",
+		"LSystems_Stochastic_L_Systems",
+		"LSystems_Backus_Naur_Form_BNF",
+        "Chamber_LSystems"
+	  ],
+	  "deferred_reason": {
+		"Chamber_LSystems": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+	  },
+	  "references": {
+		"key_texts": [
+          "Prusinkiewicz & Lindenmayer: The Algorithmic Beauty of Plants"
+		],
+		"related_algorithms": [
+		  "algorithms/lsystems/",
+          "algorithms/fractals/lsystem_dungeon/"
+		]
+	  },
+	  "artifact_groups": [
+		{
+		  "map": "LSystems_Grammar_Lab",
+		  "position": "intro",
+		  "artifacts": [
+			"dark_sphere",
+			"fractal_lsystem_string",
+			"lsystem_editor",
+            "lsystem_tree"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Interactive pipeline: editor, tree output, visible string expansion, and visual anchor. Axiom rewriting producing organic structure."
+		},
+		{
+		  "map": "LSystems_Growth",
+		  "position": "foundation",
+		  "artifacts": [
+			"parametric_lsystem",
+			"AnimatedTree",
+			"ContextSensitiveTree",
+			"lsystem_tree",
+            "modulor_cypress"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "One primary follows the actual saved-state trace and branch length ratio. Four retained studies explore timed generations, physical obstacle queries, tree drawing and cypress assembly; they are not a matched habitat experiment."
+		},
+		{
+		  "map": "LSystems_Grammars_And_Curves",
+		  "position": "exploration",
+		  "artifacts": [
+			"the_believing_turtle",
+			"ContextFreeGrammars",
+			"space_filling_curve_gallery",
+			"Hilbert3D",
+			"lindenmayer_tube_tree",
+            "tube_painting"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "A controlled interpretation comparison opens the hall. Five authored works remain, with finite curve and grammar studies available for deeper development.",
+		  "application_studies": {
+			"tube_painting": "Change the middle ring side count from twelve to eight. Keep the path and radius; compare the skin."
+		  }
+		},
+		{
+		  "map": "LSystems_Architecture",
+		  "position": "exploration",
+		  "artifacts": [
+			"lsystem_dungeon",
+			"CityGenerator",
+			"dark_sphere",
+			"dragon_room",
+			"grammar_seed",
+			"mesh_grammar_petal_flower",
+			"mesh_grammar_coral_fingers",
+			"catalyst_vent",
+            "catalyst_prompter_box"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "A full-size construction study distinguishes connected records from body-specific access. All nine authored works remain, including the original miniature."
+		},
+		{
+		  "map": "LSystems_Competition",
+		  "position": "integration",
+		  "artifacts": [
+			"ForestCompetition",
+			"branching_coral",
+            "dark_sphere"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Controlled resource and schedule comparison, with original five-strategy forest and independent coral retained."
+		},
+		{
+		  "map": "LSystems_Living",
+		  "position": "synthesis",
+		  "artifacts": [
+			"genetic_tree_sculptor",
+			"lsystem_tree",
+			"branching_coral",
+			"living_paper_fern",
+			"living_paper_tree",
+            "living_paper_dragon"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Gene-to-body comparison and stable local specimen, preserving the earlier terrain and five secondary form studies."
+		},
+		{
+		  "map": "LSystems_Shape_Grammars",
+		  "position": "synthesis",
+		  "artifacts": [
+			"form_grammar_family",
+            "form_grammar_canopy"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Keep the six cube constructions, then introduce an existing curved-strip operation. Same generated geometry at two scales makes the change of bodily relation concrete."
+		}
+	  ]
+	}
+  },
+  "artifact_groups": [
+	{
+	  "map": "LSystems_Grammar_Lab",
+	  "position": "intro",
+	  "artifacts": [
+		"lsystem_editor",
+		"lsystem_tree",
+		"fractal_lsystem_string",
+        "dark_sphere"
+	  ],
+	  "size_budget": "compact_only",
+	  "rationale": "Introduces L-system concept with interactive editor and basic tree. First map, beginner-friendly."
+	},
+	{
+	  "map": "LSystems_Growth",
+	  "position": "foundation",
+	  "artifacts": [
+		"parametric_lsystem",
+		"AnimatedTree",
+		"ContextSensitiveTree",
+		"lsystem_tree",
+        "modulor_cypress"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "One primary follows the actual saved-state trace and branch length ratio. Four retained studies explore timed generations, physical obstacle queries, tree drawing and cypress assembly; they are not a matched habitat experiment."
+	},
+	{
+	  "map": "LSystems_Grammars_And_Curves",
+	  "position": "exploration",
+	  "artifacts": [
+		"the_believing_turtle",
+		"ContextFreeGrammars",
+		"space_filling_curve_gallery",
+		"Hilbert3D",
+        "lindenmayer_tube_tree"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "A controlled interpretation comparison opens the hall. Five authored works remain, with finite curve and grammar studies available for deeper development."
+	},
+	{
+	  "map": "LSystems_Architecture",
+	  "position": "exploration",
+	  "artifacts": [
+		"lsystem_dungeon",
+		"CityGenerator",
+		"dark_sphere",
+		"dragon_room",
+		"grammar_seed",
+		"mesh_grammar_petal_flower",
+		"mesh_grammar_coral_fingers",
+		"catalyst_vent",
+        "catalyst_prompter_box"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "A full-size construction study distinguishes connected records from body-specific access. All nine authored works remain, including the original miniature."
+	},
+	{
+	  "map": "LSystems_Competition",
+	  "position": "integration",
+	  "artifacts": [
+		"ForestCompetition",
+		"branching_coral",
+        "dark_sphere"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "Controlled resource and schedule comparison, with original five-strategy forest and independent coral retained."
+	},
+	{
+	  "map": "LSystems_Living",
+	  "position": "synthesis",
+	  "artifacts": [
+		"genetic_tree_sculptor",
+		"lsystem_tree",
+		"branching_coral",
+		"living_paper_fern",
+		"living_paper_tree",
+        "living_paper_dragon"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "Gene-to-body comparison and stable local specimen, preserving the earlier terrain and five secondary form studies."
+	},
+	{
+	  "map": "LSystems_Shape_Grammars",
+	  "position": "synthesis",
+	  "artifacts": [
+		"form_grammar_family",
+        "form_grammar_canopy"
+	  ],
+	  "size_budget": "environment",
+	  "rationale": "Keep the six cube constructions, then introduce an existing curved-strip operation. Same generated geometry at two scales makes the change of bodily relation concrete."
+	}
+  ],
+  "world_phase": "organic"
+}

@@ -1,0 +1,78 @@
+{
+  "distribution_sampler": {
+    "registry": "commons/artifacts/registry/commons_artifacts.json",
+    "scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn"
+  },
+  "random_walk_terrarium": {
+    "registry": "commons/artifacts/registry/commons_artifacts.json",
+    "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn"
+  },
+  "dark_sphere": {
+    "registry": "commons/artifacts/registry/lsystems.json",
+    "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn"
+  },
+  "mushrooms": {
+    "registry": "commons/artifacts/registry/procgen_extra.json",
+    "scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn"
+  },
+  "Random_Rotate_Random_XYZ": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn"
+  },
+  "random_draw_dot": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://commons/artifacts/randomness_space/random_draw_dot.tscn"
+  },
+  "bubbles_random": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn"
+  },
+  "random_decay_multimesh": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn"
+  },
+  "random_walk_128": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/random_walk_128.tscn"
+  },
+  "galton_board": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/galton_board/galton_board.tscn"
+  },
+  "pixel_cloud": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn"
+  },
+  "silhouette_arrivals": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://commons/artifacts/randomness_space/silhouette_arrivals.tscn"
+  },
+  "hardware_entropy_decay": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn"
+  },
+  "GaussianPaintSplatter": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn"
+  },
+  "RotateGridCubes": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/SlopeGradientCubes.tscn"
+  },
+  "random_walk_leash": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn"
+  },
+  "couture_comparison": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://commons/artifacts/randomness_space/couture_comparison.tscn"
+  },
+  "random_walk_collection": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn"
+  },
+  "distribution_comparator": {
+    "registry": "commons/artifacts/registry/randomness.json",
+    "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn"
+  }
+}

@@ -1,0 +1,190 @@
+{
+	"checks": [
+		{
+			"check": "Six constructions built from one input stroke",
+			"passed": true
+		},
+		{
+			"check": "Loaded, wash and dry versions have identical geometry",
+			"passed": true
+		},
+		{
+			"check": "Twisting changes the surface without rewriting the path",
+			"passed": true
+		},
+		{
+			"check": "First four constructions retain the same material parameters",
+			"passed": true
+		},
+		{
+			"check": "Native capture gallery.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture round-line.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture flat-stroke.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture loaded-stroke.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture twisted-ribbon.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture wash.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture dry-brush.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture ribbon-side.png",
+			"passed": true
+		},
+		{
+			"check": "Coarser sampling reduces mesh data while retaining the stored path",
+			"passed": true
+		},
+		{
+			"check": "Native capture coarse.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture fine.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture planar-front.png",
+			"passed": true
+		},
+		{
+			"check": "Orbit retains mesh positions",
+			"passed": true
+		},
+		{
+			"check": "Native capture planar-edge.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture wash-crossing-front.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture opaque-crossing.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture wash-crossing-back.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture wash-crossing-order.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture dry-crossing.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture portrait.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture portrait-twisted.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture portrait-side.png",
+			"passed": true
+		},
+		{
+			"check": "Clear empties all six representations",
+			"passed": true
+		},
+		{
+			"check": "Mouse replay makes one connected stroke",
+			"passed": true
+		},
+		{
+			"check": "Shift-wheel changes depth during a stroke",
+			"passed": true
+		},
+		{
+			"check": "Pen-up travel adds no positions",
+			"passed": true
+		},
+		{
+			"check": "Pen lift makes separate meshes without a joining strip",
+			"passed": true
+		},
+		{
+			"check": "New colour belongs to the new stroke",
+			"passed": true
+		},
+		{
+			"check": "Width twist and material changes preserve drawing data",
+			"passed": true
+		},
+		{
+			"check": "Native capture mouse-strokes.png",
+			"passed": true
+		},
+		{
+			"check": "Undo removes exactly the last stroke",
+			"passed": true
+		},
+		{
+			"check": "Switching examples is undoable",
+			"passed": true
+		},
+		{
+			"check": "Restoring an example is undoable",
+			"passed": true
+		},
+		{
+			"check": "Drawing saves in an isolated test file",
+			"passed": true
+		},
+		{
+			"check": "Saved drawing loads",
+			"passed": true
+		},
+		{
+			"check": "Reload preserves every stored point",
+			"passed": true
+		},
+		{
+			"check": "Malformed input is rejected without replacing the drawing",
+			"passed": true
+		},
+		{
+			"check": "Losing window focus ends the stroke",
+			"passed": true
+		},
+		{
+			"check": "Focus loss prevents further paint deposition",
+			"passed": true
+		},
+		{
+			"check": "Long valid paths obey the total rendered sample budget",
+			"passed": true
+		},
+		{
+			"check": "Capping detail preserves recorded positions and announces adaptation",
+			"passed": true
+		},
+		{
+			"check": "Native capture controls.png",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"scope": "Native Godot mesh and shader renders plus scripted desktop input replay. No manual pressure, tracked controller or Quest test."
+}

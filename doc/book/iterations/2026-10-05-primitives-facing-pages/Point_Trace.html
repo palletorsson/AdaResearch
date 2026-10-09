@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trace — Primitives facing pages · Endless Museum</title>
+<style>
+:root{--paper:#fcfaf5;--ink:#272c2b;--muted:#707570;--rule:#dcdcd3;--green:#36584e}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#e7e8e2;color:var(--ink)}body{font:16px/1.6 Georgia,'Times New Roman',serif;display:grid;grid-template-rows:auto minmax(0,1fr) auto}a{color:var(--green);text-underline-offset:3px}button,select{font:13px/1.3 system-ui,sans-serif;color:inherit}button{cursor:pointer;background:transparent;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px}button:hover{background:#f5f5ef}button:disabled{opacity:.32;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,article:focus-visible{outline:2px solid var(--green);outline-offset:3px}header{padding:17px 32px 13px;display:flex;gap:28px;align-items:center;justify-content:space-between}.brand{font-size:25px;line-height:1.1;letter-spacing:-.7px}.strap{font:10px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:6px}.chapter-title{font:13px/1.5 system-ui,sans-serif}.chapter-title strong{display:block;font-weight:500;font-size:16px}.chapter-title span{color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:9px}select{background:#f8f8f3;border:1px solid #bfc4ba;border-radius:3px;padding:9px 26px 9px 11px;max-width:220px}main{min-height:0;padding:0 28px 4px}.spread{height:100%;max-width:1680px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-shadow:0 5px 22px #28302712;border:1px solid #d5d7ce;background:var(--paper)}[hidden]{display:none!important}.page{min-width:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#bac0b3 transparent;padding:22px clamp(25px,4vw,67px) 34px;scroll-padding-top:25px}.tutorial{background:linear-gradient(to left,#e7e6dd 0, #f6f3ec 5px,var(--paper) 28px)}.final{background:linear-gradient(to right,#e7e6dd 0,#f6f3ec 5px,var(--paper) 28px);border-left:1px solid #d8d7cc}.running-head{display:flex;align-items:center;gap:10px;min-height:30px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:32px;font:10px/1.5 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.running-head a{margin-left:auto;white-space:nowrap;text-decoration:none}.intent{font-size:9px;background:#efeadc;border-radius:2px;padding:2px 5px;letter-spacing:0}.prose{font-size:18px;line-height:1.75;overflow-wrap:break-word}.prose h1,.prose h2,.prose h3,.prose h4{font-weight:400;line-height:1.2;scroll-margin-top:20px}.prose h1{font-size:clamp(28px,2.6vw,40px);letter-spacing:-.7px;margin:0 0 32px;text-wrap:balance}.prose h2{font-size:27px;margin:38px 0 18px}.prose h3{font-size:22px;margin:30px 0 15px}.prose p{margin:0 0 21px}.prose ul,.prose ol{padding-left:24px;margin:0 0 23px}.prose li{margin:6px 0}.prose blockquote{margin:27px 0;border-left:2px solid #b8c4b7;padding-left:22px;color:#4b5851}.prose pre{padding:18px 20px;margin:25px -7px;background:#edf0e9;border:1px solid #dce2d5;border-radius:2px;overflow:auto;font:12.5px/1.7 Consolas,'Courier New',monospace;tab-size:4}.prose code{font-family:Consolas,'Courier New',monospace;font-size:.79em}.prose :not(pre)>code{background:#eeeee5;padding:1px 3px;border-radius:2px;overflow-wrap:anywhere}.prose pre code{font-size:inherit;white-space:pre;overflow-wrap:normal}.prose img{display:block;max-width:100%;height:auto;margin:30px auto}.prose table{width:100%;display:block;overflow:auto;border-collapse:collapse;margin:25px 0;font:13px/1.6 system-ui,sans-serif}.prose th,.prose td{text-align:left;border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top}.prose th{font-weight:500}.prose hr{border:0;border-top:1px solid var(--rule);margin:35px 0}.prose .footnote{font-size:13px;line-height:1.6;color:#62665f}.prose sup{font-size:10px;line-height:0}.page-end{display:flex;justify-content:space-between;margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);font:11px/1.4 system-ui,sans-serif;color:var(--muted)}footer{padding:9px 33px 12px;display:flex;justify-content:space-between;gap:20px;font:11px/1.4 system-ui,sans-serif;color:var(--muted)}#position{color:#414d43}.mobile-switch{display:none}.skip{position:absolute;top:-60px;background:var(--paper);padding:8px;z-index:2}.skip:focus{top:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1750px){.prose{font-size:19px}.prose pre{font-size:14px}}
+@media(max-width:1080px){header{padding:14px 20px;gap:15px}.chapter-title{display:none}main{padding:0 16px 2px}.page{padding-left:28px;padding-right:28px}.prose{font-size:16px}.prose pre{font-size:12px}footer{padding-left:20px;padding-right:20px}}
+@media(max-width:720px){body{grid-template-rows:auto minmax(0,1fr) auto}header{flex-wrap:wrap;padding:12px 13px;gap:12px}.brand{font-size:21px}.strap{font-size:8px}nav{margin-left:auto;gap:5px}nav button{padding:8px}select{max-width:160px;padding:8px 3px}.mobile-switch{display:flex;width:100%;gap:6px}.mobile-switch button{flex:1;padding:7px;font-size:12px}.mobile-switch button[aria-pressed=true]{background:#36584e;color:white;border-color:#36584e}main{padding:0 8px}.spread{display:block}.page{height:100%;padding:17px 24px 32px;background:var(--paper)}body[data-side=tutorial] .final,body[data-side=final] .tutorial{display:none}.prose{font-size:17px}.prose h1{font-size:30px}.running-head{margin-bottom:25px}footer{font-size:10px;padding:8px 12px}.desktop-hint{display:none}}
+@media print{body{display:block;background:white;height:auto}header,footer{display:none}main{padding:0}.spread{height:auto;box-shadow:none;border:0;display:grid!important;break-after:page}.page{overflow:visible;height:auto;background:white!important;padding:12mm!important;display:block!important}.prose{font-size:10pt}.prose h1{font-size:22pt}.prose h2{font-size:16pt}.prose pre,.prose pre code{font-size:7pt;white-space:pre-wrap;overflow-wrap:anywhere}.running-head{margin-bottom:20px}.running-head a{display:none}a{color:inherit}.page-end{display:none}@page{size:A3 landscape;margin:10mm}}
+
+.nav-button{display:block;font:13px/1.3 system-ui,sans-serif;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px;text-decoration:none;color:inherit;white-space:nowrap}.nav-button:hover{background:#f5f5ef}.nav-button.disabled{opacity:.32;pointer-events:none}.contents{position:relative;font:13px/1.3 system-ui,sans-serif;z-index:3}.contents summary{cursor:pointer;list-style:none;min-width:196px;display:flex;justify-content:space-between;gap:16px;border:1px solid #bfc4ba;border-radius:3px;background:#f8f8f3;padding:9px 12px}.contents ol{position:absolute;right:0;top:29px;width:260px;max-height:70vh;overflow:auto;background:#fcfaf5;border:1px solid #c9cdbf;box-shadow:0 10px 30px #1e2b1e22;list-style:none;padding:9px;margin:10px 0}.contents a{display:block;padding:9px 12px;text-decoration:none;color:inherit}.contents a span{color:var(--muted);margin-right:9px;font-size:11px}.contents a:hover,.contents a[aria-current=page]{background:#e9ede3}.contents summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:720px){.nav-button{padding:8px;font-size:12px}.contents summary{min-width:135px;padding:8px;font-size:12px}.mobile-switch input{position:absolute;opacity:0;width:1px;height:1px}.mobile-switch label{flex:1;padding:7px;border:1px solid #bfc4ba;border-radius:3px;text-align:center;font:12px/1.3 system-ui,sans-serif;cursor:pointer}.mobile-switch input:checked+label{background:#36584e;color:white}.mobile-switch input:focus-visible+label{outline:2px solid #36584e;outline-offset:3px}body:has(#side-final:checked) .tutorial{display:none}body:has(#side-final:checked) .final{display:block}}
+</style>
+</head>
+<body data-side="tutorial">
+<a class="skip" href="#book">Skip to the texts</a>
+<header>
+  <div><div class="brand">Endless Museum</div><div class="strap">Always another room</div></div>
+  <div class="chapter-title"><strong>I. Primitives</strong><span>Points build worlds · Facing pages</span></div>
+  <nav aria-label="Chapter navigation">
+    <a class="nav-button" aria-label="Previous hall" href="Point_Lines.html">← Previous</a>
+    <details class="contents"><summary aria-label="Choose a hall">05 · Trace <span>⌄</span></summary><ol><li><a href="index.html" ><span>01</span> Point Zero</a></li>
+<li><a href="Point_One.html" ><span>02</span> Point One</a></li>
+<li><a href="Point_Coordinates.html" ><span>03</span> Coordinates</a></li>
+<li><a href="Point_Lines.html" ><span>04</span> Lines</a></li>
+<li><a href="Point_Trace.html" aria-current=page><span>05</span> Trace</a></li>
+<li><a href="Point_Line_Grid.html" ><span>06</span> Grid</a></li>
+<li><a href="Point_Triangle_Context.html" ><span>07</span> Triangle</a></li>
+<li><a href="Primitives_Polythedra.html" ><span>08</span> Polyhedra</a></li>
+<li><a href="Point_Animatedcube.html" ><span>09</span> Cube</a></li>
+<li><a href="Primitives_Ignorance.html" ><span>10</span> Primitives</a></li>
+<li><a href="Primitives_Godot.html" ><span>11</span> Godot primitives</a></li>
+<li><a href="Primitives_Columns.html" ><span>12</span> Columns</a></li>
+<li><a href="Primitives_Profiles.html" ><span>13</span> Borrowed outlines</a></li>
+<li><a href="Primitives_Portals.html" ><span>14</span> Limits</a></li>
+<li><a href="Primitives_Melencolia.html" ><span>15</span> Melencolia</a></li></ol></details>
+    <a class="nav-button" aria-label="Next hall" href="Point_Line_Grid.html">Next →</a>
+  </nav>
+  <div class="mobile-switch" aria-label="Reading side">
+    <input type="radio" name="reading-side" id="side-tutorial" checked><label for="side-tutorial">Left · Tutorial</label>
+    <input type="radio" name="reading-side" id="side-final"><label for="side-final">Right · Reflection</label>
+  </div>
+</header>
+<main id="book" aria-label="Tutorial left, reflection right">
+<section class="spread" data-map="Point_Trace" data-label="Trace" aria-label="Trace facing pages"><article class="page tutorial" tabindex="0" aria-label="Trace — tutorial">
+              <div class="running-head"><span>Make / tutorial.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Trace/tutorial.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Trace--tutorial--point-trace-keep-where-the-point-has-been">Point Trace — keep where the point has been</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Reusing the point class</li>
+<li>Arrays of positions</li>
+<li>Appending and reading an index</li>
+<li>A distance condition with if</li>
+<li>Neighbour loops with for</li>
+<li>Saving the drawing for the next hall</li>
+</ul>
+<p>In Lines, you could carry an endpoint around a detour and return it. The segment returned too; nothing kept the journey. Now let the point leave a trace.</p>
+<p>The Trace hall offers pens and a ball whose movement leaves a line. Our small program follows the centre of the same pickable point we have already built. We will keep its positions in an array and reuse the line between each neighbouring pair.</p>
+<h2 id="Point_Trace--tutorial--continue-the-point">Continue the point</h2>
+<p>Start from the working <a href="Point_Lines.html">Lines example</a>. Keep the <code>PointBody</code> class from Lines, with its mesh, collider and pickup settings, and keep the coordinate readout. Replace the second endpoint and their live segment with a list of positions and a group of drawn segments.</p>
+<p>Save the complete continuation below as <code>trace.gd</code> beside the unchanged <code>point_body.gd</code> and <code>line_skin.gd</code>. Replace <code>line.gd</code> on your existing <code>PointStudy</code> with <code>trace.gd</code>. Keep the previous file. Work inside the existing Endless Museum Trace hall. Its room, light and XR hands remain supplied; this code creates the point, record and drawing. Keep the station's scale at <code>(1, 1, 1)</code>.</p>
+<h2 id="Point_Trace--tutorial--the-complete-trace-tracegd">The complete trace — trace.gd</h2>
+<!-- student-code:trace.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+const MIN_SEGMENT_DISTANCE := 0.05
+
+const PointBody = preload("point_body.gd")
+
+const LineSkin = preload("line_skin.gd")
+const TraceArchive = preload("trace_archive.gd")
+
+var point: XRToolsPickable
+var readout: Label3D
+var positions: Array[Vector3] = []
+var trail: Node3D
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    trail = Node3D.new()
+    add_child(trail)
+    positions.append(point.position)
+    TraceArchive.keep_on_release(point, trail, positions)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+
+    var last := positions[positions.size() - 1]
+    if (local_position - last).length() &gt;= MIN_SEGMENT_DISTANCE:
+        positions.append(local_position)
+
+        for segment in trail.get_children():
+            segment.queue_free()
+
+        for i in range(1, positions.size()):
+            var a := positions[i - 1]
+            var displacement := positions[i] - a
+            var segment := LineSkin.new()
+            trail.add_child(segment)
+            segment.show_segment(a, displacement, displacement.length())
+
+    readout.text += "\nPOINTS " + str(positions.size())
+
+</code></pre>
+<p>Run it. The count begins at one: the point's starting position. Carry the point sideways, turn a corner, then pause. The line remains and the count stops growing. Release it; pick it up again and continue. This record keeps going until the study ends.</p>
+<p><code>PointBody.new()</code> makes the familiar point. Its class needs no change for this lesson: the recorder reads its position. The array belongs to this study, so later we can keep the record or change its drawing without changing the point.</p>
+<h2 id="Point_Trace--tutorial--an-array-keeps-an-order">An array keeps an order</h2>
+<p><code>positions</code> is an <code>Array[Vector3]</code>: an ordered list whose entries are position values. <code>[]</code> starts it empty. The type inside the brackets says what it may hold. We store a position, not the point node that can keep moving. Declaring <code>positions</code> outside the functions lets each frame use the same array.</p>
+<p><code>positions.append(point.position)</code> adds the first value in <code>_ready()</code>. At that moment the point is a direct child of <code>PointStudy</code>, so this is its position in the study's frame. Seeding the list gives the recorder a first position to compare against.</p>
+<p><code>positions[0]</code> reads the first entry. <code>positions[1]</code> reads the second, once it exists. Code counts indices from zero. With four positions, the valid indices are 0, 1, 2 and 3.</p>
+<p><code>positions.size()</code> returns the number of entries. Subtract one to get the last valid index: <code>positions[positions.size() - 1]</code>. That is the last position we kept. Moving the point afterwards does not move an earlier value in the array.</p>
+<p>This is a one-dimensional list of three-dimensional positions: one index chooses an entry; that entry holds X, Y and Z.</p>
+<h2 id="Point_Trace--tutorial--if-it-has-moved-far-enough">If it has moved far enough</h2>
+<p>The line lesson gave us the length of a displacement. Here <code>(local_position - last).length()</code> measures from the last <strong>retained</strong> position to the point's current one.</p>
+<p><code>&gt;=</code> means greater than or equal to. The <code>if</code> asks whether that distance has reached <code>MIN_SEGMENT_DISTANCE</code>: <code>0.05</code> metres, or five centimetres. When the answer is true, Godot runs the indented block: append the position and redraw the trace. When it is false, that block is skipped. The coordinate readout still updates each frame.</p>
+<p>The indentation belongs to the code. The POINTS readout sits outside the <code>if</code>; it runs whether or not we add an entry.</p>
+<p>Move by a little, then a little more. The smaller movements can accumulate because we keep comparing with the last accepted position, not the previous frame. Holding still adds no duplicate positions merely because time passes.</p>
+<p>The threshold is a minimum movement for acceptance, not a promise of equally spaced points. Move a long way between two frames and the next segment can be longer than five centimetres. The program joins the positions it kept; it does not recover every bend between them.</p>
+<h2 id="Point_Trace--tutorial--a-loop-joins-the-neighbours">A loop joins the neighbours</h2>
+<p><code>for i in range(1, positions.size())</code> visits the indices from 1 up to, but not including, the size. With four entries, <code>i</code> becomes 1, then 2, then 3. Each visit runs the indented instructions again with that index.</p>
+<p><code>positions[i - 1]</code> is the preceding position. <code>positions[i]</code> is the next. The loop therefore draws 0–1, 1–2 and 2–3: three segments for four retained positions. Starting at 1 keeps the previous index valid. With only the seeded entry, the range is empty and no segment is drawn.</p>
+<p>Inside that loop, the construction from Lines returns: find the displacement, create a <code>LineSkin</code>, and give it the start, displacement and length. We can join many positions without creating a pickup body for every one.</p>
+<p>The shorter loop above it visits the old segment nodes in <code>trail.get_children()</code>. <code>queue_free()</code> schedules their removal at the end of the frame. Then we draw the retained list afresh. This keeps the teaching example small and makes the neighbour loop visible; it is intended for short drawings. Clearing these drawings does not erase <code>positions</code>.</p>
+<p><code>_process()</code> repeats over frames. The <code>for</code> loop visits entries within one update. These are different kinds of repetition.</p>
+<h2 id="Point_Trace--tutorial--change-the-record">Change the record</h2>
+<p>Change <code>MIN_SEGMENT_DISTANCE</code> from <code>0.05</code> to <code>0.20</code>. Draw a small bend, then enlarge it. More movement is needed to add another entry; fewer corners may survive. Restore <code>0.05</code>.</p>
+<p>For a loop experiment, change <code>range(1, positions.size())</code> to <code>range(1, positions.size() - 1)</code>. Draw again. The array and count still grow, but the last neighbouring pair is not drawn. You changed the display's traversal, not the record. Restore the original range.</p>
+<p>Now make your own short shape and return towards its beginning. Predict the next retained entry before moving. A return can add an earlier location again at a later index: the list keeps order, not just distinct places.</p>
+<h2 id="Point_Trace--tutorial--the-carried-point-point_bodygd">The carried point — point_body.gd</h2>
+<p>Keep this file unchanged from Lines. It is repeated here so the complete example is visible; it creates the same body and inherits the same pickup behaviour.</p>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2 id="Point_Trace--tutorial--the-drawing-helper-line_skingd">The drawing helper — line_skin.gd</h2>
+<p>Keep the same helper from Lines. It draws a visible cylinder for a supplied start, displacement and length; it neither records movement nor adds collision. Its complete code is repeated here so these three files are sufficient within the prepared project. The orientation calculation remains supplied.</p>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Point_Trace--tutorial--keep-the-record-for-what-comes-next">Keep the record for what comes next</h2>
+<p>Our positions belong to <code>PointStudy</code>'s local frame. Moving or turning the station carries the drawing with it. We record the point's centre whenever it moves far enough; this small recorder follows the point itself, with no separate pen-tip model.</p>
+<p>Release the held point when you have a drawing to keep. The supplied <code>TraceArchive</code> saves the retained positions <strong>and the segments already made from them</strong>. Grid will place this saved drawing as a sculpture. You will not draw it again or make another sphere there.</p>
+<p><code>TraceArchive.keep_on_release(point, trail, positions)</code> supplies the release connection and waits for the current redraw before packing the snapshot. An intentional release keeps the drawing; removing the study or closing its scene does not replace the saved work. The transport uses local positions in metres; the museum hall's world offset is not baked into the gesture. The archive has no timestamps. A later valid release replaces your saved drawing. Releasing before two positions exist leaves the previous file alone.</p>
+<h2 id="Point_Trace--tutorial--supplied-transport-trace_archivegd">Supplied transport — trace_archive.gd</h2>
+<p>Keep this file beside the lesson scripts. It packs a snapshot of the existing segment nodes and stores the position array as metadata. The source trace remains live and unchanged. <code>user://ada_student_trace.scn</code> belongs to this Godot project's user-data directory, so Trace and Grid must run in the same project. Serialization is supplied here; arrays, sampling and traversal remain this lesson's focus.</p>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<p>Carry that saved drawing into Grid. Its position data can be read again; its existing visible form can be placed in another hall.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Trace/trace.gd" rel="noopener" target="_blank">Current trace.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div>
+              <div class="page-end">Trace <span>Tutorial</span></div>
+            </article><article class="page final" tabindex="0" aria-label="Trace — final">
+              <div class="running-head"><span>Reflect / final.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Trace/final.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Trace--final--duration-and-residue">Duration and Residue</h1>
+<p>Bring the detour.</p>
+<p>There was time between the ends. We passed through it. Let the next line try to keep something of the passage.<sup id="Point_Trace--final--fnref:point-trace-klee"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-klee">1</a></sup></p>
+<h2 id="Point_Trace--final--let-the-hand-leave-a-line">Let the hand leave a line</h2>
+<!-- @draw_dot -->
+<p>Three coloured pens wait on their plinths. Take the red pen and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.</p>
+<p>The nib is the point being followed. Turn your wrist while keeping your hand almost still: the tip can travel while your grip barely moves.</p>
+<p>Watch during the pause. Does another point enter merely because time passes?</p>
+<p>Move again. Give the loop a tail, then release the pen. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.</p>
+<p>The count comes from a list:</p>
+<pre><code class="language-gdscript">var point_count = _trail_points.size()
+</code></pre>
+<p><code>_trail_points</code> holds positions in the order they were kept; <code>size()</code> counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.<sup id="Point_Trace--final--fnref:point-trace-sampling"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-sampling">2</a></sup></p>
+<p>The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point Zero's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.</p>
+<p>Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.</p>
+<p>Each row gives three coordinates for a retained position. As the drawing grows, earlier rows leave the small table. The drawing still has its beginning. What has left the screen has not yet left the line.</p>
+<h2 id="Point_Trace--final--another-resolution-another-gesture">Another resolution, another gesture</h2>
+<p>The other pens give the line a coarser grain. From red through green to blue, their grids grow wider.</p>
+<p>Repeat a small bend with the blue pen. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.</p>
+<p>The program rounds each coordinate to the nearest grid position. Several movements of your hand can arrive at the same saved address. Until a different address is kept, the line has no new corner.<sup id="Point_Trace--final--fnref:point-trace-quantisation"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-quantisation">3</a></sup></p>
+<p>The saved positions lie on the grid, but the segments between them can cut across it diagonally. A grid of corners does not require a drawing made only of right angles.</p>
+<p>Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?</p>
+<p>There is also a limit to how many positions a pen can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing.</p>
+<h2 id="Point_Trace--final--after-the-hand-lets-go">After the hand lets go</h2>
+<!-- @trace_ball_ramp -->
+<p>A black ball rests on a pale plinth. A plank slopes from its edge to the floor. Pick up the ball, set it near the top of the plank and let go.</p>
+<p>The ball continues. A thin black line stays behind it.</p>
+<p>The point has acquired weight. Your hand chose where to release it; gravity, the slope and contact with the plank carry the movement further. Here the recorder follows the ball's centre. The mark hangs a radius above the surface it seems to draw on.</p>
+<p>Wait until the ball settles in the shallow tray. The line stops growing. Walk alongside it: the slope has become part of the drawing. Carry the ball back and release it from another place. The next release begins a new trace.</p>
+<p>You have set a line in motion and let something else continue it. How much of the drawing did you make when you placed the ball?</p>
+<h2 id="Point_Trace--final--touch-the-page">Touch the page</h2>
+<!-- @whiteboard -->
+<p>Four pens and an eraser wait on the shelf beneath the wall-mounted whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.</p>
+<p>Your hand travelled across the gap. The picture leaves it white.</p>
+<p>The pen writes within the board's edges and close enough to its face. Lift beyond that contact allowance, and the next touch begins a new stroke. Your hand keeps moving across the gap; the rule stops admitting it to the picture. You can use that interruption to give two marks some space.</p>
+<p>The board turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. A lift of the hand gives the drawing a gap.</p>
+<h2 id="Point_Trace--final--a-line-with-a-short-memory">A line with a short memory</h2>
+<!-- @trace_short_memory -->
+<p>The amber point near the exit has room for thirty-two positions. Draw a loop, then lead it away. Small beads mark the positions the cord joins. Watch its far end.</p>
+<p>At first you make more line. Then you begin to unmake it.</p>
+<p>Hold your hand still. Does the remaining line wait with you?</p>
+<p>This recorder uses the same movement gate as the red pen. We have given its list less room. When a new position takes it over that limit, the oldest goes:</p>
+<pre><code class="language-gdscript">if _trail_points.size() &gt; trail_max_points:
+    _trail_points.pop_front()
+</code></pre>
+<p>Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.</p>
+<p>Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?</p>
+<!-- @ -->
+<p>Return to a line you want to keep. Release the drawing pen after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.<sup id="Point_Trace--final--fnref:point-trace-carry"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-carry">4</a></sup></p>
+<p>We bring that trace into the next hall. Your hand can rest now. The movement that made the line has already passed; its recorded positions can remain.<sup id="Point_Trace--final--fnref:point-trace-inscription"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-inscription">5</a></sup> There we will place the drawing as a sculpture, something you can approach from another side.</p>
+<p>The recorder was made to keep a gesture. Its list can now become something to compose with. A bend of the wrist may return at the size of a room, inviting another movement. The first use is still there, but it no longer tells us everything the record can become.<sup id="Point_Trace--final--fnref:point-trace-hauntology"><a class="footnote-ref" href="#Point_Trace--final--fn:point-trace-hauntology">6</a></sup></p>
+<p>In the next room, look for your bend. It may have grown.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="Point_Trace--final--fn:point-trace-klee">
+<p>Paul Klee, <a href="https://openendedgroup.com/field2/assets/Klee_Paul_Pedagogical_Sketchbook_1960.pdf" rel="noopener" target="_blank"><em>Pedagogical Sketchbook</em></a>, translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line. <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-klee" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="Point_Trace--final--fn:point-trace-sampling">
+<p>Claude E. Shannon, <a href="https://fab.cba.mit.edu/classes/S62.12/docs/Shannon_noise.pdf" rel="noopener" target="_blank">“Communication in the Presence of Noise”</a>, <em>Proceedings of the IRE</em> 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture. <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-sampling" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="Point_Trace--final--fn:point-trace-quantisation">
+<p>Godot’s <a href="https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf" rel="noopener" target="_blank"><code>snappedf</code></a> returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons. The <a href="http://localhost:3003/book?map=Point_Trace&amp;section=technical" rel="noopener" target="_blank">technical companion</a> gives the spacings, recording gate and list capacities. <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-quantisation" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="Point_Trace--final--fn:point-trace-carry">
+<p>A drawing pen must retain at least two positions to send a copy onward. The whiteboard's image and the ball's path stay in this hall. The <a href="http://localhost:3003/book?map=Point_Trace&amp;section=technical" rel="noopener" target="_blank">technical companion</a> distinguishes these records and their transfer routes. <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-carry" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="Point_Trace--final--fn:point-trace-inscription">
+<p>Sigmund Freud’s <a href="https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf" rel="noopener" target="_blank">“A Note upon the ‘Mystic Writing-Pad’”</a> (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in <a href="https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html" rel="noopener" target="_blank"><em>Writing and Difference</em></a>, translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. Here they open a question to pursue: what can a retained mark tell us about a movement that has already passed? <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-inscription" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="Point_Trace--final--fn:point-trace-hauntology">
+<p>Jacques Derrida's <a href="https://api.pageplace.de/preview/DT0400.9781040559963_A63760427/preview-9781040559963_A63760427.pdf" rel="noopener" target="_blank"><em>Specters of Marx</em></a> (1993; English translation by Peggy Kamuf, 1994), “Exordium,” connects inheritance with responsibilities towards those no longer or not yet present. Ada extends this question to technical use: a tool can carry an earlier purpose into an unanticipated connection. The <a href="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword" rel="noopener" target="_blank">project afterword</a> develops this proposal alongside entropy as difference and Ashby's requisite variety. <a class="footnote-backref" href="#Point_Trace--final--fnref:point-trace-hauntology" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              <div class="page-end">Trace <span>Reflection</span></div>
+            </article></section>
+</main>
+<footer><span id="position" role="status" aria-live="polite">05 / 15 · Trace</span><span class="desktop-hint">Read at your own pace · Each page scrolls independently</span><span>5 October 2026 · Tutorial + reflection</span></footer>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Resolution helper loads after autoload initialization"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: every integer segment/ring combination retains the requested legal values"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: every vertex and normal is finite across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: all native vertex and index counts match the generated topology"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: height stays 2.4 across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: inputs below the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder: inputs above the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 4/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 5/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 16/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder 64/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: every integer segment/ring combination retains the requested legal values"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: every vertex and normal is finite across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: all native vertex and index counts match the generated topology"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: height stays 2.4 across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: inputs below the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Capsule: inputs above the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 4/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 5/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 16/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/0: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/0: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Capsule 64/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: every integer segment/ring combination retains the requested legal values"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: every vertex and normal is finite across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: all native vertex and index counts match the generated topology"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: height stays 2.4 across the complete range"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: inputs below the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Sphere: inputs above the demonstration range clamp safely"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/1: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/1: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 4/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/1: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/1: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 5/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/1: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/1: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 16/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/1: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/1: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/4: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/4: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/32: measured faces exclude zero-area pole triangles"
+		},
+		{
+			"passed": true,
+			"test": "Sphere 64/32: measurement supplies actual counts, parameters and wire edges"
+		},
+		{
+			"passed": true,
+			"test": "Cylinder rings add vertical cuts without changing its straight silhouette"
+		},
+		{
+			"passed": true,
+			"test": "Capsule rings add sample levels through the caps and middle"
+		},
+		{
+			"passed": true,
+			"test": "Sphere rings add sample levels between its poles"
+		},
+		{
+			"passed": true,
+			"test": "Specimens are independent resources; modifying one cannot alter another"
+		},
+		{
+			"passed": true,
+			"test": "All 5,978 legal cylinder, capsule and sphere combinations were generated"
+		}
+	],
+	"combinations": 5978,
+	"engine": "4.6-stable (official)",
+	"passed": true,
+	"vertices_checked": 6481616
+}

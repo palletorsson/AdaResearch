@@ -1,0 +1,111 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trace → Grid — Endless Museum</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f1eb;color:#252928;font:17px/1.65 system-ui}main{max-width:1220px;margin:auto;padding:48px 30px}h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.12}h1{font-size:clamp(44px,7vw,78px);letter-spacing:-.04em}h2{font-size:34px}.lead{font:24px/1.5 Georgia,serif;max-width:850px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:#647064}a{color:#87405c;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:14px;margin:24px 0}section{border-top:1px solid #cdc6b9;margin-top:40px;padding-top:24px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:20px 0}img{display:block;width:100%;background:#202426}figcaption,footer{font-size:13px;color:#647064}figcaption{padding-top:8px}pre{overflow:auto;padding:24px;background:#232c2a;color:#f1eee7;font:13px/1.7 Consolas,monospace}.proof{padding:18px;background:#e0e9dd}.pink{color:#a94870}.green{color:#26715d}table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d3cbbb;padding:13px}summary{cursor:pointer}@media(max-width:740px){main{padding:28px 18px}.comparison{grid-template-columns:1fr}th,td{font-size:14px;padding:8px}}</style>
+<main><p data-superseded style="background:#fff0be;padding:20px"><strong>Superseded after the author’s clarification.</strong> Trace now saves its actual drawing; Grid loads that sculpture. <a href="../2026-10-06-trace-saved-to-grid/index.html">Read the corrected handoff.</a> This earlier report remains an archive of the same-station draft.</p><p class="eyebrow">Endless Museum · Tutorial continuation · 6 October 2026</p><h1>A trace can have<br>another address.</h1><p class="lead">Keep what the hand recorded. Change the rule that gives those positions a place on the grid.</p>
+<nav><a href="../2026-10-05-primitives-facing-pages/Point_Line_Grid.html">Read tutorial beside reflection</a><a href="http://localhost:3003/ghost-student?state=point-grid">Inspect Ghost Student</a><a href="http://localhost:3003/tutorial-plan?map=Point_Line_Grid">Edit lesson plan</a><a href="grid-three-files.zip">Download scripts + exercise</a></nav>
+<p>The sphere, pickup behaviour, sampling condition and pink trace return from the tested Trace program. Grid adds integer addresses and a second position array. Both use the same station frame. A small control compares two spacings without clearing the drawing.</p>
+<section id="comparison"><h2>One record. Two spacings.</h2><p><strong class="pink">Pink:</strong> retained positions. <strong class="green">Green:</strong> their rounded interpretation. The point and pink trace stay in place while the green corners move.</p><div class="comparison">
+<figure><img src="pitch-025.png" alt="Godot learner program: original trace and its green quarter-metre grid interpretation"><figcaption>0.25 metre spacing · nine retained samples</figcaption></figure>
+<figure><img src="pitch-050.png" alt="The same program and original trace with the green half-metre interpretation"><figcaption>0.50 metre spacing · the same nine samples</figcaption></figure></div>
+<p>Actual renders of the unchanged tested learner script, driven by a fixed example gesture. The camera, lights and floor grid are a capture fixture. They are not a new museum installation. The floor ruling remains 0.25 metres in both views; the second derivation uses every other interval. <a href="capture.gd">Capture source</a>.</p></section>
+<section><h2>What this lesson adds</h2><table><tr><th>Trace supplied</th><th>Grid adds</th><th>Student demonstrates</th></tr><tr><td>A held PointBody, an ordered local array, a distance condition and a neighbour loop.</td><td>Vector3i addresses, rounding, a separate placed-position array and a shared derivation function.</td><td>Predict an address, compare pitches on one gesture, then flatten only the derived Y coordinate.</td></tr></table><p>An array index identifies an entry. A grid address identifies a place. Several entries may have the same address; their order remains.</p></section>
+<section><h2>From the museum into learner code</h2><figure><img src="../2026-10-05-eight-interaction-lessons/figures/grid.png" alt="Existing Grid hall in the Endless Museum" loading="lazy"><figcaption>Existing museum capture, recorded in the earlier interaction review. The production hall was not rebuilt during this tutorial pass.</figcaption></figure><table><tr><th>Before</th><th>Now</th></tr><tr><td>The tutorial followed the production pen’s session store and display fitting. It did not continue the student’s tested PointBody recorder.</td><td>The tutorial prints a complete continuation of that recorder, plus its unchanged point class and renderer. It keeps all records in one named local frame.</td></tr></table><p>Running Grid starts a new instance of the continued program. Once drawing, you can compare both pitches on its retained record. This does not yet carry a drawing from an earlier running hall or save it between sessions.</p></section>
+<section id="evidence"><h2>The printed code runs.</h2><p class="proof">71 native Godot assertions pass. Three deliberate faults are detected by the same normal checks.</p><p>Assertions cover source preservation, manual rounding oracles, negative coordinates and ties, empty/single records, repeated addresses, geometry, frame changes, pitch switching, the flat-Y exercise, pickup, release and resuming the drawing. The actual XRTools library receives synthetic controller input. Headset experience and human learning remain untested.</p><nav><a href="report-runtime.json">Native results</a><a href="contract.json">Contract</a><a href="verify.gd">Behaviour assertions</a><a href="run-checks.py.txt">Runner</a><a href="before/tutorial.md">Previous tutorial</a></nav><details><summary>The complete Grid script</summary><pre><code>extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+const MIN_SEGMENT_DISTANCE := 0.05
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+
+var point: XRToolsPickable
+var readout: Label3D
+var positions: Array[Vector3] = []
+var trail: Node3D
+var grid_step := 0.25
+var addresses: Array[Vector3i] = []
+var snapped_positions: Array[Vector3] = []
+var grid_trail: Node3D
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 2.0, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+    trail = Node3D.new()
+    add_child(trail)
+    positions.append(point.position)
+
+    grid_trail = Node3D.new()
+    add_child(grid_trail)
+    point.action_pressed.connect(_change_pitch)
+    _redraw_grid()
+
+func _process(_delta: float) -&gt; void:
+    if Input.is_action_just_pressed(&quot;ui_accept&quot;):
+        _change_pitch()
+
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = &quot;LOCAL &quot; + str(local_position) + &quot;\nWORLD &quot; + str(world_position)
+
+    var last := positions[positions.size() - 1]
+    if (local_position - last).length() &gt;= MIN_SEGMENT_DISTANCE:
+        positions.append(local_position)
+
+        for segment in trail.get_children():
+            segment.queue_free()
+
+        for i in range(1, positions.size()):
+            var a := positions[i - 1]
+            var displacement := positions[i] - a
+            var segment := LineSkin.new()
+            trail.add_child(segment)
+            segment.show_segment(a, displacement, displacement.length())
+
+        _redraw_grid()
+
+    readout.text += &quot;\nPOINTS &quot; + str(positions.size())
+    readout.text += &quot;\nPITCH &quot; + str(grid_step) + &quot; m&quot;
+    if not addresses.is_empty():
+        readout.text += &quot;\nLAST ADDRESS &quot; + str(addresses[addresses.size() - 1])
+
+func _change_pitch(_held_point: Node3D = null) -&gt; void:
+    if grid_step == 0.25:
+        grid_step = 0.50
+    else:
+        grid_step = 0.25
+    _redraw_grid()
+
+func _redraw_grid() -&gt; void:
+    addresses.clear()
+    snapped_positions.clear()
+    for segment in grid_trail.get_children():
+        segment.queue_free()
+    if grid_step &lt;= 0.0:
+        return
+
+    for p in positions:
+        var address := Vector3i(
+            roundi(p.x / grid_step),
+            roundi(p.y / grid_step),
+            roundi(p.z / grid_step)
+        )
+        addresses.append(address)
+        snapped_positions.append(Vector3(address) * grid_step)
+
+    for i in range(1, snapped_positions.size()):
+        var a := snapped_positions[i - 1]
+        var displacement := snapped_positions[i] - a
+        var segment := LineSkin.new()
+        var finish := segment.material_override as StandardMaterial3D
+        finish.albedo_color = Color(0.25, 0.85, 0.60)
+        grid_trail.add_child(segment)
+        segment.show_segment(a, displacement, displacement.length())
+</code></pre></details><details><summary>Short instruction for the next AI</summary><pre>BRING tested Trace + unchanged PointBody/LineSkin. KEEP local positions/order. DERIVE Vector3i(roundi(p/step)) then Vector3(address)*step; independent arrays. COMPARE .25/.50 m on same record: pink source, green result. EXPLAIN index != address, ties, repeats. TEST source/frame/XR action/pitch/flat-Y. CARRY records; no scene transport.</pre></details></section><section><h2>Next: three corners.</h2><p>The records can supply positions. Triangle must choose three that can form a face, close their boundary, and distinguish that boundary from the surface inside. That is the next increment to write and test.</p></section></main></html>

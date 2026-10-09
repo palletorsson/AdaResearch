@@ -1,0 +1,14 @@
+--- before/commons/maps/Primitives_Melencolia/tutorial.md
++++ commons/maps/Primitives_Melencolia/tutorial.md
+@@ -45,3 +45,11 @@
+ ## Carry a relation forward
+ 
+ Choose a relation in the court: repeated corners, a tall centre, or the connection between two levels. Predict which part survives moving, turning or scaling the objects. That prediction is the handover to transformation. Purpose, pleasure and the desire to continue investigating remain questions alongside the implementation.
++
++## The court on the page
++
++The book's three-view illustration loads the nine production artifact scenes with their actual map configurations: four `pyramid`, one `pyramidlong`, four `cube_scene`. All three views keep mesh data, transforms and pigments fixed. An aligned elevation hides the two rear corner pyramids, an oblique camera separates the outlines, and the plan shows their horizontal positions. These are orthographic explanatory views, not literal headset views. The support matches the court's 5 × 5 × 1 metre envelope with a plain finish; lighting is adapted for the page. The surrounding museum is omitted from the illustration and shown separately in the native hall photographs.
++
++The capture checks rendered bounds against the assembled museum's measured placements. Two controlled walks reach the court by the west ramp and the Dürer platform from the raised connection; three floor rays verify the two levels and the connection. Headset comfort, magic-square reading distance and every route around the stages remain separate checks.
++
++The later `frame_counter_display` at (3,20) is the existing artifact in its default `count` / `boot` configuration. It reads engine process frames, preserving the return to Point One in the current manuscript. A direct launch into this hall starts a new engine session; the text's larger number describes continuing through the sequence in one session. It is not a saved personal elapsed-time record.

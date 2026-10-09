@@ -1,88 +1,95 @@
-# Point Zero — Hello, world. We are here.
+# Point Zero — Hello, world
 
-Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.
+Day Zero gave you a running project. Here you decide what happens once and what keeps happening.
 
-Open [the Point Zero study project](README.md), then open `hello_world.gd`. This study builds on Day Zero's prepared scene and supplies two text displays named `Greeting` and `Counter`. In `hello_world.tscn`, the script is attached to the root node named `HelloWorld`; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.
+Open `hello_world.gd` in [the Point Zero study](README.md). The room supplies the floor, camera and light. The script creates its own text display. Each example can also be attached to an empty `Node3D` in your prepared scene.
 
-We borrow the displays, floor, light and camera. Here we are attending to when something happens.
+This download is a desktop study. The script also gives us a counter to place in Ada's world. Day Zero prepares that world and its XR tools; this example needs no controller input.
 
-## Say hello
+## Once
 
 ```gdscript
 extends Node3D
+
+var display := Label3D.new()
 
 func _ready():
-    $Greeting.text = "Hello, world."
+    display.position.y = 1.5
+    display.text = "Hello, world."
+    add_child(display)
 ```
 
-Run it. “Hello, world.” appears above the floor.
+Run the study. “Hello, world.” appears above the floor.
 
-A node is one part of a Godot scene. `extends Node3D` says that this script adds behaviour to a 3D node.
+A node is a building block of a Godot scene. `extends Node3D` adds our script's behaviour to a node in 3D space.
 
-`func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
+`Label3D` is Godot's class for text in 3D space. `.new()` creates one. The variable `display` keeps a reference to that node, so we can change it.
 
-`_ready()` has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.
+`func` defines a function: a named block of code. The colon begins the block; the indentation groups its instructions. Godot calls `_ready()` when this node is ready.
 
-`$Greeting` finds the supplied child named `Greeting`. Its `text` property holds the words it displays. The equals sign assigns our quoted text to that property. We are changing an existing display, not constructing its letters.
+Inside `_ready()`, we set the display's height to 1.5 units above its parent and assign its text. `add_child(display)` adds it beneath our node in the scene. Change the quoted words and run again.
 
-Change the words and run again. You have chosen what this arrival says.
+## The view and the light
 
-Our node becoming ready does not mean that the world has just begun. The engine has already been working to bring it here.
+The display exists in 3D space. A `Camera3D` chooses the view shown on screen. In the study's `base.tscn`, select the camera and change its z position from 4.7 to 3.0. Run again: the text appears larger, although the text object has not grown. Restore 4.7.
 
-## Let a number continue
+This is the desktop camera. In XR, the tracked view follows your head; do this position-editing exercise in the desktop study.
 
-Replace the script with this complete version:
+A `DirectionalLight3D` sends parallel light through the scene, like sunlight. Select it and change its `light_energy` from 1.2 to 0.0. Run again: the floor goes dark. This study uses no ambient fill light.
+
+The text stays bright. By default, `Label3D` is *unshaded*: its appearance ignores lighting. Being visible and being illuminated are separate conditions here. Restore the light's energy to 1.2.
+
+## Repeatedly
+
+Replace the script with this version:
 
 ```gdscript
 extends Node3D
 
+var display := Label3D.new()
 var count := 0
 
 func _ready():
-    $Greeting.text = "Hello, world."
+    display.position.y = 1.5
+    display.text = str(count)
+    add_child(display)
 
 func _process(_delta):
     count += 1
-    $Counter.text = str(count)
+    display.text = str(count)
 ```
 
-The greeting stays. Beneath it, a number keeps changing.
+The display now shows a number that increases.
 
-`var count := 0` creates a variable named `count` and gives it the starting value zero. The variable stores the number we will change. With `:=`, Godot infers the type from the starting value: here, an integer, or whole number.
+`var count := 0` declares a variable starting at zero. `:=` lets Godot infer its type from the starting value: here, an integer, or whole number. Declared outside the functions, `count` keeps its value between calls.
 
-The declaration sits outside the functions, so `count` belongs to this node and keeps its value between function calls.
+Godot calls `_process` on each process frame. `count += 1` adds one to the stored count. `str(count)` converts the number to text for the display.
 
-Godot calls `_process` on each process frame while processing is enabled. `count += 1` adds one to the value already there. `str(count)` turns that number into text, which we give to the supplied `Counter` display.
+Godot passes the frame's time interval, in seconds, as `_delta`. The underscore marks an unused input. This example counts calls, not seconds; its speed depends on how often processing runs.
 
-Each call begins with what the previous call left behind. The number can continue while our attention goes somewhere else.
+Change `count += 1` to `count += 2`. Each call now adds two. Restore one before continuing.
 
-Godot also supplies the elapsed time for that update, in seconds. We receive it as `_delta`. The leading underscore says we are deliberately leaving this input unused. Our script counts calls; it does not measure seconds. A hundred updates add a hundred, however long they took.
+## Change when it happens
 
-## Once, or repeatedly?
-
-Move the two indented lines from `_process` into `_ready`, beneath the greeting. Remove the now-empty `_process` function. The script becomes:
+Move the counting instruction into `_ready()`:
 
 ```gdscript
 extends Node3D
 
+var display := Label3D.new()
 var count := 0
 
 func _ready():
-    $Greeting.text = "Hello, world."
+    display.position.y = 1.5
     count += 1
-    $Counter.text = str(count)
+    display.text = str(count)
+    add_child(display)
 ```
 
-Run it. The number reaches one and stays there. The engine continues running; our counting instruction now happens only when this node becomes ready.
+The display reaches one and stays there. The scene keeps running. The counting instruction happens once because of where you placed it.
 
-Restore the version with both functions. Change `count += 1` to `count += 2`. The display advances two at a time. You have changed what happens on each call, without choosing when those calls arrive. Return it to one when you finish.
+Restore the version with `_process` to keep counting.
 
-## Whose beginning?
+Our counter begins with this node. The museum panel reads `Engine.get_process_frames()`: the engine's process-frame total since startup. Its count includes work done before the panel appeared. The two counts have different beginnings.
 
-Our small count begins with this node. Restarting the study creates a fresh instance and begins its count again.
-
-The museum's panel asks for `Engine.get_process_frames()` instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.
-
-To compare the numbers, we need to know what each one counts and when that count started.
-
-In Point One, we will return to `_ready()` to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.
+In Point One, we will reuse `_ready()` and a variable to give a point a position.

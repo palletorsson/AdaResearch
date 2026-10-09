@@ -1,0 +1,85 @@
+--- before/commons/maps/Point_One/final.md
++++ commons/maps/Point_One/final.md
+@@ -55,6 +55,8 @@
+ 
+ <!-- @origin -->
+ 
++## Somewhere to count from
++
+ We cannot follow everything back to its beginning. But we can choose somewhere to count from.
+ 
+ Find the black sphere with its pink glow and wireframe cube. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.
+@@ -65,7 +67,7 @@
+ 
+ `Vector3.ZERO` is shorthand for three zeroes: `(0, 0, 0)`. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.
+ 
+-Nearby, four words are printed on the floor: “~~you~~ are here.” The first is struck through.
++Nearby, three words are printed on the floor: “~~you~~ are here.” The first is struck through.
+ 
+ Take hold of the struck word. It lifts. The crossed-out “you” comes away as a thing you can carry, and the rest of the sentence stays exactly where it was printed, still saying *are here* to the room. Set it down somewhere else and look back at what is left behind.
+ 
+@@ -85,9 +87,9 @@
+ 
+ `Vector3` holds three numbers in the order X, Y, Z. Here they locate a position in the case's own coordinate system: 1.25 metres up from its origin, with no displacement along X or Z. The numbers specify where the lines will meet. They do not draw anything there.
+ 
+-The arrows aim towards `FOCUS`; the red lines pass through it. What they locate is never drawn. There is no hidden mesh waiting to appear.
++The arrows aim towards `FOCUS`; the red lines pass through it. There is no hidden mesh waiting to appear.
+ 
+-That is a strange thing to exhibit: a position you can locate, with no body of its own. The source lets us approach it from the other direction. In the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.
++In the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.
+ 
+ <!-- @code_evolution_screen -->
+ 
+@@ -95,7 +97,7 @@
+ 
+ Here `delta`, which the counter received without using, has something to do. Each call to `_process(delta)` adds its time interval to `elapsed`. In this example, the accumulated time would hide and show the sphere every two seconds. Its centre would stay at the same address. A body can disappear from view without going anywhere.
+ 
+-The additions matter separately, even though they arrive together when we look at the finished object. A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.
++The next point has a surface you can take hold of. We will need to distinguish the position, the visible body and what makes it available to your hand.
+ 
+ <!-- @interactive_point_origin_force -->
+ 
+@@ -109,13 +111,15 @@
+ var p := Vector3(1.0, 0.5, 0.0)
+ ```
+ 
+-Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. The position can be used by a program that records those things separately. On its own, it does not tell that story.
++Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. Those would need records of their own.
+ 
+-What drew your hand towards the point may be among the things its coordinates cannot report. Knowing how the sphere was made need not finish that interest. It gives you places to intervene: another surface, another response, another way to make a location felt.
++Knowing how the sphere was made need not finish your interest in it. It gives you places to intervene: another surface, another response, another way to make a location felt.
+ 
+ <!-- @coordinate_readout -->
+ 
+-Keep the point in your hand. Move it while watching the white card. The changing body now has an address. What does the address follow, and what does it leave out?
++## Two addresses
++
++Keep the point in your hand and watch the white card as you move.
+ 
+ The opening between the two areas lets you carry the same point towards the coloured frame. Its guides and the card follow the point you are already holding.
+ 
+@@ -145,6 +149,8 @@
+ 
+ <!-- @drag_point_target -->
+ 
++## Room to arrive
++
+ The red arrow says “drag point here”. Carry the point towards it without letting go. Watch for the falling balls.
+ 
+ “Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:
+@@ -162,13 +168,11 @@
+ 
+ The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
+ 
+-Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. A detour may matter to what you are making while remaining absent from the distance test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.
++Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.
+ 
+ <!-- @ -->
+ 
+-The counter has continued through all of this. A position has acquired a body, different addresses, a tolerance for arrival. It still leaves questions unanswered.
+-
+-One of them travels with us: how did it get there?
++The counter has continued through all of this. You have brought the point here. Its address tells us where. How did it get there?
+ 
+ The next room brings two points into relation. A line begins.
+ 

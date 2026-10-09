@@ -1,0 +1,130 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "all before sources match baseline",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Walls/intent.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Walls/critical.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Walls/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Color_Walls/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged: algorithms/color/color_mixing/color_constellation_office.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/artifacts/color_space_navigator/color_space_navigator.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/ui/control_panel.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/interactables/push_button.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/interactables/interactable_area_button_pointer.gd",
+      "passed": true
+    },
+    {
+      "name": "only specified paragraph and figures changed",
+      "passed": true
+    },
+    {
+      "name": "published current text equals canonical",
+      "passed": true
+    },
+    {
+      "name": "code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "canonical text hash current",
+      "passed": true
+    },
+    {
+      "name": "only this core manuscript hash changed",
+      "passed": true
+    },
+    {
+      "name": "43 runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "no runtime script errors",
+      "passed": true
+    },
+    {
+      "name": "captured source inputs still current",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: same-opening.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: same-endpoints.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: colour-coordinates.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: from-the-desk.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: Color_Walls.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP exact bytes: source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "scoped diff whitespace",
+      "passed": true
+    },
+    {
+      "name": "all three canonical illustrations resolve through book-review",
+      "passed": true
+    }
+  ],
+  "scope": "Preservation, source identity, exact local HTTP bytes and scoped whitespace. Native images inspected separately. No browser interaction or headset claim."
+}

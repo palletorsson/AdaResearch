@@ -1,0 +1,163 @@
+{
+	"checks": [
+		{
+			"absent_seconds": 2.2,
+			"passed": true,
+			"present_seconds": 3.0,
+			"states": [
+				{
+					"elapsed_ms": 0,
+					"position": [
+						4.0,
+						1.25,
+						2.0
+					],
+					"visible": true
+				},
+				{
+					"elapsed_ms": 607,
+					"position": [
+						4.0,
+						1.25,
+						2.0
+					],
+					"visible": false
+				},
+				{
+					"elapsed_ms": 2811,
+					"position": [
+						4.0,
+						1.25,
+						2.0
+					],
+					"visible": true
+				},
+				{
+					"elapsed_ms": 5798,
+					"position": [
+						4.0,
+						1.25,
+						2.0
+					],
+					"visible": false
+				}
+			],
+			"tag": "standin_disappears_and_returns_on_real_default_timer"
+		},
+		{
+			"passed": true,
+			"point_position": [
+				4.0,
+				0.0,
+				2.0
+			],
+			"standin_position": [
+				4.0,
+				1.25,
+				2.0
+			],
+			"tag": "point_and_standin_positions_persist_while_visibility_changes"
+		},
+		{
+			"global_focus": [
+				4.0,
+				1.25,
+				2.0
+			],
+			"local_focus": [
+				0.0,
+				1.25,
+				0.0
+			],
+			"passed": true,
+			"tag": "focus_remains_the_same_address"
+		},
+		{
+			"passed": true,
+			"persistent_meshes": 13,
+			"tag": "arrows_lasers_and_vitrine_persist"
+		},
+		{
+			"arrivals": [
+				{
+					"class": "StaticBody3D",
+					"groups": [],
+					"name": "ExistingFloor"
+				}
+			],
+			"passed": true,
+			"prior_mode": 1,
+			"tag": "existing_floor_reaches_area_but_is_rejected",
+			"viewport_mode": 1
+		},
+		{
+			"groups": [
+				"em_walker"
+			],
+			"layer": 1,
+			"passed": true,
+			"tag": "outside_walker_leaves_viewport_unchanged",
+			"walker_class": "CharacterBody3D"
+		},
+		{
+			"arrivals": [
+				{
+					"class": "StaticBody3D",
+					"groups": [],
+					"name": "ExistingFloor"
+				},
+				{
+					"class": "CharacterBody3D",
+					"groups": [
+						"em_walker"
+					],
+					"name": "MuseumStyleWalker"
+				}
+			],
+			"passed": true,
+			"tag": "museum_style_walker_physics_entry_enables_wireframe",
+			"viewport_mode": 4
+		},
+		{
+			"expected": 1,
+			"passed": true,
+			"tag": "physical_exit_restores_prior_mode",
+			"viewport_mode": 1
+		},
+		{
+			"passed": true,
+			"tag": "reentry_enables_wireframe_again"
+		},
+		{
+			"expected": 1,
+			"passed": true,
+			"tag": "occupied_subtree_removal_restores_prior_mode",
+			"viewport_mode": 1
+		},
+		{
+			"passed": true,
+			"tag": "replacement_threshold_detects_existing_walker"
+		},
+		{
+			"expected": 1,
+			"passed": true,
+			"tag": "occupied_artifact_deletion_restores_prior_mode",
+			"viewport_mode": 1
+		}
+	],
+	"engine": {
+		"build": "official",
+		"hash": "89cea143987d564363e15d207438530651d943ac",
+		"hex": 263680,
+		"major": 4,
+		"minor": 6,
+		"patch": 0,
+		"status": "stable",
+		"string": "4.6-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"passed": true,
+	"renderer": "headless",
+	"scope": "Actual packed scenes in an isolated SceneTree. Default point timing and genuine Area3D physics signals; museum-style em_walker CharacterBody3D. Headless state verification only; no rendered-wireframe, museum placement, headset or learner acceptance claim."
+}

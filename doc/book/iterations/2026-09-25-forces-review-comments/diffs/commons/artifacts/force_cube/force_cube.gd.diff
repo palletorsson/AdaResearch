@@ -1,0 +1,34 @@
+--- before/commons/artifacts/force_cube/force_cube.gd
++++ commons/artifacts/force_cube/force_cube.gd
+@@ -52,6 +52,9 @@
+ const DECOMPOSITIONS: Array[String] = ["both", "chain", "box", "none"]
+ 
+ const CUBE := 0.40
++# At 0.5 m per m/s, this display threshold corresponds to 0.04 m/s.
++# Apply it before the redraw deadband so a small old arrow cannot survive rest.
++const LESSON_STILL_ARROW_M := 0.02
+ 
+ var _last_pos: Vector3
+ var _last_f: Vector3 = Vector3.INF
+@@ -158,6 +161,9 @@
+ 
+ 
+ func _redraw(f: Vector3) -> void:
++	var lesson := str(get_meta("config_lesson", "")) == "force_as_place"
++	if lesson and f.length() <= LESSON_STILL_ARROW_M:
++		f = Vector3.ZERO
+ 	if demo_root == null or f.distance_to(_last_f) < 0.02:
+ 		return
+ 	_last_f = f
+@@ -166,7 +172,10 @@
+ 	var tip := f
+ 	# component decomposition box
+ 	var dim := _glow_mat(Color(0.6, 0.62, 0.68), 0.35)
+-	match decomposition:
++	var display_style: String = "still" if lesson and f == Vector3.ZERO else decomposition
++	match display_style:
++		"still":
++			pass # Keep the readout without collapsed component cylinders at the origin.
+ 		"chain":
+ 			# the legs walked tip to tail: origin -> x -> xy -> tip, solid this time,
+ 			# so the last leg lands exactly on the resultant's point.

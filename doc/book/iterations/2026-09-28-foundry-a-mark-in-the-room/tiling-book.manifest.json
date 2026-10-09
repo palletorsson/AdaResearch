@@ -1,0 +1,52 @@
+{
+  "captured_at": "2026-09-28T14:16:59.019296+00:00",
+  "base_commit": "da6262bbf65e92125443c7c81c01bade3a5f0ce3",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "tiling",
+  "sequence_sha256": "074b210d5c61c8e57396929e44779903e0a1d6284bf0c0c43fda6b8753107a24",
+  "maps": [
+    {
+      "map": "Pattern_Disco",
+      "path": "commons/maps/Pattern_Disco/final.md",
+      "sha256": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987"
+    },
+    {
+      "map": "Pattern_Foundry",
+      "path": "commons/maps/Pattern_Foundry/final.md",
+      "sha256": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb"
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "path": "commons/maps/Tutorial_Pattern/final.md",
+      "sha256": "a639a36c67ca06ee2ec5e8e86c0f8004613b894a34b848b3a17dc3c27672d44c"
+    },
+    {
+      "map": "Array_Patterns",
+      "path": "commons/maps/Array_Patterns/final.md",
+      "sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84"
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "path": "commons/maps/Symmetry_Seventeen/final.md",
+      "sha256": "79bd5b7f9f75f06ac3524e0c4c2cb7ed928e34c0b55bf27c27be7ffe6de2aeb6"
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "path": "commons/maps/Ribbon_Patterns_01/final.md",
+      "sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e"
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "path": "commons/maps/Ribbon_Patterns_02/final.md",
+      "sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af"
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "path": "commons/maps/Ribbon_Patterns_03/final.md",
+      "sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4"
+    }
+  ],
+  "output_sha256": "297f2493ccd112c1c7f6f32c582fa815a3450599952a9e17430f9462d21a080b"
+}

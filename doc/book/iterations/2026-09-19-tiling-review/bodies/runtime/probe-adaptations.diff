@@ -1,0 +1,165 @@
+--- commons/testing/probe_layer_pattern.gd
++++ bodies/runtime/probe_layer_pattern.gd
+@@ -4,7 +4,7 @@
+ 	XRToolsPointerEvent.pressed(cam,area,area.global_position);XRToolsPointerEvent.released(cam,area,area.global_position)
+ func run() -> void:
+ 	var em:Node3D=load("res://commons/scenes/endless_museum.tscn").instantiate()
+-	var ctl="res://ada_run/layer-pattern-control.json"
++	var ctl="res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/layer-pattern-control.json"
+ 	em.set("EM_CONTROL",ctl);em.set("_overrides_path",ctl+".unused");em.set("_hand_path",ctl+".unused-hand")
+ 	em.set("start_chapter","tiling");em.set("start_map","Ribbon_Patterns_01")
+ 	var f=FileAccess.open(ctl,FileAccess.WRITE);f.store_string(JSON.stringify({"first_chapter":"tiling","dollhouse":0,"grid_pack":1}));f.close()
+@@ -42,6 +42,12 @@
+ 	press(ui,"SLICE / ALL",cam)
+ 	check(ui.voxels.values().filter(func(c):return c.visible).size()==16 and ui.voxels.size()==64,"slice shows sixteen cells without deleting the other forty-eight")
+ 	check(ui.values.size()*ui.values[0].size()*ui.values[0][0].size()==64,"slice leaves all stored values present")
++	var sliced_values:Array=ui.values.duplicate(true)
++	var previous_layer:int=ui.layer
++	press(ui,"LAYER +",cam)
++	check(ui.layer==(previous_layer+1)%4 and ui.voxels.values().filter(func(c):return c.visible).size()==16,"layer control moves the visible slice while retaining sixteen visible cells")
++	check(ui.values==sliced_values,"moving the selected slice preserves every stored palette index")
++	press(ui,"UNDO",cam);check(ui.layer==previous_layer and ui.slice_only,"undo restores the prior slice index before restoring ALL")
+ 	press(ui,"UNDO",cam);check(not ui.slice_only,"undo restores full visibility")
+ 	press(ui,"UNDO",cam);check(not ui.shifted and ui.values[1]==source,"undo restores repeated layer data")
+ 	for i in 4:press(ui,"LAYER +",cam)
+@@ -67,5 +73,12 @@
+ 	press(ui,"SLICE / ALL",cam)
+ 	await capture(cam,ui.to_global(Vector3(1,4.5,9.5)),ui.to_global(Vector3(-1,1.4,1.5)),"layer_pattern_slice")
+ 	await capture(cam,ui.to_global(Vector3(-1,1.7,6.6)),ui.mount.global_position,"layer_pattern_console")
+-	f=FileAccess.open("res://ada_run/probe_layer_pattern.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
++	f=FileAccess.open("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe_layer_pattern.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
+ 	print("LAYER_PATTERN ",checks," checks / ",failures.size()," failures");quit(0 if failures.is_empty() else 1)
++
++# Review-local capture path; the original probe is preserved unchanged.
++func capture(cam:Camera3D,pos:Vector3,target:Vector3,suffix:String) -> void:
++	cam.global_position=pos;cam.look_at(target)
++	for i in range(20):await process_frame;cam.make_current()
++	await RenderingServer.frame_post_draw
++	root.get_texture().get_image().save_png("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/"+suffix+".png")
+--- commons/testing/probe_carrier_comparison.gd
++++ bodies/runtime/probe_carrier_comparison.gd
+@@ -4,7 +4,7 @@
+ 	XRToolsPointerEvent.pressed(cam,area,area.global_position);XRToolsPointerEvent.released(cam,area,area.global_position)
+ func run() -> void:
+ 	var em:Node3D=load("res://commons/scenes/endless_museum.tscn").instantiate()
+-	var ctl="res://ada_run/carrier-control.json"
++	var ctl="res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/carrier-control.json"
+ 	em.set("EM_CONTROL",ctl);em.set("_overrides_path",ctl+".unused");em.set("_hand_path",ctl+".unused-hand")
+ 	em.set("start_chapter","tiling");em.set("start_map","Ribbon_Patterns_02")
+ 	var f=FileAccess.open(ctl,FileAccess.WRITE);f.store_string(JSON.stringify({"first_chapter":"tiling","dollhouse":0,"grid_pack":1}));f.close()
+@@ -45,6 +45,8 @@
+ 	check(ui.samples[1].mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]==vertices,"shading and repeat controls do not deform the carrier")
+ 	press(ui,"UNDO",cam);check(not ui.grid,"undo restores grid state")
+ 	press(ui,"RESET",cam);check(not ui.shaded and not ui.dense and not ui.right_light,"reset restores initial carrier comparison")
++	check(context.samples.all(func(s):return s.material_override.shading_mode==BaseMaterial3D.SHADING_MODE_UNSHADED) and context.bridge.material_override.shading_mode==BaseMaterial3D.SHADING_MODE_UNSHADED,"both targets and their connector are actually unshaded in the assembled hall")
++	check(ui.samples[0].mesh.size==Vector2(4,2),"assembled plane is four metres wide and two metres high")
+ 	var grey:Color=context.samples[0].material_override.albedo_color
+ 	press(context,"SWAP",cam);press(context,"SURROUNDS",cam);press(context,"CONNECT",cam)
+ 	check(context.samples[0].material_override.albedo_color==grey and context.samples[1].material_override.albedo_color==grey,"surround and connector controls never change either target")
+@@ -72,6 +74,17 @@
+ 		if n.get_script() and n.get_script().resource_path=="res://algorithms/color/spherecolors/spherecolors.gd" and n.get("label_in_space"):
+ 			scoped_label=not n.explanation_label.no_depth_test and not n.explanation_label.fixed_size
+ 	check(scoped_label,"neighbour label respects depth and distance instead of covering this exhibit")
+-	await capture(cam,context.to_global(Vector3(0,2.3,8)),context.to_global(Vector3(0,1.6,0)),"carrier_context")
+-	f=FileAccess.open("res://ada_run/probe_carrier_comparison.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
++	# Compact hall: the old +8m view backs into the next sphere exhibit.
++	cam.fov=90
++	await capture(cam,context.to_global(Vector3(0,2.3,4.5)),context.to_global(Vector3(0,1.6,0)),"carrier_context")
++	press(context,"SURROUNDS",cam);press(context,"CONNECT",cam)
++	await capture(cam,context.to_global(Vector3(0,2.3,4.5)),context.to_global(Vector3(0,1.6,0)),"carrier_context_equal_connected")
++	f=FileAccess.open("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe_carrier_comparison.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
+ 	print("CARRIER_COMPARISON ",checks," checks / ",failures.size()," failures");quit(0 if failures.is_empty() else 1)
++
++# Review-local capture path; the original probe is preserved unchanged.
++func capture(cam:Camera3D,pos:Vector3,target:Vector3,suffix:String) -> void:
++	cam.global_position=pos;cam.look_at(target)
++	for i in range(20):await process_frame;cam.make_current()
++	await RenderingServer.frame_post_draw
++	root.get_texture().get_image().save_png("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/"+suffix+".png")
+--- commons/testing/probe_fabric_studio.gd
++++ bodies/runtime/probe_fabric_studio.gd
+@@ -4,7 +4,7 @@
+ 	XRToolsPointerEvent.pressed(cam,area,area.global_position);XRToolsPointerEvent.released(cam,area,area.global_position)
+ func run() -> void:
+ 	var em:Node3D=load("res://commons/scenes/endless_museum.tscn").instantiate()
+-	var ctl="res://ada_run/fabric-studio-control.json"
++	var ctl="res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/fabric-studio-control.json"
+ 	em.set("EM_CONTROL",ctl);em.set("_overrides_path",ctl+".unused");em.set("_hand_path",ctl+".unused-hand")
+ 	em.set("start_chapter","tiling");em.set("start_map","Ribbon_Patterns_03")
+ 	var f=FileAccess.open(ctl,FileAccess.WRITE);f.store_string(JSON.stringify({"first_chapter":"tiling","dollhouse":0,"grid_pack":1}));f.close()
+@@ -24,8 +24,8 @@
+ 	for i in 90:em.call("_cull_artifacts");await process_frame
+ 
+ 
+-	ui.save_path="res://ada_run/probe-fabric-recipe.json"
+-	var w=em.get("_wardrobe");w.appearance_save_path="res://ada_run/probe-fabric-appearance.cfg"
++	ui.save_path="res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe-fabric-recipe.json"
++	var w=em.get("_wardrobe");w.appearance_save_path="res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe-fabric-appearance.cfg"
+ 	var original_look:String=w.costume.outfit_id;var original_fabric:Dictionary=w.skirt_fabric.duplicate(true)
+ 	check(ui.Recipe.valid(ui.Recipe.initial()),"default fabric recipe is valid")
+ 	check(ui.cells.size()==16 and ui.buttons.size()==32,"sixteen source cells, four paints and twelve controls")
+@@ -63,6 +63,10 @@
+ 	var stage=ui.runway();check(stage!=null and stage.agents.size()==4,"existing runway supplies four performers in this hall")
+ 	press(ui,"RUNWAY SAVED",cam);check(stage.agents.all(func(a):return a.outfit.skirt_fabric==saved),"runway application uses the same saved recipe for all four skirts")
+ 	stage.agents[0].set_look(2);check(stage.agents[0].outfit.skirt_fabric==saved,"performer look changes retain its fabric")
++	var old_runway_looks:Array=stage.agents.map(func(a):return a.outfit.look_id)
++	var swap_area:Area3D=stage.buttons[1].get_node("InteractableAreaButton")
++	XRToolsPointerEvent.pressed(cam,swap_area,swap_area.global_position);XRToolsPointerEvent.released(cam,swap_area,swap_area.global_position)
++	check(stage.agents.map(func(a):return a.outfit.look_id)!=old_runway_looks and stage.agents.all(func(a):return a.outfit.skirt_fabric==saved),"actual SWAP LOOKS button changes runway silhouettes while preserving all four saved recipes")
+ 	press(ui,"UNDO",cam);check(stage.agents.all(func(a):return a.outfit.skirt_fabric.is_empty()),"runway undo restores each performer's previous fabric")
+ 	check(not ui.Recipe.valid({"version":1,"cells":[]}),"malformed saved recipes are rejected")
+ 	check(ui.buttons['WEAR SAVED'].global_position.y>0.55 and ui.cells[0].global_position.y<1.9,"controls remain within standing reach band")
+@@ -93,7 +97,9 @@
+ 	var distances:Array=stage.travelled.duplicate()
+ 	for i in 90:em.call("_cull_artifacts");await physics_frame
+ 	check(stage.travelled!=distances,"performers continue walking while wearing the recipe")
+-	await capture(cam,stage.to_global(Vector3(9,4.2,14)),stage.to_global(Vector3(0,1.1,6)),"fabric_runway")
++	# Compact hall: local x=+9 lies beyond its east wall. Look from the interior aisle.
++	await capture(cam,stage.to_global(Vector3(-5,4.2,13)),stage.to_global(Vector3(0,1.1,6)),"fabric_runway")
++	await capture(cam,stage.to_global(Vector3(-5,1.7,11)),stage.to_global(Vector3(0,1.1,6)),"fabric_runway_standing")
+ 	press(ui,"UNDO",cam)
+ 	var secondary=em.find_children("*","Node3D",true,false).filter(func(n):return n.has_meta("config_embedded"))
+ 	check(secondary.size()>=3,"all three legacy exhibits receive embedded configuration")
+@@ -107,5 +113,12 @@
+ 	for approach in [[ui,Vector3(0,0.85,4.5),Vector3(0,0,-1.5)],[mirrors[0],Vector3(0,0.85,4),Vector3(0,0,-1.2)],[stage,Vector3(0,0.85,-1),Vector3(0,0,2.5)]]:
+ 		shape_query.transform=Transform3D(Basis.IDENTITY,approach[0].to_global(approach[1]));shape_query.motion=approach[0].global_basis*approach[2]
+ 		check(ui.get_world_3d().direct_space_state.cast_motion(shape_query)[0]>0.99,"standing capsule has a clear approach to "+approach[0].name)
+-	f=FileAccess.open("res://ada_run/probe_fabric_studio.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
++	f=FileAccess.open("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe_fabric_studio.json",FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"headset_tested":false},"  "));f.close()
+ 	print("FABRIC_STUDIO ",checks," checks / ",failures.size()," failures");quit(0 if failures.is_empty() else 1)
++
++# Review-local capture path; the original probe is preserved unchanged.
++func capture(cam:Camera3D,pos:Vector3,target:Vector3,suffix:String) -> void:
++	cam.global_position=pos;cam.look_at(target)
++	for i in range(20):await process_frame;cam.make_current()
++	await RenderingServer.frame_post_draw
++	root.get_texture().get_image().save_png("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/"+suffix+".png")
+--- commons/testing/probe_drag_catwalk.gd
++++ bodies/runtime/probe_drag_catwalk.gd
+@@ -114,7 +114,7 @@
+ 	moving_agent.animate(0.9, true)
+ 	check(hand_a.distance_to(moving_agent.left.position) > 0.04, "hands swing with gait")
+ 	if "--shots" in OS.get_cmdline_user_args():
+-		DirAccess.make_dir_recursive_absolute("res://ada_run/drag_catwalk_shots")
++		DirAccess.make_dir_recursive_absolute("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/drag_catwalk_shots")
+ 		# Restore one of each look for the review picture.
+ 		for i in range(4):
+ 			walk.agents[i].set_look(i)
+@@ -124,14 +124,14 @@
+ 		for frame in range(6):
+ 			await process_frame
+ 		await RenderingServer.frame_post_draw
+-		root.get_texture().get_image().save_png("res://ada_run/drag_catwalk_shots/runway.png")
++		root.get_texture().get_image().save_png("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/drag_catwalk_shots/runway.png")
+ 		camera.position = Vector3(2.7, 1.7, 13.2)
+ 		camera.look_at(Vector3(0, 1.1, 5.8))
+ 		await process_frame
+ 		await RenderingServer.frame_post_draw
+-		root.get_texture().get_image().save_png("res://ada_run/drag_catwalk_shots/along_runway.png")
++		root.get_texture().get_image().save_png("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/drag_catwalk_shots/along_runway.png")
+ 	var report := {"checks": checks, "failures": failures, "minimum_agent_spacing_m": minimum_spacing, "simulated_seconds": 120, "headset_tested": false}
+-	var file := FileAccess.open("res://ada_run/probe_drag_catwalk.json", FileAccess.WRITE)
++	var file := FileAccess.open("res://doc/book/iterations/2026-09-19-tiling-review/bodies/runtime/probe_drag_catwalk.json", FileAccess.WRITE)
+ 	file.store_string(JSON.stringify(report, "\t"))
+ 	file.close()
+ 	print("CATWALK_RESULT ", JSON.stringify(report))

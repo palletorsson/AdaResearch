@@ -1,0 +1,73 @@
+{
+  "n": 1000,
+  "channel_counts": {
+    "The Action Lab": 30,
+    "Action Lab Shorts": 88,
+    "Steve Mould": 88,
+    "physicsfun": 88,
+    "Engineezy": 88,
+    "Joseph's Machines": 88,
+    "Brick Experiment Channel": 22,
+    "Hevesh5": 88,
+    "How Ridiculous": 88,
+    "Dude Perfect": 88,
+    "MDMX Games": 39,
+    "BrandonJLa": 1,
+    "Ctop": 9,
+    "SpyCakes": 3,
+    "DoodleChaos": 18,
+    "Sick Science!": 87,
+    "FailArmy": 87
+  },
+  "topic_cue_counts": {
+    "Mechanisms and automation": 111,
+    "Chain reactions and repetition": 96,
+    "Fluids, air and pressure": 86,
+    "Sports, trick shots and vehicles": 76,
+    "Light, colour and perception": 67,
+    "Throw, flight, bounce": 66,
+    "Materials, heat and chemistry": 51,
+    "Sound, rhythm and synchronization": 49,
+    "Collision, breakage and load": 34,
+    "Balance, fit and constraint": 32,
+    "VR and game cues": 29,
+    "Gravity, magnets and orbits": 15
+  },
+  "hook_cue_counts": {
+    "Question or prediction": 221,
+    "Failure or mishap": 102,
+    "Scale, speed or escalation": 97,
+    "Build or useful task": 94,
+    "Surprise or apparent impossibility": 50,
+    "Comparison": 34,
+    "Precision or satisfaction": 34,
+    "Reveal or anticipation": 11
+  },
+  "no_topic_cue": 428,
+  "no_hook_cue": 453,
+  "method": "Lexical title cues, including hashtags; categories overlap. Counts describe this purposive sample only. They are not counts of confirmed physical processes, successful videos or audience preferences.",
+  "topic_regex": {
+    "Throw, flight, bounce": "\\b(throw\\w*|launch\\w*|catapult\\w*|mortar\\w*|bounc\\w*|jump\\w*|fly|flying|flight|rocket\\w*|drop\\w*|catch\\w*|frisbee\\w*|ballistic\\w*)\\b",
+    "Mechanisms and automation": "\\b(mechan\\w*|machine\\w*|contraption\\w*|robot\\w*|automat\\w*|motor\\w*|gear\\w*|conveyor\\w*|dispenser\\w*|sorter\\w*|gripper\\w*|servo\\w*|crank\\w*|hinge\\w*|piston\\w*|clock\\w*|pump\\w*)\\b",
+    "Chain reactions and repetition": "(domino|chain.?reaction|repeat|reset|loop\\w*|toppl\\w*|falldown)",
+    "Sports, trick shots and vehicles": "\\b(trick.?shot\\w*|basketball\\w*|golf\\w*|bowling\\w*|football\\w*|soccer\\w*|baseball\\w*|sport\\w*|skateboard\\w*|bike\\w*|biking|motorcycle\\w*|car\\w*|vehicle\\w*|truck\\w*|frisbee\\w*|jugg\\w*|ping.?pong|pool|tennis|billiard\\w*)\\b",
+    "Balance, fit and constraint": "\\b(balanc\\w*|fit|fits|fitting|stack\\w*|tower\\w*|support\\w*|puzzle\\w*|stuck|knot\\w*|interlock\\w*|bolt\\w*|friction\\w*|slid\\w*|roll\\w*|spring\\w*|pendulum\\w*|tug|torque|weight\\w*)\\b",
+    "Collision, breakage and load": "(collisi\\w*|collid\\w*|crash\\w*|smash\\w*|shred\\w*|crush\\w*|break\\w*|broken|destruct\\w*|knock\\w*|impact\\w*|heavy|heaviest|force\\w*|momentum|inertia|recoil)",
+    "Gravity, magnets and orbits": "\\b(gravit\\w*|magnet\\w*|orbit\\w*|levitat\\w*|attract\\w*|vortex\\w*|centrifug\\w*)\\b",
+    "Fluids, air and pressure": "\\b(water\\w*|fluid\\w*|liquid\\w*|air|wind\\w*|vacuum\\w*|pressure\\w*|siphon\\w*|bubble\\w*|balloon\\w*|float\\w*|buoyan\\w*|pour\\w*|snorkel\\w*|fountain\\w*)\\b",
+    "Light, colour and perception": "\\b(light\\w*|optic\\w*|mirror\\w*|color\\w*|colour\\w*|rainbow\\w*|laser\\w*|illusion\\w*|hologram\\w*|invisib\\w*|image\\w*|microscope\\w*|screen\\w*|glass|see.through)\\b",
+    "Sound, rhythm and synchronization": "(music\\w*|rhythm\\w*|sync\\w*|melody|sound\\w*|asmr|piano|sing\\w*|song\\w*|chime\\w*|bell\\w*|noise\\w*)",
+    "Materials, heat and chemistry": "\\b(heat\\w*|hot|cold|freez\\w*|melt\\w*|fire\\w*|flame\\w*|lava|nitrogen|oxygen|chem\\w*|metal\\w*|steel|diamond|crystal\\w*|wax|polymer\\w*|sodium|ice|aerogel)\\b",
+    "VR and game cues": "\\b(vr|metaquest\\w*|quest\\d*|gamedev\\w*|gaming|gmod|garry\\w*|ragdoll\\w*|sandbox|people.playground|boneworks|bonelab|unstable.dynamics|marrow)\\b"
+  },
+  "hook_regex": {
+    "Question or prediction": "(\\?|\\b(why|how|what happens|which|guess|predict|will it|can you|can we|can he|can i)\\b)",
+    "Comparison": "(\\b(vs\\.?|versus|compar\\w*|different|same|faster than|slower than|bigger than)\\b)",
+    "Precision or satisfaction": "\\b(perfect\\w*|satisf\\w*|smooth\\w*|accur\\w*|precision|synchron\\w*|sync\\w*)\\b",
+    "Failure or mishap": "(fail\\w*|gone.wrong|not.the.plan|regret|bloop\\w*|crash\\w*|accident\\w*|stuck|flaw|break\\w*|broken|didn.t.go.well|did.not.survive|not.the.results)",
+    "Surprise or apparent impossibility": "(impossib\\w*|weird\\w*|strange\\w*|surpris\\w*|unexpected|paradox\\w*|secret\\w*|magic\\w*|mind.bend\\w*|mind.blow\\w*|reverse\\w*|defy\\w*|actually)",
+    "Scale, speed or escalation": "(\\b(biggest|largest|longest|fastest|smallest|tiny|giant|huge|ultimate|world.record|faster|increasing\\w*|level.\\d+|high.speed)\\b|\\d[\\d,]*\\s*(domino|ball|marble|gram|second|hour|foot|feet))",
+    "Reveal or anticipation": "(reveal\\w*|wait.*(end|drop)|watch.*happen|before.it.happens|see.what|what.will.happen)",
+    "Build or useful task": "\\b(build\\w*|mak\\w*|creat\\w*|design\\w*|clean\\w*|wash\\w*|tidy\\w*|carry\\w*|deliver\\w*|retriev\\w*|open\\w*|pack\\w*|draw\\w*)\\b"
+  }
+}

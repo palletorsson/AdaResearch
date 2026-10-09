@@ -1,0 +1,425 @@
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -15733,6 +15733,57 @@
+         "wall_backing": false,
+         "orientation": "face_approach"
+       }
++    },
++    "sampling_hoppers": {
++      "lookup_name": "sampling_hoppers",
++      "name": "The bag remembers",
++      "scene": "res://commons/artifacts/sampling_hoppers/sampling_hoppers.tscn",
++      "category": "randomness",
++      "sequence": "randomness",
++      "map_sequences": [
++        "randomness"
++      ],
++      "complexity": "beginner",
++      "include_in_map_data": true,
++      "map_ready": true,
++      "interaction": "grab",
++      "interactions": [
++        "Pull either lever to draw one numbered member",
++        "Watch the left member return and the right member stay out",
++        "Compare repeated numbers with an exhausted set",
++        "Replay both sets with the same starting seed"
++      ],
++      "description": "Matched eight-member cases expose sampling with and without replacement. A seeded PRNG chooses a member, then an authored animation returns or removes it. Real grab levers and pointer control; bounded visible records and explicit replay. Not a physical mixing or entropy simulation.",
++      "qfep_connection": "Availability is made by the return rule. Repetition, exhaustion and the certain final choice arise from how a draw changes its future set.",
++      "tags": [
++        "sampling",
++        "replacement",
++        "eligibility",
++        "memory",
++        "probability",
++        "removal"
++      ],
++      "parameters": {
++        "footprint": [
++          4,
++          3,
++          3
++        ],
++        "size_group": "room_scale"
++      },
++      "spatial_needs": {
++        "platform": "none",
++        "footprint_cells": 4,
++        "clearance": {
++          "front": 1,
++          "back": 1,
++          "left": 1,
++          "right": 1
++        },
++        "player_position": "front",
++        "wall_backing": false,
++        "orientation": "face_approach"
++      }
+     }
+   }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -1,14 +1,15 @@
+ {
+   "primary_tokens": [
+     "remove_random",
++    "sampling_hoppers",
+     "random_removal_arena"
+   ],
+-  "reason": "Inspect eligibility before drawing, then compare hidden geometry with withdrawn support.",
++  "reason": "The board exposes eligibility; paired cases show what returning a member changes; the floor joins removal to bodily support.",
+   "status": "source_checked_draft",
+   "sequence": "randomness",
+   "text_path": "commons/maps/Random_Remove/final.md",
+-  "text_sha256": "6c1dabdc09f8564769826d5676e161ec39e4bf917f18a9f7bb59e625525c6de7",
+-  "map_sha256": "49ba0ecea3891195af06fe5a87c686795be91713d46174f8f770db0a604998ad",
++  "text_sha256": "47c3a2edbab0ccc58aa9a9b3d24ed064a223f3af50d359ca2be0e222952dd432",
++  "map_sha256": "9e8b8dc0e54fb8cecb094b9c9a8d56692f1980c6223f45df26a71d0bf791bd64",
+   "learner_verified": false,
+   "pilot_action_id": "remove-bounded-candidates",
+   "runtime_check": {
+@@ -16,5 +17,5 @@
+     "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+   },
+   "verification_scope": "Current source and historical bench/arena evidence; no new full removal-floor crossing or headset validation.",
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Remove/DECISIONS.md"
++  "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-sampling-hoppers/index.html"
+ }
+--- before/commons/maps/Random_Remove/final.md
++++ after/commons/maps/Random_Remove/final.md
+@@ -62,6 +62,18 @@
+ 
+ Stop before the set is empty. Keep this interrupted pattern for a moment. Perhaps the openings make an arrangement you want. Nothing requires another press. The final empty range would erase the distinction between the orders you have been comparing; halfway through, their different choices can still be seen. A slot remembers where a cube is absent. The visible last-removal line remembers one event. The program keeps this run's full order in `removal_log`, readable through `get_state` but not on this plate, until RESET, NEW SEED or a mode button clears it. The comparison between your runs is kept only by you.
+ 
++<!-- @sampling_hoppers -->
++
++Beside the board, two glass cases hold the same eight numbered blocks. Each has a handle. Pull the one on the left. A block comes forward, leaves a small copy in the row below, and travels back into its place. Pull the one on the right. Its block stays out. Behind it, the numbered slot is empty.
++
++Try to get the same number again. On the left you can wait for it; nothing promises how long. On the right, the number you have just drawn is no longer available. An absence has become part of the next choice.
++
++The left-hand case returns its member before allowing another draw. All eight remain eligible. The right-hand case loses a candidate each time: eight, seven, six. Stop with one block left. Can you name the next result before pulling? Seven earlier choices have left only one answer. Which number survives to that moment still depends on their order.
++
++Here code chooses the member. The movement lets you follow what happens to it afterward. Both machines begin with the same seed, so their first choices match. Then their available sets part company. The left-hand row can contain repetitions; the right-hand row can fill with every number once. The left keeps only its latest twelve draws, though its count continues. The right stops after eight.
++
++REPLAY BOTH restores the blocks and begins the two orders again. Watch the returning block rejoin its neighbours. Giving it back is an instruction too. What looked like another chance depended on making it available again.
++
+ <!-- @random_removal_arena -->
+ 
+ Behind the board, the set becomes a floor. Ninety-nine cubes span a basin inside a glass frame. Pause on the dark edge before entering. That edge is permanent. The amber cells are not.
+--- before/commons/maps/Random_Remove/intent.md
++++ after/commons/maps/Random_Remove/intent.md
+@@ -1,7 +1,7 @@
+-Concept: Separate the eligibility filter, uniform draw without replacement, and zero-scaling operation. A grey cube cannot be selected under the current mask.
+-Sequence: Random_Definition → Random_Entropy → Random_Remove → Random_Walk. Returnable procedure becomes measured sample, then a spatial candidate set, then successive movement.
+-Primary: remove_random:180#local_grid:true at (4,5), facing −Z. The 9×10 hall holds the existing owned 8×8 bench, its controls and cased status. The repeated reference sphere and unrelated hazards are archived; the bench supplies the complete first encounter.
+-Discovery: Find an excluded cube; remove one and inspect its surviving slot; replay; compare ROW and COLUMN with eight candidates and equal draw bounds. Pause over an unfinished pattern before the fully emptied range loses its visible history.
+-Critical: Eligibility can protect from removal or exclude from opportunity depending on the action. Equal counts leave spatial differences undescribed. Removal retains a slot and original transform; the code keeps more history than the visible plate.
+-Limits: NEW SEED may repeat. No visitor seed-entry field or START/STOP controls. RESET preserves the seed within this bench session; hall rebuild chooses again. Removal edits the owned model, not museum collision. Desktop review is not headset observation.
+-Review: doc/space/remove-review-2026-09-12/README.md and /research/possible-bodies/random-remove.html.
++Concept: Eligibility is chosen before the random draw. Returning or removing the chosen member changes what future draws can select; connecting removal to collision changes what can support a body.
++Sequence: Random_Entropy -> Random_Remove -> Randomness_10_PRINT_Algorithm. From sorting a retained set, through changing its eligible members, to repeated choices between two diagonal marks.
++Primary: remove_random at (8,5), sampling_hoppers at (3,6), random_removal_arena at (8,17). The existing bench remains central, the paired cases stand beside it, and the glass-framed removal floor spans the basin behind. The hall is 17 by 26 cells with a permanent bypass.
++Discovery: Find an excluded cube; remove one and inspect its surviving address. Pull the two case levers and follow whether a selected member returns. Try for a repeat, then predict the last remaining candidate. Walk from an absent model cube to a floor cell whose collider also disappears.
++Critical: A return is a rule that makes another selection possible. Emptying the set turns the last choice into certainty without making the preceding order inevitable. A grey member may be protected from removal or excluded from opportunity, depending on the action. A retained address and an actual foothold are different kinds of persistence.
++Limits: The cases animate a seeded algorithmic draw; they do not physically mix or measure entropy. Their REPLAY BOTH restarts two independent generators at seed 79, restores candidates and clears records. The left records twelve recent draws; the right exhausts eight members. The older bench and floor keep their own controls. Headset reach and freely operated use remain unverified.
++Review: doc/book/iterations/2026-09-24-sampling-hoppers/index.html. Earlier intent preserved in this review's before snapshot.
+--- before/commons/maps/Random_Remove/map_data.json
++++ after/commons/maps/Random_Remove/map_data.json
+@@ -19,7 +19,8 @@
+ 		"Find a cube excluded before the random draw and separate filter, draw and removal",
+ 		"Replay an ordered removal history from the same seed and candidate list",
+ 		"Compare eight-choice ROW and COLUMN masks using equal draw bounds",
+-        "Inspect the address and original transform retained behind visible absence"
++        "Inspect the address and original transform retained behind visible absence",
++        "Compare returning a drawn member with removing it from the set of future candidates"
+ 	  ]
+ 	},
+ 	"museum": {
+@@ -1213,7 +1214,7 @@
+ 		" ",
+ 		" ",
+ 		" ",
+-		" ",
++		"sampling_hoppers:180",
+ 		" ",
+ 		" ",
+ 		" ",
+--- before/commons/maps/Random_Remove/technical.md
++++ after/commons/maps/Random_Remove/technical.md
+@@ -31,3 +31,14 @@
+ The independent continuation exports six complete removal histories, compares equal-sized masks, checks cancellation during the highlight and rapid presses, and retains the existing button, mask, replay, ownership, route and streaming checks. Its run receipt, captures, diagnostics and results are in `doc/space/remove-review-2026-09-12/`; the illustrated review is `/research/possible-bodies/random-remove.html`.
+ 
+ Desktop pointer operation is distinct from tracked-hand reach. Headset reading, approach and Quest performance remain for a later visit. Preserve the raw run diagnostics alongside assertion results.
++
++
++## Paired sampling cases — 24 September 2026
++
++`sampling_hoppers` adds a matched set comparison beside the retained board. Both contain identities 1–8. Each uses its own RandomNumberGenerator, reset to seed 79. A pull crossing 28 degrees draws one candidate uniformly by list index; returning below 8 degrees rearms the lever. Busy motion and an empty pool reject extra draws. Pointer dragging and XR grabbing reuse lever_zero; selection is algorithmic, not physical mixing.
++
++The left pool retains the selected member, animates its return, and refuses another draw until that return completes. A miniature copy joins a twelve-entry record; the total continues beyond the retained window. The right removes the member from its pool at selection and moves its actual visual block into the record. Its eight unique members can be exhausted. Empty slots retain identity labels. Both animations are authored presentation, without RigidBody sorting or a claim of physical entropy.
++
++REPLAY BOTH kills active tweens, resets both independent generators, restores the sets and blocks, clears records and rearms controls. Thus first choices match because seed and eight-candidate bounds match. Later matching is not promised once pool sizes diverge. In-flight callbacks cannot append stale draws after replay. Each station uses a real grabbable lever with a pointer event path, at 1.05 m; reach remains subject to headset acceptance.
++
++Placement: cell (3,6), yaw 180 degrees. The existing board and removal arena remain at their original positions; all floor and utility cells are preserved.
+--- before/commons/maps/sequences/randomness.json
++++ after/commons/maps/sequences/randomness.json
+@@ -98,10 +98,12 @@
+           "map": "Random_Remove",
+           "position": "intro",
+           "artifacts": [
+-            "remove_random"
+-          ],
+-          "size_budget": "compact_only",
+-          "rationale": "The eligible set, removal controls and retained slots are one complete central experiment.",
++            "remove_random",
++            "sampling_hoppers",
++            "random_removal_arena"
++          ],
++          "size_budget": "mixed",
++          "rationale": "The board defines eligibility; paired cases compare returning and withholding a member; the floor connects removal to bodily support.",
+           "grammar": "central_hero"
+         },
+         {
+--- before/commons/artifacts/sampling_hoppers/sampling_hoppers.gd
++++ after/commons/artifacts/sampling_hoppers/sampling_hoppers.gd
+@@ -0,0 +1,220 @@
++extends Node3D
++## @identity
++## essence: a draw changes its future only if the selected member leaves the set
++## desire: find a repeated number, then try to get it again from the emptying set
++## truth: the code selects; the mechanism animates that selection rather than measuring physical mixing
++const LeverScene = preload("res://commons/interactables/lever_zero.tscn")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++const COUNT := 8
++const MEMORY := 12
++const SEED := 79
++const INK := Color(0.075,0.10,0.13)
++const BLUE := Color(0.25,0.76,0.89)
++const PINK := Color(0.96,0.40,0.61)
++signal draw_finished(side: int, number: int)
++var pools: Array = [[],[]]
++var histories: Array = [[],[]]
++var totals: Array[int] = [0,0]
++var busy: Array[bool] = [false,false]
++var armed: Array[bool] = [true,true]
++var generators: Array = []
++var blocks: Array = [[],[]]
++var levers: Array = []
++var records: Array = []
++var statuses: Array = []
++var motions: Array = [null,null]
++var resetting := false
++
++func _ready() -> void:
++	for side in range(2):
++		generators.append(RandomNumberGenerator.new())
++		_make_station(side)
++	var panel := Rack.create_panel("", [[{"type":"button","label":"REPLAY BOTH"}]],true)
++	panel.position = Vector3(0,0.94,1.03)
++	panel.rotation_degrees.x = -65
++	panel.scale = Vector3.ONE * 1.7
++	add_child(panel)
++	_box(self,"ReplayStand",Vector3(0,0.44,0.99),Vector3(0.30,0.88,0.25),INK,true)
++	var button := panel.find_child("Btn_0",true,false)
++	if button != null:
++		button.get_node("InteractableAreaButton").button_pressed.connect(func(_b): replay())
++	replay()
++
++func _centre(side: int) -> float:
++	return -0.86 if side == 0 else 0.86
++
++func _slot(side: int, id: int) -> Vector3:
++	return Vector3(_centre(side)-0.375+float((id-1)%4)*0.25,1.28+float((id-1)/4)*0.30,-0.02)
++
++func _record_slot(side: int, i: int) -> Vector3:
++	return Vector3(_centre(side)-0.475+float(i%6)*0.19,0.87,0.66+float(i/6)*0.18)
++
++func _make_station(side: int) -> void:
++	var x := _centre(side)
++	_box(self,"HopperBase",Vector3(x,1.03,-0.02),Vector3(1.20,0.10,0.68),INK,true)
++	for dx in [-0.49,0.49]:
++		_box(self,"Leg",Vector3(x+dx,0.51,0),Vector3(0.065,1.02,0.38),INK,true)
++		for z in [-0.33,0.29]:
++			_box(self,"Corner",Vector3(x+dx,1.51,z),Vector3(0.026,0.89,0.026),INK,false)
++	_box(self,"TopFrame",Vector3(x,1.99,-0.02),Vector3(1.20,0.08,0.68),INK,false)
++	var glass := Color(0.58,0.80,0.86,0.10)
++	_box(self,"FrontGlass",Vector3(x,1.51,0.30),Vector3(1.18,0.87,0.012),glass,false)
++	_box(self,"BackGlass",Vector3(x,1.51,-0.34),Vector3(1.18,0.87,0.012),glass,false)
++	for dx in [-0.60,0.60]:
++		_box(self,"SideGlass",Vector3(x+dx,1.51,-0.02),Vector3(0.012,0.87,0.64),glass,false)
++	_label(self,"RETURNS" if side == 0 else "STAYS OUT",Vector3(x,2.00,0.33),0.065)
++	_label(self,"WITH REPLACEMENT" if side == 0 else "WITHOUT REPLACEMENT",Vector3(x,2.14,0.07),0.028)
++	for id in range(1,COUNT+1):
++		var pos := _slot(side,id)
++		_box(self,"SlotPlate",pos+Vector3(0,0,-0.14),Vector3(0.223,0.223,0.023),INK,false)
++		_label(self,str(id),pos+Vector3(0,0,-0.126),0.048)
++		var block := _numbered_block(id)
++		block.name = "Source_%d_%d" % [side,id]
++		block.position = pos
++		add_child(block)
++		blocks[side].append(block)
++	_box(self,"RecordShelf",Vector3(x,0.77,0.76),Vector3(1.23,0.055,0.46),INK,true)
++	_label(self,"DRAW RECORD / LAST 12" if side == 0 else "DRAW RECORD / UP TO 8",Vector3(x,0.74,1.005),0.026)
++	var record := Node3D.new()
++	record.name = "Record%d" % side
++	add_child(record)
++	records.append(record)
++	statuses.append(_label(self,"",Vector3(x,1.05,0.345),0.035))
++	var lever: Node3D = LeverScene.instantiate()
++	lever.name = "DrawLever%d" % side
++	lever.position = Vector3(x + (-0.64 if side == 0 else 0.64),1.05,0.78)
++	lever.scale = Vector3.ONE * 1.35
++	add_child(lever)
++	lever.set_caption("PULL / DRAW")
++	lever.set_readout_visible(false)
++	lever.hinge_moved.connect(_lever_moved.bind(side))
++	levers.append(lever)
++	_box(self,"LeverStand",Vector3(x + (-0.64 if side == 0 else 0.64),0.48,0.76),Vector3(0.21,0.96,0.15),INK,true)
++
++func _lever_moved(angle: float, side: int) -> void:
++	if resetting: return
++	if angle < 8.0: armed[side] = true
++	if angle >= 28.0 and armed[side]:
++		armed[side] = false
++		draw(side)
++
++func draw(side: int) -> bool:
++	if side < 0 or side > 1 or resetting or busy[side] or pools[side].is_empty(): return false
++	busy[side] = true
++	var index: int = generators[side].randi_range(0,pools[side].size()-1)
++	var id: int = pools[side][index]
++	if side == 1: pools[side].remove_at(index)
++	var block: Node3D = blocks[side][id-1]
++	var out := Vector3(_centre(side),1.20,0.51)
++	var tween := create_tween()
++	motions[side] = tween
++	# This is an exposed animation of a PRNG choice, not a gravity sorter.
++	tween.tween_property(block,"position",out,0.38).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
++	tween.tween_interval(0.28)
++	tween.tween_callback(_remember.bind(side,id))
++	if side == 0:
++		tween.tween_property(block,"position",Vector3(_centre(side)+0.69,1.20,0.51),0.22)
++		tween.tween_property(block,"position",Vector3(_centre(side)+0.69,2.24,0),0.38)
++		tween.tween_property(block,"position",_slot(side,id)+Vector3(0,0.30,0),0.28)
++		tween.tween_property(block,"position",_slot(side,id),0.20)
++	else:
++		tween.set_parallel(true)
++		tween.tween_property(block,"position",_record_slot(side,totals[side]),0.36)
++		tween.tween_property(block,"scale",Vector3.ONE*0.82,0.36)
++		tween.set_parallel(false)
++	tween.tween_callback(_finish.bind(side,id))
++	_update_status(side)
++	return true
++
++func _remember(side: int, id: int) -> void:
++	histories[side].append(id)
++	totals[side] += 1
++	if histories[side].size() > MEMORY: histories[side].pop_front()
++	if side == 0:
++		for child in records[side].get_children():
++			records[side].remove_child(child)
++			child.queue_free()
++		for i in range(histories[side].size()):
++			var copy := _numbered_block(histories[side][i])
++			copy.position = _record_slot(side,i)
++			copy.scale = Vector3.ONE * 0.82
++			records[side].add_child(copy)
++
++func _finish(side: int, id: int) -> void:
++	busy[side] = false
++	motions[side] = null
++	_update_status(side)
++	draw_finished.emit(side,id)
++
++func _update_status(side: int) -> void:
++	var description := " / moving" if busy[side] else ""
++	if pools[side].is_empty() and not busy[side]: description = " / empty"
++	statuses[side].text = "%d available / %d draws%s" % [pools[side].size(),totals[side],description]
++
++func replay() -> void:
++	resetting = true
++	for side in range(2):
++		if motions[side] != null: motions[side].kill()
++		motions[side] = null
++		generators[side].seed = SEED
++		pools[side] = range(1,COUNT+1)
++		histories[side] = []
++		totals[side] = 0
++		busy[side] = false
++		armed[side] = true
++		for i in range(COUNT):
++			var block: Node3D = blocks[side][i]
++			block.position = _slot(side,i+1)
++			block.scale = Vector3.ONE
++		for child in records[side].get_children():
++			records[side].remove_child(child)
++			child.queue_free()
++		levers[side].set_angle_degrees(0)
++		_update_status(side)
++	resetting = false
++
++func get_state() -> Dictionary:
++	return {"pools":pools.duplicate(true),"histories":histories.duplicate(true),"totals":totals.duplicate(),"busy":busy.duplicate(),"seed":SEED,"memory":MEMORY}
++
++func _numbered_block(id: int) -> Node3D:
++	var node := Node3D.new()
++	_box(node,"Block",Vector3.ZERO,Vector3.ONE*0.155,BLUE if id <= 4 else PINK,false)
++	_label(node,str(id),Vector3(0,0,0.079),0.07,INK)
++	return node
++
++func _label(host: Node3D, text: String, pos: Vector3, height: float, colour: Color = Color(0.93,0.95,0.92)) -> Label3D:
++	var label := Label3D.new()
++	label.text = text
++	label.position = pos
++	label.font_size = 48
++	label.pixel_size = height / 48.0
++	label.modulate = colour
++	label.outline_size = 0 if colour == INK else 4
++	host.add_child(label)
++	return label
++
++func _box(host: Node3D, title: String, pos: Vector3, size: Vector3, colour: Color, solid: bool) -> void:
++	var mesh := MeshInstance3D.new()
++	mesh.name = title
++	mesh.position = pos
++	var shape := BoxMesh.new()
++	shape.size = size
++	mesh.mesh = shape
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = colour
++	mat.roughness = 0.35
++	if colour.a < 1.0:
++		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
++		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++		mat.no_depth_test = false
++	mesh.material_override = mat
++	host.add_child(mesh)
++	if solid:
++		var body := StaticBody3D.new()
++		body.position = pos
++		var collision := CollisionShape3D.new()
++		var box := BoxShape3D.new()
++		box.size = size
++		collision.shape = box
++		body.add_child(collision)
++		host.add_child(body)
+--- before/commons/artifacts/sampling_hoppers/sampling_hoppers.tscn
++++ after/commons/artifacts/sampling_hoppers/sampling_hoppers.tscn
+@@ -0,0 +1,6 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/artifacts/sampling_hoppers/sampling_hoppers.gd" id="1"]
++
++[node name="SamplingHoppers" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/maps/Random_Remove/encounter-notes.md
++++ after/commons/maps/Random_Remove/encounter-notes.md
+@@ -0,0 +1,7 @@
++# Random Remove — encounter addition, 24 September 2026
++
++Retain the eligibility board and disappearing floor. Between their two book encounters, add sampling_hoppers: two matched eight-member sets, one returning a draw and one keeping it out. Physical lever movement exposes an algorithmic selection; the transparent cases display changing eligibility. Ask whether the same member can return, then whether the last choice can still surprise.
++
++The new artifact stands at (3,6), facing the entrance. Existing placements, structure and utilities are unchanged. Primary order: remove_random, sampling_hoppers, random_removal_arena. The manuscript gains one passage; its existing paragraphs and code remain intact.
++
++The review records supplied-pointer interaction checks and actual museum placement/captures. This is not a tracked-headset or physical-randomness test.

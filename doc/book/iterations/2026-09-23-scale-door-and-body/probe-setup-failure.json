@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "scale encounter and museum body loaded",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: door-before",
+      "passed": true
+    },
+    {
+      "name": "0.44 m by 1.6 m capsule cannot cross tiny door",
+      "passed": true
+    },
+    {
+      "name": "desktop pointer finds the real bottle",
+      "passed": true
+    },
+    {
+      "name": "desktop pickup activates fourfold room scale",
+      "passed": true
+    },
+    {
+      "name": "bottle is consumed and hand released",
+      "passed": true
+    },
+    {
+      "name": "body keeps its scale",
+      "passed": true
+    },
+    {
+      "name": "outer gold frame stays in place and at size",
+      "passed": true
+    },
+    {
+      "name": "pickup places body just above the highest plate",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: on-the-plate",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: serving-descent",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: door-after",
+      "passed": true
+    },
+    {
+      "name": "same capsule clears enlarged door and fixed frame",
+      "passed": true
+    },
+    {
+      "name": "enlarged test body begins clear of solids",
+      "passed": false
+    },
+    {
+      "name": "fourfold capsule still cannot clear enlarged doorway",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "enlarged test body begins clear of solids"
+  ],
+  "observations": {
+    "anchor": [
+      10.5,
+      0.0,
+      2.5
+    ],
+    "capsule_sizes_m": {
+      "fourfold": [
+        1.76,
+        6.4
+      ],
+      "unchanged": [
+        0.44,
+        1.6
+      ]
+    },
+    "door_camera": {
+      "distance_from_opening_m": 2.5,
+      "eye_height_m": 1.65,
+      "fov": 70,
+      "target_height_m": 1.2
+    },
+    "door_sizes_m": {
+      "after": [
+        1.8,
+        2.4
+      ],
+      "before": [
+        0.45,
+        0.6
+      ],
+      "fixed_frame": [
+        1.8,
+        2.4
+      ]
+    },
+    "plate_top_world": [
+      10.5,
+      7.07999992370605,
+      9.30000019073486
+    ]
+  },
+  "passed": false,
+  "room": "Trans_Scale",
+  "scope": "Isolated production museum; supplied desktop grab, doorway capsule sweeps and selected native views. Descent not rewalked. No runtime source or map changes. Headset and learner experience untested."
+}

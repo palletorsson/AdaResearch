@@ -1,0 +1,539 @@
+--- before/commons/artifacts/head_trace_projection/head_trace_projection.gd
++++ commons/artifacts/head_trace_projection/head_trace_projection.gd
+@@ -23,13 +23,13 @@
+ var _fresh_on_entry := true
+ var _source_id := 0
+ var _source_kind := ""
+-var _body: Node
+-var _interface: XRInterface
++var _source: Node
+ 
+ func _ready() -> void:
+ 	_build_display()
+-	if XRServer.has_signal("reference_frame_changed"):
+-		XRServer.connect("reference_frame_changed", _interrupt_stroke)
++	_source = load("res://commons/artifacts/trace_shared/measured_view_source.gd").new()
++	add_child(_source)
++	_source.discontinuity.connect(_interrupt_stroke)
+ 
+ func _process(delta: float) -> void:
+ 	var input := _read_input()
+@@ -50,40 +50,7 @@
+ 	_accept_position(camera.global_position, delta, kind)
+ 
+ func _read_input() -> Dictionary:
+-	var camera := get_viewport().get_camera_3d()
+-	if not is_instance_valid(camera): return {}
+-	var xr := XRServer.primary_interface
+-	if camera is XRCamera3D:
+-		if xr == null or not xr.is_initialized(): return {}
+-		# Do not treat an old/staging camera or uncertain tracking as measurement.
+-		if xr.get_tracking_status() != XRInterface.XR_NORMAL_TRACKING: return {}
+-		var rig := camera.get_parent() as XROrigin3D
+-		if rig == null or not rig.current: return {}
+-		if xr != _interface:
+-			if is_instance_valid(_interface) and _interface.play_area_changed.is_connected(_interrupt_stroke):
+-				_interface.play_area_changed.disconnect(_interrupt_stroke)
+-			_interface = xr
+-			_interface.play_area_changed.connect(_interrupt_stroke)
+-			_interrupt_stroke()
+-		# XRTools teleports may be shorter than the displacement guard.
+-		if not is_instance_valid(_body) or not rig.is_ancestor_of(_body):
+-			if is_instance_valid(_body) and _body.is_connected("player_teleported", _interrupt_stroke):
+-				_body.disconnect("player_teleported", _interrupt_stroke)
+-			_body = null
+-			for child in rig.find_children("*", "CharacterBody3D", true, false):
+-				if child.has_signal("player_teleported"):
+-					_body = child
+-					_body.connect("player_teleported", _interrupt_stroke)
+-					break
+-		return {"camera":camera, "kind":"HEADSET"}
+-	# Never silently record a spectator, photo, editor or staging camera.
+-	if xr != null and xr.is_initialized(): return {}
+-	var ancestor: Node = camera
+-	while ancestor != null:
+-		if ancestor.is_in_group("em_walker"):
+-			return {"camera":camera, "kind":"DESKTOP VIEW"}
+-		ancestor = ancestor.get_parent()
+-	return {}
++	return _source.read_input()
+ 
+ func _interrupt_stroke(_unused: Variant = null) -> void:
+ 	_break_pending = true
+--- before/commons/artifacts/registry/primitives.json
++++ commons/artifacts/registry/primitives.json
+@@ -24504,7 +24504,7 @@
+ 	"automatic_writing_desk": {
+ 	  "category": "primitives",
+ 	  "complexity": "beginner",
+-	  "description": "A desk with a sheet of paper that the headset writes by itself: a pen sweeps left-to-right and drops a row at the margin, filling the page top-to-bottom with asemic script whose jaggedness scales with HEAD speed (still = flat ruled line, moving = jagged handwriting). Surrealist automatic writing / the spiritualist planchette, with the head as the medium. Driven by XRCamera3D; demo head-drift fallback.",
++	  "description": "A writing desk with two explicit modes. Default asemic handwriting is generated and modulated by head speed. Opt-in head_height records measured height against elapsed time, starting empty and leaving blank intervals when input is absent. Point_Trace selects the measured mode.",
+ 	  "dev_themes": [
+ 		"commons",
+ 		"primitives",
+@@ -24525,6 +24525,7 @@
+ 	  ],
+ 	  "name": "Automatic Writing Desk",
+ 	  "parameters": {
++        "recording": "asemic",
+ 		"rows": 11,
+ 		"letters_freq": 7,
+ 		"write_speed": 0.32,
+@@ -24548,7 +24549,7 @@
+ 		"desk",
+         "didactic"
+ 	  ],
+-	  "qfep_connection": "The desk transcribes the one thing you never agreed to author: your attention. A head, sampled as it turns toward whatever it cannot help looking at, is a confession written in a hand you can't read - kept on the page after you walk away.",
++	  "qfep_connection": "A constant measured height can give waiting a length, while a spatial movement gate omits its duration. What an instrument keeps shapes what can be read from its mark; neither mode measures attention or confession.",
+ 	  "measurements": {
+ 		"aabb_size": [
+ 		  0.9,
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -46,15 +46,16 @@
+         "draw_dot",
+         "draw_stick",
+         "head_trace_projection",
++        "automatic_writing_desk",
+         "whiteboard",
+         "trace_short_memory"
+       ],
+-      "reason": "The first walk follows the held point, the displaced stick tip and the headset path with its floor projection, then whiteboard contact and a 32-position companion. Telemetry and automatic writing remain secondary, with generated-versus-measured input distinctions retained in detours.md.",
++      "reason": "The first walk follows the held point, displaced stick tip, head path and floor projection, measured height against time at the writing desk, whiteboard contact and a short-memory companion. Hand telemetry remains secondary; generated defaults are distinguished from measured input.",
+       "status": "existing_text_retained",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Trace/final.md",
+-      "text_sha256": "ef1c56475a1f720d0e266cfcb0ed662554b543cebee05aa9dfea8f32585a3d84",
+-      "map_sha256": "fdbf8d104197586f921a34624b828e5a1338a8a28c61d8e992df53e8f631b854",
++      "text_sha256": "79f0f423314a742d7ff5c2e2c7f9656b7cac61c6e6ecbfc3666f0657fd3e24ea",
++      "map_sha256": "b8148605426c230b334917862c4b72f31ebb285885c627c6723cd279863d7974",
+       "learner_verified": false
+     },
+     "Point_Line_Grid": {
+--- before/commons/maps/Point_Trace/critical.md
++++ commons/maps/Point_Trace/critical.md
+@@ -48,7 +48,7 @@
+ 
+ Ask where row 1 has gone. Compare the surviving line with the list operation. Ask what a pause contributes, then inspect the movement gate. The display and the code answer related questions, and the visitor's purpose helps decide which answer matters.
+ 
+-The optional writing desk offers another investigation. Marks can look expressive even when a small mapping from camera movement drives their amplitude. The appearance of handwriting invites an interpretation that the data cannot settle. The earlier question remains useful for a return: what makes a mark feel as if it knows you?
++The writing desk now keeps head height against time. A level stretch can record a wait, where the drawing dot's spatial list adds nothing. An interval without measurements leaves blank paper. These forms of apparent quiet have different conditions. Neither a steady height nor an empty interval can establish attention, reluctance or absence of thought. The default generated handwriting remains available elsewhere as a further comparison: what makes a mark feel as if it knows you?
+ 
+ ## Reduction and the possibility of reply
+ 
+--- before/commons/maps/Point_Trace/detours.md
++++ commons/maps/Point_Trace/detours.md
+@@ -1,6 +1,6 @@
+ # Return visits in Point_Trace
+ 
+-These experiments remain in the room as secondary encounters. The book follows the drawing dots, stick, head-path comparison, whiteboard and short-memory point; a return can ask a different question of the same hall.
++These experiments remain in the room as secondary encounters. The book follows the drawing dots, stick, head-path comparison, measured writing desk, whiteboard and short-memory point; a return can ask a different question of the same hall.
+ 
+ ## Give the pause another record
+ 
+@@ -12,11 +12,9 @@
+ 
+ ## A mark that seems to know you
+ 
+-The automatic-writing desk offers wordless handwriting. When it finds a headset camera, changes of that camera's position vary the amplitude of the writing. Otherwise, a demonstration can keep it moving.
++The desk in this hall now records measured head height against time, as a primary encounter. This makes a pause available for comparison with a movement-gated drawing point. It starts empty, omits missing observations and holds the completed page.
+ 
+-Compare its response to movement and rest when the input is actually yours. What makes a mark feel as if it knows you? The appearance can invite a reading of character or confession while the implementation supplies a much narrower relation between motion and amplitude.
+-
+-This inquiry can develop further without becoming a prerequisite for learning to keep a list of positions.
++The earlier `asemic` mode is preserved in the source and remains the default elsewhere. That mode generates sine-shaped handwriting whose amplitude follows head-position speed, with optional demonstration input. Its marks can still support a later comparison about interpretation, once generators have been introduced. It does not establish a person's attention or intention.
+ 
+ ## The finite list
+ 
+@@ -27,4 +25,6 @@
+ 
+ ## Movement before generators
+ 
+-The new head-path comparison uses measured positions and no sine or random trajectory. Its pink/cyan views make a direct record/projection comparison. This differs from the older automatic-writing desk: that script varies sine-shaped handwriting using head-position speed; it does not draw the head's literal path. The coloured dots' `retention:trace` guide strokes and the hand monitors' fallback also contain generated examples. They remain secondary implementation/curation work, not evidence of a visitor gesture. The [source inventory](../../../doc/book/iterations/2026-09-24-trace-short-memory/INPUT-SOURCES.md) records these distinctions. A future direct head-writing mode would need to replace the desk's waveform rather than merely turn off its fallback.
++The head-path comparison and the desk's measured mode use bodily inputs without a sine or random path generator. Both share the same current-view selector. The desk gives time a place on the page; the head path keeps a spatial route. The older generated desk is preserved for later use.
++
++The coloured dots' `retention:trace` guide strokes and the hand monitors' fallback still contain generated examples. They remain implementation/curation work, not evidence of a visitor gesture. The earlier [source inventory](../../../doc/book/iterations/2026-09-24-trace-short-memory/INPUT-SOURCES.md) is a dated record of how this inquiry began; its desk description predates the measured mode.
+--- before/commons/maps/Point_Trace/final.md
++++ commons/maps/Point_Trace/final.md
+@@ -76,6 +76,26 @@
+ 
+ Return to the square to begin again. Try giving the floor line a bend. Then try moving without extending it. The same body can make more than one account of its passage.
+ 
++## The pause leaves a line
++
++<!-- @automatic_writing_desk -->
++
++Come close to the small writing desk. Let the nib cross a little paper while you hold still. Lower your head, wait there, then rise. Your hands can remain empty.
++
++Look for the waits in the writing. A level stretch can keep something the drawing dot left out.
++
++At this desk, time moves the pen across the page. The height of your headset moves the mark above or below the row. The height at which you arrived becomes its starting level. Small movements still belong to the recording; stillness need not be perfectly straight.
++
++```gdscript
++_elapsed += delta
++```
++
++Each update adds the elapsed time. The nib keeps travelling while a measured height stays the same. Lower yourself and the line bends; stay lower and another level stretch can appear. We have given waiting a length.
++
++The page can also have blanks. When measured input disappears, the clock can carry on without a mark. A horizontal line and an empty interval make different claims about what the instrument received.
++
++A completed page waits. Step away and return to begin another. Give one pause more room than the last. Your reason for waiting stays with you.
++
+ ## Touch the page
+ 
+ <!-- @whiteboard -->
+@@ -111,7 +131,7 @@
+ 
+ <!-- @ -->
+ 
+-Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. With the amber dot, only the surviving positions travel. A whiteboard image is kept differently and will not take this route. The head trace stays in this hall.
++Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. With the amber dot, only the surviving positions travel. A whiteboard image is kept differently and will not take this route. The head trace and the desk's page stay in this hall.
+ 
+ We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+ 
+--- before/commons/maps/Point_Trace/map_data.json
++++ commons/maps/Point_Trace/map_data.json
+@@ -2,7 +2,7 @@
+ 	"layers": {
+ 		"interactables": [
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", "automatic_writing_desk", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", "automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", "head_trace_projection:0:0#plinth:0#pin:1", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+--- before/commons/maps/Point_Trace/technical.md
++++ commons/maps/Point_Trace/technical.md
+@@ -44,7 +44,7 @@
+ 
+ The footer labels a found controller node as TRACKING and the synthetic fallback as DEMO FEED. The lookup checks tracker/name but not active-pose validity or the currently driven rig; TRACKING therefore does not establish live hardware input by itself. Without a controller, synthetic motion fills the rows. Confirming the active source is a pending implementation improvement.
+ 
+-The automatic-writing desk uses changes of an available headset camera's position to vary the amplitude of wordless marks, with fallback demonstration motion. This mapping supports an experiment in interpreting marks; it does not measure confession, attention or intention.
++Point_Trace now selects the automatic-writing desk's `head_height` recording mode. It measures head height against elapsed time. The default `asemic` mode elsewhere retains the original speed-modulated generated script; see the measured-mode notes below.
+ 
+ ## Short-memory companion
+ 
+@@ -76,3 +76,20 @@
+ Leaving the square preserves the display. After 0.6 s outside, re-entering starts a fresh drawing. Merely waiting or temporarily losing tracking does not erase the previous record. Head/floor history is local to this artifact and is not published to TraceData or carried into Grid.
+ 
+ Validation and labelled scripted camera captures: [head-path review](../../../doc/book/iterations/2026-09-24-head-trace/index.html). The probe exercises production input selection with controlled desktop and XR fixtures; it is not a headset or learner trial.
++
++
++## The pause leaves a line — measured writing mode
++
++The existing desk at cell (4,1) now uses `#recording:head_height#rows:5#write_speed:0.06#run_demo:0`. This is an opt-in companion, `measured_height_writer.gd`, called by the original script. Other placements keep the default `asemic` generator. The measured branch never seeds handwriting, invokes `_row_v`, or substitutes demo motion. Its identity/registry text now distinguishes the two modes and avoids claiming to measure attention or confession.
++
++The desk and spatial head trace share `commons/artifacts/trace_shared/measured_view_source.gd`. This extraction preserves current-rig and normal-XR-tracking checks, desktop walking-camera labels, and teleport/reference-change notification. Capturing a spectator camera is refused. The spatial trace's existing behaviour is covered by the regression probe.
++
++The writing begins when the observer is in the reading position in front of the table (local X within 0.8 m, Z from 0.40 to 1.65 m, height from 0.2 to 3.2 m). The initial local camera height supplies a baseline. Time advances U at 0.06 page fractions per second across 0.84 of a row. Height relative to that baseline moves V, clamped to +/-0.70 m and a bounded row amplitude. The sign reports `row limit` beyond that range. Raw accepted heights and elapsed times remain in parallel arrays. Sideways movement and gaze are not height measurements.
++
++A sample is accepted on a callback at least 0.05 s after the prior accepted sample, without filling intervening positions. Actual cadence therefore depends on frame timing. During tracking/view loss in an active visit, time continues but ink is omitted. Long frame gaps (>0.25 s), large displacements (>0.45 m), and notified teleports/recentering also omit an observation rather than invent a connecting gesture. The stroke consists of fine measured dots, not an interpolated waveform.
++
++The page has five rows, nominally 70 seconds of clock space, and a separate maximum of 1800 samples. Reaching either limit holds the page. Leaving preserves it; after 0.6 s outside, returning starts a new page and height baseline. Changing the observer also starts a new record. Nothing is exported to TraceData.
++
++Visual inspection found the original tilted paper intersected its tabletop, hiding early marks. In measured mode its centre is lifted by the vertical component of half its depth, so the entire sheet clears the table; the compact label rises with it. This correction is local to measured mode.
++
++[Actual museum images and focused evidence](../../../doc/book/iterations/2026-09-24-trace-pause/index.html) use explicitly supplied camera coordinates, including constant input and linear height changes. The checks compare the measured desk with the real held `draw_dot` recorder and cover the shared head selector. They do not establish headset comfort, learner discovery, or Quest performance.
+--- before/commons/maps/Point_Trace/tutorial.md
++++ commons/maps/Point_Trace/tutorial.md
+@@ -75,3 +75,8 @@
+ ### A body writes without holding the tool
+ 
+ After the stick's displaced sampling point, enter the head-trace square beside the plinths. Lower the head and move sideways, step out, then compare the suspended pink path with its cyan floor projection. Both come from one position list. Read the one-line height substitution after trying to find the same movement in each view. Returning begins a new drawing. This prepares the whiteboard's planar inscription without introducing sine or randomness as generators. Desktop walking-camera input is explicitly distinguished from headset input.
++
++
++### Give a pause room on the page
++
++At the existing writing desk, the `head_height` mode keeps measured height against elapsed time. Hold still, lower the head, wait and rise. Compare the level stretch with a drawing dot's unchanged count during stillness. The difference is how each instrument admits a sample and gives time a visible role. The desk's empty intervals belong to missing input; the current page waits when full. Its controlled source replaces generated handwriting only in this hall. Read `_elapsed += delta` after observing the waits.
+--- before/commons/primitives/automatic_writing_desk/automatic_writing_desk.gd
++++ commons/primitives/automatic_writing_desk/automatic_writing_desk.gd
+@@ -2,20 +2,17 @@
+ class_name AutomaticWritingDesk
+ 
+ # @identity
+-# essence: a small desk with a sheet of paper on it, and an invisible pen that writes by itself — driven by the movement of your HEAD. The headset is the hand. A nib travels left to right across the page laying down an ink line; when it reaches the right margin it returns to the left and drops to the next row, the way a typewriter or a hand fills a page. What it writes is asemic — wordless script, the look of handwriting with no language in it — and its shape is your head's motion: hold still and the row comes out a calm flat line; turn, lean, look around, and the row breaks into jagged loops. Row by row the page fills with a transcription of how your head moved while you stood there. Surrealist automatic writing and the spiritualist planchette, with the headset as the medium.
+-# desire: it wants to write you without your consent and without your words — to take the one input you cannot hold still (the head, always microscopically moving, always turning toward what catches the eye) and render it as a script you didn't choose to produce. It wants the page to look like a confession in a language no one can read: legibly handwriting, illegibly meaning. It puts automatic writing in drag as biometric transcription — the headset that knows where you looked, writing it down in asemic cursive, row after row.
+-# critical_parameter: head_speed_scale × letters_freq. A small head_speed_scale makes the pen leap into jagged script at the faintest head motion (the page is loud, every glance inscribed); a large one keeps the rows calm unless you move sharply (the page is discreet). letters_freq sets how many "letters" per row — coarse scrawl or fine hand. Between them: how much of your attention the page is allowed to write down, and how finely.
+-# triggers: _ready builds the desk + paper + faint ruled lines and pre-seeds several written rows; _process finds the XRCamera3D (the head), measures its speed, and advances the pen left-to-right / row-by-row, laying ink dots whose vertical wander scales with head speed; at the bottom of the page it starts a fresh sheet; with no headset it runs a demo head-drift so the page writes itself in capture.
+-# emerges: on the lab table beside the cold hand-telemetry diptych, it is the warm, involuntary member of the trace set — not your hands logged as numbers but your head transcribed as script. Where `mystic_writing_pad` keeps what you draw and the diptych logs where your hands are, this writes what your attention does, in a hand that is yours and unreadable.
+-# needs: a desk + a page to write on [present]; an instrument that advances row by row like writing [the pen, present]; a driver that is involuntary and always moving [the head / XRCamera3D, with a demo fallback]; ink that reads as asemic handwriting [dot script whose amplitude is head speed, present]; ruled lines so the page reads as paper [present]
+-# relationships: warm head-driven counterpart to `hand_telemetry_diptych` (cold, hand-driven) in the lab trace set; shares the dot-trace motif with `mystic_writing_pad`, `living_paper`, and `draw_dot`; descendant of Surrealist automatic writing (Breton), asemic writing (Michaux, Dermisache), and the seismograph drum; the head-as-pen sibling to the hand-as-pen of `draw_dot`.
+-# truth: a point is position without extension — and a head, sampled as it turns toward whatever it cannot help looking at, is a confession written in a hand you can't read. The desk transcribes the one thing you never agreed to author: your attention, row by row, in asemic cursive, kept on the page after you walk away.
+-
+-## Automatic writing desk — the headset's motion writes asemic script on a
+-## sheet of paper, row by row. The pen sweeps left→right, drops a row at the
+-## margin, fills the page top→bottom; the vertical wander of each row scales
+-## with head speed (still = flat line, moving = jagged script). Driven by the
+-## XRCamera3D; demo head-drift fallback so it writes in capture / desktop.
++# essence: a desk writes across a page; the selected recording mode determines its source.
++# desire: compare a mark's appearance with the process that made it.
++# critical_parameter: recording — generated asemic script or measured head height against time.
++# triggers: in head_height, enter the reading position and let measured height write; in asemic, head speed modulates a generated waveform with an optional demo fallback.
++# emerges: a constant height can leave a horizontal timed record while a movement-gated spatial trace waits.
++# needs: a current measured headset or labelled desktop walking view for head_height; no fabricated samples when unavailable.
++# relationships: draw_dot omits stationary duration; head_trace_projection compares spatial coordinates with their floor projection; this page gives elapsed time an axis.
++# truth: the line records a chosen measurement; it cannot establish where someone looked, their attention, or what their movement meant.
++
++## The default asemic mode keeps the original generated handwriting.
++## Opt-in head_height uses the measured mode below, with no seeded marks or sine.
+ 
+ # ── DNA ───────────────────────────────────────────────────────────────
+ 
+@@ -36,6 +33,8 @@
+ ## Head speed (m/s) that maps to maximum row amplitude.
+ @export var head_speed_scale: float = 1.4
+ @export var run_demo: bool = true
++@export_enum("asemic", "head_height") var recording: String = "asemic"
++var _measured_writer: Node
+ 
+ # ── State ─────────────────────────────────────────────────────────────
+ 
+@@ -85,6 +84,9 @@
+ 
+ 
+ func _read_metadata_overrides() -> void:
++	if has_meta("config_recording"):
++		var mode := str(get_meta("config_recording"))
++		if mode in ["asemic", "head_height"]: recording = mode
+ 	if has_meta("config_rows"):
+ 		rows = maxi(3, int(str(get_meta("config_rows"))))
+ 	if has_meta("config_letters_freq"):
+@@ -206,10 +208,15 @@
+ 	_nib.add_child(barrel)
+ 	_paper.add_child(_nib)
+ 
+-	_seed_rows()
+-	_rebuild_ink()
+-	_pen_u = 0.1
+-	_update_nib()
++	if recording == "head_height":
++		_measured_writer = load("res://commons/primitives/automatic_writing_desk/measured_height_writer.gd").new()
++		_measured_writer.host = self
++		add_child(_measured_writer)
++	else:
++		_seed_rows()
++		_rebuild_ink()
++		_pen_u = 0.1
++		_update_nib()
+ 
+ 
+ func _build_desk() -> void:
+@@ -243,6 +250,9 @@
+ 
+ func _process(delta: float) -> void:
+ 	if not _built:
++		return
++	if recording == "head_height":
++		_measured_writer.advance(delta)
+ 		return
+ 	_t += delta
+ 
+--- /dev/null
++++ commons/artifacts/trace_shared/measured_view_source.gd
+@@ -0,0 +1,55 @@
++extends Node
++## Shared measured input for spatial and timed Trace instruments.
++## This node has no display, generated fallback or recorded history.
++signal discontinuity
++var _body: Node
++var _interface: XRInterface
++
++func _ready() -> void:
++	if XRServer.has_signal("reference_frame_changed"):
++		XRServer.connect("reference_frame_changed", _notify_discontinuity)
++
++func _notify_discontinuity(_unused: Variant = null) -> void:
++	discontinuity.emit()
++
++func _exit_tree() -> void:
++	if is_instance_valid(_interface) and _interface.play_area_changed.is_connected(_notify_discontinuity):
++		_interface.play_area_changed.disconnect(_notify_discontinuity)
++	if is_instance_valid(_body) and _body.is_connected("player_teleported", _notify_discontinuity):
++		_body.disconnect("player_teleported", _notify_discontinuity)
++
++func read_input() -> Dictionary:
++	var camera := get_viewport().get_camera_3d()
++	if not is_instance_valid(camera): return {}
++	var xr := XRServer.primary_interface
++	if camera is XRCamera3D:
++		if xr == null or not xr.is_initialized(): return {}
++		# Do not treat an old/staging camera or uncertain tracking as measurement.
++		if xr.get_tracking_status() != XRInterface.XR_NORMAL_TRACKING: return {}
++		var rig := camera.get_parent() as XROrigin3D
++		if rig == null or not rig.current: return {}
++		if xr != _interface:
++			if is_instance_valid(_interface) and _interface.play_area_changed.is_connected(_notify_discontinuity):
++				_interface.play_area_changed.disconnect(_notify_discontinuity)
++			_interface = xr
++			_interface.play_area_changed.connect(_notify_discontinuity)
++			_notify_discontinuity()
++		# XRTools teleports may be shorter than the displacement guard.
++		if not is_instance_valid(_body) or not rig.is_ancestor_of(_body):
++			if is_instance_valid(_body) and _body.is_connected("player_teleported", _notify_discontinuity):
++				_body.disconnect("player_teleported", _notify_discontinuity)
++			_body = null
++			for child in rig.find_children("*", "CharacterBody3D", true, false):
++				if child.has_signal("player_teleported"):
++					_body = child
++					_body.connect("player_teleported", _notify_discontinuity)
++					break
++		return {"camera":camera, "kind":"HEADSET"}
++	# Never silently record a spectator, photo, editor or staging camera.
++	if xr != null and xr.is_initialized(): return {}
++	var ancestor: Node = camera
++	while ancestor != null:
++		if ancestor.is_in_group("em_walker"):
++			return {"camera":camera, "kind":"DESKTOP VIEW"}
++		ancestor = ancestor.get_parent()
++	return {}
+--- /dev/null
++++ commons/primitives/automatic_writing_desk/measured_height_writer.gd
+@@ -0,0 +1,148 @@
++extends Node
++## Opt-in companion for the existing desk. Height is measured; time moves the pen.
++## Missing measurements leave blank paper, never a generated waveform.
++const SAMPLE_PERIOD := 0.05
++const HALF_HEIGHT_RANGE := 0.70
++const PAGE_WIDTH := 0.84
++const MAX_SAMPLES := 1800
++var host: Node3D
++var _source: Node
++var _label: Label3D
++var _elapsed := 0.0
++var _sample_clock := 0.0
++var _reference_height := 0.0
++var _active := false
++var _full := false
++var _gap_pending := false
++var _outside_time := 1.0
++var _source_id := 0
++var _source_kind := ""
++var _last_position := Vector3.ZERO
++var _have_last_position := false
++var _times: Array[float] = []
++var _heights: Array[float] = []
++
++func _ready() -> void:
++	_source = load("res://commons/artifacts/trace_shared/measured_view_source.gd").new()
++	add_child(_source)
++	_source.discontinuity.connect(_interrupt)
++	host._trace.clear()
++	host._ink.multimesh.instance_count = 0
++	host._nib.visible = false
++	# The tilted back of the old sheet intersected the tabletop. Lift its
++	# full depth above the table, using the already-transformed page axis.
++	host._paper.position.y = host.table_h + 0.034 + absf(host._paper.basis.z.y)*0.31
++	# Fine ink leaves room to read the differences between five measured rows.
++	host._dot_mesh.radius = 0.0018
++	host._dot_mesh.height = 0.0036
++	_build_label()
++
++func _interrupt() -> void:
++	_gap_pending = true
++	_have_last_position = false
++
++func _start(height: float, camera: Camera3D, kind: String) -> void:
++	host._trace.clear()
++	_times.clear()
++	_heights.clear()
++	host._rebuild_ink()
++	_elapsed = 0.0
++	_sample_clock = 0.0
++	_reference_height = height
++	_source_id = camera.get_instance_id()
++	_source_kind = kind
++	_active = true
++	_full = false
++	_gap_pending = false
++	_have_last_position = false
++	host._pen_u = 0.08
++	host._pen_row = 0
++
++func _advance_clock(delta: float) -> void:
++	_elapsed += delta
++	var distance: float = _elapsed * maxf(host.write_speed,0.001)
++	host._pen_row = int(floor(distance/PAGE_WIDTH))
++	host._pen_u = 0.08 + fmod(distance,PAGE_WIDTH)
++	if host._pen_row >= host.rows or _times.size() >= MAX_SAMPLES:
++		_full = true
++		host._nib.visible = false
++
++func advance(delta: float) -> void:
++	if delta <= 0.0: return
++	var input: Dictionary = _source.read_input()
++	if input.is_empty():
++		if _active and not _full: _advance_clock(delta)
++		_interrupt()
++		host._nib.visible = false
++		_label.text = "HEIGHT / TIME\nWaiting for measured input"
++		return
++	var camera: Camera3D = input["camera"]
++	var kind: String = input["kind"]
++	var p: Vector3 = host.to_local(camera.global_position)
++	if not p.is_finite():
++		_interrupt()
++		host._nib.visible = false
++		return
++	var near := absf(p.x)<=0.8 and p.z>=0.40 and p.z<=1.65 and p.y>0.2 and p.y<3.2
++	if not near:
++		_outside_time += delta
++		if _outside_time >= 0.6: _active = false
++		_interrupt()
++		host._nib.visible = false
++		_label.text = "THE PAUSE LEAVES A LINE\nCome closer. Lower your head. Wait."
++		return
++	_outside_time = 0.0
++	if not _active or camera.get_instance_id()!=_source_id or kind!=_source_kind:
++		_start(p.y,camera,kind)
++	if _full:
++		_label.text = "PAGE FULL\nStep away and return for a fresh sheet."
++		return
++	_advance_clock(delta)
++	if _full: return
++	# Unobserved time has a place on the page but no fabricated samples.
++	if delta>0.25 or (_have_last_position and p.distance_to(_last_position)>0.45):
++		_interrupt()
++	_last_position = p
++	_have_last_position = true
++	if _gap_pending:
++		_gap_pending = false
++		_sample_clock = 0.0
++		host._nib.visible = false
++		return
++	var relative_height: float = p.y-_reference_height
++	var v := height_on_page(relative_height,host._pen_row)
++	host._nib.position = host._uv_to_local(host._pen_u,v)
++	host._nib.visible = true
++	_sample_clock += delta
++	if _sample_clock >= SAMPLE_PERIOD:
++		_sample_clock = 0.0
++		host._trace.append(Vector2(host._pen_u,v))
++		_times.append(_elapsed)
++		_heights.append(p.y)
++		host._rebuild_ink()
++	var range_note := " / row limit" if absf(relative_height)>HALF_HEIGHT_RANGE else ""
++	_label.text = kind + " HEIGHT / TIME" + range_note + "\n" + str(_times.size()) + " samples / stillness also writes"
++
++func height_on_page(relative_height: float, row: int) -> float:
++	var height_fraction := clampf(relative_height/HALF_HEIGHT_RANGE,-1.0,1.0)
++	return host._row_baseline(row)-height_fraction*(0.32/float(host.rows))
++
++func _build_label() -> void:
++	var backing := MeshInstance3D.new()
++	var mesh := BoxMesh.new()
++	mesh.size = Vector3(0.82,0.16,0.025)
++	var material := StandardMaterial3D.new()
++	material.albedo_color = Color(0.045,0.055,0.07)
++	material.roughness = 0.85
++	mesh.material = material
++	backing.mesh = mesh
++	backing.position = Vector3(0,host.table_h+0.30,-0.30)
++	host.add_child(backing)
++	_label = Label3D.new()
++	_label.position = Vector3(0,host.table_h+0.30,-0.285)
++	_label.font_size = 32
++	_label.pixel_size = 0.001
++	_label.modulate = Color(0.90,0.86,0.74)
++	_label.outline_size = 0
++	_label.text = "THE PAUSE LEAVES A LINE\nCome closer. Lower your head. Wait."
++	host.add_child(_label)

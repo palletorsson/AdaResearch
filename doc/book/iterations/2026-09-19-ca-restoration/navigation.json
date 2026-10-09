@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "message": "eight halls and a plan owner",
+      "ok": true
+    },
+    {
+      "message": "select CA_Introduction",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_Introduction",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_Introduction",
+      "ok": true
+    },
+    {
+      "message": "select CA_ElementaryRules",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_ElementaryRules",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_ElementaryRules",
+      "ok": true
+    },
+    {
+      "message": "select CA_GameOfLife",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_GameOfLife",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_GameOfLife",
+      "ok": true
+    },
+    {
+      "message": "select CA_BeyondBinary",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_BeyondBinary",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_BeyondBinary",
+      "ok": true
+    },
+    {
+      "message": "select CA_ExpandingSpace",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_ExpandingSpace",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_ExpandingSpace",
+      "ok": true
+    },
+    {
+      "message": "select CA_SoftRules",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_SoftRules",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_SoftRules",
+      "ok": true
+    },
+    {
+      "message": "select CA_AgentsCircuits",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_AgentsCircuits",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_AgentsCircuits",
+      "ok": true
+    },
+    {
+      "message": "select CA_EdgeOfChaos",
+      "ok": true
+    },
+    {
+      "message": "owner for CA_EdgeOfChaos",
+      "ok": true
+    },
+    {
+      "message": "advance from CA_EdgeOfChaos",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "route": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

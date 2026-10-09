@@ -1,0 +1,40 @@
+--- before/form_in_hand.gd
++++ commons/artifacts/ignorance_gallery/form_in_hand.gd
+@@ -11,10 +11,14 @@
+ 	moon_torus.name="MoonStudy"
+ 	add_child(moon_torus)
+ 	# A suspended point at reachable height; no pedestal stands in the reach space.
+-	# Move it to the side and hang it from a small wall bracket; keep the shadow field clear.
+-	var point_at := Vector3(5.7,1.45,-3.5)
+-	Kit.block(self,Vector3(2.1,0.055,0.055),Vector3(6.72,3.15,-3.5),Kit.BLACK,false)
+-	var thread := Kit.cylinder(self,Vector3(5.7,2.37,-3.5),0.005,1.56,8,Kit.BLACK)
++	# Meet it near the entrance to the court, before the much larger form overhead.
++	# A slim stand keeps the point and its instructions together, outside the through-route.
++	var point_at := Vector3(-3.6,1.45,-3.5)
++	Kit.block(self,Vector3(0.38,0.06,0.38),Vector3(-4.45,0.03,-2.9),Kit.WHITE)
++	Kit.block(self,Vector3(0.055,3.12,0.055),Vector3(-4.45,1.62,-2.9),Kit.BLACK)
++	Kit.block(self,Vector3(0.90,0.055,0.055),Vector3(-4.025,3.15,-2.9),Kit.BLACK,false)
++	Kit.block(self,Vector3(0.055,0.055,0.66),Vector3(-3.6,3.15,-3.2),Kit.BLACK,false)
++	var thread := Kit.cylinder(self,Vector3(-3.6,2.37,-3.5),0.005,1.56,8,Kit.BLACK)
+ 	thread.name = "Suspension"
+ 	# The cable is a display convention, not a physical constraint on the hand.
+ 	for child in thread.get_children(): child.queue_free()
+@@ -22,11 +26,13 @@
+ 	point.position = point_at
+ 	add_child(point)
+ 	point.suspension = thread
+-	Kit.block(self,Vector3(3.7,1.10,0.06),Vector3(-4.1,2.45,4.86),Kit.WHITE,false)
+-	Kit.label(self,"A FORM IN THE HAND",Vector3(-4.1,2.78,4.82),0.0034,PI)
+-	Kit.label(self,"Hold: fewer divisions.\nTrigger: send this form.",Vector3(-4.1,2.43,4.81),0.0019,PI)
+-	Kit.label(self,"Release: return in two seconds.",Vector3(-4.1,2.08,4.80),0.0016,PI)
+-	point.readout = Kit.label(self,"",point_at+Vector3(0,-0.41,0.20),0.0015,PI)
++	var guide := Kit.block(self,Vector3(1.4,0.90,0.06),Vector3(-4.45,1.83,-2.94),Kit.WHITE,false)
++	guide.name = "CatalystGuide"
++	Kit.label(self,"THE POINT\nFIRST CATALYST",Vector3(-4.45,2.10,-2.98),0.0015,PI)
++	Kit.label(self,"Hold: fewer rings and segments.\nTrigger: send this form.",Vector3(-4.45,1.82,-2.98),0.0013,PI)
++	Kit.label(self,"Release: return\nin two seconds.",Vector3(-4.45,1.54,-2.98),0.0012,PI)
++	Kit.block(self,Vector3(1.4,0.25,0.04),Vector3(-4.45,1.12,-2.94),Kit.WHITE,false)
++	point.readout = Kit.label(self,"",Vector3(-4.45,1.12,-2.97),0.0013,PI)
+ 	# Same sphere, same mesh counts: only the displayed direction differs.
+ 	for i in 2:
+ 		var at := Vector3(-6.2 if i==0 else 6.2,0,2.6)

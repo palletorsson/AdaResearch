@@ -1,0 +1,5 @@
+Establishes the Boolean vocabulary through a recurring box-and-sphere pair. Sizes, offsets and colours differ across the three demonstrations, so this is a comparison of operations rather than a controlled one-variable experiment. The three demos were three separate maps until 2026-09-03; they were folded into one because each operation is only legible beside the others — union's deleted seam means little until you have seen intersection return an empty set, and difference's invented face means nothing until you know that neither input brought it.
+
+The raised sides between bays are sills, not enclosing walls: the player should never lose sight of the previous verb while standing at the next. `the_argument_of_solids` closes the hall by rebuilding all three at bench scale under the claim that the set is closed — and the reflection beat is that the list names three operations but does not exhaust the combinations of operands, order, placement and nested expressions. Difference changes when its operands exchange roles.
+
+Curriculum role: B1 INTRODUCE in the boolean_surfaces sequence — the vocabulary, and the first look at what a boundary representation forecloses.

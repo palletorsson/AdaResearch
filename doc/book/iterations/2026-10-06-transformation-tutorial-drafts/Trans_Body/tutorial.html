@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Approach supplies the value</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}.full{grid-column:1/-1}hr{border:0;border-top:1px solid #c7c0b6;margin-top:45px}article h1{font-size:1.8em}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../feedback.html">Feedback decisions</a><a href="../Trans_Scale/tutorial.html">Previous</a><a href="../Trans_Pit/tutorial.html">Next</a><a href="parallel.html">Facing texts</a></nav></header><main><h1>Let your approach choose the transform</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>World-space separation and horizontal distance</li>
+<li>Mapping a distance range to a bounded fraction</li>
+<li>Driving scale or rotation from the same input</li>
+<li>Keeping a shrinking body's base on the floor</li>
+</ul>
+<p>Approach the slat wall, then step back. The slats return. Farther on, blocks shrink around you and recover when you leave. Your relation to the object now supplies the changing value.</p>
+<p>Continue with one familiar box. Replace Scale's chosen factor with a value calculated from the player. Remove the doorway group and witness. The museum supplies the tracked body; the lesson creates the cube and its response. Like the previous visual studies, this cube does not block your route. The installed exhibits supply their own collision.</p>
+<h2>The complete study</h2>
+<p>Put this <code>lesson.gd</code> on an empty <code>TransformStudy</code> at floor level, with zero rotation and unit scale. Leave several metres of clear approach space. The player already exists when the study enters the scene.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var player: Node3D
+var near_distance := 1.0
+var far_distance := 4.0
+var minimum := 0.25
+var turn_instead := false
+
+func _ready() -&gt; void:
+    assert(far_distance &gt; near_distance and near_distance &gt;= 0.0)
+    assert(minimum &gt; 0.0 and minimum &lt;= 1.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position.y = 0.5
+    player = get_tree().get_first_node_in_group(&quot;player_body&quot;) as Node3D
+    if player == null:
+        player = get_tree().get_first_node_in_group(&quot;em_walker&quot;) as Node3D
+
+func _process(_delta: float) -&gt; void:
+    if not is_instance_valid(player):
+        return
+    var separation := player.global_position - global_position
+    separation.y = 0.0
+    respond(separation.length())
+
+func respond(distance: float) -&gt; void:
+    var closeness := 1.0 - clampf((distance - near_distance) / (far_distance - near_distance), 0.0, 1.0)
+    if turn_instead:
+        cube.scale = Vector3.ONE
+        cube.position.y = 0.5
+        cube.rotation_degrees.y = 90.0 * closeness
+    else:
+        var factor := lerpf(1.0, minimum, closeness)
+        cube.rotation_degrees.y = 0.0
+        cube.scale = Vector3.ONE * factor
+        cube.position.y = factor * 0.5
+</code></pre>
+<p>The lookup selects the supplied XR body in group <code>player_body</code>, or the desktop museum walker in <code>em_walker</code>. These are named connections to the existing player. If neither exists, the cube remains at its starting pose; the script does not invent a player.</p>
+<p>Both positions in the subtraction are <strong>world positions</strong>. Taking the difference in one frame avoids confusing a local coordinate with a world coordinate. Setting its Y component to zero measures horizontal distance: crouching should not alter this study's response just by changing height.</p>
+<h2>Turn metres into a size</h2>
+<p>At four metres or farther, <code>closeness</code> is zero. At one metre or nearer, it is one. Halfway between, at 2.5 metres, it is one half. Subtracting the near distance shifts the range; dividing by its width gives a fraction; <code>clampf</code> bounds it; subtracting from one makes closer mean larger input.</p>
+<p><code>lerpf(1.0, minimum, closeness)</code> uses that input to shrink the cube from a one-metre side to a quarter-metre side. The mesh is centred on its origin. Moving its centre to half the current height keeps its bottom on the floor.</p>
+<p>Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. At the same distance, it gives the same size whether or not you have approached before. Trace kept earlier positions after the point moved on; this study keeps no record of earlier approaches.</p>
+<p>Compare that return with the lattice's retained cut elsewhere in this hall. Leaving does not put its missing cells back. This tutorial selects the reversible distance-to-transform relation; the lattice changes which cells remain. Both are visible in the hall.</p>
+<h2>Keep the input, change the response</h2>
+<p>Set <code>turn_instead</code> to <code>true</code>. The cube now keeps its size and turns from zero to 90 degrees around Y as you approach. At 2.5 metres it turns 45 degrees. One bodily relation can control different transforms.</p>
+<p>Return to shrinking and set <code>far_distance</code> to <code>6.0</code>. Predict where the response starts and where it reaches half its range. The start moves to six metres; halfway is now 3.5 metres, not three. Keep the near limit at one.</p>
+<p>Our one-body study responds immediately. The installed wall smooths movement and attends to neighbouring parts. Carry the distance-to-transform relation into a combined opening.</p></main></body></html>

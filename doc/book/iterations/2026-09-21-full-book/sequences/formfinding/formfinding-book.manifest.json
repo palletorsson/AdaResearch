@@ -1,0 +1,42 @@
+{
+  "captured_at": "2026-09-21T06:06:43.375850+00:00",
+  "base_commit": "158b23851faaef4e8b1c671c553ef4eec6ec2d55",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved.",
+  "sequence": "formfinding",
+  "sequence_sha256": "817e9cd013defeed8ceabc924d29e87b9e0c7b73d882a460d61ab7a287986f86",
+  "maps": [
+    {
+      "map": "FormFinding_Descent",
+      "path": "commons/maps/FormFinding_Descent/final.md",
+      "sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b"
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "path": "commons/maps/FormFinding_Catenary/final.md",
+      "sha256": "10a77ddaedbf1044fd4d7a6c56d10d14ae0eed55c73d589e622a26fa13b3daab"
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "path": "commons/maps/FormFinding_Relaxation/final.md",
+      "sha256": "e6dc5f028daa2703a6ca03165f9496fe0a3705a0f58f077f29ef5675206f296f"
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "path": "commons/maps/FormFinding_Equilibrium/final.md",
+      "sha256": "7a10f7826640b1ec4b3a21c0885142d56ece2c68760daf27335527aa50a7f480"
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "path": "commons/maps/FormFinding_Annealing/final.md",
+      "sha256": "47f2158ba9df6f9ac31ed1a86fa9265ff51f19d92b2fe3d2868ef286971b893f"
+    },
+    {
+      "map": "FormFinding_Forge",
+      "path": "commons/maps/FormFinding_Forge/final.md",
+      "sha256": "3741c4e456fc72e8b2d12d6a44db040564bdfd55e3cf2e96dd2f13ea34386409"
+    }
+  ],
+  "output_sha256": "166fa0e5897b4f37b139ef164919ab36617beef49e48ba7a10cd97142faa3113"
+}

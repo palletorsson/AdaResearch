@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "still: exact study mounted",
+      "passed": true
+    },
+    {
+      "name": "still: floor under study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: still",
+      "passed": true
+    },
+    {
+      "name": "translate: exact study mounted",
+      "passed": true
+    },
+    {
+      "name": "translate: floor under study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: translate",
+      "passed": true
+    },
+    {
+      "name": "turn: exact study mounted",
+      "passed": true
+    },
+    {
+      "name": "turn: floor under study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: turn",
+      "passed": true
+    },
+    {
+      "name": "scale: exact study mounted",
+      "passed": true
+    },
+    {
+      "name": "scale: floor under study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: scale",
+      "passed": true
+    },
+    {
+      "name": "rise: exact study mounted",
+      "passed": true
+    },
+    {
+      "name": "rise: floor under study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rise",
+      "passed": true
+    },
+    {
+      "name": "real walker outside keeps pickup",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pickup-before",
+      "passed": true
+    },
+    {
+      "name": "real museum walker collects by overlap",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pickup-after",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "hall": "Trans_Pre",
+  "observations": {
+    "rise_time_seconds": 1.0,
+    "scope": "Temporary exact-code studies in Trans_Pre; only the camera and study root are supplied. Installed exhibits unchanged.",
+    "station_local": [
+      9.5,
+      0.0,
+      13.5
+    ]
+  },
+  "passed": true,
+  "scope": "Exact printed program mounted temporarily in the real Endless Museum hall. Synthetic input; no permanent placement or headset claim."
+}

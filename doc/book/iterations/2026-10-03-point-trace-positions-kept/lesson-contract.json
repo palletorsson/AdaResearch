@@ -1,0 +1,38 @@
+{
+  "map": "Point_Trace",
+  "status": "author_review_pilot",
+  "inherits": [
+    "Point Zero: ready/process, variables, Label3D and str()",
+    "Point One: Vector3 position and value",
+    "Lines: subtraction, length, PointHandle and Segment"
+  ],
+  "introduces": [
+    "Array[Vector3]: ordered one-dimensional list of positions",
+    "append, index (including last entry), size",
+    "if and >=: admission by minimum separation",
+    "for/range: traverse neighbouring index pairs",
+    "pop_front: remove oldest when capacity is exceeded"
+  ],
+  "supplied": [
+    "TraceDrawing.clear and join: pooled segments and sample markers",
+    "PointHandle: desktop and XR Tools pickup, frozen release",
+    "Day Zero room, lighting and player"
+  ],
+  "learner_actions": [
+    "move, pause and inspect unchanged count",
+    "increase spacing from 0.08 to 0.25",
+    "follow three adjacent pairs through four entries",
+    "set capacity to 32 and displace the oldest position"
+  ],
+  "museum_relation": "Reduced continuous centre-position recorder; no grid snapping, nib offset, stroke separation or TraceData export",
+  "deferred": [
+    "Grid: assign kept positions to cells",
+    "whole-array copying and persistence",
+    "pen nib and multiple strokes",
+    "physics of the ramp ball"
+  ],
+  "coordinates_rewrite_pending": true,
+  "printed_code_matches_download": true,
+  "source_sha256": "6fa2a39c0b9cd8f2d42147abc43c2e8a01cdb29b446c92ddb04856d1c82dd33d",
+  "physical_headset_tested": false
+}

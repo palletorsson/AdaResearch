@@ -1,0 +1,149 @@
+{
+	"grid_ceiling": {
+		"height": 0.0,
+		"hidden_families": 4,
+		"lights": 0,
+		"low_y": 1000000000.0,
+		"mesh_instance_nodes": 0,
+		"omni_lights": 0,
+		"segments": 0,
+		"tile_size": 0.0,
+		"tiles": 0
+	},
+	"mode": "hide",
+	"museum_ceiling": {
+		"families": [
+			{
+				"instances": 60,
+				"name": "ArrisCeiling"
+			},
+			{
+				"instances": 42,
+				"name": "Ceiling"
+			},
+			{
+				"instances": 60,
+				"name": "ArrisCeiling"
+			},
+			{
+				"instances": 42,
+				"name": "Ceiling"
+			}
+		],
+		"high_y": 3.39999997615814,
+		"instances": 204,
+		"low_y": 2.94800003897399,
+		"mesh_instance_nodes": 0,
+		"nodes": 4
+	},
+	"overhead": [
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "Trim",
+			"parent": "Seg1_sainsbury-false-perspective-enfilade",
+			"plan_m2": 585.2,
+			"x": [
+				-0.1,
+				17.1
+			],
+			"y": [
+				0.0,
+				3.0
+			],
+			"z": [
+				33.9,
+				68.1
+			]
+		},
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "Trim",
+			"parent": "Seg0_sainsbury-false-perspective-enfilade",
+			"plan_m2": 585.2,
+			"x": [
+				-0.1,
+				17.1
+			],
+			"y": [
+				0.0,
+				3.0
+			],
+			"z": [
+				-0.1,
+				34.1
+			]
+		},
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "ArrisTrim",
+			"parent": "Seg1_sainsbury-false-perspective-enfilade",
+			"plan_m2": 510.2,
+			"x": [
+				1.0,
+				16.0
+			],
+			"y": [
+				0.0,
+				3.021
+			],
+			"z": [
+				34.0,
+				68.0
+			]
+		},
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "ArrisTrim",
+			"parent": "Seg0_sainsbury-false-perspective-enfilade",
+			"plan_m2": 510.2,
+			"x": [
+				1.0,
+				16.0
+			],
+			"y": [
+				0.0,
+				3.021
+			],
+			"z": [
+				0.0,
+				34.0
+			]
+		},
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "DoorHeads",
+			"parent": "Seg1_sainsbury-false-perspective-enfilade",
+			"plan_m2": 462.0,
+			"x": [
+				1.0,
+				15.0
+			],
+			"y": [
+				2.22,
+				3.0
+			],
+			"z": [
+				35.0,
+				68.0
+			]
+		},
+		{
+			"class": "MultiMeshInstance3D",
+			"name": "DoorHeads",
+			"parent": "Seg0_sainsbury-false-perspective-enfilade",
+			"plan_m2": 403.0,
+			"x": [
+				1.0,
+				14.0
+			],
+			"y": [
+				2.22,
+				3.0
+			],
+			"z": [
+				3.0,
+				34.0
+			]
+		}
+	]
+}

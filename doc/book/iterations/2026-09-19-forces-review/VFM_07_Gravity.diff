@@ -1,0 +1,11 @@
+--- before/commons\maps\VFM_07_Gravity\final.md
++++ commons\maps\VFM_07_Gravity\final.md
+@@ -19,7 +19,7 @@
+ 
+ Try REVERSE while the satellite is moving. Its velocity changes sign, its position stays, and the clock continues forward. In this isolated model it can retrace the path it has just made. The earlier spring with damping could not offer the same experiment merely by reversing velocity: resistance would keep dissipating motion. A return depends on what the update preserves.
+ 
+-Look again at the pink body. Why has it not moved?
++Look again at the pink body. Why has it not moved? Press **RULE** to inspect which body receives the acceleration.
+ 
+ ```gdscript
+ if mutual or i!=0:a[i] += pair_force / masses[i]

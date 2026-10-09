@@ -1,0 +1,530 @@
+{
+  "museum": "neue-nationalgalerie-free-plan",
+  "tile": [
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "4",
+      "4",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "0",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ]
+  ],
+  "h": 19,
+  "rooms": 0,
+  "artifacts": [
+    {
+      "token": "synthesis_stand",
+      "cell": [
+        2,
+        3
+      ],
+      "tile_cell": [
+        2,
+        3
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          2,
+          3
+        ]
+      },
+      "config": {
+        "subject": "dark_sphere",
+        "mode": "hero"
+      }
+    },
+    {
+      "token": "dark_sphere",
+      "cell": [
+        5,
+        3
+      ],
+      "tile_cell": [
+        5,
+        3
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "token": "persian_rug",
+      "cell": [
+        4,
+        4
+      ],
+      "tile_cell": [
+        4,
+        4
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          4,
+          4
+        ]
+      },
+      "config": {
+        "plinth": "0"
+      },
+      "offset": [
+        0.0,
+        0.025,
+        0.0
+      ]
+    },
+    {
+      "token": "ca_rule_explorer",
+      "cell": [
+        10,
+        5
+      ],
+      "tile_cell": [
+        10,
+        5
+      ],
+      "rotation": 270,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          10,
+          5
+        ]
+      },
+      "config": {
+        "study": "neighbours",
+        "rule": "90",
+        "speed": "4",
+        "plinth": "0",
+        "room": "ring"
+      },
+      "offset": [
+        0.0,
+        1.04,
+        0.0
+      ]
+    },
+    {
+      "token": "langton_swarm",
+      "cell": [
+        10,
+        9
+      ],
+      "tile_cell": [
+        10,
+        9
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          10,
+          9
+        ]
+      }
+    },
+    {
+      "token": "line_network_ca",
+      "cell": [
+        10,
+        12
+      ],
+      "tile_cell": [
+        10,
+        12
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          10,
+          12
+        ]
+      },
+      "config": {
+        "size": "2.0",
+        "study": "arrival"
+      }
+    },
+    {
+      "token": "rule110_computer",
+      "cell": [
+        10,
+        16
+      ],
+      "tile_cell": [
+        10,
+        16
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          10,
+          16
+        ]
+      }
+    },
+    {
+      "token": "ca_showcase",
+      "cell": [
+        1,
+        17
+      ],
+      "tile_cell": [
+        1,
+        17
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_Introduction",
+        "cell": [
+          1,
+          17
+        ]
+      }
+    }
+  ],
+  "rejected": [],
+  "room": {
+    "w": 13,
+    "h": 19
+  },
+  "apron": 0,
+  "interior_count": 134,
+  "ordered": true,
+  "pages": [],
+  "sequence": "cellularautomata",
+  "pearl": "ca introduction",
+  "pearl_index": 0,
+  "map": "CA_Introduction",
+  "pearls_total": 8,
+  "authored": "map",
+  "source": "em_map_halls: the map IS the hall",
+  "_ruling": {
+    "src_w": 13,
+    "src_h": 19,
+    "rotated": false,
+    "pad": 0,
+    "pad_closed": false,
+    "ring": null
+  }
+}

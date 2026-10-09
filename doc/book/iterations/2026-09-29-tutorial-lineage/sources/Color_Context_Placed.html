@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Context_Placed · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Context_Placed">← Tutorial lineage</a></p><h1>Color Context Placed</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Context_Placed/final.md">Raw captured source</a></p><pre># Before we ask what colour is
+
+&lt;!-- @chroma_stack --&gt;
+
+Colour has been here all along. It was in the rooms before we gave it a chapter. Now walk into this long hall and look at what we have brought with us.
+
+A block, a sphere, a wedge: the primitives. Their positions, turns and proportions: transformation. One piece followed by another, each with an address in a list: arrays. The columns gather these earlier lessons into bodies we can walk around. The turns are already over. The movement is yours.
+
+On the disco floor, you held an arrangement before advancing to the next. Here, the choices stand beside one another. One column can remain in view while you look at its neighbour.
+
+![The columns seen from the entrance aisle inside the museum.](/book-review/doc/book/figures/Color_Context_Placed/colour-hall.png)
+
+Begin with the four columns near the entrance. Each has the same five pieces in the same positions. One ochre covers the first from foot to crown. Beside it, the blocks are red and the round forms blue. Follow a block from one column to the other. Does it still belong to the whole in the same way?
+
+Follow the red past the blue sphere to the next block. The sphere keeps those two red parts apart, yet your eye can bring them together. The parts touch in one order; colour lets you gather them in another.
+
+The third column assigns colour by height. A block near the floor and a block near the top receive different colours. Sharing a shape no longer gives them the same colour. In the fourth, each colour is calculated from the one below: the hue moves halfway around the hue circle, then halfway again. Ochre, blue, ochre again. The alternation is held in the column, for your eye to climb. A neighbour has become an input.
+
+![Four native museum views of the same five forms under four colour rules.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/four-colour-rules.png)
+
+*The four columns near the entrance. Their local geometry is the same; each rule gives their pieces a different colour assignment.*
+
+The pieces are stored in an array. The builder begins each turn through it like this:
+
+```gdscript
+for i in range(elements.size()):
+    var e: Dictionary = elements[i]
+```
+
+`i` is the address; `e` is the piece found there. The rest of the loop builds its shape, assigns its colour and places it above the previous piece. An array has an order. The builder makes that order climb. We could read the same list into another arrangement; here, *next* becomes *above*.
+
+Further down, the colour assignment stays while the alphabet changes. Blocks and round forms give way to cylinders, a ring and a cone, then to blocks and wedges. The cone and wedge share yellow. Their grouping is a choice in the code. Nothing in a triangle requires yellow; here, yellow helps us recognise a relation someone has chosen to make.[^bauhaus]
+
+Now find the four columns made from blocks and wedges. One keeps its levels aligned. In the next, each level has been turned another twenty-two and a half degrees. The third narrows successive levels across X and Z. The fourth combines the turns and narrowing. Follow the yellow through the changing silhouette. What remains easy to recognise?
+
+The first four columns kept their geometry while the colour assignment changed. These turned and narrowed stacks keep their colour assignment while the geometry changes. In each case, a material receives its base colour through one small line:
+
+```gdscript
+m.albedo_color = c
+```
+
+That gives the surface a base colour for the renderer to work with. Illumination, the surrounding scene and the display still participate in its appearance. The assignment is precise; it gives us something we can return to when the appearance raises a question.
+
+Colour is deeply scientific and deeply associative. We can ask how light, surfaces and vision make a colour available to us, and how to measure it under specified conditions. We can also find ourselves remembering a room, wanting a garment, recognising a warning. Both kinds of attention can begin at the same patch of colour. A value in the material gives us a handle on the construction. What the colour calls up may lead elsewhere.
+
+The next four stacks loosen the proportions. A large red sphere meets a small red sphere, with a dark cap between them. The red lets you follow a relation across a difference in size. Beside it, thin discs interrupt heavier forms. A narrow stem carries a broad crown. Your eye may supply a weight that the code has not calculated: these objects are fixed in place, with no simulation of balance.
+
+Further across, slabs turn and pieces leave the centre. It is still a stack, but being above no longer means sharing an axis. In the fourth construction, pink, teal, yellow and blue accompany wedges, discs, a block and round beads. Colour is now chosen piece by piece. What might the same forms become in another palette?
+
+The vocabulary is familiar. The combinations are beginning to exceed what we first asked it to do.
+
+&lt;!-- @color_dna_stack --&gt;
+
+Four taller columns carry their names on their plates. Each plate says what its column borrows; the shapes and colours are there to inspect even when the name is new.
+
+Recognition adds another kind of company. A palette can arrive with memories of paintings, furniture, toys or interiors. Those associations may draw your attention to a colour before you begin to measure it. They may also make a combination feel familiar so quickly that you stop looking. Stay with one of the columns a little longer. Find a detail its name did not tell you to expect.
+
+The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. Stripes disappear at one edge and enter at the other. The object has not turned.
+
+![Two views around the fixed rainbow column, with its broad cap overhead.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/around-the-rainbow.png)
+
+*The same column seen from two sides. The stripes keep their places while their arrangement in the view changes.*
+
+This column began as a table-sized study, 72 centimetres tall; here it is raised to 6.2 metres. Thirty stripes take their colours from an array of six entries:
+
+```gdscript
+var col_idx: int = i % stripe_colors.size()
+var col_val = stripe_colors[col_idx]
+```
+
+The remainder sends the index back to the start of the palette after every six stripes. The six-colour order repeats five times around the shaft. Arrays and transformations have brought us here again: a list of colours, repeated pieces, positions and turns around a circle.
+
+If a Pride flag, a sweet wrapper or a fairground comes to mind, the array has not stored that memory. The arrangement meets something you bring. Someone else may arrive at another association, or stay with the stripes. Learning the rule gives us more to notice in that meeting.
+
+The broad cap once belonged to a table-sized construction. Now it is overhead. A change in height has changed its relation to your reach. At the end of the hall, that cap carries another stack. The rainbow shaft and eight-piece Bauhaus crown become a 7.2-metre column. Beside it, Memphis blocks, a striped shaft and red beads rise to 7.4 metres. Whole configurations become parts of another body.
+
+The saved description of a stack is what this project calls its DNA. Later we will open the rules that turn such a description into a body; here we can walk among its relatives.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+&lt;!-- @reference_landscape --&gt;
+
+A cone returns as a tree. Three cones become its tiers; forty-eight places become a forest. The little pavilion shares their vocabulary. Change the height and the same sites seem to belong to another scale of world.
+
+The supplied Alex McLeod image offered a way into this abundance. Here it takes surprisingly few kinds of part to make somewhere you want to look into. Gold, water and a pastel arch invite a belief that the geometry alone never required. Keep the sites and alter one proportion. Notice when a collection begins to feel like a place.
+
+&lt;!-- @ --&gt;
+
+We have brought primitives, transformations and arrays into composition. They let us specify what is built, keep a choice, vary it and share the construction with someone else. Colour enters that structure and opens further relations: between parts, between a surface and its surroundings, between something seen and something remembered.
+
+We can begin with those relations before we know how to account for them. In the next hall, keep the surface and move the light. What happens to the colour then?
+
+[^bauhaus]: The assignment draws on [Kandinsky’s Bauhaus colour teaching](https://www.bauhaus.de/en/sammlung/highlights/204_unterricht/444): yellow triangle, red square, blue circle. Our five-form stack loosely recalls Alma Siedhoff-Buscher’s building games for the [1923 Haus am Horn](https://www.klassik-stiftung.de/service/presse/pressemitteilung/bauhaus-welt-fuer-kinder/); it does not reproduce their set of pieces.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Context_Placed/tutorial.md">Raw captured source</a></p><pre># Add colour to the construction
+
+This opening gathers primitives, transformations and arrays already encountered. Follow the current final.md: the tutorial progression is comparison between fixed objects, with the visitor supplying movement.
+
+1. Recognise the same five-piece column under four colour assignments. Read the actual elements array: an index supplies the next entry, while the construction loop gives that ordering an upward direction. Separate geometry from how its pieces receive colour.
+2. Keep colour by shape while changing the primitive alphabet. A category in code can group a cone and a wedge without making them identical.
+3. Keep the cut alphabet and its colour assignment while changing static pose. Successive levels turn around Y, narrow across X/Z, or combine both. Their heights remain unchanged.
+4. Compose richer stacks from the same vocabulary: unequal heights, broad discs, small beads, sideways offsets and chosen colours. These fixed sculptures do not simulate balance.
+5. Read art and design DNA as composed choices: proportion, ordering and palette. The gallery configurations are the actual source data.
+6. Inspect the rainbow pedestal shaft raised to 6.2 m with its broad cap. Thirty stripes use six palette entries: i % stripe_colors.size() repeats the colour order five times. Walk around it and relate the visible pattern to array indexing and rotation. The changed height also changes the form&#x27;s relation to your reach.
+7. Combine whole configurations into taller stacks: rainbow plus Bauhaus; Memphis plus rainbow plus beads.
+
+Relevant implementation: `commons/artifacts/chroma_stack/chroma_stack.gd` and `commons/artifacts/color_dna_stack/color_dna_stack.gd`. The code sets these transformations during construction and does not animate them. The three coordinates of a material colour are not a complete account of its appearance; later halls investigate that relation through light, surfaces and displays.
+
+The earlier tutorial&#x27;s hypothetical perceived() function is archived with the previous draft. It is not an implemented model of the viewer&#x27;s perception and should not be presented as one.
+
+The prose introduces colour science through a reproducible assignment and the conditions of appearance, while leaving full accounts of light, surface and perception for the following halls. Memories and cultural associations are invited as possibilities, not coded outcomes or universal colour meanings.
+
+## Shared book illustrations — 23 September
+
+The current chapter uses native renders of the four placed opening columns and two views of the fixed rainbow column. The four-rule comparison keeps the same orthographic camera offset relative to each artifact; the source meshes and local transforms match. Existing illumination and backgrounds vary across the hall, so the photographs compare colour assignment in place, not calibrated display colour. The rainbow cameras are 1.65 m above the column base and the object remains fixed between views. No new viewer controls or production geometry were added.
+
+Figures and exact manuscript comparison: `doc/book/iterations/2026-09-23-colour-gathering/`. The focused isolated-museum run checks 24 conditions, including the four assignments and the retained 6.2/7.2/7.4 m heights. Existing 17 September route evidence is historical; no new walking, headset or learner trial is claimed.
+
+
+## Another order among the same parts — 28 September 2026
+
+The writing now connects Disco&#x27;s held states to the simultaneous colour assignments standing in this hall. The opening follows the red blocks across the intervening blue sphere, then distinguishes shape, height and neighbour as different inputs to an assignment. The ochre/blue alternation in the neighbour column is held spatially rather than advanced by a clock. No new algorithm, geometry or control is implied.
+
+The builders and map still match the 23 September native evidence. The only difference in the tested studies.json is the rainbow plate&#x27;s already-authored wording: a source ID was replaced with the table-sized study&#x27;s 72 cm height. Its parts and configuration are unchanged. The existing four-rule and rainbow figures remain dated views, not new captures or calibrated-colour measurements. The scientific/associative paragraph, all three code excerpts, the taller gallery stacks and the illumination handoff remain unchanged.
+
+Comparison, source audit and current reading: doc/book/iterations/2026-09-28-colour-another-order/.
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Return: A world from a cone
+
+Change the height factor; keep the 48 sites and three cones per tree. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses array, transform, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`landscape`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:reference_landscape --&gt;
+
+### One source change: A world from a cone
+
+In build(), reduce the maximum height from 1.85 to 1.25. Leave the seeded tree_sites generation and tier count intact. Random shape variation is supplied at this point in the spine.
+
+```gdscript
+var height := lerpf(0.28, 1.25, amount) * random.randf_range(0.65, 1.15)
+```
+
+Source: `commons/artifacts/reference_studies/landscape.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Context_Placed/technical.md">Raw captured source</a></p><pre># A world from a cone
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Installed application: A world from a cone
+
+`reference_landscape` occupies a new adjoining bay, after the existing encounters. Cell [11, 71], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/landscape.tscn`. Original response to Alex McLeod; no claim of exact reconstruction.
+
+Change the height factor; keep the 48 sites and three cones per tree. Reuses array, transform, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Context_Placed/intent.md">Raw captured source</a></p><pre># Colour joins the primitives
+
+The entry to Color gathers three earlier capabilities: primitives supply form; transformations place, turn and proportion it; arrays hold order and repeated assignments. These are pedagogical preconditions for the investigation, not a claim that colour was absent before this chapter. Begin with controlled comparisons, then let richer compositions open scientific and associative questions together.
+
+Palle&#x27;s 17 September direction replaces the repeated four-by-two ending with more gallery DNA and lengthens the hall. The hall is now 23 × 61 m. Fifteen chroma_stack studies lead into eight color_dna_stack studies. The Kraš rainbow table DNA becomes a 6.2 m column; the final two combinations reach 7.2 and 7.4 m. The central route remains open.
+
+The gallery is compositional material: use its actual configurations, then expose the changes of height and combination. Art references do not make these replicas. Fixed shapes do not claim to balance under gravity. Their scale makes the relation to the visitor&#x27;s body available for inspection.
+
+Book and primary order: chroma_stack, color_dna_stack. Then continue to Color_Flashlight and investigate illumination. This opening need not explain all of colour.
+
+Previous versions, the removed translation studies and deferred filter/drum/Life passages remain archived. Current evidence: doc/space/color-dna-columns-2026-09-17/.
+
+Editorial direction, 17 September: colour is deeply scientific and deeply associative. Ground this in actual construction and observation: the indexed stack, material assignment and six-colour palette repeated around thirty stripes. Associations belong to a situated reader; the prose must not prescribe a universal meaning for a hue or turn an RGB value into a complete model of perception. The next hall changes illumination.
+
+23 September: the return from the disco floor now leads directly into simultaneous colour choices. Follow red across the intervening blue sphere to distinguish physical contact from the group that colour invites the eye to make. Preserve the full progression and richer gallery stacks. Two shared native figures make the existing comparisons available on the page; no new artifact is needed for this pass.
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Installed application: A world from a cone
+
+`reference_landscape` occupies a new adjoining bay, after the existing encounters. Cell [11, 71], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/landscape.tscn`. Original response to Alex McLeod; no claim of exact reconstruction.
+
+Change the height factor; keep the 48 sites and three cones per tree. Reuses array, transform, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Context_Placed/critical.md">Raw captured source</a></p><pre># A world from a cone
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Installed application: A world from a cone
+
+The supplied Alex McLeod image offered a way into this abundance. Here it takes surprisingly few kinds of part to make somewhere you want to look into. Gold, water and a pastel arch invite a belief that the geometry alone never required. Keep the sites and alter one proportion. Notice when a collection begins to feel like a place.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Context_Placed/artifacts.md">Raw captured source</a></p><pre># Colour joins the primitives — current artifacts
+
+23 individual columns in a 23 × 61 m hall. Enter (11,2), follow increasing Z, leave (11,58). All plates face the entrance; later labels stay at 1.2 m despite the increasing height.
+
+| Encounter | Row | Placements |
+|---|---|---|
+| Same assembly, four colour assignments | 6 | Four chroma_stack |
+| Three primitive alphabets | 12 | Three chroma_stack |
+| Aligned, turned, narrowed, combined | 18 | Four chroma_stack |
+| Beads, discs, offsets, festival | 26 | Four chroma_stack |
+| Mondrian, Albers, Memphis, tall Bauhaus gallery studies | 35 | Four color_dna_stack, 5.0–5.6 m |
+| Blues and the elongated Kraš rainbow shaft | 44 | Two color_dna_stack, 6.0 and 6.2 m |
+| Rainbow crown and Memphis / stripes / beads | 53 | Two color_dna_stack, 7.2 and 7.4 m |
+
+## Primary families
+
+`chroma_stack` carries the initial comparisons and four richer compositions. `color_dna_stack` loads actual gallery JSON snapshots through the existing primitive_stack renderer. Seven source configurations make eight studies. The final two combine multiple configurations. These are static constructions, with convex collision per gallery mesh, not a balance simulation.
+
+The two chroma_translation placements (four copies each) have been removed from this hall at Palle&#x27;s request. Their script remains available; their map positions and prose are in the before/ archive of `doc/space/color-dna-columns-2026-09-17/`.
+
+Gallery source IDs and hashes are in that folder&#x27;s references.json. The art-labelled studies are adaptations, not replicas of historical paintings or furniture.
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Installed application: A world from a cone
+
+`reference_landscape` occupies a new adjoining bay, after the existing encounters. Cell [11, 71], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/landscape.tscn`. Original response to Alex McLeod; no claim of exact reconstruction.
+
+Change the height factor; keep the 48 sites and three cones per tree. Reuses array, transform, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Context_Placed/summary.md">Raw captured source</a></p><pre># A world from a cone
+
+
+&lt;!-- study-spine:reference_landscape --&gt;
+
+## Installed application: A world from a cone
+
+`reference_landscape` occupies a new adjoining bay, after the existing encounters. Cell [11, 71], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/landscape.tscn`. Original response to Alex McLeod; no claim of exact reconstruction.
+
+Change the height factor; keep the 48 sites and three cones per tree. Reuses array, transform, colour; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Context_Placed/blurb.md">Raw captured source</a></p><pre>Colour has been here all along. Primitives, transformations and arrays have given us enough to build, repeat a choice and look again. Walk among the columns: a precise assignment can also awaken a memory, a desire or a question.
+</pre></section></body></html>

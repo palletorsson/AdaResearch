@@ -1,0 +1,36 @@
+{
+  "id": "Array_Patterns",
+  "title": "Give an address physical dimensions",
+  "storyboard": "Enter the tunnel with its stated fixed four-by-four source; earlier edits have not travelled here. Bring wrapped lookup and named frames. Follow one marked floor address to its source, then derive the address from a position using a declared origin, surface axes and cell width in metres. On the right wall, columns run along the passage and rows descend; they are not the floor’s directions. The tunnel, collision, shader and face selector remain supplied. Predict that changing a cell from forty to sixty centimetres changes a four-cell motif from 1.6 to 2.4 metres, without enlarging the passage. Inspect the corner where counts restart. Carry the conversion and its units; importing a learner motif remains optional future work.",
+  "storyboard_short": "Use fixed-source tunnel; no preceding-edit transfer. Reuse wrapped read/reference frames. Teach position→surface row/column with named origin/axes and metre cell width. Predict .4→.6 m cells means 1.6→2.4 m motif. Wall directions differ; corners restart. Supply tunnel/collision/shader/selector. Carry explicit surface conversion. Distinguish cell width from whole-repeat width; optional import remains unbuilt.",
+  "mode": "deepen",
+  "brings": [
+    "motif sampling",
+    "reference frames"
+  ],
+  "learns": [
+    "physical position to surface address",
+    "cell width versus whole motif width"
+  ],
+  "carries": "A position-to-address conversion with explicit origin, axes and metre units.",
+  "supplied": [
+    "tunnel and collision",
+    "face selector and marker"
+  ],
+  "artifact_refs": [
+    "pattern_tunnel_machine",
+    "pattern_tile_brick"
+  ],
+  "review_note": "The tunnel intentionally uses a fixed comparison source. Teach it as such rather than requiring an import to justify the hall. Other stations quote whole-repeat width; this control quotes one source cell. Check the selected face’s actual origin and axes before expanding code.",
+  "independent_check": "Predict the motif width for another cell width, then explain how one right-wall address maps to the source without using the floor axes.",
+  "prior_maps": [
+    "Point_Coordinates",
+    "Tutorial_Pattern",
+    "Tutorial_Tiling_Walls"
+  ],
+  "source_refs": [
+    "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd",
+    "commons/artifacts/pattern_tunnel/pattern_tunnel.gdshader"
+  ],
+  "change_reason": "Give the same number an unambiguous unit and meaning."
+}

@@ -1,0 +1,66 @@
+--- before/Color_Paint/final.md
++++ current/Color_Paint/final.md
+@@ -2,17 +2,21 @@
+ 
+ <!-- @ball_painting_demo -->
+ 
+-A coloured ball is already moving across the canvas. Wait before taking anything. The line changes direction, and the pigment changes colour as it travels. A painting is underway without your hand.
++A spray can is already moving across the canvas. Wait before taking anything. The line changes direction, and the pigment changes colour as it travels. A painting is underway without your hand.
+ 
+-At the grid, a colour waited at an address until another write replaced it. Here, look back at a place the ball has left. Something of its passage remains. Something is already changing.
++At the grid, a colour waited at an address until another write replaced it. Here, look back at a place the nozzle has left. Something of its passage remains. Something is already changing.
+ 
+-Thirty pigment balls wait on the low tray. Pick one up and aim it at the canvas. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish. Release the ball. It returns to its place, and your marks stop arriving. The other painter continues.
++Thirty spray cans wait on the low tray. Pick up a colour, aim the nozzle at the canvas and hold the trigger. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish.
++
++Bring the nozzle closer. The mark gathers into a smaller area. Draw back and the same colour spreads more thinly. Hold still for a moment: the patch deepens. Movement is only one way to make a difference here. Staying also leaves more behind.
++
++Release the trigger. Your marks stop arriving while the other painter continues. Let go of the can and it returns to its place.
+ 
+ Which part of the image can you still call yours?
+ 
+-![The same museum canvas before pickup, during a second gesture, after release and a little later.](/book-review/doc/book/iterations/2026-09-23-paint-shared-memory/the-surface-keeps-working.png)
++![Spray cans on the tray beside the shared painting surface inside the museum.](/book-review/doc/book/iterations/2026-09-28-paint-spray-cans/shared-canvas.png)
+ 
+-*A pigment ball is held and moved across the automatic line, then released. The ball returns to the tray while the painting continues to change.*
++*Close and distant deposits, then a gesture across the automatic path. Thirty cans offer colours; the distance of the hand changes how each colour arrives.*
+ 
+ The canvas has its own addresses. `u` and `v` measure position across the surface, each from zero at one edge to one at the other. The automatic painter supplies both coordinates:
+ 
+@@ -20,27 +24,27 @@
+ var uv := Vector2(0.5+0.43*sin(elapsed*0.71),0.5+0.4*sin(elapsed*1.13+0.6))
+ ```
+ 
+-Two oscillations give the automatic brush its position. Their rates differ. Follow one turn of the line and then another: neither coordinate alone describes the gesture you see. Its hue changes with elapsed time too. The moving ball is the visible companion of this calculation; no collision is needed for its paint to arrive.
++Two oscillations give the automatic brush its position. Their rates differ. Follow one turn of the line and then another: neither coordinate alone describes the gesture you see. Its hue changes with elapsed time too. The moving can follows this calculation; its paint is placed directly on the surface.
+ 
+-Your ball takes another route. A ray finds the canvas you are aiming at. The hit becomes a position on that surface, then a pair of coordinates between zero and one. The canvas is four metres wide and two and a half high. Those proportions matter: assuming a square would quietly move your mark away from where you aimed.
++The can in your hand takes another route. A ray leaves the nozzle and finds the canvas you are aiming at. The hit becomes a position on that surface, then a pair of coordinates between zero and one. The canvas is four metres wide and two and a half high. Those proportions matter: assuming a square would quietly move your mark away from where you aimed. Tilt the can and its round footprint stretches across the surface.
+ 
+-Both routes reach the same drawing operation.
++Both routes reach the same spray operation.
+ 
+ ```gdscript
+-surface.draw_line(previous,uv,color,12,256)
++surface.draw_spray(hit, -normal, 0.06, color, 1.0 - exp(-7.0 * deposit_time), strokes)
+ ```
+ 
+-That is the automatic caller: brush radius twelve pixels, positions snapped to 256 divisions along each axis. The manual balls carry their own brush sizes and snap resolutions. Try another ball. Colour changes, but it is not the only difference in your hand. The apparently continuous movement passes through a finite choice of positions, as the drawn line did in Trace.
++That is the automatic caller. It leaves a soft patch with a radius of six centimetres. Your nozzle makes a patch whose radius depends on its distance from the canvas. The shader scatters its coverage into grain, thickest near the centre. One deposit is partly transparent; another can cover more of what was there. The apparent mist is still an arrangement of pixels.
+ 
+-The wet canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, shifts the sampling position, and fades the result toward white. The surface remembers by becoming another image. It does not preserve a list of gestures that can be retrieved intact.
++The canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, allowing a little spreading, downward drift and fading toward the ground colour. The surface remembers by becoming another image. It does not preserve a list of gestures that can be retrieved intact.
+ 
+ ```glsl
+-vec4 color = mix(vec4(1.0), prev_color, dissipation);
++color = mix(ground_color, prev_color, pow(dissipation, step_scale));
+ ```
+ 
+-White enters the work again. It is the direction of forgetting in this particular simulation. We could ask for another ground, another rate of fading, another way for two colours to meet. None is the natural behaviour of code. Here we can point to the line that makes the decision.
++Here the ground is white. It enters the work again as the direction of forgetting in this particular simulation. We could ask for another ground, another rate of fading, another way for two colours to meet. None is the natural behaviour of code. Here we can point to the line that makes the decision.
+ 
+-The automatic brush advances by elapsed time. The wet surface updates with rendered frames. Even their clocks differ. A slower rendering pace can change how much the image has faded during the same time on your watch. The computer's ability to keep up participates in what the painting becomes.
++The nozzle releases separate deposits, and the surface becomes another image at each rendered frame. Elapsed time controls their strength, but the computer still has to make each image. Sweep quickly and you may find spaces between the marks. Even this soft edge has a resolution.
+ 
+ <!-- @albers_wall_gallery -->
+ 

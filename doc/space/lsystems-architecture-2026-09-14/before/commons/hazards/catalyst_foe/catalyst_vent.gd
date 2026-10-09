@@ -1,0 +1,339 @@
+# @identity
+# essence: vent(rate, wave_size) -> [CatalystFoe ...] -- a corruption seam in the biome that emits foes
+# desire: to be the spawn source of the catalyst tower-defense game in VR -- a place the angry come from, visible from far away
+# critical_parameter: emit_interval_s + wave_size -- how fast and how many foes; once wave is spent, the vent goes quiet
+# triggers: _physics_process() ticks the timer; emits one CatalystFoe on schedule until wave_size is reached; player can transform foes after they leave the vent
+# emerges: a column of grey orbs marching one cell at a time toward the player -- the tower-defense rhythm
+# needs: CatalystFoe scene [has at sibling]; world ref to add foes to [has via parent]; tall pillar visual so the vent reads at any camera angle [has]
+# relationships: mirrors the e:RATE:WAVE token in /editor; the third-person catalyst loop in VR; pairs with catalyst_foe
+# truth: the vent is not malicious -- it is the biome leaking; the angry are made of the same biome the player walks on.
+
+# catalyst_vent.gd
+# Spawn point for biome-borne foes. Periodically emits CatalystFoe
+# bodies up to wave_size, then goes quiet. The visual is a tall grey
+# pillar so authors can see vent placement from any camera angle.
+extends Node3D
+class_name CatalystVent
+
+# Verbose emit logging. Off by default — flip on locally when diagnosing
+# vent rate / wave size / spawn position issues.
+const DEBUG_LOG: bool = false
+
+const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
+
+# ── Tunables ─────────────────────────────────────────────────────────
+# All four can be overridden per-placement via apply_grid_config / token
+# config. See README for the full grammar.
+@export var emit_interval_s: float = 2.0    # seconds between emissions
+@export var wave_size: int = 5               # max foes this vent emits
+@export var start_delay_s: float = 5.0       # warmup AFTER catalyst is armed
+@export var require_catalyst_armed: bool = true  # block emissions until player has the bracelet
+@export var pillar_height: float = 4.0       # visual only
+# Personality stage at which spawned foes start. Maps in early curriculum
+# sequences (Lab phase) seed "foe"; later sequences seed "wary" / "neutral"
+# / "curious" to match the creature personality arc. Accepts the same
+# names CatalystFoe.apply_grid_config takes: foe / wary / neutral /
+# curious / friend.
+@export var initial_state: String = "foe"
+# Optional foe-mode seed for every foe this vent spawns (goo / transport /
+# swarm / drainfriend / chroma / wave / fractal / branch — see
+# CatalystFoe.FoeMode). Empty = leave each foe on its own default (GOO).
+# Set per-placement via the e:RATE:WAVE:DELAY:KIND utility token or
+# apply_grid_config {"foe_mode": ...}.
+@export var default_foe_mode: String = ""
+# Optional critter-stage pin (soft_stages order) threaded to every spawned
+# foe; -1 = unset (each foe asks HazardManager itself). See
+# critter_morphology.gd for the stage table.
+@export var critter_stage: float = -1.0
+
+const CritterMorphology := preload("res://commons/hazards/catalyst_foe/critter_morphology.gd")
+const SequenceBinding := preload("res://commons/hazards/catalyst_sequence_binding.gd")
+
+# Sequence binding for the brood: when non-empty, the vent resolves its
+# spawned foes' kind from this sequence's binding table entry ("auto" =
+# the sequence running at first emit). Set via `sequence:` config or the
+# `e:RATE:WAVE:DELAY:auto` utility token. Explicit default_foe_mode wins.
+@export var bind_sequence: String = ""
+
+var _emitted: int = 0
+var _timer: float = 0.0          # accumulates dt
+var _started: bool = false       # flips true once start_delay elapses
+var _live_count: int = 0
+var _wave_mult_applied: bool = false
+
+# Lease wind-down — the vent is the catalyst's counterpart, so when the
+# timed lease returns the catalyst to its pedestal, the vent goes quiet
+# too (remaining wave paused, visual dims). A re-lease (pedestal
+# re-pickup) resumes the wave. Vents in maps with no lease never see
+# lease_started, so their behavior is untouched.
+var _lease_seen: bool = false
+var _lease_paused: bool = false
+var _dim_mats: Array[StandardMaterial3D] = []
+var _dim_originals: Array[float] = []   # matching emission/alpha energies
+
+
+## The "many" critter stage (CA onward) doubles this vent's wave. Applied
+## lazily on the first physics tick so play-time progression decides,
+## not scene-load order.
+func _apply_stage_wave_mult() -> void:
+	if _wave_mult_applied:
+		return
+	_wave_mult_applied = true
+	var order: float = critter_stage
+	if order < 0.0:
+		var hm: Node = get_node_or_null("/root/HazardManager")
+		if hm != null and hm.has_method("get_current_stage_order"):
+			order = float(hm.get_current_stage_order())
+		else:
+			return
+	var mult: int = int(CritterMorphology.stage_for(order).get("wave_mult", 1))
+	if mult > 1:
+		wave_size = wave_size * mult
+
+
+func _ready() -> void:
+	add_to_group("catalyst_vent")
+	_build_visual()
+	_connect_lease()
+
+
+# Listen to the lease clock (autoload). Guarded so probe/test scenes
+# without the manager keep working.
+func _connect_lease() -> void:
+	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
+	if mgr == null or not mgr.has_signal("lease_started"):
+		return
+	mgr.lease_started.connect(_on_lease_started)
+	mgr.lease_ended.connect(_on_lease_ended)
+
+
+func _on_lease_started(_seconds: float) -> void:
+	_lease_seen = true
+	if _lease_paused:
+		_lease_paused = false
+		_set_wound_down(false)
+
+
+func _on_lease_ended() -> void:
+	if not _lease_seen:
+		return
+	_lease_paused = true
+	_timer = 0.0
+	_set_wound_down(true)
+
+
+func _set_wound_down(down: bool) -> void:
+	for i in _dim_mats.size():
+		var mat: StandardMaterial3D = _dim_mats[i]
+		if mat == null:
+			continue
+		if mat.emission_enabled:
+			mat.emission_energy_multiplier = _dim_originals[i] * (0.15 if down else 1.0)
+		else:
+			var c: Color = mat.albedo_color
+			c.a = _dim_originals[i] * (0.3 if down else 1.0)
+			mat.albedo_color = c
+
+
+func _build_visual() -> void:
+	# Tall translucent grey pillar — visible from any angle, reads as
+	# "this is where the angry come from".
+	var pillar := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 0.18
+	cyl.bottom_radius = 0.30
+	cyl.height = pillar_height
+	pillar.mesh = cyl
+	pillar.position = Vector3(0, pillar_height * 0.5, 0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.61, 0.64, 0.69, 0.30)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	pillar.material_override = mat
+	add_child(pillar)
+	_dim_mats.append(mat)
+	_dim_originals.append(mat.albedo_color.a)
+	# Halo at base
+	var halo := MeshInstance3D.new()
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.34
+	torus.outer_radius = 0.46
+	halo.mesh = torus
+	halo.position = Vector3(0, 0.04, 0)
+	var halo_mat := StandardMaterial3D.new()
+	halo_mat.albedo_color = Color(0.61, 0.64, 0.69, 0.55)
+	halo_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	halo_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	halo.material_override = halo_mat
+	add_child(halo)
+	_dim_mats.append(halo_mat)
+	_dim_originals.append(halo_mat.albedo_color.a)
+	# Dark orb at cube top
+	var orb := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.36
+	sphere.height = 0.72
+	orb.mesh = sphere
+	orb.position = Vector3(0, 0.45, 0)
+	var orb_mat := StandardMaterial3D.new()
+	orb_mat.albedo_color = Color(0.10, 0.11, 0.14)
+	orb_mat.emission_enabled = true
+	orb_mat.emission = Color(0.63, 0.65, 0.69)
+	orb_mat.emission_energy_multiplier = 0.55
+	orb.material_override = orb_mat
+	add_child(orb)
+	_dim_mats.append(orb_mat)
+	_dim_originals.append(orb_mat.emission_energy_multiplier)
+
+
+func _physics_process(delta: float) -> void:
+	_apply_stage_wave_mult()
+	if _emitted >= wave_size:
+		return
+	if _lease_paused:
+		return
+	# Wait until the player has actually picked up the catalyst before
+	# starting the warmup. The catalyst body adds itself to group
+	# "catalyst" and sets _absorbed=true on grab. Until then, the
+	# warmup timer doesn't even tick — vent stays silent.
+	if not _started and require_catalyst_armed and not _is_catalyst_armed():
+		return
+	_timer += delta
+	# Warmup — first emission waits for start_delay_s (after the
+	# bracelet is armed), subsequent ones wait for emit_interval_s.
+	if not _started:
+		if _timer < start_delay_s:
+			return
+		_started = true
+		_timer = 0.0
+		_emit_one()
+		return
+	if _timer < emit_interval_s:
+		return
+	_timer = 0.0
+	_emit_one()
+
+
+# Returns true if any BecomingCatalyst body is in absorbed state.
+# Implemented as a scene-tree lookup (no autoload dependency) so it
+# works in test scenes too.
+func _is_catalyst_armed() -> bool:
+	for n in get_tree().get_nodes_in_group("catalyst"):
+		if n.get("_absorbed") == true:
+			return true
+	return false
+
+
+# Resolve the brood's kind from the bound sequence. Lazy (called per
+# emit) so AdaSceneManager has its sequence data by the time we ask;
+# keeps retrying while no sequence is resolvable, settles once one is.
+func _resolve_brood_kind() -> void:
+	if bind_sequence.is_empty() or not default_foe_mode.is_empty():
+		return
+	var seq: String = SequenceBinding.resolve(bind_sequence, get_tree())
+	if seq.is_empty():
+		return  # no sequence context yet — retry on next emit
+	var kind: String = SequenceBinding.foe_kind_for_sequence(seq)
+	if not kind.is_empty():
+		default_foe_mode = kind
+	else:
+		print("[CatalystVent] sequence '%s' has no binding — brood stays default" % seq)
+	bind_sequence = ""  # settled; don't re-resolve
+
+
+func _emit_one() -> void:
+	_resolve_brood_kind()
+	# Cast via Node3D rather than CatalystFoe so this script parses
+	# in isolation (class_name lookup isn't always available during
+	# headless --check-only). At runtime the instantiated node IS a
+	# CatalystFoe — its hit_by_projectile() / state machine still fire.
+	var instance: Node = FOE_SCENE.instantiate()
+	if instance == null:
+		print("[CatalystVent] FAIL: foe scene returned null")
+		return
+	var foe: Node3D = instance as Node3D
+	if foe == null:
+		instance.queue_free()
+		return
+	# Insert into the parent map's tree, not as our own child — so the
+	# foe survives if the vent is removed (rare, but cleaner).
+	var parent: Node = get_parent()
+	if parent == null:
+		foe.queue_free()
+		return
+	parent.add_child(foe)
+	# Spawn at the vent's footprint, just above the floor.
+	foe.global_position = global_position + Vector3(0, 0.4, 0)
+	# Seed the foe's personality stage from the vent's initial_state.
+	# This is what makes the curriculum-arc real: a vent in a Lab-phase
+	# chamber spawns foes; a vent in a Nature-phase chamber spawns
+	# already-warmed creatures (curious, neutral); an Emergence-phase
+	# chamber spawns friends.
+	if foe.has_method("apply_grid_config"):
+		var foe_cfg: Dictionary = {"initial_state": initial_state}
+		# Thread the vent's foe-mode seed down so token-placed vents
+		# (e:RATE:WAVE:DELAY:KIND) shape their offspring's friend kind.
+		if not default_foe_mode.is_empty():
+			foe_cfg["foe_mode"] = default_foe_mode
+		if critter_stage >= 0.0:
+			foe_cfg["critter_stage"] = critter_stage
+		foe.call("apply_grid_config", foe_cfg)
+	_emitted += 1
+	_live_count += 1
+	foe.tree_exited.connect(_on_foe_exited)
+
+
+func _on_foe_exited() -> void:
+	_live_count = max(0, _live_count - 1)
+
+
+# ── Grid integration ─────────────────────────────────────────────────
+func apply_grid_config(config_data: Dictionary) -> void:
+	var rate := float(config_data.get("emit_interval_s", emit_interval_s))
+	if rate > 0.0:
+		emit_interval_s = rate
+	var wave := int(config_data.get("wave_size", wave_size))
+	if wave > 0:
+		wave_size = wave
+	# start_delay_s: warmup pause before the FIRST emission. Counts
+	# only AFTER the catalyst is picked up (unless require_catalyst_armed
+	# is false). Accept 0 (immediate after pickup).
+	var delay := float(config_data.get("start_delay_s", start_delay_s))
+	if delay >= 0.0:
+		start_delay_s = delay
+	# require_catalyst_armed: when true, the vent stays silent until
+	# the player picks up the bracelet. Set to false for maps where
+	# catalyst is optional / not yet introduced.
+	if config_data.has("require_catalyst_armed"):
+		require_catalyst_armed = bool(config_data.get("require_catalyst_armed"))
+	# Seed the personality stage of every foe this vent spawns.
+	if config_data.has("initial_state"):
+		initial_state = String(config_data.get("initial_state"))
+	# foe_mode: optional kind seed applied to every foe this vent spawns
+	# (see default_foe_mode above). Empty string clears it. The special
+	# value "auto" routes through the sequence binding instead — so the
+	# editor token e:RATE:WAVE:DELAY:auto means "kind of the running
+	# sequence", the counterpart of the catalyst's sequence:auto.
+	if config_data.has("foe_mode"):
+		var fm: String = String(config_data.get("foe_mode")).to_lower()
+		if fm == "auto":
+			bind_sequence = "auto"
+			default_foe_mode = ""
+		else:
+			default_foe_mode = fm
+	# sequence: bind the brood kind to a named sequence (or "auto").
+	if config_data.has("sequence"):
+		bind_sequence = String(config_data.get("sequence")).to_lower()
+	# critter_stage: pin the evolving critter's stage for this vent's brood.
+	if config_data.has("critter_stage"):
+		critter_stage = float(config_data.get("critter_stage", -1.0))
+
+
+# Diagnostic helpers ----------------------------------------------------
+func get_remaining() -> int:
+	return max(0, wave_size - _emitted)
+
+
+func get_live_count() -> int:
+	return _live_count

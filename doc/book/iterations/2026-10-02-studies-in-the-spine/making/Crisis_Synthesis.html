@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="eea82b565777fa365f66d070e133bf82af5bee136b3746c28530c7248b0b5a9e"><title>commons/maps/Crisis_Synthesis/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Crisis_Synthesis/tutorial.md</p><h1>Crisis Synthesis</h1>
+<p>Four wings, one summit, one complete formula. Build the synthesis that turns crisis into capacity.</p>
+<p>Declare the wing registry.</p>
+<pre><code class="language-gdscript">class_name WingRegistry
+extends Node3D
+
+const WINGS := {
+    &quot;russell&quot;: &quot;paradox&quot;,
+    &quot;godel&quot;: &quot;incompleteness&quot;,
+    &quot;brouwer&quot;: &quot;construction&quot;,
+    &quot;florensky&quot;: &quot;paraconsistency&quot;,
+}
+</code></pre>
+<p>Four wings, four names, four words. The registry is the map key. Each wing hosts one artifact from the sequence.</p>
+<p>Place the wings around the summit.</p>
+<pre><code class="language-gdscript">func place_wings() -&gt; void:
+    var angle := 0.0
+    for key in WINGS:
+        var wing := preload(&quot;res://commons/maps/elements/crisis_wing.tscn&quot;).instantiate()
+        wing.position = Vector3(cos(angle) * 8.0, 0, sin(angle) * 8.0)
+        wing.set_meta(&quot;key&quot;, key)
+        add_child(wing)
+        angle += TAU / WINGS.size()
+</code></pre>
+<p>Eight-metre radius around the summit. Equal spacing. No wing is privileged; each presents a distinct response to the crisis.</p>
+<p>Render the summit formula.</p>
+<pre><code class="language-gdscript">func render_summit(label: Label3D) -&gt; void:
+    label.text = &quot;QFE = F − λ·E(S) + φ·ΔE(S,t)&quot;
+    label.font_size = 80
+    label.modulate = Color(1.0, 0.95, 0.8)
+</code></pre>
+<p>The complete formula for the first time. Earlier maps showed fragments. The summit holds the whole.</p>
+<p>Wire the bifurcation diagram.</p>
+<pre><code class="language-gdscript">func update_bifurcation(diagram: MeshInstance3D, lambda_value: float) -&gt; void:
+    var samples: Array = []
+    for i in 100:
+        var x := float(i) / 100.0
+        samples.append(Vector2(x, _logistic_step(lambda_value, x)))
+    diagram.mesh = _mesh_from_samples(samples)
+</code></pre>
+<p>The bifurcation rides λ. Low λ is stable; moving λ up opens doublings and then chaos. The diagram explains the critical zones visually.</p>
+<p>Slide λ and φ.</p>
+<pre><code class="language-gdscript">func _on_lambda_slider_moved(v: float) -&gt; void:
+    lambda_value = v
+    update_bifurcation(bif_diagram, v)
+
+func _on_phi_slider_moved(v: float) -&gt; void:
+    phi_value = lerp(-1.0, 1.0, v)
+    update_wings(phi_value)
+</code></pre>
+<p>Each slider rewrites the summit's readout. The wings update to show what their response implies under the current parameters.</p>
+<p>Open the wings by proximity.</p>
+<pre><code class="language-gdscript">func _on_player_near_wing(wing: Node3D) -&gt; void:
+    wing.set_meta(&quot;open&quot;, true)
+    wing.play_open_animation()
+</code></pre>
+<p>Proximity is the trigger, not a button. Walking toward Gödel unlocks Gödel. The learner pieces the argument together at their own pace.</p>
+<p>Mark completion on all four visits.</p>
+<pre><code class="language-gdscript">func mark_wing_visited(wing: Node3D) -&gt; void:
+    visited[wing.get_meta(&quot;key&quot;)] = true
+    if visited.size() == WINGS.size():
+        summit_light.light_energy = 4.0
+</code></pre>
+<p>All four wings must be visited before the summit lights fully. The formula only reads complete after every response to the crisis has been witnessed.</p>
+<p>You have assembled the crisis into capacity. The next map, Chamber Foundations, embodies Gödel as a creature you cannot distinguish from itself.
+&lt;&lt;</MAP>&gt;&gt;</p>
+<p>Animate the summit light on full completion.</p>
+<pre><code class="language-gdscript">func animate_summit() -&gt; void:
+    var t := Time.get_ticks_msec() / 1000.0
+    summit_light.light_energy = 3.0 + sin(t * 0.8) * 0.8
+    summit_light.light_color = Color(1.0, 0.9, 0.7)
+</code></pre>
+<p>A gentle pulse once the four wings are visited. The pulse is slow enough to read as breath.</p>
+<!-- study-spine:sentence_authority -->
+
+<h2>Return: Permission at three scales</h2>
+<p>Change one sentence once; follow the same words across label, strip and wall. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses loop, array, inscription, limit. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>sentence</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html">Study and making notes</a>. The display stays fixed while its data, words or images change. RESET returns the original comparison.</p>
+<!-- study-edit:sentence_authority -->
+
+<h3>One source change: Permission at three scales</h3>
+<p>Replace this first entry in SENTENCES with your own short sentence. All three displays read the same array entry. Compare WORD / WHOLE and PACE while keeping that entry fixed. The loop and string array are the learner’s tools; font geometry and pointer fabrication are supplied. Keep the sentence short enough to fit and test all displays.</p>
+<pre><code class="language-gdscript">&quot;YOU MAY REMAIN HERE&quot;
+</code></pre>
+<p>Source: <code>commons/artifacts/spine_studies/sentence_authority.gd</code>. Use the prepared scene to run and compare.</p>
+<!-- study-reference:sentence_authority -->
+
+<h3>Reference and scope</h3>
+<p>Holzer circulated statements in different public formats. The installation uses original Ada sentences; changing their scale or rhythm does not establish their truth and is not an illustration of an incompleteness proof.</p>
+<p><a href="https://www.moma.org/collection/works/63755">MoMA: Jenny Holzer, Truisms</a>.</p></body></html>

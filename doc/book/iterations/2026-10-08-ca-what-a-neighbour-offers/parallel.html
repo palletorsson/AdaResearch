@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One intervention, two readings</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#223334;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1440px;margin:auto;padding:36px}header{padding-top:62px}h1{font-size:clamp(40px,6vw,76px);line-height:1.05;max-width:980px}h2{margin-top:2em;line-height:1.2}nav,figcaption,.eyebrow,.badge,.switch label{font:14px/1.55 system-ui,sans-serif}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:#37676a;text-underline-offset:3px}.eyebrow{text-transform:uppercase;letter-spacing:.12em}.lead{font-size:26px;max-width:830px}p,li{max-width:80ch}.badge{display:inline-block;background:#dce9e2;padding:8px 14px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border:1px solid #c7cbc5}figcaption{padding:9px 0;color:#526260}.pair,.parallel{display:grid;grid-template-columns:1fr 1fr;gap:24px}.parallel article{min-width:0;padding:24px;background:#fffdf6;border-top:4px solid #b2cec4}.parallel article:last-child{border-color:#c9adba}.parallel h1{font-size:34px}pre{background:#1d2b2e;color:#f8f1df;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace;tab-size:4}code{font-size:.83em}pre code{font-size:inherit}table{border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #becac4;text-align:left}.switch input{margin:0 6px 0 18px}.switch label{cursor:pointer}.switch .after{display:none}#after:checked~.after{display:block}#after:checked~.before{display:none}.switch figure img{max-height:1050px;object-fit:contain;background:#d8dbd6}footer{border-top:1px solid #c5cec8}@media(max-width:850px){.pair,.parallel{display:block}header,main,footer{padding:22px}.parallel article{padding:16px}}@media print{nav,.switch input,.switch label{display:none}body{font-size:11pt}pre{white-space:pre-wrap;background:white;color:#111;font-size:8pt}.parallel{display:block}}</style></head><body><header><div class="eyebrow">Endless Museum / Cellular Automata / 8 October 2026</div><h1>One intervention, two readings</h1><nav><a href="index.html">Hall report</a><a href="index.html#layout">Before / after</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="ca-exchange-review.zip">Review ZIP</a></nav></header><main><div class="parallel"><article><h1>What a neighbour offers</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Two fractional values at each address: U and V.</li>
+<li>A neighbour contributes a difference, rather than a count above a threshold.</li>
+<li>A small model class keeps state separate from its display.</li>
+<li>Matched beginnings isolate one changed operation.</li>
+<li>The carried point chooses an address for a shared intervention.</li>
+</ul>
+<h2>Bring the point to the tables</h2>
+<p>In the previous room a healthy neighbour contributed to recovery. Here <strong>how much it differs matters</strong>. Two tables begin with the same square. Each table's field also covers a curved wall. A exchanges with its neighbours; B starts with exchange off. Both still perform the same local reaction.</p>
+<p>Find W, the gold address just beside the starting square. At the side desk, press STEP. A receives a little V at W; B receives none. Press +100 to see that small difference develop. EXCHANGE B enables the missing operation and restores both beginnings. Step again: they now agree.</p>
+<p>Take the black point beside the desk. Hold its centre just above either table and use its trigger. You plant the same small patch at the corresponding address in both fields. Moving the point without triggering does nothing. Release returns it to its shelf; use the desk to advance time. The floor crossing and INJECT offer a fixed patch instead. These are interventions in a running field, not a different rule.</p>
+<h2>Reconstruct the comparison</h2>
+<p>Save the previous study. Put <code>field.gd</code>, <code>exchange.gd</code> and the unchanged <code>point_body.gd</code> together. Attach <code>exchange.gd</code> to the existing <code>PointStudy</code> Node3D in your Day Zero museum. Keep unit scale and about 3.3 × 2.4 metres clear, facing its positive Z side. The museum supplies the player, camera, lighting and XR Tools. These files create every child used by this study.</p>
+<p>The compact reconstruction has two tables and two flat upright displays. The installed walls are larger and curved; they use the same operation. Use Enter for one step, Space for 100, E to change B's exchange and restart both fields, R to replay, and V to view U or V. In VR the point's trigger plants a seed. The compact model's clock and comparison controls use the keyboard; the installed exhibit has nearby VR desk controls. Desktop learners use the museum's pickup and I while holding the point.</p>
+<h2>A field stores two values</h2>
+<p><code>Field</code> is a small class extending <code>RefCounted</code>. Each instance owns two arrays, one for U and one for V. It needs no position or mesh because its job is calculation. <code>left</code> and <code>right</code> are separate instances, not two names for the same arrays.</p>
+<p>The grid has 32 × 32 addresses. <code>index(x, y)</code> turns two coordinates into one array index. <code>posmod</code> wraps either coordinate to 0–31: the neighbour left of x = 0 is x = 31. This periodic boundary differs from the bounded bridge in the previous hall. The starting 6 × 6 square holds U = 0.5 and V = 0.25; elsewhere U = 1 and V = 0.</p>
+<h2>Receive a difference</h2>
+<p><code>laplacian</code> adds the four axial neighbours and subtracts four copies of the centre. Equivalently, it adds four neighbour-minus-centre differences. A uniform field gives zero. A higher neighbour contributes positively; lower neighbours contribute negatively. The centre is not an extra fifth neighbour.</p>
+<p>The supplied Gray–Scott reaction in <code>next_pair</code> uses U × V × V to remove U and add V. Feed replenishes U; feed plus kill removes V. Exchange adds 0.16 times U's neighbour difference and 0.08 times V's. B can set just that exchange contribution to zero. <code>clampf</code> bounds both results to 0–1. The lesson uses this fixed reaction to compare exchange; deriving the chemical model and choosing a stable numerical scheme are later work.</p>
+<p>One call is one numerical step with dt = 1, not one second of real time. <code>step</code> reads only the old arrays, writes both answers into new arrays, then replaces the old state. This keeps the simultaneous-update agreement from the earlier halls. A fresh pair of arrays makes that agreement visible; the larger installation reuses its spare buffers.</p>
+<p>W is (12,15), just outside the square. Its U neighbours sum to 3.5 and its V neighbours to 0.25. Its own U = 1 and V = 0, so the reaction contributes nothing there. After one step:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>U at W</th>
+<th>V at W</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A, exchange on</td>
+<td>0.92</td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>B, exchange off</td>
+<td>1.00</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+<p>That first difference is small enough to predict before watching it spread.</p>
+<h2>Complete model — field.gd</h2>
+<pre><code class="language-gdscript">extends RefCounted
+const N := 32
+const FEED := 0.037
+const KILL := 0.060
+var u := PackedFloat32Array()
+var v := PackedFloat32Array()
+var exchange := true
+var ticks := 0
+
+func _init() -&gt; void:
+    u.resize(N * N)
+    v.resize(N * N)
+    reset()
+
+func index(x: int, y: int) -&gt; int:
+    return posmod(y, N) * N + posmod(x, N)
+
+func reset() -&gt; void:
+    u.fill(1.0)
+    v.fill(0.0)
+    ticks = 0
+    for y in range(13, 19):
+        for x in range(13, 19):
+            u[index(x, y)] = 0.5
+            v[index(x, y)] = 0.25
+
+func seed_at(site: Vector2i) -&gt; void:
+    for dy in range(-1, 2):
+        for dx in range(-1, 2):
+            u[index(site.x + dx, site.y + dy)] = 0.5
+            v[index(site.x + dx, site.y + dy)] = 0.25
+
+func laplacian(values: PackedFloat32Array, x: int, y: int) -&gt; float:
+    return values[index(x - 1, y)] + values[index(x + 1, y)] + values[index(x, y - 1)] + values[index(x, y + 1)] - 4.0 * values[index(x, y)]
+
+func next_pair(a: float, b: float, lap_u: float, lap_v: float) -&gt; Vector2:
+    # Supplied Gray–Scott model. One numerical step has dt = 1.
+    var coupling := 1.0 if exchange else 0.0
+    var uvv := a * b * b
+    return Vector2(
+        clampf(a + coupling * 0.16 * lap_u - uvv + FEED * (1.0 - a), 0.0, 1.0),
+        clampf(b + coupling * 0.08 * lap_v + uvv - (KILL + FEED) * b, 0.0, 1.0)
+    )
+
+func step() -&gt; void:
+    var next_u := PackedFloat32Array()
+    var next_v := PackedFloat32Array()
+    next_u.resize(N * N)
+    next_v.resize(N * N)
+    for y in N:
+        for x in N:
+            var i := index(x, y)
+            var answer := next_pair(u[i], v[i], laplacian(u, x, y), laplacian(v, x, y))
+            next_u[i] = answer.x
+            next_v[i] = answer.y
+    u = next_u
+    v = next_v
+    ticks += 1
+</code></pre>
+<h2>A position becomes an address</h2>
+<p>The point keeps its pickup behaviour. <code>target_site</code> converts its world position into the study's local space, checks whether it is near either tabletop, and divides its offset into 0.04-metre cells. Logical grid Y becomes tabletop Z. An invalid target returns (-1,-1), so an unheld point or a trigger away from the tables plants nothing.</p>
+<p><code>seed_at</code> replaces a 3 × 3 patch with U = 0.5, V = 0.25. It does not add concentrations and does not advance the clock. Both fields receive the same intervention, but can retain different histories elsewhere. R restores the original square. E changes B's exchange and resets both histories for a fair comparison; R alone keeps that choice.</p>
+<p><code>paint</code> reads state without changing it. Each table and its upright display share one texture. The initial palette maps V × 2 into colour, clamped at one; U has another palette. V changes the view, not the simulation. A saturated colour need not mean a stored concentration of one. These surfaces are pictures of the field; the tables keep their physical support.</p>
+<h2>Complete study — exchange.gd</h2>
+<p>Read <code>target_site</code>, <code>plant</code>, <code>advance</code> and <code>paint</code> first. <code>box</code> and <code>make_display</code> provide the complete staging. There is one <code>_ready</code>, and no required child is hidden in a scene reference.</p>
+<pre><code class="language-gdscript">extends Node3D
+const Field = preload(&quot;field.gd&quot;)
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LIMIT := 2400
+const W := Vector2i(12, 15)
+var left := Field.new()
+var right := Field.new()
+var point: XRToolsPickable
+var reading := Label3D.new()
+var textures: Array[ImageTexture] = []
+var show_u := false
+var injections := 0
+
+func _ready() -&gt; void:
+    right.exchange = false
+    make_display()
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): plant())
+    park()
+    reset()
+
+func reset() -&gt; void:
+    left.reset()
+    right.reset()
+    injections = 0
+    paint()
+
+func advance(count: int) -&gt; void:
+    for i in mini(count, LIMIT - left.ticks):
+        left.step()
+        right.step()
+    paint()
+
+func change_exchange() -&gt; void:
+    right.exchange = not right.exchange
+    reset()
+
+func target_site() -&gt; Vector2i:
+    if not point.held():
+        return Vector2i(-1, -1)
+    var at := to_local(point.global_position)
+    for cx in [0.85, -0.85]:
+        if absf(at.x - cx) &lt; 0.64 and absf(at.z - 0.5) &lt; 0.64 and absf(at.y - 1.01) &lt; 0.35:
+            return Vector2i(floori((at.x - cx + 0.64) / 0.04), floori((at.z - 0.5 + 0.64) / 0.04))
+    return Vector2i(-1, -1)
+
+func plant() -&gt; void:
+    var site := target_site()
+    if site.x &lt; 0:
+        return
+    left.seed_at(site)
+    right.seed_at(site)
+    injections += 1
+    paint()
+
+func _physics_process(_delta: float) -&gt; void:
+    if not point.held():
+        park()
+
+func park() -&gt; void:
+    point.position = Vector3(0, 1.12, -0.35)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and not event.echo:
+        match event.keycode:
+            KEY_ENTER: advance(1)
+            KEY_SPACE: advance(100)
+            KEY_R: reset()
+            KEY_E: change_exchange()
+            KEY_V: show_u = not show_u; paint()
+            KEY_I: plant()
+            _: return
+        get_viewport().set_input_as_handled()
+
+func tint(value: float) -&gt; Color:
+    if show_u:
+        return Color(&quot;241e46&quot;).lerp(Color(&quot;bce8bc&quot;), value)
+    return Color(&quot;122d3d&quot;).lerp(Color(&quot;edb1cb&quot;), clampf(value * 2.0, 0.0, 1.0))
+
+func paint() -&gt; void:
+    for side in 2:
+        var field = left if side == 0 else right
+        var data: PackedFloat32Array = field.u if show_u else field.v
+        var image := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+        for y in 32:
+            for x in 32:
+                image.set_pixel(x, y, tint(data[y * 32 + x]))
+        textures[side].update(image)
+    var i := left.index(W.x, W.y)
+    reading.text = &quot;TICK %d / W (12,15)\nA: U %.3f  V %.3f\nB: U %.3f  V %.3f\nB EXCHANGE %s / VIEW %s / SEEDS %d\nENTER: STEP   SPACE: +100   R: REPLAY\nE: EXCHANGE B   V: VIEW   TRIGGER / I: PLANT&quot; % [left.ticks, left.u[i], left.v[i], right.u[i], right.v[i], &quot;ON&quot; if right.exchange else &quot;OFF&quot;, &quot;U&quot; if show_u else &quot;V x2&quot;, injections]
+
+func box(size: Vector3, at: Vector3) -&gt; MeshInstance3D:
+    var node := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    node.mesh = mesh
+    node.position = at
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(&quot;263744&quot;)
+    node.material_override = material
+    add_child(node)
+    return node
+
+func make_display() -&gt; void:
+    for side in 2:
+        var cx := -0.85 if side == 0 else 0.85
+        var image := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+        var texture := ImageTexture.create_from_image(image)
+        textures.append(texture)
+        var title := Label3D.new()
+        title.text = &quot;A&quot; if side == 0 else &quot;B&quot;
+        title.position = Vector3(cx, 2.42, -0.4)
+        title.font_size = 52
+        title.pixel_size = 0.0015
+        add_child(title)
+        var finish := StandardMaterial3D.new()
+        finish.albedo_texture = texture
+        finish.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+        finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        finish.cull_mode = BaseMaterial3D.CULL_DISABLED
+        var table := box(Vector3(1.36, 0.08, 1.36), Vector3(cx, 0.96, 0.5))
+        box(Vector3(0.5, 0.92, 0.5), Vector3(cx, 0.46, 0.5))
+        var body := StaticBody3D.new()
+        var boundary := CollisionShape3D.new()
+        var shape := BoxShape3D.new()
+        shape.size = Vector3(1.36, 0.08, 1.36)
+        boundary.shape = shape
+        table.add_child(body)
+        body.add_child(boundary)
+        for wall in [false, true]:
+            var display := MeshInstance3D.new()
+            var plane := PlaneMesh.new()
+            plane.size = Vector2(1.28, 1.28)
+            display.mesh = plane
+            display.material_override = finish
+            display.position = Vector3(cx, 1.7, -0.4) if wall else Vector3(cx, 1.01, 0.5)
+            if wall:
+                display.rotation.x = PI / 2.0
+            add_child(display)
+        var mark := box(Vector3(0.038, 0.004, 0.038), Vector3(cx + (W.x + 0.5 - 16) * 0.04, 1.014, 0.5 + (W.y + 0.5 - 16) * 0.04))
+        var gold := StandardMaterial3D.new()
+        gold.albedo_color = Color(&quot;ffe49a&quot;)
+        gold.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+        gold.albedo_color.a = 0.3
+        mark.material_override = gold
+    reading.position = Vector3(0, 2.65, 0.5)
+    reading.font_size = 30
+    reading.pixel_size = 0.0013
+    reading.modulate = Color(&quot;213639&quot;)
+    reading.outline_modulate = Color(&quot;f5f0e8&quot;)
+    add_child(reading)
+</code></pre>
+<h2>The same carried object — point_body.gd</h2>
+<p>This file is unchanged from the previous hall. Keep your existing copy. It appears here so the three-file example is complete.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Predict, intervene, compare</h2>
+<p>Replay with B's exchange off and step once. Check W's two answers against the table above. Press V: the colours change while the tick and stored values remain the same. Press E and step once: with exchange on for both, every address should agree.</p>
+<p>Now restore B's exchange-off comparison. Carry the point to a different address, outside the starting square, and plant. Step 100 times. Find a site just beyond that second patch. Can anything make its first V arrive without exchange? At an untouched site, V = 0 makes the local reaction product zero. An address can receive its first V from its neighbours.</p>
+<p>Make one independent edit: in <code>reset</code>, after <code>right.reset()</code>, add <code>left.seed_at(Vector2i(0, 0))</code> and <code>right.seed_at(Vector2i(0, 0))</code>. Predict all nine addresses before replaying. The patch appears at x = 31, 0, 1 and y = 31, 0, 1. Its split appearance is one neighbourhood crossing the periodic boundary, not four unrelated seeds. After replay, find which side can send V into an adjacent unseeded address. Remove those two added lines to return to the original beginning.</p>
+<p>Both clocks stop at 2,400 steps. Reset to make another comparison. You leave with a field class that can be shown on more than one surface, a point that can intervene without replacing the rule, and a distinction between what happens at an address and what can arrive from elsewhere. The next hall compares a cellular history with recursive construction: similar forms can have different ways of becoming.</p></article><article><h1>What can a cell receive?</h1>
+<!-- @rd_artifact -->
+
+<p>Two small squares wait on the tables. Behind them, the same squares wait on curved walls. The room has already enlarged their answer, although neither field has taken a step.</p>
+<p>Find the small gold frame on either table, just outside the seeded square. This is W; the side desk reads its values. V is zero there in both fields. Press STEP once. On the left, a little arrives. On the right, nothing. Look back at the pictures: can you find that difference without the numbers?</p>
+<p>Press +100 and let the local clock complete its hundred updates. The fields begin to part. They began with the same values, at the same addresses. They have the same reaction. What has the right-hand square been denied?</p>
+<p>EXCHANGE B turns its neighbourhood exchange on and restores both beginnings. Advance again. The two fields now agree. Switch exchange off, replay, and look for the first place where they differ. We can locate the missing relation before giving the result a name.</p>
+<p>In the previous hall a neighbour above half health counted as one contribution to recovery. Here a cell stores two concentrations, U and V. It receives differences in concentration from the four sites beside it. For each concentration, it adds the four neighbours and subtracts four copies of the centre.</p>
+<p>The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Each cell now holds two fractions, and a neighbour matters by how much its concentration differs.</p>
+<p>There is also a reaction at the address itself. The product U × V × V removes some U and adds some V. A feed term replenishes U; another term removes V. The installation uses the same arithmetic as the project's existing Gray–Scott generator,<sup id="fnref:ca-gray-scott"><a class="footnote-ref" href="#fn:ca-gray-scott">2</a></sup> now exposed one update at a time.</p>
+<p>With exchange off, the right-hand field still reacts. But at an unseeded address V is zero, so U × V × V is also zero. Nothing in that local reaction can make its first V arrive. The left-hand field can receive it. This difference is small enough to calculate and large enough to alter the wall. By the end of the first hundred updates, the right-hand square has nearly faded. The same local reaction has had a different future without exchange.</p>
+<p>Keep that distinction in hand. “Soft” is not a promise that the rule is gentle or that every boundary has disappeared. Both fields still occupy a 32-by-32 grid. The arithmetic writes into separate next arrays before swapping them into the present. Values are clamped between zero and one. At an edge, the remainder operator wraps the neighbour index to the opposite side. The wall has a visible border that the calculation does not share.</p>
+<p>Use VIEW U/V. Another distribution appears without a single new update. The initial view doubles V before mapping it into colour; the U view has its own palette. A colour can saturate while the stored value still has room to change. An image is already an interpretation of the field.</p>
+<p>Now walk between the two curved displays. Find a patch on a wall, then look for it on the table. Each pair shares the same texture. At the desk you could take in the small field; here you turn within its enlarged image.</p>
+<p>Press COAT. The colour surfaces disappear while the table fields continue. Bring them back. The fixed museum floor carries you through both views.<sup id="fnref:ca-soft-coating"><a class="footnote-ref" href="#fn:ca-soft-coating">1</a></sup> The field has become something the room can wear. Perhaps you would keep it here, or want it closer, as a lining against a body. What would you change for that other use?</p>
+<p>Between the displays, a small floor mark says <strong>STEP IN / LEAVE A SEED</strong>. Cross it. Both fields receive the same small second patch. With the clock running, watch beyond its edge as well as at its centre. Exchange lets some concentration leave the place where you put it. Try this after the first hundred updates: the new patch thins in A while the earlier pattern continues to spread. What lets something travel can also let it disperse.</p>
+<p>There is also the small black point beside the desk. Take it to either table and hold it above a place you choose. Its trigger gives both fields a seed at that address. We have brought the same object onward, but changed what its position can do. On the bridge it helped remove support; here it introduces a concentration. Neither consequence belongs to the sphere alone.</p>
+<p>Stay on the mark. It does not keep replenishing the seed. Leave and return to place it again. INJECT makes the same intervention from the desk. We are no longer only watching a prepared beginning; we have entered another event into its history. REPLAY can restore that beginning. It cannot make our first encounter with the difference happen again.</p>
+<p><img alt="A floor crossing places the same small patch on both curved field displays." src="images/exchange-seed.png" /></p>
+<p><em>The floor receives your arrival. What happens to the seed continues through the field's own relations.</em></p>
+<!-- @the_clockmaker_of_rules -->
+
+<p>Further on, the clockmaker has laid out trays, stencils and small worlds. The brass shapes make reading and writing almost look like trades we could perform with our hands. Find the fractional ring. It is a still radial diagram. Its graded appearance does not demonstrate a running Lenia field,<sup id="fnref:ca-lenia"><a class="footnote-ref" href="#fn:ca-lenia">3</a></sup> and the ornamental crank cannot advance it.</p>
+<p>Compare that invitation with the walls we have just left. Both offer pleasure in a patterned body; their means of producing it differ. We need neither reject the ornament nor grant it an operation it does not have. A diagram can help us imagine the machine, then leave us with something still to build.</p>
+<!-- @ -->
+
+<p>The local study holds after 2,400 updates. The museum goes on. We have watched a field change and a room wear its image. Carry a question from those surfaces: could a similar form have another way of becoming?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:ca-soft-coating">
+<p>COAT toggles the wall display meshes. Their geometry stays fixed and has no collision shapes; the museum floor supplies support. Sharing a field texture does not create a sensing or growing body. Those would require additional operations.&#160;<a class="footnote-backref" href="#fnref:ca-soft-coating" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ca-gray-scott">
+<p>The reaction is Peter Gray and Stephen Scott's (<em>Chemical Engineering Science</em> 39, 1984), diffused across a grid; the feed .037 and kill .060 the readout prints lie in the range John Pearson mapped in “Complex patterns in a simple system” (<em>Science</em> 261, 1993).&#160;<a class="footnote-backref" href="#fnref:ca-gray-scott" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ca-lenia">
+<p>Lenia (Bert Wang-Chak Chan, <em>Complex Systems</em> 28, 2019) is a continuous automaton: its cells hold fractions, read a ring-shaped neighbourhood weighted by distance, and grow by a smooth function of what they find there. The still ring on the tray pictures that neighbourhood; nothing in it is being updated.&#160;<a class="footnote-backref" href="#fnref:ca-lenia" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></main><footer>One hall, two complete texts. Native museum evidence. Next: CA_AgentsCircuits.</footer></body></html>

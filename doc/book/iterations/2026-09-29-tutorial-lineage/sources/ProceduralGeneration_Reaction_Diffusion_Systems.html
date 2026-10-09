@@ -1,0 +1,127 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ProceduralGeneration_Reaction_Diffusion_Systems · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ProceduralGeneration_Reaction_Diffusion_Systems">← Tutorial lineage</a></p><h1>ProceduralGeneration Reaction Diffusion Systems</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/final.md">Raw captured source</a></p><pre># A pattern has a metabolism
+
+&lt;!-- @turing_pattern_generator --&gt;
+
+A patch interrupts the field. Twelve cells at the centre of a grid thirty-two across were given a little of the second substance; everywhere else has only the first. Before advancing it, predict where the next change should occur: everywhere at once, around the boundary, or only inside the patch? STEP performs one update; 100 STEPS performs a hundred, which makes the consequence easier to see while keeping the same rule.
+
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
+
+```gdscript
+var uvv = u * v * v
+var du = Du * lap_u - uvv + feed * (1.0 - u)
+var dv = Dv * lap_v + uvv - (kill + feed) * v
+```
+
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing&#x27;s original chemical equations.[^turing] REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
+
+Press 100 STEPS, change REGIME, and press it again. After a hundred updates the six regimes still differ from one another in fewer than one cell in ten: the patch has grown a little and told you nothing about which law it is under. It takes about a thousand. By then, under Spots, the regime this hall opens in, the patch has stopped growing at three per cent of the field and stays one spot for as long as you care to press; under Stripes and Maze the same twelve cells have covered a third of the field and will cover most of it; under Mitosis they have split into four; under Coral they never move at all. The seed decides where, and whether. The two rates decide what.[^port]
+
+The grid wraps at its edges. Concentrations are clamped to the interval zero to one. These choices are part of the experiment. A field that seems to continue beyond its frame has a particular way of returning through it.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @reaction_diffusion --&gt;
+
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
+
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
+
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.
+
+&lt;!-- @ --&gt;
+
+[^turing]: Alan Turing, “The Chemical Basis of Morphogenesis”, *Philosophical Transactions of the Royal Society B* 237 (1952), 37–72. Peter Gray and Stephen Scott set out the autocatalytic scheme in *Chemical Engineering Science* 39 (1984); John Pearson, “Complex Patterns in a Simple System”, *Science* 261 (1993), 189–192, mapped its feed and kill plane, and the presets REGIME cycles are points on that map. The excerpt above is Pearson’s discretised form.
+
+[^port]: Measured in a numpy port of the shipped update (the same 0.2 and 0.05 neighbour weights, the same clamp, the same twelve-cell stamp of U 0.5 and V 0.25) at the hall’s resolution of 32 and its centre seeding, coverage counted as cells where V exceeds a tenth, at 100, 300, 1,000, 2,000 and 4,000 updates: Spots 2, 3, 3, 3, 3 per cent in one blob; Stripes 3, 9, 37, 86, 91; Maze 4, 11, 42, 65, 65; Mitosis 3, 4, 7, 13, 34 in four then twelve blobs; Coral 1 throughout. The artifact’s own source records a matching measurement at resolution 40 with the five-disc seeding.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/tutorial.md">Raw captured source</a></p><pre># A pattern has a metabolism
+
+&lt;!-- @turing_pattern_generator --&gt;
+
+A patch interrupts the field. Before advancing it, predict where the next change should occur: everywhere at once, around the boundary, or only inside the patch? STEP performs one update. A hundred updates make the consequence easier to see while keeping the same rule.
+
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
+
+```gdscript
+var uvv = u * v * v
+var du = Du * lap_u - uvv + feed * (1.0 - u)
+var dv = Dv * lap_v + uvv - (kill + feed) * v
+```
+
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing&#x27;s original chemical equations. REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
+
+The grid wraps at its edges. Concentrations are clamped to the interval zero to one. These choices are part of the experiment. A field that seems to continue beyond its frame has a particular way of returning through it.
+
+
+
+&lt;!-- @reaction_diffusion --&gt;
+
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
+
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
+
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/technical.md">Raw captured source</a></p><pre># A pattern has a metabolism — implementation
+
+Primary source scenes:
+
+- `res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn`
+- `res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers STEP, 100 STEPS, REGIME, SEEDING, RESET, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+
+A patch interrupts the field. Before advancing it, predict where the next change should occur: everywhere at once, around the boundary, or only inside the patch? STEP performs one update. A hundred updates make the consequence easier to see while keeping the same rule.
+
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
+
+```gdscript
+var uvv = u * v * v
+var du = Du * lap_u - uvv + feed * (1.0 - u)
+var dv = Dv * lap_v + uvv - (kill + feed) * v
+```
+
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing&#x27;s original chemical equations. REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
+
+The grid wraps at its edges. Concentrations are clamped to the interval zero to one. These choices are part of the experiment. A field that seems to continue beyond its frame has a particular way of returning through it.
+
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
+
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
+
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/intent.md">Raw captured source</a></p><pre># Intent
+
+How can local exchanges maintain a spatial difference?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/critical.md">Raw captured source</a></p><pre># A pattern has a metabolism — question the construction
+
+How can local exchanges maintain a spatial difference?
+
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
+
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing&#x27;s original chemical equations. REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
+
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
+
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
+
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `turing_pattern_generator` — primary
+- `reaction_diffusion` — primary
+- `mesh_grammar_detailed_bulge` — secondary
+- `softstopscene` — secondary
+- `the_confessing_body` — secondary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/summary.md">Raw captured source</a></p><pre># A pattern has a metabolism
+
+How can local exchanges maintain a spatial difference?
+
+Primary encounters: turing_pattern_generator, reaction_diffusion. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ProceduralGeneration_Reaction_Diffusion_Systems/blurb.md">Raw captured source</a></p><pre># A pattern has a metabolism
+
+How can local exchanges maintain a spatial difference?
+</pre></section></body></html>

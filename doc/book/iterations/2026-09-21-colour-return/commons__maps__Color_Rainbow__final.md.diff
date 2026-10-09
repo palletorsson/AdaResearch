@@ -1,0 +1,21 @@
+--- before/commons/maps/Color_Rainbow/final.md
++++ current/commons/maps/Color_Rainbow/final.md
+@@ -18,14 +18,16 @@
+ return (RAINBOW_THICKNESS * 7.0) / float(maxi(1, rainbow_colors.size()))
+ ```
+ 
+-The old width was seven strips of thickness `0.8`. That width remains the budget. More strips each receive less of it; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
++The bands together keep a thickness of 5.6 metres, measured from the inner edge to the outer edge. That is seven strips of `0.8`, shared out again. More strips each receive less of it; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
+ 
+-The option called `continuous` still makes forty-eight strips. For each one, the code computes a hue:
++The option called `continuous` still makes forty-eight strips. For each one, the code computes a hue. **HSV** names hue, saturation and value: a place around a colour circle, how far the colour is from grey at that value, and a level that reaches black at zero. Here saturation and value both stay at one. Only hue travels:
+ 
+ ```gdscript
+ var t: float = float(i) / float(count - 1)
+ out.append(Color.from_hsv(t * 0.78, 1.0, 1.0, 1.0))
+ ```
++
++`t` runs from zero at the first strip to one at the last. A hue value of one would complete a turn around the circle; multiplying by `0.78` takes this sweep partway around instead.
+ 
+ Look for its seams. A name can promise continuity while an implementation offers enough small divisions for some seams to become difficult to see. These are HSV values converted into RGB colours on a mesh. No droplets, sunlight or wavelength calculation produce this particular rainbow. Even its opaque appearance does not make the bands a climbing surface. The low steps have collision; the arch is a display.
+ 

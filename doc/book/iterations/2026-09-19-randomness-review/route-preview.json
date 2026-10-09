@@ -1,0 +1,100 @@
+{
+  "sequence": "randomness",
+  "book_chapters": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game"
+  ],
+  "museum_order": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Biome_Cage",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game",
+    "Biome_Ladder_Randomness"
+  ],
+  "restored": [
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Space_Geometry",
+    "Random_Pheromone",
+    "Random_Space"
+  ],
+  "retained_interludes": {
+    "Biome_Cage": "after Random_Mushrooms: application of an authored repertoire",
+    "Biome_Ladder_Randomness": "after Random_Game: cumulative seeded composition"
+  },
+  "input_sha256": {
+    "ada_run/em_plan.json": "a1e90ff659e3ffaea037643d6661b71fcff4ceca1a6ee0e323d591c3e32762ec",
+    "commons/data/museum/em_plan.json": "a1e90ff659e3ffaea037643d6661b71fcff4ceca1a6ee0e323d591c3e32762ec",
+    "commons/data/map_authored.json": "6334bab56b14f75bbe80bbb3eb20bdbf281f7576feb41787efcf72ff943349ed"
+  },
+  "rows_before": 178,
+  "rows_after": 183,
+  "preservation": "All existing room geometry/artifacts and unrelated plan rows unchanged. Only ordering fields of retained randomness rows change.",
+  "headset_tested": false,
+  "derived": [
+    {
+      "map": "Random_Cubes",
+      "room": {
+        "w": 14,
+        "h": 22
+      },
+      "artifacts": 53
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "room": {
+        "w": 13,
+        "h": 16
+      },
+      "artifacts": 5
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "room": {
+        "w": 14,
+        "h": 30
+      },
+      "artifacts": 6
+    },
+    {
+      "map": "Random_Pheromone",
+      "room": {
+        "w": 13,
+        "h": 10
+      },
+      "artifacts": 4
+    },
+    {
+      "map": "Random_Space",
+      "room": {
+        "w": 15,
+        "h": 17
+      },
+      "artifacts": 5
+    }
+  ],
+  "mode": "inspect"
+}

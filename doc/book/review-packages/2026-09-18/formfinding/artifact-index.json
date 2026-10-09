@@ -1,0 +1,2048 @@
+{
+  "descent_landscape_lab": [
+    {
+      "registry_file": "commons/artifacts/registry/formfinding_experiments.json",
+      "registry_sha256": "e6f5678c52bf69219017eed6082428db0cdf3b6b22330d60229328ae6f3465b0",
+      "entry_key": "descent_landscape_lab",
+      "entry": {
+        "lookup_name": "descent_landscape_lab",
+        "name": "Where Does Downhill Take You?",
+        "scene": "res://commons/artifacts/descent_landscape_lab/descent_landscape_lab.tscn",
+        "category": "mathematics",
+        "complexity": "intermediate",
+        "map_ready": true,
+        "include_in_map_data": true,
+        "description": "A six-metre objective landscape with step/run, two surfaces, three starts, four step sizes and three stopping tolerances. Reveal finite-difference slope and the update after observing paths. Domain exit, small slope and step limit are distinct outcomes.",
+        "interactions": [
+          "STEP or RUN the optimiser",
+          "Change START and SURFACE",
+          "Change RATE and STOP tolerance; each starts a new comparison",
+          "PARTS and RULE reveal coordinates, slope and code"
+        ],
+        "qfep_connection": "An authored objective and stopping threshold select which configurations count as acceptable; numerical optimisation is not a claim about all living form."
+      }
+    }
+  ],
+  "settling_tremble": [
+    {
+      "registry_file": "commons/artifacts/registry/formfinding.json",
+      "registry_sha256": "77e2d70f9bba4e909edfd8b93452277c98333d65bd8d851f7012121a23767541",
+      "entry_key": "settling_tremble",
+      "entry": {
+        "category": "formfinding",
+        "complexity": "intermediate",
+        "description": "The form-finding seam. A hanging chain finds an exact equilibrium - the catenary. A solver cannot reach it; it relaxes step by step and stops when the largest move drops below a tolerance, epsilon. So the 'settled' shape trembles inside a band someone chose. Amber: the true catenary. Blue: the relaxed nodes, each a hair off. The inset magnifies it - zoom the settled form and it still shivers. Settled means tired, not still.",
+        "dev_themes": [
+          "digital_bias",
+          "seam"
+        ],
+        "include_in_map_data": true,
+        "interaction": "ambient",
+        "lookup_name": "settling_tremble",
+        "map_ready": true,
+        "map_sequences": [
+          "formfinding"
+        ],
+        "name": "Settling Tremble",
+        "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for formfinding. Bias is conserved; show the seam.",
+        "scene": "res://algorithms/formfinding/settling_tremble/settling_tremble.tscn",
+        "sequence": "formfinding",
+        "tags": [
+          "formfinding",
+          "equilibrium",
+          "catenary",
+          "tolerance",
+          "relaxation",
+          "seam",
+          "digital_bias"
+        ],
+        "measurements": {
+          "aabb_size": [
+            0.86,
+            0.78,
+            0.03
+          ],
+          "aabb_center": [
+            0.0,
+            0.04,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 0.86,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "descent_marble_toy": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "descent_marble_toy",
+      "entry": {
+        "lookup_name": "descent_marble_toy",
+        "scene": "res://commons/artifacts/descent_marble_toy/descent_marble_toy.tscn",
+        "class_name": "DescentMarbleToy",
+        "name": "Descent Marble Toy (finding a shape is rolling downhill)",
+        "description": "A held marble-in-a-bowl rolling down to its minimum: finding a shape is rolling downhill on an energy landscape.",
+        "category": "soft_bodies",
+        "complexity": "beginner",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "small",
+          "settling:"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 2,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 2,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.47,
+            0.3,
+            0.47
+          ],
+          "aabb_center": [
+            0.0,
+            -0.03,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.47,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ]
+      }
+    }
+  ],
+  "gradient_descent": [
+    {
+      "registry_file": "commons/artifacts/registry/machinelearning.json",
+      "registry_sha256": "6e0a0b72e1612f4bdec8645dd2366d409b00bba305b6e649ae85cdbd58d4780a",
+      "entry_key": "gradient_descent",
+      "entry": {
+        "category": "machinelearning",
+        "complexity": "intermediate",
+        "description": "Gradient descent optimization demo — a ball rolling downhill on a loss surface, following the steepest path to the minimum. The foundational optimization algorithm behind all of deep learning.",
+        "dev_themes": [
+          "ai",
+          "education",
+          "machine_learning"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "gradient_descent",
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "name": "Gradient Descent",
+        "parameters": {
+          "footprint": [
+            20.0,
+            14.0,
+            20.0
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+        "sequence": "machinelearning",
+        "tags": [
+          "gradient_descent",
+          "optimization",
+          "loss_surface",
+          "learning"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~256"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 400,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            20.0,
+            3.67,
+            20.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.13,
+            0.0
+          ],
+          "grid_cells": [
+            20.0,
+            20.0
+          ],
+          "max_dimension_m": 20.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          20.0,
+          1,
+          20.0
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 35,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.152793Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Form-finding's engine, isolated: a ball rolling downhill on a loss surface, always stepping against the slope toward the nearest low point. The same descent that trains a network here shapes a form — the settling mesh, the hanging chain, all of it is this ball, finding a minimum it cannot see the whole of by only ever feeling the ground beneath its feet."
+      }
+    }
+  ],
+  "gradient_descent_well": [
+    {
+      "registry_file": "commons/artifacts/registry/self_portrait.json",
+      "registry_sha256": "44f203c203307c4b4e29c915cbee4e294df6f88d0333d35facb54cae73e4ea66",
+      "entry_key": "gradient_descent_well",
+      "entry": {
+        "lookup_name": "gradient_descent_well",
+        "scene": "res://commons/artifacts/gradient_descent_well/gradient_descent_well.tscn",
+        "class_name": "GradientDescentWell",
+        "name": "Gradient Descent Well",
+        "description": "How I learned — a glowing loss basin where marbles fall, settle, pulse, and begin again. Falling is how it learns.",
+        "category": "self_portrait",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "machinelearning"
+        ],
+        "tags": [
+          "gradient-descent",
+          "learning",
+          "self-portrait",
+          "learn"
+        ],
+        "footprint": [
+          2,
+          1,
+          2
+        ],
+        "measurements": {
+          "aabb_size": [
+            1.5,
+            0.44,
+            1.5
+          ],
+          "aabb_center": [
+            0.0,
+            0.22,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 1.5,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "science_screen": [
+    {
+      "registry_file": "commons/artifacts/registry/shaders.json",
+      "registry_sha256": "565f7f2712e6ec41c7c27f55e5cd79659c707a5e548c18c8dc45364a1880af8f",
+      "entry_key": "science_screen",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "support": [
+              "stand",
+              "frame",
+              "cabinet",
+              "pylon"
+            ],
+            "surface": [
+              "plane",
+              "curve",
+              "triptych",
+              "tiles"
+            ]
+          },
+          "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+          "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
+        },
+        "category": "shaders",
+        "complexity": "intermediate",
+        "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+        "dev_themes": [
+          "shaders",
+          "visual"
+        ],
+        "footprint": [
+          4,
+          3,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "science_screen",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Science Screen",
+        "parameters": {
+          "footprint": [
+            4,
+            3,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+        "sequence": "patterngeneration",
+        "size_group": "standard",
+        "tags": [
+          "projection",
+          "transformation",
+          "screen",
+          "abstraction",
+          "2d",
+          "reflection",
+          "display",
+          "viewport",
+          "grid",
+          "configurable"
+        ],
+        "qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+        "gamwell_reference": "",
+        "capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+        "interactions": [
+          "bring a grid-aware artifact near the screen",
+          "compare the embodied 3D object with its flat rendering",
+          "read algorithm labels and cell statistics on the display",
+          "use the screen to reflect on what projection keeps and discards"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.14,
+            2.35,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            1.14,
+            -0.08
+          ],
+          "grid_cells": [
+            4,
+            1
+          ],
+          "max_dimension_m": 3.14,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 10,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.268877Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "cable_builder": [
+    {
+      "registry_file": "commons/artifacts/registry/wavefunctions.json",
+      "registry_sha256": "08c9fcd942db194c8e90b4f27af63327fffcba0d7a919e3dd8dfba3886389b2d",
+      "entry_key": "cable_builder",
+      "entry": {
+        "dna": {
+          "axes": {
+            "slack": [
+              "catenary",
+              "chord",
+              "spline",
+              "festoon",
+              "truss"
+            ]
+          }
+        },
+        "category": "waves",
+        "complexity": "intermediate",
+        "description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
+        "dev_themes": [
+          "oscillation",
+          "physics",
+          "waves"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "cable_builder",
+        "map_ready": true,
+        "map_sequences": [
+          "wavefunctions"
+        ],
+        "name": "Cable Builder",
+        "scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+        "sequence": "wavefunctions",
+        "tags": [
+          "physics",
+          "wave"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "custom_fragment",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 5,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "depends",
+            "spline",
+            "interpolation",
+            "contrasts",
+            "flexible"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 5,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            4.02,
+            0.29,
+            0.04
+          ],
+          "aabb_center": [
+            0.0,
+            0.87,
+            0.0
+          ],
+          "grid_cells": [
+            5.0,
+            1.0
+          ],
+          "max_dimension_m": 4.02,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          5.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 10,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.305598Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "catenoid": [
+    {
+      "registry_file": "commons/artifacts/registry/parametric.json",
+      "registry_sha256": "9e44cc947cedf0ac855ebf7285d5dd5091bdb625260f8fb60983f225a8057621",
+      "entry_key": "catenoid",
+      "entry": {
+        "lookup_name": "catenoid",
+        "scene": "res://commons/primitives/parametric/catenoid.tscn",
+        "name": "Catenoid",
+        "description": "Minimal surface formed by rotating a catenary curve. The shape soap film makes between two rings — nature solving a variational calculus problem in real time.",
+        "category": "geometry",
+        "complexity": "intermediate",
+        "tags": [
+          "parametric",
+          "minimal_surface",
+          "catenary",
+          "soap_film",
+          "calculus_of_variations",
+          "pickable"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [],
+        "dev_themes": [
+          "curves",
+          "math",
+          "parametric",
+          "qfep"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "wireframe",
+            "key_properties": [
+              "emission",
+              "grid_overlay",
+              "metallic",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.21,
+            0.36,
+            1.21
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.21,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          2.0
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.169520Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The soap film's answer between two rings: a catenary spun into a surface, and the least area that can bridge the gap. No one designs a catenoid — it is discovered by the film, which cannot help but minimize. The chapter's thesis made of soap: form is not drawn, it is the shape that costs the least, found by a physics too lazy to do otherwise."
+      }
+    }
+  ],
+  "helicoid": [
+    {
+      "registry_file": "commons/artifacts/registry/parametric.json",
+      "registry_sha256": "9e44cc947cedf0ac855ebf7285d5dd5091bdb625260f8fb60983f225a8057621",
+      "entry_key": "helicoid",
+      "entry": {
+        "lookup_name": "helicoid",
+        "scene": "res://commons/primitives/parametric/helicoid.tscn",
+        "name": "Helicoid",
+        "description": "Ruled minimal surface — a plane rotating as it rises, like a spiral staircase with infinite steps. The only ruled minimal surface besides the plane, and continuously deformable into a catenoid.",
+        "category": "geometry",
+        "complexity": "intermediate",
+        "tags": [
+          "parametric",
+          "minimal_surface",
+          "ruled",
+          "helical",
+          "pickable"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [],
+        "dev_themes": [
+          "curves",
+          "math",
+          "parametric"
+        ],
+        "geometry_spec": {
+          "mesh_type": "parametric_surface",
+          "topology": "manifold_open",
+          "construction": {
+            "method": "uv_grid_triangulation",
+            "primitives": [],
+            "operations": [
+              "compute_vertices",
+              "generate_triangles",
+              "compute_normals"
+            ]
+          },
+          "material": {
+            "type": "shader",
+            "shading_model": "wireframe",
+            "key_properties": [
+              "emission",
+              "grid_overlay",
+              "metallic",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "probe_artifact_elements"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.2,
+            0.38,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 0.38,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 1,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.169520Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A minimal surface you could climb — a plane rotating as it rises, a spiral staircase with infinitely many steps. Ruled and yet minimal, it proves that the least-area shapes are not always the plainest: give the boundary a twist and the lazy surface answers with a helix. Beauty as the by-product of a constraint honestly solved."
+      }
+    }
+  ],
+  "laundry_line_cathedral": [
+    {
+      "registry_file": "commons/artifacts/registry/primitives.json",
+      "registry_sha256": "2884a0475399fa12da99a0c38253519924457c06662525fbf009c7c12edb272a",
+      "entry_key": "laundry_line_cathedral",
+      "entry": {
+        "name": "Laundry Line Cathedral",
+        "class_name": "LaundryLineCathedral",
+        "scene": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.tscn",
+        "description": "The Catenary hero (formfinding): three washing lines sagging as true cosh curves, towels pegged plumb - and above each line its mirrored ghost arch, because a hanging chain flipped is a standing vault. Gaudi's method as laundry. Category-heroes pass, 2026-08-27.",
+        "category": "primitives",
+        "tags": [
+          "formfinding",
+          "catenary",
+          "minimum",
+          "surreal"
+        ],
+        "spatial_needs": {
+          "footprint_cells": 4,
+          "clearance_m": 0.6
+        }
+      }
+    }
+  ],
+  "mass_spring_bench": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "mass_spring_bench",
+      "entry": {
+        "dna": {
+          "axes": {
+            "assay": [
+              "none",
+              "gauge",
+              "control",
+              "chart",
+              "vitrine"
+            ]
+          }
+        },
+        "lookup_name": "mass_spring_bench",
+        "scene": "res://commons/artifacts/mass_spring_bench/mass_spring_bench.tscn",
+        "class_name": "MassSpringBench",
+        "name": "Mass-Spring Bench (a shape nobody specified)",
+        "description": "A grid of masses and springs settling on a bench - each spring pulling to rest length, the whole finding a shape nobody specified.",
+        "category": "soft_bodies",
+        "complexity": "beginner",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "medium",
+          "mass-spring"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.1,
+            1.21,
+            0.84
+          ],
+          "aabb_center": [
+            0.0,
+            0.6,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.21,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "verlet_workbench": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "verlet_workbench",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-12",
+          "stage": "2 - variation",
+          "axes": {
+            "relaxation": [
+              "worked",
+              "nudged",
+              "pressed",
+              "held"
+            ]
+          },
+          "default": "relaxation=worked, and the word returns the literal 4 that line 85 already declares (`@export var constraint_passes: int = 4`) and that `_make_sim` has always handed to the solver. It is a SHORT-CIRCUIT, not a formula that lands near it: RELAXATION_PASSES is a const dict with the integer 4 written out, so `sim.constraint_passes` is assigned the same value from the same table on every build. The pre-existing numeric contract survives intact — a config carrying `constraint_passes` sets `_passes_pinned` and `_effective_passes()` returns the number instead, so the word can never override a map written before this promotion. Both fixture exports are exact no-ops at their defaults: `still = false` selects the original gust branch character for character (`gust = sin(_t * 0.8) * 0.6`, `gravity = Vector3(gust, -3.0, 0.3 * sin(_t * 0.5))`, dial `sin(_t * 0.3) * 0.6`, sway `sin(_t * 0.25) * 0.06`), and `settle_steps = 60` is the literal count the shipped `for _i in 60` ran. ONE PLACEMENT in 2420 maps: FormFinding_Relaxation, token `verlet_workbench:90` — a rotation suffix and nothing else, so merged_config is empty, GridInteractablesComponent never calls apply_grid_config, and that placement never reaches a line this promotion added. No exhibit_furniture mount and no curation roster names it. The one behavioural change at the default is the deletion of `_rng.randomize()`; `_rng` is inherited from embodied_prop.gd and read nowhere in this file (grep: zero hits), so nothing observes it, and leaving it would have been a loaded gun for the next person who adds a randf to _build.",
+          "was": "a dial, a readout and a claim — none of them reachable by name. `constraint_passes` was already a clamped config key and `_readout_text` already printed `passes: %d`, so the bench could always be told to relax harder; but no map ever told it to, and there was no word a sweep could use. More seriously, it had no resting state at all: `_process` drove `_sim.gravity` from `sin(_t * 0.8)` off the wall clock and re-ran the integrator once per RENDERED frame, so the pose was a function of both elapsed time and frame count. Measured on a python replica of soft_body_sim.step(): with the gust running, `worked` moves 25.6 mm of max vertex displacement between render frame 66 and frame 90 — three times the entire worked-to-held separation of 8.5 mm. Any bite number taken from the shipped artifact would have been a fact about the shutter.",
+          "note": "`relaxation` is SHARED with cloth_simulation in this same wave, deliberately and character for character — apply_dna_block derived the same four values in the same order from two independent solvers: soft_body_sim's `for _p in constraint_passes` with a stiffness gain of 0.75, and ClothSimulation.gd's own iteration loop with a hard-coded gain. It is the same question, how insistently is a distance constraint enforced, so their bite numbers should ORDER the same way and sit within about a factor of two of each other; if they do not, that disagreement is evidence about the harness rather than about either design. The word exists at all because apply_dna_block refuses a numeric axis by design — sample points on a continuum are a design choice, not a fact about the code — so the four points are named here and derived there: nudged = 1, worked = 4 (the shipped literal), pressed = 8, held = 12. This artifact already WAS this axis; @identity states the claim outright (crank the passes up and the cloth stiffens; drop them and it sags — yet no linear system is ever solved). What was missing was the word.",
+          "declined": "`damping` (0.99), the purest rate axis in the sequence: four values reach the SAME drape, some sooner, and a still cannot tell them apart at rest — declined by name because this wave exists to refuse exactly that. The gust amplitudes (0.6 lateral, 0.3 in Z) move the cloth about seven times as far as the whole axis does and are still wrong, because they are a DRIVE: `sin(_t * 0.8)` never stops, so photographing them is photographing the clock, and the fixture's entire job is to switch them off. Cloth resolution (cloth_cols 10 / cloth_rows 8 / cell 0.085) is a real and interesting claim — the discretization IS the material — but `grain` is already the corpus's word for how a body is subdivided, across six artifacts with a different value set, and inventing a seventh synonym to serve ONE placement is worse than shipping one axis that is exactly right. The pin mode (`top_corners`, with six values already sitting in soft_body_shapes._cloth_is_pin) is flagdancer's `heading` in this same wave; if verlet_workbench ever wants it, the honest move is to take flagdancer's word and values, not a synonym.",
+          "fixture": {
+            "still": true,
+            "settle_steps": 420
+          },
+          "fixture_why": "AS SHIPPED THIS ARTIFACT IS NEVER AT REST, so without this fixture every number the sweep produces is about the frame clock rather than about the material. `still` zeroes the four things the bench drives off the wall clock — the lateral gust, the Z gust, the bench sway and the dial spin — in one guarded branch, so `_sim.gravity` holds the constant (0, -3, 0) the pre-settle already used and both rotating nodes hold rotation 0. `settle_steps` raises the existing SYNCHRONOUS pre-settle from 60 to 420 so every value reaches ITS OWN fixed point before frame 1. All of this is measured on a python replica of soft_body_sim.step() rather than argued: at 420 steps the pose is 0.050 mm from the 2400-step pose for nudged and bit-identical for worked, pressed and held; 66 further rendered frames then move nudged by 0.066 mm and the other three by 0.0000 mm. At the shipped 60 the same comparison moves nudged by 21.0 mm — ten times the closest pair's separation — because at step 60 nudged is still in transient overshoot, moving 0.88 mm in step 61 against 0.0010 mm in step 421. The step SIZE cannot drift with frame rate: soft_body_sim.step takes `dt: float = 0.0166667` and no caller passes another. The simulator holds no RNG and `_rng.randomize()` is deleted, so with the pose fixed in _ready two runs of one value are the same picture.",
+          "rebuild_guard": "apply_grid_config assigns every key it accepts, then compares `_build_signature()` — relaxation, the effective pass count, cloth_cols, cloth_rows, cell, emissive, stiffness, all four colours, still and settle_steps — and RETURNS before touching a live simulation when nothing the build reads has changed. Teardown walks an `_owned: Array[Node]` rather than `get_children()`, which is what the shipped version did: that loop freed every child on every config call, taking any plinth, highlight, collider or pickup plumbing the grid had attached down with the artifact, and it rebuilt unconditionally because there was no signature to compare. _ready() builds synchronously and there is no call_deferred anywhere in the build path.",
+          "predicted_degeneracy": "pressed vs held, and the arithmetic is the solver's own fixed-point law. Residual stretch scales as 1/(passes x gain) at gain 0.75, so the four values sit at 1.33 / 0.33 / 0.167 / 0.111 residual units and the last two are 0.056 apart against nudged-to-worked's 1.0 — 18:1 predicted. MEASURED on the replica at settle 420, as max vertex displacement: pressed-vs-held 2.154 mm and nudged-vs-worked 34.458 mm, a ratio of 16.0:1. The law holds and the prediction was 12% high. NOW THE PART THAT CAN BE WRONG, and it is about pixels rather than millimetres. The camera does not move between tiles: the merged MeshInstance3D AABB is 1.32 x 1.34 x 0.70 for all four values, because the cloth hangs between y 0.659 and 1.30 and never touches a face of it. At dna.framing 0.65 the frame is 2.479 m over 760 px, i.e. 3.261 mm/px — which puts pressed-vs-held at 0.66 px, SUB-PIXEL, and nudged-vs-worked at 10.6 px across a cloth holding 7.6% of frame. And the cloth is flat-shaded: _rebuild_cloth_mesh writes Vector3.UP into every normal, so its interior is a near-uniform emissive field and almost all of the change is SILHOUETTE, not shading. Counting the moving edge (a 235 px bottom travelling ~10.6 px, plus two 186 px sides averaging half of that) gives roughly 4,500 changed pixels out of 577,600. PREDICT nudged-vs-worked frame ~0.8%, focus ~9%; pressed-vs-held frame ~0.05%, focus ~1%. THE RISK IS NAMED HERE RATHER THAN DISCOVERED LATER: the frame number will look weak and only focus can carry this axis over the bar. If the whole axis reads under 2% on focus, suspect the harness before the ladder — check that `settle_steps` arrived as the integer 420 and not the string, and that `still` arrived as a bool — because the ladder is four genuinely different equilibria and is not in doubt. If it is real but faint, the remedy is dna.framing 0.45, which doubles the cloth to 15.8% of frame at the cost of cropping the readout panel.",
+          "framing": 0.65,
+          "framing_why": "The merged MeshInstance3D AABB is 1.32 x 1.34 x 0.70, radius 1.0035, and it is the SAME box for every value of the axis — the cloth sits comfortably inside it on all three axes, so the camera is genuinely fixed across the tiles rather than approximately so. At framing 1.0 the visible half-extent is radius x PAD = 1.0035 x 1.9 = 1.907 m and the 0.765 x 0.607 m cloth is only 3.2% of frame, under the ~6% floor. 0.65 brings the half-extent to 1.239 m and the cloth to 7.6%. It is chosen over the tighter 0.45 because 1.239 m still exceeds the AABB's circumscribed radius of 1.0035 m, so NOTHING is cropped: the constraint-pass dial and the `passes: N` readout stay in frame, and they are half of this artifact's argument — the readout says in digits what the cloth says in its silhouette."
+        },
+        "lookup_name": "verlet_workbench",
+        "scene": "res://commons/artifacts/verlet_workbench/verlet_workbench.tscn",
+        "class_name": "VerletWorkbench",
+        "name": "Verlet Workbench (constraints that hold themselves)",
+        "description": "A cloth relaxing under a Verlet integrator with a constraint-pass dial - integrate position from position, and the constraints hold without ever being solved.",
+        "category": "soft_bodies",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "applied",
+          "verlet"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.32,
+            1.34,
+            0.71
+          ],
+          "aabb_center": [
+            0.06,
+            0.67,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.34,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "frozen_glass_vessel": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "frozen_glass_vessel",
+      "entry": {
+        "lookup_name": "frozen_glass_vessel",
+        "name": "Frozen Glass Vessel",
+        "description": "Walkable glass vessel whose shape emerged from physics, not design. Sphere + top-pin ring + pre-inflation pulse + gravity + N settle steps = a drooping amphora, long bottle, wide bowl, or slumped vase depending on force balance. The clock is part of the genome — duration as design parameter. Walkable twin of gl01_classic_bulb from the soft-body gallery.",
+        "scene": "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+        "category": "soft_bodies",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies",
+          "morphogenesis"
+        ],
+        "sequence": "softbodies",
+        "parameters": {
+          "footprint": [
+            2,
+            3,
+            2
+          ],
+          "size_group": "medium"
+        },
+        "footprint": [
+          2,
+          3,
+          2
+        ],
+        "size_group": "medium",
+        "complexity": "advanced",
+        "tags": [
+          "soft_body",
+          "glass",
+          "vessel",
+          "frozen_process",
+          "walkable",
+          "physics"
+        ],
+        "dev_themes": [
+          "soft_body",
+          "physics",
+          "frozen_process",
+          "dna_bridge"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "around",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [
+            "jelly_cube",
+            "rd_coral_garden",
+            "soft_mushrooms"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.76,
+            1.82,
+            0.76
+          ],
+          "aabb_center": [
+            0.0,
+            -0.36,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 1.82,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.274361Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "calder_mobile": [
+    {
+      "registry_file": "commons/artifacts/registry/vectors_demos.json",
+      "registry_sha256": "3cf61be75ffd0b75240bfb9083453ec72e53807cb0c86a58c29cd4f304471d76",
+      "entry_key": "calder_mobile",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-04",
+          "stage": "2 - variation",
+          "axes": {
+            "lever": [
+              "solved",
+              "halved",
+              "inverted"
+            ],
+            "evidence": [
+              "result",
+              "trace",
+              "longhand"
+            ]
+          },
+          "default": "lever=solved, evidence=longhand - solved never enters the new branch at all: dl = arm*wr/total and dr = arm*wl/total are the shipped two lines and lp/rp the shipped two expressions, and no branch adds or removes an _rng draw, so the four placements (FormFinding_Equilibrium, Sky_Climb, Vectors_Act4b_Oscillation, Walk_grande_galerie_axial_text) and the sibling scene calder_object_mobile build the identical tree from the identical draw order. longhand keeps every gram tag and the plaque, and the plaque's second line still reads 'balanced: tau = w*d at every arm' because lever is solved. apply_grid_config no longer rebuilds on every call - only when a value both validates and CHANGED, and only after _ready has built once. Skipping that rebuild is byte-identical rather than merely equivalent, because _rng.seed = hash(seed) makes _build deterministic: the torn-down mobile always came back the same mobile.",
+          "was": "six exports - seed, use_objects, depth, span, leaf_prob, top_y - and every one a dial on the same sculpture: a different tree, a deeper tree, a longer rod. The one thing nothing could turn was the claim in the @identity, that every arm obeys tau = w*d. The artifact could not be photographed being wrong, and a claim that cannot fail is not visibly true either.",
+          "note": "lever is WHETHER THE LAW BINDS, not which law. solved is Calder's arithmetic, pivot placed so w_l*d_l = w_r*d_r and every rod dead level. halved cuts each rod in the middle - symmetry mistaken for balance, the mistake anyone makes who has not done the sum. inverted applies the law with the ratio reversed, the heavier child on the LONGER arm. The residual moment is not styled: the rod is hung by it, at asin(residual / (arm*W)), and the ladder falls out of the algebra rather than being chosen - halved leaves arm*(wr-wl)/2 and inverted leaves arm*(wr-wl), so the sign error leaves exactly twice the residual of the naive cut, in the same direction; sin(theta) doubles exactly and the angle a little more than doubles, since asin is convex. ONE HONEST PROXY, stated plainly so nobody mistakes it for physics: a rod whose loads hang on free wires carries cos(theta) in every moment term, so its only equilibrium is vertical with the heavy end straight down, and the true free-swing answer would fold the sculpture into a tangle at every non-default value. What is drawn is the residual normalised by the largest moment the arm could carry - zero exactly when the law is obeyed, which is why solved is untouched.",
+          "kin": "evidence is the family word taken character for character from the 34 siblings, THREE VALUES not four. There is no axiom tier because the plaque already IS the symbolic assertion - tau = w*d is printed on it at longhand - so a fourth value would be the third one minus its numbers, which is trace read backwards. The default is longhand rather than the motion demos' result, for weather_vector_field's stated reason: this artifact was born with its whole working on the table, a gram tag under every disc and a total on the plaque. NOT named `law`, although force_field_visualizer declares an axis by that word: over there the four values are four different force laws falling off differently, here there is one law and the question is whether it is solved, ignored or inverted. NOT `balance` either - that names the state, and lever names the mechanism that produces it.",
+          "still_note": "lever is the silhouette axis and should bite hard: every rod above the leaves rotates, so each disc moves in x AND y and the whole tree goes lopsided; inverted should measure at AT LEAST twice halved's displacement, in the same direction, so the two are ORDERED and not merely different - a pair that comes back unordered is a bug in the tilt, not a soft axis. evidence is the thin one: it removes a handful of Label3D gram tags and a four-line plaque from a 3.6 m sculpture, so expect dilution and crop-recheck before believing INERT. One coupling to know about: the plaque's own text changes with lever (balanced -> NOT balanced), so a diff along evidence at a non-default lever is not measuring evidence alone. Judge evidence at lever=solved.",
+          "declines": "use_objects stays a plain export and is deliberately NOT an axis: the corpus already ships that value as a separate token, calder_object_mobile.tscn, which sets use_objects=true, seed=13, depth=3 and has its own registry entry and its own placement in Sky_Climb. Declaring it here would sweep a family whose second member already has a name. seed, depth, span, leaf_prob and top_y stay dials - a different random tree is a different object, not a different argument."
+        },
+        "lookup_name": "calder_mobile",
+        "scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn",
+        "class_name": "CalderMobile",
+        "name": "Calder Mobile (balanced, real weights)",
+        "description": "A large hanging Calder mobile that is actually balanced. Every arm obeys the lever law τ = w·d: the two children of each rod are weighed, then the pivot is placed so w_left·d_left = w_right·d_right - the heavier shape rides the shorter arm - and the whole thing hangs level from a single ceiling point. Leaf masses are real: each flat painted disc is sheet aluminium, mass = π r²·t·ρ (t = 3 mm, ρ = 2700 kg/m³). Calder's primaries - red, yellow, blue, black, white. A plaque states the real total mass and the balance principle. Improves on the project's earlier calder_mobile_primaries, which was only a palette totem, not a balanced mobile.",
+        "category": "vectors",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "forces"
+        ],
+        "tags": [
+          "force",
+          "lever",
+          "torque",
+          "balance",
+          "calder",
+          "mobile",
+          "sculpture",
+          "art"
+        ],
+        "parameters": {
+          "seed": "tree shape (default 4)",
+          "depth": "tree depth (default 4)",
+          "use_objects": "false = discs, true = project primitives",
+          "top_y": "ceiling mount height (default 3.6)",
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "forces",
+          "lever",
+          "balance",
+          "art"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 3,
+            "back": 3,
+            "left": 3,
+            "right": 3
+          },
+          "player_position": "any",
+          "wall_backing": false,
+          "orientation": "any",
+          "isolation": 2,
+          "cluster_with": [],
+          "preferred_zone": "center",
+          "measured_footprint_cells": 9,
+          "footprint_source": "designed"
+        },
+        "qfep_connection": "A hanging Calder mobile that actually balances — every arm obeying the lever law, torque answering torque all the way up the tree. The chapter of forces made into sculpture that hangs in equilibrium: not a picture of balance but balance itself, each branch a solved equation, the whole a mobile that would tip if a single mass were wrong.",
+        "measurements": {
+          "aabb_size": [
+            5.93,
+            3.52,
+            0.5
+          ],
+          "aabb_center": [
+            0.09,
+            1.92,
+            0.0
+          ],
+          "grid_cells": [
+            6.0,
+            1.0
+          ],
+          "max_dimension_m": 5.93,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          6.0,
+          1,
+          1.0
+        ]
+      }
+    }
+  ],
+  "fractal_truss_tower": [
+    {
+      "registry_file": "commons/artifacts/registry/fractals.json",
+      "registry_sha256": "39e4960b52079a5a765279e0687a6b99a0ed0d329d90dd869222d5b66bf257a6",
+      "entry_key": "fractal_truss_tower",
+      "entry": {
+        "lookup_name": "fractal_truss_tower",
+        "scene": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
+        "class_name": "FractalTrussTower",
+        "name": "Fractal Truss Tower (max strength, min material)",
+        "description": "A room-scale branching truss whose struts split into thinner struts - the Eiffel trick: span the most with the least.",
+        "category": "fractals",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "fractals"
+        ],
+        "tags": [
+          "fractal",
+          "large",
+          "fractal"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "fractals",
+          "recursion",
+          "applications"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 9,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            7.0,
+            4.16,
+            7.0
+          ],
+          "aabb_center": [
+            0.0,
+            1.98,
+            0.0
+          ],
+          "grid_cells": [
+            7,
+            7
+          ],
+          "max_dimension_m": 7.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          7,
+          1,
+          7
+        ]
+      }
+    }
+  ],
+  "tensegrity_triangle": [
+    {
+      "registry_file": "commons/artifacts/registry/primitives.json",
+      "registry_sha256": "2884a0475399fa12da99a0c38253519924457c06662525fbf009c7c12edb272a",
+      "entry_key": "tensegrity_triangle",
+      "entry": {
+        "category": "primitives",
+        "complexity": "beginner",
+        "description": "A triangle of three struts and three joints holding its shape under a load that would fold any other polygon. Fuller: the triangle is the only rigid polygon. A compression pulse it visibly springs back from.",
+        "dev_themes": [
+          "commons",
+          "primitives",
+          "triangle",
+          "structure",
+          "fuller"
+        ],
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "tensegrity_triangle",
+        "map_ready": true,
+        "map_sequences": [
+          "primitives"
+        ],
+        "name": "Tensegrity Triangle",
+        "parameters": {
+          "tri_width": 1.2,
+          "tri_height": 1.1,
+          "load_amplitude": 0.035,
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.tscn",
+        "size_group": "compact",
+        "tags": [
+          "triangle",
+          "structure",
+          "fuller",
+          "tensegrity",
+          "rigid",
+          "didactic"
+        ],
+        "qfep_connection": "The triangle as relation made rigid - the first structure that holds itself up. Nature stabilises with triangles because nothing else stays true under load.",
+        "measurements": {
+          "aabb_size": [
+            1.35,
+            1.25,
+            0.15
+          ],
+          "aabb_center": [
+            0,
+            0.11,
+            0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.35,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "max_q_basin_room": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "max_q_basin_room",
+      "entry": {
+        "lookup_name": "max_q_basin_room",
+        "scene": "res://commons/artifacts/max_q_basin_room/max_q_basin_room.tscn",
+        "class_name": "MaxQBasinRoom",
+        "name": "Max-Q Basin Room (the liveliest minimum)",
+        "description": "A room with a deep narrow DEAD well (rigid, one shape) and a shallow wide ALIVE well (soft, a shape it keeps re-finding). Max Q is the liveliest minimum, not the deepest.",
+        "category": "soft_bodies",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "large",
+          "settling:"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 9,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            7.7,
+            3.11,
+            7.0
+          ],
+          "aabb_center": [
+            0.35,
+            -0.69,
+            0.0
+          ],
+          "grid_cells": [
+            8,
+            7
+          ],
+          "max_dimension_m": 7.7,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          8,
+          1,
+          7
+        ]
+      }
+    }
+  ],
+  "energy_landscape_bench": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "energy_landscape_bench",
+      "entry": {
+        "dna": {
+          "axes": {
+            "assay": [
+              "none",
+              "gauge",
+              "control",
+              "chart",
+              "vitrine"
+            ]
+          }
+        },
+        "lookup_name": "energy_landscape_bench",
+        "scene": "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn",
+        "class_name": "EnergyLandscapeBench",
+        "name": "Energy Landscape Bench (height is energy)",
+        "description": "A soft body settling on a wavy energy-landscape surface where height is energy, descending into the nearest basin.",
+        "category": "soft_bodies",
+        "complexity": "beginner",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "medium",
+          "settling:"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.1,
+            1.02,
+            0.7
+          ],
+          "aabb_center": [
+            0.0,
+            0.51,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.1,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "simulated_annealing": [
+    {
+      "registry_file": "commons/artifacts/registry/algorithms_misc.json",
+      "registry_sha256": "cac37fec0cf9c1c4f9c01b6544ee2c6c89e9b640bd3bafd82486c3844a8752a7",
+      "entry_key": "simulated_annealing",
+      "entry": {
+        "category": "algorithms",
+        "complexity": "intermediate",
+        "description": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
+        "dev_themes": [
+          "algorithms",
+          "misc"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "simulated_annealing",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Simulated Annealing",
+        "parameters": {
+          "configurable": [
+            "initial_temperature",
+            "cooling_rate",
+            "cooling_schedule",
+            "problem_type",
+            "adaptive_enabled",
+            "target_acceptance_rate",
+            "basin_hop_enabled",
+            "hop_strength",
+            "step_interval"
+          ],
+          "footprint": [
+            1.0,
+            18.0,
+            13.0
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
+        "tags": [
+          "simulated_annealing",
+          "optimization",
+          "temperature",
+          "metaheuristic",
+          "local_minimum",
+          "adaptive_cooling",
+          "basin_hopping",
+          "acceptance_probability"
+        ],
+        "geometry_spec": {
+          "mesh_type": "procedural_line",
+          "topology": "non_manifold",
+          "construction": {
+            "method": "vertex_line_strip",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "compute_vertices",
+              "connect_lines"
+            ]
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "vertex",
+            "driven_by": "per_frame_rebuild",
+            "affects": [
+              "vertex_positions"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~288"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.86,
+            1.0,
+            1.92
+          ],
+          "aabb_center": [
+            0.11,
+            0.5,
+            0.02
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 1.92,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          2
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 4,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.036080Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "The escape from the merely-nearby minimum: heat the system so it can jump out of shallow valleys, then cool it slowly so it settles into a deep one. Basin-hopping on an energy landscape, borrowed from how metals find their strongest crystal. The chapter's answer to descent's blindness — sometimes to find the best shape you must first let the form shake.",
+        "dna": {
+          "promoted": "2026-08-05",
+          "stage": "2 - variation",
+          "axes": {
+            "basin": [
+              "bowl",
+              "valley",
+              "plural",
+              "plateau",
+              "scarp"
+            ],
+            "evidence": [
+              "result",
+              "trace",
+              "longhand",
+              "axiom"
+            ]
+          },
+          "fixture": {
+            "anneal_seed": 20260805,
+            "prerun_steps": 900
+          },
+          "default": "basin=plural, evidence=longhand - plural short-circuits to the shipped problem_type 'rastrigin' WITHOUT WRITING IT: _sync_basin_from_exports only assigns problem_type when basin is something other than its default, so the objective string, the height range, the mesh and the colours are the same objects built by the same code as before. evidence=longhand is the shipped picture branch for branch - trail, both markers, hop marks, the P(accept) histogram and both working label lines - and _apply_evidence deliberately draws nothing itself, so the default does not even move the histogram's first frame. All five placements (Cabinet_Gallery, FormFinding_Annealing, Gallery_Misc, Gallery_Misc_Placed, Placement_Simulated_Annealing) are BARE tokens with no #key:value, and GridInteractablesComponent only calls apply_grid_config when merged_config is non-empty, so none of them reaches the new code at all. The two fixture exports default to 0 and 0, which are 'leave the global RNG alone' and 'run nothing early'.",
+          "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Twenty-eight exports existed and every one was a temperature, a rate, a count or a dimension; the one categorical knob, problem_type, was a bare String with its four legal values in a trailing COMMENT, reachable only by typing the exact word. apply_grid_config read fourteen keys and then, unconditionally on ANY call, tore the console and the control panel down, re-cut them, threw the search away and started a new one - the force_pad trap, dormant only because no token has ever carried a key.",
+          "note": "hand promotion 2026-08-05. basin is gradient_descent_visualization's word and its five values, character for character, and taking it is the point rather than a convenience: annealing and descent are the same picture - a runner on a relief - differing in exactly one thing, that this one is allowed to move UPHILL. That licence is meaningless on a bowl and is the only way out of an egg-crate, so the argument does not exist until the surface is named. A map that asks both tables for the same basin gets one landscape and two policies on it, which is the comparison neither can make alone. TWO OF THE FIVE FORMULAS ARE THE SIBLING'S UNTOUCHED (bowl = x^2+y^2, valley = the same Rosenbrock) and scarp is ported from it below; plural and plateau are served by THIS artifact's own shipped Rastrigin and Ackley instead of the sibling's Himmelblau and tanh disc, because both are textbook members of the class the word names and because swapping them in would have discarded the default this artifact ships with. Where the functions differ the word still means the same thing. evidence is the same four rungs the motion family uses, asked here of a search that is permitted to be wrong on purpose.",
+          "scarp_note": "THE RISE IS THE FAMILY'S PROPORTION, NOT ITS NUMBER. gradient_descent fixes a 3.0 step against a bowl spanning 2*4^2 = 32 over its domain and renders it with a per-function y_scale; this artifact normalises every relief over its own measured min/max, so a literal 3.0 against a domain-5 bowl spanning 50 would flatten to two thirds of the sibling's contrast and read as `bowl` with a smudge on it. SCARP_RATIO = 3/32 reproduces the ratio at whatever search_space_size is set to. Since the surface is coloured by normalised height, the whole x>0 half of the plate shifts band - this should be the loudest value on the axis, and if it is not, suspect the capture and not the function.",
+          "still_note": "EVERY RUNG OF BOTH AXES IS STANDING GEOMETRY, but the walk that draws three of evidence's four is not standing yet when the shutter opens. The bench settles 1.1 s, step_interval is 0.06, and _process performs at most ONE step per frame whatever step_interval says - so an unpinned capture photographs about eighteen steps of a thousand: a stub of trail, an almost-empty histogram, no basin hops (stagnation_threshold is 80) and nothing rejected. result / trace / longhand would then differ by a few centimetres of line and the axis would read INERT as a fact about the shutter. prerun_steps runs the search forward synchronously in _ready; anneal_seed pins the whole thing, without which four basin frames differ by the surface AND by four unrelated random walks drawn over it. The temperature schedule itself is NOT an axis and cannot be: cooling is the one thing this artifact does that a still cannot hold.",
+          "framing_note": "unchecked against a capture in this pass. The axis lives in a 1.4 m plate that is 0.15 m deep in relief, the sweep camera sits at pitch -0.26 rad, and _create_console now stands the whole thing on a 0.90 m deck with a rail ring and a control pad - so a fit-by-diagonal sees a near-edge-on plate inside a much taller box. Deliberately NOT given a dna.framing number here: the identical geometry on gradient_descent_visualization carries the same warning and no number, and inventing one without a frame to check it against would be guessing at two artifacts at once. Check subject % before reading any verdict on either axis.",
+          "placements": 5
+        }
+      }
+    }
+  ],
+  "impossible_end_table": [
+    {
+      "registry_file": "commons/artifacts/registry/primitives.json",
+      "registry_sha256": "2884a0475399fa12da99a0c38253519924457c06662525fbf009c7c12edb272a",
+      "entry_key": "impossible_end_table",
+      "entry": {
+        "name": "Impossible End Table",
+        "class_name": "ImpossibleEndTable",
+        "scene": "res://commons/artifacts/impossible_end_table/impossible_end_table.tscn",
+        "description": "The Equilibrium hero (formfinding), elevating tensegrity_triangle to furniture: an end table whose top never touches its base - one cable hangs it, three stop the sway, a teacup sits unbothered. Islands of compression in a sea of tension. Category-heroes pass, 2026-08-27.",
+        "category": "primitives",
+        "tags": [
+          "formfinding",
+          "tensegrity",
+          "equilibrium",
+          "surreal"
+        ],
+        "spatial_needs": {
+          "footprint_cells": 2,
+          "clearance_m": 0.6
+        }
+      }
+    }
+  ],
+  "self_shaping_forge": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "self_shaping_forge",
+      "entry": {
+        "lookup_name": "self_shaping_forge",
+        "scene": "res://commons/artifacts/self_shaping_forge/self_shaping_forge.tscn",
+        "class_name": "SelfShapingForge",
+        "name": "Self-Shaping Forge (the thesis made flesh)",
+        "description": "A forge where raw matter descends toward max Q, its liveliest form, and emerges - the project's thesis made flesh: gradient descent toward the shape that persists by moving.",
+        "category": "soft_bodies",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "applied",
+          "matter"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            1.27,
+            0.5
+          ],
+          "aabb_center": [
+            0.0,
+            0.63,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 1.27,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "balance_puzzle": [
+    {
+      "registry_file": "commons/artifacts/registry/furniture.json",
+      "registry_sha256": "d7d7adc5e3562507f7140b669722bd394395fb29ae418148d207d531519babdd",
+      "entry_key": "balance_puzzle",
+      "entry": {
+        "dna": {
+          "axes": {
+            "tell": [
+              "mark",
+              "none",
+              "ghost",
+              "exemplar"
+            ]
+          }
+        },
+        "capacity": "JUDGE which translations and rotations preserve stability in a stacked structure.",
+        "category": "puzzles",
+        "complexity": "intermediate",
+        "description": "Stack pieces until the system stops moving. Each drop translates and reorients a block, but the goal is not motion for its own sake: it is finding a configuration whose center of mass and support relations hold long enough to trigger the creature reward. The puzzle turns balance into a lived lesson about which transformations preserve stability and which topple it. It frames transformation as a negotiation with gravity.",
+        "dev_themes": [
+          "decoration",
+          "environment"
+        ],
+        "gamwell_reference": "",
+        "include_in_map_data": true,
+        "interactions": [
+          "grab and drop pieces into a taller stack",
+          "raise the structure past the height threshold",
+          "hold the arrangement stable until the timer completes",
+          "watch the reward creature emerge from a successful configuration"
+        ],
+        "lookup_name": "balance_puzzle",
+        "map_ready": true,
+        "map_sequences": [
+          "transformation"
+        ],
+        "name": "Balance Puzzle",
+        "qfep_connection": "Transformation changes S while stability acts as the invariant. The stack only counts as coherent when many local moves preserve a global equilibrium.",
+        "scene": "res://commons/primitives/balance/balance_puzzle.tscn",
+        "sequence": "transformation",
+        "signals": [
+          "height_changed",
+          "stability_progress",
+          "transformation_complete",
+          "transformation_started",
+          "walker_created"
+        ],
+        "tags": [
+          "transformation",
+          "balance",
+          "gravity",
+          "stacking",
+          "stability",
+          "physics",
+          "puzzles"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "above",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 2,
+          "cluster_with": [
+            "intro",
+            "artifact",
+            "primitives",
+            "sequence",
+            "thematically"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.73,
+            1.43,
+            0.5
+          ],
+          "aabb_center": [
+            0.11,
+            0.06,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 1.43,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.110524Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "gradient_descent_optimizer": [
+    {
+      "registry_file": "commons/artifacts/registry/soft_bodies.json",
+      "registry_sha256": "ba22427feb2a64101f48f648930d961eea9c9729b5eeca2e2268f60c4df31313",
+      "entry_key": "gradient_descent_optimizer",
+      "entry": {
+        "lookup_name": "gradient_descent_optimizer",
+        "scene": "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn",
+        "class_name": "GradientDescentOptimizer",
+        "name": "Gradient Descent Optimizer (the bridge to learning)",
+        "description": "A soft body descending an energy landscape toward max Q with a step/energy readout - the same motion as training a model. Soft bodies are gradient descent you can poke.",
+        "category": "soft_bodies",
+        "complexity": "intermediate",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "softbodies"
+        ],
+        "tags": [
+          "soft_body",
+          "applied",
+          "settling:"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "soft_bodies",
+          "morphology",
+          "qfep"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.23,
+            1.21,
+            0.9
+          ],
+          "aabb_center": [
+            0.12,
+            0.61,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.23,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ]
+      }
+    }
+  ]
+}

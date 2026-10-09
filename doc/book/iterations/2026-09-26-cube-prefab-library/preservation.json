@@ -1,0 +1,89 @@
+{
+  "checks": [
+    {
+      "name": "Every earlier interactables token and coordinate retained",
+      "passed": true
+    },
+    {
+      "name": "Only the library placement added",
+      "passed": true
+    },
+    {
+      "name": "Fifteen earlier artifact placements retained",
+      "passed": true
+    },
+    {
+      "name": "Every earlier utilities token and coordinate retained",
+      "passed": true
+    },
+    {
+      "name": "No extra utility added",
+      "passed": true
+    },
+    {
+      "name": "All layer rows match the new 19 by 14 hall",
+      "passed": true
+    },
+    {
+      "name": "Other curation records unchanged in artifact_roles.json",
+      "passed": true
+    },
+    {
+      "name": "Other curation records unchanged in museum_core_encounters.json",
+      "passed": true
+    },
+    {
+      "name": "All 19 native checks completed and passed",
+      "passed": true
+    },
+    {
+      "name": "No GDScript error in the completed native run",
+      "passed": true
+    },
+    {
+      "name": "Native run used the current commons/maps/Point_Animatedcube/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Native run used the current commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "name": "Native run used the current doc/book/iterations/2026-09-26-cube-prefab-library/probe.gd",
+      "passed": true
+    },
+    {
+      "name": "Four real source scene families",
+      "passed": true
+    },
+    {
+      "name": "All catalog source scenes exist",
+      "passed": true
+    },
+    {
+      "name": "Twenty-four catalog entries",
+      "passed": true
+    },
+    {
+      "name": "Library is a primary encounter after the cube construction group",
+      "passed": true
+    },
+    {
+      "name": "Earlier outline, corner, diagonal and net inquiry preserved verbatim",
+      "passed": true
+    },
+    {
+      "name": "Shared book illustration matches the native image",
+      "passed": true
+    },
+    {
+      "name": "Book digest matches current final.md",
+      "passed": true
+    },
+    {
+      "name": "Learner verification remains open",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

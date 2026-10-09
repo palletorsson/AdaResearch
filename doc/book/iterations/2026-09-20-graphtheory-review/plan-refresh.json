@@ -1,0 +1,235 @@
+{
+  "sequence": "graphtheory",
+  "maps": [
+    "GT_Spanning_Trees",
+    "GT_Matching"
+  ],
+  "live_sequence_maps": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "museum_template": "grande-galerie-axial",
+  "template_source": "Explicit existing museum key",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json",
+    "commons/data/map_authored.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "8a467293345fce66eaf49f2e2e7f194655fb2b6828b35acdeb1b2c040fb78d98",
+    "commons/data/museum/em_plan.json": "8a467293345fce66eaf49f2e2e7f194655fb2b6828b35acdeb1b2c040fb78d98",
+    "commons/data/map_authored.json": "24a4a97f65f7184e20735ea55cbb9ca8508053c8ebd6549a9403a6d494ac5d92",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/graphtheory.json": "c995f27a904d87134ce6548a8cefdc29e29e1ebd1d51a9b907b7973c8c22bf48",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/GT_Spanning_Trees/map_data.json": "387c44382ab6da077b11dcfe4315494413c17b65c0b3ed64df4c8834d51a92e8",
+    "commons/maps/GT_Matching/map_data.json": "80742e73d65564546ddaecb40c506701227a3cbe80fadb36edfb55e62212de90"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "4bb34284a1fca24340784f333ea84d1c1598c5e887110909a04c1c61da022e40",
+    "commons/data/museum/em_plan.json": "4bb34284a1fca24340784f333ea84d1c1598c5e887110909a04c1c61da022e40",
+    "commons/data/map_authored.json": "cbcbb5d1d0ba00687e46df61857dd51447813918e3f1f73b8d07a957cf9b3efa"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 194,
+    "commons/data/museum/em_plan.json": 194
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 196,
+    "commons/data/museum/em_plan.json": 196
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [
+      {
+        "map": "GT_Foundations",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Layout",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Pathfinding",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Network_Analysis",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Connectivity",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Flow",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 6,
+          "pearls_total": 8
+        }
+      }
+    ],
+    "commons/data/museum/em_plan.json": [
+      {
+        "map": "GT_Foundations",
+        "before": {
+          "pearl_index": 0,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 0,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Layout",
+        "before": {
+          "pearl_index": 1,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 1,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Pathfinding",
+        "before": {
+          "pearl_index": 2,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 2,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Network_Analysis",
+        "before": {
+          "pearl_index": 3,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 3,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Connectivity",
+        "before": {
+          "pearl_index": 4,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 4,
+          "pearls_total": 8
+        }
+      },
+      {
+        "map": "GT_Flow",
+        "before": {
+          "pearl_index": 5,
+          "pearls_total": 6
+        },
+        "after": {
+          "pearl_index": 6,
+          "pearls_total": 8
+        }
+      }
+    ]
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "GT_Spanning_Trees",
+      "pearl_index": 5,
+      "room": {
+        "w": 15,
+        "h": 17
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 15,
+        "src_h": 17,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "GT_Matching",
+      "pearl_index": 7,
+      "room": {
+        "w": 15,
+        "h": 17
+      },
+      "artifacts": 1,
+      "ruling": {
+        "src_w": 15,
+        "src_h": 17,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T095145317939Z"
+}

@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "name": "ready creates its label",
+      "passed": true
+    },
+    {
+      "name": "ready creates its sphere and collision",
+      "passed": true
+    },
+    {
+      "name": "point retains XR pickable behavior",
+      "passed": true
+    },
+    {
+      "name": "point stays kinematic under the angular model",
+      "passed": true
+    },
+    {
+      "name": "point retains the Forces material",
+      "passed": true
+    },
+    {
+      "name": "ready places bob at the declared radius",
+      "passed": true
+    },
+    {
+      "name": "same position with opposite velocities separates",
+      "passed": false
+    },
+    {
+      "name": "symmetric states keep opposite angles",
+      "passed": true
+    },
+    {
+      "name": "positive turning point accelerates toward centre",
+      "passed": true
+    },
+    {
+      "name": "negative turning point accelerates toward centre",
+      "passed": true
+    },
+    {
+      "name": "rest stays at rest",
+      "passed": true
+    },
+    {
+      "name": "six-second release makes repeated crossings",
+      "passed": false
+    },
+    {
+      "name": "crossings alternate velocity sign",
+      "passed": true
+    },
+    {
+      "name": "constrained bob keeps its radius after motion",
+      "passed": true
+    },
+    {
+      "name": "readout exposes signed speed",
+      "passed": true
+    },
+    {
+      "name": "pickup signal begins hold",
+      "passed": true
+    },
+    {
+      "name": "held position supplies angle",
+      "passed": true
+    },
+    {
+      "name": "holding does not invent crossings",
+      "passed": true
+    },
+    {
+      "name": "release sample window stays bounded",
+      "passed": true
+    },
+    {
+      "name": "still hand releases with zero angular speed",
+      "passed": true
+    },
+    {
+      "name": "drop clears the hand sample record",
+      "passed": true
+    },
+    {
+      "name": "tangential metres per second become radians per second",
+      "passed": true
+    },
+    {
+      "name": "out-of-plane gesture contributes no swing",
+      "passed": true
+    },
+    {
+      "name": "rotated study converts world hand velocity",
+      "passed": true
+    },
+    {
+      "name": "desktop begin/end use the same state",
+      "passed": true
+    },
+    {
+      "name": "per-tick damping changes with physics tick rate",
+      "passed": false
+    },
+    {
+      "name": "independent instance has independent state",
+      "passed": true
+    },
+    {
+      "name": "two-instance transfer preserves opposite motion",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [
+    "same position with opposite velocities separates",
+    "six-second release makes repeated crossings",
+    "per-tick damping changes with physics tick rate"
+  ],
+  "measurements": {
+    "crossing_signs": [],
+    "last_two_second_peak_by_physics_hz": {
+      "60": 0.126227309396692,
+      "90": 0.168856097774721
+    }
+  },
+  "passed": false,
+  "scope": "Published study in native Godot; no tracked headset or human learner claim.",
+  "source": "res://doc/book/iterations/2026-10-08-wavefunctions-what-returns/extracted/forgot-velocity.gd"
+}

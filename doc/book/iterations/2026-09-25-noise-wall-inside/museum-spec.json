@@ -1,0 +1,133 @@
+{
+  "shots": [],
+  "rays": [
+    {
+      "tag": "east doorway threshold",
+      "x": 9,
+      "z": 6.5,
+      "top": 0,
+      "tolerance": 0.15
+    },
+    {
+      "tag": "west exit aisle",
+      "x": 3.3,
+      "z": 6.5,
+      "top": 0,
+      "tolerance": 0.15
+    }
+  ],
+  "walks": [
+    {
+      "from": [
+        7.5,
+        0.07,
+        1.5
+      ],
+      "to": [
+        9.3,
+        0.07,
+        2.6
+      ],
+      "tag": "arrival to east aisle",
+      "seconds": 3
+    },
+    {
+      "from": [
+        9.3,
+        0.07,
+        2.6
+      ],
+      "to": [
+        9.5,
+        0.07,
+        6.5
+      ],
+      "tag": "along east side",
+      "seconds": 4
+    },
+    {
+      "from": [
+        9.5,
+        0.07,
+        6.5
+      ],
+      "to": [
+        7.8,
+        0.07,
+        6.5
+      ],
+      "tag": "enter east doorway",
+      "seconds": 3
+    },
+    {
+      "from": [
+        7.8,
+        0.07,
+        6.5
+      ],
+      "to": [
+        7.8,
+        0.07,
+        5.3
+      ],
+      "tag": "reach inside controls",
+      "seconds": 2
+    },
+    {
+      "from": [
+        7.8,
+        0.07,
+        5.3
+      ],
+      "to": [
+        7.8,
+        0.07,
+        6.5
+      ],
+      "tag": "return from controls",
+      "seconds": 2
+    },
+    {
+      "from": [
+        7.8,
+        0.07,
+        6.5
+      ],
+      "to": [
+        3.3,
+        0.07,
+        6.5
+      ],
+      "tag": "cross room and leave west door",
+      "seconds": 4
+    },
+    {
+      "from": [
+        3.3,
+        0.07,
+        6.5
+      ],
+      "to": [
+        3.3,
+        0.07,
+        10.0
+      ],
+      "tag": "west aisle toward exit",
+      "seconds": 3
+    },
+    {
+      "from": [
+        3.3,
+        0.07,
+        10.0
+      ],
+      "to": [
+        6.5,
+        0.07,
+        11.5
+      ],
+      "tag": "return to spine exit",
+      "seconds": 4
+    }
+  ]
+}

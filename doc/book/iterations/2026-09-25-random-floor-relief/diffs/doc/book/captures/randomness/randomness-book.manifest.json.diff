@@ -1,0 +1,27 @@
+--- before/doc/book/captures/randomness/randomness-book.manifest.json
++++ doc/book/captures/randomness/randomness-book.manifest.json
+@@ -1,6 +1,6 @@
+ {
+-  "captured_at": "2026-09-25T09:31:13.341314+00:00",
+-  "base_commit": "5607f3ad3efbd8d575b0edb70c07afa6008ea65d",
++  "captured_at": "2026-09-25T09:46:09.992081+00:00",
++  "base_commit": "2ce7f33642ae82f05f4b84d9691e33c038592331",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+   "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+@@ -70,7 +70,7 @@
+     {
+       "map": "Random_Space",
+       "path": "commons/maps/Random_Space/final.md",
+-      "sha256": "3750b3b7ea693fbfc2e8f1f766959afa3803fd1dd2e97bfa40edb89a2c008885"
++      "sha256": "32e210aa458267293f7f9ba477c43cd87f608f13c82913237126140776f3303c"
+     },
+     {
+       "map": "Random_Game",
+@@ -78,5 +78,5 @@
+       "sha256": "5a3220a1f42de10c868851eaaaedb0fca9cc38cb18a7338027e18e14b84cc6a3"
+     }
+   ],
+-  "output_sha256": "e341ea38d08d3b5198b99ca7da4d7975f240ff1419fb92de9461c0b321d8b3ee"
++  "output_sha256": "8f6d2ac3c7fab1a5eb25b3b9bbf7cb884b025a9ae26315b9e85fe141b597a894"
+ }

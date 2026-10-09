@@ -1,0 +1,27 @@
+--- before/line_relations_gallery.gd
++++ after/line_relations_gallery.gd
+@@ -39,6 +39,7 @@
+ 	rod("depth_cross",Vector3(7,1.25,5.0),Vector3.RIGHT,2.4,"stick")
+ 	floor_words("GRAB A LINE. LEAVE ANOTHER ARRANGEMENT.",Vector3(-0.5,0.016,8.0),Vector2(7,0.22))
+ 	wall_studies()
++	wall_planks()
+ 	# One continuous mark runs right into the east wall, then up its face.
+ 	paint(Vector3(-6,0.016,13.7),Vector3(12.49,0.016,13.7),0.065,Color("202329"))
+ 	paint(Vector3(12.49,0.016,13.7),Vector3(12.49,3.0,13.7),0.065,Color("202329"))
+@@ -81,3 +82,16 @@
+ 	# Native room reset may call this; no automatic snapping interrupts a hand.
+ 	for i in range(lines.size()):
+ 		if not lines[i].is_picked_up():lines[i].transform=first_poses[i]
++
++func wall_planks() -> void:
++	# Seven lengths share one angle and section. Account for the section so
++	# each lower corner rests on the floor and the upper edge meets the wall.
++	var angle := deg_to_rad(70.0)
++	var direction := Vector3(cos(angle),sin(angle),0)
++	for i in range(7):
++		var length_m := 1.0 + float(i)*0.5
++		var centre := Vector3(
++			12.48 - length_m*0.5*cos(angle) - 0.06*sin(angle),
++			length_m*0.5*sin(angle) + 0.06*cos(angle),
++			1.0 + float(i)*0.9)
++		rod("wall_plank_%d" % (i+1),centre,direction,length_m,"plank")

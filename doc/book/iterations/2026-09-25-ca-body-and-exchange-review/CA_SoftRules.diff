@@ -1,0 +1,20 @@
+--- before/commons/maps/CA_SoftRules/final.md
++++ commons/maps/CA_SoftRules/final.md
+@@ -4,7 +4,7 @@
+ 
+ Two small squares wait on the tables. Behind them, the same squares wait on curved walls. The room has already enlarged their answer, although neither field has taken a step.
+ 
+-At the side desk, find W. It lies just outside the seeded square. Its V reading is zero in both fields. Press STEP once. On the left, a little arrives. On the right, nothing. Look back at the pictures: can you find that difference without the numbers?
++Find the small gold frame on either table, just outside the seeded square. This is W; the side desk reads its values. V is zero there in both fields. Press STEP once. On the left, a little arrives. On the right, nothing. Look back at the pictures: can you find that difference without the numbers?
+ 
+ Press +100 and let the local clock complete its hundred updates. The fields begin to part. They began with the same values, at the same addresses. They have the same reaction. What has the right-hand square been denied?
+ 
+@@ -16,7 +16,7 @@
+ return a[y*N+(x+N-1)%N]+a[y*N+(x+1)%N]+a[((y+N-1)%N)*N+x]+a[((y+1)%N)*N+x]-4.0*a[y*N+x]
+ ```
+ 
+-The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Two choices have changed: a cell holds two fractions instead of one bit, and what it consults is not a count but a difference.
++The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Each cell now holds two fractions, and a neighbour matters by how much its concentration differs.
+ 
+ There is also a reaction at the address itself. The product U × V × V removes some U and adds some V. A feed term replenishes U; another term removes V. The installation uses the same arithmetic as the project's existing Gray–Scott generator,[^ca-gray-scott] now exposed one update at a time:
+ 

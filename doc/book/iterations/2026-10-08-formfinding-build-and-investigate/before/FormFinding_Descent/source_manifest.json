@@ -1,0 +1,28 @@
+{
+  "room": "FormFinding_Descent",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/FormFinding_Descent/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/FormFinding_Descent/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/FormFinding_Descent/map_data.json": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+    "tools/probes/formfinding_lessons_museum.gd": "0cd60912059a8d36a10718517403f715c7540560ed23ed0e55dcf96009b10aa4",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "f4193017c397f226cab23014101eef6bbf03fadfeda0707d0dccf69efcfb6651",
+    "ada_run/encounter_pilot/FormFinding_Descent/control.json": "430322aab01200199dc61a71f29ab98d19fcc67734672729931ab60e4544a6fb",
+    "ada_run/encounter_pilot/FormFinding_Descent/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/FormFinding_Descent/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/FormFinding_Descent/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0"
+  }
+}

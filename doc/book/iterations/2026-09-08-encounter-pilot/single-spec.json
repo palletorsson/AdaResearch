@@ -1,0 +1,18 @@
+{
+  "rays": [
+    {"tag": "pickup support", "x": 2.5, "z": 4.5, "top": 0},
+    {"tag": "western approach support", "x": 1.5, "z": 4.5, "top": 0},
+    {"tag": "western corridor support", "x": 0.5, "z": 5.5, "top": 0}
+  ],
+  "walks": [
+    {"tag": "western corridor to approach", "from": [0.5, 0.1, 5.5], "to": [0.5, 0, 4.5], "seconds": 2},
+    {"tag": "approach to pause", "from": [0.5, 0.1, 4.5], "to": [1.2, 0, 4.5], "seconds": 2, "token": "pick_up_cube", "expect_collected": false},
+    {"tag": "contact collects pickup", "from": [1.2, 0.1, 4.5], "to": [2.5, 0, 4.5], "seconds": 2, "token": "pick_up_cube", "expect_collected": true},
+    {"tag": "return from empty position", "from": [2.5, 0.1, 4.5], "to": [0.5, 0, 4.5], "seconds": 2}
+  ],
+  "shots": [
+    {"tag": "overview", "from": [13, 12, 16], "look_at": [5, 0, 8]},
+    {"tag": "pickup-eye", "from": [0.5, 1.65, 4.5], "look_at": [2.5, 0.65, 4.5]},
+    {"tag": "western-corridor-eye", "from": [0.5, 1.65, 6.5], "look_at": [0.5, 0.8, 4.5]}
+  ]
+}

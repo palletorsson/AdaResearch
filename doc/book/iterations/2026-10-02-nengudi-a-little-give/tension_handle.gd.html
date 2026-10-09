@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>tension_handle.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eeeae3;color:#302830;font:17px/1.65 system-ui}header,main,footer{max-width:1180px;margin:auto;padding:42px 30px}h1{font:clamp(58px,8vw,100px)/1.02 Georgia;margin:24px 0}h2{font:38px/1.2 Georgia}a{color:#873c59;text-underline-offset:4px}nav{display:flex;gap:25px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:770px}.reading{font:24px/1.65 Georgia;max-width:760px;margin:65px auto}.reading p{margin:0 0 28px}section{padding:32px 0;scroll-margin-top:25px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small{font-size:13px;color:#71636a}details{background:#e4dcd5;padding:22px;margin:25px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a242b;color:#ffe0ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 20px;border:1px solid #9c8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ad5178}.states figure{display:none}.states #rest:checked~.rest,.states #pull:checked~.pull,.states #loaded:checked~.loaded{display:block}.states input:checked+label{background:#853b58;color:white}.note{border-left:3px solid #b66584;padding:5px 23px}code{font-size:.9em}@media(max-width:650px){header,main,footer{padding:28px 17px}.reading{font-size:21px}}</style><main><a href="index.html#making">Back to the study</a><h1>tension_handle.gd</h1><pre>extends &quot;res://addons/godot-xr-tools/objects/pickable.gd&quot;
+## The solver follows a held handle; on release the handle follows the solver.
+var desktop_held := false
+
+func _init() -&gt; void:
+	collision_layer = 4
+	collision_mask = 0
+	freeze = true
+	release_mode = ReleaseMode.FROZEN
+
+func _ready() -&gt; void:
+	add_to_group(&quot;no_gravity_gun&quot;)
+	var shape := SphereShape3D.new(); shape.radius = 0.16
+	var collider := CollisionShape3D.new(); collider.shape = shape; add_child(collider)
+	var mesh := SphereMesh.new(); mesh.radius = 0.11; mesh.height = 0.22
+	var grip := MeshInstance3D.new(); grip.mesh = mesh
+	var material := StandardMaterial3D.new(); material.albedo_color = Color(&quot;d37c99&quot;)
+	material.roughness = 0.45; grip.material_override = material; add_child(grip)
+	super()
+
+func held_by_visitor() -&gt; bool:
+	return desktop_held or is_picked_up()
+
+func on_desktop_grab(_pointer: Node) -&gt; void:
+	desktop_held = true
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+	desktop_held = false
+	freeze = true
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+</pre></main></html>

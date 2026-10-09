@@ -1,0 +1,67 @@
+
+	# This staged hall builds its works inside GridSystem, beneath the museum
+	# simulation record. Inspect those actual nodes too; gallery edit records
+	# alone are not an inventory of a simulation's nested artifacts.
+	var nested_scripts := {
+		"axial_sweep":load("res://commons/artifacts/axial_sweep/axial_sweep.gd"),
+		"rotation_array_compare":load("res://commons/artifacts/rotation_studies/array_compare.gd"),
+		"boolean_tunnel":load("res://algorithms/transformation/booleanTunnel/booleanTunnel.gd")}
+	for candidate in hall.find_children("*","Node3D",true,false):
+		for token in nested_scripts:
+			if candidate.get_script()==nested_scripts[token]:
+				nodes[token]=candidate
+				report.artifacts.append({"token":token,"path":str(candidate.get_path()),"position":arr(candidate.global_position-origin),"source":"nested simulation grid"})
+	report["checks"]=[]
+	var study: Node3D=nodes.get("axial_sweep")
+	check(report,is_instance_valid(study),"Axial sweep loads in the authored museum hall")
+	if not is_instance_valid(study):
+		report["failures"]=failures
+		FileAccess.open(folder+"report.json",FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+		quit(1);return
+	var arrays: Node3D=nodes.get("rotation_array_compare")
+	var tunnel: Node3D=nodes.get("boolean_tunnel")
+	check(report,is_instance_valid(arrays) and is_instance_valid(tunnel),"Existing array and tunnel remain")
+	check(report,study.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Study retains metre scale")
+	study.set_process(false)
+	study.seek(0)
+	check(report,study.shape_id=="cube" and not study.show_envelope,"Cube begins turning with its boundary hidden")
+	check(report,is_equal_approx(study.get_node("ViewingPlate").global_position.y+0.03-study.global_position.y,1.7),"Viewing plate top remains 1.7 m above base")
+	var points: PackedVector3Array=study.get_shape_vertices()
+	var start_basis: Basis=study.meshspin.basis
+	study.playing=true
+	study.call("_process",5.0)
+	check(report,not study.meshspin.basis.is_equal_approx(start_basis),"Running clock actually turns the body")
+	check(report,study.get_shape_vertices()==points,"Turn retains the source geometry")
+	var pointer:=Camera3D.new();root.add_child(pointer)
+	var area: Node3D=study.buttons[1].get_node("InteractableAreaButton")
+	XRToolsPointerEvent.pressed(pointer,area,area.global_position)
+	XRToolsPointerEvent.released(pointer,area,area.global_position)
+	check(report,not study.playing,"Actual PAUSE button stops the clock")
+	var stopped: Basis=study.meshspin.basis
+	study.call("_process",1.0)
+	check(report,study.meshspin.basis.is_equal_approx(stopped),"Paused body holds its angle")
+	area=study.buttons[2].get_node("InteractableAreaButton")
+	XRToolsPointerEvent.pressed(pointer,area,area.global_position)
+	XRToolsPointerEvent.released(pointer,area,area.global_position)
+	check(report,study.show_envelope and study.envelope.visible,"Actual BOUNDARY button reveals the outline")
+	check(report,is_equal_approx(study.envelope_radius_at(0),sqrt(2.0)*0.3),"Cube contour radius agrees with corner distance")
+	area=study.buttons[0].get_node("InteractableAreaButton")
+	XRToolsPointerEvent.pressed(pointer,area,area.global_position)
+	XRToolsPointerEvent.released(pointer,area,area.global_position)
+	check(report,study.shape_id=="triangle" and study.envelope.visible,"Actual SHAPE button replaces cube with triangle and keeps boundary visible")
+	check(report,is_equal_approx(study.envelope_radius_at(-0.35),0.45) and is_zero_approx(study.envelope_radius_at(0.35)),"Triangle sweep has wide base and zero-radius tip")
+	check(report,study.meshspin.find_children("*","CollisionShape3D",true,false).is_empty() and study.envelope.find_children("*","CollisionShape3D",true,false).is_empty(),"The rotating geometry and outline add no hidden solid")
+	study.set_shape("cube");study.set_envelope(false);study.seek(1.5)
+	pointer.queue_free()
+	var at:=study.global_position-origin
+	var array_at:=arrays.global_position-origin
+	var tunnel_at:=tunnel.global_position-origin
+	report["study_at"]=arr(at)
+	var route: Array[Vector3]=[array_at+Vector3(0,0.03,12.5),at+Vector3(0,0.03,-1.05),at+Vector3(1.3,0.03,-1.05),at+Vector3(1.3,0.03,1.4),at+Vector3(-1.3,0.03,1.4),at+Vector3(-1.3,0.03,-1.05),at+Vector3(0,0.03,-1.05),tunnel_at+Vector3(0,0.03,-1.4)]
+	spec["walks"]=[]
+	for i in range(route.size()-1):
+		spec.walks.append({"tag":"continuous-approach-"+str(i),"from":arr(route[i]),"to":arr(route[i+1]),"seconds":route[i].distance_to(route[i+1])/2.0+1.2})
+	spec["shots"]=[]
+	for state in ["cube","cube-boundary","triangle-boundary"]:
+		spec.shots.append({"tag":state,"from":arr(at+Vector3(-0.6,1.7,-1.65)),"look_at":arr(at+Vector3(0,1.65,0)),"fov":68,"state":state})
+	spec.shots.append({"tag":"museum-study-context","from":arr(at+Vector3(-3.3,2.6,-4.1)),"look_at":arr(at+Vector3(3,1.0,3.5)),"fov":80,"state":"cube-boundary"})

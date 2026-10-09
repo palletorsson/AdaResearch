@@ -1,0 +1,148 @@
+{
+  "checks": [
+    {
+      "name": "Both 1331-site arrays start at four except B centre five",
+      "passed": true
+    },
+    {
+      "name": "Changing B leaves independent A intact",
+      "passed": true
+    },
+    {
+      "name": "Interior has26 and corner7 neighbours; no self or wrap",
+      "passed": true
+    },
+    {
+      "name": "Integer uniform first update erases intervention in whole arrays",
+      "passed": true
+    },
+    {
+      "name": "Step retains old arrays and advances once",
+      "passed": true
+    },
+    {
+      "name": "Fractional first update has27 differences and peak0.75",
+      "passed": true
+    },
+    {
+      "name": "Centre loses quarter; neighbour gains quarter divided by26",
+      "passed": true
+    },
+    {
+      "name": "Unforced fractional peak never increases through20 updates",
+      "passed": true
+    },
+    {
+      "name": "No pull or drive preserves all values and one difference",
+      "passed": true
+    },
+    {
+      "name": "Identical beginnings stay identical under matched forcing",
+      "passed": true
+    },
+    {
+      "name": "Supplied finite forcing schedule matches installed samples",
+      "passed": true
+    },
+    {
+      "name": "120 complete paired updates exactly match installed model",
+      "passed": true
+    },
+    {
+      "name": "Both storage modes remain bounded under strong shared drive",
+      "passed": true
+    },
+    {
+      "name": "Count excludes tiny difference but maximum and mean retain it",
+      "passed": true
+    },
+    {
+      "name": "Printed corner edit affects exactly8 sites and keeps peak0.75",
+      "passed": true
+    },
+    {
+      "name": "Corner propagation respects recipient neighbour counts and no wrap",
+      "passed": true
+    },
+    {
+      "name": "Unmatched forcing fault fails equal-beginning control",
+      "passed": true
+    },
+    {
+      "name": "In-place update fault fails analytic first-step result",
+      "passed": true
+    },
+    {
+      "name": "Complete construction builds two1331-site volumes and three images",
+      "passed": true
+    },
+    {
+      "name": "Spatial section changes without state or clock mutation",
+      "passed": true
+    },
+    {
+      "name": "Slice6 hides centre difference while global count stays1",
+      "passed": true
+    },
+    {
+      "name": "Slice5 restores visible centre and frames agree",
+      "passed": true
+    },
+    {
+      "name": "First fractional gain is4over3 and printed with measured maximum",
+      "passed": true
+    },
+    {
+      "name": "Peak can stay bright while numeric maximum fades",
+      "passed": true
+    },
+    {
+      "name": "All2662 spatial addresses stay fixed while state colours change",
+      "passed": true
+    },
+    {
+      "name": "Native table remains solid below selection rail",
+      "passed": true
+    },
+    {
+      "name": "Held world position selects localZ6 in rotated study without a step",
+      "passed": true
+    },
+    {
+      "name": "Point trigger advances exactly one update",
+      "passed": true
+    },
+    {
+      "name": "Hand reader clamps beyond rail to slice10",
+      "passed": true
+    },
+    {
+      "name": "Release parks at last chosen slice",
+      "passed": true
+    },
+    {
+      "name": "Replay keeps storage and section while restoring beginning",
+      "passed": true
+    },
+    {
+      "name": "Keyboard STEP ignores key repeat",
+      "passed": true
+    },
+    {
+      "name": "Storage toggle resets pair, not slice",
+      "passed": true
+    },
+    {
+      "name": "Remaining controls set matched scattered drive with no pull",
+      "passed": true
+    },
+    {
+      "name": "Model stops at100 without extra state change",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "maximum_parity_difference": 0.0,
+  "passed": true,
+  "scope": "Exact printed files;120 paired source updates; analytic storage/boundary cases; corner transfer; two faults; nativegeometry and supplied XRTools poses. No physical headset or independent student."
+}

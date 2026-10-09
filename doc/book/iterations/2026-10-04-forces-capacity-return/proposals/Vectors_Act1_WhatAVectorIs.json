@@ -1,0 +1,43 @@
+{
+  "id": "Vectors_Act1_WhatAVectorIs",
+  "title": "Move the relation without changing it",
+  "storyboard": "SHIFT moves both pins while the wall arrows keep their displacement. Reuse positions and translation by reading the existing sample_vector(): end minus start in world coordinates. Predict one tip movement in the XY view and the XZ view, then reveal PARTS to check what each picture omits. SHORT, LONG and ZERO separate magnitude from direction without another drawing exercise. At the normalization companion, briefly explain division by nonzero length and its chosen small-input threshold; do not assume an earlier mention established the skill. Carry a measured displacement whose frame, origin and display scale are stated. Keep the other instruments available as returns.",
+  "storyboard_short": "Use SHIFT and the existing sample_vector(); reuse positions and translation. Predict a tip movement in supplied XY/XZ views, then reveal PARTS. Use SHORT/LONG/ZERO to distinguish magnitude and direction. Briefly explain normalization and its threshold at the companion. Carry a world displacement with stated display scale; require no new projection display or force controller.",
+  "mode": "deepen",
+  "brings": [
+    "positions in a named frame",
+    "translation and displacement",
+    "Flow_Field's supplied unit direction"
+  ],
+  "learns": [
+    "common translation preserves displacement",
+    "a component view omits one direction",
+    "normalization needs a declared small-input policy"
+  ],
+  "carries": "A displacement measurement with its frame and display scale stated; direction and magnitude remain distinct.",
+  "supplied": [
+    "VectorBasics with lesson:room_reading, existing pins and sample_vector()",
+    "XY/XZ wall drawings and SHORT/LONG/SHIFT/ZERO/PARTS controls",
+    "vector_normalize_demo and its unit-length reference"
+  ],
+  "artifact_refs": [
+    "VectorBasics",
+    "vector_normalize_demo"
+  ],
+  "review_note": "Keep this opening a short return. sample_vector() measures world positions; wall drawings scale by 0.85 and clip to radius 1.05 without clipping the numeric vector. SHORT/LONG supply the diagonal below 0.0001, whereas the separate normalization companion returns zero at or below 0.001. Translation's final explains direction and distance, but its present tutorial does not establish normalization practice. No new display binding is implied.",
+  "prior_maps": [
+    "Point_Lines",
+    "Trans_Translation",
+    "Flow_Field"
+  ],
+  "independent_check": "Predict a tip movement visible in XZ but absent from XY; verify it, then shift both pins and explain why the measured vector stays unchanged.",
+  "source_refs": [
+    "algorithms/vectors/01_vector_basics/room_reading.gd",
+    "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+    "commons/maps/Trans_Translation/final.md",
+    "commons/maps/Trans_Translation/tutorial.md"
+  ],
+  "change_reason": "The learner already has positions and translation. A lighter return establishes what an arrow measures without delaying the later retained-state hinge."
+}

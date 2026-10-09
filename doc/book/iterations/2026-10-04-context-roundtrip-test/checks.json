@@ -1,0 +1,91 @@
+{
+  "scope": "Thirteen selected files only; no runtime test.",
+  "files": [
+    {
+      "path": "doc/book/course/storyboards/BRIEF.md",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "doc/book/course/storyboards/opening.json",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "doc/book/course/storyboards/early.json",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "doc/book/course/sketch/SUBJECT_REGISTER.md",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/primitives/point/draw_dot.gd",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/primitives/line/grid_lines.gd",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/globals/trace_data.gd",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/visualaid/frame_counter/frame_counter_display.gd",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/maps/Point_Zero/map_data.json",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/maps/Point_Trace/map_data.json",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/map_data.json",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/final.md",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    },
+    {
+      "path": "project.godot",
+      "snapshot_matches_manifest": true,
+      "working_file_matches_manifest": true
+    }
+  ],
+  "all_snapshot_hashes_match": true,
+  "all_selected_working_files_unchanged": true,
+  "packet_words_whitespace_count": 402,
+  "handoff_words_whitespace_count": 392,
+  "stale_input_simulation": {
+    "source": "commons/primitives/line/grid_lines.gd",
+    "original_sha256": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08",
+    "simulated_sha256": "103e285f3b2c5afe6b7555ea57bb9fec3cd73ce6149ced08dfd125dfe3fd11cd",
+    "change_detected": true,
+    "written_to_disk": false,
+    "manually_declared_affected_claims": [
+      "Grid fits before rounding",
+      "Grid rounding loses position detail"
+    ],
+    "manually_declared_affected_summaries": [
+      "Point_Line_Grid",
+      "Array return in subject register"
+    ],
+    "conclusion": "Evidence version needs review; a changed fingerprint does not refute the claim.",
+    "limit": "No automatic dependency discovery or semantic invalidation was tested."
+  }
+}

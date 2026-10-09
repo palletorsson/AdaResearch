@@ -1,0 +1,163 @@
+{
+  "at": "2026-09-15T13:51:47.173Z",
+  "version": "c73e20352a933675fb6b043a58851a54b8880650bdb8f8efe540555a5f960298",
+  "previous": "{\r\n  \"schema\": \"encounter-route/1\",\r\n  \"map\": \"Point_Lines\",\r\n  \"status\": \"proposed\",\r\n  \"note\": \"Teaching order proposed with Palle on 2026-09-15. This overlay does not change roles, placements or book text. Later construction stations need development.\",\r\n  \"stops\": [\r\n    {\r\n      \"id\": \"connect\",\r\n      \"title\": \"Connect two points\",\r\n      \"action\": \"Bring the two points together. Watch the line appear and the barrier fly apart.\",\r\n      \"question\": \"What did connecting two positions allow you to do?\",\r\n      \"members\": [\r\n        \"line_demo\",\r\n        \"do_not_cross_barrier\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"line_demo\"\r\n        }\r\n      ],\r\n      \"stage\": \"refine first\",\r\n      \"draft\": \"<!-- @line_demo -->\\n\\nTwo black points wait beside a barrier: **DO NOT CROSS.** Bring the points near one another and release to request a connection. Watch for the segment between them. What else moved?\\n\\nThe barrier flies apart. You joined two positions, and something nearby lost its power to stop you. Move an endpoint. The connection can remain while its length and direction change.\\n\\nThe connection manager keeps each point as the other's neighbour. On their first connection, this demonstration also calls the barrier's `trigger_explosion()`. Someone joined those events in code. Making a line has become a way to open a passage. We could have written a different consequence. Keep that possibility beside the one you have just tried.\\n\\n<!-- @do_not_cross_barrier -->\\n\\nThe barrier made a different kind of request. While intact, its collider extended from the floor to the bar: the visible gap beneath the plank did not offer passage. Now its former position can be crossed. Disconnecting your points does not put it back.\\n\\nA phrase, a painted stripe, an invisible collision boundary: each can take part in directing a body. They have been made separately. Changing the words and opening the way are different acts.\\n\\n## Carry the whole line\"\r\n    },\r\n    {\r\n      \"id\": \"measure\",\r\n      \"title\": \"Give a span a measure\",\r\n      \"action\": \"Move the measuring line's endpoints. Compare the changing distance with one metre.\",\r\n      \"question\": \"What does a unit let us compare?\",\r\n      \"members\": [\r\n        \"line\",\r\n        \"scale_lines\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"line\",\r\n          \"at\": [\r\n            16,\r\n            2\r\n          ]\r\n        }\r\n      ],\r\n      \"stage\": \"refine first\",\r\n      \"draft\": \"<!-- @line -->\\n\\nThe next line has two ends you can hold. Pull them apart, then bring them closer. Watch its length change on the display. Can you find a span of one metre?\\n\\nHold one end still and move the other around it. A line can change direction while keeping the same length. We have two things to read in the movement, and a way to separate them:\\n\\n```gdscript\\nvar a := Vector3(0, 0, 0)\\nvar b := Vector3(1, 0, 0)\\nvar displacement := b - a\\nvar distance := displacement.length()\\n```\\n\\nThese example positions give a displacement of one unit along X. In this room we use that unit as a metre. The subtraction keeps a direction as well as an amount; taking the length gives us the amount alone. The artifact calculates a distance between its endpoints and prints it for us.\\n\\nTry to keep the number steady as you move. The display can give nearby spans the same rounded reading. Your hand is still moving; the printed measure may stay still. A unit lets us compare, but a reading also depends on how much difference the instrument keeps.\\n\\nTwo distinct positions determine a straight line; the part between them is a segment. We have given that segment a length we can name. What else might a line be asked to establish?\"\r\n    },\r\n    {\r\n      \"id\": \"red-line\",\r\n      \"title\": \"Cross a red line\",\r\n      \"action\": \"Approach the red line, then cross it and look back.\",\r\n      \"question\": \"What does this division change, and what do we bring to it?\",\r\n      \"members\": [\r\n        \"redline\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"redline\"\r\n        }\r\n      ],\r\n      \"stage\": \"refine first\",\r\n      \"draft\": \"<!-- @redline -->\\n\\nA red line lies between two faintly different fields. Step across it. Turn back. It is easy to give the two sides names: here and there, this side and the other. Which side did you take to be yours?\\n\\nThe artifact builds two shallow coloured fields on opposite sides of its local Z origin, then lays a narrow red mesh between them. Its own script adds no collision body. The colour divides what we see without erecting a fence to stop the crossing.\\n\\nWe have just watched a connection break a barrier. Here a division remains visible while the body crosses it. A mark and a prohibition require different work. If this red line were to forbid passage, something more would have to be written, enforced, or taken on trust.\\n\\nCross it again. The ease of that step belongs to this construction; it cannot promise that every boundary will yield so easily. What did the line do before it stopped anything?\\n\\nFurther on, another line addresses us directly: **WALK THIS LINE.** We will bring a moving body to an instruction that stays straight.\"\r\n    },\r\n    {\r\n      \"id\": \"walk\",\r\n      \"title\": \"Walk this line; read your trace\",\r\n      \"action\": \"Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.\",\r\n      \"question\": \"What kind of line does your movement leave?\",\r\n      \"members\": [\r\n        \"walk_this_line_marking\",\r\n        \"player_trace\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"walk_this_line_marking\"\r\n        }\r\n      ],\r\n      \"stage\": \"existing encounter\"\r\n    },\r\n    {\r\n      \"id\": \"combine\",\r\n      \"title\": \"Two directions: plus and X\",\r\n      \"action\": \"Compare the horizontal and vertical arrangements with the diagonal pair. A future revision will let you compose them by hand.\",\r\n      \"question\": \"What does the relation between two lines make visible?\",\r\n      \"members\": [\r\n        \"axis_line\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"axis_line\",\r\n          \"at\": [\r\n            6,\r\n            11\r\n          ]\r\n        },\r\n        {\r\n          \"lookup\": \"axis_line\",\r\n          \"at\": [\r\n            11,\r\n            15\r\n          ]\r\n        }\r\n      ],\r\n      \"stage\": \"interaction proposal\"\r\n    },\r\n    {\r\n      \"id\": \"depth\",\r\n      \"title\": \"Carry a line into depth\",\r\n      \"action\": \"Carry and turn the grabbable line. Proposed next step: build a flat arrangement, then lift one line out of its plane.\",\r\n      \"question\": \"What changes when the arrangement no longer shares one plane?\",\r\n      \"members\": [\r\n        \"grabbable_line\",\r\n        \"line_collection\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"grabbable_line\"\r\n        }\r\n      ],\r\n      \"stage\": \"interaction proposal\"\r\n    },\r\n    {\r\n      \"id\": \"viewpoint\",\r\n      \"title\": \"Find a viewpoint; begin a grid\",\r\n      \"action\": \"Walk around the perspective arrangements. Proposed next step: manipulate parallel lines and repeat them into a grid.\",\r\n      \"question\": \"What appears joined from here, and separates when you move?\",\r\n      \"members\": [\r\n        \"perspective_lines\",\r\n        \"parallel_lines\"\r\n      ],\r\n      \"visits\": [\r\n        {\r\n          \"lookup\": \"perspective_lines\",\r\n          \"at\": [\r\n            5,\r\n            14\r\n          ]\r\n        }\r\n      ],\r\n      \"stage\": \"interaction proposal\"\r\n    }\r\n  ],\r\n  \"basedOn\": [\r\n    {\r\n      \"path\": \"commons/maps/Point_Lines/map_data.json\",\r\n      \"sha256\": \"1e6eed1b66a4266019d121bdd4d5e1dc6d069942569545a0bf2c53c90d27a121\"\r\n    },\r\n    {\r\n      \"path\": \"commons/maps/Point_Lines/final.md\",\r\n      \"sha256\": \"74e4049c5818b3391d0763115e9d506bb52b6e73e00baacd09ae7eaaf23db209\"\r\n    },\r\n    {\r\n      \"path\": \"commons/data/artifact_roles.json\",\r\n      \"sha256\": \"bb33f8a18175f56a1880de5762743a10503d0a5c5c3bc61418f59e68aadae31d\"\r\n    }\r\n  ]\r\n}\r\n",
+  "next": {
+    "schema": "encounter-route/1",
+    "map": "Point_Lines",
+    "status": "proposed",
+    "note": "Teaching order proposed with Palle on 2026-09-15. This overlay does not change roles, placements or book text. Later construction stations need development.",
+    "stops": [
+      {
+        "id": "connect",
+        "title": "Connect two points",
+        "action": "Bring the two points together. Watch the line appear and the barrier fly apart.",
+        "question": "What did connecting two positions allow you to do?",
+        "stage": "refine first",
+        "members": [
+          "line_demo",
+          "do_not_cross_barrier"
+        ],
+        "visits": [
+          {
+            "lookup": "line_demo"
+          }
+        ],
+        "draft": "<!-- @line_demo -->\n\nTwo black points wait beside a barrier: **DO NOT CROSS.** Bring the points near one another and release to request a connection. Watch for the segment between them. What else moved?\n\nThe barrier flies apart. You joined two positions, and something nearby lost its power to stop you. Move an endpoint. The connection can remain while its length and direction change.\n\nThe connection manager keeps each point as the other's neighbour. On their first connection, this demonstration also calls the barrier's `trigger_explosion()`. Someone joined those events in code. Making a line has become a way to open a passage. We could have written a different consequence. Keep that possibility beside the one you have just tried.\n\n<!-- @do_not_cross_barrier -->\n\nThe barrier made a different kind of request. While intact, its collider extended from the floor to the bar: the visible gap beneath the plank did not offer passage. Now its former position can be crossed. Disconnecting your points does not put it back.\n\nA phrase, a painted stripe, an invisible collision boundary: each can take part in directing a body. They have been made separately. Changing the words and opening the way are different acts.\n\n## Carry the whole line"
+      },
+      {
+        "id": "measure",
+        "title": "Give a span a measure",
+        "action": "Move the measuring line's endpoints. Compare the changing distance with one metre.",
+        "question": "What does a unit let us compare?",
+        "stage": "refine first",
+        "members": [
+          "line",
+          "scale_lines"
+        ],
+        "visits": [
+          {
+            "lookup": "line",
+            "at": [
+              16,
+              2
+            ]
+          }
+        ],
+        "draft": "<!-- @line -->\n\nThe next line has two ends you can hold. Pull them apart, then bring them closer. Watch its length change on the display. Can you find a span of one metre?\n\nHold one end still and move the other around it. A line can change direction while keeping the same length. We have two things to read in the movement, and a way to separate them:\n\n```gdscript\nvar a := Vector3(0, 0, 0)\nvar b := Vector3(1, 0, 0)\nvar displacement := b - a\nvar distance := displacement.length()\n```\n\nThese example positions give a displacement of one unit along X. In this room we use that unit as a metre. The subtraction keeps a direction as well as an amount; taking the length gives us the amount alone. The artifact calculates a distance between its endpoints and prints it for us.\n\nTry to keep the number steady as you move. The display can give nearby spans the same rounded reading. Your hand is still moving; the printed measure may stay still. A unit lets us compare, but a reading also depends on how much difference the instrument keeps.\n\nTwo distinct positions determine a straight line; the part between them is a segment. We have given that segment a length we can name. What else might a line be asked to establish?"
+      },
+      {
+        "id": "red-line",
+        "title": "Cross a red line",
+        "action": "Approach the red line, then cross it and look back.",
+        "question": "What does this division change, and what do we bring to it?",
+        "stage": "refine first",
+        "members": [
+          "redline"
+        ],
+        "visits": [
+          {
+            "lookup": "redline"
+          }
+        ],
+        "draft": "<!-- @redline -->\n\nA red line lies between two faintly different fields. Step across it. Turn back. It is easy to give the two sides names: here and there, this side and the other. Which side did you take to be yours?\n\nThe artifact builds two shallow coloured fields on opposite sides of its local Z origin, then lays a narrow red mesh between them. Its own script adds no collision body. The colour divides what we see without erecting a fence to stop the crossing.\n\nWe have just watched a connection break a barrier. Here a division remains visible while the body crosses it. A mark and a prohibition require different work. If this red line were to forbid passage, something more would have to be written, enforced, or taken on trust.\n\nCross it again. The ease of that step belongs to this construction; it cannot promise that every boundary will yield so easily. What did the line do before it stopped anything?\n\nFurther on, another line addresses us directly: **WALK THIS LINE.** We will bring a moving body to an instruction that stays straight."
+      },
+      {
+        "id": "walk",
+        "title": "Walk this line; read your trace",
+        "action": "Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.",
+        "question": "What kind of line does your movement leave?",
+        "stage": "existing encounter",
+        "members": [
+          "walk_this_line_marking",
+          "player_trace"
+        ],
+        "visits": [
+          {
+            "lookup": "walk_this_line_marking"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "combine",
+        "title": "Two directions: plus and X",
+        "action": "Compare the horizontal and vertical arrangements with the diagonal pair. A future revision will let you compose them by hand.",
+        "question": "What does the relation between two lines make visible?",
+        "stage": "interaction proposal",
+        "members": [
+          "axis_line"
+        ],
+        "visits": [
+          {
+            "lookup": "axis_line",
+            "at": [
+              6,
+              11
+            ]
+          },
+          {
+            "lookup": "axis_line",
+            "at": [
+              11,
+              15
+            ]
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "depth",
+        "title": "Carry a line into depth",
+        "action": "Carry and turn the grabbable line. Proposed next step: build a flat arrangement, then lift one line out of its plane.",
+        "question": "What changes when the arrangement no longer shares one plane?",
+        "stage": "interaction proposal",
+        "members": [
+          "grabbable_line",
+          "line_collection"
+        ],
+        "visits": [
+          {
+            "lookup": "grabbable_line"
+          }
+        ],
+        "draft": ""
+      },
+      {
+        "id": "viewpoint",
+        "title": "Find a viewpoint; begin a grid",
+        "action": "Walk around the perspective arrangements. Proposed next step: manipulate parallel lines and repeat them into a grid.",
+        "question": "What appears joined from here, and separates when you move?",
+        "stage": "interaction proposal",
+        "members": [
+          "perspective_lines",
+          "parallel_lines"
+        ],
+        "visits": [
+          {
+            "lookup": "perspective_lines",
+            "at": [
+              5,
+              14
+            ]
+          }
+        ],
+        "draft": ""
+      }
+    ],
+    "basedOn": [
+      {
+        "path": "commons/maps/Point_Lines/map_data.json",
+        "sha256": "1e6eed1b66a4266019d121bdd4d5e1dc6d069942569545a0bf2c53c90d27a121"
+      },
+      {
+        "path": "commons/maps/Point_Lines/final.md",
+        "sha256": "74e4049c5818b3391d0763115e9d506bb52b6e73e00baacd09ae7eaaf23db209"
+      },
+      {
+        "path": "commons/data/artifact_roles.json",
+        "sha256": "bb33f8a18175f56a1880de5762743a10503d0a5c5c3bc61418f59e68aadae31d"
+      }
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "checks": [
+    {
+      "message": "baseline script compiles: FitnessLandscapePolitics",
+      "ok": true
+    },
+    {
+      "message": "reproduced old novelty memory freeze",
+      "ok": true
+    },
+    {
+      "message": "objective switch keeps position/velocity: 0",
+      "ok": true
+    },
+    {
+      "message": "repeatable reset: 0",
+      "ok": true
+    },
+    {
+      "message": "objective switch keeps position/velocity: 1",
+      "ok": true
+    },
+    {
+      "message": "repeatable reset: 1",
+      "ok": true
+    },
+    {
+      "message": "objective switch keeps position/velocity: 2",
+      "ok": true
+    },
+    {
+      "message": "repeatable reset: 2",
+      "ok": true
+    },
+    {
+      "message": "objective switch keeps position/velocity: 3",
+      "ok": true
+    },
+    {
+      "message": "repeatable reset: 3",
+      "ok": true
+    },
+    {
+      "message": "archive rescoring chooses current best score, not historical maximum",
+      "ok": true
+    },
+    {
+      "message": "current position can replace a stale remembered best",
+      "ok": true
+    },
+    {
+      "message": "archive addition can reduce shared best score",
+      "ok": true
+    },
+    {
+      "message": "empty archive has no unbeatable reward",
+      "ok": true
+    },
+    {
+      "message": "novelty personal memory actually changes during motion",
+      "ok": true
+    },
+    {
+      "message": "archive accumulates in headless simulation time",
+      "ok": true
+    },
+    {
+      "message": "personal scores agree with current archive",
+      "ok": true
+    },
+    {
+      "message": "shared score agrees with current archive",
+      "ok": true
+    },
+    {
+      "message": "archive stays bounded",
+      "ok": true
+    },
+    {
+      "message": "baseline script compiles: AntColonyOptimization",
+      "ok": true
+    },
+    {
+      "message": "reproduced old reset changing the starting problem",
+      "ok": true
+    },
+    {
+      "message": "slider begins at the actual evaporation setting",
+      "ok": true
+    },
+    {
+      "message": "lesson controls are above the floor",
+      "ok": true
+    },
+    {
+      "message": "RESET restores food, field, headings and positions",
+      "ok": true
+    },
+    {
+      "message": "changing evaporation preserves reset problem and random stream",
+      "ok": true
+    },
+    {
+      "message": "same one-second simulation at 60 Hz",
+      "ok": true
+    },
+    {
+      "message": "same one-second simulation at 90 Hz",
+      "ok": true
+    },
+    {
+      "message": "ANTS replaces bodies while preserving the old field",
+      "ok": true
+    },
+    {
+      "message": "MODE keeps ongoing field",
+      "ok": true
+    },
+    {
+      "message": "decay depends on elapsed time",
+      "ok": true
+    },
+    {
+      "message": "ecosystem scene is eligible for museum placement",
+      "ok": true
+    },
+    {
+      "message": "population colours are rendered without emission",
+      "ok": true
+    },
+    {
+      "message": "caretaker record appears through map configuration",
+      "ok": true
+    },
+    {
+      "message": "prey replenishment is recorded at source",
+      "ok": true
+    },
+    {
+      "message": "predator pressure is recorded",
+      "ok": true
+    },
+    {
+      "message": "predator replenishment is recorded at source",
+      "ok": true
+    },
+    {
+      "message": "outside food has its own visible count",
+      "ok": true
+    },
+    {
+      "message": "fallow still prevents predator restock",
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "care_label": "POPULATION SUPPORT\nAdded prey 0   predators 0\nFood supplied 0\nPredator pressure: idle\nNo intervention yet",
+    "novelty": {
+      "archive_size": 32,
+      "best_score": 0.402631491422653,
+      "changed_memories": 30
+    },
+    "old_novelty": {
+      "all_personal_positions_frozen": true,
+      "stored_global_score": 10.0
+    }
+  },
+  "failures": [],
+  "scope": "Controlled live-script tests; no headset acceptance"
+}

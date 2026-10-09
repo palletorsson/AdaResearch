@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_EdgeOfChaos · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_EdgeOfChaos">← Tutorial lineage</a></p><h1>CA EdgeOfChaos</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_EdgeOfChaos/final.md">Raw captured source</a></p><pre># How far does one difference go?
+
+&lt;!-- @self_organization_ca --&gt;
+
+Two volumes wait at the same update. Their colours almost agree. Somewhere in B, one address holds a value one greater than its counterpart in A. Can you find it without the instrument telling you where to look?
+
+Walk between them. Thin gold frames mark the same depth in both volumes. As you pass the numbered edges of the floor image, the frames move with you. The cases ahead show A, B and their difference at that depth; the floor carries the same difference image. A wall is a slice through space. It is not the next generation. Watch the update counter while you walk. Z SLICE offers the same choice from the console.
+
+Before taking the first update, stop at five. The changed address appears in the section. Walk to six and it disappears from that picture. Come back. It is still there. We have moved past the difference, not removed it. An empty section could have been all we saw of this volume.
+
+![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/ca-walking-slice.png)
+
+Return to the console. Press STEP. Follow the lit difference for a few updates, then use REPLAY to meet the same beginning again. ONE CELL removes the intervention, or restores it. With the intervention removed, both runs should agree through every update, even when the disturbance is loud. What would it mean if they did not?
+
+The two runs receive the same forcing value at the same address and update. This is a deliberately shared, reproducible schedule. Without that agreement, a second source of difference would enter while we were trying to follow the first. The comparison makes a small experimental world inside a larger one whose clock continues.
+
+Here is the local instruction, before storage:
+
+```gdscript
+var drive:float=disturbance*sample(i,tick)
+var va:float=clampf(a[i]*(1.0-coupling)+sa/neighbours[i].size()*coupling+drive,0.0,9.0)
+```
+
+`sa` is the sum of A&#x27;s valid neighbours. Interior cells have twenty-six; the corner has seven. Every cell reads the previous volume. PULL changes how far it moves toward that average. DRIVE changes the size of the added disturbance. The controls reset both runs, keeping the comparison legible. One gesture no longer changes both tendencies at once.
+
+Bring DRIVE to zero. Choose the uniform beginning with SEED, leave PULL at 0.25 and ONE CELL enabled. In INTEGER storage, press STEP. The difference is gone. Replay, switch STORE to FRACTIONAL and take the same step. Now twenty-seven addresses differ, but the largest difference is smaller than before: 0.75 instead of one.
+
+More places carry it. Less of it remains at any one place.
+
+The fork is one short line:
+
+```gdscript
+na[i]=float(int(va)) if integer_storage else va
+```
+
+The integer conversion removes the fractional part of these nonnegative values. The pull that took five toward four produced 4.75. The stored integer is four. Around it, smaller fractional changes also fell away. A rule about neighbours was accompanied by another rule about what a value may keep. In this comparison the neighbour rule stayed the same; storage decided how much of its answer could remain.
+
+Continue the fractional run. The wall of difference becomes broad and luminous. Look up at the gain printed on the readout above the console. The display is increasing its sensitivity as the largest difference fades. Its brightness is a decision about visibility. Read the maximum alongside the number of affected cells: that count includes only differences above 0.000001. A trace may leave the counter before it leaves the stored values.
+
+Turn PULL down to zero, with DRIVE still zero, and replay. The intervention stays at its original address. This stillness keeps whole a memory that the smoothing run spread thin. We would miss something if we arrived already certain that a moving, complicated-looking field must be the more interesting body.
+
+This hall was conceived under the name *Edge of Chaos*. It borrows a question from Christopher Langton: under what conditions can a pattern retain information, carry it elsewhere and change it through an encounter?[^ca-edge] Let the name remain a question here.
+
+The neighbour average belongs to the same family of operations as a blur: a mark can spread while becoming fainter. With matched forcing added, our two volumes let us follow what survives that smoothing and what storage discards. A spreading difference alone does not establish chaotic amplification. The integer conversion introduces thresholds of its own. We have measured some consequences of those choices. We have not located the one permissible region where life, computation or queerness can exist.
+
+The other works remain in the rear gallery: a screen that keeps the successive states of a one-dimensional automaton as rows, local transmission and recovery drawn by chance — the susceptible, infected and recovered of 1927 laid on a grid, the fourth choice settled by a draw[^ca-sir] — a fog field whose cell rule fills it solid within two updates, and cracks that finish spreading across their plate within a couple of seconds of being built. Each asks for its own account of what passes between neighbours, what is stored, and what the image omits. Similar-looking motion, where there is any, does not make their rules equivalent.
+
+&lt;!-- @ --&gt;
+
+The next hall, the first of Fractals, changes the instruction. Instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself. Carry this distinction with you: a form can resemble its neighbour, inherit an earlier state, or be told to repeat. The resemblance does not yet explain the making.
+
+[^ca-edge]: Christopher Langton, [“Computation at the edge of chaos: phase transitions and emergent computation”](https://doi.org/10.1016/0167-2789(90)90064-V), *Physica D* 42 (1990). His experiments associated information storage, transmission and modification with a transition between ordered and disordered behaviour. His λ counts the fraction of rule-table entries whose output differs from a designated quiescent state. It is not the proportion of living cells in a displayed field. PULL changes the strength of neighbour averaging in another model; this hall has not measured Langton&#x27;s transition.
+
+[^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery each cell is infected with a fixed probability per infected neighbour and recovers with another: two draws and a grid.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_EdgeOfChaos/tutorial.md">Raw captured source</a></p><pre># Follow a difference before naming a regime
+
+Primary: **self_organization_ca**, configured as the paired difference study. The four rear works remain secondary; their presence is not a claim that they demonstrate one shared critical point.
+
+1. Inspect the two volumes and their selected spatial slice. STEP once; REPLAY and repeat.
+2. Toggle ONE CELL off. The fields should agree even with DRIVE enabled. This checks the comparison before interpreting a difference.
+3. Set DRIVE to zero, PULL to 0.25, SEED to UNIFORM and ONE CELL on. In INTEGER storage, STEP once.
+4. Switch STORE to FRACTIONAL, which resets the same beginning. STEP: twenty-seven addresses differ; the maximum is 0.75.
+5. Continue to G20. Read the count, maximum and printed display gain together. Try Z SLICE without advancing time.
+6. Set PULL to zero and replay with DRIVE zero. The local intervention persists without spreading. Discuss whether stillness can retain something that smoothing erases.
+7. Return to the scattered beginning and add disturbance. Keep the forcing shared between A and B. Describe the observed history before using “chaos”.
+
+The floor carries an image of difference on fixed support. Body movement does not change this model. In the next hall, Fractal_Recursion, an explicit recursive call supplies a different way of making large form from a compact instruction.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_EdgeOfChaos/technical.md">Raw captured source</a></p><pre># A controlled difference in a three-dimensional field
+
+CA_SoftRules separated local reaction from neighbour exchange. This hall holds two 11³ volumes under the same update and forcing schedule, changing one cell in B. It prepares Fractal_Recursion by distinguishing locally accumulated form from an explicit instruction to repeat.
+
+The placed `self_organization_ca#study:difference` mounts `difference_study.gd`; its model is `difference_model.gd`. The legacy 64³ showcase remains available without this configuration. This study changes the domain size and uses a reproducible forcing schedule rather than independent calls to the global random generator.
+
+Each volume is a PackedFloat64Array, indexed `x + 11*y + 121*z`. A scattered beginning is the explicitly authored arithmetic sequence `(i*73+i*i*19+17)%10`; a uniform beginning stores four. B starts as an exact copy, then address (5,5,5) receives +1 if ONE CELL is enabled. The scattered centre is seven, so this intervention remains within the allowed range.
+
+The next value combines the previous cell, the mean of its valid 26-neighbour Moore neighbourhood, and an address/update-indexed forcing value. Outside positions are omitted; there is no periodic wrapping. The corner averages seven neighbours. Both arrays are double buffered.
+
+```gdscript
+var drive:float=disturbance*sample(i,tick)
+var va:float=clampf(a[i]*(1.0-coupling)+sa/neighbours[i].size()*coupling+drive,0.0,9.0)
+var vb:float=clampf(b[i]*(1.0-coupling)+sb/neighbours[i].size()*coupling+drive,0.0,9.0)
+na[i]=float(int(va)) if integer_storage else va
+nb[i]=float(int(vb)) if integer_storage else vb
+```
+
+The schedule `sample(i,tick)` uses bounded integer arithmetic and 2,001 possible values from -1 to 1. It is a reproducible forcing construction, not a claim of independent random samples. No state-dependent random draw is consumed in one run alone.
+
+PULL ranges from zero to one in quarters; DRIVE ranges from zero to four in units. SEED, STORE, ONE CELL and these parameter controls reset both fields. REPLAY preserves parameters and reconstructs the beginning. STEP performs one synchronous update; +10 schedules at most one update per eligible display frame with a 0.12-second minimum interval. Slow rendering stretches the wall-clock duration without inserting extra generations. The observation stops at 100 updates.
+
+The readout counts addresses with `abs(a[i]-b[i]) &gt; 0.000001`, reports the maximum and the mean absolute difference, and prints the display gain. Fractional averaging with matched forcing and clipping is non-expansive in the maximum difference for 0 &lt;= PULL &lt;= 1: a convex combination cannot exceed the old maximum difference, and clipping cannot increase it. Finite precision remains part of the implementation. Integer truncation adds discontinuous thresholds. A count of differing addresses is not a Lyapunov exponent or an entropy measurement.
+
+Volumes show every address as a separated cube. Three wall cases show the selected spatial Z slice. The third case and the floor share the same difference texture. Its gain is `1 / max(max_difference, 0.000001)` and is explicitly printed; A and B use a fixed 0..9 palette. Z SLICE and COAT do not advance time or edit stored fields. The museum floor and passage remain solid.
+
+The source&#x27;s older lambda coupled neighbour pull to disturbance. It is not Langton&#x27;s rule-table lambda. Neither that dial nor these new measurements classify this finite run as a universal critical regime. For the historical claim and a re-examination, see [Mitchell, Hraber and Crutchfield (1993)](https://csc.ucdavis.edu/~evca/Papers/rev-edge.html).
+
+The four secondary works are retained. The disease preview computes the original full 64³ synchronous transition over 1,024 display frames and keeps its four-cell display stride; it does not show every infected address. The fog uses a configured 12³ preview and shows a labelled central Z slice in the compatibility renderer. Neither secondary is evidence for the primary&#x27;s matched-run results. Their wider pedagogical and headset reviews remain open.
+
+## Walk through the receiver
+
+This map adds `#slice:walk` to the existing paired study. `walking_slice.gd` reads a recognised player body between the volumes. Eleven depth positions match the original cube centres: local Z = 0.25 + 0.27 × index. Gold frames locate that same plane in both arrays. Small markers remain at the floor image&#x27;s edges, so the Z locator is not mistaken for a row of the X/Y image.
+
+The receiver calls `select_spatial_slice`, which changes only slice_z and repaints the existing textures. It never calls the console action dispatcher, resets the model, advances an update, consumes a forcing value, or cancels a pending +10 run. The wall cases and floor retain their shared material. The floor image lays the selected X/Y section flat; physical walking in Z selects which section is shown.
+
+The reader recognises XRToolsPlayerBody and the museum&#x27;s grouped CharacterBody3D, rejects loose rigid bodies, and releases a visitor on exit. A 2.5 cm dead band beyond a row midpoint reduces flicker near an edge. When the visitor leaves, the selected slice stays; the original Z SLICE button remains available. No solid collision or new support is added, and unconfigured studies retain the original behaviour.
+
+At update zero, the intervention is in Z=5 only. Walking from five to six can hide it from the selected image while the paired arrays, update count and global difference count remain unchanged. This differs from integer storage actually removing it on the first uniform, unforced update. The native probe checks both cases separately.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_EdgeOfChaos/intent.md">Raw captured source</a></p><pre>Concept: Follow one altered address under a specified local update before naming a regime. Extent, magnitude, storage and visibility are distinct questions.
+
+Sequence role: Closes the active cellular-automata sequence after CA_AgentsCircuits and leads to Fractal_Recursion. The preceding comparison changes the procedure while retaining a resemblance; this hall holds the procedure fixed and changes one address.
+
+Encounter: self_organization_ca in paired-study mode. Two 11³ volumes share the same beginning and forcing schedule; ONE CELL changes exactly one address in B. PULL and DRIVE are independent. STORE compares integer truncation with fractional values. The wall cases and floor expose a selected spatial slice, with difference gain printed explicitly.
+
+Critical question: What can a value retain, and what can an instrument show? A trace can spread while weakening. Stillness can preserve a local difference. These observations do not establish a universal critical point or a compulsory location for queer life.
+
+Collection: Retain all five authored works. The screen, disease model, fog and crack growth need distinct interpretations. Further work: headset review, secondary interactions and visibility, and richer measures tied to an explicit task rather than a decorative order/chaos label.
+
+Body encounter: walk between the volumes to select matching spatial sections. The difference can disappear from view while remaining in the field. Return to find it at the same update, then compare that loss of sight with a loss caused by storage. The reader changes what is visible, not what the rule computes.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_EdgeOfChaos/critical.md">Raw captured source</a></p><pre># What is allowed to remain different?
+
+The previous hall asked what a cell can receive. Here it receives an average and a disturbance, then meets a further condition: what may be stored? The integer conversion is easy to overlook because it looks like housekeeping. In the uniform experiment it decides whether the intervention survives its first update.
+
+The fractional version distributes a trace widely while weakening it. The integer version can remove it. Neither result tells us in advance which body is preferable. A quiet uncoupled cell retains its changed value. Stillness can keep a memory; smoothing can lose one. Movement and mixture do not automatically amount to freedom.
+
+This matters to the project&#x27;s question, “what bodies are possible?” The rule admits neighbourhoods and numbers; the storage admits some distinctions; the display admits others. A counter uses a tolerance. A difference image increases its gain as the trace fades. The artist&#x27;s decisions about visibility take part in what the visitor calls a pattern. The counter and the luminous floor therefore need to be read together.
+
+Matched forcing is also a deliberate experimental arrangement. It excludes one source of divergence so we can follow another. That is useful, but it is not a view of all possible disturbances, bodies or encounters. A result from one beginning and observation window does not settle the capacities of a rule family.
+
+Earlier room text identified an intermediate dial region as computation&#x27;s only home and treated it as the privileged place for life. That conclusion was assigned rather than measured here. The literature also contains direct re-examinations: [Mitchell, Hraber and Crutchfield (1993)](https://csc.ucdavis.edu/~evca/Papers/rev-edge.html) obtained different results from an evolutionary CA experiment and challenged the earlier interpretation. Their study is a reason to specify the task and evidence, not a proof that every criticality hypothesis is false.
+
+QFEP remains a research lens for asking about persistence, suppression and becoming. This installation does not measure thermodynamic entropy, free energy or a universal queer threshold. Its narrower contribution is executable: show how a difference is carried, attenuated, rounded away, or made visible again by an instrument. Queer possibility can enter through questioning the permitted states and the criteria of a successful outcome. It need not be confined to a band that the interface has already painted green.
+
+The next hall approaches form through recursion. The distinction to carry forward is methodological: where is resemblance produced by local exchange, and where is it explicitly instructed? Similar-looking bodies may have inherited very different conditions of existence.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_EdgeOfChaos/artifacts.md">Raw captured source</a></p><pre># CA_EdgeOfChaos — five retained works
+
+| Role | Artifact | Current encounter |
+|---|---|---|
+| Primary / book | self_organization_ca | Paired 11³ study; change one cell, vary pull and drive, compare storage, body-selected spatial slices and the difference floor. |
+| Secondary | ca_screen | Flat cellular display in the rear gallery. |
+| Secondary | disease_spread_ca | Local S/I/R model, scheduled over frames; the existing sampled sphere display can omit individual affected addresses. |
+| Secondary | volumetric_fog_ca | Local binary density field; labelled central slice in compatibility, volume rendering in Forward+. |
+| Secondary | crackpropagation_ca | Retained stress-and-crack growth display; distinct from the primary&#x27;s averaging rule. |
+
+All five are placed in map_data.json and both museum plan rows. The book&#x27;s primary anchor is self_organization_ca. Read final.md for the encounter and technical.md for its limits. Existing detailed secondary experiments have not been replaced by claims that every work occupies a measured edge of chaos.
+
+The optional walking reader belongs to self_organization_ca; it is not a sixth artifact. Gold frames locate the same selected depth in both volumes, and the existing textures show the section. No primary/secondary promotion, artifact move, secondary solver or sequence change accompanies it.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_EdgeOfChaos/summary.md">Raw captured source</a></p><pre># How far does one difference go?
+
+CA_EdgeOfChaos closes the active cellular-automata walk after CA_SoftRules and before Fractal_Recursion. A 19 × 30 m hall carries the paired self_organization_ca study at map cell (9,5), with a reachable console, two complete volumes, three spatial slice cases and a shared difference floor. The central study passage and eastern aisle have fixed support.
+
+The primary is unchanged. All five authored works remain: self_organization_ca, ca_screen, disease_spread_ca, volumetric_fog_ca and crackpropagation_ca. Four secondary displays occupy the rear gallery. The former compact grid is archived with the pre-edit text and museum rows in doc/space/ca-edge-review-2026-09-14/before.
+
+The discovery compares one changed address under identical forcing, separates coupling from disturbance, and compares integer with fractional storage. It measures extent and amplitude separately and exposes visual gain. It does not classify a universal edge of chaos.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_EdgeOfChaos/blurb.md">Raw captured source</a></p><pre>Two almost identical volumes wait. Change one cell and follow what remains: a trace can spread while becoming weaker, or disappear in the short journey from a computed fraction to a stored integer.
+</pre></section></body></html>

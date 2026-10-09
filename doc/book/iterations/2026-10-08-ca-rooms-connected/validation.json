@@ -1,0 +1,29 @@
+{
+  "native_checks": 25,
+  "native_passed": true,
+  "clearance_samples": 209,
+  "relative_html_references": 45,
+  "protected_sources_unchanged": {
+    "commons/maps/CA_Introduction/tutorial.md": true,
+    "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/row.gd": true,
+    "doc/book/studies/cellular-automata-through-the-hands/CA_Introduction/point_body.gd": true,
+    "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd": true,
+    "commons/artifacts/ca_rule_explorer/neighbour_study.gd": true,
+    "commons/artifacts/ca_rule_explorer/hand_point.gd": true
+  },
+  "authored_artifacts_retained": {
+    "synthesis_stand": 1,
+    "dark_sphere": 1,
+    "persian_rug": 1,
+    "ca_rule_explorer": 1,
+    "langton_swarm": 1,
+    "line_network_ca": 1,
+    "ca_showcase": 1,
+    "rule110_computer": 1
+  },
+  "map_shape": [
+    13,
+    19
+  ],
+  "images": 10
+}

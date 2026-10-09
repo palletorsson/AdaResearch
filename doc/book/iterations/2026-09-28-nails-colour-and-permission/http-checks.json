@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/figures/Color_Nails/salon-red.png",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/Color_Nails.current.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/Color_Nails.diff",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/checks.json",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/color-book.manifest.json",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/color-book.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-colour-and-permission/index.html",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-nails-the-next-choice/index.html",
+      "status": 200,
+      "matches_disk": true
+    }
+  ]
+}

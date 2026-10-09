@@ -1,0 +1,418 @@
+{
+  "created": "2026-10-08T19:53:38.351610+00:00",
+  "scope": "same-assistant fresh-file reconstruction",
+  "archive_sha256": "0de637fdb4a23d10106851f6f5c8c2a0fa841fbf20fb3c05e1957afcd1397a35",
+  "predictions_sha256": "c9f258962f68cfdb8a0265312acdc17b546a31e9730f4e847fede26f2d37f148",
+  "rows": [
+    {
+      "map": "WaveFunctions_Intro",
+      "title": "Cube",
+      "probe": "cube",
+      "main": "01_cube_return.gd",
+      "files": [
+        "01_cube_return.gd"
+      ],
+      "code_lines": 33,
+      "main_lines": 33,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Amplitude .25, frequency .25, phase PI/2: start at 1.55 m; bottom 1.05 m at 2 s; period 4 s.",
+      "hashes": {
+        "01_cube_return.gd": "9d05f4143e8259038a75de743841ec08235911fabee8602bee0e174629884320"
+      },
+      "edits": [
+        [
+          "amplitude := 0.4",
+          "amplitude := 0.25"
+        ],
+        [
+          "frequency := 0.5",
+          "frequency := 0.25"
+        ],
+        [
+          "phase := 0.0",
+          "phase := PI / 2.0"
+        ]
+      ],
+      "transfer_hash": "4a774f58640889b05923839f5ef6cf214830722b3bbba00867e3c58f9f39a992"
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "title": "Pendulum",
+      "probe": "pendulum",
+      "main": "02_pendulum_record.gd",
+      "files": [
+        "02_pendulum_record.gd"
+      ],
+      "code_lines": 107,
+      "main_lines": 107,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Sample every .1 s with 20 slots: after 8 s about 1.9 s retained; swing unchanged. Halving trail speed halves drawn depth, not stored positions.",
+      "hashes": {
+        "02_pendulum_record.gd": "fbcd8d93477ad6912e5626f4c9de0519f46ca0defcedbb7787c8c7f04992be2c"
+      },
+      "edits": [
+        [
+          "sample_interval := 0.025",
+          "sample_interval := 0.1"
+        ],
+        [
+          "max_samples := 120",
+          "max_samples := 20"
+        ],
+        [
+          "trail_speed := 0.6",
+          "trail_speed := 0.3"
+        ]
+      ],
+      "transfer_hash": "0a15a1a7d1ac4397b3f113db050647c206d1a41431e03c6091c4ce9ed4f98319"
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "title": "Sine Space",
+      "probe": "surface",
+      "main": "03_sine_surface.gd",
+      "files": [
+        "03_sine_surface.gd",
+        "point_body.gd"
+      ],
+      "code_lines": 85,
+      "main_lines": 61,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Separate spatial frequencies: X=.5 and Z=1. At (.5,.25), height=.98; at (0,.25), .8. X repeats over 2 m, Z over 1 m. Still 289 positions and 512 faces.",
+      "hashes": {
+        "03_sine_surface.gd": "e3d51cd0aaa1fcbe36be39e793b6203b3cf8bb26b516cf76dc0ca3e93d29ce36",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+      },
+      "edits": [
+        [
+          "sin(TAU * frequency * x)",
+          "sin(TAU * 0.5 * x)"
+        ]
+      ],
+      "transfer_hash": "c93d14489d258aad79cd4e3626b9580601d9466d90bcb39f9c4672fdb401713b"
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "title": "Unit Circle",
+      "probe": "circle",
+      "main": "04_circle_coordinates.gd",
+      "files": [
+        "04_circle_coordinates.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 131,
+      "main_lines": 75,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Radius .6, centre (-.4,1.6,0), angular speed PI: top (-.4,2.2,0) at .5 s. Circle period 2 s; graph axis stays 4 m.",
+      "hashes": {
+        "04_circle_coordinates.gd": "1a00fcfa717569f726ee1d76012ef27468b7e7d6b5b0351c9568e3c04dce2194",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "Vector3(0, 1.5, 0)",
+          "Vector3(-0.4, 1.6, 0)"
+        ],
+        [
+          "radius := 1.0",
+          "radius := 0.6"
+        ],
+        [
+          "angular_speed := PI / 2.0",
+          "angular_speed := PI"
+        ]
+      ],
+      "transfer_hash": "db2cbb27e51b77ec70f8e46abb4c9bdd22e9d878aa22cc36816709009f7030c4"
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "title": "Propagation",
+      "probe": "neighbours",
+      "main": "05_neighbour_motion.gd",
+      "files": [
+        "05_neighbour_motion.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 135,
+      "main_lines": 79,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Seven points; initial centre .3 m. At dt=1/60, centre velocity=-.14 and displacement=.2976667; adjacent displacement=.001, next neighbour zero. Reversing traversal with separate next arrays preserves results.",
+      "hashes": {
+        "05_neighbour_motion.gd": "fb21318a5edaacff7beecda0161c84c408208d567d8e901cd059ff5f981725e2",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "count := 9",
+          "count := 7"
+        ],
+        [
+          "displacement[count / 2] = 0.6",
+          "displacement[count / 2] = 0.3"
+        ]
+      ],
+      "transfer_hash": "d479b5716f6babe0fd1f4d1677ff20543a6fd92bd440caa9ad03a324db9f2c1e"
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "title": "Effect Sound",
+      "probe": "sound",
+      "main": "06_phase_note.gd",
+      "files": [
+        "06_phase_note.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 152,
+      "main_lines": 96,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Ratio 1.5: modulator 660 Hz. Zero-depth sample bytes unchanged from ratio 2; positive-depth bytes differ. Length and amplitude limits unchanged.",
+      "hashes": {
+        "06_phase_note.gd": "2cb7c132eb16e3d5c6994147ea7da6b88a1b51a274563521b7e1d8cf0045df0f",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "ratio := 2.0",
+          "ratio := 1.5"
+        ]
+      ],
+      "transfer_hash": "f827876e1a010011ce0464458c854b8c54968cfe48317b6dce44ce3bd92a614a"
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "title": "Bernini",
+      "probe": "bernini",
+      "main": "07_twisted_shaft.gd",
+      "files": [
+        "07_twisted_shaft.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 172,
+      "main_lines": 116,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Height 3.6, twelve corners: 206 positions and 408 faces. Half-height corner (0,2.05,-.4), top (-.4,3.85,0). Rotating the parent leaves stored positions intact.",
+      "hashes": {
+        "07_twisted_shaft.gd": "6d2dd88ded6668eda199b231cc74e5937d7985d01b02558ea30486fe1629ec43",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "height := 2.4",
+          "height := 3.6"
+        ],
+        [
+          "sides := 8",
+          "sides := 12"
+        ]
+      ],
+      "transfer_hash": "32d6b4c0c90c033598203f93ac657b66ec057c938eb6a7cbd43dfffee8741079"
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "title": "Cage",
+      "probe": "cage",
+      "main": "08_chance_score.gd",
+      "files": [
+        "08_chance_score.gd",
+        "note_voice.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 199,
+      "main_lines": 115,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Both intervals .75: six times .75,1.5,2.25,3,3.75,4.5. Replay leaves voice choices and RNG state unchanged; late dispatch retains order.",
+      "hashes": {
+        "08_chance_score.gd": "faf73013beb4258829a724ae4113f7cbe6cc3b32585b97b51e743a0e5795d44f",
+        "note_voice.gd": "19f6d693c67fe6d2ac9401319f66ba86bf399ee3c0005c848cd99a3823968cd2",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "min_interval := 0.8",
+          "min_interval := 0.75"
+        ],
+        [
+          "max_interval := 1.6",
+          "max_interval := 0.75"
+        ]
+      ],
+      "transfer_hash": "36745f471ef467f88c52fa2579ca8c02b1141b799dcafe5b4e34a43844a0587c"
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "title": "Air Music",
+      "probe": "air_music",
+      "main": "09_contact_voices.gd",
+      "files": [
+        "09_contact_voices.gd",
+        "ring_voice.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 198,
+      "main_lines": 109,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Both bars 392 Hz: same sample bytes, but separate starts. Touching bar 1 after bar 0 must not restart bar 0. Equal pitch is not shared age.",
+      "hashes": {
+        "09_contact_voices.gd": "8e81e3077d16df13cf445ef36f0a4a7b5bf380a96bf8b17405ebe309db69772f",
+        "ring_voice.gd": "abc180d760cc71cbdd4e3288a8ce67b5b32aa5e86567ba29b01028a9a744743f",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "[261.63, 392.0]",
+          "[392.0, 392.0]"
+        ]
+      ],
+      "transfer_hash": "aed9737fecea52c164256beec923a3968db5127f8ec355ba874bacfecb7ff2e7"
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "title": "Sky Stairs",
+      "probe": "stairs",
+      "main": "10_sampled_treads.gd",
+      "files": [
+        "10_sampled_treads.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 102,
+      "main_lines": 70,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Constant radius 2.5 and rise .15: eleven centres on the same circle, tops 0,.75,1.5 at indices 0,5,10; collider tops match. No claim that this proves player ascent.",
+      "hashes": {
+        "10_sampled_treads.gd": "670d32cf08c0f49cf0b83f7d495d77f72dd91e257bdba5c27ad9589d0e2ceefd",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "amplitude := 0.45",
+          "amplitude := 0.0"
+        ],
+        [
+          "rise := 0.11",
+          "rise := 0.15"
+        ]
+      ],
+      "transfer_hash": "c59faa7efe646ce84c2dcaff3fc3060e3bbdb6e1e61440db324459d90b18d6c0"
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "title": "Beats",
+      "probe": "beats",
+      "main": "11_two_cycles.gd",
+      "files": [
+        "11_two_cycles.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 150,
+      "main_lines": 94,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "A=6 Hz; initial point Y=.95 selects B=5.75. Envelope period 4 s, cancellation after 2 s. Raw source sum and display gain stay distinct.",
+      "hashes": {
+        "11_two_cycles.gd": "f4fcb28a40f72bcf7ccb96c7c371228e73627c78f1aa98f5681f5b9dcc34d736",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "frequency_a := 4.0",
+          "frequency_a := 6.0"
+        ],
+        [
+          "Vector3(-2.1, 1.7, 0.5)",
+          "Vector3(-2.1, 0.95, 0.5)"
+        ]
+      ],
+      "transfer_hash": "c80c19f5817dd8f0e3465f71e19f84dc7bbfab9707a26d6237e1d924a3e6d692"
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "title": "Synthesis",
+      "probe": "synthesis",
+      "main": "12_five_amounts.gd",
+      "files": [
+        "12_five_amounts.gd",
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "code_lines": 159,
+      "main_lines": 103,
+      "archive_matches": [
+        true
+      ],
+      "prediction": "Recipe [1,0,.5,0,0]: at PI/2 signed sum=.5. Half-cycle sign reverses. Removing H3 raises the sum to 1. Baseline restores recipe without restoring phase.",
+      "hashes": {
+        "12_five_amounts.gd": "90600ae242e4f34f1dd8ed6c71662b874781ac1727a884249451cf6af8652eee",
+        "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+        "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+      },
+      "edits": [
+        [
+          "[1.0, 0.5, 1.0 / 3.0, 0.25, 0.2]",
+          "[1.0, 0.0, 0.5, 0.0, 0.0]"
+        ]
+      ],
+      "transfer_hash": "f9647ad48a820d7c7822b640f2262a0809b8f4967087a501bc43efa471b816ff"
+    }
+  ],
+  "protected": {
+    "commons/maps/WaveFunctions_Intro/tutorial.md": "c1c1fb9c2df381af68a499110b9249127ef1f80962807019f08962393e46ded9",
+    "commons/maps/WaveFunctions_Intro/final.md": "8d5ff298d66da268bd213ce94f8f3d979403d6c9a98730afb6d884505d88affa",
+    "commons/maps/WaveFunctions_Pendulum/tutorial.md": "5ff487fd5f63286c5bb2bda21f76a1836a5dd70dfa44889e8a987544ea0a2d51",
+    "commons/maps/WaveFunctions_Pendulum/final.md": "cefadb7e5862c0a924f1d3e10a3fd8ef81ba57acb881e4228d020539f0455d04",
+    "commons/maps/WaveFunctions_Sine_Space/tutorial.md": "746715df5228e121d3146487ba2194a27893068eada89582e6ef74eb124b80da",
+    "commons/maps/WaveFunctions_Sine_Space/final.md": "51a3df85c82f204dc2465c8010801a924e1ea8edf169d391be2d65b08c784d40",
+    "commons/maps/WaveFunctions_Unit_Circle/tutorial.md": "b3cd1f31a16dcfa3a3075b876abc3e2707eff3f171dd5d6c3eb9cdbc7998a010",
+    "commons/maps/WaveFunctions_Unit_Circle/final.md": "ea0cfd42d29fd78d2859ebbde681e54e255cb7d1b544be868ebaf13e120363bd",
+    "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md": "0b59098769ca0b9a9773c710021a94c5fd1f9f496901189c153054fe5ada8898",
+    "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md": "181050034b8ef0635bc26839ed0f607635c91d6cdee4a4e2792c5f4bc5f1cd49",
+    "commons/maps/WaveFunctions_Effect_Sound/tutorial.md": "4c8cb6a4f4dd2eebafe2dba53b2e7bd79b16bfff5a3fbe1d4517bcab25c62560",
+    "commons/maps/WaveFunctions_Effect_Sound/final.md": "7c029125824ac9c6a34ee4ce26ccf73f09f71f4a133c98f31444e4f94b7601e5",
+    "commons/maps/Wavefunctions_Bernini/tutorial.md": "126039aa4d747c072d19aec31692c06c398dda65e3d12f1143659f401fb09206",
+    "commons/maps/Wavefunctions_Bernini/final.md": "bf3e8ce18331f494ed7f9c16b7e0d0ceb82856e414fb91dcd54e0ce124d58ecb",
+    "commons/maps/WaveFunctions_John_Cage/tutorial.md": "a9655f95054a53c8155cef860364e9d361b0d3250f869c66496556275cb0fc64",
+    "commons/maps/WaveFunctions_John_Cage/final.md": "af9214394b8bdb6c63bf4f606b0690376ff681f9f2ca06b23f6cc6a8b41c6ae6",
+    "commons/maps/WaveFunctions_AirMusic/tutorial.md": "35903fec6795f0ecde9a060a15dbc6f3101f1cc1791024313a69e4c0806269ee",
+    "commons/maps/WaveFunctions_AirMusic/final.md": "12fee178a65cb8dd62e63c7701990f94427f488bfd61449a7a06833b996b9c95",
+    "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md": "6aee6d8e105e9c1c36e288321d80c7dce7f2ecb05209dbb4bc56b23dae73fecd",
+    "commons/maps/Wavefunctions_Sky_Stairs/final.md": "f5c4e946ce38484e495f181300e014c4f34e9297cf394ac0d788de5f84b4fc2b",
+    "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md": "d8679a3f9b033e693a05c12ecb35d8f7cca683195345fbbb4baed6f572380b34",
+    "commons/maps/WaveFunctions_TrigWalkingPath/final.md": "49c336590f4d7777d0adac544f80d52d39dd63846420fc66576289734c30a6c3",
+    "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md": "cc36fed0c034c378644ea76a8d0d75db1695a1602ecfa7789e3818595ffb7c2b",
+    "commons/maps/WaveFunctions_Synthesis_Lab/final.md": "7b9b37b353c3bbf36fb9e7b7dcb9fbe218d96317e5fac151b613539f1538e1be"
+  }
+}

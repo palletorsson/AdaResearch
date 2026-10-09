@@ -1,0 +1,34 @@
+{
+  "started": "2026-09-14T09:12:09+02:00",
+  "finished": "2026-09-14T09:12:50+02:00",
+  "pid": 444,
+  "exit": 0,
+  "checks": 45,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/ca_edge_probe_base.gd": "47b8eaac79bc6715065032a3763d13ecbe3c2dd979c4551407442b3cb89b09dc",
+    "ada_run/ca_edge_acceptance.gd": "83c5b6a27bd23217ee5398b10c2af9fba6775a818eea28ec1a59b34eeb78eaf1",
+    "commons/maps/CA_EdgeOfChaos/map_data.json": "b7a80d968f1f532e6a692be886c64b28a79892d00a6521e92c2725c813662c79",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-edge-review-2026-09-14/review-plan.json": "8a653eab62e078125ac8a190f3cd2a7645524683eb70909e275a8f591cd69f65",
+    "algorithms/cellularautomata/ca_showcase/difference_model.gd": "f6243274399105d55e41cdc5ffba9e1462a8807e1a557fe3429fd452120acdeb",
+    "algorithms/cellularautomata/ca_showcase/difference_study.gd": "1ea1ae2b82d4953b4a84f27169862c109194ddbb7cc110348fa1e213bddfd414",
+    "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd": "b2d212bffde2cae9f8be69e70b46df6a9979fd0cbd08f17d5f0e876063c714e1",
+    "ada_run/ca_difference_oracle.py": "b6e3fdddeb952ab3cbafd3216299910065072b99109348b810b91e9e420a9109",
+    "ada_run/ca-edge-review-2026-09-14/oracle.json": "a706fc17b492185adcd5fbfbefb7886bdc0299ec7aec5021189e9a485ca20c66",
+    "algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd": "c896ba4ec1b40daf7711d329dc4159d9e9461db8fb37b56ac928bd4b6ffbf85e",
+    "algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.gd": "5dbfc532229dce4ac6a6fce6bb492d3d585fe5a42cafd59bb3d1c6f6591cfd68",
+    "commons/artifacts/registry/cellular_automata.json": "3269e8144bb59d096083581f139e6df85806462ffdcfe64ba932cf7c0f6d9420"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

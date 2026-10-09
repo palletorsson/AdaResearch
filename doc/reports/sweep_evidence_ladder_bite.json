@@ -1,0 +1,68 @@
+{
+ "sweep": "evidence_ladder",
+ "peak_changed_pct": 1.127,
+ "subject_pct": 32.356,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "phenomenon": "fall"
+   },
+   "b": {
+    "phenomenon": "throw"
+   },
+   "changed_px": 5376,
+   "changed_pct": 0.931
+  },
+  {
+   "a": {
+    "phenomenon": "fall"
+   },
+   "b": {
+    "phenomenon": "bounce"
+   },
+   "changed_px": 5334,
+   "changed_pct": 0.923
+  },
+  {
+   "a": {
+    "phenomenon": "fall"
+   },
+   "b": {
+    "phenomenon": "drag"
+   },
+   "changed_px": 4073,
+   "changed_pct": 0.705
+  },
+  {
+   "a": {
+    "phenomenon": "throw"
+   },
+   "b": {
+    "phenomenon": "bounce"
+   },
+   "changed_px": 6507,
+   "changed_pct": 1.127
+  },
+  {
+   "a": {
+    "phenomenon": "throw"
+   },
+   "b": {
+    "phenomenon": "drag"
+   },
+   "changed_px": 6013,
+   "changed_pct": 1.041
+  },
+  {
+   "a": {
+    "phenomenon": "bounce"
+   },
+   "b": {
+    "phenomenon": "drag"
+   },
+   "changed_px": 5186,
+   "changed_pct": 0.898
+  }
+ ]
+}

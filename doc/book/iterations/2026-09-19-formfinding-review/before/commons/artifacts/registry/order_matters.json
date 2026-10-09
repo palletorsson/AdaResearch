@@ -1,0 +1,43 @@
+{
+ "artifacts": {
+  "order_matters": {
+   "dna": {
+    "axes": {
+     "order": [
+      "TRS",
+      "TSR",
+      "RTS",
+      "RST",
+      "SRT",
+      "STR"
+     ]
+    },
+    "predicted_degeneracy": {
+     "pair": [
+      "RST",
+      "SRT"
+     ],
+     "predicted_pct": 2.8,
+     "measured_pct": 3.79,
+     "arithmetic": "T=(1.3,0.55,0), R=Rz(50deg), S=diag(1,2.4,1). Composed left-to-right by pre-multiplication over the figure's 11 vertices; mean vertex distance across all 15 pairs. RST(T*S*R) vs SRT(T*R*S) minimum at 0.489 m; 0.489/4.4 span = 11.1% of width, figure ~1/4 of frame -> ~2.8%. Sanity check in the same run: TSR vs STR came out 0.770 m, matching the closed form S*t - t = (0, 0.55*1.4, 0) exactly."
+    }
+   },
+   "name": "Order Matters",
+   "class_name": "OrderMatters",
+   "scene": "res://commons/artifacts/order_matters/order_matters.tscn",
+   "description": "Transformation's cheat-code as an object rather than a diagram: ONE figure, ONE translation (1.3, 0.55, 0), ONE rotation (50 degrees about Z), ONE NON-UNIFORM scale (1, 2.4, 1) - and the six orders you can apply them in. Letters read left to right as world-space application, so TRS builds S*R*T. The scale is non-uniform on purpose: a uniform scale commutes with rotation and the axis would die quietly. A pale ghost of the untouched figure stands at the origin in every frame. The numbers never change; six different objects come out. 2026-08-27.",
+   "category": "transformation",
+   "tags": [
+    "transformation",
+    "composition",
+    "non-commutative",
+    "dna",
+    "matrix"
+   ],
+   "spatial_needs": {
+    "footprint_cells": 4,
+    "clearance_m": 0.8
+   }
+  }
+ }
+}

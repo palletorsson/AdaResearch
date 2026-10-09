@@ -1,0 +1,236 @@
+[
+  {
+    "map": "ISO_CaveGeneration",
+    "exit": 0,
+    "present": true,
+    "failures": [],
+    "walks": [
+      {
+        "end": [
+          13.5,
+          0.000846400856971741,
+          18.4333972930908
+        ],
+        "passed": true,
+        "tag": "gallery passage",
+        "target": [
+          13.5,
+          0.1,
+          18.5
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "token": "marchingcave",
+        "position": [
+          6.5,
+          3.0,
+          12.5
+        ],
+        "scale": [
+          0.0199999995529652,
+          0.0199999995529652,
+          0.0199999995529652
+        ],
+        "bounds_position": [
+          5.59182500839233,
+          2.15497636795044,
+          10.5
+        ],
+        "bounds_size": [
+          1.83330821990967,
+          1.58935976028442,
+          4.0
+        ]
+      },
+      {
+        "token": "marchingcubes_cave",
+        "position": [
+          19.5,
+          3.09999990463257,
+          12.5
+        ],
+        "scale": [
+          0.0199999995529652,
+          0.0199999995529652,
+          0.0199999995529652
+        ],
+        "bounds_position": [
+          16.5,
+          0.287499904632568,
+          9.5
+        ],
+        "bounds_size": [
+          6.0,
+          6.0,
+          6.0
+        ]
+      }
+    ]
+  },
+  {
+    "map": "ISO_AnimatedNoise",
+    "exit": 0,
+    "present": true,
+    "failures": [],
+    "walks": [
+      {
+        "end": [
+          10.5,
+          0.000846400856971741,
+          16.4334278106689
+        ],
+        "passed": true,
+        "tag": "gallery passage",
+        "target": [
+          10.5,
+          0.1,
+          16.5
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "token": "animated_noise_explorer",
+        "position": [
+          5.5,
+          1.29999995231628,
+          8.5
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "bounds_position": [
+          4.75,
+          0.549999952316284,
+          7.75
+        ],
+        "bounds_size": [
+          1.5,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "token": "mc_base",
+        "position": [
+          14.5,
+          1.5,
+          12.5
+        ],
+        "scale": [
+          0.0199999995529652,
+          0.0199999995529652,
+          0.0199999995529652
+        ],
+        "bounds_position": [
+          13.5918254852295,
+          0.654976308345795,
+          10.5
+        ],
+        "bounds_size": [
+          1.83330821990967,
+          1.58935976028442,
+          4.0
+        ]
+      }
+    ]
+  },
+  {
+    "map": "ISO_ImplicitModeling",
+    "exit": 0,
+    "present": true,
+    "failures": [],
+    "walks": [
+      {
+        "end": [
+          2.5,
+          0.000846400856971741,
+          14.4334144592285
+        ],
+        "passed": true,
+        "tag": "gallery passage",
+        "target": [
+          2.5,
+          0.1,
+          14.5
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "token": "implicit_surface_modeling",
+        "position": [
+          8.5,
+          3.20000004768372,
+          10.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "bounds_position": [
+          2.5,
+          -2.79999995231628,
+          4.5
+        ],
+        "bounds_size": [
+          12.0,
+          12.0,
+          12.0
+        ]
+      }
+    ]
+  },
+  {
+    "map": "ISO_RhizomeBody",
+    "exit": 0,
+    "present": true,
+    "failures": [],
+    "walks": [
+      {
+        "end": [
+          2.5,
+          0.000846400856971741,
+          30.4332141876221
+        ],
+        "passed": true,
+        "tag": "gallery passage",
+        "target": [
+          2.5,
+          0.1,
+          30.5
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "token": "rhizome_inside",
+        "position": [
+          17.5,
+          0.0,
+          17.5
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "bounds_position": [
+          5.38412761688232,
+          -0.755594551563263,
+          4.86110687255859
+        ],
+        "bounds_size": [
+          24.4684562683105,
+          5.83284950256348,
+          25.131534576416
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "message": "seven halls and a plan owner",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_PhysarumColony",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_PhysarumColony",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_PhysarumColony",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_FlowFields",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_FlowFields",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_FlowFields",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_Boids_Algorithm",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_Boids_Algorithm",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_Boids_Algorithm",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_Ant_Colony_Optimization",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_Ant_Colony_Optimization",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_Ant_Colony_Optimization",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_Particle_Swarm_Optimization",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_Particle_Swarm_Optimization",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_Particle_Swarm_Optimization",
+      "ok": true
+    },
+    {
+      "message": "select SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "ok": true
+    },
+    {
+      "message": "owner for SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "ok": true
+    },
+    {
+      "message": "advance from SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "route": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Ant_Colony_Optimization",
+    "SwarmIntelligence_Particle_Swarm_Optimization",
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

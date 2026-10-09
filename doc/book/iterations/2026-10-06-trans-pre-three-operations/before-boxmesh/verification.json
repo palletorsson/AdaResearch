@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "assertions": 38,
+  "variants": {
+    "still": {},
+    "translate": {
+      "var start := Vector3(0, 1, 0)": "var start := Vector3(1, 1, 0)"
+    },
+    "turn": {
+      "var turn_degrees := 0.0": "var turn_degrees := 45.0"
+    },
+    "scale": {
+      "var size_factor := 1.0": "var size_factor := 1.5"
+    },
+    "other-angle": {
+      "var turn_degrees := 0.0": "var turn_degrees := -30.0"
+    },
+    "rise": {
+      "var rise := 0.0": "var rise := 1.0"
+    },
+    "slow": {
+      "var rise := 0.0": "var rise := 1.0",
+      "var duration := 2.0": "var duration := 4.0"
+    },
+    "combine": {
+      "var rise := 0.0": "var rise := 1.0",
+      "var turn_degrees := 0.0": "var turn_degrees := 45.0",
+      "var size_factor := 1.0": "var size_factor := 1.5"
+    }
+  },
+  "faults": {
+    "wrong-axis": {
+      "mutation": [
+        "cube.rotation_degrees.y = turn_degrees",
+        "cube.rotation_degrees.x = turn_degrees"
+      ],
+      "required_failure": "rotation/declared_y_axis",
+      "detected": true
+    },
+    "frame-clock": {
+      "mutation": [
+        "elapsed += delta",
+        "elapsed += 1.0"
+      ],
+      "required_failure": "time/30/0.5",
+      "detected": true
+    },
+    "accumulated-position": {
+      "mutation": [
+        "cube.position = start + Vector3.UP * rise * t",
+        "cube.position += start + Vector3.UP * rise * t"
+      ],
+      "required_failure": "still/clock_does_not_require_motion",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "commons/maps/Trans_Pre/tutorial.md": "aa8c3c9244394874733c84055bf60aac2eefa5e887645e244d4b0b8d66580a03",
+    "commons/maps/Point_Animatedcube/tutorial.md": "7c9f4a05aa774be8e0fd80f16a4e69971282761b2b88ec0076c9ed6db0aa0021",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py": "efe2477d075c605a8234c37e4d302d0e601894f32ddc7d577530ad75bc6adc85",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd": "f87964989d91e1917e331510e92269e18400a965586d52ce65f4e386f09d8ae8",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd": "f417b0dfb4435bff837209d288fa4470855fb0113bf840eebde3e7aaf98776f0",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "unchanged_helpers": [
+    "cube_body.gd",
+    "face_body.gd",
+    "line_skin.gd"
+  ],
+  "preserved": {
+    "final.md": true,
+    "map_data.json": true
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-trans-pre-73pcvq4p",
+  "scope": "Exact printed code and value-edited variants in native Godot. Actual process callback plus controlled time steps. No headset or learner-understanding claim."
+}

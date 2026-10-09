@@ -1,0 +1,23 @@
+--- before/commons/maps/Noise_Space_10/final.md
++++ commons/maps/Noise_Space_10/final.md
+@@ -18,9 +18,9 @@
+ 
+ Return to the margin. Press HEIGHT until it reads 0.90 and look for the feature you just crossed. The posts have not moved. The field has not been drawn again from another seed. Try the same approach.
+ 
+-In the recorded desktop walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
++In one recorded walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
+ 
+-Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while a player body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
++Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while your body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
+ 
+ The current height rule is short:
+ 
+@@ -48,7 +48,7 @@
+ 
+ The display gives the length and steepest sampled stretch of whichever proposed route is selected. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
+ 
+-The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
++The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The controller in that walk accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
+ 
+ Look down at the yellow witness. Its printed height belongs to the triangle under that point. The terrain is made from 81 by 81 sampled positions, spaced ten centimetres apart. Between those positions, triangles supply a surface. Sampling the noise again between the vertices can give a slightly different answer: the collider is the constructed mesh, not an infinitely detailed function.
+ 

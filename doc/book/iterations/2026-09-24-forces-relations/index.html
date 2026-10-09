@@ -1,0 +1,286 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forces — what the relation can carry</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e8;color:#292c30;font:17px/1.65 system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:54px 32px 90px}a{color:#00666d;text-underline-offset:3px}nav{display:flex;gap:12px 22px;flex-wrap:wrap;font-size:14px;margin:22px 0}h1,h2,h3{line-height:1.15}header.hero{max-width:790px}header.hero h1{font:clamp(42px,6vw,76px)/1.06 Georgia,serif;letter-spacing:-.035em;margin:20px 0}.intro{font-size:21px;line-height:1.65}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#626d70}.status{border-left:3px solid #9b4a42;padding-left:16px;max-width:870px}.chapter{max-width:820px}.chapter h2{font:34px/1.2 Georgia,serif}section{border-top:1px solid #cfc8bd;margin-top:48px;padding-top:24px}details{background:#ebe7df;border:1px solid #d0cabe;border-radius:9px;padding:18px 22px;margin:26px 0}summary{cursor:pointer;font-weight:600}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}.comparison article{min-width:0;font:17px/1.7 Georgia,serif}.comparison h3{font:13px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#526568}.reading{max-width:720px;margin:56px auto 74px;font:21px/1.78 Georgia,serif;scroll-margin-top:30px}.reading h1{font-size:38px;line-height:1.15;margin-bottom:35px}.reading h2{font-size:29px;margin-top:2.3em;line-height:1.25}.reading p{margin:1.15em 0}code{font-size:.82em}pre{background:#e7ebe7;border-left:3px solid #3b7d77;padding:18px;overflow:auto;line-height:1.55;font:14px/1.6 Consolas,monospace;tab-size:4}pre code{font-size:inherit}.note,figcaption{font-size:14px;color:#606a70}.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}.pair figure{margin:0}.pair img{display:block;width:100%;border-radius:6px}.pair figcaption{margin-top:10px}footer{max-width:790px;margin-top:50px}blockquote{border-left:2px solid #a45a52;padding-left:22px;margin-left:0}@media(max-width:800px){main{padding:28px 18px 60px}.comparison,.pair{grid-template-columns:1fr}.reading{font-size:19px}.reading h1{font-size:33px}.chapter h2{font-size:29px}details{padding:14px}.intro{font-size:19px}}</style></head><body><main><header class="hero"><p class="eyebrow">Ada Research · Forces · 24 September 2026</p><h1>What the relation<br>can carry.</h1><p class="intro">The arrow moves while its wall picture stays. A cube comes home with a journey behind it. A rail turns, and what it can keep changes.</p></header><p class="status">Applied to the first three Forces <strong>final.md</strong> chapters. Eight primary encounters retain their order. The mathematical relations remain in the reading; detailed operating notes stay beside it.</p><nav><a href="#reading">Read all three chapters</a><a href="#Vectors_Act1_WhatAVectorIs">The vector</a><a href="#VFM_02_Operations">The journey</a><a href="#Vectors_Act2_VectorArithmetic">The remainder</a><a href="DECISIONS.md">Decisions and scope</a><a href="capture/forces-book.md">Current Forces capture</a></nav><div id="reading"></div><section id="Vectors_Act1_WhatAVectorIs"><header class="chapter"><p class="eyebrow">Vectors Act1 WhatAVectorIs</p><h2>The same difference, somewhere else</h2><p>Both pins move; the wall has nothing new to report. Begin with the visible difference between relocation and displacement, then discover what a unit direction can carry.</p><nav><a href="#reading-Vectors_Act1_WhatAVectorIs">Read the revision</a><a href="/compose/sources?map=Vectors_Act1_WhatAVectorIs&amp;doc=final">Read and comment</a><a href="Vectors_Act1_WhatAVectorIs.diff">Exact diff</a><a href="Vectors_Act1_WhatAVectorIs.notes.md">Companion details</a></nav></header><details><summary>Original and revision, side by side</summary><p class="note">705 → 645 words, including code. Frozen comparison; the comment link opens the live manuscript.</p><div class="comparison"><article><h3>Before</h3><h1>The same difference, somewhere else</h1>
+<p>Can something move without its vector changing?</p>
+<p>We have given points addresses, transformed shapes, made patterns and followed changes through time. Now keep two addresses together. One names a beginning; the other names an end. What can we carry forward from their relation?</p>
+<p><span id="Vectors_Act1_WhatAVectorIs-before-encounter-VectorBasics"></span></p>
+<p>At the first bench, move either pin of the small arrow. Watch the large wall. Two yellow arrows respond: an elevation view, XY, and a floor-plan view, XZ. They are two projections of the same displacement. Predict which view will change most before moving the tip again.</p>
+<p>Press <strong>SHORT</strong>, then <strong>LONG</strong>. The displacement changes from a quarter metre to one metre without changing its direction. Look between the hand-sized arrow and the wall. The pictures have different display scales; their shared input is the difference between the pins in world coordinates.</p>
+<p>Press <strong>SHIFT</strong>. Both pins move together by twenty centimetres along the bench. Their addresses change. Does the wall have anything new to report? Press again to return them. An unchanged picture can be evidence that the machine is doing exactly what we asked.</p>
+<p>Only now press <strong>PARTS</strong>. The components and magnitude appear on the console; coloured legs make the components visible in each projection.</p>
+<pre><code class="language-gdscript">var displacement = end.global_position - start.global_position
+</code></pre>
+<p>Subtraction keeps the difference and discards the two original addresses. This is a free displacement vector: it can be represented at another origin without changing its direction or length. Later, where a force is applied will matter. We should not carry this freedom into every physical question without testing it.</p>
+<p>The wall keeps the world axes fixed. Turning the bench changes how its local directions relate to that frame. A screen on a wall is another arrangement inside the room, not a transparent window onto mathematics. One projection leaves out Z; the other leaves out Y. Neither alone tells the whole displacement.</p>
+<p>Now press <strong>ZERO</strong>. The pins coincide, and the displacement has length zero. There is no direction for the yellow arrow to show. If you press SHORT or LONG from this state, the interface chooses the direction (1,1,1), normalised. That direction is a convention supplied by the control, not information rescued from zero.</p>
+<p>The wall samples the pins twenty times a second. An update can reach the small arrow before it reaches the large picture. If a projection exceeds the drawing window, the wall limits its drawn length and labels the clipping; the component numbers retain the measured displacement. The representation has a capacity, and it says where that capacity ends.</p>
+<p>The coordinate frame, route courier and length lantern remain nearby as supporting encounters. A path has an origin and a history even when a displacement summary does not keep them. What was useful to discard for this question may be necessary for the next one.</p>
+<p><span id="Vectors_Act1_WhatAVectorIs-before-encounter-vector_normalize_demo"></span></p>
+<p>At the second primary, compare the input vector with its normalised companion. Change the input direction and length. Which changes reach the companion? Which do not?</p>
+<p>The operation divides a nonzero vector by its own magnitude:</p>
+<pre><code class="language-gdscript">var magnitude = v.length()
+var unit = v / magnitude if magnitude &gt; 0.001 else Vector3.ZERO
+</code></pre>
+<p>Length is removed while direction is retained. The sphere and rings provide the diagram's reference for unit length; they are part of the display's scale. A long input can become shorter and a short input longer. Normalisation is not simply shrinking.</p>
+<p>This implementation also chooses a threshold: magnitudes at or below 0.001 return zero. It does not normalise every tiny nonzero input. The boundary keeps the calculation usable while treating a neighbourhood around zero as having no available direction. The numeric output now reports the computed length, including zero, rather than always printing one.</p>
+<p>We have made something reusable by leaving information behind. First the two addresses, then the magnitude. Reuse is powerful because of these reductions; the reductions also need to remain open to inspection.</p>
+<p>Next, in <strong>VFM_02_Operations</strong>, vectors meet. We will compare a composed displacement with its separate contributions before asking a force to change a body's movement. The arrow on the wall can eventually become an instruction to the room. Today it describes; it does not push.</p></article><article><h3>Revised</h3><h1>The same difference, somewhere else</h1>
+<p><span id="Vectors_Act1_WhatAVectorIs-after-encounter-VectorBasics"></span></p>
+<p>Two pins hold a small arrow between them. On the wall, two larger yellow arrows show it from different directions: one from the side, one from above. Move the tip. The wall answers.</p>
+<p>Now <strong>SHIFT</strong> moves both pins sideways together. The small arrow has gone somewhere. The two wall arrows stay where they were.</p>
+<p>We can see the movement and the lack of change at once. The wall has been asked for the difference between the pins. Both addresses have changed by the same amount, so their difference has not.</p>
+<p>The point rooms gave us addresses; transformation let us move them. Here we can carry a relation from one place to another. <em>This far, this way</em> can begin somewhere else.</p>
+<p><strong>PARTS</strong> brings out the coloured component legs and their numbers. The calculation is short:</p>
+<pre><code class="language-gdscript">var displacement = end.global_position - start.global_position
+</code></pre>
+<p>The subtraction gives the displacement from the beginning to the end. It does not retain either address on its own. Many pairs of points can make this same arrow.</p>
+<p>With <strong>SHORT</strong> and <strong>LONG</strong>, the gap changes from a quarter metre to one metre. Its direction stays. The wall pictures grow, although their display scale differs from the arrow in our hands. What they share is the measured displacement.</p>
+<p>One wall view keeps X and Y, leaving out depth along Z. The other keeps X and Z, leaving out height along Y. Move the tip in a direction that disappears from one view and watch it arrive in the other. A movement can be missing from a picture while still taking place in the room.</p>
+<p>These are world axes. Turning the bench changes its relation to them; it does not turn the world's frame with it. The arrow has a direction within an arrangement we inherited when we entered.</p>
+<p><strong>ZERO</strong> brings the pins together. There is no longer a direction from one to the other. SHORT or LONG can separate them again, but now the control has to supply a direction: it chooses the normalised diagonal (1,1,1). There was no little arrow hidden inside zero, waiting to be enlarged.</p>
+<p>The coordinate frame, route courier and length lantern remain nearby. A courier has to begin somewhere, even when its instruction is only <em>this far, this way</em>. Later, the point where a force is applied will matter too. The freedom to move a displacement arrow does not make every use of a vector independent of place.</p>
+<p><span id="Vectors_Act1_WhatAVectorIs-after-encounter-vector_normalize_demo"></span></p>
+<p>At the next diagram, a sphere gives the companion arrow a reference for unit length. Lengthen the input: its companion keeps its length. Change the direction: both turn.</p>
+<p>A long arrow becomes shorter here. A short one becomes longer. Both have one unit of length, with their different directions intact.</p>
+<p>This is normalisation. A nonzero vector is divided by its own magnitude:</p>
+<pre><code class="language-gdscript">var magnitude = v.length()
+var unit = v / magnitude if magnitude &gt; 0.001 else Vector3.ZERO
+</code></pre>
+<p>The sphere and rings make that common length visible at the scale of the diagram. They do not tell us how far a body should travel. A unit direction could guide a short step or a long journey; we would have to supply the distance separately.</p>
+<p>Near zero, the companion has no length to draw. The code treats any input length at or below 0.001 as too small to supply a direction and returns zero instead. That small neighbourhood belongs to the implementation. Mathematics leaves only the exact zero vector without a direction.</p>
+<p>At the first bench, the same difference could begin elsewhere. At the second, different lengths could share a direction. These are two ways of finding something in common without making the inputs identical.</p>
+<p>In the next room, two displacements meet. The question becomes where they can take us together.</p></article></div></details><article class="reading" id="reading-Vectors_Act1_WhatAVectorIs"><h1>The same difference, somewhere else</h1>
+<p><span id="Vectors_Act1_WhatAVectorIs-reading-encounter-VectorBasics"></span></p>
+<p>Two pins hold a small arrow between them. On the wall, two larger yellow arrows show it from different directions: one from the side, one from above. Move the tip. The wall answers.</p>
+<p>Now <strong>SHIFT</strong> moves both pins sideways together. The small arrow has gone somewhere. The two wall arrows stay where they were.</p>
+<p>We can see the movement and the lack of change at once. The wall has been asked for the difference between the pins. Both addresses have changed by the same amount, so their difference has not.</p>
+<p>The point rooms gave us addresses; transformation let us move them. Here we can carry a relation from one place to another. <em>This far, this way</em> can begin somewhere else.</p>
+<p><strong>PARTS</strong> brings out the coloured component legs and their numbers. The calculation is short:</p>
+<pre><code class="language-gdscript">var displacement = end.global_position - start.global_position
+</code></pre>
+<p>The subtraction gives the displacement from the beginning to the end. It does not retain either address on its own. Many pairs of points can make this same arrow.</p>
+<p>With <strong>SHORT</strong> and <strong>LONG</strong>, the gap changes from a quarter metre to one metre. Its direction stays. The wall pictures grow, although their display scale differs from the arrow in our hands. What they share is the measured displacement.</p>
+<p>One wall view keeps X and Y, leaving out depth along Z. The other keeps X and Z, leaving out height along Y. Move the tip in a direction that disappears from one view and watch it arrive in the other. A movement can be missing from a picture while still taking place in the room.</p>
+<p>These are world axes. Turning the bench changes its relation to them; it does not turn the world's frame with it. The arrow has a direction within an arrangement we inherited when we entered.</p>
+<p><strong>ZERO</strong> brings the pins together. There is no longer a direction from one to the other. SHORT or LONG can separate them again, but now the control has to supply a direction: it chooses the normalised diagonal (1,1,1). There was no little arrow hidden inside zero, waiting to be enlarged.</p>
+<p>The coordinate frame, route courier and length lantern remain nearby. A courier has to begin somewhere, even when its instruction is only <em>this far, this way</em>. Later, the point where a force is applied will matter too. The freedom to move a displacement arrow does not make every use of a vector independent of place.</p>
+<p><span id="Vectors_Act1_WhatAVectorIs-reading-encounter-vector_normalize_demo"></span></p>
+<p>At the next diagram, a sphere gives the companion arrow a reference for unit length. Lengthen the input: its companion keeps its length. Change the direction: both turn.</p>
+<p>A long arrow becomes shorter here. A short one becomes longer. Both have one unit of length, with their different directions intact.</p>
+<p>This is normalisation. A nonzero vector is divided by its own magnitude:</p>
+<pre><code class="language-gdscript">var magnitude = v.length()
+var unit = v / magnitude if magnitude &gt; 0.001 else Vector3.ZERO
+</code></pre>
+<p>The sphere and rings make that common length visible at the scale of the diagram. They do not tell us how far a body should travel. A unit direction could guide a short step or a long journey; we would have to supply the distance separately.</p>
+<p>Near zero, the companion has no length to draw. The code treats any input length at or below 0.001 as too small to supply a direction and returns zero instead. That small neighbourhood belongs to the implementation. Mathematics leaves only the exact zero vector without a direction.</p>
+<p>At the first bench, the same difference could begin elsewhere. At the second, different lengths could share a direction. These are two ways of finding something in common without making the inputs identical.</p>
+<p>In the next room, two displacements meet. The question becomes where they can take us together.</p></article></section><section id="VFM_02_Operations"><header class="chapter"><p class="eyebrow">VFM 02 Operations</p><h2>The journey that adds up to nothing</h2><p>The existing journey stays at the centre. Swap its legs, go directly, come home: one destination can belong to different histories.</p><nav><a href="#reading-VFM_02_Operations">Read the revision</a><a href="/compose/sources?map=VFM_02_Operations&amp;doc=final">Read and comment</a><a href="VFM_02_Operations.diff">Exact diff</a><a href="VFM_02_Operations.notes.md">Companion details</a></nav></header><details><summary>Original and revision, side by side</summary><p class="note">751 → 601 words, including code. Frozen comparison; the comment link opens the live manuscript.</p><div class="comparison"><article><h3>Before</h3><h1>The journey that adds up to nothing</h1>
+<p><span id="VFM_02_Operations-before-encounter-adder_board"></span></p>
+<p>A pale cube waits inside a glass-edged grid. Amber makes one leg of a route; pink continues from its end. A cyan mark waits elsewhere on the floor. Above them, the wall draws the same arrangement from overhead.</p>
+<p>Press <strong>GO</strong>. The cube starts at home, follows amber, turns, follows pink. It stops at cyan.</p>
+<p>Now <strong>SWAP</strong>, then <strong>GO</strong> again. The turn happens somewhere else. The destination has not moved.</p>
+<p>There is already something here that the destination cannot tell us.</p>
+<p>In the previous room we moved two points together and kept their difference. Here we keep two differences and exchange their order. Each contribution belongs to the same floor frame: X across the stage, F forward into it. Both are measured in metres. The wall turns that floor into a small upright plan; its upward direction means forward, not climbing.</p>
+<p>The first pair is one metre across and one metre forward. <strong>A/B</strong> selects a contribution. <strong>X−</strong>, <strong>X+</strong>, <strong>F−</strong>, <strong>F+</strong> change one of its components in half-metre steps. Change the pink contribution and watch both cyan marks. The wall and the stage receive one result.</p>
+<p>Try <strong>PATH</strong>. The console now says <em>direct</em>. <strong>GO</strong> sends the cube straight to cyan. The corner has gone, but the destination remains. On these opening inputs the two-legged trip covers two metres. The direct trip covers about 1.41.</p>
+<p>Press <strong>RULE</strong> when you want to see the arithmetic that has been holding this together:</p>
+<pre><code class="language-gdscript">result = a + b
+</code></pre>
+<p>Small enough to pass over. Yet this is where two contributions become something a receiver can use. Component by component, one metre across plus no metres across; no metres forward plus one metre forward. The result is <code>(1, 1)</code>.</p>
+<p>The carriage receives the result as a destination. The wall receives it as a point in a diagram. Neither has to invent another answer.</p>
+<p>Addition needs compatible quantities and a shared frame. A metre of displacement can meet another metre of displacement here. Later, two velocities or two forces can be added by the same component rule, but the resulting numbers will have different jobs. The shape of a vector alone cannot tell us which job it has been given.</p>
+<p><strong>CANCEL</strong> sets B opposite to A. Keep A nonzero. Cyan returns home.</p>
+<p>Choose the route <em>via A</em> and press <strong>GO</strong>. The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.</p>
+<p>Zero has not meant that nothing happened.</p>
+<p>Switch to <em>direct</em> and run the same pair. This time the cube stays home. Two journeys now share both their start and their destination. One has movement, a turn, elapsed time. The other has no distance to cover. If we kept only the sum, we could not recover which one we had watched.</p>
+<p>The out-and-back is useful precisely because it does not vanish from every account. Displacement cancels; distance accumulates. We have already met accumulation. Here it keeps a fact that the endpoint leaves behind. Which account would a delivery machine need? Which would a tired body insist on keeping?</p>
+<p>There is a small choreography in the implementation too. The stage turns its two floor coordinates into three scene coordinates:</p>
+<pre><code class="language-gdscript">return Vector3(v.x, height, -v.y)
+</code></pre>
+<p>The second number goes forward along local negative Z. Height is supplied separately. Turning a plan upright on the wall has not given the carriage permission to rise. Its body is possible within this particular translation between representations.</p>
+<p>The controls stop each input component at plus or minus one metre. A larger request meets a limit chosen for this stage. That boundary is not a property of vector addition. You can see the refusal by pressing again at the edge: the button still exists, but the value stays where it is.</p>
+<p>And <strong>GO</strong> has its own convenience. It puts the cube back at home instantly before each trip. Editing the route resets it too. That return is outside the travelled counter. The experiment makes repetition easy by deciding where a journey begins. The running museum has no obligation to begin there with it.</p>
+<p>For now, a prescribed speed carries the cube along a chosen path. Nothing here measures a push or asks the cube's mass. Beyond this arena the other instruments are still waiting: subtraction, projection, alignment, rotation. We can carry one question into them. When a relationship becomes a usable result, what becomes possible—and what would we need to keep if we wanted to remember more?</p></article><article><h3>Revised</h3><h1>The journey that adds up to nothing</h1>
+<p><span id="VFM_02_Operations-after-encounter-adder_board"></span></p>
+<p>A pale cube waits inside a glass-edged grid. Amber makes one leg of a route; pink continues from its end. A cyan mark waits elsewhere on the floor. Above them, the wall draws the same arrangement from overhead.</p>
+<p>Press <strong>GO</strong>. The cube starts at home, follows amber, turns, follows pink. It stops at cyan.</p>
+<p>Now <strong>SWAP</strong>, then <strong>GO</strong> again. The turn happens somewhere else. The destination has not moved.</p>
+<p>There is already something here that the destination cannot tell us.</p>
+<p>In the previous room we moved two points together and kept their difference. Here we keep two differences and exchange their order. Each contribution belongs to the same floor frame: X across the stage, F forward into it. Both are measured in metres. The wall turns that floor into an upright plan; upward in the picture means forward on the stage.</p>
+<p>The first pair is one metre across and one metre forward. Change either contribution with the console and watch the cyan marks on the wall and floor move together. Both receive one result.</p>
+<p><strong>PATH</strong> offers another journey. In <em>direct</em> mode, GO sends the cube straight to cyan. The corner has gone, but the destination remains. On the opening inputs the two-legged trip covers two metres. The direct trip covers about 1.41.</p>
+<p>Behind <strong>RULE</strong>, the arithmetic is waiting:</p>
+<pre><code class="language-gdscript">result = a + b
+</code></pre>
+<p>Small enough to pass over. Yet this is where two contributions become something a receiver can use. Component by component, one metre across plus no metres across; no metres forward plus one metre forward. The result is <code>(1, 1)</code>.</p>
+<p>The carriage receives it as a destination. The wall receives it as a point in a diagram. Neither has to invent another answer.</p>
+<p>Addition needs compatible quantities and a shared frame. Here a metre of displacement meets another metre of displacement. Later, two velocities or two forces can be added by the same component rule. The numbers will have different jobs. The shape of a vector alone cannot tell us which job it has been given.</p>
+<h2>Coming home</h2>
+<p><strong>CANCEL</strong> sets B opposite to A. With A still nonzero, cyan returns home.</p>
+<p>Choose the route <em>via A</em> and press <strong>GO</strong>. The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.</p>
+<p>Zero has not meant that nothing happened.</p>
+<p>Switch to <em>direct</em> and run the same pair. This time the cube stays home. Two journeys now share both their start and their destination. One has movement, a turn, elapsed time. The other has no distance to cover. If we kept only the sum, we could not recover which one we had watched.</p>
+<p>The out-and-back is useful precisely because it does not vanish from every account. Displacement cancels; distance accumulates. We have already met accumulation. Here it keeps a fact that the endpoint leaves behind. Which account would a delivery machine need? Which would a tired body insist on keeping?</p>
+<p>The counter also has a beginning. Each GO puts the cube home instantly and starts a new trip. That reset is not part of the distance it reports. The experiment lets us start again; it has chosen which movement belongs to the journey.</p>
+<p>A prescribed speed carries the cube along its route. We have not yet needed a push or the cube's mass. Addition supplied a destination; another part of the program supplied the travel.</p>
+<p>In the next room, exchange will matter differently. The gap from here to there has the same length as the gap back. It points the other way.</p></article></div></details><article class="reading" id="reading-VFM_02_Operations"><h1>The journey that adds up to nothing</h1>
+<p><span id="VFM_02_Operations-reading-encounter-adder_board"></span></p>
+<p>A pale cube waits inside a glass-edged grid. Amber makes one leg of a route; pink continues from its end. A cyan mark waits elsewhere on the floor. Above them, the wall draws the same arrangement from overhead.</p>
+<p>Press <strong>GO</strong>. The cube starts at home, follows amber, turns, follows pink. It stops at cyan.</p>
+<p>Now <strong>SWAP</strong>, then <strong>GO</strong> again. The turn happens somewhere else. The destination has not moved.</p>
+<p>There is already something here that the destination cannot tell us.</p>
+<p>In the previous room we moved two points together and kept their difference. Here we keep two differences and exchange their order. Each contribution belongs to the same floor frame: X across the stage, F forward into it. Both are measured in metres. The wall turns that floor into an upright plan; upward in the picture means forward on the stage.</p>
+<p>The first pair is one metre across and one metre forward. Change either contribution with the console and watch the cyan marks on the wall and floor move together. Both receive one result.</p>
+<p><strong>PATH</strong> offers another journey. In <em>direct</em> mode, GO sends the cube straight to cyan. The corner has gone, but the destination remains. On the opening inputs the two-legged trip covers two metres. The direct trip covers about 1.41.</p>
+<p>Behind <strong>RULE</strong>, the arithmetic is waiting:</p>
+<pre><code class="language-gdscript">result = a + b
+</code></pre>
+<p>Small enough to pass over. Yet this is where two contributions become something a receiver can use. Component by component, one metre across plus no metres across; no metres forward plus one metre forward. The result is <code>(1, 1)</code>.</p>
+<p>The carriage receives it as a destination. The wall receives it as a point in a diagram. Neither has to invent another answer.</p>
+<p>Addition needs compatible quantities and a shared frame. Here a metre of displacement meets another metre of displacement. Later, two velocities or two forces can be added by the same component rule. The numbers will have different jobs. The shape of a vector alone cannot tell us which job it has been given.</p>
+<h2>Coming home</h2>
+<p><strong>CANCEL</strong> sets B opposite to A. With A still nonzero, cyan returns home.</p>
+<p>Choose the route <em>via A</em> and press <strong>GO</strong>. The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.</p>
+<p>Zero has not meant that nothing happened.</p>
+<p>Switch to <em>direct</em> and run the same pair. This time the cube stays home. Two journeys now share both their start and their destination. One has movement, a turn, elapsed time. The other has no distance to cover. If we kept only the sum, we could not recover which one we had watched.</p>
+<p>The out-and-back is useful precisely because it does not vanish from every account. Displacement cancels; distance accumulates. We have already met accumulation. Here it keeps a fact that the endpoint leaves behind. Which account would a delivery machine need? Which would a tired body insist on keeping?</p>
+<p>The counter also has a beginning. Each GO puts the cube home instantly and starts a new trip. That reset is not part of the distance it reports. The experiment lets us start again; it has chosen which movement belongs to the journey.</p>
+<p>A prescribed speed carries the cube along its route. We have not yet needed a push or the cube's mass. Addition supplied a destination; another part of the program supplied the travel.</p>
+<p>In the next room, exchange will matter differently. The gap from here to there has the same length as the gap back. It points the other way.</p></article></section><section id="Vectors_Act2_VectorArithmetic"><header class="chapter"><p class="eyebrow">Vectors Act2 VectorArithmetic</p><h2>What the line can keep</h2><p>Exchange reverses a gap. Alignment acquires the name FRIEND. Turning a rail changes what it can use. Keep these encounters distinct and leave room for another use of the remainder.</p><nav><a href="#reading-Vectors_Act2_VectorArithmetic">Read the revision</a><a href="/compose/sources?map=Vectors_Act2_VectorArithmetic&amp;doc=final">Read and comment</a><a href="Vectors_Act2_VectorArithmetic.diff">Exact diff</a><a href="Vectors_Act2_VectorArithmetic.notes.md">Companion details</a></nav></header><details><summary>Original and revision, side by side</summary><p class="note">1,205 → 961 words, including code. Frozen comparison; the comment link opens the live manuscript.</p><div class="comparison"><article><h3>Before</h3><h1>What the line can keep</h1>
+<p><span id="Vectors_Act2_VectorArithmetic-before-encounter-vector_add"></span></p>
+<p>The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.</p>
+<p>Move one pad. The sum moves with it. At this scale there is no carriage to wait for. That absence matters: the result appears immediately, although a body given that destination would still need a way to get there.</p>
+<p>Keep the distinction as we walk. These operations give us relationships. A simulation has to decide what to do with them.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-before-encounter-vector_sub"></span></p>
+<p>Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.</p>
+<p>Press <strong>SWAP</strong>. The arrow reverses.</p>
+<p>In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.</p>
+<p><strong>A/B</strong> chooses an address; <strong>X−</strong>, <strong>X+</strong>, <strong>F−</strong>, <strong>F+</strong> move it in half-metre coordinate steps. Try <strong>SHIFT</strong> instead. Both addresses move sideways together, while the gap between them stays the same. That is the first vector room returning inside a new operation.</p>
+<p>Then <strong>SAME</strong> brings B to A. The two addresses coincide. The cyan arrow has no length to draw.</p>
+<p>Press <strong>RULE</strong>:</p>
+<pre><code class="language-gdscript">gap = a - b
+</code></pre>
+<p>From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have not introduced another kind of number; we have asked a different question of the same coordinates.</p>
+<p>The diagram has a scale of its own. Each coordinate metre is drawn as half a metre, on the floor and on the wall. X goes across; F goes forward on the floor and upward on the wall. An upward arrow in the drawing still does not authorize a climb. The little blocks are representations of addresses, not a measurement of the visitor's position.</p>
+<p>The controls stop at ±1.5 metres per component. SHIFT refuses the whole move if either address would cross that boundary. It does not quietly move one and spoil the comparison. A limit chosen for the exhibit is already shaping which questions can be asked without rebuilding it.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-before-encounter-dot_aligner"></span></p>
+<p>Between the gap and its next use, a small aiming console makes a decision from an angle. Move its <strong>ALIGNMENT</strong> slider. The drawn aim changes relative to a target; the readout moves toward <em>FRIEND</em> as their directions approach one another.</p>
+<p>The source compares normalized directions. Their dot product is one at complete alignment, zero at a right angle, negative when they point sufficiently against each other. This placement's ordinary slider covers only a limited angular range; it does not offer the whole operation. The larger dot-product exhibit beside it is a separate comparison, not another control for this console.</p>
+<p>A threshold of <code>0.985</code> divides the illustrated target's status. The directions vary continuously, but the name changes at a boundary someone selected. The target is not learning to trust the turret. A drawing is being classified by a rule.</p>
+<p>That is a useful place to pause before calling a number agreement. What relation have we measured, and what extra story did the label attach to it?</p>
+<p><span id="Vectors_Act2_VectorArithmetic-before-encounter-projection_shadow"></span></p>
+<p>At the next wall, the cyan gap has arrived before us. This station reads the actual A and B values from the subtraction station in this hall. It has not invented a similar-looking example.</p>
+<p>A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. Press <strong>RESET</strong> to return both stations to their opening coordinates and the rail to X. Then <strong>SLIDE</strong>.</p>
+<p>A moves in the source. The cyan gap changes. Gold stays where it was. Pink grows.</p>
+<p>SLIDE moves A half a coordinate metre perpendicular to the rail, reversing that step on the next press. The rail cannot register this part of the movement in its along-rail reading. Here the remainder remains visible beside the answer.</p>
+<p>Now <strong>TURN</strong>. The rail turns thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.</p>
+<p>When you press <strong>RULE</strong>, three short lines hold the experiment together:</p>
+<pre><code class="language-gdscript">kept = axis * gap.dot(axis)
+remainder = gap - kept
+</code></pre>
+<p>The axis is maintained at unit length. <code>gap.dot(axis)</code> gives a signed distance along it. Multiplying by the axis turns that number back into a vector. Subtracting the kept part leaves the perpendicular remainder.</p>
+<p>And the addition we already know can check the result:</p>
+<pre><code class="language-gdscript">kept + remainder
+</code></pre>
+<p>It gives the gap back. To ordinary floating-point precision, the remainder's dot with the rail is zero. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.</p>
+<p>Try <strong>FLIP</strong>. The signed distance changes sign, but the gold vector stays in place: both the axis and its scalar coordinate reverse. Even a negative number cannot tell its whole story without the frame it belongs to.</p>
+<p>There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail's account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-before-encounter-torque_crank"></span></p>
+<p>The crank farther along takes the question toward turning. Its <strong>LEVERAGE</strong> slider changes the angle between an illustrated arm and push. Along the arm, the normalized cross-product magnitude is zero. Across it, the value grows toward one.</p>
+<p>The source contains a compact expression of the geometric relation:</p>
+<pre><code class="language-gdscript">var torque_vec: Vector3 = r_dir.cross(f_dir)
+</code></pre>
+<p>These are unit directions. Their cross product supplies an axis and an angular factor. Physical torque would also need the actual arm length and force magnitude. The exhibit draws its wheel at an angle derived from that factor; it does not accumulate a wheel's angular velocity through time.</p>
+<p>The readout names its quantity: sin θ, a unitless factor, beside the chosen angle. It also reports the wheel's static pose. Move the slider, then leave it alone. The wheel holds that pose; time has not been made part of this model.</p>
+<p>The diagram shows a relation worth learning, and also where a future simulation must do more work. What the rail keeps of a push along an arm contributes no torque about that arm's origin; the perpendicular part can. Yet neither a projection nor a cross product, by itself, makes a body move.</p>
+<p>The larger comparisons and the distant laser-operated diagrams remain around this route. We need not finish every version before continuing. The next hall in the current sequence is Launch. Carry the gap, its components and this unfinished wheel with you: a destination, a direction, an initial velocity and a force may all be written with vectors, but they ask different things of time.</p></article><article><h3>Revised</h3><h1>What the line can keep</h1>
+<p><span id="Vectors_Act2_VectorArithmetic-after-encounter-vector_add"></span></p>
+<p>The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.</p>
+<p>Move one pad. The sum moves with it. There is no carriage to wait for. A body given that destination would still need a way to get there.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-after-encounter-vector_sub"></span></p>
+<p>Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.</p>
+<p>With <strong>SWAP</strong>, the arrow reverses.</p>
+<p>In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.</p>
+<p><strong>SHIFT</strong> moves both addresses sideways together. The gap stays the same: the first vector room returns inside this new operation. <strong>SAME</strong> brings B to A, leaving no length for the cyan arrow to draw.</p>
+<p>Behind <strong>RULE</strong> is the subtraction:</p>
+<pre><code class="language-gdscript">gap = a - b
+</code></pre>
+<p>From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have asked a different question of the same coordinates.</p>
+<p>The blocks and their wall picture use a reduced scale. They represent addresses on the stage, not the visitor's position. The arrow can tell the little block how to reach its neighbour. Applying it to our own body would require another connection.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-after-encounter-dot_aligner"></span></p>
+<h2>When an angle becomes agreement</h2>
+<p>Between the gap and its next use, a small aiming console makes a decision from an angle. Its <strong>ALIGNMENT</strong> slider brings the drawn aim toward a target direction. As they approach one another, the target acquires the name <em>FRIEND</em>.</p>
+<p>The console compares normalised directions. Their dot product reaches one when they align. In the wider operation it is zero at a right angle and negative when the directions point sufficiently against each other; this slider explores only a limited angular range.</p>
+<p>Here <code>0.985</code> is enough to cross the threshold. The direction changes continuously. The name changes at once.</p>
+<p>Nothing about the target's intentions entered the calculation. It became a friend by pointing nearly the same way. The number measures alignment; the label supplies a story about whom to welcome. What happens to that story if agreement stops being our condition for approach?</p>
+<p><span id="Vectors_Act2_VectorArithmetic-after-encounter-projection_shadow"></span></p>
+<h2>Somewhere for the remainder</h2>
+<p>At the next wall, the cyan gap has arrived before us. This station reads A and B from the subtraction stage we just left.</p>
+<p>A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. <strong>RESET</strong> returns both stations to their opening coordinates, with the rail along X. Then <strong>SLIDE</strong> moves A across the rail.</p>
+<p>The cyan gap changes. Gold stays where it was. Pink grows.</p>
+<p>The rail's along-direction reading cannot register this movement. Beside it, the remainder makes the change visible. A second SLIDE reverses the step.</p>
+<p>Now <strong>TURN</strong> moves the rail thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.</p>
+<p>The rule separates the gap into two parts:</p>
+<pre><code class="language-gdscript">kept = axis * gap.dot(axis)
+remainder = gap - kept
+</code></pre>
+<p>The axis has unit length. <code>gap.dot(axis)</code> gives a signed distance along it. Multiplying by the axis makes that number into the gold vector. Subtracting gold from the gap leaves the perpendicular pink remainder.</p>
+<p>The addition we already know can put them together again:</p>
+<pre><code class="language-gdscript">kept + remainder
+</code></pre>
+<p>It gives the gap back. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.</p>
+<p><strong>FLIP</strong> reverses the rail's orientation. The signed distance changes sign, but gold stays in place: both the axis and its coordinate reverse. A negative number needs its frame before it can tell us where to go.</p>
+<p>There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail's account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-after-encounter-torque_crank"></span></p>
+<h2>Across the arm</h2>
+<p>The crank farther along brings this perpendicular part to a different question. Its <strong>LEVERAGE</strong> slider changes the angle between an illustrated arm and push. Along the arm, the cross-product magnitude is zero. Across it, the value grows toward one.</p>
+<pre><code class="language-gdscript">var torque_vec: Vector3 = r_dir.cross(f_dir)
+</code></pre>
+<p>These are unit directions. Their cross product supplies an axis and an angular factor. For physical torque we would also need the actual arm length and force magnitude. A push directed through the pivot supplies no torque about it; the perpendicular part can turn the arm.</p>
+<p>The readout names the factor, sin θ, beside the chosen angle. The wheel changes its pose as the slider moves. Let go and it holds still.</p>
+<p>We can study the relation here without waiting for a wheel to accelerate. But setting a pose has not yet given the wheel momentum. To let it keep turning, we would have to give it a state that carries from one moment into the next.</p>
+<p>The larger comparisons and the distant laser-operated diagrams remain around this route. Ahead, in Launch, a vector will be given another job. It will leave the diagram and become an initial velocity for a moving body.</p></article></div></details><article class="reading" id="reading-Vectors_Act2_VectorArithmetic"><h1>What the line can keep</h1>
+<p><span id="Vectors_Act2_VectorArithmetic-reading-encounter-vector_add"></span></p>
+<p>The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.</p>
+<p>Move one pad. The sum moves with it. There is no carriage to wait for. A body given that destination would still need a way to get there.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-reading-encounter-vector_sub"></span></p>
+<p>Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.</p>
+<p>With <strong>SWAP</strong>, the arrow reverses.</p>
+<p>In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.</p>
+<p><strong>SHIFT</strong> moves both addresses sideways together. The gap stays the same: the first vector room returns inside this new operation. <strong>SAME</strong> brings B to A, leaving no length for the cyan arrow to draw.</p>
+<p>Behind <strong>RULE</strong> is the subtraction:</p>
+<pre><code class="language-gdscript">gap = a - b
+</code></pre>
+<p>From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have asked a different question of the same coordinates.</p>
+<p>The blocks and their wall picture use a reduced scale. They represent addresses on the stage, not the visitor's position. The arrow can tell the little block how to reach its neighbour. Applying it to our own body would require another connection.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-reading-encounter-dot_aligner"></span></p>
+<h2>When an angle becomes agreement</h2>
+<p>Between the gap and its next use, a small aiming console makes a decision from an angle. Its <strong>ALIGNMENT</strong> slider brings the drawn aim toward a target direction. As they approach one another, the target acquires the name <em>FRIEND</em>.</p>
+<p>The console compares normalised directions. Their dot product reaches one when they align. In the wider operation it is zero at a right angle and negative when the directions point sufficiently against each other; this slider explores only a limited angular range.</p>
+<p>Here <code>0.985</code> is enough to cross the threshold. The direction changes continuously. The name changes at once.</p>
+<p>Nothing about the target's intentions entered the calculation. It became a friend by pointing nearly the same way. The number measures alignment; the label supplies a story about whom to welcome. What happens to that story if agreement stops being our condition for approach?</p>
+<p><span id="Vectors_Act2_VectorArithmetic-reading-encounter-projection_shadow"></span></p>
+<h2>Somewhere for the remainder</h2>
+<p>At the next wall, the cyan gap has arrived before us. This station reads A and B from the subtraction stage we just left.</p>
+<p>A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. <strong>RESET</strong> returns both stations to their opening coordinates, with the rail along X. Then <strong>SLIDE</strong> moves A across the rail.</p>
+<p>The cyan gap changes. Gold stays where it was. Pink grows.</p>
+<p>The rail's along-direction reading cannot register this movement. Beside it, the remainder makes the change visible. A second SLIDE reverses the step.</p>
+<p>Now <strong>TURN</strong> moves the rail thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.</p>
+<p>The rule separates the gap into two parts:</p>
+<pre><code class="language-gdscript">kept = axis * gap.dot(axis)
+remainder = gap - kept
+</code></pre>
+<p>The axis has unit length. <code>gap.dot(axis)</code> gives a signed distance along it. Multiplying by the axis makes that number into the gold vector. Subtracting gold from the gap leaves the perpendicular pink remainder.</p>
+<p>The addition we already know can put them together again:</p>
+<pre><code class="language-gdscript">kept + remainder
+</code></pre>
+<p>It gives the gap back. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.</p>
+<p><strong>FLIP</strong> reverses the rail's orientation. The signed distance changes sign, but gold stays in place: both the axis and its coordinate reverse. A negative number needs its frame before it can tell us where to go.</p>
+<p>There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail's account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.</p>
+<p><span id="Vectors_Act2_VectorArithmetic-reading-encounter-torque_crank"></span></p>
+<h2>Across the arm</h2>
+<p>The crank farther along brings this perpendicular part to a different question. Its <strong>LEVERAGE</strong> slider changes the angle between an illustrated arm and push. Along the arm, the cross-product magnitude is zero. Across it, the value grows toward one.</p>
+<pre><code class="language-gdscript">var torque_vec: Vector3 = r_dir.cross(f_dir)
+</code></pre>
+<p>These are unit directions. Their cross product supplies an axis and an angular factor. For physical torque we would also need the actual arm length and force magnitude. A push directed through the pivot supplies no torque about it; the perpendicular part can turn the arm.</p>
+<p>The readout names the factor, sin θ, beside the chosen angle. The wheel changes its pose as the slider moves. Let go and it holds still.</p>
+<p>We can study the relation here without waiting for a wheel to accelerate. But setting a pose has not yet given the wheel momentum. To let it keep turning, we would have to give it a state that carries from one moment into the next.</p>
+<p>The larger comparisons and the distant laser-operated diagrams remain around this route. Ahead, in Launch, a vector will be given another job. It will leave the diagram and become an initial velocity for a moving body.</p></article></section><footer><p>This pass changes writing and its publication records. Maps, artifacts and sequence order are preserved. The remaining ten Forces chapters are unchanged. No new museum capture, runtime or headset check is claimed.</p><p>Next: Launch and Motion, where a vector becomes an initial velocity, and time begins to carry its consequences.</p></footer></main></body></html>

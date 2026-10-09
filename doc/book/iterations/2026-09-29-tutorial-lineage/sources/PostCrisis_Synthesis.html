@@ -1,0 +1,157 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PostCrisis_Synthesis · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PostCrisis_Synthesis">← Tutorial lineage</a></p><h1>PostCrisis Synthesis</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PostCrisis_Synthesis/final.md">Raw captured source</a></p><pre># The body that returned
+
+What will have survived the journey?
+
+&lt;!-- @assembly_return --&gt;
+
+Look for the hand you moved.
+
+It has crossed the threshold without making the journey. Beyond the ledger, an amber body holds the last pose kept in the Assembly Laboratory. The blue body beside it holds the starting arrangement. Walk between them. The elbow, the lowered head, the hand left too far away: a difference you made in another room can now be met from another side.
+
+If you came straight here, the amber space will be empty. There is a place for a record, but no pose has yet been kept. That emptiness belongs to the work too.
+
+The two bodies need not be dramatically different. Perhaps you moved one hand and decided that was enough. Perhaps you made the figure almost unrecognisable. Perhaps you left the joints where they were and took a connection elsewhere. Each still has thirteen joints and twelve connections. The totals agree. The bodies may no longer seem to.
+
+At the beginning of the museum, a counter was already running before we could read it. We could follow its increase without knowing everything that had happened. Here a count of released edits tells us that someone did something. Looking from one body to the other lets us ask what changed. Neither tells us why.
+
+The amber figure was made again from a record of positions. The program did not need to remember how your hand found them. A hesitation, a sweep around the head, an accidental drop: several different gestures can finish at the same coordinates. The figure keeps the destination. You may still feel the movement that is absent from it.
+
+The hand has arrived. Your hand is missing.
+
+&lt;!-- @accountability_ledger --&gt;
+
+Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and says whether any of the twelve connections has been rerouted. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
+
+After a changed joint is released, the program writes its record:
+
+```gdscript
+file.store_string(JSON.stringify(record,&quot;\t&quot;))
+```
+
+The line is short because the choice of what to remember has already been made. The record contains the starting and released coordinates, the named joints, and both arrangements of their connections. Those are enough to reconstruct this pair. They are not enough to reconstruct the encounter between your body and the figure.
+
+Earlier, drawing a trace meant choosing which positions of the hand could be retained. Here we have chosen less: a destination after release. The missing path saves work and storage. It also closes a question. From this record alone, we cannot ask whether the hand moved carefully, reluctantly or with delight. Increasing the precision of its final coordinates would not recover the movement.
+
+The choice is useful. It lets a change survive the room that produced it. It lets you return to the Assembly Laboratory and find the pose again, ready for another alteration. But usefulness does not settle which questions ought to remain possible.
+
+What would you want the record to keep next? The path of the hand might let you compare two ways of arriving. Another version of the pose might let you undo a decision without having to imitate your earlier self. A note might keep the reason you tried it. Each addition would make another kind of return available. None would keep the whole event.
+
+For now, the ledger holds one latest pose. Another released change replaces it. It is labelled as the last kept pose; it does not identify who made it. Before calling a record ours, we have to ask what connects it to us.
+
+Look along the connections too. If you took the turquoise collar to the head, the amber body&#x27;s hand can be in exactly the same place as the blue body&#x27;s hand, yet no line reaches it. A turquoise line elsewhere shows where the relation went. Or perhaps you brought the other end to the hand, joining it to the head. Every joint is connected again, but the body has kept a different way of belonging. Its outline may scarcely have changed. The record had to keep more than coordinates to let this difference return.
+
+The previous room opened one connection to revision. It kept the thirteen joints. There is still no place in this record for the extra part you may have wanted to take from the neighbouring catalogue. What the workshop permits and what the record can remember have grown together. They can grow again.
+
+Or remember a form you wanted to enter. A branch with no passage through it, a body you could see but could not inhabit. The question need not begin with a fault. Desire can also locate the next piece of work. What would have to change for that encounter to become possible?
+
+Choose one alteration you still want to make. Give it somewhere to happen. A new connection in the body; a passage through the branch; a memory that keeps two alternatives. We can build the operation, then discover what its arrival changes. A possibility that helps one body may obstruct another. The next encounter is where that consequence becomes something we can inspect.
+
+&lt;!-- @ --&gt;
+
+This is a place to turn around. You have a body to return to and enough of its construction to ask for something it cannot yet do. The ending leaves that request open.
+
+The clock is still running. There is something you wanted to make.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PostCrisis_Synthesis/tutorial.md">Raw captured source</a></p><pre># Which consequence will you keep in view after the next line arrives?
+
+Every hall made a choice inspectable. Here we turn that practice towards the museum itself.
+
+&lt;!-- @accountability_ledger --&gt;
+
+Read one choice/exclusion pair and keep it in mind after it scrolls away. Choose a room you have walked and name one obstacle, one possible change and one observation that would tell you whether it helped.
+
+The entry count increases while old entries leave the six-line buffer. The examples are prewritten and arrive every six seconds. The display records no visitor decisions and does not save the discussion.
+
+The source makes the operation inspectable:
+
+```gdscript
+_entries.push_front(line)
+while _entries.size() &gt; visible_lines:
+    _entries.pop_back()
+_count += 1
+```
+
+A line enters at the front; another leaves when the buffer is full. The counter survives that loss. We met a running count near the point at the beginning of the museum. Here counting and remembering separate in four lines of code. The machine can announce progress while the evidence of an earlier problem has already disappeared.
+
+[Implementation](../../../commons/artifacts/accountability_ledger/accountability_ledger.gd). This is an excerpt from the artifact, not a standalone program.
+
+Naming an exclusion does not repair it. Nor should every design limitation be treated as the same kind of harm. Keep the specific body, activity and consequence in view. The next iteration needs a durable record of a change and its outcome, including an outcome we did not expect. Generalisation begins when another hall presents the same relation; it remains a proposal until someone can test that second encounter.
+
+&lt;!-- @ --&gt;
+
+Return to one earlier hall. Remember both an obstacle and a form you wanted to enter. Desire can locate a next experiment as clearly as a fault. The spine has supplied tools for another pass, not a final inventory of possible bodies.
+
+## Next experiment — not yet a visitor control
+
+Make the ledger accept a real museum observation with hall, affected activity, proposed change and later result. Preserve unresolved entries across visits. Begin with the contributor-counter ambiguity or a control whose reach has actually been tested.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PostCrisis_Synthesis/technical.md">Raw captured source</a></p><pre># The body that returned — implementation and encounter
+
+Two primary artifacts share a real record: `assembly_return` reconstructs a starting and released pose at standing scale; `accountability_ledger` names the source and reports the same record. The six earlier artifact families and the authored floor remain. The body comparison occupies cell (7,12); the ledger stands to one side at (11,10), height 0.65 m and scale 1.8. Both face the approach. The comparison bodies have visual connections and no supporting collision.
+
+## From a released joint to another hall
+
+[AssemblyBodyStudy.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd) uses the existing VRBody: thirteen named joints and twelve connections. A release more than 0.01 m from the position at pickup increments its edit count and calls [AssemblyPoseRecord.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd). Merely viewing or holding a joint does not create a record. When two joints are held, releasing one saves the other at its previous released position.
+
+The record includes the source map, assembly identity and source hash, joint radii, starting and released coordinates, original and released connections, completed edit count and last-save time. A valid changed collar release can save a new relation without moving a point. The normal destination is `user://ada_research/assembly_pose.json`. It holds one latest pose, not a sequence of gestures or a visitor identity.
+
+```gdscript
+file.store_string(JSON.stringify(record,&quot;\t&quot;))
+```
+
+Validated data is written to a temporary file and renamed over the earlier record. A SceneTree cache carries the pose through hall unloads; the disk file carries it through application restarts. If writing fails, the cache remains available and the captions say `this session only`. Missing or malformed files produce the empty state. Private probes override the destination with a workspace-local file and never replace the visitor&#x27;s save.
+
+The [return gallery](../../../commons/artifacts/assembly_return/assembly_return.gd) reads the same record once per second and rebuilds only when its revision changes. Blue uses the recorded starting coordinates and graph; amber uses the released coordinates and graph. A changed edge is turquoise in the amber reconstruction. The status distinguishes displaced points, rerouted connections and connected groups. Without a record, only the current catalogue&#x27;s blue starting pose appears. The second place is visibly empty. The comparison does not invent a visitor history.
+
+## What the ledger counts
+
+This placement opts into `visitor_record:true`. Its fields give the Assembly Laboratory, UTC save time, joints displaced by more than 0.01 m from their starting positions, twelve connections, a rerouted-connection count when nonzero, and persistence state. Its counter counts completed changed releases. Moving a joint away and back can increase released edits while decreasing the number of displaced joints. Standing still adds neither. All fields retain their text contrast; they are parts of one record, not ageing entries.
+
+Other ledger placements retain their existing illustrative, timed examples. Reconfiguration preserves externally attached museum children.
+
+Revisiting Assembly restores the released pose when its source hash and joint names match the current assembly, ready to edit again. The final gallery can reconstruct an older saved comparison using its included geometry even if the catalogue later changes. Schema 2 keeps original and current edge lists. Schema 1 remains readable as an unchanged graph. The Assembly workshop opens both endpoints of one connection for rerouting; the gallery is a reconstruction, not another editor. No undo history, path recording, identity attribution or new-joint operation is supplied.
+
+## Verification and next question
+
+The private rendered museum run checks real record production, producer teardown, cache clearing and disk reload, reconstruction, revisiting, simultaneous held joints, invalid data, failed writes, empty state, legacy ledger behaviour and a selected continuous walking route. [Evidence and current chapter](../../../doc/book/iterations/2026-09-21-synthesis-return/index.html).
+
+Headset readability, comfort, Quest performance and learner understanding remain unverified. A useful next experiment is to retain two alternatives or the hand&#x27;s path: what questions become answerable when the record changes?
+
+[Latest connection checks](../../../doc/book/iterations/2026-09-21-assembly-reconnection/index.html) cover a changed relation without moved joints, its persistence and its return.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PostCrisis_Synthesis/intent.md">Raw captured source</a></p><pre>Concept: Gathering the sequence&#x27;s questions into one room and asking the learner to carry the answer forward. The map is a closing gesture rather than a new teaching, and it recasts the whole arc in a single sentence placed on a plinth without ornament.
+Sequence role: Final map in the Post-Foundations Crisis sequence and the closing gesture of the arc that began with the Foundations Crisis and passed through the QFEP Laboratory. Follows AdvancedLaboratory_Lab_Equipment_Simulation; hands the learner forward from the post-crisis toolkit into whatever they build next.
+Technical angle: Miniature displays around the walls carry the preceding maps — the divided room of the bias visualiser, the case table of Applied Ethics, the Florensky sphere of Paraconsistent Engineering, the three platforms of Situated Computation, the four-agent commons of Collective Knowledge, the rhizomatic cave, and the modest laboratory. Each miniature is clickable and surfaces a short recap label, so the map functions as a small interactive index.
+Critical angle: The map resists monument. The Foundations Crisis is reframed not as a failure of mathematics but as the moment the discipline admitted its own edges, and the post-crisis practice that follows is characterised by careful, partial, accountable use of formal tools rather than by their abandonment. The closing sentence does the work of a thesis without the volume of one.
+Key artifacts: the eight miniature display panels carry the earlier-map recaps; the central plinth carries the closing sentence; the forward-pointing exit panel names the continuation rather than the conclusion.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PostCrisis_Synthesis/critical.md">Raw captured source</a></p><pre># What survives the journey?
+
+A change made to a body in Assembly reappears at standing scale in the final hall. The blue starting pose and amber released pose have the same thirteen joints and twelve connections. Their agreement in count does not guarantee agreement in recognition. Walk between them before asking the ledger for an account.
+
+The encounter now has a consequence that survives unloading its source room. The ledger reports an actual saved pose. It still cannot account for the encounter that produced it: neither the movement of the visitor&#x27;s hand, the reason for the alteration nor the alternatives considered are retained. A destination can survive while the way of arriving disappears.
+
+This is a particular decision about memory. Greater numerical precision at an endpoint cannot recover a path that was never recorded. Adding a path would make another question possible, but would not establish a visitor&#x27;s intention. A record&#x27;s usefulness and its incompleteness coexist.
+
+The body&#x27;s relations are now retained in two versions. Moving a joint changes geometry; rerouting the turquoise connection changes the graph. The name `l_hand` stays with a point that may have become isolated. The two bodies can have the same coordinates and counts while differing in which parts are connected. The outline alone cannot tell the whole story. Either endpoint of one connection can be revised. The hand may rejoin the body through the head, without returning to the elbow. The inventory and the other connections remain authored.
+
+The record names no person. It can outlast a visit and be overwritten by someone else using this local installation. The empty place on a direct start and the label `LAST KEPT POSE` matter: the scene must not manufacture a past or claim ownership on a visitor&#x27;s behalf.
+
+Desire can locate the next experiment as clearly as a fault. A form one wants to enter, a relation one wants to add, a movement one wants to remember: each gives a concrete direction for another pass through the museum. The ending offers a body to return to. It leaves open what else that body might become.
+
+[Earlier illustrative-ledger text](../../../doc/book/iterations/2026-09-21-synthesis-return/before/commons/maps/PostCrisis_Synthesis/critical.md) remains available as a baseline. The new encounter is implemented; claims about how visitors experience it still require visitors.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PostCrisis_Synthesis/summary.md">Raw captured source</a></p><pre># Return with a change
+
+Which consequence will you keep in view after the next line arrives?
+
+Every hall made a choice inspectable. Here we turn that practice towards the museum itself.
+
+Primary: `accountability_ledger`.
+
+Read one choice/exclusion pair and keep it in mind after it scrolls away. Choose a room you have walked and name one obstacle, one possible change and one observation that would tell you whether it helped.
+
+The entry count increases while old entries leave the six-line buffer. The examples are prewritten and arrive every six seconds. The display records no visitor decisions and does not save the discussion.
+
+Return to one earlier hall. The spine has supplied tools for another pass, not a final inventory of possible bodies.
+
+Supporting artifacts remain: `tt`, `edge_ground_synthesis`, `bias_from_inside`, `qfep_formula_3d`, `florensky_sphere`.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PostCrisis_Synthesis/blurb.md">Raw captured source</a></p><pre>Which consequence will you keep in view after the next line arrives? Return to one earlier hall. The spine has supplied tools for another pass, not a final inventory of possible bodies.
+</pre></section></body></html>

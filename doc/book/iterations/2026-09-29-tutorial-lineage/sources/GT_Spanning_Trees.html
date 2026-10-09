@@ -1,0 +1,300 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Spanning_Trees · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Spanning_Trees">← Tutorial lineage</a></p><h1>GT Spanning Trees</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Spanning_Trees/final.md">Raw captured source</a></p><pre># The price of one more route
+
+Which connection can you remove without separating anyone from the network?
+
+&lt;!-- @mst_visualization --&gt;
+
+Watch the next edge considered by the display: it turns yellow. Before anything else happens to it, trace whether its two endpoints are already connected through accepted edges. If they are not, a green line is laid along it. If they are, nothing more happens: the yellow stays, and the display moves on. A rejection is never marked here, so the tracing is yours to do.[^red] An edge can look short and useful while adding no new connection between the groups that remain separate.
+
+The default procedure is Kruskal’s algorithm. It considers edges in increasing order of weight and accepts an edge when that edge joins two different components. If the endpoints are already joined, the candidate would complete a cycle and is rejected. A small structure called union-find tracks which vertices already belong to the same component.
+
+When an edge is left yellow, trace the accepted route between its endpoints and notice how that route completes the would-be cycle. The rejection has a structural reason even if the edge’s weight is small. When an edge is accepted, identify the two previously separate groups it joins. Alternating these two checks helps you follow the algorithm’s decisions without needing to remember every edge considered earlier or interpret the final green network all at once.
+
+Continue until the selected edges span the connected graph. A tree connects its vertices without cycles; between each pair there is one selected route. With the given edge weights, Kruskal’s rule produces a spanning tree of minimum total weight. “Minimum” refers to that sum, not to every traveller’s individual journey.
+
+Compare a yellow edge with the green route now needed between its endpoints. Removing a direct connection can lower the cost of maintaining the whole network while lengthening a particular trip. The criterion that made the tree economical does not make each path shortest.
+
+Now imagine one selected edge failing. In a tree, removing an edge separates the structure into two components. A cycle that looked redundant under the construction budget could have supplied a second route. Redundancy changes meaning when the question changes from cheap connection to surviving a failure.
+
+Suppose you had the cost of one extra edge to spend once the tree is complete. Which of the yellow edges would you restore, and whose journey or reliability would improve? The minimum tree is the baseline in front of you; the objective that would spend on it is yours to name.
+
+&lt;!-- @ --&gt;
+
+Flow adds another constraint. A route may exist and still be unable to carry everything trying to pass through it.
+
+[^red]: The artifact’s registry entry promises that rejected cycle-forming edges glow red (`commons/artifacts/registry/algorithms_misc.json`, line 5357). The scene never does it: the call that would colour them is commented out and the export for that colour is unused. What you see is what the code does, not what its description says.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Spanning_Trees/tutorial.md">Raw captured source</a></p><pre># GT Spanning Trees
+
+Connect every vertex. Minimise total weight. MST via Kruskal.
+
+Build a weighted graph.
+
+```gdscript
+class_name WeightedGraph
+
+var vertices: Array = []
+var edges: Array = []  # [a, b, weight]
+
+func add_edge(a, b, weight: float) -&gt; void:
+    if not a in vertices: vertices.append(a)
+    if not b in vertices: vertices.append(b)
+    edges.append([a, b, weight])
+```
+
+Each edge carries a weight. The MST minimises the sum of chosen weights.
+
+Union-find data structure.
+
+```gdscript
+class_name UnionFind
+
+var parent: Dictionary = {}
+var rank: Dictionary = {}
+
+func make_set(x) -&gt; void:
+    parent[x] = x
+    rank[x] = 0
+
+func find(x):
+    if parent[x] != x:
+        parent[x] = find(parent[x])  # path compression
+    return parent[x]
+
+func union(x, y) -&gt; bool:
+    var rx = find(x); var ry = find(y)
+    if rx == ry: return false
+    if rank[rx] &lt; rank[ry]:
+        parent[rx] = ry
+    elif rank[rx] &gt; rank[ry]:
+        parent[ry] = rx
+    else:
+        parent[ry] = rx
+        rank[rx] += 1
+    return true
+```
+
+Path compression and union by rank give effectively O(α(n)) per operation.
+
+Kruskal&#x27;s algorithm.
+
+```gdscript
+func kruskal(g: WeightedGraph) -&gt; Array:
+    var uf := UnionFind.new()
+    for v in g.vertices: uf.make_set(v)
+    var sorted_edges = g.edges.duplicate()
+    sorted_edges.sort_custom(func(a, b): return a[2] &lt; b[2])
+    var tree: Array = []
+    for edge in sorted_edges:
+        if uf.union(edge[0], edge[1]):
+            tree.append(edge)
+            if tree.size() == g.vertices.size() - 1: break
+    return tree
+```
+
+Sort by weight, add if it doesn&#x27;t form a cycle. Stops when V-1 edges are added.
+
+Prim&#x27;s algorithm.
+
+```gdscript
+func prim(g: WeightedGraph, start) -&gt; Array:
+    var tree: Array = []
+    var in_tree: Dictionary = {start: true}
+    var candidates: Array = []
+    for edge in g.edges:
+        if edge[0] == start or edge[1] == start:
+            candidates.append(edge)
+    while tree.size() &lt; g.vertices.size() - 1:
+        candidates.sort_custom(func(a, b): return a[2] &lt; b[2])
+        var best = candidates.pop_front()
+        var other = best[1] if best[0] in in_tree else best[0]
+        if other in in_tree: continue
+        tree.append(best)
+        in_tree[other] = true
+        for edge in g.edges:
+            if edge[0] == other or edge[1] == other:
+                candidates.append(edge)
+    return tree
+```
+
+Grow from the root. Always add the cheapest edge that connects a new vertex.
+
+Verify the MST.
+
+```gdscript
+func verify_mst(tree: Array, g: WeightedGraph) -&gt; bool:
+    if tree.size() != g.vertices.size() - 1: return false
+    var uf := UnionFind.new()
+    for v in g.vertices: uf.make_set(v)
+    for edge in tree:
+        if not uf.union(edge[0], edge[1]): return false
+    return true
+```
+
+V-1 edges, no cycles. Valid spanning tree.
+
+Compute total weight.
+
+```gdscript
+func total_weight(tree: Array) -&gt; float:
+    var total: float = 0.0
+    for edge in tree:
+        total += edge[2]
+    return total
+```
+
+Sum of selected edges&#x27; weights. Kruskal and Prim produce the same total on a connected weighted graph with unique weights.
+
+Animate the MST construction.
+
+```gdscript
+func animate_mst(tree: Array, delay: float = 0.3) -&gt; void:
+    for edge in tree:
+        highlight_edge(edge)
+        await get_tree().create_timer(delay).timeout
+```
+
+One edge at a time, with a pause between. The learner watches the tree grow.
+
+You can now build a weighted graph, compute the MST via Kruskal or Prim using union-find, verify the result, and animate the construction. GT_Flow extends into network flow.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Spanning_Trees/technical.md">Raw captured source</a></p><pre># GT Spanning Trees — Technical
+
+A minimum spanning tree (MST) is a subset of edges that connects every vertex and minimises total edge weight. The map implements both Kruskal&#x27;s and Prim&#x27;s algorithms and shows their step-by-step progress.
+
+Kruskal&#x27;s algorithm sorts all edges by weight, then adds them greedily, skipping any edge that would form a cycle with the edges already chosen. Cycle detection uses a disjoint-set (union-find) data structure:
+
+```gdscript
+class UnionFind:
+    var parent: Dictionary = {}
+    var rank: Dictionary = {}
+
+    func find(x):
+        if parent[x] != x:
+            parent[x] = find(parent[x])  # path compression
+        return parent[x]
+
+    func union(x, y) -&gt; bool:
+        var rx = find(x)
+        var ry = find(y)
+        if rx == ry: return false  # would form cycle
+        if rank[rx] &lt; rank[ry]:
+            parent[rx] = ry
+        elif rank[rx] &gt; rank[ry]:
+            parent[ry] = rx
+        else:
+            parent[ry] = rx
+            rank[rx] += 1
+        return true
+
+func kruskal() -&gt; Array:
+    var tree := []
+    var uf := UnionFind.new()
+    for v in vertices: uf.parent[v] = v
+    edges.sort_custom(func(a, b): return a.weight &lt; b.weight)
+    for e in edges:
+        if uf.union(e.a, e.b):
+            tree.append(e)
+            if tree.size() == vertices.size() - 1: break
+    return tree
+```
+
+Union-find with path compression and union-by-rank supports find and union in effectively O(α(V)) amortised time, where α is the inverse Ackermann function (practically constant). The sort dominates: O(E log E) total.
+
+Prim&#x27;s algorithm grows the tree from a root vertex by repeatedly adding the lightest edge that connects a new vertex to the existing tree. A priority queue maintains the candidate edges, giving O((V + E) log V) with a binary heap or O(E + V log V) with a Fibonacci heap.
+
+The two algorithms produce the same tree when edge weights are distinct. The map animates them side by side so the learner can see the different orders in which the same edges are selected.
+
+The scattered platforms in the map at varying heights make edge weights physical — longer connections cost more, shorter ones cost less. Building the MST by hand produces the same tree the algorithms find automatically, which confirms that the problem has a structural optimum rather than an algorithmic one.
+
+Within the sequence, Spanning_Trees is the optimisation-on-structure chapter. GT_Flow will next optimise throughput rather than structure.
+
+## Correctness of the Greedy Approach
+
+Kruskal&#x27;s and Prim&#x27;s algorithms are greedy, and greedy algorithms are not always correct. For the MST problem, the cut property guarantees correctness: for any cut of the graph, the minimum-weight edge crossing the cut is in some MST. Both algorithms can be shown to always respect the cut property, and therefore always produce an MST.
+
+Kruskal&#x27;s correctness: the sorted-and-added edge is the minimum-weight edge crossing the cut between the two components it connects. Prim&#x27;s correctness: the lightest edge leaving the current tree is the minimum-weight edge crossing the cut between the tree and the rest of the graph.
+
+## When Weights Are Not Distinct
+
+If two edges have the same weight, the MST is not unique. Kruskal&#x27;s and Prim&#x27;s algorithms may produce different trees depending on tie-breaking order. Every MST has the same total weight, though, so the choice of tie-breaking is cosmetic for the optimisation objective.
+
+## Borůvka&#x27;s Algorithm
+
+A third MST algorithm, Borůvka&#x27;s, is parallelisable. It finds, for each component simultaneously, the minimum-weight outgoing edge, adds all such edges, and merges the resulting components. Repeating halves the component count each iteration, so the algorithm terminates in O(log V) rounds, each round costing O(E).
+
+```gdscript
+func boruvka() -&gt; Array:
+    var tree := []
+    var uf := UnionFind.new()
+    for v in vertices: uf.parent[v] = v
+    while uf.components() &gt; 1:
+        var min_edge_per_component := {}
+        for e in edges:
+            var ca := uf.find(e.a)
+            var cb := uf.find(e.b)
+            if ca == cb: continue
+            if not min_edge_per_component.has(ca) or min_edge_per_component[ca].weight &gt; e.weight:
+                min_edge_per_component[ca] = e
+            if not min_edge_per_component.has(cb) or min_edge_per_component[cb].weight &gt; e.weight:
+                min_edge_per_component[cb] = e
+        for me in min_edge_per_component.values():
+            if uf.union(me.a, me.b):
+                tree.append(me)
+    return tree
+```
+
+The parallelism matters for very large graphs. The map&#x27;s graphs are small enough that Kruskal and Prim are adequate, but Borůvka becomes competitive at the scale of continental road networks.
+
+Within the sequence, Spanning_Trees optimises structure. GT_Flow will next optimise throughput.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Spanning_Trees/intent.md">Raw captured source</a></p><pre>Concept: Strip every cycle, keep every node reachable, minimize total weight — the minimum spanning tree is the skeleton of a graph. Kruskal sorts edges greedily; Prim grows from a root.
+Sequence role: Sixth map in Graph Theory; introduces optimization on graphs. After connectivity (what can reach what), spanning trees ask: what is the cheapest way to connect everything? The scattered platforms at varying heights make edge weights physical — longer connections cost more; follows GT_Connectivity; leads to GT_Flow.
+Technical angle: Minimum spanning tree (MST), Kruskal&#x27;s algorithm (sort edges, add cheapest that doesn&#x27;t create cycle), Prim&#x27;s algorithm (grow from root, add cheapest edge to unvisited node), cut property and cycle property. The mst_visualization artifact demonstrates the greedy construction.
+Critical angle: The spanning tree is the graph stripped to its essentials — no redundancy, no cycles, minimum cost. This is the F-term applied to networks: minimize, simplify, find the most efficient structure. But the MST is fragile — remove one edge and the tree disconnects. Redundancy (cycles) is the E-term&#x27;s contribution: resilience through structural excess. The MST-vs-full-graph tension is the QFEP formula applied to network design.
+Key artifacts: mst_visualization demonstrates Kruskal/Prim construction — watching the skeleton emerge edge by edge from the scattered platforms, connections forming as cost is minimized.
+
+Gap: mst_visualization needs slider_horizontal, push_button.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Spanning_Trees/critical.md">Raw captured source</a></p><pre># GT_Spanning_Trees — Critical Reflection
+
+Scattered platforms at varying heights across an open void. Narrow walkways connect them — each one an edge you walk, each platform a node you stand on. The MST artifact sits on the central elevated island. No redundancy. No shortcuts. Every path earns its place or does not exist. The minimum spanning tree is a graph&#x27;s confession of what it actually needs, and the confession is brutal: most of what connected you was unnecessary.
+
+Kruskal sorts edges by weight and adds them greedily — cheapest first, skip if it creates a cycle. Prim grows from a root, always adding the cheapest edge to an unvisited node. Both arrive at the same minimum structure through opposite instincts. The `mst_visualization` artifact demonstrates both: green edges accepted, red edges rejected for creating cycles, the MST growing like a nervous system. The critical parameter is `algorithm_type` — Kruskal processes globally by weight, Prim grows locally from a root — and the identity is that the same result emerges from different experiences. Two greedy strategies, one optimal skeleton.
+
+Foucault would see the MST as an exercise in disciplinary economy. The panopticon is not the largest possible prison; it is the most efficient one. The MST is not the most connected possible network; it is the cheapest one that still connects everything. Both optimize the same thing: maximum coverage at minimum cost. The MST strips every redundant connection, every alternative path, every cycle that would let you reach the same node two different ways. What remains is a tree — a structure with exactly one path between any two nodes. This is not connectivity; it is controlled connectivity. Every journey through a tree has exactly one route, and that route was determined by the algorithm&#x27;s greedy logic, which considered only weight and never asked whether a more expensive edge might serve a purpose beyond connection.
+
+The rejected edges — the red ones, the ones that would have created cycles — are the MST&#x27;s political unconscious. A cycle is redundancy. Redundancy is resilience. If one edge in a tree fails, the tree splits into two disconnected components. If one edge in a graph with cycles fails, alternative paths absorb the load. The MST optimizes for cost and pays for it in fragility.
+
+The cheapest possible skeleton is also the most vulnerable possible skeleton. Remove one edge and the tree dies. The map makes you walk this fragility: the narrow h1 walkways over void are single-cell wide, and below them is nothing. The architecture tells your body what the algorithm tells the graph: there is no backup. There is no alternative route. The path you walk is the only path.
+
+Ranciere&#x27;s concept of the distribution of the sensible finds a precise analogue in the MST&#x27;s edge selection. The algorithm makes certain connections visible (the green accepted edges) and certain connections invisible (the red rejected edges). The MST determines which relationships matter by determining which relationships are cheapest, and the metric of cheapness becomes the criterion of structural membership. An expensive edge — a long walkway between distant platforms — is rejected not because it is useless but because a cheaper alternative exists. The MST does not evaluate edges by their importance, their resilience contribution, or their role in the network&#x27;s function. It evaluates them by weight alone. The lightest skeleton is the one that survives, and lightness is the only value.
+
+The scattered platforms at varying heights make edge weight physical. Height difference translates to walkway steepness, length translates to crossing time, and the MST selects the connections that minimize total cost. But the cost is defined by the map designer&#x27;s choice of weight assignment. Different weight functions produce different MSTs from the same graph. If weight is physical distance, the MST connects nearby platforms. If weight is height difference, the MST connects platforms at similar elevations. If weight is some social or economic quantity, the MST connects whatever that quantity makes cheap. The spanning tree does not reveal the graph&#x27;s essential structure; it reveals the structure that a particular cost function privileges.
+
+Foucault&#x27;s analysis of normalization — the process by which certain standards become the invisible baseline against which everything else is measured — applies to the MST&#x27;s relationship with the full graph. The MST becomes the network&#x27;s skeleton, its essential structure, its &quot;real&quot; topology. The edges outside the MST become surplus, redundancy, waste. But the surplus edges are the graph&#x27;s resilience, its flexibility, its capacity to survive failure. The MST normalizes minimality as structural truth and casts everything beyond the minimum as excess. The lightest skeleton becomes the norm, and the question of whether the norm is adequate — whether one path between every pair of nodes is enough — is not asked because the algorithm does not have a concept of enough. It has a concept of minimum.
+
+The void below the walkways is the MST&#x27;s ontology made visible. Between the platforms, there is nothing. No floor, no surface, no support. The walkways are the only connections, and each one was placed by an algorithm that optimized for cost. The void is everything the MST decided was too expensive to include. Walk the skeleton and feel the absence of alternatives beneath your feet. The minimum spanning tree is the graph stripped to its lightest bones, and the question is whether bones are enough or whether the flesh — the cycles, the redundancy, the expensive edges — was what kept the thing alive.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Spanning_Trees/artifacts.md">Raw captured source</a></p><pre># GT Spanning Trees — Artifacts
+*Graph Theory: Connections Define Structure · relation · 1 artifacts*
+
+&gt; A graph has redundant paths. A spanning tree does not. Strip every cycle, keep every node reachable, minimize total weight — what remains is the skeleton. Kruskal sorts edges by cost and adds them greedily. Prim grows outward from a single root. Both arrive at the same minimum structure, built by opposite instincts.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## mst_visualization
+![mst_visualization](/scene-catalog/mst_visualization.png)
+
+DISTINGUISH necessary from redundant edges in a weighted network and explain why the cheapest backbone works.
+
+`mst_visualization`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Spanning_Trees/summary.md">Raw captured source</a></p><pre># GT Spanning Trees — Summary
+
+GT_Spanning_Trees is the sixth map in the Graph Theory sequence. It asks for the cheapest way to connect every node once and for all: strip every cycle, keep every vertex reachable, minimise total edge weight. The answer is a minimum spanning tree.
+
+The space is a scattered collection of platforms at different heights. Edges are drawn between platforms, and each edge&#x27;s length is its weight; the longer a connection, the more it costs. The learner&#x27;s task is to pick a subset of edges that forms a spanning tree — connected and acyclic — at the lowest possible total weight.
+
+Two stations run the canonical algorithms. Kruskal&#x27;s algorithm sorts all edges by weight and adds them greedily, skipping any edge that would form a cycle with those already chosen. Prim&#x27;s algorithm starts from a root node and grows the tree outward, always adding the lightest edge that connects a new node. Each station animates its algorithm step by step and ends on the same tree, because for a graph with distinct weights the minimum spanning tree is unique.
+
+A display at the centre of the room tracks the running total cost of each algorithm&#x27;s tree as it is built. Within the sequence, Spanning_Trees is the optimisation chapter on structure. GT_Flow will next ask the optimisation question on throughput.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Spanning_Trees/blurb.md">Raw captured source</a></p><pre>A graph has redundant paths. A spanning tree does not. Strip every cycle, keep every node reachable, minimize total weight — what remains is the skeleton. Kruskal sorts edges by cost and adds them greedily. Prim grows outward from a single root. Both arrive at the same minimum structure, built by opposite instincts.
+
+Scattered platforms float at different heights across an open void. Narrow walkways connect them — each one an edge you walk, each platform a node you stand on. The MST artifact sits on the central elevated island, the convergence point of least-cost connection. No redundancy. No shortcuts. Every path earns its place or doesn&#x27;t exist.
+
+The minimum spanning tree is a graph&#x27;s confession of what it actually needs. Maximum connectivity, minimum cost. Identity reduced to its lightest skeleton — the least material that still holds everything together.</pre></section></body></html>

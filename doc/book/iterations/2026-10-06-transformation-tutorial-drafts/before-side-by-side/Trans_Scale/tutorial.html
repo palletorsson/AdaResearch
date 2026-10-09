@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A group changes size</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../Trans_Rotation/tutorial.html">Previous</a><a href="../Trans_Body/tutorial.html">Next</a><a href="parallel.html">Facing texts</a></nav></header><main><h1>Enlarge the opening, keep the witness</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Uniform and unequal scale factors</li>
+<li>Scaling around an origin</li>
+<li>Parent and child transforms</li>
+<li>Local dimensions and world dimensions</li>
+</ul>
+<p>In this hall, the furnished room grows while your body keeps its size. A small doorway becomes a possible passage. The bottle also relocates the visitor; that relocation is separate from scaling the room.</p>
+<p>Keep Rotation's parent-child arrangement. Replace the rotating pivot with a fixed doorway parent containing three boxes. Remove the clock and face mark. Bring back the familiar black sphere as a size witness, outside the parent that will change. This simple doorway is a visual model; the installed room supplies physical passage.</p>
+<h2>The complete study</h2>
+<p>Attach this <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> on museum floor. The doorway's origin is at the centre of its threshold. Its initial clear opening is 0.45 metres wide and 0.60 metres high. The sphere's diameter is 0.65 metres.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var doorway := Node3D.new()
+var point := MeshInstance3D.new()
+var factors := Vector3.ONE
+
+func _ready() -&gt; void:
+    assert(factors.x &gt; 0.0 and factors.y &gt; 0.0 and factors.z &gt; 0.0)
+    add_child(doorway)
+    box(Vector3(0.12, 0.6, 0.2), Vector3(-0.285, 0.3, 0))
+    box(Vector3(0.12, 0.6, 0.2), Vector3(0.285, 0.3, 0))
+    box(Vector3(0.69, 0.12, 0.2), Vector3(0, 0.66, 0))
+    doorway.scale = factors
+
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.325
+    sphere.height = 0.65
+    point.mesh = sphere
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    ink.roughness = 0.18
+    point.material_override = ink
+    add_child(point)
+    point.position = Vector3(1.8, 0.325, 0)
+
+func box(size: Vector3, at: Vector3) -&gt; void:
+    var body := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    body.mesh = mesh
+    body.position = at
+    doorway.add_child(body)
+</code></pre>
+<p>The two posts and lintel are children of <code>doorway</code>. The sphere is a sibling of that parent. Setting the parent's <code>scale</code> reaches the three boxes and the distances between them. It does not reach the sphere.</p>
+<p>With <code>factors = Vector3.ONE</code>, the point is wider than the opening. Change the existing line to <code>var factors := Vector3(4, 4, 4)</code> and run again. The clear opening is now 1.80 by 2.40 metres. Every doorway dimension and spacing has grown fourfold. The sphere is still 0.65 metres across.</p>
+<p>Each box keeps its local position and mesh dimensions. Its world dimensions change through the parent. The posts' bottom edges stay at floor level because the scaling origin is there. An origin halfway up the door would produce a different relation to the floor.</p>
+<h2>Change width without changing height</h2>
+<p>Set <code>factors</code> to <code>Vector3(4, 1, 1)</code>. The opening is now 1.80 metres wide but only 0.60 metres high. The sphere remains too tall. This scale changes proportions: X grows, Y and Z do not.</p>
+<p>Uniform scale preserves proportions; it does not preserve every possible action around an object. In the installed room, compare the enlarged doorway with the museum frame that stayed outside the changing group.</p>
+<h2>Make a deliberate opening</h2>
+<p>Try <code>Vector3(2, 2, 1)</code>. Predict the opening's width, height and depth before running it. The width becomes 0.90 metres and the height 1.20; depth stays unchanged. Explain why the sphere keeps both its position and diameter.</p>
+<p>The next hall keeps this size factor but lets your distance choose it. You will change the surroundings by approaching them.</p></main></body></html>

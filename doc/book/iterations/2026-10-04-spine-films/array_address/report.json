@@ -1,0 +1,152 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MultiMeshInstance3D@65"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MultiMeshInstance3D@66"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MultiMeshInstance3D@65"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MultiMeshInstance3D@66"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MultiMeshInstance3D@65"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MultiMeshInstance3D@66"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MultiMeshInstance3D@65"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MultiMeshInstance3D@66"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"addresses": [
+			"(0, 0, 0)",
+			"(1, 0, 0)",
+			"(2, 0, 0)",
+			"(3, 0, 0)",
+			"(0, 1, 0)",
+			"(1, 1, 0)",
+			"(2, 1, 0)",
+			"(3, 1, 0)",
+			"(0, 2, 0)",
+			"(1, 2, 0)",
+			"(2, 2, 0)",
+			"(3, 2, 0)",
+			"(0, 3, 0)",
+			"(1, 3, 0)",
+			"(2, 3, 0)",
+			"(3, 3, 0)",
+			"(0, 0, 1)",
+			"(1, 0, 1)",
+			"(2, 0, 1)",
+			"(3, 0, 1)",
+			"(0, 1, 1)",
+			"(1, 1, 1)",
+			"(2, 1, 1)",
+			"(3, 1, 1)",
+			"(0, 2, 1)",
+			"(1, 2, 1)",
+			"(2, 2, 1)",
+			"(3, 2, 1)",
+			"(0, 3, 1)",
+			"(1, 3, 1)",
+			"(2, 3, 1)",
+			"(3, 3, 1)",
+			"(0, 0, 2)",
+			"(1, 0, 2)",
+			"(2, 0, 2)",
+			"(3, 0, 2)",
+			"(0, 1, 2)",
+			"(1, 1, 2)",
+			"(2, 1, 2)",
+			"(3, 1, 2)",
+			"(0, 2, 2)",
+			"(1, 2, 2)",
+			"(2, 2, 2)",
+			"(3, 2, 2)",
+			"(0, 3, 2)",
+			"(1, 3, 2)",
+			"(2, 3, 2)",
+			"(3, 3, 2)",
+			"(0, 0, 3)",
+			"(1, 0, 3)",
+			"(2, 0, 3)",
+			"(3, 0, 3)",
+			"(0, 1, 3)",
+			"(1, 1, 3)",
+			"(2, 1, 3)",
+			"(3, 1, 3)",
+			"(0, 2, 3)",
+			"(1, 2, 3)",
+			"(2, 2, 3)",
+			"(3, 2, 3)",
+			"(0, 3, 3)",
+			"(1, 3, 3)",
+			"(2, 3, 3)",
+			"(3, 3, 3)"
+		],
+		"frames": 256,
+		"sites": 64,
+		"source_pose_method": "frame_pose",
+		"visible_sites": 64
+	},
+	"id": "array_address",
+	"passed": true,
+	"phases": [
+		"One row becomes a plane",
+		"Four layers of addresses",
+		"Turn at every address",
+		"Move and scale, keep the address"
+	],
+	"source_paths": [
+		"res://commons/artifacts/molnar_cube_study/molnar_cube_study.gd"
+	]
+}

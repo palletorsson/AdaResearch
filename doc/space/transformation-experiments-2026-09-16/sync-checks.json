@@ -1,0 +1,24 @@
+[
+  {
+    "map": "Trans_Introduction",
+    "primary": [
+      "tc",
+      "sc",
+      "rc",
+      "adjustable_landing"
+    ],
+    "hashes_match": true,
+    "rectangular_layers": true
+  },
+  {
+    "map": "Trans_Rotation",
+    "primary": [
+      "rotation_wall_crossings",
+      "rotation_array_compare",
+      "boolean_tunnel",
+      "carousel_cake"
+    ],
+    "hashes_match": true,
+    "rectangular_layers": true
+  }
+]

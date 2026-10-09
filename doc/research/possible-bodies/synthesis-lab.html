@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The sum on the bench · Ada Research</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0} table{font-size:14px} pre{overflow:auto;background:#fff;padding:18px} details{margin:35px 0;padding:20px;border:1px solid #c2bbaa}summary{cursor:pointer;font-weight:600}details h1{font-size:32px} table{overflow-wrap:anywhere} audio{display:block;width:100%;margin:1rem 0 2rem} details{border:1px solid #b7b0a2;padding:20px;margin-top:36px}summary{cursor:pointer;font-weight:600}details h1{font-size:32px}</style></head><body><main><h1>The curve continues after its name ends</h1>
+<p><a href="air-music.html">AirMusic</a> → <strong>Synthesis Lab</strong> → <a href="random-definition.html">Random Definition</a></p>
+<p><a href="/necklace/thread?map=WaveFunctions_Synthesis_Lab&amp;role=primary">The primary and its book passage</a> · <a href="/research/waves-chance-noise/index.html#WaveFunctions_Synthesis_Lab">Wavefunctions work plan</a></p>
+<p>At the bench, the sum is already waiting. A pale curve climbs and falls above five colored rows. None of those rows has the shape of the whole. <strong>Which part would you remove first?</strong></p>
+<p>Claude's five-slider bench, housed readout, clear approaches and miniature hallway remain. This review repairs the names the instrument gives its constructions and brings the book closer to what a visitor can actually do. All 25 placed artifacts remain; <code>additive_wave_demo</code> is the one primary the book follows.</p>
+<p><img alt="The bench from the desktop operating position, with the sum, five components, controls and readout" src="synthesis-lab-bench.png" /></p>
+<h2>Take away, predict, return</h2>
+<p>Press HOLD and lower the four sliders below H1. The extra rows disappear; a sine remains. H1 ALONE performs that removal together. BASELINE restores the five arrival amounts. Hold a phase and make the same comparison more than once.</p>
+<p><img alt="H1 alone: the pale total and the first component remain, drawn at different scales" src="synthesis-lab-one.png" /></p>
+<p>Bring H2 back. At the amber mark, predict whether it will raise or lower the total before reading the plate. The slider is a positive amount, but its sine can be negative at that position. Adding a term can lower the result.</p>
+<p>The sum uses the same operation across the board:</p>
+<pre><code class="language-gdscript">var value = 0.0
+for h in range(harmonic_amplitudes.size()):
+    value += harmonic_amplitudes[h] * sin(phase * (h + 1))
+return value
+</code></pre>
+<p>This bench is visual. It does not play its curves as audio. The continuity with AirMusic is the operation of adding contributions; the constraints have changed. Separate strikes could have separate ages. Here the five rows share one phase, multiplied by the integers one through five.</p>
+<h2>The moment a name lets go</h2>
+<p>Restore BASELINE. Its fifth amount is 0.20. Raise it to 0.22: the sawtooth name remains. Raise it to 0.24: the label becomes Custom Waveform. The construction changed continuously. The name crossed a threshold.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Revised label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One nonzero harmonic, including a quiet H1</td>
+<td>Pure Sine Wave</td>
+</tr>
+<tr>
+<td>The arrival five, or all five scaled together</td>
+<td>Approximately Sawtooth Wave</td>
+</tr>
+<tr>
+<td>H4 or H5 moved well away from that recipe</td>
+<td>Custom Waveform</td>
+</tr>
+<tr>
+<td>Positive odd 1/n² terms</td>
+<td>Odd 1/n² mix (positive terms)</td>
+</tr>
+<tr>
+<td>All five zero</td>
+<td>Zero waveform</td>
+</tr>
+</tbody>
+</table>
+<p>The old detector sometimes ignored the upper sliders and could misname a quieter lone sine as a triangle. The repaired detector checks every coefficient relative to H1, with a tolerance of 0.025. It names a neighborhood of recipes; it does not turn a finite sum into an ideal discontinuous wave.</p>
+<p>The old source preset called <code>triangle</code> also reveals a limit: its odd terms are all positive. A triangle in this orientation needs alternating signs. Those coefficients remain available under the existing source configuration, with a more accurate label. A negative amount would require a control beyond the five supplied here.</p>
+<h2>Something can leave the picture and remain in the sum</h2>
+<p>A component below 0.01 disappears from the ladder while the total still includes it. The formula rounds coefficients to one decimal place; the plate uses two. At some marks the sum of visible rows can disagree with the complete total. These are different decisions about what to show, rather than a single disappearance.</p>
+<p><img alt="The tilted readout compares the contributions at the mark, their drawn sum, and the full total" src="synthesis-lab-readout.png" /></p>
+<p>The ladder also uses a smaller drawing scale than the total and separates the components vertically. Add their values, not their literal heights on the board. The sampled baseline has a rounded rise of about 8.6 cm within a 50 cm cycle. Five smooth terms can suggest a corner without making an exact one. Other amounts can produce larger peaks; 1.58 is this baseline's peak, not a ceiling imposed on every sum.</p>
+<p>This gives the question “what bodies are possible?” a specific set of tools: five nonnegative coefficients, integer harmonics and one shared phase. There is room for many unfamiliar shapes inside those constraints. There are also forms that would require another operation. Custom Waveform is a place to begin looking.</p>
+<h2>Review and next visit</h2>
+<p><strong>110 independent desktop checks passed, with zero failures and engine exit 0.</strong> They include real slider paths, a desktop pointer drag, panel presses, sum-versus-component geometry, readout values, approaches, cleanup and rebuilding. Ten coefficient settings also check the revised names and compare all 256 drawn sum samples with independent arithmetic; the largest error was below 9 × 10⁻⁸.</p>
+<p>The book hero now agrees with the existing primary, <code>additive_wave_demo</code>. Thirteen production-code excerpts were checked across the revised final and tutorial. A stale <code>coloredlines</code> entry was removed from the book and role list; Claude had already removed its placement in the earlier visual pass.</p>
+<p>Headset reach and label legibility remain for a later visit. Higher sums extend beyond the dark backing and can approach the upper lettering; that staging limit remains visible in this review. The nearby radio is independent of the bench. No human listening observation is claimed.</p>
+<p><a href="synthesis-lab-check.json">Desktop report</a> · <a href="synthesis-lab-run.json">Run receipt</a> · <a href="synthesis-lab-tutorial.md">Tutorial</a> · <a href="synthesis-lab-technical.md">Technical notes</a> · <a href="synthesis-lab-critical.md">Critical text</a></p>
+<p><strong>Next: <a href="random-definition.html">Random Definition</a>.</strong> BASELINE returns the five amounts without rewinding the clock. Repeating a recipe and repeating an exact instant require different state. The next hall asks what else must be kept for an unfamiliar result to return.</p><details><summary>Read the book passage</summary><h1>The sum on the bench</h1>
+<p>In AirMusic one note could begin while another was already fading. Here a wave is waiting to be taken apart.</p>
+<p>A bench stands against the north wall of the laboratory. Above it a dark board carries a pale wave with five coloured rows beneath it, and the wave already has a shape when you arrive: a long slope down and a steep rise, four times across the board, drifting to the left. On the bench, at its right end, five sliders stand in a column, one for each row.</p>
+<!-- @additive_wave_demo -->
+
+<p>Read the rows before you touch anything. The top row is one smooth rise and fall per cycle; each row below has more, two, three, four, five, and each is drawn smaller than the one above. None of them looks like the pale wave. Press HOLD on the panel at the left of the bench and the drift stops, so a place on the board stays where it is.</p>
+<p>Now take the four lower sliders down, one at a time, and keep your eye on the pale wave while each row leaves the ladder. What remains is the top row, drawn larger: a sine. Press BASELINE and the four return together; press H1 ALONE and they leave together. The shape you arrived at is not one thing with a slope in it. It is five smooth returns added, and the slope belongs to none of them.</p>
+<p>Bring the second row back on its own slider and choose a place on the board. The amber line marked <em>mark</em> is one such place. Before you raise the third slider, decide what the sum will do there: the third row is at a crest, or crossing its middle, or in a trough, and its slider decides how much of that is admitted. Raise it and read the plate on the bench. Its third line lists each row's value at the mark; the fourth adds them and prints the total drawn beside them. With these five visible rows, their sum agrees with the total. The pale wave is built by this loop:</p>
+<pre><code class="language-gdscript">    var value = 0.0
+    for h in range(harmonic_amplitudes.size()):
+        value += harmonic_amplitudes[h] * sin(phase * (h + 1))
+    return value
+</code></pre>
+<p>Row h is a sine at h + 1 times the phase, scaled by its coefficient, and the sum is the running total. There is no separate drawing of "the wave". The pale line is this loop evaluated 256 times across two metres,</p>
+<pre><code class="language-gdscript">const WAVE_POINTS: int = 256
+const WAVE_LENGTH: float = 2.0  # Visual length in meters
+const NUM_HARMONICS: int = 5
+</code></pre>
+<p>with the phase running four cycles across the board and the clock adding the drift you stopped with HOLD:</p>
+<pre><code class="language-gdscript">        var phase = t * TAU * 4.0 + _time * TAU
+</code></pre>
+<p>A slider changes exactly one number. When a handle moves, the instrument reads the handle's position back as that row's coefficient:</p>
+<pre><code class="language-gdscript">        harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+</code></pre>
+<p>Even the first slider only changes how much of the first return is present. This is a visual instrument; it does not play the curve as sound. No slider changes the fundamental's frequency. The rows use integer multiples of one phase, so the vocabulary here is five amounts. Unlike the separately struck bars, these rows cannot choose separate beginnings. A shifted row or a negative amount would need a control this bench does not offer. BASELINE returns them to the table the room was placed with:</p>
+<pre><code class="language-gdscript">        &quot;sawtooth&quot;:
+            # Sawtooth: all harmonics, amplitude 1/n
+            _set_amplitudes([1.0, 0.5, 0.333, 0.25, 0.2])
+</code></pre>
+<p>one over n, all five present, the recipe the label calls a sawtooth. The plate's last line names every coefficient that differs from this table, so you can wander and still know how far you have gone.</p>
+<p>With the baseline held, look at the rise. An ideal sawtooth jumps; this one climbs from trough to crest over about nine centimetres of a fifty-centimetre cycle. Its descent ripples where the ideal would be straight. Raise the fifth slider and those ripples change. The baseline peaks near 1.58; other amounts can rise further. Five smooth returns can suggest a corner and cannot make an exact one. From across the room the pale line suggests a sawtooth. At the bench its rounded rise remains available to inspect.</p>
+<p>Take the second and fourth rows out and leave the odd three; the label offers a name. Move the fifth a little. At first the name stays. Move further and it gives way to Custom Waveform. The curve has changed continuously; the naming rule crossed a threshold. It checks all five amounts relative to the first, allowing a small difference from a recipe. Custom is a place to continue from.</p>
+<p>Then remove the row you think matters least and find where its absence shows. It is not in one place, because each row runs the whole cycle. Near zero, a row disappears before its coefficient reaches zero: the display hides values below 0.01 while the sum still includes them. At some marks the plate can report a difference between the visible rows and the total. Something has left the picture without leaving the calculation.</p>
+<!-- @ -->
+
+<p>BASELINE restores the five amounts. While HOLD keeps the phase still, the same curve returns to the same place. Let the clock run and those amounts return as a moving shape. Repeating a recipe and repeating an exact instant ask for different things to be kept. Random_Definition takes that question further: what must we retain to bring an unfamiliar result back?</p></details></main></body></html>

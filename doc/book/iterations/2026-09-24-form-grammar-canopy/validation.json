@@ -1,0 +1,194 @@
+{
+  "checks": [
+    {
+      "check": "JSON commons/artifacts/registry/form_grammar_canopy.json",
+      "pass": true
+    },
+    {
+      "check": "JSON commons/maps/LSystems_Shape_Grammars/map_data.json",
+      "pass": true
+    },
+    {
+      "check": "JSON commons/data/museum_core_encounters.json",
+      "pass": true
+    },
+    {
+      "check": "JSON commons/maps/sequences/lsystems.json",
+      "pass": true
+    },
+    {
+      "check": "rectangular structure",
+      "pass": true
+    },
+    {
+      "check": "rectangular utilities",
+      "pass": true
+    },
+    {
+      "check": "rectangular interactables",
+      "pass": true
+    },
+    {
+      "check": "first family placement preserved",
+      "pass": true
+    },
+    {
+      "check": "first floor preserved except old end wall",
+      "pass": true
+    },
+    {
+      "check": "spawn remains supported",
+      "pass": true
+    },
+    {
+      "check": "exit moved and supported",
+      "pass": true
+    },
+    {
+      "check": "one exit",
+      "pass": true
+    },
+    {
+      "check": "canopy placed",
+      "pass": true
+    },
+    {
+      "check": "sequence order unchanged",
+      "pass": true
+    },
+    {
+      "check": "two primary groups 0",
+      "pass": true
+    },
+    {
+      "check": "two primary groups 1",
+      "pass": true
+    },
+    {
+      "check": "other encounter records preserved",
+      "pass": true
+    },
+    {
+      "check": "current map fingerprint",
+      "pass": true
+    },
+    {
+      "check": "current text fingerprint",
+      "pass": true
+    },
+    {
+      "check": "both manuscript anchors",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/mesh_data.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/mesh_selector.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/mesh_rule.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/operations/inset_face_op.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/operations/extrude_face_op.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/maps/LSystems_Shape_Grammars/map_data.json",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/mesh_grammar/operations/petal_splay_op.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_canopy/form_grammar_canopy.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_canopy/form_grammar_canopy.tscn",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_family/form_grammar_family.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_family/form_grammar_family.tscn",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_family/study.gd",
+      "pass": true
+    },
+    {
+      "check": "tested source unchanged commons/artifacts/form_grammar_family/study.tscn",
+      "pass": true
+    },
+    {
+      "check": "original six-specimen generator unchanged",
+      "pass": true
+    },
+    {
+      "check": "66 native checks pass",
+      "pass": true
+    },
+    {
+      "check": "chapter image /book-review/doc/book/iterations/2026-09-24-form-grammar-spine/first-three.png",
+      "pass": true
+    },
+    {
+      "check": "chapter image /book-review/doc/book/iterations/2026-09-24-form-grammar-spine/three-families.png",
+      "pass": true
+    },
+    {
+      "check": "chapter image /book-review/doc/book/iterations/2026-09-24-form-grammar-canopy/face-and-petals.png",
+      "pass": true
+    },
+    {
+      "check": "chapter image /book-review/doc/book/iterations/2026-09-24-form-grammar-canopy/beneath.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP index.html",
+      "pass": true
+    },
+    {
+      "check": "HTTP canopy.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP beneath.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP small.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP face-and-petals.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP hall.png",
+      "pass": true
+    },
+    {
+      "check": "HTTP native-checks.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP DECISIONS.md",
+      "pass": true
+    }
+  ],
+  "native_checks": 66,
+  "scope": "Isolated native and publication checks only; no full museum-loader or headset acceptance"
+}

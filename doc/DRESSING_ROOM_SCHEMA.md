@@ -82,6 +82,7 @@ a dressing-room file fall back to a 1×1 default room in the composer.
   //   3t   3D-text label (the `text` field is required)
   //   tt   tutorial-text panel (the `key` references tutorial_text_library)
   //   el   emission light (the `params` field is the el params string)
+  //   wp   walkable prism/ramp (the `rotation` field faces the ramp)
   //   sub  sub-layer reference (rare)
   // offset — (delta_row, delta_col, delta_height) from the anchor cell.
   //          delta_height of 0 = same row in utilities; otherwise the
@@ -102,12 +103,64 @@ a dressing-room file fall back to a 1×1 default room in the composer.
   // the artifact in the 3D viewport.
   "artifact_offset": [0.0, 0.0, 0.0],
 
+  // Optional artifact-local variant. DressingRoomBuilder applies this
+  // before _ready(), and the map composer serializes it into #key:value
+  // grid-token config. This lets the ideal room request the artifact's
+  // museum form without forking its scene.
+  "artifact_config": {
+    "staging": "bare",
+    "palette": "trans"
+  },
+
+  // Optional staged-composition switches. `show_dressing:false` keeps the
+  // posture's support (wall, plinth, table, or stage) but suppresses its
+  // auxiliary DNA pieces such as floor rails, cordons, and backdrops.
+  "show_base": true,
+  "show_light": true,
+  "light_mode": "glow",
+  "show_info": true,
+  "show_dressing": true,
+
+  // Optional negotiation input. Allowed modes describe valid alternatives;
+  // the preferred mode is soft. A wall installation may waive rear clearance
+  // when the artifact has no rear interaction or circulation requirement.
+  "placement_contract": {
+    "allowed_modes": ["against_wall", "freestanding"],
+    "preferred_mode": "against_wall",
+    "wall_side": "north",
+    "hard_zone_m": [1, 3, 3],
+    "preferred_zone_m": [3, 3, 3],
+    "required_support": "wall",
+    "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0,
+    "front_clearance_m": 2.0,
+    "circulation": "frontal",
+    "circulation_behind": false,
+    "minimum_route_width_m": 0.9,
+    "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+
   // Total volumetric envelope including extras (max width, max depth,
   // max height). Used by the composer for clearance checks before
   // placement is finalised.
   "clearance": [3, 3, 4]
 }
 ```
+
+### Placement-contract zones
+
+The placement negotiator distinguishes three nested claims:
+
+1. **Occupied body** comes from measured runtime geometry. It is never negotiable.
+2. **Hard zone** is the smallest valid interaction and circulation envelope. An
+   offer that cannot meet it must move, grow, rotate, use an explicit exception,
+   or be rejected.
+3. **Preferred zone** is the artifact's ideal room. It may be reduced only when
+   the decision record names the soft rule being traded away.
+
+`required_support`, `allowed_modes`, `interaction_faces`, `circulation`, and
+`neighbor_policy` are hard constraints. `preferred_mode` and
+`preferred_zone_m` are soft preferences unless another field makes them hard.
 
 ## What "rotation" does to a dressing room
 

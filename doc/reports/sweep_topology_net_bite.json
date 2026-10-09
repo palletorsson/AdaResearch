@@ -1,0 +1,3872 @@
+{
+ "sweep": "topology_net",
+ "peak_changed_pct": 24.162,
+ "subject_pct": 21.51,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "changed_px": 113308,
+   "changed_pct": 19.617
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "changed_px": 27794,
+   "changed_pct": 4.812
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "changed_px": 97281,
+   "changed_pct": 16.842
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "changed_px": 119526,
+   "changed_pct": 20.694
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "changed_px": 112536,
+   "changed_pct": 19.483
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 109058,
+   "changed_pct": 18.881
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 138671,
+   "changed_pct": 24.008
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 110834,
+   "changed_pct": 19.189
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 89364,
+   "changed_pct": 15.472
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 111249,
+   "changed_pct": 19.261
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 98684,
+   "changed_pct": 17.085
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 103725,
+   "changed_pct": 17.958
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 116739,
+   "changed_pct": 20.211
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 107667,
+   "changed_pct": 18.64
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 102685,
+   "changed_pct": 17.778
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 104814,
+   "changed_pct": 18.146
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 103768,
+   "changed_pct": 17.965
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 95860,
+   "changed_pct": 16.596
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 97698,
+   "changed_pct": 16.914
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 96034,
+   "changed_pct": 16.626
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 102358,
+   "changed_pct": 17.721
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 102358,
+   "changed_pct": 17.721
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 102358,
+   "changed_pct": 17.721
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "changed_px": 114759,
+   "changed_pct": 19.868
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "changed_px": 124462,
+   "changed_pct": 21.548
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "changed_px": 95360,
+   "changed_pct": 16.51
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "changed_px": 125104,
+   "changed_pct": 21.659
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 131818,
+   "changed_pct": 22.822
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 115764,
+   "changed_pct": 20.042
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 133146,
+   "changed_pct": 23.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 117051,
+   "changed_pct": 20.265
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 86016,
+   "changed_pct": 14.892
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 117746,
+   "changed_pct": 20.385
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 122576,
+   "changed_pct": 21.222
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 110602,
+   "changed_pct": 19.149
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 122576,
+   "changed_pct": 21.222
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 121897,
+   "changed_pct": 21.104
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 120864,
+   "changed_pct": 20.925
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 122071,
+   "changed_pct": 21.134
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 116586,
+   "changed_pct": 20.185
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 115475,
+   "changed_pct": 19.992
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 116586,
+   "changed_pct": 20.185
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 121836,
+   "changed_pct": 21.093
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 121836,
+   "changed_pct": 21.093
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 121836,
+   "changed_pct": 21.093
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "changed_px": 101867,
+   "changed_pct": 17.636
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "changed_px": 120883,
+   "changed_pct": 20.928
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "changed_px": 114351,
+   "changed_pct": 19.798
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 113272,
+   "changed_pct": 19.611
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 139562,
+   "changed_pct": 24.162
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 115048,
+   "changed_pct": 19.918
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 95562,
+   "changed_pct": 16.545
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 112934,
+   "changed_pct": 19.552
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 104882,
+   "changed_pct": 18.158
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 106712,
+   "changed_pct": 18.475
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 117963,
+   "changed_pct": 20.423
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 108731,
+   "changed_pct": 18.825
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 105298,
+   "changed_pct": 18.23
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 107198,
+   "changed_pct": 18.559
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 106381,
+   "changed_pct": 18.418
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 98003,
+   "changed_pct": 16.967
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 99543,
+   "changed_pct": 17.234
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 98177,
+   "changed_pct": 16.997
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 104779,
+   "changed_pct": 18.14
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 104779,
+   "changed_pct": 18.14
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "graded",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 104779,
+   "changed_pct": 18.14
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "changed_px": 105104,
+   "changed_pct": 18.197
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "changed_px": 68829,
+   "changed_pct": 11.916
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 108136,
+   "changed_pct": 18.722
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 138572,
+   "changed_pct": 23.991
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 109861,
+   "changed_pct": 19.02
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 84135,
+   "changed_pct": 14.566
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 112953,
+   "changed_pct": 19.556
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 95112,
+   "changed_pct": 16.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 94377,
+   "changed_pct": 16.34
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 114866,
+   "changed_pct": 19.887
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 99074,
+   "changed_pct": 17.153
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 92548,
+   "changed_pct": 16.023
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 94824,
+   "changed_pct": 16.417
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 93592,
+   "changed_pct": 16.204
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 88970,
+   "changed_pct": 15.403
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 91255,
+   "changed_pct": 15.799
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 89779,
+   "changed_pct": 15.543
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 95348,
+   "changed_pct": 16.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 95348,
+   "changed_pct": 16.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 95348,
+   "changed_pct": 16.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "changed_px": 106465,
+   "changed_pct": 18.432
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 127970,
+   "changed_pct": 22.155
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 120311,
+   "changed_pct": 20.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 129298,
+   "changed_pct": 22.385
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 114365,
+   "changed_pct": 19.8
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 85241,
+   "changed_pct": 14.758
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 115574,
+   "changed_pct": 20.009
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 113435,
+   "changed_pct": 19.639
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 98689,
+   "changed_pct": 17.086
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 113444,
+   "changed_pct": 19.641
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 109025,
+   "changed_pct": 18.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 106916,
+   "changed_pct": 18.51
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 109074,
+   "changed_pct": 18.884
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 106951,
+   "changed_pct": 18.516
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 104437,
+   "changed_pct": 18.081
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 107356,
+   "changed_pct": 18.587
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 110358,
+   "changed_pct": 19.106
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 110358,
+   "changed_pct": 19.106
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 110358,
+   "changed_pct": 19.106
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "changed_px": 118596,
+   "changed_pct": 20.533
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 139530,
+   "changed_pct": 24.157
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 119483,
+   "changed_pct": 20.686
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 102426,
+   "changed_pct": 17.733
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 113599,
+   "changed_pct": 19.667
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 98613,
+   "changed_pct": 17.073
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 104371,
+   "changed_pct": 18.07
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 116038,
+   "changed_pct": 20.09
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 101263,
+   "changed_pct": 17.532
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 97735,
+   "changed_pct": 16.921
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 98794,
+   "changed_pct": 17.104
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 97127,
+   "changed_pct": 16.816
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 92842,
+   "changed_pct": 16.074
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 94258,
+   "changed_pct": 16.319
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 92967,
+   "changed_pct": 16.095
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 98908,
+   "changed_pct": 17.124
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 98908,
+   "changed_pct": 17.124
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "flat",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 98908,
+   "changed_pct": 17.124
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "changed_px": 123805,
+   "changed_pct": 21.434
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 13019,
+   "changed_pct": 2.254
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 103544,
+   "changed_pct": 17.927
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 122433,
+   "changed_pct": 21.197
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 110206,
+   "changed_pct": 19.08
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 103611,
+   "changed_pct": 17.938
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 119439,
+   "changed_pct": 20.678
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 106341,
+   "changed_pct": 18.411
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 97876,
+   "changed_pct": 16.945
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 101034,
+   "changed_pct": 17.492
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 98838,
+   "changed_pct": 17.112
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 88872,
+   "changed_pct": 15.386
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 92055,
+   "changed_pct": 15.938
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 89898,
+   "changed_pct": 15.564
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 92028,
+   "changed_pct": 15.933
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 92028,
+   "changed_pct": 15.933
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 92028,
+   "changed_pct": 15.933
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "changed_px": 124968,
+   "changed_pct": 21.636
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 136962,
+   "changed_pct": 23.712
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 118830,
+   "changed_pct": 20.573
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 138132,
+   "changed_pct": 23.915
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 136509,
+   "changed_pct": 23.634
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 128446,
+   "changed_pct": 22.238
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 136895,
+   "changed_pct": 23.701
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 132309,
+   "changed_pct": 22.907
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 130858,
+   "changed_pct": 22.655
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 132472,
+   "changed_pct": 22.935
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 128378,
+   "changed_pct": 22.226
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 127888,
+   "changed_pct": 22.141
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 129136,
+   "changed_pct": 22.357
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 129921,
+   "changed_pct": 22.493
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 129921,
+   "changed_pct": 22.493
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 129921,
+   "changed_pct": 22.493
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "changed_px": 105091,
+   "changed_pct": 18.194
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 123761,
+   "changed_pct": 21.427
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 111308,
+   "changed_pct": 19.271
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 105507,
+   "changed_pct": 18.266
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 120768,
+   "changed_pct": 20.909
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 108245,
+   "changed_pct": 18.74
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 99528,
+   "changed_pct": 17.231
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 102646,
+   "changed_pct": 17.771
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 100134,
+   "changed_pct": 17.336
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 90308,
+   "changed_pct": 15.635
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 93433,
+   "changed_pct": 16.176
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 91223,
+   "changed_pct": 15.793
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 93911,
+   "changed_pct": 16.259
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 93911,
+   "changed_pct": 16.259
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "deep",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 93911,
+   "changed_pct": 16.259
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "changed_px": 91298,
+   "changed_pct": 15.806
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 38444,
+   "changed_pct": 6.656
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 85022,
+   "changed_pct": 14.72
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 114007,
+   "changed_pct": 19.738
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 90668,
+   "changed_pct": 15.697
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 93564,
+   "changed_pct": 16.199
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 96103,
+   "changed_pct": 16.638
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 94903,
+   "changed_pct": 16.431
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 82751,
+   "changed_pct": 14.327
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 85557,
+   "changed_pct": 14.812
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 83491,
+   "changed_pct": 14.455
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 95337,
+   "changed_pct": 16.506
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 95337,
+   "changed_pct": 16.506
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 95337,
+   "changed_pct": 16.506
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "changed_px": 92808,
+   "changed_pct": 16.068
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 110058,
+   "changed_pct": 19.054
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 92085,
+   "changed_pct": 15.943
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 110058,
+   "changed_pct": 19.054
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 107668,
+   "changed_pct": 18.641
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 107424,
+   "changed_pct": 18.598
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 108644,
+   "changed_pct": 18.81
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 97365,
+   "changed_pct": 16.857
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 97448,
+   "changed_pct": 16.871
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 97761,
+   "changed_pct": 16.925
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 106848,
+   "changed_pct": 18.499
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 106848,
+   "changed_pct": 18.499
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 106848,
+   "changed_pct": 18.499
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "changed_px": 94776,
+   "changed_pct": 16.409
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 115376,
+   "changed_pct": 19.975
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 94855,
+   "changed_pct": 16.422
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 97040,
+   "changed_pct": 16.801
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 99183,
+   "changed_pct": 17.172
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 97904,
+   "changed_pct": 16.95
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 85256,
+   "changed_pct": 14.76
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 87879,
+   "changed_pct": 15.215
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 85870,
+   "changed_pct": 14.867
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 97789,
+   "changed_pct": 16.93
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 97789,
+   "changed_pct": 16.93
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "widened",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 97789,
+   "changed_pct": 16.93
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "changed_px": 83012,
+   "changed_pct": 14.372
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 27549,
+   "changed_pct": 4.77
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 79046,
+   "changed_pct": 13.685
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 82100,
+   "changed_pct": 14.214
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 80061,
+   "changed_pct": 13.861
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 68596,
+   "changed_pct": 11.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 70857,
+   "changed_pct": 12.267
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 69029,
+   "changed_pct": 11.951
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 69680,
+   "changed_pct": 12.064
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 69680,
+   "changed_pct": 12.064
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 69680,
+   "changed_pct": 12.064
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "changed_px": 83254,
+   "changed_pct": 14.414
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 96841,
+   "changed_pct": 16.766
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 97502,
+   "changed_pct": 16.881
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 96913,
+   "changed_pct": 16.779
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 89496,
+   "changed_pct": 15.494
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 88679,
+   "changed_pct": 15.353
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 89616,
+   "changed_pct": 15.515
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 88634,
+   "changed_pct": 15.345
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 88634,
+   "changed_pct": 15.345
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 88634,
+   "changed_pct": 15.345
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "changed_px": 80466,
+   "changed_pct": 13.931
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 83292,
+   "changed_pct": 14.42
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 81188,
+   "changed_pct": 14.056
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 69304,
+   "changed_pct": 11.999
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 71300,
+   "changed_pct": 12.344
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 69742,
+   "changed_pct": 12.074
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 70469,
+   "changed_pct": 12.2
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 70469,
+   "changed_pct": 12.2
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "pinched",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 70469,
+   "changed_pct": 12.2
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "changed_px": 17634,
+   "changed_pct": 3.053
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 11070,
+   "changed_pct": 1.917
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 30063,
+   "changed_pct": 5.205
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 40045,
+   "changed_pct": 6.933
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 30793,
+   "changed_pct": 5.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 53048,
+   "changed_pct": 9.184
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 53048,
+   "changed_pct": 9.184
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 53048,
+   "changed_pct": 9.184
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "changed_px": 24942,
+   "changed_pct": 4.318
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 38689,
+   "changed_pct": 6.698
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 45053,
+   "changed_pct": 7.8
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 39295,
+   "changed_pct": 6.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 58171,
+   "changed_pct": 10.071
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 58171,
+   "changed_pct": 10.071
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 58171,
+   "changed_pct": 10.071
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "changed_px": 34111,
+   "changed_pct": 5.906
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 42969,
+   "changed_pct": 7.439
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 34797,
+   "changed_pct": 6.024
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 54682,
+   "changed_pct": 9.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 54682,
+   "changed_pct": 9.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "rhizome",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 54682,
+   "changed_pct": 9.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "changed_px": 13517,
+   "changed_pct": 2.34
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 2446,
+   "changed_pct": 0.423
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 41693,
+   "changed_pct": 7.218
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 41693,
+   "changed_pct": 7.218
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 41693,
+   "changed_pct": 7.218
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "changed_px": 14440,
+   "changed_pct": 2.5
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 45492,
+   "changed_pct": 7.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 45492,
+   "changed_pct": 7.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 45492,
+   "changed_pct": 7.876
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "changed_px": 42179,
+   "changed_pct": 7.302
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 42179,
+   "changed_pct": 7.302
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "tree",
+    "reading": "cut"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 42179,
+   "changed_pct": 7.302
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "net"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "routes"
+   },
+   "b": {
+    "layout": "single",
+    "topology": "severed",
+    "reading": "cut"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

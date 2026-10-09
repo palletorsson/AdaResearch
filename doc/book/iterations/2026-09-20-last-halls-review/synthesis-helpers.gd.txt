@@ -1,0 +1,6 @@
+func prepare_view(s: Node, mode: String) -> void:
+	if mode=="later":
+		for i in range(6):s._push_entry()
+		s._refresh_lines()
+func capture_state(s: Node, mode: String) -> Dictionary:
+	return {"mode":mode,"entries":s._entries.duplicate(),"count":s._count}

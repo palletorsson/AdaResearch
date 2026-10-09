@@ -1,0 +1,130 @@
+[
+  {
+    "id": "01-push",
+    "title": "The push ends. The point continues.",
+    "subject": "Finite force · mass · retained velocity",
+    "caption": "The familiar point becomes a force receiver. Push briefly, release, then repeat with twice the mass. In the isolated comparison, the same force for the same duration gives half the change in velocity.",
+    "carry": "The sphere keeps its appearance. Its mass and velocity now matter.",
+    "build": "Proposed sphere study adapted from the existing Motion hall. Disable gravity and damping for this comparison.",
+    "note": "Arrow lengths are schematic, not measured ratios.",
+    "links": [
+      "VFM_03_Motion"
+    ],
+    "reflection": "The command ends. Its consequence has not."
+  },
+  {
+    "id": "02-launch",
+    "title": "The body becomes the arc.",
+    "subject": "Launch velocity · gravity · landing",
+    "caption": "Walk onto a pad and become the moving body. Compare the launch direction with the direction you travel at the top of the arc. Gravity continues there, even when vertical velocity is momentarily zero.",
+    "carry": "The known receiver becomes the player. Change one launch component to reach a different ledge.",
+    "build": "Proposed free-flight course. Existing pad implementations must be checked: setting velocity and applying an impulse are different operations.",
+    "note": "The large gaps establish the visual idea; they are not a tested VR course.",
+    "links": [
+      "VFM_05_Launch"
+    ],
+    "reflection": "An arrow becomes a route your body must finish."
+  },
+  {
+    "id": "03-flight",
+    "title": "Two points can carry you.",
+    "subject": "Two force contributions · vector addition · continuous thrust",
+    "caption": "Hold a sphere in each hand. Aim down and hold the triggers to rise; aim back to move forward. Each hand contributes independently to the same player receiver. Release removes thrust while velocity and gravity continue.",
+    "carry": "The same point appears twice. Its new capacity is to move the person holding it.",
+    "build": "The control is agreed. Two-sphere player flight remains to be implemented and tested.",
+    "note": "White streams indicate aim; amber arrows indicate the resulting thrust in the opposite direction.",
+    "links": [
+      "Vectors_Act5_ForceAsPlace"
+    ],
+    "reflection": "Cooperation need not mean that both hands do the same thing."
+  },
+  {
+    "id": "04-fall",
+    "title": "Release is not a stop.",
+    "subject": "Gravity · drag · counter-thrust",
+    "caption": "Release the triggers and keep travelling. Gravity bends the path. Compare passive drag with a deliberate push against your motion, then use what you know to approach a landing.",
+    "carry": "The flight model keeps its velocity. Resistance becomes one more contribution.",
+    "build": "Proposed short-fall and braking encounter, with nearby resets. Drag and counter-thrust need separate comparisons.",
+    "note": "A released sphere emits no thrust stream. A backward force does not instantly reverse a forward velocity.",
+    "links": [
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act5_ForceAsPlace"
+    ],
+    "reflection": "Freedom to move includes the problem of coming to rest."
+  },
+  {
+    "id": "05-vortex",
+    "title": "The room turns your path.",
+    "subject": "Spatial field · inward force · tangent",
+    "caption": "Enter a field with the velocity you already have. Combine an inward contribution with one tangent to the centre, observe the changing path, then use the held spheres to leave it.",
+    "carry": "The receiver is familiar; the room supplies a force that depends on position.",
+    "build": "Proposed force-accumulating vortex. The installed velocity-setting vortex is a comparison, not evidence of this behavior.",
+    "note": "The inset distinguishes radial and tangential directions. The scene does not prescribe one orbit for every incoming body.",
+    "links": [
+      "Vectors_Act3_FieldsAndMotion"
+    ],
+    "reflection": "A centre can gather bodies without becoming their rightful destination."
+  },
+  {
+    "id": "06-shoot",
+    "title": "Send the push to another body.",
+    "subject": "Projectile contact · impulse · mass",
+    "caption": "Keep the catalyst sphere in your hand and send a small form toward another body. One hit delivers one impulse. Compare equal-size receivers with different masses, then divert an approaching body to open a route.",
+    "carry": "The point becomes a tool; its projectile meets the force receiver learned earlier.",
+    "build": "Proposed dynamic sphere target and bounded pursuit variant. Flight and firing require separate actions or an explicit mode.",
+    "note": "The mass comparison uses free receivers and disables pursuit. Pedestals in the illustration identify the specimens; they are not a constraint model.",
+    "links": [
+      "VFM_08_Arena"
+    ],
+    "reflection": "An obstruction need not have destruction as its only possible future."
+  },
+  {
+    "id": "07-return",
+    "title": "Who chose the resting place?",
+    "subject": "Restoring force · overshoot · damping",
+    "caption": "Displace a tethered sphere and release it. The spring pulls toward its anchor; the moving sphere can overshoot. Change the damping, then ask what changes when you move the resting place.",
+    "carry": "Reuse the target and its velocity. Add one restoring term, then compare it with resistance.",
+    "build": "Proposed tethered enemy variant from the existing spring study. Begin with a one-dimensional guide.",
+    "note": "The last panel sketches anchor placement. A spring moving freely in space requires additional constraints; it is not the first one-dimensional model.",
+    "links": [
+      "Vectors_Act4b_Oscillation"
+    ],
+    "reflection": "What asks the body to return—and who put its centre there?"
+  },
+  {
+    "id": "08-course",
+    "title": "Take what you made through the room.",
+    "subject": "Transfer · choosing an ability · combined encounters",
+    "caption": "Launch, steer, release, escape a swirl and deflect a body. The course asks you to choose among the operations already learned. A ground route remains beside the aerial route.",
+    "carry": "The same two spheres carry the accumulated abilities through one continuous space.",
+    "build": "Proposed combined course. No new force law belongs here; the test is whether earlier abilities remain usable together.",
+    "note": "Cyan lines here are route guides, not instantaneous velocity vectors. The architectural montage is not a verified traversable layout.",
+    "links": [
+      "Vectors_Act5_ForceAsPlace",
+      "VFM_08_Arena"
+    ],
+    "reflection": "Capacity becomes useful when you can choose what to do with it."
+  },
+  {
+    "id": "09-beyond-body",
+    "title": "Other ways to be carried.",
+    "subject": "Buoyancy · torque · tether · repulsion · adhesion · lift",
+    "caption": "Six possible studies extend the point into water, rotation, attachment, separation, surface contact and air. Each would need its own small model before it becomes a player ability.",
+    "carry": "Return to the familiar body and change one relation to its surroundings.",
+    "build": "Speculative extensions of the proposed route. Some subjects already have relatives elsewhere in the project; these panels do not certify an implementation.",
+    "note": "The torque panel places a force away from the pivot. In the lift sketch the wing is held still and drag follows the relative airflow.",
+    "links": [],
+    "reflection": "What other relationships could let a body move?"
+  },
+  {
+    "id": "10-beyond-relations",
+    "title": "What can a force permit?",
+    "subject": "Drawn fields · collective response · movable centres · access · alternative routes",
+    "caption": "Draw a field, gather a moving shield, change who supplies the centre, or make the same ability available through another control. These panels ask how rules distribute power and access.",
+    "carry": "Keep the same objects and operations while changing who can use them, where, and for what.",
+    "build": "Speculative research questions, not accepted mechanics or a claim that physics establishes a political conclusion.",
+    "note": "One-hand and desktop alternatives should act through the same receiver contract; their usability would need testing.",
+    "links": [],
+    "reflection": "Which possibilities does the rule keep open?"
+  }
+]

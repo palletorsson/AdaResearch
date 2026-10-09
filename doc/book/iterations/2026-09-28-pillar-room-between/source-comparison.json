@@ -1,0 +1,54 @@
+{
+  "previous_evidence": "doc/book/iterations/2026-09-23-pillar-colour-between",
+  "scope": "Relevant map and encounter dependencies; not an assertion that the entire museum runtime is unchanged.",
+  "files": [
+    {
+      "path": "commons/maps/Color_Pillar/map_data.json",
+      "previous_sha256": "02d6e14dca7e1be71b2d60f42e5de8e4addc84e8db312b908ddb04966af49d16",
+      "current_sha256": "02d6e14dca7e1be71b2d60f42e5de8e4addc84e8db312b908ddb04966af49d16",
+      "match": true
+    },
+    {
+      "path": "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "previous_sha256": "ef9749addf69db110a63ccbd66daeb46d6289b7ad9e36d6fc22e3ef56052ce5f",
+      "current_sha256": "ef9749addf69db110a63ccbd66daeb46d6289b7ad9e36d6fc22e3ef56052ce5f",
+      "match": true
+    },
+    {
+      "path": "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+      "previous_sha256": "3dc213d01edeb255f91978684ad3f4ef65bc31fd822a61ccf0665e9934a7a69f",
+      "current_sha256": "3dc213d01edeb255f91978684ad3f4ef65bc31fd822a61ccf0665e9934a7a69f",
+      "match": true
+    },
+    {
+      "path": "algorithms/color/grabcolor/color_sets_overview.gd",
+      "previous_sha256": "90f9c9ccba554e3283af3f72d37c1f06fc272a391ad1b1eab4036b7776fe2205",
+      "current_sha256": "90f9c9ccba554e3283af3f72d37c1f06fc272a391ad1b1eab4036b7776fe2205",
+      "match": true
+    },
+    {
+      "path": "commons/primitives/pillar/pillar.tscn",
+      "previous_sha256": "7050031a6b95440bf7d7d1c610e1e5e8d7c14dc8b307ce8560fdedb98afedd1f",
+      "current_sha256": "7050031a6b95440bf7d7d1c610e1e5e8d7c14dc8b307ce8560fdedb98afedd1f",
+      "match": true
+    },
+    {
+      "path": "commons/primitives/panels/DigitalPaper/grab_paper.tscn",
+      "previous_sha256": "18d3fb686d9c2a90b3b06753250d9e7609222962cf9464b355198ddd4137be05",
+      "current_sha256": "18d3fb686d9c2a90b3b06753250d9e7609222962cf9464b355198ddd4137be05",
+      "match": true
+    },
+    {
+      "path": "commons/primitives/cubes/grab_cube_grid_snap.gd",
+      "previous_sha256": "f08c185d82db4c6bde8e7f837246fb2485476757522963a057e6ec9677dab899",
+      "current_sha256": "f08c185d82db4c6bde8e7f837246fb2485476757522963a057e6ec9677dab899",
+      "match": true
+    },
+    {
+      "path": "addons/godot-xr-tools/objects/pickable.gd",
+      "previous_sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7",
+      "current_sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7",
+      "match": true
+    }
+  ]
+}

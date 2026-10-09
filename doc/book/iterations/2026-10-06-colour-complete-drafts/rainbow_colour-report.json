@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "id": "Color_Rainbow/start/count",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/opening",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/fixed_outer",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/width_0",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/colour_0",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/mesh_radii_0",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/width_1",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/colour_1",
+      "passed": false
+    },
+    {
+      "id": "Color_Rainbow/start/mesh_radii_1",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/joined_1",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/own_material_1",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/width_2",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/colour_2",
+      "passed": false
+    },
+    {
+      "id": "Color_Rainbow/start/mesh_radii_2",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/joined_2",
+      "passed": true
+    },
+    {
+      "id": "Color_Rainbow/start/own_material_2",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "Color_Rainbow/start/colour_1",
+    "Color_Rainbow/start/colour_2"
+  ],
+  "passed": false
+}

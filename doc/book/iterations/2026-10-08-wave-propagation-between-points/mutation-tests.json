@@ -1,0 +1,39 @@
+[
+  {
+    "fault": "missing-coupling",
+    "rejected": true,
+    "failures": [
+      "centre first acceleration is -16.8 m/s squared",
+      "immediate neighbours first velocities both +0.12 m/s",
+      "first neighbour displacement uses new velocity",
+      "centre first height uses new velocity",
+      "second step reaches next neighbours",
+      "end point has one neighbour not a wrap or clamp",
+      "same force at double mass halves acceleration"
+    ]
+  },
+  {
+    "fault": "shared-next-state",
+    "rejected": true,
+    "failures": [
+      "centre first acceleration is -16.8 m/s squared",
+      "immediate neighbours first velocities both +0.12 m/s",
+      "first neighbour displacement uses new velocity",
+      "centre first height uses new velocity",
+      "far points do not respond in this first step",
+      "propagation stays mirror symmetric",
+      "equal offsets create no coupling force including ends",
+      "end point has one neighbour not a wrap or clamp",
+      "same force at double mass halves acceleration"
+    ]
+  },
+  {
+    "fault": "skipped-neighbour",
+    "rejected": true,
+    "failures": [
+      "immediate neighbours first velocities both +0.12 m/s",
+      "first neighbour displacement uses new velocity",
+      "far points do not respond in this first step"
+    ]
+  }
+]

@@ -1,0 +1,154 @@
+{
+  "sequences": {
+	"transformation": {
+	  "name": "Transformation: What Stays the Same When Everything Changes",
+	  "truth": "Changing position, orientation or size changes possible passage. Ask which properties survive each operation and which body the resulting space admits.",
+	  "qfep_term": "S",
+	  "qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
+	  "formula": "p_new = M * p in homogeneous coordinates; translation adds a displacement, rotation changes orientation, scale multiplies dimensions.",
+	  "demonstration": "Collect, ride, turn, grow, approach and wait: seven halls connect a concrete operation to its spatial consequence.",
+	  "description": "Translation, rotation and scale taught through collection, crossings, constrained paths, rotated architecture and relative size. Bodily input and timed obstacles then test how these operations organise access.",
+	  "layer": "F_order",
+	  "prerequisites": [
+        "primitives"
+	  ],
+	  "unlocks": [
+		"fractals",
+        "proceduralgeneration"
+	  ],
+	  "difficulty": "beginner",
+	  "estimated_time": "30-45 minutes",
+	  "learning_objectives": [
+		"Distinguish collection from the translation, rotation and scale of an object.",
+		"Translate along x, y, z and combined directions without changing orientation.",
+		"Distinguish a destination from constraints on the journey to it.",
+		"Compare rotation axis, pivot and angle through crossings, arrays and repeated profiles.",
+		"Use uniform scale while holding the player and a reference doorway constant.",
+		"Distinguish reversible transformation from removal of geometry.",
+		"Compare body-driven openings with timed obstacles.",
+        "Name invariants precisely: translation and rotation preserve distances; uniform scale preserves angles and proportions, not lengths; non-uniform scale can change shape."
+	  ],
+	  "content": [
+		"Trans_Pre: Collect a still cube. Add rising, turning and swelling to its moving demonstrations, then walk a ramp to the completed pickups.",
+		"Trans_Introduction: Cross by translation, scale and rotation; then slide the far bank while the plank keeps its original motion. Which part of the crossing did the background supply?",
+		"Trans_Translation: Seven journeys separate and combine x, y and z. At the exit, two hand-operated mechanisms share a destination but permit different paths.",
+		"Trans_Rotation: Cross a level Y bridge; ride an upright end-platform forward around X or sideways around Z. Compare two body widths in the rotated arrays, then enter the tunnel and repeated cake profiles.",
+		"Trans_Scale: A four-metre room grows fourfold. The body keeps its size; descend the serving tower and compare a growing doorway with a fixed museum frame.",
+		"Trans_Body: Approach turns slats, contact removes cells, proximity shrinks blocks. Two openings close behind you; one records your passage.",
+        "Trans_Pit: Position, orientation and size follow clocks. Read the moving obstacles and find when your body can pass."
+	  ],
+	  "maps": [
+		"Trans_Pre",
+		"Trans_Introduction",
+		"Trans_Translation",
+		"Trans_Rotation",
+		"Trans_Scale",
+		"Trans_Body",
+        "Trans_Pit"
+	  ],
+	  "axiom_files": [
+		"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
+		"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
+	  ],
+	  "algorithm_paths": {
+		"Transformation_Intro": "res://algorithms/transformations/",
+		"Trans_Rotation": "res://algorithms/transformations/rotation/",
+		"Trans_Composition": "res://commons/primitives/furniture/"
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_transformation",
+	  "unlock_requirements": [],
+	  "completion_rewards": [
+		"transformer_badge",
+        "matrix_master_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Trans_Pre",
+		  "position": "primer",
+		  "artifacts": [
+            "pick_up_cube"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Collect a still cube. Add rising, turning and swelling to its moving demonstrations, then walk a ramp to the completed pickups.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Introduction",
+		  "position": "intro",
+		  "artifacts": [
+			"tc",
+			"sc",
+			"rc",
+            "adjustable_landing"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Cross by translation, scale and rotation; then slide the far bank while the plank keeps its original motion. Which part of the crossing did the background supply?",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Translation",
+		  "position": "foundation",
+		  "artifacts": [
+			"tc",
+			"pick_up_cube",
+            "translation_cube_demo"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Seven journeys separate and combine x, y and z. At the exit, two hand-operated mechanisms share a destination but permit different paths.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Rotation",
+		  "position": "exploration",
+		  "artifacts": [
+			"rotation_wall_crossings",
+			"rotation_array_compare",
+			"boolean_tunnel",
+            "carousel_cake"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Cross a level Y bridge; ride an upright end-platform forward around X or sideways around Z. Compare two body widths in the rotated arrays, then enter the tunnel and repeated cake profiles.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Scale",
+		  "position": "integration",
+		  "artifacts": [
+            "scale_me"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "A four-metre room grows fourfold. The body keeps its size; descend the serving tower and compare a growing doorway with a fixed museum frame.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Body",
+		  "position": "synthesis",
+		  "artifacts": [
+			"approach_wall",
+			"carve_grid",
+            "approach_scale"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Approach turns slats, contact removes cells, proximity shrinks blocks. Two openings close behind you; one records your passage.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Trans_Pit",
+		  "position": "limit",
+		  "artifacts": [
+			"pusher_block",
+			"rc",
+            "grower_block"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Position, orientation and size follow clocks. Read the moving obstacles and find when your body can pass.",
+		  "grammar": "linear"
+		}
+	  ]
+	}
+  },
+  "world_phase": "grid",
+  "artifact_groups": []
+}

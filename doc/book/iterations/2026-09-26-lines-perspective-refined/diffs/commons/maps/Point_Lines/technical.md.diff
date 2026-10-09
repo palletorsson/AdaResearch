@@ -1,0 +1,18 @@
+--- before/commons/maps/Point_Lines/technical.md
++++ after/commons/maps/Point_Lines/technical.md
+@@ -183,8 +183,12 @@
+ Seven additional planks lean along the east wall at 70 degrees to the floor. Lengths rise from 1 to 4 m in 0.5 m steps; the 0.12 × 0.25 m section is constant. Their centres account for thickness so the lower corner rests at floor height and the upper edge stays 2 cm inside the wall. They use the gallery's existing pickup/release behaviour, bringing the hall gallery to 27 pickable bodies.
+ 
+ 
+-### Perspective and the ceiling edge — 26 September 2026
++### Perspective and the ceiling edge — 26 September 2026, refined
+ 
+-Two fixed parallel floor lines span the open gallery, 21 m apart, with equal 2 m graduation spacing. Their apparent convergence and foreshortening are the visitor camera's perspective. Two 0.42 m-wide soffit strips follow the side walls at the shared museum CEIL_SOFFIT height (4.64 m), preserving the open sky between them. Thin dark lines follow their inner underside edges.
++Two fixed parallel floor lines now frame a 4.8 m-wide passage, with equal 2 m graduation spacing. The four faint full-length guide lines are removed; short viewing marks and labels still identify each arrangement. Perspective changes with the visitor's view while the physical spacing stays constant. All low horizontal marks use 3 mm-thick, non-shadow-casting meshes close to the floor; elevated lines keep their visible volume.
+ 
+-The entrance mark is at map position (9.5, 0, 10.5). At eye height 1.65 m, a separate suspended segment projects onto part of the left ceiling edge. Its endpoints are the corresponding edge endpoints moved 55% of the distance from that eye. Both segments remain parallel to the room's depth axis; shifting the eye breaks their projected alignment. The floating line is about 3.28 m high. In stereo or at another eye height the overlap is approximate rather than guaranteed: the visitor is not repositioned or camera-locked. These architectural marks have no colliders or pickup interaction; all 27 rearrangeable bodies are retained. The ceiling strips and floor lines are authored for this hall's existing dimensions and gallery placement.
++Two 2.4 m-wide side canopies replace the thin strips, at the shared museum CEIL_SOFFIT height (4.64 m). The centre remains open to the sky. Dark 12 cm lines follow the canopy edges; the closer suspended segment is scaled to the same angular width from the nominal eye. Map-local props_deny suppresses automatically dressed ceiling_vent and cable_tray so they do not float in the opening or compete with the study. Existing artworks are retained.
++
++At the entrance strip (map x=8..11, z=10.5), an eye at (9.5, 1.65, 10.5) projects the suspended segment onto part of the left edge. The endpoints are 38% of the corresponding edge vectors from that eye, bringing the segment to about 2.76 m above the floor. The 3 m-wide mark also allows lower/taller visitors to seek the alignment laterally: all such eye positions lie in the plane containing the two parallel lines. Geometry does not follow the visitor. Stereo gives each eye a different view, so perfect binocular overlap is not promised. The authored mono view and selected lower/taller eye positions can be checked without claiming headset acceptance.
++
++These fixed architectural meshes have no colliders or pickup interaction; all 27 rearrangeable bodies remain. Room coordinates are specific to this hall and gallery placement. The near line's relation to the edge becomes much easier to see after a small sideways move; no camera locking or automatic motion is used.

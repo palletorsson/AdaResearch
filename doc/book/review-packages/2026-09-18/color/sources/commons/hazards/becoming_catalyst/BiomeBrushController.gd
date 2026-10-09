@@ -1,0 +1,366 @@
+# BiomeBrushController.gd — biome paint logic for the catalyst's biome_brush stone
+#
+# The desktop scrubber's brush, driven by a VR controller. The catalyst feeds it
+# the controller pose each frame (update); this owns the per-element density
+# field, the ground ghost, the live repaint, and the save payload. Mirrors how
+# voxel mode delegates to VoxelEditController. See doc/VR_EDITING_SYSTEM.md and
+# doc/PAINT_LAYERS.md.
+
+class_name BiomeBrushController
+extends Node3D
+
+const DistributionField = preload("res://commons/biome_layers/distribution_field.gd")
+const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
+const ELEMENTS: Array = BiomeElementsLib.NAMES   # single source of truth (BiomeElements)
+
+# Biome painting wraps a MARGIN RING around the grid (mirrors the desktop editor's
+# GridEditorDesktop3D.BIOME_MARGIN). The paintable/rendered area spans grid cells
+# [-M, grid_w+M) × [-M, grid_d+M), so the brush (and the foliage/ground it commits)
+# reaches all the way AROUND the grid, not just on its cells. The per-element fields,
+# the ghost, and the save payload are all sized to this biome AREA. The render path
+# (GridSystem.repaint_biome → _handle_biome_ring) is told the margin so the substrate +
+# scatter span the same area, offset by -M cells so a field cell at (cz+M, cx+M) lands
+# at world cell (cx, cz) — i.e. negative world cells around the grid.
+const BIOME_MARGIN := 12   # cells of paintable ground on every side of the grid
+
+var grid_w: int = 10
+var grid_d: int = 10
+var cube: float = 1.0
+
+var _grid: Node = null               # GridSystem (repaint_biome)
+var _data: Node = null               # GridDataComponent (existing paint_layers)
+var _elem_idx: int = 0
+var _radius: int = 2
+var _strength: float = 0.6
+var _height: float = 1.5             # TARGET height (metres) for the CURRENT ground stroke (BIOME tab HEIGHT slider, 0.5..4.0). Baked into the ground field per-cell at paint time; different strokes keep different heights.
+var _density: float = 1.0            # scatter density for every painted layer (BIOME tab DEFINE slider; was 1.0)
+var _fields: Dictionary = {}         # element -> PackedFloat32Array (biome AREA = _biome_w()*_biome_d(), margin-offset)
+var _element_artifacts: Dictionary = {}  # element -> Array[name] (the VR picker's lists)
+var _stroking: bool = false
+var _preview_tick: int = 0
+var _stroke_reacted: Dictionary = {}  # biome-7: cells already reacted this stroke
+
+var _ghost: MeshInstance3D = null
+var _ghost_mat: StandardMaterial3D = null
+
+
+## Find GridSystem + GridDataComponent and size to the current map's grid.
+func setup() -> void:
+	_grid = _find(get_tree().root, "GridSystem")
+	_data = _find(get_tree().root, "GridDataComponent")
+	if _data and _data.has_method("get_grid_dimensions"):
+		var d: Vector3i = _data.get_grid_dimensions()
+		grid_w = maxi(1, d.x)
+		grid_d = maxi(1, d.z)
+	if _grid and "cube_size" in _grid:
+		cube = _grid.cube_size
+	_build_ghost()
+
+
+func active_element() -> String:
+	return ELEMENTS[_elem_idx]
+
+
+func cycle_element() -> void:
+	_elem_idx = (_elem_idx + 1) % ELEMENTS.size()
+	_recolour_ghost()
+
+
+## Set the active element by name (from the left-hand menu). No-op if unknown.
+func set_element(element_name: String) -> void:
+	var idx: int = ELEMENTS.find(element_name)
+	if idx >= 0:
+		_elem_idx = idx
+		_recolour_ghost()
+
+
+## Toggle an artifact in the ACTIVE element's list (from the menu's picker). The
+## element's painted layer then carries `artifacts: [...]` so object_scatter places
+## those instead of the default morphology. Returns the updated list.
+func toggle_artifact(artifact_name: String) -> Array:
+	var el: String = active_element()
+	var lst: Array = _element_artifacts.get(el, [])
+	if artifact_name in lst:
+		lst.erase(artifact_name)
+	else:
+		lst.append(artifact_name)
+	_element_artifacts[el] = lst
+	return lst
+
+
+## The active element's artifact list (for the menu to mark selected entries).
+func active_artifacts() -> Array:
+	return _element_artifacts.get(active_element(), [])
+
+
+## Set the brush radius in cells (from the menu's size slider).
+func set_radius(r: int) -> void:
+	_radius = clampi(r, 0, 8)
+
+
+## Set the brush pressure / strength (from the menu's pressure slider).
+func set_strength(s: float) -> void:
+	_strength = clampf(s, 0.1, 1.0)
+
+
+## Set the painted ground/biome rise (from the menu's HEIGHT slider).
+func set_height(h: float) -> void:
+	_height = clampf(h, 0.5, 4.0)
+
+
+## Set the scatter density applied to every painted layer (from the menu's DEFINE slider).
+func set_density(d: float) -> void:
+	_density = clampf(d, 0.1, 1.0)
+
+
+## Biome-area dimensions = grid + a margin ring on every side. The painted fields,
+## the sparse payload, and the rendered substrate/scatter are all sized to this; the
+## render path is offset by -M cells so biome-local cell 0 maps to world cell -M —
+## foliage/ground wrap the grid instead of sitting only on it.
+func _biome_w() -> int:
+	return grid_w + 2 * BIOME_MARGIN
+
+
+func _biome_d() -> int:
+	return grid_d + 2 * BIOME_MARGIN
+
+
+## Margin-offset field index for a grid cell (cx, cz), where cx/cz may be NEGATIVE
+## (in the margin ring). Returns -1 if the cell falls outside the biome area.
+func _field_index(cx: int, cz: int) -> int:
+	var bw: int = _biome_w()
+	var bd: int = _biome_d()
+	var fx: int = cx + BIOME_MARGIN
+	var fz: int = cz + BIOME_MARGIN
+	if fx < 0 or fx >= bw or fz < 0 or fz >= bd:
+		return -1
+	return fz * bw + fx
+
+
+func has_strokes() -> bool:
+	return not _fields.is_empty()
+
+
+func set_idle() -> void:
+	if _ghost:
+		_ghost.visible = false
+
+
+## Called every frame by the catalyst while in biome_brush mode. `paint`/`erase`
+## are the trigger/grip held states. Stamps continuously while held; on release,
+## rebuilds the biome live with the painted field.
+func update(origin: Vector3, forward: Vector3, paint: bool, erase: bool) -> void:
+	var cell := _ray_cell(origin, forward)
+	# A miss returns the INT_MIN sentinel; legit cells (including the margin ring, where
+	# cell.x can be as low as -BIOME_MARGIN) are all > -BIOME_MARGIN-1, so this rejects only misses.
+	if cell.x < -BIOME_MARGIN:
+		if _ghost:
+			_ghost.visible = false
+		if _stroking:
+			_stroking = false
+			_commit()
+		return
+	if _ghost:
+		# Ghost rides the WORLD cell (cell.x/cell.y may be negative — the ring around the grid).
+		_ghost.visible = true
+		_ghost.global_position = Vector3((float(cell.x) + 0.5) * cube, 0.05, (float(cell.y) + 0.5) * cube)
+	if paint or erase:
+		_stamp(cell.x, cell.y, erase)
+		_stroking = true
+		_live_ground_preview()
+	elif _stroking:
+		_stroking = false
+		_commit()
+
+
+## Brush fields (mode:"brush") + the map's other (non-painted) layers — the
+## payload for both live repaint and the B-save POST.
+func paint_layers_payload() -> Array:
+	var out: Array = []
+	var painted: Dictionary = {}
+	for el in _fields:
+		painted[el] = true
+		var layer := {"element": el, "mode": "brush", "density": _density, "brush": _brush_payload(_fields[el])}
+		if el == "ground":
+			# The ground field now stores the actual height PER CELL (in metres), so the
+			# substrate renders the field DIRECTLY: height = field × 1.0. HEIGHT is baked into
+			# the field per-cell at paint time (see _stamp), so it must NOT be re-applied here —
+			# otherwise the slider would scale ALL painted ground uniformly (a flat plateau).
+			layer["height"] = 1.0
+		elif el == "shader":
+			var c := _elem_colour(el)
+			layer["color"] = [c.r, c.g, c.b]   # the colour painted into the ground texture
+		var arts: Array = _element_artifacts.get(el, [])
+		if not arts.is_empty():
+			layer["artifacts"] = arts.duplicate()   # object_scatter places these here
+		out.append(layer)
+	# Elements with a picked artifact list but no brush stroke → scatter them by a
+	# default distribution so picking alone populates the field (matches desktop).
+	for el in _element_artifacts:
+		if painted.has(el) or (_element_artifacts[el] as Array).is_empty():
+			continue
+		painted[el] = true
+		out.append({"element": el, "mode": "random", "density": _strength,
+			"artifacts": (_element_artifacts[el] as Array).duplicate()})
+	if _data and _data.has_method("get_paint_layers"):
+		for layer in _data.get_paint_layers():
+			if layer is Dictionary and not painted.has(str(layer.get("element", ""))):
+				out.append(layer)
+	return out
+
+
+# ── internals ─────────────────────────────────────────────────────────
+func _commit() -> void:
+	_stroke_reacted.clear()  # biome-7: next stroke may react the same cells again
+	if _grid == null or not _grid.has_method("repaint_biome"):
+		return
+	# Pass the brush margin so GridSystem sizes the substrate + scatter to the biome AREA
+	# and offsets it by -M cells (foliage/ground wrap the grid). repaint_biome's margin
+	# param defaults to 0, so the normal game biome is untouched — only the brush opts in.
+	_grid.repaint_biome(paint_layers_payload(), BIOME_MARGIN)
+
+
+## While painting "ground", rebuild just the ground mesh live (throttled) so the
+## terrain rises under the brush — the full rebuild (collider) lands on release.
+func _live_ground_preview() -> void:
+	if ELEMENTS[_elem_idx] != "ground":
+		return
+	_preview_tick += 1
+	if _preview_tick % 3 != 0:
+		return
+	if _grid and _grid.has_method("preview_ground") and _fields.has("ground"):
+		# The ground field IS the height (metres) per cell now, so render it directly: max_h=1.0
+		# (height = field × 1.0). The HEIGHT slider is baked into the field per-cell at paint
+		# time (see _stamp), not re-applied here — different strokes keep their own heights.
+		# The field is over the biome AREA (_biome_w × _biome_d), matching the substrate's dims;
+		# the margin offsets the preview so the live hills rise around the grid, not just on it.
+		_grid.preview_ground(_fields["ground"], _biome_w(), _biome_d(), 1.0, BIOME_MARGIN)
+
+
+## Raycast the controller pose to the ground plane → biome-area cell. ACCEPTS cells
+## across the whole biome area [-M, grid_w+M) × [-M, grid_d+M) — cx/cz may be NEGATIVE
+## (in the margin ring around the grid). Rejects only outside the ring (returns a sentinel
+## whose .x is the failure marker; callers check cx < -M via the ring bound). The +M
+## offset is applied at field-index time (_field_index), not here, so the returned cell is
+## the WORLD cell. A miss returns Vector2i(INT_MIN, INT_MIN) so a legit -M cell isn't a miss.
+func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
+	var miss: Vector2i = Vector2i(-2147483648, -2147483648)
+	if absf(forward.y) < 1e-5:
+		return miss
+	var t: float = -origin.y / forward.y
+	if t < 0.0:
+		return miss
+	var hit: Vector3 = origin + forward * t
+	var cx: int = int(floor(hit.x / cube))
+	var cz: int = int(floor(hit.z / cube))
+	# Accept the whole biome AREA (grid + margin ring); reject only outside the ring.
+	if cx < -BIOME_MARGIN or cx >= grid_w + BIOME_MARGIN or cz < -BIOME_MARGIN or cz >= grid_d + BIOME_MARGIN:
+		return miss
+	return Vector2i(cx, cz)
+
+
+## Stamp the active element's per-cell field with a radial-falloff brush. ELEMENT-AWARE:
+##   • "ground" — the field stores HEIGHTS IN METRES (not 0..1 density). Each painted cell
+##     eases toward a per-cell target lerpf(0.5, HEIGHT, falloff): centre reaches the HEIGHT
+##     slider value, edge lands on the 0.5 minimum; moved by the brush strength, clamped to
+##     [0, 4]. ERASE eases the cell toward 0. So HEIGHT is the TARGET for THIS stroke —
+##     different strokes at different HEIGHT values keep their different heights, and painted
+##     ground never drops below 0.5.
+##   • non-ground — the EXISTING 0..1 scatter density (add/subtract strength·falloff). UNCHANGED.
+func _stamp(cx: int, cz: int, erase: bool) -> void:
+	# biome-7: the declared layer answers the brush — once per cell per stroke
+	# (stamps land every frame while held; the reaction should not). The brush
+	# is a catalyst mode, so it fires its own typed trigger. Group-miss no-op
+	# on maps without a declared layer.
+	var rkey: String = "%d,%d" % [cx, cz]
+	if not _stroke_reacted.has(rkey):
+		_stroke_reacted[rkey] = true
+		var biome: Node = get_tree().get_first_node_in_group("biome_grid")
+		if biome != null and biome.has_method("react"):
+			biome.react(cx, cz, "catalyst.biome_brush")
+	var el: String = ELEMENTS[_elem_idx]
+	var need: int = _biome_w() * _biome_d()
+	if not _fields.has(el):
+		var nf := PackedFloat32Array()
+		nf.resize(need)
+		_fields[el] = nf
+	var field: PackedFloat32Array = _fields[el]
+	# Grow a stale field if the grid (hence the biome area) changed since allocation.
+	if field.size() != need:
+		field.resize(need)
+	var is_ground: bool = (el == "ground")
+	for dz in range(-_radius, _radius + 1):
+		for dx in range(-_radius, _radius + 1):
+			var x: int = cx + dx
+			var z: int = cz + dz
+			# Margin-offset index; -1 if the footprint cell falls outside the biome area.
+			# x/z (and the centre cx/cz) may be NEGATIVE — anywhere in the ring around the grid.
+			var i: int = _field_index(x, z)
+			if i < 0:
+				continue
+			var dist: float = sqrt(float(dx * dx + dz * dz))
+			if dist > float(_radius) + 0.001:
+				continue
+			var fall: float = 1.0 - dist / (float(_radius) + 0.0001)
+			if is_ground:
+				# Field holds METRES. Ease toward the per-cell target height (centre = HEIGHT
+				# slider, edge = 0.5 floor); erase eases toward 0. Clamp to [0, 4].
+				if erase:
+					field[i] = clampf(lerpf(field[i], 0.0, _strength * fall), 0.0, 4.0)
+				else:
+					var target: float = lerpf(0.5, _height, fall)
+					field[i] = clampf(lerpf(field[i], target, _strength * fall), 0.0, 4.0)
+			else:
+				# Non-ground: 0..1 scatter density (unchanged).
+				if erase:
+					field[i] = maxf(0.0, field[i] - _strength * fall)
+				else:
+					field[i] = minf(1.0, field[i] + _strength * fall)
+
+
+## Brush field → compact sparse {w,d,cells} form for the saved/payload layer
+## (only painted cells, not a dense grid of zeros). Built over the biome AREA
+## (_biome_w × _biome_d) so the mask carries the whole ring around the grid; the
+## render path's -M offset maps biome-local cell 0 → world cell -M. Distribution._read_brush decodes.
+func _brush_payload(field: PackedFloat32Array) -> Dictionary:
+	return DistributionField.field_to_sparse(field, _biome_w(), _biome_d())
+
+
+func _elem_colour(el: String) -> Color:
+	return BiomeElementsLib.ui_color(el)
+
+
+func _build_ghost() -> void:
+	if _ghost:
+		return
+	_ghost = MeshInstance3D.new()
+	_ghost.name = "BiomeBrushGhost"
+	_ghost.top_level = true
+	var disc := CylinderMesh.new()
+	disc.top_radius = 0.30
+	disc.bottom_radius = 0.30
+	disc.height = 0.02
+	_ghost.mesh = disc
+	_ghost_mat = StandardMaterial3D.new()
+	_ghost_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_ghost_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_ghost.material_override = _ghost_mat
+	add_child(_ghost)
+	_recolour_ghost()
+	_ghost.visible = false
+
+
+func _recolour_ghost() -> void:
+	if _ghost_mat:
+		var c := _elem_colour(ELEMENTS[_elem_idx])
+		_ghost_mat.albedo_color = Color(c.r, c.g, c.b, 0.55)
+
+
+func _find(node: Node, node_name: String) -> Node:
+	if node.name == node_name:
+		return node
+	for child in node.get_children():
+		var found := _find(child, node_name)
+		if found:
+			return found
+	return null

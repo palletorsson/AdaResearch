@@ -1,0 +1,46 @@
+{
+  "started": "2026-09-14T17:26:32+02:00",
+  "finished": "2026-09-14T17:26:47+02:00",
+  "pid": 34504,
+  "exit": 0,
+  "checks": 2,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/architecture_probe_base.gd": "9eef616b29e19a51776a1e8d962b447f762fa7083770b1e0f2fc2c433063148a",
+    "ada_run/architecture_acceptance.gd": "18f65fa8570e00f8b74a0215bb282df75e377d8d8597fb158264467196868165",
+    "commons/maps/LSystems_Architecture/map_data.json": "77ed7b02a046784c7fa4f504905fcd185a26775e74e8d5e0258b864d155e0843",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/architecture-review-2026-09-14/review-plan.json": "eaa585d045558568772144fc635cb8ca3dc6953212d2ad0cd99d51d1f8d4b390",
+    "commons/hazards/catalyst_foe/catalyst_vent.tscn": "79d959157c4197832740602282a52548503bf32b2af66ea2dd3d8105748b2f21",
+    "commons/hazards/catalyst_foe/catalyst_vent.gd": "ba6ab22715457172d104e2186fa291d376f86223e269ecc51e44e94804eedfe1",
+    "commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn": "885c2c70533ae9c8200440e79baa8d5efc8536bc34dfa12bc81809dd2f2a8e12",
+    "commons/hazards/becoming_catalyst/catalyst_prompter_box.gd": "5f3da8c4b02626ee40a2e6a09efa205201c88e51ffcebfd4d435026885cf4251",
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "commons/artifacts/dragon_room/dragon_room.tscn": "4b0d95887fb43d772edbb3fe45561690b088d0006753cda469b5020875363b7e",
+    "commons/artifacts/dragon_room/dragon_room.gd": "055bc1a861b404434244cea76ae22b17655ebf87742f5656c64a587f53ec97ae",
+    "algorithms/lsystems/Architecture/CityGenerator.tscn": "0e01dfb050bd5398f07d4646e6ee0edfc11aee3729c516dfd0d34305f74dc2e5",
+    "algorithms/lsystems/Architecture/CityGenerator.gd": "36455be1ad014c587088cc0700d87072ff1a1aa983b405fadbb0b406ee4c4866",
+    "algorithms/lsystems/grammar_seed/grammar_seed.tscn": "4b98962fecdea739986d28b5ae5dc1a6c7c712b5cd4622e286f75fafe03c5707",
+    "algorithms/lsystems/grammar_seed/grammar_seed.gd": "415144541831d4ca7d401ee2e313ec32d624b919403df725eb37c8ca5eae7bc5",
+    "commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn": "51fa3c84fb3faad0b53eb28eda01e6446dc562861b840c04ac767bccd71dc110",
+    "commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd": "45e2d40e703fc0f4b04a582d368e03116859de7753ad278ea10672aff5c11f22",
+    "commons/mesh_grammar/mesh_grammar_node.tscn": "2a3820aa7335a595a1dfca047a1ce534ec045b9528ce49c2aa2cef26a4626882",
+    "commons/mesh_grammar/mesh_grammar_node.gd": "e1170a3931707e44a3fde3eb5225c155f47a74531e87af81029da8975db0279e",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "80206570338a6ddc3a704a783131c0d0c905de26a5e41b0777c7dabc18210972",
+    "commons/data/trunk_branches.json": "7597e41b1f982efcf8f3083667401b6102c53b4fa9f7778ec55566c6877d98b7",
+    "commons/maps/LSystems_Architecture/final.md": "cdbf268cd1bcf7ee1e6ab14cb5bd5d5c332eb48e9b7eaf80018d143f1d622fc3"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

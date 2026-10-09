@@ -1,0 +1,129 @@
+{
+ "chapter": "tiling",
+ "title": "Tiling and Symmetry",
+ "pearls": [
+  {
+   "pearl": "pattern foundry",
+   "map": "Pattern_Foundry",
+   "lines": [
+    {
+     "token": "pattern_tile_4x4",
+     "text": "pattern tile 4x4",
+     "by": "astra"
+    },
+    {
+     "token": "pattern_tile_mirror",
+     "text": "pattern tile mirror",
+     "by": "astra"
+    }
+   ],
+   "hero": "pattern_tile_4x4"
+  },
+  {
+   "pearl": "tutorial pattern",
+   "map": "Tutorial_Pattern",
+   "lines": [
+    {
+     "token": "pattern_maker_station",
+     "text": "pattern maker station",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "pattern_maker_station"
+  },
+  {
+   "pearl": "array patterns",
+   "map": "Array_Patterns",
+   "lines": [
+    {
+     "token": "pattern_tunnel_machine",
+     "text": "pattern tunnel machine",
+     "by": "astra"
+    },
+    {
+     "token": "pattern_tile_brick",
+     "text": "pattern tile brick",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "pattern_tunnel_machine"
+  },
+  {
+   "pearl": "symmetry seventeen",
+   "map": "Symmetry_Seventeen",
+   "lines": [
+    {
+     "token": "vr_tile_editor",
+     "text": "vr tile editor",
+     "by": "astra"
+    },
+    {
+     "token": "wallpaper_cage",
+     "text": "wallpaper cage",
+     "by": "astra"
+    }
+   ],
+   "join": true,
+   "hero": "vr_tile_editor"
+  },
+  {
+   "map": "Ribbon_Patterns_01",
+   "pearl": "ribbon patterns 01",
+   "title": "Structure and repetition",
+   "hero": "grid_2d_4x4",
+   "join": true,
+   "lines": [
+    {
+     "token": "grid_2d_4x4",
+     "text": "grid 2d 4x4",
+     "by": "astra"
+    },
+    {
+     "token": "grid_3d_4x4x4",
+     "text": "grid 3d 4x4x4",
+     "by": "astra"
+    }
+   ]
+  },
+  {
+   "map": "Ribbon_Patterns_02",
+   "pearl": "ribbon patterns 02",
+   "title": "Sampling and comparison",
+   "hero": "SimultaneousContrast",
+   "join": true,
+   "lines": [
+    {
+     "token": "SimultaneousContrast",
+     "text": "SimultaneousContrast",
+     "by": "astra"
+    },
+    {
+     "token": "MetamerismLab",
+     "text": "MetamerismLab",
+     "by": "astra"
+    }
+   ]
+  },
+  {
+   "map": "Ribbon_Patterns_03",
+   "pearl": "ribbon patterns 03",
+   "title": "Signals and glitches",
+   "hero": "minimalglitch",
+   "join": true,
+   "lines": [
+    {
+     "token": "minimalglitch",
+     "text": "minimalglitch",
+     "by": "astra"
+    },
+    {
+     "token": "textureglitch",
+     "text": "textureglitch",
+     "by": "astra"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,306 @@
+--- before/commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd
++++ commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd
+@@ -5,13 +5,13 @@
+ ## lineage: the Catenary hero — Gaudí's upside-down trick done as laundry. Three
+ ##   washing lines sag between poles, each a true catenary (cosh, not a guess), pegged
+ ##   with towels and shirts; and ABOVE each line hangs its ghost: the same curve
+-##   mirrored upward as a pale arch, because a hanging chain flipped is a standing
+-##   vault. The washing knows structural engineering; the cathedral is implied.
+-## essence: a chain settles where pulling tension along itself costs least - y =
+-##   a·cosh(x/a). Nobody drew it: gravity solved it. Mirror the solution and
+-##   compression replaces tension - the arch that stands is the chain that hung.
+-## truth: form is the answer to a minimization problem. The laundry finds it every
+-##   time, without being asked.
++##   mirrored upward as a pale arch. The cathedral is implied by a shared curve.
++## essence: sample a·cosh(x/a) with three chosen sag parameters, then mirror it.
++##   This is analytic geometry, not a settling chain or masonry simulation. The
++##   clothes are decorative: adding them does not change the curve's load.
++## truth: a physical hanging model can inform a compression structure under
++##   corresponding loads and supports. This drawing makes the inversion visible;
++##   it does not test whether the mirrored structure stands.
+ ##
+ ## The 2026-08-27 category-heroes pass, formfinding.
+ 
+@@ -62,9 +62,19 @@
+ 		foot.position = Vector3(sx, 0.04, 0.0)
+ 		foot.material_override = _matte_mat(Color(0.12, 0.12, 0.14), 0.9)
+ 		add_child(foot)
+-	# crossbars so three lines can share two poles
+-	for z in [-0.8, 0.0, 0.8]:
+-		pass  # lines anchor at pole tops offset in z via their own geometry
++	# All analytic line endpoints meet one of these two support rails. The rails
++	# make the chosen boundary visible; they do not solve forces in the ropes.
++	var z_min := -0.8
++	var z_max := maxf(z_min, float(sags.size() - 2) * 0.8)
++	for index in 2:
++		var crossbar := MeshInstance3D.new()
++		crossbar.name = "AnchorCrossbar%d" % index
++		var crossbar_mesh := BoxMesh.new()
++		crossbar_mesh.size = Vector3(0.10, 0.10, z_max - z_min + 0.20)
++		crossbar.mesh = crossbar_mesh
++		crossbar.position = Vector3((-1.0 if index == 0 else 1.0) * span * 0.5, pole_h, (z_min + z_max) * 0.5)
++		crossbar.material_override = _matte_mat(Color(0.35, 0.22, 0.12), 0.85)
++		add_child(crossbar)
+ 
+ func _build_line(z: float, a: float, idx: int) -> void:
+ 	var n := 30
+@@ -117,8 +127,7 @@
+ 		cloth_mesh.size = Vector3(w, h, 0.015)
+ 		cloth.mesh = cloth_mesh
+ 		cloth.position = Vector3(x, y - h * 0.5, z)
+-		# a towel hangs plumb even on a slope - one more small proof of gravity's
+-		# opinion, and the slight yaw is the wind's counter-signature
++		# Plumb cloth and a slight yaw suggest weight and wind; both are drawn poses.
+ 		cloth.rotation.y = _rng.randf_range(-0.12, 0.12)
+ 		cloth.material_override = _matte_mat(CLOTH[(k + idx) % CLOTH.size()], 0.95)
+ 		add_child(cloth)
+@@ -134,11 +143,14 @@
+ func _build_plaque() -> void:
+ 	var ts := TextScreenScript.new()
+ 	ts.name = "LaundryPlate"
+-	ts.mode = 2
+-	ts.width_m = 0.44
+-	ts.position = Vector3(-span * 0.5 - 0.4, 0.24, 1.15)
+-	ts.rotation.y = deg_to_rad(35.0)
++	# Face the approach from the hall entrance. The old floor pad beside the
++	# left pole overlapped this hall's boundary wall after catalog recovery.
++	ts.mode = 1
++	ts.width_m = 0.65
++	ts.stand_height = 1.15
++	ts.position = Vector3(1.2, 0.0, -1.25)
++	ts.rotation.y = PI
+ 	add_child(ts)
+ 	if ts.has_method("set_text"):
+-		ts.set_text("LAUNDRY LINE CATHEDRAL - y = a cosh(x/a)",
+-			"A chain settles where tension costs least; nobody drew it, gravity solved\nit. Mirror the sag and the arch STANDS - the ghost above each line is\nGaudi's whole method. The washing knew. The cathedral is implied.")
++		ts.set_text("LAUNDRY LINE CATHEDRAL - cosh + reflection",
++			"cosh draws three sags.\nThe clothes add no load.\nMirror it: an arch appears.\nThis is not a gravity solver.")
+--- before/commons/artifacts/calder_mobile/calder_mobile.gd
++++ commons/artifacts/calder_mobile/calder_mobile.gd
+@@ -2,18 +2,18 @@
+ class_name CalderMobile
+ 
+ ## @identity
+-## lineage: a hanging Calder mobile that is actually balanced — every arm obeys the lever
+-##   law τ = w·d, with leaf masses computed from real sheet-aluminium geometry (π r²·t·ρ),
+-##   so each rod would hang level in the world, not just in the eye.
++## lineage: a static Calder-inspired mobile that encodes a chosen lever model.
++##   Nominal disc masses use sheet-aluminium geometry (π r²·t·ρ); rods and wires
++##   are massless in the calculation. No rigid-body balance or wind is simulated.
+ ## essence: a binary tree of steel arms. Build a node's two children first, weigh them, then
+ ##   place the pivot so w_left·d_left = w_right·d_right; the heavier child rides the shorter
+-##   arm. Recurse, and the whole thing balances from a single point at the ceiling.
+-## truth: a mobile is the lever law made into art — Calder's genius was that the weights and
+-##   the lengths are doing real arithmetic while they drift.
++##   arm. Recurse, and the default solved pose satisfies this ideal mass model.
++## truth: the weights and lengths expose arithmetic in a frozen sculpture;
++##   the rendering does not establish the balance of its suggested materials.
+ ##
+ ## use_objects=false → Calder's flat painted discs (red/yellow/blue/black/white). use_objects
+ ## =true → the project's own primitives (point, sphere, pyramid, arch) hung as the weights.
+-## A plaque states the real total mass and the balance principle.
++## A plaque states the total modelled leaf mass and the omitted rod/wire masses.
+ 
+ @export var seed: int = 4
+ @export var use_objects: bool = false
+@@ -24,14 +24,13 @@
+ 
+ ## --- DNA (stage 2, promoted 2026-08-04) --------------------------------------------
+ ## lever — WHETHER THE LAW BINDS. The artifact's whole claim is that τ = w·d is solved at
+-##   every arm, and the claim is checkable from a photograph, because a mobile that does
+-##   not balance hangs crooked. `solved` is the shipped mobile, pivot placed so
++##   every arm in the default pose. `solved` is the shipped mobile, pivot placed so
+ ##   w_l·d_l = w_r·d_r and every rod dead level. `halved` ignores the law and cuts each
+ ##   rod in the middle — the mistake anyone makes who thinks symmetry is balance.
+ ##   `inverted` applies the law with the ratio the wrong way round, the heavier child on
+ ##   the LONGER arm. Both leave a residual moment, and the rod is then hung BY that
+-##   residual instead of pretending it is zero: an honest lie the sculpture tells about
+-##   itself. The residual is derived, not styled — see _build_subtree.
++##   residual instead of pretending it is zero. This tilt is a diagram of the
++##   residual, not a physical equilibrium angle — see _build_subtree.
+ ## evidence — how much of the arithmetic stands beside the sculpture. Family word, taken
+ ##   character for character from force_field_visualizer / weather_vector_field / the 32
+ ##   others; three tiers, not four, because there is no symbolic-assertion-only state
+@@ -103,11 +102,11 @@
+ 	(sub["node"] as Node3D).position = Vector3(0, top_y, 0)
+ 	add_child(sub["node"])
+ 
+-	# the plaque — the real measurement. Withheld below `longhand`: at `trace` the gram
++	# The plaque reports the mass model. Withheld below `longhand`: at `trace` the gram
+ 	# tags stay and the total does not, at `result` the sculpture stands on its own.
+ 	if evidence == "longhand":
+ 		_plaque = _billboard_label(
+-			"ALEXANDER CALDER — mobile\n%s: τ = w·d at every arm\n%d %s · total %.2f kg\n%s" % [
++			"CALDER-INSPIRED — STATIC MOMENT MODEL\n%s: left m·d = right m·d\n%d %s · modelled leaf mass %.2f kg\n%s\nMassless rods and wires; no dynamic solver" % [
+ 				("balanced" if lever == "solved" else "NOT balanced"),
+ 				_n_leaves, ("objects" if use_objects else "discs"), sub["mass"],
+ 				("project primitives" if use_objects else "sheet aluminium, 3 mm")],
+--- before/commons/primitives/tensegrity_triangle/tensegrity_triangle.gd
++++ commons/primitives/tensegrity_triangle/tensegrity_triangle.gd
+@@ -2,19 +2,20 @@
+ class_name TensegrityTriangle
+ 
+ # @identity
+-# essence: a triangle made of three struts and three joints, holding its shape under a load that would fold any other polygon flat. Buckminster Fuller's lesson in one object: the triangle is the only polygon that is rigid — push a square and it racks into a diamond; push a triangle and it simply holds, because its angles are locked by its sides. Three chunky struts, three bright corner nodes, and a slow pulse of compression that the triangle shrugs off. This is the shape that lets domes stand, bridges span, and "doing more with less" become structure.
+-# desire: it wants the player to feel rigidity as a property you can SEE — to watch a force arrive and be refused. It wants to move the triangle out of the register of image (a drawn shape) into the register of structure (a thing that bears weight), and to make Fuller's ethic legible: that the most stable form is also the most economical, three members doing the work that no four-sided frame can.
+-# critical_parameter: strut thickness + the load pulse amplitude. Collapse here is conceptual inversion — a four-bar frame (not built, but implied) that would deform; the triangle's whole meaning is that it does NOT. The φ-move is the locked angle: difference (three different struts, three directions) held in a relation that cannot be racked out of true. Rigidity as the structural form of integrity.
+-# triggers: _ready builds three struts and three joints into a triangle; _process applies a gentle rhythmic compression that the frame absorbs and springs back from — visibly rigid; apply_grid_config rebuilds on DNA change.
+-# emerges: alone it reads as a truss; tiled it becomes a geodesic dome, a space-frame, a Vierendeel refused. Beside `three_points_triangle` (the triangle as image) and `pink_triangle` (the triangle as symbol) it is the triangle as STRUCTURE — the same three points asked to bear load instead of render or mean. Together: a triangle can be seen, can stand, or can speak.
+-# needs: three struts [present]; three joints locking their angles [present]; a load to refuse [compression pulse, present]; the visible springing-back that proves rigidity [present]
+-# relationships: structural sibling of `three_points_triangle` and `pink_triangle`; descendant of `two_points_line` (each strut is a line under compression); ancestor of geodesic domes, space frames, tensegrity masts and every truss in the world-architecture downstream; kin to Fuller, to the spring/soft-body sequence (which is what happens when the joints are NOT locked).
+-# truth: a point is position; a line is relation; a triangle is the relation made rigid — the first structure that holds itself up. Fuller built a career on the fact that nature stabilises with triangles because nothing else stays true under load. To install it in the lab as a thing that visibly refuses a force is to teach that some relations, locked at the right angle, simply do not collapse — and that this stubbornness is the cheapest strength there is.
++# essence: three rendered struts and joints in a triangular arrangement.
++# desire: compare the appearance of rigidity with a tested structural constraint.
++# critical_parameter: load_amplitude controls a prescribed scale pulse, not an applied load.
++# triggers: _ready constructs meshes; _process writes a sine-driven root scale.
++# emerges: a visual squeeze and return without a member-force, hinge or load solver.
++# needs: a triangle/square comparison under shared constraints and loads [not implemented].
++# relationships: follows three_points_triangle; a possible bridge to truss and spring models.
++# truth: the legacy tensegrity name does not make this a tensegrity. The struts touch
++# at their joints and there are no tension cables. The pulse cannot prove rigidity.
+ 
+-## Tensegrity / rigid triangle — the triangle as structure (Buckminster Fuller).
++## Triangular frame diagram — a visual question about structure.
+ ##
+ ## Built procedurally. Origin at the centroid; triangle in the local XY
+-## plane. Struts + joints; a compression pulse the frame springs back from.
++## plane. The entire arrangement scales periodically; no load response is simulated.
+ 
+ # ── DNA ───────────────────────────────────────────────────────────────
+ 
+@@ -142,9 +143,8 @@
+ func _process(delta: float) -> void:
+ 	if not _built:
+ 		return
+-	# Rhythmic compression from above that the rigid triangle absorbs
+-	# and springs back from — squash slightly in Y, hold X. A real
+-	# frame would rack; the triangle just breathes and stays true.
++	# Prescribed visual pulse: squash in Y and widen slightly in X.
++	# This bypasses mechanics; it is not evidence that a frame resists a load.
+ 	_phase += delta * load_speed
+ 	var load: float = maxf(0.0, sin(_phase)) * load_amplitude
+ 	scale = Vector3(1.0 + load * 0.4, 1.0 - load, 1.0)
+--- before/commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd
++++ commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd
+@@ -4,14 +4,12 @@
+ ## @identity
+ ## name: "Fractal antennas & structures"
+ ## tier: large
+-## lineage: a self-similar truss — Eiffel's gusset, recursed until it is its own scaffold.
+-## essence: A room-scale tower whose every strut is itself a little truss of thinner
+-##   struts. Strength lives in the bracing, not the bulk: subdivide a beam into a
+-##   frame and the frame holds more for less metal. Walk inside and you are inside a
+-##   beam that is made of beams.
+-## truth: "max strength, min material — a strut that is struts"
+-## applications: self-supporting structure — recurse the bracing and the same
+-##   skeleton spans further with less mass; the move every tall thing makes.
++## lineage: a recursive stack of braced, tapering storeys.
++## essence: A room-scale tower divided vertically into shorter sections. Leaf
++##   sections receive X-bracing; smaller legs overlap the earlier corner members.
++## truth: repeated bracing makes a visual hierarchy, not a strength optimum.
++## applications: inspect recursive subdivision and a prescribed sway. The artifact
++##   has no load, member-force, buckling or material-efficiency solver.
+ 
+ @export var depth: int = 3
+ @export var tower_height: float = 3.6
+@@ -81,7 +79,7 @@
+ 	root.add_child(_cylinder(apex + Vector3(0.0, 0.18, 0.0), 0.02, 0.36, steel_mat))
+ 	root.add_child(_sphere(apex + Vector3(0.0, 0.4, 0.0), 0.06, _glow_mat(Color(0.95, 0.45, 0.30), 2.4)))
+ 
+-	add_child(_billboard_label("MAX STRENGTH, MIN MATERIAL", Vector3(0.0, 3.6, 0.0), 26, label_col))
++	add_child(_billboard_label("RECURSIVE BRACED STOREYS\nNO LOAD TEST", Vector3(0.0, 3.6, 0.0), 26, label_col))
+ 
+ 
+ func _truss_segment(parent: Node3D, y0: float, y1: float, w_bot: float, w_top: float, d: int, leg_mat: Material, brace_mat: Material) -> void:
+@@ -99,7 +97,7 @@
+ 		parent.add_child(_cylinder_between(corners_b[i], corners_t[i], leg_r, leg_mat))
+ 
+ 	if d <= 1:
+-		# Base case: X-bracing on each of the four faces — the strength is the bracing.
++		# Base case: draw X-bracing on each of the four faces. No strength is measured.
+ 		var br: float = leg_r * 0.55
+ 		for i in range(4):
+ 			var j: int = (i + 1) % 4
+--- before/commons/primitives/parametric/catenoid.gd
++++ commons/primitives/parametric/catenoid.gd
+@@ -1,5 +1,6 @@
+ # Catenoid - A minimal surface (soap film between two rings)
+-# The shape that minimizes surface area for its boundary
++# An analytic minimal surface; a given bounded patch need not be area minimizing.
++# Sampled once as a mesh here, with no soap-film dynamics or stability test.
+ # Parametric form: rotation of a catenary curve (cosh)
+ # Connects to: energy minimization, equilibrium, natural forms
+ 
+--- before/commons/primitives/parametric/catenoid.tscn
++++ commons/primitives/parametric/catenoid.tscn
+@@ -2,6 +2,7 @@
+ 
+ [ext_resource type="Script" path="res://commons/primitives/parametric/catenoid.gd" id="1_script"]
+ 
+-[node name="Catenoid" type="RigidBody3D"]
+-gravity_scale = 0.0
++[node name="Catenoid" type="RigidBody3D"]
++collision_layer = 4
++gravity_scale = 0.0
+ script = ExtResource("1_script")
+--- before/commons/primitives/parametric/helicoid.tscn
++++ commons/primitives/parametric/helicoid.tscn
+@@ -2,6 +2,7 @@
+ 
+ [ext_resource type="Script" path="res://commons/primitives/parametric/helicoid.gd" id="1_script"]
+ 
+-[node name="Helicoid" type="RigidBody3D"]
+-gravity_scale = 0.0
++[node name="Helicoid" type="RigidBody3D"]
++collision_layer = 4
++gravity_scale = 0.0
+ script = ExtResource("1_script")
+--- before/algorithms/wavefunctions/line_builder_3d/cable_builder.gd
++++ algorithms/wavefunctions/line_builder_3d/cable_builder.gd
+@@ -2,14 +2,14 @@
+ 
+ 
+ # @identity
+-# essence: catenary(x) approximated by cubic spline through grabbable control points
++# essence: a cubic spline through grabbable points with authored per-span sag
+ # desire: Grab control points in VR and sculpt hanging cable curves in real-time
+ # critical_parameter: control_point_count — determines degrees of freedom for curve shaping
+ # triggers: moving any control point recomputes the spline and regenerates the cable mesh
+-# emerges: natural catenary sag from gravity acting on flexible curves between fixed points
++# emerges: a hanging-cable appearance from downward Bezier handles, without gravity integration
+ # needs: VR grab on control points [has], cable thickness control [missing]
+ # relationships: depends on Curve3D spline interpolation; contrasts with BigPipeSystem (flexible vs rigid segments); unlocks curve intuition
+-# truth: A hanging cable finds the shape that minimizes potential energy — nature solves calculus of variations.
++# truth: The hand changes a drafted curve; this code neither solves a chain's equilibrium nor conserves its length.
+ 
+ @export var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point.tscn")
+ @export var line_material: ShaderMaterial = preload("res://commons/resourses/shaders/line_shader.tres")
+@@ -25,8 +25,8 @@
+ ## builders in this tier. All three are handed a set of points and asked to make a run
+ ## between them; all three have to answer the same question — does the run admit that
+ ## it has weight? One vocabulary, three different homes on it. This artifact's home is
+-## `catenary`, which is the whole point of it: the identity block says a hanging cable
+-## finds the shape that minimises potential energy. The other four values are the
++## `catenary`, a legacy name for hand-drafted Bezier sag rather than a physical
++## minimisation. The other four values are the
+ ## positions it is arguing AGAINST, made buildable so the argument can be seen.
+ ##
+ ##   chord     weight denied. A taut straight member from anchor to anchor: with the
+@@ -89,7 +89,7 @@
+ 	# Clear and rebuild curve
+ 	curve.clear_points()
+ 
+-	# Add control points with catenary (sag) simulation
++	# Add control points to the authored sag curve.
+ 	for i in range(control_points.size()):
+ 		var pos = to_local(control_points[i].global_position)
+ 		curve.add_point(pos)
+@@ -102,7 +102,7 @@
+ 		var midpoint = (p1 + p2) / 2.0
+ 		var sag_offset = Vector3(0, -gravity_sag * distance * 0.25, 0)
+ 
+-		# Set Bezier handles for natural cable sag
++		# Set Bezier handles for the chosen cable-like sag.
+ 		var handle_length = distance * 0.3
+ 		curve.set_point_out(i, Vector3(handle_length, -gravity_sag * distance * 0.5, 0))
+ 		if i + 1 < control_points.size():

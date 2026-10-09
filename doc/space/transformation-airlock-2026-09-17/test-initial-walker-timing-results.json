@@ -1,0 +1,1013 @@
+{
+	"checks": [
+		{
+			"detail": {
+				"interior_rays": 378,
+				"max_face_error_m": 0.000000362560911071341,
+				"misses": 0
+			},
+			"name": "origin rendered plates and physical front faces agree through 21 poses",
+			"passed": true
+		},
+		{
+			"detail": {
+				"outside_false_hits": 0,
+				"outside_rays": 84
+			},
+			"name": "origin shrinking hull does not keep its old width",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "origin moving physics bodies retain unit scale",
+			"passed": true
+		},
+		{
+			"detail": 114,
+			"name": "origin animation retains existing nodes",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					-0.000960098521318287,
+					-0.618846774101257
+				],
+				"minimum_y": -0.00120930664706975,
+				"side_drift": 0.0,
+				"travel": 1.38115322589874
+			},
+			"name": "origin closed door physically stops a 0.44m capsule",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.00044531689491123,
+					1.65995669364929
+				],
+				"minimum_y": -0.000345216598361731,
+				"side_drift": 0.0,
+				"travel": 3.65995669364929
+			},
+			"name": "origin fully open doorway admits the same capsule",
+			"passed": false
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000437577487900853,
+					-1.65760505199432
+				],
+				"minimum_y": -0.00034516875166446,
+				"side_drift": 0.0,
+				"travel": 3.65760517120361
+			},
+			"name": "origin fully open doorway is passable from the far side",
+			"passed": false
+		},
+		{
+			"detail": {
+				"interior_rays": 378,
+				"max_face_error_m": 0.00000196604992197535,
+				"misses": 0
+			},
+			"name": "translated_yaw180 rendered plates and physical front faces agree through 21 poses",
+			"passed": true
+		},
+		{
+			"detail": {
+				"outside_false_hits": 0,
+				"outside_rays": 84
+			},
+			"name": "translated_yaw180 shrinking hull does not keep its old width",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "translated_yaw180 moving physics bodies retain unit scale",
+			"passed": true
+		},
+		{
+			"detail": 114,
+			"name": "translated_yaw180 animation retains existing nodes",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000240564346313477,
+					-0.618372917175293
+				],
+				"minimum_y": 2.49855852127075,
+				"side_drift": 0.0,
+				"travel": 1.38162708282471
+			},
+			"name": "translated_yaw180 closed door physically stops a 0.44m capsule",
+			"passed": true
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000441789627075195,
+					1.65759181976318
+				],
+				"minimum_y": 2.4996554851532,
+				"side_drift": 0.0,
+				"travel": 3.65759181976318
+			},
+			"name": "translated_yaw180 fully open doorway admits the same capsule",
+			"passed": false
+		},
+		{
+			"detail": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000441312789916992,
+					-1.66446542739868
+				],
+				"minimum_y": 2.49965476989746,
+				"side_drift": 0.0,
+				"travel": 3.66446542739868
+			},
+			"name": "translated_yaw180 fully open doorway is passable from the far side",
+			"passed": false
+		},
+		{
+			"detail": {
+				"empty_hold_seconds": 3.0,
+				"opening_seconds": 4.8
+			},
+			"name": "shipped timing remains a readable opening and empty hold",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "Pit-style ball does not open the door",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "distant visitor does not trigger",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "real XR-layer character approaching opens automatically",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "opening does not relocate or turn the visitor",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "visitor standing in the throat keeps passage open",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "leaving preserves the full empty hold before closing",
+			"passed": true
+		},
+		{
+			"detail": 0.923611111111111,
+			"name": "empty doorway begins closing after its hold",
+			"passed": true
+		},
+		{
+			"detail": {
+				"after": 0.982638888888889,
+				"before": 0.923611111111111
+			},
+			"name": "reentry from the far side reverses closing",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "reentry restores a fully open door",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "door closes fully after the visitor leaves",
+			"passed": true
+		}
+	],
+	"failures": [
+		"origin fully open doorway admits the same capsule",
+		"origin fully open doorway is passable from the far side",
+		"translated_yaw180 fully open doorway admits the same capsule",
+		"translated_yaw180 fully open doorway is passable from the far side"
+	],
+	"limits": [
+		"Standalone artifact on a flat test floor; does not assert final museum placement.",
+		"Real CharacterBody3D capsule and ray queries, not a worn headset or tracked-hand comfort test.",
+		"Uniform scaled plates are checked; raised decorative trim is outside the solid base-plate contract."
+	],
+	"observations": {
+		"origin": {
+			"closed_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					-0.000960098521318287,
+					-0.618846774101257
+				],
+				"minimum_y": -0.00120930664706975,
+				"side_drift": 0.0,
+				"travel": 1.38115322589874
+			},
+			"geometry_samples": [
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.0
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.05
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.1
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.15
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.2
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.25
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0000000596046447753906,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.3
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.35
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.4
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000245756240246919,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000245756240246919,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.45
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000342402614705861,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.5
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000362560911071341,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000362560911071341,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.55
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000362560911071341,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000362560911071341,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.6
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000245756240246919,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000245756240246919,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.65
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000171201307352931,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000171201307352931,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.7
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000119209289550781,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000119209289550781,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.75
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000133280039449346,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000133280039449346,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.8
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000254631146390238,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000254631146390238,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.85
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.9
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.95
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.000000238418579101563,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 1.0
+				}
+			],
+			"open_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.00044531689491123,
+					1.65995669364929
+				],
+				"minimum_y": -0.000345216598361731,
+				"side_drift": 0.0,
+				"travel": 3.65995669364929
+			},
+			"reverse_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000437577487900853,
+					-1.65760505199432
+				],
+				"minimum_y": -0.00034516875166446,
+				"side_drift": 0.0,
+				"travel": 3.65760517120361
+			}
+		},
+		"translated_yaw180": {
+			"closed_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000240564346313477,
+					-0.618372917175293
+				],
+				"minimum_y": 2.49855852127075,
+				"side_drift": 0.0,
+				"travel": 1.38162708282471
+			},
+			"geometry_samples": [
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.0
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.05
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.1
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.15
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.2
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.25
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.3
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000476837158203125,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.35
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.00000196604992197535,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.4
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000095367431640625,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.45
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.5
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.55
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.000000983024960987677,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000095367431640625,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.6
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0000019073486328125,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.00000106624031559477,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.65
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.7
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.75
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.8
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.85
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.9
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 0.95
+				},
+				{
+					"leaves": [
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						},
+						{
+							"face_error_m": 0.0,
+							"missed_inside": 0,
+							"outside_false_hits": 0,
+							"unit_physics_scale": true
+						}
+					],
+					"progress": 1.0
+				}
+			],
+			"open_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000441789627075195,
+					1.65759181976318
+				],
+				"minimum_y": 2.4996554851532,
+				"side_drift": 0.0,
+				"travel": 3.65759181976318
+			},
+			"reverse_walk": {
+				"arrived": false,
+				"local_end": [
+					0.0,
+					0.000441312789916992,
+					-1.66446542739868
+				],
+				"minimum_y": 2.49965476989746,
+				"side_drift": 0.0,
+				"travel": 3.66446542739868
+			}
+		}
+	},
+	"scene": "res://commons/artifacts/transformation_airlock/transformation_airlock.tscn",
+	"source": "res://commons/artifacts/transformation_airlock/transformation_airlock.gd",
+	"source_sha256": "8143080a496bfc6474d009108d81a2bc8fd941e2aa533f86014dd84fb912fff9"
+}

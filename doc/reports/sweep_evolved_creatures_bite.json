@@ -1,108 +1,128 @@
 {
  "sweep": "evolved_creatures",
- "peak_changed_pct": 0.471,
- "subject_pct": 0.268,
- "verdict": "SUBJECT NOT DETECTED - only 0.27% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "peak_changed_pct": 2.427,
+ "subject_pct": 14.642,
+ "verdict": "BITES",
  "variants": [
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "drift"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "uniform"
    },
-   "changed_px": 1665,
-   "changed_pct": 0.288
+   "changed_px": 3995,
+   "changed_pct": 0.692
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "drift"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "culled"
    },
-   "changed_px": 1165,
-   "changed_pct": 0.202
+   "changed_px": 5095,
+   "changed_pct": 0.882
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "drift"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "runaway"
    },
-   "changed_px": 2285,
-   "changed_pct": 0.396
+   "changed_px": 13240,
+   "changed_pct": 2.292
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "drift"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "split"
    },
-   "changed_px": 2141,
-   "changed_pct": 0.371
+   "changed_px": 10588,
+   "changed_pct": 1.833
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "uniform"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "culled"
    },
-   "changed_px": 1087,
-   "changed_pct": 0.188
+   "changed_px": 4921,
+   "changed_pct": 0.852
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "uniform"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "runaway"
    },
-   "changed_px": 2638,
-   "changed_pct": 0.457
+   "changed_px": 14019,
+   "changed_pct": 2.427
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "uniform"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "split"
    },
-   "changed_px": 2586,
-   "changed_pct": 0.448
+   "changed_px": 11440,
+   "changed_pct": 1.981
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "culled"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "runaway"
    },
-   "changed_px": 1778,
-   "changed_pct": 0.308
+   "changed_px": 10219,
+   "changed_pct": 1.769
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "culled"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "split"
    },
-   "changed_px": 1500,
-   "changed_pct": 0.26
+   "changed_px": 6603,
+   "changed_pct": 1.143
   },
   {
    "a": {
+    "freeze_bodies": true,
     "selection": "runaway"
    },
    "b": {
+    "freeze_bodies": true,
     "selection": "split"
    },
-   "changed_px": 2721,
-   "changed_pct": 0.471
+   "changed_px": 13211,
+   "changed_pct": 2.287
   }
  ]
 }

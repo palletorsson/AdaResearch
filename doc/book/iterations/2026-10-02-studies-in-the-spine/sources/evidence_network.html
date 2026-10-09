@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="a40adb46f0df9e96f833879022b6d5c4a02292273d35be1186fcb6c3622f39f7"><title>commons/artifacts/spine_studies/evidence_network.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/evidence_network.gd</p><pre><code>extends &quot;res://commons/artifacts/spine_studies/study_forms.gd&quot;
+## An explicitly fictional record set. A line is inspectable, not an allegation.
+const NAMES := [&quot;Fund&quot;, &quot;Studio&quot;, &quot;Assembly&quot;, &quot;Office&quot;, &quot;Builder&quot;, &quot;Archive&quot;, &quot;Hall&quot;, &quot;Maintenance&quot;]
+# from, to, kind, date, record. All records are authored examples, not historical sources.
+const RECORDS := [
+	[0,1,&quot;grant&quot;,&quot;04-02&quot;,&quot;F01: Fund awards Studio 12 units.&quot;],
+	[0,6,&quot;grant&quot;,&quot;04-03&quot;,&quot;F02: Fund awards Hall 20 units.&quot;],
+	[1,4,&quot;payment&quot;,&quot;04-06&quot;,&quot;P01: Studio pays Builder 8 units.&quot;],
+	[6,4,&quot;payment&quot;,&quot;04-08&quot;,&quot;P02: Hall pays Builder 6 units.&quot;],
+	[6,7,&quot;payment&quot;,&quot;04-09&quot;,&quot;P03: Hall pays Maintenance 2 units.&quot;],
+	[3,2,&quot;report&quot;,&quot;04-10&quot;,&quot;R01: Office reports to Assembly.&quot;],
+	[4,3,&quot;report&quot;,&quot;04-11&quot;,&quot;R02: Builder reports to Office.&quot;],
+	[1,5,&quot;report&quot;,&quot;04-12&quot;,&quot;R03: Studio deposits a report in Archive.&quot;],
+	[7,5,&quot;report&quot;,&quot;04-13&quot;,&quot;R04: Maintenance deposits a report in Archive.&quot;],
+	[5,2,&quot;report&quot;,&quot;04-14&quot;,&quot;R05: Archive sends records to Assembly.&quot;],
+	[2,6,&quot;grant&quot;,&quot;04-15&quot;,&quot;F03: Assembly awards Hall 3 units.&quot;],
+	[3,7,&quot;payment&quot;,&quot;04-16&quot;,&quot;P04: Office pays Maintenance 1 unit.&quot;]]
+const FILTERS := [&quot;all&quot;, &quot;grant&quot;, &quot;payment&quot;, &quot;report&quot;]
+var arrangement := 0
+var filter_index := 0
+var selected := 0
+var selected_node := 0
+var drawing: Node3D
+var record_label: Label3D
+var measure_label: Label3D
+var title: Label3D
+var positions: Array[Vector3] = []
+
+func _ready() -&gt; void:
+	block(Vector3(0,3.5,-4),Vector3(15,6.6,0.16),Color(&quot;eceae2&quot;),true)
+	for x in [-6.8,6.8]: block(Vector3(x,1.7,-4.08),Vector3(0.07,3.4,0.20),Color(&quot;4b4850&quot;),true)
+	title = inscription(&quot;A RELATION NEEDS A RECORD&quot;,Vector3(0,6.2,-3.89),0.006)
+	inscription(&quot;FICTIONAL ADA RECORDS / APRIL 2026 / arrows follow the recorded direction&quot;,Vector3(0,5.77,-3.88),0.0028)
+	record_label = inscription(&quot;&quot;,Vector3(0,0.85,-3.86),0.0036)
+	measure_label = inscription(&quot;&quot;,Vector3(0,1.45,-3.86),0.0031,Color(&quot;993c61&quot;))
+	rebuild()
+
+func visible_edges() -&gt; Array:
+	var edges: Array = []
+	for i in RECORDS.size():
+		if filter_index == 0 or RECORDS[i][2] == FILTERS[filter_index]: edges.append(i)
+	return edges
+
+func degree(node_index: int) -&gt; Vector2i:
+	var result := Vector2i.ZERO
+	for i in visible_edges():
+		var edge: Array = RECORDS[i]
+		if edge[1] == node_index: result.x += 1
+		if edge[0] == node_index: result.y += 1
+	return result
+
+func rebuild() -&gt; void:
+	if drawing: remove_child(drawing); drawing.queue_free()
+	drawing = Node3D.new(); add_child(drawing); positions.clear()
+	for i in NAMES.size():
+		var angle := TAU*float(i)/NAMES.size()
+		var at := Vector3(cos(angle)*5.3,3.68+sin(angle)*1.58,-3.85)
+		if arrangement == 1: at = Vector3((i%4-1.5)*3.3,4.65-float(i/4)*2.0,-3.85)
+		positions.append(at)
+	var edges := visible_edges()
+	if selected not in edges: selected = int(edges[0])
+	for index in edges:
+		var edge: Array = RECORDS[index]
+		var a := positions[edge[0]]; var b := positions[edge[1]]
+		var mid := (a+b)*0.5+Vector3(0,0.38+0.13*(int(index)%3),0.015)
+		var points := PackedVector3Array()
+		for step in 33:
+			var t := float(step)/32.0
+			points.append(a*(1-t)*(1-t)+mid*2*t*(1-t)+b*t*t)
+		var colour := Color(&quot;b74576&quot;) if index == selected else Color(&quot;47454b&quot;)
+		var curve := stroke(points,colour,0.022 if index == selected else 0.009); curve.reparent(drawing)
+		var tip := points[28]; var tangent := (points[28]-points[26]).normalized()
+		var side := Vector3(-tangent.y,tangent.x,0)*0.085
+		var arrow := stroke(PackedVector3Array([tip-tangent*0.20+side,tip,tip-tangent*0.20-side]),colour,0.012); arrow.reparent(drawing)
+	for i in NAMES.size():
+		var ring := PackedVector3Array()
+		for n in 49: ring.append(positions[i]+Vector3(cos(TAU*n/48.0)*0.095,sin(TAU*n/48.0)*0.095,0.03))
+		var line := stroke(ring,Color(&quot;b74576&quot;) if i == selected_node else Color(&quot;37313a&quot;)); line.reparent(drawing)
+		var label := inscription(NAMES[i],positions[i]+Vector3(0,0.23,0.05),0.0033); label.reparent(drawing)
+	var record: Array = RECORDS[selected]
+	record_label.text = &quot;%s → %s / %s / 2026-%s\n%s&quot; % [NAMES[record[0]],NAMES[record[1]],record[2],record[3],record[4]]
+	var count := degree(selected_node)
+	measure_label.text = &quot;%s / %d incoming + %d outgoing = %d incident records / filter: %s&quot; % [NAMES[selected_node],count.x,count.y,count.x+count.y,FILTERS[filter_index]]
+
+func control(index: int) -&gt; void:
+	match index:
+		0: arrangement = (arrangement+1)%2
+		1: filter_index = (filter_index+1)%FILTERS.size()
+		2:
+			var edges := visible_edges(); selected = int(edges[(edges.find(selected)+1)%edges.size()])
+		3: selected_node = (selected_node+1)%NAMES.size()
+		_: arrangement = 0; filter_index = 0; selected = 0; selected_node = 0
+	rebuild()
+</code></pre></body></html>

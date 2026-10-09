@@ -1,0 +1,573 @@
+{
+  "goal_id": "book_isosurfaces",
+  "goal_title": "Book: Isosurfaces: Implicit to Explicit — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in isosurfaces became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "isosurfaces",
+    "order": 17,
+    "phase": "F_order",
+    "title": "Isosurfaces: Implicit to Explicit",
+    "chapters": [
+      "ISO_Introduction",
+      "ISO_LookupTable",
+      "ISO_ShapesGallery",
+      "ISO_TorusGyroid",
+      "ISO_Sculpting",
+      "ISO_FlatTerrain",
+      "ISO_PortalLandscape",
+      "ISO_Caves",
+      "ISO_CaveGeneration",
+      "ISO_AnimatedNoise",
+      "ISO_Metaballs",
+      "ISO_ImplicitModeling",
+      "ISO_RhizomeBody"
+    ],
+    "words": 7223,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Topology_Entropy_Morphogenesis (last of softbodies)",
+      "ISO_Introduction",
+      "ISO_LookupTable",
+      "ISO_ShapesGallery",
+      "ISO_TorusGyroid",
+      "ISO_Sculpting",
+      "ISO_FlatTerrain",
+      "ISO_PortalLandscape",
+      "ISO_Caves",
+      "ISO_CaveGeneration",
+      "ISO_AnimatedNoise",
+      "ISO_Metaballs",
+      "ISO_ImplicitModeling",
+      "ISO_RhizomeBody",
+      "Boolean_Verbs (first of boolean_surfaces)"
+    ],
+    "reading": {
+      "arc": "The sequence takes one idea, a field of values cut at a chosen level, and walks it from a wireframe specimen to a building the visitor stands inside. The first seven halls each put a six-button desk beside an existing GPU field: the intro's LEVEL/SAMPLES, the fifteen-case MARGIN, the gallery's REPERTOIRE/LEVEL, the gyroid's PERIOD/INTRUSION/PROBE, the sculptor's PAIR/ADD/ERASE, the terrain's INTERIOR/TERMS/COLUMN, the portal's TERMS, and every desk has HOLD, which leaves a collisionless copy for comparison. The line of argument is that the same extractor serves different descriptions (chair, cup, gyroid, hand strokes, height fields, composed terms), and that boundary, enclosed volume and passage are three different questions. After ISO_Caves the halls lose their desks and shorten to 330-430 words: cave generation as authored distribution, animated noise as replacement rather than motion, metaballs as a sum crossing a threshold, raymarching as display without triangles, and the rhizome body as a graph with cycles turned into a shell you can enter. The close is right (a connection has to fit a body) but the last five chapters end in 'a useful extension would', describing instruments the rooms do not have.",
+      "holds": [
+        "HOLD: eight of nine desks leave a held copy behind or beside the live specimen, always 'display copy, no collision'. The held-versus-live comparison is the sequence's carried method and its recurring object.",
+        "The refrain that a visible opening is not clearance for a body: intro (hole vs clearance), gyroid (the capsule probe and 'an untested wall must not become evidence of freedom'), terrain (the column counter 'does not decide'), portal, caves ('a counter is not a body'), rhizome ('a connection has to fit a body').",
+        "A name is an intention, the field makes the surface: Cup and Chair in the gallery, 'formula' on the gyroid desk, 'arched' on the terrain and portal desks, 'portal' in the caves, 'entropy' in the hall before.",
+        "The sampling budget as a standing number: 24/16/32 in the intro, then 64 per axis in the gallery, gyroid, sculptor and portal readouts, so 'a narrow feature can be absent from the mesh while present in its formula' recurs with a figure attached.",
+        "The desk grammar itself: 'Press X', a readout line, a RULE card, RESET that keeps the held copy. By the fourth hall the reader knows the instrument before reading the room.",
+        "Level as the movable line: 0.50/0.45/0.55 in the intro, 0.50 fixed while MARGIN moves the crossing, 0/-2/+4/+10 in the gallery, level one on the gyroid, level zero for the sculptor, the shell's wall in the rhizome."
+      ],
+      "hall_notes": [
+        {
+          "hall": "ISO_Introduction",
+          "words": 673,
+          "note": "The noise field as a blue specimen with pink triangle edges; LEVEL 0.50/0.45/0.55, SAMPLES 24/16/32 (13,824/4,096/32,768), HOLD to the right, 0.18 scale making 5.76 m. Every number and both code lines check against VoxelNoiseMarchingCubes.gd and iso_workshop.gd. Reads calmly and sets the three-question refrain (boundary, volume, passage)."
+        },
+        {
+          "hall": "ISO_LookupTable",
+          "words": 616,
+          "note": "The fifteen-case rack; MARGIN moves the values 0.30/0.70 to 0.14/0.54, 0.44/0.84, 0.48/0.88 and the crossing 0.50, 0.10, 0.85, 0.95 with masks fixed; TRACE's gold markers; arrangement 1 = table mask 254. Exact throughout and the 'which view invites you to forget the construction' question is the hall's best line. Says nothing about the Threshold Opinion standing nine cells further on."
+        },
+        {
+          "hall": "ISO_ShapesGallery",
+          "words": 771,
+          "note": "Chair and cup; HOLD copies the middle-column pair; LEVEL 0 to -2 to +4 to +10 over all six fields; the cup as min(max(-inside, outside), handle); REPERTOIRE household/laboratory/abstract/survey; the cup vanishing at -2 with its labelled place left empty. The best-argued gallery hall; the close about escaping a name is a keeper."
+        },
+        {
+          "hall": "ISO_TorusGyroid",
+          "words": 855,
+          "note": "Longest chapter. Torus at 'formula' (weights zero), gyroid with PERIOD 0.5/1/2/4 and INTRUSION erosion, modulation, warp; the quoted shader line is verbatim; the PROBE capsule (0.20/0.35/0.60 m, 1.70 m tall, 12 m rail) is the sequence's first honest clearance test and the chapter is careful about what it does not prove. Dense but every device earns its place."
+        },
+        {
+          "hall": "ISO_Sculpting",
+          "words": 624,
+          "note": "Two deposits 0.90/0.65/0.45 m apart, radius 0.30; ADD/ERASE at a gold target with a quarter-metre brush; the cut as max(field, -brush); order as part of the form; the 500-edit memory. Strong lesson, but it carries 'In VR,' and a sentence of repair history the reader cannot use."
+        },
+        {
+          "hall": "ISO_FlatTerrain",
+          "words": 694,
+          "note": "Turquoise height field with INTERIOR 0/0.3/0.4/0.8 and the 25x25 COLUMN counter; amber composed field with TERMS. Keeps the two experiments apart ('not a matched pair differing by one switch'), the code matches MarchingCubesFlat.glsl and the overhang shader, and the closing note honestly points at the CPU terrain and rhizome at the back."
+        },
+        {
+          "hall": "ISO_PortalLandscape",
+          "words": 572,
+          "note": "The composed field with TERMS hillside to compound and a held bay of matching scale; fine sentences on names arriving before features and on a copy entering 'with different permissions'. But its one work is the same scene the reader just drove as the amber specimen next door, and the chapter presents it as a new landscape."
+        },
+        {
+          "hall": "ISO_Caves",
+          "words": 441,
+          "note": "PORTALS 1/3/7/16 and BURIAL, the enclosing cave's PLUMB and OCTAVES 1/2/3/6, HOLD behind the cave; the queer cave gets two sentences. The closing four lines are the sequence's thesis. The enclosure claim ('above, beside and behind the eye') rests on a 2 %-scale bay token and a desktop-rig review, not a headset walk."
+        },
+        {
+          "hall": "ISO_CaveGeneration",
+          "words": 413,
+          "note": "No desk. Compares this cave with the enclosing one and is honest that noise scale 13.5 vs 3.8, level 0.85 vs 0.88 and extent 300 vs 280 all changed at once. Silent about the second specimen on its stage, which is a hand-written sine tunnel, and it ends in an extension addressed to 'visitors'."
+        },
+        {
+          "hall": "ISO_AnimatedNoise",
+          "words": 395,
+          "note": "Replacement versus travel; correctly calls the blocks boundary-containing cells rather than a mesh (the extractor really emits whole cubes) and names the trig field and the 0.2 s rebuild. No desk; the mc_base tunnel beside the block set is unmentioned; ends in an extension."
+        },
+        {
+          "hall": "ISO_Metaballs",
+          "words": 329,
+          "note": "Shortest hall. EMPLACE column/ring/pair/shell/scatter and KERNEL inverse square/Wyvill/Gaussian/cone over ten sources, HOLD behind. Three one-line regions for the secondary works; the 'small rear specimen' is the largest body in the room and the code block is pseudo-code fenced as gdscript."
+        },
+        {
+          "hall": "ISO_ImplicitModeling",
+          "words": 411,
+          "note": "Explains the ray march well (bounded steps and a finite tolerance are both in the shader: 80 steps, 0.001) and keeps display and collision apart. But it opens as a first meeting with a body the reader passed at the back of ISO_Caves and twice in ISO_Metaballs, and never says this placement's joins are set to 'necked'."
+        },
+        {
+          "hall": "ISO_RhizomeBody",
+          "words": 429,
+          "note": "The plan as a graph with cycles, the shell, cut entrances, mesh and collision chunks: all of it is in rhizome_inside.gd (Kruskal tree plus extra edges, connectivity assert, abs(field) - wall). Asks the reader for a loop and distinguishes a planned cycle from a demonstrated return. A fitting close; the one hall where a two-line code excerpt is missing and would land."
+        }
+      ],
+      "stumbles": [
+        "ISO_PortalLandscape: the reader has just pressed TERMS on this exact scene as the amber specimen in ISO_FlatTerrain; 'The landscape begins with hills' reads as a new object and the same glsl block is quoted twice.",
+        "ISO_Caves: 'The portal landscape is a promise made by a boundary' arrives one hall after Portal Landscape, whose chapter insisted its specimen was not a portal and had no rings; the reader must work out that a second, ringed portal landscape is meant.",
+        "ISO_Metaballs: 'The small rear specimen' is the same raymarched scene as 'the raymarched specimen nearby', standing at scale 1 (a 12 m box) against the nearby one's 0.2.",
+        "ISO_ImplicitModeling: 'Must a surface exist as a triangle mesh before you can see it?' was answered in one sentence in the previous hall, about the same body, which the reader has now met three times.",
+        "ISO_CaveGeneration: 'Compare this cave specimen with the one you have just inspected' and 'Both specimens' are ambiguous on a stage that holds two specimens, one of which is a striped stand-in tunnel and not a field.",
+        "ISO_Sculpting: 'In VR, move a controller' implies the reader might not be in the headset; the next paragraph's 'earlier implementation accidentally' sentence is a changelog.",
+        "ISO_Caves: 'A column can show several crossings, but a counter is not a body' sends the reader looking for a COLUMN readout that is two halls back.",
+        "ISO_LookupTable: the closing handover repeats 'description' three times, and the Threshold Opinion (five surfaces from one field, a resolution row, a brass rack of the fifteen) stands in the hall with no text.",
+        "ISO_CaveGeneration, ISO_AnimatedNoise, ISO_ImplicitModeling, ISO_RhizomeBody: four consecutive halls end in 'A useful extension would', addressed once to 'visitors', describing instruments the reader cannot press."
+      ],
+      "keep": [
+        {
+          "hall": "ISO_Introduction",
+          "quote": "What matters is remembering that a smooth-looking silhouette at a distance does not erase the finite pieces from which this display is made."
+        },
+        {
+          "hall": "ISO_Introduction",
+          "quote": "Absence from the mesh does not establish absence from the underlying field, particularly where a feature falls between widely separated samples. Nor does a visible hole establish clearance for your body."
+        },
+        {
+          "hall": "ISO_LookupTable",
+          "quote": "Which view lets you explain what just happened, and which invites you to forget the construction?"
+        },
+        {
+          "hall": "ISO_ShapesGallery",
+          "quote": "The cup need not remain a cup. But escaping its name will take more than changing the label."
+        },
+        {
+          "hall": "ISO_TorusGyroid",
+          "quote": "If the generator omitted collision because the mesh was too costly, the desk says the probe is unavailable; an untested wall must not become evidence of freedom."
+        },
+        {
+          "hall": "ISO_Sculpting",
+          "quote": "This instrument's memory helps make the body, and also decides what it can cease to remember."
+        },
+        {
+          "hall": "ISO_PortalLandscape",
+          "quote": "Some changes are small; a new word on the desk can arrive more dramatically than a new feature in the surface."
+        },
+        {
+          "hall": "ISO_Caves",
+          "quote": "A portal can be a hole that does not connect; an enclosing cave can be a room with no adequate entrance. The field supplies possibilities. A route is authored through width, collision and a body that can arrive."
+        }
+      ],
+      "handover_in": "Clean. Topology_Entropy_Morphogenesis closes softbodies on a sampled surface with LEVEL, NOISE and RESOLUTION controls and the line 'a body has become a set of relations'. ISO_Introduction picks it up by name ('The porous specimen in the previous room introduced the same distinction between values and visible form') and its own LEVEL/SAMPLES desk reads as a continuation of those controls rather than a restart. Nothing in the intro contradicts the morphogenesis hall.",
+      "handover_out": "Clean and deliberate. ISO_RhizomeBody ends by naming union, intersection and difference and reminding the reader they have met their consequences in joined chambers, wall shells and cut entrances; Boolean_Verbs opens on a box and a sphere and explicitly contrasts CSG with what came before ('Earlier, distance fields let a parameter round the meeting between forms. Here there is no smoothing band') and repeats the sequence's refrain that these exhibits have no collision. The only wrinkle is on the receiving side: Boolean_Verbs has no H1 title where every isosurfaces chapter does.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_isosurfaces.001",
+      "title": "Say this is the amber field from next door, not a new landscape",
+      "spec": "[handover] ISO_PortalLandscape\nQuote: “The landscape begins with hills. Come close enough to see their edges, then lower your viewpoint a little.”\nWhy: The hall's only work resolves to the very scene the reader just drove as the amber specimen in ISO_FlatTerrain, with the same five TERMS rungs and the same density block quoted a second time; the reader repeats the experiment without being told, and what this second pass adds (a held copy of THIS field, the whole ladder with nothing else in view) is never named.\nDo: Open with the continuity: 'The amber field from the last hall stands here alone, with a bay for a held copy. You pressed TERMS beside its neighbour; now walk it through all five names with nothing else in view.' Cut the duplicated glsl block (keep it in FlatTerrain) and spend those lines on what the second pass shows.\nEvidence: commons/artifacts/registry/procgen_extra.json:7899 marchingcubes_portal_landscape.scene = res://.../marchingcubes_overhang_landscape.tscn, the same scene as isosurfaces.json:1479 mc_overhang_landscape; commons/artifacts/timing_machines/iso_portal_workshop.gd:3 TERMS is identical to iso_terrain_workshop.gd:4 TERMS and both call apply_grid_config({landform}); ISO_FlatTerrain/final.md:34-37 and ISO_PortalLandscape/final.md:15-18 quote the same MarchingCubesOverhangTerrain.glsl:255-259 block.\nFile: commons/maps/ISO_PortalLandscape/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_PortalLandscape"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "ISO_PortalLandscape",
+      "quote": "The landscape begins with hills. Come close enough to see their edges, then lower your viewpoint a little.",
+      "why": "The hall's only work resolves to the very scene the reader just drove as the amber specimen in ISO_FlatTerrain, with the same five TERMS rungs and the same density block quoted a second time; the reader repeats the experiment without being told, and what this second pass adds (a held copy of THIS field, the whole ladder with nothing else in view) is never named.",
+      "proposal": "Open with the continuity: 'The amber field from the last hall stands here alone, with a bay for a held copy. You pressed TERMS beside its neighbour; now walk it through all five names with nothing else in view.' Cut the duplicated glsl block (keep it in FlatTerrain) and spend those lines on what the second pass shows.",
+      "evidence": "commons/artifacts/registry/procgen_extra.json:7899 marchingcubes_portal_landscape.scene = res://.../marchingcubes_overhang_landscape.tscn, the same scene as isosurfaces.json:1479 mc_overhang_landscape; commons/artifacts/timing_machines/iso_portal_workshop.gd:3 TERMS is identical to iso_terrain_workshop.gd:4 TERMS and both call apply_grid_config({landform}); ISO_FlatTerrain/final.md:34-37 and ISO_PortalLandscape/final.md:15-18 quote the same MarchingCubesOverhangTerrain.glsl:255-259 block.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.002",
+      "title": "The 'small rear specimen' is the largest body in the room",
+      "spec": "[encounter] ISO_Metaballs\nQuote: “The small rear specimen is the compact reminder: several influences can become one visible mass, but the threshold still decides where the body ends.”\nWhy: The rear token has no scale field so it stands at 1.0, a 12 m raymarch box, while 'the raymarched specimen nearby' is the same scene at 0.2; the reader is told the biggest object in the hall is the small one, and that it is a summed-influence extraction when it is the same SDF ray march as the one nearby.\nDo: Either add the scale to the token, `metaballs:0:2:0.2` in commons/maps/ISO_Metaballs/map_data.json row 28, so the rear body really is the compact one, or rewrite the sentence: 'At the back the same raymarched body stands at full size; the threshold that ends it is the ray's stopping distance, not a sum.'\nEvidence: ISO_Metaballs/map_data.json row 28 `metaballs:0:2` (3-part token, legacy rot:y with no scale: commons/grid/GridInteractablesComponent.gd:1533-1546) vs row 22 `raymarched_metaballs:0:0:0.2`; both resolve to implicitsurfacemodeling/metaballs/metaballs.tscn (procgen_extra.json:8449, isosurfaces.json:1980 kin note); metaballs.gd:115-116 BoxMesh 12 m; ada_run/em_bake.json segment 'isosurfaces|iso metaballs': raymarched_metaballs seals 4 cells, metaballs seals 0.\nFile: commons/maps/ISO_Metaballs/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Metaballs"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ISO_Metaballs",
+      "quote": "The small rear specimen is the compact reminder: several influences can become one visible mass, but the threshold still decides where the body ends.",
+      "why": "The rear token has no scale field so it stands at 1.0, a 12 m raymarch box, while 'the raymarched specimen nearby' is the same scene at 0.2; the reader is told the biggest object in the hall is the small one, and that it is a summed-influence extraction when it is the same SDF ray march as the one nearby.",
+      "proposal": "Either add the scale to the token, `metaballs:0:2:0.2` in commons/maps/ISO_Metaballs/map_data.json row 28, so the rear body really is the compact one, or rewrite the sentence: 'At the back the same raymarched body stands at full size; the threshold that ends it is the ray's stopping distance, not a sum.'",
+      "evidence": "ISO_Metaballs/map_data.json row 28 `metaballs:0:2` (3-part token, legacy rot:y with no scale: commons/grid/GridInteractablesComponent.gd:1533-1546) vs row 22 `raymarched_metaballs:0:0:0.2`; both resolve to implicitsurfacemodeling/metaballs/metaballs.tscn (procgen_extra.json:8449, isosurfaces.json:1980 kin note); metaballs.gd:115-116 BoxMesh 12 m; ada_run/em_bake.json segment 'isosurfaces|iso metaballs': raymarched_metaballs seals 4 cells, metaballs seals 0.",
+      "review": "confirmed by a code checker (cited files only): ISO_Metaballs row 28 col: 'metaballs:0:2' (3 parts -> GridInteractablesComponent.gd:1534-1544 legacy rot:y_pos, no scale, so uniform_scale stays default; it is also lifted 2 m). Row 22: 'raymarched_metaballs:0:0:0.2' (4 parts, :1505-1526 -> uniform_scale 0.2). procgen_extra.json 'metaballs' (:8449, scene :8477) and isosurfaces.json 'raymarched_metaballs' (:1983) both resolve to implicitsurfacemodeling/metaballs/metaballs.tscn. metaballs.gd:113-116 BoxMesh 12 x 12 x 12. em_bake 'isosurfaces|iso metaballs': raymarched_metaballs seals 4 cells, metaballs seals 0. final.md:26 has the quoted sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.003",
+      "title": "One of the two stage specimens is a hand-drawn tunnel, not a field",
+      "spec": "[encounter] ISO_CaveGeneration\nQuote: “Both specimens belong to the same generating family. They combine multiple scales of noise with a vertical bias, then extract a threshold boundary.”\nWhy: The stage holds two specimens; `marchingcave` is marchingcubes.tscn with use_fallback = true, which never loads the compute shader and draws a hand-written 200 m sine tunnel, so the sentence is false for one of the two bodies in front of the reader. The same tunnel stands unmentioned as `mc_base` in ISO_AnimatedNoise.\nDo: Add one sentence: 'The striped tunnel beside it is a drawn stand-in, not an extraction; compare only the GPU cave with the enclosing cave you left.' Or swap `marchingcave:0:3:0.02` for a real field at a third setting and keep the sentence true.\nEvidence: commons/maps/ISO_CaveGeneration/map_data.json row 12 `marchingcave:0:3:0.02` and `marchingcubes_cave:0:3.1:0.02`; procgen_extra.json:7393 marchingcave.scene = marchingcubes.tscn whose Terrain node sets use_fallback = true; algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd:26-29 ('what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel') and :185-210; iso_specimen_stage.gd:20 targets; ISO_AnimatedNoise/map_data.json row 12 `mc_base:0:1.5:0.02`.\nFile: commons/maps/ISO_CaveGeneration/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_CaveGeneration"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ISO_CaveGeneration",
+      "quote": "Both specimens belong to the same generating family. They combine multiple scales of noise with a vertical bias, then extract a threshold boundary.",
+      "why": "The stage holds two specimens; `marchingcave` is marchingcubes.tscn with use_fallback = true, which never loads the compute shader and draws a hand-written 200 m sine tunnel, so the sentence is false for one of the two bodies in front of the reader. The same tunnel stands unmentioned as `mc_base` in ISO_AnimatedNoise.",
+      "proposal": "Add one sentence: 'The striped tunnel beside it is a drawn stand-in, not an extraction; compare only the GPU cave with the enclosing cave you left.' Or swap `marchingcave:0:3:0.02` for a real field at a third setting and keep the sentence true.",
+      "evidence": "commons/maps/ISO_CaveGeneration/map_data.json row 12 `marchingcave:0:3:0.02` and `marchingcubes_cave:0:3.1:0.02`; procgen_extra.json:7393 marchingcave.scene = marchingcubes.tscn whose Terrain node sets use_fallback = true; algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd:26-29 ('what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel') and :185-210; iso_specimen_stage.gd:20 targets; ISO_AnimatedNoise/map_data.json row 12 `mc_base:0:1.5:0.02`.",
+      "review": "confirmed by a code checker (cited files only): ISO_CaveGeneration row 12: 'marchingcave:0:3:0.02', 'marchingcubes_cave:0:3.1:0.02'. procgen_extra.json marchingcave.scene = marchingcave/Scenes/marchingcubes.tscn; that tscn line 47 'use_fallback = true'. TerrainGenerator.gd:26-29 states the fallback renders _create_simple_cave_mesh()'s hand-written sine tunnel; :310 'if use_fallback or rendering_device == null'. iso_specimen_stage.gd:20 targets ['marchingcave','marchingcubes_cave']. ISO_AnimatedNoise row 12 'mc_base:0:1.5:0.02'; isosurfaces.json mc_base.scene is the same marchingcubes.tscn. final.md:11 has the quoted sentence. Side note: procgen_extra.json declares dna.axes.plumb on marchingcave although the code comment says it must not be declared.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.004",
+      "title": "This body has been passed three times; say what is new here",
+      "spec": "[handover] ISO_ImplicitModeling\nQuote: “Must a surface exist as a triangle mesh before you can see it?”\nWhy: The hero is the raymarched body the reader passed at the back of ISO_Caves and twice in ISO_Metaballs, where the chapter already answered this question in one sentence; the genuine difference of this placement, `#fusion:necked` setting the smooth-min k to 2.6 instead of the shipped 0.4, is never mentioned, so the reader cannot see why this instance looks different.\nDo: After the opening question add: 'You have passed this body twice already. Here its joins are set wider: the smoothing constant is 2.6 where the earlier copies used 0.4, so look first at what a larger k does to a neck.' And compare with the raymarched copy in the metaball hall rather than 'the metaball specimen'.\nEvidence: ISO_ImplicitModeling/map_data.json row 10 `implicit_surface_modeling:0:3.2:1#fusion:necked`; metaballs.gd:96 FUSION_K necked 2.6, :17 blend_factor 0.4, :147-149 _blend(); registry kin note (three tokens, one scene); ISO_Caves/map_data.json row 37 `raymarched_metaballs:0:1:0.08`; ISO_Metaballs rows 22 and 28; ISO_Metaballs/final.md:18 already explains 'signed distance functions are blended while a ray advances'.\nFile: commons/maps/ISO_ImplicitModeling/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_ImplicitModeling"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "ISO_ImplicitModeling",
+      "quote": "Must a surface exist as a triangle mesh before you can see it?",
+      "why": "The hero is the raymarched body the reader passed at the back of ISO_Caves and twice in ISO_Metaballs, where the chapter already answered this question in one sentence; the genuine difference of this placement, `#fusion:necked` setting the smooth-min k to 2.6 instead of the shipped 0.4, is never mentioned, so the reader cannot see why this instance looks different.",
+      "proposal": "After the opening question add: 'You have passed this body twice already. Here its joins are set wider: the smoothing constant is 2.6 where the earlier copies used 0.4, so look first at what a larger k does to a neck.' And compare with the raymarched copy in the metaball hall rather than 'the metaball specimen'.",
+      "evidence": "ISO_ImplicitModeling/map_data.json row 10 `implicit_surface_modeling:0:3.2:1#fusion:necked`; metaballs.gd:96 FUSION_K necked 2.6, :17 blend_factor 0.4, :147-149 _blend(); registry kin note (three tokens, one scene); ISO_Caves/map_data.json row 37 `raymarched_metaballs:0:1:0.08`; ISO_Metaballs rows 22 and 28; ISO_Metaballs/final.md:18 already explains 'signed distance functions are blended while a ray advances'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.005",
+      "title": "Verify in the headset that the enclosing cave can be entered",
+      "spec": "[vr] ISO_Caves\nQuote: “The same kind of sampled boundary is no longer a facade in front of you. It is above, beside and behind the eye.”\nWhy: The enclosing cave is placed as a bay miniature (token scale 0.02 of a 280-unit field whose 'interior' reading came from a camera inside the full-size scene), the bake seals no cells for it, and the only walk on record is a desktop-rig review with headset_verified false; a headset visitor may find a block to look at rather than a room to stand in, and then 'test the route with your own clearance' has no object.\nDo: Walk it in the headset. If a 1.8 m body cannot enter, rewrite the region as looking INTO a cave ('lower your eye to its mouth') or give the enclosure paragraph to queer_marching_cave, which has a collider and a VR-scale cave_size, or add an entrance-scale instance of mc_inside_cave.\nEvidence: ISO_Caves/map_data.json row 14 `mc_inside_cave:0:0.05:0.02`; marchingcubes_inside_cave.tscn Terrain node chunk_scale = 280; TerrainGenerator.gd:20-24 (the Camera3D inside the field is why the scene reads as an interior); ada_run/em_bake.json 'isosurfaces|iso caves' mc_inside_cave seal []; ada_encyclopedia/captures/ada-run/iso-caves-review-2026-09-15/run.json headset_verified false; iso_cave_workshop.gd:40 has no PROBE unlike iso_gyroid_workshop.gd:103-122; QueerMarchingCave.gd:120 cave_size Vector3(10, 6, 10) 'VR scale' and QueerMarchingCave.tscn CaveCollision StaticBody3D.\nFile: commons/maps/ISO_Caves/final.md",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Caves"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "ISO_Caves",
+      "quote": "The same kind of sampled boundary is no longer a facade in front of you. It is above, beside and behind the eye.",
+      "why": "The enclosing cave is placed as a bay miniature (token scale 0.02 of a 280-unit field whose 'interior' reading came from a camera inside the full-size scene), the bake seals no cells for it, and the only walk on record is a desktop-rig review with headset_verified false; a headset visitor may find a block to look at rather than a room to stand in, and then 'test the route with your own clearance' has no object.",
+      "proposal": "Walk it in the headset. If a 1.8 m body cannot enter, rewrite the region as looking INTO a cave ('lower your eye to its mouth') or give the enclosure paragraph to queer_marching_cave, which has a collider and a VR-scale cave_size, or add an entrance-scale instance of mc_inside_cave.",
+      "evidence": "ISO_Caves/map_data.json row 14 `mc_inside_cave:0:0.05:0.02`; marchingcubes_inside_cave.tscn Terrain node chunk_scale = 280; TerrainGenerator.gd:20-24 (the Camera3D inside the field is why the scene reads as an interior); ada_run/em_bake.json 'isosurfaces|iso caves' mc_inside_cave seal []; ada_encyclopedia/captures/ada-run/iso-caves-review-2026-09-15/run.json headset_verified false; iso_cave_workshop.gd:40 has no PROBE unlike iso_gyroid_workshop.gd:103-122; QueerMarchingCave.gd:120 cave_size Vector3(10, 6, 10) 'VR scale' and QueerMarchingCave.tscn CaveCollision StaticBody3D.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.006",
+      "title": "Give the Threshold Opinion a region; the reader walks past it untold",
+      "spec": "[encounter] ISO_LookupTable\nQuote: “Keep that limit available for a later experiment.”\nWhy: The Threshold Opinion (one field as a lattice of rods, five surfaces cut from it at five thresholds, a resolution row at 4/8/14 lattices, a brass rack of the fifteen cases, two wells caught mid-merge) stands between the fifteen-case display and the rear pair with no line in the chapter; it is the hall's own answer to 'a later experiment', and the reader passes the sequence's summary object without a word.\nDo: Add `<!-- @the_threshold_opinion -->` after the fifteen-cases region with a short passage: from the rack (the same fifteen) to the five thresholds of ONE field and the 4/8/14 row, tied to the MARGIN lesson (values fixed, cut moved; here the cut fixed, the field's own values on show).\nEvidence: ISO_LookupTable/map_data.json row 20 `the_threshold_opinion` between fifteen_cases_demo (row 11) and mc_cave/metaball_world (rows 29-30); commons/artifacts/registry/isosurfaces.json:3065 description; commons/artifacts/the_threshold_opinion/the_threshold_opinion.gd (170 lines); tools/final_tags.py --map=ISO_LookupTable reports 1 tagged work.\nFile: commons/maps/ISO_LookupTable/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_LookupTable"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ISO_LookupTable",
+      "quote": "Keep that limit available for a later experiment.",
+      "why": "The Threshold Opinion (one field as a lattice of rods, five surfaces cut from it at five thresholds, a resolution row at 4/8/14 lattices, a brass rack of the fifteen cases, two wells caught mid-merge) stands between the fifteen-case display and the rear pair with no line in the chapter; it is the hall's own answer to 'a later experiment', and the reader passes the sequence's summary object without a word.",
+      "proposal": "Add `<!-- @the_threshold_opinion -->` after the fifteen-cases region with a short passage: from the rack (the same fifteen) to the five thresholds of ONE field and the 4/8/14 row, tied to the MARGIN lesson (values fixed, cut moved; here the cut fixed, the field's own values on show).",
+      "evidence": "ISO_LookupTable/map_data.json row 20 `the_threshold_opinion` between fifteen_cases_demo (row 11) and mc_cave/metaball_world (rows 29-30); commons/artifacts/registry/isosurfaces.json:3065 description; commons/artifacts/the_threshold_opinion/the_threshold_opinion.gd (170 lines); tools/final_tags.py --map=ISO_LookupTable reports 1 tagged work.",
+      "review": "confirmed by a code checker (cited files only): ISO_LookupTable/map_data.json: iso_lookup_console (row 3), fifteen_cases_demo (row 11), the_threshold_opinion at (row 20, col 12), mc_cave (29), metaball_world (30). isosurfaces.json:3065 the_threshold_opinion, description 'The isosurfaces SUPER OBJECT ... ONE field ... five surfaces ... five thresholds'. the_threshold_opinion.gd is 170 lines. final.md has one tag (<!-- @fifteen_cases_demo -->) and the sentence 'Keep that limit available for a later experiment.'; final_tags.py reports 3 regions, 1 tagged, 1 work.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.007",
+      "title": "Distinguish this ringed portal landscape from the one just left",
+      "spec": "[handover] ISO_Caves\nQuote: “The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two.”\nWhy: The previous hall is named Portal Landscape and its chapter insisted its specimen 'does not transport you somewhere else' and had no rings; this hall's mc_portal_landscape is a different scene (a height field joined with seven torus fields), so the reader needs one sentence to know a second portal landscape has arrived.\nDo: Open: 'A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface.'\nEvidence: isosurfaces.json:621 mc_portal_landscape.scene = marchingcubes_portal_landscape.tscn using TerrainGeneratorUnifiedPortals.gd:10 ('a CSG union of a heightfield with seven torus SDFs') and :90 num_portals = 7; MarchingCubesPortalTerrain.glsl:233-240; versus procgen_extra.json:7899 marchingcubes_portal_landscape.scene = marchingcubes_overhang_landscape.tscn; ISO_PortalLandscape/final.md:26.\nFile: commons/maps/ISO_Caves/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Caves"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "ISO_Caves",
+      "quote": "The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two.",
+      "why": "The previous hall is named Portal Landscape and its chapter insisted its specimen 'does not transport you somewhere else' and had no rings; this hall's mc_portal_landscape is a different scene (a height field joined with seven torus fields), so the reader needs one sentence to know a second portal landscape has arrived.",
+      "proposal": "Open: 'A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface.'",
+      "evidence": "isosurfaces.json:621 mc_portal_landscape.scene = marchingcubes_portal_landscape.tscn using TerrainGeneratorUnifiedPortals.gd:10 ('a CSG union of a heightfield with seven torus SDFs') and :90 num_portals = 7; MarchingCubesPortalTerrain.glsl:233-240; versus procgen_extra.json:7899 marchingcubes_portal_landscape.scene = marchingcubes_overhang_landscape.tscn; ISO_PortalLandscape/final.md:26.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.008",
+      "title": "Drop 'In VR,'; the reader is always in the headset",
+      "spec": "[vr] ISO_Sculpting\nQuote: “In VR, move a controller into the framed volume and hold its trigger briefly.”\nWhy: The reader is in the headset; 'In VR' frames the headset as one mode among others (the code's other branches are keyboard and mouse test paths), and the desk readout already says 'Controller trigger edits at your hand'.\nDo: 'Move a controller into the framed volume and hold its trigger briefly.'\nEvidence: MarchingCubesSculptVR.gd:516-534 (trigger path), :541-575 (keyboard and mouse branches marked 'desktop testing'); iso_sculpt_workshop.gd:95 readout text.\nFile: commons/maps/ISO_Sculpting/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Sculpting"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "ISO_Sculpting",
+      "quote": "In VR, move a controller into the framed volume and hold its trigger briefly.",
+      "why": "The reader is in the headset; 'In VR' frames the headset as one mode among others (the code's other branches are keyboard and mouse test paths), and the desk readout already says 'Controller trigger edits at your hand'.",
+      "proposal": "'Move a controller into the framed volume and hold its trigger briefly.'",
+      "evidence": "MarchingCubesSculptVR.gd:516-534 (trigger path), :541-575 (keyboard and mouse branches marked 'desktop testing'); iso_sculpt_workshop.gd:95 readout text.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.009",
+      "title": "Replace the repair-history sentence with the sign lesson",
+      "spec": "[prose] ISO_Sculpting\nQuote: “The earlier implementation accidentally turned erasure into another addition by discarding a negative sign. Here that sign survives into the field calculation.”\nWhy: It is the source's HISTORICAL AUDIT note in reader prose; the visitor has never met an earlier implementation and cannot use the fact. The lesson inside it, that a cut is a signed radius, is worth keeping without the changelog.\nDo: 'A cut is a deposit with a negative radius; the sign travels into the field, where it turns the operation from a smooth union into a subtraction.'\nEvidence: MarchingCubesSculptVR.gd:67-69 (HISTORICAL AUDIT, repaired 2026-09-15); Compute/MarchingCubesSculpt.glsl:135-139 (`if (blob.w < 0.0)` then `max(dist, 2.0 * params.isoLevel - d)`) and :144 opSmoothUnion.\nFile: commons/maps/ISO_Sculpting/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Sculpting"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ISO_Sculpting",
+      "quote": "The earlier implementation accidentally turned erasure into another addition by discarding a negative sign. Here that sign survives into the field calculation.",
+      "why": "It is the source's HISTORICAL AUDIT note in reader prose; the visitor has never met an earlier implementation and cannot use the fact. The lesson inside it, that a cut is a signed radius, is worth keeping without the changelog.",
+      "proposal": "'A cut is a deposit with a negative radius; the sign travels into the field, where it turns the operation from a smooth union into a subtraction.'",
+      "evidence": "MarchingCubesSculptVR.gd:67-69 (HISTORICAL AUDIT, repaired 2026-09-15); Compute/MarchingCubesSculpt.glsl:135-139 (`if (blob.w < 0.0)` then `max(dist, 2.0 * params.isoLevel - d)`) and :144 opSmoothUnion.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.010",
+      "title": "Rewrite the 'visitors' closing as something the reader can do here",
+      "spec": "[prose] ISO_CaveGeneration\nQuote: “Mark a common location in every specimen so visitors can follow a particular change instead of comparing unrelated silhouettes.”\nWhy: 'Visitors' in the third person is the author addressing a builder, and the 'A useful extension would' close recurs in ISO_AnimatedNoise, ISO_ImplicitModeling and ISO_RhizomeBody: four halls in a row end by describing an instrument the room does not have, which a headset reader cannot press.\nDo: End instead with a task for this hall: choose one opening on the GPU cave and decide which of the three changed settings (noise scale 13.5 vs 3.8, level 0.85 vs 0.88, extent 300 vs 280) you would move first, and say what you expect it to do. Keep the extension to one clause; apply the same cut to the other three closings.\nEvidence: ISO_CaveGeneration/final.md:19; ISO_AnimatedNoise/final.md:19; ISO_ImplicitModeling/final.md:19; ISO_RhizomeBody/final.md:19; marchingcubes_cave.tscn Terrain (noise_scale 13.5, iso_level 0.85, chunk_scale 300) vs marchingcubes_inside_cave.tscn (3.8, 0.88, 280).\nFile: commons/maps/ISO_CaveGeneration/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_CaveGeneration"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ISO_CaveGeneration",
+      "quote": "Mark a common location in every specimen so visitors can follow a particular change instead of comparing unrelated silhouettes.",
+      "why": "'Visitors' in the third person is the author addressing a builder, and the 'A useful extension would' close recurs in ISO_AnimatedNoise, ISO_ImplicitModeling and ISO_RhizomeBody: four halls in a row end by describing an instrument the room does not have, which a headset reader cannot press.",
+      "proposal": "End instead with a task for this hall: choose one opening on the GPU cave and decide which of the three changed settings (noise scale 13.5 vs 3.8, level 0.85 vs 0.88, extent 300 vs 280) you would move first, and say what you expect it to do. Keep the extension to one clause; apply the same cut to the other three closings.",
+      "evidence": "ISO_CaveGeneration/final.md:19; ISO_AnimatedNoise/final.md:19; ISO_ImplicitModeling/final.md:19; ISO_RhizomeBody/final.md:19; marchingcubes_cave.tscn Terrain (noise_scale 13.5, iso_level 0.85, chunk_scale 300) vs marchingcubes_inside_cave.tscn (3.8, 0.88, 280).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.011",
+      "title": "There is no column counter on this desk",
+      "spec": "[prose] ISO_Caves\nQuote: “A column can show several crossings, but a counter is not a body.”\nWhy: The cave desk has no COLUMN control; the counter is two halls back on the terrain desk, so the sentence sends the reader looking for a readout that is not in the room.\nDo: 'The terrain desk's column could count several crossings; a count was never a body.'\nEvidence: iso_cave_workshop.gd:40 ids = PLUMB, OCTAVES, PORTALS, BURIAL, HOLD, RESET, RULE; COLUMN exists only in iso_terrain_workshop.gd:46 and :91-137.\nFile: commons/maps/ISO_Caves/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Caves"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ISO_Caves",
+      "quote": "A column can show several crossings, but a counter is not a body.",
+      "why": "The cave desk has no COLUMN control; the counter is two halls back on the terrain desk, so the sentence sends the reader looking for a readout that is not in the room.",
+      "proposal": "'The terrain desk's column could count several crossings; a count was never a body.'",
+      "evidence": "iso_cave_workshop.gd:40 ids = PLUMB, OCTAVES, PORTALS, BURIAL, HOLD, RESET, RULE; COLUMN exists only in iso_terrain_workshop.gd:46 and :91-137.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.012",
+      "title": "Name nakama's limit: it never extracts a surface, so no neck can pinch off",
+      "spec": "[prose] ISO_Metaballs\nQuote: “Nakama keeps the blob vocabulary but changes the implementation and the limits of the body. It is a comparison, not a third control on the desk.”\nWhy: The limit is specific and is this desk's lesson in negative: nakama extracts no isosurface at all, it pushes one sphere mesh in and out along its normals by (field minus threshold) times 0.2, so its body is pinned at genus 0 and can never show the neck pinching off that EMPLACE is there to produce.\nDo: 'Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field's value, so the body can breathe but no neck can ever pinch off. That is the comparison.'\nEvidence: algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd header (create_metaball_proxy_mesh: SphereMesh radius 3.0, displacement (field_value - surface_threshold) * 0.2, 'genus is PINNED AT 0'); the scene loads by uid uid://bu7sjetta70wd despite the stale path in nakama_metaballs.tscn:3.\nFile: commons/maps/ISO_Metaballs/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Metaballs"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ISO_Metaballs",
+      "quote": "Nakama keeps the blob vocabulary but changes the implementation and the limits of the body. It is a comparison, not a third control on the desk.",
+      "why": "The limit is specific and is this desk's lesson in negative: nakama extracts no isosurface at all, it pushes one sphere mesh in and out along its normals by (field minus threshold) times 0.2, so its body is pinned at genus 0 and can never show the neck pinching off that EMPLACE is there to produce.",
+      "proposal": "'Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field's value, so the body can breathe but no neck can ever pinch off. That is the comparison.'",
+      "evidence": "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd header (create_metaball_proxy_mesh: SphereMesh radius 3.0, displacement (field_value - surface_threshold) * 0.2, 'genus is PINNED AT 0'); the scene loads by uid uid://bu7sjetta70wd despite the stale path in nakama_metaballs.tscn:3.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.013",
+      "title": "Untangle the closing handover sentence",
+      "spec": "[prose] ISO_LookupTable\nQuote: “The triangle-making procedure can remain the same even when the description supplied to it changes between different shape descriptions.”\nWhy: 'description ... changes between different shape descriptions' says the same word three times, and this handover line is the last thing the reader carries into the gallery, whose whole argument is exactly this sentence.\nDo: 'The triangle-making procedure stays the same while the description handed to it changes.'\nEvidence: ISO_LookupTable/final.md:36; the point it hands to is ISO_ShapesGallery/final.md:15 ('The same extraction apparatus samples them and builds the visible boundary').\nFile: commons/maps/ISO_LookupTable/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_LookupTable"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ISO_LookupTable",
+      "quote": "The triangle-making procedure can remain the same even when the description supplied to it changes between different shape descriptions.",
+      "why": "'description ... changes between different shape descriptions' says the same word three times, and this handover line is the last thing the reader carries into the gallery, whose whole argument is exactly this sentence.",
+      "proposal": "'The triangle-making procedure stays the same while the description handed to it changes.'",
+      "evidence": "ISO_LookupTable/final.md:36; the point it hands to is ISO_ShapesGallery/final.md:15 ('The same extraction apparatus samples them and builds the visible boundary').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_isosurfaces.014",
+      "title": "The gdscript block is pseudo-code; quote the real lines",
+      "spec": "[code-claim] ISO_Metaballs\nQuote: “density(p) = sum(kernel(source_i, p))\nsurface = density(p) > iso_level”\nWhy: The block is fenced as gdscript but is not a line of the source; every other desk hall quotes the real line, and the real ones are as short and carry the inverse-square kernel the KERNEL button starts from.\nDo: Quote metaballgenerator.gd:485 `total_field += mb_sr2[m] / dist_sq` and :563 `if cv0 > iso_level: cube_index |= 1`, or drop the language tag and label the block as a summary.\nEvidence: algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd:190 (`strength * radius * radius / dist_sq`), :485, :563-570; iso_metaball_workshop.gd:5 KERNELS begins at inverse_square; metaballworld.tscn MetaballGenerator metaball_count = 10, iso_level = 0.65.\nFile: commons/maps/ISO_Metaballs/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ISO_Metaballs"
+      ],
+      "sequence_refs": [
+        "isosurfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "ISO_Metaballs",
+      "quote": "density(p) = sum(kernel(source_i, p))\nsurface = density(p) > iso_level",
+      "why": "The block is fenced as gdscript but is not a line of the source; every other desk hall quotes the real line, and the real ones are as short and carry the inverse-square kernel the KERNEL button starts from.",
+      "proposal": "Quote metaballgenerator.gd:485 `total_field += mb_sr2[m] / dist_sq` and :563 `if cv0 > iso_level: cube_index |= 1`, or drop the language tag and label the block as a summary.",
+      "evidence": "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd:190 (`strength * radius * radius / dist_sq`), :485, :563-570; iso_metaball_workshop.gd:5 KERNELS begins at inverse_square; metaballworld.tscn MetaballGenerator metaball_count = 10, iso_level = 0.65.",
+      "review": "confirmed by a code checker (cited files only): ISO_Metaballs/final.md:9-12 fences 'density(p) = sum(kernel(source_i, p)) / surface = density(p) > iso_level' as gdscript; neither line exists in metaballgenerator.gd. Real lines: :190 'return strength * radius * radius / dist_sq', :485 'total_field += mb_sr2[m] / dist_sq', :563 'if cv0 > iso_level: cube_index |= 1'. iso_metaball_workshop.gd:5 KERNELS starts at 'inverse_square'; metaballworld.tscn:40-41 iso_level = 0.65, metaball_count = 10.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

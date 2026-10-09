@@ -1,0 +1,11 @@
+--- before/final.md
++++ after/final.md
+@@ -8,7 +8,7 @@
+ 
+ Press **SHOW / HIDE FILL**. A translucent patch appears between the same corners. Press again. The edges stay; the patch goes.
+ 
+-A boundary and a face have arrived through different actions. Connecting three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. The positions do not contain that instruction. We added it.
++A boundary and a face have arrived through different actions. Connecting these three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. We have chosen that these corners belong together, in this order. Their positions did not make that commitment for us.
+ 
+ <!-- @triangle_construction_plate -->
+ 

@@ -1,0 +1,261 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_F_Term · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_F_Term">← Tutorial lineage</a></p><h1>QFEP F Term</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_F_Term/final.md">Raw captured source</a></p><pre># Predictable according to what model?
+
+When a pattern looks orderly, what exactly can you predict?
+
+&lt;!-- @shannon_workbench --&gt;
+
+Move p towards one end of the workbench’s rail and inspect the bit grid. Then bring it towards the middle. Before reading H, predict which setting would make guessing the next bit easier. Compare p near 0.1 with p near 0.9 as a second pair.
+
+Near either end, one bit value predominates. Near the middle, the two values are more balanced. The entropy readout rises towards the middle and falls towards both ends. Reversing which bit is common can preserve the amount of uncertainty even though the grid’s dominant colour changes.
+
+Look at individual cells after forming your expectation from p. The setting describes a probability, not an instruction that every small neighbourhood must display exactly that proportion. A patch can look unusually mixed or unusually uniform within the same sample. Distinguishing the chosen source from its finite realisation helps you avoid treating one striking patch as a refutation of the parameter. It also keeps the model’s prediction separate from the particular observation you are trying to explain.
+
+The workbench calculates binary Shannon entropy from the chosen probability: H(p) = −p log₂ p − (1−p) log₂(1−p). The grid is one finite sample of the specified source. H describes uncertainty under that source model; it is not a guarantee about the exact shortest encoding of this particular displayed grid.
+
+The F of the formula asks a related but different question about a model’s fit and prediction. Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities. The entropy readout computes the first of those. It gives us a precise starting observation without pretending its H readout is already a measurement of F.
+
+Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compare p near 0.1 with p near 0.9 again. The entropy returns to almost the same height, but the mistakes spread. The source is no more uncertain; this predictor is less suited to it.
+
+Leave p near 0.9 and press EXPECT 1. Keep your eye on the bits, not only the number. Their colours stay; the amber marks change sides. You have improved this predictor’s performance without making the world easier.
+
+The screen distinguishes expected errors under the chosen probability from mistakes counted in this particular grid. They need not agree exactly. The smaller experiment is enough to ask something consequential: when we call a world difficult, whose expectation is meeting it?
+
+Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.
+
+The entropy room next counts alternatives explicitly, asking which possibilities the model has allowed into its world.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_F_Term/tutorial.md">Raw captured source</a></p><pre># F Term
+
+F is free energy — the prediction error that every adaptive system tries to minimize. Build a room where minimizing F is both the task and the trap.
+
+Declare the F meter.
+
+```gdscript
+class_name FMeter
+extends Node3D
+
+@export var prediction: float = 0.0
+@export var observation: float = 0.0
+
+func f_value() -&gt; float:
+    return abs(prediction - observation)
+```
+
+F is the distance between prediction and observation. The meter reads the absolute difference. Other formulations add log terms; this one is the floor model.
+
+Crystallize particles to minimize F.
+
+```gdscript
+func settle_toward(target: Vector3) -&gt; void:
+    for particle in particles:
+        var d := target - particle.position
+        particle.linear_velocity += d * settle_strength
+```
+
+Particles drift toward a lattice point. The lattice is the prediction; the particle position is the observation. Over time, the cluster becomes a crystal.
+
+Update F from the cluster state.
+
+```gdscript
+func update_f() -&gt; void:
+    var total := 0.0
+    for particle in particles:
+        total += particle.position.distance_to(target_for(particle))
+    prediction = 0.0
+    observation = total / particles.size()
+```
+
+Average distance from lattice gives the observation. Prediction is zero — the lattice is the expectation. F falls as the crystal forms.
+
+Show the dark room.
+
+```gdscript
+func enter_dark_room() -&gt; void:
+    particles.clear()
+    environment.ambient_light_energy = 0.0
+    status_label.text = &quot;F = 0.000  (nothing moves)&quot;
+```
+
+A sealed room with no particles. F is zero.
+
+Nothing surprises the system because nothing happens. Perfect prediction, no life.
+
+Gate progress on F curiosity.
+
+```gdscript
+func _on_dark_room_timer_timeout() -&gt; void:
+    if time_in_dark &gt; 3.0:
+        prompt.text = &quot;F = 0 is also a grave.&quot;
+        door.unlock()
+```
+
+The door only opens after the learner has stood in the zero-F room long enough to feel it. The prompt writes the lesson. F-minimization without entropy is closure.
+
+Solve the snap puzzle to reduce F.
+
+```gdscript
+func _on_piece_snapped(piece: Node3D) -&gt; void:
+    score += 1
+    prediction = float(score) / float(total_pieces)
+    observation = 1.0
+    meter.update_visual(f_value())
+```
+
+Each snapped piece reduces the gap between prediction and observation. The meter visibly drops. The learner&#x27;s body performs the gradient descent.
+
+Celebrate minimization and warn against it.
+
+```gdscript
+func on_puzzle_solved() -&gt; void:
+    play_chime()
+    warning.text = &quot;Beautiful. Now notice: nothing new can happen here.&quot;
+```
+
+The chime is the reward; the warning is the lesson. Closed puzzles are local optima. The F room tells the truth about both.
+
+You have built the F side of the dialectic. The next map, E Term, introduces the counterweight: entropy as possibility.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Throttle the settle strength.
+
+```gdscript
+func throttle_settle(meter: float) -&gt; void:
+    settle_strength = lerp(0.2, 1.5, clamp(meter, 0.0, 1.0))
+```
+
+Faster settle means sharper crystallization. A slower one lets the learner watch F fall gradually toward zero.
+
+Record the descent curve.
+
+```gdscript
+func log_f_descent(sample_rate: float) -&gt; void:
+    if Time.get_ticks_msec() - last_log &lt; sample_rate: return
+    f_history.append(f_value())
+    last_log = Time.get_ticks_msec()
+```
+
+Every sample stores a data point. The history line shows the gradient. F-minimization becomes a trace on a chart.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_F_Term/technical.md">Raw captured source</a></p><pre># A source and an expectation
+
+The Introduction showed different arrangements returning the same total. Here two sources can have the same entropy while one predictor fares very differently against them.
+
+The Shannon workbench keeps a seeded array of random draws. Its p rail sets the probability of a one by thresholding each stored draw:
+
+```gdscript
+var bit: bool = _draws[i] &lt; _p
+```
+
+Moving the rail changes this threshold. It does not replace the stored draws. The normal sample has 256 cells; smaller and larger evidence presets remain available in the artifact configuration.
+
+The source readout computes binary Shannon entropy from p. It does not run a compressor on the grid. The previous claim that this particular grid was incompressible has been removed. A chosen probability and one finite realisation are different things to inspect.
+
+In this hall, `prediction_study:on` adds EXPECT 0 and EXPECT 1. Each button chooses one constant prediction for every cell. Amber underlines identify the cells that disagree. Expected error is p for EXPECT 0 and 1−p for EXPECT 1. Observed error counts mismatches in the displayed sample. At p = 0.1 and p = 0.9 the source entropy is the same, but EXPECT 0 has different expected error.
+
+```gdscript
+if int(_draws[i] &lt; _p) != _prediction:
+    errors += 1
+```
+
+Leave p at 0.9 and change the prediction. The stored draws, threshold, bit colours and source entropy stay fixed. Only the mismatch marks and predictor readout change. This is a deliberately small comparison: improvement can come from changing an expectation without changing the observed world. It does not establish that this mistake count is variational free energy.
+
+The none preset reports no observed sample, even though the source formula and expected error are still defined. Changing sample size or seed updates the observed count and marks together. Other placements keep their single-control interface unless prediction study is explicitly enabled.
+
+The snap puzzles and crystal remain secondary comparisons. The old snap_cube_puzzle and snap_tetra_puzzle aliases were disabled in the museum registry; this map now uses the active octahedron and tetrahedron names for the same scene files. The independent lambda rail is movable. The legacy dark sphere retains its decorative role.
+
+Next, the E hall asks which alternatives enter a model’s distribution. Before counting uncertainty, we must decide what is counted as an outcome.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_F_Term/intent.md">Raw captured source</a></p><pre>Concept: F is free energy — prediction error, surprise. Systems minimize F by finding patterns, reducing uncertainty. But pure order is a trap: the dark room problem, where minimizing surprise means closing your eyes.
+Sequence role: Second map in QFEP Lab; isolates the F term. After the Introduction showed the whole formula, this map zooms into order-seeking. The crystal_cluster demonstrates F-minimization as crystallization; the snap puzzles require pattern-finding. The dark room problem is the critical counterpoint: pure F-minimization leads to death, not life; follows QFEP_Introduction; leads to QFEP_E_Term.
+Technical angle: Free energy minimization, prediction error as the difference between model and world, Bayesian brain hypothesis. The crystal_cluster artifact crystallizes from disorder into order — F decreasing over time. The snap puzzles (cube, tetrahedron) require the learner to minimize structural error through assembly.
+Critical angle: F is the drive behind every formal system Euclid built, every pattern the curriculum taught. But the Foundations Crisis showed that pure formalization fails — Gödel proved F can never reach zero. The dark room problem makes this biological: an organism that only minimizes surprise would sit in the dark forever. Life requires entropy. F alone is necessary but insufficient.
+Key artifacts: crystal_cluster demonstrates F-minimization as crystallization from chaos; snap_cube_puzzle and snap_tetra_puzzle require pattern-finding (error reduction); lambda_slider contextualizes F within the full formula; dark_sphere as the ambient constant; tt for navigation.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_F_Term/critical.md">Raw captured source</a></p><pre># Whose mistake?
+
+The bit remains blue. Under EXPECT 0 it was a mistake; under EXPECT 1 it is a success. Nothing inside that cell has become more obedient. You have changed what meets it.
+
+This small switch places a limit on a familiar description: the world is difficult. Difficult for which expectation? Two source settings can occupy the same height on the entropy curve while defeating opposite guesses. The source’s uncertainty alone does not tell the whole story of a relation to it.
+
+The comparison should not promise that every mismatch can be resolved by changing your mind. Here the available predictors are only two buttons. A different task would need different capacities. A learner might ask for a predictor that attends to a neighbour, remembers a sequence or admits uncertainty. That request already exceeds the present machine’s idea of a guess.
+
+Ada’s question about possible bodies returns through this restriction. What could a body notice with these controls? Which differences does the apparatus call error, and what would let those differences change its model? The amber marks make one convention visible enough to contest.
+
+The nearby puzzles offer a return to fitting points to targets. Their targets are authored; their satisfaction does not prove that order is always desirable or that deviation is pathological. Preserve them as places to investigate a different relation between an instruction and a body, without making them certify the workbench’s arithmetic.
+
+There is also another possible experiment: keep the expectation fixed and change the world until it agrees. That is retained as development work. For now, stay with the change we can actually make. The bits keep their places. The judgment moves.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_F_Term/artifacts.md">Raw captured source</a></p><pre># QFEP F Term — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 8 artifacts*
+
+&gt; *Systems minimize surprise.*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Shannon Workbench
+![Shannon Workbench](/scene-catalog/shannon_workbench.png)
+
+WALK the entropy hill
+
+`shannon_workbench`
+
+## Snap Cube Puzzle
+![Snap Cube Puzzle](/scene-catalog/snap_cube_puzzle.png)
+
+Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.
+
+`snap_cube_puzzle`
+
+## Snap Tetra Puzzle
+![Snap Tetra Puzzle](/scene-catalog/snap_tetra_puzzle.png)
+
+Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.
+
+`snap_tetra_puzzle`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## Crystal Cluster
+![Crystal Cluster](/scene-catalog/crystal_cluster.png)
+
+SEE order
+
+`crystal_cluster`
+
+## Lambda Slider
+![Lambda Slider](/scene-catalog/lambda_slider.png)
+
+TUNE entropy drive
+
+`lambda_slider`
+
+## Tutorial Text Display
+![Tutorial Text Display](/scene-catalog/tt.png)
+
+In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.
+
+`tt`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_F_Term/summary.md">Raw captured source</a></p><pre># F Term — predictable according to what model?
+
+Second of eight declared QFEP Laboratory halls, restored to the authored museum route between Introduction and E Term.
+
+The primary Shannon workbench compares source entropy with a constant predictor’s errors. Move p, compare 0.1 and 0.9, then hold p fixed and switch EXPECT 0/1. Amber underlines mark actual misses. The display distinguishes expected error from the counted errors in one finite sample. No variational free energy is computed.
+
+The 10 by 12 gallery has level floor, perimeter walls and open entrance/exit. The workbench at (4,4) faces the entrance. Eight existing works remain in the map. Two retired puzzle aliases are replaced with their active names for the same scene files. Puzzles, crystal and separate lambda rail remain secondary; the dark sphere remains decoration.
+
+The earlier proposals survive in design-proposals.md. Headset interaction and learner understanding remain to be checked.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_F_Term/blurb.md">Raw captured source</a></p><pre>*The bits stay. Your mistakes change sides.*
+
+Make a guess, then look for the cells that refuse it. Leave the world where it is and change the guess.
+
+What was difficult: the source, or your way of meeting it?
+</pre></section></body></html>

@@ -1,0 +1,2074 @@
+{
+  "checks": 45,
+  "failures": [],
+  "headset_verified": false,
+  "map": "CA_EdgeOfChaos",
+  "measurements": {
+    "captures": {
+
+    },
+    "disease_scheduling": {
+      "commits": 0,
+      "rows_computed": 904
+    },
+    "fractional_g20": {
+      "actions": 15,
+      "changed": true,
+      "coating": true,
+      "coupling": 0.25,
+      "different": 1331,
+      "disturbance": 0.0,
+      "gain": 71.3778150891219,
+      "integer_storage": false,
+      "max_difference": 0.0140099553166682,
+      "mean_a": 6.99998801898975,
+      "mean_b": 7.00075601640673,
+      "mean_difference": 0.000767997416980344,
+      "scattered": true,
+      "slice": 5,
+      "step_usec": 33998,
+      "target": 0,
+      "tick": 20
+    },
+    "fractional_g5": {
+      "actions": 3,
+      "changed": true,
+      "coating": true,
+      "coupling": 0.25,
+      "different": 613,
+      "disturbance": 0.0,
+      "gain": 4.01678371823497,
+      "integer_storage": false,
+      "max_difference": 0.248955400675497,
+      "mean_a": 6.99986141621921,
+      "mean_b": 7.00061274265785,
+      "mean_difference": 0.000751326438669217,
+      "scattered": true,
+      "slice": 5,
+      "step_usec": 8481,
+      "target": 0,
+      "tick": 5
+    },
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "VolumeBase_0",
+            "position": [
+              10.7250003814697,
+              0.0,
+              5.52500057220459
+            ],
+            "size": [
+              3.14999961853027,
+              0.200000002980232,
+              3.14999961853027
+            ]
+          },
+          {
+            "name": "VolumeBase_1",
+            "position": [
+              5.125,
+              0.0,
+              5.52500057220459
+            ],
+            "size": [
+              3.14999961853027,
+              0.200000002980232,
+              3.14999961853027
+            ]
+          },
+          {
+            "name": "SliceCase_0",
+            "position": [
+              11.6499996185303,
+              0.450000047683716,
+              11.9300003051758
+            ],
+            "size": [
+              3.5,
+              3.5,
+              0.139999389648438
+            ]
+          },
+          {
+            "name": "Slice_0",
+            "position": [
+              11.7749996185303,
+              0.575000047683716,
+              11.9099998474121
+            ],
+            "size": [
+              3.25,
+              3.25,
+              0.0
+            ]
+          },
+          {
+            "name": "SliceCase_1",
+            "position": [
+              7.75,
+              0.450000047683716,
+              11.9300003051758
+            ],
+            "size": [
+              3.5,
+              3.5,
+              0.139999389648438
+            ]
+          },
+          {
+            "name": "Slice_1",
+            "position": [
+              7.875,
+              0.575000047683716,
+              11.9099998474121
+            ],
+            "size": [
+              3.25,
+              3.25,
+              0.0
+            ]
+          },
+          {
+            "name": "SliceCase_2",
+            "position": [
+              3.84999990463257,
+              0.450000047683716,
+              11.9300003051758
+            ],
+            "size": [
+              3.5,
+              3.5,
+              0.139999389648438
+            ]
+          },
+          {
+            "name": "Slice_2",
+            "position": [
+              3.97499990463257,
+              0.575000047683716,
+              11.9099998474121
+            ],
+            "size": [
+              3.25,
+              3.25,
+              0.0
+            ]
+          },
+          {
+            "name": "DifferenceFloor",
+            "position": [
+              8.5,
+              0.0160000007599592,
+              5.5
+            ],
+            "size": [
+              2.0,
+              0.0,
+              4.0
+            ]
+          },
+          {
+            "name": "ConsoleFoot",
+            "position": [
+              3.25,
+              0.0,
+              3.40000009536743
+            ],
+            "size": [
+              2.5,
+              0.119999997317791,
+              0.799999713897705
+            ]
+          },
+          {
+            "name": "ConsoleStem",
+            "position": [
+              4.42999982833862,
+              0.050000011920929,
+              3.73000001907349
+            ],
+            "size": [
+              0.140000343322754,
+              1.10000014305115,
+              0.140000343322754
+            ]
+          },
+          {
+            "name": "Frame",
+            "position": [
+              4.10750007629395,
+              0.852031171321869,
+              3.59433269500732
+            ],
+            "size": [
+              0.784999847412109,
+              0.590201675891876,
+              0.419526100158691
+            ]
+          },
+          {
+            "name": "Panel",
+            "position": [
+              4.11499977111816,
+              0.859608888626099,
+              3.59249067306519
+            ],
+            "size": [
+              0.770000457763672,
+              0.580782175064087,
+              0.415018558502197
+            ]
+          },
+          {
+            "name": "Highlight",
+            "position": [
+              4.11999988555908,
+              1.4339405298233,
+              3.98303556442261
+            ],
+            "size": [
+              0.760000228881836,
+              0.00348162651062012,
+              0.00348186492919922
+            ]
+          },
+          {
+            "name": "AccentStrip",
+            "position": [
+              4.26900005340576,
+              1.43506526947021,
+              3.99245738983154
+            ],
+            "size": [
+              0.461999893188477,
+              0.00696372985839844,
+              0.00696372985839844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@880",
+            "position": [
+              4.69000005722046,
+              1.24840128421783,
+              3.85818004608154
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@881",
+            "position": [
+              4.6875,
+              1.24635338783264,
+              3.86084175109863
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.72874975204468,
+              1.28890371322632,
+              3.82971858978271
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.71500015258789,
+              1.28044259548187,
+              3.83259201049805
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@882",
+            "position": [
+              4.67999982833862,
+              1.22414004802704,
+              3.80308246612549
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@883",
+            "position": [
+              4.51000022888184,
+              1.24840128421783,
+              3.85818004608154
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@884",
+            "position": [
+              4.50750017166138,
+              1.24635338783264,
+              3.86084175109863
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.54874992370605,
+              1.28890371322632,
+              3.82971858978271
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.53500032424927,
+              1.28044259548187,
+              3.83259201049805
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@885",
+            "position": [
+              4.5,
+              1.22414004802704,
+              3.80308246612549
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@886",
+            "position": [
+              4.32999992370605,
+              1.24840128421783,
+              3.85818004608154
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@887",
+            "position": [
+              4.3274998664856,
+              1.24635338783264,
+              3.86084175109863
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.36874961853027,
+              1.28890371322632,
+              3.82971858978271
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.35500001907349,
+              1.28044259548187,
+              3.83259201049805
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@888",
+            "position": [
+              4.31999969482422,
+              1.22414004802704,
+              3.80308246612549
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@889",
+            "position": [
+              4.15000009536743,
+              1.24840128421783,
+              3.85818004608154
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@890",
+            "position": [
+              4.14750003814697,
+              1.24635338783264,
+              3.86084175109863
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.18874979019165,
+              1.28890371322632,
+              3.82971858978271
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.17500019073486,
+              1.28044259548187,
+              3.83259201049805
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@891",
+            "position": [
+              4.1399998664856,
+              1.22414004802704,
+              3.80308246612549
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@892",
+            "position": [
+              4.69000005722046,
+              1.08866667747498,
+              3.7463321685791
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@893",
+            "position": [
+              4.6875,
+              1.08661878108978,
+              3.74899435043335
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.72874975204468,
+              1.12916910648346,
+              3.71787071228027
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.71500015258789,
+              1.12070798873901,
+              3.72074460983276
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@894",
+            "position": [
+              4.67999982833862,
+              1.06440544128418,
+              3.69123506546021
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@895",
+            "position": [
+              4.51000022888184,
+              1.08866667747498,
+              3.7463321685791
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@896",
+            "position": [
+              4.50750017166138,
+              1.08661878108978,
+              3.74899482727051
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.54874992370605,
+              1.12916910648346,
+              3.71787071228027
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.53500032424927,
+              1.12070798873901,
+              3.72074460983276
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@897",
+            "position": [
+              4.5,
+              1.06440544128418,
+              3.69123506546021
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@898",
+            "position": [
+              4.32999992370605,
+              1.08866667747498,
+              3.7463321685791
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@899",
+            "position": [
+              4.3274998664856,
+              1.08661878108978,
+              3.74899482727051
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.36874961853027,
+              1.12916910648346,
+              3.71787071228027
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.35500001907349,
+              1.12070798873901,
+              3.72074460983276
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@900",
+            "position": [
+              4.31999969482422,
+              1.06440544128418,
+              3.69123506546021
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@901",
+            "position": [
+              4.15000009536743,
+              1.08866667747498,
+              3.7463321685791
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887237548828,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@902",
+            "position": [
+              4.14750003814697,
+              1.08661878108978,
+              3.74899482727051
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115093231201,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.18874979019165,
+              1.12916910648346,
+              3.71787071228027
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833532810211182,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.17500019073486,
+              1.12070798873901,
+              3.72074460983276
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@903",
+            "position": [
+              4.1399998664856,
+              1.06440544128418,
+              3.69123506546021
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491490364074707,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@904",
+            "position": [
+              4.69000005722046,
+              0.928931951522827,
+              3.63448524475098
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887356758118,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@905",
+            "position": [
+              4.6875,
+              0.926884055137634,
+              3.63714694976807
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115212440491,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.72874975204468,
+              0.969434440135956,
+              3.60602378845215
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833533406257629,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.71500015258789,
+              0.960973262786865,
+              3.60889720916748
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@906",
+            "position": [
+              4.67999982833862,
+              0.904670715332031,
+              3.57938766479492
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491491556167603,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@907",
+            "position": [
+              4.51000022888184,
+              0.928931951522827,
+              3.63448524475098
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887356758118,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@908",
+            "position": [
+              4.50750017166138,
+              0.926884055137634,
+              3.63714694976807
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115212440491,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.54874992370605,
+              0.969434440135956,
+              3.60602378845215
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833533406257629,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.53500032424927,
+              0.960973262786865,
+              3.60889720916748
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@909",
+            "position": [
+              4.5,
+              0.904670715332031,
+              3.57938766479492
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491491556167603,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@910",
+            "position": [
+              4.32999992370605,
+              0.928931951522827,
+              3.63448524475098
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887356758118,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@911",
+            "position": [
+              4.3274998664856,
+              0.926884055137634,
+              3.63714694976807
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115212440491,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.36874961853027,
+              0.969434440135956,
+              3.60602378845215
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833533406257629,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.35500001907349,
+              0.960973262786865,
+              3.60889720916748
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@912",
+            "position": [
+              4.31999969482422,
+              0.904670715332031,
+              3.57938766479492
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491491556167603,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@913",
+            "position": [
+              4.15000009536743,
+              0.928931951522827,
+              3.63448524475098
+            ],
+            "size": [
+              0.159999847412109,
+              0.114887356758118,
+              0.0835762023925781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@914",
+            "position": [
+              4.14750003814697,
+              0.926884055137634,
+              3.63714694976807
+            ],
+            "size": [
+              0.164999961853027,
+              0.116115212440491,
+              0.0823478698730469
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              4.18874979019165,
+              0.969434440135956,
+              3.60602378845215
+            ],
+            "size": [
+              0.0825004577636719,
+              0.0833533406257629,
+              0.0698471069335938
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              4.17500019073486,
+              0.960973262786865,
+              3.60889720916748
+            ],
+            "size": [
+              0.109999656677246,
+              0.0955436229705811,
+              0.0708580017089844
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@915",
+            "position": [
+              4.1399998664856,
+              0.904670715332031,
+              3.57938766479492
+            ],
+            "size": [
+              0.180000305175781,
+              0.0491491556167603,
+              0.0344142913818359
+            ]
+          },
+          {
+            "name": "ReadoutCase",
+            "position": [
+              2.29999971389771,
+              1.69000005722046,
+              4.81500053405762
+            ],
+            "size": [
+              4.80000019073486,
+              1.11999988555908,
+              0.0699996948242188
+            ]
+          }
+        ],
+        "position": "(9.5, 0.0, 9.5)",
+        "token": "self_organization_ca"
+      },
+      {
+        "meshes": [
+          {
+            "name": "AutomataPlane",
+            "position": [
+              3.5,
+              0.5,
+              19.7943592071533
+            ],
+            "size": [
+              2.0,
+              2.0,
+              0.0
+            ]
+          }
+        ],
+        "position": "(4.5, 1.5, 22.5)",
+        "token": "ca_screen"
+      },
+      {
+        "meshes": [],
+        "position": "(12.5, 3.4, 23.5)",
+        "token": "disease_spread_ca"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@919",
+            "position": [
+              2.90000009536743,
+              0.399999976158142,
+              25.5
+            ],
+            "size": [
+              3.19999980926514,
+              3.19999980926514,
+              0.0
+            ]
+          }
+        ],
+        "position": "(4.5, 2.0, 29.5)",
+        "token": "volumetric_fog_ca"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@921",
+            "position": [
+              10.4603185653687,
+              0.939999997615814,
+              23.423999786377
+            ],
+            "size": [
+              4.11568164825439,
+              0.00000798702239990234,
+              4.15200042724609
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@922",
+            "position": [
+              10.4519996643066,
+              0.875999987125397,
+              23.4519996643066
+            ],
+            "size": [
+              4.09600067138672,
+              0.0,
+              4.09600067138672
+            ]
+          }
+        ],
+        "position": "(12.5, 0.9, 29.5)",
+        "token": "crackpropagation_ca"
+      }
+    ],
+    "oracle_comparisons": [
+      {
+        "changed": true,
+        "coupling": 0.25,
+        "disturbance": 1.0,
+        "integer": true,
+        "max_error": 0.0,
+        "scattered": true
+      },
+      {
+        "changed": true,
+        "coupling": 0.0,
+        "disturbance": 0.0,
+        "integer": true,
+        "max_error": 0.0,
+        "scattered": true
+      },
+      {
+        "changed": true,
+        "coupling": 0.25,
+        "disturbance": 0.0,
+        "integer": true,
+        "max_error": 0.0,
+        "scattered": true
+      },
+      {
+        "changed": true,
+        "coupling": 0.25,
+        "disturbance": 0.0,
+        "integer": false,
+        "max_error": 0.000000000000000888178419700125,
+        "scattered": true
+      },
+      {
+        "changed": true,
+        "coupling": 0.25,
+        "disturbance": 0.0,
+        "integer": true,
+        "max_error": 0.0,
+        "scattered": false
+      },
+      {
+        "changed": true,
+        "coupling": 0.25,
+        "disturbance": 0.0,
+        "integer": false,
+        "max_error": 0.000000000000000888178419700125,
+        "scattered": false
+      },
+      {
+        "changed": false,
+        "coupling": 0.25,
+        "disturbance": 1.0,
+        "integer": true,
+        "max_error": 0.0,
+        "scattered": true
+      }
+    ],
+    "pointer": [
+      {
+        "after": {
+          "actions": 4,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 751,
+          "disturbance": 0.0,
+          "gain": 5.21338221041996,
+          "integer_storage": false,
+          "max_difference": 0.191814058443923,
+          "mean_a": 6.99987424423375,
+          "mean_b": 7.00062561728698,
+          "mean_difference": 0.00075137305323755,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 6
+        },
+        "before": {
+          "actions": 3,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 613,
+          "disturbance": 0.0,
+          "gain": 4.01678371823497,
+          "integer_storage": false,
+          "max_difference": 0.248955400675497,
+          "mean_a": 6.99986141621921,
+          "mean_b": 7.00061274265785,
+          "mean_difference": 0.000751326438669217,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 8481,
+          "target": 0,
+          "tick": 5
+        },
+        "button": 0,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_0/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_0/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.16,
+              -0.17,
+              0.97
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_0/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_0/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.76,
+              1.33,
+              3.8
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 5,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 751,
+          "disturbance": 0.0,
+          "gain": 5.21338221041996,
+          "integer_storage": false,
+          "max_difference": 0.191814058443923,
+          "mean_a": 6.99987424423375,
+          "mean_b": 7.00062561728698,
+          "mean_difference": 0.00075137305323755,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 16,
+          "tick": 6
+        },
+        "before": {
+          "actions": 4,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 751,
+          "disturbance": 0.0,
+          "gain": 5.21338221041996,
+          "integer_storage": false,
+          "max_difference": 0.191814058443923,
+          "mean_a": 6.99987424423375,
+          "mean_b": 7.00062561728698,
+          "mean_difference": 0.00075137305323755,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 6
+        },
+        "button": 1,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_1/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_1/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.05,
+              -0.17,
+              0.98
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_1/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_1/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.59,
+              1.33,
+              3.8
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 6,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 1,
+          "disturbance": 0.0,
+          "gain": 1.0,
+          "integer_storage": false,
+          "max_difference": 1.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0007513148009,
+          "mean_difference": 0.000751314800901578,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 5,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 751,
+          "disturbance": 0.0,
+          "gain": 5.21338221041996,
+          "integer_storage": false,
+          "max_difference": 0.191814058443923,
+          "mean_a": 6.99987424423375,
+          "mean_b": 7.00062561728698,
+          "mean_difference": 0.00075137305323755,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 6
+        },
+        "button": 2,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_2/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_2/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.05,
+              -0.17,
+              0.98
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_2/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_2/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.41,
+              1.33,
+              3.8
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 7,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 6,
+          "changed": true,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 1,
+          "disturbance": 0.0,
+          "gain": 1.0,
+          "integer_storage": false,
+          "max_difference": 1.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0007513148009,
+          "mean_difference": 0.000751314800901578,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 3,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_3/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_3/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.16,
+              -0.17,
+              0.97
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_3/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_3/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.24,
+              1.33,
+              3.8
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 8,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.0,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 7,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 4,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_4/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_4/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.17,
+              -0.27,
+              0.95
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_4/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_4/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.76,
+              1.18,
+              3.7
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 9,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 8,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.0,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 5,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_5/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_5/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.06,
+              -0.28,
+              0.96
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_5/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_5/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.59,
+              1.18,
+              3.7
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 10,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 9,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 6,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_6/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_6/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.06,
+              -0.28,
+              0.96
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_6/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_6/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.41,
+              1.18,
+              3.7
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 11,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 10,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 0.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 7,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_7/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_7/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.17,
+              -0.27,
+              0.95
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_7/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_7/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.24,
+              1.18,
+              3.7
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 12,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 11,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 7.0,
+          "mean_b": 7.0,
+          "mean_difference": 0.0,
+          "scattered": true,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 8,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_8/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_8/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.17,
+              -0.39,
+              0.91
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_8/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_8/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.76,
+              1.03,
+              3.59
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 13,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": true,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 12,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": false,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 9,
+        "pointer": {
+          "control": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_9/InteractableAreaButton",
+          "hover": "HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_9/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.06,
+              -0.39,
+              0.92
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_9/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ceConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_9/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.59,
+              1.03,
+              3.59
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 14,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": true,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 6,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 13,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": true,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 5,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 10,
+        "pointer": {
+          "control": "OW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_10/InteractableAreaButton",
+          "hover": "OW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_10/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.06,
+              -0.39,
+              0.92
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "eConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_10/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_10/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.41,
+              1.03,
+              3.59
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      },
+      {
+        "after": {
+          "actions": 15,
+          "changed": false,
+          "coating": false,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": true,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 6,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "before": {
+          "actions": 14,
+          "changed": false,
+          "coating": true,
+          "coupling": 0.25,
+          "different": 0,
+          "disturbance": 1.0,
+          "gain": 1000000.0,
+          "integer_storage": true,
+          "max_difference": 0.0,
+          "mean_a": 4.0,
+          "mean_b": 4.0,
+          "mean_difference": 0.0,
+          "scattered": false,
+          "slice": 6,
+          "step_usec": 1770,
+          "target": 0,
+          "tick": 0
+        },
+        "button": 11,
+        "pointer": {
+          "control": "OW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_11/InteractableAreaButton",
+          "hover": "OW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_11/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.17,
+              -0.39,
+              0.91
+            ],
+            "camera_from": [
+              4.5,
+              1.6,
+              2.25
+            ],
+            "independent_ray": "eConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_11/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eConsole/HOW_FAR_DOES_ONE_DIFFERENCE_GO?/Btn_11/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              4.24,
+              1.03,
+              3.59
+            ]
+          },
+          "stand": [
+            4.5,
+            0.0,
+            2.25
+          ]
+        }
+      }
+    ],
+    "volume_colour_errors": [
+      0.000486433506011963,
+      0.000486552715301514
+    ],
+    "walks": [
+      {
+        "finish": "(0.0, 0.000391, 7.099996)",
+        "start": "(0.0, 0.05, -0.4)"
+      },
+      {
+        "finish": "(7.799999, 0.000391, 15.50003)",
+        "start": "(7.799999, 0.000391, 8.0)"
+      }
+    ]
+  }
+}

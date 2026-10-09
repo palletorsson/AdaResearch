@@ -1,0 +1,9 @@
+--- before-feedback/Trans_Translation/tutorial.md
++++ Trans_Translation/tutorial.md
+@@ -65,4 +65,6 @@
+ 
+ Keep `via_corner` true and change `finish` to `Vector3(2, 3, 2)`. Predict the new corner and final position. The first leg stays vertical; the second now crosses both X and Z. The body still does not turn to face its travel.
+ 
++In Trace, an ordered list kept positions after movement. Here, `start`, `corner` and `finish` name positions for a movement to follow. Put their values in that order on paper. A longer route could keep them in an array, with an index choosing the next destination. Our two branches still choose the segments here; the list would be a different way to describe the route.
++
+ The next hall makes that turn a deliberate choice, with an axis and a centre of its own.

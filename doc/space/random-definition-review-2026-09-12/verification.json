@@ -1,0 +1,109 @@
+{
+  "hall": "Random_Definition",
+  "run": {
+    "started": "2026-09-12T19:22:02+02:00",
+    "finished": "2026-09-12T19:22:27+02:00",
+    "pid": 35708,
+    "exit": 0,
+    "checks": 65,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_random_definition_live.gd": "dc5989d811cefdb66fe4268e71d9634afcdf2eb501160a9bdd10a883f074a572",
+      "commons/maps/Random_Definition/map_data.json": "b637936719c349cd4945a444447a5616e96400d6c5be5d628ccdefd30f04f51b",
+      "algorithms/randomness/seed_replay/seed_replay_demo.gd": "8d829f5541365231643a8347fe98f546443806f4c7c0efc4e0c83140935865cf",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+      "commons/interactables/slider_horizontal.gd": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "current_source_matches_run": {
+    "commons/testing/probe_wcn_random_definition_live.gd": true,
+    "commons/maps/Random_Definition/map_data.json": false,
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": true,
+    "commons/testing/wcn_desktop_driver.gd": true,
+    "commons/interactables/slider_horizontal.gd": true
+  },
+  "map_change_after_run": "Only map_info name/title/learning objectives; all other data and museum settings unchanged.",
+  "unchanged_functions": [
+    "_regenerate",
+    "_build_grid",
+    "_column_seeds",
+    "draws_per_grid",
+    "_build_stand"
+  ],
+  "exact_source_excerpts": 9,
+  "exported_draws": 193,
+  "color_assignments_checked": 128,
+  "changed_cells": 64,
+  "matched_capture_pose": {
+    "current_camera": "/root/@Node@3273/WcnDesktopRig/Head/Camera3D",
+    "eye": [
+      7.4,
+      1.6,
+      11.5
+    ],
+    "forward": [
+      0.95,
+      -0.33,
+      0.0
+    ],
+    "rig": [
+      7.4,
+      0.0,
+      11.5
+    ]
+  },
+  "primary_book_hero": [
+    "seed_replay_demo"
+  ],
+  "placements": {
+    "planned": 15,
+    "matched": 15,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 15,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random definition"
+  },
+  "plan_rows_agree": true,
+  "wcn_audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 0
+  },
+  "engine_script_errors": false,
+  "shutdown_warning": "ObjectDB instances leaked; 1 resource still in use at exit. Unresolved.",
+  "headset_verified": false,
+  "files_prepared_for_publication": 54,
+  "global_index_warnings": "Existing Tutorial_Disco ragged rows and stale/degraded pack ledgers in other halls; retained in tool logs.",
+  "source_sha256_now": {
+    "commons/testing/probe_wcn_random_definition_live.gd": "dc5989d811cefdb66fe4268e71d9634afcdf2eb501160a9bdd10a883f074a572",
+    "commons/maps/Random_Definition/map_data.json": "f289d607b1bdc014df6d03c12ea1cad187e6acdbb57be2cf0eab0cb76ac3b58e",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "8d829f5541365231643a8347fe98f546443806f4c7c0efc4e0c83140935865cf",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "commons/interactables/slider_horizontal.gd": "bed70c321e36a5d47c77586dd65a04cfcdd53e5abdbc6d1c2c268a87f5f72206"
+  },
+  "http_files_verified": 54,
+  "browser_review": {
+    "viewport_width": 1280,
+    "images_loaded": 3,
+    "horizontal_overflow": false,
+    "swatches": 128,
+    "toggle_and_restore": true,
+    "last_cell_uses_draw_193": true,
+    "book_disclosure_opens": true,
+    "primary_cards": 1,
+    "primary_written": 1,
+    "revised_slider_and_repeat_passages_served": true
+  },
+  "scoped_diff_check": "passed"
+}

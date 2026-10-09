@@ -1,0 +1,409 @@
+[
+  {
+    "sequence": "primitives",
+    "arc": "From arriving in a running world to making its first elements: a point gains a body, an address, a relation, a record and a face. Connected faces become generated forms. Separate rooms then ask what the engine supplies, how a column separates profile from sampling, and what borrowed letter outlines can become. The closing halls consider a chosen tolerance and a composition made with known tools.",
+    "halls": [
+      {
+        "id": "Point_Zero",
+        "title": "Once, then again",
+        "storyboard": "The student encounters the existing museum counter, then reads and runs its smallest complete study: create a Label3D in _ready, attach it, and update its text with the engine frame total in _process. Move the reading to _ready to hold one value while the engine continues. The tutorial prints one complete program, explains every necessary connection and names the exact move for the once-only experiment; camera and player are supplied by Day Zero. Native tests execute the printed code without production-script completion and reject omitted label creation or attachment. Carry execution timing into Point One; keep arrival and borrowed time in final.md.",
+        "mode": "deepen",
+        "brings": [
+          "Running museum",
+          "A saved change appears"
+        ],
+        "learns": [
+          "_ready: initialize when the node is ready",
+          "_process: per-frame updates"
+        ],
+        "carries": "When an instruction runs",
+        "supplied": [
+          "Day Zero running project, camera, light and player"
+        ],
+        "artifact_refs": [
+          "frame_counter_display"
+        ],
+        "review_note": "5 October author correction: smallest complete working code must be visible and tested. This is a reduced learner study of the existing counter, not edits hidden within its production implementation.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Meet museum counter. Print/run complete label + frame-reading study. Create and attach in _ready; update in _process; compare once-only reading. Supply Day Zero camera/player only. Assert exact printed code; missing creation/attachment must fail. Carry execution timing."
+      },
+      {
+        "id": "Point_One",
+        "title": "Give a point a body",
+        "storyboard": "Encounter the corridor's absent, visible and solid points, then build one small point from scratch in point.gd on an empty PointStudy Node3D inside the prepared project. _ready creates a StaticBody3D, sphere mesh and collider. A named centre and radius control position and both boundaries. Change each value; hide the surface or disable collision to separate seeing from contact. The complete code is printed once and executed by native assertions, including the edited states. Carry this actual program into Coordinates. Day Zero supplies room, camera, light and player, not the point.",
+        "mode": "make",
+        "brings": [
+          "Readiness and repeated processing"
+        ],
+        "learns": [
+          "Named values and object references",
+          "Create and attach a visible surface",
+          "Create a separate physical boundary"
+        ],
+        "carries": "The exact point.gd construction continued in Coordinates",
+        "supplied": [
+          "Day Zero room, camera, light and player",
+          "An empty PointStudy Node3D at floor level"
+        ],
+        "artifact_refs": [
+          "point_absent",
+          "point_visible",
+          "point_solid"
+        ],
+        "review_note": "Printed small construction and exact edits have native behavioural evidence. It is a learner study of the existing corridor, with no museum-runtime changes. See doc/book/iterations/2026-10-05-points-built-and-carried/index.html.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Meet corridor points. New point.gd on empty PointStudy in prepared project. _ready builds StaticBody3D + mesh + collider; shared centre/radius. Test position, size, visibility and collision independently. Print complete code once; assert exact script/edits. Carry same program to Coordinates. Supply room/view/player only."
+      },
+      {
+        "id": "Point_Coordinates",
+        "title": "A point we can move",
+        "storyboard": "Meet the museum's held point, then continue the exact point.gd made in Point One. Preserve centre, radius and mesh/collider construction; change the body to XRToolsPickable and supply its pickup settings before adding it to the scene. Create a Label3D and update WORLD from global_position and LOCAL through PointStudy.to_local. Grip, carry and release the same authored construction; disable pickup to isolate permission; move the station to distinguish frames. Test the printed program and its exact predecessor composition in native Godot using the real XR library and synthetic controller. Carry a movable, readable point into Lines. Day Zero supplies configured hands/library; distance is deferred.",
+        "mode": "make",
+        "brings": [
+          "Position variable",
+          "Visible body and collision"
+        ],
+        "learns": [
+          "Pickable body connection and release",
+          "3D coordinates",
+          "Local and world position in named frames"
+        ],
+        "carries": "Point One's authored body construction with pickup and a live coordinate readout",
+        "supplied": [
+          "Day Zero room, camera, light and configured XR hands",
+          "Godot XR Tools library"
+        ],
+        "artifact_refs": [
+          "origin"
+        ],
+        "review_note": "The readout is now created in the printed code. Native evidence tests overlap/grab/release and frame conversion; it does not prove hardware input or headset experience. Lines now continues this exact tested construction and preserves the readout.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Continue exact Point One point.gd. Preserve shape construction; StaticBody3D becomes XRToolsPickable. Set pickup configuration before tree entry. Create Label3D; per-frame WORLD=global_position, LOCAL=PointStudy.to_local. Test permission, hold/release, frame change. Supply XR hands/library. Native assertions + exact predecessor composition. Carry point; defer distance."
+      },
+      {
+        "id": "Point_Lines",
+        "title": "Put two points in relation",
+        "storyboard": "Move familiar geometry and pickup settings into PointBody._init; make A and B with .new; keep positions/readout/relation in the lesson. Convert both ends to local coordinates; subtract, measure and draw.",
+        "mode": "make",
+        "brings": [
+          "The tested pickable point from Coordinates",
+          "Its local/world readout",
+          "Per-frame updates"
+        ],
+        "learns": [
+          "Endpoints and a segment",
+          "Displacement and distance",
+          "A class and its instances",
+          "Parallel, cross and X",
+          "Position in depth"
+        ],
+        "carries": "PointBody class, two independent pickable instances, coordinate readout and live segment. Trace reuses the class unchanged.",
+        "supplied": [
+          "Prepared unit-scale museum room, camera/light and configured XR hands/library",
+          "Complete printed line_skin.gd renderer"
+        ],
+        "artifact_refs": [
+          "line_black_box"
+        ],
+        "review_note": "The complete printed script extracts the tested Coordinates construction into point_body.gd and creates two instances. The class construction is checked against the predecessor. Each point owns its mesh and collider; native XR pickup, resource independence and line relations are verified.",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "Extract familiar point into PointBody. _init builds mesh/collider/settings; XRToolsPickable supplies pickup. Two .new instances, own resources. Lesson owns placement/readout/segment. Explain class vs instance; test independent movement/resources, release, local relation and pairs. Carry class unchanged to Trace."
+      },
+      {
+        "id": "Point_Trace",
+        "title": "Keep the positions",
+        "storyboard": "Move the point already built in Point One and made pickable in Coordinates. Trace keeps selected local positions in an array, uses a distance condition to admit a sample, and loops over neighbours to join them. Predict which motion is retained and try another threshold. Release the point to save its positions and existing drawing through the supplied archive. Bring that work into the next museum hall; Grid will receive the sculpture instead of asking for another gesture.",
+        "mode": "make",
+        "brings": [
+          "The verified Lines program, unchanged PointBody class and LineSkin renderer."
+        ],
+        "learns": [
+          "Reusing the point class",
+          "Arrays of positions",
+          "Appending and reading an index",
+          "A distance condition with if",
+          "Neighbour loops with for",
+          "Saving the drawing for the next hall"
+        ],
+        "carries": "The saved segment sculpture and ordered local positions in user://ada_student_trace.scn. Metres, PointStudy-local frame, no timestamps; a later valid release replaces the save.",
+        "supplied": [
+          "The existing Endless Museum hall, player and XRTools; fully printed TraceArchive supplies packing and loading. PointBody and LineSkin return unchanged."
+        ],
+        "artifact_refs": [
+          "draw_dot"
+        ],
+        "review_note": "6 October author correction: bring the actual saved drawing into the next museum hall. Native source-bound tests and actual-hall checks pass; headset and human learning not tested.",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "BRING same PointBody + LineSkin. RECORD local metre positions; Array, append/index, distance IF, neighbour FOR. RELEASE saves positions + existing segment sculpture via supplied TraceArchive. CHECK pause/threshold/order/geometry + cross-process load. CARRY actual saved work to Grid; no timestamps."
+      },
+      {
+        "id": "Point_Line_Grid",
+        "title": "Give that trace addresses",
+        "storyboard": "Meet the drawing saved in Trace as a sculpture in Grid. One sampled record supports several representations: an ordered array, visible segments and rounded XYZ addresses. Keep the pink source intact while changing an independent green copy. Predict an address, compare pitches and flatten only the copy. Carry the preserved source into Triangle.",
+        "mode": "deepen",
+        "brings": [
+          "The actual drawing saved on release in Trace, its local position record and the unchanged LineSkin renderer."
+        ],
+        "learns": [
+          "Loading your saved trace",
+          "Reusing a drawing as a sculpture",
+          "One record, different representations",
+          "Source positions and grid addresses",
+          "Integer coordinates and rounding",
+          "Changing a copy while keeping the original"
+        ],
+        "carries": "Original saved sculpture and positions, independently owned derived segments and integer XYZ addresses. The drawing file and original record survive every comparison.",
+        "supplied": [
+          "The existing Endless Museum Grid hall, light and player; the same fully printed TraceArchive supplies loading. Desktop ui_accept changes pitch; the initial grid_step can be edited for VR."
+        ],
+        "artifact_refs": [
+          "grid_lines"
+        ],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "storyboard_notes": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Loading your saved trace; Reusing a drawing as a sculpture; One record, different representations; Source positions and grid addresses; Integer coordinates and rounding; Changing a copy while keeping the original. Meet the drawing saved in Trace as a sculpture in Grid. One sampled record supports several representations: an ordered array, visible segments and rounded XYZ addresses. Keep the pink source intact while changing an independent green copy. Predict an address, compare pitches and flatten only the copy. Carry the preserved source into Triangle."
+      },
+      {
+        "id": "Point_Triangle_Context",
+        "title": "A boundary becomes a face",
+        "storyboard": "Bring the original saved Trace positions through Grid. Lines already connected positions; now choose three entries and store their ordered connection as a face recipe. Reuse PointBody handles, move a corner, reverse the front and collapse the face to test its guard. Preserve the archive. Carry positions and connectivity into the first enclosure.",
+        "mode": "make",
+        "brings": [
+          "Three positions",
+          "Connected segments"
+        ],
+        "learns": [
+          "Three selected array entries",
+          "A closed boundary and a face",
+          "Clockwise vertex order",
+          "A guard for a collapsed triangle"
+        ],
+        "carries": "A face made from chosen positions",
+        "supplied": [
+          "Small tool and enlarged twin",
+          "Material and input"
+        ],
+        "artifact_refs": [],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Three selected array entries; A closed boundary and a face; Clockwise vertex order; A guard for a collapsed triangle. Bring the original saved Trace positions through Grid. Lines already connected positions; now choose three entries and store their ordered connection as a face recipe. Reuse PointBody handles, move a corner, reverse the front and collapse the face to test its guard. Preserve the archive. Carry positions and connectivity into the first enclosure."
+      },
+      {
+        "id": "Primitives_Polythedra",
+        "title": "Connect faces around a space",
+        "storyboard": "Reload the same three selected Trace positions and add an apex behind their plane. Store four positions once and address them with four face-index triples. Move the shared apex and see three faces change together; distinguish a closed visible surface from a collider. Carry the position/connectivity separation and FaceBody into Cube.",
+        "mode": "make",
+        "brings": [
+          "Position list",
+          "Triangle submission"
+        ],
+        "learns": [
+          "Shared vertices",
+          "A list of face-index triples",
+          "Tetrahedron connectivity",
+          "Surface enclosure versus collision"
+        ],
+        "carries": "A small connected mesh",
+        "supplied": [
+          "Rendering wrapper",
+          "The wider solid comparisons"
+        ],
+        "artifact_refs": [],
+        "review_note": "",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Shared vertices; A list of face-index triples; Tetrahedron connectivity; Surface enclosure versus collision. KEEP museum host; printed owned geometry; declare supplied helpers. TEST native + variant + deliberate fault. CARRY Carry the position/connectivity separation and FaceBody into Cube."
+      },
+      {
+        "id": "Point_Animatedcube",
+        "title": "Keep the corners, change the connections",
+        "storyboard": "Build CubeBody from eight shared corners and twelve triangles using the previous face renderer. Compare two independent instances with different front-face diagonals. Deform a corner, then move the whole node, distinguishing a construction edit from a placement. Keep the reusable cube for later composition, Transformation and Arrays.",
+        "mode": "deepen",
+        "brings": [
+          "Positions and face connections"
+        ],
+        "learns": [
+          "A reusable CubeBody class",
+          "Shared corner data",
+          "Two triangles per square side",
+          "Connectivity versus object position"
+        ],
+        "carries": "Edit a mesh without confusing it with object motion",
+        "supplied": [
+          "Comparison display",
+          "Prefab shelf"
+        ],
+        "artifact_refs": [],
+        "review_note": "",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH A reusable CubeBody class; Shared corner data; Two triangles per square side; Connectivity versus object position. KEEP museum host; printed owned geometry; declare supplied helpers. TEST native + variant + deliberate fault. CARRY Keep the reusable cube for later composition, Transformation and Arrays."
+      },
+      {
+        "id": "Primitives_Ignorance",
+        "title": "A rule can make the positions",
+        "storyboard": "Return to the authored position lists from Cube. Generate an octahedron list with a named function and a radius: positive and negative multiples of three axes. Render the supplied face recipe, call the function again and modify one independent result. Explain which choice belongs to the generating rule and which to a returned position. Carry parameters, return values and rule/output separation.",
+        "mode": "make",
+        "brings": [
+          "Position lists",
+          "Connected faces",
+          "Loop"
+        ],
+        "learns": [
+          "Functions and typed return values",
+          "Parameters and arguments",
+          "Symmetry as a construction rule",
+          "Independent generated results"
+        ],
+        "carries": "A reusable geometric generator",
+        "supplied": [
+          "Face connections",
+          "Museum columns and solids"
+        ],
+        "artifact_refs": [],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Functions and typed return values; Parameters and arguments; Symmetry as a construction rule; Independent generated results. Return to the authored position lists from Cube. Generate an octahedron list with a named function and a radius: positive and negative multiples of three axes. Render the supplied face recipe, call the function again and modify one independent result. Explain which choice belongs to the generating rule and which to a returned position. Carry parameters, return values and rule/output separation."
+      },
+      {
+        "id": "Primitives_Godot",
+        "title": "The sphere in your hand",
+        "storyboard": "Return to PointBody to study resolution as a construction parameter. Compare rings-only and segments-only changes on independent spheres while radius, appearance and spherical collision stay fixed. Pickup and the fully printed held-time controller support the comparison: holding reduces resolution, release pauses, and reset restores. Stop at valid lower bounds. Carry controllable construction into Columns and later abilities.",
+        "mode": "deepen",
+        "brings": [
+          "Existing PointBody construction and pickup behaviour",
+          "_process, elapsed time and conditions",
+          "Independent instances and resources",
+          "Position-generating functions"
+        ],
+        "learns": [
+          "Resolution as a construction parameter",
+          "Rings and radial segments",
+          "Visible construction and collision",
+          "Independent mesh resources"
+        ],
+        "carries": "A familiar sphere with an interaction that changes its resolution; a reusable route toward further abilities.",
+        "supplied": [
+          "Existing Endless Museum room, player and XR library",
+          "Mesh library and seven-form choir as comparison specimens"
+        ],
+        "artifact_refs": [
+          "primitive_mesh_library",
+          "seven_words_choir"
+        ],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Resolution as a construction parameter; Rings and radial segments; Visible construction and collision; Independent mesh resources. Return to PointBody to study resolution as a construction parameter. Compare rings-only and segments-only changes on independent spheres while radius, appearance and spherical collision stay fixed. Pickup and the fully printed held-time controller support the comparison: holding reduces resolution, release pauses, and reset restores. Stop at valid lower bounds. Carry controllable construction into Columns and later abilities."
+      },
+      {
+        "id": "Primitives_Columns",
+        "title": "One outline, several bodies",
+        "storyboard": "Use a radius profile and two loops to generate stacked ring positions. Compare the same profile and height at 4, 6, 8, 12 and 16 sides with a supplied circle sampler and surface stitcher. Then change silhouette and height separately. Carry independent construction parameters and the profile/placement distinction into borrowed letter outlines.",
+        "mode": "make",
+        "brings": [
+          "List and loop",
+          "A function returns positions",
+          "Supplied geometry can be inspected"
+        ],
+        "learns": [
+          "A profile as a radius list",
+          "Nested loops over rings and sides",
+          "Independent height and resolution",
+          "Comparing one variable at a time"
+        ],
+        "carries": "A column rule with separable shape, height and sampling inputs",
+        "supplied": [
+          "Circle sampler and surface builder",
+          "Museum specimens and their curved-section builder",
+          "Room, material and input"
+        ],
+        "artifact_refs": [
+          "resolution_colonnade_museum"
+        ],
+        "review_note": "The museum has fixed specimens, not live editing knobs. The reduced radius-list study uses straight intervals and ArrayMesh; do not call it a built-in PrimitiveMesh or equate more entries with smoothing. Agree where the learner’s edited column belongs in the museum.",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH A profile as a radius list; Nested loops over rings and sides; Independent height and resolution; Comparing one variable at a time. KEEP museum host; printed owned geometry; declare supplied helpers. TEST native + variant + deliberate fault. CARRY Carry independent construction parameters and the profile/placement distinction into borrowed letter outlines."
+      },
+      {
+        "id": "Primitives_Profiles",
+        "title": "Borrowed outlines",
+        "storyboard": "Return to Columns: a ring section carried through heights made a body. Borrow an O outline, including its hole, and carry that section through five parallel placements. Change sideways travel first; then compare width, depth and a C section. Preserve the supplied outline. Font extraction, triangulation and general curved-path frames stay supplied or deferred. Carry section and route as separate choices; visible hollow geometry does not supply collision.",
+        "mode": "deepen",
+        "brings": [
+          "Profile and sampling are different inputs",
+          "A function can return geometry data",
+          "Supplied construction is not a guaranteed use"
+        ],
+        "learns": [
+          "A supplied outline with a hole",
+          "Cross-section versus route",
+          "Sampling placements along a path",
+          "Declaring a dependency"
+        ],
+        "carries": "A borrowed profile with an explicit construction choice and use limitation",
+        "supplied": [
+          "Font and six tested form recipes",
+          "Glyph triangulation and sweep builder",
+          "Museum host and source-profile displays"
+        ],
+        "artifact_refs": [
+          "glyph_profile_gallery"
+        ],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH A supplied outline with a hole; Cross-section versus route; Sampling placements along a path; Declaring a dependency. Return to Columns: a ring section carried through heights made a body. Borrow an O outline, including its hole, and carry that section through five parallel placements. Change sideways travel first; then compare width, depth and a C section. Preserve the supplied outline. Font extraction, triangulation and general curved-path frames stay supplied or deferred. Carry section and route as separate choices; visible hollow geometry does not supply collision."
+      },
+      {
+        "id": "Primitives_Portals",
+        "title": "Decide what is sufficient",
+        "storyboard": "Reuse the supplied circle sampler and LineSkin to measure a closed polygon. Sum neighbour lengths, including last to first, and compare with the finite TAU-based circumference reference. Increase sides until the metre tolerance is met or the sample budget is spent. Trigonometric derivation stays supplied. Test a tighter tolerance and an unattainable request; carry a stopping rule that names both error and cost.",
+        "mode": "reflect",
+        "brings": [
+          "Generated positions",
+          "Distance between points"
+        ],
+        "learns": [
+          "A closed neighbour loop",
+          "Error in a stated unit",
+          "A while loop with a stopping rule",
+          "A finite work budget"
+        ],
+        "carries": "A stated tolerance or visible purpose",
+        "supplied": [
+          "Circle sampler",
+          "Ring display"
+        ],
+        "artifact_refs": [],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH A closed neighbour loop; Error in a stated unit; A while loop with a stopping rule; A finite work budget. Reuse the supplied circle sampler and LineSkin to measure a closed polygon. Sum neighbour lengths, including last to first, and compare with the finite TAU-based circumference reference. Increase sides until the metre tolerance is met or the sample budget is spent. Trigonometric derivation stays supplied. Test a tighter tolerance and an unattainable request; carry a stopping rule that names both error and cost."
+      },
+      {
+        "id": "Primitives_Melencolia",
+        "title": "Compose with what we have",
+        "storyboard": "Compose with learned CubeBody instances and the familiar PointBody. Change placements without changing construction data; reconstruct a second arrangement from script values. Scale and rotation wait for Transformation. Then attempt an independent arrangement: generate positions, retain a source and alter a copy, reuse a valid face and compare two sphere resolutions. Explain the construction choices and the arrangement; automated checks alone cannot establish that understanding.",
+        "mode": "reflect",
+        "brings": [
+          "Generated forms",
+          "Placement and proportion"
+        ],
+        "learns": [
+          "Composition with known classes",
+          "Independent instances",
+          "Placement versus construction",
+          "Reusing a learned capability"
+        ],
+        "carries": "A small arrangement that can change",
+        "supplied": [
+          "Existing Dürer encounter",
+          "Prepared materials"
+        ],
+        "artifact_refs": [],
+        "review_note": "6 October feedback refinement. See doc/book/iterations/2026-10-06-primitives-feedback/index.html",
+        "summary_style": "full-with-compact-alternative",
+        "storyboard_short": "TEACH Composition with known classes; Independent instances; Placement versus construction; Reusing a learned capability. Compose with learned CubeBody instances and the familiar PointBody. Change placements without changing construction data; reconstruct a second arrangement from script values. Scale and rotation wait for Transformation. Then attempt an independent arrangement: generate positions, retain a source and alter a copy, reuse a valid face and compare two sphere resolutions. Explain the construction choices and the arrangement; automated checks alone cannot establish that understanding."
+      }
+    ]
+  }
+]

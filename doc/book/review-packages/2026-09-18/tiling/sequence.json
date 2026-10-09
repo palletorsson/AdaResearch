@@ -1,0 +1,70 @@
+{
+  "name": "Patterns: Dress the Architecture",
+  "truth": "A pattern is a rule you can walk around. Repetition is not decoration — it is a claim that the same thing can happen again, and symmetry is the bookkeeping of which repetitions are the same one.",
+  "description": "Return to the familiar disco with independent pattern and palette controls, then let the foundry machines supply live pattern and colour to architectural walls and floors. Continue through motif operations, symmetry, volume, appearance, shaders and dressed bodies.",
+  "layer": "F_order",
+  "difficulty": "beginner",
+  "estimated_time": "45-60 minutes",
+  "learning_objectives": [
+    "A tile is a rule, not a picture",
+    "Reflection, rotation and glide as operations on a cell",
+    "How a rule on one cell becomes a wall",
+    "The seventeen wallpaper groups, and why there are exactly seventeen"
+  ],
+  "maps": [
+    "Pattern_Disco",
+    "Pattern_Foundry",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Symmetry_Seventeen",
+    "Ribbon_Patterns_01",
+    "Ribbon_Patterns_02",
+    "Ribbon_Patterns_03"
+  ],
+  "return_to": "lab",
+  "lab_map": "Lab/map_data_post_color",
+  "deferred_maps": [],
+  "deferred_reason": "THE UNBRAIDING, 2026-09-07 (Palle). colour was carrying two threads: a COLOUR thread (Nails, Pillar, Walls, Context_Placed) and a PATTERN thread (Pattern_Foundry, Symmetry_Seventeen), diagnosed by the red-thread pass on 2026-09-03 — 'three of the seven rooms contain no colour argument at all'. The pattern rooms leave for a sequence of their own, joined by Tutorial_Pattern and Array_Patterns from array_tutorial. Evidence they are one sequence: pattern_tile_mirror stands in three of the four (Symmetry_Seventeen joins on vr_tile_editor alone), pattern_tile_4x4 in two, pattern_maker_station in two, vr_tile_editor in two. colour's stated truth — 'context, not wavelength' — now applies to every room in colour.",
+  "notes": "Born 2026-09-07 out of colour and array_tutorial. It partly undoes the 2026-08-24 fold that dissolved symmetry into colour's census room — stated as a reversal, not smuggled. NOT named for shaders: there are zero .gdshader files under commons/shaders and two shader-named tokens in the registry, and a sequence should not be named for work that does not exist yet. RENAMED 2026-09-07 from `pattern` to `tiling` at Palle's instruction, to keep it distinct from patterngeneration — 'Shaders & Patterns: The Book of Shaders', 25 maps, which stays OUT of the spine for now. Every artifact in these four rooms is a tile, loom, mill or wallpaper piece, and the sequence ends on the seventeen wallpaper groups, which is the classification of plane tilings. `tiling` names what is built; `patterngeneration` names what is designed.",
+  "content": [
+    "Pattern_Disco: The familiar floor gains independent colour control",
+    "Pattern_Foundry: Pattern Foundry",
+    "Tutorial_Pattern: Tutorial Pattern",
+    "Array_Patterns: Array Patterns",
+    "Symmetry_Seventeen: Symmetry Seventeen",
+    "Ribbon_Patterns_01: Structure and repetition",
+    "Ribbon_Patterns_02: Sampling and comparison",
+    "Ribbon_Patterns_03: Signals and glitches"
+  ],
+  "museum_recovery_note": "2026-09-09: retain current pattern configurations inside perimeter walls. These four maps are owned by tiling, never colour.",
+  "ribbon_consolidation": "2026-09-09: seven former colour ribbon rooms consolidated into three annexes; authored colour/tiling copies take precedence. Remaining exhibits occur once across the annexes.",
+  "prerequisites": [
+    "array_tutorial",
+    "color"
+  ],
+  "artifact_groups": [
+    {
+      "map": "Pattern_Disco",
+      "position": "intro",
+      "artifacts": [
+        "disco_controls",
+        "standalone_disco",
+        "step_sequencer"
+      ],
+      "size_budget": "environment",
+      "rationale": "The monochrome lesson returns after Color with a separate palette control."
+    },
+    {
+      "map": "Pattern_Foundry",
+      "position": "development",
+      "artifacts": [
+        "pattern_architecture",
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "rationale": "A small motif becomes a controllable architectural surface; existing machines and precise receiver studies remain.",
+      "size_budget": "environment"
+    }
+  ]
+}

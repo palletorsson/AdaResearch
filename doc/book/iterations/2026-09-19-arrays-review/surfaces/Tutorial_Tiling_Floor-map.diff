@@ -1,0 +1,25 @@
+--- before/Tutorial_Tiling_Floor/map_data.json
++++ after/Tutorial_Tiling_Floor/map_data.json
+@@ -1726,7 +1726,7 @@
+         "",
+         "",
+         "",
+-        "tiling_principles#mode:floor",
++        "tiling_principles:0:0#mode:floor",
+         "",
+         "",
+         "",
+@@ -2044,6 +2044,13 @@
+     "show_grid": false,
+     "grid_animation": {
+       "enabled": false
++    },
++    "color_overrides": {
++      "model_color": "0.69, 0.69, 0.69, 1.0",
++      "wireframe_color": "0.69, 0.69, 0.69, 1.0",
++      "emission_color": "0.0, 0.0, 0.0, 1.0",
++      "emission_strength": 0.0,
++      "width": 0.1
+     }
+   },
+   "utility_definitions": {

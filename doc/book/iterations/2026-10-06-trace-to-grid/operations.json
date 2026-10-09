@@ -1,0 +1,38 @@
+[
+  {
+    "id": "room-for-address-readout",
+    "kind": "replace",
+    "before": "    readout.position = Vector3(0, 1.6, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.005\n",
+    "after": "    readout.position = Vector3(0, 2.0, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.003\n"
+  },
+  {
+    "id": "grid-state",
+    "kind": "insert_after",
+    "anchor": "var trail: Node3D\n",
+    "text": "var grid_step := 0.25\nvar addresses: Array[Vector3i] = []\nvar snapped_positions: Array[Vector3] = []\nvar grid_trail: Node3D\n"
+  },
+  {
+    "id": "prepare-comparison",
+    "kind": "insert_after",
+    "anchor": "    positions.append(point.position)\n",
+    "text": "\n    grid_trail = Node3D.new()\n    add_child(grid_trail)\n    point.action_pressed.connect(_change_pitch)\n    _redraw_grid()\n"
+  },
+  {
+    "id": "desktop-control",
+    "kind": "insert_after",
+    "anchor": "func _process(_delta: float) -> void:\n",
+    "text": "    if Input.is_action_just_pressed(\"ui_accept\"):\n        _change_pitch()\n\n"
+  },
+  {
+    "id": "derive-after-sample",
+    "kind": "insert_after",
+    "anchor": "            segment.show_segment(a, displacement, displacement.length())\n",
+    "text": "\n        _redraw_grid()\n"
+  },
+  {
+    "id": "inspect-address",
+    "kind": "insert_after",
+    "anchor": "    readout.text += \"\\nPOINTS \" + str(positions.size())\n",
+    "text": "    readout.text += \"\\nPITCH \" + str(grid_step) + \" m\"\n    if not addresses.is_empty():\n        readout.text += \"\\nLAST ADDRESS \" + str(addresses[addresses.size() - 1])\n\nfunc _change_pitch(_held_point: Node3D = null) -> void:\n    if grid_step == 0.25:\n        grid_step = 0.50\n    else:\n        grid_step = 0.25\n    _redraw_grid()\n\nfunc _redraw_grid() -> void:\n    addresses.clear()\n    snapped_positions.clear()\n    for segment in grid_trail.get_children():\n        segment.queue_free()\n    if grid_step <= 0.0:\n        return\n\n    for p in positions:\n        var address := Vector3i(\n            roundi(p.x / grid_step),\n            roundi(p.y / grid_step),\n            roundi(p.z / grid_step)\n        )\n        addresses.append(address)\n        snapped_positions.append(Vector3(address) * grid_step)\n\n    for i in range(1, snapped_positions.size()):\n        var a := snapped_positions[i - 1]\n        var displacement := snapped_positions[i] - a\n        var segment := LineSkin.new()\n        var finish := segment.material_override as StandardMaterial3D\n        finish.albedo_color = Color(0.25, 0.85, 0.60)\n        grid_trail.add_child(segment)\n        segment.show_segment(a, displacement, displacement.length())\n"
+  }
+]

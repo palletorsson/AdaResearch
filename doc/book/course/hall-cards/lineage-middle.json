@@ -1,0 +1,2105 @@
+{
+  "date": "2026-10-05",
+  "scope": "Proposed teaching lineage; not learner or runtime verification",
+  "halls": [
+    {
+      "map": "WaveFunctions_Intro",
+      "subjects": [
+        "Angular state",
+        "Release velocity",
+        "Restoring acceleration"
+      ],
+      "focus": "Compare releases from one angle with different angular velocities, tracing how restoring acceleration changes the next state.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "why": "Retained velocity, restoration and damping."
+        },
+        {
+          "map": "VFM_02_Operations",
+          "why": "Projection of a velocity onto a chosen direction."
+        }
+      ],
+      "adds": "Extend the retained motion state to angle and angular velocity.",
+      "carries": "An angular update with explicit initial state.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "30b88139d316f3e005a3be0510afdadca0398cc04ed555e254109b3e7aa2bc97",
+      "tutorial_sha256_after": "737385fe186233727915ebba98426e715f9f7b9307e3506da1eecc7139aa6077"
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "subjects": [
+        "Timestamped records",
+        "Sampling intervals",
+        "Memory limits"
+      ],
+      "focus": "Record position and time as named fields, bound the history by count and age, and compare coarse and period-matched sampling.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "An ordered list of retained positions."
+        },
+        {
+          "map": "WaveFunctions_Intro",
+          "why": "A moving source whose angle and velocity remain distinct."
+        }
+      ],
+      "adds": "Attach a time to each sample and distinguish sample count from retained duration.",
+      "carries": "A bounded recorder with an explicit sampling contract.",
+      "status": "needs_revision",
+      "review": "The lesson stores time in Vector3.z; the proposed named position/time record needs an explicit data contract and learner edit.",
+      "tutorial_sha256_before": "b261c85fb0e2da2a3f7fd825894935a5f2359e59446e5b0a28711a1ed368dc48",
+      "tutorial_sha256_after": "e68c7f40c9143d2244f2025e18bf3dc08a76839fea7ab28ae9dfebe6dd0f2a79"
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "subjects": [
+        "Spatial sine sampling",
+        "Height fields",
+        "Collision boundaries"
+      ],
+      "focus": "Sample a product of spatial sines on a small grid, connect known triangles, and compare relief with sphere size using supplied collision construction.",
+      "builds_on": [
+        {
+          "map": "Point_Line_Grid",
+          "why": "Addresses for neighbouring samples."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Vertex and face connectivity."
+        },
+        {
+          "map": "Trans_Introduction",
+          "why": "A first usable sine rule."
+        }
+      ],
+      "adds": "Apply a periodic function to spatial coordinates and separate sampled geometry from physical contact.",
+      "carries": "A static sine height field with a stated collision receiver.",
+      "status": "needs_revision",
+      "review": "The current text explains the existing tray and corridor; a reduced learner grid and face-building operation are not yet supplied.",
+      "tutorial_sha256_before": "8deeb1bfc778887d4e0f754e50b1e5c74966d290b8e3a5dc60aa94eb3a83fc1d",
+      "tutorial_sha256_after": "03a6cbd78be278cec61bcf0fc2462cbfdf2f03dace63f1cb8606c82d9b3ec911"
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "subjects": [
+        "Circular coordinates",
+        "Radians",
+        "Phase",
+        "Coordinate projections"
+      ],
+      "focus": "Write a circle-position function and predict its sine and cosine coordinates at quarter turns.",
+      "builds_on": [
+        {
+          "map": "Trans_Rotation",
+          "why": "Rotation about a centre."
+        },
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "Sine already used as a spatial rule."
+        }
+      ],
+      "adds": "Derive two coordinate offsets from one angle and radius.",
+      "carries": "An understood circle sampler with a named centre.",
+      "status": "needs_revision",
+      "review": "The recipe omits a centred learner function and contains an incorrect quarter-turn chord claim; the supplied runner reference and phase account need alignment.",
+      "tutorial_sha256_before": "e6abbfbeb1f257508a12f28a16d53fba18961706ee487108493b2da168d6bb11",
+      "tutorial_sha256_after": "a976bf21e1bf33444a6fd3622c0688453f20bcc9042079f5a6c21275108844d9"
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "subjects": [
+        "Neighbour coupling",
+        "Synchronous updates",
+        "Disturbance propagation"
+      ],
+      "focus": "Update a short row of oscillators from old neighbouring displacements and compare linked and independent responses to one impulse.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "why": "A restoring state update."
+        },
+        {
+          "map": "Tutorial_3D",
+          "why": "Addressed state collections; revisit the indexing convention."
+        }
+      ],
+      "adds": "Let neighbouring state differences transmit a disturbance without an imposed delay formula.",
+      "carries": "A local interaction rule with separate old and next states.",
+      "status": "needs_revision",
+      "review": "The existing lesson builds distance-delayed sources and pebble emitters, not the storyboard's coupled lattice.",
+      "tutorial_sha256_before": "ea132a847b89577536ce332cf22024473674c25b93e567b34bd209f2ba7ec4cf",
+      "tutorial_sha256_after": "a60c3aa1306a201031374c0b079698bd0ad956c7ad78a3e4baf7cda56241ad7b"
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "subjects": [
+        "Signal sampling",
+        "Phase modulation",
+        "Amplitude envelopes"
+      ],
+      "focus": "Trace a sampled carrier with a second sine inside its phase and compare modulation depth against a retained reference.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Angle, phase and sine evaluation."
+        },
+        {
+          "map": "WaveFunctions_Pendulum",
+          "why": "Sampling with an explicit time coordinate."
+        }
+      ],
+      "adds": "Compose functions inside phase and distinguish that operation from adding two output signals.",
+      "carries": "A readable phase-modulated signal and its envelope.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "6ad751ca5b04488568ae30007443c6401663cad5f3df46b5f296106812da07ce",
+      "tutorial_sha256_after": "83edad4e7126d9423f234e7571697405b99e60cb1c000764b4a5ad7dacf5baa4"
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "subjects": [
+        "Ring sampling",
+        "Height-dependent twist",
+        "Spatial and temporal variation"
+      ],
+      "focus": "Build a short stack of rotated rings, join corresponding corners, and stop whole-object rotation to inspect the twist that remains.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Circular coordinate sampling."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Faces connect known vertex addresses."
+        }
+      ],
+      "adds": "Compose circular sampling with a height-dependent angular offset.",
+      "carries": "A short shaft generator separating shape from its motion.",
+      "status": "needs_revision",
+      "review": "The current recipe displaces ring centres instead of rotating their profiles and has an incomplete triangle strip; the intended short shaft still needs a sound construction.",
+      "tutorial_sha256_before": "c1beb872bce14059745d3099d511b9f086d36b05685eaf3e94d6243eb68d5d9e",
+      "tutorial_sha256_after": "02a85312d49162995e77cb00fe1c83d772ceefaa88f2bea889ad334a989e25ef"
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "subjects": [
+        "Chance scores",
+        "Event intervals",
+        "Prepared vocabularies"
+      ],
+      "focus": "Retain a short event list selected from an explicit sound vocabulary and compare replay with a newly drawn performance.",
+      "builds_on": [
+        {
+          "map": "Tutorial_Disco",
+          "why": "A clock reading an ordered score."
+        },
+        {
+          "map": "FormFinding_Annealing",
+          "why": "A bounded random proposal, to be re-explained if unfamiliar."
+        }
+      ],
+      "adds": "Compose earlier timing and random choice; distinguish a chosen vocabulary from its sampled order.",
+      "carries": "An inspectable finite chance score.",
+      "status": "needs_revision",
+      "review": "The current lesson claims ambient breath measurement and a Cage performance; it does not implement the proposed replayable score from supplied sounds.",
+      "tutorial_sha256_before": "22b93edac5286e42cd34dd5b0ecfccbcfe1c0bc08d4083a2beef62069679eea1",
+      "tutorial_sha256_after": "1965511e5e002fa4d9e82028281fed74ce0d9b118cc38b995db29d9874b7f2c1"
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "subjects": [
+        "Event-driven voices",
+        "Independent clocks",
+        "Decay envelopes",
+        "Signal addition"
+      ],
+      "focus": "Compare a restrike with two overlapping notes by tracing each voice's start, age and decaying response.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Effect_Sound",
+          "why": "A sampled sine multiplied by an amplitude envelope."
+        },
+        {
+          "map": "Trans_Introduction",
+          "why": "Elapsed time and conditional state changes."
+        }
+      ],
+      "adds": "Give each event its own beginning and distinguish restarting one voice from adding another.",
+      "carries": "A voice-state account with separate start times and summed signals.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "8df5b66afff45a34cc52db63d9450158746512d08694f36bb622e060f8fd3794",
+      "tutorial_sha256_after": "df5d6c49b00a179cb88ab048a639927d09a358ba13b94aeddfb3b1f0947e134e"
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "subjects": [
+        "Helical sampling",
+        "Tread orientation",
+        "Clearance"
+      ],
+      "focus": "Construct a short tread segment from a circular rule with uniform rise, then compare centre spacing with its inner and outer edges.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Circular positions from angle and radius."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "A visible body and its collision boundary."
+        }
+      ],
+      "adds": "Compose known sampling and transforms into a support arrangement.",
+      "carries": "A short route segment with separate geometry and support decisions.",
+      "status": "needs_revision",
+      "review": "The current opening corrects the installed radial modulation, but the preserved lesson builds an obsolete variable-rise proposal; a reduced tread construction is absent.",
+      "tutorial_sha256_before": "3db217b5f8aa6493f5f953e9e117488627168a6c63495e2523dd3da1166d6b12",
+      "tutorial_sha256_after": "62764882bb985abe5e6f9820914cbce46e6a21f278d00dc6a71c92cb80f0f3db"
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "subjects": [
+        "Signal superposition",
+        "Beat envelopes",
+        "Display scales"
+      ],
+      "focus": "Sample two close frequencies at shared times, add their signed values, and predict the slow envelope while keeping drawing gain explicit.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Effect_Sound",
+          "why": "A sampled time-to-signal function."
+        },
+        {
+          "map": "WaveFunctions_AirMusic",
+          "why": "Addition of independently timed signals."
+        }
+      ],
+      "adds": "Compare cancellation and reinforcement without inventing a third oscillator.",
+      "carries": "A two-signal comparison with its raw sum retained.",
+      "status": "needs_revision",
+      "review": "The current introduction names the beat exhibit; the main recipe still teaches an archived endless walking path rather than the proposed sum.",
+      "tutorial_sha256_before": "7cb41471b219834ff0e6ea5d3b41b7ad58575a5a739ab7dd844376c10d7a186d",
+      "tutorial_sha256_after": "f9657ac58917449b1a601a9b18333a25c0e0f6a9c9f2d0a8386b55de98c97b6c"
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "subjects": [
+        "Harmonic coefficients",
+        "Weighted sums",
+        "Finite representations"
+      ],
+      "focus": "Use a coefficient list and loop to predict one harmonic contribution, then alter a finite sum and state what the permitted coefficients cannot express.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_TrigWalkingPath",
+          "why": "Signed addition at a shared sample time."
+        },
+        {
+          "map": "WaveFunctions_AirMusic",
+          "why": "A sum depends on levels and phase."
+        }
+      ],
+      "adds": "Generalize two-signal addition to a list of weighted harmonics.",
+      "carries": "A finite wave recipe with explicit range and phase limitations.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "90a24357f279a402506c28760fd2c2767d2b6e29c55c3711ae45906d6d11e986",
+      "tutorial_sha256_after": "ae7c4e3f7d67aaf54077655ff925215dae442ac205b2fabb01e44ee2fce8ced2"
+    },
+    {
+      "map": "Random_Definition",
+      "subjects": [
+        "Seeded generators",
+        "Draw order",
+        "Value assignments"
+      ],
+      "focus": "Reset a local generator, colour an ordered collection, and change the result by moving the reset, consuming one draw or exchanging channel roles.",
+      "builds_on": [
+        {
+          "map": "FormFinding_Annealing",
+          "why": "A bounded draw already used for a proposal."
+        },
+        {
+          "map": "Color_Grid_Pallet",
+          "why": "Addressed colour values."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "A value passed to a declared receiver; revisit the planned function interface."
+        }
+      ],
+      "adds": "Deepen random choice into a reproducible reset-request-assign procedure.",
+      "carries": "A seed kept with its ordered requests and assignments.",
+      "status": "aligned",
+      "review": "The making lesson is substantive, but its standalone study still needs the proposed museum colour-list adapter.",
+      "tutorial_sha256_before": "c571d270eae54eec460674eba3a2f28d28f410b723af209048fddd7052d2b75b",
+      "tutorial_sha256_after": "686fcbf36ca7d6723cc30731e00ec0e6b4f1a9d82bc6d6a5194169a47b3acd73"
+    },
+    {
+      "map": "Random_Entropy",
+      "subjects": [
+        "Frequency tables",
+        "Copied records",
+        "Marginal entropy"
+      ],
+      "focus": "Count retained symbols and compare their original and sorted arrangements while explaining what a count-based entropy calculation leaves out.",
+      "builds_on": [
+        {
+          "map": "Random_Definition",
+          "why": "A retained seeded sample and declared request order."
+        }
+      ],
+      "adds": "Reduce a sequence to counts without confusing that reduction with its arrangement.",
+      "carries": "A sample-to-count operation and a separately retained original record.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "f91de02a37537442212f8dd72548b20d4fc2334cb7f5982da3cc18212c0f6cb2",
+      "tutorial_sha256_after": "3ae885beaaf45b69157baffdc6c52d57d1de4ee55c79d9159f228ea6d84fb947"
+    },
+    {
+      "map": "Random_Remove",
+      "subjects": [
+        "Eligibility filters",
+        "Sampling without replacement",
+        "Replacement policies"
+      ],
+      "focus": "Construct an eligible list, draw one member, and compare returning it with removing it before the next draw.",
+      "builds_on": [
+        {
+          "map": "Random_Definition",
+          "why": "A bounded draw from a local generator."
+        },
+        {
+          "map": "Point_Line_Grid",
+          "why": "Spatial addresses separate from list indices."
+        }
+      ],
+      "adds": "Make the set of possible choices and its evolution explicit.",
+      "carries": "A remaining-candidates list and a stated replacement rule.",
+      "status": "needs_revision",
+      "review": "The current board clearly teaches filtering and removal; the with-replacement comparison and its small learner receiver remain to be written.",
+      "tutorial_sha256_before": "c49a94c85a290b34d16995f9a6ab99bac49d6006f014593dc2455e14f64b9995",
+      "tutorial_sha256_after": "4737ef840c93f0422239561f20165fe096943b5d1682f95861cd17191806ba67"
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "subjects": [
+        "Binary choices",
+        "Grid traversal",
+        "Mark interpretation"
+      ],
+      "focus": "Assign one of two diagonal marks to each grid address and vary the choice threshold without claiming the image guarantees a route.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Two endpoints define a line."
+        },
+        {
+          "map": "Random_Definition",
+          "why": "Ordered draws and replay."
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "why": "One assigned value selects a tile's orientation."
+        }
+      ],
+      "adds": "Compose known traversal, conditions and random choice into a two-mark pattern.",
+      "carries": "An addressed binary-mark generator.",
+      "status": "aligned",
+      "review": "The current recipe's infinite-pattern and maze claims exceed its finite drawing; route connectivity is not established.",
+      "tutorial_sha256_before": "216a70a0dc7e89a4432f0cf3b233e0f6341b83275e622bde6a72a25d9089d0b8",
+      "tutorial_sha256_after": "f2fbac5af36f8846f849fb16b0612dddd07aff62f923897bf08300671ea23f6f"
+    },
+    {
+      "map": "Random_Cubes",
+      "subjects": [
+        "Event accumulators",
+        "Stopping conditions",
+        "Outcome histories"
+      ],
+      "focus": "Accept each supplied die landing once, add its face to a retained total, and continue only after six while reporting any imposed limit.",
+      "builds_on": [
+        {
+          "map": "Random_Entropy",
+          "why": "A retained outcome list differs from its summary."
+        },
+        {
+          "map": "WaveFunctions_AirMusic",
+          "why": "An event starts or changes state once."
+        }
+      ],
+      "adds": "Accumulate asynchronously supplied outcomes under a conditional stopping rule.",
+      "carries": "A bounded die-chain record with total and completion state.",
+      "status": "needs_revision",
+      "review": "The current tutorial constructs random cube-edge profiles; it does not teach the physical die chain or accepted landing-event accumulator.",
+      "tutorial_sha256_before": "401f7f6fad6526de2200c89bb8404a9dfdebf1f8a760553f98ddb8172525d521",
+      "tutorial_sha256_after": "7d76729475f55f935a64e7323fcd6a2195dd8dd140b488a4d5fc62bb8e411120"
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "subjects": [
+        "State accumulation",
+        "Random increments",
+        "Orientation histories"
+      ],
+      "focus": "Compare assigning a fresh angle with adding an increment to one retained angle, then inspect what reset restores.",
+      "builds_on": [
+        {
+          "map": "Trans_Rotation",
+          "why": "An angle changes orientation."
+        },
+        {
+          "map": "Random_Definition",
+          "why": "Explicit draw requests."
+        }
+      ],
+      "adds": "Deepen the difference between assigning state and accumulating a change.",
+      "carries": "An orientation record with an explicit update cadence.",
+      "status": "needs_revision",
+      "review": "The historical XYZ recipe differs from the current accumulated in-plane rotation and mistakes a clock-bit expression for hardware entropy.",
+      "tutorial_sha256_before": "875736a2eeb8185a5961ceca4c7b4e446f3ec0d717ecd8f1cfd98c4c0f9c6e59",
+      "tutorial_sha256_after": "6fc347c3572aaa4122897f3edde121eec3e6678a62cab88887ca3b9e4a2ca162"
+    },
+    {
+      "map": "Random_Walk",
+      "subjects": [
+        "Random displacements",
+        "Boundary rules",
+        "Position histories"
+      ],
+      "focus": "Add a sampled displacement to the current position, apply an explicit boundary rule and distinguish accepted endpoints from the displayed connecting line.",
+      "builds_on": [
+        {
+          "map": "Random_Rotate_Random_XYZ",
+          "why": "An increment changes retained state."
+        },
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Direction from sine and cosine."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Retained positions do not themselves control the next step."
+        }
+      ],
+      "adds": "Move the accumulation into position and make enclosure corrections part of the rule.",
+      "carries": "A walker whose proposal, accepted position and history stay distinct.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "b2f53600e75900cf09e10af90339171b79127b8ba3f0da997bae9183448cc5e5",
+      "tutorial_sha256_after": "bae51365a3947b458e9ff145251b4c52eaf4640ae856c1895657fa02f65a76cb"
+    },
+    {
+      "map": "Random_Gaussian",
+      "subjects": [
+        "Histograms",
+        "Distribution comparisons",
+        "Clipping and binning"
+      ],
+      "focus": "Retain numerical samples and rebin them without drawing again, distinguishing the sampling law, clipping boundary and displayed counts.",
+      "builds_on": [
+        {
+          "map": "Random_Entropy",
+          "why": "Counts summarize a retained record."
+        },
+        {
+          "map": "Random_Walk",
+          "why": "A draw and its stored observation are different operations."
+        }
+      ],
+      "adds": "Group numerical samples by interval while retaining values for another partition.",
+      "carries": "A rebinning procedure with a declared sampling and display range.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "a6d2616896a54f3a065106b3f268a3fac9597fe185d51ac9c2221ef63eaf3a52",
+      "tutorial_sha256_after": "3f21ba3801aba0996bc35c9dbd7a52b8b82dd0e244c5530fdcecfa7354f4f2b7"
+    },
+    {
+      "map": "Random_Mushrooms",
+      "subjects": [
+        "Population records",
+        "Discrete templates",
+        "Continuous variation"
+      ],
+      "focus": "Keep template, position and scale in a small population description, then vary one assignment while retaining the others.",
+      "builds_on": [
+        {
+          "map": "Random_Gaussian",
+          "why": "State which sampling law generates a parameter."
+        },
+        {
+          "map": "Random_Definition",
+          "why": "Preserve draw consumption while changing a value's use."
+        }
+      ],
+      "adds": "Compose separate sampled assignments into a reproducible population recipe.",
+      "carries": "A population record separating kind, placement and scale.",
+      "status": "needs_revision",
+      "review": "The lesson supports controlled specimen comparisons but does not yet build the proposed retained population description or expose its builder contract.",
+      "tutorial_sha256_before": "ca9e4319473514beca1354fea9658b549048e1c055ccb187a74ebeb8f33994e0",
+      "tutorial_sha256_after": "56fb39a5547098ce3a191abd2fdfc49020ad4baf1b479dfa68a6c7e31b8e70a5"
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "subjects": [
+        "Spatial correlation",
+        "Matched sample coordinates",
+        "Neighbour differences"
+      ],
+      "focus": "Compare independent draws with a supplied coherent field at identical coordinates, measuring adjacent differences before changing coordinate spacing.",
+      "builds_on": [
+        {
+          "map": "Random_Definition",
+          "why": "Independent draw requests."
+        },
+        {
+          "map": "Point_Line_Grid",
+          "why": "A declared grid of sample coordinates."
+        }
+      ],
+      "adds": "Investigate relations among neighbouring values instead of only their distribution.",
+      "carries": "A matched profile comparison with stated coordinate spacing.",
+      "status": "needs_revision",
+      "review": "The current tutorial creates random panel chambers; the storyboard centres the white-noise/Perlin comparison bench.",
+      "tutorial_sha256_before": "3f5c69f0f2bda0690f1cf5256976541651ceffabb84f2ea54d586467e0fac776",
+      "tutorial_sha256_after": "671c50920a7b9bfb991c85ac4085465f9186f464472734e5d45f58ac5084ea69"
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "subjects": [
+        "Monte Carlo estimates",
+        "Hit tests",
+        "Finite-sample error"
+      ],
+      "focus": "Sample points uniformly inside a square, count circle hits and compare successive estimates without expecting each new draw to improve them.",
+      "builds_on": [
+        {
+          "map": "Random_Entropy",
+          "why": "A sample count and proportion."
+        },
+        {
+          "map": "VFM_02_Operations",
+          "why": "Distance from a chosen centre."
+        }
+      ],
+      "adds": "Use a random sample to estimate an area ratio.",
+      "carries": "A sample-test-count estimate with its sampling assumptions stated.",
+      "status": "needs_revision",
+      "review": "The existing survey explains the estimate but does not provide the bounded learner sampler and hit-test operation.",
+      "tutorial_sha256_before": "d9affb2e22022ae1f3dbde60173831faca99e379d84529d585efc22694ce4135",
+      "tutorial_sha256_after": "7fd8aada1cabd3d999e4b644b9acaf91deba59f7725543a389c419bfecfa5c86"
+    },
+    {
+      "map": "Random_Pheromone",
+      "subjects": [
+        "Signal fields",
+        "Deposition and decay",
+        "Feedback"
+      ],
+      "focus": "Deposit and decay an addressed signal, then use neighbouring values to choose a walker's next step.",
+      "builds_on": [
+        {
+          "map": "Random_Walk",
+          "why": "Position updates and a record independent of the next step."
+        },
+        {
+          "map": "Random_Remove",
+          "why": "Eligible alternatives precede a choice."
+        }
+      ],
+      "adds": "Make a retained trace participate in future decisions.",
+      "carries": "A walker-to-field feedback rule distinct from terrain height.",
+      "status": "needs_revision",
+      "review": "Weighted choice and coordinate helpers are unexplained; the function called trail_entropy computes a mean and cannot support the claimed entropy interpretation.",
+      "tutorial_sha256_before": "b676cc2306b05ad989f61bb23cd8a995be98b77cf07b0c896bfb34304714800a",
+      "tutorial_sha256_after": "76fed081a341e1f7a2bb08e306116f3ece666bf8d5bc347d5b0d77afc42b4b06"
+    },
+    {
+      "map": "Random_Space",
+      "subjects": [
+        "Multiscale sampling",
+        "Weighted field sums",
+        "Retained contributions"
+      ],
+      "focus": "Sample a supplied base function at several coordinate scales, retain each weighted contribution and compare their finite sum.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "why": "A weighted sum over a list."
+        },
+        {
+          "map": "Random_Space_Geometry",
+          "why": "Field sampling at declared coordinates."
+        }
+      ],
+      "adds": "Transfer harmonic composition to a finite field recipe with separate scale and amplitude.",
+      "carries": "A field recipe whose layers can be inspected and recombined.",
+      "status": "needs_revision",
+      "review": "The current lesson assembles unrelated finale specimens instead of the noise mixer's weighted layers.",
+      "tutorial_sha256_before": "dddd7802af308efdd58aeccc9c73c7b5d010556fbcb6ef3c4c5a4700179be475",
+      "tutorial_sha256_after": "e17db5e63175c264e8f590bb0108e9f573b1007852c6a29cc45b964c633ed83e"
+    },
+    {
+      "map": "Random_Game",
+      "subjects": [
+        "Stored deadlines",
+        "Decision timing",
+        "State disclosure"
+      ],
+      "focus": "Trace a duration drawn once into a stored deadline, separating known state order, remaining wait and the next unmade draw.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_John_Cage",
+          "why": "Timed event choices."
+        },
+        {
+          "map": "Random_Definition",
+          "why": "A seed and procedure locate draw decisions."
+        }
+      ],
+      "adds": "Deepen timed state into a distinction between deciding, retaining and revealing.",
+      "carries": "A readable event schedule with explicit decision times.",
+      "status": "aligned",
+      "review": "The tutorial supports tracing the existing wait; an executable learner schedule remains a separate proposed adapter.",
+      "tutorial_sha256_before": "276d5ce1bf22b3cbd242c4a5cf3c729dbf279d2a440bf56485846caeb651e246",
+      "tutorial_sha256_after": "61b1e61d4176381d9ff84ceab4aea8ae385589311c99e3b01ca4fc65b74a6ba9"
+    },
+    {
+      "map": "Random_Noise_Types",
+      "subjects": [
+        "Rejection sampling",
+        "Minimum spacing",
+        "Attempt budgets"
+      ],
+      "focus": "Propose positions, reject those too close to accepted points, and report unfilled requests separately from rejected candidates.",
+      "builds_on": [
+        {
+          "map": "Random_Remove",
+          "why": "An admission rule defines eligible choices."
+        },
+        {
+          "map": "Random_Walk",
+          "why": "Distance and an explicit boundary rule."
+        }
+      ],
+      "adds": "Use the growing accepted set to constrain the next random proposal.",
+      "carries": "A bounded placement sampler with an honest failure count.",
+      "status": "needs_revision",
+      "review": "The encounter compares spacing and clipping, but the actual proposal/acceptance loop and learner-owned attempt budget are not taught in this file.",
+      "tutorial_sha256_before": "163b298b6635a0c7dcf9559f04ab1340997797f426ad860d82c2d8b5013716ad",
+      "tutorial_sha256_after": "903dc985274f9e1657b3588255e06c55d435cceffabe9d9abb3aef22c166c0c4"
+    },
+    {
+      "map": "Noise_Columns",
+      "subjects": [
+        "Scalar drivers",
+        "Receiving functions",
+        "Local clocks"
+      ],
+      "focus": "Trace held, periodic and field-derived values through the same shaft rule, then compare a sine sent to brightness.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "Sine controls a spatial form."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "A scalar-to-appearance function; revisit its declared receiver."
+        }
+      ],
+      "adds": "Separate a source function from the operation that receives its value.",
+      "carries": "A driver/receiver pair with a local clock.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "d355412e592bd1ce12b817813cdbadba898b1520c5cbe98637c371bb2220980a",
+      "tutorial_sha256_after": "5fdd338b0c68ff7c3ae5e6fa9cc32ceb92031bcff531c600247aa26d23cf7343"
+    },
+    {
+      "map": "Noise_One",
+      "subjects": [
+        "Signed-value mappings",
+        "Position offsets",
+        "Colour ranges"
+      ],
+      "focus": "Write two receivers for one retained signed sample: a position offset and a colour remap, then compare clipping with full-range mapping.",
+      "builds_on": [
+        {
+          "map": "Noise_Columns",
+          "why": "A scalar source and recipient."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "Position and value-to-colour functions."
+        }
+      ],
+      "adds": "Give the same sample different consequences without changing its source.",
+      "carries": "Two explicit mappings from one signed value.",
+      "status": "needs_revision",
+      "review": "The present tutorial is an encounter guide; it does not supply the small learner receiving functions or directly referenced vertices.",
+      "tutorial_sha256_before": "edc5e3e3513c85e57dae3a9da2b5723a8d4c133ee35896c0a19db0a4f78f7a5e",
+      "tutorial_sha256_after": "ac8b67b4a823c7a1eef866bed75cdc569949bdd54a859ef796ae445d85ea9d20"
+    },
+    {
+      "map": "Noise_Voxel",
+      "subjects": [
+        "Occupancy arrays",
+        "Thresholds",
+        "Display cuts"
+      ],
+      "focus": "Build a small binary volume from supplied field values and a declared height bias, then separate stored occupancy from a visual cut.",
+      "builds_on": [
+        {
+          "map": "Tutorial_3D",
+          "why": "Multidimensional addressing."
+        },
+        {
+          "map": "Noise_One",
+          "why": "A scalar can feed more than one receiver."
+        }
+      ],
+      "adds": "Convert sampled values into stored occupancy decisions.",
+      "carries": "A binary volume inspectable independently of its display.",
+      "status": "needs_revision",
+      "review": "The current text sends the occupancy contract to final.md/technical.md; the reduced learner array and threshold loop still need a tutorial.",
+      "tutorial_sha256_before": "d9093e864f58b4a08efb716d40f97c04ad74f9e3fdc0d967a927529030954970",
+      "tutorial_sha256_after": "65720d063c702e1080739c6c00fd8d260cd86da3b4b3d3a4ca8d307ad6cd1125"
+    },
+    {
+      "map": "Noise_6_Wall",
+      "subjects": [
+        "Layered fields",
+        "Colour composition",
+        "Appearance and support"
+      ],
+      "focus": "Compose a signed-value-to-colour rule on the existing shader host and explain which changes affect appearance rather than collision.",
+      "builds_on": [
+        {
+          "map": "Ribbon_Patterns_03",
+          "why": "An initial texture-sampling shader, still a proposed foundation where unwritten."
+        },
+        {
+          "map": "Noise_One",
+          "why": "Separate colour and displacement receivers."
+        },
+        {
+          "map": "Random_Space",
+          "why": "A finite weighted field sum."
+        }
+      ],
+      "adds": "Compose known field and colour operations on a supplied material receiver.",
+      "carries": "A colour rule separated from room geometry and support.",
+      "status": "needs_revision",
+      "review": "The lesson exposes the cloud accumulation loop and controls but not the proposed learner colour composition or declared shader host.",
+      "tutorial_sha256_before": "f5d88a721f156a188e8a88d53d979d77b8bd177e2ca510ce5d43f59cda41236a",
+      "tutorial_sha256_after": "c906e9ca1116514955ce3e24c62f2f92940246659409b45f52c2c96f157338ae"
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "subjects": [
+        "Domain warping",
+        "Function composition",
+        "Sampling coordinates"
+      ],
+      "focus": "Construct a borrowed address q from p, evaluate the same supplied field at q, and keep output displacement a separate operation.",
+      "builds_on": [
+        {
+          "map": "Noise_One",
+          "why": "Separate a sampled value from its output mapping."
+        },
+        {
+          "map": "Trans_Translation",
+          "why": "Add an offset in a declared coordinate frame."
+        }
+      ],
+      "adds": "Compose a coordinate-transform function with a field query.",
+      "carries": "A domain-warp function with inspectable input and output addresses.",
+      "status": "needs_revision",
+      "review": "The encounter explains q and p but sends the actual address_at/value_at code to final.md; the learner's two-function construction remains absent.",
+      "tutorial_sha256_before": "30250ea507d5fd11ae6a14940f1072307431ca7c7222cf2f3b6bfe812e15286b",
+      "tutorial_sha256_after": "daabd4dde56f096b44e45b1d20c0a6b180f44a8d7c798aa0f0d5e67349cbc37d"
+    },
+    {
+      "map": "Noise_Space_10",
+      "subjects": [
+        "Terrain sections",
+        "Proposed routes",
+        "Recorded passage"
+      ],
+      "focus": "Sample a chosen line across supplied triangle terrain and compare its height profile with the recorded passage of a particular body.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "A movement record."
+        },
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "Sampled surfaces and their collision boundaries."
+        }
+      ],
+      "adds": "Use an explicit terrain query to compare a geometric proposal with actual passage.",
+      "carries": "A terrain-section tool with a declared height query.",
+      "status": "needs_revision",
+      "review": "The existing walking exercise is useful; the reduced profile sampler and triangle-height interface are still not taught here.",
+      "tutorial_sha256_before": "688ce88a941955476959263b4bbd0adfd6e26dd741693dcddd6645ca9323d493",
+      "tutorial_sha256_after": "7db99aa7cf956c8de49ca496cf91785e49b4b22083aca6b391f2ade4a3023091"
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "subjects": [
+        "Matched comparisons",
+        "Generator settings",
+        "Value differences"
+      ],
+      "focus": "Compare two supplied generators at the same address, then change one setting and identify which comparison condition no longer agrees.",
+      "builds_on": [
+        {
+          "map": "Random_Space_Geometry",
+          "why": "Neighbouring field values at declared coordinates."
+        },
+        {
+          "map": "Noise_One",
+          "why": "One value can appear as colour or relief."
+        }
+      ],
+      "adds": "Practice controlled comparison across field implementations.",
+      "carries": "A comparison procedure recording coordinates, settings and signed differences.",
+      "status": "aligned",
+      "review": "The route sentence still skips the intervening Shader sequence.",
+      "tutorial_sha256_before": "ee530387b4f4cd916cef850b06cda682fdf31f8d6fdd175795f9d9672aaf7b6d",
+      "tutorial_sha256_after": "e53e3dbcb5a0addc3ba7d125b4f2b3cca94429e23c072084b36668acba4d577b"
+    },
+    {
+      "map": "Lab_Path",
+      "subjects": [
+        "Encounter accounts",
+        "Operation accounts",
+        "Return experiments"
+      ],
+      "focus": "Describe one Noise encounter as both a bodily experience and a sequence of value/address/receiver changes, then choose one return experiment.",
+      "builds_on": [
+        {
+          "map": "Noise_Inside_Noise",
+          "why": "A distinction between input coordinates and output mapping."
+        },
+        {
+          "map": "Noise_Space_10",
+          "why": "A distinction between proposed and experienced passage."
+        }
+      ],
+      "adds": "Reflect with known tools; no new syntax is required.",
+      "carries": "A concrete comparison question for revisiting a Noise hall.",
+      "status": "needs_revision",
+      "review": "The old tutorial builds a generic exit corridor; the storyboard proposes optional reflection and records that this portal is inactive.",
+      "tutorial_sha256_before": "503e1e799bbf3bc8ffa479e85f49764fb7f13a6a9d6783ae4e05c7b87d23a248",
+      "tutorial_sha256_after": "2e3c3881ea9a30c1212abe01b1d412ce4491c460799647f12f72ee1165d2d80c"
+    },
+    {
+      "map": "Shader_01_Shaping",
+      "subjects": [
+        "Distance masks",
+        "Thresholds",
+        "Soft edges"
+      ],
+      "focus": "Make one circular mark from distance to a centre, then vary centre, radius and a bounded edge transition independently.",
+      "builds_on": [
+        {
+          "map": "VFM_02_Operations",
+          "why": "Distance between positions."
+        },
+        {
+          "map": "Ribbon_Patterns_03",
+          "why": "A first shader host and texture lookup, to be established where missing."
+        }
+      ],
+      "adds": "Turn a scalar distance into an inside/outside appearance.",
+      "carries": "A small mask function and its parameters.",
+      "status": "missing",
+      "review": "No tutorial.md exists. The mask and its host binding remain proposed.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "subjects": [
+        "Coordinate transforms",
+        "Tile addresses",
+        "Local coordinates"
+      ],
+      "focus": "Transform an asymmetric mark, repeat it on a four-by-four grid and use one integer tile address to choose a variation.",
+      "builds_on": [
+        {
+          "map": "Shader_01_Shaping",
+          "why": "A retained mask function; its lesson is currently missing."
+        },
+        {
+          "map": "Array_Patterns",
+          "why": "An address selects a sampling rule."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "Rotation about a named centre."
+        }
+      ],
+      "adds": "Separate a tile's integer address from the fractional coordinates inside it.",
+      "carries": "A mask, coordinate transform and variation rule kept separately.",
+      "status": "needs_revision",
+      "review": "The present companion only changes the garden's phase parameter; it does not teach the proposed transformed mask or integer/fractional tiling.",
+      "tutorial_sha256_before": "3a5ff0a7ca5951de8ad87abc0e6c2100c8eca46613abdeffe74c5592f5a8a369",
+      "tutorial_sha256_after": "d0b70c4f0e1b2a305427f55b54658be2d12d706f41e37f5df3f7287d6c1b47f4"
+    },
+    {
+      "map": "Shader_11_QueerRubber",
+      "subjects": [
+        "View-dependent appearance",
+        "Dot-product rims",
+        "Material receivers"
+      ],
+      "focus": "Add a rim from supplied same-frame normal and view vectors, then compare one material on a sphere and cube.",
+      "builds_on": [
+        {
+          "map": "VFM_02_Operations",
+          "why": "Dot products as alignment."
+        },
+        {
+          "map": "Shader_01_Shaping",
+          "why": "A scalar mapped to appearance; opening lesson still missing."
+        },
+        {
+          "map": "Color_Flashlight",
+          "why": "Appearance changes with lighting and viewpoint."
+        }
+      ],
+      "adds": "Use alignment to make a view-dependent appearance and examine the receiving shape.",
+      "carries": "A material rule whose body and viewpoint remain explicit.",
+      "status": "missing",
+      "review": "No tutorial.md exists. A shared learner material switch and vector interface are proposed.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Shader_09_FBM",
+      "subjects": [
+        "Multiscale loops",
+        "Weighted contributions",
+        "Boundary disturbance"
+      ],
+      "focus": "Combine a bounded number of supplied field samples at different scales and disturb the retained mask's boundary without moving the mesh.",
+      "builds_on": [
+        {
+          "map": "Random_Space",
+          "why": "Finite weighted field composition."
+        },
+        {
+          "map": "Shader_01_Shaping",
+          "why": "An inspectable mask boundary; its lesson is missing."
+        }
+      ],
+      "adds": "Move a known finite field sum into a shader and disclose its contribution range.",
+      "carries": "A bounded shader field function usable by a mask.",
+      "status": "missing",
+      "review": "No tutorial.md exists. The learner mask-to-field connection remains proposed.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Shader_12_PinkExtravaganza",
+      "subjects": [
+        "Material composition",
+        "Retained recipes",
+        "Interpretive choices"
+      ],
+      "focus": "Combine a chosen subset of mask, repetition, rim and field operations on a supplied body, keeping an alternate appearance for comparison.",
+      "builds_on": [
+        {
+          "map": "Shader_05_Patterns",
+          "why": "A pattern separated from its coordinates."
+        },
+        {
+          "map": "Shader_11_QueerRubber",
+          "why": "A receiver-aware material; lesson missing."
+        },
+        {
+          "map": "Shader_09_FBM",
+          "why": "A finite field contribution; lesson missing."
+        }
+      ],
+      "adds": "Compose known operations and explain aesthetic choices without adding compulsory syntax.",
+      "carries": "A material recipe and a reasoned alternate version.",
+      "status": "needs_revision",
+      "review": "The current companion edits one limb-unfolding expression; the material-composition lesson and adapter remain proposed.",
+      "tutorial_sha256_before": "9dec71f35a7dd289e9200a95d5ea23fc8fd27fecf6e5eb043dc7039a92cfd5d2",
+      "tutorial_sha256_after": "0edc5697ffbb5cea499c66cdc103795e19b1f35848660ced19b4ee37d5ed451e"
+    },
+    {
+      "map": "Shader_10_ReactionDiffusion",
+      "subjects": [
+        "Retained images",
+        "Feedback inputs",
+        "State contracts"
+      ],
+      "focus": "Trace the inputs to a recomputed image and identify what previous state would be required for a changed mark to affect the next update.",
+      "builds_on": [
+        {
+          "map": "Color_Paint",
+          "why": "A retained image can preserve previous marks."
+        },
+        {
+          "map": "WaveFunctions_3D_Wave_Propagation",
+          "why": "Separate old-state reads from next-state writes; proposed lesson needs alignment."
+        },
+        {
+          "map": "Shader_09_FBM",
+          "why": "A function recomputed from coordinates."
+        }
+      ],
+      "adds": "Specify the memory required by an evolving image without claiming the missing feedback works.",
+      "carries": "An explicit previous-state contract for the next simulation.",
+      "status": "missing",
+      "review": "No tutorial.md exists. The storyboard identifies an unbound previous-frame texture; this is a reflective threshold, not a completed reaction-diffusion build.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "CA_Introduction",
+      "subjects": [
+        "Local transition rules",
+        "Synchronous buffers",
+        "Boundary conditions"
+      ],
+      "focus": "Write a row update that reads three old cells, writes a next row and swaps only when every address has been processed.",
+      "builds_on": [
+        {
+          "map": "Point_Line_Grid",
+          "why": "Addressed values and neighbours."
+        },
+        {
+          "map": "Shader_10_ReactionDiffusion",
+          "why": "The proposed need for retained previous state; tutorial missing."
+        }
+      ],
+      "adds": "Make a synchronous local-state engine with an explicit edge rule.",
+      "carries": "A small row automaton and separate history display.",
+      "status": "needs_revision",
+      "review": "The current encounter refers to _apply_rule and _advance without teaching the learner's readable rule table, array allocation or swap.",
+      "tutorial_sha256_before": "37521d24ffad695727280daede6c4aca5647a7b41b2926403a2a201b295e7a70",
+      "tutorial_sha256_after": "e5178418ad2c164b21d6b5f5623ea77dda1e0e70179fd1c0afaa76a3f4605613"
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "subjects": [
+        "Three-state transitions",
+        "Neighbour counts",
+        "State and display"
+      ],
+      "focus": "Construct an empty/active/fading transition table and trace a supplied 26-neighbour count separately from visible shell cells.",
+      "builds_on": [
+        {
+          "map": "CA_Introduction",
+          "why": "An old-state/next-state update."
+        },
+        {
+          "map": "Tutorial_3D",
+          "why": "Three-dimensional cell addresses."
+        }
+      ],
+      "adds": "Let a state remain visible after it ceases to participate in the active count.",
+      "carries": "A three-state transition function with stated participation rules.",
+      "status": "needs_revision",
+      "review": "The encounter supports tracing the three-state volume, but the transition function and neighbourhood contract are not taught; the historical title does not describe an elementary row.",
+      "tutorial_sha256_before": "bf343458e2921f509d6ba3a688d307876758cb100857e4d08525e196d52f5a01",
+      "tutorial_sha256_after": "04f9a207439d6c2a4fb02c5c1363249bdbac40f51247c9d7e1715d65bdbad045"
+    },
+    {
+      "map": "CA_GameOfLife",
+      "subjects": [
+        "History snapshots",
+        "Generation coordinates",
+        "State receivers"
+      ],
+      "focus": "Copy completed Rule 30 rows into history and map generation/site addresses to both a drawing and supplied occupied pieces.",
+      "builds_on": [
+        {
+          "map": "CA_Introduction",
+          "why": "A row engine."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "A copied record must not alias a changing state."
+        },
+        {
+          "map": "Noise_Voxel",
+          "why": "Occupancy and its receiver have different responsibilities."
+        }
+      ],
+      "adds": "Give stored generations a spatial mapping without rerunning the process.",
+      "carries": "A retained history with two explicit receivers.",
+      "status": "needs_revision",
+      "review": "The current primary is a Rule 30 history, not Conway Life; the file is an encounter guide rather than the proposed snapshot-and-receiver construction.",
+      "tutorial_sha256_before": "3d18718dc0e230938b1ba1f0607d397324c86ee91980eda8fff3da7b226d280d",
+      "tutorial_sha256_after": "38a536f0362c9ff0bf4622aa37a7c42626a9ce5ba2885f252885c545264dd00d"
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "subjects": [
+        "Birth and survival",
+        "Fixed addresses",
+        "Output connections"
+      ],
+      "focus": "Implement the binary B3/S23 decision from a supplied eight-neighbour count and connect one fixed cell to a supplied lamp.",
+      "builds_on": [
+        {
+          "map": "CA_Introduction",
+          "why": "Synchronous cell updates."
+        },
+        {
+          "map": "Noise_Columns",
+          "why": "A value and its recipient are distinct."
+        }
+      ],
+      "adds": "Connect a simulation address to an external object without adding feedback.",
+      "carries": "A binary transition rule and one declared output connection.",
+      "status": "needs_revision",
+      "review": "The installed dish remains binary despite the map name; its actual branch and receiver call are delegated to final.md rather than taught here.",
+      "tutorial_sha256_before": "ca35168a96ad7cd6fe35ce0359ace18674ca929e5ae81dad693313415d9b320a",
+      "tutorial_sha256_after": "e3c48eb3ad9c4df79cb92ba17f8b702e3dc19b2b0fa321c787bd1b31050f6f6a"
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "subjects": [
+        "External inputs",
+        "Graded state",
+        "Update order"
+      ],
+      "focus": "Map a supplied position to bounded health changes, apply neighbour recovery and compare shared-old-state updates with in-place scanning.",
+      "builds_on": [
+        {
+          "map": "CA_BeyondBinary",
+          "why": "An explicit simulation output."
+        },
+        {
+          "map": "VFM_02_Operations",
+          "why": "Distance to a named position."
+        }
+      ],
+      "adds": "Add external input to a graded state and expose scan-order dependence.",
+      "carries": "An input-update-output pattern with separate support thresholds.",
+      "status": "needs_revision",
+      "review": "The guide offers a strong PROBE/SYNC/SCAN comparison but not the reduced input function or recovery update the learner would own.",
+      "tutorial_sha256_before": "3224d84bb4d7559940d6903b503480b193e084c75e03538f2076c6d0e706de2c",
+      "tutorial_sha256_after": "6903ca03a1ab207c8f1346558222c02fec833ead9aace241ea8e3fa0c48ab295"
+    },
+    {
+      "map": "CA_SoftRules",
+      "subjects": [
+        "Diffusion",
+        "Coupled fields",
+        "Synchronous exchange"
+      ],
+      "focus": "Compute a small neighbour-difference sum for two concentration fields and combine it with a supplied local reaction function.",
+      "builds_on": [
+        {
+          "map": "CA_ExpandingSpace",
+          "why": "Graded state and synchronous update order."
+        },
+        {
+          "map": "WaveFunctions_3D_Wave_Propagation",
+          "why": "Neighbour differences can transmit change; revisit the proposed construction."
+        }
+      ],
+      "adds": "Exchange graded quantities rather than count occupied neighbours.",
+      "carries": "A two-field update with the reaction function named as supplied.",
+      "status": "needs_revision",
+      "review": "The present comparison explains disabled exchange but does not teach the neighbour sum and two-buffer update.",
+      "tutorial_sha256_before": "63d5b6050e9796e58d65dbdbdc9cc36d8060a91d9b510b42a2e379614ee761f8",
+      "tutorial_sha256_after": "49c8387b24a4c7c8af589fad57f6c22979ff5624904b6e63f044e99b9fd7bd79"
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "subjects": [
+        "Procedural comparison",
+        "State histories",
+        "Repeated construction"
+      ],
+      "focus": "Explain one Rule 90 cell update and one supplied recursive-copy step, then record which visual resemblances survive a changed seed.",
+      "builds_on": [
+        {
+          "map": "CA_Introduction",
+          "why": "A local rule over an ordered neighbourhood."
+        },
+        {
+          "map": "CA_GameOfLife",
+          "why": "A displayed history differs from the current state."
+        }
+      ],
+      "adds": "Practice comparing procedures that can produce similar shapes; recursion remains a preview.",
+      "carries": "A precise question about what repeats and what each step reads.",
+      "status": "needs_revision",
+      "review": "The current tutorial teaches proposed Wireworld gates, whereas the storyboard uses the Rule 90 history and Sierpinski comparison.",
+      "tutorial_sha256_before": "3cc0b60448466bb2c6b4d45d1f2e8e48510a7fdbb0837f31fb769728abd5d1a7",
+      "tutorial_sha256_after": "fe258caa8f53ee9c35396b2b3115cadf38392fdd928a87a3d9d6918fff093a3e"
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "subjects": [
+        "Paired-state experiments",
+        "Difference measures",
+        "Numerical storage"
+      ],
+      "focus": "Copy a beginning, alter one address and compare both the magnitude and spread of differences under the same update and forcing schedule.",
+      "builds_on": [
+        {
+          "map": "Random_Entropy",
+          "why": "Independent retained copies."
+        },
+        {
+          "map": "CA_ElementaryRules",
+          "why": "State and its display counts differ."
+        },
+        {
+          "map": "Noise_Perlin_Simplex",
+          "why": "Matched conditions make comparisons interpretable."
+        }
+      ],
+      "adds": "Measure a perturbation with separate magnitude and affected-site counts.",
+      "carries": "A paired-state experiment with stated storage and display gain.",
+      "status": "needs_revision",
+      "review": "The current guide enables observation but omits the learner's copying and difference-measurement operations; it does not establish a universal critical point.",
+      "tutorial_sha256_before": "0ef11b0d73a32db7fe41b49519e97f93217bda1219eafd696920f11df13a50f3",
+      "tutorial_sha256_after": "3663a6fe639770d6df6111c74468d671aeb52cd9800908d5a6b19155229aa48e"
+    },
+    {
+      "map": "Fractal_Recursion",
+      "subjects": [
+        "Recursive calls",
+        "Stopping conditions",
+        "Construction budgets"
+      ],
+      "focus": "Create one square and call the same function with reduced size and depth, tracing the two limits before comparing a branching version.",
+      "builds_on": [
+        {
+          "map": "Color_Nails",
+          "why": "An input-to-output function, re-established if still only planned."
+        },
+        {
+          "map": "Trans_Scale",
+          "why": "A size change with a retained construction rule."
+        }
+      ],
+      "adds": "Introduce bounded self-calls through visible geometry.",
+      "carries": "A recursive constructor with explicit stopping and work limits.",
+      "status": "needs_revision",
+      "review": "The current survey starts with factorial and expands to memoisation and tail recursion; the proposed nested-square construction is not provided.",
+      "tutorial_sha256_before": "b158631c8da9c0a6bb6e631a6c82b1da652544d61c0965ee415e9a38084ca084",
+      "tutorial_sha256_after": "1863a7018d32e2351398d5a89384f9f9c4f9e4ca45bc918c8feb4225ba2f4578"
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "subjects": [
+        "Branch records",
+        "Inherited parameters",
+        "Recursive branching"
+      ],
+      "focus": "Construct two child segments from a parent's endpoint, direction and length, and vary length inheritance separately from branch count.",
+      "builds_on": [
+        {
+          "map": "Fractal_Recursion",
+          "why": "A bounded recursive call."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "Turn a direction around a stated axis."
+        }
+      ],
+      "adds": "Pass geometric state from a parent to multiple descendants.",
+      "carries": "A branching constructor with inspectable parent records.",
+      "status": "needs_revision",
+      "review": "The current file is a short encounter order; the recursive learner constructor must be distinguished from the installed generation queue.",
+      "tutorial_sha256_before": "0829d6a251a95ee6714f109e644439883c511ad2fb0549c77e9ad6bbb7b97e8d",
+      "tutorial_sha256_after": "c70dd67ec47a75fe7e5eb980086acfaa5f47569d131455b747af00b5be4e8874"
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "subjects": [
+        "Interval replacement",
+        "Retained length",
+        "Current state and history"
+      ],
+      "focus": "Build a next list containing the first and last thirds of each interval and keep previous rows separate from the current construction.",
+      "builds_on": [
+        {
+          "map": "CA_GameOfLife",
+          "why": "Retained rows differ from the current state."
+        },
+        {
+          "map": "Fractal_Recursion",
+          "why": "A finite repeat count and stopping condition."
+        }
+      ],
+      "adds": "Replace one interval with two while tracking count and total length independently.",
+      "carries": "A bounded interval replacement with an explicit removed complement.",
+      "status": "needs_revision",
+      "review": "The current encounter compares cuts, history and gaps; it does not teach the interval record and replacement function.",
+      "tutorial_sha256_before": "3765e2ffbfd7ad33a978b6b4bd2dddaa287c44a5a04994ae1ee2f6680a264632",
+      "tutorial_sha256_after": "70d48be3fc51f0d2cba3ce25c64545978e4d5e891dd8e393dcc783884bedc9fc"
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "subjects": [
+        "Segment replacement",
+        "Endpoint distance",
+        "Path length"
+      ],
+      "focus": "Construct one equilateral Koch replacement from a segment's endpoints and apply it to a separate next list.",
+      "builds_on": [
+        {
+          "map": "Fractal_CantorSet",
+          "why": "A replacement builds new data from old."
+        },
+        {
+          "map": "Point_Lines",
+          "why": "Endpoints, direction and distance."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "Turn a displacement."
+        }
+      ],
+      "adds": "Replace a relation with a longer connected route while retaining its endpoints.",
+      "carries": "A geometry-replacement function with two distinct length measures.",
+      "status": "needs_revision",
+      "review": "The current encounter surveys Koch, Sierpinski and box counting; the learner's endpoint-to-four-segments function is absent.",
+      "tutorial_sha256_before": "410e81ca8fbd0ad6ff3f6b7806068c0fa34d6ba878d07dd7081f142d7ab00447",
+      "tutorial_sha256_after": "e7196954f0d4dc1fb4b7663760a7994de002b8b5cd968c8d05e276bde7ffddb9"
+    },
+    {
+      "map": "Fractal_MengerSponge",
+      "subjects": [
+        "Volume subdivision",
+        "Cell selection",
+        "Retained volume"
+      ],
+      "focus": "Select twenty addresses from a three-by-three-by-three block and repeat the rule for a bounded number of levels.",
+      "builds_on": [
+        {
+          "map": "Tutorial_3D",
+          "why": "Three-dimensional address conventions."
+        },
+        {
+          "map": "Fractal_Recursion",
+          "why": "Bounded recursive construction."
+        },
+        {
+          "map": "Fractal_CantorSet",
+          "why": "Count and retained measure can change differently."
+        }
+      ],
+      "adds": "Apply replacement to volume and explicitly identify the removed cells.",
+      "carries": "A finite volume-subdivision rule with fixed outer bounds.",
+      "status": "needs_revision",
+      "review": "The guide explains the 27-to-20 rule but does not provide the selection predicate and bounded learner construction.",
+      "tutorial_sha256_before": "608ad52dbc823d46e0a08c5487f71a851a528658cd7719ad951b50cc7b4a0299",
+      "tutorial_sha256_after": "808d58b59b493fe4101ef51e836b5976013d77ef05f9a79282744c10bae377db"
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "subjects": [
+        "Numerical recurrence",
+        "Value mappings",
+        "Geometric interpretation"
+      ],
+      "focus": "Build a finite Fibonacci list, then compare two height mappings against a fixed-unit addition witness.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "An ordered numerical record can be extended."
+        },
+        {
+          "map": "Noise_Columns",
+          "why": "One source can feed distinct receiving functions."
+        }
+      ],
+      "adds": "Separate a recurrence from the geometry chosen to represent its values.",
+      "carries": "A finite recurrence with explicitly named display mappings.",
+      "status": "needs_revision",
+      "review": "The encounter supports the comparison but omits the learner's recurrence loop and explicit supplied logarithmic mapping.",
+      "tutorial_sha256_before": "36c0703668f45c6967c352c0b24918ddc786272cded0822312834665ad29732a",
+      "tutorial_sha256_after": "115f2ac9b9de6257b58020827f3b5632a2df7ebee2cbfcbbc3c34ade26b0a310"
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "subjects": [
+        "Construction recipes",
+        "Descendant rules",
+        "Stopping conditions"
+      ],
+      "focus": "Describe one construction precisely enough to predict its next step, separating input, descendants, placement and stopping rule.",
+      "builds_on": [
+        {
+          "map": "Fractal_CantorSet",
+          "why": "Interval replacement and retained history."
+        },
+        {
+          "map": "Fractal_RecursiveTrees",
+          "why": "Parent/child construction and inherited parameters."
+        }
+      ],
+      "adds": "Synthesize known procedures; no new syntax is required.",
+      "carries": "A reconstructable account of repeated geometric work.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "0e04185bc8f86aa0e8e3ecfd7fef93e570a0bada2e362dae640804e214d5e17e",
+      "tutorial_sha256_after": "c0a689da4fad2569b1400c51088579b8cc15c59ebfecb6ba9f860be960e78a19"
+    },
+    {
+      "map": "LSystems_Grammar_Lab",
+      "subjects": [
+        "Symbol rewriting",
+        "Parallel replacement",
+        "Interpretation"
+      ],
+      "focus": "Read an old string and append replacements into a new string, then let a supplied turtle interpret it under two turn angles.",
+      "builds_on": [
+        {
+          "map": "Fractal_Synthesis",
+          "why": "A recipe distinguishes descendants and placement."
+        },
+        {
+          "map": "Fractal_CantorSet",
+          "why": "Build new data separately from the old list."
+        }
+      ],
+      "adds": "Separate symbolic production from geometric interpretation.",
+      "carries": "A one-pass symbolic generator and a declared command vocabulary.",
+      "status": "needs_revision",
+      "review": "The current guide compares existing presets but does not teach the rewriting function or expose a learner rule connection.",
+      "tutorial_sha256_before": "ed37bd7d45875d7944efa08a70bf55198bf3e0a91b199b31ae8a8b0e64ac61fb",
+      "tutorial_sha256_after": "b77c820089ab8a2e91981d71e4b2e12820a2d0e3ec86832f6ba067dddf0a2374"
+    },
+    {
+      "map": "LSystems_Growth",
+      "subjects": [
+        "State stacks",
+        "Copied snapshots",
+        "Branch restoration"
+      ],
+      "focus": "Attach bracket handlers that save and restore position, orientation and length around supplied draw/turn commands.",
+      "builds_on": [
+        {
+          "map": "LSystems_Grammar_Lab",
+          "why": "Symbols and their interpretation."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "An independent copy preserves an earlier state."
+        }
+      ],
+      "adds": "Use last-in-first-out state storage for nested branches.",
+      "carries": "A stack of explicit turtle-state records.",
+      "status": "needs_revision",
+      "review": "The encounter explains the saved state but does not supply the learner's copied record, push/pop functions or their interpreter binding.",
+      "tutorial_sha256_before": "09eafb8d1d6493c907712fb67e0730ab29303f920bcf3a648eeafd6e086ae846",
+      "tutorial_sha256_after": "cbd2c964fa1c2076ab14da2891fcade09b069d126cf12c949127d26a7004fb40"
+    },
+    {
+      "map": "LSystems_Grammars_And_Curves",
+      "subjects": [
+        "Geometric interpretation",
+        "Swept surfaces",
+        "Ring resolution",
+        "Explicit connections"
+      ],
+      "focus": "Compare reflected readings of one sentence, then change a swept tube's ring resolution while retaining its path and radius; distinguish joined ports from crossing skins.",
+      "builds_on": [
+        {
+          "map": "LSystems_Growth",
+          "why": "A turtle's saved heading differs from its emitted geometry."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "An ordered path of positions."
+        },
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Circular sampling supplies ring vertices."
+        }
+      ],
+      "adds": "Compose known traces, circular samples and faces into a sweep; record a connection explicitly.",
+      "carries": "A path-to-surface construction whose resolution and connections remain inspectable.",
+      "status": "aligned",
+      "review": "The new sweep lesson is substantial. Its frame transport and signal routing remain supplied; the storyboard's learner interpreter adapter is a separate proposal.",
+      "tutorial_sha256_before": "24a6579ad8cdcfb10893d72f9f2dc22072aacf8e381206a9ac599c91df52e520",
+      "tutorial_sha256_after": "8c71142e0254d157b6735207b7995fa010cafdec9845a9e14cc3d2df288680d8"
+    },
+    {
+      "map": "LSystems_Architecture",
+      "subjects": [
+        "Path footprints",
+        "Passage width",
+        "Open boundaries"
+      ],
+      "focus": "Turn a short orthogonal centreline into a footprint with declared width and open ends, using a supplied wall and junction builder.",
+      "builds_on": [
+        {
+          "map": "LSystems_Growth",
+          "why": "Branches produce retained segments."
+        },
+        {
+          "map": "LSystems_Grammars_And_Curves",
+          "why": "A line acquires width through an explicit construction."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "Collision boundaries and a body's dimensions."
+        }
+      ],
+      "adds": "Turn an interpreted path into a bounded empty passage.",
+      "carries": "A path-to-footprint rule with a clearance question.",
+      "status": "needs_revision",
+      "review": "The current encounter compares the generated dungeon but does not teach the reduced footprint operation or its wall-builder interface.",
+      "tutorial_sha256_before": "410ea017149db708f03024c777108dd8d293a24ed335a3c090c9896904951bab",
+      "tutorial_sha256_after": "58e6a17195d387fbc2dfc78465f6fa23f9abb3ec8330421b18a9124f6356d384"
+    },
+    {
+      "map": "LSystems_Competition",
+      "subjects": [
+        "Shared resources",
+        "Execution order",
+        "Conditional growth"
+      ],
+      "focus": "Record resource state before each of two growth requests and compare which request acts first under the same grammar.",
+      "builds_on": [
+        {
+          "map": "LSystems_Grammar_Lab",
+          "why": "A production defines possible growth."
+        },
+        {
+          "map": "CA_ExpandingSpace",
+          "why": "Order can matter when later work reads changed state."
+        }
+      ],
+      "adds": "Make the conditions for executing a rule and consuming a resource explicit.",
+      "carries": "A two-request schedule with a resource trace.",
+      "status": "needs_revision",
+      "review": "The guide supports order comparisons, but the small learner schedule and consume-before-gate state record are not yet taught.",
+      "tutorial_sha256_before": "128ed34bf8b38575280310339a8ac593b2cff21c086d68a3a87d6f07694a302d",
+      "tutorial_sha256_after": "8d213f367b10a1c3f2278381dbc9a0839d4e9383cda575409b4459976f7f3fa0"
+    },
+    {
+      "map": "LSystems_Living",
+      "subjects": [
+        "Design records",
+        "Parameter quantisation",
+        "Retained specimens"
+      ],
+      "focus": "Convert a short design record into bounded generation, angle and fork values, then keep the exact record used by a planted specimen.",
+      "builds_on": [
+        {
+          "map": "LSystems_Growth",
+          "why": "Branch depth and saved parameters."
+        },
+        {
+          "map": "Random_Mushrooms",
+          "why": "A population description separates kinds and numerical variations."
+        }
+      ],
+      "adds": "Expose rounding and bounds between a continuous control and discrete construction.",
+      "carries": "A reproducible design record with stated reachable changes.",
+      "status": "needs_revision",
+      "review": "The guide identifies gene mappings and snapshots but does not teach the proposed record-to-parameter conversion or learner binding.",
+      "tutorial_sha256_before": "a2684d9221599859ca02d42c298f636724f9cd6d32f72e5d3e66549094a07dd4",
+      "tutorial_sha256_after": "1e84e11bfcb95eeb3b3bf0babb28729cc7ea67854cd7fe107bebef80b650117c"
+    },
+    {
+      "map": "LSystems_Shape_Grammars",
+      "subjects": [
+        "Face selection",
+        "Operation sequences",
+        "Shape recipes"
+      ],
+      "focus": "Specify a short sequence of supplied inset and extrusion operations on named face indices and predict the resulting connections.",
+      "builds_on": [
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Indexed faces and shared vertices."
+        },
+        {
+          "map": "LSystems_Grammar_Lab",
+          "why": "A production is distinct from its interpretation."
+        },
+        {
+          "map": "LSystems_Living",
+          "why": "A retained design record defines a reproducible construction."
+        }
+      ],
+      "adds": "Describe shape changes as operations over selected faces.",
+      "carries": "A face-operation recipe with explicit builder inputs.",
+      "status": "missing",
+      "review": "No tutorial.md exists. Fixed museum specimens do not yet provide the proposed editable learner recipe.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Assemblage_Same_Desire",
+      "subjects": [
+        "Retained decisions",
+        "Mark vocabularies",
+        "Interpretive paths"
+      ],
+      "focus": "Keep one binary decision sheet while comparing diagonals, bars and blocks, then explain which perceived paths its generator never tested.",
+      "builds_on": [
+        {
+          "map": "Randomness_10_PRINT_Algorithm",
+          "why": "A two-mark choice at each grid address."
+        },
+        {
+          "map": "LSystems_Grammar_Lab",
+          "why": "A sentence and its geometric reading can change independently."
+        }
+      ],
+      "adds": "Synthesize sample, decision and mark as separate operations; no new syntax is required.",
+      "carries": "A comparison account separating choices from their interpretation.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "8a8c26ea9ca02a6d7f01f3e58bf7d5b7b4dcc7bdaddaf251b584953f7f516395",
+      "tutorial_sha256_after": "e1bd18e72420ee148e0fa014bec94592b52d6685d0baf3bd91a2abe2ddf5a5d9"
+    },
+    {
+      "map": "PG_Genetic_Evolution",
+      "subjects": [
+        "Candidate records",
+        "Evaluation functions",
+        "Selection criteria"
+      ],
+      "focus": "Evaluate a retained population with a declared score, then rank it without rebuilding the candidates and identify omitted features.",
+      "builds_on": [
+        {
+          "map": "LSystems_Living",
+          "why": "A retained description generates a body."
+        },
+        {
+          "map": "Assemblage_Same_Desire",
+          "why": "One record can have different readers."
+        },
+        {
+          "map": "FormFinding_Descent",
+          "why": "A chosen objective determines what counts as improvement."
+        }
+      ],
+      "adds": "Separate generating a candidate from scoring and selecting it.",
+      "carries": "An evaluator with an explicit criterion and known omissions.",
+      "status": "needs_revision",
+      "review": "The current encounter sends the score formula to final.md; the learner evaluator/ranking operation is absent and must preserve the estimator's approximations.",
+      "tutorial_sha256_before": "aacc24d94019a3ec0e339ba7950d4ec05ac1e771534461d1e4b511fa48803592",
+      "tutorial_sha256_after": "44f201aa01912b608e2c3735dff9371bd8d6b66a7f1e80172eb7690a5e861cfc"
+    },
+    {
+      "map": "PG_Space_Colonization",
+      "subjects": [
+        "Direction accumulation",
+        "Growth eligibility",
+        "Branch records"
+      ],
+      "focus": "Normalize directions toward a supplied assigned-point list, sum them and add one fixed-length child while stating which sites may act next.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act2_VectorArithmetic",
+          "why": "Add and normalize direction vectors."
+        },
+        {
+          "map": "Fractal_RecursiveTrees",
+          "why": "A child begins at a parent endpoint."
+        }
+      ],
+      "adds": "Combine several directional invitations into one growth decision.",
+      "carries": "A direction accumulator with a declared eligibility policy.",
+      "status": "needs_revision",
+      "review": "The guide explains the first decision but delegates actual accumulation lines to final.md; the proposed assigned-list function needs teaching here.",
+      "tutorial_sha256_before": "c370988b15ddecfd4ab91eff9aec0131b31923d262e43af7911138e8b4d8bc5f",
+      "tutorial_sha256_after": "f9c7e74e11816d2410dec77d0a9971b71464a9b588fe870c1d58d145cdbe21bf"
+    },
+    {
+      "map": "PG_Branching_Growth",
+      "subjects": [
+        "Nearest-target search",
+        "Parent records",
+        "Coincident positions"
+      ],
+      "focus": "Search eligible targets, retain the chosen index and create one fixed-length child, comparing record count with distinct positions.",
+      "builds_on": [
+        {
+          "map": "PG_Space_Colonization",
+          "why": "A growth decision can combine assigned directions."
+        },
+        {
+          "map": "Random_Remove",
+          "why": "Eligibility precedes selection."
+        }
+      ],
+      "adds": "Replace accumulated invitations with nearest-target selection and retain its provenance.",
+      "carries": "A selection-and-growth record naming parent and target.",
+      "status": "needs_revision",
+      "review": "The current lesson shows direction normalization but not the nearest-eligible search or retained target record needed for the proposed learner operation.",
+      "tutorial_sha256_before": "efa3fdff551c5a82d95405508c2637e96d3b68f90d6bcba3f03b0c41e3984631",
+      "tutorial_sha256_after": "61251902aa6b102f05d5bf78dd32da0177d1e222c512af50e23b6888b9b3347d"
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "subjects": [
+        "Six-neighbour adjacency",
+        "Local transmission",
+        "Reachability"
+      ],
+      "focus": "Advance a flow state through a retained occupied volume using only six face neighbours and separate old and next arrays.",
+      "builds_on": [
+        {
+          "map": "Noise_Voxel",
+          "why": "Stored occupancy differs from its visible surface."
+        },
+        {
+          "map": "CA_Introduction",
+          "why": "A synchronous neighbourhood update."
+        }
+      ],
+      "adds": "Test transmission under a declared adjacency without conflating contact and access.",
+      "carries": "A local propagation step over a separately retained lattice.",
+      "status": "needs_revision",
+      "review": "The tutorial lists the six neighbours and explains the experiment but lacks the learner's transmission branch and complete buffer operation.",
+      "tutorial_sha256_before": "38314006f9d27d2c47e8557a093b17ae7f07da2b149b2ddcda7260e87ae72e38",
+      "tutorial_sha256_after": "a28f51d7dd3160d14a44857458b1f001f0b07bace6b84cd4e3e8a91aae8427da"
+    },
+    {
+      "map": "PG_Caves_Mazes",
+      "subjects": [
+        "Carving footprints",
+        "Headroom",
+        "Path and empty volume"
+      ],
+      "focus": "Clear a declared footprint and headroom around retained carving centres while preserving the centre record for another clearance choice.",
+      "builds_on": [
+        {
+          "map": "Random_Walk",
+          "why": "A retained path records positions."
+        },
+        {
+          "map": "Noise_Voxel",
+          "why": "A grid stores solid or empty decisions."
+        },
+        {
+          "map": "LSystems_Architecture",
+          "why": "A connected centreline needs width and clearance."
+        }
+      ],
+      "adds": "Map a position record to removed volume instead of drawn lines.",
+      "carries": "A path-to-empty-volume operation with explicit clearance.",
+      "status": "needs_revision",
+      "review": "The existing text explains carving and backtracking but leaves _carve_ball and _set_air unspecified; the learner footprint operation still needs implementation and explanation.",
+      "tutorial_sha256_before": "0a0caa296d4dd2183df37e7f43117d98f0bc5c5f6a6763aa734f01075f87b711",
+      "tutorial_sha256_after": "bad128f813e4154002914b69d3b6628960eb09e39a6a84e08fc8d7c53fdc77fc"
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "subjects": [
+        "Coordinate conversion",
+        "Voxel sampling",
+        "Exposed faces"
+      ],
+      "focus": "Convert supplied body centres into local coordinates, mark a declared cell neighbourhood and submit exposed faces to a supplied assembler.",
+      "builds_on": [
+        {
+          "map": "Point_Coordinates",
+          "why": "Local and global positions differ."
+        },
+        {
+          "map": "Noise_Voxel",
+          "why": "Occupancy records."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "why": "A surface is a set of connected faces."
+        }
+      ],
+      "adds": "Sample an event into a finite surface while naming the lost rotations and contacts.",
+      "carries": "A centre-to-surface pipeline with explicit approximation size.",
+      "status": "needs_revision",
+      "review": "The tutorial teaches to_local and the enlarged approximation but omits the learner occupancy and exposed-face operations.",
+      "tutorial_sha256_before": "22865de81eb6a6ffb410cad0b7f36cd04eb5c41c237630bcfd32f5e732aa072f",
+      "tutorial_sha256_after": "ac6990806e0b4582b81a682568ac6d96ef919022a8807f31ca499b834e64785a"
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "subjects": [
+        "Array reflection",
+        "Preserved inputs",
+        "Image and connectivity"
+      ],
+      "focus": "Reflect a retained array into a separate result, checking centre rows and columns while distinguishing repeated image values from network connections.",
+      "builds_on": [
+        {
+          "map": "CA_Introduction",
+          "why": "Read old data before writing a result."
+        },
+        {
+          "map": "Symmetry_Seventeen",
+          "why": "A symmetry depends on an explicit transformation."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "A held input permits another reading."
+        }
+      ],
+      "adds": "Compose copying with stored cellular data and inspect odd-grid edge cases.",
+      "carries": "A reflection operation with an unchanged witness array.",
+      "status": "needs_revision",
+      "review": "The excerpts show mirrored assignments, but a complete learner loop and explicit treatment of the omitted centre row/column still need alignment.",
+      "tutorial_sha256_before": "ff907bcf2cbbdca9f800475a5b87dbae70bf8d7baf3f156210c16bc9c8b162bd",
+      "tutorial_sha256_after": "3dbf48af1330eca02b133b4d27bf6765729b9baecc0c3da60228a3eb695377ae"
+    },
+    {
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "subjects": [
+        "Deformable meshes",
+        "Resistance and damping",
+        "Pinned attachments"
+      ],
+      "focus": "Connect a supplied subdivided mesh to a soft-body solver, retain its reference and pin one explicitly selected point before comparing solver coefficients.",
+      "builds_on": [
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Connectivity can remain fixed while positions change."
+        },
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "why": "Resistance and damping have different roles."
+        }
+      ],
+      "adds": "Let constituent positions respond while retaining face connections and attachments.",
+      "carries": "A bounded soft-body setup with an explicit attachment.",
+      "status": "needs_revision",
+      "review": "The lesson compares coefficients but does not supply the reduced solver setup or reliable point-selection interface proposed by the storyboard.",
+      "tutorial_sha256_before": "8670dc42e23f751b906722c8899542812c94d47adc7f9264ea92a12f6c5bcdd3",
+      "tutorial_sha256_after": "e1bd2a91b36f9b8e1caa15826173f02feaf93c8c376800093db7f8b8b8d28e5b"
+    },
+    {
+      "map": "SoftBodies_Cloth_Physics",
+      "subjects": [
+        "Boundary conditions",
+        "Distributed loads",
+        "Compliance and damping"
+      ],
+      "focus": "Compare an upper row with corner pins, then change one load-array value on the supplied four-anchor membrane while holding compliance fixed.",
+      "builds_on": [
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "A solver moves vertices under fixed connectivity."
+        },
+        {
+          "map": "FormFinding_Relaxation",
+          "why": "Constraints and repeated geometric correction."
+        },
+        {
+          "map": "Vectors_Act4a_KineticForces",
+          "why": "A force changes motion."
+        }
+      ],
+      "adds": "Separate support selection, material response and applied load using existing tools.",
+      "carries": "A controlled pin/load comparison and one authored load setting.",
+      "status": "aligned",
+      "review": "The new membrane edit supports this focus; deriving a general vertex-selection function remains a proposed extension.",
+      "tutorial_sha256_before": "4c6838de50c1f12f7ead733cc12f19bb78d718c2fde9d3bcdf80037ee36eb37a",
+      "tutorial_sha256_after": "e9263995770bb78a75e7f1f2e0aaae4915b2f01b56081fcaea7f5612f1877739"
+    },
+    {
+      "map": "SoftBodies_Carusell",
+      "subjects": [
+        "Driven anchors",
+        "Retained motion",
+        "One-way coupling"
+      ],
+      "focus": "Write a rate-based anchor rotation and stop or reverse its driver while a supplied hanging body retains its own state.",
+      "builds_on": [
+        {
+          "map": "Trans_Rotation",
+          "why": "A rate advances an angle."
+        },
+        {
+          "map": "SoftBodies_Cloth_Physics",
+          "why": "Pinned boundaries constrain a responding surface."
+        }
+      ],
+      "adds": "Drive a boundary without prescribing the responding body's full motion.",
+      "carries": "A driven-anchor rule distinct from the simulated response.",
+      "status": "needs_revision",
+      "review": "The current encounter explains speed and stopping but does not provide the learner's anchor-update function or its assembly connection.",
+      "tutorial_sha256_before": "7dc96ef18b5cc00d723455da380fb0eac9070dbccb0af0925cfc7d23c09ee653",
+      "tutorial_sha256_after": "376bbf860b238b432ef2fb51926b0b1d735142c6186d32836fbaf0817408accf"
+    },
+    {
+      "map": "SoftBodies_Obsticals",
+      "subjects": [
+        "Pressure drivers",
+        "Solver response",
+        "Changing clearance"
+      ],
+      "focus": "Trace a periodic scalar into pressure and compare holding its phase with freezing the responding wall positions.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "A spatial sine can directly prescribe geometry."
+        },
+        {
+          "map": "Noise_Columns",
+          "why": "A driver and its recipient."
+        },
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "Pressure contributes to a solver response."
+        }
+      ],
+      "adds": "Send a known sine rule into pressure rather than directly into vertex position.",
+      "carries": "A readable signal-to-pressure mapping with independent solver state.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "25c9ae21d70575a825ff48aea01e096efd9f1d26b648d159d1ed615cf14345ed",
+      "tutorial_sha256_after": "0d6a18b41194d65d37d023114ff8ca3b4594bdf82165c84a981dd867a5a98ab7"
+    },
+    {
+      "map": "SoftBodies_Obsticals_Part2",
+      "subjects": [
+        "Controlled comparisons",
+        "Initial conditions",
+        "Shape observation"
+      ],
+      "focus": "Describe two body-contact cases by their full settings, choose one intended difference and record an observable result after replay.",
+      "builds_on": [
+        {
+          "map": "Noise_Perlin_Simplex",
+          "why": "Matched conditions make a comparison interpretable."
+        },
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "Stiffness, damping and pressure have different roles."
+        }
+      ],
+      "adds": "Practice controlled experimental description; no new syntax is required.",
+      "carries": "A two-case comparison that distinguishes seeded setup from solver replay.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "ba4739c0a58508b4b16cefae6f4e5fa989152aac877bbe861f0fd14ebbff4e51",
+      "tutorial_sha256_after": "db1c0ee72101628878279a09e25a054e4d15a64704e1380d19d008096d139314"
+    },
+    {
+      "map": "SoftBodies_Playground_of_Joy",
+      "subjects": [
+        "Vertex snapshots",
+        "Process and sculpture",
+        "Measurement proxies"
+      ],
+      "focus": "Copy a supplied solver's current vertices into a static mesh with retained connectivity and compare the result with the motion it no longer records.",
+      "builds_on": [
+        {
+          "map": "PG_Sculpted_Forms",
+          "why": "An event sample omits part of the process."
+        },
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "Positions can change without new face connections."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "A copied snapshot differs from a live reference."
+        }
+      ],
+      "adds": "Retain geometry from a chosen solver step without claiming to retain dynamics.",
+      "carries": "A process-to-static-mesh snapshot with stated omissions.",
+      "status": "needs_revision",
+      "review": "The current chapter discusses the frozen result and bounding-box proxy but does not teach the copy/mesh operation or expose the custom solver's vertex interface.",
+      "tutorial_sha256_before": "20c1d41b622fa2ed5c7c43c720adbff6649a180aed7112f8d0719b199d06f21c",
+      "tutorial_sha256_after": "62ded8f6bdb02546730d51a49a495e5a12c108fc08874ec8bdb59e7a1ad6e0b7"
+    },
+    {
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "subjects": [
+        "Apparent life",
+        "Construction cues",
+        "Controlled variation"
+      ],
+      "focus": "Choose two forms, explain the cues that make them appear alive and vary one cue under a pinned construction seed.",
+      "builds_on": [
+        {
+          "map": "Random_Mushrooms",
+          "why": "A repertoire and its parameter choices differ."
+        },
+        {
+          "map": "LSystems_Living",
+          "why": "A design record does not constitute biology."
+        },
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "Soft dynamics and organic appearance are different claims."
+        }
+      ],
+      "adds": "Compose and interpret known procedures; no new syntax is required.",
+      "carries": "A precise vocabulary for testing appearance without claiming a hidden mechanism.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "501555c30ee23d56ea1dbd7f0aed22d80b3b5deba4252d3f59e7b9a186d9c5b5",
+      "tutorial_sha256_after": "b9ffc9483c04c9a6ebc04ca48e55cded9fee72b1664f8b19d3c2480b6ac87db7"
+    },
+    {
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "subjects": [
+        "Local reactions",
+        "Diffusion",
+        "Feed and removal"
+      ],
+      "focus": "Write local Gray-Scott reaction, feed and removal terms, combine them with known neighbour differences and compare equal-step runs.",
+      "builds_on": [
+        {
+          "map": "CA_SoftRules",
+          "why": "Two synchronous concentration fields and a supplied reaction function."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "A small step accumulates a rate."
+        }
+      ],
+      "adds": "Open the previously supplied reaction function and distinguish its local terms from exchange.",
+      "carries": "A small two-field update with explicit boundary and step settings.",
+      "status": "needs_revision",
+      "review": "The chapter exposes the reaction equations but not a complete reduced update or stable learner runner; those must be supplied before claiming the full simulation is authored.",
+      "tutorial_sha256_before": "5ad282f77e0ef9180cd8ccacd08a7dab9b23136628daa8b0ecc1d08809699c69",
+      "tutorial_sha256_after": "45a85e6fc1e214c75ef04a3edad04fbfb5703958b11e1672a78f30e76048616a"
+    },
+    {
+      "map": "Topology_Entropy_Morphogenesis",
+      "subjects": [
+        "Composed controls",
+        "Named parameters",
+        "Threshold comparisons"
+      ],
+      "focus": "Trace one master control into frequency, noise amplitude and cut level, then compare those interventions separately.",
+      "builds_on": [
+        {
+          "map": "Noise_Voxel",
+          "why": "A threshold makes an occupancy decision."
+        },
+        {
+          "map": "Noise_Columns",
+          "why": "A scalar drives an explicit recipient."
+        },
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "A periodic rule defines spatial variation."
+        }
+      ],
+      "adds": "Compose known mappings while making the bundled choices inspectable.",
+      "carries": "A named multi-parameter control recipe; surface extraction remains supplied.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "bb2cb018498374c834046903d3e663f9e2ffaf04a3ced632d5555e56d09185e7",
+      "tutorial_sha256_after": "8bb492a2e50f9e32d8c1e9266ce0294ebec35560572106382ee955a07d7b5a09"
+    }
+  ]
+}

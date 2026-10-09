@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "snapshot_hashes_match": true,
+    "only_two_artifact_scripts_changed": true,
+    "painter_executable_lines_unchanged": true,
+    "map_final_tutorial_scene_unchanged": true,
+    "paired_cameras_match": true,
+    "paired_particle_states_match": true,
+    "paired_shared_museum_sources_match": true
+  },
+  "runtime": {
+    "runtime-headless-v2": {
+      "checks": 25,
+      "failures": [],
+      "returncode": 0,
+      "source_hashes_stable_during_run": true
+    },
+    "before-headless-v2": {
+      "checks": 26,
+      "failures": [],
+      "returncode": 0,
+      "source_hashes_stable_during_run": true
+    },
+    "final-headless": {
+      "checks": 32,
+      "failures": [],
+      "returncode": 0,
+      "source_hashes_stable_during_run": true
+    },
+    "before-runtime": {
+      "checks": 47,
+      "failures": [],
+      "returncode": 0,
+      "source_hashes_stable_during_run": true
+    },
+    "after-runtime": {
+      "checks": 50,
+      "failures": [],
+      "returncode": 0,
+      "source_hashes_stable_during_run": true
+    }
+  },
+  "headset_tested": false,
+  "learner_verified": false
+}

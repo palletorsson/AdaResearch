@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "name": "Automatic drop waits seven seconds",
+      "passed": true
+    },
+    {
+      "name": "First interval drops exactly one body",
+      "passed": true
+    },
+    {
+      "name": "Other three comparison bodies wait their turn",
+      "passed": true
+    },
+    {
+      "name": "Dropped body falls under real gravity",
+      "passed": true
+    },
+    {
+      "name": "Second interval advances to the ball lane",
+      "passed": true
+    },
+    {
+      "name": "Four intervals cover all four lanes",
+      "passed": true
+    },
+    {
+      "name": "Repeated drops stay bounded and finite",
+      "passed": true
+    },
+    {
+      "name": "Pause prevents automatic drops",
+      "passed": true
+    },
+    {
+      "name": "Resume gives a fresh seven-second interval",
+      "passed": true
+    },
+    {
+      "name": "Held body is skipped and next lane drops",
+      "passed": true
+    },
+    {
+      "name": "Drop scheduler does not move a held body",
+      "passed": true
+    },
+    {
+      "name": "All bodies held means no forced release",
+      "passed": true
+    },
+    {
+      "name": "Reset cancels a pending drop and restarts the cycle",
+      "passed": true
+    },
+    {
+      "name": "Pending release cannot unfreeze the reset bodies",
+      "passed": true
+    },
+    {
+      "name": "Manual comparison releases together and pauses auto",
+      "passed": true
+    },
+    {
+      "name": "Smooth cube still travels farther than rough cube",
+      "passed": true
+    },
+    {
+      "name": "Rough ball still rolls",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "measurements": {
+    "after_28_seconds": [
+      [
+        "(-7.796961, 0.43481, 6.966717)",
+        "(0.0, 0.0, 0.0)"
+      ],
+      [
+        "(-2.614502, 0.449991, 6.530481)",
+        "(0.0, 0.0, 0.0)"
+      ],
+      [
+        "(2.600209, 2.243168, -4.238911)",
+        "(0.0, 0.0, 0.0)"
+      ],
+      [
+        "(7.8, 3.028151, -4.3)",
+        "(0.0, -1.458295, 0.0)"
+      ]
+    ]
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "scope": "Real physics-tick drop cadence and Jolt motion; simulated hand ownership. Museum walk test is separate."
+}

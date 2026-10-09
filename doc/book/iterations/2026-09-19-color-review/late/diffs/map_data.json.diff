@@ -1,0 +1,68 @@
+--- before/commons/maps/Color_Walls/map_data.json
++++ commons/maps/Color_Walls/map_data.json
+@@ -56,7 +56,7 @@
+ 	 16,
+ 	 8,
+ 	 30,
+-	 29
++	 34
+ 	]
+    ]
+   }
+@@ -77,13 +77,14 @@
+   }
+  },
+  "documentation": {
+-  "summary": "Color_Gradiant - Gradient Hall",
+-  "layout": "12x30 gallery with layered platforms and a rainbow hallway installation near the terminus.",
+-  "objective": "Traverse the gradient environment and observe the rainbow hallway feature before exiting.",
++  "summary": "Color_Walls - partition, coordinate and path",
++  "layout": "37 by 39 metre museum hall. Enter the cubicle office from its low-z entrance; the RGB/HSV model and interpolation bench stand beyond it at z31.",
++  "objective": "Compare a visible opening with a bodily passage, then compare colour coordinates and interpolation paths.",
+   "key_elements": [
+-   "`rainbow_hallway:180:2` exhibit at (5,17)",
+-   "`dark_sphere` dome near the entrance",
+-   "Teleporter `t` positioned at (8,29)"
++   "Eight glass/opaque cubicles around an open aisle at (23,20)",
++   "RGB/HSV comparison model at (18,31)",
++   "Gradient interpolator at (28,31)",
++   "Rainbow hallway and subpixel display remain available as secondary returns"
+   ]
+  },
+  "lighting": {
+@@ -3590,7 +3591,6 @@
+ 	"",
+ 	"",
+ 	"",
+-	"color_space_navigator:180:1.2:1#mount:comparison#plinth:0",
+ 	"",
+ 	"",
+ 	"",
+@@ -3600,7 +3600,8 @@
+ 	"",
+ 	"",
+ 	"",
+-	"gradient_interpolator:180:0.95:1#mount:comparison#plinth:0",
++	"",
++	"",
+ 	"",
+ 	"",
+ 	"",
+@@ -4409,6 +4410,7 @@
+ 	"",
+ 	"",
+ 	"",
++	"color_space_navigator:180:1.2:1#mount:comparison#plinth:0",
+ 	"",
+ 	"",
+ 	"",
+@@ -4418,8 +4420,7 @@
+ 	"",
+ 	"",
+ 	"",
+-	"",
+-	"",
++	"gradient_interpolator:180:0.95:1#mount:comparison#plinth:0",
+ 	"",
+ 	"",
+ 	"",

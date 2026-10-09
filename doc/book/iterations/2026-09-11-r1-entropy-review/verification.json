@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "file": "final.md",
+      "excerpts": 4
+    },
+    {
+      "file": "tutorial.md",
+      "excerpts": 5
+    },
+    {
+      "file": "probe_entropy.json",
+      "checks": 89,
+      "failures": [],
+      "entropy_recalculated": true,
+      "headset_verified": false
+    },
+    {
+      "file": "probe_entropy_live.json",
+      "checks": 96,
+      "failures": [],
+      "entropy_recalculated": true,
+      "headset_verified": false
+    }
+  ],
+  "runtime_run_by_astra": false,
+  "source_and_map_unchanged": true,
+  "acceptance": "partial; reference-law display, readability and shared lifecycle verification open"
+}

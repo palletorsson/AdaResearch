@@ -1,0 +1,146 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_FlatTerrain · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_FlatTerrain">← Tutorial lineage</a></p><h1>ISO FlatTerrain</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_FlatTerrain/final.md">Raw captured source</a></p><pre># Look beneath the height
+
+&lt;!-- @mc_flat_landscape --&gt;
+
+How many times can the ground be above the same place?
+
+The turquoise landscape begins with hills. Walk around its edge. A gold line passes vertically through it; the small marks show where that line meets the generated surface. The desk reports one crossing. Choose another COLUMN. The height varies, but each tested column still has one answer.
+
+Press HOLD. The earlier surface remains behind the live specimen. Now press INTERIOR once, then again. Look beneath the upper profile before reading the number. Something can disappear from the top view while becoming visible from the side. A fold may give the same vertical line more than one meeting with the boundary.
+
+The first field begins with a familiar description:
+
+```glsl
+float terrainDensity = (surfaceHeight - worldPos.y) / 30.0;
+float density = terrainDensity - caveNoise * params.caveStrength;
+```
+
+Here `surfaceHeight` depends on horizontal position. With cave strength zero, the second line leaves the first alone. Rise through a column and the density decreases steadily; at level zero it crosses at the assigned height. The hills can be rough or smooth. This description still gives each horizontal position only one height. It cannot independently specify a floor, an air gap and a ceiling there.
+
+INTERIOR keeps that height function, sample domain and threshold unchanged. It changes the weight of a three-dimensional cave field: zero, 0.3, 0.4, then 0.8. Because that contribution varies with height too, the final field need no longer decrease steadily as you rise. A column can leave solid, enter air, and meet solid again.
+
+Try the strongest setting. The marked column is chosen from a fixed set of 25 by 25 test positions, with the most crossings shown first after a rebuild. COLUMN moves through that set. These are intersections with the extracted triangles. They are evidence at particular positions, rather than a complete account of the continuous field or the whole landscape.
+
+The cave term can also lower the upper surface. Holding the height function steady does not hold the final skyline steady: both terms contribute to the boundary. Compare with your held copy. Which difference did you notice first—the changed silhouette, or the space beneath it?
+
+The earlier noise rooms gave us variation we could recognise as terrain. Here we ask what that variation is allowed to describe. Adding more detail to a height function cannot give it a second answer at the same position. Changing the description can. Even then, an enclosed pocket may offer no entrance. A visual opening may be too small for a body. This miniature&#x27;s column counter does not decide either question for us.
+
+&lt;!-- @mc_overhang_landscape --&gt;
+
+The amber landscape starts from a height field too. Press TERMS and watch it acquire contributions one at a time: overhang, cave, arch, then outcrop. Keep the turquoise specimen as it is while you examine the amber one from the side.
+
+Its description gathers several tendencies:
+
+```glsl
+density = baseTerrain - overhangDensity - caveStrength
+        - archStrength + outcropStrength;
+```
+
+Each contribution has its own spatial mask and noise calculation. The two specimens share an extractor, but they are not a matched pair differing by one switch. The left experiment varies the weight of one interior field. The right experiment adds different terms to a composition. Distinguish those questions before comparing the results.
+
+The names suggest things to look for. Does the setting called “arched” give you an arch you can recognise here? Where does it fail to do so? A word on the desk names an intention; the field, sampling and selected domain make the actual surface. The gap between those accounts is part of the encounter.
+
+RESET returns both reference fields and keeps the held surface. Neither specimen is rescaled or lifted to improve its fit as the values change. Some differences are small. Come closer, change your viewpoint, or keep the question open. More terms need not produce more usable space.
+
+&lt;!-- @ --&gt;
+
+The original CPU terrain and rhizome specimen remain further into the hall, offering other ways to return to this question. Our next stop is Portal Landscape: once an opening appears, where can it take us?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_FlatTerrain/tutorial.md">Raw captured source</a></p><pre># Look beneath the height
+
+&lt;!-- @mc_flat_landscape --&gt;
+
+How many times can the ground be above the same place?
+
+The turquoise landscape begins with hills. Walk around its edge. A gold line passes vertically through it; the small marks show where that line meets the generated surface. The desk reports one crossing. Choose another COLUMN. The height varies, but each tested column still has one answer.
+
+Press HOLD. The earlier surface remains behind the live specimen. Now press INTERIOR once, then again. Look beneath the upper profile before reading the number. Something can disappear from the top view while becoming visible from the side. A fold may give the same vertical line more than one meeting with the boundary.
+
+The first field begins with a familiar description:
+
+```glsl
+float terrainDensity = (surfaceHeight - worldPos.y) / 30.0;
+float density = terrainDensity - caveNoise * params.caveStrength;
+```
+
+Here `surfaceHeight` depends on horizontal position. With cave strength zero, the second line leaves the first alone. Rise through a column and the density decreases steadily; at level zero it crosses at the assigned height. The hills can be rough or smooth. This description still gives each horizontal position only one height. It cannot independently specify a floor, an air gap and a ceiling there.
+
+INTERIOR keeps that height function, sample domain and threshold unchanged. It changes the weight of a three-dimensional cave field: zero, 0.3, 0.4, then 0.8. Because that contribution varies with height too, the final field need no longer decrease steadily as you rise. A column can leave solid, enter air, and meet solid again.
+
+Try the strongest setting. The marked column is chosen from a fixed set of 25 by 25 test positions, with the most crossings shown first after a rebuild. COLUMN moves through that set. These are intersections with the extracted triangles. They are evidence at particular positions, rather than a complete account of the continuous field or the whole landscape.
+
+The cave term can also lower the upper surface. Holding the height function steady does not hold the final skyline steady: both terms contribute to the boundary. Compare with your held copy. Which difference did you notice first—the changed silhouette, or the space beneath it?
+
+The earlier noise rooms gave us variation we could recognise as terrain. Here we ask what that variation is allowed to describe. Adding more detail to a height function cannot give it a second answer at the same position. Changing the description can. Even then, an enclosed pocket may offer no entrance. A visual opening may be too small for a body. This miniature&#x27;s column counter does not decide either question for us.
+
+&lt;!-- @mc_overhang_landscape --&gt;
+
+The amber landscape starts from a height field too. Press TERMS and watch it acquire contributions one at a time: overhang, cave, arch, then outcrop. Keep the turquoise specimen as it is while you examine the amber one from the side.
+
+Its description gathers several tendencies:
+
+```glsl
+density = baseTerrain - overhangDensity - caveStrength
+        - archStrength + outcropStrength;
+```
+
+Each contribution has its own spatial mask and noise calculation. The two specimens share an extractor, but they are not a matched pair differing by one switch. The left experiment varies the weight of one interior field. The right experiment adds different terms to a composition. Distinguish those questions before comparing the results.
+
+The names suggest things to look for. Does the setting called “arched” give you an arch you can recognise here? Where does it fail to do so? A word on the desk names an intention; the field, sampling and selected domain make the actual surface. The gap between those accounts is part of the encounter.
+
+RESET returns both reference fields and keeps the held surface. Neither specimen is rescaled or lifted to improve its fit as the values change. Some differences are small. Come closer, change your viewpoint, or keep the question open. More terms need not produce more usable space.
+
+&lt;!-- @ --&gt;
+
+The original CPU terrain and rhizome specimen remain further into the hall, offering other ways to return to this question. Our next stop is Portal Landscape: once an opening appears, where can it take us?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_FlatTerrain/technical.md">Raw captured source</a></p><pre># Height, interior and composition
+
+The hall uses the existing TerrainGeneratorFlat and TerrainGeneratorOverhang through a local iso_terrain_workshop desk. INTERIOR selects none / undercut / caverned / warren, with cave weights 0 / 0.3 / 0.4 / 0.8. TERMS selects hillside / overhung / quarried / arched / compound, retaining the existing accumulating weight tuples. Both start at level zero. Their 300-unit domains render at scale 0.02, six metres across; the right instance&#x27;s inherited 1000-unit domain is set to 300 for this placement. Flat retains its original noise offset (100,50,75). Their formulas and noise inputs differ: the two specimens are not an isolated-variable pair. Each specimen&#x27;s own controls provide that comparison.
+
+The desk drains outstanding work, then disables redundant continuous generation on these two instances. Existing apply_grid_config methods rebuild on parameter changes. No algorithm or shader modification is required. Coordinates and display scales remain fixed across changes. HOLD deep-copies the flat mesh and material ten metres behind it, without collision. RESET preserves the copy. The tall inherited labels are hidden in these placements and replaced by the compact desk&#x27;s transparent readout.
+
+COLUMN intersects actual mesh triangles with 625 fixed vertical lines inside the 300-unit domain. Triangle projections are rasterised into a 25x25 test lattice; barycentric interpolation finds each crossing height. Duplicate shared-edge crossings within 0.001 model units merge. Vertical triangles are excluded because a coincident vertical line has no isolated intersection. Columns with no crossings are omitted from the display. Results are sorted by decreasing crossing count after a rebuild, and COLUMN selects successive entries. This is a bounded mesh diagnostic, not a continuous-field proof, cave-connectivity analysis or body-clearance test. The marker is visual and has no collision.
+
+All four inherited artifact instances remain. mc_flat_landscape and mc_overhang_landscape are primary; mc_terrain_demo and rhizome_cave_system are secondary. All original 16x12 structure cells are preserved at offset (3,32), within a 30x48 open-roof comparison court. The right and rear aisles provide independent onward access. The larger width is intentional to separate the six-metre specimens, held copy and preserved collection. No room is added or removed from the eight-hall active museum route; all thirteen source curriculum halls remain.
+
+Sources: commons/artifacts/timing_machines/iso_terrain_workshop.gd; algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd and TerrainGeneratorOverhang.gd; Compute/MarchingCubesFlat.glsl and MarchingCubesOverhangTerrain.glsl. Human headset comfort and Quest performance remain unverified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_FlatTerrain/critical.md">Raw captured source</a></p><pre># More detail cannot change a function&#x27;s contract
+
+A height field permits variation while keeping one rule stable: each horizontal position receives one height. Its smoothness is secondary to that contract. Roughening it can make movement difficult without making a ceiling possible above a separate floor at the same position.
+
+A volume offers another description. Different vertical positions can change classification independently. That capacity does not guarantee shelter, an entrance or a route. The distinction matters to the research question: what bodies are possible depends both on the representation&#x27;s expressive capacity and on the particular space made with it.
+
+The column instrument is selective. It samples a finite lattice and begins with the strongest observed example. It helps us find a difference, while also arranging our attention. Its count cannot speak for all positions, and it cannot determine whether an opening accommodates the player. Making its selection rule visible lets the learner question what the demonstration has privileged.
+
+The composition desk also carries expectations in its vocabulary. An “arch” term is not an arch by declaration. Its contribution can be obscured by other terms or lost in sampling. The held surface and the change of viewpoint give us ways to inspect that mismatch. The possibility of inhabiting an interior begins with a representation that can express one; it remains a question for bodies, entrances and contact.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_FlatTerrain/artifacts.md">Raw captured source</a></p><pre># ISO FlatTerrain — Artifacts
+*Isosurfaces: Implicit to Explicit · F_order · 3 artifacts*
+
+&gt; Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground. The overhang landscape breaks the contract. Rock juts sideways, canopies form from nothing, gravity loses its vote. Same threshold, same 256-case lookup, but the noise field now curves back on itself.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## mc_flat_landscape
+![mc_flat_landscape](/scene-catalog/mc_flat_landscape.png)
+
+GPU flat terrain — marching cubes landscape with gentle noise.
+
+`mc_flat_landscape`
+
+## mc_overhang_landscape
+![mc_overhang_landscape](/scene-catalog/mc_overhang_landscape.png)
+
+GPU overhang terrain — landscape with overhanging rock formations.
+
+`mc_overhang_landscape`
+
+## mc_terrain_demo
+![mc_terrain_demo](/scene-catalog/mc_terrain_demo.png)
+
+CPU terrain generation demo — marching cubes terrain with configurable noise parameters.
+
+`mc_terrain_demo`
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_FlatTerrain/blurb.md">Raw captured source</a></p><pre>Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground. The overhang landscape breaks the contract. Rock juts sideways, canopies form from nothing, gravity loses its vote. Same threshold, same 256-case lookup, but the noise field now curves back on itself.
+
+Heightmaps can&#x27;t do this. They enforce a rule: one height per point, one surface per column. Marching cubes refuses that constraint. When the field says solid-above-empty-above-solid, it builds exactly that. Overhangs, arches, shelves of stone floating on math.
+
+Flat terrain is landscape as floor. Overhang terrain is landscape as architecture — structure that folds over itself, where ground becomes ceiling becomes ground again.</pre></section></body></html>

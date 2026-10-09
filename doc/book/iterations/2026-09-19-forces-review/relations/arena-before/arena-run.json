@@ -1,0 +1,40 @@
+{
+  "pid": 39264,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--headless",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\relations\\arena-before\\arena-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/relations/probes/probe_arena.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-forces-review/relations/arena-before/",
+    "--baseline"
+  ],
+  "returncode": -1,
+  "seconds": 180.01819825172424,
+  "source_sha256_before": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/VFM_08_Arena/map_data.json": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+    "commons/artifacts/registry/vectors_demos.json": "9a246e44cde324aeb654edfdea304e72b6c1622129a0e0b1ac14fd05baf86bd4",
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd": "11f75c97e27bad430b4be85174e6a714cdcf51655d0b669a1a6e484d78ed1a7b",
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": "2a362cb700e21a1c2b300f2d924710df15cbf1118cacf1a08e58490f5fa756d2"
+  },
+  "source_sha256_after": {
+    "commons/scenes/endless_museum.gd": "bb50afe8f7af30953a09d4eb37a7d3206e952e99733edd96c7bf373bba5934ec",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/VFM_08_Arena/map_data.json": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+    "commons/artifacts/registry/vectors_demos.json": "8ed4f21c5871bd0d52daf2c6a6e75ab3f482b41373f7c37e533056c864c13376",
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd": "11f75c97e27bad430b4be85174e6a714cdcf51655d0b669a1a6e484d78ed1a7b",
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": "2a362cb700e21a1c2b300f2d924710df15cbf1118cacf1a08e58490f5fa756d2"
+  }
+}

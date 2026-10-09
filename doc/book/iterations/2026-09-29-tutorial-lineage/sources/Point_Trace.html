@@ -1,0 +1,493 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Trace · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Trace">← Tutorial lineage</a></p><h1>Point Trace</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Trace/final.md">Raw captured source</a></p><pre># Duration and Residue
+
+Bring the detour.
+
+There was time between the ends. We passed through it. Let the next line try to keep something of the passage.[^point-trace-klee]
+
+## Let the hand leave a line
+
+&lt;!-- @draw_dot --&gt;
+
+Three coloured pens wait on their plinths. Take the red pen and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
+
+The nib is the point being followed. Turn your wrist while keeping your hand almost still: the tip can travel while your grip barely moves.
+
+Watch during the pause. Does another point enter merely because time passes?
+
+Move again. Give the loop a tail, then release the pen. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
+
+The count comes from a list:
+
+```gdscript
+var point_count = _trail_points.size()
+```
+
+`_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^point-trace-sampling]
+
+The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point Zero&#x27;s counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
+
+Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.
+
+Each row gives three coordinates for a retained position. As the drawing grows, earlier rows leave the small table. The drawing still has its beginning. What has left the screen has not yet left the line.
+
+## Another resolution, another gesture
+
+The other pens give the line a coarser grain. From red through green to blue, their grids grow wider.
+
+Repeat a small bend with the blue pen. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
+
+The program rounds each coordinate to the nearest grid position. Several movements of your hand can arrive at the same saved address. Until a different address is kept, the line has no new corner.[^point-trace-quantisation]
+
+The saved positions lie on the grid, but the segments between them can cut across it diagonally. A grid of corners does not require a drawing made only of right angles.
+
+Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+
+There is also a limit to how many positions a pen can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing.
+
+
+## After the hand lets go
+
+&lt;!-- @trace_ball_ramp --&gt;
+
+A black ball rests on a pale plinth. A plank slopes from its edge to the floor. Pick up the ball, set it near the top of the plank and let go.
+
+The ball continues. A thin black line stays behind it.
+
+The point has acquired weight. Your hand chose where to release it; gravity, the slope and contact with the plank carry the movement further. Here the recorder follows the ball&#x27;s centre. The mark hangs a radius above the surface it seems to draw on.
+
+Wait until the ball settles in the shallow tray. The line stops growing. Walk alongside it: the slope has become part of the drawing. Carry the ball back and release it from another place. The next release begins a new trace.
+
+You have set a line in motion and let something else continue it. How much of the drawing did you make when you placed the ball?
+
+
+## Touch the page
+
+&lt;!-- @whiteboard --&gt;
+
+Four pens and an eraser wait on the shelf beneath the wall-mounted whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
+
+Your hand travelled across the gap. The picture leaves it white.
+
+The pen writes within the board&#x27;s edges and close enough to its face. Lift beyond that contact allowance, and the next touch begins a new stroke. Your hand keeps moving across the gap; the rule stops admitting it to the picture. You can use that interruption to give two marks some space.
+
+The board turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. A lift of the hand gives the drawing a gap.
+
+## A line with a short memory
+
+&lt;!-- @trace_short_memory --&gt;
+
+The amber point near the exit has room for thirty-two positions. Draw a loop, then lead it away. Small beads mark the positions the cord joins. Watch its far end.
+
+At first you make more line. Then you begin to unmake it.
+
+Hold your hand still. Does the remaining line wait with you?
+
+This recorder uses the same movement gate as the red pen. We have given its list less room. When a new position takes it over that limit, the oldest goes:
+
+```gdscript
+if _trail_points.size() &gt; trail_max_points:
+    _trail_points.pop_front()
+```
+
+Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.
+
+Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?
+
+&lt;!-- @ --&gt;
+
+Return to a line you want to keep. Release the drawing pen after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.[^point-trace-carry]
+
+We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+
+The recorder was made to keep a gesture. Its list can now become something to compose with. A bend of the wrist may return at the size of a room, inviting another movement. The first use is still there, but it no longer tells us everything the record can become.[^point-trace-hauntology]
+
+In the next room, look for your bend. It may have grown.
+
+[^point-trace-klee]: Paul Klee, [*Pedagogical Sketchbook*](https://openendedgroup.com/field2/assets/Klee_Paul_Pedagogical_Sketchbook_1960.pdf), translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line.
+
+[^point-trace-sampling]: Claude E. Shannon, [“Communication in the Presence of Noise”](https://fab.cba.mit.edu/classes/S62.12/docs/Shannon_noise.pdf), *Proceedings of the IRE* 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture.
+
+[^point-trace-quantisation]: Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons. The [technical companion](/book?map=Point_Trace&amp;section=technical) gives the spacings, recording gate and list capacities.
+
+[^point-trace-carry]: A drawing pen must retain at least two positions to send a copy onward. The whiteboard&#x27;s image and the ball&#x27;s path stay in this hall. The [technical companion](/book?map=Point_Trace&amp;section=technical) distinguishes these records and their transfer routes.
+
+[^point-trace-inscription]: Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. Here they open a question to pursue: what can a retained mark tell us about a movement that has already passed?
+
+[^point-trace-hauntology]: Jacques Derrida&#x27;s [*Specters of Marx*](https://api.pageplace.de/preview/DT0400.9781040559963_A63760427/preview-9781040559963_A63760427.pdf) (1993; English translation by Peggy Kamuf, 1994), “Exordium,” connects inheritance with responsibilities towards those no longer or not yet present. Ada extends this question to technical use: a tool can carry an earlier purpose into an unanticipated connection. The [project afterword](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword) develops this proposal alongside entropy as difference and Ashby&#x27;s requisite variety.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Trace/tutorial.md">Raw captured source</a></p><pre># Point Trace
+
+Point_Lines gave us a segment between two positions. Here we keep intermediate positions in order. The lesson is how a reading becomes part of that list, and how the list becomes a drawing.
+
+## Watch a position enter
+
+Draw a short loop with the red pen. Pause, then move again. Compare the point count with two neighbouring rows on the tilted display.
+
+The installed scenes use a 5 mm movement gate. The script can inspect the held point during process callbacks, but a callback need not add a position. This excerpt reduces the recording branch in draw_dot.gd by leaving out display updates, fading and progress bookkeeping:
+
+```gdscript
+var current_global = _draw_sphere.global_position
+var dist = current_global.distance_to(_last_global_position)
+
+if dist &lt; min_segment_distance:
+    return
+
+_last_global_position = current_global
+var rec: Vector3 = _shape_sample(current_global)
+
+if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
+    return
+
+_trail_points.append(rec)
+```
+
+The first return declines movement below the threshold. Passing that test updates the comparison position before shaping the sample. The second return declines a shaped position that repeats the preceding saved one. `append()` puts a new accepted position at the end of the list.
+
+The comparison position therefore need not be the last saved position. Movement can pass the first test and still produce a duplicate after shaping. While the tool is released, recording is disabled and the comparison position follows the resting tool.
+
+## Change where a sample can stand
+
+The red, green and blue pens use 10, 40 and 80 mm spacing. In free space, the shaping operation rounds each world-coordinate component:
+
+```gdscript
+var s: float = resolution_mm / 1000.0
+rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+```
+
+These lines show the free-space rounding operation with the position named `rec`. The complete helper also handles nearby whiteboard surfaces. A recording lattice changes spatial grain; it does not set a fixed number of samples per second.
+
+Repeat a small bend, then enlarge it for the coarse recorder. Try deliberately returning to an address. Only consecutive duplicates are rejected: an ordered trace can revisit an earlier position after visiting others.
+
+## Join what was kept
+
+The count is the size of the retained list:
+
+```gdscript
+var point_count = _trail_points.size()
+```
+
+The mesh uses `Mesh.PRIMITIVE_LINE_STRIP` and supplies the retained positions in order. Each adjacent pair gives a straight segment. The list supplies endpoints for that segment; it does not establish the intervening route of the hand.
+
+The instrument displays the last ten positions while the larger count includes the whole retained list. The three drawing pens keep at most 4096 positions each. Beyond that capacity, `pop_front()` removes the oldest position. This is a bounded array maintained by removal, not a circular-buffer implementation. Fading is off in these placements.
+
+## Meet the limit sooner
+
+The amber `trace_short_memory` point inherits the same recorder with `trail_max_points = 32`. Its plaque names the capacity. Keep drawing until the beginning is removed, then pause. Fading is off: elapsed time alone does not delete a point. The limit counts accepted positions, not seconds or metres. On release, only the surviving positions are copied onward.
+
+## Move the observed point
+
+The pen uses the same recorder and threshold, but `WritingTip` is the observed point. Turning the barrel moves its nib even when the grip changes position very little. Its fixed XRTools grab point aligns the nib with the hand&#x27;s forward direction on pickup.
+
+At the whiteboard, lift a pen between two marks. The board&#x27;s separate pen script writes only while held, within the surface bounds and contact allowance. It starts a fresh stroke after the nib leaves. The drawing can omit the journey across the gap.
+
+## Carry the record onward
+
+Releasing a drawing pen calls `TraceData.add_trace(_trail_points)`. The store copies lists containing at least two positions. It survives room changes during the running game; it does not save these traces to disk. Whiteboard pixels follow another storage route.
+
+The copied list contains positions without per-point timestamps. Grid can display and reshape those positions, but cannot recover the timing of a pause from them. That is the record we take into Point_Line_Grid.
+
+See [technical.md](technical.md) for exact source paths, surface rules and the optional timed recorder. Earlier extension sketches are retained in [the previous tutorial](../../../doc/space/point-trace-focus-2026-09-16/previous/tutorial.md).
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Trace/technical.md">Raw captured source</a></p><pre>&gt; Current arrangement, 29 September 2026: three plain drawing pens (10/40/80 mm), their plinth readouts, a whiteboard mounted on the uninterrupted east wall, and the ball ramp. The neutral dot, stick, head projection and writing desk are no longer placed. The dated implementation notes below retain the removed studies&#x27; history.
+
+# Point Trace — implementation reference
+
+The current book develops the selected-position recorder, its spatial grain, its sampling point, and the whiteboard&#x27;s contact rule. [tutorial.md](tutorial.md) gives the short programming route. This reference distinguishes those installed behaviours from optional comparisons and possible extensions.
+
+## Drawing dots and stick
+
+Both scenes use [draw_dot.gd](../../primitives/point/draw_dot.gd). Their scene properties set `min_segment_distance = 0.005` metres and `trail_max_points = 4096`. Recording requires the pickable to be held. The dot observes its GrabPoint; the stick observes `GrabStick/Blade/Top/TrackBall`.
+
+In the recording branch of `_process()`, the script reads the observed world position and compares it with `_last_global_position`. A reading below the movement threshold is declined. Passing the gate updates that comparison position before calling `_shape_sample()`. If the shaped result approximately equals the immediately preceding saved position, it is declined; otherwise it is appended.
+
+The gate&#x27;s reference is therefore the last gate-passing reading, not necessarily the last retained point or the previous frame&#x27;s position. A released tool updates the reference without extending the trace. Returning to an earlier position after other saved positions is allowed.
+
+The three drawing pens use 10 mm, 40 mm and 80 mm spacing. In free space the helper rounds world X, Y and Z to multiples of the spacing. Near a whiteboard it can shape the sample in the board&#x27;s frame, then convert it back to world coordinates. That capture zone extends 0.05 m from the board plane, with 0.02 m around its bounds; positions are clamped to the face and offset 0.004 m for visibility. This behaviour is separate from the board&#x27;s own pens.
+
+## Reading the line
+
+The retained coordinates enter an ImmediateMesh line strip. Adjacent positions are connected directly, including diagonals across the recording lattice. These segments are constructed geometry, not additional measurements.
+
+The cased display tilts 35 degrees from vertical. Its count is read after capacity enforcement; the table shows the last ten retained positions in world metres, with at least three decimal places. Eighteen retained points produce rows 9–18. These numbers are current list positions, not permanent sample identifiers.
+
+The three panels are fixed to their plinths and stay visible at zero points and after release. Appending or evicting points does not make it chase the newest endpoint. The casing and display do not change the data being reported.
+
+When the list exceeds 4096 positions, its oldest position is removed. Live fading is off here. The optional `_trail_times` array is populated only when fading is enabled, so it is empty under these placements&#x27; default settings. The live position list does not encode the duration of stationary pauses.
+
+## The whiteboard&#x27;s pens
+
+The map enables separate pens with `#pens:1`. [whiteboard_pen.gd](../../artifacts/whiteboard/whiteboard_pen.gd) reads the nib of the held tool; [whiteboard_drawing.gd](../../artifacts/whiteboard/whiteboard_drawing.gd) converts its world position into the drawing surface&#x27;s local frame.
+
+A nib outside the bounds or more than 0.035 m from the plane ends the stroke. The next valid contact starts another stroke. The four pens use 0/10/40/80 mm positional spacing before conversion to canvas coordinates. NO GRID omits that rounding; the image still consists of pixels.
+
+At this board&#x27;s 2.0 by 1.2 m size, the canvas is 1024 by 614 pixels. A brush with a three-pixel radius connects valid contacts; the eraser paints white with a 22-pixel radius. The dedicated `whiteboard_canvas.gd` retains a bounded pixel image and uploads changes once per frame when dirty. It has no wet-paint feedback, diffusion or idle fading. Its image stays with the board during this visit.
+
+## Room arrangement and tool return
+
+Three drawing pens occupy plinths at source cells (3,5), (4,5) and (5,5). Each readout stays seated on its 0.90 m support. `#pen_style:simple` replaces the held sphere with a 22.5 cm pen; the recorder follows its nib. A fixed, hand-independent XRTools grab point aligns local -Z with the pickup&#x27;s forward direction. Recording waits for the grip to arrive, so the pickup approach is not drawn. Other draw_dot placements keep their original sphere.
+
+The whiteboard is at source cell (7,2), with its lower edge 0.95 m above the floor, facing west into the hall. Its two-metre width lies entirely on the solid wall before the side-bay opening. `#pen_style:simple` opts this board into plain barrels with forward-aligned grips; its four resolutions, eraser, shelf and return behavior are retained. The same pen body helper serves both drawing in space and drawing on the board.
+
+Released shelf tools fall under physics. A tool more than 0.25 m below its dock or more than 3 m away returns after 1.25 seconds in that condition. Its home transform is relative to the board, so wall rotation and placement are respected. Held tools never return. Both XRTools pickup and the desktop pointer&#x27;s grab/drop hooks are supported. Other boards retain the floating-tool arrangement unless they opt into the shelf.
+
+## Optional comparisons
+
+The telemetry diptych uses [hand_telemetry_display.gd](../../primitives/hand_telemetry_display/hand_telemetry_display.gd). Its default sampling interval is 0.12 seconds. A process callback crossing that timer threshold appends the current time and position, even if a tracked controller has stayed still. Actual cadence remains limited by callbacks; this is not a guarantee of perfectly periodic sampling.
+
+The footer labels a found controller node as TRACKING and the synthetic fallback as DEMO FEED. The lookup checks tracker/name but not active-pose validity or the currently driven rig; TRACKING therefore does not establish live hardware input by itself. Without a controller, synthetic motion fills the rows. Confirming the active source is a pending implementation improvement.
+
+The removed automatic-writing desk used the `head_height` recording mode. It measures head height against elapsed time. The default `asemic` mode elsewhere retains the original speed-modulated generated script; see the measured-mode notes below.
+
+## Short-memory companion
+
+`trace_short_memory` inherits the existing draw-dot scene and recorder. Its capacity is 32 instead of 4096, its ink is amber, and its static plaque states the capacity. The extra data panel is disabled so it cannot obscure the drawing. A local display override draws each retained position as a 12 mm bead and each adjacent connection as a 7 mm cord. Two small MultiMeshes render the same list; there is no additional trajectory record. The 5 mm movement gate, unsnapped positions, pickup requirement, lack of time fading and release-to-TraceData behaviour are inherited unchanged. The three remaining drawing pens retain their recording resolutions.
+
+The companion stands in the exit bay at cell (2,9), facing the approach from the central passage. A visitor can draw beyond the bay while carrying the point. Continuing a gesture eventually removes earlier positions, whereas a stationary pause leaves the retained list unchanged. Capacity counts accepted positions; its duration and spatial length depend on the movement and process callbacks. It is not a fixed-time trail.
+
+The controlled Godot comparison supplies the same 72 positions through two held tools and their real recorder callbacks. The original keeps 72; the companion keeps exactly the last 32. A four-second synthetic pause does not remove any; a later accepted position removes one. Releasing copies the remaining 32 positions to TraceData. This establishes the mechanism, not headset comfort or whether a visitor enjoys drawing with it.
+
+## Transfer into Grid
+
+On release, the drawing pen calls [TraceData.add_trace()](../../globals/trace_data.gd). That function requires at least two positions and duplicates the list. Its autoload storage survives room changes in the running game. It has no trace disk-save operation here and does not copy pen colour, identity or per-point timestamps. The whiteboard and player_trace do not publish their records to this store.
+
+[grid_lines.gd](../../primitives/line/grid_lines.gd) reads existing traces and listens for later releases. It subtracts the source bounding-box centre and applies a fivefold enlargement, reducing the factor if necessary to fit the longest dimension within five display metres. A second rendering rounds transformed coordinates to another lattice. Source positions remain unchanged. This supports the book&#x27;s conditional ending: the bend may have grown.
+
+## Retained development material
+
+The [previous technical draft](../../../doc/space/point-trace-focus-2026-09-16/previous/technical.md) preserves experiments in timestamps, simplification, fading and storage. Those sketches need separate implementation and verification. Its numerical memory comparison and its named simplification algorithm were not reliable descriptions of the installed recorder; they should not be used as current evidence.
+
+
+## Head path and floor projection — 24 September 2026
+
+`head_trace_projection` occupies cell (2,3), centred at (2.5, 0, 3.5). Its 2.2 m square is a flush visual mark over the existing museum floor, with no added obstacle collider. Pink records full positions; cyan is derived from that same list by `Vector3(p.x, FLOOR_Y, p.z)` in the artifact&#x27;s local frame. It measures neither feet nor eye gaze. Locomotion is included in the world camera position before conversion to the hall-relative frame.
+
+Input comes from the current XRCamera3D under the current XROrigin3D, with an initialized primary XR interface reporting normal tracking. There is no synthetic fallback. Without active XR, a camera belonging to the active `em_walker` can supply the separately labelled DESKTOP VIEW. Spectator/capture cameras are excluded. Godot notes that the game-logic [XRCamera3D position](https://docs.godotengine.org/en/4.6/classes/class_xrcamera3d.html) may lag the render-thread pose; this is a sampled headset account, not an unmediated body. The interface&#x27;s [tracking status](https://docs.godotengine.org/en/4.6/classes/class_xrinterface.html#class-xrinterface-method-get-tracking-status) determines admission; unknown or degraded status waits rather than inventing movement.
+
+Accepted positions are at least 15 mm apart, with a shared capacity of 256. The recorder operates on process callbacks without interpolation of missing measurements. Tracking loss, source changes, XRTools teleport, reference/play-area changes, frame gaps above 0.25 s and single-step displacements above 0.45 m prevent a joining segment. The displacement limit is a guard, not proof that every unsignalled discontinuity can be detected. A new observer begins a separate record. Zero-length projected joins are omitted, while their coincident positions remain represented.
+
+Leaving the square preserves the display. After 0.6 s outside, re-entering starts a fresh drawing. Merely waiting or temporarily losing tracking does not erase the previous record. Head/floor history is local to this artifact and is not published to TraceData or carried into Grid.
+
+Validation and labelled scripted camera captures: [head-path review](../../../doc/book/iterations/2026-09-24-head-trace/index.html). The probe exercises production input selection with controlled desktop and XR fixtures; it is not a headset or learner trial.
+
+
+## The pause leaves a line — measured writing mode
+
+The existing desk at cell (4,1) now uses `#recording:head_height#rows:5#write_speed:0.06#run_demo:0`. This is an opt-in companion, `measured_height_writer.gd`, called by the original script. Other placements keep the default `asemic` generator. The measured branch never seeds handwriting, invokes `_row_v`, or substitutes demo motion. Its identity/registry text now distinguishes the two modes and avoids claiming to measure attention or confession.
+
+The desk and spatial head trace share `commons/artifacts/trace_shared/measured_view_source.gd`. This extraction preserves current-rig and normal-XR-tracking checks, desktop walking-camera labels, and teleport/reference-change notification. Capturing a spectator camera is refused. The spatial trace&#x27;s existing behaviour is covered by the regression probe.
+
+The writing begins when the observer is in the reading position in front of the table (local X within 0.8 m, Z from 0.40 to 1.65 m, height from 0.2 to 3.2 m). The initial local camera height supplies a baseline. Time advances U at 0.06 page fractions per second across 0.84 of a row. Height relative to that baseline moves V, clamped to +/-0.70 m and a bounded row amplitude. The sign reports `row limit` beyond that range. Raw accepted heights and elapsed times remain in parallel arrays. Sideways movement and gaze are not height measurements.
+
+A sample is accepted on a callback at least 0.05 s after the prior accepted sample, without filling intervening positions. Actual cadence therefore depends on frame timing. During tracking/view loss in an active visit, time continues but ink is omitted. Long frame gaps (&gt;0.25 s), large displacements (&gt;0.45 m), and notified teleports/recentering also omit an observation rather than invent a connecting gesture. The stroke consists of fine measured dots, not an interpolated waveform.
+
+The page has five rows, nominally 70 seconds of clock space, and a separate maximum of 1800 samples. Reaching either limit holds the page. Leaving preserves it; after 0.6 s outside, returning starts a new page and height baseline. Changing the observer also starts a new record. Nothing is exported to TraceData.
+
+Visual inspection found the original tilted paper intersected its tabletop, hiding early marks. In measured mode its centre is lifted by the vertical component of half its depth, so the entire sheet clears the table; the compact label rises with it. This correction is local to measured mode.
+
+[Actual museum images and focused evidence](../../../doc/book/iterations/2026-09-24-trace-pause/index.html) use explicitly supplied camera coordinates, including constant input and linear height changes. The checks compare the measured desk with the real held `draw_dot` recorder and cover the shared head selector. They do not establish headset comfort, learner discovery, or Quest performance.
+
+## 26 September 2026 — Point released to gravity
+
+`trace_ball_ramp` occupies a new side bay at source cell (12,2), with an open approach at x=8, z=4..6. The 0.28 m diameter black sphere uses XRToolsPickable, dynamic release, layer 6/mask 1 and native rigid-body gravity. A 1 m plinth leads to a 0.82 m-wide sloped plank and shallow landing tray. The trace samples its released centre at a minimum 18 mm movement, stops adding at rest, and retains at most 1024 segments. A new release clears the previous path. Picking up pauses recording; abandoned balls recover after falling below the room or leaving the installation. No scripted downhill motion. This path stays in the hall; existing hand-drawn TraceData publishing remains unchanged. Native tests exercise the production pickup/release; headset feel is pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Trace/intent.md">Raw captured source</a></p><pre># Point_Trace — current intent
+
+Question: What has to happen before movement enters a record?
+
+The book follows the detour from Point_Lines through four related decisions: whether movement passes the recorder&#x27;s gate; where a retained position may stand; which part of a tool is being tracked; and whether contact admits movement to a drawing. An ordered list of selected positions, joined by straight segments, is the main new capability.
+
+Three drawing pens share the draw_dot recorder and a 5 mm movement gate, with red, green and blue grids of 10, 40 and 80 mm. The plain nib is the sampled point; the grip aligns forward on pickup. The wall-mounted whiteboard keeps four surface-writing pens and an eraser. The ball ramp offers a movement continued by gravity. Telemetry and the science screen remain secondary.
+
+The neutral dot, draw_stick, head_trace_projection and automatic_writing_desk have been removed from this hall at the author&#x27;s request. Their code is retained; [retired encounter passages](trace-retired-encounters.md) preserve the former manuscript material.
+
+The recording rules can hide a small difference and make another position easier to return to. The critical text should ask what a particular practice needs from its record, who chooses the rules, and how those rules could be challenged. It should not equate a sampled position list with preserved intention, complete duration, or freedom.
+
+Release a drawing pen to copy its retained positions into TraceData. Grid receives that record, centres and scales its display, and applies another lattice. The source is already sampled and may already be spatially rounded; Grid makes addresses and changes of representation the next explicit question.
+
+Earlier drafts are preserved in [the previous texts](../../../doc/space/point-trace-focus-2026-09-16/previous/). Their proposals and historical descriptions are not the current interaction contract.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Trace/critical.md">Raw captured source</a></p><pre># Point Trace — what enters the record?
+
+The question carried from Lines is concrete: two endpoints did not retain the detour. Here a list of positions keeps more of its shape. What work must happen before a movement becomes one of those positions?
+
+## A pause without another point
+
+Hold the drawing dot still and watch its count. The process loop continues, but movement below the threshold does not add a position. In these placements the retained list contains no per-point timestamps. The drawing can therefore remain unchanged through a pause whose duration matters to the person holding the tool.
+
+This is a limit of a particular recorder. The telemetry nearby can append timed rows during stillness. Adding a clock to a record makes other comparisons possible; it does not make intention or the experience of waiting readable automatically.
+
+The body has undergone something that one instrument has no field for. We can ask whether this absence matters to a drawing, to a performance, or to someone making a judgement about the person who moved. The purpose of the record changes the consequences of what it omits.
+
+## A curve partly constructed
+
+The program joins neighbouring saved positions with straight segments. That line lets us see a shape, including across intervals where no further position was retained. Its apparent continuity can make the record feel more complete than the measurements establish.
+
+A segment between two samples may be a useful account of their connection. It may also cross a space the hand did not cross. There are two operations to inspect: selecting positions and constructing something between them. Neither operation can establish the whole event on its own.
+
+The claim that a line erases a prior gesture also needs care. A segment can be defined without first recording a journey. Erasure becomes an actual operation when a program deletes a record or replaces it with a smaller one. A representation&#x27;s limits matter without requiring an invented history of what was once inside it.
+
+## A grain to work with
+
+The coarse dot moves readings onto an 80 mm lattice. A small flourish may disappear into repeated coordinates. That same range can let the hand wander while an address remains steady, making a chosen corner easier to repeat.
+
+The useful question is what this instrument lets someone make. A visitor can enlarge a movement, work with the stepped form, change tools, or decide that the missing difference matters. The grid has become part of the practice rather than merely a defect to overcome.
+
+Queer possibility can appear in that change of use: an interval treated as inadequate for faithful capture becomes material for another drawing. This does not make coarseness inherently queer or finer recording inherently oppressive. It keeps open the question of who gets to define the task, choose the grain, and refuse the instrument&#x27;s account.
+
+## A limit that changes the task
+
+The amber companion keeps only thirty-two positions. It makes the loss of a beginning encounterable during a short drawing, while the original dots still offer longer records. A pause leaves its tail intact; further accepted positions make room by removing older ones. Time passing and a record changing are different events here.
+
+A visitor may want to preserve a loop, or discover a use for a line that clears space as it travels. Neither purpose settles which capacity is right. The comparison makes the question answerable through another gesture. Its small memory is a chosen limit we can change, not a measured limit of the headset and not an entropy measure.
+
+## Which point stands for the body?
+
+The stick keeps the same movement threshold while observing a point farther from the fist. Turning the wrist can move that point through an arc. The resulting line describes the trajectory of the chosen tip; it does not become a complete description of the hand.
+
+The head-trace square follows a point the visitor is already carrying. Its floor projection can be a useful account of a route while different heights coincide. Lowering the head and returning makes that choice available to inspect. The suspended version keeps another difference but still has no shoulders or intention. Neither representation needs to become a complete body to be useful; the question is which account a particular purpose requires, and whether its omissions remain available to question.
+
+At the board, proximity to the face and the board&#x27;s edges decide where a held pen can write. Lifting makes an interval of movement absent from the image. The visitor can use that absence to separate marks. Here the recording boundary supports an action the person wants to perform.
+
+These choices become political when their outputs acquire authority over someone: when a selected point stands for a whole body, or a missing mark becomes evidence that nothing happened. The museum can make the choice inspectable and invite another use. It should leave room to question the interpretation as well as adjust the parameters.
+
+## The authority of a legible instrument
+
+Eighteen retained positions can be displayed beside ten coordinate rows. Both readings can be accurate while the small window leaves earlier positions out of view. The casing makes the instrument easier to read and gives its report a finished appearance. It does not widen the report&#x27;s scope.
+
+Ask where row 1 has gone. Compare the surviving line with the list operation. Ask what a pause contributes, then inspect the movement gate. The display and the code answer related questions, and the visitor&#x27;s purpose helps decide which answer matters.
+
+The writing desk now keeps head height against time. A level stretch can record a wait, where the drawing dot&#x27;s spatial list adds nothing. An interval without measurements leaves blank paper. These forms of apparent quiet have different conditions. Neither a steady height nor an empty interval can establish attention, reluctance or absence of thought. The default generated handwriting remains available elsewhere as a further comparison: what makes a mark feel as if it knows you?
+
+## Reduction and the possibility of reply
+
+The project&#x27;s [entropic-morality essay](../../../doc/research/qfep/entropic-morality.md) asks how to make necessary reductions while remaining answerable for their consequences. Trace gives that question an instrument: which differences reach its list, which can be recovered from its display, and how can a visitor work differently with the rule?
+
+The point count is not an entropy measure, and no numerical QFEP parameter has been established by this encounter. The connection is methodological. Make a bounded account, expose its conditions, and keep open the possibility that another purpose needs another account.
+
+The copied positions can travel to Grid and take on a new use. Their usefulness does not require us to mistake them for everything that happened. What might we want from them there that this recorder has not kept?
+
+Earlier philosophical associations and drafts remain in [the previous critical text](../../../doc/space/point-trace-focus-2026-09-16/previous/critical.md). They are retained research material, not evidence that the current tool preserves a complete duration or intention.
+
+## A record can acquire another task
+
+The author&#x27;s 28 September connection to hauntology concerns inherited purposes and uses that have not yet become actual. The drawing record retains a prior gesture while becoming available for another construction. In Grid it can acquire another centre, scale and quantisation; following the enlarged bend remains a visitor&#x27;s invitation, not an automatic walking route. This gives the final chapter&#x27;s short passage its material occasion.
+
+The [preface](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#preface) introduces tinkering through household laboratory equipment and a game camera used in scanning. The [afterword](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword) develops entropy as difference and requisite variety without equating a position count with freedom. Hauntology is a theoretical connection and project extension, not a new claim about what the trace file stores.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Trace/artifacts.md">Raw captured source</a></p><pre># Point Trace — Artifacts
+*Primitives: Points Build Worlds · F_order · 5 artifacts*
+
+&gt; Now: duration. The trace records what the line forgets — your hand moved through space, hesitated, curved, returned. Time accumulates as visible residue. The line will compress this to two points. The trace resists.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Lab Room
+![Lab Room](/scene-catalog/lab_room.png)
+
+Procedurally-generated Half-Life-style modern test chamber that frames a workbench. White tile floor, observation glass, accent-colored strip naming the QFEP phase, signage like &#x27;TEST CHAMBER λ-S&#x27;. Takes a mounted_artifact_scene path and instantiates that workbench at the central plinth. The room IS the staging — same script, different DNA = different chamber.
+
+`lab_room`
+
+## Mystic Writing Pad
+![Mystic Writing Pad](/scene-catalog/mystic_writing_pad.png)
+
+Freud&#x27;s Mystic Writing-Pad (Wunderblock, 1925) as the trace apparatus: a red-framed magic slate where a stylus writes a bright trace of points on a clearing sheet, and every lift sinks the trace into the wax below as a faint warm ghost. The surface forgets; the depth remembers. Derrida&#x27;s model of the trace, made a thing you stand before.
+
+`mystic_writing_pad`
+
+## Floating Sphere Field
+![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
+
+A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
+
+`floating_sphere_field`
+
+## draw_dot
+![draw_dot](/scene-catalog/draw_dot.png)
+
+sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
+
+`draw_dot`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## trace_ball_ramp
+
+A black point released to gravity; the real ball leaves a path down a sloping plank.
+
+Source: `res://commons/artifacts/trace_ball_ramp/trace_ball_ramp.tscn`. Placed in this map on 26 September 2026.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Trace/summary.md">Raw captured source</a></p><pre># Point Trace - Map Summary
+
+## Overview
+Point Trace introduces duration and embodied gesture into geometry. Where previous maps dealt with discrete abstractions (points, measured lines, grids), the trace accumulates over time as a visible record of continuous movement. This map foregrounds gesture, repetition, and the residue of action - revealing geometry as a lived process rather than instantaneous calculation.
+
+## Spatial Layout
+- **Dimensions**: 7x14 grid (medium corridor)
+- **Architecture**: Fragmented platform with raised ridge at row 4 (heights 1-2), tapering southern section
+- **Entry**: Type &quot;I&quot; - immersive spawn into dark space
+- **Atmosphere**: Very dark background [0.05, 0.05, 0.1] - intimate, focused
+
+## Key Elements
+
+### Primary Interactable
+- **draw_dot** (3,4) - Continuous drawing tool that traces controller movement
+  - Creates persistent visual marks in space
+  - Records gesture as accumulating geometry
+  - Sunken to height 0 (fillhole group) creating focused drawing pit
+
+### Supporting Elements
+- **grab_sphere_point_snap** (2,4) rotated 180 deg - Discrete point for comparison
+- **dark_sphere** (3,3) - Encloses drawing area in intimate darkness
+- **cube_scene markers** (3,5) and (4,5) height 0.9m - Spatial anchors in fillhole group
+
+### Utilities
+- **Teleporter** (5,10) - Exit to next map
+- **Floating text** (3,13) - &quot;the_trace&quot; label
+- **Annotation** (6,1) rotated -90 deg - Navigation marker
+
+## Atmosphere
+- **Background**: Very dark blue-black [0.05, 0.05, 0.1]
+- **Lighting**: Warm directional light (1.2 energy) creating dramatic shadows
+- **Mood**: Intimate, contemplative, focused on gesture
+- **Visibility**: Hidden tiles except corners - space revealed through exploration
+
+## Learning Sequence
+1. Player spawns into dark, fragmented space
+2. Encounters dark_sphere creating intimate enclosure
+3. Discovers draw_dot tool in sunken area
+4. Experiments with continuous gesture - moving controller traces visible line
+5. Observes how trace accumulates over time - unlike discrete points
+6. Compares grab_sphere_point_snap (discrete) with draw_dot (continuous)
+7. Experiences duration and embodiment - the time of drawing matters
+8. Exits having encountered geometry that remembers movement
+
+## Design Intent
+The **sunken drawing area** (fillhole group at height 0) creates a &quot;pit&quot; that focuses attention on the act of tracing. The very dark background makes the glowing trace lines highly visible. The fragmented platform architecture mirrors the concept - incomplete, accumulating, not predetermined.
+
+Unlike Point_Line which reduces gesture to endpoints, Point_Trace preserves the entire path. The draw_dot tool resists discretization - it cannot be compressed to two coordinates and a distance. It must be experienced as duration.
+
+## Key Contrast: Trace vs. Line
+
+**Line** (Point_Line):
+- Two endpoints
+- Instant calculation
+- No memory of path
+- Pure abstraction
+
+**Trace** (Point_Trace):
+- Continuous accumulation
+- Duration required
+- Records entire gesture
+- Embodied residue
+
+## Connection to Sequence
+- **Position in primitives sequence**: 3/11
+- **Precedes**: Point_Line_Grid (coordinate systems)
+- **Follows**: Point_Lines (grid systems)
+- **Establishes**: Duration, gesture, resistance to complete discretization
+- **Critical function**: Counterpoint to clean geometric logic - inserts time and body
+
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Trace/blurb.md">Raw captured source</a></p><pre>Now: duration. The trace records what the line forgets — your hand moved through space, hesitated, curved, returned. Time accumulates as visible residue. The line will compress this to two points. The trace resists.
+
+Pick up `draw_dot` and move. Each frame your position is stored; each dot marks a moment that has already passed. The `cube_scene` is the volume within which these deposits accumulate. The trace is not a line but what the line erases — Derrida&#x27;s residue made geometric. Gesture, hesitation, error, return: all preserved at the frame rate, none of it symmetric with what a line can hold.
+</pre></section></body></html>

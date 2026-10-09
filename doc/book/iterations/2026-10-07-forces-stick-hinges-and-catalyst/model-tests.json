@@ -1,0 +1,65 @@
+{
+  "checks": [
+    "friction: constructed with finite bodies and a reset",
+    "friction: smooth cube travels farther than rough cube",
+    "friction: sphere rolls",
+    "friction: paths retain moving samples",
+    "friction: finite motion",
+    "friction: reset restores original transforms",
+    "friction: reset survives the next physics frames",
+    "springs: constructed with finite bodies and a reset",
+    "springs: disturbing one point moves its neighbour",
+    "springs: seven hanging points with six coupling springs",
+    "springs: finite motion",
+    "springs: reset restores original transforms",
+    "springs: reset survives the next physics frames",
+    "swings: constructed with finite bodies and a reset",
+    "swings: strong damping leaves less movement",
+    "swings: each seat remains hinged",
+    "swings: finite motion",
+    "swings: reset restores original transforms",
+    "swings: reset survives the next physics frames",
+    "torque: constructed with finite bodies and a reset",
+    "torque: pulling grip turns a constrained gate",
+    "torque: hinge anchor stays attached",
+    "torque: finite motion",
+    "torque: reset restores original transforms",
+    "torque: reset survives the next physics frames",
+    "constraints: constructed with finite bodies and a reset",
+    "constraints: basket, chain, plank and arm use real joints",
+    "constraints: held trigger closes physical claw",
+    "constraints: finite motion",
+    "constraints: reset restores original transforms",
+    "constraints: reset survives the next physics frames"
+  ],
+  "failures": [],
+  "godot_version": "4.6-stable (official)",
+  "measurements": {
+    "friction": [
+      [
+        1.56380641460419,
+        0.000000218657802975031
+      ],
+      [
+        1.50955450534821,
+        5.13895797729492
+      ],
+      [
+        -4.27425861358643,
+        0.0
+      ],
+      [
+        0.572974860668182,
+        9.36662006378174
+      ]
+    ],
+    "swing_remaining": [
+      0.500257015228271,
+      0.0510809328407049
+    ]
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "physics_server": "PhysicsServer3D",
+  "scope": "Real Jolt Physics bodies, contact, joints and force integration. Simulated hand/receiver inputs; no headset claim."
+}

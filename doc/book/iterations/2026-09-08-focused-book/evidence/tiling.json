@@ -1,0 +1,219 @@
+{
+  "sequence": "tiling",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Pattern_Foundry",
+      "primary_tokens": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror"
+      ],
+      "question": "How many places can one small decision change?",
+      "ontology": "The source tile is a finite array of colour indices; the displayed field is a rule reading that array repeatedly. A motif and the rule repeating it are separable.",
+      "action": "Take a coloured cube from the tile palette and release it over an off-centre grid cell. Watch the repeated preview. Make the same asymmetric motif on the mirror station and compare which copies reverse direction.",
+      "observable": "One source-cell change appears in many preview positions. The simple-repeat station preserves orientation; MIRROR_XY reverses selected copies. An off-centre mark makes that difference visible.",
+      "mechanism": "Both tokens instantiate PatternTilePuzzle; registry config selects tile_size=4 and SIMPLE versus MIRROR_XY. PatternTileCube._on_dropped snaps to a nearby cell and calls puzzle.set_cell; _get_tiled_color maps preview indices back into the finite array.",
+      "limit": "A large result is not necessarily many independent decisions. The repeated image cannot preserve a unique exception in just one copy because every copy reads the same source tile.",
+      "variation": "Try to make a single off-centre mark appear only once in the repeated field. Its recurrence exposes the shared source. Independent exceptions would require a second layer or per-copy edits, a proposed extension.",
+      "prior_bridge": "Live previous room: Color_Walls",
+      "next_bridge": "Live next room: Tutorial_Pattern",
+      "sources": [
+        "commons/primitives/arrays/pattern_tile_puzzle.gd :: set_cell, _get_tiled_color, apply_grid_config",
+        "commons/primitives/arrays/pattern_tile_cube.gd :: _on_dropped, _on_picked_up"
+      ],
+      "source_files": [
+        "commons/maps/Pattern_Foundry/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/primitives/arrays/pattern_tile_puzzle.tscn",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd",
+        "commons/primitives/arrays/pattern_tile_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Pattern_Foundry/map_data.json": "6f14247ec2180edb3477ec93a176bfac22dfec96d40f672a592f50d69c8101f7",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "commons/primitives/arrays/pattern_tile_puzzle.tscn": "c6246ea258601b997b59ef473765f432a291961a31b2f292838dcd98546f95a0",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd": "a5268e47d81331dc8542806a58f098ef29daed3134c60eadedccdd4166d361d3",
+        "commons/primitives/arrays/pattern_tile_cube.gd": "031ba668874645bea9d23751de2e7d75a9049541eec0310f95c154ade3265b5a"
+      },
+      "placements": [
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "value": "pattern_tile_4x4:0:-0.5"
+        },
+        {
+          "cell": [
+            3,
+            6
+          ],
+          "value": "pattern_tile_mirror:0:-0.5"
+        }
+      ],
+      "cautions": "Do not repeat older text claiming the 17 groups describe every pattern in the world. Here claims concern two finite rendered repeat rules, with museum hand reach still untested."
+    },
+    {
+      "room_id": "Tutorial_Pattern",
+      "primary_tokens": [
+        "pattern_maker_station"
+      ],
+      "question": "What stays the same when you change the rule but keep the motif?",
+      "ontology": "A fundamental domain stores local decisions. A symmetry operation supplies a mapping between domain coordinates and copies; changing the mapping can reorganize the entire field without adding paint.",
+      "action": "Select a palette button and touch a few cells on the upright grid to create an asymmetric motif. Keep those cells fixed and cycle the group control. Then mirror or rotate the source using the station buttons.",
+      "observable": "Cycling the group changes the carpet while the source remains. Mirroring or rotating the source changes the input array itself. These are two distinct ways to obtain a new overall arrangement.",
+      "mechanism": "PatternMakerStation._check_touch_paint maps an overlapping hand/pointer body into panel coordinates; _paint_cell changes _grid_data and updates the carpet. _cycle_group changes GROUP_ORDER selection; _mirror_x/_mirror_y/_rotate_cw rewrite array indices. GPU carpet receives domain_texture and wallpaper_group; CPU fallback uses WallpaperGroups.",
+      "limit": "The palette and cell grid limit what can be drawn, and many different motifs can produce visually similar fields. A group name alone does not tell the complete story of the pattern, its maker, or its use.",
+      "variation": "Make a motif with an apparent symmetry, then add one cell that breaks it and watch which repetitions restore an overall symmetry anyway. A source-domain border is an available configuration axis but not a visitor button.",
+      "prior_bridge": "Live previous room: Pattern_Foundry",
+      "next_bridge": "Live next room: Array_Patterns",
+      "sources": [
+        "commons/artifacts/pattern_maker_station/pattern_maker_station.gd :: _paint_cell, _check_touch_paint, _cycle_group, _mirror_x, _rotate_cw, _update_carpet"
+      ],
+      "source_files": [
+        "commons/maps/Tutorial_Pattern/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/artifacts/pattern_maker_station/pattern_maker_station.tscn",
+        "commons/artifacts/pattern_maker_station/pattern_maker_station.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Tutorial_Pattern/map_data.json": "09d0c6788dd0cea82de96d404fdcd6284c81793f5c3f37fa55d8d56b8a6b1314",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "commons/artifacts/pattern_maker_station/pattern_maker_station.tscn": "391ba52ab45f20022411f2e93914cf56e9937ea18faa7994450374caecfbd1b9",
+        "commons/artifacts/pattern_maker_station/pattern_maker_station.gd": "80e3354faeaaacef4a45dc77500bb47d4511bd5016b2f057963c2fbed3ed3ed2"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            8
+          ],
+          "value": "pattern_maker_station:0:-0.49"
+        }
+      ],
+      "cautions": "Touch painting depends on overlapping physics bodies. Config-after-ready limitations affect older grid loader; current museum applies config earlier. Do not promise all keyboard/controller aliases work here."
+    },
+    {
+      "room_id": "Array_Patterns",
+      "primary_tokens": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "question": "When does repetition become an environment rather than a picture?",
+      "ontology": "A pattern consists of a motif, a repetition rule and a surface receiving the result. A moving reveal can expose how a field is assembled in time.",
+      "action": "At the tunnel console keep MOTIF and PALETTE fixed, adjust GROUP and watch the tube reskin. Use SPEED to separate how quickly it appears from the rule it displays. Compare the brick station by putting a coloured cube off-centre and following the staggered rows in its preview.",
+      "observable": "The tunnel can change its rule without changing its source motif, and its reveal speed without changing its finished pattern. The brick preview offsets alternate rows, making boundaries fall in different places.",
+      "mechanism": "PatternTunnelMachine._on_plate_change passes group/motif/period choices to Tunnel.reskin and adjusts fill_speed separately. The tunnel starts randomized by default, so a specific opening group should not be promised. pattern_tile_brick selects RepeatMode.BRICK_X (registry config 6), whose preview lookup offsets source indices.",
+      "limit": "A patterned surface can conceal the local rule that produced it. The tunnel is a finite rendered tube, and its historical palette names are presets, not evidence that a whole period had one style.",
+      "variation": "Use a mismatched palette and motif intentionally, then describe the structural rule without relying on the style name. A room-wide comparison keeping all presets synchronized would be a future authoring tool.",
+      "prior_bridge": "Live previous room: Tutorial_Pattern",
+      "next_bridge": "Live next room: Symmetry_Seventeen",
+      "sources": [
+        "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd :: _build, _build_console, _on_plate_change",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel.gd :: reskin",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd :: _get_tiled_color BRICK_X",
+        "commons/primitives/arrays/pattern_tile_cube.gd :: dropped snap delegate"
+      ],
+      "source_files": [
+        "commons/maps/Array_Patterns/map_data.json",
+        "commons/artifacts/registry/procgen_extra.json",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd",
+        "commons/artifacts/registry/arrays.json",
+        "commons/primitives/arrays/pattern_tile_puzzle.tscn",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel.gd",
+        "commons/primitives/arrays/pattern_tile_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Array_Patterns/map_data.json": "259969aef0af13121dce65b0520441b39f8e0042dae9b8fabc12ae14890a9e8c",
+        "commons/artifacts/registry/procgen_extra.json": "88df489f1a39e80084740f34ef520f8e6474ed370b9a9adcb16d2c536e358e07",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn": "8c7eab355af082cdcd31ece25af99feac2bc209ccc47467a09b88b4ad84113b1",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd": "90665fbe4f533a04fb70d0e29145aaec84678c138fd3b8da8ae6e627f5f3b844",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "commons/primitives/arrays/pattern_tile_puzzle.tscn": "c6246ea258601b997b59ef473765f432a291961a31b2f292838dcd98546f95a0",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd": "a5268e47d81331dc8542806a58f098ef29daed3134c60eadedccdd4166d361d3",
+        "commons/artifacts/pattern_tunnel/pattern_tunnel.gd": "e43c4fe7bdc1792ba31ae5381c5132ea334e00708e991f4ce3896e917f7850e4",
+        "commons/primitives/arrays/pattern_tile_cube.gd": "031ba668874645bea9d23751de2e7d75a9049541eec0310f95c154ade3265b5a"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "value": "pattern_tunnel_machine:0:0#tunnel_length:6"
+        },
+        {
+          "cell": [
+            3,
+            9
+          ],
+          "value": "pattern_tile_brick:0:-0.5"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Symmetry_Seventeen",
+      "primary_tokens": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "question": "What assumptions make a catalogue of symmetries finite?",
+      "ontology": "Wallpaper groups classify the symmetries of ideal patterns periodic in two independent directions on the Euclidean plane. Rotation, reflection, glide reflection and translation combine under that restriction.",
+      "action": "Make an asymmetric motif with the tile editor’s grabbable colour cubes. Use the editor’s group navigation to compare how copies transform. Then inspect the cage’s marked rotational orders and distinguish its explanation from the editor’s live examples.",
+      "observable": "Some choices reverse or rotate the motif as they repeat it. The cage marks 1,2,3,4,6 as compatible rotational orders and crosses 5 and 7; it is a static diagram, not a machine trying and failing to close a lattice.",
+      "mechanism": "VRTileEditor wraps PatternTilePuzzle and rebuilds its carpet texture on pattern/group changes. Its controller routing forwards A/X and B/Y navigation plus mode toggling. WallpaperCage._ready draws a continuous ring, allowed-order spokes and crossed forbidden-order marks.",
+      "limit": "The count of seventeen applies under the periodic-plane assumptions; it does not contain every textile, finite ornament, quasicrystal, aperiodic tiling or cultural meaning of a pattern. The cage’s diagram illustrates a restriction; it does not prove the classification.",
+      "variation": "Draw a fivefold-looking motif inside a repeatable cell and ask why a local motif can show a form the whole periodic lattice cannot adopt as a rotational symmetry. A nonperiodic tiling comparison would be a proposed additional artifact.",
+      "prior_bridge": "Live previous room: Array_Patterns",
+      "next_bridge": "Live next room: Change_Intro",
+      "sources": [
+        "commons/primitives/arrays/vr_tile_editor.gd :: _create_puzzle, _update_carpet_texture, _on_button_pressed",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd :: handle_vr_button, wallpaper mapping",
+        "commons/primitives/arrays/pattern_tile_cube.gd :: dropped snap delegate",
+        "algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd :: _ready"
+      ],
+      "source_files": [
+        "commons/maps/Symmetry_Seventeen/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/primitives/arrays/vr_tile_editor.tscn",
+        "commons/primitives/arrays/vr_tile_editor.gd",
+        "commons/artifacts/registry/symmetry.json",
+        "algorithms/symmetry/wallpaper_cage/wallpaper_cage.tscn",
+        "algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd",
+        "commons/primitives/arrays/pattern_tile_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Symmetry_Seventeen/map_data.json": "8967f5270c051b6adc8bd779b222fb8be4bd7b82a07f17db14be9fb2eba28e55",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "commons/primitives/arrays/vr_tile_editor.tscn": "5c129a009c3fae0aa7edd40e6966798e148ae4c5a355cba78593b373fb9e798c",
+        "commons/primitives/arrays/vr_tile_editor.gd": "a122d1e487041f7a924cafc2b4d49a392968cded6d9368fbd875afadbae7c086",
+        "commons/artifacts/registry/symmetry.json": "7f5039d6a5d4f7c07d78ab6e03952c029e569474cc0c4deb60aa5bea6d04cb04",
+        "algorithms/symmetry/wallpaper_cage/wallpaper_cage.tscn": "08346a2bb7e4bcb402266460e99cf8a61f39ca9673ac6c86507e4be1ee77eece",
+        "algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd": "f25c9697ed1621cc60ae431ffdb3c9574177bf4d67f6ba50e2a166048f7bcf29",
+        "commons/primitives/arrays/pattern_tile_puzzle.gd": "a5268e47d81331dc8542806a58f098ef29daed3134c60eadedccdd4166d361d3",
+        "commons/primitives/arrays/pattern_tile_cube.gd": "031ba668874645bea9d23751de2e7d75a9049541eec0310f95c154ade3265b5a"
+      },
+      "placements": [
+        {
+          "cell": [
+            3,
+            1
+          ],
+          "value": "wallpaper_cage:0:0"
+        },
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "value": "vr_tile_editor:90:0"
+        }
+      ],
+      "cautions": "The editor defaults to legacy mirror mode; toggle symmetry mode before group-navigation claims. Do not repeat unsupported old claim that the Alhambra exhausted all seventeen groups."
+    }
+  ]
+}

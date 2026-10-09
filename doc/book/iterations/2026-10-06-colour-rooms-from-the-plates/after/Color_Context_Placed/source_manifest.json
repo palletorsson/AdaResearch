@@ -1,0 +1,31 @@
+{
+  "room": "Color_Context_Placed",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Context_Placed/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Context_Placed/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/Color_Context_Placed/map_data.json": "f57ff0b2ceac3363735b24a0806440f04c34fa777163da12e38aee06fb4b755f",
+    "tools/probes/colour_gallery.gd": "c0641f62a2cdfa1600efe7b6c94c2c88c1576598389460f759f41b683b1dce05",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "56c949ebb87f6436abc2ee1e0b125682ab0d003d28dc3ba64a5be9c2eb5218a6",
+    "ada_run/encounter_pilot/Color_Context_Placed/control.json": "f4991c3094b9020c0394271f44fa1990f196b0ed81d22d90f5b6d578a9f776bd",
+    "ada_run/encounter_pilot/Color_Context_Placed/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Color_Context_Placed/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Context_Placed/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/algorithms_misc.json": "87af799db8de0326b7cadaa8fc530bf30b4375b8eb044eec877146988caced19",
+    "algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn": "7235c5b17d70c3613bd453ad7a02849d4a37ca425cccc7f57fcef8176a87bf9d",
+    "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd": "32e7d9558e3e81ebb2f5ea9ae9ff2a48d80fb5d0e9a64f3c1d0dfadc6e4b7f8b"
+  }
+}

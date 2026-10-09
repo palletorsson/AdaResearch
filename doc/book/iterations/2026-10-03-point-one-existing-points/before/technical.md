@@ -1,0 +1,11 @@
+# Point One — implementation reference
+
+The active corridor contains point_absent, point_visible, point_solid and point_pedestal, built by commons/primitives/point/point_condition.gd. The absent condition creates no sphere. Visible and solid have radius 0.14 m; only solid adds a fixed collision sphere. The final sphere has radius 0.65 m, centre height 1.40 m and a pedestal whose top is 0.75 m.
+
+point_sun_switch.gd adds a directional light for the study spheres on visual layer 18, distinct from collision layers. The existing museum floor receives this light on an additional visual layer 17; no extra floor plates are added. Its material and normal lighting remain. The sun's caster mask includes only the study bodies, so the lesson is not accidentally shadowed by a streamed roof. A low, unshadowed local fill keeps the bodies readable when the sun is hidden. Other lights exclude only the dedicated sphere layer. Light and floor masks are restored when the study unloads.
+
+The wall lever uses the production XRTools area button with pointer support: near-hand entry or pointer press toggles sun.visible. Its 1.28 m control height is a design value, not a headset comfort certification. The plate sits on the inside face of the corridor's right wall. The entry door remains.
+
+The portable Point One study retains its three reduced scripts: position.gd, visible.gd and solid.gd. Its complete code examples distinguish point_position (a Vector3) from marker (a MeshInstance3D). The supplied contact_probe.gd creates three small CharacterBody3D feelers. Actual move_and_collide results stop a feeler; the other two cross. Space pauses and R repeats. Changing the authored collision radius changes where contact occurs without changing the rendered radius. The helper stays at height 1.12 m, so the height experiment must be restored before the radius comparison. The sun switch is inspected in the museum; its full lighting rig is not part of that portable kit.
+
+Pickup, WORLD/LOCAL cards, frame, L-shaped basin and target now belong to Point_Coordinates. See its technical.md for the maintained point_one_main channel and all moved placements. Distance is first calculated in the Point_Lines tutorial.

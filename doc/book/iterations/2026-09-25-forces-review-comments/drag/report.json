@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "kinetic drag passage loaded",
+      "passed": true
+    },
+    {
+      "name": "WALK initially optional and off",
+      "passed": true
+    },
+    {
+      "name": "off leaves walking request unchanged",
+      "passed": true
+    },
+    {
+      "name": "three media reduce the same stick request progressively",
+      "passed": true
+    },
+    {
+      "name": "beside the passage normal request returns",
+      "passed": true
+    },
+    {
+      "name": "same launch has different drag speeds",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: three-resistances",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-the-passage",
+      "passed": true
+    },
+    {
+      "name": "WALK can return to ordinary request",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "walk_multipliers": [
+      0.714285714285714,
+      0.434782608695652,
+      0.238095238095238
+    ]
+  },
+  "passed": true,
+  "room": "Vectors_Act4a_KineticForces",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

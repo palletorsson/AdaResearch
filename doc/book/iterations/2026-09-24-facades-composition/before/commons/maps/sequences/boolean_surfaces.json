@@ -1,0 +1,91 @@
+{
+  "sequences": {
+    "boolean_surfaces": {
+      "name": "Boolean Surfaces: CSG as Composition",
+      "v1_4_note": "The current spine places Boolean Surfaces after Isosurfaces and before Swarm Intelligence. Three halls: verbs, variants, bodily consequences.",
+      "truth": "Union, intersection and difference compose solid regions; collision and clearance determine how a body can inhabit the result.",
+      "qfep_term": "F",
+      "qfep_connection": "Deterministic set operations make composed forms. What their boundaries permit a body to do depends on additional representation and contact rules.",
+      "layer": "F_order",
+      "prerequisites": [
+        "isosurfaces"
+      ],
+      "unlocks": [
+        "swarmintelligence",
+        "facade_assembly"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "20-25 minutes",
+      "learning_objectives": [
+        "Union: A∪B as filled volume",
+        "Intersection: A∩B as shared volume",
+        "Difference: A−B as carved volume",
+        "Order matters: (A−B)−C ≠ A−(B−C) in general",
+        "CSG trees as expressions",
+        "Boolean composition vs. mesh assembly"
+      ],
+      "content": [
+        "Boolean_Verbs: A ∪ B, A ∩ B, A − B on one pair of operands — only the word changes",
+        "Boolean_Gallery: six families at every value their DNA axis can take; the published claim beside the object",
+        "Boolean_Works: test a visual wall, enter the level-floor burrow, and compare the raised SDF cavern model."
+      ],
+      "maps": [
+        "Boolean_Verbs",
+        "Boolean_Gallery",
+        "Boolean_Works"
+      ],
+      "deferred_maps": [
+        "Chamber_Boolean"
+      ],
+      "deferred_reason": {
+        "Chamber_Boolean": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+      },
+      "artifact_groups": [
+        {
+          "map": "Boolean_Verbs",
+          "position": "intro",
+          "artifacts": [
+            "csg_union_demo",
+            "csg_intersection_demo",
+            "csg_difference_demo",
+            "the_argument_of_solids"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "The three operators on one pair of operands, in three bays separated by sills rather than walls, so each verb stays visible from the next. the_argument_of_solids closes the hall by rebuilding all three at bench scale."
+        },
+        {
+          "map": "Boolean_Gallery",
+          "position": "exploration",
+          "artifacts": [
+            "csg_difference_demo",
+            "csg_union_demo",
+            "csg_intersection_demo",
+            "subtraction_suite",
+            "coincident_face",
+            "removal_room"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Six promoted families, each placed at all four values of its DNA axis — 24 placements in six bands. Layout is generated from the registry, default leftmost, so every band opens on the object as it ships elsewhere."
+        },
+        {
+          "map": "Boolean_Works",
+          "position": "synthesis",
+          "artifacts": [
+            "csg_compose_workbench",
+            "subtraction_suite",
+            "sphere_splitting_showcase",
+            "recursive_boolean_cube",
+            "csg_architecture_cavity",
+            "boolean_burrow",
+            "sdf_cavern_room",
+            "booleanvariations",
+            "coincident_face"
+          ],
+          "size_budget": "environment",
+          "rationale": "A workbench, visual models and a colliding burrow let the visitor distinguish a represented interior from body clearance. Existing comparisons remain."
+        }
+      ],
+      "note": "2026-05-13: populated with 5 CSG maps wired to the new boolean_surfaces artifacts. Moved from λ_edge order 12.7 to F_order order 4.7 in the macro sieve. 2026-09-03 (3d37b5b2f): the five halls folded into three — Verbs, Gallery, Works. 2026-09-04: content, artifact_groups and the per-map blurb/intent caught up with that fold; the artifact lists here are read from each map_data.json, not authored."
+    }
+  }
+}

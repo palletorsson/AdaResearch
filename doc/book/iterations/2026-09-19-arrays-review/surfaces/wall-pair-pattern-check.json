@@ -1,0 +1,14 @@
+{
+  "method": "Comparative image analysis only; no pixels modified",
+  "roi_xyxy": [
+    1050,
+    250,
+    1250,
+    400
+  ],
+  "meaning": "Interior of QUARTER TURN panel, black/white segmentation with sum RGB < 240",
+  "pixels": 30000,
+  "agreement": 1.0,
+  "probe_state_reset": "capture_surfaces.gd:97 sets phase=0; exception=false; refresh() before both captures",
+  "texture_hashes": "Not recorded during runtime; do not claim independent byte comparison of rendered textures."
+}

@@ -1,0 +1,32 @@
+--- before/commons/context/clipboard/tutorial_text/ten_print_axioms.md
++++ commons/context/clipboard/tutorial_text/ten_print_axioms.md
+@@ -1,15 +1,21 @@
+-**10 PRINT**
+-Complexity from Simplicity
++# 10 PRINT
+ 
+-**10 PRINT CHR$(205.5+RND(1)); : GOTO 10**
++Two diagonals, many possible arrangements.
+ 
+-This single line of BASIC code, written for the Commodore 64, generates the infinite maze you see before you.
++```basic
++10 PRINT CHR$(205.5+RND(1)); : GOTO 10
++```
+ 
+----
++A draw selects one of two characters. The trailing semicolon keeps the next character on the same line; the screen wraps them into rows. No cell consults its neighbours. Neighbouring marks meet because the grid gives their endpoints shared positions.
+ 
+-## The Algorithm
++## From a mark to a passage
+ 
+-**How it works:**
++The printed pattern is not yet a walkable maze. A solid wall, a line without collision and a route for a simulated ant give different consequences to the same diagonal. Joining four marks can close a figure while closing a body out of its interior.
+ 
+-1. Flip a coin (Random 0 or 1)
+-2. If 0: Print+In the upright animated fields, several cells turn each second. Those fields have no wall collision for the visitor. The ant follows its own navigation grid, which can close a channel that appears open between the drawn marks. Each change also clears the ant's recorded visits. Its confinement comes from the navigation procedure as well as the image.
++
++## Who chooses what may vary?
++
++The two-choice vocabulary does not by itself determine who can move here. The spacing, crop, thickness, collision and navigation rules participate too. A complex picture is not evidence that a body has become freer. Find an opening and ask whether the body you have been given can use it.
++
++10 PRINT builds patterns from independent choices. A cellular automaton instead makes a cell's next state depend on a local neighbourhood. Their resemblance does not make their procedures the same.

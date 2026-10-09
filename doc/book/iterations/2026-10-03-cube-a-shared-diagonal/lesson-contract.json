@@ -1,0 +1,51 @@
+{
+  "map": "Point_Animatedcube",
+  "status": "author_review_pilot",
+  "needs": [
+    "Vector3 coordinates and component edit",
+    "arrays, indices, for, nested loop, if",
+    "position list distinct from face list",
+    "ImmediateMesh face submission",
+    "PointHandle and Segment"
+  ],
+  "gives": [
+    "two triangle patches per square face",
+    "diagonal as a shared connection",
+    "moving one shared vertex changes only incident triangles",
+    "changing diagonal can change a non-planar interpolating surface",
+    "six geometric faces versus twelve rendering triangles"
+  ],
+  "learner_owns": [
+    "eight explicit positions",
+    "twelve triangle rows",
+    "corner_shift",
+    "front-pair diagonal choice",
+    "handle-to-position update"
+  ],
+  "supplied": [
+    "prepared room and desktop/XR inputs",
+    "PointHandle",
+    "Segment",
+    "two-sided unshaded patch materials",
+    "amber guide material",
+    "number labels as annotations"
+  ],
+  "reused": [
+    "nested face submission",
+    "positions and connections as distinct data"
+  ],
+  "deferred": [
+    "timed assembly and replay",
+    "rigid-face hinge net",
+    "prefab scene loading",
+    "normal generation",
+    "GPU index buffer",
+    "general mesh validity",
+    "surface collision"
+  ],
+  "source_of_positions": "Eight deliberately specified cube coordinates; no gesture-derived cube",
+  "physical_headset_tested": false,
+  "all_lesson_objects_created_in_code": true,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

@@ -1,0 +1,11 @@
+--- before/commons/maps/WaveFunctions_Synthesis_Lab/map_data.json
++++ after/commons/maps/WaveFunctions_Synthesis_Lab/map_data.json
+@@ -649,7 +649,7 @@
+ 		"air_music_display_case:0:1",
+ 		"",
+ 		"",
+-		"additive_wave_demo:0#stand:bench#waveform:sawtooth",
++        "additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true",
+ 		"",
+ 		"",
+ 		"dark_sphere",

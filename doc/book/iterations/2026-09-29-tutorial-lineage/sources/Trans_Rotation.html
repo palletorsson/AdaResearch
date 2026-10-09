@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Rotation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Trans_Rotation">← Tutorial lineage</a></p><h1>Trans Rotation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Trans_Rotation/final.md">Raw captured source</a></p><pre># Rotation: room for a turn
+
+The transport cube carried you without needing to turn. Here, a blade stays attached to its middle while its ends sweep across the gap. Follow one end. The other moves away.
+
+&lt;!-- @rotation_wall_crossings --&gt;
+
+## Staying upright
+
+The green blade turns around the vertical y axis. At ninety degrees it pauses, its length reaching across your route. Walk over while the crossing holds.
+
+At the orange blade, one end descends as the other rises. It turns around x, like a paddle wheel. The far landing is three grid cubes higher. During the pause, the blade offers a slope you can climb. Through vertical, your feet lose their agreement with it.
+
+Beside its lower end is a small level platform. Board it and stay through the turn. You rise, move forward, and arrive beside the higher grid. Your head has stayed upright.
+
+The platform follows an arc while keeping its surface level. It is mounted to one side so the blade can pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.
+
+The orange ride&#x27;s arc, before that sideways offset, is calculated as:
+
+```gdscript
+var radial := Vector3(0, -1.5, -3.5)
+var orbit := Basis(Vector3.RIGHT, PI * progress) * radial
+var endpoint := Vector3(0, 1.5, 0) + orbit
+```
+
+`radial` reaches from the centre to the starting point. `Basis` turns that reach around x; `progress` from zero to one supplies half a revolution. Adding the centre gives the new position. The platform carries you until you step off or jump.
+
+The blue blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.
+
+Both rides pause for twelve seconds, then take twelve for the half-turn. Staying aboard brings you back along the upper arc. The grid wedges and still aisles offer other returns.
+
+&lt;!-- @ --&gt;
+
+Beyond the blades, the cubes hold their angles. You bring the movement.
+
+&lt;!-- @rotation_array_compare --&gt;
+
+## An angle underfoot
+
+Four bands each contain two columns and six rows of cubes. Begin at zero and walk forward along z.
+
+Eighteen degrees. Thirty-six. Fifty-four.
+
+The centres keep their spacing; each row adds an angle. X makes rises and falls across your route. Z makes ridges along it. Y turns the square footprints while keeping their tops horizontal. The fourth band combines x, then y, then z.
+
+```gdscript
+var degrees := float(cube.get_meta(&quot;row&quot;)) * row_angle_step
+cube.basis = rotation_for_band(band, degrees)
+```
+
+The row supplies the angle; the band supplies the axis or combination. Waiting will not change the slope. The still aisles let you inspect a difficult row from beside it.
+
+A stand in the central aisle starts another walk. Cyan capsules, 0.44 metres wide, set off along all four bands. Pink capsules follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings retain their endpoints; the trial repeats, and **REPLAY** starts it again.
+
+Watch the z band. The narrow body catches on a ridge; the wider one can slide sideways and continue. Wider need not mean less room to move. These bodies neither jump nor choose a detour: the collision solver supplies their slides. You can walk through them and try a route they did not take.
+
+&lt;!-- @ --&gt;
+
+The last row reaches ninety degrees. In the Y band, compare it with the first. The cube&#x27;s outline returns, but the pale L on its top points another way. That flat-looking row still waits beyond all the tilted ones.
+
+Each cube has kept its shape throughout. What changes is how it meets its neighbours and your body.
+
+&lt;!-- @transform_composition_workbench --&gt;
+
+## Two turns
+
+Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. Blue receives X first; red receives Y first.
+
+Follow the fin through the smaller intermediate forms. In the two results it points different ways. The display separates the forms for us; both calculations use the same origin.
+
+```gdscript
+var left_xform: Transform3D = t2 * t1
+var right_xform: Transform3D = t1 * t2
+```
+
+The operation on the right acts first. In Translation, upward and sideways movements could exchange order and share a destination. These two turns cannot: the second receives the orientation left by the first.
+
+Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. The fin gives you something to follow through both journeys.
+
+&lt;!-- @axial_sweep --&gt;
+
+## What returned?
+
+A small cube turns on a spindle beside the way onward. Follow the pale L on its face. After a quarter-turn, the cube fits the space it occupied before. The marked face has gone around the corner.
+
+What returned depends on what you were following.
+
+![The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png)
+
+*Two paused moments from one place. The mark moves from the left-hand face to the right.*
+
+Press **BOUNDARY**. A cylinder appears around the turn. A corner reaches its round side, then leaves. The contour keeps that place while the corner is elsewhere.
+
+Pause. Part of the cylinder is empty. It describes the outside of all the positions the cube occupies over a full turn. A turn needs room that a single pose leaves empty.
+
+Change **SHAPE** to the triangle. Its upright edge lies on the axle. As the face turns, the wide bottom sweeps a circle and the sloping edge describes a cone. Hide the boundary and follow the sweep with your eyes; bring it back. The outline helps you keep a whole turn in view. It has made no new solid wall.
+
+![The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png)
+
+*The cyan contours describe full turns. Each amber body is paused in one position.*
+
+The triangle from Primitives has acquired another possibility without acquiring another corner.
+
+&lt;!-- @ --&gt;
+
+Walk on into the last court.
+
+&lt;!-- @boolean_tunnel --&gt;
+
+## Inside the turns
+
+Look through the first hollow cube. Four more stand beyond it. Each adds eighteen degrees.
+
+```gdscript
+angle_deg = i * rotation_per_segment
+```
+
+Subtracting an inner box made each cube hollow. The turns arrange those openings around a continuous floor. Walk inside and follow a corner with your eye.
+
+Five segments occupy fifteen metres. They stand still; your walk unfolds their differences. Turn back and the sequence unwinds.
+
+Which edge did you take for a horizon?
+
+&lt;!-- @carousel_cake --&gt;
+
+Outside the tunnel, the stacks keep turning. Follow a stripe on a low layer, then near the top. Their relations change while you stand still.
+
+The lowest layer turns at half a radian per second; each successive layer turns 1.2 times as fast. In the tunnel, eighteen degrees separated neighbours. Here, speed keeps changing the angle through time.
+
+Eight layers make each of five profiles: a brim, a column, a taper, a pinched spindle, a flare. They share heights and turning speeds. Walk between them and compare the room each leaves around itself.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+&lt;!-- @hinge_release --&gt;
+
+A small plate waits on a hinge. Turn it; its neighbours travel with it. Release it under KEEP. The pose stays where you left it. Choose RETURN, turn again, then release. The joint moves towards the earlier angle, as if the object had a preferred answer.
+
+The fixed support and stored angles make this an Ada response to Lygia Clark&#x27;s articulated works. They give us a way to ask what an invitation permits. A joint can be available to your hand while the rule after release quietly takes the last word. Switch on TRACE and watch one corner: two journeys can arrive at the same pose without leaving the same line.
+
+&lt;!-- @ --&gt;
+
+In the next hall, the surroundings change size while your body stays the same. What will fit then?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Trans_Rotation/tutorial.md">Raw captured source</a></p><pre># One centre, many centres, an enclosure
+
+1. Find the fixed middle of each 8.4 m blade. Y offers a level crossing; X and Z retain held climbing slopes. Then board their small level end-platforms: X travels forward along z and up3m, Z travels sideways along x and up3m. Each platform follows a180-degree upper arc while remaining upright, with12-second docking pauses and a12-second turn. It reverses along the upper arc for the return. Compare the blade&#x27;s changing orientation with the platform&#x27;s fixed upright basis; remaining on a bare blade through vertical cannot be a standing ride. Grid wedges and still aisles provide returns.
+2. Walk forward through each two-column, six-row array. The angles are 0, 18, 36, 54, 72 and 90 degrees. Compare X, Y, Z and fixed X-then-Y-then-Z order without changing cube size or centre spacing. Then compare the cyan 0.44 m and pink 1.20 m test bodies: the same 1.6 m height, 2 m/s forward input, gravity, 45-degree slope limit and 0.15 m floor snap. Rings retain endpoints; readouts include sideways displacement. REPLAY starts both passes again. A wider body need not stop sooner: Z can carry it sideways into a continuing route. These are collision trials, not a proof that another body or movement cannot pass. Inspect a stopped route from an aisle. Ninety degrees can restore a flat-looking endpoint without making the intervening passage easy.
+3. Walk through five hollow tunnel segments with the same eighteen-degree spatial increment. Then observe the five carousel profiles: their layers use angular speeds of `0.5 * pow(1.2, i)` radians per second. Separate an angle assigned by position from an angle accumulating with time.
+
+```gdscript
+station.pivot.basis = Basis(station.axis, deg_to_rad(degrees * float(station.sign)))
+var degrees := float(cube.get_meta(&quot;row&quot;)) * row_angle_step
+cube.basis = rotation_for_band(band, degrees)
+```
+
+A rigid rotation preserves a solid&#x27;s internal distances and topology. Passage also depends on its neighbours, pivot, collision and the moving body. The tunnel&#x27;s subtraction supplies its hole; rotation arranges the holes. Compare the room left around the five carousel profiles. Carry the relation between an object&#x27;s dimensions and your body into Scale, where the surroundings grow while the visitor keeps the same size.
+
+The compact arrangement retains full-size crossing blades and array cubes. It reduces repetition counts and removes one duplicate cake; the five distinct cake profiles remain available together. Headset traversal and comfort still require a human review.
+
+## Standing through the turn
+
+`wall_crossings.gd` now advances on physics ticks at priority−110. `rotation_rider_deck.gd` detects actual supported feet and applies each platform displacement to the rider. For XR it uses the same incremental body/origin movement as the transport cube and rebases only its own moving-ground contact, preventing double carry. A jump or step off releases the rider. The player&#x27;s pitch, roll and room-scale camera offset are preserved.
+
+The deck&#x27;s top follows `(0,1.5,0) + R(axis, angle) * radial + side_offset`. X uses radial `(0,-1.5,-3.5)` and side offset `(-2.2,0,0)`; Z uses radial `(-3.5,-1.5,0)` and side offset `(0,0,-2.2)`, turning in the opposite sense so both trips use the upper arc. The platform&#x27;s basis stays upright. Its fixed bracket height compensates for the original blade&#x27;s thickness-adjusted axle. Both endpoint tops meet grid heights0m and3m.
+
+Tests must cover the moving ride, natural boarding, departure and the full body volume around the arc. A static ramp crossing test alone did not cover the failure reported in VR.
+
+## Following a marked orientation — 23 September
+
+Compare the first and last top marks in the Y array: at ninety degrees the occupied cube shape repeats while the L points another way. Beyond the combined array, the restored composition workbench starts on pair four, X30° and Y45°. Follow the intermediate forms to compare `Y * X` with `X * Y`. Pair two is the counterexample: rotation and uniform scale about the same origin commute, although their intermediate states differ. The stage separates the drawings for visibility; both calculations use the same origin.
+
+The array has two batched mark surfaces per band; the sweep’s mark is attached to its rotating cube. Neither changes collision. The grid parser now recognises `initial_pair` as a numeric parameter rather than a tutorial rotation shorthand.
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Return: A pose left
+
+Change the return speed while keeping the reference pose. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses loop, transform, trace. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`hinge`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-clark-a-pose-left/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:hinge_release --&gt;
+
+### One source change: A pose left
+
+Change the existing degrees_per_second value from 45 to 20. Return takes longer; the destination angle stays the same.
+
+```gdscript
+degrees_per_second = 20.0
+```
+
+Source: `commons/artifacts/spine_studies/hinge_score.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Trans_Rotation/technical.md">Raw captured source</a></p><pre># Centred blades and an angle gradient
+
+## Blade crossings
+
+Source: `commons/artifacts/rotation_studies/wall_crossings.gd`.
+
+All three panels have their local centre at `Vector3.ZERO` under a pivot. Each measures 8.4 by 2.4 by 0.2 metres. Mesh and physical box share the pivot.
+
+| Station | Axis and signed crossing angle | Source-grid route |
+| --- | --- | --- |
+| Y | +y, +90 degrees | Ground to ground along z |
+| X | +x, -23.19859 degrees | Ground to +3 m along z |
+| Z | +z, +23.19859 degrees | Ground to +3 m along x |
+
+The gap between the bank faces is 7 m and the rise is 3 m. The climb angle is `atan(3/7)`. The X/Z axle height is `3/2 - 0.2/(2*cos(angle))`, approximately 1.3912 m. This accounts for panel thickness: the upper plane meets y=0 and y=3 at the two bank faces. The longer blade overlaps the banks.
+
+```gdscript
+station.pivot.basis = Basis(station.axis,deg_to_rad(degrees*float(station.sign)))
+```
+
+Each pivot sits at the panel&#x27;s middle, unlike the previous bottom-hinged prototype. The source map supplies all static landing geometry; the artifact builds no bank slabs. Grid height 1 has its top at world y=0, height 4 at y=3. A four-metre basin gives the larger paddle sweep room below the deck.
+
+The running score holds each crossing pose for twelve seconds and advances a half-turn at fifteen degrees per second, also twelve seconds. It repeats in the reversed sense, lowering the raised end of X/Z as it leaves the climb pose. A centred rectangular blade has the same collision geometry after half a turn. The probe can select `set_crossing_pose()` without depending on frame timing.
+
+## Array gradient
+
+Source: `commons/artifacts/rotation_studies/array_compare.gd`.
+
+This hall configures each of four bands with two columns and six rows. The artifact defaults remain four columns and ten rows for other placements. A cube edge is 2.04 m; centre spacing is 2 m. The small overlap makes the zero-degree control continuous. Centres stay fixed at y=-1.02, giving a flat top at y=0 before rotation. Array rows occupy z=25 through 36 in the source map; the structure cells beneath them are empty.
+
+```gdscript
+var degrees := float(cube.get_meta(&quot;row&quot;))*row_angle_step
+cube.basis = rotation_for_band(band,degrees)
+```
+
+The hall sets `row_angle_step` to eighteen degrees: rows 0 through 5 receive 0, 18, 36, 54, 72 and 90. The default outside this hall remains ten degrees. X uses a negative turn, Y and Z a positive turn. XYZ applies those same signed turns in fixed order, X then Y then Z: `Basis(z,a) * Basis(y,a) * Basis(x,-a)`. This band composes three rotations; it does not compare alternative composition orders. This is a static spatial score, not an animation of the whole floor or a shared-parent array turn. The four array bands compare the same dimensions, spacing and angle magnitudes around different axes.
+
+Each physical box inherits its cube&#x27;s basis. One additional line mesh per band draws the edges of its twelve cubes; those lines have no collision. `apply_gradient()` refreshes transforms, outlines and row labels when the exported angle step is changed by tooling.
+
+## Spatial repetition and angular rate
+
+The tunnel uses five full-size hollow cubes at 3 m spacing. Each shell is 3 m deep, making a 15 m visible run. The invisible framing anchor extends a further metre. `rotation_per_segment=18` gives angles 0–72 degrees. `segment_vertical_offset=-0.65` retains the clear standing passage used by the earlier gallery.
+
+Five carousel profiles remain: cake, column, ziggurat, spindle and flare. Every placement uses `gallery:clean`, which removes a saved duplicate and makes collision follow the drawn radii. The uniform placement scale is 0.4; neither the speed rule nor the ratios change. Eight layers turn at `0.5 * pow(1.2, i)` radians per second. A rim point&#x27;s speed is its world radius times angular speed.
+
+## Evidence and limits
+
+`commons/testing/probe_rotation_compact.gd` loads the current actual source grid. It measures the full-size blade crossings, shorter array controls, changed angle gradient, still side aisle and body clearance through the tunnel. Results belong to a 0.22 m radius, 1.6 m capsule walking without jumping. They do not establish a universal traversal limit or headset comfort.
+
+On the compact gradient, the straight-walking probe stops after 6.90 m in X, 4.66 m in Z and 5.22 m in XYZ; Y completes the 14 m test. All four zero-angle controls complete it. The shorter, eighteen-degree sampling changes the comparison with the older ten-degree array. The route is a result of specific spacing, samples and body settings, rather than a ranking inherent in the axis names.
+
+The earlier 4 by 10 array measurements remain historical evidence in `ada_run/rotation_studies_checks.json`; their coordinates and distances do not describe this compact layout. The before source is preserved in `doc/space/transformation-refresh-2026-09-16/before`.
+
+`probe_rotation_turn_direction.gd` remains applicable to the unchanged blade artifact: each centre stays fixed, X/Z raised ends descend after the hold, Y swings in the reversed sense, and a half-turn restores the same crossing bounds.
+
+## A turn&#x27;s occupied space — placement added 21 September
+
+`axial_sweep` now stands at source cell (14,39), after the array and before the tunnel, with no automatic plinth and its own 1.7 m viewing plate. Since the order workbench returned on 23 September, the sweep is the fourth primary encounter. The existing artifacts, source floor and wall cells remain in place.
+
+The 0.60 m cube turns about its centred Y axis at 18 degrees per second. The full-turn union has a cylindrical outer boundary of radius `sqrt(2) * 0.30` and height 0.60 m. The alternative triangular profile has vertices `(0,-0.35,0)`, `(0.45,-0.35,0)`, `(0,0.35,0)` and sweeps a cone of radius 0.45 m and height 0.70 m. The outline starts hidden. SHAPE, PLAY/PAUSE and BOUNDARY operate the existing artifact; no new controls were built.
+
+The pedestal is physical, while the turning body and computed contour are visual studies. The contour collects the boundary of occupied positions over a full revolution; it is not a new solid or a demonstrated persistence-of-vision effect. The four-carrier drum study remains in `commons/testing/transformation_sampling_lab.tscn` for a later comparison. [Earlier study and controlled geometry evidence](../../../doc/space/zoetrope-encounter-2026-09-17/README.md). [Current museum placement and comparison](../../../doc/book/iterations/2026-09-21-transformation-return/SUMMARY.md).
+
+
+## Shared book illustrations — 23 September
+
+The chapter uses native captures of the existing `axial_sweep` in the actual isolated museum: cube at 0 and 90 degrees with one fixed camera, then the cube and triangle with their analytical boundaries shown. The latter pair pauses each body at 45 degrees. These are selected poses of the same working artifact, not a new scene or an optical motion-blur effect. `tools/probes/rotation_book_illustrations.gd` supplies poses and exercises the existing pointer buttons; the book labels each image accordingly. No map placement, geometry, controls or runtime source changed in this pass.
+
+[Full chapter comparison, images and evidence](../../../doc/book/iterations/2026-09-23-rotation-return-and-sweep/index.html).
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Installed application: A pose left
+
+`hinge_release` occupies a new adjoining bay, after the existing encounters. Cell [19, 66], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/hinge.tscn`. Original response to Lygia Clark; no claim of exact reconstruction.
+
+Change the return speed while keeping the reference pose. Reuses loop, transform, trace; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Trans_Rotation/intent.md">Raw captured source</a></p><pre>Concept: What a turn permits depends on its centre, axis, neighbours and the body trying to pass.
+Sequence role: Follows translation, absorbs the former rotation spectacle hall, and prepares scale through radius and rim speed.
+First court: Three full-size centre blades meet level or raised grid banks. Grid wedges return from the upper landings.
+Second court: Four 2 by 6 arrays retain full-size cubes and compare X, Y, Z and X-then-Y-then-Z. Eighteen-degree increments produce 0–90 degrees in six spatial samples. A shorter comparison preserves both dimensions of an array.
+Third court: Five hollow tunnel segments surround the walker; five compact carousel profiles distribute speed through time. Distinguish subtraction, orientation, accumulated angle and rate.
+Critical angle: Rotation preserves each solid&#x27;s topology, but relationships among solids and body produce different passages. Neither maximum angle nor a striking silhouette alone explains traversability.
+Evidence: Current refresh probe measures instantiated geometry, capsule crossings, clear aisles and tunnel passage. Such checks support spatial review; they do not stand in for headset comfort or every way of moving.
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Installed application: A pose left
+
+`hinge_release` occupies a new adjoining bay, after the existing encounters. Cell [19, 66], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/hinge.tscn`. Original response to Lygia Clark; no claim of exact reconstruction.
+
+Change the return speed while keeping the reference pose. Reuses loop, transform, trace; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Trans_Rotation/critical.md">Raw captured source</a></p><pre># A direction for a body
+
+The blade rotates around its middle. Neither bank owns the hinge. As one end rises the other descends; the same operation changes the relation with both landings. A higher grid surface can become reachable without moving the centre of the rotating object. This is an argument made by a particular length, axle height and pair of banks, not a property bestowed by the word rotation.
+
+Beyond the landing, the angle is distributed through an array. The row supplies the amount, the band supplies the axis, and the visitor supplies a direction of travel. The x ridges cut across forward movement; the z ridges extend along it. Y changes the horizontal footprint. These distinctions can be inspected in matching cube centres, visible edges and physical surfaces.
+
+The narrow and wide capsules receive the same forward instruction, without jumping or choosing a detour. Their stopping points belong to their dimensions and movement rules. In the z band, the wider body can slide sideways and continue where the narrow body stops: its arrival does not erase the change of route. Neither trial proves the array impassable for every body. A different approach, floor-angle setting or jump may find a remainder these tests omitted. The still aisles make it possible to inspect the difficult row without completing its route.
+
+Rigid rotation preserves the topology of each solid. Traversal depends on how solids meet each other and a body. Maintaining that distinction lets the installation test a claim about connectivity without claiming to have changed the topology of a cube.
+
+Increasing a parameter is not a promise of increasing difficulty forever. This score continues to ninety degrees, where a cube&#x27;s geometry can repeat an axis-aligned orientation. The range selected for the experiment makes the progression legible, and also leaves something outside it. Keep the range visible beside the array.
+
+The first court gives a twelve-second pause for a climb or boarding a level end-platform. The ride exposes an additional rule: the platform is kept upright while its position follows the rotating blade. Without that rule a standing body loses support as the blade becomes vertical. X offers forward displacement, while Z demands a sideways destination. The second holds the geometry still. These are two different distributions of time and attention. Neither should be accepted as adequate for a group until people have walked the revised hall.
+
+
+The last court keeps a floor under your feet while the tunnel&#x27;s frames turn around the passage. Beside it, the carousels distribute different rates through equal layer heights. The same code can be read as a constraint to cross, a rhythm to follow or an enclosure to inhabit. These possibilities need their specific operations named: subtraction makes a hole; a turn orients it; repetition supplies neighbours; time lets their relations move.
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Installed application: A pose left
+
+The fixed support and stored angles make this an Ada response to Lygia Clark&#x27;s articulated works. They give us a way to ask what an invitation permits. A joint can be available to your hand while the rule after release quietly takes the last word. Switch on TRACE and watch one corner: two journeys can arrive at the same pose without leaving the same line.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Trans_Rotation/artifacts.md">Raw captured source</a></p><pre># Trans_Rotation — six primary encounters
+
+1. **rotation_wall_crossings** at (19,11): three 8.4 m centre-mounted blades. Y crosses level banks; X/Z reach grid landings 3 m higher. The reversed rotation holds each crossing pose twelve seconds. Grid wedges return to the floor.
+2. **rotation_array_compare** at (19,25): four full-size 2 by 6 cube arrays. X/Y/Z/XYZ share eighteen-degree row increments and fixed centres. Aisles preserve a viewing and bypass route.
+3. **transform_composition_workbench** at (29,39): starts with X30° and Y45° applied in both orders, with intermediate forms visible. The pair slider also compares rotation with uniform scale. Restored existing artifact, using `initial_pair:4` and `workings:trace`.
+4. **axial_sweep** at (14,39): approach the 1.7 m viewing plate, follow a rotating cube edge, then reveal its full-turn boundary; change to the triangular profile and compare the cone. Placed after the arrays and before the tunnel.
+5. **boolean_tunnel** at (19,42): five hollow segments, eighteen degrees per segment, fifteen metres of continuous-floor enclosure. Static spatial repetition.
+6. **carousel_cake**: cake, column, ziggurat, spindle and flare at 0.4 scale. All five share eight layers and the same angular speeds; profile changes radius, silhouette and rim speed.
+
+The former Trans_RotationSpectacle map remains on disk as a source. Its unique forms now belong to this hall; the repeated second cake is omitted. The before snapshot is `doc/space/transformation-refresh-2026-09-16/before`.
+
+The four-drum `transformation_sampling` workshop remains available in its research scene. This pass places the compact swept-body comparison without moving the five carousel profiles or enlarging the hall.
+
+The array cubes carry an asymmetric pale L on a dark top-face patch. The axial-sweep cube carries the same mark on a side face. The mark follows each cube’s actual basis; it changes no collision. Top placement makes the array marks visible above the museum floor.
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Installed application: A pose left
+
+`hinge_release` occupies a new adjoining bay, after the existing encounters. Cell [19, 66], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/hinge.tscn`. Original response to Lygia Clark; no claim of exact reconstruction.
+
+Change the return speed while keeping the reference pose. Reuses loop, transform, trace; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Trans_Rotation/summary.md">Raw captured source</a></p><pre># Rotation — crossings, arrays and inhabited repetition
+
+A 39 by 60 grid combines the former rotation and spectacle halls. Its 2,340 cells replace a combined 5,095, reducing the footprint by 54.1 percent while keeping the 8.4 m crossing blades, 2.04 m array cubes and full-size tunnel.
+
+The first court compares centre-pivot Y, X and Z crossings and retains their grid banks. Short wedge runs return from the raised landings. The second court uses four two-column, six-row arrays at eighteen-degree increments. The last court places five hollow segments on the centreline and five carousel profiles beside them. Only the duplicate cake was removed.
+
+The teaching order is axis and pivot → repeated orientation and order → spatial enclosure → angular speed and radius. A continuous side route supports comparison, observation and access to the next hall without forcing every moving crossing. The historical source map and documentation are preserved in the refresh snapshot.
+
+
+&lt;!-- study-spine:hinge_release --&gt;
+
+## Installed application: A pose left
+
+`hinge_release` occupies a new adjoining bay, after the existing encounters. Cell [19, 66], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/hinge.tscn`. Original response to Lygia Clark; no claim of exact reconstruction.
+
+Change the return speed while keeping the reference pose. Reuses loop, transform, trace; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Trans_Rotation/blurb.md">Raw captured source</a></p><pre>A blade turns around its middle and a way across arrives. Repeat the turn and a path becomes a ridge, an enclosure, a rhythm. The centre stays; what your body can do around it changes.
+</pre></section></body></html>

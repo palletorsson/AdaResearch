@@ -1,0 +1,26 @@
+[
+  {
+    "id": "parallel",
+    "kind": "insert_after",
+    "anchor": "\tadd_child(line)\n",
+    "text": "\tpoint_a.position = Vector3(-0.6, 1.12, 0)\n\tpoint_b.position = Vector3(0.6, 1.12, 0)\n\tvar c := Vector3(-0.6, 1.62, 0)\n\tvar d := Vector3(0.6, 1.62, 0)\n\tvar other_line := LineSkin.new()\n\tother_line.name = \"OtherSegment\"\n\tadd_child(other_line)\n\tother_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "plus",
+    "kind": "insert_after",
+    "anchor": "\tadd_child(line)\n",
+    "text": "\tpoint_a.position = Vector3(-0.6, 1.42, 0)\n\tpoint_b.position = Vector3(0.6, 1.42, 0)\n\tvar c := Vector3(0, 0.82, 0)\n\tvar d := Vector3(0, 2.02, 0)\n\tvar other_line := LineSkin.new()\n\tother_line.name = \"OtherSegment\"\n\tadd_child(other_line)\n\tother_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "x",
+    "kind": "insert_after",
+    "anchor": "\tadd_child(line)\n",
+    "text": "\tpoint_a.position = Vector3(-0.6, 0.82, 0)\n\tpoint_b.position = Vector3(0.6, 2.02, 0)\n\tvar c := Vector3(-0.6, 2.02, 0)\n\tvar d := Vector3(0.6, 0.82, 0)\n\tvar other_line := LineSkin.new()\n\tother_line.name = \"OtherSegment\"\n\tadd_child(other_line)\n\tother_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "x_depth",
+    "kind": "insert_after",
+    "anchor": "\tadd_child(line)\n",
+    "text": "\tpoint_a.position = Vector3(-0.6, 0.82, 0)\n\tpoint_b.position = Vector3(0.6, 2.02, 0)\n\tvar c := Vector3(-0.6, 2.02, 0.2)\n\tvar d := Vector3(0.6, 0.82, 0.2)\n\tvar other_line := LineSkin.new()\n\tother_line.name = \"OtherSegment\"\n\tadd_child(other_line)\n\tother_line.show_segment(c, d - c, (d - c).length())\n"
+  }
+]

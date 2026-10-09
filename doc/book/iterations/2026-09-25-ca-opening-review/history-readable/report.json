@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "lab and mounted apparatus remain",
+      "passed": true
+    },
+    {
+      "name": "lab title asks what counts as computation",
+      "passed": true
+    },
+    {
+      "name": "subtitle names the present model",
+      "passed": true
+    },
+    {
+      "name": "crowded annotations are disabled",
+      "passed": true
+    },
+    {
+      "name": "question is placed on the rear wall",
+      "passed": true
+    },
+    {
+      "name": "title and subtitle are actually built",
+      "passed": true
+    },
+    {
+      "name": "old unsupported claim absent from rendered signs",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lab-sign",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lab-question",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lab-annotation",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: history-and-rear-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "lab_labels": [
+      {
+        "name": "SignageTop",
+        "text": "WHAT COUNTS AS COMPUTATION?"
+      },
+      {
+        "name": "SignageSub",
+        "text": "A tape, a head, a set of states"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "CA_GameOfLife",
+  "scope": "Current isolated museum, supplied control signals and cameras; no headset or performance acceptance."
+}

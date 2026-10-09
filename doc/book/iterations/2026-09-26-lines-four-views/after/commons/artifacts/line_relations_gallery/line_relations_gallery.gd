@@ -1,0 +1,83 @@
+extends Node3D
+## Four open sightlines. Rods remain where the visitor releases them.
+## The wall drawings stay fixed, so a moved body can disagree with its first view.
+const LINE := preload("res://commons/artifacts/line_relations_gallery/line_body.gd")
+const KIT := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+var lines: Array[Node3D] = []
+var first_poses: Array[Transform3D] = []
+const LANES := [-8.0,-3.0,2.0,7.0]
+const TITLES := ["TWO LINES / + AND X", "PARALLEL / BETWEEN", "VERTICAL / HORIZON", "MORE LINES / GRID"]
+
+func _ready() -> void:
+	for i in range(4):
+		var x: float = LANES[i]
+		paint(Vector3(x,0.009,-4),Vector3(x,0.009,11.5),0.018,Color("9d9b91"))
+		floor_words(TITLES[i],Vector3(x,0.016,-3.3),Vector2(3.4,0.2))
+		# A small empty viewing mark gives the eye a place to start, not a cage.
+		paint(Vector3(x-0.38,0.012,-3.9),Vector3(x+0.38,0.012,-3.9),0.04,Color("282b30"))
+	# Two pairs: same spans, different relations. The skins have thickness,
+	# so the two bars occupy slightly separated depth planes.
+	rod("plus_horizontal",Vector3(-8,1.35,0),Vector3.RIGHT,2.0,"stick")
+	rod("plus_vertical",Vector3(-8,1.35,0.07),Vector3.UP,2.0,"stick")
+	rod("cross_a",Vector3(-8,1.35,4),Vector3(1,1,0).normalized(),2.0,"stick")
+	rod("cross_b",Vector3(-8,1.35,4.07),Vector3(1,-1,0).normalized(),2.0,"stick")
+	rod("rail_a",Vector3(-3.65,1.0,1.0),Vector3.BACK,3.0,"plank")
+	rod("rail_b",Vector3(-2.35,1.0,1.0),Vector3.BACK,3.0,"plank")
+	rod("measure_a",Vector3(-3,1.05,5.0),Vector3.RIGHT,2.0,"measure")
+	rod("measure_b",Vector3(-3,1.45,5.0),Vector3.RIGHT,2.0,"measure")
+	rod("upright_a",Vector3(1.15,1.25,1),Vector3.UP,2.4,"beam")
+	rod("upright_b",Vector3(2.85,1.25,1),Vector3.UP,2.4,"beam")
+	rod("horizon",Vector3(2,1.55,4.0),Vector3.RIGHT,3.2,"light")
+	for k in range(3):
+		var v: float = (k-1)*0.8
+		rod("grid_horizontal_%d"%k,Vector3(7,1.35+v,1.0),Vector3.RIGHT,2.4,"stick")
+		rod("grid_vertical_%d"%k,Vector3(7+v,1.35,1.08),Vector3.UP,2.4,"stick")
+	# A sparse spatial grid beyond the planar one: walking sideways separates
+	# its depth planes. It deliberately offers no fitted surfaces.
+	rod("depth_a",Vector3(6.2,1.25,5.0),Vector3.BACK,2.4,"beam")
+	rod("depth_b",Vector3(7.8,1.25,5.0),Vector3.BACK,2.4,"beam")
+	rod("depth_cross",Vector3(7,1.25,5.0),Vector3.RIGHT,2.4,"stick")
+	floor_words("GRAB A LINE. LEAVE ANOTHER ARRANGEMENT.",Vector3(-0.5,0.016,8.0),Vector2(7,0.22))
+	wall_studies()
+	# One continuous mark runs right into the east wall, then up its face.
+	paint(Vector3(-6,0.016,13.7),Vector3(12.49,0.016,13.7),0.065,Color("202329"))
+	paint(Vector3(12.49,0.016,13.7),Vector3(12.49,3.0,13.7),0.065,Color("202329"))
+	floor_words("FOLLOW THIS LINE",Vector3(7.5,0.018,14.1),Vector2(3.5,0.23))
+
+func rod(id: String, at: Vector3, direction: Vector3, length_m: float, finish: String) -> void:
+	var body := LINE.new()
+	body.name=id;body.span=length_m;body.skin=finish
+	body.collision_layer=6;body.collision_mask=1
+	body.transform=Transform3D(Basis(Quaternion(Vector3.RIGHT,direction)),at)
+	add_child(body);lines.append(body);first_poses.append(body.transform)
+
+func paint(a: Vector3, b: Vector3, width: float, colour: Color) -> void:
+	var mesh := MeshInstance3D.new();var box := BoxMesh.new()
+	box.size=Vector3(a.distance_to(b),width,width);mesh.mesh=box
+	mesh.transform=Transform3D(Basis(Quaternion(Vector3.RIGHT,(b-a).normalized())),(a+b)*0.5)
+	var mat := StandardMaterial3D.new();mat.albedo_color=colour;mat.roughness=0.8
+	mesh.material_override=mat;add_child(mesh)
+
+func floor_words(words: String, at: Vector3, size_m: Vector2) -> void:
+	var label: MeshInstance3D=KIT.stencil(words,size_m,Color("25282d"))
+	if label==null:return
+	label.rotation_degrees.x=-90;label.rotation_degrees.y=180;label.position=at;add_child(label)
+
+func wall_studies() -> void:
+	var z := 18.48
+	var ink := Color("25282d")
+	paint(Vector3(-9.2,1.6,z),Vector3(-6.8,1.6,z),0.065,ink)
+	paint(Vector3(-8,0.4,z),Vector3(-8,2.8,z),0.065,ink)
+	# Equal physical gaps on the wall; perspective belongs to the visitor.
+	for x in [-3.6,-2.4]:paint(Vector3(x,0.2,z),Vector3(x,3.4,z),0.06,ink)
+	paint(Vector3(0.6,1.6,z),Vector3(3.4,1.6,z),0.04,ink)
+	paint(Vector3(2,0.05,z),Vector3(2,3.8,z),0.07,ink)
+	for i in range(4):
+		var p: float = float(i)*0.65
+		paint(Vector3(6+p,0.55,z),Vector3(6+p,2.5,z),0.035,ink)
+		paint(Vector3(6,0.55+p,z),Vector3(7.95,0.55+p,z),0.035,ink)
+
+func restore_arrangements() -> void:
+	# Native room reset may call this; no automatic snapping interrupts a hand.
+	for i in range(lines.size()):
+		if not lines[i].is_picked_up():lines[i].transform=first_poses[i]

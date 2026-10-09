@@ -1,0 +1,25 @@
+{
+  "id": "Fractal_MengerSponge",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A finite volume-subdivision rule with fixed outer bounds.",
+  "change": "Select twenty addresses from a three-by-three-by-three block and repeat the rule for a bounded number of levels.",
+  "dependsOn": [
+    "Tutorial_3D",
+    "Fractal_Recursion",
+    "Fractal_CantorSet"
+  ],
+  "reuses": "Three-dimensional address conventions.; Bounded recursive construction.; Count and retained measure can change differently.",
+  "given": "block renderer; collision bodies; flight enclosure",
+  "later": "Do not explain every visible artifact. Keep geometry changes outside an occupied structure; the current desk already restricts rebuilding while visitors inhabit it.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A finite volume-subdivision rule with fixed outer bounds.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The guide explains the 27-to-20 rule but does not provide the selection predicate and bounded learner construction.",
+  "baseline": {
+    "tutorial": "808d58b59b493fe4101ef51e836b5976013d77ef05f9a79282744c10bae377db",
+    "choice": "8d4677a0e00bb0e7ba8951284208438f70192178b76c4330434214cda027d77d"
+  },
+  "summary": "Select twenty addresses from a 3×3×3 block and apply the subdivision to a bounded number of levels. Predict retained count and outer bounds before rendering another level; state the work budget. Blocks, collision and flight are supplied. Carry a finite volume-subdivision rule, distinguishing an increasingly detailed approximation from an infinite mathematical object or guaranteed traversable interior."
+}

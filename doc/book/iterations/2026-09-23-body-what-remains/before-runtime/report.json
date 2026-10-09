@@ -1,0 +1,218 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "all three existing encounters and museum body loaded",
+      "passed": true
+    },
+    {
+      "name": "slats close without a nearby body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: slats-before",
+      "passed": true
+    },
+    {
+      "name": "walk to slat opening",
+      "passed": true
+    },
+    {
+      "name": "natural proximity opens slats",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: slats-near",
+      "passed": true
+    },
+    {
+      "name": "walk through slats and leave reach",
+      "passed": true
+    },
+    {
+      "name": "slats return after the walk",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: slats-after",
+      "passed": true
+    },
+    {
+      "name": "lattice has not yet lost cells",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lattice-before",
+      "passed": true
+    },
+    {
+      "name": "walk through lattice without bypass",
+      "passed": true
+    },
+    {
+      "name": "walking removed cells",
+      "passed": true
+    },
+    {
+      "name": "cut stays after the body leaves",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lattice-after",
+      "passed": true
+    },
+    {
+      "name": "scaling field starts full",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: blocks-before",
+      "passed": true
+    },
+    {
+      "name": "walk between shrinking blocks",
+      "passed": true
+    },
+    {
+      "name": "natural approach reduces blocks",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: blocks-near",
+      "passed": true
+    },
+    {
+      "name": "walk out of block sensing range",
+      "passed": true
+    },
+    {
+      "name": "all blocks regain their size",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: blocks-after",
+      "passed": true
+    },
+    {
+      "name": "lattice alone still retains the changed occupancy",
+      "passed": true
+    },
+    {
+      "name": "all three encounter comparisons completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "actual_body": {
+      "height": 1.5,
+      "offset": [
+        0.0,
+        0.75,
+        0.0
+      ],
+      "width": 0.639999985694885
+    },
+    "anchors": {
+      "carve": [
+        10.5,
+        0.0,
+        17.5
+      ],
+      "field": [
+        10.5,
+        0.575000047683716,
+        23.5
+      ],
+      "wall": [
+        10.5,
+        0.0,
+        11.5
+      ]
+    },
+    "near_factors": [
+      1.0,
+      0.888849556446075,
+      0.888849556446075,
+      1.0,
+      0.526710689067841,
+      0.526710689067841,
+      1.0,
+      0.918237447738647,
+      0.918237447738647
+    ],
+    "removed_cells": 132,
+    "total_cells": 484,
+    "walk between shrinking blocks": {
+      "arrived": true,
+      "feet": [
+        11.25,
+        0.000833733996842057,
+        23.4750385284424
+      ],
+      "target": [
+        11.25,
+        0.575000047683716,
+        23.5
+      ]
+    },
+    "walk out of block sensing range": {
+      "arrived": true,
+      "feet": [
+        11.25,
+        0.000837794155813754,
+        27.975025177002
+      ],
+      "target": [
+        11.25,
+        0.575000047683716,
+        28.0
+      ]
+    },
+    "walk through lattice without bypass": {
+      "arrived": true,
+      "feet": [
+        10.5,
+        0.000835548911709338,
+        20.1750221252441
+      ],
+      "target": [
+        10.5,
+        0.0,
+        20.2000007629395
+      ]
+    },
+    "walk through slats and leave reach": {
+      "arrived": true,
+      "feet": [
+        10.5,
+        0.000830089091323316,
+        14.9748954772949
+      ],
+      "target": [
+        10.5,
+        0.0,
+        15.0
+      ]
+    },
+    "walk to slat opening": {
+      "arrived": true,
+      "feet": [
+        10.5,
+        0.000837532570585608,
+        10.6249628067017
+      ],
+      "target": [
+        10.5,
+        0.0,
+        10.6499996185303
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Trans_Body",
+  "scope": "Actual isolated museum, actual museum CharacterBody3D with supplied physics-tick walking input. Body placed at each separate encounter's approach; movement through each gate uses move_and_slide. Selected elevated cameras for book illustrations. No headset or learner test."
+}

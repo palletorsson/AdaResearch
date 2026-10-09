@@ -1,0 +1,90 @@
+{
+  "status": "Introduction and F Term reviewed; E Term next",
+  "summary": "The introduction keeps two arrangements with the same total. The restored F hall takes the comparison further: equal source uncertainty can meet very different predictor performance. Change the expectation while the bits remain fixed. Seven of eight declared laboratory halls are now authored; Sandbox remains to restore.",
+  "items": [
+    {
+      "title": "The outline remembers what the total cannot",
+      "description": "KEEP retains one arrangement while you move the four controls. A pale outline stays beside the current coloured shape, and the readout shows the retained total and difference. The diagram can disagree while the number agrees.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-kept-a.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-current-b.png"
+      ],
+      "captions": [
+        "Keep A: F 0.4, E 0.2, lambda 0.5, phi 0.5. Total 0.450.",
+        "Change to B: F 0.6, E 0.6. Total 0.450 again; A remains as a pale outline."
+      ],
+      "image_note": "Same camera, two states of the actual revised Godot museum. These are not before/after software versions. The test operates the existing KEEP button signal and slider components; tracked hands remain untested.",
+      "text_kind": "book — preserve the question, strengthen its encounter",
+      "before": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Then try changing another control to return the result towards its earlier value. Look for two configurations that look different on the axes but give nearly the same total.",
+      "after": "Move one control on the workbench and watch both the numerical result and the shape of the four-axis display. Press KEEP. A pale outline holds that arrangement while your next movements redraw the coloured shape.\n\nNow try changing two controls to return the result towards the kept total. Look for two configurations that look different on the axes but give nearly the same number. The outline remembers what the total cannot.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/final.diff",
+      "report_label": "Exact introduction manuscript diff"
+    },
+    {
+      "title": "A handle can move without changing this total",
+      "description": "The chapter’s existing zero-weight experiment stays. With lambda at zero, the E vertex moves but its contribution to the total is zero. The saved shape makes the movement visible. The controls also state their domains; the colour names a nearest authored example rather than a detected physical phase.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-low.png",
+        "doc/book/iterations/2026-09-20-qfep-introduction-review/balance-zero-high.png"
+      ],
+      "captions": [
+        "Lambda zero, E 0.1. Keep this arrangement: total 0.550.",
+        "Lambda still zero, E 0.9. Another shape; total still 0.550."
+      ],
+      "image_note": "The unchanged total is a property of this expression. It does not establish that entropy or change has disappeared from the surrounding room.",
+      "text_kind": "book — names and ranges belong to particular instruments",
+      "before": "The named phase on the display is selected by comparing the knob arrangement with authored reference configurations. A changing name therefore reports proximity to a project example; it does not announce an experimentally detected physical phase transition.",
+      "after": "All four rails on this console run from zero to one. Its phi is a nonnegative weight; the separate phi rail nearby, and the later Phi hall, also allow negative values. A familiar symbol does not guarantee the same range. Read the rail as well as the letter.\n\nThe display says “nearest project reference.” Its name and colour come from comparing your arrangement with seven authored examples. A name can change while you are still moving the same four handles. Watch when it changes: the border between two reference examples is a choice made in the comparison, not an experimentally detected physical phase transition.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/QFEP_Introduction-runtime.json",
+      "report_label": "21 control checks and five walking routes"
+    },
+    {
+      "title": "Preserve the introduction’s ecology",
+      "description": "The workbench and formula face the entrance, with the blocked exit cleared. All eleven placed artifact families remain. Supporting notes distinguish implemented behaviour from retained proposals for memory projections and a responsive room. The existing large wave screen and synthesis stand still need later attention. The following F hall has now been restored, as shown below.",
+      "report": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md",
+      "report_label": "Findings, decisions, full-hall image and limits"
+    },
+    {
+      "title": "F Term: same uncertainty, whose mistake?",
+      "description": "A fixed seed gives 256 stored draws. Changing p re-thresholds them. EXPECT 0 marks each one as a miss. The entropy curve gives the same height at p=0.1 and p=0.9; this particular predictor does very differently. The main chapter’s proposed experiment now exists in the museum.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-low-zero.png",
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-zero.png"
+      ],
+      "captions": [
+        "p=0.1, EXPECT 0: source H≈0.469; 27 observed misses in 256 cells.",
+        "p=0.9, EXPECT 0: source H≈0.469; 230 observed misses in 256 cells."
+      ],
+      "image_note": "Same camera, actual Godot museum. Amber underlines mark errors in the displayed sample. Expected percentages and observed counts are shown separately. H is a source quantity, not the measured encoding length of this grid.",
+      "text_kind": "book — the proposed predictor becomes an encounter",
+      "before": "Imagine a predictor that always expects zero. It would usually succeed near one end of the rail and usually fail near the other, although the entropy can be the same at those two settings. The example separates uncertainty in a source from mismatch between a source and a particular predictor.",
+      "after": "Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compare p near 0.1 with p near 0.9 again. The entropy returns to almost the same height, but the mistakes spread. The source is no more uncertain; this predictor is less suited to it.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/final.diff",
+      "report_label": "Exact F Term manuscript diff"
+    },
+    {
+      "title": "Improve the prediction without changing the world",
+      "description": "Keep p at 0.9 and press EXPECT 1. The bit colours and positions stay fixed. Their amber marks change sides, and observed misses fall from 230 to 26. This is an explicit mismatch count for a simple predictor; the screen does not claim to measure variational free energy.",
+      "images": [
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-zero.png",
+        "doc/book/iterations/2026-09-20-qfep-f-term-review/predict-high-one.png"
+      ],
+      "captions": [
+        "EXPECT 0: 230 misses. The source and sample are held fixed for the next image.",
+        "EXPECT 1: 26 misses. The same bits meet a different expectation."
+      ],
+      "image_note": "26 runtime assertions and five selected walking routes pass. 70 content/preservation checks pass. This tests the control signals and calculations in the museum, not tracked hands or learner understanding.",
+      "text_kind": "book — the critical question grows from the comparison",
+      "before": "The next useful addition would display that predictor’s expectations and errors beside the grid. It could then change its expectations while the source stays fixed. A learner would see whether improvement came from an easier world or from a better model of it.",
+      "after": "Leave p near 0.9 and press EXPECT 1. Keep your eye on the bits, not only the number. Their colours stay; the amber marks change sides. You have improved this predictor’s performance without making the world easier.\n\nThe screen distinguishes expected errors under the chosen probability from mistakes counted in this particular grid. They need not agree exactly. The smaller experiment is enough to ask something consequential: when we call a world difficult, whose expectation is meeting it?\n\nHere you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/QFEP_F_Term-runtime.json",
+      "report_label": "Controls, sample counts and route evidence"
+    },
+    {
+      "title": "The missing hall returns, with its puzzles",
+      "description": "F Term now stands between Introduction and E Term in both museum plans. All eight map works are retained. Two old puzzle names were preventing their scenes from loading; active names restore the same octahedron and tetrahedron works. The decorative dark sphere remains outside the chapter’s argument. E Term is next; Sandbox is the remaining route gap.",
+      "report": "doc/book/iterations/2026-09-20-qfep-f-term-review/SUMMARY.md",
+      "report_label": "Findings, decisions, full-hall image and limits"
+    }
+  ]
+}

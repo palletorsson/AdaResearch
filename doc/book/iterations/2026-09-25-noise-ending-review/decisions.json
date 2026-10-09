@@ -1,0 +1,42 @@
+{
+  "book_noise.002": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "Lab_Path now has a real H1. Its reflective question and encounter remain; the subtitle explicitly marks it as an optional return."
+  },
+  "book_noise.003": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "VIEW leaves the seed alone. If you used REGEN, you keep that new field. The sentence now distinguishes choosing a new field from changing how its values occupy space. Native sample and generator checks support it."
+  },
+  "book_noise.005": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "The dangling engine-docs fragment becomes a sourced footnote. The main sentence and four code excerpts remain. The linked Godot 4.6 reference distinguishes Perlin, OpenSimplex2 and OpenSimplex2S."
+  },
+  "book_noise.006": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "Repaired encoding and updated the sequence title, purposes, descriptions and current chapter titles, with Chamber_Noise kept deferred and Lab_Path explicitly optional. The description distinguishes spatial coherence from stored state. Map order, route, unlocks, roles and artifact lists are retained."
+  },
+  "book_noise.007": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "Keep Lab_Path outside the main museum/book route. Fold the two tellings and hold-a-seed invitation into the Perlin/Simplex ending, before the preserved blob-culture passage. The main chapter retains the one handover to Cellular Automata; the optional coda no longer repeats it."
+  },
+  "book_noise.013": {
+    "status": "done",
+    "triage": "comment",
+    "decision": "Compared the frozen Claude audited chapter with the live chapter before this pass. Keep the live chapter: its newer arch encounter is supported by native work, and VIEW already bypassed the obsolete seed-reset caveat. All four audited code excerpts and the blob-culture ending remain. This pass also fixes the underlying readout-only config API."
+  },
+  "book_noise.014": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "The absence of Lab_Path from the museum is now an explicit curatorial choice. Its existing drop flag, grid, teleporter and orb stay; final.md and companion descriptions call it an optional return. Its strongest invitation also appears in the main ending, so the spine does not need an unbuilt corridor to carry it."
+  },
+  "book_noise.017": {
+    "status": "done",
+    "triage": "fix",
+    "decision": "Simplex apply_grid_config now separates readout updates from contract application. Native REGEN followed by plate and relief preserves the regenerated seed, 49 sampled values, generator properties and colours; heights change and return. Explicit seed changes, pre-ready config, shared VIEW and MATCH remain effective. 29 native assertions pass, exit 0, no script/shader errors. No headset claim."
+  }
+}

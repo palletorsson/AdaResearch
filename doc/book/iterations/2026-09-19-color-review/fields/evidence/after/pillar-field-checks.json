@@ -1,0 +1,236 @@
+{
+  "checks": 97,
+  "failures": [],
+  "headset_tested": false,
+  "observations": {
+    "field_camera": {
+      "fov": 72.2640914916992,
+      "position": "(24.8, 1.2, 4.0)",
+      "target": "(24.8, 0.0, 18.0)",
+      "viewport": "(1280, 800)"
+    },
+    "gradient_world": "(26.4, 0.026, 17.6)",
+    "paired_replay": [
+      {
+        "camera": "(24.8, 1.7, 4.0)",
+        "fov": 70.0,
+        "gradient_y": -0.474000006914139,
+        "pillar_y": -0.5,
+        "state": "before",
+        "target": "(24.8, 0.5, 18.0)"
+      },
+      {
+        "camera": "(24.8, 1.7, 4.0)",
+        "fov": 70.0,
+        "gradient_y": 0.0260000005364418,
+        "pillar_y": 0.0,
+        "state": "after",
+        "target": "(24.8, 0.5, 18.0)"
+      }
+    ],
+    "pillar_world": "(20.0, 0.0, 8.0)",
+    "plane_corners": [
+      {
+        "expected": "(1.0, 1.0)",
+        "point": "(12.8, 0.026, 19.2)",
+        "uv": "(1.0, 1.0)"
+      },
+      {
+        "expected": "(0.0, 1.0)",
+        "point": "(0.0, 0.026, 19.2)",
+        "uv": "(0.0, 1.0)"
+      },
+      {
+        "expected": "(1.0, 0.0)",
+        "point": "(12.8, 0.026, 0.0)",
+        "uv": "(1.0, 0.0)"
+      },
+      {
+        "expected": "(0.0, 0.0)",
+        "point": "(0.0, 0.026, 0.0)",
+        "uv": "(0.0, 0.0)"
+      }
+    ],
+    "samples": [
+      {
+        "hex": "f2b6b6",
+        "local": "(0.0, 0.0, 0.0)",
+        "node": "Pillar_0_0"
+      },
+      {
+        "hex": "e2f2b6",
+        "local": "(3.2, 0.0, 0.0)",
+        "node": "Pillar_0_1"
+      },
+      {
+        "hex": "b6f2d7",
+        "local": "(6.4, 0.0, 0.0)",
+        "node": "Pillar_0_2"
+      },
+      {
+        "hex": "b6c0f2",
+        "local": "(9.6, 0.0, 0.0)",
+        "node": "Pillar_0_3"
+      },
+      {
+        "hex": "f2b6ec",
+        "local": "(12.8, 0.0, 0.0)",
+        "node": "Pillar_0_4"
+      },
+      {
+        "hex": "f29797",
+        "local": "(0.0, 0.0, 3.2)",
+        "node": "Pillar_1_0"
+      },
+      {
+        "hex": "d9f297",
+        "local": "(3.2, 0.0, 3.2)",
+        "node": "Pillar_1_1"
+      },
+      {
+        "hex": "97f2c9",
+        "local": "(6.4, 0.0, 3.2)",
+        "node": "Pillar_1_2"
+      },
+      {
+        "hex": "97a7f2",
+        "local": "(9.6, 0.0, 3.2)",
+        "node": "Pillar_1_3"
+      },
+      {
+        "hex": "f297e9",
+        "local": "(12.8, 0.0, 3.2)",
+        "node": "Pillar_1_4"
+      },
+      {
+        "hex": "f27979",
+        "local": "(0.0, 0.0, 6.4)",
+        "node": "Pillar_2_0"
+      },
+      {
+        "hex": "d1f279",
+        "local": "(3.2, 0.0, 6.4)",
+        "node": "Pillar_2_1"
+      },
+      {
+        "hex": "79f2bc",
+        "local": "(6.4, 0.0, 6.4)",
+        "node": "Pillar_2_2"
+      },
+      {
+        "hex": "798ef2",
+        "local": "(9.6, 0.0, 6.4)",
+        "node": "Pillar_2_3"
+      },
+      {
+        "hex": "f279e6",
+        "local": "(12.8, 0.0, 6.4)",
+        "node": "Pillar_2_4"
+      },
+      {
+        "hex": "f25b5b",
+        "local": "(0.0, 0.0, 9.6)",
+        "node": "Pillar_3_0"
+      },
+      {
+        "hex": "c9f25b",
+        "local": "(3.2, 0.0, 9.6)",
+        "node": "Pillar_3_1"
+      },
+      {
+        "hex": "5bf2ae",
+        "local": "(6.4, 0.0, 9.6)",
+        "node": "Pillar_3_2"
+      },
+      {
+        "hex": "5b75f2",
+        "local": "(9.6, 0.0, 9.6)",
+        "node": "Pillar_3_3"
+      },
+      {
+        "hex": "f25be3",
+        "local": "(12.8, 0.0, 9.6)",
+        "node": "Pillar_3_4"
+      },
+      {
+        "hex": "f23d3d",
+        "local": "(0.0, 0.0, 12.8)",
+        "node": "Pillar_4_0"
+      },
+      {
+        "hex": "c0f23d",
+        "local": "(3.2, 0.0, 12.8)",
+        "node": "Pillar_4_1"
+      },
+      {
+        "hex": "3df2a0",
+        "local": "(6.4, 0.0, 12.8)",
+        "node": "Pillar_4_2"
+      },
+      {
+        "hex": "3d5cf2",
+        "local": "(9.6, 0.0, 12.8)",
+        "node": "Pillar_4_3"
+      },
+      {
+        "hex": "f23de0",
+        "local": "(12.8, 0.0, 12.8)",
+        "node": "Pillar_4_4"
+      },
+      {
+        "hex": "f21e1e",
+        "local": "(0.0, 0.0, 16.0)",
+        "node": "Pillar_5_0"
+      },
+      {
+        "hex": "b8f21e",
+        "local": "(3.2, 0.0, 16.0)",
+        "node": "Pillar_5_1"
+      },
+      {
+        "hex": "1ef293",
+        "local": "(6.4, 0.0, 16.0)",
+        "node": "Pillar_5_2"
+      },
+      {
+        "hex": "1e43f2",
+        "local": "(9.6, 0.0, 16.0)",
+        "node": "Pillar_5_3"
+      },
+      {
+        "hex": "f21edd",
+        "local": "(12.8, 0.0, 16.0)",
+        "node": "Pillar_5_4"
+      },
+      {
+        "hex": "f20000",
+        "local": "(0.0, 0.0, 19.2)",
+        "node": "Pillar_6_0"
+      },
+      {
+        "hex": "b0f200",
+        "local": "(3.2, 0.0, 19.2)",
+        "node": "Pillar_6_1"
+      },
+      {
+        "hex": "00f285",
+        "local": "(6.4, 0.0, 19.2)",
+        "node": "Pillar_6_2"
+      },
+      {
+        "hex": "002af2",
+        "local": "(9.6, 0.0, 19.2)",
+        "node": "Pillar_6_3"
+      },
+      {
+        "hex": "f200da",
+        "local": "(12.8, 0.0, 19.2)",
+        "node": "Pillar_6_4"
+      }
+    ],
+    "shader": "shader_type spatial; render_mode unshaded, cull_disabled; void fragment(){ vec3 p=abs(fract(vec3(UV.x*0.85)+vec3(0.0,2.0/3.0,1.0/3.0))*6.0-3.0); ALBEDO=0.95*mix(vec3(1.0),clamp(p-1.0,0.0,1.0),mix(0.25,1.0,UV.y)); }",
+    "support_hit": "{ \"position\": (24.8, 0.0, 16.0), \"normal\": (0.0, 1.0, 0.0), \"face_index\": -1, \"collider_id\": 526636820839, \"collider\": @StaticBody3D@4655:<StaticBody3D#526636820839>, \"shape\": 0, \"rid\": RID(33582349288639) }",
+    "swatches": 144
+  },
+  "scope": "Actual museum field positions/materials/UV basis and swatch capability; human perception and tracked pickup not tested."
+}

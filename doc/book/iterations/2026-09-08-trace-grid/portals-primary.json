@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-08",
+  "room": "Primitives_Portals",
+  "primary": [
+    "combine_portals",
+    "achilles_tortoise"
+  ],
+  "improvements": [
+    "Portal selection/highlight and reversible refinement with actual mesh counts",
+    "Separate unit-polygon perimeter and circumference-gap calculation",
+    "Achilles direct step, eased autoplay/pause, restart and held finite ending",
+    "Local instrument colliders excluded from whole-footprint obstruction; collision ledger refreshes even when bounds do not grow",
+    "Book, tutorial, critical and intent aligned with implemented controls"
+  ],
+  "interaction_checks": {
+    "checks": 30,
+    "failures": [],
+    "scope": "Pointer events, mesh/order checks, actual tweens and configured museum stamping; full-corridor/headset routes unverified."
+  },
+  "previews": [
+    "ada_run/portals_primary/portals.png",
+    "ada_run/portals_primary/race.png"
+  ],
+  "content_checks": {
+    "book_primary_agreement": true,
+    "encyclopedia_primary_passages_verified": true
+  },
+  "reusable_pattern": "Separate a mathematical sequence from the pacing and interpolation used to present it. Hold the finite endpoint for inspection. Keep local instrument collision distinct from a subject-wide obstruction classification.",
+  "remaining": "Full-corridor/headset route, control reach and marker legibility remain unverified. No teleportation, floating-point saturation measurement or completed infinite process claimed."
+}

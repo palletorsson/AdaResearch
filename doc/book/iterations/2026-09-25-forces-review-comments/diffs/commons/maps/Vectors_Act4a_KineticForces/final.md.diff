@@ -1,0 +1,19 @@
+--- before/commons/maps/Vectors_Act4a_KineticForces/final.md
++++ commons/maps/Vectors_Act4a_KineticForces/final.md
+@@ -22,11 +22,15 @@
+ 
+ MASS cycles through one, two and four kilograms, returning the probes to their starting positions and holding them there. FIRE begins another equal-speed comparison. A strip keeps its own coefficient throughout the flight, even when its cube passes through the glass boundary of the walking passage. The glass divides another kind of encounter.
+ 
+-Turn on **WALK**, then go through the centre: air, water, honey. The same desktop movement command carries you progressively less quickly. XR stick movement uses the same adaptation. Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.
++Turn on **WALK**, then go through the centre: air, water, honey. The same movement of the stick carries you progressively less quickly. Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.
+ 
+ Your controller is a different receiver. Its requested walking speed is multiplied by approximately 0.71, 0.43 or 0.24. That mapping is chosen to make resistance apparent; it does not integrate the cube's drag force through your body. In a headset, the program can slow a stick request. It cannot make your physical legs walk more slowly through the room you are standing in.
+ 
+ One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.
++
++![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-review/doc/book/figures/forces/inside-the-passage-museum.png)
++
++*The cubes cross the strips; the walking passage runs through them. A cube receives a force. The stick receives a change to its requested speed.*
+ 
+ The cubes ignore furniture and the visitor. Gravity and inherited damping are removed. If a cube reaches the end of its eight-metre observation window, the apparatus freezes it and labels FRAME EXIT. It has reached the limit of what we are watching, not a wall that did work to stop it. The displayed velocity remains its outgoing value.
+ 

@@ -1,0 +1,345 @@
+This first **Arrays** pair is strong. The tutorial and reflection are doing different but complementary work, just as Transformation did. I would call it **KEEP with two small clarifications**, not a structural rewrite.
+
+The tutorial's core move is excellent: it does not introduce arrays abstractly. It starts from a known event—collecting a cube—and asks what must remain when one element is gone. That makes **stable address** the reason to learn the data structure. Pasted text
+
+## The technical lesson has a very clear conceptual spine
+
+I read it as:
+
+**one cube**  
+→ **several independent instances**  
+→ **each has an address**  
+→ **one array describes occupancy**  
+→ **another array holds references to bodies**  
+→ **changing a slot need not change the address**  
+→ **a row becomes a plane through another index**
+
+That is exactly the right continuation after Transformation.
+
+The distinction between these two structures is particularly important:
+
+```text
+grid_data[x][z]  → what the site means / contains
+cubes[x][z]      → which runtime object is there
+```
+
+The text explains this very well: a numeric value can record presence but cannot rotate a mesh; a node reference lets you act on a body but does not by itself explain what an empty site means. Pasted text
+
+That is much deeper than “here is how nested arrays work.”
+
+It establishes **data versus object reference**.
+
+That distinction will pay off everywhere later.
+
+---
+
+## Stable slots are the real lesson
+
+The best decision is not using `remove_at()`.
+
+When `[2,0]` is collected:
+
+```gdscript
+grid_data[x][z] = 0
+cubes[x][z].queue_free()
+cubes[x][z] = null
+```
+
+the slot remains.
+
+That means `[3,0]` does not suddenly become `[2,0]`. The tutorial explicitly explains why shifting entries would destroy the spatial agreement between address and site. Pasted text
+
+This should probably be considered the hall's central principle:
+
+> **absence can be stored without erasing the place where the absence occurred.**
+
+That bridges beautifully back to Trace and Grid.
+
+Trace kept an ordered history.
+
+Grid kept spatial addresses.
+
+Array now keeps **addressable vacancies**.
+
+---
+
+# Row → plane is very clean
+
+Changing only:
+
+```gdscript
+depth := 1
+```
+
+to:
+
+```gdscript
+depth := 4
+```
+
+is an excellent exercise because the data model is already two-dimensional from the beginning. The student isn't forced to rewrite a one-dimensional lesson into a new architecture. Pasted text
+
+And `[1,2]` versus `[2,1]` gives the two indices an immediate spatial consequence.
+
+This is important because the student begins learning that:
+
+> an array index is not inherently X, Y, row, column, height, time, or anything else.
+
+**The program gives the index that interpretation.**
+
+Your text already approaches that point; I would make it explicit once.
+
+Something like:
+
+> `x` and `z` are our interpretation of the two indices in this study. Nested arrays themselves do not contain a spatial coordinate system.
+
+That will help later when you go from:
+
+```text
+grid_data[x][z]
+```
+
+to something like:
+
+```text
+volume[y][z][x]
+```
+
+where storage order and spatial naming need to be deliberately distinguished.
+
+---
+
+# The transformation reuse is exactly right
+
+This is a very effective bridge:
+
+```gdscript
+cubes[1][0].rotation_degrees.y = 45.0
+```
+
+Suddenly the array isn't merely something to print or collect from.
+
+It becomes a way to **address an already-learned operation**. Pasted text
+
+That is pedagogically excellent.
+
+Transformation taught:
+
+> change this body.
+
+Arrays now asks:
+
+> **which body?**
+
+That is probably the cleanest formulation of the sequence transition.
+
+And later Arrays can naturally ask:
+
+> which bodies?
+
+> which subset?
+
+> which rule for each address?
+
+---
+
+# One small technical clarification I would make
+
+The text correctly says:
+
+> `append([])` creates a fresh inner array on each outer-loop visit. Pasted text
+
+This is important enough to turn into a tiny counterexample, because aliasing/shared references is one of the hardest early programming concepts.
+
+You don't need a new exercise. Just perhaps show the danger conceptually:
+
+```text
+fresh arrays:
+X0 → [1,1,1,1]
+X1 → [1,1,1,1]
+
+shared inner array:
+X0 ─┐
+    ├→ same [1,1,1,1]
+X1 ─┘
+```
+
+Then:
+
+> changing one “row” would appear to change another because they would be two references to the same array.
+
+That connects directly to the independent cube instances from Primitives.
+
+It's the same problem at a new level:
+
+**similar contents ≠ same object.**
+
+---
+
+# The reflection is especially strong
+
+The reflective text starts from almost exactly the same event but asks a different question.
+
+The cube disappears, yet its slot remains numerically represented. Pasted text
+
+Then it develops a very useful proposition:
+
+> **the array preserves an address but not the reason for its value.**
+
+A zero could mean:
+
+- absent,
+- reserved,
+- empty,
+- silence,
+- colour zero,
+- measurement zero,
+
+depending on the system. The data structure does not supply semantics by itself. Pasted text
+
+That's excellent.
+
+It is the Arrays equivalent of:
+
+> three points do not choose their own face.
+
+Here:
+
+> **a stored value does not choose its own meaning.**
+
+That is exactly the kind of recurring conceptual structure that makes the book coherent.
+
+---
+
+# The floor encounter makes the abstraction bodily
+
+The transition from little pickup cubes to the floor is very effective.
+
+An empty slot first appears as:
+
+> a missing cube you can point to.
+
+Then it becomes:
+
+> somewhere your foot expects support and doesn't find it.
+
+Pasted text
+
+This turns data mutation into spatial consequence without pretending arrays themselves imply collision or architecture.
+
+This line is particularly strong:
+
+> “The address remains available to the program even when it no longer offers our feet a place to rest.” Pasted text
+
+I would keep that.
+
+---
+
+# Molnár is a good final movement
+
+The nested-frame study gives the hall a second conceptual expansion:
+
+At first arrays were about:
+
+**where something is and whether it exists.**
+
+Now they become:
+
+**where repeated variation can occur.**
+
+Translation, rotation and scale from the previous chapter are distributed over indexed sites. Pasted text
+
+That's exactly how curriculum should accumulate.
+
+You are no longer teaching:
+
+> rotation again.
+
+You are teaching:
+
+> an address gives us a place at which a transformation can differ.
+
+And the fixed grey point is a particularly good device because it lets the visitor compare departure against a retained site.
+
+So the larger conceptual formula becomes:
+
+```text
+address
++
+value/state
++
+object/reference
++
+operation
+=
+structured variation
+```
+
+That is a very strong foundation for procedural work later.
+
+---
+
+# One distinction I would sharpen in the reflection
+
+You already arrive at it in the last line:
+
+> “where is the slot, and what can happen at it?” Pasted text
+
+I think these are actually the two governing questions of Arrays:
+
+### Address
+**Which place in the structure?**
+
+### Contents / state
+**What is stored there?**
+
+And then a third will gradually emerge:
+
+### Reference / behaviour
+**What object or operation does that address give us access to?**
+
+That three-part distinction would make the whole Arrays sequence very legible:
+
+**address → contents → action**
+
+---
+
+## The only other clarification: tutorial versus installed artifact
+
+There is one potentially confusing difference worth keeping explicit.
+
+In the reduced tutorial, the labels belong to `ArrayStudy`, so a cube can disappear while its label remains. Pasted text
+
+In the reflective installed **row**, the collected cube takes its label with it, whereas the square grid deliberately leaves address plates behind. Pasted text
+
+That's actually conceptually productive, not a problem.
+
+But I would explicitly say somewhere in the tutorial/reflection relation:
+
+> The reduced study leaves every address label visible to isolate stable indexing. The museum row removes its cube label, while the grid retains its floor plate, letting the reflective encounter compare different ways an address can remain legible.
+
+Then the difference becomes intentional evidence rather than seeming like a mismatch.
+
+---
+
+## Verdict
+
+**KEEP the tutorial. KEEP the reflection.**
+
+I would only:
+
+1. explicitly say that `x` and `z` are meanings assigned to the indices, not properties of arrays themselves;
+2. slightly emphasize fresh inner arrays versus shared inner references;
+3. explicitly acknowledge the useful difference between the reduced tutorial's persistent labels and the museum row/grid's two different labeling behaviours.
+
+The deeper architecture is already very good:
+
+**Transformation:** *what can this object do?*
+
+**Arrays:** *where is this object/state in a collection, and what happens when one place differs from another?*
+
+And the reflective sequence has already found an excellent formulation for what comes next:
+
+> **Where is the slot, and what can happen at it?**
+
+That is strong enough to organize the rest of Arrays.

@@ -1,0 +1,149 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act4b_Oscillation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act4b_Oscillation">← Tutorial lineage</a></p><h1>Vectors Act4b Oscillation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act4b_Oscillation/final.md">Raw captured source</a></p><pre># Coming back takes you through
+
+&lt;!-- @spring_tower --&gt;
+
+A cube waits to one side of a line. A coil connects it to the frame. The line continues across the floor, where your feet can find it too.
+
+Press **RELEASE**. The cube moves towards the line. Watch what happens when it arrives.
+
+It goes through.
+
+The spring has brought it back to a place where the spring&#x27;s own force is zero. It has not brought it to rest. The movement gathered on the way still belongs to the body. Beyond the line the coil begins to oppose that movement, slows it, and brings it back from the other side.
+
+Press **RESET**. The cube waits at its opening position again. **PULL** offers other starting displacements, or you can take the cube and move it yourself. Your hand can move in three dimensions; the handle keeps only the horizontal part, limited to one and a half metres on either side. Letting go starts from rest. This experiment deliberately leaves out the speed of your throw.
+
+That is already a choice about the body we are making. A release could carry your hand&#x27;s velocity into the next movement. Here it carries a position, while velocity begins at zero. Compare two releases before choosing which would be useful for another machine.
+
+Try **DAMP** once, from FREE to LIGHT. RESET and RELEASE give it the same beginning. The cube still crosses the line, but its excursions shrink.
+
+Now reveal **PARTS**. The cyan spring arrow points towards the resting place. The orange damping arrow points against the current velocity. On the way in, the arrows oppose one another. After the cube crosses the line, both can point back against its continuing journey. The gold arrow is their sum. The wall shows the same three signed forces, at the same scale, without following the cube.
+
+The drag rule from the previous room has joined another rule:
+
+```gdscript
+var force: float = -stiffness * displacement - damping_coefficient() * velocity
+velocity += (force / mass_value) * STEP
+displacement += velocity * STEP
+```
+
+**RULE** brings those updates onto the wall. One term asks where the body is relative to rest. The other asks how it is moving. Divide their sum by mass and acceleration appears; add its contribution to velocity, then use the new velocity to change position.
+
+The cube does not consult a cosine to find its next address. This one-dimensional model computes the next state from the current one, at 120 steps per model second. Its pickable cube displays that state. It is not a second, freely colliding physics body, and its coil does not push the visitor. The rail assumes vertical support; gravity and contact friction have been left out.
+
+The opening mass is two kilograms and the spring stiffness is eight newtons per metre. With damping off, RESET and RELEASE, then compare a heavier **MASS** from the same start. It takes longer to cross the line. Return to two kilograms and increase **SPRING**: a stiffer spring brings it through sooner. The buttons cycle through one, two and four kilograms, and four, eight and sixteen newtons per metre.
+
+Changing those values during motion keeps position and velocity. It does not promise to keep energy. Stiffening a stretched spring changes the energy attributed to that state; replacing mass while keeping velocity does too. The edit is an intervention in the apparatus, not a free transformation of an isolated system.
+
+Continue through the DAMP settings. At CRITICAL, release from rest on one side and watch it approach without crossing. At HEAVY, it also approaches without crossing, but more slowly. Extra resistance has delayed the return. Try the comparison from the same displacement: the setting that removes movement most strongly need not bring the body to its resting place soonest.
+
+Those names are tied to the chosen mass and stiffness. The damping coefficient is computed from a ratio:
+
+```gdscript
+return 2.0 * RATIOS[damping_index] * sqrt(stiffness * mass_value)
+```
+
+FREE, LIGHT, CRITICAL and HEAVY use ratios of zero, a quarter, one and two and a half. Changing mass or stiffness changes the coefficient required to keep that ratio. The names describe this linear, undriven model; the return we compared begins from rest. They do not prescribe a good rhythm for every body.
+
+The word *restoring* gives a direction a purpose. Back to what? Here there is a visible line and an explicit displacement measured from it. We can inspect the chosen centre. A system that calls its preferred state normal may make its reference harder to see. The useful question is not whether returning is always desirable. It is which differences the apparatus returns, which it damps, and which it never allowed to enter.
+
+The hand&#x27;s sideways travel was discarded. Its throwing speed was discarded. The cube&#x27;s horizontal velocity, once released, is precisely what lets it pass through the place it was being brought back to. What was excluded and what was retained both helped make this body possible.
+
+There are further limits. A long computer stall advances at most a quarter of a model second on the next update. If an intervention sends the cube outside the observation frame, beyond 2.25 metres of displacement, FRAME EXIT holds its outgoing state. No imaginary collision is supplied to make the frame seem like a wall. And the finite update can introduce numerical error even when damping is off. The recurring movement is something to examine, not a promise of perfect repetition.
+
+Other balances, springs and pendulums remain farther into this hall. Among them hang two mobiles after Alexander Calder, who made the first in 1931: every arm balanced so that weight times distance is equal on both sides, the crank you turned two halls ago hung up and at rest. One carries painted discs; the other the museum&#x27;s own objects.[^calder] A similar swing may be prescribed directly from time; the older tall pendulum does exactly that. Looking alike does not establish the same mechanism. The question follows you from one apparatus to the next.
+
+&lt;!-- @ --&gt;
+
+We will return to oscillation in Wavefunctions. There a pendulum leaves a history we can walk beside, and returning motion becomes material for sampling, phase, spatial patterns and sound. Here we have established a smaller thing to carry: a force can bring a body back without telling it to stop there.
+
+Next, the timing machines. What happens when several returning movements share a clock, or begin to fall out of step?
+
+[^calder]: Alexander Calder made his first mobiles in 1931; the name was Marcel Duchamp&#x27;s. The two here are calder_mobile and calder_object_mobile: each disc&#x27;s mass is its area times a three-millimetre sheet times the density of aluminium, and each arm&#x27;s pivot is placed where the two moments cancel, weight times distance on either side. They do not move. The balance is arithmetic, as the Equilibrium hall in Form Finding says at length.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act4b_Oscillation/tutorial.md">Raw captured source</a></p><pre># Restoring Forces and Balance
+
+This hall builds on accumulated velocity in Motion and linear drag in Kinetic Forces. Its one primary, spring_tower with lesson:restoring_forces, uses a horizontal spring-damper variant. The legacy tower remains a prescribed cosine animation elsewhere. The later Wavefunctions chapter develops rhythm, records, phase and sound.
+
+## State and update
+
+restoring_forces.gd stores scalar displacement x in metres, velocity v in m/s, mass m in kg and stiffness k in N/m. It integrates F = -kx - cv with semi-implicit Euler: velocity first, then position using the new velocity. A 1/120 s accumulator produces identical results for 30/60 Hz frame partitions. Each external update caps catch-up at 0.25 seconds. The frozen XRToolsPickable is the model&#x27;s view and input handle, not an independently simulated rigid body.
+
+Default x=1.25, v=0, m=2, k=8, damping ratio zero, initially held. A horizontal rail assumes support: gravity, contact friction and collision forces are absent. Equilibrium is x=0. The drawn coil stretches between x=-3.2 and the cube; its geometry is illustrative and is not a soft-body solver.
+
+Damping coefficient c=2*zeta*sqrt(k*m), in kg/s. Ratios are 0, 0.25, 1 and 2.5. Critical/overdamped non-crossing comparisons use release from rest in this linear undriven model. Parameter changes retain x and v. Changing m/k can alter calculated energy; changing either recalculates c to retain the selected ratio.
+
+## Input
+
+Two banks offer PULL / RELEASE / RESET and DAMP / MASS / SPRING / PARTS / RULE. PULL cycles held displacements -1.25, +0.625, +1.25; RESET returns to +1.25. Both zero velocity, elapsed model time and crossings while retaining parameters and reveal settings. RELEASE zeros velocity and begins from the current position. DAMP cycles the four ratios; MASS cycles 2/4/1; SPRING cycles 8/16/4.
+
+Actual XRTools pickup and drop signals are connected. spring_handle.gd runs at physics priority 100 after the grab driver, projects its requested world position onto local X, clamps to +/-1.5 m, and keeps Y=1.35, Z=0 with fixed orientation. Dropping begins motion from rest, ignoring throwing velocity. PULL/RELEASE/RESET are ignored while grabbed. The handle belongs to no_gravity_gun and releases frozen. Collision mask zero prevents a competing contact solver. Tracked-hand comfort is untested.
+
+## Displays and limits
+
+PARTS shows cyan restoring, orange damping and gold total force, on the body and wall. Both use the same samples and 0.04 m/N scale. RULE reveals the update; numerical readouts run at 10 Hz. Coil mesh and six arrow rigs are allocated once and transformed thereafter. There is no time-history plot here.
+
+A crossing counts a displacement sign change during free integration. The cutoff at |x|&gt;2.25 freezes outgoing state and retains velocity in the readout. It does not bounce, clamp the model to a wall or dissipate its velocity. The model continues arbitrarily small motion near rest rather than inventing an exact stopping threshold.
+
+## Space and checks
+
+All 22 identities remain. A sixteen-row arrival extends the room from 30x30 to 30x46. Spring moves to (15,8) at unit scale; the other 21 placements shift together. surreal_kinetic_sculpture is compacted to scale 0.12 and raised 0.7 m. Its opt-in presentation:museum disables standalone lights, cameras and screen overlays while retaining its moving forms.
+
+The actual museum probe verifies analytical free-spring response, energy error tolerance, damping comparisons, mass response, frame partition agreement, live pointer controls, supplied XRTools pickup/drop, retained state, force signs, matching wall arrows, allocation stability and sampled approaches. See restoring-forces-check.json in the illustrated guide for the current count. Headset testing and detailed supporting-exhibit review remain open.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act4b_Oscillation/intent.md">Raw captured source</a></p><pre># Restoring Forces and Balance
+
+Question: does arriving at equilibrium mean stopping?
+
+Do: release the waiting cube; reset and compare damping; grab a displacement or use PULL. Observe crossing and settling before PARTS and RULE.
+
+One primary: spring_tower with lesson:restoring_forces. Twenty other supporting artifacts and one decoration remain. The earlier pendulum_hall is supporting; it prescribes cosine and is not evidence of integrated dynamics.
+
+Critical seam: the hand supplies only displacement; the released body then carries accumulated velocity. A visible zero line makes the preferred state inspectable. This is a numerical 1D experiment, not a haptic force on the player.
+
+Next: the existing Change_Choreography timing machines, then Gravity. Later: Wavefunctions develops rhythm, phase, sampling, spatial waves and sound without repeating this whole force introduction.
+
+Headset reach, comfort and sustained performance remain open. The record and illustrated guide carry desktop checks and actual museum captures.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act4b_Oscillation/critical.md">Raw captured source</a></p><pre># Which return is being requested?
+
+The spring&#x27;s reference is visible: displacement is measured from the line across the floor. Calling its influence restoring gives that reference a direction of preference. This does not make every restoring force a political metaphor. It gives us a particular apparatus in which the reference, response and exclusions can be inspected before extending the question elsewhere.
+
+The force approaches zero at equilibrium; velocity need not. Reaching the favoured place can be a passage through it. A model that records only position loses the distinction between two arrivals carrying opposite velocities. Previous halls gave the body a history through accumulation. The spring makes that history consequential at the place that could have been mistaken for completion.
+
+Damping adds another preference, opposing velocity rather than displacement. Stronger damping can delay the return. The fastest non-crossing return from rest in this linear model is a specified criterion, not a universal measure of a good body. A resonant instrument, a door closer and a springboard could value different responses. This room supplies one rule to investigate; it does not implement all those applications.
+
+The handle also has a policy. It accepts horizontal displacement, discards the other axes, and discards throwing speed at release. Those reductions make a repeatable experiment possible. They also decide which bodily differences can affect the next state. A different release policy could be tested without pretending this one was a neutral transmission of the hand.
+
+The body and wall share instantaneous force samples. That correspondence supports a visual argument: compare the sum and its parts while the body responds. It does not turn every decorative arrow into evidence of an applied force. The supporting tall pendulum prescribes a cosine; the new spring integrates a state. Similar pictures leave that difference unresolved until the code is examined.
+
+The room claims no measured entropy, physical haptic resistance or universal threshold of queerness. Its opening is specific: the preferred place, the retained velocity and the excluded gesture do not say the same thing about what a return can be.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Vectors_Act4b_Oscillation/artifacts.md">Raw captured source</a></p><pre># Restoring Forces and Balance - artifacts
+
+The book has one primary: `spring_tower`, using its `restoring_forces` variant. All 22 identities remain. The earlier catalogue is preserved in the before record.
+
+| Role | Artifact |
+| --- | --- |
+| secondary | `momentum_cradle` |
+| secondary | `bounce_well` |
+| secondary | `lever_balance` |
+| secondary | `pendulum_hall` |
+| primary | `spring_tower` |
+| secondary | `calder_mobile` |
+| secondary | `calder_object_mobile` |
+| secondary | `weather_vane` |
+| secondary | `example_6_4_windmill_vr` |
+| secondary | `mass_spring_damper` |
+| secondary | `coupled_pendulums` |
+| secondary | `spring_system` |
+| secondary | `spring_network` |
+| secondary | `harmonic_motion_demo` |
+| secondary | `slingshot_pull` |
+| secondary | `vector_joint_playground` |
+| secondary | `work_energy_demo` |
+| secondary | `ChainSwing` |
+| secondary | `ConeTwistBag` |
+| secondary | `HingeCrank` |
+| secondary | `SliderPress` |
+| decoration | `surreal_kinetic_sculpture` |
+
+The supporting pendulum_hall and legacy spring tower prescribe cosine. The new spring variant integrates its state; the wall force display shares that model. Supporting exhibits have not all been recertified.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Vectors_Act4b_Oscillation/summary.md">Raw captured source</a></p><pre>Restoring Forces and Balance introduces an integrated horizontal spring-damper model through one primary, spring_tower. The visitor releases a constrained cube, compares free/light/critical/heavy damping, and reveals the current force budget on the body and wall. It builds on velocity accumulation and drag; the later Wavefunctions chapter develops rhythm, sampling and sound. All 22 artifact identities remain, with older pendulums and balances supporting the encounter.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act4b_Oscillation/blurb.md">Raw captured source</a></p><pre>A spring brings a body back to its resting place. The body goes through. Displace, release and change the damping: which part of the movement is being opposed?
+</pre></section></body></html>

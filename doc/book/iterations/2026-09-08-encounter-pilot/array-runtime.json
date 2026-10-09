@@ -1,0 +1,205 @@
+{
+	"checks": 21,
+	"failures": [],
+	"observations": [
+		{
+			"address_rule": "cube-attached label leaves with occupant",
+			"after": [
+				[
+					1,
+					1,
+					0,
+					1
+				]
+			],
+			"before": [
+				[
+					1,
+					1,
+					1,
+					1
+				]
+			],
+			"case": "row default"
+		},
+		{
+			"address_remains": true,
+			"after": [
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					0,
+					1,
+					1
+				]
+			],
+			"before": [
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				]
+			],
+			"case": "grid",
+			"config": {
+				"cols": 4,
+				"notation": "plate",
+				"rows": 4
+			},
+			"removed_address": [
+				3,
+				1
+			]
+		},
+		{
+			"address_remains": true,
+			"after": [
+				[
+					1,
+					1
+				],
+				[
+					1,
+					1
+				],
+				[
+					1,
+					0
+				]
+			],
+			"before": [
+				[
+					1,
+					1
+				],
+				[
+					1,
+					1
+				],
+				[
+					1,
+					1
+				]
+			],
+			"case": "grid",
+			"config": {
+				"cols": 3,
+				"notation": "plate",
+				"rows": 2
+			},
+			"removed_address": [
+				2,
+				1
+			]
+		},
+		{
+			"address_remains": false,
+			"after": [
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					0,
+					1,
+					1
+				]
+			],
+			"before": [
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				],
+				[
+					1,
+					1,
+					1,
+					1
+				]
+			],
+			"case": "grid",
+			"config": {
+				"cols": 4,
+				"notation": "label",
+				"rows": 4
+			},
+			"removed_address": [
+				3,
+				1
+			]
+		},
+		{
+			"case": "single pickup",
+			"non_player_overlap": "no collection",
+			"outside_wait": "no collection",
+			"scope": "physics overlap plus repeated handler calls; no controller or reachability claim",
+			"score_delta": 1
+		}
+	],
+	"passed": true
+}

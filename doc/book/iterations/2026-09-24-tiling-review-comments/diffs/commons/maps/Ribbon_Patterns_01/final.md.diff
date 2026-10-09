@@ -1,0 +1,16 @@
+--- before/commons/maps/Ribbon_Patterns_01/final.md
++++ commons/maps/Ribbon_Patterns_01/final.md
+@@ -1,10 +1,12 @@
++# A mark acquires an inside
++
+ The mark has acquired an inside. Can you find it?
+ 
+ In the previous room, one source could repeat, reverse and slip across a plane. The corridor wrapped a pattern around several faces. Here, look between the faces. There are addresses behind the ones you can see.
+ 
+ <!-- @grid_2d_4x4 -->
+ 
+-Begin with the low array. Sixteen cubes hold the same arrangement of four colours you have met in the pattern lessons. Find the blue corner, then the bend in red. The pale cells belong to the array too. Pale does not mean absent.
++The two grids near the entrance begin this study. The bars, shelves and sorting race further along the hall offer other ways to revisit arrays; start here with the low array. Sixteen cubes hold the same arrangement of four colours you have met in the pattern lessons. Find the blue corner, then the bend in red. The pale cells belong to the array too. Pale does not mean absent.
+ 
+ These cubes have bodies, but their addresses use only two indices: a row and a column. Giving a cell a visible thickness has not added a third index to its data. The room has made a two-dimensional arrangement out of three-dimensional objects.
+ 

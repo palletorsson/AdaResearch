@@ -1,0 +1,148 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Keep correcting the connection</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><h1>3. Relaxation</h1><div class="spread"><article><h1>Keep correcting the connection</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Current and previous positions</li>
+<li>Pinned endpoints</li>
+<li>Distance constraints</li>
+<li>Iteration budget</li>
+<li>Residual error</li>
+</ul>
+<p>At the cloth bench, switch WIND off, then compare PASSES. Each choice resets the same cloth. Look at its worst length error as well as its shape. Nearby frozen forms retain the result of earlier corrections; their stillness does not mean the calculation was exact.</p>
+<h2>What you bring</h2>
+<p>Keep the endpoint points, arrays and neighbouring-index loop. Forces supplied gravity, time steps and damping. Here positions and their previous values carry the motion; a separate correction loop enforces approximate lengths.</p>
+<h2>Build inside the museum</h2>
+<p>Reduce the cloth to seven points and six links. Only the endpoints are held. Each STEP advances one fixed 1/60-second model step, then repeats the constraint corrections. The chain has 2.7 m of requested link length across an initial two-metre span, so it has room to hang.</p>
+<p>Save <code>03_relaxation.gd</code> beside the <a href="../../../doc/book/course/formfinding-shared-code.md">complete shared code</a>, on your existing <code>PointStudy</code> Node3D. The inspected working bay is hall-local <code>(16, 0, 7)</code> metres, floor level, upright, unit scale. The museum supplies the floor, camera, light, hands and button scene. The larger artifact remains available for comparison.</p>
+<h2>Complete code — 03_relaxation.gd</h2>
+<!-- student-code:03_relaxation.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+const COUNT := 7
+const REST := 0.45
+const DT := 1.0 / 60.0
+var passes := 4
+var positions: Array[Vector3] = []
+var previous: Array[Vector3] = []
+var points: Array[Node3D] = []
+var links: Array[MeshInstance3D] = []
+var readout: Label3D
+var steps := 0
+
+func _ready() -&gt; void:
+    for i in COUNT:
+        points.append(make_point(Vector3.ZERO, i == 0 or i == COUNT - 1))
+        if i &gt; 0:
+            links.append(rod())
+    readout = caption(&quot;&quot;, Vector3(0, 2.3, 0))
+    button(&quot;STEP&quot;, Vector3(-0.55, 1, -0.8), step_once)
+    button(&quot;PASSES&quot;, Vector3(0, 1, -0.8), change_passes)
+    button(&quot;RESET&quot;, Vector3(0.55, 1, -0.8), restart)
+    restart()
+
+func restart() -&gt; void:
+    positions.clear()
+    for i in COUNT:
+        positions.append(Vector3(-1.0 + 2.0 * i / (COUNT - 1), 1.7, 0))
+        points[i].position = positions[i]
+    previous = positions.duplicate()
+    steps = 0
+    redraw()
+
+func change_passes() -&gt; void:
+    passes = 12 if passes == 1 else 1
+    restart()
+
+func step_once() -&gt; void:
+    for i in [0, COUNT - 1]:
+        positions[i] = to_local(points[i].global_position)
+        previous[i] = positions[i]
+    for i in range(1, COUNT - 1):
+        var here := positions[i]
+        positions[i] += (here - previous[i]) * 0.99 + Vector3.DOWN * 3.0 * DT * DT
+        previous[i] = here
+    for pass_index in passes:
+        for i in COUNT - 1:
+            correct_pair(i, i + 1)
+    steps += 1
+    redraw()
+
+func correct_pair(a: int, b: int) -&gt; void:
+    var d := positions[b] - positions[a]
+    if d.length() &lt; 0.00001:
+        return
+    var correction := d * (d.length() - REST) / d.length()
+    var wa := 0.0 if a == 0 else 1.0
+    var wb := 0.0 if b == COUNT - 1 else 1.0
+    positions[a] += correction * wa / (wa + wb)
+    positions[b] -= correction * wb / (wa + wb)
+
+func worst_error() -&gt; float:
+    var worst := 0.0
+    for i in COUNT - 1:
+        worst = maxf(worst, absf(positions[i].distance_to(positions[i + 1]) / REST - 1))
+    return worst
+
+func redraw() -&gt; void:
+    for i in range(1, COUNT - 1):
+        points[i].position = positions[i]
+    for i in links.size():
+        join(links[i], positions[i], positions[i + 1])
+    readout.text = &quot;%d passes | step %d\nWorst length error %.2f%%&quot; % [passes, steps, worst_error() * 100]
+</code></pre>
+<h2>Read the operation</h2>
+<p>positions and previous are separate arrays. duplicate() preserves the previous record while the current one changes. For an interior point, here − previous[i] is displacement during the preceding fixed step, not metres per second. Multiplying by 0.99 damps that displacement. Gravity adds acceleration × DT². Jolt does not integrate these interior points.</p>
+<p>A link compares its current length with REST. correct_pair moves its ends toward the requested distance. An endpoint has correction weight zero; a free point has weight one. Two free ends split a correction; beside a pin the free end takes it all. The tiny-distance guard avoids dividing by zero. It cannot invent a direction for coincident points.</p>
+<p>Later corrections can disturb earlier links, so one pass need not satisfy the entire chain. Repeating the pass reduces the remaining error in this comparison. It costs more work and does not certify every possible configuration. worst_error reports the largest absolute relative length error. Moving either held endpoint supplies a new pin on the next STEP; RESET returns both original pins. PASSES switches to 1, then 12, resetting each time. The initial budget is 4.</p>
+<h2>Predict, then change</h2>
+<p>From RESET, compare one and twelve passes after the same 420 steps. You may drive step_once() with a bounded for loop for this measurement. Predict which budget leaves less worst error. Keep the same pins, time step, initial positions and damping. Do not compare one fresh chain with another that has already been settling.</p>
+<h2>Build another experiment</h2>
+<p>Reconstruct a second chain with the same seven points but only the first point pinned. Update the correction weights and the integration range together so the final point is free. Predict its motion before stepping. Show that the first point stays at its pin and that the last point can move. Then explain why leaving the old endpoint weight at zero would contradict your new model.</p>
+<h2>Carry onward</h2>
+<p>Constraints can shape a configuration through repeated local corrections. Equilibrium next asks when a simpler relation lets you calculate a pose directly.</p>
+<h2>Model notes</h2>
+<p>This study is a fixed-step position solver with no contact response for its interior markers or rods. Keep pins near their initial positions and above the floor. The full cloth includes a two-dimensional spring network and optional wind. The chain is not an exact continuous catenary.</p></article><article><h1>What a budget leaves</h1>
+<p>A released mesh settles into a shape nobody specified, and what stands afterwards is a fossil of the forces that made it.</p>
+<p>The last hall let us draw a sag and evaluate a formula. Here a connected shape keeps a history of being changed. A frame budget allows only so many corrections: nudge the points, move to the next constraint, begin another pass. The cloth continues; the lattice and the vessel keep the pose reached after a chosen number of steps. Their stopping times were supplied with their rules.</p>
+<h2>Nudged, not solved</h2>
+<!-- @verlet_workbench -->
+
+<p>A magenta cloth of ten by eight points hanging from its two top corners. It receives sixty settling steps before you arrive, then continues in fixed one-sixtieth-second steps. Watch it before touching the controls. A changing sideways gust keeps disturbing it; motion here does not mean that a single settling process has failed to finish.</p>
+<p>The panel now offers PASSES, RESET and WIND. PASSES cycles through nudged, worked, pressed and held: one, four, eight and twelve constraint passes per step. Each choice restarts the same grid and its sixty preliminary steps. Switch WIND off to compare the corrections under gravity alone. The bench begins at four passes. Press PASSES through eight and twelve until the readout says nudged: one pass. The next press returns to worked: four passes. Does the cloth hold the same outline? RESET lets you return to the beginning without changing the chosen settings.</p>
+<pre><code class="language-gdscript">var pos: Vector3 = positions[i]
+var prev: Vector3 = prev_positions[i]
+var vel: Vector3 = (pos - prev) * damping
+var new_pos: Vector3 = pos + vel + gravity * dt * dt
+prev_positions[i] = pos
+positions[i] = new_pos
+</code></pre>
+<p>There is no separately stored velocity in that code. In the position update used by Loup Verlet in 1967, where a point is going is implied by where it just was: keep two positions, and their difference carries the motion.<sup id="fnref:verlet"><a class="footnote-ref" href="#fn:verlet">1</a></sup> The temporary variable called <code>vel</code> holds that difference after damping. A point at rest, released, falls gravity times a step squared on its first update. At sixty steps a second, this bench's gravity gives less than a millimetre. The constraints then correct those proposed positions.</p>
+<p>Now read MEAN and WORST. They report spring-length errors relative to the lengths we asked the cloth to keep. A pass corrects each spring in turn, moving a free endpoint by half the current error scaled by stiffness; a correction can disturb a neighbouring spring. More passes give those relations another chance to agree.</p>
+<p>With WIND off, compare the readings as the step count reaches 420—about six seconds after each restart, which already includes sixty preliminary steps. At one pass, the mean absolute error is about 1.4% and the worst spring error about 34%. At four passes, they fall to about 0.36% and 8.9%. The average has become small while one local relation is still far from its request. Look between those two numbers. What would we overlook if the bench reported only the reassuring one?</p>
+<!-- @mass_spring_bench -->
+
+<p>The lattice version stands on a bench: forty-eight pink masses, a hundred and seventy-nine cyan wires, rocking eight degrees either side on an eighteen-second cycle. Compare its movement with the cloth. Are the relations between its points still changing, or is one retained form being turned?</p>
+<p>All eighty of its solver steps ran before the room finished loading. The rocking carries a frozen result: a grid with a random hundredth-of-a-metre disturbance per particle, rest lengths, gravity and a fixed time to act. Nobody placed each vertex of the final slump by hand. Somebody did choose the conditions from which it came.</p>
+<!-- @frozen_glass_vessel -->
+
+<p>And here is where it stops being a demonstration. A sphere of glass, fifteen rings by twenty-two segments, three hundred and thirty particles, of which the eighty-eight above the top eighth are pinned as if gripped by a blowpipe. Every free vertex is pushed out by a fifth as an initial expansion. Spring rest lengths are made from that expanded shape, then the whole thing is dropped into gravity for two hundred steps of the same solver the cloth is running.</p>
+<p>It runs once, when the room loads, and stops. The pose it happens to be in at that moment is the vessel. The glass lets you see an inside that its closed collision surface keeps your moving body outside. Transparency offers a view, not an entrance. The falling has finished; the boundary it left can still meet you.</p>
+<p><img alt="The frozen glass vessel with the cloth behind it in the museum" src="file:///C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/figures/formfinding/glass-keeps-a-boundary-museum.png" /></p>
+<p><em>The cloth keeps changing. The vessel keeps a moment, and the surface of that moment keeps a boundary.</em></p>
+<p>In the source, changing stiffness, gravity or the number of settling steps makes other vessels possible; those controls are not on this exhibit. A different duration keeps a different moment of the process. The clock is part of the genome here. The form records the conditions that acted on it and how long they were allowed to act.</p>
+<!-- @science_screen -->
+
+<p>A screen, and the thing this room is about is the one thing no still image can hold. Every shape here is a duration: eighty steps, two hundred steps, a cloth still taking another step. A picture of a vessel contains none of the falling that made it, which is exactly what a fossil is and exactly what the vessel is.</p>
+<!-- @ -->
+
+<h2>A fossil of forces</h2>
+<p>The vessel in this room was designed through conditions rather than by placing its final vertices. What you see is the frozen output of a simulation, kept because it was interesting, in the same way a fossil is a shape that some process left behind and then stopped.</p>
+<p>That is the chapter's argument at its most literal. Nobody drew the amphora. Somebody chose a stiffness, a pin ring, a pulse and a number of steps, and the amphora is what those choices left.</p>
+<p>Next: a balance written into the relations between parts. How can we tell an encoded equilibrium from a form that has physically found one?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:verlet">
+<p>Loup Verlet, <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.159.98">“Computer Experiments on Classical Fluids. I”</a> (1967). The bench adds distance-constraint corrections to its position update; those corrections and their pass budget are part of this implementation. The corrections are younger than the integrator: Thomas Jakobsen, "Advanced Character Physics" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.&#160;<a class="footnote-backref" href="#fnref:verlet" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></main>

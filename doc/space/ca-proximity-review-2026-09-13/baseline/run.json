@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-13T23:33:35+02:00",
+  "finished": "2026-09-13T23:33:53+02:00",
+  "pid": 41372,
+  "exit": 1,
+  "checks": 3,
+  "failures": [
+    "all seven authored works exist"
+  ],
+  "source_sha256": {
+    "ada_run/ca_proximity_probe_base.gd": "df87134637aabd2ccc7421683d9d9e15efc6af2d98d10c2a745b6ce1df2577a3",
+    "ada_run/ca_proximity_acceptance.gd": "8170c7babb629ef432b242b92c814d79b71e2db43c69c281e71a423887b2956f",
+    "commons/maps/CA_ExpandingSpace/map_data.json": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-proximity-review-2026-09-13/review-plan.json": "894ef370476fb6b35426c1ed7c6678fc55b50dc459f3bb08c73d672cfb13643c",
+    "algorithms/cellularautomata/living_architecture/decaying_bridge.gd": "67157d8068d0a61cbbe87e7e2c53541094a25b0493f4f0e33a68d4a5d427402e"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

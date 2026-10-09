@@ -1,0 +1,279 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "three distinct vector stations share this museum hall",
+      "passed": true
+    },
+    {
+      "name": "direction: familiar point radius and collision",
+      "passed": true
+    },
+    {
+      "name": "direction: one nearby control",
+      "passed": true
+    },
+    {
+      "name": "direction: annotation follows the moved point",
+      "passed": true
+    },
+    {
+      "name": "direction: live values display the actual input",
+      "passed": true
+    },
+    {
+      "name": "direction: direction is a thin solid cylinder",
+      "passed": true
+    },
+    {
+      "name": "direction: rod reaches both endpoints",
+      "passed": true
+    },
+    {
+      "name": "direction: cylinder orientation follows displacement",
+      "passed": true
+    },
+    {
+      "name": "3-4 displacement has magnitude 5",
+      "passed": true
+    },
+    {
+      "name": "unit direction is independent of magnitude",
+      "passed": true
+    },
+    {
+      "name": "separate unit display has length one",
+      "passed": true
+    },
+    {
+      "name": "zero hides both direction rods and marks undefined",
+      "passed": true
+    },
+    {
+      "name": "opposite vertical direction remains finite",
+      "passed": true
+    },
+    {
+      "name": "desktop grab marks held point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves desktop-held point alone",
+      "passed": true
+    },
+    {
+      "name": "desktop drop leaves a frozen readable point",
+      "passed": true
+    },
+    {
+      "name": "actual XRTools pickup owns the point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves XR-held point alone",
+      "passed": true
+    },
+    {
+      "name": "XR drop preserves frozen reading",
+      "passed": true
+    },
+    {
+      "name": "reset restores initial point",
+      "passed": true
+    },
+    {
+      "name": "addition: familiar point radius and collision",
+      "passed": true
+    },
+    {
+      "name": "addition: one nearby control",
+      "passed": true
+    },
+    {
+      "name": "addition: annotation follows the moved point",
+      "passed": true
+    },
+    {
+      "name": "addition: live values display the actual input",
+      "passed": true
+    },
+    {
+      "name": "addition: direction is a thin solid cylinder",
+      "passed": true
+    },
+    {
+      "name": "addition: rod reaches both endpoints",
+      "passed": true
+    },
+    {
+      "name": "addition: cylinder orientation follows displacement",
+      "passed": true
+    },
+    {
+      "name": "sum is 1 5 3",
+      "passed": true
+    },
+    {
+      "name": "translated b begins at a and arrives at sum",
+      "passed": true
+    },
+    {
+      "name": "swapping keeps the same arrival",
+      "passed": true
+    },
+    {
+      "name": "opposites cancel without a degenerate visible cylinder",
+      "passed": true
+    },
+    {
+      "name": "desktop grab marks held point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves desktop-held point alone",
+      "passed": true
+    },
+    {
+      "name": "desktop drop leaves a frozen readable point",
+      "passed": true
+    },
+    {
+      "name": "actual XRTools pickup owns the point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves XR-held point alone",
+      "passed": true
+    },
+    {
+      "name": "XR drop preserves frozen reading",
+      "passed": true
+    },
+    {
+      "name": "reset restores initial point",
+      "passed": true
+    },
+    {
+      "name": "projection: familiar point radius and collision",
+      "passed": true
+    },
+    {
+      "name": "projection: one nearby control",
+      "passed": true
+    },
+    {
+      "name": "projection: annotation follows the moved point",
+      "passed": true
+    },
+    {
+      "name": "projection: live values display the actual input",
+      "passed": true
+    },
+    {
+      "name": "projection: direction is a thin solid cylinder",
+      "passed": true
+    },
+    {
+      "name": "projection: rod reaches both endpoints",
+      "passed": true
+    },
+    {
+      "name": "projection: cylinder orientation follows displacement",
+      "passed": true
+    },
+    {
+      "name": "rail keeps X and remainder keeps Y",
+      "passed": true
+    },
+    {
+      "name": "perpendicular movement preserves projection",
+      "passed": true
+    },
+    {
+      "name": "projection retains its negative sign",
+      "passed": true
+    },
+    {
+      "name": "parts recover the original vector",
+      "passed": true
+    },
+    {
+      "name": "desktop grab marks held point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves desktop-held point alone",
+      "passed": true
+    },
+    {
+      "name": "desktop drop leaves a frozen readable point",
+      "passed": true
+    },
+    {
+      "name": "actual XRTools pickup owns the point",
+      "passed": true
+    },
+    {
+      "name": "reset leaves XR-held point alone",
+      "passed": true
+    },
+    {
+      "name": "XR drop preserves frozen reading",
+      "passed": true
+    },
+    {
+      "name": "reset restores initial point",
+      "passed": true
+    },
+    {
+      "name": "four directly grabbable black points",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: direction",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: addition",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: projection",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: direction-moved",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "expected_reset": [
+      0.899999976158142,
+      1.60000002384186,
+      0.600000023841858
+    ],
+    "point_parent": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@721",
+    "reset_after_tick": [
+      0.699999809265137,
+      1.51999998092651,
+      0.800000190734863
+    ],
+    "reset_immediate": [
+      0.899999976158142,
+      1.60000002384186,
+      0.600000023841858
+    ],
+    "reset_settled": [
+      0.899999618530273,
+      1.60000002384186,
+      0.600000381469727
+    ],
+    "scope": "Geometric vector operations, actual PointBody and XRTools pickup; no new force law."
+  },
+  "passed": true,
+  "scope": "Three stations in the real museum; live numeric labels, pooled solid cylinders, zero/signed/cancellation cases, desktop and XRTools grab/release/reset. Physical headset readability and reach untested."
+}

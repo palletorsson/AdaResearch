@@ -1,0 +1,17 @@
+{
+  "next": "Trans_Translation",
+  "vr": true,
+  "bounds": true,
+  "roomscale": true,
+  "exit_cell": [
+    5,
+    22
+  ],
+  "exit_faces_hall": true,
+  "isolate_roaming_foes": true,
+  "staged": true,
+  "shot": "res://doc/book/iterations/2026-09-29-transformation-passages/Trans_Introduction-exit.png",
+  "room": "Trans_Introduction",
+  "sequence": "transformation",
+  "run": "res://ada_run/encounter_pilot/Trans_Introduction/"
+}

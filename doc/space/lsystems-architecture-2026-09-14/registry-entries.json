@@ -1,0 +1,917 @@
+{
+  "catalyst_vent": {
+    "category": "hazards",
+    "complexity": "intermediate",
+    "lookup_name": "catalyst_vent",
+    "name": "Catalyst Vent",
+    "description": "Biome corruption seam that emits CatalystFoe bodies on a timer until wave_size is reached, then goes quiet. Tall translucent grey pillar so the spawn point is visible from any camera angle. VR mirror of the /editor e:RATE:WAVE utility token.",
+    "interaction": "passive",
+    "map_ready": true,
+    "include_in_map_data": true,
+    "dev_themes": [
+      "gameplay",
+      "hazards",
+      "catalyst",
+      "spawner"
+    ],
+    "map_sequences": [
+      "primitives",
+      "transformation",
+      "forces",
+      "swarmintelligence"
+    ],
+    "qfep_connection": "spawn_source",
+    "footprint": [
+      1,
+      4,
+      1
+    ],
+    "tags": [
+      "catalyst",
+      "vent",
+      "spawner",
+      "vr"
+    ],
+    "scene": "res://commons/hazards/catalyst_foe/catalyst_vent.tscn",
+    "measurements": {
+      "aabb_size": [
+        0.92,
+        4.02,
+        0.92
+      ],
+      "aabb_center": [
+        0.0,
+        1.99,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 4.02,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    }
+  },
+  "catalyst_prompter_box": {
+    "category": "tools",
+    "complexity": "simple",
+    "lookup_name": "catalyst_prompter_box",
+    "name": "Catalyst Prompter Box",
+    "description": "The catalyst presented from below: a one-meter floor hatch (one grid cell) whose diamond-plate lid tips open on a gas-strut angle when the player approaches. The crystal rises from the glowing recess; on pickup or walk-away the lid closes, and a timed lease returns the crystal beneath the floor. shape:flat is a flush hatch, shape:plinth a raised box.",
+    "interaction": "immersive",
+    "map_ready": true,
+    "include_in_map_data": true,
+    "dev_themes": [
+      "gameplay",
+      "hazards",
+      "catalyst"
+    ],
+    "map_sequences": [
+      "hazards",
+      "lab",
+      "testmaps"
+    ],
+    "qfep_connection": "The prompter is never seen from the audience \u2014 the understage feeds the player their lines. Same invitation as the pedestal, spoken by the floor instead of a cage.",
+    "tags": [
+      "tool",
+      "catalyst",
+      "hatch",
+      "prompter",
+      "floor",
+      "pickable",
+      "theater"
+    ],
+    "footprint": [
+      1,
+      1,
+      1
+    ],
+    "spatial_needs": {
+      "platform": "floor",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 0,
+        "left": 0,
+        "right": 0
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "becoming_catalyst",
+        "catalyst_pedestal"
+      ],
+      "preferred_zone": "any"
+    },
+    "scene": "res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn",
+    "dna": {
+      "promoted": "2026-07-31",
+      "stage": "2 - variation",
+      "axes": {
+        "emergence": [
+          "hatch",
+          "doors",
+          "slide",
+          "vent"
+        ],
+        "shape": [
+          "flat",
+          "plinth"
+        ]
+      },
+      "fixture": {
+        "always_open": "true"
+      },
+      "default": "emergence=hatch, shape=flat - the rear-hinged deck plate is the shipped closure and flat the shipped body, so CatalystLab_08_PrompterBox (which sets shape explicitly and never sets emergence) renders identically",
+      "was": "a single rear-hinged lid was the only way the floor could open; the artifact could stage the box but not the floor parting or the vent, even though its own brief (the catalyst emerging from box, floor, vent) names all three",
+      "note": "emergence is the how-of-arrival axis: hatch = the box lid on its gas strut, doors = the floor parting as stage trap doors, slide = the plate slipping beneath the stage, vent = no lid at all, the crystal rising through a grate in a standing light shaft (kin of catalyst_vent). The fixture pins always_open so every tile shows the offer, not eight identical closed plates."
+    },
+    "measurements": {
+      "aabb_size": [
+        1.0,
+        0.81,
+        1.0
+      ],
+      "aabb_center": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 1.0,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    }
+  },
+  "dark_sphere": {
+    "dna": {
+      "promoted": "2026-07-27",
+      "stage": "2 - variation",
+      "axes": {
+        "presence": [
+          "witness",
+          "hush",
+          "beacon",
+          "eclipse",
+          "becoming"
+        ],
+        "body": [
+          "orb",
+          "swarm",
+          "cage",
+          "cairn"
+        ]
+      },
+      "default": "presence=witness + body=orb is the legacy lineage; every witness multiplier is 1.0.",
+      "note": "The agent DEMOTED pulse_speed rather than exposing it: the identity named a rate as critical_parameter, but its own justification was about how much room the sphere takes - the rate was a proxy for presence. presence spends part of its delta on radius, which self-cancels under an AABB-fitted camera; judge hush vs witness at a fixed camera."
+    },
+    "category": "procedural",
+    "complexity": "intermediate",
+    "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "dark_sphere",
+    "map_ready": true,
+    "map_sequences": [
+      "array_tutorial",
+      "bricolage",
+      "cellularautomata",
+      "color",
+      "constraint_solvers",
+      "forces",
+      "fractals",
+      "isosurfaces",
+      "lsystems",
+      "noise",
+      "particles",
+      "patterngeneration",
+      "physicssimulation",
+      "primitives",
+      "proceduralgeneration",
+      "proceduralgeneration_all",
+      "qfeplaboratory",
+      "randomness",
+      "testmaps",
+      "transformation",
+      "unused",
+      "wavefunctions"
+    ],
+    "name": "Dark Sphere",
+    "parameters": {
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size_group": "compact"
+    },
+    "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+    "tags": [
+      "reference",
+      "atmosphere",
+      "sphere",
+      "scale_marker",
+      "lighting",
+      "geometry",
+      "procedural"
+    ],
+    "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+    "gamwell_reference": "",
+    "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+    "interactions": [
+      "observe the pulsing sphere against transformed geometry",
+      "use it as a scale and occlusion reference in the room",
+      "compare its stable silhouette with more dynamic artifacts nearby",
+      "treat it as an atmospheric marker when reading spatial change"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [
+          "sphere",
+          "cylinder"
+        ],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "unlit",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "emission",
+          "metallic",
+          "transparency",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "~1536"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.84,
+        0.95,
+        0.84
+      ],
+      "aabb_center": [
+        0.0,
+        0.48,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.95,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "dragon_room": {
+    "lookup_name": "dragon_room",
+    "scene": "res://commons/artifacts/dragon_room/dragon_room.tscn",
+    "class_name": "DragonRoom",
+    "name": "Dragon Room (the big dragon)",
+    "description": "A room-scale dragon curve, glowing.",
+    "category": "lsystems",
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "tags": [
+      "lsystem",
+      "large",
+      "dragon"
+    ],
+    "parameters": {
+      "emissive": "Bool"
+    },
+    "dev_themes": [
+      "lsystems",
+      "grammar",
+      "biome"
+    ],
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 9,
+      "clearance": {
+        "front": 2,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "front",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 9,
+      "footprint_source": "designed"
+    },
+    "measurements": {
+      "aabb_size": [
+        7.0,
+        0.32,
+        7.0
+      ],
+      "aabb_center": [
+        0.0,
+        0.06,
+        0.0
+      ],
+      "grid_cells": [
+        7,
+        7
+      ],
+      "max_dimension_m": 7.0,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      7,
+      1,
+      7
+    ]
+  },
+  "CityGenerator": {
+    "category": "procedural",
+    "complexity": "advanced",
+    "description": "Procedural pipe network using orthogonal L-System rules",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "CityGenerator",
+    "map_ready": true,
+    "map_sequences": [
+      "grammar_systems",
+      "lsystems"
+    ],
+    "name": "City Generator",
+    "parameters": {
+      "footprint": [
+        1.0,
+        6.0,
+        11.0
+      ],
+      "size_group": "world_scale"
+    },
+    "scene": "res://algorithms/lsystems/Architecture/CityGenerator.tscn",
+    "sequence": "grammar_systems",
+    "tags": [
+      "graph",
+      "l_system",
+      "procedural",
+      "simulation"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "emissive",
+        "key_properties": [
+          "emission",
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 9,
+      "clearance": {
+        "front": 2,
+        "back": 2,
+        "left": 2,
+        "right": 2
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "lsystem_dungeon",
+        "growth",
+        "floor"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 289,
+      "footprint_source": "measured_capped"
+    },
+    "measurements": {
+      "aabb_size": [
+        17.52,
+        21.53,
+        17.3
+      ],
+      "aabb_center": [
+        0.01,
+        9.24,
+        -0.12
+      ],
+      "grid_cells": [
+        18.0,
+        18.0
+      ],
+      "max_dimension_m": 21.53,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      18.0,
+      1,
+      18.0
+    ],
+    "spatial_profile": {
+      "dir_group": "floor",
+      "range": 60,
+      "density": "high",
+      "min_clearance": 2,
+      "stack_priority": 0.85,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "grammar_seed": {
+    "category": "lsystems",
+    "complexity": "intermediate",
+    "description": "The L-systems seam and the compression thesis made literal. This plant is not stored - it is a tiny grammar (axiom + two rewrite rules) expanded a few times and walked by a turtle. A handful of bytes become a forest: a short seed with a costly branching run. The cost of the gift is reproducibility - run the same grammar again and the tree returns leaf for leaf. The organic was a formula.",
+    "dev_themes": [
+      "digital_bias",
+      "seam"
+    ],
+    "include_in_map_data": true,
+    "interaction": "ambient",
+    "lookup_name": "grammar_seed",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "Grammar Seed",
+    "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for lsystems. Bias is conserved; show the seam.",
+    "scene": "res://algorithms/lsystems/grammar_seed/grammar_seed.tscn",
+    "sequence": "lsystems",
+    "tags": [
+      "lsystem",
+      "grammar",
+      "turtle",
+      "compression",
+      "determinism",
+      "seam",
+      "digital_bias"
+    ],
+    "measurements": {
+      "aabb_size": [
+        1.14,
+        0.63,
+        0.02
+      ],
+      "aabb_center": [
+        0.1,
+        0.01,
+        0.0
+      ],
+      "grid_cells": [
+        2,
+        1
+      ],
+      "max_dimension_m": 1.14,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      2,
+      1,
+      1
+    ]
+  },
+  "lsystem_dungeon": {
+    "category": "procedural",
+    "complexity": "advanced",
+    "description": "Procedural dungeon floor plan generated from L-system grammar rules \u2014 corridors and rooms emerge from string rewriting, rendered as a miniature architectural model.",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "lsystem_dungeon",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "L-System Dungeon",
+    "parameters": {
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size_group": "compact"
+    },
+    "qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string \u2014 spatial E(S) from textual F-description.",
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "grammar": [
+          "warren",
+          "spiral",
+          "branch",
+          "meander"
+        ],
+        "depth": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "default": "grammar=warren, depth=3 - warren is the pair of productions this file used to hold in two plain vars (axiom F, F -> F+RF-FF-FR+F, R -> RFRFRF) and _resolve_grammar writes them back verbatim, while depth 3 is the number the old `iterations` export shipped with. The turtle has no randomness at all, so identical inputs give an identical picture; apply_grid_config rebuilds only when a value actually changed and only after _ready has built once, and none of the placements (LSystems_Architecture, the two curation_station bays, the two Mission maps) sends any config. Nothing in the corpus moves.",
+      "was": "one grammar, hard-coded. `_axiom` and `_rules` were ordinary vars holding a single pair of productions with no export and no config key, so the only thing about this artifact that was ever variable was how many times its one grammar got rewritten - and the registry description ('corridors and rooms emerge from string rewriting') was describing a rewrite nobody could rewrite. `depth` is the old `iterations` export under the word the rest of the L-system family already uses.",
+      "note": "hand promotion 2026-08-03, the lsystem_editor case a second time: the runner refused this token for NO TURNABLE KNOBS while a whole parameter space sat in the source as two string literals. NOT SEEDED, and it does not need to be - grep the file for randf/randi/noise and there is nothing; the turtle is deterministic, so a variant is a fact and not a sample. The three new grammars were written against the turtle this file already interprets (F forward, R room at the current point, +/- 90 degrees, [ ] push/pop) and each argues a different PLAN TOPOLOGY, which is what a top-down floor plan is for: warren a dense net, spiral a coil of growing runs, branch the only one that touches the stack and comes out a corridor TREE, meander the quadratic-Koch single crenellated hall. depth is declared 1-4 and not 1-5 although the code range is 1-5: warren multiplies F sixfold per rewrite, so depth 5 is roughly 7,800 corridor slabs and 15,600 wall slabs as separate MeshInstance3D nodes, which is a capture-time hazard rather than a picture.",
+      "kin": "lsystem_editor.grammar and lsystem_editor.depth ask exactly these two questions in the same sequence and the words are taken from there unchanged. The VALUE lists are not shared and should not be: lsystem_editor's seven are botanical and fractal curves (koch, plant, fern), and naming a dungeon plan 'fern' would make two artifacts look like siblings that measure alike when they do not. space_filling_curve_gallery.depth names its samples (sketch|sparse|standard|fine) because it draws one fixed curve at four settings; here, as in lsystem_editor, the honest unit is the rewrite itself."
+    },
+    "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
+    "tags": [
+      "2d",
+      "l_system",
+      "procedural",
+      "simulation",
+      "string"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [
+          "box",
+          "cylinder"
+        ],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": [
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "few",
+      "vertex_estimate": "~1"
+    },
+    "spatial_needs": {
+      "platform": "sunken",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "growth",
+        "proceduralgeneration"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.84,
+        0.08,
+        0.84
+      ],
+      "aabb_center": [
+        0.0,
+        0.01,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.84,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "plane",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "mesh_grammar_petal_flower": {
+    "name": "MeshGrammar \u2014 Petal Flower",
+    "lookup_name": "mesh_grammar_petal_flower",
+    "description": "Petal splay on upward faces \u2014 radiating curved petals with tilt and curl. Organic decoration operation.",
+    "scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
+    "category": "substrate",
+    "artifact_type": "interactive_algorithm",
+    "sequence": "lsystems",
+    "tags": [
+      "substrate",
+      "mesh_grammar",
+      "petal",
+      "flower",
+      "decoration",
+      "lsystems"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "dev_themes": [
+      "grammar",
+      "mesh",
+      "procedural"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": [
+          "metallic",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.85,
+        0.85,
+        0.85
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.85,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.162407Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "The selector is the politics: only faces whose normals point up are granted petals, so the bloom records an orientation privilege before it records any botany. Each petal is an open strip with quadratic curl \u2014 ornament the closed mesh never promised, surface without volume."
+  },
+  "mesh_grammar_coral_fingers": {
+    "name": "MeshGrammar \u2014 Coral Fingers",
+    "lookup_name": "mesh_grammar_coral_fingers",
+    "description": "Tube branches growing from upward-facing random faces \u2014 curved, segmented fingers reaching outward. Demonstrates tube_branch operation.",
+    "scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
+    "category": "substrate",
+    "artifact_type": "interactive_algorithm",
+    "sequence": "lsystems",
+    "tags": [
+      "substrate",
+      "mesh_grammar",
+      "tube_branch",
+      "coral",
+      "organic",
+      "lsystems"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems",
+      "proceduralgeneration"
+    ],
+    "dev_themes": [
+      "grammar",
+      "mesh",
+      "procedural"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": [
+          "metallic",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.85,
+        0.85,
+        0.85
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.85,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.162407Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "Fingers grow only from upward-facing faces, chosen at random \u2014 orientation is destiny, chance picks the individuals. Reaching coded as a class privilege of 'up': the sphere's underside never gets to want anything."
+  }
+}

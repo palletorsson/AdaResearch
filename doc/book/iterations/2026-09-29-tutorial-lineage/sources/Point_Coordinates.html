@@ -1,0 +1,175 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Coordinates · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Coordinates">← Tutorial lineage</a></p><h1>Point Coordinates</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Coordinates/final.md">Raw captured source</a></p><pre># Point Coordinates — Where is the point?
+
+&lt;!-- @point_held --&gt;
+
+The first label says “Point one”. This time the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.
+
+It fits within your hand. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays at the station; the point has gone elsewhere.
+
+Which part did the name belong to? The position, the sphere, the possibility of taking hold?
+
+We have already separated seeing a body from being stopped by it. Holding adds another relation. Someone has made this point available to a hand. A position could not have supplied that permission on its own.
+
+Keep the black point. The corridor opens towards a coloured frame standing in an L-shaped basin. Its glass is level with the floor; the depth belongs below your feet. The point can travel over a hollow without falling into it.
+
+&lt;!-- @coordinate_readout --&gt;
+
+## Two addresses
+
+Keep the point in your hand and watch the white card as you move.
+
+The guides and the card follow the point you are already holding.
+
+The card marked `WORLD` puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.
+
+The card rounds each component to two decimal places: `1.231` and `1.234` both appear as `1.23`. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.
+
+Now compare it with the card marked `LOCAL`. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?
+
+&lt;!-- @CoordinateSystem3M --&gt;
+
+Follow the coloured frame&#x27;s guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+
+The two cards give the same point different addresses. `WORLD` measures from the scene&#x27;s origin; `LOCAL` uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.
+
+A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^coordinates-haraway]
+
+Carry the point beyond an arrow&#x27;s end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.
+
+&lt;!-- @drag_point_target --&gt;
+
+## Room to arrive
+
+The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.
+
+“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.
+
+The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
+
+Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.
+
+In the next hall, we keep two positions at once. The space between them will become a line, and a distance we can change.
+
+[^coordinates-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Coordinates/tutorial.md">Raw captured source</a></p><pre># Point Coordinates — carry a position
+
+Point One separated a position, its surface and its physical boundary. Begin this room by taking the black sphere. The label stays behind. The point now follows a hand.
+
+## Borrow a working hold
+
+The museum uses the supplied `point_held.tscn`. Inside it is the existing XR Tools pickable point. It already knows how to receive a grab, follow its holder and be released. We can use that relation before writing it ourselves.
+
+Carry it sideways, lift it, then bring it towards you. The point remains one body while its address changes. Holding supplies the movement we are about to read.
+
+In an already configured Ada XR scene, instance `commons/primitives/point/point_held.tscn` under the room root. Keep its scale at one and put its root on the floor; the wrapper places the sphere at hand height. Run with the prepared player and use its existing grab input. In a practice scene without the museum cards, make a second instance somewhere else to try the same interaction again. Do not add a second player or rebuild the controller here. The `point_one_main` identity belongs to the museum&#x27;s reporting link, not to the generic act of grabbing; only the original point should use that reporting channel when working with the museum&#x27;s cards.
+
+The separate [coordinate study](../../../doc/book/studies/point-coordinates/README.md) supplies the following desktop exercises. It does not include an XR player or reproduce the museum&#x27;s pickup. A self-contained portable XR starter remains to be supplied; the in-project exercise above uses Ada&#x27;s installed player and add-on.
+
+## Change one component
+
+The desktop study opens with two prepared sphere markers and red, green and blue guides for X, Y and Z. The museum uses pink, grey and black; the letters and directions identify the references in either palette. Open `points.gd`. The position called `a` is:
+
+```gdscript
+var a := Vector3(-0.75, 1.12, 0.0)
+```
+
+The numbers are X, Y and Z. Change only `1.12` to `1.7`. Marker A rises. Restore it, then change `-0.75` to `-1.2`. It moves along another direction. Change the last number to `0.5` and watch it move along the blue guide.
+
+The guide does not move the point. It gives us a direction with which to read the change. We borrow its construction.
+
+The supplied script places the marker with:
+
+```gdscript
+$A.position = a
+```
+
+`$A` finds the child node named A in this scene. `position` is its position relative to its parent. We are giving a visible body the three numbers we kept under a name.
+
+## One body, two addresses
+
+In the museum, compare WORLD and LOCAL while moving the same black point. WORLD reads its position in the scene. LOCAL describes it relative to the coloured frame. A different reference can give the same place different numbers.
+
+In the desktop study, select the root `CoordinateStudy`. Its parent is the scene&#x27;s world. Change the root&#x27;s X position in the Inspector to `2.0`, then run. Both markers and their guides move together. The value of `a` in the script has not changed.
+
+These two lines are already in `points.gd`:
+
+```gdscript
+print(&quot;local &quot;, $A.position)
+print(&quot;world &quot;, $A.global_position)
+```
+
+Read the output. The first address is still `a`; the second includes the parent&#x27;s shift. Return the root&#x27;s X position to zero. We can now change a point within its frame, or move the frame that contains it. The later Transformation sequence will make more of that distinction.
+
+The view may look unchanged: the supplied camera also belongs to that root and travels with it. The world address can change while the relation between camera and point stays the same.
+
+The museum cards round their numbers for display. Their apparent stillness during a tiny movement does not mean the point stopped. Reporting is another attachment to the position, with its own limits.
+
+## Keep another position
+
+The next line in the supplied script gives B its own address:
+
+```gdscript
+var b := Vector3(0.75, 1.12, 0.0)
+```
+
+Change B while leaving A alone. Then give B the same three numbers as A. One sphere may hide the other; the scene still contains two markers. Restore their separation.
+
+We leave with two positions we can change independently and a reason to name their reference. Point Lines will connect them and introduce distance. The target in this room already uses a distance threshold. It asks whether a position is close enough, not whether two objects have the same identity. We can enjoy its falling response before calculating distance in Lines.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Coordinates/technical.md">Raw captured source</a></p><pre># Coordinates — implementation reference
+
+Point_Coordinates was separated from Point_One on 29 September 2026. Its layout develops the old wider room; artifacts.md records the current placed cells. Source cells are not museum world coordinates.
+
+The first artifact is `point_held` at (7,2). `point_condition.gd` builds its label and instantiates the production `interactive_point_origin.tscn`, an XR Tools pickable. Its black sphere and spherical collider both have a 7 cm radius, half the previous radius; the earlier white points keep theirs. The black sphere keeps `coordinate_id = point_one_main`; this legacy identifier intentionally remains stable across the split.
+
+`CoordinateSystem3M` is at (4,12), with `adopt_external_point:1`, `external_point_id:point_one_main` and `floating_point:0`. WORLD at (2,9) and LOCAL at (2,11) use the same `readout_channel`. The Fontana recess contains a secondary force comparison; the two cards explicitly select the original held point. The frame&#x27;s origin sign is suppressed; the actual Point Zero origin remains in the preceding arrival hall.
+
+The L-shaped basin is the union of [4,7,1,6] and [4,12,6,1]: eleven cells, depth one metre, glass collision at deck height, no fire. The coordinate artifact&#x27;s +1 metre placement offset compensates for the basin floor. Do not raise its frame above the museum floor.
+
+The hall opts into opaque, shaded pink/grey/black axes and matching projection markers. Axis length is 3.4 local units (5.1 m of shaft at the unchanged display scale 1.5), with radius 0.08 local units (24 cm diameter in the hall). Enlarging the drawing does not rescale LOCAL coordinates. The arms keep their existing placement along the basin; the Z arm points towards negative Z and its end label says −Z. The colours identify X/Y/Z independently of sign. Solidity here means opaque geometry, not a new collision barrier across the floor. Other placements retain the default RGB palette and transparency.
+
+The target is at (6,10). Its existing radius is 0.45 metres and it rearms after departure. The target accepts eligible point-group members; the cards select the named primary point. The manuscript distinguishes these functions without teaching all their implementation here.
+
+The separate coordinate download inherits the existing Day Zero base and prepares two sphere nodes with `points.gd`. It has no XR add-on. In-project pickup practice uses Ada&#x27;s already configured player. Point_Lines is the next map and the first tutorial to calculate distance.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Coordinates/intent.md">Raw captured source</a></p><pre># Carry the point, name the reference
+
+The input to this hall is Point One&#x27;s distinction between position, surface and collision. The first new encounter is the black point following a hand. Use the existing pickup; do not make the student build the XR player.
+
+The main text follows holding → two addresses → the coloured frame in the L-shaped basin → a target with room to arrive. The critical question is what a position report must disclose about its reference, and what a threshold recognises while leaving intention unread.
+
+The tutorial learns to use the supplied pickup in the prepared Ada XR environment, then changes X/Y/Z in a reduced desktop study. It separates local from global position and prepares A and B for Point Lines. Distance, arrow construction, label formatting and target state are deferred. Portable XR setup remains a delivery gap; do not call the desktop kit a grab tutorial.
+
+The existing secondary artifacts remain available as comparisons. Their presence does not oblige the prose or tutorial to explain every mechanism. The large pedestal sphere stays in Point One.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Coordinates/critical.md">Raw captured source</a></p><pre># A reference is part of an address
+
+This hall begins with a permission: a black point can follow a hand. It then asks what its position means. WORLD and LOCAL are both situated readings, made relative to declared references. Naming a coordinate system does not make the report exhaustive; rounding, a finite visible guide, and the target&#x27;s tolerance each decide what difference becomes legible.
+
+Use the discussion of situated knowledge in final.md as a question arising from those two reports. Avoid equating a change of mathematical frame with every political difference. The exact encounter is strong enough: the point moves once, the cards answer differently, and a number needs its reference.
+
+The target makes a second cut. It recognises a position inside a region while leaving the traveller&#x27;s intention outside its test. Different gestures can count as one arrival. Returning with another rhythm is a way to play within that reduction, rather than merely describing its limit.
+
+Earlier Point One research remains in that map&#x27;s critical.md as historical material. The current division gives appearance and resistance to Point One, holding and reference to this hall, and connection and measurement to Point Lines.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Coordinates/artifacts.md">Raw captured source</a></p><pre># Point Coordinates — current encounters
+
+30 September 2026. Generated from the current map_data.json placements. Source cells are not runtime world coordinates.
+
+| Artifact | Cell (x,z) | Configuration |
+| --- | --- | --- |
+| `point_corridor_door` | (10, 1) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
+| `point_held` | (7, 2) | `point_held:180#plinth:0#pin:1` |
+| `fontana_puncture` | (17, 6) | `fontana_puncture:270:0#plinth:1.00#embed_artifact:interactive_point_origin_force#embed_mode:transformation#offset:0.00,0.20,0.00` |
+| `code_evolution_screen` | (15, 8) | `code_evolution_screen:270:1.4:2#evolution_path:res://commons/maps/Point_One/evolution.json` |
+| `coordinate_readout` | (2, 9) | `coordinate_readout:90:1.4:1#plinth:0#pin:1#display_scale:2.4#readout_channel:point_one_main#space:world` |
+| `drag_point_target` | (6, 10) | `drag_point_target#text:drag point here` |
+| `comment_box` | (17, 10) | `comment_box:90` |
+| `coordinate_readout` | (2, 11) | `coordinate_readout:90:1.4:1#plinth:0#pin:1#display_scale:2.4#readout_channel:point_one_main#space:local` |
+| `CoordinateSystem3M` | (4, 12) | `CoordinateSystem3M:0:0#axis_length:3.4#axis_thickness:0.08#axis_palette:pink_grey_black#axis_opacity:1#axis_unshaded:0#tick_step:0#labels:1#panel:0#floating_point:0#adopt_external_point:1#external_point_id:point_one_main#readout_channel:point_one_main#point_finish:zero#offset:0.00,1.00,0.00#origin_sign_text:#plinth:0#pin:1` |
+| `the_invisible_point` | (17, 12) | `the_invisible_point` |
+| `floating_sphere_field` | (9, 14) | `floating_sphere_field#sphere_count:18#bounds:2.5,1.2,2.5#volume_offset:0,2.4,0` |
+| `SoundscapeRadioRack` | (16, 14) | `SoundscapeRadioRack:270#plinth:0.85#pin:1#orientation:inclined` |
+
+final.md follows the primary encounter; tutorial.md selects the operations to make. This inventory includes secondary works and practical equipment without making every object a required lesson.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Coordinates/summary.md">Raw captured source</a></p><pre># Point Coordinates
+
+Take the black point and carry it into a room where two cards give it different addresses. The coloured frame stands in an L-shaped glass basin at floor level. WORLD and LOCAL disclose different references; the target accepts different gestures as the same arrival. The tutorial leaves two positions ready to become a line.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Coordinates/blurb.md">Raw captured source</a></p><pre>Take the point. Its name stays behind; its address changes. Where is it, and from where are we counting?
+</pre></section></body></html>

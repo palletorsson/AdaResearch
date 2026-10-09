@@ -450,22 +450,19 @@ a sphere, written out → the same, as a class → a row of four → hung and na
 
 Turn one of your bodies into a class with two axes, and write the closest-pair prediction before rendering its sheet.
 
-Copy `room.tscn`, `room.gd`, `my_plane.tres`, `my_ring.tscn` and `my_floor.gd` from your Chessboard folder into this one. Copy, do not move: the Chessboard folder keeps the originals, and if a copy goes wrong you copy again.
-
-First carry one member in. At the end of `_ready()` in `room.gd`, add:
+The kit's guest is one member of the family, carried in: the folder `guests/family/`, with the scene `family.tscn`, the script `member.gd` and the class beside them, `globe.gd`. Copy the folder `guests/family/` from your copy of this kit into the `guests/` folder of your room project. Open the room's `room.gd` and add one line to `GUESTS`, under the last one:
 
 ```gdscript
-	var globe := Globe.new()
-	globe.segments = 8
-	globe.rings = 4
-	add_child(globe)
-	globe.position = Vector3(-1.2, 1.6, -0.5)
+	"res://guests/family/family.tscn",
 ```
 
-Then a body of your own. Ours is the ring from the Body of Parts, the one drawn by hand in the editor. Make a new script, `my_ring.gd` *(editor: right-click in the FileSystem dock, **New Script**)*, with this in it:
+Run the room and walk to it. In our copy of the room the Output read `Globe, 8, 4: 80 triangles` and then `My room: place 2 is res://guests/family/family.tscn`. A lime body with corners stands on the dark square, 1 m high. The walker, sent at it from the aisle, was stopped 0.77 m from the middle of the place.
+
+`globe.gd` in that folder is this page's `globe.gd` without its first line. A guest declares no `class_name`: a room holds many guests, and two that declare one name do not load together. So `member.gd` takes the class by its file, `load("res://guests/family/globe.gd").new()`, as Point Cube took the drafter's answer. Then it writes the member down as *Walk the sheet, carry one member* said: 8 and 4, set before `add_child()`. Three things are added for the room. The member stands on the ground, its middle at 0.5 m. It wears one colour of the course look, written out. And it has a body, from `create_trimesh_collision()` as under *Try*: the room's marble, dropped by a script from 2 m over its middle, came to rest on its point at 1.10 m, and dropped 22 cm off the middle it rolled off and away over the floor.
+
+Then a body of your own, in the same folder. Ours is the ring from the Body of Parts, the one drawn by hand in the editor. Make a new script, `guests/family/my_ring.gd` *(editor: right-click the folder in the FileSystem dock, **New Script**)*, with this in it:
 
 ```gdscript
-class_name MyRing
 extends MeshInstance3D
 
 @export_range(3, 64) var sides: int = 6             # cuts around the ring
@@ -488,15 +485,42 @@ func triangles() -> int:
 	return arrays[Mesh.ARRAY_INDEX].size() / 3
 ```
 
-One axis is an `int` and one a `float`; `clampf()` is `clampi()` for a number with decimals. In `room.gd`, replace `var ring: Node3D = load("res://my_ring.tscn").instantiate()` with `var ring := MyRing.new()`.
+One axis is an `int` and one a `float`; `clampf()` is `clampi()` for a number with decimals. Like the guest's `globe.gd`, this class has no name and is taken by its file.
 
-Then its sheet. Save a copy of `family.gd` as `my_family.gd`. In it, write `MyRing.new()` for `Globe.new()`, take out the two lines of the half rule, and set `axis` to `"sides"` and `values` to `"3, 6, 12, 48"`. In `room.tscn`, add an instance of `sweep_sheet.tscn` named `Sheet` at (−1.7, 1.1, 1.0), on top of your floor, with **Spacing** 0.7, and a `Node3D` named `MyFamily` at the same place running `my_family.gd`. To add the instance, drag `sweep_sheet.tscn` from the FileSystem dock, at the lower left, onto the root node in the Scene dock, at the upper left; the position and the spacing are set in the Inspector, at the right *(editor)*.
+Then its sheet. The room has no `Sheet`, and a guest names nothing outside its folder, so the row stands itself, with *A row*'s `place`. A place is 1.6 m wide: the four lie 0.4 m apart, at 0.7 of their size, in front of the carried member. In `member.gd`, add two lines above `func _ready()`:
 
-**Write your prediction now**: which two of your four will look most alike, and why. Then run `room.tscn`. We made the same room by writing its files. The carried member stands on the floor, its lowest point at 1.10 m, with 80 triangles. The ring on the cube has 6 sides and 384 triangles; drawn by hand it had 4096. Four rings stand on the sheet: `3 asked, 3 built: 192 triangles`, then 384, 768 and 3072. We wrote down 12 and 48 as our closest pair and did not render stills of our rings, so that prediction stands unchecked.
+```gdscript
+@export var axis := "sides"              # the field we sweep, by its name
+@export var values := "3, 6, 12, 48"     # its values, as typed into one text field
+```
+
+and these at the end of `_ready()`:
+
+```gdscript
+	var second := StandardMaterial3D.new()
+	second.albedo_color = Color("22d9ff")   # SECOND, the look's cyan
+	second.roughness = 0.8
+	var place := 0
+	for word in values.split(","):
+		var title := word.strip_edges()
+		var ring: MeshInstance3D = load("res://guests/family/my_ring.gd").new()
+		ring.set(axis, title)
+		add_child(ring)
+		ring.scale = Vector3(0.7, 0.7, 0.7)
+		ring.position = Vector3(-0.6 + place * 0.4, ring.band * 0.7, 0.6)
+		ring.material_override = second
+		ring.create_trimesh_collision()
+		place += 1
+		print(title, " asked, ", ring.get(axis), " built: ", ring.triangles(), " triangles")
+```
+
+This is the loop of *The axis by name*, without the half rule. `ring.band * 0.7` lays each ring on the ground: a ring reaches `band` below its own middle.
+
+**Write your prediction now**: which two of your four will look most alike, and why. Then run the room. We made the same guest by writing its files. The carried member stands on its place, with 80 triangles. Four cyan rings lie in a row in front of it: `3 asked, 3 built: 192 triangles`, then 384, 768 and 3072; drawn by hand the ring had 4096. The walker, sent at the guest again, was stopped 0.78 m from the middle of the place, its feet at 0.03 m: the rings have a body too. We wrote down 12 and 48 as our closest pair and did not render stills of our rings, so that prediction stands unchecked.
 
 Sweep your second axis as well. With `axis` at `"band"` and `values` at `"0.02, 0.04, 0.08, 0.12"` our four lines all ended in `384 triangles`: four different rings with one count. The count cannot tell these apart. The numbers read back can: `0.02 asked, 0.02 built`.
 
-Write one line in your README: what your two axes are, and one body they cannot make. Hand in your room with its process strip and your field note.
+Write one line at the top of `my_ring.gd`, as a comment: what your two axes are, and one body they cannot make. Hand in your room with its process strip and your field note.
 
 ## What we borrowed
 

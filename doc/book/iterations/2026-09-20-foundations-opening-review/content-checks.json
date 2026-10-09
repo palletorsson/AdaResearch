@@ -1,0 +1,259 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "check": "Euclid restored before NonEuclidean; Florensky remains explicitly pending"
+    },
+    {
+      "passed": true,
+      "check": "Declared eight-hall order preserved"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: current authored order"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: declared indices, with missing hall visible"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: unrelated plans preserved"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: other geometry and placements preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: current authored order"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: declared indices, with missing hall visible"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: unrelated plans preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: other geometry and placements preserved"
+    },
+    {
+      "passed": true,
+      "check": "Local and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived authored route current"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived authored route current"
+    },
+    {
+      "passed": true,
+      "check": "Only triangle foil promoted; all other roles retained"
+    },
+    {
+      "passed": true,
+      "check": "Other book records retained"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: current text_sha256"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: current map_sha256"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: placed primary encounters agree"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: book hero matches primary encounter"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: rectangular map layers"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: no encoding replacement"
+    },
+    {
+      "passed": true,
+      "check": "Euclid_Parallel: primary instantiated and selected walks pass"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: current text_sha256"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: current map_sha256"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: placed primary encounters agree"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: book hero matches primary encounter"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: rectangular map layers"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: no encoding replacement"
+    },
+    {
+      "passed": true,
+      "check": "NonEuclidean_Spaces: primary instantiated and selected walks pass"
+    },
+    {
+      "passed": true,
+      "check": "Russell_Paradox: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Russell_Paradox: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Russell_Paradox: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Godel_Incompleteness: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Godel_Incompleteness: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Godel_Incompleteness: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Escher_Impossible: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Escher_Impossible: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Escher_Impossible: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Brouwer_Intuitionism: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Brouwer_Intuitionism: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Brouwer_Intuitionism: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Florensky_Paraconsistent: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Florensky_Paraconsistent: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Florensky_Paraconsistent: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Crisis_Synthesis: map_data.json byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Crisis_Synthesis: final.md byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "Crisis_Synthesis: every artifact family retained"
+    },
+    {
+      "passed": true,
+      "check": "Actual museum repeats all three measured states"
+    },
+    {
+      "passed": true,
+      "check": "alternative_geometries: unrelated registry entries retained"
+    },
+    {
+      "passed": true,
+      "check": "foundations: unrelated registry entries retained"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: other sequences untouched"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: other pearls untouched"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: wall speech agrees for Euclid_Parallel"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: wall speech agrees for NonEuclidean_Spaces"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: other sequences untouched"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: other pearls untouched"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: wall speech agrees for Euclid_Parallel"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: wall speech agrees for NonEuclidean_Spaces"
+    },
+    {
+      "passed": true,
+      "check": "model-checks.json: checks pass"
+    },
+    {
+      "passed": true,
+      "check": "navigation.json: checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Frozen before-files preserved"
+    }
+  ],
+  "count": 63,
+  "failures": [],
+  "passed": true
+}

@@ -1,0 +1,2150 @@
+{
+ "sweep": "intrusion_bench",
+ "peak_changed_pct": 7.517,
+ "subject_pct": 7.831,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "changed_px": 42152,
+   "changed_pct": 7.298
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "changed_px": 40600,
+   "changed_pct": 7.029
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "changed_px": 38061,
+   "changed_pct": 6.59
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "changed_px": 43022,
+   "changed_pct": 7.448
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "changed_px": 42478,
+   "changed_pct": 7.354
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 37936,
+   "changed_pct": 6.568
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 43023,
+   "changed_pct": 7.449
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 42600,
+   "changed_pct": 7.375
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 38041,
+   "changed_pct": 6.586
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 42653,
+   "changed_pct": 7.385
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 42516,
+   "changed_pct": 7.361
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 36788,
+   "changed_pct": 6.369
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 42690,
+   "changed_pct": 7.391
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 41899,
+   "changed_pct": 7.254
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 37430,
+   "changed_pct": 6.48
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 43421,
+   "changed_pct": 7.517
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 41250,
+   "changed_pct": 7.142
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "changed_px": 22534,
+   "changed_pct": 3.901
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "changed_px": 37733,
+   "changed_pct": 6.533
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "changed_px": 13320,
+   "changed_pct": 2.306
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "changed_px": 21927,
+   "changed_pct": 3.796
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 41036,
+   "changed_pct": 7.105
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 13728,
+   "changed_pct": 2.377
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 22779,
+   "changed_pct": 3.944
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 39186,
+   "changed_pct": 6.784
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 13093,
+   "changed_pct": 2.267
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 21982,
+   "changed_pct": 3.806
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 39931,
+   "changed_pct": 6.913
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 11874,
+   "changed_pct": 2.056
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 21544,
+   "changed_pct": 3.73
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38523,
+   "changed_pct": 6.669
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 14809,
+   "changed_pct": 2.564
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 22804,
+   "changed_pct": 3.948
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "changed_px": 35450,
+   "changed_pct": 6.137
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "changed_px": 22777,
+   "changed_pct": 3.943
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "changed_px": 20365,
+   "changed_pct": 3.526
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 39336,
+   "changed_pct": 6.81
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 22361,
+   "changed_pct": 3.871
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 20114,
+   "changed_pct": 3.482
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 37712,
+   "changed_pct": 6.529
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 22970,
+   "changed_pct": 3.977
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 20153,
+   "changed_pct": 3.489
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 36421,
+   "changed_pct": 6.306
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 22136,
+   "changed_pct": 3.832
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 19093,
+   "changed_pct": 3.306
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 37034,
+   "changed_pct": 6.412
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 23186,
+   "changed_pct": 4.014
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "melted",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 19433,
+   "changed_pct": 3.364
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "changed_px": 35932,
+   "changed_pct": 6.221
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "changed_px": 33200,
+   "changed_pct": 5.748
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 27867,
+   "changed_pct": 4.825
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 36089,
+   "changed_pct": 6.248
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 33839,
+   "changed_pct": 5.859
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 30293,
+   "changed_pct": 5.245
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 36040,
+   "changed_pct": 6.24
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 33786,
+   "changed_pct": 5.849
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 26224,
+   "changed_pct": 4.54
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 35868,
+   "changed_pct": 6.21
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 34118,
+   "changed_pct": 5.907
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 29459,
+   "changed_pct": 5.1
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 36629,
+   "changed_pct": 6.342
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 33591,
+   "changed_pct": 5.816
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "changed_px": 17108,
+   "changed_pct": 2.962
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 41044,
+   "changed_pct": 7.106
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 6078,
+   "changed_pct": 1.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 18022,
+   "changed_pct": 3.12
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 40176,
+   "changed_pct": 6.956
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 9085,
+   "changed_pct": 1.573
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 18664,
+   "changed_pct": 3.231
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 39425,
+   "changed_pct": 6.826
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 7278,
+   "changed_pct": 1.26
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 17990,
+   "changed_pct": 3.115
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38326,
+   "changed_pct": 6.635
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 7319,
+   "changed_pct": 1.267
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 16937,
+   "changed_pct": 2.932
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "changed_px": 37538,
+   "changed_pct": 6.499
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 17771,
+   "changed_pct": 3.077
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 9778,
+   "changed_pct": 1.693
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 36216,
+   "changed_pct": 6.27
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 16801,
+   "changed_pct": 2.909
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 11814,
+   "changed_pct": 2.045
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 35476,
+   "changed_pct": 6.142
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 17848,
+   "changed_pct": 3.09
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 10870,
+   "changed_pct": 1.882
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 36892,
+   "changed_pct": 6.387
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 19181,
+   "changed_pct": 3.321
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "formula",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 8367,
+   "changed_pct": 1.449
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "changed_px": 41130,
+   "changed_pct": 7.121
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 38232,
+   "changed_pct": 6.619
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 25144,
+   "changed_pct": 4.353
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 40782,
+   "changed_pct": 7.061
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 38079,
+   "changed_pct": 6.593
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 30794,
+   "changed_pct": 5.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 40725,
+   "changed_pct": 7.051
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 38101,
+   "changed_pct": 6.596
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 34071,
+   "changed_pct": 5.899
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 41321,
+   "changed_pct": 7.154
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 37508,
+   "changed_pct": 6.494
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "changed_px": 18049,
+   "changed_pct": 3.125
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 40161,
+   "changed_pct": 6.953
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 8004,
+   "changed_pct": 1.386
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 18079,
+   "changed_pct": 3.13
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 39152,
+   "changed_pct": 6.778
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 8558,
+   "changed_pct": 1.482
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 18748,
+   "changed_pct": 3.246
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38522,
+   "changed_pct": 6.669
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 9480,
+   "changed_pct": 1.641
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 17686,
+   "changed_pct": 3.062
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "changed_px": 36671,
+   "changed_pct": 6.349
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 18221,
+   "changed_pct": 3.155
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 10453,
+   "changed_pct": 1.81
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 35939,
+   "changed_pct": 6.222
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 18835,
+   "changed_pct": 3.261
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 12881,
+   "changed_pct": 2.23
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 37105,
+   "changed_pct": 6.424
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 19472,
+   "changed_pct": 3.371
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "eroded",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 12418,
+   "changed_pct": 2.15
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "changed_px": 39049,
+   "changed_pct": 6.761
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 35948,
+   "changed_pct": 6.224
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 31413,
+   "changed_pct": 5.439
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 39775,
+   "changed_pct": 6.886
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 36360,
+   "changed_pct": 6.295
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38973,
+   "changed_pct": 6.747
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 40930,
+   "changed_pct": 7.086
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 37062,
+   "changed_pct": 6.417
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "changed_px": 17556,
+   "changed_pct": 3.039
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 39457,
+   "changed_pct": 6.831
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 9421,
+   "changed_pct": 1.631
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 18094,
+   "changed_pct": 3.133
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 39034,
+   "changed_pct": 6.758
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 12864,
+   "changed_pct": 2.227
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 17965,
+   "changed_pct": 3.11
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "changed_px": 35987,
+   "changed_pct": 6.23
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 18998,
+   "changed_pct": 3.289
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 13803,
+   "changed_pct": 2.39
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38437,
+   "changed_pct": 6.655
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 20586,
+   "changed_pct": 3.564
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "drifting",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 15388,
+   "changed_pct": 2.664
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "changed_px": 39352,
+   "changed_pct": 6.813
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 36196,
+   "changed_pct": 6.267
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 33097,
+   "changed_pct": 5.73
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 39572,
+   "changed_pct": 6.851
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 35774,
+   "changed_pct": 6.194
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "changed_px": 17968,
+   "changed_pct": 3.111
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 38321,
+   "changed_pct": 6.635
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 9912,
+   "changed_pct": 1.716
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 17956,
+   "changed_pct": 3.109
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "changed_px": 37700,
+   "changed_pct": 6.527
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 19727,
+   "changed_pct": 3.415
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "rippled",
+    "surface": "sphere"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 11700,
+   "changed_pct": 2.026
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "changed_px": 38254,
+   "changed_pct": 6.623
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "gyroid"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 35868,
+   "changed_pct": 6.21
+  },
+  {
+   "a": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "torus"
+   },
+   "b": {
+    "layout": "single",
+    "intrusion": "roughened",
+    "surface": "sphere"
+   },
+   "changed_px": 18014,
+   "changed_pct": 3.119
+  }
+ ]
+}

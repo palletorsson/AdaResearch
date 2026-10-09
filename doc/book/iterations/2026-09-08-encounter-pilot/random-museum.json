@@ -1,0 +1,199 @@
+{
+	"checks": [
+		{
+			"details": {
+				"bound": true,
+				"busy": false,
+				"eligible_at_start": 16,
+				"generation": 1,
+				"last_removed": -1,
+				"last_selected": -1,
+				"map_position": [
+					6.5,
+					0.0,
+					7.5
+				],
+				"mode": "Range",
+				"remaining": 16,
+				"removed": 0,
+				"rotation_degrees": [
+					0.0,
+					90.0,
+					0.0
+				],
+				"scale": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"total": 64,
+				"world_position": [
+					6.5,
+					0.0,
+					7.5
+				]
+			},
+			"passed": true,
+			"tag": "museum_plan_binds_local_grid"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "museum_initial_64_and_16"
+		},
+		{
+			"details": {
+				"centre": [
+					7.32170248031616,
+					0.999373316764832,
+					7.82399988174438
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_0/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_0_front_ray_clear"
+		},
+		{
+			"details": {
+				"centre": [
+					7.32170248031616,
+					0.999373316764832,
+					7.60799980163574
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_1/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_1_front_ray_clear"
+		},
+		{
+			"details": {
+				"centre": [
+					7.32170248031616,
+					0.999373316764832,
+					7.39200019836426
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_2/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_2_front_ray_clear"
+		},
+		{
+			"details": {
+				"centre": [
+					7.32170248031616,
+					0.999373316764832,
+					7.17600011825562
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_3/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_3_front_ray_clear"
+		},
+		{
+			"details": {
+				"centre": [
+					7.45591926574707,
+					0.807691752910614,
+					7.60799980163574
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_4/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_4_front_ray_clear"
+		},
+		{
+			"details": {
+				"centre": [
+					7.45591926574707,
+					0.807691752910614,
+					7.39200019836426
+				],
+				"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_5/InteractableAreaButton"
+			},
+			"passed": true,
+			"tag": "button_5_front_ray_clear"
+		},
+		{
+			"details": {
+				"draw_order": [
+					36,
+					26,
+					19,
+					37,
+					34,
+					45,
+					18,
+					28,
+					44,
+					20,
+					43,
+					29,
+					27,
+					21,
+					42,
+					35
+				],
+				"initial": [
+					18,
+					19,
+					20,
+					21,
+					26,
+					27,
+					28,
+					29,
+					34,
+					35,
+					36,
+					37,
+					42,
+					43,
+					44,
+					45
+				],
+				"state": {
+					"bound": true,
+					"busy": false,
+					"eligible_at_start": 16,
+					"generation": 1,
+					"last_removed": 35,
+					"last_selected": 35,
+					"mode": "Range",
+					"remaining": 0,
+					"removed": 16,
+					"total": 64
+				}
+			},
+			"passed": true,
+			"tag": "museum_range_removes_16_distinct_then_stops"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "museum_empty_set_does_not_expand"
+		},
+		{
+			"details": {
+				"floor_after": "(8.0, -0.0, 7.5)",
+				"floor_before": "(8.0, -0.0, 7.5)",
+				"other_artifacts": 28
+			},
+			"passed": true,
+			"tag": "museum_other_artifacts_and_approach_floor_survive"
+		},
+		{
+			"details": {
+
+			},
+			"passed": true,
+			"tag": "museum_reset_restores_64"
+		}
+	],
+	"failures": [],
+	"passed": true,
+	"scope": "Actual museum instance and its plan config; button physics rays and live signal actions. Headset/learner acceptance remains open."
+}

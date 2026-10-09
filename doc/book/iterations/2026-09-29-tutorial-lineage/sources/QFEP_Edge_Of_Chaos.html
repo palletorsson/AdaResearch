@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_Edge_Of_Chaos · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_Edge_Of_Chaos">← Tutorial lineage</a></p><h1>QFEP Edge Of Chaos</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_Edge_Of_Chaos/final.md">Raw captured source</a></p><pre># A pattern and the way we drive it
+
+Which changes belong to the model, and which belong to the way its calculation is run?
+
+&lt;!-- @edge_of_chaos_unlocked --&gt;
+
+The console is the pair of framed screens under SAME START / SAME TIME; the rail nearer the door is a separate handle wired to nothing in this hall. Keep SIM SPEED steady and move LAMBDA slowly. Give the image time to respond before choosing another value. Use RESTART to repeat the same start, or NEW SEED to choose another. Describe what persists, spreads or disappears before giving the whole picture a name.
+
+The display updates two concentrations on a grid. Local reaction terms change their amounts, while diffusion exchanges concentration with neighbouring cells. The resulting image comes from repeated local updates rather than from replaying a finished picture.
+
+Choose a visible feature small enough to follow, such as the boundary between two coloured regions. Compare its persistence through several updates with the overall impression of activity across the field. A rapidly changing picture can contain local features that last, while a nearly uniform picture can still undergo numerical updates. Describing both scales gives you a better observation than declaring the whole image ordered or chaotic from one glance at its most conspicuous movement.
+
+LAMBDA follows one authored route through several reaction-diffusion parameters. It changes feed, removal and diffusion coefficients together.[^gray-scott] If the picture changes, the comparison establishes a response to that combined adjustment; it does not isolate the effect of one chemical parameter or discover a universal balance point.
+
+Initial conditions matter too. NEW SEED changes the starting concentrations while leaving the chosen parameter setting available for comparison. RESTART returns that numbered seed to its beginning. A pattern that survives one start may not appear in the same way from another. Fix it in words before you touch anything: which feature are you comparing, and over how much observed time?
+
+There are two images in front of you. They begin with the same concentrations and reach the same model time, but the right-hand calculation takes twice as many smaller steps. Follow the boundary you chose in both. Does it still turn in the same place? Press HOLD / RUN when there is something you want to look at for longer.
+
+DT .3 / .15 starts the comparison again with a different step size. The smaller number gives the calculation more occasions to respond along the way. SIM SPEED instead changes how quickly the model clock advances while you stand here. Those are different ways of changing time. Making the picture run faster does not make its calculation more precise.
+
+The small difference reading compares the two B concentration fields cell by cell. A low value means these calculations are close in that particular respect. It does not tell you whether the pattern is alive, beautiful or worth keeping. Look back at your boundary. Does the number register what you were watching?
+
+A previous version of this screen made its pattern partly by overshooting and clipping its values; that too was something code had made, answering a different question from the one the display claimed to ask. Repairing the calculation gives us another way to investigate the image; it does not make the image explain itself.
+
+The hall’s recommended middle was an architectural choice. Here a measured transition would require a stable numerical experiment and a defined observable, such as persistence or spatial correlation, examined across controlled settings. An evocative label cannot perform that work.
+
+Repeat the comparison at another LAMBDA setting, or from another seed. Agreement across smaller steps gives us a reason to trust a feature more. Disagreement gives us somewhere to look. The question remains open long enough to become an experiment.
+
+
+The sandbox extends the question of control across several objects. First we must establish which objects actually receive each change.
+
+[^gray-scott]: The Gray–Scott model: John E. Pearson, &quot;Complex Patterns in a Simple System&quot;, *Science* 261 (1993), 189–192. LAMBDA&#x27;s path through feed and kill is authored here and is not a parameter of that model.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_Edge_Of_Chaos/tutorial.md">Raw captured source</a></p><pre># Edge Of Chaos
+
+λ near 0.4, φ positive, both held. Build the narrow band where Turing patterns, Langton&#x27;s rules, and life itself live.
+
+Declare the edge controller.
+
+```gdscript
+class_name EdgeController
+extends Node3D
+
+@export var lambda_value: float = 0.4
+@export var phi_value: float = 0.6
+@export var window: float = 0.12
+```
+
+Two live values and a tolerance. The controller holds the target and reports whether the learner is in the window.
+
+Test the window.
+
+```gdscript
+func in_edge(l: float, p: float) -&gt; bool:
+    return abs(l - lambda_value) &lt; window and p &gt; 0.0
+```
+
+Inside the window means close to target λ and positive φ. Outside means nothing bad; only less complex. The edge is a location, not a judgement.
+
+Drive a reaction-diffusion field by λ.
+
+```gdscript
+func step_rd(field: Image, l: float) -&gt; void:
+    var feed: float = 0.035 + l * 0.025
+    var kill: float = 0.06 + l * 0.005
+    _apply_rd(field, feed, kill)
+```
+
+Feed and kill parameters shift with λ. The Gray-Scott system produces spots, stripes, and dissolution across the swept range. The edge hosts the patterns.
+
+Render the RD field to a floor texture.
+
+```gdscript
+func update_floor(field: Image) -&gt; void:
+    var tex := ImageTexture.create_from_image(field)
+    floor_material.albedo_texture = tex
+```
+
+The texture updates live. The learner walks on the pattern. The pattern is λ made visible on the ground.
+
+Spawn Langton ants at the edge.
+
+```gdscript
+func spawn_ants_if_edge(l: float, p: float) -&gt; void:
+    if not in_edge(l, p): return
+    for i in 6:
+        var ant := preload(&quot;res://commons/artifacts/qfep/langton_ant.tscn&quot;).instantiate()
+        ant.position = Vector3(randf_range(-4, 4), 0.05, randf_range(-4, 4))
+        add_child(ant)
+```
+
+Ants appear only when the conditions are met. They leave trails that remember the learner&#x27;s location history. Rule 110 and Langton&#x27;s ant both live in this neighbourhood.
+
+Chime on entering the window.
+
+```gdscript
+func _on_window_entered() -&gt; void:
+    audio.stream = edge_chime
+    audio.play()
+    window_label.text = &quot;you are at the edge&quot;
+```
+
+The chime marks the threshold without spotlighting it. The window is a discovery, not a level.
+
+Fade everything outside the window.
+
+```gdscript
+func _on_window_exited() -&gt; void:
+    for creature in creatures:
+        creature.queue_free()
+    rd_enabled = false
+```
+
+Leaving the edge clears the patterns. The learner sees complexity as something sustained, not something earned. Step back in and it returns.
+
+You have inhabited the edge. The next map, Sandbox, removes every guardrail and gives the parameters to the learner.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Count ants visible in the frame.
+
+```gdscript
+func count_visible_ants(cam: Camera3D) -&gt; int:
+    var count := 0
+    for ant in ants:
+        if cam.is_position_in_frustum(ant.global_position):
+            count += 1
+    return count
+```
+
+Ant-count rises when the learner stands inside the window. A small readout on the wall updates from this value.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_Edge_Of_Chaos/technical.md">Raw captured source</a></p><pre># Two timesteps, one model duration
+
+Phi separated a weight from both measured change and interpretation. This hall puts a parameter in contact with a specific Gray-Scott update. LAMBDA remains one authored route: feed 0.01–0.08, removal 0.08–0.03, diffusion A 0.8–1.2 and diffusion B 0.3–0.7. Varying it changes all four together.
+
+Every tenure now uses the same periodic four-neighbour operator: neighbour average minus centre. The previous interactive solver used neighbour sum minus four times centre at dt=1; only the two endpoint presets used the normalized operator. Normalization divides the spatial diffusion operator by four. This changes effective diffusion relative to the old interactive model; it is not simply a smaller timestep. The current comparison keeps this normalized model identical on both screens.
+
+```gdscript
+var reaction := av * bv * bv
+na[idx] = av + (_diffusion_a * lap_a - reaction + _feed_rate * (1.0-av)) * dt
+nb[idx] = bv + (_diffusion_b * lap_b + reaction - (_kill_rate+_feed_rate)*bv) * dt
+```
+
+For pure diffusion, the normalized operator&#x27;s most negative eigenvalue is -2; explicit Euler needs D*dt &lt;= 1. Our largest diffusion coefficient times the coarser timestep is 1.2*0.3=0.36. That bound alone is not a proof of stability for nonlinear reaction terms. The recorded numerical checks also examine finite, nonnegative concentrations and a selected timestep-refinement comparison. No claim of universal convergence or physical criticality follows.
+
+The fields are not clipped to [0,1]. B can exceed one transiently with the existing seed; imposing the palette range on the simulated concentrations would change the update. An invalid negative/nonfinite value stops calculation and reports a solver fault. The display palette saturates separately. The paired display uses dt=0.3 with dt=0.15, or dt=0.15 with dt=0.075. One coarse tick and two fine ticks advance both by exactly the same model duration, under the same current coefficients.
+
+RESTART reproduces the numbered seed and resets both clocks. NEW SEED increments it and restarts both. DT .3 / .15 switches the pair and restarts the same seed. HOLD / RUN pauses both fields and their clock. LAMBDA changes their common coefficients; use RESTART after selecting it for a comparison of fixed settings. The readout&#x27;s B difference is the root mean square of cellwise differences, not entropy or a quality score.
+
+SIM SPEED now requests 3–24 model-time units per visitor second, independently of rendered frame count. Work is limited to four coarse ticks per frame. Under load model time can fall behind the requested rate; the readout reports only time actually integrated. This prevents catch-up work from growing without bound. Quest performance remains unmeasured. Display rate changes texture refresh cadence only.
+
+The pair is enabled through comparison_study:on in this hall. Other placements retain their single display and tenure geometry, but receive the common solver, elapsed-time scheduling and separate RESTART / NEW SEED controls. Legacy regime words become LAMBDA LOW / MID / HIGH, explicitly ranges of the knob, not measured dynamics. Historical tenure names frozen/chaos remain configuration vocabulary. Endpoint presets still preroll 192 model-time units.
+
+The map keeps its central terraces and all six placement families. A level east bay gives the paired study a clear approach; controls occupy two compact rows facing into the hall. The other lambda_slider is still an independent secondary. Its legacy locked token is ignored by that script; this pass makes no claim that it is fixed or drives the solver. The continuous museum suppresses its legacy teleporter, and retains five instantiated works. The secondary turing_pattern screen uses noise and trigonometry rather than a stateful reaction-diffusion update. Its malformed shader hash and fractional-part expressions were repaired so that this retained work can render again. These secondary links belong to the Sandbox investigation rather than an inferred connection here.
+
+Numerical probe: check_solver.gd and solver-checks.json in the dated review folder. Museum probe: check_hall.py. Neither replaces headset testing or a learner&#x27;s account of what changed.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_Edge_Of_Chaos/intent.md">Raw captured source</a></p><pre>Concept: λ ≈ 0.3–0.5. The sweet spot where complexity emerges — not frozen order, not dissolved chaos. Turing patterns, Langton&#x27;s discovery, adaptation and learning all happen here at the edge.
+Sequence role: Sixth map in QFEP Lab; the moment the theory becomes phenomenal. After walking the spectrum (Lambda_Spectrum) and understanding rate sensitivity (Phi_Term), this map dwells at the edge where everything interesting happens. The turing_pattern artifact connects back to the SoftBodies sequence (reaction-diffusion); the emergence_zone is where the cellular automata generated complexity; follows QFEP_Phi_Term; leads to QFEP_Sandbox.
+Technical angle: Langton&#x27;s lambda parameter and its connection to QFEP&#x27;s λ, Turing morphogenesis as edge-of-chaos pattern formation, the four classes of cellular automata behavior (fixed, periodic, chaotic, edge-of-chaos), criticality and phase transitions. The edge_core artifact generates emergent behavior at the critical λ value.
+Critical angle: The edge of chaos is the curriculum&#x27;s ultimate thesis: creativity, life, learning, and computation all occur at the boundary between too much order and too much entropy. This is not a metaphor — it is a measurable property of dynamical systems. Langton showed it in cellular automata, Kauffman in genetic networks, Beggs and Plenz in neural tissue. The edge is where the QFEP formula&#x27;s three terms balance productively.
+Key artifacts: edge_core generates emergent behavior at critical λ; emergence_zone visualizes the narrow band where complexity lives; turing_pattern connects to reaction-diffusion morphogenesis; lambda_slider provides continuous parameter control; tt for navigation.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_Edge_Of_Chaos/critical.md">Raw captured source</a></p><pre># A pattern can belong to the calculation
+
+The calculation had made something vivid. It had also made it difficult to tell whether the chosen parameters mattered: different settings could run into the same limits and return a similar image.
+
+There is a temptation to call that image chaos because it refuses the regularity we expected. But the label would conceal a more specific event. A numerical decision had overwhelmed the differences the visitor was trying to explore.
+
+The paired study gives that decision a visible consequence. Two images receive the same start and the same time. Their different steps can leave a difference between them. The comparison asks the visitor to choose a feature and keep looking; the number on the console cannot choose what deserves attention.
+
+Repair does not exhaust the artistic question. An unstable calculation can still produce a form we desire. We can return to it as a study of instability, saturation or the image of complexity. What we cannot honestly do is use that pleasure as evidence for a privileged biological or political regime.
+
+In the project&#x27;s QFEP framing, revisability includes the criteria by which an outcome is recognised. Here even closeness has a chosen definition: the square root of averaged squared concentration differences. A boundary important to a body might occupy very few cells. We need to keep both the measurement and the encounter available to question.
+
+The next room extends this attention to the reach of a control. Before a hand can revise a system, something has to receive its gesture.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_Edge_Of_Chaos/artifacts.md">Raw captured source</a></p><pre># QFEP Edge Of Chaos — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 6 artifacts*
+
+&gt; *λ ≈ 0.3 - 0.5*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Turing Pattern
+![Turing Pattern](/scene-catalog/turing_pattern.png)
+
+Reaction-diffusion Turing pattern. Spots, stripes, labyrinths.
+
+`turing_pattern`
+
+## Edge Core
+![Edge Core](/scene-catalog/edge_core.png)
+
+Central orb for edge of chaos. Pulsing, alive, responsive to λ.
+
+`edge_core`
+
+## Edge of Chaos Unlocked
+![Edge of Chaos Unlocked](/scene-catalog/edge_of_chaos_unlocked.png)
+
+CONTROL lambda directly
+
+`edge_of_chaos_unlocked`
+
+## Emergence Zone
+![Emergence Zone](/scene-catalog/emergence_zone.png)
+
+A zone where complexity emerges. Particles self-organize at the edge of chaos.
+
+`emergence_zone`
+
+## Lambda Slider
+![Lambda Slider](/scene-catalog/lambda_slider.png)
+
+TUNE entropy drive
+
+`lambda_slider`
+
+## Tutorial Text Display
+![Tutorial Text Display](/scene-catalog/tt.png)
+
+In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.
+
+`tt`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_Edge_Of_Chaos/summary.md">Raw captured source</a></p><pre># Edge of Chaos — a pattern and the way we drive it
+
+Sixth declared QFEP Laboratory hall. A paired Gray-Scott display starts two fields from the same numbered seed and advances them through the same model duration using two numerical timesteps. Follow a boundary, hold the images, repeat the seed or choose a new one. Change LAMBDA slowly while keeping SIM SPEED steady, then restart at a fixed setting for comparison.
+
+The numerical repair applies to every tenure of the main artifact. The chapter preserves its investigative opening and replaces the proposed future experiment with the actual paired comparison. It does not classify an image as life or criticality from the knob setting.
+
+All six map placements remain. Five works instantiate; the legacy teleporter is suppressed by the continuous museum. The central terraced structure remains, with an accessible east-side study bay. Headset operation and learner understanding remain pending. Next: Sandbox and the question of which objects actually receive a control.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_Edge_Of_Chaos/blurb.md">Raw captured source</a></p><pre>*The image changes. Which part of the change belongs to the way we calculated it?*
+
+Two fields begin together. One takes smaller steps.
+
+Choose a boundary and keep looking.
+</pre></section></body></html>

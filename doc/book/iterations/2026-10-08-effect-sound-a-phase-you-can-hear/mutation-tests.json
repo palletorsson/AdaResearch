@@ -1,0 +1,27 @@
+[
+  {
+    "fault": "mixed-instead-of-modulated",
+    "rejected": true,
+    "failures": [
+      "nested phase gives the predicted signed sample"
+    ]
+  },
+  {
+    "fault": "world-instead-of-local",
+    "rejected": true,
+    "failures": [
+      "height 0.7 maps to depth 0.0 in rotated local frame",
+      "height 1.0 maps to depth 0.0 in rotated local frame",
+      "height 1.3 maps to depth 2.0 in rotated local frame",
+      "sideways and depth movement do not select another parameter",
+      "second trigger cannot interrupt prepared pair"
+    ]
+  },
+  {
+    "fault": "wrong-sample-clock",
+    "rejected": true,
+    "failures": [
+      "every encoded sample matches the signal within one quantisation step"
+    ]
+  }
+]

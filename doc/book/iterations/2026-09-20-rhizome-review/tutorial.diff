@@ -1,0 +1,32 @@
+--- before/commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md
++++ commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md
+@@ -4,9 +4,9 @@
+ 
+ <!-- @rhizome_grower -->
+ 
+-Watch a new shoot and trace its links. Compare a crowded region with a sparse one. Predict which nearby nodes the next shoot could reach, then inspect what actually appears.
++Watch a new shoot and trace its links. Press GROW to hold the arrivals, then REPLAY to return to the first two points. STEP admits one new point and waits. Compare a crowded region with a sparse one. Predict which nearby points the next shoot could reach, then inspect what appears.
+ 
+-New nodes connect by distance. They have no designated root, but some nodes accumulate more links than others. The little graph sways as a whole; that motion is separate from the creation of edges.
++Hold an arrangement and press LINKS. The positions stay while the rule switches between one and three earlier neighbours. Trace a route before and after the switch. Which points remain connected?
+ 
+ The source makes the operation inspectable:
+ 
+@@ -25,12 +25,14 @@
+ 
+ [Implementation](../../../commons/artifacts/rhizome_grower/rhizome_grower.gd). This is an excerpt from the artifact, not a standalone program.
+ 
+-No named root is a construction rule, not a certificate of equal power. Proximity and arrival time still shape access. A graph can contain uneven degrees, bottlenecks and dependencies without storing a hierarchy field. The desire for other relations becomes useful when we can ask which relation to change and observe the consequences. Adding a distant link or removing a busy node would make a sharper experiment than simply calling the whole network free.
++Select a busy node with NODE and predict the consequence of removing it. CUT hides its incident links and leaves a small grey ghost. Trace the surviving paths, then read COMPONENTS: it counts connected groups, including isolated active points. Restore the node with CUT, switch LINKS and repeat at the same point. Neither comparison moves the points or repairs missing relations.
++
++No named root is a construction rule, not a certificate of equal power. Proximity and arrival time still shape access. DEGREE counts links, not authority. REPLAY can recover the same positions and forty-node growth holds for inspection; there is time to reconsider the arrangement.
+ 
+ <!-- @ -->
+ 
+ The assembly laboratory replaces nearest-neighbour growth with a catalogue and an authored target.
+ 
+-## Next experiment — not yet a visitor control
++## Further experiment
+ 
+-Expose a selectable node and removal operation, then show connected components before and after deletion. Compare nearest-only growth with one distant connection per shoot. The current exhibit has neither deletion nor automatic repair.
++Compare nearby links with a distant connection, or let the graph alter the region in which points can arrive. These are proposals; the current controls compare link count and temporary removal within a fixed region.

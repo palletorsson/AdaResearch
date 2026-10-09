@@ -1,0 +1,23 @@
+--- before/commons/maps/WaveFunctions_TrigWalkingPath/map_data.json
++++ after/commons/maps/WaveFunctions_TrigWalkingPath/map_data.json
+@@ -1,9 +1,9 @@
+ {
+  "map_info": {
+   "name": "WaveFunctions_TrigWalkingPath",
+-  "title": "Walk the Trig Function",
++  "title": "A Slow Pulse from Fast Motions",
+   "lookup_name": "WaveFunctions_TrigWalkingPath",
+-  "description": "Trig Walking Path",
++  "description": "Compare two adjustable visual oscillations with their half-scaled sum. Nearby frequencies produce a slow envelope; equal frequencies remove that beating. The finite TrigWalkingPath remains a secondary spatial comparison alongside sine oscillation, Lissajous curves and wave interference.",
+   "version": "1.0",
+   "format": "json",
+   "dimensions": {
+@@ -15,7 +15,7 @@
+    "difficulty": "beginner",
+    "category": "algorithms",
+    "estimated_time": "5 minutes",
+-   "learning_objectives": [ "Wavefunctions" ]
++   "learning_objectives": [ "Compare two frequencies with their visual sum", "Relate the slow envelope to absolute frequency difference", "Distinguish half-scaled display height from the raw sum", "Keep visual beats distinct from audible demonstrations" ]
+   },
+   "museum": {
+    "wall_height": 3,

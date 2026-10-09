@@ -1,0 +1,88 @@
+{
+  "reports": [
+    {
+      "name": "projections-and-snapshot",
+      "checks": 21
+    },
+    {
+      "name": "museum-hall",
+      "checks": 30
+    }
+  ],
+  "total_checks": 51,
+  "sources": [
+    {
+      "file": "commons/maps/Fractal_Recursion/final.md",
+      "sha256": "be286ff770816e3888d20e0c9dc419e3cd39ce6095fa971d12caef075fbabeda"
+    },
+    {
+      "file": "commons/maps/Fractal_RecursiveTrees/final.md",
+      "sha256": "de2b55b4fdb7a7a203a3fab20e58c4ab917131c238d76190631f341f1725fd3f"
+    },
+    {
+      "file": "commons/maps/Fractal_CantorSet/final.md",
+      "sha256": "438cd65e891852393e1bc06611ebbefcd7d5e3ae12cb48fb7f4ae23245414e4b"
+    },
+    {
+      "file": "commons/maps/Fractal_KochSierpinski/final.md",
+      "sha256": "ce1cfd2522b391580666ae2effc9515145ce307b261f3770b27160796c2604b9"
+    },
+    {
+      "file": "commons/maps/Fractal_MengerSponge/final.md",
+      "sha256": "8388af3149e9aa1f686f0e1860a8f1705516a9cb760d35e1f1e2ec93f7685574"
+    },
+    {
+      "file": "commons/maps/Fractal_GoldenSpiral/final.md",
+      "sha256": "9412a6fe693f0d8bb67ff29a325936a28383579e0cd1ebbb94e0636de5d5eb3e"
+    },
+    {
+      "file": "commons/maps/Fractal_Synthesis/final.md",
+      "sha256": "c0124dbb8848ca5fb51dd09850c3c76e3cfdb363a5f163bd4c6bb0884eea91fa"
+    },
+    {
+      "file": "doc/book/course/fractals-scale-and-return.md",
+      "sha256": "c9a4519bc743095c396abe4761951e4a5079f8d686c06517d084629a447910c3"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/tree_readings.gd",
+      "sha256": "111d2be2c1f27326ac2388c74c96063b4e277a2a8dd5f18e340345997ed969ee"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd",
+      "sha256": "39ae72106e06489ba2bbaa130f1ddf3affba02548d138e659fd05784be0038d3"
+    },
+    {
+      "file": "tools/probes/fractal_scale_return.gd",
+      "sha256": "cece2da9d8704efd7d2bd74d6fcf3c9063444d711a175a2f60a32fd8f0459bba"
+    },
+    {
+      "file": "tools/probes/fractal_scale_return_museum.gd",
+      "sha256": "61c7e456bd7a8eeedfd139329cb8e27c2c6f22286ee1b80b75e9b786209e4d17"
+    },
+    {
+      "file": "tools/test_fractal_scale_return.py",
+      "sha256": "4de181be6697ca629943c464fca4f45f5e3a10bc297988c61f6c17f5f1237a52"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/hand_fork.gd",
+      "sha256": "a45f5758b8b9c2ebc08734b44c0d06df3ccf315bd2304862d38a290f468404ba"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/fork_point.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/branch_canopy.gd",
+      "sha256": "eeab94c7611dc7d869c99fbdd6f3cd097b857cacb326cd62e1e79e0a363fb8eb"
+    },
+    {
+      "file": "commons/artifacts/recursive_tree_lesson/HAND_FORK.md",
+      "sha256": "a5694de4d97f79e6827b2b17e479ca591d5c5e37dfbb1444e937b2e7e80c4b01"
+    },
+    {
+      "file": "algorithms/fractals/recursivetree/recursive_tree.gd",
+      "sha256": "0fc418349ebeed4fbb0e4d0583ea883a4717d169562250b3fa13e82dd7fa531c"
+    }
+  ],
+  "scope": "Reflective text integration and one local comparison instrument; tutorial code unchanged. Synthetic input, not headset or learning verification."
+}

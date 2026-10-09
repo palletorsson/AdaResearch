@@ -1,0 +1,168 @@
+{
+  "checks": [
+    {
+      "name": "complete program creates its cube",
+      "passed": true
+    },
+    {
+      "name": "cube retains the previous lesson's size",
+      "passed": true
+    },
+    {
+      "name": "readout initialised by ready",
+      "passed": true
+    },
+    {
+      "name": "bounded display allocated once",
+      "passed": true
+    },
+    {
+      "name": "initial cube is at a constrained radius",
+      "passed": true
+    },
+    {
+      "name": "gravity accelerates towards the hanging position",
+      "passed": true
+    },
+    {
+      "name": "sub-interval update stores no observation",
+      "passed": true
+    },
+    {
+      "name": "first observation waits for a physics tick",
+      "passed": true
+    },
+    {
+      "name": "record stores study coordinates rather than pivot offset",
+      "passed": true
+    },
+    {
+      "name": "motion does not mutate saved positions",
+      "passed": true
+    },
+    {
+      "name": "age has the predicted display depth",
+      "passed": true
+    },
+    {
+      "name": "redrawing never accumulates displacement in record",
+      "passed": true
+    },
+    {
+      "name": "display has one visible mark per observation",
+      "passed": true
+    },
+    {
+      "name": "rendered first mark matches the computed position",
+      "passed": true
+    },
+    {
+      "name": "25 ms request actually includes 1-tick gaps",
+      "passed": true
+    },
+    {
+      "name": "25 ms request actually includes 2-tick gaps",
+      "passed": true
+    },
+    {
+      "name": "sampler switch clears record and remainder",
+      "passed": true
+    },
+    {
+      "name": "sampler switch preserves motion and clock",
+      "passed": true
+    },
+    {
+      "name": "sampler switch hides old display",
+      "passed": true
+    },
+    {
+      "name": "reset restores initial state and local clock",
+      "passed": true
+    },
+    {
+      "name": "fine history obeys count bound",
+      "passed": false
+    },
+    {
+      "name": "fine count bound retains about three seconds",
+      "passed": false
+    },
+    {
+      "name": "all records stay in the swing plane",
+      "passed": true
+    },
+    {
+      "name": "recording rate leaves motion unchanged",
+      "passed": true
+    },
+    {
+      "name": "coarse history has about thirty marks",
+      "passed": true
+    },
+    {
+      "name": "coarse age bound keeps more duration",
+      "passed": false
+    },
+    {
+      "name": "all retained records obey age limit",
+      "passed": true
+    },
+    {
+      "name": "translated rotated study still records its local plane",
+      "passed": true
+    },
+    {
+      "name": "half drawing speed halves the depth",
+      "passed": true
+    },
+    {
+      "name": "drawing change retains motion and record",
+      "passed": true
+    },
+    {
+      "name": "independent 20-entry variation hits count limit",
+      "passed": false
+    },
+    {
+      "name": "late update saves one real observation, not invented backlog",
+      "passed": true
+    },
+    {
+      "name": "zero velocity and gravity retain angle",
+      "passed": true
+    },
+    {
+      "name": "injected velocity changes the future",
+      "passed": true
+    },
+    {
+      "name": "render frames do not advance physics time",
+      "passed": true
+    },
+    {
+      "name": "smaller time steps give a close two-second solution",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [
+    "fine history obeys count bound",
+    "fine count bound retains about three seconds",
+    "coarse age bound keeps more duration",
+    "independent 20-entry variation hits count limit"
+  ],
+  "passed": false,
+  "scope": "Teacher-authored native checks of the exact printed program; not independent reconstruction or headset validation.",
+  "source": "res://doc/book/iterations/2026-10-08-pendulum-a-record-of-return/extracted/unbounded-count.gd"
+}

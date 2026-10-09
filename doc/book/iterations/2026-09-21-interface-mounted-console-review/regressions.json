@@ -1,0 +1,20 @@
+{
+  "grammar": {
+    "checks": 46,
+    "failures": [],
+    "headset_tested": false,
+    "method": "XR Tools pickup, grab-driver motion and release; physics rays to physical colliders; actual grammar geometry and readout"
+  },
+  "fitness": {
+    "checks": 45,
+    "failures": [],
+    "headset_tested": false,
+    "method": "Physics hand overlap and ray hits; XR Tools pickup, grab driver and release; live artifact, state synchronization and seeded before comparison"
+  },
+  "edge": {
+    "checks": 81,
+    "failures": [],
+    "headset_tested": false,
+    "method": "Actual XR Tools grab and physics ray input; ten access/comparison combinations; before/after numerical fields; restart, seed, pause, timestep and live configuration"
+  }
+}

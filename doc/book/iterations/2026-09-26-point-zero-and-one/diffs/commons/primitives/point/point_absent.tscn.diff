@@ -1,0 +1,10 @@
+--- before/commons/primitives/point/point_absent.tscn
++++ after/commons/primitives/point/point_absent.tscn
+@@ -0,0 +1,7 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/primitives/point/point_condition.gd" id="1"]
++
++[node name="point_absent" type="Node3D"]
++script = ExtResource("1")
++condition = "absent"

@@ -1,0 +1,28 @@
+--- before-feedback/tutorial.md
++++ tutorial.md
+@@ -98,7 +98,7 @@
+ 
+ The two arrays keep different things. `grid_data[x][z]` holds a number: `1` means a cube is present, and `0` means it has been collected. `cubes[x][z]` holds a reference to that cube, or `null` after collection. A number describing presence cannot turn a mesh. A reference to a mesh does not explain what an empty place means.
+ 
+-The outer list selects X; the inner list selects Z. At the start, `grid_data` reads `[[1], [1], [1], [1]]`. Four X entries, each containing one Z entry. `grid_data[2][0]` selects the third cube's value. In the installed row, the display wraps four values as `array_data[0][i]`; our reduced study starts with the X/Z convention used by the hall's square grid.
++Our program uses the first index for X and the second for Z. Nested arrays have no spatial axes of their own; this is the meaning we give those indices when placing and reading cubes. At the start, `grid_data` reads `[[1], [1], [1], [1]]`. Four X entries, each containing one Z entry. `grid_data[2][0]` selects the third cube's value. In the installed row, the display wraps four values as `array_data[0][i]`; our reduced study starts with the X/Z convention used by the hall's square grid.
+ 
+ Trace used an array to keep a growing history of positions. This record begins with fixed slots. We can change what one slot contains without removing that slot.
+ 
+@@ -116,13 +116,15 @@
+ 
+ The labels belong to `ArrayStudy`, not to the cubes, so collection keeps them. The readout traverses the retained values again. This is why you can still locate and read an empty address. We do not use `remove_at`: removing a list entry would shift the later indices.
+ 
++Our study keeps every address label visible to make stable indexing easy to follow. In the museum row, the label leaves with its cube; in the square grid, the floor plate stays. Both records retain their slots. The displays give us different ways to find those places again.
++
+ ## Open the row into a plane
+ 
+ Change `depth` from `1` to `4` and run the study again. The same code now places sixteen cubes. For each X index, the inner loop visits four Z indices. The readout has four lines, each containing four values. Its lines represent X, and the entries across a line represent Z.
+ 
+ Find `[1, 2]`. It is 1.6 metres along local X and 3.2 metres along local Z. Compare it with `[2, 1]` before collecting either. Exchanging the numbers changes the place. Collect `[1, 2]` and inspect the second readout line: its third entry is zero. The other fifteen entries remain one.
+ 
+-`append([])` creates a fresh inner array on each outer-loop visit. This matters: if every X entry referred to the same inner array, one change would appear in several places. The cube factory likewise creates a new node on every call. Similar appearance does not mean shared identity.
++`append([])` creates a fresh inner array on each outer-loop visit. Suppose X entries 0 and 1 instead referred to the same inner array. Writing zero to `grid_data[0][2]` would also make `grid_data[1][2]` read zero: both addresses would reach the same entry. Fresh inner arrays keep those changes separate. This is the distinction we met with cubes: making two objects differs from keeping two references to one object.
+ 
+ ## Use a known transformation
+ 

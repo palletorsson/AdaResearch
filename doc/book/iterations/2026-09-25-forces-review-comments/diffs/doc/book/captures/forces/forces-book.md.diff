@@ -1,0 +1,111 @@
+--- before/doc/book/captures/forces/forces-book.md
++++ doc/book/captures/forces/forces-book.md
+@@ -13,7 +13,7 @@
+ 
+ We can see the movement and the lack of change at once. The wall has been asked for the difference between the pins. Both addresses have changed by the same amount, so their difference has not.
+ 
+-The point rooms gave us addresses; transformation let us move them. Here we can carry a relation from one place to another. *This far, this way* can begin somewhere else.
++The point rooms gave us addresses; transformation let us move them. The particles in the last room followed directions. Here we can carry a relation from one place to another. *This far, this way* can begin somewhere else.
+ 
+ **PARTS** brings out the coloured component legs and their numbers. The calculation is short:
+ 
+@@ -453,11 +453,15 @@
+ 
+ MASS cycles through one, two and four kilograms, returning the probes to their starting positions and holding them there. FIRE begins another equal-speed comparison. A strip keeps its own coefficient throughout the flight, even when its cube passes through the glass boundary of the walking passage. The glass divides another kind of encounter.
+ 
+-Turn on **WALK**, then go through the centre: air, water, honey. The same desktop movement command carries you progressively less quickly. XR stick movement uses the same adaptation. Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.
++Turn on **WALK**, then go through the centre: air, water, honey. The same movement of the stick carries you progressively less quickly. Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.
+ 
+ Your controller is a different receiver. Its requested walking speed is multiplied by approximately 0.71, 0.43 or 0.24. That mapping is chosen to make resistance apparent; it does not integrate the cube's drag force through your body. In a headset, the program can slow a stick request. It cannot make your physical legs walk more slowly through the room you are standing in.
+ 
+ One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.
++
++![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-review/doc/book/figures/forces/inside-the-passage-museum.png)
++
++*The cubes cross the strips; the walking passage runs through them. A cube receives a force. The stick receives a change to its requested speed.*
+ 
+ The cubes ignore furniture and the visitor. Gravity and inherited damping are removed. If a cube reaches the end of its eight-metre observation window, the apparatus freezes it and labels FRAME EXIT. It has reached the limit of what we are watching, not a wall that did work to stop it. The displayed velocity remains its outgoing value.
+ 
+@@ -637,6 +641,8 @@
+ There is comedy in anticipating a clean handover and watching a parcel arrive at the wrong moment. There is also another form appearing in the interruption. For whom is the heap only waste? What would have to change for it to become a shelter, a route, a body worth keeping?
+ 
+ We have made those questions available; this first machine does not yet let you carry away its boxes or climb its heap as a designed route. Carry the distinction forward: a parameter can change a pattern, but the permissions of the body still need to be built.
++
++Next, gravity. The place the spring returned to acquires a body of its own. Will the centre remain still when another body answers it?
+ 
+ ---
+ 
+@@ -697,11 +703,13 @@
+ 
+ There are two white crosses now. Moving that one initial coordinate also moved its copy's centre of mass. We did not secretly recentre it. Even an experiment about difference has to decide which differences it will retain.
+ 
+-Return to `EPS * EPS`. The quarter-metre softening keeps close encounters finite by changing the attraction near coincidence. The visible spheres have no hard surfaces in this calculation: they neither collide nor merge. Their glow suggests bodies with skins; the rule offers positions and masses. What kind of encounter could we make by adding a skin?
++Return to `EPS * EPS`. The quarter-metre softening, called Plummer softening, keeps close encounters finite by changing the attraction near coincidence.[^VFM_07_Gravity--plummer] The visible spheres have no hard surfaces in this calculation: they neither collide nor merge. Their glow suggests bodies with skins; the rule offers positions and masses. What kind of encounter could we make by adding a skin?
+ 
+ The floor keeps at most 240 samples for each trail, taken twenty times a second: roughly twelve seconds of visible past. Hiding PATH does not stop this recording. Large acceleration arrows stop growing at two metres, while the numerical acceleration continues beyond that drawing limit. At the golden frame the whole experiment pauses with its outgoing state intact. The edge says our observation has ended; it does not prove that a body has escaped its partners.
+ 
+ We have allowed the centre to move and the third body to alter a relation already underway. Your feet, meanwhile, have remained on the museum floor. Gravity in the next encounter will need an answer from the ground. What lets a body stand?
++
++[^VFM_07_Gravity--plummer]: The added squared length softens the short-distance interaction. The [galpy Plummer potential documentation](https://docs.galpy.org/en/latest/reference/potentialplummer.html) gives the corresponding potential; this hall uses a softening length of 0.25 metres.
+ 
+ ---
+ 
+@@ -846,6 +854,8 @@
+ 
+ *Vectors_Act5_ForceAsPlace*
+ 
++### What carries you across?
++
+ A hole in the floor, and two ways over it. One of them somebody built. The other one you have to set.
+ 
+ The crab in the previous room needed a rule for finding its next encounter. The collision carts needed an account of what the encounter preserved. Bring both questions here. What will this place recognise when you enter it, and what motion will you bring?
+@@ -857,9 +867,9 @@
+ 
+ It opens at an acceleration of 9.8 metres per second squared, downward. That resembles ordinary falling, but the field supplies that value locally. Down is a setting you can change here.
+ 
+-Now watch what the steepness slider costs. At the bottom of its travel the field points straight down, `cos(pitch)` is zero, and the slider beside it does nothing at all. Run it through its whole range and the world will not move. Lift the field off the floor by even a little and the same slider becomes the most powerful control on the console.
+-
+-That is not a fault, it is what a direction *is* when you name it with two angles. At the poles the second angle has nothing left to mean. So the console tells you: while the field is vertical the readout says the yaw is idle and at what bearing it is waiting, and a faint arrow on the stage holds that bearing where you can see it. The fader is not dead. It is aimed, and the field cannot hear it yet.
++Now watch what the steepness slider costs. At the bottom of its travel the field points straight down, `cos(pitch)` is zero, and the slider beside it does nothing at all. Run it through its whole range and the world will not move. Tilt the field away from vertical. YAW begins to turn its horizontal part; as that part grows, the turn becomes easier to see.
++
++That is not a fault, it is what a direction *is* when you name it with two angles. At the poles the second angle has nothing left to mean. The console marks a small neighbourhood around either pole as idle too, even though a slight horizontal part is already there. Its readout gives the waiting bearing, and a faint arrow on the stage holds that bearing where you can see it. The fader is not dead. It is aimed, and the field cannot hear it yet.
+ 
+ A direction can be well defined while one of its coordinates is not. Here that ambiguity is at hand height, in metal, where you can feel it happen.
+ 
+@@ -871,12 +881,12 @@
+ return Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw)) * mag
+ ```
+ 
+-The last slider stops at fifteen. Aim partly upward and along the hall. Read the components before leaving the bench: positive Z leads toward the far side. The machine speaks only to this hall's field. A dial elsewhere in the museum cannot quietly rewrite your crossing.
++The last slider stops at fifteen metres per second squared. Aim partly upward and along the hall. Read the components before leaving the bench: positive Z leads toward the far side. The machine speaks only to this hall's field. A dial elsewhere in the museum cannot quietly rewrite your crossing.
+ 
+ #### Something in the way
+ 
+ 
+-Three glass cubes wait near the machine. Take one and move it slowly. Stop your hand. Its motion arrow should disappear; a body at rest need not invent a direction merely to remain a useful exhibit.
++Three glass cubes wait near the machine. Take one and move it slowly. Let your hand settle. The motion arrow disappears when the sampled movement becomes small enough. Even stillness has a threshold in this picture.
+ 
+ Release it into the volume and watch before following. Aim down, then repeat with the field tilted up and forward. Your release matters too. The field changes a velocity that has already begun.
+ 
+@@ -900,7 +910,11 @@
+ 
+ Five metres of air, marked by a cage. The thin edges are visible; they are not walls. A solid plank remains through the gap. Look along it, then into the air beside it. What would have to change for both to carry you?
+ 
+-With the field tilted up and forward, enter its near face from the plank. The field takes over locomotion inside. Your incoming velocity is retained, acceleration is added each physics step, and collision can still stop or deflect that movement. Ordinary keyboard or stick steering resumes when your feet leave the volume. Physical tracked movement remains possible in VR; this is a controller handoff, not a force applied to your muscles.
++![The plank and the outlined carrying field seen from inside the museum](/book-review/doc/book/figures/forces/two-crossings-museum.png)
++
++*The plank keeps a route through the gap. Beside it, the outline marks where another rule can carry you.*
++
++With the field tilted up and forward, enter its near face from the plank. The field takes over locomotion inside. Your incoming velocity is retained, acceleration is added each physics step, and collision can still stop or deflect that movement. Leaving the volume ends this override; the return to ordinary stick steering also needs support under your feet. Physical tracked movement remains possible in VR; this is a controller handoff, not a force applied to your muscles.
+ 
+ For a released cube, the central operation is short:
+ 
+@@ -921,7 +935,7 @@
+ 
+ Set ACCEL to zero before another crossing. Enter with some motion. Zero has removed the new contribution; it has not removed what you brought. The loose cube slows through its damping. This visitor receiver does not add that damping. The same empty-looking volume holds two different accounts of persistence.
+ 
+-The boundary is another decision. The cube is detected by overlapping its physical body with an area; the visitor is admitted by a test of the body's position near its feet. Their entries need not happen at the same instant. At the far face, the desktop walker returns horizontal movement to its ordinary input controller and keeps its vertical velocity under ordinary gravity. That seam can be felt as a change in how you travel.
++The boundary is another decision. The cube is detected by overlapping its physical body with an area; the visitor is admitted by a test of the body's position near its feet. Their entries need not happen at the same instant. At the far face, the carry receiver lets go. In the air, you keep the motion you leave with while ordinary gravity changes it. Once your feet find the floor, the stick can steer again. That seam can be felt as a change in how you travel.
+ 
+ 
+ #### What the plank keeps

@@ -1,0 +1,163 @@
+{
+  "checks": [
+    {
+      "name": "Printed lesson starts with an independent six-metre record",
+      "passed": true
+    },
+    {
+      "name": "Thirds produce the two exact outer intervals",
+      "passed": true
+    },
+    {
+      "name": "Translation follows the interval start",
+      "passed": true
+    },
+    {
+      "name": "Empty input yields an empty generation",
+      "passed": true
+    },
+    {
+      "name": "Quarter exercise is a distinct replacement",
+      "passed": true
+    },
+    {
+      "name": "Printed point is held by the actual XRTools driver",
+      "passed": true
+    },
+    {
+      "name": "Held withdrawal waits for release",
+      "passed": true
+    },
+    {
+      "name": "Returning before release cancels the printed cut",
+      "passed": true
+    },
+    {
+      "name": "Released withdrawal makes one generation in a rotated frame",
+      "passed": true
+    },
+    {
+      "name": "Unheld frames cannot repeat a cut",
+      "passed": true
+    },
+    {
+      "name": "Released point parks at its declared home",
+      "passed": true
+    },
+    {
+      "name": "Printed generation 2: count and retained length",
+      "passed": true
+    },
+    {
+      "name": "Printed generation 3: count and retained length",
+      "passed": true
+    },
+    {
+      "name": "Printed generation 4: count and retained length",
+      "passed": true
+    },
+    {
+      "name": "Printed generation 5: count and retained length",
+      "passed": true
+    },
+    {
+      "name": "Original and first generation remain intact",
+      "passed": true
+    },
+    {
+      "name": "Latest-only lesson draws 32 intervals",
+      "passed": true
+    },
+    {
+      "name": "Showing 63 history bars preserves current records",
+      "passed": true
+    },
+    {
+      "name": "Printed limit stops at five cuts",
+      "passed": true
+    },
+    {
+      "name": "Editing a saved row does not alias original or current",
+      "passed": true
+    },
+    {
+      "name": "Existing artifact installs the new grip and starts latest-only",
+      "passed": true
+    },
+    {
+      "name": "Rebuild controls leave a held point and current row intact",
+      "passed": true
+    },
+    {
+      "name": "Museum hand feedback arms without cutting",
+      "passed": true
+    },
+    {
+      "name": "Museum pull-back cancels",
+      "passed": true
+    },
+    {
+      "name": "Actual XR release cuts all current intervals once",
+      "passed": true
+    },
+    {
+      "name": "Museum resettable handle cannot auto-repeat",
+      "passed": true
+    },
+    {
+      "name": "Existing desktop pickup/release makes the same cut",
+      "passed": true
+    },
+    {
+      "name": "Museum generation 3: frozen latest pieces and length",
+      "passed": true
+    },
+    {
+      "name": "Museum generation 4: frozen latest pieces and length",
+      "passed": true
+    },
+    {
+      "name": "Museum generation 5: frozen latest pieces and length",
+      "passed": true
+    },
+    {
+      "name": "Museum history reveals 63 collidable bars without adding current members",
+      "passed": true
+    },
+    {
+      "name": "All 31 removals are meshes without collision",
+      "passed": true
+    },
+    {
+      "name": "Latest view excludes history collisions",
+      "passed": true
+    },
+    {
+      "name": "Held cut at the limit cannot create a sixth generation",
+      "passed": true
+    },
+    {
+      "name": "Back restores previous generation",
+      "passed": true
+    },
+    {
+      "name": "Repeated rebuilding preserves one hand model and bounded bars",
+      "passed": true
+    },
+    {
+      "name": "Ordinary nonlesson artifact retains falling physics",
+      "passed": true
+    },
+    {
+      "name": "Existing pagoda keeps all 15 structural blocks at three cuts",
+      "passed": true
+    },
+    {
+      "name": "Pagoda intervals retain 8 times one-third metre",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Extracted printed lesson, production fixture, actual XRTools driver with supplied poses and desktop hooks; headset untested."
+}

@@ -1,0 +1,2842 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-09-21 17:40:01",
+	"boot_ms": {
+		"autoloads": 2250,
+		"bake_parsed": 1004,
+		"boot_tail": 3907,
+		"engine_pak": 789,
+		"engine_to_ready": 4429,
+		"entry": 1,
+		"first_physics": 4024,
+		"grid_warm": 1563,
+		"guests_loaded": 1649,
+		"loading_shell": 20,
+		"modules_loaded": 302,
+		"modules_pool": 380,
+		"museum_data": 380,
+		"plan_parsed": 957,
+		"pool_done": 880,
+		"scene_chain": 1390,
+		"segment0_built": 3907,
+		"world_ready": 2279
+	},
+	"plan": "res://doc/reports/interfaces-2026-09-21/spine-polyhedra/after/trihedron/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.7,
+						-2.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.14,
+						0.0,
+						1.6
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.0,
+						0.0,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						1
+					],
+					"token": "path_watchdog",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						1
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						2
+					],
+					"token": "path_game_controller",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						2.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 2.0,
+					"tile_cell": [
+						4,
+						4
+					],
+					"token": "interactive_point_origin_force",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.0,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "becoming_catalyst",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.7,
+					"tile_cell": [
+						6,
+						4
+					],
+					"token": "becoming_catalyst",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.23,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						5
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						5
+					],
+					"token": "prism_block",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "grab_trihedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						5
+					],
+					"token": "grab_trihedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						1.53,
+						5.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "pyramid_edit",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						7
+					],
+					"token": "pyramid_edit",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.71,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "grab_tetrahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						7
+					],
+					"token": "grab_tetrahedron",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						1.53,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "plinth",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						7
+					],
+					"token": "cube_scene",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						1.43,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						9
+					],
+					"token": "street_sign",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						9.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						9
+					],
+					"token": "street_sign",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						9.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						10
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						10
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						10
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						10.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						11
+					],
+					"token": "street_sign",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						11
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						11
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						11.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						12
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						12.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						12
+					],
+					"token": "diamonds",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						12.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						12
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						12.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						13
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						13.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						13
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						13.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						14
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						14.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						14
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						14.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						14
+					],
+					"token": "concrete_barrier",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						14.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						15
+					],
+					"token": "street_sign",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						15.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						15
+					],
+					"token": "street_sign",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						15.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						16
+					],
+					"token": "trafficcone",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						16.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						16
+					],
+					"token": "trafficcone",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						16.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						10,
+						18
+					],
+					"token": "if_not_exist_create",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						18.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						20
+					],
+					"token": "rock_spawner",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						20.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						22
+					],
+					"token": "rock_scanner",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "gate",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "gate:primitives polythedra",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						-3.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						4,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 01",
+					"index": 1,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "01\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.6,
+						8.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						9
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 02",
+					"index": 2,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "02\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.6,
+						1.1,
+						9.0
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						14
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "03\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.2,
+						1.2,
+						15.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						15
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 04",
+					"index": 4,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "04\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.3,
+						1.0,
+						15.0
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						3,
+						19
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 05",
+					"index": 5,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "05\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.3,
+						1.0,
+						20.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						21
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 06",
+					"index": 6,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "06\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.6,
+						1.1,
+						21.0
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						24
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						3,
+						25
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 07",
+					"index": 7,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "07\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.6,
+						1.1,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						26
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 08",
+					"index": 8,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "08\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.3,
+						1.0,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						32
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						10,
+						33
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 09",
+					"index": 9,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "09\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.6,
+						1.1,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 10",
+					"index": 10,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "10\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						3
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						10,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "11\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.6,
+						1.1,
+						3.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						3
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 12",
+					"index": 12,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "12\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.6,
+						1.1,
+						4.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "13\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						5
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						5
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 14",
+					"index": 14,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "14\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.0,
+						1.2,
+						5.2
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "15\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.2,
+						4.2
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						17
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						17
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "16\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.0,
+						17.3
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 17",
+					"index": 17,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "17\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						21
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						21
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 18",
+					"index": 18,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "18\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.0,
+						1.0,
+						21.3
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						24
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						24
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 19",
+					"index": 19,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "19\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.0,
+						0.2,
+						24.6
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						30
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						30
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 20",
+					"index": 20,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "20\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.0,
+						1.1,
+						30.6
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						37
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						37
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 21",
+					"index": 21,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "21\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.0,
+						1.0,
+						37.3
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						22
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						22
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 22",
+					"index": 22,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "22\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.0,
+						1.1,
+						22.6
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						31
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						31
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 23",
+					"index": 23,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "23\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.0,
+						1.4,
+						31.3
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						22
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						22
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 24",
+					"index": 24,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "24\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.0,
+						1.1,
+						22.6
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						2
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 25",
+					"index": 25,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "25\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.0,
+						1.1,
+						2.6
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						3
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						3
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 26",
+					"index": 26,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "26\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.0,
+						3.3
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 27",
+					"index": 27,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "27\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						8.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						9
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 28",
+					"index": 28,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "28\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.2,
+						1.2,
+						9.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						17
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						16
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 29",
+					"index": 29,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "29\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.2,
+						1.2,
+						17.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						20
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						19
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 30",
+					"index": 30,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "30\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.6,
+						1.1,
+						20.0
+					]
+				},
+				{
+					"backing_cell": [
+						7,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						26
+					],
+					"chapter": "primitives",
+					"facing_deg": 180.0,
+					"id": "primitives · primitives polythedra · 31",
+					"index": 31,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "31\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						7.6,
+						1.1,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "primitives",
+					"facing_deg": 0.0,
+					"id": "primitives · primitives polythedra · 32",
+					"index": 32,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "32\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						-1,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						0,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 33",
+					"index": 33,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "33\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						0.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						7
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						7
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 34",
+					"index": 34,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "34\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.0,
+						1.0,
+						7.3
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						6
+					],
+					"chapter": "primitives",
+					"facing_deg": 90.0,
+					"id": "primitives · primitives polythedra · 35",
+					"index": 35,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "35\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.0,
+						6.3
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						19
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 36",
+					"index": 36,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "36\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.0,
+						1.1,
+						19.6
+					]
+				},
+				{
+					"backing_cell": [
+						13,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						4
+					],
+					"chapter": "primitives",
+					"facing_deg": -90.0,
+					"id": "primitives · primitives polythedra · 37",
+					"index": 37,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "primitives polythedra",
+					"segment": 0,
+					"text": "37\nprimitives · primitives poly",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.02755381539464,
+						"pixel_size": 0.000250489236790607,
+						"w": 0.128000006079674
+					},
+					"world": [
+						13.0,
+						1.0,
+						4.3
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.#######################",
+				"................p#########",
+				"##..............p#########",
+				"##...........#############",
+				"#######..#....############",
+				"##...ss..#....############",
+				"##.....s.#....############",
+				"##.......###..############",
+				"##...s.s.ss#..############",
+				"##.sss...ss#..############",
+				"##..sssssss#..############",
+				"##..ssssss.#..############",
+				"##..########..############",
+				"##..s..s...#..############",
+				"##...sssss.#..############",
+				"##.s.s###s##..############",
+				"##...s###s##..############",
+				"#####s###s##..############",
+				"##...sssss.#..############",
+				"##..s...s#################",
+				"##..s...s#...#############",
+				"####..#...sss#############",
+				"##.sssss..sss#############",
+				"##.sssss.#sss#############",
+				"##.#####.#...#############",
+				"##.#sss#.#...#############",
+				"##.#sss#.#....############",
+				"##.#sss#.#....############",
+				"##.##ss#.#...#############",
+				"##.......#...#############",
+				"##.......#...#############",
+				"####...###################",
+				"####...###################",
+				"#####..###################",
+				"#####...##################",
+				"#####...##################",
+				"#####...##################",
+				"#####...##################",
+				"#####...##################",
+				"######..##################",
+				"######...#...#############"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": true
+			},
+			"h": 37,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "primitives polythedra",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"10,17": "if_not_exist_create",
+				"10,18": "if_not_exist_create",
+				"10,19": "if_not_exist_create",
+				"11,17": "if_not_exist_create",
+				"11,18": "if_not_exist_create",
+				"11,19": "if_not_exist_create",
+				"2,11": "street_sign",
+				"2,18": "rock_spawner",
+				"2,19": "rock_spawner",
+				"2,5": "prism_block",
+				"3,15": "street_sign",
+				"3,16": "trafficcone",
+				"3,18": "rock_spawner",
+				"3,19": "rock_spawner",
+				"3,21": "rock_spawner",
+				"3,22": "rock_spawner",
+				"3,23": "rock_scanner",
+				"3,5": "prism_block",
+				"3,6": "pyramid_edit",
+				"3,7": "pyramid_edit",
+				"3,9": "street_sign",
+				"4,1": "path_watchdog",
+				"4,10": "diamonds",
+				"4,11": "concrete_barrier",
+				"4,12": "concrete_barrier",
+				"4,13": "diamonds",
+				"4,14": "diamonds",
+				"4,18": "rock_spawner",
+				"4,19": "rock_spawner",
+				"4,21": "rock_spawner",
+				"4,22": "rock_spawner",
+				"4,23": "rock_scanner",
+				"4,24": "rock_scanner",
+				"4,4": "interactive_point_origin_force",
+				"4,5": "prism_block",
+				"4,6": "pyramid_edit",
+				"4,7": "pyramid_edit",
+				"5,1": "prism_block",
+				"5,10": "concrete_barrier",
+				"5,14": "diamonds",
+				"5,18": "rock_spawner",
+				"5,19": "rock_spawner",
+				"5,21": "rock_spawner",
+				"5,22": "rock_spawner",
+				"5,23": "rock_scanner",
+				"5,24": "rock_scanner",
+				"5,6": "grab_tetrahedron",
+				"5,7": "grab_tetrahedron",
+				"6,10": "concrete_barrier",
+				"6,14": "diamonds",
+				"6,18": "rock_spawner",
+				"6,19": "rock_spawner",
+				"6,2": "path_game_controller",
+				"6,4": "becoming_catalyst",
+				"6,6": "grab_tetrahedron",
+				"6,7": "grab_tetrahedron",
+				"6,9": "street_sign",
+				"7,10": "concrete_barrier",
+				"7,14": "diamonds",
+				"7,15": "street_sign",
+				"7,16": "trafficcone",
+				"7,6": "grab_tetrahedron",
+				"7,7": "grab_tetrahedron",
+				"8,10": "diamonds",
+				"8,11": "concrete_barrier",
+				"8,12": "diamonds",
+				"8,13": "diamonds",
+				"8,14": "diamonds",
+				"8,4": "grab_trihedron",
+				"8,5": "grab_trihedron",
+				"8,6": "grab_trihedron",
+				"8,7": "cube_scene",
+				"9,17": "if_not_exist_create",
+				"9,18": "if_not_exist_create",
+				"9,19": "if_not_exist_create",
+				"9,4": "grab_trihedron",
+				"9,5": "grab_trihedron",
+				"9,6": "grab_trihedron"
+			},
+			"segment": 0,
+			"severed": [
+				{
+					"cells": [
+						[
+							5,
+							6
+						],
+						[
+							6,
+							6
+						],
+						[
+							7,
+							6
+						],
+						[
+							5,
+							7
+						],
+						[
+							6,
+							7
+						],
+						[
+							7,
+							7
+						]
+					],
+					"token": "grab_tetrahedron"
+				},
+				{
+					"cells": [
+						[
+							8,
+							11
+						]
+					],
+					"token": "concrete_barrier"
+				},
+				{
+					"cells": [
+						[
+							4,
+							12
+						]
+					],
+					"token": "concrete_barrier"
+				},
+				{
+					"cells": [
+						[
+							4,
+							10
+						],
+						[
+							8,
+							10
+						],
+						[
+							8,
+							12
+						],
+						[
+							4,
+							13
+						],
+						[
+							8,
+							13
+						],
+						[
+							4,
+							14
+						],
+						[
+							5,
+							14
+						],
+						[
+							6,
+							14
+						],
+						[
+							7,
+							14
+						],
+						[
+							8,
+							14
+						]
+					],
+					"token": "diamonds"
+				},
+				{
+					"cells": [
+						[
+							3,
+							16
+						]
+					],
+					"token": "trafficcone"
+				},
+				{
+					"cells": [
+						[
+							9,
+							17
+						],
+						[
+							10,
+							17
+						],
+						[
+							11,
+							17
+						],
+						[
+							9,
+							18
+						],
+						[
+							10,
+							18
+						],
+						[
+							11,
+							18
+						],
+						[
+							9,
+							19
+						],
+						[
+							10,
+							19
+						],
+						[
+							11,
+							19
+						]
+					],
+					"token": "if_not_exist_create"
+				}
+			],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 13,
+			"z0": -4,
+			"z1": 37
+		}
+	]
+}

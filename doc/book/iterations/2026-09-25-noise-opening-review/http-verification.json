@@ -1,0 +1,281 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "unique reading and footnote anchors",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #museum",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #reading",
+      "passed": true
+    },
+    {
+      "name": "HTTP: DECISIONS.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: DECISIONS.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /book-tasks/review?seq=noise",
+      "passed": true
+    },
+    {
+      "name": "HTTP: noise-book.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: noise-book.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP: rings/upright-pair.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: rings/upright-pair.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP: voxel-final/bench-controls.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: voxel-final/bench-controls.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP: above-volume.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: above-volume.png",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Random_Noise_Types",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Columns",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_One",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Voxel",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /compose/sources?map=Random_Noise_Types&doc=final",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "HTTP: diffs/commons/maps/Random_Noise_Types/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: diffs/commons/maps/Random_Noise_Types/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Random_Noise_Types-fn:cloud-replay",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Random_Noise_Types-fn:weather-filter",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Random_Noise_Types-fnref:cloud-replay",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Random_Noise_Types-fnref:weather-filter",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /compose/sources?map=Noise_Columns&doc=final",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to1__1",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to1__1",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to1__top",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to1__top",
+      "passed": true
+    },
+    {
+      "name": "HTTP: diffs/commons/maps/Noise_Columns/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: diffs/commons/maps/Noise_Columns/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /book-review/doc/book/figures/Noise_Columns/three-columns.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: /book-review/doc/book/figures/Noise_Columns/three-columns.png",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Columns-fn:image-score",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Columns-fnref:image-score",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /compose/sources?map=Noise_One&doc=final",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to2__top",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to2__top",
+      "passed": true
+    },
+    {
+      "name": "HTTP: diffs/commons/maps/Noise_One/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: diffs/commons/maps/Noise_One/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /book-review/doc/book/figures/Noise_One/standing-pair.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: /book-review/doc/book/figures/Noise_One/standing-pair.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /compose/sources?map=Noise_Voxel&doc=final",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to3__1",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to3__1",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to3__top",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #difflib_chg_to3__top",
+      "passed": true
+    },
+    {
+      "name": "HTTP: diffs/commons/maps/Noise_Voxel/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: diffs/commons/maps/Noise_Voxel/final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Voxel-fn:voxel-pieces",
+      "passed": true
+    },
+    {
+      "name": "HTTP: /book-review/doc/book/figures/Noise_Voxel/flight-from-above.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: /book-review/doc/book/figures/Noise_Voxel/flight-from-above.png",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Voxel-fn:voxel-screen",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Voxel-fnref:voxel-pieces",
+      "passed": true
+    },
+    {
+      "name": "internal anchor: #Noise_Voxel-fnref:voxel-screen",
+      "passed": true
+    },
+    {
+      "name": "HTTP: verification.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: verification.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP: rings/report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: rings/report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP: voxel-final/report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: voxel-final/report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP: engine-warnings.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes match source: engine-warnings.json",
+      "passed": true
+    },
+    {
+      "name": "review page served unchanged",
+      "passed": true
+    },
+    {
+      "name": "seven Noise tasks resolved",
+      "passed": true
+    },
+    {
+      "name": "thirteen later Noise tasks remain open",
+      "passed": true
+    }
+  ]
+}

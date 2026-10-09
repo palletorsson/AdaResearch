@@ -1,0 +1,74 @@
+--- canonical/Trans_Introduction/final.md
++++ review-draft/Trans_Introduction/final.md
+@@ -14,22 +14,7 @@
+ 
+ Relative to the room, you are moving. Relative to the cube, you may be standing still.
+ 
+-The transport script moves the cube towards `target_position`, its destination:
+-
+-```gdscript
+-global_position = global_position.move_toward(target_position, move_speed * delta)
+-```
+-
+-The destination is two metres farther along the room's z direction. `move_speed * delta` gives the distance the cube can travel during this update: its speed multiplied by the elapsed time. The cube keeps its size and facing.
+-
+-To carry you, the script also applies each small displacement to the rider it has detected on top:
+-
+-```gdscript
+-var movement_delta = global_position - previous_position
+-_translate_rider(carried_player, movement_delta)
+-```
+-
+-`movement_delta` is the difference between the cube's new position and its previous one. `_translate_rider` adds that difference to your position too. In VR, it moves both the body used to test contact and the viewpoint through which you see the room. The bank recedes while the surface beneath you stays close.
++For each small displacement of the cube, the program moves the supported rider by the same amount. The bank recedes while the surface beneath you stays close. Moving the cube alone would leave you behind.
+ 
+ Step off at the far bank. The cube waits, then goes back. The gap has not closed. You crossed with a temporary surface under your feet.
+ 
+@@ -39,15 +24,7 @@
+ 
+ Wait until the surface is level with the floor, then walk across during its pause. Look back as it shrinks. What made a floor a moment ago is withdrawing below it.
+ 
+-The cube grows from half a metre to three metres on each side. Its visible shape, the mesh, is built one metre on a side. The script multiplies all three dimensions by the same factor, `safe_scale`, from a half to three:
+-
+-```gdscript
+-var scale_vec: Vector3 = Vector3(safe_scale, safe_scale, safe_scale)
+-mesh_instance.scale = scale_vec
+-box_shape.size = scale_vec
+-```
+-
+-The last line enlarges the collision box, the shape the program uses to test contact with the cube. The visible surface and the surface that supports your feet grow together.
++The cube grows from half a metre to three metres on each side. Its visible surface and the collision box that supports your feet grow together. What you see arriving becomes something you can stand on.
+ 
+ The centre sits below the floor so that the upper face reaches it at full size. Growth spreads downwards as well as upwards. From the bank, you might notice only the part that arrives to meet you.
+ 
+@@ -59,13 +36,7 @@
+ 
+ Cross while it holds that alignment. The same length of plank now reaches the places you need it to reach, with its centre still in the middle of the gap.
+ 
+-The step-and-pause rotation code assigns an angle around the upright axis:
+-
+-```gdscript
+-mesh_instance.rotation_degrees = rotation_axis * current_angle
+-```
+-
+-The visible plank and its collision body turn together, between zero and ninety degrees, with a four-second pause at each end. The plank is three metres long, one metre wide and 20 centimetres thick. Its upper face stays level with the floor; its ends meet the banks when aligned.
++The visible plank and its collision body turn together between zero and ninety degrees, with a four-second pause at each end. The plank is three metres long, one metre wide and twenty centimetres thick. Its upper face stays level with the floor; its ends meet the banks when aligned.
+ 
+ From the bank, follow one end with your eyes as it turns away again. The centre stays in place while the end sweeps a curve around it, carrying the edge of your crossing out of reach.
+ 
+@@ -87,14 +58,7 @@
+ 
+ Let the plank turn again. An operation that worked a moment ago keeps running exactly as before. The crossing has lost one of its agreements.
+ 
+-The landing uses a translation too:
+-
+-```gdscript
+-displacement = move_toward(displacement, target_displacement, SPEED * delta)
+-landing.position = HOME + Vector3.BACK * displacement
+-```
+-
+-The slider sets `target_displacement`, how far the landing should move from `HOME`. `Vector3.BACK` points along the rails, the local positive z direction. The bank can travel one metre, taking its visible surface and its support with it. The side aisles let you return to the control while the gap stays open.
++The landing travels along its rails, taking its visible surface and support with it. You can move it up to one metre from its starting place. The side aisles let you return to the control while the gap stays open.
+ 
+ <!-- @ -->
+ 

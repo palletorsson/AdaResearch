@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "reading equals canonical",
+      "passed": true
+    },
+    {
+      "name": "all code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors retained",
+      "passed": true
+    },
+    {
+      "name": "opening and Rainbow handoff retained",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/maps/Color_Nails/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/artifacts/nail_salon/nail_salon.gd",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/interfaces/nail_color_controller.gd",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/interfaces/value_mapper_3d.gd",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/body/hands/left_hand.tscn",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/body/hands/right_hand.tscn",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/body/hands/left_hand_nails.gd",
+      "passed": true
+    },
+    {
+      "name": "production unchanged commons/body/hands/right_hand_nails.gd",
+      "passed": true
+    },
+    {
+      "name": "core text hash current",
+      "passed": true
+    },
+    {
+      "name": "all other core data preserved",
+      "passed": true
+    },
+    {
+      "name": "59 runtime assertions pass",
+      "passed": true
+    },
+    {
+      "name": "completed run has no script errors",
+      "passed": true
+    },
+    {
+      "name": "tested artifact inputs still current",
+      "passed": true
+    },
+    {
+      "name": "served index.html",
+      "passed": true
+    },
+    {
+      "name": "served same-choice-two-scales.png",
+      "passed": true
+    },
+    {
+      "name": "served one-channel-two-choices.png",
+      "passed": true
+    },
+    {
+      "name": "served salon-turquoise.png",
+      "passed": true
+    },
+    {
+      "name": "served Color_Nails.diff",
+      "passed": true
+    },
+    {
+      "name": "served source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "served report.json",
+      "passed": true
+    },
+    {
+      "name": "served SUMMARY.md",
+      "passed": true
+    }
+  ]
+}

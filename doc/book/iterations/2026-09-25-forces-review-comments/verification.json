@@ -1,0 +1,210 @@
+{
+  "checks": [
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: titled chapter without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: text/map hashes current",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: encounter roles retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act1_WhatAVectorIs: reader serves canonical text",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: titled chapter without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: text/map hashes current",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: encounter roles retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act4a_KineticForces: reader serves canonical text",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: titled chapter without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: text/map hashes current",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: encounter roles retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Choreography: reader serves canonical text",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: titled chapter without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: text/map hashes current",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: encounter roles retained",
+      "passed": true
+    },
+    {
+      "check": "VFM_07_Gravity: reader serves canonical text",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: titled chapter without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: text/map hashes current",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: encounter roles retained",
+      "passed": true
+    },
+    {
+      "check": "Vectors_Act5_ForceAsPlace: reader serves canonical text",
+      "passed": true
+    },
+    {
+      "check": "Unrelated current core records retained",
+      "passed": true
+    },
+    {
+      "check": "All thirteen map files unchanged",
+      "passed": true
+    },
+    {
+      "check": "Other eight canonical chapters unchanged",
+      "passed": true
+    },
+    {
+      "check": "All companion manuscripts retained",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/sequences/forces.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Flow_Field/final.md: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/vector_machine/vector_machine.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/force_field_zone/field_carry_provider.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/force_field_zone/force_field_zone.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/drag_corridor/kinetic_drag.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/drag_corridor/kinetic_walk_provider.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "drag: native checks passed and exit zero",
+      "passed": true
+    },
+    {
+      "check": "drag: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "place: native checks passed and exit zero",
+      "passed": true
+    },
+    {
+      "check": "place: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "Actual production arrow regression: old stub at rest now clears",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/forces/inside-the-passage-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact figure served doc/book/figures/forces/inside-the-passage-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/forces/two-crossings-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact figure served doc/book/figures/forces/two-crossings-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Current thirteen-hall Forces capture matches canonical text",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Source, current manuscript and publication, native controls and nontracked receiver contract. Headset/reader/Quest acceptance not established."
+}

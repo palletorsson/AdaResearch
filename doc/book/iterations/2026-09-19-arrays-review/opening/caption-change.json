@@ -1,0 +1,17 @@
+{
+  "source": "commons\\artifacts\\regularity\\array_flight_lab.gd",
+  "before_sha256": "432a699751526c31b1f97cd5736a32aff06c061033d012f56e95e0468328253b",
+  "after_sha256": "398f6eec033a053b7619f587d27d3d2ddd5063a4c137a7b4f068d5e53a0b7666",
+  "changes": [
+    [
+      "FLY INTO THE THIRD INDEX",
+      "REACH AN ADDRESS"
+    ],
+    [
+      "THREE INDICES",
+      "SELECT AN ADDRESS"
+    ]
+  ],
+  "unchanged": "controls, geometry, interactions and final.md",
+  "implementation_change": "The 64 live lab address labels now use depth testing and y=1.0 after deferred grid configuration. At original y=0.6 the label was inside the pickup cube; shared grid defaults remain unchanged."
+}

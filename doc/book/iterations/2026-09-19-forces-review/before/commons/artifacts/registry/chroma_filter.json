@@ -1,0 +1,96 @@
+{
+	"artifacts": {
+		"chroma_filter": {
+			"dna": {
+				"axes": {
+					"mix": [
+						"filter",
+						"veil",
+						"solid"
+					],
+					"triad": [
+						"paint",
+						"light",
+						"bauhaus"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "mix=veil: triad=paint vs triad=light",
+					"predicted_focus_pct": 9.0,
+					"arithmetic": "Under the veil each two-sided MIX pane at alpha 0.5 shows a quarter wall and three quarters paint, so paint differences are damped; pane 0 (seen at 35 deg by the canonical camera) cyan vs green moves ~0.09 luminance, pane 1 (24 deg) magenta vs blue ~0.07, pane 2 (84 deg, near edge-on) yellow vs red ~0.24 over a sliver. If the sliver is hidden the row reads ~9%, if not ~20%: a WEAK row, named and accepted. Per-channel the pair moves 170 grey levels, so it can never be a twin. Every other triad pair 18-40%; closest mix pair triad=light filter vs solid ~20%."
+				}
+			},
+			"lookup_name": "chroma_filter",
+			"name": "Chroma Filter",
+			"class_name": "ChromaFilter",
+			"scene": "res://commons/artifacts/chroma_filter/chroma_filter.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "A white corner - a 3.60 m slab and two 4.40 m white walls along its -X and -Z edges - with three tall coloured panes (3.40 x 4.20 x 0.03 m) crossing in front of it through one axis at 0, 60 and 120 degrees, so that how many panes stand between a visitor and the white is decided by where the visitor stands. Two axes, both word-valued on the map token. mix (default filter) decides what a pane does to the white behind it: filter multiplies (unshaded, TRANSPARENCY_ALPHA at alpha 1.0 with BLEND_MODE_MUL at the default back-face cull, casting no shadow - the shipped recipe of grab_disk.gd and color_display_disk.gd to the letter, neither of which sets cull_mode, here for the first time at walk scale; a box pane is two-sided by its own faces, and CULL_DISABLED on it would rasterise the far face too and square every colour), so one pane leaves its own colour on the white, two leave their product and three leave almost nothing, commutatively; veil averages (shaded, TRANSPARENCY_ALPHA with BLEND_MODE_MIX at alpha 0.50, roughness 0.18, CULL_DISABLED as the gallery's _translucent_material has it - so a ray crosses both faces of the box and one pane shows a quarter wall and three quarters paint - render_priority 0/1/2 pinning the sort of the three coincident origins, no shadow), which is exactly how the gallery's winner ps06_grawunder_cmy mixed its panes and called the result subtractive - kept beside the truth, not as a lie; solid is opaque paint at roughness 0.55 casting its shadow, the control where nothing mixes. triad (default paint) decides which three colours the panes carry, pane 0/1/2 in order: paint is cyan, magenta, yellow (filter products blue, green, red, triple near black); light is green, BLUE, red (as filters any two leave the wall dark, every product under 0.3 in every channel); bauhaus is chroma_stack's RED, YELLOW, BLUE exactly (as filters red-orange, plum, dark green, and a near-black triple), so the primaries that name kinds on the row-six totem go dark nearly everywhere they overlap - a primary is a claim about a medium. The pane order puts the hue-only differences on pane 2, the one the canonical sweep camera sees nearly edge-on. A third config word, plate (west|east, default west), is furniture and not DNA: it chooses which end of the +Z edge holds the 0.90 m text plate at 1.20 m, so a second placement can keep its reader out from under a hall lamp. The plate's title names the two words in force and its body says in one sentence what the mix does, rebuilt on every rebuild. The origin is the token cell's centre and the slab's underside is y = 0; the slab and walls put their outer faces at local -0.46, so at a hall corner the piece stands 4 cm off both hall walls and grows +X / +Z from its cell. Built-in meshes only, no randomness, no emission, no lights, no timers; one box collider per slab, wall, pane (turned with the pane), post and plate. Extent 3.60 x 4.40 x 3.62 m, identical for all nine axis values because the walls fix the box. NOT COMPILED OR CAPTURED in the session that wrote it; every number here is arithmetic, not a render, and the first capture is the gate before the plate's word filter ships.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				4,
+				4,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"filter",
+				"subtractive",
+				"transparency",
+				"surface",
+				"kandinsky",
+				"bauhaus",
+				"dna"
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 0,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.6,
+					4.4,
+					3.62
+				],
+				"source": "procedural, arithmetic not a render: the slab is 3.60 square with its outer faces at local -0.46, so X runs -0.46..3.14 = 3.60, and the two walls (0.08 thick, along the -X and -Z edges) stand from the slab's top at 0.06 to 4.40, so Y is 4.40 exactly; the panes (3.40 x 4.20 x 0.03, one origin at (1.34, 2.16, 1.34), turned 0, 60 and 120 degrees) top out at 4.26 and reach at most x -0.36..3.04 and z -0.13..2.81, all inside the slab. Z is the slab's -0.46..3.14 plus what the plate stands proud of the +Z face: the text_screen node sits at z = 3.14 + 0.001 + 0.014 = 3.155 with its baked text at +0.004 and a few millimetres of panel, so the far face is near 3.16 and the extent is 3.62. The plate post (0.08 square, z 3.06..3.14) and the plate's own collider (z 3.14..3.16) are inside those bounds. The walls fix the box, so the extent is the same for all nine axis values; with plate=east the plate's 0.936 m frame centred at x 2.90 reaches x 3.368, 0.23 m past the slab's +X edge, but plate is never swept."
+			},
+			"interactions": [],
+			"dev_themes": [
+				"a colour on a pane is a colour left over, not a colour added",
+				"how many panes stand between you and the white is decided by where you stand",
+				"a primary is a claim about a medium: the Bauhaus triad goes dark as filters",
+				"the gallery's veil kept beside the true filter, so the record is on show"
+			],
+			"qfep_connection": "Color_Context_Placed's truth is that a colour value enters an encounter - a light, a surface, a position, a neighbour and a viewer. chroma_stack and chroma_translation hold the surface still and vary the rule; this is their SURFACE companion: it brings its own white and lets the visitor's position decide how many coloured panes stand between them and it. Under filter the colour seen is nothing on the pane and nothing on the wall - it is what the panes between the two have taken away, and the darkest place moves when the visitor does. Run the same crossing under the red, yellow and blue that name kinds on the row-six totem and the primaries go dark nearly everywhere they overlap, while the printer's three leave blue, green and red: a primary is a claim about a medium, not a property of a colour. The veil is the gallery's own surface kept beside the truth - averaging, which is what the eye does further down the hall, and another thing. The white is the piece's own, so the LIGHT stays the next room's.",
+			"note": "NEW 2026-09-17. Config keys: #mix:<filter|veil|solid>, #triad:<paint|light|bauhaus> and #plate:<west|east>. plate is placement furniture (which end of the +Z edge holds the reading plate), not DNA, and is never swept; it is read in _read_meta_overrides and sits in the rebuild guard because two placements of this one artifact carry different ends. All three are word-valued, so no key needs to sit in GridInteractablesComponent.CONFIG_PARAM_NAMES - only a #key:<number> on an unlisted key is eaten as the tutorial's rotation shorthand. An unknown word warns and falls back to the default. The museum stamps config_* metadata before _ready and the grid calls apply_grid_config after: the script reads the metadata in _ready, builds once, and apply_grid_config rebuilds only when one of the three words actually changes, so curation_station's blanket apply_grid_config({\"emissive\": false}) touches nothing. NO dna block written by hand - derive it with tools/apply_dna_block.py --token=chroma_filter --axes=mix,triad. Footprint [4,4,5] from the token cell growing +X/+Z; footprint_cells is written as 9 (the cap), 16 real. Predicted degeneracy, arithmetic and a lower bound, a WEAK row named and accepted: mix=veil, triad=paint vs triad=light, predicted 9%. Each veil pane is a two-sided box under the gallery's cull-disabled MIX (primitive_stack._translucent_material sets CULL_DISABLED), so a ray crosses two faces and a pane shows 0.25*wall + 0.75*paint with the lit wall about (0.82, 0.82, 0.80); paint differences scale by 0.75, not by half. Pane 0 (seen at 35 degrees by the canonical camera, about 5 m^2 of single-pane image) cyan to green: (0.39, 0.90, 0.89) lum 0.745 vs (0.34, 0.81, 0.37) lum 0.618, 0.13 = 33 grey levels. Pane 1 (24 degrees) magenta to BLUE: 0.57 vs 0.47, 0.10 = 27 levels. Pane 2 (84 degrees, near edge-on, about 1.4 m^2 projected) yellow to red: 0.83 vs 0.50, 0.32 = 82 levels. The hottest 5% of an about 18 m^2 crop is about 0.9 m^2: if pane 2's sliver is not hidden behind panes 0/1 the row reads about 30%, if hidden about 13%. The headline stays at 9%, under the pane-0 arithmetic, because the veil is shaded and the arithmetic is not. Per channel the pair moves 134 levels on the veiled pane (B 0.89 vs 0.37; raw paint cyan B 0.92 vs green B 0.22), so it can never be a twin. Every other triad row 18-40% (filter paint/bauhaus 40%, light/bauhaus 29%; solid 27-36%). Closest MIX pair: triad=light, filter vs solid, about 20% (the light triad's products are all near black and its solid panes are dark); other mix rows 32-49%. A sweep under 9% on the named row means a pane rendered opaque (MUL missed the transparent pass) or the walls not lit - check the harness before the axis. veil is the gallery's surface, not a lie: ps06_grawunder_cmy (5 stars, the gallery's winner, note 'genuinely teaches subtractive color mixing as structure') and its warm/cool hue variants mixed their panes with TRANSPARENCY_ALPHA + BLEND_MODE_MIX at alpha 0.5 (primitive_stack._translucent_material), a lerp whose triple overlap over white is a light tan, not black; this work makes the true filter (BLEND_MODE_MUL, the shipped recipe of commons/primitives/disks/grab_disk.gd and algorithms/color/color_mixing/color_display_disk.gd) and keeps the lerp as veil beside it. The filter pane is a BoxMesh at the DEFAULT cull (CULL_BACK), as both of those recipes ship it: a box is two-sided by its own faces, and CULL_DISABLED on a transparent box - the transparent pass writes no depth - rasterises the far face too and multiplies every colour in twice, so cyan x magenta would read (0.05, 0.05, 0.33) instead of (0.23, 0.23, 0.57) and RED x BLUE black instead of plum. The lead's material readback should assert cull_mode == CULL_BACK on Pane_0 under filter beside the four material checks. The veil keeps CULL_DISABLED because that is the gallery's recipe to the letter, and its doubled blend is the thing on show. Corpus precedents: stained_curtain (color.json, the Through hero, TRANSPARENCY_ALPHA MIX - a veil) and color_constellation_office (RGB/CMY glass walls, MIX - a veil); this is the corpus's first walk-scale MUL pane. The gallery note's 4-panel radial version is declined for the body's sake: eight wedges are too narrow to stand in. The ratings this was taken from are stamped evaluated_by claude, 2026-04-22; nothing on disk records another rater. The plate's title uses a middle dot (U+00B7) written as a \\u00b7 escape so the source stays ASCII; the baked typeface is Roboto, which carries the glyph. The hall is open-roof: do not write that the panes go dark overhead, they multiply the sky. MUL has rendered live in this project only at disk scale, never through the sweep camera or the hall's lighting: the lead's first capture is the gate before the plate's word filter ships. NOT COMPILED OR CAPTURED in the session that wrote it."
+		}
+	}
+}

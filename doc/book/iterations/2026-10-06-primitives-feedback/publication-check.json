@@ -1,0 +1,87 @@
+{
+  "http_pages_resolve": true,
+  "ghost_states": [
+    {
+      "id": "point-one",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "point-coordinates",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "point-lines",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "point-trace",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "point-grid",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-triangle",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-polyhedra",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-cube",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-generator",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-godot-sphere",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-columns",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-profiles",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-limits",
+      "evidence": "current",
+      "sourceDrift": []
+    },
+    {
+      "id": "primitives-composition",
+      "evidence": "current",
+      "sourceDrift": []
+    }
+  ],
+  "scope": "Publication checks. Printed-source/native validation is separate.",
+  "whole_project_audit": {
+    "passed": false,
+    "existing_issue": "commons/maps/Point_Triangle_Context/map_data.json",
+    "unchanged_in_this_pass": true,
+    "reason": "Protected source differs from the older plan baseline; no matching recorded revision. Not a failure of the tutorial programs."
+  },
+  "existing_final_blank_lines": {
+    "Primitives_Ignorance": "Unchanged from the pre-review tutorial; no whitespace introduced by this prose review.",
+    "Primitives_Melencolia": "Unchanged from the pre-review tutorial; no whitespace introduced by this prose review.",
+    "Primitives_Portals": "Unchanged from the pre-review tutorial; no whitespace introduced by this prose review."
+  }
+}

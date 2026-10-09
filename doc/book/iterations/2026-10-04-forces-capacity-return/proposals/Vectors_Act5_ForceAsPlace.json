@@ -1,0 +1,49 @@
+{
+  "id": "Vectors_Act5_ForceAsPlace",
+  "title": "Declare what receives the field",
+  "storyboard": "Glass cubes show the bounded field before the visitor tries the gap. Reuse the sampled-field question from Flow Field and Forces' retained velocity: what receives this vector, in what units, and what changes? Compose an up-and-forward acceleration through the supplied controls, then read the cube's velocity increment. Set field strength to zero while a cube moves and predict why it does not stop immediately; damping and contacts still matter. Compare the visitor's separately supplied carrying rule without treating the two bodies as interchangeable. Carry a field with declared membership, units and retained state. Form Finding will reuse a direction through a different receiver: descent updates a point from a gradient without retaining velocity. Its trail records past positions, and its step size is not elapsed physical time.",
+  "storyboard_short": "Use cubes before the visitor crossing. Reuse sampled fields and retained velocity; compose acceleration with supplied controls and inspect the cube update. Predict zero field versus immediate stopping, keeping damping and contacts explicit. Compare the visitor's separate receiver. Carry membership, units and state. Prepare the change to Form Finding: its gradient descent stores no velocity, and its step size is not elapsed physical time.",
+  "mode": "deepen",
+  "brings": [
+    "Flow Field's distinction between a sampled vector and its receiver",
+    "retained velocity changed by acceleration over time",
+    "a comparison of explicit models, physical bodies and controller decisions"
+  ],
+  "learns": [
+    "bounded membership determines which receiver gets the field update",
+    "zero acceleration does not assign zero velocity",
+    "a field can feed different updates with different units and retained state"
+  ],
+  "carries": "A declared field receiver: its membership rule, vector units, state update and other influences, ready to compare with gradient descent's position-only update.",
+  "supplied": [
+    "vector_machine's angle and magnitude controls",
+    "force_field_zone's membership detection and cube receiver",
+    "force_cube's damping and collision behaviour; the separate visitor carry provider",
+    "the next hall's existing gradient descent as a source comparison, not an added Forces build"
+  ],
+  "artifact_refs": [
+    "vector_machine",
+    "force_cube",
+    "force_field_zone"
+  ],
+  "review_note": "The cube receiver adds field_vector * delta directly to linear_velocity; field_vector is acceleration, with no division by mass. Inside the zone ordinary gravity is suppressed, but damping and contacts remain; leaving restores saved gravity. The visitor has a separate locomotion/carry contract. Both can retain motion, so zero field does not mean stopped body. The next hall instead evaluates point - rate * gradient(point), with no velocity term or physics-delta factor; its display trail is history, not momentum. Preserve that change of model and do not promise a new receiver or descent implementation in this summary.",
+  "prior_maps": [
+    "Flow_Field",
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "VFM_08_Arena"
+  ],
+  "independent_check": "While a cube is still moving inside the field, set its magnitude to zero. Predict no immediate assignment to zero velocity and explain the remaining damping/contact influences; contrast that receiver with FormFinding_Descent, whose next point uses the current gradient and no retained velocity.",
+  "source_refs": [
+    "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+    "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+    "commons/artifacts/vector_machine/vector_machine.gd",
+    "commons/artifacts/force_field_zone/force_field_zone.gd",
+    "commons/artifacts/force_field_zone/field_carry_provider.gd",
+    "commons/artifacts/force_cube/force_cube.gd",
+    "commons/maps/FormFinding_Descent/final.md",
+    "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd"
+  ],
+  "change_reason": "The closing field should prepare a reusable question about receivers, rather than suggest that Form Finding is another force simulation with the same state."
+}

@@ -1,0 +1,1 @@
+Conway's Game of Life. Birth: three neighbors. Survival: two or three neighbors. Death: otherwise. From these rules: gliders that walk, oscillators that pulse, still lifes that persist. The most famous cellular automaton — a universe of complexity from almost nothing.

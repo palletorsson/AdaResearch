@@ -12,6 +12,8 @@ extends SceneTree
 ## Godot's import makes of it, the class Found that gives it a unit and an
 ## origin), the planted fault, the finished study, the marble, the steps of the
 ## process strip, and that the earlier studies still run.
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -33,6 +35,27 @@ const BOX := Vector3(0.789, 0.989, 0.789)   # the solid, in metres
 const FOUND_TRIANGLES := 5851
 const FOUND_CORNERS := 2993
 const DRAFTED_MD5 := "e8ab9850ada3b58906faa554c2468312"         # the answer as it came back, line ends as \n
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/collage/"          # the body this chapter hands to the room
+const PLACE := 0.8                              # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors, and the lines printed, while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lines: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
+
+	func _log_message(message: String, _error: bool) -> void:
+		lock.lock()
+		lines.append(message.strip_edges(false, true))
+		lock.unlock()
 
 var last_sign := 0   # when the last check was written, in milliseconds
 
@@ -315,6 +338,59 @@ func exported(node: Object, names: Array) -> Dictionary:
 		if names.has(property["name"]) and (property["usage"] & PROPERTY_USAGE_EDITOR) != 0 and (property["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE) != 0:
 			out[property["name"]] = property
 	return out
+
+## What a ray straight down from 2 m meets first: the height, or -1.0 for nothing.
+func first_under(over: Vector3) -> float:
+	var query := PhysicsRayQueryParameters3D.create(over, Vector3(over.x, -1.0, over.z))
+	var hit := root.get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return -1.0
+	return hit.position.y
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "collage.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/collage/collage.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	var class_text := FileAccess.get_file_as_string("res://solid.gd")
+	var guest_text := FileAccess.get_file_as_string(GUEST + "solid.gd")
+	var solids: Array[Node] = guest.find_children("*", "MeshInstance3D", true, false)
+	var solid: MeshInstance3D = solids[0] if solids.size() == 1 else null
+	var one: bool = solid != null and solid.get_script() == load(GUEST + "solid.gd") and solid.get_script() != SolidScript
+	var numbers: bool = one and is_equal_approx(solid.stretch, 1.53) and is_equal_approx(solid.cut, 0.38) and corners_of(solid.mesh).size() == 12 and listed(solid.mesh) == 20 and outward(solid.mesh) == 20
+	var painted: bool = one and solid.material_override is StandardMaterial3D and solid.material_override.albedo_color.to_html(false) == "c6ff3d" and is_equal_approx(solid.material_override.roughness, 0.8)
+	var shapes: Array[Node] = guest.find_children("*", "CollisionShape3D", true, false)
+	var bodied: bool = shapes.size() == 1 and shapes[0].get_parent() is StaticBody3D and shapes[0].shape is ConcavePolygonShape3D
+	check("the guest is the truncated solid: its solid.gd is the lesson's solid.gd without the first line, 'class_name Solid'; one body of that class with stretch 1.53 and cut 0.38, 12 corners and 20 triangles, all facing outward, in BODY c6ff3d, with one collider made from its mesh; it said '%s'" % [catcher.lines],
+		class_text.begins_with("class_name Solid\n") and guest_text == class_text.trim_prefix("class_name Solid\n")
+		and numbers and painted and bodied and catcher.lines == ["by hand: 20 triangles, (0.788675, 0.989348, 0.788675) m"])
+	var box := box_of(guest as Node3D)
+	var top := first_under(Vector3(0.0, 2.0, 0.0))
+	check("the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (%.3f, %.3f, %.3f) to (%.3f, %.3f, %.3f), and a ray straight down over its middle stops on it at %.3f m" % [
+		box.position.x, box.position.y, box.position.z, box.end.x, box.end.y, box.end.z, top],
+		absf(box.position.y) < 0.001 and box.position.x >= -PLACE and box.position.z >= -PLACE and box.end.x <= PLACE and box.end.z <= PLACE
+		and near(box.get_center(), Vector3(0, BOX.y / 2.0, 0), 0.001) and absf(top - BOX.y) < 0.001)
+	measured["guest"] = {"scene": GUEST + "collage.tscn", "stretch": num(solid, "stretch") if one else 0.0, "cut": num(solid, "cut") if one else 0.0, "said": catcher.lines,
+		"box": [[snappedf(box.position.x, 0.001), snappedf(box.position.y, 0.001), snappedf(box.position.z, 0.001)], [snappedf(box.end.x, 0.001), snappedf(box.end.y, 0.001), snappedf(box.end.z, 0.001)]]}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The named classes and the imported file have to be there before anything can load.
@@ -803,6 +879,9 @@ func run() -> void:
 	var sheet_bytes := FileAccess.get_file_as_bytes("res://sheet.png").size()
 	check("sheet.png is there: the three bodies in three columns and three rows (from the side, from above, faceted), %d bytes" % sheet_bytes,
 		sheet_picture != null and sheet_picture.get_width() == 3 * TILE.x + 2 * GUTTER and sheet_picture.get_height() > 3 * TILE.y and sheet_bytes < 300000)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

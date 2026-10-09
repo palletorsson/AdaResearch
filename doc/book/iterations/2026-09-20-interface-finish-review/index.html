@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The console, close up · Ada Research</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2eb;color:#242a29;font:17px/1.65 system-ui,sans-serif}
+main,header,footer{max-width:1400px;margin:auto;padding:32px 5vw}header{padding-top:58px;padding-bottom:0}
+h1{font:500 clamp(36px,5vw,65px)/1.1 Georgia,serif;max-width:900px;margin:20px 0}
+h2{font:500 30px/1.25 Georgia,serif}p{max-width:900px}a{color:#255d52;text-underline-offset:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#4f6b62}
+.lead{font-size:21px}.metrics{display:flex;flex-wrap:wrap;gap:18px;margin:30px 0}
+.metric{background:#e5ece5;padding:17px 24px;border-left:3px solid #3a7162}
+.metric strong{display:block;font:32px Georgia,serif}.metric span{font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;height:auto;display:block;border-radius:5px}
+figcaption{font-size:14px;line-height:1.5;color:#58635e;margin:12px 0 24px}section{border-top:1px solid #c8d0c7;margin-top:30px;padding-top:20px}
+code{font-size:14px;overflow-wrap:anywhere}pre{white-space:pre-wrap;background:#e8ede6;padding:20px}
+.note{font-size:14px;color:#58635e}li{margin:8px 0}table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #c8d0c7}
+@media(max-width:760px){.pair{grid-template-columns:1fr}header,main,footer{padding-left:20px;padding-right:20px}table{font-size:13px}th,td{padding:8px}}
+
+.hero-image img{width:100%;height:auto;display:block}.hero-image{margin:0}.zoom-note{font-size:.9rem;color:#496c63}
+.pair img{object-fit:contain}pre{overflow-x:auto}.comparison>input{accent-color:#234e42;margin:1rem .4rem 1rem 1rem}.comparison>label{display:inline-block;border:1px solid #315d50;border-radius:30px;padding:.65rem 1.2rem;cursor:pointer}
+.comparison>input:checked+label{background:#234e42;color:white}.comparison .before-view{display:none}#view-before:checked~.before-view{display:block}#view-before:checked~.after-view{display:none}.comparison figcaption{padding:1rem 0}
+</style></head><body><header><div class="eyebrow">Ada Research · interface refinement · 20 September 2026</div>
+<h1>The console,<br>close up.</h1><p class="lead">Larger values. A tighter casing. Every control has a place on the face. The same construction now works for a second instrument.</p>
+<p><a href="../2026-09-20-interface-console-review/index.html">Previous console pass</a> · <a href="/book?map=QFEP_Introduction&amp;section=final">QFEP Introduction</a> · <a href="#reference">Working reference</a></p>
+<div class="metrics"><div class="metric"><strong>85.5 → 64.3 cm</strong><span>Casing length along the sloping face</span></div><div class="metric"><strong>52 → 78 mm</strong><span>Individual value-window width</span></div><div class="metric"><strong>14 cm</strong><span>Physical slider travel retained</span></div></div></header><main>
+<section><h2>Inspect the face</h2><p>Same museum placement, camera position and comparison values. The lens is now closer: 42° field of view. Select before or after, or open the image at full size.</p>
+<div class="comparison" role="group" aria-label="Console comparison">
+<input type="radio" name="view" id="view-after" checked><label for="view-after">After refinement</label>
+<input type="radio" name="view" id="view-before"><label for="view-before">Before refinement</label>
+<figure class="hero-image after-view"><a href="after-controls.png"><img src="after-controls.png" alt="Refined QFEP console with larger values, grouped wells and a slim casing" width="1800" height="1200"></a><figcaption>After: four full-size rails and KEEP. Values, labels and controls occupy clearly grouped areas.</figcaption></figure>
+<figure class="hero-image before-view"><a href="before-controls.png"><img src="before-controls.png" alt="Original console with a broad top border and smaller numeric windows" width="1800" height="1200"></a><figcaption>Before: a broad top border, smaller numeric windows and widely separated labels.</figcaption></figure></div>
+<p class="zoom-note">Actual Godot museum renders. These images show the built console, not a design mock-up.</p></section>
+<section><h2>What improved</h2><p>The empty top border is removed. A slim frame and four flush fasteners attach the face to its housing. Printed labels sit closer to their controls, within subtle shaded wells. The value windows use larger type, and their backing clears the slider handle at every position.</p><p>F, E(S), λ, φ and KEEP still perform the same experiment. The retained total and comparison remain visible. The design makes their relationship easier to follow.</p>
+<figure><a href="after-approach.png"><img src="after-approach.png" alt="Refined console seen with the QFEP apparatus from the approach" width="1800" height="1200"></a><figcaption>The console remains part of its room. Neighbouring screens and the object it changes must also be considered from the operating position.</figcaption></figure></section>
+<section id="reference"><h2>One principle, different instruments</h2><p>The focused reference console combines a slider, dial, joystick and RESET. Size, rotation and position change the orange body. The two joystick axes appear in the same flat summary screen. Every visible caption and value on the console is 2D text carried by a surface in 3D.</p>
+<div class="pair"><figure><a href="reference-braun.png"><img src="reference-braun.png" alt="Working reference console in the light Braun finish" width="1500" height="1300"></a><figcaption>Light finish. Two columns, full-size controls, a specimen above the readout.</figcaption></figure><figure><a href="reference-black_mesa.png"><img src="reference-black_mesa.png" alt="The same working reference in a dark finish" width="1500" height="1300"></a><figcaption>Dark finish. The same construction and actions with different housing and label colours.</figcaption></figure></div>
+<p>The first reference capture revealed a mistake: the specimen platform hid the readout. Moving the platform back and up restored both views. An interaction test can pass while the spatial arrangement still needs work.</p></section>
+<section><h2>Reuse it in the project</h2><pre><code>var console = InterfacePresets.build(
+    "workbench", "Your instrument", plate_height,
+    "braun", "instrument"
+)
+# Set the grouping before adding controls.
+console.panel().layout_columns = 2
+add_child(console)
+var size = console.add_slider("SIZE")
+var turn = console.add_dial("TURN")
+var position = console.add_joystick("POSITION")
+var reset = console.add_button("RESET")</code></pre>
+<p>The <code>instrument</code> layout fits the casing to unscaled controls. It defaults to three columns; this reference uses two. The existing full sampler remains available. Enable <code>reference_console</code> on InteractableDemo, or use <code>commons/interactables/interactable_console_demo.tscn</code>, for the focused example.</p><p>This profile applies to console housings. Other housing forms and bespoke controls still need their own inspection. Adopt it per encounter, preserving the actions and comparisons that matter.</p></section>
+<section><h2>Checked, and still to check</h2><ul><li><a href="console-regression.json">132 console regression checks</a>: existing layouts, three mounting forms, scale, travel, pointer input and values.</li>
+<li><a href="layout-checks.json">70 shared panel checks</a>: row layout, input and backing.</li><li><a href="instrument-checks.json">46 working-reference checks</a>: two finishes, mixed controls, their actual effects, RESET and value-window clearance.</li><li><a href="after-runtime.json">21 QFEP encounter checks and 5 selected walks</a>: KEEP, equal totals with different tuples, dependencies, rebuilds and access.</li></ul>
+<p>Headset legibility, seated reach, tracked-hand operation and Quest performance remain to be tested. Other QFEP workbench placements inherit the style, but only this hall received the museum capture and walk pass.</p>
+<p><a href="before-runtime.json">Before measurements</a> · <a href="changes.diff">Exact source changes</a> · <a href="source-hashes.json">Source hashes</a></p></section>
+</main><footer><p><a href="../2026-09-20-interface-shannon-review/index.html">Continue: Shannon, persistent choices and the slider direction fix.</a></p>Shared profile and working reference implemented · Desktop verification complete · Headset checks pending</footer>
+</body></html>

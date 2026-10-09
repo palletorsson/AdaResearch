@@ -1,0 +1,43 @@
+{
+  "archive_sha256": "d5c8dc63854bed73419ac69ea2475c08663c155b419c3a6ee02fa6df60970e69",
+  "checks": [
+    {
+      "id": "close/incoming_file_intact",
+      "passed": true
+    },
+    {
+      "id": "desktop/e_key_selects_the_point",
+      "passed": true
+    },
+    {
+      "id": "desktop/pickup_keeps_position_and_orientation",
+      "passed": false
+    },
+    {
+      "id": "desktop/no_pickup_spur",
+      "passed": false
+    },
+    {
+      "id": "desktop/held_movement_reaches_the_recorder",
+      "passed": true
+    },
+    {
+      "id": "close/holding_has_not_saved",
+      "passed": true
+    },
+    {
+      "id": "close/adapter_cleanup_does_not_save",
+      "passed": true
+    },
+    {
+      "id": "close/quit_with_a_held_point",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "desktop/pickup_keeps_position_and_orientation",
+    "desktop/no_pickup_spur"
+  ],
+  "mode": "close-held",
+  "passed": false
+}

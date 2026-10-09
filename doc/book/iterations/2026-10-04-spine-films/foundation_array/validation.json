@@ -1,0 +1,28 @@
+{
+	"checks": {
+		"exact_rule": true,
+		"reset": true,
+		"reused_meshes": true,
+		"selection_reads_only": true,
+		"single_write": true,
+		"sixteen_addresses": true
+	},
+	"evidence": {
+		"boolean_values": true,
+		"dimensions": [
+			4,
+			4
+		],
+		"initial_selection": [
+			1,
+			1
+		],
+		"native_port": true,
+		"source_lines": [
+			82,
+			94
+		],
+		"storage_order": "cells[x][z]"
+	},
+	"passed": true
+}

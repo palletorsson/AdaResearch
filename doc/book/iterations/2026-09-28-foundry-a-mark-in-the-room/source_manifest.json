@@ -1,0 +1,32 @@
+{
+  "room": "Pattern_Foundry",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "2d7e31f03702b5c851306ae9fd4aad8ee7ebb5eb6512fe0f7714a2f57066091f",
+    "commons/maps/Pattern_Foundry/map_data.json": "e4aed04049a9ad9a2d70cfa77e3a35bc0959ebfec33dcae507f4a0a220357b57",
+    "doc/book/iterations/2026-09-28-foundry-a-mark-in-the-room/probe.gd": "7649dc2efa8cb6871ca17317e6f0f23f0f0753bb48ef8813f57e6a8cea04657d",
+    "doc/book/iterations/2026-09-28-foundry-a-mark-in-the-room/run_probe.py": "2323dc91e3c6460bdcb780962cd421c320e2e582bf72d1b659e8c0d1c9b64ae4",
+    "ada_run/em_plan.json": "1f035f9e10312141559247ca785d59299c26e1089477128facf279aef4b957ea",
+    "ada_run/encounter_pilot/Pattern_Foundry_reading_return/control.json": "61959b139d3ace856abf774938d3039fa6c6bfaf459bd0144df214bc0c673d5b",
+    "ada_run/encounter_pilot/Pattern_Foundry_reading_return/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Pattern_Foundry_reading_return/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394",
+    "commons/artifacts/registry/arrays.json": "9888367a0d49caed0c3d666495430b2a867da4e2239e1572ec5c69a2a448fa79",
+    "commons/primitives/arrays/pattern_tile_puzzle.tscn": "c6246ea258601b997b59ef473765f432a291961a31b2f292838dcd98546f95a0",
+    "commons/primitives/arrays/pattern_tile_puzzle.gd": "7e122673f036e21b6d7a69371a4d057ec553c0b5204b7bcd689241a0e4cc0169",
+    "commons/primitives/arrays/pattern_tile_cube.gd": "031ba668874645bea9d23751de2e7d75a9049541eec0310f95c154ade3265b5a"
+  }
+}

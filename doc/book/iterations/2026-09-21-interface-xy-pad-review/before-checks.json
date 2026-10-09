@@ -1,0 +1,23 @@
+{
+	"baseline": true,
+	"checks": [
+		{
+			"message": "Visible grip and grab target coincide",
+			"passed": false
+		},
+		{
+			"message": "Both values move across the face, never into it",
+			"passed": false
+		},
+		{
+			"message": "Pad text is mounted flat on its face",
+			"passed": false
+		}
+	],
+	"failures": [
+		"Visible grip and grab target coincide",
+		"Both values move across the face, never into it",
+		"Pad text is mounted flat on its face"
+	],
+	"headset_tested": false
+}

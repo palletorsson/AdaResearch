@@ -1,0 +1,119 @@
+{
+  "checks": [
+    {
+      "name": "complete program builds five pickable points and six line rows",
+      "passed": true
+    },
+    {
+      "name": "points retain original radius and independent meshes",
+      "passed": true
+    },
+    {
+      "name": "starts held with declared baseline",
+      "passed": true
+    },
+    {
+      "name": "third contribution is negative at PI/2",
+      "passed": false
+    },
+    {
+      "name": "known signed sum at PI/2",
+      "passed": false
+    },
+    {
+      "name": "second harmonic has two returns",
+      "passed": false
+    },
+    {
+      "name": "removing negative contribution raises total",
+      "passed": false
+    },
+    {
+      "name": "working edits preserve the original baseline",
+      "passed": true
+    },
+    {
+      "name": "actual H5 action restores all coefficients and handle heights",
+      "passed": true
+    },
+    {
+      "name": "one coefficient recovers a pure sine",
+      "passed": false
+    },
+    {
+      "name": "zero amounts produce a zero signal",
+      "passed": true
+    },
+    {
+      "name": "height mapping uses local frame in translated rotated host",
+      "passed": true
+    },
+    {
+      "name": "horizontal movement does not change identity or amount",
+      "passed": true
+    },
+    {
+      "name": "coefficient range clamps both ends",
+      "passed": true
+    },
+    {
+      "name": "held time stops while amounts remain editable",
+      "passed": true
+    },
+    {
+      "name": "actual H1 action runs common fundamental at 0.2 Hz",
+      "passed": true
+    },
+    {
+      "name": "baseline action preserves phase and hold state",
+      "passed": true
+    },
+    {
+      "name": "baseline action preserves running state too",
+      "passed": true
+    },
+    {
+      "name": "running phase wraps without changing cycle",
+      "passed": true
+    },
+    {
+      "name": "integer harmonics repeat over a fundamental cycle",
+      "passed": true
+    },
+    {
+      "name": "sum and components share declared gain",
+      "passed": false
+    },
+    {
+      "name": "every rendered segment joins its two sampled positions",
+      "passed": true
+    },
+    {
+      "name": "readout states current recipe hold phase and gain",
+      "passed": true
+    },
+    {
+      "name": "independent odd recipe reverses after half a cycle",
+      "passed": true
+    },
+    {
+      "name": "even terms break that symmetry in original recipe",
+      "passed": false
+    },
+    {
+      "name": "sampling history never accumulates into next sum",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "third contribution is negative at PI/2",
+    "known signed sum at PI/2",
+    "second harmonic has two returns",
+    "removing negative contribution raises total",
+    "one coefficient recovers a pure sine",
+    "sum and components share declared gain",
+    "even terms break that symmetry in original recipe"
+  ],
+  "passed": false,
+  "scope": "Exact printed files; native numeric, action and rendering checks. Teacher-authored, not independent student or headset evidence."
+}

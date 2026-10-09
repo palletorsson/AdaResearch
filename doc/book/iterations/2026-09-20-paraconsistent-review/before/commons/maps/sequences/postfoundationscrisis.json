@@ -1,0 +1,163 @@
+{
+ "sequences": {
+  "postfoundationscrisis": {
+   "name": "Post-Crisis: Applied Limits",
+   "truth": "Knowing the limits of formalization, what do we build?",
+   "qfep_term": "Edge",
+   "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
+   "formula": "limits → critical practice → new structures",
+   "description": "The last sequence turns the museum back towards its makers. Each hall exposes a different decision: what can be distinguished, who can participate, what survives disagreement, where a claim comes from, how contributions accumulate, which connections form, which bodies a catalogue permits, and what we will change next.",
+   "layer": "synthesis",
+   "prerequisites": [
+    "foundationscrisis"
+   ],
+   "unlocks": [],
+   "difficulty": "advanced",
+   "estimated_time": "30-40 minutes",
+   "learning_objectives": [
+	"Separate authored spatial compression from measured model behaviour",
+	"Compare how count, scale and arrangement shape participation",
+	"Distinguish retaining a conflict from changing inference rules",
+	"Keep a claim, its source and its criteria distinguishable",
+	"Distinguish contribution counts, contributor identity and revision",
+	"Inspect how nearest-neighbour growth distributes connections",
+	"Separate authored assembly targets from the motion towards them",
+    "Propose a specific change, observe its consequence and test its reuse"
+   ],
+   "content": [
+	"CriticalAlgorithms_Algorithmic_Bias_Visualization: Distinguish",
+	"CriticalAlgorithms_Applied_Ethics: Arrange",
+	"SpeculativeComputation_Paraconsistent_Engineering: Keep the conflict",
+	"SpeculativeComputation_Situated_Computation: Locate the claim",
+	"SpeculativeComputation_Collective_Knowledge: Contribute",
+	"SpeculativeComputation_Rhizome_Network: Connect",
+	"AdvancedLaboratory_Lab_Equipment_Simulation: Assemble a body",
+    "PostCrisis_Synthesis: Return with a change"
+   ],
+   "maps": [
+	"CriticalAlgorithms_Algorithmic_Bias_Visualization",
+	"CriticalAlgorithms_Applied_Ethics",
+	"SpeculativeComputation_Paraconsistent_Engineering",
+	"SpeculativeComputation_Situated_Computation",
+	"SpeculativeComputation_Collective_Knowledge",
+	"SpeculativeComputation_Rhizome_Network",
+	"AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis"
+   ],
+   "deferred_maps": [
+    "Chamber_PostFoundations"
+   ],
+   "deferred_reason": {
+	"Chamber_PostFoundations": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+   },
+   "audio": {
+	"ambient_preset": "minimal_drone",
+	"volume": -10.0
+   },
+   "return_to": "lab",
+   "completion_rewards": [
+    "critical_lens_badge"
+   ],
+   "artifact_groups": [
+	{
+	 "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+	 "position": "intro",
+	 "artifacts": [
+	  "bias_visualizer",
+	  "bias_from_inside",
+	  "science_screen",
+      "situated_readout"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Book encounter: bias_from_inside. How much space does a distinction need? Supporting artifacts remain available."
+	},
+	{
+	 "map": "CriticalAlgorithms_Applied_Ethics",
+	 "position": "response",
+	 "artifacts": [
+	  "tt",
+	  "room_shape_demonstrator",
+	  "excluded_class_visualizer",
+	  "bias_from_inside",
+	  "godel_statement_plaque",
+      "synthesis_stand"
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "Book encounter: room_shape_demonstrator. Who becomes easy to address before anyone speaks? Supporting artifacts remain available."
+	},
+	{
+	 "map": "SpeculativeComputation_Paraconsistent_Engineering",
+	 "position": "principle",
+	 "artifacts": [
+	  "florensky_sphere",
+	  "shannon_workbench",
+	  "superposition_display",
+	  "schrodinger_box",
+	  "merge_conflict_visualizer",
+	  "cap_theorem_walk",
+	  "tt",
+      "rhizome_vault"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Book encounter: merge_conflict_visualizer. What disappears when a disagreement is declared resolved? Supporting artifacts remain available."
+	},
+	{
+	 "map": "SpeculativeComputation_Situated_Computation",
+	 "position": "principle",
+	 "artifacts": [
+      "situated_readout"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Book encounter: situated_readout. Which part of a judgement tells you where it came from? Supporting artifacts remain available."
+	},
+	{
+	 "map": "SpeculativeComputation_Collective_Knowledge",
+	 "position": "principle",
+	 "artifacts": [
+	  "the_fourth_limit",
+	  "peer_production_tool",
+	  "wiki_fragment",
+      "the_commons_table"
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "Book encounter: peer_production_tool. Does more activity mean more voices? Supporting artifacts remain available."
+	},
+	{
+	 "map": "SpeculativeComputation_Rhizome_Network",
+	 "position": "applied_form",
+	 "artifacts": [
+	  "rhizome_cave_demo",
+      "rhizome_grower"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Book encounter: rhizome_grower. Can a network grow without naming a root? Supporting artifacts remain available."
+	},
+	{
+	 "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+	 "position": "applied_form",
+	 "artifacts": [
+      "MolecularDesigner"
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Book encounter: MolecularDesigner. Where was this body's destination decided? Supporting artifacts remain available."
+	},
+	{
+	 "map": "PostCrisis_Synthesis",
+	 "position": "synthesis",
+	 "artifacts": [
+	  "tt",
+	  "accountability_ledger",
+	  "edge_ground_synthesis",
+	  "bias_from_inside",
+	  "qfep_formula_3d",
+      "florensky_sphere"
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "Book encounter: accountability_ledger. Which consequence will you keep in view after the next line arrives? Supporting artifacts remain available."
+	}
+   ]
+  }
+ },
+ "world_phase": "beyond",
+ "artifact_groups": []
+}

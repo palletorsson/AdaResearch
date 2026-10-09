@@ -1,0 +1,194 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Existing editor present",
+      "passed": true
+    },
+    {
+      "name": "Eight authored works retained once",
+      "passed": true
+    },
+    {
+      "name": "Point and controls have a supported clear approach",
+      "passed": true
+    },
+    {
+      "name": "Hand point within reach from controls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer NEXT",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer HOLD",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer TURN",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer PRESET",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer RESET",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer RULE",
+      "passed": true
+    },
+    {
+      "name": "Hand changes only reading:120 vs held90",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand",
+      "passed": true
+    },
+    {
+      "name": "Held trigger rewrites exactly once keeping witness",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: next",
+      "passed": true
+    },
+    {
+      "name": "Release parks point without altering angle",
+      "passed": true
+    },
+    {
+      "name": "Eighth preset reaches Cantor and names it",
+      "passed": true
+    },
+    {
+      "name": "Installed Cantor has27 symbols8 intervals",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cantor",
+      "passed": true
+    },
+    {
+      "name": "Preset cycles from Cantor to Koch",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear",
+      "passed": true
+    },
+    {
+      "name": "Both primary bypasses and rear route have support and capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "Entry and onward portals validate",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Printed reconstruction runs inside actual museum",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "entry": {
+      "cage": false,
+      "cell": "(9, 1)",
+      "door": "(9.5, 0.05, 0.35)",
+      "landing": "(9.5, 0.05, 1.5)",
+      "marker": "(9.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cell": "(9, 25)",
+      "door": "(9.5, 0.05, 25.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(9.5, 0.05, 25.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "route_samples": 188,
+    "scope": "Actual opening hall; supplied desktop rays, real XRTools with supplied poses, capsule route samples. No headset or independent student, no full sequence crossing.",
+    "source_origin": "(0.0, 0.0, 0.0)",
+    "works": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "lsystem_editor",
+      "mesh_grammar_lsystem_tree",
+      "science_screen",
+      "grammar_provenance",
+      "lsystem_tree",
+      "fractal_lsystem_string",
+      "city_bench",
+      "dark_sphere",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "exit_sign",
+      "exit_sign",
+      "wall_clock",
+      "whiteboard",
+      "electrical_panel",
+      "ceiling_vent",
+      "cable_tray",
+      "floor_grate"
+    ]
+  },
+  "passed": true,
+  "room": "LSystems_Grammar_Lab",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

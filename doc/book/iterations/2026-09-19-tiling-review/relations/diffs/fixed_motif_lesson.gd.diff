@@ -1,0 +1,11 @@
+--- before/commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd
++++ after/commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd
+@@ -46,7 +46,7 @@
+ 		box(frame,Vector3(0,0,-0.06),Vector3(1.72,1.86,0.10),Color("292b30"),true)
+ 		var mesh=MeshInstance3D.new();var quad=QuadMesh.new();quad.size=Vector2(1.6,1.6);mesh.mesh=quad;frame.add_child(mesh);panels.append(mesh)
+ 		mesh.material_override=station._carpet_shader_material.duplicate()
+-		label(frame,"P1 / TRANSLATION" if i==0 else "PM / REFLECTION",Vector3(0,1.05,0.01),0.0021)
++		label(frame,"P1" if i==0 else "PM",Vector3(0,1.05,0.01),0.0021)
+ 		label(frame,"SAME SOURCE / 40 cm PER TILE",Vector3(0,-1.05,0.01),0.0012)
+ 	station.set_meta("em_visibility_bounds",AABB(Vector3(-3,0,-2.5),Vector3(6,3,5)))
+ 	reset_source();refresh()

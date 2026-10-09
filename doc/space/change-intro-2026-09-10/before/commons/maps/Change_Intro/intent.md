@@ -1,0 +1,7 @@
+Concept: The derivative as the most concrete form of change — the slope of a curve at a single point. A tangent line slides along a curve and reads out its instantaneous rate. Before the word "derivative" arrives, the learner has already seen the thing it names.
+Sequence role: Opens the Change sequence, the calculus substrate that forces, wavefunctions, randomness, and noise all draw on without naming. No prior calculus assumed; prerequisite is only Color. Establishes the vocabulary — rate, slope, instantaneous — that every later map in the sequence extends.
+Technical angle: Sampling a function, computing the limit of (f(x+h) − f(x))/h as h shrinks, drawing the tangent at the contact point, and rendering slope as a readout. The derivative-as-function plot shows that taking a slope at every point produces a new curve.
+Critical angle: Change made local. The derivative refuses the global view — it reports only what is happening exactly here, exactly now. It is the first move in the sequence's argument that accumulation (the integral, two maps later) is the inverse act: stitching all the local rates back into a whole.
+Key artifacts: slope_tangent_demo carries the curve and the sliding tangent; derivative_pair stacks f and f' to show the slope is itself a function; code_display gives the symbolic form; science_screen mirrors the readout in 2D.
+
+Gap: Artifacts slope_tangent_demo and derivative_pair are scaffolded names — scenes not yet built. This doc is the spec they should satisfy.

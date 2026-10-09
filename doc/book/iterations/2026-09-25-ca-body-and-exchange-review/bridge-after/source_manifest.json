@@ -1,0 +1,28 @@
+{
+  "room": "CA_ExpandingSpace",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/CA_ExpandingSpace/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d13a57b95217555b48526443477a897e449b785da8a9cd3fe9961f1f19d3ba81",
+    "commons/maps/CA_ExpandingSpace/map_data.json": "1580ee6bc3100cd09d980cab2fff66683de3c4e0a744bcf9c8a15c4e881115f2",
+    "doc/book/iterations/2026-09-25-ca-body-and-exchange-review/probe.gd": "6668a1f36caf0489236fd780d00c5ad29e31412e5c10ad9c1e3bbad35b94124c",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/CA_ExpandingSpace/control.json": "d9f03a967aeae0ec76927b4d238296ada2247fac36d12e41a2738c1ee957adfd",
+    "ada_run/encounter_pilot/CA_ExpandingSpace/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/CA_ExpandingSpace/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/CA_ExpandingSpace/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a"
+  }
+}

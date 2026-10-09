@@ -1,0 +1,158 @@
+{
+ "sweep": "order_matters",
+ "peak_changed_pct": 1.005,
+ "subject_pct": 2.125,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "order": "TRS"
+   },
+   "b": {
+    "order": "TSR"
+   },
+   "changed_px": 5160,
+   "changed_pct": 0.893
+  },
+  {
+   "a": {
+    "order": "TRS"
+   },
+   "b": {
+    "order": "RTS"
+   },
+   "changed_px": 5465,
+   "changed_pct": 0.946
+  },
+  {
+   "a": {
+    "order": "TRS"
+   },
+   "b": {
+    "order": "RST"
+   },
+   "changed_px": 5807,
+   "changed_pct": 1.005
+  },
+  {
+   "a": {
+    "order": "TRS"
+   },
+   "b": {
+    "order": "SRT"
+   },
+   "changed_px": 5713,
+   "changed_pct": 0.989
+  },
+  {
+   "a": {
+    "order": "TRS"
+   },
+   "b": {
+    "order": "STR"
+   },
+   "changed_px": 5214,
+   "changed_pct": 0.903
+  },
+  {
+   "a": {
+    "order": "TSR"
+   },
+   "b": {
+    "order": "RTS"
+   },
+   "changed_px": 5145,
+   "changed_pct": 0.891
+  },
+  {
+   "a": {
+    "order": "TSR"
+   },
+   "b": {
+    "order": "RST"
+   },
+   "changed_px": 5487,
+   "changed_pct": 0.95
+  },
+  {
+   "a": {
+    "order": "TSR"
+   },
+   "b": {
+    "order": "SRT"
+   },
+   "changed_px": 5334,
+   "changed_pct": 0.923
+  },
+  {
+   "a": {
+    "order": "TSR"
+   },
+   "b": {
+    "order": "STR"
+   },
+   "changed_px": 2837,
+   "changed_pct": 0.491
+  },
+  {
+   "a": {
+    "order": "RTS"
+   },
+   "b": {
+    "order": "RST"
+   },
+   "changed_px": 4532,
+   "changed_pct": 0.785
+  },
+  {
+   "a": {
+    "order": "RTS"
+   },
+   "b": {
+    "order": "SRT"
+   },
+   "changed_px": 5560,
+   "changed_pct": 0.963
+  },
+  {
+   "a": {
+    "order": "RTS"
+   },
+   "b": {
+    "order": "STR"
+   },
+   "changed_px": 5199,
+   "changed_pct": 0.9
+  },
+  {
+   "a": {
+    "order": "RST"
+   },
+   "b": {
+    "order": "SRT"
+   },
+   "changed_px": 3467,
+   "changed_pct": 0.6
+  },
+  {
+   "a": {
+    "order": "RST"
+   },
+   "b": {
+    "order": "STR"
+   },
+   "changed_px": 5515,
+   "changed_pct": 0.955
+  },
+  {
+   "a": {
+    "order": "SRT"
+   },
+   "b": {
+    "order": "STR"
+   },
+   "changed_px": 4410,
+   "changed_pct": 0.764
+  }
+ ]
+}

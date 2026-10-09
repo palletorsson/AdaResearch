@@ -1,0 +1,1781 @@
+<!doctype html><meta charset="utf-8"><title>UniversalVRAudioController.gd</title><style>body{margin:3rem;background:#f5f1e9;color:#202129}pre{white-space:pre-wrap;font:15px/1.7 monospace}</style><h1>UniversalVRAudioController.gd</h1><pre>﻿@tool
+extends Node3D
+
+## Universal VR Audio Controller (UVAC)
+## The central brain of the modular synth rack.
+## Supports Ableton-style controls: sliders, knobs, XY pads, buttons
+
+# Load PickupCube for shared Mario parameter sync
+const PickupCube = preload(&quot;res://commons/scenes/mapobjects/pick_up_cube.gd&quot;)
+
+# Control scenes — use load() instead of preload() to avoid RigidBody3D script
+# compilation errors when XRTools interactable_handle.gd fails to load
+var SLIDER_SCENE: PackedScene
+var SLIDER_HORIZONTAL_SCENE: PackedScene
+var DIAL_SCENE: PackedScene
+var SLIDER_VERTICAL_SCENE: PackedScene
+var SLIDER_SNAP_SCENE: PackedScene
+var SLIDER_ZERO_SCENE: PackedScene
+var XY_PAD_SCENE: PackedScene
+var BUTTON_SCENE: PackedScene
+var JOYSTICK_SCENE: PackedScene
+var LEVER_SCENE: PackedScene
+var WHEEL_SCENE: PackedScene
+var WAVEFORM_MONITOR_SCENE: PackedScene
+var SPECTRUM_DISPLAY_SCENE: PackedScene
+var WAVEFORM_DISPLAY_SCENE: PackedScene
+var LISSAJOUS_DISPLAY_SCENE: PackedScene
+var SIMPLE_WAVEFORM_SCENE: PackedScene
+
+func _load_control_scenes() -&gt; void:
+	SLIDER_SCENE = load(&quot;res://commons/interactables/slider_smooth.tscn&quot;)
+	SLIDER_HORIZONTAL_SCENE = load(&quot;res://commons/interactables/slider_horizontal.tscn&quot;)
+	DIAL_SCENE = load(&quot;res://commons/interactables/dial_smooth.tscn&quot;)
+	SLIDER_VERTICAL_SCENE = load(&quot;res://commons/interactables/slider_axis.tscn&quot;)
+	SLIDER_SNAP_SCENE = load(&quot;res://commons/interactables/slider_snap.tscn&quot;)
+	SLIDER_ZERO_SCENE = load(&quot;res://commons/interactables/slider_zero.tscn&quot;)
+	XY_PAD_SCENE = load(&quot;res://commons/interactables/slider_plane.tscn&quot;)
+	BUTTON_SCENE = load(&quot;res://commons/interactables/push_button.tscn&quot;)
+	JOYSTICK_SCENE = load(&quot;res://commons/interactables/joystick_smooth.tscn&quot;)
+	LEVER_SCENE = load(&quot;res://commons/interactables/lever_smooth.tscn&quot;)
+	WHEEL_SCENE = load(&quot;res://commons/interactables/wheel_smooth.tscn&quot;)
+	WAVEFORM_MONITOR_SCENE = load(&quot;res://commons/audio/interfaces/VRAudioMonitor.tscn&quot;)
+	SPECTRUM_DISPLAY_SCENE = load(&quot;res://commons/audio/interfaces/VRSpectrumDisplay.tscn&quot;)
+	WAVEFORM_DISPLAY_SCENE = load(&quot;res://commons/audio/interfaces/VRWaveformDisplay.tscn&quot;)
+	LISSAJOUS_DISPLAY_SCENE = load(&quot;res://commons/audio/interfaces/VRLissajousDisplay.tscn&quot;)
+	SIMPLE_WAVEFORM_SCENE = load(&quot;res://commons/audio/interfaces/VRSimpleWaveform.tscn&quot;)
+
+# Default spacing by control type (width, height in meters)
+const CONTROL_SIZES = {
+	&quot;slider&quot;: Vector2(0.08, 0.22),
+	&quot;slh&quot;: Vector2(0.22, 0.08),
+	&quot;slv&quot;: Vector2(0.08, 0.22),
+	&quot;knob&quot;: Vector2(0.10, 0.10),
+	&quot;wheel&quot;: Vector2(0.18, 0.25),
+	&quot;xy&quot;: Vector2(0.22, 0.29),
+	&quot;btn&quot;: Vector2(0.08, 0.08),
+	&quot;lv&quot;: Vector2(0.18, 0.25),
+	&quot;monitor&quot;: Vector2(0.30, 0.22),
+	&quot;spectrum&quot;: Vector2(0.32, 0.24),
+	&quot;waveform&quot;: Vector2(0.32, 0.24),
+	&quot;simple_waveform&quot;: Vector2(0.32, 0.24),
+	&quot;lissajous&quot;: Vector2(0.30, 0.30),
+	&quot;meter&quot;: Vector2(0.04, 0.12),
+	&quot;label&quot;: Vector2(0.20, 0.04),
+	&quot;grp&quot;: Vector2(0.25, 0.20),
+	&quot;divider&quot;: Vector2(0.004, 0.12),
+	&quot;div&quot;: Vector2(0.004, 0.12),
+	&quot;default&quot;: Vector2(0.10, 0.08)
+}
+
+# Control type mapping
+# Prefixes:
+#   slh_N  = Horizontal slider (fader)
+#   slv_N  = Vertical slider (fader)
+#   sls_N  = Snap slider (discrete steps)
+#   slz_N  = Zero-centered slider (bipolar)
+#   nb_N   = Knob/dial (rotary)
+#   xy_N   = XY Pad (2D control, maps to 2 parameters)
+#   btn_N  = Button (trigger/toggle)
+#   js_N   = Joystick (alternative 2D control)
+#   lv_N   = Lever (vertical throw)
+#   whl_N  = Wheel (scroll/pitch bend style)
+#   mon_N  = Monitor (waveform/spectrum display)
+#   mtr_N  = Meter (VU/level meter)
+#   lbl_N  = Label (text display)
+#   grp_N  = Group container
+
+signal sound_played(stream)
+
+@export_file(&quot;*.json&quot;) var rack_config_path: String = &quot;&quot;
+@export var eurorack_preset_name: String = &quot;&quot;  ## If set, loads a eurorack preset instead of JSON config
+
+@onready var parameter_container = $ParameterGrid
+@onready var preview_player = $AudioStreamPlayer3D
+
+var current_sound_key: String = &quot;basic_sine_wave&quot;
+var active_controls: Dictionary = {}
+var active_buttons: Dictionary = {}
+var rack_config: Dictionary = {}
+var use_json_config: bool = true
+## A grid config handed over before _ready (the museum&#x27;s map-authored lane calls
+## apply_grid_config while the root is still outside the tree; the grid component
+## defers it until after). Kept here; _ready applies it once ParameterGrid, the
+## dedicated bus and the control scenes exist. (2026-09-10, Astra&#x27;s runtime brief.)
+var _pending_grid_config: Dictionary = {}
+
+# Dedicated audio bus for this rack&#x27;s output (allows waveform display to show only rack audio)
+var dedicated_bus_name: String = &quot;&quot;
+var _dedicated_bus_index: int = -1
+
+# Auto-save timer for syncing Mario parameters (like MarioSoundController)
+var _auto_save_timer: Timer
+var _auto_save_interval: float = 2.0
+
+const RACK_CONFIG_BASE_PATH = &quot;res://commons/audio/rack_configs/&quot;
+const MIN_AUDIO_BOARD_WIDTH := 1.0
+const MIN_AUDIO_BOARD_HEIGHT := 0.82
+const CELL_FRAME_THICKNESS := 0.006
+const CELL_FRAME_DEPTH := 0.004
+
+func _ready():
+	# Setup dedicated audio bus for this rack
+	_setup_dedicated_bus()
+
+	# Setup auto-save timer for parameter syncing
+	_setup_auto_save_timer()
+
+	# A config that arrived before this node was ready: apply it now, over the exports
+	if not _pending_grid_config.is_empty():
+		var pending: Dictionary = _pending_grid_config
+		_pending_grid_config = {}
+		apply_grid_config(pending)
+	# Eurorack preset takes priority over JSON config
+	elif eurorack_preset_name != &quot;&quot;:
+		# Preset mode: ModuleFaceTexture handles everything, no 3D control scenes needed
+		load_eurorack_preset(eurorack_preset_name)
+	elif rack_config_path != &quot;&quot; and FileAccess.file_exists(rack_config_path):
+		# JSON mode: load 3D control scenes (deferred to avoid preload errors)
+		_load_control_scenes()
+		load_rack_config(rack_config_path)
+	elif rack_config_path != &quot;&quot;:
+		push_warning(&quot;UniversalVRAudioController: Config path set but file not found: %s&quot; % rack_config_path)
+
+func _setup_dedicated_bus():
+	&quot;&quot;&quot;Create a dedicated audio bus for this rack&#x27;s output&quot;&quot;&quot;
+	# Generate unique bus name based on instance ID
+	dedicated_bus_name = &quot;RackBus_%d&quot; % get_instance_id()
+
+	# Check if bus already exists
+	_dedicated_bus_index = AudioServer.get_bus_index(dedicated_bus_name)
+	if _dedicated_bus_index != -1:
+		print(&quot;UniversalVRAudioController: Using existing bus &#x27;%s&#x27;&quot; % dedicated_bus_name)
+	else:
+		# Create new bus
+		var bus_count = AudioServer.bus_count
+		AudioServer.add_bus(bus_count)
+		AudioServer.set_bus_name(bus_count, dedicated_bus_name)
+		AudioServer.set_bus_send(bus_count, &quot;Master&quot;)  # Route to Master
+		_dedicated_bus_index = bus_count
+		print(&quot;UniversalVRAudioController: Created dedicated bus &#x27;%s&#x27; (index %d)&quot; % [dedicated_bus_name, _dedicated_bus_index])
+
+	# Route preview player to dedicated bus
+	if preview_player:
+		preview_player.bus = dedicated_bus_name
+		print(&quot;UniversalVRAudioController: Routed audio player to &#x27;%s&#x27;&quot; % dedicated_bus_name)
+
+func get_dedicated_bus_name() -&gt; String:
+	&quot;&quot;&quot;Return the dedicated bus name for this rack&quot;&quot;&quot;
+	return dedicated_bus_name
+
+func _exit_tree():
+	# Remove the dedicated audio bus to avoid leaking buses
+	if dedicated_bus_name != &quot;&quot;:
+		var bus_idx = AudioServer.get_bus_index(dedicated_bus_name)
+		if bus_idx != -1:
+			AudioServer.remove_bus(bus_idx)
+
+func _setup_auto_save_timer():
+	_auto_save_timer = Timer.new()
+	_auto_save_timer.wait_time = _auto_save_interval
+	_auto_save_timer.autostart = true
+	_auto_save_timer.timeout.connect(_on_auto_save_timeout)
+	add_child(_auto_save_timer)
+
+func _on_auto_save_timeout():
+	# Sync Mario parameters globally so pickup cubes always use current settings
+	if current_sound_key == &quot;pickup_mario&quot;:
+		_sync_mario_parameters()
+
+func _sync_mario_parameters():
+	var values = _get_current_values()
+	var start_freq = values.get(&quot;start_freq&quot;, 540.0)
+	var end_freq = values.get(&quot;end_freq&quot;, 880.0)
+	var decay_rate = values.get(&quot;decay_rate&quot;, 8.0)
+	var duration = values.get(&quot;duration&quot;, 0.36)
+	PickupCube.set_shared_mario_parameters(start_freq, end_freq, decay_rate, duration)
+
+# Audio level for meters
+var _rack_spectrum_instance: AudioEffectSpectrumAnalyzerInstance
+var _rack_spectrum_setup: bool = false
+
+func _process(_delta: float):
+	_update_rack_meters()
+
+func _update_rack_meters():
+	&quot;&quot;&quot;Update any meters that monitor the rack bus&quot;&quot;&quot;
+	# Setup spectrum analyzer on rack bus if needed
+	if not _rack_spectrum_setup and _dedicated_bus_index &gt;= 0:
+		_setup_rack_spectrum_analyzer()
+
+	if not _rack_spectrum_instance:
+		return
+
+	# Get audio level from rack bus
+	var total_magnitude = 0.0
+	for freq in [100.0, 200.0, 400.0, 800.0, 1600.0, 3200.0]:
+		var mag = _rack_spectrum_instance.get_magnitude_for_frequency_range(freq * 0.8, freq * 1.2)
+		total_magnitude += mag.length()
+	var audio_level = clamp(total_magnitude * 10.0, 0.0, 1.0)
+
+	# Update all rack meters
+	for control_id in active_controls:
+		var control_data = active_controls[control_id]
+		var control = control_data.get(&quot;instance&quot;)  # Controls stored as &quot;instance&quot;
+		if not control:
+			continue
+		if control.has_meta(&quot;audio_source&quot;) and control.get_meta(&quot;audio_source&quot;) == &quot;rack&quot;:
+			if &quot;level&quot; in control:
+				control.level = audio_level
+
+func _setup_rack_spectrum_analyzer():
+	&quot;&quot;&quot;Setup spectrum analyzer on the dedicated rack bus&quot;&quot;&quot;
+	_rack_spectrum_setup = true
+
+	# Find existing or create spectrum analyzer
+	for i in range(AudioServer.get_bus_effect_count(_dedicated_bus_index)):
+		var effect = AudioServer.get_bus_effect(_dedicated_bus_index, i)
+		if effect is AudioEffectSpectrumAnalyzer:
+			_rack_spectrum_instance = AudioServer.get_bus_effect_instance(_dedicated_bus_index, i)
+			return
+
+	# Create new analyzer
+	var analyzer = AudioEffectSpectrumAnalyzer.new()
+	analyzer.buffer_length = 0.1
+	analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_512
+	AudioServer.add_bus_effect(_dedicated_bus_index, analyzer)
+
+	var effect_idx = AudioServer.get_bus_effect_count(_dedicated_bus_index) - 1
+	_rack_spectrum_instance = AudioServer.get_bus_effect_instance(_dedicated_bus_index, effect_idx)
+	print(&quot;UniversalVRAudioController: Created spectrum analyzer for rack meters&quot;)
+
+# Called by GridInteractablesComponent when using # syntax
+# Supported parameters:
+#   #config:synth_rack       â†’ Load rack config from rack_configs folder
+#   #sound:laser_shot        â†’ Override sound type
+#   #autoplay:true           â†’ Auto-play sound on ready
+#   #col_spacing:0.25        â†’ Override column spacing
+#   #row_spacing:0.12        â†’ Override row spacing
+#   #hide_selection:true     â†’ Hide category/sound selection panel
+#   #hide_buttons:true       â†’ Hide play/save buttons
+#
+# Example: AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true
+func apply_grid_config(config_data: Dictionary):
+	# Before _ready the ParameterGrid, the bus and the control scenes do not exist:
+	# keep the config, _ready applies it.
+	if not is_node_ready() or parameter_container == null:
+		_pending_grid_config = config_data.duplicate(true)
+		print(&quot;UniversalVRAudioController: grid config kept until ready: %s&quot; % str(config_data))
+		return
+	# A JSON rack spawns control scenes; make sure they are loaded whichever path
+	# brought us here (only the rack_config_path branch of _ready used to load them).
+	if SLIDER_SCENE == null and (config_data.has(&quot;config&quot;) or config_data.has(&quot;grid&quot;)):
+		_load_control_scenes()
+	print(&quot;UniversalVRAudioController: Applying grid config: %s&quot; % str(config_data))
+
+	# If this is a full rack config (has grid + control_definitions), load directly
+	if config_data.has(&quot;grid&quot;) and config_data.has(&quot;control_definitions&quot;):
+		load_rack_config_from_dict(config_data)
+		return
+
+	# Load eurorack preset (if specified) — uses ModuleFaceTexture for polished look
+	if config_data.has(&quot;preset&quot;):
+		var preset_name = str(config_data[&quot;preset&quot;])
+		load_eurorack_preset(preset_name)
+		print(&quot;  -&gt; Loaded eurorack preset: %s&quot; % preset_name)
+		return
+
+	# Load rack config first (if specified)
+	if config_data.has(&quot;config&quot;):
+		var config_name = str(config_data[&quot;config&quot;])
+		var full_path = RACK_CONFIG_BASE_PATH + config_name + &quot;.json&quot;
+
+		if FileAccess.file_exists(full_path):
+			load_rack_config(full_path)
+			print(&quot;  -&gt; Loaded rack config: %s&quot; % config_name)
+		else:
+			push_error(&quot;UniversalVRAudioController: Rack config not found: %s&quot; % full_path)
+			_list_available_configs()
+
+	# Override sound type
+	if config_data.has(&quot;sound&quot;):
+		var sound_type = str(config_data[&quot;sound&quot;])
+		current_sound_key = sound_type
+		if rack_config.has(&quot;rack_info&quot;):
+			rack_config[&quot;rack_info&quot;][&quot;sound_type&quot;] = sound_type
+		print(&quot;  â†’ Sound type override: %s&quot; % sound_type)
+
+	# Override layout spacing
+	if config_data.has(&quot;col_spacing&quot;):
+		var spacing = float(config_data[&quot;col_spacing&quot;])
+		if rack_config.has(&quot;layout&quot;):
+			rack_config[&quot;layout&quot;][&quot;col_spacing&quot;] = spacing
+		_respawn_controls_if_needed()
+		print(&quot;  â†’ Column spacing: %s&quot; % spacing)
+
+	if config_data.has(&quot;row_spacing&quot;):
+		var spacing = float(config_data[&quot;row_spacing&quot;])
+		if rack_config.has(&quot;layout&quot;):
+			rack_config[&quot;layout&quot;][&quot;row_spacing&quot;] = spacing
+		_respawn_controls_if_needed()
+		print(&quot;  â†’ Row spacing: %s&quot; % spacing)
+
+	# Hide selection panel
+	if config_data.has(&quot;hide_selection&quot;):
+		var should_hide = str(config_data[&quot;hide_selection&quot;]).to_lower() == &quot;true&quot;
+		if has_node(&quot;SelectionPanel&quot;):
+			$SelectionPanel.visible = not should_hide
+			print(&quot;  â†’ Selection panel visible: %s&quot; % (not should_hide))
+
+	# Hide buttons
+	if config_data.has(&quot;hide_buttons&quot;):
+		var should_hide = str(config_data[&quot;hide_buttons&quot;]).to_lower() == &quot;true&quot;
+		if has_node(&quot;Buttons&quot;):
+			$Buttons.visible = not should_hide
+			print(&quot;  â†’ Buttons visible: %s&quot; % (not should_hide))
+
+	# Auto-play on ready
+	if config_data.has(&quot;autoplay&quot;):
+		var should_autoplay = str(config_data[&quot;autoplay&quot;]).to_lower() == &quot;true&quot;
+		if should_autoplay:
+			# Defer to ensure controls are spawned
+			call_deferred(&quot;play_current_sound&quot;)
+			print(&quot;  â†’ Autoplay enabled&quot;)
+
+func _list_available_configs():
+	var dir = DirAccess.open(RACK_CONFIG_BASE_PATH)
+	if dir:
+		var configs = []
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != &quot;&quot;:
+			if file_name.ends_with(&quot;.json&quot;):
+				configs.append(file_name.replace(&quot;.json&quot;, &quot;&quot;))
+			file_name = dir.get_next()
+		print(&quot;UniversalVRAudioController: Available configs: %s&quot; % str(configs))
+
+func _respawn_controls_if_needed():
+	if use_json_config and not rack_config.is_empty():
+		_clear_controls()
+		_spawn_controls_from_json()
+
+func load_rack_config(path: String):
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		push_error(&quot;Failed to open rack config file: &quot; + path)
+		return
+
+	var json_text = file.get_as_text()
+	file.close()
+
+	var json = JSON.new()
+	var error = json.parse(json_text)
+	if error != OK:
+		push_error(&quot;Failed to parse rack config JSON: &quot; + json.get_error_message())
+		return
+
+	var data = json.data
+	if not _validate_rack_config(data):
+		push_error(&quot;Invalid rack config structure in: &quot; + path)
+		return
+
+	rack_config = data
+	use_json_config = true
+
+	# Update rack info
+	if rack_config.has(&quot;rack_info&quot;):
+		var info = rack_config[&quot;rack_info&quot;]
+		if info.has(&quot;sound_type&quot;):
+			current_sound_key = info[&quot;sound_type&quot;]
+
+	# Spawn controls from JSON config
+	_clear_controls()
+	_spawn_controls_from_json()
+
+	# Apply layout visibility settings
+	var layout = rack_config.get(&quot;layout&quot;, {})
+	if layout.has(&quot;hide_selection&quot;):
+		var should_hide = layout[&quot;hide_selection&quot;]
+		if has_node(&quot;SelectionPanel&quot;):
+			$SelectionPanel.visible = not should_hide
+	if layout.has(&quot;hide_buttons&quot;):
+		var should_hide = layout[&quot;hide_buttons&quot;]
+		if has_node(&quot;Buttons&quot;):
+			$Buttons.visible = not should_hide
+
+	# Configure cable case colors from layout
+	_configure_cable_case(layout)
+
+	print(&quot;Loaded rack config: &quot;, rack_config.get(&quot;rack_info&quot;, {}).get(&quot;name&quot;, &quot;Unknown&quot;))
+
+
+func load_rack_config_from_dict(data: Dictionary):
+	## Load a rack config from an in-memory Dictionary (e.g. converted from grid editor preset).
+	if not _validate_rack_config(data):
+		push_error(&quot;Invalid rack config dictionary&quot;)
+		return
+
+	rack_config = data
+	use_json_config = true
+
+	if rack_config.has(&quot;rack_info&quot;):
+		var info = rack_config[&quot;rack_info&quot;]
+		if info.has(&quot;sound_type&quot;):
+			current_sound_key = info[&quot;sound_type&quot;]
+
+	_clear_controls()
+	_spawn_controls_from_json()
+
+	var layout = rack_config.get(&quot;layout&quot;, {})
+	if layout.has(&quot;hide_selection&quot;):
+		if has_node(&quot;SelectionPanel&quot;):
+			$SelectionPanel.visible = not layout[&quot;hide_selection&quot;]
+	if layout.has(&quot;hide_buttons&quot;):
+		if has_node(&quot;Buttons&quot;):
+			$Buttons.visible = not layout[&quot;hide_buttons&quot;]
+
+	_configure_cable_case(layout)
+	print(&quot;Loaded rack config from dict: &quot;, rack_config.get(&quot;rack_info&quot;, {}).get(&quot;name&quot;, &quot;Unknown&quot;))
+
+
+## --- Eurorack Modular Rack API ---
+
+## Load a Eurorack preset by name from module_library.json.
+## Creates an EurorackRack with compound modules containing real interactive controls.
+func load_eurorack_preset(preset_name: String) -&gt; void:
+	_clear_controls()
+
+	# Hide legacy UI panels
+	if has_node(&quot;SelectionPanel&quot;):
+		$SelectionPanel.visible = false
+	if has_node(&quot;Buttons&quot;):
+		$Buttons.visible = false
+	if has_node(&quot;CableCase&quot;):
+		$CableCase.visible = false
+
+	var EurorackRackScript = load(&quot;res://commons/audio/EurorackRack.gd&quot;)
+	var rack: Node3D = EurorackRackScript.new()
+	rack.name = &quot;EurorackRack&quot;
+	parameter_container.add_child(rack)
+	rack.load_preset(preset_name, self)
+
+	# Wire up cable routing if cable manager exists
+	if rack.cable_manager:
+		_eurorack_cable_manager = rack.cable_manager
+		_eurorack_cable_manager.parameter_routed.connect(_on_cable_routed)
+		_eurorack_cable_manager.parameter_unrouted.connect(_on_cable_unrouted)
+		print(&quot;UniversalVRAudioController: Cable manager connected — %d cables&quot; % _eurorack_cable_manager.get_cable_count())
+
+	# Read sound_type from preset
+	var lib_path := &quot;res://commons/audio/eurorack_modules/module_library.json&quot;
+	if FileAccess.file_exists(lib_path):
+		var file := FileAccess.open(lib_path, FileAccess.READ)
+		var json := JSON.new()
+		if json.parse(file.get_as_text()) == OK:
+			var presets: Dictionary = json.data.get(&quot;rack_presets&quot;, {})
+			if presets.has(preset_name):
+				current_sound_key = presets[preset_name].get(&quot;sound_type&quot;, current_sound_key)
+		file.close()
+
+	if preset_name == &quot;patch_and_motion&quot;:
+		live_patch = preload(&quot;res://commons/audio/cables/live_patch.gd&quot;).new()
+		rack.add_child(live_patch)
+		live_patch.setup(self, rack.cable_manager)
+
+	print(&quot;UniversalVRAudioController: Loaded Eurorack preset &#x27;%s&#x27;&quot; % preset_name)
+
+
+## Public wrappers for control creation (used by EurorackModule).
+func instantiate_control(control_type: String, control_id: String) -&gt; Node:
+	return _instantiate_control(control_type, control_id)
+
+func configure_control(control: Node, config: Dictionary, control_type: String) -&gt; void:
+	_configure_control(control, config, control_type)
+
+func connect_control_signals(control: Node, control_id: String, control_type: String, config: Dictionary) -&gt; void:
+	_connect_control_signals(control, control_id, control_type, config)
+
+func attach_face_plate(control: Node3D, control_type: String):
+	return _attach_face_plate(control, control_type)
+
+
+## --- Eurorack Cable Routing ---
+
+var live_patch: Node
+var _eurorack_cable_manager: SynthCableManager = null
+
+
+func _on_cable_routed(from_param: String, to_param: String) -&gt; void:
+	if is_instance_valid(live_patch): return
+	print(&quot;UVAC Cable: Routed %s → %s&quot; % [from_param, to_param])
+	play_current_sound()
+
+
+func _on_cable_unrouted(from_param: String, to_param: String) -&gt; void:
+	if is_instance_valid(live_patch): return
+	print(&quot;UVAC Cable: Unrouted %s → %s&quot; % [from_param, to_param])
+	play_current_sound()
+
+
+func _configure_cable_case(layout: Dictionary):
+	&quot;&quot;&quot;Configure cable case decoration colors based on layout settings&quot;&quot;&quot;
+	var cable_case = get_node_or_null(&quot;CableCase&quot;)
+	if not cable_case:
+		return
+
+	# Set accent color from layout (matches button colors, etc.)
+	if layout.has(&quot;cable_accent_color&quot;):
+		var color = Color(layout[&quot;cable_accent_color&quot;])
+		if &quot;accent_color&quot; in cable_case:
+			cable_case.accent_color = color
+
+	# Check for cable visibility toggle
+	if layout.has(&quot;show_cables&quot;):
+		cable_case.visible = layout[&quot;show_cables&quot;]
+
+	# Set glow intensity
+	if layout.has(&quot;cable_glow&quot;):
+		if &quot;glow_intensity&quot; in cable_case:
+			cable_case.glow_intensity = float(layout[&quot;cable_glow&quot;])
+
+func _validate_rack_config(data: Dictionary) -&gt; bool:
+	# Check for required top-level keys
+	if not data.has(&quot;grid&quot;):
+		push_error(&quot;Rack config missing &#x27;grid&#x27; section&quot;)
+		return false
+
+	if not data.has(&quot;control_definitions&quot;):
+		push_error(&quot;Rack config missing &#x27;control_definitions&#x27; section&quot;)
+		return false
+
+	# Validate grid structure
+	var grid = data[&quot;grid&quot;]
+	if not grid is Array:
+		push_error(&quot;&#x27;grid&#x27; must be an Array&quot;)
+		return false
+
+	# Validate control_definitions structure
+	var control_defs = data[&quot;control_definitions&quot;]
+	if not control_defs is Dictionary:
+		push_error(&quot;&#x27;control_definitions&#x27; must be a Dictionary&quot;)
+		return false
+
+	# Validate each control definition has required fields
+	for control_id in control_defs.keys():
+		var control = control_defs[control_id]
+		if not control is Dictionary:
+			push_error(&quot;Control definition &#x27;&quot; + control_id + &quot;&#x27; must be a Dictionary&quot;)
+			return false
+
+		if not control.has(&quot;type&quot;):
+			push_error(&quot;Control &#x27;&quot; + control_id + &quot;&#x27; missing &#x27;type&#x27; field&quot;)
+			return false
+
+		# Visual/display controls don&#x27;t need parameters
+		var type = control.get(&quot;type&quot;, &quot;slider&quot;)
+		if type in [&quot;label&quot;, &quot;lbl&quot;, &quot;text&quot;, &quot;group&quot;, &quot;grp&quot;, &quot;container&quot;, &quot;monitor&quot;, &quot;mon&quot;, &quot;scope&quot;, &quot;spectrum&quot;, &quot;spec&quot;, &quot;fft&quot;, &quot;waveform&quot;, &quot;wave&quot;, &quot;osc&quot;, &quot;simple_waveform&quot;, &quot;srcwave&quot;, &quot;rack_wave&quot;, &quot;lissajous&quot;, &quot;liss&quot;, &quot;xy_wave&quot;, &quot;paramwave&quot;, &quot;meter&quot;, &quot;mtr&quot;, &quot;vu&quot;, &quot;level&quot;, &quot;div&quot;, &quot;divider&quot;]:
+			continue
+			
+		# XY controls need parameter_x and parameter_y (or just parameter)
+		if type in [&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;, &quot;js&quot;, &quot;joystick&quot;]:
+			if not control.has(&quot;parameter&quot;) and (not control.has(&quot;parameter_x&quot;) or not control.has(&quot;parameter_y&quot;)):
+				push_error(&quot;Control &#x27;&quot; + control_id + &quot;&#x27; must have &#x27;parameter&#x27; OR &#x27;parameter_x&#x27; and &#x27;parameter_y&#x27;&quot;)
+				return false
+			continue
+
+		# Standard controls need parameter
+		if not control.has(&quot;parameter&quot;):
+			# Buttons can have &#x27;action&#x27; instead of &#x27;parameter&#x27;
+			if type in [&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;] and control.has(&quot;action&quot;):
+				continue
+			
+			push_error(&quot;Control &#x27;&quot; + control_id + &quot;&#x27; missing &#x27;parameter&#x27; field&quot;)
+			return false
+
+	return true
+
+func _spawn_controls_from_json():
+	if not rack_config.has(&quot;grid&quot;) or not rack_config.has(&quot;control_definitions&quot;):
+		return
+
+	var control_defs = rack_config[&quot;control_definitions&quot;]
+	var layout = rack_config.get(&quot;layout&quot;, {})
+
+	# Check for legacy manual spacing mode
+	var use_legacy = layout.has(&quot;col_spacing&quot;) and layout.get(&quot;col_spacing&quot;, 0.0) &gt; 0
+	if use_legacy:
+		_spawn_controls_legacy()
+		return
+
+	# Use new blueprint-based layout calculator
+	var layout_result = RackLayoutCalculator.calculate_layout(rack_config)
+
+	print(&quot;RackLayout: Total size %.2fm x %.2fm, %d controls&quot; % [
+		layout_result.total_width,
+		layout_result.total_height,
+		layout_result.positions.size()
+	])
+
+	# Build proper eurorack frame (rails, side panels, back panel) — no cables
+	_build_eurorack_frame(layout_result.total_width, layout_result.total_height)
+
+	# Build module panel background (dark metallic)
+	_build_module_panel(layout_result.total_width, layout_result.total_height)
+
+	# Cell background material (subtle dark inset per control)
+	var cell_bg_mat := StandardMaterial3D.new()
+	cell_bg_mat.albedo_color = Color(0.72, 0.69, 0.62)
+	cell_bg_mat.metallic = 0.5
+	cell_bg_mat.roughness = 0.4
+
+	# Spawn controls at calculated positions with cell backgrounds
+	for control_id in layout_result.positions.keys():
+		if not control_defs.has(control_id):
+			continue
+
+		var control_config = control_defs[control_id]
+		var control_type = control_config.get(&quot;type&quot;, &quot;slider&quot;)
+
+		# Skip labels/dividers for cell backgrounds
+		var is_decoration: bool = control_type in [&quot;label&quot;, &quot;lbl&quot;, &quot;divider&quot;, &quot;div&quot;, &quot;group&quot;, &quot;grp&quot;]
+
+		# Add cell background plate (dark inset behind each control)
+		if not is_decoration and layout_result.sizes.has(control_id):
+			var cell_size: Vector2 = layout_result.sizes[control_id]
+			var cell_pos: Vector3 = layout_result.positions[control_id]
+			var cell_mesh := MeshInstance3D.new()
+			cell_mesh.name = &quot;CellBg_%s&quot; % control_id
+			var cell_box := BoxMesh.new()
+			cell_box.size = Vector3(cell_size.x + 0.008, cell_size.y + 0.008, 0.002)
+			cell_mesh.mesh = cell_box
+			cell_mesh.material_override = cell_bg_mat
+			cell_mesh.transform.origin = Vector3(cell_pos.x, cell_pos.y, 0.003)
+			parameter_container.add_child(cell_mesh)
+			_add_control_cell_frame(parameter_container, cell_pos, cell_size)
+
+		var control = _instantiate_control(control_type, control_id)
+		if not control:
+			continue
+
+		parameter_container.add_child(control)
+
+		# Apply calculated position
+		var pos: Vector3 = layout_result.positions[control_id]
+		control.transform.origin = pos
+
+		# Apply control-specific configuration
+		_configure_control(control, control_config, control_type)
+
+		# Connect signals based on control type
+		_connect_control_signals(control, control_id, control_type, control_config)
+
+		# Face plates ON by default for polished look
+		if layout.get(&quot;face_plates&quot;, true) and not (control is VRRackControl):
+			var plate := _attach_face_plate(control, control_type)
+			if plate:
+				plate.set_param_name(control_config.get(&quot;label&quot;, &quot;&quot;))
+				_strip_interactable_visuals(control, control_type)
+
+		# Store control with structure
+		active_controls[control_id] = {
+			&quot;instance&quot;: control,
+			&quot;parameter&quot;: control_config.get(&quot;parameter&quot;, &quot;&quot;),
+			&quot;parameter_x&quot;: control_config.get(&quot;parameter_x&quot;, &quot;&quot;),
+			&quot;parameter_y&quot;: control_config.get(&quot;parameter_y&quot;, &quot;&quot;),
+			&quot;config&quot;: control_config,
+			&quot;type&quot;: control_type
+		}
+
+
+## Build eurorack-style frame with chrome rails, side panels, screw holes.
+## Replaces the old flat RackMesh/PanelMesh/CableCase approach.
+func _build_eurorack_frame(content_w: float, content_h: float) -&gt; void:
+	# Hide old flat panel and cable case
+	var rack_mesh: MeshInstance3D = get_node_or_null(&quot;RackMesh&quot;)
+	if rack_mesh:
+		rack_mesh.visible = false
+	var cable_case = get_node_or_null(&quot;CableCase&quot;)
+	if cable_case:
+		cable_case.visible = false
+
+	var frame := Node3D.new()
+	frame.name = &quot;EurorackFrame&quot;
+	parameter_container.add_child(frame)
+
+	var rail_h := 0.016
+	var rail_d := 0.024
+	var side_w := 0.016
+	var pad := 0.015  # padding around content
+
+	var total_w: float = maxf(content_w + pad * 2, MIN_AUDIO_BOARD_WIDTH)
+	var total_h: float = maxf(content_h + pad * 2, MIN_AUDIO_BOARD_HEIGHT)
+
+	# ── Chrome rails (top and bottom) ──
+	var rail_mat := StandardMaterial3D.new()
+	rail_mat.albedo_color = Color(0.70, 0.70, 0.74)
+	rail_mat.metallic = 0.94
+	rail_mat.roughness = 0.14
+
+	for sign in [1.0, -1.0]:
+		var y_pos: float = sign * (total_h / 2.0 + rail_h / 2.0)
+		var rail := MeshInstance3D.new()
+		rail.name = &quot;Rail&quot;
+		var box := BoxMesh.new()
+		box.size = Vector3(total_w + side_w * 2, rail_h, rail_d)
+		rail.mesh = box
+		rail.material_override = rail_mat
+		rail.transform.origin = Vector3(0, y_pos, rail_d / 2.0)
+		frame.add_child(rail)
+
+		# Screw hole dots along rail
+		var dot_mat := StandardMaterial3D.new()
+		dot_mat.albedo_color = Color(0.45, 0.45, 0.48)
+		dot_mat.metallic = 0.92
+		dot_mat.roughness = 0.15
+		var dot_mesh := CylinderMesh.new()
+		dot_mesh.top_radius = 0.002
+		dot_mesh.bottom_radius = 0.002
+		dot_mesh.height = 0.001
+		dot_mesh.radial_segments = 10
+		var dot_spacing := 0.04
+		var dot_count := int(total_w / dot_spacing)
+		for d in dot_count:
+			var mi := MeshInstance3D.new()
+			mi.mesh = dot_mesh
+			mi.material_override = dot_mat
+			mi.transform.origin = Vector3(
+				-total_w / 2.0 + 0.02 + d * dot_spacing,
+				y_pos,
+				rail_d + 0.001
+			)
+			mi.rotation_degrees.x = 90
+			frame.add_child(mi)
+
+	# ── Side panels (left and right) ──
+	var side_mat := StandardMaterial3D.new()
+	side_mat.albedo_color = Color(0.15, 0.12, 0.10)
+	side_mat.metallic = 0.15
+	side_mat.roughness = 0.7
+	var side_total_h := total_h + rail_h * 2
+
+	for sign in [-1.0, 1.0]:
+		var x_pos: float = sign * (total_w / 2.0 + side_w / 2.0)
+		var side := MeshInstance3D.new()
+		side.name = &quot;SidePanel&quot;
+		var side_box := BoxMesh.new()
+		side_box.size = Vector3(side_w, side_total_h, rail_d + 0.004)
+		side.mesh = side_box
+		side.material_override = side_mat
+		side.transform.origin = Vector3(x_pos, 0, rail_d / 2.0)
+		frame.add_child(side)
+
+	# ── Back panel ──
+	var back_mat := StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.65, 0.62, 0.56)
+	back_mat.metallic = 0.2
+	back_mat.roughness = 0.8
+	var back := MeshInstance3D.new()
+	back.name = &quot;BackPanel&quot;
+	var back_box := BoxMesh.new()
+	back_box.size = Vector3(total_w + side_w * 2, side_total_h, 0.004)
+	back.mesh = back_box
+	back.material_override = back_mat
+	back.transform.origin = Vector3(0, 0, -0.003)
+	frame.add_child(back)
+
+
+## Build dark metallic module panel behind all controls with accent stripe.
+func _build_module_panel(content_w: float, content_h: float) -&gt; void:
+	var pad := 0.012
+	var panel_w: float = maxf(content_w + pad * 2, MIN_AUDIO_BOARD_WIDTH - 0.04)
+	var panel_h: float = maxf(content_h + pad * 2, MIN_AUDIO_BOARD_HEIGHT - 0.06)
+
+	# Dark panel face
+	var panel_mat := StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.75, 0.72, 0.65)
+	panel_mat.metallic = 0.92
+	panel_mat.roughness = 0.22
+
+	var panel := MeshInstance3D.new()
+	panel.name = &quot;ModulePanel&quot;
+	var box := BoxMesh.new()
+	box.size = Vector3(panel_w, panel_h, 0.008)
+	panel.mesh = box
+	panel.material_override = panel_mat
+	panel.transform.origin = Vector3(0, 0, 0)
+	parameter_container.add_child(panel)
+
+	# Accent stripe at top
+	var rack_name: String = rack_config.get(&quot;rack_info&quot;, {}).get(&quot;name&quot;, &quot;&quot;)
+	var accent_color := _get_rack_accent_color()
+	var stripe_mat := StandardMaterial3D.new()
+	stripe_mat.albedo_color = accent_color
+	stripe_mat.emission_enabled = true
+	stripe_mat.emission = accent_color
+	stripe_mat.emission_energy_multiplier = 0.9
+
+	var stripe := MeshInstance3D.new()
+	stripe.name = &quot;AccentStripe&quot;
+	var stripe_box := BoxMesh.new()
+	stripe_box.size = Vector3(panel_w * 0.88, 0.003, 0.001)
+	stripe.mesh = stripe_box
+	stripe.material_override = stripe_mat
+	stripe.transform.origin = Vector3(0, panel_h / 2.0 - 0.018, 0.005)
+	parameter_container.add_child(stripe)
+
+	# Rack name label
+	if not rack_name.is_empty():
+		var label := Label3D.new()
+		label.name = &quot;RackNameLabel&quot;
+		label.text = rack_name.to_upper()
+		label.font_size = 40
+		label.pixel_size = 0.0008
+		label.modulate = Color(0.92, 0.92, 0.95)
+		label.outline_modulate = Color(0, 0, 0, 0.9)
+		label.outline_size = 4
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.transform.origin = Vector3(0, panel_h / 2.0 - 0.009, 0.005)
+		parameter_container.add_child(label)
+
+	# Corner screws
+	var screw_mat := StandardMaterial3D.new()
+	screw_mat.albedo_color = Color(0.75, 0.75, 0.78)
+	screw_mat.metallic = 0.95
+	screw_mat.roughness = 0.12
+	var screw_mesh := CylinderMesh.new()
+	screw_mesh.top_radius = 0.0022
+	screw_mesh.bottom_radius = 0.0022
+	screw_mesh.height = 0.003
+	screw_mesh.radial_segments = 24
+	var mx := panel_w / 2.0 - 0.006
+	var my := panel_h / 2.0 - 0.006
+	for pos in [Vector3(-mx, my, 0), Vector3(mx, my, 0), Vector3(-mx, -my, 0), Vector3(mx, -my, 0)]:
+		var mi := MeshInstance3D.new()
+		mi.mesh = screw_mesh
+		mi.material_override = screw_mat
+		mi.transform.origin = Vector3(pos.x, pos.y, 0.005)
+		mi.rotation_degrees.x = 90
+		parameter_container.add_child(mi)
+
+
+func _add_control_cell_frame(parent: Node3D, cell_pos: Vector3, cell_size: Vector2) -&gt; void:
+	var frame := Node3D.new()
+	frame.name = &quot;CellFrame&quot;
+	frame.transform.origin = Vector3(cell_pos.x, cell_pos.y, 0.008)
+	parent.add_child(frame)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.18, 0.20, 0.23)
+	mat.metallic = 0.3
+	mat.roughness = 0.68
+
+	var width: float = cell_size.x + 0.016
+	var height: float = cell_size.y + 0.016
+	var vertical_height: float = maxf(height - CELL_FRAME_THICKNESS * 2.0, CELL_FRAME_THICKNESS)
+	var segments := [
+		{ &quot;size&quot;: Vector3(width, CELL_FRAME_THICKNESS, CELL_FRAME_DEPTH), &quot;pos&quot;: Vector3(0, height * 0.5 - CELL_FRAME_THICKNESS * 0.5, 0) },
+		{ &quot;size&quot;: Vector3(width, CELL_FRAME_THICKNESS, CELL_FRAME_DEPTH), &quot;pos&quot;: Vector3(0, -height * 0.5 + CELL_FRAME_THICKNESS * 0.5, 0) },
+		{ &quot;size&quot;: Vector3(CELL_FRAME_THICKNESS, vertical_height, CELL_FRAME_DEPTH), &quot;pos&quot;: Vector3(-width * 0.5 + CELL_FRAME_THICKNESS * 0.5, 0, 0) },
+		{ &quot;size&quot;: Vector3(CELL_FRAME_THICKNESS, vertical_height, CELL_FRAME_DEPTH), &quot;pos&quot;: Vector3(width * 0.5 - CELL_FRAME_THICKNESS * 0.5, 0, 0) },
+	]
+	for i in segments.size():
+		var mi := MeshInstance3D.new()
+		mi.name = &quot;CellFrame_%d&quot; % i
+		var box := BoxMesh.new()
+		box.size = segments[i][&quot;size&quot;]
+		mi.mesh = box
+		mi.material_override = mat
+		mi.transform.origin = segments[i][&quot;pos&quot;]
+		frame.add_child(mi)
+
+
+## Get accent color from rack config sound type
+func _get_rack_accent_color() -&gt; Color:
+	var sound_type: String = rack_config.get(&quot;rack_info&quot;, {}).get(&quot;sound_type&quot;, &quot;&quot;)
+	match sound_type:
+		&quot;synth_wave&quot;: return Color(0.53, 0.76, 0.20)  # Green
+		&quot;basic_sine_wave&quot;: return Color(0.27, 0.55, 0.95)  # Blue
+		&quot;heartbeat&quot;: return Color(1.0, 0.20, 0.40)  # Pink/red
+		&quot;lab_hum&quot;: return Color(0.0, 0.78, 0.85)  # Cyan
+		&quot;pickup_mario&quot;: return Color(1.0, 0.60, 0.0)  # Orange
+		_: return Color(0.95, 0.45, 0.15)  # Default orange
+
+# Legacy spawn method for configs with explicit col_spacing/row_spacing
+func _spawn_controls_legacy():
+	var grid = rack_config[&quot;grid&quot;]
+	var control_defs = rack_config[&quot;control_definitions&quot;]
+	var layout = rack_config.get(&quot;layout&quot;, {})
+
+	var col_spacing = layout.get(&quot;col_spacing&quot;, 0.12)
+	var row_spacing = layout.get(&quot;row_spacing&quot;, 0.10)
+
+	for row_idx in range(grid.size()):
+		var row = grid[row_idx]
+		for col_idx in range(row.size()):
+			var control_id = row[col_idx]
+			if control_id == &quot;&quot; or control_id == &quot; &quot;:
+				continue
+			if not control_defs.has(control_id):
+				continue
+
+			var control_config = control_defs[control_id]
+			var control_type = control_config.get(&quot;type&quot;, &quot;slider&quot;)
+			var control = _instantiate_control(control_type, control_id)
+			if not control:
+				continue
+
+			parameter_container.add_child(control)
+
+			var x = col_idx * col_spacing
+			var y = -row_idx * row_spacing
+			control.transform.origin = Vector3(x, y, 0.03)
+
+			_configure_control(control, control_config, control_type)
+			_connect_control_signals(control, control_id, control_type, control_config)
+
+			active_controls[control_id] = {
+				&quot;instance&quot;: control,
+				&quot;parameter&quot;: control_config.get(&quot;parameter&quot;, &quot;&quot;),
+				&quot;parameter_x&quot;: control_config.get(&quot;parameter_x&quot;, &quot;&quot;),
+				&quot;parameter_y&quot;: control_config.get(&quot;parameter_y&quot;, &quot;&quot;),
+				&quot;config&quot;: control_config,
+				&quot;type&quot;: control_type
+			}
+
+# Instantiate the correct control scene based on type
+func _instantiate_control(control_type: String, control_id: String) -&gt; Node:
+	var control_scene = null
+
+	match control_type:
+		# Sliders
+		&quot;slider&quot;, &quot;slv&quot;, &quot;slider_vertical&quot;, &quot;vfader&quot;, &quot;fader&quot;:
+			control_scene = SLIDER_SCENE
+		&quot;slh&quot;, &quot;slider_horizontal&quot;:
+			control_scene = SLIDER_HORIZONTAL_SCENE
+		&quot;sls&quot;, &quot;slider_snap&quot;, &quot;stepped&quot;:
+			control_scene = SLIDER_SNAP_SCENE
+		&quot;slz&quot;, &quot;slider_zero&quot;, &quot;bipolar&quot;:
+			control_scene = SLIDER_ZERO_SCENE
+
+		# Rotary controls
+		&quot;knob&quot;, &quot;dial&quot;, &quot;nb&quot;, &quot;rotary&quot;:
+			control_scene = DIAL_SCENE
+		&quot;wheel&quot;, &quot;whl&quot;, &quot;pitchbend&quot;:
+			control_scene = WHEEL_SCENE
+
+		# 2D controls
+		&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;:
+			control_scene = XY_PAD_SCENE
+		&quot;js&quot;, &quot;joystick&quot;:
+			control_scene = JOYSTICK_SCENE
+
+		# Discrete controls
+		&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;:
+			control_scene = BUTTON_SCENE
+		&quot;lv&quot;, &quot;lever&quot;, &quot;throw&quot;:
+			control_scene = LEVER_SCENE
+
+		# Monitors and displays
+		&quot;mon&quot;, &quot;monitor&quot;, &quot;scope&quot;:
+			control_scene = WAVEFORM_MONITOR_SCENE
+		&quot;spectrum&quot;, &quot;spec&quot;, &quot;fft&quot;:
+			control_scene = SPECTRUM_DISPLAY_SCENE
+		&quot;waveform&quot;, &quot;wave&quot;, &quot;osc&quot;:
+			control_scene = WAVEFORM_DISPLAY_SCENE
+		&quot;simple_waveform&quot;, &quot;srcwave&quot;, &quot;rack_wave&quot;:
+			control_scene = SIMPLE_WAVEFORM_SCENE
+		&quot;lissajous&quot;, &quot;liss&quot;, &quot;xy_wave&quot;, &quot;paramwave&quot;:
+			control_scene = LISSAJOUS_DISPLAY_SCENE
+		&quot;mtr&quot;, &quot;meter&quot;, &quot;vu&quot;, &quot;level&quot;:
+			return _create_vr_control(&quot;res://commons/audio/rack_controls/RackMeter.tscn&quot;, control_id)
+		&quot;lbl&quot;, &quot;label&quot;, &quot;text&quot;:
+			return _create_vr_control(&quot;res://commons/audio/rack_controls/RackLabel.tscn&quot;, control_id)
+		&quot;grp&quot;, &quot;group&quot;, &quot;container&quot;:
+			return _create_vr_control(&quot;res://commons/audio/rack_controls/RackGroup.tscn&quot;, control_id)
+		&quot;div&quot;, &quot;divider&quot;:
+			return _create_vr_control(&quot;res://commons/audio/rack_controls/RackDivider.tscn&quot;, control_id)
+
+		_:
+			push_warning(&quot;Unknown control type &#x27;%s&#x27; for %s. Available: slider, slv, sls, slz, knob, wheel, xy, js, btn, lv, mon, spectrum, waveform, lissajous, mtr, lbl, grp, div&quot; % [control_type, control_id])
+			return null
+
+	if control_scene:
+		return control_scene.instantiate()
+	return null
+
+# Create a VRRackControl wrapper for non-physical 2D controls
+func _create_vr_control(scene_path: String, control_id: String) -&gt; Node3D:
+	var wrapper := VRRackControl.new()
+	wrapper.name = control_id
+	wrapper.control_scene_path = scene_path
+	return wrapper
+
+# Face plate scene mapping: control type -&gt; 2D RackControl scene path
+const FACE_PLATE_SCENES := {
+	&quot;slider&quot;: &quot;res://commons/audio/rack_controls/RackSliderV.tscn&quot;,
+	&quot;slv&quot;: &quot;res://commons/audio/rack_controls/RackSliderV.tscn&quot;,
+	&quot;slh&quot;: &quot;res://commons/audio/rack_controls/RackSliderH.tscn&quot;,
+	&quot;sls&quot;: &quot;res://commons/audio/rack_controls/RackSliderStepped.tscn&quot;,
+	&quot;slz&quot;: &quot;res://commons/audio/rack_controls/RackSliderBipolar.tscn&quot;,
+	&quot;knob&quot;: &quot;res://commons/audio/rack_controls/RackKnob.tscn&quot;,
+	&quot;wheel&quot;: &quot;res://commons/audio/rack_controls/RackWheel.tscn&quot;,
+	&quot;xy&quot;: &quot;res://commons/audio/rack_controls/RackXYPad.tscn&quot;,
+	&quot;joystick&quot;: &quot;res://commons/audio/rack_controls/RackJoystick.tscn&quot;,
+	&quot;js&quot;: &quot;res://commons/audio/rack_controls/RackJoystick.tscn&quot;,
+	&quot;btn&quot;: &quot;res://commons/audio/rack_controls/RackButton.tscn&quot;,
+	&quot;lever&quot;: &quot;res://commons/audio/rack_controls/RackLever.tscn&quot;,
+	&quot;lv&quot;: &quot;res://commons/audio/rack_controls/RackLever.tscn&quot;,
+}
+
+# Attach a 2D face plate behind a physical 3D control
+func _attach_face_plate(control: Node3D, control_type: String) -&gt; VRFacePlate:
+	var base_type := control_type
+	match control_type:
+		&quot;slider&quot;, &quot;slider_vertical&quot;, &quot;vfader&quot;, &quot;fader&quot;:
+			base_type = &quot;slv&quot;
+		&quot;slider_horizontal&quot;:
+			base_type = &quot;slh&quot;
+		&quot;slider_snap&quot;, &quot;stepped&quot;:
+			base_type = &quot;sls&quot;
+		&quot;slider_zero&quot;, &quot;bipolar&quot;:
+			base_type = &quot;slz&quot;
+		&quot;dial&quot;, &quot;nb&quot;, &quot;rotary&quot;:
+			base_type = &quot;knob&quot;
+		&quot;whl&quot;, &quot;pitchbend&quot;:
+			base_type = &quot;wheel&quot;
+		&quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;:
+			base_type = &quot;xy&quot;
+		&quot;button&quot;, &quot;trigger&quot;:
+			base_type = &quot;btn&quot;
+		&quot;throw&quot;:
+			base_type = &quot;lever&quot;
+
+	var scene_path: String = FACE_PLATE_SCENES.get(base_type, &quot;&quot;)
+	if scene_path.is_empty():
+		return null
+
+	var plate := VRFacePlate.new()
+	plate.name = &quot;FacePlate&quot;
+	plate.control_scene_path = scene_path
+	control.add_child(plate)
+	return plate
+
+# Strip visual meshes from a physical interactable, leaving only collision/grab nodes.
+# Called when face plates are enabled so the 2D visual is the only visible layer.
+func _strip_interactable_visuals(control: Node3D, control_type: String) -&gt; void:
+	var hide_paths: Array = []
+	match control_type:
+		&quot;slider&quot;, &quot;slv&quot;, &quot;slider_vertical&quot;, &quot;vfader&quot;, &quot;fader&quot;:
+			hide_paths = [
+				&quot;Frame/PanelMesh&quot;, &quot;Frame/TrackGroove&quot;,
+				&quot;Frame/Label3DValue&quot;, &quot;Frame/LabelName&quot;,
+				&quot;SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle/HandleMesh&quot;,
+				&quot;SliderOrigin/InteractableSlider/HandleOrigin/HandleMesh&quot;,
+			]
+		&quot;slh&quot;, &quot;slider_horizontal&quot;:
+			hide_paths = [
+				&quot;Frame/BaseMesh&quot;, &quot;Frame/TrackMesh&quot;,
+				&quot;Frame/Label3DValue&quot;, &quot;Frame/LabelName&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/HandleMesh&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/AccentMesh&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/ShadowMesh&quot;,
+			]
+		&quot;sls&quot;, &quot;slider_snap&quot;, &quot;stepped&quot;:
+			hide_paths = [
+				&quot;Frame/MeshInstance3D&quot;, &quot;Frame/TrackMesh&quot;,
+				&quot;Frame/Label3DValue&quot;, &quot;Frame/Notches&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/HandleMesh&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/AccentMesh&quot;,
+			]
+		&quot;slz&quot;, &quot;slider_zero&quot;, &quot;bipolar&quot;:
+			hide_paths = [
+				&quot;Frame/MeshInstance3D&quot;, &quot;Frame/TrackMesh&quot;,
+				&quot;Frame/Label3DValue&quot;, &quot;Frame/CenterMark&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/HandleMesh&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/AccentMesh&quot;,
+			]
+		&quot;knob&quot;, &quot;dial&quot;, &quot;nb&quot;, &quot;rotary&quot;:
+			hide_paths = [
+				&quot;Frame/PanelMesh&quot;, &quot;Frame/BaseRing&quot;,
+				&quot;Frame/Label3DValue&quot;, &quot;Frame/LabelName&quot;,
+				&quot;DialOrigin/InteractableHinge/KnobMesh&quot;,
+				&quot;DialOrigin/InteractableHinge/KnobMesh/Indicator&quot;,
+			]
+		&quot;wheel&quot;, &quot;whl&quot;, &quot;pitchbend&quot;:
+			hide_paths = [
+				&quot;Frame/MeshInstance3D&quot;,
+				&quot;HingeOrigin/InteractableHinge/WheelBody/MeshInstance3D&quot;,
+				&quot;HingeOrigin/InteractableHinge/WheelBody/MeshInstance3D2&quot;,
+			]
+		&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;:
+			hide_paths = [
+				&quot;Frame/BaseMesh&quot;, &quot;Frame/TrackMesh&quot;,
+				&quot;Frame/Label3DValue&quot;,
+				&quot;SliderOrigin/InteractableSlider/SliderBody/HandleMesh&quot;,
+			]
+		&quot;js&quot;, &quot;joystick&quot;:
+			hide_paths = [
+				&quot;Frame/MeshInstance3D&quot;,
+				&quot;JoystickOrigin/InteractableJoystick/JoystickBody/BarMesh&quot;,
+				&quot;JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh&quot;,
+			]
+		&quot;lv&quot;, &quot;lever&quot;, &quot;throw&quot;:
+			hide_paths = [
+				&quot;Frame/MeshInstance3D&quot;,
+				&quot;LeverOrigin/InteractableLever/HingeBody/BarMesh&quot;,
+				&quot;LeverOrigin/InteractableLever/HingeBody/HandleMesh&quot;,
+			]
+		&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;:
+			hide_paths = [
+				&quot;ButtonBase/BaseMesh&quot;, &quot;AccentRing&quot;,
+				&quot;Button/ButtonMesh&quot;,
+			]
+
+	for path in hide_paths:
+		var node = control.get_node_or_null(path)
+		if node and node is Node3D:
+			(node as Node3D).visible = false
+
+	# Also hide handle visuals inside grab point handles (spheres/meshes on grab handles)
+	_hide_handle_visuals(control)
+
+
+# Recursively hide MeshInstance3D nodes inside InteractableHandle RigidBody3D nodes
+func _hide_handle_visuals(node: Node) -&gt; void:
+	for child in node.get_children():
+		if child.name == &quot;InteractableHandle&quot; and child is RigidBody3D:
+			# Hide mesh children of handles (but not collision shapes)
+			for handle_child in child.get_children():
+				if handle_child is MeshInstance3D:
+					handle_child.visible = false
+		if child is Node3D:
+			_hide_handle_visuals(child)
+
+
+# Get control size for spacing calculations
+func _get_control_size(control_type: String) -&gt; Vector2:
+	# Normalize type name
+	var base_type = control_type
+	match control_type:
+		&quot;slh&quot;, &quot;slider_horizontal&quot;, &quot;fader&quot;:
+			base_type = &quot;slider&quot;
+		&quot;slider_vertical&quot;, &quot;vfader&quot;:
+			base_type = &quot;slv&quot;
+		&quot;dial&quot;, &quot;nb&quot;, &quot;rotary&quot;:
+			base_type = &quot;knob&quot;
+		&quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;, &quot;joystick&quot;, &quot;js&quot;:
+			base_type = &quot;xy&quot;
+		&quot;button&quot;, &quot;trigger&quot;:
+			base_type = &quot;btn&quot;
+		&quot;wheel&quot;, &quot;whl&quot;, &quot;pitchbend&quot;:
+			base_type = &quot;wheel&quot;
+		&quot;lv&quot;, &quot;lever&quot;, &quot;throw&quot;:
+			base_type = &quot;lv&quot;
+		&quot;grp&quot;, &quot;group&quot;, &quot;container&quot;:
+			base_type = &quot;grp&quot;
+		&quot;monitor&quot;, &quot;mon&quot;, &quot;waveform&quot;, &quot;scope&quot;:
+			base_type = &quot;monitor&quot;
+		&quot;lissajous&quot;, &quot;liss&quot;, &quot;xy_wave&quot;, &quot;paramwave&quot;:
+			base_type = &quot;lissajous&quot;
+		&quot;vu&quot;, &quot;level&quot;, &quot;mtr&quot;:
+			base_type = &quot;meter&quot;
+		&quot;text&quot;, &quot;lbl&quot;:
+			base_type = &quot;label&quot;
+		&quot;div&quot;, &quot;divider&quot;:
+			base_type = &quot;divider&quot;
+
+	return CONTROL_SIZES.get(base_type, CONTROL_SIZES[&quot;default&quot;])
+
+# Configure control properties based on type and config
+func _configure_control(control: Node, config: Dictionary, control_type: String):
+	# Set label if control supports it (guard against placeholder scripts)
+	var label = config.get(&quot;label&quot;, &quot;&quot;)
+	if control.has_method(&quot;set_param_name&quot;):
+		if control.is_inside_tree():
+			control.set_param_name(label)
+		else:
+			control.ready.connect(func(): control.set_param_name(label), CONNECT_ONE_SHOT)
+	elif &quot;label&quot; in control:
+		control.label = label
+
+	var style_variant: String = str(config.get(&quot;style&quot;, config.get(&quot;style_variant&quot;, &quot;&quot;)))
+	if not style_variant.is_empty():
+		if control.has_method(&quot;set_style_variant&quot;):
+			control.set_style_variant(style_variant)
+		elif &quot;style_variant&quot; in control:
+			control.style_variant = style_variant
+
+	var step_count: int = int(config.get(&quot;step_count&quot;, 0))
+	if step_count &gt; 0:
+		if control.has_method(&quot;set_step_count&quot;):
+			control.set_step_count(step_count)
+		elif &quot;step_count&quot; in control:
+			control.step_count = step_count
+		elif &quot;steps&quot; in control:
+			control.steps = step_count
+
+	# Get range and default values
+	var p_min = config.get(&quot;min&quot;, 0.0)
+	var p_max = config.get(&quot;max&quot;, 1.0)
+	var p_default = config.get(&quot;default&quot;, 0.5)
+
+	# Apply range to controls that support it
+	if &quot;limit_min&quot; in control:
+		control.limit_min = p_min
+	if &quot;limit_max&quot; in control:
+		control.limit_max = p_max
+
+	# Set display range if supported (for custom controls like slider_smooth)
+	if control.has_method(&quot;set_range&quot;):
+		control.set_range(p_min, p_max)
+
+	# Set initial value
+	var norm = remap(p_default, p_min, p_max, 0.0, 1.0)
+	if control.has_method(&quot;set_normalized_value&quot;):
+		control.set_normalized_value(norm)
+	elif &quot;slider_value&quot; in control:
+		control.slider_value = lerp(p_min, p_max, norm)
+
+	# Control-specific configuration
+	match control_type:
+		&quot;sls&quot;, &quot;slider_snap&quot;, &quot;stepped&quot;:
+			# Set step size for snap sliders
+			var step = config.get(&quot;step&quot;, 0.1)
+			if &quot;step&quot; in control:
+				control.step = step
+
+		&quot;slz&quot;, &quot;slider_zero&quot;, &quot;bipolar&quot;:
+			# Zero-centered sliders return to center on release
+			if &quot;default_on_release&quot; in control:
+				control.default_on_release = config.get(&quot;return_to_zero&quot;, true)
+
+		&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;:
+			# Button configuration
+			if config.has(&quot;toggle&quot;) and &quot;toggle_mode&quot; in control:
+				control.toggle_mode = config.get(&quot;toggle&quot;, false)
+			if config.has(&quot;color&quot;):
+				var base_color = Color(config.get(&quot;color&quot;))
+				# Released color = the config color (visible when not pressed)
+				if &quot;released_color&quot; in control:
+					control.released_color = base_color
+				# Pressed color = brighter version when pressed
+				if &quot;pressed_color&quot; in control:
+					control.pressed_color = base_color.lightened(0.3)
+				# Force update the visual state with new colors
+				if control.has_method(&quot;update_colors&quot;) and control.is_inside_tree():
+					control.update_colors()
+
+		&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;, &quot;js&quot;, &quot;joystick&quot;:
+			# XY pad size configuration
+			if config.has(&quot;size&quot;) and &quot;limit_min&quot; in control:
+				var size = config.get(&quot;size&quot;, 0.1)
+				control.limit_min = -size
+				control.limit_max = size
+
+		&quot;wheel&quot;, &quot;whl&quot;, &quot;pitchbend&quot;:
+			# Rotate wheel to face forward (if it&#x27;s a flat wheel)
+			# Assuming wheel_smooth is flat on XZ, rotate 90 deg on X
+			control.rotation_degrees.x = 90
+		
+		&quot;lv&quot;, &quot;lever&quot;, &quot;throw&quot;:
+			# Rotate lever to face forward
+			# Assuming lever_smooth is vertical (Y-up), rotate -90 on X so it sticks out Z
+			control.rotation_degrees.x = -90
+
+		&quot;lbl&quot;, &quot;label&quot;, &quot;text&quot;:
+			# Label text configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				control.set_text(config.get(&quot;text&quot;, config.get(&quot;label&quot;, &quot;&quot;)))
+				if config.has(&quot;subtitle&quot;):
+					control.set_subtitle(config.get(&quot;subtitle&quot;, &quot;&quot;))
+			else:
+				var text_node = control.get_node_or_null(&quot;Text&quot;)
+				if text_node:
+					text_node.text = config.get(&quot;text&quot;, config.get(&quot;label&quot;, &quot;&quot;))
+					if config.has(&quot;font_size&quot;):
+						text_node.font_size = int(config.get(&quot;font_size&quot;, 32))
+					if config.has(&quot;color&quot;):
+						text_node.modulate = Color(config.get(&quot;color&quot;))
+
+		&quot;grp&quot;, &quot;group&quot;, &quot;container&quot;:
+			# Group configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				control.set_group_title(config.get(&quot;label&quot;, config.get(&quot;name&quot;, &quot;&quot;)).to_upper())
+			else:
+				var group_label = control.get_node_or_null(&quot;GroupLabel&quot;)
+				if group_label:
+					group_label.text = config.get(&quot;label&quot;, config.get(&quot;name&quot;, &quot;&quot;)).to_upper()
+				if config.has(&quot;color&quot;):
+					var border = control.get_node_or_null(&quot;Border&quot;)
+					if border and border.material_override:
+						var color = Color(config.get(&quot;color&quot;))
+						border.material_override.albedo_color = color
+						border.material_override.emission = color
+				var bg = control.get_node_or_null(&quot;Background&quot;)
+				if bg and bg.mesh:
+					var width = config.get(&quot;width&quot;, 0.25)
+					var height = config.get(&quot;height&quot;, 0.2)
+					bg.mesh.size = Vector3(width, height, 0.005)
+					var border = control.get_node_or_null(&quot;Border&quot;)
+					if border and border.mesh:
+						border.mesh.size.x = width
+
+		&quot;div&quot;, &quot;divider&quot;:
+			# Divider configuration via VRRackControl wrapper
+			if control is VRRackControl:
+				var inner = control.get_control()
+				if inner and &quot;orientation&quot; in inner:
+					inner.orientation = config.get(&quot;orientation&quot;, &quot;vertical&quot;)
+
+		&quot;mon&quot;, &quot;monitor&quot;, &quot;scope&quot;:
+			# Monitor configuration
+			if config.has(&quot;label&quot;):
+				var label_node = control.get_node_or_null(&quot;Chassis/LabelName&quot;)
+				if label_node:
+					label_node.text = config.get(&quot;label&quot;, &quot;MONITOR&quot;).to_upper()
+
+		&quot;spectrum&quot;, &quot;spec&quot;, &quot;fft&quot;:
+			# Spectrum display configuration
+			if config.has(&quot;label&quot;):
+				var label_node = control.get_node_or_null(&quot;Chassis/LabelName&quot;)
+				if label_node:
+					label_node.text = config.get(&quot;label&quot;, &quot;SPECTRUM&quot;).to_upper()
+
+		&quot;waveform&quot;, &quot;wave&quot;, &quot;osc&quot;:
+			# Waveform display configuration
+			if config.has(&quot;label&quot;):
+				var label_node = control.get_node_or_null(&quot;Chassis/LabelName&quot;)
+				if label_node:
+					label_node.text = config.get(&quot;label&quot;, &quot;WAVEFORM&quot;).to_upper()
+
+			# Configure audio source: &quot;rack&quot; = dedicated bus, &quot;master&quot; or omitted = Master bus
+			var source = config.get(&quot;source&quot;, &quot;master&quot;)
+			if source == &quot;rack&quot; and dedicated_bus_name != &quot;&quot;:
+				if control.has_method(&quot;set_source_bus&quot;):
+					control.set_source_bus(dedicated_bus_name)
+				elif &quot;source_bus&quot; in control:
+					control.source_bus = dedicated_bus_name
+				print(&quot;UniversalVRAudioController: Waveform display set to monitor rack bus &#x27;%s&#x27;&quot; % dedicated_bus_name)
+
+		&quot;simple_waveform&quot;, &quot;srcwave&quot;, &quot;rack_wave&quot;:
+			# Simple waveform display - shows only the rack&#x27;s audio
+			if config.has(&quot;label&quot;):
+				var label_node = control.get_node_or_null(&quot;Chassis/LabelName&quot;)
+				if label_node:
+					label_node.text = config.get(&quot;label&quot;, &quot;WAVEFORM&quot;).to_upper()
+
+			# Always use rack bus for simple_waveform (that&#x27;s its purpose)
+			var source = config.get(&quot;source&quot;, &quot;rack&quot;)
+			if source == &quot;rack&quot; and dedicated_bus_name != &quot;&quot;:
+				if control.has_method(&quot;set_source_bus&quot;):
+					control.set_source_bus(dedicated_bus_name)
+				print(&quot;UniversalVRAudioController: Simple waveform set to rack bus &#x27;%s&#x27;&quot; % dedicated_bus_name)
+
+			# Store parameter bindings for frequency/amplitude display
+			if config.has(&quot;freq_param&quot;):
+				control.set_meta(&quot;freq_param&quot;, config.get(&quot;freq_param&quot;))
+			if config.has(&quot;amp_param&quot;):
+				control.set_meta(&quot;amp_param&quot;, config.get(&quot;amp_param&quot;))
+			control.set_meta(&quot;is_simple_waveform&quot;, true)
+
+		&quot;lissajous&quot;, &quot;liss&quot;, &quot;xy_wave&quot;, &quot;paramwave&quot;:
+			# Lissajous display configuration
+			if config.has(&quot;label&quot;):
+				var label_node = control.get_node_or_null(&quot;Chassis/LabelName&quot;)
+				if label_node:
+					label_node.text = config.get(&quot;label&quot;, &quot;LISSAJOUS&quot;).to_upper()
+			
+			# Store param bindings for frequency updates
+			if config.has(&quot;params&quot;):
+				var params = config.get(&quot;params&quot;, [])
+				control.set_meta(&quot;param_x&quot;, params[0] if params.size() &gt; 0 else &quot;&quot;)
+				control.set_meta(&quot;param_y&quot;, params[1] if params.size() &gt; 1 else &quot;&quot;)
+			
+			# Store control reference for updates
+			control.set_meta(&quot;is_lissajous&quot;, true)
+
+		&quot;mtr&quot;, &quot;meter&quot;, &quot;vu&quot;, &quot;level&quot;:
+			# Meter connects to audio output for level
+			if config.has(&quot;source&quot;):
+				control.set_meta(&quot;audio_source&quot;, config.get(&quot;source&quot;))
+
+# Connect appropriate signals for each control type
+func _connect_control_signals(control: Node, control_id: String, control_type: String, config: Dictionary):
+	match control_type:
+		&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;, &quot;js&quot;, &quot;joystick&quot;:
+			# 2D controls emit position (Vector2)
+			if control.has_signal(&quot;slider_moved&quot;):
+				control.slider_moved.connect(_on_xy_control_changed.bind(control_id))
+			elif control.has_signal(&quot;joystick_moved&quot;):
+				control.joystick_moved.connect(_on_xy_control_changed.bind(control_id))
+
+		&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;:
+			# Buttons emit pressed signal (defer if not ready)
+			if control.has_signal(&quot;pressed&quot;) and control.is_inside_tree():
+				control.pressed.connect(_on_button_pressed.bind(control_id))
+			elif control.has_signal(&quot;pressed&quot;):
+				control.ready.connect(func():
+					if control.has_signal(&quot;pressed&quot;):
+						control.pressed.connect(_on_button_pressed.bind(control_id))
+				, CONNECT_ONE_SHOT)
+			if control.has_signal(&quot;button_pressed&quot;):
+				control.button_pressed.connect(_on_button_pressed.bind(control_id))
+
+		_:
+			# Standard 1D controls (sliders, knobs, wheels, levers)
+			if control.has_signal(&quot;slider_moved&quot;):
+				control.slider_moved.connect(_on_parameter_changed_json.bind(control_id))
+			elif control.has_signal(&quot;hinge_moved&quot;):
+				control.hinge_moved.connect(_on_parameter_changed_json.bind(control_id))
+			elif control.has_signal(&quot;lever_moved&quot;):
+				control.lever_moved.connect(_on_parameter_changed_json.bind(control_id))
+			elif control.has_signal(&quot;wheel_moved&quot;):
+				control.wheel_moved.connect(_on_parameter_changed_json.bind(control_id))
+
+# Handle XY pad / joystick movement (2 parameters)
+func _on_xy_control_changed(position, control_id: String):
+	if not active_controls.has(control_id):
+		return
+
+	var control_data = active_controls[control_id]
+	var config = control_data[&quot;config&quot;]
+
+	# Get X and Y parameter names
+	var param_x = config.get(&quot;parameter_x&quot;, config.get(&quot;parameter&quot;, &quot;&quot;) + &quot;_x&quot;)
+	var param_y = config.get(&quot;parameter_y&quot;, config.get(&quot;parameter&quot;, &quot;&quot;) + &quot;_y&quot;)
+
+	# Store the XY values for later retrieval
+	control_data[&quot;last_x&quot;] = position.x if position is Vector2 else position.x
+	control_data[&quot;last_y&quot;] = position.y if position is Vector2 else position.z
+
+	# Trigger sound update with debounce
+	_trigger_sound_update()
+
+# Handle button press
+func _on_button_pressed(control_id: String):
+	if not active_controls.has(control_id):
+		return
+
+	var control_data = active_controls[control_id]
+	var config = control_data[&quot;config&quot;]
+
+	# Button action - could trigger sound, toggle effect, etc.
+	var action = config.get(&quot;action&quot;, &quot;play&quot;)
+	match action:
+		&quot;play&quot;:
+			play_current_sound()
+		&quot;stop&quot;:
+			if is_instance_valid(live_patch):
+				live_patch.powered = false
+				return
+			if preview_player:
+				preview_player.stop()
+		&quot;toggle&quot;:
+			# Toggle a parameter between 0 and 1
+			var param = config.get(&quot;parameter&quot;, &quot;&quot;)
+			if param != &quot;&quot;:
+				var current = control_data.get(&quot;toggle_state&quot;, false)
+				control_data[&quot;toggle_state&quot;] = not current
+				_trigger_sound_update()
+
+	print(&quot;Button pressed: %s (action: %s)&quot; % [control_id, action])
+
+func _trigger_sound_update():
+	# Time-based debounce for auto-play
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time &lt; min_play_interval:
+		return
+	_last_play_time = current_time
+	play_current_sound()
+
+func _on_parameter_changed_json(_value, _control_id: String):
+	if is_instance_valid(live_patch): return
+	# Update any waveform displays that are bound to this parameter
+	_update_waveform_displays()
+
+	# Real-time tweak with time-based debounce to prevent rapid firing
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time &lt; min_play_interval:
+		return
+	_last_play_time = current_time
+	play_current_sound()
+
+func _update_waveform_displays():
+	&quot;&quot;&quot;Update any waveform displays with current parameter values&quot;&quot;&quot;
+	var values = _get_current_values()
+
+	for control_id in active_controls:
+		var control_data = active_controls[control_id]
+		var control = control_data.get(&quot;instance&quot;)  # Controls stored as &quot;instance&quot;, not &quot;node&quot;
+		if not control:
+			continue
+
+		# Update simple waveform displays
+		if control.has_meta(&quot;is_simple_waveform&quot;):
+			var freq_param = control.get_meta(&quot;freq_param&quot;) if control.has_meta(&quot;freq_param&quot;) else &quot;&quot;
+			var amp_param = control.get_meta(&quot;amp_param&quot;) if control.has_meta(&quot;amp_param&quot;) else &quot;&quot;
+
+			if freq_param != &quot;&quot; and values.has(freq_param):
+				var freq_val = values[freq_param]
+				if control.has_method(&quot;set_frequency&quot;):
+					control.set_frequency(freq_val)
+			if amp_param != &quot;&quot; and values.has(amp_param):
+				var amp_val = values[amp_param]
+				if control.has_method(&quot;set_amplitude&quot;):
+					control.set_amplitude(amp_val)
+
+
+
+func _on_play_pressed(_btn):
+	play_current_sound()
+
+func _on_save_pressed(_btn):
+	var values = _get_current_values()
+	SoundParameterManager.save_sound_parameters(current_sound_key, values)
+
+func _get_mock_sounds_for_category(_cat: String) -&gt; Array:
+	return SoundParameterManager.get_available_sound_types()
+
+func load_sound(sound_key: String):
+	current_sound_key = sound_key
+	
+	# Traditional mode is deprecated. Ensure we are using JSON config or just update the sound key.
+	print(&quot;UniversalVRAudioController: Switched sound to %s&quot; % current_sound_key)
+
+func _clear_controls():
+	if is_instance_valid(live_patch):
+		live_patch.queue_free()
+		live_patch = null
+	for child in parameter_container.get_children():
+		child.queue_free()
+	active_controls.clear()
+	# Also clear section panels
+	for child in get_children():
+		if child.is_in_group(&quot;rack_section&quot;):
+			child.queue_free()
+
+
+func _resize_rack_panel(w: float, h: float) -&gt; void:
+	## Legacy: resize flat backplate. Now mostly unused — _build_eurorack_frame replaces this.
+	var rack_mesh: MeshInstance3D = get_node_or_null(&quot;RackMesh&quot;)
+	if not rack_mesh:
+		return
+	rack_mesh.visible = false
+	var cable_case = get_node_or_null(&quot;CableCase&quot;)
+	if cable_case:
+		cable_case.visible = false
+	print(&quot;UVAC: Rack panel hidden — eurorack frame built instead&quot;)
+
+
+func _build_sections(layout_result, control_defs: Dictionary) -&gt; void:
+	## Build visual section panels from the &quot;sections&quot; array in rack_config.
+	var sections: Array = rack_config.get(&quot;sections&quot;, [])
+	if sections.is_empty():
+		return
+
+	for section in sections:
+		if not section is Dictionary:
+			continue
+		var label_text: String = str(section.get(&quot;label&quot;, &quot;&quot;))
+		var color_hex: String = str(section.get(&quot;color&quot;, &quot;#4CAF50&quot;))
+		var ctrl_ids: Array = section.get(&quot;controls&quot;, [])
+		if ctrl_ids.is_empty():
+			continue
+
+		# Compute bounding box from control positions
+		var min_pos := Vector3(999, 999, 0)
+		var max_pos := Vector3(-999, -999, 0)
+		var found := false
+		for cid in ctrl_ids:
+			var cid_str: String = str(cid)
+			if layout_result.positions.has(cid_str):
+				var pos: Vector3 = layout_result.positions[cid_str]
+				var sz: Vector2 = layout_result.sizes.get(cid_str, Vector2(0.08, 0.08))
+				min_pos.x = min(min_pos.x, pos.x - sz.x / 2.0)
+				min_pos.y = min(min_pos.y, pos.y - sz.y / 2.0)
+				max_pos.x = max(max_pos.x, pos.x + sz.x / 2.0)
+				max_pos.y = max(max_pos.y, pos.y + sz.y / 2.0)
+				found = true
+		if not found:
+			continue
+
+		# Add padding around controls
+		var pad := 0.015
+		min_pos.x -= pad
+		min_pos.y -= pad
+		max_pos.x += pad
+		max_pos.y += pad
+
+		var section_w: float = max_pos.x - min_pos.x
+		var section_h: float = max_pos.y - min_pos.y
+		var center := Vector3(
+			(min_pos.x + max_pos.x) / 2.0,
+			(min_pos.y + max_pos.y) / 2.0,
+			0.025  # Just behind controls (controls at Z=0.03)
+		)
+
+		var section_node := Node3D.new()
+		section_node.name = &quot;Section_%s&quot; % label_text.replace(&quot; &quot;, &quot;_&quot;)
+		section_node.add_to_group(&quot;rack_section&quot;)
+		section_node.position = center
+
+		# Dark background panel
+		var bg := MeshInstance3D.new()
+		var bg_mesh := BoxMesh.new()
+		bg_mesh.size = Vector3(section_w, section_h, 0.004)
+		bg.mesh = bg_mesh
+		var bg_mat := StandardMaterial3D.new()
+		bg_mat.albedo_color = Color(0.50, 0.48, 0.44, 0.9)
+		bg_mat.roughness = 0.6
+		bg_mat.metallic = 0.3
+		bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		bg.material_override = bg_mat
+		section_node.add_child(bg)
+
+		# Colored accent bar at top
+		var accent := MeshInstance3D.new()
+		var accent_mesh := BoxMesh.new()
+		accent_mesh.size = Vector3(section_w, 0.004, 0.006)
+		accent.mesh = accent_mesh
+		accent.position = Vector3(0, section_h / 2.0 + 0.002, 0.002)
+		var accent_mat := StandardMaterial3D.new()
+		var accent_color := Color(color_hex)
+		accent_mat.albedo_color = accent_color
+		accent_mat.emission_enabled = true
+		accent_mat.emission = accent_color
+		accent_mat.emission_energy_multiplier = 1.2
+		accent.material_override = accent_mat
+		section_node.add_child(accent)
+
+		# Section label
+		if not label_text.is_empty():
+			var label := Label3D.new()
+			label.text = label_text
+			label.position = Vector3(0, section_h / 2.0 + 0.012, 0.003)
+			label.pixel_size = 0.0005
+			label.font_size = 24
+			label.modulate = accent_color.lightened(0.3)
+			label.outline_size = 4
+			section_node.add_child(label)
+
+		parameter_container.add_child(section_node)
+
+	print(&quot;UVAC: Built %d section panels&quot; % sections.size())
+
+
+var _update_timer: SceneTreeTimer = null
+var _last_play_time: float = 0.0
+var min_play_interval: float = 0.5  # 500ms between auto-plays (like MarioSoundController)
+
+func _on_parameter_changed(_value, _p_name: String):
+	# Real-time tweak with time-based debounce to prevent rapid firing
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time &lt; min_play_interval:
+		return
+	_last_play_time = current_time
+	play_current_sound()
+
+
+
+func play_current_sound():
+	if is_instance_valid(live_patch):
+		live_patch.powered = true
+		return
+	var values = _get_current_values()
+	var sound_type = _resolve_sound_type(current_sound_key)
+
+	print(&quot;UVAC: Playing sound - key: %s, type: %s&quot; % [current_sound_key, sound_type])
+	print(&quot;UVAC: Values: %s&quot; % str(values))
+
+	# Sync Mario parameters globally so pickup cubes use them too
+	if current_sound_key == &quot;pickup_mario&quot;:
+		var start_freq = values.get(&quot;start_freq&quot;, 540.0)
+		var end_freq = values.get(&quot;end_freq&quot;, 880.0)
+		var decay_rate = values.get(&quot;decay_rate&quot;, 8.0)
+		var duration = values.get(&quot;duration&quot;, 0.36)
+		PickupCube.set_shared_mario_parameters(start_freq, end_freq, decay_rate, duration)
+		print(&quot;UVAC: Synced Mario params - start: %s, end: %s, decay: %s, dur: %s&quot; % [start_freq, end_freq, decay_rate, duration])
+
+	var stream = CustomSoundGenerator.generate_custom_sound(sound_type, values)
+	if stream:
+		preview_player.stream = stream
+		preview_player.play()
+		sound_played.emit(stream)
+	else:
+		push_warning(&quot;UVAC: Failed to generate sound stream&quot;)
+
+func _get_current_values() -&gt; Dictionary:
+	var values = {}
+
+	# JSON config mode - use new structure with support for all control types
+	for control_id in active_controls.keys():
+		var control_data = active_controls[control_id]
+		var control = control_data[&quot;instance&quot;]
+		var config = control_data[&quot;config&quot;]
+		var control_type = control_data.get(&quot;type&quot;, &quot;slider&quot;)
+
+		# Handle different control types
+		match control_type:
+			&quot;xy&quot;, &quot;xypad&quot;, &quot;2df&quot;, &quot;pad&quot;, &quot;js&quot;, &quot;joystick&quot;:
+				# XY controls map to two parameters
+				var param_x = config.get(&quot;parameter_x&quot;, config.get(&quot;parameter&quot;, &quot;&quot;) + &quot;_x&quot;)
+				var param_y = config.get(&quot;parameter_y&quot;, config.get(&quot;parameter&quot;, &quot;&quot;) + &quot;_y&quot;)
+				var min_x = config.get(&quot;min_x&quot;, config.get(&quot;min&quot;, 0.0))
+				var max_x = config.get(&quot;max_x&quot;, config.get(&quot;max&quot;, 1.0))
+				var min_y = config.get(&quot;min_y&quot;, config.get(&quot;min&quot;, 0.0))
+				var max_y = config.get(&quot;max_y&quot;, config.get(&quot;max&quot;, 1.0))
+
+				var norm_x = 0.5
+				var norm_y = 0.5
+				if control.has_method(&quot;get_normalized_value&quot;):
+					norm_x = control.get_normalized_value()
+				else:
+					var x_val = control_data.get(&quot;last_x&quot;, 0.0)
+					var size = config.get(&quot;size&quot;, 0.1)
+					norm_x = remap(x_val, -size, size, 0.0, 1.0)
+
+				if control.has_method(&quot;get_normalized_value_y&quot;):
+					norm_y = control.get_normalized_value_y()
+				else:
+					var y_val = control_data.get(&quot;last_y&quot;, 0.0)
+					var size_y = config.get(&quot;size&quot;, 0.1)
+					norm_y = remap(y_val, -size_y, size_y, 0.0, 1.0)
+
+				values[param_x] = lerp(min_x, max_x, norm_x)
+				values[param_y] = lerp(min_y, max_y, norm_y)
+
+			&quot;btn&quot;, &quot;button&quot;, &quot;trigger&quot;:
+				# Buttons - check toggle state or skip if momentary
+				var param_name = config.get(&quot;parameter&quot;, &quot;&quot;)
+				if param_name != &quot;&quot; and control_data.has(&quot;toggle_state&quot;):
+					values[param_name] = 1.0 if control_data[&quot;toggle_state&quot;] else 0.0
+
+			_:
+				# Standard 1D controls (sliders, knobs, wheels, levers)
+				var param_name = control_data[&quot;parameter&quot;]
+				if param_name == &quot;&quot;:
+					continue
+
+				var norm = 0.5
+				if control.has_method(&quot;get_normalized_value&quot;):
+					norm = control.get_normalized_value()
+				elif &quot;slider_value&quot; in control:
+					var p_min = config.get(&quot;min&quot;, 0.0)
+					var p_max = config.get(&quot;max&quot;, 1.0)
+					norm = remap(control.slider_value, p_min, p_max, 0.0, 1.0)
+
+				# Get range from config
+				var p_min = config.get(&quot;min&quot;, 0.0)
+				var p_max = config.get(&quot;max&quot;, 1.0)
+
+				values[param_name] = lerp(p_min, p_max, norm)
+
+	return values
+
+func _resolve_sound_type(key: String):
+	# Basic lookup, in a real app this would be more robust
+	var s_type = key.to_upper()
+	if AudioSynthesizer.SoundType.has(s_type):
+		return AudioSynthesizer.SoundType[s_type]
+	return AudioSynthesizer.SoundType.BASIC_SINE_WAVE
+</pre>

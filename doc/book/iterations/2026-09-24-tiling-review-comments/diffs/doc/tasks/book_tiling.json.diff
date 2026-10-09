@@ -1,0 +1,350 @@
+--- before/doc/tasks/book_tiling.json
++++ doc/tasks/book_tiling.json
+@@ -149,9 +149,9 @@
+       "effort": "half-day",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_03"
+       ],
+@@ -166,9 +166,12 @@
+       "proposal": "Add an apply_grid_config to laser_turret.gd that reads target_player (and detection_range), and change the token in Ribbon_Patterns_03/map_data.json row 45 to laser_turret#target_player:false#pin:1#plinth:0 so it hunts balls only. If the encounter is wanted, write the turret into the last region of the chapter and give the visitor the route; silence is the one option that does not work.",
+       "evidence": "commons/maps/Ribbon_Patterns_03/map_data.json interactables row 45 col 23 'laser_turret#pin:1#plinth:0'; commons/artifacts/registry/vectors.json -> res://commons/artifacts/turret_targeting/laser_turret.tscn (root carries the script, .tscn:5-6); commons/artifacts/turret_targeting/laser_turret.gd:13 detection_range 30.0, :15 damage_per_second 80.0, :26 target_player true, :279-287 player scored first, :312-317 XRCamera3D under 'xr_origin', :438-441 GameManager.apply_health_damage; commons/managers/GameManager.gd:440-458 walker_bitten path; no apply_grid_config in laser_turret.gd (0 matches); ada_run/em_plan.json plans[197] authored 'map' (the map IS the hall); ada_run/em_layout_walk.json halls['tiling|ribbon patterns 03'] h 52, passage 3.",
+       "review": "amended by a code checker (cited files only): Everything checks except the range: the placed scene laser_turret.tscn:8 overrides detection_range to 25.0 (the .gd:13 default of 30.0 is not what stands in the hall). Ribbon_Patterns_03 is 31 x 49, spawn 's' at (15,2), exit 't' at (15,46), interactables row 45 col 23 = 'laser_turret#pin:1#plinth:0' (about 8 cells from the exit, inside 25 m). .tscn:5-6 root carries the script; .gd:15 damage_per_second 80, :26 target_player true, :279-287 player scored first, :312-317 XRCamera3D under 'xr_origin', :438-441 GameManager.apply_health_damage; GameManager.gd:440-458 routes to em_lethal walker_bitten ('kills on the third bite'); 0 apply_grid_config matches in laser_turret.gd. em_plan plans[197] authored 'map'; em_layout_walk 'tiling|ribbon patterns 03' h 52, passage 3, laser_turret at tile [23,45].",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nAdded placement-specific target_player configuration to the existing turret. Ribbon_Patterns_03 opts out; other placements retain their default. Native checks confirm the loaded setting, ball selection and release of a supplied XR target lock. This desktop runner has no tracked player; an explicit xr_origin/XRCamera3D fixture exercises the production resolver. No damage or headset traversal claim. The original failed desktop-resolver expectation is retained in turret-desktop-first/.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:25.476Z"
+     },
+     {
+       "id": "book_tiling.002",
+@@ -177,9 +180,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Pattern_Foundry"
+       ],
+@@ -194,9 +197,12 @@
+       "proposal": "Move the four studio paragraphs (lines 84-90, 'Take the passage into the runway annex...' through '...even though its supports stayed where they were?') to directly follow line 55, then introduce the remaining loom experiments with one line such as 'On a return visit, the loom has more to show.' so the walking order and the reading order agree.",
+       "evidence": "commons/maps/Pattern_Foundry/final.md lines 5, 55, 57-81, 84-90; the annex layout matches the text (map_data.json structure: wall column at x24 rows 2-28, opening at rows 29-31, inner doorway at x29-31 row 18; pattern_studio_plate#room:curved at (30,11)); studio_surface_controls.gd:102-110 appends ROOM WALL / ROOM FLOOR / ROOM when the curved room exists.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nMoved the four studio paragraphs intact to the announced third pass, before the loom’s longer experiments. Added an On a return visit heading. Kept the experiments and the critical closing; no artifact or substantial passage removed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:27.520Z"
+     },
+     {
+       "id": "book_tiling.003",
+@@ -205,9 +211,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_03"
+       ],
+@@ -222,9 +228,12 @@
+       "proposal": "Rewrite the closing sentences to promise a reading at one address and another a little further along: for example 'In Change_Intro we ask what a value does between one address and the next, and how far apart two readings may be before they disagree.' Keep 'The fabric can come with us' only if Change_Intro gains a sentence that notices it; otherwise drop the clock.",
+       "evidence": "commons/maps/Ribbon_Patterns_03/final.md line 61; commons/maps/Change_Intro/final.md lines 7-13 (two readings of a curve), 34 ('The independent variable here is position'), 11 (the only reference back to colour and pattern).",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nThe ending now leads to the actual static curve and two spatial readings in Change_Intro. Removed the premature promise about a clock and velocity while retaining the sequence’s movement from addressed appearance to change.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:29.565Z"
+     },
+     {
+       "id": "book_tiling.004",
+@@ -233,9 +242,9 @@
+       "effort": "10min",
+       "skill": "verify",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Pattern_Disco"
+       ],
+@@ -250,9 +259,12 @@
+       "proposal": "Either change the sentence to 'two values, five arrangements, four palettes' and add one clause on the fifth ('a fifth press swaps the tiles for a triangle surface that carries the same two tones'), or list the triangle beside the checker, row, bands and snake in the second paragraph.",
+       "evidence": "commons/artifacts/regularity/disco_controls.gd:4 PATTERNS := [\"CHECKER\", \"ROWS\", \"DIAGONALS\", \"SNAKE\", \"SUPER TRIANGLE\"], :5 TRIANGLE_MODE := 4, :89 pattern = (pattern+1)%PATTERNS.size(), :132 readout 'SUPER TRIANGLE / ...'; :7 PALETTES has four pairs; commons/maps/Pattern_Disco/final.md line 15.",
+       "review": "confirmed by a code checker (cited files only): disco_controls.gd:4 PATTERNS has five entries ending 'SUPER TRIANGLE', :5 TRIANGLE_MODE := 4, :88 pattern = (pattern+1)%PATTERNS.size(), :132 readout 'SUPER TRIANGLE / ...', :7 PALETTES has four pairs. Pattern_Disco places disco_controls#mode:colour at (9,4) (registry -> disco_controls.tscn with this script), so the fifth press is live in the hall. final.md:15 'two values, four arrangements, four palettes'.",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nCorrected four to five pattern modes and brought SUPER TRIANGLE into the encounter. The opening comparison now chooses CHECKER, and the binary code excerpt is explicitly scoped to square-cell patterns. Added the distinct triangle shader and its unchanged floor support; correcting only the number would have left that distinction missing.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:31.608Z"
+     },
+     {
+       "id": "book_tiling.005",
+@@ -261,9 +273,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_02"
+       ],
+@@ -278,9 +290,12 @@
+       "proposal": "Add one sentence after the quoted one: 'The squares disappear. On an equal surround, two equal values have nothing left to differ by; the exhibit has not broken.'",
+       "evidence": "algorithms/color/carrier_comparison.gd:65 targets Color(0.5,0.5,0.5); :92 neutral backgrounds Color(0.5,0.5,0.5); :66 bridge same grey; :101 all boxes SHADING_MODE_UNSHADED; commons/maps/Ribbon_Patterns_02/final.md line 11.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nExplained that equal surrounds make the target faces almost disappear. Native museum photographs retain faint raised edges, so the prose deliberately does not promise total disappearance. Added an exact before/after pair from the same camera; surrounding animated works remain active.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:33.655Z"
+     },
+     {
+       "id": "book_tiling.006",
+@@ -289,9 +304,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Symmetry_Seventeen"
+       ],
+@@ -306,9 +321,12 @@
+       "proposal": "After the cage paragraph add one paragraph: send the visitor to the wall gallery to see the seventeen as shaders on the grid, to the loom and mills whose names carry a group (Alhambra p6m, Escher p4g, Persian p4) so a name meets a machine, and to the atlas plates where each pattern names its makers, keeping the caution that a tradition is not reduced to its group.",
+       "evidence": "commons/maps/Symmetry_Seventeen/map_data.json interactables: wall_pattern_gallery (8,6), loom_alhambra_p6m (14,5), mill_alhambra_p6m (14,9), mill_escher_p4g (11,13), mill_persian_p4 (5,13), loom_escher_mirror (6,7), kaleidoscope (13,17), tile_meander_floor (14,21), pattern_atlas_gallery (8,18); commons/artifacts/registry/shaders.json wall_pattern_gallery 'all 17 wallpaper groups as GPU shaders'; commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.gd:55-73 (nineteen plates with makers), :45-49 (the gallery does not know the groups and argues against classification-first reading); tools/final_tags.py --map=Symmetry_Seventeen: 2 tagged works of 14.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nInvited the reader to compare existing looms, mills, architectural patterns and credited atlas plates. Amended the review’s claim that the gallery displays all seventeen: this loaded hall configured ten distinct group IDs, 0–9. The source has seventeen available rules; a finite installation is not a completeness proof. Makers and histories remain irreducible to symmetry classification.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:35.714Z"
+     },
+     {
+       "id": "book_tiling.007",
+@@ -317,9 +335,9 @@
+       "effort": "half-day",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Symmetry_Seventeen"
+       ],
+@@ -334,9 +352,12 @@
+       "proposal": "Capture the two framed panels of the symmetry console with the seed mark, held on P1 and live on PG, and add it after the PG code block with a caption on the order of 'Held P1 on the left, live PG on the right. The reflected copy has also slipped by two source rows.'",
+       "evidence": "commons/primitives/arrays/symmetry_compare_lesson.gd:49-51 (held panel at x=-1.75, live at x=+1.75), :54 (hold_sample called on P1 at start), :87-90; grep '![' over the eight chapters returns 0 for each; commons/maps/Color_Walls/final.md has 3 figures; commons/maps/sequences/tiling.json learning_objectives[1].",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nAdded an unmodified native photograph of held P1 beside live PG, including the console and surrounding museum. Real button-signal checks preserve the seed and held pixels while changing the live image. The caption identifies reflection and the two-source-row shift.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:37.757Z"
+     },
+     {
+       "id": "book_tiling.008",
+@@ -345,9 +366,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_01"
+       ],
+@@ -362,9 +383,12 @@
+       "proposal": "Add one sentence to the opening: 'The two grids nearest the entrance are this study; the shelves, bars and sorting race further along belong to the array annex and keep their own lessons.' The same sentence pattern would serve Ribbon_Patterns_02 (the colour annex) and _03 (the light annex).",
+       "evidence": "commons/maps/Ribbon_Patterns_01/map_data.json interactables: grid_2d_4x4 (2,4), grid_3d_4x4x4#lesson:layer_pattern (7,4), grid3d (6,17), bar_array (18,17), bar_array_bubble_sort (6,20), sorting_algorithm_race (18,20), shelf (5,22), shelf_with_stickers (19,22), xyz_coordinates (5,12), column_3_z (18,4), row_3_x (18,11); algorithms/arrays/layer_pattern_lesson.gd:48 (console mounted on the volume) and :29 (pairs with grid_2d_4x4 in the same hall); commons/maps/sequences/tiling.json ribbon_consolidation.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nLocated the paired study at the entrance, with the low array as the starting point. Named the bars, shelves and sorting race further along as optional returns to arrays; retained all existing artifacts and their roles.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:39.805Z"
+     },
+     {
+       "id": "book_tiling.009",
+@@ -373,9 +397,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_02"
+       ],
+@@ -390,9 +414,12 @@
+       "proposal": "Delete the paragraph, or reduce it to one clause folded into the previous one: 'Keeping the model small lets us follow exactly where the difference enters, which is more than a name like metamerism would do.'",
+       "evidence": "commons/maps/Ribbon_Patterns_02/final.md line 37; algorithms/color/carrier_comparison.gd:31 (title label), :59-60 (specimen labels); algorithms/color/metamerism_lab/MetamerismLab.gd:32 and :39 (both results Color(1,1,0)); map token 'MetamerismLab:0#pin:1#plinth:0#lesson:carrier' swaps the scene for carrier_comparison.gd (MetamerismLab.gd:126-146).",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved the internal MetamerismLab naming history from final.md. The source and model limits remain in the chapter; the prior critical/technical documents and original manuscript remain intact in the baseline.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:41.869Z"
+     },
+     {
+       "id": "book_tiling.010",
+@@ -401,9 +428,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Pattern"
+       ],
+@@ -418,9 +445,12 @@
+       "proposal": "Expand the sentence to: 'Cross the main room, past the plates that run richer rules than we need yet, to the opening in its east wall; the side bay beyond holds two framed fields flanking an editor.'",
+       "evidence": "commons/maps/Tutorial_Pattern/map_data.json structure rows 5-17 (wall ring at x17 and x27, opening at x17 rows 10-12); interactables: pattern_maker_station#lesson:fixed_motif (22,9), pattern_tile_plate#p4m at (6,8), (8,8), (10,8), pattern_studio_plate (11,7), panel_bridge_loom (11,12), script_runner (7,13), pulsar_compact (10,14), grid_model (8,6), pattern_tile_puzzle (9,11), pattern_tile_mirror (8,10); commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd:44-50 (two frames at x=-1.95 and +1.95).",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nLocated the editor’s bay beyond the patterned plates through the east-wall opening, consistent with the authored map. This is orientation from the existing layout, not a new headset navigation claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:43.917Z"
+     },
+     {
+       "id": "book_tiling.011",
+@@ -429,9 +459,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Ribbon_Patterns_03"
+       ],
+@@ -446,9 +476,12 @@
+       "proposal": "Change to: 'Press NEXT or PREVIOUS at the mirror to change your look. The skirt keeps the recipe. WALK DRESS returns the costume the walk gave you, which has no skirt to carry it; the recipe waits in the wardrobe until you choose a look again.'",
+       "evidence": "commons/artifacts/super_drag_mirror/super_drag_mirror.gd:94 (title), :100-106 (PREVIOUS / NEXT / WALK DRESS; restore_walk_dress calls choose_outfit(\"\")); commons/player/costume_wardrobe.gd:73-76 (choose_outfit re-applies skirt_fabric only when drag_outfit is valid), :198-202; commons/player/super_drag_outfit.gd:151-158 (only a mesh named Skirt receives the recipe); commons/maps/Ribbon_Patterns_03/final.md line 47.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed NEXT, PREVIOUS and WALK DRESS. Clarified that the walking costume does not display the saved skirt fabric and that the wardrobe retains it for a skirted look. Checked the mirror → wardrobe → outfit path; no new costume interaction was implemented or headset-tested.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:45.966Z"
+     },
+     {
+       "id": "book_tiling.012",
+@@ -457,9 +490,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Pattern_Disco"
+       ],
+@@ -474,9 +507,12 @@
+       "proposal": "Add a one-line H1 above the opening question of each of the eight chapters in the neighbours' manner (Pattern_Disco: '# The same floor, another palette'; Pattern_Foundry: '# One decision, many surfaces'; and so on), keeping the question as the first sentence.",
+       "evidence": "First lines of commons/maps/{Pattern_Disco,Pattern_Foundry,Tutorial_Pattern,Array_Patterns,Symmetry_Seventeen,Ribbon_Patterns_01,Ribbon_Patterns_02,Ribbon_Patterns_03}/final.md (no '# '); commons/maps/Color_Walls/final.md:1 '# The view has partitions'; commons/maps/Change_Intro/final.md:1 '# Change and accumulation'; survey over commons/maps/curriculum_spine.json spine.sequences: 148 chapters with H1, 48 without, of which 30 are primitives, transformation, array_tutorial and tiling.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
+-      "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nGave all eight chapters a title. Promoted the final chapter’s existing opening question to its heading rather than repeating it. Mature chapter bodies and all code excerpts are preserved except for the targeted changes listed here.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
++      "source": "one reader (skeptic pending)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T20:26:48.018Z"
+     }
+   ]
+ }

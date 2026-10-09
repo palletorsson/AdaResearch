@@ -1,0 +1,151 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "origin, counter and arrival shaft present",
+      "passed": true
+    },
+    {
+      "name": "origin marker is at actual world zero",
+      "passed": true
+    },
+    {
+      "name": "label belongs to the origin",
+      "passed": true
+    },
+    {
+      "name": "one origin instance",
+      "passed": true
+    },
+    {
+      "name": "restored basin has sixteen cells",
+      "passed": true
+    },
+    {
+      "name": "glass at deck height (-1.25, -1.25)",
+      "passed": true
+    },
+    {
+      "name": "basin bottom two metres down (-1.25, -1.25)",
+      "passed": true
+    },
+    {
+      "name": "glass at deck height (-1.25, 1.25)",
+      "passed": true
+    },
+    {
+      "name": "basin bottom two metres down (-1.25, 1.25)",
+      "passed": true
+    },
+    {
+      "name": "glass at deck height (1.25, -1.25)",
+      "passed": true
+    },
+    {
+      "name": "basin bottom two metres down (1.25, -1.25)",
+      "passed": true
+    },
+    {
+      "name": "glass at deck height (1.25, 1.25)",
+      "passed": true
+    },
+    {
+      "name": "basin bottom two metres down (1.25, 1.25)",
+      "passed": true
+    },
+    {
+      "name": "no internal wall across basin (-1.5, -0.7, 0.2)",
+      "passed": true
+    },
+    {
+      "name": "no internal wall across basin (0.2, -0.7, -1.5)",
+      "passed": true
+    },
+    {
+      "name": "arrival still lands safely",
+      "passed": true
+    },
+    {
+      "name": "approach from counter reaches basin",
+      "passed": true
+    },
+    {
+      "name": "approach has supporting floor",
+      "passed": true
+    },
+    {
+      "name": "walk onto basin glass",
+      "passed": true
+    },
+    {
+      "name": "glass supports walker",
+      "passed": true
+    },
+    {
+      "name": "Folding Past remains",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: origin-close",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: basin-context",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-counter",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "arrival_landed": [
+      7.5,
+      0.000683411955833435,
+      1.5
+    ],
+    "bottom_hit_(-1.25, -1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(-1.25, -2.0, -1.25)"
+    },
+    "bottom_hit_(-1.25, 1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(-1.25, -2.0, 1.25)"
+    },
+    "bottom_hit_(1.25, -1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(1.25, -2.0, -1.25)"
+    },
+    "bottom_hit_(1.25, 1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(1.25, -2.0, 1.25)"
+    },
+    "glass_hit_(-1.25, -1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(-1.25, 0.0, -1.25)"
+    },
+    "glass_hit_(-1.25, 1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(-1.25, 0.0, 1.25)"
+    },
+    "glass_hit_(1.25, -1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(1.25, 0.0, -1.25)"
+    },
+    "glass_hit_(1.25, 1.25)": {
+      "collider": "Collision:<StaticBody3D#369501407128>",
+      "position": "(1.25, 0.0, 1.25)"
+    },
+    "origin_world": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "passed": true,
+  "scope": "Native museum, exact world coordinates, four-quadrant basin collision and actual desktop walker; headset not tested."
+}

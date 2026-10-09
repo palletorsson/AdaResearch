@@ -1,0 +1,3559 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,21 +1,265 @@
+-# Approach, wait, withdraw; then inspect the update
+-
+-**Learning elements — proposed focus**
+-
+-_The labels below set the revision focus; the existing lesson still needs alignment._
+-
+-- External inputs
+-- Graded state
+-- Update order
+-
+-Start with the inherited array and the Life dish's explicit output connection. The new capability is a graded field whose external input can be the observing body.
+-
+-1. From the desk choose SOURCE → PROBE and inspect NEAR. Run, watch W=(2,6), and hold. Name separately the colour, health and support changes.
+-2. Move the probe FAR and run. Follow recovery from a healthier edge into the depleted region. The probe controls a position, not a load.
+-3. RESTORE the full beginning. Select VISITOR and RUN. Approach, wait, withdraw; inspect the actual tracked body's distance. The ordinary margin and the basin ramps let the learner return after lost support.
+-4. Explain the proximity subtraction and four-neighbour recovery after observation. Compare the >0.5 participation threshold with the ≥0.2 support threshold. A value between them is a useful counterexample to “healthy or dead.”
+-5. Read the same state in the wall frieze. Ask which parts change colour, which support a body, and which influence the next update.
+-6. Choose CHAIN. With input NONE, STEP in SYNC. Switch ORDER to SCAN (the beginning resets), then STEP. REVERSE resets again; compare the same three addresses. Follow the `read_states` reference into the code.
+-7. Return to FULL and VISITOR. Describe one observation through an input, a state update, a threshold and a physical consequence.
+-
+-Do not require a learner to fall to understand the rule; PROBE and the readout permit inspection from the stable floor. A desktop body has been tested on the bridge and recovery ramp. Headset comfort and reach are deferred. The next hall needs a live weighted-neighbour or coupled-field experiment before the book can claim richer exchange.
++# The surface includes you
++
++## Learning elements
++
++- An external position becomes input to a cellular rule.
++- A dictionary pairs each grid address with a fractional state.
++- Four axial neighbours and a bounded field.
++- Separate thresholds for recovery and physical support.
++- Snapshot updates compared with a directional scan.
++
++## Bring the same point
++
++In the previous hall, carrying the point changed nothing in the cells. It carried STEP. Here **where you hold it matters**. The bridge and its wall frieze show the same field. Take the black point beside the desk, bring it near a tile and press its trigger. Each press selects HAND and advances one tenth of a simulated second. A nearby tile loses health. Release the point and STEP again: recovery now depends on what remains around the tile.
++
++Try the installed bridge first. Its desk also offers a fixed PROBE and the actual VISITOR as input, RUN for repeated steps, and a full RESTORE. The gold address W appears on both floor and wall. Below 0.2, its floor tile loses collision support. The basin catches you; the ramps return you to the museum floor. A wall panel can show the same value without opening a hole in the wall.
++
++We reconstruct this operation at one-fifth scale, with the same PointBody and rule. Save the previous lesson. Attach `presence.gd` to your existing `PointStudy` Node3D in the museum. Keep unit scale, about 2 × 3 metres clear, and face its positive Z side. Place the unchanged `point_body.gd` beside it. Day Zero's museum still supplies the player, camera, light and XR Tools. These two files create all study geometry; no prepared child nodes are needed. The small model has manual steps, one point input and a tray beneath its tiles. Walk on the installed bridge, not this table.
++
++## An address keeps a fraction
++
++`current[Vector2i(x, y)]` holds a number from 0 to 1. The dictionary makes the address explicit; it replaces the flat Boolean array used in Life. All 80 addresses exist throughout the experiment. A disappearing tile does not delete its entry.
++
++Logical Y runs along the bridge, becoming physical Z in `cell_position`. `view_position` shrinks that simulation position and places it on the table. `input_position` reverses the conversion: world position → study-local position → simulation position. This lets the smaller model use the installed rule's distances. Moving or rotating the entire study does not alter those local relations.
++
++The radius is 1.35 simulation metres, which appears as 0.27 metres on this model. Distance uses all three coordinates, including height. The input is the held point's centre. In the installed VISITOR mode it is the tracked body's origin. Neither measures weight or contact pressure.
++
++## One update
++
++For each address, `evolve` makes one choice. If the point is held and its centre is nearer than `RADIUS`, health falls by 0.04. Otherwise each healthy axial neighbour adds 0.01. The four directions are north, south, east and west; diagonals and the centre are excluded. Missing neighbours at the boundary contribute nothing. This field does not wrap as Life did.
++
++`maxf` and `minf` keep the result between 0 and 1. Near the input, decay takes the whole branch: recovery is not added at the same time. Moving the point while the clock is stopped changes no cell. Trigger or Enter commits one update.
++
++| Health | Helps neighbours recover? | Tile supports a body? |
++| --- | --- | --- |
++| Greater than 0.5 | Yes | Yes |
++| 0.2 through 0.5 | No | Yes |
++| Below 0.2 | No | No |
++
++`redraw` uses the new value to change colour and collision. Each wall panel shares its floor tile's material. The wall backing and lower tray stay solid. Changing a state and deciding what that state permits remain separate operations.
++
++## Complete study — presence.gd
++
++Read `input_position`, `neighbours`, `evolve` and `step` first. They contain the new operation. `make_display` builds the two views and their support; it is included so the reconstruction is complete. There is one `_ready`, and every reference is created or declared here.
++
++```gdscript
++extends Node3D
++const PointBody = preload("point_body.gd")
++const WIDTH := 5
++const LENGTH := 16
++const PITCH := 0.6
++const RADIUS := 1.35
++const DT := 0.1
++const LIMIT := 300
++const VIEW_SCALE := 0.2
++const VIEW_ORIGIN := Vector3(0, 1.02, 0)
++const W := Vector2i(2, 6)
++const DIRECTIONS := [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
++var current: Dictionary = {}
++var materials: Dictionary = {}
++var supports: Dictionary = {}
++var point: XRToolsPickable
++var reading := Label3D.new()
++var ticks := 0
++var chain := false
++var synchronous := true
++var backwards := false
++
++func _ready() -> void:
++	for y in LENGTH:
++		for x in WIDTH:
++			current[Vector2i(x, y)] = 1.0
++	make_display()
++	point = PointBody.new()
++	add_child(point)
++	point.action_pressed.connect(func(_body): step())
++	park()
++	reset()
++
++func cell_position(site: Vector2i) -> Vector3:
++	return Vector3((site.x - 2) * PITCH, -0.1, site.y * PITCH)
++
++func view_position(site: Vector2i) -> Vector3:
++	return VIEW_ORIGIN + cell_position(site) * VIEW_SCALE
++
++func input_position() -> Vector3:
++	return (to_local(point.global_position) - VIEW_ORIGIN) / VIEW_SCALE
++
++func neighbours(old: Dictionary, site: Vector2i) -> int:
++	var count := 0
++	for direction in DIRECTIONS:
++		var other: Vector2i = site + direction
++		if old.has(other) and old[other] > 0.5:
++			count += 1
++	return count
++
++func evolve(old: Dictionary, at: Vector3, present: bool) -> Dictionary:
++	var next := old.duplicate()
++	var read: Dictionary = old if synchronous else next
++	var order := old.keys()
++	if backwards:
++		order.reverse()
++	for site: Vector2i in order:
++		var health: float = old[site]
++		if present and cell_position(site).distance_to(at) < RADIUS:
++			next[site] = maxf(0.0, health - 0.08 * DT * 5.0)
++		else:
++			next[site] = minf(1.0, health + 1.0 * DT * 0.1 * neighbours(read, site))
++	return next
++
++func step() -> void:
++	if ticks == LIMIT:
++		return
++	current = evolve(current, input_position(), point.held() and not chain)
++	ticks += 1
++	redraw()
++
++func reset() -> void:
++	ticks = 0
++	for site in current:
++		current[site] = 0.0 if chain else 1.0
++	if chain:
++		current[Vector2i(1, 6)] = 0.6
++		current[W] = 0.495
++	redraw()
++
++func _physics_process(_delta: float) -> void:
++	if not point.held():
++		park()
++
++func park() -> void:
++	point.position = Vector3(-0.65, 1.12, 0.3)
++
++func _unhandled_key_input(event: InputEvent) -> void:
++	if event is InputEventKey and event.pressed and not event.echo:
++		match event.keycode:
++			KEY_ENTER: step()
++			KEY_R: chain = false; reset()
++			KEY_C: chain = true; reset()
++			KEY_O: synchronous = not synchronous; reset()
++			KEY_V: backwards = not backwards; reset()
++			_: return
++		get_viewport().set_input_as_handled()
++
++func box(size: Vector3, at: Vector3, colour: Color) -> MeshInstance3D:
++	var node := MeshInstance3D.new()
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	node.mesh = mesh
++	node.position = at
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = colour
++	node.material_override = finish
++	add_child(node)
++	return node
++
++func solid(node: MeshInstance3D, size: Vector3) -> CollisionShape3D:
++	var body := StaticBody3D.new()
++	var boundary := CollisionShape3D.new()
++	var shape := BoxShape3D.new()
++	shape.size = size
++	boundary.shape = shape
++	node.add_child(body)
++	body.add_child(boundary)
++	return boundary
++
++func make_display() -> void:
++	var tray := box(Vector3(0.72, 0.04, 2.0), Vector3(0, 0.86, 0.9), Color("354650"))
++	solid(tray, Vector3(0.72, 0.04, 2.0))
++	box(Vector3(0.1, 0.84, 0.1), Vector3(0, 0.42, 0.9), Color("bf9469"))
++	var wall := box(Vector3(0.04, 0.38, 2), Vector3(0.55, 1.28, 0.9), Color("20373a"))
++	solid(wall, Vector3(0.04, 0.38, 2))
++	for site: Vector2i in current:
++		var tile := box(Vector3(0.114, 0.04, 0.114), view_position(site), Color.WHITE)
++		materials[site] = tile.material_override
++		supports[site] = solid(tile, Vector3(0.12, 0.04, 0.12))
++		var panel := box(Vector3(0.02, 0.058, 0.106), Vector3(0.52, 1.15 + site.x * 0.064, site.y * 0.12), Color.WHITE)
++		panel.material_override = materials[site]
++	var at := view_position(W) + Vector3.UP * 0.025
++	for side in [-1, 1]:
++		box(Vector3(0.124, 0.008, 0.008), at + Vector3(0, 0, side * 0.062), Color("ffd484"))
++		box(Vector3(0.008, 0.008, 0.124), at + Vector3(side * 0.062, 0, 0), Color("ffd484"))
++	reading.position = Vector3(0, 1.8, 0.6)
++	reading.font_size = 28
++	reading.pixel_size = 0.0014
++	reading.modulate = Color("213639")
++	reading.outline_modulate = Color("f5f0e8")
++	reading.outline_size = 4
++	add_child(reading)
++
++func redraw() -> void:
++	for site: Vector2i in current:
++		var health: float = current[site]
++		var finish: StandardMaterial3D = materials[site]
++		finish.albedo_color = Color("a86c88").lerp(Color("8cd9be"), health)
++		finish.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if health < 0.2 else BaseMaterial3D.TRANSPARENCY_DISABLED
++		finish.albedo_color.a = 0.18 + health if health < 0.2 else 1.0
++		supports[site].set_deferred("disabled", health < 0.2)
++	reading.text = "W (2,6) / HEALTH %.3f / SUPPORT %s\n%s / %s / %.1f s\nTRIGGER / ENTER: STEP   R: FULL   C: CHAIN\nO: SYNC/SCAN   V: REVERSE" % [current[W], "ON" if current[W] >= 0.2 else "OFF", "SYNC" if synchronous else "SCAN", "REVERSE" if backwards else "FORWARD", ticks * DT]
++```
++
++## Unchanged carried object — point_body.gd
++
++This is the same PointBody file used in the previous hall. It keeps its small dark sphere, pickup behaviour and action signal. Copy it only if it is not already beside the new script.
++
++```gdscript
++extends XRToolsPickable
++## Point Lines' frozen point construction, made smaller for the hand model.
++var tint := Color("25212a")
++var desktop_pointer: WeakRef
++
++func _init() -> void:
++	freeze = true
++	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
++	release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
++	collision_layer = 4
++	collision_mask = 0
++	var surface := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.085
++	sphere.height = 0.17
++	sphere.radial_segments = 24
++	sphere.rings = 12
++	surface.mesh = sphere
++	add_child(surface)
++	var boundary := CollisionShape3D.new()
++	var shape := SphereShape3D.new()
++	shape.radius = 0.085
++	boundary.shape = shape
++	add_child(boundary)
++
++func _ready() -> void:
++	super._ready()
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = tint
++	finish.roughness = 0.24
++	get_child(0).material_override = finish
++
++func held() -> bool:
++	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
++
++func on_desktop_grab(pointer: Node) -> void:
++	desktop_pointer = weakref(pointer)
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_pointer = null
++```
++
++## Let the edge recover
++
++Hold the point's centre about 0.05 metres above W and STEP 21 times without moving it. The value reaches 0.16; the faint tile no longer supplies support. Release the point. Each later Enter press advances recovery without a proximity input. The outer edge of the depleted patch recovers first because it still has healthy neighbours. A wholly empty field has none and will not repair itself merely because you leave.
++
++Now hold the point directly above W but more than 0.27 metres from its centre. Predict the next update before pressing. Height alone can take it outside the radius. Lower it and repeat. You are testing a three-dimensional distance, not painting onto a two-dimensional grid. Desktop learners can use the museum's established grab operation and Enter while holding the point.
++
++## Does the order count?
++
++This comparison returns to the old-to-next agreement; it does not add another input. Press C. The field begins at zero except (1,6) = 0.600 and W = 0.495. Hand influence is disabled for this comparison. In SYNC, all recovery counts read `old`. STEP once: W becomes 0.505, but (3,6) remains zero because it read W's old value.
++
++Press O to select SCAN and reset that same beginning. Now counts read `next`, including answers already written. STEP: (3,6) becomes 0.01. W's newly healthy value was available before the loop reached its neighbour. Press V to reverse the scan and reset; STEP again. That neighbour now stays at zero. SYNC gives the same answer in either order.
++
++Make one independent edit: change W's CHAIN beginning from 0.495 to **0.49**. Predict whether the third cell gains anything in forward SCAN, then run it. W reaches exactly 0.5. The condition is strictly greater than 0.5, so the third cell still gains nothing. The threshold, not the rounded appearance of the colour, decides.
++
++R restores the full field and permits hand input again. O and V preserve the chosen beginning while resetting time. At 300 steps—30 simulated seconds—the study holds its state until reset. Releasing the point does not advance time by itself.
++
++You leave with an input connection you can name, and two consequences you can distinguish: a value can cease to help its neighbours before it ceases to hold you. The next room asks what happens when the neighbourhood offers more than a count above a threshold.
+--- before/final.md
++++ after/final.md
+@@ -8,28 +8,21 @@
+ 
+ Use NEAR/FAR to withdraw the probe and run again. Watch the edge of the depleted region before its centre. Something returns through what remained around it. There is no separate instruction ordering this particular patch to grow back into its old outline.
+ 
+-RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe's place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end of its right-hand edge, on the desk's side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
++RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe's place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end on the desk's side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
++
++You can bring the black point from beside the desk into this relation. Hold it near the surface and use its trigger to give the rule another position. The same object that carried STEP in the previous hall now brings a location as well. Release it and continue stepping: the input has withdrawn, but its consequences remain.
+ 
+ Look up to find W again. A gold frame holds its place on the frieze. Wait above the tile while watching its colour there. The change stays in front of you; the consequence arrives beneath your feet. When the surface gives way, you are still looking at the same address from a little lower down.
+ 
+-![The gold address W remains visible on the wall and the depleted bridge.](images/ca-presence-depleted.png)
++![The gold address W remains visible on the wall and the depleted bridge.](images/presence-depleted.png)
+ 
+ *One cell, two surfaces. The basin receives the body when the bridge can no longer carry it.*
+ 
+-The bridge's variable is called health. Here that means a number between zero and one. The name lends it a small biological story, but the operations are available to read. Nearby cells lose a fixed amount on each update:
+-
+-```gdscript
+-if present and cell_position(coord).distance_to(local_visitor) < decay_radius:
+-    next[coord] = maxf(0.0, health - decay_speed * dt * 5.0)
+-```
++The bridge's variable is called health. Here that means a number between zero and one. The name lends it a small biological story, but the operations are available to read. Nearby cells lose a fixed amount on each update. The number records this particular rule, not a diagnosis of a body.
+ 
+ Distance is measured in three dimensions from a cell's centre to the tracked body's origin. No scale weighs your feet. The surface can respond before your body is standing on the cell you are watching. The pink probe can produce the same numerical influence without a person above it. Which part of our first explanation came from the event, and which part did the appearance of a bridge invite us to supply?
+ 
+-Outside that radius, a cell can recover through its four immediate axial neighbours. Each neighbour above 0.5 contributes to recovery. At 0.3 a tile can support you, yet it cannot contribute as a healthy neighbour. Below 0.2, its collider is disabled:
+-
+-```gdscript
+-colliders[coord].set_deferred("disabled", health < 0.2)
+-```
++Outside that radius, a cell can recover through its four immediate axial neighbours. Each neighbour above 0.5 contributes to recovery. At 0.3 a tile can support you, yet it cannot contribute as a healthy neighbour. Below 0.2, the tile stops supplying collision support.
+ 
+ One changing value meets two different thresholds. Being visible, carrying a visitor and helping a neighbour recover are separate permissions. The frieze wears the same changing colours. Its solid backing remains even when the tile can no longer carry you. A room can wear an answer without offering the same way through it.
+ 
+@@ -37,11 +30,7 @@
+ 
+ STEP once in SYNC. The middle value crosses 0.5. Has the next cell been allowed to use that change already? ORDER switches to SCAN and restores the same beginning. Step again, then use REVERSE and repeat. A different answer can appear even though the neighbouring cells and the amount of time are unchanged. The loop has a direction too.
+ 
+-SYNC reads the previous field throughout the update. SCAN reads answers already written during the same pass. In this study, changing scan direction leaves the synchronous result unchanged; in-place recovery can change. The choice sits in a single line:
+-
+-```gdscript
+-var read_states: Dictionary = previous if snapshot_reads else next
+-```
++SYNC reads the previous field throughout the update. SCAN reads answers already written during the same pass. In this study, changing scan direction leaves the synchronous result unchanged; in-place recovery can change. What an update is allowed to know changes the result.
+ 
+ We have returned to the Life dish's two buffers. Their separation now changes when a weakened surface can help another part of itself. The rule includes a schedule, even when the picture conceals it.
+ 
+--- before/map_data.json
++++ after/map_data.json
+@@ -1,1532 +1,1533 @@
+ {
+-  "map_info": {
+-    "title": "The surface includes you",
+-    "name": "CA_ExpandingSpace",
+-    "lookup_name": "CA_ExpandingSpace",
+-    "description": "A graded bridge responds to proximity. Follow one cell through health, recovery and support, compare update schedules, and read the same state in a wall frieze.",
+-    "version": "1.0",
+-    "format": "json",
+-    "dimensions": {
+-      "width": 15,
+-      "depth": 28,
+-      "max_height": 3
+-    },
+-    "metadata": {
+-      "difficulty": "intermediate",
+-      "category": "cellular_automata",
+-      "estimated_time": "5 minutes",
+-      "learning_objectives": [
+-        "Identify the tracked body and distance input",
+-        "Separate graded health from binary support",
+-        "Compare neighbourhood participation thresholds",
+-        "Test synchronous and sequential recovery",
+-        "Read the same state as a path and wall finish"
+-      ]
+-    },
+-    "museum": {
+-      "wall_height": 3,
+-      "open_roof": true,
+-      "artifact_placement": "map",
+-      "plinths": false,
+-      "gate_depth_rows": 0,
+-      "sculpture_clear_rects": [
+-        [
+-          1,
+-          1,
+-          13,
+-          17
+-        ],
+-        [
+-          13,
+-          18,
+-          13,
+-          26
+-        ]
+-      ]
+-    }
++ "map_info": {
++  "title": "The surface includes you",
++  "name": "CA_ExpandingSpace",
++  "lookup_name": "CA_ExpandingSpace",
++  "description": "A graded bridge responds to proximity. Follow one cell through health, recovery and support, compare update schedules, and read the same state in a wall frieze.",
++  "version": "1.0",
++  "format": "json",
++  "dimensions": {
++   "width": 15,
++   "depth": 28,
++   "max_height": 3
+   },
+-  "utility_definitions": {
+-    "t": {
+-      "type": "teleporter",
+-      "name": "Next",
+-      "description": "Continue to next step",
+-      "properties": {
+-        "action": "next_in_sequence"
+-      }
+-    }
++  "metadata": {
++   "difficulty": "intermediate",
++   "category": "cellular_automata",
++   "estimated_time": "5 minutes",
++   "learning_objectives": [
++    "Identify the tracked body and distance input",
++    "Separate graded health from binary support",
++    "Compare neighbourhood participation thresholds",
++    "Test synchronous and sequential recovery",
++    "Read the same state as a path and wall finish"
++   ]
+   },
+-  "lighting": {
+-    "ambient_color": [
+-      0.4,
+-      0.4,
+-      0.5
+-    ],
+-    "ambient_energy": 0.6,
+-    "directional_light": {
+-      "enabled": true,
+-      "direction": [
+-        -0.4,
+-        -0.7,
+-        -0.4
+-      ],
+-      "color": [
+-        1.0,
+-        0.9,
+-        0.8
+-      ],
+-      "energy": 1.2
+-    }
+-  },
+-  "settings": {
+-    "cube_size": 1.0,
+-    "gutter": 0.0,
+-    "show_grid": true,
+-    "enable_physics": true,
+-    "auto_reveal_on_entry": false,
+-    "initial_tile_visibility": "hidden_except_corners",
+-    "background": {
+-      "type": "sky",
+-      "color": [
+-        0.2,
+-        0.3,
+-        0.7
+-      ]
+-    }
+-  },
+-  "layers": {
+-    "structure": [
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "0",
+-        "0",
+-        "1",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w"
+-      ]
+-    ],
+-    "utilities": [
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "sp",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "t",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ]
+-    ],
+-    "interactables": [
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "decaying_bridge:0:0#study:proximity#plinth:0",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "ca_chair_test:90",
+-        "",
+-        "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "catalyst_prompter_box:0:0#emergence:doors#sequence:auto#lease_s:45",
+-        "",
+-        "dark_sphere",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "cellular_automata_3d_tree:90#host_lighting:1",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "crossway_ca:0",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ]
++  "museum": {
++   "wall_height": 3,
++   "open_roof": true,
++   "artifact_placement": "map",
++   "plinths": false,
++   "gate_depth_rows": 0,
++   "sculpture_clear_rects": [
++    [
++     1,
++     1,
++     13,
++     26
+     ]
++   ],
++   "gate": false,
++   "portal_entry": {
++    "cage": false
++   },
++   "portal_exit": {
++    "approach": "from_hall"
++   }
+   }
++ },
++ "utility_definitions": {
++  "t": {
++   "type": "teleporter",
++   "name": "Next",
++   "description": "Continue to next step",
++   "properties": {
++    "action": "next_in_sequence"
++   }
++  }
++ },
++ "lighting": {
++  "ambient_color": [
++   0.4,
++   0.4,
++   0.5
++  ],
++  "ambient_energy": 0.6,
++  "directional_light": {
++   "enabled": true,
++   "direction": [
++    -0.4,
++    -0.7,
++    -0.4
++   ],
++   "color": [
++    1.0,
++    0.9,
++    0.8
++   ],
++   "energy": 1.2
++  }
++ },
++ "settings": {
++  "cube_size": 1.0,
++  "gutter": 0.0,
++  "show_grid": true,
++  "enable_physics": true,
++  "auto_reveal_on_entry": false,
++  "initial_tile_visibility": "hidden_except_corners",
++  "background": {
++   "type": "sky",
++   "color": [
++    0.2,
++    0.3,
++    0.7
++   ]
++  }
++ },
++ "layers": {
++  "structure": [
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "0",
++    "0",
++    "0",
++    "0",
++    "0",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "1",
++    "1",
++    "1",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w",
++    "w"
++   ]
++  ],
++  "utilities": [
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "sp",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "t",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ]
++  ],
++  "interactables": [
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "decaying_bridge:0:0#study:proximity#plinth:0",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "crossway_ca:0:0.8:0.25",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "ca_chair_test:0:0:0.12#host_lighting:1",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "dark_sphere",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "catalyst_prompter_box:0:0#emergence:doors#sequence:auto#lease_s:45",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "cellular_automata_3d_tree:0:0:0.35#host_lighting:1",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ]
++  ]
++ }
+ }
+--- before/technical.md
++++ after/technical.md
+@@ -6,7 +6,7 @@
+ 
+ `grid` maps Vector2i addresses to health in [0,1]. Cell centres lie at y=-0.1 m; their collision tops align with the ordinary floor. The visitor resolver first follows a real player camera to its physical body, including XRToolsPlayerBody for an XR camera; otherwise it checks em_walker, player_body and player groups. A capture camera is not treated as a visitor. When no body exists, no origin-position substitute causes decay. The XR path is implemented but has not been tested in a headset.
+ 
+-The study can use VISITOR, a nominated PROBE position, or NONE. Probe NEAR is (0,0.05,3.6) in bridge space; FAR is (-3,0.05,3.6). The sphere is drawn above that nominated coordinate so it can be seen. Distance includes y; it is not a pressure sensor or horizontal-only footprint. The witness W=(2,6) is at local (0,-0.1,3.6), so the near probe is 0.15 m from it.
++The study can use VISITOR, a nominated PROBE position, NONE, or HAND. The fourth source samples the held PointBody centre; when released it has no proximity input. The point trigger selects HAND and steps once. The point parks on release, and release itself does not step. Probe NEAR is (0,0.05,3.6) in bridge space; FAR is (-3,0.05,3.6). The sphere is drawn above that nominated coordinate so it can be seen. Distance includes y; it is not a pressure sensor or horizontal-only footprint. The witness W=(2,6) is at local (0,-0.1,3.6), so the near probe is 0.15 m from it.
+ 
+ ## One update
+ 
+@@ -26,10 +26,28 @@
+ 
+ ## Architecture and verification
+ 
+-The map is 15 × 28. An added front bay contains the bridge, a 0.6 m collecting basin, two closed convex recovery wedges and an independent museum margin. The original seven artifacts remain, with the other six shifted together into the rear gallery. The old automatic arrangement removed crossway_ca to reopen its path; authored placement now retains it. The retained tree's optional host_lighting configuration disables its standalone sun/environment in this placement, preventing it from overexposing the hall. Geometry and growth parameters remain.
++The map is 15 × 28. An added front bay contains the bridge, a 0.6 m collecting basin, two closed convex recovery wedges and an independent museum margin. The original seven artifacts remain, with the other six staged individually in a level rear gallery. The chair is scaled to 0.12, crossway to 0.25 and tree to 0.35. Crossway is lifted 0.8 m as a small relief; it no longer crosses the exit wall. The old automatic arrangement removed crossway_ca to reopen its path; authored placement now retains it. The retained tree's optional host_lighting configuration disables its standalone sun/environment in this placement, preventing it from overexposing the hall. Geometry and growth parameters remain.
+ 
+ Real desktop checks exercise tracking, the rule, thresholds, matched schedules, all eight pointer controls, support/basin rays, a body losing support, a climbed ramp and a margin walk. Evidence is under `doc/space/ca-proximity-review-2026-09-13/`. Headset testing and the retained secondary encounters remain further work. Existing catalyst viewport-texture diagnostics are separate from this primary; the final run must have no runtime script errors.
+ 
+ ## 25 September: locating the same cell with the body
+ 
+ W now has a fixed gold frame and address on the frieze at the existing panel for (2,6). The frame has no collision, state or clock. The panel still shares the exact floor-cell material. Four lining faces close the collecting basin below floor height; the basin bottom, both recovery ramps, tile collision, rule and console are unchanged. No global floor policy changes. See `encounter-notes.md` for current native checks and their limits.
++
++
++## Complete learner reconstruction — 8 October 2026
++
++`tutorial.md` prints `presence.gd` and the unchanged PointBody, maintained under `doc/book/studies/cellular-automata-through-the-hands/CA_ExpandingSpace`. The full 5 × 16 float dictionary keeps the installed primary's pitch, radius, rates, axial bounded neighbourhood and thresholds. A one-fifth-scale view maps the held point back into simulation units. The model has manual steps, a lower receiving tray, corresponding wall panels and a complete collision construction. Unlike the installed VISITOR mode, its input is deliberately the held point centre. It is a tabletop reconstruction, not a miniature walking platform.
++
++The lesson introduces external input first; SYNC/SCAN is a later return to the existing buffer agreement. Independent exercises raise the point above the radius and change CHAIN W from .495 to .49. Two deliberately faulty variants discard height or read newly written answers in SYNC; the tests reject their predicted outcomes.
++
++The installed proximity study adds `proximity_hand.gd` only through its opt-in study mounting. VISITOR, PROBE and NONE remain in the same order; HAND is fourth. The original bridge solver is unchanged in this pass. The rear chair receives optional `host_lighting:1`, like the tree, to disable its standalone sun/environment. Its cellular algorithm is unchanged.
++
++All seven authored works remain. Rear floor/partition cells are levelled, incidental sculpture is reserved out of circulation, and portals move to the entry/exit thresholds with no additional generic gate. The basin and recovery wedges retain their geometry. Only this hall's generated plan row is rederived.
++
++32 exact-printed-code checks and 37 installed-museum checks pass in Godot 4.6. There are 255 samples on four routes for layer-1 capsule clearance (0.56 m wide / 1.7 m high) and level floor. A supplied physical body loses support at W, lands at approximately -0.63 m and climbs the exit wedge to the museum floor. Both source types at the same coordinate produce the same field. Final runs have no SCRIPT ERROR or Parse Error; existing unrelated engine warnings remain.
++
++
++Earlier diagnostic runs are retained: the learner parity fixture initially omitted the production study-coordinate flag; the first museum pass exposed a duplicate configuration hook added to the chair and a route intersecting the desk foot. The hook is merged into the existing function; the final route goes around the furniture. These are corrected integration/harness defects, not grounds for claiming the first runs passed.
++
++Evidence: `doc/book/iterations/2026-10-08-ca-the-surface-includes-you/index.html`, exact printed code, receipts, logs, before/after overhead/raised/visitor views and review ZIP. No physical headset, Quest performance, independent student, complete secondary-artifact interaction audit or full portal transfer is claimed.
+--- before/encounter-notes.md
++++ after/encounter-notes.md
+@@ -25,3 +25,16 @@
+ Next: CA_SoftRules. Inspect the existing live neighbourhood mechanism and let its spatial consequences lead the next passage.
+ 
+ Concurrent-source note: during this pass another edit updated the display titles of CA_ElementaryRules, CA_GameOfLife and CA_BeyondBinary in the sequence file. These edits are preserved and recorded separately in concurrent-sequence.diff. Active map order and all other sequence fields remain unchanged. The initial byte-for-byte preservation check correctly reported this difference; diagnostic-preservation.json retains that result.
++
++
++---
++
++# The surface includes you — 8 October 2026
++
++The carried point moves from controlling the clock to supplying a location. HAND + STEP is an additional installed input; release withdraws it, while recovery still requires further updates. The complete two-file learner model reconstructs that same rule at table scale. The reflection keeps its encounter and distinction between appearance, support and recovery; three implementation blocks become prose. Its point passage records the new connection without turning the final text into a tutorial.
++
++Rear gallery levelled and six secondary works spaced; all seven authored works retained. Chair/crossway/tree fit at .12/.25/.35, crossway lifted .8 m. Threshold portals and no duplicate gate. Existing basin/ramps and bridge transition law preserved. Optional host lighting on the embedded chair avoids a second sun.
++
++32 learner + 37 native museum checks pass; four routes / 255 samples. Native XRTools supplied poses, physical-body basin/ramp test, comparison faults and threshold transfer are covered. Initial failed diagnostics retained. No headset or independent student claim. Final photos reviewed from above, raised oblique and eye height. The printed model is temporarily mounted only for its picture. Blank wall frames and secondary encounters still need their own review.
++
++Full review: `doc/book/iterations/2026-10-08-ca-the-surface-includes-you/index.html`. Next: CA_SoftRules.
+--- before/proximity_study.gd
++++ algorithms/cellularautomata/living_architecture/proximity_study.gd
+@@ -6,7 +6,7 @@
+ var running:bool=false
+ var elapsed:float=0.0
+ var ticks:int=0
+-var source_mode:int=0 # VISITOR, PROBE, NONE
++var source_mode:int=0 # VISITOR, PROBE, NONE, HAND
+ var probe_near:bool=true
+ var beginning:String="FULL"
+ var reading:Label3D
+@@ -21,6 +21,8 @@
+ func _ready() -> void:
+ 	work=get_parent()
+ 	_build_space();_build_desk();reset()
++	var hand:Node3D=load("res://algorithms/cellularautomata/living_architecture/proximity_hand.gd").new()
++	hand.name="ProximityHand";add_child(hand)
+ 
+ func reset() -> void:
+ 	running=false;elapsed=0.0;ticks=0
+@@ -43,7 +45,7 @@
+ 	work.reverse_scan=not work.reverse_scan;reset()
+ 
+ func next_source() -> void:
+-	source_mode=(source_mode+1)%3;_refresh()
++	source_mode=(source_mode+1)%4;_refresh()
+ 
+ func move_probe() -> void:
+ 	probe_near=not probe_near;source_mode=1;_refresh()
+@@ -56,11 +58,16 @@
+ 	work.has_visitor=is_instance_valid(visitor) if source_mode==0 else source_mode==1
+ 	if source_mode==0 and work.has_visitor:work.player_position=visitor.global_position
+ 	elif source_mode==1:work.player_position=work.to_global(probe_position())
++	elif source_mode==3:
++		var hand:Node3D=get_node_or_null("ProximityHand")
++		work.has_visitor=hand!=null and hand.point.held()
++		if work.has_visitor:work.player_position=hand.point.global_position
+ 	last_distance=work.cell_position(WITNESS).distance_to(work.to_local(work.player_position)) if work.has_visitor else -1.0
+ 	last_neighbors=work.healthy_neighbors(WITNESS,work.grid)
+ 	probe.position=probe_position()+Vector3(0,0.3,0)
+ 	probe.visible=source_mode==1
+-	source_label.text=["VISITOR / body origin","PROBE / nominated position","NONE / recovery only"][source_mode]
++	source_label.text=["VISITOR / body origin","PROBE / nominated position","NONE / recovery only","HAND / held point centre"][source_mode]
++	if source_mode==3 and not work.has_visitor:source_label.text="HAND RELEASED / recovery only"
+ 	if source_mode==1:source_label.text="PROBE / " + ("NEAR" if probe_near else "FAR")
+ 	if source_mode==0 and not work.has_visitor:source_label.text="NO VISITOR FOUND / recovery only"
+ 
+--- before/proximity_hand.gd
++++ algorithms/cellularautomata/living_architecture/proximity_hand.gd
+@@ -0,0 +1,19 @@
++extends Node3D
++## The carried point supplies a position to the existing rule; trigger steps it.
++var study:Node3D
++var point:XRToolsPickable
++func _ready() -> void:
++	study=get_parent()
++	point=load("res://commons/artifacts/ca_rule_explorer/point_body.gd").new()
++	point.name="PointBody";add_child(point)
++	point.action_pressed.connect(func(_body): study.source_mode=3;study.step_once())
++	park()
++	study.box("PointShelf",Vector3(.4,.05,.35),Vector3(-4.05,.97,-1.6),Color("365159"),true)
++	study.box("PointStem",Vector3(.06,.95,.06),Vector3(-4.05,.475,-1.6),Color("bf9469"),true)
++	study.box("PointCaption",Vector3(.85,.27,.025),Vector3(-4.05,.72,-1.8),Color("153237"))
++	var caption:Label3D=study.label("HandCaption","HOLD POINT NEAR A CELL\nTRIGGER: HAND + STEP\nRELEASE: RECOVERY",28)
++	caption.position=Vector3(-4.05,.72,-1.816);caption.rotation.y=PI;add_child(caption)
++func _physics_process(_delta:float) -> void:
++	if not point.held():park()
++func park() -> void:
++	point.position=Vector3(-4.05,1.08,-1.6)
+--- before/chair_main.gd
++++ algorithms/cellularautomata/CAchairtests/Main.gd
+@@ -41,6 +41,7 @@
+ var camera_target: Vector3 = Vector3(10, 12, 10)
+ 
+ func _ready() -> void:
++	if str(get_meta("config_host_lighting", "")) == "1": _use_host_lighting()
+ 	_xr_active = XRServer.primary_interface != null
+ 	# Embedded as an artifact inside a map (not run standalone): suppress the demo's
+ 	# screen-space UI panel and standalone camera so they don't leak into the host scene.
+@@ -54,6 +55,12 @@
+ 		setup_camera()
+ 	setup_ui()
+ 	reset_simulation()
++
++func _use_host_lighting() -> void:
++	for child in get_children():
++		if child is DirectionalLight3D: child.visible = false
++		elif child is WorldEnvironment: child.environment = null
++		elif child is Camera3D: child.current = false
+ 
+ func setup_camera() -> void:
+ 	camera.position = camera_target + Vector3(0, 20, -30)
+@@ -176,4 +183,4 @@
+ 	step_interval = 1.0 / value
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	if str(config.get("host_lighting", "")) == "1": _use_host_lighting()

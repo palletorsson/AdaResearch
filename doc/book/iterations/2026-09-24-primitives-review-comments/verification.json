@@ -1,0 +1,738 @@
+{
+  "checks": [
+    {
+      "check": "Sequence content matches ten maps in spine order",
+      "passed": true
+    },
+    {
+      "check": "Only sequence content ledger changed",
+      "passed": true
+    },
+    {
+      "check": "Preserved doc/tasks/book_primitives.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/brief.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/seed.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_One/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Lines/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/detours.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/technical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Trace/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/detours.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Line_Grid/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/detours.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/technical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Triangle_Context/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Polythedra/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/technical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Point_Animatedcube/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/technical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Ignorance/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Portals/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/artifacts.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/critical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/eye_shot.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/field_notes.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/intent.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/summary.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/technical.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/walked.md",
+      "passed": true
+    },
+    {
+      "check": "Preserved commons/maps/Primitives_Melencolia/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "Point_One current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_One footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_One code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_One encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Point_One live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Point_Lines current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_Lines footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_Lines code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_Lines encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Point_Lines live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Point_Trace current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_Trace footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_Trace code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_Trace encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Point_Trace live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Point_Line_Grid current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_Line_Grid footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_Line_Grid code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_Line_Grid encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Point_Line_Grid live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Point_Triangle_Context current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_Triangle_Context footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_Triangle_Context code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_Triangle_Context canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Point_Triangle_Context live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra current text hash",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Polythedra live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube current text hash",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Point_Animatedcube live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance current text hash",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Ignorance live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals current text hash",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Portals live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia current text hash",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia footnotes resolve",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia code preserved except attributed screen identifier",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia encounter markers retained",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia canonical figure exists",
+      "passed": true
+    },
+    {
+      "check": "Primitives_Melencolia live review text is current",
+      "passed": true
+    },
+    {
+      "check": "Primitives core changes limited to scoped hashes and review links",
+      "passed": true
+    },
+    {
+      "check": "Portal map changed only Achilles placement and matching note",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Point_Triangle_Context",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Point_Triangle_Context",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Primitives_Polythedra",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Primitives_Polythedra",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Point_Animatedcube",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Point_Animatedcube",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Unmodified native figure Primitives_Melencolia",
+      "passed": true
+    },
+    {
+      "check": "Served canonical figure Primitives_Melencolia",
+      "passed": true
+    },
+    {
+      "check": "20 runtime assertions passed; shutdown status recorded separately",
+      "passed": true
+    }
+  ],
+  "runtime_process_exit": 3221225477,
+  "runtime_caveat": "Assertions completed and report written; Godot crashes during teardown. No claim of a clean process exit, full room walk or headset test."
+}

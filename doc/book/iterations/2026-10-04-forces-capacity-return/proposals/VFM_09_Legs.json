@@ -1,0 +1,43 @@
+{
+  "id": "VFM_09_Legs",
+  "title": "Ask what supports a still body",
+  "storyboard": "A plate rests on four posts; removing support or shifting its mass centre changes what happens after RELEASE. Bring the distinction between geometry, physical properties and a body's received forces. Use the existing FEET and SHIFT controls to state a support hypothesis before the plate moves. Compare adjacent and diagonal pairs at the same centred mass setting: the number of posts alone cannot explain the difference. The supplied outline encloses finite pad corners and describes the initial horizontal arrangement, not every later contact. Then watch the procedural walker and inspect how its body and feet are commanded. Carry a comparison of two accounts of standing, with their limits named. No new hull routine or gait controller is required, and limb count need not become a rule for viable bodies.",
+  "storyboard_short": "Use FEET, SHIFT and RELEASE on the existing plate. Reuse geometry, mass centre and physical response. Predict adjacent versus diagonal support with the same centred mass; check the initial finite-pad outline against release. Supply hull and solver. Compare the commanded walker without treating it as balance validation. Carry an explicit support hypothesis and its limits; add no hull or gait implementation obligation.",
+  "mode": "reflect",
+  "brings": [
+    "point arrangements and the distinction between shape and physical properties",
+    "a declared mass centre",
+    "forces and the conditions under which a body may respond"
+  ],
+  "learns": [
+    "support depends on arrangement and mass projection rather than post count alone",
+    "an initial support outline is not a live account of changing contacts",
+    "commanded walking and contact-supported balance provide different evidence"
+  ],
+  "carries": "A stated support hypothesis, one observed comparison and a boundary on what that comparison establishes.",
+  "supplied": [
+    "support_polygon_lab's finite pads, plate and FEET/SHIFT/RELEASE controls",
+    "initial support hull, mass-centre projection and rigid-body solver",
+    "the existing four-leg walker and its supplied gait and body movement"
+  ],
+  "artifact_refs": [
+    "support_polygon_lab",
+    "four_leg_critter"
+  ],
+  "review_note": "Preserve this hall as comparison and independent judgement. The actual plate is a rigid body; the pads have finite square tops, and the hull uses their corners. The outline is an initial horizontal support estimate, not a changing contact solver. SHIFT changes the custom mass centre while keeping the configured inertia; scope the claim accordingly. The walker advances its body and places feet through authored rules without a hull-based balance test. Do not infer a required anatomy, demand that learners build a controller, or use the walker as physical validation of the plate.",
+  "prior_maps": [
+    "Array",
+    "Vectors_Act4a_KineticForces",
+    "VFM_07_Gravity"
+  ],
+  "independent_check": "Keep the mass centre centred and compare the existing adjacent-pair and diagonal-pair FEET settings. Predict the initial support difference before releasing each plate, then state why the walker cannot confirm the same hypothesis merely by remaining upright.",
+  "source_refs": [
+    "commons/maps/VFM_09_Legs/final.md",
+    "commons/maps/VFM_09_Legs/tutorial.md",
+    "commons/maps/VFM_09_Legs/critical.md",
+    "commons/artifacts/support_polygon_lab/support_polygon_lab.gd",
+    "commons/hazards/octapod_crawler/four_leg_critter.gd",
+    "commons/hazards/octapod_crawler/leg_walker_base.gd"
+  ],
+  "change_reason": "The hall already offers a precise comparison. It can deepen judgement about bodies and models without turning reflection into another geometry or gait-building task."
+}

@@ -1,0 +1,125 @@
+{
+  "actual_endless_museum": false,
+  "area_note": "Summed logical triangle areas include overlap; not union area, entropy or usable floor area.",
+  "cases": [
+    {
+      "filled_loops": 1,
+      "fills_visible": true,
+      "label": "start-a",
+      "logical_triangles": 4,
+      "mesh_instance_id": 140341413808,
+      "outside_centroids": 0,
+      "panel_text": "OUTLINE / TRIANGLE FAN\nPath entries: 1 | Drawing first: --\nLoops: 1 | Triangles: 4\nSelected loop 1 | START 1\nGrid: 0.10 m | Hold: 1.0 s\nSHIFT START keeps this boundary.",
+      "partial_outline": false,
+      "path_entries": 1,
+      "path_first_index": 0,
+      "points": 6,
+      "selected_loop_index": 0,
+      "selected_loop_number": 1,
+      "selected_loop_points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "selected_start_index": 0,
+      "selected_start_number": 1,
+      "shift_start_ready": true,
+      "shift_start_reason": "",
+      "stored_positions": [
+        "(0.0, 1.2, 0.0)",
+        "(1.2, 1.2, 0.0)",
+        "(1.2, 1.2, 0.4)",
+        "(0.4, 1.2, 0.4)",
+        "(0.4, 1.2, 1.2)",
+        "(0.0, 1.2, 1.2)"
+      ],
+      "sum_triangle_area_m2": 0.800000011920929,
+      "triangles": [
+        {
+          "area_m2": 0.240000009536743,
+          "centroid": "(0.8, 0.133333)",
+          "centroid_in_notch": false
+        },
+        {
+          "area_m2": 0.159999996423721,
+          "centroid": "(0.533333, 0.266667)",
+          "centroid_in_notch": false
+        },
+        {
+          "area_m2": 0.159999996423721,
+          "centroid": "(0.266667, 0.533333)",
+          "centroid_in_notch": false
+        },
+        {
+          "area_m2": 0.240000009536743,
+          "centroid": "(0.133333, 0.8)",
+          "centroid_in_notch": false
+        }
+      ]
+    },
+    {
+      "filled_loops": 1,
+      "fills_visible": true,
+      "label": "start-b",
+      "logical_triangles": 4,
+      "mesh_instance_id": 140341413808,
+      "outside_centroids": 2,
+      "panel_text": "OUTLINE / TRIANGLE FAN\nPath entries: 1 | Drawing first: --\nLoops: 1 | Triangles: 4\nSelected loop 1 | START 2\nGrid: 0.10 m | Hold: 1.0 s\nSHIFT START keeps this boundary.",
+      "partial_outline": false,
+      "path_entries": 1,
+      "path_first_index": 0,
+      "points": 6,
+      "selected_loop_index": 0,
+      "selected_loop_number": 1,
+      "selected_loop_points": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "selected_start_index": 1,
+      "selected_start_number": 2,
+      "shift_start_ready": true,
+      "shift_start_reason": "",
+      "stored_positions": [
+        "(0.0, 1.2, 0.0)",
+        "(1.2, 1.2, 0.0)",
+        "(1.2, 1.2, 0.4)",
+        "(0.4, 1.2, 0.4)",
+        "(0.4, 1.2, 1.2)",
+        "(0.0, 1.2, 1.2)"
+      ],
+      "sum_triangle_area_m2": 1.44000007212162,
+      "triangles": [
+        {
+          "area_m2": 0.160000011324883,
+          "centroid": "(0.933333, 0.266667)",
+          "centroid_in_notch": false
+        },
+        {
+          "area_m2": 0.320000052452087,
+          "centroid": "(0.666667, 0.533333)",
+          "centroid_in_notch": true
+        },
+        {
+          "area_m2": 0.239999979734421,
+          "centroid": "(0.533333, 0.8)",
+          "centroid_in_notch": true
+        },
+        {
+          "area_m2": 0.720000028610229,
+          "centroid": "(0.4, 0.4)",
+          "centroid_in_notch": false
+        }
+      ]
+    }
+  ],
+  "headset_verified": false,
+  "renderer": "Windows",
+  "scope": "Isolated production draw_triangle_faces.tscn, discovery panel, supplied timed hand positions and actual XRTools SHIFT START pointer callback. Museum placement and human/headset usability are not tested."
+}

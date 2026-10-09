@@ -1,0 +1,49 @@
+--- before/commons/maps/Color_Grid_Pallet/technical.md
++++ commons/maps/Color_Grid_Pallet/technical.md
+@@ -34,3 +34,11 @@
+ ## Verification
+ 
+ `commons/testing/probe_grid_address_lesson.gd` loads the actual museum, emits the real console button signals, inspects buffer writes, checks returning to an address, rule replacement, palette evaluation, preserved geometry, standing reach and a body-sized approach. Tracked-controller pressing and headset comfort require a separate walkthrough.
++
++## Native sequence and ordinary walk, 23 September 2026
++
++The shared illustration captures the actual floor from one fixed camera after COLOUR, X+, a full address return and RULE. The final frame is taken while the ordinary museum walker stands on the rewritten square. The small swatch and readout are captured separately. No source, geometry or placement changed.
++
++36 focused assertions pass in the isolated production museum. Supplied pressed/released pointer events operate the five actual console buttons. COLOUR changes exactly one MultiMesh instance; selection changes on both axes preserve it. The swatch reads the stored value. RULE restores the original value, and equal coordinate sums agree. PALETTE retains the assignment across every mapped floor address, including addresses outside the manual selection region. Three palette changes restore the starting collection; the probe also restores the initial ink index.
++
++Supplied key input drives the ordinary controller from the console approach to the selected cell and back, passing beside the plinth. The same floor supports the body before and after RULE; all instance transforms remain unchanged. Evidence is in `doc/book/iterations/2026-09-23-grid-colour-kept/`. The checks retain a per-channel colour tolerance of 1/255. Tracked pressing/reach, headset comfort, colour calibration, learner response and performance are not established.
+--- before/commons/maps/Color_Grid_Pallet/critical.md
++++ commons/maps/Color_Grid_Pallet/critical.md
+@@ -9,3 +9,7 @@
+ Neither the address nor its hexadecimal colour exhausts the encounter. The swatch and the floor receive the same stored value under different lighting and viewing conditions. In the desktop compatibility renderer, requested and retrieved channels can also differ slightly through storage precision. That discrepancy should be measured before being given a metaphor.
+ 
+ The lesson retains a current value, not a history of its replacements. An undo stack or save file would be another design decision. The next room's accumulating painting makes a different decision about what a surface keeps.
++
++## Further encounters — proposals retained outside the chapter
++
++An exception that travels, an exception protected from a rewrite, or a change to the assignment rule could each make a different encounter. These possibilities remain development questions, not capabilities of the current console. The current final.md stays with what can already be experienced: the edit persists through a change of attention, an explicit rewrite replaces it, and the rule reaches addresses the visitor cannot select.
+--- before/commons/maps/Color_Grid_Pallet/field_notes.md
++++ commons/maps/Color_Grid_Pallet/field_notes.md
+@@ -20,3 +20,11 @@
+ Focused desktop checks: 30 pass, covering actual button signals, exact one-instance scope, return to an address, rule replacement, palette evaluation, unchanged transforms, standing reach and a body-sized approach. Stored colour differs slightly from the requested floating-point value in the compatibility renderer; colour comparisons allow 1/255 per channel. Report: ada_run/probe_grid_address.json. Capture: ada_run/grid_address_museum.png. Tracked-controller pressing and headset comfort remain untested. Existing unknown-UID startup warning remains.
+ 
+ Before-state: doc/space/grid-pallet-addresses-2026-09-10/before/.
++
++## 2026-09-23 — An address keeps a colour
++
++Preserved the working address lesson, floor, secondary works, controls, geometry and placement. Added a shared four-state native book illustration. Canonical final.md keeps both code excerpts and the edit/return/rewrite progression. Its permissions paragraph now follows an actual square outside the visitor's selection region; future-feature proposals remain in the critical companion. “History stack” becomes the concrete statement that each address keeps only its current colour. The painting handoff remains.
++
++36 focused isolated-museum checks pass through actual pointer callbacks and the ordinary controller. Verified one-instance write, both coordinate returns, readout/swatch agreement, explicit replacement, equal-sum assignment, palette changes, wider rule scope, unaltered instance transforms and selected paths with support before/after the rewrite. An extra parenthesis in the newly written probe was corrected before its successful run; no production repair was needed. Native/composed views inspected. No live restart, live save/bake overwrite, commit or frozen book/audio rebuild. No tracked-controller, headset, colour-calibration, learner or performance claim.
++
++Review: `doc/book/iterations/2026-09-23-grid-colour-kept/index.html`. Next: Color_Paint — a surface that keeps marks of a moving body.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2574,7 +2574,7 @@
+       "map_sha256": "9b5b3e58b5f31d7550cf223f26b911de6f90d4f055b31345c48af231792450e0",
+       "learner_verified": false,
+       "text_path": "commons/maps/Color_Grid_Pallet/final.md",
+-      "text_sha256": "6b2c6f57c3fa2012215ce2c51f940289d5af40e0b9b1c2da426c86040963c89f"
++      "text_sha256": "ed773523af115589e9fd3c402d9be5cf449e7adeefcd3c802613af6dada76347"
+     },
+     "Color_Rainbow": {
+       "primary_tokens": [

@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "name": "complete program builds three rows and both labels",
+      "passed": true
+    },
+    {
+      "name": "carried PointBody remains pickable at its original radius",
+      "passed": true
+    },
+    {
+      "name": "initial pair is 4 and 4.5 Hz",
+      "passed": true
+    },
+    {
+      "name": "shared start reinforces to raw amplitude two",
+      "passed": true
+    },
+    {
+      "name": "one second cancels substantial opposing sources",
+      "passed": false
+    },
+    {
+      "name": "two seconds restores alignment",
+      "passed": true
+    },
+    {
+      "name": "opposition applies across the entire row",
+      "passed": false
+    },
+    {
+      "name": "halfway envelope agrees with cosine identity",
+      "passed": true
+    },
+    {
+      "name": "gain is applied only to plotted sum",
+      "passed": true
+    },
+    {
+      "name": "row labels explicitly identify half sum",
+      "passed": true
+    },
+    {
+      "name": "every line joins the calculated displayed samples",
+      "passed": true
+    },
+    {
+      "name": "moving the point previews without changing running pair",
+      "passed": true
+    },
+    {
+      "name": "actual pickup action applies local height and resets clock",
+      "passed": true
+    },
+    {
+      "name": "smaller gap cancels at two seconds and aligns at four",
+      "passed": false
+    },
+    {
+      "name": "readout names four-second beat",
+      "passed": true
+    },
+    {
+      "name": "reversing frequency order keeps beat period",
+      "passed": false
+    },
+    {
+      "name": "equal frequencies avoid division by zero",
+      "passed": true
+    },
+    {
+      "name": "equal-frequency pair retains shared phase",
+      "passed": false
+    },
+    {
+      "name": "high point clamps frequency preview",
+      "passed": true
+    },
+    {
+      "name": "low point clamps frequency preview",
+      "passed": true
+    },
+    {
+      "name": "process advances one shared clock",
+      "passed": true
+    },
+    {
+      "name": "independent faster-pair script chooses 5 and 5.25 Hz",
+      "passed": true
+    },
+    {
+      "name": "faster sources retain four-second envelope",
+      "passed": true
+    },
+    {
+      "name": "higher carrier changes intermediate source value",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "one second cancels substantial opposing sources",
+    "opposition applies across the entire row",
+    "smaller gap cancels at two seconds and aligns at four",
+    "reversing frequency order keeps beat period",
+    "equal-frequency pair retains shared phase"
+  ],
+  "passed": false,
+  "scope": "Exact printed files; actual pickup action callback, numeric and rendered signal checks. No headset or independent-student claim."
+}

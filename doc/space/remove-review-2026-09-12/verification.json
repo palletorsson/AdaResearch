@@ -1,0 +1,117 @@
+{
+  "hall": "Random_Remove",
+  "run": {
+    "started": "2026-09-12T21:38:35+02:00",
+    "finished": "2026-09-12T21:40:23+02:00",
+    "pid": 36196,
+    "exit": 0,
+    "checks": 87,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_remove_live.gd": "c1d72a20db03a053b4167253d412713f82e2a70f5148621e112e9d897711f0b1",
+      "commons/testing/probe_wcn_remove.gd": "6e506f70f494c7b4fab75f86b3620c1d739e62441ba5d55035f6fd912ac72a82",
+      "commons/maps/Random_Remove/map_data.json": "c09f7563c03dd908a1d833ea6897106990cefdc82338b70b57ee32a4855f9f29",
+      "algorithms/randomness/RemoveRandom.gd": "ce8a1c20cf55ab68e30982dda448f1711785f0049522cb8acce5c7b7a0a609b2",
+      "algorithms/randomness/remove_random_fixture.gd": "4d4e3c0230f8cdc7f1efb692f857e63f508986aa1380382e2863eacc8e7f68c8",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "current_source_matches_run": {
+    "commons/testing/probe_wcn_remove_live.gd": true,
+    "commons/testing/probe_wcn_remove.gd": true,
+    "commons/maps/Random_Remove/map_data.json": false,
+    "algorithms/randomness/RemoveRandom.gd": true,
+    "algorithms/randomness/remove_random_fixture.gd": true,
+    "commons/testing/wcn_desktop_driver.gd": true
+  },
+  "map_change_after_run": "Only map_info name/title/description/objectives/dimensions; all layer, utility, lighting, settings and museum data unchanged.",
+  "unchanged_production_scripts": [
+    "algorithms/randomness/RemoveRandom.gd",
+    "algorithms/randomness/remove_random_fixture.gd"
+  ],
+  "registry_change": "Only this artifact description, qfep_connection and two prose DNA notes. Runtime parameters, scene, axes, measurements and other entries unchanged.",
+  "source_excerpts": 11,
+  "histories": 6,
+  "removal_entries": 128,
+  "equal_sized_mask_offsets": [
+    7,
+    0,
+    4,
+    2,
+    1,
+    1,
+    0,
+    0
+  ],
+  "range_seeds": [
+    29640,
+    37468
+  ],
+  "matched_one_empty_pose": {
+    "at": [
+      8.7,
+      1.6,
+      7.5
+    ],
+    "current_camera": "/root/EndlessMuseum/@Camera3D@2547",
+    "forward": [
+      -0.98,
+      -0.22,
+      0.0
+    ],
+    "is_ours": true
+  },
+  "outside_object_count": 1056,
+  "primary_book_hero": [
+    "remove_random"
+  ],
+  "placements": {
+    "planned": 3,
+    "matched": 3,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 2,
+    "refused": 1,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random remove"
+  },
+  "missing_secondary": "hazards_demo",
+  "plan_rows_agree": true,
+  "wcn_audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 0
+  },
+  "engine_script_errors": false,
+  "shutdown_leak_warning": false,
+  "engine_diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: [em-art] randomness|random remove: david_drape took 127 ms to build — that is a dropped frame in the hall",
+    "WARNING: [em-art] randomness|random remove: couch_lounge took 130 ms to build — that is a dropped frame in the hall",
+    "WARNING: [em-art] randomness|random remove: crackle_peak took 298 ms to build — that is a dropped frame in the hall"
+  ],
+  "headset_verified": false,
+  "files_prepared_for_publication": 55,
+  "visual_limit": "The tray overlaps part of RANGE from the dedicated oblique close camera. Front view keeps the board and both stations visible. Tracked-hand approach pending.",
+  "global_index_warnings": "Existing Tutorial_Disco ragged rows/size mismatch and other halls' stale or unbuilt ledgers retained in logs."
+}

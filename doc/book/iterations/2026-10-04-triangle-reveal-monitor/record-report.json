@@ -1,0 +1,217 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Missing source gives an empty record"
+		},
+		{
+			"passed": true,
+			"test": "An untouched tool does not manufacture a drawing"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Three-corner face: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Four-corner fan: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Nonplanar six-corner fan: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Rotated and nonuniformly scaled source: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Independently transformed source mesh: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Actual source permits shifting the completed fan anchor"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source order and signature reach the snapshot"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: snapshot is closed and valid"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: stored boundary order and logical fan count match"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: boundary positions are copied in source-local coordinates"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: exact six emitted vertices per fan triangle are copied"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: source normals survive frame changes"
+		},
+		{
+			"passed": true,
+			"test": "Shifted source fan: each fan triangle names the actual stored indices"
+		},
+		{
+			"passed": true,
+			"test": "Unchanged source gives a stable polling signature"
+		},
+		{
+			"passed": true,
+			"test": "Repeated reads preserve source geometry, state, handles and TraceData"
+		},
+		{
+			"passed": true,
+			"test": "Returned positions, normals and indices have no writable aliases into the source"
+		},
+		{
+			"passed": true,
+			"test": "Hidden fill remains a recorded mesh without changing its visibility"
+		},
+		{
+			"passed": true,
+			"test": "Current open path takes precedence over an older completed face"
+		},
+		{
+			"passed": true,
+			"test": "Out-of-range source index returns an explicit error"
+		},
+		{
+			"passed": true,
+			"test": "Clearing the real tool clears the snapshot"
+		},
+		{
+			"passed": true,
+			"test": "A 256-corner open record is kept in full"
+		},
+		{
+			"passed": true,
+			"test": "A 257-corner record is rejected rather than silently truncated"
+		},
+		{
+			"passed": true,
+			"test": "A singular source transform is rejected before inversion"
+		},
+		{
+			"passed": true,
+			"test": "Missing completed geometry returns an explicit error"
+		},
+		{
+			"passed": true,
+			"test": "All snapshot fixtures leave the TraceData store unchanged"
+		}
+	],
+	"max_normal_error": 0.000000179433740754575,
+	"max_vertex_error": 0.000000549527669591043,
+	"passed": true,
+	"scope": "Real drawing tool with in-memory point fixtures; exact face snapshots, no authored map changes.",
+	"source": "res://commons/primitives/point/draw_triangle_faces.tscn"
+}

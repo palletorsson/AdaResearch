@@ -1,0 +1,18 @@
+{
+  "artifacts": {
+    "sine_flow_tray": {
+      "lookup_name": "sine_flow_tray",
+      "name": "What Will Leave? — Sine Contact Tray",
+      "scene": "res://commons/artifacts/sine_flow_tray/sine_flow_tray.tscn",
+      "category": "wavefunctions",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "One stationary colliding sine heightfield receives 32 spheres. Change peak-to-trough relief or sphere radius between releases; compare outlet crossings, still-in bodies and other exits at a twelve-second deadline. A side console keeps the surface visible. RESET restores the declared 0.30 m relief and 75 mm radius. The tray complements the visible, noncolliding corridor in Sine Space.",
+      "interactions": ["RELEASE a fresh batch", "RELIEF changes only height range", "SIZE changes sphere radius at fixed mass", "RESET restores declared settings", "RULE reveals the sampled sine and collision construction"],
+      "qfep_connection": "A repeating field supplies different possibilities to different bodies. Presence at a deadline is measured; shelter, entropy and freedom need further questions and tests.",
+      "dev_themes": ["sine", "contact", "landscape", "possible bodies"],
+      "research_plan": "res://doc/research/possible-bodies/landscape-thread.json"
+    }
+  }
+}

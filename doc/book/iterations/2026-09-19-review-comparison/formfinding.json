@@ -1,0 +1,120 @@
+{
+  "status": "six-hall local pass",
+  "summary": "A form can be drawn, calculated, relaxed, balanced in a model, or accepted by a detector. Keep the differences available to the visitor. Restore the work that makes those differences visible.",
+  "items": [
+    {
+      "title": "The six halls stay; their methods become distinct",
+      "description": "All 28 authored placements remain. The washing-line cathedral and end table return through catalog repair. Laundry, the glass vessel and the basin comparison become primary. Descent stays unchanged; the four middle chapters distinguish their actual methods; Forge gains one stop-condition correction.",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md"
+    },
+    {
+      "title": "Descent: keep the chapter, recover the evidence",
+      "description": "The quoted valley costs were already recorded in a 36-check museum run. All ten source fingerprints still match. The smaller diagram below is a separate repair: its geometry stays, while its labels now acknowledge fixed seeded offsets. It asks about a remainder without inventing a running solver.",
+      "images": [
+        "doc/book/iterations/2026-09-19-formfinding-review/diagram/before.png",
+        "doc/book/iterations/2026-09-19-formfinding-review/diagram/after.png"
+      ],
+      "captions": [
+        "Saved original labels · a solver and ongoing trembling were claimed.",
+        "Current labels · fixed differences and the question of what counts as settled."
+      ],
+      "image_note": "Same camera, isolated actual Godot artifact, saved original versus current source. These images do not show a new whole-museum or headset test.",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/diagram/check.json"
+    },
+    {
+      "title": "Catenary: the washing and the cathedral share a curve",
+      "description": "The existing cathedral is admitted by the catalog again. Its outside lines gain their missing supports; a separate plaque identifies the analytic construction. The two parametric surfaces now appear in the pickup collision query. The chapter moves from a cable in the hand to a formula, then asks what a physical version would have to establish.",
+      "images": [
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/capture-before-accepted-FormFinding_Catenary/laundry-standing.png",
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/capture-after-verified-FormFinding_Catenary/laundry-standing.png"
+      ],
+      "captions": [
+        "Saved-source replay · the outer endpoints float.",
+        "Current source · crossbars support the three lines."
+      ],
+      "image_note": "Actual museum assembly, matched camera and frozen shared loader. The restored catalog is held constant in this pair; it compares support repairs, not the earlier absence of the entire exhibit. The plaque faces the entrance on its own stand.",
+      "before": "Four cyan beads at ankle height, and a four-metre cable glowing magenta into blue slung through them with its belly grazing the floor. The beads are the only thing in this room you can actually take hold of. Move one and the whole curve recomputes and re-skins in your hands, every frame.",
+      "after": "Four cyan beads, and a four-metre cable glowing magenta into blue slung through them. Take a bead and move it. The whole curve recomputes and re-skins in your hands, every frame. Hold the ends in mind while you move an interior point: what have you asked the curve to obey?",
+      "map": "FormFinding_Catenary",
+      "text_kind": "final.md · Catenary",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/structure/AUDIT.md"
+    },
+    {
+      "title": "Relaxation: let the visitor change the correction budget",
+      "description": "PASSES, RESET and WIND replace the decorative dial in this hall. The panel reports average and worst relative spring error. Configuration-before-ready now builds one cloth and one readout. The frozen lattice stays where it already worked; the vessel becomes primary.",
+      "images": [
+        "doc/book/iterations/2026-09-19-formfinding-review/relaxation/paired-before/workbench.png",
+        "doc/book/iterations/2026-09-19-formfinding-review/relaxation/final-visible-after/workbench.png"
+      ],
+      "captions": [
+        "Saved original · the dial has no input.",
+        "Current · repeat a condition, change passes, switch the drive."
+      ],
+      "image_note": "Same-camera actual museum comparison, with the original script replayed for the baseline. Final controls and cloth visibility were inspected; headset reach and Quest performance remain untested.",
+      "before": "On the panel below it there is a dial reading nudged, worked, pressed or held. Those are one, four, eight and twelve constraint passes per frame, and the bench runs on four. You cannot turn it. It is a cylinder with a lit notch that rotates itself on a slow sine, and there is no collider, no grab and no input handler anywhere in the file. The setting is real and the control is furniture.",
+      "after": "The panel now offers PASSES, RESET and WIND. PASSES cycles through nudged, worked, pressed and held: one, four, eight and twelve constraint passes per step. Each choice restarts the same grid and its sixty preliminary steps. Switch WIND off to compare the corrections under gravity alone. Try one pass, then four. Does the cloth hold the same outline? RESET lets you return to the beginning without changing the chosen settings.",
+      "map": "FormFinding_Relaxation",
+      "text_kind": "final.md · Relaxation",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/relaxation/AUDIT.md"
+    },
+    {
+      "title": "A small mean can conceal a larger local error",
+      "description": "The original worst-spring reversal did not reproduce. Under the same undriven conditions, four passes improved both measures. The revised question follows the observed discrepancy instead of preserving a false measurement.",
+      "before": "Two things about the number are worth more than the dial. The first is that a pass never finishes the job; it takes half the error off each spring and moves on to the next. The second is stranger, and it is measurable: going from one pass to four makes the whole cloth tauter and makes the single worst spring in it *worse*, because a sweep fixes each spring in turn and every fixed spring pulls its neighbour out of true. Relaxation improves the total and is under no obligation to improve any particular part of it.",
+      "after": "In a matched desktop calculation after 420 total undriven steps—sixty preliminary steps and 360 more—one pass leaves a mean absolute error of about 1.409% and a worst spring error of 34.276%. Four passes reduce both, to about 0.359% and 8.936%. The average has become small while one local relation is still far from its request. Look between those two numbers. What would we overlook if the bench reported only the reassuring one?",
+      "map": "FormFinding_Relaxation",
+      "text_kind": "final.md · Relaxation",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/relaxation/measures/measurement.json"
+    },
+    {
+      "title": "Equilibrium: inspect the model that holds the image still",
+      "description": "The mobile retains its recursive lever arithmetic. Its label now names the modelled disc masses and massless rods and wires. Triangle scaling and recursive bracing remain visible, with their physical tests identified as further work.",
+      "images": [
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/capture-before-verified-FormFinding_Equilibrium/calder-plaque.png",
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/capture-after-verified-FormFinding_Equilibrium/calder-plaque.png"
+      ],
+      "captions": [
+        "Saved original · balance was presented without the model limits.",
+        "Current · the mass model is available to inspect."
+      ],
+      "image_note": "Actual museum assembly with the same camera, authored geometry and shared source snapshot. No dynamic balancing or load experiment is claimed.",
+      "before": "It is genuinely balanced, not balanced-looking. Each leaf's mass is computed from the real thing, its area times three millimetres of sheet times the density of aluminium, and then every rod is built from the bottom up: weigh the two children, place the pivot where the moments cancel, report the total upward. The heavier disc always rides the shorter arm because the arithmetic gives it no choice.",
+      "after": "For each disc, the source multiplies its area by three millimetres of sheet and the density assigned to aluminium. Then it builds every rod from the bottom up: add the two children's masses, place the pivot where their moments cancel, report the total upward. The rods and wires have no mass in this calculation. That omission lets the visible masses and distances satisfy a clean lever model; it does not establish how the sculpture would behave if we built it from the materials it resembles.",
+      "map": "FormFinding_Equilibrium",
+      "text_kind": "final.md · Equilibrium",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/structure/AUDIT.md"
+    },
+    {
+      "title": "Annealing: compare before interpreting",
+      "description": "The source distinguishes random proposals, uphill acceptance, adaptive cooling and a separate forced hop. The basin comparison starts with DEEP and SHALLOW; INTERPRET brings in the Q proposition. Its bodies have different drives, so their difference is an authored argument rather than a measured law of life.",
+      "images": [
+        "doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-standing.png",
+        "doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-interpretation.png"
+      ],
+      "captions": [
+        "Current encounter · compare the two responses.",
+        "Same view · interpretation requested through the control."
+      ],
+      "image_note": "Two states of the updated actual museum, not before/after software versions. Camera world height 1.7 m; the museum route repair installs this tank at half its authored size. The narrow well is best inspected from its outside edge. Headset reach remains untested.",
+      "before": "The claim on the floor is that it is the better minimum, and the room calls the difference Q. The deepest well is a dead-perfect crystal, finished. A form that can still be moved has to be resting somewhere shallow enough to be moved out of, which means the liveliest place in an energy landscape is never the bottom of it.",
+      "after": "Press INTERPRET after the comparison. The work proposes that the more responsive form is the better minimum, and gives that preference the name Q. Its dead-perfect crystal and its still-changing body are roles in an argument: low enough to hold, high enough to be moved. The installation has authored those roles; it has not measured a universal boundary between life and rest.",
+      "map": "FormFinding_Annealing",
+      "text_kind": "final.md · Annealing",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/search/AUDIT.md"
+    },
+    {
+      "title": "Forge: let the second history happen",
+      "description": "The default optimiser stalled at the frame edge instead of beginning another history. It now distinguishes BOUNDARY from SMALL SLOPE and restarts. The puzzle still allows a low, useful arrangement to remain a refusal of its success criterion.",
+      "before": "Here a numerical rule estimates the local slope in two directions and takes a small step downhill. It repeats that operation, retaining a short record of previous positions. The surface supplies the quantity being reduced; the stopping condition decides when further change is small enough to begin another demonstration. A small local slope is not proof that the point has found the best possible place on every landscape.",
+      "after": "Here a numerical rule estimates the local slope in two directions and takes a small step downhill. It repeats that operation, retaining a short record of previous positions. The surface supplies the quantity being reduced. After more than thirty steps, the demonstration starts again when the sampled slope is below 0.002, or when the frame edge permits a step smaller than 0.002 times the learning rate. That second ending is marked BOUNDARY: a limit on the permitted move, not a claim that the surface is flat. A small local slope is not proof that the point has found the best possible place on every landscape.",
+      "map": "FormFinding_Forge",
+      "text_kind": "final.md · Forge",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/search/AUDIT.md"
+    },
+    {
+      "title": "What remains to be tested",
+      "description": "The evidence covers the recorded controls, source behavior and selected museum views. A full headset visit and learner reading remain open. An isolated Annealing/Q probe completes its behavior checks but crashes during native teardown; that failure remains visible in the report. Next: Wave Functions.",
+      "report": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md"
+    }
+  ]
+}

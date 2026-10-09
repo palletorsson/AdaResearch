@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "colour hall embedded exhibits present",
+      "passed": true
+    },
+    {
+      "name": "museum exhibit build finished",
+      "passed": true
+    },
+    {
+      "name": "all fifteen earlier stacks remain",
+      "passed": true
+    },
+    {
+      "name": "all eight DNA studies remain",
+      "passed": true
+    },
+    {
+      "name": "striped column still placed",
+      "passed": true
+    },
+    {
+      "name": "plate names the scale change",
+      "passed": true
+    },
+    {
+      "name": "stripe construction source retained",
+      "passed": true
+    },
+    {
+      "name": "column remains 6.2 metres",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: colour-hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: among-the-columns",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rainbow-column",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "capture_scope": "Standing viewpoints in the loaded production museum, original materials and surrounding hall retained. No grid editor, isolated object stage or headset pose.",
+    "striped_position_in_grid": [
+      16.0,
+      0.5,
+      44.0
+    ]
+  },
+  "passed": true,
+  "room": "Color_Context_Placed",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

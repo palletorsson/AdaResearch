@@ -1,0 +1,34 @@
+--- before/doc/book/captures/noise/noise-book.manifest.json
++++ doc/book/captures/noise/noise-book.manifest.json
+@@ -1,11 +1,11 @@
+ {
+-  "captured_at": "2026-09-25T10:14:48.459415+00:00",
+-  "base_commit": "3d3515f2d13f7a5398bc9a18afb25726763c8706",
++  "captured_at": "2026-09-25T11:30:33.587070+00:00",
++  "base_commit": "367cc1e20648bf94c0ad4241fa36f954581887d5",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+   "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+   "sequence": "noise",
+-  "sequence_sha256": "ae774f9fdcbd5d9930be8ca451c6262fd70fbed5f7556c33b267b82e19b21877",
++  "sequence_sha256": "956b56f8a77996ab8e1f64d6bdb56c9e534aa0ffe2aa7bf6c569ccbe3f2d4171",
+   "maps": [
+     {
+       "map": "Random_Noise_Types",
+@@ -45,13 +45,13 @@
+     {
+       "map": "Noise_Perlin_Simplex",
+       "path": "commons/maps/Noise_Perlin_Simplex/final.md",
+-      "sha256": "81cc4b5833a214b824027b2b98739e6d37d6df3116e01ea3bbf87201af415310"
++      "sha256": "7ce7a016fd13b1125829e36ffe3482a879fd8ce80b5be6ebd642cd320bbccccd"
+     },
+     {
+       "map": "Lab_Path",
+       "path": "commons/maps/Lab_Path/final.md",
+-      "sha256": "f566363c70e8f4bdadb93630784b462da8751cdaa7cdd8127d3b9187a2b8ee6e"
++      "sha256": "29ff7776d6c0d5e96ac673f8503a774e7122d17bacbbce2faaa1fd065d1416e3"
+     }
+   ],
+-  "output_sha256": "45fddff7a453d8c637e09d117fe950a0faeec143ed1deda93a0c494e515e7169"
++  "output_sha256": "1a62c9b7ae7b38faaaa1ece315778f17f0abd3732af299cc1f4e39d4a6c8915c"
+ }

@@ -1,0 +1,25 @@
+# Point_Trace
+
+Authored dimensions: {"depth": 12.0, "max_height": 5.0, "width": 20.0}
+
+![Source plan](Point_Trace.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/Point_Trace/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Point_Trace/map_data.json)
+
+Text: [commons/maps/Point_Trace/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Point_Trace/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 4,1 | `automatic_writing_desk` | secondary | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/automatic_writing_desk/automatic_writing_desk.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/automatic_writing_desk/automatic_writing_desk.tscn) |
+| A2 | 6,3 | `whiteboard:270:0#board_width:1.6#offset:0.00,0.60,0.00#pens:1` | primary | [commons/artifacts/registry/lab.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/lab.json) → [commons/artifacts/whiteboard/whiteboard.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/whiteboard/whiteboard.tscn) |
+| A3 | 1,5 | `draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00` | {'role': 'primary', 'group': 'recording-contract'} | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/point/draw_dot.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/draw_dot.tscn) |
+| A4 | 2,5 | `draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00` | {'role': 'primary', 'group': 'recording-contract'} | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/point/draw_dot.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/draw_dot.tscn) |
+| A5 | 3,5 | `draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00` | {'role': 'primary', 'group': 'recording-contract'} | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/point/draw_dot.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/draw_dot.tscn) |
+| A6 | 4,5 | `draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00` | {'role': 'primary', 'group': 'recording-contract'} | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/point/draw_dot.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/draw_dot.tscn) |
+| A7 | 5,5 | `draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00` | primary | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/point/draw_stick.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/draw_stick.tscn) |
+| A8 | 2,7 | `hand_telemetry_diptych:180:1` | secondary | [commons/artifacts/registry/primitives.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/primitives.json) → [commons/primitives/hand_telemetry_diptych/hand_telemetry_diptych.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/hand_telemetry_diptych/hand_telemetry_diptych.tscn) |
+| A9 | 6,7 | `science_screen:180:3:0.5#offset:0.00,-2.95,0.00` | secondary | [commons/artifacts/registry/shaders.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/shaders.json) → [commons/artifacts/science_screen/science_screen.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/science_screen/science_screen.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

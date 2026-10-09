@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "biome_primitives": {
+      "lookup_name": "biome_primitives",
+      "name": "One world: from a point to a passage",
+      "scene": "res://commons/artifacts/biome_primitives/biome_primitives.tscn",
+      "category": "biome",
+      "artifact_type": "installation",
+      "complexity": "beginner",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "description": "Full-size 12 × 12 metre walkable ground, from point/line/trace/grid to triangulated panels and five equal solids with unequal passages. Authored hall stage, walking-driven trace, no in-world interface. Prototype, not installed in the spine. Rotation revisits the thin faces as an automatic bank of hinged panels, holding their angle while the tracked visitor occupies a sweep.",
+      "parameters": {
+        "seed": 7,
+        "stage": "Point_One"
+      },
+      "interactions": [
+        "Walk across the ground: your projected position moves.",
+        "In the line stage, compare your walk with the straight relation to its reference.",
+        "In trace and grid stages, your walking leaves sampled marks; the grid highlights the occupied cell.",
+        "Walk around the triangulated panels; compare face-on and edge-on views.",
+        "Try the gaps between equal volumes. The standalone 0.5 metre capsule cannot pass the 0.35 metre gap.",
+        "Watch the hinged faces turn, then enter a sweep to hold their angle. The left-edge pivots stay fixed."
+      ],
+      "qfep_connection": "An address and a sampled record preserve selected differences; withdrawal reveals which capabilities depend on a rule. This is an early encounter, not a QFEP implementation.",
+      "tags": [
+        "biome",
+        "point",
+        "line",
+        "trace",
+        "grid",
+        "prototype",
+        "triangles",
+        "solids",
+        "intervals",
+        "Judd",
+        "body-clearance",
+        "hinge",
+        "rotation"
+      ],
+      "spatial_needs": {
+        "footprint_cells": 12,
+        "height_m": 3,
+        "clearance_cells": 1,
+        "approach": "walk in"
+      }
+    }
+  }
+}

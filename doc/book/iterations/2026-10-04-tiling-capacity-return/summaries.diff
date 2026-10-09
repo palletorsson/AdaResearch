@@ -1,0 +1,120 @@
+--- Pattern_Disco/storyboard/before
++++ Pattern_Disco/storyboard/after
+@@ -1 +1 @@
+-The familiar disco floor returns in navy and pink. With timed array reading and colour lists already available, the student separates their earlier checker function from the palette used to display its zero and one. A supplied floor receiver draws the returned colours; the sequencer keeps its separate clock. They hold a phase, replace the palette, then hold the palette and advance the phase, predicting which relationships should remain. This short return produces a pattern function whose numeric output can acquire another appearance without changing its timing, addresses or supporting floor.
++The familiar floor returns after Colour with two replaceable colours. Bring the earlier address rule and palette lookup; use the existing value_at result rather than making another floor or clock. With the floor held and sequencer stopped, change the pair that displays zero and one, then keep the pair while advancing one phase. Predict what stays related in each comparison. The floor receiver, controls and independent score remain supplied. The student carries the separation between a computed value and its displayed colour. The optional triangle comparison uses a different shader drawing, not one whole-cell zero or one; it can retain the palette question without becoming the opening shader lesson.
+--- Pattern_Disco/storyboard_short/before
++++ Pattern_Disco/storyboard_short/after
+@@ -1 +1 @@
+-Use the navy/pink disco return. Reuse timed reading and palettes. Separate numeric checker output from two-colour rendering; hold phase while changing palette, then reverse. Supply floor receiver and independently clocked sequencer. Carry a pattern function whose appearance can change without changing timing, addresses or support. Keep triangle mode's separate drawing explicit.
++Reuse existing value_at and Colour palette lookup. Hold floor/stop score; change colour pair, then phase alone. Predict unchanged relationships. Supply floor/controls/separate score clock. Carry value versus appearance. Triangle drawing optional and distinct from whole-cell values. No new floor/clock; reduced palette-edit entry still to be chosen.
+--- Pattern_Disco/review_note/before
++++ Pattern_Disco/review_note/after
+@@ -1 +1 @@
+-Keep the distinction between numeric pattern values and two-colour rendering explicit, including the triangle mode's separate drawing.
++Revisit the current two-colour lookup instead of requiring a new floor or timer. The production console chooses four prepared pairs; a learner-authored pair needs a named source-edit entry. Super Triangle is separately drawn by a shader.
+--- Pattern_Foundry/storyboard/before
++++ Pattern_Foundry/storyboard/after
+@@ -1 +1 @@
+-At the small tile editor, an off-centre pair of marks appears throughout the preview; the loom carries another shared recipe onto flat and curved sheets. The student brings writable colour arrays and creates a four-by-four source, then writes a wrapping lookup that repeats it across a supplied preview. They keep a copy of the source before an edit and compare that snapshot with the live result. Receiver meshes, controls and image upload are supplied. The useful construction is a small editable motif with an explicit distinction between shared source and retained version.
++Begin with one off-centre pair in the small four-by-four tile and find its repeated appearances. Bring addressed writes and palette selection; let a source entry hold a palette index and let a wrapping lookup select that entry before its colour is assigned. The student predicts another copy from its address, then changes one source cell. Input controls and the image preview are supplied. Carry a small motif and its reader. On a return visit, copy the nested source explicitly and compare it with a live reference. The loom and architectural receivers remain further encounters: the loom has its own five-by-five card, HOLD retains a receiver image, and each SAVE acts on a stated source. These are not one shared learner record.
+--- Pattern_Foundry/storyboard_short/before
++++ Pattern_Foundry/storyboard_short/after
+@@ -1 +1 @@
+-Use the tile editor and loom's flat/curved receivers. Reuse writable colour arrays. Teach wrapping lookup from a four-by-four source and a simple deep copy before editing. Compare snapshot with live changes. Supply previews, meshes, controls and image upload. Carry an editable motif distinguishing shared source from retained version; production HOLD stores an image and SAVE has another scope.
++Use one 4×4 tile. Reuse addressed writes/palette lookup. Teach source[row][column] palette indices, wrap address then choose colour. Predict a repeated pair after one edit. Supply input/image preview. Carry motif + reader. Optional return: independent nested copy versus live reference. Loom has separate 5×5 source; HOLD image differs from SAVE. Later teaching stations use fixed seeds.
+--- Pattern_Foundry/review_note/before
++++ Pattern_Foundry/review_note/after
+@@ -1 +1 @@
+-Choose a simple deep copy of the small source; the production hall's held receiver stores an image and its SAVE has a different scope.
++One core source-and-reader study first; copy/history on a return visit. Use explicit row/column storage in the reduced example and show how it connects to the selected station. The small tile, five-by-five loom and fabric studio are distinct sources. Do not present a copied source array as the implementation of a held texture.
+--- Tutorial_Pattern/storyboard/before
++++ Tutorial_Pattern/storyboard/after
+@@ -1 +1 @@
+-The red bend changes facing on the PM panel while its sixteen source cells remain unchanged; FLIP X instead moves the source itself. Bringing the motif and repeating lookup, the student adds alternate-column reflection to their sampler, then writes a separate function that returns reversed source rows. Fixed P1 and PM displays and the editor input are supplied. They use an asymmetric mark to reveal the difference and a symmetric mark to hide it. The result is a pair of operations they can choose deliberately: change how data is read, or change the data kept.
++Follow the asymmetric bend through PM, then watch the source cells during FLIP X. Bring the motif and wrapping reader. First change only the read address: on alternate tile columns, reverse the source column while keeping the row. Then make a separate mirrored source by reversing entries inside each row; do not reverse the order of the rows. Displays, editor input and shader rendering are supplied. The student predicts where the coloured neighbour will appear and checks that only the second operation changes the stored source. A symmetric mark can conceal either reversal; altering one cell reveals it again. Carry two named operations, source editing and transformed reading, before considering any wider symmetry classification.
+--- Tutorial_Pattern/storyboard_short/before
++++ Tutorial_Pattern/storyboard_short/after
+@@ -1 +1 @@
+-Use PM's reflected bend versus FLIP X changing its source. Reuse motif and repeating lookup. Teach alternate-column reflected sampling in GDScript, then a separate function reversing stored source rows. Test asymmetric and symmetric marks. Supply P1/PM displays, editor input and shader renderer. Carry a deliberate choice between transformed reading and changed data. Defer shader authorship to the studio.
++Use PM versus FLIP X. Reuse motif/wrapping. Teach alternate-column reflected read without source mutation; separately reverse entries within each source row, not row order. Predict asymmetric neighbour; inspect unchanged versus changed source. Supply editor/displays/shader. Carry read transform versus data transform. Symmetric motif may hide the operation; shader authorship waits.
+--- Tutorial_Pattern/review_note/before
++++ Tutorial_Pattern/review_note/after
+@@ -1 +1 @@
+-Teach the address operation in GDScript first; the production shader can remain a supplied renderer until the closing studio.
++Keep the first reduced address operation in GDScript. “Reverse source rows” must mean reversing entries within every row, not swapping top and bottom rows. P1/PM displays are supplied; matching appearance alone cannot tell whether the source was mutated.
+--- Array_Patterns/storyboard/before
++++ Array_Patterns/storyboard/after
+@@ -1 +1 @@
+-Inside the patterned tunnel, the student follows a marked surface cell back to the fixed four-by-four source. Reusing their sampler and named frames, they map a position on a supplied floor or wall into row and column, with an explicit cell size in metres. Changing that size alters the motif's physical span without editing the source. The tunnel, collision and selectable-face display are supplied. Inspecting a corner exposes where two faces restart their counts. The reusable outcome is a surface-address conversion whose orientation, origin and units are stated.
++Enter the tunnel with its stated fixed four-by-four source; earlier edits have not travelled here. Bring wrapped lookup and named frames. Follow one marked floor address to its source, then derive the address from a position using a declared origin, surface axes and cell width in metres. On the right wall, columns run along the passage and rows descend; they are not the floor’s directions. The tunnel, collision, shader and face selector remain supplied. Predict that changing a cell from forty to sixty centimetres changes a four-cell motif from 1.6 to 2.4 metres, without enlarging the passage. Inspect the corner where counts restart. Carry the conversion and its units; importing a learner motif remains optional future work.
+--- Array_Patterns/storyboard_short/before
++++ Array_Patterns/storyboard_short/after
+@@ -1 +1 @@
+-Use the tunnel's marked cell and fixed four-by-four source. Reuse sampler and named frames. Teach floor/wall position-to-address conversion with explicit metre cell size; vary size and inspect corner count restarts. Supply tunnel, collision and face selector. Carry origin, orientation and units. Open: supply a real import or use the fixed source; preceding edits do not currently transfer.
++Use fixed-source tunnel; no preceding-edit transfer. Reuse wrapped read/reference frames. Teach position→surface row/column with named origin/axes and metre cell width. Predict .4→.6 m cells means 1.6→2.4 m motif. Wall directions differ; corners restart. Supply tunnel/collision/shader/selector. Carry explicit surface conversion. Distinguish cell width from whole-repeat width; optional import remains unbuilt.
+--- Array_Patterns/review_note/before
++++ Array_Patterns/review_note/after
+@@ -1 +1 @@
+-The preceding room's edits do not currently travel here. Supply a real import or explicitly use the stated fixed comparison source.
++The tunnel intentionally uses a fixed comparison source. Teach it as such rather than requiring an import to justify the hall. Other stations quote whole-repeat width; this control quotes one source cell. Check the selected face’s actual origin and axes before expanding code.
+--- Symmetry_Seventeen/storyboard/before
++++ Symmetry_Seventeen/storyboard/after
+@@ -1 +1 @@
+-The live and held panels compare translation, reflection and glide reflection using the same asymmetric mark. The student brings their reflected lookup and adds a half-source-height row shift to make a glide, wrapping the result back into the source. The comparison panels, hold control and wallpaper cage are supplied. They then remove the distinguishing mark and test whether a changed rule is still visible. The reusable lesson is to design a source that reveals an operation and verify its repeating unit; the room's wider seventeen-group classification remains a question to investigate, not a theorem proved by buttons.
++Use the live and held panels to follow the same asymmetric mark through P1, PM and PG. Bring the reflected reader; on reflected alternate columns, add half the four-row source height and wrap to produce the installed glide comparison. The panels, source editor, image hold and wallpaper cage remain supplied. Predict two neighbouring source blocks before changing a mark. A generic reflected or glided arrangement needs two source blocks across its horizontal translation period, while a specially symmetric source can hide the operation or add further symmetries. Carry a motif that reveals a rule and a tested repeating unit. The seventeen-group classification and makers’ histories remain questions beyond what three buttons certify.
+--- Symmetry_Seventeen/storyboard_short/before
++++ Symmetry_Seventeen/storyboard_short/after
+@@ -1 +1 @@
+-Use live/held translation, reflection and glide panels. Reuse reflected lookup; add a half-source-height row shift and wrap. Supply panels, hold control and wallpaper cage. Remove an asymmetric distinguishing mark and test whether the rule remains visible. Carry a source that reveals operations and a verified repeating unit. Keep seventeen-group classification open; three comparisons do not certify it.
++Use P1/PM/PG live-held comparison. Reuse reflected reader; on alternate reflected blocks shift source row by two and wrap four. Predict adjacent blocks and generic two-block X period. Supply editor/panels/image hold/cage. Alter asymmetric mark to hide/reveal operation. Carry diagnostic motif + tested period. Keep classification/cultural history distinct; no proof of seventeen renderers.
+--- Symmetry_Seventeen/review_note/before
++++ Symmetry_Seventeen/review_note/after
+@@ -1 +1 @@
+-Do not infer mathematical classification from the selected button or claim the three comparisons certify all wallpaper renderers.
++For the current even-height four-row source the glide shifts by two rows; do not silently generalise that discrete recipe to odd heights. A source block is not necessarily the whole field’s translation unit. The selected renderer name is not a proof of the resulting pattern’s complete symmetry group.
+--- Ribbon_Patterns_01/storyboard/before
++++ Ribbon_Patterns_01/storyboard/after
+@@ -1 +1 @@
+-The coloured square appears in four layers, and SLICE hides three without removing their stored values. Bringing the three-index volume and two-index motif, the student writes a sampler that repeats the source through height, then shifts the source column by the layer index. The volume display and slice selector are supplied. Following one selected address back to the source reveals that a diagonal colour relation can appear while every cube stays put. The learner carries a volume-filling rule and a display filter that leaves the underlying record intact.
++The marked source and selected volume cube let the student follow one lookup through height. Bring the earlier volume convention, values[y][z][x], and explicitly name the source plane SOURCE[z][x]. Repeat the source through four layers, then let the layer index shift its source column: SOURCE[z][(x+y)%4]. Predict a selected address before using its marker. Cube creation, selection and slicing are supplied. Turning SLICE on hides forty-eight of the sixty-four stored values; the comparison changes visibility without deleting entries. Zero now selects a pale colour, not vacancy. Carry the layer-dependent reader and these declared meanings. The familiar starting motif returns as installed data, not a claim that a previous edit was imported.
+--- Ribbon_Patterns_01/storyboard_short/before
++++ Ribbon_Patterns_01/storyboard_short/after
+@@ -1 +1 @@
+-Use four colour layers and SLICE. Reuse three-index volume and two-index motif. Teach repeated source sampling through height, shifting source column by layer. Follow an address back to source while cubes stay fixed. Supply volume display, slice/address selectors. Carry a volume-filling rule and a visibility filter preserving stored values. Zero means a pale cube here, not vacancy.
++Reuse volume[y][z][x]; source plane is SOURCE[z][x]. Repeat then shift lookup SOURCE[z][(x+y)%4]. Predict unequal indices before marker check. Supply cubes/selection/slicing. SLICE:16 visible,64 stored; zero=pale colour, not absence. Carry layer reader and value meaning. Fixed familiar motif, no previous-edit import. Missing full companion remains to write.
+--- Ribbon_Patterns_01/review_note/before
++++ Ribbon_Patterns_01/review_note/after
+@@ -1 +1 @@
+-Zero denotes a pale cube in this encounter; do not silently reuse the earlier occupancy meaning.
++Preserve the YZX storage convention from the flight volume while explicitly changing values from occupancy to palette indices. The source uses ZX. Supplied rendering and selectors are not new learning prerequisites. tutorial.md is absent; this remains a plan.
+--- Ribbon_Patterns_02/storyboard/before
++++ Ribbon_Patterns_02/storyboard/after
+@@ -1 +1 @@
+-Two equal grey targets meet different surrounds; nearby, the same motif covers a plane and a curve. The student brings palette values and surface mapping, then makes a controlled comparison by holding the source and spacing fixed while changing one receiver or surround. The contrast controls, curved mesh and directional shading model are supplied. They record which equality the code guarantees and what their own viewing comparison suggests, without adding syntax or treating perception as a required answer. The reusable outcome is a method for distinguishing stored colour, mapped surface distance and viewed appearance.
++Keep the grey targets numerically equal while their surrounds change; there is no required perceptual answer. Bring colour values and surface addresses, then compare the same motif on a flat sheet and a curve of equal surface width. Hold the source and repeat size fixed while changing one surround, carrier or supplied shading condition. Record the equality the code guarantees separately from what appears equal from the current viewpoint. Arc length need not equal projected width. The dot-product lighting model and controls stay supplied, with the operation taught later in Forces. This hall carries a method of comparison into the studio, not a new shader assignment. Its artifact name does not establish a spectral metamerism experiment.
+--- Ribbon_Patterns_02/storyboard_short/before
++++ Ribbon_Patterns_02/storyboard_short/after
+@@ -1 +1 @@
+-Use equal grey targets in differing surrounds and one motif on flat/curved receivers. Reuse palettes and mapping. Hold source/spacing fixed; change receiver or surround and record guaranteed equality separately from viewed appearance. Supply controls, meshes and directional shading, including dot product. Carry a controlled comparison; require no perceptual answer or new syntax. Defer dot-product teaching; do not claim spectral metamerism.
++Keep reflective comparison. Equal target values, changed surrounds; same source and surface spacing, flat/curved carriers. Separate numerical equality, arc length and projected appearance. Supply controls and dot-product shading; teach operation later. No required perceptual result or new code. Carry controlled comparison to studio; no spectral-metamerism claim.
+--- Ribbon_Patterns_02/review_note/before
++++ Ribbon_Patterns_02/review_note/after
+@@ -1 +1 @@
+-The dot-product shading expression is supplied here; Forces teaches the operation explicitly later. The artifact name does not establish a spectral metamerism experiment.
++Retain the reflective mode. Equal physical repeat spacing here differs from equal UV repeat counts on differently sized studio receivers. No new code or dot-product prerequisite is added. Equal arc length is not equal projected width; the shader’s direction control is not a moved museum sun. tutorial.md is absent, but a short comparison companion is enough.
+--- Ribbon_Patterns_03/storyboard/before
++++ Ribbon_Patterns_03/storyboard/after
+@@ -1 +1 @@
+-The studio's source reaches both a wall and a skirt, and a saved recipe can be worn at the mirror. Reusing their motif and surface addresses, the student writes a tiny surface shader that takes mesh UV coordinates, multiplies them to repeat, adds an offset and samples the supplied texture into base colour. Meshes, image upload, garment selection and saving are supplied. They compare live edits with the saved version on their skirt and test the existing cut-out separately. The outcome is a portable appearance recipe; invisible fragments do not automatically open a physical passage.
++Begin with the existing studio wall and preview skirt sharing a motif. Bring wrapping lookup and surface addresses into a small first shader: multiply mesh UV by repeat counts, add an offset, then sample the supplied texture into ALBEDO. The declared host turns four-by-four palette indices into a nearest-filtered, repeating texture and assigns materials; garment meshes and wardrobe remain supplied. Write and explain the reduced fragment calculation before comparing repeat and offset separately. UV repeats are counts per mesh, not metre spacing. Use the existing SAVE and WEAR SAVED flow to compare live edits with a stored recipe. That file saves bounded cells and settings, not arbitrary shader code. Carry this small sampling vocabulary to Shaders; cut-out, finish and deformation remain optional encounters.
+--- Ribbon_Patterns_03/storyboard_short/before
++++ Ribbon_Patterns_03/storyboard_short/after
+@@ -1 +1 @@
+-Use the studio wall, skirt and saved mirror recipe. Reuse motif and surface addresses. Teach a tiny shader: mesh UV, repeat multiplier, offset and texture-to-base-colour sampling. Compare live edits with saved application; test cut-out separately from physical passage. Supply meshes, upload, wardrobe and saving. Carry portable appearance. Open: smallest explained host; defer finish/deformation depth to Shaders.
++Use existing studio wall/skirt host. Teach tiny fragment: UV×repeat+offset → repeating nearest texture → ALBEDO. Supply palette-index→texture conversion, material assignment, meshes/wardrobe. Predict repeat versus offset; UV counts are not metres. SAVE stores bounded cells/settings; WEAR explicitly applies snapshot to Skirt. No shader-code export or general garment transfer. Cut-out/finish/deformation optional; full companion absent.
+--- Ribbon_Patterns_03/review_note/before
++++ Ribbon_Patterns_03/review_note/after
+@@ -1 +1 @@
+-Select the smallest explained shader host. Finish and vertex-deformation controls can remain encounters; the later Shaders sequence develops these systems.
++Use existing Recipe.material and studio.refresh as the explained host. Current SAVE accepts repeats 4/8 and offset 0/.125 plus supported cells/settings; it excludes palette, shader code, meshes and LOOK. The current preview silhouette is chosen separately on wear. Select the reduced fragment excerpt and exact learner edit location before the full lesson; no new host is needed. All three Ribbon tutorial.md files are absent. Do not require finish or vertex deformation before the later Shaders sequence.

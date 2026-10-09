@@ -1,0 +1,167 @@
+{
+  "changes": [
+    {
+      "path": "commons/maps/FormFinding_Annealing/map_data.json",
+      "before_sha256": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+      "after_sha256": "dc537606fed8ef042ca5e77257f9007c385c3e169dc79e71699dfa275ce0dab2",
+      "diff": "diffs\\map_data.map.diff"
+    },
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "before_sha256": "37f09f98df1a966116014a008fdf7a809441352b8b5a26438f451eeaed2fa714",
+      "after_sha256": "535cf0af91035be42b8ce1451867ec06867dafe768961df9daa733a4915c8b73",
+      "diff": "diffs\\max_q_basin_room.diff"
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "before_sha256": "6eb3466bd05a03e677086b8570c1aaed4644ac88f2de48a3ca1d38fc16039ad1",
+      "after_sha256": "619203684824357e1fb9f8b72cd3c1ebbd3c261d476429427a0c951e8173b6d0",
+      "diff": "diffs\\gradient_descent_optimizer.diff"
+    },
+    {
+      "path": "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+      "before_sha256": "7865a11b8069a602082b1a8676c48bb290e48cced3e3b2b9b881bc8ce7f9ef26",
+      "after_sha256": "9a7e040029647cd787047ae880b99cccff9aedf1c5eabdce7a5cf73d46fb8899",
+      "diff": "diffs\\simulated_annealing_visualization.diff"
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "before_sha256": "8f31fcc6fcf5ce34418bff632cd2458093cacc08e527beea9d5fb515b48da733",
+      "after_sha256": "2b9adc308b3e03fd2acfa308621a8bb8a6d9fb501f4ec1410900a49a3806a0a2",
+      "diff": "diffs\\impossible_end_table.diff"
+    }
+  ],
+  "unchanged_functions": [
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "function": "_well_mesh",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "function": "_alive_floor_h",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "function": "_constrain_alive",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "function": "_refresh_live",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+      "function": "_process",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "function": "_energy",
+      "unchanged": false,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "function": "_grad",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "function": "_surface_mesh",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "function": "_ball_world",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+      "function": "_refresh_trail",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "function": "_build_base",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "function": "_build_brackets",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "function": "_build_cables",
+      "unchanged": false,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "function": "_build_top",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "commons/artifacts/impossible_end_table/impossible_end_table.gd",
+      "function": "_bar",
+      "unchanged": true,
+      "executable_lines_unchanged": true
+    },
+    {
+      "path": "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+      "only_change": "TEMP label to START T",
+      "unchanged_except_label": true
+    }
+  ],
+  "map_leaf_diffs": [
+    {
+      "path": "/layers/interactables/2/2",
+      "before": "max_q_basin_room:270",
+      "after": ""
+    },
+    {
+      "path": "/layers/interactables/2/3",
+      "before": "",
+      "after": "energy_landscape_bench:90"
+    },
+    {
+      "path": "/layers/interactables/2/6",
+      "before": "energy_landscape_bench:90",
+      "after": ""
+    },
+    {
+      "path": "/layers/interactables/3/6",
+      "before": "",
+      "after": "max_q_basin_room:0#reveal_on_request:true#floor_size:4.9"
+    }
+  ],
+  "watched_sources_after": {
+    "commons/maps/FormFinding_Annealing/map_data.json": "dc537606fed8ef042ca5e77257f9007c385c3e169dc79e71699dfa275ce0dab2",
+    "commons/maps/FormFinding_Forge/map_data.json": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+    "commons/artifacts/max_q_basin_room/max_q_basin_room.gd": "535cf0af91035be42b8ce1451867ec06867dafe768961df9daa733a4915c8b73",
+    "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd": "619203684824357e1fb9f8b72cd3c1ebbd3c261d476429427a0c951e8173b6d0",
+    "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd": "9a7e040029647cd787047ae880b99cccff9aedf1c5eabdce7a5cf73d46fb8899",
+    "commons/artifacts/impossible_end_table/impossible_end_table.gd": "2b9adc308b3e03fd2acfa308621a8bb8a6d9fb501f4ec1410900a49a3806a0a2",
+    "commons/artifacts/self_shaping_forge/self_shaping_forge.gd": "e940ee84fa504dee002d073f8290b652ca9bee53993607ac4317765b6f4ca700",
+    "commons/primitives/balance/balance_puzzle.gd": "e9b9ebfb94d70bfe02e0d8c18e96198e6d58a706eab4fc2a7d9f2ff5456d9237",
+    "commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd": "6338dba0fd8822d7a480977937f7437674a168a42e608afb215ed5e889a936c6",
+    "commons/scenes/endless_museum.gd": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/data/artifact_roles.json": "3b94b6c06f8b0d229ee9e2530fe22f7dce2ca36c44fed8a5b16f28e3553dac6e"
+  }
+}

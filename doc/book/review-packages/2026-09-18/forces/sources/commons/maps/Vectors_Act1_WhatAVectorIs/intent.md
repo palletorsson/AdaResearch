@@ -1,0 +1,1 @@
+Follow one measured displacement from editable pins into two wall projections, then inspect what normalization retains. Reveal components after exploration. Carry the same-state, different-receiver method forward into physical force applications.

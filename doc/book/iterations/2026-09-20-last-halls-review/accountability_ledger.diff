@@ -1,0 +1,75 @@
+--- before/commons/artifacts/accountability_ledger/accountability_ledger.gd
++++ commons/artifacts/accountability_ledger/accountability_ledger.gd
+@@ -6,7 +6,7 @@
+ ## truth: Stay answerable for what you leave out.
+ ##
+ ## Ethical design after incompleteness — APPLIED, device (~1m + readout Label3D).
+-## A running ledger: it logs each design choice and WHO IT EXCLUDES. A scrolling
++## An illustrative ledger cycles through prewritten choices and exclusions. A scrolling
+ ## readout lists answerability entries; a fresh entry is stamped at a steady
+ ## interval and pushes the list up. An amber "ON THE RECORD" lamp pulses each
+ ## time a line is committed. Cool/formal housing, constructive amber accent.
+@@ -44,21 +44,32 @@
+ var _timer: float = 0.0
+ var _commit_flash: float = 0.0
+ var _count: int = 0
++var _owned: Array[Node] = []
+ 
+ 
+ func _ready() -> void:
+ 	_rng.randomize()
+-	_build()
++	_rebuild()
+ 	set_process(not Engine.is_editor_hint())
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if config.has("emissive"):
+-		emissive = bool(config["emissive"])
+-	for c in get_children():
+-		remove_child(c)
+-		c.queue_free()
++		emissive = str(config.emissive).to_lower() in ["true","1"]
++	if config.has("log_interval"): log_interval = clampf(float(config.log_interval),.5,60)
++	if config.has("visible_lines"): visible_lines = clampi(int(config.visible_lines),1,6)
++	if is_node_ready(): _rebuild()
++
++func _rebuild() -> void:
++	for child in _owned:
++		if is_instance_valid(child):
++			remove_child(child)
++			child.queue_free()
++	_owned.clear()
++	var external: Array[Node] = get_children()
+ 	_build()
++	for child in get_children():
++		if child not in external: _owned.append(child)
+ 
+ 
+ func _build() -> void:
+@@ -99,10 +110,11 @@
+ 		var ly: float = top_y - line_h * float(i)
+ 		var lab := Label3D.new()
+ 		lab.text = ""
+-		lab.font_size = 13
++		lab.font_size = 18
++		lab.pixel_size = .0012
+ 		lab.modulate = COOL_WHITE
+ 		lab.outline_size = 6
+-		lab.no_depth_test = true
++		lab.no_depth_test = false
+ 		lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+ 		lab.position = Vector3(-0.26, ly, 0.20)
+ 		add_child(lab)
+@@ -121,6 +133,11 @@
+ 	_push_entry()
+ 	_push_entry()
+ 	_refresh_lines()
++	# Keep headings at the scale of the device, with normal scene occlusion.
++	for child in get_children():
++		if child is Label3D and child not in _line_labels:
++			child.pixel_size = .0015
++			child.no_depth_test = false
+ 
+ 
+ func _push_entry() -> void:

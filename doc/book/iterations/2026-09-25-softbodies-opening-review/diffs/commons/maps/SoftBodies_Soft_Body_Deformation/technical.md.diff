@@ -1,0 +1,24 @@
+--- before/commons/maps/SoftBodies_Soft_Body_Deformation/technical.md
++++ after/commons/maps/SoftBodies_Soft_Body_Deformation/technical.md
+@@ -7,7 +7,7 @@
+ 
+ The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers STIFFNESS, DAMPING, PRESSURE, RESET, MILL, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+ 
+-The cube gives way. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation. Before looking at the settings, choose what you expect a softer cube to do: change further, return more slowly, or fail to return at all?
++The cube gives way. A small arm holds one point at its top; the rest of its surface can move. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation. Before looking at the settings, choose what you expect a softer cube to do: change further, return more slowly, or fail to return at all?
+ 
+ Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.
+ 
+@@ -27,4 +27,12 @@
+ 
+ The nearby jelly variants remain useful comparisons, and radiolaria offers a different warning: intricate biological resemblance can be constructed without soft-body dynamics. Keep that distinction for later. First we need to see how a surface changes when some of its points are required to stay.
+ 
++The placed cube sets simulation precision to 5. This count does not apply to every artifact in the sequence: rounded_softbody, for example, uses 10. The engine is GodotPhysics3D. Its links include triangle edges and bending constraints between points two edges apart; the surface is not a volumetric lattice, but saying it has only edge links is inaccurate. Stiffness is not simply a fraction of each distance error corrected per pass.
++
++Both collision hands in commons/scenes/base.tscn select mode 1, TELEPORT. In addons/godot-xr-tools/hands/collision_hand.gd that mode copies the target transform directly; COLLIDE is another available mode. This is source evidence for the manuscript's hand asymmetry, not a completed headset contact test.
++
++The opening hall opts into `jelly_cube:180:1.0#anchor:crown`. One vertex nearest the centre of the top face is pinned. A small brass stem and open stand expose that attachment; there is no plate underneath the deforming surface. The local control rack is lowered and brought forward to keep it clear of the body. The default `anchor:free` retains the original pedestal and unpinned body in other placements. Anchor is a placement setting, read before construction, not a new live control. Changing the existing coefficients does not rebuild the body or release the pin.
++
++The unpinned cube left its original support during a native control sequence. Several tray trials also failed to retain it; those diagnostics are preserved in the opening review. The crown attachment establishes an explicit boundary condition for this lesson. It does not certify free soft-body contact with a tray or solve that separate collision problem.
++
+ Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.

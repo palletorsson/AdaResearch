@@ -1,0 +1,30 @@
+{
+  "room": "WaveFunctions_AirMusic",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_AirMusic/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/WaveFunctions_AirMusic/map_data.json": "8bf006927d427d549913b1f22d5a33425605beb1ebe498abbc555d0f709ce75d",
+    "tools/probes/wavefunctions_air_music_museum.gd": "12e108ac4a0296e58ebccaf31cac3261ac4cb2ab4c269d193a50823ed1d6d65b",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "654a36aa939ccbfb52a5d12e86792087fbf6266f6a883abd409708aa709442f3",
+    "ada_run/encounter_pilot/WaveFunctions_AirMusic/control.json": "a2cbaa602bb7d6734c942d58a4deef95bd12eaa5da6ab056ace62b28fe560bc1",
+    "ada_run/encounter_pilot/WaveFunctions_AirMusic/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_AirMusic/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/resonance/resonating_metallophone.tscn": "437bc14aa866a68a48ca25d99befcbfd028dc737550ab1c2e431e24b673dcf14",
+    "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd": "077ad003a3860dc72f188dd7b7e01958af55e5d83533b66371bed0c5c92588a0",
+    "algorithms/wavefunctions/resonance/ResonatingBar.gd": "82808491d8563666fd683ba342992485806478a0b9fb99f17db69412f297afed"
+  }
+}

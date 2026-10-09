@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-07",
+  "artifacts": [
+    {
+      "map": "VFM_05_Launch",
+      "token": "bubble_blaster",
+      "cell": [
+        32,
+        12
+      ],
+      "zone": [
+        4,
+        4
+      ],
+      "config": "",
+      "y": 0.95,
+      "pedestal": true,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "catapult",
+      "cell": [
+        33,
+        32
+      ],
+      "zone": [
+        12,
+        20
+      ],
+      "config": "default_force:9",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "human_catapult",
+      "cell": [
+        10,
+        62
+      ],
+      "zone": [
+        14,
+        32
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "firework_burst",
+      "cell": [
+        31,
+        66
+      ],
+      "zone": [
+        16,
+        16
+      ],
+      "config": "lesson:live_fountain",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_03_Motion",
+      "token": "force_mower",
+      "cell": [
+        14,
+        46
+      ],
+      "zone": [
+        10,
+        8
+      ],
+      "config": "workings:expression",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "token": "wind_room",
+      "cell": [
+        14,
+        52
+      ],
+      "zone": [
+        16,
+        14
+      ],
+      "config": "lesson:hands_on_wind",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "token": "force_vortex",
+      "cell": [
+        14,
+        72
+      ],
+      "zone": [
+        10,
+        10
+      ],
+      "config": "warning:beacon",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "token": "viscosity_layers",
+      "cell": [
+        15,
+        52
+      ],
+      "zone": [
+        8,
+        6
+      ],
+      "config": "",
+      "y": 0.82,
+      "pedestal": true,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "token": "centrifuge_ring",
+      "cell": [
+        15,
+        69
+      ],
+      "zone": [
+        12,
+        12
+      ],
+      "config": "lesson:hand_ring",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "token": "SpringSuspension",
+      "cell": [
+        8,
+        61
+      ],
+      "zone": [
+        8,
+        8
+      ],
+      "config": "lesson:museum_spring",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "token": "spring_tower",
+      "cell": [
+        22,
+        61
+      ],
+      "zone": [
+        8,
+        8
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "token": "orbit_walk",
+      "cell": [
+        17,
+        70
+      ],
+      "zone": [
+        10,
+        10
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 0,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "token": "momentum_cradle",
+      "cell": [
+        8,
+        55
+      ],
+      "zone": [
+        5,
+        4
+      ],
+      "config": "",
+      "y": 0,
+      "pedestal": false,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "token": "newton_cradle",
+      "cell": [
+        18,
+        55
+      ],
+      "zone": [
+        5,
+        4
+      ],
+      "config": "",
+      "y": 0.82,
+      "pedestal": true,
+      "rotation": 180,
+      "role": "comparison"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "token": "launch_arc",
+      "role": "tutorial",
+      "already_placed": true
+    }
+  ],
+  "notes": {
+    "VFM_05_Launch": "The selected Bubble Blaster carries the launch velocity in the hand. Compare the existing Launch Arc with a projectile catapult and a human catapult. The enlarged fountain runs ballistic trajectories and pauses its own clock near the apex; the museum continues running.",
+    "VFM_03_Motion": "The mower applies the earlier projection to work: integrate the nominal drawn force along the actual displacement. Its force is a declared model value, not a measurement of pressure from the hand.",
+    "Vectors_Act3_FieldsAndMotion": "The upgraded Wind Room drives rigid cubes and familiar points with relative-velocity drag. Aim a held rose point to steer the air, or use the controls at the entry. Walk through the same field. Compare the older Force Vortex, which prescribes a spiral velocity and ejects the visitor, with the primary vortex that integrates acceleration.",
+    "Vectors_Act4a_KineticForces": "Viscosity Layers returns the drag comparison at bench scale. The centrifuge adds a circular hand ride: hold the rose handle, travel around the ring, release into the tangent. It prescribes the circular motion; it does not simulate a physical hinge or rotate the tracked head.",
+    "Vectors_Act4b_Oscillation": "Compare the physical 6DOF SpringSuspension joint, now pulled with a rose hand grip, with Spring Tower, whose cosine animation illustrates a period. The existing coupled PointBody springs remain the tutorial object.",
+    "VFM_07_Gravity": "Orbit Walk is a prescribed two-body barycentre diagram. It is a controlled comparison beside the primary mutually attracting points, whose trajectories are integrated.",
+    "VFM_08_Arena": "Compare two presentations: Momentum Cradle shows ideal input/output poses; Newton's Cradle integrates pendulum angles with an idealized equal-mass collision exchange. Neither is the Jolt collision solver used by bowling."
+  }
+}

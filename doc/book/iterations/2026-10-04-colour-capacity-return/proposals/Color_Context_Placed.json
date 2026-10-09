@@ -1,0 +1,36 @@
+{
+  "id": "Color_Context_Placed",
+  "title": "Let colour regroup an assembly",
+  "storyboard": "The first columns keep the same five forms while their colour assignments change. Bringing primitives, transforms and array lookup, the student selects colours for a small supplied part list while keeping its geometry fixed. Begin with list position; supplied numeric shape categories offer a second grouping once that assignment is clear. Each part has an explained material reference, so choosing a palette entry and assigning it are visible operations. The student regroups two separated parts by colour without moving either. They carry a palette and a selection rule independent of placement. The larger stacks, historical associations and cone landscape remain available for looking and composition without becoming additional required builds.",
+  "storyboard_short": "Use fixed-geometry columns. Reuse primitives/transforms/lookup. Teach palette selection separately from material assignment and placement. Supply part/material references; numeric categories optional after index selection. Check: regroup separated parts without moving them. Carry palette + selection rule. Rich stacks remain encounters. Open: reduced host binding; no dictionary lesson assumed.",
+  "mode": "make",
+  "brings": [
+    "primitive forms and transforms",
+    "array lookup and cyclic selection"
+  ],
+  "learns": [
+    "palette selection separate from placement",
+    "a colour value assigned to a named material"
+  ],
+  "carries": "A palette and a selection rule, with a declared material receiver.",
+  "supplied": [
+    "existing part geometry with direct material references",
+    "optional numeric category list"
+  ],
+  "artifact_refs": [
+    "chroma_stack",
+    "color_dna_stack",
+    "reference_landscape"
+  ],
+  "review_note": "Use a small explicit part/category list before requiring dictionaries. The museum’s richer stack records remain supplied; choose the reduced editing entry before writing a full lesson.",
+  "prior_maps": [
+    "Array",
+    "Tutorial_Tiling_Floor",
+    "Trans_Translation"
+  ],
+  "independent_check": "Give two separated parts the same colour without changing their positions; explain which selection changed.",
+  "source_refs": [
+    "commons/artifacts/chroma_stack/chroma_stack.gd"
+  ],
+  "change_reason": "Keep the opening focused on how colour regroups familiar parts."
+}

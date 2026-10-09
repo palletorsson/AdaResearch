@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "assertions": 216,
+  "printed_exercise_variants": 3,
+  "independent_choice_examples": 1,
+  "configurations_including_baseline": 5,
+  "variant_edits": {
+    "one": [],
+    "grouped": [
+      [
+        "[0, 0, 0, 0, 0]",
+        "[1, 1, 2, 1, 2]"
+      ]
+    ],
+    "recoloured": [
+      [
+        "[0, 0, 0, 0, 0]",
+        "[1, 1, 2, 1, 2]"
+      ],
+      [
+        "Color(0.80, 0.16, 0.16)",
+        "Color(0.90, 0.22, 0.48)"
+      ]
+    ],
+    "alternating": [
+      [
+        "[0, 0, 0, 0, 0]",
+        "[1, 2, 1, 2, 1]"
+      ]
+    ],
+    "choice": [
+      [
+        "[0, 0, 0, 0, 0]",
+        "[2, 0, 1, 0, 2]"
+      ]
+    ]
+  },
+  "faults_rejected": 5,
+  "faults": {
+    "shared_material": {
+      "mutation": [
+        "    material.roughness = 0.55",
+        "    material.roughness = 0.55\n    if not parts.is_empty():\n        material = parts[0].material_override"
+      ],
+      "required_failure": "live/one_material_edit_is_local",
+      "detected": true
+    },
+    "ignored_assignment": {
+      "mutation": [
+        "material.albedo_color = palette[slot]",
+        "material.albedo_color = palette[0]"
+      ],
+      "required_failure": "grouped/assigned_colours",
+      "detected": true
+    },
+    "wrong_palette_index": {
+      "mutation": [
+        "material.albedo_color = palette[slot]",
+        "material.albedo_color = palette[(slot + 1) % palette.size()]"
+      ],
+      "required_failure": "one/assigned_colours",
+      "detected": true
+    },
+    "colour_moves_geometry": {
+      "mutation": [
+        "material.albedo_color = palette[slot]",
+        "material.albedo_color = palette[slot]\n        parts[i].position.y += 0.1"
+      ],
+      "required_failure": "live/reassignment_preserves_geometry",
+      "detected": true
+    },
+    "rebuilds_mesh": {
+      "mutation": [
+        "material.albedo_color = palette[slot]",
+        "material.albedo_color = palette[slot]\n        parts[i].mesh = parts[i].mesh.duplicate()"
+      ],
+      "required_failure": "one/repaint_preserves_objects_geometry_and_pose",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "doc/book/iterations/2026-10-06-colour-the-same-parts/tutorial.md": "77da32f3fe1b46418b53dc53f112947896e80dbc13fc4c6d184b5b431a5152a4",
+    "doc/book/iterations/2026-10-06-colour-the-same-parts/lesson.gd": "6709e3d96084c736347bff433fc1871d065853831bcc61fd89816a26e2520717",
+    "doc/book/iterations/2026-10-06-colour-the-same-parts/verify.gd": "65d67f8be44fdab8df10a587b4409e6ce90ce3bc4f45417b717db88bc479fc67",
+    "doc/book/iterations/2026-10-06-colour-the-same-parts/run_checks.py": "ec6e38e5ec29a2bf3adf5103e4bf7fbc31398634d0cd0c09e15387328b65f8e6",
+    "doc/book/iterations/2026-10-06-colour-the-same-parts/native-project.godot": "c01b2abdf48d3e8ebdd65d9bd68c96a6c8e784ea6002eac730f3e4b7d99432c1"
+  },
+  "preserved": {
+    "commons/maps/Color_Context_Placed/tutorial.md": "14165897ec836485a0b3e0361490c79069c82a0c70a5571c304b42148601bf2d",
+    "commons/maps/Color_Context_Placed/final.md": "80873d7a9e82bbe459fc8c9d20e89e0536e29e38e1ad92e8e0749bf57a0f8c2d",
+    "commons/maps/Color_Context_Placed/map_data.json": "9ba79cdf49320ecc01fcce49fc06121fd148234f782f74476a73f93e40c7bdeb",
+    "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+    "commons/artifacts/chroma_stack/chroma_stack.gd": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+    "doc/book/course/execution-plan/plan.json": "7ea2524f93441abb3bed08a94ae3f0604c4eb3abbda6d021779a9d9a7d8c32f6"
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-colour-draft-rpqfnzr0",
+  "scope": "Exact printed self-contained five-part program. Native meshes, dimensions, contiguous levels, material assignment and independence; live edits preserve object/resource identity, geometry and transforms; translated/rotated host; three printed edits and one transfer example. Headless: no rendered-pixel, full museum integration, headset or human-learning test."
+}

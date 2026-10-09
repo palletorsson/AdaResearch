@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "biome_inheritance": {
+      "lookup_name": "biome_inheritance",
+      "name": "Inherited forms: doors become banners",
+      "scene": "res://commons/artifacts/biome_inheritance/biome_inheritance.tscn",
+      "category": "biome",
+      "artifact_type": "installation",
+      "complexity": "intermediate",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "description": "Standalone bridge: the five inherited panel bodies rise 2.35 m into patterned nobori-inspired banners, retaining their two-triangle faces. Height-aware clearance lets cover return below them while poles keep their space. Twenty-second automatic cycle, full size, no in-world interface. The earlier width study remains available with banners disabled. Geometric occupancy, not growth or cloth physics.",
+      "qfep_connection": "A continuous change in one form crosses discrete occupancy thresholds for other bodies. The clearance rule and excluded candidate identities are recorded, making the chosen norm inspectable.",
+      "interactions": ["Observe the doors rise into five patterned banners; compare which plants fit below.", "With banners disabled, compare narrow and wide panels on the same terrain."],
+      "tags": ["biome", "inheritance", "sculpture", "clearance", "pattern", "banner", "translation", "prototype"],
+      "spatial_needs": {"footprint_cells": 12, "height_m": 6, "approach": "walk in"}
+    }
+  }
+}

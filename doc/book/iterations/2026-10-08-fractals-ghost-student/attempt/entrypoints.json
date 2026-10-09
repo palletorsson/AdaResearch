@@ -1,0 +1,274 @@
+{
+  "status": "first_submission_before_runtime",
+  "godot_executed": false,
+  "environment": "Prepared Endless Museum Godot 4.6 project with XRTools, player, camera and lighting",
+  "attachment": "Empty Node3D at unit scale on the floor; face local +Z",
+  "property_changes": "Set before adding to scene; rerun to rebuild unless stated otherwise",
+  "entries": [
+    {
+      "hall": "Fractal_Recursion",
+      "dependencies": [
+        "line_skin.gd"
+      ],
+      "exported_properties": {
+        "depth": {
+          "default": 3,
+          "min": 0,
+          "max": 7
+        },
+        "ratio": {
+          "default": 0.65,
+          "min": 0.25,
+          "max": 0.85
+        }
+      },
+      "observable_properties": [
+        "sizes"
+      ],
+      "methods": [
+        "rebuild"
+      ],
+      "entry_script": "reconstructed/Fractal_Recursion/frames.gd",
+      "folder": "reconstructed/Fractal_Recursion"
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "dependencies": [
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "exported_properties": {
+        "generations": {
+          "default": 3,
+          "min": 1,
+          "max": 4
+        },
+        "ratio": {
+          "default": 0.7,
+          "min": 0.4,
+          "max": 0.8
+        }
+      },
+      "observable_properties": [
+        "segment_count",
+        "first_forks",
+        "tree"
+      ],
+      "methods": [
+        "turn_fork"
+      ],
+      "entry_script": "reconstructed/Fractal_RecursiveTrees/tree.gd",
+      "folder": "reconstructed/Fractal_RecursiveTrees"
+    },
+    {
+      "hall": "Fractal_CantorSet",
+      "dependencies": [
+        "point_body.gd"
+      ],
+      "exported_properties": {
+        "show_history": {
+          "default": false
+        }
+      },
+      "observable_properties": [
+        "current",
+        "history",
+        "original"
+      ],
+      "methods": [
+        "advance",
+        "replace_intervals",
+        "kept_length",
+        "redraw"
+      ],
+      "entry_script": "reconstructed/Fractal_CantorSet/cantor.gd",
+      "folder": "reconstructed/Fractal_CantorSet"
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "dependencies": [
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "exported_properties": {},
+      "observable_properties": [
+        "current",
+        "generation",
+        "original",
+        "cursor",
+        "along"
+      ],
+      "methods": [
+        "advance",
+        "replace_path",
+        "path_length",
+        "nearest_on_path"
+      ],
+      "entry_script": "reconstructed/Fractal_KochSierpinski/koch.gd",
+      "folder": "reconstructed/Fractal_KochSierpinski"
+    },
+    {
+      "hall": "Fractal_MengerSponge",
+      "dependencies": [
+        "point_body.gd"
+      ],
+      "exported_properties": {},
+      "observable_properties": [
+        "current",
+        "edge",
+        "generation",
+        "selected"
+      ],
+      "methods": [
+        "advance",
+        "keep_cell",
+        "retained_volume"
+      ],
+      "entry_script": "reconstructed/Fractal_MengerSponge/menger.gd",
+      "folder": "reconstructed/Fractal_MengerSponge"
+    },
+    {
+      "hall": "Fractal_GoldenSpiral",
+      "dependencies": [
+        "point_body.gd"
+      ],
+      "exported_properties": {},
+      "observable_properties": [
+        "values",
+        "latched"
+      ],
+      "methods": [
+        "request_step",
+        "advance",
+        "height_for"
+      ],
+      "entry_script": "reconstructed/Fractal_GoldenSpiral/sum_points.gd",
+      "folder": "reconstructed/Fractal_GoldenSpiral"
+    },
+    {
+      "hall": "Fractal_Synthesis",
+      "dependencies": [
+        "point_body.gd"
+      ],
+      "exported_properties": {},
+      "observable_properties": [
+        "recipe",
+        "kept_recipe",
+        "live",
+        "kept"
+      ],
+      "methods": [
+        "choose",
+        "keep_current",
+        "restore",
+        "advance",
+        "reset_live",
+        "build",
+        "total"
+      ],
+      "entry_script": "reconstructed/Fractal_Synthesis/recipe.gd",
+      "folder": "reconstructed/Fractal_Synthesis"
+    },
+    {
+      "hall": "Fractal_Synthesis_FourCuts",
+      "entry_script": "variations/Fractal_Synthesis_FourCuts/recipe_four_cuts.gd",
+      "dependencies": [
+        "point_body.gd"
+      ],
+      "exported_properties": {},
+      "initial_recipe": {
+        "seed": [
+          0,
+          6
+        ],
+        "fraction": 0.3333333333333333,
+        "steps": 4
+      },
+      "observable_properties": [
+        "recipe",
+        "kept_recipe",
+        "live",
+        "kept"
+      ],
+      "methods": [
+        "choose",
+        "keep_current",
+        "restore",
+        "advance",
+        "reset_live",
+        "build",
+        "total"
+      ],
+      "reset_steps": 3
+    },
+    {
+      "hall": "Optional_Wave_Fork",
+      "entry_script": "composition/wave_fork/tree_wave.gd",
+      "dependencies": [
+        "point_body.gd",
+        "line_skin.gd"
+      ],
+      "exported_properties": {
+        "generations": {
+          "default": 3,
+          "min": 1,
+          "max": 4
+        },
+        "ratio": {
+          "default": 0.7,
+          "min": 0.4,
+          "max": 0.8
+        },
+        "amplitude_degrees": {
+          "default": 12,
+          "min": 0,
+          "max": 15,
+          "units": "degrees"
+        },
+        "cycles_per_level": {
+          "default": 0.25,
+          "min": 0,
+          "max": 1,
+          "units": "cycles per parent-depth unit"
+        },
+        "phase": {
+          "default": 1.5707963267948966,
+          "units": "radians",
+          "constraint": "finite"
+        }
+      },
+      "observable_properties": [
+        "segment_count",
+        "first_forks",
+        "tree"
+      ],
+      "methods": [
+        "fork_bias",
+        "turn_fork"
+      ],
+      "construction": "static",
+      "expected_default_counts": {
+        "segments": 15,
+        "by_depth": [
+          1,
+          2,
+          4,
+          8
+        ]
+      },
+      "expected_default_lengths": [
+        0.7,
+        0.49,
+        0.343,
+        0.2401
+      ],
+      "expected_bias_degrees": [
+        12,
+        0,
+        -12
+      ],
+      "original_comparison": "reconstructed/Fractal_RecursiveTrees/tree.gd"
+    }
+  ],
+  "optional_probe": "prediction_probe.gd"
+}

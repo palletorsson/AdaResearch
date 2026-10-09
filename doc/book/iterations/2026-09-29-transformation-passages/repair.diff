@@ -1,0 +1,313 @@
+--- before/commons/scenes/em/em_portal_stream.gd
++++ after/commons/scenes/em/em_portal_stream.gd
+@@ -554,6 +554,14 @@
+ 	if not parsed is Dictionary: return {}
+ 	var layers: Dictionary = parsed.get("layers", {})
+ 	var utilities: Array = layers.get("utilities", [])
++	# A doorway beside a ramp or pit needs its landing outside the authored
++	# exit cell. Keep the cell as the connection to the hall; shift only the
++	# frame, by no more than the length of its supported approach.
++	var config: Dictionary = parsed.get("map_info", {}).get("museum", {}).get("portal_exit", {})
++	var outset := clampf(float(config.get("outset", 0.0)), 0.0, 2.3)
++	var approaches: Array[Vector3] = [Vector3.FORWARD,Vector3.LEFT,Vector3.RIGHT,Vector3.BACK]
++	var facing: String = str(config.get("approach", ""))
++	if facing == "from_hall": approaches = [Vector3.FORWARD]
+ 	var candidates: Array[Vector2i] = []
+ 	var next_map: String = museum.call("_peek_next_authored_map")
+ 	for z in range(utilities.size()):
+@@ -572,6 +580,7 @@
+ 	var seg: Node3D = _current.node
+ 	var pad := float((seg.get_meta("em_simulation_stage", {}) as Dictionary).get("pad", 0.0))
+ 	var grid := seg.get_node_or_null("SimGrid_"+map_name) as Node3D
++	var rejected: Array[Dictionary] = []
+ 	for cell in candidates:
+ 		var marker := seg.to_global(Vector3(cell.x+0.5+pad,0,cell.y+0.5+pad+float(museum.get("VESTIBULE_H"))))
+ 		var level: float = museum.call("_arrival_floor_y", marker.x,marker.z)
+@@ -586,19 +595,25 @@
+ 			level = grid.global_position.y+(height-0.5)*size
+ 		# Old grid teleport holes receive a flush solid threshold. Never use
+ 		# the bottom of a pit as the doorway's floor height.
+-		var p := Vector3(marker.x,level+0.05,marker.z)
+-		for inward: Vector3 in [Vector3.FORWARD,Vector3.LEFT,Vector3.RIGHT,Vector3.BACK]:
++		var anchor := Vector3(marker.x,level+0.05,marker.z)
++		for inward: Vector3 in approaches:
++			var p := anchor - inward * outset
+ 			var yaw := atan2(inward.x,inward.z)
+-			if not _portal_clear(p,yaw): continue
+-			if not _supported(p+inward*2.3): continue
++			if not _portal_clear(p,yaw):
++				rejected.append({"door":p,"inward":inward,"reason":"frame blocked"})
++				continue
++			if not _supported(p+inward*2.3):
++				rejected.append({"door":p,"inward":inward,"reason":"approach unsupported","join":p+inward*2.3})
++				continue
+ 			var clear := true
+ 			for distance: float in [0.0,0.4,0.8,ARRIVAL_INSET,1.6,2.0,2.3]:
+ 				if not _body_clear(p+inward*distance):
++					rejected.append({"door":p,"inward":inward,"reason":"approach blocked","distance":distance})
+ 					clear = false
+ 					break
+ 			if clear:
+-				return {"source":"t","cell":cell,"door":p,"inward":inward,"yaw":yaw}
+-	return {"invalid":true,"source":"t","cells":candidates}
++				return {"source":"t","cell":cell,"marker":anchor,"door":p,"inward":inward,"yaw":yaw,"outset":outset}
++	return {"invalid":true,"source":"t","cells":candidates,"rejected":rejected}
+ 
+ 
+ func _find_landing(at_far_end: bool) -> Vector3:
+--- before/commons/scenes/em/em_simulation_stage.gd
++++ after/commons/scenes/em/em_simulation_stage.gd
+@@ -18,6 +18,10 @@
+ 	var pad := margin + moat + apron
+ 	var w := sw + pad * 2
+ 	var d := sd + pad * 2
++	# A portal on the bridge needs clearance for its frame as well as the
++	# visitor. Stay within the original floor opening; never cut grid walls.
++	var portal_exit: Dictionary = info.get("museum", {}).get("portal_exit", {})
++	var exit_width := 2.4 if float(portal_exit.get("outset", 0.0)) > 0.0 else 2.0
+ 	var tile: Array = []
+ 	for z in range(d):
+ 		var row: Array = []
+@@ -28,9 +32,9 @@
+ 		"w": w, "d": d, "pad": pad, "margin": margin, "moat": moat,
+ 		"depth": clampf(float(sim.get("depth", 2.5)), 1.5, 8.0),
+ 		"glass_height": maxf(3.0, float(info.get("dimensions", {}).get("max_height", 2)) + 0.5),
+-		"entry": _opening(rows[0], sw), "exit": _opening(rows[-1], sw), "tile": tile}
++		"entry": _opening(rows[0], sw), "exit": _opening(rows[-1], sw, exit_width), "tile": tile}
+ 
+-static func _opening(row: Array, width: int) -> Dictionary:
++static func _opening(row: Array, width: int, maximum_width := 2.0) -> Dictionary:
+ 	# Use an existing floor opening. Never cut the copied map's walls.
+ 	var runs: Array = []
+ 	var start := -1
+@@ -47,7 +51,7 @@
+ 			best = run
+ 	if best.x < 0:
+ 		return {"x": width / 2.0, "width": 0.0}
+-	return {"x": best.x + best.y * 0.5, "width": minf(2.0, best.y)}
++	return {"x": best.x + best.y * 0.5, "width": minf(maximum_width, best.y)}
+ 
+ static func build(parent: Node3D, p: Dictionary, z_offset: float) -> Dictionary:
+ 	var frame := Node3D.new()
+--- before/commons/scenes/endless_museum.gd
++++ after/commons/scenes/endless_museum.gd
+@@ -11153,7 +11153,12 @@
+ 			if gs.has_signal("build_finished"):
+ 				gs.connect("build_finished", _sim_grid_ready.bind(gs, zbase, true), CONNECT_ONE_SHOT)
+ 			if is_inside_tree():
+-				get_tree().create_timer(2.5).timeout.connect(_sim_grid_ready.bind(gs, zbase))
++				# A portal may unload this hall before the fallback fires.
++				# Do not pass a freed grid to the typed callback.
++				var grid_ref: WeakRef = weakref(gs)
++				get_tree().create_timer(2.5).timeout.connect(func() -> void:
++					var live_grid := grid_ref.get_ref() as Node3D
++					if is_instance_valid(live_grid): _sim_grid_ready(live_grid, zbase))
+ 			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)
+ 			return {"pearl": String(entry.get("pearl", "")), "placed": 0, "packed": true,
+ 				"offered": 0, "interior": 0, "grid_embed": true}
+--- before/tools/probes/hall_portal_navigation.gd
++++ after/tools/probes/hall_portal_navigation.gd
+@@ -7,6 +7,8 @@
+ var xr_body: CharacterBody3D
+ var bounds: Node3D
+ var observed_bounds_reset := false
++var isolate_roaming_foes := false
++var isolated_foes := 0
+ 
+ func _physics_process(_delta: float) -> bool:
+ 	if bounds != null and float(bounds.get("_reset_cooldown_timer")) > 0.0:
+@@ -32,6 +34,7 @@
+ 
+ func run() -> void:
+ 	var spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OS.get_cmdline_user_args()[0]))
++	isolate_roaming_foes = bool(spec.get("isolate_roaming_foes", false))
+ 	var folder: String = spec["run"]
+ 	var vr := bool(spec.get("vr", false))
+ 	var staged := bool(spec.get("staged", false))
+@@ -137,6 +140,14 @@
+ 		var cell: Array = spec["exit_cell"]
+ 		check(authored_exit.get("source","") == "t" and not authored_exit.get("invalid",false), "Uses an authored t exit")
+ 		check(authored_exit.get("cell",Vector2i(-1,-1)) == Vector2i(int(cell[0]),int(cell[1])), "Exact authored exit cell")
++	if bool(spec.get("exit_faces_hall", false)):
++		check(authored_exit.get("inward", Vector3.ZERO) == Vector3.FORWARD, "Exit faces the approaching visitor in the hall")
++		if not authored_exit.get("invalid", false) and authored_exit.has("door"):
++			# Sample the full physical threshold, including the seam with the
++			# authored floor. A valid trigger alone is not a walkable passage.
++			for i in range(24):
++				var p: Vector3 = authored_exit.door + Vector3.FORWARD * (i * 0.1)
++				check(bool(portal.call("_supported", p)), "Exit approach supported at " + str(i * 0.1))
+ 	var doors: Array = portal.get("_portals")
+ 	if doors.is_empty():
+ 		push_error("No exit doorway was placed")
+@@ -216,6 +227,7 @@
+ 	check(not bool(portal.get("_armed")), "Arrival cannot immediately bounce back")
+ 	check(not observed_bounds_reset, "Rig bounds checker does not reset museum arrival")
+ 	var report := {"staged_rig":staged,"observed_bounds_reset":observed_bounds_reset,"room":spec["room"], "next":spec["next"], "vr_simulated":vr,
++		"isolated_roaming_foes":isolated_foes,
+ 		"authored_exit":authored_exit, "landing_checks":landing_checks, "xr_physics_body":is_instance_valid(xr_body),
+ 		"peak_resident_halls":peak_halls, "passed":failures.is_empty(), "failures":failures, "events":portal.get("events")}
+ 	var f := FileAccess.open(folder + "report.json", FileAccess.WRITE)
+@@ -225,6 +237,17 @@
+ 	quit(0 if failures.is_empty() else 1)
+ 
+ func check_landing(portal: Node3D, end: int, label: String) -> void:
++	# This optional fixture isolates passage geometry from combat: a chasing
++	# silhouette can stand on a valid landing after arrival. Keep all static
++	# architecture, moving platforms and the real XR player body active.
++	if isolate_roaming_foes:
++		var hall: Dictionary = portal.get("_current")
++		for body in (hall.node as Node3D).find_children("*", "CollisionObject3D", true, false):
++			if body.get_meta("em_foe", false) and body.collision_layer != 0:
++				body.process_mode = Node.PROCESS_MODE_DISABLED
++				body.collision_layer = 0
++				body.collision_mask = 0
++				isolated_foes += 1
+ 	var pads: Dictionary = portal.get("_landings")
+ 	check(pads.has(end), label + ": entrance pad exists")
+ 	if not pads.has(end): return
+--- before/commons/maps/Trans_Pre/map_data.json
++++ after/commons/maps/Trans_Pre/map_data.json
+@@ -7,10 +7,11 @@
+     "version": "1.0",
+     "dimensions": {
+       "width": 9,
+-      "depth": 24,
++      "depth": 25,
+       "max_height": 4
+     },
+     "museum": {
++      "portal_exit": {"approach": "from_hall", "outset": 2.3},
+       "wall_height": 4,
+       "plinths": false,
+       "simulation": {
+@@ -38,7 +39,7 @@
+   },
+   "documentation": {
+     "summary": "One cube, three added operations, then a small level.",
+-    "layout": "9 by 24. Four cumulative demonstrations at x4,z2/5/8/11; three principle markers at x6,z5/8/11. Three wedge lanes at row 14 reach a raised route carrying four animated pickups; row 22 carries the descent. Two health crosses flank the central route.",
++    "layout": "9 by 25. Four cumulative demonstrations at x4,z2/5/8/11; three principle markers at x6,z5/8/11. Three wedge lanes at row 14 reach a raised route carrying four animated pickups; row 22 carries the descent. A flat landing follows, with the exit at (4,24). Two health crosses flank the central route.",
+     "objective": "Connect the construction of a familiar pickup with its placement in a level.",
+     "key_elements": [
+       "still at (4,2), centred on the room",
+@@ -318,6 +319,17 @@
+         "4",
+         "4",
+         "4"
++      ],
++      [
++        "4",
++        "4",
++        "4",
++        "1",
++        "1",
++        "1",
++        "4",
++        "4",
++        "4"
+       ]
+     ],
+     "utilities": [
+@@ -579,6 +591,17 @@
+         "",
+         "",
+         "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
+         "t",
+         "",
+         "",
+@@ -813,6 +836,17 @@
+         "",
+         "",
+         "pick_up_cube:0:0#motion:all#motion_curve:lerp",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
+         "",
+         "",
+         "",
+--- before/commons/maps/Trans_Introduction/map_data.json
++++ after/commons/maps/Trans_Introduction/map_data.json
+@@ -14,6 +14,7 @@
+ 	  "n_artifacts": 6
+ 	},
+ 	"museum": {
++      "portal_exit": {"approach": "from_hall", "outset": 2.3},
+ 	  "basin": {
+ 		"depth": 2.5,
+ 		"glass": false,
+@@ -37,9 +38,9 @@
+ 		"1",
+ 		"2",
+ 		"2",
+-		"2",
+-		"2",
+-		"2",
++		"1",
++		"1",
++		"1",
+ 		"2",
+ 		"2",
+ 		"2",
+@@ -381,11 +382,11 @@
+ 	"utilities": [
+ 	  [
+ 		" ",
++		"",
++		"",
++		"",
++		"",
+ 		"sp",
+-		"",
+-		"",
+-		"",
+-		"",
+ 		"",
+ 		"",
+ 		"",
+--- before/commons/maps/Trans_Rotation/map_data.json
++++ after/commons/maps/Trans_Rotation/map_data.json
+@@ -24,6 +24,7 @@
+     },
+     "title": "Rotation: crossings, arrays and inhabited repetition",
+     "museum": {
++      "portal_exit": {"approach": "from_hall", "outset": 2.3},
+       "wall_height": 4,
+       "simulation": {
+         "depth": 4,
+--- before/commons/maps/Trans_Pit/map_data.json
++++ after/commons/maps/Trans_Pit/map_data.json
+@@ -50,6 +50,7 @@
+ 	"title": "The Moving Boundary",
+ 	"version": "1.0",
+ 	"museum": {
++      "portal_exit": {"approach": "from_hall", "outset": 2.3},
+ 	  "wall_height": 4.0,
+ 	  "simulation": {
+ 		"grid": true,
+@@ -1215,7 +1216,7 @@
+ 		" ",
+ 		" ",
+ 		" ",
+-		" ",
++		"sp",
+ 		" ",
+ 		" ",
+ 		" ",

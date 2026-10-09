@@ -1,0 +1,31 @@
+[
+  {
+    "fault": "missing-tau",
+    "rejected": true,
+    "failures": [
+      "predicted height at 0.5 seconds",
+      "predicted height at 1.0 seconds",
+      "predicted height at 1.5 seconds",
+      "predicted height at 2.0 seconds",
+      "double amplitude doubles the upward extent",
+      "amplitude leaves the period unchanged",
+      "double frequency reaches the top in a quarter second",
+      "double frequency completes a cycle in one second",
+      "two cubes can be at opposite extremes"
+    ]
+  },
+  {
+    "fault": "accumulating-height",
+    "rejected": true,
+    "failures": [
+      "predicted height at 0.0 seconds",
+      "predicted height at 0.5 seconds",
+      "predicted height at 1.0 seconds",
+      "predicted height at 1.5 seconds",
+      "predicted height at 2.0 seconds",
+      "same time never accumulates height",
+      "equal elapsed seconds agree across render rates",
+      "two cubes can be at opposite extremes"
+    ]
+  }
+]

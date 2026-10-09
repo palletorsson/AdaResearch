@@ -1,0 +1,15 @@
+--- before-pink/commons/scenes/em/em_simplex_corners.gd
++++ after-pink/commons/scenes/em/em_simplex_corners.gd
+@@ -38,6 +38,12 @@
+ 		visual.name = "ClosedTetrahedron"
+ 		visual.mesh = _mesh(points)
+ 		visual.material_override = material
++		if raw.has("color"):
++			# Local finish: do not recolor the shared museum wall material.
++			var finish := StandardMaterial3D.new()
++			finish.albedo_color = Color.from_string(str(raw["color"]), Color.WHITE)
++			finish.roughness = 0.85
++			visual.material_override = finish
+ 		body.add_child(visual)
+ 		var shape := ConvexPolygonShape3D.new()
+ 		shape.points = points

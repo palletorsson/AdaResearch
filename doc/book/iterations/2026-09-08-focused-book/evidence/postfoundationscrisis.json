@@ -1,0 +1,477 @@
+{
+  "sequence": "postfoundationscrisis",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "primary_tokens": [
+        "bias_from_inside"
+      ],
+      "question": "Which differences disappear when a representation gives some terms less room?",
+      "ontology": "An embedding represents items by positions; distances can make distinctions available or collapse them. This artifact is an authored spatial analogy, not a measured embedding from a trained model.",
+      "action": "Choose two warm-coloured word labels and follow both as you move PERSPECTIVE. Compare their separation with two grey labels.",
+      "observable": "Warm labels compress into a small region while grey labels spread out and move away. Label positions and visual emphasis change together.",
+      "mechanism": "Seeded positions are interpolated between two authored configurations by a connected horizontal slider. The control moves geometry rather than changing a camera or retraining an embedding.",
+      "limit": "The model makes compression legible but does not establish that these exact distances occur in an actual language model. Its two preselected term groups also deserve scrutiny.",
+      "variation": "Existing: stop halfway and track one distinction still visible and one becoming difficult to read. Proposed: compare these authored positions with a documented measured embedding and several different groupings.",
+      "prior_bridge": "The laboratory made model parameters explicit; now ask who gets represented distinctly.",
+      "next_bridge": "Applied ethics moves the same question from word positions to furniture and participation.",
+      "sources": [
+        {
+          "path": "commons/artifacts/bias_from_inside/bias_from_inside.gd",
+          "line": 118,
+          "function_or_anchor": "func _generate_positions",
+          "fact": "Seeded authored default/compressed coordinates."
+        },
+        {
+          "path": "commons/artifacts/bias_from_inside/bias_from_inside.gd",
+          "line": 291,
+          "function_or_anchor": "func _create_controls",
+          "fact": "Connected PERSPECTIVE slider."
+        },
+        {
+          "path": "commons/artifacts/bias_from_inside/bias_from_inside.gd",
+          "line": 322,
+          "function_or_anchor": "func _apply_perspective",
+          "fact": "Interpolates both groups and changes brightness."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/map_data.json": "3a2fdf3db30d8a7c6fa00e2f76edd5fe446cf9383f15055258e051ca7a9317af",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/intent.md": "c5ad60d20c6fe3a21ec799d656712262042974c98509d2eda9a31a3bc33550a5",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md": "798ee08473ef4207d3f7364ecabc4de039f63c78c567e809b90f9680a21de822",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md": "2dee6e65e6edd7e2d493483e306e01633ee2062d6c423ba163cfa8356574ac23",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/critical.md": "87862ba1ac5b80c384798983ab6c5a748b141fd9f3b67c33e4994a588afeb198",
+        "commons/artifacts/bias_from_inside/bias_from_inside.tscn": "17f465685d793ce4a4d7bb32e3fae602b3ee565ba283542cb42d68a817f9ed33",
+        "commons/artifacts/bias_from_inside/bias_from_inside.gd": "10e6fe8871032c1367ff3e3b29d890f2c5dcaefd74bc6c9dc85eceea865a7b8f"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 2,
+          "raw": "bias_from_inside"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not call this an actual trained embedding, an empirical bias measurement, or a visitor camera transform."
+      ]
+    },
+    {
+      "room_id": "CriticalAlgorithms_Applied_Ethics",
+      "primary_tokens": [
+        "room_shape_demonstrator"
+      ],
+      "question": "Who is made easiest to address before anybody has spoken?",
+      "ontology": "An affordance makes some actions easier than others. A seating plan distributes visibility, orientation and the symbolic position of a head.",
+      "action": "Walk around the paired room models. Trace a line of sight from the head chair in the long-table plan, then from one chair in the circular plan.",
+      "observable": "One model singles out a head position; the other arranges chairs around a shared centre. Red and green colours already suggest an evaluation.",
+      "mechanism": "The default pair builds two static room models with different furniture. Other plan values are curator configurations, not visitor toggles.",
+      "limit": "A circle does not guarantee equal speech, access or authority. Colour can supply the answer before the learner has examined the arrangement.",
+      "variation": "Existing: defend one useful role for the head position and identify one exclusion the circle could retain. Proposed: test sightlines and turn-taking with actual groups, including mobility and hearing needs.",
+      "prior_bridge": "Bias exposed unequal space between representations; furniture makes unequal access to a conversation tangible.",
+      "next_bridge": "Paraconsistent engineering next asks what to do when two legitimate requirements conflict.",
+      "sources": [
+        {
+          "path": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+          "line": 136,
+          "function_or_anchor": "func _build_all",
+          "fact": "Default pair constructs both model plans."
+        },
+        {
+          "path": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+          "line": 191,
+          "function_or_anchor": "func _build_centralized_room",
+          "fact": "Head-of-table layout."
+        },
+        {
+          "path": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+          "line": 221,
+          "function_or_anchor": "func _build_distributed_room",
+          "fact": "Circular seating layout."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/CriticalAlgorithms_Applied_Ethics/map_data.json": "e35d06b6a50cf97055f270f8511a4bd600d3e1ef138bc072e25d829d3d1e5696",
+        "commons/maps/CriticalAlgorithms_Applied_Ethics/intent.md": "b63b774d7a4e334629f418a0909c210a6d33454ceb4d817b9cd24f6d9cf48b4b",
+        "commons/maps/CriticalAlgorithms_Applied_Ethics/tutorial.md": "1a935bcbe7c8ea1cd9af3fad68982f5da7f683706f16d3038ea14fdd0d7a5c4f",
+        "commons/maps/CriticalAlgorithms_Applied_Ethics/technical.md": "6638a7af53e483ab8820f50d5fad31f3288bce9148cc96bdab22ce25fc394cf9",
+        "commons/maps/CriticalAlgorithms_Applied_Ethics/critical.md": "44b0857838c6879218c526e4f1e895a460add706148a9f008d7502ec9e66cabb",
+        "algorithms/postfoundationscrisis/room_shape_demonstrator.tscn": "588241f1a751d9c58432f574d23a243dec09777cd52b9551baa260df4a7b1a4a",
+        "algorithms/postfoundationscrisis/room_shape_demonstrator.gd": "a68b91e6144320472972437d0df1f2e205d0589adeb8f05b94717faab607025a"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "room_shape_demonstrator"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Models are miniatures, not functional visitor seats; no toggle interaction exists. Do not claim geometry alone determines politics."
+      ]
+    },
+    {
+      "room_id": "SpeculativeComputation_Paraconsistent_Engineering",
+      "primary_tokens": [
+        "merge_conflict_visualizer"
+      ],
+      "question": "Must one account disappear before two accounts can share a system?",
+      "ontology": "Two branches preserve distinct versions; a conflict records incompatibility requiring a policy. Retaining provenance differs from silently choosing a winner.",
+      "action": "Inspect the two labelled pillars and the lit junction between them. Trace each branch to the meeting point before deciding what a combined result should retain.",
+      "observable": "Branch A and branch B remain visible around a pulsing conflict marker. The default junction does not resolve either version.",
+      "mechanism": "Static authored pillars and a pulsing sphere diagram a merge conflict. Curator variants overlap, resolve to one branch, or fork apart; no actual merge or paraconsistent inference runs.",
+      "limit": "Disagreement between records is not automatically a logical contradiction. Formal paraconsistency requires inference rules that avoid arbitrary conclusions from a contradiction; the sculpture does not implement those rules.",
+      "variation": "Existing thought experiment: assign the branches two incompatible dated measurements and preserve source and time before choosing a policy. Proposed: a small rule table showing which inferences survive a contradiction.",
+      "prior_bridge": "Furniture distributed participation; now two participants may contribute incompatible claims.",
+      "next_bridge": "Situated computation asks what conditions gave each claim its authority.",
+      "sources": [
+        {
+          "path": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+          "line": 161,
+          "function_or_anchor": "func _build_junction",
+          "fact": "Default preserves two pillars and junction."
+        },
+        {
+          "path": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+          "line": 148,
+          "function_or_anchor": "func _process",
+          "fact": "Only conflict pulse is animated."
+        },
+        {
+          "path": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+          "line": 186,
+          "function_or_anchor": "func _build_resolved",
+          "fact": "Curator resolved state preserves one full branch and one stump."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/map_data.json": "8e77b351cfc104bdcd980c81f25a122c8ebeb64a4b85bf27a1314713fc1b0d31",
+        "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/intent.md": "5ba7b7e6c81707a574ddeff1e85281fd3e17bd2afecd3dc5b502c972dcd5c6fa",
+        "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md": "2fa81394ab12af8bc7600fea46406c0627950669f54d426572d21fc4183d3b59",
+        "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/technical.md": "897e3178259c2359d46f59655cef25f1e5a331b828ee46eec41b30ad89b80e52",
+        "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/critical.md": "59a0d94ad10507a3a55a75808c0b8e260e1aac4f731d77e5bd4f03f335d511e7",
+        "algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn": "d1a8dca0d7f03a6c5f09ad6d19d65ae578dfc458c5b1e0d4b901c490dd2f37aa",
+        "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd": "fd58c3f4c89068d0ee603a123f358c58b495459e90090679f7bb030bfd70aa38"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 8,
+          "raw": "merge_conflict_visualizer"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Central formal-logic encounter is currently a diagram, not a paraconsistent computation. Add explicit rule example before claiming the room teaches formal inference."
+      ],
+      "external_sources": [
+        {
+          "url": "https://arxiv.org/abs/2112.00357",
+          "authors": "Sankha S. Basu and Sayantan Roy",
+          "location": "Abstract and introductory definition",
+          "fact": "Primary research defines ordinary paraconsistency through failure of explosion; chapter uses that limited formal distinction, not the paper’s new generalisations."
+        }
+      ]
+    },
+    {
+      "room_id": "SpeculativeComputation_Situated_Computation",
+      "primary_tokens": [
+        "situated_readout"
+      ],
+      "question": "What changes when the subject stays the same but the source of the verdict changes?",
+      "ontology": "A claim has a subject, a predicate, confidence and provenance. Four authored viewpoints attach different evaluations to the same subject identifier.",
+      "action": "Read the subject ID on all four panels, then compare each verdict, confidence and footer. Keep the identical subject fixed in your comparison.",
+      "observable": "SUBJECT #4729 is ORDERLY 87%, CREATIVE 64%, DANGEROUS 92% or IRRELEVANT 22%, depending on the panel. Each panel names its viewpoint.",
+      "mechanism": "Four map placements explicitly set verdict NW, NE, SW and SE. A panel’s verdict is fixed from its configuration; walking changes which panel you read, not an input to a classifier.",
+      "limit": "These percentages are authored signs, not calibrated probabilities. Different judgements can have unequal evidence; situatedness does not make every verdict equally credible.",
+      "variation": "Existing: choose the highest confidence and ask what extra evidence would make it trustworthy. Proposed: reveal distinct measurement criteria and allow one same observation to be evaluated under each.",
+      "prior_bridge": "The conflict sculpture kept two versions present; these panels retain the location of four judgements.",
+      "next_bridge": "Collective knowledge asks how contributions can be combined without losing that provenance.",
+      "sources": [
+        {
+          "path": "commons/artifacts/situated_readout/situated_readout.gd",
+          "line": 107,
+          "function_or_anchor": "QUADRANT_VERDICTS",
+          "fact": "Four authored labels and confidences."
+        },
+        {
+          "path": "commons/artifacts/situated_readout/situated_readout.gd",
+          "line": 252,
+          "function_or_anchor": "func _populate_from_position",
+          "fact": "Same subject, fixed per-instance verdict and positional footer."
+        },
+        {
+          "path": "commons/artifacts/situated_readout/situated_readout.gd",
+          "line": 271,
+          "function_or_anchor": "func _resolve_quadrant_key",
+          "fact": "Explicit map verdict overrides location hash."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json": "ac30de151668288af3792cd9b9f6e7aeb465a4356a502dc3fd6b00ed4c04ef86",
+        "commons/maps/SpeculativeComputation_Situated_Computation/intent.md": "31714c047e764e2a1e51c0e098d0c55d7d9773bb559953a6ea966a396aac3630",
+        "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md": "4f2dd5c59c4794b72beced48845c58a5cb7a16fe7371211e5d13df6a87b1b8ae",
+        "commons/maps/SpeculativeComputation_Situated_Computation/technical.md": "65ce1f990d39a041ac28603e02b2928af5ef3b3b21ece99fee2de839e850353c",
+        "commons/maps/SpeculativeComputation_Situated_Computation/critical.md": "70b7ee26dc6df5991da7f03dd85bd708aab003b7cead3e53d78c540f5b8a4244",
+        "commons/artifacts/situated_readout/situated_readout.tscn": "af37ce24f14dee7742b104e63d8801f1c2e7fd766162f8c1a44f9c156c1d53cb",
+        "commons/artifacts/situated_readout/situated_readout.gd": "475e25ef004f8bcee4df688fcf342cc50b5b11a4c150ce1f692e61f73286c6f8"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "situated_readout:0:0.3#verdict:NW"
+        },
+        {
+          "x": 7,
+          "z": 2,
+          "raw": "situated_readout:0:0.3#verdict:NE"
+        },
+        {
+          "x": 2,
+          "z": 7,
+          "raw": "situated_readout:0:0.3#verdict:SW"
+        },
+        {
+          "x": 7,
+          "z": 7,
+          "raw": "situated_readout:0:0.3#verdict:SE"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Map scales each readout to .3; label legibility needs runtime walk. No live inference or visitor-dependent classification."
+      ]
+    },
+    {
+      "room_id": "SpeculativeComputation_Collective_Knowledge",
+      "primary_tokens": [
+        "peer_production_tool"
+      ],
+      "question": "When many marks accumulate, what makes the result knowledge rather than a pile?",
+      "ontology": "A contribution is an event from a source; a shared artifact accumulates contributions. Participation counts and validation are different operations.",
+      "action": "Follow a packet from a rim node to the central structure. Compare how the edit and contributor readouts change during the first growing structure.",
+      "observable": "Packets from twelve peer positions add facets to a central helix. Repeated contributions can increase edits without introducing a new contributor.",
+      "mechanism": "The script selects random peer indices and accepts each arriving packet, adding one authored facet. After sixty facets it clears the structure. It is a simulated accretion, not a live multi-user editor.",
+      "limit": "The animation omits review, disagreement, exclusion and correction. The same rule accepting every contribution also accepts error; growing shape alone does not establish shared knowledge.",
+      "variation": "Existing: count several contributions from an already seen peer. Proposed: tag a disputed contribution and make acceptance, revision and source history visible.",
+      "prior_bridge": "Situated panels preserved competing sources; peer production attempts a common object.",
+      "next_bridge": "The rhizome asks what connection pattern that common process builds.",
+      "sources": [
+        {
+          "path": "commons/artifacts/peer_production_tool/peer_production_tool.gd",
+          "line": 137,
+          "function_or_anchor": "func _place_facet",
+          "fact": "Arriving packets add facets and update counts."
+        },
+        {
+          "path": "commons/artifacts/peer_production_tool/peer_production_tool.gd",
+          "line": 166,
+          "function_or_anchor": "func _process",
+          "fact": "Random peers emit timed packets."
+        },
+        {
+          "path": "commons/artifacts/peer_production_tool/peer_production_tool.gd",
+          "line": 123,
+          "function_or_anchor": "func _reset_artifact",
+          "fact": "Clears visible facets and seen-peer flags; lifetime counters are not reset here."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json": "ab407d37b940c92a720c16c6e8ea75bb3eea74333f562f86d38c14007395c0bd",
+        "commons/maps/SpeculativeComputation_Collective_Knowledge/intent.md": "0a238de492b8711949153691afc401392b2ff620d18e3ab28b80064489c4d834",
+        "commons/maps/SpeculativeComputation_Collective_Knowledge/tutorial.md": "525b8c0cba25d1413fd15a0ecb6a989f6386226b73e3079e56e1deb1952f8d6f",
+        "commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md": "9bc3996459d7ca3840bfbeda6151626d65e66d7e717a686fbe8247029c56b7fb",
+        "commons/maps/SpeculativeComputation_Collective_Knowledge/critical.md": "ed53cde6ff54209eaa09a7730002177713961c0dc9f2b34c713af711331a1676",
+        "commons/artifacts/peer_production_tool/peer_production_tool.tscn": "85df85e0770dd328746a1a81ac6ba5a594c98cb592d0f8874a290dfe409683bb",
+        "commons/artifacts/peer_production_tool/peer_production_tool.gd": "91074145442be55410d8831b0790a2753aaae92ff4ec1d9893ad9bac921d190f"
+      },
+      "placements": [
+        {
+          "x": 6,
+          "z": 5,
+          "raw": "peer_production_tool:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Readout counts after subsequent structure cycles may mix lifetime counters with reset seen-peer flags; avoid interpreting contributors as distinct lifetime people. No network users or editable content."
+      ]
+    },
+    {
+      "room_id": "SpeculativeComputation_Rhizome_Network",
+      "primary_tokens": [
+        "rhizome_grower"
+      ],
+      "question": "Can a network grow through local connections without being given a root?",
+      "ontology": "A graph has nodes and edges; this growth rule adds a spatial node and links it to nearby existing nodes. No root field or parent-child hierarchy is assigned.",
+      "action": "Follow one new shoot and count its new links. Watch a locally crowded area and compare how often it receives a connection with a sparse area.",
+      "observable": "Nodes and connecting segments accumulate while the NODES and EDGES readout changes. The structure restarts when its forty-node capacity is reached.",
+      "mechanism": "Starting with two nodes, each timed shoot chooses a random position and connects to up to three nearest existing nodes. Geometric proximity and insertion time therefore shape degree.",
+      "limit": "Having no designated root does not guarantee equal influence or resilience. Early or centrally located nodes can collect many links.",
+      "variation": "Existing: identify a visually busy node and predict the effect of losing it. Proposed: remove it and compute components instead of assuming the network remains connected.",
+      "prior_bridge": "Peer production accumulated contributions; the rhizome makes a connection rule visible.",
+      "next_bridge": "The assembly laboratory next constrains which parts can connect and where they must go.",
+      "sources": [
+        {
+          "path": "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+          "line": 180,
+          "function_or_anchor": "func _nearest_indices",
+          "fact": "Sorts existing nodes by geometric distance."
+        },
+        {
+          "path": "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+          "line": 195,
+          "function_or_anchor": "func _grow_shoot",
+          "fact": "Adds random-position node with nearest-neighbour edges."
+        },
+        {
+          "path": "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+          "line": 211,
+          "function_or_anchor": "func _process",
+          "fact": "Timed growth and capacity restart."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json": "edd8d96385a47740672acf16547c36d36818609aec2f753bfd33d555f265f125",
+        "commons/maps/SpeculativeComputation_Rhizome_Network/intent.md": "c44fed98acf862465348566fac51edabe05c5ac8dda0170431d4a8d1559d737c",
+        "commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md": "559025eba140707e75e33c849462481777901fd042c8f3effd69a9474ffc4c6f",
+        "commons/maps/SpeculativeComputation_Rhizome_Network/technical.md": "164afb8f54472116af14e65fab6ec03286b7913d3dc9a87dd21ef360c7f9fd6e",
+        "commons/maps/SpeculativeComputation_Rhizome_Network/critical.md": "7e8c57ad422c0350cdf1a4aa1f216d62e4bd7dc76da980daaaa5ae458e23250e",
+        "commons/artifacts/rhizome_grower/rhizome_grower.tscn": "4bde2ade3d35364273c23f56e45f3035839f551dcb82d95c4d6a4dc90ea7248f",
+        "commons/artifacts/rhizome_grower/rhizome_grower.gd": "59fa0023006fb21394149f89ccc178a4fc0cf31dfe706740f604f68ae3a19e70"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 5,
+          "raw": "rhizome_grower"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "No live node deletion or VR growth control. No-root is a data-structure statement, not proof of equal power."
+      ]
+    },
+    {
+      "room_id": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "primary_tokens": [
+        "MolecularDesigner"
+      ],
+      "question": "How can the same inventory become more than one recognisable body?",
+      "ontology": "A catalogue names part types; an assembly assigns typed parts to target transforms and declares bonds. Motion towards targets is a separate mechanism from the chosen assembly.",
+      "action": "Choose a recognisable part and follow it through floating and assembly phases. Wait for another assembly and compare which relations have changed.",
+      "observable": "Forty pieces float, then move towards target positions; bond lines update between assigned parts. The scene cycles assemblies with ten-second float and assembly phases.",
+      "mechanism": "The scene reads authored catalogues and assemblies from JSON. MolecularPart uses a damped spring towards a target and independent idle waves otherwise. These are authored assemblies, not a chemical search.",
+      "limit": "A part name or bond line does not establish molecular chemistry. Predefined bodies can be recombined without making every possible body available.",
+      "variation": "Existing: compare a named part’s role across two automatic arrangements. Proposed: author an assembly that the present catalogue makes awkward, then decide whether to change the inventory or its connection rules.",
+      "prior_bridge": "Rhizome growth selected neighbours by proximity; here an explicit assembly defines targets and links.",
+      "next_bridge": "The final ledger asks us to record what every such design choice makes difficult or impossible.",
+      "sources": [
+        {
+          "path": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+          "line": 24,
+          "function_or_anchor": "enable_auto_cycle = true",
+          "fact": "Bound scene config: forty parts, ten-second phases, cycles assemblies."
+        },
+        {
+          "path": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+          "line": 76,
+          "function_or_anchor": "func _process",
+          "fact": "Automatic cycling and bond visual updates."
+        },
+        {
+          "path": "algorithms/computationalbiology/molecular_framework/Part.gd",
+          "line": 56,
+          "function_or_anchor": "func _dock_to_target",
+          "fact": "Damped spring movement to authored target."
+        },
+        {
+          "path": "algorithms/computationalbiology/molecular_framework/assemblies.json",
+          "line": 2,
+          "function_or_anchor": "\"catalog\"",
+          "fact": "Authored part inventory and assembly definitions."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json": "15f3311f2526065cc89ce227fb657b93a51a3f9948b9eed499789586b2c5d8df",
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/intent.md": "053b281d6880bddbbe56939f0c5e7bd615ad27b54c431fef8a21bff6dcec9138",
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md": "2f05727846871503d4e25bb86a050c5ce26e28f04a141bdcf2c4156fc68aaa3f",
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md": "0356456ab1e9d683b3336eb09ef4fbc80726b87ee9e434bf39362a3a1ddf55a9",
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/critical.md": "f7ee72646cc9e3df6e7b9d2fb34b4f89f080990783c197e3047e90ea83e79735",
+        "algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn": "f386e3877a10adee425068fcf95cca981e530a4e57e3c52dfc6a2f7a9762aa7a",
+        "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd": "63b2e663a1a4193929cd935bd896a7e32e3fa0d5d1e09e648d9b3933ee59624a",
+        "algorithms/computationalbiology/molecular_framework/Part.gd": "97cb23c61aefd9846ca064e192fd41a7df19ebe6d18698f858be24df5a5276bb",
+        "algorithms/computationalbiology/molecular_framework/assemblies.json": "30924c937f0a44a6df3816fafc92ee7660813150dc78815cfc709b056a2af508"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 3,
+          "raw": "MolecularDesigner:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Part has grabbed state/setter but no verified XR connection in this scene; do not promise grabbing or visitor construction. Default initial assembly is VRBody."
+      ]
+    },
+    {
+      "room_id": "PostCrisis_Synthesis",
+      "primary_tokens": [
+        "accountability_ledger"
+      ],
+      "question": "Can you name one person a useful design choice could leave out?",
+      "ontology": "A decision has an intended benefit, an excluded case and an owner who can revisit it. Accountability needs a record and a subsequent response, not merely a confession.",
+      "action": "Read one complete choice/exclusion pair before it scrolls away. State a specific change that would reduce that exclusion and one trade-off it would introduce.",
+      "observable": "Example pairs such as a short name field and long names appear on the ledger; older lines leave the six-line display as new entries arrive.",
+      "mechanism": "The artifact randomly displays ten prewritten pairs every1.8seconds. It does not capture visitor decisions, save a ledger or verify a repair.",
+      "limit": "Naming exclusion cannot substitute for changing the condition that produces it. The prewritten groups are prompts, not evidence about a particular user.",
+      "variation": "Existing discussion: return to one museum room and name one real rule, the encounter it prevents and a test for a proposed change. Proposed build: save that decision with its source, owner and next review.",
+      "prior_bridge": "The assembly room made a catalogue’s permitted bodies visible; the ledger asks what those permissions leave outside.",
+      "next_bridge": "Return to a chosen room, including Point One, with one concrete improvement and a way to observe its effect.",
+      "sources": [
+        {
+          "path": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+          "line": 25,
+          "function_or_anchor": "const CHOICES",
+          "fact": "Ten prewritten design choices."
+        },
+        {
+          "path": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+          "line": 126,
+          "function_or_anchor": "func _push_entry",
+          "fact": "Random authored entry; bounded display history."
+        },
+        {
+          "path": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+          "line": 153,
+          "function_or_anchor": "func _process",
+          "fact": "Timed entry display; no visitor input or persistence."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/PostCrisis_Synthesis/map_data.json": "432c91d0eeeff41f5d0250e7da9e88ab435944eb679682b3ddf441faa920affb",
+        "commons/maps/PostCrisis_Synthesis/intent.md": "2813da2dec285274e29c2e12f95ac24da9b06453892ba253cb91b8d28b652350",
+        "commons/maps/PostCrisis_Synthesis/tutorial.md": "98dfffbe9dc80941f7c501ec2dbe081ed9eef969a4552f183c3f45f887d0f49b",
+        "commons/maps/PostCrisis_Synthesis/technical.md": "cc1ebac96b262d52143eca5c1aa5ddefb6de5cc73e69dd70627ebb1bb860424e",
+        "commons/maps/PostCrisis_Synthesis/critical.md": "cd1fb2bfe57b279526fbc005c1b9d0be3412159a8dcdfb197d631cb42571d5bd",
+        "commons/artifacts/accountability_ledger/accountability_ledger.tscn": "6771e70619ec13fa49f4de2c88db6510fdc579d9d9e8b4b07a54a6974fc00644",
+        "commons/artifacts/accountability_ledger/accountability_ledger.gd": "b0000ffa93c193df8cf7d11615a80bdad0ebfcf6ab4ed4ee7da03b8cf4723a06"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "accountability_ledger:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Not an actual log of this visitor, this room or completed work. Do not claim the discussion has been saved."
+      ]
+    }
+  ]
+}

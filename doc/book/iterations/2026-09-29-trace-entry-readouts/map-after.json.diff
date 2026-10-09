@@ -1,0 +1,11 @@
+--- map-before.json
++++ map-after.json
+@@ -6,7 +6,7 @@
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "trace_ball_ramp:0:0#plinth:0", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", "head_trace_projection:0:0#plinth:0#pin:1", " ", " ", " ", "", "whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-	  [" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++	  [" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.7#data_table_yaw:180", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.7#data_table_yaw:180", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.7#data_table_yaw:180", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.7#data_table_yaw:180", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00#data_table_scale:0.7#data_table_yaw:180", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:0:0.5#offset:0.50,1.45,0.47#support:pylon#screen_width:2.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

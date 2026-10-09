@@ -1,0 +1,262 @@
+[
+  {
+    "key": "cloth_simulation",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/physics_simulation.json",
+        "scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/soft_bodies.json",
+        "scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn"
+      }
+    ]
+  },
+  {
+    "key": "coshlea",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions_extra.json",
+        "scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn"
+      }
+    ]
+  },
+  {
+    "key": "demo_compounds",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/interactables/demo_compounds.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://commons/interactables/demo_compounds.tscn"
+      }
+    ]
+  },
+  {
+    "key": "demo_passive",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/interactables/demo_passive.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://commons/interactables/demo_passive.tscn"
+      }
+    ]
+  },
+  {
+    "key": "demo_singles",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/interactables/demo_singles.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://commons/interactables/demo_singles.tscn"
+      }
+    ]
+  },
+  {
+    "key": "entropy_axiom",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/algorithms_misc.json",
+        "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/randomness.json",
+        "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn"
+      }
+    ]
+  },
+  {
+    "key": "fluid_simulation",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/algorithms_misc.json",
+        "scene": "res://algorithms/physicssimulation/fluidsimulation/fluid_simulation.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/physics_simulation.json",
+        "scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn"
+      }
+    ]
+  },
+  {
+    "key": "grab_cube",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/interactables/grab_cube.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/primitives.json",
+        "scene": "res://commons/primitives/cubes/grab_cube.tscn"
+      }
+    ]
+  },
+  {
+    "key": "living_paper",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/living_paper.json",
+        "scene": "res://commons/substrates/living_paper/living_paper.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/primitives.json",
+        "scene": "res://commons/primitives/living_paper/living_paper.tscn"
+      }
+    ]
+  },
+  {
+    "key": "microscope",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/lab.json",
+        "scene": "res://commons/artifacts/microscope/microscope.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://commons/lab/microscope/microscope.tscn"
+      }
+    ]
+  },
+  {
+    "key": "mill_alhambra_p6m",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/pattern_machine_c.json",
+        "scene": ""
+      },
+      {
+        "registry": "commons/artifacts/registry/pattern_mill.json",
+        "scene": ""
+      }
+    ]
+  },
+  {
+    "key": "mill_bauhaus_p4m",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/pattern_machine_c.json",
+        "scene": ""
+      },
+      {
+        "registry": "commons/artifacts/registry/pattern_mill.json",
+        "scene": ""
+      }
+    ]
+  },
+  {
+    "key": "oscilloscope",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/lab.json",
+        "scene": "res://commons/artifacts/oscilloscope/oscilloscope.tscn"
+      }
+    ]
+  },
+  {
+    "key": "prism",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/lab.json",
+        "scene": "res://commons/artifacts/prism/prism.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/primitives.json",
+        "scene": "res://commons/primitives/prism/prism.tscn"
+      }
+    ]
+  },
+  {
+    "key": "rotatescalecubes",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/transforms.json",
+        "scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn"
+      }
+    ]
+  },
+  {
+    "key": "shader_07_noise",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/randomness.json",
+        "scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/shaders.json",
+        "scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn"
+      }
+    ]
+  },
+  {
+    "key": "shader_08_cellularnoise",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/randomness.json",
+        "scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/shaders.json",
+        "scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn"
+      }
+    ]
+  },
+  {
+    "key": "sliding_door",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/lab.json",
+        "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/primitives.json",
+        "scene": "res://commons/primitives/translation/sliding_door.tscn"
+      }
+    ]
+  },
+  {
+    "key": "spring_network",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "scene": "res://commons/artifacts/spring_network/spring_network.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/wavefunctions.json",
+        "scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn"
+      }
+    ]
+  },
+  {
+    "key": "turret_targeting",
+    "definitions": [
+      {
+        "registry": "commons/artifacts/registry/vectors.json",
+        "scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn"
+      },
+      {
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn"
+      }
+    ]
+  }
+]

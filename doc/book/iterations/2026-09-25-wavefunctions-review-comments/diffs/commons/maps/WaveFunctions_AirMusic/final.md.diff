@@ -1,0 +1,11 @@
+--- before/commons/maps/WaveFunctions_AirMusic/final.md
++++ commons/maps/WaveFunctions_AirMusic/final.md
+@@ -45,7 +45,7 @@
+ 
+ Set the stick down more than half a metre from its cradle and leave it alone. After three seconds the return begins. Leave it at rest and listen to the last voice go.
+ 
+-An exponential never quite arrives at zero, but this note does end. The stored sound lasts seven and a half seconds, with a short fade in its final tenth. The model lets go before the mathematical tail does.
++An exponential never quite arrives at zero, but this note does end. The stored sound lasts seven and a half seconds, with a fade over its last tenth of a second. The model lets go before the mathematical tail does.
+ 
+ Look at the plate's other number: 12 ms. The ribbon has only that much time across its width. It reads samples near each bar's playback position, after that player's gain, before distance and the rest of the audio system. A smooth curve here still joins chosen data points. Moving your head changes what reaches you without rewriting these stored notes.
+ 

@@ -1,0 +1,627 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Office · colour between the walls</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f5f2ed;color:#202528;font:17px/1.6 system-ui,sans-serif}a{color:inherit;text-underline-offset:.22em}header,main,footer{max-width:1380px;margin:auto;padding:2rem 5vw}header{padding-top:4rem}nav{display:flex;flex-wrap:wrap;gap:1.4rem;font-size:.88rem;margin:1.7rem 0}h1{font-size:clamp(2.8rem,5vw,5.4rem);line-height:1;letter-spacing:-.05em;font-weight:500;max-width:900px;margin:1rem 0 1.8rem}h2{font-size:2rem;font-weight:500;margin-top:3.5rem}h3{font-size:1.2rem}.eyebrow{letter-spacing:.16em;font-size:.72rem;text-transform:uppercase}.lede{font-size:1.3rem;max-width:740px;color:#4b5457}figure{margin:1.2rem 0 2rem}img{display:block;width:100%;height:auto;background:#ddd}figcaption{font-size:.82rem;color:#576267;margin:.65rem 0}section{scroll-margin-top:2rem;border-top:1px solid #c8cfca;margin-top:3rem;padding-top:1rem}.reading{max-width:760px;margin:auto;font:21px/1.75 Georgia,serif}.reading h1{font:42px/1.1 Georgia,serif}.reading p:has(img){margin:2rem -5vw}.reading p:has(img) img{width:100%}.reading pre{font-size:14px;line-height:1.4}.columns{display:grid;grid-template-columns:1fr 1fr;gap:2rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e6e8e2;padding:1.2rem;border-radius:4px;font:13px/1.6 monospace}code{font-size:.85em}details{border-top:1px solid #ccd1ca;padding:1rem 0}summary{cursor:pointer}table{width:100%;border-collapse:collapse;font-size:15px}td,th{text-align:left;padding:12px;border-bottom:1px solid #ccd1ca}.comparison>input{position:absolute;opacity:0}.comparison>label{display:inline-block;padding:.6rem 1rem;border:1px solid #9da7a0;border-radius:999px;cursor:pointer;margin:0 .5rem .3rem 0}.comparison>input:checked+label{background:#233a3e;color:#fff;border-color:#233a3e}.comparison>input:focus-visible+label{outline:3px solid #d565ae;outline-offset:3px}.pair-a,.pair-b{display:none}.comparison>input:first-of-type:checked~.pair-a,.comparison>input:nth-of-type(2):checked~.pair-b{display:block}.reference{max-width:850px;margin:auto}.note{border-left:3px solid #d474ad;padding-left:1.2rem;max-width:850px}.pill{padding:.3rem .8rem;background:#dce9e1;border-radius:999px;font-size:.85rem}footer{color:#69746e;font-size:.85rem;padding-bottom:4rem}@media(max-width:760px){.columns{grid-template-columns:1fr}.reading{font-size:19px}.reading p:has(img){margin:1rem 0}header,main,footer{padding-left:6vw;padding-right:6vw}}
+</style>
+<header><div class="eyebrow">Ada / Colour / Color_Walls / 1 October 2026</div><h1>Colour between<br>the walls.</h1><p class="lede">The office opens into twelve coloured planes. Your movement composes the overlaps; the gaps give your body a way through.</p><nav><a href="#museum">Museum</a><a href="#comparison">Filter / opaque</a><a href="#reading">Read</a><a href="#making">Make</a><a href="#evidence">Evidence</a></nav></header>
+<main><div id="museum"><figure><a href="across-glass.png"><img src="across-glass.png" alt="Within the actual Color_Walls museum hall. Cyan, magenta and blue cross the view; the ceiling opens to the sky." loading="lazy"></a><figcaption>Within the actual Color_Walls museum hall. Cyan, magenta and blue cross the view; the ceiling opens to the sky.</figcaption></figure></div>
+<div class="columns"><div><h2>The cubicle opens</h2><p>Forty panes enclosing eight workstations become twelve freestanding sheets and three places to sit. Different heights, angled accents and interrupted edges loosen the repeated boxes.</p><p>A pale floor, open wings and a split canopy give the colours a bright ground. There is a route through the middle, a rear opening and gaps at the sides.</p></div><div><h2>A surface between us</h2><p>Look through two panes, then move until only one covers the chair. The geometry stays still while the visible composition changes.</p><p>The entrance button closes the view into opaque colour. Every collider and gap stays where it was. Seeing a way through and having a way through remain different conditions.</p></div></div>
+<section><h2>Before / after</h2><p>Same arrival camera in the production museum, before and after this revision.</p><div class="comparison">
+    <input type="radio" name="revision" id="revision-a" checked><label for="revision-a">Former cubicles</label>
+    <input type="radio" name="revision" id="revision-b"><label for="revision-b">Open planes</label>
+    <div class="pair-a"><figure><a href="before-office.png"><img src="before-office.png" alt="Former cubicles · native Godot museum" loading="lazy"></a><figcaption>Former cubicles · native Godot museum</figcaption></figure></div>
+    <div class="pair-b"><figure><a href="arrival-glass.png"><img src="arrival-glass.png" alt="Open planes · native Godot museum" loading="lazy"></a><figcaption>Open planes · native Godot museum</figcaption></figure></div></div></section>
+<section id="comparison"><h2>Same room. Same gaps.</h2><p>Switch between two native captures from the same camera. In the museum, use the FILTER / OPAQUE button at the entrance.</p><div class="comparison">
+    <input type="radio" name="visibility" id="visibility-a" checked><label for="visibility-a">Filter</label>
+    <input type="radio" name="visibility" id="visibility-b"><label for="visibility-b">Opaque</label>
+    <div class="pair-a"><figure><a href="layers-glass.png"><img src="layers-glass.png" alt="Filter · native Godot museum" loading="lazy"></a><figcaption>Filter · native Godot museum</figcaption></figure></div>
+    <div class="pair-b"><figure><a href="layers-opaque.png"><img src="layers-opaque.png" alt="Opaque · native Godot museum" loading="lazy"></a><figcaption>Opaque · native Godot museum</figcaption></figure></div></div><p class="note">The surfaces use layered alpha tint, not a physical model of glass. The colour changes with both overlap and the renderer’s ordering of transparent surfaces.</p></section>
+<section><h2>Other positions</h2><div class="columns"><figure><a href="back-glass.png"><img src="back-glass.png" alt="Looking back through the open arrangement." loading="lazy"></a><figcaption>Looking back through the open arrangement.</figcaption></figure><figure><a href="plan-oblique.png"><img src="plan-oblique.png" alt="An oblique view reveals the staggered route and three workstations." loading="lazy"></a><figcaption>An oblique view reveals the staggered route and three workstations.</figcaption></figure></div><details><summary>The supplied reference</summary><div class="reference"><figure><a href="reference.png"><img src="reference.png" alt="User-supplied reference: overlapping transparent planes, a pale setting and views through several colours. Artist and title have not been established here." loading="lazy"></a><figcaption>User-supplied reference: overlapping transparent planes, a pale setting and views through several colours. Artist and title have not been established here.</figcaption></figure></div></details></section>
+<section id="reading"><div class="reading"><h1>The view has partitions</h1>
+<!-- @color_constellation_office -->
+
+<p>A sheet of cyan stands higher than you. Beyond it, magenta crosses your view. The pale floor continues through both colours. For a moment, the room seems to have several distances at once.</p>
+<p>Step sideways. A dark patch narrows, then opens into blue. Nothing in the office has moved. You have changed which panes stand between you and the far wall.</p>
+<p>There are twelve sheets, staggered across the floor. Some turn away from the others. Their edges stop short of enclosing a room. Follow one edge until you can pass it; the colour that covered the next space falls behind you.</p>
+<p>A desk waits to one side. Two more places to work are scattered among the partitions. Sit in imagination, or stand beside a chair and look back through the colours. How much of this office could you call your own without being able to close it?</p>
+<p><img alt="Looking through the overlapping colour planes in the museum office." src="/book-review/doc/book/iterations/2026-10-01-office-open-colour/layers-glass.png" /></p>
+<p><em>The overlap changes with your position. The panes and the gaps remain still.</em></p>
+<p>At the entrance, press <strong>FILTER / OPAQUE</strong>. The view closes into coloured surfaces. Take the same route again. The next opening is harder to see, although it has not become narrower.</p>
+<p>Press once more. A chair returns through a pane. The pane still stops your body.</p>
+<p>In filter mode, the surface lets the view behind it contribute to the colour:</p>
+<pre><code class="language-gdscript">surface.albedo_color.a = 0.52
+</code></pre>
+<p>An overlap adds another tint. The pale backing keeps the view bright enough to follow through the layers. This is a blend of screen colours, not a simulation of the wavelengths passing through real glass.</p>
+<p>In Paint, your mark joined someone else's on a shared surface. Here the colour between two people changes what each can see. Opaque walls can interrupt that exchange. Gaps still let a view reach around them. Privacy depends on where you stand, where someone else stands, and how far the partition extends.</p>
+<!-- @color_space_navigator -->
+
+<p>Find a gap between the panes and leave the office. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.</p>
+<p>You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.</p>
+<p><img alt="The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples." src="/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/colour-coordinates.png" /></p>
+<p><em>RGB channels become three straight directions. In HSV, hue goes around, saturation moves outward and value changes height.</em></p>
+<p>The RGB model assigns a sample's position and colour together. In this shortened version of the construction:</p>
+<pre><code class="language-gdscript">position = (Vector3(r, g, b) - Vector3.ONE * 0.5) * cube_size
+colour = Color(r, g, b)
+</code></pre>
+<p>Follow the RGB cube upwards: that direction adds green. Across in the HSV cylinder, rising changes value, as height did among the pillars. Hue goes around its axis; saturation moves outward. Up is still up in the room, but the colour rule gives it another job.</p>
+<p>Neither contains every colour as a visible point: each holds five hundred samples. The gaps belong to the display we have built. Even the black corner has been brightened slightly so that you can find it. To show a value, the exhibit has already made an accommodation. What would disappear if it refused?</p>
+<!-- @gradient_interpolator -->
+
+<p>At the next bench, red and blue mark the ends of a row of sixteen small cubes. Follow the colours between them, then press <strong>RGB / HSV</strong>. Leave the endpoints alone.</p>
+<p>The middle changes. The agreement about where to begin and end did not decide how to travel.</p>
+<p><img alt="The same sixteen gradient cubes between red and blue in RGB and HSV modes." src="/book-review/doc/book/iterations/2026-09-23-walls-view-and-passage/same-endpoints.png" /></p>
+<p><em>The endpoints remain red and blue. Changing the interpolation changes the colours encountered between them.</em></p>
+<p>In RGB mode, the calculation is:</p>
+<pre><code class="language-gdscript">col = ca.lerp(cb, t)
+</code></pre>
+<p>Here <code>t</code> runs from zero to one across the sixteen samples. Red decreases as blue increases. In HSV mode, the program instead chooses the shorter arc around hue, while interpolating saturation and value. For these endpoints that keeps a bright passage through magenta, where the RGB passage was darker. Try <strong>COLOUR A</strong> and <strong>COLOUR B</strong> to choose another pair from eight presets. Does the distinction remain as conspicuous?</p>
+<p>The path was chosen in code. The number of places along it was chosen too. Sixteen cubes let us inspect a transition without pretending we have occupied every value between its ends.</p>
+<!-- @ -->
+
+<p>Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?</p></div></section>
+<section id="making"><h2>Make a change you can follow</h2><div class="reading"><h1>Three ways to pass</h1>
+<p>Begin with a chair seen through two coloured panes. Step sideways until only one pane covers it. The chair, its position and its material have stayed fixed. Follow the edge to a gap and walk around the pane. A view through a surface does not promise passage through it.</p>
+<p>Return to the entrance and press FILTER / OPAQUE. Repeat your route. Inspect <code>toggle_office_glass()</code> in <code>algorithms/color/color_mixing/color_constellation_office.gd</code>: it changes the surface material and shadow setting, without rebuilding the collider. The twelve panes are positioned by <code>PANES</code> in <code>office_planes.gd</code>. Each row contains x, z, yaw, width, height and colour. The geometry uses transforms already introduced in Transformation and a repeated construction already introduced in Arrays.</p>
+<p>The new decision is how the surface combines with the view behind it. Both states use <code>BLEND_MODE_MIX</code>. Filter mode enables alpha transparency with alpha 0.52; opaque mode disables transparency and sets alpha to 1.0. Start with one pane. Change only its colour, then compare the same chair with and without a second pane in front of it. Keep the supplied pale backing so dark surroundings do not obscure the furniture. This operation blends rendered RGB colours; it is not a model of spectral absorption. Transparent surfaces are sorted for rendering, so their order contributes to the result.</p>
+<p>For a first alteration, change one row's yaw, rebuild, and find a new overlap by walking. Keep widths and gaps fixed until you have checked which routes remain possible. The furniture, support geometry and comparison button are supplied apparatus; rebuilding them is not the learning target here.</p>
+<p>At the navigator, identify the RGB axes. Each displayed sample uses its three channels as coordinates relative to the model centre. Locate the same general colour region in the HSV cylinder. Hue is now an angle, saturation a radius, value a height. Compare up in each model: RGB increases green, while HSV increases value, returning to the vertical rule of the Pillar field. Each model shows 500 samples, not every colour. Inspect the black corner's deliberate brightness adjustment.</p>
+<p>At the interpolator, leave the initial red and blue endpoints unchanged and switch RGB / HSV. Describe the middle before reading <code>_recalculate()</code> and <code>_lerp_hsv()</code> in <code>algorithms/color/gradient_interpolator/gradient_interpolator.gd</code>. RGB linearly interpolates channels. HSV chooses the shorter hue arc, then interpolates saturation and value. Use COLOUR A and COLOUR B to choose another pair and repeat.</p>
+<p>Carry three distinctions into Pattern_Disco: a material can change a view, coordinates can organise values, and an interpolation rule can choose a path. Keep the floor arrangement while changing its palette, then keep the palette while changing the pattern. Compare what each change makes visible.</p></div><details><summary>Implementation and limits</summary><h1>Colour as partition, coordinate and path</h1>
+<h2>Office — current layout, 1 October 2026</h2>
+<p>The active placement is <code>color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0</code>. It remains at map cell (23,20), seated on the museum floor. <code>office_planes.gd</code> supplies twelve independent QuadMesh sheets, 2.75–3.55 m high, with thin matching box colliders. Fine edge strips and foot clamps make the obstacles legible. Three desks, monitors and chairs retain the office association without enclosing eight workstations.</p>
+<p>The staggered transverse panes alternate the central route. Three smaller angled screens interrupt the rectangular pattern. A pale floor, interrupted side wings, rear opening and two overhead strips provide a neutral ground for the colour; a central ceiling slot stays open to the museum sky. The display backing is unshaded and does not cast shadows, so the global dark sky cannot erase the comparison. It does not simulate colour transmitted onto the floor by lights.</p>
+<p>Each filter uses one double-sided quad, alpha transparency at 0.52, normal blending, unshaded colour and no cast shadow. One quad avoids applying the tint twice as would happen with two faces of a thin glass box. Fog is disabled on the filter itself; the background retains the museum's rendering. FILTER / OPAQUE disables transparency, sets alpha to 1.0 and enables shadow casting, while preserving RGB values, transforms and the exact collision bodies. Colour filtering here is layered RGB tint, not wavelength-dependent glass absorption. A multiplication trial darkened even a white pane in the current Compatibility renderer, and was rejected on visual inspection. The retained alpha mix is order-dependent; transparent sorting is a rendering limit, especially at intersecting sheets.</p>
+<p><code>layout=cubicles</code> retains the earlier forty-pane layout. No layout selects the older eighteen-pane installation and its <code>mixture=bench/light/retina</code> variants. These are separate configurations; mixture does not modify the active open office. Reapplying the same placement configuration does not rebuild it.</p>
+<h2>Colour coordinates</h2>
+<p><code>color_space_navigator:180:1.2:1#mount:comparison#plinth:0</code> adds an integral support for the two small models. The 0.7-metre RGB cube sits entirely above the support; its 500 seeded samples use colour channels as local coordinates. Another 500 samples populate the HSV cylinder: hue angle, saturation radius, value height. Internal names still say HSL in places, but the code calls <code>Color.from_hsv</code> and the displayed label says HSV. This is an inspectable model, not an interactive colour picker or a body-sized room. The black corner is slightly brightened for visibility.</p>
+<h2>Interpolation</h2>
+<p><code>gradient_interpolator:180:0.95:1#mount:comparison#plinth:0</code> adds its own 0.95-metre support and standing canonical control panel. The comparison configuration enlarges the sixteen cubes to 0.045 metres with 0.009-metre gaps. COLOUR A and COLOUR B advance through eight presets; RGB / HSV toggles the calculation while preserving the endpoints. Other placements retain the original rack and dimensions.</p>
+<p>RGB mode calls <code>ca.lerp(cb, t)</code> at <code>t = i / (step_count - 1)</code>. HSV mode wraps the hue difference onto the shorter arc and linearly interpolates saturation and value. Red to blue therefore compares a darker RGB interior with a saturated magenta HSV interior. Other endpoint pairs need not show the same contrast.</p>
+<h2>Verification</h2>
+<p>Replay the focused production-museum probe:</p>
+<pre><code class="language-powershell">python tools/run_encounter_probe.py Color_Walls --sequence color --render --probe doc/book/iterations/2026-10-01-office-open-colour/probe.gd
+</code></pre>
+<p>The probe checks the actual placed artifact, pane/furniture count, filter material, ordinary-controller passage along the staggered route and out through the rear opening in both visibility states, refusal at a pane, real pointer press/release callbacks, unchanged collider identity and idempotent placement configuration. See the saved report and native interior comparisons in the review directory. This is a supplied desktop input journey, not a headset or learner trial. Quest performance, tracked-hand reach and first-time navigation remain to be checked.</p>
+<p>The 23/28 September reports remain historical evidence for the former cubicles and the two unchanged colour benches. Their forty-pane and eight-entrance claims do not describe this revision. The current probe confirms both benches remain placed; their previous sample/interpolation checks are not presented as rerun here.</p></details></section>
+<section id="evidence"><h2>Checked in the museum</h2><p><span class="pill">47 / 47 native checks pass</span></p><p>The ordinary desktop controller follows ten route legs and leaves through the rear opening in both material states. Direct approaches to a pane are blocked in both. Supplied pointer events operate the actual button. Colour, geometry and collision identity return after two switches; repeated placement configuration does not rebuild the installation.</p><p>These are native GPU captures from the production museum. There has been no headset or learner trial. The RGB/HSV and gradient benches remain placed; their earlier detailed checks are retained as dated evidence.</p><p><a href="report.json">Runtime report</a> · <a href="baseline-report.json">Before report</a> · <a href="source-hashes.json">Current source hashes</a> · <a href="DECISIONS.md">Design decisions and replay</a></p><details><summary>What the first material trial taught us</summary><p>Multiplication made even a white test sheet dark in this museum’s Compatibility rendering. Disabling fog did not resolve it; a minimal shader showed the same result. We retained alpha blending, inspected it from several viewpoints, and documented that its mixing depends on draw order. No claim of spectral absorption follows from the image.</p><figure><a href="diagnostic-white-multiply.png"><img src="diagnostic-white-multiply.png" alt="Rejected diagnostic: one neutral white multiplier still darkened the view. This is evidence from an intermediate trial, not the final installation." loading="lazy"></a><figcaption>Rejected diagnostic: one neutral white multiplier still darkened the view. This is evidence from an intermediate trial, not the final installation.</figcaption></figure></details><details><summary>Exact changes from the working-copy baseline</summary><details><summary>algorithms/color/color_mixing/color_constellation_office.gd</summary><pre>--- before/algorithms/color/color_mixing/color_constellation_office.gd
++++ after/algorithms/color/color_mixing/color_constellation_office.gd
+@@ -1,17 +1,17 @@
+ extends Node3D
+ 
+ # @identity
+-# essence: coloured partitions; Color_Walls selects eight orthogonal, furnished cubicles
++# essence: coloured partitions; Color_Walls selects an open field of twelve filtering planes
+ # desire: compare the route a view can take with the doorway a body must use
+-# critical_parameter: glass/opaque visibility changes material alpha while cubicle collision remains fixed
+-# triggers: the cubicle entrance button toggles GLASS / OPAQUE; the legacy installation has separate mixture variants
++# critical_parameter: filter/opaque changes the view while the physical gaps and pane collision remain fixed
++# triggers: the open office entrance button toggles FILTER / OPAQUE; the legacy installation has separate mixture variants
+ # emerges: seeing a chair through a pane does not let the visitor walk through that pane
+ # needs: headset walkthrough remains a separate check from source and collision probes
+ # relationships: Color_Paint brings neighbours into one image; this office gives neighbours partitions and bodily routes
+-# truth: the cubicle configuration uses renderer transparency, not wavelength-dependent absorption
+-
+-## Color_Walls uses layout=cubicles and compare=visibility.
+-## Without that configuration, the older angled installation and its mixture variants remain available.
++# truth: the open office layers RGB tints; it does not simulate wavelength-dependent absorption
++
++## Color_Walls uses layout=planes and compare=visibility.
++## layout=cubicles retains the former arrangement; no layout selects the legacy mixture installation.
+ 
+ @export var wall_size: Vector2 = Vector2(2.0, 2.4)
+ @export var wall_thickness: float = 0.03
+@@ -54,8 +54,8 @@
+ #            pure hues, which is the same count as the family&#x27;s mosaic.
+ #
+ # `pigment` IS DELIBERATELY ABSENT and the reason is in the registry&#x27;s `declines`:
+-# subtractive mixing needs a white ground to subtract FROM, and a room of
+-# freestanding partitions has none. The sibling solved this with a white TABLE.
++# this legacy installation has no white ground. The later layout=planes adds
++# a pale architectural backing, but does not add a spectral pigment model.
+ @export_enum(&quot;bench&quot;, &quot;light&quot;, &quot;retina&quot;) var mixture: String = &quot;bench&quot;
+ 
+ ## Allow-list. An unknown word in a map token keeps the shipped room rather than
+@@ -66,6 +66,7 @@
+ ## the first build must not tear down panes that do not exist yet.
+ var _built: bool = false
+ var cubicle_office := false
++var open_office := false
+ var office_panes: Array[MeshInstance3D] = []
+ var glass_visible := true
+ var glass_button: Node3D
+@@ -73,10 +74,14 @@
+ 
+ func _ready() -&gt; void:
+ 	cubicle_office = str(get_meta(&quot;config_layout&quot;, &quot;&quot;)) == &quot;cubicles&quot;
++	open_office = str(get_meta(&quot;config_layout&quot;, &quot;&quot;)) == &quot;planes&quot;
+ 	_build_office_walls()
+ 	_built = true
+ 
+ func _build_office_walls() -&gt; void:
++	if open_office:
++		preload(&quot;res://algorithms/color/color_mixing/office_planes.gd&quot;).build(self)
++		return
+ 	if cubicle_office:
+ 		_build_cubicles()
+ 		return
+@@ -183,13 +188,21 @@
+ ## from what is in play, and the rebuild only runs once _ready has built, because
+ ## the grid calls this deferred.
+ func apply_grid_config(config: Dictionary) -&gt; void:
++	if str(config.get(&quot;layout&quot;, &quot;&quot;)) == &quot;planes&quot; and not open_office:
++		open_office = true
++		cubicle_office = false
++		if _built:
++			for child in get_children(): remove_child(child); child.queue_free()
++			_build_office_walls()
++		return
+ 	if str(config.get(&quot;layout&quot;, &quot;&quot;)) == &quot;cubicles&quot; and not cubicle_office:
+ 		cubicle_office = true
++		open_office = false
+ 		if _built:
+ 			for child in get_children(): remove_child(child); child.queue_free()
+ 			_build_cubicles()
+ 		return
+-	if not config.has(&quot;mixture&quot;):
++	if not config.has(&quot;mixture&quot;) or cubicle_office or open_office:
+ 		return
+ 	var want: String = str(config[&quot;mixture&quot;]).strip_edges().to_lower()
+ 	if not MIXTURES.has(want) or want == mixture:
+@@ -265,6 +278,15 @@
+ 
+ func toggle_office_glass() -&gt; void:
+ 	glass_visible = not glass_visible
++	if open_office:
++		for pane in office_panes:
++			var surface: StandardMaterial3D = pane.material_override
++			surface.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
++			surface.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
++			surface.albedo_color.a = 0.52 if glass_visible else 1.0
++			pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF if glass_visible else GeometryInstance3D.SHADOW_CASTING_SETTING_ON
++		if glass_readout: glass_readout.text = &quot;FILTER / SAME PASSAGES&quot; if glass_visible else &quot;OPAQUE / SAME PASSAGES&quot;
++		return
+ 	for pane in office_panes:
+ 		var mat: StandardMaterial3D = pane.material_override
+ 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
+</pre></details><details><summary>algorithms/color/color_mixing/office_planes.gd</summary><pre>--- before/algorithms/color/color_mixing/office_planes.gd
++++ after/algorithms/color/color_mixing/office_planes.gd
+@@ -0,0 +1,113 @@
++extends RefCounted
++## Open partition score for Color_Walls. The enclosing museum is supplied.
++## One QuadMesh per pane: the tint is applied once, from either side.
++## Its thin box collider stays present in both filter and opaque modes.
++
++const PANES := [
++	# x, z, yaw, width, height, colour; gaps are part of the score.
++	[-2.65,-4.70,90.0,3.6,3.55,&quot;39e7ee&quot;],
++	[2.80,-4.40,90.0,4.0,3.55,&quot;ffe82f&quot;],
++	[-2.10,-1.90,0.0,4.8,3.10,&quot;f431ba&quot;],
++	[2.10,0.50,0.0,4.8,3.30,&quot;5075f5&quot;],
++	[-3.20,2.00,90.0,4.0,3.50,&quot;67e9ec&quot;],
++	[-2.00,3.10,0.0,4.6,3.00,&quot;fae54a&quot;],
++	[2.80,2.70,90.0,3.6,3.50,&quot;54df70&quot;],
++	[-2.20,5.80,15.0,3.0,3.20,&quot;ef66c0&quot;],
++	[-4.05,-5.20,-15.0,1.6,2.85,&quot;fc805d&quot;],
++	[4.00,-5.10,15.0,1.6,2.85,&quot;6987f4&quot;],
++	[2.20,5.95,0.0,3.8,3.45,&quot;78dee6&quot;],
++	[-4.10,3.90,32.0,1.4,2.75,&quot;fbb268&quot;],
++]
++
++static func build(office: Node3D) -&gt; void:
++	office.office_panes.clear()
++	office.glass_visible = true
++	office._office_box(office,&quot;QuietFloor&quot;,Vector3(0,0.009,-0.1),Vector3(9.8,0.018,13.4),Color(&quot;e3ded4&quot;),false)
++	# A pale setting keeps furniture legible through layered colour. The dark
++	# museum sky alone supplies little detail. Wings stay open at the entrance,
++	# rear and two side passages; they never make individual coloured cells.
++	for side in [-1.0,1.0]:
++		office._office_box(office,&quot;PaleWing&quot;,Vector3(side*5.2,2.05,-2.2),Vector3(0.10,4.1,9.2),Color(&quot;f1eee7&quot;))
++		office._office_box(office,&quot;RearWing&quot;,Vector3(side*5.2,2.05,6.1),Vector3(0.10,4.1,3.0),Color(&quot;f1eee7&quot;))
++		office._office_box(office,&quot;PaleBack&quot;,Vector3(side*3.15-0.2,2.05,7.5),Vector3(4.2,4.1,0.10),Color(&quot;f1eee7&quot;))
++		# Two overhead strips leave a central opening to the museum sky.
++		office._office_box(office,&quot;Canopy&quot;,Vector3(side*3.0,4.15,0.3),Vector3(4.4,0.08,14.4),Color(&quot;eeeae4&quot;),false)
++	for background in office.get_children():
++		if background is MeshInstance3D:
++			# Neutral display backing, independent of the dark museum sky.
++			background.material_override.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++			background.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	for i in PANES.size():
++		add_pane(office,PANES[i],i)
++	workstation(office,Vector3(-3.85,0,-3.55),90,0)
++	workstation(office,Vector3(3.95,0,1.7),-90,1)
++	workstation(office,Vector3(-3.5,0,5.0),0,2)
++	office.set_meta(&quot;em_visibility_bounds&quot;,AABB(Vector3(-5.5,0,-8.5),Vector3(11,4.3,16.2)))
++	if str(office.get_meta(&quot;config_compare&quot;,&quot;&quot;))==&quot;visibility&quot;:
++		var controls: Node3D = load(&quot;res://commons/ui/control_panel.gd&quot;).new()
++		controls.name = &quot;VisibilityConsole&quot;
++		controls.title = &quot;A VIEW / A WAY THROUGH&quot;
++		controls.position = Vector3(-3.8,1.1,-7.55)
++		controls.rotation_degrees.y = 180
++		office.add_child(controls)
++		office.glass_button = controls.add_button(&quot;FILTER / OPAQUE&quot;)
++		office.glass_button.pressed.connect(office.toggle_office_glass)
++		office.glass_readout = controls.add_readout(&quot;FILTER / SAME PASSAGES&quot;)
++		office._office_box(office,&quot;VisibilityPlinth&quot;,Vector3(-3.8,0.45,-7.55),Vector3(0.8,0.9,0.6),Color(&quot;dcd8d1&quot;))
++
++static func add_pane(office: Node3D, spec: Array, index: int) -&gt; void:
++	var width: float = spec[3]
++	var height: float = spec[4]
++	var colour := Color(str(spec[5]))
++	var pane := MeshInstance3D.new()
++	pane.name = &quot;FilterPane_%02d&quot; % index
++	var mesh := QuadMesh.new()
++	mesh.size = Vector2(width,height)
++	pane.mesh = mesh
++	pane.position = Vector3(spec[0],height*0.5+0.025,spec[1])
++	pane.rotation_degrees.y = spec[2]
++	var surface := StandardMaterial3D.new()
++	surface.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
++	surface.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
++	surface.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	# The background already receives the museum fog; keep each tint clear.
++	surface.disable_fog = true
++	surface.cull_mode = BaseMaterial3D.CULL_DISABLED
++	surface.albedo_color = colour
++	surface.albedo_color.a = 0.52
++	surface.roughness = 0.18
++	pane.material_override = surface
++	pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	var body := StaticBody3D.new()
++	body.name = &quot;PaneBody&quot;
++	var collision := CollisionShape3D.new()
++	var shape := BoxShape3D.new()
++	shape.size = Vector3(width,height,0.035)
++	collision.shape = shape
++	body.add_child(collision)
++	pane.add_child(body)
++	office.add_child(pane)
++	office.office_panes.append(pane)
++	# Fine edges make a transparent obstacle visible without outlining a cube.
++	var edge_colour := colour.lightened(0.48)
++	for x in [-width*0.5,width*0.5]:
++		office._office_box(pane,&quot;GlassEdge&quot;,Vector3(x,0,0),Vector3(0.018,height,0.024),edge_colour,false)
++		office._office_box(pane,&quot;Foot&quot;,Vector3(x,-height*0.5+0.04,0),Vector3(0.13,0.08,0.32),Color(&quot;b5b6b6&quot;),false)
++	# No top rail, no closing return, no suspended label across the view.
++
++static func workstation(office: Node3D, at: Vector3, yaw: float, index: int) -&gt; void:
++	var station := Node3D.new()
++	station.name = &quot;Workstation_%d&quot; % index
++	office.add_child(station)
++	station.position = at
++	station.rotation_degrees.y = yaw
++	office._office_box(station,&quot;DeskTop&quot;,Vector3(0,0.74,0.65),Vector3(1.25,0.045,0.62),Color(&quot;d4b998&quot;))
++	for x in [-0.52,0.52]:
++		office._office_box(station,&quot;DeskLeg&quot;,Vector3(x,0.35,0.65),Vector3(0.03,0.7,0.45),Color(&quot;a2a3a1&quot;))
++	office._office_box(station,&quot;Monitor&quot;,Vector3(0,1.01,0.78),Vector3(0.50,0.30,0.025),Color(&quot;383a40&quot;))
++	office._office_box(station,&quot;MonitorFoot&quot;,Vector3(0,0.79,0.78),Vector3(0.12,0.08,0.16),Color(&quot;96999b&quot;),false)
++	office._office_box(station,&quot;Seat&quot;,Vector3(0,0.45,-0.12),Vector3(0.47,0.045,0.45),Color(&quot;e4dfd3&quot;))
++	office._office_box(station,&quot;Back&quot;,Vector3(0,0.70,-0.34),Vector3(0.47,0.50,0.04),Color(&quot;e4dfd3&quot;))
++	for x in [-0.19,0.19]:
++		for z in [-0.28,0.04]:
++			office._office_box(station,&quot;ChairLeg&quot;,Vector3(x,0.22,z),Vector3(0.025,0.44,0.025),Color(&quot;96999b&quot;),false)
+</pre></details><details><summary>commons/artifacts/registry/color.json</summary><pre>--- before/commons/artifacts/registry/color.json
++++ after/commons/artifacts/registry/color.json
+@@ -693,7 +693,7 @@
+ 			&quot;dna&quot;: {
+ 				&quot;still_note&quot;: &quot;AWAITING A RE-SWEEP ON A FIXED BENCH. Two separate faults were found on 2026-08-05, and the previous still_note was wrong about both. (1) THE AXIS WAS HOLLOW. The note claimed the three readings were implemented; they were not. commit 1fe54b36a says in its own message that it implemented them, and its diff never touches _add_glass_wall - the export, the MIXTURES allow-list and a thirty-line header existed and no function read the variable, so the byte-identical frames were honest. Now implemented as the header specifies: bench falls through the shipped material untouched, light sets alpha 1.0 and BLEND_MODE_ADD so the three 60-degree panes sum to a white core, retina goes opaque and unlit and builds no OmniLight3D at all. (2) THE GREEN WAS THE BENCH, AND IT IS NOT THIS ARTIFACT&#x27;S PROBLEM - it is on every sheet the rig has ever published, riemann_pump included. NatureRenderer is an autoload; its _find_world_environment walks the tree matching on CLASS, found capture_config_sweep&#x27;s own staging WorldEnvironment, took its Environment resource and tweened fog_light_color to Color(0.6,0.6,0.6).lerp(Color(0.55,0.7,0.5), density), which at density 1.0 is exactly the measured RGB(130,165,118) by ratio (0.786/0.714 against 0.788/0.715). density comes from EcosystemManager restoring user://ecosystem_progression.json - the developer&#x27;s own save, all 25 sequences complete - so the bench&#x27;s background colour was a function of how much of the game the operator had played. Fixed in capture_config_sweep.gd: the Environment now lives on Camera3D.environment with no WorldEnvironment node for the bridge to find, the SubViewport owns its World3D, and the ecosystem autoloads are stood down. Not re-swept here - captures are serialised centrally. Expect a strong bite; if it still measures low, suspect the axis, not the fog.&quot;,
+ 				&quot;declines&quot;: {
+-					&quot;pigment&quot;: &quot;A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word.&quot;
++					&quot;pigment&quot;: &quot;Legacy mixture axis only (not layout=planes, added 2026-10-01 with pale backing and layered alpha tint). A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word.&quot;
+ 				},
+ 				&quot;axes&quot;: {
+ 					&quot;mixture&quot;: [
+@@ -705,7 +705,7 @@
+ 			},
+ 			&quot;category&quot;: &quot;unknown&quot;,
+ 			&quot;complexity&quot;: &quot;beginner&quot;,
+-			&quot;description&quot;: &quot;Eight furnished cubicles with 40 tinted glass panes, 2.6 m high, all at right angles; default retains the mixing installation.&quot;,
++			&quot;description&quot;: &quot;Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations.&quot;,
+ 			&quot;dev_themes&quot;: [
+ 				&quot;color&quot;,
+ 				&quot;perception&quot;
+@@ -824,7 +824,7 @@
+ 				}
+ 			},
+ 			&quot;configuration_notes&quot;: {
+-				&quot;layout&quot;: &quot;Eight furnished cubicles with 40 tinted glass panes, 2.6 m high, all at right angles; default retains the mixing installation.&quot;
++				&quot;layout&quot;: &quot;Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations.&quot;
+ 			}
+ 		},
+ 		&quot;color_mixing&quot;: {
+</pre></details><details><summary>commons/data/museum_core_encounters.json</summary><pre>--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -384,7 +384,7 @@
+         &quot;nail_color_controller&quot;,
+         &quot;hand_color_controller&quot;
+       ],
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Nails/final.md&quot;,
+@@ -398,7 +398,7 @@
+         &quot;pillarcolorcollection&quot;,
+         &quot;color_sets_overview&quot;
+       ],
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Pillar/final.md&quot;,
+@@ -413,14 +413,14 @@
+         &quot;color_space_navigator&quot;,
+         &quot;gradient_interpolator&quot;
+       ],
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Walls/final.md&quot;,
+-      &quot;text_sha256&quot;: &quot;042927e1e46acad6ea3183f1f565ded4b1b4e63a76ae6d4eab376b4097e64cbc&quot;,
+-      &quot;map_sha256&quot;: &quot;cc8fc41cdafb354118c05c6b62864efb829fd2dc2d13891dda66ff33512b2aff&quot;,
+-      &quot;learner_verified&quot;: false,
+-      &quot;local_review&quot;: &quot;http://localhost:3003/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/index.html&quot;
++      &quot;text_sha256&quot;: &quot;c214b379ed050cd2599d583aa73a84d3148238ac6be406c5a91ebd7b8b24c888&quot;,
++      &quot;map_sha256&quot;: &quot;298b1ec96f9e9592a03afd46844b15932ab0c346614cbcefadc1a0a561fc39c2&quot;,
++      &quot;learner_verified&quot;: false,
++      &quot;local_review&quot;: &quot;doc/book/iterations/2026-10-01-office-open-colour/index.html&quot;
+     },
+     &quot;Pattern_Foundry&quot;: {
+       &quot;primary_tokens&quot;: [
+@@ -2665,7 +2665,7 @@
+       ],
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;map_sha256&quot;: &quot;9b5b3e58b5f31d7550cf223f26b911de6f90d4f055b31345c48af231792450e0&quot;,
+       &quot;learner_verified&quot;: false,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Grid_Pallet/final.md&quot;,
+@@ -2678,7 +2678,7 @@
+       ],
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;map_sha256&quot;: &quot;a7e26310de601a500d6c75adfac7b1d2e524c3e3b12c8243a3708ad84e160d8b&quot;,
+       &quot;learner_verified&quot;: false,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Rainbow/final.md&quot;,
+@@ -2704,7 +2704,7 @@
+       ],
+       &quot;sequence&quot;: &quot;color&quot;,
+       &quot;status&quot;: &quot;draft&quot;,
+-      &quot;reason&quot;: &quot;Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.&quot;,
++      &quot;reason&quot;: &quot;Open overlapping filters replace the office cubicles; bodily passage stays fixed across visibility modes. Colour coordinates and interpolation follow.&quot;,
+       &quot;map_sha256&quot;: &quot;f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16&quot;,
+       &quot;learner_verified&quot;: false,
+       &quot;text_path&quot;: &quot;commons/maps/Color_Paint/final.md&quot;,
+</pre></details><details><summary>commons/maps/Color_Walls/artifacts.md</summary><pre>--- before/commons/maps/Color_Walls/artifacts.md
++++ after/commons/maps/Color_Walls/artifacts.md
+@@ -34,9 +34,9 @@
+ `gradient_interpolator`
+ 
+ ## color_constellation_office
+-![color_constellation_office](/scene-catalog/color_constellation_office.png)
++![The open colour office in the museum](/book-review/doc/book/iterations/2026-10-01-office-open-colour/across-glass.png)
+ 
+-Office space with adaptive additive/subtractive constellations
++The active office contains twelve freestanding colour planes and three workstations. Walk to change their overlap; FILTER / OPAQUE changes the view while keeping the same physical gaps. Pale backing and an open ceiling slot frame the installation.
+ 
+ `color_constellation_office`
+ 
+</pre></details><details><summary>commons/maps/Color_Walls/blurb.md</summary><pre>--- before/commons/maps/Color_Walls/blurb.md
++++ after/commons/maps/Color_Walls/blurb.md
+@@ -1 +1 @@
+-A coloured office lets your view pass where your body cannot. Change the glass, then change the path between two colours: what stayed in place?
++Step sideways and another colour gathers between the panes. Find a gap to pass through. Change what the walls let you see, then follow two colours along different paths.
+</pre></details><details><summary>commons/maps/Color_Walls/critical.md</summary><pre>--- before/commons/maps/Color_Walls/critical.md
++++ after/commons/maps/Color_Walls/critical.md
+@@ -1,6 +1,8 @@
+ # An invitation to look
+ 
+-The cubicle gives the eye and the body different routes. Transparency makes a desk available to view while the pane still blocks a direct approach. Toggle opacity and the visible invitation disappears, although the entrance and every collision body remain unchanged. This is a specific discrepancy to investigate before attaching a theory of offices to the room.
++The coloured sheets stop short of enclosing a room. A chair is visible through two of them, concealed by an opaque version of the same surfaces, or visible again from another angle. The comparison separates visibility from passage, but the gaps complicate its promise of privacy: opacity is local to a surface, while a view can go around its edge.
++
++The pale backing is a further condition. The earlier dark render concealed the overlaps; the surrounding architecture and material treatment had to change for them to become legible. The exhibit&#x27;s setting participates in its argument.
+ 
+ A queer reading can begin with the inadequacy of one permission as a description of another. Being visible, being accessible, and being able to act are separable conditions. The simulation gives us a controlled example; it does not make every social threshold reducible to a collider. Ask what other bodies, heights or modes of navigation would change the encounter. The current capsule and standing controls supply one answer, not the possible body in general.
+ 
+</pre></details><details><summary>commons/maps/Color_Walls/field_notes.md</summary><pre>--- before/commons/maps/Color_Walls/field_notes.md
++++ after/commons/maps/Color_Walls/field_notes.md
+@@ -1,3 +1,13 @@
++## 2026-10-01 — Open colour planes
++
++The active office now uses layout=planes: twelve large freestanding coloured sheets replace the eight cubicles. Three furnished places remain. Interrupted pale wings and a split canopy give the layered colours a readable ground; the central ceiling slot, side gaps and rear opening remain open. The FILTER / OPAQUE button changes alpha/transparency and shadow casting, preserving every pane&#x27;s RGB, transform and exact collider. These are layered screen tints, not spectral glass or projected coloured light.
++
++The supplied photograph prompted the arrangement; no artist attribution or exact reconstruction is claimed. Current final.md, tutorial, technical, critical, intent and summary follow the new layout. The earlier forty-pane and eight-cubicle observations below are historical.
++
++47 focused native checks pass in the actual isolated production museum: ordinary-controller passage through the staggered route and rear exit in both modes, refusal at a pane, actual pointer callbacks, material state, fixed collision/geometry, repeated-config stability and the retained legacy layouts. No headset, learner or Quest performance trial. Review and working-copy snapshots: doc/book/iterations/2026-10-01-office-open-colour/index.html.
++
++---
++
+ 
+ 
+ ## 2026-09-09 — configuration recovered and enclosed
+</pre></details><details><summary>commons/maps/Color_Walls/final.md</summary><pre>--- before/commons/maps/Color_Walls/final.md
++++ after/commons/maps/Color_Walls/final.md
+@@ -2,36 +2,35 @@
+ 
+ &lt;!-- @color_constellation_office --&gt;
+ 
+-Someone has prepared a place for you. A desk, a monitor, a chair. Seven more places repeat along the aisle. The glass has colour; the office has an order.
++A sheet of cyan stands higher than you. Beyond it, magenta crosses your view. The pale floor continues through both colours. For a moment, the room seems to have several distances at once.
+ 
+-Choose a cubicle. Before entering, look toward its desk through a pane. There is almost nothing between you and the chair. Almost. Walk toward the opening instead. Your view took a route your body could not.
++Step sideways. A dark patch narrows, then opens into blue. Nothing in the office has moved. You have changed which panes stand between you and the far wall.
+ 
+-At the entrance console, press **GLASS / OPAQUE**. Return to the same cubicle. The chair has disappeared behind a coloured wall. Find the opening again. Has the route become longer, or has finding it become a different task?
++There are twelve sheets, staggered across the floor. Some turn away from the others. Their edges stop short of enclosing a room. Follow one edge until you can pass it; the colour that covered the next space falls behind you.
+ 
+-Press once more. The furniture returns to view. No doorway has opened.
++A desk waits to one side. Two more places to work are scattered among the partitions. Sit in imagination, or stand beside a chair and look back through the colours. How much of this office could you call your own without being able to close it?
+ 
+-Now go inside. Stand beside the chair and look back towards the aisle. The glass that let you look in also lets a view reach you here. Would you choose this much openness if you meant to stay?
++![Looking through the overlapping colour planes in the museum office.](/book-review/doc/book/iterations/2026-10-01-office-open-colour/layers-glass.png)
+ 
+-![Looking out from inside a furnished cubicle through its coloured glass.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/inside-glass.png)
++*The overlap changes with your position. The panes and the gaps remain still.*
+ 
+-*Inside the cubicle, the aisle remains in view. The same doorway serves the glass and opaque states.*
++At the entrance, press **FILTER / OPAQUE**. The view closes into coloured surfaces. Take the same route again. The next opening is harder to see, although it has not become narrower.
+ 
+-The office has forty panes. The switch changes two material properties on each one:
++Press once more. A chair returns through a pane. The pane still stops your body.
++
++In filter mode, the surface lets the view behind it contribute to the colour:
+ 
+ ```gdscript
+-mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
+-mat.albedo_color.a = 0.26 if glass_visible else 1.0
++surface.albedo_color.a = 0.52
+ ```
+ 
+-The collision bodies remain where they were. Each cubicle still has its 1.2-metre entrance; the walls still meet at right angles. You may have to find the chair again, but the opening that admitted you is still there.
++An overlap adds another tint. The pale backing keeps the view bright enough to follow through the layers. This is a blend of screen colours, not a simulation of the wavelengths passing through real glass.
+ 
+-In Paint, your gesture joined another painter on a shared surface. Here a coloured surface separates a place to work from a place to pass. Through the glass, each remains visible from the other. Opacity interrupts that exchange in both directions. The cubicle offers another degree of privacy without another way out.
+-
+-Move until several panes overlap in your view. A colour gathers where you see through more than one. No new pane has appeared there. The renderer combines their colours and transparency; it does not calculate the wavelengths a real pane would absorb. Move again and the overlap shifts.
++In Paint, your mark joined someone else&#x27;s on a shared surface. Here the colour between two people changes what each can see. Opaque walls can interrupt that exchange. Gaps still let a view reach around them. Privacy depends on where you stand, where someone else stands, and how far the partition extends.
+ 
+ &lt;!-- @color_space_navigator --&gt;
+ 
+-Leave the cubicle through its opening. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
++Find a gap between the panes and leave the office. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
+ 
+ You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.
+ 
+</pre></details><details><summary>commons/maps/Color_Walls/intent.md</summary><pre>--- before/commons/maps/Color_Walls/intent.md
++++ after/commons/maps/Color_Walls/intent.md
+@@ -1,6 +1,7 @@
+-Concept: distinguish seeing through a partition, locating colour values, and choosing an interpolation path.
+-Sequence role: after Color_Paint&#x27;s shared changing canvas, Color_Walls introduces colour as a condition of the surrounding world. This closes the authored Colour sequence; Pattern_Disco follows in Patterns, returning to the familiar floor with a changeable palette.
+-Key artifacts: color_constellation_office, color_space_navigator, gradient_interpolator. All three are primary and anchored in final.md.
+-Teaching order: enter one cubicle; compare glass and opaque with unchanged collision; inspect RGB/HSV sample models; keep two endpoints while changing interpolation space.
+-Critical question: what can pass through a wall, and which representation decides? Visibility and bodily access can disagree without either being a complete account of the room.
+-Open work: tracked-hand reach and a first-time visitor walkthrough; no headset readiness claimed.
++Concept: distinguish a changing overlap in the view, fixed physical passage, colour coordinates and interpolation paths.
++Sequence role: after Color_Paint&#x27;s shared changing canvas, Color_Walls introduces colour as a condition between the visitor and the surrounding world. It closes Colour; Pattern_Disco follows in Patterns.
++Key artifacts: color_constellation_office, color_space_navigator, gradient_interpolator. All three remain primary and anchored in final.md.
++Teaching order: walk to change the overlap of fixed panes; pass through a gap; compare filter and opaque modes with unchanged collision; inspect RGB/HSV models; keep two endpoints while changing interpolation space.
++Inherited capabilities: points and coordinates, transforms, repeated construction and material colour. New decision: the rule combining a surface with the view behind it. Supporting fabrication and UI are supplied.
++Critical question: what does a partition separate if it never quite encloses a place? Visibility, privacy and bodily passage depend on different conditions.
++Open work: tracked-hand reach, headset performance and a first-time visitor walkthrough; no headset readiness claimed.
+</pre></details><details><summary>commons/maps/Color_Walls/map_data.json</summary><pre>--- before/commons/maps/Color_Walls/map_data.json
++++ after/commons/maps/Color_Walls/map_data.json
+@@ -2,7 +2,7 @@
+   &quot;map_info&quot;: {
+ 	&quot;name&quot;: &quot;Color_Walls&quot;,
+ 	&quot;lookup_name&quot;: &quot;Color_Walls&quot;,
+-	&quot;description&quot;: &quot;The view has partitions: compare glass and opaque cubicles with unchanged passage, inspect RGB and HSV coordinates, then change the path between two colours.&quot;,
++	&quot;description&quot;: &quot;The view has partitions: walk among overlapping colour planes, compare filter and opaque surfaces with unchanged passage, then inspect colour coordinates and interpolation.&quot;,
+ 	&quot;version&quot;: &quot;placed-promenade&quot;,
+ 	&quot;format&quot;: &quot;json&quot;,
+ 	&quot;dimensions&quot;: {
+@@ -3986,7 +3986,7 @@
+ 		&quot;&quot;,
+ 		&quot;&quot;,
+ 		&quot;&quot;,
+-		&quot;color_constellation_office:0:0:1#layout:cubicles#compare:visibility#plinth:0&quot;,
++		&quot;color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0&quot;,
+ 		&quot;&quot;,
+ 		&quot;&quot;,
+ 		&quot;&quot;,
+</pre></details><details><summary>commons/maps/Color_Walls/summary.md</summary><pre>--- before/commons/maps/Color_Walls/summary.md
++++ after/commons/maps/Color_Walls/summary.md
+@@ -1,5 +1,5 @@
+ # The view has partitions
+ 
+-Eight furnished cubicles compare visibility with physical passage. A GLASS / OPAQUE console changes forty panes without moving their colliders or doorways. Two standing exhibits then separate colour coordinates from colour interpolation: finite RGB/HSV sample models, and sixteen gradient samples with endpoint and mode controls.
++Twelve freestanding coloured panes break the former cubicle arrangement into overlapping views and gaps. Three workstations remain. A FILTER / OPAQUE console changes how the surfaces render while preserving their positions and collisions. A pale architectural backing makes the filters visible against the museum&#x27;s dark surroundings.
+ 
+-The room follows Paint and closes the authored Colour sequence. Pattern_Disco opens Patterns by returning to the familiar floor in colour. Its three primaries are color_constellation_office, color_space_navigator and gradient_interpolator.
++Two standing exhibits then separate colour coordinates from colour interpolation: finite RGB/HSV sample models, and sixteen gradient samples with endpoint and mode controls. Color_Walls closes the authored Colour sequence. Pattern_Disco follows in Patterns, returning to the familiar floor in colour.
+</pre></details><details><summary>commons/maps/Color_Walls/technical.md</summary><pre>--- before/commons/maps/Color_Walls/technical.md
++++ after/commons/maps/Color_Walls/technical.md
+@@ -1,10 +1,14 @@
+ # Colour as partition, coordinate and path
+ 
+-## Office
++## Office — current layout, 1 October 2026
+ 
+-`color_constellation_office` opts in with `#layout:cubicles#compare:visibility`. Four cubicles on each side contain desks, monitors and chairs. The root is at floor height; the occupied office is about 9.6 by 13.8 metres. Forty 2.6-metre panes have matching static box colliders. All walls are orthogonal, entrances are 1.2 metres wide, and the central aisle is open.
++The active placement is `color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0`. It remains at map cell (23,20), seated on the museum floor. `office_planes.gd` supplies twelve independent QuadMesh sheets, 2.75–3.55 m high, with thin matching box colliders. Fine edge strips and foot clamps make the obstacles legible. Three desks, monitors and chairs retain the office association without enclosing eight workstations.
+ 
+-The standing entrance console calls `toggle_office_glass()`. This switches material transparency and alpha (0.26 / 1.0). It preserves pane transforms, RGB values and the exact collision bodies. The console has its own solid plinth and is included in the visibility bounds. This is renderer transparency, not wavelength-dependent absorption. The older `mixture` controls belong to the default installation, not this cubicle configuration.
++The staggered transverse panes alternate the central route. Three smaller angled screens interrupt the rectangular pattern. A pale floor, interrupted side wings, rear opening and two overhead strips provide a neutral ground for the colour; a central ceiling slot stays open to the museum sky. The display backing is unshaded and does not cast shadows, so the global dark sky cannot erase the comparison. It does not simulate colour transmitted onto the floor by lights.
++
++Each filter uses one double-sided quad, alpha transparency at 0.52, normal blending, unshaded colour and no cast shadow. One quad avoids applying the tint twice as would happen with two faces of a thin glass box. Fog is disabled on the filter itself; the background retains the museum&#x27;s rendering. FILTER / OPAQUE disables transparency, sets alpha to 1.0 and enables shadow casting, while preserving RGB values, transforms and the exact collision bodies. Colour filtering here is layered RGB tint, not wavelength-dependent glass absorption. A multiplication trial darkened even a white pane in the current Compatibility renderer, and was rejected on visual inspection. The retained alpha mix is order-dependent; transparent sorting is a rendering limit, especially at intersecting sheets.
++
++`layout=cubicles` retains the earlier forty-pane layout. No layout selects the older eighteen-pane installation and its `mixture=bench/light/retina` variants. These are separate configurations; mixture does not modify the active open office. Reapplying the same placement configuration does not rebuild it.
+ 
+ ## Colour coordinates
+ 
+@@ -18,13 +22,12 @@
+ 
+ ## Verification
+ 
+-Run `commons/testing/probe_walls_encounter.gd` in the desktop museum. It checks body sweeps through the aisle and eight entrances in both visibility modes, pane blocking, unchanged collider identity, actual button signals, reachable controls, sample counts and channel-position correspondence. Tracked hands and headset comfort remain untested. Pre-edit map texts and layout are retained in `doc/space/walls-partitions-2026-09-10/before/Color_Walls`.
++Replay the focused production-museum probe:
+ 
++```powershell
++python tools/run_encounter_probe.py Color_Walls --sequence color --render --probe doc/book/iterations/2026-10-01-office-open-colour/probe.gd
++```
+ 
+-## Native comparison and ordinary-controller route, 23 September 2026
++The probe checks the actual placed artifact, pane/furniture count, filter material, ordinary-controller passage along the staggered route and out through the rear opening in both visibility states, refusal at a pane, real pointer press/release callbacks, unchanged collider identity and idempotent placement configuration. See the saved report and native interior comparisons in the review directory. This is a supplied desktop input journey, not a headset or learner trial. Quest performance, tracked-hand reach and first-time navigation remain to be checked.
+ 
+-The new focused probe in doc/book/iterations/2026-09-23-walls-view-and-passage/probe.gd runs the current production museum with isolated output paths. Supplied pointer press/release events operate the actual GLASS / OPAQUE and interpolation buttons. The ordinary museum controller approaches one pane, is stopped, retreats, enters the neighbouring 1.2 m opening and returns in both visibility states. This checks one cubicle’s actual movement path, not all eight entrances. Earlier shape-sweep coverage remains dated above.
+-
+-Forty pane transforms and exact collision bodies survive the material switches. Eight desks remain. Both five-hundred-sample models remain, RGB channel-position correspondence is checked, and the black corner’s deliberate brightness adjustment is retained. The red/blue gradient keeps its endpoints, changes its interior under HSV, and restores its initial values after cycling the endpoint buttons and mode. All sixteen cube transforms stay fixed.
+-
+-43 focused runtime assertions pass. The office and gradient book pairs share their respective cameras; views from inside use the reached player position plus eye height. The first office camera looked mostly through the doorway; only the camera was changed for the retained comparison through a pane. Production scripts, map, geometry, controls and roles remain unchanged. Native figures do not establish tracked-controller reach, headset comfort, colour calibration, learner experience or performance.
++The 23/28 September reports remain historical evidence for the former cubicles and the two unchanged colour benches. Their forty-pane and eight-entrance claims do not describe this revision. The current probe confirms both benches remain placed; their previous sample/interpolation checks are not presented as rerun here.
+</pre></details><details><summary>commons/maps/Color_Walls/tutorial.md</summary><pre>--- before/commons/maps/Color_Walls/tutorial.md
++++ after/commons/maps/Color_Walls/tutorial.md
+@@ -1,8 +1,12 @@
+ # Three ways to pass
+ 
+-Begin with the office. Look through a pane toward a chair, then use the doorway to enter. From beside the chair, look back towards the aisle and notice that the view is reciprocal. Return to the entrance console and press GLASS / OPAQUE. Repeat the route. Compare what became hidden with what became impassable before explaining either.
++Begin with a chair seen through two coloured panes. Step sideways until only one pane covers it. The chair, its position and its material have stayed fixed. Follow the edge to a gap and walk around the pane. A view through a surface does not promise passage through it.
+ 
+-The button changes transparency and alpha; it never rebuilds a collision shape. Inspect `toggle_office_glass()` in `algorithms/color/color_mixing/color_constellation_office.gd`. Ask which part of the implementation the eye encounters and which part the body encounters. Move until panes overlap; this view is produced by rendering several transparent materials.
++Return to the entrance and press FILTER / OPAQUE. Repeat your route. Inspect `toggle_office_glass()` in `algorithms/color/color_mixing/color_constellation_office.gd`: it changes the surface material and shadow setting, without rebuilding the collider. The twelve panes are positioned by `PANES` in `office_planes.gd`. Each row contains x, z, yaw, width, height and colour. The geometry uses transforms already introduced in Transformation and a repeated construction already introduced in Arrays.
++
++The new decision is how the surface combines with the view behind it. Both states use `BLEND_MODE_MIX`. Filter mode enables alpha transparency with alpha 0.52; opaque mode disables transparency and sets alpha to 1.0. Start with one pane. Change only its colour, then compare the same chair with and without a second pane in front of it. Keep the supplied pale backing so dark surroundings do not obscure the furniture. This operation blends rendered RGB colours; it is not a model of spectral absorption. Transparent surfaces are sorted for rendering, so their order contributes to the result.
++
++For a first alteration, change one row&#x27;s yaw, rebuild, and find a new overlap by walking. Keep widths and gaps fixed until you have checked which routes remain possible. The furniture, support geometry and comparison button are supplied apparatus; rebuilding them is not the learning target here.
+ 
+ At the navigator, identify the RGB axes. Each displayed sample uses its three channels as coordinates relative to the model centre. Locate the same general colour region in the HSV cylinder. Hue is now an angle, saturation a radius, value a height. Compare up in each model: RGB increases green, while HSV increases value, returning to the vertical rule of the Pillar field. Each model shows 500 samples, not every colour. Inspect the black corner&#x27;s deliberate brightness adjustment.
+ 
+</pre></details><details><summary>commons/maps/Color_Walls/walked.md</summary><pre>--- before/commons/maps/Color_Walls/walked.md
++++ after/commons/maps/Color_Walls/walked.md
+@@ -1,3 +1,13 @@
++## 2026-10-01 — Open colour planes
++
++The active office now uses layout=planes: twelve large freestanding coloured sheets replace the eight cubicles. Three furnished places remain. Interrupted pale wings and a split canopy give the layered colours a readable ground; the central ceiling slot, side gaps and rear opening remain open. The FILTER / OPAQUE button changes alpha/transparency and shadow casting, preserving every pane&#x27;s RGB, transform and exact collider. These are layered screen tints, not spectral glass or projected coloured light.
++
++The supplied photograph prompted the arrangement; no artist attribution or exact reconstruction is claimed. Current final.md, tutorial, technical, critical, intent and summary follow the new layout. The earlier forty-pane and eight-cubicle observations below are historical.
++
++47 focused native checks pass in the actual isolated production museum: ordinary-controller passage through the staggered route and rear exit in both modes, refusal at a pane, actual pointer callbacks, material state, fixed collision/geometry, repeated-config stability and the retained legacy layouts. No headset, learner or Quest performance trial. Review and working-copy snapshots: doc/book/iterations/2026-10-01-office-open-colour/index.html.
++
++---
++
+ # Color_Walls — walked
+ 
+ &gt; ghost-drafted from the working map (world slot, color thread); Palle rules the voice.
+</pre></details><details><summary>commons/maps/sequences/color.json</summary><pre>--- before/commons/maps/sequences/color.json
++++ after/commons/maps/sequences/color.json
+@@ -50,7 +50,7 @@
+ 	&quot;Color_Pillar: A spatial gradient sampled by pillars; named palettes on a wall&quot;,
+ 	&quot;Color_Grid_Pallet: Color Grid Pallet&quot;,
+ 	&quot;Color_Paint: A painting continues before you touch it&quot;,
+-    &quot;Color_Walls: Colour at office scale through orthogonal glass cubicles&quot;
++    &quot;Color_Walls: Overlapping colour planes, fixed gaps, colour coordinates and paths&quot;
+    ],
+    &quot;maps&quot;: [
+ 	&quot;Color_Context_Placed&quot;,
+</pre></details></details></section>
+</main><footer>Installed in Color_Walls, in the Colour sequence. The main text and tutorial shown here are frozen from the updated canonical manuscripts.</footer></html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coordinates — Primitives facing pages · Endless Museum</title>
+<style>
+:root{--paper:#fcfaf5;--ink:#272c2b;--muted:#707570;--rule:#dcdcd3;--green:#36584e}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#e7e8e2;color:var(--ink)}body{font:16px/1.6 Georgia,'Times New Roman',serif;display:grid;grid-template-rows:auto minmax(0,1fr) auto}a{color:var(--green);text-underline-offset:3px}button,select{font:13px/1.3 system-ui,sans-serif;color:inherit}button{cursor:pointer;background:transparent;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px}button:hover{background:#f5f5ef}button:disabled{opacity:.32;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,article:focus-visible{outline:2px solid var(--green);outline-offset:3px}header{padding:17px 32px 13px;display:flex;gap:28px;align-items:center;justify-content:space-between}.brand{font-size:25px;line-height:1.1;letter-spacing:-.7px}.strap{font:10px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:6px}.chapter-title{font:13px/1.5 system-ui,sans-serif}.chapter-title strong{display:block;font-weight:500;font-size:16px}.chapter-title span{color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:9px}select{background:#f8f8f3;border:1px solid #bfc4ba;border-radius:3px;padding:9px 26px 9px 11px;max-width:220px}main{min-height:0;padding:0 28px 4px}.spread{height:100%;max-width:1680px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-shadow:0 5px 22px #28302712;border:1px solid #d5d7ce;background:var(--paper)}[hidden]{display:none!important}.page{min-width:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#bac0b3 transparent;padding:22px clamp(25px,4vw,67px) 34px;scroll-padding-top:25px}.tutorial{background:linear-gradient(to left,#e7e6dd 0, #f6f3ec 5px,var(--paper) 28px)}.final{background:linear-gradient(to right,#e7e6dd 0,#f6f3ec 5px,var(--paper) 28px);border-left:1px solid #d8d7cc}.running-head{display:flex;align-items:center;gap:10px;min-height:30px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:32px;font:10px/1.5 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.running-head a{margin-left:auto;white-space:nowrap;text-decoration:none}.intent{font-size:9px;background:#efeadc;border-radius:2px;padding:2px 5px;letter-spacing:0}.prose{font-size:18px;line-height:1.75;overflow-wrap:break-word}.prose h1,.prose h2,.prose h3,.prose h4{font-weight:400;line-height:1.2;scroll-margin-top:20px}.prose h1{font-size:clamp(28px,2.6vw,40px);letter-spacing:-.7px;margin:0 0 32px;text-wrap:balance}.prose h2{font-size:27px;margin:38px 0 18px}.prose h3{font-size:22px;margin:30px 0 15px}.prose p{margin:0 0 21px}.prose ul,.prose ol{padding-left:24px;margin:0 0 23px}.prose li{margin:6px 0}.prose blockquote{margin:27px 0;border-left:2px solid #b8c4b7;padding-left:22px;color:#4b5851}.prose pre{padding:18px 20px;margin:25px -7px;background:#edf0e9;border:1px solid #dce2d5;border-radius:2px;overflow:auto;font:12.5px/1.7 Consolas,'Courier New',monospace;tab-size:4}.prose code{font-family:Consolas,'Courier New',monospace;font-size:.79em}.prose :not(pre)>code{background:#eeeee5;padding:1px 3px;border-radius:2px;overflow-wrap:anywhere}.prose pre code{font-size:inherit;white-space:pre;overflow-wrap:normal}.prose img{display:block;max-width:100%;height:auto;margin:30px auto}.prose table{width:100%;display:block;overflow:auto;border-collapse:collapse;margin:25px 0;font:13px/1.6 system-ui,sans-serif}.prose th,.prose td{text-align:left;border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top}.prose th{font-weight:500}.prose hr{border:0;border-top:1px solid var(--rule);margin:35px 0}.prose .footnote{font-size:13px;line-height:1.6;color:#62665f}.prose sup{font-size:10px;line-height:0}.page-end{display:flex;justify-content:space-between;margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);font:11px/1.4 system-ui,sans-serif;color:var(--muted)}footer{padding:9px 33px 12px;display:flex;justify-content:space-between;gap:20px;font:11px/1.4 system-ui,sans-serif;color:var(--muted)}#position{color:#414d43}.mobile-switch{display:none}.skip{position:absolute;top:-60px;background:var(--paper);padding:8px;z-index:2}.skip:focus{top:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1750px){.prose{font-size:19px}.prose pre{font-size:14px}}
+@media(max-width:1080px){header{padding:14px 20px;gap:15px}.chapter-title{display:none}main{padding:0 16px 2px}.page{padding-left:28px;padding-right:28px}.prose{font-size:16px}.prose pre{font-size:12px}footer{padding-left:20px;padding-right:20px}}
+@media(max-width:720px){body{grid-template-rows:auto minmax(0,1fr) auto}header{flex-wrap:wrap;padding:12px 13px;gap:12px}.brand{font-size:21px}.strap{font-size:8px}nav{margin-left:auto;gap:5px}nav button{padding:8px}select{max-width:160px;padding:8px 3px}.mobile-switch{display:flex;width:100%;gap:6px}.mobile-switch button{flex:1;padding:7px;font-size:12px}.mobile-switch button[aria-pressed=true]{background:#36584e;color:white;border-color:#36584e}main{padding:0 8px}.spread{display:block}.page{height:100%;padding:17px 24px 32px;background:var(--paper)}body[data-side=tutorial] .final,body[data-side=final] .tutorial{display:none}.prose{font-size:17px}.prose h1{font-size:30px}.running-head{margin-bottom:25px}footer{font-size:10px;padding:8px 12px}.desktop-hint{display:none}}
+@media print{body{display:block;background:white;height:auto}header,footer{display:none}main{padding:0}.spread{height:auto;box-shadow:none;border:0;display:grid!important;break-after:page}.page{overflow:visible;height:auto;background:white!important;padding:12mm!important;display:block!important}.prose{font-size:10pt}.prose h1{font-size:22pt}.prose h2{font-size:16pt}.prose pre,.prose pre code{font-size:7pt;white-space:pre-wrap;overflow-wrap:anywhere}.running-head{margin-bottom:20px}.running-head a{display:none}a{color:inherit}.page-end{display:none}@page{size:A3 landscape;margin:10mm}}
+
+.nav-button{display:block;font:13px/1.3 system-ui,sans-serif;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px;text-decoration:none;color:inherit;white-space:nowrap}.nav-button:hover{background:#f5f5ef}.nav-button.disabled{opacity:.32;pointer-events:none}.contents{position:relative;font:13px/1.3 system-ui,sans-serif;z-index:3}.contents summary{cursor:pointer;list-style:none;min-width:196px;display:flex;justify-content:space-between;gap:16px;border:1px solid #bfc4ba;border-radius:3px;background:#f8f8f3;padding:9px 12px}.contents ol{position:absolute;right:0;top:29px;width:260px;max-height:70vh;overflow:auto;background:#fcfaf5;border:1px solid #c9cdbf;box-shadow:0 10px 30px #1e2b1e22;list-style:none;padding:9px;margin:10px 0}.contents a{display:block;padding:9px 12px;text-decoration:none;color:inherit}.contents a span{color:var(--muted);margin-right:9px;font-size:11px}.contents a:hover,.contents a[aria-current=page]{background:#e9ede3}.contents summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:720px){.nav-button{padding:8px;font-size:12px}.contents summary{min-width:135px;padding:8px;font-size:12px}.mobile-switch input{position:absolute;opacity:0;width:1px;height:1px}.mobile-switch label{flex:1;padding:7px;border:1px solid #bfc4ba;border-radius:3px;text-align:center;font:12px/1.3 system-ui,sans-serif;cursor:pointer}.mobile-switch input:checked+label{background:#36584e;color:white}.mobile-switch input:focus-visible+label{outline:2px solid #36584e;outline-offset:3px}body:has(#side-final:checked) .tutorial{display:none}body:has(#side-final:checked) .final{display:block}}
+</style>
+</head>
+<body data-side="tutorial">
+<a class="skip" href="#book">Skip to the texts</a>
+<header>
+  <div><div class="brand">Endless Museum</div><div class="strap">Always another room</div></div>
+  <div class="chapter-title"><strong>I. Primitives</strong><span>Points build worlds · Facing pages</span></div>
+  <nav aria-label="Chapter navigation">
+    <a class="nav-button" aria-label="Previous hall" href="Point_One.html">← Previous</a>
+    <details class="contents"><summary aria-label="Choose a hall">03 · Coordinates <span>⌄</span></summary><ol><li><a href="index.html" ><span>01</span> Point Zero</a></li>
+<li><a href="Point_One.html" ><span>02</span> Point One</a></li>
+<li><a href="Point_Coordinates.html" aria-current=page><span>03</span> Coordinates</a></li>
+<li><a href="Point_Lines.html" ><span>04</span> Lines</a></li>
+<li><a href="Point_Trace.html" ><span>05</span> Trace</a></li>
+<li><a href="Point_Line_Grid.html" ><span>06</span> Grid</a></li>
+<li><a href="Point_Triangle_Context.html" ><span>07</span> Triangle</a></li>
+<li><a href="Primitives_Polythedra.html" ><span>08</span> Polyhedra</a></li>
+<li><a href="Point_Animatedcube.html" ><span>09</span> Cube</a></li>
+<li><a href="Primitives_Ignorance.html" ><span>10</span> Primitives</a></li>
+<li><a href="Primitives_Godot.html" ><span>11</span> Godot primitives</a></li>
+<li><a href="Primitives_Columns.html" ><span>12</span> Columns</a></li>
+<li><a href="Primitives_Profiles.html" ><span>13</span> Borrowed outlines</a></li>
+<li><a href="Primitives_Portals.html" ><span>14</span> Limits</a></li>
+<li><a href="Primitives_Melencolia.html" ><span>15</span> Melencolia</a></li></ol></details>
+    <a class="nav-button" aria-label="Next hall" href="Point_Lines.html">Next →</a>
+  </nav>
+  <div class="mobile-switch" aria-label="Reading side">
+    <input type="radio" name="reading-side" id="side-tutorial" checked><label for="side-tutorial">Left · Tutorial</label>
+    <input type="radio" name="reading-side" id="side-final"><label for="side-final">Right · Reflection</label>
+  </div>
+</header>
+<main id="book" aria-label="Tutorial left, reflection right">
+<section class="spread" data-map="Point_Coordinates" data-label="Coordinates" aria-label="Coordinates facing pages"><article class="page tutorial" tabindex="0" aria-label="Coordinates — tutorial">
+              <div class="running-head"><span>Make / tutorial.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Coordinates/tutorial.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Coordinates--tutorial--point-coordinates-carry-a-position">Point Coordinates — carry a position</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickable</li>
+<li>3D coordinate system</li>
+<li>Local and world position</li>
+</ul>
+<p>Take the black point in the museum's coordinate hall. Its surface and boundary follow your hand. Now give the point you made in Point One that same capacity.</p>
+<p>Continue with your existing <code>PointStudy</code> and <code>point.gd</code>. Keep the radius, centre, mesh and collision shape. Change the body's class and pickup settings, then add a position readout. Day Zero supplies the configured XR hands and Godot XR Tools library. Our script supplies the point they can hold.</p>
+<h2 id="Point_Coordinates--tutorial--the-same-point-now-pickable">The same point, now pickable</h2>
+<p>Here is the complete resulting script. The shape construction is unchanged; the new parts are the body's type and settings, the readout, and <code>_process()</code>.</p>
+<!-- student-code:point.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+var point: XRToolsPickable
+var readout: Label3D
+
+func _ready() -&gt; void:
+    point = XRToolsPickable.new()
+    point.position = CENTRE
+    point.freeze = true
+    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    point.collision_layer = 4
+    point.collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    point.add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    point.add_child(boundary)
+
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+</code></pre>
+<p>Run it in the prepared XR scene. Bring your hand to the point, grip, carry it, then release. Its shape is unchanged. Its relation to the hand has changed.</p>
+<h2 id="Point_Coordinates--tutorial--what-the-pickup-connection-adds">What the pickup connection adds</h2>
+<p><code>XRToolsPickable</code> is a physics body with pickup behaviour from the supplied library. It replaces <code>StaticBody3D</code>; the same mesh and collider remain its children. The configured hand selects this body and moves it. Our script does not rebuild hand tracking or the grab driver.</p>
+<p><code>freeze = true</code> holds the point in place initially. The kinematic freeze mode allows collision checking as a frozen body moves. <code>ReleaseMode.FROZEN</code> makes it stay where you release it. <code>RangedMethod.NONE</code> limits this example to a nearby hand.</p>
+<p>The two collision settings match the prepared museum: <code>4</code> puts the point on layer 3, the grab layer; <code>196615</code> enables contact with layers 1, 2, 3, 17 and 18. These numbers are supplied configuration. Set them before <code>add_child(point)</code>, because the pickup library records its starting settings when the body enters the scene.</p>
+<p>To test permission separately, add <code>point.enabled = false</code> just before <code>add_child(point)</code>. Run again. The visible point and collider remain, but the hand cannot select it. Remove that line to restore pickup.</p>
+<h2 id="Point_Coordinates--tutorial--one-point-two-addresses">One point, two addresses</h2>
+<p>The readout uses the <code>Label3D</code> construction from Point Zero. It belongs to <code>PointStudy</code>, so it stays behind when the point moves. <code>_process()</code> reads the point again each frame.</p>
+<p><code>point.global_position</code> gives the point's position in the world's coordinate system. <code>to_local(world_position)</code> converts that position into the coordinate system of the node running this script: <strong>PointStudy</strong>. The two readings describe the same point from different frames.</p>
+<p>The last line converts each vector to text. <code>+</code> joins the pieces; <code>\n</code> starts a new line. It reports the positions without calculating a distance.</p>
+<p>If <code>PointStudy</code> has the world's origin and orientation, the readings initially agree. Move <code>PointStudy</code> two metres along world X and run again. The point still begins at LOCAL <code>(0, 1.12, 0)</code>, but WORLD now includes the study's displacement. Changing the parent changes where the point is without changing its local starting value.</p>
+<p>Carry the point sideways, up, then forward. Watch which components change. Release it and move your empty hand: the point and its two readings stay where you left them.</p>
+<h2 id="Point_Coordinates--tutorial--the-drawn-frame">The drawn frame</h2>
+<p>The museum's pink, grey and black frame helps you see three directions. Its LOCAL card measures from that coloured frame. Our small study measures from <code>PointStudy</code>; the choice is explicit in each case. <code>point.position</code> would instead mean position relative to the point's parent.</p>
+<p>Carry the museum point beyond an arrow's end. The drawing stops; positions continue. A coordinate system can describe more space than its diagram occupies.</p>
+<p>Keep this <code>point.gd</code>. Lines will continue with the held point and introduce a second endpoint. Distance belongs there.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Coordinates/point.gd" rel="noopener" target="_blank">Current point.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div>
+              <div class="page-end">Coordinates <span>Tutorial</span></div>
+            </article><article class="page final" tabindex="0" aria-label="Coordinates — final">
+              <div class="running-head"><span>Reflect / final.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Coordinates/final.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Coordinates--final--point-coordinates-where-is-the-point">Point Coordinates — Where is the point?</h1>
+<!-- @point_held -->
+<p>The first label says “Point one”. This time the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.</p>
+<p>It fits within your hand. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays at the station; the point has gone elsewhere.</p>
+<p>Which part did the name belong to? The position, the sphere, the possibility of taking hold?</p>
+<p>We have already separated seeing a body from being stopped by it. Holding adds another relation. Someone has made this point available to a hand. A position could not have supplied that permission on its own.</p>
+<p>Keep the black point. The corridor opens towards a coloured frame standing in an L-shaped basin. Its glass is level with the floor; the depth belongs below your feet. The point can travel over a hollow without falling into it.</p>
+<!-- @coordinate_readout -->
+<h2 id="Point_Coordinates--final--two-addresses">Two addresses</h2>
+<p>Keep the point in your hand and watch the white card as you move.</p>
+<p>The guides and the card follow the point you are already holding.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The card rounds each component to two decimal places: <code>1.231</code> and <code>1.234</code> both appear as <code>1.23</code>. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.</p>
+<p>Now compare it with the card marked <code>LOCAL</code>. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?</p>
+<!-- @CoordinateSystem3M -->
+<p>Follow the coloured frame's guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p>The two cards give the same point different addresses. <code>WORLD</code> measures from the scene's origin; <code>LOCAL</code> uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.<sup id="Point_Coordinates--final--fnref:coordinates-haraway"><a class="footnote-ref" href="#Point_Coordinates--final--fn:coordinates-haraway">1</a></sup></p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.</p>
+<!-- @drag_point_target -->
+<h2 id="Point_Coordinates--final--room-to-arrive">Room to arrive</h2>
+<p>The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.</p>
+<p>“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.</p>
+<p>The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.</p>
+<p>In the next hall, we keep two positions at once. The space between them will become a line, and a distance we can change.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="Point_Coordinates--final--fn:coordinates-haraway">
+<p>Donna Haraway, <a href="https://doi.org/10.2307/3178066" rel="noopener" target="_blank">“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”</a>, <em>Feminist Studies</em> 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits? <a class="footnote-backref" href="#Point_Coordinates--final--fnref:coordinates-haraway" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              <div class="page-end">Coordinates <span>Reflection</span></div>
+            </article></section>
+</main>
+<footer><span id="position" role="status" aria-live="polite">03 / 15 · Coordinates</span><span class="desktop-hint">Read at your own pace · Each page scrolls independently</span><span>5 October 2026 · Tutorial + reflection</span></footer>
+
+</body>
+</html>

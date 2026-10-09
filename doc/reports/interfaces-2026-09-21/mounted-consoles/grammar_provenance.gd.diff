@@ -1,0 +1,28 @@
+--- before/commons/artifacts/grammar_provenance/grammar_provenance.gd
++++ after/commons/artifacts/grammar_provenance/grammar_provenance.gd
+@@ -173,12 +173,21 @@
+ 		casing.scale = Vector3.ONE * 1.5
+ 		casing.position *= 1.5
+ 	_controls.add_child(casing)
++	var stand := Node3D.new()
++	stand.name = "ConsoleStand"
++	stand.position.z = 1.7
++	add_child(stand)
+ 	var stem := _plate(Vector3(.08, .74, .08))
+-	stem.position = Vector3(0, .37, 1.72)
+-	add_child(stem)
++	stem.position = Vector3(0, .37, .02)
++	stand.add_child(stem)
+ 	var foot := _plate(Vector3(.36, .025, .30))
+-	foot.position = Vector3(0, .025, 1.72)
+-	add_child(foot)
++	foot.position = Vector3(0, .025, .02)
++	stand.add_child(foot)
++
++
++func exhibit_control_parts() -> Array[Node3D]:
++	if not use_physical_controls: return []
++	return [_controls, get_node("ConsoleStand")]
+ 
+ 
+ func _build_header() -> void:

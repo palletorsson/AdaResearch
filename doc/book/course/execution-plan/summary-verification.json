@@ -1,0 +1,50 @@
+{
+  "scope": "Authored plans and planner UI; no new Godot or learner evidence",
+  "halls": 207,
+  "sequences": 25,
+  "paragraphs": 207,
+  "word_range": [
+    51,
+    74
+  ],
+  "forward_prerequisites": [],
+  "editorial_review": "REVIEW.md",
+  "preserved_prior_decisions": true,
+  "preserved_subject_placements": true,
+  "prior_plan_sha256": "3e106b396f76b9978b0064e10c07e72990fa86a8d040fdc66a9a61a246e99f60",
+  "current_plan_sha256": "03b6062a057a5495384ad01295f99a8dfb765eb85d7d18642d1c90ab7674625a",
+  "backend_tests": {
+    "planner": 11,
+    "hall_cards": 8,
+    "passed": true
+  },
+  "typescript": {
+    "changed_files": 4,
+    "diagnostics": 0,
+    "scope": "Targeted, not whole-project typecheck"
+  },
+  "browser": {
+    "summary_edit_saved": true,
+    "reload_preserved_edit": true,
+    "sequence_filter_preserved_on_reload": true,
+    "screenshot": "summaries-preview.png"
+  },
+  "http": [
+    {
+      "route": "/tutorial-plan?view=summaries",
+      "status": 200
+    },
+    {
+      "route": "/api/tutorial-plan?download=summaries",
+      "status": 200
+    },
+    {
+      "route": "/book-review/doc/book/course/execution-plan/REVIEW.md",
+      "status": 200
+    }
+  ],
+  "contract_status": {
+    "specific_proposals": 30,
+    "not_yet_specific": 177
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "status": "Proposed visual teaching map; existing images inspected; no Godot or tutorial edits",
+  "date": "2026-10-04",
+  "scope": "Transformation 7 halls and Arrays 5 halls",
+  "evidence_scope": "Saved museum pictures establish visible context. Dynamic behavior is described by the current route; this task did not rerun the museum. Browser diagrams are proposed teaching models, not captured runtime instrumentation.",
+  "sources": [
+    "../2026-10-04-foundations-before-randomness/plan.json",
+    "../2026-10-04-museum-tutorial-storyboards/route.json"
+  ],
+  "maps": [
+    {
+      "map": "Trans_Pre",
+      "sequence": "transformation",
+      "concept": "Elapsed time and an if/else boundary",
+      "action": "Scrub elapsed seconds from before to beyond a chosen duration; then change duration with endpoints held fixed.",
+      "consequence": "The cube moves between two marked endpoints, reaches the finish, and stays there while the clock can continue.",
+      "contrast": "Before duration: moving branch. At and after duration: holding branch. Separate height, size and turn variations.",
+      "observable_now": "The photographed museum corridor contains the pickup cubes; the route describes linear timed demonstrations.",
+      "proposed_highlight": "A separate side-view cube, seconds ruler, duration marker and two branch lamps. Show elapsed as retained state and delta as one small added interval.",
+      "pitfall": "A still image does not show timing, branch execution or frame-rate independence. Do not depict a sine trajectory as the existing museum motion.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Pre-1.webp",
+      "image_caption": "Saved museum capture: pickup cubes along the corridor. Time and branch indicators are proposed.",
+      "diagram": {
+        "type": "timed_motion",
+        "controls": [
+          "elapsed",
+          "duration"
+        ],
+        "marks": [
+          "start",
+          "finish",
+          "elapsed < duration"
+        ],
+        "sample": {
+          "duration": 2,
+          "elapsed": 1
+        }
+      }
+    },
+    {
+      "map": "Trans_Introduction",
+      "sequence": "transformation",
+      "concept": "An event calls a reset handler",
+      "action": "Advance the model to mid-crossing, press Reset once, and then advance again.",
+      "consequence": "An event pulse reaches the reset function; elapsed returns to zero and the deck's starting pose is restored. Later frame steps continue the trip.",
+      "contrast": "One reset event versus repeated frame updates. A moving deck surface versus the displacement carried to a rider.",
+      "observable_now": "The photo shows a deck, landing and bank control with an alignment readout; it locates the physical crossing encounter.",
+      "proposed_highlight": "A small event-to-handler arrow beside three state boxes: elapsed, deck pose and rider position. Flash the event arrow once; animate frame pulses separately.",
+      "pitfall": "The photographed BANK/RESET control is not proof of the proposed learner timing-reset contract. Label the event/state schematic as a teaching proposal; rider transport remains supplied.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Introduction-1.webp",
+      "image_caption": "Saved museum capture: rotating crossing, destination and bank control.",
+      "diagram": {
+        "type": "event_reset",
+        "controls": [
+          "step",
+          "reset"
+        ],
+        "marks": [
+          "one event",
+          "handler",
+          "elapsed = 0",
+          "start pose"
+        ]
+      }
+    },
+    {
+      "map": "Trans_Translation",
+      "sequence": "transformation",
+      "concept": "Retained waypoint index and a zero-length guard",
+      "action": "Move a marker through a four-entry route with two equal consecutive waypoints; step once at a time.",
+      "consequence": "The active leg and index are highlighted. The repeated point produces a zero-length leg, whose division is skipped before the next leg becomes active.",
+      "contrast": "One update through time versus a loop inspecting all route entries in one call; route length versus direct endpoint separation.",
+      "observable_now": "The saved three-panel picture compares rail, diagonal and another route between common endpoints.",
+      "proposed_highlight": "Numbered route entries linked to a top-down path, current index, leg-length readout and a guard lamp. Show duplicate entries as two list slots at one spatial position.",
+      "pitfall": "Different drawn journeys do not establish safe zero-length handling. Keep the proposed guard display separate from the museum capture; do not skip intervening travel to make the animation simpler.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Translation-1.webp",
+      "image_caption": "Saved comparison of three journeys; the index and guard demonstration is proposed.",
+      "diagram": {
+        "type": "waypoint_guard",
+        "controls": [
+          "step",
+          "reset"
+        ],
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "marks": [
+          "index",
+          "leg length",
+          "length > 0"
+        ]
+      }
+    },
+    {
+      "map": "Trans_Rotation",
+      "sequence": "transformation",
+      "concept": "A returning position function and order of turns",
+      "action": "Use the same off-axis point and two named 90-degree turns; swap their order while preserving both angles and the pivot.",
+      "consequence": "Two endpoint markers land at different positions, with their intermediate position visible after each first turn.",
+      "contrast": "Turn X then Y versus Y then X; rotating an offset around a pivot versus translating the pivot.",
+      "observable_now": "The photo locates the rotation study and marked angular forms; the route names the composition workbench.",
+      "proposed_highlight": "An isometric axis triad, one pivot, a radius line, and two colored sequential paths. Label function inputs and the returned final position.",
+      "pitfall": "A flat two-dimensional rotation comparison will not show general noncommutativity. Use distinct 3D axes and a nondegenerate point; some special inputs do yield equal results.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Rotation-1.webp",
+      "image_caption": "Saved museum rotation context. Ordered point paths are a proposed schematic.",
+      "diagram": {
+        "type": "rotation_order",
+        "controls": [
+          "swap order",
+          "reset"
+        ],
+        "sample": {
+          "point": [
+            1,
+            1,
+            0
+          ],
+          "first_axis": "X",
+          "second_axis": "Y",
+          "degrees": 90
+        }
+      }
+    },
+    {
+      "map": "Trans_Scale",
+      "sequence": "transformation",
+      "concept": "Parent-child transform ownership",
+      "action": "Scale a small parent group from one to two while a comparison doorway remains outside the group.",
+      "consequence": "The children's visible dimensions and separation double around the parent's origin, while the external doorway remains fixed.",
+      "contrast": "Scaling the parent versus scaling one child's own geometry; direct references still identify the same children.",
+      "observable_now": "The photo shows the serving/plate encounter at a changed apparent scale. The route describes the room changing around an unchanged visitor.",
+      "proposed_highlight": "A minimal parent-to-two-children tree paired with a front view, distance brackets and a fixed doorway silhouette. Ghost the original child positions.",
+      "pitfall": "A dramatic camera view alone cannot identify transform ownership, player scaling or relocation. Show the schematic ownership explicitly and keep relocation separate.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Scale-1.webp",
+      "image_caption": "Saved scale encounter. It conveys bodily proportion; the parent/child teaching diagram is proposed.",
+      "diagram": {
+        "type": "parent_scale",
+        "controls": [
+          "parent scale",
+          "one child scale"
+        ],
+        "marks": [
+          "same child references",
+          "child gap",
+          "fixed doorway"
+        ]
+      }
+    },
+    {
+      "map": "Trans_Body",
+      "sequence": "transformation",
+      "concept": "Current boolean versus retained flag",
+      "action": "Move a visitor marker near, away, and near again, then press Reset.",
+      "consequence": "The current-near lamp follows distance immediately; the remembered-visit lamp remains on after departure until reset. A reversible block and retained opening respond differently.",
+      "contrast": "A value recomputed from the present input versus a value retained from an earlier event.",
+      "observable_now": "The saved before/after comparison shows a cut remaining in the lattice after the body has left; a separate route image shows nearby slats.",
+      "proposed_highlight": "A distance threshold ring, two explicitly named lamps and a short near/away timeline. Keep the remembered flag's history visible after the visitor leaves.",
+      "pitfall": "A retained opening does not expose the actual internal variable or prove it is implemented as this boolean. Label the two-flag model as a reduced teaching representation.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Body-1.webp",
+      "image_caption": "Saved museum comparison: an opening remains after passage.",
+      "diagram": {
+        "type": "proximity_memory",
+        "controls": [
+          "visitor distance",
+          "reset"
+        ],
+        "marks": [
+          "near now",
+          "visited before",
+          "threshold"
+        ]
+      }
+    },
+    {
+      "map": "Trans_Pit",
+      "sequence": "transformation",
+      "concept": "Compose familiar rules through one shared input",
+      "action": "Choose an opening fraction and hold it at a middle value; then let a supplied occupancy input request opening or closing.",
+      "consequence": "Two leaves change position, angle and size together; a visible gap can be compared with a fixed body-width marker.",
+      "contrast": "One shared fraction driving several functions versus unrelated values that can disagree. Reset restores the chosen starting state.",
+      "observable_now": "The photo compares two timed sizes in the level-ground room; the route describes the airlock and composed transformations.",
+      "proposed_highlight": "A top-down pair of leaves, a single fraction slider feeding three labeled outputs, and a clearance bracket at the narrowest shown gap.",
+      "pitfall": "The screenshot is of a growing obstacle, not proof of the proposed two-leaf learner model. Browser clearance is a geometric illustration and does not verify Godot collision or headset passage.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Pit-1.webp",
+      "image_caption": "Saved timed-room comparison. The shared-fraction airlock diagram is proposed.",
+      "diagram": {
+        "type": "shared_opening",
+        "controls": [
+          "opening fraction",
+          "occupied",
+          "reset"
+        ],
+        "marks": [
+          "position",
+          "angle",
+          "size",
+          "clear gap"
+        ]
+      }
+    },
+    {
+      "map": "Array",
+      "sequence": "array_tutorial",
+      "concept": "Slots, object references and independent objects",
+      "action": "Select a stored reference and move its target; switch between two references to one object and references to two separately created objects. Separately empty one occupancy slot.",
+      "consequence": "Reference arrows identify the target whose position changes. Two aliases still end at one object; independent references end at distinct objects. An emptied occupancy address stays in place.",
+      "contrast": "One object with two names versus two objects; stored occupancy versus the visible object and its reference.",
+      "observable_now": "The photo shows a row, grid and related museum exhibits. Collections and spatial repetition are visible.",
+      "proposed_highlight": "A separated data strip and scene strip joined by arrows; show alias and independent cases side by side, plus a retained empty slot with its unchanged index.",
+      "pitfall": "Neither repeated cubes nor a screenshot proves identity or memory aliasing. The arrows and reference experiment are proposed teaching views, not extracted live Godot memory.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Array-1.webp",
+      "image_caption": "Saved museum array hall. Reference ownership is made visible only in the proposed diagram.",
+      "diagram": {
+        "type": "references_slots",
+        "controls": [
+          "alias or independent",
+          "move selected target",
+          "empty slot"
+        ],
+        "marks": [
+          "reference A",
+          "reference B",
+          "object identity",
+          "occupancy"
+        ]
+      }
+    },
+    {
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "concept": "Spatial coordinates and storage order",
+      "action": "Choose the unequal coordinate x=1, y=2, z=3 in the four-by-four-by-four volume, then write one value and read it back.",
+      "consequence": "One cube highlights in space while its storage trail opens as values[2][3][1]. Neighbouring cells retain their values.",
+      "contrast": "Displayed [x,y,z] versus stored [y][z][x]; changing spacing changes physical positions without changing addresses.",
+      "observable_now": "The photo clearly shows indexed cubes within the flight volume, including [2,2,2] and [2,2,3].",
+      "proposed_highlight": "An exploded layer view, three color-consistent axes and a breadcrumb from y-layer to z-row to x-entry. Use unequal indices in the proposed selection.",
+      "pitfall": "Equal indices can conceal a swapped-axis error. An extra index supplies an address, not flight; flight controls and row/layer construction remain supplied or explicitly explained.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_3D-1.webp",
+      "image_caption": "Saved labeled volume; proposed layer view explains the storage convention.",
+      "diagram": {
+        "type": "volume_address",
+        "controls": [
+          "x",
+          "y",
+          "z",
+          "write value"
+        ],
+        "sample": {
+          "x": 1,
+          "y": 2,
+          "z": 3,
+          "size": 4
+        },
+        "marks": [
+          "space [x,y,z]",
+          "values[y][z][x]"
+        ]
+      }
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "sequence": "array_tutorial",
+      "concept": "A repeating address-to-turn rule with one exception",
+      "action": "Select an address in a four-by-four field, predict its quarter-turn from the displayed remainder rule, then set one exceptional address.",
+      "consequence": "The selected asymmetric motif rotates; expanding the field extends the same rule while preserving the named exception.",
+      "contrast": "Zero as a valid orientation versus zero as empty occupancy; changing the rule versus replacing the motif.",
+      "observable_now": "The saved overhead picture shows six differently organized fields made from a related motif vocabulary.",
+      "proposed_highlight": "An address grid beside an enlarged motif, a numeric remainder wheel 0-3, and one outlined exception. Use a deterministic rule such as (x+z)%4.",
+      "pitfall": "The installed fields are raster images. Draw cell outlines as a browser explanation, not as evidence of per-tile nodes, collision bodies or stored occupancy.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Tiling_Floor-1.webp",
+      "image_caption": "Saved six-field museum comparison; the selected address and remainder wheel are proposed.",
+      "diagram": {
+        "type": "remainder_tiles",
+        "controls": [
+          "selected address",
+          "exception",
+          "field size"
+        ],
+        "sample": {
+          "rule": "(x + z) % 4",
+          "size": 4
+        },
+        "marks": [
+          "0°",
+          "90°",
+          "180°",
+          "270°"
+        ]
+      }
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "sequence": "array_tutorial",
+      "concept": "One image, another receiver",
+      "action": "First rotate the pattern inside a fixed wall; then rotate the wall carrying the unchanged pattern.",
+      "consequence": "Pattern orientation changes in the first comparison while the wall outline stays fixed. In the second, wall outline and passage direction change together.",
+      "contrast": "Image coordinates versus the transform of the physical carrier; shared source versus apparent size at different viewing distances.",
+      "observable_now": "The photo shows upright patterned surfaces with a marked exception and a wall opening/context.",
+      "proposed_highlight": "Two small top views with separate texture-arrow and wall-outline indicators. Keep the same source-image swatch visible beside both.",
+      "pitfall": "A photograph cannot prove shared image identity or collision motion. The existing floor/wall generator does not automatically transfer a learner's edited image; that assignment remains explicit and proposed.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Tiling_Walls-1.webp",
+      "image_caption": "Saved patterned-wall encounter; source and carrier indicators are proposed.",
+      "diagram": {
+        "type": "image_carrier",
+        "controls": [
+          "image turn",
+          "wall turn"
+        ],
+        "marks": [
+          "same source",
+          "wall outline",
+          "passage"
+        ]
+      }
+    },
+    {
+      "map": "Tutorial_Disco",
+      "sequence": "array_tutorial",
+      "concept": "A retained boolean score read by a clock",
+      "action": "Toggle one step in a short score and advance the playhead; then change tempo without changing any stored steps.",
+      "consequence": "The playhead visits each address. True entries emit a momentary trigger pulse; false entries emit none. Tempo changes the spacing of visits while the score remains.",
+      "contrast": "Stored score versus present playhead versus triggered event; a false entry means no new trigger, not stop an already ringing sound.",
+      "observable_now": "The saved image shows a lit strip in the museum floor. The route separately identifies a sequencer and independently changing floor.",
+      "proposed_highlight": "A clearly separate eight-step browser score, moving cursor, trigger lamp and event timeline. A play/step/reset control can expose retained index and elapsed time.",
+      "pitfall": "Do not infer sequencer state from the floor screenshot, call its lit strip a recorded score, or imply footsteps recorded it. The proposed eight-step diagram is smaller than the installed four-track, sixteen-step instrument; its twelve-column floor is not the score.",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Disco-1.webp",
+      "image_caption": "Saved museum floor only. The independent score/playhead diagram is proposed.",
+      "diagram": {
+        "type": "boolean_score",
+        "controls": [
+          "toggle step",
+          "play or step",
+          "tempo",
+          "reset"
+        ],
+        "sample": {
+          "score": [
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        "marks": [
+          "stored bools",
+          "current step",
+          "new trigger"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+--- before/commons/maps/Wavefunctions_Sky_Stairs/map_data.json
++++ after/commons/maps/Wavefunctions_Sky_Stairs/map_data.json
+@@ -3,7 +3,7 @@
+   "name": "Wavefunctions_Sky_Stairs",
+   "title": "Wavefunctions_Sky_Stairs",
+   "lookup_name": "Wavefunctions_Sky_Stairs",
+-  "description": "A vertical amphitheater where you are launched 10 units skyward, then descend through sine-modulated cylinder staircases. Each step follows sin(t)—climbing stairs IS tracing a waveform. Floating cube fields at varying heights sample 3D space. Mathematical objects await at the deep stage below. The tallest structure in the wavefunctions sequence.\n\n[Placement applied humanoid_walker engine — constraint 0.947→0.900, walkability 0.753→0.898]",
++  "description": "Inspect a single helical staircase whose tread radius varies sinusoidally while height rises uniformly. Compare sampled centres, tread edges and the membranes joining them from the surrounding floor. Mathematical objects, a cube and the dark sphere remain secondary references. Full ascent, headroom and headset comfort are not established by the visible outline.",
+   "version": "placed-humanoid_walker",
+   "format": "json",
+   "dimensions": {
+@@ -15,7 +15,7 @@
+    "difficulty": "intermediate",
+    "category": "wavefunctions",
+    "estimated_time": "5-7 minutes",
+-   "learning_objectives": [ "Sine-modulated geometry as architecture", "Vertical oscillation and spatial sampling", "Embodied waveform tracing through climbing", "Phase relationships in 3D space" ]
++   "learning_objectives": [ "Distinguish angular progression, radial sine modulation and uniform rise", "Compare sampled centres with tread edges and connections", "Recognize that collision geometry does not establish a usable full ascent", "Inspect provisions for different bodies from accessible viewpoints" ]
+   },
+   "eye_shot_adopted": "Trial_eye_Wavefunctions_Sky_Stairs",
+   "museum": {

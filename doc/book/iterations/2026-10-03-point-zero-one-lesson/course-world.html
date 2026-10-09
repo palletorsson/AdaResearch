@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Ada world, portable studies</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f6f3eb;color:#282b29;font:19px/1.65 Georgia,serif}
+main{max-width:1160px;margin:auto;padding:35px 24px 70px}header,article{max-width:720px;margin:0 auto}
+header{font:14px/1.6 system-ui,sans-serif;border-bottom:1px solid #ccc6bc;padding-bottom:20px;margin-bottom:42px}
+nav{display:flex;flex-wrap:wrap;gap:12px 24px}a{color:#794451;text-underline-offset:3px}
+h1{font-weight:normal;font-size:38px;line-height:1.2}h2{font-weight:normal;font-size:27px;margin-top:36px}
+p{margin:0 0 22px}pre{padding:20px;background:#eae6dd;overflow:auto;font:14px/1.55 Consolas,monospace}
+code{font-family:Consolas,monospace;font-size:.88em}pre code{font:inherit}details{margin-top:48px;border-top:1px solid #ccc6bc;padding-top:20px}
+summary{font:16px/1.6 system-ui,sans-serif;cursor:pointer}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:35px;font-size:16px}
+.comparison>div{min-width:0}.comparison h1{font-size:28px}.comparison h2{font-size:23px}
+.views{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.views figure{margin:20px 0}.views img{width:100%;height:auto}.views figcaption{font:14px/1.5 system-ui,sans-serif}
+a:focus-visible,summary:focus-visible{outline:3px solid #a75172;outline-offset:4px}
+@media(max-width:800px){.comparison{grid-template-columns:1fr}body{font-size:18px}main{padding:24px 18px}}
+@media print{header,details{display:none}body{background:white;font-size:11pt}main{padding:0}pre{white-space:pre-wrap}h2{break-after:avoid}}
+</style></head><body><main><header><nav><a href="index.html#reading">Back to Point Zero</a></nav></header><article><h1>One Ada world, portable studies</h1>
+<p>3 October 2026. Course agreement following Palle's distinction between a study that can run separately and a study that belongs to Ada.</p>
+<p>The course builds a growing collection of works in one prepared Ada XR project. A small study can also run on desktop. Its construction remains portable; its place in the curriculum comes from the museum encounter and the skills it inherits.</p>
+<h2>Day Zero establishes the environment</h2>
+<p>The intended student starter supplies the Godot project, an empty working room, lighting, a player, OpenXR configuration and the chosen XR Tools components. Include the compatible add-on version in the starter download. Explain what each part does; do not ask students to assemble a fresh collection of plug-ins for every lesson.</p>
+<p>Day Zero covers importing the project, editing, saving, running and stopping. The headset route also covers device setup and export, followed by a real check of head tracking, movement and a supplied pickup object. A successful desktop run does not certify the headset route.</p>
+<p>The desktop route supports students without a headset and quick iteration. Its input and camera can differ from XR. When that difference matters to a lesson, name it.</p>
+<p>Day Zero also prepares the image: viewing, environment light, a main light, fill, material response and clear edges. The starter provides an editable studio preset. Its desktop Forward+ rendering and lighter Compatibility path are documented separately; neither a polished screenshot nor a desktop run certifies headset performance. Later lessons inherit these conditions and return to their construction when relevant.</p>
+<p>The <a href="../2026-10-03-day-zero-light-and-material/index.html">lighting comparison</a> shows the running room before and after, and what happens when its main light is removed.</p>
+<h2>What each tutorial contributes</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prepared world</td>
+<td>Viewing, locomotion, device input and the supplied interaction components.</td>
+</tr>
+<tr>
+<td>Student's study</td>
+<td>The display, body, rule or system taught here, created in code with its state and direct references.</td>
+</tr>
+<tr>
+<td>Hall</td>
+<td>The scale, placement, neighbours and bodily situation that give this construction a question.</td>
+</tr>
+</tbody>
+</table>
+<p>Each lesson names its starting context and dependencies. Create the teaching object in code; do not fetch a secretly prepared object using <code>$</code>, <code>get_node()</code> or another path lookup. A supplied XR component is allowed when its role and public interface are stated. Self-contained does not mean rewriting the engine or an entire player in every example.</p>
+<p>For Point Zero, the same script can create a counter on a plain Node3D in a desktop study or in the Ada world. It requires a view of that location, but it does not read a camera or controller by name. Its desktop camera experiment teaches perspective; in XR the view follows the head.</p>
+<p>When Coordinates introduces grabbing, the lesson must declare the provided pickup component and what it supplies. A desktop substitute can test position changes, but cannot stand in for testing reach, grip or release on the headset. Where useful, pass a position or event into the study through an explained interface, keeping device-specific input separate from the rule being investigated.</p>
+<p>Save each work as a scene or script the student can reuse. Bring selected works together into their own room. The growing collection need not all run at once, and the learner need not reproduce every museum artifact.</p>
+<h2>What is available now</h2>
+<ul>
+<li>The full Ada project enables OpenXR, bundles Godot XR Tools 4.5.1 and starts <code>commons/scenes/vr_staging.tscn</code>, as checked in the local project and add-on configuration.</li>
+<li>The small Day Zero and Point Zero downloads are desktop studies. They contain no tracked player or XR add-ons.</li>
+<li>Point Zero's construction has been tested on a bare Node3D and in its prepared desktop room. Headset integration of that study is not claimed by those tests.</li>
+<li>The <a href="../2026-10-03-ada-xr-starter/index.html">student XR starter</a> now packages one room, a desktop player, an XR Tools player, a supplied pickup cube and the unchanged Point Zero counter. The add-on and action map are included in its download. Desktop and simulated-controller checks are recorded with the package; a real headset run and standalone Quest export still need verification.</li>
+<li>Point One now has its own <code>point_one.tscn</code> in that same starter. It borrows the room and player, then creates the lesson's position, mesh and collision in three small scripts. Its <a href="../2026-10-03-point-one-a-body/index.html#reading">reading copy</a> and executable checks are ready for author review.</li>
+<li>The <a href="../2026-10-03-point-lines-two-ends/index.html#reading">Point Lines pilot</a> runs in <code>point_lines.tscn</code> in the shared starter. Its named supplied scripts provide holding and segment drawing; the lesson computes displacement and distance. Coordinates remains the intervening hall and still needs its shared-starter writing pass.</li>
+</ul>
+<p>Keep writing and checking one tutorial at a time. Use the starter to establish a working room during Day Zero. Record the actual headset and device results before calling that route ready for a class. The prepared player is something to borrow; Point Zero's counter remains something the student constructs.</p></article></main></body></html>

@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Carusell · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Carusell">← Tutorial lineage</a></p><h1>SoftBodies Carusell</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Carusell/final.md">Raw captured source</a></p><pre># The support moves
+
+&lt;!-- @revolving_joy_ride --&gt;
+
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed. The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.
+
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+
+The rate is measured in radians per second. A complete turn is `TAU` radians. The driven rotation connects this hall to Transformation and Oscillation, but the hanging bodies add a different problem: their current state matters to what happens next.
+
+Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
+
+This carousel offers an image of freedom through motion. Its moving parts also show how motion can be organized by obligations: a joint, a pin, a driven hub. The question is which relations can move, and which relations move them.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @cloth_straps --&gt;
+
+The cloth strips nearby retain a fixed support. Return to them after watching the ride. They make the contrast available at the same bodily scale: a surface can respond while its boundary remains still, or respond because its boundary is driven.
+
+The sticks, pick-up cubes, flex pad and soft mushroom remain part of the collection. They are opportunities for further encounters, rather than evidence that every visible object runs the same solver. Begin with one comparison you can follow, then widen it.
+
+In the next room, the enclosing architecture takes on a deformable surface. The distinction between a body and its surroundings becomes harder to maintain by pointing.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Carusell/tutorial.md">Raw captured source</a></p><pre># The support moves
+
+&lt;!-- @revolving_joy_ride --&gt;
+
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed.
+
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+
+The rate is measured in radians per second. A complete turn is `TAU` radians. The driven rotation connects this hall to Transformation and Oscillation, but the hanging bodies add a different problem: their current state matters to what happens next.
+
+Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
+
+This carousel offers an image of freedom through motion. Its moving parts also show how motion can be organized by obligations: a joint, a pin, a driven hub. The question is which relations can move, and which relations move them.
+
+
+
+&lt;!-- @cloth_straps --&gt;
+
+The cloth strips nearby retain a fixed support. Return to them after watching the ride. They make the contrast available at the same bodily scale: a surface can respond while its boundary remains still, or respond because its boundary is driven.
+
+The sticks, pick-up cubes, flex pad and soft mushroom remain part of the collection. They are opportunities for further encounters, rather than evidence that every visible object runs the same solver. Begin with one comparison you can follow, then widen it.
+
+In the next room, the enclosing architecture takes on a deformable surface. The distinction between a body and its surroundings becomes harder to maintain by pointing.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Carusell/technical.md">Raw captured source</a></p><pre># The support moves — implementation
+
+Primary source scenes:
+
+- `res://algorithms/softbodies/joyride/revolving_joy_ride.tscn`
+- `res://algorithms/softbodies/cloth_straps/cloth_straps.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers SPEED, REVERSE, STOP, STIFFNESS, PRESSURE, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed.
+
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+
+The rate is measured in radians per second. A complete turn is `TAU` radians. The driven rotation connects this hall to Transformation and Oscillation, but the hanging bodies add a different problem: their current state matters to what happens next.
+
+Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
+
+This carousel offers an image of freedom through motion. Its moving parts also show how motion can be organized by obligations: a joint, a pin, a driven hub. The question is which relations can move, and which relations move them.
+
+The cloth strips nearby retain a fixed support. Return to them after watching the ride. They make the contrast available at the same bodily scale: a surface can respond while its boundary remains still, or respond because its boundary is driven.
+
+The sticks, pick-up cubes, flex pad and soft mushroom remain part of the collection. They are opportunities for further encounters, rather than evidence that every visible object runs the same solver. Begin with one comparison you can follow, then widen it.
+
+In the next room, the enclosing architecture takes on a deformable surface. The distinction between a body and its surroundings becomes harder to maintain by pointing.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Carusell/intent.md">Raw captured source</a></p><pre># Intent
+
+What changes when the constraint itself is driven?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Carusell/critical.md">Raw captured source</a></p><pre># The support moves — question the construction
+
+What changes when the constraint itself is driven?
+
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed.
+
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+
+Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
+
+This carousel offers an image of freedom through motion. Its moving parts also show how motion can be organized by obligations: a joint, a pin, a driven hub. The question is which relations can move, and which relations move them.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Carusell/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `flex_cloth_pad` — secondary
+- `synthesis_stand` — secondary
+- `pick_up_cube` — secondary
+- `grab_long_stick` — secondary
+- `revolving_joy_ride` — primary
+- `cloth_straps` — primary
+- `soft_mushroom` — secondary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Carusell/summary.md">Raw captured source</a></p><pre># The support moves
+
+What changes when the constraint itself is driven?
+
+Primary encounters: revolving_joy_ride, cloth_straps. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Carusell/blurb.md">Raw captured source</a></p><pre># The support moves
+
+What changes when the constraint itself is driven?
+</pre></section></body></html>

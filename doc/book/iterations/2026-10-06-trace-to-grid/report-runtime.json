@@ -1,0 +1,1697 @@
+{
+  "passed": true,
+  "scope": "Native Godot 4.6 runs the exact printed Grid code, unchanged PointBody/LineSkin and the full flat-Y exercise. Assertions cover manual coordinate oracles, source preservation, local frames, geometry, same-record pitch switching, actual XRTools overlap/grab-driver/action/release with synthetic controller input, and desktop named action. No headset comfort, human learning, cross-hall transport or production museum behaviour is certified.",
+  "learner_source_sha256": "cc30494944b29249341f110e8994cdc933f72280a5431ff5142720ec95f51b7a",
+  "incoming_sha256": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124",
+  "checks": [
+    {
+      "description": "Addresses use integer triples.",
+      "id": "types/addresses",
+      "passed": true
+    },
+    {
+      "description": "Placed positions remain Vector3 values in metres.",
+      "id": "types/derived",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "quant/0.25/2/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "quant/0.25/2/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "quant/0.25/2/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "quant/0.25/2/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "quant/0.25/2/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "quant/0.25/2/finish",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "quant/0.5/8/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "quant/0.5/8/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "quant/0.5/8/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "quant/0.5/8/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "quant/0.5/8/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "quant/0.5/8/finish",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "quant/0.25/14/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "quant/0.25/14/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "quant/0.25/14/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "quant/0.25/14/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "quant/0.25/14/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "quant/0.25/14/finish",
+      "passed": true
+    },
+    {
+      "description": "Moving the station does not change its local derived positions.",
+      "id": "frame/local_snapshot",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "frame/moved/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "frame/moved/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "frame/moved/finish",
+      "passed": true
+    },
+    {
+      "description": "Empty records yield empty arrays and no segments.",
+      "id": "edge/empty",
+      "passed": true
+    },
+    {
+      "description": "One retained entry has an address but no neighbouring line.",
+      "id": "edge/single",
+      "passed": true
+    },
+    {
+      "description": "Nonpositive pitch produces no division and leaves the source intact.",
+      "id": "edge/invalid_0.0",
+      "passed": true
+    },
+    {
+      "description": "Nonpositive pitch produces no division and leaves the source intact.",
+      "id": "edge/invalid_-0.25",
+      "passed": true
+    },
+    {
+      "description": "Addresses use integer triples.",
+      "id": "flat/types/addresses",
+      "passed": true
+    },
+    {
+      "description": "Placed positions remain Vector3 values in metres.",
+      "id": "flat/types/derived",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "flat/0.25/30/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "flat/0.25/30/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "flat/0.25/30/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "flat/0.25/30/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "flat/0.25/30/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "flat/0.25/30/finish",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "flat/0.5/36/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "flat/0.5/36/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "flat/0.5/36/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "flat/0.5/36/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "flat/0.5/36/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "flat/0.5/36/finish",
+      "passed": true
+    },
+    {
+      "description": "Rounding leaves every original value and its order intact.",
+      "id": "flat/0.25/42/source_kept",
+      "passed": true
+    },
+    {
+      "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+      "id": "flat/0.25/42/addresses",
+      "passed": true
+    },
+    {
+      "description": "Each address becomes the expected local position at this pitch.",
+      "id": "flat/0.25/42/placed",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "flat/0.25/42/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "flat/0.25/42/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "flat/0.25/42/finish",
+      "passed": true
+    },
+    {
+      "description": "Moving the station does not change its local derived positions.",
+      "id": "flat/frame",
+      "passed": true
+    },
+    {
+      "description": "One renderer per neighbouring pair; no discarded entries.",
+      "id": "flat/moved/pairs",
+      "passed": true
+    },
+    {
+      "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+      "id": "flat/moved/geometry",
+      "passed": true
+    },
+    {
+      "description": "Only the derived rendering receives green.",
+      "id": "flat/moved/finish",
+      "passed": true
+    },
+    {
+      "description": "Empty records yield empty arrays and no segments.",
+      "id": "flat/empty",
+      "passed": true
+    },
+    {
+      "description": "One retained entry has an address but no neighbouring line.",
+      "id": "flat/single",
+      "passed": true
+    },
+    {
+      "description": "The original sphere construction and pickup/release settings remain.",
+      "id": "carry/body",
+      "passed": true
+    },
+    {
+      "description": "Both programs start with the same local seed and empty pink trace.",
+      "id": "carry/seed",
+      "passed": true
+    },
+    {
+      "description": "Unmodified XRTools overlap finds this sphere.",
+      "id": "xr/target",
+      "passed": true
+    },
+    {
+      "description": "The actual grab library holds the original sphere.",
+      "id": "xr/pickup",
+      "passed": true
+    },
+    {
+      "description": "The inherited threshold compares to the last retained sample.",
+      "id": "sampling/0.02",
+      "passed": true
+    },
+    {
+      "description": "The inherited threshold compares to the last retained sample.",
+      "id": "sampling/0.04",
+      "passed": true
+    },
+    {
+      "description": "The inherited threshold compares to the last retained sample.",
+      "id": "sampling/0.06",
+      "passed": true
+    },
+    {
+      "description": "A real grab-driver route supplies Grid's actual ordered trace.",
+      "id": "drawing/source",
+      "passed": true
+    },
+    {
+      "description": "The actual pickup tool action button emits the inherited action signal and switches pitch.",
+      "id": "action/xr_pitch",
+      "passed": true
+    },
+    {
+      "description": "Changing pitch derives a different result from this retained drawing.",
+      "id": "action/same_record",
+      "passed": true
+    },
+    {
+      "description": "Switching pitch does not rebuild or erase the pink source drawing.",
+      "id": "action/pink_nodes",
+      "passed": true
+    },
+    {
+      "description": "One ui_accept event returns to the finer result from the same source.",
+      "id": "action/desktop_pitch",
+      "passed": true
+    },
+    {
+      "description": "The initialized label shows local/world point, retained count, pitch and last retained address.",
+      "id": "readout/current",
+      "passed": true
+    },
+    {
+      "description": "Release keeps the same point and source record as the empty hand moves.",
+      "id": "release/record",
+      "passed": true
+    },
+    {
+      "description": "Re-grabbing extends the existing source instead of replacing it.",
+      "id": "resume/history",
+      "passed": true
+    },
+    {
+      "description": "Both derivations and another pickup leave the live point and its resource identities intact.",
+      "id": "carry/identity",
+      "passed": true
+    },
+    {
+      "description": "A new station starts with its seed; no cross-scene persistence is invented.",
+      "id": "lifetime/new_station",
+      "passed": true
+    }
+  ],
+  "positive": {
+    "checks": [
+      {
+        "description": "Addresses use integer triples.",
+        "id": "types/addresses",
+        "passed": true
+      },
+      {
+        "description": "Placed positions remain Vector3 values in metres.",
+        "id": "types/derived",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "quant/0.25/2/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "quant/0.25/2/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "quant/0.25/2/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "quant/0.25/2/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "quant/0.25/2/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "quant/0.25/2/finish",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "quant/0.5/8/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "quant/0.5/8/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "quant/0.5/8/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "quant/0.5/8/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "quant/0.5/8/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "quant/0.5/8/finish",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "quant/0.25/14/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "quant/0.25/14/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "quant/0.25/14/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "quant/0.25/14/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "quant/0.25/14/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "quant/0.25/14/finish",
+        "passed": true
+      },
+      {
+        "description": "Moving the station does not change its local derived positions.",
+        "id": "frame/local_snapshot",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "frame/moved/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "frame/moved/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "frame/moved/finish",
+        "passed": true
+      },
+      {
+        "description": "Empty records yield empty arrays and no segments.",
+        "id": "edge/empty",
+        "passed": true
+      },
+      {
+        "description": "One retained entry has an address but no neighbouring line.",
+        "id": "edge/single",
+        "passed": true
+      },
+      {
+        "description": "Nonpositive pitch produces no division and leaves the source intact.",
+        "id": "edge/invalid_0.0",
+        "passed": true
+      },
+      {
+        "description": "Nonpositive pitch produces no division and leaves the source intact.",
+        "id": "edge/invalid_-0.25",
+        "passed": true
+      },
+      {
+        "description": "Addresses use integer triples.",
+        "id": "flat/types/addresses",
+        "passed": true
+      },
+      {
+        "description": "Placed positions remain Vector3 values in metres.",
+        "id": "flat/types/derived",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "flat/0.25/30/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "flat/0.25/30/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "flat/0.25/30/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "flat/0.25/30/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "flat/0.25/30/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "flat/0.25/30/finish",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "flat/0.5/36/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "flat/0.5/36/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "flat/0.5/36/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "flat/0.5/36/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "flat/0.5/36/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "flat/0.5/36/finish",
+        "passed": true
+      },
+      {
+        "description": "Rounding leaves every original value and its order intact.",
+        "id": "flat/0.25/42/source_kept",
+        "passed": true
+      },
+      {
+        "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+        "id": "flat/0.25/42/addresses",
+        "passed": true
+      },
+      {
+        "description": "Each address becomes the expected local position at this pitch.",
+        "id": "flat/0.25/42/placed",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "flat/0.25/42/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "flat/0.25/42/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "flat/0.25/42/finish",
+        "passed": true
+      },
+      {
+        "description": "Moving the station does not change its local derived positions.",
+        "id": "flat/frame",
+        "passed": true
+      },
+      {
+        "description": "One renderer per neighbouring pair; no discarded entries.",
+        "id": "flat/moved/pairs",
+        "passed": true
+      },
+      {
+        "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+        "id": "flat/moved/geometry",
+        "passed": true
+      },
+      {
+        "description": "Only the derived rendering receives green.",
+        "id": "flat/moved/finish",
+        "passed": true
+      },
+      {
+        "description": "Empty records yield empty arrays and no segments.",
+        "id": "flat/empty",
+        "passed": true
+      },
+      {
+        "description": "One retained entry has an address but no neighbouring line.",
+        "id": "flat/single",
+        "passed": true
+      },
+      {
+        "description": "The original sphere construction and pickup/release settings remain.",
+        "id": "carry/body",
+        "passed": true
+      },
+      {
+        "description": "Both programs start with the same local seed and empty pink trace.",
+        "id": "carry/seed",
+        "passed": true
+      },
+      {
+        "description": "Unmodified XRTools overlap finds this sphere.",
+        "id": "xr/target",
+        "passed": true
+      },
+      {
+        "description": "The actual grab library holds the original sphere.",
+        "id": "xr/pickup",
+        "passed": true
+      },
+      {
+        "description": "The inherited threshold compares to the last retained sample.",
+        "id": "sampling/0.02",
+        "passed": true
+      },
+      {
+        "description": "The inherited threshold compares to the last retained sample.",
+        "id": "sampling/0.04",
+        "passed": true
+      },
+      {
+        "description": "The inherited threshold compares to the last retained sample.",
+        "id": "sampling/0.06",
+        "passed": true
+      },
+      {
+        "description": "A real grab-driver route supplies Grid's actual ordered trace.",
+        "id": "drawing/source",
+        "passed": true
+      },
+      {
+        "description": "The actual pickup tool action button emits the inherited action signal and switches pitch.",
+        "id": "action/xr_pitch",
+        "passed": true
+      },
+      {
+        "description": "Changing pitch derives a different result from this retained drawing.",
+        "id": "action/same_record",
+        "passed": true
+      },
+      {
+        "description": "Switching pitch does not rebuild or erase the pink source drawing.",
+        "id": "action/pink_nodes",
+        "passed": true
+      },
+      {
+        "description": "One ui_accept event returns to the finer result from the same source.",
+        "id": "action/desktop_pitch",
+        "passed": true
+      },
+      {
+        "description": "The initialized label shows local/world point, retained count, pitch and last retained address.",
+        "id": "readout/current",
+        "passed": true
+      },
+      {
+        "description": "Release keeps the same point and source record as the empty hand moves.",
+        "id": "release/record",
+        "passed": true
+      },
+      {
+        "description": "Re-grabbing extends the existing source instead of replacing it.",
+        "id": "resume/history",
+        "passed": true
+      },
+      {
+        "description": "Both derivations and another pickup leave the live point and its resource identities intact.",
+        "id": "carry/identity",
+        "passed": true
+      },
+      {
+        "description": "A new station starts with its seed; no cross-scene persistence is invented.",
+        "id": "lifetime/new_station",
+        "passed": true
+      }
+    ],
+    "failure_ids": [],
+    "mode": "positive",
+    "passed": true
+  },
+  "negative_control": {
+    "name": "mutated_source",
+    "expected_failure_ids": [
+      "quant/0.25/2/source_kept"
+    ],
+    "normal_contract_result": {
+      "checks": [
+        {
+          "description": "Addresses use integer triples.",
+          "id": "types/addresses",
+          "passed": true
+        },
+        {
+          "description": "Placed positions remain Vector3 values in metres.",
+          "id": "types/derived",
+          "passed": true
+        },
+        {
+          "description": "Rounding leaves every original value and its order intact.",
+          "id": "quant/0.25/2/source_kept",
+          "passed": false
+        },
+        {
+          "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+          "id": "quant/0.25/2/addresses",
+          "passed": true
+        },
+        {
+          "description": "Each address becomes the expected local position at this pitch.",
+          "id": "quant/0.25/2/placed",
+          "passed": true
+        },
+        {
+          "description": "One renderer per neighbouring pair; no discarded entries.",
+          "id": "quant/0.25/2/pairs",
+          "passed": true
+        },
+        {
+          "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+          "id": "quant/0.25/2/geometry",
+          "passed": true
+        },
+        {
+          "description": "Only the derived rendering receives green.",
+          "id": "quant/0.25/2/finish",
+          "passed": true
+        },
+        {
+          "description": "Rounding leaves every original value and its order intact.",
+          "id": "quant/0.5/8/source_kept",
+          "passed": false
+        },
+        {
+          "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+          "id": "quant/0.5/8/addresses",
+          "passed": false
+        },
+        {
+          "description": "Each address becomes the expected local position at this pitch.",
+          "id": "quant/0.5/8/placed",
+          "passed": false
+        },
+        {
+          "description": "One renderer per neighbouring pair; no discarded entries.",
+          "id": "quant/0.5/8/pairs",
+          "passed": true
+        },
+        {
+          "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+          "id": "quant/0.5/8/geometry",
+          "passed": false
+        },
+        {
+          "description": "Only the derived rendering receives green.",
+          "id": "quant/0.5/8/finish",
+          "passed": true
+        },
+        {
+          "description": "Rounding leaves every original value and its order intact.",
+          "id": "quant/0.25/14/source_kept",
+          "passed": false
+        },
+        {
+          "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+          "id": "quant/0.25/14/addresses",
+          "passed": false
+        },
+        {
+          "description": "Each address becomes the expected local position at this pitch.",
+          "id": "quant/0.25/14/placed",
+          "passed": false
+        },
+        {
+          "description": "One renderer per neighbouring pair; no discarded entries.",
+          "id": "quant/0.25/14/pairs",
+          "passed": true
+        },
+        {
+          "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+          "id": "quant/0.25/14/geometry",
+          "passed": false
+        },
+        {
+          "description": "Only the derived rendering receives green.",
+          "id": "quant/0.25/14/finish",
+          "passed": true
+        },
+        {
+          "description": "Moving the station does not change its local derived positions.",
+          "id": "frame/local_snapshot",
+          "passed": true
+        },
+        {
+          "description": "One renderer per neighbouring pair; no discarded entries.",
+          "id": "frame/moved/pairs",
+          "passed": true
+        },
+        {
+          "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+          "id": "frame/moved/geometry",
+          "passed": true
+        },
+        {
+          "description": "Only the derived rendering receives green.",
+          "id": "frame/moved/finish",
+          "passed": true
+        },
+        {
+          "description": "Empty records yield empty arrays and no segments.",
+          "id": "edge/empty",
+          "passed": true
+        },
+        {
+          "description": "One retained entry has an address but no neighbouring line.",
+          "id": "edge/single",
+          "passed": true
+        },
+        {
+          "description": "Nonpositive pitch produces no division and leaves the source intact.",
+          "id": "edge/invalid_0.0",
+          "passed": true
+        },
+        {
+          "description": "Nonpositive pitch produces no division and leaves the source intact.",
+          "id": "edge/invalid_-0.25",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "quant/0.25/2/source_kept",
+        "quant/0.5/8/source_kept",
+        "quant/0.5/8/addresses",
+        "quant/0.5/8/placed",
+        "quant/0.5/8/geometry",
+        "quant/0.25/14/source_kept",
+        "quant/0.25/14/addresses",
+        "quant/0.25/14/placed",
+        "quant/0.25/14/geometry"
+      ],
+      "mode": "mutated_source",
+      "passed": false
+    },
+    "expected_failure_detected": true
+  },
+  "negative_controls": [
+    {
+      "name": "mutated_source",
+      "expected_failure_ids": [
+        "quant/0.25/2/source_kept"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "description": "Addresses use integer triples.",
+            "id": "types/addresses",
+            "passed": true
+          },
+          {
+            "description": "Placed positions remain Vector3 values in metres.",
+            "id": "types/derived",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/2/source_kept",
+            "passed": false
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/2/addresses",
+            "passed": true
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/2/placed",
+            "passed": true
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/2/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/2/geometry",
+            "passed": true
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/2/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.5/8/source_kept",
+            "passed": false
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.5/8/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.5/8/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.5/8/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.5/8/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.5/8/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/14/source_kept",
+            "passed": false
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/14/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/14/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/14/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/14/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/14/finish",
+            "passed": true
+          },
+          {
+            "description": "Moving the station does not change its local derived positions.",
+            "id": "frame/local_snapshot",
+            "passed": true
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "frame/moved/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "frame/moved/geometry",
+            "passed": true
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "frame/moved/finish",
+            "passed": true
+          },
+          {
+            "description": "Empty records yield empty arrays and no segments.",
+            "id": "edge/empty",
+            "passed": true
+          },
+          {
+            "description": "One retained entry has an address but no neighbouring line.",
+            "id": "edge/single",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_0.0",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_-0.25",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "quant/0.25/2/source_kept",
+          "quant/0.5/8/source_kept",
+          "quant/0.5/8/addresses",
+          "quant/0.5/8/placed",
+          "quant/0.5/8/geometry",
+          "quant/0.25/14/source_kept",
+          "quant/0.25/14/addresses",
+          "quant/0.25/14/placed",
+          "quant/0.25/14/geometry"
+        ],
+        "mode": "mutated_source",
+        "passed": false
+      },
+      "expected_failure_detected": true
+    },
+    {
+      "name": "wrong_frame",
+      "expected_failure_ids": [
+        "quant/0.25/2/addresses",
+        "frame/local_snapshot"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "description": "Addresses use integer triples.",
+            "id": "types/addresses",
+            "passed": true
+          },
+          {
+            "description": "Placed positions remain Vector3 values in metres.",
+            "id": "types/derived",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/2/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/2/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/2/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/2/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/2/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/2/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.5/8/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.5/8/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.5/8/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.5/8/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.5/8/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.5/8/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/14/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/14/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/14/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/14/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/14/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/14/finish",
+            "passed": true
+          },
+          {
+            "description": "Moving the station does not change its local derived positions.",
+            "id": "frame/local_snapshot",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "frame/moved/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "frame/moved/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "frame/moved/finish",
+            "passed": true
+          },
+          {
+            "description": "Empty records yield empty arrays and no segments.",
+            "id": "edge/empty",
+            "passed": true
+          },
+          {
+            "description": "One retained entry has an address but no neighbouring line.",
+            "id": "edge/single",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_0.0",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_-0.25",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "quant/0.25/2/addresses",
+          "quant/0.25/2/placed",
+          "quant/0.25/2/geometry",
+          "quant/0.5/8/addresses",
+          "quant/0.5/8/placed",
+          "quant/0.5/8/geometry",
+          "quant/0.25/14/addresses",
+          "quant/0.25/14/placed",
+          "quant/0.25/14/geometry",
+          "frame/local_snapshot",
+          "frame/moved/geometry"
+        ],
+        "mode": "wrong_frame",
+        "passed": false
+      },
+      "expected_failure_detected": true
+    },
+    {
+      "name": "truncated",
+      "expected_failure_ids": [
+        "quant/0.25/2/addresses"
+      ],
+      "normal_contract_result": {
+        "checks": [
+          {
+            "description": "Addresses use integer triples.",
+            "id": "types/addresses",
+            "passed": true
+          },
+          {
+            "description": "Placed positions remain Vector3 values in metres.",
+            "id": "types/derived",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/2/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/2/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/2/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/2/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/2/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/2/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.5/8/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.5/8/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.5/8/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.5/8/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.5/8/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.5/8/finish",
+            "passed": true
+          },
+          {
+            "description": "Rounding leaves every original value and its order intact.",
+            "id": "quant/0.25/14/source_kept",
+            "passed": true
+          },
+          {
+            "description": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits.",
+            "id": "quant/0.25/14/addresses",
+            "passed": false
+          },
+          {
+            "description": "Each address becomes the expected local position at this pitch.",
+            "id": "quant/0.25/14/placed",
+            "passed": false
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "quant/0.25/14/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "quant/0.25/14/geometry",
+            "passed": false
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "quant/0.25/14/finish",
+            "passed": true
+          },
+          {
+            "description": "Moving the station does not change its local derived positions.",
+            "id": "frame/local_snapshot",
+            "passed": true
+          },
+          {
+            "description": "One renderer per neighbouring pair; no discarded entries.",
+            "id": "frame/moved/pairs",
+            "passed": true
+          },
+          {
+            "description": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden.",
+            "id": "frame/moved/geometry",
+            "passed": true
+          },
+          {
+            "description": "Only the derived rendering receives green.",
+            "id": "frame/moved/finish",
+            "passed": true
+          },
+          {
+            "description": "Empty records yield empty arrays and no segments.",
+            "id": "edge/empty",
+            "passed": true
+          },
+          {
+            "description": "One retained entry has an address but no neighbouring line.",
+            "id": "edge/single",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_0.0",
+            "passed": true
+          },
+          {
+            "description": "Nonpositive pitch produces no division and leaves the source intact.",
+            "id": "edge/invalid_-0.25",
+            "passed": true
+          }
+        ],
+        "failure_ids": [
+          "quant/0.25/2/addresses",
+          "quant/0.25/2/placed",
+          "quant/0.25/2/geometry",
+          "quant/0.5/8/addresses",
+          "quant/0.5/8/placed",
+          "quant/0.5/8/geometry",
+          "quant/0.25/14/addresses",
+          "quant/0.25/14/placed",
+          "quant/0.25/14/geometry"
+        ],
+        "mode": "truncated",
+        "passed": false
+      },
+      "expected_failure_detected": true
+    }
+  ],
+  "inputs": {
+    "commons/maps/Point_Line_Grid/tutorial.md": "98fd9158357ef8e5ebfb75985ffb21ab49131fb522d5436c26ce982db1b0c79d",
+    "commons/maps/Point_Trace/tutorial.md": "b06e1c851fbfa0c96c5f50bbfc5fce68f367f5629913fa05f1a0fec2681e4139",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/trace.gd": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/report-runtime.json": "284b82c114b53587e43bfbf6d3bb4dd3639893b739b71441820cc388a878e3c5",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-trace-to-grid/prepare.py": "249692345b3f69891b6b99ab0be15fb52cae7d5fef3fecb79c73aef159dda0a3",
+    "doc/book/iterations/2026-10-06-trace-to-grid/run_checks.py": "56411b345512a8ab318cc33db9f3f51e1ca7ed838efda973bcc086605eb5c364",
+    "doc/book/iterations/2026-10-06-trace-to-grid/verify.gd": "24f90b37650bb057900db8ef94993785e69c066307c1c4f5e358b8be721dac66",
+    "doc/book/iterations/2026-10-06-trace-to-grid/operations.json": "1b5ea42c378e0e8cd3292de38b2860784cd777e1c18ffbf75a58ea249ab1ca6f",
+    "doc/book/iterations/2026-10-06-trace-to-grid/grid.gd": "cc30494944b29249341f110e8994cdc933f72280a5431ff5142720ec95f51b7a",
+    "doc/book/iterations/2026-10-06-trace-to-grid/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/iterations/2026-10-06-trace-to-grid/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-trace-to-grid/incoming.gd": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124",
+    "doc/book/iterations/2026-10-06-trace-to-grid/assembled.gd": "cc30494944b29249341f110e8994cdc933f72280a5431ff5142720ec95f51b7a",
+    "doc/book/iterations/2026-10-06-trace-to-grid/expected.gd": "cc30494944b29249341f110e8994cdc933f72280a5431ff5142720ec95f51b7a",
+    "doc/book/iterations/2026-10-06-trace-to-grid/tutorial.md": "98fd9158357ef8e5ebfb75985ffb21ab49131fb522d5436c26ce982db1b0c79d",
+    "doc/book/iterations/2026-10-06-trace-to-grid/next-input.json": "f5189a3675f02a2fef6a8189c6c2ef06b5f623518fefe2dc485901031f080cee",
+    "doc/book/iterations/2026-10-06-trace-to-grid/exercise-variants.json": "cde45f6e278610bf6feecb17977b2cbcb209f65ecbb505f6997ec06eb3450468",
+    "doc/book/iterations/2026-10-06-trace-to-grid/variants/flat_y.gd": "2dd753632b7bed554d383273c89df9334902ce72bc712c1029570df4ff8b1733",
+    "doc/book/iterations/2026-10-06-trace-to-grid/contract.json": "7dd7cffcb55cff5d542f8751507d658f6bd8dfb27abb06fad421884fd60d6d5d"
+  },
+  "dependencies": {
+    "addons/godot-xr-tools/plugin.gd": "2fe77daf8592203a9ca728df197124cde9253d86a47a8ffefad626fd44642eae",
+    "addons/godot-xr-tools/xr_tools.gd": "25e3b568ef99cdde6a42f33541db3c533866c86c9019fce3d4064d0b7513d45e",
+    "addons/godot-xr-tools/audio/area_audio.gd": "1b1e24f9deaf652d8026aca5ecf73dc76b1f97853f7baaa8328190890718dd67",
+    "addons/godot-xr-tools/audio/area_audio.tscn": "b203c1dca48b69da1e45bfa9884da81afcbee7c62ea751d15ffe61fd4d6aa5fb",
+    "addons/godot-xr-tools/audio/area_audio_type.gd": "7be88f6b941e14830db7697bf7c46127339716d3821f4a3e4cd3101d9bcc369d",
+    "addons/godot-xr-tools/audio/pickable_audio.gd": "29f36c41ab4c7ebaa8bf81aabab9c92ec7ddf2ee4b912f9ac24a953dcd43f48d",
+    "addons/godot-xr-tools/audio/pickable_audio.tscn": "fcf54063d691ca032e18775b58d7626f8db45966166d6c203ccf3e549126a77c",
+    "addons/godot-xr-tools/audio/pickable_audio_type.gd": "9d7e541ca70985f5f18b2cbdc358d894a9a46217cd5f75a41f5b616661044933",
+    "addons/godot-xr-tools/audio/surface_audio.gd": "c7dd02a8d1fb6a64075189d29a047640736573a4f970cc8be53ab0bb65d4333c",
+    "addons/godot-xr-tools/audio/surface_audio.tscn": "df2f314353e2b796e81d2f812db11b739cb45c0a1ec2ac500a25fd4d65c3a80c",
+    "addons/godot-xr-tools/audio/surface_audio_type.gd": "f1a2ada0cb434c63e5dbd1f3c0c7d7a90919ca9bf575be69544ca8d2cebe8481",
+    "addons/godot-xr-tools/desktop-support/controller_hider.gd": "f632762ba011dcc8533f213b6b2f95efae3bc390c50c5a7a775675c55de61dad",
+    "addons/godot-xr-tools/desktop-support/controller_hider.tscn": "cf3f25fafe48b1acf089f4d41f4333b0bdd84215b9f095d0fb1e7dd181255a01",
+    "addons/godot-xr-tools/desktop-support/function_desktop_pointer.gd": "7337a4fc4e1ebb30599f1284dc8e7c438d9b641eb0c4cfb26225b97377346cb7",
+    "addons/godot-xr-tools/desktop-support/function_desktop_pointer.tscn": "f30e9724f8ac59a440dcf3839a66e9cec90452ac8af90e22793bf8e49c14c90f",
+    "addons/godot-xr-tools/desktop-support/mouse_capture.gd": "369f630aaeee6eab954436f4dd2e5d9b2bb2ede8f776ead286ee8617b1c1749e",
+    "addons/godot-xr-tools/desktop-support/mouse_capture.tscn": "331a0b3efcc0c84959e3f7fe82118bd7db65d1bc0fc646204f34baa9fb9ba233",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_crouch.gd": "1320b64eb7d0b5dd360a2e6d398f0fa09a9ff70e02cf5f949b8458da0e3758c7",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_crouch.tscn": "53bfd4692bc7da420f5dd1e622fe57dd954c603e9b93daf3335622b0b1a56235",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_direct.gd": "691af2a094ae1bfb4941c22dc9ec92f7ad52f535c2eb6cc582cd1a96b30d71c2",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_direct.tscn": "42a18f3d7554e6e960c5dd0d9308ca057493c7d59749f2b0b80a8f381d79c4cf",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_flight.gd": "cef025585884576634fc5913a2e3bfd2907f59ec1cf37cb9b5a97905edb6f1eb",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_flight.tscn": "3c4cf52899fa55a0d8ba58e75994ce3e9253ec37c24ed700748b4129551ba2c0",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_jump.gd": "5b0348995197c1e22b216e4ea1463cd49d0e47b7c1df7720e498428c676fdf1e",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_jump.tscn": "1f8346d347de1ae868b2c22d0f0b701ca488f89542a743561a09f5f4a08e4272",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_sprint.gd": "f247030de79712ff97a50e216bc5dee336e4a9d46c7e56a84138e6bec04c9926",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_sprint.tscn": "80196a653e8daa8191b9f8c48d07e0eaea5e8b85be9c48135fa238252c4d7921",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_turn.gd": "0d9a9b43125e7dbe8fc2c2b090b638c9398cd3d685d9e90bb8aa50f5ce9d8598",
+    "addons/godot-xr-tools/desktop-support/movement_desktop_turn.tscn": "b650a0bd1fd8d598b0cd7038ff1bdda355865fbf41d9de1818ba926c7c018524",
+    "addons/godot-xr-tools/desktop-support/movement_gravity_zones.gd": "fd82fd62f73ecbe65ebadc73442a34f85dca5777c8b94024ae11253dbd514be6",
+    "addons/godot-xr-tools/desktop-support/movement_gravity_zones.tscn": "2a654db1eac8afb57b7a28ce435f23fc14d29425fac34f4a1b320642628b39b6",
+    "addons/godot-xr-tools/effects/fade.gd": "611e0ef2bd295ecb1e3694852a6646ce567791eeb74a8c14bca18e43b298ba4a",
+    "addons/godot-xr-tools/effects/fade.gdshader": "feb9917e45d1720bbc3f05dcab87e2fbc50a31e622c2062095360ec0a069dba4",
+    "addons/godot-xr-tools/effects/fade.tscn": "b576622415e86a57db683dd930a87dea0c4b9f6b7de7422fca49c1868c9ac0fb",
+    "addons/godot-xr-tools/effects/vignette.gd": "030eebe37fa5e3cf029bf700b5f71186c8e7901f8ae30c55cfa8f5c3c9fb1a37",
+    "addons/godot-xr-tools/effects/vignette.gdshader": "3cb443c99b5fd799f387e2b4036187f0364082b7c03110fb6596976f8a585ac4",
+    "addons/godot-xr-tools/effects/vignette.tres": "a4e0141095db07377c25409cdf2080c9ee61063f21a0f2dc59b7794ea632be46",
+    "addons/godot-xr-tools/effects/vignette.tscn": "5829356528ffa5c43430c81a67a4610d07822037ff34a16ff74d59c92eff97c5",
+    "addons/godot-xr-tools/events/pointer_event.gd": "68d9e65f498a7d9ec32389d3d7f76c162064ba3af76646001da09bd022afd758",
+    "addons/godot-xr-tools/examples/fall_damage.gd": "f6fecad19f9bed95f2386f91e138cb4e81cd5e5811f464d24b7448a84bbfa99a",
+    "addons/godot-xr-tools/examples/fall_damage.tscn": "927dfd3fd21bf3befece9ffc65690157326c8a02d15bf1fdf5d7e446acb81f0b",
+    "addons/godot-xr-tools/functions/function_gaze_pointer.gd": "5a854430fc866948029df5249c8b5de9bf1017934aea665af78a67fc5f21948e",
+    "addons/godot-xr-tools/functions/function_gaze_pointer.tscn": "bda82be55d934aba6c881e90a2053486e1ec321e89332660732d29da32efeb79",
+    "addons/godot-xr-tools/functions/function_pickup.gd": "c0af90a317b83db630f61fe173f685226f6a24635bc8c17bf427033095736939",
+    "addons/godot-xr-tools/functions/function_pickup.tscn": "e9e5d3e15d3789a770965414d82ffbf60736428a1b25fe7bdb8a8fa7a0f38a24",
+    "addons/godot-xr-tools/functions/function_pointer.gd": "b4afaf52a35160be3468e114d2dacbe07436ed0512040c3c2bd28c5597d2a921",
+    "addons/godot-xr-tools/functions/function_pointer.tscn": "43681df1eb93f07eb072a7c0a40382571c0efa2d45a1b67b1152b549019d1e7b",
+    "addons/godot-xr-tools/functions/function_pose_detector.gd": "d0b6c47040b9ce8cd84fb196e4cfaa55ee6d6da1aa4252f12ed80471ab5bc2a9",
+    "addons/godot-xr-tools/functions/function_pose_detector.tscn": "f5fbbf69e2ce4fa1f54502c13e9a790003d223370822607bfa26430e24ab89d1",
+    "addons/godot-xr-tools/functions/function_teleport.gd": "6a88e70fa588aa74b4ab8639f52e3cab139b94cef27653b65c7342fc76956b80",
+    "addons/godot-xr-tools/functions/function_teleport.tscn": "0dee649776555027e666322e291edcc01dc89cbe36b5a3906f36326c5af905c0",
+    "addons/godot-xr-tools/functions/movement_climb.gd": "15c4a229f46682a1b418d27ca9402b5f298eba822765bdd845b5a97720c3258e",
+    "addons/godot-xr-tools/functions/movement_climb.tscn": "8e3dd98d6e2b77330c5a72e1940c0e71ef7ed05cffe95ad269c8de5227ca7dfb",
+    "addons/godot-xr-tools/functions/movement_crouch.gd": "ad6354077d6a426a7d23a022d04003c0d743a13fa13c7a8162413dceb9dfe19e",
+    "addons/godot-xr-tools/functions/movement_crouch.tscn": "3e1aefb272b1fc110ba9b1fa450f6374b381afb193f297c232597ace71098423",
+    "addons/godot-xr-tools/functions/movement_direct.gd": "1ad9b37697b093b28fda2ff11ef202260fa36642973491ffeec5fa03bcb53053",
+    "addons/godot-xr-tools/functions/movement_direct.tscn": "de0a683f9af80b8c0c6dfeb86fadc2106001bbc113366f760060ec931d036273",
+    "addons/godot-xr-tools/functions/movement_flight.gd": "29060002fed1bfbbe56be746c8d2862bdc9acb60869fcc0d05c5209d149f655e",
+    "addons/godot-xr-tools/functions/movement_flight.tscn": "cf4fa54d7a84c3088936a8fc5f503f256e3899c63ea0945ab9f2d361b4059766",
+    "addons/godot-xr-tools/functions/movement_footstep.gd": "e0d727a098e2ce12a059a79a3245962a58b08b0a25323a2a45fe436bf1efb086",
+    "addons/godot-xr-tools/functions/movement_footstep.tscn": "d14232dc7a37ba715cc806cfffba4ad4a602175a2ee28947bbf042056548e7b4",
+    "addons/godot-xr-tools/functions/movement_glide.gd": "72ac548ae3e7bd6095c6fc95ce109a48e0e91100f42be5919e19bc6059e04838",
+    "addons/godot-xr-tools/functions/movement_glide.tscn": "5bdc9bdef048e6e2e9292bf7c18b2ce77c36b79b9afda76bf3d200dca826ce8a",
+    "addons/godot-xr-tools/functions/movement_grapple.gd": "cbaac199173b12212f023f658be52266bfaf8a9e9aea6e2c887d9db90f196b42",
+    "addons/godot-xr-tools/functions/movement_grapple.tscn": "c5eca7e45b718e134dc47e80b37715be0ea510bc247bbb014772a9ac8dc6e4c5",
+    "addons/godot-xr-tools/functions/movement_jog.gd": "c75f1c5436a631836084415b097eca0503722429204a097843868161c5795f6b",
+    "addons/godot-xr-tools/functions/movement_jog.tscn": "778bf8539a9a53dc8ee9ddb3f23ce5e08ecdd6a51c93a05673e03aaa145b51ae",
+    "addons/godot-xr-tools/functions/movement_jump.gd": "2dc953995a829b8cc0d267e487d2682611e9e19a01fad004dc202e41fb384098",
+    "addons/godot-xr-tools/functions/movement_jump.tscn": "8445eb7ff1f5ab7c5d1baee1aca6c422cf34c3a73243934ac460d80aed6f189d",
+    "addons/godot-xr-tools/functions/movement_physical_jump.gd": "1abd439302dcddf5cdee3e9a84488210069c3a514cefc2193613fb9259e62734",
+    "addons/godot-xr-tools/functions/movement_physical_jump.tscn": "ac4ba334a51be23d4f1eb48f738a0a1c6f37326a5d40e93b8a32f52141f39077",
+    "addons/godot-xr-tools/functions/movement_provider.gd": "a802645684db8008cf9078f8ac8b02565b9e0222f1aa2fc443c2cb1f5a31d4b6",
+    "addons/godot-xr-tools/functions/movement_sprint.gd": "e4aa5d63f19b2b0e572384a189796df4097ce2d702de7642da3547fbf3728932",
+    "addons/godot-xr-tools/functions/movement_sprint.tscn": "27e44670274413c4f50fbd1b48ae51806905d5fb1ccb55d2798e0666c684326f",
+    "addons/godot-xr-tools/functions/movement_turn.gd": "54130c27b42a72c0fdd789ff265243a0a83724d45635028538f6ecfaea1eb9ce",
+    "addons/godot-xr-tools/functions/movement_turn.tscn": "1248950367fdccde052cffd9226ff488337d1eca633c589355b361542305580d",
+    "addons/godot-xr-tools/functions/movement_wall_walk.gd": "c8041a915ee99c4a1797d3befcdb3c5782315682c0e2430c1111299cba65296e",
+    "addons/godot-xr-tools/functions/movement_wall_walk.tscn": "4de770d36150b916f8d23c447cc3dd2e43dd6b0019e05147696ae35f3ab6f20a",
+    "addons/godot-xr-tools/functions/movement_wind.gd": "d5f4b7ad6658d1d4f23dabad511e8cb3ad96d76530a9077a04107a0581ebdb4a",
+    "addons/godot-xr-tools/functions/movement_wind.tscn": "d529ef7367aa0456b53c6ce50edaf3ad61a0bb2d7e8b3292414ce1dd66e9cf87",
+    "addons/godot-xr-tools/functions/movement_world_grab.gd": "78c0919da1dcdf7534099d8c8d3081cd0d8ade80a73eb14ccec8970748eb915f",
+    "addons/godot-xr-tools/functions/movement_world_grab.tscn": "680d7f6c90f16327684be208397ffb323c4f51923e000438c1fa9e7b2c135a45",
+    "addons/godot-xr-tools/hands/collision_hand.gd": "4499bfb6ac29b42cf45732d30296019ff257c45594bff12ab16b0c6b71401485",
+    "addons/godot-xr-tools/hands/hand.gd": "388d9f2c9ffe025db2bcccde7f94c358c77525c8b0bc4e1171721ae4bf98e6ae",
+    "addons/godot-xr-tools/hands/hand_aim_offset.gd": "27e6cc10361b6d3725e6219f884846d8caad07f00527044352a8a1695fb33fb3",
+    "addons/godot-xr-tools/hands/hand_palm_offset.gd": "94b313a84fd4d9c4c8e4f2d80a38a483f129e0b291095eb4b8acb1bc2ffafa94",
+    "addons/godot-xr-tools/hands/hand_physics_bone.gd": "eb229c38660381bf7817154763148237ff11a40e6794237b4733cde488dc48ff",
+    "addons/godot-xr-tools/hands/physics_hand.gd": "5c28c68416b8f49d7d7a1b468a2d12f39591c2a0c7ca972ab48c9098f980bd6e",
+    "addons/godot-xr-tools/hands/surface_grip.gd": "7bfab311c502d352082cde799aac7cfd496eb4447492739c7eab7ba1bdb4100c",
+    "addons/godot-xr-tools/hands/surface_grip_pose.gd": "eff6067afae6fe9d5b0405e62ddb87e9f92c5cf483cfa2b11134d8ad9d526788",
+    "addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn": "09407e4ba97f8a5fdd9f5209e7a00006b2259a89305ab6384c37beba33e441ec",
+    "addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres": "6ffdefde756ec6bab181f6614264f09b95677b39eec5025a0df15ff43ebf2de2",
+    "addons/godot-xr-tools/hands/animations/right/AnimationPlayer.tscn": "09f5a62e0597eed8e2b9521e7fe792b73298ed58c4c03388a2bfd721455f6fe8",
+    "addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres": "48f8b3e7d8f76d40a0055e6dc1b566ecd981940db52242f32b7776c498118532",
+    "addons/godot-xr-tools/hands/materials/african_hands.tres": "f61db840c5a71f5d24348236f09ebb56317eaf31dd1f29e6466ce78cc5df2398",
+    "addons/godot-xr-tools/hands/materials/african_hands_realistic.tres": "006a9611ce1faee3f98171b70b2fc464a9efca4795de7ed055d1e3d7c06bd37f",
+    "addons/godot-xr-tools/hands/materials/caucasian_hand.tres": "e68b9957510b36292eaedbbe8513b0eb55e4114e37baf45dc764baf908c9b947",
+    "addons/godot-xr-tools/hands/materials/caucasian_hands_realistic.tres": "b68628b40de260dadd4cb94d538674b1aea8d03f14ddd91f76f5aaddae46b565",
+    "addons/godot-xr-tools/hands/materials/cleaning_glove.tres": "256a430080e5c8e78e6b28365e98430c71e8578c71a12fe25c41578a17403942",
+    "addons/godot-xr-tools/hands/materials/ghost_hand.tres": "ebe96045818b3f0f6516415b0d1e70ae126080089aecaa494a5b21110236968b",
+    "addons/godot-xr-tools/hands/materials/glove_african_dark_camo.tres": "18fc032a41f4128d4cce399efd1e2ff1e7e9040d874e349e9639457cba26582a",
+    "addons/godot-xr-tools/hands/materials/glove_african_green_camo.tres": "f0f2402167c67be645946f8160b833806dedb05d44968733a571de7ae2f835cd",
+    "addons/godot-xr-tools/hands/materials/glove_caucasian_dark_camo.tres": "b93f204bccfd497805acd21bdef87fd77d87b6bb3156b2b4aebe0f37573f97ef",
+    "addons/godot-xr-tools/hands/materials/glove_caucasian_green_camo.tres": "15b3c8c35bd38d97c583e73ad0e4dce556a348f28f5df69203e4cdf1512d40e1",
+    "addons/godot-xr-tools/hands/materials/labglove.tres": "5e11d23a8260c55bacb7e34ae42654599552e21841c2bc756ce684487bd80e11",
+    "addons/godot-xr-tools/hands/poses/hand_pose_settings.gd": "93e5cac21f7ba19b164011718f46d4a3db032b47ea66df0b6cb29ae53faa8243",
+    "addons/godot-xr-tools/hands/poses/pose_default_left.tres": "f2a18e805a99cd9844b818d0722e5790a032d161dfa6abdf03ea2f49cd7faacf",
+    "addons/godot-xr-tools/hands/poses/pose_default_right.tres": "6ad14cfebbee05218059aef23f38302a0d7577cdae23d942191d00e151e01a85",
+    "addons/godot-xr-tools/hands/poses/pose_point_left.tres": "76a30a9db4f42df4765b62d1d7933efbd7c6fa3bb944a4c69db95e8ff2a347d8",
+    "addons/godot-xr-tools/hands/poses/pose_point_right.tres": "dbe2ae88fb87315a4ea8eb53d3d3d78fd023a45e96eeb063c6687c8767c88b24",
+    "addons/godot-xr-tools/hands/scenes/collision/collision_hand.tscn": "fa446aca33c6583bc978c981bcda38f77ed3a2239de188756aee338024298afc",
+    "addons/godot-xr-tools/hands/scenes/collision/collision_hand_left.tscn": "eafe1a5845c9a5b721cdf1f43febd5a057e130680f0823c8076c2f704283fe65",
+    "addons/godot-xr-tools/hands/scenes/collision/collision_hand_right.tscn": "563fe156e0b64f6df17bc56018726748f1005905c0c7b3e3831dcd42d93bb3db",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_fullglove_hand.tscn": "7783747acbf989cb35f1b955d5b028ed29abeba9b70f2adcbd222402438e6171",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_fullglove_physics_hand.tscn": "8cc1c8ad0a9b5a9ca6834a5bcc65e47a2869af12dcd299179197f11e2df3ef56",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_hand.tscn": "7c1aa9741c3b72e60f12519e81fa6b4215e7e5ab07bd551cfd87ee565dc86cd8",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_physics_hand.tscn": "77ea837175363564aa0126a89cb63fc98be13a21a87e8bb80e19036306db80ad",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_physics_tac_glove.tscn": "7e22c323822a80f5c8fb71bc96ed6b97b7bac6cc6cef1c5b5d59d5b19d0d1c6b",
+    "addons/godot-xr-tools/hands/scenes/highpoly/left_tac_glove.tscn": "2f398da5431674b45024e205e6aefcca87d3a0a0b99a59d9a0e9ffc5472a8570",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_fullglove_hand.tscn": "b649c23c3534c459d5a5efbc72f768e2de8679d6cbee3fe86b555b08a1a18f30",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_fullglove_physics_hand.tscn": "4527738d701e0ae3a94d0afd8822e32beba7e43f6d0e5162845b1b1bf45f01ec",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn": "023f5d4673d2d1451871a0a69a9b371bcf2d15de15286c40a8bd4b1a6be76ef8",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_physics_hand.tscn": "c77f1b6dbf54ad2a5223e46ef78d9aad03cd3f9aa486c40b5dd60178b3d66ff3",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_physics_tac_glove.tscn": "7fd382a055645e2b0c9f623574164f4f93d7b84072862141a81283f8a9c02ae3",
+    "addons/godot-xr-tools/hands/scenes/highpoly/right_tac_glove.tscn": "c2f2753c5e8a1ff725ceb9761f99c7e155fca789c9df7030ed99886a72a4ad07",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn": "378a8cd16831881ab522b74920a02bf437493bd88bdf96c395b1a9aa2c9c380d",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn": "9d6e8d04f6bde35a4b579d1c604b5e0d35e85dbbea4eec497ea7601fd0ccff91",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_fullglove_low.tscn": "f8d8c740dcc776232bc1d977eb167d01e1936006a137e2e333076b9317968bb0",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_hand_low.tscn": "a734f469184106f39722ff32a5397a119c2ddf1a32453feb4cd16b12f4a74636",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_tac_glove_low.tscn": "55e8737e6c12570beaccf5f9fbcd21ca50b1e49431fb80354ada8e183235fffd",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/left_tac_glove_low.tscn": "c19518c8a37930b73dc7abf4a53ffb030650add513ecef63d2de9f12dc340a88",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn": "700a1c7052cadd95ecb07217d5947e861fb0ea15369daf3dbf9dc6adfd474ab3",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn": "52d3d5561c0c240f870fa7193b2f2ce34f28a072a9aa63f92d0a94733d26d8ae",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_fullglove_low.tscn": "b39f145b45662cafb26da5bf52a58a889021953f6346aa5ae2a5da222a1e1a4e",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_hand_low.tscn": "095416ba7eba95a486a7c83896dfadd9eb6c48867b5464cbd37d4631585ff4f6",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_tac_glove_low.tscn": "284bbffc363c4566ea8547076d58693cd44541dd6c2ae39c8cdc9e9acafa59df",
+    "addons/godot-xr-tools/hands/scenes/lowpoly/right_tac_glove_low.tscn": "173f787c186a24de5b5b3818bf590d70c04c1179a55487aa89277aadb7ac1838",
+    "addons/godot-xr-tools/interactables/interactable_area_button.gd": "6b6d692347750afbd46603c655cbf3bc10e84737ab32484be9931571d2775960",
+    "addons/godot-xr-tools/interactables/interactable_area_button.tscn": "acb58c5a1beef8250cd4208cdda289f48cddb7c5ba7d20560ea01a90200df534",
+    "addons/godot-xr-tools/interactables/interactable_handle.gd": "90c323f5f675be7f71ec657c33dda73d8dc01aa6e6a8320ea3b3ab4b62f5e33d",
+    "addons/godot-xr-tools/interactables/interactable_handle.tscn": "526193517746db1ad0893d3ee84e2d55cc45f4414bbe6e7969afd2ad1d36a71e",
+    "addons/godot-xr-tools/interactables/interactable_handle_driven.gd": "b5b7ffb576d3fd1a6a3da2a4630c93346309e9a48a30834e73b7b31f909b831d",
+    "addons/godot-xr-tools/interactables/interactable_hinge.gd": "fa08c359b5d3b124397a67cde88209811e7dfd59c7899551ea7643abbf137573",
+    "addons/godot-xr-tools/interactables/interactable_hinge.tscn": "48c1f8791762ab6f08b04c9299e58102d2884c3329242d4e2d5f598579a12a49",
+    "addons/godot-xr-tools/interactables/interactable_joystick.gd": "9218574ceb9d99312e8f6b40800baae9dc18fe464ee32b9af741c28a052410b9",
+    "addons/godot-xr-tools/interactables/interactable_joystick.tscn": "2b0ca8187535b8870484ce70f8aaa875d0e7bec8b32e08923ab14a140e4e7def",
+    "addons/godot-xr-tools/interactables/interactable_slider.gd": "ef9b79a8845f9f40a4540e4f4bdda2946c0aae1a3bacac4c9e7e6c400d1bb613",
+    "addons/godot-xr-tools/interactables/interactable_slider.tscn": "d382212b0894094f1295ec56b32a5aa5bea9fe9e8e1b108f3593038c688a69f2",
+    "addons/godot-xr-tools/materials/capsule.tres": "533666c3af3e9619c085fe46eaa03f771d9734757a1abe305fee518ae5a5041e",
+    "addons/godot-xr-tools/materials/highlight.tres": "2e24a02082eeba9130f2c62576d03f206e5690d2205bde1aef7920ce5f2ec650",
+    "addons/godot-xr-tools/materials/pointer.tres": "84037c4aa57885708ff5fae4d41a8e140841dab85bf030ffd01f55c96b2b8d5f",
+    "addons/godot-xr-tools/materials/target.tres": "7d5848180489be82f40bebe2314faf41b2e08d565414896628275f911b380253",
+    "addons/godot-xr-tools/materials/teleport.gdshader": "d83ecb95e0fc57c6af543daab2f6a9a847e7515b901843ce5fedced828cafff2",
+    "addons/godot-xr-tools/materials/teleport.tres": "1c00692603dd4f9cd9e51b27c94ae2c1ab29cb36141e9f4f472b70a6e7413961",
+    "addons/godot-xr-tools/misc/hold_button.gd": "096fb27e5b2a25e926a7762e682ca44edf6f980a073c670f289c2b48ca100b05",
+    "addons/godot-xr-tools/misc/hold_button.tscn": "96413bec3ebe1b1874cd44e9ceef7857089c8402badc6fbf1adb3a763d720e54",
+    "addons/godot-xr-tools/misc/hold_button_gaze_pointer_visualshader.tres": "28ef3c29f152a5e8c59cd3d394d62f949e05088a1161d329e70ff551c57f35d4",
+    "addons/godot-xr-tools/misc/hold_button_visualshader.tres": "9fe64b01fe1fea6fa29869c99956e79f3b86a47728600198fe64e4e0e4fc2709",
+    "addons/godot-xr-tools/misc/move_to.gd": "d6efe96f356d4a8ecc7d47ca099d5c8102c43e313227b4728bb4fcb7d848babd",
+    "addons/godot-xr-tools/misc/velocity_averager.gd": "9608cc29cc3f87c62b0e79e84336e0378f6fb04c2d00f926b5a33a91edc9b281",
+    "addons/godot-xr-tools/misc/velocity_averager_linear.gd": "ff28a7089cccebed69fbd27ac289ed7d5978b4a0f8d3883ae105dbdcf66192f4",
+    "addons/godot-xr-tools/misc/vr_common_shader_cache.gd": "e6b43f2c5bc8ce22e20485d41816a4d414f720aed525f34f9493953c030c892f",
+    "addons/godot-xr-tools/misc/vr_common_shader_cache.tscn": "ee520fc2d090eb624dc0f225c7b518e5b0b0d2e56fd155801ec7c6ff6cefe112",
+    "addons/godot-xr-tools/misc/xr_helpers.gd": "038e3100ae7d53e3fce6c01b48b97f6c14d39de46159c48b9da7b1dc3ce92367",
+    "addons/godot-xr-tools/objects/climbable.gd": "8c9ac26746819c4ea9d72997247fe9c2fe493d781b3310161b63e80d52625dc6",
+    "addons/godot-xr-tools/objects/climbable.tscn": "3f1d84028094d04f0d3954cb0fd3490977c077a96072014fa963c74ca6420e9b",
+    "addons/godot-xr-tools/objects/hand_pose_area.gd": "d87ac772297d6597c60cbce31e38940ea22071e00b409006ed4be6e117f962ea",
+    "addons/godot-xr-tools/objects/hand_pose_area.tscn": "03abf235ac34cba0a9f8b03dfeef0e19865cc28c8369079c5639babde362cbcc",
+    "addons/godot-xr-tools/objects/interactable_area.gd": "1dbf6c8616738f085dbbdceae004eb5981a5ec989acd367949a0a31648fbe465",
+    "addons/godot-xr-tools/objects/interactable_body.gd": "facd62d0b182ec07f3bbcc8fc1221e6743d811fbd6cbbe9ef81d1dadc14708aa",
+    "addons/godot-xr-tools/objects/pickable.gd": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7",
+    "addons/godot-xr-tools/objects/pickable.tscn": "3674320a89f44d1206c440890cee09dcfa812daa6e3187d1fc33605ce526237d",
+    "addons/godot-xr-tools/objects/return_to_snap_zone.gd": "de8600931e69a3986de11e76ac1407995db1db80fc4cf8db21f98b8d5c9bbf9c",
+    "addons/godot-xr-tools/objects/snap_path.gd": "92f7870e7805c7d322b4683cf04e9d32ecb20904ec62542de4201f5168d5d474",
+    "addons/godot-xr-tools/objects/snap_path.tscn": "f9059397a43744a579f678f7636feb342b7200766282ef8d404dad26e7babeab",
+    "addons/godot-xr-tools/objects/snap_path_guide.gd": "1eed2912effa584577cfe172c19725f370695d920c7cde41260b2f561f944dba",
+    "addons/godot-xr-tools/objects/snap_zone.gd": "dd19ae15d69d46ee62a6e69b0c7dbd37933642025f02c34c01defd8052729b15",
+    "addons/godot-xr-tools/objects/snap_zone.tscn": "63f5107e32ba7c481d94ca6cbb18a263f175945615e370b4a11d44317f0850fe",
+    "addons/godot-xr-tools/objects/teleport_area.gd": "6bacf170f2966f9f4212121a0e6f5bfff1fbd65e611e15b18b66b38b4fdf3214",
+    "addons/godot-xr-tools/objects/teleport_area.tscn": "2bea4ebef2917d960f73a052bcb463fc132a37fbe64620e72a8f29c68daa1a02",
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd": "e86868407fd6a29ba08770ce48d7e037c1802b04d83b2df85d28b009daf6c817",
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn": "2035da0171d03666df8e7cdc09085004ac03b153a77d119e8237c69981db3344",
+    "addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd": "6e9041b7585577e563334f9141d47e39db981ab533dbcd236c84242024ce835e",
+    "addons/godot-xr-tools/objects/virtual_keyboard.tscn": "7a65138bf294f5cbc207fc7d406e9820bb043d981f84eed631b43254effad650",
+    "addons/godot-xr-tools/objects/wind_area.gd": "32070ad810db506c97d51cd1b9c64fbdb4903b266bf4b6db908f88585c3f15bc",
+    "addons/godot-xr-tools/objects/wind_area.tscn": "32be7162fe42e163666e1874b469258467d362270c88fc1ac7343fc94e100f40",
+    "addons/godot-xr-tools/objects/world_grab_area.gd": "3a1816b9b368a2a132c9c57664b98f845007ad9bab8da8c5a4f817a1f3bea963",
+    "addons/godot-xr-tools/objects/world_grab_area.tscn": "cecc7c1b6b6e974b9a859b751dd97aadcc93b7041203b12f546021c8436bdf00",
+    "addons/godot-xr-tools/objects/force_body/force_body.gd": "f16e402ceffd09d2048f0901e3b6d725504b4aff600c07b6465fb7e78174bac0",
+    "addons/godot-xr-tools/objects/grab_points/grab.gd": "8fdac07c0fe1c99aa7ed75f6d06ea32d5842eabb06bfb1d176fd5fb206d4c35d",
+    "addons/godot-xr-tools/objects/grab_points/grabber.gd": "43ce1c2220f5a28f2908f64d82178f18d4ec10c9d0ce43d8f905c373abe5d491",
+    "addons/godot-xr-tools/objects/grab_points/grab_driver.gd": "70b21cb6deee1556e9f2287ee1b2f3673040e2682157f9dbe0f53718dbad1dc8",
+    "addons/godot-xr-tools/objects/grab_points/grab_point.gd": "3d8685554a64d5f2d59605b79d88be5afeda634d91bfa8c90742071cd23aace7",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_hand.gd": "b9d2cc5a46901cf1c20bd1becbd1fce120c309ef6dcf4732267aa6e2592aa2d7",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn": "982c7d9f43eb0af99899ab025794e98612cbed9134685ee5db98fb20070612fc",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn": "87a1b581f6650289a81f04b3cb984705b7692a405d47930e9816c89a2b7a778b",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_redirect.gd": "a71dc178d4f9a56e4560e7c0f5f3ddb0dd66c38ac075dc4ba78eb66cf34bfb77",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn": "3f3a06d796fd90582bf0f448c8e2a8b5feec6f10c1958a2bc180132c6842d16f",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_snap.gd": "ceed49c65580a1c5cbc9151770b0db277c918996ba3c06adc3d0032cd04d4fb9",
+    "addons/godot-xr-tools/objects/grab_points/grab_point_snap.tscn": "498c78131e98a74960f78fc5612d7bc5d7bf9168112a146652b0ce7cfc7f9b7a",
+    "addons/godot-xr-tools/objects/highlight/highlight_material.gd": "8c0cd2c3a850c1116aa1a31274c3f241e35e02b08800b710acf50ec3b6c259d0",
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.gd": "7e16a830d6010ee284905f4c8c0be35499b98644d61ec9914b1da640287bdb35",
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.tres": "5e10ca1942fa2ac7922a10a9124e32d80b1f65a67b6f1fa640dc67bdefc668db",
+    "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn": "b1b4353c42d2c392ce03bfe62e8cd27ca99465b9d5fa9e78c74fa013595a5140",
+    "addons/godot-xr-tools/objects/highlight/highlight_visible.gd": "20be0bb3a64bb2ac7730aabc17f1ff86f2b7041e4fc4aed7219b729a35e89791",
+    "addons/godot-xr-tools/objects/keyboard/virtual_key.gd": "d3cbd13657ec2a537571963ed8fa96140e3a440e8450871b1f2842eea4083539",
+    "addons/godot-xr-tools/objects/keyboard/virtual_keyboard_2d.gd": "ca2b08909b082bbad634e1eef0f3b67038ef1c28f39d54d1258d829744f80891",
+    "addons/godot-xr-tools/objects/keyboard/virtual_keyboard_2d.tscn": "16ecb10be388dbf5d88e679b21dcfc63a8b3c63424ce44d0fcc39a2d5e419f2c",
+    "addons/godot-xr-tools/objects/keyboard/virtual_key_char.gd": "d3d4c34bb84a0069575b19b84a2e891118036cf1722b13d29406cdc2b90a393d",
+    "addons/godot-xr-tools/overrides/ground_physics.gd": "bf3c0a24c29666520a8686d8657382da456bbb0723f4c6a65d4d5f0f217fa9d1",
+    "addons/godot-xr-tools/overrides/ground_physics.tscn": "5b3b6f110d554589ef343e84b703cecefbad3ba25f2cae3d6bdad252ba0781d8",
+    "addons/godot-xr-tools/overrides/ground_physics_settings.gd": "3ee18e9c98a0cd01beea8615944274bbdac5d543e758c8bf6e4c39394a752f72",
+    "addons/godot-xr-tools/player/player_body.gd": "66159167a1848b5ea8e48d5091bd3ee5b549315e15d3c4a43c935c85493582da",
+    "addons/godot-xr-tools/player/player_body.tscn": "ef6a6e032284409cdc80ab3cd59618fc48e77540dfad9179daad359a3ffac7e5",
+    "addons/godot-xr-tools/player/fade/fade_collision.gd": "3f9b9ee0c372234c54cf5ab669c5e9a540e114c7190de1ee445490bf45e25bd3",
+    "addons/godot-xr-tools/player/fade/fade_collision.tscn": "2d17d733f825eaf7ebf765485e88e58a94df3cd3f1e04ab8cbfdddf3afe69cad",
+    "addons/godot-xr-tools/player/poke/poke.gd": "4b62ddb0761ecfac603fba4f742211c324dd000b3c69e876515728f2c84617ec",
+    "addons/godot-xr-tools/player/poke/poke.tscn": "e48c49bb42f6c057cfb2a022511ca25369c8b8c912707926ddfabe1995cd8778",
+    "addons/godot-xr-tools/player/poke/poke_body.gd": "17b44daa0eb4c8e74cc5f109b873ab7df4d8732076f306531d6043531f08da1f",
+    "addons/godot-xr-tools/rumble/rumbler.gd": "3d6f3598e4dde7cca29dd25434be1da4ba68202fe3d4c8b228cfe0de6a38894a",
+    "addons/godot-xr-tools/rumble/rumble_event.gd": "6e8942211ee924f78d3a4d61e5013cd0fcc8101def3795f48ec9e92dc2ab0bb1",
+    "addons/godot-xr-tools/rumble/rumble_manager.gd": "31bc8e6cd36a605d40ab27f0121c99c797385a174b4bccb4631008ed011725a9",
+    "addons/godot-xr-tools/rumble/rumble_manager_queue.gd": "3242de99af879f7fee3b6c2a2e119a7fdd361ed8ca2ac57ee7397c9b525596a4",
+    "addons/godot-xr-tools/rumble/tap_rumble.tres": "66a4ff7de308725e1d2bdc2063f339125a704c5247d53f52ed16857455ab7558",
+    "addons/godot-xr-tools/staging/loading_screen.gd": "965e9d285cf03d05709afe809afcd929bf38516434ca5c2fab726bd69bf7109f",
+    "addons/godot-xr-tools/staging/loading_screen.tscn": "ae8f1a39ad3cd7170f02264f4e56f61d6378c3046fa0c6fd4decd5aa49533952",
+    "addons/godot-xr-tools/staging/loading_screen_shader.tres": "28105f822c3038fcffa55f5f4dadacf211c8e33b77b7b2e75c93475b146b8c3d",
+    "addons/godot-xr-tools/staging/scene_base.gd": "08e3a878aa27e60284727b038e480aac7dd11ace19e5a06530e80251340b3101",
+    "addons/godot-xr-tools/staging/scene_base.tscn": "3ba95895a157ebe1b37c0fc716096aefdb0a268bff9702933acabbeb55b673e0",
+    "addons/godot-xr-tools/staging/staging.gd": "3b0836aaf56ed0186bbe9895fe4cd0c9f41b2b7814d737b5174f3fa33ca551d9",
+    "addons/godot-xr-tools/staging/staging.tscn": "cafac404186dc77de39e1e0d0535ee25c6cee4faf10f11e8bbf10b059fdd2770",
+    "addons/godot-xr-tools/staging/staging_env.tres": "585ff24ab69d19a5a8afac4f432265ebe3d7a202ca5fca3650c7024fd6c6382a",
+    "addons/godot-xr-tools/staging/loading_screen/loading_screen_shader.tres": "e1573ed7a4b786da99433aa7b1d5118b7f634bf21a6f7f335edff6d170d67ecb",
+    "addons/godot-xr-tools/user_settings/user_settings.gd": "c42a859aec679181012f7df184f8ee944f72bdb92a1dab69a3c5ae377f222894",
+    "addons/godot-xr-tools/user_settings/user_settings_ui.gd": "29711802939e0f6e01c3740f559baab8a0202bfde1eb67cb0b6f58663c6dd718",
+    "addons/godot-xr-tools/user_settings/user_settings_ui.tscn": "c0ddec3e99f958f4b584efa80bfc9b96fe7ad5a5419acc030b18a4e060046250",
+    "addons/godot-xr-tools/xr/start_xr.gd": "a43dd435f70c8f2f4e109284e0fad07a7e38eb16151a2b1ace116a24a970d33a",
+    "addons/godot-xr-tools/xr/start_xr.tscn": "0d0927c01bec1ed8a99bda025d198a4302257adbc9015ff480375f6228e78fcc"
+  },
+  "source_and_test_inputs_unchanged": true,
+  "all_declared_checks_present": true,
+  "continuation_composes_exactly": true,
+  "runs": [
+    {
+      "stage": "import",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "script_or_engine_error": false
+    },
+    {
+      "stage": "positive",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "script_or_engine_error": false
+    },
+    {
+      "stage": "mutated_source",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "script_or_engine_error": false
+    },
+    {
+      "stage": "wrong_frame",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "script_or_engine_error": false
+    },
+    {
+      "stage": "truncated",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "script_or_engine_error": false
+    }
+  ],
+  "private_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-trace-grid-hc0jy3r2",
+  "engine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe",
+  "native_copy_sha256": {
+    "flat_y.gd": "2dd753632b7bed554d383273c89df9334902ce72bc712c1029570df4ff8b1733",
+    "grid.gd": "cc30494944b29249341f110e8994cdc933f72280a5431ff5142720ec95f51b7a",
+    "incoming.gd": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124",
+    "line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "mutated_source.gd": "53ddc2a8fe3b8cf827e2c1452ec844140e95cb03bf25928172424c4b5c0289dd",
+    "point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "truncated.gd": "edf5a0fa184d399a1b8114ea0db8f2b14b0a2dee85fb0b3f05e1a5937eeaf124",
+    "verify.gd": "24f90b37650bb057900db8ef94993785e69c066307c1c4f5e358b8be721dac66",
+    "wrong_frame.gd": "1f561db18862333f874f55c62f51ad6bdf3adf34dd73833d4605166f174e7026"
+  }
+}

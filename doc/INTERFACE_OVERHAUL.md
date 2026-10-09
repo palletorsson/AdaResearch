@@ -74,3 +74,11 @@ file references `ControlPanel`/`ControlConsole`. Rack files flip when their base
 Some interfaces have *character* worth keeping — `control_board`'s Black Mesa CRTs,
 `_toy_console`'s Braun monitor. The recipe must integrate them onto the canonical
 board **without flattening them into identical kiosks**. Console type = "keep character."
+
+## September 2026: physical controls and exhibit mounting
+
+The current pass uses physical 3D buttons and sliders, with flat text on their plates and screens. `physical_stepped_slider.gd` supports discrete selectors and continuous faders; `physical_choice_console.gd` and `physical_parameter_console.gd` provide compact, backed stations. Deliberately clamped or withheld controls retain their authored access differences.
+
+Furniture must distinguish the specimen from the station. The `exhibit_control_parts()` contract opts an artifact into `exhibit_control_mount.gd`: the specimen follows its platform, while the console and support retain their authored floor height and metre scale in front. Ownership and visibility stay with the artifact. Grammar Provenance, Fitness Landscape Politics and Edge of Chaos implement this boundary; it does not automatically migrate other artifacts.
+
+See [the mounting contract, tests and remaining limits](reports/interfaces-2026-09-21/mounted-consoles/README.md) and [the before/after review](book/iterations/2026-09-21-interface-mounted-console-review/index.html). Review the enlarged footprint in the actual hall before considering a migrated placement complete.

@@ -1,0 +1,467 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_Synthesis_Lab · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_Synthesis_Lab">← Tutorial lineage</a></p><h1>WaveFunctions Synthesis Lab</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_Synthesis_Lab/final.md">Raw captured source</a></p><pre># The sum on the bench
+
+In AirMusic one note could begin while another was already fading. Here a wave is waiting to be taken apart.
+
+Find the bench with the dark board above it. The board carries a pale wave with five coloured rows beneath it, and the wave already has a shape when you arrive: a long slope down and a steep rise, four times across the board, drifting to the left. On the bench, at its right end, five sliders stand in a column, one for each row.
+
+## Five amounts
+
+&lt;!-- @additive_wave_demo --&gt;
+
+Read the rows before you touch anything. The top row is one smooth rise and fall per cycle; each row below has more, two, three, four, five, and each is drawn smaller than the one above. None of them looks like the pale wave. Press HOLD on the panel at the left of the bench and the drift stops, so a place on the board stays where it is.
+
+Now take the four lower sliders down, one at a time, and keep your eye on the pale wave while each row leaves the ladder. What remains is the top row, drawn larger: a sine. Press BASELINE and the four return together; press H1 ALONE and they leave together. The shape you arrived at is not one thing with a slope in it. It is five smooth returns added, and the slope belongs to none of them.
+
+Bring the second row back on its own slider and choose a place on the board. The amber line marked *mark* is one such place. Before you raise the third slider, decide what the sum will do there: the third row is at a crest, or crossing its middle, or in a trough, and its slider decides how much of that is admitted. Raise it and read the plate on the bench. Its third line lists each row&#x27;s value at the mark; the fourth adds them and prints the total drawn beside them. With these five visible rows, their sum agrees with the total. The pale wave is built by this loop:
+
+```gdscript
+	var value = 0.0
+	for h in range(harmonic_amplitudes.size()):
+		value += harmonic_amplitudes[h] * sin(phase * (h + 1))
+	return value
+```
+
+Row h is a sine at h + 1 times the phase, scaled by its coefficient, and the sum is the running total. There is no separate drawing of &quot;the wave&quot;. The pale line is this loop evaluated 256 times across two metres,
+
+```gdscript
+const WAVE_POINTS: int = 256
+const WAVE_LENGTH: float = 2.0  # Visual length in meters
+const NUM_HARMONICS: int = 5
+```
+
+with the phase running four cycles across the board and the clock adding the drift you stopped with HOLD:
+
+```gdscript
+		var phase = t * TAU * 4.0 + _time * TAU
+```
+
+A slider changes exactly one number. When a handle moves, the instrument reads the handle&#x27;s position back as that row&#x27;s coefficient:
+
+```gdscript
+		harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+```
+
+Even the first slider only changes how much of the first return is present. This is a visual instrument; it does not play the curve as sound. No slider changes the fundamental&#x27;s frequency. The rows use integer multiples of one phase, so the vocabulary here is five amounts. Unlike the separately struck bars, these rows cannot choose separate beginnings. A shifted row or a negative amount would need a control this bench does not offer. BASELINE returns them to the table the room was placed with:
+
+```gdscript
+		&quot;sawtooth&quot;:
+			# Sawtooth: all harmonics, amplitude 1/n
+			_set_amplitudes([1.0, 0.5, 0.333, 0.25, 0.2])
+```
+
+one over n, all five present, the recipe the label calls a sawtooth. The plate&#x27;s last line names every coefficient that differs from this table, so you can wander and still know how far you have gone.
+
+With the baseline held, look at the rise. An ideal sawtooth jumps; this one climbs from trough to crest over about nine centimetres of a fifty-centimetre cycle. Its descent ripples where the ideal would be straight. Raise the fifth slider and those ripples change. The baseline peaks near 1.58; other amounts can rise further. Five smooth returns can suggest a corner and cannot make an exact one. From across the room the pale line suggests a sawtooth. At the bench its rounded rise remains available to inspect.
+
+Take the second and fourth rows out and leave the odd three; the label offers a name. Move the fifth a little. At first the name stays. Move further and it gives way to Custom Waveform. The curve has changed continuously; the naming rule crossed a threshold. It checks all five amounts relative to the first, allowing a small difference from a recipe. Custom is a place to continue from.
+
+Then remove the row you think matters least and find where its absence shows. It is not in one place, because each row runs the whole cycle. Near zero, a row disappears before its coefficient reaches zero: the display hides values below 0.01 while the sum still includes them. At some marks the plate can report a difference between the visible rows and the total. Something has left the picture without leaving the calculation.
+
+&lt;!-- @ --&gt;
+
+## What the room keeps
+
+At the bench, one slider changed how much of a wave was present. Another instrument in the laboratory, Slow Circuits, offers ENTER ROOM. It takes you out of this hall and into a listening room. BACK TO HALL will bring you to the museum again. Take a phrase with you.
+
+&lt;!-- @ambient_patch --&gt;
+
+A loudspeaker stands inside. At the Voice station, press RECORD / END, say a short phrase, and press again to finish. Eight seconds is the limit. DEMO VOICE offers a synthetic phrase if you prefer. Listen once. Then press HEAR ORIGINAL, let it finish, and hear it again. The instrument plays the same stored recording. Repetition has not yet altered its data.
+
+Press NEXT PASS. Something has acted on the phrase. Listen for a vowel, a consonant, a pause. Press again. Which is easiest to follow now? AUTO continues the returns; HEAR ORIGINAL interrupts them with the recording you began from. The comparison remains available even when the words become difficult to recognize.
+
+The room keeps the result of each pass and makes that result the next input. Leaving out the worker and playback machinery, the operation is:
+
+```gdscript
+current = DSP.room_pass(current, absorption).samples
+```
+
+The next pass begins with a sound that has already been changed. Compare that with the line used when you press RESET:
+
+```gdscript
+current = original.duplicate()
+```
+
+A copy can keep the values. A filter acts on them. Here, delayed sound returns into the calculation, reinforcing some frequencies more than others. Repeating the operation makes that unevenness increasingly audible. The voice and the rule participate in what remains.
+
+Alvin Lucier&#x27;s *I Am Sitting in a Room* begins with a voice recorded and played back into a physical room, then recorded again. The room&#x27;s resonances become prominent through successive returns. A digital recorder could take part in that physical process too; tape damage is not required for its central effect.[^synthesis-lucier]
+
+Calling everything we hear here *analogue distortion* would hide a distinction we can investigate. In Lucier&#x27;s physical setup, sound passes through air between a loudspeaker and a microphone. In this virtual room, the first recording enters a numerical model. Three delayed paths use the room&#x27;s dimensions; damping changes what returns. The visible walls do not, by themselves, act on the sound.[^synthesis-room-model]
+
+Go to SURFACE and move ABSORB. The panels change colour and the experiment returns to the stored voice. Begin the passes again. Keep the same phrase and compare what happens under the changed conditions. Colour and acoustic response have been connected by code. One has not caused the other.
+
+A wall can look like concrete before we have given it any of concrete&#x27;s acoustic behaviour. What would it mean to give that wall the response of cloth? Or to let a curtain ring? Those rooms are possibilities for another iteration. The current control changes absorption; it does not yet let us exchange a whole material&#x27;s behaviour. Even this smaller choice makes appearance and action available to question separately.
+
+There are other choices inside the return. Each pass is adjusted to the same peak amplitude. The recording has a fixed length, with a short allowance for its tail. Sound that continues beyond that window is cut away. HEAR ORIGINAL means the first recording this instrument stored; it cannot give us the voice before recording, sampling and preparation. Walking changes where we hear the virtual loudspeaker, while the simplified resonance model stays fixed.
+
+Listen once more to the original. What became difficult to hear has not been deleted from every place. It remains in a buffer we chose to keep. The room&#x27;s rules shaped one version of the voice; comparison lets us notice their work. Which properties would we carry into another room, and which might we let it change?
+
+&lt;!-- @ --&gt;
+
+## Back at the bench
+
+![The five rows and their restored sum on the synthesis bench inside the museum.](/book-review/doc/book/figures/wavefunctions/synthesis-return-museum.png)
+
+Choose BACK TO HALL and find the five rows again. Press HOLD, then BASELINE. Pick a place on the pale curve and move the fifth slider. Watch that place change. Press BASELINE once more: with the phase held, restoring the five amounts brings the curve back to where you just saw it.
+
+In the listening room, each pass began with the altered result of the last. Here the slider changes an amount used to calculate the sum afresh. The previous curve does not become an ingredient in the next one. Both instruments let us return, but they keep different things available.
+
+Release HOLD. The five amounts stay while the shape moves across the board. BASELINE can restore this recipe without recovering the moment before we left the hall. Repeating a recipe and repeating an exact instant ask for different things to be kept. In Random Definition, that question will meet an unfamiliar result: what would we need to retain to bring it back?
+
+
+[^synthesis-lucier]: Alvin Lucier, *I Am Sitting in a Room* (1969). Nicolas Collins&#x27;s [album notes](https://www.dramonline.org/albums/alvin-lucier-i-am-sitting-in-a-room/notes) (1990) describe the result as an encounter between a particular voice and a particular space, and discuss its realization with digital delays or samplers. Collins also attends to Lucier&#x27;s stutter as a rhythmic contribution. Lucier’s stutter is part of the voice the room receives, not a fault the passes correct. “Less intelligible” describes what happens to the recording, not a judgement of its speaker.
+
+[^synthesis-room-model]: Julius O. Smith III, [“Artificial Reverberation,” *Physical Audio Signal Processing*](https://www.dsprelated.com/freebooks/pasp/Artificial_Reverberation.html), explains how delays and filters model propagation, reflections and absorption, and why a response between a source and receiver depends on their positions. Ada&#x27;s current three-path model is much simpler: it does not calculate reflections from the visible mesh, an open doorway or a moving microphone. The equation above abbreviates `room_memory_audio.gd` and `room_memory_dsp.gd`; the actual processing runs on a background worker.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_Synthesis_Lab/tutorial.md">Raw captured source</a></p><pre># Five amounts and one shared phase
+
+AirMusic gave each struck bar its own beginning. Synthesis Lab gives five components one phase and asks what their amounts can make together. The primary is `additive_wave_demo`, a visual instrument. It does not render these curves to an audio stream. All code excerpts below come from `commons/artifacts/additive_wave_demo/additive_wave_demo.gd`.
+
+## Take the assembled shape apart
+
+Press HOLD to stop the display&#x27;s drift. Lower H2 through H5 and compare the remaining row with the pale sum. H1 ALONE performs that removal together; BASELINE restores the five arrival coefficients. These buttons preserve the current held phase. H1 ALONE keeps H1&#x27;s current amount, restoring it to one only if it was below 0.01.
+
+The state begins as five coefficients. The map then selects the sawtooth preset:
+
+```gdscript
+var harmonic_amplitudes: Array[float] = [1.0, 0.0, 0.0, 0.0, 0.0]
+```
+
+```gdscript
+_set_amplitudes([1.0, 0.5, 0.333, 0.25, 0.2])
+```
+
+At a chosen phase, each coefficient scales one sine. The harmonic index selects how many returns it makes in a cycle:
+
+```gdscript
+func _calculate_wave_value(phase: float) -&gt; float:
+    var value = 0.0
+    for h in range(harmonic_amplitudes.size()):
+        value += harmonic_amplitudes[h] * sin(phase * (h + 1))
+    return value
+```
+
+Raise H2 again. At the amber mark, predict whether it adds or subtracts from the total before reading the plate. A coefficient is nonnegative, but its sine can be above or below zero. Addition can therefore lower the sum.
+
+## One position, several rates
+
+The drawing evaluates 256 samples across two metres and four cycles:
+
+```gdscript
+var t = float(i) / (WAVE_POINTS - 1)
+var x = (t - 0.5) * WAVE_LENGTH
+var phase = t * TAU * 4.0 + _time * TAU
+```
+
+The combined wave is drawn at 0.30 m per signal unit. The ladder uses 0.20 m per unit and separates the rows vertically:
+
+```gdscript
+return Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1)
+```
+
+Adding literal screen heights would also add the offsets. Read the values at the shared mark instead. The `overlay` source configuration uses the sum&#x27;s scale and axis; there is no visitor mode selector on this placed bench.
+
+The clock moves only when the display is not held:
+
+```gdscript
+if not held:
+    _time = fmod(_time + delta * base_frequency, 1000.0)
+```
+
+Multiplying the whole phase by `h + 1` keeps the components related as the picture scrolls. There are no separate phase controls, signed coefficients, constant offset or harmonics above five. This finite family is useful without containing every periodic shape. The older source preset ID `triangle` keeps its positive odd 1/n² coefficients; the label now names that mix. A triangle series with this sine orientation would require alternating signs, which these sliders cannot supply.
+
+In this hall, read the amounts and compare the rows before naming the recipe. `name_after_compare:true` leaves the preset name at `ARRIVAL RECIPE` until H1 ALONE or BASELINE is used; HOLD does not reveal it. After a manual edit it instead says `COMPARE THE SUM`. Those invitations do not change the coefficients or their drawing.
+
+## The slider and the name are different operations
+
+Moving a real slider updates its own coefficient from the handle position:
+
+```gdscript
+harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+```
+
+The geometry uses that value. The recipe label compares all five amounts relative to H1:
+
+```gdscript
+for h in range(NUM_HARMONICS):
+    if absf(harmonic_amplitudes[h] / first - float(recipe[h])) &gt; RECIPE_TOLERANCE:
+        return false
+```
+
+`RECIPE_TOLERANCE` is 0.025. At H1 = 1, moving H5 from the sawtooth&#x27;s 0.20 to 0.22 retains the name; 0.24 leaves it. Scaling every coefficient together preserves the ratios. An all-zero state gets its own label, and any single nonzero harmonic is a sine. A new name does not change the accumulation loop.
+
+## A contribution can leave the picture first
+
+Component ribbons disappear below amplitude 0.01. The formula label rounds to one decimal place and omits small terms; the housed readout rounds to two decimals. The sum continues using the stored coefficients. Its marker readout compares the sum of visible rows with the full sum, reporting inequality when their difference exceeds 0.005. Display precision and signal state are distinct.
+
+With the arrival coefficients, the finite sum rounds the ideal sawtooth&#x27;s jump and ripples along its descent. The current capture spans about 0.086 m from trough to the following crest in a 0.5 m cycle. That is a measurement of this sampled, five-term construction. It does not measure all possible settings or give the sum a universal amplitude ceiling.
+
+Hold a phase, alter the five amounts, then restore BASELINE. The shape returns at that phase. Release HOLD and the phase continues; BASELINE restores coefficients without rewinding time. The next hall, Random_Definition, asks which other state must be retained for a result to return.
+
+## A companion you can hear: Slow Circuits
+
+The ambient console at (4,6) is independent of the coefficient bench. Press PLAY and wait for the two voices to prepare. Three clocks propose notes at different intervals. DENSITY decides how often a proposal sounds; the scale limits which pitches it can become. Lower density before adding more SPACE: does the silence stay empty, or does a previous note inhabit it?
+
+WARMTH lowers the filter cutoff. DRIFT deepens a 29-second modulation; LFO ROUTE moves it between filter and stereo position. RATE changes the three clocks together. NEW SEED changes future choices; stopping and starting with the same seed and unchanged controls reproduces the event sequence. The drawn output is captured sound. The fixed cables explain the patch; they are not loose plugs.
+
+The synthesis comes from `DiscreetAudioGenerator` and `FMPianoGenerator`, prepared once through `AsyncAudioGenerator`. The console schedules at most eight finite voices. Excess requests are skipped. The room can keep an echo without accumulating an unlimited number of bodies.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_Synthesis_Lab/technical.md">Raw captured source</a></p><pre># Synthesis Lab — a finite sum made inspectable
+
+Builds on AirMusic&#x27;s separate voices and leads to Random_Definition&#x27;s question of replay. `additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true` at (4,2) is the sole primary. It is a visual sum, not an audio synthesizer. The other 25 placements remain supporting laboratory material; their states are not controlled by this bench.
+
+## State and computation
+
+Five sliders supply nonnegative amplitudes in [0,1]. Harmonic h uses `amplitude[h] * sin((h + 1) * phase)`. All components share a phase, with no separate phase offsets, signed coefficients, constant term or harmonics above five. The arrival coefficients are [1, 0.5, 0.333, 0.25, 0.2]. These are rounded 1/n values, a finite sawtooth approximation.
+
+The sum and components use 256 samples spanning four cycles across two metres. `_time` advances by `delta * base_frequency` (default 1) and wraps at 1000; HOLD pauses this display clock. The sum&#x27;s scale is 0.30 m per unit. Ladder rows use 0.20 m per unit, with axes separated by 0.15 m. Their vertical offsets must be removed before comparing geometry with the sum.
+
+The slider signal reads the handle&#x27;s normalized value back into exactly one coefficient. BASELINE writes the saved arrival table to all sliders. H1 ALONE preserves H1 (or sets it to one if below 0.01), and zeroes the rest. Neither resets `_time`. The readout updates on changes and ten times per second while scrolling.
+
+## Naming after comparison
+
+This hall opts into `name_after_compare:true`. Arrival shows `ARRIVAL RECIPE`; a manual coefficient edit changes that invitation to `COMPARE THE SUM`. HOLD leaves the name waiting. The existing H1 ALONE or BASELINE action reveals the detector’s current name, and subsequent edits keep recognition available. Coefficients, formula, rows, marker and controls remain visible. The bench-front caption identifies the finite, nonnegative, phase-locked family. Other placements retain immediate names and their existing caption.
+
+## Recipe recognition revised
+
+The former detector ignored H4/H5 in several classifications and could call a lower-amplitude lone sine a triangle. The new detector recognizes zero and a single sine first, then compares all five coefficients relative to H1, with a per-coefficient tolerance of 0.025. Matching is skipped if H1 is below 0.01. A match describes proximity to a recipe, not equality to an ideal discontinuous waveform.
+
+The legacy `triangle` preset ID retains its positive odd 1/n² table to preserve existing configurations. Its label is now `Odd 1/n² mix (positive terms)`. A triangle in this sine orientation requires alternating signs. No new control or change to the five-term waveform calculation is introduced. The label repair applies to other placements of this shared artifact too.
+
+## What the display leaves out
+
+Rows below 0.01 disappear, while the total still includes their coefficients. The formula uses one decimal place; the plate uses two. The marker is sample 159, local x ≈ 0.247 m. `display_values()` reports each row, the sum of drawn rows and the complete total; the readout uses an equality threshold of 0.005. Thus an invisible small contribution can produce a visible disagreement. There is no automatic normalization of the sum.
+
+The sampled baseline peaks around ±1.582, with an approximately 0.086 m rounded rise in its 0.5 m cycle. Other coefficient settings can exceed this amplitude. High sums extend beyond the dark backing and can approach the upper lettering; the current staging has not been enlarged in this review.
+
+## Preserved staging and route
+
+Claude&#x27;s bench is 2.90 × 0.50 m, top at 0.92 m. The sum&#x27;s axis is at 1.75 m; ladder axes are 1.40, 1.25, 1.10, 0.95 and 0.80 m. The lowest axis is below the bench top in height, but the checked standing sight line clears its rear edge. The five slider handles sit roughly 0.99–1.36 m high at the right end. A three-button panel and tilted five-line readout occupy the front.
+
+Retain the recovered platform/wall contract, clear approach rectangles, miniature hallway on the synthesis stand and the synth shutdown repair. All map layers are preserved. `coloredlines` was removed by Claude&#x27;s prior pass because it changed the visitor&#x27;s camera; this review only removes its stale book/role references.
+
+## Evidence and remaining visit
+
+The independent live run passed 110 checks with zero failures and engine exit 0. The retained tests exercise the five real slider paths, desktop pointer drag and buttons, readout versus ribbon vertices, finite-corner comparison, access, room cleanup and rebuilding. Ten new coefficient settings verify label regressions and independently compare all 256 drawn sum samples with arithmetic; the worst discrepancy is below 9e-8. The clear-rectangle assertion now matches the already-authored corridor and operating strip.
+
+No tracked-hand or human listening observation is claimed. Verify headset reach and lettering, particularly at higher amplitudes. The radio rack was playing during the probe, 7.7 m from the bench; this does not establish how it sounds at a listener&#x27;s head. See `doc/space/synthesis-lab-review-2026-09-12/` and `/research/possible-bodies/synthesis-lab.html`.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_Synthesis_Lab/intent.md">Raw captured source</a></p><pre># Synthesis Lab — what shape can several simple returns make together?
+
+Keep one primary: additive_wave_demo on the existing bench at (4,2). Begin with the assembled five-term curve, hold a phase, remove contributions and rebuild it. Prediction at the shared mark should precede the explanation of the sum.
+
+The shared substrate is five coefficients. The constraints are equally concrete: nonnegative amounts, integer harmonics, one phase, finite sampling, drawing thresholds and recipe-label tolerances. AirMusic allowed separate note beginnings; here the terms move together. The chapter hands Random_Definition a question about what state a repetition needs.
+
+Retain Claude&#x27;s laboratory and all 25 placements, the clear approaches and miniature hallway. The reviewed primary is visual. Other specimens are not connected to its coefficient state. A future material, body or motion application must establish that connection explicitly.
+
+110 independent desktop checks passed on 12 September. Headset reach, upper-label legibility and high-amplitude contrast remain for the later visit. Review: /research/possible-bodies/synthesis-lab.html.
+
+
+## Room Memory detour - 22 September 2026
+
+Keep the additive bench as the primary encounter. Slow Circuits now supplies the entry to an audible comparison after Alvin Lucier: hear the unchanged stored voice, pass the previous result through the room model, then change absorption and restart from the same source. The book follows those existing controls. The question is what a repeated operation preserves or makes less audible, and how a visible material acquires a capacity to act through code. Concrete that absorbs like cloth and curtains that ring are speculative extensions, not current presets. Original comparison is a first stored recording, not access to an unmediated voice. Carry the difference between copying state and processing it into the existing handoff to Random_Definition.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_Synthesis_Lab/critical.md">Raw captured source</a></p><pre># The curve continues after its name ends
+
+Begin with the fifth slider. Move it a little away from the arrival recipe and the sawtooth name stays. Move it further and the label changes to Custom Waveform. Nothing in the accumulation has crossed a comparable boundary. One amount continued to change; a classification made a cut.
+
+That difference gives Ada Research a precise place to ask what bodies are possible. At this bench, sine, square-like and sawtooth-like forms share one representation: five coefficients in the same loop. A named shape is a neighborhood within that construction. Leaving the neighborhood does not make the new shape an error. It makes it available without the old name.
+
+The naming rule also has a history. It once ignored some upper harmonics when recognizing a recipe, and could mistake a lone, quieter sine for a triangle. The repair compares all five amounts. It still makes a choice: each ratio to the first harmonic may differ by 0.025. That tolerance is an interface decision we can inspect, rather than a natural border between kinds of wave. Enlarging it would make more shapes familiar; reducing it would make more shapes custom. The underlying curves would remain.
+
+The five sliders permit a great deal and withhold a great deal. Their values are nonnegative. Every component uses an integer multiple of one phase. There is no separate beginning for a row, no constant offset, no sixth contribution. AirMusic allowed two strikes to carry different ages; this bench binds the terms together. A shared computational substrate makes combinations possible, but the controls decide which combinations a visitor can actually reach.
+
+The old triangle preset makes that limit specific. Its coefficients decrease as positive odd 1/n² terms. The alternating signs needed for a triangle in this orientation are absent. Naming the result after its actual recipe lets the missing operation become a question: what would become possible if one term could turn over? The answer would require a change to the instrument, not a stronger claim for the current one.
+
+Other remainders appear at the edge of visibility. A small row vanishes below 0.01 while its contribution remains in the sum. The total can disagree with what the visible rows seem to account for. The finite sawtooth keeps a rounded rise. The formula rounds coefficients more coarsely than the readout. These are different kinds of omission, each made by a particular operation. Calling all of them entropy would erase the distinctions that make them useful to investigate.
+
+The specimens around the bench extend the room&#x27;s question toward other bodies, but they are not outputs of these five sliders. A laboratory arrangement can suggest a relationship before an implementation establishes one. The gap is work still available: carry the actual coefficient state into a material, a motion or another body, then test what that transfer preserves and changes.
+
+For this visit, the inquiry is smaller and complete enough to repeat. Hold a phase. Change the amounts. Restore them. Release the hold. Returning a recipe and returning an instant require different state. We carry that distinction into randomness, where an unfamiliar result may also depend on something that can be kept.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_Synthesis_Lab/artifacts.md">Raw captured source</a></p><pre># Synthesis Lab — the primary and its laboratory
+
+26 placed artifacts. The book follows one primary, `additive_wave_demo`: five coefficients, their visible component rows and a shared sum. The other pieces are supporting laboratory material; they do not receive the bench&#x27;s coefficient state.
+
+The inventory below preserves the existing catalog descriptions. They describe the wider collection and are not additional steps in the primary lesson.
+
+## DNA Specimen
+![DNA Specimen](/scene-catalog/dna_specimen.png)
+
+A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.
+
+`dna_specimen`
+
+## Holographic Display
+![Holographic Display](/scene-catalog/holographicdisplay.png)
+
+Holographic projector with sine-based effects. Scan line sweeps vertically using sin(t), content rotates and bobs, flicker effect at 15Hz creates subtle instability. Wireframe cube demonstrates 3D rotation. Projector lights pulse with phase offsets around the ring.
+
+`holographicdisplay`
+
+## Electronic Scales
+![Electronic Scales](/scene-catalog/electronicscales.png)
+
+Laboratory scales demonstrating damped harmonic oscillation. When weighing, the display settles using e^(-bt) * sin(ωt)—exponential decay multiplied by sine. Adjustable damping factor and frequency. Shows how real oscillating systems lose energy over time.
+
+`electronicscales`
+
+## Air Music Display Case
+![Air Music Display Case](/scene-catalog/air_music_display_case.png)
+
+A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.
+
+`air_music_display_case`
+
+## Sample Vial Rack
+![Sample Vial Rack](/scene-catalog/samplevialrack.png)
+
+Six sample vials demonstrating phase relationships. Each vial glows with a sine wave offset by TAU/6 from its neighbor, creating a visible wave propagation effect. Modes: linear wave travel, radial expansion from center, random phases. Classic wave interference visualization.
+
+`samplevialrack`
+
+## seismograph
+![seismograph](/scene-catalog/seismograph.png)
+
+Seismograph-style traveling-pen chart — draws the driving signal over time onto a scrolling paper strip, reading oscillation as a physical trace.
+
+`seismograph`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Oscilloscope
+![Oscilloscope](/scene-catalog/oscilloscope.png)
+
+Multi-mode oscilloscope with VR sliders. Shows waveform, Lissajous patterns, and XY plots. Classic green phosphor CRT aesthetic. Controls: FREQ A/B, Amplitude, Phase, Time/Div.
+
+`oscilloscope`
+
+## Glass Rack
+![Glass Rack](/scene-catalog/GlassRack.png)
+
+Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.
+
+`GlassRack`
+
+## Biomagnetic Resonator
+![Biomagnetic Resonator](/scene-catalog/biomagneticresonator.png)
+
+Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.
+
+`biomagneticresonator`
+
+## Colored Lines
+![Colored Lines](/scene-catalog/coloredlines.png)
+
+Interactive colored line visualization and manipulation algorithms
+
+`coloredlines`
+
+## hallway_scene
+![hallway_scene](/scene-catalog/hallway_scene.png)
+
+Populates a tunnel with sine-driven cylinder tubes and animates them through time.
+
+`hallway_scene`
+
+## UnitCircleTrig
+![UnitCircleTrig](/scene-catalog/UnitCircleTrig.png)
+
+Unit circle generating Sine and Cosine
+
+`UnitCircleTrig`
+
+## Petri Dish Worms
+![Petri Dish Worms](/scene-catalog/petri_dish_worms.png)
+
+Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.
+
+`petri_dish_worms`
+
+## Atmospheric Monitoring Station
+![Atmospheric Monitoring Station](/scene-catalog/atmosphericmonitoring.png)
+
+Three analog gauges at different frequencies: pressure (0.05 Hz slow drift), temperature (0.02 Hz), humidity (0.03 Hz). Demonstrates how multiple independent oscillations create complex patterns. Status lights indicate normal ranges. Real atmospheric data oscillates similarly.
+
+`atmosphericmonitoring`
+
+## Additive Wave Demo
+![Additive Wave Demo](/scene-catalog/additive_wave_demo.png)
+
+Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier&#x27;s fundamental insight that any shape can be constructed from simple oscillations.
+
+`additive_wave_demo`
+
+## double_helix_scene
+![double_helix_scene](/scene-catalog/double_helix_scene.png)
+
+Oscillation-driven double-helix visualisation — two phase-offset sine waves trace intertwined curves that grow over time.
+
+`double_helix_scene`
+
+## Chladni Plate
+![Chladni Plate](/scene-catalog/chladni_plate.png)
+
+Vibrating metal plate with sand particles that migrate to nodal lines, forming standing wave patterns. Auto-cycles through modes showing different resonant geometries. Ernst Chladni&#x27;s classic 18th-century experiment demonstrating that sound creates visible form.
+
+`chladni_plate`
+
+## Spring Demo
+![Spring Demo](/scene-catalog/spring_demo.png)
+
+A hands-on spring physics demonstration — stretch, compress, and release springs to feel Hooke&#x27;s law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.
+
+`spring_demo`
+
+## SoundscapeRadioRack
+![SoundscapeRadioRack](/scene-catalog/SoundscapeRadioRack.png)
+
+TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise
+
+`SoundscapeRadioRack`
+
+## Microscope
+![Microscope](/scene-catalog/microscope.png)
+
+Bench-top optical microscope — Half-Life lab vocabulary. Heavy dark steel base, a slightly tilted column, a glossy white stage with two specimen clamps, an objective turret carrying short lenses, one or two tilted eyepieces, and a small emissive bulb illuminator below the stage. The architectural form of LOOKING-CLOSER.
+
+`microscope`
+
+## Chemical Apparatus
+![Chemical Apparatus](/scene-catalog/chemicalapparatus.png)
+
+Chemistry station with bubbling liquids using sine-based animation. Flask and beaker liquids oscillate with phase offsets demonstrating wave relationships. Test tubes show wave propagation. Bunsen burner flame flickers using multi-frequency sine superposition for natural randomness.
+
+`chemicalapparatus`
+
+## Multimeter
+![Multimeter](/scene-catalog/multimeter.png)
+
+Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage waveforms—the needle deflects following sin(t * frequency), showing how alternating current oscillates between positive and negative. Modes: AC voltage, DC voltage, resistance, frequency.
+
+`multimeter`
+
+## LissajousCurves
+![LissajousCurves](/scene-catalog/lissajous_curves.png)
+
+Parametric curves with particle tracer
+
+`lissajous_curves`
+
+## Slow Circuits — Ambient Patch
+
+`ambient_patch` · supporting playable instrument · cell (4,6), front toward +Z.
+
+Three independent clocks pass through seeded chance and a C-major pentatonic scale. Ada’s Discreet pad and FM piano feed a low-pass filter, stereo delays and reverb. Press PLAY, lower DENSITY to leave gaps, then move SPACE to hear what remains between notes. LFO ROUTE sends the slow modulation to the filter or stereo pan. Six physical sliders have flat labels; the output trace reads real PCM. This is a fixed patch with a switchable modulation destination, not a free cable editor. It does not sonify the additive bench’s coefficients.
+
+The console also has **ENTER ROOM**: **Room Memory**, an experiment after Alvin Lucier&#x27;s *I Am Sitting in a Room*. Record a phrase or use a synthetic demo, then hear it pass repeatedly through a simplified room-resonance model. Compare the original and change absorption. BACK TO HALL returns here; AMBIENT ROOM opens the earlier circular instrument. These staged rooms leave the other laboratory exhibits in place.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_Synthesis_Lab/summary.md">Raw captured source</a></p><pre># The sum on the bench
+
+A sawtooth-like curve waits above five colored rows. HOLD pauses its drift. Five sliders change the rows&#x27; amounts; H1 ALONE removes the upper harmonics, and BASELINE restores the arrival recipe. At the amber mark, predict each contribution before comparing the readout with the sum.
+
+The primary `additive_wave_demo` is a visual construction from five nonnegative sine coefficients sharing one phase. Its labels describe nearby recipes. Moving a slider is continuous; changing a shape&#x27;s name crosses a threshold. A row can also disappear below the display threshold while still contributing to the total.
+
+Claude&#x27;s bench, clear approaches and laboratory staging remain, with 25 placed artifacts. The book follows this one primary. The next hall is Random_Definition: what state must be kept for a result to return?
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_Synthesis_Lab/blurb.md">Raw captured source</a></p><pre>Five smooth returns make a shape none of them has alone. Take it apart. Restore it. Move a slider until the curve loses its familiar name, and keep going.
+
+What has changed: the construction, its name, or what the instrument lets you see?
+</pre></section></body></html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three points and a future — Endless Museum</title>
+<style>
+:root{color-scheme:light;--paper:#f3f1ec;--ink:#17181a;--quiet:#676763;--line:#d6d3cd}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}header{background:#151618;color:#f7f5ef;padding:72px max(24px,calc((100vw - 1120px)/2)) 60px}header .overline{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#bab9b5}h1{max-width:850px;font:normal clamp(38px,6vw,72px)/1.06 Georgia,serif;letter-spacing:-.035em;margin:26px 0}header p{max-width:740px;color:#d4d2cd}nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:30px}a{color:inherit;text-underline-offset:4px}main{max-width:1168px;padding:48px 24px 80px;margin:auto}section{margin-bottom:60px}h2{font:normal 32px/1.2 Georgia,serif;margin:0 0 20px}p{max-width:850px}figure{margin:0 0 26px}figure a{display:block;text-decoration:none;background:#202226;color:#eee}img{display:block;width:100%;height:auto}img[hidden]{display:none}figcaption{font-size:14px;color:var(--quiet);margin-top:10px;max-width:870px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.placeholder{display:block;padding:80px 28px;text-align:center;font-size:15px}.placeholder[hidden]{display:none}ul{padding-left:22px}li{margin:8px 0}.status{border-top:1px solid var(--line);padding-top:24px}.pending{color:var(--quiet)}.small{font-size:14px;color:var(--quiet)}code{font-size:.88em;overflow-wrap:anywhere}footer{border-top:1px solid var(--line);padding-top:24px;color:var(--quiet);font-size:14px}@media(max-width:700px){.pair{grid-template-columns:1fr}header{padding-top:44px}main{padding-top:32px}}
+</style>
+</head>
+<body>
+<header>
+<div class="overline">Endless Museum · Runtime update · 5 October 2026</div>
+<h1>Three points<br>and a future.</h1>
+<p>The arrangement moves into the VR museum: three plain podiums in the Point One corridor, a large polished black sphere at its end, and the museum’s name on the walls with <em>always another room</em> underneath.</p>
+<nav><a href="#museum">The rooms</a><a href="#before">Earlier view</a><a href="#checks">Evidence</a></nav>
+</header>
+<main>
+<section id="museum">
+<h2>One corridor, three conditions</h2>
+<figure>
+<a href="Point_One/three-podiums.png"><img src="Point_One/three-podiums.png" alt="Point One in the running museum: three equal off-white podiums, one empty, one with a visible white sphere, one with a solid white sphere." onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="placeholder" hidden>Point One runtime capture pending.</span></a>
+<figcaption>The first podium is empty. The second supports the visible point; the third adds the point’s collision boundary. All three podiums have the same dimensions and a single front label. Image source: the running Endless Museum.</figcaption>
+</figure>
+<p>The podium tops sit at 0.98 metres, meeting the lower edge of the existing 0.28-metre spheres. Their supports are physical; the distinction between an absent point, a visible point and a solid point remains intact.</p>
+<figure>
+<a href="Point_One/future-sphere.png"><img src="Point_One/future-sphere.png" alt="The final 1.3-metre sphere in Point One, polished black on an off-white pedestal." onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="placeholder" hidden>Future sphere runtime capture pending.</span></a>
+<figcaption>The object of the future: the existing final sphere, now glossy black. Its 1.3-metre diameter, position and collision boundary are retained.</figcaption>
+</figure>
+</section>
+<section>
+<h2>Always another room</h2>
+<p>Shared wall lettering carries the title <strong>ENDLESS MUSEUM</strong> and the line <strong>always another room</strong>. These views document the lettering in two actual halls.</p>
+<p class="small">Cormorant Garamond gives the comic’s lettering a close, reproducible serif treatment. The font and its license travel with the project. The common hall builder chooses a continuous wall, avoiding doorways, pools and enclosing exhibits; a hall without a suitable wall does not receive a floating sign.</p>
+<div class="pair">
+<figure><a href="Point_One/museum-lettering.png"><img src="Point_One/museum-lettering.png" alt="Endless Museum wall lettering in Point One." onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="placeholder" hidden>Point One lettering capture pending.</span></a><figcaption>Point One.</figcaption></figure>
+<figure><a href="Point_Lines/museum-lettering.png"><img src="Point_Lines/museum-lettering.png" alt="Endless Museum wall lettering in Point Lines." onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="placeholder" hidden>Point Lines lettering capture pending.</span></a><figcaption>Point Lines.</figcaption></figure>
+</div>
+</section>
+<section id="before">
+<h2>An earlier view</h2>
+<figure><a href="../2026-10-03-point-one-existing-points/corridor.png"><img src="../2026-10-03-point-one-existing-points/corridor.png" alt="Historical Point One corridor capture from 3 October 2026."></a><figcaption>Historical museum capture, 3 October 2026. This gives context for the arrangement; it is not an exact capture immediately before today’s change.</figcaption></figure>
+</section>
+<section id="checks" class="status">
+<h2>What has been checked</h2>
+<p><strong>23 native point checks passed.</strong> They inspect the real scene geometry, materials, positions and collision responses. Rays above the podiums pass through the empty and visible stations; the solid point stops them.</p>
+<ul>
+<li>Three matching off-white supports; one label each.</li>
+<li>Small points keep their original size and white material.</li>
+<li>The final sphere remains 1.3 metres across, with a polished black finish.</li>
+</ul>
+<p id="integration-status"><strong>Point One: 41/41 passed. Point Lines: 15/15 passed.</strong> Both actual-museum runs exited successfully, with stable source hashes throughout. The checks cover physical wall mounting, clear sightlines to both labels, collision differences, a clear walking lane, and the sun switch turning off and back on.</p>
+<p><a href="points-checks.json">Point scene checks</a> · <a href="Point_One/report.json">Point One museum report</a> · <a href="Point_Lines/report.json">Point Lines museum report</a></p>
+<p class="small">These are desktop renders of the museum’s shared VR scene. No Quest/headset test has been performed. Lettering has less contrast on Point Lines’ shadowed wall; headset legibility remains to be judged there. Logs retain an existing unresolved resource UID and renderer warnings; no script errors were reported.</p>
+</section>
+<section>
+<h2>Implementation</h2>
+<p>The point changes live in <a href="../../../../commons/primitives/point/point_condition.gd"><code>point_condition.gd</code></a>. Shared museum lettering is handled by <a href="../../../../commons/scenes/em/em_identity.gd"><code>em_identity.gd</code></a> and its museum integration. Original point source is preserved in <a href="before/commons/primitives/point/point_condition.gd">the before snapshot</a>.</p>
+<p>The sun switch still controls the point study. Its dedicated lighting now leaves the supports to the museum’s ordinary light, so the empty and occupied podiums have the same finish.</p>
+<p class="small">The held point, lesson code and reflective book text are outside this change.</p>
+</section>
+<footer>The visual proposal came from the ghost-student comic. This page documents its implementation in the actual museum.</footer>
+</main>
+</body>
+</html>

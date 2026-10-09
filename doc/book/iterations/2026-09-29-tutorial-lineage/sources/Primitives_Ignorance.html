@@ -1,0 +1,488 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Primitives_Ignorance · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Primitives_Ignorance">← Tutorial lineage</a></p><h1>Primitives Ignorance</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Primitives_Ignorance/final.md">Raw captured source</a></p><pre># Limits of Geometric Knowledge
+
+You left a cube whose connections could outlast its name. Now try the name sphere. What are you accepting when you recognise something as round?
+
+&lt;!-- @sphere --&gt;
+
+Begin with the ordinary sphere near the entrance. Look at it from a distance, then approach. Follow its silhouette against the room beyond it. Where does the outline give you something to inspect that the name had allowed you to pass over?
+
+Above the entrance: **Let No One Ignorant of Geometry Enter.** It recalls the motto traditionally associated with Plato&#x27;s Academy.[^ignorance-inscription] Here we have entered with a little geometry. We will use it to inspect the limits of the forms that seemed to admit us.
+
+&lt;!-- @geometry_courtyard --&gt;
+
+Inside, five solids have been given five places. Tetrahedron, cube, octahedron, dodecahedron, icosahedron. Off-white and almost black, each rests on a plain block. You can lift one and bring a face toward you. Its edges remain sharp. There is nothing unfinished about that sharpness.
+
+Columns surround the group. Near the entrance their sides are easy to count; farther along, the corners draw closer together. Four divisions, then five, six, eight. Eventually the column looks round. Walking along the court, you pass through several constructions of the same architectural name.
+
+The solids do not take that journey. An icosahedron has twenty faces because it is an icosahedron. Adding more would give you something else. In the next room, the sphere keeps its name while the number of faces changes. What did the name ask us to preserve?
+
+&lt;!-- @sphere_high --&gt;
+
+The next room holds three pairs of spheres. Start with the first pair in the resolution display. One sphere wears lines along its triangle edges; the other has plain shading. Predict whether removing the lines also changes the sphere&#x27;s outline. Walk around the pair and compare.
+
+The two meshes have the same vertex positions and triangle connections. The lines are an added overlay. They make a construction easier to follow without rebuilding its surface.
+
+Choose one place where the silhouette changes direction. Step back until that distinction becomes difficult to see, then approach again. Your distance changed. The mesh did not.
+
+&lt;!-- @sphere_mid --&gt;
+
+Continue to the middle pair. Inspect it from a comparable distance. Which distinctions are easier to find now? Compare the marked example with its plain neighbour before comparing it with the finer pair behind you.
+
+The finer pair uses sixteen rings and sixteen radial segments; this pair uses seven of each. Those two settings divide different directions of the surface. Changing them changes the positions and connections available for making it.
+
+&lt;!-- @sphere_low --&gt;
+
+At the coarsest pair, follow one flat patch toward its edge. Is this merely a sphere missing something, or is there a feature here you would choose to keep?
+
+Its construction uses one ring and ten radial segments. One direction is divided more often than in the middle example, the other much less. Resolution has a distribution. It does not arrive as a single quantity called detail.
+
+The script gives the two choices separate names:
+
+```gdscript
+sphere_mesh.radial_segments = segment_count
+sphere_mesh.rings = ring_count
+```
+
+&lt;!-- @sphere_resolution_atlas --&gt;
+
+Across the room, twelve smaller spheres spread the two choices out in space. Across each row, more rings divide the height. Along each column, more segments divide the circumference. Their triangle edges remain visible. You can follow one change while the other holds still.
+
+A crowded equator can belong to a sparsely divided body. One figure has a broad flat face where another gathers many narrow triangles. Both answer to sphere. Before deciding which is more convincing, look for a shape you had not expected to find there.
+
+A mathematical sphere consists of points at a fixed distance from a centre. The mesh joins sampled positions with flat triangles. Adding triangles can improve that approximation; no finite collection of flat patches acquires the sphere&#x27;s continuous curvature. Shading can soften their appearance while the polygonal outline remains.
+
+![The existing high, middle and low sphere artifacts in matched views: triangle edges visible above, hidden below. Each column keeps the same mesh.](/book-review/doc/book/figures/Primitives_Ignorance/sphere-visible-construction.png)
+
+*The lower row keeps every triangle in the upper row. The lines disappear; the construction remains.*
+
+This is where ignorance turns around. Plato distinguishes the drawn figure from the geometric object considered in thought. Here we turn our attention toward the constructed figure: what its polygons leave out, and what their particular arrangement makes available.[^ignorance-plato]
+
+The formula specifies a sphere. The mesh gives us one finite construction through which to encounter it. The ridge is available too. We can learn from its shape without requiring it to disappear into a smoother answer.
+
+&lt;!-- @budget_of_smoothness --&gt;
+
+At the far end of this room, a counter makes the cost of these choices countable. Four numbered spheres turn at the same rate. Keep the counts hidden at first. Choose one for a distant background and one for someone to inspect close to their face. The spheres stay on their stands; you are choosing possible uses.
+
+Press **SHOW / HIDE COUNTS**. Did the numbers change your choice? Then press **SHOW / HIDE EDGES** and follow the lines toward a pole.
+
+Each tag gives two triangle counts. Even counting depends on what the instrument agrees to include.[^ignorance-counts]
+
+Hide the counts while keeping the edges visible, then try the reverse. What becomes easier to judge? Both controls alter what is shown while keeping the sphere meshes in place.
+
+A triangle count does not measure frame time or tell us which object deserves to exist. For your proposed use, name the distinction worth spending geometry on. You might spend more on a close silhouette, or keep a facet because it makes this body recognisable.
+
+&lt;!-- @capsule_reliquary --&gt;
+
+At the centre, the five-sided capsule turns above a stepped pedestal. Eight pale tiers carry it: cylinders with four divisions through eleven, each smaller than the one beneath. Corners shift around the stack. The support is making its own argument about roundness.
+
+The capsule is taller now, nearly the height of a person. Its dark surface receives the light slowly as it turns. A small, awkward construction has been given the place of an object worth lingering before. When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view.
+
+Five segments divide the body around its long axis. Opposite a ridge is the middle of a facet. Half a turn does not bring this cross-section back onto itself. The divisions are evenly spaced, but their odd number interrupts that particular symmetry.[^ignorance-capsule]
+
+You cannot fold your understanding around this corner by simply repeating the front at the back. The shortcut fails. You have to follow another side, or learn the rule well enough to work it out. The object remains knowable; recognising a capsule was not yet knowing this one.
+
+Stay with what the five divisions produced. Between the familiar pill and its polygonal construction, a body appears that the name did not prepare you for. Its surprise is made within the restriction. What would you miss if you corrected it into the capsule you expected?
+
+This gives ignorance another direction: a limit in our expectation becomes somewhere to look. The same small set of instructions that confines the form can make more available than we first knew to ask of it.
+
+![The five-segment capsule raised on eight cylinders, with resolutions four through eleven.](/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/five-on-four-to-eleven.png)
+
+*The capsule keeps its five divisions. The pedestal changes the attention we give them.*
+
+&lt;!-- @primitive_mesh_library --&gt;
+
+The third room has another collection of beginnings. A wedge, a ring, a plane. A pair of letters with depth. The engine supplies these constructions before we decide what to make of them. Each has been wrapped in a reusable scene, like the boxes in the previous hall. The mesh supplies a surface; the scene can bring its material, collision and behaviour along. Choosing a shape and choosing what an object can do are still different decisions.
+
+Here, even the word primitive has practical habits. A plane offers a surface to subdivide. A quad supplies two triangles. Move beside them and their broad faces narrow toward an edge. The letters already carry a language; their geometry lets that language cast a shadow.
+
+One stand holds a point drawn twenty-two screen pixels wide. Approach it: its mark keeps that pixel width while the stand grows in your view. This is another way of giving a point a visible body. It does not behave like the sphere we first called Point One.[^ignorance-prefabs]
+
+Two longer forms belong to the engine&#x27;s trail meshes. Here they are shown at rest, before particles or moving bones would shape them into trails. Some of the engine&#x27;s simplest forms are beginnings of movement.
+
+The old studies remain through the side opening: the rock, the star, the choir, the extra cubes. The court has made a clear arrangement without exhausting what these forms might become.
+
+&lt;!-- @ --&gt;
+
+Carry a more specific question than whether the sphere is good enough: **enough to hold which distinction, for whom, at what distance?**
+
+The polygonal model has a limit; our first understanding of its possibilities has one too. The next room follows a finite sequence of round-looking objects toward a boundary none of its examples reaches.
+
+[^ignorance-inscription]: The Academy motto is a later tradition, not a securely documented inscription from Plato&#x27;s lifetime. See [The Academy of Plato](https://mathshistory.st-andrews.ac.uk/Societies/Plato/), MacTutor History of Mathematics. The museum stages the familiar wording as an instruction whose authority we can question.
+
+[^ignorance-plato]: Plato, [Republic, Book VI](https://classics.mit.edu/Plato/republic.7.vi.html), Benjamin Jowett translation, the divided-line discussion: drawn figures serve reasoning about geometric objects rather than being its ultimate objects. Ada&#x27;s reversal is methodological: stay with the implemented figure and investigate its limits and possibilities. This does not establish that Plato was unaware of imperfect drawings, or that geometry cannot describe curves.
+
+[^ignorance-counts]: Some generated triangle triples collapse at the poles. The counter distinguishes all submitted triples from those with measurable area in [Godot 4.6 SphereMesh](https://docs.godotengine.org/en/4.6/classes/class_spheremesh.html) arrays. “With area” excludes triangles below a local squared-cross-product tolerance of `1e-16`; it is a practical threshold. The [technical chapter](/book?map=Primitives_Ignorance&amp;section=technical) records all four measured pairs of counts. Overlays and counter furniture are excluded. Analytic sphere descriptions and this finite polygonal rendering are different representations.
+
+[^ignorance-capsule]: The central installation reuses `capsule.tscn`, enlarged uniformly to 1.6 times its authored size. It uses a [CapsuleMesh](https://docs.godotengine.org/en/4.6/classes/class_capsulemesh.html) with five radial segments and five rings. Its regular pentagonal cross-section repeats after 72 degrees, but not after 180 degrees about the long axis. The absent half-turn symmetry does not make all symmetry disappear. The scene turns at 45 degrees per second. These are the authored mesh and spin settings, not controls available on the plinth.
+
+[^ignorance-prefabs]: Godot 4.6 [PrimitiveMesh](https://docs.godotengine.org/en/4.6/classes/class_primitivemesh.html) is a family of generated mesh resources. The new room wraps PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh in reusable scenes. Box, cylinder, sphere and capsule have already appeared; a cone is a CylinderMesh with one radius set to zero. QuadMesh inherits PlaneMesh. The [PointMesh](https://docs.godotengine.org/en/4.6/classes/class_pointmesh.html) display uses a point-size material: its 22 pixels describe the rendered mark, not a world-space diameter. Trail specimens show their undeformed rest geometry.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Primitives_Ignorance/tutorial.md">Raw captured source</a></p><pre># Inspect the sphere that the name leaves out
+
+The cube hall separated positions, connectivity and presentation. This room carries that distinction into finite models of a curved surface. The Academy motto supplies a question about knowledge; the work is to inspect the construction that knowledge has made familiar. The historical and interpretive references are in the [book text](/book?map=Primitives_Ignorance&amp;section=final).
+
+## Recognition, then inspection
+
+Begin with the ordinary `sphere` near the entrance. Approach and inspect its outline. Treat it as an example of what the name leaves unspecified. It is smaller than the later resolution pairs: its default radius is 0.25, while those pairs have radius 0.5. Do not interpret this initial encounter as a controlled resolution comparison.
+
+Proceed to `sphere_high`, `sphere_mid` and `sphere_low`, at rows 18, 21 and 24. This follows the actual order of their placements. At each pair, compare the edge-marked surface with its plain neighbour, then compare with the preceding pair from a similar distance.
+
+| Pair | Rings | Radial segments | Radius / height |
+| --- | ---: | ---: | ---: |
+| High | 16 | 16 | 0.5 / 1.0 |
+| Middle | 7 | 7 | 0.5 / 1.0 |
+| Low | 1 | 10 | 0.5 / 1.0 |
+
+Within a pair, the generated vertex and triangle-index arrays match. Both have `inspection:1`; `inspection_edges:1` adds the overlay to one member and `inspection_edges:0` hides it on the other. The base material also matches. Comparing the pair separates mesh geometry from its presentation.
+
+Between pairs, the geometry changes. The low example is especially useful: it has more radial divisions than the middle one, but far fewer rings. A smaller total does not mean every direction was reduced equally.
+
+## Follow the two parameters
+
+The low sphere&#x27;s builder reads the selected configuration into these variables:
+
+```gdscript
+sphere_mesh.radial_segments = segment_count
+sphere_mesh.rings = ring_count
+```
+
+The first controls division around the axis; the second controls the ring structure along it. The current room leaves their defaults in place. It does not provide buttons for rebuilding these pairs at arbitrary resolutions.
+
+The source generates positions and joins them with triangles. The definition of a sphere specifies a fixed radius from its centre; a finite surface of flat triangles approximates that curved boundary. Smooth lighting can make a facet less conspicuous while leaving its geometry unchanged. Other ways to represent or render a sphere exist; the limit examined here belongs to these meshes.
+
+Choose one facet or ridge you would keep for a particular visual use. This is a design proposal about an existing form, not a request to operate an editing control that the display does not have.
+
+## Continue to the counter
+
+The counter sits at (9,26), near the rear of the second room. Choose one of its four numbered spheres for a distant background, then one for close inspection, before revealing the counts.
+
+| Control | What changes | What stays |
+| --- | --- | --- |
+| SHOW / HIDE COUNTS | The information on the tilted tags | The generated sphere meshes |
+| SHOW / HIDE EDGES | The extra triangle-edge overlay | The generated sphere meshes |
+
+The spheres remain fixed on their stands and rotate at the same rate. The two controls are independent. The four radial settings are 4, 8, 16 and 64, with rings generated by `maxi(seg / 2, 2)`.
+
+Each tag gives two counts. One reads every index triple:
+
+```gdscript
+var arrays = mesh.surface_get_arrays(0)
+var triangle_entries = arrays[Mesh.ARRAY_INDEX].size() / 3
+```
+
+The other looks up the positions and excludes patches whose squared cross product is below `1e-16`. At the poles, some listed triangles collapse. The full [measured invoice and area test](/book?map=Primitives_Ignorance&amp;section=technical) remain in the technical chapter. This distinction offers a second inquiry for readers who want to follow the instrument itself.
+
+A count is not a frame-time measurement. Identify a desired feature, viewing distance and proposed use before treating a larger or smaller number as an improvement. Headset performance requires its own measurement.
+
+## The capsule: the side you have not seen
+
+The `capsule_reliquary` at (9,22) contains the enlarged original capsule. Its long axis is vertical and it turns at 45 degrees per second. Watch a ridge face you and predict what is opposite it. Observe the changing silhouette while the object turns; no pause or grab control is assumed.
+
+The scene&#x27;s authored resource contains:
+
+```ini
+radial_segments = 5
+rings = 5
+```
+
+Those are separate parameters. Five radial divisions give a regular pentagonal cross-section through the straight middle of the body. Each angular interval is 360 / 5 = 72 degrees. After that rotation the cross-section fits itself again. A half-turn is 180 / 72 = 2.5 intervals: a ridge arrives opposite the middle of a facet, so this rotation does not preserve the cross-section.
+
+The unevenness is the odd count and the mismatch of opposite sides, not irregular spacing between five segments. This is one failed symmetry test, not the disappearance of every symmetry. A regular six-sided cross-section would pass the half-turn; that comparison is calculable without adding another exhibit or suggesting a segment button here.
+
+Try to describe what you expected before naming what the geometry does. The name &quot;capsule&quot; does not tell you how the hidden side is divided. Learning the rule gives another route to knowing it. Palle&#x27;s question concerns the form this restriction makes available between familiar categories, and whether we can encounter it before treating its facets as defects.
+
+## Return visits
+
+The following studies remain available alongside the main sphere and capsule encounters. They were moved here from the longer book draft so the collection can retain its depth without requiring every argument on the first walk.
+
+### The ideal set
+
+Choose a tetrahedron and a cube from the held solids. Turn each until you have inspected more than one face and corner. What kind of sameness repeats within each object? Then compare with another member of the family.
+
+The five convex regular polyhedra have congruent regular polygonal faces and the same arrangement at every vertex. They do not look identical from every possible viewpoint. Their regularity is a specified symmetry of the object, not a promise that the eye sees the same picture everywhere.
+
+Why only five in this family? Regular face angles must fit around a convex vertex with a positive angular defect. Triangles permit three, four or five faces there; squares permit three; pentagons permit three. Six equilateral triangles or four squares already fill a flat turn. Those constraints lead to the tetrahedron, octahedron, icosahedron, cube and dodecahedron.
+
+The list is finite because the question is restrictive. It does not list every useful solid, every beautiful object, or every possible way of making a world.
+
+At the held octahedron, count six vertices, twelve edges and eight faces. Compare those numbers with the cube&#x27;s eight, twelve and six. Vertices and faces exchange roles in their dual relationship. A different way of organising the same comparison reveals a relation the individual names conceal.
+
+Look at what cutting the tetrahedron&#x27;s corners adds. New faces appear where vertices used to be. A construction can leave the five-member regular family while remaining precise and usable. Exclusion from a catalogue is not exclusion from geometry.
+
+### Other ways to recognise a form
+
+Compare the star&#x27;s five-point pattern under the same imagined half-turn. A familiar outline can answer one symmetry test and fail another. Name the transformation before saying an object is symmetrical.
+
+Look for a feature on the irregular rock that you would lose by replacing it with a regular solid. Choose a use for that feature: recognition, shelter, a grip, a distinctive silhouette. What resists your first abstraction may be exactly what another task needs to keep.
+
+The right triangle offers an invariant to compare: move or turn a rigid right triangle and the right angle remains. An invariant says which changes you are considering and which relation survives them. It is not a ranking of the objects that possess it.
+
+The cones mark a place that invites you to look for something absent. A marker can preserve an expectation even when the thing it names is no longer there. Read the marking, then check the place.
+
+### Further instruments in the existing collection
+
+The snap-octahedron puzzle, two cube scenes, cylinder ring/radial display, primitive pillar, tiled science screen, seven-words choir and diamonds remain placed. They are available for later encounters and development; their existence does not add another compulsory step to this chapter. The two dark-sphere placements remain decorative.
+
+## Scope of this pass
+
+The three-room arrangement contains 28 placements. The five regular solids can be picked up; the twelve new sphere examples vary rings and segments independently. The existing counter has no resize control or frame-time meter, and its samples are not grabbable. Eight additional PrimitiveMesh prefab scenes are displayed at rest in the third room. The sixteen older secondary/decorative placements remain in the side alcove. Native desktop approach and supplied pickup were tested; headset reach and legibility remain unverified.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Primitives_Ignorance/technical.md">Raw captured source</a></p><pre># Sphere names, mesh counts and visible differences
+
+Point_Animatedcube separated vertex positions from connectivity and presentation. This hall keeps those distinctions available while examining the sphere. Its route now passes an ordinary sphere and the five-solid courtyard, then the existing sphere pairs and a twelve-sphere atlas, the counting counter, the central five-segment capsule, and the additional engine mesh prefabs. Sixteen older placements remain in a side alcove.
+
+## What the polygonal representation cannot retain
+
+An analytic sphere is defined by a fixed distance from its centre. The finite surface mesh connects sampled positions with planar triangles. That triangle surface cannot coincide everywhere with the exact curved boundary. This is a limitation of the chosen representation; it is not a claim that code or mathematics cannot specify a sphere analytically.
+
+Keep geometry, presentation and use distinct. Changing rings or radial segments changes the generated mesh. The inspection overlay changes how a fixed mesh is shown. Viewing distance and the observer&#x27;s purpose change which of its features matter. The room&#x27;s reference to Plato directs attention to those distinctions; its historical and interpretive sources are footnoted in final.md.
+
+## Two directions of subdivision
+
+First compare silhouettes from the same distance. The current default configurations are:
+
+| Artifact | Rings | Radial segments |
+|---|---:|---:|
+| sphere_low | 1 | 10 |
+| sphere_mid | 7 | 7 |
+| sphere_high | 16 | 16 |
+
+All three use radius 0.5 and height 1.0. Their scripts expose other configuration choices, but this room retains the defaults above. Rings and radial segments divide different directions of the surface. Their distribution matters as well as their quantity.
+
+Each resolution is placed twice. The room adds `inspection:1` to both members and `inspection_edges:1` or `inspection_edges:0` to distinguish them. Their generated vertex and index arrays agree. The inspection mode supplies the same plain material to each pair and adds actual triangle-edge lines to one member.
+
+The room-specific overlay is built from the mesh&#x27;s index triples. It does not assume that `VERTEX_ID % 3` produces distinct barycentric coordinates for every indexed triangle; shared indices can violate that assumption. The shared inspection helper reads the indices explicitly. Existing non-inspection appearances remain available in other maps.
+
+## Read the counter after choosing a use
+
+The counter generates four smaller spheres with radius 0.26 and height 0.52. Their radial segment settings are 4, 8, 16 and 64; rings are `maxi(seg / 2, 2)`. They share material and spin rate. Counts and overlays start hidden under `#discovery:1`.
+
+The two pointer/press buttons independently show or hide counts and edges. Revealing either leaves the original surface mesh resource unchanged. The spheres are fixed exhibits, not grabbable samples. Their stands raise them above the tilted labels.
+
+The counter now stands at (9,26), facing back into the second room. The three pairs occupy columns 13 and 16 at rows 18, 21 and 24. Their requested support is 0.70 m with no extra vertical offset. The former 0.10 m support plus 0.60 m offset has been consolidated; the new plain block honors the requested height.
+
+## Two triangle counts
+
+Read the buffers of each generated sphere:
+
+```gdscript
+var arrays = mesh.surface_get_arrays(0)
+var triangle_entries = arrays[Mesh.ARRAY_INDEX].size() / 3
+```
+
+This counts triangle entries, including collapsed entries at the poles. The helper also examines their positions:
+
+```gdscript
+if (b-a).cross(c-a).length_squared() &lt; 1e-16:
+    continue
+```
+
+The cross product is twice the triangle&#x27;s oriented area vector. This squared-length tolerance excludes zero and tiny-area triangles in local coordinates. The label **with area** means triangles retained by that test, not a proof of exact nonzero area at arbitrary scale.
+
+| Segments | Rings | Triangle entries | Retained by area test |
+|---:|---:|---:|---:|
+| 4 | 2 | 24 | 16 |
+| 8 | 4 | 80 | 64 |
+| 16 | 8 | 288 | 256 |
+| 64 | 32 | 4,224 | 4,096 |
+
+These values were measured from meshes produced by the project&#x27;s Godot 4.6 runtime. The previous formula `2 * segments * rings` matched the area-bearing count in these examples. It did not include the collapsed pole entries in the index buffer. The updated counter exposes both descriptions.
+
+An overlay is built from the three edges of each retained triangle. Shared edges may be drawn twice. It is slightly enlarged by a factor of 1.002 to reduce coplanar flicker. Overlay geometry, stands, screens and the counter itself are excluded from the sphere counts.
+
+## A count does not measure the whole frame
+
+The display inventories mesh geometry. It does not time the GPU, estimate headset frame rate or measure attention. Materials, screen coverage, lighting, shadows, batching and other running work affect performance too. Use the numbers to specify a design choice, then test its perceptual and runtime consequences separately.
+
+The low-resolution form may preserve the distinctive outline a visitor wants to recognise. The high-resolution form may be useful for a closer inspection. Neither judgment follows automatically from an integer or from the name sphere.
+
+## Five segments: a particular symmetry fails
+
+The installed `commons/primitives/capsule/capsule.tscn` authors a CapsuleMesh with radius 0.25, height 1.0, five radial segments and five rings. The root script defaults to `facture = &quot;cast&quot;`, which leaves this mesh unchanged. The reliquary instantiates this scene without a facture override, gives the visible mesh an off-black material, and scales it uniformly by 1.6. Its bottom sits at the 1.04 m top of eight 0.13 m cylinder tiers, with radial segments 4 through 11. The original rotation script remains inside the source scene. The capsule has no pickup or collider; the solid support prevents walking through its base. Its child uses `commons/primitives/prismes/rotation.gd`, with angular speed `(0,45,0)` degrees per second.
+
+The straight middle has a regular pentagonal cross-section. Its equal angular intervals are 72 degrees. A 72-degree rotation preserves the cross-section&#x27;s corners; a 180-degree rotation does not. Opposite a corner&#x27;s radial direction is a side midpoint. The absent half-turn symmetry should not be described as total asymmetry or as an inability to infer the back from the full generative rule.
+
+The capsule supplies a second limit: a familiar name or an assumed front/back correspondence does not specify the unseen side. The constraints generate an inspectable form between what &quot;rounded pill&quot; suggests and what these facets actually do. &quot;Transcendental inside restrictions&quot; is Palle&#x27;s research formulation for exceeding an expectation within a generative system, not an additional property measured by the mesh API.
+
+A direct Godot mesh measurement is archived at `doc/space/ignorance-focus-2026-09-16/capsule-return/`. It extracts a ring from the actual authored mesh, tests the 72-degree and 180-degree rotations, and compares a six-segment copy as a control. This verifies cross-section geometry, not visual legibility in the room.
+
+## Sources and checks
+
+- `commons/primitives/godotmeshes/sphere_low.gd`, `sphere_mid.gd`, `sphere_high.gd`
+- `commons/primitives/shared/mesh_inspection.gd`
+- `commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd`
+- `commons/maps/Primitives_Ignorance/map_data.json`
+- `commons/testing/probe_ignorance_primary.gd`
+
+The probe exercises pointer events, reads actual mesh arrays, compares paired vertex/index buffers and stamps the configured counter through the museum loader. Full-room distances, hand reach and headset legibility remain to be checked. Primitives_Portals next develops the distinction between finite approximations and a mathematical limit.
+
+## Shared sphere figure
+
+The book comparison loads the actual `sphere_high`, `sphere_mid` and `sphere_low` scenes, applying the six inspection configurations read from this map. It retains their generated geometry, normals and inspection materials. The book layout changes only their arrangement, with equal scale, viewpoint and lighting across the pairs. These are the existing museum exhibits; there is no new museum plate or additional control.
+
+`tools/capture_sphere_resolution.py` stages a private Godot project and checks the paired position, index and normal arrays, material colours, orientation and overlay visibility before rendering. The measured submitted / area-bearing counts are 544 / 512, 112 / 98 and 40 / 20, in finer-to-coarser order. These are the full-size exhibits, not the four smaller counter samples listed above.
+
+
+## Courtyard, independent subdivisions and reusable mesh scenes — 27 September 2026
+
+`geometry_courtyard` uses meshes from the existing tetrahedron, cube, octahedron, dodecahedron and icosahedron source scenes. There is one of each, normalized to a maximum dimension of 0.88 m, with an unscaled RigidBody and a convex collider generated from the scaled source vertices. All use the production XRTools pickup path. The sixteen cylinder columns use eight radial resolutions twice: 4, 5, 6, 8, 12, 20, 32, 64. The inscription sits above the entrance with clear headroom.
+
+`sphere_resolution_atlas` crosses radial segments [4, 8, 16, 32] with rings [1, 4, 12]. Each sphere has radius 0.39 m and height 0.78 m; the shared inspection helper draws its actual triangle edges. These twelve constructions supplement the six existing paired specimens.
+
+`primitive_mesh_library` instantiates eight separate `.tscn` prefabs in `commons/artifacts/ignorance_gallery/prefabs/`. The resource classes are PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh. These complete the displayed PrimitiveMesh families alongside the earlier box, cylinder, capsule and sphere. There is no ConeMesh class: CylinderMesh supplies that shape through unequal end radii. QuadMesh is a PlaneMesh subclass. The PointMesh uses a 22-pixel point material; its screen extent is not a metre measurement. Both trail examples display undeformed rest geometry, not particle animation. The additional prefabs are fixed viewing exhibits; only the five Platonic solids are pickable here.
+
+The alcove keeps all sixteen earlier secondary/decorative placements. `diamonds` uses a room-local scale of 0.12 and a 0.45 m support, retaining twelve units and their twist. Its original scene remains unchanged elsewhere.
+
+## Shared museum support
+
+StationPlinth, its wide variant and its micropod now default to `presentation = &quot;museum&quot;`: one matte off-white box with a matching collider, no ornamental trim or lights. Requested top height is honored down to 0.02 m. Captions and information lines remain as plain type. `presentation = &quot;industrial&quot;` retains the prior authored workshop variants. Automatic low broad supports now use the same plain family; automatic minimum lift remains 0.25 m, while explicit lower decks are honored. Architectural podium/plinth material roles use the same off-white finish. The capsule&#x27;s resolution tiers are deliberately part of the exhibit, not generic furniture.
+
+The room&#x27;s new courtyard and two walk-through collections do not seal their entire bounding rectangles in the museum&#x27;s path map. Their individual colliders govern passage. The capsule&#x27;s compact footprint uses normal sealing. The main rooms remain 19 cells wide; the retained side alcove extends total width to 27, an intentional exception to the sequence template&#x27;s 19-cell width preference.
+
+Native evidence, photographs, code and scope notes: [courtyard review](/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/index.html). Desktop geometry and supplied pickup are tested; headset targeting, label legibility and Quest performance still need an in-headset visit.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Primitives_Ignorance/intent.md">Raw captured source</a></p><pre>Concept: Ignorance names the room&#x27;s reversal of the Platonic association between geometry and knowledge. We use the geometry we have learned to inspect what this polygonal model cannot retain, and the particular forms its limits produce. The learner&#x27;s lack of mastery is not the only question; the scope of the representation becomes an object of inquiry.
+
+Sequence role: Tenth of twelve maps in primitives, after Point_Animatedcube and before Primitives_Portals. The cube separated positions, connections and naming. This hall distinguishes an analytic sphere, a finite mesh, its visible presentation and a useful encounter. Portals can then develop the approach to a limit. The library also distinguishes a generated mesh resource from the reusable scene that gives it material, collision and behaviour.
+
+Primary order: sphere -&gt; geometry_courtyard -&gt; sphere_high -&gt; sphere_mid -&gt; sphere_low -&gt; sphere_resolution_atlas -&gt; budget_of_smoothness -&gt; capsule_reliquary -&gt; primitive_mesh_library. The inscription now sits above the entrance. Five held solids occupy the court; comparison, cost and the enlarged capsule occupy the second room; the engine mesh library occupies the third. The side alcove retains all sixteen other placements. Twenty-eight tokens are placed in total.
+
+Small lesson: A SphereMesh uses rings and radial segments to construct finite triangle patches. Within each marked/plain pair, vertex positions and triangle indices agree; the edge overlay changes presentation. Between resolutions, geometry changes. A flat polygonal mesh can approximate a sphere without reproducing its exact curvature.
+
+Critical angle: The Academy motto is staged as a later tradition, not asserted as a historical inscription. Plato&#x27;s distinction between drawn and intelligible figures is acknowledged; Ada redirects attention toward the implemented figure and what it omits or enables. A coarse feature can be valued for a chosen use without treating faceting as inherently truthful, ignorance as virtue, or polygonal limits as limits of all mathematics.
+
+Counter: Independent SHOW / HIDE COUNTS and SHOW / HIDE EDGES controls, fixed rotating samples, two measured triangle counts. Pole entries and the helper&#x27;s area tolerance make counting itself inspectable. The display measures geometry, not frame time or value. The full invoice belongs to the technical text.
+
+Capsule: The half-turn shortcut fails for its regular five-sided cross-section: a ridge faces a facet across the axis. One-fifth-turn symmetry remains. Recognition does not supply the hidden side, but the generative rule can. Palle&#x27;s &quot;transcendental inside restrictions&quot; names the research direction: forms exceed our expectations while remaining generated within the rules. This is a main encounter, not an optional aside or a claim of total asymmetry.
+
+Return visits: Preserve the regularity and duality argument, truncated tetrahedron, star, rock, right triangle and marked absence in the tutorial. Retain the other existing displays and puzzle as further material. The old generic local-state/signal tutorial is archived; those examples do not describe the installed lesson.
+
+Remaining: Full-room/headset approach, panel reach, legibility and comparison distances. No sphere-resizing control, grabbable counter sample or performance meter is claimed. Source scenes remain intact; this map rearranges their encounters and adds the four installations.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Primitives_Ignorance/critical.md">Raw captured source</a></p><pre># What the polygons cannot hold
+
+The room carries the motto traditionally associated with Plato&#x27;s Academy. Its reversal asks what the geometric representation leaves unaccounted for. The visitor has learned enough to inspect the method, not only to submit to its catalogue of named forms.
+
+In the divided-line discussion of the [Republic, Book VI](https://classics.mit.edu/Plato/republic.7.vi.html), drawn figures assist thought directed toward geometric objects. Our method turns toward the particular implementation and asks what happens there. The approximation&#x27;s ridges, distributions and costs become material for investigation. This is a change of research direction, not a demonstration that Plato mistook a drawing for an ideal object.
+
+The limit must remain specific. Flat triangles do not reproduce a spherical boundary exactly. That does not mean geometry cannot describe curvature, or that every polygonal construction fails to support bodies and uses. Nor does a rougher object necessarily escape a norm: a deliberately faceted style can become another default. Ask which distinction this particular construction preserves, which it loses, and what a different encounter might require.
+
+## Understanding does not simply fold around the corner
+
+The capsule belongs in the main walk. Its five radial divisions let a ridge face a facet across the body. An assumed half-turn correspondence fails. The learner cannot obtain the unseen side merely by repeating a familiar front. Another view, or closer attention to the generative rule, becomes necessary.
+
+This is a precise restriction on a shortcut. Five equal angular divisions still permit one-fifth-turn symmetry; the geometry remains describable. The productive uncertainty lies in what recognition had not yet taught us to look for. We should preserve that opening without declaring the body unknowable.
+
+Palle calls this &quot;transcendental inside restrictions&quot;: a form can exceed the categories and expectations with which we entered while remaining entirely produced by the available rules. The capsule matters as something found between familiar forms, before its facets are dismissed as unfinished smoothness. That is an artistic research proposition to pursue in the encounter: the geometry is finite, while our investigation of its possibilities remains open.
+
+A teaching method that sends the capsule to the margin would close this inquiry prematurely. The sphere comparisons teach us to specify an approximation; the capsule asks whether we have mistaken that specification for an exhaustive understanding of what the form offers. There is more to uncover inside the model&#x27;s limits.
+
+## The instrument had an assumption too
+
+At first the counter offers four spheres and a question: which one would serve the use you have in mind? The prices are hidden. There is time to decide where a visitor might stand and what they might need to notice before a number begins to organise the answer.
+
+When the counts appear, there are two for each sphere. The mesh&#x27;s index list contains triangle entries which collapse at its poles. Another count excludes triangles without measurable area. The same object supports two answers to a question that initially sounded complete: how many triangles?
+
+The counter itself used to calculate only the smaller count. Inspecting the generated mesh revealed what that formula omitted. This does not make the earlier count meaningless. It makes its scope specific. We had to examine the instrument that was supposed to teach us to examine the sphere.
+
+## A remainder can be an entry
+
+At a pole, a triangle can remain present as indices while providing almost no surface to see. It is neither a hidden room inside the sphere nor an alien substance outside computation. It is a consequence of how a repeated construction arrives at a place where its rows meet.
+
+This is a useful kind of strangeness because we can follow it. Read three indices, look up their positions, calculate an area, compare that result with the rendered mark. Each step answers something, and the answers do not become interchangeable just because the same word triangle appears in all of them.
+
+The area test also has a threshold. The helper excludes a sufficiently small squared cross product. Its practical count therefore brings another decision into view: at what scale do we treat a patch as collapsed? The calculation helps us inspect the mesh while retaining an assumption of its own.
+
+## Smoothness is not a confession
+
+The paired spheres keep their geometry and change the edge overlay. A surface can become easier to inspect without becoming more geometrically detailed. Conversely, removing an overlay can make a shape easier to recognise without erasing its triangle list.
+
+The faceted version is not inherently more truthful. The shaded version is not inherently a lie. Both are ways of making a finite construction available to a task. Ask what each reveals, what it makes harder to notice, and which encounter benefits from that choice.
+
+A deliberate ridge might be the feature by which we recognise an object. A smoother silhouette might help us attend to movement instead of tessellation. There is no obligation to recover a supposedly original appearance before these uses can begin. There is an obligation to be specific about what the construction supports.
+
+## Who decides what is enough?
+
+The counter measures mesh entries and area-bearing patches. It does not measure beauty, usefulness, frame time or the freedom of a visitor. A number can inform those questions without settling them.
+
+Viewing distance matters. So do the task, eyesight, movement, display and other demands on the running system. A choice made for a distant background may become conspicuous when someone approaches. The difference was not absent at the doorway; the conditions for noticing it changed.
+
+The queer possibility can begin with changing the criterion. Instead of asking how cheaply the object can pass for an ideal sphere, ask which facet, seam or silhouette we want someone to encounter. That choice may spend more geometry or less. Its value belongs to what it lets us perceive and do, not to its position on a scale from coarse to fine.
+
+## A small catalogue leaves room
+
+The room&#x27;s other forms remain available: regular solids, the faceted capsule, a truncated tetrahedron, an irregular rock, an absence marked by cones. They offer further questions without all becoming prerequisites for leaving the hall.
+
+The five convex regular polyhedra answer a tightly specified geometric question. They do not exhaust useful forms. Cutting a corner can leave that family while producing another precise construction. Likewise, the capsule&#x27;s five-sided cross-section can fail a half-turn symmetry test without becoming a failed object. Name the operation and the requirement before calling the result deficient.
+
+We cannot inspect every source line or test every viewpoint before moving on. Choosing a path through this room is part of the research, and leaves something for another passage. The next hall approaches a limit with a finite sequence. We carry forward the habit of asking what each count includes.
+
+## Implementation anchors
+
+`mesh_inspection.gd` reads generated triangle indices and applies the local area tolerance. `budget_of_smoothness.gd` exposes the two counts and independent overlay control. The three sphere scripts enable matched marked/plain pairs through room configuration. These encounters support specific comparisons; they do not establish a universal geometry budget or a numerical measure of queer possibility.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Primitives_Ignorance/artifacts.md">Raw captured source</a></p><pre># Primitives Ignorance — current artifacts
+
+Updated 27 September 2026. Three main rooms and a side alcove; 28 placements. Coordinates are (column,row) grid indices. The installation tokens below contain multiple constituent meshes.
+
+## Primary route
+
+`sphere` → `geometry_courtyard` → `sphere_high` → `sphere_mid` → `sphere_low` → `sphere_resolution_atlas` → `budget_of_smoothness` → `capsule_reliquary` → `primitive_mesh_library`.
+
+One ordinary sphere precedes the five-solid courtyard. The second room holds six existing sphere specimens, twelve new independent subdivision examples, the counter, and the enlarged original capsule. The third room introduces eight other native mesh prefabs. Sixteen older placements remain in the side alcove.
+
+## Every placement
+
+| Cell | Artifact | Role | Full placement string |
+| --- | --- | --- | --- |
+| (6,2) | `sphere` | primary | `sphere:0:0#plinth:0.75` |
+| (9,6) | `geometry_courtyard` | primary | `geometry_courtyard:0:0#plinth:0` |
+| (13,18) | `sphere_high` | primary | `sphere_high:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:1` |
+| (16,18) | `sphere_high` | primary | `sphere_high:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:0` |
+| (3,21) | `sphere_resolution_atlas` | primary | `sphere_resolution_atlas:0:0#plinth:0` |
+| (13,21) | `sphere_mid` | primary | `sphere_mid:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:1` |
+| (16,21) | `sphere_mid` | primary | `sphere_mid:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:0` |
+| (9,22) | `capsule_reliquary` | primary | `capsule_reliquary:0:0#plinth:0` |
+| (13,24) | `sphere_low` | primary | `sphere_low:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:1` |
+| (16,24) | `sphere_low` | primary | `sphere_low:0:0#plinth:0.70#offset:0.00,0.00,0.00#inspection:1#inspection_edges:0` |
+| (9,26) | `budget_of_smoothness` | primary | `budget_of_smoothness:180:0#discovery:1#plinth:0` |
+| (19,30) | `dark_sphere` | decoration | `dark_sphere:0:-0.5` |
+| (21,30) | `cube_scene` | secondary | `cube_scene:0:-0.5#offset:0.00,0.45,0.00#plinth:0.10` |
+| (23,30) | `dark_sphere` | decoration | `dark_sphere#body:cairn` |
+| (25,30) | `primitive_pillar` | secondary | `primitive_pillar` |
+| (19,33) | `science_screen` | secondary | `science_screen#surface:tiles` |
+| (21,33) | `star_primitive` | secondary | `star_primitive:90:0#plinth:0.90` |
+| (23,33) | `cube_scene` | secondary | `cube_scene#grain:quartered` |
+| (25,33) | `hole_with_cones` | secondary | `hole_with_cones:0:-0.5` |
+| (9,35) | `primitive_mesh_library` | primary | `primitive_mesh_library:0:0#plinth:0` |
+| (19,36) | `seven_words_choir` | secondary | `seven_words_choir` |
+| (21,36) | `truncatedtetrahedron` | secondary | `truncatedtetrahedron:0:0#plinth:0.90` |
+| (23,36) | `cylinder_radials_rings` | secondary | `cylinder_radials_rings` |
+| (25,36) | `grab_octahedron` | secondary | `grab_octahedron:0:0#plinth:0.90` |
+| (19,39) | `snap_octahedron_puzzle` | secondary | `snap_octahedron_puzzle:0:0.5#fillhole:remove` |
+| (21,39) | `diamonds` | secondary | `diamonds#scale:0.12#plinth:0.45` |
+| (23,39) | `roughrock` | secondary | `roughrock:0:0#plinth:0.90` |
+| (25,39) | `righttriangle` | secondary | `righttriangle:0:0#plinth:0.90` |
+
+## What the installation tokens contain
+
+- `geometry_courtyard`: one tetrahedron, cube, octahedron, dodecahedron and icosahedron, all pickable. Sixteen columns use 4, 5, 6, 8, 12, 20, 32 and 64 radial segments. The motto belongs to its entrance plaque.
+- `sphere_resolution_atlas`: twelve fixed spheres, crossing radial segments [4,8,16,32] and rings [1,4,12]. Actual triangle-edge overlays remain visible.
+- `capsule_reliquary`: the original five-segment/five-ring CapsuleMesh at 1.6 times size, turning at 45 degrees per second. Eight solid tiers, radial resolutions 4 through 11.
+- `primitive_mesh_library`: PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh; all eight are separately reusable scene files. Static viewing exhibits; trail resources shown at rest.
+
+The old 75-body `platonic_grabbables` scene remains in the project but is replaced in this map by five individual source meshes. The old capsule placement is replaced by its enlarged installation; the source scene remains unchanged. The side alcove preserves the rock, star, choir, extra cubes and other studies. Its diamond tower alone receives a room-local 0.12 scale and 0.45 m support.
+
+Existing high/middle/low sphere pairs keep their mesh, inspection, edge-overlay and material settings. The counter retains independent count/edge controls and fixed samples. Two old artifacts, `budget_of_smoothness` and `seven_words_choir`, lacked the live registry flag and are now marked map-ready; all 28 declared placements load.
+
+Unplaced historical role entries remain available as history; they are not counted above. See technical.md for geometry and test limits.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Primitives_Ignorance/summary.md">Raw captured source</a></p><pre># Primitives Ignorance — map summary
+
+The hall gives two different meanings of geometric form room to meet. Five regular solids retain their defining faces. Cylinders and spheres retain their names while their finite constructions change. The enlarged five-segment capsule is placed at the centre of attention; the next room shows what the engine itself supplies as primitive forms.
+
+Three main rooms are 19 cells wide. The side alcove extends the total footprint to 27 × 43 cells. Spawn is (9,0), exit (9,42). There are 28 artifact placements, including four new composite installations. Twelve placements carry nine primary tokens; sixteen secondary/decorative placements remain in the alcove. All declared placements were stamped at their authored cells in the native museum run.
+
+The sphere pairs keep their geometry and overlays: high at (13,18)/(16,18), middle at (13,21)/(16,21), low at (13,24)/(16,24). The atlas is at (3,21), capsule at (9,22), counter at (9,26), and prefab collection at (9,35). The courtyard is centred at (9,6). The entrance inscription is part of that installation.
+
+Ninth of eleven maps in the current Primitives spine: after Point_Animatedcube, before Primitives_Portals. The former cube library supplies the idea of reusable scenes; this hall distinguishes that packaging from the underlying generated meshes. Portals follows with a finite approach toward a limit.
+
+Native desktop checks cover pickup/release, geometry, support dimensions and body-width passages. Headset reach, comfort, label legibility and Quest performance remain unverified. See the current review for images and the report.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Primitives_Ignorance/blurb.md">Raw captured source</a></p><pre>The room turns a Platonic association around: learn enough geometry to discover what a polygonal model cannot hold. Follow a familiar sphere into its facets, compare an edge overlay with the same unmarked mesh, then choose a use before revealing its cost. Then follow the five-segment capsule: a ridge faces a facet across its body, interrupting the symmetry you may have expected. What can we discover between familiar forms, inside the restrictions that produce them?
+
+Five solids stand within a colonnade of changing resolutions. Beyond them, twelve sphere constructions and a capsule on eight polygonal tiers make the limits visible. A further room displays the engine’s supplied mesh families; the older studies remain through a side opening.
+</pre></section></body></html>

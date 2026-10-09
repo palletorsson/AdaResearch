@@ -1,0 +1,7 @@
+# A family and its missing requests
+
+The saved values matter, but they do not alone define the field of possible forms. A builder has already decided which primitives and operations are available. The selector further decides where an operation can act. In this exhibit a square appearance contains two independently operated triangles. Representation participates in the result before a visitor requests a variation.
+
+The distinction gives the project’s queer enquiry something specific to investigate. An unwanted limit may sit in a number, a face selection or the available operations. A hole or a connection between separate tips requires work that changing the inset amount cannot supply. This is not a claim that every unusual form is queer, or that adding operations abolishes all limits. It is a way to locate which decision a desired body asks us to revisit.
+
+The fixed comparisons allow pleasure and judgement to remain separate for a while. None is named the winner. The later genetic hall introduces a score and asks which differences it recognises. Form Finding has already distinguished construction, physical support and an authored success condition. These are related questions, not interchangeable uses of the word growth.

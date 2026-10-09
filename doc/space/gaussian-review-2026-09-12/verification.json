@@ -1,0 +1,153 @@
+{
+  "hall": "Random_Gaussian",
+  "run": {
+    "started": "2026-09-12T22:49:31+02:00",
+    "finished": "2026-09-12T22:50:17+02:00",
+    "pid": 37520,
+    "exit": 0,
+    "checks": 156,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_gaussian_live.gd": "daffdd6e18ce5579eb02d84fd6455cb50a91a1682eb5f1cfcbec7874986fd467",
+      "commons/testing/probe_wcn_gaussian.gd": "488598641aaf399d9dd05147a6fb71d42f86c613bcf082fdb2abc1956eeb242b",
+      "commons/maps/Random_Gaussian/map_data.json": "4a919376aac470fc85aca3920fdf170ea85d0ca4347623990c00754f3a943ea4",
+      "commons/artifacts/distribution_sampler/distribution_sampler.gd": "802fc74e9bf66547c4b066cc65a9db4e19891ab18d6ac01bf65e5f6358483669",
+      "commons/testing/gaussian_endpoint_sampler.gd": "2e4794fb63f7331d78da3e4f740054153d4b39c6793df14c37b4b37d484b7aab",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "source_excerpts": 10,
+  "map_layers_unchanged": true,
+  "scene_unchanged": true,
+  "sampler_changes": [
+    "logarithm input guards",
+    "issued-draw cap",
+    "CLEAR and landing mesh cleanup",
+    "landing at the actual bar top",
+    "contained separately scaled model curve",
+    "larger labelled sign"
+  ],
+  "histories": {
+    "expon": {
+      "seed": 31415,
+      "clipped": 0,
+      "retained_mean": 0.16219592186815135,
+      "binned_means": {
+        "10": 0.16629999999999998,
+        "30": 0.16243333333333332,
+        "60": 0.16216666666666665
+      },
+      "edge_counts_30": [
+        177,
+        0
+      ]
+    },
+    "expon_edge": {
+      "seed": 1,
+      "clipped": 2,
+      "retained_mean": 0.1735998716962422,
+      "binned_means": {
+        "10": 0.178,
+        "30": 0.17449999999999996,
+        "60": 0.1737333333333333
+      },
+      "edge_counts_30": [
+        159,
+        4
+      ]
+    },
+    "gauss": {
+      "seed": 31415,
+      "clipped": 0,
+      "retained_mean": 0.4980377632677555,
+      "binned_means": {
+        "10": 0.49820000000000003,
+        "30": 0.4975333333333334,
+        "60": 0.49783333333333313
+      },
+      "edge_counts_30": [
+        0,
+        0
+      ]
+    },
+    "poisson": {
+      "seed": 31415,
+      "clipped": 0,
+      "retained_mean": 0.3358000095933676,
+      "binned_means": {
+        "10": 0.35190000000000005,
+        "30": 0.3524,
+        "60": 0.3441
+      },
+      "edge_counts_30": [
+        4,
+        2
+      ]
+    },
+    "uniform": {
+      "seed": 31415,
+      "clipped": 0,
+      "retained_mean": 0.49997806707955894,
+      "binned_means": {
+        "10": 0.5006,
+        "30": 0.4995333333333334,
+        "60": 0.4997999999999999
+      },
+      "edge_counts_30": [
+        26,
+        32
+      ]
+    }
+  },
+  "retained_values": 5000,
+  "frozen_prefix_snapshots": 20,
+  "rebin_snapshots": 12,
+  "primary_book_hero": [
+    "distribution_sampler"
+  ],
+  "pack": {
+    "planned": 9,
+    "matched": 9,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 9,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random gaussian"
+  },
+  "plan_rows_agree": true,
+  "audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 1
+  },
+  "engine_diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: [em-art] randomness|random gaussian: david_drape took 121 ms to build — that is a dropped frame in the hall"
+  ],
+  "script_errors": false,
+  "shutdown_leak_warning": false,
+  "headset_verified": false,
+  "files_prepared": 56,
+  "final_words": 912
+}

@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "name": "24 existing prefab and point bodies",
+      "passed": true
+    },
+    {
+      "name": "Field turns up, over, down and back",
+      "passed": true
+    },
+    {
+      "name": "Field excludes the surrounding aisle",
+      "passed": true
+    },
+    {
+      "name": "Free rigid prefab completes at least two physical circuits",
+      "passed": true
+    },
+    {
+      "name": "Prop passes over the top and returns low",
+      "passed": true
+    },
+    {
+      "name": "All bodies remain finite and no recovery substitutes a loop",
+      "passed": true
+    },
+    {
+      "name": "Real XR body has the museum field adapter",
+      "passed": true
+    },
+    {
+      "name": "Player rises, crosses and cycles with actual XR collision movement",
+      "passed": true
+    },
+    {
+      "name": "Tracked head keeps its own orientation and local pose",
+      "passed": true
+    },
+    {
+      "name": "XR origin follows the collision body",
+      "passed": true
+    },
+    {
+      "name": "Thumbstick movement can leave the stream",
+      "passed": true
+    },
+    {
+      "name": "Leaving relinquishes carry ownership",
+      "passed": true
+    },
+    {
+      "name": "Floating furniture can be picked up",
+      "passed": true
+    },
+    {
+      "name": "Reset refuses held floating furniture",
+      "passed": true
+    },
+    {
+      "name": "Taken-out object returns to ordinary gravity",
+      "passed": true
+    },
+    {
+      "name": "Reset accepts after release",
+      "passed": true
+    },
+    {
+      "name": "Reset restores the circulating launch and finite pool",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "measurements": {
+    "prop": {
+      "highest": 11.0615797042847,
+      "lowest": 0.346551090478897,
+      "recoveries": 0,
+      "turns": 2.22345159288998
+    },
+    "xr": {
+      "highest": 10.45166015625,
+      "origin_travel": 6.37812662124634,
+      "returned_to": 0.0486697144806385,
+      "turns": 2.17935319500714
+    }
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "scope": "Real Jolt cargo and XRTools player/adapter with supplied head and controller poses. No headset or Quest performance claim."
+}

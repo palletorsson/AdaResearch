@@ -1,0 +1,94 @@
+--- before/FormFinding_Catenary/final.md
++++ FormFinding_Catenary/final.md
+@@ -1,6 +1,30 @@
+-The least-cost curve is computed by its boundary, not drawn by a hand.
++What has already been decided when a curve seems to find itself?
+ 
+-Two of the oldest solved minimisations in the world stand in this room. A hanging chain finds the catenary, the exact curve of least potential energy for a rope between two points. A soap film finds the minimal surface, the least area that can span a wire frame. Nobody drew either. They are computed, continuously, by matter obeying one instruction: spend the least. The last hall had a solver stepping toward an answer and trembling short of it. Here there is no solver at all, and the answer is exact.
++The last hall let you follow a search taking steps. Here, first take a curve in your hand. Then compare it with one whose coordinates come from a formula. The hanging chain and the soap film are the physical references: under specified supports, loads and material assumptions, a settled chain or film can make a difficult calculation visible. But these objects in the museum arrive by different routes. Watch for the difference between drawing an answer, evaluating an answer, and letting a system settle toward one.
++
++## The chain
++
++<!-- @cable_builder -->
++
++Four cyan beads, and a four-metre cable glowing magenta into blue slung through them. Take a bead and move it. The whole curve recomputes and re-skins in your hands, every frame. Hold the ends in mind while you move an interior point: what have you asked the curve to obey?
++
++Read it carefully, because it is the room's honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span's length, so the depth is drafted rather than found. It resembles a hanging cable because its maker supplied a rule for sag. Your hand changes the constraints of that drawing. No weight has been measured and no rope length conserved.
++
++<!-- @laundry_line_cathedral -->
++
++Three washing lines pegged with towels and shirts, supported at their ends by crossbars. These curves are sampled from `cosh`. Their sag comes from three chosen parameters; the washing adds colour and an association with weight, but it adds no load to the calculation. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. The cathedral is implied.
++
++Gaudí used hanging models to study structural form. Inverting a suitable tension model can suggest a compression structure under corresponding loads and supports; it is not a guarantee that any inverted curve will stand. Here the two poses let you see that reversal, while the plaque names the limit: an analytic drawing, not a gravity solver. The washing and the cathedral share a curve. They do not yet share a test.[^hanging-model]
++
++<!-- @ -->
++
++## The film
++
++<!-- @catenoid -->
++
++The chain, revolved into a surface. A soap film can form a catenoid between two coaxial rings, but the rings do not guarantee one enduring answer: stability depends on their separation, and a film can collapse into separate discs. “Minimal” does not promise a globally smallest surface for every boundary.[^film]
++
++Here it lies low and wide, a cyan wireframe hourglass about a metre and a fifth across and a little over a third of a metre tall. Lift the model and turn it. The opening travels with it; the sampled mesh retains its shape. The same `cosh` appears again, now drawn around an axis. You can inspect the result in your hand, but you cannot stretch its rings or watch a film settle between them.
+ 
+ ```gdscript
+ @export var c: float = 0.5      # waist radius
+@@ -11,46 +35,30 @@
+ var z: float = u
+ ```
+ 
+-One function does both. `cosh` is the hanging chain, and a hanging chain spun about its axis is the soap film. The waist of the surface is where the chain is slackest, and the number that sets it, `c`, is the only parameter either shape has.
+-
+-## The chain
+-
+-<!-- @cable_builder -->
+-
+-Four cyan beads at ankle height, and a four-metre cable glowing magenta into blue slung through them with its belly grazing the floor. The beads are the only thing in this room you can actually take hold of. Move one and the whole curve recomputes and re-skins in your hands, every frame.
+-
+-Read it carefully, because it is the room's honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span's length, so the depth is drafted rather than found. It is a very good drawing of a catenary made by somebody who knew what one looks like, and the difference matters enormously here, because everything else in this room got its shape without anybody knowing in advance what the shape would be.
+-
+-<!-- @laundry_line_cathedral -->
+-
+-Three washing lines pegged with towels and shirts, and these are true `cosh` curves rather than good drawings. Only one of the three has a pole under either end; the other two simply begin and end in the air, which nothing in the room admits. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. That is Gaudí's trick, and it is the reason this is the hero of the room. He hung chains from a ceiling, photographed them, and turned the photograph upside down, because a chain in pure tension inverted is an arch in pure compression, and the curve that costs least to hang is the curve that costs least to stand. He let gravity do the drawing and then read the drawing the other way up.
+-
+-<!-- @ -->
+-
+-## The film
+-
+-<!-- @catenoid -->
+-
+-The chain, spun. A soap film between two rings makes this surface and no other, because surface tension is a cost per unit area and this is the least area that will reach both rings. It lies low and wide on the floor, a cyan wireframe hourglass about a metre and a fifth across and only a third of a metre tall, and it is the same `cosh` as the laundry line, revolved.
+-
+-It looks as though you could pick it up, and you cannot. It is built as a physics body on the layer the world's static geometry uses, which is the one layer a hand is told to ignore, so it carries a collider that no grab will ever find. Three separate documents in this project say you can lift it.
++The same `cosh` appears in a catenary and in the radial profile of a catenoid. Here `c` sets the waist radius; the chosen range of `u` decides how much surface we keep. The formula does not choose its own boundary. Somebody has already chosen the numbers from which it will begin.
+ 
+ <!-- @helicoid -->
+ 
+-In a slot between two pillars, the other one, and you will step over it before you notice it: a green wireframe corkscrew twenty centimetres across and a third of a metre high, six thousand triangles in a thing the size of a mug. A plane rotating as it rises, two full turns, three tenths of a turn's height gained per turn.
++In a slot between two pillars, the other one, and you may step over it before you notice it: a green wireframe corkscrew twenty centimetres across, about thirty-eight centimetres high, six thousand triangles in a thing the size of a mug. Lift this one too. A straight line rotates as it rises; the display gains about nineteen centimetres in each full turn.
+ 
+-Apart from a flat plane, the helicoid and the catenoid are the only ruled minimal surfaces there are, and one bends continuously into the other without a single point of either ever stretching. They are the same film in two poses. Nothing in this room performs that bend. Both surfaces are computed once when the hall loads and then never touched again, so the deformation is a fact you are told and not a thing you can watch.
++A helicoid is ruled: straight lines lie along its surface. A catenoid is a surface of revolution. Suitable patches of these surfaces belong to an isometric family: they can be continuously related while preserving their intrinsic distances. That does not make these two differently bounded meshes the same object, and nothing in the room performs the deformation. It is a further encounter to build, not a movement to imagine that you have already seen.[^surfaces]
+ 
+ <!-- @science_screen -->
+ 
+-One thing in this room would draw a curve rather than be one, and it misses by sixty-six centimetres. The screen looks eight metres for a name it knows; the washing lines are the only match and they stand eight and two thirds metres off. A record-keeper just out of range of the thing worth recording.
++The screen has no compatible live measurement from these objects. Its scanner needs more than a nearby shape or a suggestive name: it needs data in a form it recognises. The surfaces are visible; their mathematical relation has not become a signal the screen can read. There is still work between having an object and having an instrument for it.
+ 
+ <!-- @ -->
+ 
+ ## Matter as the solver
+ 
+-The chain does not iterate. It does not sample its neighbourhood, take a step, and check whether things improved. It is already in the shape that costs least, at every instant, and if you move an end it is in the new one immediately. That is what makes these two problems the oldest solved ones: they were solved before anybody could state them, by rope and by water, and the mathematics arrived centuries later to describe what the rope had been doing all along.
++A real chain can move, overshoot and settle after an end is displaced. A film has a history too. The equilibrium equation describes a possible settled condition; it does not erase the time needed to reach it. In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.
+ 
+-The calculus of variations is that description. The room is the thing it describes.
++This is still a powerful way to make form. The boundary, the formula, the sampling and the drawing each decide something. The calculus of variations asks what makes a shape stationary under allowed changes. Our objects let us approach that question, and also ask which changes their code has allowed us to make.
+ 
+ Next: what happens when the solving has to be done in steps after all, by a machine with a frame budget.
++
++[^hanging-model]: Santiago Huerta, [“Structural design in the work of Gaudí”](https://oa.upm.es/703/) (2006), on hanging models, graphical methods and equilibrium design. The inversion is conditional on loads and supports; the laundry artifact evaluates and mirrors a formula.
++
++[^film]: Gareth P. Alexander and Thomas Machon, [“A Björling Representation for Jacobi Fields on Minimal Surfaces and Soap Film Instabilities”](https://arxiv.org/abs/1912.13009) (2020). Instability and the transition to separated films are not implemented in this model.
++
++[^surfaces]: Danny Calegari, [*Minimal Surfaces*, §1.4](https://math.uchicago.edu/~dannyc/courses/minimal_surfaces_2014/minimal_surfaces_notes.pdf), on the conjugate family and isometric deformation. The local relation does not identify arbitrary finite meshes or their boundaries.

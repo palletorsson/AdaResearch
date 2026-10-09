@@ -1,0 +1,11 @@
+--- before/doc/book/day-zero.md
++++ doc/book/day-zero.md
+@@ -37,7 +37,7 @@
+ 
+ ## Know what has been supplied
+ 
+-The base gives us a lit floor and a fixed view. We have not yet constructed a player. This desktop scene contains no walking, hands or XR add-ons. Point One's study uses the same `base.tscn`, hides the greeting and adds its three point stations. Its scripts can therefore concentrate on what gives a position a visible or physical body.
++The base gives us a lit floor and a fixed view. We have not yet constructed a player. This desktop scene contains no walking, hands or XR add-ons. Point One's first study uses the same `base.tscn`, hides the greeting and supplies two markers and coordinate guides. Its short script can concentrate on keeping and changing positions. The fuller visible/solid comparison remains available as an optional study.
+ 
+ The full museum supplies much more. In the current course project, `project.godot` enables the bundled **Godot XR Tools 4.5.1** add-on and starts `commons/scenes/vr_staging.tscn`. The player, movement and pickup systems are working material to inherit. Their construction is not an entrance examination for the point.
+ 

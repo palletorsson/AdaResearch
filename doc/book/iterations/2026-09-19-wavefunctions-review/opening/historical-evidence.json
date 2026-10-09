@@ -1,0 +1,183 @@
+{
+  "scope": "Historical evidence inspected on 2026-09-19; these are not new museum or headset tests.",
+  "manifests": [
+    {
+      "path": "doc/space/sine-flow-hall-2026-09-12/source-hashes.json",
+      "sha256": "12645e1b75e1fe678665ffd67a3d1f61eb9a979e573c905cc5b503b026f074ed",
+      "comparisons": [
+        {
+          "path": "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+          "recorded_sha256": "0de11db74ef98c87e10c09359459b76984233615d694ced16633ea05ce7becc0",
+          "prepass_sha256": "8c23ba17b3287e1d354c5cd0cf7cc03eff6108ba98deaa4a254d25027d16676a",
+          "matches_prepass": false
+        },
+        {
+          "path": "commons/maps/WaveFunctions_Sine_Space/final.md",
+          "recorded_sha256": "1d97723e8dcc802d1c2b5598fe062023570be93cbdedc6dd77f98faf2080c615",
+          "prepass_sha256": "1d97723e8dcc802d1c2b5598fe062023570be93cbdedc6dd77f98faf2080c615",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/maps/WaveFunctions_Sine_Space/tutorial.md",
+          "recorded_sha256": "8deeb1bfc778887d4e0f754e50b1e5c74966d290b8e3a5dc60aa94eb3a83fc1d",
+          "prepass_sha256": "8deeb1bfc778887d4e0f754e50b1e5c74966d290b8e3a5dc60aa94eb3a83fc1d",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/maps/WaveFunctions_Sine_Space/technical.md",
+          "recorded_sha256": "95d8e8e84a3d67102a7d860224bd03d68077e03eb29640595297cfb98de5301b",
+          "prepass_sha256": "91be6c1fe5cb94ade8039c51402fa64701b2c87647ff4f8e825080d518b30c77",
+          "matches_prepass": false
+        },
+        {
+          "path": "commons/maps/WaveFunctions_Sine_Space/critical.md",
+          "recorded_sha256": "204b4cdb000697f265098545c2b4afe8f3e65336edd13d7dcac37d0938c5624a",
+          "prepass_sha256": "204b4cdb000697f265098545c2b4afe8f3e65336edd13d7dcac37d0938c5624a",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/artifacts/sine_flow_tray/sine_flow_tray.gd",
+          "recorded_sha256": "2aa36dd45072d75a4461de430c07b72104d866d3d064d59609de53fc132369cc",
+          "prepass_sha256": "2aa36dd45072d75a4461de430c07b72104d866d3d064d59609de53fc132369cc",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/artifacts/sine_flow_tray/sine_flow_tray.tscn",
+          "recorded_sha256": "0e6cff9a74bf01c83419f9ac480f32e8c547901e4c433ba2d7357bfb481f20dc",
+          "prepass_sha256": "0e6cff9a74bf01c83419f9ac480f32e8c547901e4c433ba2d7357bfb481f20dc",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/artifacts/registry/sine_flow_tray.json",
+          "recorded_sha256": "71908f9b75879113dc39d6072dd48eb1cbdc06ef8acb88b8b087f1c56291e9f4",
+          "prepass_sha256": "71908f9b75879113dc39d6072dd48eb1cbdc06ef8acb88b8b087f1c56291e9f4",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/testing/probe_sine_flow_hall.gd",
+          "recorded_sha256": "d34c4b69511ad5da4c81dc0c726be2d89cf0696bc6ea6a159edc6b1b737aaa20",
+          "prepass_sha256": "d34c4b69511ad5da4c81dc0c726be2d89cf0696bc6ea6a159edc6b1b737aaa20",
+          "matches_prepass": true
+        },
+        {
+          "path": "commons/testing/probe_wcn_sine_space.gd",
+          "recorded_sha256": "a93e59d220684cb8ff1f054de0b21293a211d6005410f2fb0680fdee7a72213a",
+          "prepass_sha256": "5a135e76b49af23542fa775f4cb0d85eedf46892b95c07434d0c462a68d385ee",
+          "matches_prepass": false
+        }
+      ]
+    },
+    {
+      "path": "doc/space/wcn-runtime-review-2026-09-10/evidence.json",
+      "sha256": "6578a358ba4d768fa7dff5c19d166cf01a1a6c59515fb3a88fd3ff6610b15cd6",
+      "comparisons": [
+        {
+          "path": "commons/testing/probe_wcn_intro.gd",
+          "recorded_sha256": "870780f666acec9985adfe6d2ce2c6046a92684827122ee16e0309b950b6426f",
+          "prepass_sha256": "66cbcb598e4118354e5f56f1a24e85f43e3a0187917266154e42c49a8bacbdd5",
+          "matches_prepass": false
+        },
+        {
+          "path": "commons/testing/probe_wcn_pendulum.gd",
+          "recorded_sha256": "0c25b0bbb6a5b43b3b044129b0eb64422926371dc901e260e4874d51c471465f",
+          "prepass_sha256": "72f6d5a26d5a6f71f251e8009f9254e47bd15e4a7ed47b85987a0b647bf56ebc",
+          "matches_prepass": false
+        },
+        {
+          "path": "commons/testing/probe_wcn_sine_space.gd",
+          "recorded_sha256": "11d50ed3996e9b12861aa6e4f8bf2a9ff3e5f2735b4a45a4b18812cb3710740e",
+          "prepass_sha256": "5a135e76b49af23542fa775f4cb0d85eedf46892b95c07434d0c462a68d385ee",
+          "matches_prepass": false
+        },
+        {
+          "path": "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd",
+          "recorded_sha256": "ebbee4c1a3d50e548dfd0af2c92f0e8a2b6fb0ea5022f338bead877b6f9484e5",
+          "prepass_sha256": "43656bc99de4874bb1498ef7f6630909a876cb0ee1153b179b401891a5a41eb8",
+          "matches_prepass": false
+        },
+        {
+          "path": "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd",
+          "recorded_sha256": "d43247da7a596e45215b5f2ffe288f676c7bc0d2854579c4920765d3a795d5d6",
+          "prepass_sha256": "b4e767ea82bc9f165f5da9ebecbbbdd947c6c932a7387675545aaf5c704f85af",
+          "matches_prepass": false
+        }
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Intro/probe_intro_live.json",
+      "sha256": "eafb5d672b5884d80ac3488cff629d854135f2a45e7a3a6d8570fe2b541ec6fd",
+      "checks": 58,
+      "failures": [],
+      "control_path": "the bob grabbed, carried and released through the desktop pointer's right-click from both sides, the pendulum hearing it through its own pickup and drop handlers; the model lane emits the pickable's signals",
+      "headset_verified": false,
+      "full_artifact_source_fingerprint_in_report": false,
+      "date_context": "commons/maps/WaveFunctions_Intro/field_notes.md: 2026-09-13 entry"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Pendulum/probe_pendulum_live.json",
+      "sha256": "2ec5070ac3b23d84a961bd2dc4ddd770cb8b7c5df5ee29d2e03bc1eedd22dbf3",
+      "checks": 81,
+      "failures": [],
+      "control_path": "all four sampler buttons pressed through the desktop pointer, the sampler read back after each; the model lane emits the same buttons' signals",
+      "headset_verified": false,
+      "full_artifact_source_fingerprint_in_report": false,
+      "date_context": "commons/maps/WaveFunctions_Pendulum/field_notes.md: 2026-09-13 entry"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Sine_Space/probe_sine_space_live.json",
+      "sha256": "3bdaeeefec64bb39d40879bba25912a7b8aaa2653262fffc545ea6c3be877563",
+      "checks": 84,
+      "failures": [],
+      "control_path": "AMP and PHASE dragged and FREEZE and RESET pressed through the desktop pointer, the meshes and colliders read after each, and the player's own body walked through the passage at its narrowest; the model lane emits the same controls' signals",
+      "headset_verified": false,
+      "full_artifact_source_fingerprint_in_report": false,
+      "date_context": "commons/maps/WaveFunctions_Sine_Space/field_notes.md: 2026-09-13 entry"
+    },
+    {
+      "path": "ada_run/sine-flow-hall/report_2026-09-12.json",
+      "sha256": "3fc3175554aa3e17e92ada481bb2a09426e003af261af70ca87ae5d21275de48",
+      "checks": 41,
+      "failures": []
+    },
+    {
+      "path": "ada_run/sine-flow-hall/report.json",
+      "sha256": "3fc3175554aa3e17e92ada481bb2a09426e003af261af70ca87ae5d21275de48",
+      "checks": 41,
+      "failures": []
+    }
+  ],
+  "review_package_matches": [
+    {
+      "path": "commons/artifacts/control_pendulum/control_pendulum.gd",
+      "review_sha256": "2bcd4ce84c90868fd5b2d312b232c1929844d2cd6d5a1cca5dfc92fca827b02b",
+      "prepass_sha256": "2bcd4ce84c90868fd5b2d312b232c1929844d2cd6d5a1cca5dfc92fca827b02b",
+      "matches_prepass": true
+    },
+    {
+      "path": "algorithms/wavefunctions/unit_circle/UnitCircle.gd",
+      "review_sha256": "8576c8db576aaf5c32bf9a68b9e0f95307b4edfdf48be2841f7b08787c38692f",
+      "prepass_sha256": "8576c8db576aaf5c32bf9a68b9e0f95307b4edfdf48be2841f7b08787c38692f",
+      "matches_prepass": true
+    },
+    {
+      "path": "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd",
+      "review_sha256": "b4e767ea82bc9f165f5da9ebecbbbdd947c6c932a7387675545aaf5c704f85af",
+      "prepass_sha256": "b4e767ea82bc9f165f5da9ebecbbbdd947c6c932a7387675545aaf5c704f85af",
+      "matches_prepass": true
+    },
+    {
+      "path": "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd",
+      "review_sha256": "43656bc99de4874bb1498ef7f6630909a876cb0ee1153b179b401891a5a41eb8",
+      "prepass_sha256": "43656bc99de4874bb1498ef7f6630909a876cb0ee1153b179b401891a5a41eb8",
+      "matches_prepass": true
+    },
+    {
+      "path": "commons/artifacts/sine_flow_tray/sine_flow_tray.gd",
+      "review_sha256": "2aa36dd45072d75a4461de430c07b72104d866d3d064d59609de53fc132369cc",
+      "prepass_sha256": "2aa36dd45072d75a4461de430c07b72104d866d3d064d59609de53fc132369cc",
+      "matches_prepass": true
+    }
+  ]
+}

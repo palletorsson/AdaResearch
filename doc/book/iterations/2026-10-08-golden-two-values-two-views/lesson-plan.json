@@ -1,0 +1,30 @@
+{
+  "id": "Fractal_GoldenSpiral",
+  "decision": "draft",
+  "mode": "build",
+  "object": "Two familiar PointBody values and one ordered record in two height views.",
+  "change": "Join the last pair once, append their sum; compare linear and logarithmic readers of the same record.",
+  "dependsOn": [
+    "Point_Trace",
+    "Fractal_MengerSponge"
+  ],
+  "reuses": "PointBody pickup/release; typed arrays, indices, append, loops, BoxMesh, a Boolean interaction latch; separation of data and displayed scale.",
+  "given": "Prepared museum camera/light/player/XRTools; unchanged PointBody printed; logarithmic height function supplied explicitly; rectangle and unit-sum witnesses remain installed.",
+  "later": "No botanical explanation, universal beauty claim, complete logarithm derivation or rebuilding of every exhibit. Numerical recurrence is not automatically a fractal.",
+  "checks": [
+    "Two seeds plus eight requests give 1,1,2,3,5,8,13,21,34,55; cap ten.",
+    "Same list and labels feed both height functions; miniature uses common factor0.2.",
+    "Held contact adds once; both released rearms. Trigger uses same request.",
+    "Executed seed variation [1,2] ends89; source recurrence unchanged.",
+    "Rectangle ratio and area preserved; ARC changes view rather than data."
+  ],
+  "transfer": "Change only seeds to [1,2]; predict first five and tenth; keep operation and compare both readers.",
+  "carry": "A retained numerical history and two explicitly different interpretations of its height.",
+  "next": "Fractal_Synthesis: name the seed, operation, limit and display before composing a work.",
+  "notes": "One required complete two-file reconstruction. Installed adapter reads the existing desk; all seven artifacts and order retained. Native verification is distinct from headset feel.",
+  "baseline": {
+    "tutorial": "115f2ac9b9de6257b58020827f3b5632a2df7ebee2cbfcbbc3c34ade26b0a310",
+    "choice": "fcbcb3a8eaef1f59a7d3e043eae423d043a523e890454b871ae39d6571aea128"
+  },
+  "summary": "At the Fibonacci desk, the learner joins two familiar points carrying the last two values. One contact appends one sum; release rearms it. Reconstruct a positive integer list from [1,1], retain earlier entries and feed it to adjacent linear and supplied logarithmic height functions. Compare both with the museum’s fixed-unit SUM witness; neither reader changes the record. Predict and execute [1,2] as different seeds. Visit the separate rectangle cut and arc as comparisons, then carry seed, recurrence, limit and display choices into Synthesis."
+}

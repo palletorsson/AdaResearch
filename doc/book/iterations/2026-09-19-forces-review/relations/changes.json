@@ -1,0 +1,30 @@
+{
+  "files": {
+    "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd": {
+      "before_sha256": "8a8c5584158817fcdf66b80a1f5e201c79f5c49283f0bc948e14ffe38a7ae57f",
+      "after_sha256": "11f75c97e27bad430b4be85174e6a714cdcf51655d0b669a1a6e484d78ed1a7b"
+    },
+    "commons/hazards/octapod_crawler/four_leg_critter.gd": {
+      "before_sha256": "608785aec42f0498459d70f03551d53b765d8663fdcd16bf3aff0d37d7618930",
+      "after_sha256": "2a362cb700e21a1c2b300f2d924710df15cbf1118cacf1a08e58490f5fa756d2"
+    },
+    "commons/artifacts/vector_machine/vector_machine.gd": {
+      "before_sha256": "5327dbe78cf8bd7f36c327284a0803feb8e9571efd1a83594c2accb8556e5044",
+      "after_sha256": "d851fa1e4a8afb6b22727acdc076965e7db3a4b9709eae7eab3706928e442027"
+    },
+    "commons/artifacts/force_field_zone/force_field_zone.gd": {
+      "before_sha256": "567660da2a1a716a9fd04bd98ee9ebd6b60fac2e78c20523bde209303d5083df",
+      "after_sha256": "3d1c6091e1b222e147bf9677414760d92721d5711b88875946572f4bd0e7927f"
+    }
+  },
+  "checks": {
+    "gravity_outside_update_text_unchanged": true,
+    "four_leg_critter_executable_lines_unchanged": true,
+    "vector_machine_executable_lines_unchanged": true,
+    "force_field_zone_executable_lines_unchanged": true,
+    "before_gravity_58_checks_stable": true,
+    "after_gravity_58_checks_stable": true,
+    "paired_overview_cameras_identical": true,
+    "four_second_measurement_identical": true
+  }
+}

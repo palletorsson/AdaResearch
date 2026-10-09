@@ -1,0 +1,424 @@
+{
+  "checks": [
+    {
+      "name": "starts at centre without invented history",
+      "passed": true
+    },
+    {
+      "name": "real grab proxy on prediction marker",
+      "passed": true
+    },
+    {
+      "name": "world-space pointer moves marker 1.1m at rotated host",
+      "passed": true
+    },
+    {
+      "name": "prediction does not change RNG or carriage positions",
+      "passed": true
+    },
+    {
+      "name": "real NEXT lever starts a paired move",
+      "passed": true
+    },
+    {
+      "name": "both targets share one random draw",
+      "passed": true
+    },
+    {
+      "name": "busy lever cannot consume another draw",
+      "passed": true
+    },
+    {
+      "name": "targets visible before carriage motion",
+      "passed": true
+    },
+    {
+      "name": "both rails use same intermediate easing weight",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "held lever cannot repeat a draw",
+      "passed": true
+    },
+    {
+      "name": "release rearms NEXT",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "fresh target ignores old position",
+      "passed": true
+    },
+    {
+      "name": "step adds draw to previous committed position",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "both land inside rails and step stays local",
+      "passed": true
+    },
+    {
+      "name": "record bounded but count continues",
+      "passed": true
+    },
+    {
+      "name": "positive overshoot folds",
+      "passed": true
+    },
+    {
+      "name": "negative overshoot folds",
+      "passed": true
+    },
+    {
+      "name": "exact boundaries retained",
+      "passed": true
+    },
+    {
+      "name": "real REPLAY restores seed positions history and marker",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "replay recovers same landing pair",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "replay recovers same landing pair",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "replay recovers same landing pair",
+      "passed": true
+    },
+    {
+      "name": "RUN starts automatic movement",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "HOLD finishes revealed move",
+      "passed": true
+    },
+    {
+      "name": "HOLD prevents subsequent draws",
+      "passed": true
+    },
+    {
+      "name": "REPLAY cancels motion without late commits",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "move completes",
+      "passed": true
+    },
+    {
+      "name": "drawing history is not input to next move",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "landing_pairs": [
+    [
+      0.0708050727844238,
+      0.012873649597168
+    ],
+    [
+      1.11797738075256,
+      0.216142266988754
+    ],
+    [
+      -1.42084527015686,
+      -0.0421932265162468
+    ],
+    [
+      -0.40308341383934,
+      -0.115481115877628
+    ],
+    [
+      -1.446164727211,
+      -0.378420174121857
+    ],
+    [
+      0.685065686702728,
+      -0.253862768411636
+    ],
+    [
+      1.3840343952179,
+      -0.00222015986219049
+    ],
+    [
+      -1.13069176673889,
+      -0.20780049264431
+    ],
+    [
+      0.372673392295837,
+      -0.140041694045067
+    ],
+    [
+      1.87396121025085,
+      0.200678527355194
+    ],
+    [
+      1.12418413162231,
+      0.405075639486313
+    ],
+    [
+      -0.416128516197205,
+      0.329415917396545
+    ],
+    [
+      -0.856566429138184,
+      0.173676565289497
+    ],
+    [
+      -1.84432280063629,
+      -0.161654844880104
+    ],
+    [
+      1.50933635234833,
+      0.112769946455956
+    ]
+  ],
+  "scope": "Production native Godot scene; supplied pointer events through actual controls at translated, rotated host. Headset grip and comfort not tested."
+}

@@ -1,0 +1,229 @@
+{
+  "incoming": {
+    "sha256": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\nconst PointBody = preload(\"point_body.gd\")\nvar places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]\nvar cubes: Array[Node3D] = []\nvar point := PointBody.new()\n\nfunc _ready() -> void:\n    for place in places:\n        var cube := CubeBody.new()\n        cube.position = place\n        add_child(cube)\n        cubes.append(cube)\n    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)\n    add_child(point)\n",
+      "after": "extends Node3D\n\nvar cube := MeshInstance3D.new()\nvar start := Vector3(0, 1, 0)\nvar turn_degrees := 0.0\nvar size_factor := 1.0\nvar rise := 0.0\nvar duration := 2.0\nvar elapsed := 0.0\n\nfunc _ready() -> void:\n    assert(duration > 0.0 and size_factor > 0.0)\n    cube.mesh = BoxMesh.new()\n    add_child(cube)\n    cube.position = start\n    cube.rotation_degrees.y = turn_degrees\n    cube.scale = Vector3.ONE * size_factor\n\n    var sensor := Area3D.new()\n    sensor.collision_layer = 0\n    sensor.collision_mask = 1\n    sensor.set_collision_mask_value(20, true)\n    cube.add_child(sensor)\n    var hitbox := CollisionShape3D.new()\n    hitbox.shape = BoxShape3D.new()\n    sensor.add_child(hitbox)\n    sensor.body_entered.connect(_on_body_entered)\n\nfunc _process(delta: float) -> void:\n    elapsed += delta\n    var t: float = minf(elapsed / duration, 1.0)\n    cube.position = start + Vector3.UP * rise * t\n\nfunc _on_body_entered(body: Node3D) -> void:\n    if body.is_in_group(\"em_walker\") or body.is_in_group(\"player_body\"):\n        print(\"Collected\")\n        queue_free()\n"
+    }
+  ],
+  "given_files": [],
+  "sources": [
+    {
+      "path": "commons/maps/Trans_Pre/tutorial.md",
+      "sha256": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/native-project.godot",
+      "sha256": "2f5fa852ab7e315bf6b1eca3ce9c2526fe3775cf6a1d630db6c1af685d28e485"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py",
+      "sha256": "738b01c279e5cfc0fdc700455822993b9ad6daaa400306c54d734340cfac4240"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd",
+      "sha256": "d8307653ff18d285017a0a2508d0c4482af00078e3cbca65687fc17f207c793e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd",
+      "sha256": "e2a55ef8c528d32b5e581891a56539c69ac9655504342b442a32755877fa60a6"
+    }
+  ],
+  "checks": [
+    {
+      "id": "still/owns_visible_cube",
+      "kind": "native"
+    },
+    {
+      "id": "still/one_box_mesh",
+      "kind": "native"
+    },
+    {
+      "id": "still/starting_pose",
+      "kind": "native"
+    },
+    {
+      "id": "still/clock_does_not_require_motion",
+      "kind": "native"
+    },
+    {
+      "id": "still/sensor_does_not_block",
+      "kind": "native"
+    },
+    {
+      "id": "translation/equal_displacement_all_corners",
+      "kind": "native"
+    },
+    {
+      "id": "translation/orientation_and_size_kept",
+      "kind": "native"
+    },
+    {
+      "id": "translation/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/declared_y_axis",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/corner_moves",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/all_pair_distances_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/origin_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "scale/every_distance_times_factor",
+      "kind": "native"
+    },
+    {
+      "id": "scale/centre_fixed",
+      "kind": "native"
+    },
+    {
+      "id": "scale/top_reaches_1_75",
+      "kind": "native"
+    },
+    {
+      "id": "scale/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "transfer/new_angle_on_same_body",
+      "kind": "native"
+    },
+    {
+      "id": "transfer/neighbour_unaffected",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/0.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/1.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/2.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/2.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/30",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/0.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/1.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/2.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/2.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/120",
+      "kind": "native"
+    },
+    {
+      "id": "time/equal_elapsed_equal_pose",
+      "kind": "native"
+    },
+    {
+      "id": "time/double_duration_halfway",
+      "kind": "native"
+    },
+    {
+      "id": "time/double_duration_same_destination",
+      "kind": "native"
+    },
+    {
+      "id": "combine/rise_in_study_y",
+      "kind": "native"
+    },
+    {
+      "id": "combine/fixed_turn_and_size",
+      "kind": "native"
+    },
+    {
+      "id": "combine/original_construction",
+      "kind": "native"
+    },
+    {
+      "id": "restore/rerun_original_values",
+      "kind": "native"
+    },
+    {
+      "id": "engine/actual_process_callback",
+      "kind": "native"
+    },
+    {
+      "id": "engine/callback_uses_elapsed",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/outside_kept/em_walker",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/physics_collects/em_walker",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/outside_kept/player_body",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/physics_collects/player_body",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/ordinary_body_ignored",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/unwatched_layer_ignored",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/former_position_is_empty",
+      "kind": "native"
+    },
+    {
+      "id": "pickup/sensor_moves_with_cube",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Trans_Pre/tutorial.md",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/native-project.godot",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd"
+  ]
+}

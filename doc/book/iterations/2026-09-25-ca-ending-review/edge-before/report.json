@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "difference study loaded",
+      "passed": true
+    },
+    {
+      "name": "before: pier occupies changed address",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: volume-and-pier",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-comparison",
+      "passed": true
+    },
+    {
+      "name": "chapter beginning uniform/no drive",
+      "passed": true
+    },
+    {
+      "name": "integer storage removes initial difference",
+      "passed": true
+    },
+    {
+      "name": "fractional storage spreads to 27 addresses",
+      "passed": true
+    },
+    {
+      "name": "fractional maximum is 0.75",
+      "passed": true
+    },
+    {
+      "name": "slice selection changes neither time nor values",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fractional-difference",
+      "passed": true
+    },
+    {
+      "name": "zero pull retains one undiminished difference",
+      "passed": true
+    },
+    {
+      "name": "matched runs remain equal under shared drive",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "before: pier occupies changed address"
+  ],
+  "observations": {
+    "changed_address_colliders": []
+  },
+  "passed": false,
+  "room": "CA_EdgeOfChaos",
+  "scope": "Native museum, supplied slider/button signals, collision query and interior camera. No headset, Quest or learner acceptance."
+}

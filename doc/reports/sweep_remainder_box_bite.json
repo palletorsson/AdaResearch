@@ -1,0 +1,1448 @@
+{
+ "sweep": "remainder_box",
+ "peak_changed_pct": 39.147,
+ "subject_pct": 49.639,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "changed_px": 66269,
+   "changed_pct": 11.473
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "changed_px": 48051,
+   "changed_pct": 8.319
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "changed_px": 48051,
+   "changed_pct": 8.319
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "changed_px": 173454,
+   "changed_pct": 30.03
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "changed_px": 188196,
+   "changed_pct": 32.582
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 173454,
+   "changed_pct": 30.03
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 173454,
+   "changed_pct": 30.03
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 122963,
+   "changed_pct": 21.289
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 185838,
+   "changed_pct": 32.174
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 171063,
+   "changed_pct": 29.616
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 171063,
+   "changed_pct": 29.616
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 168496,
+   "changed_pct": 29.172
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 224674,
+   "changed_pct": 38.898
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 216423,
+   "changed_pct": 37.469
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 216589,
+   "changed_pct": 37.498
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "changed_px": 18218,
+   "changed_pct": 3.154
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "changed_px": 18218,
+   "changed_pct": 3.154
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "changed_px": 140082,
+   "changed_pct": 24.252
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "changed_px": 125914,
+   "changed_pct": 21.8
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 140082,
+   "changed_pct": 24.252
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 140082,
+   "changed_pct": 24.252
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 185667,
+   "changed_pct": 32.145
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 123556,
+   "changed_pct": 21.391
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 137691,
+   "changed_pct": 23.838
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 137691,
+   "changed_pct": 23.838
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 226113,
+   "changed_pct": 39.147
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 163719,
+   "changed_pct": 28.345
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 177964,
+   "changed_pct": 30.811
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 178130,
+   "changed_pct": 30.84
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "changed_px": 140158,
+   "changed_pct": 24.266
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 171001,
+   "changed_pct": 29.605
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 137800,
+   "changed_pct": 23.857
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 123025,
+   "changed_pct": 21.299
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 123025,
+   "changed_pct": 21.299
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 216534,
+   "changed_pct": 37.489
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 176636,
+   "changed_pct": 30.581
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 168385,
+   "changed_pct": 29.153
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 168551,
+   "changed_pct": 29.181
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "changed_px": 140158,
+   "changed_pct": 24.266
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 125416,
+   "changed_pct": 21.713
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 171001,
+   "changed_pct": 29.605
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 137800,
+   "changed_pct": 23.857
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 123025,
+   "changed_pct": 21.299
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 123025,
+   "changed_pct": 21.299
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 216534,
+   "changed_pct": 37.489
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 176636,
+   "changed_pct": 30.581
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 168385,
+   "changed_pct": 29.153
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 168551,
+   "changed_pct": 29.181
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "changed_px": 17313,
+   "changed_pct": 2.997
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 9802,
+   "changed_pct": 1.697
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 3667,
+   "changed_pct": 0.635
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 66907,
+   "changed_pct": 11.584
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 35874,
+   "changed_pct": 6.211
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 28658,
+   "changed_pct": 4.962
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 22523,
+   "changed_pct": 3.899
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 160699,
+   "changed_pct": 27.822
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 122021,
+   "changed_pct": 21.126
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 121733,
+   "changed_pct": 21.076
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 116328,
+   "changed_pct": 20.14
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "changed_px": 27115,
+   "changed_pct": 4.694
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 20980,
+   "changed_pct": 3.632
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 83920,
+   "changed_pct": 14.529
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 18855,
+   "changed_pct": 3.264
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 45671,
+   "changed_pct": 7.907
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 39536,
+   "changed_pct": 6.845
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 170976,
+   "changed_pct": 29.601
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 107619,
+   "changed_pct": 18.632
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 132010,
+   "changed_pct": 22.855
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 126605,
+   "changed_pct": 21.919
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "changed_px": 9802,
+   "changed_pct": 1.697
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 76709,
+   "changed_pct": 13.281
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 45676,
+   "changed_pct": 7.908
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 18856,
+   "changed_pct": 3.265
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 28658,
+   "changed_pct": 4.962
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 169781,
+   "changed_pct": 29.394
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 131106,
+   "changed_pct": 22.698
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 112258,
+   "changed_pct": 19.435
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 121743,
+   "changed_pct": 21.077
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "changed_px": 70574,
+   "changed_pct": 12.218
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 39541,
+   "changed_pct": 6.846
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 28658,
+   "changed_pct": 4.962
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 18856,
+   "changed_pct": 3.265
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 164366,
+   "changed_pct": 28.457
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 125688,
+   "changed_pct": 21.76
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 121733,
+   "changed_pct": 21.076
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 112661,
+   "changed_pct": 19.505
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "changed_px": 65065,
+   "changed_pct": 11.265
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 57853,
+   "changed_pct": 10.016
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 51718,
+   "changed_pct": 8.954
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 115533,
+   "changed_pct": 20.002
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 172930,
+   "changed_pct": 29.939
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 172643,
+   "changed_pct": 29.89
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 167238,
+   "changed_pct": 28.954
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "changed_px": 26816,
+   "changed_pct": 4.643
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 20681,
+   "changed_pct": 3.581
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 173873,
+   "changed_pct": 30.103
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 110515,
+   "changed_pct": 19.133
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 134907,
+   "changed_pct": 23.356
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 129502,
+   "changed_pct": 22.421
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "changed_px": 9802,
+   "changed_pct": 1.697
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 172613,
+   "changed_pct": 29.885
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 133937,
+   "changed_pct": 23.189
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 115090,
+   "changed_pct": 19.926
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 124575,
+   "changed_pct": 21.568
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "changed_px": 167198,
+   "changed_pct": 28.947
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 128519,
+   "changed_pct": 22.251
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 124565,
+   "changed_pct": 21.566
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "keeping": "dial"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 115493,
+   "changed_pct": 19.995
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "changed_px": 66074,
+   "changed_pct": 11.439
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 57555,
+   "changed_pct": 9.965
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "none"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 51735,
+   "changed_pct": 8.957
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "changed_px": 27505,
+   "changed_pct": 4.762
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "room"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 21681,
+   "changed_pct": 3.754
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "keeping": "vault"
+   },
+   "b": {
+    "remainder": "haze",
+    "keeping": "dial"
+   },
+   "changed_px": 9483,
+   "changed_pct": 1.642
+  }
+ ]
+}

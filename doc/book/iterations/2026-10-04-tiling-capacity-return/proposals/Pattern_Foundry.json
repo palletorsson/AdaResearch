@@ -1,0 +1,38 @@
+{
+  "id": "Pattern_Foundry",
+  "title": "Author the source others repeat",
+  "storyboard": "Begin with one off-centre pair in the small four-by-four tile and find its repeated appearances. Bring addressed writes and palette selection; let a source entry hold a palette index and let a wrapping lookup select that entry before its colour is assigned. The student predicts another copy from its address, then changes one source cell. Input controls and the image preview are supplied. Carry a small motif and its reader. On a return visit, copy the nested source explicitly and compare it with a live reference. The loom and architectural receivers remain further encounters: the loom has its own five-by-five card, HOLD retains a receiver image, and each SAVE acts on a stated source. These are not one shared learner record.",
+  "storyboard_short": "Use one 4×4 tile. Reuse addressed writes/palette lookup. Teach source[row][column] palette indices, wrap address then choose colour. Predict a repeated pair after one edit. Supply input/image preview. Carry motif + reader. Optional return: independent nested copy versus live reference. Loom has separate 5×5 source; HOLD image differs from SAVE. Later teaching stations use fixed seeds.",
+  "mode": "make",
+  "brings": [
+    "writable colour arrays",
+    "remainder lookup"
+  ],
+  "learns": [
+    "palette-index source with wrapping lookup",
+    "optional independent copy versus live reference"
+  ],
+  "carries": "A small indexed motif and its reader; an optional separately retained source copy.",
+  "supplied": [
+    "existing tile editor input and image preview",
+    "loom and architectural receiver controls for comparison"
+  ],
+  "artifact_refs": [
+    "pattern_tile_4x4",
+    "pattern_tile_mirror",
+    "pattern_machine_a",
+    "pattern_architecture"
+  ],
+  "review_note": "One core source-and-reader study first; copy/history on a return visit. Use explicit row/column storage in the reduced example and show how it connects to the selected station. The small tile, five-by-five loom and fabric studio are distinct sources. Do not present a copied source array as the implementation of a held texture.",
+  "independent_check": "Choose an unseen preview address, predict its source entry and colour, then explain why editing that entry changes more than one appearance.",
+  "prior_maps": [
+    "Array",
+    "Color_Grid_Pallet",
+    "Pattern_Disco"
+  ],
+  "source_refs": [
+    "commons/primitives/arrays/pattern_tile_puzzle.gd",
+    "commons/artifacts/pattern_machine_a/recipe_study.gd"
+  ],
+  "change_reason": "Reduce first-visit load without losing the richer questions of sharing and keeping."
+}

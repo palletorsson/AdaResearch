@@ -1,0 +1,475 @@
+{
+  "status": "proposed visual teaching plan",
+  "halls": [
+    {
+      "map": "Point_Zero",
+      "sequence": "primitives",
+      "concept": "Execution and calls · Observation and debugging",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Zero-1.webp",
+      "caption": "Saved museum capture · The counter is large and readable, with enough room context to locate it.",
+      "action": "Move the existing display assignment between _ready and _process; predict the reading before restarting.",
+      "consequence": "One reading stays fixed; repeated readings continue changing while the same museum remains active.",
+      "contrast": "Same instruction and display, different invocation timing.",
+      "proposal": "Proposed comparison beside the photograph: three labelled instants, with a fixed reading in the _ready row and changing readings in the _process row. Mark them as illustrative values, not recorded frames. Put the same assignment beside both rows.",
+      "limit": "A still showing 118 cannot establish whether the number updates, or how often the callback runs."
+    },
+    {
+      "map": "Point_One",
+      "sequence": "primitives",
+      "concept": "Variables, assignment and basic types · Arithmetic, expressions and returned values · Objects, properties and references · Observation and debugging",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_One-1.webp",
+      "caption": "Saved museum capture · The corridor includes the sphere conditions and their separate stations.",
+      "action": "Change the centre, then change the shared radius, then change only the collision radius in separate source edits.",
+      "consequence": "The point moves; the visible sphere grows; a collision-only change changes where locomotion stops while the surface stays fixed.",
+      "contrast": "A Vector3 or float value is distinct from the object receiving it; mesh and collision can receive the same radius independently.",
+      "proposal": "Proposed two-panel diagram: one numeric radius feeds a drawn circle and a dashed collision boundary; then only the dashed boundary changes. A tiny adjacent call chain, SphereMesh.new() → sphere reference → body.mesh, names the actual programming relation. Label the dashed boundary as an explanatory drawing.",
+      "limit": "Visibility does not establish a collider, physical stopping distance, variable type or reference identity."
+    },
+    {
+      "map": "Point_Coordinates",
+      "sequence": "primitives",
+      "concept": "Variables, assignment and basic types · Scope and retained state · Objects, properties and references · Events and input",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Coordinates-1.webp",
+      "caption": "Saved museum capture · The coloured axes, point and paired coordinate cards appear together.",
+      "action": "Hold the existing point and move along one named axis; compare its position readout before and after release.",
+      "consequence": "The held object changes position while the reporting cards and coordinate frame remain in place.",
+      "contrast": "One retained object reference, repeatedly read position values; world and named local frames can report different numbers for the same place.",
+      "proposal": "Proposed margin strip with two successive reads: the same pt reference points to the same body; each read obtains a new Vector3 value. Highlight only Y for an upward move. State the chosen frame; do not place invented readings onto the photographed cards.",
+      "limit": "The still cannot show grabbing, scope across callbacks, or which temporary values survive an update."
+    },
+    {
+      "map": "Point_Lines",
+      "sequence": "primitives",
+      "concept": "Arithmetic, expressions and returned values · Variables, assignment and basic types · Objects, properties and references",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Lines-1.webp",
+      "caption": "Saved museum capture · The isolated endpoints and joining line are visually simple.",
+      "action": "Move an endpoint, then compare two endpoint pairs with equal distance but different direction; reverse the subtraction.",
+      "consequence": "The segment turns or changes length; reversing the computed displacement reverses its direction without changing the endpoint separation.",
+      "contrast": "Vector3 displacement versus float distance; a return value versus its supplied drawing.",
+      "proposal": "Proposed comparison of a horizontal and vertical pair, both 1.5 m apart: b-a → Vector3, then length() → 1.5. Add a reversed arrow in a third small view while leaving endpoints fixed. Keep the arrow explicitly diagrammatic.",
+      "limit": "The dark readouts are not evidence of the numeric result, and a line alone has no labelled direction."
+    },
+    {
+      "map": "Point_Trace",
+      "sequence": "primitives",
+      "concept": "Lists and indexed data · Comparisons and conditions · Loops and accumulation · Execution and calls · Observation and debugging",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Trace-2.webp",
+      "caption": "Saved museum capture · The clean-hall view shows the three recording stations, their lines and data displays; it is substantially stronger than the broad room view.",
+      "action": "Move, pause and return with the pen; predict whether each reading enters the record, then join the retained neighbours in order.",
+      "consequence": "Accepted samples remain as a route after the point has moved away. A pause contributes no new position under the distance rule.",
+      "contrast": "Frames still occur while the list stays unchanged; a for traversal visits retained entries within one update.",
+      "proposal": "Three proposed diagram beats: append a named point to slots 0,1,2; a distance comparison gives true/false and either appends or keeps the list; a moving highlight visits pairs 0–1 and 1–2. Use an explicit small illustrative record, not invented values pasted onto the museum monitor.",
+      "limit": "Displayed paths do not prove they are a student's drawing, reveal acceptance thresholds, or establish the starter companion's persistence behavior."
+    },
+    {
+      "map": "Point_Line_Grid",
+      "sequence": "primitives",
+      "concept": "Lists and indexed data · Loops and accumulation · Variables, assignment and basic types",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Line_Grid-1.webp",
+      "caption": "Saved museum context capture; weak concept evidence · The clear route image locates the hall but concentrates on neighbouring figures, not the trace-to-grid operation. The second image is an obstructed doorway and should not be selected.",
+      "action": "Release a trace, inspect its fitted display and rounded addresses, then find separate list entries that share a displayed address.",
+      "consequence": "The original ordered record stays distinct while the derived drawing gains repeated grid addresses and straightened joins.",
+      "contrast": "List index versus spatial address; source record versus derived display.",
+      "proposal": "Proposed comparison must carry the teaching: a small ordered list with indices 0,1,2,3 → fit/resize → XYZ rounding. Show two indices reaching one grid address while the original list remains visible. Use the photograph only as a small location image, or flag the missing focused capture.",
+      "limit": "Neither route capture shows the relevant source/rounded trace comparison or preservation of the source list."
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "sequence": "primitives",
+      "concept": "Lists and indexed data · Execution and calls · Comparisons and conditions",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Point_Triangle_Context-1.webp",
+      "caption": "Saved museum capture · The existing board already compares points, boundary and face beside the spatial work.",
+      "action": "Choose three non-collinear positions, join their boundary, then submit the face in a stated order.",
+      "consequence": "The same corners support points, an outline or a filled surface according to the operation requested.",
+      "contrast": "Stored positions stay fixed while the renderer receives a different instruction.",
+      "proposal": "Small proposed ordered-index strip [0,1,2] aligned with the board's three corners. Reuse the existing points/outline/face comparison instead of inventing another scene.",
+      "limit": "The still cannot show the source list, a live submission call, or what reversing winding would do under the material's culling policy."
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "sequence": "primitives",
+      "concept": "Lists and indexed data · Loops and accumulation · Objects, properties and references",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Primitives_Polythedra-2.webp",
+      "caption": "Saved museum capture · The close view of the existing open/closed boundary board is stronger than the general hall view.",
+      "action": "Read a face's three indices, close one missing face, then change a shared corner.",
+      "consequence": "An opening closes; every face referring to the edited position changes together.",
+      "contrast": "One position list with multiple references to its indices; changing a position differs from changing connectivity.",
+      "proposal": "Proposed margin diagram: four numbered positions, three short face rows, then the added row highlighted. Highlight the same corner number in every referring row before showing its changed position.",
+      "limit": "A closed picture does not demonstrate a collider or show the underlying face-index list."
+    },
+    {
+      "map": "Point_Animatedcube",
+      "sequence": "primitives",
+      "concept": "Lists and indexed data · Variables, assignment and basic types · Observation and debugging",
+      "image": "captures/Point_Animatedcube.png",
+      "caption": "Saved museum capture outside the current route's selected pair · The existing teaching plate is readable. Current route images show the prefab shelf and miss the main shared-corner concept.",
+      "action": "Move one corner out of the face plane, predict affected triangles, then compare the alternative diagonal.",
+      "consequence": "Shared coordinates deform connected faces; the diagonal determines which triangular patch spans each part.",
+      "contrast": "Same connections with a changed vertex, then same vertices with changed connections.",
+      "proposal": "Reuse the existing numbered two-state diagram at a readable size and identify it as a diagram. A tiny proposed third panel can compare [4,5,7]/[5,6,7] with [4,5,6]/[4,6,7] under the same displaced corner.",
+      "limit": "This is a photograph of an explanatory plate, not a before/after recording of a learner moving a corner."
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "sequence": "primitives",
+      "concept": "Functions: parameters, locals and return · Lists and indexed data · Loops and accumulation",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Primitives_Ignorance-1.webp",
+      "caption": "Saved museum context capture; weak concept evidence · The doorway and solids locate the encounter, but do not show the reduced generator or its two calls.",
+      "action": "Call the same position generator with two radii; predict both returned lists before comparing the resulting forms.",
+      "consequence": "Opposite pairs retain their relation while their distances from the centre change.",
+      "contrast": "One function definition, two calls and two data results; editing a generated result does not change its generating rule.",
+      "proposal": "Proposed comparison: octahedron_positions(0.5) → six positions → small octahedron; octahedron_positions(0.8) → six positions → larger octahedron. Keep one short shared function label above both. Do not depict a function as a physical factory in the museum.",
+      "limit": "A courtyard of forms cannot show parameters, local values, return behavior or whether a function runs once or every frame."
+    },
+    {
+      "map": "Primitives_Godot",
+      "sequence": "primitives",
+      "concept": "Objects, properties and references · Variables, assignment and basic types",
+      "image": "../2026-10-04-primitives-expanded/Primitives_Godot/entry.png",
+      "caption": "Saved native Endless Museum capture, 2026-10-04 · The entry view shows more labelled library specimens than the inside view.",
+      "action": "In the proposed small edit study, create two familiar mesh resources with different settings and assign each to its displaying node.",
+      "consequence": "Changing one separately created resource changes its displayed geometry while the other remains unchanged.",
+      "contrast": "Class name, created resource, displaying node and supplied scene have separate roles.",
+      "proposal": "Proposed flat reference diagram beside the photo: SphereMesh.new() twice gives resource A and resource B; each feeds one node's mesh property. Highlight only A's radius edit. Keep this separate from the photographed library.",
+      "limit": "Fixed library specimens do not expose object references or prove independent live editing; several dark surfaces are hard to read."
+    },
+    {
+      "map": "Primitives_Columns",
+      "sequence": "primitives",
+      "concept": "Functions: parameters, locals and return · Loops and accumulation · Lists and indexed data · Observation and debugging",
+      "image": "../2026-10-04-primitives-expanded/Primitives_Columns/entry.png",
+      "caption": "Saved native Endless Museum capture, 2026-10-04 · The front row and aisle are legible; the inside alternative contains a large diagonal visual obstruction and mixes varied families.",
+      "action": "Inspect the controlled first row, then use the reduced column function to change one radius, height or side count while holding the other inputs fixed.",
+      "consequence": "A profile edit changes the silhouette; height changes vertical spacing; side count changes the polygonal cross-section.",
+      "contrast": "Independent inputs to one rule; outer loop over profile rings and inner loop around each ring.",
+      "proposal": "Proposed diagram with a vertical radius list and one highlighted ring; a short row of 4/6/8/12/16-sided cross-sections keeps radius fixed. A second small line states rings × sides = position count for the reduced study. Avoid marking every museum specimen as a controlled trial.",
+      "limit": "The photograph alone does not verify held inputs or show the two loops. Later rows vary shape and height as well as sampling."
+    },
+    {
+      "map": "Primitives_Profiles",
+      "sequence": "primitives",
+      "concept": "Functions: parameters, locals and return · Lists and indexed data · Observation and debugging",
+      "image": "../2026-10-04-primitives-expanded/Primitives_Profiles/entry.png",
+      "caption": "Saved native Endless Museum capture, 2026-10-04 · The entry image places the O passage and flared vessel together, with source-profile signs. This is clearer for the core contrast than the B close-up.",
+      "action": "Compare the flat O profile with its passage and vessel uses; predict what changes when route or section scale changes while the outline stays fixed.",
+      "consequence": "The same outline can yield visibly different spatial forms through different construction choices.",
+      "contrast": "Source data versus parameters of the operation receiving it.",
+      "proposal": "Proposed two-branch diagram from one O outline: fixed section along a straight route, and changing section scale along another route. Keep source and route colours distinct; explicitly label the passage sill and the vessel's open end.",
+      "limit": "The snapshot does not establish arbitrary glyph support, an editable recipe, usable level passage or a closed vessel bottom."
+    },
+    {
+      "map": "Primitives_Portals",
+      "sequence": "primitives",
+      "concept": "Loops and accumulation · Comparisons and conditions · Functions: parameters, locals and return · Arithmetic, expressions and returned values",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Primitives_Portals-2.webp",
+      "caption": "Saved museum capture · The selected low-sided ring and its nested comparisons are much more legible than the aerial overview. The control readout is partly cropped.",
+      "action": "Measure a closed polygon by adding neighbour distances, then change the acceptance tolerance while keeping the polygon fixed.",
+      "consequence": "The running total includes the closing edge; the same shape can pass or fail a different stated requirement.",
+      "contrast": "Changed construction versus changed decision; accumulated length difference versus maximum visible gap.",
+      "proposal": "Proposed planar polygon inset with consecutive edges highlighted into a numeric sum, ending with the closing edge. Show one fixed gap with two tolerances and different true/false results. Label the gap as a perimeter difference, not distance from polygon to circle.",
+      "limit": "Perspective cannot measure approximation error, show a completed running total, or establish learner performance or portal transport."
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "sequence": "primitives",
+      "concept": "Variables, assignment and basic types · Lists and indexed data · Loops and accumulation · Objects, properties and references",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Primitives_Melencolia-1.webp",
+      "caption": "Saved museum capture · The court gives a clear arrangement of forms and space without pretending to be the reduced three-pyramid study.",
+      "action": "Arrange three familiar bodies from a position list; change one entry and explain which body moves.",
+      "consequence": "One placement changes while the local vertices and other bodies retain their values.",
+      "contrast": "A list of position values and a list of created body references; arranging objects versus changing their geometry.",
+      "proposal": "Proposed plan-view comparison with three numbered footprints: one changed Vector3 entry moves only the middle footprint. Keep the same shape silhouettes in both panels. A small list-to-reference correspondence can make instance creation legible without adding another room.",
+      "limit": "The court's geometry does not reveal a loop or establish that its materials, collisions and positions are those of the companion study."
+    },
+    {
+      "map": "Trans_Pre",
+      "sequence": "transformation",
+      "concept": "Elapsed time and an if/else boundary",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Pre-1.webp",
+      "caption": "Saved museum capture: pickup cubes along the corridor. Time and branch indicators are proposed.",
+      "action": "Scrub elapsed seconds from before to beyond a chosen duration; then change duration with endpoints held fixed.",
+      "consequence": "The cube moves between two marked endpoints, reaches the finish, and stays there while the clock can continue.",
+      "contrast": "Before duration: moving branch. At and after duration: holding branch. Separate height, size and turn variations.",
+      "proposal": "A separate side-view cube, seconds ruler, duration marker and two branch lamps. Show elapsed as retained state and delta as one small added interval.",
+      "limit": "A still image does not show timing, branch execution or frame-rate independence. Do not depict a sine trajectory as the existing museum motion."
+    },
+    {
+      "map": "Trans_Introduction",
+      "sequence": "transformation",
+      "concept": "An event calls a reset handler",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Introduction-1.webp",
+      "caption": "Saved museum capture: rotating crossing, destination and bank control.",
+      "action": "Advance the model to mid-crossing, press Reset once, and then advance again.",
+      "consequence": "An event pulse reaches the reset function; elapsed returns to zero and the deck's starting pose is restored. Later frame steps continue the trip.",
+      "contrast": "One reset event versus repeated frame updates. A moving deck surface versus the displacement carried to a rider.",
+      "proposal": "A small event-to-handler arrow beside three state boxes: elapsed, deck pose and rider position. Flash the event arrow once; animate frame pulses separately.",
+      "limit": "The photographed BANK/RESET control is not proof of the proposed learner timing-reset contract. Label the event/state schematic as a teaching proposal; rider transport remains supplied."
+    },
+    {
+      "map": "Trans_Translation",
+      "sequence": "transformation",
+      "concept": "Retained waypoint index and a zero-length guard",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Translation-1.webp",
+      "caption": "Saved comparison of three journeys; the index and guard demonstration is proposed.",
+      "action": "Move a marker through a four-entry route with two equal consecutive waypoints; step once at a time.",
+      "consequence": "The active leg and index are highlighted. The repeated point produces a zero-length leg, whose division is skipped before the next leg becomes active.",
+      "contrast": "One update through time versus a loop inspecting all route entries in one call; route length versus direct endpoint separation.",
+      "proposal": "Numbered route entries linked to a top-down path, current index, leg-length readout and a guard lamp. Show duplicate entries as two list slots at one spatial position.",
+      "limit": "Different drawn journeys do not establish safe zero-length handling. Keep the proposed guard display separate from the museum capture; do not skip intervening travel to make the animation simpler."
+    },
+    {
+      "map": "Trans_Rotation",
+      "sequence": "transformation",
+      "concept": "A returning position function and order of turns",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Rotation-1.webp",
+      "caption": "Saved museum rotation context. Ordered point paths are a proposed schematic.",
+      "action": "Use the same off-axis point and two named 90-degree turns; swap their order while preserving both angles and the pivot.",
+      "consequence": "Two endpoint markers land at different positions, with their intermediate position visible after each first turn.",
+      "contrast": "Turn X then Y versus Y then X; rotating an offset around a pivot versus translating the pivot.",
+      "proposal": "An isometric axis triad, one pivot, a radius line, and two colored sequential paths. Label function inputs and the returned final position.",
+      "limit": "A flat two-dimensional rotation comparison will not show general noncommutativity. Use distinct 3D axes and a nondegenerate point; some special inputs do yield equal results."
+    },
+    {
+      "map": "Trans_Scale",
+      "sequence": "transformation",
+      "concept": "Parent-child transform ownership",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Scale-1.webp",
+      "caption": "Saved scale encounter. It conveys bodily proportion; the parent/child teaching diagram is proposed.",
+      "action": "Scale a small parent group from one to two while a comparison doorway remains outside the group.",
+      "consequence": "The children's visible dimensions and separation double around the parent's origin, while the external doorway remains fixed.",
+      "contrast": "Scaling the parent versus scaling one child's own geometry; direct references still identify the same children.",
+      "proposal": "A minimal parent-to-two-children tree paired with a front view, distance brackets and a fixed doorway silhouette. Ghost the original child positions.",
+      "limit": "A dramatic camera view alone cannot identify transform ownership, player scaling or relocation. Show the schematic ownership explicitly and keep relocation separate."
+    },
+    {
+      "map": "Trans_Body",
+      "sequence": "transformation",
+      "concept": "Current boolean versus retained flag",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Body-1.webp",
+      "caption": "Saved museum comparison: an opening remains after passage.",
+      "action": "Move a visitor marker near, away, and near again, then press Reset.",
+      "consequence": "The current-near lamp follows distance immediately; the remembered-visit lamp remains on after departure until reset. A reversible block and retained opening respond differently.",
+      "contrast": "A value recomputed from the present input versus a value retained from an earlier event.",
+      "proposal": "A distance threshold ring, two explicitly named lamps and a short near/away timeline. Keep the remembered flag's history visible after the visitor leaves.",
+      "limit": "A retained opening does not expose the actual internal variable or prove it is implemented as this boolean. Label the two-flag model as a reduced teaching representation."
+    },
+    {
+      "map": "Trans_Pit",
+      "sequence": "transformation",
+      "concept": "Compose familiar rules through one shared input",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Trans_Pit-1.webp",
+      "caption": "Saved timed-room comparison. The shared-fraction airlock diagram is proposed.",
+      "action": "Choose an opening fraction and hold it at a middle value; then let a supplied occupancy input request opening or closing.",
+      "consequence": "Two leaves change position, angle and size together; a visible gap can be compared with a fixed body-width marker.",
+      "contrast": "One shared fraction driving several functions versus unrelated values that can disagree. Reset restores the chosen starting state.",
+      "proposal": "A top-down pair of leaves, a single fraction slider feeding three labeled outputs, and a clearance bracket at the narrowest shown gap.",
+      "limit": "The screenshot is of a growing obstacle, not proof of the proposed two-leaf learner model. Browser clearance is a geometric illustration and does not verify Godot collision or headset passage."
+    },
+    {
+      "map": "Array",
+      "sequence": "array_tutorial",
+      "concept": "Slots, object references and independent objects",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Array-1.webp",
+      "caption": "Saved museum array hall. Reference ownership is made visible only in the proposed diagram.",
+      "action": "Select a stored reference and move its target; switch between two references to one object and references to two separately created objects. Separately empty one occupancy slot.",
+      "consequence": "Reference arrows identify the target whose position changes. Two aliases still end at one object; independent references end at distinct objects. An emptied occupancy address stays in place.",
+      "contrast": "One object with two names versus two objects; stored occupancy versus the visible object and its reference.",
+      "proposal": "A separated data strip and scene strip joined by arrows; show alias and independent cases side by side, plus a retained empty slot with its unchanged index.",
+      "limit": "Neither repeated cubes nor a screenshot proves identity or memory aliasing. The arrows and reference experiment are proposed teaching views, not extracted live Godot memory."
+    },
+    {
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "concept": "Spatial coordinates and storage order",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_3D-1.webp",
+      "caption": "Saved labeled volume; proposed layer view explains the storage convention.",
+      "action": "Choose the unequal coordinate x=1, y=2, z=3 in the four-by-four-by-four volume, then write one value and read it back.",
+      "consequence": "One cube highlights in space while its storage trail opens as values[2][3][1]. Neighbouring cells retain their values.",
+      "contrast": "Displayed [x,y,z] versus stored [y][z][x]; changing spacing changes physical positions without changing addresses.",
+      "proposal": "An exploded layer view, three color-consistent axes and a breadcrumb from y-layer to z-row to x-entry. Use unequal indices in the proposed selection.",
+      "limit": "Equal indices can conceal a swapped-axis error. An extra index supplies an address, not flight; flight controls and row/layer construction remain supplied or explicitly explained."
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "sequence": "array_tutorial",
+      "concept": "A repeating address-to-turn rule with one exception",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Tiling_Floor-1.webp",
+      "caption": "Saved six-field museum comparison; the selected address and remainder wheel are proposed.",
+      "action": "Select an address in a four-by-four field, predict its quarter-turn from the displayed remainder rule, then set one exceptional address.",
+      "consequence": "The selected asymmetric motif rotates; expanding the field extends the same rule while preserving the named exception.",
+      "contrast": "Zero as a valid orientation versus zero as empty occupancy; changing the rule versus replacing the motif.",
+      "proposal": "An address grid beside an enlarged motif, a numeric remainder wheel 0-3, and one outlined exception. Use a deterministic rule such as (x+z)%4.",
+      "limit": "The installed fields are raster images. Draw cell outlines as a browser explanation, not as evidence of per-tile nodes, collision bodies or stored occupancy."
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "sequence": "array_tutorial",
+      "concept": "One image, another receiver",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Tiling_Walls-1.webp",
+      "caption": "Saved patterned-wall encounter; source and carrier indicators are proposed.",
+      "action": "First rotate the pattern inside a fixed wall; then rotate the wall carrying the unchanged pattern.",
+      "consequence": "Pattern orientation changes in the first comparison while the wall outline stays fixed. In the second, wall outline and passage direction change together.",
+      "contrast": "Image coordinates versus the transform of the physical carrier; shared source versus apparent size at different viewing distances.",
+      "proposal": "Two small top views with separate texture-arrow and wall-outline indicators. Keep the same source-image swatch visible beside both.",
+      "limit": "A photograph cannot prove shared image identity or collision motion. The existing floor/wall generator does not automatically transfer a learner's edited image; that assignment remains explicit and proposed."
+    },
+    {
+      "map": "Tutorial_Disco",
+      "sequence": "array_tutorial",
+      "concept": "A retained boolean score read by a clock",
+      "image": "../2026-10-04-museum-tutorial-storyboards/images/Tutorial_Disco-1.webp",
+      "caption": "Saved museum floor only. The independent score/playhead diagram is proposed.",
+      "action": "Toggle one step in a short score and advance the playhead; then change tempo without changing any stored steps.",
+      "consequence": "The playhead visits each address. True entries emit a momentary trigger pulse; false entries emit none. Tempo changes the spacing of visits while the score remains.",
+      "contrast": "Stored score versus present playhead versus triggered event; a false entry means no new trigger, not stop an already ringing sound.",
+      "proposal": "A clearly separate eight-step browser score, moving cursor, trigger lamp and event timeline. A play/step/reset control can expose retained index and elapsed time.",
+      "limit": "Do not infer sequencer state from the floor screenshot, call its lit strip a recorded score, or imply footsteps recorded it. The proposed eight-step diagram is smaller than the installed four-track, sixteen-step instrument; its twelve-column floor is not the score."
+    },
+    {
+      "map": "Color_Context_Placed",
+      "sequence": "color",
+      "concept": "A list entry reaches a named receiver",
+      "image": "../2026-09-23-colour-gathering/four-colour-rules.png",
+      "caption": "Existing composite: five forms under four supplied colour rules; distinct specimens.",
+      "action": "Look across the four existing stacks. In the proposed small study, change one palette entry or its selection rule while keeping the part list and positions fixed.",
+      "consequence": "The same kinds of forms belong to different colour groups without needing another geometry build.",
+      "contrast": "Which part moved, and which only received another Color value? Start with index selection; shape categories can follow.",
+      "proposal": "Show five numbered part references, a short palette list and arrows from selected entries to named material receivers. One changed arrow/value is highlighted; coordinates remain printed and unchanged. Label this an explanatory diagram, not installed controls.",
+      "limit": "The pictured stacks are different specimens and viewpoints, not a same-object before/after. Their lit appearances cannot prove equal numerical colours, an executed loop or a learner-editable palette."
+    },
+    {
+      "map": "Color_Flashlight",
+      "sequence": "color",
+      "concept": "An object property changes a condition of appearance",
+      "image": "../2026-09-28-white-room-and-apertures/white-room-pair.png",
+      "caption": "Existing paired capture: same room/view under rose and cyan light.",
+      "action": "Aim an existing handheld lamp aside and back; separately use the existing companion edit to change the fixed room light’s colour.",
+      "consequence": "The receiving surface changes appearance even though its material colour and geometry have not been repainted.",
+      "contrast": "Hold viewpoint/material fixed for a lamp-value comparison; hold lamp value fixed for an aim comparison. These are separate beats.",
+      "proposal": "Draw one retained light reference with light_color and orientation as separate inputs, plus an unchanged receiving material. Reuse the prior paired photograph; do not add a new lamp or fictional colour-control panel.",
+      "limit": "The existing rose/cyan pair records one view under two light states. Pixels alone do not identify which property changed or verify the material stayed fixed; pair it with the named assignment/source."
+    },
+    {
+      "map": "Color_Nails",
+      "sequence": "color",
+      "concept": "Parameters enter a function; a Color value returns",
+      "image": "../2026-09-23-nails-the-choosing-hand/one-channel-two-choices.png",
+      "caption": "Existing comparison: R and G stay labelled; B changes. Skin and geometry are held.",
+      "action": "Move mainly along one axis of the existing RGB chooser. Proposed authored function: give a local point and positive box dimensions, then explicitly assign its returned Color to one preview.",
+      "consequence": "One numeric channel changes while the same nail surfaces remain. The giant and petite hands can receive the same value at different scales.",
+      "contrast": "Keep the returned nail Color fixed while changing rendered skin or view. Equal RGB triples do not guarantee equal perceived colour, and equally easy rendered edits do not make skin and polish equivalent lived choices.",
+      "proposal": "Use three panels: local point and box dimensions; colour_at(...) with a returned numeric RGB chip; a separately labelled albedo_color assignment to the preview. Mark the preview binding as proposed. No implication that returning a value automatically paints every hand.",
+      "limit": "A still cannot show function execution, scope, the called receiver, or equality of stored values. The labelled channel comparison is stronger than inferring numerical change from pixels."
+    },
+    {
+      "map": "Color_Rainbow",
+      "sequence": "color",
+      "concept": "A nonempty list partitions a fixed span",
+      "image": "../2026-09-23-rainbow-room-for-another/four-arrangements.png",
+      "caption": "Existing four-state museum composite; supplied palettes also recolour the steps.",
+      "action": "Use RE-DIVIDE to compare the installed six, seven, forty-eight and two band arrangements. Looking and celebrating remain sufficient; optional making substitutes a chosen palette.",
+      "consequence": "More entries divide the same band span into narrower pieces while the opening remains.",
+      "contrast": "Keep radius and total span fixed; compare band count with individual width. Forty-eight discrete samples can look continuous from a distance.",
+      "proposal": "Place a numbered palette beside the same fixed-width bracket split into 2, 6 and 7 parts; label width/count. State count > 0 rather than hiding division by zero. No new compulsory exercise or optical spectrum simulation.",
+      "limit": "The composite makes band count and aperture comparison visible; it does not prove the loop, division or the proposed custom-palette input. Celebration is not unlocked by code completion."
+    },
+    {
+      "map": "Color_Pillar",
+      "sequence": "color",
+      "concept": "The same function contract accepts a new rule",
+      "image": "../2026-09-28-pillar-height-and-value/sampler-50.png",
+      "caption": "Existing close view: HSV, RGB and represented Y can be read together.",
+      "action": "Move the existing sample card across the field, then vary height with horizontal position fixed. Read HSV, returned RGB and represented field height together.",
+      "consequence": "The card changes its sample between the displayed columns; vertical movement changes value through the supplied height adapter.",
+      "contrast": "Nails maps X/Y/Z directly into bounded RGB; Pillar maps X/Z/represented Y into HSV and then converts. At value zero, different addresses can return the same black.",
+      "proposal": "Show card-local Y 0.65–1.85 m → represented Y 0.46–4.60 m → hsv_at → Color. Keep coordinate adaptation outside the colour function box. A numeric triple sits beside, not inside, the rendered swatch.",
+      "limit": "sampler-50 has readable values; carried-colour is too distant to explain the mapping alone. A stopped card keeps its latest sample because its position stops changing, not because a held/released gate freezes it. The photograph proves no automatic transfer to Grid."
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "sequence": "color",
+      "concept": "Stored assignment, object state and a first authored class",
+      "image": "../2026-09-28-grid-a-colour-left/an-address-keeps-colour.png",
+      "caption": "Existing four-frame sequence: write, look elsewhere, return, apply RULE.",
+      "action": "In the installed room, write a colour, select another address, return, then run RULE. Proposed class comparison uses two existing floor-cell receivers with a new, explicitly identified Palette adapter.",
+      "consequence": "The edit stays at its address while attention moves; RULE overwrites it. In the proposed extension, advancing one Palette instance changes only its own selected index and the receiver explicitly refreshed from it.",
+      "contrast": "Selection versus write; stored value versus recomputation; one class versus two instances; two independent instances versus two references to one instance. Keep these as separate visual beats.",
+      "proposal": "Use the dedicated palette_class plan below. Draw state boxes beside the real room capture; never paste pretend new controls into a museum photograph.",
+      "limit": "The current four-frame composite documents selection, return and overwrite, not Palette instances, history versions, or save/load persistence. Existing COLOUR cycles fixed INKS and there is no custom learner-colour input."
+    },
+    {
+      "map": "Color_Paint",
+      "sequence": "color",
+      "concept": "A method call deposits into an evolving image",
+      "image": "captures/Color_Paint.png",
+      "caption": "Existing native capture comparing the coverage of two passes.",
+      "action": "Compare a quick pass with dwelling, using the existing cans. The making proposal changes one rate or amplitude of the existing automatic path; it supplies no second brush.",
+      "consequence": "Coverage accumulates differently, and the image continues to spread and fade after deposition.",
+      "contrast": "Grid replaces one stored entry. Paint contributes through draw_spray to an evolving texture; the current picture is not a lossless list of strokes.",
+      "proposal": "Show manual hit and automatic path as two callers feeding the same draw_spray operation, then successive image states. Mark which path parameter is the proposed learner edit. Keep shader and hit conversion supplied.",
+      "limit": "The stripe comparison is a captured consequence, not proof of timing by itself. A single image cannot establish decay, invocation count, shared implementation or retained history; pair claims with the recorded sequence/source."
+    },
+    {
+      "map": "Color_Walls",
+      "sequence": "color",
+      "concept": "A changed image need not change a boundary",
+      "image": "../2026-09-28-walls-a-view-from-inside/inside-glass.png",
+      "caption": "Existing inside view in transparent/filter mode.",
+      "action": "Use FILTER and OPAQUE, keep the view for comparison, then walk the same route around the panes.",
+      "consequence": "Furniture becomes hidden or visible while the openings keep their positions.",
+      "contrast": "Alpha/material appearance versus geometry and collision; a visible gap versus a route actually traversed. Palette and arrangement remain separate choices.",
+      "proposal": "Pair the existing inside-glass/inside-opaque captures. Beside them repeat the same simple pane/opening plan with one marked walking route; label the route a proposed observation unless accompanied by recorded traversal evidence.",
+      "limit": "The pair shows visibility changes. It cannot establish traversability, unchanged collision, comfort or privacy outcomes; those need movement/source evidence. Do not infer physical opacity from a rendered colour value."
+    }
+  ],
+  "coverage": [
+    {
+      "concept": "Execution and calls",
+      "demo": "state"
+    },
+    {
+      "concept": "Variables, assignment and basic types",
+      "demo": "point"
+    },
+    {
+      "concept": "Arithmetic, expressions and returned values",
+      "demo": "point"
+    },
+    {
+      "concept": "Comparisons and conditions",
+      "demo": "trace"
+    },
+    {
+      "concept": "Lists and indexed data",
+      "demo": "array"
+    },
+    {
+      "concept": "Loops and accumulation",
+      "demo": "trace"
+    },
+    {
+      "concept": "Functions: parameters, locals and return",
+      "demo": "function"
+    },
+    {
+      "concept": "Scope and retained state",
+      "demo": "state"
+    },
+    {
+      "concept": "Objects, properties and references",
+      "demo": "class"
+    },
+    {
+      "concept": "An authored class with state and methods",
+      "demo": "class"
+    },
+    {
+      "concept": "Events and input",
+      "demo": "state"
+    },
+    {
+      "concept": "Observation and debugging",
+      "demo": "point"
+    }
+  ]
+}

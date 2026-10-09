@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "learner_behavior_checks": 70,
+  "expanded_experiment_regressions": 36,
+  "museum_checks": 259,
+  "museum_halls": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "checks": 19,
+      "passed": true
+    },
+    {
+      "map": "VFM_05_Launch",
+      "checks": 25,
+      "passed": true
+    },
+    {
+      "map": "VFM_03_Motion",
+      "checks": 20,
+      "passed": true
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "checks": 24,
+      "passed": true
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "checks": 22,
+      "passed": true
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "checks": 24,
+      "passed": true
+    },
+    {
+      "map": "Change_Choreography",
+      "checks": 18,
+      "passed": true
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "checks": 24,
+      "passed": true
+    },
+    {
+      "map": "VFM_09_Legs",
+      "checks": 20,
+      "passed": true
+    },
+    {
+      "map": "VFM_08_Arena",
+      "checks": 27,
+      "passed": true
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "checks": 36,
+      "passed": true
+    }
+  ],
+  "printed_code_blocks": 12,
+  "scope": "Godot 4.6 + Jolt; actual museum scenes, source-to-text equality, supplied XRTools controller poses. Physical VR playtest not performed. The HTML browser preview was blocked for file URLs.",
+  "sources": {
+    "doc/book/studies/forces-point-lineage/01_vectors.gd": "3bb91ed42038bc35f9a09d5071b2d4807b9af6674381d62b8ca351970e3983c1",
+    "doc/book/studies/forces-point-lineage/02_launch.gd": "de7bba05537b818d5276625174ac15159d0ff2de4b614c104d941663c8b8af87",
+    "doc/book/studies/forces-point-lineage/03_mass.gd": "14f1bb2aa82b29b9e6d34894e5c613764789ee89a4a86e18485c277f6fa4ad18",
+    "doc/book/studies/forces-point-lineage/04_field.gd": "24a1789d3407a0700ed3c03c9002ccef6e5ad148e04b16fee15dfcf8b75b23ea",
+    "doc/book/studies/forces-point-lineage/05_drag.gd": "8edd160b52bd8b7415400377f5a1d1ae1ce12537df5c5f0940d7be3fb810a53f",
+    "doc/book/studies/forces-point-lineage/06_spring.gd": "90864f79743cd0beada5e927ce1d64a93668d61eb337520c9afb090eb3bfb13b",
+    "doc/book/studies/forces-point-lineage/07_phase.gd": "af05883c700799c7e760cd311e2ac8c01e5ec9c31e4eb57934db83e535da0092",
+    "doc/book/studies/forces-point-lineage/08_attraction.gd": "d71814cc6329f233972f1a67d9d8b1ef930f490fee88c0dac7bf88b829b9c239",
+    "doc/book/studies/forces-point-lineage/09_support.gd": "2b678eb570a0d6f980408b46c083264d0e4467cc30b45d36fb0378ec1fa1780d",
+    "doc/book/studies/forces-point-lineage/10_impulse.gd": "5d70a7e6dacd991a8e6fd3a59cde3221e16c27563abfd8b0027691dc19acb6d7",
+    "doc/book/studies/forces-point-lineage/11_flight.gd": "b4f4f0e97e6d86a14715995ab44df23fccc1595b39db9129fbcb3a033abafc64",
+    "doc/book/studies/forces-point-lineage/free_point.gd": "abdfa49efdec65af1307e8c072830950e50c06f12d8261afc48e18020e243ade",
+    "doc/book/studies/forces-point-lineage/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/studies/forces-point-lineage/study.gd": "9c9c5594c83b88e34bcfb47f837023c31741039e3242ebf8bd8694ba2c1610e3",
+    "doc/book/studies/forces-point-lineage/thrust_point.gd": "521ed2f6493d20954405dc72d6977390ea1cb1b0b7d7d0e7d6c58178a608f18d",
+    "commons/artifacts/force_play/encounter.gd": "5223f352ad6cdbb1de2479b2d4b7697f969ba01e14eaaad6c909f6a5b30518f8",
+    "commons/artifacts/force_halls/curation.json": "648107d89c92b3f77799ac573fa4b25cf265578920ec4e987ae59e75d88cbe8a",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md": "1d202dafea0f869130ba64fc15792474f2e5efb81e0378ffb976d2fd066bf716",
+    "commons/maps/VFM_05_Launch/tutorial.md": "1551ac28017ab30b389aa3d4ae9402af7c0a6b972fc9453d0ffdc77cda238432",
+    "commons/maps/VFM_03_Motion/tutorial.md": "1d40ddafbb2f38f73c19d0a573ceca93e2c76e9836d476ac5f6d4175d10d684a",
+    "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md": "5b1c228de69d116a8f05540a4ed4ce882534b59c99309dd82dd07e919d49ed2f",
+    "commons/maps/Vectors_Act4a_KineticForces/tutorial.md": "62633f8e2bad408e1bd11e527707cc0bc86b53088dc075d27309f22162d50cae",
+    "commons/maps/Vectors_Act4b_Oscillation/tutorial.md": "30392bdc98d51ee8b2226047b2167a8919b6f67f4f152d74e455ad155e429522",
+    "commons/maps/Change_Choreography/tutorial.md": "4295d1d9d56d772cd8adc7bb99aa9aa0a8e6a517ea613d180278bcf4c7e7c113",
+    "commons/maps/VFM_07_Gravity/tutorial.md": "7ddff6a568afd12e066aa41a4c9ca579ffa30af49b5900c124b4969153c892a1",
+    "commons/maps/VFM_09_Legs/tutorial.md": "ba4efb838c4c70d418e2ba1958898d6db9ff063521f1a2d4262ee7ce6e1b4675",
+    "commons/maps/VFM_08_Arena/tutorial.md": "0dc0c65e1872f3600de4215073c6498b5f9cf9cfa32120e9fdf090d8800487c1",
+    "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md": "20b8a51c69797f41ffc44918fd434236591ac5c467f4d884bac2d7d8aa2c6ff9"
+  }
+}

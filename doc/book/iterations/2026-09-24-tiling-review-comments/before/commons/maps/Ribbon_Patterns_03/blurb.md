@@ -1,0 +1,1 @@
+What travels when a pattern becomes a garment? Edit one small source, follow it across a wall and a skirt, then save it and meet your dressed body in the mirror. A visible hole may still stop you. A shared recipe may arrive differently on four walking bodies.

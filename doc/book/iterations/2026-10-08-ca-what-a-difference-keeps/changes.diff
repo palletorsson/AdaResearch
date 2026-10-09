@@ -1,0 +1,701 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,21 +1,368 @@
+-# Follow a difference before naming a regime
+-
+-**Learning elements — proposed focus**
+-
+-_The labels below set the revision focus; the existing lesson still needs alignment._
+-
+-- Paired-state experiments
+-- Difference measures
+-- Numerical storage
+-
+-Primary: **self_organization_ca**, configured as the paired difference study. The four rear works remain secondary; their presence is not a claim that they demonstrate one shared critical point.
+-
+-1. Inspect the two volumes and their selected spatial slice. STEP once; REPLAY and repeat.
+-2. Toggle ONE CELL off. The fields should agree even with DRIVE enabled. This checks the comparison before interpreting a difference.
+-3. Set DRIVE to zero, PULL to 0.25, SEED to UNIFORM and ONE CELL on. In INTEGER storage, STEP once.
+-4. Switch STORE to FRACTIONAL, which resets the same beginning. STEP: twenty-seven addresses differ; the maximum is 0.75.
+-5. Continue to G20. Read the count, maximum and printed display gain together. Try Z SLICE without advancing time.
+-6. Set PULL to zero and replay with DRIVE zero. The local intervention persists without spreading. Discuss whether stillness can retain something that smoothing erases.
+-7. Return to the scattered beginning and add disturbance. Keep the forcing shared between A and B. Describe the observed history before using “chaos”.
+-
+-The floor carries an image of difference on fixed support. Body movement does not change this model. In the next hall, Fractal_Recursion, an explicit recursive call supplies a different way of making large form from a compact instruction.
++# What a difference keeps
++
++## Learning elements
++
++- Copy a beginning and change one address.
++- Keep the update and forcing identical in two runs.
++- Measure how many addresses differ and how large the difference is.
++- Compare integer truncation with retained fractional values.
++- Select a spatial section without advancing time.
++- Read display gain separately from the values it makes visible.
++
++## Bring the comparison forward
++
++In the previous room, a changed seed altered the row history while the copied pyramid stayed fixed. Here both volumes use the same procedure. We change one starting value in B and follow what happens to that difference.
++
++Begin in the existing paired study. Set SEED to UNIFORM, DRIVE to zero, PULL to 0.25 and ONE CELL on. Both volumes start at four, except B's centre, which starts at five. Their update counter is still zero.
++
++Walk between the volumes. At Z=5, the selected section contains that centre; at Z=6, it does not. The floor and wall can lose sight of a difference without the arrays losing it. Take the familiar black point beside the console to choose the section by hand instead. While it is held, the hand takes priority. Release it to resume walking as the reader. Its trigger advances one update.
++
++## Reconstruct this experiment
++
++Keep the Day Zero museum and save the previous study. Put `paired.gd`, `difference.gd` and your unchanged `point_body.gd` together. Attach `difference.gd` to the existing `PointStudy`, at unit scale. Approach from positive Z; leave about 3.2 × 2.5 metres clear. The existing museum supplies the player, camera, lighting and XR Tools. Every study mesh, material, label and collider is created below.
++
++The miniature keeps both complete 11³ volumes and their three section images. Move the held point forward and back along the middle rail to select Z. Trigger or Enter advances one update. It starts with the quiet, uniform, integer comparison above; the full exhibit initially uses its scattered, driven beginning. The miniature uses keyboard controls for parameters. The installation retains its nearby VR buttons and walking reader, plus the enlarged difference floor.
++
++## Copy, then intervene
++
++`a` and `b` are packed arrays of 64-bit floating-point numbers. One index represents `x + N*y + N*N*z`. `b = a.duplicate()` makes an independent copy. Only then does B gain one at `site`.
++
++For each address we keep a list of valid neighbours. This is the 26-neighbour volume from the second CA hall, with positions outside the box omitted. A corner has seven neighbours. It does not wrap to the opposite side.
++
++One update keeps three quarters of the present value and adds one quarter of the neighbours' average. More generally, `pull` selects that fraction. Both next arrays are completed from the old arrays before either becomes the present.
++
++The supplied `sample` function returns a reproducible forcing value for an address and generation. A and B receive the **same** value. It is a finite arithmetic schedule, not a claim of independent random samples. Its number recipe is supplied so this lesson can focus on a fair comparison.
++
++`integer_storage` describes what answers we retain, not the array's machine type. In that mode, `int(value)` discards the fractional part before the result returns to the floating-point array. Fractional mode retains that part, subject to finite floating-point precision. Both modes clip answers to the range 0–9.
++
++## Complete paired model — paired.gd
++
++```gdscript
++extends RefCounted
++const N := 11
++const COUNT := N * N * N
++const LIMIT := 100
++var site := Vector3i(5, 5, 5)
++var a := PackedFloat64Array()
++var b := PackedFloat64Array()
++var neighbours: Array[PackedInt32Array] = []
++var tick := 0
++var pull := 0.25
++var drive := 0.0
++var integer_storage := true
++var scattered := false
++var changed := true
++
++func _init() -> void:
++	for z in N:
++		for y in N:
++			for x in N:
++				var ns := PackedInt32Array()
++				for dz in range(-1, 2):
++					for dy in range(-1, 2):
++						for dx in range(-1, 2):
++							if dx == 0 and dy == 0 and dz == 0:
++								continue
++							var p := Vector3i(x + dx, y + dy, z + dz)
++							if p.x >= 0 and p.x < N and p.y >= 0 and p.y < N and p.z >= 0 and p.z < N:
++								ns.append(index(p))
++				neighbours.append(ns)
++	reset()
++
++func index(p: Vector3i) -> int:
++	return p.x + N * p.y + N * N * p.z
++
++func reset() -> void:
++	tick = 0
++	a.resize(COUNT)
++	for i in COUNT:
++		a[i] = float((i * 73 + i * i * 19 + 17) % 10) if scattered else 4.0
++	b = a.duplicate()
++	if changed:
++		b[index(site)] += 1.0
++
++func sample(i: int, generation: int) -> float:
++	var h: int = ((i + 1) * 73856093 + (generation + 1) * 19349663 + 83492791) % 2147483647
++	h = (h * 48271) % 2147483647
++	return float(h % 2001) / 1000.0 - 1.0
++
++func step() -> void:
++	if tick >= LIMIT:
++		return
++	var na := PackedFloat64Array()
++	var nb := PackedFloat64Array()
++	na.resize(COUNT)
++	nb.resize(COUNT)
++	for i in COUNT:
++		var sa := 0.0
++		var sb := 0.0
++		for j in neighbours[i]:
++			sa += a[j]
++			sb += b[j]
++		var forcing := drive * sample(i, tick)
++		var va := clampf(a[i] * (1.0 - pull) + sa / neighbours[i].size() * pull + forcing, 0.0, 9.0)
++		var vb := clampf(b[i] * (1.0 - pull) + sb / neighbours[i].size() * pull + forcing, 0.0, 9.0)
++		na[i] = float(int(va)) if integer_storage else va
++		nb[i] = float(int(vb)) if integer_storage else vb
++	a = na
++	b = nb
++	tick += 1
++
++func report() -> Dictionary:
++	var count := 0
++	var maximum := 0.0
++	var total := 0.0
++	for i in COUNT:
++		var difference := absf(a[i] - b[i])
++		maximum = maxf(maximum, difference)
++		total += difference
++		if difference > 0.000001:
++			count += 1
++	return {"count": count, "maximum": maximum, "mean": total / COUNT}
++```
++
++## Measure before judging the picture
++
++`report` subtracts the arrays address by address. The count includes only absolute differences greater than 0.000001. Maximum and mean use every stored difference, including those below that threshold. These quantities answer different questions: how widely detectable difference is distributed, how large the largest difference is, and its average over the whole volume.
++
++The A and B palettes use the same fixed 0–9 scale. The third image magnifies absolute difference by `gain = 1 / max(maximum, 0.000001)`. Gain changes only the image. It is printed beside the measurements because a bright picture can accompany a fading difference.
++
++`select_slice` changes an address in the receiver, not a generation in the model. At each selected Z, X and Y remain spatial coordinates. Gold frames locate that plane in both volumes. Moving the point alone changes neither array; its trigger calls `step`. On release it parks at the selected slice.
++
++## Complete study — difference.gd
++
++Read `step`, `select_slice` and `paint` first. `make_display` supplies the staging. As before, the model and its display have separate jobs.
++
++```gdscript
++extends Node3D
++const Pair = preload("paired.gd")
++const Point = preload("point_body.gd")
++const PITCH := 0.085
++var model = Pair.new()
++var slice_z := 5
++var gain := 1.0
++var point: Node3D
++var reading: Label3D
++var textures: Array[ImageTexture] = []
++var volumes: Array[MultiMesh] = []
++var frames: Array[Node3D] = []
++
++func _ready() -> void:
++	make_display()
++	point = Point.new()
++	add_child(point)
++	point.action_pressed.connect(func(_p): step())
++	park()
++	paint()
++
++func step() -> void:
++	model.step()
++	paint()
++
++func select_slice(value: int) -> void:
++	var selected := clampi(value, 0, Pair.N - 1)
++	if selected != slice_z:
++		slice_z = selected
++		paint()
++
++func _physics_process(_delta: float) -> void:
++	if point.held():
++		select_slice(roundi(to_local(point.global_position).z / PITCH + 5.0))
++	else:
++		park()
++
++func park() -> void:
++	point.position = Vector3(0, 1.24, (slice_z - 5) * PITCH)
++
++func _unhandled_key_input(event: InputEvent) -> void:
++	if not event is InputEventKey or not event.pressed or event.echo:
++		return
++	match event.keycode:
++		KEY_ENTER:
++			step()
++			return
++		KEY_R: pass
++		KEY_I: model.integer_storage = not model.integer_storage
++		KEY_C: model.changed = not model.changed
++		KEY_P: model.pull = 0.0 if model.pull > 0.0 else 0.25
++		KEY_N: model.drive = 1.0 if model.drive == 0.0 else 0.0
++		KEY_B: model.scattered = not model.scattered
++		_: return
++	model.reset()
++	paint()
++
++func tint(value: float) -> Color:
++	return Color("182c42").lerp(Color("efc0d6"), value / 9.0)
++
++func paint() -> void:
++	var result: Dictionary = model.report()
++	gain = 1.0 / maxf(result.maximum, 0.000001)
++	for side in 3:
++		var img := Image.create(Pair.N, Pair.N, false, Image.FORMAT_RGBA8)
++		for y in Pair.N:
++			for x in Pair.N:
++				var i: int = model.index(Vector3i(x, y, slice_z))
++				var colour := tint(model.a[i] if side == 0 else model.b[i])
++				if side == 2:
++					colour = Color("112c31").lerp(Color("ffd18e"), absf(model.a[i] - model.b[i]) * gain)
++				img.set_pixel(x, Pair.N - 1 - y, colour)
++		textures[side].update(img)
++	for side in 2:
++		var values: PackedFloat64Array = model.a if side == 0 else model.b
++		for i in Pair.COUNT:
++			volumes[side].set_instance_color(i, tint(values[i]))
++		frames[side].position.z = (slice_z - 5) * PITCH
++	reading.text = "UPDATE %d / Z SLICE %d\n%s / %s / ONE CELL %s\nPULL %.2f / DRIVE %.1f\nDIFFERENT %d (>0.000001)\nMAX %.8f / MEAN %.8f / GAIN x%.1f" % [model.tick, slice_z,
++		"INTEGER" if model.integer_storage else "FRACTIONAL", "SCATTERED" if model.scattered else "UNIFORM",
++		"ON" if model.changed else "OFF", model.pull, model.drive, result.count, result.maximum, result.mean, gain]
++
++func box(parent: Node3D, size: Vector3, at: Vector3, colour: Color, solid: bool = false) -> void:
++	var surface := MeshInstance3D.new()
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	surface.mesh = mesh
++	surface.position = at
++	var material := StandardMaterial3D.new()
++	material.albedo_color = colour
++	surface.material_override = material
++	parent.add_child(surface)
++	if solid:
++		var body := StaticBody3D.new()
++		var boundary := CollisionShape3D.new()
++		var shape := BoxShape3D.new()
++		shape.size = size
++		boundary.shape = shape
++		surface.add_child(body)
++		body.add_child(boundary)
++
++func label(words: String, at: Vector3, pixel: float = 0.0014) -> Label3D:
++	var result := Label3D.new()
++	result.text = words
++	result.position = at
++	result.font_size = 32
++	result.pixel_size = pixel
++	add_child(result)
++	return result
++
++func make_display() -> void:
++	box(self, Vector3(2.95, 0.08, 1.5), Vector3(0, 1.0, 0), Color("e4dfd4"), true)
++	for side in 2:
++		var cx := -0.85 if side == 0 else 0.85
++		box(self, Vector3(0.6, 0.96, 0.6), Vector3(cx, 0.48, 0), Color("e4dfd4"))
++		var cells := MultiMesh.new()
++		cells.transform_format = MultiMesh.TRANSFORM_3D
++		cells.use_colors = true
++		var cube := BoxMesh.new()
++		cube.size = Vector3.ONE * 0.03
++		cells.mesh = cube
++		cells.instance_count = Pair.COUNT
++		for z in Pair.N:
++			for y in Pair.N:
++				for x in Pair.N:
++					cells.set_instance_transform(model.index(Vector3i(x, y, z)), Transform3D(Basis.IDENTITY, Vector3(cx + (x - 5) * PITCH, 1.12 + y * PITCH, (z - 5) * PITCH)))
++		var instance := MultiMeshInstance3D.new()
++		instance.multimesh = cells
++		var material := StandardMaterial3D.new()
++		material.vertex_color_use_as_albedo = true
++		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		instance.material_override = material
++		add_child(instance)
++		volumes.append(cells)
++		var frame := Node3D.new()
++		frame.position = Vector3(cx, 1.545, 0)
++		add_child(frame)
++		frames.append(frame)
++		for sign_ in [-1, 1]:
++			box(frame, Vector3(0.012, 0.94, 0.012), Vector3(sign_ * 0.47, 0, 0), Color("ffd18e"))
++			box(frame, Vector3(0.94, 0.012, 0.012), Vector3(0, sign_ * 0.47, 0), Color("ffd18e"))
++	for side in 3:
++		var cx := (side - 1) * 0.85
++		var img := Image.create(Pair.N, Pair.N, false, Image.FORMAT_RGBA8)
++		var texture := ImageTexture.create_from_image(img)
++		textures.append(texture)
++		box(self, Vector3(0.74, 0.74, 0.035), Vector3(cx, 2.5, -0.8), Color("b59a79"))
++		var view := MeshInstance3D.new()
++		var quad := QuadMesh.new()
++		quad.size = Vector2(0.7, 0.7)
++		view.mesh = quad
++		view.position = Vector3(cx, 2.5, -0.777)
++		var material := StandardMaterial3D.new()
++		material.albedo_texture = texture
++		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
++		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		view.material_override = material
++		add_child(view)
++		label(["A", "B", "|A-B| x GAIN"][side], Vector3(cx, 2.96, -0.77))
++	box(self, Vector3(0.009, 0.009, 0.94), Vector3(0, 1.08, 0), Color("ffd18e"))
++	box(self, Vector3(2.6, 0.47, 0.04), Vector3(0, 0.77, 0.78), Color("172937"))
++	reading = label("", Vector3(0, 0.77, 0.807), 0.001)
++	label("ENTER step / R replay / I storage / C one cell\nP pull / N drive / B seed", Vector3(0, 0.43, 0.81), 0.0009)
++```
++
++## Carried object — point_body.gd
++
++Keep your existing PointBody. Its unchanged code is included so the three-file reconstruction is complete.
++
++```gdscript
++extends XRToolsPickable
++## Point Lines' frozen point construction, made smaller for the hand model.
++var tint := Color("25212a")
++var desktop_pointer: WeakRef
++
++func _init() -> void:
++	freeze = true
++	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
++	release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
++	collision_layer = 4
++	collision_mask = 0
++	var surface := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.085
++	sphere.height = 0.17
++	sphere.radial_segments = 24
++	sphere.rings = 12
++	surface.mesh = sphere
++	add_child(surface)
++	var boundary := CollisionShape3D.new()
++	var shape := SphereShape3D.new()
++	shape.radius = 0.085
++	boundary.shape = shape
++	add_child(boundary)
++
++func _ready() -> void:
++	super._ready()
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = tint
++	finish.roughness = 0.24
++	get_child(0).material_override = finish
++
++func held() -> bool:
++	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
++
++func on_desktop_grab(pointer: Node) -> void:
++	desktop_pointer = weakref(pointer)
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_pointer = null
++```
++
++## Make three predictions
++
++**First, keep INTEGER, UNIFORM, PULL 0.25 and DRIVE 0.** At the changed centre, the calculated answer is 4.75. Integer storage keeps four. Its neighbours' small increases also lose their fractions. After one update the count and maximum difference are zero. Both complete arrays agree.
++
++**Now press I.** This selects FRACTIONAL and replays the same beginning. After one update, predict a smaller peak spread over more addresses: the centre differs by 0.75; each of its 26 neighbours differs by 0.25/26. The count is 27. Continue to update 20. Read the maximum beside the gain before calling the larger lit region an amplification.
++
++**Press P to set PULL to zero.** With DRIVE still zero, this replays the beginning and then preserves the original difference at one address through every step. An unchanged picture can retain something that the smoothing update distributes.
++
++Press C to remove the one-cell intervention. A and B should agree. Press N to enable the shared drive; they should still agree. This is a control for the comparison. Press B to switch to the supplied scattered beginning. C, N, B, I and P all replay both arrays after changing their setting. R replays while preserving settings. None changes the selected slice. The model stops at 100 updates.
++
++## Make an independent change
++
++In `paired.gd`, change `site` to `Vector3i(0, 0, 0)`. Run in UNIFORM, FRACTIONAL mode with PULL 0.25 and DRIVE zero. Select Z=0 to see the beginning. Before STEP, predict which addresses can receive it.
++
++After one step, **eight** addresses differ: the corner itself and its seven valid neighbours. The corner difference is still 0.75. A receiving cell averages its own neighbour list: the adjacent edge cell (1,0,0) receives 0.25/11; the interior cell (1,1,1) receives 0.25/26. There is no wrap to the far face. The changed location exposes a boundary choice hidden by the central example. The scaffold expects `site` inside 0–10 on each axis; its +1 experiment is compared from the uniform beginning.
++
++Explain three different disappearances: moving to a slice that misses the changed address, integer storage discarding the difference, and a stored difference falling below the count's threshold. They require different evidence.
++
++This finishes the cellular-automata passage with a testable comparison. In the unforced fractional case, averaging spreads and reduces the peak; brightness alone does not establish chaos. Fractals returns to explicit repetition: what changes when the procedure calls itself instead of waiting for neighbouring states to exchange values?
+--- before/final.md
++++ after/final.md
+@@ -8,30 +8,21 @@
+ 
+ Before taking the first update, stop at five. The changed address appears in the section. Walk to six and it disappears from that picture. Come back. It is still there. We have moved past the difference, not removed it. An empty section could have been all we saw of this volume.
+ 
+-![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/ca-walking-slice.png)
++![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/one-difference.png)
++
++The black point waits beside the console. Take it and choose a section with your hand. The walking reader yields while you hold it; release returns that choice to your body. The same sphere has carried a mark, planted a seed and inspected a row. Here it changes what we can see without changing what is there. Its trigger lets the next update arrive.
+ 
+ Return to the console. Press STEP. Follow the lit difference for a few updates, then use REPLAY to meet the same beginning again. ONE CELL removes the intervention, or restores it. With the intervention removed, both runs should agree through every update, even when the disturbance is loud. What would it mean if they did not?
+ 
+ The two runs receive the same forcing value at the same address and update. This is a deliberately shared, reproducible schedule. Without that agreement, a second source of difference would enter while we were trying to follow the first. The comparison makes a small experimental world inside a larger one whose clock continues.
+ 
+-Here is the local instruction, before storage:
+-
+-```gdscript
+-var drive:float=disturbance*sample(i,tick)
+-var va:float=clampf(a[i]*(1.0-coupling)+sa/neighbours[i].size()*coupling+drive,0.0,9.0)
+-```
+-
+-`sa` is the sum of A's valid neighbours. Interior cells have twenty-six; the corner has seven. Every cell reads the previous volume. PULL changes how far it moves toward that average. DRIVE changes the size of the added disturbance. The controls reset both runs, keeping the comparison legible. One gesture no longer changes both tendencies at once.
++Each cell keeps part of its present value and moves the remainder toward its neighbours' average. Both volumes receive the same added disturbance, then their calculated values are clipped to the allowed range. Interior cells have twenty-six neighbours; the corner has seven. Every cell reads the previous volume. PULL changes how far it moves toward that average. DRIVE changes the size of the added disturbance. The controls reset both runs, keeping the comparison legible. One gesture no longer changes both tendencies at once.
+ 
+ Bring DRIVE to zero. Choose the uniform beginning with SEED, leave PULL at 0.25 and ONE CELL enabled. In INTEGER storage, press STEP. The difference is gone. Replay, switch STORE to FRACTIONAL and take the same step. Now twenty-seven addresses differ, but the largest difference is smaller than before: 0.75 instead of one.
+ 
+ More places carry it. Less of it remains at any one place.
+ 
+-The fork is one short line:
+-
+-```gdscript
+-na[i]=float(int(va)) if integer_storage else va
+-```
++The two versions part at the moment of storage.
+ 
+ The integer conversion removes the fractional part of these nonnegative values. The pull that took five toward four produced 4.75. The stored integer is four. Around it, smaller fractional changes also fell away. A rule about neighbours was accompanied by another rule about what a value may keep. In this comparison the neighbour rule stayed the same; storage decided how much of its answer could remain.
+ 
+@@ -51,4 +42,4 @@
+ 
+ [^ca-edge]: Christopher Langton, [“Computation at the edge of chaos: phase transitions and emergent computation”](https://doi.org/10.1016/0167-2789(90)90064-V), *Physica D* 42 (1990). His experiments associated information storage, transmission and modification with a transition between ordered and disordered behaviour. His λ counts the fraction of rule-table entries whose output differs from a designated quiescent state. It is not the proportion of living cells in a displayed field. PULL changes the strength of neighbour averaging in another model; this hall has not measured Langton's transition.
+ 
+-[^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery each cell is infected with a fixed probability per infected neighbour and recovers with another: two draws and a grid.
++[^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery a susceptible cell with at least one infected neighbour is infected with a fixed probability, and an infected cell recovers with another: two draws and a grid.
+--- before/map_data.json
++++ after/map_data.json
+@@ -38,7 +38,14 @@
+           28
+         ]
+       ],
+-      "piers": false
++      "piers": false,
++      "gate": false,
++      "portal_entry": {
++        "cage": false
++      },
++      "portal_exit": {
++        "approach": "from_hall"
++      }
+     }
+   },
+   "utility_definitions": {
+@@ -738,27 +745,6 @@
+         "",
+         "",
+         "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+         "sp",
+         "",
+         "",
+@@ -1326,28 +1312,49 @@
+         "",
+         "",
+         "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
+         "t",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+         "",
+         "",
+         "",
+--- before/technical.md
++++ after/technical.md
+@@ -37,3 +37,24 @@
+ The reader recognises XRToolsPlayerBody and the museum's grouped CharacterBody3D, rejects loose rigid bodies, and releases a visitor on exit. A 2.5 cm dead band beyond a row midpoint reduces flicker near an edge. When the visitor leaves, the selected slice stays; the original Z SLICE button remains available. No solid collision or new support is added, and unconfigured studies retain the original behaviour.
+ 
+ At update zero, the intervention is in Z=5 only. Walking from five to six can hide it from the selected image while the paired arrays, update count and global difference count remain unchanged. This differs from integer storage actually removing it on the first uniform, unforced update. The native probe checks both cases separately.
++
++
++## Complete learner reconstruction — 8 October 2026
++
++`tutorial.md` prints `paired.gd`, `difference.gd` and unchanged `point_body.gd`, maintained under `doc/book/studies/cellular-automata-through-the-hands/CA_EdgeOfChaos`. The existing Day Zero `PointStudy` host supplies player, camera, lighting and XR Tools. The model owns the two fields; the display constructs all study geometry, textures, labels, support and input. The carried class is byte-identical to CA_AgentsCircuits. No prepared study children are required.
++
++The compact model deliberately starts uniform, with DRIVE zero, PULL .25 and integer storage, making the first prediction legible. The installed desk starts scattered with DRIVE one; the lesson explicitly sets the controlled comparison before comparing outcomes. Both store PackedFloat64Arrays. INTEGER means an explicit int conversion before storage, not an integer array type. The supplied forcing schedule matches production exactly but is not presented as independent random sampling.
++
++The first fractional update changes 27 addresses; the peak falls to .75. At generation 20 in the native controlled run, all 1331 addresses exceed the count threshold, the peak is 0.014009955316666, and the display gain is 71.377815089. This run spreads and weakens the difference. The count threshold is 1e-6. A/B colours use a fixed 0..9 range; only the difference image uses its declared reciprocal-maximum gain. The mean of the entire field is not promised to be conserved at the finite boundary, where neighbour counts differ.
++
++The independent edit changes the intervention site to (0,0,0). The first fractional update then affects eight addresses: corner .75, receiving edge at (1,0,0) gets .25/11, receiving interior (1,1,1) gets .25/26. The changed corner itself has seven neighbours; each receiver uses its own neighbour count. No wrapping is introduced.
++
++The installed walking branch now mounts `difference_hand.gd`, with the existing PointBody on a short rail beside the console. Held local Z chooses a slice. The walking receiver yields while it is held. Trigger calls the existing STEP operation, including cancellation of a pending +10 budget. Moving the point calls only select_spatial_slice and preserves that budget. Release invalidates the walker's previous band so a body still standing in the receiver resumes selection immediately, then the point parks at that slice. This changes selection and input priority, not the solver. Unconfigured studies keep their original behaviour.
++
++The compact reconstruction has the same held-point selection and trigger; Enter steps, R replays, I switches storage, C toggles the intervention, P switches pull zero/.25, N toggles drive zero/one, B switches the seed. Parameter keys reset the fields. The installed desk supplies its existing VR controls, wider parameter ranges, walking reader and floor image. Those differences are declared.
++
++All five authored artifact tokens and placements remain unchanged, as does the level floor. The extra generic gate is disabled and entry/exit move to source(9,0)/(9,29). Only this hall's generated plan row is rederived. Native route tests follow the console, body reader and rear gallery before reaching the exit.
++
++Validation: 35 exact-printed-code and 43 museum checks pass in native Godot 4.6. All values in 120 paired source updates across six settings match exactly. The corner transfer runs the actual edited file. Two deliberate defects—different forcing in B and writing B in place—are detected. Checks cover old-array independence, thresholds, full instance transforms, support, texture gain, control resets and limits. Supplied XRTools poses test pickup, selection, trigger and release in a rotated/translated learner study and in the museum. A real CharacterBody overlap tests walking, dead band and hand/body priority. Four routes contain 348 layer-1 capsule and level-floor samples; portal approaches are supported.
++
++Nine native after images and five before images record the real hall. The learner model is temporarily mounted only for its photograph. Final logs contain no SCRIPT ERROR or Parse Error. The source model and wrapper remain byte-identical to the baseline. No physical headset, Quest performance, full portal transfer, independent student acceptance or complete secondary interaction audit is claimed. Existing blank frames and rear billboard labels drawing through the main view remain visible.
+--- before/encounter-notes.md
++++ after/encounter-notes.md
+@@ -7,3 +7,14 @@
+ Keep all five existing works, the paired model, source equation excerpts and mature manuscript argument. Add only the early walking encounter and its native photograph. Correct the stale companion claim that CA_AgentsCircuits is off route; the active sequence already places it directly before this hall.
+ 
+ Native evidence and exact revisions: doc/book/iterations/2026-09-25-ca-walking-slice/. Desktop checks do not establish headset comfort, Quest performance or learner understanding.
++
++
++## 8 October 2026 — what a difference keeps
++
++The final CA lesson now has a complete runnable reconstruction and an independently edited corner case. The same black point chooses a spatial section and triggers one update. Holding it takes priority over walking; release gives the selection back to the body. Selection never edits the fields. The existing paired solver and all five authored placements are preserved.
++
++Keep three losses distinct: a changed cell can leave the selected section, fall below a counting threshold, or be removed by the storage conversion. Fractional averaging can spread a difference while reducing its maximum. Image gain makes a fading difference visible. The reflection stays with this encounter and leaves implementation to tutorial.md; it does not turn the hall's historical title into evidence for chaotic amplification.
++
++35 learner and 43 museum assertions pass; 120 paired updates match source exactly, the corner transfer succeeds, two defects are caught, and four routes/348 samples have clearance and level support. Native overhead, raised and visitor images plus both full texts: doc/book/iterations/2026-10-08-ca-what-a-difference-keeps/index.html. The rear labels and blank frames remain visual follow-up items. No headset or independent student assessment.
++
++All eight CA halls now have a draft in this pass. Next editorial step: read the full tutorial and reflection sequences together, checking the carried point's changing roles and the distinctions between state, history, geometry and display. The next museum sequence is Fractals, already developed separately.
+--- before/difference_study.gd
++++ algorithms/cellularautomata/ca_showcase/difference_study.gd
+@@ -86,6 +86,8 @@
+ 	slice_walker=load("res://algorithms/cellularautomata/ca_showcase/walking_slice.gd").new()
+ 	slice_walker.name="WalkingSlice"
+ 	add_child(slice_walker)
++	var hand=load("res://algorithms/cellularautomata/ca_showcase/difference_hand.gd").new()
++	hand.name="SliceHand";add_child(hand)
+ 
+ ## A receiver change must not invoke operate(), which cancels a scheduled run.
+ func select_spatial_slice(value:int) -> void:
+--- before/walking_slice.gd
++++ algorithms/cellularautomata/ca_showcase/walking_slice.gd
+@@ -51,6 +51,8 @@
+ 	if body.get_instance_id()==last_body:last_body=0;last_band=-1
+ 
+ func _physics_process(_delta:float) -> void:
++	var hand=study.get_node_or_null("SliceHand")
++	if hand!=null and hand.point!=null and hand.point.held():return
+ 	for id in visitors.keys():
+ 		var body: Node3D = visitors[id].get_ref()
+ 		if not is_instance_valid(body):visitors.erase(id);continue
+--- before/difference_hand.gd
++++ algorithms/cellularautomata/ca_showcase/difference_hand.gd
+@@ -0,0 +1,34 @@
++extends Node3D
++## Same PointBody: choose a spatial section without changing the paired state.
++const FIRST_Z := -2.25
++const PITCH := 0.11
++var study: Node3D
++var point: XRToolsPickable
++var was_held := false
++
++func _ready() -> void:
++	study = get_parent()
++	point = load("res://commons/artifacts/ca_rule_explorer/point_body.gd").new()
++	point.name = "PointBody"
++	add_child(point)
++	park()
++	point.action_pressed.connect(func(_p): study.operate(0))
++	study.box("SliceHandRail",Vector3(.018,.018,1.26),Vector3(-3.35,1.08,-1.7),Color("ffd18e"))
++	study.box("SliceHandFoot",Vector3(.35,1.02,.35),Vector3(-3.35,.51,-1.7),Color("e4dfd4"),true)
++	var words:Label3D=study.label("HandReadsSlice","MOVE POINT: Z SLICE / TRIGGER: STEP\nHAND WHILE HELD; WALK AFTER RELEASE",26)
++	words.position=Vector3(-3.35,1.5,-2.46);words.rotation.y=PI
++	study.add_child(words)
++
++func _physics_process(_delta: float) -> void:
++	if point.held():
++		var z:float=to_local(point.global_position).z
++		study.select_spatial_slice(roundi((z-FIRST_Z)/PITCH))
++		was_held=true
++	else:
++		if was_held and is_instance_valid(study.slice_walker):
++			study.slice_walker.last_band=-1
++		was_held=false
++		park()
++
++func park() -> void:
++	point.position=Vector3(-3.35,1.24,FIRST_Z+PITCH*study.slice_z)
+--- before/lesson-plan.json
++++ after/lesson-plan.json
+@@ -2,24 +2,29 @@
+   "id": "CA_EdgeOfChaos",
+   "decision": "draft",
+   "mode": "build",
+-  "object": "A paired-state experiment with stated storage and display gain.",
+-  "change": "Copy a beginning, alter one address and compare both the magnitude and spread of differences under the same update and forcing schedule.",
++  "object": "Same PointBody selects a section of two nearly matching fields and triggers their next synchronous update.",
++  "change": "Copy one beginning, alter one address, apply the same procedure and forcing to both; distinguish stored difference, measured spread and display gain.",
+   "dependsOn": [
+-    "Random_Entropy",
++    "CA_AgentsCircuits",
++    "CA_SoftRules",
+     "CA_ElementaryRules",
+-    "Noise_Perlin_Simplex"
++    "Point_Coordinates"
+   ],
+-  "reuses": "Independent retained copies.; State and its display counts differ.; Matched conditions make comparisons interpretable.",
+-  "given": "volume solver; slice displays; body-selected depth",
+-  "later": "Do not explain every visible artifact. The teaching comparison must use the same forcing schedule on both copies; no universal edge-of-chaos threshold is claimed.",
+-  "checks": [],
+-  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+-  "carry": "A paired-state experiment with stated storage and display gain.",
+-  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+-  "notes": "The current guide enables observation but omits the learner's copying and difference-measurement operations; it does not establish a universal critical point.",
++  "reuses": "Carried point/action, world-to-local address, independent arrays, old-to-next update, scalar fields and neighbour exchange, model/display separation, supplied host.",
++  "given": "Day Zero Endless Museum host, player, camera, light and XR Tools. Full paired.gd, difference.gd and unchanged point_body.gd. Reproducible address/update forcing function supplied; no independent-random-sample claim.",
++  "later": "Compact reconstruction uses keyboard parameter controls; installed desk retains VR controls, body-selected depth and shared floor receiver. Finite 11-cubed fields, 100-update cap. Secondary works remain museum companions. No universal critical point or proof of chaos.",
++  "checks": [
++    "35 exact printed-file native checks. All values in 120 paired updates match the installed solver exactly across six settings. Analytic integer/fractional/zero-pull cases; 26 interior versus seven corner neighbours; old arrays, geometry, input, gain and cap.",
++    "Independent edit moves site to Vector3i(0,0,0): eight affected addresses, corner .75, edge contribution .25/11, interior contribution .25/26, no wrapping. Unmatched forcing and in-place update defects are detected.",
++    "43 installed museum checks including camera assertions: held point has priority over walking, trigger STEP cancels pending batch, release returns control to stationary body, slice/coat preserve state, real console actions, clock/cap, four routes/348 clearance and level-floor samples, supported portal approaches."
++  ],
++  "transfer": "Move site from (5,5,5) to (0,0,0), keep uniform fractional storage, zero drive and pull .25. Predict eight changed addresses, then explain why receiving cells divide by different neighbour counts.",
++  "carry": "Separate disappearance from view, disappearance from a thresholded count and disappearance from stored state. More affected addresses need not mean a larger difference.",
++  "next": "Fractal_Recursion in the museum: contrast local exchange with explicit repeated construction. The eight CA hall drafts are now ready to read together before another expansion.",
++  "notes": "Installed difference_model.gd and self_organization_ca.gd unchanged. Add carried point beside console and hand priority to walking reader. Retain all five authored works and level floor; move portals to thresholds. Native tests and images only; no physical headset, Quest, independent student or full portal transfer. Rear billboard labels still draw through the main view; secondary interactions remain outside this pass.",
+   "baseline": {
+     "tutorial": "3663a6fe639770d6df6111c74468d671aeb52cd9800908d5a6b19155229aa48e",
+     "choice": "9231723ffa54d4a955bb56b8e4a1ffc094fba2e1798b713ad08028018fcc8795"
+   },
+-  "summary": "Copy one beginning, alter a single address and run both states under the same update and forcing schedule. Record both the size and spatial spread of their difference while keeping display gain declared. Solver and slices are supplied. Carry a paired-state experiment; a visually dramatic divergence is evidence about this run, not by itself a general classification of the system as chaotic."
++  "summary": "Bring the same point to two 11-cubed fields. Duplicate the beginning, change one address in B and advance both through the same old-to-next neighbour average and forcing schedule. Move the held point to inspect a Z section; trigger one update. Release returns the installed reader to walking. Compare integer storage erasing the uniform intervention, fractional storage spreading a weaker difference, and zero pull keeping it whole in one place. Read affected count, maximum and image gain separately. Move the changed address to a corner and predict eight affected cells with unequal neighbour denominators. Carry the distinction between a state, its measurement and its image into Fractals."
+ }

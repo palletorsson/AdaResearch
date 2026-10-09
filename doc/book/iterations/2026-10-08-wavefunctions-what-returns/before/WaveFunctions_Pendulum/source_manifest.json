@@ -1,0 +1,31 @@
+{
+  "room": "WaveFunctions_Pendulum",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_Pendulum/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/WaveFunctions_Pendulum/map_data.json": "3c66be5b1ecb5b355ea46a9c328abe1884b78615ae5b996d0db1f813ec1a1028",
+    "tools/probes/wavefunctions_lessons_museum.gd": "212699a807dcd32122a111c69085a09e59333d2eee0bc21c806ad37716d62027",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "f4193017c397f226cab23014101eef6bbf03fadfeda0707d0dccf69efcfb6651",
+    "ada_run/encounter_pilot/WaveFunctions_Pendulum/control.json": "27b27004f68622b40f69a864456e8ddd6e5355a03e75ae4082495092edae5f2a",
+    "ada_run/encounter_pilot/WaveFunctions_Pendulum/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_Pendulum/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/WaveFunctions_Pendulum/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn": "3619ae79399bae246899ad3c7dea6416e1e730aaf772f7e1fc08f6be58b0eaa0",
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "43656bc99de4874bb1498ef7f6630909a876cb0ee1153b179b401891a5a41eb8"
+  }
+}

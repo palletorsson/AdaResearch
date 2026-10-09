@@ -1,0 +1,59 @@
+{
+  "map": "Point_One",
+  "status": "written_and_desktop_tested_author_reading_pending",
+  "inherits": [
+    "Day Zero room, lights and player",
+    "Point Zero: Node3D, variable, :=, assignment, .new(), _ready(), add_child()"
+  ],
+  "introduces": [
+    "Vector3 used as a position",
+    "float radius and multiplication",
+    "resource versus node",
+    "SphereMesh and MeshInstance3D",
+    "StaticBody3D, CollisionShape3D and SphereShape3D"
+  ],
+  "actions": [
+    "change an unseen value",
+    "move and resize a visible marker",
+    "match and mismatch visible and collision radii",
+    "walk to compare contact"
+  ],
+  "defers": [
+    "full coordinate frames and axes",
+    "grabbing",
+    "distance",
+    "arrays and loops",
+    "mesh tessellation",
+    "material programming"
+  ],
+  "source_sha256": "bc744a787bdec3e6f8033926bb78d77dc900db48072b0017f0bea5f90d8253ed",
+  "script_sha256": {
+    "position": "3c420a262ebebbfddd0b7efce5e5aa2642a328d647ddf5ca605b4ef082d3f669",
+    "visible": "e091cc69c6377889b5718b8de764e7a148b20bd6ef843699aebe875e4ce8f770",
+    "solid": "09832e1d20540f95adbd2bc1364dc0c2329a2f68fd3f57b4e984a9ec9764f7bd"
+  },
+  "code_matches_printed_lesson": true,
+  "api_checked_in_local_godot_4_6_reference": {
+    "Vector3": [],
+    "SphereMesh": [
+      "radius",
+      "height"
+    ],
+    "MeshInstance3D": [
+      "mesh"
+    ],
+    "Node3D": [
+      "position"
+    ],
+    "StaticBody3D": [],
+    "SphereShape3D": [
+      "radius"
+    ],
+    "CollisionShape3D": [
+      "shape"
+    ]
+  },
+  "canonical_final_changed": false,
+  "physical_headset_tested": false,
+  "note": "Scope and source checks are not proof of beginner comprehension or a bulk promotion of the old numeric taxonomy."
+}

@@ -1,0 +1,27 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"_initialize_draws",
+			"_binary_entropy",
+			"prediction_reading"
+		],
+		"draw_hash": 3237737502,
+		"draw_seed": 1234,
+		"entropy_endpoints": [
+			0.0,
+			1.0,
+			0.0
+		],
+		"fixed_draws": 64,
+		"limitation": "64-draw private sample; source entropy is not empirical sample entropy or a QFEP proof",
+		"max_draw": 0.994517922401428,
+		"min_draw": 0.000406184466555715
+	},
+	"geometry_nodes": 197,
+	"phases": 4,
+	"source_paths": [
+		"res://commons/artifacts/shannon_workbench/shannon_workbench.gd"
+	],
+	"title": "SAME DRAWS, A MOVING THRESHOLD"
+}

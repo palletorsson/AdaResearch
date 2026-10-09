@@ -1,0 +1,42 @@
+--- before/Point_One/final.md
++++ after/Point_One/final.md
+@@ -19,11 +19,13 @@
+     _count += 1
+ ```
+ 
+-Godot calls `_process` once per process frame while this node is processing. The engine supplies the repetition. Each call reaches the indented line: add one to `_count`. One, then two, then three. Declared outside the function, `_count` keeps its value between calls. Its zero belongs to the beginning of this instance.
++Godot repeatedly calls the function named `_process`. Each call runs the indented line, `_count += 1`, adding one to the number stored in `_count`. One, then two, then three.
+ 
+-`delta` carries this update's time interval in seconds. We receive it here but do not use it yet. Adding one counts calls. The same count could have accumulated through different durations; the number keeps how many, leaving how long unanswered.
++The declaration `var _count := 0` sits outside the function. It sets the starting value. Calling `_process` again does not run that declaration again, so the count keeps what the previous call left behind.
+ 
+-The room's counter reads a total that began earlier:
++Godot also supplies `delta`: this update's time interval, in seconds. Our counter receives it but does not use it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.
++
++That example has its own count. The room's counter reads a total that began earlier:
+ 
+ ```gdscript
+ var frames: int = int(Engine.get_process_frames())
+@@ -37,11 +39,13 @@
+ 
+ <!-- @folding_past -->
+ 
+-Through the entrance window, frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.
++Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.
+ 
+-The source gives this particular depth a small inventory: ten frames, scaled and moved through a repeating cycle. It makes a figure of a past. It has no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.
++Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.
+ 
+-We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here. To begin with the point, we have to leave some invitations unanswered. The lesson borrows operations we have not learned to examine yet.
++In 1968, an experimental head-mounted display put its viewer inside a room drawn in wireframe. Turning the head changed the view; walls, ceiling and floor were already part of the experiment.[^point-one-room-history] Before we could take a room like this for granted, people had to make it possible to look around one. You are here now, with some time to play.
++
++We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here. We would also like time to pick something up and see what happens. To begin with the point, we have to leave some invitations unanswered.
+ 
+ The code we leave unread keeps working. It gives the number its appearance and the room its possibilities while our attention moves elsewhere. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?
+ 
+@@ -169,3 +173,5 @@
+ [^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+ 
+ [^point-one-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. Naming a coordinate frame is not equivalent to that epistemology. It gives this room a technical way to ask a related question: what must accompany a reading for someone else to understand its reference and limits?
++
++[^point-one-room-history]: Ivan E. Sutherland, [“A Head-Mounted Three Dimensional Display”](https://doi.org/10.1145/1476589.1476686) (1968), especially “Results”; [accessible paper](https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf). The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent.

@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-23-book-frame/index.html",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-23-book-frame/sources/doc/research/qfep/README.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-23-book-frame/sources/doc/research/qfep/entropic-morality.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/afterword.diff",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/checks.json",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/index.html",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/preface.diff",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/primitives-book.manifest.json",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/primitives-book.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/trace.current.md",
+      "status": 200,
+      "matches_disk": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-trace-other-futures/trace.diff",
+      "status": 200,
+      "matches_disk": true
+    }
+  ],
+  "framing_sources_current": true
+}

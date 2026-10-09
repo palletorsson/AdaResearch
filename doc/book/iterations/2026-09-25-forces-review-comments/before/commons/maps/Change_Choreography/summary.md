@@ -1,0 +1,1 @@
+A 25 by 27 cell museum hall, immediately after Vectors_Act4b_Oscillation. Left bay: phase_rod_array at (6,8), rotation 180 degrees. Right bay: conveyor_backlog at (18,18), rotation 180 degrees. Both at floor height and original scale, without museum plinths. A central lane connects entrance and exit; each machine has a standing-height console facing the approach.

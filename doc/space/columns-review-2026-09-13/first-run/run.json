@@ -1,0 +1,26 @@
+{
+  "started": "2026-09-13T09:11:13+02:00",
+  "finished": "2026-09-13T09:11:53+02:00",
+  "pid": 38424,
+  "exit": 1,
+  "checks": 46,
+  "failures": [
+    "all six bases and capitals follow the local clock, including FREEZE"
+  ],
+  "source_sha256": {
+    "ada_run/columns_probe_base.gd": "c319385a8b96ea842d6b4eeea1f404a906319ec2e8db4739e4e9c8cedea4cd85",
+    "ada_run/columns_review_extra.gd": "ebcc3b0931d0070a09bdd9326b448a6c736d4e922d94f1e0de00c173c362c317",
+    "commons/maps/Noise_Columns/map_data.json": "dcdae872ec6ee147c032bfdb137adbfd5060701b7bcba5d12ccebd0ced73288d",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd": "0f1cb37d4c4ee59bc7df9fa05b2bdaed2d70886d33de4289ecd2b8e8bd1ba257",
+    "algorithms/patterngeneration/fabrics/displacement.gdshader": "0fdd4e4940f162d93daa98285209ab05c5e971e8783a18c3c3798df143a04f5c",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "commons/artifacts/synthesis/synthesis_stand.gd": "aabd604193112ade0231501d8a08554241bc19058a9f6d3bdc8ef60b8da35259",
+    "commons/data/dna_synthesis.json": "dfb4227c711051c66b9c7d9c2e62cf6a408908a999828a328d16ff6fc595b31c"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

@@ -1,0 +1,269 @@
+{
+ "chapter": "foundationscrisis",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "euclid parallel",
+   "map": "Euclid_Parallel",
+   "lines": [
+    {
+     "token": "euclid_postulates_plaque",
+     "text": "the parallel postulate was assumed for two thousand years",
+     "by": "draft"
+    },
+    {
+     "token": "parallel_lines",
+     "text": "Three line modules arranged in parallel to visualize equidistant lines",
+     "by": "draft"
+    },
+    {
+     "token": "angle_sum_triangle",
+     "text": "the angle sum of a triangle is not a fact about triangles but a fact about the space they …",
+     "by": "draft",
+     "note": "the triangle cannot supply its own angle sum — 180° is a fact about the space, and the space arrives as a postulate every proof uses and no proof produces: certainty standing on a decision, not a truth.",
+     "note_src": {
+      "file": "commons/maps/Euclid_Parallel/critical.md",
+      "quote": "Inside, because every proof uses it. Outside, because no proof produces it."
+     }
+    }
+   ],
+   "hero": "angle_sum_triangle"
+  },
+  {
+   "pearl": "noneuclidean spaces",
+   "map": "NonEuclidean_Spaces",
+   "lines": [
+    {
+     "token": "curvature_slider",
+     "text": "flat space is not the default — it is the singular boundary between two infinite families of …",
+     "by": "draft"
+    },
+    {
+     "token": "elliptic_surface",
+     "text": "on a positively curved surface, there is no room for parallel lines",
+     "by": "draft"
+    },
+    {
+     "token": "poincare_disk",
+     "text": "infinity can be contained in a finite disk — the Poincare model proves that hyperbolic geometry is as consistent as …",
+     "by": "draft",
+     "note": "hyperbolic space cannot be drawn honestly: the disk buys a finite picture of infinity by crushing the metric toward the rim, so every equal step outward is drawn smaller and the boundary is infinity rendered as a wall.",
+     "note_src": {
+      "file": "commons/maps/NonEuclidean_Spaces/critical.md",
+      "quote": "The Poincare disk shows an infinite plane compressed into a finite circle — boundlessness contained, but never tamed."
+     }
+    },
+    {
+     "token": "hyperbolic_surface",
+     "text": "on a negatively curved surface, there are infinitely many parallel lines through any point",
+     "by": "draft"
+    },
+    {
+     "token": "riemann_sphere",
+     "text": "infinity is not the absence of a boundary — it is a boundary that has been folded back into the space it …",
+     "by": "draft"
+    }
+   ],
+   "hero": "poincare_disk"
+  },
+  {
+   "pearl": "russell paradox",
+   "map": "Russell_Paradox",
+   "lines": [
+    {
+     "token": "self_membership_set",
+     "text": "The set that contains itself, all the way down - R = {x : x not-in x}, is R in R?",
+     "by": "draft",
+     "note": "a set that contains itself cannot supply its own bottom: the nest is only legible because someone cut it at five, and that cut — foundation, types, a levels export — is the restriction the paradox extorted.",
+     "note_src": {
+      "file": "commons/artifacts/self_membership_set/self_membership_set.gd",
+      "quote": "the axiom of foundation is precisely a bound on the chain, and letting the map lengthen it would un-draw the axiom"
+     }
+    },
+    {
+     "token": "barber_paradox",
+     "text": "Russell's Paradox: the barber who shaves all who don't shave themselves - does he shave himself? The rule eats …",
+     "by": "draft"
+    },
+    {
+     "token": "russell_set_box",
+     "text": "naive set theory is inconsistent — the set of all sets that do not contain themselves destroyed the foundations of mathematics in …",
+     "by": "draft"
+    },
+    {
+     "token": "liar_loop",
+     "text": "The liar paradox: THIS STATEMENT IS FALSE - a truth value that oscillates forever",
+     "by": "draft"
+    }
+   ],
+   "hero": "self_membership_set"
+  },
+  {
+   "pearl": "godel incompleteness",
+   "map": "Godel_Incompleteness",
+   "lines": [
+    {
+     "token": "godel_sentence_machine",
+     "text": "if G were provable it would be false (it asserts its own unprovability)",
+     "by": "draft",
+     "note": "the machine builds G out of its own rules but cannot supply the standpoint from which G reads true — the gold verdict is spoken from outside, on a soundness no arm inside can reach.",
+     "note_src": {
+      "file": "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+      "quote": "a sound system proves no falsehoods, so G is not provable — and therefore G is true"
+     }
+    },
+    {
+     "token": "provability_sorter",
+     "text": "The provable is a proper subset of the true - statements fall into the gap that never …",
+     "by": "draft"
+    },
+    {
+     "token": "incompleteness_tower",
+     "text": "Add an axiom to close the gap and a new gap opens above - incompleteness all the way up",
+     "by": "draft"
+    }
+   ],
+   "hero": "godel_sentence_machine"
+  },
+  {
+   "pearl": "escher impossible",
+   "map": "Escher_Impossible",
+   "lines": [
+    {
+     "token": "escher_staircase",
+     "text": "locally coherent does not mean globally possible",
+     "by": "draft",
+     "note": "an impossible figure cannot supply its own coherence: it depends on the one standpoint where the loop appears to close, and pays by hiding the joint — the fourth side quietly eased to zero where nobody looks.",
+     "note_src": {
+      "file": "commons/interfaces/foundations/escher_staircase.gd",
+      "quote": "it only works from one place. The trick has to fail somewhere"
+     }
+    },
+    {
+     "token": "magritte_pipe",
+     "text": "representation is a gap pretending to be a bridge -- computation runs on signs detached from …",
+     "by": "draft"
+    },
+    {
+     "token": "penrose_triangle",
+     "text": "each corner is valid, the object is not -- incompleteness you can hold in your hands",
+     "by": "draft"
+    },
+    {
+     "token": "impossible_trident",
+     "text": "The blivet: two prongs become three - consistent locally, impossible globally",
+     "by": "draft"
+    }
+   ],
+   "hero": "escher_staircase"
+  },
+  {
+   "pearl": "brouwer intuitionism",
+   "map": "Brouwer_Intuitionism",
+   "lines": [
+    {
+     "token": "constructive_proof",
+     "text": "existence without construction is an article of faith, not a proof",
+     "by": "draft",
+     "note": "existence here cannot be asserted, only produced: the proof depends on somebody building the witness in time, and pays in everything true but unbuilt — the platforms that trail off are not false, they are unconstructed.",
+     "note_src": {
+      "file": "commons/maps/Brouwer_Intuitionism/critical.md",
+      "quote": "The unreachable platforms are not false. They are unconstructed."
+     }
+    },
+    {
+     "token": "brouwer_choice_sequence",
+     "text": "an infinite object that is never finished is not incomplete",
+     "by": "draft"
+    },
+    {
+     "token": "constructive_staircase",
+     "text": "Brouwer's intuitionism: the next step isn't true-or-false until you construct it",
+     "by": "draft"
+    },
+    {
+     "token": "excluded_middle_demo",
+     "text": "the law of excluded middle is not a law of logic",
+     "by": "draft"
+    }
+   ],
+   "hero": "constructive_proof"
+  },
+  {
+   "pearl": "foundations",
+   "map": "Chamber_Foundations",
+   "lines": [],
+   "drop": true,
+   "edge": "no test inside the chamber tells the two ghosts apart, so undecidability only becomes legible on a screen bolted to the wall: the lesson needs the outside view the fight forbids, or it reads as bad aim.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Foundations/critical.md",
+    "quote": "Without the screen, the learner would experience the encounter as a frustrating combat with an elusive enemy and might blame themselves"
+   }
+  },
+  {
+   "pearl": "florensky paraconsistent",
+   "map": "Florensky_Paraconsistent",
+   "lines": [
+    {
+     "token": "schrodinger_box",
+     "text": "observation does not reveal a pre-existing state — it creates one",
+     "by": "draft",
+     "note": "the box cannot show what it holds — superposition needs the lid shut — so its only freedom is where to put the part it cannot display: sealed in the core, split to a twin, smeared into haze.",
+     "note_src": {
+      "file": "commons/artifacts/schrodinger_box/schrodinger_box.gd",
+      "quote": "the one thing a box can actually argue about: WHAT IT DOES WITH THE FACT THAT YOU ARE OUTSIDE IT"
+     }
+    },
+    {
+     "token": "both_true_gate",
+     "text": "Florensky's paraconsistency: open AND closed, P and not-P, and the world does not end",
+     "by": "draft"
+    },
+    {
+     "token": "florensky_sphere",
+     "text": "A and not-A can both be true. This is not a failure of logic but a description of reality that classical logic cannot contain",
+     "by": "draft"
+    },
+    {
+     "token": "superposition_display",
+     "text": "superposition is not uncertainty about which state the system is in",
+     "by": "draft"
+    }
+   ],
+   "hero": "schrodinger_box"
+  },
+  {
+   "pearl": "crisis synthesis",
+   "map": "Crisis_Synthesis",
+   "lines": [
+    {
+     "token": "lambda_slider",
+     "text": "lambda is the entropy drive — the dial between crystallization and dissolution that every living system must …",
+     "by": "draft",
+     "note": "the dial depends on a calibration chain that ends nowhere — there is no metre bar for how much a system should value disorder — so the instrument covers the gap by painting the right answer on in green.",
+     "note_src": {
+      "file": "commons/interfaces/qfep/lambda_slider.gd",
+      "quote": "An instrument's authority comes from its calibration chain; this one's chain ends nowhere"
+     }
+    },
+    {
+     "token": "phi_slider",
+     "text": "phi is the queer parameter — positive phi means the system does not merely tolerate change but seeks it as …",
+     "by": "draft"
+    },
+    {
+     "token": "bifurcation_diagram",
+     "text": "the edge of chaos is not a metaphor — it is a precise mathematical boundary where computation is …",
+     "by": "draft"
+    },
+    {
+     "token": "qfep_formula_3d",
+     "text": "the formula is not an equation to solve but a lens to see every system through",
+     "by": "draft"
+    }
+   ],
+   "hero": "lambda_slider"
+  }
+ ]
+}

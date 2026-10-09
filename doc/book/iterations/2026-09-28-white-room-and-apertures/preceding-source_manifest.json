@@ -1,0 +1,28 @@
+{
+  "room": "Color_Flashlight",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Flashlight/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "5276950eb2a2f525dba735cb71520ba86c8da60b93bc444704d0d4e291ffe48f",
+    "commons/maps/Color_Flashlight/map_data.json": "6d06792d1ec94afd7476c3059855394841b8e8cf490e462e3a7a2f559948affe",
+    "doc/book/iterations/2026-09-28-white-room-and-apertures/probe.gd": "6152ea09c93e845d2fe4efc2ca4780c260695a2ce56b9b43a2971555601bd8a9",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "1f035f9e10312141559247ca785d59299c26e1089477128facf279aef4b957ea",
+    "ada_run/encounter_pilot/Color_Flashlight/control.json": "54a0c0e6da5300a381d1ce3b7ba730f5de7b82f4d8fe7c5831da0f186e863975",
+    "ada_run/encounter_pilot/Color_Flashlight/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Color_Flashlight/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Flashlight/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394"
+  }
+}

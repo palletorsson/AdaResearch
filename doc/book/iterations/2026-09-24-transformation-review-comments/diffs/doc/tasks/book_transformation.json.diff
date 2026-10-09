@@ -1,0 +1,472 @@
+--- before/doc/tasks/book_transformation.json
++++ doc/tasks/book_transformation.json
+@@ -151,9 +151,9 @@
+       "effort": "1h",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pit"
+       ],
+@@ -168,9 +168,12 @@
+       "proposal": "Remove the nine `h:fire` cells between the slabs in map_data.json (and review the other 19 legacy fire cells: twelve flanking the slabs at x=1-2/12-13 rows 11-13, four by the pushers, three by the growers — the map's own dev_notes already call them disarmed), so the middle route is the open floor the sentence promises; or, if the flames are wanted as a 'do not wait here' mark, name them in this sentence. Re-run the pathfinder and re-walk the hall in the museum after the edit.",
+       "evidence": "commons/maps/Trans_Pit/map_data.json layers.utilities rows 3,5,11-13,21 (28 `h:fire` cells; nine at x=6-8 rows 11-13); slabs at (4,12),(10,12); dev_notes; map_info.museum.simulation {grid:true, fire:false}. commons/scenes/endless_museum.gd:11051-11112 (grid embed, returns before _stamp_map_utilities :11355), :11382-11404 (_sim_grid_disarm: monitoring/monitorable false only), :8131/:8149/:8899-8906 (simulation.fire is the basin flag). commons/grid/UtilityRegistry.gd:120-126 (`h` -> danger_zone.tscn); commons/grid/GridUtilitiesComponent.gd:813-840; commons/grid/GridSystem.gd:781-796 (bare_world scope). commons/hazards/DangerZone.gd:21-22, :93-95, :124, :135, _process_fire (~:477-485). doc/book/iterations/2026-09-23-moving-boundary/growers-small.png + SUMMARY.md ('Five native Godot captures from the actual isolated museum').",
+       "review": "amended: Confirmed. Quote exact at Trans_Pit/final.md:37. map_data.json utilities rows 11-13 carry `h:fire` at x=6,7,8; slabs `rc:90:y:4:-0.6` at (4,12) and `rc:90:y:3:-0.6` at (10,12); dev_notes say the fire tokens are 'disarmed by the current embedded museum'; map_info.museum.simulation.grid=true. endless_museum.gd builds the hall with the real grid_system.tscn and returns `grid_embed` before `_stamp_map_utilities` (:11051-11112 vs :11355); `_sim_grid_disarm` (:11382-11404) only sets Area3D monitoring/monitorable false. UtilityRegistry.gd:120-126 maps `h` to danger_zone.tscn; GridUtilitiesComponent.gd:813-840 sets FIRE; DangerZone.gd:124/135 builds the orange box + particles + light in _ready; GridSystem.gd:781-796 `bare_world` skips only ecosystem/biome/sky, not utilities. Proof the meshes stand in the museum: doc/book/iterations/2026-09-23-moving-boundary/growers-small.png (a native isolated-museum capture per that folder's SUMMARY.md and report.json 'requested museum hall loaded') shows the orange fire box on the floor beside a grower at row 21. Three corrections to the evidence: (a) fire damage is FIRE_DAMAGE_PER_TICK 10 every FIRE_TICK_INTERVAL 2.0 s times a heat multiplier 1+heat (heat to 3.0) — DangerZone.gd:21-22, :93-95, _process_fire — not '35 dmg per 0.3 s' (CLAUDE.md's Death System line is stale); still lethal in roughly ten to fifteen seconds. (b) `museum.simulation.fire: false` in Trans_Pit's map_info is the burning-BASIN flag (endless_museum.gd:8131, :8149, :8899-8906), not the tokens. (c) Of the 28 fire cells, 12 flank the slabs (x=1-2 and 12-13, rows 11-13), 4 sit by the pushers (5,3),(9,3),(3,5),(9,5) and 3 by the growers (1,21),(5,21),(9,21) — not '19 around the pushers and growers'. Worse than the task says: in rows 11-13 the only unburnt floor is under the two slabs' own footprints (x=3-5, 9-11), so in a plain grid run the sentence sends the visitor onto the one burning strip and the only clear way is through the sweep.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved all 28 legacy h:fire cells from Trans_Pit, including the 21 cells on the rotation observation floor. Current intent, summary and tutorial already describe an optional level-floor study. Disarming Area3D detection left flame visuals in place; removing the utilities repairs the promised encounter. No other grid cell or artifact placement changed. Source and companion notes updated; new native grower photographs replace the outdated chapter pair. In the isolated production museum there are no remaining DangerZone instances, all 21 observation cells have floor support, and the actual museum body traverses the middle and both side strips. The complete run passed 72 checks and exited 0. No live bake replacement or headset claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:38.691Z"
+     },
+     {
+       "id": "book_transformation.002",
+@@ -179,9 +182,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pit"
+       ],
+@@ -196,9 +199,12 @@
+       "proposal": "'The open floor to your left as you come in, past the last lane and along the side wall, lets you walk around.' If the side is not confirmed by a walk, the side-free form still beats 'eastern': 'The open floor past the last lane, along the side wall, lets you walk around.' Optionally give the floor caption the side too ('OR WALK AROUND / LEFT').",
+       "evidence": "commons/maps/Trans_Pit/map_data.json: structure row 0 open at x=4-8 (the museum entry mouth), rows 2-5 x=11 floor, row 3 x=12-13 height 4; utilities (1,1) `s` with utility_definitions.s.properties.player_rotation=180, (5,1) `3t:CHOOSE A LANE / OR WALK AROUND`; pushers (3,3),(7,3),(5,5); dev_notes 'An eastern bypass stays available'. commons/scenes/endless_museum.gd:11069 skip_player_spawn, :11086-11091 unrotated grid placement at pad+0.5 after VESTIBULE_H, :2961 walker camera x=7.5, :5288 halls laid along +Z. commons/grid/GridStructureComponent.gd:757 `Vector3(x, y, z) * total_size`.",
+       "review": "amended: The defect is real (quote exact at Trans_Pit/final.md:22; 'eastern' is the editor's +x; the floor caption at (5,1) reads only 'CHOOSE A LANE / OR WALK AROUND'; the bypass floor is x=11 rows 2-5 with row 3 x=12-13 at height 4), but the proposal is wrong-footed. 'Across the room from where you came in' assumes the grid spawn at x=1; in the museum the spawn is skipped (`skip_player_spawn`, endless_museum.gd ~11069) and the walker enters through the row-0 opening at x=4-8 on the walk line at world x=7.5 = grid x=5 (camera :2961; grid placed at pad+0.5, :11086-11091), so the bypass at x=11-13 is six to eight metres off to ONE SIDE, not across the room. Which side: grid column -> world +X (GridStructureComponent.gd:757), the grid is placed unrotated beyond the vestibule and the museum advances +Z (:5288 `_next_z += h + VESTIBULE_H + ...`); facing +Z in Godot's right-handed frame puts +X on the visitor's LEFT, and the grid spawn at (1,1) with player_rotation 180 also faces +Z, so 'left' holds in both modes. This is derived from the placement code, not walked — confirm with one walk before committing, or use the side-free fallback.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced editor-relative eastern passage with open floor along the side wall. The optional route and invitation to return and watch remain; no new left/right instruction is imposed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:40.738Z"
+     },
+     {
+       "id": "book_transformation.003",
+@@ -207,9 +213,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Introduction"
+       ],
+@@ -224,9 +230,12 @@
+       "proposal": "'The mesh is built one metre on a side; the script multiplies it by a single factor that runs from a half to three, about a fixed centre.'",
+       "evidence": "commons/scenes/mapobjects/scale_cube.gd:49–50 `box_mesh.size = Vector3.ONE`, :10–11 min_scale 0.5 / max_scale 3.0, :88–93 scale_vec on mesh and box_shape; commons/maps/Trans_Introduction/map_data.json utilities (4,12) `sc:3:0.5:1:0#seat:deck`; commons/grid/UtilityRegistry.gd:903–904 seats the centre max_scale*0.5 below the deck (so 'the centre sits below the floor' is right).",
+       "review": "kept: Confirmed and stronger than stated. Quote exact at Trans_Introduction/final.md:40. scale_cube.gd:10-11 min_scale 0.5 / max_scale 3.0; :49-50 `box_mesh.size = Vector3.ONE`; :88-93 one `scale_vec` on mesh and box_shape; and :38 `current_scale = min_scale` in _ready, so the first thing the visitor sees is a HALF-metre cube — 'begins as a one-metre cube' is wrong temporally as well as confusing. Map (4,12) `sc:3:0.5:1:0#seat:deck` routes through UtilityRegistry.gd:848-860 set_scale_range; :903-904 seats the centre max_scale*0.5 below the deck, so 'the centre sits below the floor' stands. The proposal is accurate and shorter.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nSeparated the one-metre authored mesh from the displayed cube, which starts at half a metre. Source scale_cube.gd initializes current_scale to min_scale and multiplies the unit mesh and collision by the same factor. Kept the observable growth before the implementation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:42.788Z"
+     },
+     {
+       "id": "book_transformation.004",
+@@ -235,9 +244,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Rotation"
+       ],
+@@ -252,9 +261,12 @@
+       "proposal": "Add one locating sentence before it: 'In the still aisle at the near end of the bands stands a study panel with a REPLAY button. Without any cue, a cyan capsule sets off along every band at once, then a pink one from the same places, and the run repeats on its own.' Then keep the widths as written.",
+       "evidence": "commons/artifacts/rotation_studies/array_body_comparison.gd:9, :11, :15, :18, :30, :47-49 (restart), :52-66 (pass sequencing and auto_repeat), :69-71 and :129 (one body per band at band-local START), :214-215 (StudyStand), :228-239 (Replay + 'REPLAY / no jump, same gravity, 2 m/s'); commons/artifacts/rotation_studies/array_compare.gd:54-58.",
+       "review": "amended: Confirmed: quote exact at Trans_Rotation/final.md:68 and the chapter gives no location or cue. array_body_comparison.gd:9 WIDTHS [0.44, 1.20], :11 cyan/pink, :30 auto_repeat true, :214-215 StudyStand in the 'Central still aisle, outside all four trials', :228-239 Replay button + caption; array_compare.gd:54-58 adds it. But the pass logic (:52-66, :69-71) is: after a 2 s wait one NARROW capsule sets off on all four bands at once from band-local START (-1, 0.02, -1.4), the near end of each band (:15, :129); 7 s hold (:18); then WIDE on all four; hold; repeat while auto_repeat. The proposal's 'down each band in turn' reads as one band after another; say all four at once, one width after the other.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nLocated the existing stand in the still central aisle at the near end of the bands. Clarified that all four cyan bodies depart together, pink follows, and the study repeats; REPLAY starts it again. Source array_body_comparison.gd confirms that order. Kept the bodily comparison and widths.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:44.839Z"
+     },
+     {
+       "id": "book_transformation.015",
+@@ -263,9 +275,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Introduction"
+       ],
+@@ -280,9 +292,12 @@
+       "proposal": "After :78, place the existing pair as one figure in the style of the other halls: left bank-at-crossing.png (plank aligned, 'BANK +0.00 m / Aligned: overlap 0.30 m'), right bank-gap.png ('BANK +1.00 m / Aligned: gap 0.70 m'), composed side by side like translation-paths.png, with a standpoint caption: 'The same crossing from the near bank at two bank settings; the plank holds the same quarter-turn in both. The camera has not moved.' No new capture is needed unless a tighter crop of the seam is wanted.",
+       "evidence": "doc/book/iterations/2026-09-23-transformation-encounters/bank-at-crossing.png, bank-gap.png, bank-control-close.png, SUMMARY.md ('The two bank images use the same aligned bridge pose'), DECISIONS.md ('Controls move to source (4,15)'); commons/maps/Trans_Introduction/map_data.json (3,18) `adjustable_landing:0:0#plinth:0#control_offset:1,0,-3`; commons/artifacts/adjustable_landing/adjustable_landing.gd:6-7, :112-114; commons/scenes/mapobjects/rotation_cube.gd:56; grep 'book/iterations' over commons/maps/Trans_*/final.md finds no Trans_Introduction reference.",
+       "review": "amended: The gap is real (no figure in Trans_Introduction/final.md; grep of book/iterations references finds none), the quote is exact at :78, and the code cites hold (adjustable_landing.gd:6-7 TRAVEL/SPEED, :112-114 `separation := displacement - 0.30` and readout; rotation_cube.gd:56 bridge 3.6 x 0.2 x 1.0). But the figure has already been shot: doc/book/iterations/2026-09-23-transformation-encounters/bank-at-crossing.png (readout 'BANK +0.00 m / Aligned: overlap 0.30 m / RESET / side aisles open') and bank-gap.png ('BANK +1.00 m / Aligned: gap 0.70 m'), same camera, plank aligned in both (that folder's SUMMARY.md: 'The two bank images use the same aligned bridge pose'), from the pass that moved the MOVE THE BANK control to (4,15) — the current arrangement. The proposal's readout text 'Aligned: no' does not exist; the format is 'BANK +%.2f m / Aligned: overlap|gap %.2f m / RESET / side aisles open'. Effort drops from L to S: compose or reference the existing pair.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nAdded the existing bank-at-crossing and bank-gap native photographs to Trans_Introduction at the loss-of-overlap passage. Both use the same camera and aligned plank pose, inspected visually and confirmed by the original capture record. Copied the original PNGs byte-for-byte to stable book figure paths; no fabricated screenshot or new control claim. Published them as two images with one comparison caption; the review page puts the pair side by side.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:48.942Z"
+     },
+     {
+       "id": "book_transformation.006",
+@@ -291,9 +306,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pit"
+       ],
+@@ -308,9 +323,12 @@
+       "proposal": "'In the script, a fraction `_t` marks the block's place along the journey: zero at the start, one at the far end.'",
+       "evidence": "commons/hazards/transformation_blocks/pusher_block.gd:57–58 `_start_pos.lerp(_end_pos, _t)` / `_body.global_position = target_pos`; :97–104 the only mark on the block is a PrismMesh DirectionArrow; no Label3D in the file.",
+       "review": "kept: Confirmed. Quote exact at Trans_Pit/final.md:13. pusher_block.gd:57-58 `_start_pos.lerp(_end_pos, _t)` / `_body.global_position = target_pos`; the only mark on the block is the PrismMesh DirectionArrow (:97-110); grep finds no Label3D in the file. 'A fraction marks its place' does read as a visible mark to a visitor who sees a red block with an arrow; naming `_t` as the script's fraction is a clear improvement.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed _t as a fraction kept by the script, so the reader does not search for a visible progress mark. The existing interpolation excerpt and timed-journey argument remain; source pusher_block.gd uses _t in the endpoint lerp.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:51.000Z"
+     },
+     {
+       "id": "book_transformation.007",
+@@ -319,9 +337,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pit"
+       ],
+@@ -336,9 +354,12 @@
+       "proposal": "Cut the sentence, or replace it with the rule the code has: 'Only nearness decides.'",
+       "evidence": "commons/artifacts/transformation_airlock/transformation_airlock.gd:36–45 opens while `is_visitor` bodies overlap `_sensor`, :10 `empty_hold_seconds = 3.0`; commons/maps/sequences/transformation.json lists no pickup gate; Trans_Pre pickups are `#hold:collect` with no door; Trans_Pit utilities hold only s, t, rc, h, 3t.",
+       "review": "kept: Confirmed, and the sentence's origin is now known: transformation_airlock.gd:4 header reads 'no invisible opening switch, scaled physics nodes, player relocation or collection requirement' — the chapter transcribes the code's own disclaimer, whose referent is the retired orphan hall Trans_AxisDecomposition (map_data.json:137 `pickup_gate#pickups:6`), absorbed into Trans_Translation (transformation-encounters DECISIONS.md, 'Two orphan halls'). Nothing in the live sequence gates on pickups: transformation.json unlock_requirements is [], Trans_Pre/Translation pickups are `#hold:collect` with no door, Trans_Pit utilities hold only s, t, rc, h, 3t. The door's rule is nearness (:36-40 opens while an is_visitor body overlaps `_sensor`) then `empty_hold_seconds` 3.0 (:10, :43-44). Keep 'You can return from the other side and open it again.' and replace the second sentence with 'Only nearness decides.'",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved only No pickup count decides whether you may enter. The preceding passage already explains approach, waiting, vacancy and return. Its nearness rule is tested in the actual door; the discarded sentence answered an abandoned design question.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:53.063Z"
+     },
+     {
+       "id": "book_transformation.008",
+@@ -347,9 +368,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Scale"
+       ],
+@@ -364,9 +385,12 @@
+       "proposal": "Strip the provenance words from all seven caption/alt-text lines, keeping the standpoint facts: Trans_Scale :39 'The tiny gold doorway and its enlarged version, viewed from the same standing height and distance.'; Trans_Translation :73 'The door mechanisms leave different traces for different permitted paths.' and :75 'The same two door studies: a guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel shows one gesture.'; Trans_Rotation :107 'Two paused moments of the study, seen from one place...' and :115 '...and the triangular face inside its conical boundary.'; Trans_Body :43 '...the open-topped cut a body left, photographed from the same elevated viewpoint.' and :45 'The body has left the second view. Both views show the missing cells...'; Trans_Pit :90 'The same door closed, partway through its turn, and fully open...'.",
+       "evidence": "commons/maps/Trans_Scale/final.md:39; Trans_Translation/final.md:73, :75; Trans_Rotation/final.md:107, :115; Trans_Body/final.md:43, :45; Trans_Pit/final.md:90; clean siblings for contrast: Trans_Rotation :105/:117, Trans_Scale :41, Trans_Pit :62/:64/:92. PNGs under doc/book/iterations/2026-09-23-{translation-paths,rotation-return-and-sweep,scale-door-and-body,body-what-remains,moving-boundary}/.",
+       "review": "amended: All six cited captions are exact, but the census is short and the words are of two kinds. Seven captions/alt-texts carry provenance language, not six: add Trans_Rotation :107 'Two paused moments of the museum study' and Trans_Body :43 '...left by the museum body'. The genuinely defensive words are 'actual' (Scale :39), 'existing' (Translation :73), 'used in the museum' and 'recorded by the live artifact' (Translation :75), 'captured from the museum study' (Rotation :115); 'museum door/body/views/study' (Pit :90, Body :43/:45, Rotation :107) are plain modifiers a reader standing in the museum does not need, so strip them for consistency. All seven PNGs exist under doc/book/iterations/2026-09-23-*/. Seven one-line edits: effort S, not M.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRemoved existing/actual museum/live artifact provenance language from the named caption and alt-text passages across Translation, Rotation, Scale, Body and Pit. Retained useful information about standpoint, separate handle gestures, paused states and unchanged cameras. Capture provenance remains in the supporting records.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:55.108Z"
+     },
+     {
+       "id": "book_transformation.009",
+@@ -375,9 +399,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pre"
+       ],
+@@ -392,9 +416,12 @@
+       "proposal": "'Beside each moving example a small marker repeats that one operation on its own: a cube sliding along an axis, one turning in place, one swelling and shrinking. Use them to check which movement was added.'",
+       "evidence": "commons/maps/Trans_Pre/map_data.json interactables (6,5) `y_translation_cube:180:0.7`, (6,8) `rotation_oscillation_cube:180:0.7#mode:continuous`, (6,11) `uniform_scale_marker:180:0.7#motion_curve:lerp`; resolved in commons/artifacts/registry/transforms.json, wavefunctions.json, uniform_scale_marker.json.",
+       "review": "kept: Confirmed. Quote exact at Trans_Pre/final.md:40. Map interactables (6,5) `y_translation_cube:180:0.7`, (6,8) `rotation_oscillation_cube:180:0.7#mode:continuous`, (6,11) `uniform_scale_marker:180:0.7#motion_curve:lerp`, beside the three moving stations at x=4 (rows 5, 8, 11); the still cube at (4,3) has no marker, so 'beside each moving example' is right. Registry/code match the proposal's descriptions: y_translation_cube 'moves only along the Y axis' (transforms.json); `#mode:continuous` sets continuous_mode = constant spin, theta += omega*dt (rotation_oscillation_cube.gd:21-22, :43-44); uniform_scale_marker 'expands uniformly from 0.7 to 1.3 times its saved size about a fixed centre' with a reference cage (uniform_scale_marker.json). Minor optional tightening: the first marker slides up and down, so 'a cube sliding up and down its axis' is more exact than 'along an axis'.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nIntroduced the smaller markers beside the moving examples as isolated operations: vertical travel, turning and size change. The map places y_translation_cube, continuous rotation_oscillation_cube and uniform_scale_marker at those three stations; the still cube has no corresponding marker.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:57.170Z"
+     },
+     {
+       "id": "book_transformation.010",
+@@ -403,9 +430,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Body"
+       ],
+@@ -420,9 +447,12 @@
+       "proposal": "'The floor caption beyond the last row asks you to step clear; it cannot declare that you already have.'",
+       "evidence": "commons/maps/Trans_Body/map_data.json utilities (4,21) `3t:SCALE / STEP CLEAR TO REGROW`, approach_scale at (5,18); commons/artifacts/approach_scale/approach_scale.gd:93 `reach_m = 2.2`, :403–405 the distance-to-size rule quoted in the chapter.",
+       "review": "kept: Confirmed. Quote exact at Trans_Body/final.md:67. The caption is the floor label (4,21) `3t:SCALE / STEP CLEAR TO REGROW`, beyond the approach_scale field at (5,18), which is 3 x 3 = nine blocks (approach_scale.gd:79-81) with reach_m 2.2 (:93) and the distance-to-size rule quoted in the chapter (:403-405). Naming the caption as the floor label beyond the last row is a plain improvement.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed the floor caption beyond the last row, which the source map places at (4,21). Kept the distinction between passing the blocks and leaving their measured reach.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:59.229Z"
+     },
+     {
+       "id": "book_transformation.011",
+@@ -431,9 +461,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Introduction"
+       ],
+@@ -448,9 +478,12 @@
+       "proposal": "Trans_Introduction :97 'The next hall will give displacement more work to do.'; Trans_Translation :81 'In the next hall, the turn itself becomes the question.'; Trans_Translation :69 'In the trace hall, movement left positions behind.'",
+       "evidence": "commons/maps/Trans_Translation/map_data.json map_info.name 'Trans_Translation'; Trans_Rotation map_info.name 'Rotation: crossings, arrays and inhabited repetition'; Trans_Pit 'The Moving Boundary'; Point_Trace map_info.name 'Point_Trace', no title; commons/data/book/transformation.json pearl 'trans translation'; 'The next hall' at Trans_Pre/final.md:48, Trans_Rotation:156, Trans_Scale:47, Trans_Body:75.",
+       "review": "amended: Confirmed, with one more instance. Trans_Introduction/final.md:97 'Trans_Translation will give...' and Trans_Translation/final.md:81 'In Trans_Rotation, the turn itself...' are repository IDs: Trans_Translation's map_info.name is the bare ID 'Trans_Translation' (no title), Trans_Rotation's is 'Rotation: crossings, arrays and inhabited repetition', Trans_Pit's 'The Moving Boundary'; the book knows the halls by pearl names ('trans translation', commons/data/book/transformation.json). The other halls hand over with 'The next hall' (Trans_Pre :48, Trans_Rotation :156, Trans_Scale :47, Trans_Body :75). Add the backward reference at Trans_Translation :69 'In Point_Trace, movement left positions behind.' — Point_Trace's map_info.name is also the bare ID with no title.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced Trans_Translation, Trans_Rotation and Point_Trace IDs in reader-facing handovers with next hall and trace hall. The sequence and referenced encounters are unchanged.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:29:01.272Z"
+     },
+     {
+       "id": "book_transformation.012",
+@@ -459,9 +492,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Rotation"
+       ],
+@@ -476,9 +509,12 @@
+       "proposal": "Insert a heading before the carousel region, e.g. '## A rate instead of an angle', so the five profiles read as their own stop.",
+       "evidence": "commons/maps/Trans_Rotation/final.md:127 '## Inside the turns' heads the boolean_tunnel region (:125) and the carousel_cake region begins at :143 without a heading; map_data.json places the tunnel at (19,42) and five carousel_cake profiles at (6,43), (32,43), (6,49), (32,49), (6,55); word counts: Trans_Rotation 1548, next-longest Trans_Pit 1265.",
+       "review": "kept: Confirmed. Quote exact at Trans_Rotation/final.md:145. '## Inside the turns' (:127) heads the boolean_tunnel region (:125) and the carousel_cake region (:143) has no heading of its own; the five ## headings are :5, :41, :84, :101, :127. map_data.json places the tunnel at (19,42) and five carousel_cake profiles at (6,43), (32,43), (6,49), (32,49), (6,55). Raw word counts: Trans_Rotation 1548, Trans_Pit 1265 (next longest). A heading before :143 costs one line and gives the hall's last idea its own stop.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nGave the carousel its own heading, A rate instead of an angle, after the carousel anchor. This makes the shift from fixed tunnel angles to changing rates easier to follow without shortening its comparison.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:29:03.317Z"
+     },
+     {
+       "id": "book_transformation.016",
+@@ -487,9 +523,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Translation"
+       ],
+@@ -504,9 +540,12 @@
+       "proposal": "':58 ...then move it sideways.' and, in the same line, 'they have the same distance to travel up and across.'",
+       "evidence": "commons/primitives/translation/translation_cube_demo.gd:45; commons/primitives/translation/constrained_door.gd:11-12, :174-176; commons/maps/Trans_Translation/final.md:56, :58.",
+       "review": "amended: Confirmed, and the same line has a second 'out'. translation_cube_demo.gd:45 default course lift_lateral; constrained_door.gd:11-12 phase1_dir +Y then phase2_dir +X, :174-176 second leg `base2 + phase2_dir * u`; Trans_Translation/final.md:56 calls the missing component 'sideways', then :58 says 'move it outwards' and, two sentences on, 'the same distance to travel up and out'. Both should agree with 'sideways'.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nChanged outwards to sideways and up and out to up and across. The shipped lift_lateral course constrains the second leg along X. The relationship between permitted movement and the recorded line remains intact.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:29:07.410Z"
+     },
+     {
+       "id": "book_transformation.001",
+@@ -515,9 +554,9 @@
+       "effort": "1h",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Pit"
+       ],
+@@ -532,10 +571,13 @@
+       "proposal": "Remove the 21 `h:fire` cells of the rotation room (rows 11-13) from map_data.json, and review the 7 around the pushers (rows 3 and 5) and growers (row 21), which the map's dev_notes already call disarmed; re-run the pathfinder and re-bake the hall. If the flames are wanted as a 'do not wait here' mark, name them in this sentence and in line 3's 'room to watch the others from beside them'.",
+       "evidence": "commons/maps/Trans_Pit/map_data.json layers.utilities rows 11-13: `h:fire` at x=1,2,6,7,8,12,13 (21 cells); row 3 x=5,9; row 5 x=3,9; row 21 x=1,5,9 (28 in all); slabs `rc:90:y:4:-0.6` at (4,12) and (10,12); caption (7,9) `3t:ROTATION / WATCH FROM BESIDE IT`; map_info.museum.simulation {grid:true, staged:true, fire:false}, where `fire` is the basin's water-fire (endless_museum.gd:8149, :8906), not the h: cells; endless_museum.gd:11052-11112 embeds the real GridSystem and returns before _stamp_map_utilities (:11355); UtilityRegistry.gd:120-122 `h` -> danger_zone.tscn; GridUtilitiesComponent.gd:813-840 sets danger_type FIRE; DangerZone.gd:124 -> _build_fire_visuals :135-160 (FireMesh 1x0.3x1 orange box, particles, light); _sim_grid_disarm endless_museum.gd:11382-11404 sets monitoring/monitorable=false only; DangerZone.gd:22-23 and :94-95 FIRE_DAMAGE_PER_TICK 10 / FIRE_TICK_INTERVAL 2.0, :475-482 heat multiplier up to x4, :531 half tick on entry (CLAUDE.md's '35 per 0.3 s' is stale); doc/book/iterations/2026-09-23-moving-boundary/growers-small.png, the left panel of the-room-keeps-time.png referenced at Trans_Pit/final.md:62, shows the orange fire slab beside the 0.3 m grower; dev_notes: 'Source fire tokens are disarmed by the current embedded museum'.",
+       "review": "amended: Fact confirmed and understated. The nine middle cells are `h:fire`, but so are the twelve cells flanking the slabs (x=1-2 and 12-13, rows 11-13) where the caption ROTATION / WATCH FROM BESIDE IT and line 3 ('room to watch the others from beside them') send the visitor; the only unburnt floor in that room is the slabs' own sweep. The museum embeds the real grid, which builds each cell as a DangerZone with an orange slab, particles and a pulsing light; _sim_grid_disarm only sets monitoring=false, and the chapter's own growers figure shows one of the slabs. The damage numbers quoted from CLAUDE.md are stale: the code deals 10 per 2 s tick, heat-ramped to 40.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24",
+-      "stale": true
++      "notes": "Codex review — 24 September 2026\nRemoved all 28 legacy h:fire cells from Trans_Pit, including the 21 cells on the rotation observation floor. Current intent, summary and tutorial already describe an optional level-floor study. Disarming Area3D detection left flame visuals in place; removing the utilities repairs the promised encounter. No other grid cell or artifact placement changed. Source and companion notes updated; new native grower photographs replace the outdated chapter pair. In the isolated production museum there are no remaining DangerZone instances, all 21 observation cells have floor support, and the actual museum body traverses the middle and both side strips. The complete run passed 72 checks and exited 0. No live bake replacement or headset claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "stale": true,
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:36.631Z"
+     },
+     {
+       "id": "book_transformation.005",
+@@ -544,9 +586,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Introduction"
+       ],
+@@ -561,10 +603,13 @@
+       "proposal": "Place the existing pair after line 78 as a two-panel figure in the sequence's style (composited with a title strip like the-room-keeps-time.png), captioned e.g. 'The aligned plank at BANK 0 and at BANK +1.00 m. The plank and the camera have not moved; the landing has.' If a +0.50 m state is preferred, reshoot with that iteration's build.py; otherwise no capture is needed.",
+       "evidence": "doc/book/iterations/2026-09-23-transformation-encounters/bank-at-crossing.png (readout 'BANK +0.00 m / Aligned: overlap 0.30 m') and bank-gap.png ('BANK +1.00 m / Aligned: gap 0.70 m'), both 1800x1200 from the same standpoint; SUMMARY.md: 'The two bank images use the same aligned bridge pose for a fair comparison'; index.html section #bank carries their captions; no `![` in commons/maps/Trans_Introduction/final.md; commons/artifacts/adjustable_landing/adjustable_landing.gd:6-7 TRAVEL 1.0 / SPEED 0.25, :112 `separation := displacement - 0.30`, :114 readout text; commons/scenes/mapobjects/rotation_cube.gd:56 bridge profile 3.6 x 0.2 x 1.0.",
+       "review": "amended: The need is real (the only hall after Trans_Pre without a figure, and the argument-bearing one), but the effort is wrong: the paired photograph already exists from the 23 September transformation-encounters pass, same camera, plank held at its aligned quarter-turn in both frames, readout legible. What is missing is the reference in final.md, not the capture. No Godot run is needed unless the +0.50 m state is insisted on.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24",
+-      "stale": true
++      "notes": "Codex review — 24 September 2026\nAdded the existing bank-at-crossing and bank-gap native photographs to Trans_Introduction at the loss-of-overlap passage. Both use the same camera and aligned plank pose, inspected visually and confirmed by the original capture record. Copied the original PNGs byte-for-byte to stable book figure paths; no fabricated screenshot or new control claim. Published them as two images with one comparison caption; the review page puts the pair side by side.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "stale": true,
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:28:46.897Z"
+     },
+     {
+       "id": "book_transformation.013",
+@@ -573,9 +618,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Trans_Translation"
+       ],
+@@ -590,10 +635,13 @@
+       "proposal": "'…then move it sideways.'",
+       "evidence": "commons/primitives/translation/translation_cube_demo.gd:45 course 'lift_lateral'; constrained_door.gd:11 phase1_dir +Y then phase2_dir +X, :174–175 second leg along phase2_dir; Trans_Translation/final.md:56 'The sideways part of your gesture has gone missing.'",
+       "review": "kept: Confirmed: the rail's second leg is +X in the door's frame, which the hall has just called 'the sideways part of your gesture'; 'outwards' invites a visitor to try the depth axis. One word.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24",
+-      "stale": true
++      "notes": "Codex review — 24 September 2026\nChanged outwards to sideways and up and out to up and across. The shipped lift_lateral course constrains the second leg along X. The relationship between permitted movement and the recorded line remains intact.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-transformation-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "stale": true,
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T18:29:05.361Z"
+     }
+   ]
+ }

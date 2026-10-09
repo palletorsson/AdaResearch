@@ -1,0 +1,93 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -3,20 +3,26 @@
+     "primary_tokens": [
+       "row_3_x",
+       "grid_2d_4x4",
++      "array_floor_writer",
+       "molnar_cube_study"
+     ],
+-    "reason": "Row and grid introduce indexed occupancy; the Molnar-inspired transparent cube study varies transforms at fixed sites before the full-scale third-index hall.",
++    "reason": "Row and grid introduce indexed occupancy; the changing floor gives a write a bodily consequence; the Molnár-inspired transparent cube study varies transforms at fixed sites before the full-scale third-index hall.",
+     "status": "source_checked_draft",
+     "sequence": "array_tutorial",
+     "text_path": "commons/maps/Array/final.md",
+-    "text_sha256": "cf2bc21e3d3996e2eed9088f7519fea23a00352444e996f6b44037f85171d7f0",
+-    "map_sha256": "7cc10589031a334d23545490a3298a91651847db1e00ccfea8ce7b7ffabedc2d",
++    "text_sha256": "3043c95e16632de6a52c555a83f54a9473d6f4cca3f1c31387af715cc8a4b861",
++    "map_sha256": "7b989857e1da6f9f93c0dc2ebf9171298eb2f76bae8df24e25650ddc712c57f6",
+     "learner_verified": false,
+     "pilot_action_id": "array-addresses-persist",
+     "runtime_check": {
+       "evidence": "doc/book/iterations/2026-09-23-array-molnar-volume/report.json",
+       "scope": "38 focused checks for the new study: production museum placement, supplied pointer controls, deterministic transforms, fixed indices, bounded geometry and an actual-body circuit around the plinth. Not a full hall or headset/learner test.",
+       "earlier_evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
++    },
++    "local_review": "doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++    "floor_runtime_check": {
++      "evidence": "doc/book/iterations/2026-09-24-arrays-review-comments/floor/report.json",
++      "scope": "25 controlled native checks: live grid writes, once-per-state pacing, protected cells and existing Molnár pad and existing Molnár pad, pause/resume, support removal, actual-body descent and occupancy-aware restoration. Not a headset traverse, recovery/comfort or learner test."
+     }
+   },
+   "Tutorial_3D": {
+@@ -27,13 +33,14 @@
+     "status": "source_checked_draft",
+     "sequence": "array_tutorial",
+     "text_path": "commons/maps/Tutorial_3D/final.md",
+-    "text_sha256": "69aed5e771fadce21041baac9cbf1e57dc564e518721e6ab83d0d228acb84731",
++    "text_sha256": "1a40420001d0e4fe6ef161ae5c5b122410ea6111e4f2d5cdc9949d379241d469",
+     "map_sha256": "be5c9daee7c3bd35be2c592b21cb6ae582f94343542122f68757ad99865844fd",
+     "learner_verified": false,
+     "runtime_check": {
+       "evidence": "doc/book/iterations/2026-09-23-array-entered-address/report.json",
+       "scope": "31 focused checks: real pointer selection and supplied key-input flight/collection/hover/return through the production museum controller. Figures use selected camera poses. Headset comfort and learner acceptance remain open."
+-    }
++    },
++    "local_review": "doc/book/iterations/2026-09-24-arrays-review-comments/index.html"
+   },
+   "Tutorial_Tiling_Floor": {
+     "primary_tokens": [
+@@ -49,7 +56,8 @@
+     "runtime_check": {
+       "evidence": "doc/book/iterations/2026-09-23-tiling-underfoot/report.json",
+       "scope": "42 focused checks: supplied real pointer events, exact current texture comparisons, unchanged floor geometry/contacts and supplied key-input crossings through the production museum controller. No headset or learner claim."
+-    }
++    },
++    "local_review": "doc/book/iterations/2026-09-24-arrays-review-comments/index.html"
+   },
+   "Tutorial_Tiling_Walls": {
+     "primary_tokens": [
+@@ -60,13 +68,14 @@
+     "status": "encounter_revision_draft",
+     "sequence": "array_tutorial",
+     "text_path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+-    "text_sha256": "ecef775211fb6a44198ea56b0724a3266bf60070c5b8336c89851fec6a0d5443",
++    "text_sha256": "05464cd876f14b472c35fa0fd211c6696e3544cbf58186470b22abd4d07fec16",
+     "map_sha256": "ae691694a72dd0f559a06b3d8829188e4aef3a5a968fee13f4c47e270e212dfb",
+     "learner_verified": false,
+     "runtime_check": {
+       "evidence": "doc/book/iterations/2026-09-23-tiling-wall-and-outside/report.json",
+       "scope": "25 focused checks: supplied pointer and key input through the actual museum controller; selected boundary/landing/return route and staged native captures. No headset or learner claim."
+-    }
++    },
++    "local_review": "doc/book/iterations/2026-09-24-arrays-review-comments/index.html"
+   },
+   "Tutorial_Disco": {
+     "primary_tokens": [
+@@ -78,13 +87,14 @@
+     "status": "source_checked_draft",
+     "sequence": "array_tutorial",
+     "text_path": "commons/maps/Tutorial_Disco/final.md",
+-    "text_sha256": "f32460bf2c9edf83f8f6c53c129a513b2913644f641cd1aabe8716756e29826f",
++    "text_sha256": "17157168068d87042c7e3f79aacc445112f94a1a1fa6b5b3a1b277af23a2382d",
+     "map_sha256": "b41df70d842fc31f5d67b9ff116c2c53dc4a1e8c4d6de30814cff1cc011de075",
+     "learner_verified": false,
+     "pilot_action_id": "disco-stored-step-trace",
+     "runtime_check": {
+       "evidence": "doc/book/iterations/2026-09-23-disco-super-triangle/report.json",
+       "scope": "121 focused isolated museum checks: existing square controls and independent clocks, 24 held triangle poses, intermediate HOLD, step, score pulses, palette inputs, unchanged tile transforms and collision, and three supplied-key controller walks. 96 native shader samples form an edited silent preview. Audio muted. No headset, listening or learner claim."
+-    }
++    },
++    "local_review": "doc/book/iterations/2026-09-24-arrays-review-comments/index.html"
+   }
+ }

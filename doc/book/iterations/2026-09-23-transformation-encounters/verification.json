@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Trans_Introduction retains all earlier code excerpts",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction retains earlier named encounters",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction snapshot matches canonical text",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction text hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction map hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation retains all earlier code excerpts",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation retains earlier named encounters",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation snapshot matches canonical text",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation text hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation map hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Body retains all earlier code excerpts",
+      "passed": true
+    },
+    {
+      "name": "Trans_Body retains earlier named encounters",
+      "passed": true
+    },
+    {
+      "name": "Trans_Body snapshot matches canonical text",
+      "passed": true
+    },
+    {
+      "name": "Trans_Body text hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Body map hash current",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction changes one interactable placement",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction preserves structural grid",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation changes one interactable placement",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation preserves structural grid",
+      "passed": true
+    },
+    {
+      "name": "commons/data/artifact_roles.json parses",
+      "passed": true
+    },
+    {
+      "name": "commons/maps/sequences/transformation.json parses",
+      "passed": true
+    },
+    {
+      "name": "tools/run_encounter_probe.py syntax",
+      "passed": true
+    },
+    {
+      "name": "doc\\book\\iterations\\2026-09-23-transformation-encounters\\build.py syntax",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation native checks pass",
+      "passed": true
+    },
+    {
+      "name": "Trans_Rotation no GDScript errors",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction native checks pass",
+      "passed": true
+    },
+    {
+      "name": "Trans_Introduction no GDScript errors",
+      "passed": true
+    },
+    {
+      "name": "HTTP index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP DECISIONS.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "HTTP source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP Trans_Rotation.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP order-comparison.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP commuting-comparison.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP marked-sweep.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP array-mark-zero.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP array-mark-ninety.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bank-gap.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bank-at-crossing.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bank-control-close.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP array-and-comparison.png",
+      "passed": true
+    }
+  ]
+}

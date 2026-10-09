@@ -1,0 +1,21 @@
+--- before/commons/maps/WaveFunctions_Synthesis_Lab/technical.md
++++ after/commons/maps/WaveFunctions_Synthesis_Lab/technical.md
+@@ -1,6 +1,6 @@
+ # Synthesis Lab — a finite sum made inspectable
+ 
+-Builds on AirMusic's separate voices and leads to Random_Definition's question of replay. `additive_wave_demo:0#stand:bench#waveform:sawtooth` at (4,2) is the sole primary. It is a visual sum, not an audio synthesizer. The other 24 placements remain supporting laboratory material; their states are not controlled by this bench.
++Builds on AirMusic's separate voices and leads to Random_Definition's question of replay. `additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true` at (4,2) is the sole primary. It is a visual sum, not an audio synthesizer. The other 24 placements remain supporting laboratory material; their states are not controlled by this bench.
+ 
+ ## State and computation
+ 
+@@ -9,6 +9,10 @@
+ The sum and components use 256 samples spanning four cycles across two metres. `_time` advances by `delta * base_frequency` (default 1) and wraps at 1000; HOLD pauses this display clock. The sum's scale is 0.30 m per unit. Ladder rows use 0.20 m per unit, with axes separated by 0.15 m. Their vertical offsets must be removed before comparing geometry with the sum.
+ 
+ The slider signal reads the handle's normalized value back into exactly one coefficient. BASELINE writes the saved arrival table to all sliders. H1 ALONE preserves H1 (or sets it to one if below 0.01), and zeroes the rest. Neither resets `_time`. The readout updates on changes and ten times per second while scrolling.
++
++## Naming after comparison
++
++This hall opts into `name_after_compare:true`. Arrival shows `ARRIVAL RECIPE`; a manual coefficient edit changes that invitation to `COMPARE THE SUM`. HOLD leaves the name waiting. The existing H1 ALONE or BASELINE action reveals the detector’s current name, and subsequent edits keep recognition available. Coefficients, formula, rows, marker and controls remain visible. The bench-front caption identifies the finite, nonnegative, phase-locked family. Other placements retain immediate names and their existing caption.
+ 
+ ## Recipe recognition revised
+ 

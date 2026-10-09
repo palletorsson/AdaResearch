@@ -1,0 +1,175 @@
+{
+  "run": {
+    "started": "2026-09-13T08:53:03+02:00",
+    "finished": "2026-09-13T08:53:26+02:00",
+    "pid": 2104,
+    "exit": 0,
+    "checks": 81,
+    "failures": [],
+    "source_sha256": {
+      "ada_run/gallery_probe_base.gd": "6a44e0e24f582bd56b6404b029a57d07e54561c1c3832f348680a9f984fd98e3",
+      "ada_run/noise_galleries_extra.gd": "cd5b5f6873eaeb84bae6422e333bef47fa8cc4ef5cac43437bcf6db273580c79",
+      "commons/maps/Random_Noise_Types/map_data.json": "f6bac6ab11c77490be06be59427f68e616f53352f1bc8c791de6defb09881be9",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+      "algorithms/randomness/whitenoise/noise_gallery_console.gd": "f2ad7b1b283aacfe64ed55e4adf32928cabc6b5482174b19fef18afcb84fe012",
+      "algorithms/randomness/whitenoise/noise_spectrum_3d.gd": "a21f432f11c9010a799834306d4584181b0edb24ddc23a00eb7e8402c416b6cd",
+      "algorithms/randomness/whitenoise/white_noise_spectrum.gd": "bd40ba84af503e6d1bcc7392ef6ecf57f8fc1f1e054391093e6ef1067350ace9"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "post_run_formatting": [
+    {
+      "path": "algorithms/randomness/whitenoise/noise_spectrum_3d.gd",
+      "tested_sha256": "a21f432f11c9010a799834306d4584181b0edb24ddc23a00eb7e8402c416b6cd",
+      "current_sha256": "1766ae0e71867a342e5560267dfc7c413f2d3d98d3c65716a800497b89d14e2c",
+      "change": "One empty EOF line removed after the accepted runtime; all other bytes identical."
+    },
+    {
+      "path": "algorithms/randomness/whitenoise/white_noise_spectrum.gd",
+      "tested_sha256": "bd40ba84af503e6d1bcc7392ef6ecf57f8fc1f1e054391093e6ef1067350ace9",
+      "current_sha256": "5c81b630f64d3665927856b1a422af06051ebadf98028c7e33d316bcbd284ca2",
+      "change": "One empty EOF line removed after the accepted runtime; all other bytes identical."
+    }
+  ],
+  "primary": [
+    "randompoint",
+    "randompoints",
+    "WhiteNoiseGallery",
+    "NoiseColors3D"
+  ],
+  "pack": {
+    "planned": 4,
+    "matched": 4,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 4,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "noise|random noise types"
+  },
+  "preserved_methods": {
+    "white_noise_spectrum.gd": [
+      "generate_spectrum",
+      "_generate_noise_sample",
+      "_reset_audio_filter_state"
+    ],
+    "noise_spectrum_3d.gd": [
+      "generate_spectrum",
+      "_generate_noise_sample",
+      "_reset_audio_filter_state",
+      "_generate_single_type",
+      "_generate_all_types",
+      "_calculate_spectral_power"
+    ]
+  },
+  "map_changes": [
+    [
+      4,
+      4,
+      "WhiteNoiseGallery:180:-0.500:0.050",
+      "WhiteNoiseGallery:180:-0.500:0.050#stand:gallery#seed:31415"
+    ],
+    [
+      6,
+      4,
+      "NoiseColors3D:180:-0.500:0.100",
+      "NoiseColors3D:180:-0.500:0.100#stand:gallery#seed:31415"
+    ]
+  ],
+  "original_passages_preserved_except_handoff": true,
+  "final_words": 1583,
+  "audio": {
+    "NoiseColors3D-white.wav": {
+      "rms": 0.0923753461406572,
+      "mean": -0.0002890258554057934,
+      "adjacent_correlation": -0.0004111587508988446,
+      "sha256": "c83c7b3dc6103baa24423c05371b3410f586b854615d1013a54eae7e4a64316a",
+      "duration": 2.0
+    },
+    "NoiseColors3D-pink.wav": {
+      "rms": 0.030476693318025674,
+      "mean": -0.0022182617362872764,
+      "adjacent_correlation": 0.8161305215971822,
+      "sha256": "a3a3092612fc3717b4b9838f44e5b38bc2c3b70dc2b310ebbe08bbbf43c17321",
+      "duration": 2.0
+    },
+    "NoiseColors3D-brown.wav": {
+      "rms": 0.3002035094994592,
+      "mean": -0.1639766676652655,
+      "adjacent_correlation": 0.9996711955638643,
+      "sha256": "fb40e10cb4e8629fdb962edc53822f531e549b8bf86c12c160f7074f2acda4fb",
+      "duration": 2.0
+    },
+    "NoiseColors3D-blue.wav": {
+      "rms": 0.1805662381769298,
+      "mean": -3.622775444599629e-06,
+      "adjacent_correlation": -0.015421491311657721,
+      "sha256": "7e1616ef5f57c0de03668d94fe966a58fd88195571f135cc103e608bc82474d2",
+      "duration": 2.0
+    },
+    "NoiseColors3D-violet.wav": {
+      "rms": 0.11759796269262905,
+      "mean": -8.100207560465449e-07,
+      "adjacent_correlation": -0.5012425838263207,
+      "sha256": "17163227541e1153bb71ea97f1fb9026d25c4e57a12d3144c0838e8fa29cc7d5",
+      "duration": 2.0
+    },
+    "WhiteNoiseGallery-white.wav": {
+      "rms": 0.0923753461406572,
+      "mean": -0.0002890258554057934,
+      "adjacent_correlation": -0.0004111587508988446,
+      "sha256": "c83c7b3dc6103baa24423c05371b3410f586b854615d1013a54eae7e4a64316a",
+      "duration": 2.0
+    },
+    "WhiteNoiseGallery-pink.wav": {
+      "rms": 0.030476693318025674,
+      "mean": -0.0022182617362872764,
+      "adjacent_correlation": 0.8161305215971822,
+      "sha256": "a3a3092612fc3717b4b9838f44e5b38bc2c3b70dc2b310ebbe08bbbf43c17321",
+      "duration": 2.0
+    },
+    "WhiteNoiseGallery-brown.wav": {
+      "rms": 0.3002035094994592,
+      "mean": -0.1639766676652655,
+      "adjacent_correlation": 0.9996711955638643,
+      "sha256": "fb40e10cb4e8629fdb962edc53822f531e549b8bf86c12c160f7074f2acda4fb",
+      "duration": 2.0
+    },
+    "WhiteNoiseGallery-blue.wav": {
+      "rms": 0.1805662381769298,
+      "mean": -3.622775444599629e-06,
+      "adjacent_correlation": -0.015421491311657721,
+      "sha256": "7e1616ef5f57c0de03668d94fe966a58fd88195571f135cc103e608bc82474d2",
+      "duration": 2.0
+    },
+    "WhiteNoiseGallery-violet.wav": {
+      "rms": 0.11759796269262905,
+      "mean": -8.100207560465449e-07,
+      "adjacent_correlation": -0.5012425838263207,
+      "sha256": "17163227541e1153bb71ea97f1fb9026d25c4e57a12d3144c0838e8fa29cc7d5",
+      "duration": 2.0
+    }
+  },
+  "diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer."
+  ],
+  "publication_files": 72
+}

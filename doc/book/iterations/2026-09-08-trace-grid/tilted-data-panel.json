@@ -1,0 +1,19 @@
+{
+  "change": "Tilted backed trace-data panel with a large retained-point count and the latest ten indexed coordinate rows",
+  "panel_tilt_from_vertical_degrees": 35,
+  "anchoring": "Fixed beside the first retained sample when the panel first opens; remains fixed through capacity eviction; clear hides and resets it.",
+  "row_numbering": "One-based indices into the current retained line, not lifetime sample IDs. Eighteen points display rows 9 through 18.",
+  "layout": "Backing expands to measured glyph bounds, including configured font sizes and the time recorder extra line.",
+  "checks": {
+    "checks": 16,
+    "failures": [],
+    "scope": "Real recorder with supplied positions; screenshot is one trace, not a headset reading test."
+  },
+  "regressions": {
+    "snap_and_pen": 76,
+    "board_pens": 62,
+    "trace_grid_discovery": 28
+  },
+  "preview": "ada_run/trace_data_panel/preview.png",
+  "limits": "Actual packed scenes and rendering with supplied motions; headset acceptance and simultaneous-panel crowding have not been tested. Startup UID/certificate/log/shader cache diagnostics persist without script errors."
+}

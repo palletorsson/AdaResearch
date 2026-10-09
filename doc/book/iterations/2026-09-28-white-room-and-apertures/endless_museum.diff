@@ -1,0 +1,15 @@
+--- before/commons/scenes/endless_museum.gd
++++ current/commons/scenes/endless_museum.gd
+@@ -14359,6 +14359,12 @@
+ ## (0, 0, z0) and cells are unit metres, so a world position maps straight onto
+ ## a _walk_cells key with no conversion.
+ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
++	# Walk-in architecture may report its actual partitions, leaving the interior open.
++	if node.has_method("get_museum_occupied_cells"):
++		var occupied: Array = []
++		for key in node.call("get_museum_occupied_cells"):
++			if key is Vector2i and _walk_cells.has(key): occupied.append(key)
++		return occupied
+ 	# An approach-opening threshold is a traversable route, like the lobby gate.
+ 	# Its own moving colliders still govern when the body can cross. Only opt-in
+ 	# doors with jambs inside existing walls declare this; fixed objects still seal.

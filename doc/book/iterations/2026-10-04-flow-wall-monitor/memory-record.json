@@ -1,0 +1,63 @@
+{
+  "id": "finding-cc65e63e98074229964d62e8cdcfd27f",
+  "scope": "map:Flow_Field",
+  "kind": "decision",
+  "text": "Flow_Field is now a 4.8 × 3.2 metre wall monitor with a separate waist-height console, as requested by Palle.",
+  "reason": "Make the field readable across the hall while keeping controls reachable.",
+  "sequence_effect": "Same field sampler, particle update, 80-particle lesson and trails; only the display mount and control placement change.",
+  "project_effect": "Actual museum staging change, separate from the two pending Change teaching proposals. Current museum route and book image now show the wall monitor.",
+  "status": "accepted",
+  "method": "Current Endless Museum before/after rendered desktop runs. 45 after checks passed, standing pointer rays and callbacks checked, seeded local particle records identical. No headset test.",
+  "created_by": "Codex",
+  "created_at": "2026-10-04T18:12:36.160775Z",
+  "review_note": "Implements Palle’s explicit request: make the flow field a big wall monitor. Verified the museum installation; this does not accept the separate teaching proposals.",
+  "reviewed_at": "2026-10-04T18:12:39.076082Z",
+  "related_scopes": [
+    "sequence:change"
+  ],
+  "sources": [
+    {
+      "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/README.md",
+      "sha256": "af6ca20afdbe13fe82eca722e88fcff8a4ae83bec0e77c06d69eb6754a50995b",
+      "current_sha256": "af6ca20afdbe13fe82eca722e88fcff8a4ae83bec0e77c06d69eb6754a50995b",
+      "status": "current"
+    },
+    {
+      "path": "commons/maps/Flow_Field/map_data.json",
+      "sha256": "d0bdb0cc19c67bbf9753a88611c36dea9b36d22c81e35281879aee5571bf9835",
+      "current_sha256": "d0bdb0cc19c67bbf9753a88611c36dea9b36d22c81e35281879aee5571bf9835",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/flow_field_painter/wall_monitor.gd",
+      "sha256": "d6cb48fe3caed8ca1ab81d70fd1010dd33e641240905b32bbcdd6dcebd93accb",
+      "current_sha256": "d6cb48fe3caed8ca1ab81d70fd1010dd33e641240905b32bbcdd6dcebd93accb",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+      "sha256": "e16f3e875ead31ac3c1e99f8c3f0e22ad4f802edc3553323f3a8fd79c2327b66",
+      "current_sha256": "e16f3e875ead31ac3c1e99f8c3f0e22ad4f802edc3553323f3a8fd79c2327b66",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "sha256": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+      "current_sha256": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/after/checks.json",
+      "sha256": "f761096cc4ac4ad8e697d63b556342c8f970994ed0352618d5a01f3efcef5c20",
+      "current_sha256": "f761096cc4ac4ad8e697d63b556342c8f970994ed0352618d5a01f3efcef5c20",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/after/particle-parity.json",
+      "sha256": "45d9cdabdf6db85f48dfcf5b1aa314af967f1f6c49c07a63826885ac9e55d6aa",
+      "current_sha256": "45d9cdabdf6db85f48dfcf5b1aa314af967f1f6c49c07a63826885ac9e55d6aa",
+      "status": "current"
+    }
+  ],
+  "freshness": "current"
+}

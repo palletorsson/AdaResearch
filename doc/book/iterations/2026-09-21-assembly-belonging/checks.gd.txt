@@ -1,0 +1,232 @@
+	report["checks"] = []
+	var study: Node3D = nodes.get("MolecularDesigner")
+	check(report,is_instance_valid(study),"Existing MolecularDesigner placed")
+	if not is_instance_valid(study): quit(1); return
+	await process_frame
+	var body: Node3D = study.get_node_or_null("BodyWorkshop")
+	check(report,is_instance_valid(body),"Opt-in body workshop built in actual hall")
+	if not is_instance_valid(body): quit(1); return
+	study.set_process(false)
+	study._assemble("VRBody")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	check(report,body.joints.size()==study.assemblies.VRBody.nodes.size(),"Editable body reuses complete existing VRBody specification")
+	check(report,body.pairs.size()==study.assemblies.VRBody.bonds.size(),"Every declared body relation retained")
+	check(report,body.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Pickable body stays at metre scale beneath enlarged artifact")
+	check(report,body.joints[1].position.y>1.7 and body.joints[1].position.y<2.0,"Body is within standing reach")
+	var index: int = body.names.find("l_hand")
+	var handle: RigidBody3D = body.joints[index]
+	var initial: Vector3 = body.targets[index]
+	var hand_camera := Camera3D.new()
+	root.add_child(hand_camera)
+	hand_camera.global_position = handle.global_position + Vector3(0,0,1.2)
+	hand_camera.look_at(handle.global_position)
+	var pointer: Node3D = load("res://commons/scenes/DesktopInteractionPointer.gd").new()
+	root.add_child(pointer)
+	pointer.set_process(false)
+	pointer._camera = hand_camera
+	await physics_frame
+	check(report,pointer._find_grabbable()==handle,"Actual desktop ray finds joint on pickable layer")
+	pointer._grab_held(handle)
+	check(report,body.active.has(index),"Desktop grab starts an edit")
+	hand_camera.global_position += Vector3(-.55,.25,.5)
+	for frame in range(24):
+		pointer._process(1.0/60)
+		body._process(1.0/60)
+	pointer._drop_held()
+	var released: Vector3 = body.targets[index]
+	check(report,released.distance_to(initial)>.6,"Desktop carrying actually changes body proportions")
+	check(report,handle.freeze and handle.collision_layer==4,"Drop retains pose and restores pickable layer")
+	check(report,body.edit_count==1 and body.active.is_empty(),"Completed desktop edit recorded once")
+	var untouched: Vector3 = body.targets[body.names.find("r_hand")]
+	study._assemble("Chair")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	for frame in range(120): body._process(1.0/60)
+	check(report,body.targets[index].is_equal_approx(released),"Authored catalogue cycle cannot overwrite visitor pose")
+	check(report,body.targets[body.names.find("r_hand")].is_equal_approx(untouched),"Other joints do not silently follow the edited hand")
+	# Exercise the real XRTools grab driver through a synthetic controller; not headset input.
+	var controller := XRController3D.new()
+	root.add_child(controller)
+	var pickup: Node3D = load("res://addons/godot-xr-tools/functions/function_pickup.gd").new()
+	controller.add_child(pickup)
+	pickup.set_process(false)
+	controller.global_position = handle.global_position
+	handle.pick_up(pickup)
+	check(report,handle.is_picked_up() and body.active.has(index),"XRTools pickup driver starts edit")
+	var before_vr_move: Vector3 = handle.global_position
+	controller.global_position += Vector3(.25,.1,-.3)
+	for frame in range(5): await physics_frame
+	check(report,handle.global_position.distance_to(before_vr_move)>.1,"XRTools driver carries joint with synthetic controller movement")
+	handle.let_go(pickup,Vector3.ZERO,Vector3.ZERO)
+	check(report,not handle.is_picked_up() and body.active.is_empty(),"XRTools release completes edit")
+	check(report,handle.freeze and handle.collision_layer==4,"VR release remains frozen and pickable")
+	var rod_index := 0
+	for i in range(body.pairs.size()):
+		if body.pairs[i].y==index: rod_index=i
+	var pair: Vector2i = body.pairs[rod_index]
+	body._process(0)
+	check(report,is_equal_approx(body.rods[rod_index].mesh.height,body.targets[pair.x].distance_to(body.targets[pair.y])),"Connection length updates to moved endpoints")
+	handle.global_position = body.to_global(Vector3(20,-3,20))
+	body._process(0)
+	check(report,body.targets[index].is_equal_approx(Vector3(1.9,.12,1.9)),"Workspace bounds keep joints in the bay")
+	body.reset_pose()
+	check(report,body.targets[index].is_equal_approx(initial),"Author reset restores original without changing adjacency")
+	check(report,body.export_pose().positions.size()==body.joints.size(),"All joint positions available for research capture")
+
+	study._assemble("VRBody")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	var legacy: Node3D = load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	legacy.enable_auto_cycle=false
+	root.add_child(legacy)
+	await process_frame
+	check(report,not legacy.has_node("BodyWorkshop"),"Other placements keep legacy default")
+	legacy.queue_free()
+	# Open the actual exit for controlled continuous walking.
+	var gate: Dictionary = museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		museum.get("_mod_gate").call("step_open",gate,10.0)
+	var collar: Node3D = body.bond_handle
+	check(report,is_instance_valid(collar) and collar.collision_layer==4,"Turquoise collar is a real pickable on desktop/VR layer")
+	var base_positions: Array=body.targets.duplicate()
+	var base_pairs: Array=body.pairs.duplicate()
+	body.edit_count=0
+	var head_index: int=body.names.find("head")
+	var old_target: int=body.pairs[body.bond_index].y
+	var elbow: int=body.pairs[body.bond_index].x
+	hand_camera.global_position=collar.global_position+Vector3(0,0,1.2)
+	hand_camera.look_at(collar.global_position)
+	await physics_frame
+	check(report,pointer._find_grabbable()==collar,"Actual desktop ray selects the collar separately from the wrist")
+	pointer._grab_held(collar)
+	check(report,body.bond_held,"Desktop pickup loosens the connection")
+	var destination: Vector3=body.to_global(body.targets[head_index])
+	hand_camera.global_position=destination+Vector3(0,0,1.2)
+	hand_camera.look_at(destination)
+	for frame in range(60):pointer._process(1.0/60);body._process(1.0/60)
+	check(report,body.connection_candidate()==head_index and body.bond_preview.visible,"Carried endpoint finds the head and shows a snap preview")
+	check(report,same_points(body.targets,base_positions) and body.pairs==base_pairs,"Holding a connection changes neither committed graph nor joint positions")
+	pointer._drop_held()
+	check(report,not body.bond_held and body.pairs[body.bond_index].y==head_index,"Desktop drop commits the new neighbour")
+	check(report,same_points(body.targets,base_positions) and body.joints.size()==13 and body.pairs.size()==12,"Reconnection preserves all coordinates and both counts")
+	check(report,collar.freeze and collar.collision_layer==4,"Released collar remains reachable and pickable")
+	var record: Dictionary=Store.read(self)
+	check(report,record.schema==2 and Store.changed(record)==0 and Store.changed_connections(record)==1,"Record separates a relation change from moved joints")
+	check(report,Store.components(record)==2,"Same thirteen points and twelve edges now form two connected groups")
+	check(report,record.start_edges[body.bond_index][1]=="l_hand" and record.edges[body.bond_index][1]=="head","Original and altered graphs are kept separately")
+	var revision: String=record.revision
+	# Empty drop, self-connection and duplicate edge all restore the previous attachment.
+	for invalid_target in [Vector3(1.85,2.3,1.8),body.targets[elbow],body.targets[body.names.find("l_sh")]]:
+		collar.on_desktop_grab(null);collar.global_position=body.to_global(invalid_target)
+		check(report,body.connection_candidate()==-1,"Unavailable target has no snap candidate")
+		collar.on_desktop_drop(null)
+		check(report,body.pairs[body.bond_index].y==head_index and Store.read(self).revision==revision,"Invalid drop returns the edge without writing another edit")
+	# A true XRTools pickup path, using a synthetic controller, can undo the reconnection.
+	controller.global_position=collar.global_position
+	collar.pick_up(pickup)
+	check(report,collar.is_picked_up() and body.bond_held,"XRTools driver can take the loose end")
+	controller.global_position+=body.to_global(body.targets[old_target])-collar.global_position
+	for frame in range(8):await physics_frame
+	check(report,body.connection_candidate()==old_target,"Synthetic controller carries the endpoint back to the original wrist")
+	collar.let_go(pickup,Vector3.ZERO,Vector3.ZERO)
+	check(report,body.pairs==base_pairs and Store.changed_connections(Store.read(self))==0,"XRTools release can restore the original relation")
+	# A concurrently held gold joint is still uncommitted when the collar is released.
+	var held_index: int=body.names.find("r_hand")
+	body.joints[held_index].on_desktop_grab(null)
+	body.joints[held_index].global_position=body.to_global(Vector3(1.1,1.5,.5))
+	body._process(0)
+	collar.on_desktop_grab(null);collar.global_position=body.to_global(body.targets[head_index]);collar.on_desktop_drop(null)
+	record=Store.read(self)
+	check(report,Store.changed(record)==0 and Store.changed_connections(record)==1,"Saving a connection excludes a still-held joint's unfinished position")
+	body.joints[held_index].global_position=body.to_global(base_positions[held_index])
+	body.joints[held_index].on_desktop_drop(null)
+	remove_meta(Store.KEY)
+	record=Store.read(self)
+	check(report,Store.changed_connections(record)==1,"Rewired graph survives clearing session memory and reading disk")
+	var restored: Node3D=load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	restored.body_workshop=true;restored.enable_auto_cycle=false;restored.position=Vector3(80,0,60)
+	root.add_child(restored);await process_frame
+	var restored_body: Node3D=restored.get_node("BodyWorkshop")
+	check(report,restored_body.pairs[restored_body.bond_index].y==head_index,"Revisited workshop restores the altered relation")
+	check(report,restored_body.original_pairs==base_pairs,"Restoring does not overwrite the comparison's original graph")
+	restored.queue_free();await process_frame
+	var returned: Node3D=load("res://commons/artifacts/assembly_return/assembly_return.tscn").instantiate()
+	returned.position=Vector3(80,0,60);root.add_child(returned)
+	check(report,Store.changed_connections(returned.record)==1 and Store.components(returned.record)==2,"Final gallery reads the rewired record")
+	var expected_length: float=base_positions[elbow].distance_to(base_positions[head_index])
+	var return_rods: Array=[]
+	for node in returned.bodies.get_node("KeptPose").get_children():
+		if node is MeshInstance3D and node.mesh is CylinderMesh:return_rods.append(node)
+	check(report,is_equal_approx(return_rods[body.bond_index].mesh.height,expected_length),"Returned connecting rod uses the new endpoints")
+	var ledger: Node3D=load("res://commons/artifacts/accountability_ledger/accountability_ledger.tscn").instantiate()
+	ledger.visitor_record=true;ledger.position=Vector3(80,0,60);root.add_child(ledger)
+	check(report,ledger._entries[3]=="12 connections; 1 rerouted","Final ledger distinguishes retained count from changed relation")
+	var v1:=record.duplicate(true);v1.schema=1;v1.erase("start_edges");v1.edges=record.start_edges.duplicate(true)
+	check(report,Store.valid(v1) and Store.changed_connections(v1)==0,"Earlier schema-one pose files remain readable")
+	var invalid_record:=record.duplicate(true);invalid_record.start_edges=[]
+	check(report,not Store.valid(invalid_record),"New records require the original graph")
+	invalid_record=record.duplicate(true);invalid_record.edges[0]=invalid_record.edges[1].duplicate()
+	check(report,not Store.valid(invalid_record),"Duplicate edges are rejected before saving")
+	returned.queue_free();ledger.queue_free()
+	body.reset_pose();body.edit_count=0
+	Store.keep(self,body._record())
+	check(report,body.pairs==base_pairs and same_points(body.targets,base_positions),"Author reset restores both geometry and graph for paired views")
+
+	var root_collar: Node3D = body.bond_start_handle
+	check(report,is_instance_valid(root_collar) and root_collar.endpoint==0,"The other end has its own real pickup handle")
+	# Isolate the hand first; the second collar then makes a different reunion possible.
+	collar.on_desktop_grab(null);collar.global_position=body.to_global(body.targets[head_index]);collar.on_desktop_drop(null)
+	hand_camera.global_position=root_collar.global_position+Vector3(0,0,1.2)
+	hand_camera.look_at(root_collar.global_position)
+	await physics_frame
+	check(report,pointer._find_grabbable()==root_collar,"Actual desktop ray selects the second collar separately from the elbow")
+	pointer._grab_held(root_collar)
+	var reunion: Vector3=body.to_global(body.targets[old_target])
+	hand_camera.global_position=reunion+Vector3(0,0,1.2);hand_camera.look_at(reunion)
+	for frame in range(60):pointer._process(1.0/60);body._process(1.0/60)
+	check(report,body.connection_candidate(0)==old_target and body.bond_start_preview.visible,"Second end previews the isolated hand")
+	check(report,Store.components(Store.read(self))==2,"Holding the second end has not silently saved its destination")
+	pointer._drop_held()
+	check(report,body.pairs[body.bond_index]==Vector2i(old_target,head_index),"Desktop release connects the hand directly to the head")
+	check(report,same_points(body.targets,base_positions) and body.pairs.size()==12,"Reunion changes no joint positions or connection count")
+	var joined: Dictionary=Store.read(self)
+	check(report,Store.components(joined)==1 and Store.changed_connections(joined)==1,"All thirteen joints are connected again through a different relation")
+	remove_meta(Store.KEY)
+	joined=Store.read(self)
+	var join_restored: Node3D=load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	join_restored.body_workshop=true;join_restored.enable_auto_cycle=false;join_restored.position=Vector3(80,0,60)
+	root.add_child(join_restored);await process_frame
+	check(report,join_restored.get_node("BodyWorkshop").pairs==body.pairs,"Disk reload and workshop revisit retain edits to both ends")
+	join_restored.queue_free()
+	var join_return: Node3D=load("res://commons/artifacts/assembly_return/assembly_return.tscn").instantiate()
+	join_return.position=Vector3(80,0,60);root.add_child(join_return)
+	check(report,Store.components(join_return.record)==1 and join_return.record.edges[body.bond_index]==["l_hand","head"],"Final gallery reconstructs the joined body rather than the earlier isolation")
+	join_return.queue_free()
+	# Exercise a synthetic XRTools pickup of the second end as well.
+	controller.global_position=root_collar.global_position;root_collar.pick_up(pickup)
+	check(report,root_collar.is_picked_up() and body.held_ends.has(0),"XRTools can take the second end")
+	controller.global_position+=body.to_global(body.targets[elbow])-root_collar.global_position
+	for frame in range(8):await physics_frame
+	check(report,body.connection_candidate(0)==elbow,"Synthetic controller moves the second end independently")
+	root_collar.let_go(pickup,Vector3.ZERO,Vector3.ZERO)
+	check(report,body.pairs[body.bond_index]==Vector2i(elbow,head_index),"XRTools second-end release restores the earlier isolated-hand graph")
+	# Both ends can be held. The first release saves only itself.
+	root_collar.on_desktop_grab(null);collar.on_desktop_grab(null)
+	root_collar.global_position=body.to_global(body.targets[old_target])
+	collar.global_position=body.to_global(body.targets[old_target])
+	root_collar.on_desktop_drop(null)
+	var simultaneous: Dictionary=Store.read(self)
+	check(report,simultaneous.edges[body.bond_index]==["l_hand","head"] and body.bond_held,"First of two releases saves one end; the unfinished other end remains held")
+	check(report,body.connection_candidate()==-1,"Second release is revalidated against the first: self-connection unavailable")
+	collar.on_desktop_drop(null)
+	check(report,Store.read(self).revision==simultaneous.revision and not body.bond_held,"Invalid second release returns to its committed attachment without another edit")
+	# Duplicate and empty drops apply to the newly editable end too.
+	for invalid_target in [body.targets[body.names.find("torso")],Vector3(1.85,2.3,1.8)]:
+		root_collar.on_desktop_grab(null);root_collar.global_position=body.to_global(invalid_target)
+		check(report,body.connection_candidate(0)==-1,"Newly editable end rejects duplicate or empty target")
+		root_collar.on_desktop_drop(null)
+	check(report,Store.read(self).revision==simultaneous.revision,"Rejected second-end changes preserve the kept body")
+	controller.queue_free();pointer.queue_free();hand_camera.queue_free()
+	body.reset_pose();body.edit_count=0;Store.keep(self,body._record())

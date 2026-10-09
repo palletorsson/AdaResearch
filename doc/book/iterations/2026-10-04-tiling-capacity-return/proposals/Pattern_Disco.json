@@ -1,0 +1,36 @@
+{
+  "id": "Pattern_Disco",
+  "title": "Keep the pattern, change its palette",
+  "storyboard": "The familiar floor returns after Colour with two replaceable colours. Bring the earlier address rule and palette lookup; use the existing value_at result rather than making another floor or clock. With the floor held and sequencer stopped, change the pair that displays zero and one, then keep the pair while advancing one phase. Predict what stays related in each comparison. The floor receiver, controls and independent score remain supplied. The student carries the separation between a computed value and its displayed colour. The optional triangle comparison uses a different shader drawing, not one whole-cell zero or one; it can retain the palette question without becoming the opening shader lesson.",
+  "storyboard_short": "Reuse existing value_at and Colour palette lookup. Hold floor/stop score; change colour pair, then phase alone. Predict unchanged relationships. Supply floor/controls/separate score clock. Carry value versus appearance. Triangle drawing optional and distinct from whole-cell values. No new floor/clock; reduced palette-edit entry still to be chosen.",
+  "mode": "deepen",
+  "brings": [
+    "timed array rule",
+    "palette lookup"
+  ],
+  "learns": [
+    "a computed pattern value and its display palette can change independently"
+  ],
+  "carries": "A known address rule with an independently chosen two-colour palette.",
+  "supplied": [
+    "floor receiver",
+    "existing independent sequencer"
+  ],
+  "artifact_refs": [
+    "disco_controls",
+    "standalone_disco",
+    "step_sequencer"
+  ],
+  "review_note": "Revisit the current two-colour lookup instead of requiring a new floor or timer. The production console chooses four prepared pairs; a learner-authored pair needs a named source-edit entry. Super Triangle is separately drawn by a shader.",
+  "independent_check": "Keep phase fixed and predict which cells change when one palette entry changes; then advance phase with that palette unchanged.",
+  "prior_maps": [
+    "Tutorial_Disco",
+    "Color_Context_Placed",
+    "Color_Walls"
+  ],
+  "source_refs": [
+    "commons/artifacts/regularity/disco_controls.gd",
+    "commons/context/discofloor/StandaloneDiscoFloor.gd"
+  ],
+  "change_reason": "Let Colour return through an operation the student already knows."
+}

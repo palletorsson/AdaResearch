@@ -1,0 +1,59 @@
+{
+  "status": "opening two halls revised; six chapters await their focused pass",
+  "summary": "What did 180 degrees depend on? Euclid returns to the museum route, with physical controls for reading and removing the gold emphasis. The next hall compares measured angles on a plane, a sphere and a Poincare disk. Its former seven-value curvature dial concealed only three geometries; the revised encounter names those three models and measures their corners correctly. All existing artifact families remain.",
+  "items": [
+    {
+      "title": "A statement becomes something we can ask again",
+      "description": "The plaque now offers NEXT and GOLD at 1.05 m. Its colonnade and supporting artifacts return, repositioned around the central walk. The printed-angle triangle becomes a primary comparison: the next hall measures what this one labels. No secondary artifact is removed.",
+      "images": [
+        "doc/book/iterations/2026-09-20-foundations-opening-review/euclid-colonnade.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/euclid-fifth.png"
+      ],
+      "captions": [
+        "The restored Euclid hall, looking along its central approach.",
+        "The fifth postulate, with NEXT and GOLD below the plaque."
+      ],
+      "image_note": "Current Godot museum captures, not before/after versions. Selected collision-body approaches pass. The test walker is hidden for photographs; museum artifacts remain visible. Tracked hands and headset reading are untested.",
+      "text_kind": "book — Euclid",
+      "before": "So let's break the branch. `highlight_fifth` is an exported bool. Set it false and the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.",
+      "after": "Now press GOLD. It switches `highlight_fifth` off: the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/final.diff",
+      "report_label": "Exact changes to both manuscripts"
+    },
+    {
+      "title": "Three hosts; three measurements",
+      "description": "HOST selects plane, sphere or disk. The surface sits behind the console and tilts towards the visitor so the controls do not cover its triangle. The displayed angles come from analytic edge tangents. Independent spherical and hyperbolic formulas agree with these example sums: 180.0, 202.1 and 103.1 degrees. The bench illustrates a relation; it does not independently verify a curvature integral or prove Gauss–Bonnet.",
+      "images": [
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-plane.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-sphere.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-disk.png"
+      ],
+      "captions": [
+        "PLANE · straight segments, 180.0 degrees.",
+        "SPHERE · great-circle edges, 202.1 degrees.",
+        "DISK · hyperbolic geodesics, 103.1 degrees."
+      ],
+      "image_note": "Three states of the revised workbench in the actual museum, from the same camera at 1.70 m. These are separate example triangles, not an unchanged triangle transported between spaces. The collision-test walker is hidden for photographs.",
+      "text_kind": "book — Non-Euclidean Spaces",
+      "before": "The previous room let you stand inside an assumption until it stopped feeling like one. This room puts the assumption on a dial. There is a slider here with a number on it, and the number is the curvature of space — negative to the left, zero in the middle, positive to the right. Flatness is the detent at zero. It is not the centre because it is correct; it is the centre because it is zero.",
+      "after": "Start with PLANE at the bench near the entrance. Follow each yellow edge with your eye. Before moving the slider, predict what will happen to the angle sum when the triangle sits on a sphere. More than 180°? Less? The same, because it is still a triangle?\n\nMove to SPHERE. The edges take the short great-circle routes between their endpoints. Look at a corner: each incoming direction has to be read on the sphere, where the corner lives. The total rises. Move back to PLANE. It returns to 180°.\n\nNow try DISK. The triangle lies inside a circle; its sides curve towards the centre. Its angles add to less than 180°. The disk looks flat. That is already a complication worth staying with.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/model-checks.json",
+      "report_label": "Control signals and independent angle checks"
+    },
+    {
+      "title": "Keep the invitation; distinguish what each artifact can establish",
+      "description": "Bowing a line in a flat plane is separated from changing its host geometry. Unequal gaps between three parallels are separated from failure of parallelism. The Riemann sphere remains primary, and all six non-Euclidean exhibits remain available. The revised chapter distinguishes a visible disk boundary, metric distance and the point added at infinity.",
+      "text_kind": "book — Non-Euclidean Spaces",
+      "before": "Geometry was chosen, not found. That is settled by the time you leave this room, and it is settled without anyone having to be wrong.",
+      "after": "Mathematics lets us specify different geometries. Which geometry models a physical situation is a further question, answered with measurements and assumptions; a slider cannot settle it. Nor does one curvature value specify every possible space.\n\nHere the question is close enough to touch. When we change the host, what must a line do to remain straight? What have we kept, and what have we quietly replaced?\n\nFor now, return the slider to PLANE. The floor has not moved. Your account of it has.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/SUMMARY.md",
+      "report_label": "Decisions, remaining six halls and verification limits"
+    },
+    {
+      "title": "The sequence is still in progress",
+      "description": "Seven of eight declared halls now occur in the authored route; Florensky is still missing and explicitly remains a restoration task. Russell, Gödel, Escher, Brouwer, Florensky and Synthesis keep their manuscripts and maps byte for byte. Next: Russell, with Gödel as the adjacent check on what a logical limit actually says.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/content-checks.json",
+      "report_label": "Preservation and integration checks"
+    }
+  ]
+}

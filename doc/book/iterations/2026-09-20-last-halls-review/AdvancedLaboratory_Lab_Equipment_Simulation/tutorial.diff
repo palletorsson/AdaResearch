@@ -1,0 +1,20 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md
+@@ -4,7 +4,7 @@
+ 
+ <!-- @MolecularDesigner -->
+ 
+-Choose a visible part during the floating phase. Follow it as an assembly forms. Watch another floating phase and a different assembly; notice both its destination and any change of shape or colour.
++Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+ 
+ The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+ 
+@@ -22,7 +22,7 @@
+ 
+ [Implementation](../../../algorithms/computationalbiology/molecular_framework/Part.gd). This is an excerpt from the artifact, not a standalone program.
+ 
+-The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a part the inventory cannot supply? Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
++The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a kind of part the catalogue does not describe? The initial inventory is mutable: an assembly can retype an existing instance or create more instances. Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
+ 
+ <!-- @ -->
+ 

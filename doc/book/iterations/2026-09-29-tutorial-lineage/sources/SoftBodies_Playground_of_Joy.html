@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Playground_of_Joy · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Playground_of_Joy">← Tutorial lineage</a></p><h1>SoftBodies Playground of Joy</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Playground_of_Joy/final.md">Raw captured source</a></p><pre># When does a body become a form?
+
+&lt;!-- @rounded_softbody_test --&gt;
+
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
+
+Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.
+
+What has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room&#x27;s axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow.
+
+Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
+
+The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
+
+The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form. A branch recipe, a deformed surface and a sampled field may resemble one another without explaining one another. A small sphere with a thought above it may be wandering near the exit, or standing still. It is an agent from an earlier sequence, placed here with nothing of its own to do; this hall does not use it.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @frozen_glass_vessel --&gt;
+
+You have met this vessel before. In Form Finding it stood beside the cloth bench as a fossil of forces, two hundred steps of the bench&#x27;s own solver. Here it has grown two controls, and the question has moved from what a budget leaves to what a chosen duration keeps.
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
+
+```gdscript
+sim.gravity = Vector3(gravity_x, gravity_y, gravity_z)
+sim.constraint_passes = 5
+```
+
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
+
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette.
+
+A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing. Next, we will ask what else an image of a body invites us to infer.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Playground_of_Joy/tutorial.md">Raw captured source</a></p><pre># When does a body become a form?
+
+&lt;!-- @rounded_softbody_test --&gt;
+
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
+
+Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.
+
+What has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room&#x27;s axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow.
+
+SQUEEZE changes the strength used by the artifact&#x27;s existing squeeze interaction. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
+
+The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
+
+The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form. A branch recipe, a deformed surface and a sampled field may resemble one another without explaining one another.
+
+
+
+&lt;!-- @frozen_glass_vessel --&gt;
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
+
+```gdscript
+sim.gravity = Vector3(gravity_x, gravity_y, gravity_z)
+sim.constraint_passes = 5
+```
+
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
+
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette.
+
+A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing. Next, we will ask what else an image of a body invites us to infer.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Playground_of_Joy/technical.md">Raw captured source</a></p><pre># When does a body become a form? — implementation
+
+Primary source scenes:
+
+- `res://algorithms/softbodies/rounded_softbody_test.tscn`
+- `res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers MEASURE, FEEDBACK, SQUEEZE, STIFFNESS, DURATION, GRAVITY, RULE, and blocks repeated activation during rebuilds. The seven controls fit a 4×2 desk with a small inclined transparent readout.
+
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
+
+Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.
+
+What has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room&#x27;s axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow.
+
+SQUEEZE changes the strength used by the artifact&#x27;s existing squeeze interaction. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
+
+The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
+
+The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form. A branch recipe, a deformed surface and a sampled field may resemble one another without explaining one another.
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
+
+```gdscript
+sim.gravity = Vector3(gravity_x, gravity_y, gravity_z)
+sim.constraint_passes = 5
+```
+
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
+
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette.
+
+A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing. Next, we will ask what else an image of a body invites us to infer.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+
+Implementation notes: `volume_feedback` is independent of `measure` and defaults to false. Pressure feedback uses elapsed delta with the existing gain, a 2% deadband and a pressure range of -1..2. The local MODE/FEEDBACK buttons and hall desk control the same state. The hall&#x27;s `lesson:true` seats the specimen bench before its physics reference capture; other test-harness placements retain their elevation. Frozen glass geometry is translated above its floor datum after simulation, with a two-sided trimesh collision child that is replaced on each reconstruction. This supplies surface contact, not a solid interior or a cut mouth.
+
+The rounded body&#x27;s mesh is created before `SoftBody3D` enters the scene tree. Godot 4.6 connects its simulation/render path when entering the world; adding an empty body and assigning its mesh afterwards had left the point readings at zero. The six mesh faces now have consistent outward winding. Deck collision includes the visible apron depth, avoiding the initial expansion passing through the former 6 cm shell. World-space overlays and the desktop squeeze centre follow simulated points, while the history chart stays in the bench&#x27;s local frame.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Playground_of_Joy/intent.md">Raw captured source</a></p><pre># Intent
+
+What does a frozen surface keep of the process that made it?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Playground_of_Joy/critical.md">Raw captured source</a></p><pre># When does a body become a form? — question the construction
+
+What does a frozen surface keep of the process that made it?
+
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
+
+SQUEEZE changes the strength used by the artifact&#x27;s existing squeeze interaction. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
+
+The strain display compares the current geometry with reference lengths. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
+
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
+
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. The walkable glass surface also has limits established by its mesh and collision; resemblance to a vessel does not guarantee an opening large enough for a body.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Playground_of_Joy/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `rounded_softbody_test` — primary
+- `frozen_glass_vessel` — primary
+- `branching_growth_algorithm` — secondary
+- `entropy_morphogenesis` — secondary
+- `gridagent` — secondary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Playground_of_Joy/summary.md">Raw captured source</a></p><pre># When does a body become a form?
+
+What does a frozen surface keep of the process that made it?
+
+Primary encounters: rounded_softbody_test, frozen_glass_vessel. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Playground_of_Joy/blurb.md">Raw captured source</a></p><pre># When does a body become a form?
+
+What does a frozen surface keep of the process that made it?
+</pre></section></body></html>

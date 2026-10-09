@@ -1,0 +1,19 @@
+--- before/technical.md
++++ current/technical.md
+@@ -12,7 +12,15 @@
+ 
+ The source helix uses `r = 0.1 * phi ** (angle / TAU)`, with a vertical term; this multiplies radius by phi per full revolution. It is not the conventional golden logarithmic spiral, whose radial multiplier is phi per quarter revolution. The 144 seed points use `r = 0.1 * sqrt(i)` and `angle = i * TAU / phi²`. The pinecone-like construction has 8 pieces in each of 13 layers with a 0.3-radian turn between layers. Shell-like chambers and the branching diagram introduce other explicit rules. These are constructed resemblances, not validated biological explanations.
+ 
+-## Golden rectangle and arcs
++## Hand pair and complete learner construction — 8 October 2026
++
++The numbers desk now installs `hand_sum.gd`, extending the complete small `sum_points.gd` construction printed in `tutorial.md`. `point_body.gd` is carried unchanged from the preceding hand models. The adapter reads a separate prefix of the original source's precomputed Fibonacci array and sends each new request through the existing desk NEXT. The printed learner version owns `[1,1]` and appends the last two entries' sum itself. Both render the same record twice, through linear and logarithmic height functions, then apply a common factor 0.2. One unit in the small linear view is 0.01 m. The two equal-sized point bodies carry labels; size and contact distance do not encode their quantities.
++
++One held point within 0.19 m of its partner requests one sum. A latch requires both points released before another held request; this also guards the trigger alternative. Released points return to their reachable homes. A desk edit during a hold synchronises the data and inhibits an additional contact until release. The installed version ignores global Enter; the printed workspace example uses the named `ui_accept` action. Two simultaneous hand pickups are possible but unnecessary: one hand can bring a point to its resting partner. No new locomotion or cross-hall storage is introduced.
++
++The new off-white table stands beside the original console at desk-local (-2.15, 0, 2); its NEXT/BACK/RESET controls are adjacent to the points. Small drawings have no collision, while the support and pickable points do. The original six controls, SUM witness, secondary displays, seven placements and map structure remain. Ten terms bound both representations. The independent printed seed variation `[1,2]` is executed separately and ends at 89. Numerical recurrence, geometric square removal and visual resemblance remain separate claims.
++
++## Golden rectangle and arcs (existing comparison)
+ 
+ The second source computes `phi = (1 + sqrt(5)) / 2`. The initial rectangle is 5 by 5/phi metres. A cut removes a square of side `min(width,height)` and retains a rectangle with one dimension reduced by that side. The remainder alternates orientation and retains the long/short ratio phi, up to floating-point error. Squares plus the current remainder partition the original area; historical remainder records must not be summed again as additional material.
+ 

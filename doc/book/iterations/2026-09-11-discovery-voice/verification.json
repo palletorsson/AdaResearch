@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-11",
+  "scope": "Six current Claude finals; editorial revision grounded in current source",
+  "rooms": [
+    {
+      "map": "WaveFunctions_Intro",
+      "before_words": 713,
+      "after_words": 613,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "commons/artifacts/control_pendulum/control_pendulum.gd"
+      ]
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "before_words": 925,
+      "after_words": 656,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd"
+      ]
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "before_words": 783,
+      "after_words": 659,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd"
+      ]
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "before_words": 567,
+      "after_words": 607,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd"
+      ]
+    },
+    {
+      "map": "Random_Definition",
+      "before_words": 568,
+      "after_words": 571,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "algorithms/randomness/seed_replay/seed_replay_demo.gd"
+      ]
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "before_words": 662,
+      "after_words": 626,
+      "code_excerpts": 2,
+      "anchors_preserved": true,
+      "sources": [
+        "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+        "algorithms/randomness/perlinnoise/NoiseVisualizer.gd"
+      ]
+    }
+  ],
+  "code_excerpts": 12,
+  "source_sha256": {
+    "commons/artifacts/control_pendulum/control_pendulum.gd": "094dfcf4d85b12e87b341ae51e6795d6ca92a9be7f7088d92328af750becfa57",
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "ebbee4c1a3d50e548dfd0af2c92f0e8a2b6fb0ea5022f338bead877b6f9484e5",
+    "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd": "d43247da7a596e45215b5f2ffe288f676c7bc0d2854579c4920765d3a795d5d6",
+    "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd": "2255c953d6c8b92186dd1190ecab12035f4d1ffc449843d888fc6d7f1d1536bb",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "88aa4bd4bdd532da2e195958557951e014bb3a2aeb8eb616dfc1aeb4c64c0cf5",
+    "algorithms/randomness/simplexnoise/SimplexVisualizer.gd": "ea15c0bc02665e0df319609ea0aeebaaff83d3547a3c5ad10503644c9799f49d",
+    "algorithms/randomness/perlinnoise/NoiseVisualizer.gd": "ea4e552ab1d69690a61c505f9713697ae060b4fd82df16a0790341a30f78cfc9"
+  },
+  "runtime": "No new runtime or listening evidence; Effect Sound remains provisional",
+  "literary_assessment": "Human editorial judgement, not established by these source checks"
+}

@@ -1,0 +1,20 @@
+--- before/commons/artifacts/registry/commons_artifacts.json
++++ commons/artifacts/registry/commons_artifacts.json
+@@ -1874,7 +1874,7 @@
+     "ca_rule_explorer": {
+       "category": "emergence",
+       "complexity": "intermediate",
+-      "description": "Browse and experiment with different cellular automata rule sets in real-time. Dial through Wolfram's elementary rules or configure custom neighborhood and transition tables to discover the full spectrum from dead stillness to chaotic noise, with complexity emerging at the edge.",
++      "description": "Explore elementary one-dimensional cellular automata by changing their eight-bit rule and initial seed. The configured neighbourhood study exposes held steps and retained rows; comparison mode enlarges the same history on the floor.",
+       "dev_themes": [
+         "biology",
+         "commons",
+@@ -1905,7 +1905,7 @@
+         ],
+         "size_group": "standard"
+       },
+-      "qfep_connection": "Rule 110 is Turing complete â€” proof that simple local rules can produce universal computation. Edge of chaos territory.",
++      "qfep_connection": "A visible resemblance can invite comparison without proving a shared procedure. Rule 110 has a universality proof; its finite museum display does not itself demonstrate an encoded computation.",
+       "scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+       "sequence": "cellularautomata",
+       "size_group": "standard",

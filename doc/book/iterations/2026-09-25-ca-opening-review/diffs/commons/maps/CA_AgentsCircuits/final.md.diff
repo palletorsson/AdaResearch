@@ -1,0 +1,11 @@
+--- before/commons/maps/CA_AgentsCircuits/final.md
++++ commons/maps/CA_AgentsCircuits/final.md
+@@ -4,7 +4,7 @@
+ 
+ Can two constructions resemble one another without doing the same calculation?
+ 
+-Set the rule explorer to Rule 90 and reset its central seed. Press STEP a few times. Follow the triangular gaps that develop between occupied cells. Choose a larger triangle and look for smaller ones arranged within its boundary. Add rows, up to fifteen steps, when you need more to compare; at the sixteenth the pattern's two diagonal edges meet around the ring and every new row from then on is empty.
++Press 90 on the explorer’s CA RULES panel, then RST to return to the central seed. Press STEP a few times. Follow the triangular gaps that develop between occupied cells. Choose a larger triangle and look for smaller ones arranged within its boundary. Add rows, up to fifteen steps, when you need more to compare; at the sixteenth the pattern's two diagonal edges meet around the ring and every new row from then on is empty.
+ 
+ Each new cell is still calculated from a local neighbourhood. No instruction tells the display to draw a large triangle and then decorate it with smaller triangles. The repeated structure becomes visible through many applications of the rule.
+ 

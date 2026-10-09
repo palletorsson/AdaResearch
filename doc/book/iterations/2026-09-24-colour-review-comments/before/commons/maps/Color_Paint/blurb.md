@@ -1,0 +1,1 @@
+Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces. This is color as action - not selected from a menu but applied through motion, each stroke a record of your throw.

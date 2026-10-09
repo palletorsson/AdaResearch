@@ -1,0 +1,53 @@
+{
+  "map": "Point_Line_Grid",
+  "scope": "First encounter: snapping sphere, address and return",
+  "edits": [
+    {
+      "title": "Two ways to name a place",
+      "old": "Trace already made choices about which positions to keep. Here, look at the table's other way of naming them. Beside the coordinates in metres are integer indices. With this tool's five-centimetre spacing, `0.15` metres along X has index `3`: three spacings from world zero. The same place has two names.",
+      "new": "Trace already made choices about which positions to keep. Here the table names each kept position in metres and in whole-number steps from the origin. With five centimetres between grid positions, `0.15` metres along X has index `3`: three steps from world zero. The same place has two names.",
+      "incitement": "An index should become understandable through counting the spacings before the reader has to recognise the technical term. Preserve the relation to Trace and the sentence about two names.",
+      "purpose": "Introduce the integer index as a count of spacings from an origin, alongside the metre coordinate of the same retained position.",
+      "reader_move": "Read 0.15 metres and three five-centimetre steps as two descriptions of one retained X position.",
+      "why_here": "The reader has already met sampling in Trace; Grid adds an address that can be found again.",
+      "without": "Integer indices would arrive as unexplained terminology before their usefulness is felt.",
+      "assessment": "grounded",
+      "evidence": [
+        "units",
+        "snap-scene"
+      ]
+    },
+    {
+      "title": "Return without repeating the hand",
+      "old": "Let go. The tool brings its marker onto the lattice. Pick it up and try to return to that address. You have some room to be imprecise and still arrive at the same result. That can be useful: we may want two pieces to meet without having to place them by eye.[^point-grid-bowker-star]",
+      "new": "Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.[^point-grid-bowker-star]",
+      "incitement": "Rounding can assist a return. Let the hand vary while the recorded address agrees, so usefulness and omitted variation arise from the same action.",
+      "purpose": "Make the tolerance of a shared address available through moving away and returning; give it a constructive use in placement.",
+      "reader_move": "Release, move away and attempt the placement again without having to repeat the first movement exactly.",
+      "why_here": "After reading the operation, return to the hand and ask what it now makes easier.",
+      "without": "Rounding remains a numerical rule rather than a possible aid to making things meet.",
+      "assessment": "grounded",
+      "evidence": [
+        "snap",
+        "units",
+        "snap-release"
+      ]
+    },
+    {
+      "title": "Let the marker make the comparison",
+      "old": "The table gives another name to the retained position. It does not show the unrounded position beside it. We still need your movement to notice what this record leaves out.",
+      "new": "Move the marker a little while watching where the recorded line ends. Can you keep that end still? Both columns in the table name retained positions. The difference to look for is between the moving marker and the position the program keeps.",
+      "incitement": "Replace a warning about missing information with a comparison the visitor can try. The table does not contain a raw-input column; the moving marker supplies the other side of the encounter.",
+      "purpose": "Let the visitor compare visible marker motion with a held recorded position, while keeping the meaning of both table columns clear.",
+      "reader_move": "Try to move the marker while leaving the recorded endpoint unchanged.",
+      "why_here": "Turns the two-name explanation into a visible relation before extending the interval to a whole-body walk.",
+      "without": "The paragraph would end in a general disclaimer rather than an action that can reveal the distinction.",
+      "assessment": "grounded",
+      "evidence": [
+        "units",
+        "snap",
+        "snap-recording"
+      ]
+    }
+  ]
+}

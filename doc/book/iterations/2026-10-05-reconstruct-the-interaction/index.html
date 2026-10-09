@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ada · Can the student make it?</title><style>*{box-sizing:border-box}body{margin:0;background:#f3efe7;color:#272d2f;font:16px/1.65 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:48px 28px}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:52px;max-width:18ch}h2{font-size:33px;margin-top:36px}p{max-width:76ch}a{color:inherit;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:22px;border-block:1px solid #c8c1b8;padding:15px 0;margin-bottom:35px;font-size:13px}pre{padding:22px;background:#253035;color:#f5eee7;overflow:auto;font:14px/1.65 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}img{width:100%;display:block}figure{margin:32px 0}figcaption,.small{font-size:12px;color:#706b66}.brief{background:#e9dfd4;padding:24px}.brief pre{margin:0}.reading{max-width:82ch;margin:40px auto;background:#fffdf8;padding:32px 42px;border:1px solid #ddd4c8}.reading p{font:18px/1.7 Georgia,serif}.reading h1{font-size:36px}.reading h2{font-size:27px}.reading pre{margin-inline:-18px}.reading code{overflow-wrap:anywhere}.reading pre code{overflow-wrap:normal}.status{padding:20px 25px;border-left:4px solid #a35e7e;background:#eee3e7}.status p{margin:6px 0}.evidence{font-size:13px}a:focus-visible{outline:3px solid #a35e7e;outline-offset:4px}section{scroll-margin-top:20px}@media(max-width:700px){main{padding:24px 16px}h1{font-size:39px}.reading{padding:22px}.reading pre{margin-inline:0;font-size:12px}.brief{padding:12px}}@media print{nav{display:none}main{padding:0}.reading{border:0;padding:0;break-before:page}pre{white-space:pre-wrap}figure{break-inside:avoid}}</style></head><body><main>
+<p class="small">ADA / RECONSTRUCTION PILOT / 5 OCTOBER 2026</p><h1>Can the student make the interaction?</h1>
+<nav><a href="#brief">Short brief</a><a href="#reading">Read the trial lesson</a><a href="#evidence">What passed</a><a href="../../course/functional_text/RECONSTRUCTION.md">Writing framework</a></nav>
+<p>The lesson's object is a capability. This pilot asks for one: build a sphere that the prepared hand can grab, carry and release in place.</p>
+<figure><img src="museum-point.png" alt="The existing black point held beside the basin coordinate frame in the museum"><figcaption>Existing museum encounter · 3 October 2026. This photograph shows the reference artifact, not the new code example.</figcaption></figure>
+<section id="brief"><h2>Six lines hold the focus.</h2><div class="brief"><pre>MAKE: Black sphere; grab, carry, release in place.
+BRING: _ready; variables; mesh/node; collider; local position.
+GIVEN: Museum; configured XR hand; XRToolsPickable; collision settings; black material settings.
+BUILD: Body; matching mesh/shape; direct refs; frozen release.
+CHECK: Hold moves both; release stays; disabled refuses; new radius matches.
+LATER: Grip pose; trigger action; labels; coordinate readouts.
+</pre></div><p>The complete code below unfolds BUILD. The explanation tells the learner how its parts cause the selected behaviour. Coordinates' local/world teaching remains the next part.</p></section>
+<section id="reading" class="reading"><h1>Make a point the hand can carry</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickable body</li>
+<li>Shared mesh and collision dimensions</li>
+<li>Frozen release</li>
+</ul>
+<p>Take the black point. Move your hand. Release it.
+The point stays where you left it.
+Reconstruct that interaction with one small body.</p>
+<p>Point One gave you a mesh and a collider.
+Here they become children of a pickable body.
+The prepared XR hand supplies tracking and grabbing.
+Your code supplies the object it can hold.</p>
+<p>Use an empty <code>Node3D</code> as your station in a working copy of the prepared museum.
+Place it at the exercise position, with scale <code>(1, 1, 1)</code>.
+Attach <code>point.gd</code> below. It creates the point 1.12 metres above that station.
+No sphere, collider or point scene needs to be added by hand.</p>
+<p>The museum supplies the lit room and configured XR Tools player.
+Use the collision and material settings shown here.
+Their detailed configuration belongs to later lessons.</p>
+<h2>Build the whole small object</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+const RADIUS := 0.07
+var point: XRToolsPickable
+
+func _ready() -&gt; void:
+    point = XRToolsPickable.new()
+    point.position = Vector3(0, 1.12, 0)
+    point.freeze = true
+    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    point.collision_layer = 4 # Layer 3: Pickable Objects.
+    point.collision_mask = 196615 # Layers 1, 2, 3, 17 and 18.
+
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    var surface := MeshInstance3D.new()
+    surface.mesh = sphere
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(0.008, 0.008, 0.012)
+    material.roughness = 0.32
+    surface.material_override = material
+    point.add_child(surface)
+
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    var collider := CollisionShape3D.new()
+    collider.shape = shape
+    point.add_child(collider)
+
+    # Enter the tree last: XR Tools remembers these collision settings at ready.
+    add_child(point)
+</code></pre>
+<p><code>point</code> keeps a reference to the body your code creates.
+<code>XRToolsPickable</code> adds the toolkit's grab behaviour to a physics body.
+It does not create the sphere's surface or shape for you.</p>
+<p><code>surface.mesh = sphere</code> gives the visible node its geometry.
+<code>collider.shape = shape</code> gives the collision node its boundary.
+Both use <code>RADIUS</code>. Both belong to <code>point</code>, so both move with it.</p>
+<p><code>freeze</code> keeps the waiting point in place.
+<code>ReleaseMode.FROZEN</code> also keeps it in place after release.
+<code>RangedMethod.NONE</code> asks the hand to come close before grabbing.
+The museum point restores its original frozen setting; this smaller version declares frozen release directly.</p>
+<p>The layer values connect this body to the prepared collision setup.
+<code>4</code> selects the pickable layer; <code>196615</code> is the museum's existing collision mask.
+Keep those supplied values for this exercise.</p>
+<p>The final <code>add_child(point)</code> puts the completed body into the scene tree.
+Its inherited setup then remembers the configured collision settings.
+The hand's existing pickup function can find and move it.
+You do not need to write another tracking loop.</p>
+<h2>Predict, try, explain</h2>
+<p>Run your working copy. Bring the hand close, grab, move, release.
+The surface and boundary move together. The released body stays.</p>
+<p>Choose another <code>RADIUS</code> and run again.
+Predict the new visible radius and collision radius before grabbing.
+Explain why one value changes both.</p>
+<p>Then add <code>point.enabled = false</code> before <code>add_child(point)</code>.
+Predict the difference. The sphere still exists, but refuses pickup.
+Remove that line when finished.</p>
+<p>Rebuild the object once from the short brief, without the full listing.
+Name what your code creates and what the toolkit supplies.
+Record where you needed help; those gaps guide the next explanation.</p>
+<p>This construction ends at pickup and release.
+The next part of Coordinates must connect this point to a named frame and readout.
+Its current museum wall cards are not automatically connected to this new body.</p></section>
+<section id="evidence"><h2>Test the construction. Then test the teaching.</h2><div class="status"><p><b>30 native checks passed.</b> Real pickup library, synthetic controller, isolated Godot project.</p><p>Museum placement, physical headset input and beginner learning are not yet tested.</p></div><div class="evidence"><p>Keep a sentence when it helps the student build, observe, explain or transfer the selected operation. State the supplied boundary. More code is warranted when it closes a missing construction step. Extra code that implements another interaction can wait.</p>
+<p>Use <a href="../../course/functional_text/RECONSTRUCTION.md">the framework</a>, then <a href="tutorial.md">read the pilot lesson</a>. The full example is <a href="point.gd">point.gd</a>. <a href="report-runtime.json">Native evidence</a> and <a href="check-report.json">contract check</a> keep their claim scopes separate.</p><p><a href="REPORT.md">Full assessment</a> · <a href="contract.json">Declared contract</a> · <a href="brief.txt">Compact brief</a> · <a href="tutorial.md">Tutorial draft</a></p><p>Only this sub-lesson is piloted. The existing museum is unchanged; the canonical tutorial received the separate Z-direction correction.</p></div></section></main></body></html>

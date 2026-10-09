@@ -1,0 +1,268 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Gradient_Landscape · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Gradient_Landscape">← Tutorial lineage</a></p><h1>ML Gradient Landscape</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Gradient_Landscape/final.md">Raw captured source</a></p><pre># Three meanings of error
+
+Can the same observations lead a learner downhill in different directions?
+
+&lt;!-- @loss_function_comparator --&gt;
+
+Find the moving point on each of the three landscapes. Each landscape scores a straight-line fit to the same set of observations. Keep OUTLIERS low for a first comparison, then raise it. The three points return to their starting places. The unlabelled button beside the slider is the reset; press it to watch the same beginning again. Look for a difference between the responses rather than asking which point arrives first.
+
+The two horizontal coordinates represent the line’s slope and intercept. Height represents the error assigned to that candidate line. Moving across the surface therefore changes the proposed model, while moving down means improving the score under that particular definition of error.
+
+Choose one candidate slope and intercept in your imagination and compare what the three surfaces would say about that same candidate. The candidate line is unchanged; only the rule assigning its height differs. This makes a useful distinction between moving within one landscape and comparing landscapes. An apparent hill on one surface is not a physical obstacle in the observations. It is a way the chosen error calculation rates a set of model parameters.
+
+The squared-error surface punishes a large residual much more heavily than a small one.[^fitness-landscape] Huber loss is quadratic near zero and becomes linear for sufficiently large residuals. An unusual observation can therefore pull the two fitted lines differently. Raising OUTLIERS replaces more observations with fixed outlying values; it keeps the other observations and the outliers already introduced. Return the slider to an earlier setting and its sample returns too. We need something to hold still if we want to notice what a different judgement does.
+
+The third surface has a deliberately wavy error rule: a sine term is added to a quadratic term. Its label uses the word “adversarial”, but this exhibit is not training a generative adversarial network. It offers a rougher landscape on which local downhill movement can encounter a different arrangement of rises and hollows.
+
+At each step the points estimate a gradient from nearby samples of the surface and move against it. Their allowed slope and intercept are bounded. A final position can therefore reflect the starting point, the local terrain and the allowed region as well as the underlying observations.
+
+Return to an outlying observation in your imagination. Is it a measurement mistake, a rare event or a person whose case the majority fit neglects? The loss function cannot answer that question. Reducing its influence may be sensible in one situation and erase important evidence in another.
+
+&lt;!-- @ --&gt;
+
+The classification room will exchange a fitted line for groups. The same question remains: which differences does the chosen measure treat as important?
+
+[^fitness-landscape]: A loss surface is a fitness landscape read upside down: evolution climbs what a learner descends, and in both the shape decides how much one more correct answer is worth. *Nature of Code* puts it in a phrase: a score that grows with the square of the correct characters makes the 801st matter far more than the 800th. The particle swarm&#x27;s plate and Form Finding&#x27;s decoy basin are this object under other names.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Gradient_Landscape/tutorial.md">Raw captured source</a></p><pre># ML Gradient Landscape
+
+Gradient descent. Compute the slope; step downhill.
+
+Define a loss function.
+
+```gdscript
+func loss(p: Vector2) -&gt; float:
+    return (p.x * p.x + p.y - 11) ** 2 + (p.x + p.y * p.y - 7) ** 2  # Himmelblau
+```
+
+Himmelblau&#x27;s function. Four global minima at comparable values.
+
+Compute the gradient numerically.
+
+```gdscript
+func gradient(p: Vector2, h: float = 0.001) -&gt; Vector2:
+    var dx: float = (loss(Vector2(p.x + h, p.y)) - loss(Vector2(p.x - h, p.y))) / (2 * h)
+    var dy: float = (loss(Vector2(p.x, p.y + h)) - loss(Vector2(p.x, p.y - h))) / (2 * h)
+    return Vector2(dx, dy)
+```
+
+Central-difference approximation. Two function evaluations per axis.
+
+Vanilla gradient descent step.
+
+```gdscript
+func gd_step(p: Vector2, lr: float = 0.05) -&gt; Vector2:
+    return p - gradient(p) * lr
+```
+
+Move opposite to the gradient, scaled by the learning rate.
+
+Momentum gradient descent.
+
+```gdscript
+var velocity: Vector2 = Vector2.ZERO
+
+func momentum_step(p: Vector2, lr: float = 0.05, momentum: float = 0.9) -&gt; Vector2:
+    velocity = velocity * momentum - gradient(p) * lr
+    return p + velocity
+```
+
+Accumulate velocity across steps. Escapes shallow local minima.
+
+Adam optimiser.
+
+```gdscript
+var m: Vector2 = Vector2.ZERO  # first moment
+var v: Vector2 = Vector2.ZERO  # second moment
+var t: int = 0
+@export var beta1: float = 0.9
+@export var beta2: float = 0.999
+@export var eps: float = 1e-8
+
+func adam_step(p: Vector2, lr: float = 0.05) -&gt; Vector2:
+    t += 1
+    var g := gradient(p)
+    m = m * beta1 + g * (1 - beta1)
+    v = Vector2(v.x * beta2 + g.x * g.x * (1 - beta2), v.y * beta2 + g.y * g.y * (1 - beta2))
+    var m_hat: Vector2 = m / (1 - pow(beta1, t))
+    var v_hat: Vector2 = v / (1 - pow(beta2, t))
+    return p - Vector2(lr * m_hat.x / (sqrt(v_hat.x) + eps), lr * m_hat.y / (sqrt(v_hat.y) + eps))
+```
+
+Per-parameter adaptive learning rates. Adam is the default optimiser in modern deep learning.
+
+Render the loss surface.
+
+```gdscript
+func render_surface(bounds: Vector2, resolution: int = 64) -&gt; ArrayMesh:
+    var st := SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for y in resolution:
+        for x in resolution:
+            var p := Vector2(x, y) / resolution * bounds - bounds / 2
+            var height: float = loss(p)
+            st.add_vertex(Vector3(p.x, height, p.y))
+    # ... triangulation
+    return st.commit()
+```
+
+A grid of vertices at computed heights. The mesh shows the terrain gradient descent walks.
+
+Animate the descent.
+
+```gdscript
+func animate_descent(p_start: Vector2, steps: int) -&gt; void:
+    var p := p_start
+    for _i in steps:
+        p = adam_step(p)
+        mark_position(p)
+        await get_tree().create_timer(0.1).timeout
+```
+
+Each step drops a marker. The trail shows the optimiser&#x27;s trajectory.
+
+You can now compute gradients numerically, step via vanilla/momentum/Adam, render a loss surface, and animate the descent. ML_Classification extends into decision boundaries.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Gradient_Landscape/technical.md">Raw captured source</a></p><pre># ML Gradient Landscape — Technical
+
+The map displays a terrain whose height at each point is a loss value — a hypothetical model&#x27;s error at those parameter values. A marker is dropped onto the terrain, and gradient descent moves the marker downhill one step per frame.
+
+```gdscript
+class_name GradientDescentRig extends Node3D
+
+@export var learning_rate: float = 0.05
+@export var momentum: float = 0.9
+
+var position_2d: Vector2
+var velocity: Vector2
+
+func step() -&gt; void:
+    var grad: Vector2 = compute_gradient(position_2d)
+    velocity = momentum * velocity - learning_rate * grad
+    position_2d += velocity
+    update_marker_height()
+
+func compute_gradient(p: Vector2) -&gt; Vector2:
+    var h: float = 0.001
+    var dx := (loss(Vector2(p.x + h, p.y)) - loss(Vector2(p.x - h, p.y))) / (2 * h)
+    var dy := (loss(Vector2(p.x, p.y + h)) - loss(Vector2(p.x, p.y - h))) / (2 * h)
+    return Vector2(dx, dy)
+
+func loss(p: Vector2) -&gt; float:
+    # Example: Himmelblau function (four minima)
+    return pow(p.x * p.x + p.y - 11, 2) + pow(p.x + p.y * p.y - 7, 2)
+```
+
+## Learning Rate and Momentum
+
+The learning rate decides step size. Too small, and the marker creeps across the terrain; too large, and it overshoots valleys and oscillates. The stable range is bounded by the Lipschitz constant of the gradient — the maximum rate at which the gradient itself changes — but this is rarely known in practice. The map exposes the learning rate as a slider so the learner can feel the stability boundary.
+
+Momentum accumulates velocity across steps. A momentum term of 0.9 means each step carries 90% of the previous step&#x27;s velocity plus the current gradient contribution. Momentum helps the marker escape shallow local minima (it keeps moving even when the gradient is briefly weak) and dampens oscillation in narrow valleys.
+
+## Loss Surfaces
+
+The map cycles through several classic loss functions. Himmelblau&#x27;s function has four minima at comparable values — useful for showing that different starting points reach different optima. The Rastrigin function has many local minima overlaid on a single global minimum — useful for showing how gradient descent gets trapped. The Rosenbrock function has a narrow curved valley — useful for showing how momentum accelerates convergence.
+
+## In Practice
+
+Real neural networks operate in loss landscapes with millions of dimensions. The map&#x27;s two-dimensional terrain is a pedagogical metaphor, not a realistic model. Saddle points dominate high-dimensional landscapes, and the 3D terrain&#x27;s legible valleys and ridges do not generalise. A side panel notes this explicitly so the learner knows the metaphor&#x27;s limits.
+
+Within the sequence, Gradient_Landscape is where optimisation becomes cheap and directed. ML_Classification will next put the machinery to work on a concrete task.
+
+## Adaptive Methods
+
+Modern optimisers adapt per-parameter learning rates based on gradient history. Adagrad scales each parameter&#x27;s learning rate by the inverse square root of accumulated squared gradients, which dampens updates for parameters that have already moved a lot. RMSProp adds an exponential moving average. Adam combines both with a bias correction.
+
+```gdscript
+class_name Adam
+
+var m: Array  # first moment estimate
+var v: Array  # second moment estimate
+var t: int = 0
+@export var beta1: float = 0.9
+@export var beta2: float = 0.999
+@export var eps: float = 1e-8
+
+func update(params: Array, grads: Array, lr: float) -&gt; Array:
+    t += 1
+    var new_params: Array = []
+    for i in range(params.size()):
+        m[i] = beta1 * m[i] + (1.0 - beta1) * grads[i]
+        v[i] = beta2 * v[i] + (1.0 - beta2) * grads[i] * grads[i]
+        var m_hat = m[i] / (1.0 - pow(beta1, t))
+        var v_hat = v[i] / (1.0 - pow(beta2, t))
+        new_params.append(params[i] - lr * m_hat / (sqrt(v_hat) + eps))
+    return new_params
+```
+
+## Second-Order Methods
+
+Newton&#x27;s method uses the Hessian (the matrix of second derivatives) to take better steps. The update is Δθ = −H⁻¹·∇, which jumps directly to the minimum for quadratic functions. The Hessian costs O(N²) to store and O(N³) to invert, so second-order methods are impractical for large networks. Quasi-Newton methods (BFGS, L-BFGS) approximate the inverse Hessian incrementally and are practical for medium-scale problems.
+
+## Stochastic Gradient Descent
+
+Real neural networks train with stochastic gradients — gradients computed on a randomly-sampled mini-batch rather than on the full dataset. The noise in the stochastic gradient can help escape local minima (the noise perturbs the trajectory enough to jump out of shallow basins), but it also prevents the optimiser from ever settling at a precise minimum. The tradeoff is the subject of an active literature.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Gradient_Landscape/intent.md">Raw captured source</a></p><pre>Concept: The loss landscape as terrain — optimization as walking downhill through a surface defined by error. Gradient descent replaces evolution&#x27;s blind search with a directed step: compute the slope, move opposite to it, repeat.
+Sequence role: Second map in the Machine Learning sequence (15th spine sequence, integration phase). Bridges from evolution&#x27;s stochastic search to calculus-driven optimization. The landscape metaphor introduced here persists through every subsequent map — neural networks, classification boundaries, and generative models all live on loss surfaces. Connects back to ML_Evolution (random search) and forward to ML_Classification (applying descent to decision boundaries).
+Technical angle: Gradient computation via partial derivatives, learning rate as step size, local minima vs. global minima, saddle points in high-dimensional spaces. Stochastic gradient descent (SGD) as a noisy approximation that paradoxically escapes local minima better than exact gradients. Momentum and adaptive learning rates (Adam, RMSProp) as refinements.
+Critical angle: The loss landscape is the central metaphor of modern ML — you optimize what you can measure, and the landscape&#x27;s shape determines what solutions are reachable. Saddle points outnumber local minima in high dimensions, which is why deep learning works at all. The landscape you walk is defined by your loss function, which encodes your values — optimization is never value-neutral.
+Key artifacts: gradient_descent_visualizer provides an interactive 3D loss surface with configurable learning rate, momentum, and starting position to demonstrate convergence behavior.
+Gap: Needs a comparative view showing the same landscape navigated by plain SGD, momentum, and Adam side-by-side to make the effect of optimizer choice visible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Gradient_Landscape/critical.md">Raw captured source</a></p><pre># ML_Gradient_Landscape — Critical Reflection
+
+The map is the metaphor is the problem. You walk a terrain of varying heights — ridges frame valleys, slopes descend toward minima — and the loss landscape becomes literal beneath your feet. The gradient descent visualizer sits in one valley and the PCA visualizer sits in another, and between them the terrain rises and falls with the exact topographic logic the algorithms navigate. The map normalizes the most powerful metaphor in modern machine learning: that learning is descent, that error is elevation, that understanding is the lowest point you can reach.
+
+Hayles argues that computation produces reality rather than merely modeling it. The gradient landscape is the proof. Once you accept that learning happens on a surface defined by a loss function, the entire field organizes around navigation: learning rate as step size, momentum as inertia, local minima as traps, saddle points as deceptions. The metaphor is so productive it becomes invisible. Nobody asks whether error is actually a surface. Nobody asks whether the best model is actually at the bottom.
+
+The gradient descent visualizer makes four optimizers race on the same surface — SGD, Momentum, Nesterov, Adam — each following `theta(t+1) = theta(t) - eta * gradient(f(theta))` with variations in how they accumulate history and adapt step size. The critical parameter is the learning rate, and the artifact lets you watch what happens when it is too large or too small. This is pedagogically honest. What it conceals is that the learning rate is the least interesting choice. The loss function — the thing that defines the surface&#x27;s shape — is taken as given. The landscape exists before the optimizer touches it, and the optimizer can only find what the landscape contains. You cannot descend to a minimum that the loss function did not create.
+
+Chun would recognize this as the habitual logic of software: presenting a technical parameter as the site of agency while the structural parameter remains below the threshold of interaction. The slider moves eta. Nothing moves the landscape. The learner adjusts the optimizer&#x27;s behavior on a fixed surface, internalizing the assumption that the surface is the given and the search is the variable. In practice, the loss function is the most political choice in machine learning — it encodes what counts as error, whose outcomes are penalized, whose are rewarded — and it is the one thing the artifact does not let you change.
+
+PCA operates from the other direction. Instead of descending a surface, it collapses dimensions. `X_centered -&gt; covariance -&gt; eigenvectors -&gt; project onto top-k components`. The critical parameter is `target_dimensions`: how many axes to keep. The visualization shows blue data points collapsing onto red projections, and the compression is beautiful in exactly the way that makes you forget what was lost. PCA preserves maximum variance. Variance is not importance. The axis of greatest spread in a dataset may be noise, bias, or an artifact of measurement. The principal component is the direction the data varies most, and the decision to call that direction &quot;structure&quot; rather than &quot;distortion&quot; is made by the algorithm&#x27;s mathematics, not by any understanding of the domain.
+
+The two artifacts placed at different valley depths create a spatial argument. You descend from spawn through the terrain to reach one, then continue descending to reach the other. The path teaches your body that understanding deepens as you go lower. But Hayles would notice that the map&#x27;s height variation — from ridge at h3 to valley at h1 — is designed to produce this feeling. The terrain is authored. The sense of descent is architectural. The loss landscape you walk is not discovered but built, and the fact that it feels like discovery is exactly what makes the metaphor dangerous.
+
+What the map excludes is flatness. In high-dimensional spaces, saddle points vastly outnumber local minima. The loss surface of a real neural network is not a mountain range with well-defined valleys but an alien geometry where most directions are flat and the occasional steep dimension does all the work. The 3D terrain metaphor, with its legible ridges and walkable slopes, normalizes a low-dimensional intuition that breaks down precisely where it matters most.
+
+The learning rate is too small to see the landscape. The learning rate is too large to stay in one place. The optimizer is always between knowledge and chaos. What the map does not ask is whether the ground you stand on was worth building, whether the valley you descend toward contains what you actually need, or whether the loss function that shaped this terrain was encoding someone&#x27;s priorities as everyone&#x27;s gravity.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Gradient_Landscape/artifacts.md">Raw captured source</a></p><pre># ML Gradient Landscape — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 3 artifacts*
+
+&gt; Every neural network learns by falling. Gradient descent drops a point onto a surface and lets gravity do the math — follow the steepest slope, step by step, toward the lowest valley. The learning rate decides how bold each step is. Too large, you overshoot. Too small, you never arrive. Momentum keeps you rolling through flat spots where the gradient whispers.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Gradient Descent
+![Gradient Descent](/scene-catalog/gradient_descent_visualization.png)
+
+Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.
+
+`gradient_descent_visualization`
+
+## PCA Visualization
+![PCA Visualization](/scene-catalog/pca_visualization.png)
+
+Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.
+
+`pca_visualization`
+
+## Loss Function Comparator
+![Loss Function Comparator](/scene-catalog/loss_function_comparator.png)
+
+Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.
+
+`loss_function_comparator`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Gradient_Landscape/summary.md">Raw captured source</a></p><pre># ML Gradient Landscape — Summary
+
+ML_Gradient_Landscape is the second map in the Machine Learning sequence. It replaces evolution&#x27;s blind search with calculus. The central feature is a terrain — a surface whose height at each point is the loss of some hypothetical model at those parameter values — and the learner drops a marker onto it and lets gravity do the maths.
+
+The terrain has hills and valleys. A global minimum sits at the lowest point; several local minima sit at higher basins. A marker at the surface computes the local slope at each step and moves in the opposite direction by an amount set by the learning-rate slider. The trajectory is drawn live, so each step is visible as a small descent.
+
+Three controls change the experiment. The learning rate decides how bold each step is: too small, and the marker creeps; too large, and it overshoots the valley and oscillates. A momentum slider lets earlier steps influence later ones, which can escape shallow local minima. A reset button drops the marker at a new random starting point, so the same landscape can be explored from multiple initial conditions.
+
+Within the sequence, Gradient_Landscape is where optimisation becomes cheap and directed. The landscape metaphor persists through every later map. ML_Classification will next use these mechanics on a concrete task.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Gradient_Landscape/blurb.md">Raw captured source</a></p><pre>Every neural network learns by falling. Gradient descent drops a point onto a surface and lets gravity do the math — follow the steepest slope, step by step, toward the lowest valley. The learning rate decides how bold each step is. Too large, you overshoot. Too small, you never arrive. Momentum keeps you rolling through flat spots where the gradient whispers.
+
+The landscape is the loss function made physical. Ridges separate solutions. Valleys hold minima — some global, most local. The optimizer doesn&#x27;t know which is which. It only knows *down*.
+
+PCA compresses from the other direction. High-dimensional data collapses onto its axes of greatest variance — the skeleton of the signal, everything else discarded. Reduction as a form of sight.
+
+Two operations, one tension: descend to find structure, or compress to reveal it. Both navigate spaces too large to see whole. Both trust that the important thing is somewhere below — in the valley, in the principal axis, in the direction you can&#x27;t yet name but your body already follows.</pre></section></body></html>

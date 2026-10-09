@@ -1,0 +1,34 @@
+{
+  "hall": "Russell_Paradox",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "six_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "nested_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "euclid_postulates_plaque",
+    "self_membership_set",
+    "barber_paradox",
+    "russell_set_box",
+    "liar_loop",
+    "hilbert_hotel"
+  ],
+  "primary_artifacts": [
+    "russell_set_box",
+    "barber_paradox"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Russell_Paradox\\map_data.json": "9562cba2eafd6e3dc76aa375f0d36a6d1ca9ada32a8a7b2d1acdd5f23a2161a9",
+    "commons\\maps\\Russell_Paradox\\final.md": "e548e10b8e76d79e198099afd722985c0eac90fe239ca484ddf8d1c5244df4ce",
+    "commons\\maps\\Russell_Paradox\\tutorial.md": "0912483a9ee0438c7ec57e22a1535a2844cab868ddc8c2cb53cbb6870a4984ee",
+    "commons\\maps\\Russell_Paradox\\technical.md": "3afe4929f4f524ebe89bb4d5da5b3d54fa54057abbda5a1b6b66ae5c39e3279e",
+    "commons\\maps\\Russell_Paradox\\critical.md": "78dfe530f9d04ed8a11eed8af8cd4fc363e0ffbcf8b9d98f11a0b44464c35cea"
+  }
+}

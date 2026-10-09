@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "reading snapshot equals canonical final.md",
+      "passed": true
+    },
+    {
+      "name": "all named and transitional encounter anchors retained in order",
+      "passed": true
+    },
+    {
+      "name": "all six code excerpts retained verbatim",
+      "passed": true
+    },
+    {
+      "name": "opening and closing retained",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/Trans_Rotation/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/artifacts/axial_sweep/axial_sweep.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/artifacts/rotation_studies/cube_witness.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/artifacts/rotation_studies/array_compare.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/artifacts/rotation_studies/wall_crossings.gd",
+      "passed": true
+    },
+    {
+      "name": "core text hash current",
+      "passed": true
+    },
+    {
+      "name": "all other core records retained",
+      "passed": true
+    },
+    {
+      "name": "19 focused museum checks pass",
+      "passed": true
+    },
+    {
+      "name": "no script or parse errors in capture log",
+      "passed": true
+    },
+    {
+      "name": "figure dimensions marked-return.png",
+      "passed": true
+    },
+    {
+      "name": "figure dimensions spaces-of-a-turn.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact marked-return.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact spaces-of-a-turn.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP serves exact Trans_Rotation.diff",
+      "passed": true
+    }
+  ],
+  "visual_inspection": "Four native captures and both composed figures inspected. Same viewpoint in each pair, marker moves left face to right; cylinder/cone contours visible. Rendering captured in an isolated museum, not a headset trial."
+}

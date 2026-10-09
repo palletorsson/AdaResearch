@@ -1,0 +1,563 @@
+{
+  "checks": [
+    {
+      "name": "LSystems_Grammars_And_Curves assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "tube full size",
+      "passed": true
+    },
+    {
+      "name": "tube visible",
+      "passed": true
+    },
+    {
+      "name": "tube controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "tube topology has rings, caps and bounded indices",
+      "passed": true
+    },
+    {
+      "name": "vertical transport has finite unit normals",
+      "passed": true
+    },
+    {
+      "name": "each ring retains its centre and radius",
+      "passed": true
+    },
+    {
+      "name": "side and cap faces use Godot clockwise fronts",
+      "passed": true
+    },
+    {
+      "name": "ring resolution changes mesh without changing path",
+      "passed": true
+    },
+    {
+      "name": "duplicate and reversed path remains finite",
+      "passed": true
+    },
+    {
+      "name": "one point has no surface",
+      "passed": true
+    },
+    {
+      "name": "three begun strokes with six accessible ends",
+      "passed": true
+    },
+    {
+      "name": "XR pickup selects an existing end",
+      "passed": true
+    },
+    {
+      "name": "grabbing extends rather than moving inherited path",
+      "passed": true
+    },
+    {
+      "name": "clear refuses while an end is held",
+      "passed": true
+    },
+    {
+      "name": "release leaves extension suspended",
+      "passed": true
+    },
+    {
+      "name": "undo restores pre-gesture work",
+      "passed": true
+    },
+    {
+      "name": "either endpoint can be continued",
+      "passed": true
+    },
+    {
+      "name": "wall attachment stops at the receiving surface",
+      "passed": true
+    },
+    {
+      "name": "attachment retains old points",
+      "passed": true
+    },
+    {
+      "name": "desktop ray finds supplied pen",
+      "passed": true
+    },
+    {
+      "name": "held desktop trigger dispatches",
+      "passed": true
+    },
+    {
+      "name": "pen release keeps a separate actual nib path",
+      "passed": true
+    },
+    {
+      "name": "pen home refuses a held pen",
+      "passed": true
+    },
+    {
+      "name": "dropping ends drawing without falling",
+      "passed": true
+    },
+    {
+      "name": "undo removes only the new stroke",
+      "passed": true
+    },
+    {
+      "name": "path rings and tube share one record",
+      "passed": true
+    },
+    {
+      "name": "thickness edits only the last radius",
+      "passed": true
+    },
+    {
+      "name": "near stationary nib does not pile up rings",
+      "passed": true
+    },
+    {
+      "name": "sudden jump cannot make a long bridge",
+      "passed": true
+    },
+    {
+      "name": "stroke budget stops at 256 retained samples",
+      "passed": true
+    },
+    {
+      "name": "eight stroke budget retains existing work",
+      "passed": true
+    },
+    {
+      "name": "invalid outside positions cannot enter the mesh",
+      "passed": true
+    },
+    {
+      "name": "native tube capture path",
+      "passed": true
+    },
+    {
+      "name": "native tube capture rings",
+      "passed": true
+    },
+    {
+      "name": "native tube capture skin",
+      "passed": true
+    },
+    {
+      "name": "native tube capture continued",
+      "passed": true
+    },
+    {
+      "name": "pipe has a real bore with annular rims",
+      "passed": true
+    },
+    {
+      "name": "outer inner and rim faces have clockwise fronts",
+      "passed": true
+    },
+    {
+      "name": "cable sags while both supports remain exact",
+      "passed": true
+    },
+    {
+      "name": "vertical cable does not fold under authored sag",
+      "passed": true
+    },
+    {
+      "name": "network example includes all three forms and three joints",
+      "passed": true
+    },
+    {
+      "name": "connected ends become fixed sockets",
+      "passed": true
+    },
+    {
+      "name": "a gesture beginning on a run makes a branch",
+      "passed": true
+    },
+    {
+      "name": "undo removes branch and its socket together",
+      "passed": true
+    },
+    {
+      "name": "extension joins two existing runs on release",
+      "passed": true
+    },
+    {
+      "name": "changing form preserves joined endpoint positions",
+      "passed": true
+    },
+    {
+      "name": "native network after joining capture",
+      "passed": true
+    },
+    {
+      "name": "native all forms capture",
+      "passed": true
+    },
+    {
+      "name": "layout resolves mixed-case anchors with cable geometry",
+      "passed": true
+    },
+    {
+      "name": "moving an anchor rebuilds its connected run",
+      "passed": true
+    },
+    {
+      "name": "glass legacy code builds at its anchor with explicit connector",
+      "passed": true
+    },
+    {
+      "name": "drain legacy code builds at its anchor with explicit connector",
+      "passed": true
+    },
+    {
+      "name": "adding after removal keeps distinct path identities",
+      "passed": true
+    },
+    {
+      "name": "removing an anchor removes dependent paths",
+      "passed": true
+    },
+    {
+      "name": "downloadable three-form layout builds every run",
+      "passed": true
+    },
+    {
+      "name": "named endpoints override samples when an anchor moves",
+      "passed": true
+    },
+    {
+      "name": "old cable sag handles follow a Z span rather than X",
+      "passed": true
+    },
+    {
+      "name": "idle legacy cable reuses its mesh",
+      "passed": true
+    },
+    {
+      "name": "shared cable mesh retains shader UVs",
+      "passed": true
+    },
+    {
+      "name": "collapsed cable clears its old mesh",
+      "passed": true
+    },
+    {
+      "name": "library straight has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library corner45 has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library corner has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library ubend has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library sbend has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "every free port has a grip in BENDS",
+      "passed": true
+    },
+    {
+      "name": "all ports extend and undo without moving parts in BENDS",
+      "passed": true
+    },
+    {
+      "name": "native form library page 0",
+      "passed": true
+    },
+    {
+      "name": "library junction has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library ypipe has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library cross has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library reducer has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "every free port has a grip in BRANCHES",
+      "passed": true
+    },
+    {
+      "name": "all ports extend and undo without moving parts in BRANCHES",
+      "passed": true
+    },
+    {
+      "name": "native form library page 1",
+      "passed": true
+    },
+    {
+      "name": "library spiral has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library wobbly has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library flask has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library beaker has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "every free port has a grip in COILS AND VESSELS",
+      "passed": true
+    },
+    {
+      "name": "all ports extend and undo without moving parts in COILS AND VESSELS",
+      "passed": true
+    },
+    {
+      "name": "native form library page 2",
+      "passed": true
+    },
+    {
+      "name": "library cap has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library drip has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library condenser has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "every free port has a grip in END PIECES",
+      "passed": true
+    },
+    {
+      "name": "all ports extend and undo without moving parts in END PIECES",
+      "passed": true
+    },
+    {
+      "name": "native form library page 3",
+      "passed": true
+    },
+    {
+      "name": "library chord has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library spline has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library catenary has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library festoon has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "library truss has geometry and reachable ports",
+      "passed": true
+    },
+    {
+      "name": "every free port has a grip in CABLE FORMS",
+      "passed": true
+    },
+    {
+      "name": "all ports extend and undo without moving parts in CABLE FORMS",
+      "passed": true
+    },
+    {
+      "name": "native form library page 4",
+      "passed": true
+    },
+    {
+      "name": "all 16 segment forms and 5 cable arrangements covered",
+      "passed": true
+    },
+    {
+      "name": "XR pickup can extend a third junction port",
+      "passed": true
+    },
+    {
+      "name": "native library port extension capture",
+      "passed": true
+    },
+    {
+      "name": "XR part extension undo restores exact parts",
+      "passed": true
+    },
+    {
+      "name": "new run connects two stock forms through both named ports",
+      "passed": true
+    },
+    {
+      "name": "connected stock ports no longer expose free grips",
+      "passed": true
+    },
+    {
+      "name": "native connected library capture",
+      "passed": true
+    },
+    {
+      "name": "undo restores both stock ports and removes joining run",
+      "passed": true
+    },
+    {
+      "name": "existing UVAC exposes physical sockets on desktop",
+      "passed": true
+    },
+    {
+      "name": "four supplied cords form audio and independent motor routes",
+      "passed": true
+    },
+    {
+      "name": "arrival is silent and stationary",
+      "passed": true
+    },
+    {
+      "name": "power control starts live sound and patched motor",
+      "passed": true
+    },
+    {
+      "name": "powered machine turns real transforms",
+      "passed": true
+    },
+    {
+      "name": "gate cord shows travelling signal",
+      "passed": true
+    },
+    {
+      "name": "pulling motor plug removes route and stops rotation",
+      "passed": true
+    },
+    {
+      "name": "independent synth continues after motor unplug",
+      "passed": true
+    },
+    {
+      "name": "desktop release snaps both socket and cable state",
+      "passed": true
+    },
+    {
+      "name": "native XR grab unplugs the same body",
+      "passed": true
+    },
+    {
+      "name": "plug mesh follows native XR pickup",
+      "passed": true
+    },
+    {
+      "name": "desktop ray finds motor plug",
+      "passed": true
+    },
+    {
+      "name": "unpatch refuses to delete a held cord",
+      "passed": true
+    },
+    {
+      "name": "occupied socket refuses a second plug",
+      "passed": true
+    },
+    {
+      "name": "gate cord cannot enter an audio input",
+      "passed": true
+    },
+    {
+      "name": "removing cable clears socket ownership and routes",
+      "passed": true
+    },
+    {
+      "name": "stationary cord does not rebuild its sweep every frame",
+      "passed": true
+    },
+    {
+      "name": "source unplug silences downstream audio",
+      "passed": true
+    },
+    {
+      "name": "unplugged speaker silences a complete upstream patch",
+      "passed": true
+    },
+    {
+      "name": "native bus produces nonzero synth audio",
+      "passed": true
+    },
+    {
+      "name": "filter lever audibly attenuates the generated harmonics",
+      "passed": true
+    },
+    {
+      "name": "direct physical patch bypasses VCF",
+      "passed": true
+    },
+    {
+      "name": "open power lever stops both motor and measured audio",
+      "passed": true
+    },
+    {
+      "name": "native museum capture machine",
+      "passed": true
+    },
+    {
+      "name": "native museum capture patch",
+      "passed": true
+    },
+    {
+      "name": "tube bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "tube bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "tube_painting standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "tube_painting support along side 2",
+      "passed": true
+    },
+    {
+      "name": "tube_painting standing clearance along side 20",
+      "passed": true
+    },
+    {
+      "name": "tube_painting support along side 20",
+      "passed": true
+    },
+    {
+      "name": "tube_painting capture",
+      "passed": true
+    },
+    {
+      "name": "no script errors during native run",
+      "passed": true
+    }
+  ],
+  "map": "LSystems_Grammars_And_Curves",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

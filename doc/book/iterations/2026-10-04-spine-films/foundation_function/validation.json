@@ -1,0 +1,128 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Two rings: n=4 h=1.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=4 h=2.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=4 h=3.0"
+		},
+		{
+			"passed": true,
+			"test": "Supplied side and top connectivity: n=4"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=6 h=1.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=6 h=2.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=6 h=3.0"
+		},
+		{
+			"passed": true,
+			"test": "Supplied side and top connectivity: n=6"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=8 h=1.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=8 h=2.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=8 h=3.0"
+		},
+		{
+			"passed": true,
+			"test": "Supplied side and top connectivity: n=8"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=12 h=1.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=12 h=2.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=12 h=3.0"
+		},
+		{
+			"passed": true,
+			"test": "Supplied side and top connectivity: n=12"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=16 h=1.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=16 h=2.0"
+		},
+		{
+			"passed": true,
+			"test": "Two rings: n=16 h=3.0"
+		},
+		{
+			"passed": true,
+			"test": "Supplied side and top connectivity: n=16"
+		},
+		{
+			"passed": true,
+			"test": "Height lower bound remains 1 m"
+		},
+		{
+			"passed": true,
+			"test": "Height upper bound remains 3 m"
+		},
+		{
+			"passed": true,
+			"test": "Reset restores right h=2 n=8"
+		},
+		{
+			"passed": true,
+			"test": "Independent reference remains 2 m / 4 sides"
+		}
+	],
+	"evidence": {
+		"display_radius": 0.7,
+		"height_range": [
+			1.0,
+			3.0
+		],
+		"height_step": 0.1,
+		"initial_editable": {
+			"height": 2.0,
+			"sides": 8
+		},
+		"limits": "Reduced straight two-ring study, not the museum's rich column profiles. Browser 49-pixel radius becomes a declared 0.70 m display radius. The bottom remains open. Flat-shaded rendering duplicates vertices; the generator's position list still contains exactly 2*n entries.",
+		"prebuilt_meshes": 6,
+		"reference": {
+			"height": 2.0,
+			"sides": 4
+		},
+		"rule": "theta=i/sides*TAU; two rings at y=0 and y=height; radius fixed",
+		"sides": [
+			4,
+			6,
+			8,
+			12,
+			16
+		],
+		"source": "Function browser study: column(cx,height,sides), drawFunction, and input attributes"
+	},
+	"passed": true
+}

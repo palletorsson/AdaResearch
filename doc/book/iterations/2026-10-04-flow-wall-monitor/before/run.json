@@ -1,0 +1,39 @@
+{
+  "phase": "before",
+  "command": [
+    "C:\\Users\\palle\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\tools\\run_encounter_probe.py",
+    "Flow_Field",
+    "--sequence",
+    "change",
+    "--render",
+    "--spec",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-10-04-flow-wall-monitor\\before\\spec.json",
+    "--probe",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-10-04-flow-wall-monitor\\probe.gd"
+  ],
+  "returncode": 0,
+  "seconds": 13.238593816757202,
+  "source_sha256_before": {
+    "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba",
+    "commons/artifacts/flow_field_painter/flow_field_painter.tscn": "64cc6d61a619d5a48b40d4d281361186008e26efe1005bfb253a17254e9d3c26",
+    "commons/scenes/endless_museum.gd": "21ef71df5cecce0c9df3a02e1a2e25b8b59c08b48e094d14c79fba2335b4b9e5",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "ada_run/em_plan.json": "4afd3dff67fbf5acbe61352714a7aef287cfcb8b7ab03a513453df20cce066ab"
+  },
+  "source_sha256_after": {
+    "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba",
+    "commons/artifacts/flow_field_painter/flow_field_painter.tscn": "64cc6d61a619d5a48b40d4d281361186008e26efe1005bfb253a17254e9d3c26",
+    "commons/scenes/endless_museum.gd": "21ef71df5cecce0c9df3a02e1a2e25b8b59c08b48e094d14c79fba2335b4b9e5",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "ada_run/em_plan.json": "4afd3dff67fbf5acbe61352714a7aef287cfcb8b7ab03a513453df20cce066ab"
+  },
+  "sources_unchanged_during_run": true,
+  "scope": "Current real Endless Museum hall; no historical replay. Hidden rendered desktop run; no headset or learner trial."
+}

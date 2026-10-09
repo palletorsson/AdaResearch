@@ -1,6 +1,7 @@
 {
  "sweep": "galton_board",
- "peak_changed_pct": 0.321,
+ "peak_changed_pct": 0.094,
+ "subject_pct": 79.431,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
@@ -12,8 +13,20 @@
     "derivation": "none",
     "evidence": "anecdote"
    },
-   "changed_px": 1064,
-   "changed_pct": 0.184
+   "changed_px": 173,
+   "changed_pct": 0.03
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "changed_px": 271,
+   "changed_pct": 0.047
   },
   {
    "a": {
@@ -24,8 +37,8 @@
     "derivation": "field",
     "evidence": "none"
    },
-   "changed_px": 1848,
-   "changed_pct": 0.32
+   "changed_px": 72,
+   "changed_pct": 0.012
   },
   {
    "a": {
@@ -36,8 +49,20 @@
     "derivation": "field",
     "evidence": "anecdote"
    },
-   "changed_px": 1810,
-   "changed_pct": 0.313
+   "changed_px": 144,
+   "changed_pct": 0.025
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "sample"
+   },
+   "changed_px": 352,
+   "changed_pct": 0.061
   },
   {
    "a": {
@@ -48,8 +73,8 @@
     "derivation": "paths",
     "evidence": "none"
    },
-   "changed_px": 1853,
-   "changed_pct": 0.321
+   "changed_px": 305,
+   "changed_pct": 0.053
   },
   {
    "a": {
@@ -60,8 +85,32 @@
     "derivation": "paths",
     "evidence": "anecdote"
    },
-   "changed_px": 1816,
-   "changed_pct": 0.314
+   "changed_px": 281,
+   "changed_pct": 0.049
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 465,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "changed_px": 214,
+   "changed_pct": 0.037
   },
   {
    "a": {
@@ -72,8 +121,8 @@
     "derivation": "field",
     "evidence": "none"
    },
-   "changed_px": 1261,
-   "changed_pct": 0.218
+   "changed_px": 230,
+   "changed_pct": 0.04
   },
   {
    "a": {
@@ -84,8 +133,20 @@
     "derivation": "field",
     "evidence": "anecdote"
    },
-   "changed_px": 854,
-   "changed_pct": 0.148
+   "changed_px": 193,
+   "changed_pct": 0.033
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "sample"
+   },
+   "changed_px": 292,
+   "changed_pct": 0.051
   },
   {
    "a": {
@@ -96,8 +157,8 @@
     "derivation": "paths",
     "evidence": "none"
    },
-   "changed_px": 1188,
-   "changed_pct": 0.206
+   "changed_px": 375,
+   "changed_pct": 0.065
   },
   {
    "a": {
@@ -108,8 +169,92 @@
     "derivation": "paths",
     "evidence": "anecdote"
    },
-   "changed_px": 782,
-   "changed_pct": 0.135
+   "changed_px": 202,
+   "changed_pct": 0.035
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 408,
+   "changed_pct": 0.071
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "none"
+   },
+   "changed_px": 327,
+   "changed_pct": 0.057
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "anecdote"
+   },
+   "changed_px": 288,
+   "changed_pct": 0.05
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "sample"
+   },
+   "changed_px": 136,
+   "changed_pct": 0.024
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "none"
+   },
+   "changed_px": 465,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "anecdote"
+   },
+   "changed_px": 321,
+   "changed_pct": 0.056
+  },
+  {
+   "a": {
+    "derivation": "none",
+    "evidence": "sample"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 254,
+   "changed_pct": 0.044
   },
   {
    "a": {
@@ -119,6 +264,102 @@
    "b": {
     "derivation": "field",
     "evidence": "anecdote"
+   },
+   "changed_px": 172,
+   "changed_pct": 0.03
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "sample"
+   },
+   "changed_px": 359,
+   "changed_pct": 0.062
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "none"
+   },
+   "changed_px": 362,
+   "changed_pct": 0.063
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "anecdote"
+   },
+   "changed_px": 336,
+   "changed_pct": 0.058
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 503,
+   "changed_pct": 0.087
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "field",
+    "evidence": "sample"
+   },
+   "changed_px": 340,
+   "changed_pct": 0.059
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "none"
+   },
+   "changed_px": 437,
+   "changed_pct": 0.076
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "anecdote"
+   },
+   "changed_px": 296,
+   "changed_pct": 0.051
+  },
+  {
+   "a": {
+    "derivation": "field",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
    },
    "changed_px": 481,
    "changed_pct": 0.083
@@ -126,50 +367,38 @@
   {
    "a": {
     "derivation": "field",
-    "evidence": "none"
+    "evidence": "sample"
    },
    "b": {
     "derivation": "paths",
     "evidence": "none"
    },
-   "changed_px": 1200,
-   "changed_pct": 0.208
+   "changed_px": 542,
+   "changed_pct": 0.094
   },
   {
    "a": {
     "derivation": "field",
-    "evidence": "none"
+    "evidence": "sample"
    },
    "b": {
     "derivation": "paths",
     "evidence": "anecdote"
    },
-   "changed_px": 1621,
-   "changed_pct": 0.281
+   "changed_px": 386,
+   "changed_pct": 0.067
   },
   {
    "a": {
     "derivation": "field",
-    "evidence": "anecdote"
+    "evidence": "sample"
    },
    "b": {
     "derivation": "paths",
-    "evidence": "none"
+    "evidence": "sample"
    },
-   "changed_px": 1596,
-   "changed_pct": 0.276
-  },
-  {
-   "a": {
-    "derivation": "field",
-    "evidence": "anecdote"
-   },
-   "b": {
-    "derivation": "paths",
-    "evidence": "anecdote"
-   },
-   "changed_px": 1186,
-   "changed_pct": 0.205
+   "changed_px": 153,
+   "changed_pct": 0.026
   },
   {
    "a": {
@@ -180,8 +409,32 @@
     "derivation": "paths",
     "evidence": "anecdote"
    },
-   "changed_px": 458,
-   "changed_pct": 0.079
+   "changed_px": 215,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "derivation": "paths",
+    "evidence": "none"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 395,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "derivation": "paths",
+    "evidence": "anecdote"
+   },
+   "b": {
+    "derivation": "paths",
+    "evidence": "sample"
+   },
+   "changed_px": 240,
+   "changed_pct": 0.042
   }
  ]
 }

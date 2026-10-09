@@ -1,0 +1,260 @@
+--- before/algorithms/cellularautomata/ca_showcase/difference_study.gd
++++ after/algorithms/cellularautomata/ca_showcase/difference_study.gd
+@@ -17,9 +17,12 @@
+ var floor_view:MeshInstance3D
+ var actions:int=0
+ var step_usec:int=0
++var walk_slice:bool=false
++var slice_walker:Node3D
+ 
+ func _ready() -> void:
+ 	_build();_controls();paint()
++	if walk_slice:enable_walking_slice()
+ 
+ func operate(i:int) -> void:
+ 	actions+=1;target=0
+@@ -75,6 +78,22 @@
+ 	reading.text="%s / UPDATE %d OF %d\nNEIGHBOUR PULL %.2f / DISTURBANCE %.1f\n%s / %s / B %s\nDIFFERENT %d / %d (above 0.000001)\nMAX DIFFERENCE %.6f / MEAN %.6f\nDIFFERENCE DISPLAY GAIN x%.1f"%["RUN TO %d"%target if target>model.tick else "HELD",model.tick,Model.LIMIT,model.coupling,model.disturbance,"INTEGER" if model.integer_storage else "FRACTIONAL","SCATTERED" if model.scattered else "UNIFORM 4","+1 CELL" if model.changed else "MATCHED",rep.different,Model.COUNT,rep.max_difference,rep.mean_difference,view_gain]
+ 	slice_label.text="SPATIAL SLICE Z=%d / TIME IS UPDATE %d\nA                       B                       |A-B| x%.1f"%[slice_z,model.tick,view_gain]
+ 
++	if is_instance_valid(slice_walker):slice_walker.refresh()
++
++func enable_walking_slice() -> void:
++	walk_slice=true
++	if is_instance_valid(slice_walker):return
++	slice_walker=load("res://algorithms/cellularautomata/ca_showcase/walking_slice.gd").new()
++	slice_walker.name="WalkingSlice"
++	add_child(slice_walker)
++
++## A receiver change must not invoke operate(), which cancels a scheduled run.
++func select_spatial_slice(value:int) -> void:
++	var selected:int=clampi(value,0,Model.N-1)
++	if selected==slice_z:return
++	slice_z=selected
++	paint()
++
+ func readback() -> Dictionary:
+ 	var r:Dictionary=model.report();r.merge({"slice":slice_z,"coating":coating,"target":target,"actions":actions,"gain":view_gain,"step_usec":step_usec});return r
+ 
+--- before/algorithms/cellularautomata/ca_showcase/self_organization_ca.gd
++++ after/algorithms/cellularautomata/ca_showcase/self_organization_ca.gd
+@@ -5,6 +5,7 @@
+ extends BaseCA
+ 
+ var difference_study:bool=false
++var walk_slice:bool=false
+ 
+ func _ready() -> void:
+ 	if difference_study:
+@@ -17,7 +18,7 @@
+ 	if has_node("DifferenceStudy"):return
+ 	var study:Node3D=Node3D.new()
+ 	study.set_script(load("res://algorithms/cellularautomata/ca_showcase/difference_study.gd"))
+-	study.name="DifferenceStudy";add_child(study)
++	study.name="DifferenceStudy";study.walk_slice=walk_slice;add_child(study)
+ 
+ # Legacy coupled-control presets, retained for existing standalone uses.
+ const LAMBDA = 0.5
+@@ -186,7 +187,10 @@
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if str(config.get("study",""))=="difference":
+ 		difference_study=true
+-		if is_node_ready():_mount_difference()
++		walk_slice=str(config.get("slice", ""))=="walk"
++		if is_node_ready():
++			_mount_difference()
++			if walk_slice: get_node("DifferenceStudy").enable_walking_slice()
+ 		return
+ 	# Optional lambda override from map config, so a map can seat this artifact
+ 	# anywhere on the order↔chaos axis. Additive: absent keys leave the default edge.
+--- before/commons/maps/CA_EdgeOfChaos/artifacts.md
++++ after/commons/maps/CA_EdgeOfChaos/artifacts.md
+@@ -2,10 +2,12 @@
+ 
+ | Role | Artifact | Current encounter |
+ |---|---|---|
+-| Primary / book | self_organization_ca | Paired 11³ study; change one cell, vary pull and drive, compare storage, spatial slices and the difference floor. |
++| Primary / book | self_organization_ca | Paired 11³ study; change one cell, vary pull and drive, compare storage, body-selected spatial slices and the difference floor. |
+ | Secondary | ca_screen | Flat cellular display in the rear gallery. |
+ | Secondary | disease_spread_ca | Local S/I/R model, scheduled over frames; the existing sampled sphere display can omit individual affected addresses. |
+ | Secondary | volumetric_fog_ca | Local binary density field; labelled central slice in compatibility, volume rendering in Forward+. |
+ | Secondary | crackpropagation_ca | Retained stress-and-crack growth display; distinct from the primary's averaging rule. |
+ 
+ All five are placed in map_data.json and both museum plan rows. The book's primary anchor is self_organization_ca. Read final.md for the encounter and technical.md for its limits. Existing detailed secondary experiments have not been replaced by claims that every work occupies a measured edge of chaos.
++
++The optional walking reader belongs to self_organization_ca; it is not a sixth artifact. Gold frames locate the same selected depth in both volumes, and the existing textures show the section. No primary/secondary promotion, artifact move, secondary solver or sequence change accompanies it.
+--- before/commons/maps/CA_EdgeOfChaos/final.md
++++ after/commons/maps/CA_EdgeOfChaos/final.md
+@@ -4,7 +4,11 @@
+ 
+ Two volumes wait at the same update. Their colours almost agree. Somewhere in B, one address holds a value one greater than its counterpart in A. Can you find it without the instrument telling you where to look?
+ 
+-Walk between them. The floor carries a section of their difference; the cases ahead show A, B and the difference separately. These are ways of looking into the same two volumes. A wall is a slice through space. It is not the next generation. Use Z SLICE and watch what remains unchanged on the counter.
++Walk between them. Thin gold frames mark the same depth in both volumes. As you pass the numbered edges of the floor image, the frames move with you. The cases ahead show A, B and their difference at that depth; the floor carries the same difference image. A wall is a slice through space. It is not the next generation. Watch the update counter while you walk. Z SLICE offers the same choice from the console.
++
++Before taking the first update, stop at five. The changed address appears in the section. Walk to six and it disappears from that picture. Come back. It is still there. We have moved past the difference, not removed it. An empty section could have been all we saw of this volume.
++
++![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/ca-walking-slice.png)
+ 
+ Return to the console. Press STEP. Follow the lit difference for a few updates, then use REPLAY to meet the same beginning again. ONE CELL removes the intervention, or restores it. With the intervention removed, both runs should agree through every update, even when the disturbance is loud. What would it mean if they did not?
+ 
+@@ -29,13 +33,15 @@
+ na[i]=float(int(va)) if integer_storage else va
+ ```
+ 
+-The integer conversion removes the fractional part of these nonnegative values. The pull that took five toward four produced 4.75. The stored integer is four. Around it, smaller fractional changes also fell away. A rule about neighbours was accompanied by another rule about what a value may keep. Of the four choices, this hall moves the first alone.
++The integer conversion removes the fractional part of these nonnegative values. The pull that took five toward four produced 4.75. The stored integer is four. Around it, smaller fractional changes also fell away. A rule about neighbours was accompanied by another rule about what a value may keep. In this comparison the neighbour rule stayed the same; storage decided how much of its answer could remain.
+ 
+ Continue the fractional run. The wall of difference becomes broad and luminous. Look up at the gain printed on the readout above the console. The display is increasing its sensitivity as the largest difference fades. Its brightness is a decision about visibility. Read the maximum alongside the number of affected cells: that count includes only differences above 0.000001. A trace may leave the counter before it leaves the stored values.
+ 
+ Turn PULL down to zero, with DRIVE still zero, and replay. The intervention stays at its original address. This stillness keeps whole a memory that the smoothing run spread thin. We would miss something if we arrived already certain that a moving, complicated-looking field must be the more interesting body.
+ 
+-The hall is called Edge of Chaos. The name is Christopher Langton's, from 1990: between the rules whose fields freeze or repeat and the rules whose fields boil, he measured a narrow band where structures persist long enough to carry and combine information, and put Wolfram's fourth class there.[^ca-edge] Let the name remain a question here. The fractional update averages nearby values and adds matched forcing; that averaging is the operation a blur performs on a picture, each pixel pulled toward its neighbours, and an image filter is a cellular automaton run once. A spreading difference alone does not establish chaotic amplification. The integer conversion introduces thresholds of its own. We have measured some consequences of those choices. We have not located the one permissible region where life, computation or queerness can exist.
++This hall was conceived under the name *Edge of Chaos*. It borrows a question from Christopher Langton: under what conditions can a pattern retain information, carry it elsewhere and change it through an encounter?[^ca-edge] Let the name remain a question here.
++
++The neighbour average belongs to the same family of operations as a blur: a mark can spread while becoming fainter. With matched forcing added, our two volumes let us follow what survives that smoothing and what storage discards. A spreading difference alone does not establish chaotic amplification. The integer conversion introduces thresholds of its own. We have measured some consequences of those choices. We have not located the one permissible region where life, computation or queerness can exist.
+ 
+ The other works remain in the rear gallery: a screen that keeps the successive states of a one-dimensional automaton as rows, local transmission and recovery drawn by chance — the susceptible, infected and recovered of 1927 laid on a grid, the fourth choice settled by a draw[^ca-sir] — a fog field whose cell rule fills it solid within two updates, and cracks that finish spreading across their plate within a couple of seconds of being built. Each asks for its own account of what passes between neighbours, what is stored, and what the image omits. Similar-looking motion, where there is any, does not make their rules equivalent.
+ 
+@@ -43,6 +49,6 @@
+ 
+ The next hall, the first of Fractals, changes the instruction. Instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself. Carry this distinction with you: a form can resemble its neighbour, inherit an earlier state, or be told to repeat. The resemblance does not yet explain the making.
+ 
+-[^ca-edge]: Christopher Langton, “Computation at the edge of chaos: phase transitions and emergent computation”, *Physica D* 42 (1990). His measure was λ, the share of neighbourhoods a rule answers with a living cell; the band lies where λ is neither small nor large. PULL here is a different knob on a different rule, and the name is borrowed, not measured.
++[^ca-edge]: Christopher Langton, [“Computation at the edge of chaos: phase transitions and emergent computation”](https://doi.org/10.1016/0167-2789(90)90064-V), *Physica D* 42 (1990). His experiments associated information storage, transmission and modification with a transition between ordered and disordered behaviour. His λ counts the fraction of rule-table entries whose output differs from a designated quiescent state. It is not the proportion of living cells in a displayed field. PULL changes the strength of neighbour averaging in another model; this hall has not measured Langton's transition.
+ 
+ [^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery each cell is infected with a fixed probability per infected neighbour and recovers with another: two draws and a grid.
+--- before/commons/maps/CA_EdgeOfChaos/intent.md
++++ after/commons/maps/CA_EdgeOfChaos/intent.md
+@@ -1,9 +1,11 @@
+ Concept: Follow one altered address under a specified local update before naming a regime. Extent, magnitude, storage and visibility are distinct questions.
+ 
+-Sequence role: Closes the active cellular-automata sequence after CA_SoftRules and leads to Fractal_Recursion. The off-route Agents and Circuits map remains a possible later comparison; no sequence reorder is made here.
++Sequence role: Closes the active cellular-automata sequence after CA_AgentsCircuits and leads to Fractal_Recursion. The preceding comparison changes the procedure while retaining a resemblance; this hall holds the procedure fixed and changes one address.
+ 
+ Encounter: self_organization_ca in paired-study mode. Two 11³ volumes share the same beginning and forcing schedule; ONE CELL changes exactly one address in B. PULL and DRIVE are independent. STORE compares integer truncation with fractional values. The wall cases and floor expose a selected spatial slice, with difference gain printed explicitly.
+ 
+ Critical question: What can a value retain, and what can an instrument show? A trace can spread while weakening. Stillness can preserve a local difference. These observations do not establish a universal critical point or a compulsory location for queer life.
+ 
+ Collection: Retain all five authored works. The screen, disease model, fog and crack growth need distinct interpretations. Further work: headset review, secondary interactions and visibility, and richer measures tied to an explicit task rather than a decorative order/chaos label.
++
++Body encounter: walk between the volumes to select matching spatial sections. The difference can disappear from view while remaining in the field. Return to find it at the same update, then compare that loss of sight with a loss caused by storage. The reader changes what is visible, not what the rule computes.
+--- before/commons/maps/CA_EdgeOfChaos/map_data.json
++++ after/commons/maps/CA_EdgeOfChaos/map_data.json
+@@ -1475,7 +1475,7 @@
+         "",
+         "",
+         "",
+-        "self_organization_ca:0:0#study:difference#plinth:0",
++        "self_organization_ca:0:0#study:difference#plinth:0#slice:walk",
+         "",
+         "",
+         "",
+--- before/commons/maps/CA_EdgeOfChaos/technical.md
++++ after/commons/maps/CA_EdgeOfChaos/technical.md
+@@ -27,3 +27,13 @@
+ The source's older lambda coupled neighbour pull to disturbance. It is not Langton's rule-table lambda. Neither that dial nor these new measurements classify this finite run as a universal critical regime. For the historical claim and a re-examination, see [Mitchell, Hraber and Crutchfield (1993)](https://csc.ucdavis.edu/~evca/Papers/rev-edge.html).
+ 
+ The four secondary works are retained. The disease preview computes the original full 64³ synchronous transition over 1,024 display frames and keeps its four-cell display stride; it does not show every infected address. The fog uses a configured 12³ preview and shows a labelled central Z slice in the compatibility renderer. Neither secondary is evidence for the primary's matched-run results. Their wider pedagogical and headset reviews remain open.
++
++## Walk through the receiver
++
++This map adds `#slice:walk` to the existing paired study. `walking_slice.gd` reads a recognised player body between the volumes. Eleven depth positions match the original cube centres: local Z = 0.25 + 0.27 × index. Gold frames locate that same plane in both arrays. Small markers remain at the floor image's edges, so the Z locator is not mistaken for a row of the X/Y image.
++
++The receiver calls `select_spatial_slice`, which changes only slice_z and repaints the existing textures. It never calls the console action dispatcher, resets the model, advances an update, consumes a forcing value, or cancels a pending +10 run. The wall cases and floor retain their shared material. The floor image lays the selected X/Y section flat; physical walking in Z selects which section is shown.
++
++The reader recognises XRToolsPlayerBody and the museum's grouped CharacterBody3D, rejects loose rigid bodies, and releases a visitor on exit. A 2.5 cm dead band beyond a row midpoint reduces flicker near an edge. When the visitor leaves, the selected slice stays; the original Z SLICE button remains available. No solid collision or new support is added, and unconfigured studies retain the original behaviour.
++
++At update zero, the intervention is in Z=5 only. Walking from five to six can hide it from the selected image while the paired arrays, update count and global difference count remain unchanged. This differs from integer storage actually removing it on the first uniform, unforced update. The native probe checks both cases separately.
+--- before/algorithms/cellularautomata/ca_showcase/walking_slice.gd
++++ after/algorithms/cellularautomata/ca_showcase/walking_slice.gd
+@@ -0,0 +1,77 @@
++extends Node3D
++## Read spatial Z by walking between the existing matched volumes.
++## This changes only the receiver. The model, clock, forcing and floor stay intact.
++const FIRST_Z := 0.25
++const PITCH := 0.27
++const DEAD_BAND := 0.025
++var study: Node3D
++var visitors: Dictionary = {}
++var frames: Array[Node3D] = []
++var floor_mark: Node3D
++var words: Label3D
++var last_body: int = 0
++var last_band: int = -1
++
++func _ready() -> void:
++	study = get_parent()
++	for side in range(2):
++		var frame := Node3D.new()
++		frame.name = "SliceFrame_%d" % side
++		frame.position = Vector3(2.8 if side == 0 else -2.8, 1.85, 0)
++		add_child(frame)
++		frames.append(frame)
++		for sign_ in [-1, 1]:
++			bar(frame,Vector3(.024,2.84,.024),Vector3(sign_*1.42,0,0))
++			bar(frame,Vector3(2.84,.024,.024),Vector3(0,sign_*1.42,0))
++	floor_mark = Node3D.new();floor_mark.name = "SelectedSliceAtEdges";add_child(floor_mark)
++	for side in [-1,1]:bar(floor_mark,Vector3(.12,.008,.035),Vector3(side*1.045,.039,0))
++	for side in [-1,1]:
++		bar(self,Vector3(.016,.006,3.1),Vector3(side*1.045,.03,1.6))
++	for z in range(study.Model.N):
++		var label_: Label3D = study.label("SliceAddress_%d"%z,str(z),34)
++		label_.pixel_size=.002;label_.position=Vector3(-1.14,.038,FIRST_Z+PITCH*z)
++		label_.rotation_degrees=Vector3(-90,180,0);add_child(label_)
++	words = study.label("WalkToRead","WALK BETWEEN THE VOLUMES
++YOUR POSITION SELECTS Z",34)
++	words.position=Vector3(0,.032,-.3);words.rotation_degrees=Vector3(-90,180,0);add_child(words)
++	var area := Area3D.new();area.name="BodyReader";area.collision_layer=0;area.collision_mask=0xFFFFFFFF
++	var shape:=CollisionShape3D.new();var bounds:=BoxShape3D.new();bounds.size=Vector3(1.84,2.4,3.3)
++	shape.shape=bounds;shape.position=Vector3(0,1.2,1.6);area.add_child(shape)
++	area.body_entered.connect(_entered);area.body_exited.connect(_exited);add_child(area)
++	refresh()
++
++func accepts(body:Node3D) -> bool:
++	return body is XRToolsPlayerBody or (body is CharacterBody3D and (body.is_in_group("em_walker") or body.is_in_group("player_body") or body.is_in_group("player")))
++
++func _entered(body:Node3D) -> void:
++	if accepts(body):visitors[body.get_instance_id()]=weakref(body)
++
++func _exited(body:Node3D) -> void:
++	visitors.erase(body.get_instance_id())
++	if body.get_instance_id()==last_body:last_body=0;last_band=-1
++
++func _physics_process(_delta:float) -> void:
++	for id in visitors.keys():
++		var body: Node3D = visitors[id].get_ref()
++		if not is_instance_valid(body):visitors.erase(id);continue
++		var p:Vector3=study.to_local(body.global_position)
++		if absf(p.x)>.92 or p.z<-.05 or p.z>3.25:continue
++		var band:int=clampi(roundi((p.z-FIRST_Z)/PITCH),0,study.Model.N-1)
++		if id==last_body and last_band>=0:
++			if absf(p.z-(FIRST_Z+PITCH*last_band))<=PITCH/2+DEAD_BAND:return
++		last_body=id
++		if band!=last_band:
++			last_band=band
++			study.select_spatial_slice(band)
++		return
++
++func refresh() -> void:
++	var z:float=FIRST_Z+PITCH*study.slice_z
++	for frame in frames:frame.position.z=z
++	floor_mark.position.z=z
++
++func bar(parent:Node3D,size:Vector3,at:Vector3) -> MeshInstance3D:
++	var n:=MeshInstance3D.new();var mesh:=BoxMesh.new();mesh.size=size;n.mesh=mesh;n.position=at
++	var mat:=StandardMaterial3D.new();mat.albedo_color=Color("ffd18e");mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
++	n.material_override=mat;n.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;parent.add_child(n)
++	return n
+--- before/commons/maps/CA_EdgeOfChaos/encounter-notes.md
++++ after/commons/maps/CA_EdgeOfChaos/encounter-notes.md
+@@ -0,0 +1,9 @@
++# Lose sight of a difference, then find it again
++
++25 September 2026. The paired study already has a strong storage experiment. The new encounter makes its spatial receiver legible through walking: your depth between A and B selects the same section of both. Gold frames mark that plane; the existing floor and wall textures show it.
++
++At the beginning, address (5,5,5) is the only intervention. Walk beyond its slice and the selected difference image is blank, although the field has not changed. Return and it reappears. Compare this with INTEGER storage removing the uniform unforced intervention on the first update. A disappearance from view and a disappearance from stored state require different accounts.
++
++Keep all five existing works, the paired model, source equation excerpts and mature manuscript argument. Add only the early walking encounter and its native photograph. Correct the stale companion claim that CA_AgentsCircuits is off route; the active sequence already places it directly before this hall.
++
++Native evidence and exact revisions: doc/book/iterations/2026-09-25-ca-walking-slice/. Desktop checks do not establish headset comfort, Quest performance or learner understanding.

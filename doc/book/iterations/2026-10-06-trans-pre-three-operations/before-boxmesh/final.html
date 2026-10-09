@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Pre — Reflection</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#22221f;font:19px/1.65 Georgia,serif}main{max-width:1160px;margin:auto;padding:55px 38px}.reading{max-width:900px}h1{font-size:clamp(38px,6vw,68px);font-weight:400;line-height:1.05}h2{font-weight:400;font-size:31px;line-height:1.2;margin-top:45px}h3{font:600 17px system-ui}a{color:inherit}nav,.meta,figcaption,button{font:14px/1.6 system-ui}nav{display:flex;gap:20px;flex-wrap:wrap;margin:25px 0}.meta{color:#625e54}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;display:block}figcaption{padding:10px 0}pre{background:#222528;color:#f6f2e9;overflow:auto;padding:25px;font:14px/1.55 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border-bottom:1px solid #c8c2b6;text-align:left;vertical-align:top;padding:10px}li{margin:8px 0}summary{cursor:pointer}details{margin:35px 0}.note{border-block:1px solid #c4bcae;padding:20px 0}@media(max-width:700px){main{padding:28px 20px}.gallery{grid-template-columns:1fr}table{font-size:14px}}</style><main class="reading"><nav><a href="index.html">Review</a><a href="lesson-files.zip">Download all four code files</a><a href="final.html">Read the reflection</a><a href="/ghost-student?state=transformation-pre">Tested learner state</a></nav><h1>What survives its movement?</h1>
+<p>In Melencolia, the pyramids stayed still while your viewpoint changed. Here, stay a moment and let an object change in front of you. What survives its movement?</p>
+<p>The cubes are black, white and gray. Light catches an edge; a shadow changes as a face turns. Four cubes are spaced down the middle of the hall. Smaller markers stand beside the row. Beyond the cubes, wedges lead up to a raised path. Here we can follow how a game pickup gets its animation.</p>
+<!-- @pick_up_cube -->
+
+<p>The first cube holds still. Pause before approaching and watch a corner: nothing shifts. Then walk into it: even without an animation, it can be collected. Keep its shape in mind as you go to the next one.</p>
+<p>This cube moves up and down. Follow it through a complete rise and fall. Its position changes while its size and facing stay the same. Moving an object from one position to another is <strong>translation</strong>. Here that movement follows the vertical Y direction.</p>
+<p>The script chooses a height between two endpoints:</p>
+<pre><code class="language-gdscript">global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+</code></pre>
+<p>The animation moves <code>t</code> back and forth between zero and one. <code>lerp</code>, short for <strong>linear interpolation</strong>, uses that number to choose a height between the lower and upper endpoints. At <code>t = 0.5</code>, the cube is halfway between them. Each rise and fall takes it through the same heights, at a steady speed on each leg.</p>
+<p>The third cube keeps moving up and down. What has been added?</p>
+<p>Follow a corner. The cube turns as well. Changing its orientation — which way it faces — is <strong>rotation</strong>. This line adds a small turn around the upright Y axis on each update:</p>
+<pre><code class="language-gdscript">rotate_y(rotation_speed * delta)
+</code></pre>
+<p>Point Zero's small counter example received <code>delta</code> without using it. Here <code>delta</code> is the time since the previous update. Multiplying the turning speed by those elapsed seconds gives the turn to add now. A longer interval calls for a larger turn.</p>
+<p>The rise and the turn continue together. Follow the same corner once more: it travels around the upright axis as well as up and down.</p>
+<p>At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is <strong>scale</strong>.</p>
+<pre><code class="language-gdscript">var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+_apply_pulse(size_factor)
+</code></pre>
+<p>The same <code>lerp</code> now chooses a size factor between 0.7 and 1.3. <code>_apply_pulse</code> multiplies the cube's starting size by that factor. A factor of one leaves the size unchanged; below one it shrinks, above one it grows. All three dimensions change together, so it keeps its cube shape.</p>
+<p>Beside each moving example, a smaller marker isolates the operation just added: one moves up and down, one turns in place, one grows and shrinks. They let us separate movements that the larger cubes combine.</p>
+<p>Look back along the four stations. The still cube has gone if you collected it; the three moving examples remain.</p>
+<p>Walk up the wedges. Four more cubes wait above the raised path, rising, turning and changing size. Pick one to approach. As you walk into it, it swells briefly and disappears with a pickup sound. The others keep moving.</p>
+<p>The three moving demonstrations behind you stay in place for another look.</p>
+<p>Translation kept its size and facing. Turning kept the distances between its corners. Multiplying all three dimensions by the same factor kept its proportions. Each operation has left something to recognise. The next hall asks which of these changes can give us somewhere to stand.</p>
+<!-- @ --></main></html>

@@ -1,0 +1,24 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -11,7 +11,9 @@
+ 
+ An O can become a short hollow passage. Its interior opening is part of the source outline, not a hole we draw afterward. The museum's glyph gallery explores this relation at architectural scale. Here we use its existing outline-and-sweep builder for one small visible body.
+ 
+-Columns gave a generated cross-section a sequence of placements. Now the font supplies the cross-section, and we choose the placements. Font extraction, triangulation and boundary stitching are explicitly supplied work, not concepts you are expected to reconstruct in this lesson.
++The lesson is **a section carried along a route**. Return first to the familiar column: at each height, its radius list chose the size of a ring. Imagine keeping those rings the same size and placing them along a straight route. Now substitute the supplied O outline for the ring. The section tells us what is carried; the route tells us where it goes.
++
++Start with the same O and width throughout. Change only the sideways travel, OFFSET. The font record, placement formula and surface builder are supplied support. Font extraction, triangulation, holes and general path orientation are not additional tasks to solve here.
+ 
+ ## Make this study
+ 
+@@ -159,7 +161,9 @@
+ 
+ ## Make it your own
+ 
+-Set OFFSET to zero; then give it the opposite sign. Keep the O and WIDTH unchanged. Predict the direction of the passage and verify that the opening survives. Next try C and explain why an open contour changes what you would call the resulting space. Some glyphs have disconnected components; one character need not make one connected solid.
++Set OFFSET to zero; then give it the opposite sign. Keep the O, WIDTH and DEPTH unchanged. Predict the direction of travel and verify that the opening survives. Point to what belongs to the unchanged section and what came from its route.
++
++Once that distinction is clear, try C with the same route. Its gap connects the hollow to the outside; the material outline itself still has a closed boundary. Some glyphs have disconnected components, so one character need not make one connected solid.
+ 
+ Carry the distinction between a rule you write and a structure you borrow. Portals asks how a finite construction can answer a question about an ideal form.
+ 

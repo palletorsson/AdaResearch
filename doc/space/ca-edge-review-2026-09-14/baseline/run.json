@@ -1,0 +1,31 @@
+{
+  "started": "2026-09-14T08:44:53+02:00",
+  "finished": "2026-09-14T08:47:54+02:00",
+  "pid": 25092,
+  "exit": 124,
+  "checks": null,
+  "failures": null,
+  "source_sha256": {
+    "ada_run/ca_edge_probe_base.gd": "47b8eaac79bc6715065032a3763d13ecbe3c2dd979c4551407442b3cb89b09dc",
+    "ada_run/ca_edge_acceptance.gd": "3c1709c0a86d3524e29d700658568f6b7fd92b633342706ae6e8b42d5a91d769",
+    "commons/maps/CA_EdgeOfChaos/map_data.json": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-edge-review-2026-09-14/review-plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "algorithms/cellularautomata/ca_showcase/difference_model.gd": "f6243274399105d55e41cdc5ffba9e1462a8807e1a557fe3429fd452120acdeb",
+    "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd": "4aaeeea75ce1b742dfdd88bd909cef817ea476a669993fb406fb3ad4827fc3fc",
+    "ada_run/ca_difference_oracle.py": "b6e3fdddeb952ab3cbafd3216299910065072b99109348b810b91e9e420a9109",
+    "ada_run/ca-edge-review-2026-09-14/oracle.json": "a706fc17b492185adcd5fbfbefb7886bdc0299ec7aec5021189e9a485ca20c66",
+    "commons/artifacts/registry/cellular_automata.json": "030cc76f10bbae7ceb7842fbf153f62063b6bcfd5ddd1728afd2560640eb40a7"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

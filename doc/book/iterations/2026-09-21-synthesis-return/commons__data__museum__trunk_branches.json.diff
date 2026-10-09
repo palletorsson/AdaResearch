@@ -1,0 +1,58 @@
+--- before/commons/data/museum/trunk_branches.json
++++ current/commons/data/museum/trunk_branches.json
+@@ -22596,15 +22596,19 @@
+       },
+       {
+         "map": "PostCrisis_Synthesis",
+-        "tokens_add": [],
++        "tokens_add": [
++          "assembly_return"
++        ],
+         "tokens_remove": [],
+         "says": {
+-          "accountability_ledger": "The count continues. Which consequence will you carry back?"
++          "assembly_return": "Look for the hand you moved. What survived the journey?",
++          "accountability_ledger": "The pose is kept. What would you want the record to remember next?"
+         },
+         "says_by": {
++          "assembly_return": "hand",
+           "accountability_ledger": "hand"
+         },
+-        "hero": "accountability_ledger"
++        "hero": "assembly_return"
+       }
+     ]
+   },
+@@ -28801,17 +28805,20 @@
+           "pearl": "postcrisis synthesis",
+           "map": "PostCrisis_Synthesis",
+           "index": 7,
+-          "hero": "accountability_ledger",
++          "hero": "assembly_return",
+           "hero_by": "hand",
+           "tokens": [
++            "assembly_return",
+             "accountability_ledger",
+             "edge_ground_synthesis"
+           ],
+-          "blurb": "Which consequence will you keep in view after the next line arrives?",
++          "blurb": "The body that returned",
+           "says": {
+-            "accountability_ledger": "The count continues. Which consequence will you carry back?"
++            "assembly_return": "Look for the hand you moved. What survived the journey?",
++            "accountability_ledger": "The pose is kept. What would you want the record to remember next?"
+           },
+           "says_by": {
++            "assembly_return": "hand",
+             "accountability_ledger": "hand"
+           }
+         }
+@@ -28821,7 +28828,7 @@
+         "wiki_fragment"
+       ],
+       "qfep_role": "Applied limits — bias, rhizomes, molecular design as post-crisis practice",
+-      "tokens": 14
++      "tokens": 15
+     }
+   ],
+   "hand_nodes": {

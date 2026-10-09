@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act1_WhatAVectorIs · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act1_WhatAVectorIs">← Tutorial lineage</a></p><h1>Vectors Act1 WhatAVectorIs</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/final.md">Raw captured source</a></p><pre># The same difference, somewhere else
+
+&lt;!-- @VectorBasics --&gt;
+
+Two pins hold a small arrow between them. On the wall, two larger yellow arrows show it from different directions: one from the side, one from above. Move the tip. The wall answers.
+
+Now **SHIFT** moves both pins sideways together. The small arrow has gone somewhere. The two wall arrows stay where they were.
+
+We can see the movement and the lack of change at once. The wall has been asked for the difference between the pins. Both addresses have changed by the same amount, so their difference has not.
+
+The point rooms gave us addresses; transformation let us move them. The particles in the last room followed directions. Here we can carry a relation from one place to another. *This far, this way* can begin somewhere else.[^stick-chart]
+
+**PARTS** brings out the coloured component legs and their numbers. The calculation is short:
+
+```gdscript
+var displacement = end.global_position - start.global_position
+```
+
+The subtraction gives the displacement from the beginning to the end. It does not retain either address on its own. Many pairs of points can make this same arrow.
+
+With **SHORT** and **LONG**, the gap changes from a quarter metre to one metre. Its direction stays. The wall pictures grow, although their display scale differs from the arrow in our hands. What they share is the measured displacement.
+
+One wall view keeps X and Y, leaving out depth along Z. The other keeps X and Z, leaving out height along Y. Move the tip in a direction that disappears from one view and watch it arrive in the other. A movement can be missing from a picture while still taking place in the room.
+
+These are world axes. Turning the bench changes its relation to them; it does not turn the world&#x27;s frame with it. The arrow has a direction within an arrangement we inherited when we entered.
+
+**ZERO** brings the pins together. There is no longer a direction from one to the other. SHORT or LONG can separate them again, but now the control has to supply a direction: it chooses the normalised diagonal (1,1,1). There was no little arrow hidden inside zero, waiting to be enlarged.
+
+&lt;!-- @ --&gt;
+
+The coordinate frame, route courier and length lantern remain nearby. A courier has to begin somewhere, even when its instruction is only *this far, this way*. Later, the point where a force is applied will matter too. The freedom to move a displacement arrow does not make every use of a vector independent of place.
+
+&lt;!-- @vector_normalize_demo --&gt;
+
+At the next diagram, a sphere gives the companion arrow a reference for unit length. Lengthen the input: its companion keeps its length. Change the direction: both turn.
+
+A long arrow becomes shorter here. A short one becomes longer. Both have one unit of length, with their different directions intact.
+
+This is normalisation. A nonzero vector is divided by its own magnitude:
+
+```gdscript
+var magnitude = v.length()
+var unit = v / magnitude if magnitude &gt; 0.001 else Vector3.ZERO
+```
+
+The sphere and rings make that common length visible at the scale of the diagram. They do not tell us how far a body should travel. A unit direction could guide a short step or a long journey; we would have to supply the distance separately.
+
+Near zero, the companion has no length to draw. The code treats any input length at or below 0.001 as too small to supply a direction and returns zero instead. That small neighbourhood belongs to the implementation. Mathematics leaves only the exact zero vector without a direction.
+
+&lt;!-- @ --&gt;
+
+At the first bench, the same difference could begin elsewhere. At the second, different lengths could share a direction. These are two ways of finding something in common without making the inputs identical.
+
+In the next room, two displacements meet. The question becomes where they can take us together.
+
+[^stick-chart]: Before the arrow there was the frond. The navigators of the Marshall Islands tied the directions of ocean swells and the positions of islands into lattices of coconut-frond midribs and shells, the mattang, meddo and rebbelib stick charts: an instrument of *this far, this way*, memorised before a voyage and left ashore. *Nature of Code* opens its chapter on vectors with one.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/tutorial.md">Raw captured source</a></p><pre># One displacement, two wall projections
+
+The opt-in `lesson:room_reading` layer on VectorBasics starts with its input arrow and hides the legacy decomposition displays. A floor console offers SHORT, LONG, SHIFT, ZERO and PARTS. The input arrow is brought forward above the console. The projection screen occupies a cleared side bay; former interior grid columns in that footprint have been removed.
+
+Both projections read `end.global_position - start.global_position`. SHORT selects magnitude 0.25 m and LONG selects 1 m. They retain direction above magnitude 0.0001; at or below that threshold they supply normalised (1,1,1). This preset threshold differs from the normalisation companion&#x27;s 0.001 threshold. SHIFT alternates a common 0.2 m translation of both pins along the console axis. ZERO makes them coincide. PARTS reveals world components and two component-leg drawings. This is a description of displacement, not a force controller.
+
+The wall&#x27;s XY and XZ diagrams use 0.85 display metres per world metre. Each projection is limited to radius 1.05 display metres. The clipping label names that bound; the numeric displacement is unchanged. The adapter samples at 20 Hz and rebuilds only after a measured vector or reveal-state change. Body, world and drawing coordinates are kept explicit. Existing VectorBasics placements without the lesson metadata retain their interface.
+
+The companion vector_normalize_demo uses a 0.001 magnitude threshold. Its numeric readout uses the computed unit.length(), including 0.000 for the zero result. Its drawn unit sphere belongs to the illustration&#x27;s scale, not the world-metre scale of the first wall.
+
+Before expanding this into bodily locomotion, introduce velocity state, acceleration and integration. The existing force_pad assigns launch velocity; force_field_zone adjusts velocity over time. They require distinct adapters and distinct comparisons.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act1_WhatAVectorIs/final.md) is retained for comparison.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/intent.md">Raw captured source</a></p><pre># A relation can move
+
+Begin with the two pins shifting together while their wall projections stay fixed. Let the visitor meet displacement as a reusable relation between addresses, then distinguish it from direction at unit length. Retain the zero-vector convention, the world frame and the question of where a force is applied. The next hall adds two displacements and gives their sum to a moving carriage.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/critical.md">Raw captured source</a></p><pre># What the vector leaves behind
+
+A free displacement keeps a difference while discarding the two original addresses. Moving both pins can preserve that difference. Applying a force at a particular point is a different question: the point of application can change torque. Reuse has conditions, and this hall should not erase them.
+
+The wall shows two projections of one measured displacement. Each drops a coordinate. The choice of world frame and the drawing window both belong to the representation. Clipping can preserve a direction while losing visible magnitude, so the numbers retain what the window cannot hold. The wall&#x27;s sampling clock can also lag behind the hand.
+
+Zero is another boundary. Normalisation uses a threshold around it; the preset controls choose a direction when there is none available from the measured vector. That convenience is declared. A useful interface can introduce a convention without disguising it as information contained in its input.
+
+The force sequence will carry these questions into the room: which rule acts on a parcel, a wall or the player, and which capability is genuinely shared between those receivers? Similar arrows do not establish identical dynamics. The gameplay comparison must expose the connection in code and through movement.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/artifacts.md">Raw captured source</a></p><pre>Primary: VectorBasics (room_reading) and vector_normalize_demo. Supporting: CoordinateSystem3M, route_vector and length_lantern. The opening 3t text is decoration.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act1_WhatAVectorIs/blurb.md">Raw captured source</a></p><pre>A processional hall with four stations and one question: what is a vector, before it is any particular arrow? Stand inside the coordinate frame and read your own address off three axes. Grab a free arrow and slide it anywhere — same direction, same length, same vector. Stretch the lantern and watch its glow grow with √(x²+y²+z²). Then divide a vector by its own length and keep only the which-way. Four ideas walked in order: a where, a which-way, a how-far, and a how-far refused. The diagram is on the wall; the arrow is in your hands.
+</pre></section></body></html>

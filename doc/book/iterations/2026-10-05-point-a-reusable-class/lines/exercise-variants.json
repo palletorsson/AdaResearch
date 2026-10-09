@@ -1,0 +1,72 @@
+{
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/vertical.gd": {
+    "sha256": "bdb318fb9db5a8ee52f63bc151e11a6c044da172ddd818ca72c885f92fe5a7c9",
+    "native_filename": "vertical.gd",
+    "edit": {
+      "id": "vertical",
+      "kind": "replace",
+      "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+      "after": "    point_b.position = CENTRE + Vector3(0, 1.0, 0)\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/coincident.gd": {
+    "sha256": "99c8605f102d8ec4a2db8e56edb637bd06e380eaa94e61b03d4f014a0eaf3f45",
+    "native_filename": "coincident.gd",
+    "edit": {
+      "id": "coincident",
+      "kind": "replace",
+      "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+      "after": "    point_b.position = CENTRE\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/reverse_direction.gd": {
+    "sha256": "da6b3479496fb77446bd73d10279f3a47fdacd8aec6f6241040fb8f01dfc9451",
+    "native_filename": "reverse_direction.gd",
+    "edit": {
+      "id": "reverse_direction",
+      "kind": "replace",
+      "before": "    var displacement := b - a\n",
+      "after": "    var displacement := a - b\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/two_lines_parallel.gd": {
+    "sha256": "c3d3e7758807be25c1cd71908b5bc815ed6380be24bb2fbae2a22347547c7cff",
+    "native_filename": "two_lines_parallel.gd",
+    "edit": {
+      "id": "two_lines_parallel",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 1.12, 0)\n    point_b.position = Vector3(0.6, 1.12, 0)\n    var c := Vector3(-0.6, 1.62, 0)\n    var d := Vector3(0.6, 1.62, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/two_lines_plus.gd": {
+    "sha256": "43f17443f58adfb6070a7ec85067744019cfe4dd2ad9fda8a834989cea930181",
+    "native_filename": "two_lines_plus.gd",
+    "edit": {
+      "id": "two_lines_plus",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 1.42, 0)\n    point_b.position = Vector3(0.6, 1.42, 0)\n    var c := Vector3(0, 0.82, 0)\n    var d := Vector3(0, 2.02, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/two_lines_x.gd": {
+    "sha256": "a43e956224c7f3a18c44d8d1bc90b69b9f1ee6e4166d5b5fb65fc333c4f28247",
+    "native_filename": "two_lines_x.gd",
+    "edit": {
+      "id": "two_lines_x",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02, 0)\n    var d := Vector3(0.6, 0.82, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/variants/two_lines_x_depth.gd": {
+    "sha256": "9a07dee6f72adb14bd2b75cc4bacf25a88ad6719ebe3bcbfd6275b66d981c2ec",
+    "native_filename": "two_lines_x_depth.gd",
+    "edit": {
+      "id": "two_lines_x_depth",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02,0.2)\n    var d := Vector3(0.6, 0.82,0.2)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  }
+}

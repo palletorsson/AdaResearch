@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_One · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_One">← Tutorial lineage</a></p><h1>Point One</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_One/final.md">Raw captured source</a></p><pre># Point One — A body in the light
+
+&lt;!-- @point_absent --&gt;
+
+The corridor begins with a label: “Point one”. Above it, nothing.
+
+There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.
+
+Here is the point, but you cannot see it. We can keep its position in three numbers:[^point-one-code]
+
+```gdscript
+var point_position := Vector3(0.0, 1.12, 0.0)
+```
+
+We have given that position a name, `point_position`. The numbers locate a place. They draw nothing. In the next hall, we will take them apart.
+
+A mathematical point has no extent.[^point-one-euclid] To let it appear in the room, we will have to give it something a point does not have: a surface.
+
+&lt;!-- @point_visible --&gt;
+
+Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.
+
+Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.
+
+We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.
+
+&lt;!-- @point_solid --&gt;
+
+The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.
+
+This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.
+
+Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.
+
+&lt;!-- @point_sun_switch --&gt;
+
+## First there was light
+
+First there was light, right? Look at the crooked shadows under the white spheres. Round bodies leave stretched marks on the floor. Something outside the shape has helped to draw them.
+
+There is a switch on the wall. Turn it.
+
+You have removed their sun.
+
+The long shadows disappear. The spheres remain, faintly lit. Try approaching the solid one again. Its boundary has not gone with its shadow. What helped you see the body was never what stopped your body.
+
+Here the sun is a direction from which light arrives. We did not have to build a burning star. A few instructions gave the room a familiar consequence, and familiarity let the source go unquestioned. The switch puts that borrowed certainty within reach.
+
+Turn it back. A shadow returns to the same place. It makes the sphere easier to locate, but it is not another point beneath the first one. It belongs to a relation between a surface, a light and somewhere for the light to be interrupted.
+
+&lt;!-- @point_pedestal --&gt;
+
+## The size of a point
+
+Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.
+
+The small sphere let you approach its centre. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.
+
+Look from the small white spheres to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.
+
+In the next room, the point can leave its place with your hand. Now we can ask where it has gone.
+
+[^point-one-code]: The position is drawn from the station&#x27;s construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate tutorial keeps a position, adds a visible surface and compares it with a collision boundary. Reading the three components and using pickup belong to the next hall, Point Coordinates.
+
+[^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_One/tutorial.md">Raw captured source</a></p><pre># Point One — give the point a body
+
+Point Zero gave us an instruction that runs when the scene is ready. Here we will use that moment to place a marker. The supplied scene already gives us a floor, a light and a view. We will keep those while changing what appears in front of us.
+
+Open [the Point One study project](../../../doc/book/studies/point-one/README.md), then `study.tscn`. Its root is `PointStudy`. The three station nodes, `Position`, `Visible` and `Solid`, have `position.gd`, `visible.gd` and `solid.gd` attached. These are the three scripts we will change. Each station has its own “Point one” label.
+
+Run the study. Above the first label there is nothing; above the next two are white spheres. Three small pink feelers move from left to right. Two cross their stations; the third stops at the solid sphere. The sweep repeats. Space pauses or resumes it; R starts the sweep again. `contact_probe.gd` supplies this contact test. Its movement is borrowed equipment, like the camera. We will change what it can cross.
+
+## At the first label, nothing appears
+
+Open `position.gd`. This is the whole script:
+
+```gdscript
+extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+```
+
+We know `_ready()` from Point Zero; `-&gt; void` says the function returns no value. Here we define a `Vector3`, a value containing three numbers, and name it `point_position`. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.
+
+Change `1.12` to `1.7` and run. Nothing appears at this station. We have changed a value without attaching a visible body to it. The editor&#x27;s unused-variable warning describes that condition. The pink feeler still crosses the empty place. It belongs to the supplied test, not to the position we have just defined. Restore `1.12`.
+
+## Give the position a surface
+
+Open `visible.gd`. Its complete construction runs in the same familiar function:
+
+```gdscript
+extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+
+    var radius := 0.14
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+```
+
+`point_position` is the location. `sphere` describes a spherical surface; `marker` is the node that displays it. `.new()` creates each part. Assigning `marker.mesh` gives that node its surface; assigning `marker.position` places it. `add_child(marker)` joins it to the station. A position and the object placed there are different things.
+
+Change `1.12` to `1.7` in this script. Now the white sphere rises. Restore the height, then change `radius` from `0.14` to `0.3`. The sphere grows around the same centre. Its height follows because the script makes it twice the radius.
+
+Watch the feeler cross the larger sphere. A visible surface has still given it nothing to collide with. We can change how much the sphere hides without changing what can pass through it. Restore the radius to `0.14`.
+
+## Give the body a boundary
+
+The third station looks the same. Its feeler stops. Open `solid.gd`:
+
+```gdscript
+extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+
+    var radius := 0.14
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+
+    var solid := StaticBody3D.new()
+    solid.position = point_position
+
+    var sphere_shape := SphereShape3D.new()
+    sphere_shape.radius = radius
+    var collider := CollisionShape3D.new()
+    collider.shape = sphere_shape
+
+    solid.add_child(collider)
+    add_child(solid)
+```
+
+The first part constructs the same marker. The added `StaticBody3D` participates in collision. `SphereShape3D` describes its boundary, and `CollisionShape3D` attaches that shape to the physics body. The visible marker and this body are both placed at `point_position`.
+
+Find `sphere_shape.radius = radius`. Change only that line to:
+
+```gdscript
+    sphere_shape.radius = 0.35
+```
+
+Run again. The white sphere stays small, but the feeler stops earlier, leaving a visible gap. The empty space resists it. **Debug → Visible Collision Shapes** can also reveal the larger boundary; the contact test works without that overlay.
+
+We have chosen whether the surface we see and the boundary we encounter coincide. In the museum, it is your movement that meets this difference. The fixed-camera study supplies another moving body so we can test the same relation. Restore `sphere_shape.radius = radius`.
+
+Try a different disagreement: in `solid.gd`, set the visible `radius` to `0.3` and `sphere_shape.radius` to `0.07`. The feeler disappears into the white surface before the contact label reports “stopped”. The boundary is now inside the body we see. Return both to the matching `0.14` when you finish.
+
+## Remove the light, keep the body
+
+In the museum, use the wall switch. The long shadows disappear while a dim fill leaves the spheres visible. The collision boundary stays where it was.
+
+The decision in the switch is one line:
+
+```gdscript
+sun.visible = false
+```
+
+Here `sun` is the museum&#x27;s directional light. This is a reading of that source, not a line to paste into `visible.gd`, which has no variable named `sun`. The portable study keeps its supplied light. Building the switch and its lighting rig is outside this lesson.
+
+## What we can carry forward
+
+We can now place a marker, change its surface around the same centre and give it a different physical boundary. The large sphere at the end of the museum corridor asks us to return to those choices: it still says “Point one”. Knowing its construction gives us another way to change the encounter.
+
+[Point Coordinates](../Point_Coordinates/tutorial.md) begins with a supplied point we can hold, then reads its movement. It will prepare two positions for the line. The [construction reference](../../../doc/book/studies/point-one/CONSTRUCTION.md) keeps the roles of the supplied parts available without adding another required exercise.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_One/technical.md">Raw captured source</a></p><pre># Point One — implementation reference
+
+The active corridor contains point_absent, point_visible, point_solid and point_pedestal, built by commons/primitives/point/point_condition.gd. The absent condition creates no sphere. Visible and solid have radius 0.14 m; only solid adds a fixed collision sphere. The final sphere has radius 0.65 m, centre height 1.40 m and a pedestal whose top is 0.75 m.
+
+point_sun_switch.gd adds a directional light for the study spheres on visual layer 18, distinct from collision layers. The existing museum floor receives this light on an additional visual layer 17; no extra floor plates are added. Its material and normal lighting remain. The sun&#x27;s caster mask includes only the study bodies, so the lesson is not accidentally shadowed by a streamed roof. A low, unshadowed local fill keeps the bodies readable when the sun is hidden. Other lights exclude only the dedicated sphere layer. Light and floor masks are restored when the study unloads.
+
+The wall lever uses the production XRTools area button with pointer support: near-hand entry or pointer press toggles sun.visible. Its 1.28 m control height is a design value, not a headset comfort certification. The plate sits on the inside face of the corridor&#x27;s right wall. The entry door remains.
+
+The portable Point One study retains its three reduced scripts: position.gd, visible.gd and solid.gd. Its complete code examples distinguish point_position (a Vector3) from marker (a MeshInstance3D). The supplied contact_probe.gd creates three small CharacterBody3D feelers. Actual move_and_collide results stop a feeler; the other two cross. Space pauses and R repeats. Changing the authored collision radius changes where contact occurs without changing the rendered radius. The helper stays at height 1.12 m, so the height experiment must be restored before the radius comparison. The sun switch is inspected in the museum; its full lighting rig is not part of that portable kit.
+
+Pickup, WORLD/LOCAL cards, frame, L-shaped basin and target now belong to Point_Coordinates. See its technical.md for the maintained point_one_main channel and all moved placements. Distance is first calculated in the Point_Lines tutorial.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_One/intent.md">Raw captured source</a></p><pre># A body in the light
+
+Point Zero supplies readiness and processing. Point One asks what must be attached to a position before it can appear or resist us. The corridor separates absence, a white surface, and an identical surface with collision. The wall switch then makes the directional light removable while keeping the body and its boundary. The large pedestal sphere closes this hall.
+
+The main text follows those encounters. It keeps one position line but leaves component-by-component coordinates to the next hall. Its critical question is how apparently natural solidity and visibility are constructed separately.
+
+The tutorial names the supplied scene and shows three complete scripts. It changes the visible radius and the collision radius independently. A supplied moving feeler makes their disagreement observable in the fixed-camera study through actual physics contact. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
+
+The coordinate frame, cards, target and retained secondary comparisons have moved together to Point_Coordinates. Their removal from this hall is a pedagogical split, not a rejection of their work. The actual origin marker and its Point zero label remain in Point_Zero.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_One/critical.md">Raw captured source</a></p><pre>&gt; Current placement, 30 September 2026: Point One holds absence, visibility, collision, a removable directional light and the pedestal sphere. Holding, WORLD/LOCAL, the frame and target belong to Point_Coordinates. [README.md](README.md) identifies the current files. The older research below remains as material, not a claim that every referenced artifact still stands in this hall.
+
+# Point One - Critical Reflection
+
+## Reading status — 26 September 2026
+
+This is an earlier research draft, retained for its questions. The current literary argument is in [final.md](final.md); [technical.md](technical.md) now follows the actual encounter.
+
+Some assertions below need revision before reuse. A geometric point does not by itself discretize a continuum or establish a binary classification. The current room does not establish a fixed 90 Hz tracking rate. A position value alone does not record a trajectory, but a surrounding program can record one. Claims about ownership, surveillance and colonial mapping require a particular practice and evidence; they do not follow from the definition of a point alone.
+
+The running-system and inherited-work inquiry now opens Point_Zero. Here, begin with absence, a visible surface that permits passage, an identical surface that resists, and the removable light. The held black body, reference frames and acceptance of an arrival continue in Point_Coordinates. These are investigative leads, not required conclusions. Preserve the rabbit, pleasure, curiosity and the usefulness of the abstraction alongside its limits.
+
+---
+
+## That Which Has No Part
+
+Euclid&#x27;s definition: &quot;A point is that which has no part.&quot;
+
+This is not just a mathematical statement - it is a declaration of **atomicity**, of fundamental indivisibility. The point cannot be broken down further. It is the **minimal unit**.
+
+But what does it mean to have &quot;no part&quot;?
+
+The point:
+- Cannot be split
+- Cannot be shared
+- Cannot be distributed
+- Cannot contain multiplicity
+
+The point is **singular, discrete, and absolute**. It is the first assertion of the **one** against the continuous.
+
+## Discretization as Violence
+
+The transition from Point_Zero (infrastructure) to Point_One (individual unit) is the moment where **continuous space becomes discrete**.
+
+Before the point, there was only the field - the origin as stable reference, but no marked positions. With Point_One, space becomes **countable**:
+- This point (1)
+- Not that point (0)
+- One, not zero
+- Present, not absent
+
+This is the introduction of the **binary** into geometry. The point makes space **digital** - either there is a point here, or there is not.
+
+What this excludes:
+- **Gradual transitions** (no &quot;almost a point&quot;)
+- **Partial presence** (no &quot;half a point&quot;)
+- **Ambiguity** (no &quot;maybe a point&quot;)
+- **Continuity** (gaps appear between discrete points)
+
+## The Body Creates Position
+
+In Point_One, you **grab** the point. Your hand moves through space, and the point follows.
+
+This is crucial: **The body instantiates the point**.
+
+The point&#x27;s position is not given by mathematics - it is produced by your hand&#x27;s movement through VR space. The controller&#x27;s tracking system writes new (x, y, z) coordinates 90 times per second.
+
+The point becomes a **record of embodied action**. Where you placed it, that&#x27;s where it is.
+
+But here&#x27;s the tension: The point has no memory. It doesn&#x27;t remember where it **was**, only where it **is**. The duration of your movement - the gesture, the arc of your arm, the hesitation - all of this is erased.
+
+Only the final position remains.
+
+## What the Point Cannot Hold
+
+The point is defined by what it **excludes**:
+
+- **Duration** - It exists only in the present moment
+- **Trajectory** - It has no memory of how it arrived at its position
+- **Thickness** - It has no volume, no materiality
+- **Texture** - It has no surface quality
+- **Temperature** - It is pure abstraction, untouchable
+- **Multiplicity** - It is singular, never plural
+
+The point is the most **compressed** representation of position. Everything about embodied location except the coordinates themselves is discarded.
+
+## Euclid and Colonial Geometry
+
+When Euclid wrote &quot;that which has no part,&quot; he was establishing the **axioms** that would govern Western geometry for millennia.
+
+But axioms are not neutral. They are **choices** about what counts as foundational truth.
+
+The Euclidean point privileges:
+- Discreteness over continuity
+- Singularity over multiplicity
+- Abstraction over materiality
+- Measurement over experience
+
+These are the same logics that enable:
+- Property boundaries (this land, not that land)
+- Colonial mapping (dividing continuous territories into discrete parcels)
+- Surveillance (tracking bodies as point locations)
+- Logistics (reducing movement to origin/destination pairs)
+
+The point is not innocent. It is a **tool of organization** that makes space calculable, divisible, and ownable.
+
+## Queer Points
+
+What would a queer point look like?
+
+Perhaps:
+- A point that **remembers** its trajectory
+- A point that exists in **multiple positions simultaneously**
+- A point that **drifts** over time
+- A point that has **thickness**, occupying uncertain space
+- A point that can be **partially present**
+
+The point could refuse singularity. It could be **becoming** rather than **being**.
+
+## The Isolated Cube
+
+The map&#x27;s architecture includes an isolated cube at (4,2) - spatially separated from the continuous platform.
+
+This cube **is** the point made architectural. It demonstrates singularity through physical isolation. One cube, apart from the field.
+
+The point is always already **separated** - defined by its distinction from what it is not.
+
+## Conclusion: Individuation
+
+Point_One teaches **individuation** - how the continuous becomes discrete, how the field produces units, how bodies create marked positions.
+
+But we must ask: **Who benefits from discretization?**
+
+Systems of power require:
+- Countable subjects (population management)
+- Trackable positions (surveillance)
+- Discrete properties (ownership)
+- Singular identities (governable bodies)
+
+The point is not just a geometric primitive. It is the **atom of administrative logic** - the minimal unit that can be counted, located, and controlled.
+
+When you grab the point and place it in space, you are performing the act of **making discrete**. You are converting continuous VR space into a marked, nameable, retrievable position.
+
+This is both necessary (we need to build with discrete elements) and troubling (discretization enables capture).
+
+The question is not whether to use points, but whether we can remain **aware** that the point is a **political technology** disguised as mathematical truth.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_One/artifacts.md">Raw captured source</a></p><pre># Point One — current encounters
+
+30 September 2026. Generated from the current map_data.json placements. Source cells are not runtime world coordinates.
+
+| Artifact | Cell (x,z) | Configuration |
+| --- | --- | --- |
+| `point_corridor_door` | (8, 0) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
+| `point_absent` | (7, 2) | `point_absent:180#plinth:0#pin:1` |
+| `point_visible` | (7, 5) | `point_visible:180#plinth:0#pin:1` |
+| `point_sun_switch` | (10, 6) | `point_sun_switch:270#plinth:0#pin:1#offset:0.45,0,0` |
+| `point_solid` | (7, 8) | `point_solid:180#plinth:0#pin:1` |
+| `point_pedestal` | (8, 12) | `point_pedestal:180#plinth:0#pin:1` |
+
+final.md follows the primary encounter; tutorial.md selects the operations to make. This inventory includes secondary works and practical equipment without making every object a required lesson.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_One/summary.md">Raw captured source</a></p><pre># Point One
+
+A label names an absent point. A white sphere gives it a surface; the next sphere adds resistance. Turn a wall switch and remove the light that made their crooked shadows. The bodies remain. A large sphere repeats the name before we enter Coordinates and take a point in hand.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_One/blurb.md">Raw captured source</a></p><pre>A point is given a surface, a boundary and light. Turn the switch. Which of its powers have you removed?
+</pre></section></body></html>

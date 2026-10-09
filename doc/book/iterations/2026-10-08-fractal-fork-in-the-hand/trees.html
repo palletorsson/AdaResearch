@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_RecursiveTrees</title><style>
+:root{color-scheme:light;--paper:#f5f1e9;--ink:#26232b;--rose:#cb7292}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}header,main,footer{max-width:1280px;margin:auto;padding:28px 5vw}nav{display:flex;gap:22px;flex-wrap:wrap}a{color:#823856;text-underline-offset:4px}h1{font:clamp(38px,5vw,68px)/1.05 Georgia,serif;max-width:900px}h2{font:34px/1.15 Georgia,serif;margin-top:55px}h3{font-size:20px}p{max-width:75ch}.eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:12px}.lead{font-size:22px;max-width:65ch}.pill{background:#25232b;color:#fff;padding:9px 16px;display:inline-block;border-radius:30px;font-size:14px}img{width:100%;display:block;border-radius:3px}figure{margin:24px 0}figcaption{font-size:14px;color:#59545d;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;background:#fffdf8;padding:24px}table{border-collapse:collapse;width:100%;background:#fffdf8}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d2ca;padding:16px}pre{white-space:pre;overflow:auto;font:13px/1.6 Consolas,monospace;padding:18px;background:#25232b;color:#f7eef1}code{font-family:Consolas,monospace;font-size:.87em}blockquote{margin:25px 0;padding:12px 26px;border-left:4px solid var(--rose);font:25px/1.5 Georgia,serif}.reading p{max-width:70ch}.reading h2{font-size:27px}.reading h1{font-size:38px}.reading pre{max-height:none}.notes{background:#e9e4dc;padding:22px}button{font:inherit;border:1px solid #b8a7ad;background:#fffdf8;padding:8px 15px;margin:10px 8px 10px 0;cursor:pointer}button[aria-pressed=true]{background:#25232b;color:white}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}th,td{padding:10px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}body{background:white}pre{white-space:pre-wrap}article{break-before:page}}
+</style><header><p class="eyebrow">Endless Museum · 8 October 2026 · Fractals / first pass</p><nav><a href="index.html">Museum & changes</a><a href="recursion.html">Recursion: tutorial / reflection</a><a href="trees.html">Trees: tutorial / reflection</a><a href="student-files.zip">Student scripts</a></nav></header><main class="pair reading"><article><p class="eyebrow">Tutorial · reconstruct the operation</p><h1>Recursive Trees — turn one fork</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Two recursive calls from one branch</li>
+<li>Parent and child transforms</li>
+<li>Inherited direction and length</li>
+<li>A local edit that preserves the other subtree</li>
+</ul>
+<p>Press GROW beside the small tree. Hold one of its two points and turn the first branch. Its descendants follow. The other side stays. Look up: the large canopy receives the same edit. Release the point, then add another generation. Its new branches begin at the tips you moved.</p>
+<p>The sphere still acts as a point you can hold. The line still gives two positions a visible span. We now arrange those spans in a hierarchy, so you can change a family of branches without dragging every endpoint.</p>
+<h2>What continues</h2>
+<p>Keep the museum workspace, XR hands and the <code>LineSkin</code> from the previous lesson. Save <code>tree.gd</code>, <code>point_body.gd</code> and <code>line_skin.gd</code> together. On your empty <code>PointStudy</code> node, replace <code>frames.gd</code> with <code>tree.gd</code>; keep the frame script as your previous working version. Use unit scale and place the station with clear space in front of you. The script creates a small tree and two grips inside the existing museum environment.</p>
+<p>This is the minimal reconstruction of the fork interaction. The museum artifact additionally supplies the growth buttons, readout, large solid canopy and alternative branching settings. Our study uses two children and a fixed 35-degree turn. Its <code>generations</code> Inspector value sets the whole tree before running. Re-run to rebuild; the study does not add another set of museum controls.</p>
+<h2>tree.gd</h2>
+<!-- student-code:tree.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+@export_range(1, 4) var generations := 3
+@export_range(0.4, 0.8) var ratio := 0.7
+const TURN := PI * 35.0 / 180.0
+var tree: Node3D
+var first_forks: Array[Node3D] = []
+var points: Array = []
+var segment_count := 0
+
+func _ready() -&gt; void:
+    tree = branch(0.7, clampi(generations, 1, 4))
+    tree.position = Vector3(0, 0.60, 0)
+    add_child(tree)
+    for child in tree.get_children():
+        if child.has_meta(&quot;length&quot;):
+            first_forks.append(child)
+    for i in range(2):
+        var point = PointBody.new()
+        point.tint = Color(&quot;e99db8&quot;) if i == 0 else Color(&quot;25212a&quot;)
+        add_child(point)
+        points.append(point)
+        park_point(i)
+
+func branch(length: float, remaining: int) -&gt; Node3D:
+    var joint := Node3D.new()
+    joint.set_meta(&quot;length&quot;, length)
+    var line := LineSkin.new()
+    joint.add_child(line)
+    line.show_segment(Vector3.ZERO, Vector3.UP * length, length)
+    segment_count += 1
+    if remaining &lt;= 0:
+        return joint
+    for sign_value in [-1.0, 1.0]:
+        var child := branch(length * clampf(ratio, 0.4, 0.8), remaining - 1)
+        child.position = Vector3.UP * length
+        child.rotation.z = TURN * sign_value
+        joint.add_child(child)
+    return joint
+
+func _process(_delta: float) -&gt; void:
+    for i in range(2):
+        if points[i].held():
+            var fork := first_forks[i]
+            var parent: Node3D = fork.get_parent()
+            var displacement := parent.to_local(points[i].global_position) - fork.position
+            turn_fork(i, displacement)
+        else:
+            park_point(i)
+
+func turn_fork(index: int, displacement: Vector3) -&gt; void:
+    if not displacement.is_finite() or displacement.length() &lt; 0.001:
+        return
+    var horizontal := Vector3(displacement.x, 0, displacement.z)
+    if horizontal.length() &lt; 0.001:
+        return
+    var angle := clampf(atan2(horizontal.length(), displacement.y), deg_to_rad(12), deg_to_rad(65))
+    var direction := Vector3.UP * cos(angle) + horizontal.normalized() * sin(angle)
+    first_forks[index].basis = Basis(Quaternion(Vector3.UP, direction))
+
+func park_point(index: int) -&gt; void:
+    var fork := first_forks[index]
+    var tip := Vector3.UP * float(fork.get_meta(&quot;length&quot;))
+    points[index].global_position = fork.to_global(tip)
+</code></pre>
+<p><code>branch()</code> makes a joint and draws one line upwards from it. It returns that joint, including anything attached below it. When <code>remaining</code> is zero, the visible branch is the last one: it gets no children. Here <code>generations</code> counts the generations <strong>after the trunk</strong>. Three gives 1 + 2 + 4 + 8 = 15 segments; four gives 31.</p>
+<p>The two loop values give opposite turns. Each loop iteration calls <code>branch()</code> again with a shorter length and one fewer generation. The returned child is placed at the parent's tip, turned, then attached to that parent. Its children have already been made by the same rule. This is a depth-first construction: finish one subtree, then make its sibling.</p>
+<p>Earlier, local and world coordinates described a point relative to a room. Here every child has a local position relative to its parent branch. <code>child.position = Vector3.UP * length</code> puts its origin at that parent's end. Moving or turning the parent carries the children through their existing attachments. The scene tree performs that inheritance; we do not recalculate every descendant in <code>_process()</code>.</p>
+<p>The two grips control only the first fork. While one is held, we convert its world position into its branch parent's coordinates, subtract the attachment position and obtain a direction. <code>turn_fork()</code> aligns the branch's local Y axis to that direction. The quaternion line is a supplied alignment operation: it turns one axis towards another. Length is unchanged. The 12–65-degree limit keeps this particular hand study within a manageable arc; it is an interface choice, not a law of recursion. Pulling farther does not lengthen a branch.</p>
+<p>On release, <code>park_point()</code> places the grip back at the represented endpoint. Its handle is an editing tool; it is not a free endpoint that stretches the branch. The other first fork has a different parented subtree, so turning one does not turn both.</p>
+<h2>The familiar point — point_body.gd</h2>
+<p>This keeps the sphere, matching collider and frozen XRTools pickup construction from Point Lines. The radius is reduced to 8.5 cm for this small model. A material distinguishes the two grips. The small <code>held()</code> adapter also recognises the museum's existing desktop pickup and drop hooks. XR Tools still supplies the actual hand attachment; the tutorial does not rebuild the player.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>The same line skin — line_skin.gd</h2>
+<p>Keep this supplied renderer unchanged. The new work is the relationship between branches.</p>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Test a different tree</h2>
+<p>Set <code>generations</code> to 4. Predict 31 segments, then run. Turn the rose point out of the original plane. Follow one of its terminal twigs and compare it with a twig on the black side. The first must move; the second must stay. Release the point and check that no branch has gained length or lost its attachment.</p>
+<p>Change <code>ratio</code> from 0.7 to 0.5 and run again. Predict which property changes and which stays: the tree reaches less far but still has 31 segments. This is the independent test of the lesson: distinguish a change in geometry from a change in the number of branches.</p>
+<h2>Back at the large canopy</h2>
+<p>The museum source evaluates its branching rule through a queue of unfinished tips. GROW advances a complete generation; it does not use the depth-first call order of our small study. It also stores branch positions in one shared local frame. Its hand editor explicitly turns the selected branch records, their descendants and their pending tips. Our nested nodes make the same inheritance visible with less machinery. These are two implementations of the relation, not identical scripts or an exact geometric copy.</p>
+<p>The small museum model and large canopy, however, really do share the source's branch records. Their scale differs; their branching decisions do not. ANGLE and LENGTH on the original desk change the whole rule and rebuild the specimen. The point grips make a local edit. Release both before using those controls or RESET.</p>
+<p>Carry the bounded self-call onward. In Cantor Set, the next decision will be which part of an interval is retained, removed and passed to another call.</p></article><article><p class="eyebrow">Final · encounter and reflection</p><h1>Where will the next branch go?</h1>
+<!-- @recursive_tree_2 -->
+
+<p>A trunk waits. Where would you put its first fork?</p>
+<p>Press GROW. Two branches appear at its tip. Press again, following one of those branches rather than the outline of the whole tree. Each new pair begins where a previous segment ends. Predict the next fork before asking for it.</p>
+<p>The previous room let one call become several. Here we give those calls a place to start, a direction and a length. Four presses leave thirty-one segments, including the trunk. The fourth generation contains sixteen of them. Shorter branches do not mean fewer branches.</p>
+<p>Beside the desk, the same tree fits between your hands. A rose point and a black point mark its first fork. Take one. Turn it sideways. Its children move with it; the other family of branches stays. You have changed one attachment, and the change has travelled further than your hand. Look up at the large canopy. It has received the same turn.</p>
+<p>The grip lets you turn a branch within a bounded arc. It keeps the length. On release the sphere returns to that branch's tip. There are two kinds of reach here: where your hand can go, and what we allow that movement to alter. A local decision can have many descendants without reaching everything. Release the point before returning to the desk. Its ANGLE and LENGTH controls rebuild the whole specimen; they leave your local edit behind.</p>
+<p>Leave the generation count where it is and press ANGLE. The tree opens. Press again: its branches draw closer to the direction their parents were taking. The button cycles through three turns, measured from the parent direction. Follow the same first fork. Its descendants have moved, but none has been added or removed.</p>
+<p>Now press LENGTH. The ratio changes from 0.70 to 0.85: each child inherits more of its parent's length. The next press takes it to 0.50. You can make a crowded body or a much smaller one without changing the number of segments. Walk around it. A branch that seemed short from the desk may have been pointing towards you.</p>
+<p>These lines come from the growing tree's implementation:</p>
+<pre><code class="language-gdscript">var new_length = parent_data.length * length_reduction
+</code></pre>
+<p>And, after the new direction has been calculated:</p>
+<pre><code class="language-gdscript">var end_position = parent_pos + branch_direction * new_length
+</code></pre>
+<p>The second line hands the next fork its beginning. A vector, a multiplication and an addition carry the body further. What looked like a tree can be followed as a succession of these handovers.</p>
+<p>Press FORKS at the fourth generation. Three descendants now leave each tip. The display rises from thirty-one to one hundred and twenty-one segments. This change adds connections to the branching graph; turning or lengthening its existing edges did not. A visible crossing of two branches still does not join them in the program.</p>
+<p>RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Now press GROW once more and watch where the new branches appear. Every unfinished tip advances in the same press. The desk holds those tips in a queue and works through one generation at a time.</p>
+<p>We could instead follow one branch all the way to its last twig before returning for its siblings. A self-call can take that route. With the same fixed angles and lengths, the completed tree could look the same; watching it being made would be a different encounter. Here the next generation waits for your hand. The surrounding museum continues.</p>
+<p>There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. At the desk, the branches are visible meshes; they do not offer the player's body a climbable support. In the aisle, the same branch geometry has been enlarged and made solid. Walk towards its trunk. It stops you. Step beside it and look up. The first fork is now above your head.</p>
+<p>Grow to the fourth generation again, then return to ANGLE and LENGTH. Open the turn to sixty-five degrees and let each child keep 0.85 of its parent's length. Some tips turn down towards the floor. The count has stayed at thirty-one, but the space beneath them has changed. Walk back among them. What looked like a small adjustment at the desk changes how far the branches reach over you.</p>
+<p>The same fork can be something to stand beneath or something to get past. Those meanings arrive with us. The instruction contains neither. We have given the branches size and solidity; we have not taught them to make room for us.</p>
+<p><img alt="Looking up from beneath the enlarged, solid tree in the museum aisle." src="images/Fractal_RecursiveTrees-tree-canopy.png" /></p>
+<!-- @recursive_tree -->
+
+<p>Across the approach, the red block tree has already spent its calls. Choose a large branch and follow it towards its smaller descendants. At a fork, predict the next division, then find another fork at a similar depth. A shared procedure need not give them the same dimensions or the same number of children.</p>
+<p>Press STRATA. Colour separates three branching levels from the trunk. Follow a route to its last visible block. REACH draws the accumulated bounds; ENDS adds marks at the handover and terminal branches. FORM returns the original colours. These readings belong to the same built geometry. Changing the view does not draw another tree.</p>
+<p>This tree does use random choices, from the seed shown on its desk. The choices vary its branches within a fixed construction rule. A seed can repeat an arrangement; it cannot tell us which arrangements the rule never permits. Even the blunt boxes can persuade us to call it organic. We can enjoy that recognition and still ask what it has made too easy to recognise.</p>
+<!-- @ -->
+
+<p>The small tree further in begins with a sentence. A short string is rewritten four times, then read as steps and turns. Its angle control changes how those turns are drawn. The letters can stay while the branches move.</p>
+<p>Look back at the two studies near the entrance: the growing tree keeps its proportions; the red tree repeats a seeded draw. Beside them, the little grammar tree gives instructions letters we will learn to read in a later hall. Which one most readily becomes a tree in your eyes? That recognition arrives before any of them has met soil, light or wind.</p>
+<p>Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view. They need not all answer the same question. The old enclosure remains a detour around something we cannot see from every position. We have more procedures to learn before resemblance becomes our only way to choose a body.</p>
+<p>Next comes Cantor: another generation, this time made by deciding what will be removed.</p></article></main><footer>Native Godot captures. Supplied test input; physical headset feel and learner understanding remain untested.</footer></html>

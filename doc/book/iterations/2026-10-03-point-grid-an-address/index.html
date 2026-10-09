@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Grid — a place to return to</title><link rel="stylesheet" href="style.css"></head><body><main><header><p>ADA / ONE TUTORIAL AT A TIME · 3 October 2026</p><nav><a href="#reading">Read Point Grid</a><a href="#code">Complete script</a><a href="#lineage">What it adds</a><a href="Point_Line_Grid.tutorial.diff">Text diff</a></nav></header><article id="reading"><h1>Point Grid — a place to return to</h1>
+<p>Move the pink point slowly. A smaller white marker waits, then jumps. Your point can move while the marker keeps its place.</p>
+<p>Trace kept positions after enough movement. Here we give each position a grid address and keep a new position when that address changes. The list and drawing loop are already ours; the new operation is rounding.</p>
+<p>Open <code>point_grid.tscn</code> in the <a href="../2026-10-03-ada-xr-starter/index.html#guide">Ada student starter</a>. Edit <code>studies/point_grid/grid.gd</code>. The same supplied handle provides the hold. The script creates the white marker as Point One created its sphere. Three readouts show the input in metres, its grid address, and the resulting placement in metres.</p>
+<figure><a href="before-boundary.png"><img src="before-boundary.png" alt="Pink free input at x=0.12 metres beside the white output at zero; separate input, address and placement readings inside the Godot starter"></a><figcaption>The free point and its placed marker. Actual Godot desktop view inside the shared starter.</figcaption></figure><h2>1. Count steps from an origin</h2>
+<p>The grid has a chosen spacing:</p>
+<pre><code class="language-gdscript">var grid_size := 0.25
+</code></pre>
+<p>One step is a quarter of a metre. All positions use Study's frame. Keep its scale at one: one unit represents one metre.</p>
+<p>Inside <code>_process()</code>, we read the point and calculate its address:</p>
+<pre><code class="language-gdscript">    var p := point.position
+    var address := Vector3i(
+        roundi(p.x / grid_size),
+        roundi(p.y / grid_size),
+        roundi(p.z / grid_size)
+    )
+</code></pre>
+<p>For each coordinate, divide by the spacing to count steps. <code>roundi()</code> rounds that count to the nearest integer. <code>Vector3i</code> holds three integers, while <code>Vector3</code> holds three floating-point numbers. The address counts grid intervals; the position measures metres.</p>
+<p>The starting X value is <code>0.12</code>. Dividing by <code>0.25</code> gives <code>0.48</code> steps. The nearest whole number is zero. Y is <code>1.25</code> metres, exactly five steps; Z is zero. The address is therefore <code>(0, 5, 0)</code>.</p>
+<h2>2. Give the address a position</h2>
+<pre><code class="language-gdscript">    var placed := Vector3(address) * grid_size
+    marker.position = placed
+</code></pre>
+<p><code>Vector3(address)</code> converts the integer components into floating-point components. Multiplying by the spacing gives metres again. Address <code>(0, 5, 0)</code> becomes position <code>(0.0, 1.25, 0.0)</code>.</p>
+<p>We move the marker to this result. The held point keeps its own position. Calculating an address does not force your hand onto it.</p>
+<p>In <code>_ready()</code>, change the point's starting X from <code>0.12</code> to <code>0.13</code> and run again. The address becomes <code>(1, 5, 0)</code>. The input changed by one centimetre; the placed X changed by twenty-five centimetres. You crossed the halfway boundary between two grid positions.</p>
+<p>Try <code>-0.12</code>, then <code>-0.13</code>. Negative addresses extend the same rule to the other side of zero. At an exact halfway value, Godot rounds away from zero.</p>
+<div class="pair"><figure><a href="before-boundary.png"><img src="before-boundary.png" alt="X 0.12 maps to address zero" loading="lazy"></a><figcaption>Input X 0.12 m → address X 0 → placed X 0 m.</figcaption></figure><figure><a href="after-boundary.png"><img src="after-boundary.png" alt="X 0.13 maps to address one" loading="lazy"></a><figcaption>Input X 0.13 m → address X 1 → placed X 0.25 m.</figcaption></figure></div><h2>3. Keep an order of visits</h2>
+<p>We reuse Trace's <code>Array[Vector3]</code>. The first frame seeds the empty list. After that, we add a position only when it differs from the last one:</p>
+<pre><code class="language-gdscript">    if points.is_empty():
+        points.append(placed)
+    if placed != points[-1]:
+        points.append(placed)
+</code></pre>
+<p><code>is_empty()</code> tests whether the list has no entries. <code>!=</code> means “not equal”. Moving within one address adds nothing. Moving away and returning adds another visit to that address. The record keeps an order, so a place can occur more than once.</p>
+<p>An array index and a grid address do different jobs. <code>points[3]</code> reads the fourth visit; it does not mean the fourth column of the room.</p>
+<p>The existing loop joins each retained position to the next. These segments can run diagonally. The code does not fill in skipped addresses or find a route along the ruled lines. Trace's capacity limit still keeps at most 128 positions.</p>
+<h2>4. Change the agreement</h2>
+<p>Restore X to <code>0.12</code>. Change <code>grid_size</code> to <code>0.5</code> and restart. Move, pause, and try to return to a place you left. The larger spacing gives a wider region of input positions the same address. Use a positive spacing; zero cannot divide a position into steps.</p>
+<p>The supplied <code>GridRuling</code> redraws the reference lines at the chosen spacing. It shows only the XY section at Z = 0, with grid indices along its edges. Move the point towards you: the third address component changes too. The rounding works in three dimensions even though this section is flat.</p>
+<p>This is a reduced version of the hall's snapping artifact. Its finer grid, release alignment and table add other ways to inspect the rule. Here the marker shows the result while the held point stays free.</p>
+<p>A grid can help endpoints find the same place again. It supplies neither a face nor collision. Next we can arrange three points, close their boundary, and ask what it takes to put a surface inside.</p><div class="pair"><figure><a href="quarter.png"><img src="quarter.png" alt="The retained route at quarter-metre spacing" loading="lazy"></a><figcaption>Spacing 0.25 m · 31 recorded visits.</figcaption></figure><figure><a href="half.png"><img src="half.png" alt="The same movement recorded at half-metre spacing" loading="lazy"></a><figcaption>Same scripted movement, spacing 0.5 m · 15 visits.</figcaption></figure></div><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the starter with Point Grid</a></p><p class="small">Open point_grid.tscn · Run Current Scene (F6).</p></article><details id="code"><summary>grid.gd · the complete working lesson</summary><div><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const TraceDrawing = preload(&quot;res://prepared/trace_drawing.gd&quot;)
+const GridRuling = preload(&quot;res://prepared/grid_ruling.gd&quot;)
+
+var point := PointHandle.new()
+var marker := MeshInstance3D.new()
+var drawing := TraceDrawing.new()
+var ruling := GridRuling.new()
+var input_readout := Label3D.new()
+var address_readout := Label3D.new()
+var placed_readout := Label3D.new()
+var points: Array[Vector3] = []
+var grid_size := 0.25
+var capacity := 128
+
+func _ready():
+    point.position = Vector3(0.12, 1.25, 0.0)
+    add_child(point)
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.04
+    sphere.height = 0.08
+    marker.mesh = sphere
+    add_child(marker)
+    add_child(drawing)
+    add_child(ruling)
+    ruling.build(grid_size)
+    input_readout.position = Vector3(0.0, 2.65, -0.6)
+    address_readout.position = Vector3(0.0, 2.4, -0.6)
+    placed_readout.position = Vector3(0.0, 2.15, -0.6)
+    add_child(input_readout)
+    add_child(address_readout)
+    add_child(placed_readout)
+
+func _process(_delta):
+    var p := point.position
+    var address := Vector3i(
+        roundi(p.x / grid_size),
+        roundi(p.y / grid_size),
+        roundi(p.z / grid_size)
+    )
+    var placed := Vector3(address) * grid_size
+    marker.position = placed
+    input_readout.text = &quot;input m  &quot; + str(p)
+    address_readout.text = &quot;address  &quot; + str(address)
+    placed_readout.text = &quot;placed m  &quot; + str(placed)
+    if points.is_empty():
+        points.append(placed)
+    if placed != points[-1]:
+        points.append(placed)
+        if points.size() &gt; capacity:
+            points.pop_front()
+        drawing.clear()
+        for i in range(1, points.size()):
+            drawing.join(points[i - 1], points[i])
+</code></pre><p>The output sphere reuses Point One's construction. The new ruling helper supplies only the reference lines; the calculation that gives a position its address is visible in the learner code.</p><p><a href="grid.gd" download>Download grid.gd</a> · <a href="grid_ruling.gd">Supplied GridRuling</a> · <a href="trace_drawing.gd">TraceDrawing</a> · <a href="point_handle.gd">PointHandle</a> · <a href="segment.gd">Segment</a></p></div></details><section id="lineage" class="lineage"><h2>A place and a visit have different names.</h2><p>A position in Point One. A relation between two positions in Lines. An ordered record in Trace. Now a grid address makes nearby positions agree, and the record can retain separate visits to the same address.</p><p>The flat ruling is a section of the three-dimensional calculation. Moving in depth still changes the third address component. Neither the ruling nor the retained line supplies collision.</p><p>Triangle comes next: close a boundary, then add a face. Coordinates keeps its earlier place in the spine; its shared-starter writing pass remains pending.</p><p class="small">The canonical tutorial and executable companion are updated. The critical manuscript and live museum are unchanged. The hall's release alignment and floor-plan construction remain separate encounters.</p></section><details id="checked"><summary>39 checks passed · evidence and limits</summary><div><p>Fresh ZIP import and native Godot 4.6 checks cover positive and negative rounding boundaries, halfway values, all three coordinates, unchanged input, repeated visits, diagonal jumps, spacing changes, capacity, desktop pickup and synthetic XR grip.</p><p>Every printed excerpt matches the downloadable code. Images are actual desktop renders using scripted positions for comparison. A physical headset and beginner reading trial remain pending.</p><p><a href="depth.png">View a connection in depth</a> · <a href="verification.json">Native results</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="DECISIONS.md">Editorial decisions</a></p></div></details></main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

@@ -1,0 +1,53 @@
+--- before/commons/maps/FormFinding_Descent/final.md
++++ commons/maps/FormFinding_Descent/final.md
+@@ -26,7 +26,7 @@
+ 
+ The subtraction is familiar. We have carried vectors, combined them and used them to cross space. Here subtraction changes an address in a search. RATE decides how far to trust the local direction. It does not name speed in metres per second. No mass is divided out; no acceleration is accumulated.
+ 
+-On the opening bowl, the cost is one quarter of x squared plus z squared. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre's address to make those steps. We can see the whole bowl; the update uses nearby samples.
++On the opening bowl, the cost is a quarter of the sum of x squared and z squared. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre's address to make those steps. We can see the whole bowl; the update uses nearby samples.
+ 
+ Eventually the display says SMALL SLOPE. Look at that wording before calling the run solved.
+ 
+@@ -36,7 +36,7 @@
+ 
+ Both runs can stop at a small slope. They do not arrive at the same cost.
+ 
+-In the recorded desktop comparison, the first run finishes near -0.304 and the second near 0.295. The rule, tolerance and surface are shared. The beginning differs. One valley is lower, but the point in the other valley has no instruction to cross the intervening rise in search of it.
++In a recorded comparison with these settings, the first run finishes near -0.304 and the second near 0.295. The rule, tolerance and surface are shared. The beginning differs. One valley is lower, but the point in the other valley has no instruction to cross the intervening rise in search of it.
+ 
+ The surface makes this difference visible all at once. The moving point encounters it locally, one update at a time. You can walk around the plot and see the other valley. That knowledge has not entered the algorithm merely because it has entered your view.
+ 
+@@ -62,7 +62,31 @@
+ height = 0.40 + 0.22 * cost(point)
+ ```
+ 
+-The height makes cost legible across a table. It is not gravitational potential energy, and the blue mesh is not a floor for your body to climb. The point's apparent descent comes from changing an address and drawing the result. Behind this experiment, the retained marble toy carries velocity and receives periodic programmed kicks. Its motion may resemble searching, but it uses another update. The resemblance gives us a comparison to investigate.
++The height makes cost legible across a table. It is not gravitational potential energy, and the blue mesh is not a floor for your body to climb. The point's apparent descent comes from changing an address and drawing the result.
++
++## Comparisons
++
++<!-- @descent_marble_toy -->
++
++In the small swaying bowl, the marble carries motion from one moment into the next. Damping reduces it; a programmed kick every five seconds starts a new disturbance. Watch it pass a place the gold point would approach in shrinking steps. Looking downhill has not given these two bodies the same way to move.
++
++<!-- @gradient_descent -->
++
++The terrain station takes the local comparison onto seeded Perlin ground. Here too, samples to either side give a direction, and a threshold or a budget of 160 steps ends the search. The surface has become less orderly; the rule still knows only its neighbourhood.
++
++<!-- @gradient_descent_well -->
++
++At the glowing well, marbles descend, settle, pulse and begin again. Its title says that falling is how it learns. The marbles combine the local slope with retained motion; the LOSS readout follows the first marble on this authored landscape. A return to the top gives it another beginning, not a memory of the previous lesson. What does the falling let us understand about learning, and what does that resemblance leave out?
++
++<!-- @settling_tremble -->
++
++The small inset holds an amber curve beside blue points, then magnifies their differences eight times. Nothing trembles. These are fixed, seeded offsets from a sampled catenary, as its plaque says, rather than the residue of a solver. Magnification makes a small disagreement hard to overlook. Whether it matters is still a question for whoever accepts the result.
++
++<!-- @science_screen -->
++
++The nearby screen is another receiver: being visible in the room does not, by itself, make any of these histories a measurement it can read.
++
++<!-- @ -->
+ 
+ There is room for a different body in these small changes. One beginning inhabits a valley another beginning misses. A threshold admits one endpoint and rejects the next. Yet lowering cost only means improving according to the cost we wrote. Nothing in the arithmetic establishes that this measure contains everything worth keeping.
+ 

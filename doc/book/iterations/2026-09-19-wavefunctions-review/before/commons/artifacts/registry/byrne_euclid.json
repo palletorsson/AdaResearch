@@ -1,0 +1,124 @@
+{
+	"registry_info": {
+		"name": "byrne_euclid",
+		"description": "Euclid I.47 printed twice at the same size on one panel — lettered on the left, coloured on the right after Byrne 1847 — with the key to the letters standing behind the panel.",
+		"note": "Per-token registry file so parallel builders never share one JSON. The clause on the left-hand plate that says where the key is is DERIVED from key_side and not typed, so a map shipping #key:none gets a plate reading 'there is no key' rather than a plate pointing at nothing. If a still ever disagrees with its token, the plate is right."
+	},
+	"artifacts": {
+		"byrne_euclid": {
+			"lookup_name": "byrne_euclid",
+			"name": "Byrne's Euclid",
+			"class_name": "ByrneEuclid",
+			"scene": "res://commons/artifacts/byrne_euclid/byrne_euclid.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"sequence": "color",
+			"map_sequences": [
+				"color",
+				"primitives"
+			],
+			"description": "One proposition of Euclid, printed twice on the same panel at the same size, and the difference between the two printings is the whole artifact. On the LEFT: the figure of I.47 with its three squares filled in ONE identical grey, so nothing distinguishes them, and nine letter tags — A B C D E F G H K — stuck to their corners, with a sentence underneath that says the square BDEC equals the squares GFBA and HKCA together. To read that sentence you must find four letters and trace the quadrilateral they bound, and to know which letters matter you need the key, which stands behind the panel where you have to walk to it: about 6.5 m for the round trip. On the RIGHT: the identical figure, drawn by the same function with one boolean flipped, with the three squares filled vermilion, chrome yellow and ultramarine, and the same sentence written as a red square, an equals, a yellow square, a plus and a blue square. Nothing to look up, because nothing was named. This is Oliver Byrne's argument from 1847 — he printed the Elements in colour and threw the lettering away, so that the triangle you are talking about is the triangle you are pointing at — and it is built here as a walk rather than a page, because on a page the cost of a lookup is paid by the eye in a tenth of a second and is therefore invisible. THE LEFT FILLS ARE GREY AND NOT EMPTY on purpose: an engraved line diagram against Byrne's colour blocks is a confounded comparison, because the halves would then differ in filledness as well as in naming and a visitor could correctly say the coloured one is just easier to see. Both halves are three filled squares of the same size in the same places. One set is distinguishable; the other set is named. NOT a second pythagorean_proof — that one hands you draggable vertices and an area readout and its subject is the theorem. This one never asks whether the theorem is true and would work as well on a false one. Its subject is naming.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"hazard": false,
+			"interactions": [
+				"read the left-hand sentence, find that BDEC names nothing you can see, and go looking for the key",
+				"walk round the end of the deck to the key stand behind the panel — it faces the panel's back, so you read it standing in the gap",
+				"walk back and apply what you remembered, and notice that you could not hold the key and the figure in one view",
+				"read the right-hand sentence instead, which takes no walking at all and is the same claim",
+				"meet it already argued the other way: #key:front puts the key on the deck in reach, which is what a book does to the cost"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "large",
+				"key_side": "back",
+				"key_distance_m": 1.05,
+				"panel_width_m": 1.82,
+				"solid": true
+			},
+			"token_examples": [
+				"byrne_euclid",
+				"byrne_euclid#key:front",
+				"byrne_euclid#key:none",
+				"byrne_euclid#outer:2.2",
+				"byrne_euclid#width:2.40#outer:1.60",
+				"byrne_euclid#width:1.45#solid:false"
+			],
+			"token_note": "EVERY NUMERIC KEY HERE APPEARS IN GridInteractablesComponent.CONFIG_PARAM_NAMES (:16), and that is load-bearing rather than tidy: `#name:<number>` on a name outside that list is read as the tutorial's positional shorthand at :1705, the artifact is handed the boolean `true`, the number silently becomes a rotation, and the map looks configured while the object keeps its default. outer = key_distance_m (0.35..6.0, metres from the panel's BACK face to the key stand), width = panel_width_m (1.30..2.60, alias size). There is deliberately NO `#distance:` and no `#offset:` — neither name is registered, so both would be traps. `key` is safe under any name because all three of its values are WORDS and a non-numeric value never reaches the shorthand branch. `solid` is NOT in the list and must therefore take a word value: `#solid:false`, `no` and `off` all fail is_valid_float() and arrive as values, while `#solid:0` parses as a float, takes the shorthand branch, and hands the artifact `true` — the one spelling that reads as 'off' is the one that turns the collider ON. THE COLOURS ARE NOT CONFIGURABLE and will not become configurable: a token that could recolour the right-hand half to three greys would be a token that switches the artifact off, and 'off' is already spelled #key:none, which at least stays honest about what it is doing.",
+			"map_note": "DO NOT PUT THIS AGAINST A WALL. wall_backing is false and it is not a preference: the key stands 1.05 m BEHIND the panel facing the panel's back, and a visitor who cannot walk round the deck cannot reach it, at which point the left-hand proof is undecodable and the artifact is a diagram of itself. It needs a walkable band of about two cells behind as well as in front — that is what the round trip is, and the round trip is the measurement. Place the token on the DECK cell; the key eats floor at -Z, away from the approach, so the footprint grows backwards. The origin is the floor at the centre of the deck and minimum Y is 0 (deck underside and key foot both sit exactly on it), so it seats correctly in the maps that skip auto-grounding — which is every map token carrying an explicit y. A hall that genuinely has no room behind should ship #key:front instead of squeezing it: the front pad is the artifact's own control condition and is a legitimate placement, not a degraded one. CHECK THE CEILING BEFORE SCALING UP: #width scales everything, so #width:2.60 is 3.01 m tall (deck 0.94 + panel 2.07) against the shipped 2.11, and the panel top is the first thing that will punch through a low hall. #width:1.30 is 1.51 m tall and still legible — the standing key comes out at 29 columns and the shipped five lines fit in six, which is what the clamp is protecting. THE FRONT PAD DID NOT GET THAT PROTECTION AND HAS NOW BEEN GIVEN IT: TextScreen holds int(w * 0.41292 / 0.035) body lines, so five lines need a screen 0.4238 m wide, and the pad shipped at 0.58 * k — 0.4143 m at #width:1.30, which is FOUR lines, and the key's last entry, HKCA, came back as an ellipsis. Silently, on the one square the coloured half is arguing about. The pad reference is 0.64 now: 0.4571 m at the smallest panel, five lines with 0.39 of a line spare, and it still sits on the deck at every width (4.8 mm of deck in front of it at #width:1.30, 27 mm at 2.60). Note also that in #key:front the reclined pad rises about 0.28 m off the deck under the lettered half and clips the bottom of that plate in a straight-on still — the argument still photographs, but the shipped case is #key:back and that is the one the gallery shot is of.",
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"footprint_source": "authored",
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none",
+				"reading_radius": 2
+			},
+			"tags": [
+				"byrne",
+				"euclid",
+				"notation",
+				"naming",
+				"indirection",
+				"symbol_table",
+				"colour",
+				"proof",
+				"diagram",
+				"panel",
+				"plate",
+				"legibility"
+			],
+			"dev_themes": [
+				"a name is a promise the thing named can be found again",
+				"indirection is free on a page because the eye pays for it",
+				"the cost of a lookup, measured in metres"
+			],
+			"qfep_connection": "Byrne removed the letters and the proof stopped needing a key. What that exposes is not a fact about typography but about who a notation is built for: a symbol table is a compact for people who already hold the table, and everyone else pays a toll at every term. The lettered half is legible only to a reader who has done the walk, and it looks exactly as authoritative as the coloured half while being unreadable — which is the ordinary condition of a specialist notation encountered from outside. The corpus has this argument on the other side too: eleven_dots makes what you SEE a fact about where you stand, and this makes what you can READ one. Note also which half the museum's own habits favour. This project names 3427 artifacts with lookup tokens and resolves them through a registry, and it does that because it is a machine; the left-hand panel is that arrangement drawn at human scale, with the toll made walkable so somebody can feel it.",
+			"relationships": {
+				"pairs_with": [
+					"serial_principle",
+					"eleven_dots"
+				],
+				"argues_with": [
+					"pythagorean_proof",
+					"pythagorean_triangle_angles"
+				]
+			},
+			"measurements": {
+				"aabb_size": [
+					1.92,
+					2.11,
+					1.82
+				],
+				"aabb_center": [
+					0.0,
+					1.055,
+					-0.64
+				],
+				"max_dimension_m": 2.11,
+				"source": "computed from the shipped defaults — deck 0 to 0.66 (1.92 x 0.50), panel 0.66 to 2.11 (1.82 x 0.07) with its back face at z -0.25, deck caption to z +0.269, key stand at z -1.30 with a 0.50 m foot reaching z -1.55. Minimum Y is 0. The walk: a reader at the deck's front edge stands about z +0.45, the key is read from about z -0.75, the deck is 1.92 m wide so the path rounds its end at x +/-1.25 — 0.80 + 1.20 + 1.25 = 3.25 m one way, 6.50 m for the trip.",
+				"measured_at": "unmeasured in engine — run tools/sync_footprints.py after the first capture"
+			},
+			"note": "ADDED 2026-09-09. TEXT LANE: every word on this artifact — the two plate titles, the lettered sentence, the nine one-letter tags, the deck caption and the key itself — goes through commons/ui/text_screen.gd, which is the one text component in this corpus with a legible capture behind it. Label3D draws nothing here and BakedTextAlbedo.make_label_mesh (what HangarKit.stencil wraps) photographed blank twice on serial_principle's plate after its facing had already been corrected. Nine tags as nine TextScreens is heavier than nine baked quads and is the price of using the lane that is known to work. FACING: nothing is rotated. The panel face, both plates, the deck caption and the key stand ALL look at +Z — the key faces the panel's BACK, so a visitor who has walked round stands in the gap between them and reads it head on, which is why it needs no PI flip. That also means the key is invisible from all four capture angles, and that is correct: the still should show that there is something back there, not what it says. No dna.axes block — key_side is a real three-value family and an honest control, but nothing has swept or bitten it yet, and a declaration transcribed rather than derived is how science_screen published sixteen identical frames."
+		}
+	}
+}

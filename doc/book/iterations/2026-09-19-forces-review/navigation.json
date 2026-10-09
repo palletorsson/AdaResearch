@@ -1,0 +1,248 @@
+{
+  "checks": [
+    {
+      "message": "Forces has a museum plan owner",
+      "ok": true
+    },
+    {
+      "message": "plan position 1 selects Vectors_Act1_WhatAVectorIs",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act1_WhatAVectorIs",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act1_WhatAVectorIs",
+      "ok": true
+    },
+    {
+      "message": "plan position 2 selects VFM_02_Operations",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_02_Operations",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_02_Operations",
+      "ok": true
+    },
+    {
+      "message": "plan position 3 selects Vectors_Act2_VectorArithmetic",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act2_VectorArithmetic",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act2_VectorArithmetic",
+      "ok": true
+    },
+    {
+      "message": "plan position 4 selects VFM_05_Launch",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_05_Launch",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_05_Launch",
+      "ok": true
+    },
+    {
+      "message": "plan position 5 selects VFM_03_Motion",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_03_Motion",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_03_Motion",
+      "ok": true
+    },
+    {
+      "message": "plan position 6 selects Vectors_Act3_FieldsAndMotion",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act3_FieldsAndMotion",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act3_FieldsAndMotion",
+      "ok": true
+    },
+    {
+      "message": "plan position 7 selects Vectors_Act4a_KineticForces",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act4a_KineticForces",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act4a_KineticForces",
+      "ok": true
+    },
+    {
+      "message": "plan position 8 selects Vectors_Act4b_Oscillation",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act4b_Oscillation",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act4b_Oscillation",
+      "ok": true
+    },
+    {
+      "message": "plan position 9 selects Change_Choreography",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Change_Choreography",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Change_Choreography",
+      "ok": true
+    },
+    {
+      "message": "plan position 10 selects VFM_07_Gravity",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_07_Gravity",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_07_Gravity",
+      "ok": true
+    },
+    {
+      "message": "plan position 11 selects VFM_09_Legs",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_09_Legs",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_09_Legs",
+      "ok": true
+    },
+    {
+      "message": "plan position 12 selects VFM_08_Arena",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in VFM_08_Arena",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at VFM_08_Arena",
+      "ok": true
+    },
+    {
+      "message": "plan position 13 selects Vectors_Act5_ForceAsPlace",
+      "ok": true
+    },
+    {
+      "message": "museum refuses legacy teleporter in Vectors_Act5_ForceAsPlace",
+      "ok": true
+    },
+    {
+      "message": "cursor advance at Vectors_Act5_ForceAsPlace",
+      "ok": true
+    },
+    {
+      "message": "no legacy teleporter nodes instantiated",
+      "ok": true
+    },
+    {
+      "message": "all thirteen museum plan entries match the sequence",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final pearl",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "raw_exits": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "utility": "t:Vectors_Act2_VectorArithmetic"
+    },
+    {
+      "map": "VFM_02_Operations",
+      "utility": "t:Vectors_Act2_VectorArithmetic"
+    },
+    {
+      "map": "Vectors_Act2_VectorArithmetic",
+      "utility": "t:Vectors_Act3_FieldsAndMotion"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "utility": "t:VFM_03_Motion"
+    },
+    {
+      "map": "VFM_03_Motion",
+      "utility": "t:Vectors_Act3_FieldsAndMotion"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "utility": "t:Vectors_Act4a_KineticForces"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "utility": "t:Vectors_Act4b_Oscillation"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "utility": "t:Vectors_Act5_ForceAsPlace"
+    },
+    {
+      "map": "Change_Choreography",
+      "utility": "t"
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "utility": "t:VFM_09_Legs"
+    },
+    {
+      "map": "VFM_09_Legs",
+      "utility": "t:VFM_08_Arena"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "utility": "t:Vectors_Act5_ForceAsPlace"
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "utility": "t:Vectors_Act1_WhatAVectorIs"
+    }
+  ],
+  "route": [
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations",
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_05_Launch",
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation",
+    "Change_Choreography",
+    "VFM_07_Gravity",
+    "VFM_09_Legs",
+    "VFM_08_Arena",
+    "Vectors_Act5_ForceAsPlace"
+  ],
+  "scope": "Production plan selection and utility refusal; no physical portal crossing or full route walk"
+}

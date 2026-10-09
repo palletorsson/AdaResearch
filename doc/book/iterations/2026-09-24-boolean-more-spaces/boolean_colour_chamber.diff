@@ -1,0 +1,114 @@
+--- before/commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.gd
++++ commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.gd
+@@ -1,8 +1,8 @@
+ extends Node3D
+-## A common walkable floor beneath three different Boolean recipes.
++## A common walkable floor beneath different Boolean recipes.
+ ## Geometry stays fixed when the surface changes. No displacement shader.
+ signal surface_changed(value: int)
+-@export_enum("path", "lens", "shell") var mode: String = "path"
++@export_enum("path", "lens", "shell", "ring", "cross", "fold") var mode: String = "path"
+ @export_range(0, 3) var finish: int = 0
+ @export var controls: bool = true
+ var surface: ShaderMaterial
+@@ -23,7 +23,7 @@
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+  var next_mode := str(config.get("mode", mode))
+- if next_mode in ["path", "lens", "shell"]: mode = next_mode
++ if next_mode in ["path", "lens", "shell", "ring", "cross", "fold"]: mode = next_mode
+  finish = clampi(int(config.get("surface", finish)), 0, 3)
+  if built: _build()
+ 
+@@ -54,6 +54,9 @@
+   "path": _path_space()
+   "lens": _lens_space()
+   "shell": _shell_space()
++  "ring": _ring_space()
++  "cross": _cross_space()
++  "fold": _fold_space()
+  _floor()
+  _lights()
+  if controls: _controls()
+@@ -133,6 +136,56 @@
+   _sphere(stock, "Pore_%d" % i, 1.10, Vector3(cos(a)*4.5,4.6,sin(a)*4.0), 2)
+  # Flatten underside so the map floor supports the full artifact.
+  _box(stock, "BelowFloor", Vector3(20,8,20), Vector3(0,-4.0,0), 2)
++
++func _cylinder(parent: Node, key: String, radius: float, height: float, at: Vector3, rotation_value: Vector3 = Vector3.ZERO, op: int = 0) -> CSGCylinder3D:
++ var cut := CSGCylinder3D.new()
++ cut.name = key
++ cut.radius = radius
++ cut.height = height
++ cut.sides = 48
++ cut.smooth_faces = true
++ cut.position = at
++ cut.rotation = rotation_value
++ cut.operation = op
++ cut.material = surface
++ parent.add_child(cut)
++ return cut
++
++func _ring_space() -> void:
++ _box(stock, "Block", Vector3(13,7,13), Vector3(0,3.5,0))
++ var ring := CSGTorus3D.new()
++ ring.name = "AnnularVoid"
++ ring.inner_radius = 1.45
++ ring.outer_radius = 5.55
++ ring.sides = 64
++ ring.ring_sides = 24
++ ring.smooth_faces = true
++ ring.position.y = 1.35
++ ring.operation = CSGShape3D.OPERATION_SUBTRACTION
++ ring.material = surface
++ stock.add_child(ring)
++ _door("Entry", 5.8)
++ _door("Exit", -5.8)
++ _cylinder(stock,"OffsetLightWell",.95,7,Vector3(3.5,4.5,0),Vector3.ZERO,2)
++
++func _cross_space() -> void:
++ _box(stock, "Block", Vector3(13,8,13), Vector3(0,4,0))
++ var cuts := _cut_group("CrossingVoids")
++ _cylinder(cuts,"NorthSouth",2.55,16,Vector3(0,1.4,0),Vector3(PI*.5,0,0))
++ _cylinder(cuts,"EastWest",2.55,16,Vector3(0,1.4,0),Vector3(0,0,PI*.5))
++ _cylinder(cuts,"HighDiagonal",1.65,18,Vector3(0,4.25,0),Vector3(PI*.5,PI*.25,0))
++ _cylinder(cuts,"SkyShaft",1.4,10,Vector3(0,5,0))
++
++func _fold_space() -> void:
++ _box(stock, "Block", Vector3(13,8,13), Vector3(0,4,0))
++ var cuts := _cut_group("TiltedBoxVoids")
++ for i in 3:
++  var sign_value := -1.0 if i%2==0 else 1.0
++  var cut := _box(cuts,"Fold_%d"%i,Vector3(5.5,6.0,6.4),Vector3(sign_value*.4,2.1,-4.4+i*4.4))
++  cut.rotation = Vector3(0,deg_to_rad(sign_value*10),deg_to_rad(sign_value*22))
++ # A narrow inclined slit admits sky without making another walking route.
++ var slit := _box(stock,"RoofSlit",Vector3(.7,9,11),Vector3(-2.4,4.5,0),2)
++ slit.rotation.z = deg_to_rad(-18)
+ 
+ func _door(key: String, z: float) -> void:
+  var door := CSGCylinder3D.new()
+@@ -167,12 +220,22 @@
+  floor_body.add_child(visual)
+  add_child(floor_body)
+  # Small lit inlays remain level. They mark the shared route without a raised rail.
+- for z in [-6.0,-3.0,0.0,3.0,6.0]:
++ var inlays: Array[Vector3] = []
++ if mode == "ring":
++  for i in 16:
++   var a := float(i)*TAU/16.0
++   inlays.append(Vector3(sin(a)*3.5,.005,cos(a)*3.5))
++  inlays.append(Vector3(0,.005,6.0))
++  inlays.append(Vector3(0,.005,-6.0))
++ else:
++  for z in [-6.0,-3.0,0.0,3.0,6.0]: inlays.append(Vector3(0,.005,z))
++ for at in inlays:
+   var tile := MeshInstance3D.new()
+   var plane := BoxMesh.new()
+   plane.size = Vector3(.07,.009,.40)
+   tile.mesh = plane
+-  tile.position = Vector3(0,.005,z)
++  tile.position = at
++  if mode == "ring" and absf(at.z)<5: tile.rotation.y = atan2(at.z,-at.x)
+   var light_mat := StandardMaterial3D.new()
+   light_mat.albedo_color = Color(.50,.58,.67)
+   light_mat.emission_enabled = true

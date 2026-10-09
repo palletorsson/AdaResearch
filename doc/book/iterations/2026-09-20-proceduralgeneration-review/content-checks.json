@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "check": "PG_Genetic_Evolution book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Space_Colonization book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Branching_Growth book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Percolation_Network book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Caves_Mazes book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Sculpted_Forms book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Mirrored_Patterns book unchanged",
+      "passed": true
+    },
+    {
+      "check": "PG_Caves_Mazes book, roles, order and core agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Caves_Mazes flat roles agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Caves_Mazes text_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "PG_Caves_Mazes map_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "PG_Sculpted_Forms book, roles, order and core agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Sculpted_Forms flat roles agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Sculpted_Forms text_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "PG_Sculpted_Forms map_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "PG_Mirrored_Patterns book, roles, order and core agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Mirrored_Patterns flat roles agree",
+      "passed": true
+    },
+    {
+      "check": "PG_Mirrored_Patterns text_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "PG_Mirrored_Patterns map_sha256 current",
+      "passed": true
+    },
+    {
+      "check": "commons/data/artifact_roles.json unrelated data preserved",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum_core_encounters.json unrelated data preserved",
+      "passed": true
+    },
+    {
+      "check": "floor, support and utilities retained",
+      "passed": true
+    },
+    {
+      "check": "museum support overrides unchanged",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json unrelated museum rows preserved",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json unrelated museum rows preserved",
+      "passed": true
+    },
+    {
+      "check": "controller preserved",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "chapters_preserved": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+  ],
+  "headset_verified": false,
+  "learner_verified": false
+}

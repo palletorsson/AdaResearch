@@ -1,0 +1,29 @@
+--- before/algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd
++++ after/algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd
+@@ -1,20 +1,20 @@
+ # perlin_noise_bridge.gd
+-# Perlin Noise Bridge — from chaos to terrain.
++# Perlin Noise Bridge — independent heights beside a spatially correlated field.
+ # Side-by-side 16x16 heightfield grids: white noise (random) vs Perlin noise (coherent).
+-# Shows how noise functions transform raw randomness into structured, terrain-like form.
++# Compares two sampling procedures; one field is not transformed into the other.
+ #
+ # QFEP: Coherence from constraint — the same [0,1] range, but Perlin imposes
+ # spatial correlation. Structure is not added, it is revealed by the rule.
+ #
+ # @identity
+-# essence: Perlin(x,y) = smoothstep(dot(gradient, offset)) — gradient noise with spatial memory
+-# desire: see two grids side by side — one chaotic, one terrain — and feel the moment randomness becomes landscape
++# essence: seeded uniform heights beside FastNoiseLite Perlin samples — independent draws versus spatial correlation
++# desire: compare neighbouring heights before interpreting either grid as a landscape
+ # critical_parameter: frequency — controls the scale of coherent features; low = rolling hills, high = jagged peaks
+ # triggers: _rebuild_grids() regenerates both heightfields when octaves, frequency, or seed change
+-# emerges: the Perlin grid looks like terrain not because terrain was coded, but because neighbors remember each other
++# emerges: the correlated field supports broader features; the colour mapping invites a landscape reading
+ # needs: FastNoiseLite [has]; RackTemplates panel with OCTAVES/FREQUENCY/SEED sliders [has]; RESAMPLE button [has]
+ # relationships: depends on white_noise_spectrum (conceptual base); feeds noise_layers and procedural terrain artifacts
+-# truth: Coherence is not the opposite of randomness — it is randomness with memory.
++# truth: Nearby samples can be related by a spatial construction without recording a history of visits.
+ 
+ extends Node3D
+ 

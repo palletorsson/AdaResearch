@@ -1,0 +1,64 @@
+{
+  "status": "route restored; one encounter developed",
+  "summary": "The thirteen chapters already carry a useful progression from values to visible boundaries, then to the conditions of bodily passage. Five omitted halls are back in the route. Portal Landscape now offers the controlled comparison its manuscript proposed. Eleven chapters remain unchanged.",
+  "items": [
+    {
+      "title": "The proposed experiment is now in the room",
+      "description": "TERMS adds the existing field contributions in order. HOLD keeps an earlier surface beside the live result. The transparent desk leaves the specimens visible; both are close enough to inspect at standing height.",
+      "images": [
+        "doc/book/iterations/2026-09-20-isosurfaces-review/after-encounter.png"
+      ],
+      "captions": [
+        "Current Godot museum · held hillside and live compound field."
+      ],
+      "image_note": "Actual restored hall, desktop Vulkan capture. Controls were tested through their button signals; headset use remains untested.",
+      "text_kind": "book",
+      "before": "A useful extension would display the existing cumulative settings in order: hillside, overhung, quarried, arched and compound. Preserve common coordinates and scale so that a visitor can follow the consequences of each added term. A second experiment could remove one term from the compound version and ask which features depended on it.",
+      "after": "HOLD can replace the comparison with any current surface. RESET returns the live hills while leaving that copy beside them. CLEAR removes the copy. The held surface has no collision: it keeps a shape for looking, without becoming another obstacle. Even a faithful copy can enter the room with different permissions.\n\nTry keeping the compound surface and returning to the beginning. More terms have given us another form. Have they given us more room? An extra fold might offer shelter, obstruct a view, or make no usable difference for this body. We can want an opening before we know how to make it. Here that desire has found a few specific operations to try, and a surface against which to test their promises."
+    },
+    {
+      "title": "Follow one boundary through the additions",
+      "description": "Coordinates, sample grid, level, display scale and finish remain fixed. The held hillside stays unchanged while the live composition gains terms.",
+      "images": [
+        "doc/book/iterations/2026-09-20-isosurfaces-review/after-overhung.png",
+        "doc/book/iterations/2026-09-20-isosurfaces-review/after-compound.png"
+      ],
+      "captions": [
+        "Overhung · one contribution beyond the base height.",
+        "Compound · cave, arch and outcrop contributions are also present."
+      ],
+      "image_note": "Two states of the revised artifact from the same camera, not a before/after software pair. The smaller changes in the later terms are retained rather than exaggerated.",
+      "text_kind": "book — a new observation",
+      "before": "",
+      "after": "The word has given us an expectation. Where does the surface support it, and where are we supplying what we hoped to find?"
+    },
+    {
+      "title": "The book and museum share thirteen halls again",
+      "description": "Portal Landscape, Cave Generation, Animated Noise, Implicit Modeling and Rhizome Body return to their declared places. The restored displays receive explicit museum placements; the rhizome remains full size.",
+      "report": "doc/book/iterations/2026-09-20-isosurfaces-review/SUMMARY.md",
+      "report_label": "Findings, preservation decisions, runtime evidence and remaining work",
+      "images": [
+        "doc/book/iterations/2026-09-20-isosurfaces-review/ISO_ImplicitModeling.png",
+        "doc/book/iterations/2026-09-20-isosurfaces-review/ISO_RhizomeBody.png"
+      ],
+      "captions": [
+        "Implicit Modeling: the raymarched field at its native scale, with smooth joins.",
+        "Rhizome Body: full size, centred inside its hall."
+      ],
+      "image_note": "Current restored halls in Godot. The raymarched image is not collision geometry; the rhizome interior route remains to be tested."
+    },
+    {
+      "title": "The exit names the room we actually enter",
+      "description": "A single sentence at the end of Metaballs now leads into raymarching. The passage-making question returns in Rhizome Body after it.",
+      "text_kind": "book — ISO_Metaballs",
+      "before": "The next hall asks what happens when a boundary is not merely blended, but cut into a passage.",
+      "after": "The next hall asks whether we need to store a boundary as triangles before we can see it."
+    },
+    {
+      "title": "Read the complete change",
+      "description": "The eleven other chapters remain intact. The exact diff includes every changed paragraph in Portal Landscape and the single Metaballs exit sentence.",
+      "report": "doc/book/iterations/2026-09-20-isosurfaces-review/final.diff",
+      "report_label": "Complete text diff"
+    }
+  ]
+}

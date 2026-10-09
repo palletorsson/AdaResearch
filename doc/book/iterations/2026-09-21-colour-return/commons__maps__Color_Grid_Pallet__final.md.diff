@@ -1,0 +1,11 @@
+--- before/commons/maps/Color_Grid_Pallet/final.md
++++ current/commons/maps/Color_Grid_Pallet/final.md
+@@ -27,7 +27,7 @@
+ colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
+ ```
+ 
+-In this two-coordinate address, `address.y` names the room's z direction. Add the coordinates. `%` keeps the remainder after division by the number of colours in the palette. Another cell can have the same remainder and receive the same colour. The diagonal relationships were already inside that addition.
++In this two-coordinate address, `address.y` names the room's z direction. Add the coordinates. `%` keeps the remainder after division by the number of colours in the palette. Another cell can have the same remainder and receive the same colour. Compare addresses (8, 9) and (9, 8) after applying the rule: both sums are seventeen. The diagonal relationships were already inside that addition.
+ 
+ Try PALETTE. The collection changes; the assignment keeps its form. The floor finds another appearance without learning another way to stand.
+ 

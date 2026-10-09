@@ -1,0 +1,116 @@
+{
+  "title": "A library of boxes",
+  "description": "Existing box scenes, exact repetitions and declared variations. Original AGAIN carton, not a Warhol reproduction.",
+  "columns": [
+    {
+      "label": "01 / CARDBOARD",
+      "source": "res://commons/artifacts/cardboard_box/cardboard_box.tscn",
+      "base": {
+        "box_width": 0.6,
+        "box_height": 0.42,
+        "box_depth": 0.52
+      },
+      "rows": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "label": "02 / CRATE",
+      "source": "res://commons/artifacts/crate/crate.tscn",
+      "base": {
+        "stamp_label": "AGAIN"
+      },
+      "rows": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "label": "03 / CARGO",
+      "source": "res://commons/artifacts/tech_crate/tech_crate.tscn",
+      "base": {
+        "use_shader": false,
+        "show_leds": false
+      },
+      "rows": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "label": "04 / EDITION",
+      "source": "res://commons/artifacts/prefab_box_library/edition_carton.tscn",
+      "base": {},
+      "rows": [
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "label": "05 / CRATE VARIATIONS",
+      "source": "res://commons/artifacts/crate/crate.tscn",
+      "base": {
+        "stamp_label": "AGAIN"
+      },
+      "rows": [
+        {
+          "plank_color": "e1dacf",
+          "plank_color_alt": "f5f0e5",
+          "brace_color": "c3b7a4"
+        },
+        {
+          "plank_color": "c4779a",
+          "plank_color_alt": "d9a2ba",
+          "brace_color": "a45078"
+        },
+        {
+          "show_x_brace": false,
+          "plank_count": 8,
+          "band_count": 2
+        },
+        {
+          "plank_color": "566b85",
+          "plank_color_alt": "6d829a",
+          "brace_color": "3a4d68",
+          "hazard_tape": true
+        }
+      ]
+    },
+    {
+      "label": "06 / EDITION VARIATIONS",
+      "source": "res://commons/artifacts/prefab_box_library/edition_carton.tscn",
+      "base": {},
+      "rows": [
+        {
+          "paper_color": "f0d86a",
+          "word": "AGAIN"
+        },
+        {
+          "paper_color": "dcabc5",
+          "word": "OTHER",
+          "ink_color": "6e2257"
+        },
+        {
+          "paper_color": "c9e4dd",
+          "word": "YET",
+          "accent_color": "07776c"
+        },
+        {
+          "paper_color": "efeee9",
+          "word": "AGAIN",
+          "ink_color": "e14a37",
+          "accent_color": "182d63"
+        }
+      ]
+    }
+  ]
+}

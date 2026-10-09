@@ -1,0 +1,31 @@
+--- before/commons/maps/Point_Lines/map_data.json
++++ after/commons/maps/Point_Lines/map_data.json
+@@ -3,7 +3,7 @@
+ 		"interactables": [
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", "player_trace:0:0#plinth:0#pin:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "line_proof_pair:0:0#plinth:0#pin:1", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", "line_demo:90:0#plinth:0", " ", " ", "do_not_cross_barrier:75:0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "line:90:1.5#plinth:1.12,micropod", " ", "scale_lines:90:1#rungs:body", " ", " "],
++			[" ", " ", "line_black_box:0:0#plinth:0#pin:1#offset:0.5,0,0.5", " ", " ", " ", " ", " ", "line_demo:90:0#plinth:0", " ", " ", "do_not_cross_barrier:75:0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "line:90:1.5#plinth:1.12,micropod", " ", "scale_lines:90:1#rungs:body", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "redline:0:0:1.4", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "parallel_line_puzzle:180:1.2#plinth:0.66#offset:0.00,0.60,0.00", " ", " ", " ", " ", " "],
+@@ -166,7 +166,7 @@
+ 		"format": "json",
+ 		"lookup_name": "Point_Lines",
+ 		"metadata": {
+-			"n_artifacts": 40,
++			"n_artifacts": 41,
+ 			"source": "editor"
+ 		},
+ 		"name": "Point_Lines",
+@@ -220,8 +220,8 @@
+ 	},
+ 	"documentation": {
+ 		"summary": "Make a line, walk a line, then change its body and relations.",
+-		"layout": "Original entry and Walk this line at z=7; the hall opens at z=9 into four sightlines centred at x=5.5,10.5,15.5,20.5. A floor line reaches the east wall at z=31.2 and climbs it; the exit remains separately accessible.",
+-		"encounters": ["two points and barrier", "endpoint line and metre", "Walk this line with player trace", "plus and X", "parallel planks and measures", "vertical beams and luminous horizon", "planar grid and depth", "Follow this line into the wall"],
++		"layout": "The authored x=1..4, z=1..4 entrance bay is a 4 m black room, with a north entrance and an east passage. Original entry and Walk this line at z=7; the hall opens at z=9 into four sightlines centred at x=5.5,10.5,15.5,20.5. A floor line reaches the east wall at z=31.2 and climbs it; the exit remains separately accessible.",
++		"encounters": ["black room: two held endpoints and changing length", "two points and barrier", "endpoint line and metre", "Walk this line with player trace", "plus and X", "parallel planks and measures", "vertical beams and luminous horizon", "planar grid and depth", "Follow this line into the wall"],
+ 		"parked_placements": "doc/book/iterations/2026-09-26-lines-four-views/parked-placements.json"
+ 	}
+ }

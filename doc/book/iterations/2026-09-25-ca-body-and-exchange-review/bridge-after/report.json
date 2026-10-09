@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "bridge study present",
+      "passed": true
+    },
+    {
+      "name": "initial source is the visitor",
+      "passed": true
+    },
+    {
+      "name": "one SOURCE press selects PROBE / NEAR",
+      "passed": true
+    },
+    {
+      "name": "RUN starts the selected experiment",
+      "passed": true
+    },
+    {
+      "name": "second RUN press holds",
+      "passed": true
+    },
+    {
+      "name": "near probe lowers witness health",
+      "passed": true
+    },
+    {
+      "name": "fixed frieze backing stops a body-layer ray",
+      "passed": true
+    },
+    {
+      "name": "floor sign directs to the desk side",
+      "passed": true
+    },
+    {
+      "name": "BasinNote upright for arrival along local +Z",
+      "passed": true
+    },
+    {
+      "name": "WitnessTag upright for arrival along local +Z",
+      "passed": true
+    },
+    {
+      "name": "shared coloured panels remain visual only",
+      "passed": true
+    },
+    {
+      "name": "wall W uses the floor cell material",
+      "passed": true
+    },
+    {
+      "name": "gold wall address retained",
+      "passed": true
+    },
+    {
+      "name": "both recovery ramps remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-directions",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: witness-and-frieze",
+      "passed": true
+    },
+    {
+      "name": "backing persists when every bridge tile is depleted",
+      "passed": true
+    },
+    {
+      "name": "depleted W no longer supports",
+      "passed": true
+    },
+    {
+      "name": "museum walker available",
+      "passed": true
+    },
+    {
+      "name": "actual body cannot pass through fixed frieze",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "frieze_hit": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DecayingBridge/ProximityStudy/FriezeBack/@StaticBody3D@852",
+    "walker_blocked_local": [
+      2.73906803131104,
+      0.000108012987766415,
+      3.60000038146973
+    ]
+  },
+  "passed": true,
+  "room": "CA_ExpandingSpace",
+  "scope": "Focused native museum tests, supplied console signals/body motion/cameras. No headset readability or Quest profiling claim."
+}

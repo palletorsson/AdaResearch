@@ -1,0 +1,28 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"_build",
+			"_grow_shoot",
+			"_rewire",
+			"_refresh_graph"
+		],
+		"after_removal_components": 1,
+		"limitation": "The source's shallow annular geometry is preserved; connectivity does not establish social equality",
+		"nodes": 18,
+		"one_link_components": 2,
+		"one_link_edges": 16,
+		"positions_hash": 13850918,
+		"removed_degree": 9,
+		"removed_node": 0,
+		"sample_seed": 47,
+		"three_link_components": 1,
+		"three_link_edges": 47
+	},
+	"geometry_nodes": 83,
+	"phases": 4,
+	"source_paths": [
+		"res://commons/artifacts/rhizome_grower/rhizome_grower.gd"
+	],
+	"title": "NO NAMED ROOT, UNEQUAL CONNECTIONS"
+}

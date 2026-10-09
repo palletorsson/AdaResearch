@@ -1,0 +1,148 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "loom study studio and architecture are placed",
+      "passed": true
+    },
+    {
+      "name": "curved room is built",
+      "passed": true
+    },
+    {
+      "name": "loom starts with a five-cell translation card",
+      "passed": true
+    },
+    {
+      "name": "flat and curved sheets begin with the same image",
+      "passed": true
+    },
+    {
+      "name": "curved sheet retains the flat sheet UV addresses",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: samples-before",
+      "passed": true
+    },
+    {
+      "name": "pointer mark changes both live samples",
+      "passed": true
+    },
+    {
+      "name": "same mark also changes the registered low wall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: samples-marked",
+      "passed": true
+    },
+    {
+      "name": "held curve keeps the older mark while flat follows",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: curve-keeps-a-mark",
+      "passed": true
+    },
+    {
+      "name": "edits and hold preserve both sample transforms",
+      "passed": true
+    },
+    {
+      "name": "relinked curve catches up",
+      "passed": true
+    },
+    {
+      "name": "whole-hall controller reads the loom carpet output",
+      "passed": true
+    },
+    {
+      "name": "hall pattern skins add no collision",
+      "passed": true
+    },
+    {
+      "name": "room starts live with the studio as source",
+      "passed": true
+    },
+    {
+      "name": "ROOM initially selected on its surface console",
+      "passed": true
+    },
+    {
+      "name": "room domain texture is available",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-before",
+      "passed": true
+    },
+    {
+      "name": "one painted source cell reaches wall and floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-one-mark",
+      "passed": true
+    },
+    {
+      "name": "held floor stays while the room wall follows",
+      "passed": true
+    },
+    {
+      "name": "room keeps its physical wall and floor geometry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: room-two-moments",
+      "passed": true
+    },
+    {
+      "name": "ordinary body enters the patterned room",
+      "passed": true
+    },
+    {
+      "name": "ordinary body moves sideways inside",
+      "passed": true
+    },
+    {
+      "name": "ordinary body returns to its approach",
+      "passed": true
+    },
+    {
+      "name": "ordinary body leaves through the same opening",
+      "passed": true
+    },
+    {
+      "name": "walking does not relink the held floor",
+      "passed": true
+    },
+    {
+      "name": "APPLY LIVE catches the floor up to its wall",
+      "passed": true
+    },
+    {
+      "name": "UNDO LINK restores the held floor image",
+      "passed": true
+    },
+    {
+      "name": "Foundry encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "room_start": [
+      30.5,
+      0.0,
+      10.5
+    ],
+    "source_count": 4
+  },
+  "passed": true,
+  "room": "Pattern_Foundry",
+  "scope": "Real museum, pointer callbacks at source/receiver controls, material-domain comparisons and ordinary-controller entry/return. No saved recipes written. Standing-height native images. Headset comfort and learner reading remain untested."
+}

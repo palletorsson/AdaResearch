@@ -1,0 +1,3585 @@
+{
+  "room": {
+    "width": 13,
+    "depth": 10,
+    "spawn_row": 8,
+    "spawn_col": 7,
+    "teleporter_row": 7,
+    "teleporter_col": 7
+  },
+  "artifacts": [
+    {
+      "lookup_name": "catalyst_prompter_box",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 0,
+      "clearance_left": 0,
+      "clearance_right": 0,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "becoming_catalyst",
+        "catalyst_pedestal"
+      ],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "ant_colony_optimization",
+      "footprint_cells": 1,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "end"
+    },
+    {
+      "lookup_name": "physarum_colony",
+      "footprint_cells": 9,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "unlocks",
+        "ant_colony_optimization",
+        "contrasts",
+        "external",
+        "field"
+      ],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "catalyst_foe",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "catalyst_vent",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    }
+  ],
+  "results": {
+    "random": {
+      "constraint_score": 0.8929,
+      "walkability": 0.367,
+      "combined": 0.683,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.9,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 33.0,
+        "backtrack_rate": 0.545,
+        "encounter_order": 0.333,
+        "centerpiece_proximity": 0.78,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "catalyst_foe",
+          "physarum_colony",
+          "catalyst_vent",
+          "catalyst_prompter_box",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 6,
+          "col": 12
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 6,
+          "col": 0
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 7,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 4,
+          "col": 7
+        }
+      ]
+    },
+    "rule_based": {
+      "constraint_score": 0.9048,
+      "walkability": 0.634,
+      "combined": 0.796,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.825,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 35,
+        "detour_ratio": 35.0,
+        "backtrack_rate": 0.114,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.864,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_vent",
+          "catalyst_foe",
+          "ant_colony_optimization",
+          "catalyst_prompter_box"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 5,
+          "col": 12
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 5,
+          "col": 0
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 8
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 5,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 5,
+          "col": 7
+        }
+      ]
+    },
+    "sdf": {
+      "constraint_score": 0.9397,
+      "walkability": 0.621,
+      "combined": 0.812,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.333,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 29.0,
+        "backtrack_rate": 0.103,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.749,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "catalyst_vent"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    },
+    "fold": {
+      "constraint_score": 0.9508,
+      "walkability": 0.529,
+      "combined": 0.782,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.833,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 29.0,
+        "backtrack_rate": 0.483,
+        "encounter_order": 0.833,
+        "centerpiece_proximity": 0.817,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_foe",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "catalyst_prompter_box"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 8,
+          "col": 12
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 5,
+          "col": 3
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 8,
+          "col": 4
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 1,
+          "col": 4
+        }
+      ]
+    },
+    "paradoxical": {
+      "constraint_score": 0.9099,
+      "walkability": 0.391,
+      "combined": 0.702,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.8,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.486,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 41,
+        "detour_ratio": 41.0,
+        "backtrack_rate": 0.22,
+        "encounter_order": 0.167,
+        "centerpiece_proximity": 0.524,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "catalyst_foe",
+          "catalyst_prompter_box",
+          "physarum_colony",
+          "catalyst_vent",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 1,
+          "col": 11
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 8,
+          "col": 1
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 8,
+          "col": 11
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 0,
+          "col": 0
+        }
+      ]
+    },
+    "hybrid": {
+      "constraint_score": 0.9636,
+      "walkability": 0.577,
+      "combined": 0.809,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.755,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 33.0,
+        "backtrack_rate": 0.212,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.749,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "catalyst_vent"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 3,
+          "col": 8
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    },
+    "circle_packing": {
+      "constraint_score": 0.9124,
+      "walkability": 0.514,
+      "combined": 0.753,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.725,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.321,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 35,
+        "detour_ratio": 35.0,
+        "backtrack_rate": 0.2,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.629,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "catalyst_vent",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 0
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 0,
+          "col": 3
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 0,
+          "col": 7
+        }
+      ]
+    },
+    "warehouse": {
+      "constraint_score": 0.927,
+      "walkability": 0.454,
+      "combined": 0.738,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.5,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 9,
+        "detour_ratio": 9.0,
+        "backtrack_rate": 0.444,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.878,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_prompter_box",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "catalyst_foe"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 7,
+          "col": 8
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 9,
+          "col": 7
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 8,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 9,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 6,
+          "col": 7
+        }
+      ]
+    },
+    "simulated_annealing": {
+      "constraint_score": 0.9576,
+      "walkability": 0.623,
+      "combined": 0.824,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 27.0,
+        "backtrack_rate": 0.111,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.78,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "catalyst_prompter_box",
+          "catalyst_foe"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 3,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 5,
+          "col": 9
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 1,
+          "col": 4
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 5,
+          "col": 1
+        }
+      ]
+    },
+    "voronoi": {
+      "constraint_score": 0.8956,
+      "walkability": 0.561,
+      "combined": 0.762,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.925,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 29.0,
+        "backtrack_rate": 0.069,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.591,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "catalyst_foe",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "physarum_colony",
+          "catalyst_prompter_box"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 6,
+          "col": 10
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 1,
+          "col": 9
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 7,
+          "col": 4
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 1,
+          "col": 5
+        }
+      ]
+    },
+    "humanoid_walker": {
+      "constraint_score": 0.9138,
+      "walkability": 0.501,
+      "combined": 0.749,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.65,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.486,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 23,
+        "detour_ratio": 23.0,
+        "backtrack_rate": 0.13,
+        "encounter_order": 0.333,
+        "centerpiece_proximity": 0.689,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_prompter_box",
+          "catalyst_vent",
+          "catalyst_foe",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 1,
+          "col": 2
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 1,
+          "col": 3
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 1,
+          "col": 4
+        }
+      ]
+    },
+    "grow_walker": {
+      "constraint_score": 0.7822,
+      "walkability": 0.691,
+      "combined": 0.746,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.6,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.486,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 21,
+        "detour_ratio": 21.0,
+        "backtrack_rate": 0.095,
+        "encounter_order": 0.833,
+        "centerpiece_proximity": 0.864,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_foe",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "catalyst_prompter_box"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 5,
+          "col": 7
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 0,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 0,
+          "col": 4
+        }
+      ]
+    },
+    "focal_composition": {
+      "constraint_score": 0.9695,
+      "walkability": 0.515,
+      "combined": 0.788,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.9,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 21,
+        "detour_ratio": 21.0,
+        "backtrack_rate": 0.286,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.864,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "ant_colony_optimization",
+          "catalyst_vent"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 7,
+          "col": 3
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 6,
+          "col": 9
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 6,
+          "col": 2
+        }
+      ]
+    },
+    "pacing_arc": {
+      "constraint_score": 0.9401,
+      "walkability": 0.474,
+      "combined": 0.754,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.825,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.973,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 13,
+        "detour_ratio": 13.0,
+        "backtrack_rate": 0.538,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.828,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "catalyst_foe",
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_vent",
+          "catalyst_prompter_box"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 5,
+          "col": 4
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 8,
+          "col": 4
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 7,
+          "col": 8
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 8,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 6,
+          "col": 8
+        }
+      ]
+    },
+    "alexander": {
+      "constraint_score": 0.9519,
+      "walkability": 0.36,
+      "combined": 0.715,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.899,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 19.0,
+        "backtrack_rate": 0.211,
+        "encounter_order": 0,
+        "centerpiece_proximity": 0.629,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "catalyst_vent",
+          "catalyst_prompter_box",
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_foe"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 7,
+          "col": 4
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 4,
+          "col": 3
+        },
+        {
+          "artifact": "physarum_colony",
+          "row": 1,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 6,
+          "col": 8
+        }
+      ]
+    },
+    "promenade": {
+      "constraint_score": 0.9177,
+      "walkability": 0.573,
+      "combined": 0.78,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.6,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 25,
+        "detour_ratio": 25.0,
+        "backtrack_rate": 0.12,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.807,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_vent",
+          "ant_colony_optimization",
+          "catalyst_prompter_box",
+          "catalyst_foe"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 4,
+          "col": 5
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 3,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 7,
+          "col": 6
+        }
+      ]
+    },
+    "tile_wfc": {
+      "constraint_score": 0.9636,
+      "walkability": 0.577,
+      "combined": 0.809,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.755,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 33.0,
+        "backtrack_rate": 0.212,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.749,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "ant_colony_optimization",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "catalyst_vent"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 3,
+          "col": 8
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    },
+    "crystallization": {
+      "constraint_score": 0.8314,
+      "walkability": 0.552,
+      "combined": 0.72,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.975,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.65,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 29.0,
+        "backtrack_rate": 0.069,
+        "encounter_order": 0.333,
+        "centerpiece_proximity": 0.864,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_vent",
+          "catalyst_prompter_box",
+          "catalyst_foe",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 5,
+          "col": 5
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 1,
+          "col": 5
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 5,
+          "col": 1
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 5,
+          "col": 9
+        }
+      ]
+    },
+    "stickiness": {
+      "constraint_score": 0.7488,
+      "walkability": 0.573,
+      "combined": 0.678,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.825,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 0.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 31,
+        "detour_ratio": 31.0,
+        "backtrack_rate": 0.161,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.914,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "physarum_colony",
+          "catalyst_foe",
+          "catalyst_prompter_box",
+          "catalyst_vent",
+          "ant_colony_optimization"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 6,
+          "col": 7
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 6,
+          "col": 10
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 7,
+          "col": 11
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 6,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 5,
+          "col": 11
+        }
+      ]
+    },
+    "colonization": {
+      "constraint_score": 0.9534,
+      "walkability": 0.559,
+      "combined": 0.796,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.95,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.973,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 33.0,
+        "backtrack_rate": 0.091,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.634,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "ant_colony_optimization",
+          "physarum_colony",
+          "catalyst_prompter_box",
+          "catalyst_vent",
+          "catalyst_foe"
+        ]
+      },
+      "full_path": [
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "physarum_colony",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "catalyst_prompter_box",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "ant_colony_optimization",
+          "row": 5,
+          "col": 8
+        },
+        {
+          "artifact": "catalyst_foe",
+          "row": 1,
+          "col": 10
+        },
+        {
+          "artifact": "catalyst_vent",
+          "row": 2,
+          "col": 2
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+	"id": "rhizome_architecture",
+	"name": "Rhizome Architecture",
+	"description": "Walkable structures grown as signed-distance fields rather than assembled. The walkable void is the solid's own interior (abs(f) - wall), so the body's topology IS the plan of the building and nobody drew it: wherever two limbs smooth-union, you can walk through. Marched in chunks on a global lattice by commons/artifacts/dream_bodies/dream_iso.gd, so a 25 m body is meshed at body resolution and neighbouring chunks agree to 0.000007 m.",
+	"category": "rhizome_architecture",
+	"artifacts": {
+		"rhizome_inside": {
+			"lookup_name": "rhizome_inside",
+			"name": "Rhizome Inside",
+			"scene": "res://commons/artifacts/radial_inside/rhizome_inside.tscn",
+			"category": "rhizome_architecture",
+			"artifact_type": "structure",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"footprint": [
+				25,
+				6,
+				25
+			],
+			"_footprint": "The body measures 24.5 x 5.8 x 25.1 m. It is world_scale, which in this corpus means the artifact IS the world and the grid cell is only an anchor — rhizomatic_maze_space is [50, 21, 50] on a 13 x 11 map and overhangs it entirely. The same applies here.",
+			"size_group": "world_scale",
+			"tags": [
+				"isosurface",
+				"sdf",
+				"marching-tetrahedra",
+				"walkable",
+				"architecture",
+				"procedural",
+				"queer"
+			],
+			"description": "A hollow body you walk inside, whose plan is a graph rather than a corridor: 8 chambers, 10 passages, cycle rank 3, so there is no root, no single route and no point from which the whole is ordered. Built as ONE signed-distance field and hollowed with abs(f) - wall, so the walkable void is the solid's own interior. Every marched vertex carries its SUTURE — which limb is nearest and how close the runner-up is — and the shader lights the ties, so you read the plan off the walls: colour says which limb you are in, light says where it fused with another.",
+			"walkable": true,
+			"carries_own_collision": true,
+			"_collision": "The museum's own collision is axis-aligned boxes on a 1 m lattice and cannot describe a curved interior, so this artifact carries its own: one StaticBody3D + ConcavePolygonShape3D per marched chunk (199 of them). Both the grid and the museum instance an artifact and respect the colliders it brings.",
+			"entrance": "The body is SEALED by construction — abs(f) - wall gives an outer skin, an inner skin and nothing between. One chamber is bored (MOUTH_R 1.75, a 3.5 m ovoid) at the walking level, and entrance_point() / entrance_dir() report where it is so a map can face a visitor at it.",
+			"gates": [
+				"commons/testing/probe_iso_chunks.gd — chunked marching equals monolithic to 0.000007 m; the shell is hollow (a ray out of a chamber crosses material exactly twice) and the wall measures what was asked",
+				"commons/testing/probe_rhizome_inside.gd — 8/8 chambers standable, 10/10 passages passable, 8/8 reachable, with the player's own capsule",
+				"commons/testing/probe_rhizome_mouth.gd — you can get IN: the capsule walks 9 m from open air through the mouth into a chamber"
+			]
+		},
+		"rhizome_world": {
+			"lookup_name": "rhizome_world",
+			"name": "Rhizome World",
+			"scene": "res://commons/artifacts/radial_inside/rhizome_world.tscn",
+			"category": "rhizome_architecture",
+			"artifact_type": "structure",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"footprint": [
+				100,
+				24,
+				100
+			],
+			"size_group": "world_scale",
+			"tags": [
+				"isosurface",
+				"sdf",
+				"walkable",
+				"architecture",
+				"world",
+				"procedural"
+			],
+			"description": "The same rhizome at 4x — 143.7 m across the diagonal, chambers you could put a hall inside, passages ten metres wide. Scaled as a NODE rather than rebuilt, because cost tracks surface area and a 4x rebuild is about nine million triangles: this is 620,242, exactly what the 25 m body costs, with the cell become a 1 m facet. The player does NOT scale, so every clearance derived for a 0.30 x 1.80 m capsule can only get more generous.",
+			"walkable": true,
+			"carries_own_collision": true,
+			"_scale_gate": "commons/testing/probe_rhizome_world.gd measures each ConcavePolygonShape3D's OWN faces against the mesh at x1, x2 and x4 — Godot's docs are discouraging about scaled collision shapes, and a trimesh that silently refused would leave the walls a hundred metres from where they look. Measured ratio 1.000 at every scale."
+		}
+	}
+}

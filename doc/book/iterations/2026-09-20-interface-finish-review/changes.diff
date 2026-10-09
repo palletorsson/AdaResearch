@@ -1,0 +1,522 @@
+--- before/commons/ui/control_panel.gd
++++ commons/ui/control_panel.gd
+@@ -41,6 +41,9 @@
+ @export var layout_max_width: float = 0.0: set = _set_layout_max_width
+ ## Clear space between a row's labels and the next row's controls.
+ @export var row_gap: float = 0.035: set = _set_row_gap
++## A compact instrument face: grouped control wells, stronger printed labels.
++## Opt in at construction through InterfacePresets' instrument layout.
++@export var instrument_face: bool = false
+ @export var tilt_degrees: float = -20.0: set = _set_tilt     # recline toward the player
+ @export var panel_height: float = 0.42
+ 
+@@ -152,6 +155,8 @@
+ 	if d.has_method("set_param_name"):
+ 		d.set_param_name(param_name if param_name != "" else label)
+ 	_row.add_child(d)
++	if _uses_rows() and d.has_method("use_panel_value_surface"):
++		d.use_panel_value_surface()
+ 	_items.append({"node": d, "label": label})
+ 	call_deferred("_strip_internal_label", d)
+ 	_relayout()
+@@ -330,11 +335,12 @@
+ 
+ func _layout_rows() -> void:
+ 	for child in _row.get_children():
+-		if String(child.name).begins_with("Label_"):
++		if String(child.name).begins_with("Label_") or String(child.name).begins_with("Well_"):
+ 			_row.remove_child(child)
+ 			child.free()
+ 	var rows: Array[Dictionary] = []
+-	var row := {"items": [], "width": 0.0, "height": CTRL_H, "labels": false}
++	var minimum_height := 0.10 if instrument_face else CTRL_H
++	var row := {"items": [], "width": 0.0, "height": minimum_height, "labels": false}
+ 	for index in _items.size():
+ 		var item: Dictionary = _items[index]
+ 		var node: Node3D = item.node
+@@ -345,7 +351,7 @@
+ 		var too_wide: bool = layout_max_width > 0.0 and float(row.width) + width > layout_max_width + 0.00001
+ 		if not row.items.is_empty() and (full or too_wide):
+ 			rows.append(row)
+-			row = {"items": [], "width": 0.0, "height": CTRL_H, "labels": false}
++			row = {"items": [], "width": 0.0, "height": minimum_height, "labels": false}
+ 		row.items.append({"index": index, "width": width, "bounds": bounds})
+ 		row.width += width
+ 		row.height = maxf(row.height, bounds.size.y)
+@@ -369,6 +375,17 @@
+ 			var cx: float = cursor + float(cell.width) * 0.5
+ 			var centre: Vector3 = cell.bounds.get_center()
+ 			node.position = Vector3(cx - centre.x, cy - centre.y, CONTROL_Z)
++			if instrument_face:
++				var cell_height: float = float(band.height) + (0.010 + LBL_H if band.labels else 0.0)
++				var well := MeshInstance3D.new()
++				well.name = "Well_%d" % int(cell.index)
++				var face := QuadMesh.new()
++				face.size = Vector2(float(cell.width) - 0.012, cell_height + 0.012)
++				well.mesh = face
++				well.position = Vector3(cx, y - cell_height * 0.5, PLATE_Z + 0.0003)
++				well.material_override = _mat(panel_color.lerp(frame_color, 0.20), 0.95, 0.0)
++				well.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++				_row.add_child(well)
+ 			if not String(item.label).is_empty():
+ 				var label_width := maxf(spacing * 0.74, float(cell.width) - PAD * 2.0)
+ 				var label := _label_node(item.label, label_color, Vector2(label_width, LBL_H))
+@@ -579,6 +596,21 @@
+ 		accent.material_override = _mat(accent_color, 0.5, 0.0)
+ 		accent.position = Vector3(0, box["accent_y"], 0.004)
+ 		_chrome.add_child(accent)
++	if instrument_face:
++		# Four flush fasteners give the plate a readable attachment to its case.
++		for x in [-1.0, 1.0]:
++			for y in [-1.0, 1.0]:
++				var screw := MeshInstance3D.new()
++				var disc := CylinderMesh.new()
++				disc.top_radius = 0.0035
++				disc.bottom_radius = 0.0035
++				disc.height = 0.001
++				disc.radial_segments = 12
++				screw.mesh = disc
++				screw.rotation_degrees.x = 90
++				screw.position = Vector3(x * (w * 0.5 - 0.010), bcy + y * (bh * 0.5 - 0.010), 0.0)
++				screw.material_override = _mat(frame_color.darkened(0.35), 0.6, 0.0)
++				_chrome.add_child(screw)
+ 
+ 
+ func _mat(c: Color, rough: float, emission: float) -> StandardMaterial3D:
+@@ -597,7 +629,7 @@
+ ## Preserve the legacy ink choice without constructing extruded glyphs.
+ func _label_node(text: String, baked_color: Color, box_size: Vector2) -> Node3D:
+ 	var ink: Color = label_mesh_color if label_mesh else baked_color
+-	return BakedText.make_label_mesh(text, ink, box_size, 1400, false)
++	return BakedText.make_label_mesh(text, ink, box_size, 1400, false, "medium" if instrument_face else "regular")
+ 
+ 
+ func _set_title(v: String) -> void:
+--- before/commons/ui/interface_presets.gd
++++ commons/ui/interface_presets.gd
+@@ -137,6 +137,9 @@
+ ## Build the configured housing for `type`, in the named `skin`. `plate_height`
+ ## = the world Y the board sits at. Returns ControlConsole / InterfaceHousing.
+ ## `compact` keeps controls at their authored size and wraps at three columns.
++## `instrument` adds a slimmer bezel, grouped wells and stronger printed labels.
++## These layout profiles apply to console housings; custom housing forms retain
++## their own spatial contract. Set the column count before adding controls.
+ ## Adopt per encounter: it can need a larger casing than a scaled-down legacy one.
+ static func build(type: String, title: String, plate_height: float = 1.0, skin: String = "braun", layout: String = "legacy") -> Node3D:
+ 	var cfg: Dictionary = config_for(type)
+@@ -165,10 +168,15 @@
+ 	console.set("trim_color", sc["trim"])
+ 	console.call("set_title", title)
+ 	_style_panel(console.call("panel"), sc)
+-	if layout == "compact":
++	if layout in ["compact", "instrument"]:
+ 		console.set("fit_controls", true)
+ 		console.call("panel").set("spacing", 0.22)
+ 		console.call("panel").set("layout_columns", 3)
++	if layout == "instrument":
++		console.set("bezel", 0.018)
++		console.set("board_face_drop", 0.0)
++		console.call("panel").set("instrument_face", true)
++		console.call("panel").set("row_gap", 0.025)
+ 	return console
+ 
+ 
+--- before/commons/interactables/slider_smooth.gd
++++ commons/interactables/slider_smooth.gd
+@@ -181,38 +181,16 @@
+ 	if is_instance_valid(_surface_value): return
+ 	if not _ensure_label(): return
+ 	_label.hide()
+-	_surface_viewport = SubViewport.new()
+-	_surface_viewport.name = "ValueViewport"
+-	_surface_viewport.size = Vector2i(128, 48)
+-	_surface_viewport.disable_3d = true
+-	_surface_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+-	add_child(_surface_viewport)
+-	var background := ColorRect.new()
+-	background.size = Vector2(128, 48)
+-	background.color = Color(0.08, 0.09, 0.10)
+-	_surface_viewport.add_child(background)
+-	_surface_value = Label.new()
+-	_surface_value.name = "Value"
+-	_surface_value.size = Vector2(128, 48)
+-	_surface_value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+-	_surface_value.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+-	_surface_value.add_theme_font_size_override("font_size", 28)
+-	_surface_value.add_theme_color_override("font_color", Color(0.75, 1.0, 0.70))
++	# The handle is 35 mm tall. Keep the value window above its swept area,
++	# including at the left endpoint, with a backing that covers the whole screen.
++	var frame_mesh := get_node("Frame/PanelMesh") as MeshInstance3D
++	frame_mesh.mesh = frame_mesh.mesh.duplicate()
++	frame_mesh.mesh.size.x = 0.106
++	var display := preload("res://commons/ui/control_value_surface.gd").build(
++		get_node("Frame"), Vector2(0.078, 0.026), Vector3(0.035, 0.061, 0.0085), -90.0)
++	_surface_viewport = display.viewport
++	_surface_value = display.label
+ 	_surface_value.text = _last_display_text
+-	_surface_viewport.add_child(_surface_value)
+-	var screen := MeshInstance3D.new()
+-	screen.name = "ValueSurface"
+-	var quad := QuadMesh.new()
+-	quad.size = Vector2(0.052, 0.020)
+-	screen.mesh = quad
+-	screen.position = Vector3(0.027, 0.075, 0.0085)
+-	screen.rotation_degrees.z = -90.0
+-	screen.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+-	var material := StandardMaterial3D.new()
+-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+-	material.albedo_texture = _surface_viewport.get_texture()
+-	screen.material_override = material
+-	get_node("Frame").add_child(screen)
+ 
+ func set_param_name(text: String):
+ 	var name_label = get_node_or_null("Frame/LabelName")
+--- before/commons/interactables/dial_smooth.gd
++++ commons/interactables/dial_smooth.gd
+@@ -6,6 +6,9 @@
+ @export var hinge_node: NodePath = NodePath("DialOrigin/InteractableHinge")
+ @export var label_node: NodePath = NodePath("Frame/Label3DValue")
+ @export_range(0, 6) var decimal_places: int = 2
++
++var _surface_value: Label
++var _surface_viewport: SubViewport
+ 
+ var range_min: float = 0.0
+ var range_max: float = 1.0
+@@ -49,7 +52,32 @@
+ 	if _label:
+ 		# Map normalized 0-1 to logical range
+ 		var logical_value = lerp(range_min, range_max, normalized)
+-		_label.text = String.num(logical_value, decimal_places)
++		var text := String.num(logical_value, decimal_places)
++		if text == _label.text and is_instance_valid(_surface_value) and text == _surface_value.text: return
++		_label.text = text
++		if is_instance_valid(_surface_value):
++			_surface_value.text = text
++			_surface_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
++
++## The dial retains its grab geometry; a backed 2D value window sits above it.
++func use_panel_value_surface() -> void:
++	if is_instance_valid(_surface_value): return
++	if not is_instance_valid(_label): _label = get_node_or_null(label_node)
++	if not is_instance_valid(_label): return
++	_label.hide()
++	var display := preload("res://commons/ui/control_value_surface.gd").build(
++		get_node("Frame"), Vector2(0.078, 0.026), Vector3(0, 0.060, 0.0085))
++	_surface_viewport = display.viewport
++	_surface_value = display.label
++	_surface_value.text = _label.text
++	var backing := MeshInstance3D.new()
++	backing.name = "ValueBacking"
++	var plate := BoxMesh.new()
++	plate.size = Vector3(0.086, 0.037, 0.008)
++	backing.mesh = plate
++	backing.position = Vector3(0, 0.058, 0.004)
++	backing.material_override = load("res://commons/ui/materials/metal_dark.tres")
++	get_node("Frame").add_child(backing)
+ 
+ func set_param_name(text: String):
+ 	var name_label = get_node_or_null("Frame/LabelName")
+--- before/commons/interactables/InteractableDemo.gd
++++ commons/interactables/InteractableDemo.gd
+@@ -107,6 +107,8 @@
+ ]
+ 
+ @export var auto_build: bool = true
++## Focused working console; the complete control sampler remains the default.
++@export var reference_console: bool = false
+ 
+ var controls: Array = []
+ var extra_buttons: Array = []
+@@ -169,6 +171,11 @@
+ func _ready():
+ 	if not auto_build:
+ 		return
++	if reference_console:
++		var reference := preload("res://commons/ui/interface_reference_console.gd").new()
++		reference.name = "ReferenceConsole"
++		add_child(reference)
++		return
+ 	_build_back_panel()
+ 	_spawn_controls()
+ 	_spawn_passive_elements()
+@@ -179,6 +186,7 @@
+ 
+ func load_demo_config_from_dict(data: Dictionary) -> void:
+ 	_restore_defaults()
++	reference_console = bool(data.get("reference_console", false))
+ 	if data.has("demo_info") and data["demo_info"] is Dictionary:
+ 		demo_info = data["demo_info"]
+ 	if data.has("controls") and data["controls"] is Array:
+--- before/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd
++++ commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd
+@@ -446,7 +446,7 @@
+ 	# detail readout stay as world-space viz. Replaces the hand-built plate + jumpy
+ 	# slider_horizontal with the canonical slider_smooth row.
+ 	# Keep the four rails and optional KEEP comparison at their authored size.
+-	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height, "braun", "compact")
++	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height, "braun", "instrument")
+ 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
+ 	add_child(_plate_root)
+ 	_owned.append(_plate_root)
+--- before/commons/ui/control_value_surface.gd
++++ commons/ui/control_value_surface.gd
+@@ -0,0 +1,40 @@
++@tool
++extends RefCounted
++## A value is a flat display, seated on its control. Share the renderer between
++## faders and dials; redraw only when the formatted value actually changes.
++const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
++
++static func build(parent: Node3D, size: Vector2, at: Vector3, roll: float = 0.0) -> Dictionary:
++	var viewport := SubViewport.new()
++	viewport.name = "ValueViewport"
++	viewport.size = Vector2i(240, 80)
++	viewport.disable_3d = true
++	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
++	parent.add_child(viewport)
++	var background := ColorRect.new()
++	background.size = Vector2(viewport.size)
++	background.color = Color(0.035, 0.05, 0.055)
++	viewport.add_child(background)
++	var value := Label.new()
++	value.name = "Value"
++	value.size = Vector2(viewport.size)
++	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
++	value.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
++	value.add_theme_font_override("font", BakedText.project_font("medium"))
++	value.add_theme_font_size_override("font_size", 58)
++	value.add_theme_color_override("font_color", Color(0.83, 0.97, 0.84))
++	viewport.add_child(value)
++	var screen := MeshInstance3D.new()
++	screen.name = "ValueSurface"
++	var quad := QuadMesh.new()
++	quad.size = size
++	screen.mesh = quad
++	screen.position = at
++	screen.rotation_degrees.z = roll
++	screen.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	var material := StandardMaterial3D.new()
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.albedo_texture = viewport.get_texture()
++	screen.material_override = material
++	parent.add_child(screen)
++	return {"viewport": viewport, "label": value, "screen": screen}
+--- before/commons/ui/interface_reference_console.gd
++++ commons/ui/interface_reference_console.gd
+@@ -0,0 +1,83 @@
++extends Node3D
++## Working reference for the shared instrument profile. The physical controls
++## retain their native input paths; their effects are visible on the specimen.
++const Presets = preload("res://commons/ui/interface_presets.gd")
++@export var skin: String = "braun"
++var console: Node3D
++var size_control: Node3D
++var turn_control: Node3D
++var position_control: Node3D
++var reset_control: Node3D
++var specimen: MeshInstance3D
++var readout: Label
++var offset := Vector2.ZERO
++
++func _ready() -> void:
++	_make_stage()
++	console = Presets.build("workbench", "BODY / TRANSFORM", 1.0, skin, "instrument")
++	console.panel().layout_columns = 2
++	console.position.y = 1.0
++	add_child(console)
++	readout = console.add_readout("")
++	size_control = console.add_slider("SIZE", "size")
++	size_control.set_range(0.5, 1.5)
++	turn_control = console.add_dial("TURN", "turn")
++	turn_control.set_range(-135, 135)
++	position_control = console.add_joystick("POSITION")
++	reset_control = console.add_button("RESET")
++	size_control.slider_moved.connect(func(_v): _apply())
++	turn_control.hinge_moved.connect(func(_v): _apply())
++	var joystick := position_control.get_node("JoystickOrigin/InteractableJoystick")
++	joystick.joystick_moved.connect(_on_position)
++	reset_control.pressed.connect(reset)
++	reset()
++
++func reset() -> void:
++	size_control.set_normalized_value(0.5)
++	turn_control.set_normalized_value(0.5)
++	position_control.get_node("JoystickOrigin/InteractableJoystick").move_joystick(0.0, 0.0)
++	offset = Vector2.ZERO
++	_apply()
++
++func _on_position(x_degrees: float, y_degrees: float) -> void:
++	offset = Vector2(x_degrees, y_degrees) / 45.0
++	_apply()
++
++func _apply() -> void:
++	var size_value: float = lerpf(0.5, 1.5, size_control.get_normalized_value())
++	var turn_value: float = lerpf(-135, 135, turn_control.get_normalized_value())
++	specimen.scale = Vector3.ONE * size_value
++	specimen.rotation_degrees.y = turn_value
++	specimen.position = Vector3(offset.x * 0.22, 1.49 + size_value * 0.16, -0.90 + offset.y * 0.22)
++	readout.text = "SIZE %.2f   TURN %+.0f°\nX %+.2f   Z %+.2f" % [size_value, turn_value, offset.x, offset.y]
++
++func _make_stage() -> void:
++	var stage := MeshInstance3D.new()
++	var drum := CylinderMesh.new()
++	drum.top_radius = 0.34
++	drum.bottom_radius = 0.34
++	drum.height = 0.04
++	stage.mesh = drum
++	stage.position = Vector3(0, 1.47, -0.90)
++	var dark := StandardMaterial3D.new()
++	dark.albedo_color = Color(0.16, 0.19, 0.19)
++	dark.roughness = 0.7
++	stage.material_override = dark
++	add_child(stage)
++	var support := MeshInstance3D.new()
++	var stem := BoxMesh.new()
++	stem.size = Vector3(0.14, 1.45, 0.14)
++	support.mesh = stem
++	support.position = Vector3(0, 0.725, -0.90)
++	support.material_override = dark
++	add_child(support)
++	specimen = MeshInstance3D.new()
++	specimen.name = "Specimen"
++	var block := BoxMesh.new()
++	block.size = Vector3(0.4, 0.32, 0.22)
++	specimen.mesh = block
++	var orange := StandardMaterial3D.new()
++	orange.albedo_color = Color(0.95, 0.35, 0.10)
++	orange.roughness = 0.35
++	specimen.material_override = orange
++	add_child(specimen)
+--- before/commons/interactables/interactable_console_demo.tscn
++++ commons/interactables/interactable_console_demo.tscn
+@@ -0,0 +1,7 @@
++[gd_scene load_steps=2 format=3]
++
++[ext_resource type="Script" path="res://commons/interactables/InteractableDemo.gd" id="1"]
++
++[node name="InteractableConsoleDemo" type="Node3D"]
++script = ExtResource("1")
++reference_console = true
+--- before/commons/testing/test_instrument_console.gd
++++ commons/testing/test_instrument_console.gd
+@@ -0,0 +1,119 @@
++extends SceneTree
++## Actual control callbacks and renderer, with a second receiver and two skins.
++const OUT := "res://doc/reports/interfaces-2026-09-20/console-finish/"
++var failures: Array[String] = []
++var checks := 0
++var views: Array = []
++
++func _initialize() -> void: run.call_deferred()
++func check(ok: bool, message: String) -> void:
++	checks += 1
++	if not ok: failures.append(message)
++	print("INSTRUMENT ", "PASS " if ok else "FAIL ", message)
++
++func run() -> void:
++	var world := Node3D.new()
++	root.add_child(world)
++	var environment := WorldEnvironment.new()
++	var sky := Environment.new()
++	sky.background_mode = Environment.BG_COLOR
++	sky.background_color = Color(0.065, 0.075, 0.09)
++	sky.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
++	sky.ambient_light_color = Color(0.9, 0.93, 1)
++	sky.ambient_light_energy = 0.7
++	environment.environment = sky
++	world.add_child(environment)
++	var light := DirectionalLight3D.new()
++	light.rotation_degrees = Vector3(-45, -25, 0)
++	light.light_energy = 1.4
++	world.add_child(light)
++	var floor_mesh := MeshInstance3D.new()
++	var plane := PlaneMesh.new()
++	plane.size = Vector2(40, 40)
++	floor_mesh.mesh = plane
++	var floor_material := StandardMaterial3D.new()
++	floor_material.albedo_color = Color(0.16, 0.18, 0.20)
++	floor_mesh.material_override = floor_material
++	world.add_child(floor_mesh)
++	var demo: Node3D = load("res://commons/interactables/interactable_console_demo.tscn").instantiate()
++	world.add_child(demo)
++	var reference: Node3D = demo.get_node("ReferenceConsole")
++	var dark: Node3D = load("res://commons/ui/interface_reference_console.gd").new()
++	dark.skin = "black_mesa"
++	dark.position.x = 3.0
++	world.add_child(dark)
++	var pointer := Node3D.new()
++	world.add_child(pointer)
++	var camera := Camera3D.new()
++	world.add_child(camera)
++	camera.current = true
++	camera.fov = 46
++	for frame in 12: await process_frame
++	root.scaling_3d_scale = 1.0
++	root.msaa_3d = Viewport.MSAA_4X
++	for example in [reference, dark]:
++		var panel: Node3D = example.console.panel()
++		var slider: Node3D = example.size_control
++		var dial: Node3D = example.turn_control
++		var tag: String = example.skin
++		check(panel._items.size() == 4, tag + " has slider, dial, joystick and reset")
++		check(panel.scale.is_equal_approx(Vector3.ONE), tag + " keeps control scale")
++		check(panel._items[2].node.position.y < panel._items[0].node.position.y, tag + " two-column layout wraps")
++		for item in panel._items:
++			check(item.node.global_basis.get_scale().is_equal_approx(Vector3.ONE), tag + " unscaled " + item.label)
++		var head: CSGBox3D = example.console.get_node("Body/Head")
++		var plate: MeshInstance3D = panel.get_node("Tilt/Chrome/BackPanel")
++		var fits := true
++		for corner in 8:
++			var p: Vector3 = head.to_local(plate.to_global(plate.get_aabb().get_endpoint(corner)))
++			fits = fits and absf(p.x) <= head.size.x / 2 and absf(p.y) <= head.size.y / 2
++		check(fits, tag + " face fits its housing")
++		var axis: Vector3 = slider.get_node("SliderOrigin").global_basis.x.normalized()
++		var origin: Vector3 = slider.global_position
++		XRToolsPointerEvent.pressed(pointer, slider, origin)
++		XRToolsPointerEvent.moved(pointer, slider, origin + axis * .035, origin)
++		XRToolsPointerEvent.released(pointer, slider, origin + axis * .035)
++		check(is_equal_approx(example.specimen.scale.x, 1.25), tag + " real slider pointer path changes body size")
++		var dial_origin: Vector3 = dial.global_position
++		XRToolsPointerEvent.pressed(pointer, dial, dial_origin)
++		XRToolsPointerEvent.moved(pointer, dial, dial_origin + Vector3.UP * .15, dial_origin)
++		XRToolsPointerEvent.released(pointer, dial, dial_origin + Vector3.UP * .15)
++		check(is_equal_approx(example.specimen.rotation_degrees.y, 45), tag + " real dial pointer path rotates body")
++		check(float(dial._surface_value.text) == 45, tag + " dial display shows signed logical degrees")
++		check(float(slider._surface_value.text) == 1.25, tag + " slider display shows logical size")
++		var value_screen: MeshInstance3D = slider.get_node("Frame/ValueSurface")
++		var frame_mesh: MeshInstance3D = slider.get_node("Frame/PanelMesh")
++		var screen_bottom: float = value_screen.position.x - value_screen.mesh.size.y / 2
++		check(screen_bottom > 0.0175, tag + " fader window clears the handle across its entire travel")
++		check(value_screen.position.x + value_screen.mesh.size.y / 2 < frame_mesh.mesh.size.x / 2, tag + " fader window stays on its backing")
++		var joystick: Node3D = example.position_control.get_node("JoystickOrigin/InteractableJoystick")
++		joystick.move_joystick(deg_to_rad(15), deg_to_rad(-15))
++		check(example.offset.is_equal_approx(Vector2(1.0/3, -1.0/3)), tag + " joystick signal changes both axes")
++		check(example.specimen.position.x > 0.07 and example.specimen.position.z < -0.97, tag + " position visibly moves receiver")
++		check(example.readout.text.contains("TURN +45"), tag + " summary reflects actual controls")
++		for control in [slider, dial]:
++			check(not control.get_node("Frame/Label3DValue").visible, tag + " legacy value is not drawn")
++			check(control.get_node("Frame/ValueSurface").mesh is QuadMesh, tag + " value rendered in 2D on control")
++		await process_frame
++		await RenderingServer.frame_post_draw
++		var viewport: SubViewport = slider._surface_viewport
++		viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
++		slider._update_label(slider._current_slider_value())
++		check(viewport.render_target_update_mode == SubViewport.UPDATE_DISABLED, tag + " unchanged values do not request redraw")
++		var button_area: Area3D = example.reset_control.get_node("InteractableAreaButton")
++		XRToolsPointerEvent.pressed(pointer, button_area, button_area.global_position)
++		XRToolsPointerEvent.released(pointer, button_area, button_area.global_position)
++		check(example.specimen.scale.is_equal_approx(Vector3.ONE) and is_zero_approx(example.specimen.rotation.y) and example.offset.is_zero_approx(), tag + " physical RESET restores all parameters")
++		# Remove reset indication before capturing the settled instrument.
++		for frame in 5: await process_frame
++		camera.position = example.position + Vector3(0.12, 1.95, 2.0)
++		camera.look_at(example.position + Vector3(0, 1.10, -0.20))
++		for frame in 3: await process_frame
++		await RenderingServer.frame_post_draw
++		var image_path := OUT + "reference-" + tag + ".png"
++		root.get_texture().get_image().save_png(image_path)
++		views.append(image_path)
++	FileAccess.open(OUT + "instrument-checks.json", FileAccess.WRITE).store_string(JSON.stringify({"checks": checks, "failures": failures, "shots": views, "headset_tested": false}, "\t"))
++	world.queue_free()
++	for frame in 3: await process_frame
++	quit(0 if failures.is_empty() else 1)

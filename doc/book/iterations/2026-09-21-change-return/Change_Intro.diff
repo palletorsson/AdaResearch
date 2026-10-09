@@ -1,0 +1,88 @@
+--- before/commons/maps/Change_Intro/final.md
++++ current/commons/maps/Change_Intro/final.md
+@@ -4,7 +4,7 @@
+ 
+ Where can a high curve be changing very little?
+ 
+-The fabric can come with you. In the previous room, changing an address changed what reached a wall or a skirt. Here the curve stays fixed while you choose where to inspect it. We are still changing position, not advancing a clock. Before asking how fast a body moves, we can ask how a value changes from one place to another.
++A fabric chosen in the previous room can arrive here on your dress. Changing an address changed what reached a wall or a skirt; now we choose where to inspect a curve. The curve stays fixed. Before asking how fast a body moves, we can ask how a value changes from one place to another.
+ 
+ <!-- @tangent_slope_workbench -->
+ 
+@@ -16,6 +16,8 @@
+ 
+ At this starting position, the wide interval crosses a crest. Its two endpoints report an overall fall. It does not tell us that every part of the journey went down. Close enough to the red point, the curve is still rising. Both reports describe this same curve. They answer questions at different scales.
+ 
++With shorter names for the bench's variables, the calculation reads:
++
+ ```gdscript
+ var rise = f(x + h) - f(x)
+ var rate = rise / h
+@@ -23,7 +25,7 @@
+ 
+ Two values and an interval are enough to construct the green line. This rate is a finite difference: change across the interval, per unit of position. **STEP** cycles through 0.5, 0.25, 0.125 and 0.0625 position units. At the right edge, the bench samples backwards and displays a negative `h`; the division uses that signed interval. Zero is never offered. Dividing by zero would not uncover the tangent.
+ 
+-The derivative asks what these ratios approach as the interval tends to zero, where that limit exists. This bench does not reach the limit by pressing the button enough times. Its gold tangent comes from a separate analytic calculation for the smooth curve:
++The derivative asks what these ratios approach as the interval tends to zero, where that limit exists. This bench does not reach the limit by pressing the button enough times. Its gold tangent comes from a separate analytic calculation for the smooth curve. With the same shortened names, the two functions read:
+ 
+ ```gdscript
+ func f(x: float) -> float:
+@@ -35,7 +37,7 @@
+ 
+ The two functions can be read alongside one another. The heights do not become slopes by changing their label: the calculation changes. `df` gives the local rate against which we can compare the finite samples. A smaller interval helps here, but the four choices are an experiment, not a proof that every smaller computational step must improve every estimate. Precision, noise and the shape of the function can matter.
+ 
+-Use the existing slider, or **x −** and **x +**, to move the red sample. Find a high point with a nearly flat tangent. Then find a lower point with a steep tangent. Compare `f` with the analytic `f′` readout. Height and rate cannot replace each other.
++Use the existing slider, or **x −** and **x +**, to move the red sample. Find a high point with a nearly flat tangent. Then find a lower point with a steep tangent. Compare `f` with the analytic `f′` readout. Height and rate cannot replace each other. Follow the second plot: where is the slope itself changing fastest as you move along the horizontal axis? A rate can have a rate of change of its own.
+ 
+ Try two places of similar height with opposite slopes. Imagine receiving only their height values. The report could be accurate and still conceal the distinction you need for your next movement. This is another kind of remainder: the data retained something true while leaving out a relation.
+ 
+@@ -45,7 +47,7 @@
+ 
+ <!-- @ -->
+ 
+-What does this make possible for a body? Knowing a height tells it where a surface is. Knowing how height changes with position can help it anticipate an incline. This plot supplies the distinction; it does not make the museum's walking controller use it. That connection would be another piece of code.
++What does this make possible for a body? Knowing a height tells it where a surface is. What if a walking body also read the slope and leaned into an incline? The plot makes a relation available; a body could be written to act on it.
+ 
+ Replace position with time and a rate acquires different units: change per second. The choice of independent variable belongs to the question. Moving the slider quickly does not make this curve's derivative a velocity.
+ 
+@@ -65,7 +67,7 @@
+ 
+ Which total would you trust? Keep the question open while pressing **RULE** again for the left edges, then again for the midpoints. The held panel remembers the version you chose to keep. Its stillness gives the moving comparison somewhere to land.
+ 
+-The calculation is short enough to read aloud:
++In a teaching sketch, the calculation is short enough to read aloud:
+ 
+ ```gdscript
+ var width = (b - a) / n
+@@ -77,7 +79,7 @@
+ 
+ `fraction` is 0 for the left edge, 0.5 for the midpoint, and 1 for the right edge. An address, a height, a width, an addition. The loop keeps doing the same small thing. What looks like a filled area is made from these contributions.
+ 
+-This is a Riemann sum. Here `a` is 0 and `b` is 5. The function stays positive, so the contributions are positive areas. In another model, a rate multiplied by a time interval could give an amount gained during that interval. We would need to name that rate and those units. Moving this slider does not turn its position axis into a clock.
++This is a Riemann sum. Here `a` is 0 and `b` is 5. The function stays positive, so the contributions are positive areas. In another model, a rate multiplied by a time interval could give an amount gained during that interval. In Flow_Field, we will give the small interval to a clock.
+ 
+ Return to the midpoint rule and leave the held four-rectangle panel beside it. Move the count slider one stop. Eight narrower rectangles now look at the same curve. Follow their tops. A ridge that passed between two samples may now receive a sample of its own. Continue through 16, 32, 64 and 128. What becomes easier to estimate, and what becomes harder to distinguish by eye?
+ 
+@@ -105,7 +107,7 @@
+ 
+ Watch the pulse move along the arch. Predict the height difference left between its beginning and end. Then follow the coloured contributions beneath the bridge. Which side contributes positively, and which side negatively?
+ 
+-The arch rises and falls to a level endpoint. Zero net change does not mean that nothing happened. The curve here is a different function from the workbenches: a symmetric arch. Its horizontal coordinate is still position. The moving pulse lets you follow that function; its animation clock is not the input used by the rate plot.
++The arch rises and falls to a level endpoint. Zero net change does not mean that nothing happened. The curve here is a different function from the workbenches: a symmetric arch. The pulse lets you follow it; the horizontal coordinate measures position.
+ 
+ A plot below the deck gives the local height rate with respect to horizontal position. Signed strips extend above or below the plot's baseline. Press **COMPARE TOTALS**. Endpoint labels and a difference marker appear beside it. Underneath, a numerical sum of the rate is compared with the endpoint height difference. Press again to hide this comparison and make another prediction; the arch and its signed strips remain.
+ 
+@@ -119,10 +121,12 @@
+ 
+ For a continuously differentiable height function, integrating its signed derivative across an interval recovers the final height minus the initial height. This is the net-change relationship in the fundamental theorem of calculus. Recovering a function from its derivative still requires a starting value: a slope alone cannot tell us how high the whole bridge was placed.
+ 
++Back at the line, `b - a` gave the same answer for a direct walk and a detour. Here we ask about height: the final height minus the initial height. The signed sum approaches that difference by adding the changes along the way. The strips can still show where the climb and descent happened; the total cannot.
++
+ Compare the earlier positive-area sum with this signed-rate sum. They use different inputs and answer different questions. Adding the magnitudes of the rate contributions would measure something else again. A journey's net height change can vanish while its rises and falls remain substantial.
+ 
+ <!-- @ -->
+ 
+-What would a report of zero leave out of your journey? The total can be correct and insufficient for the question you now want to ask. We have preserved three encounters here so that you can return to the choice: sample a change, gather contributions, recover a difference.
++What would a report of zero leave out of your journey? The total can be correct and insufficient for the question you now want to ask. Which part of the journey would you need to keep?
+ 
+ In **Flow_Field**, an update will help determine the address of the next sample. Carry the loop forward. We are about to make the path through the data part of the computation.

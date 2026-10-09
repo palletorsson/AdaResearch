@@ -1,0 +1,431 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed history bridge found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: history-margin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "Arrival record has twelve rows and original rule",
+      "passed": true
+    },
+    {
+      "name": "Body walking forward and back selects the same row across three views",
+      "passed": true
+    },
+    {
+      "name": "Walking leaves all saved rows and support shapes unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: walking-history",
+      "passed": true
+    },
+    {
+      "name": "Walking into unrecorded depth cannot select a future row",
+      "passed": true
+    },
+    {
+      "name": "Outside the bay cannot change selection",
+      "passed": true
+    },
+    {
+      "name": "XR player-body group reads existing generation",
+      "passed": true
+    },
+    {
+      "name": "Walking keeps RUN active",
+      "passed": true
+    },
+    {
+      "name": "Manual ROW pauses RUN",
+      "passed": true
+    },
+    {
+      "name": "Replay keeps one seed row and only its tile active",
+      "passed": true
+    },
+    {
+      "name": "Installed first step produces three cells",
+      "passed": true
+    },
+    {
+      "name": "Every installed support slot matches occupied recorded state",
+      "passed": true
+    },
+    {
+      "name": "Occupied installed tile provides surface at museum floor level",
+      "passed": true
+    },
+    {
+      "name": "Gap has a lower collecting floor",
+      "passed": false
+    },
+    {
+      "name": "Installed history stops at 24 generations",
+      "passed": true
+    },
+    {
+      "name": "Changing beginning discards all descendants",
+      "passed": true
+    },
+    {
+      "name": "entry_to_desk: capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "entry_to_desk: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "desk_to_left_history_margin: capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "desk_to_left_history_margin: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "margin_to_east_lab_door: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "margin_to_east_lab_door: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "lab_to_rear_gallery: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "lab_to_rear_gallery: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_gallery_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_gallery_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "Gap has a lower collecting floor",
+    "entry_to_desk: capsule clearance",
+    "desk_to_left_history_margin: capsule clearance"
+  ],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_window"
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_view"
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_counter"
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_extinguisher"
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_elevator"
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_pallet"
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_point_zero"
+      },
+      {
+        "key": "ca_bridge",
+        "local": [
+          6.5,
+          0.0,
+          9.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge"
+      },
+      {
+        "key": "film_cellular_history",
+        "local": [
+          1.5,
+          0.0,
+          19.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/film_cellular_history"
+      },
+      {
+        "key": "lab_room",
+        "local": [
+          6.5,
+          0.0,
+          26.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/LabRoom"
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          4.5,
+          0.0,
+          32.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DarkSphere"
+      },
+      {
+        "key": "ca_columns",
+        "local": [
+          8.5,
+          0.0,
+          32.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CAColumns"
+      },
+      {
+        "key": "mirrored_cellular_automata",
+        "local": [
+          6.5,
+          0.0,
+          36.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/MirroredCellularAutomata2"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ExitSign"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          1.5,
+          3.0,
+          40.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/@Node3D@1468"
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/WallClock"
+      },
+      {
+        "key": "info_screen",
+        "local": [
+          1.0,
+          1.70000004768372,
+          22.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/InfoScreen"
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ElectricalPanel"
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          22.2250003814697
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CeilingVent"
+      }
+    ],
+    "routes": {
+      "desk_to_left_history_margin": {
+        "blocked": [
+          {
+            "at": [
+              6.5,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              6.35185194015503,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              6.20370388031006,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              6.05555534362793,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              5.90740728378296,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              5.75925922393799,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              5.61111116409302,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              5.46296310424805,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          },
+          {
+            "at": [
+              5.31481456756592,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          }
+        ],
+        "samples": 115,
+        "unsupported": []
+      },
+      "entry_to_desk": {
+        "blocked": [
+          {
+            "at": [
+              6.5,
+              6.0
+            ],
+            "node": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge/HistoryStudy/HistoryDesk/DeskCase/@StaticBody3D@1163"
+          }
+        ],
+        "samples": 18,
+        "unsupported": []
+      },
+      "lab_to_rear_gallery": {
+        "blocked": [],
+        "samples": 90,
+        "unsupported": []
+      },
+      "margin_to_east_lab_door": {
+        "blocked": [],
+        "samples": 115,
+        "unsupported": []
+      },
+      "rear_gallery_to_exit": {
+        "blocked": [],
+        "samples": 113,
+        "unsupported": []
+      }
+    },
+    "scope": "Actual museum overhead, raised and visitor-height views. Player and neighbouring halls hidden for capture. No physical headset test.",
+    "single_step_ms": 0.395,
+    "study_local": [
+      6.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": false
+}

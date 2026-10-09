@@ -1,0 +1,29 @@
+# Transformation — Claude feedback and current assessment
+
+21 September 2026. The author asks whether the feedback is useful. [Received review](01-claude-review.txt) is preserved verbatim; `received.json` records provenance and current source hashes. This assessment does not apply chapter revisions.
+
+The strongest observation is the sequence's architecture: the same operations make a pickup conspicuous, carry the visitor, change the relation between body and opening, occupy available space, then make room at the final door. This is a pedagogical and critical progression worth protecting. The review supports a light editorial pass, not rebuilding the sequence.
+
+| Recommendation | Current evidence and judgment | Useful next action |
+| --- | --- | --- |
+| Protect the named passages | Agree. They connect a visible operation to a bodily or epistemic consequence. The recurring Alice and pickup/door links do new work. | Preserve them and the seven-hall arc. |
+| Repair Trans_Pre's seam | The opening quoted in the review is already superseded. The current chapter starts in Melencolia and asks what survives movement. Its final summary remains plain. | Keep the new opening. Consider a short closing return to what each operation preserves; no need to rewrite the primer. |
+| Copy the suggested Trans_Pre close | Do not adopt literally. Turning does not preserve every point's place; it preserves distances. In this additive demonstration the cube continues to translate while turning. Uniform scale preserves more than the proposed “only its proportions,” and arbitrary nonuniform scale need not preserve proportions. | Describe the actual additive demonstration and name invariants carefully. A pivot can stay fixed while corners move. |
+| Shorten Translation's deck/socket paragraph | Agree. Half-metre centres and socket starting heights read as implementation repair notes. The surrounding encounter already gives the meaningful relation. | Keep the sentence about coordinates agreeing with the floor; retain any needed setup arithmetic in technical notes. Keep numerical detail when the learner uses it to make a comparison. |
+| Rotation footnote and studies | The footnote really contains localhost and a production-status sentence. Trans_Rotation's current interactables contain crossings, array, tunnel and five carousel profiles, not transformation_sampling or axial_sweep. The production studies and their earlier probes exist. | Fix the publication link and remove work-status language from book prose. Assess the existing studies for an embodied placement before cutting the idea. No new control-panel artifact is called for merely to answer the review. |
+| Shorten Pit before The constant | Agree with selective compression, not a one-third quota. Exact per-block travel times and repeated explanations crowd the encounter. | Keep enough watching, waiting and moving to discover timing, swept space and narrowing gaps before the synthesis. Preserve differing pusher rhythms, the shared grower clock and the distinction between optional studies and a compulsory crossing. |
+| Scale heading | Confirmed: current final.md starts with a top-level heading. | Make the small heading-level correction in the next applied pass. |
+| Scale's factor and witness frame | Current configured source has FACTOR=4 and builds a fixed witness frame beyond the enlarged doorway. The chapter explicitly says an instantaneous cut and separate relocation. | Keep this account. Do not reopen the earlier “grows around you” problem. |
+| Missing single combined transform / “matrices” | A useful reader-language question. Rotation already shows a Basis product. The airlock source sets Transform3D(turn, at), scales its visual child, and resizes collision vertices while leaving the physics body at unit scale. The encounter already combines the three operations. | No combined-matrix detour is needed solely to justify the noun. Keep a formal derivation optional; consider “transformations” in The constant if “matrices” distracts from the reader's acquired vocabulary. Preserve the argument about their insufficiency to describe access. |
+
+## Working direction
+
+Keep the plain opening tutorial as a handhold. Reduce implementation bookkeeping where it interrupts observation. Preserve poetry that emerges from a particular operation, and strengthen a missing encounter before deleting its question. Rotation's absent studies are the one proposed spatial task; the other recommendations are small editorial repairs or already resolved.
+
+Next applied unit: continue from Trans_Introduction without rewriting its successful crossing argument; carry these bounded recommendations through Translation, Rotation, Scale and Pit. The present assessment has not changed manuscripts, placements, roles or runtime code. No headset or new runtime evidence is claimed.
+
+## Applied, 21 September 2026
+
+The author accepted this direction. [The Transformation return](../../../iterations/2026-09-21-transformation-return/index.html) now shows exact chapter comparisons and actual museum images. Pre closes on invariants; Translation and Pit lose setup/timing bookkeeping; Scale changes only its heading level. Introduction and Body are preserved. The existing compact axial-sweep study is placed after the Rotation arrays and before the tunnel, and the prose now follows it. The larger four-drum study remains in its research scene. No prior artifact is removed or moved.
+
+Fourteen controlled museum assertions, seven connected walking segments and 58 content/preservation checks pass. The evidence records a separate nested-GridSystem null-player startup error; headset experience remains open. The full scope, evidence and follow-up are in the [summary](../../../iterations/2026-09-21-transformation-return/SUMMARY.md). Next: the opening of Arrays.

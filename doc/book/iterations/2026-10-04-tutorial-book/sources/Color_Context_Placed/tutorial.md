@@ -1,0 +1,56 @@
+# Add colour to the construction
+
+This opening gathers primitives, transformations and arrays already encountered. Follow the current final.md: the tutorial progression is comparison between fixed objects, with the visitor supplying movement.
+
+1. Recognise the same five-piece column under four colour assignments. Read the actual elements array: an index supplies the next entry, while the construction loop gives that ordering an upward direction. Separate geometry from how its pieces receive colour.
+2. Keep colour by shape while changing the primitive alphabet. A category in code can group a cone and a wedge without making them identical.
+3. Keep the cut alphabet and its colour assignment while changing static pose. Successive levels turn around Y, narrow across X/Z, or combine both. Their heights remain unchanged.
+4. Compose richer stacks from the same vocabulary: unequal heights, broad discs, small beads, sideways offsets and chosen colours. These fixed sculptures do not simulate balance.
+5. Read art and design DNA as composed choices: proportion, ordering and palette. The gallery configurations are the actual source data.
+6. Inspect the rainbow pedestal shaft raised to 6.2 m with its broad cap. Thirty stripes use six palette entries: i % stripe_colors.size() repeats the colour order five times. Walk around it and relate the visible pattern to array indexing and rotation. The changed height also changes the form's relation to your reach.
+7. Combine whole configurations into taller stacks: rainbow plus Bauhaus; Memphis plus rainbow plus beads.
+
+Relevant implementation: `commons/artifacts/chroma_stack/chroma_stack.gd` and `commons/artifacts/color_dna_stack/color_dna_stack.gd`. The code sets these transformations during construction and does not animate them. The three coordinates of a material colour are not a complete account of its appearance; later halls investigate that relation through light, surfaces and displays.
+
+The earlier tutorial's hypothetical perceived() function is archived with the previous draft. It is not an implemented model of the viewer's perception and should not be presented as one.
+
+The prose introduces colour science through a reproducible assignment and the conditions of appearance, while leaving full accounts of light, surface and perception for the following halls. Memories and cultural associations are invited as possibilities, not coded outcomes or universal colour meanings.
+
+## Shared book illustrations — 23 September
+
+The current chapter uses native renders of the four placed opening columns and two views of the fixed rainbow column. The four-rule comparison keeps the same orthographic camera offset relative to each artifact; the source meshes and local transforms match. Existing illumination and backgrounds vary across the hall, so the photographs compare colour assignment in place, not calibrated display colour. The rainbow cameras are 1.65 m above the column base and the object remains fixed between views. No new viewer controls or production geometry were added.
+
+Figures and exact manuscript comparison: `doc/book/iterations/2026-09-23-colour-gathering/`. The focused isolated-museum run checks 24 conditions, including the four assignments and the retained 6.2/7.2/7.4 m heights. Existing 17 September route evidence is historical; no new walking, headset or learner trial is claimed.
+
+
+## Another order among the same parts — 28 September 2026
+
+The writing now connects Disco's held states to the simultaneous colour assignments standing in this hall. The opening follows the red blocks across the intervening blue sphere, then distinguishes shape, height and neighbour as different inputs to an assignment. The ochre/blue alternation in the neighbour column is held spatially rather than advanced by a clock. No new algorithm, geometry or control is implied.
+
+The builders and map still match the 23 September native evidence. The only difference in the tested studies.json is the rainbow plate's already-authored wording: a source ID was replaced with the table-sized study's 72 cm height. Its parts and configuration are unchanged. The existing four-rule and rainbow figures remain dated views, not new captures or calibrated-colour measurements. The scientific/associative paragraph, all three code excerpts, the taller gallery stacks and the illumination handoff remain unchanged.
+
+Comparison, source audit and current reading: doc/book/iterations/2026-09-28-colour-another-order/.
+
+
+<!-- study-spine:reference_landscape -->
+
+## Return: A world from a cone
+
+Change the height factor; keep the 48 sites and three cones per tree. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses array, transform, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`landscape`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-edit:reference_landscape -->
+
+### One source change: A world from a cone
+
+In build(), reduce the maximum height from 1.85 to 1.25. Leave the seeded tree_sites generation and tier count intact. Random shape variation is supplied at this point in the spine.
+
+```gdscript
+var height := lerpf(0.28, 1.25, amount) * random.randf_range(0.65, 1.15)
+```
+
+Source: `commons/artifacts/reference_studies/landscape.gd`. Use the prepared scene to run and compare.

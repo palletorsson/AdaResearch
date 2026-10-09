@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="b9acfcbc31085f3c14384f91bcf4a623a94498ffca8dc4851ddf63de16472c85"><title>commons/artifacts/spine_studies/paired_time_score.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/paired_time_score.gd</p><pre><code>extends RefCounted
+## Two stored angles, advanced by the same engine delta at chosen rates.
+## This is an accelerated comparison, not independent hardware clock drift.
+const PERIOD_SECONDS := 12.0
+const DRIFT_RATIO := 1.04
+var left_angle := TAU * 0.16
+var right_angle := TAU * 0.16
+var right_ratio := 1.0
+var paused := false
+
+func advance(delta: float) -&gt; void:
+	if paused or not is_finite(delta) or delta &lt;= 0.0: return
+	left_angle = fposmod(left_angle + TAU / PERIOD_SECONDS * delta, TAU)
+	right_angle = fposmod(right_angle + TAU / PERIOD_SECONDS * right_ratio * delta, TAU)
+
+func drift() -&gt; void:
+	right_ratio = DRIFT_RATIO
+
+func same_rate() -&gt; void:
+	right_ratio = 1.0
+
+func offset() -&gt; void:
+	right_angle = fposmod(right_angle + PI / 4.0, TAU)
+
+func align() -&gt; void:
+	right_angle = left_angle
+
+func gap_degrees() -&gt; float:
+	var gap := fposmod(rad_to_deg(right_angle - left_angle), 360.0)
+	return 0.0 if gap &lt; 0.00001 or gap &gt; 359.99999 else gap
+
+func reset() -&gt; void:
+	left_angle = TAU * 0.16
+	right_angle = left_angle
+	right_ratio = 1.0
+	paused = false
+</code></pre></body></html>

@@ -1,0 +1,1 @@
+The games hall: the two-handed vector arena, the walk-in reflection bay where r = d - 2(d.n)n bounces around you, the sentry turret's dodge field, and the targeting range. The exit teleporter loops back to the front door.

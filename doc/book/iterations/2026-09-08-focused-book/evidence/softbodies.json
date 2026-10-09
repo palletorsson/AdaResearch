@@ -1,0 +1,212 @@
+{
+  "sequence": "softbodies",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "SoftBodies_Obsticals_Part2",
+      "primary_tokens": [
+        "softbody_gallery_part2"
+      ],
+      "question": "Does softness belong only to the falling body?",
+      "ontology": "A deformation encounter depends on body shape,material parameters,contact geometry and the conditions of release.",
+      "action": "Compare the labelled Bouncy Collider and Slippery Collider stations,then a torus or corner-strike specimen. Look for what the setup changes before explaining the resulting pose.",
+      "observable": "Different contact arrangements produce different motions and settled shapes; labels identify the intended comparison.",
+      "mechanism": "gallery_part2 selects tests13–24; bouncy sets collider bounce1,slippery sets friction0 on a ramp,other tests change body shape,drop offset,drag,pressure or stiffness.",
+      "limit": "This is not a controlled single-variable series: some neighbours change several properties. A label describes configuration,not a measured result.",
+      "variation": "Proposed extension: Select two stations with the same body and release,changing only collider friction,then preserve their starting pose as a reference.",
+      "prior_bridge": "SoftBodies_Obsticals",
+      "next_bridge": "SoftBodies_Cloth_Physics",
+      "sources": [
+        {
+          "path": "algorithms/softbodies/softbody_test_gallery.gd",
+          "fact": "224–333 test13–24 configurations;449 selection by gallery_part;create_test_cell constructs bodies/colliders."
+        }
+      ],
+      "placements": [
+        {
+          "x": 10,
+          "z": 2,
+          "token": "softbody_gallery_part2:180"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Observe existing specimens; do not require unsupported grab controls. Label tracking uses physics vertex0 rather than centre.",
+      "source_hashes": {
+        "commons/maps/SoftBodies_Obsticals_Part2/map_data.json": "79d1fd31f219018c660f399b64d9e6d88439a0b3c77b255df6ca1e7ce358d2b0",
+        "algorithms/softbodies/softbody_gallery_part2.tscn": "39c9f8012494a6f945fdcf4df84fd0f004ce647e4d3b379f09b1cc8293e1633c",
+        "algorithms/softbodies/softbody_test_gallery.gd": "0312a1eb5ad97a201fb3cc54875dcfd5d6ffa2ebd59b77a3844a2fda930d8f16",
+        "commons/maps/SoftBodies_Obsticals_Part2/intent.md": "09d5d7af0df3a9b5ca6a194a4b9447b351465d5c7612e046f4c7af4e025484e5",
+        "commons/maps/SoftBodies_Obsticals_Part2/blurb.md": "d43e8f19db4d20200b2203bbe533a35026a09b229b7d46c74bfa9682a4e17476",
+        "commons/maps/SoftBodies_Obsticals_Part2/critical.md": "6bea867584e13b41863d17a47ddf558fce85f3eb0c41aee3cf6ee89cb2b13390",
+        "commons/maps/SoftBodies_Obsticals_Part2/technical.md": "14e503fcb2b6c7ebecd65692faf89b05852edb1226225bd80e976d6b7c04c8aa"
+      }
+    },
+    {
+      "room_id": "SoftBodies_Cloth_Physics",
+      "primary_tokens": [
+        "softstopscene"
+      ],
+      "question": "If a body stops changing, has it reached equilibrium or has somebody stopped the experiment?",
+      "ontology": "A simulation state and the decision to halt or heavily damp its updates are distinct.",
+      "action": "Compare the four soft bodies and their remaining motion; look for differences between forms arrested at different times.",
+      "observable": "Four bodies are released in a2×2 arrangement and receive stopping interventions on separate timers.",
+      "mechanism": "_on_stop_timeout calls stop_soft_body,sets process disabled,damping100 and stiffness1; restart restores processing and stiffness0.5.",
+      "limit": "This is not a pinned cloth sheet,despite the room title. Heavy damping and changed stiffness do not constitute an exact snapshot or evidence of natural rest.",
+      "variation": "Proposed extension: Restore a real pinned cloth comparison here,or add a clock and start-pose witness to distinguish stopping a simulation from material relaxation.",
+      "prior_bridge": "SoftBodies_Obsticals_Part2",
+      "next_bridge": "SoftBodies_Playground_of_Joy",
+      "sources": [
+        {
+          "path": "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+          "fact": "162 four-body release;303–336 timed stopping;restart_soft_body."
+        }
+      ],
+      "placements": [
+        {
+          "x": 1,
+          "z": 3,
+          "token": "softstopscene"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Intended cloth lesson remains core_gap. No cloth present and no verified VR stop controls; do not promote mismatch as a proof about cloth.",
+      "source_hashes": {
+        "commons/maps/SoftBodies_Cloth_Physics/map_data.json": "cf3155b9676d4c02e9dc81f29d010d78bcc86be19c7641d33c314d316e7fd6c2",
+        "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn": "03057b372360e7b49f0668210a13e931d49e11b74dd976b70473c11ccb827e74",
+        "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd": "72dcec7a7d21499865d1c8046ed9b1ea41ccd8c7523e6d2aaabeda311ea1ab3f",
+        "commons/maps/SoftBodies_Cloth_Physics/intent.md": "13fe294520410939fd2369145835acddb5c2ee0f5623511567e68a0232615084",
+        "commons/maps/SoftBodies_Cloth_Physics/blurb.md": "469b65ba1d090dc32a29ad5c97a7935897327846840a030d2b88481ecc40aa83",
+        "commons/maps/SoftBodies_Cloth_Physics/critical.md": "884b5e097eac4c31c799729f65560268efcfef42f8541eeea6f07fb5f382b20f",
+        "commons/maps/SoftBodies_Cloth_Physics/technical.md": "5b0e634185c79c0184bb44583a2d0a78ea208b3130e777bfcfd045be5c7d3b2d"
+      },
+      "core_gap": "Current primary is timed soft-body stopping; it is not pinned cloth.",
+      "smallest_repair_candidate": "Restore a working cloth sheet with pins/supports and one clear stiffness orrelease comparison."
+    },
+    {
+      "room_id": "SoftBodies_Playground_of_Joy",
+      "primary_tokens": [
+        "rounded_softbody_test"
+      ],
+      "question": "When the shape yields, what does its colour tell you?",
+      "ontology": "A measurement overlay expresses a chosen quantity about deformation; the same body can support several readings.",
+      "action": "Compare the resting outline with the changing heatmap; use MODE to compare strain,collision andvolume readings,then vary STIFFNESS while leaving other controls alone.",
+      "observable": "The specimen deforms while overlays and labels emphasise different aspects of its state.",
+      "mechanism": "Harness delegates to rounded_softbody; its controls create STIFFNESS/PRESSURE/SQUEEZE/MODE. Strain-like value uses displacement from captured rest points and a running maximum for colour normalisation. In _process, Volume mode also calls _apply_volume_correction, which adjusts pressure in response to volume error; modes do not all preserve dynamics.",
+      "limit": "Colour is a selected diagnostic,not pain or permanent damage. Changing stiffness also changes the numerical scale used in the energy-like display,so redness is not a fair cross-setting absolute measure.",
+      "variation": "Proposed extension: Keep a common colour scale across stiffness settings,or let the visitor choose a new observation such as recovery time.",
+      "prior_bridge": "SoftBodies_Cloth_Physics",
+      "next_bridge": "SoftBodies_Affect_Theory_Visualization",
+      "sources": [
+        {
+          "path": "algorithms/softbodies/rounded_softbody.gd",
+          "fact": "164 build;298 rest capture;467 controls;per-vertex strain andmode update."
+        },
+        {
+          "path": "algorithms/softbodies/rounded_softbody_test.gd",
+          "fact": "51 harness resolves RoundedSoftBody;76 config forwarding."
+        },
+        {
+          "path": "algorithms/softbodies/rounded_softbody.gd",
+          "fact": "_process609–610 active volume correction;_apply_volume_correction749–760 changes pressure, rather than only drawing an overlay."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "rounded_softbody_test:90"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Controller squeeze routing andmuseum controls unverified; avoid instructing hand force as guaranteed. Old scene overrides on harness child are inert.",
+      "source_hashes": {
+        "commons/maps/SoftBodies_Playground_of_Joy/map_data.json": "c8373dee6a0b05cfad1eadd52c4e98365c752b1fba746073221ebb201f984b10",
+        "algorithms/softbodies/rounded_softbody_test.tscn": "72efe93b4be4d1cd5c0adb45a92be166f97fbb87d74f063b68e04bf30a1f7dbe",
+        "algorithms/softbodies/rounded_softbody_test.gd": "46ccbf03479081671e5ce8145397cc7161887550bc785b904f027a812987c11a",
+        "algorithms/softbodies/rounded_softbody.gd": "0d6206f473e574b5b74ac4ed45440565c53c2aa3e78960adf0be66385e749d05",
+        "commons/maps/SoftBodies_Playground_of_Joy/intent.md": "fa9c76b7397c30054de16a720751c2a86658d91e2f1b9f33541d719892eb4746",
+        "commons/maps/SoftBodies_Playground_of_Joy/blurb.md": "a5322526d112fb3a126f59161cbeba047cb14c30bde02f750861180707066c7c",
+        "commons/maps/SoftBodies_Playground_of_Joy/critical.md": "8b582eda6d6822f70a1e869ffb79dd0ce204f50529c3d6c979053927c9f015a6",
+        "commons/maps/SoftBodies_Playground_of_Joy/technical.md": "a2054cb6e809f63a2d5e4d6c7fcadcf15c7d594230402cd67cd19492d7ce79d7"
+      }
+    },
+    {
+      "room_id": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "primary_tokens": [
+        "turing_pattern_generator"
+      ],
+      "question": "Can a pattern form without anybody drawing its outline?",
+      "ontology": "A reaction-diffusion system stores concentrations,local reactions and spatial exchange; a visible image reads one field.",
+      "action": "Select a preset,watch patches develop,then move FEED slightly while keeping KILL fixed. Use RESET to begin a new run.",
+      "observable": "Spots,stripes or connected regions change as the concentration field evolves; the image need not follow the hand directly.",
+      "mechanism": "Each step computes uvv,subtracts/adds reaction terms,adds weighted neighbour Laplacian,feed andkill,clamps U/V0–1 and swaps buffers.",
+      "limit": "Preset names describe a tendency,not a guaranteed biological form. Reset seeding and elapsed evolution also affect the picture.",
+      "variation": "Proposed extension: Keep a seed and initial field fixed across paired feed settings; let one visitor disturb a region and another decide what counts as the same pattern.",
+      "prior_bridge": "SoftBodies_Affect_Theory_Visualization",
+      "next_bridge": "Topology_Entropy_Morphogenesis",
+      "sources": [
+        {
+          "path": "commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+          "fact": "_create_vr_controls PRESET/FEED/KILL/RESET;430–476 Gray–Scott update andwrapped stencil."
+        }
+      ],
+      "placements": [
+        {
+          "x": 4,
+          "z": 4,
+          "token": "turing_pattern_generator:0:0.5:1"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/map_data.json": "6b1c31227d9fc039eed8867660a5591b8b28964215a9920bf3598441eab20f45",
+        "commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn": "60b138f8abdb7d33cbe8aeb5035f1d31d09903dbfa97c2df4e6cecb14d1906f1",
+        "commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd": "28316a932641f9c6568a7a0b1bfc007703b06f1c4b9f7ca67c951f5849faa2df",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/intent.md": "2ce9f515fb6e6e319d4860069b2aea6cabcb478059a3da3af0f7c9b30876589d",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/blurb.md": "26a7923af6ee2c5d7beabfd05087caaa7ee5efd2ddd3fac3122161562842fd05",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md": "49a22a3e630228035754fdc36dd49adfc695af9fd611213e18515e694556b338",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/technical.md": "0d02054989cb4f771859645e825e26bbb5dafe93b3e78021f385e4113062a323"
+      }
+    },
+    {
+      "room_id": "Topology_Entropy_Morphogenesis",
+      "primary_tokens": [
+        "entropy_morphogenesis"
+      ],
+      "question": "Which openings connect inside a surface that seems to fold through itself?",
+      "ontology": "An implicit surface is selected from a scalar field by a threshold; its geometry can change when field parameters change.",
+      "action": "Follow an opening with your eye,then move to another viewpoint to test whether two apparent passages connect.",
+      "observable": "The current specimen is a gyroid-like porous structure with noise perturbation.",
+      "mechanism": "S linearly maps tofrequency,noise amplitude andthreshold; GyroidFieldGenerator samples sin(kx)cos(ky)+sin(ky)cos(kz)+sin(kz)cos(kx) plusnoise and builds a marching-cubes mesh.",
+      "limit": "S is an authored morphing control,not measured thermodynamic entropy. One frozen specimen cannot show the effect of changing three coupled parameters.",
+      "variation": "Proposed extension: Compare fixed-seed specimens varying only threshold,then onlyfrequency,before offering a combined morphing axis.",
+      "prior_bridge": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "next_bridge": "ISO_Introduction",
+      "sources": [
+        {
+          "path": "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd",
+          "fact": "173–217 parameter mapping andmeshbuild."
+        },
+        {
+          "path": "algorithms/spacetopology/gyroid_cheese/GyroidFieldGenerator.gd",
+          "fact": "sample gyroid density equation+noise."
+        }
+      ],
+      "placements": [
+        {
+          "x": 3,
+          "z": 4,
+          "token": "entropy_morphogenesis:0:8 "
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitorS slider; static source-supported encounter prepares isosurfaces without presenting entropy metaphor as physics.",
+      "source_hashes": {
+        "commons/maps/Topology_Entropy_Morphogenesis/map_data.json": "58a7cfa16f02fd3aaa8b20ba20a83b4afc534416b05802b3cc1561d3860a4b10",
+        "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn": "0fc99f9e4a505afc4132fd75371cb13a38db7b8e3a1e95a40c04f255fad32b7a",
+        "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd": "615c7a3993dbf0a928702359ac5bc24a9a4c01d83842394c67910d89ff4c5785",
+        "algorithms/spacetopology/gyroid_cheese/GyroidFieldGenerator.gd": "d2a4730db888234cd7790979cd84261fc2b6931c03dbeb396ad7be4d3db524dc",
+        "commons/maps/Topology_Entropy_Morphogenesis/intent.md": "2aff7874e499c4eb22f7871199934ac7a9aa0530545ad14e59ca3a50a25f7620",
+        "commons/maps/Topology_Entropy_Morphogenesis/blurb.md": "ce22ab5d03b014479f75aa7c7cfd8f07829026aeaa2023e8899cb59965d03d21",
+        "commons/maps/Topology_Entropy_Morphogenesis/critical.md": "a90906d4102b65b7b2fe76884595d3cfa3f94930783080c7726532f88afd565e",
+        "commons/maps/Topology_Entropy_Morphogenesis/technical.md": "60290b1f0d50eb007bf9b3365504374670ffa137abc6bcb278e5b44ec55bed81"
+      }
+    }
+  ]
+}

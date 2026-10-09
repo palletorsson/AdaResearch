@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "study belongs to requested museum hall",
+      "passed": true
+    },
+    {
+      "name": "workplace has actual museum floor",
+      "passed": true
+    },
+    {
+      "name": "Grid receives the saved sculpture",
+      "passed": true
+    },
+    {
+      "name": "Grid has the nine saved positions and eight original segments",
+      "passed": true
+    },
+    {
+      "name": "Grid does not build a new point",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-grid-sculpture",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-grid-coarse",
+      "passed": true
+    },
+    {
+      "name": "Grid leaves saved drawing file untouched",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "archive_sha256": "1a693548f2000b23b1e70682d74677c7577c016d9c3f79f091bebbe617b06b70"
+  },
+  "passed": true,
+  "room": "Point_Line_Grid",
+  "scope": "Actual museum halls and exact learner programs, separate process runs. Synthetic controller draws and releases in Trace; Grid loads the saved sculpture. Temporary study placement, not a permanent museum map edit or physical headset test."
+}

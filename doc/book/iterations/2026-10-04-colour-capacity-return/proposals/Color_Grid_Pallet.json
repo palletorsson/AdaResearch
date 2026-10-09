@@ -1,0 +1,37 @@
+{
+  "id": "Color_Grid_Pallet",
+  "title": "Let one address keep a colour",
+  "storyboard": "The outline leaves an edited square and returns to find its colour. Bring array addressing and a recorded result from Nails or Pillar. In the proposed reduced study, write that colour to one chosen address through an explained address-to-instance receiver; selecting another address must not write to either. The installed console instead cycles four inks, so using the learner’s own value is a proposed binding. Revisit the address, then apply the whole-grid rule and predict the replacement. Carry stored assignment separately from live field evaluation. Preserving one exception is an optional later policy, not current behaviour. The wider reach of RULE, the twenty-five selectable sites and the unbroken floor retain their critical force.",
+  "storyboard_short": "Use edited floor square. Reuse address/lookup and recorded Nails/Pillar Color. Propose write through named address→instance receiver; selection only reads. Check leave/return, then predict RULE overwrite. Current COLOUR cycles four inks; custom input needs binding. Carry stored assignment versus live evaluation. Optional protected exception; no history/current protection. Keep 25-site control versus wider rule and unchanged support.",
+  "mode": "make",
+  "brings": [
+    "addressed read/write",
+    "colour returned by an earlier function"
+  ],
+  "learns": [
+    "selection versus assignment",
+    "stored sample versus live evaluation",
+    "explicit overwrite policy"
+  ],
+  "carries": "A colour value stored at an address and a known rule for replacing it.",
+  "supplied": [
+    "selection interface",
+    "explained address-to-MultiMesh-instance receiver"
+  ],
+  "artifact_refs": [
+    "gridcolorizer"
+  ],
+  "review_note": "Vector2i.y denotes room Z here. The actual colour is a MultiMesh instance value, not one separate material per cell. Current COLOUR cycles INKS; custom function input is proposed. RULE overwrites mapped floor colours; protected exceptions/history are not implemented.",
+  "prior_maps": [
+    "Array",
+    "Tutorial_Tiling_Floor",
+    "Color_Nails",
+    "Color_Pillar"
+  ],
+  "independent_check": "Write a recorded colour to one address, leave and return without modifying it, then predict what RULE will replace. The custom-colour binding remains to be supplied.",
+  "source_refs": [
+    "algorithms/color/gridcolorizer/address_lesson.gd",
+    "algorithms/color/gridcolorizer/gridcolorizer.gd"
+  ],
+  "change_reason": "Make the strongest sequence handoff concrete while distinguishing the proposed input from the installed four inks."
+}

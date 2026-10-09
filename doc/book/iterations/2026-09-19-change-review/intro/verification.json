@@ -1,0 +1,44 @@
+{
+  "before": {
+    "staging": {
+      "checks": 27,
+      "failures": []
+    },
+    "tangent": {
+      "checks": 21,
+      "failures": []
+    },
+    "accumulation": {
+      "checks": 26,
+      "failures": []
+    },
+    "staging_source_changed_during_run": [],
+    "change_intro_source_changed_during_run": [],
+    "accumulation_source_changed_during_run": []
+  },
+  "after": {
+    "staging": {
+      "checks": 27,
+      "failures": []
+    },
+    "tangent": {
+      "checks": 21,
+      "failures": []
+    },
+    "accumulation": {
+      "checks": 26,
+      "failures": []
+    },
+    "staging_source_changed_during_run": [],
+    "change_intro_source_changed_during_run": [],
+    "accumulation_source_changed_during_run": []
+  },
+  "source_checks": {
+    "authored_artifacts": 17,
+    "relocated_artifacts": 2,
+    "changed_cells": 5,
+    "other_positions_preserved": 15,
+    "structure_and_utilities_preserved": true,
+    "workbench_sources_unchanged": true
+  }
+}

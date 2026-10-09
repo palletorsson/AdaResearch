@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "file": "12_five_amounts.gd",
+      "printed_matches_source": true,
+      "sha256": "90600ae242e4f34f1dd8ed6c71662b874781ac1727a884249451cf6af8652eee"
+    },
+    {
+      "file": "point_body.gd",
+      "printed_matches_source": true,
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "file": "line_skin.gd",
+      "printed_matches_source": true,
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "additive_logic_unchanged_except_display_lift": true,
+  "additive_scene_unchanged": true,
+  "production_sources": {
+    "commons/artifacts/additive_wave_demo/additive_wave_demo.gd": "3174ca5ddc7d5cbe77753936f74a72325cbef5af4d3c911de1aa119a4290f08a",
+    "algorithms/wavefunctions/oscillation_driver/DoubleHelix.gd": "ac1bc9efe980f6b78bf253a776a2b041d059f9f4fe85fb83b3767221654678b7",
+    "algorithms/wavefunctions/oscillation_driver/double_helix_scene.gd": "733fa70b82135340f6d299a5e7f092663742f92c69192b79d777330162748389",
+    "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json": "ca5283dee6214f09806c80b360d16c6256cd7ca9fc4c52466a3ceb2471d4545a"
+  },
+  "repairs": [
+    "Bench display raised 0.40m; controls, coefficient calculation, gains and state unchanged.",
+    "This helix placement opts into a 4.8m local trail drop limit. Other placements retain their original behaviour."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "tilt field is present in actual museum",
+      "passed": true
+    },
+    {
+      "name": "this placed field is static",
+      "passed": true
+    },
+    {
+      "name": "baseline field extends beyond the hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tilt-field",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "field": {
+      "animate_slope": false,
+      "cube_count": 210,
+      "grid_size": "(7, 30)",
+      "outside_interior": 195,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unchanged_after_update": true,
+      "world_bounds": "[P: (-0.5, -0.682823, 11.0), S: (7.0, 1.365646, 30.0)]",
+      "world_position": [
+        3.5,
+        0.0,
+        11.5
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Random_Rotate_Random_XYZ",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

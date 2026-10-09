@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Three ways to reach</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}.full{grid-column:1/-1}hr{border:0;border-top:1px solid #c7c0b6;margin-top:45px}article h1{font-size:1.8em}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../feedback.html">Feedback decisions</a><a href="../Trans_Pre/tutorial.html">Previous</a><a href="../Trans_Translation/tutorial.html">Next</a><a href="parallel.html">Facing texts</a></nav></header><main><h1>Three ways to make a crossing</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Translation, rotation and scale as different ways to reach</li>
+<li>A bounded fraction controlling a transform</li>
+<li>Interpolation between two values</li>
+<li>A returning function for repeated construction</li>
+</ul>
+<p>Try the three installed crossings. One carries you, one grows, one turns into alignment. The far bank gives each change a purpose. A correctly moving object can still fail to reach it.</p>
+<p>Keep the <code>MeshInstance3D</code> and <code>BoxMesh</code> construction from Trans_Pre. Remove its collection area: these examples need to remain for comparison. Make three small studies beside the real crossings. Their geometry is visible but has no blocking collision; use the installed crossings for standing and riding. The museum's rider transport is supplied, not reconstructed here.</p>
+<h2>Make the comparison</h2>
+<p>Attach this complete <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> in a clear area about ten metres wide. Its origin is at floor level. The three lanes run along local Z, at X = −4, 0 and 4. Their bank tops are one metre above the origin. The centre of the growing cube stays at the origin height; part of its volume extends below the floor.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var travel: MeshInstance3D
+var grow: MeshInstance3D
+var turn: MeshInstance3D
+var far_banks: Array[MeshInstance3D] = []
+var far_gap := 0.0
+var animate := true
+var pose := 0.0
+var duration := 4.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0 and far_gap &gt;= 0.0)
+    for x in [-4.0, 0.0, 4.0]:
+        box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, -1.5))
+        far_banks.append(box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, 1.5 + far_gap)))
+    travel = box(Vector3(1.2, 0.2, 0.8), Vector3(-4, 0.9, -1.4))
+    grow = box(Vector3(1.2, 2, 2), Vector3.ZERO)
+    turn = box(Vector3(2, 0.2, 0.6), Vector3(4, 0.9, 0))
+    apply_pose(pose)
+
+func box(size: Vector3, at: Vector3) -&gt; MeshInstance3D:
+    var body := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    body.mesh = mesh
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    if animate:
+        pose = pingpong(elapsed / duration, 1.0)
+    apply_pose(pose)
+
+func apply_pose(value: float) -&gt; void:
+    var t := clampf(value, 0.0, 1.0)
+    travel.position.z = lerpf(-1.4, 1.4, t)
+    grow.scale = Vector3.ONE * lerpf(0.25, 1.0, t)
+    turn.rotation_degrees.y = 90.0 * t
+</code></pre>
+<p>The <code>box</code> function repeats the construction you already know. Its two arguments choose dimensions and position. It returns the new instance so <code>travel</code>, <code>grow</code> and <code>turn</code> can refer to different bodies. The loop places the same pair of banks in each lane.</p>
+<p><code>apply_pose</code> gives the three operations the same fraction, <code>t</code>. Zero selects their first pose; one selects their last. <code>clampf</code> keeps the fraction within those bounds. <code>lerpf(a, b, t)</code> chooses a value between <code>a</code> and <code>b</code>: halfway gives their average.</p>
+<h2>Hold the two ends</h2>
+<p>Set <code>animate</code> to <code>false</code> and <code>pose</code> to <code>0.0</code>. The travelling surface waits at the near bank. The small cube does not reach the bank tops. The long plank lies across X, away from the route.</p>
+<p>Change <code>pose</code> to <code>1.0</code>. The first surface reaches the far bank without changing size or orientation. The cube has grown around its fixed centre: its top reaches bank height and its Z edges meet the banks. The plank has turned 90 degrees around Y, putting its long dimension along Z. Its centre and dimensions stay fixed.</p>
+<p>One operation moves a surface between banks. The others make a span. They solve different spatial problems using the same three properties from Trans_Pre.</p>
+<h2>Follow the intervening poses</h2>
+<p>Restore <code>animate</code> to <code>true</code>. <code>pingpong</code> moves the fraction from zero to one, then back. With <code>duration = 4.0</code>, each outward journey takes four seconds; the full return takes eight. This timing turns immediately at its endpoints. The installed crossings also have pauses and rider support.</p>
+<h2>Move the place it must reach</h2>
+<p>For a held comparison, set <code>animate</code> to <code>false</code>, <code>pose</code> to <code>1.0</code> and <code>far_gap</code> to <code>0.5</code>. The far banks move half a metre farther along Z. The growing cube and turned plank keep their previous end poses. Each now leaves half a metre unbridged.</p>
+<p>The transform still reaches its intended pose. Reaching the bank also depends on where the bank is.</p>
+<p>Return <code>far_gap</code> to zero and choose <code>pose = 0.5</code>. Predict the travelling surface's position, the cube's size and the plank's angle before running it.</p></main></body></html>

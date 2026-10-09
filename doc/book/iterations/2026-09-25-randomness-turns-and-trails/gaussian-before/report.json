@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "sampler cabinet is present in actual museum",
+      "passed": true
+    },
+    {
+      "name": "three batches retain 300 values",
+      "passed": true
+    },
+    {
+      "name": "compact console has a marked standing place",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sampler-standing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sampler-readout",
+      "passed": true
+    },
+    {
+      "name": "BINS button regroups the retained values",
+      "passed": false
+    },
+    {
+      "name": "WIDTH button changes spread and clears values",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "BINS button regroups the retained values",
+    "WIDTH button changes spread and clears values"
+  ],
+  "observations": {
+    "readout": {
+      "lines": [
+        "GAUSS · μ 0.50 σ 0.15 · Box-Muller",
+        "landed 300 · in flight 0 · cap 1000",
+        "clipped 0 of 300 drawn · first bin 0 · last 0",
+        "bins 30 · mean 0.492 · σ 0.156 (binned)",
+        "seed 16995 · CLEAR replays it",
+        "paused · BATCH lands 100"
+      ],
+      "plate_local": [
+        0.0,
+        0.832000017166138,
+        0.172000005841255
+      ],
+      "standing_eye": [
+        5.5,
+        1.70000004768372,
+        4.87999963760376
+      ],
+      "world": [
+        5.5,
+        0.832000017166138,
+        6.32800006866455
+      ]
+    },
+    "width_cycle": {
+      "after": 0.15,
+      "before": 0.15
+    }
+  },
+  "passed": false,
+  "room": "Random_Gaussian",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,147 @@
+{
+  "checks": [
+    {
+      "name": "Printed example creates a cube, readout and carried point",
+      "passed": true
+    },
+    {
+      "name": "Boolean predicate exactly matches all 27 production addresses",
+      "passed": true
+    },
+    {
+      "name": "Centre and every face centre are removed",
+      "passed": true
+    },
+    {
+      "name": "Replacement leaves its input array intact",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 0: count, edge and retained volume",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 0: unchanged nine-metre outer bounds",
+      "passed": true
+    },
+    {
+      "name": "Printed/production retained positions agree at stage 0",
+      "passed": true
+    },
+    {
+      "name": "Miniature reads production cubes at stage 0",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 1: count, edge and retained volume",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 1: unchanged nine-metre outer bounds",
+      "passed": true
+    },
+    {
+      "name": "Printed/production retained positions agree at stage 1",
+      "passed": true
+    },
+    {
+      "name": "Miniature reads production cubes at stage 1",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 2: count, edge and retained volume",
+      "passed": true
+    },
+    {
+      "name": "Printed stage 2: unchanged nine-metre outer bounds",
+      "passed": true
+    },
+    {
+      "name": "Printed/production retained positions agree at stage 2",
+      "passed": true
+    },
+    {
+      "name": "Miniature reads production cubes at stage 2",
+      "passed": true
+    },
+    {
+      "name": "Drawing has no cube colliders",
+      "passed": true
+    },
+    {
+      "name": "Third action respects two-cut budget",
+      "passed": true
+    },
+    {
+      "name": "Executed corner-only variation gives 64 one-metre cubes",
+      "passed": true
+    },
+    {
+      "name": "Corner-only variation retains bounds but loses edge-middle positions",
+      "passed": true
+    },
+    {
+      "name": "Production complement is bounded and initially hidden",
+      "passed": true
+    },
+    {
+      "name": "View controls preserve solids and reveal same complement",
+      "passed": true
+    },
+    {
+      "name": "Reader adds no collision to the large cube",
+      "passed": true
+    },
+    {
+      "name": "Held point selects a kept corner through rotated frames",
+      "passed": true
+    },
+    {
+      "name": "Large frame marks same selected source cell",
+      "passed": true
+    },
+    {
+      "name": "Held point selects a removed face centre",
+      "passed": true
+    },
+    {
+      "name": "Released tool returns within reach without resetting reading",
+      "passed": true
+    },
+    {
+      "name": "Point action cannot rebuild around a visitor",
+      "passed": true
+    },
+    {
+      "name": "Leaving does not execute a deferred cut",
+      "passed": true
+    },
+    {
+      "name": "Fresh point action works after the visitor leaves",
+      "passed": true
+    },
+    {
+      "name": "Flight enclosure and reader survive solid rebuilds",
+      "passed": true
+    },
+    {
+      "name": "Printed reader locates first face centre after two cuts",
+      "passed": true
+    },
+    {
+      "name": "Printed release returns tool to near edge",
+      "passed": true
+    },
+    {
+      "name": "Printed desktop reader reuses pickup hook",
+      "passed": true
+    },
+    {
+      "name": "Printed named desktop input replaces exactly once",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed scripts, executed corner variation, production geometry and XRTools supplied poses. No physical headset claim."
+}

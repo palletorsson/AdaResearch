@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "line gallery loaded",
+      "passed": true
+    },
+    {
+      "name": "freestanding column is present",
+      "passed": true
+    },
+    {
+      "name": "all 28 existing line bodies remain",
+      "passed": true
+    },
+    {
+      "name": "column is in the central gallery aisle",
+      "passed": true
+    },
+    {
+      "name": "column reaches precisely two metres above the floor",
+      "passed": true
+    },
+    {
+      "name": "column is solid from (0.0, 1.0, -2.0)",
+      "passed": true
+    },
+    {
+      "name": "column is solid from (0.0, 1.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "column is solid from (0.0, 3.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "continuous ink: Approach to Up",
+      "passed": true
+    },
+    {
+      "name": "continuous ink: Up to Over",
+      "passed": true
+    },
+    {
+      "name": "continuous ink: Over to Down",
+      "passed": true
+    },
+    {
+      "name": "continuous ink: Down to Continue",
+      "passed": true
+    },
+    {
+      "name": "old wall mark removed",
+      "passed": true
+    },
+    {
+      "name": "start and invitation appear beside the central route",
+      "passed": true
+    },
+    {
+      "name": "walking the mark meets the column",
+      "passed": true
+    },
+    {
+      "name": "can walk around column on side -1.15",
+      "passed": true
+    },
+    {
+      "name": "can walk around column on side 1.15",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: follow-start",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: follow-return",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: follow-hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "column_world": [
+      15.5,
+      1.0,
+      22.0
+    ]
+  },
+  "passed": true
+}

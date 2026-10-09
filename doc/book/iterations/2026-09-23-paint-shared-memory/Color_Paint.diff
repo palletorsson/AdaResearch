@@ -1,0 +1,13 @@
+--- before/commons/maps/Color_Paint/final.md
++++ commons/maps/Color_Paint/final.md
+@@ -9,6 +9,10 @@
+ Thirty pigment balls wait on the low tray. Pick one up and aim it at the canvas. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish. Release the ball. It returns to its place, and your marks stop arriving. The other painter continues.
+ 
+ Which part of the image can you still call yours?
++
++![The same museum canvas before pickup, during a second gesture, after release and a little later.](/book-review/doc/book/iterations/2026-09-23-paint-shared-memory/the-surface-keeps-working.png)
++
++*A pigment ball is held and moved across the automatic line, then released. The ball returns to the tray while the painting continues to change.*
+ 
+ The canvas has its own addresses. `u` and `v` measure position across the surface, each from zero at one edge to one at the other. The automatic painter supplies both coordinates:
+ 

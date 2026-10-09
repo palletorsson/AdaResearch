@@ -1,0 +1,184 @@
+[
+  {
+    "id": "primitives",
+    "title": "Primitives",
+    "concepts": [
+      {"label": "Initialization, calls and frame updates", "maps": ["Point_Zero"]},
+      {"label": "Prediction, inspection and debugging", "maps": ["Point_Zero", "Point_One"], "status": "proposed"},
+      {"label": "Variables, assignment and basic types", "maps": ["Point_One"], "status": "proposed"},
+      {"label": "Objects, properties and collision shapes", "maps": ["Point_One"]},
+      {"label": "Coordinate frames and variable scope", "maps": ["Point_Coordinates"], "status": "proposed"},
+      {"label": "Expressions, displacement and distance", "maps": ["Point_Lines"]},
+      {"label": "Lists, conditions and loops", "maps": ["Point_Trace"], "status": "proposed"},
+      {"label": "Grid addressing and fit-then-round mapping", "maps": ["Point_Line_Grid"]},
+      {"label": "Triangle winding and face submission", "maps": ["Point_Triangle_Context"]},
+      {"label": "Shared vertices, face indices and connectivity", "maps": ["Primitives_Polythedra", "Point_Animatedcube"]},
+      {"label": "Function parameters, locals and returns", "maps": ["Primitives_Ignorance"], "status": "proposed"},
+      {"label": "Classes, instances and mesh resources", "maps": ["Primitives_Godot"]},
+      {"label": "Nested loops and sampled profiles", "maps": ["Primitives_Columns"], "status": "proposed"},
+      {"label": "Source outlines and sampled sweeps", "maps": ["Primitives_Profiles"]},
+      {"label": "Running totals and tolerance checks", "maps": ["Primitives_Portals"], "status": "proposed"},
+      {"label": "Values and object references in arrangements", "maps": ["Primitives_Melencolia"], "status": "proposed"}
+    ]
+  },
+  {
+    "id": "transformation",
+    "title": "Transformation",
+    "concepts": [
+      {"label": "Elapsed time, interpolation and if/else", "maps": ["Trans_Pre"], "status": "proposed"},
+      {"label": "Supplied sine animation preview", "maps": ["Trans_Pre"], "status": "proposed"},
+      {"label": "Events, reset handlers and starting state", "maps": ["Trans_Introduction"], "status": "proposed"},
+      {"label": "Surface motion and carried displacement", "maps": ["Trans_Introduction"]},
+      {"label": "Waypoint indices and zero-length guards", "maps": ["Trans_Translation"], "status": "proposed"},
+      {"label": "Pivots, axes and rotation order", "maps": ["Trans_Rotation"]},
+      {"label": "Parent and child transform ownership", "maps": ["Trans_Scale"]},
+      {"label": "Clamped proximity mapping", "maps": ["Trans_Body"]},
+      {"label": "Current booleans and retained flags", "maps": ["Trans_Body"], "status": "proposed"},
+      {"label": "Shared inputs and composed transform functions", "maps": ["Trans_Pit"], "status": "proposed"}
+    ]
+  },
+  {
+    "id": "array_tutorial",
+    "title": "Arrays",
+    "concepts": [
+      {"label": "Indexed reads, writes and occupancy", "maps": ["Array", "Tutorial_3D"]},
+      {"label": "Independent objects and shared references", "maps": ["Array"], "status": "proposed"},
+      {"label": "Nested loops over rows and layers", "maps": ["Array", "Tutorial_3D"], "status": "proposed"},
+      {"label": "Spatial coordinates and storage order", "maps": ["Tutorial_3D"]},
+      {"label": "Modulo orientation rules and exceptions", "maps": ["Tutorial_Tiling_Floor"], "status": "proposed"},
+      {"label": "Image and geometry transforms", "maps": ["Tutorial_Tiling_Floor", "Tutorial_Tiling_Walls"]},
+      {"label": "Boolean scores, playheads and event triggers", "maps": ["Tutorial_Disco"], "status": "proposed"}
+    ]
+  },
+  {
+    "id": "color",
+    "title": "Colour",
+    "concepts": [
+      {"label": "Palette indexing and material assignment", "maps": ["Color_Context_Placed"]},
+      {"label": "Light properties and surface albedo", "maps": ["Color_Flashlight"]},
+      {"label": "Function contracts and clamped RGB mapping", "maps": ["Color_Nails"], "status": "proposed"},
+      {"label": "Palette length and fixed-span division", "maps": ["Color_Rainbow"]},
+      {"label": "HSV conversion and coordinate adapters", "maps": ["Color_Pillar"]},
+      {"label": "Stored colour and overwrite policies", "maps": ["Color_Grid_Pallet"]},
+      {"label": "Authored classes, methods and independent state", "maps": ["Color_Grid_Pallet"], "status": "proposed"},
+      {"label": "Parametric UV paths", "maps": ["Color_Paint"]},
+      {"label": "Method calls and accumulating image deposits", "maps": ["Color_Paint"]},
+      {"label": "Alpha compositing and fixed boundaries", "maps": ["Color_Walls"]}
+    ]
+  },
+  {
+    "id": "tiling",
+    "title": "Tiling",
+    "concepts": [
+      {"label": "Pattern values and palettes", "maps": ["Pattern_Disco"]},
+      {"label": "Wrapped palette index lookup", "maps": ["Pattern_Foundry"]},
+      {"label": "Independent copies and live references", "maps": ["Pattern_Foundry"]},
+      {"label": "Reflected lookup and source reversal", "maps": ["Tutorial_Pattern"]},
+      {"label": "Physical coordinates and texture scale", "maps": ["Array_Patterns", "Ribbon_Patterns_02"]},
+      {"label": "Glide reflection and repeat periods", "maps": ["Symmetry_Seventeen"]},
+      {"label": "Layer dependent array lookup", "maps": ["Ribbon_Patterns_01"]},
+      {"label": "UV texture sampling", "maps": ["Ribbon_Patterns_03"]},
+      {"label": "Recipe serialization and snapshots", "maps": ["Ribbon_Patterns_03"]}
+    ]
+  },
+  {
+    "id": "change",
+    "title": "Change",
+    "concepts": [
+      {"label": "Finite differences", "maps": ["Change_Intro"]},
+      {"label": "Riemann sums", "maps": ["Change_Intro"]},
+      {"label": "Signed accumulation and net change", "maps": ["Change_Intro"]},
+      {"label": "Position dependent field sampling", "maps": ["Flow_Field"]},
+      {"label": "Time stepped position updates", "maps": ["Flow_Field"]},
+      {"label": "Trajectory records and boundary wrapping", "maps": ["Flow_Field"]}
+    ]
+  },
+  {
+    "id": "forces",
+    "title": "Vectors and Forces",
+    "concepts": [
+      {"label": "Vector components and normalization", "maps": ["Vectors_Act1_WhatAVectorIs"]},
+      {"label": "Vector sums and route length", "maps": ["VFM_02_Operations"]},
+      {"label": "Dot products and projection", "maps": ["Vectors_Act2_VectorArithmetic"]},
+      {"label": "Analytic constant acceleration trajectories", "maps": ["VFM_05_Launch"]},
+      {"label": "Force pulses, mass and acceleration", "maps": ["VFM_03_Motion"]},
+      {"label": "Velocity assignment and accumulation", "maps": ["Vectors_Act3_FieldsAndMotion"]},
+      {"label": "Spring restoration and linear damping", "maps": ["Vectors_Act4a_KineticForces", "Vectors_Act4b_Oscillation"]},
+      {"label": "Period, phase and rate drift", "maps": ["Change_Choreography"]},
+      {"label": "Pairwise forces and receiving masses", "maps": ["VFM_07_Gravity"]},
+      {"label": "Support polygons and mass centres", "maps": ["VFM_09_Legs"]},
+      {"label": "Eligibility and retained event state", "maps": ["VFM_08_Arena"]},
+      {"label": "Bounded acceleration fields", "maps": ["Vectors_Act5_ForceAsPlace"]}
+    ]
+  },
+  {
+    "id": "formfinding",
+    "title": "Form Finding",
+    "concepts": [
+      {"label": "Gradient descent and stopping thresholds", "maps": ["FormFinding_Descent"]},
+      {"label": "Parametric curves and geometric constraints", "maps": ["FormFinding_Catenary"]},
+      {"label": "Position based motion state", "maps": ["FormFinding_Relaxation"]},
+      {"label": "Iterative distance constraints", "maps": ["FormFinding_Relaxation"]},
+      {"label": "Lever balance and construction", "maps": ["FormFinding_Equilibrium"]},
+      {"label": "Probabilistic acceptance and cooling", "maps": ["FormFinding_Annealing"]},
+      {"label": "Current and best candidate records", "maps": ["FormFinding_Annealing"]},
+      {"label": "Conditional success criteria", "maps": ["FormFinding_Forge"]}
+    ]
+  },
+  {
+    "id": "wavefunctions",
+    "title": "Waves",
+    "concepts": [
+      {"label": "Angular position and velocity", "maps": ["WaveFunctions_Intro"]},
+      {"label": "Timestamped sampling and bounded records", "maps": ["WaveFunctions_Pendulum"]},
+      {"label": "Spatial sine fields and meshes", "maps": ["WaveFunctions_Sine_Space"]},
+      {"label": "Circular coordinates and radians", "maps": ["WaveFunctions_Unit_Circle"]},
+      {"label": "Coupled oscillators and synchronous updates", "maps": ["WaveFunctions_3D_Wave_Propagation"]},
+      {"label": "Audio sampling, modulation and envelopes", "maps": ["WaveFunctions_Effect_Sound", "WaveFunctions_AirMusic"]},
+      {"label": "Timed stochastic event composition", "maps": ["WaveFunctions_John_Cage"]},
+      {"label": "Spatial twist and support sampling", "maps": ["Wavefunctions_Bernini", "Wavefunctions_Sky_Stairs"]},
+      {"label": "Superposition, beats and harmonic synthesis", "maps": ["WaveFunctions_TrigWalkingPath", "WaveFunctions_Synthesis_Lab"]}
+    ]
+  },
+  {
+    "id": "randomness",
+    "title": "Randomness",
+    "concepts": [
+      {"label": "Seeded generators and request order", "maps": ["Random_Definition"]},
+      {"label": "Frequency counts, entropy and histograms", "maps": ["Random_Entropy", "Random_Gaussian"]},
+      {"label": "Eligibility and replacement policies", "maps": ["Random_Remove"]},
+      {"label": "Random sample to mark mapping", "maps": ["Randomness_10_PRINT_Algorithm"]},
+      {"label": "Event accumulation and stored deadlines", "maps": ["Random_Cubes", "Random_Game"]},
+      {"label": "Random increments and bounded walks", "maps": ["Random_Rotate_Random_XYZ", "Random_Walk"]},
+      {"label": "Spatial correlation and weighted fields", "maps": ["Random_Space_Geometry", "Random_Space"]},
+      {"label": "Monte Carlo estimation", "maps": ["Randomness_Examples_of_Randomness"]},
+      {"label": "Decaying fields and environmental feedback", "maps": ["Random_Pheromone"]}
+    ]
+  },
+  {
+    "id": "noise",
+    "title": "Noise",
+    "concepts": [
+      {"label": "Distance based rejection sampling", "maps": ["Random_Noise_Types"]},
+      {"label": "Scalar drivers and geometry mapping", "maps": ["Noise_Columns", "Noise_One"]},
+      {"label": "Signed remapping and surface colour", "maps": ["Noise_One", "Noise_6_Wall"]},
+      {"label": "Thresholded voxel occupancy", "maps": ["Noise_Voxel"]},
+      {"label": "Domain warping", "maps": ["Noise_Inside_Noise"]},
+      {"label": "Triangle based terrain height sampling", "maps": ["Noise_Space_10"]},
+      {"label": "Perlin and OpenSimplex2 sampling", "maps": ["Noise_Perlin_Simplex"]}
+    ]
+  },
+  {
+    "id": "shaders",
+    "title": "Shaders",
+    "concepts": [
+      {"label": "Uniform parameters and distance masks", "maps": ["Shader_01_Shaping"]},
+      {"label": "Tile indices and local coordinates", "maps": ["Shader_05_Patterns"]},
+      {"label": "Coordinate transformations and repetition", "maps": ["Shader_05_Patterns"]},
+      {"label": "Normals and view dependent shading", "maps": ["Shader_11_QueerRubber"]},
+      {"label": "Finite octave noise accumulation", "maps": ["Shader_09_FBM"]},
+      {"label": "Vertex and fragment operations", "maps": ["Shader_12_PinkExtravaganza"]},
+      {"label": "Retained state and feedback", "maps": ["Shader_10_ReactionDiffusion"]}
+    ]
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "edits": [
+    {
+      "title": "Give the origin a visible address",
+      "incitement": "Find the object through its actual appearance before asking what its zero means.",
+      "old": "Find the origin marker. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.",
+      "new": "Find the black sphere with its pink glow and wireframe cube. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.",
+      "purpose": "Identify the installed origin by its appearance, then distinguish its spatial zero from the already running clock.",
+      "reader_move": "Find the black sphere, pink glow and wireframe cube.",
+      "why_here": "The shift from time to space needs a findable object.",
+      "without": "The instruction to find an origin assumes the reader already recognizes its marker.",
+      "evidence": [
+        "origin-appearance",
+        "origin-placement"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "What the zero tells us",
+      "incitement": "The symbol needs a plain reading; its numerical precision need not answer why this reference was chosen.",
+      "old": "The origin is a point chosen as the reference from which other positions are measured. Calling it zero establishes a relation with other positions. It does not put zero outside the world it helps describe.",
+      "new": "`Vector3.ZERO` is shorthand for three zeroes: `(0, 0, 0)`. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.",
+      "purpose": "Read the three zero components and leave the choice of reference open to investigation.",
+      "reader_move": "Connect the code's zero to a spatial reference without treating that convention as self-explanatory.",
+      "why_here": "The reader has found a marker and now meets its short declaration.",
+      "without": "Zero remains a familiar symbol whose role in measurement has not been made explicit.",
+      "evidence": [
+        "reference",
+        "frame"
+      ],
+      "assessment": "interpretive"
+    },
+    {
+      "title": "Read the address from a particular origin",
+      "incitement": "1.25 needs a reference; it is a local coordinate, not an absolute height or a visible object.",
+      "old": "`Vector3` holds three components. Here we use them as a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. These are coordinates relative to the case. They specify a location without making anything visible.",
+      "new": "`Vector3` holds three numbers in the order X, Y, Z. Here they locate a position in the case's own coordinate system: 1.25 metres up from its origin, with no displacement along X or Z. The numbers specify where the lines will meet. They do not draw anything there.",
+      "purpose": "Explain the order and local reference of the three components through the crossing the reader has just located.",
+      "reader_move": "Read 1.25 as a height from the artifact's own origin.",
+      "why_here": "The value can now clarify a position already sought in the glass case.",
+      "without": "The coordinates risk reading as an ungrounded address or a command to draw a point.",
+      "evidence": [
+        "empty",
+        "beams"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Keep the centre undrawn",
+      "incitement": "The arrows and lines make the position locatable. This is not a hidden object awaiting a reveal.",
+      "old": "The arrows and lines are built in relation to `FOCUS`. They make its location available through things beside it and passing through it. The point itself is never drawn. It has no hidden mesh and no later appearance to wait for.",
+      "new": "The arrows aim towards `FOCUS`; the red lines pass through it. What they locate is never drawn. There is no hidden mesh waiting to appear.",
+      "purpose": "Name the two geometric relations and preserve the point's permanent absence of a visible body.",
+      "reader_move": "Follow an aim and a crossing without waiting for a dot to appear.",
+      "why_here": "The code's address has just been explained; now return to what the construction actually gives the eye.",
+      "without": "The empty centre could be mistaken for a delayed revelation or missing asset.",
+      "evidence": [
+        "empty",
+        "arrows",
+        "beams"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Read the construction in both directions",
+      "incitement": "Looking and reading source approach the same arrangement differently: the visitor finds the centre; the program starts with it.",
+      "old": "That is a strange thing to exhibit: a position you can locate, with no body of its own. The source offers another access to it. You can read the address and follow how the surrounding construction was arranged. The position has become available through those relations, without acquiring a surface.",
+      "new": "That is a strange thing to exhibit: a position you can locate, with no body of its own. The source lets us approach it from the other direction. In the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.",
+      "purpose": "Let the strangeness arise from the difference between finding a position in an arrangement and constructing the arrangement from a position.",
+      "reader_move": "Move between the case and its source, reversing the direction of the explanation.",
+      "why_here": "After locating and naming the point, the reader can reconsider which part of the encounter came first.",
+      "without": "The source repeats the object's address without opening another way to investigate it.",
+      "evidence": [
+        "empty",
+        "arrows"
+      ],
+      "assessment": "interpretive"
+    },
+    {
+      "title": "Follow what is added",
+      "incitement": "The screen presents code for a separate marker. Describing it as already building a sphere blurs reading code with running it.",
+      "old": "The nearby code screen builds a visible marker in a separate example. Its excerpts give a sphere a position, then colour and a label. The screen does not execute these scripts. Their sphere belongs to that example; the point in the case remains undrawn. The complete illustrative scripts accompany the excerpts in the room's source.",
+      "new": "On the nearby screen, a separate example begins with three numbers. The displayed code adds a sphere at that position, then colour and a label. The screen advances through excerpts; it does not run the program. We can follow the decisions that would give this position a visible body.",
+      "purpose": "Introduce the code screen as a readable construction of a separate marker, with each added property made deliberate.",
+      "reader_move": "Follow the progression from position to geometry, colour and label.",
+      "why_here": "The permanently undrawn point makes the work of giving another position a body newly noticeable.",
+      "without": "The screen could be read as executing code or revealing the invisible point.",
+      "evidence": [
+        "examples",
+        "marker-stages"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Let elapsed time do something",
+      "incitement": "Return to the previously unused delta through a specific operation: two-second visibility intervals while the centre stays put.",
+      "old": "In a later stage, `_process(delta)` adds `delta` to `elapsed`. The example accumulates time rather than adding one per call; that elapsed time selects when its marker would be drawn. Its position stays the same. This is a construction we could make from a position. The invisible point keeps its empty centre.",
+      "new": "Here `delta`, which the counter received without using, has something to do. Each call to `_process(delta)` adds its time interval to `elapsed`. In this example, the accumulated time would hide and show the sphere every two seconds. Its centre would stay at the same address. A body can disappear from view without going anywhere.",
+      "purpose": "Bring the counter's unused duration back as the means of changing visibility without changing position.",
+      "reader_move": "Follow a familiar value into a new consequence: appearing and disappearing at one address.",
+      "why_here": "Once the example has a surface, the text can distinguish its visibility from its position.",
+      "without": "The return of delta stays abstract and the difference between a hidden surface and an undrawn point remains less concrete.",
+      "evidence": [
+        "examples",
+        "visibility-example"
+      ],
+      "assessment": "grounded"
+    }
+  ]
+}

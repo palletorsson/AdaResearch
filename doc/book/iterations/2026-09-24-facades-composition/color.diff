@@ -1,0 +1,14 @@
+--- before/commons/maps/sequences/color.json
++++ commons/maps/sequences/color.json
+@@ -26,8 +26,9 @@
+     "primitives"
+    ],
+    "unlocks": [
+-    "proceduralgeneration",
+-    "machinelearning"
++     "proceduralgeneration",
++     "machinelearning",
++     "facade_assembly"
+    ],
+    "difficulty": "beginner",
+    "estimated_time": "20-25 minutes",

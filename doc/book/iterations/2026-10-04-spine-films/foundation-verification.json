@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "added": 6,
+  "catalog_total": 52,
+  "films": [
+    {
+      "id": "foundation_function",
+      "map": "Primitives_Columns",
+      "passed": true
+    },
+    {
+      "id": "foundation_point",
+      "map": "Point_Coordinates",
+      "passed": true
+    },
+    {
+      "id": "foundation_trace",
+      "map": "Point_Trace",
+      "passed": true
+    },
+    {
+      "id": "foundation_state",
+      "map": "Trans_Body",
+      "passed": true
+    },
+    {
+      "id": "foundation_array",
+      "map": "Array",
+      "passed": true
+    },
+    {
+      "id": "foundation_class",
+      "map": "Color_Grid_Pallet",
+      "passed": true
+    }
+  ],
+  "protected_files_unchanged": 648,
+  "prior_films_preserved": 46,
+  "control_checks": 184,
+  "visual_review": {
+    "passed": true,
+    "films": [
+      "foundation_function",
+      "foundation_point",
+      "foundation_trace",
+      "foundation_state",
+      "foundation_array",
+      "foundation_class"
+    ],
+    "stage_review": "All24 phase images visually checked by implementing specialist agents, then repaired and rechecked for readable values and unambiguous comparisons.",
+    "museum_review": "Root inspected all six actual-hall monitor views after final label sizing; Function and State also inspected full size. Screens, value readouts and both control rows are visible.",
+    "headset_verified": false,
+    "status": "Complete"
+  },
+  "headset_verified": false
+}

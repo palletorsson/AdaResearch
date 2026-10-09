@@ -1,0 +1,176 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One — give the point a body</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f1e9;color:#29282b;font:19px/1.65 Georgia,serif}main{max-width:1150px;margin:auto;padding:30px 26px 70px}header{border-bottom:1px solid #cdc6bd;padding-bottom:22px;font:14px/1.6 system-ui,sans-serif}nav{display:flex;flex-wrap:wrap;gap:12px 25px}a{color:#84445f;text-underline-offset:4px}article{max-width:760px;margin:48px auto}h1{font-size:clamp(32px,4vw,47px);font-weight:normal;line-height:1.18}h2{font-size:29px;font-weight:normal;margin-top:44px}p{margin:0 0 23px}code{font:.84em Consolas,monospace}pre{background:#e9e3db;border-left:3px solid #b87792;padding:22px;overflow-x:auto;font:15px/1.6 Consolas,monospace}pre code{font:inherit}figure{margin:34px -90px}img{width:100%;height:auto;display:block}figcaption,.small{font:14px/1.6 system-ui,sans-serif;color:#5e575b;margin-top:12px}details{margin:28px 0;border-top:1px solid #cdc6bd;padding-top:19px}summary{cursor:pointer;font:17px/1.5 system-ui,sans-serif}details>div{max-width:760px;margin:auto}.download{display:inline-block;background:#733e55;color:white;padding:10px 20px;text-decoration:none;font:16px/1.5 system-ui,sans-serif;border-radius:3px}.lineage{max-width:760px;margin:45px auto;border-top:1px solid #cdc6bd;padding-top:20px}.lineage p{margin:10px 0}a:focus-visible,summary:focus-visible{outline:3px solid #aa577b;outline-offset:4px}@media(max-width:1000px){figure{margin:30px 0}}@media(max-width:650px){main{padding:24px 17px}body{font-size:18px}pre{font-size:13px;padding:14px}}@media print{header,details,.download{display:none}body{background:white;font-size:11pt}figure{margin:20px 0}pre{white-space:pre-wrap}h2{break-after:avoid}}
+</style></head><body><main><header><p>ADA / ONE TUTORIAL AT A TIME · 3 October 2026</p><nav><a href="#reading">Read Point One</a><a href="#code">Complete scripts</a><a href="#lineage">What it adds</a><a href="#comparison">Earlier lesson</a><a href="Point_One.tutorial.diff">Text diff</a></nav></header><article id="reading"><h1>Point One — give the point a body</h1>
+<p>Three labels say “Point one”. Above the first, nothing. Above the next two, a white sphere. Walk towards each. Only the last stops your movement.</p>
+<p>We will construct these differences. Point Zero gave us <code>_ready()</code>, variables and a way to add a node. Here a variable will keep a position; then we will give that position a surface and a collision boundary.</p>
+<p>Open <code>point_one.tscn</code> in the <a href="../2026-10-03-ada-xr-starter/index.html#guide">Ada student starter</a>. Use <strong>Run Current Scene</strong> (F6). The room, light and player are the Day Zero setup. The three scripts below are in <code>studies/point_one/</code>. Their station nodes and labels are supplied; each script creates everything it needs for its point.</p>
+<figure><a href="room.png"><img src="room.png" alt="Three Point One stations inside the Godot starter: empty space at the first, matching white spheres at the next two"></a><figcaption>Inside the shared starter. Two surfaces look alike; only the last station has a collision boundary.</figcaption></figure><h2>1. Keep a position</h2>
+<p>Open <code>position.gd</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p><code>var</code> declares a variable. Its name, <code>point_position</code>, lets us refer to the value it holds. <code>:=</code> gives it a starting value and lets Godot infer the type.</p>
+<p>Here the type is <code>Vector3</code>: three numbers kept together. We use them as a position relative to this station. The middle number gives its height. Coordinates will examine the three directions in the next hall.</p>
+<p>Change <code>1.12</code> to <code>1.7</code>. Run the scene. Nothing appears above the first label. A stored position draws nothing. Restore <code>1.12</code>.</p>
+<h2>2. Give it a surface</h2>
+<p>Open <code>visible.gd</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var point_position := Vector3(0.0, 1.12, 0.0)
+var radius := 0.14
+
+func _ready():
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+</code></pre>
+<p><code>radius</code> holds a decimal number, a <code>float</code>. It measures from the sphere's centre to its surface. <code>*</code> multiplies: the full height is twice the radius.</p>
+<p><code>SphereMesh</code> is a resource describing the surface. A resource holds data a node can use. <code>MeshInstance3D</code> is the node that displays this mesh. <code>.new()</code> creates each one. The assignments give <code>marker</code> its mesh and position; <code>add_child(marker)</code> puts it in the station's scene tree.</p>
+<p>Change <code>radius</code> to <code>0.3</code>. The sphere grows around the same position. Walk through it. A surface can hide part of the room without stopping your movement. Restore <code>0.14</code>.</p>
+<p>Now change the height in <code>point_position</code> to <code>1.7</code>. This time something rises: <code>marker.position</code> uses the value we stored. Restore <code>1.12</code>.</p>
+<h2>3. Give it a boundary</h2>
+<p>Open <code>solid.gd</code>. It contains the same construction, followed by these lines inside <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">    var solid := StaticBody3D.new()
+    solid.position = point_position
+
+    var sphere_shape := SphereShape3D.new()
+    sphere_shape.radius = radius
+    var collider := CollisionShape3D.new()
+    collider.shape = sphere_shape
+
+    solid.add_child(collider)
+    add_child(solid)
+</code></pre>
+<p><code>StaticBody3D</code> supplies a physics body that stays in place. <code>SphereShape3D</code> describes its collision shape. <code>CollisionShape3D</code> attaches that shape to the body. It draws no visible surface.</p>
+<p>The marker and the physics body use the same position. Their two shapes use the same radius. Walk towards this sphere: the supplied player's collision body now meets a boundary.</p>
+<p>Change <code>sphere_shape.radius = radius</code> to <code>sphere_shape.radius = 0.5</code>. The visible sphere stays small. Your movement stops farther away. In this version, some empty space has become impassable.</p>
+<p>Restore <code>sphere_shape.radius = radius</code>. Then change <code>radius</code> to <code>0.3</code>: both surface and boundary grow because both read that variable.</p>
+<h2>Make them disagree</h2>
+<p>Keep the visible radius at <code>0.3</code>, but give <code>sphere_shape.radius</code> the value <code>0.07</code>. The surface now extends beyond its collision boundary. You can approach closer than the visible edge suggests. The supplied player has a width too; contact depends on both bodies.</p>
+<p>Restore the matching <code>0.14</code> values when finished. You can now make a marker, resize its surface and decide how its boundary relates to what we see.</p>
+<p>The lesson uses the prepared light. The museum's wall switch lets us remove one light source while the solid point still blocks movement. Illumination is another condition; it does not create the collision shape.</p>
+<p>The next hall, Point Coordinates, begins with a point we can hold. We will follow the changing position and learn to read its reference frame.</p><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the starter with Point One</a></p><p class="small">Open point_one.tscn · Run Current Scene (F6). F5 still opens Day Zero.</p></article><section class="lineage" id="lineage"><h2>What this lesson adds.</h2><p><strong>Inherit:</strong> the working room and player; readiness, a variable, creating a node and adding it.</p><p><strong>Make:</strong> a position, a visible marker and a separate collision shape. Change their values and compare what happens.</p><p><strong>Carry forward:</strong> a point whose construction the student can alter. Coordinates will add holding and reference frames.</p><p class="small">The critical text and museum remain intact. This pass revises tutorial.md and its executable companion.</p></section><section id="code"><details><summary>position.gd · complete script</summary><pre><code>extends Node3D
+
+var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre><p><a download href="position.gd">Download this script</a></p></details><details><summary>visible.gd · complete script</summary><pre><code>extends Node3D
+
+var point_position := Vector3(0.0, 1.12, 0.0)
+var radius := 0.14
+
+func _ready():
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+</code></pre><p><a download href="visible.gd">Download this script</a></p></details><details><summary>solid.gd · complete script</summary><pre><code>extends Node3D
+
+var point_position := Vector3(0.0, 1.12, 0.0)
+var radius := 0.14
+
+func _ready():
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+
+    var solid := StaticBody3D.new()
+    solid.position = point_position
+
+    var sphere_shape := SphereShape3D.new()
+    sphere_shape.radius = radius
+    var collider := CollisionShape3D.new()
+    collider.shape = sphere_shape
+
+    solid.add_child(collider)
+    add_child(solid)
+</code></pre><p><a download href="solid.gd">Download this script</a></p></details></section><details id="comparison"><summary>The earlier tutorial</summary><div><h1>Point One — give the point a body</h1>
+<p>Point Zero gave us an instruction that runs when the scene is ready. Here we will use that moment to place a marker. The supplied scene already gives us a floor, a light and a view. We will keep those while changing what appears in front of us.</p>
+<p>Open <a href="../../studies/point-one/README.md">the Point One study project</a>, then <code>study.tscn</code>. Its root is <code>PointStudy</code>. The three station nodes, <code>Position</code>, <code>Visible</code> and <code>Solid</code>, have <code>position.gd</code>, <code>visible.gd</code> and <code>solid.gd</code> attached. These are the three scripts we will change. Each station has its own “Point one” label.</p>
+<p>Run the study. Above the first label there is nothing; above the next two are white spheres. Three small pink feelers move from left to right. Two cross their stations; the third stops at the solid sphere. The sweep repeats. Space pauses or resumes it; R starts the sweep again. <code>contact_probe.gd</code> supplies this contact test. Its movement is borrowed equipment, like the camera. We will change what it can cross.</p>
+<h2>At the first label, nothing appears</h2>
+<p>Open <code>position.gd</code>. This is the whole script:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p>We know <code>_ready()</code> from Point Zero; <code>-&gt; void</code> says the function returns no value. Here we define a <code>Vector3</code>, a value containing three numbers, and name it <code>point_position</code>. For now, this is the supplied position at our station. Point Coordinates will make its three components the subject of a lesson.</p>
+<p>Change <code>1.12</code> to <code>1.7</code> and run. Nothing appears at this station. We have changed a value without attaching a visible body to it. The editor's unused-variable warning describes that condition. The pink feeler still crosses the empty place. It belongs to the supplied test, not to the position we have just defined. Restore <code>1.12</code>.</p>
+<h2>Give the position a surface</h2>
+<p>Open <code>visible.gd</code>. Its complete construction runs in the same familiar function:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+
+    var radius := 0.14
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+</code></pre>
+<p><code>point_position</code> is the location. <code>sphere</code> describes a spherical surface; <code>marker</code> is the node that displays it. <code>.new()</code> creates each part. Assigning <code>marker.mesh</code> gives that node its surface; assigning <code>marker.position</code> places it. <code>add_child(marker)</code> joins it to the station. A position and the object placed there are different things.</p>
+<p>Change <code>1.12</code> to <code>1.7</code> in this script. Now the white sphere rises. Restore the height, then change <code>radius</code> from <code>0.14</code> to <code>0.3</code>. The sphere grows around the same centre. Its height follows because the script makes it twice the radius.</p>
+<p>Watch the feeler cross the larger sphere. A visible surface has still given it nothing to collide with. We can change how much the sphere hides without changing what can pass through it. Restore the radius to <code>0.14</code>.</p>
+<h2>Give the body a boundary</h2>
+<p>The third station looks the same. Its feeler stops. Open <code>solid.gd</code>:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+
+    var radius := 0.14
+    var sphere := SphereMesh.new()
+    sphere.radius = radius
+    sphere.height = radius * 2.0
+
+    var marker := MeshInstance3D.new()
+    marker.mesh = sphere
+    marker.position = point_position
+    add_child(marker)
+
+    var solid := StaticBody3D.new()
+    solid.position = point_position
+
+    var sphere_shape := SphereShape3D.new()
+    sphere_shape.radius = radius
+    var collider := CollisionShape3D.new()
+    collider.shape = sphere_shape
+
+    solid.add_child(collider)
+    add_child(solid)
+</code></pre>
+<p>The first part constructs the same marker. The added <code>StaticBody3D</code> participates in collision. <code>SphereShape3D</code> describes its boundary, and <code>CollisionShape3D</code> attaches that shape to the physics body. The visible marker and this body are both placed at <code>point_position</code>.</p>
+<p>Find <code>sphere_shape.radius = radius</code>. Change only that line to:</p>
+<pre><code class="language-gdscript">    sphere_shape.radius = 0.35
+</code></pre>
+<p>Run again. The white sphere stays small, but the feeler stops earlier, leaving a visible gap. The empty space resists it. <strong>Debug → Visible Collision Shapes</strong> can also reveal the larger boundary; the contact test works without that overlay.</p>
+<p>We have chosen whether the surface we see and the boundary we encounter coincide. In the museum, it is your movement that meets this difference. The fixed-camera study supplies another moving body so we can test the same relation. Restore <code>sphere_shape.radius = radius</code>.</p>
+<p>Try a different disagreement: in <code>solid.gd</code>, set the visible <code>radius</code> to <code>0.3</code> and <code>sphere_shape.radius</code> to <code>0.07</code>. The feeler disappears into the white surface before the contact label reports “stopped”. The boundary is now inside the body we see. Return both to the matching <code>0.14</code> when you finish.</p>
+<h2>Remove the light, keep the body</h2>
+<p>In the museum, use the wall switch. The long shadows disappear while a dim fill leaves the spheres visible. The collision boundary stays where it was.</p>
+<p>The decision in the switch is one line:</p>
+<pre><code class="language-gdscript">sun.visible = false
+</code></pre>
+<p>Here <code>sun</code> is the museum's directional light. This is a reading of that source, not a line to paste into <code>visible.gd</code>, which has no variable named <code>sun</code>. The portable study keeps its supplied light. Building the switch and its lighting rig is outside this lesson.</p>
+<h2>What we can carry forward</h2>
+<p>We can now place a marker, change its surface around the same centre and give it a different physical boundary. The large sphere at the end of the museum corridor asks us to return to those choices: it still says “Point one”. Knowing its construction gives us another way to change the encounter.</p>
+<p><a href="../../../../commons/maps/Point_Coordinates/tutorial.md">Point Coordinates</a> begins with a supplied point we can hold, then reads its movement. It will prepare two positions for the line. The <a href="../../studies/point-one/CONSTRUCTION.md">construction reference</a> keeps the roles of the supplied parts available without adding another required exercise.</p></div></details><details id="checked"><summary>23 Point One checks passed</summary><div><p>The checks run the actual scripts, including the suggested edits, and move the supplied player through each station using Godot physics. The invisible boundary stops movement independently of the surface and light. The three scripts also create their objects without prepared mesh nodes.</p><p>Desktop collision and the screenshot were checked in Godot 4.6. Physical XR and a beginner reading trial remain to be checked.</p><p><a href="verification.json">Native checks</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="DECISIONS.md">Editorial decisions</a></p></div></details></main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

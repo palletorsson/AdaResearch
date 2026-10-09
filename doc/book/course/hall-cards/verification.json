@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-05",
+  "halls": 207,
+  "sequences": 25,
+  "summary_statuses": {
+    "current": 207
+  },
+  "available_images": 199,
+  "broken_image_paths": [],
+  "saved_choices": [
+    "Point_Coordinates"
+  ],
+  "backend_tests": "6 passed; temporary fixtures only",
+  "scoped_typescript": "0 diagnostics",
+  "browser_checks": [
+    "Coordinates edit/add/remove subjects",
+    "Draft and unadded label retained across Next/Previous",
+    "Coordinates actual requested focus saved and verified after reload",
+    "Full final.md expands and closes",
+    "Next/Previous crosses sequence boundary",
+    "First/last navigation disabled correctly"
+  ],
+  "scope": "Interface and authoring intent. No full tutorials or museum runtime changes."
+}

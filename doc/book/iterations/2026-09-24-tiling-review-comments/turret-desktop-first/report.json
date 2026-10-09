@@ -1,0 +1,49 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "exit turret present in actual loaded hall",
+      "passed": true
+    },
+    {
+      "name": "map configuration excludes the visitor",
+      "passed": true
+    },
+    {
+      "name": "existing scene range retained",
+      "passed": true
+    },
+    {
+      "name": "production player resolver finds a body",
+      "passed": false
+    },
+    {
+      "name": "other turret placements retain original defaults",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ribbon-exit",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fabric-studio",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "production player resolver finds a body"
+  ],
+  "observations": {
+    "turret_world": [
+      23.5,
+      0.0,
+      45.5
+    ]
+  },
+  "passed": false,
+  "room": "Ribbon_Patterns_03",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

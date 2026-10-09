@@ -1,0 +1,158 @@
+{
+ "sweep": "grid3d",
+ "peak_changed_pct": 14.731,
+ "subject_pct": 89.502,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "algorithm": "BFS"
+   },
+   "b": {
+    "algorithm": "DFS"
+   },
+   "changed_px": 54825,
+   "changed_pct": 9.492
+  },
+  {
+   "a": {
+    "algorithm": "BFS"
+   },
+   "b": {
+    "algorithm": "DIJKSTRA"
+   },
+   "changed_px": 49439,
+   "changed_pct": 8.559
+  },
+  {
+   "a": {
+    "algorithm": "BFS"
+   },
+   "b": {
+    "algorithm": "KRUSKAL_MST"
+   },
+   "changed_px": 58436,
+   "changed_pct": 10.117
+  },
+  {
+   "a": {
+    "algorithm": "BFS"
+   },
+   "b": {
+    "algorithm": "PRIM_MST"
+   },
+   "changed_px": 57847,
+   "changed_pct": 10.015
+  },
+  {
+   "a": {
+    "algorithm": "BFS"
+   },
+   "b": {
+    "algorithm": "FORCE_DIRECTED"
+   },
+   "changed_px": 83246,
+   "changed_pct": 14.412
+  },
+  {
+   "a": {
+    "algorithm": "DFS"
+   },
+   "b": {
+    "algorithm": "DIJKSTRA"
+   },
+   "changed_px": 43288,
+   "changed_pct": 7.494
+  },
+  {
+   "a": {
+    "algorithm": "DFS"
+   },
+   "b": {
+    "algorithm": "KRUSKAL_MST"
+   },
+   "changed_px": 54695,
+   "changed_pct": 9.469
+  },
+  {
+   "a": {
+    "algorithm": "DFS"
+   },
+   "b": {
+    "algorithm": "PRIM_MST"
+   },
+   "changed_px": 51563,
+   "changed_pct": 8.927
+  },
+  {
+   "a": {
+    "algorithm": "DFS"
+   },
+   "b": {
+    "algorithm": "FORCE_DIRECTED"
+   },
+   "changed_px": 79086,
+   "changed_pct": 13.692
+  },
+  {
+   "a": {
+    "algorithm": "DIJKSTRA"
+   },
+   "b": {
+    "algorithm": "KRUSKAL_MST"
+   },
+   "changed_px": 50410,
+   "changed_pct": 8.727
+  },
+  {
+   "a": {
+    "algorithm": "DIJKSTRA"
+   },
+   "b": {
+    "algorithm": "PRIM_MST"
+   },
+   "changed_px": 45625,
+   "changed_pct": 7.899
+  },
+  {
+   "a": {
+    "algorithm": "DIJKSTRA"
+   },
+   "b": {
+    "algorithm": "FORCE_DIRECTED"
+   },
+   "changed_px": 71006,
+   "changed_pct": 12.293
+  },
+  {
+   "a": {
+    "algorithm": "KRUSKAL_MST"
+   },
+   "b": {
+    "algorithm": "PRIM_MST"
+   },
+   "changed_px": 56442,
+   "changed_pct": 9.772
+  },
+  {
+   "a": {
+    "algorithm": "KRUSKAL_MST"
+   },
+   "b": {
+    "algorithm": "FORCE_DIRECTED"
+   },
+   "changed_px": 85085,
+   "changed_pct": 14.731
+  },
+  {
+   "a": {
+    "algorithm": "PRIM_MST"
+   },
+   "b": {
+    "algorithm": "FORCE_DIRECTED"
+   },
+   "changed_px": 79477,
+   "changed_pct": 13.76
+  }
+ ]
+}

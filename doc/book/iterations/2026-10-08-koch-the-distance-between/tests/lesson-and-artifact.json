@@ -1,0 +1,163 @@
+{
+  "checks": [
+    {
+      "name": "Printed example constructs a point and one drawn segment",
+      "passed": true
+    },
+    {
+      "name": "Four metre seed and independent current array",
+      "passed": true
+    },
+    {
+      "name": "Printed step 1: positions, segments and length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 1: seed and endpoints preserved",
+      "passed": true
+    },
+    {
+      "name": "Printed step 1: every child has correct length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 2: positions, segments and length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 2: seed and endpoints preserved",
+      "passed": true
+    },
+    {
+      "name": "Printed step 2: every child has correct length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 3: positions, segments and length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 3: seed and endpoints preserved",
+      "passed": true
+    },
+    {
+      "name": "Printed step 3: every child has correct length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 4: positions, segments and length",
+      "passed": true
+    },
+    {
+      "name": "Printed step 4: seed and endpoints preserved",
+      "passed": true
+    },
+    {
+      "name": "Printed step 4: every child has correct length",
+      "passed": true
+    },
+    {
+      "name": "Printed study stops at four without altering current",
+      "passed": true
+    },
+    {
+      "name": "First five positions include the equilateral peak",
+      "passed": true
+    },
+    {
+      "name": "Independent turn reversal preserves length and mirrors the peak",
+      "passed": true
+    },
+    {
+      "name": "Tilted seed is replaced in its own direction within XY",
+      "passed": true
+    },
+    {
+      "name": "Reader returns known peak at half the first path length",
+      "passed": true
+    },
+    {
+      "name": "Actual XR pickup reads path in a rotated study frame",
+      "passed": true
+    },
+    {
+      "name": "Actual pickable action requests one replacement",
+      "passed": true
+    },
+    {
+      "name": "Release parks at represented point without another step",
+      "passed": true
+    },
+    {
+      "name": "Desktop hook reads last endpoint and full path",
+      "passed": true
+    },
+    {
+      "name": "Named desktop action advances once",
+      "passed": true
+    },
+    {
+      "name": "Production desk installs one reader and three nearby controls",
+      "passed": true
+    },
+    {
+      "name": "Production/printed endpoints agree at step 0",
+      "passed": true
+    },
+    {
+      "name": "Production/printed endpoints agree at step 1",
+      "passed": true
+    },
+    {
+      "name": "Production/printed endpoints agree at step 2",
+      "passed": true
+    },
+    {
+      "name": "Production/printed endpoints agree at step 3",
+      "passed": true
+    },
+    {
+      "name": "Production/printed endpoints agree at step 4",
+      "passed": true
+    },
+    {
+      "name": "Production TURN keeps length and reverses geometry",
+      "passed": true
+    },
+    {
+      "name": "Closed comparison has 12 segments and 14 metre perimeter",
+      "passed": true
+    },
+    {
+      "name": "Production XR trigger and hand read the same peak",
+      "passed": true
+    },
+    {
+      "name": "Floor receiver follows the exact selected data point",
+      "passed": true
+    },
+    {
+      "name": "Production release keeps reading without moving source endpoints",
+      "passed": true
+    },
+    {
+      "name": "Floor drawing has no additional collision",
+      "passed": true
+    },
+    {
+      "name": "Production keeps bounded 256-segment open path",
+      "passed": true
+    },
+    {
+      "name": "BACK restores previous generation",
+      "passed": true
+    },
+    {
+      "name": "RESET restores seed and zero reading",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact three printed scripts; production source/receiver and XRTools supplied poses. No physical headset or learning claim."
+}

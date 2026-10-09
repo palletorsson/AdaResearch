@@ -1,0 +1,215 @@
+[
+  {
+    "id": "Change_Choreography",
+    "title": "Keep an offset, change a rate",
+    "mode": "deepen",
+    "storyboard": "Twenty rods turn together, form a wave, then drift apart; the conveyor gives a rate mismatch a different material consequence. Reuse indexed repetition and rate over elapsed time; introduce period and phase with the rods before returning to the supplied paired dials. Make the existing tutorial's one source edit: halve DRIFT_RATIO's excess above one, keeping the twelve-second period. Predict the gap after thirty seconds, then use SAME RATE to stop its growth without closing it. Carry a tested distinction between changing a stored angle and changing the rate added to it. Keep the conveyor as a comparison with contact, arrival and finite capacity. The paired-clock reference remains open to interpretation; this shared engine clock supplies neither independent ageing nor the bodily history of its reference.",
+    "storyboard_short": "Keep rods, conveyor and paired dials in their existing order. Reuse indexed repetition and elapsed time; introduce period and phase at the rods. Follow the existing DRIFT_RATIO edit from 1.04 to 1.02; predict thirty seconds of separation, then preserve the gap with SAME RATE. Supply display and controls. Carry offset versus accumulated rate difference. Conveyor contacts and the clocks' historical reference remain comparisons, not extra builds or claims of bodily simulation.",
+    "brings": [
+      "indexed repetition and timed transforms",
+      "rate multiplied by elapsed time",
+      "Oscillation's returning movement, without assuming period or phase has been taught"
+    ],
+    "learns": [
+      "period names a cycle's duration and phase names its angular offset",
+      "a rate change preserves the existing angle in the paired score",
+      "equal rates preserve a phase gap without closing it",
+      "prescribed rotation and a contact-driven queue need different accounts"
+    ],
+    "carries": "A small tested rate edit and an explanation of which difference stays fixed, grows or is erased by an assignment.",
+    "supplied": [
+      "phase_rod_array, conveyor_backlog and the paired_time museum study",
+      "paired_time_score.gd with its twelve-second base period and stored angles",
+      "dial geometry, controls, museum player and conveyor contact model"
+    ],
+    "prior_maps": [
+      "Array",
+      "Change_Intro",
+      "Vectors_Act4b_Oscillation"
+    ],
+    "independent_check": "Change DRIFT_RATIO from 1.04 to 1.02 in the supplied study. Before RESET and DRIFT RIGHT, predict an 18-degree gap after thirty seconds rather than 36 degrees; explain why SAME RATE then keeps that gap instead of aligning the hands.",
+    "source_refs": [
+      "commons/maps/Change_Choreography/final.md",
+      "commons/maps/Change_Choreography/tutorial.md",
+      "commons/artifacts/timing_machines/phase_rod_array.gd",
+      "commons/artifacts/timing_machines/conveyor_backlog.gd",
+      "commons/artifacts/spine_studies/paired_time_score.gd",
+      "commons/artifacts/spine_studies/paired_time.gd",
+      "commons/artifacts/spine_studies/station.gd"
+    ],
+    "review_note": "This uses an actual authored source exercise already present in tutorial.md, replacing the proposed extra marker-row build. Oscillation does not establish period and phase; introduce those terms at the rods. The rods assign absolute angle from elapsed time, so configuration changes may jump; the paired score instead advances stored angles, and SAME RATE preserves them. The conveyor has finite rigid parcels, contact and admission limits. Both dials share engine delta and discard whole-turn counts; neither battery ageing nor the material and bodily conditions of the Gonzalez-Torres reference are simulated. No new runtime or tutorial work is applied by this summary.",
+    "before": "Build another short row of phased markers, then compare its drift with the conveyor backlog.",
+    "after": "Use the existing paired-dial source edit to halve drift; predict the gap and explain why equal rates preserve it.",
+    "reason": "A concrete exercise already exists. It makes the earlier rate and phase skills reusable while leaving rods, conveyor and the artistic reference room to offer different kinds of comparison."
+  },
+  {
+    "id": "VFM_07_Gravity",
+    "title": "Allow the reference to answer",
+    "mode": "make",
+    "storyboard": "The gold satellite turns around a held source; at the next station both bodies answer the attraction. Reuse separation, mass and acceleration by completing the two receiver contributions in the existing accelerations() pattern: one shared pair force, opposite signs, each divided by its receiving mass. Supply the softened law, pair loop, state and integrator. Test one pair with unequal masses before summing more pairs; equal forces need not produce equal accelerations. Read the guard that withholds body zero's response. The museum stations also change masses and beginnings, so their paths are not a controlled test of that guard alone. Third-body and NUDGE encounters remain available comparisons. Carry a paired contribution rule and the question of whose response a fixed reference leaves out.",
+    "storyboard_short": "Use the held source and mutual-body stations. Reuse separation and force-to-acceleration. Own the two receiver contributions in the existing pair pattern; supply softened attraction, loop and integrator. Check equal/opposite forces with unequal receiving masses. Read the omitted response for body zero. The stations change beginnings as well as recipients. Keep third-body and NUDGE as comparisons; require no new gravity solver.",
+    "brings": [
+      "separation vectors and shared coordinate frames",
+      "force divided by receiving mass",
+      "retained velocity and position updates"
+    ],
+    "learns": [
+      "one pair contributes equal and opposite forces to two receivers",
+      "unequal receiving masses give unequal accelerations",
+      "omitting a receiver's contribution is an explicit model choice"
+    ],
+    "carries": "A pair contribution pattern with declared receiving masses and any deliberately omitted response.",
+    "supplied": [
+      "gravity_relations.gd and its existing accelerations() pair loop",
+      "softened attraction with EPS=0.25 and velocity Verlet stepping",
+      "initial states, displays, bounded trails and existing museum controls"
+    ],
+    "prior_maps": [
+      "Vectors_Act2_VectorArithmetic",
+      "VFM_03_Motion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation"
+    ],
+    "independent_check": "For one computed force pair, use receiving masses of 12 kg and 1 kg and allow both contributions. Predict opposite accelerations with magnitudes in a 1:12 ratio, check the two divisions, then identify which contribution the first station's body-zero guard omits.",
+    "source_refs": [
+      "commons/maps/VFM_07_Gravity/final.md",
+      "commons/maps/VFM_07_Gravity/tutorial.md",
+      "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd"
+    ],
+    "review_note": "The two-line contribution exercise is a proposed teaching emphasis on existing source, not an already rewritten tutorial or a new solver. Supply the law and integrator intact; assess the contributions before integration. The first station uses 12 kg and 1 kg with a held source; the mutual station starts with equal 4 kg bodies and different positions/velocities. Do not present their paths as an otherwise identical fixed/mutual experiment. Softened markers have no mutual collisions or player coupling. NUDGE's paired beginning and finite observation window warrant a measured comparison, not a proof of chaos or escape.",
+    "before": "Write a two-body interaction and compare a fixed source with mutual response.",
+    "after": "Focus the work on two receiver contributions, unequal masses and the source's omitted response; keep the solver supplied.",
+    "reason": "The reusable skill is distributing a shared interaction. Naming the stations' different beginnings prevents a misleading comparison and keeps the task smaller than building an orbital solver."
+  },
+  {
+    "id": "VFM_09_Legs",
+    "title": "Ask what supports a still body",
+    "mode": "reflect",
+    "storyboard": "A plate rests on four posts; removing support or shifting its mass centre changes what happens after RELEASE. Bring the distinction between geometry, physical properties and a body's received forces. Use the existing FEET and SHIFT controls to state a support hypothesis before the plate moves. Compare adjacent and diagonal pairs at the same centred mass setting: the number of posts alone cannot explain the difference. The supplied outline encloses finite pad corners and describes the initial horizontal arrangement, not every later contact. Then watch the procedural walker and inspect how its body and feet are commanded. Carry a comparison of two accounts of standing, with their limits named. No new hull routine or gait controller is required, and limb count need not become a rule for viable bodies.",
+    "storyboard_short": "Use FEET, SHIFT and RELEASE on the existing plate. Reuse geometry, mass centre and physical response. Predict adjacent versus diagonal support with the same centred mass; check the initial finite-pad outline against release. Supply hull and solver. Compare the commanded walker without treating it as balance validation. Carry an explicit support hypothesis and its limits; add no hull or gait implementation obligation.",
+    "brings": [
+      "point arrangements and the distinction between shape and physical properties",
+      "a declared mass centre",
+      "forces and the conditions under which a body may respond"
+    ],
+    "learns": [
+      "support depends on arrangement and mass projection rather than post count alone",
+      "an initial support outline is not a live account of changing contacts",
+      "commanded walking and contact-supported balance provide different evidence"
+    ],
+    "carries": "A stated support hypothesis, one observed comparison and a boundary on what that comparison establishes.",
+    "supplied": [
+      "support_polygon_lab's finite pads, plate and FEET/SHIFT/RELEASE controls",
+      "initial support hull, mass-centre projection and rigid-body solver",
+      "the existing four-leg walker and its supplied gait and body movement"
+    ],
+    "prior_maps": [
+      "Array",
+      "Vectors_Act4a_KineticForces",
+      "VFM_07_Gravity"
+    ],
+    "independent_check": "Keep the mass centre centred and compare the existing adjacent-pair and diagonal-pair FEET settings. Predict the initial support difference before releasing each plate, then state why the walker cannot confirm the same hypothesis merely by remaining upright.",
+    "source_refs": [
+      "commons/maps/VFM_09_Legs/final.md",
+      "commons/maps/VFM_09_Legs/tutorial.md",
+      "commons/maps/VFM_09_Legs/critical.md",
+      "commons/artifacts/support_polygon_lab/support_polygon_lab.gd",
+      "commons/hazards/octapod_crawler/four_leg_critter.gd",
+      "commons/hazards/octapod_crawler/leg_walker_base.gd"
+    ],
+    "review_note": "Preserve this hall as comparison and independent judgement. The actual plate is a rigid body; the pads have finite square tops, and the hull uses their corners. The outline is an initial horizontal support estimate, not a changing contact solver. SHIFT changes the custom mass centre while keeping the configured inertia; scope the claim accordingly. The walker advances its body and places feet through authored rules without a hull-based balance test. Do not infer a required anatomy, demand that learners build a controller, or use the walker as physical validation of the plate.",
+    "before": "Arrange supplied support pads and use a supplied hull calculation before comparing the walker.",
+    "after": "Use the existing support controls for one prediction, then compare physical support with the walker's commanded movement.",
+    "reason": "The hall already offers a precise comparison. It can deepen judgement about bodies and models without turning reflection into another geometry or gait-building task."
+  },
+  {
+    "id": "VFM_08_Arena",
+    "title": "Ask what an encounter keeps",
+    "mode": "reflect",
+    "storyboard": "The crab turns toward a beacon or mushroom; a screen can remove a candidate from view. Bring distance comparisons, conditions and the previous hall's distinction between commanded movement and physical response. Before a meal starts, keep candidate positions fixed and insert the screen: predict what selection may change and what completed-meal history cannot. Read the supplied selector and feeding record to check that account. The learner need not rebuild steering, legs or an event system. The five-meal stop is authored, while the meaning of this apparent relationship remains open to discussion. Keep the collision carts as a separate, optional comparison with an explicit one-dimensional model. Carry a distinction between present eligibility, retained events and an interpretation of agency; none alone establishes the others.",
+    "storyboard_short": "Keep Arena a comparison. Reuse distances, conditions and commanded-body distinctions. Before feeding starts, hold positions fixed, insert the screen and predict selection versus completed-meal history. Read the supplied selector and event record; build no new controller. The five-meal stop is authored. Keep collision carts a separate model and interpretation open. Carry a distinction between eligibility, retained events and attributed agency.",
+    "brings": [
+      "lists, distance comparisons and conditions",
+      "the distinction between a current input and retained state",
+      "Legs' comparison of commanded and physically supported movement"
+    ],
+    "learns": [
+      "a candidate must remain eligible before distance can select it",
+      "a completed-event count differs from the current target",
+      "an authored threshold and an interpretation of agency answer different questions"
+    ],
+    "carries": "An inspectable account of a choice, the event history it retains and the interpretive claims that remain open.",
+    "supplied": [
+      "lesson_crab's existing eligible-candidate selector and line-of-sight query",
+      "museum beacon, mushroom, screen and controls",
+      "feeding events, steering and gait; the separate analytic collision-cart comparison"
+    ],
+    "prior_maps": [
+      "Array",
+      "VFM_02_Operations",
+      "VFM_03_Motion",
+      "VFM_09_Legs"
+    ],
+    "independent_check": "Start before a meal is underway. With candidate positions unchanged, insert the screen and predict which candidate remains eligible. Explain why an occlusion may change the selected target but cannot itself increase the completed-meal count; use the existing rules to check both claims.",
+    "source_refs": [
+      "commons/maps/VFM_08_Arena/final.md",
+      "commons/maps/VFM_08_Arena/tutorial.md",
+      "commons/maps/VFM_08_Arena/critical.md",
+      "commons/artifacts/arena_relation_lab/lesson_crab.gd",
+      "commons/artifacts/arena_relation_lab/arena_relation_lab.gd",
+      "commons/artifacts/arena_relation_lab/lesson_food.gd",
+      "commons/hazards/head_crab/head_crab.gd",
+      "commons/artifacts/collision_carts/collision_carts.gd"
+    ],
+    "review_note": "Change the former make obligation to reflect: the current final/tutorial support an encounter and source comparison, not a prerequisite to author a new selector, gait or event framework. Selection uses a strict six-metre candidate range and a supplied visibility test; active feeding and temporary ignoring affect when selection resumes. The five completed meals trigger an authored stop, not learned policy. The carts display a supplied analytic elastic-collision account rather than measuring the crab's collisions. Keep critical interpretation available without presenting friendship, intent or conservation as facts proved by target selection.",
+    "before": "Write a nearest-eligible selector and completed-meal counter alongside the creature encounter.",
+    "after": "Compare the existing selector, event history and authored stopping rule; test one occlusion prediction without building a controller.",
+    "reason": "The encounter can develop a careful reading of agency and retained state. An additional implementation obligation would crowd that work and blur its distinction from the separate collision model."
+  },
+  {
+    "id": "Vectors_Act5_ForceAsPlace",
+    "title": "Declare what receives the field",
+    "mode": "deepen",
+    "storyboard": "Glass cubes show the bounded field before the visitor tries the gap. Reuse the sampled-field question from Flow Field and Forces' retained velocity: what receives this vector, in what units, and what changes? Compose an up-and-forward acceleration through the supplied controls, then read the cube's velocity increment. Set field strength to zero while a cube moves and predict why it does not stop immediately; damping and contacts still matter. Compare the visitor's separately supplied carrying rule without treating the two bodies as interchangeable. Carry a field with declared membership, units and retained state. Form Finding will reuse a direction through a different receiver: descent updates a point from a gradient without retaining velocity. Its trail records past positions, and its step size is not elapsed physical time.",
+    "storyboard_short": "Use cubes before the visitor crossing. Reuse sampled fields and retained velocity; compose acceleration with supplied controls and inspect the cube update. Predict zero field versus immediate stopping, keeping damping and contacts explicit. Compare the visitor's separate receiver. Carry membership, units and state. Prepare the change to Form Finding: its gradient descent stores no velocity, and its step size is not elapsed physical time.",
+    "brings": [
+      "Flow Field's distinction between a sampled vector and its receiver",
+      "retained velocity changed by acceleration over time",
+      "a comparison of explicit models, physical bodies and controller decisions"
+    ],
+    "learns": [
+      "bounded membership determines which receiver gets the field update",
+      "zero acceleration does not assign zero velocity",
+      "a field can feed different updates with different units and retained state"
+    ],
+    "carries": "A declared field receiver: its membership rule, vector units, state update and other influences, ready to compare with gradient descent's position-only update.",
+    "supplied": [
+      "vector_machine's angle and magnitude controls",
+      "force_field_zone's membership detection and cube receiver",
+      "force_cube's damping and collision behaviour; the separate visitor carry provider",
+      "the next hall's existing gradient descent as a source comparison, not an added Forces build"
+    ],
+    "prior_maps": [
+      "Flow_Field",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "VFM_08_Arena"
+    ],
+    "independent_check": "While a cube is still moving inside the field, set its magnitude to zero. Predict no immediate assignment to zero velocity and explain the remaining damping/contact influences; contrast that receiver with FormFinding_Descent, whose next point uses the current gradient and no retained velocity.",
+    "source_refs": [
+      "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+      "commons/artifacts/vector_machine/vector_machine.gd",
+      "commons/artifacts/force_field_zone/force_field_zone.gd",
+      "commons/artifacts/force_field_zone/field_carry_provider.gd",
+      "commons/artifacts/force_cube/force_cube.gd",
+      "commons/maps/FormFinding_Descent/final.md",
+      "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd"
+    ],
+    "review_note": "The cube receiver adds field_vector * delta directly to linear_velocity; field_vector is acceleration, with no division by mass. Inside the zone ordinary gravity is suppressed, but damping and contacts remain; leaving restores saved gravity. The visitor has a separate locomotion/carry contract. Both can retain motion, so zero field does not mean stopped body. The next hall instead evaluates point - rate * gradient(point), with no velocity term or physics-delta factor; its display trail is history, not momentum. Preserve that change of model and do not promise a new receiver or descent implementation in this summary.",
+    "before": "Compose a cube's field acceleration and compare its receiver with the visitor crossing.",
+    "after": "Make membership, units and retained velocity explicit, then mark the next hall's deliberate change to descent without velocity.",
+    "reason": "The closing field should prepare a reusable question about receivers, rather than suggest that Form Finding is another force simulation with the same state."
+  }
+]

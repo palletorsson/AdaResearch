@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpeculativeComputation_Rhizome_Network · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SpeculativeComputation_Rhizome_Network">← Tutorial lineage</a></p><h1>SpeculativeComputation Rhizome Network</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/final.md">Raw captured source</a></p><pre># Another way through
+
+Which connections can a body enter, and which can it only see?
+
+&lt;!-- @rhizome_grower --&gt;
+
+Near the way in, a small grower is already at work. A new point appears and reaches towards points already there. An older point can receive a relation it could not have anticipated. The newcomer cannot reach into its own future.
+
+Hold the growth and compare one link with three. The positions stay. Some of the ways between them disappear. You have changed no point&#x27;s address, yet moving through the network would be a different undertaking.
+
+Here we can inspect the rule more closely. Each arrival chooses nearby earlier points. There is no declared root, but proximity and time still make some points more available than others. Removing a busy point asks a further question: which relations survive without it? The model can restore the point and its former links. Inventing a new connection would be another act.
+
+The ring does not spread with the shoots. The machine keeps finding new places inside a boundary it chose before the network began. Something is growing, but its territory has already been given.
+
+That boundary is easy to see at this scale. Inside the cave ahead, its equivalent will be a wall. We can enjoy what these rules make possible and still want to change where they stop.
+
+&lt;!-- @rhizome_cave_demo --&gt;
+
+From outside, you can follow several passages with your eyes. One rises across another. Openings disappear into the tangle. There seems to be a way through.
+
+Inside, the wall takes away that view. The passage divides. A coloured light gathers at a junction; further on, another opening offers another direction. You can leave a place and find it again without walking back along the way you came.
+
+Try returning to the violet light by a different passage. What did you recognise first: the colour, the opening, the direction from which you expected it? A place can become familiar before you can draw its position in the whole.
+
+We began with a line to walk. Here the line divides and meets another. The return is possible because the connections contain a circuit. A branching tree could offer many directions too, but, if its branches never rejoin, coming back would require retracing part of your route. One added connection can change what a journey is.
+
+Above the lower passages, a longer route climbs and comes down elsewhere. From outside, two paths may seem to intersect. Inside, one passes over the other. You cannot turn at that crossing. Nearness is not yet a relation you can enter.
+
+The distinction has followed us from the drawn line. A crossing on a screen may conceal a difference in depth. The triangle gave a surface to the image; here the surface surrounds you, supports your feet and keeps two journeys apart. The engine must decide where it holds. Your body encounters that decision as a floor, a slope, a wall.
+
+These passages begin as connections between positions. For this encounter, their junctions and heights have been composed so that we can walk several returns, including the upper crossing. The small growing network you passed follows a different rule. It has not secretly designed this cave.
+
+To give a connection room, the cave calculation opens a volume around it. Where two such volumes meet, their interiors join. There must be no leftover wall sealing the junction. A small line of code performs this union:
+
+```gdscript
+air[index] = minf(air[index], passage)
+```
+
+Each sample holds a signed value: negative inside a passage, positive outside it. The smaller value lets either passage admit the sample. The surface extractor finds the boundary afterwards. A line becomes a volume; overlapping volumes can become a shared interior.
+
+But the width matters. Make a passage wider and it may meet a neighbour that its centre line never touched. Make it narrower and the drawn connection can remain while the body loses its way through. We have not escaped geometry by drawing a network. We have acquired another place to work on it.
+
+Deleuze and Guattari give the rhizome multiple entryways and connections between unlike things. Their map is something that can be made and altered in contact with the world.[^1] The invitation exceeds this cave. We can enter its relations and choose among them; we cannot yet make a new opening in its wall. That is a desire the encounter can produce. Where would you put one? Which two places would become neighbours?
+
+There is pleasure in finding another way. There can also be shelter in the turn that takes you out of sight, or company at a junction where separate routes arrive. These possibilities give a connection more than one use. A space can be legible to a drawing and still hold something for the body to discover.
+
+&lt;!-- @ --&gt;
+
+The museum has an onward direction. You have just spent time returning, approaching from another side, making a route that was yours to choose. Carry that desire into the assembly laboratory. There, the available parts will ask what other body they could become.
+
+[^1]: Gilles Deleuze and Félix Guattari, *A Thousand Plateaus*, translated by Brian Massumi (University of Minnesota Press, 1987), “Introduction: Rhizome,” especially pp. 7–15.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/tutorial.md">Raw captured source</a></p><pre># Passages, returns and connections
+
+Start with the cave. Enter its near opening, find a coloured junction and return to it by another passage. Compare a junction you can turn through with the upper route passing above a lower one. Follow the climb to its return. This first comparison requires walking, not an interface.
+
+&lt;!-- @rhizome_cave_demo --&gt;
+
+The cave has an authored graph. Around each link, the field calculation opens a corridor with an interpolated floor. At junctions, the minimum of the signed passage values joins their interiors. Surface extraction supplies the walls and floors; collision determines whether the player can actually take the route. A graph crossing is not necessarily a shared opening, and a wider passage can intersect a neighbour without adding a graph edge.
+
+The current wall cannot be cut by the visitor. Sketching a desired new opening is a further design question. The small model below lets us vary connections while keeping its points fixed; its rule and geometry are independent of the cave.
+
+&lt;!-- @rhizome_grower --&gt;
+
+Watch a new shoot and trace its links. Press GROW to hold the arrivals, then REPLAY to return to the first two points. STEP admits one new point and waits. Compare a crowded region with a sparse one. Predict which nearby points the next shoot could reach, then inspect what appears.
+
+Hold an arrangement and press LINKS. The positions stay while the rule switches between one and three earlier neighbours. Trace a route before and after the switch. Which points remain connected?
+
+The source makes the operation inspectable:
+
+```gdscript
+var targets: Array = _nearest_indices(pos, links_per_node)
+var new_idx: int = _add_node(pos)
+if new_idx &lt; 0:
+    return
+var t: int = 0
+while t &lt; targets.size():
+    _add_edge(new_idx, int(targets[t]))
+    t += 1
+```
+
+The neighbour search runs before the new node is inserted, so the shoot cannot select itself. It can only select nodes already present. Up to three nearest neighbours receive a link. The rule creates a graph without declaring a family tree; it also gives earlier and nearby nodes opportunities that later or distant nodes do not have.
+
+[Implementation](../../../commons/artifacts/rhizome_grower/rhizome_grower.gd). This is an excerpt from the artifact, not a standalone program.
+
+Select a busy node with NODE and predict the consequence of removing it. CUT hides its incident links and leaves a small grey ghost. Trace the surviving paths, then read COMPONENTS: it counts connected groups, including isolated active points. Restore the node with CUT, switch LINKS and repeat at the same point. Neither comparison moves the points or repairs missing relations.
+
+No named root is a construction rule, not a certificate of equal power. Proximity and arrival time still shape access. DEGREE counts links, not authority. REPLAY can recover the same positions and forty-node growth holds for inspection; there is time to reconsider the arrangement.
+
+&lt;!-- @ --&gt;
+
+The assembly laboratory replaces nearest-neighbour growth with a catalogue and an authored target.
+
+## Further experiment
+
+Compare nearby links with a distant connection, or let the graph alter the region in which points can arrive. These are proposals; the current controls compare link count and temporary removal within a fixed region.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/technical.md">Raw captured source</a></p><pre># Another way through — implementation and encounter
+
+The primary encounters are `rhizome_cave_demo` and `rhizome_grower`, in that order. The cave is placed at (15,18) in a 31 by 37 cell hall with `passage_study:true`. The grower stands at (4,2) as a companion model. They use different constructions; the grower is not a live map of this cave.
+
+## Inhabitable passages
+
+The cave controller selects [RhizomePassages.gd](../../../algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd) only for the new opt-in placement. Other cave placements retain the stochastic generator. This study composes fifteen floor-height positions and twenty links: several lower circuits and a longer upper return. Its highest floor is 3.7 metres above the hall floor. Two open ends connect to the museum floor.
+
+For each connection, the code samples a rounded corridor around its centre line and clips its interior above an interpolated floor. The union is `air[index] = minf(air[index], passage)`. The existing marching-cubes extractor converts this signed field to surfaces. Inner and outer surfaces are extracted separately at a 0.45 metre sample spacing and a 0.24 metre wall offset, so walls thinner than one cell are not lost. Trilinear field sampling supplies smoother normals. The same mesh supplies a collision surface with both sides enabled.
+
+The topology is deliberately authored, not claimed as emergent growth. Volumes can intersect even where graph edges do not. In the first construction, a descending upper floor met a lower tunnel&#x27;s air and opened an unintended hole. Keeping the overcrossing high until it clears the lower route preserves a continuous upper floor. This is why a graph alone does not establish a walkable route.
+
+Three coloured lights mark junctions without prescribing directions. The passage study adds no buttons. Its geometry is cached in a resource carrying hashes of the builder and extractor; only the explicit capture path saves the cache. Runtime loads a matching cache or generates the geometry. It never overwrites an asset. Standalone cave camera and environment nodes are omitted from the museum variant.
+
+See the [21 September construction](../../../doc/book/iterations/2026-09-21-rhizome-immersion/SUMMARY.md) for actual museum views and walking evidence. Changing widths, cutting the inhabited walls and live cave growth are not visitor controls.
+
+## Companion grower
+
+Its [scene](../../../commons/artifacts/rhizome_grower/rhizome_grower.tscn) and [implementation](../../../commons/artifacts/rhizome_grower/rhizome_grower.gd) retain the earlier controls below.
+
+## The same positions, another connection rule
+
+The hall configures a full-size interactive placement, `spread=0.85`, `grow_period=0.8` and `sample_seed=47`. The default capacity is forty nodes and the initial rule chooses up to three earlier neighbours. Two initial points have no edge between them. Later points are sampled at radii `spread * 0.4 .. spread`, with height offsets of ±0.06 m. This is a fixed annulus with shallow vertical variation, not an expanding frontier. The display&#x27;s circular frame is a boundary marker, not an edge in the graph.
+
+The random generator prepares a finite sequence of positions. REPLAY retains that sequence and the current link setting, clears the graph to the two initial points and holds. STEP adds one point and holds; GROW toggles timed arrivals. Interactive growth holds at capacity. Other placements retain the passive default: smaller field, whole-graph sway and a fresh random sequence at capacity.
+
+```gdscript
+var targets: Array = _nearest_indices(pos, links_per_node)
+var new_idx: int = _add_node(pos)
+if new_idx &lt; 0:
+    return
+var t: int = 0
+while t &lt; targets.size():
+    _add_edge(new_idx, int(targets[t]))
+    t += 1
+```
+
+The neighbour search runs before the new node is inserted, so the shoot cannot select itself. It can only select nodes already present. Up to three nearest neighbours receive a link. The rule creates a graph without declaring a family tree; it also gives earlier and nearby nodes opportunities that later or distant nodes do not have.
+
+LINKS holds growth and reconstructs edges using either one or three nearest earlier points. Positions and insertion order remain fixed. Each node after the first two contributes one edge in the one-link case: the result is two trees. With three links, the third node joins both seeds; subsequent nodes join the existing connected graph. Neither construction asserts equal degree or social influence.
+
+## Removal and measurement
+
+NODE selects the next birth index, holds growth and highlights its active incident edges. Colour grades from early white to later teal. DEGREE counts undirected active neighbours. COMPONENTS traverses active adjacency and includes isolated active nodes.
+
+CUT toggles the selected node&#x27;s active state. Its stored coordinates and edges remain available for restoration; a small grey ghost marks the missing point. Edges with an inactive endpoint are omitted from drawing and measurement. Remaining nodes do not reconnect around it. Timed growth and STEP stay held while any node is cut, keeping the comparison stable. LINKS can change the underlying edge rule during that hold; returning CUT restores the node under whichever rule is selected.
+
+Rendered edge cylinders use an oriented basis followed by scaling along their local Y axis. The runtime probe checks that both ends meet their node coordinates, including diagonal connections. Reconfiguring the artifact replaces only its own generated children and preserves children attached by the museum.
+
+## Evidence and limits
+
+The [dated review](../../../doc/book/iterations/2026-09-20-rhizome-review/SUMMARY.md) contains runtime measurements, button-signal checks, selected walking segments and rendered states. For the captured 24-point arrangement, one-link node 3 has degree 3: removing it changes two components into four. Under three links, the same node has degree 8; removing it leaves one component. This is a measured comparison, not a promise that any collection of cuts remains connected.
+
+The work has no distant-link control, automatic repair, communication traffic or evolving growth boundary. Such extensions would pose different questions. Selected desktop collision and reach checks do not establish headset comfort, readability or learner understanding, nor do they establish that the cave is traversable.
+
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Rhizome_Network/technical.md) preserves the previous proposed systems.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/intent.md">Raw captured source</a></p><pre>Concept: Deleuze and Guattari&#x27;s rhizome — a structure with no root, no trunk, no privileged path. Any point connects to any other. The cave system grows the way thought should: non-hierarchically.
+Sequence role: Second map in Post-Foundations Crisis; the constructive alternative to hierarchical systems. After the bias map showed how tree-structured classification creates inequality, the rhizome offers a different topology. No center, no margin, no privileged node. Connects to Graph Theory (where these structures become formal) and Swarm Intelligence (where decentralized coordination operates); follows CriticalAlgorithms_Algorithmic_Bias_Visualization; leads to AdvancedLaboratory_Lab_Equipment_Simulation.
+Technical angle: Rhizomatic network topology, non-hierarchical graph structures, the cave as procedurally generated rhizome (four interconnected chambers, multiple paths between any two). Deleuze and Guattari&#x27;s six principles: connection, heterogeneity, multiplicity, asignifying rupture, cartography, decalcomania.
+Critical angle: The rhizome is the anti-tree — the structure that refuses hierarchy, refuses root, refuses the kind of binary classification that produces bias. In QFEP terms, the rhizome operates at high λ (many possible paths, high entropy) but with enough connectivity to maintain coherence. It is the spatial embodiment of φ &gt; 0: structure that welcomes becoming.
+Key artifacts: rhizome_cave_demo generates the non-hierarchical cave system with multiple interconnected chambers and no privileged path.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/critical.md">Raw captured source</a></p><pre># What relations can a body enter?
+
+The inhabited cave lets someone know a place through returns before knowing the whole as a diagram. Coloured light can become a landmark; a branch can shelter or hide; an upper crossing can withhold a turn. These are possibilities to investigate in movement, not properties guaranteed by naming a form rhizomatic.
+
+Deleuze and Guattari&#x27;s introduction to *A Thousand Plateaus* (Massumi translation, 1987, pp. 7–15) connects heterogeneous relations, multiple entryways and a map open to modification. A composed cave offers an encounter with routes and returns. Making new openings would extend the investigation; it is not yet a visitor action. A starting instruction in a program does not by itself refute the possibility of rhizomatic experimentation.
+
+The museum&#x27;s forward spine houses sideways movement and return. The chapter should give these routes time to become attractive and familiar. Criticism can arise from wanting another relation, as well as from detecting an exclusion. The useful code here joins passage interiors; its geometric thickness then decides which connections a body can enter.
+
+The small grower remains a companion with a different construction. Its existing questions follow.
+
+Watch a new shoot and trace its links. Compare a crowded region with a sparse one. Predict which nearby nodes the next shoot could reach, then inspect what actually appears.
+
+No named root is a construction rule, not a certificate of equal power. Proximity and arrival time still shape access. A graph can contain uneven degrees, bottlenecks and dependencies without storing a hierarchy field. The desire for other relations becomes useful when we can ask which relation to change and observe the consequences. Hold the positions, change the number of links, then remove the same node from both arrangements. The body of points has stayed; its dependencies have changed.
+
+The neighbour search runs before the new node is inserted, so the shoot cannot select itself. It can only select nodes already present. Up to three nearest neighbours receive a link. The rule creates a graph without declaring a family tree; it also gives earlier and nearby nodes opportunities that later or distant nodes do not have.
+
+The material comparison is specific: new nodes connect by distance. They have no designated root, but some nodes accumulate more links than others. DEGREE makes that unevenness countable. It does not tell us what authority a node holds, because this graph has no messages, decisions or resources passing through it. We would need to build those relations before treating the display as their evidence.
+
+Its territory poses another limit. New points arrive inside a region fixed before the first connection. Calling the result growth can make that boundary easy to overlook. What would it take for a connection to change where the next point may appear?
+
+CUT leaves a ghost. It is possible to restore what was there, and tempting to call that repair. But the remaining nodes have invented nothing. The distinction matters for the kind of freedom we are looking for: a returned past, a surviving path and a newly made relation are not interchangeable.
+
+The assembly laboratory replaces nearest-neighbour growth with a catalogue and an authored target.
+
+## A question the next version can test
+
+The selectable node, temporary removal and component count now make the first comparison available. A further experiment could compare nearest-only growth with one distant connection per shoot, or let the network change its sampling region. Neither distant links nor automatic repair are current visitor controls.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Rhizome_Network/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/artifacts.md">Raw captured source</a></p><pre># SpeculativeComputation Rhizome Network — Artifacts
+*Post-Crisis: Applied Limits · synthesis · 1 artifacts*
+
+&gt; Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. The rhizome: any point connects to any other. Not a tree. Not a hierarchy. A cave system that grows the way thought should.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## rhizome_cave_demo
+![rhizome_cave_demo](/scene-catalog/rhizome_cave_demo.png)
+
+Rhizomatic cave — Deleuze-inspired branching cave generation using growth patterns + marching cubes.
+
+`rhizome_cave_demo`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/summary.md">Raw captured source</a></p><pre># Another way through
+
+The primary encounter is an inhabitable cave: several lower circuits, two portals and an upper return. Three coloured lights mark places one can approach from different directions. Its composed graph becomes a signed volume, a surface and a colliding floor. The body discovers differences between a drawn connection, a crossing and a passage.
+
+`rhizome_cave_demo` is primary, followed by the retained `rhizome_grower`. The grower compares one and three nearby links, removal and restoration on the same points. It does not generate the walkable cave.
+
+The critical thread draws on Deleuze and Guattari&#x27;s multiple entryways and modifiable map. The chapter begins with seeing and walking; it opens a desire to make another passage. It preserves the earlier question about growth within a territory fixed in advance. Complexity and the absence of a named root do not by themselves establish freedom or equal influence.
+
+The hall is 31 by 37 cells, with an open roof and clear space around the cave. Controls and limitations are documented in technical.md; the book follows the encounter. The next hall asks what bodies the assembly catalogue can become.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SpeculativeComputation_Rhizome_Network/blurb.md">Raw captured source</a></p><pre>You can return without retracing your steps. Enter a branching space, follow a passage above another, and discover which connections admit a body. Where would you make another opening?
+</pre></section></body></html>

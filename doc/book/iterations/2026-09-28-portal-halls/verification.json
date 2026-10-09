@@ -1,0 +1,555 @@
+{
+  "date": "2026-09-28",
+  "scope": "Godot runtime regressions; desktop and synthetic XR rig. No live headset comfort or FPS measurement.",
+  "cases": [
+    {
+      "events": [
+        {
+          "halls": 1,
+          "ms": 10846,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 10875,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 10891,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 10891,
+          "phase": "architecture"
+        },
+        {
+          "ms": 1899,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 12805,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 12805,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 13206,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 13245,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 13246,
+          "phase": "idle"
+        },
+        {
+          "halls": 1,
+          "ms": 13251,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 13269,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 13327,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 13327,
+          "phase": "architecture"
+        },
+        {
+          "ms": 355,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 13701,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 13701,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 13927,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 13981,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 13996,
+          "phase": "idle"
+        }
+      ],
+      "failures": [],
+      "next": "Point_One",
+      "passed": true,
+      "peak_resident_halls": 1,
+      "room": "Point_Zero",
+      "vr_simulated": false
+    },
+    {
+      "events": [
+        {
+          "halls": 1,
+          "ms": 11190,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 11218,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 11260,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 11260,
+          "phase": "architecture"
+        },
+        {
+          "ms": 302,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 11581,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 11581,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 13595,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 13622,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 13623,
+          "phase": "idle"
+        },
+        {
+          "halls": 1,
+          "ms": 13628,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 13658,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 13705,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 13705,
+          "phase": "architecture"
+        },
+        {
+          "ms": 278,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 13997,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 13998,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 14408,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 14416,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 14429,
+          "phase": "idle"
+        }
+      ],
+      "failures": [],
+      "next": "Color_Rainbow",
+      "passed": true,
+      "peak_resident_halls": 1,
+      "room": "Color_Nails",
+      "vr_simulated": true
+    },
+    {
+      "events": [
+        {
+          "halls": 1,
+          "ms": 10535,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 10552,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 10603,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 10603,
+          "phase": "architecture"
+        },
+        {
+          "ms": 438,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 11048,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 11048,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 13308,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 13329,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 13337,
+          "phase": "idle"
+        },
+        {
+          "halls": 1,
+          "ms": 13346,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 13371,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 13422,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 13422,
+          "phase": "architecture"
+        },
+        {
+          "ms": 236,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 13665,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 13666,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 15185,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 15212,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 15220,
+          "phase": "idle"
+        }
+      ],
+      "failures": [],
+      "next": "Trans_Introduction",
+      "passed": true,
+      "peak_resident_halls": 1,
+      "room": "Trans_Pre",
+      "vr_simulated": true
+    },
+    {
+      "events": [
+        {
+          "halls": 1,
+          "ms": 15040,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 15073,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 15172,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 15172,
+          "phase": "architecture"
+        },
+        {
+          "ms": 668,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 15857,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 15857,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 16942,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 16999,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 17283,
+          "phase": "idle"
+        },
+        {
+          "halls": 1,
+          "ms": 17334,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 17391,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 17458,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 17458,
+          "phase": "architecture"
+        },
+        {
+          "ms": 253,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 17727,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 17727,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 18240,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 18289,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 18353,
+          "phase": "idle"
+        }
+      ],
+      "failures": [],
+      "next": "Biome_Ladder_Color",
+      "passed": true,
+      "peak_resident_halls": 1,
+      "room": "Color_Walls",
+      "vr_simulated": false
+    },
+    {
+      "events": [
+        {
+          "halls": 1,
+          "ms": 10471,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 10499,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 10515,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 10515,
+          "phase": "architecture"
+        },
+        {
+          "ms": 131,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 10653,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 10653,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 11596,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 11635,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 11636,
+          "phase": "idle"
+        },
+        {
+          "halls": 1,
+          "ms": 11872,
+          "phase": "entering"
+        },
+        {
+          "halls": 1,
+          "ms": 11894,
+          "phase": "unloading"
+        },
+        {
+          "halls": 0,
+          "ms": 11935,
+          "phase": "empty"
+        },
+        {
+          "halls": 0,
+          "ms": 11935,
+          "phase": "architecture"
+        },
+        {
+          "ms": 257,
+          "phase": "architecture_ms"
+        },
+        {
+          "halls": 1,
+          "ms": 12199,
+          "phase": "resources"
+        },
+        {
+          "halls": 1,
+          "ms": 12199,
+          "phase": "artifacts"
+        },
+        {
+          "halls": 1,
+          "ms": 12945,
+          "phase": "support"
+        },
+        {
+          "halls": 1,
+          "ms": 12975,
+          "phase": "arriving"
+        },
+        {
+          "halls": 1,
+          "ms": 13004,
+          "phase": "idle"
+        }
+      ],
+      "failures": [],
+      "next": "Pattern_Disco",
+      "passed": true,
+      "peak_resident_halls": 1,
+      "room": "Biome_Ladder_Color",
+      "vr_simulated": false
+    }
+  ],
+  "sha256": {
+    "commons/scenes/endless_museum.gd": "2d7e31f03702b5c851306ae9fd4aad8ee7ebb5eb6512fe0f7714a2f57066091f",
+    "commons/scenes/em/em_portal_stream.gd": "855614a23eb04c2f49552511890e9d0dc4a4205781f1a924dcdcabe090999c85",
+    "commons/scenes/em/em_portal_frame.gd": "203dac7318b6ec3a0abf9f27f41aefcd33e15dfb6a9c5bebc49661d30671761e",
+    "commons/scenes/em/em_portal_veil.gdshader": "6d2fccad7871b6109c735f01510709cee5d4315cfa867cf5c9f9b00c3efcc394",
+    "commons/scenes/endless_museum_staged.tscn": "525f77a005a486f133109deb9647db4f26af8b1a156f76de936906172f77d978",
+    "commons/scenes/main_menu/MainMenu3D.gd": "c4bdda37f2bf4c160094157594ee143d0f69b02d5dad0b716f993d86060a0d77",
+    "tools/probes/hall_portal_navigation.gd": "8d2af290ef36a54baf904e6f88b266ab5fc7769616e86014f898a34f2cb98f3c"
+  }
+}

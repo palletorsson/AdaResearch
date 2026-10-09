@@ -1,0 +1,415 @@
+--- before/commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd
++++ commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd
+@@ -2,8 +2,8 @@
+ # The synthesis artifact — form that refuses fixed categories
+ # Soft body + fluid + QFEP responsiveness in a specimen jar
+ #
+-# λ (lambda) = edge of chaos: how close to phase transition
+-# φ (phi) = becoming: embracing vs resisting transformation
++# λ maps to stiffness and a pressure baseline; φ maps to damping and drag.
++# These are authored controls, not measurements of queerness, life or entropy.
+ #
+ # "Queer morphology" — not a fixed thing but a process of becoming
+ 
+@@ -14,12 +14,12 @@
+ # @identity
+ # essence: soft_body(stiffness(lambda), damping(phi)) + fluid_shader(turbulence) -> specimen_in_jar
+ # desire: hold a creature that refuses to be one thing, watch it breathe between crystal and dissolution
+-# critical_parameter: lambda — edge of chaos dial that transitions specimen from crystalline to dissolving
+-# triggers: lambda shifts stiffness/pressure/color; phi shifts damping/drag/subsurface scatter; presets jump to named states
+-# emerges: the breathing motion at edge of chaos where pressure oscillates — the specimen appears alive
++# critical_parameter: lambda — couples stiffness with a pressure baseline that peaks at the midpoint
++# triggers: lambda shifts stiffness/pressure/color; phi shifts damping/drag/subsurface scatter; presets select three sample pairs
++# emerges: stopping the imposed pressure pulse leaves the body's existing motion to settle
+ # needs: VR sliders for lambda and phi [has], preset buttons [has], soft body physics [has]
+ # relationships: synthesizes entire QFEP sequence; depends on lambda_slider, phi_slider; contrasts rigid_sculpture (frozen) vs fluid_form (flowing)
+-# truth: queer morphology is not a fixed form but a process of becoming — the specimen is the theory made flesh
++# truth: the specimen opens a question about possible bodies; its mechanics cannot certify life or queerness
+ 
+ ## Jar dimensions
+ @export var jar_height: float = 0.4
+@@ -85,17 +85,13 @@
+ ## volume to carry to a camera outside the jar. 1.0 — no change — everywhere else.
+ const CLOUD_EMISSION_GAIN: float = 3.0
+ 
+-## The museum plate. 0.30 m wide gives a 0.336 x 0.222 m board once TextScreen
+-## adds its 0.018 m bezel; centred at 0.63 it spans y 0.519–0.741, entirely above
+-## the 0.43 m lid, so a front-on camera sees plate, then air, then specimen.
+-const PLATE_WIDTH: float = 0.30
+-const PLATE_Y: float = 0.63
+-
+-const TextScreenScript := preload("res://commons/ui/text_screen.gd")
++## Live mechanical readout, above the lid and clear of the specimen.
++const PLATE_WIDTH: float = 0.82
++const PLATE_Y: float = 0.80
+ 
+ ## QFEP Parameters
+ @export_group("QFEP")
+-@export_range(0.0, 1.0) var lambda: float = 0.5:  # Edge of chaos
++@export_range(0.0, 1.0) var lambda: float = 0.5:  # Midpoint of the authored range
+ 	set(value):
+ 		lambda = clampf(value, 0.0, 1.0)
+ 		_apply_lambda()
+@@ -127,14 +123,18 @@
+ var _specimen_material: StandardMaterial3D
+ var _info_label: Label3D
+ var _state_label: Label3D
+-# Untyped on purpose: TextScreen's own properties (mode/width_m/set_text) are not
+-# on Node3D, and a statically-typed reference would refuse to compile against them.
+-var _text_screen = null
++var _text_screen: Node3D
++var _live_title: Label
++var _live_values: Label
+ 
+ # VR Controls
+ var _lambda_slider: Node
+ var _phi_slider: Node
+ var _control_panel: Node3D
++var _pressure_baseline: float = 1.5
++var _breathing_time: float = 0.0
++var _readout_elapsed: float = 0.0
++var breathing_enabled: bool = true
+ 
+ # Lifecycle. `_created` is every node THIS script added as a direct child — the
+ # rebuild frees only these, because the grid adds framing, plates and grounding
+@@ -147,21 +147,6 @@
+ # a single body — so `jarred`, `cracked` and `escaped` keep the exact energies
+ # they shipped with. Only `clouded` raises it, in _create_suspension.
+ var _emission_gain: float = 1.0
+-
+-# State descriptions for different parameter regions
+-## Specimen-label copy, authored to the plate's measure: PLATE_WIDTH 0.30 m
+-## holds 3 lines of ~15 characters. The earlier wording ran to 18-19 characters
+-## on its middle and last lines, so each reflowed into two and the plate showed
+-## four lines' worth of a three-line panel — the state name survived and the
+-## description was cut. Terse is the register here anyway.
+-const STATES = {
+-	"crystalline": "CRYSTALLINE\nRigid structure\nResists change",
+-	"stable": "STABLE\nOrdered balance\nHolding form",
+-	"edge": "EDGE OF CHAOS\nMax complexity\nLife emerges",
+-	"fluid": "FLUID\nDissipative\nAlways becoming",
+-	"dissolving": "DISSOLVING\nEntropy wins\nForm releasing"
+-}
+-
+ 
+ const FLUID_SHADER = """
+ shader_type spatial;
+@@ -285,7 +270,8 @@
+ 		glass_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+ 		glass_mat.metallic = 0.1
+ 		glass_mat.roughness = 0.05
+-		glass_mat.refraction_enabled = true
++		# Keep the body readable through nested glass/fluid on the mobile renderer.
++		glass_mat.refraction_enabled = false
+ 		glass_mat.refraction_scale = 0.02
+ 		_jar_mesh.material_override = glass_mat
+ 
+@@ -418,7 +404,7 @@
+ 	_soft_body.collision_mask = 1
+ 	
+ 	# Material
+-	_specimen_material = _make_specimen_material()
++	_specimen_material = _make_specimen_material(true)
+ 
+ 	_soft_body.material_override = _specimen_material
+ 
+@@ -441,15 +427,9 @@
+ ## The violet the specimen is made of. Shared by the single body and by the
+ ## `clouded` suspension, so λ's hue shift and φ's scatter still drive both.
+ ##
+-## `solid` is for the suspension only. A body suspended in the fluid can afford
+-## to be alpha-blended — there is one of it, and its silhouette is the picture.
+-## A cloud cannot: transparent grains inside the transparent fluid inside the
+-## transparent glass are sorted per-object (every AABB centre sits at the same
+-## point, y≈0.2) and blend down to the same violet-green wash the single body
+-## makes. Opaque grains draw in the opaque pass instead, before anything
+-## transparent, and depth-reject the fluid's rear face — so the occupation is
+-## covered by one fluid layer and one glass layer rather than by four.
+-## Default `false` keeps every single-body value on the exact shipped material.
++## Both the deformable specimen and fixed grains are opaque, so nested glass
++## and fluid layers cannot sort the body out of view. The transparent option
++## remains available to callers; current forms use the solid branch.
+ func _make_specimen_material(solid: bool = false) -> StandardMaterial3D:
+ 	var m := StandardMaterial3D.new()
+ 	m.albedo_color = specimen_color
+@@ -513,10 +493,8 @@
+ 	_add_tracked(_cloud)
+ 
+ func _create_jar_collision():
+-	# Cylinder collision to contain soft body
+-	var area = Area3D.new()
+-	area.name = "JarBoundary"
+-	
++	# The former jar had only a bottom. Match the visible container with a
++	# polygonal shell; cracked is open, escaped keeps only its base.
+ 	# Bottom
+ 	var bottom = StaticBody3D.new()
+ 	var bottom_shape = CollisionShape3D.new()
+@@ -526,34 +504,77 @@
+ 	bottom.add_child(bottom_shape)
+ 	bottom.position = Vector3(0, 0.01, 0)
+ 	_add_tracked(bottom)
+-
+-## TEXT — two bare Label3Ds promoted onto one museum plate.
+-##
+-## WAS: InfoLabel hanging at (0, 0.52, 0), a live λ/φ readout floating in air
+-## over the lid with nothing behind it; and StateLabel at (0, -0.15, 0.23) —
+-## 0.15 m BELOW the ground plane and 0.045 m under the bottom of the pedestal,
+-## occluded by the floor in every placement it has ever stood in. Both sat at
+-## Godot's billboard default (DISABLED), so LabelFramer skipped both: neither was
+-## ever given a body, and the state description has never been read by anybody.
+-## Neither would have covered geometry if it HAD been framed — the fix here is
+-## legibility and burial, not occlusion.
+-##
+-## NOW: one TextScreen (SCREEN mode, PLATE_WIDTH wide → a 0.336 x 0.222 m board
+-## spanning y 0.519–0.741) standing clear above the lid at (0, PLATE_Y, -0.01),
+-## facing +Z toward the approach side and the control rack at (0, 0.05, 0.35).
+-## The board is entirely above the 0.43 m lid, so it never enters the viewing
+-## corridor between a front-on camera and the specimen.
+-##
+-## Both Label3D nodes SURVIVE, reparented under the plate — _update_state_label
+-## still writes to them, any external reader still reads them, and the framer
+-## still skips them.
++	if becoming == "escaped": return
++	var shell := StaticBody3D.new()
++	shell.name = "JarBoundary"
++	var wall_height: float = jar_height-CRACK_RIM_CUT if becoming=="cracked" else jar_height
++	for i in range(16):
++		var angle: float = TAU*float(i)/16.0
++		var wall := CollisionShape3D.new()
++		var shape := BoxShape3D.new()
++		shape.size = Vector3(.012, wall_height, 2.0*jar_radius*tan(PI/16.0)+.006)
++		wall.shape = shape
++		wall.position = Vector3(cos(angle)*jar_radius,wall_height*.5,sin(angle)*jar_radius)
++		wall.rotation.y = -angle
++		shell.add_child(wall)
++	if becoming != "cracked":
++		var lid := CollisionShape3D.new()
++		var shape := BoxShape3D.new()
++		shape.size=Vector3(jar_radius*2,.02,jar_radius*2)
++		lid.shape=shape
++		lid.position.y=jar_height
++		shell.add_child(lid)
++	_add_tracked(shell)
++
++## A framed live readout. Retired Label3Ds remain available to source readers;
++## the visible values come from the same strings in a 2D viewport in the plate.
+ func _create_labels():
+-	_text_screen = TextScreenScript.new()
++	# A live viewport avoids rebuilding baked-text meshes on every pressure tick.
++	_text_screen = Node3D.new()
+ 	_text_screen.name = "SpecimenPlate"
+-	_text_screen.mode = 0                    # TextScreen.Mode.SCREEN
+-	_text_screen.width_m = PLATE_WIDTH
+ 	_text_screen.position = Vector3(0, PLATE_Y, -0.01)
+ 	_add_tracked(_text_screen)
++	var viewport := SubViewport.new()
++	viewport.size = Vector2i(960, 594)
++	viewport.disable_3d = true
++	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
++	_text_screen.add_child(viewport)
++	var background := ColorRect.new()
++	background.size = Vector2(960, 594)
++	background.color = Color(.06, .08, .1)
++	viewport.add_child(background)
++	_live_title = Label.new()
++	_live_title.position = Vector2(24, 26)
++	_live_title.size = Vector2(912, 125)
++	_live_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
++	_live_title.add_theme_font_size_override("font_size", 38)
++	_live_title.add_theme_color_override("font_color", Color(.65,.85,1))
++	viewport.add_child(_live_title)
++	_live_values = Label.new()
++	_live_values.position = Vector2(24, 174)
++	_live_values.size = Vector2(912, 360)
++	_live_values.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
++	_live_values.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
++	_live_values.add_theme_font_size_override("font_size", 36)
++	viewport.add_child(_live_values)
++	var frame := MeshInstance3D.new()
++	var box := BoxMesh.new()
++	box.size = Vector3(PLATE_WIDTH+.036, PLATE_WIDTH*.62+.036, .02)
++	frame.mesh = box
++	var frame_mat := StandardMaterial3D.new()
++	frame_mat.albedo_color = Color(.13,.16,.19)
++	frame.material_override = frame_mat
++	_text_screen.add_child(frame)
++	var screen := MeshInstance3D.new()
++	var quad := QuadMesh.new()
++	quad.size = Vector2(PLATE_WIDTH, PLATE_WIDTH*.62)
++	screen.mesh = quad
++	screen.position.z = .012
++	var material := StandardMaterial3D.new()
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.albedo_texture = viewport.get_texture()
++	screen.material_override = material
++	_text_screen.add_child(screen)
+ 
+ 	# Title
+ 	_info_label = Label3D.new()
+@@ -590,12 +611,13 @@
+ 			{"type": "slider_h", "label": "PHI", "default": (phi + 1.0) / 2.0},
+ 		],
+ 		[
+-			{"type": "button", "label": "CRYST"},
+-			{"type": "button", "label": "EDGE"},
+-			{"type": "button", "label": "FLUID"},
++			{"type": "button", "label": "PAIR A"},
++			{"type": "button", "label": "PAIR B"},
++			{"type": "button", "label": "PAIR C"},
+ 		],
++		[{"type": "button", "label": "PULSE / STEADY"}],
+ 	])
+-	_control_panel.position = Vector3(0, 0.05, jar_radius + 0.2)
++	_control_panel.position = Vector3(0.55, 0.05, jar_radius + 0.2)
+ 	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+ 	_add_tracked(_control_panel)
+ 
+@@ -605,6 +627,7 @@
+ 
+ 	_phi_slider = _control_panel.find_child("Param_1", true, false)
+ 	if _phi_slider and _phi_slider.has_signal("slider_moved"):
++		_phi_slider.set_range(-1.0, 1.0)
+ 		_phi_slider.slider_moved.connect(_on_phi_slider_moved)
+ 
+ 	var preset_data := [[0.1, -0.8], [0.5, 0.0], [0.8, 0.6]]
+@@ -616,6 +639,8 @@
+ 			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+ 			if area:
+ 				area.button_pressed.connect(func(_b): _apply_preset(l, p))
++	var breath_button: Node = _control_panel.find_child("Btn_3", true, false)
++	breath_button.get_node("InteractableAreaButton").button_pressed.connect(func(_b): toggle_breathing())
+ 
+ 	call_deferred("_sync_sliders_deferred")
+ 
+@@ -649,15 +674,13 @@
+ 	# `clouded` there is no soft body, but the suspension still carries the
+ 	# specimen material and the plate still has to update.
+ 	if _soft_body:
+-		# Low lambda: rigid, crystalline structure
+-		# High lambda: fluid, chaotic, near phase transition
+-
+-		# Stiffness: high when ordered, low when chaotic
++		# Lower lambda gives greater stiffness in this authored mapping.
+ 		_soft_body.linear_stiffness = lerpf(0.9, 0.1, lambda)
+ 
+-		# Pressure: increases at edge, specimen "breathes"
+-		var edge_boost = 1.0 - abs(lambda - 0.5) * 2.0  # Peaks at 0.5
+-		_soft_body.pressure_coefficient = base_pressure * (1.0 + edge_boost * 0.5)
++		# The midpoint peak is an authored mapping, retained during breathing.
++		var midpoint_weight: float = 1.0 - abs(lambda - 0.5) * 2.0
++		_pressure_baseline = base_pressure * (1.0 + midpoint_weight * 0.5)
++		_update_pressure()
+ 
+ 	# Update fluid shader
+ 	if _fluid_material:
+@@ -680,13 +703,10 @@
+ 
+ func _apply_phi():
+ 	if _soft_body:
+-		# Negative phi: resists change, high damping
+-		# Positive phi: embraces transformation, low damping
+-
+-		# Damping: high when resisting, low when flowing
++		# Signed phi maps to damping; its sign is not a moral evaluation.
+ 		_soft_body.damping_coefficient = lerpf(0.2, 0.001, (phi + 1.0) / 2.0)
+ 
+-		# Drag: resisting = more drag
++		# Drag decreases as phi increases.
+ 		_soft_body.drag_coefficient = lerpf(0.3, 0.0, (phi + 1.0) / 2.0)
+ 
+ 	# Update fluid shader
+@@ -704,21 +724,10 @@
+ 	_update_state_label()
+ 
+ func _update_state_label():
+-	var state: String
+-
+-	if lambda < 0.2:
+-		state = "crystalline" if phi < 0 else "stable"
+-	elif lambda < 0.4:
+-		state = "stable"
+-	elif lambda < 0.6:
+-		state = "edge"
+-	elif lambda < 0.8:
+-		state = "fluid"
+-	else:
+-		state = "dissolving" if phi > 0 else "fluid"
+-	
+-	var body: String = STATES.get(state, "")
+-	var head: String = "QUEER MORPHOLOGY  λ=%.2f φ=%+.2f" % [lambda, phi]
++	var body: String = "160 fixed grains\nNo deformable body"
++	if is_instance_valid(_soft_body):
++		var mode: String = "PULSE" if breathing_enabled and lambda > 0.3 and lambda < 0.7 else "STEADY"
++		body = "stiffness %.3f | damping %.3f\ndrag %.3f | pressure base %.3f\npressure now %.3f | %s" % [_soft_body.linear_stiffness, _soft_body.damping_coefficient, _soft_body.drag_coefficient, _pressure_baseline, _soft_body.pressure_coefficient, mode]
+ 
+ 	# The retired labels stay the text SOURCE — same assignments as before, so
+ 	# anything reading .text off this artifact keeps working.
+@@ -729,20 +738,30 @@
+ 		_info_label.text = "QUEER MORPHOLOGY\nλ=%.2f φ=%+.2f" % [lambda, phi]
+ 
+ 	# ...and both land on the one plate that is actually readable.
+-	if is_instance_valid(_text_screen) and _text_screen.has_method("set_text"):
+-		_text_screen.set_text(head, body)
+-
+-func _process(_delta):
+-	# Gentle oscillation to keep specimen alive
+-	if _soft_body and is_inside_tree():
+-		# Breathing motion influenced by lambda
+-		var breathe_speed = lerpf(0.5, 2.0, lambda)
+-		var breathe_amp = lerpf(0.02, 0.1, lambda)
+-		var breathe = sin(Time.get_ticks_msec() * 0.001 * breathe_speed) * breathe_amp
+-		
+-		# Apply subtle force (only when at edge of chaos)
+-		if lambda > 0.3 and lambda < 0.7:
+-			_soft_body.pressure_coefficient = base_pressure * (1.0 + breathe)
++	if is_instance_valid(_live_title):
++		_live_title.text = "QUEER MORPHOLOGY\nλ=%.2f  φ=%+.2f" % [lambda, phi]
++		_live_values.text = body
++
++func _update_pressure() -> void:
++	if not is_instance_valid(_soft_body): return
++	var modulation := 1.0
++	if breathing_enabled and lambda > 0.3 and lambda < 0.7:
++		modulation += sin(_breathing_time * lerpf(0.5, 2.0, lambda)) * lerpf(0.02, 0.1, lambda)
++	_soft_body.pressure_coefficient = _pressure_baseline * modulation
++
++func toggle_breathing() -> void:
++	breathing_enabled = not breathing_enabled
++	_breathing_time = 0.0
++	_update_pressure()
++	_update_state_label()
++
++func _physics_process(delta: float) -> void:
++	_breathing_time += delta
++	_update_pressure()
++	_readout_elapsed += delta
++	if _readout_elapsed >= 0.1:
++		_readout_elapsed = 0.0
++		_update_state_label()
+ 
+ func _input(event):
+ 	if event is InputEventKey and event.pressed:
+@@ -756,11 +775,11 @@
+ 			KEY_UP:
+ 				phi = minf(1, phi + 0.1)
+ 			KEY_1:
+-				_apply_preset(0.1, -0.8)  # Crystalline
++				_apply_preset(0.1, -0.8)  # Pair A
+ 			KEY_2:
+-				_apply_preset(0.5, 0.0)   # Edge
++				_apply_preset(0.5, 0.0)   # Pair B
+ 			KEY_3:
+-				_apply_preset(0.8, 0.6)   # Fluid
++				_apply_preset(0.8, 0.6)   # Pair C
+ 
+ ## External API
+ func set_lambda(value: float):
+@@ -769,6 +788,7 @@
+ func set_phi(value: float):
+ 	phi = value
+ 
++# Compatibility labels for callers of the older API, not the live plate.
+ func get_state() -> String:
+ 	if lambda < 0.3:
+ 		return "ordered"

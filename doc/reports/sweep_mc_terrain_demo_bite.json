@@ -1,0 +1,1928 @@
+{
+ "sweep": "mc_terrain_demo",
+ "peak_changed_pct": 14.121,
+ "subject_pct": 66.427,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "changed_px": 25427,
+   "changed_pct": 4.402
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "changed_px": 31595,
+   "changed_pct": 5.47
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "changed_px": 48475,
+   "changed_pct": 8.392
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "changed_px": 36945,
+   "changed_pct": 6.396
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "changed_px": 43861,
+   "changed_pct": 7.594
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 29101,
+   "changed_pct": 5.038
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 29061,
+   "changed_pct": 5.031
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 27298,
+   "changed_pct": 4.726
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 22292,
+   "changed_pct": 3.859
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 52142,
+   "changed_pct": 9.027
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 72857,
+   "changed_pct": 12.614
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 33677,
+   "changed_pct": 5.831
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 33020,
+   "changed_pct": 5.717
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 46790,
+   "changed_pct": 8.101
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 60494,
+   "changed_pct": 10.473
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "changed_px": 44187,
+   "changed_pct": 7.65
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "changed_px": 56299,
+   "changed_pct": 9.747
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "changed_px": 19888,
+   "changed_pct": 3.443
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "changed_px": 24457,
+   "changed_pct": 4.234
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 26531,
+   "changed_pct": 4.593
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 32504,
+   "changed_pct": 5.627
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 42704,
+   "changed_pct": 7.393
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 28386,
+   "changed_pct": 4.914
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 61494,
+   "changed_pct": 10.646
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 78910,
+   "changed_pct": 13.662
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 31106,
+   "changed_pct": 5.385
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 19905,
+   "changed_pct": 3.446
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 48144,
+   "changed_pct": 8.335
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 63716,
+   "changed_pct": 11.031
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "changed_px": 34146,
+   "changed_pct": 5.912
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "changed_px": 54372,
+   "changed_pct": 9.413
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "changed_px": 56343,
+   "changed_pct": 9.755
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 47604,
+   "changed_pct": 8.242
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 36533,
+   "changed_pct": 6.325
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 32282,
+   "changed_pct": 5.589
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 38279,
+   "changed_pct": 6.627
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 40409,
+   "changed_pct": 6.996
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 64151,
+   "changed_pct": 11.106
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 40275,
+   "changed_pct": 6.973
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 45302,
+   "changed_pct": 7.843
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 46820,
+   "changed_pct": 8.106
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 59930,
+   "changed_pct": 10.376
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "changed_px": 62018,
+   "changed_pct": 10.737
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "changed_px": 63732,
+   "changed_pct": 11.034
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 58146,
+   "changed_pct": 10.067
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 50389,
+   "changed_pct": 8.724
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 45081,
+   "changed_pct": 7.805
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 51499,
+   "changed_pct": 8.916
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 39854,
+   "changed_pct": 6.9
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 53087,
+   "changed_pct": 9.191
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 51298,
+   "changed_pct": 8.881
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 56675,
+   "changed_pct": 9.812
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 49977,
+   "changed_pct": 8.653
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "all",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 60111,
+   "changed_pct": 10.407
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "changed_px": 11015,
+   "changed_pct": 1.907
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 16080,
+   "changed_pct": 2.784
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 29447,
+   "changed_pct": 5.098
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 53359,
+   "changed_pct": 9.238
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 43127,
+   "changed_pct": 7.467
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 69460,
+   "changed_pct": 12.026
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 80858,
+   "changed_pct": 13.999
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 38924,
+   "changed_pct": 6.739
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 28036,
+   "changed_pct": 4.854
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 54333,
+   "changed_pct": 9.407
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 66938,
+   "changed_pct": 11.589
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "changed_px": 22814,
+   "changed_pct": 3.95
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 33885,
+   "changed_pct": 5.867
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 59448,
+   "changed_pct": 10.292
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 48948,
+   "changed_pct": 8.474
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 71526,
+   "changed_pct": 12.383
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 81561,
+   "changed_pct": 14.121
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 39205,
+   "changed_pct": 6.788
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 25482,
+   "changed_pct": 4.412
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 55702,
+   "changed_pct": 9.644
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 68839,
+   "changed_pct": 11.918
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "changed_px": 18625,
+   "changed_pct": 3.225
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 47773,
+   "changed_pct": 8.271
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 42222,
+   "changed_pct": 7.31
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 63246,
+   "changed_pct": 10.95
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 77731,
+   "changed_pct": 13.458
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 41543,
+   "changed_pct": 7.192
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 33767,
+   "changed_pct": 5.846
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 54622,
+   "changed_pct": 9.457
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 65992,
+   "changed_pct": 11.425
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "changed_px": 42009,
+   "changed_pct": 7.273
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 42910,
+   "changed_pct": 7.429
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 56855,
+   "changed_pct": 9.843
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 71408,
+   "changed_pct": 12.363
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 43461,
+   "changed_pct": 7.524
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 38688,
+   "changed_pct": 6.698
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 53818,
+   "changed_pct": 9.318
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "bedrock",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 63992,
+   "changed_pct": 11.079
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "changed_px": 23429,
+   "changed_pct": 4.056
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 37030,
+   "changed_pct": 6.411
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 64239,
+   "changed_pct": 11.122
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 44241,
+   "changed_pct": 7.659
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 50100,
+   "changed_pct": 8.674
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 49978,
+   "changed_pct": 8.653
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 61968,
+   "changed_pct": 10.729
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "changed_px": 49233,
+   "changed_pct": 8.524
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 72879,
+   "changed_pct": 12.618
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 40506,
+   "changed_pct": 7.013
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 40472,
+   "changed_pct": 7.007
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 50106,
+   "changed_pct": 8.675
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 63324,
+   "changed_pct": 10.963
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "changed_px": 38289,
+   "changed_pct": 6.629
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 58515,
+   "changed_pct": 10.131
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 63908,
+   "changed_pct": 11.064
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 54610,
+   "changed_pct": 9.455
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 62033,
+   "changed_pct": 10.74
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "changed_px": 75715,
+   "changed_pct": 13.109
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 78918,
+   "changed_pct": 13.663
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 69192,
+   "changed_pct": 11.979
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "cells",
+    "swell": "range"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 68885,
+   "changed_pct": 11.926
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "changed_px": 27626,
+   "changed_pct": 4.783
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 40814,
+   "changed_pct": 7.066
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "rolling"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 59128,
+   "changed_pct": 10.237
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "changed_px": 49579,
+   "changed_pct": 8.584
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "subdued"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 65419,
+   "changed_pct": 11.326
+  },
+  {
+   "a": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "hills"
+   },
+   "b": {
+    "terrain_seed": 7,
+    "build_synchronously": true,
+    "strata": "fine",
+    "swell": "range"
+   },
+   "changed_px": 39583,
+   "changed_pct": 6.853
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+--- before/commons/maps/Trans_Pre/final.md
++++ commons/maps/Trans_Pre/final.md
+@@ -37,7 +37,7 @@
+ 
+ The same `lerp` now chooses a size factor between 0.7 and 1.3. `_apply_pulse` multiplies the saved size by that factor. Below one, the cube becomes smaller; above one, larger. All three dimensions change together, so it keeps its cube shape.
+ 
+-The small markers beside the examples help you recognise each operation. Look back along the four stations. The still cube has gone if you collected it; the three moving examples remain. Recall the sequence: still; up and down; add turning; add growing and shrinking. Can you spot all three movements in the last one?
++Beside each moving example, a smaller marker isolates the operation just added: one moves up and down, one turns in place, one grows and shrinks. Look back along the four stations. The still cube has gone if you collected it; the three moving examples remain. Recall the sequence: still; up and down; add turning; add growing and shrinking. Can you spot all three movements in the last one?
+ 
+ Ahead, wedges lead onto a platform with four collectible cubes. Here the finished animation belongs to a small level made from forms we already know.
+ 

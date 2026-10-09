@@ -1,0 +1,29 @@
+{
+  "room": "Wavefunctions_Sky_Stairs",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/Wavefunctions_Sky_Stairs/map_data.json": "1b5bc07cabc2123ad2570b873ec1cb22b9096631dab816eee4bfde09cbc1e05b",
+    "tools/probes/wavefunctions_stairs_museum.gd": "a072df5d18db90bdd3dc8f74885324abf85c341c4421c64637ec97a39d6c0148",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "654a36aa939ccbfb52a5d12e86792087fbf6266f6a883abd409708aa709442f3",
+    "ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/control.json": "cc090f5de94adeb13ba7a1b206c1019aa940b8511037a9d97a3ac30cd94d9fc3",
+    "ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Wavefunctions_Sky_Stairs/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn": "bcef12ae91474933022e8c402354c5038f5dfb89a6d952b9999e027ebb23c02a",
+    "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd": "d60ed92bd1e96dce92935e3e341cdfc10bbcef2105a93b63ab89ce418c9b99fa"
+  }
+}

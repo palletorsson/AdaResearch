@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pattern workshop — Ada Research</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0}</style><main><h1>A workshop of related instruments</h1>
+<p><strong>Current state — 10 September:</strong> the closing <a href="ribbon-patterns-03.html">source-to-skirt studio</a> now connects source editing and shader controls to a saved fabric, the player mirror and four walking performers. All seven Patterns rooms have a focused book passage. <a href="change-intro.html">Change_Intro now has a two-sample comparison</a>. Next: Accumulation_Riemann; headset and continuous gestures remain deferred. The entries below record the workshop's development.</p>
+<p>The question stays: <strong>what bodies are possible with these operations?</strong> The editors already offer different ways of answering. Carry their editable structures into VR, not just the resulting images.</p>
+<h2>First workstation: Pattern Studio</h2>
+<p><img alt="Pattern Studio in the museum" src="pattern-studio-console.png" /></p>
+<p>The existing <code>pattern_studio_plate</code> now has a 1.32 m face, a 42 cm editable source, a tiled shader preview, separated paint swatches and explicit previous/next selectors. Row zero is at the top, matching the web editor. A loaded motif keeps its native 2, 4, 6 or 8 cell resolution; the Greek Key no longer loses half its cells. All seventeen group labels now address the corresponding engine rule. MIRROR reflects the whole source; two presses return it. Four ROTATE presses also return it.</p>
+<p>Paint a cell near an edge, then change GROUP while keeping the source. Follow the copies in the preview and the carpet. Return with UNDO. The source and the rule are distinct decisions even when one image makes them hard to tell apart.</p>
+<p><strong>WEB NEXT</strong> reads saved JSON patterns in <code>res://commons/patterns</code>, the directory written by the web studio's save action. It keeps supported tile-shape, grout, distortion and weathering values and sends them through the existing Godot wallpaper shader. Shader finish is rendered here; its dedicated VR editing controls remain to be added. Zone is retained as metadata, not presented as an implemented spatial operation.</p>
+<p><strong>SAVE / RESTORE</strong> use a separate local file, <code>user://pattern_recipes/studio.json</code>. They preserve the source and its finish without overwriting a web-authored file. This is currently a web-to-VR load path, not automatic bidirectional synchronisation. UNDO retains up to 32 earlier source states. Unsupported sizes above 8 or palettes above 9 colours are rejected explicitly rather than reduced silently. Library loading on a packaged headset uses files bundled with that build; it does not watch the desktop web server.</p>
+<p><img alt="The workstation and its carpet" src="pattern-studio-room.png" /></p>
+<p>The station now stands at grid (30,11), inside an eight-metre curved room in the northern extension of the runway annex. A three-metre doorway connects the bays. The earlier teaching grid and runway remain intact; the new floor occupies previously unused cells and automatic sculptures are excluded from the room. The station remains a secondary workshop artifact. The book's three primary artifacts are unchanged.</p>
+<h2>The studio can now select its receiving surfaces</h2>
+<p>The smaller console beside the studio selects WALL, NORTH, EAST, FLAT, CURVE, ARCHITECTURE (three walls), or ALL FIVE. Selecting a target changes nothing until you act.</p>
+<ul>
+<li><strong>APPLY LIVE</strong> makes the selection follow the studio. Subsequent studio edits update only its live receivers.</li>
+<li><strong>HOLD</strong> keeps the current material and domain image.</li>
+<li><strong>LOOM</strong> explicitly returns the selection to the current loom recipe.</li>
+<li><strong>UNDO LINK</strong> reverses the latest receiver transaction from either console, restoring both ownership and live/held state. A restored live source catches up; a restored held image stays exact.</li>
+</ul>
+<p>The labels identify LOOM, STUDIO or mixed ownership. A studio-owned wall cannot be overwritten by edits to the loom. The adapters retain the two recipe types rather than converting one into the other. The studio's shader uses a 1.2 m reference square on room receivers, keeping the same physical repeat size across different wall widths and the bent specimen. Meshes and collision remain unchanged. If a studio leaves, its receivers hold their last image.</p>
+<p>This bridge is confined to the studio's own authored hall. It does not apply to avatars, adjacent halls or every wall in the museum. SAVE/RESTORE still saves the source package, not these temporary receiver links. The studio's own preview and carpet still use their established normalized UV mapping.</p>
+<h2>Enter the pattern</h2>
+<p><img alt="Inside the curved pattern room" src="curved-room-inside.png" /></p>
+<p>The studio is now inside the space it can dress: an eight-metre room with a 300-degree curved wall, 3.2 metres high, a wide entrance and an opening in the roof. The source remains small enough to edit; its consequences surround your body. Start at the console, then step back and walk towards the wall.</p>
+<p><strong>ROOM WALL</strong>, <strong>ROOM FLOOR</strong> and <strong>ROOM</strong> join the selector. Apply to both, or hold the floor while the wall follows your edits. The existing ALL FIVE and ARCHITECTURE selections retain their original meanings. The room begins linked to the studio with a readable 60 cm card repeat. A loaded web recipe can choose another repeat count.</p>
+<p>The wall maps the motif using distance along its curve. The floor uses a flat x/z grid. Equal repeat size does not guarantee that their marks meet at the seam. Pattern changes leave the curved wall, its collision and the entrance unchanged. The room's shape carries the body; its surface can change how that place is perceived.</p>
+<p><img alt="Entrance to the curved room" src="curved-room-entrance.png" /></p>
+<p>The captures use the Guilloche motif with the Renaissance palette. They are actual desktop Godot views. The wall has an outer plaster backing. The shell and roof do not cast shadows, avoiding the coarse sun-shadow edge across the print. The roof opening frames the sky; a fixed local light supports comparison under the museum lighting. Headset comfort and rendering performance still need a walkthrough.</p>
+<h2>What each web instrument contributes</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Editable structure</th>
+<th>VR continuation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://localhost:3003/pattern-studio">Pattern Studio</a> and <a href="http://localhost:3003/pattern-maker">Pattern Maker</a></td>
+<td>A colour-indexed domain, palette, symmetry rule and material settings</td>
+<td>One shared source editor, tiled preview and explicit receiver selection. This turn improves the physical studio; the other station and Panel Bridge still exist and need a deliberate consolidation pass.</td>
+</tr>
+<tr>
+<td><a href="http://localhost:3003/loom">Loom</a></td>
+<td>Threading, tie-up and treadling matrices compute a drawdown</td>
+<td>Improve the existing Panel Bridge loom so a selected crossing can be traced back through the matrices. The wallpaper loom and spring-based cloth are different systems; neither is automatically this weaving computation.</td>
+</tr>
+<tr>
+<td><a href="http://localhost:3003/meander-editor">Meander Editor</a></td>
+<td>Separate straight and corner tiles, bands and field parameters</td>
+<td>Edit an edge, then walk to its corner and inspect the join. Existing border motifs provide geometry/rendering sources; a dedicated VR editing adapter still needs to be built.</td>
+</tr>
+<tr>
+<td><a href="http://localhost:3003/mosaic-editor">Mosaic Editor</a></td>
+<td>A central field, ordered border/separator rings and a threshold</td>
+<td>Select one spatial region and change its rule. Reuse pattern packages and the existing composite loader. Ring order and widths belong to the composition, not to a single motif.</td>
+</tr>
+<tr>
+<td><a href="http://localhost:3003/facade-builder">Facade Builder</a></td>
+<td>Parts placed in bays, stories and zones; symmetry expands placements</td>
+<td>Select a bay and compose at model scale, then inspect the full-size wall. The Godot facade builder already accepts plan JSON; its source identifies direct VR interaction as missing. Openings must be checked against collision.</td>
+</tr>
+</tbody>
+</table>
+<p>These links were inspected through their local source implementations and HTTP responses. The browser automation connection was unavailable; their full interactive web workflows were not exercised during this pass.</p>
+<h2>Shared conventions, distinct models</h2>
+<p>Use <strong>source → operation → receiving body</strong> as the common arrangement. Keep the source visible while its consequences appear beside it and in the room. Use previous/next for named choices, bounded sliders for quantities, and an explicit held control for continuous hand movement. Select the receiver before applying; distinguish a live link from a held copy.</p>
+<p>Reuse the existing <code>commons/ui/panel_bridge</code> machinery for matrix and multi-panel editors. It already loads layout/data JSON and hosts loom, pattern and grid widgets. The physical studio adds a more tangible front end to the existing pattern model, rather than replacing that infrastructure.</p>
+<p>A shared package envelope should eventually identify the maker type, version, editable source, operation parameters, mapping, finish, receiver scope and provenance. Keep the type-specific payload: a weaving draft, border pair and facade plan are not interchangeable pixel grids. Do not flatten them into textures and claim the source survived.</p>
+<h2>Next actionable improvements</h2>
+<ol>
+<li>Compare the physical studio, Pattern Maker Station and Panel Bridge pattern editor; choose one common state adapter before duplicating more controls.</li>
+<li><strong>Implemented:</strong> explicit studio-to-surface APPLY LIVE / HOLD / LOOM / UNDO LINK, with shared receiver transactions and distinct source schemas.</li>
+<li>Connect a deliberately held hand control to offset; verify release, tracking loss and independence from walking.</li>
+<li>Make the existing Panel Bridge loom's source-to-crossing explanation readable in VR.</li>
+<li>Add straight/corner editing, then ordered mosaic regions using those motifs.</li>
+<li>Add a facade bay selector and a tested model-to-room scale transition.</li>
+<li>Finish the sequence with shader controls and code: coordinates, repeat, masks, surface finish, then separately tested mesh displacement and collision. Garment transfer remains an explicit later action.</li>
+</ol>
+<h2>Verification</h2>
+<p>86 studio/adapter/room checks and 99 Foundry regression checks cover this step. See <a href="pattern-studio-check.json">the studio checks</a> and <a href="pattern-recipe-check.json">the Foundry receiver checks</a>. Captures are actual desktop Godot museum views with the player outfit hidden for inspection. Headset reach, touch comfort and performance remain untested.</p>
+<p><a href="index.html#Pattern_Foundry">Return to the working guide</a> · <a href="patterns-plan.html">Patterns sequence plan</a></p>
+<h2>Next room: the mark stays</h2>
+<p><a href="tutorial-pattern.html">Tutorial_Pattern now has a focused comparison bay</a>. One source feeds fixed translation and reflection panels and a floor with P1/PM selection. Source painting, FLIP X, ROTATE, UNDO and RESET work through the desktop pointer. The text follows these controls. Headset and continuous gestures are deferred; the next hall is Array_Patterns.</p>
+<p><img alt="One source, two rules" src="fixed-motif-bay.png" /></p>
+<h2>Array_Patterns: enter the addressed surface</h2>
+<p><a href="array-patterns.html">The tunnel now has a source/address inspector</a>. Move between floor and right-wall coordinates, change cell spacing and hide the drawn grid without changing collision. The book follows those controls. 50 desktop checks pass; continue to Symmetry_Seventeen next.</p>
+<p><img alt="An address becomes a passage" src="tunnel-address-bay.png" /></p>
+<p>The Array_Patterns corridor now stands on a platform with wp ramps and side wings that require the bay crossing to pass through it. The inspector remains reachable from the lower floor.</p>
+<h2>Symmetry_Seventeen: hold a comparison</h2>
+<p><a href="symmetry-seventeen.html">One mark, three rules</a> now follows the raised Array_Patterns corridor. The primary editor supplies P1, PM and PG, sixteen editable source addresses, four paints, HOLD, UNDO and RESET. The held panel owns its pixels while the live panel and carpet share the changing result. A plain backing wall and a reachable console stage the comparison in the existing east bay.</p>
+<p>The book now asks what remains the same before naming the symmetry. An unusually symmetric source can conceal a construction rule or add symmetries; pressing a group button does not certify the resulting image's exact group. The cage remains a diagram. The next room is Ribbon_Patterns_01. Forty desktop checks pass; headset work remains deferred.</p>
+<h2>Ribbon_Patterns_01: an address gains depth</h2>
+<p><a href="ribbon-patterns-01.html">The paired array study and book passage</a> follow the saved plan's surface-to-volume progression. Sixteen source cells supply four height layers. A shared console selects x, z and height, switches repeated/shifted lookup, reveals a single slice and undoes changes. The source frame tracks the lookup while the volume address stays fixed. Visible and stored counts distinguish hiding from deletion.</p>
+<p>The two primary arrays stand together in the west bay. Nine secondary exhibits remain. Initialization now avoids a duplicate volume when configuration arrives before _ready. Twenty-two desktop checks cover the lesson and the default/early-configuration paths. Headset work remains deferred. Next: Ribbon_Patterns_02 for carrier and viewing conditions, then the planned closing shader/fabric studio.</p>
+<h2>Ribbon_Patterns_02: what the surface contributes</h2>
+<p><a href="ribbon-patterns-02.html">The context and carrier studies</a> now lead the room. One comparison changes surrounds while holding target RGB values fixed. The other shares a source texture across a plane and half-cylinder with matched physical spacing, then varies a stated directional shading rule. Repeat boundaries, horizontal repeat size, light side, undo and reset have mounted controls.</p>
+<p>Twenty-three desktop checks pass. The inherited MetamerismLab token supplies the carrier study, with no claim of spectral computation. The other ten exhibits remain supporting material. Next: Ribbon_Patterns_03 for the closing shader/fabric studio and garment transfer. Headset and gesture work remain deferred.</p>
+<h2>Ribbon_Patterns_03: from source to skirt</h2>
+<p><a href="ribbon-patterns-03.html">Open the studio and book passage</a>. Three primaries now close the sequence: the source/shader console, the live player mirror and the runway. Paint an address; inspect UVs, repetition, fragment cut-outs, finish and static vertex displacement. Save a recipe before deliberately wearing it or dressing the four performers. Only their named skirts receive it; studio undo restores previous assignments.</p>
+<p><img alt="One saved fabric on the actual player in the mirror" src="fabric-mirror.png" /></p>
+<p>This closes a specific path from arrays and colour to surfaces and garments. It does not yet unify every workshop tool into a shared recipe library. The Foundry's wall/floor ownership remains its own adapter; continuous gestures, other garment parts, stereo mirror work and headset reach are still open. The next room, Change_Intro, can ask how these configurations vary over time.</p>
+<h2>Change_Intro: two samples before the tangent</h2>
+<p><a href="change-intro.html">Open the room and book passage</a>. The existing workbench now starts with two sample points. STEP narrows their interval; DERIVATIVE reveals the analytic tangent and derivative subplot. At the starting point a wide secant falls while the local tangent rises: the interval has crossed a crest. This makes the transition from appearance to variation specific without silently turning a spatial x-axis into time.</p>
+<p>The five controls join the original slider in one floor-standing cabinet. The sign card now says near zero under a declared threshold, without asserting an extremum. The book follows the sole primary; all ten supporting exhibits and the existing grid layout remain. Next: Accumulation_Riemann.</p>
+<h2>Accumulation_Riemann: keep one account beside another</h2>
+<p><a href="accumulation-riemann.html">Open the comparison and book passage</a>. The same curve now supplies rectangle contributions. HOLD preserves a picture and total; RULE moves samples between midpoint and edges; the count slider refines the partition. The reference appears only when requested and names its finite 4,096-midpoint calculation.</p>
+<p><img alt="Different sampling rules, one unchanged curve" src="accumulation-rules.png" /></p>
+<p>The primary has moved into a position where both panels are visible. The existing walls and three secondary placements remain. Twenty-six desktop checks pass; the revised book and tutorial follow the one primary. Headset work is deferred. Next: Flow_Field, where the path through sampling addresses can depend on earlier updates.</p>
+<h2>Compact Patterns ribbon galleries</h2>
+<p><a href="compact-ribbons.html">View the new walls and room layouts</a>. The three ribbon halls now measure 25 x 25 m, 27 x 31 m and 31 x 49 m, reducing their floor areas by 53%, 75% and 83%. Continuous gallery walls and short returns frame the exhibits around clear central passages. All forty artifacts remain. Main encounters, the mirror and the runway retain full scale; selected supporting installations are smaller.</p>
+<p>Layout and primary interaction probes pass after the move. Headset comfort, supporting controls and legibility remain for the walkthrough. The active research thread continues at Flow_Field.</p><h2>Change consolidated</h2>
+<p><a href="change-two-halls.html">Two halls, all 23 artifacts</a>: rate, accumulation, net change and flow. Next: Forces; headset testing remains deferred.</p><p><a href="timing-machines.html">New after oscillation: twenty clocks and the receiver.</a> Two primary encounters make timing differences visible and physical.</p><p><a href="vectors-forces-plan.html">Change wishes and the Vector and Forces plan</a>: four future-idea markers are placed; the first vector now drives two wall views.</p></main></html>

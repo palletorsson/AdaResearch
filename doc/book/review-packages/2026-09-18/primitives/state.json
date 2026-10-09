@@ -1,0 +1,689 @@
+{
+  "sequence": "primitives",
+  "declared_maps": [
+    "Point_One",
+    "Point_Lines",
+    "Point_Trace",
+    "Point_Line_Grid",
+    "Point_Triangle_Context",
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Primitives_Ignorance",
+    "Primitives_Portals",
+    "Primitives_Melencolia"
+  ],
+  "museum_map_authored_order": [
+    "Point_One",
+    "Point_Lines",
+    "Point_Trace",
+    "Point_Line_Grid",
+    "Point_Triangle_Context",
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Primitives_Ignorance",
+    "Primitives_Portals",
+    "Primitives_Melencolia",
+    "Biome_Ladder_Primitives"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "Point_One",
+      "recorded_status": "existing_text_retained",
+      "text_words": 2072,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "frame_counter_display",
+          "folding_past",
+          "the_invisible_point",
+          "code_evolution_screen",
+          "interactive_point_origin_force",
+          "origin",
+          "coordinate_readout",
+          "CoordinateSystem3M",
+          "drag_point_target",
+          "wireframe_threshold",
+          "fontana_puncture",
+          "floating_sphere_field"
+        ],
+        "reason": "Primary names the artifacts with passages in this room's current book, including the configured entrance view; the coordinate pair retains its authored group.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_One/final.md",
+        "text_sha256": "59a7fa1bea93f7824a34b711e0efca16b57449bcd3b736b6e5efe34c2e3e34e9",
+        "map_sha256": "c243239ce64ece3e42d9642a9b8773b654f7e36bee3123c7ba426450907c3e69",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "frame_counter_display",
+        "folding_past",
+        "origin",
+        "the_invisible_point",
+        "code_evolution_screen",
+        "interactive_point_origin_force",
+        "coordinate_readout",
+        "CoordinateSystem3M",
+        "drag_point_target"
+      ],
+      "role_primary_order": [
+        "frame_counter_display",
+        "folding_past",
+        "origin",
+        "the_invisible_point",
+        "code_evolution_screen",
+        "interactive_point_origin_force",
+        "@the-3d-coordinate-system",
+        "drag_point_target"
+      ],
+      "anchors_not_in_primary_roles": [
+        "CoordinateSystem3M",
+        "coordinate_readout"
+      ],
+      "primary_roles_without_anchors": [
+        "@the-3d-coordinate-system"
+      ],
+      "anchors_without_ordinary_placement_hint": [
+        "folding_past"
+      ],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Point_Lines",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1082,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "line_demo",
+          "line",
+          "walk_this_line_marking",
+          "do_not_cross_barrier",
+          "grabbable_line",
+          "two_point_ruler",
+          "two_points_line",
+          "laser_measure",
+          "laser_exploding_sphere",
+          "parallel_lines"
+        ],
+        "reason": "Primary identifies every artifact with its own tagged passage in this room's book, in manuscript order. Keep the connection, marking and barrier together; keep the laser pair together. Other placed artifacts remain available for further development.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_Lines/final.md",
+        "text_sha256": "52df4a9c5fcebdabe9391eb4c78d968f5d7a4d5ba341311a3dbf8227a348eb79",
+        "map_sha256": "8415cba99e4028409e5d1d246eb8d2221bdfff64d2dda9c94b37bf5f3cde52c0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "line_demo",
+        "do_not_cross_barrier",
+        "line",
+        "walk_this_line_marking",
+        "player_trace"
+      ],
+      "role_primary_order": [
+        "@relation-and-instruction",
+        "@body-and-record"
+      ],
+      "anchors_not_in_primary_roles": [
+        "do_not_cross_barrier",
+        "line",
+        "line_demo",
+        "player_trace",
+        "walk_this_line_marking"
+      ],
+      "primary_roles_without_anchors": [
+        "@body-and-record",
+        "@relation-and-instruction"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Point_Trace",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1185,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "draw_dot",
+          "draw_stick",
+          "whiteboard",
+          "hand_telemetry_diptych",
+          "automatic_writing_desk"
+        ],
+        "reason": "Primary follows tagged book artifacts in manuscript order. Four original draw_dot instances remain on their plinths with cased numeric readouts. The whiteboard owns separate colored pens with 0/10/40/80 mm grids and an eraser.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_Trace/final.md",
+        "text_sha256": "930f905386477bafe5bb1cdbf13aa62f78cbffabb2856389e453ba5c9bebf4e6",
+        "map_sha256": "981ee5cddf884f2e8efbfb091477bac12b53b01b23830a0114f2aaa64f954723",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "draw_dot",
+        "draw_stick",
+        "whiteboard"
+      ],
+      "role_primary_order": [
+        "@recording-contract",
+        "draw_stick",
+        "whiteboard"
+      ],
+      "anchors_not_in_primary_roles": [
+        "draw_dot"
+      ],
+      "primary_roles_without_anchors": [
+        "@recording-contract"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Point_Line_Grid",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1092,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "grab_sphere_point_snap",
+          "player_trace",
+          "grid_lines",
+          "floating_sphere_field",
+          "room_grammar",
+          "simulation_grid"
+        ],
+        "reason": "The book follows hand and walking grids, the released trace display and supporting encounters, then introduces a walkable five-by-five plan.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_Line_Grid/final.md",
+        "text_sha256": "852cbe8a77229ef6223460a1445b29eced5cdbbd9fbc5462c0b272832a890081",
+        "map_sha256": "1292c9fe5be130ef141812202a25b750a5854cfae7701f8a7e6f4fea1fbb8ed4",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "grab_sphere_point_snap",
+        "player_trace",
+        "grid_lines",
+        "plan_vitrine"
+      ],
+      "role_primary_order": [
+        "@kept-and-discarded-position",
+        "grid_lines",
+        "plan_vitrine"
+      ],
+      "anchors_not_in_primary_roles": [
+        "grab_sphere_point_snap",
+        "player_trace"
+      ],
+      "primary_roles_without_anchors": [
+        "@kept-and-discarded-position"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1111,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "triangle_line_puzzle",
+          "draw_triangle_faces"
+        ],
+        "reason": "Two principal encounters: close the triangle boundary, explicitly reveal its fill, then draw and inspect first-corner triangle fans. Other room objects remain optional comparisons.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_Triangle_Context/final.md",
+        "text_sha256": "e0ae1dca3ccd0a0a8a64948bd23b561089ce96466b093e63b282ae8788d7bc21",
+        "map_sha256": "2fe68f2e38b3314ef631347c9cb8ac109764399fc65d8ece5c5bbda0a2ac8014",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "triangle_line_puzzle",
+        "draw_triangle_faces"
+      ],
+      "role_primary_order": [
+        "@boundary-and-face"
+      ],
+      "anchors_not_in_primary_roles": [
+        "draw_triangle_faces",
+        "triangle_line_puzzle"
+      ],
+      "primary_roles_without_anchors": [
+        "@boundary-and-face"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "recorded_status": "implemented_component_verified",
+      "text_words": 997,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "grab_trihedron",
+          "grab_tetrahedron",
+          "pyramid_edit",
+          "cube_scene",
+          "prism_block",
+          "concrete_barrier",
+          "street_sign",
+          "diamonds",
+          "rock_spawner",
+          "rock_scanner"
+        ],
+        "reason": "Preserve developed basic-polyhedra encounters and align the book with a new prism/barrier/slope/sign comparison; grouped primary artifacts follow the manuscript.",
+        "status": "implemented_component_verified",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Primitives_Polythedra/final.md",
+        "text_sha256": "9263b26bef8b6518f93e4ee7a7d47964b0e2c633381c0ebd2ff26f7418e98385",
+        "map_sha256": "735ce11251a401cfbab04af5e0efc4dfff947eb253bc202863f0cd9933941bab",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "prism_block",
+        "concrete_barrier",
+        "street_sign"
+      ],
+      "role_primary_order": [
+        "#note-1",
+        "@enclosure-and-collision",
+        "#note-2",
+        "@stop-and-flow"
+      ],
+      "anchors_not_in_primary_roles": [
+        "concrete_barrier",
+        "grab_tetrahedron",
+        "grab_trihedron",
+        "prism_block",
+        "street_sign"
+      ],
+      "primary_roles_without_anchors": [
+        "#note-1",
+        "#note-2",
+        "@enclosure-and-collision",
+        "@stop-and-flow"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Point_Animatedcube",
+      "recorded_status": "implemented_component_verified",
+      "text_words": 1010,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "cube_lines",
+          "polyhedron_nets_cube",
+          "animatedcubebuilder"
+        ],
+        "reason": "Three primary encounters distinguish outline, hinged net and editable assembly. The two builder placements now expose replay, pause, restoration and triangle diagonals.",
+        "status": "implemented_component_verified",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Point_Animatedcube/final.md",
+        "text_sha256": "c726cbae8cd669beae2b53a1175e393a6ee889107c89bc66458c0af077f9a99c",
+        "map_sha256": "5806e445ef6b724ad63a2b0164a0de14a847685550f847a46c0062121e37c346",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "cube_lines",
+        "animatedcubebuilder",
+        "polyhedron_nets_cube"
+      ],
+      "role_primary_order": [
+        "@cube-construction"
+      ],
+      "anchors_not_in_primary_roles": [
+        "animatedcubebuilder",
+        "cube_lines",
+        "polyhedron_nets_cube"
+      ],
+      "primary_roles_without_anchors": [
+        "@cube-construction"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "recorded_status": "implemented_component_verified",
+      "text_words": 1184,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "sphere_low",
+          "sphere_mid",
+          "sphere_high",
+          "sphere",
+          "budget_of_smoothness"
+        ],
+        "reason": "Five primary tokens form a resolution comparison: three matched marked/plain mesh pairs, an ordinary sphere and a counter that exposes actual triangle entries and area-bearing patches after visual judgment.",
+        "status": "implemented_component_verified",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Primitives_Ignorance/final.md",
+        "text_sha256": "b98f15ff47b9ec335120a54c20b08bce4af3d904a4059010f118bc707bd244c5",
+        "map_sha256": "bfba7a3cc86adeb0761bedd8cd9b03a44ed9978c9c54f02484f1bfb293862a2f",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "sphere",
+        "sphere_high",
+        "sphere_mid",
+        "sphere_low",
+        "budget_of_smoothness",
+        "capsule"
+      ],
+      "role_primary_order": [
+        "@spheres",
+        "capsule"
+      ],
+      "anchors_not_in_primary_roles": [
+        "budget_of_smoothness",
+        "sphere",
+        "sphere_high",
+        "sphere_low",
+        "sphere_mid"
+      ],
+      "primary_roles_without_anchors": [
+        "@spheres"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Primitives_Portals",
+      "recorded_status": "implemented_component_verified",
+      "text_words": 1121,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "combine_portals",
+          "achilles_tortoise"
+        ],
+        "reason": "Two primary encounters distinguish a reversible finite mesh progression and a controllable halving demonstration. Readouts keep portal geometry, planar perimeter and live marker gaps separate.",
+        "status": "implemented_component_verified",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Primitives_Portals/final.md",
+        "text_sha256": "8d617797d811beb26e777aa1c5ddaee6106becff9dceaa92a922067d7b4a42ff",
+        "map_sha256": "2c4b2961efc0b6e17b778c8588d80cf28ef3895466c9bca8481bc50c1c68f455",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "combine_portals",
+        "achilles_tortoise"
+      ],
+      "role_primary_order": [
+        "@finite-approaches"
+      ],
+      "anchors_not_in_primary_roles": [
+        "achilles_tortoise",
+        "combine_portals"
+      ],
+      "primary_roles_without_anchors": [
+        "@finite-approaches"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1101,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "snap_pyramid_puzzle",
+          "pyramid",
+          "pyramidlong",
+          "durer_scene"
+        ],
+        "reason": "Keep the recognised connection pattern, repeated corner/centre composition and DÃ¼rer tableau. The restored architecture and all supporting text remain.",
+        "status": "existing_text_retained",
+        "sequence": "primitives",
+        "text_path": "commons/maps/Primitives_Melencolia/final.md",
+        "text_sha256": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4",
+        "map_sha256": "8fed9482f93c4828aa87adc6e6c29e3444ebcc966afad630eac0ea1bcb8d5a2a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pyramid",
+        "pyramidlong",
+        "cube_scene",
+        "snap_pyramid_puzzle",
+        "durer_scene"
+      ],
+      "role_primary_order": [
+        "#note-1",
+        "@recognition-and-purpose",
+        "#note-2"
+      ],
+      "anchors_not_in_primary_roles": [
+        "cube_scene",
+        "durer_scene",
+        "pyramid",
+        "pyramidlong",
+        "snap_pyramid_puzzle"
+      ],
+      "primary_roles_without_anchors": [
+        "#note-1",
+        "#note-2",
+        "@recognition-and-purpose"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "addons/godot-xr-tools/objects/pickable.gd",
+      "addons/godot-xr-tools/objects/pickable.tscn",
+      "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd",
+      "algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+      "algorithms/vectors/shared/gadgets/gyroscope_gadget.gd",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd",
+      "commons/artifacts/budget_of_smoothness/budget_of_smoothness.tscn",
+      "commons/artifacts/code_evolution_screen/code_evolution_screen.gd",
+      "commons/artifacts/code_evolution_screen/code_evolution_screen.tscn",
+      "commons/artifacts/concrete_barrier/concrete_barrier.gd",
+      "commons/artifacts/concrete_barrier/concrete_barrier.tscn",
+      "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd",
+      "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.tscn",
+      "commons/artifacts/drag_point_target/drag_point_target.gd",
+      "commons/artifacts/drag_point_target/drag_point_target.tscn",
+      "commons/artifacts/plan_vitrine/plan_vitrine.gd",
+      "commons/artifacts/plan_vitrine/plan_vitrine.tscn",
+      "commons/artifacts/queer_confetti/queer_confetti.gd",
+      "commons/artifacts/shared/mesh_factory.gd",
+      "commons/artifacts/simulation_grid/simulation_grid.tscn",
+      "commons/artifacts/street_sign/street_sign.gd",
+      "commons/artifacts/street_sign/street_sign.tscn",
+      "commons/artifacts/the_invisible_point/the_invisible_point.gd",
+      "commons/artifacts/the_invisible_point/the_invisible_point.tscn",
+      "commons/artifacts/walk_this_line_marking/walk_this_line_marking.gd",
+      "commons/artifacts/walk_this_line_marking/walk_this_line_marking.tscn",
+      "commons/artifacts/whiteboard/whiteboard.gd",
+      "commons/artifacts/whiteboard/whiteboard.tscn",
+      "commons/artifacts/whiteboard/whiteboard_drawing.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_branching.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_cellular.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_chaos.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_chromatic.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_forces.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_fractal.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_primitives.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_swarm.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_transformation.gd",
+      "commons/hazards/becoming_catalyst/modes/mode_waveform.gd",
+      "commons/infoboards_3d/visualizations/polyhedron_nets.gd",
+      "commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn",
+      "commons/interactables/push_button.tscn",
+      "commons/primitives/animatedcubebuilder/animatedcubebuilder.gd",
+      "commons/primitives/animatedcubebuilder/animatedcubebuilder.tscn",
+      "commons/primitives/capsule/capsule.gd",
+      "commons/primitives/capsule/capsule.tscn",
+      "commons/primitives/combines/achilles_tortoise.gd",
+      "commons/primitives/combines/achilles_tortoise.tscn",
+      "commons/primitives/combines/combine_portals.gd",
+      "commons/primitives/combines/combine_portals.tscn",
+      "commons/primitives/cubes/cube_scene.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/primitives/cubes/grab_long_stick.tscn",
+      "commons/primitives/cubes/grab_rod.gd",
+      "commons/primitives/cubes/text_node.gd",
+      "commons/primitives/godotmeshes/sphere_high.gd",
+      "commons/primitives/godotmeshes/sphere_high.tscn",
+      "commons/primitives/godotmeshes/sphere_low.gd",
+      "commons/primitives/godotmeshes/sphere_low.tscn",
+      "commons/primitives/godotmeshes/sphere_mid.gd",
+      "commons/primitives/godotmeshes/sphere_mid.tscn",
+      "commons/primitives/line/coordinate_line.gd",
+      "commons/primitives/line/cube_lines.gd",
+      "commons/primitives/line/cube_lines.tscn",
+      "commons/primitives/line/grid_lines.gd",
+      "commons/primitives/line/grid_lines.tscn",
+      "commons/primitives/line/line.gd",
+      "commons/primitives/line/line.tscn",
+      "commons/primitives/line/line_static.gd",
+      "commons/primitives/line/line_static.tscn",
+      "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+      "commons/primitives/line/puzzles/triangle_line_puzzle.tscn",
+      "commons/primitives/logic_display/CategoryLogicDisplay.tscn",
+      "commons/primitives/logic_display/CategoryLogicDisplayUI.tscn",
+      "commons/primitives/logic_display/category_logic_display.gd",
+      "commons/primitives/origin/origin.gd",
+      "commons/primitives/origin/origin.tscn",
+      "commons/primitives/point/coordinate_readout.gd",
+      "commons/primitives/point/coordinate_readout.tscn",
+      "commons/primitives/point/draw_dot.gd",
+      "commons/primitives/point/draw_dot.tscn",
+      "commons/primitives/point/draw_dot_time_domain.gd",
+      "commons/primitives/point/draw_stick.tscn",
+      "commons/primitives/point/draw_triangle_faces.gd",
+      "commons/primitives/point/draw_triangle_faces.tscn",
+      "commons/primitives/point/force_catalyst.gdshader",
+      "commons/primitives/point/grab_sphere.gd",
+      "commons/primitives/point/grab_sphere_point.tscn",
+      "commons/primitives/point/grab_sphere_point_snap.gd",
+      "commons/primitives/point/grab_sphere_point_snap.tscn",
+      "commons/primitives/point/grab_sphere_point_with_text.tscn",
+      "commons/primitives/point/interactive_point_origin.gd",
+      "commons/primitives/point/interactive_point_origin.tscn",
+      "commons/primitives/point/interactive_point_origin_force.gd",
+      "commons/primitives/point/interactive_point_origin_force.tscn",
+      "commons/primitives/point/player_trace.gd",
+      "commons/primitives/point/player_trace.tscn",
+      "commons/primitives/point/point_mesh.gd",
+      "commons/primitives/point/simple_position_text.gd",
+      "commons/primitives/prismes/prism_block.gd",
+      "commons/primitives/prismes/prism_block.tscn",
+      "commons/primitives/prismes/rotation.gd",
+      "commons/primitives/pyramid/pyramid.gd",
+      "commons/primitives/pyramid/pyramid.tscn",
+      "commons/primitives/pyramid/pyramidlong.gd",
+      "commons/primitives/pyramid/pyramidlong.tscn",
+      "commons/primitives/shared/grid_material_factory.gd",
+      "commons/primitives/shared/mesh_inspection.gd",
+      "commons/primitives/shared/primitive_mesh_builder.gd",
+      "commons/primitives/shared/solid_primitive_finish.gd",
+      "commons/primitives/snappoint/demos/line_demo.gd",
+      "commons/primitives/snappoint/demos/line_demo.tscn",
+      "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+      "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+      "commons/primitives/snappoint/snap_connection_manager.gd",
+      "commons/primitives/snappoint/snap_line.tscn",
+      "commons/primitives/snappoint/snap_point.gd",
+      "commons/primitives/snappoint/snap_point.tscn",
+      "commons/primitives/snappoint/snap_tetrahedron.tscn",
+      "commons/primitives/snappoint/snap_triangle.tscn",
+      "commons/primitives/sphere/sphere.gd",
+      "commons/primitives/sphere/sphere.tscn",
+      "commons/primitives/tetrahedron/grab_tetrahedron.gd",
+      "commons/primitives/tetrahedron/grab_tetrahedron.tscn",
+      "commons/primitives/trails/mesmerizing_trail.gd",
+      "commons/primitives/trihedron/grab_trihedron.gd",
+      "commons/primitives/trihedron/grab_trihedron.tscn",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/resourses/shaders/displayobjectposition/displayobjectposition.tscn",
+      "commons/resourses/shaders/grid_solid.gdshader",
+      "commons/resourses/shaders/long_cloth.gdshader",
+      "commons/scenes/demos/durer/DurerPolyhedron.gd",
+      "commons/scenes/demos/durer/DurerScene.gd",
+      "commons/scenes/demos/durer/DurerScene.tscn",
+      "commons/scenes/demos/durer/MagicSquare.gd",
+      "commons/scenes/main_menu/components/linear_progress.gdshader",
+      "commons/ui/cube_experiment_panel.gd",
+      "commons/ui/instrument_panel_case.gd",
+      "commons/ui/limit_experiment_panel.gd",
+      "commons/ui/text_screen.gd",
+      "commons/ui/triangle_experiment_panel.gd",
+      "commons/utils/baked_text_albedo.gd",
+      "commons/visualaid/frame_counter/frame_counter_display.gd",
+      "commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://commons/artifacts/simulation_grid/simulation_grid.gd",
+      "res://commons/artifacts/whiteboard/whiteboard_pen.gd",
+      "res://commons/context/drawingboard/paper_draw_surface.gd",
+      "res://commons/context/drawingboard/pen.tscn",
+      "res://commons/hazards/becoming_catalyst/modes/branching_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/cellular_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/chaos_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/forces_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/fractal_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/primitives_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/swarm_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/transformation_projectile.gd",
+      "res://commons/hazards/becoming_catalyst/modes/waveform_projectile.gd",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/primitives/cubes/grab_cube.gd",
+      "res://commons/primitives/logic_display/category_logic_display_ui.gd",
+      "res://commons/primitives/snappoint/snap_line.gd",
+      "res://commons/primitives/snappoint/snap_tetrahedron.gd",
+      "res://commons/primitives/snappoint/snap_triangle.gd",
+      "res://commons/resourses/shaders/ParametricGrid.gdshader",
+      "res://commons/resourses/shaders/displayobjectposition/displayobjectposition.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

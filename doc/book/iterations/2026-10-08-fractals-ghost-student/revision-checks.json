@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "Witness revision preserves the complete initial wave geometry",
+      "passed": true
+    },
+    {
+      "name": "Witness selects corresponding leaf three from both constructed trees",
+      "passed": true
+    },
+    {
+      "name": "Witness separation agrees with independent geometry",
+      "passed": true
+    },
+    {
+      "name": "Retained twig directions agree within float tolerance",
+      "passed": true
+    },
+    {
+      "name": "Two equal-length twigs and separation link use actual model lengths",
+      "passed": true
+    },
+    {
+      "name": "The initial witness remains retained after the live tree is edited",
+      "passed": true
+    },
+    {
+      "name": "Witness and carried two grips remain children of the study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "direction_vector_difference": 0.0,
+    "selected_leaf": 3,
+    "tip_distance_metres": 0.166341379284859
+  },
+  "passed": true,
+  "scope": "Student observation-led reading aid; independent geometry checks. First submission remains unchanged."
+}

@@ -1,0 +1,195 @@
+{
+  "run": {
+    "started": "2026-09-12T23:27:49+02:00",
+    "finished": "2026-09-12T23:28:42+02:00",
+    "pid": 26376,
+    "exit": 0,
+    "checks": 117,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_mushrooms_live.gd": "35bfbeb492f8440274130457bbe85ca6696b619b4b8fee976f3938e0843dfd3c",
+      "commons/testing/probe_wcn_mushrooms.gd": "746caaa7f263ee3b150926b2b035c7b833fc7722d9d519d832498c1711bc364a",
+      "commons/maps/Random_Mushrooms/map_data.json": "63b13850ab8cf44cf82bd7c68cfa1b5ef3915f1cf231b7b72655f912da6314b0",
+      "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd": "afe2cb53756a9b7fd252e27e2b2a13832ebf751c5c0c046cdd1fe4a2f13d49bc",
+      "ada_run/mushrooms_review_extra.gd": "688febc82941636b7d598a77f6beb7d1e9af71a969250ea37ac93ff37e6bc734",
+      "commons/hazards/mushroom/edible_mushroom.gd": "f030717b84f75d4fcc9a1cd2d0cffcd64696b4cd8ea0569a7874d2d60e48cf35",
+      "commons/hazards/mushroom/mushroom_effect.gd": "aea83f1217589f713f92ef11a50320bad201c5c1173b235d949188801765dc84",
+      "commons/resourses/shaders/mushroom_trip.gdshader": "2426db3313153829d718c05c90d34b27298608f48264cb55d5262f632116855f",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "source_excerpts": 14,
+  "map_layers_and_scene_unchanged": true,
+  "primary_book_hero": [
+    "mushrooms"
+  ],
+  "pack": {
+    "planned": 6,
+    "matched": 6,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 6,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random mushrooms"
+  },
+  "populations": {
+    "seed_27182": {
+      "seed": 27182,
+      "count": 95,
+      "kinds": {
+        "scattered": 65,
+        "ring": 7,
+        "cluster": 23
+      },
+      "rejected": 15,
+      "ring_requested": 8,
+      "ring_placed": 7,
+      "clustering": [
+        {
+          "centre": [
+            -2.09313279390335,
+            0.621746063232422
+          ],
+          "placed": 10,
+          "requested": 10,
+          "size": 0.968891710042953,
+          "template": 0
+        },
+        {
+          "centre": [
+            1.80252599716187,
+            1.74093317985535
+          ],
+          "placed": 13,
+          "requested": 13,
+          "size": 1.28282940387726,
+          "template": 2
+        }
+      ],
+      "glowing": 2,
+      "lit": 2
+    },
+    "seed_31415": {
+      "seed": 31415,
+      "count": 94,
+      "kinds": {
+        "scattered": 71,
+        "ring": 7,
+        "cluster": 16
+      },
+      "rejected": 9,
+      "ring_requested": 17,
+      "ring_placed": 7,
+      "clustering": [
+        {
+          "centre": [
+            -1.31145304441452,
+            1.94700658321381
+          ],
+          "placed": 10,
+          "requested": 11,
+          "size": 1.41094243526459,
+          "template": 3
+        },
+        {
+          "centre": [
+            -2.65434256196022,
+            2.16856098175049
+          ],
+          "placed": 6,
+          "requested": 9,
+          "size": 1.46316909790039,
+          "template": 0
+        }
+      ],
+      "glowing": 4,
+      "lit": 4
+    },
+    "size_off": {
+      "seed": 31415,
+      "count": 94,
+      "kinds": {
+        "scattered": 71,
+        "ring": 7,
+        "cluster": 16
+      },
+      "rejected": 9,
+      "ring_requested": 17,
+      "ring_placed": 7,
+      "clustering": [
+        {
+          "centre": [
+            -1.31145304441452,
+            1.94700658321381
+          ],
+          "placed": 10,
+          "requested": 11,
+          "size": 1.41094243526459,
+          "template": 3
+        },
+        {
+          "centre": [
+            -2.65434256196022,
+            2.16856098175049
+          ],
+          "placed": 6,
+          "requested": 9,
+          "size": 1.46316909790039,
+          "template": 0
+        }
+      ],
+      "glowing": 4,
+      "lit": 4
+    }
+  },
+  "shader": {
+    "active_difference": 0.44863558388282,
+    "duration_contract": "ten-second peak timer, plus fade-in and fade-out",
+    "fade_in": 1.0,
+    "fade_out": 2.5,
+    "intensity": 0.8,
+    "size": [
+      128,
+      96
+    ],
+    "zero_difference": 0.0
+  },
+  "neutral_capture_wait": {
+    "finished": true,
+    "seconds": 10.652
+  },
+  "engine_diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Godot 3.x SpatialMaterial remapped parameter not found: rim_color",
+    "ERROR: Condition \"f.is_null()\" is true."
+  ],
+  "audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 1
+  },
+  "publication_files": 60,
+  "final_words": 931,
+  "headset_verified": false
+}

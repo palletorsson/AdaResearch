@@ -1,0 +1,11 @@
+--- before/route.ts
++++ current/route.ts
+@@ -39,6 +39,8 @@
+   ".txt": "text/plain; charset=utf-8",
+ 
+   ".gd": "text/plain; charset=utf-8",
++
++  ".tscn": "text/plain; charset=utf-8",
+ 
+   ".zip": "application/zip",
+ 

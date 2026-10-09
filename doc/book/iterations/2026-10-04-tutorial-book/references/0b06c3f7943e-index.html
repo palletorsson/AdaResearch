@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Room to gather · Ada / Gillick</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#efede7;color:#24292f;font:18px/1.65 system-ui,sans-serif}
+header,main,footer{max-width:1250px;margin:auto;padding:30px}header{padding-top:70px}.eyebrow{font:12px/1.4 system-ui;letter-spacing:.17em;text-transform:uppercase;color:#825169}
+h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:clamp(48px,8vw,96px);margin:20px 0 24px}h2{font-size:40px;margin-top:0}h3{font-size:28px}
+.lead{font:28px/1.5 Georgia,serif;max-width:850px}.small,figcaption{font:14px/1.55 system-ui;color:#575d61}a{color:#86355c;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:24px}
+section{padding:48px 0;border-top:1px solid #c9c5bf;scroll-margin-top:20px}figure{margin:0 0 24px}img{display:block;width:100%;height:auto}figcaption{padding-top:10px}.state{display:none}
+fieldset{border:0;padding:10px 0 20px;margin:0;display:flex;flex-wrap:wrap;gap:10px}legend{font-size:13px;text-transform:uppercase;letter-spacing:.10em}label{cursor:pointer;padding:8px 16px;background:#e2ded8;border:1px solid transparent;border-radius:3px}label:has(input:checked){border-color:#87375d;background:#f2dae5}input{accent-color:#87375d}label:has(input:focus-visible){outline:2px solid #224c9a;outline-offset:2px}
+article{max-width:750px;margin:auto;font:24px/1.75 Georgia,serif}article h2{font-size:44px}article hr{border:0;border-top:1px solid #c9c5bf;margin:38px 0}article hr+p{font:15px/1.6 system-ui}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.making{max-width:860px;margin:auto}.making p{max-width:760px}pre{padding:24px;background:#252b32;color:#f2e9ee;overflow-x:auto;font:15px/1.6 Consolas,monospace}code{font-size:.9em}table{width:100%;border-collapse:collapse}td,th{padding:12px;text-align:left;border-bottom:1px solid #c9c5bf;vertical-align:top}details{border:1px solid #c9c5bf;padding:22px}summary{cursor:pointer}footer{font-size:14px;border-top:1px solid #c9c5bf}.pill{display:inline-block;background:#252b32;color:#f9eff4;padding:11px 20px;border-radius:3px;text-decoration:none}
+@media(max-width:700px){header,main,footer{padding:22px}header{padding-top:40px}.pair{grid-template-columns:1fr}article{font-size:21px}label{padding:8px 10px;font-size:15px}h2{font-size:33px}.lead{font-size:24px}}
+.comparison:has(#layout-0:checked):has(#colour-0:checked) .state-0-0{display:block}
+.comparison:has(#layout-0:checked):has(#colour-1:checked) .state-0-1{display:block}
+.comparison:has(#layout-0:checked):has(#colour-2:checked) .state-0-2{display:block}
+.comparison:has(#layout-1:checked):has(#colour-0:checked) .state-1-0{display:block}
+.comparison:has(#layout-1:checked):has(#colour-1:checked) .state-1-1{display:block}
+.comparison:has(#layout-1:checked):has(#colour-2:checked) .state-1-2{display:block}
+.comparison:has(#layout-2:checked):has(#colour-0:checked) .state-2-0{display:block}
+.comparison:has(#layout-2:checked):has(#colour-1:checked) .state-2-1{display:block}
+.comparison:has(#layout-2:checked):has(#colour-2:checked) .state-2-2{display:block}</style></head><body>
+<header><div class="eyebrow">Ada · Colour / companion study · 2 October 2026</div><h1>Room to gather.</h1>
+<p class="lead">Twelve panels. Three arrangements. An array gives every sheet a place; what place does it leave for someone?</p>
+<nav><a href="#room">Compare the room</a><a href="#reading">Read</a><a href="#making">Make a change</a><a href="#lineage">In the spine</a></nav>
+<p class="small">An original Godot study informed by Liam Gillick. Proposed companion for Color_Walls.</p></header>
+<main><section id="room"><h2>Keep one decision. Change the other.</h2><p>Choose an arrangement, then keep it still while you change the colour rule. These controls compare nine native Godot captures; the downloadable scene lets you walk between the panels.</p>
+<div class="comparison"><fieldset><legend>Arrangement</legend><label><input type="radio" id="layout-0" name="layout" value="0" checked> Canopy</label><label><input type="radio" id="layout-1" name="layout" value="1" > Screens</label><label><input type="radio" id="layout-2" name="layout" value="2" > Gathering</label></fieldset><fieldset><legend>Colour rule</legend><label><input type="radio" id="colour-0" name="colour" value="0" checked> Alternating</label><label><input type="radio" id="colour-1" name="colour" value="1" > Groups of three</label><label><input type="radio" id="colour-2" name="colour" value="2" > One colour</label></fieldset><figure class="state state-0-0"><img src="figures/canopy-alternating.png" width="1800" height="1200" alt="Canopy arrangement of the same twelve panels, with alternating colour assignment"><figcaption>Canopy · Alternating. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-0-1"><img src="figures/canopy-bands.png" width="1800" height="1200" alt="Canopy arrangement of the same twelve panels, with groups of three colour assignment"><figcaption>Canopy · Groups of three. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-0-2"><img src="figures/canopy-one-colour.png" width="1800" height="1200" alt="Canopy arrangement of the same twelve panels, with one colour colour assignment"><figcaption>Canopy · One colour. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-1-0"><img src="figures/screens-alternating.png" width="1800" height="1200" alt="Screens arrangement of the same twelve panels, with alternating colour assignment"><figcaption>Screens · Alternating. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-1-1"><img src="figures/screens-bands.png" width="1800" height="1200" alt="Screens arrangement of the same twelve panels, with groups of three colour assignment"><figcaption>Screens · Groups of three. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-1-2"><img src="figures/screens-one-colour.png" width="1800" height="1200" alt="Screens arrangement of the same twelve panels, with one colour colour assignment"><figcaption>Screens · One colour. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-2-0"><img src="figures/gathering-alternating.png" width="1800" height="1200" alt="Gathering arrangement of the same twelve panels, with alternating colour assignment"><figcaption>Gathering · Alternating. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-2-1"><img src="figures/gathering-bands.png" width="1800" height="1200" alt="Gathering arrangement of the same twelve panels, with groups of three colour assignment"><figcaption>Gathering · Groups of three. Same panels, camera, room and lights.</figcaption></figure><figure class="state state-2-2"><img src="figures/gathering-one-colour.png" width="1800" height="1200" alt="Gathering arrangement of the same twelve panels, with one colour colour assignment"><figcaption>Gathering · One colour. Same panels, camera, room and lights.</figcaption></figure></div>
+<p class="small">The same gallery and twelve persistent panel identities in every state. This companion is not yet installed in the museum.</p>
+<div class="pair"><figure><img src="figures/screens-eye.png" alt="Transparent coloured screens interrupt the route ahead at standing eye height" loading="lazy"><figcaption>At 1.65 m: the view crosses several sheets. The walking body has to find a gap.</figcaption></figure><figure><img src="figures/gathering-eye.png" alt="The same standing viewpoint shows an open centre with six panels overhead" loading="lazy"><figcaption>Same eye position: six sheets above, six around the centre. The benches remain at the sides.</figcaption></figure></div>
+<p><a class="pill" href="colour-assembly-study.zip" download>Download the Godot study</a></p><p class="small">Godot 4.6 · desktop WASD + mouse · Escape releases the pointer · Reset returns to the first arrangement.</p></section>
+<section id="reading"><article><h2>Room to gather</h2>
+<p>Twelve sheets of colour wait above the floor. Pink repeats along one side; blue holds the other. Beneath them, the room has acquired another ceiling, low enough to feel as though it belongs to the people standing here.</p>
+<p>Keep the colours. Change the arrangement.</p>
+<p>The sheets stand up. What was above you is now in your way. A bench remains visible through yellow, then through blue. Your eyes can reach it before your body can. You have to find a gap.</p>
+<p>Each frame carries a small number. Follow one as the room changes again. Six sheets return overhead; six stand around an open centre. Nothing has been added to the collection. There is somewhere else to stand.</p>
+<p>Now leave the arrangement alone. Give three consecutive frames the same colour, then the next three another. Across a gap, two sheets begin to read together. A neighbouring sheet joins a different company. Colour has made another set of relations inside the one made by distance.</p>
+<p>Make them all pink. The differences of height and angle persist. So do the interruptions to your walk.</p>
+<p>Liam Gillick's screens and platforms bring the language of the managed interior into this encounter: the meeting area, the partition, the place prepared for something to happen. These familiar structures can make us comfortable before we have asked what their comfort arranges.</p>
+<p>The benches still sit at the sides. The centre is open. We have called this arrangement <em>Gathering</em>, but nobody has gathered yet. Who would move a chair here? Who could move a panel?</p>
+<p>The array has a place for every sheet. For a moment, leave the place between them without an assignment.</p>
+<hr />
+<p>An original Ada study informed by Gillick's practice. The reference is grounded in his <a href="https://liamgillick.info/Somewhere-Specific-in-Mind-Liam-Gillick-and-Suzanne-Cotter">conversation with Suzanne Cotter</a>, especially the relation between secondary structures, context and occupation. Our array comparison is an interpretation, not Gillick's instruction or a reconstruction of a named work.</p></article></section>
+<section id="making"><div class="making"><h2>One collection, two decisions</h2>
+<p>The supplied scene contains twelve panels. Each keeps its array index, its frame and its collider. The room, camera positions, benches and lights are supplied too. Start with a running scene, as established in Day Zero.</p>
+<h2>What this returns to</h2>
+<p>Coordinates locate a panel. Rotation turns its local plane. An array keeps twelve identities available. A colour assignment groups those identities without changing their positions. Colour → <strong>Color_Walls</strong> is the proposed home for this return, after the earlier array and transformation lessons. It introduces no new foundational capability node.</p>
+<p>The encounter is about the place these decisions leave for someone. The first making task is deliberately smaller: change one known property while keeping the rest inspectable.</p>
+<h2>Change the colour rule first</h2>
+<p>In <code>colour_assembly.gd</code>, <code>colour_for(index, rule)</code> chooses from four colours. The two relevant expressions are:</p>
+<pre><code class="language-gdscript">var palette_index := index % PALETTE.size()
+</code></pre>
+<p>and:</p>
+<pre><code class="language-gdscript">palette_index = floori(index / 3.0)
+</code></pre>
+<p>For twelve indices and four colours, the first produces <code>0 1 2 3 0 1 2 3 0 1 2 3</code>. The second produces <code>0 0 0 1 1 1 2 2 2 3 3 3</code>. The groups follow array order; they need not form spatial stripes in every arrangement.</p>
+<p>As a first edit, shift the alternating rule by one:</p>
+<pre><code class="language-gdscript">var palette_index := (index + 1) % PALETTE.size()
+</code></pre>
+<p>Keep the camera and arrangement fixed. Predict which frame will become pink, then run the scene. No position, collision shape or panel count has changed. Carry the same edit into another arrangement: does a group still look like a group?</p>
+<h2>Then move one known panel</h2>
+<p>At the end of <code>panel_transform()</code>, immediately before its <code>return</code>, add:</p>
+<pre><code class="language-gdscript">if layout == 1 and index == 10:
+    origin.x += 0.7
+</code></pre>
+<p>This is an optional second exercise. It moves the front middle screen to the right in the Screens arrangement. Its material and identity stay attached. Compare the route beside it with the view through it, then undo the two lines. Move to the edge before changing arrangements.</p>
+<h2>The seam in the real implementation</h2>
+<p>These are excerpts from the working component, with bookkeeping omitted:</p>
+<pre><code class="language-gdscript">panels[i].transform = panel_transform(i, arrangement)
+</code></pre>
+<pre><code class="language-gdscript">materials[i].albedo_color = colour_for(i, colour_rule)
+</code></pre>
+<p>One assignment changes a transform; the other changes a material. Neither recreates the panel. The room is their joint consequence. The supplied desktop controls make these two operations independently available; they do not teach interface construction or an XR grab system here.</p>
+<p>The panes use two-sided alpha compositing and a separate solid collision shape. Seeing through a surface does not imply walking through it. Alpha blending is not a spectral model of coloured glass: the transparent sheets do not cast coloured transmitted shadows. The metal frames cast ordinary shadows.</p>
+<h2>Run and inspect</h2>
+<p><a href="colour-assembly-study.zip">Download the small Godot project</a>, import its <code>project.godot</code> in Godot 4.6, then run. Choose Canopy, Screens or Gathering, and separately choose Alternating, Groups of three or One colour. Walk uses WASD and the mouse; Escape releases the pointer. Overview and At the edge restore fixed views; Reset restores the initial comparison.</p>
+<p>Source scene in Ada: <code>res://commons/artifacts/colour_assembly/study.tscn</code>. The reusable component is <code>colour_assembly.tscn</code> in the same directory. The download includes the actual four scene/script files, without the museum's other dependencies.</p>
+<p>The three arrangements are authored possibilities. Naming one Gathering does not establish that it produces conversation, equal access or collective control. That judgement belongs to people occupying and changing the space.</p></div></section>
+<section id="lineage"><h2>Where this fits</h2><p><strong>Colour → Color_Walls.</strong> A return to things the reader can already carry, with space left for the encounter to ask more than the code implements.</p>
+<table><thead><tr><th>Earlier capability</th><th>What it carries here</th></tr></thead><tbody>
+<tr><td>Coordinates and Transformation</td><td>A panel keeps its identity while its position and orientation change.</td></tr>
+<tr><td>Array</td><td>Twelve indexed objects, repeatable layouts, one chosen exception.</td></tr>
+<tr><td>Color_Context_Placed</td><td>Colour assignment makes groups within a spatial arrangement.</td></tr>
+<tr><td>Color_Pillar → Color_Walls</td><td>What takes up space; what the eye can cross; what the body can pass.</td></tr></tbody></table>
+<p>This is an application of the existing capability ladder. Its proposed placement is recorded without adding a new hall or rewriting the current chapter.</p></section>
+<section id="reference"><h2>A structure prepared for use</h2><p>Gillick's screens and platforms let us ask what an interior has organised before anyone occupies it. His <a href="https://liamgillick.info/Somewhere-Specific-in-Mind-Liam-Gillick-and-Suzanne-Cotter">conversation with Suzanne Cotter</a> is the principal reference; <a href="https://www.kerlingallery.com/artists/liam-gillick">Kerlin Gallery's account</a> grounds the material vocabulary of modular Plexiglas and aluminium.</p>
+<p>The palette and arrangements here are ours. The relation to array indexing is a computational interpretation. We borrow a question about context and occupation, while keeping the work's institutional and social questions available beyond this small mechanism.</p>
+<details><summary>Sources, code and verification</summary><p>33 native behaviour checks and 13 successful image saves. The tests cover independent controls, persistent identities, collision, scripted standing-body traversal, the occupied-area guard and reset. No physical headset or learner trial has been run.</p>
+<p><a href="figures/verification.json">Native checks</a> · <a href="figures/provenance.json">Source hashes</a> · <a href="README.md">Decisions and limits</a> · <a href="READING.md">Reading source</a> · <a href="MAKING.md">Making source</a></p>
+<p class="small">Two-sided alpha compositing; solid panel colliders; ordinary frame shadows. No spectral glass transmission or coloured shadow simulation. Images are unedited Godot viewport output.</p></details></section></main>
+<footer>Ada Research · Room to gather · Independent native study. <a href="../2026-10-02-gillick-wall-relations/index.html">Continue to the wall studies</a> · <a href="../2026-10-01-artist-capacity/index.html">Artist / capacity atlas</a> · <a href="/tutorial-lineage">Tutorial lineage</a></footer></body></html>

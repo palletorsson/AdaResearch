@@ -1,0 +1,314 @@
+{
+  "artifacts": {
+    "force_trial_mass": {
+      "lookup_name": "force_trial_mass",
+      "name": "Same force, different mass",
+      "scene": "res://commons/artifacts/force_trials/mass.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "A timed force pulse gives the familiar points different accelerations. Coast after the pulse; compare 1, 2 and 4 kg.",
+      "learning_objectives": [
+        "Force, mass, acceleration; ending a force preserves velocity."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 12,
+      "review_map": "Force_Review_01_Mass"
+    },
+    "force_trial_vortex": {
+      "lookup_name": "force_trial_vortex",
+      "name": "The drain becomes an orbit",
+      "scene": "res://commons/artifacts/force_trials/vortex.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Release the point into a radial field, then add a sideways component. A cube can join it; the path is integrated, not animated.",
+      "learning_objectives": [
+        "Field composition, initial velocity, resistance."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 15,
+      "review_map": "Force_Review_02_Vortex"
+    },
+    "force_trial_roll": {
+      "lookup_name": "force_trial_roll",
+      "name": "Slide, roll or tip?",
+      "scene": "res://commons/artifacts/force_trials/roll.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Release a rotation-locked sphere, a free sphere and a cube on three equal slopes. Compare contact, rolling and sticking.",
+      "learning_objectives": [
+        "Friction, shape, rotational freedom."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 18,
+      "review_map": "Force_Review_03_Roll"
+    },
+    "force_trial_pipe": {
+      "lookup_name": "force_trial_pipe",
+      "name": "Where the pipe lets go",
+      "scene": "res://commons/artifacts/force_trials/pipe.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Send the point through a transparent, open curved channel. Predict where it leaves; the channel stops but motion and gravity continue.",
+      "learning_objectives": [
+        "Contact redirects velocity; tangent and ballistic departure."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 19,
+      "review_map": "Force_Review_04_Pipe"
+    },
+    "force_trial_conveyor": {
+      "lookup_name": "force_trial_conveyor",
+      "name": "The belt keeps going",
+      "scene": "res://commons/artifacts/force_trials/conveyor.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Feed twelve cubes against a closed receiver. Open the gate and see which boxes still make it. Spilled boxes remain available.",
+      "learning_objectives": [
+        "Contact motion, input/output rate, accumulated backlog."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 24,
+      "review_map": "Force_Review_05_Conveyor"
+    },
+    "force_trial_attractor": {
+      "lookup_name": "force_trial_attractor",
+      "name": "It caught the doorstop",
+      "scene": "res://commons/artifacts/force_trials/attractor.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Attract the chosen point, then widen the filter to include the doorstop. The hinged door keeps trying to close.",
+      "learning_objectives": [
+        "Attraction, selection, unintended secondary effects."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 25,
+      "review_map": "Force_Review_06_Attractor"
+    },
+    "force_trial_threebody": {
+      "lookup_name": "force_trial_threebody",
+      "name": "Three bodies, two beginnings",
+      "scene": "res://commons/artifacts/force_trials/threebody.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Release two planar trios with one small velocity difference. Compare their paths with equal opposite forces and softened near contact.",
+      "learning_objectives": [
+        "Pairwise force sums, initial conditions, limits of prediction."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 26,
+      "review_map": "Force_Review_07_Threebody"
+    },
+    "force_trial_support": {
+      "lookup_name": "force_trial_support",
+      "name": "Remove one support",
+      "scene": "res://commons/artifacts/force_trials/support.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Let a loaded table settle. Pull the marked foot and keep the collapse, or rebuild it by hand.",
+      "learning_objectives": [
+        "Support, centre of mass, contact and structural dependence."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 27,
+      "review_map": "Force_Review_08_Support"
+    },
+    "force_trial_bowling": {
+      "lookup_name": "force_trial_bowling",
+      "name": "One push, two directions",
+      "scene": "res://commons/artifacts/force_trials/bowling.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Send the point into a little bowling formation. Compare a braced launch cart with a free one; retain the knocked blocks.",
+      "learning_objectives": [
+        "Impulse, recoil, momentum transfer."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 29,
+      "review_map": "Force_Review_09_Bowling"
+    },
+    "force_trial_catapult": {
+      "lookup_name": "force_trial_catapult",
+      "name": "The lever lets go",
+      "scene": "res://commons/artifacts/force_trials/catapult.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces_review"
+      ],
+      "footprint": [
+        10,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Release a point from a hinged cup driven by a short torque pulse. Its flight comes from contact with the arm.",
+      "learning_objectives": [
+        "Torque, hinge constraint, release and trajectory."
+      ],
+      "qfep_connection": "An available operation changes a situation; the body and environment retain its consequence. This trial makes no numerical entropy claim.",
+      "illustrated_idea": 9,
+      "review_map": "Force_Review_10_Catapult"
+    }
+  }
+}

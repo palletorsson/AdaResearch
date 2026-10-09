@@ -1,0 +1,1 @@
+The outline breathes inward and outward as the treads climb at a steady rise. Follow three neighbouring steps with your eyes, then compare their edges and the membranes joining them. A sampled curve supplies positions; a route for a body needs more.

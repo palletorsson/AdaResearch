@@ -1,0 +1,224 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Gallery staged with recipe table",
+      "passed": true
+    },
+    {
+      "name": "Original interval and tree remain",
+      "passed": true
+    },
+    {
+      "name": "Ten authored artifacts plus gallery retained once each",
+      "passed": true
+    },
+    {
+      "name": "Table approach has floor and standing clearance",
+      "passed": true
+    },
+    {
+      "name": "Point reachable from one standing position",
+      "passed": true
+    },
+    {
+      "name": "Table side bypass has floor and clearance -1",
+      "passed": true
+    },
+    {
+      "name": "Table side bypass has floor and clearance 1",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: thirds",
+      "passed": true
+    },
+    {
+      "name": "Nearby NEXT receives desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby KEEP receives desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby RESTORE receives desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Nearby RESET receives desktop ray",
+      "passed": true
+    },
+    {
+      "name": "Pointer NEXT and KEEP retained four cuts; RESET restores live three",
+      "passed": true
+    },
+    {
+      "name": "Museum hand selects quarters while kept thirds remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: quarters",
+      "passed": true
+    },
+    {
+      "name": "Trigger keeps quarters while live becomes two fifths",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison",
+      "passed": true
+    },
+    {
+      "name": "Pointer RESTORE recovers kept quarter recipe",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: restored",
+      "passed": true
+    },
+    {
+      "name": "Live reaches cap while kept stays at three",
+      "passed": true
+    },
+    {
+      "name": "Table changes leave original desks untouched",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: five-cuts",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cantor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tree",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: overview",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Exact printed program runs inside museum",
+      "passed": true
+    },
+    {
+      "name": "Both authored portals validate",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: exit",
+      "passed": true
+    },
+    {
+      "name": "Walking through rear doorway requests next hall",
+      "passed": true
+    },
+    {
+      "name": "Portal completes arrival in Grammar Lab",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "entry": {
+      "cage": false,
+      "cell": "(9, 1)",
+      "door": "(9.5, 0.05, 0.35)",
+      "landing": "(9.5, 0.05, 1.5)",
+      "marker": "(9.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cell": "(9, 31)",
+      "door": "(9.5, 0.05, 31.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(9.5, 0.05, 31.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "portal_end": {
+      "failure": "",
+      "map": "LSystems_Grammar_Lab",
+      "phase": "idle"
+    },
+    "scope": "Actual Endless Museum; original ten works and gallery retained. Before hides only new comparison table. Desktop button rays, supplied XRTools hand poses and walker passage into next hall. Exact printed script temporarily substituted for screenshot. No physical headset or Quest performance claim.",
+    "works": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "fractal_procedure_gallery",
+      "cantor_set",
+      "recursive_tree",
+      "fractal_recursion_1",
+      "koch_curve",
+      "sierpinski_triangle",
+      "fractal_clouds",
+      "dark_sphere",
+      "strange_attractors",
+      "romanesco",
+      "fibonacci_sequences",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "exit_sign",
+      "exit_sign",
+      "emergency_button",
+      "wall_clock",
+      "info_screen",
+      "whiteboard",
+      "electrical_panel",
+      "ceiling_vent",
+      "cable_tray",
+      "floor_grate",
+      "fire_hose_box"
+    ]
+  },
+  "passed": true,
+  "room": "Fractal_Synthesis",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

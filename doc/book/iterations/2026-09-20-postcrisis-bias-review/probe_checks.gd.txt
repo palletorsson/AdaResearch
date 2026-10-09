@@ -1,0 +1,67 @@
+	report["checks"]=[]
+	var study: Node3D=nodes.get("bias_from_inside")
+	if study==null:
+		push_error("Word-position study is absent")
+		quit(1)
+		return
+	check(report,study.scale.is_equal_approx(Vector3.ONE),"Study is full size")
+	check(report,study._marginalized_tags.size()==12 and study._default_tags.size()==12,"All 24 labels retained")
+	check(report,not study._reading.visible,"Interpretation starts closed")
+	var initial_transform: Transform3D=study.global_transform
+	var warm_emission: float=study._marginalized_mat.emission_energy_multiplier
+	var grey_colour: Color=study._default_mat.albedo_color
+	var prior_warm: float=INF
+	var prior_grey: float=0
+	for value in [0.0,.5,1.0]:
+		move_handle(study,value)
+		check(report,is_equal_approx(study._perspective_blend,value),"Physical rail callback reaches normalized %.2f" % value)
+		var exact: bool=true
+		for i in range(12):
+			var warm: Vector3=study._marginalized_positions_default[i].lerp(study._marginalized_positions_compressed[i],value)
+			var grey: Vector3=study._default_positions_default[i].lerp(study._default_positions_compressed[i],value)
+			exact=exact and study._marginalized_multimesh.multimesh.get_instance_transform(i).origin.is_equal_approx(warm) and study._default_multimesh.multimesh.get_instance_transform(i).origin.is_equal_approx(grey)
+			exact=exact and study._marginalized_tags[i].position.is_equal_approx(warm+Vector3(0,study.sphere_radius+.03,0))
+		check(report,exact,"Indexed positions and labels follow the authored interpolation at %.2f" % value)
+		check(report,study._marginalized_mat.emission_energy_multiplier==warm_emission and study._default_mat.albedo_color==grey_colour,"Emission and alpha stay fixed at %.2f" % value)
+		var warm: float=pair_distance(study._marginalized_multimesh)
+		var grey: float=pair_distance(study._default_multimesh)
+		check(report,warm<prior_warm and grey>prior_grey,"Selected warm pair contracts and grey pair separates at %.2f" % value)
+		prior_warm=warm
+		prior_grey=grey
+		check(report,study.global_transform==initial_transform,"Handle leaves the exhibit transform unchanged")
+	check(report,study._header_cache=="ARRANGEMENT B","Endpoint title names arrangement without prescribing a judgement")
+	read_button(study)
+	check(report,study._reading.visible and study._perspective_blend==1.0,"READ exposes interpretation without changing geometry")
+	read_button(study)
+	check(report,not study._reading.visible,"READ closes interpretation again")
+	study.apply_grid_config({"perspective_blend":.4})
+	check(report,absf(study._slider.get_normalized_value()-.4)<.00001 and study._marginalized_positions_default.size()==12,"Author configuration synchronizes handle and does not duplicate arrays")
+	var old_radius: float=study.compressed_cluster_radius
+	study.apply_grid_config({"compressed_cluster_radius":.3,"perspective_blend":1})
+	check(report,pair_distance(study._marginalized_multimesh)>prior_warm,"Author radius configuration regenerates its endpoint")
+	study.apply_grid_config({"compressed_cluster_radius":old_radius,"perspective_blend":0})
+	check(report,study._slider.global_position.distance_to(origin+Vector3(4.5,1.3,4.85))<.75,"Handle lies within selected 0.75m reach")
+	check(report,study._controls.find_child("Btn_0",true,false).global_position.distance_to(origin+Vector3(4.5,1.3,4.85))<.75,"READ button lies within selected reach")
+	# Execute the frozen callback with the same physical rail signal.
+	var legacy_script:=GDScript.new()
+	legacy_script.source_code=FileAccess.get_file_as_string("res://doc/book/iterations/2026-09-20-postcrisis-bias-review/before/commons/artifacts/bias_from_inside/bias_from_inside.gd").replace("class_name BiasFromInside", "")
+	check(report,legacy_script.reload()==OK,"Frozen source compiles for callback reproduction")
+	var legacy:=Node3D.new()
+	legacy.set_script(legacy_script)
+	legacy.position=Vector3(1000,10,0)
+	root.add_child(legacy)
+	var old_slider: Node=legacy._controls.get_child(0)
+	old_slider.set_normalized_value(1.0)
+	old_slider.slider_moved.emit(old_slider.get_node("SliderOrigin/InteractableSlider").slider_position)
+	report["legacy_endpoint"]={"handle":old_slider.get_normalized_value(),"blend":legacy._perspective_blend}
+	check(report,old_slider.get_normalized_value()>.99 and legacy._perspective_blend<.2,"Frozen callback mistakes physical rail travel for the full blend")
+	legacy.queue_free()
+	# The isolated harness pauses the museum's process loop. Open its real
+	# arrival gate through the scanner signal and the ordinary animation step.
+	var gate: Dictionary= museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		var module: Variant=museum.get("_mod_gate")
+		module.call("step_open",gate,10.0)
+		await physics_frame
+	check(report,float(museum.get("_gate_t"))>=0.0,"Arrival scanner grants the actual museum gate before walking")

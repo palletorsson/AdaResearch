@@ -1,0 +1,101 @@
+
+	report["checks"]=[]
+	var study: Node3D=nodes.get("MolecularDesigner")
+	check(report,is_instance_valid(study),"MolecularDesigner loads in its actual museum hall")
+	if not is_instance_valid(study): quit(1);return
+	await process_frame
+	var rag: Node3D=study.get_node_or_null("BodyRagdoll")
+	var gold: Node3D=study.get_node_or_null("BodyWorkshop")
+	check(report,is_instance_valid(rag),"Opt-in ragdoll built")
+	if not is_instance_valid(rag):quit(1);return
+	study.set_process(false)
+	study._assemble("VRBody")
+	settle(study,18)
+	for p in study.parts:p.set_process(false)
+	var gold_before: Dictionary=gold.export_pose()
+	var saved_before: Dictionary=Store.read(self)
+	check(report,rag.parts.size()==10 and rag.links.size()==9,"Ten physical parts joined by nine pin constraints")
+	check(report,rag.grips.size()==13,"Every source body point has a grabbable ring")
+	check(report,rag.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Ragdoll physics stays at metre scale under enlarged artifact")
+	report["ragdoll_position"]=arr(rag.global_position-origin)
+	await create_timer(1.0).timeout
+	check(report,is_instance_valid(rag.hanger) and rag.anchor_position("head").distance_to(rag.to_global(rag.points.head))<.05,"Hanging support keeps head in reach")
+	var physical_live := true
+	for part in rag.parts.values():physical_live=physical_live and not part.freeze and part.mass>0 and part.gravity_scale>0
+	check(report,physical_live,"Physical parts use mass and gravity, never frozen during play")
+	var grip: RigidBody3D=rag.grips.l_hand
+	var start_hand: Vector3=rag.anchor_position("l_hand")
+	var start_elbow: Vector3=rag.anchor_position("l_elb")
+	var camera_hand:=Camera3D.new();root.add_child(camera_hand)
+	camera_hand.global_position=grip.global_position+rag.global_basis*Vector3(0,0,1.2)
+	camera_hand.look_at(grip.global_position)
+	var pointer: Node3D=load("res://commons/scenes/DesktopInteractionPointer.gd").new()
+	root.add_child(pointer);pointer.set_process(false);pointer._camera=camera_hand
+	await physics_frame
+	var found: Node3D=pointer._find_grabbable()
+	report["desktop_hit"]=str(found.get_path()) if is_instance_valid(found) else "none"
+	report["grip_position"]=arr(grip.global_position-rag.global_position)
+	check(report,found==grip,"Desktop ray selects the hand ring")
+	pointer._grab_held(grip)
+	check(report,rag.active.has("l_hand") and not is_instance_valid(rag.hanger),"Taking hand releases hanging support")
+	var camera_start:=camera_hand.global_position
+	for frame in range(100):
+		camera_hand.global_position=camera_start+rag.global_basis*Vector3(-.45,.7,.1)*minf(float(frame)/70,1)
+		pointer._process(1.0/60)
+		await physics_frame
+	var hand_move: float=rag.anchor_position("l_hand").distance_to(start_hand)
+	var elbow_move: float=rag.anchor_position("l_elb").distance_to(start_elbow)
+	report["drag"]={"hand_distance":hand_move,"elbow_distance":elbow_move,"constraint_gap":gap(rag)}
+	check(report,hand_move>.2 and elbow_move>.15,"Pulling hand moves both hand and neighbouring elbow")
+	check(report,not rag.parts.l_fore.freeze,"Grabbing target does not freeze or teleport the physical limb")
+	check(report,gap(rag)<.12,"Joined limb anchors remain within solver tolerance during dragging")
+	rag.reset_button.button_pressed.emit(rag.reset_button)
+	check(report,not rag.reset_pending and rag.active.size()==1,"Reset refuses to interrupt a held limb")
+	pointer._drop_held()
+	check(report,rag.active.is_empty() and grip.freeze and grip.collision_layer==4,"Desktop release stops pulling and restores pickable target")
+	await create_timer(3.0).timeout
+	var max_height:=0.0
+	var finite_above_floor:=true
+	for part in rag.parts.values():
+		var local: Vector3=rag.to_local(part.global_position)
+		max_height=maxf(max_height,local.y)
+		finite_above_floor=finite_above_floor and local.is_finite() and local.y>-.03
+	report["released"]={"highest_part_center":max_height,"constraint_gap":gap(rag)}
+	check(report,max_height<.5 and finite_above_floor,"Released body falls, stays above floor and settles low")
+	check(report,gap(rag)<.12,"Constraints survive the fall")
+	rag.reset_button.button_pressed.emit(rag.reset_button)
+	await create_timer(.8).timeout
+	check(report,is_instance_valid(rag.hanger) and not rag.reset_pending,"Physical reset button hangs the body again")
+	report["reset_head_error"]=rag.anchor_position("head").distance_to(rag.to_global(rag.points.head))
+	check(report,rag.anchor_position("head").distance_to(rag.to_global(rag.points.head))<.05,"Reset restores the head to hanging position")
+	# Two genuine XRTools drivers, with synthetic controllers rather than headset input.
+	var controllers: Array=[]
+	var pickups: Array=[]
+	for id in ["l_hand","r_foot"]:
+		var controller:=XRController3D.new();root.add_child(controller)
+		var pickup: Node3D=load("res://addons/godot-xr-tools/functions/function_pickup.gd").new()
+		controller.add_child(pickup);pickup.set_process(false)
+		controller.global_position=rag.grips[id].global_position
+		rag.grips[id].pick_up(pickup)
+		controllers.append(controller);pickups.append(pickup)
+	check(report,rag.active.size()==2,"Two XRTools pickups can hold different limbs together")
+	var vr_start: Vector3=rag.anchor_position("r_foot")
+	for frame in range(75):
+		controllers[0].global_position+=rag.global_basis*Vector3(0,.008,0)
+		controllers[1].global_position+=rag.global_basis*Vector3(.004,.008,0)
+		await physics_frame
+	check(report,rag.anchor_position("r_foot").distance_to(vr_start)>.2,"XRTools controller movement pulls the physical foot")
+	report["two_hand_gap"]=gap(rag)
+	check(report,gap(rag)<.12,"Joint constraints remain bounded with two held limbs")
+	for i in range(2):rag.grips[["l_hand","r_foot"][i]].let_go(pickups[i],Vector3.ZERO,Vector3.ZERO)
+	check(report,rag.active.is_empty(),"Both VR releases stop their forces")
+	for c in controllers:c.queue_free()
+	pointer.queue_free();camera_hand.queue_free()
+	check(report,gold.export_pose()==gold_before and Store.read(self)==saved_before,"Physics play changes neither gold workshop nor saved return pose")
+	var legacy: Node3D=load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	legacy.enable_auto_cycle=false;root.add_child(legacy);await process_frame
+	check(report,not legacy.has_node("BodyRagdoll"),"Other catalogue placements remain unchanged unless opted in")
+	legacy.queue_free()
+	rag.request_reset();await create_timer(.7).timeout
+	var gate: Dictionary=museum.get("_gate")
+	if not gate.is_empty():gate.scanner.palm_scanned.emit();museum.get("_mod_gate").call("step_open",gate,10.0)

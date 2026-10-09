@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="3a5ff0a7ca5951de8ad87abc0e6c2100c8eca46613abdeffe74c5592f5a8a369"><title>commons/maps/Shader_05_Patterns/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Shader_05_Patterns/tutorial.md</p><h1>The pattern crosses over</h1>
+<!-- study-spine:reference_pattern_garden -->
+
+<h2>Return: The pattern crosses over</h2>
+<p>Change pattern phase while retaining every flower position. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses array, shader. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>garden</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-edit:reference_pattern_garden -->
+
+<h3>One source change: The pattern crosses over</h3>
+<p>In surface(), halve the original 0.5 phase range. Watch the same petal through the parameter change; keep density and flower positions.</p>
+<pre><code class="language-gdscript">result.set_shader_parameter(&quot;phase&quot;, amount * 0.25)
+</code></pre>
+<p>Source: <code>commons/artifacts/reference_studies/pattern_garden.gd</code>. Use the prepared scene to run and compare.</p></body></html>

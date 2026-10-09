@@ -1,0 +1,57 @@
+--- before/Trans_Rotation-final.md
++++ commons/maps/Trans_Rotation/final.md
+@@ -6,15 +6,15 @@
+ 
+ ## Staying upright
+ 
+-The green blade turns around the vertical y axis. At ninety degrees it pauses, its length reaching across your route. Walk over while the crossing holds.
++The level blade turns around the vertical y axis. At ninety degrees it pauses, its length reaching across your route. Walk over while the crossing holds.
+ 
+-At the orange blade, one end descends as the other rises. It turns around x, like a paddle wheel. The far landing is three grid cubes higher. During the pause, the blade offers a slope you can climb. Through vertical, your feet lose their agreement with it.
++At the X-axis blade, one end descends as the other rises. It turns around x, like a paddle wheel. The far landing is three grid cubes higher. During the pause, the blade offers a slope you can climb. Through vertical, your feet lose their agreement with it.
+ 
+ Beside its lower end is a small level platform. Board it and stay through the turn. You rise, move forward, and arrive beside the higher grid. Your head has stayed upright.
+ 
+ The platform follows an arc while keeping its surface level. It is mounted to one side so the blade can pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.
+ 
+-The orange ride's arc, before that sideways offset, is calculated as:
++The X-axis ride's arc, before that sideways offset, is calculated as:
+ 
+ ```gdscript
+ var radial := Vector3(0, -1.5, -3.5)
+@@ -24,7 +24,7 @@
+ 
+ `radial` reaches from the centre to the starting point. `Basis` turns that reach around x; `progress` from zero to one supplies half a revolution. Adding the centre gives the new position. The platform carries you until you step off or jump.
+ 
+-The blue blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.
++The sideways ride's blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.
+ 
+ Both rides pause for twelve seconds, then take twelve for the half-turn. Staying aboard brings you back along the upper arc. The grid wedges and still aisles offer other returns.
+ 
+@@ -49,7 +49,7 @@
+ 
+ The row supplies the angle; the band supplies the axis or combination. Waiting will not change the slope. The still aisles let you inspect a difficult row from beside it.
+ 
+-A stand in the central aisle starts another walk. Cyan capsules, 0.44 metres wide, set off along all four bands. Pink capsules follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings retain their endpoints; the trial repeats, and **REPLAY** starts it again.
++A stand in the central aisle starts another walk. Narrow capsules, 0.44 metres wide, set off along all four bands. Wider capsules follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings retain their endpoints; the trial repeats, and **REPLAY** starts it again.
+ 
+ Watch the z band. The narrow body catches on a ridge; the wider one can slide sideways and continue. Wider need not mean less room to move. These bodies neither jump nor choose a detour: the collision solver supplies their slides. You can walk through them and try a route they did not take.
+ 
+@@ -63,7 +63,7 @@
+ 
+ ## Two turns
+ 
+-Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. Blue receives X first; red receives Y first.
++Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. The left form receives X first; the right receives Y first.
+ 
+ Follow the fin through the smaller intermediate forms. In the two results it points different ways. The display separates the forms for us; both calculations use the same origin.
+ 
+@@ -96,7 +96,7 @@
+ 
+ ![The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png)
+ 
+-*The cyan contours describe full turns. Each amber body is paused in one position.*
++*In this earlier colour study, the contours describe full turns. Each solid body is paused in one position. The museum now shows these studies in grayscale.*
+ 
+ The triangle from Primitives has acquired another possibility without acquiring another corner.
+ 

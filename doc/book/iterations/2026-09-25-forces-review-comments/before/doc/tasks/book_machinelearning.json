@@ -1,0 +1,539 @@
+{
+  "goal_id": "book_machinelearning",
+  "goal_title": "Book: Machine Learning: What Changes, and Why? — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in machinelearning became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "machinelearning",
+    "order": 20,
+    "phase": "integration",
+    "title": "Machine Learning: What Changes, and Why?",
+    "chapters": [
+      "ML_Evolution",
+      "ML_Gradient_Landscape",
+      "ML_Classification",
+      "ML_Neural_Networks",
+      "ML_Perception",
+      "ML_Sequence_Memory",
+      "ML_Generative",
+      "ML_Synthesis"
+    ],
+    "words": 3608,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "SwarmIntelligence_Swarm_Intelligence_Algorithms (previous sequence, last hall)",
+      "ML_Evolution",
+      "ML_Gradient_Landscape",
+      "ML_Classification",
+      "ML_Neural_Networks",
+      "ML_Perception",
+      "ML_Sequence_Memory",
+      "ML_Generative",
+      "ML_Synthesis",
+      "GT_Foundations (next sequence, first hall)"
+    ],
+    "reading": {
+      "arc": "The sequence walks from selection without a judge to a flag without an explanation, and in every hall performs the same separation: the operation a room really computes from the interpretation a label, a sign or a name lays over it. The first four halls (energy economy, three loss rules, k-means, backprop) are live computations the visitor can perturb and repeat; the sixth (sequence memory) is the one hall where the visitor's own hands set the parameters of an arithmetic they can predict before the slab moves. Halls five, seven and eight confess that a stage of the room is supplied rather than computed (typed-in names and percentages, scripted losses, a single fixed detection rule) and turn the confession into the lesson rather than hiding it. The last hall names the refrain outright (a cluster from a class, an edge from an object, a curve from generalisation) and closes on the anomaly as a relation between a point and the rule that judged it. The sequence's truth line, that a change in appearance is not yet evidence of learning, is honoured in every chapter; the cost is that three of the eight chapters are partly about what their room does not do.",
+      "holds": [
+        "The refrain 'the operation is not the interpretation', built hall by hall (environment selects without a leaderboard; hill is a scoring rule not an obstacle; cluster is not a class; weight is not the answer; edge is not an object; gate is set by hand; scripted curve is not training; flag is not an error) and named explicitly in ML_Synthesis.",
+        "The 'hold something still' device: RESET and repeatable starts in the loss room, the same sample returning in k-means, four fixed examples in the network, three hand-set spheres in memory, one unchanging image in perception.",
+        "The honest confession as a structural beat: each chapter says in its own words what the room cannot yet show (a proposed comparison not offered; names supplied in advance; no models trained; a threshold not yet exposed) and turns it into the experiment the reader should want.",
+        "A backward callback in the fifth or sixth paragraph of every chapter (the ecosystem's caretaker; k-means moved centres; the fixed loss surface; the whole sequence's separations) and a one-sentence forward handover after the closing tag.",
+        "The ethical turn at the end of each hall: the outlier as a person the majority fit neglects, the cluster mistaken for an identity, the reference set's reward leaving unusual forms outside, the flagged point you would investigate rather than discard.",
+        "One tagged work per hall, opened with a second-person imperative (Find, Choose, Press, Carry) before any explanation."
+      ],
+      "hall_notes": [
+        {
+          "hall": "ML_Evolution",
+          "words": 415,
+          "note": "Opens the sequence by asking whether the absence of a ranking means nothing selects, then explains the energy economy exactly as the code runs it (new cells pay, time drains, reproduction halves energy and nudges size, speed and colour) and insists the environment still prefers. Patient and clean; its one weakness is asking the eye to catch a birth among thirty bodies a centimetre or two across when the nameplate counts births and deaths."
+        },
+        {
+          "hall": "ML_Gradient_Landscape",
+          "words": 448,
+          "note": "Three error rules over one dataset, with OUTLIERS and RESET as the instruments for holding something still; every technical claim (squared vs Huber, the sine-plus-quadratic third surface, finite-difference gradient, bounded slope and intercept, outliers accumulating and returning with the slider) checks against the code, and the closing turn about the outlier as a person lands. RESET names a button the hall never labels."
+        },
+        {
+          "hall": "ML_Classification",
+          "words": 498,
+          "note": "The most hands-on hall: STEP, PAUSE / RUN, RESET and DATASET all exist, the sample really returns on RESET, and the BLOBS to RINGS to BLOCK cycle is precisely what the lesson controls do. The length is spent on watching rather than explaining, which is right. One slip: it calls the sequence a classification sequence."
+        },
+        {
+          "hall": "ML_Neural_Networks",
+          "words": 405,
+          "note": "Separates passing activity from a lasting weight, one wire from the aggregate error, fitting from generalising; correct about the four-example, four-input, two-output set and about what the backward pass does not do. Its instructions assume a training loop that is still running, which in the built hall stops fifty seconds after spawn with no way to restart it from a headset."
+        },
+        {
+          "hall": "ML_Perception",
+          "words": 395,
+          "note": "The clearest instance of the refrain: the Sobel step is real and the names and percentages are typed in, and the chapter says so. Accurate about the border zero and the local neighbourhood; it overstates what the moving window shows and never mentions that the room's own signs invite the visitor to paint pixels and grab filters, neither of which works."
+        },
+        {
+          "hall": "ML_Sequence_Memory",
+          "words": 585,
+          "note": "The centrepiece, the longest chapter and the only one where the visitor's hands set the parameters; the arithmetic is right and the prose is the most alive in the sequence. But its flagship comparison puts the slab below the floor, its second run starts on an uncleared cell so the printed number will not match, and its height-to-value sentence and 'six decimals' do not match the code or the readout."
+        },
+        {
+          "hall": "ML_Generative",
+          "words": 407,
+          "note": "An honest chapter about a diagram: nothing trains, the losses are scripted, and the chapter specifies the experiment the room still needs. Its confession arrives in paragraph five, after four paragraphs that read as if a training process were in front of the visitor, who has meanwhile been standing at a panel that says so in two lines."
+        },
+        {
+          "hall": "ML_Synthesis",
+          "words": 407,
+          "note": "Names the refrain explicitly and closes the sequence on the anomaly as a relation; the Z-score arithmetic and the observation that the outer points sit inside the statistics that judge them are exactly what the code does. The painted threshold disc contradicts the boundary shape the chapter derives, and the mode sign the reader is sent to renders raw BBCode."
+        }
+      ],
+      "stumbles": [
+        "ML_Sequence_Memory: both demonstration histories end with a dark token, so the slab the reader is told to compare sits 11 cm and 34 cm below the floor; the comparison is invisible in the headset.",
+        "ML_Sequence_Memory: the second history ('two dark tokens') is run on top of the first without clearing the cell, so the readout prints -0.406, not the -0.375 the chapter promises.",
+        "ML_Sequence_Memory: 'nought at the floor and one above your head' is not the code's mapping (zero up to waist height, one at three metres), and the readout that actually shows c and h is never named.",
+        "ML_Neural_Networks: 'watch it through several training updates' assumes live training; the loop runs 1000 batches at 0.05 s and frees its timer, and the only restart is a keyboard key.",
+        "ML_Gradient_Landscape: 'RESET' is written as a labelled control; the hall has an unlabelled push button beside the Outliers slider.",
+        "ML_Perception: 'look at what happens when it crosses a boundary' — nothing happens at the window; it is a yellow outline stepping over a static input image, and the computed response is on the other canvas.",
+        "ML_Perception: the room's own signs say 'Paint pixels with hand' and 'Grab to apply'; neither is implemented, and a visitor who tries will doubt the chapter's careful account.",
+        "ML_Synthesis: the chapter derives a boundary shape from adding two standardised displacements, but the hall paints a circular disc as the threshold; and 'Read the active detection mode' sends the reader to a sign reading '[b]Mode:[/b] Z-Score'.",
+        "ML_Generative: the disclosure that losses are scripted and nothing trains comes in paragraph five; the visitor has been reading 'Scripted loss / No models trained' on the panel since arrival.",
+        "ML_Classification: 'The room sits in a classification sequence' — it sits in the machine-learning sequence, which the reader was told on entry."
+      ],
+      "keep": [
+        {
+          "hall": "ML_Evolution",
+          "quote": "Removing an explicit fitness ranking has not removed the conditions under which some lineages continue and others stop."
+        },
+        {
+          "hall": "ML_Gradient_Landscape",
+          "quote": "Is it a measurement mistake, a rare event or a person whose case the majority fit neglects? The loss function cannot answer that question."
+        },
+        {
+          "hall": "ML_Classification",
+          "quote": "We have changed what the procedure encounters while keeping its demand for four centres. The boundary belongs to that meeting."
+        },
+        {
+          "hall": "ML_Neural_Networks",
+          "quote": "It does not send a little correct answer backwards through every wire."
+        },
+        {
+          "hall": "ML_Perception",
+          "quote": "Local contrast can be real while its interpretation remains ambiguous. Adding a confident word does not remove that ambiguity."
+        },
+        {
+          "hall": "ML_Sequence_Memory",
+          "quote": "The band is not a threshold anyone set — it is where the arithmetic runs out of present tense."
+        },
+        {
+          "hall": "ML_Sequence_Memory",
+          "quote": "a model you can predict is a model you can be wrong about in a way you can check."
+        },
+        {
+          "hall": "ML_Synthesis",
+          "quote": "The population helping define normality therefore includes the very observations that may later be called abnormal."
+        }
+      ],
+      "handover_in": "Clean. The swarm sequence closes on 'Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.' ML_Evolution opens on exactly that question (does anything select when no judge ranks?), and its sixth paragraph names the previous room explicitly ('The ecosystem in the previous room combined local behaviour with balancing interventions') before turning the caretaker motif into 'the apparently ordinary rule that pays for survival'. The reader carries the distinction in and uses it.",
+      "handover_out": "Sound. ML_Synthesis closes with a pivot from distance to connection ('Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit'), and GT_Foundations delivers it in its second paragraph ('an edge records a permitted connection') and its opening question about two travellers obeying the same connections. GT_Foundations does not look back at machine learning at all, which is acceptable since the promise is met; the only loose thread is administrative, not reader-facing: machinelearning.json says it unlocks foundationscrisis while the spine's next sequence is graphtheory.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_machinelearning.001",
+      "title": "Flip the two histories so the slab stays above the floor",
+      "spec": "[encounter] ML_Sequence_Memory\nQuote: “Both runs ended with the same dark token. The slab is not in the same place.”\nWhy: With all gates at rest (0.5) the histories pale-then-dark and dark-then-dark leave h = -0.125 and -0.375; the rail sits at h x 0.9 m above a post whose base is on the floor, so both slab positions the reader is told to compare are 11 cm and 34 cm underground and invisible in the headset. The chapter's flagship evidence cannot be seen.\nDo: Rewrite the two runs as pale-then-pale (h = +0.375, slab 34 cm up) and dark-then-pale (h = +0.125, slab 11 cm up): same last token, same 0.25 gap, both visible; the 'drops past where it started' line goes and the band paragraph is untouched. Alternative if you prefer the drama of a drop: one code line in LSTMs_VR.gd putting the rail's zero at mid-post (and moving the band with it), effort L.\nEvidence: algorithms/machinelearning/LSTMs/LSTMs_VR.gd:577-578 `_rail.position.y = clamp(hidden_out, -2.0, 2.0) * 0.9`; post at y = 0 (:632-634); the step (:718-723); gates rest at local y = 2.0 m (:169,:175,:184,:193) which _gate_value (:487-489) reads as 0.5; floor markers at y = 0 (:162) so the artifact base is the floor, and commons/grid/GridInteractablesComponent.gd:2128-2160 only shifts the AABB minimum to 0. Arithmetic: pale,dark -> c = -0.25, h = -0.125; dark,dark -> c = -0.75, h = -0.375; pale,pale -> h = +0.375; dark,pale -> h = +0.125.\nFile: commons/maps/ML_Sequence_Memory/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Sequence_Memory"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ML_Sequence_Memory",
+      "quote": "Both runs ended with the same dark token. The slab is not in the same place.",
+      "why": "With all gates at rest (0.5) the histories pale-then-dark and dark-then-dark leave h = -0.125 and -0.375; the rail sits at h x 0.9 m above a post whose base is on the floor, so both slab positions the reader is told to compare are 11 cm and 34 cm underground and invisible in the headset. The chapter's flagship evidence cannot be seen.",
+      "proposal": "Rewrite the two runs as pale-then-pale (h = +0.375, slab 34 cm up) and dark-then-pale (h = +0.125, slab 11 cm up): same last token, same 0.25 gap, both visible; the 'drops past where it started' line goes and the band paragraph is untouched. Alternative if you prefer the drama of a drop: one code line in LSTMs_VR.gd putting the rail's zero at mid-post (and moving the band with it), effort L.",
+      "evidence": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd:577-578 `_rail.position.y = clamp(hidden_out, -2.0, 2.0) * 0.9`; post at y = 0 (:632-634); the step (:718-723); gates rest at local y = 2.0 m (:169,:175,:184,:193) which _gate_value (:487-489) reads as 0.5; floor markers at y = 0 (:162) so the artifact base is the floor, and commons/grid/GridInteractablesComponent.gd:2128-2160 only shifts the AABB minimum to 0. Arithmetic: pale,dark -> c = -0.25, h = -0.125; dark,dark -> c = -0.75, h = -0.375; pale,pale -> h = +0.375; dark,pale -> h = +0.125.",
+      "review": "confirmed by a code checker (cited files only): LSTMs_VR.gd:577-578 '_rail.position.y = clamp(hidden_out,-2,2)*0.9'; post at y=0 (:634), stem 0..4 m; rail knob is a 0.09 m box. Gates: container at cell_size/2 (=1.5, :18 cell_size 3.0) + local 0.5 = 2.0; _gate_value (:487-489) gives (2.0-1.0)/2 = 0.5; gate bodies have gravity_scale 0 (:204) so they stay there. recurrent_step (:718-723) confirms the arithmetic: pale,dark h=-0.125; dark,dark h=-0.375 (final.md:24 already states these), i.e. -11 cm and -34 cm. Map token 'lstms_vr:0:0:1#recurrent:on' has y_offset 0; GridInteractablesComponent 2128ff only lifts a negative AABB min at spawn. final.md:15 has the quoted sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.002",
+      "title": "Add the clearing step between the two histories",
+      "spec": "[prose] ML_Sequence_Memory\nQuote: “Now do it again in the other order. Two dark tokens, one after the other.”\nWhy: Nothing clears the cell between runs: recurrent_reset() is only reachable from the probe API, and every token entry steps the state. Run literally, the second history starts from c = -0.25 and the readout prints h = -0.406, not the -0.375 the chapter promises; the reader's first check of 'arithmetic you can follow' fails.\nDo: Insert one sentence before the second run, using the reset the code already contains: put the forget sphere on the floor, carry any token through once (c becomes 0 x c + i x x, then leaves with the token), lift it back to half height, then run the two dark tokens. Say the same before 'run both histories again' later in the chapter.\nEvidence: LSTMs_VR.gd:728-733 recurrent_reset(), called only from run_history (:737-743); _poll_tokens steps on every entry (:552-564); the code's own note on resetting by hand (:726-727). From c = -0.25: dark -> c = -0.625, dark -> c = -0.8125, h = -0.406.\nFile: commons/maps/ML_Sequence_Memory/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Sequence_Memory"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Sequence_Memory",
+      "quote": "Now do it again in the other order. Two dark tokens, one after the other.",
+      "why": "Nothing clears the cell between runs: recurrent_reset() is only reachable from the probe API, and every token entry steps the state. Run literally, the second history starts from c = -0.25 and the readout prints h = -0.406, not the -0.375 the chapter promises; the reader's first check of 'arithmetic you can follow' fails.",
+      "proposal": "Insert one sentence before the second run, using the reset the code already contains: put the forget sphere on the floor, carry any token through once (c becomes 0 x c + i x x, then leaves with the token), lift it back to half height, then run the two dark tokens. Say the same before 'run both histories again' later in the chapter.",
+      "evidence": "LSTMs_VR.gd:728-733 recurrent_reset(), called only from run_history (:737-743); _poll_tokens steps on every entry (:552-564); the code's own note on resetting by hand (:726-727). From c = -0.25: dark -> c = -0.625, dark -> c = -0.8125, h = -0.406.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.003",
+      "title": "Give the network a restart the visitor can press",
+      "spec": "[encounter] ML_Neural_Networks\nQuote: “Choose one connection between two layers and watch it through several training updates.”\nWhy: Training runs 1000 batches on a 0.05 s timer, i.e. fifty seconds from the moment the hall builds, then frees its timer; the only restart is KEY_R / KEY_T on a keyboard. A headset visitor who arrives a minute after the hall streamed in meets a frozen diagram reading 'Epoch: 1000 / 1000', and the chapter's instructions to watch updates and compare them with the error history cannot be followed.\nDo: Add an in-hall push button (the loss comparator already instantiates commons/interactables/push_button.tscn) wired to reset_network(), with a Label3D 'TRAIN AGAIN'; or, cheaper, make _run_training_batch loop by resetting current_epoch at 1000. Then add one clause to the chapter telling the visitor the button exists.\nEvidence: algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd:38 training_iterations = 1000; :612-620 timer wait_time 0.05 / training_speed; :622-633 stops and frees the timer at 1000; :259-265 KEY_R and KEY_T only; :911-933 apply_grid_config accepts only topology, presentation, emissive so no map token can extend it; commons/maps/ML_Neural_Networks/map_data.json token `neural_network_visualization:0:0:0.6`.\nFile: commons/maps/ML_Neural_Networks/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Neural_Networks"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ML_Neural_Networks",
+      "quote": "Choose one connection between two layers and watch it through several training updates.",
+      "why": "Training runs 1000 batches on a 0.05 s timer, i.e. fifty seconds from the moment the hall builds, then frees its timer; the only restart is KEY_R / KEY_T on a keyboard. A headset visitor who arrives a minute after the hall streamed in meets a frozen diagram reading 'Epoch: 1000 / 1000', and the chapter's instructions to watch updates and compare them with the error history cannot be followed.",
+      "proposal": "Add an in-hall push button (the loss comparator already instantiates commons/interactables/push_button.tscn) wired to reset_network(), with a Label3D 'TRAIN AGAIN'; or, cheaper, make _run_training_batch loop by resetting current_epoch at 1000. Then add one clause to the chapter telling the visitor the button exists.",
+      "evidence": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd:38 training_iterations = 1000; :612-620 timer wait_time 0.05 / training_speed; :622-633 stops and frees the timer at 1000; :259-265 KEY_R and KEY_T only; :911-933 apply_grid_config accepts only topology, presentation, emissive so no map token can extend it; commons/maps/ML_Neural_Networks/map_data.json token `neural_network_visualization:0:0:0.6`.",
+      "review": "confirmed by a code checker (cited files only): neural_network_visualization.gd:38 training_iterations = 1000; :37 auto_train = true and :220-221 start_training() in _ready; :612-620 timer wait_time 0.05 / training_speed; :622-633 stops and frees the timer at 1000; :259-265 only KEY_R (reset_network) and KEY_T; :911-933 apply_grid_config reads only topology, presentation, emissive. Map places neural_network_visualization:0:0:0.6 at (3,2) with no desk. loss_function_comparator.gd:642 loads push_button.tscn. reset_network (:880-891) rebuilds and restarts when auto_train, so a button wired to it would work.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.004",
+      "title": "Correct the height-to-value sentence",
+      "spec": "[code-claim] ML_Sequence_Memory\nQuote: “its height *is* its value, nought at the floor and one above your head”\nWhy: The code reads (y - 1.0) / 2.0 clamped to 0..1 in the artifact frame: every height up to one metre is zero, one is reached only at three metres, and the resting height of two metres is the 0.5 the chapter later relies on. A visitor who lifts a sphere from the floor to their waist sees nothing change, and cannot place it at one by hand.\nDo: Replace with the real mapping in one sentence: 'anything at waist height or lower reads nought, three metres up reads one, and where the spheres hang, two metres, is one half' — or change the code datum to the floor (y / 2.0) and move the spheres' rest to one metre, effort L, which also makes one reachable.\nEvidence: LSTMs_VR.gd:487-489 `return clamp((y - 1.0) / 2.0, 0.0, 1.0)` with y = to_local(body.global_position).y when recurrent; gate rest positions (:169 container at cell_size/2 = 1.5, :175/:184/:193 +0.5) = 2.0 m; floor at local y = 0 (:162).\nFile: commons/maps/ML_Sequence_Memory/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Sequence_Memory"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "ML_Sequence_Memory",
+      "quote": "its height *is* its value, nought at the floor and one above your head",
+      "why": "The code reads (y - 1.0) / 2.0 clamped to 0..1 in the artifact frame: every height up to one metre is zero, one is reached only at three metres, and the resting height of two metres is the 0.5 the chapter later relies on. A visitor who lifts a sphere from the floor to their waist sees nothing change, and cannot place it at one by hand.",
+      "proposal": "Replace with the real mapping in one sentence: 'anything at waist height or lower reads nought, three metres up reads one, and where the spheres hang, two metres, is one half' — or change the code datum to the floor (y / 2.0) and move the spheres' rest to one metre, effort L, which also makes one reachable.",
+      "evidence": "LSTMs_VR.gd:487-489 `return clamp((y - 1.0) / 2.0, 0.0, 1.0)` with y = to_local(body.global_position).y when recurrent; gate rest positions (:169 container at cell_size/2 = 1.5, :175/:184/:193 +0.5) = 2.0 m; floor at local y = 0 (:162).",
+      "review": "confirmed by a code checker (cited files only): LSTMs_VR.gd:487-489 _gate_value returns clamp((y - 1.0) / 2.0, 0, 1) with y = to_local(...).y when recurrent; cell_size = 3.0 (:18), gates_container at y = cell_size/2 = 1.5 (:169) and each gate sphere at +0.5 (:175, :184, :193) -> rest height 2.0 m = value 0.5; floor markers at y = 0 (:162). So 0 up to 1 m, 1 only at 3 m. final.md:7 says 'nought at the floor and one above your head'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.005",
+      "title": "Name the readout, use the hall's notation, and say which gap is which",
+      "spec": "[prose] ML_Sequence_Memory\nQuote: “So the gap between two histories that differ at one earlier step is exactly twice the forget gate times the input gate — nothing else in the rule can produce it.”\nWhy: The numbers the chapter quotes (-0.125, -0.375, 'to six decimals') exist only on the StateReadout label 4.3 m up the post, which prints c and h to three decimals and which the chapter never mentions; the post itself has no scale. And 2 x forget x input (0.5) is the gap in c, while the slab the reader is watching shows h, whose gap is the output gate times that (0.25).\nDo: One sentence after the slab first moves: 'Above the post a readout prints the step, the retained term f*c, the admitted term i*x, and c and h to three decimals.' Then: 'the gap in c is exactly twice the forget gate times the input gate; the slab shows that gap scaled by the exposing gate.' Replace the gdscript block with the panel's own line, c = f*c + i*x and h = o*c, and change 'to six decimals' to 'to every decimal the readout prints'.\nEvidence: LSTMs_VR.gd:580-582 readout format `%+.3f` for retain, admit, c, h; :694 readout at y = 4.3; :705-709 the panel text 'c = f*c + i*x    h = o*c'; :719-722 the source uses forget_gate_activation / input_gate_activation / output_gate_activation, not the chapter's forget / input_gate / output. Gap arithmetic: c differs by 2*i = 1.0 after step one, f*1.0 = 0.5 after step two; h differs by o*0.5 = 0.25 (matches -0.125 vs -0.375).\nFile: commons/maps/ML_Sequence_Memory/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Sequence_Memory"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Sequence_Memory",
+      "quote": "So the gap between two histories that differ at one earlier step is exactly twice the forget gate times the input gate — nothing else in the rule can produce it.",
+      "why": "The numbers the chapter quotes (-0.125, -0.375, 'to six decimals') exist only on the StateReadout label 4.3 m up the post, which prints c and h to three decimals and which the chapter never mentions; the post itself has no scale. And 2 x forget x input (0.5) is the gap in c, while the slab the reader is watching shows h, whose gap is the output gate times that (0.25).",
+      "proposal": "One sentence after the slab first moves: 'Above the post a readout prints the step, the retained term f*c, the admitted term i*x, and c and h to three decimals.' Then: 'the gap in c is exactly twice the forget gate times the input gate; the slab shows that gap scaled by the exposing gate.' Replace the gdscript block with the panel's own line, c = f*c + i*x and h = o*c, and change 'to six decimals' to 'to every decimal the readout prints'.",
+      "evidence": "LSTMs_VR.gd:580-582 readout format `%+.3f` for retain, admit, c, h; :694 readout at y = 4.3; :705-709 the panel text 'c = f*c + i*x    h = o*c'; :719-722 the source uses forget_gate_activation / input_gate_activation / output_gate_activation, not the chapter's forget / input_gate / output. Gap arithmetic: c differs by 2*i = 1.0 after step one, f*1.0 = 0.5 after step two; h differs by o*0.5 = 0.25 (matches -0.125 vs -0.375).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.006",
+      "title": "Retire the two signs that promise painting and grabbing",
+      "spec": "[encounter] ML_Perception\nQuote: “A future interaction could alter the input while exposing which stages actually change”\nWhy: The chapter correctly says altering the input is future work, but the hall's own labels read 'INPUT IMAGE / Paint pixels with hand' and 'FILTER TOOLKIT / Grab to apply'. Pixels are plain meshes with no collision, set_pixel_value has no caller, the four filter bodies carry no script so XR Tools refuses to pick them up, and apply_filter ignores its argument. A visitor who tries either will stop trusting the chapter's careful account of what is computed.\nDo: Change the two label strings to describe what stands there ('INPUT IMAGE / 16 x 16, fixed' and 'FILTER KERNELS / Sobel X, Sobel Y, Gaussian, Sharpen'), and while there fix the 'Learn ed representations' typo on the feature panel; or, if the labels must stay, add one chapter sentence warning that the signs describe an interaction the room does not yet have.\nEvidence: algorithms/machinelearning/computer_vision/ComputerVision_VR.gd:240 and :290 label texts; :257-279 pixels are MeshInstance3D only; :311-369 filter RigidBody3D never given a script; addons/godot-xr-tools/functions/function_pickup.gd:293-295 rejects any target without pick_up; set_pixel_value (:879-883) and apply_filter (:875-877) have no callers in algorithms/, commons/ or addons/ (grep); :778 'Learn ed representations'.\nFile: commons/maps/ML_Perception/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Perception"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ML_Perception",
+      "quote": "A future interaction could alter the input while exposing which stages actually change",
+      "why": "The chapter correctly says altering the input is future work, but the hall's own labels read 'INPUT IMAGE / Paint pixels with hand' and 'FILTER TOOLKIT / Grab to apply'. Pixels are plain meshes with no collision, set_pixel_value has no caller, the four filter bodies carry no script so XR Tools refuses to pick them up, and apply_filter ignores its argument. A visitor who tries either will stop trusting the chapter's careful account of what is computed.",
+      "proposal": "Change the two label strings to describe what stands there ('INPUT IMAGE / 16 x 16, fixed' and 'FILTER KERNELS / Sobel X, Sobel Y, Gaussian, Sharpen'), and while there fix the 'Learn ed representations' typo on the feature panel; or, if the labels must stay, add one chapter sentence warning that the signs describe an interaction the room does not yet have.",
+      "evidence": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd:240 and :290 label texts; :257-279 pixels are MeshInstance3D only; :311-369 filter RigidBody3D never given a script; addons/godot-xr-tools/functions/function_pickup.gd:293-295 rejects any target without pick_up; set_pixel_value (:879-883) and apply_filter (:875-877) have no callers in algorithms/, commons/ or addons/ (grep); :778 'Learn ed representations'.",
+      "review": "confirmed by a code checker (cited files only): ML_Perception row 3 places computer_vision_vr:0:0:0.6 -> machinelearning.json:1283 ComputerVision_VR.tscn. ComputerVision_VR.gd:240 'INPUT IMAGE\\nPaint pixels with hand'; :290 'FILTER TOOLKIT\\nGrab to apply'; :257 _create_pixel returns a bare MeshInstance3D; :311-369 _create_filter_object builds a RigidBody3D + CollisionShape3D and never calls set_script; function_pickup.gd:293-295 returns unless target.has_method('pick_up'); :875-877 apply_filter ignores filter_name; :879-883 set_pixel_value; a grep over algorithms/, commons/, addons/ finds no caller of either (only unrelated private _apply_filter methods elsewhere); :778 'Learn ed representations'. final.md:17 carries the quoted sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.007",
+      "title": "Label the reset button the chapter calls RESET",
+      "spec": "[encounter] ML_Gradient_Landscape\nQuote: “RESET lets you watch the same beginning again.”\nWhy: The comparator instantiates push_button.tscn, which has no label node, and sets none, while it does name the slider 'Outliers'; the visitor is sent to a control that does not exist by that name and must guess that the bare button beside the slider is it.\nDo: Add a Label3D 'RESET' above the button in _create_controls, the way enhanced_kmeans labels its four lesson buttons; or, if the code is off limits, write 'the unlabelled button beside the slider resets the run' in the chapter.\nEvidence: algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd:642-647 instantiates and connects the button with no label; :632-635 the slider gets 'Outliers'; commons/interactables/push_button.tscn node list (:62-112) contains no Label3D; algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd:1526-1536 shows the labelled pattern.\nFile: commons/maps/ML_Gradient_Landscape/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Gradient_Landscape"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "ML_Gradient_Landscape",
+      "quote": "RESET lets you watch the same beginning again.",
+      "why": "The comparator instantiates push_button.tscn, which has no label node, and sets none, while it does name the slider 'Outliers'; the visitor is sent to a control that does not exist by that name and must guess that the bare button beside the slider is it.",
+      "proposal": "Add a Label3D 'RESET' above the button in _create_controls, the way enhanced_kmeans labels its four lesson buttons; or, if the code is off limits, write 'the unlabelled button beside the slider resets the run' in the chapter.",
+      "evidence": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd:642-647 instantiates and connects the button with no label; :632-635 the slider gets 'Outliers'; commons/interactables/push_button.tscn node list (:62-112) contains no Label3D; algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd:1526-1536 shows the labelled pattern.",
+      "review": "confirmed by a code checker (cited files only): loss_function_comparator.gd:632-635 labels the slider 'Outliers'; :642-647 instantiates push_button.tscn, positions it and connects pressed, no label. push_button.tscn nodes (:62-112) contain no Label3D, and its script push_button.gd creates none. enhanced_kmeans.gd:1526-1536 adds a Label3D per button. Map ML_Gradient_Landscape places 'loss_function_comparator:0:0:1.2#plinth:1.0' at (6,8); final.md:7 says 'RESET lets you watch the same beginning again.'",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.008",
+      "title": "Say the painted disc is not the boundary",
+      "spec": "[prose] ML_Synthesis\nQuote: “so the shape of its decision boundary comes from that addition as well as from the sample's spread”\nWhy: The chapter's argument is right: summing two absolute standardised displacements gives a diamond-shaped boundary. But the hall paints the threshold as a circular disc of radius (mean spread) x threshold, so the visitor who compares 'a point displaced mainly along one coordinate with a point displaced along both' against the disc will find raised points inside it and unraised points outside it and conclude the arithmetic is wrong.\nDo: Add one sentence: 'The pale disc on the floor is a rough marker at the average spread, not the boundary; the real boundary is a diamond in standardised units, which is why some raised points sit inside the disc.' Or draw the true L1 boundary in code (effort L).\nEvidence: algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd:198-201 score = |z_x| + |z_y|; :221-234 threshold_visual scaled (r, 0.05, r) with r = ((std.x + std.y) * 0.5) * threshold; anomaly_detection.tscn:21 and :44-47 ThresholdVisual is a CylinderMesh.\nFile: commons/maps/ML_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Synthesis"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Synthesis",
+      "quote": "so the shape of its decision boundary comes from that addition as well as from the sample's spread",
+      "why": "The chapter's argument is right: summing two absolute standardised displacements gives a diamond-shaped boundary. But the hall paints the threshold as a circular disc of radius (mean spread) x threshold, so the visitor who compares 'a point displaced mainly along one coordinate with a point displaced along both' against the disc will find raised points inside it and unraised points outside it and conclude the arithmetic is wrong.",
+      "proposal": "Add one sentence: 'The pale disc on the floor is a rough marker at the average spread, not the boundary; the real boundary is a diamond in standardised units, which is why some raised points sit inside the disc.' Or draw the true L1 boundary in code (effort L).",
+      "evidence": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd:198-201 score = |z_x| + |z_y|; :221-234 threshold_visual scaled (r, 0.05, r) with r = ((std.x + std.y) * 0.5) * threshold; anomaly_detection.tscn:21 and :44-47 ThresholdVisual is a CylinderMesh.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.009",
+      "title": "Send the eye to the matching cell, not to the window",
+      "spec": "[prose] ML_Perception\nQuote: “Follow the small moving window and look at what happens when it crosses a boundary rather than a uniform patch.”\nWhy: Nothing happens at the window: it is an unlit yellow outline that steps one cell every two seconds over an input image that never changes, and no value is computed or displayed at it. The response the chapter wants the reader to see is the fixed edge image on the next canvas, six metres (times the 0.6 scale) to the right.\nDo: Rewrite as: 'A small outline crawls over the input image one cell at a time; find the same cell in the edge image beside it and compare the two when the outline sits on a boundary rather than a uniform patch.' Then soften 'The moving window helps you connect a local neighbourhood with a local calculation' to 'marks the neighbourhood whose calculation you can read off the edge image'.\nEvidence: ComputerVision_VR.gd:194-198 steps every 2 s; :841-848 _step_convolution; :821-830 the outline moves over the input canvas at x = -8; edge canvas at x = -2 (:375); edge_map computed once (:225) and only re-read (:813-819).\nFile: commons/maps/ML_Perception/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Perception"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Perception",
+      "quote": "Follow the small moving window and look at what happens when it crosses a boundary rather than a uniform patch.",
+      "why": "Nothing happens at the window: it is an unlit yellow outline that steps one cell every two seconds over an input image that never changes, and no value is computed or displayed at it. The response the chapter wants the reader to see is the fixed edge image on the next canvas, six metres (times the 0.6 scale) to the right.",
+      "proposal": "Rewrite as: 'A small outline crawls over the input image one cell at a time; find the same cell in the edge image beside it and compare the two when the outline sits on a boundary rather than a uniform patch.' Then soften 'The moving window helps you connect a local neighbourhood with a local calculation' to 'marks the neighbourhood whose calculation you can read off the edge image'.",
+      "evidence": "ComputerVision_VR.gd:194-198 steps every 2 s; :841-848 _step_convolution; :821-830 the outline moves over the input canvas at x = -8; edge canvas at x = -2 (:375); edge_map computed once (:225) and only re-read (:813-819).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.010",
+      "title": "Open with the diagram disclosure the panel already makes",
+      "spec": "[structure] ML_Generative\nQuote: “This room currently illustrates those roles through animated zones, particles and progress displays. Its displayed losses are prescribed curves over time”\nWhy: The visitor is standing at a panel that says 'GAN ROLES / ANIMATED DIAGRAM' and 'Scripted loss: G / D — No models trained' from the moment they arrive, yet the chapter spends four paragraphs on the exchange as if a training process were in front of them before saying so in paragraph five. Meeting the reader where the room has already put them lets the middle paragraphs read as the diagram-reading they are.\nDo: Move one sentence to the end of the first paragraph: 'Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.' Keep paragraph five as the specification of the missing experiment.\nEvidence: algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd:453 title text; :469-471 metrics text 'Scripted loss ... No models trained'; :66-73 losses driven by a clock.\nFile: commons/maps/ML_Generative/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Generative"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "ML_Generative",
+      "quote": "This room currently illustrates those roles through animated zones, particles and progress displays. Its displayed losses are prescribed curves over time",
+      "why": "The visitor is standing at a panel that says 'GAN ROLES / ANIMATED DIAGRAM' and 'Scripted loss: G / D — No models trained' from the moment they arrive, yet the chapter spends four paragraphs on the exchange as if a training process were in front of them before saying so in paragraph five. Meeting the reader where the room has already put them lets the middle paragraphs read as the diagram-reading they are.",
+      "proposal": "Move one sentence to the end of the first paragraph: 'Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.' Keep paragraph five as the specification of the missing experiment.",
+      "evidence": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd:453 title text; :469-471 metrics text 'Scripted loss ... No models trained'; :66-73 losses driven by a clock.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.011",
+      "title": "Fix the mode sign and drop 'default view'",
+      "spec": "[code-claim] ML_Synthesis\nQuote: “Read the active detection mode.”\nWhy: The sign the reader is sent to is a Label3D whose text is '[b]Mode:[/b] Z-Score'; Label3D has no BBCode, so the tags render literally. And 'In the default view' implies other views the visitor can reach, but cycle_detection_mode has no caller and apply_grid_config is a bare pass, so Z-score is the only rule this hall will ever show.\nDo: Strip the [b] tags from the mode string in AnomalyDetection.gd and anomaly_detection.tscn (two lines), and change 'In the default view' to 'In this room' so the chapter does not promise a switch that is not there.\nEvidence: AnomalyDetection.gd:255 `\"[b]Mode:[/b] %s\"`; anomaly_detection.tscn:59-63 ModeLabel is type Label3D with the same text; cycle_detection_mode (:152-158) has no caller; apply_grid_config (:302-303) is pass; the file's own @identity (:9) lists 'VR controls for mode cycling [missing]'.\nFile: commons/maps/ML_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Synthesis"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "ML_Synthesis",
+      "quote": "Read the active detection mode.",
+      "why": "The sign the reader is sent to is a Label3D whose text is '[b]Mode:[/b] Z-Score'; Label3D has no BBCode, so the tags render literally. And 'In the default view' implies other views the visitor can reach, but cycle_detection_mode has no caller and apply_grid_config is a bare pass, so Z-score is the only rule this hall will ever show.",
+      "proposal": "Strip the [b] tags from the mode string in AnomalyDetection.gd and anomaly_detection.tscn (two lines), and change 'In the default view' to 'In this room' so the chapter does not promise a switch that is not there.",
+      "evidence": "AnomalyDetection.gd:255 `\"[b]Mode:[/b] %s\"`; anomaly_detection.tscn:59-63 ModeLabel is type Label3D with the same text; cycle_detection_mode (:152-158) has no caller; apply_grid_config (:302-303) is pass; the file's own @identity (:9) lists 'VR controls for mode cycling [missing]'.",
+      "review": "confirmed by a code checker (cited files only): AnomalyDetection.gd:255 `\"[b]Mode:[/b] %s\"`; anomaly_detection.tscn:59-63 ModeLabel type Label3D, text \"[b]Mode:[/b] Z-Score\"; :302-303 apply_grid_config is pass; :9 needs line 'VR controls for mode cycling [missing]'. cycle_detection_mode (:152-158) has no code caller; the only other mention is inside a BBCode text string in anomaly_detection_tutorial.gd:19. ML_Synthesis/final.md:7 'Read the active detection mode.' and :9 'In the default view'. Map places anomaly_detection:0:2:0.6.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.012",
+      "title": "It is the machine-learning sequence",
+      "spec": "[prose] ML_Classification\nQuote: “The room sits in a classification sequence, but this encounter does not learn named classes from labelled examples.”\nWhy: The reader entered 'Machine Learning: What Changes, and Why?' and is in a hall called Classification; calling the sequence a classification sequence contradicts the entry and muddles the very distinction (grouping vs classifying) the sentence is making.\nDo: Change to 'The room is called Classification, but this encounter does not learn named classes from labelled examples.'\nEvidence: commons/maps/sequences/machinelearning.json:4 sequence name; :41 map ML_Classification; no other hall in the sequence uses 'sequence' for a room.\nFile: commons/maps/ML_Classification/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Classification"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Classification",
+      "quote": "The room sits in a classification sequence, but this encounter does not learn named classes from labelled examples.",
+      "why": "The reader entered 'Machine Learning: What Changes, and Why?' and is in a hall called Classification; calling the sequence a classification sequence contradicts the entry and muddles the very distinction (grouping vs classifying) the sentence is making.",
+      "proposal": "Change to 'The room is called Classification, but this encounter does not learn named classes from labelled examples.'",
+      "evidence": "commons/maps/sequences/machinelearning.json:4 sequence name; :41 map ML_Classification; no other hall in the sequence uses 'sequence' for a room.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.013",
+      "title": "Point at the nameplate's Born and Died counts",
+      "spec": "[prose] ML_Evolution\nQuote: “Stay long enough to notice a new body appear or an existing one disappear”\nWhy: At the map's 0.6 scale the bodies are 1-3 cm spheres and a child spawns within 5 cm of its parent, so catching a birth by eye among thirty moving dots is luck; the nameplate under the title counts Pop, Diversity, Born, Died and Gen and is the reliable evidence, exactly as the previous hall's POPULATION SUPPORT record was. The sign's line 'No fitness function. No goal. Just drift.' is also the claim the chapter argues against and would sharpen the opening question if quoted.\nDo: Add: 'The plate above the field counts births and deaths; watch Born and Died tick while you look for the body that changed them.' Optionally open paragraph two with the plate's own line 'No fitness function. No goal. Just drift.' as the claim the room is about to test.\nEvidence: algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd:603-605 stats text; :405 the sign text; :289 body radius 0.02-0.05 m; :538 child offset within 0.05 m; commons/maps/ML_Evolution/map_data.json token `non_teleological_evolution:0:2:0.6`.\nFile: commons/maps/ML_Evolution/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Evolution"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ML_Evolution",
+      "quote": "Stay long enough to notice a new body appear or an existing one disappear",
+      "why": "At the map's 0.6 scale the bodies are 1-3 cm spheres and a child spawns within 5 cm of its parent, so catching a birth by eye among thirty moving dots is luck; the nameplate under the title counts Pop, Diversity, Born, Died and Gen and is the reliable evidence, exactly as the previous hall's POPULATION SUPPORT record was. The sign's line 'No fitness function. No goal. Just drift.' is also the claim the chapter argues against and would sharpen the opening question if quoted.",
+      "proposal": "Add: 'The plate above the field counts births and deaths; watch Born and Died tick while you look for the body that changed them.' Optionally open paragraph two with the plate's own line 'No fitness function. No goal. Just drift.' as the claim the room is about to test.",
+      "evidence": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd:603-605 stats text; :405 the sign text; :289 body radius 0.02-0.05 m; :538 child offset within 0.05 m; commons/maps/ML_Evolution/map_data.json token `non_teleological_evolution:0:2:0.6`.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.014",
+      "title": "Update the sequence text that still calls the memory hall a diagram",
+      "spec": "[handover] machinelearning (sequence file)\nQuote: “ML_Sequence_Memory: What should survive the next input - trace a gate diagram and its missing experiment”\nWhy: The sequence description ('diagrams of memory and adversarial learning'), the content line and the learning objective ('Read memory and adversarial-learning diagrams') all predate the 2026-09-23 recurrence that made the memory hall a hands-on computation; the description is rendered on the encyclopedia's sequences page, so a reader is told to expect a diagram and meets a cell that computes.\nDo: Rewrite the three lines: description 'diagrams of memory' -> 'a hand-set memory cell', content line -> 'set three gates by hand and predict what survives the next token', objective -> 'Predict a linear memory cell's output from hand-set gates; read the adversarial diagram without mistaking animation for trained state'.\nEvidence: commons/maps/sequences/machinelearning.json:8 description, :25 objective, :34 content line; algorithms/machinelearning/LSTMs/LSTMs_VR.gd:33-49 the recurrence and its date; ada_encyclopedia/src/app/sequences/page.tsx:220-221 renders seq.description.\nFile: commons/maps/machinelearning (sequence file)/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "machinelearning (sequence file)"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "machinelearning (sequence file)",
+      "quote": "ML_Sequence_Memory: What should survive the next input - trace a gate diagram and its missing experiment",
+      "why": "The sequence description ('diagrams of memory and adversarial learning'), the content line and the learning objective ('Read memory and adversarial-learning diagrams') all predate the 2026-09-23 recurrence that made the memory hall a hands-on computation; the description is rendered on the encyclopedia's sequences page, so a reader is told to expect a diagram and meets a cell that computes.",
+      "proposal": "Rewrite the three lines: description 'diagrams of memory' -> 'a hand-set memory cell', content line -> 'set three gates by hand and predict what survives the next token', objective -> 'Predict a linear memory cell's output from hand-set gates; read the adversarial diagram without mistaking animation for trained state'.",
+      "evidence": "commons/maps/sequences/machinelearning.json:8 description, :25 objective, :34 content line; algorithms/machinelearning/LSTMs/LSTMs_VR.gd:33-49 the recurrence and its date; ada_encyclopedia/src/app/sequences/page.tsx:220-221 renders seq.description.",
+      "review": "unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

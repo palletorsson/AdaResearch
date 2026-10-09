@@ -1,0 +1,251 @@
+{
+  "version": 2,
+  "mode": "continuation",
+  "brief": {
+    "make": "Existing point: grab, carry, release in place.",
+    "bring": "Point One state: sphere surface + matching static boundary.",
+    "given": "Museum XR hand; pickup library; collision settings.",
+    "build": "Swap body class; configure pickup; parent existing surface.",
+    "check": "Same shape/place; surface and boundary follow; release stays.",
+    "later": "Grip alignment; actions; coordinate readouts."
+  },
+  "lesson": "doc/book/iterations/2026-10-05-lesson-state-chain/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-lesson-state-chain/assembled.gd",
+  "host": "Node3D station in prepared museum working copy; native test uses an isolated XR Tools copy and synthetic controller.",
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-lesson-state-chain/incoming.gd",
+    "sha256": "c8866090b3cd0a32189a198828bb64cc4861955dbeb11361cc74ba86396cd5d8",
+    "provenance": "Explicit assumed reconstruction from Point One excerpts and its small solid-point source. Current Point One lesson edits an existing museum script; it does not yet yield this standalone file. Names, material helper and subdivisions are retained source settings, not evidence of taught mastery."
+  },
+  "operations": [
+    {
+      "id": "body-class",
+      "kind": "replace",
+      "before": "\tvar solid := StaticBody3D.new()\n",
+      "after": "\tvar solid := XRToolsPickable.new()\n"
+    },
+    {
+      "id": "pickup-settings",
+      "kind": "insert_after",
+      "anchor": "\tsolid.position = centre\n",
+      "text": "\tsolid.freeze = true\n\tsolid.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC\n\tsolid.release_mode = XRToolsPickable.ReleaseMode.FROZEN\n\tsolid.ranged_grab_method = XRToolsPickable.RangedMethod.NONE\n\tsolid.collision_layer = 4\n\tsolid.collision_mask = 196615\n"
+    },
+    {
+      "id": "carry-visible-surface",
+      "kind": "insert_after",
+      "anchor": "\tadd_child(solid)\n",
+      "text": "\tbody.reparent(solid)\n"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_One/tutorial.md",
+      "sha256": "84fea920fc51e990a071ccbb9948ec240687e86bf60273a3937d69963de71bfa"
+    },
+    {
+      "path": "commons/primitives/point/point_condition.gd",
+      "sha256": "8b0b7eca1cc404a7668561d748c3cb1f46682dfae40fa14431334faba09e58f7"
+    },
+    {
+      "path": "addons/godot-xr-tools/objects/pickable.gd",
+      "sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7"
+    },
+    {
+      "path": "addons/godot-xr-tools/functions/function_pickup.gd",
+      "sha256": "c0af90a317b83db630f61fe173f685226f6a24635bc8c17bf427033095736939"
+    }
+  ],
+  "checks": [
+    {
+      "id": "radius_014/incoming/not_pickable",
+      "action": "Try the incoming point",
+      "expect": "No pickup method on the static body.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/no_duplicate_point",
+      "action": "Apply the printed edits",
+      "expect": "One surface and one collider remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/pose_preserved",
+      "action": "Run under a translated, rotated station",
+      "expect": "Surface and collider retain their incoming world pose.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/appearance_and_geometry_preserved",
+      "action": "Compare before and after",
+      "expect": "The existing material, mesh and collision dimensions remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/settings_before_ready",
+      "action": "Enter the tree",
+      "expect": "The configured collision layers were cached.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/near_eligible",
+      "action": "Bring the controller close",
+      "expect": "Real overlap makes the point available for pickup.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/disabled_not_eligible",
+      "action": "Disable pickup",
+      "expect": "The point cannot be selected.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/held",
+      "action": "Grab",
+      "expect": "The library holds the point.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/held_mesh_follows",
+      "action": "Move the controller",
+      "expect": "The visible surface follows.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/held_collider_follows",
+      "action": "Move the controller",
+      "expect": "The physical boundary follows.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/same_instances",
+      "action": "Hold and move",
+      "expect": "The original surface and collider instances remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/released",
+      "action": "Release",
+      "expect": "The library clears the grab.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/release_restores",
+      "action": "Release",
+      "expect": "Frozen state and configured collision layers return.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_014/outgoing/release_stays",
+      "action": "Move the empty hand",
+      "expect": "The released point stays.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/incoming/not_pickable",
+      "action": "Try the incoming point",
+      "expect": "No pickup method on the static body.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/no_duplicate_point",
+      "action": "Apply the printed edits",
+      "expect": "One surface and one collider remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/pose_preserved",
+      "action": "Run under a translated, rotated station",
+      "expect": "Surface and collider retain their incoming world pose.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/appearance_and_geometry_preserved",
+      "action": "Compare before and after",
+      "expect": "The existing material, mesh and collision dimensions remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/settings_before_ready",
+      "action": "Enter the tree",
+      "expect": "The configured collision layers were cached.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/near_eligible",
+      "action": "Bring the controller close",
+      "expect": "Real overlap makes the point available for pickup.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/disabled_not_eligible",
+      "action": "Disable pickup",
+      "expect": "The point cannot be selected.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/held",
+      "action": "Grab",
+      "expect": "The library holds the point.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/held_mesh_follows",
+      "action": "Move the controller",
+      "expect": "The visible surface follows.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/held_collider_follows",
+      "action": "Move the controller",
+      "expect": "The physical boundary follows.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/same_instances",
+      "action": "Hold and move",
+      "expect": "The original surface and collider instances remain.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/released",
+      "action": "Release",
+      "expect": "The library clears the grab.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/release_restores",
+      "action": "Release",
+      "expect": "Frozen state and configured collision layers return.",
+      "kind": "native"
+    },
+    {
+      "id": "radius_030/outgoing/release_stays",
+      "action": "Move the empty hand",
+      "expect": "The released point stays.",
+      "kind": "native"
+    },
+    {
+      "id": "explain-ownership",
+      "action": "Predict, remove and restore reparent",
+      "expect": "Learner explains separate visual and physical movement.",
+      "kind": "learner"
+    },
+    {
+      "id": "transfer-radius",
+      "action": "Choose a new radius without the complete listing",
+      "expect": "Learner preserves matching dimensions and working pickup.",
+      "kind": "learner"
+    }
+  ],
+  "evidence_inputs": [
+    "doc/book/iterations/2026-10-05-lesson-state-chain/incoming.gd",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/expected.gd",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/assembled.gd",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/tutorial.md",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/contract.json",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/verify.gd",
+    "doc/book/iterations/2026-10-05-lesson-state-chain/run_checks.py",
+    "doc/book/course/functional_text/reconstruction.py"
+  ],
+  "native_report": "doc/book/iterations/2026-10-05-lesson-state-chain/report-runtime.json"
+}

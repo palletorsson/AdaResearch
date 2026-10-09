@@ -1,0 +1,42 @@
+{
+  "checks": 4,
+  "evidence": {
+    "artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "hardware_entropy_decay",
+      "Random_Rotate_Random_XYZ",
+      "dark_sphere",
+      "random_decay_multimesh",
+      "RotateGridCubes",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent",
+      "fire_hose_box",
+      "station_plinth",
+      "dream_bodies"
+    ],
+    "layers": [
+      {
+        "bounds": "[P: (-0.16, -0.5, 14.0), S: (5.32, 4.24, 1.0)]",
+        "count": 20,
+        "speed_scale": 0.3
+      },
+      {
+        "bounds": "[P: (3.08, -0.5, 14.0), S: (13.24, 10.18, 1.0)]",
+        "count": 120,
+        "speed_scale": 0.1
+      }
+    ],
+    "root": "(6.5, 0.0, 14.5)",
+    "spawn": "(7.5, 1.000683, 5.5)"
+  },
+  "failures": [],
+  "headset_tested": false
+}

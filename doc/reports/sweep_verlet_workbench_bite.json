@@ -1,0 +1,92 @@
+{
+ "sweep": "verlet_workbench",
+ "peak_changed_pct": 0.333,
+ "subject_pct": 14.592,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "worked"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "nudged"
+   },
+   "changed_px": 1027,
+   "changed_pct": 0.178
+  },
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "worked"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "pressed"
+   },
+   "changed_px": 368,
+   "changed_pct": 0.064
+  },
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "worked"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "held"
+   },
+   "changed_px": 1106,
+   "changed_pct": 0.191
+  },
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "nudged"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "pressed"
+   },
+   "changed_px": 1184,
+   "changed_pct": 0.205
+  },
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "nudged"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "held"
+   },
+   "changed_px": 1923,
+   "changed_pct": 0.333
+  },
+  {
+   "a": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "pressed"
+   },
+   "b": {
+    "still": true,
+    "settle_steps": 420,
+    "relaxation": "held"
+   },
+   "changed_px": 950,
+   "changed_pct": 0.164
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+{
+  "status": "targeted staging and reveal repairs",
+  "summary": "A correct report can omit the relation needed for the next question. Two mature chapters connect local rate, finite accumulation and net change with a path whose next address depends on its previous update. Preserve that thread; let the room and its displays support the discoveries.",
+  "items": [
+    {
+      "title": "Two halls, four book encounters, nineteen supporting works",
+      "description": "The sequence order and artifact ecology stay intact. Flow’s chapter is unchanged. Change Intro moves one sentence until after observation and names the new bridge comparison control.",
+      "report": "doc/book/iterations/2026-09-19-change-review/SUMMARY.md"
+    },
+    {
+      "title": "Find the first workbench from the entrance",
+      "description": "The rate bench moves from (6,5) to (9,5), bringing it into the doorway view. The accumulation bench moves from (20,5) to (20,9), farther along; the bridge stays at (6,12). All seventeen artifacts and the open central passage remain.",
+      "images": [
+        "doc/book/iterations/2026-09-19-change-review/intro/before/entry.png",
+        "doc/book/iterations/2026-09-19-change-review/intro/after/entry.png"
+      ],
+      "captions": [
+        "Before · the small benches are outside the doorway framing; the bridge is conspicuous ahead.",
+        "After · rate is visible near the entrance, accumulation farther along, and the bridge beyond."
+      ],
+      "image_note": "Actual museum captures at the same recorded camera. These views also span the separate bridge numerical-reveal change. Background moving exhibits are not frozen at an identical phase. The arrangement suggests a reading order; it does not prove how an unassisted visitor will choose a route.",
+      "report": "doc/book/iterations/2026-09-19-change-review/intro/AUDIT.md"
+    },
+    {
+      "title": "Let the interval change the answer before explaining what was omitted",
+      "description": "One existing sentence moves after the STEP and DERIVATIVE comparison. Its argument remains: two endpoints can correctly report an overall fall while the curve rises locally.",
+      "before": "The console names three quantities: `x`, the selected position; `f`, the value there; and `h`, the interval to the other sample. Below them are the rise and the rise divided by that interval. A negative rise says the second value is lower when the interval points to the right. It does not tell us that every part of the journey went down.\n\nLeave the red point where it is and press **STEP**. Watch the green neighbour approach. Press again, and again. Does the line still lean the same way? Now press **DERIVATIVE**. A gold tangent appears at the red point, and a second plot shows the local slopes along the whole curve. Compare their directions before reading the numbers.\n\nAt this starting position, the wide interval crosses a crest. Its two endpoints report an overall fall. Close enough to the red point, the curve is still rising. Both reports describe this same curve. They answer questions at different scales.",
+      "after": "The console names three quantities: `x`, the selected position; `f`, the value there; and `h`, the interval to the other sample. Below them are the rise and the rise divided by that interval. A negative rise says the second value is lower when the interval points to the right.\n\nLeave the red point where it is and press **STEP**. Watch the green neighbour approach. Press again, and again. Does the line still lean the same way? Now press **DERIVATIVE**. A gold tangent appears at the red point, and a second plot shows the local slopes along the whole curve. Compare their directions before reading the numbers.\n\nAt this starting position, the wide interval crosses a crest. Its two endpoints report an overall fall. It does not tell us that every part of the journey went down. Close enough to the red point, the curve is still rising. Both reports describe this same curve. They answer questions at different scales.",
+      "text_kind": "final.md · explanation timing",
+      "report": "doc/book/iterations/2026-09-19-change-review/Change_Intro.diff"
+    },
+    {
+      "title": "Ask for the bridge’s comparison",
+      "description": "The arch and signed rate strips remain visible. COMPARE TOTALS reveals or hides endpoint readings, the difference marker and the numerical sum. The equation stays as the bridge’s title; the numbers wait for the visitor.",
+      "before": "The bridge now shows its working. A plot below the deck gives the local height rate with respect to horizontal position. Signed strips extend above or below the plot's baseline. Endpoint labels and a difference marker appear beside it. Underneath, a numerical sum of the rate is compared with the endpoint height difference.",
+      "after": "A plot below the deck gives the local height rate with respect to horizontal position. Signed strips extend above or below the plot's baseline. Press **COMPARE TOTALS**. Endpoint labels and a difference marker appear beside it. Underneath, a numerical sum of the rate is compared with the endpoint height difference. Press again to hide this comparison and make another prediction; the arch and its signed strips remain.",
+      "text_kind": "final.md · control invitation",
+      "report": "doc/book/iterations/2026-09-19-change-review/bridge/AUDIT.md",
+      "images": [
+        "doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-predict.png",
+        "doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-compared.png"
+      ],
+      "captions": [
+        "Prediction state · arch and signed rate strips, before requesting the numbers.",
+        "Compared state · the finite rate sum and endpoint difference are revealed."
+      ],
+      "image_note": "Two states of the repaired artifact in the actual museum, using the same recorded camera; these are not software before/after images. The canonical button event is exercised by the desktop probe. Physical pointer contact, headset reach and learner discovery remain untested."
+    },
+    {
+      "title": "Flow: report the display state, leave the relation to discovery",
+      "description": "Keep the unchanged chapter’s invitation to compare an arrow with a particle. The status now reports whether arrows are present; it no longer announces the shared sampler in advance. The wrapping trail and separate clocks are preserved. Actual museum views also exposed a duplicate title over the status and RESET/SEED partly buried in the tabletop. The lesson now hides that duplicate and lifts/tilts the existing control panel; base placements keep their original layout.",
+      "before": "ARROWS = PARTICLE SAMPLER",
+      "after": "ARROWS HIDDEN / ARROWS SHOWN",
+      "text_kind": "artifact status · two possible states",
+      "report": "doc/book/iterations/2026-09-19-change-review/flow/AUDIT.md",
+      "images": [
+        "doc/book/iterations/2026-09-19-change-review/flow/before-runtime/standing-hidden.png",
+        "doc/book/iterations/2026-09-19-change-review/flow/after-runtime/standing-hidden.png"
+      ],
+      "captions": [
+        "Original lesson replay · labels overlap and RESET/SEED sink into the table.",
+        "Repaired lesson · status and all six controls can be read from the same standing viewpoint."
+      ],
+      "image_note": "Actual museum, same camera at 1.65 m and identical seeded particle/trail states. The before view replays the saved original artifact sources inside the same current museum. Shared museum source hashes match across this pair. Particle motion and the wrap stroke are preserved; this is not a headset usability trial."
+    },
+    {
+      "title": "A finite estimate is not the limit",
+      "description": "Registry and sequence descriptions now match the actual comparisons: nonzero finite steps, a separate 4096-midpoint reference, signed net change, and a prescribed direction field. The earlier overview remains as dated history.",
+      "before": "The slider IS the limit",
+      "after": "six slider stops do not reach the limit",
+      "text_kind": "registry description excerpt",
+      "report": "doc/book/iterations/2026-09-19-change-review/registry-change.diff"
+    }
+  ]
+}

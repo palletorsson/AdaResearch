@@ -1,0 +1,55 @@
+{
+	"artifacts": {
+		"laser_measure_rack": {
+			"lookup_name": "laser_measure_rack",
+			"name": "Laser Measure Rack",
+			"class_name": "LaserMeasureRack",
+			"scene": "res://commons/artifacts/laser_measure_rack/laser_measure_rack.tscn",
+			"category": "wavefunctions",
+			"artifact_type": "composition",
+			"complexity": "beginner",
+			"description": "Ten laser measures mounted in one rail, sweeping a cone in lockstep: ten dead-parallel beams that rotate as one solid sheet of light. The pattern is read on whatever the beams land on, never on the rack. phase_step_deg breaks the lockstep, and which way that cuts depends on the motion — under yaw or pitch an offset of 360/count stands one whole travelling wave on the rack and 0 collapses it to a bar, while under orbit (the default) 0 is the figure and any offset only decorrelates ten copies of it. Five motions: orbit puts yaw and pitch in quadrature so each beam traces a cone, yaw sweeps sideways, pitch up and down, rise lifts the instruments in place without turning them, lissajous crosses two rates so each beam draws a figure.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "wide",
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"map_sequences": [
+				"wavefunctions",
+				"primitives"
+			],
+			"tags": [
+				"visualization",
+				"wave",
+				"phase",
+				"array",
+				"laser"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 4,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": "none"
+			}
+		}
+	}
+}

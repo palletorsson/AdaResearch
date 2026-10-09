@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act3_FieldsAndMotion · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act3_FieldsAndMotion">← Tutorial lineage</a></p><h1>Vectors Act3 FieldsAndMotion</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/final.md">Raw captured source</a></p><pre># The arrow does not decide
+
+&lt;!-- @VectorFieldFlow --&gt;
+
+Two small bodies wait beyond the controls. They share an address on the floor, one held a little higher so you can distinguish them. One is cyan, the other pink.
+
+Press **RUN**. Both head inward. Watch the centre.
+
+Cyan approaches and slows. Pink crosses it, keeps going, then begins to turn back. They started together. What did the second body bring through a place where the first was coming to rest?
+
+Pause with RUN and reveal **TRAILS**. On the wall plan, both paths lie on one diagonal. Pink&#x27;s extends beyond the centre, but its return draws over ground it has already marked. Start them again. A line can keep the places visited without showing how often, or in which direction, the body passed.
+
+With **ARROWS**, samples of the field appear across the floor. They point inward and shorten toward the centre, where the rule returns zero. Each moving body asks this same rule for a value at its current position. The displayed arrows are only some of the places we have sampled; a body can ask between them too.
+
+The field extends across the room, but it has not settled how either body will receive it.
+
+## What reaches the centre
+
+In Motion, a pulse ended while its acquired velocity remained. Pink carries that possibility here. Near the centre the new contribution shrinks, but the velocity it has acquired is still present. Past the centre the field points back. It takes time to turn that velocity around.
+
+Cyan uses the current field value as its velocity. As the arrows shorten, its speed decreases directly. The next sample replaces the velocity it had before.
+
+Behind **RULE**, cyan receives the sample through an assignment:
+
+```gdscript
+velocities[i] = sample
+```
+
+Pink adds a contribution over one model step:
+
+```gdscript
+velocities[i] += sample * STEP
+```
+
+Both then move:
+
+```gdscript
+positions[i] += velocities[i] * STEP
+```
+
+An equals sign and a plus-equals sign give the same spatial rule different consequences. The second meets a velocity already there; the first supplies a new velocity each time. Once the bodies separate, each also asks the field from a different place.
+
+Of the three quantities in the update, only two remember. Acceleration is made new at every step from whatever is pushing now; velocity and position carry the steps before. That is why a force can end and its consequence continue.
+
+Hold on to the difference between the two receivers. In Randomness, the beads in a glass tank will replace their velocity with a new draw at every step, and jitter; a body that adds its draws to what it already has, as pink does, glides. The same rule, received two ways.
+
+The samples begin without units. Cyan interprets one field unit as one metre per second. Pink interprets it as one metre per second squared. The receiver gives the number its physical meaning. A bare arrow cannot tell us whether it names a direction, a velocity, an acceleration or a force.
+
+The centre has become somewhere to approach for one body and somewhere to cross for the other. Pink&#x27;s persistence may look like reluctance to follow. We can locate it in a velocity the program allows to continue. Both ways of moving have been made possible by a rule.
+
+## Changing the field
+
+**FIELD** changes the inward rule to **SWIRL**. Reset, then run. The arrows point across the radius rather than along it. Cyan follows the turning directions. Pink adds them to its existing velocity. A circular arrangement of arrows has given us different paths through the room.
+
+At the next setting, **UNIFORM**, every address returns the same value. Reset and compare the first second. At gain one, cyan travels about 0.8 metres. Pink starts from rest, travels about 0.4 metres and reaches about 0.8 metres per second. One travelled at the speed the other was still acquiring.
+
+Now **REVERSE** during a run. The arrows reverse immediately. Cyan accepts the new velocity on its next update. Pink receives an acceleration against the velocity it already has. For a while, it continues into a field pointing the other way.
+
+Field, gain and sign can change without clearing that state. RESET returns both bodies to their starting address and pauses them, keeping the chosen settings. It gives us another comparison from a shared beginning. A reversal gives us something else: the new rule meeting a movement already under way.
+
+## Where the observation ends
+
+At the gold perimeter a marker may stop. Its outgoing velocity remains in the readout. The apparatus has frozen that receiver at the edge of the comparison.
+
+In Motion, a boundary made the cube rebound. Here the line ends an observation. Similar marks on a floor can belong to different kinds of world.
+
+The markers pass through furniture and through our position. Their two heights separate the views of one horizontal calculation. We can stand inside this field without being moved by it. Another way for our body to receive it would have to be built.
+
+The paths are made in small numerical steps, and the trails retain only a recent history. The drawing cannot recover everything that led here. What we can examine is how the present position and velocity meet the next sample, and how changing that relation changes the movement.
+
+The earlier field, weather and motion exhibits remain beyond this opening. A similar arrow may turn an instrument, guide a particle or reach a physical body. Follow it to what receives it.
+
+&lt;!-- @ --&gt;
+
+Next, three cubes enter strips named air, water and honey. The influence will depend on the movement it is slowing. The body has become part of the rule that acts on it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/tutorial.md">Raw captured source</a></p><pre># One field, two receiver rules
+
+This follows VFM_03_Motion, where finite force pulses changed a rigid body&#x27;s stored velocity. It prepares Vectors_Act4a_KineticForces, where named forces must be connected to particular bodies and units.
+
+The sole book primary is VectorFieldFlow, opting into `field_receivers` in this map. Its ordinary compact scene remains available in other placements. VectorMotion and the other eleven supporting artifacts remain placed.
+
+## Compare before explaining
+
+Start in SINK at gain 1, positive sign. RUN for about four model seconds. Cyan approaches the centre without crossing; pink crosses and starts returning later. Reveal TRAILS, then ARROWS and RULE. Pause with RUN. RESET clears both states and histories and pauses, retaining parameters and reveals.
+
+FIELD cycles SINK, SWIRL, UNIFORM. REVERSE flips sign. GAIN cycles 1 -&gt; 1.5 -&gt; 0.5 -&gt; 1. Parameter edits preserve state, making a reversed influence different from a velocity reset. RESET between controlled comparisons.
+
+## Spatial rule
+
+SINK returns `Vector3(-p.x, 0, -p.z) * 0.35`; SWIRL returns `Vector3(-p.z, 0, p.x) * 0.35`; UNIFORM returns `Vector3.RIGHT * 0.8`. The base value is capped at length 2 before gain and sign. These are dimensionless samples in this apparatus. The floor shows 63 samples through two MultiMeshes, with 0.4 m of arrow per field unit. Samples are rebuilt only when parameters change. Hiding arrows does not change the model.
+
+## Receiving the sample
+
+Cyan sets `velocities[i] = sample`, using a conversion of 1 m/s per field unit. Pink adds `velocities[i] += sample * STEP`, using 1 m/s squared per field unit. Both then perform `positions[i] += velocities[i] * STEP`. Each samples at its own position, so their inputs diverge after their positions diverge.
+
+This is an explicit numerical, collision-free comparison. Pink uses a semi-implicit Euler acceleration update; it is not a RigidBody3D and has no mass or applied force. In the previous hall the physics engine integrated a real rigid body. Here the two update rules are deliberately exposed side by side.
+
+The fixed model step is 1/120 s. A call advances at most 0.25 model seconds; longer stalls discard excess wall time. At the frame limits |X| &gt;= 5 or |Z| &gt;= 4 a receiver freezes just beyond the threshold, keeping its outgoing velocity. This is an observation cutoff, not a collision. Both exiting pauses the run.
+
+Markers are displayed at heights 1.45 and 1.9 m, but use identical planar coordinates and initial position (-2, -2). Their history buffers keep at most 240 positions, sampled every 12 steps. The same positions draw a floor-space path and a wall plan with X scaled by 0.5 and Z by 0.28. Different projection scales mean wall lengths and angles cannot be read as metre-scale geometry. Controls stand at 1.04 m; routes to either side remain open.
+
+## Relation to the old scene
+
+The preserved compact VectorFieldFlow blends previous velocity toward a sample with `lerp(sample, 0.35)` and multiplies by 0.985 each rendered update. It retains velocity state and is neither the new direct velocity assignment nor the new acceleration integrator. Its coefficients are per frame. The old chapter&#x27;s memoryless claim was inaccurate. Its manuscript is backed up with the room&#x27;s before state.
+
+39 desktop checks cover the pointer controls, sink overshoot, uniform quantitative predictions, reversal, parameter cycles, pause/reset, timestep partition agreement, history limits, exit convention, stable geometry, sampled approaches, control height and legacy scene creation. Headset reach, comfort and sustained performance remain open.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows approach, overshoot, reversal and the observation boundary. The opening trail comparison concerns overlaid return travel: pink&#x27;s extent beyond the centre can show that it crossed, while a static line does not by itself show timing, repeated visits or current direction. The exact integration, history, arrow sampling, gain cycle and exit conventions remain above. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-field-and-receiver/before/commons/maps/Vectors_Act3_FieldsAndMotion/final.md) is retained for comparison. This reading pass adds no runtime or headset result.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/intent.md">Raw captured source</a></p><pre>One primary, VectorFieldFlow, opens a full-scale comparison with central controls. Two collision-free markers sample one dimensionless field at their own positions: cyan sets velocity, pink accumulates acceleration. Discover approach versus overshoot, then inspect trails, field samples and the update equations. All 13 source identities remain; VectorMotion becomes supporting after its primary encounter in the previous room. The large legacy vector_field is scaled to a compact specimen to prevent its blue glyphs from obscuring the new chamber. Next: kinetic forces and explicit receiver contracts.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/critical.md">Raw captured source</a></p><pre># A rule needs a receiver
+
+The room begins with two markers and a difference in what they do at the centre. Only afterward do we uncover the two assignments producing that difference. This makes the implementation available as an argument: sharing a field does not entail sharing a path.
+
+The field alone cannot explain either body&#x27;s movement. Cyan replaces its velocity with a sample; pink retains its existing velocity and adds a new contribution. Both carry a position. Only one carries the earlier velocity into the next update. Calling one obedient and the other free would be too quick: both follow exact rules, and the difference is a specific capacity that one receiver has been given.
+
+For the research question, what bodies are possible, this is a useful experiment. An inward rule can permit approach or repeated crossing. A swirling rule can produce different paths depending on how it is received. The vector&#x27;s visible shape is insufficient to determine the body&#x27;s future. The apparatus lets us locate a difference in code without reducing all differences to one universal explanation.
+
+Reverse the field while the bodies are moving. Pink does not immediately reverse; its accumulated velocity must be changed over time. This carries the previous chapter&#x27;s unfinished influence into a spatial relation. The next instruction meets a past, even when the trace has discarded that past&#x27;s early samples.
+
+The visitor occupies the same visible space but is not a receiver of this field. The markers pass through the controls; their two heights are display choices for one planar calculation. The gold perimeter freezes observations rather than responding with contact. These seams distinguish the simulation from the museum enclosing it. They are concrete places to ask what would change if another body were admitted to the rule.
+
+Neither overshoot nor a complicated trail measures freedom or entropy here. No QFEP threshold is computed. The contribution is methodological: vary the coupling between a spatial rule and a state, watch which forms of movement become possible, and keep the omissions inspectable. The next force room must make an equally explicit account of the bodies its forces actually reach.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/artifacts.md">Raw captured source</a></p><pre># Book primary
+
+`VectorFieldFlow` — the field_receivers variant compares setting velocity with accumulating acceleration in the same field.
+
+All 13 artifact identities remain. VectorMotion is now supporting, following its primary encounter in VFM_03_Motion. The retained catalogue below is not a declaration of book primacy.
+
+# Vectors Act3 FieldsAndMotion — Artifacts
+*Vectors &amp; Forces: From Direction to Dynamics · oscillation · 13 artifacts*
+
+&gt; Two rooms, two ways a vector stops holding still. First the field: a flow console, then a storm chamber you walk into where an arrow waits at every point and the wind decides where you drift. Then motion: a projectile&#x27;s arc rising and falling, a bubble gun whose launch velocity you can watch, and a velocity pulled apart into the part that carries you forward and the part that fights gravity. A field is force that has decided to be everywhere at once; motion is a vector the world keeps editing. Both refuse to sit still on a page.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## VectorFieldFlow
+![VectorFieldFlow](/scene-catalog/VectorFieldFlow.png)
+
+F(p) = swirl(p) - radial(p). A vector field assigns a direction to every point. The particle reads the field and follows.
+
+`VectorFieldFlow`
+
+## Weather Vector Field — Storm Chamber
+![Weather Vector Field — Storm Chamber](/scene-catalog/weather_vector_field.png)
+
+A walkable storm chamber (~5x5 m) built on vector addition — two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum, then watch a real GPUParticles3D storm answer the resultant: rain streaks slant at the true gravity + wind angle, wind-blown debris streaks downwind (the vector in flight), drifting cloud slabs and swaying ground mist advect on the wind, and forked lightning strikes downwind in stormy weather. A MultiMesh field of arrows plus classic instruments — a yawing windsock, a spinning 3-cup anemometer, a ground compass rose, and fading streamlines — all read the same live summed vector. Four weather modes (calm / breezy / storm / blizzard) swap density, scale, colour, drift and lightning; calm adds a sun shaft with rising motes; blizzard turns the rain to slow white snow. Pressure zones distort the field; the ground tints warm/cool with the wind&#x27;s vertical sign.
+
+`weather_vector_field`
+
+## Launch Arc (projectile motion)
+![Launch Arc (projectile motion)](/scene-catalog/launch_arc.png)
+
+Projectile motion made playable - the launch / F=ma toy for the embodied vectors-forces arc (the pad that throws you). A launch pad fires at angle theta with speed v; gravity bends the straight launch vector into a parabola. The launch velocity decomposes into a horizontal vx (carries you) and a vertical vy (fights gravity); the trade between them sets the range = v^2 sin(2theta)/g - which peaks at 45 degrees. Shows the tilted glowing pad, the stroboscopic projectile arc, the launch vector + its vx/vy components, and apex / range markers. DNA: angle 0..1 sets the launch angle (flat to steep), power 0..1 the launch speed; color_a pad + components, color_b the arc + launch vector, accent pad glow + apex/range.
+
+`launch_arc`
+
+## Bubble Blaster (output velocity vector)
+![Bubble Blaster (output velocity vector)](/scene-catalog/bubble_blaster.png)
+
+A soap-bubble gun that fires a spreading cone of bubbles and wears its launch vector on the muzzle - an embodied force-display prop. Pull the trigger and bubbles pour out; the muzzle shows an arrow for the output velocity and a faint cone for the spread. Crank the output and the arrow stretches, the cone widens, the bubbles fly faster and further. Every emitter is a little vector field - each particle leaves with a velocity, and the spray&#x27;s force is just that launch vector made of many departures. DNA: output 0..1 dials the launch (vector length, spread angle, bubble speed/count); seed jitters the bubbles.
+
+`bubble_blaster`
+
+## VectorMotion
+![VectorMotion](/scene-catalog/VectorMotion.png)
+
+VectorMotion
+
+`VectorMotion`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/summary.md">Raw captured source</a></p><pre>A full-scale field comparison builds on stored velocity from Motion. Begin with two bodies approaching an inward field: one sets velocity, the other accumulates acceleration and overshoots. Central controls change the field, gain and sign while keeping state; reset provides repeatable starts. Floor samples and wall histories reveal the rule after the movement. One primary anchors the book; twelve supporting artifacts remain. Kinetic forces follow.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act3_FieldsAndMotion/blurb.md">Raw captured source</a></p><pre>Two bodies enter the same field. What each does with an arrow changes the path it can take.
+</pre></section></body></html>

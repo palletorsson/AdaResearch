@@ -1,0 +1,1 @@
+The room turns a Platonic association around: learn enough geometry to discover what a polygonal model cannot hold. Follow a familiar sphere into its facets, compare an edge overlay with the same unmarked mesh, then choose a use before revealing its cost. What the approximation leaves out can also help us notice a form worth keeping.

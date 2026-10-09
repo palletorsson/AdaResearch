@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": true
+    },
+    {
+      "name": "desk bound to cube with six controls",
+      "passed": true
+    },
+    {
+      "name": "cube uses five solver passes",
+      "passed": true
+    },
+    {
+      "name": "initial coefficients match manuscript",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-one",
+      "passed": true
+    },
+    {
+      "name": "STIFFNESS changes stiffness alone",
+      "passed": true
+    },
+    {
+      "name": "DAMPING changes damping alone",
+      "passed": true
+    },
+    {
+      "name": "RESET restores coefficients in the same body",
+      "passed": true
+    },
+    {
+      "name": "first PRESSURE press sets zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-zero",
+      "passed": true
+    },
+    {
+      "name": "next PRESSURE press sets two",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-two",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deformation-hall",
+      "passed": true
+    },
+    {
+      "name": "MILL holds drive without disabling the soft bodies",
+      "passed": true
+    },
+    {
+      "name": "MILL releases the drive",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "initial_extent": [
+      [
+        8.32256698608398,
+        1.0363461971283,
+        8.32070922851563
+      ],
+      [
+        8.67733478546143,
+        1.33325445652008,
+        8.67934131622314
+      ]
+    ],
+    "pressure_two_after_3s_extent": [
+      [
+        7.71746110916138,
+        -0.0291096977889538,
+        8.81194686889648
+      ],
+      [
+        8.10916137695313,
+        0.396493941545486,
+        9.24284172058105
+      ]
+    ],
+    "zero_pressure_after_3s_extent": [
+      [
+        7.80282688140869,
+        -0.00586831010878086,
+        8.74309730529785
+      ],
+      [
+        8.22357273101807,
+        0.332980215549469,
+        9.27615737915039
+      ]
+    ]
+  },
+  "passed": true,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

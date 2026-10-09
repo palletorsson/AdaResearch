@@ -1,0 +1,29 @@
+{
+  "id": "CA_ExpandingSpace",
+  "decision": "draft",
+  "mode": "build",
+  "object": "The carried PointBody supplies position to a fractional cell field; floor and wall share its state.",
+  "change": "Connect a held point centre as external input. Decay nearby cells, recover through healthy neighbours, and separate recovery from support thresholds. Compare update schedules with three cells.",
+  "dependsOn": [
+    "CA_BeyondBinary",
+    "Point_Coordinates",
+    "Point_Lines"
+  ],
+  "reuses": "Same PointBody and action signal; local/world coordinates and distance; address, loops, old-to-next buffers; a state and its chosen output.",
+  "given": "Existing Day Zero museum host, player, camera, lighting and XR Tools. Full presence.gd and unchanged point_body.gd printed. All learner geometry, materials, labels and colliders are constructed in code.",
+  "later": "Compact model uses manual steps and held point centre. Installed VISITOR resolves the physical body; PROBE, RUN and richer desk remain comparisons. Secondary chair/tree/crossway works are museum encounters, not required lesson code.",
+  "checks": [
+    "32 exact-printed-code native checks: 3D distance, four axial neighbours, strict thresholds, clamping, separate buffers, schedule comparison and 160 updates matching the installed solver.",
+    "Independent height and .49 threshold exercises; flat-distance and accidental-scan faults rejected; native material, collision, actual XRTools pickup/action/release with supplied poses; keyboard and limit.",
+    "37 native museum checks including cameras: four sources, held-point parity, release/recovery, shared materials, schedules, falling body, climbed ramp, four routes/255 capsule-and-floor samples and portal approaches."
+  ],
+  "transfer": "Move the held point above the radius and predict recovery. Change CHAIN W from .495 to .49; in forward SCAN it reaches .5, still cannot contribute to the next cell because healthy means strictly greater than .5.",
+  "carry": "External input can alter future state; visual presence, physical support and recovery participation are distinct permissions. Timing of reads belongs to the rule.",
+  "next": "CA_SoftRules: inspect the installed primary and what its neighbourhood reads beyond a thresholded count; keep one carried object and one tested reconstruction.",
+  "notes": "One-fifth-scale learner model reverses its visual mapping to retain simulation units. It samples PointBody centre only while held; the installed VISITOR samples tracked body origin, not pressure. Bridge solver unchanged. No physical headset, full portal transfer or independent student acceptance.",
+  "baseline": {
+    "tutorial": "6903ca03a1ab207c8f1346558222c02fec833ead9aace241ea8e3fa0c48ab295",
+    "choice": "1d2b4ba0f9a5e8b1a09fb345ecf4320bb75d2ee0a01d4f46ec71d9b4abbf5d22"
+  },
+  "summary": "Carry the same PointBody from STEP-only to spatial input. In a 5x16 fractional field, a held point within a 3D radius removes health; otherwise four healthy axial neighbours permit recovery. Keep every address and show each value twice, on floor and wall. Below .2 floor support ends; only values above .5 aid recovery. Predict withdrawal and height changes. Revisit old-to-next with a three-cell SYNC/SCAN comparison, then edit .495 to .49 and explain the threshold. Carry explicit input/state/output separation toward soft neighbourhood rules."
+}

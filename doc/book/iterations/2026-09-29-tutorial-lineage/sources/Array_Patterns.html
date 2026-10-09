@@ -1,0 +1,227 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Array_Patterns · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Array_Patterns">← Tutorial lineage</a></p><h1>Array Patterns</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Array_Patterns/final.md">Raw captured source</a></p><pre># An address needs a surface
+
+When does repetition become an environment rather than a picture?
+
+The red bend returns, with its blue corner and ochre interruption. It is the same starting arrangement you met in Tutorial_Pattern, entered here as a fixed source. Your edits from the previous room have not secretly travelled with you. This time the question is what gives the mark a place to appear.
+
+&lt;!-- @pattern_tunnel_machine --&gt;
+
+Take the opening into the side bay. A six-metre passage stands on a raised platform; its console is beside the ramp on the lower floor. Three wedges make a broad ascent. Side walls close the routes around the tunnel, so crossing this bay takes you through it and down the ramp at the far end. The source has sixteen cells. There are considerably more squares inside the tunnel. Find the pale yellow indicator on the floor and compare its position with the console&#x27;s two addresses.
+
+Press COL +. The surface address advances. Press it again, watching the smaller source address. After four steps, one number has returned while the other has moved on.
+
+```gdscript
+column % 4
+row % 4
+```
+
+These are the wrapping expressions used by the inspector. It displays addresses as `[row, column]`, then the palette index stored there. Surface `[10,1]` returns to source `[2,1]`. Another place can consult the same memory.
+
+The tunnel&#x27;s renderer first computes a small swatch from the source and its translation rule. The shader samples that swatch across each face. The inspector follows the same cell coordinates back to the four-by-four source. You can move the indicator without changing a single stored colour.
+
+Now press FACE. The indicator moves to the right wall. The panel still speaks in rows and columns, but those directions occupy another plane. On the floor, one direction runs across the passage and the other along it. On the right wall, columns run along the passage and rows descend from the ceiling. The address needs a surface to acquire a direction in the room.
+
+Walk inside. Follow a line to the corner between floor and wall. Each face begins its own grid. A shared motif does not promise that its edges will join there. The corner exposes a decision that was harder to notice on a single flat panel: where should counting begin, and which way should it proceed?
+
+Return to CELL SIZE. A cell now occupies sixty centimetres instead of forty. The source still has four cells across. Its whole motif therefore spans 2.4 metres instead of 1.6. In the previous room, forty centimetres described an entire motif; here the mark has been enlarged so you can inspect its individual addresses. The same number needs its unit and its referent.
+
+The passage has not grown. Its width remains 3.6 metres and its height 3.2. Some divisions fit exactly; others leave a cut cell at an edge. A room does not owe the pattern an integer number of repeats. The inspector selects complete cells; the remaining strip is still there to look at.
+
+Press GRID. The dark joints disappear. Keep walking. No wall has opened and no floor tile has fallen away. Those divisions were drawn in a shader on four large surfaces. The supports that stop your body are separate. UNDO restores the last inspector setting, including cell size and grid visibility.
+
+&lt;!-- @pattern_tile_brick --&gt;
+
+Back among the earlier stations, look at the brick preview. Follow a seam through two neighbouring rows. The boundary steps sideways. Compare that stagger with the tunnel&#x27;s straight cell divisions and the corner where two faces restart their counting.
+
+A stagger changes how rows relate within a field. A corner changes how a field is carried into space. They can resemble one another as disruptions, but they ask for different changes to the implementation. Keep the motif, the lookup and the carrier available as separate things to question.
+
+&lt;!-- @ --&gt;
+
+An orderly image can conceal a complicated support. A conspicuous seam can reveal the rule more clearly than a perfect join. Neither smoothness nor interruption is automatically the more interesting result. What becomes available to a body that can read the difference?
+
+This passage holds its pattern fully visible. The earlier automatic reveal remains another performance to revisit when we study change over time. Here there is time to compare addresses, then move on. Symmetry_Seventeen will ask what can be classified about an ideal repeating field. Bring the finite edge of this room with you.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Array_Patterns/tutorial.md">Raw captured source</a></p><pre># Follow an address
+
+1. Find the marked floor cell and compare its `[row,column]` with the source address on the side console.
+2. Press COL + four times. The surface column advances; the source column returns. Try ROW +.
+3. Press FACE. Inspect the right wall and work out which way its rows and columns run.
+4. Change CELL SIZE from 40cm to 60cm. The motif still has four cells across, but its physical span changes from 1.6m to 2.4m.
+5. Press GRID and walk through the tunnel. Hiding drawn divisions leaves supports and collision unchanged. Use UNDO to return.
+6. Inspect the corner and a cut boundary cell. Compare with the staggered rows at pattern_tile_brick.
+
+Each face starts its own UV grid. The inspector selects complete cells only. The source is fixed for this encounter; the preceding room supplies editing. Headset and continuous gestures remain deferred.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Array_Patterns/technical.md">Raw captured source</a></p><pre># Array_Patterns — addressed surfaces and physical passage
+
+Arrays supplied row/column addresses and Colour supplied palette indices. Tutorial_Pattern separated source editing from repeating rules. This room holds a fixed asymmetric source and P1 translation while exposing surface addresses, physical cell spacing and face orientation.
+
+## Current encounter
+
+`pattern_tunnel_machine:0:0#lesson:addresses#tunnel_length:6#group_index:0` occupies (24,11), floor offset zero. A new east bay connects through x18, rows11-13. The original tunnel placement at (6,9) is cleared; all other artifact instances remain. The original structure changes only at those three doorway cells. The tunnel extends six metres down its local -Z, is 3.6m wide and 3.2m high. Its console stands to the right of the mouth so the passage stays open.
+
+`tunnel_address_lesson.gd` attaches only to this explicit configuration. It retires the generic console (rebuilds now detach queued children before assigning new node names), fixes the source to the previous room&#x27;s initial 4x4 motif and sets P1. This is an authored copy, not persistence of a visitor&#x27;s edits. It holds the four surfaces fully revealed and disables automatic fill. The generic machine&#x27;s existing reveal and controls remain available in other configurations. Its group-name list was corrected to match the existing engine enum: CM at4, PMM at5, PMG at6, PGG at7.
+
+## Source and sample
+
+The tunnel generates a 32x32 RGBA8 swatch using `WallpaperGroups.get_symmetric_color`. In this lesson the group is P1 and the domain is 4x4, so the source lookup is `[row % 4][column % 4]`. The inspector labels both surface and source addresses and highlights the source cell and its location on the chosen face.
+
+The source swatch is fixed while inspector settings change. Four steps along a surface return to the same source coordinate without returning to the same physical position.
+
+Each mesh uses its own UV coordinates. With surface extent `extent` and cell pitch `pitch`, the lesson sets:
+
+```gdscript
+mat.set_shader_parameter(&quot;tile_reps&quot;, extent / pitch)
+mat.set_shader_parameter(&quot;pattern_reps&quot;, extent / pitch / 32.0)
+```
+
+The shader samples the swatch using the second quantity and draws cell divisions using the first. Source pixels, drawn cell joints and collision are different representations.
+
+CELL SIZE selects 0.4m or 0.6m per source-addressed cell. A four-cell motif therefore spans 1.6m or 2.4m. At 0.6m the floor has 6x10 complete cells; a 3.2m-high wall has five complete cell rows plus a 0.2m strip. The inspector cycles over complete cells, leaving cut boundary cells visible but unselected.
+
+## Face coordinates and seams
+
+Floor UV column increases across local x; its row increases from the far end towards the mouth. On the right wall, column increases from far end to mouth and row descends from the ceiling. The indicator is positioned from these same mappings. The desktop probe reconstructs UV coordinates from the actual quad transform and checks that the indicator lands at its named address on both faces.
+
+Each face restarts its own coordinates. Equal pitch does not promise seam continuity. The present lesson exposes this independent mapping rather than offering an unimplemented seamless wrap control.
+
+## Physical support
+
+The existing four quads remain the printed surfaces. Printed faces and their backing do not cast shadows in this fixed comparison; the backing is separated from the print by 15mm to avoid coincident-surface interference. A thin backing with collision bounds both walls and the ceiling. Both ends are open. The floor print sits 18mm above the authored grid; the grid carries the visitor. GRID changes only the drawn joints via an instance-local shader uniform. It never alters the meshes, backing or collision. A translucent marker has no collision. The source is inspected here, not repainted.
+
+The console provides COL +, ROW +, FACE, CELL SIZE, GRID and UNDO. Its 32-entry history restores the complete inspector state. Headset and gesture work remain deferred.
+
+## Verification and limits
+
+50 desktop museum checks pass, including pointer operations, source-byte preservation, modulo recurrence, equal physical scaling, marker-to-quad UV agreement, traversable ends, wall collision and the bay approach. Three captures document the installation and source display. No headset performance claim is made.
+
+The old generic reveal shader measures world-Z, which is unsuitable as a portable tunnel-local reveal coordinate. This lesson is fully revealed and does not exercise that animation. A future timed-reveal pass should fix and test translation/rotation invariance before making claims about its rate. The brick station remains a second primary comparison; it was not rebuilt in this pass.
+
+## Raised platform route
+
+The platform is one metre above the lower floor, authored as structure height2 over x22-26,z5-11. Three wp:180 wedges at x23-25,z12 form the entrance ramp; three wp:0 wedges at z4 form the descent. The wp scene runs two metres along its slope. A flat northern landing connects to the gallery through x18,z1-3; the southern opening remains x18,z11-13. Side wings seal the lateral gaps between tunnel and perimeter at z8, so the crossing between those openings passes through the tunnel. The side console is lowered relative to the raised artifact to remain reachable from the lower approach.
+
+Added desktop checks sample physical floor and wedge heights, verify the metre rise, block both lateral bypasses and check the entrance/exit routes. The platform raises the tunnel through normal grid placement; its source addressing remains unchanged.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Array_Patterns/intent.md">Raw captured source</a></p><pre>Concept: An array address acquires physical size and direction through a surface mapping.
+Sequence role: Fourth room of tiling; after Tutorial_Pattern, before Symmetry_Seventeen.
+Primary: pattern_tunnel_machine and pattern_tile_brick.
+Encounter: Fixed source, P1 tunnel, source/surface inspector, 40/60cm cells, independently mapped faces, grid visibility and unchanged physical passage.
+Critical question: Which relation repeats, where does counting restart, and which remainder can be seen but not selected?
+Deferred: continuous gestures, headset comfort, transferable visitor source, seam alignment controls, portable timed reveal.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Array_Patterns/critical.md">Raw captured source</a></p><pre># Where counting begins
+
+A source address can survive a move from floor to wall while its direction in the room changes. The index is neither wholly abstract nor already spatial: it acquires a direction through a mapping. Here each face starts again. The corner reveals that independence.
+
+The tunnel accepts the same red mark repeatedly. Its limits accept something less tidy. A3.2m wall cannot hold an integer number of 0.6m cells. The last strip is cut by the carrier. Calling the field regular does not remove that remainder; it says which relation we chose to describe.
+
+The drawn grid and the physical passage also make different demands. GRID removes the joints without changing the walls that stop a body. An image of division can be changed with one parameter while access remains fixed. That distinction can support a visual argument about control, provided we identify which implementation actually governs movement.
+
+The present inspector selects complete cells. Its address range therefore excludes the cut strip from selection even while the renderer continues to display it. This is a small but specific mismatch between what is visible and what the interface lets us point to. It is a limit to notice, not proof that partial cells are inherently uninteresting.
+
+No degree of surface smoothness settles what forms of life a passage can host. Its width, openings, supports, visibility and representation act together. Later we can make those conditions variable. For now, changing the pattern while keeping the carrier fixed gives us a way to avoid attributing every apparent change to the same cause.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Array_Patterns/artifacts.md">Raw captured source</a></p><pre># Array Patterns — Artifacts
+*Array Tutorial Sequence · F_order · 13 artifacts*
+
+&gt; Every carpet is an algorithm. Every algorithm can be a carpet.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## 4x4 Pattern Tile
+![4x4 Pattern Tile](/scene-catalog/pattern_tile_4x4.png)
+
+Basic 4x4 tile pattern editor. Simple repeat mode.
+
+`pattern_tile_4x4`
+
+## VR Tile Editor Mirror
+![VR Tile Editor Mirror](/scene-catalog/vr_tile_editor_mirror.png)
+
+VR tile editor starting in kaleidoscope mirror mode. Design symmetric patterns and see them tile across a floor carpet.
+
+`vr_tile_editor_mirror`
+
+## Mirror Pattern Tile
+![Mirror Pattern Tile](/scene-catalog/pattern_tile_mirror.png)
+
+4x4 tile with mirror symmetry (kaleidoscope effect).
+
+`pattern_tile_mirror`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## Tiling System Demo
+![Tiling System Demo](/scene-catalog/tiling_demo.png)
+
+Italian tiling motifs gallery. 17 wallpaper groups, multi-layer composition. Checkerboard to cosmatesque — field study preparation.
+
+`tiling_demo`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Pattern Tile Plate
+![Pattern Tile Plate](/scene-catalog/pattern_tile_plate.png)
+
+Dieter Rams-styled pattern studio. Paint a 4x4 grid, see it tile into a carpet using 17 wallpaper symmetry groups. Integrated cream plate with palette, preview, and symmetry controls.
+
+`pattern_tile_plate`
+
+## Pattern Tunnel Machine
+![Pattern Tunnel Machine](/scene-catalog/pattern_tunnel_machine.png)
+
+A subway-tiled walkway tunnel that paints itself tile by tile (floor then walls then ceiling), driven by a pattern-maker console at the mouth. The console&#x27;s GROUP / MOTIF / PALETTE / SPEED sliders re-skin the whole tube through any of the 17 wallpaper symmetry groups; touching a control surges the fill faster. Same WallpaperGroups engine as pattern_studio_plate.
+
+`pattern_tunnel_machine`
+
+## Panel Bridge — Loom Simulator
+![Panel Bridge — Loom Simulator](/scene-catalog/panel_bridge_loom.png)
+
+Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.
+
+`panel_bridge_loom`
+
+## Grid Model
+![Grid Model](/scene-catalog/grid_model.png)
+
+Miniature interactive model of the map grid — grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.
+
+`grid_model`
+
+## Facade Grammar Demo
+![Facade Grammar Demo](/scene-catalog/facade_grammar_demo.png)
+
+Architectural facade gallery. Italian presets (Villa San Michele, Certosa, San Gregorio Armeno) plus element library (columns, arches, cornices, rustication).
+
+`facade_grammar_demo`
+
+## Brick Pattern Tile
+![Brick Pattern Tile](/scene-catalog/pattern_tile_brick.png)
+
+Tile with brick/half-drop offset. Classic masonry pattern.
+
+`pattern_tile_brick`
+
+## Herringbone Pattern Tile
+![Herringbone Pattern Tile](/scene-catalog/pattern_tile_herringbone.png)
+
+Tile with herringbone weave pattern.
+
+`pattern_tile_herringbone`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Array_Patterns/summary.md">Raw captured source</a></p><pre># Array_Patterns — an address becomes a passage
+
+After Tutorial_Pattern, the same initial asymmetric motif appears as a fixed source in a six-metre walkable tunnel. A side console exposes surface and source addresses, floor/right-wall selection, 40/60cm cell spacing, drawn-grid visibility and undo.
+
+The primary tunnel now occupies a connected east bay. The brick station remains the second primary comparison: staggered rows within a field versus independently mapped faces at a corner. Other artifacts remain supporting experiments.
+
+The book asks where counting begins, how a cell acquires a physical size and direction, and why hiding a drawn seam does not remove a physical support. 50 desktop checks pass; headset and gesture work are deferred. Next: Symmetry_Seventeen and the assumptions behind classifying ideal repeating fields.
+
+The corridor now stands on a one-metre platform, reached by a broad wp ramp and exited down another. Side walls make the crossing pass through the tunnel; the inspector remains on the lower approach.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Array_Patterns/blurb.md">Raw captured source</a></p><pre>Four steps return to the same stored cell. Your body has travelled further. At the corner, counting begins again; along the edge, the room cuts a repeat short.
+</pre></section></body></html>

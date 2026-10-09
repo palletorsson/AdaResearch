@@ -1,0 +1,735 @@
+--- before/algorithms/randomness/voxelnoise/voxelnoise.gd
++++ after/algorithms/randomness/voxelnoise/voxelnoise.gd
+@@ -36,6 +36,7 @@
+ var _occupied_cells: Dictionary = {}
+ var _rebuild_ms: float = 0.0
+ @export_enum("none", "volume") var stand: String = "none"
++@export var flight_box: bool = false
+ var _selected_cell: Vector3i = Vector3i(12, 12, 12)
+ var _slice_frame: Node3D
+ var _cell_frame: Node3D
+@@ -99,8 +100,7 @@
+ 	_read_meta_overrides()
+ 	add_to_group("voxelnoise_receivers")
+ 	_ensure_generated_root()
+-	if stand == "volume":
+-		_build_volume_stage()
++	_refresh_volume_staging()
+ 	_queue_rebuild()
+ 
+ 
+@@ -354,7 +354,9 @@
+ func _read_meta_overrides() -> void:
+ 	if str(get_meta("config_stand", "")) == "volume":
+ 		stand = "volume"
+-		chunk_size = 24;world_height = 24;voxel_scale = 0.2
++		chunk_size = 24;world_height = 24;voxel_scale = clampf(float(str(get_meta("config_cell_size", "0.2"))), 0.05, 2.0)
++	if has_meta("config_flight_box"):
++		flight_box = str(get_meta("config_flight_box")).to_lower() in ["true", "1", "yes"]
+ 	if has_meta("config_threshold"):
+ 		var v: String = str(get_meta("config_threshold")).strip_edges().to_lower()
+ 		if THRESHOLDS.has(v):
+@@ -375,29 +377,49 @@
+ 	var before_threshold: String = threshold
+ 	var before_iso: float = iso_level
+ 	var before_seed: int = noise_seed
++	var before_staging: Array = [stand, voxel_scale, flight_box]
+ 	for k in config.keys():
+ 		set_meta("config_%s" % str(k), config[k])
+ 	_read_meta_overrides()
+-	if threshold == before_threshold and is_equal_approx(iso_level, before_iso) \
++	var staging_changed: bool = before_staging != [stand, voxel_scale, flight_box]
++	if staging_changed and is_inside_tree(): _refresh_volume_staging()
++	if not staging_changed and threshold == before_threshold and is_equal_approx(iso_level, before_iso) \
+ 			and noise_seed == before_seed:
+ 		return
+ 	_queue_rebuild()
++
++## Only explicit size/staging changes rebuild the enclosure. Field and CELL updates
++## keep the flight zone and its locomotion registration alive.
++func _refresh_volume_staging() -> void:
++	for node_name in ["VolumeStage", "SelectedSlice", "SelectedCell", "FlightBox"]:
++		var old := get_node_or_null(node_name)
++		if old != null: remove_child(old); old.queue_free()
++	_slice_frame = null; _cell_frame = null
++	if stand != "volume": return
++	_build_volume_stage()
++	if flight_box:
++		var zone := preload("res://commons/movement/museum_flight_box.gd").new()
++		zone.name = "FlightBox"
++		zone.edge_length = maxf(chunk_size, world_height) * voxel_scale + 4.0
++		zone.instruction_title = "FLY THROUGH THE EMPTY CELLS"
++		add_child(zone)
+ 
+ ## Fixed museum framing; the generated body can become entirely absent within it.
+ func _build_volume_stage() -> void:
+ 	var kit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+ 	var mat := StandardMaterial3D.new();mat.albedo_color=Color(0.08,0.12,0.16)
++	var width: float = chunk_size * voxel_scale + 0.4
+ 	var stage_ := Node3D.new();stage_.name="VolumeStage";add_child(stage_)
+-	stage_.add_child(kit.box(Vector3(0,-0.06,0),Vector3(5.2,0.12,5.2),mat))
+-	for x in [-2.55,2.55]:
+-		stage_.add_child(kit.box(Vector3(x,0.12,0),Vector3(0.06,0.24,5.2),mat))
+-	var label_ := Label3D.new();label_.text="SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL
+-Threshold changes the body; this frame stays."
+-	label_.font_size=25;label_.pixel_size=0.0016;label_.position=Vector3(0,0.15,-2.63);label_.rotation.y=PI
++	stage_.add_child(kit.box(Vector3(0,-0.06,0),Vector3(width,0.12,width),mat))
++	for x in [-width * 0.5 + 0.05, width * 0.5 - 0.05]:
++		stage_.add_child(kit.box(Vector3(x,0.12,0),Vector3(0.06,0.24,width),mat))
++	var label_ := Label3D.new()
++	label_.text = "%s m CELLS | %d x %d x %d ADDRESSES\nSame field as the bench | %s times the spacing" % [voxel_scale, chunk_size, world_height, chunk_size, voxel_scale / 0.04]
++	label_.font_size=25;label_.pixel_size=0.002;label_.position=Vector3(0,0.15,-width*0.5-0.03);label_.rotation.y=PI
+ 	label_.set_meta("em_local_instrument",true);stage_.add_child(label_)
+ 	# Readable from both approaches when the volume shares the model's orientation.
+ 	var reverse_label := label_.duplicate() as Label3D
+-	reverse_label.position.z = 2.63; reverse_label.rotation.y = 0.0
++	reverse_label.position.z = width * 0.5 + 0.03; reverse_label.rotation.y = 0.0
+ 	stage_.add_child(reverse_label)
+ 	_build_selection_markers()
+ 
+@@ -433,12 +455,13 @@
+ 	_slice_frame.visible = valid; _cell_frame.visible = valid
+ 	if not valid: return
+ 	var width: float = chunk_size * voxel_scale + 0.10
++	var stroke: float = 0.012 * maxf(1.0, voxel_scale / 0.2)
+ 	_slice_frame.position.y = (_selected_cell.y + 0.5) * voxel_scale
+ 	for i in range(4):
+ 		var bar: MeshInstance3D = _slice_frame.get_child(i)
+ 		var side: float = -1.0 if i % 2 == 0 else 1.0
+ 		bar.position = Vector3(side * width * 0.5, 0, 0) if i < 2 else Vector3(0, 0, side * width * 0.5)
+-		(bar.mesh as BoxMesh).size = Vector3(0.012, 0.012, width) if i < 2 else Vector3(width, 0.012, 0.012)
++		(bar.mesh as BoxMesh).size = Vector3(stroke, stroke, width) if i < 2 else Vector3(width, stroke, stroke)
+ 	_cell_frame.position = Vector3(_selected_cell.x - (chunk_size - 1) * 0.5, _selected_cell.y + 0.5, _selected_cell.z - (chunk_size - 1) * 0.5) * voxel_scale
+ 	var size: float = voxel_scale * 1.06
+ 	var index: int = 0
+@@ -447,6 +470,6 @@
+ 			for b in [-1.0, 1.0]:
+ 				var bar: MeshInstance3D = _cell_frame.get_child(index)
+ 				var at := Vector3.ZERO; at[(axis + 1) % 3] = a * size * 0.5; at[(axis + 2) % 3] = b * size * 0.5
+-				var dimensions := Vector3.ONE * 0.009; dimensions[axis] = size
++				var dimensions := Vector3.ONE * (stroke * 0.75); dimensions[axis] = size
+ 				bar.position = at; (bar.mesh as BoxMesh).size = dimensions
+ 				index += 1
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -11,7 +11,7 @@
+   },
+   "category": "procedural",
+   "complexity": "intermediate",
+-  "description": "Thresholded 3D noise volume. Optional stand:volume stages a 24 cubed, 4.8 m domain in a 5.2 m frame; linked Perlin samples match the lattice bench, with exposed boundary faces and matching triangle collision. Unlinked legacy mode retains its Simplex generator.",
++  "description": "Thresholded 3D noise volume. Optional stand:volume uses 24 cubed addresses with cell_size in metres (default 0.2). Noise_Voxel selects cell_size:1 and flight_box:true: a 24 m field in a 28 m glass flight enclosure. Linked Perlin samples match the lattice bench, with exposed boundary faces and matching triangle collision. Unlinked legacy mode retains its Simplex generator.",
+   "dev_themes": [
+     "probability",
+     "procedural",
+@@ -116,5 +116,9 @@
+     "derived_at": "2026-04-29T09:39:46.247932Z",
+     "derived_from": "aabb_size + category"
+   },
+-  "qfep_connection": "3D noise made walkable census: cubes appear where the field crosses threshold, vanish where it does not. The invisible correlation structure of the noise stands revealed as architecture — you are looking at the field's memory, cell by cell."
++  "qfep_connection": "3D noise made walkable census: cubes appear where the field crosses threshold, vanish where it does not. The invisible correlation structure of the noise stands revealed as architecture — you are looking at the field's memory, cell by cell.",
++  "parameters": {
++    "cell_size": "Metres per cell in stand:volume; defaults to 0.2, clamped to 0.05–2.0. Noise_Voxel uses 1.0.",
++    "flight_box": "Opt-in local flight enclosure for stand:volume. Physical glass, two ground doors, room to fly around/above the solid field. Existing desktop and XR flight controls."
++  }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -7,8 +7,8 @@
+   "status": "source_checked_draft",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_Voxel/final.md",
+-  "text_sha256": "3cff4c8b5c4844287589b88579fca8502b70ee4b29a387e57ce9708aaf622245",
+-  "map_sha256": "ab67d3d90e8b53edafa78b2f97b498e8530c7059c1a320e2b0ff05d1d182a5a6",
++  "text_sha256": "7eeeac0a632c0d11da5bf80adb0f7a84af658b433a3101b81a88e1640bb632f2",
++  "map_sha256": "22b8eb7872fa15f50caf062f59c5cb8511ade564addb3ab4cec9ddfd6c88e81c",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-25-voxel-correspondence/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-voxel-flight/DECISIONS.md"
+ }
+--- before/commons/maps/Noise_Voxel/artifacts.md
++++ after/commons/maps/Noise_Voxel/artifacts.md
+@@ -4,18 +4,18 @@
+ 
+ ## Perlin Terrain Sculptor
+ 
+-`perlin_terrain_sculptor` at (4,7), on a plinth. The 24³ lattice source offers THRESHOLD, CELL, SEED and view-only CUT. The cased readout identifies one field value, vertical bias, threshold, occupancy, component count and largest piece.
++`perlin_terrain_sculptor` at (13,7), on a plinth. The 24³ lattice source offers THRESHOLD, CELL, SEED and view-only CUT. The cased readout identifies one field value, vertical bias, threshold, occupancy, component count and largest piece.
+ 
+ ## Science Screen
+ 
+-`science_screen` at (9,4), with a floor stand and explicit voxel_slice mode. It reads the actual local source and displays the selected horizontal score layer beside its stored decisions. It does not invent a replacement field when the source is absent.
++`science_screen` at (18,4), with a floor stand and explicit voxel_slice mode. It reads the actual local source and displays the selected horizontal score layer beside its stored decisions. It does not invent a replacement field when the source is absent.
+ 
+ ## Voxel Noise
+ 
+-`voxelnoise` at (9,9), in volume mode. A 5.2 m frame contains a 4.8 m sample domain. Its 24³ cells match the model at five times the physical spacing. Exposed cell faces provide both visible geometry and collision. It now shares the bench's orientation. CELL moves a yellow horizontal perimeter and selected-address outline here, matching the screen without rebuilding the volume. Occupied connectivity does not establish player traversal.
++`voxelnoise` at (16,24), in volume mode. A 28 m glass flight enclosure surrounds a 24 m cube domain, supported by a 24.4 m stage. Its 24³ cells match the model at twenty-five times the physical spacing, with one-metre cells. Exposed cell faces provide both visible geometry and collision. It now shares the bench's orientation. CELL moves a yellow horizontal perimeter and selected-address outline here, matching the screen without rebuilding the volume. Occupied connectivity does not establish player traversal.
+ 
+ ## Dark Sphere
+ 
+-`dark_sphere` at (4,12). The original orb retains its independent rotation, sine-driven emission and halo. It lets the chapter compare binary occupancy with an earlier way to receive a varying scalar.
++`dark_sphere` at (5,8). The original orb retains its independent rotation, sine-driven emission and halo. It lets the chapter compare binary occupancy with an earlier way to receive a varying scalar.
+ 
+-Recovered map structure and utilities are unchanged. Actual rendered images and the review are at `/research/possible-bodies/noise-voxel.html`; the original artifact page is preserved in the dated review snapshot.
++The hall expands to 33 × 44 m. Recovered interior structure and utility tokens are retained with a nine-cell x offset; the old end wall moves to the new end. The model and screen keep their relative positions, while the volume moves into the flight court and the orb remains outside it. Actual rendered images and the review are at `/research/possible-bodies/noise-voxel.html`; the original artifact page is preserved in the dated review snapshot.
+--- before/commons/maps/Noise_Voxel/critical.md
++++ after/commons/maps/Noise_Voxel/critical.md
+@@ -8,7 +8,7 @@
+ 
+ The initial field already contains decisions. Perlin basis, fractal octaves, seed, sample spacing and a vertical bias all precede the threshold. The bias gives lower addresses a numerical advantage without invoking gravity. Exposing this preference lets a visitor ask who gave the volume its downstairs. The answer here is a line of source, not nature speaking through the scene.
+ 
+-The full-size body introduces a further relation. Five times the model's cell spacing makes a cavity a different proposition for the visitor. The occupied component counter remains indifferent to headroom, shoulder width, a safe landing or a reachable ledge. A topology of face-connected cells is useful but insufficient to describe these bodily possibilities. Nor is the number of pieces an entropy score: the observed fall from 25 pieces to 21 at a higher threshold is already enough to trouble a single story of increasing fragmentation.
++The full-size body introduces a further relation. Twenty-five times the model's cell spacing makes a cavity a different proposition for the visitor. The occupied component counter remains indifferent to headroom, shoulder width, a safe landing or a reachable ledge. A topology of face-connected cells is useful but insufficient to describe these bodily possibilities. Nor is the number of pieces an entropy score: the observed fall from 25 pieces to 21 at a higher threshold is already enough to trouble a single story of increasing fragmentation.
+ 
+ The queer opening I want to keep is the possibility of remaining interested in the body before assigning it an authorised use. A recess can attract attention without becoming cover from an enemy. A hanging fragment can be desirable without becoming loot. A topology can solicit a body we do not yet possess. The room gives this desire a material question: which dimensions, controls and collision rules would that encounter require?
+ 
+@@ -21,3 +21,5 @@
+ These are proposals, not installed controls. Use the rejected scalar as emission on the occupied boundary; reverse the height bias while retaining the same seed; compare face-only adjacency with edge/corner adjacency; put differently sized player capsules beside the same cavity. Each comparison should change one named relation and preserve enough of the scene for the consequences to be legible. None needs to declare one outcome the most free.
+ 
+ The earlier essay and its theoretical associations remain in the dated source snapshot. This version grounds the inquiry in the four works actually present; it does not attribute the hall's threshold mechanism to an author whose argument the installation has not established.
++
++The flight enclosure alters another condition: a route no longer needs continuous support below the feet. It still needs clearance around the body. The visitor can rise to a previously distant opening without changing the field that left it empty. The glass bounds that permission; outside its doors the museum returns the body to walking.
+--- before/commons/maps/Noise_Voxel/field_notes.md
++++ after/commons/maps/Noise_Voxel/field_notes.md
+@@ -37,3 +37,7 @@
+ The standing photograph showed the small and large bodies facing opposite ways. Rotated only the large placement by 180 degrees and added a CELL-linked yellow perimeter at the selected horizontal layer, with a selected-cell outline. The existing control now locates the screen reading in the full-size body. No new control or field rule. Solid cells can still hide the selected address; the frame does not cut the body or collide with the visitor.
+ 
+ The chapter keeps all former passages except the opening orientation phrase, adding one observation paragraph and a native photograph. Current role lists and sequence are unchanged. The core record still promotes the bench and volume, while older companion/book-role records name four works; this pre-existing discrepancy is recorded, not treated as permission to promote the legacy orb. The earlier orb passage remains available as a supporting comparison.
++
++## 25 September — author asks for one-metre cells and flight
++
++Expanded the receiver from 0.20 m to 1.00 m spacing while retaining the 24³ field, miniature and decisions. Added a 28 m glass flight enclosure using the museum's existing local locomotion, with physical sides/roof and two ground doors. The larger 33 × 44 m hall keeps the bench and screen in front and the orb outside the enclosure. Current book claims and dimensions follow this revision; earlier measurements and photographs above describe the previous staging.
+--- before/commons/maps/Noise_Voxel/final.md
++++ after/commons/maps/Noise_Voxel/final.md
+@@ -38,9 +38,9 @@
+ 
+ Press CELL at the bench. The box visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
+ 
+-A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square drops below your eyes, then rises above your head as you continue. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
++A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square changes level high above you. Later, inside the glass flight box, you can rise until this reading meets your eyes. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
+ 
+-![The selected horizontal slice runs below eye level around the full-size voxel body. Changing CELL moves this yellow frame while the occupied form stays put.](/book-review/doc/book/figures/Noise_Voxel/selected-slice.png)
++![Flying above the one-metre voxel cells. The yellow frame locates the selected horizontal slice; the glass enclosure lends flight while occupied blocks remain solid.](/book-review/doc/book/figures/Noise_Voxel/flight-from-above.png)
+ 
+ Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
+ 
+@@ -52,9 +52,9 @@
+ 
+ <!-- @voxelnoise -->
+ 
+-Walk towards the large blue volume with its pink edges. At the bench you look down on most of the arrangement, though its top layers reach just above eye level; here parts of it rise above your head. A recess that looked like a detail becomes somewhere you might want to approach.
++Walk towards the large blue volume with its pink edges. Each cube is now one metre across. Twenty-four cells can rise twenty-four metres above the floor. At the bench a recess was a detail; here you can approach it with your whole body.
+ 
+-Both works ask at the same 24 × 24 × 24 positions in the same Perlin field. Their cell spacing differs: four centimetres at the bench, twenty centimetres here. The model leaves a small gap around each visible block so its addresses remain legible. The large volume joins occupied neighbours and draws their exposed faces. Its surface also supplies the collision triangles.
++Both works ask at the same 24 × 24 × 24 positions in the same Perlin field. Their cell spacing differs: four centimetres at the bench, one metre here: twenty-five times the spacing. The model leaves a small gap around each visible block so its addresses remain legible. The large volume joins occupied neighbours and draws their exposed faces. Its surface also supplies the collision triangles.
+ 
+ The coordinate rule is small enough to carry across the room:
+ 
+@@ -63,6 +63,8 @@
+ ```
+ 
+ The three coordinates run from zero to one within either display. `CONTRACT_SPAN` is 9.6. Increasing the physical spacing therefore enlarges the arrangement without reaching into a different part of the field. The same decisions have gained another relation to your height, reach and route.
++
++Step through a ground-level opening in the glass. Your feet no longer have to ask for a floor. Rise along the edge, then approach a gap. Release the movement and hang there. The blue blocks still stop you; an opening has to admit your body before it can become a route. The glass lends this movement a boundary. Descend to either doorway and leave: the museum asks for your weight again.
+ 
+ The plate counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
+ 
+--- before/commons/maps/Noise_Voxel/intent.md
++++ after/commons/maps/Noise_Voxel/intent.md
+@@ -2,7 +2,7 @@
+ 
+ Sequence role: after Noise_One's different readings of a field, carry the array into a volume of occupied/empty decisions. Continue into Noise_6_Wall with another possible receiver for the values classification leaves out.
+ 
+-Encounter: keep the seed while moving the threshold; inspect one coordinate; distinguish a change to occupancy from a cut in the model's visible instances. Read the actual score slice beside the stored decisions, then approach the same 24³ arrangement at five times the cell spacing. The pair shares its orientation; a yellow perimeter carries the selected screen layer into the volume at its actual height. Changing the reading position leaves the body still.
++Encounter: keep the seed while moving the threshold; inspect one coordinate; distinguish a change to occupancy from a cut in the model's visible instances. Read the actual score slice beside the stored decisions, then approach the same 24³ arrangement at twenty-five times the cell spacing. The pair shares its orientation; a yellow perimeter carries the selected screen layer into the volume at its actual height. Changing the reading position leaves the body still.
+ 
+ Four primary works: perlin_terrain_sculptor, science_screen, voxelnoise, dark_sphere. The source model, section screen and large receiver compare one field; the orb retains independent sine-driven material variation. It adds an earlier operation to the comparison without being retuned as a noise artifact.
+ 
+@@ -11,3 +11,5 @@
+ Current evidence: 61 rendered museum checks pass; exact sample/occupancy equality at five thresholds; live section, boundary collision, local controls and connected surrounding route. All authored artifacts and recovered structure/utilities remain. Headset reach, body traversal through the volume and Quest performance remain pending.
+ 
+ Return later: reverse the vertical bias; compare adjacency conventions; let a rejected scalar dress a surface; test different body sizes. These are proposed extensions, not existing controls. Earlier intent is preserved in doc/space/voxel-review-2026-09-13/before/.
++
++Author-directed scale pass, 25 September: one-metre receiver cells in a 28 m flight box. Flight changes the visitor’s possible approaches while the occupied surface stays solid. The small model remains a reachable instrument at 4 cm spacing.
+--- before/commons/maps/Noise_Voxel/map_data.json
++++ after/commons/maps/Noise_Voxel/map_data.json
+@@ -1,120 +1,236 @@
+ {
+- "map_info": {
+-  "name": "Voxel Noise: Discretizing the Continuum",
+-  "title": "Noise Carved into Blocks",
+-  "lookup_name": "Noise_Voxel",
+-  "description": "A fixed Perlin field becomes a sampled occupancy decision. A cased 24-cubed model controls a five-times-larger volume with matching cells. A live screen compares one horizontal score slice with the exact occupied/empty mask; the dark orb keeps its independent pulse. Threshold changes classification, CELL selects a sample and screen layer, marked at the corresponding height and address in the large volume, SEED changes the field, and CUT changes only the model view. Connected occupied cells do not establish a walkable route.",
+-  "version": "1.0",
+-  "format": "json",
+-  "dimensions": {
+-   "width": 15,
+-   "depth": 16,
+-   "max_height": 3
++  "map_info": {
++    "name": "Voxel Noise: Discretizing the Continuum",
++    "title": "Noise Carved into Blocks",
++    "lookup_name": "Noise_Voxel",
++    "description": "A fixed Perlin field becomes a sampled occupancy decision. A cased 24-cubed model controls a twenty-five-times-larger volume of one-metre cells inside a 28-metre glass flight enclosure with matching cells. A live screen compares one horizontal score slice with the exact occupied/empty mask; the dark orb keeps its independent pulse. Threshold changes classification, CELL selects a sample and screen layer, marked at the corresponding height and address in the large volume, SEED changes the field, and CUT changes only the model view. Connected occupied cells do not establish a walkable route.",
++    "version": "1.0",
++    "format": "json",
++    "dimensions": {
++      "width": 33,
++      "depth": 44,
++      "max_height": 28
++    },
++    "metadata": {
++      "difficulty": "intermediate",
++      "category": "noise",
++      "estimated_time": "6-8 minutes",
++      "learning_objectives": [
++        "Sampling continuous fields into discrete voxels",
++        "Threshold-based placement algorithms",
++        "3D noise field visualization",
++        "Grid discretization critique"
++      ]
++    },
++    "museum": {
++      "wall_height": 4,
++      "gate_depth_rows": 0,
++      "artifact_placement": "map",
++      "sculpture_clear_rects": [
++        [
++          2,
++          2,
++          31,
++          42
++        ]
++      ],
++      "open_roof": true,
++      "gate": false,
++      "plinths": false
++    }
+   },
+-  "metadata": {
+-   "difficulty": "intermediate",
+-   "category": "noise",
+-   "estimated_time": "6-8 minutes",
+-   "learning_objectives": [ "Sampling continuous fields into discrete voxels", "Threshold-based placement algorithms", "3D noise field visualization", "Grid discretization critique" ]
++  "utility_definitions": {
++    "t": {
++      "type": "teleporter",
++      "name": "Next Lesson",
++      "description": "Continue to the next algorithm demonstration",
++      "properties": {
++        "action": "next_in_sequence"
++      }
++    },
++    "s": {
++      "properties": {
++        "height": 5.5
++      }
++    }
+   },
+-  "museum": {
+-   "wall_height": 3,
+-   "gate_depth_rows": 0,
+-   "artifact_placement": "map",
+-   "sculpture_clear_rects": [[2, 2, 13, 14]]
++  "lighting": {
++    "ambient_color": [
++      0.4,
++      0.4,
++      0.5
++    ],
++    "ambient_energy": 0.6,
++    "directional_light": {
++      "enabled": true,
++      "direction": [
++        -0.4,
++        -0.7,
++        -0.4
++      ],
++      "color": [
++        1,
++        0.9,
++        0.8
++      ],
++      "energy": 1.2
++    }
++  },
++  "settings": {
++    "cube_size": 1,
++    "gutter": 0,
++    "show_grid": true,
++    "enable_physics": true,
++    "auto_reveal_on_entry": false,
++    "initial_tile_visibility": "hidden_except_corners",
++    "background": {
++      "type": "sky",
++      "color": [
++        0.2,
++        0.3,
++        0.7
++      ]
++    }
+   }
+- },
+- "utility_definitions": {
+-  "t": {
+-   "type": "teleporter",
+-   "name": "Next Lesson",
+-   "description": "Continue to the next algorithm demonstration",
+-   "properties": {
+-	"action": "next_in_sequence"
+-   }
+-  },
+-  "s": {
+-   "properties": {
+-	"height": 5.5
+-   }
++,
++  "layers": {
++    "structure": [
++      ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
++      ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]
++    ],
++    "utilities": [
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "sp", "", "", "t", "", "", "", "", "", "", "tc:10:y", "", "an:-90", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "tc:50:y", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "tc:10:y", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "tc:10:y", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
++    ],
++    "interactables": [
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "science_screen:180#mode:voxel_slice#support:stand#screen_width:2.8#screen_height:1.8", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "dark_sphere", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "voxelnoise:180#stand:volume#cell_size:1#flight_box:true", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
++      ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
++    ]
+   }
+- },
+- "lighting": {
+-  "ambient_color": [ 0.4, 0.4, 0.5 ],
+-  "ambient_energy": 0.6,
+-  "directional_light": {
+-   "enabled": true,
+-   "direction": [ -0.4, -0.7, -0.4 ],
+-   "color": [ 1, 0.9, 0.8 ],
+-   "energy": 1.2
+-  }
+- },
+- "settings": {
+-  "cube_size": 1,
+-  "gutter": 0,
+-  "show_grid": true,
+-  "enable_physics": true,
+-  "auto_reveal_on_entry": false,
+-  "initial_tile_visibility": "hidden_except_corners",
+-  "background": {
+-   "type": "sky",
+-   "color": [ 0.2, 0.3, 0.7 ]
+-  }
+- },
+- "layers": {
+-  "structure": [
+-   [ "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ],
+-   [ "w", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+-   [ "w", "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w", "w" ]
+-  ],
+-  "utilities": [
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "sp", "", "", "t", "", "", "", "", "", "", "tc:10:y", "", "an:-90", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "tc:50:y", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "tc:10:y", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "tc:10:y", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+-  ],
+-  "interactables": [
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "science_screen:180#mode:voxel_slice#support:stand#screen_width:2.8#screen_height:1.8", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "voxelnoise:180#stand:volume", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "dark_sphere", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+-  ]
+- }
+ }
+--- before/commons/maps/Noise_Voxel/summary.md
++++ after/commons/maps/Noise_Voxel/summary.md
+@@ -2,6 +2,8 @@
+ 
+ Four retained works: the Perlin lattice bench, its large voxel receiver, a live section screen and the independently pulsing dark orb. The hall carries the array into three dimensions and asks what a threshold lets have a body.
+ 
+-THRESHOLD, CELL, SEED and CUT distinguish changes to classification, inspection, source and visibility. Both volumes sample the same 24³ field; cell spacing changes from 4 cm to 20 cm. The screen compares biased values with actual stored occupancy. Occupied count, connected pieces and a player's possible routes remain different questions.
++THRESHOLD, CELL, SEED and CUT distinguish changes to classification, inspection, source and visibility. Both volumes sample the same 24³ field; cell spacing changes from 4 cm to 1 m. The screen compares biased values with actual stored occupancy. Occupied count, connected pieces and a player's possible routes remain different questions.
+ 
+ Next: Noise_6_Wall. What other operation could receive a rejected value?
++
++A 28 m glass enclosure lends local flight around the 24 m voxel domain. Two ground doors return the visitor to museum walking. The hall is 33 × 44 m; the bench and section screen remain outside the enclosure.
+--- before/commons/maps/Noise_Voxel/technical.md
++++ after/commons/maps/Noise_Voxel/technical.md
+@@ -45,7 +45,7 @@
+ 
+ THRESHOLD changes classification and broadcasts the source settings to the hall's volume. CELL cycles five selected coordinates and changes the screen's horizontal layer, the large volume's yellow section perimeter and its selected-cell outline. This selection update is scoped to the same hall and does not rebuild either body. The receiver's link opt-out also disables selection updates. SEED generates a new named five-digit seed and rebuilds the field. CUT hides cells with `z > grid_size / 2` in the model's MultiMesh while retaining `_voxels`, all occupancy counts, the receiver and the screen section. With 24 indices this keeps 0–12 visible; the cut is not exactly half the index range.
+ 
+-The lattice mode now omits the legacy slider case and floating labels in favour of its four-button panel and cased readout. The legacy standalone sculptor still offers its own controls. The lattice panel is enlarged and tilted; the model stands on a low solid plinth with a clear northern approach. The source now occupies map cell (4,7), avoiding the retained raised platform near its former controls.
++The lattice mode now omits the legacy slider case and floating labels in favour of its four-button panel and cased readout. The legacy standalone sculptor still offers its own controls. The lattice panel is enlarged and tilted; the model stands on a low solid plinth with a clear northern approach. The source now occupies map cell (13,7), avoiding the retained raised platform near its former controls.
+ 
+ The source discovers its museum ancestor and broadcasts only to receiver descendants of that hall. A receiver in another streamed hall is outside the update. The screen similarly finds its own hall's lattice source; if none exists it returns an empty data record and displays source-unavailable information, not an invented substitute field.
+ 
+@@ -55,9 +55,9 @@
+ 
+ The science screen explicitly uses `mode:voxel_slice`. It shows a 24 × 24 horizontal layer at the selected y. It recalculates the field values from the source sampler and reads the actual stored `_voxels[x][y][z]` booleans. The left heatmap maps the biased scalar through a fixed colour range; the right map displays occupancy. Two yellow outlines identify the same selected x,z address. The screen is a 2D rendering carried by a 3D stand. Its cache includes source identity, seed, frequency, octaves, threshold, cell and grid size. CUT does not change its data.
+ 
+-`voxelnoise:180#stand:volume` faces the same way as the bench and uses 0.20 m spacing and cubes which meet at their faces. The stage occupies 5.2 × 5.2 m around a 4.8 m cube domain. The occupied mask is computed first; a second pass emits only faces with an empty or out-of-bounds neighbour. Each exposed square contributes two triangles. Shared interior faces need no rendering or collision. This preserves the occupied set while reducing mesh construction cost. The boundary includes cavity surfaces, not just the outside silhouette.
++`voxelnoise:180#stand:volume#cell_size:1#flight_box:true` faces the same way as the bench and uses 1.00 m spacing and cubes which meet at their faces. The stage occupies 24.4 × 24.4 m around a 24 m cube domain. A 28 m glass enclosure leaves a two-metre margin on each horizontal side and four metres above the domain. The occupied mask is computed first; a second pass emits only faces with an empty or out-of-bounds neighbour. Each exposed square contributes two triangles. Shared interior faces need no rendering or collision. This preserves the occupied set while reducing mesh construction cost. The boundary includes cavity surfaces, not just the outside silhouette.
+ 
+-The same triangle array constructs the ConcavePolygonShape3D. Rebuilding removes the preceding mesh and collider before adding their replacement. A fully empty result creates neither. A matching collider establishes a physical boundary, but does not certify that a player can climb through the volume. The chamber's surrounding museum route remains available independently of the volume's changing occupancy. The original map walls, two raised cells, two openings and utility placements remain unchanged.
++The same triangle array constructs the ConcavePolygonShape3D. Rebuilding removes the preceding mesh and collider before adding their replacement. A fully empty result creates neither. A matching collider establishes a physical boundary, but does not certify that a player can climb through the volume. The chamber's surrounding museum route remains available independently of the volume's changing occupancy. The 33 × 44 m source hall has a clear flight court and open roof. The old interior structure and utilities shift nine cells in x; side/end boundaries expand. Both raised cells and old openings are retained. The four artifacts remain; the model and screen move with that x offset, the volume moves to (16,24), and the orb to (5,8).
+ 
+ ## What survives a representation change
+ 
+@@ -73,6 +73,14 @@
+ 
+ ## Shared section in the room — 25 September
+ 
+-The volume's section perimeter is 4.9 m wide around the 4.8 m field domain. Its centre height is `(selected_y + 0.5) * 0.20`; the authored five-cell cycle visits 2.5, 1.7, 1.3, 3.5 and 2.5 m. The small wire box follows the same x,y,z address, including empty cells. Both markers are depth-tested, unshaded observations with no collider; solid neighbours can occlude the address marker. Sixteen BoxMesh bars are reused as the selection moves. No field, threshold, occupancy, boundary generation or collision rule changes. The frame's fixed label is readable from either approach.
++The volume's section perimeter is 24.1 m wide around the 24 m field domain. Its centre height is `(selected_y + 0.5) * 1.00`; the authored five-cell cycle visits 12.5, 8.5, 6.5, 17.5 and 12.5 m. The small wire box follows the same x,y,z address, including empty cells. Both markers are depth-tested, unshaded observations with no collider; solid neighbours can occlude the address marker. Sixteen BoxMesh bars are reused as the selection moves. No field, threshold, occupancy, boundary generation or collision rule changes. The frame's fixed label is readable from either approach.
+ 
+-The new native museum check injects press/release PointerEvent objects into the actual buttons; it does not test ray aiming or hand tracking. It compares all 13,824 field samples and decisions at five thresholds, checks unchanged mesh identity while selecting cells, matching mesh/collision triangles, CUT isolation, receiver opt-out and separation from another hall. Controlled walking paths go around the bench corner; a failed direct diagonal is retained in the review. Current results and photographs: `doc/book/iterations/2026-09-25-voxel-correspondence/`. The older 61-check report above remains the earlier verification record.
++The preceding 0.20 m staging check injected press/release PointerEvent objects into the actual buttons; it does not test ray aiming or hand tracking. It compares all 13,824 field samples and decisions at five thresholds, checks unchanged mesh identity while selecting cells, matching mesh/collision triangles, CUT isolation, receiver opt-out and separation from another hall. Controlled walking paths go around the bench corner; a failed direct diagonal is retained in the review. That earlier check and photographs remain at `doc/book/iterations/2026-09-25-voxel-correspondence/`; the one-metre flight revision is at `doc/book/iterations/2026-09-25-voxel-flight/`. The older 61-check report above remains the earlier verification record.
++
++## One-metre cells and local flight
++
++The `cell_size` placement setting defaults to 0.20 m for existing volume placements; this hall explicitly selects 1.0. The number of addresses, normalized sampler, seed, threshold and occupied set are unchanged. Boundary vertices and collision now fall on the metre grid. Stage, captions and yellow section markers derive their size from the spacing. The miniature remains at 0.04 m.
++
++The opt-in `flight_box` uses the existing museum_flight_box.gd and XR movement adapter. Its new `edge_length` setting is assigned before it enters the tree. Existing Menger and Array boxes retain their 12 m default, controls and speed. This hall uses 28 m; door openings retain their human-scale 3 m width and 2.6 m height. Flight is selected from the body's position, ends outside the envelope and does not remove voxel collision. Neutral input hovers; combined velocity is bounded at 2.4 m/s. The threshold and CELL buttons do not replace the flight enclosure.
++
++The glass floor, sides and roof are physical, with two ground-level doors. No room-wide free-flight toggle persists after departure. Desktop and synthetic XR checks exercise the real museum movement/provider; headset comfort, tracking, reach and Quest performance remain unverified.
+--- before/commons/maps/Noise_Voxel/tutorial.md
++++ after/commons/maps/Noise_Voxel/tutorial.md
+@@ -6,7 +6,7 @@
+ 2. Compare occupied cells with separate pieces. The first count decreases through ascending thresholds; the second need not. A component may split or disappear. This is six-face adjacency, not a route test.
+ 3. Try CUT and inspect the unchanged occupied count. It changes the visible MultiMesh instances. Restore the view, then use CELL to choose another sample.
+ 4. At **science_screen**, follow the yellow coordinate between the score slice and the binary mask. Change threshold at the bench. Inspect a value whose answer changes. Change CELL to view another horizontal layer. SEED then changes the field itself.
+-5. Approach **voxelnoise** from outside its low frame. Find a form shared with the model. Both have 24³ decisions; the physical spacing grows from 0.04 to 0.20 m. Distinguish the occupied set from what a body of your size could traverse.
++5. Approach **voxelnoise** through a ground door in its glass flight enclosure. Find a form shared with the model. Both have 24³ decisions; the physical spacing grows from 0.04 to 1.00 m. Rise in the clear margin, release movement to hover, and approach an opening. Distinguish the occupied set from what a body of your size can traverse. Desktop: look + WASD, Space up, Ctrl down. VR: tilt the left controller and use its stick. Descend and leave through either ground doorway to resume walking.
+ 6. Find **dark_sphere**. Its emission and rotation continue independently. Compare a value used as a varying material strength with a value used in an occupancy test.
+ 
+ For a group, one person controls the bench while others compare the screen and volume. Swap positions. Alone, keep the seed fixed while returning between the three views. The question to carry into Noise_6_Wall is what another receiver can make of a value the threshold rejected.
+--- before/commons/movement/museum_flight_box.gd
++++ after/commons/movement/museum_flight_box.gd
+@@ -7,6 +7,8 @@
+ const SPEED := 2.4
+ const DOOR_WIDTH := 3.0
+ const DOOR_HEIGHT := 2.6
++## Set before entering the scene tree; existing enclosures retain the 12 m default.
++@export_range(6.0, 64.0, 0.5) var edge_length: float = EDGE
+ @export var monochrome: bool = false
+ @export var instruction_title: String = "FLY THROUGH THE HOLES"
+ 
+@@ -18,8 +20,8 @@
+ 
+ func contains_point(world_position: Vector3) -> bool:
+ 	var p := to_local(world_position)
+-	return absf(p.x) < EDGE * 0.5 and absf(p.z) < EDGE * 0.5 \
+-		and p.y >= -0.03 and p.y < EDGE
++	return absf(p.x) < edge_length * 0.5 and absf(p.z) < edge_length * 0.5 \
++		and p.y >= -0.03 and p.y < edge_length
+ 
+ static func at_point(tree: SceneTree, world_position: Vector3) -> Node3D:
+ 	for zone in tree.get_nodes_in_group(GROUP):
+@@ -117,19 +119,19 @@
+ 	var glass := _material(Color(0.3, 0.7, 0.85, 0.065))
+ 	var frame := _material(Color(0.14, 0.8, 0.94), true)
+ 	var landing := _material(Color(0.18, 0.31, 0.37))
+-	var h := EDGE * 0.5
++	var h := edge_length * 0.5
+ 	var t := 0.06
+-	# Floor top at zero; roof underside at EDGE. Side faces have real collisions.
+-	_box("Floor", Vector3(0,-t*0.5,0), Vector3(EDGE,t,EDGE),glass,true)
++	# Floor top at zero; roof underside at edge_length. Side faces have real collisions.
++	_box("Floor", Vector3(0,-t*0.5,0), Vector3(edge_length,t,edge_length),glass,true)
+ 	# The museum camera is 15 cm above its capsule. A 24 cm roof keeps the eye
+ 	# inside the visible envelope when that capsule reaches the ceiling.
+-	_box("Roof", Vector3(0,EDGE-0.06,0), Vector3(EDGE,0.24,EDGE),glass,true)
++	_box("Roof", Vector3(0,edge_length-0.06,0), Vector3(edge_length,0.24,edge_length),glass,true)
+ 	for s in [-1.0,1.0]:
+-		_box("Side", Vector3(s*(h+t*0.5),h,0), Vector3(t,EDGE,EDGE),glass,true)
+-		var wing := (EDGE-DOOR_WIDTH)*0.5
++		_box("Side", Vector3(s*(h+t*0.5),h,0), Vector3(t,edge_length,edge_length),glass,true)
++		var wing := (edge_length-DOOR_WIDTH)*0.5
+ 		for side in [-1.0,1.0]:
+-			_box("DoorWing", Vector3(side*(DOOR_WIDTH+wing)*0.5,h,s*(h+t*0.5)),Vector3(wing,EDGE,t),glass,true)
+-		_box("DoorLintel",Vector3(0,(EDGE+DOOR_HEIGHT)*0.5,s*(h+t*0.5)),Vector3(DOOR_WIDTH,EDGE-DOOR_HEIGHT,t),glass,true)
++			_box("DoorWing", Vector3(side*(DOOR_WIDTH+wing)*0.5,h,s*(h+t*0.5)),Vector3(wing,edge_length,t),glass,true)
++		_box("DoorLintel",Vector3(0,(edge_length+DOOR_HEIGHT)*0.5,s*(h+t*0.5)),Vector3(DOOR_WIDTH,edge_length-DOOR_HEIGHT,t),glass,true)
+ 		_box("Landing",Vector3(0,-0.025,s*h),Vector3(DOOR_WIDTH,0.05,1.0),landing,true)
+ 		for side in [-1.0,1.0]:
+ 			_box("DoorFrame",Vector3(side*(DOOR_WIDTH*0.5+0.04),DOOR_HEIGHT*0.5,s*h),Vector3(0.08,DOOR_HEIGHT,0.08),frame,false)
+@@ -137,11 +139,11 @@
+ 		# The floor edge stops at the door: no hidden sill to catch the feet.
+ 		for side in [-1.0,1.0]:
+ 			_box("FloorEdge",Vector3(side*(DOOR_WIDTH+wing)*0.5,0.035,s*h),Vector3(wing,0.04,0.04),frame,false)
+-		_box("TopEdgeX",Vector3(0,EDGE,s*h),Vector3(EDGE,0.06,0.06),frame,false)
+-		for y in [0.035,EDGE]:
+-			_box("EdgeZ",Vector3(s*h,y,0),Vector3(0.06,0.06,EDGE),frame,false)
++		_box("TopEdgeX",Vector3(0,edge_length,s*h),Vector3(edge_length,0.06,0.06),frame,false)
++		for y in [0.035,edge_length]:
++			_box("EdgeZ",Vector3(s*h,y,0),Vector3(0.06,0.06,edge_length),frame,false)
+ 		for side in [-1.0,1.0]:
+-			_box("Upright",Vector3(s*h,h,side*h),Vector3(0.08,EDGE,0.08),frame,false)
++			_box("Upright",Vector3(s*h,h,side*h),Vector3(0.08,edge_length,0.08),frame,false)
+ 	# Outside and inside, on both ground doors, so return controls remain visible.
+ 	for s in [-1.0,1.0]:
+ 		_sign(Vector3(0,3.25,s*(h+0.08)), PI if s < 0 else 0.0)

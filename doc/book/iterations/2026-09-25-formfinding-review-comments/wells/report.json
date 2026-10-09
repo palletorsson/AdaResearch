@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "two wells present inside museum",
+      "passed": true
+    },
+    {
+      "name": "interpretation waits for visitor",
+      "passed": true
+    },
+    {
+      "name": "finite unit normals well 0",
+      "passed": true
+    },
+    {
+      "name": "finite unit normals well 1",
+      "passed": true
+    },
+    {
+      "name": "both original meshes retained",
+      "passed": true
+    },
+    {
+      "name": "profile normals follow the hollow",
+      "passed": true
+    },
+    {
+      "name": "profile normals follow the hollow",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deep-well",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-wells",
+      "passed": true
+    },
+    {
+      "name": "real INTERPRET button reveals the proposal",
+      "passed": true
+    },
+    {
+      "name": "visitor can return to comparison",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifact_world": [
+      6.5,
+      0.0,
+      3.5
+    ],
+    "standing_eye": [
+      3.84999990463257,
+      1.70000004768372,
+      3.59999990463257
+    ],
+    "well_meshes": [
+      {
+        "bounds": "[P: (-2.2, -0.95, -0.696165), S: (1.4, 0.95, 1.392331)]",
+        "indices_sha256": "2bdbf767e87294027855cf559cde719164e6f1e6d41d77df7766ef4156aa51f6",
+        "normals_sha256": "a91952cab5c9b24dc7869b6923eca4b981c2bb2f6782613b6aa3d93d4e5a4a4e",
+        "sample_normal": [
+          -0.944642961025238,
+          0.328100293874741,
+          -0.0000194208168977639
+        ],
+        "tilted": 279,
+        "transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (6.5, 1.05, 3.5)]",
+        "vertices_sha256": "571bf51adf47f4f11c6e9d1d8b6152fc6e10435bd1b612fbe750a5f9d5e17d71"
+      },
+      {
+        "bounds": "[P: (-0.8, -0.3, -1.591235), S: (3.2, 0.3, 3.18247)]",
+        "indices_sha256": "2bdbf767e87294027855cf559cde719164e6f1e6d41d77df7766ef4156aa51f6",
+        "normals_sha256": "35507475c890e769af9b92f2204a07417ceee788cd662f49105a80781eb4c572",
+        "sample_normal": [
+          -0.0416410975158215,
+          0.999132633209229,
+          -0.0000158811890287325
+        ],
+        "tilted": 279,
+        "transform": "[X: (1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (0.0, 0.0, 1.0), O: (6.5, 1.05, 3.5)]",
+        "vertices_sha256": "5aaf7cc384667cc721863094d9ef69d899b2185ae0e924ecfb13a509ddef2d2f"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "FormFinding_Annealing",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

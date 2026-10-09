@@ -1,0 +1,181 @@
+{
+  "checks": [
+    {
+      "message": "saved shared museum script compiles",
+      "ok": true
+    },
+    {
+      "message": "actual museum scene uses saved shared loader bytes",
+      "ok": true
+    },
+    {
+      "message": "actual authored museum segment loads: FormFinding_Equilibrium",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever solved",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model solved",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever halved",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model halved",
+      "ok": true
+    },
+    {
+      "message": "Calder root rod pose shows selected lever inverted",
+      "ok": true
+    },
+    {
+      "message": "Calder label identifies implemented model inverted",
+      "ok": true
+    },
+    {
+      "message": "Calder same seed retains leaf mass across lever alternatives",
+      "ok": true
+    },
+    {
+      "message": "truss retains its single board",
+      "ok": true
+    },
+    {
+      "message": "truss board distinguishes bracing geometry from proof of strength",
+      "ok": true
+    },
+    {
+      "message": "triangle pulse directly prescribes squash, not solved load",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "interaction": "source methods and physics mask queries; no real tracked hand",
+  "observations": {
+    "calder": [
+      {
+        "left": "(-1.430935, -0.396562, 0.0)",
+        "lever": "solved",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nbalanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.091971, -0.396562, 0.0)"
+      },
+      {
+        "left": "(-1.258604, -0.311821, 0.0)",
+        "lever": "halved",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nNOT balanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.258604, -0.481303, 0.0)"
+      },
+      {
+        "left": "(-1.082071, -0.24985, 0.0)",
+        "lever": "inverted",
+        "mass": 9.29090642340281,
+        "plaque": "CALDER-INSPIRED — STATIC MOMENT MODEL\nNOT balanced: left m·d = right m·d\n11 discs · modelled leaf mass 9.29 kg\nsheet aluminium, 3 mm\nMassless rods and wires; no dynamic solver",
+        "right": "(1.417962, -0.588815, 0.0)"
+      }
+    ],
+    "museum_source_sha256": "3d2977729d506a672583f88932d81c77e330cf77acecfd8f69c623196d7f5c4d",
+    "placements": [
+      {
+        "key": "window",
+        "position": "(7.5, 1.7, -3.5)",
+        "script": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "key": "view",
+        "position": "(7.5, 1.7, -2.0)",
+        "script": "res://commons/primitives/temporal/animated_folding_past.gd"
+      },
+      {
+        "key": "counter",
+        "position": "(11.0, 1.6, -2.94)",
+        "script": "res://commons/visualaid/frame_counter/frame_counter_display.gd"
+      },
+      {
+        "key": "extinguisher",
+        "position": "(1.14, 0.0, -1.4)",
+        "script": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "key": "elevator",
+        "position": "(15.94, 0.0, -1.8)",
+        "script": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "key": "pallet",
+        "position": "(15.1, 0.0, -1.8)",
+        "script": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "key": "point_zero",
+        "position": "(0.0, 0.0, -4.0)",
+        "script": "res://commons/primitives/origin/origin.gd"
+      },
+      {
+        "key": "exit_sign",
+        "position": "(7.0, 3.52, -1.0)",
+        "script": "res://commons/artifacts/exit_sign/exit_sign.gd"
+      },
+      {
+        "key": "wall_clock",
+        "position": "(1.02, 2.25, -3.5)",
+        "script": "res://commons/artifacts/wall_clock/wall_clock.gd"
+      },
+      {
+        "key": "electrical_panel",
+        "position": "(1.0, 1.5, -2.5)",
+        "script": "res://commons/artifacts/electrical_panel/electrical_panel.gd"
+      },
+      {
+        "key": "ceiling_vent",
+        "position": "(3.5, 4.64, 6.225)",
+        "script": "res://commons/artifacts/ceiling_vent/ceiling_vent.gd"
+      },
+      {
+        "key": "station_plinth",
+        "position": "(4.5, 0.0, 10.5)",
+        "script": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "key": "dream_bodies",
+        "position": "(4.5, 0.42, 10.5)",
+        "script": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "key": "calder_mobile",
+        "position": "(5.5, 0.0, 3.5)",
+        "script": "res://commons/artifacts/calder_mobile/calder_mobile.gd"
+      },
+      {
+        "key": "fractal_truss_tower",
+        "position": "(9.5, 0.0, 4.5)",
+        "script": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd"
+      },
+      {
+        "key": "tensegrity_triangle",
+        "position": "(4.5, 0.0, 6.5)",
+        "script": "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.gd"
+      },
+      {
+        "key": "science_screen",
+        "position": "(8.5, 0.0, 7.5)",
+        "script": "res://commons/artifacts/science_screen/science_screen.gd"
+      }
+    ],
+    "science_screen": {
+      "generic": false,
+      "line": false,
+      "mode": "",
+      "source": "",
+      "triangle": false
+    },
+    "truss_plaque": "RECURSIVE BRACED STOREYS\nNO LOAD TEST"
+  },
+  "replay_before": false
+}

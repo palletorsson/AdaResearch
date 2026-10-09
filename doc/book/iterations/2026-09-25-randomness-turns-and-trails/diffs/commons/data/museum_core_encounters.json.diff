@@ -1,0 +1,59 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -12,11 +12,11 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Cubes/final.md",
+-    "text_sha256": "19fd20ec07102ed9971eb4c94a2e8bcf8753fe17c54f8f3579b18a68a84c764e",
++    "text_sha256": "d83c7d9f2ae33674898bdf6e6667ba32eebffcba4c79f075157d1328bd65d28f",
+     "map_sha256": "3be60c2a723e240748a0684e98b0a58c414619d96f0e7459ebc7c050678f83f7",
+     "learner_verified": false,
+     "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review. Continuing-die checks and isolated museum evidence: doc/book/iterations/2026-09-24-continuing-die/; controlled physical faces, fresh-release ownership, continuation, closure and explicit unfinished cap. No headset or fairness claim.",
+-    "local_review": "doc/book/iterations/2026-09-24-continuing-die/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+   },
+   "Random_Rotate_Random_XYZ": {
+     "primary_tokens": [
+@@ -26,11 +26,11 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+-    "text_sha256": "a418a65eab6c5a7d9bb107880a9e2c9f2c4d126d0f02aca176a55111373bb4b8",
+-    "map_sha256": "9c71df12ff7f593dcf318283e33d0c936048a46d04f23a5f5e66b6b8d0deb9d4",
++    "text_sha256": "dd886638e09496e2e7f21af471d78d58e9882ee36cddc9d0819475ab5b7c023d",
++    "map_sha256": "bfc9655588c6eb6879e37dce4e0e5f7d106cf14cc0524208e4701099df98de0e",
+     "learner_verified": false,
+     "verification_scope": "probe_rotation_study.gd: default placement unchanged; #study:rotation matches rates (0.3/0.3), removes drift, sinking and colour, lays the prisms on 12 even columns (shipped: 11), fits the display to 10 m alone, and turns each cube exactly as a matched run does (0.000000000 rad). Map placement keeps the whole display inside the hall. No headset walk.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Rotate_Random_XYZ/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+   },
+   "Random_Walk": {
+     "primary_tokens": [
+@@ -43,11 +43,11 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Walk/final.md",
+-    "text_sha256": "8e6f78b1c9c96335988270e8465ebe9fb7881696cbae64680074ced89c50a0a0",
++    "text_sha256": "4eb597de71413b34bafa9734aac4d0d4d07cd7fe18158726c05be7240f3ac0b9",
+     "map_sha256": "d9724f0258e6b2c45c164336682e61266129481fb84079cf7527030beb8ab541",
+     "learner_verified": false,
+     "verification_scope": "Production rail controls, shared draw, revealed targets, matched easing, bounded record, replay and museum placement. Headset pending; see dated evidence.",
+-    "local_review": "doc/book/iterations/2026-09-24-random-walk-rails/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+   },
+   "Random_Gaussian": {
+     "primary_tokens": [
+@@ -57,10 +57,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Gaussian/final.md",
+-    "text_sha256": "669913fdf82c0e686518fc83d9fd8d71c6084bbc2c3691a5bf9d4cfb4dc97f87",
+-    "map_sha256": "fdf8781e1981448b7efa811203590a282ee05cc1aff26a8b934ff242b329e032",
++    "text_sha256": "22b1decebfcd8446d76aaf5ceb8ce6f087ead81630db35e00e450c34a7bdb10e",
++    "map_sha256": "5dea9ef055d240b53289822c8bbb9df15211131e62185eee2542716b0f1319ca",
+     "learner_verified": false,
+     "verification_scope": "Fresh focused rebinning of a retained sample; no complete museum or headset visit.",
+-    "local_review": "doc/book/iterations/2026-09-24-paired-dice/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+   }
+ }

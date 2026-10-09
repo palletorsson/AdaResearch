@@ -1,0 +1,99 @@
+{
+  "sequence": "swarmintelligence",
+  "maps": [
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Particle_Swarm_Optimization"
+  ],
+  "live_sequence_maps": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Ant_Colony_Optimization",
+    "SwarmIntelligence_Particle_Swarm_Optimization",
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+  ],
+  "museum_template": "guggenheim-serpentine",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "dabd867cb76eb1b8f2e37fb8307a11786a1c20fea34bee7b9d84c13863c135f5",
+    "commons/data/museum/em_plan.json": "dabd867cb76eb1b8f2e37fb8307a11786a1c20fea34bee7b9d84c13863c135f5",
+    "commons/data/map_authored.json": "dbca3c4be4ef1d8214a50ade897e5042fa884d2a7c1956f69c205b22e203e86a",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/swarmintelligence.json": "71cd3680b239044ef8d9bb8e5ea8f3f2125e55edfb4a03c698eec737fe0ba24f",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json": "73dc5ba85867ca8595bec504d52d1fadbf49685718712f40e252a93828712b16",
+    "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json": "1c954975dd9ad4ecfd77ea1d9fc05b4043cc287ef261c966fc70d2a2a48f5e5b"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "3fddcfbf53db99bf9d5f541a35e76e040cb3f169d720e27cd6b250777b1d6e01",
+    "commons/data/museum/em_plan.json": "3fddcfbf53db99bf9d5f541a35e76e040cb3f169d720e27cd6b250777b1d6e01",
+    "commons/data/map_authored.json": "dbca3c4be4ef1d8214a50ade897e5042fa884d2a7c1956f69c205b22e203e86a"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 192,
+    "commons/data/museum/em_plan.json": 192
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 192,
+    "commons/data/museum/em_plan.json": 192
+  },
+  "preservation": "All unrelated plan rows, placements, top-level metadata and relative order retained.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "pearl_index": 3,
+      "room": {
+        "w": 13,
+        "h": 10
+      },
+      "artifacts": 5,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 10,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "pearl_index": 5,
+      "room": {
+        "w": 13,
+        "h": 11
+      },
+      "artifacts": 4,
+      "ruling": {
+        "src_w": 13,
+        "src_h": 11,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T084553409958Z"
+}

@@ -1,0 +1,206 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_Synthesis · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_Synthesis">← Tutorial lineage</a></p><h1>Fractal Synthesis</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_Synthesis/final.md">Raw captured source</a></p><pre># What, exactly, is repeated?
+
+&lt;!-- @cantor_set --&gt;
+
+Can you explain two recursive constructions without using their names?
+
+Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Point to an example of the input, the descendants and the gap. Then identify where the displayed construction stops.
+
+Try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. After one cut there are two pieces, each two metres long. Before the second cut, predict both the number of pieces and their combined length. They will not change in the same direction.
+
+Here is the step that actually creates a descendant&#x27;s size:
+
+```gdscript
+var new_length = bar_length / 3.0
+```
+
+In `cantor_set.gd`, `perform_iteration()` creates a left bar and a right bar of that length, each centred a third of the parent&#x27;s length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.
+
+After three cuts, press HISTORY. The upper rows disappear. Has another third been removed?
+
+The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What disappeared was the visible record of earlier stages. Bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.
+
+This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.
+
+The fifth cut is the desk&#x27;s last. It leaves thirty-two finite pieces. The stopping point gives our attention and this instrument somewhere to stand. It does not establish that further difference is impossible. RESET returns to the uncut beginning; it does not rewind the museum.
+
+&lt;!-- @recursive_tree --&gt;
+
+The red block tree has already branched. Find a fork that seems to end, and follow it backward. What would a call have to remember to place a smaller branch there?
+
+Press STRATA. The blocks change colour according to their recorded branch levels. Press REACH and volumes enclose the extents accumulated through those levels. ENDS marks the joint where the trunk hands off and every deepest recorded block. FORM brings the solid reading back. Compare the same fork through these views: none of these buttons grows a new tree.
+
+The source receives a parent, an origin, a number of branches and two depth values. Its stopping condition is small enough to read in one breath:
+
+```gdscript
+if current_depth &gt;= max_depth:
+    return
+```
+
+Later in `recursive_tree.gd`, `generate_branches()` passes the continuation on:
+
+```gdscript
+generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
+```
+
+The surrounding code chooses dimensions, directions and descendant counts with a local random-number generator. This placement starts from seed 12345. The nested calls stop after three branching levels. A seed is one part of that recipe; the generator, draw order and ranges also matter. The desk&#x27;s changing colours and cages read the resulting geometry without drawing those random choices again.
+
+Try the incomplete description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. A cage around its reach adds another representation: it encloses empty space as well as blocks. It is not a new shelter with solid walls.
+
+We have accumulated ways to make form, and ways to mistake a reading for the form. The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those are different interventions, with different consequences.
+
+&lt;!-- @ --&gt;
+
+The collection beyond offers further procedures to compare. Its held examples leave time for looking; the moving works keep their own clocks. We do not need to turn every resemblance into the same law.
+
+The trees around this hall were grown by a rule too, and it is not any of the desks’. The biome’s own generator writes a sentence with an L-system and reads it with a turtle in three dimensions; how many generations, how many branches at a fork, the angle and the taper come from that plant’s own genes, so no two are the same tree. The flag in the stage file that calls this flora fractal is a name nothing reads. What the ring inherits that the desks do not show is a body per plant: a different sentence for each, and a reader that gives it tubes and leaves. That grammar is where the next sequence begins.
+
+The names on these desks arrived late in another sense. Cantor&#x27;s set is dated 1883, Koch&#x27;s curve 1904, Sierpinski&#x27;s triangle 1915, Menger&#x27;s sponge 1926, and the word that gathers them, *fractal*, 1975. The structure is older than any of them. The Ba-ila settlements of what is now Zambia were built as a ring of enclosures, each enclosure itself a ring, with the chief&#x27;s ring at the back of the village repeating the whole at a smaller scale, long before a mathematician called the arrangement self-similar,[^1] and the geometric ornament of Islamic architecture repeats a motif inside itself at descending scales for reasons of its own. A rule can be practised for centuries before it is written down. These desks show the written form. They do not show who was already building it.
+
+Carry one explicit rule into the grammar laboratory. There, a string is rewritten before it is read as movement, and the interval you cut five times in the Cantor hall is two letters and two rules: `F` draws a step, `f` walks one without drawing, and every rewrite turns `F` into `FfF` and `f` into `fff`. Read the sentence after five rewrites and the bar&#x27;s thirty-two pieces and their gaps are already in it, in order, before any turtle has moved; the lab keeps it as the preset called “Cantor”. Its preset called “Koch Curve” is a different Koch from our snowflake, one that replaces `F` with `F+F-F-F+F` and turns ninety degrees, so even a familiar name leaves work for us to do. What does an instruction become when another reader gives it a body?
+
+[^1]: Ron Eglash, *African Fractals: Modern Computing and Indigenous Design* (Rutgers University Press, 1999).
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_Synthesis/tutorial.md">Raw captured source</a></p><pre># Encounter order
+
+1. At Cantor, describe a replacement step before NEXT. Predict the count and combined length after two or three cuts.
+2. HISTORY: compare the latest row before and after older rows vanish. GHOST: distinguish visible middles from surviving, collidable intervals. RULE follows the comparison.
+3. At the block tree, find one fork. Follow it through STRATA, REACH, ENDS and FORM. Determine which operations reveal the existing tree and which would need a rebuild.
+4. Read the stopping condition and the recursive call. Explain why “make smaller things” is insufficient to reconstruct either work.
+5. Browse the retained collection. Its plaque identifies held examples; their presentation is not a shared entropy scale.
+6. Continue to LSystems_Grammar_Lab. Inspect the specific production rule before treating a familiar preset name as the same construction.
+
+Primary order: cantor_set, recursive_tree. The ten original works remain; a new decoration fixture supports the comparison. Deeper secondary controls and headset review remain later work.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_Synthesis/technical.md">Raw captured source</a></p><pre># Compare procedures and representations
+
+This hall follows Fractal_GoldenSpiral and precedes LSystems_Grammar_Lab. It reuses two existing, tested instruments in a new comparison; the underlying algorithm scripts are unchanged.
+
+## Installed controls
+
+- `cantor_set:180#lesson:true`: NEXT/BACK select cuts 0–5; HISTORY switches the full record and latest generation; GHOST marks new removed middles; RESET returns to cut zero; RULE reveals the calculation. Initial length 6 m, thickness 0.12 m, row spacing 0.45 m. The lesson freezes physical intervals.
+- `recursive_tree:180:0:0.42#lesson:true`: FORM, STRATA, REACH, ENDS, RESET and RULE. The generated block tree is reduced in scale, while its desk counter-scales to preserve physical button size. Readings share one generated geometry. REACH/ENDS volumes are visual annotations, not colliders.
+
+For Cantor cut n, the current population has 2^n intervals of length 6/3^n m, total 6(2/3)^n m. HISTORY alters visibility and collision for earlier rows without deleting their nodes or advancing the cut. GHOST uses separate meshes without collision; those meshes are not in current_bars. The mathematical limiting set is distinct from these finite thick intervals.
+
+The block tree calls generate_branches(tree_root, branch_origin, num_main_branches, 0, 3). Each accepted call creates branches, optionally details, then calls itself with current_depth + 1. The local RNG is seeded at build. Descendant views traverse the actual nested scene graph, excluding TreeLesson itself. ENDS marks centres of the deepest recorded blocks; these marks should not be described as exact botanical tips. Bounds include empty space, overlap and display choices; they are not an entropy or traversability measurement.
+
+## Source excerpts in final.md
+
+1. `algorithms/fractals/cantorset/cantor_set.gd`, perform_iteration: new_length = bar_length / 3.0.
+2. `algorithms/fractals/recursive_tree/recursive_tree.gd`, generate_branches: the depth return and recursive call, copied exactly with surrounding indentation removed.
+3. Next hall comparison: `commons/artifacts/lsystem_editor/lsystem_editor.gd`, PRESETS[0] = [F, {F: F+F-F-F+F}, 90.0, 4, Koch Curve]. This is not the equilateral generator shown by koch_curve.
+
+## Room staging
+
+The twelve-row approach leads into the former 19×21 museum enclosure. Its raised sphere cell remains; the obsolete teleporter floor hole is filled. Historical July/August grid maps and the current map are archived under doc/space/fractal-synthesis-2026-09-14. All ten original tokens remain. `fractal_procedure_gallery` adds a physical prompt, warmer lighting, hides standalone screen overlays, and stages selected rear specimens for comparison.
+
+Koch uses its existing trace mode at 0.09 scale. The gasket is held after three subdivisions at 0.3 scale. Cloud wind animation is held. The Fibonacci view calls its original display methods once at time zero and stops its local _process; its downward diagram is raised above the floor. These are explicitly held examples, not new generated procedures. Other works, including the attractor and Romanesco, retain their own animation. The fixture runs only in Fractal_Synthesis and stops scanning after staging; failed discovery reports an error after 15 seconds. Original scenes elsewhere are untouched.
+
+Desktop pointer, geometry and route evidence belong in the dated review receipt. Human headset reach, readability, comfort and Quest performance require a later pass. Rear works retain development opportunities; this hall does not certify every secondary interaction.
+
+Scene reference repairs: koch_curve.tscn now resolves its declared script path instead of a duplicated UID shared with koch_curve_1. apply_grid_config stores evidence before _ready and builds only once meshes exist. RecursiveTreeUI resolves its owning root with get_parent().get_parent(), independent of instance name. The final runtime test includes ordinary and preconfigured Koch scenes.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_Synthesis/intent.md">Raw captured source</a></p><pre>Concept: Compare generating a form with recording and reading its construction.
+Sequence role: Final fractal hall; retrieve accumulated operations, then hand explicit instructions to L-systems.
+Primary order: cantor_set, recursive_tree.
+Retain: all ten earlier artifacts; add one gallery fixture as decoration.
+Encounter: predict and cut; hide history; reveal removed middles; read one fixed tree through strata, bounds and deepest-level marks.
+Critical question: Which control changes the representation, which changes the construction, and which would make room for another body?
+Next: LSystems_Grammar_Lab. Its Koch preset uses a different generator from this hall&#x27;s equilateral snowflake.
+Later iteration: editable recipe comparison, deeper secondary encounters, human headset review and performance budgets.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_Synthesis/critical.md">Raw captured source</a></p><pre># The rule and its reading
+
+Pressing HISTORY in the Cantor encounter removes older rows from view while preserving the surviving intervals. Pressing NEXT makes another selection. A first-person view may make those operations feel similar: something has disappeared. Their consequences differ. One changes the presentation of a history; the other constructs a new surviving population.
+
+GHOST complicates this comparison. The discarded middles become visible, but remain outside the population and without collision. Their pale bodies are annotations. Visibility can help us examine an exclusion without repairing it. Conversely, the absence of a visible record does not establish that its consequences have disappeared.
+
+The block tree supplies a complementary seam. It is already generated. Its colour strata, enclosing volumes and terminal marks rearrange what we can read of the same geometry. The enclosing box includes void as well as matter. It would be an error to infer a room&#x27;s usable capacity from that volume alone. A body, its dimensions, collision rules and possible route would have to enter the account.
+
+Entropic morality asks us to distinguish reducing a representation from enforcing its reduction on the conditions of life. These desks give that distinction a concrete starting point without pretending a visual toggle carries the stakes of habitat destruction. We can inspect what a control changes and what it leaves available. Later applications can ask who has authority to change those conditions and whose responses the model neglects.
+
+The available buttons also define this instrument&#x27;s limits. A visitor can reveal branch levels but cannot invent a new branching grammar at this desk. That restriction creates a clear comparison; it must not quietly become a claim that these are the only possible forms. The next sequence makes rewriting available as another capability. A later iteration may connect the gallery&#x27;s observations to editable rules, while preserving the ability to hold a form steady and understand it.
+
+This is one place where the desire to make another world can stay specific. What must be inherited? Where can the next branch begin? What relation could be retained while its interpretation changes? We can enjoy a strange outline and still ask which procedure permits it. Complexity, novelty and change are not automatic measures of freedom. Stability can supply the comparison through which an unnoticed possibility becomes legible.
+
+All ten earlier works remain in the collection. Choosing two primary encounters gives attention a path through them. It does not declare the rest irrelevant. Our first pass through the spine should protect those return paths: keep the work, state what has been tested, and record what a further encounter could disclose.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_Synthesis/artifacts.md">Raw captured source</a></p><pre># Fractal Synthesis — Artifacts
+*Fractals: Infinite Within Finite · lambda_edge · 10 artifacts*
+
+&gt; All the fractal forms converge. Recursion, Koch, Cantor, Sierpinski, Fibonacci, romanesco—each a different face of the same principle: D = log(N)/log(S). Fractals embody the QFEP tension: deterministic rules plus entropic variation creates forms at the edge of chaos. Queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Fractal Recursion 1
+![Fractal Recursion 1](/scene-catalog/fractal_recursion_1.png)
+
+Basic recursion visualization demonstrating fundamental recursive patterns
+
+`fractal_recursion_1`
+
+## Koch Curve
+![Koch Curve](/scene-catalog/koch_curve.png)
+
+Classic Koch snowflake fractal curve generation
+
+`koch_curve`
+
+## cantor_set
+![cantor_set](/scene-catalog/cantor_set.png)
+
+cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.
+
+`cantor_set`
+
+## Strange Attractors
+![Strange Attractors](/scene-catalog/strange_attractors.png)
+
+Gallery of strange attractors — Lorenz, Rössler, and others. Deterministic systems that never repeat yet stay bounded, tracing fractal paths through phase space forever.
+
+`strange_attractors`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## recursive_tree
+![recursive_tree](/scene-catalog/recursive_tree.png)
+
+branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)
+
+`recursive_tree`
+
+## Fibonacci Sequences
+![Fibonacci Sequences](/scene-catalog/fibonacci_sequences.png)
+
+Recursive mathematical sequences and spiral visualizations
+
+`fibonacci_sequences`
+
+## Fractal Clouds
+![Fractal Clouds](/scene-catalog/fractal_clouds.png)
+
+Volumetric clouds using fractal Brownian motion noise. Presets: cumulus, stratus, cirrus, storm
+
+`fractal_clouds`
+
+## sierpinski_triangle
+![sierpinski_triangle](/scene-catalog/sierpinski_triangle.png)
+
+sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
+
+`sierpinski_triangle`
+
+## romanesco
+![romanesco](/scene-catalog/romanesco.png)
+
+romanesco(cone, depth) = 13 * romanesco(cone * 0.382, depth+1) placed at 137.508 degree golden angle intervals
+
+`romanesco`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_Synthesis/summary.md">Raw captured source</a></p><pre># What, exactly, is repeated?
+
+Two familiar instruments become a comparison. The Cantor desk separates a new selection from hiding its record or showing its removed middles. The block tree reveals branch levels, accumulated bounds and terminal marks without changing its generated geometry. Ten original works remain, with a new gallery fixture providing a prompt and held secondary examples. The hall closes the fractal first pass and prepares explicit symbolic rewriting in L-systems.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_Synthesis/blurb.md">Raw captured source</a></p><pre># What, exactly, is repeated?
+
+The older rows disappear; the surviving pieces remain. A tree changes its reading without growing another branch. What would you have to tell the next call so it could continue?
+</pre></section></body></html>

@@ -1,0 +1,28 @@
+{
+  "room": "Primitives_Melencolia",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Primitives_Melencolia_durer/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07fe08753fda37c03c491273bf4df2001c0ba0c13b374e6214b08353aa8beaf6",
+    "commons/maps/Primitives_Melencolia/map_data.json": "02bb9039233f3c317a839f716bc4f64bce4df10aca08e74d35105a54dad47fce",
+    "doc/book/iterations/2026-09-27-melencolia-geometric-desire/probe.gd": "f3c801b3460d9c82b02f079a2de050bee1d8083eeed497089019a3fa5f237c28",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "74280296475c5e5b72bfd45ee601d35fee180f9544c47eb5e52599ef3f357313",
+    "ada_run/encounter_pilot/Primitives_Melencolia_durer/control.json": "ff63892f70ec77688e5f16cc292c6ac1907693a8c1772aff58f0f9e5aeba30fc",
+    "ada_run/encounter_pilot/Primitives_Melencolia_durer/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Primitives_Melencolia_durer/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Primitives_Melencolia_durer/em_bake.json": "fdc8a601b3cc46a706301464799d126cb0bb28cff3a898bbf0eb88b821a1ef63"
+  }
+}

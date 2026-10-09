@@ -1,0 +1,34 @@
+{
+  "hall": "QFEP_Sandbox",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "six_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "layer_shapes": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "reactive_particles",
+    "lambda_slider",
+    "phi_slider",
+    "qfep_formula_3d",
+    "qfep_reactor"
+  ],
+  "primary_artifacts": [
+    "lambda_slider",
+    "phi_slider"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Sandbox\\map_data.json": "fcaec5c9793a635cc83b3bc8a89af2169e44de00e7e43d079898f2a821d2e6ff",
+    "commons\\maps\\QFEP_Sandbox\\final.md": "83f19c6d22526e30b752d9ecac115b28d2116fc3edd43a36ea8e08793dca736f",
+    "commons\\maps\\QFEP_Sandbox\\tutorial.md": "c79203e58c3e7657274261e23900359a44bbe820c42532dec46b0f8aa30582cf",
+    "commons\\maps\\QFEP_Sandbox\\technical.md": "96a3e70492ca78e09df173da04a748b11ab074c05285d12230a553515e74b417",
+    "commons\\maps\\QFEP_Sandbox\\critical.md": "11b0674888ead34147f5bd1f91cb5422e44f24cd185796380ef77205931adaa1"
+  }
+}

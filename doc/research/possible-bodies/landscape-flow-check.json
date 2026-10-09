@@ -1,0 +1,73 @@
+{
+  "baseline": {
+    "batch_per_tray": 32,
+    "counts": {
+      "PERLIN": {
+        "other_exit": 0,
+        "outlet": 32,
+        "still_in": 0
+      },
+      "RANDOM HEIGHTS": {
+        "other_exit": 0,
+        "outlet": 0,
+        "still_in": 32
+      },
+      "SINE": {
+        "other_exit": 0,
+        "outlet": 2,
+        "still_in": 30
+      },
+      "WORLEY F1": {
+        "other_exit": 0,
+        "outlet": 32,
+        "still_in": 0
+      }
+    },
+    "elapsed_ticks": 720,
+    "gravity": 9.8,
+    "physics_hz": 60,
+    "radius_m": 0.075,
+    "relief_m": 0.3,
+    "seed": 1729,
+    "tilt_degrees": 20.0,
+    "window_seconds": 12
+  },
+  "checks": 45,
+  "failures": [],
+  "hall_placement_tested": false,
+  "headset_tested": false,
+  "second_run": {
+    "batch_per_tray": 32,
+    "counts": {
+      "PERLIN": {
+        "other_exit": 0,
+        "outlet": 32,
+        "still_in": 0
+      },
+      "RANDOM HEIGHTS": {
+        "other_exit": 0,
+        "outlet": 0,
+        "still_in": 32
+      },
+      "SINE": {
+        "other_exit": 0,
+        "outlet": 5,
+        "still_in": 27
+      },
+      "WORLEY F1": {
+        "other_exit": 0,
+        "outlet": 32,
+        "still_in": 0
+      }
+    },
+    "elapsed_ticks": 480,
+    "gravity": 9.8,
+    "physics_hz": 60,
+    "radius_m": 0.075,
+    "relief_m": 0.3,
+    "seed": 1730,
+    "tilt_degrees": 20.0,
+    "window_seconds": 8
+  },
+  "status": "standalone_physical_prototype"
+}

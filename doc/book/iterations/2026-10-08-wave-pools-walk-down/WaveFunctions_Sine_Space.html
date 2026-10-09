@@ -1,0 +1,162 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sine Space — two readings</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}</style><header><div class="tag">Endless Museum · 8 October 2026</div><h1>Sine Space — two readings</h1><nav><a href="index.html">Rooms and walking tests</a><a href="WaveFunctions_Sine_Space.html">Sine Space readings</a><a href="WaveFunctions_3D_Wave_Propagation.html">Propagation readings</a></nav></header><main><p>The tutorial program is unchanged. The reflection now follows the descent and return in the actual museum.</p><div class="parallel"><article><div class="tag">tutorial.md</div><h1>A rule becomes a surface</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Spatial frequency: cycles per metre</li>
+<li>A height function of two coordinates</li>
+<li>Sampling a grid into shared positions</li>
+<li>Joining neighbouring samples with triangles</li>
+<li>Giving a static mesh collision</li>
+</ul>
+<p>At the entrance, look across the blue tray. Choose a hollow before pressing RELEASE. Will a sphere pass through it, settle there, or knock another sphere out? The sine rule supplies a landscape. Gravity and contact determine what the bodies do with it.</p>
+<h2>What returns</h2>
+<p>The opening cube repeated a height as <strong>time</strong> advanced. Pendulum kept observations of a moving body. Here a repeating rule takes <strong>position</strong> as its input. The surface stays still.</p>
+<p>Bring the addresses from Grid and the face lists from Polyhedra. Bring back the PointBody sphere used in Forces: the same 0.14-metre radius, mesh, boundary and pickup behaviour. We create another instance of that class; we do not rebuild or re-explain its sphere. This is a return to a learned object after using the cube as our clock and pendulum marker.</p>
+<p><strong>Build:</strong> sample a two-metre square, connect the samples, and give its triangles a collision receiver. Drop one PointBody onto it.</p>
+<p><strong>Investigate:</strong> change the height range or spacing while keeping the sphere. Predict a change in the surface before you predict the body's response.</p>
+<h2>Inside the museum</h2>
+<p>Save <code>03_sine_surface.gd</code> beside the carried <code>point_body.gd</code>. Attach the new script to your <code>PointStudy</code> Node3D in Sine Space, at <strong>hall-local <code>(10.5, 0, 8.5)</code></strong>, zero rotation and unit scale. This places your small study across from the existing tray. The museum continues to supply its player, camera, light and XR tools.</p>
+<p>Run the study. The sphere drops automatically; you can then pick it up and release it elsewhere using the museum's existing interaction. Restart the study after changing its exported values. Use a positive <code>cells</code> value; start with 16. We build a static mesh once in <code>_ready()</code>. Changing a variable while it runs does not rebuild the surface.</p>
+<h2>Complete new code — 03_sine_surface.gd</h2>
+<!-- student-code:03_sine_surface.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+@export var cells: int = 16
+@export var amplitude: float = 0.18
+@export var frequency: float = 1.0 # Cycles per metre, not per second.
+var points: Array[Vector3] = []
+var faces: Array[Vector3i] = []
+var surface := MeshInstance3D.new()
+var receiver := StaticBody3D.new()
+var boundary := CollisionShape3D.new()
+var point: PointBody
+
+func height_at(x: float, z: float) -&gt; float:
+    return 0.8 + amplitude * sin(TAU * frequency * x) * sin(TAU * frequency * z)
+
+func _ready() -&gt; void:
+    add_child(surface)
+    add_child(receiver)
+    receiver.add_child(boundary)
+    for row in range(cells + 1):
+        for column in range(cells + 1):
+            var x := -1.0 + 2.0 * column / cells
+            var z := -1.0 + 2.0 * row / cells
+            points.append(Vector3(x, height_at(x, z), z))
+    var stride := cells + 1
+    for row in range(cells):
+        for column in range(cells):
+            var a := row * stride + column
+            faces.append(Vector3i(a, a + 1, a + stride))
+            faces.append(Vector3i(a + 1, a + stride + 1, a + stride))
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            builder.add_vertex(points[index])
+    builder.generate_normals()
+    surface.mesh = builder.commit()
+    var blue := StandardMaterial3D.new()
+    blue.albedo_color = Color(&quot;76b6c9&quot;)
+    blue.roughness = 0.65
+    surface.material_override = blue
+    boundary.shape = surface.mesh.create_trimesh_shape()
+    var contact := PhysicsMaterial.new()
+    contact.friction = 0.45
+    contact.bounce = 0.0
+    receiver.physics_material_override = contact
+    point = PointBody.new()
+    point.position = Vector3(0.20, 1.8, 0.20)
+    point.mass = 0.1
+    point.gravity_scale = 1.0
+    point.release_mode = XRToolsPickable.ReleaseMode.UNFROZEN
+    point.freeze = false
+    point.physics_material_override = contact
+    var black := StandardMaterial3D.new()
+    black.albedo_color = Color(&quot;17191c&quot;)
+    black.roughness = 0.16
+    for child in point.get_children():
+        if child is MeshInstance3D:
+            child.material_override = black
+    add_child(point)
+</code></pre>
+<h2>Read the height rule</h2>
+<p>At <code>(x, z)</code>, the function returns <code>0.8 + amplitude * sin(...) * sin(...)</code>. The 0.8 metres raises the study to table height. With amplitude 0.18, the mathematical rule ranges from 0.62 to 0.98 metres. A particular sampling grid might miss its highest and lowest points.</p>
+<p><code>frequency</code> is measured in <strong>cycles per metre</strong>. <code>TAU * frequency * x</code> converts a position in metres to an angle in radians. At frequency 1, moving one metre in X repeats the value. There is no elapsed time in this expression and no <code>_process()</code> moving the terrain.</p>
+<p>Hold Z at 0.25 metres. Predict the heights at X = 0, 0.25 and 0.5: <strong>0.8, 0.98 and 0.8 metres</strong>. At Z = 0, its sine is zero, so the whole row stays at 0.8. The two factors act together: a crest along one direction can be cancelled by the other.</p>
+<h2>Addresses become faces again</h2>
+<p>Sixteen cells need seventeen sample positions along each edge. The nested loops keep <code>17 × 17 = 289</code> positions. X and Z run from −1 to 1 in the study's local coordinates. We keep positions row by row, so <code>row * stride + column</code> finds a sample in the list.</p>
+<p>For each cell, <code>a</code> is one corner; <code>a + 1</code> is its neighbour along X; <code>a + stride</code> is the next row. The fourth corner is <code>a + stride + 1</code>. The two <code>Vector3i</code> entries refer to these four positions. This is the face-list relationship from Polyhedra, repeated across a grid: <strong>256 cells, 512 triangles</strong>.</p>
+<p>The builder emits each triangle's three vertices and generates lighting normals. The order shown gives the triangles upward-facing fronts in Godot. The position list still contains shared samples even though the resulting rendering mesh repeats vertices per face. We leave out the earlier edge cylinders to keep this surface and its contacts readable.</p>
+<h2>Seeing and supporting are separate</h2>
+<p><code>surface</code> makes the triangles visible. <code>receiver</code> is a static physics body. Its <code>boundary</code> receives a triangle collision shape made from <strong>that same mesh</strong>, so the contact surface matches the drawn facets. The trimesh construction is a supplied engine operation; we are not writing a collision solver here.</p>
+<p>The familiar point is unfrozen, has gravity, and keeps its spherical boundary. The physics engine advances it. We do not also assign its position every frame. A grab temporarily controls the body through the existing XR tool; releasing returns it to physics.</p>
+<p>The new surface is a finite, thin sheet with no enclosing rails. A sphere can roll off and fall onto the museum floor. It collides with the sampled triangles, not an infinitely smooth mathematical sine. The contact material sets friction to 0.45 and bounce to zero; it does not promise that every hollow will hold the sphere.</p>
+<h2>Make another surface without copying the answer</h2>
+<ol>
+<li>Keep frequency 1 and cells 16. Set amplitude to zero and restart. Predict the terrain and the released sphere separately. Then try amplitude 0.30. Which changes are consequences of the height rule, and which depend on contact?</li>
+<li>Keep amplitude 0.18. Set frequency to 0.5, then 2, restarting each time. Predict how many full cycles fit across the two-metre width. Explain why increasing frequency is different from increasing height.</li>
+<li>Return to frequency 1 but use only 4 cells. The sample spacing is now half a metre: all sampled sine values are approximately zero. The built surface becomes almost flat even though the unsampled function still has crests. Restore 16 cells. The function and its representation made different promises.</li>
+</ol>
+<p>Now make one independent variation: give X and Z separate frequency variables. Aim for one cycle across the width and two along the depth. State your two frequencies in cycles per metre before running it. Keep the same PointBody and explain what you changed without calling it a faster wave.</p>
+<h2>Compare with the installed encounters</h2>
+<p>The museum tray uses a denser, tilted surface and 32 smaller spheres. It rescales its sampled heights into the selected relief range. Our study uses a horizontal surface and a centred height range. Both construct static triangles and matching collision. The tray's SIZE and RELIEF controls reset its trial; its twelve-second counter records a deadline, not proof of permanent trapping. Use its batch for comparison after making the smaller construction.</p>
+<p>Further into the hall, the red corridor advances the phase of layered waves. Its walls are visible but noncolliding; its thin floor provides support. Beyond that, the silver sine floor has a matching collider and stays still. Walk across a fold in each and compare what the same word, <em>surface</em>, lets your body do.</p>
+<h2>Carried code — point_body.gd</h2>
+<p>This is the unchanged PointBody from Forces, included so the two-file study is complete. Keep it beside the new script. Its superclass, <code>XRToolsPickable</code>, is part of the museum's installed XR Tools; running these files in an empty Godot project would require that setup first.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2>Take forward</h2>
+<p>Keep the height function, sample list and face list. You can now make a repeating value occupy a surface and state whether that surface can stop a body. In Unit Circle, we examine where the sine value comes from: a turning point and one of its coordinates.</p></article><article><div class="tag">final.md</div><h1>What a wave can hold</h1>
+<!-- @sine_flow_tray -->
+
+<p>The blue tray tilts away from you. Choose a hollow before pressing RELEASE. Imagine where the first sphere will go.</p>
+<p>It touches the surface, finds a slope, meets another sphere. The landscape has become part of the movement.</p>
+<p>After twelve seconds the bodies stop. The display separates those that crossed the outlet from those still inside and those that left elsewhere. The spheres in the neat rows below are a record: the program has moved each departed body there and removed it from further collisions.</p>
+<p>Leave RELIEF alone and press SIZE. The surface waits for a larger body. Release again. Which hollow from your first prediction still matters? Cycle SIZE once more to try the smallest spheres. A place in the landscape has dimensions; so does what arrives there. The name of the wave has not told us their relationship.</p>
+<p>RESET returns the middle size and the original relief. Now change RELIEF and repeat. One press makes the folds steeper; the next makes them shallower than when you arrived. Their positions across the tray stay the same. You have changed a surface, then watched what that means to a body with its own size, mass and contacts.</p>
+<p>Open RULE. A sine repeats across the tray and another along it. Their product supplies a height at each sampled address. Triangles join the addresses; a collision shape gives those triangles the power to support the spheres. The terrain stays still throughout the trial. Time belongs to the moving bodies and to our observation window.</p>
+<p>Look again at STILL IN. Twelve seconds gave us time to compare. It did not give us forever. A body present at this deadline has not been proven permanently trapped. And if the purpose were to hold something here, our judgement of the same count might change. What else would we need to learn before calling this hollow a shelter?</p>
+<!-- @sine_wall_corridor -->
+
+<p>Beyond the tray, a fold comes towards you.</p>
+<p>There is a corresponding fold on the other wall, a little out of step. Stop at the mouth of the passage. Choose a narrow place ahead. Watch what becomes of it while you stay where you are.</p>
+<p>The walls keep changing the invitation. Press FREEZE. Now the folds wait for you. Pass one, turn, and approach it from the other direction. A shape can come to meet a body through its own motion or through the body's movement. For a moment these felt alike.</p>
+<p>Run the walls again and follow a small ripple across a broader fold. The layers slip past each other. Walking the frozen surface carries one arrangement past the eye; advancing the phase changes how its layers agree. We have found a difference inside the resemblance.</p>
+<p>Leave AMP where it is and slide PHASE through half a turn. Look where the left wall approaches the middle. What is the right doing now?</p>
+<p>Both sides bend the same way. The passage swerves while the readout settles at 2.00 to 2.00 metres. Slide back towards zero and openings and pinches return. One relative setting has changed the kind of passage the pair makes.</p>
+<p>Inspect a bend at half a turn. The number still says two metres. Notice its name: x-gap. It compares the walls at matching positions along the passage, across its local X direction. The shortest way between curved surfaces need not follow that direction. We have made a constant width by deciding how to measure it. Which width would matter to a body trying to get through?</p>
+<p>Bring PHASE back towards zero, then raise AMP. Approach a pinch slowly. Try crossing a visible crest instead of following the opening.</p>
+<p>You can pass through. The walls have no collision shapes; a thin slab supplies the floor. Yet the surfaces have already offered a direction, a narrowing, a reason to hesitate. Their influence did not wait for collision to be enabled.</p>
+<p>Try following the apparent passage for a few steps, then cutting across a fold. Giving these surfaces the power to stop you would change what can happen here. It would require another part of the program.</p>
+<p>RESET restores the declared settings. You can recognise the passage and still choose a different route through it.</p>
+<!-- @sine_space -->
+
+<p>Beyond the corridor, a broad ramp descends into the basin. The silver floor waits a metre below the museum floor. This surface has collision. Walk down onto it: a fold that the eye follows now changes where the foot can stand. The room opens wider. Coloured balls fall from above, bounce against a crest and gather in the hollows. Walk among them: the same relief redirects their movement and changes your footing. The terrain stays still while your height changes. Solid walls close both sides. To reach the next room you cross these folds; a second ramp returns you to level ground at the far end. The wave has become a condition of continuing.</p>
+<p>A repeating value has acquired several bodies already. Ahead, a point travels around a circle. A graph grows beside it, then stays while the point keeps turning. Follow the point and try to predict the graph. After walking among these folds, we can look at one way their returning values are made.</p></article></div></main></html>

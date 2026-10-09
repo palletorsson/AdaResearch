@@ -1,0 +1,79 @@
+# When forward goes sideways
+
+<!-- @the_believing_turtle -->
+
+Does an instruction say how it must be obeyed?
+
+Three short lines rise from three origins. Each has read the first F of the same sentence, taking a stride of 0.32 metres. We have kept the travelling state from Growth, but the question has moved: what agreement connects an instruction to a movement?
+
+Press READ F. The blue line goes sideways. Its gold arrow still points up; its white arrow points across. The gold arrow shows the stored heading, the white one the direction the reader will draw. Those two directions no longer agree.
+
+The sentence has not changed. Neither has the stride. This reader takes the direction it was given and exchanges its x and y components. What used to contribute to height now contributes to horizontal distance. Before seeing a whole tree, we can catch the disagreement in a single step.
+
+Now press ANGLE. The middle reader changes from twenty-five to forty-five degrees. Its first line stays upright. Why did this change produce no visible turn? Keep pressing STEP until the sixth symbol. The first two Fs extend the stem; a plus turns the heading; a bracket saves it; another plus turns again; the next F draws. The middle reading has departed from the green reference. An angle matters when an instruction uses it.
+
+All three readers follow:
+
+```text
+FF+[+F-F-F]-[-F+F+F]
+```
+
+There are twenty symbols and eight drawing instructions. Finish the sentence, finding corresponding forks as you go. When the brackets close, the saved positions and headings return, as they did in Growth. Each drawing has read the same bracket at the same moment. Yet one spreads differently, and another seems to have forgotten which way a tree should stand.
+
+Here is the direction calculation in the believing turtle:
+
+```gdscript
+var dir := Vector2(cos(heading), sin(heading))
+if sideways:
+    dir = Vector2(dir.y, dir.x)
+```
+
+The angle called heading supplies the two components of a unit direction. The conditional exchanges them. The next line uses that direction to take a step in the museum's drawing plane:
+
+```gdscript
+var nxt := pos + Vector3(dir.x, dir.y, 0.0) * step
+```
+
+The third component is zero: these drawings remain planar inside a three-dimensional room. The step multiplies the direction; adding it to the current position gives the next position. This is the vector operation we brought through the earlier halls, now given another reading.
+
+Try to match every blue fork to a green one. The correspondence is unusually dependable. With the same angle, exchanging x and y at every step reflects the entire construction across the diagonal x = y, relative to its origin. It preserves lengths, angles between segments and which branches connect. A reflection can overturn our expectation of uprightness while retaining this much structure. It is not simply a ninety-degree rotation; follow an off-axis branch to see the difference.
+
+![The green reading and the blue READ F reading of the same sentence at TREE, drawn from the rule, with the diagonal x = y through their shared origin](/book-review/doc/book/figures/lsystems/believing-turtle-reflection.png)
+
+*Both readings drawn from the rule at generation two: 172 symbols, 64 segments each, 25 degrees, a 0.32-metre stride. The blue one is the green one reflected across the dashed diagonal; every fork has its counterpart.*
+
+Press READ F again. The blue reading returns to the green one's arrangement. The exchange is reversible. Its strangeness has a precise operation we can repeat, inspect and undo.
+
+TREE gives all three readers two complete rewriting generations: 172 symbols, 64 drawn segments. The same local differences accumulate across a larger body. No drawing has been resized to fit its case. Find the first fork again before trying to recognise the whole outline. More detail can obscure a relation we understood one step earlier.
+
+STEP reveals recorded interpreter states, not a calculation suspended between button presses. After the last symbol it returns to the beginning of the reading; RESET also restores the initial angles and forward convention. The original lectern and its smaller studies remain behind this desk, including their unequal step lengths and finite drawing prefixes. They offer another comparison, with different conditions.
+
+Calling this reader a believing turtle gives us a way to attend to its commitments. It does not give the turtle an inner conviction. The commitment is executable: F is assigned a direction through this code. We can change that assignment. We can also ask what the change has left untouched. The branches still have no collision surfaces; a sideways drawing has not yet become somewhere we can stand. That further desire needs another operation.
+
+<!-- @ -->
+
+<!-- study-spine:tube_painting -->
+
+<!-- @tube_painting -->
+
+Someone has already begun. Three bent lines hang in front of a pale wall. Their ends are within reach. Take one and continue it.
+
+The part you inherited stays where it was. Your hand adds to its end. Let go: the new length remains in the air, carrying the turn you just made. Bring another end towards the wall and it settles against the surface. A drawing begins to make its own partition.
+
+There is a pen for starting elsewhere. But beginning again is no longer the only invitation. You can accept the shape already here, prolong it, or make its unfinished edge lead somewhere its first gesture did not suggest.
+
+Choose VIEW. The coloured skin disappears. A path remains; then rings appear along it. Choose again and the faces return between them. What looked like a single flowing body keeps a count of the decisions that made it.
+
+These lines do not sag. Their suspension is something the program grants. The wall is a place to meet, not a support they need. Leave one end unattached. For once, an unfinished thing does not have to fall.
+
+Choose NETWORK. A white pipe holds an opening through its middle; a black cable hangs between two supports; the pink tube keeps the turn of a hand. Bring an end to another run. An amber marker offers a joint. Release, and the two share a connection. A crossing alone is not enough. What looks continuous still needs a decision about where it belongs.
+
+Beside the drawing, three coloured bodies wait above dark wheels. Close the power lever. The wheels turn at unequal rates; each body finds another sway. Pull the motor cord and the figures keep their last pose. The small synthesizer can go on sounding. Its connection is elsewhere.
+
+The cord has the same kind of skin as the lines we have been making. Here its ends also carry an agreement: this output may reach that input. The drawing has acquired a consequence. What would we connect if a line could give something else permission to move?
+
+Look up. Large pink pipes pass over and under one another. Their gloss bends the room back towards us. Change the rule at the small console: the weave becomes ribs, then long returning loops. What fitted in a hand now reaches across the bay. Repetition has given the line the scale of a ceiling. We are standing inside one of its arrangements.
+
+<!-- @ -->
+
+The floor curves and the volumetric path remain in the collection. Their finite constructions let a sentence visit many grid locations; they do not occupy every point of this room. Beyond them lies Architecture. A step will acquire width, a branch may become a corridor, and a return will have to be considered in relation to a body trying to find its way.

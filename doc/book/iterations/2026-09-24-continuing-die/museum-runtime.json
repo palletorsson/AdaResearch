@@ -1,0 +1,3924 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "40"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				2.01999998092651
+			],
+			"bounds_size": [
+				1.0,
+				0.952555656433105,
+				1.01999998092651
+			],
+			"cell": [
+				3,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.2519199848175,
+						0.936815559864044,
+						2.92848587036133
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.2519199848175,
+						0.936815559864044,
+						2.92848587036133
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.30807995796204,
+						0.936815559864044,
+						2.92848587036133
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.30807995796204,
+						0.936815559864044,
+						2.92848587036133
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "DiceThrow",
+					"position": [
+						3.28999996185303,
+						0.919819951057434,
+						2.11545205116272
+					],
+					"text": "?"
+				},
+				{
+					"parent": "DiceThrow",
+					"position": [
+						3.36999988555908,
+						0.934339940547943,
+						2.05725193023682
+					],
+					"text": "Rolls: 0\n\nGrab & throw\nthe dice!"
+				},
+				{
+					"parent": "RackPanel",
+					"position": [
+						3.27999997138977,
+						0.929110288619995,
+						2.88594150543213
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				3.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dice_throw"
+		},
+		{
+			"bounds_position": [
+				8.14999961853027,
+				0.0,
+				2.24000000953674
+			],
+			"bounds_size": [
+				0.90000057220459,
+				1.77999997138977,
+				0.460000038146973
+			],
+			"cell": [
+				8,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						8.26620006561279,
+						0.963186383247375,
+						2.5751621723175
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						8.26620006561279,
+						0.963186383247375,
+						2.5751621723175
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						8.3238000869751,
+						0.963186383247375,
+						2.5751621723175
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						8.3238000869751,
+						0.963186383247375,
+						2.5751621723175
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RackPanel",
+					"position": [
+						8.29500007629395,
+						0.998003840446472,
+						2.54769897460938
+					],
+					"text": ""
+				},
+				{
+					"parent": "PickableObject",
+					"position": [
+						8.54800033569336,
+						0.916999995708466,
+						2.5
+					],
+					"text": "H"
+				},
+				{
+					"parent": "PickableObject",
+					"position": [
+						8.54800033569336,
+						0.913000047206879,
+						2.5
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@870",
+					"position": [
+						8.5339412689209,
+						0.921999990940094,
+						2.53394103050232
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@870",
+					"position": [
+						8.5339412689209,
+						0.918000042438507,
+						2.53394103050232
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@873",
+					"position": [
+						8.5,
+						0.926999986171722,
+						2.54800009727478
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@873",
+					"position": [
+						8.5,
+						0.923000037670136,
+						2.54800009727478
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@876",
+					"position": [
+						8.4660587310791,
+						0.931999981403351,
+						2.53394103050232
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@876",
+					"position": [
+						8.4660587310791,
+						0.928000032901764,
+						2.53394103050232
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@879",
+					"position": [
+						8.45199966430664,
+						0.936999976634979,
+						2.5
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@879",
+					"position": [
+						8.45199966430664,
+						0.933000028133392,
+						2.5
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@882",
+					"position": [
+						8.4660587310791,
+						0.941999971866608,
+						2.46605896949768
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@882",
+					"position": [
+						8.4660587310791,
+						0.938000023365021,
+						2.46605896949768
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@885",
+					"position": [
+						8.5,
+						0.946999967098236,
+						2.45199990272522
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@885",
+					"position": [
+						8.5,
+						0.943000018596649,
+						2.45199990272522
+					],
+					"text": "T"
+				},
+				{
+					"parent": "@RigidBody3D@888",
+					"position": [
+						8.5339412689209,
+						0.951999962329865,
+						2.46605896949768
+					],
+					"text": "H"
+				},
+				{
+					"parent": "@RigidBody3D@888",
+					"position": [
+						8.5339412689209,
+						0.948000013828278,
+						2.46605896949768
+					],
+					"text": "T"
+				}
+			],
+			"position": [
+				8.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "coin_toss"
+		},
+		{
+			"bounds_position": [
+				3.97499990463257,
+				0.0,
+				3.74410653114319
+			],
+			"bounds_size": [
+				3.05000019073486,
+				1.32500004768372,
+				2.0958936214447
+			],
+			"cell": [
+				5,
+				4
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.56300020217896,
+						0.997009813785553,
+						3.81501817703247
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.56300020217896,
+						0.997009813785553,
+						3.81501817703247
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.43699979782104,
+						0.997009813785553,
+						3.81501817703247
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.43699979782104,
+						0.997009813785553,
+						3.81501817703247
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "DieA",
+					"position": [
+						6.19999980926514,
+						1.0900000333786,
+						4.6399998664856
+					],
+					"text": "?"
+				},
+				{
+					"parent": "DieA",
+					"position": [
+						6.19999980926514,
+						0.0,
+						4.31999969482422
+					],
+					"text": ""
+				},
+				{
+					"parent": "DieB",
+					"position": [
+						4.80000019073486,
+						1.0900000333786,
+						4.64000034332275
+					],
+					"text": "?"
+				},
+				{
+					"parent": "DieB",
+					"position": [
+						4.80000019073486,
+						0.0,
+						4.32000017166138
+					],
+					"text": ""
+				},
+				{
+					"parent": "PairedDiceColumn",
+					"position": [
+						5.5,
+						2.67000007629395,
+						5.59999990463257
+					],
+					"text": "TWO THROWS / ONE HEIGHT"
+				},
+				{
+					"parent": "PairedDiceColumn",
+					"position": [
+						5.5,
+						1.25,
+						3.82999992370605
+					],
+					"text": "Throw both dice into their trays"
+				},
+				{
+					"parent": "PairedDiceColumn",
+					"position": [
+						5.5,
+						1.13999998569489,
+						3.82999992370605
+					],
+					"text": "? + ?"
+				},
+				{
+					"parent": "PairedDiceColumn",
+					"position": [
+						5.5,
+						1.6599999666214,
+						5.59999990463257
+					],
+					"text": "RECENT PAIRS / empty"
+				},
+				{
+					"parent": "PairedDiceColumn",
+					"position": [
+						5.5,
+						1.79999995231628,
+						5.59999990463257
+					],
+					"text": "Each colour keeps its contribution"
+				},
+				{
+					"parent": "RackPanel",
+					"position": [
+						5.5,
+						1.00501608848572,
+						3.91169238090515
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				5.5,
+				0.0,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "paired_dice_column"
+		},
+		{
+			"bounds_position": [
+				1.25500011444092,
+				0.0,
+				4.63000011444092
+			],
+			"bounds_size": [
+				2.50499987602234,
+				3.03999996185303,
+				1.89000034332275
+			],
+			"cell": [
+				2,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.26299977302551,
+						1.00700986385345,
+						4.7150182723999
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.26299977302551,
+						1.00700986385345,
+						4.7150182723999
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.13699984550476,
+						1.00700986385345,
+						4.7150182723999
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.13699984550476,
+						1.00700986385345,
+						4.7150182723999
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Throw_1",
+					"position": [
+						1.58000004291534,
+						0.410000026226044,
+						6.07500028610229
+					],
+					"text": "+6"
+				},
+				{
+					"parent": "Throw_2",
+					"position": [
+						1.58000004291534,
+						0.950000047683716,
+						6.07500028610229
+					],
+					"text": "+6"
+				},
+				{
+					"parent": "Throw_3",
+					"position": [
+						1.58000004291534,
+						1.35500001907349,
+						6.07500028610229
+					],
+					"text": "+3"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						1.58000004291534,
+						1.82000005245209,
+						6.21000003814697
+					],
+					"text": "WORKED EXAMPLE\n6 + 6 + 3 = 15\nNOT LIVE THROWS"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						3.20000004768372,
+						1.66999995708466,
+						5.63000011444092
+					],
+					"text": "SIX / THROW AGAIN"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						3.20000004768372,
+						1.52999997138977,
+						5.63000011444092
+					],
+					"text": "0 / 5 THROWS"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						3.20000004768372,
+						1.39999997615814,
+						5.63000011444092
+					],
+					"text": "?"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						3.20000004768372,
+						1.27999997138977,
+						5.63000011444092
+					],
+					"text": "Throw into the tray"
+				},
+				{
+					"parent": "LiveDie",
+					"position": [
+						3.20000004768372,
+						1.0900000333786,
+						5.51999998092651
+					],
+					"text": "?"
+				},
+				{
+					"parent": "LiveDie",
+					"position": [
+						3.20000004768372,
+						0.0,
+						5.19999980926514
+					],
+					"text": ""
+				},
+				{
+					"parent": "RackPanel",
+					"position": [
+						3.19999980926514,
+						1.01501619815826,
+						4.811692237854
+					],
+					"text": ""
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						2.29999995231628,
+						0.0799999982118607,
+						5.52899980545044
+					],
+					"text": "LIVE CHAIN"
+				},
+				{
+					"parent": "ContinuingDie",
+					"position": [
+						2.29999995231628,
+						2.96000003814697,
+						5.51999998092651
+					],
+					"text": "5-THROW DISPLAY LIMIT"
+				}
+			],
+			"position": [
+				2.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "continuing_die"
+		},
+		{
+			"bounds_position": [
+				9.07999992370605,
+				0.00749999983236194,
+				5.07999992370605
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949272334575653,
+				0.840000152587891
+			],
+			"cell": [
+				9,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				5.44999122619629,
+				0.998998522758484,
+				6.44999742507935
+			],
+			"bounds_size": [
+				0.100010871887207,
+				1.05100452899933,
+				0.100013256072998
+			],
+			"cell": [
+				5,
+				6
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				1.0,
+				6.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_object_spawner"
+		},
+		{
+			"bounds_position": [
+				6.44999122619629,
+				0.998998522758484,
+				6.44999742507935
+			],
+			"bounds_size": [
+				0.100010871887207,
+				1.05100452899933,
+				0.100013256072998
+			],
+			"cell": [
+				6,
+				6
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				1.0,
+				6.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_object_spawner"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.15643918514252,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.0,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.21700763702393,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.16992795467377,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.17770946025848,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				8.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.10911238193512,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				8
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.20776033401489,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.13688099384308,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.17780208587646,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.21708071231842,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.07487559318542,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				9.44999980926514
+			],
+			"bounds_size": [
+				1.0,
+				1.18081390857697,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				9
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.15282416343689,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.22138118743896,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.19527292251587,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.20644986629486,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.24881207942963,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				10.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.0,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				10
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.17738473415375,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.12394881248474,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.16205501556396,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.15538668632507,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.0408091545105,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				11.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.23046946525574,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.27465999126434,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.23492133617401,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.0,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.12398135662079,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.22423589229584,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				12.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.00376892089844,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.09687685966492,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.02761650085449,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.28648662567139,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.06097483634949,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.20854604244232,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				13.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.05898284912109,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.17360889911652,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.10123443603516,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.18649089336395,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.0,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.21979343891144,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				14.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.15307128429413,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				3.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.158074259758,
+				0.100000381469727
+			],
+			"cell": [
+				3,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				4.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.24862670898438,
+				0.100000381469727
+			],
+			"cell": [
+				4,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.14575493335724,
+				0.100000381469727
+			],
+			"cell": [
+				5,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				6.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.14582455158234,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				7.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.06007421016693,
+				0.100000381469727
+			],
+			"cell": [
+				7,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				8.0,
+				0.0,
+				15.4499998092651
+			],
+			"bounds_size": [
+				1.0,
+				1.22508633136749,
+				0.100000381469727
+			],
+			"cell": [
+				8,
+				15
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "random_edge_profile"
+		},
+		{
+			"bounds_position": [
+				13.8599996566772,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.27999973297119,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				15.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:random cubes"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				20.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.58000004291534,
+				22.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				28.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.00899999961256981,
+				1.58000004291534,
+				12.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				19.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				20.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				22.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				28.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.00899999961256981,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				21.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				9.27499961853027,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				2.27500009536743,
+				2.91000008583069,
+				26.9169998168945
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				3.0,
+				27.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				0.00499998452141881,
+				2.05920004844666,
+				11.3092002868652
+			],
+			"bounds_size": [
+				0.0300000160932541,
+				0.381599903106689,
+				0.381599426269531
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.0199999995529652,
+				2.25,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				-0.025000024586916,
+				1.38500010967255,
+				27.9599990844727
+			],
+			"bounds_size": [
+				0.0510000437498093,
+				0.629999995231628,
+				1.08000183105469
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.0,
+				1.70000004768372,
+				28.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				4.27500009536743,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.75,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				1.40999948978424,
+				4.32000017166138,
+				0.25
+			],
+			"bounds_size": [
+				0.180001020431519,
+				0.0799999237060547,
+				20.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.5,
+				4.3600001335144,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_position": [
+				1.0,
+				-0.0500000007450581,
+				1.0
+			],
+			"bounds_size": [
+				1.0,
+				0.0500000007450581,
+				1.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.5,
+				0.0,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "floor_grate"
+		},
+		{
+			"bounds_position": [
+				0.279999971389771,
+				0.550000011920929,
+				23.1837997436523
+			],
+			"bounds_size": [
+				0.287999987602234,
+				0.600000083446503,
+				0.616201400756836
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.280000001192093,
+				0.850000023841858,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				4.97428369522095,
+				0.419999957084656,
+				23.0550956726074
+			],
+			"bounds_size": [
+				1.05654239654541,
+				1.66000020503998,
+				0.922483444213867
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.419999986886978,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				170.177658081055,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				8.98538684844971,
+				0.419999986886978,
+				2.94515419006348
+			],
+			"bounds_size": [
+				1.02922630310059,
+				1.46083664894104,
+				1.10969161987305
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.419999986886978,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				174.883316040039,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				2.81774258613586,
+				0.419999986886978,
+				22.8557167053223
+			],
+			"bounds_size": [
+				1.36451458930969,
+				1.46588683128357,
+				1.28856658935547
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.419999986886978,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				170.619338989258,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				5.9730806350708,
+				0.419999986886978,
+				19.9590320587158
+			],
+			"bounds_size": [
+				1.24192428588867,
+				1.57950413227081,
+				1.10917472839355
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				143.251815795898,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"capped_chain": {
+		"armed": false,
+		"capped": true,
+		"chain": [
+			6,
+			6,
+			6,
+			6,
+			6
+		],
+		"closed": false,
+		"height": 2.7,
+		"max_throws": 5,
+		"total": 30,
+		"worked_example": [
+			6,
+			6,
+			3
+		]
+	},
+	"checks": [
+		{
+			"name": "continuing die loaded through registry",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "intended side placement",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "earlier primary encounters retained",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "live empty; worked example is separate",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: empty",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "first six keeps chain open",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: six",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical 6+6+3 closes at fifteen",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: fifteen",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "museum new-chain button clears live only",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "physical museum face 6",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "fifth six remains unfinished at display limit",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "camera retained: unfinished",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"complete_chain": {
+		"armed": false,
+		"capped": false,
+		"chain": [
+			6,
+			6,
+			3
+		],
+		"closed": true,
+		"height": 1.35,
+		"max_throws": 5,
+		"total": 15,
+		"worked_example": [
+			6,
+			6,
+			3
+		]
+	},
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [
+		{
+			"collider": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "new die approach floor",
+			"top": 0.000000379979610443115
+		}
+	],
+	"room": "Random_Cubes",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Random_Cubes/empty.png",
+		"res://ada_run/encounter_pilot/Random_Cubes/six.png",
+		"res://ada_run/encounter_pilot/Random_Cubes/fifteen.png",
+		"res://ada_run/encounter_pilot/Random_Cubes/unfinished.png",
+		"res://ada_run/encounter_pilot/Random_Cubes/room.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				3.20000004768372,
+				0.000844888389110565,
+				4.29999923706055
+			],
+			"passed": true,
+			"tag": "approach continuing die",
+			"target": [
+				3.2,
+				0.1,
+				4.35
+			]
+		},
+		{
+			"end": [
+				7.73332786560059,
+				0.000170901417732239,
+				3.29999995231628
+			],
+			"passed": true,
+			"tag": "between original die and paired comparison",
+			"target": [
+				7.8,
+				0.1,
+				3.3
+			]
+		},
+		{
+			"end": [
+				7.80000019073486,
+				0.0000976547598838806,
+				7.53332948684692
+			],
+			"passed": true,
+			"tag": "onward route beside existing spawners",
+			"target": [
+				7.8,
+				0.1,
+				7.6
+			]
+		}
+	]
+}

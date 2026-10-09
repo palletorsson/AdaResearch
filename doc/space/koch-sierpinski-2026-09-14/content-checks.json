@@ -1,0 +1,21 @@
+{
+  "checks": 16,
+  "passed": [
+    "All ten existing tokens retained exactly once",
+    "Entire old 13\u00d711 structure retained at offset (3,18)",
+    "All three map layers are 19\u00d729",
+    "Three book anchors in encounter order",
+    "Primary roles and explicit order match anchors",
+    "Every unrelated role and ordering record preserved",
+    "Book cards and hero match",
+    "Every unrelated book pearl preserved",
+    "Every unrelated trunk and hand override preserved",
+    "Only this hall changed in ada_run/em_plan.json",
+    "Only this hall changed in commons/data/museum/em_plan.json",
+    "Active spine primaries match the book",
+    "Unrelated spine entries preserved",
+    "Registry changes are only the two measuring-bench availability flags",
+    "Previous reviews remain valid; next work is Menger",
+    "103-check runtime receipt still matches all recorded sources"
+  ]
+}

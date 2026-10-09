@@ -1,0 +1,53 @@
+--- before/Array/final.md
++++ current/Array/final.md
+@@ -1,18 +1,14 @@
+ # The same cube, counted
+ 
+-What remains at an address after its occupant has gone?
+-
+-This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company. We have made copies, placed them apart, and given each a number. What can we do with many that we could not do with one?
+-
+-Keep a position in mind while the thing occupying it disappears. Begin with the row before extending the same question across a grid.
++This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company: four copies, a metre apart, with a number above each one.
+ 
+ <!-- @row_3_x -->
+ 
+-Find the row of four cubes with labels above them. A second line across the hall counts another direction, with its numbers on plates at the cubes’ feet. Begin with the row whose labels hang above. Choose one cube and read its address before approaching it. Predict which entry in the accompanying table will change when your body collects the cube. Then make contact and compare the table with the space you remember.
++Look for the row with labels hanging above the cubes. A second line across the hall counts another direction, with its numbers on plates at the cubes’ feet.
+ 
+-The cube disappears. Its entry changes from one to zero, while the other entries keep their values. Point to the former position without relying on the cube to mark it. An empty slot can still have an address.
++Approach the cube marked [2]. It disappears on contact, taking its label with it. In the accompanying table, its value changes from one to zero. The cube marked [3] stays where it was. The row has a gap, and the count has not closed around it.
+ 
+-An array keeps values in an indexed sequence. In this row, the index identifies a slot and the value records whether its cube remains present. The number naming the slot and the number stored there do different jobs. Changing the stored value does not require renumbering every position after it.
++An array keeps values in an indexed sequence. The index names a slot; the value is what we store there. Slot two still exists. Its value is now zero, which this program uses to record that the cube has gone. The remaining entries keep their numbers.
+ 
+ The row begins in a loop. These lines from its builder create and place the copies; the surrounding code gives them labels and connects their collection:
+ 
+@@ -28,21 +24,21 @@
+ 
+ Look at the double brackets. The inner list holds four values; the outer list holds that one row. This is already an array inside an array. `array_data[0][i]` selects row zero, then entry `i` within it. In a moment, the grid will give us more rows to choose from.
+ 
+-The removal event supplies the update. This is a collection by contact; the exercise does not require carrying the cube somewhere else. The table knows that its occupant has left, without keeping a destination for it.
++The table has recorded your collection as an absence. It keeps no destination for the cube.
+ 
+ <!-- @grid_2d_4x4 -->
+ 
+-Now choose a cube in the grid. Its address stands on a small plate at its feet. Give its two indices to a companion, or say them to yourself before moving. Predict both the table entry that will change and what will remain readable after collection. Collect the cube, then locate the empty place again.
++In the square grid, each address stands on a small plate at its cube’s feet. Find [1, 2] and approach. The cube disappears, but its plate remains. Its entry in the table is now zero; the floor still names the empty place.
+ 
+-Two indices distinguish positions along two directions. This grid writes them as [x, z] and stores the value as `grid_data[x][z]`: choose one row of values, then one entry inside it. Face the accompanying table. Its X indices run down the rows and its Z indices across the columns. The plate [1, 2] names the second row and third column, because both counts begin at zero. Find [2, 1] on the floor and in the table. The same numbers, exchanged, take you somewhere else.
++Two indices distinguish positions along two directions. This grid writes them as [x, z] and stores the value as `grid_data[x][z]`: choose one row of values, then one entry inside it. Face the accompanying table. Its X indices run down the rows and its Z indices across the columns. The plate [1, 2] names the second row and third column, because both counts begin at zero. At [2, 1], the same numbers exchanged take you somewhere else.
+ 
+-The grid adds a way of locating values, rather than a new kind of cube. A zero here means absence under this particular rule. In another array it could mean a measured quantity, a silent beat or a legitimate category. The data structure does not supply that meaning on its own.
++The grid adds a way of locating values, rather than a new kind of cube. A zero here means absence under this particular rule. In another array it could mean a measured quantity, a silent beat or a colour. The data structure does not supply that meaning on its own.
+ 
+ <!-- @ -->
+ 
+-Compare the two empty places. In the row, the cube took its label with it. In the grid, the plate still names the slot. Both tables record absence; the spaces give you different help in locating it. Ask a companion to name an empty slot without pointing, or turn away and find it again yourself. Which arrangement lets the address survive without depending on your memory?
++Turn back to the row. Its missing cube took its label with it. In the grid, the plate still names the slot. The data preserves both addresses. Whether you can find them again also depends on where we put their names.
+ 
+-Give an empty slot another meaning: a reserved place, a rest, something waiting to arrive. Does the zero distinguish any of those? The plate preserves where, while the stored value leaves why unresolved. Decide what additional record your chosen meaning would need.
++An empty place might be reserved for someone, left for a rest, or waiting for something to arrive. Here, the zero cannot distinguish those possibilities. The record keeps the address, but none of those reasons. They would need another value or another record.
+ 
+ The regular spacing helps you find a slot, but the address and the spacing are different decisions. We could place the same indexed cubes at unequal distances. An array needs a way to distinguish its entries; it does not require them to look alike, stand straight or remain occupied.
+ 

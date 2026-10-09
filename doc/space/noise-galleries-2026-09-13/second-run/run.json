@@ -1,0 +1,38 @@
+{
+  "started": "2026-09-13T08:49:06+02:00",
+  "finished": "2026-09-13T08:49:29+02:00",
+  "pid": 17764,
+  "exit": 1,
+  "checks": 81,
+  "failures": [
+    "NoiseColors3D pointer selects WHITE",
+    "NoiseColors3D sound stream is active for WHITE",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects PINK",
+    "NoiseColors3D sound stream is active for PINK",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects BROWN",
+    "NoiseColors3D sound stream is active for BROWN",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects BLUE",
+    "NoiseColors3D sound stream is active for BLUE",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects VIOLET",
+    "NoiseColors3D sound stream is active for VIOLET",
+    "NoiseColors3D status names sound and its separate source"
+  ],
+  "source_sha256": {
+    "ada_run/gallery_probe_base.gd": "6a44e0e24f582bd56b6404b029a57d07e54561c1c3832f348680a9f984fd98e3",
+    "ada_run/noise_galleries_extra.gd": "cd5b5f6873eaeb84bae6422e333bef47fa8cc4ef5cac43437bcf6db273580c79",
+    "commons/maps/Random_Noise_Types/map_data.json": "f6bac6ab11c77490be06be59427f68e616f53352f1bc8c791de6defb09881be9",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "algorithms/randomness/whitenoise/noise_gallery_console.gd": "1d8740c40054a52dac56c6dbda66b4838f6b983c6a2ff8cba50a5607c76d4589",
+    "algorithms/randomness/whitenoise/noise_spectrum_3d.gd": "a21f432f11c9010a799834306d4584181b0edb24ddc23a00eb7e8402c416b6cd",
+    "algorithms/randomness/whitenoise/white_noise_spectrum.gd": "bd40ba84af503e6d1bcc7392ef6ecf57f8fc1f1e054391093e6ef1067350ace9"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

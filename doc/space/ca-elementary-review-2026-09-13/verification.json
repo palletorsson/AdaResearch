@@ -1,0 +1,144 @@
+{
+  "checks": 30,
+  "passed": 30,
+  "results": [
+    {
+      "check": "all 70 original structure cells retained exactly",
+      "passed": true
+    },
+    {
+      "check": "all layers are 13 by 14",
+      "passed": true
+    },
+    {
+      "check": "both original artifacts retained",
+      "passed": true
+    },
+    {
+      "check": "study placed over retained pit without inferred plinth",
+      "passed": true
+    },
+    {
+      "check": "metre-sized console stands on the entrance rim",
+      "passed": true
+    },
+    {
+      "check": "level-floor route connects entry, console, orb and exit without crossing pits or raised tiers",
+      "passed": true
+    },
+    {
+      "check": "tall original cells remain below wall classification threshold",
+      "passed": true
+    },
+    {
+      "check": "book anchors, primary roles/order and book lines agree",
+      "passed": true
+    },
+    {
+      "check": "roles preserved; no existing artifact demoted",
+      "passed": true
+    },
+    {
+      "check": "other book pearls unchanged",
+      "passed": true
+    },
+    {
+      "check": "restored hall follows introduction in seven-hall active declaration",
+      "passed": true
+    },
+    {
+      "check": "all other declaration entries preserved",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json: CA route matches declaration",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json: placement derived from source map",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json: normalization preserves authored geometry and placements",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json: only insertion and CA ordering metadata changed",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: CA route matches declaration",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: placement derived from source map",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: normalization preserves authored geometry and placements",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: only insertion and CA ordering metadata changed",
+      "passed": true
+    },
+    {
+      "check": "shared solver, defaults and mould DNA unchanged outside opt-in mount",
+      "passed": true
+    },
+    {
+      "check": "original structure scene and baked geometry unchanged",
+      "passed": true
+    },
+    {
+      "check": "study explicitly clears both boundary buffers after seeding",
+      "passed": true
+    },
+    {
+      "check": "study delegates updates to retained solver without replacing the rule",
+      "passed": true
+    },
+    {
+      "check": "visual scale and mutable resources are local to the study",
+      "passed": true
+    },
+    {
+      "check": "VIEW changes rendering without advancing or seeding state",
+      "passed": true
+    },
+    {
+      "check": "book code block is an exact solver excerpt",
+      "passed": true
+    },
+    {
+      "check": "book code block is an exact solver excerpt",
+      "passed": true
+    },
+    {
+      "check": "CellularAutomata3D_Flexible.gd: GDScript grammar",
+      "passed": true
+    },
+    {
+      "check": "structure_study.gd: GDScript grammar",
+      "passed": true
+    }
+  ],
+  "godot_verified": true,
+  "headset_verified": false,
+  "runtime_status": "21 desktop checks passed, including five pointer controls and rendered captures. Route traversal and headset acceptance remain pending.",
+  "source_sha256": {
+    "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd": "c3b27501e0e265235567b5a7e4b5912f3e75032f609f3cb89193db6d5cd691e5",
+    "algorithms/cellularautomata/cellular_automata_3d/structure_study.gd": "78403288a3e253ef409d4d74eee34d4a1cdfbff2e09fc82dfaee571e7d7fd26f",
+    "commons/maps/CA_ElementaryRules/map_data.json": "2ca45cf62d98ce89102e93615b42aa4838f359face570373d7a99e91b46f7aaf",
+    "commons/maps/CA_ElementaryRules/final.md": "2638c5ee9765bb8da3c16c383f559b1b35eb7f09dee94dda64005c770c8f3f69"
+  },
+  "existing_global_diagnostics": [
+    "Tutorial_Disco ragged/mismatched layers",
+    "Noise_Inside_Noise utility dimensions differ",
+    "Existing cartridge-ledger drift elsewhere in museum_necklace output"
+  ],
+  "runtime_checks": 21,
+  "runtime_failures": [],
+  "single_update_ms": 144.051,
+  "runtime_source_receipt": "ada_run/ca-elementary-review-2026-09-13/run.json"
+}

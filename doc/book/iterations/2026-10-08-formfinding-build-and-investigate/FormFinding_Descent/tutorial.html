@@ -1,0 +1,105 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Choose the next address</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><article><h1>Choose the next address</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Objective function</li>
+<li>Finite-difference gradient</li>
+<li>Update rule</li>
+<li>Distinct stopping conditions</li>
+</ul>
+<p>At the large blue surface, press STEP and follow the gold point. The point changes address because a rule proposes another one. In Forces, a released body kept velocity. This search keeps no velocity: every accepted step replaces its two-number address.</p>
+<h2>What you bring</h2>
+<p>Keep the point class, Vector2 and Vector3, functions, conditionals and the controls from Forces. The displayed sphere is a marker here; its collider is disabled. A grabbable point would let a hand move the picture without changing the search address.</p>
+<h2>Build inside the museum</h2>
+<p>Reconstruct the STEP operation and both cost functions. The supplied display samples the same functions into a small surface; it does not decide the step. A Vector2 holds the search coordinates. Its second component becomes spatial Z when plotted; surface height shows cost.</p>
+<p>Save <code>01_descent.gd</code> beside the <a href="../../../doc/book/course/formfinding-shared-code.md">complete shared code</a>, on your existing <code>PointStudy</code> Node3D. The inspected working bay is hall-local <code>(10.5, 0, 6)</code> metres, floor level, upright, unit scale. The museum supplies the floor, camera, light, hands and button scene. The larger artifact remains available for comparison.</p>
+<h2>Complete code — 01_descent.gd</h2>
+<!-- student-code:01_descent.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+const Landscape = preload(&quot;landscape.gd&quot;)
+var address := Vector2(-2.8, -2)
+var rate := 0.7
+var tolerance := 0.08
+var valleys := false
+var steps := 0
+var status := &quot;READY&quot;
+var point: Node3D
+var readout: Label3D
+var terrain: MeshInstance3D
+
+func _ready() -&gt; void:
+    terrain = landscape_surface(valleys)
+    point = make_point(Vector3.ZERO, false)
+    point.scale = Vector3.ONE * 0.45
+    readout = caption(&quot;&quot;, Vector3(0, 2.0, 0))
+    button(&quot;STEP&quot;, Vector3(-0.55, 1, -1.65), step_once)
+    button(&quot;RESET&quot;, Vector3(0, 1, -1.65), restart)
+    button(&quot;SURFACE&quot;, Vector3(0.55, 1, -1.65), change_surface)
+    refresh()
+
+func step_once() -&gt; void:
+    if status not in [&quot;READY&quot;, &quot;STEPPING&quot;]:
+        return
+    var slope := Landscape.gradient(address, valleys)
+    if steps &gt;= 160:
+        status = &quot;STEP LIMIT&quot;
+    elif slope.length() &lt; tolerance:
+        status = &quot;SMALL SLOPE&quot;
+    else:
+        var proposed := address - rate * slope
+        if absf(proposed.x) &gt; 3 or absf(proposed.y) &gt; 3:
+            status = &quot;LEFT FRAME&quot;
+        else:
+            address = proposed
+            steps += 1
+            status = &quot;STEPPING&quot;
+    refresh()
+
+func restart() -&gt; void:
+    address = Vector2(-2.8, -2)
+    steps = 0
+    status = &quot;READY&quot;
+    refresh()
+
+func change_surface() -&gt; void:
+    valleys = not valleys
+    terrain.queue_free()
+    terrain = landscape_surface(valleys)
+    restart()
+
+func refresh() -&gt; void:
+    point.position = Landscape.plot(address, valleys)
+    readout.text = &quot;%s | step %d\nx %.2f  z %.2f | cost %.3f&quot; % [status, steps,
+        address.x, address.y, Landscape.cost(address, valleys)]
+</code></pre>
+<h2>landscape.gd — keep this for Annealing</h2>
+<!-- student-code:landscape.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+# The same two functions used by the hall's descent landscape.
+static func cost(p: Vector2, valleys: bool) -&gt; float:
+    if valleys:
+        return 0.08 * pow(p.x * p.x - 4.0, 2) + 0.25 * p.y * p.y + 0.15 * p.x
+    return 0.25 * p.length_squared()
+
+static func gradient(p: Vector2, valleys: bool) -&gt; Vector2:
+    var h := 0.03
+    var x := Vector2(h, 0)
+    var y := Vector2(0, h)
+    return Vector2(cost(p + x, valleys) - cost(p - x, valleys),
+        cost(p + y, valleys) - cost(p - y, valleys)) / (2.0 * h)
+
+static func plot(p: Vector2, valleys: bool) -&gt; Vector3:
+    return Vector3(p.x * 0.45, 0.9 + 0.12 * cost(p, valleys), p.y * 0.45)
+</code></pre>
+<h2>Read the operation</h2>
+<p>The bowl costs one quarter of x² + z². Its gradient is (x/2, z/2). The two-valley expression is the hall’s second authored landscape; it gives us two possible local arrivals. In landscape.gd, sample the cost 0.03 to either side of each coordinate and divide the difference by the full 0.06 separation. This estimates the slope of the cost function, not a normal read from the rendered mesh.</p>
+<p>Subtract rate × gradient to propose an address. The rate is a search step size, not seconds. STEP does one update. A small gradient, an exhausted budget and an out-of-frame proposal have different names. The last case retains the old address; it does not clamp the point onto the edge and pretend it has settled.</p>
+<h2>Predict, then change</h2>
+<p>On the bowl, predict the first step from (−2.8, −2) at rate 0.7: (−1.82, −1.3). Press STEP once and read it. Set rate to 5 and restart: the first proposal leaves the frame, so the point must stay at its start. These outcomes test the operation and the boundary separately.</p>
+<h2>Build another experiment</h2>
+<p>Make a second search beginning at (2.8, −2). Give it its own address, step count and status. Use the same two-valley function and rate 0.2 for both searches. Predict whether they finish together. Record their final costs and stopping reasons. A single shared STEP button can call each search once; do not share the mutable address. Explain why two SMALL SLOPE messages need not identify the same result.</p>
+<h2>Carry onward</h2>
+<p>You now have an objective, a proposed change and a reason to stop. Keep landscape.gd: Annealing will revisit this exact landscape with another proposal and acceptance rule.</p>
+<h2>Model notes</h2>
+<p>The hall adds RUN, three starts, rate and tolerance controls, a history and explanatory boards. This study keeps STEP, RESET and two surfaces. Small slope is a local observation; no code here proves a global minimum.</p></article></main>

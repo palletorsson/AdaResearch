@@ -1,0 +1,83 @@
+{
+  "edits": [
+    {
+      "title": "Stand on inherited work, without a clear view",
+      "incitement": "Palle's image of shoulders and fog gives borrowing both support and obscurity. Place it where the reader has seen one line of code but has not opened the machinery that makes its answer visible.",
+      "old": "We have read the line that asks for that number. Much of the code making it readable remains unopened.",
+      "new": "We have read the line that asks for that number. Much of the code making it readable remains unopened. It is like standing on the shoulders of giants in fog: other people's work has brought us here, but height alone does not give us a clear view.",
+      "purpose": "Let inherited capability and incomplete understanding coexist in a concrete reading situation.",
+      "reader_move": "Read one operation while recognizing how much still supports its appearance.",
+      "why_here": "The counter has just become partly intelligible; the next encounter will tempt us to follow its beginnings.",
+      "without": "Borrowing has practical and historical dimensions but lacks this image of support without an unobstructed view.",
+      "evidence": [
+        "counter",
+        "counter-scene",
+        "seed"
+      ],
+      "assessment": "interpretive"
+    },
+    {
+      "title": "Let the pickup disclose the changing body",
+      "incitement": "Move from the invitation to hold the point into a repeatable action, allowing surface and label to become separate things to notice.",
+      "old": "The dark point offers itself to your hands. Pick it up. Follow it a little to one side, then back. Its appearance can change as you handle it; successive pickups also cycle its coordinate display through several formats, including one that hides the label.",
+      "new": "The dark point offers itself to your hands. Pick it up. Move it a little to one side, then back. Its surface changes when you take hold. Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address.",
+      "purpose": "Invite the reader to carry and pick up the point again, noticing that its surface and printed address have separate behaviors.",
+      "reader_move": "Hold, move, put down and take hold again.",
+      "why_here": "After the code screen's separate example, the visitor can now handle an artifact whose response is implemented.",
+      "without": "The first invitation describes capabilities without giving a way to compare successive pickups.",
+      "evidence": [
+        "body",
+        "pickup-labels",
+        "pickup-morph"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Distinguish seeing from holding",
+      "incitement": "The visible sphere and the grabbable object require different parts of the implementation. This is a specific way to ask what a body needs in this world.",
+      "old": "A mathematical point specifies a location without extension.[^point-one-euclid] This artifact gives it a sphere, a collision shape and ways to respond. Those additions let us meet it through movement. They also give it possibilities that a position alone does not have.",
+      "new": "A mathematical point specifies a location without extension.[^point-one-euclid] Here, a sphere makes the position visible. A collision shape and pickup code make the artifact available to your controller. Seeing it and being able to hold it are different things the program has to arrange.",
+      "purpose": "Separate the visible representation from the machinery that permits interaction without reducing the encounter to a component inventory.",
+      "reader_move": "Reconsider what has been added to a position to make this particular body visible and available to a hand.",
+      "why_here": "The visitor has been invited to pick it up; the distinction now has an action to explain.",
+      "without": "Surface, collision and responsiveness arrive as an undifferentiated bundle.",
+      "evidence": [
+        "pickable-body",
+        "body"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Give the printed stillness a numerical example",
+      "incitement": "The rounding rule becomes graspable when two distinct values produce the same printed number. What the card omits also makes it easier to read.",
+      "old": "`%.2f` rounds each component to two decimal places in the text. The stored position is left alone. The card has made the location easier to read by allowing several nearby positions to share a printed address. The apparent stillness belongs to that report.",
+      "new": "`%.2f` rounds each component to two decimal places in the text: `1.231` and `1.234` both print as `1.23`. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.",
+      "purpose": "Make the difference between stored movement and displayed coordinates explicit with two values that share one report.",
+      "reader_move": "Compare the moving point with the rounded address and understand why their changes need not coincide.",
+      "why_here": "The reader has just encountered the formatting code and a possible discrepancy on the card.",
+      "without": "The rounding operation remains correct but less immediately imaginable.",
+      "evidence": [
+        "format"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Name both references",
+      "incitement": "Explain what WORLD means before comparing it with LOCAL; two addresses become a relation the reader can follow rather than two unexplained labels.",
+      "old": "The frame has its own origin, orientation and scale. Its script uses `to_local()` to express a world position relative to that frame. The `LOCAL` card prints that address beside `WORLD`: the same place measured from different references. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.",
+      "new": "`WORLD` measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses `to_local()` to express that same position relative to the frame. The `LOCAL` card prints the result beside `WORLD`. The numbers differ because they answer to different references. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.",
+      "purpose": "Identify the scene and the coloured frame as two coordinate references for the same point, then reconnect to the invisible point's local address.",
+      "reader_move": "Read each card with its reference and carry the earlier local-coordinate lesson forward.",
+      "why_here": "Both cards have been introduced and the coloured guides now expose the frame they depend on.",
+      "without": "WORLD can sound like an unqualified universal address while only LOCAL is explained.",
+      "evidence": [
+        "paired",
+        "local-card",
+        "frame-placed",
+        "frame",
+        "reference-pair"
+      ],
+      "assessment": "grounded"
+    }
+  ]
+}

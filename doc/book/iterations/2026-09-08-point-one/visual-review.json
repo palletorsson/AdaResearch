@@ -1,0 +1,87 @@
+{
+  "scope": "Inspection of actual Point_One museum output rendered with Godot 4.6 Forward+. Cameras are detached inspection cameras; movement uses the actual em_walker with museum input/catch logic paused. These checks do not establish continuous gameplay, button reach, grabbing input, headset usability or learner acceptance.",
+  "runtime_report": "ada_run/point_one_restoration/museum_report.json",
+  "runtime_checks_passed": 38,
+  "support_rays_passed": 3,
+  "short_approaches_passed": 2,
+  "source_manifest": "ada_run/point_one_restoration/museum_sources.json",
+  "input_drift": {},
+  "visual_findings": [
+    {
+      "artifact": "the_invisible_point",
+      "images": [
+        "invisible-present.png",
+        "invisible-absent.png"
+      ],
+      "result": "The stand-in is visible in the first image and absent in the second; the surrounding arrows, crossed lines and vitrine remain. The exhibit was paused only after naturally reaching each timer state to hold a still. Earlier isolated probe verifies unchanged FOCUS and transforms."
+    },
+    {
+      "artifact": "wireframe_threshold",
+      "images": [
+        "threshold-off.png",
+        "threshold-on.png",
+        "threshold-restored.png"
+      ],
+      "result": "The real em_walker enters and leaves the threshold by controlled move_and_slide. Matching camera images visibly show mode 0 normal, mode 4 wireframe, then mode 0 restored. Entry and exit horizontal errors were below 0.06 m and walker remained on the floor.",
+      "capture_limitation": "Revised matching camera clears the large counter, though a nearby architectural panel still occludes the left portion. The actual wireframe transition and restored normal rendering remain clearly visible. Opening overview is a verification view, not a polished room portrait."
+    },
+    {
+      "artifact": "CoordinateSystem3M",
+      "images": [
+        "world-card-controlled.png"
+      ],
+      "result": "The actual frame selects its own FloatingPoint despite three coordinate points existing in the museum. Its physics-aware placement method moved that point from (6,1.4,14) to (6.4,1.6,13.7); the visible WORLD card reads x6.40/y1.60/z13.70. The point was restored afterwards. This is a method-level feed check, not a grabbing-input claim."
+    },
+    {
+      "artifact": "code_evolution_screen",
+      "images": [
+        "code-stage-1.png",
+        "code-stage-2.png",
+        "code-stage-three.png",
+        "code-stage-4.png",
+        "code-stage-5.png"
+      ],
+      "result": "All five revised on-screen code blocks and thinking bodies fit. Museum metrics measured code including line numbers at maximum466 by465 pixels within684 by614 visible pixels; thinking body maximum434 by396 within441 by510. Stage1 title was the sole remaining museum-layout failure. Renaming it Before a surface gives a one-line42px title and clears the fixed body start. All five stages then pass the same code/title/body bounds and title/body separation checks in the actual isolated screen scene at scale2.",
+      "gap": "No current text overflow or title/body overlap remains in the targeted screen check. Manual scrolling and pointer-button reach remain unverified; the current excerpts need no scrolling. Full illustrative programs remain in evolution.json full_code, not on the screen.",
+      "source_lines": [
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd:279",
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd:349",
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd:640",
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd:785"
+      ],
+      "capture_scope": "Stage1 PNG is from the isolated actual-screen scene after the title-only fix. Stage2–5 PNGs are from the actual museum before that title-only change. No museum rerun is claimed."
+    },
+    {
+      "artifact": "floating_sphere_field",
+      "images": [
+        "floating-field-front.png"
+      ],
+      "result": "The front view visibly contains luminous motes and shaded beads. Two live GPUParticles3D emitters contain13+5 particles, centred at(9.5,2.4,14.5) with configured emission half-extents(2.5,1.2,2.5).",
+      "capture_limitation": "The originally requested rear camera produces a blank dark view; the side camera is partly occluded by architecture. These are unsuitable evidence of artifact absence. The front camera at(9.5,1.7,9.5) is usable."
+    },
+    {
+      "artifact": "lobby:view",
+      "images": [
+        "lobby-window-front.png"
+      ],
+      "result": "Front view visibly shows nested square frames through the window. The requested diagonal view includes a large adjacent wall plaque; the front camera at(7.5,1.7,-1) makes the view clearer."
+    }
+  ],
+  "log_notes": "Museum stamping emits Viewport Texture must be set warnings at _stamp_inner:12856, but the code and thinking panels subsequently render. Other boot warnings are recorded in museum_stdout.log. No source scripts, registry, maps, book or global controls were edited by this scoped probe.",
+  "runtime_checks_total": 39,
+  "historical_runtime_failure": "stage_1_display_fits: title wrapped to two lines and overlapped the body by 14 pixels.",
+  "final_outcome": "All museum behaviour, presence, feed, support and approach checks passed. Museum render found one stage1 title overlap after the shortened code excerpts resolved code clipping. Only that title changed to Before a surface. A subsequent isolated actual-screen Forward+ check passes the same bounds/separation measurements for all five stages. The museum was not rerun after the title change.",
+  "targeted_layout_report": "ada_run/point_one_restoration/screen-layout.json",
+  "targeted_layout_checks_passed": 5,
+  "targeted_layout_source_hashes": {
+    "commons/maps/Point_One/evolution.json": "055be926ac82f24c8212350fe2cd3b51ead16c638ca2e8e6e9742d38e3cd757f",
+    "commons/artifacts/code_evolution_screen/code_evolution_screen.gd": "f330ca974c4e197e725c26a27762cf7f48c97596b91e6214b512b6062321e640",
+    "commons/artifacts/code_evolution_screen/code_evolution_screen.tscn": "d88222725a8edf6613897c61f8b84fca15bc4c0efad41f878e4fe024520833e1",
+    "ada_run/point_one_restoration/screen_layout.gd": "6f07baccf4f2c4b9e447c7aa04cd86ca0a2a6d7702d3d574588bdef7efb908fd",
+    "ada_run/point_one_restoration/run_screen_layout.py": "5c6a69884aee3940a80938e8532663d7587d41d7fa3ff913c6696cdf375851c4"
+  },
+  "historical_before": [
+    "ada_run/point_one_restoration/before_excerpt_fit/",
+    "ada_run/point_one_restoration/before_title_fit/"
+  ]
+}

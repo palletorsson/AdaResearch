@@ -1,0 +1,1321 @@
+{
+  "date": "2026-10-04",
+  "scope": "Current tutorial.md only; source chapters unchanged",
+  "counts": {
+    "sequences": 25,
+    "halls": 207,
+    "files": 197,
+    "prose_words": 76588,
+    "code_blocks": 712
+  },
+  "missing": [
+    "Array",
+    "Ribbon_Patterns_01",
+    "Ribbon_Patterns_02",
+    "Ribbon_Patterns_03",
+    "Shader_01_Shaping",
+    "Shader_11_QueerRubber",
+    "Shader_09_FBM",
+    "Shader_10_ReactionDiffusion",
+    "LSystems_Shape_Grammars",
+    "ISO_RhizomeBody"
+  ],
+  "explicit_intent_files": [
+    "Primitives_Columns",
+    "Primitives_Godot",
+    "Primitives_Profiles"
+  ],
+  "sequences": [
+    {
+      "id": "primitives",
+      "title": "Primitives: Points Build Worlds",
+      "halls": 15,
+      "files": 15,
+      "prose_words": 7537,
+      "code_blocks": 48
+    },
+    {
+      "id": "transformation",
+      "title": "Transformation: What Stays the Same When Everything Changes",
+      "halls": 7,
+      "files": 7,
+      "prose_words": 4338,
+      "code_blocks": 43
+    },
+    {
+      "id": "array_tutorial",
+      "title": "Arrays and Regularity",
+      "halls": 5,
+      "files": 4,
+      "prose_words": 766,
+      "code_blocks": 9
+    },
+    {
+      "id": "color",
+      "title": "Color and Composition",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 3590,
+      "code_blocks": 8
+    },
+    {
+      "id": "tiling",
+      "title": "Patterns: Dress the Architecture",
+      "halls": 8,
+      "files": 5,
+      "prose_words": 1488,
+      "code_blocks": 0
+    },
+    {
+      "id": "change",
+      "title": "Change: Rate, Accumulation, and Flow",
+      "halls": 2,
+      "files": 2,
+      "prose_words": 1513,
+      "code_blocks": 2
+    },
+    {
+      "id": "forces",
+      "title": "Vectors & Forces: From Direction to Dynamics",
+      "halls": 13,
+      "files": 13,
+      "prose_words": 7038,
+      "code_blocks": 5
+    },
+    {
+      "id": "formfinding",
+      "title": "Form Finding: Rules, Constraints and Possible Shapes",
+      "halls": 6,
+      "files": 6,
+      "prose_words": 2055,
+      "code_blocks": 38
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Wavefunctions: What Returns",
+      "halls": 12,
+      "files": 12,
+      "prose_words": 5943,
+      "code_blocks": 98
+    },
+    {
+      "id": "randomness",
+      "title": "Randomness: What Can Chance Change?",
+      "halls": 14,
+      "files": 14,
+      "prose_words": 7042,
+      "code_blocks": 93
+    },
+    {
+      "id": "noise",
+      "title": "Noise: Fields and Possible Bodies",
+      "halls": 9,
+      "files": 9,
+      "prose_words": 3004,
+      "code_blocks": 15
+    },
+    {
+      "id": "shaders",
+      "title": "Shaders: What a Surface Answers To",
+      "halls": 6,
+      "files": 2,
+      "prose_words": 334,
+      "code_blocks": 2
+    },
+    {
+      "id": "cellularautomata",
+      "title": "Cellular Automata: Local Rules, Global Patterns",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 1944,
+      "code_blocks": 8
+    },
+    {
+      "id": "fractals",
+      "title": "Fractals: Rules, Scale and Room to Move",
+      "halls": 7,
+      "files": 7,
+      "prose_words": 1277,
+      "code_blocks": 8
+    },
+    {
+      "id": "lsystems",
+      "title": "L-Systems: Rules Grow Structure",
+      "halls": 8,
+      "files": 7,
+      "prose_words": 3871,
+      "code_blocks": 3
+    },
+    {
+      "id": "proceduralgeneration",
+      "title": "Procedural Generation: Rules Build Worlds",
+      "halls": 7,
+      "files": 7,
+      "prose_words": 3201,
+      "code_blocks": 7
+    },
+    {
+      "id": "softbodies",
+      "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+      "halls": 9,
+      "files": 9,
+      "prose_words": 3527,
+      "code_blocks": 8
+    },
+    {
+      "id": "isosurfaces",
+      "title": "Isosurfaces: Implicit to Explicit",
+      "halls": 13,
+      "files": 12,
+      "prose_words": 5692,
+      "code_blocks": 33
+    },
+    {
+      "id": "boolean_surfaces",
+      "title": "Boolean Surfaces: CSG as Composition",
+      "halls": 3,
+      "files": 3,
+      "prose_words": 1127,
+      "code_blocks": 3
+    },
+    {
+      "id": "swarmintelligence",
+      "title": "Swarm Intelligence: Where Coordination Lives",
+      "halls": 7,
+      "files": 7,
+      "prose_words": 1004,
+      "code_blocks": 49
+    },
+    {
+      "id": "machinelearning",
+      "title": "Machine Learning: What Changes, and Why?",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 1161,
+      "code_blocks": 56
+    },
+    {
+      "id": "graphtheory",
+      "title": "Graph Theory: What Connections Permit",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 1433,
+      "code_blocks": 55
+    },
+    {
+      "id": "foundationscrisis",
+      "title": "Foundations Crisis: The Limits of Formalization",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 2167,
+      "code_blocks": 63
+    },
+    {
+      "id": "qfeplaboratory",
+      "title": "QFEP Laboratory: The Formula Made Interactive",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 1720,
+      "code_blocks": 48
+    },
+    {
+      "id": "postfoundationscrisis",
+      "title": "Post-Crisis: Applied Limits",
+      "halls": 8,
+      "files": 8,
+      "prose_words": 3816,
+      "code_blocks": 10
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/curriculum_spine.json",
+      "sha256": "fea5f0a0ad98ce94fbd3f1651cf1e4c162c0aa5d677451ae2d70efaaa743bead"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-museum-tutorial-storyboards/route.json",
+      "sha256": "1c3daebd6f8b3c4effba8aecc47ad49d015f661a256bdaac0f251cde7f388d23"
+    },
+    {
+      "path": "commons/maps/sequences/primitives.json",
+      "sha256": "53863589fd4848ce3cf715e1f97af503ad4cfb8ad2fb601dd8424e1d053306dc"
+    },
+    {
+      "path": "commons/maps/Point_Zero/tutorial.md",
+      "sha256": "b21716490ad2c04b71ca4c5629c74f431a12743e7e09e8df39601de44a7e2be8"
+    },
+    {
+      "path": "commons/maps/Point_One/tutorial.md",
+      "sha256": "09979370381493e170ce349368ae4d3ec72286f6fd1b4d468dfa0680eb2039e2"
+    },
+    {
+      "path": "commons/maps/Point_Coordinates/tutorial.md",
+      "sha256": "dadad1eeb9fed1712cee562c5a323c1c84b5d59eb6db164a91e7749b9edb0fcb"
+    },
+    {
+      "path": "commons/maps/Point_Lines/tutorial.md",
+      "sha256": "b9cb2ff8a7e5cdc010feb904751e7efef526a92938d5d26d7e5e5617f01bf5b4"
+    },
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "8ad5211bab859c2a8fd86f60145624af9753bf818ed271a342d2e804bec0238f"
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/tutorial.md",
+      "sha256": "fa84848214727334d51c9f93b0034fd446c9d52fcfda411f3897aa66a785ebef"
+    },
+    {
+      "path": "commons/maps/Point_Triangle_Context/tutorial.md",
+      "sha256": "d4ac069e400c56a688ec9f535f718b4f379325e929d0ecf7139ce4d6c383d0eb"
+    },
+    {
+      "path": "commons/maps/Primitives_Polythedra/tutorial.md",
+      "sha256": "ddb38b5d620c27bd298b3127b699eeb7a606a1d57c54f35b8adf3c8d11a288e2"
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/tutorial.md",
+      "sha256": "f5a72009ec3bda3ab386639b11d56325e2385a15bbcbbb1bc2462ed4d3eb8601"
+    },
+    {
+      "path": "commons/maps/Primitives_Ignorance/tutorial.md",
+      "sha256": "9e06017ebbb5f2e33d6fa68411d809cc9848e0939213ffd0c74bb141cc9374bc"
+    },
+    {
+      "path": "commons/maps/Primitives_Godot/tutorial.md",
+      "sha256": "5dd8876659fcc0f9a2791094d0def4d3fc33f621a56426b6796d4ce7793e06ac"
+    },
+    {
+      "path": "commons/maps/Primitives_Columns/tutorial.md",
+      "sha256": "08164e6c0c203f9a914622509bc70312d11a5f640143d72dd703448432d2592b"
+    },
+    {
+      "path": "commons/maps/Primitives_Profiles/tutorial.md",
+      "sha256": "e8e82d47845d9c0d9cae29ffe6fcc640119bd36c98b307dc53924876bfe24c25"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/tutorial.md",
+      "sha256": "429ec13d403c517ee2997de773f2be6a54f650371b102ed0d6e6a3b326e0da73"
+    },
+    {
+      "path": "commons/maps/Primitives_Melencolia/tutorial.md",
+      "sha256": "67a1c2fb733b2b321de7daf0cc53909fd5b6dfe2c84e9dd35165c0f437990251"
+    },
+    {
+      "path": "commons/maps/sequences/transformation.json",
+      "sha256": "ac5dbeaddd09c23019ab09f75651b6837f7864ba5e0070f5e8a2310f401002b2"
+    },
+    {
+      "path": "commons/maps/Trans_Pre/tutorial.md",
+      "sha256": "26940be60bcb1b1e750ecf79596657d944d01ccb28a4f8ba70cc07af83847796"
+    },
+    {
+      "path": "commons/maps/Trans_Introduction/tutorial.md",
+      "sha256": "a459ee1dbb208c7469a840105e6b92a4896c2c355c5a4d66e761a7b8972dd44a"
+    },
+    {
+      "path": "commons/maps/Trans_Translation/tutorial.md",
+      "sha256": "c881a66a286d48ca60c21afe3878037ec2dba8e67fb53b40e0da7ba3ab23f6db"
+    },
+    {
+      "path": "commons/maps/Trans_Rotation/tutorial.md",
+      "sha256": "50b33d34a2d7a1ad58923f5d5f7b86a6584f328ccdac4003b1ebd1738774eb0a"
+    },
+    {
+      "path": "commons/maps/Trans_Scale/tutorial.md",
+      "sha256": "00f0c96e30ecc41f9acb5535cfdd5b43d831920d0d13b2b803111d1bd88c8795"
+    },
+    {
+      "path": "commons/maps/Trans_Body/tutorial.md",
+      "sha256": "8c406a71c19e38dd4151d0e66a594fc8d64afaa74fe359bc35c9f55f0c5aa29c"
+    },
+    {
+      "path": "commons/maps/Trans_Pit/tutorial.md",
+      "sha256": "f54f6b846cffcbbde844438a72f63644598939e0c2f804deab594564116de7ad"
+    },
+    {
+      "path": "commons/maps/sequences/array_tutorial.json",
+      "sha256": "b348c9466224ea96e8072f812b40aa8db50026b8970b05ecd265c10c52f5b70a"
+    },
+    {
+      "path": "commons/maps/Tutorial_3D/tutorial.md",
+      "sha256": "1b19132a2d35f55bcb299feaa766021600cfb5e829cead1c7ff60af08fab8a2a"
+    },
+    {
+      "path": "commons/maps/Tutorial_Tiling_Floor/tutorial.md",
+      "sha256": "01abf86bd51201f4b14c21d3808659dc18c11ff67ab016b2cbf582f3b3cf6e71"
+    },
+    {
+      "path": "commons/maps/Tutorial_Tiling_Walls/tutorial.md",
+      "sha256": "6c8d9f89eb734d8d487b4a5468a07352a661233bf085324cf2fd5d6218dbe21d"
+    },
+    {
+      "path": "commons/maps/Tutorial_Disco/tutorial.md",
+      "sha256": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e"
+    },
+    {
+      "path": "commons/maps/sequences/color.json",
+      "sha256": "840e9c82e8307c89a351ce2c6e4d685106204ab64a800bc20050f6e13679b148"
+    },
+    {
+      "path": "commons/maps/Color_Context_Placed/tutorial.md",
+      "sha256": "5d9fa6c924287e859c76db207f9597d52488f52b3620867da9c61b86791cd1f0"
+    },
+    {
+      "path": "commons/maps/Color_Flashlight/tutorial.md",
+      "sha256": "71c0c8088739464d2a96c5914a1716e8d4412c92dd5b39b2f6c50c7cb275fabe"
+    },
+    {
+      "path": "commons/maps/Color_Nails/tutorial.md",
+      "sha256": "5437ec1394fbec1f4c3c0f481e7d99bec52101c36cd449984a3439c8e48aeab4"
+    },
+    {
+      "path": "commons/maps/Color_Rainbow/tutorial.md",
+      "sha256": "fea9d131c3ca930dcb472f886e94ba40c25722bfe818e07b629158fd13870e5f"
+    },
+    {
+      "path": "commons/maps/Color_Pillar/tutorial.md",
+      "sha256": "6b8597c49a074760e92aef5df5007b9b2d947f5ca9da02d9a8d5f047a4161945"
+    },
+    {
+      "path": "commons/maps/Color_Grid_Pallet/tutorial.md",
+      "sha256": "d5f23fc0b70100417e7366de324e600e9dd238487a91a5ec048ae4ac9b91bbfb"
+    },
+    {
+      "path": "commons/maps/Color_Paint/tutorial.md",
+      "sha256": "6d2135389dea6fd8c8ad959f325faa563d86e1d816def3b9c5453b5c6a9ca10b"
+    },
+    {
+      "path": "commons/maps/Color_Walls/tutorial.md",
+      "sha256": "04bb373e9a49b6de7c059d12f4a724b1f9679315a5d477f6d7e939b19737ad86"
+    },
+    {
+      "path": "commons/maps/sequences/tiling.json",
+      "sha256": "db53f7c99eb95436d5ea67045cced31eb8c880f9ec2b1da3497cbe4dbbe64414"
+    },
+    {
+      "path": "commons/maps/Pattern_Disco/tutorial.md",
+      "sha256": "15ac946afdefde6e61975de525cb02dee025596be9f1d08d392a7363c1953e42"
+    },
+    {
+      "path": "commons/maps/Pattern_Foundry/tutorial.md",
+      "sha256": "018061a5b6cb9c17425afdff19f4e807102766deeeb7247a500f5e2fb02d8bb5"
+    },
+    {
+      "path": "commons/maps/Tutorial_Pattern/tutorial.md",
+      "sha256": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f"
+    },
+    {
+      "path": "commons/maps/Array_Patterns/tutorial.md",
+      "sha256": "f7e4eea41859a769da644fd8db45e307f464d1c873572a8aabbb031d3fb5aa1d"
+    },
+    {
+      "path": "commons/maps/Symmetry_Seventeen/tutorial.md",
+      "sha256": "a65fa4f95c20b54d3e22e9dafd23af32be54d44ebb21a7117385826248e35d8a"
+    },
+    {
+      "path": "commons/maps/sequences/change.json",
+      "sha256": "00c03e77b96aad6c6d199d5000762ffa8e4fc41c7bfed45864926dfe2be6219b"
+    },
+    {
+      "path": "commons/maps/Change_Intro/tutorial.md",
+      "sha256": "24c2e4cc6cbb615a08938c45ca415f8662887bb2c65f675131cad513c19743a5"
+    },
+    {
+      "path": "commons/maps/Flow_Field/tutorial.md",
+      "sha256": "2925f1d75d727a12e67d3bb09f7c43f6c62b14c2f8923b38fab1777fa395f50e"
+    },
+    {
+      "path": "commons/maps/sequences/forces.json",
+      "sha256": "28846ec1e58b7286b392dab1eb62a17afd05abb2c0ff9433659a8a5e6167d047"
+    },
+    {
+      "path": "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+      "sha256": "b368f48852f57b52bc2fd595379995e075c088e535ce0137ec080f7e8fb03abe"
+    },
+    {
+      "path": "commons/maps/VFM_02_Operations/tutorial.md",
+      "sha256": "0b080b8614d41adfd9595d10e097c3ab71e8b95e3a07b8fe4fea66467de2154b"
+    },
+    {
+      "path": "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+      "sha256": "eba407a6dbff63d05af16d4cbfda0f4c44588a0e8e14b7579d103d9f9ca2fbbe"
+    },
+    {
+      "path": "commons/maps/VFM_05_Launch/tutorial.md",
+      "sha256": "829513da55c12ee2399d84860e0f8361b551417979d6451f457fd1a3086d3a57"
+    },
+    {
+      "path": "commons/maps/VFM_03_Motion/tutorial.md",
+      "sha256": "356bae8ebb7f7ec4b699bc0782292c1b14586200c5e064a010edfe6d6c75c336"
+    },
+    {
+      "path": "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+      "sha256": "3149384db6890fd55f649be165450c18fecd41fe76b0cd02de528774b691f6e0"
+    },
+    {
+      "path": "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+      "sha256": "1a2e94a94cf086ecccfc6122b65a13e4dd1d02aaa152ff5aae89da98ad0f3db3"
+    },
+    {
+      "path": "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+      "sha256": "3d81aef75d088c15a002bffa638696e7e0d4caa15bec8c655f4560596be73441"
+    },
+    {
+      "path": "commons/maps/Change_Choreography/tutorial.md",
+      "sha256": "fd1e553c324e8169a2c6a586134d9bf871c310019d54219047ba873b53ef91a4"
+    },
+    {
+      "path": "commons/maps/VFM_07_Gravity/tutorial.md",
+      "sha256": "229e4c2018a9a2f9e70264df1dbb0b742e04cb6d1c1796aaf86b036d3ad7c01d"
+    },
+    {
+      "path": "commons/maps/VFM_09_Legs/tutorial.md",
+      "sha256": "da23a1a2657821c110122b977727e5174e4d2b7fde088c5746a2aafd031d7bcf"
+    },
+    {
+      "path": "commons/maps/VFM_08_Arena/tutorial.md",
+      "sha256": "1852042d465d22bcdb552ef23f5d3d2b9032fef2fb92f885c52dabecb29dc170"
+    },
+    {
+      "path": "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+      "sha256": "f3b2815aed203bfac23137f6aafda9687fe615e1c76b910f8ee8193d5b7d50a6"
+    },
+    {
+      "path": "commons/maps/sequences/formfinding.json",
+      "sha256": "348678399e5d4091664db3d4608e38d1401997788838be8d3dd05e6ff73b8d7b"
+    },
+    {
+      "path": "commons/maps/FormFinding_Descent/tutorial.md",
+      "sha256": "cad3c6072ed8a3902c62b58471c2b9047f46582e32fb9a1c6fdc5edffa52ed34"
+    },
+    {
+      "path": "commons/maps/FormFinding_Catenary/tutorial.md",
+      "sha256": "97e38631df61b7be846e4a34fc855102f9bb7fb1db07ed24ecac8e91df58bbcf"
+    },
+    {
+      "path": "commons/maps/FormFinding_Relaxation/tutorial.md",
+      "sha256": "21075942806c3dc35a8637d4aa9b0934215fce49b47c929e9c29a98e0735b56c"
+    },
+    {
+      "path": "commons/maps/FormFinding_Equilibrium/tutorial.md",
+      "sha256": "d6445e539295fddd8603899affa20d426b28207c2714015e91de7f2d4bb6f8e8"
+    },
+    {
+      "path": "commons/maps/FormFinding_Annealing/tutorial.md",
+      "sha256": "bb415e56210542a17e7ec8f33b9a87655f582e52fb976efc43272cbe6e70d545"
+    },
+    {
+      "path": "commons/maps/FormFinding_Forge/tutorial.md",
+      "sha256": "b1dbf107f0d779379783353f150b1536834dd31b662521b4eaae30162f3ae423"
+    },
+    {
+      "path": "commons/maps/sequences/wavefunctions.json",
+      "sha256": "f72def8880ce0eb186a0ce4cacd7eea2ffa61e0bc31cf27546f4c8b5ef04c2b9"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Intro/tutorial.md",
+      "sha256": "30b88139d316f3e005a3be0510afdadca0398cc04ed555e254109b3e7aa2bc97"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Pendulum/tutorial.md",
+      "sha256": "b261c85fb0e2da2a3f7fd825894935a5f2359e59446e5b0a28711a1ed368dc48"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Sine_Space/tutorial.md",
+      "sha256": "8deeb1bfc778887d4e0f754e50b1e5c74966d290b8e3a5dc60aa94eb3a83fc1d"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Unit_Circle/tutorial.md",
+      "sha256": "e6abbfbeb1f257508a12f28a16d53fba18961706ee487108493b2da168d6bb11"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md",
+      "sha256": "ea132a847b89577536ce332cf22024473674c25b93e567b34bd209f2ba7ec4cf"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Effect_Sound/tutorial.md",
+      "sha256": "6ad751ca5b04488568ae30007443c6401663cad5f3df46b5f296106812da07ce"
+    },
+    {
+      "path": "commons/maps/Wavefunctions_Bernini/tutorial.md",
+      "sha256": "c1beb872bce14059745d3099d511b9f086d36b05685eaf3e94d6243eb68d5d9e"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_John_Cage/tutorial.md",
+      "sha256": "22b93edac5286e42cd34dd5b0ecfccbcfe1c0bc08d4083a2beef62069679eea1"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_AirMusic/tutorial.md",
+      "sha256": "8df5b66afff45a34cc52db63d9450158746512d08694f36bb622e060f8fd3794"
+    },
+    {
+      "path": "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md",
+      "sha256": "3db217b5f8aa6493f5f953e9e117488627168a6c63495e2523dd3da1166d6b12"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md",
+      "sha256": "7cb41471b219834ff0e6ea5d3b41b7ad58575a5a739ab7dd844376c10d7a186d"
+    },
+    {
+      "path": "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md",
+      "sha256": "90a24357f279a402506c28760fd2c2767d2b6e29c55c3711ae45906d6d11e986"
+    },
+    {
+      "path": "commons/maps/sequences/randomness.json",
+      "sha256": "74b9e787e59c10cdf09973ba5bc8e70643c3170744175518bce08986015b00b5"
+    },
+    {
+      "path": "commons/maps/Random_Definition/tutorial.md",
+      "sha256": "c571d270eae54eec460674eba3a2f28d28f410b723af209048fddd7052d2b75b"
+    },
+    {
+      "path": "commons/maps/Random_Entropy/tutorial.md",
+      "sha256": "f91de02a37537442212f8dd72548b20d4fc2334cb7f5982da3cc18212c0f6cb2"
+    },
+    {
+      "path": "commons/maps/Random_Remove/tutorial.md",
+      "sha256": "c49a94c85a290b34d16995f9a6ab99bac49d6006f014593dc2455e14f64b9995"
+    },
+    {
+      "path": "commons/maps/Randomness_10_PRINT_Algorithm/tutorial.md",
+      "sha256": "216a70a0dc7e89a4432f0cf3b233e0f6341b83275e622bde6a72a25d9089d0b8"
+    },
+    {
+      "path": "commons/maps/Random_Cubes/tutorial.md",
+      "sha256": "401f7f6fad6526de2200c89bb8404a9dfdebf1f8a760553f98ddb8172525d521"
+    },
+    {
+      "path": "commons/maps/Random_Rotate_Random_XYZ/tutorial.md",
+      "sha256": "875736a2eeb8185a5961ceca4c7b4e446f3ec0d717ecd8f1cfd98c4c0f9c6e59"
+    },
+    {
+      "path": "commons/maps/Random_Walk/tutorial.md",
+      "sha256": "b2f53600e75900cf09e10af90339171b79127b8ba3f0da997bae9183448cc5e5"
+    },
+    {
+      "path": "commons/maps/Random_Gaussian/tutorial.md",
+      "sha256": "a6d2616896a54f3a065106b3f268a3fac9597fe185d51ac9c2221ef63eaf3a52"
+    },
+    {
+      "path": "commons/maps/Random_Mushrooms/tutorial.md",
+      "sha256": "ca9e4319473514beca1354fea9658b549048e1c055ccb187a74ebeb8f33994e0"
+    },
+    {
+      "path": "commons/maps/Random_Space_Geometry/tutorial.md",
+      "sha256": "3f5c69f0f2bda0690f1cf5256976541651ceffabb84f2ea54d586467e0fac776"
+    },
+    {
+      "path": "commons/maps/Randomness_Examples_of_Randomness/tutorial.md",
+      "sha256": "d9affb2e22022ae1f3dbde60173831faca99e379d84529d585efc22694ce4135"
+    },
+    {
+      "path": "commons/maps/Random_Pheromone/tutorial.md",
+      "sha256": "b676cc2306b05ad989f61bb23cd8a995be98b77cf07b0c896bfb34304714800a"
+    },
+    {
+      "path": "commons/maps/Random_Space/tutorial.md",
+      "sha256": "dddd7802af308efdd58aeccc9c73c7b5d010556fbcb6ef3c4c5a4700179be475"
+    },
+    {
+      "path": "commons/maps/Random_Game/tutorial.md",
+      "sha256": "276d5ce1bf22b3cbd242c4a5cf3c729dbf279d2a440bf56485846caeb651e246"
+    },
+    {
+      "path": "commons/maps/sequences/noise.json",
+      "sha256": "8470c73f6617d144a1dfb7c7a3c3331a43465c5ae4b774cd05645c6c7b1c6fa7"
+    },
+    {
+      "path": "commons/maps/Random_Noise_Types/tutorial.md",
+      "sha256": "163b298b6635a0c7dcf9559f04ab1340997797f426ad860d82c2d8b5013716ad"
+    },
+    {
+      "path": "commons/maps/Noise_Columns/tutorial.md",
+      "sha256": "d355412e592bd1ce12b817813cdbadba898b1520c5cbe98637c371bb2220980a"
+    },
+    {
+      "path": "commons/maps/Noise_One/tutorial.md",
+      "sha256": "edc5e3e3513c85e57dae3a9da2b5723a8d4c133ee35896c0a19db0a4f78f7a5e"
+    },
+    {
+      "path": "commons/maps/Noise_Voxel/tutorial.md",
+      "sha256": "d9093e864f58b4a08efb716d40f97c04ad74f9e3fdc0d967a927529030954970"
+    },
+    {
+      "path": "commons/maps/Noise_6_Wall/tutorial.md",
+      "sha256": "f5d88a721f156a188e8a88d53d979d77b8bd177e2ca510ce5d43f59cda41236a"
+    },
+    {
+      "path": "commons/maps/Noise_Inside_Noise/tutorial.md",
+      "sha256": "30250ea507d5fd11ae6a14940f1072307431ca7c7222cf2f3b6bfe812e15286b"
+    },
+    {
+      "path": "commons/maps/Noise_Space_10/tutorial.md",
+      "sha256": "688ce88a941955476959263b4bbd0adfd6e26dd741693dcddd6645ca9323d493"
+    },
+    {
+      "path": "commons/maps/Noise_Perlin_Simplex/tutorial.md",
+      "sha256": "ee530387b4f4cd916cef850b06cda682fdf31f8d6fdd175795f9d9672aaf7b6d"
+    },
+    {
+      "path": "commons/maps/Lab_Path/tutorial.md",
+      "sha256": "503e1e799bbf3bc8ffa479e85f49764fb7f13a6a9d6783ae4e05c7b87d23a248"
+    },
+    {
+      "path": "commons/maps/sequences/shaders.json",
+      "sha256": "524828e8faede684aa46fb29b9549e4ddbfaab008c4beba5db441606ae16e2e3"
+    },
+    {
+      "path": "commons/maps/Shader_05_Patterns/tutorial.md",
+      "sha256": "3a5ff0a7ca5951de8ad87abc0e6c2100c8eca46613abdeffe74c5592f5a8a369"
+    },
+    {
+      "path": "commons/maps/Shader_12_PinkExtravaganza/tutorial.md",
+      "sha256": "9dec71f35a7dd289e9200a95d5ea23fc8fd27fecf6e5eb043dc7039a92cfd5d2"
+    },
+    {
+      "path": "commons/maps/sequences/cellularautomata.json",
+      "sha256": "304d37c6b6d23bda19b839db1fa89c01138eedc1dc3115346935d2b40c5d9eb1"
+    },
+    {
+      "path": "commons/maps/CA_Introduction/tutorial.md",
+      "sha256": "37521d24ffad695727280daede6c4aca5647a7b41b2926403a2a201b295e7a70"
+    },
+    {
+      "path": "commons/maps/CA_ElementaryRules/tutorial.md",
+      "sha256": "bf343458e2921f509d6ba3a688d307876758cb100857e4d08525e196d52f5a01"
+    },
+    {
+      "path": "commons/maps/CA_GameOfLife/tutorial.md",
+      "sha256": "3d18718dc0e230938b1ba1f0607d397324c86ee91980eda8fff3da7b226d280d"
+    },
+    {
+      "path": "commons/maps/CA_BeyondBinary/tutorial.md",
+      "sha256": "ca35168a96ad7cd6fe35ce0359ace18674ca929e5ae81dad693313415d9b320a"
+    },
+    {
+      "path": "commons/maps/CA_ExpandingSpace/tutorial.md",
+      "sha256": "3224d84bb4d7559940d6903b503480b193e084c75e03538f2076c6d0e706de2c"
+    },
+    {
+      "path": "commons/maps/CA_SoftRules/tutorial.md",
+      "sha256": "63d5b6050e9796e58d65dbdbdc9cc36d8060a91d9b510b42a2e379614ee761f8"
+    },
+    {
+      "path": "commons/maps/CA_AgentsCircuits/tutorial.md",
+      "sha256": "3cc0b60448466bb2c6b4d45d1f2e8e48510a7fdbb0837f31fb769728abd5d1a7"
+    },
+    {
+      "path": "commons/maps/CA_EdgeOfChaos/tutorial.md",
+      "sha256": "0ef11b0d73a32db7fe41b49519e97f93217bda1219eafd696920f11df13a50f3"
+    },
+    {
+      "path": "commons/maps/sequences/fractals.json",
+      "sha256": "98fc39595025112a2e130e6829c08efdf0558957d90d6794924ea33650925deb"
+    },
+    {
+      "path": "commons/maps/Fractal_Recursion/tutorial.md",
+      "sha256": "b158631c8da9c0a6bb6e631a6c82b1da652544d61c0965ee415e9a38084ca084"
+    },
+    {
+      "path": "commons/maps/Fractal_RecursiveTrees/tutorial.md",
+      "sha256": "0829d6a251a95ee6714f109e644439883c511ad2fb0549c77e9ad6bbb7b97e8d"
+    },
+    {
+      "path": "commons/maps/Fractal_CantorSet/tutorial.md",
+      "sha256": "3765e2ffbfd7ad33a978b6b4bd2dddaa287c44a5a04994ae1ee2f6680a264632"
+    },
+    {
+      "path": "commons/maps/Fractal_KochSierpinski/tutorial.md",
+      "sha256": "410e81ca8fbd0ad6ff3f6b7806068c0fa34d6ba878d07dd7081f142d7ab00447"
+    },
+    {
+      "path": "commons/maps/Fractal_MengerSponge/tutorial.md",
+      "sha256": "608ad52dbc823d46e0a08c5487f71a851a528658cd7719ad951b50cc7b4a0299"
+    },
+    {
+      "path": "commons/maps/Fractal_GoldenSpiral/tutorial.md",
+      "sha256": "36c0703668f45c6967c352c0b24918ddc786272cded0822312834665ad29732a"
+    },
+    {
+      "path": "commons/maps/Fractal_Synthesis/tutorial.md",
+      "sha256": "0e04185bc8f86aa0e8e3ecfd7fef93e570a0bada2e362dae640804e214d5e17e"
+    },
+    {
+      "path": "commons/maps/sequences/lsystems.json",
+      "sha256": "15bd18c674fb3557a0eb2a70c4f7055d37b8500c2a8591c1d73f7f4aea65674e"
+    },
+    {
+      "path": "commons/maps/LSystems_Grammar_Lab/tutorial.md",
+      "sha256": "ed37bd7d45875d7944efa08a70bf55198bf3e0a91b199b31ae8a8b0e64ac61fb"
+    },
+    {
+      "path": "commons/maps/LSystems_Growth/tutorial.md",
+      "sha256": "09eafb8d1d6493c907712fb67e0730ab29303f920bcf3a648eeafd6e086ae846"
+    },
+    {
+      "path": "commons/maps/LSystems_Grammars_And_Curves/tutorial.md",
+      "sha256": "24a6579ad8cdcfb10893d72f9f2dc22072aacf8e381206a9ac599c91df52e520"
+    },
+    {
+      "path": "commons/maps/LSystems_Architecture/tutorial.md",
+      "sha256": "410ea017149db708f03024c777108dd8d293a24ed335a3c090c9896904951bab"
+    },
+    {
+      "path": "commons/maps/LSystems_Competition/tutorial.md",
+      "sha256": "128ed34bf8b38575280310339a8ac593b2cff21c086d68a3a87d6f07694a302d"
+    },
+    {
+      "path": "commons/maps/LSystems_Living/tutorial.md",
+      "sha256": "a2684d9221599859ca02d42c298f636724f9cd6d32f72e5d3e66549094a07dd4"
+    },
+    {
+      "path": "commons/maps/Assemblage_Same_Desire/tutorial.md",
+      "sha256": "8a8c26ea9ca02a6d7f01f3e58bf7d5b7b4dcc7bdaddaf251b584953f7f516395"
+    },
+    {
+      "path": "commons/maps/sequences/proceduralgeneration.json",
+      "sha256": "4ef7fd9ed1f5e20216f46c486559d68eef1a20094b4fda84d41132be3b3f37d5"
+    },
+    {
+      "path": "commons/maps/PG_Genetic_Evolution/tutorial.md",
+      "sha256": "aacc24d94019a3ec0e339ba7950d4ec05ac1e771534461d1e4b511fa48803592"
+    },
+    {
+      "path": "commons/maps/PG_Space_Colonization/tutorial.md",
+      "sha256": "c370988b15ddecfd4ab91eff9aec0131b31923d262e43af7911138e8b4d8bc5f"
+    },
+    {
+      "path": "commons/maps/PG_Branching_Growth/tutorial.md",
+      "sha256": "efa3fdff551c5a82d95405508c2637e96d3b68f90d6bcba3f03b0c41e3984631"
+    },
+    {
+      "path": "commons/maps/PG_Percolation_Network/tutorial.md",
+      "sha256": "38314006f9d27d2c47e8557a093b17ae7f07da2b149b2ddcda7260e87ae72e38"
+    },
+    {
+      "path": "commons/maps/PG_Caves_Mazes/tutorial.md",
+      "sha256": "0a0caa296d4dd2183df37e7f43117d98f0bc5c5f6a6763aa734f01075f87b711"
+    },
+    {
+      "path": "commons/maps/PG_Sculpted_Forms/tutorial.md",
+      "sha256": "22865de81eb6a6ffb410cad0b7f36cd04eb5c41c237630bcfd32f5e732aa072f"
+    },
+    {
+      "path": "commons/maps/PG_Mirrored_Patterns/tutorial.md",
+      "sha256": "ff907bcf2cbbdca9f800475a5b87dbae70bf8d7baf3f156210c16bc9c8b162bd"
+    },
+    {
+      "path": "commons/maps/sequences/softbodies.json",
+      "sha256": "555f9c642a1cf6697a27a4746545f4b612287ae557670443319125fba4927edc"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Soft_Body_Deformation/tutorial.md",
+      "sha256": "8670dc42e23f751b906722c8899542812c94d47adc7f9264ea92a12f6c5bcdd3"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Cloth_Physics/tutorial.md",
+      "sha256": "4c6838de50c1f12f7ead733cc12f19bb78d718c2fde9d3bcdf80037ee36eb37a"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Carusell/tutorial.md",
+      "sha256": "7dc96ef18b5cc00d723455da380fb0eac9070dbccb0af0925cfc7d23c09ee653"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Obsticals/tutorial.md",
+      "sha256": "25c9ae21d70575a825ff48aea01e096efd9f1d26b648d159d1ed615cf14345ed"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Obsticals_Part2/tutorial.md",
+      "sha256": "ba4739c0a58508b4b16cefae6f4e5fa989152aac877bbe861f0fd14ebbff4e51"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Playground_of_Joy/tutorial.md",
+      "sha256": "20c1d41b622fa2ed5c7c43c720adbff6649a180aed7112f8d0719b199d06f21c"
+    },
+    {
+      "path": "commons/maps/SoftBodies_Affect_Theory_Visualization/tutorial.md",
+      "sha256": "501555c30ee23d56ea1dbd7f0aed22d80b3b5deba4252d3f59e7b9a186d9c5b5"
+    },
+    {
+      "path": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/tutorial.md",
+      "sha256": "5ad282f77e0ef9180cd8ccacd08a7dab9b23136628daa8b0ecc1d08809699c69"
+    },
+    {
+      "path": "commons/maps/Topology_Entropy_Morphogenesis/tutorial.md",
+      "sha256": "bb2cb018498374c834046903d3e663f9e2ffaf04a3ced632d5555e56d09185e7"
+    },
+    {
+      "path": "commons/maps/sequences/isosurfaces.json",
+      "sha256": "e0724f16ba868f9b81c96626ca9ec85f3d1b67ebd25f3b47522ab0127b7ac58b"
+    },
+    {
+      "path": "commons/maps/ISO_Introduction/tutorial.md",
+      "sha256": "a6fc9a42d7dbb2bb47e2846fb373f0cf28a5dffe2c096f3949d52d91be5a8e58"
+    },
+    {
+      "path": "commons/maps/ISO_LookupTable/tutorial.md",
+      "sha256": "b4c7fad9900781a8850d3303b763dc421c86b41732308a353aec6fcce608d149"
+    },
+    {
+      "path": "commons/maps/ISO_ShapesGallery/tutorial.md",
+      "sha256": "7cec856a7ca1d88a9380fd00101ccbf404dd604fd136bd9ddbf9e71749c6dbfe"
+    },
+    {
+      "path": "commons/maps/ISO_TorusGyroid/tutorial.md",
+      "sha256": "be2406169db2d10d9fe08b2f6a825aeed000c192f6700b9bfe19262b63b52512"
+    },
+    {
+      "path": "commons/maps/ISO_Sculpting/tutorial.md",
+      "sha256": "59d09eafa7034b1a317fec111cddf214e3b5704ba166e48936bfc76a3d935607"
+    },
+    {
+      "path": "commons/maps/ISO_FlatTerrain/tutorial.md",
+      "sha256": "3c043c81946d8977d6dd1d92c7c6bb915a6045e6e2dc51097676a64bce13044c"
+    },
+    {
+      "path": "commons/maps/ISO_PortalLandscape/tutorial.md",
+      "sha256": "0367b5222e877fcef574a15ce23bcb4182aa1c7f10f404e8498372be12a82644"
+    },
+    {
+      "path": "commons/maps/ISO_Caves/tutorial.md",
+      "sha256": "e5faebde69d63adf70b402386cc64ffb9ec288b3eb47dc23363e57136affb658"
+    },
+    {
+      "path": "commons/maps/ISO_CaveGeneration/tutorial.md",
+      "sha256": "76b9246651939eb106037584c072615a7eb57889269256d879e9f4eee2be1753"
+    },
+    {
+      "path": "commons/maps/ISO_AnimatedNoise/tutorial.md",
+      "sha256": "7c950f1f633d2b7ef648a56a99d481816af2addefa78d092a6004d9fd006bf5d"
+    },
+    {
+      "path": "commons/maps/ISO_Metaballs/tutorial.md",
+      "sha256": "dfc6b34e0d82a15beb1e04d2efebe290e725f648ec642b60a4d16eb7f3493436"
+    },
+    {
+      "path": "commons/maps/ISO_ImplicitModeling/tutorial.md",
+      "sha256": "7db74322e30ae6b398098bab840fef6a90082a730d12bfa4c3658cf8f0950360"
+    },
+    {
+      "path": "commons/maps/sequences/boolean_surfaces.json",
+      "sha256": "ef922f43044cb5268a8a38bd57136a53b87972fc14c8cb9718387f9eebc08e2f"
+    },
+    {
+      "path": "commons/maps/Boolean_Verbs/tutorial.md",
+      "sha256": "8d3786d8a85da2930472907a5ac32a54c1f91cb4164e76d7b7e9283c721df634"
+    },
+    {
+      "path": "commons/maps/Boolean_Gallery/tutorial.md",
+      "sha256": "c26f9248a3f0b2ff950ed3dce26cd3af6860991b351a499066d5c42a688021b6"
+    },
+    {
+      "path": "commons/maps/Boolean_Works/tutorial.md",
+      "sha256": "b18670f1c7aaa84842972157d15cf42b48499c9067267b414a3051a0b513d97e"
+    },
+    {
+      "path": "commons/maps/sequences/swarmintelligence.json",
+      "sha256": "71cd3680b239044ef8d9bb8e5ea8f3f2125e55edfb4a03c698eec737fe0ba24f"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md",
+      "sha256": "b22a782eb16982fc6753da6914876fed8f37b5b59754a6b6508137756a237b60"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_FlowFields/tutorial.md",
+      "sha256": "6a885701146cc2da11eefca6ecd336b99c7232f6839dd94b441c6de65bae98e3"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_Boids_Algorithm/tutorial.md",
+      "sha256": "eda0ddf7813ad1441ff1158cfc532ff4023f6b1964b61843627b526878183789"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/tutorial.md",
+      "sha256": "8b1e5a8e162a37979b40cb2405e4cf0a0710d943d11520cc17a2619d645d5215"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/tutorial.md",
+      "sha256": "b5cb71110e2c5568b7061bff76a1326a6d6e823b05d866d941178b91191722ea"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/tutorial.md",
+      "sha256": "dee67def74ffa896419a481e40786fa30aae2ac60f81504871ec778cfeb4894a"
+    },
+    {
+      "path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/tutorial.md",
+      "sha256": "6a3441d72bed94f715e909ec790f5de9edd684796d8b5fb8fb42ac6818d42e7c"
+    },
+    {
+      "path": "commons/maps/sequences/machinelearning.json",
+      "sha256": "2726a02dfbb1093c7b9a1c83ee023552bb5c7e3684aadfb833b4744fcac09afb"
+    },
+    {
+      "path": "commons/maps/ML_Evolution/tutorial.md",
+      "sha256": "88c2462b9dfaf0e77cbec65b9671fd9c6d303a0555cf96044dcfee51f612900f"
+    },
+    {
+      "path": "commons/maps/ML_Gradient_Landscape/tutorial.md",
+      "sha256": "f2e5f8daacbfc17a4971f8cbf74a5e82ddae91d84459e4c2dec9774aa21a8c4d"
+    },
+    {
+      "path": "commons/maps/ML_Classification/tutorial.md",
+      "sha256": "d500df467fcd4b28d8daa52d5cd3ee5311cd43a27200fb37462636f88def5338"
+    },
+    {
+      "path": "commons/maps/ML_Neural_Networks/tutorial.md",
+      "sha256": "36fd74a87b739c0e14d8088555c348e8dbce4727c0a39667af60fa3735f0bb3f"
+    },
+    {
+      "path": "commons/maps/ML_Perception/tutorial.md",
+      "sha256": "33d519bee127f122db995b408b82216f734f9192fe535324a080cf7c92565a75"
+    },
+    {
+      "path": "commons/maps/ML_Sequence_Memory/tutorial.md",
+      "sha256": "6b577ba77a20525c10967ff4431d2901dc0d03856e3895795b5dde565afd35b8"
+    },
+    {
+      "path": "commons/maps/ML_Generative/tutorial.md",
+      "sha256": "dda947611385f311e54aea4985c1632f45bfe5e4e725521acfe357a8299b906c"
+    },
+    {
+      "path": "commons/maps/ML_Synthesis/tutorial.md",
+      "sha256": "dc268840941f3bcaca095b4fd543cade660970d36768e5eac33454d645c6e1c0"
+    },
+    {
+      "path": "commons/maps/sequences/graphtheory.json",
+      "sha256": "4a52682d804f8a45472af41545017dadc8df46439db6d71fd6ce597d6cc75c58"
+    },
+    {
+      "path": "commons/maps/GT_Foundations/tutorial.md",
+      "sha256": "641051c0a43df4bb066a0693aa100e8c8bdb158363025b8b95e9897f375a9c41"
+    },
+    {
+      "path": "commons/maps/GT_Layout/tutorial.md",
+      "sha256": "b8627b6436074601670061ddd17707a5be479eada1b66c8a7dff45697799e922"
+    },
+    {
+      "path": "commons/maps/GT_Pathfinding/tutorial.md",
+      "sha256": "70c6254604df6dcc279b1312a2ce969f352be1404ab9bfcf279860c10d79dec9"
+    },
+    {
+      "path": "commons/maps/GT_Network_Analysis/tutorial.md",
+      "sha256": "3a79659f14fe1d92df33bc895a8dbe12dbb927d942ff300888b6a6554ab5e40e"
+    },
+    {
+      "path": "commons/maps/GT_Connectivity/tutorial.md",
+      "sha256": "2a12cf81c449f8db30ce971413f83dc3096001d4734ce3783b98ae6bcd725cd3"
+    },
+    {
+      "path": "commons/maps/GT_Spanning_Trees/tutorial.md",
+      "sha256": "12b30c7b206b0cc0959cc9818f7c4a7a1cda37d991f83cffc2f3f9213a670c35"
+    },
+    {
+      "path": "commons/maps/GT_Flow/tutorial.md",
+      "sha256": "79d80f2c6ea334af23f9f524fc197070aee02d5f39b017dea874b9803fdc2237"
+    },
+    {
+      "path": "commons/maps/GT_Matching/tutorial.md",
+      "sha256": "33188cf04180e47d581e305716bf8f0bb68e6548a546278c62329a92dd26a67f"
+    },
+    {
+      "path": "commons/maps/sequences/foundationscrisis.json",
+      "sha256": "6b0dfd00d8449c0a14fd767acd31a3fbdc66933859f6571b8ce28b1de1a2f1ee"
+    },
+    {
+      "path": "commons/maps/Euclid_Parallel/tutorial.md",
+      "sha256": "60e019244d1944053013c2ce3906eb1328df8d98a74fc95875af5e1522800da4"
+    },
+    {
+      "path": "commons/maps/NonEuclidean_Spaces/tutorial.md",
+      "sha256": "5d938705b88b0d453afa6fb0f3274b366625a0333e408775fe2ce6556eaf2088"
+    },
+    {
+      "path": "commons/maps/Russell_Paradox/tutorial.md",
+      "sha256": "0912483a9ee0438c7ec57e22a1535a2844cab868ddc8c2cb53cbb6870a4984ee"
+    },
+    {
+      "path": "commons/maps/Godel_Incompleteness/tutorial.md",
+      "sha256": "5b6a407cb3d5f8f73d37dbacd3e118180758d3f562f52980d0d5d5365883118c"
+    },
+    {
+      "path": "commons/maps/Escher_Impossible/tutorial.md",
+      "sha256": "130cbae1fbb8282e0a6e827fb25c8b4babfc26cf20a6e849917255160e8355df"
+    },
+    {
+      "path": "commons/maps/Brouwer_Intuitionism/tutorial.md",
+      "sha256": "6f501c6016892a07a24464413702cfba244b677131885629cc550365aebf3791"
+    },
+    {
+      "path": "commons/maps/Florensky_Paraconsistent/tutorial.md",
+      "sha256": "314c961c040f26f8d644221dd3626c270aa54f5748a14d060801e8fb565a17db"
+    },
+    {
+      "path": "commons/maps/Crisis_Synthesis/tutorial.md",
+      "sha256": "eea82b565777fa365f66d070e133bf82af5bee136b3746c28530c7248b0b5a9e"
+    },
+    {
+      "path": "commons/maps/sequences/qfeplaboratory.json",
+      "sha256": "0424d1a366076c798f26f5f67ca46d26858e55f15b02090df5017d942d0faf9f"
+    },
+    {
+      "path": "commons/maps/QFEP_Introduction/tutorial.md",
+      "sha256": "9efb04de6d91a1284bdc076218d51c63ef9bce508069fb4a44f224007e1cb53a"
+    },
+    {
+      "path": "commons/maps/QFEP_F_Term/tutorial.md",
+      "sha256": "e2e4e63a86d197a919afd7d2a948bd48f76f12f3fa3e6e2310c707487d9938fa"
+    },
+    {
+      "path": "commons/maps/QFEP_E_Term/tutorial.md",
+      "sha256": "56846b11195dd67c601143e793b11a7607043cecaef027898821c330004bfd01"
+    },
+    {
+      "path": "commons/maps/QFEP_Lambda_Spectrum/tutorial.md",
+      "sha256": "863857f858706675558d9cc81fde30b40a37edbce96ad6a8e578ac5a57536414"
+    },
+    {
+      "path": "commons/maps/QFEP_Phi_Term/tutorial.md",
+      "sha256": "49e45ffe1be85065354bd010e9c302adcb36b4a7376d2e0f82a1a2fd5205c12f"
+    },
+    {
+      "path": "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+      "sha256": "9b9676233da428a64b712b885f3e3a43ec6029a3604d0db5d55349c53de0fad0"
+    },
+    {
+      "path": "commons/maps/QFEP_Sandbox/tutorial.md",
+      "sha256": "579bf6fdd358c9e0a45cce7cbc5090c26336c8f09ca5ed11b660b1e8b0efab57"
+    },
+    {
+      "path": "commons/maps/QFEP_Synthesis/tutorial.md",
+      "sha256": "e1a6c16749ede887fcda934ac2ec3ab4045c744cf4b4390c6fd0a9b83a2ce3cf"
+    },
+    {
+      "path": "commons/maps/sequences/postfoundationscrisis.json",
+      "sha256": "08b30b68ac373fa7468a10539647906f9e58943c51d5bc336c0bd882827340ad"
+    },
+    {
+      "path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md",
+      "sha256": "377aaeaa29427c544136d23ed0ea35ec0c3c63c4a5dc918de28a58e43ccb3e05"
+    },
+    {
+      "path": "commons/maps/CriticalAlgorithms_Applied_Ethics/tutorial.md",
+      "sha256": "3c0d2db9874070ab41d0a37ff03a51ddf643cb58ff48a89f710b5949d88d452f"
+    },
+    {
+      "path": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md",
+      "sha256": "8045caa40402f27a28a32473728d2dad19fc4f5b438c60e8d0a86d1e6235e8fd"
+    },
+    {
+      "path": "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md",
+      "sha256": "cdc542de6b1003f3a6922e8b091a1de6d37f42085589c607d0ec854154d27a15"
+    },
+    {
+      "path": "commons/maps/SpeculativeComputation_Collective_Knowledge/tutorial.md",
+      "sha256": "7dcf9e1b1d250c25785a01a9920dee81dc7f3b9a73f2aec6870a0ff485d88ff3"
+    },
+    {
+      "path": "commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md",
+      "sha256": "afed59755295e8346767027a279bbb61ac854546017d69b0d2c4101a43c2297d"
+    },
+    {
+      "path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md",
+      "sha256": "0ee3296eadaa2756474dca21480ce7c81df1a16e3f781cdda54733d89d93fc31"
+    },
+    {
+      "path": "commons/maps/PostCrisis_Synthesis/tutorial.md",
+      "sha256": "a9b45074b6faf25dbdc2b54edb6a80b80a1210de8fd85f2224d4c563b5826c12"
+    }
+  ],
+  "references": [
+    {
+      "source": "doc/book/studies/ada-xr-starter/README.md",
+      "snapshot": "references/5b220525ba12-README.md",
+      "sha256": "577ff305271a56f8d00d0ed6095a6c877e70c7958d5571d5ad70728b8a238cab"
+    },
+    {
+      "source": "commons/maps/Primitives_Godot/summary.md",
+      "snapshot": "references/2d24e2607dc1-summary.md",
+      "sha256": "34117520dc62b441159bf4d894e39403f2b7da3e515a46a3593ff302cd298491"
+    },
+    {
+      "source": "commons/maps/Primitives_Columns/summary.md",
+      "snapshot": "references/2825d3a4c034-summary.md",
+      "sha256": "f48006865a597ba513f05281e4dab5984bcdc61a1369d23b66b6a40ca18e6b91"
+    },
+    {
+      "source": "commons/maps/Primitives_Ignorance/tutorial-column.md",
+      "snapshot": "references/12dee3b07b0a-tutorial-column.md",
+      "sha256": "8db60669639070ee6f4722f5d7fa37b732e0a9953b4a6d428e0831c0b735af78"
+    },
+    {
+      "source": "doc/book/course/storyboards/opening.json",
+      "snapshot": "references/f98cb77e992d-opening.json",
+      "sha256": "ea23743471363674595303cff9f98319b6b5fb8ed9358e226fcf8891dd748285"
+    },
+    {
+      "source": "commons/artifacts/ignorance_gallery/primitive_mesh_library.gd",
+      "snapshot": "references/80f2ad24fec0-primitive_mesh_library.gd",
+      "sha256": "7ea85abf75c079378e66c53c4e88d32fabed0fd10ac98f22140f317b3f1f2336"
+    },
+    {
+      "source": "commons/artifacts/seven_words_choir/seven_words_choir.gd",
+      "snapshot": "references/7f521545c592-seven_words_choir.gd",
+      "sha256": "c1bf7b62b101d9c41932fba88c3b451ac63539fab8c8650678b7008b6bbf9513"
+    },
+    {
+      "source": "commons/maps/Primitives_Profiles/summary.md",
+      "snapshot": "references/8190974622a9-summary.md",
+      "sha256": "2b1644238344473ebfdc59f253d01401e5bab5fc3391dcc2b92b0d33c17c4aaf"
+    },
+    {
+      "source": "doc/book/studies/glyph-form-atlas/README.md",
+      "snapshot": "references/4158fb9034bc-README.md",
+      "sha256": "7c7e02409a48e281b325242e7efe42ec3059bf7d5e2ce8b0a2c7ecb497995711"
+    },
+    {
+      "source": "commons/maps/Primitives_Portals/summary.md",
+      "snapshot": "references/c3ce869333cc-summary.md",
+      "sha256": "1b485b034cdfc366cbe487f91bb905bee36d41469ec020b7b1944768a1c8f316"
+    },
+    {
+      "source": "commons/maps/Primitives_Melencolia/tutorial-museum.md",
+      "snapshot": "references/6e8ea33def3b-tutorial-museum.md",
+      "sha256": "bf80d2c50ab4ad7c57d7839bd435697a97c93d72bc0b60901b504fffd7b246f3"
+    },
+    {
+      "source": "commons/maps/Trans_Pre/tutorial-sine.md",
+      "snapshot": "references/7fc616c22991-tutorial-sine.md",
+      "sha256": "ef55f410520fb6ac8a4f78206472f458a3e1b06828da77b6a4e2e5b8728b0262"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-change-reading/before/commons/maps/Change_Intro/final.md",
+      "snapshot": "references/37d943bf7764-final.md",
+      "sha256": "6fac9430d1e10d7c4d71f7e2d621b40bb50c3882456cd5dc595c7e9bff8eb296"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-change-reading/before/commons/maps/Flow_Field/final.md",
+      "snapshot": "references/59d1ad114061-final.md",
+      "sha256": "d85295e244d4fd227fa506ad3e5b56a4e7f52c8afc9194e6c2e2385d8a716524"
+    },
+    {
+      "source": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "snapshot": "references/22522fa2a271-final.md",
+      "sha256": "ca8fea625467648ac58d714696e5331a0d4eb320abb36e38eeb14940a143284c"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "snapshot": "references/a34724d7be38-final.md",
+      "sha256": "e270dec4f34a0a1894a148093a442442e33c12b2fbaa47b5b13392c3261c6606"
+    },
+    {
+      "source": "commons/maps/VFM_02_Operations/final.md",
+      "snapshot": "references/7d3617f4d409-final.md",
+      "sha256": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/VFM_02_Operations/final.md",
+      "snapshot": "references/48bc24288e61-final.md",
+      "sha256": "51edcafb21e713d250e36300b70e28d0f5ba8ee832c7804c723a6d4d7016cd9f"
+    },
+    {
+      "source": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+      "snapshot": "references/13a573654a9b-final.md",
+      "sha256": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+      "snapshot": "references/2f12e38c9614-final.md",
+      "sha256": "e283d7668d2284611d2bda617761dffc06c6fca82dcaa737443f06fdbb96ad71"
+    },
+    {
+      "source": "commons/maps/VFM_05_Launch/final.md",
+      "snapshot": "references/f73100ebe5b4-final.md",
+      "sha256": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-launch-and-motion/before/commons/maps/VFM_05_Launch/final.md",
+      "snapshot": "references/f23c65c142be-final.md",
+      "sha256": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458"
+    },
+    {
+      "source": "commons/maps/VFM_03_Motion/final.md",
+      "snapshot": "references/049a6c8f021f-final.md",
+      "sha256": "5c26fa4807d44fb4ee645cdae9f33e8f9a551506755fe30235b729af83679f9b"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-launch-and-motion/before/commons/maps/VFM_03_Motion/final.md",
+      "snapshot": "references/2061bc6ef92c-final.md",
+      "sha256": "4674c8b37c0f9b89097f43fea600ca1ae44adda04311fbcf8cd07bb584b01278"
+    },
+    {
+      "source": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+      "snapshot": "references/9e370ac97734-final.md",
+      "sha256": "9b080531fb62be6f8344fff1055290e3043e488bcbc1364105ae90ad0852c53b"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-24-field-and-receiver/before/commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+      "snapshot": "references/0904d90f0e7c-final.md",
+      "sha256": "3050d9438bf37064deb243305c9823223f87428dd6e2c73c2aab650efce8cea3"
+    },
+    {
+      "source": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+      "snapshot": "references/33cf1ccfeb97-final.md",
+      "sha256": "58549b1b4ace5e614fd34e36ef5e9c9879927f7f75dabdd5681f84829d99f079"
+    },
+    {
+      "source": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+      "snapshot": "references/252d26c2a259-final.md",
+      "sha256": "7959db17f9218184243a9b335a09a9ec9f53559b15e4a2eed9c6feab532c9492"
+    },
+    {
+      "source": "doc/book/iterations/2026-09-30-random-definition-making/random-definition-study.zip",
+      "snapshot": "references/1f7fd8ae27db-random-definition-study.zip",
+      "sha256": "bd9d33f233e622e073e63ec4a0b1d9919a1cd52ef9e57369374c012444873a63"
+    },
+    {
+      "source": "commons/maps/Random_Definition/technical.md",
+      "snapshot": "references/8d8036bc1ef0-technical.md",
+      "sha256": "e175b88f4918d4f649f33c904ff16d691b47ccb732a8044e4441b1074245d843"
+    },
+    {
+      "source": "doc/space/recursive-trees-2026-09-14/before/commons/maps/Fractal_RecursiveTrees/tutorial.md",
+      "snapshot": "references/a671cd5ac016-tutorial.md",
+      "sha256": "eacac9f9feb0b40b0588fd301ac5d211a427d8d8aaf90d71cd316fb4b94c50cd"
+    },
+    {
+      "source": "commons/artifacts/bias_from_inside/bias_from_inside.gd",
+      "snapshot": "references/59ee069a0415-bias_from_inside.gd",
+      "sha256": "5cc760d627b75c8f116ec8bdde9590f7cfb683da1c54f9764bf578d98199144a"
+    },
+    {
+      "source": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+      "snapshot": "references/cd6fe2d482c2-room_shape_demonstrator.gd",
+      "sha256": "85466e96de1ea25730c72d43d5b8bfbf030f1b66676153acb7730e145ec32174"
+    },
+    {
+      "source": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+      "snapshot": "references/347c4d40eee4-merge_conflict_visualizer.gd",
+      "sha256": "cd9ac2dc0f519b2afa9a7fa9655a6084858b9c10070e78a63deb3bccff0be0bb"
+    },
+    {
+      "source": "commons/artifacts/situated_readout/situated_readout.gd",
+      "snapshot": "references/ad0441551c3d-situated_readout.gd",
+      "sha256": "d0e9d3f7895f2ba053dd9f18375153498c1595bbc6516bdb2c26afa0edd4f8db"
+    },
+    {
+      "source": "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+      "snapshot": "references/2e3346087800-rhizome_grower.gd",
+      "sha256": "4d1273c16e09609993f3dac929e18d466e8bc57c83b8815d4aaf475c68abb5b7"
+    },
+    {
+      "source": "algorithms/computationalbiology/molecular_framework/Part.gd",
+      "snapshot": "references/d79b43c44cd7-Part.gd",
+      "sha256": "7ccac9d13132175280f733b08bdebfdbaaa19dd2d63ee4a13b6dc80011566fc2"
+    },
+    {
+      "source": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+      "snapshot": "references/af5a1b9d6e56-accountability_ledger.gd",
+      "sha256": "8793e87eabf70eb3248f878f2e0dda2b47bf04a6030728f22b2bd5fce470c9ad"
+    }
+  ],
+  "unresolved_references": []
+}

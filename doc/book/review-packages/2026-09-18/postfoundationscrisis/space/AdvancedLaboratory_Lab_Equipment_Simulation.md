@@ -1,0 +1,17 @@
+# AdvancedLaboratory_Lab_Equipment_Simulation
+
+Authored dimensions: {"width": 9, "depth": 8, "max_height": 2}
+
+![Source plan](AdvancedLaboratory_Lab_Equipment_Simulation.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json)
+
+Text: [commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 4,3 | `MolecularDesigner:90` | primary | [commons/artifacts/registry/computational_biology.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/computational_biology.json) → [algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

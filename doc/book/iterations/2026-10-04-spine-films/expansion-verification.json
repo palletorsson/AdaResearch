@@ -1,0 +1,212 @@
+{
+  "passed": true,
+  "new_films": 20,
+  "total_films": 46,
+  "films": [
+    {
+      "id": "cube_corner",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "body_aperture",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "door_routes",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "scale_children",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "disco_phase",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "gradient_paths",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "rainbow_partitions",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "flow_lookup",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "torque_purchase",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "catenoid_sections",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "circle_projection",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "prng_register",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "noise_relief",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "shader_repeat",
+      "passed": true,
+      "seconds": 28.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "ca_triplet",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "cantor_thirds",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "jelly_skin",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "metaball_sum",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "boolean_overlap",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    },
+    {
+      "id": "spanning_choice",
+      "passed": true,
+      "seconds": 24.0,
+      "phases": 4,
+      "museum_checks": 17
+    }
+  ],
+  "protected_files_unchanged": 555,
+  "existing_map_artifacts_preserved": 146,
+  "new_seconds": 508.0,
+  "museum_checks": 340,
+  "visual_review": {
+    "passed": true,
+    "stage_films": [
+      "cube_corner",
+      "body_aperture",
+      "door_routes",
+      "scale_children",
+      "disco_phase",
+      "gradient_paths",
+      "rainbow_partitions",
+      "flow_lookup",
+      "torque_purchase",
+      "catenoid_sections",
+      "circle_projection",
+      "prng_register",
+      "noise_relief",
+      "shader_repeat",
+      "ca_triplet",
+      "cantor_thirds",
+      "jelly_skin",
+      "metaball_sum",
+      "boolean_overlap",
+      "spanning_choice"
+    ],
+    "museum_films": [
+      "cube_corner",
+      "body_aperture",
+      "door_routes",
+      "scale_children",
+      "disco_phase",
+      "gradient_paths",
+      "rainbow_partitions",
+      "flow_lookup",
+      "torque_purchase",
+      "catenoid_sections",
+      "circle_projection",
+      "prng_register",
+      "noise_relief",
+      "shader_repeat",
+      "ca_triplet",
+      "cantor_thirds",
+      "jelly_skin",
+      "metaball_sum",
+      "boolean_overlap",
+      "spanning_choice"
+    ],
+    "method": "Visual review of four rendered phases per film and final actual-hall monitor captures, supported by source-specific probes and gaze/control/occlusion checks.",
+    "reviewers": [
+      "root",
+      "triangle_source_check",
+      "resolution_source_check",
+      "polyhedra_source_check"
+    ],
+    "final_root_checks": [
+      "flow_lookup",
+      "catenoid_sections",
+      "circle_projection"
+    ],
+    "headset_verified": false
+  },
+  "headset_verified": false
+}

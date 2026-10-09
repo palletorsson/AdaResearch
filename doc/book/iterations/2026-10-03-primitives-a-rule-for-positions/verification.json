@@ -1,0 +1,140 @@
+{
+	"checks": [
+		{
+			"check": "Generator returns the declared six signed-axis points in order",
+			"passed": true
+		},
+		{
+			"check": "Calling the function changes neither the visible study nor its child count",
+			"passed": true
+		},
+		{
+			"check": "A second positive argument changes radius and preserves direction",
+			"passed": true
+		},
+		{
+			"check": "Each call returns an independent list",
+			"passed": true
+		},
+		{
+			"check": "Supplied connectivity closes eight equilateral faces around twelve shared edges",
+			"passed": true
+		},
+		{
+			"check": "Rendered vertices use the generated positions through face rows",
+			"passed": true
+		},
+		{
+			"check": "Sphere starts at the same radius with eight radial and four height divisions",
+			"passed": true
+		},
+		{
+			"check": "Guide follows actual non-degenerate mesh edges without duplicate seam strokes",
+			"passed": true
+		},
+		{
+			"check": "Capture room.png",
+			"passed": true
+		},
+		{
+			"check": "The printed radius edit compiles",
+			"passed": true
+		},
+		{
+			"check": "Edited script runs without authored child nodes",
+			"passed": true
+		},
+		{
+			"check": "Capture radius.png",
+			"passed": true
+		},
+		{
+			"check": "Handle edit persists between frames and updates incident faces",
+			"passed": true
+		},
+		{
+			"check": "The generator is not called to constrain edits during processing",
+			"passed": true
+		},
+		{
+			"check": "Capture edited.png",
+			"passed": true
+		},
+		{
+			"check": "Printed sphere setting edit compiles: 16/4",
+			"passed": true
+		},
+		{
+			"check": "Setting changes generated geometry while keeping dimensions: 16/4",
+			"passed": true
+		},
+		{
+			"check": "Guide reflects edited source: 16/4",
+			"passed": true
+		},
+		{
+			"check": "Capture sphere-16-4.png",
+			"passed": true
+		},
+		{
+			"check": "Printed sphere setting edit compiles: 8/8",
+			"passed": true
+		},
+		{
+			"check": "Setting changes generated geometry while keeping dimensions: 8/8",
+			"passed": true
+		},
+		{
+			"check": "Guide reflects edited source: 8/8",
+			"passed": true
+		},
+		{
+			"check": "Capture sphere-8-8.png",
+			"passed": true
+		},
+		{
+			"check": "Rebuilding the guide replaces old strokes",
+			"passed": true
+		},
+		{
+			"check": "Visible face interior has no added collider",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim picks up the local positive-Z point",
+			"passed": true
+		},
+		{
+			"check": "Mouse movement edits data in the translated study frame",
+			"passed": true
+		},
+		{
+			"check": "Desktop release retains the new position",
+			"passed": true
+		},
+		{
+			"check": "Synthetic near grip picks up the translated study handle",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand moves the point and its incident triangles",
+			"passed": true
+		},
+		{
+			"check": "Synthetic release retains the edit",
+			"passed": true
+		},
+		{
+			"check": "A fresh instance restores generated data without sharing the edited list",
+			"passed": true
+		},
+		{
+			"check": "Repeated updates retain a fixed six handles, twelve edges and one surface",
+			"passed": true
+		}
+	],
+	"input": "Actual desktop mouse handler; synthetic XR grip and poses",
+	"passed": true,
+	"physical_headset_tested": false,
+	"screenshots": "Native student room"
+}

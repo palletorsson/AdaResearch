@@ -1,0 +1,111 @@
+--- before/commons/artifacts/form_grammar_family/form_grammar_family.gd
++++ after/commons/artifacts/form_grammar_family/form_grammar_family.gd
+@@ -0,0 +1,108 @@
++extends Node3D
++## Six retained constructions from the production face-grammar operations.
++## Walking changes the view; the specimens do not morph or simulate growth.
++
++const Data = preload("res://commons/mesh_grammar/mesh_data.gd")
++const Selector = preload("res://commons/mesh_grammar/mesh_selector.gd")
++const Inset = preload("res://commons/mesh_grammar/operations/inset_face_op.gd")
++const Extrude = preload("res://commons/mesh_grammar/operations/extrude_face_op.gd")
++const RECIPES = [
++	{"id":"seed", "title":"01 / THE CUBE", "caption":"12 triangles / two on top", "rounds":0, "amount":0.28, "selection":"up"},
++	{"id":"inset", "title":"02 / INSET", "caption":"Each top triangle draws inward", "rounds":0, "amount":0.28, "selection":"up", "inset_only":true},
++	{"id":"lift", "title":"03 / EXTRUDE", "caption":"The two inner faces rise 0.4 m", "rounds":1, "amount":0.28, "selection":"up"},
++	{"id":"repeat", "title":"04 / REPEAT", "caption":"Three rounds / inset 28%", "rounds":3, "amount":0.28, "selection":"up"},
++	{"id":"wider", "title":"05 / VARY THE AMOUNT", "caption":"Three rounds / inset 8%", "rounds":3, "amount":0.08, "selection":"up"},
++	{"id":"all", "title":"06 / CHANGE THE SELECTION", "caption":"Three rounds / all twelve seed faces", "rounds":3, "amount":0.28, "selection":"all"}
++]
++var records: Array[Dictionary] = []
++var meshes: Dictionary = {}
++
++func _ready() -> void:
++	for i in range(RECIPES.size()):
++		_build_specimen(RECIPES[i], Vector3(float(i % 3 - 1) * 5.0, 0, 3.2 if i < 3 else -3.2))
++
++static func build_data(recipe: Dictionary) -> MeshData:
++	var result: MeshData = Data.create_cube(0.5)
++	var selected: PackedInt32Array = Selector.all_faces().select(result) if recipe.selection == "all" else Selector.by_normal_direction(Vector3.UP, 5.0).select(result)
++	for index in selected:
++		result.face_tags[index].append("growing")
++	var inset := Inset.new(Selector.by_tag("growing"), {"amount":recipe.amount, "inner_tag":"growing", "border_tag":"shoulder"})
++	var extrude := Extrude.new(Selector.by_tag("growing"), {"distance":0.4, "scale":1.0, "top_tag":"growing", "side_tag":"wall", "min_area":0.001})
++	if recipe.get("inset_only", false):
++		inset.apply(result)
++	for generation in range(int(recipe.rounds)):
++		inset.apply(result)
++		extrude.apply(result)
++	return result
++
++func _build_specimen(recipe: Dictionary, base: Vector3) -> void:
++	var data: MeshData = build_data(recipe)
++	var bounds := AABB(data.vertices[0], Vector3.ZERO)
++	for vertex in data.vertices:
++		bounds = bounds.expand(vertex)
++	var body := MeshInstance3D.new()
++	body.name = recipe.id
++	for i in range(data.face_count()):
++		var colour := Color("ddd9ce")
++		if data.face_tags[i].has("growing"):
++			colour = Color("ea749a")
++		elif data.face_tags[i].has("shoulder"):
++			colour = Color("84c9be")
++		data.face_metadata[i]["color"] = colour
++	body.mesh = data.to_array_mesh({"double_sided":false, "face_colors":true})
++	var mat := StandardMaterial3D.new()
++	mat.vertex_color_use_as_albedo = true
++	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++	mat.roughness = 0.56
++	mat.metallic = 0.12
++	body.material_override = mat
++	body.position = base + Vector3(0, 0.56 - bounds.position.y, 0)
++	add_child(body)
++	meshes[recipe.id] = body
++	# Use exactly this mesh for collision: no invisible box around the growth.
++	body.create_trimesh_collision()
++	var wire := MeshInstance3D.new()
++	var lines := ImmediateMesh.new()
++	lines.surface_begin(Mesh.PRIMITIVE_LINES)
++	for face in data.faces:
++		for j in range(3):
++			lines.surface_add_vertex(data.vertices[face[j]])
++			lines.surface_add_vertex(data.vertices[face[(j + 1) % 3]])
++	lines.surface_end()
++	wire.mesh = lines
++	var ink := StandardMaterial3D.new()
++	ink.albedo_color = Color("252d40")
++	ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	wire.material_override = ink
++	wire.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	body.add_child(wire)
++	var width := maxf(2.6, bounds.size.x + 0.25)
++	var depth := maxf(2.6, bounds.size.z + 0.25)
++	_box("Plinth_" + recipe.id, Vector3(width, 0.55, depth), base + Vector3(0,0.275,0), Color("252e42"))
++	_label(recipe.title, base + Vector3(0,0.44,depth * 0.5 + 0.025), 42, Color("fff2d9"))
++	_label(recipe.caption, base + Vector3(0,0.23,depth * 0.5 + 0.03), 28, Color("aed2d0"))
++	records.append({"id":recipe.id, "recipe":recipe.duplicate(true), "faces":data.face_count(), "vertices":data.vertex_count(), "growing":Selector.by_tag("growing").select(data).size(), "bounds_position":[bounds.position.x,bounds.position.y,bounds.position.z], "bounds_size":[bounds.size.x,bounds.size.y,bounds.size.z], "station":[base.x,base.y,base.z], "plinth_size":[width,0.55,depth]})
++
++func _box(title: String, size: Vector3, centre: Vector3, colour: Color) -> void:
++	var node := MeshInstance3D.new()
++	node.name = title
++	var box := BoxMesh.new()
++	box.size = size
++	node.mesh = box
++	node.position = centre
++	var material := StandardMaterial3D.new()
++	material.albedo_color = colour
++	material.roughness = 0.85
++	node.material_override = material
++	add_child(node)
++	node.create_trimesh_collision()
++
++func _label(text: String, at: Vector3, font: int, colour: Color) -> void:
++	var label := Label3D.new()
++	label.text = text
++	label.position = at
++	label.font_size = font
++	label.pixel_size = 0.003
++	label.modulate = colour
++	label.outline_size = 0
++	add_child(label)

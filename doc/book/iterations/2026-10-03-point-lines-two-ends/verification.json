@@ -1,0 +1,135 @@
+{
+	"checks": [
+		{
+			"check": "Lesson creates two handles and three drawing nodes",
+			"passed": true
+		},
+		{
+			"check": "Initial distance is 1.5 metres",
+			"passed": true
+		},
+		{
+			"check": "Handles keep the same parent frame",
+			"passed": true
+		},
+		{
+			"check": "Horizontal segment starts at A",
+			"passed": true
+		},
+		{
+			"check": "Horizontal segment ends at B",
+			"passed": true
+		},
+		{
+			"check": "Capture room.png",
+			"passed": true
+		},
+		{
+			"check": "One edited X component produces one metre",
+			"passed": true
+		},
+		{
+			"check": "Vertical turn preserves length",
+			"passed": true
+		},
+		{
+			"check": "Vertical segment starts at A",
+			"passed": true
+		},
+		{
+			"check": "Vertical segment ends at B",
+			"passed": true
+		},
+		{
+			"check": "Capture upright.png",
+			"passed": true
+		},
+		{
+			"check": "Downward segment starts at A",
+			"passed": true
+		},
+		{
+			"check": "Downward segment ends at B",
+			"passed": true
+		},
+		{
+			"check": "Segment with depth starts at A",
+			"passed": true
+		},
+		{
+			"check": "Segment with depth ends at B",
+			"passed": true
+		},
+		{
+			"check": "Capture depth.png",
+			"passed": true
+		},
+		{
+			"check": "Coincidence reads zero and hides the segment",
+			"passed": true
+		},
+		{
+			"check": "Separating the ends restores the segment",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim picks up endpoint B",
+			"passed": true
+		},
+		{
+			"check": "Desktop hold moves the endpoint",
+			"passed": true
+		},
+		{
+			"check": "Held endpoint segment starts at A",
+			"passed": true
+		},
+		{
+			"check": "Held endpoint segment ends at B",
+			"passed": true
+		},
+		{
+			"check": "Readout follows the moved endpoint",
+			"passed": true
+		},
+		{
+			"check": "Release leaves endpoint in place",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR near grip picks up endpoint A",
+			"passed": true
+		},
+		{
+			"check": "Synthetic grip moves endpoint without reparenting",
+			"passed": true
+		},
+		{
+			"check": "XR held segment starts at A",
+			"passed": true
+		},
+		{
+			"check": "XR held segment ends at B",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR release keeps the chosen position",
+			"passed": true
+		},
+		{
+			"check": "Reverse subtraction edit compiles",
+			"passed": true
+		},
+		{
+			"check": "Complete lesson constructs its nodes on a bare Node3D",
+			"passed": true
+		},
+		{
+			"check": "Reversal changes displacement but not distance",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"physical_headset_tested": false,
+	"xr_input": "Synthetic grip tracker; no headset"
+}

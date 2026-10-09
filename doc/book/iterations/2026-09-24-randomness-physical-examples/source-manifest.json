@@ -1,0 +1,92 @@
+[
+  {
+    "path": "commons/maps/sequences/randomness.json",
+    "sha256": "5aa5d5372a59d96204d3062d7ca76ea39a6a0227bc70ede6e63f04f1dfea82ae",
+    "note": "canonical 14-hall order"
+  },
+  {
+    "path": "commons/maps/Random_Cubes/final.md",
+    "sha256": "725d56d0bd902a237cdf80d298e7ba86fec2279505db96baa54fb2bf3857ce22",
+    "note": "current die and coin encounter"
+  },
+  {
+    "path": "commons/maps/Random_Cubes/map_data.json",
+    "sha256": "b90c08efcc188867994a514aecc34bcd5900abeee7ea09208b521c1dd9412415",
+    "note": "die at (3,2), coin at (8,2)"
+  },
+  {
+    "path": "commons/maps/Random_Gaussian/final.md",
+    "sha256": "c31b41764113d4a1ee3edb0aa20c752fac8abf95e51a1055f745e9fa7ecf7100",
+    "note": "current sampler-led chapter"
+  },
+  {
+    "path": "commons/maps/Random_Gaussian/map_data.json",
+    "sha256": "fdf8781e1981448b7efa811203590a282ee05cc1aff26a8b934ff242b329e032",
+    "note": "four placed distribution artifacts"
+  },
+  {
+    "path": "commons/maps/Random_Remove/map_data.json",
+    "sha256": "49ba0ecea3891195af06fe5a87c686795be91713d46174f8f770db0a604998ad",
+    "note": "existing removal studies"
+  },
+  {
+    "path": "commons/maps/Random_Walk/map_data.json",
+    "sha256": "bb7b9a11ecf811817344ae8d5e93986a684f0dea8e2bef52167608f217d50030",
+    "note": "existing walker and collection"
+  },
+  {
+    "path": "commons/maps/Random_Game/final.md",
+    "sha256": "7ebe94c86cb420a0864fcecd656aa1c38cb1d245998dc7b2f5569fa99c5bd760",
+    "note": "crossing, removal, hidden doors and field"
+  },
+  {
+    "path": "commons/maps/Random_Game/map_data.json",
+    "sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
+    "note": "five placed chance-space artifacts"
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "sha256": "623f375fab280f2b8f80d98749e9a6704569df68b7103ae66d3a14f96a12ae40",
+    "note": "independent/coherent field comparison"
+  },
+  {
+    "path": "algorithms/randomness/dice_throw/dice_throw.gd",
+    "sha256": "1579c0406230c2b30c512e2f1a1c4c3b0f4d433fd83591dafac92a257d5dfad7",
+    "note": "_read_dice_result: settled orientation, proportional rewards"
+  },
+  {
+    "path": "algorithms/randomness/coin_toss/coin_toss.gd",
+    "sha256": "48d0a35058cc6af02db233bcec4890aa5c929263f6722d9b9ac13e857ba603dc",
+    "note": "_read_coin_result: orientation, edge threshold"
+  },
+  {
+    "path": "algorithms/randomness/RemoveRandom.gd",
+    "sha256": "ce8a1c20cf55ab68e30982dda448f1711785f0049522cb8acce5c7b7a0a609b2",
+    "note": "remove_one: active set sampled then reduced"
+  },
+  {
+    "path": "algorithms/randomness/galton_board/galton_board.gd",
+    "sha256": "91cd3446716352a8882ee996f3d1ee387c9144c9a5f3db627f31b90c9957577a",
+    "note": "live physics and optional binomial prefill are separate"
+  },
+  {
+    "path": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+    "sha256": "e88831afebdaabd1722cd02864f2b0ff15b6f13e61bef55fc34f962a17b05f0f",
+    "note": "position plus sampled increment, bounded by reflection"
+  },
+  {
+    "path": "commons/artifacts/randomness_space/random_doors.gd",
+    "sha256": "2ec523963bfe63de34a0a03d2ef8ee28c40dd3bee3706d6741ea65c347d46ac8",
+    "note": "safe passage selected before choice"
+  },
+  {
+    "path": "algorithms/randomness/trng_vs_prng/TrngVsPrng.gd",
+    "sha256": "13be96da3cd031c9f4fcb9804ff76dbd7aaade6b2d67c96d5df74d1a02c7239e",
+    "note": "physical entropy label unsupported by named source functions"
+  },
+  {
+    "path": "doc/book/iterations/2026-09-24-randomness-encounters-return/DECISIONS.md",
+    "sha256": "a6821cd7e5be1169ada827f75a4670328599142095e3e5cf74bcc2abf345595d",
+    "note": "preserve recent encounter-led return"
+  }
+]

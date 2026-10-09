@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "message": "seven currently authored halls; Florensky restoration pending",
+      "ok": true
+    },
+    {
+      "message": "select Euclid_Parallel",
+      "ok": true
+    },
+    {
+      "message": "owner for Euclid_Parallel",
+      "ok": true
+    },
+    {
+      "message": "advance from Euclid_Parallel",
+      "ok": true
+    },
+    {
+      "message": "select NonEuclidean_Spaces",
+      "ok": true
+    },
+    {
+      "message": "owner for NonEuclidean_Spaces",
+      "ok": true
+    },
+    {
+      "message": "advance from NonEuclidean_Spaces",
+      "ok": true
+    },
+    {
+      "message": "select Russell_Paradox",
+      "ok": true
+    },
+    {
+      "message": "owner for Russell_Paradox",
+      "ok": true
+    },
+    {
+      "message": "advance from Russell_Paradox",
+      "ok": true
+    },
+    {
+      "message": "select Godel_Incompleteness",
+      "ok": true
+    },
+    {
+      "message": "owner for Godel_Incompleteness",
+      "ok": true
+    },
+    {
+      "message": "advance from Godel_Incompleteness",
+      "ok": true
+    },
+    {
+      "message": "select Escher_Impossible",
+      "ok": true
+    },
+    {
+      "message": "owner for Escher_Impossible",
+      "ok": true
+    },
+    {
+      "message": "advance from Escher_Impossible",
+      "ok": true
+    },
+    {
+      "message": "select Brouwer_Intuitionism",
+      "ok": true
+    },
+    {
+      "message": "owner for Brouwer_Intuitionism",
+      "ok": true
+    },
+    {
+      "message": "advance from Brouwer_Intuitionism",
+      "ok": true
+    },
+    {
+      "message": "select Crisis_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "owner for Crisis_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "advance from Crisis_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "pending_missing_hall": "Florensky_Paraconsistent",
+  "route": [
+    "Euclid_Parallel",
+    "NonEuclidean_Spaces",
+    "Russell_Paradox",
+    "Godel_Incompleteness",
+    "Escher_Impossible",
+    "Brouwer_Intuitionism",
+    "Crisis_Synthesis"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

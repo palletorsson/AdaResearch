@@ -1,0 +1,414 @@
+{
+  "checks": [
+    {
+      "name": "suspension: native capture has requested proportions",
+      "passed": true
+    },
+    {
+      "name": "suspension: parameter changes native pixels",
+      "passed": true
+    },
+    {
+      "name": "suspension: comparisons retain the same camera",
+      "passed": true
+    },
+    {
+      "name": "75 fragments retain every address",
+      "passed": true
+    },
+    {
+      "name": "fragment geometry contains 12 triangles",
+      "passed": true
+    },
+    {
+      "name": "suspension: restoring the score restores geometry and evidence",
+      "passed": true
+    },
+    {
+      "mean_absolute_error_8bit": 0.00000453125,
+      "name": "suspension: restored image differs by <0.01 mean 8-bit units",
+      "passed": true
+    },
+    {
+      "name": "passage: native capture has requested proportions",
+      "passed": true
+    },
+    {
+      "name": "passage: parameter changes native pixels",
+      "passed": true
+    },
+    {
+      "name": "passage: comparisons retain the same camera",
+      "passed": true
+    },
+    {
+      "name": "opening changes while headroom and visitor width stay fixed",
+      "passed": true
+    },
+    {
+      "name": "visitor capsule can cross the wide opening",
+      "passed": true
+    },
+    {
+      "name": "narrow opening physically stops the same capsule",
+      "passed": true
+    },
+    {
+      "name": "passage: restoring the score restores geometry and evidence",
+      "passed": true
+    },
+    {
+      "mean_absolute_error_8bit": 0.0,
+      "name": "passage: restored image differs by <0.01 mean 8-bit units",
+      "passed": true
+    },
+    {
+      "name": "landscape: native capture has requested proportions",
+      "passed": true
+    },
+    {
+      "name": "landscape: parameter changes native pixels",
+      "passed": true
+    },
+    {
+      "name": "landscape: comparisons retain the same camera",
+      "passed": true
+    },
+    {
+      "name": "forest keeps 48 seeded sites and three cones each",
+      "passed": true
+    },
+    {
+      "name": "height increases without changing the site selection",
+      "passed": true
+    },
+    {
+      "name": "landscape: restoring the score restores geometry and evidence",
+      "passed": true
+    },
+    {
+      "mean_absolute_error_8bit": 0.0021575,
+      "name": "landscape: restored image differs by <0.01 mean 8-bit units",
+      "passed": true
+    },
+    {
+      "name": "pattern_garden: native capture has requested proportions",
+      "passed": true
+    },
+    {
+      "name": "pattern_garden: parameter changes native pixels",
+      "passed": true
+    },
+    {
+      "name": "pattern_garden: comparisons retain the same camera",
+      "passed": true
+    },
+    {
+      "name": "pattern moves without rebuilding geometry differently",
+      "passed": true
+    },
+    {
+      "name": "shared coordinates reach all four pattern materials",
+      "passed": true
+    },
+    {
+      "name": "controlled clock moves the pattern",
+      "passed": true
+    },
+    {
+      "name": "pattern_garden: restoring the score restores geometry and evidence",
+      "passed": true
+    },
+    {
+      "mean_absolute_error_8bit": 0.00013328125,
+      "name": "pattern_garden: restored image differs by <0.01 mean 8-bit units",
+      "passed": true
+    },
+    {
+      "name": "plural_body: native capture has requested proportions",
+      "passed": true
+    },
+    {
+      "name": "plural_body: parameter changes native pixels",
+      "passed": true
+    },
+    {
+      "name": "plural_body: comparisons retain the same camera",
+      "passed": true
+    },
+    {
+      "name": "unfold preserves six arms and three heads",
+      "passed": true
+    },
+    {
+      "name": "unfold extends the limb tips",
+      "passed": true
+    },
+    {
+      "name": "plural_body: restoring the score restores geometry and evidence",
+      "passed": true
+    },
+    {
+      "mean_absolute_error_8bit": 0.0,
+      "name": "plural_body: restored image differs by <0.01 mean 8-bit units",
+      "passed": true
+    },
+    {
+      "name": "walk mode selects the visitor camera",
+      "passed": true
+    },
+    {
+      "name": "leaving walk restores the comparison camera and controls",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "passed": true,
+  "scope": "Native desktop study rooms. No installed spine placements, XR interaction or learner trial.",
+  "views": [
+    {
+      "amount": 1.0,
+      "file": "suspension-hero.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "suspension"
+    },
+    {
+      "amount": 0.0,
+      "file": "suspension-before.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "suspension"
+    },
+    {
+      "amount": 1.0,
+      "file": "suspension-after.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "suspension"
+    },
+    {
+      "amount": 1.0,
+      "file": "suspension-returned.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "suspension"
+    },
+    {
+      "amount": 1.0,
+      "file": "suspension-controls.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "suspension"
+    },
+    {
+      "amount": 0.72,
+      "file": "passage-hero.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "passage"
+    },
+    {
+      "amount": 0.0,
+      "file": "passage-before.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "passage"
+    },
+    {
+      "amount": 1.0,
+      "file": "passage-after.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "passage"
+    },
+    {
+      "amount": 0.72,
+      "file": "passage-returned.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "passage"
+    },
+    {
+      "amount": 0.72,
+      "file": "passage-controls.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "passage"
+    },
+    {
+      "amount": 0.88,
+      "file": "landscape-hero.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "landscape"
+    },
+    {
+      "amount": 0.0,
+      "file": "landscape-before.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "landscape"
+    },
+    {
+      "amount": 1.0,
+      "file": "landscape-after.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "landscape"
+    },
+    {
+      "amount": 0.88,
+      "file": "landscape-returned.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "landscape"
+    },
+    {
+      "amount": 0.88,
+      "file": "landscape-controls.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "landscape"
+    },
+    {
+      "amount": 0.17,
+      "file": "pattern_garden-hero.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 0.0,
+      "file": "pattern_garden-before.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 1.0,
+      "file": "pattern_garden-after.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 1.0,
+      "file": "pattern_garden-drift.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 0.17,
+      "file": "pattern_garden-returned.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 0.17,
+      "file": "pattern_garden-controls.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "pattern_garden"
+    },
+    {
+      "amount": 0.9,
+      "file": "plural_body-hero.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "plural_body"
+    },
+    {
+      "amount": 0.0,
+      "file": "plural_body-before.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "plural_body"
+    },
+    {
+      "amount": 1.0,
+      "file": "plural_body-after.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "plural_body"
+    },
+    {
+      "amount": 0.9,
+      "file": "plural_body-returned.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "plural_body"
+    },
+    {
+      "amount": 0.9,
+      "file": "plural_body-controls.png",
+      "size": [
+        1600,
+        1000
+      ],
+      "study": "plural_body"
+    }
+  ]
+}

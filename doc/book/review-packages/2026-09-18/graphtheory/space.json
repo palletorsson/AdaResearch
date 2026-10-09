@@ -1,0 +1,2486 @@
+{
+  "GT_Foundations": {
+    "map_source": "commons/maps/GT_Foundations/map_data.json",
+    "text_source": "commons/maps/GT_Foundations/final.md",
+    "map_sha256": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+    "text_sha256": "7e7e883c45e3c3d7f250584cef53e65d99c25e0d3ccdb928f70e02dd3be18dfc",
+    "map_info": {
+      "name": "Bridges and Islands",
+      "lookup_name": "GT_Foundations",
+      "description": "The KÃ¶nigsberg bridge problem brought to life â€” islands in void connected by narrow walkways. Can you cross every bridge exactly once? Graph theory begins here.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "5-8 minutes",
+        "spatial_temperature": 0.7,
+        "design_notes": "KÃ¶nigsberg-inspired â€” four islands (h1 platforms) surrounded by void (h0 water) connected by seven narrow bridges (h1 width-1). Each island is a node, bridges are edges. Three artifacts on separate islands. Player must cross bridges to reach all."
+      },
+      "title": "Konigsberg Bridges and Euler"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 1,
+        "raw_token": "synthesis_stand#subject:graphspace#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "graphspace:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "graphspace",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 5,
+        "raw_token": "graphspace3d",
+        "commented_out": false,
+        "lookup_hint": "graphspace3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "KonigsbergBridge:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "KonigsbergBridge",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 9,
+        "raw_token": "two_travelers",
+        "commented_out": false,
+        "lookup_hint": "two_travelers",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "tc:2:x",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "raw_token": "tc:3:z",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 5,
+        "z": 8,
+        "raw_token": "tc:3:x",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Foundations",
+      "recorded_status": "source_checked_draft",
+      "text_words": 405,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "two_travelers"
+        ],
+        "reason": "Does a graph already contain the order in which we should visit it?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Foundations/final.md",
+        "text_sha256": "7e7e883c45e3c3d7f250584cef53e65d99c25e0d3ccdb928f70e02dd3be18dfc",
+        "map_sha256": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "two_travelers"
+      ],
+      "role_primary_order": [
+        "two_travelers"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Layout": {
+    "map_source": "commons/maps/GT_Layout/map_data.json",
+    "text_source": "commons/maps/GT_Layout/final.md",
+    "map_sha256": "a864ab420b06e3131b09c72c0aa260367ce8066a07503907b38f0b973d798e56",
+    "text_sha256": "d611d7eebda2f9e71cf4b2b56f38f1df5adf47bcc4381975983ec359e406659e",
+    "map_info": {
+      "name": "Force-Directed Layout",
+      "lookup_name": "GT_Layout",
+      "description": "Nodes scatter at different heights in an asymmetric space â€” force-directed algorithms find equilibrium. The room itself is a graph trying to settle.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 15,
+        "depth": 13,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "4-6 minutes",
+        "spatial_temperature": 0.7,
+        "design_notes": "Asymmetric room with platforms at irregular heights â€” nodes scattered like a force-directed graph. Heights 1-4 create organic elevation variety. No symmetry, no grid. Two artifacts on elevated platforms."
+      },
+      "title": "Force-Directed Graph Equilibrium",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "2",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "5",
+        "3",
+        "3",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "2",
+        "5",
+        "3",
+        "3",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "5",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "3",
+        "3",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "2",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "living_paper_bfs",
+        "commented_out": false,
+        "lookup_hint": "living_paper_bfs",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 5,
+        "raw_token": "force_directed_layout:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "force_directed_layout",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 12,
+        "z": 6,
+        "raw_token": "graph_basilica",
+        "commented_out": false,
+        "lookup_hint": "graph_basilica",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 8,
+        "raw_token": "forcedirected3d",
+        "commented_out": false,
+        "lookup_hint": "forcedirected3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Layout",
+      "recorded_status": "source_checked_draft",
+      "text_words": 407,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "force_directed_layout"
+        ],
+        "reason": "Can the picture change while the graph stays the same?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Layout/final.md",
+        "text_sha256": "d611d7eebda2f9e71cf4b2b56f38f1df5adf47bcc4381975983ec359e406659e",
+        "map_sha256": "f3273bf4d179fb63dd0ccd27027da236f93aeac316842477ff57084498677c4d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "force_directed_layout"
+      ],
+      "role_primary_order": [
+        "force_directed_layout"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Pathfinding": {
+    "map_source": "commons/maps/GT_Pathfinding/map_data.json",
+    "text_source": "commons/maps/GT_Pathfinding/final.md",
+    "map_sha256": "fca0d2d0f6a2dbd01729e31fe8a51fdb2fedfd377c8493a80eea15db7e40ac53",
+    "text_sha256": "be4cae950e37a4c187602ef3eda78a94746419501008ff005a2b2f9e8f903d28",
+    "map_info": {
+      "name": "Pathfinding Maze",
+      "lookup_name": "GT_Pathfinding",
+      "description": "Experience pathfinding firsthand â€” navigate a maze with dead ends and the one true path. You are the algorithm searching for the exit.\n\n[Placement applied hybrid engine — constraint 0.987→1.000, walkability 0.585→0.685]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 14,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "5-8 minutes",
+        "spatial_temperature": 0.75,
+        "design_notes": "Maze corridor â€” winding path through walls with dead-end branches. Player experiences what a pathfinding algorithm does: explore, backtrack, find the way. Single heavy artifact at the maze center as reward."
+      },
+      "title": "Navigating the Search Tree"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 9,
+        "z": 2,
+        "raw_token": "salesman_knot",
+        "commented_out": false,
+        "lookup_hint": "salesman_knot",
+        "role": "unassigned",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 2,
+        "raw_token": "grid_substrate_runner",
+        "commented_out": false,
+        "lookup_hint": "grid_substrate_runner",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "pathfinding3d:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "pathfinding3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "raw_token": "family_chandelier",
+        "commented_out": false,
+        "lookup_hint": "family_chandelier",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 9,
+        "raw_token": "impatient_river",
+        "commented_out": false,
+        "lookup_hint": "impatient_river",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 12,
+        "raw_token": "living_paper_dfs_maze",
+        "commented_out": false,
+        "lookup_hint": "living_paper_dfs_maze",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Pathfinding",
+      "recorded_status": "source_checked_draft",
+      "text_words": 416,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "impatient_river"
+        ],
+        "reason": "What happens to the shortest route when a stone disappears?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Pathfinding/final.md",
+        "text_sha256": "be4cae950e37a4c187602ef3eda78a94746419501008ff005a2b2f9e8f903d28",
+        "map_sha256": "b8a333adc5bb403e0ad0bedb13171885ccb7d74375a6f67a7446c6c9ef9f08fa",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "impatient_river"
+      ],
+      "role_primary_order": [
+        "impatient_river"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Network_Analysis": {
+    "map_source": "commons/maps/GT_Network_Analysis/map_data.json",
+    "text_source": "commons/maps/GT_Network_Analysis/final.md",
+    "map_sha256": "9eea3efc21c4815e882742b2a75f2c99e5d98ffbe223840397f36ef070b7a1c9",
+    "text_sha256": "67b9122dbc9cdfb22ffcf7655c553923055ff433749ff58b4b0d1cf5e7263936",
+    "map_info": {
+      "name": "GT_Network_Analysis",
+      "lookup_name": "GT_Network_Analysis",
+      "description": "Hub-and-spoke topology â€” a central platform with radiating arms. Network flow and analysis from the heart of the graph.\n\n[Placement applied humanoid_walker engine — constraint 0.732→0.909, walkability 0.310→0.580]\n\n[Placement applied humanoid_walker engine — constraint 0.909→0.909, walkability 0.548→0.580]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 13,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.7,
+        "design_notes": "Hub-and-spoke â€” central 3Ã—3 platform (h2) with four arms extending N/S/E/W over void (h0). Arms are width-1 walkways. Two artifacts on the central hub. Player approaches from one arm, exits from another."
+      },
+      "title": "GT_Network_Analysis",
+      "eye_shot_adopted": "Trial_eye_GT_Network_Analysis",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "rhizomatic_structure:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "rhizomatic_structure",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "network_analysis:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "network_analysis",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 8,
+        "raw_token": "networkflow3d:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "networkflow3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "tc:4:x",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 8,
+        "z": 6,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Network_Analysis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 404,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "network_analysis"
+        ],
+        "reason": "Is the biggest node the one whose connections matter most?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Network_Analysis/final.md",
+        "text_sha256": "67b9122dbc9cdfb22ffcf7655c553923055ff433749ff58b4b0d1cf5e7263936",
+        "map_sha256": "7028c44b7ff027d269bae2ae88c4314ae0992bbfcca1f2e4524eb514570377f4",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "network_analysis"
+      ],
+      "role_primary_order": [
+        "network_analysis"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Connectivity": {
+    "map_source": "commons/maps/GT_Connectivity/map_data.json",
+    "text_source": "commons/maps/GT_Connectivity/final.md",
+    "map_sha256": "c8c5dc314572376ba918caa06b56b9a3f661ed771c40a9e6767fc31e6aedde88",
+    "text_sha256": "e657d9ac21123ee3f42f0bb4742c7d3db1864212e56fbe50f03ba26b579c7812",
+    "map_info": {
+      "name": "Connected Components",
+      "lookup_name": "GT_Connectivity",
+      "description": "Three rooms, three strongly connected components â€” Tarjan discovers, Kosaraju confirms, topological sort orders. Cross the connections between them.\n\n[Placement applied humanoid_walker engine — constraint 0.906→0.894, walkability 0.226→0.366]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 10,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "5-8 minutes",
+        "spatial_temperature": 0.75,
+        "design_notes": "Three connected rooms â€” each is a strongly connected component. Room A (left, h1), Room B (center, h2), Room C (right, h1). Connected by narrow single-cell passages through walls (h5). One artifact per room."
+      },
+      "title": "Strongly Connected Components",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "2",
+        "2",
+        "2",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "2",
+        "2",
+        "2",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "2",
+        "2",
+        "2",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "2",
+        "2",
+        "2",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "0",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "topological_sort:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "topological_sort",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "tarjan_algorithm:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "tarjan_algorithm",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "kosaraju_algorithm:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "kosaraju_algorithm",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "wp:270",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 7,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 11,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 9,
+        "z": 8,
+        "raw_token": "wp:90",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 11,
+        "z": 8,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Connectivity",
+      "recorded_status": "source_checked_draft",
+      "text_words": 412,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tarjan_algorithm"
+        ],
+        "reason": "If you can reach another node, can you get back?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Connectivity/final.md",
+        "text_sha256": "e657d9ac21123ee3f42f0bb4742c7d3db1864212e56fbe50f03ba26b579c7812",
+        "map_sha256": "3aa5970405e8a8459a387ccd95f8232fb59aab5a36eb1dd05303b6554f8f01c5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tarjan_algorithm"
+      ],
+      "role_primary_order": [
+        "tarjan_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Spanning_Trees": {
+    "map_source": "commons/maps/GT_Spanning_Trees/map_data.json",
+    "text_source": "commons/maps/GT_Spanning_Trees/final.md",
+    "map_sha256": "d5822e1b67b2fb83e7cafb6b68dde30e82d5de863e6d2f5f5d1ecdc491a2f2d5",
+    "text_sha256": "22a212a47d918e95e32e9a259b8d155312604bf6bac3367105536775c1181434",
+    "map_info": {
+      "name": "Spanning Tree Garden",
+      "lookup_name": "GT_Spanning_Trees",
+      "description": "Scattered platforms at varying heights â€” nodes in a minimum spanning tree. The shortest connections between them are the paths you walk.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 9,
+        "depth": 9,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "4-6 minutes",
+        "spatial_temperature": 0.75,
+        "design_notes": "Open void floor (h0) with scattered platform islands at heights 1-4. Narrow walkways (h1 width-1) connect them like edges in a spanning tree. Single MST artifact on central elevated platform."
+      },
+      "title": "The Lightest Skeleton",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0",
+        "0",
+        "3",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "4",
+        "4",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "4",
+        "4",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 4,
+        "raw_token": "mst_visualization:0:2:0.6",
+        "commented_out": false,
+        "lookup_hint": "mst_visualization",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 5,
+        "z": 4,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 7,
+        "z": 8,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Spanning_Trees",
+      "recorded_status": "source_checked_draft",
+      "text_words": 404,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mst_visualization"
+        ],
+        "reason": "Which connections can be removed while keeping everyone connected?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Spanning_Trees/final.md",
+        "text_sha256": "22a212a47d918e95e32e9a259b8d155312604bf6bac3367105536775c1181434",
+        "map_sha256": "2bb490dcfe7a0cd4e47068a8e34a38443972129552bf2d90f93127cd9e318256",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mst_visualization"
+      ],
+      "role_primary_order": [
+        "mst_visualization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Flow": {
+    "map_source": "commons/maps/GT_Flow/map_data.json",
+    "text_source": "commons/maps/GT_Flow/final.md",
+    "map_sha256": "2d921f58a6fcecd1f787bd516fb756ab447264a3909e37518dbf4d5564c6e780",
+    "text_sha256": "246c007bc670ab87e9e8f0579570b08e2d5a6f60fe476726e9a87dcf991673b0",
+    "map_info": {
+      "name": "Flow Network",
+      "lookup_name": "GT_Flow",
+      "description": "A funnel narrows from wide entrance to tight exit â€” feel the flow constraints that push-relabel and min-cut algorithms navigate.\n\n[Placement applied hybrid engine — constraint 0.987→1.000, walkability 0.388→0.652]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "5-7 minutes",
+        "spatial_temperature": 0.75,
+        "design_notes": "Funnel/pipeline â€” wide entrance (width 8) narrows progressively to tight exit (width 2). Walls converge like a flow bottleneck. Two artifacts placed at wide and narrow sections. Player feels increasing constraint."
+      },
+      "title": "Maximum Flow, Minimum Cut"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "0",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "5",
+        "5",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "grid3d_dfs",
+        "commented_out": false,
+        "lookup_hint": "grid3d_dfs",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 1,
+        "raw_token": "grid3d_prim",
+        "commented_out": false,
+        "lookup_hint": "grid3d_prim",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "karger_algorithm:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "karger_algorithm",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "push_relabel_algorithm:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "push_relabel_algorithm",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Flow",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "push_relabel_algorithm"
+        ],
+        "reason": "When a junction receives more than it can send onward, where does the excess go?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Flow/final.md",
+        "text_sha256": "246c007bc670ab87e9e8f0579570b08e2d5a6f60fe476726e9a87dcf991673b0",
+        "map_sha256": "2d921f58a6fcecd1f787bd516fb756ab447264a3909e37518dbf4d5564c6e780",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "push_relabel_algorithm"
+      ],
+      "role_primary_order": [
+        "push_relabel_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "GT_Matching": {
+    "map_source": "commons/maps/GT_Matching/map_data.json",
+    "text_source": "commons/maps/GT_Matching/final.md",
+    "map_sha256": "4469d6a1f75d10313e706631de37d696f3f51bb4d93aff0d471bda665e332fe1",
+    "text_sha256": "086247b960405eca435aaa0c897ea90e5ed0f537cf1ebead258e606e512bbe10",
+    "map_info": {
+      "name": "Perfect Matching",
+      "lookup_name": "GT_Matching",
+      "description": "Two symmetric halves mirror each other â€” matching pairs across the divide. Edmonds' algorithm finds the maximum match in any graph.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 8,
+        "depth": 8,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "graphtheory",
+        "estimated_time": "4-6 minutes",
+        "spatial_temperature": 0.7,
+        "design_notes": "Symmetric room â€” perfect left-right mirror. Central axis (h3 ridge) with matching alcoves on each side. Single artifact at the symmetry axis. Player sees matching pairs in the architecture itself."
+      },
+      "title": "Optimal Pairing via Blossoms"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "5",
+        "3",
+        "3",
+        "5",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5"
+      ],
+      [
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "5",
+        "3",
+        "3",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "edmonds_algorithm:0:0:0.6",
+        "commented_out": false,
+        "lookup_hint": "edmonds_algorithm",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 6,
+        "z": 7,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "GT_Matching",
+      "recorded_status": "source_checked_draft",
+      "text_words": 412,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "edmonds_algorithm"
+        ],
+        "reason": "Can an early pairing prevent a larger set of pairings later?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Matching/final.md",
+        "text_sha256": "086247b960405eca435aaa0c897ea90e5ed0f537cf1ebead258e606e512bbe10",
+        "map_sha256": "4469d6a1f75d10313e706631de37d696f3f51bb4d93aff0d471bda665e332fe1",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "edmonds_algorithm"
+      ],
+      "role_primary_order": [
+        "edmonds_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

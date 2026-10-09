@@ -1,0 +1,11 @@
+--- before/commons/artifacts/accountability_ledger/accountability_ledger.gd
++++ current/commons/artifacts/accountability_ledger/accountability_ledger.gd
+@@ -188,6 +188,8 @@
+ 	else:
+ 		var stamp := Time.get_datetime_string_from_unix_time(int(record.get("saved_unix",0))).replace("T"," ")
+ 		_entries.assign(["Assembly Laboratory",stamp+" UTC","%d / 13 joints displaced" % PoseRecord.changed(record),"12 connections retained","Latest pose; not a gesture log",str(record.get("persistence","this session only"))])
++		if PoseRecord.changed_connections(record)>0:
++			_entries[3] = "12 connections; %d rerouted" % PoseRecord.changed_connections(record)
+ 		_count = int(record.get("completed_edits",0))
+ 		_commit_flash = 1.0
+ 	_refresh_lines()

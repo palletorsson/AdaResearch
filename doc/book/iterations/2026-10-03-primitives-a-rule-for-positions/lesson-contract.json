@@ -1,0 +1,58 @@
+{
+  "map": "Primitives_Ignorance",
+  "status": "author_review_pilot",
+  "needs": [
+    "Vector3 and scalar multiplication",
+    "typed arrays, append, for, index",
+    "positions distinct from connectivity",
+    "ImmediateMesh triangle submission",
+    "PointHandle and Segment",
+    "SphereMesh from Point One"
+  ],
+  "gives": [
+    "an explicitly called function",
+    "parameter, argument and typed returned value",
+    "opposite axis pairs generate six regular positions",
+    "generated data remains editable",
+    "resolution along two directions distinct from dimensions"
+  ],
+  "learner_owns": [
+    "octahedron_positions(radius)",
+    "the argument passed in _ready",
+    "handle edits to returned data",
+    "one SphereMesh setting at a time"
+  ],
+  "supplied": [
+    "eight triangle rows and twelve edge pairs",
+    "prepared room, desktop and XR input",
+    "PointHandle and Segment",
+    "unshaded two-sided material",
+    "MeshEdges inspection guide, with source"
+  ],
+  "reused": [
+    "position list and face list",
+    "nested face submission",
+    "frame updates from grabbed handles",
+    "sphere resource construction"
+  ],
+  "deferred": [
+    "general Platonic mesh factory",
+    "generating face connectivity",
+    "analytic sphere sampling and trigonometry",
+    "GPU index buffers and normals",
+    "triangle-count cost claims",
+    "capsule reliquary and full mesh library",
+    "surface collision"
+  ],
+  "function_contract": {
+    "input": "positive radius in local metres",
+    "output": "fresh Array[Vector3] in +X, -X, +Y, -Y, +Z, -Z order",
+    "side_effects": "none; drawing and connections remain separate",
+    "types_are_not": "a proof of geometric regularity"
+  },
+  "source_of_positions": "Three specified unit-axis directions and their opposites; no saved Trace read or write",
+  "physical_headset_tested": false,
+  "all_lesson_objects_created_in_code": true,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

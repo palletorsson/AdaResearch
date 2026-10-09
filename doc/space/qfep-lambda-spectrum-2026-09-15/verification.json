@@ -1,0 +1,37 @@
+{
+  "hall": "QFEP_Lambda_Spectrum",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "ten_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "qfep_chalkboard",
+    "edge_particles",
+    "lambda_hall",
+    "chaos_particles",
+    "phase_cube",
+    "bifurcation_walkway",
+    "dissolving_form",
+    "ordered_grid",
+    "complexity_pattern",
+    "crystal_formation"
+  ],
+  "primary_artifacts": [
+    "lambda_hall"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Lambda_Spectrum\\map_data.json": "801549fb482638ff48ad5c68e0ea7ba7c9425ded2ce01959aaa48955351a2cbd",
+    "commons\\maps\\QFEP_Lambda_Spectrum\\final.md": "d9c6a196f31f52fc58b861a2a7cbaf5555cca54bd2b0a4dc712a22e9c3d8eb4e",
+    "commons\\maps\\QFEP_Lambda_Spectrum\\tutorial.md": "863857f858706675558d9cc81fde30b40a37edbce96ad6a8e578ac5a57536414",
+    "commons\\maps\\QFEP_Lambda_Spectrum\\technical.md": "11491b77a908642869a2a20f46d2078808ed55ee99df0eaaf655f7b0dbadb5cd",
+    "commons\\maps\\QFEP_Lambda_Spectrum\\critical.md": "152222e09c2178bfb858c5a957b2430518e57783a3da2b5519d0b2705f24be0a"
+  }
+}

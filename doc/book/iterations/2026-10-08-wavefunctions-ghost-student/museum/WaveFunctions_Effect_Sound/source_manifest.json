@@ -1,0 +1,31 @@
+{
+  "room": "WaveFunctions_Effect_Sound",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/WaveFunctions_Effect_Sound/map_data.json": "41338218aa29a40afb7e15a04f068d0c83bf5db8fa8eea781ecbfc9fcc781a75",
+    "tools/probes/wavefunctions_sound_museum.gd": "7c37a4b1565bee1fdb4b2874f4fb831ca76f76b53c886e8530ce1454f2e4f547",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "e54163c93bfab0ad230a6e654ee995c41f64ea24d2c1ba25f47cafc33478d698",
+    "ada_run/encounter_pilot/WaveFunctions_Effect_Sound/control.json": "6d2dd99da42ecc84ed6f8cc8731f544ed8a515e468b0add2907cca6aab9968a0",
+    "ada_run/encounter_pilot/WaveFunctions_Effect_Sound/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "ada_run/encounter_pilot/WaveFunctions_Effect_Sound/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn": "feb402bf92a8db7542242df4ed753f207bbc17bc01ef028a4e310a91bfeae2a1",
+    "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd": "e1dddbf59de0f468233ed1a542eff9587ccd5484b60d791c07d4755a8c3f990f",
+    "commons/interfaces/value_mapper_3d.gd": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265"
+  }
+}

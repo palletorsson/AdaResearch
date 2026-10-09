@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Release the point; keep the attachment</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>Release the point; keep the attachment</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Rest length</li>
+<li>Spring force</li>
+<li>Damping</li>
+<li>Equilibrium</li>
+<li>Spring and hinge</li>
+</ul>
+<p>Pull the rose grip beside the hanging point and release. The point returns, passes its resting place and turns again. The grip lets you pull while the spring keeps acting.</p>
+<h2>Make the small study</h2>
+<p>Make one spring from the familiar point and a fixed anchor. In your small study, grab the point itself to set its position, then release it to see the spring act. The thin cylinder shows the attachment.</p>
+<p><strong>The hall adds:</strong> The hall’s separate rose grip pulls through force while you hold it. ONE / MANY adds six more points and connecting springs. Nearby hinges offer a different kind of attachment.</p>
+<p>Save <code>06_spring.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 06_spring.gd</h2>
+<!-- student-code:06_spring.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+const ANCHOR := Vector3(0, 2.8, 0)
+var point = Point.new()
+var rest_length := 1.0
+var stiffness := 20.0 # N/m
+var damping := 0.5 # kg/s
+var tether: MeshInstance3D
+
+func _ready() -&gt; void:
+    add_child(point)
+    point.position = Vector3(0.5, 1.8, 0)
+    point.gravity_scale = 1.0
+    tether = rod()
+    caption(&quot;Pull the point. Release it. The spring keeps its anchor.&quot;)
+
+func spring_force(offset: Vector3, velocity: Vector3) -&gt; Vector3:
+    var length := offset.length()
+    if length &lt; 0.0001:
+        return -damping * velocity
+    return (offset / length * (length - rest_length) * stiffness
+        - damping * velocity).limit_length(150.0)
+
+func _physics_process(_delta: float) -&gt; void:
+    var offset: Vector3 = to_global(ANCHOR) - point.global_position
+    if not point.is_picked_up():
+        point.apply_central_force(spring_force(offset, point.linear_velocity))
+    join(tether, point.position, ANCHOR)
+</code></pre>
+<h2>Read the change</h2>
+<p><code>offset</code> points from the body to the anchor. Its length tells us their current separation. Subtract <code>rest_length</code> to find how far the spring is stretched or compressed.</p>
+<p>Multiplying that difference by <code>stiffness</code> gives the force magnitude. The normalized offset gives its direction. A stretched spring pulls toward the anchor; compression reverses the sign.</p>
+<p>The last term subtracts <code>damping * velocity</code>. It opposes movement, so the returns gradually settle. Gravity still acts: the hanging point rests with the spring stretched enough to support its weight.</p>
+<h2>Change one thing</h2>
+<p>Release from the same position with damping at 0.5, then at 3.0. Predict which will keep moving longer. Restore damping and double stiffness. Compare the stronger return without changing rest length.</p>
+<h2>Return to the hall</h2>
+<p>Return to the full row with ONE / MANY. Pull one grip and follow the movement into its neighbours. Try releasing a second point while the first is still moving. Each spring follows its rule, but the next movement now depends on several bodies.</p>
+<h2>Model notes</h2>
+<p>The zero-length check avoids dividing by zero; the force is capped at 150 N. The student point is placed by the hand while held, and resumes spring motion on release. A hinge keeps a pivot attached; this spring permits its length to change.</p>
+<h2>Into the next room</h2>
+<p>Here a repeating movement comes from forces changing velocity. Next, make a similar repetition by assigning positions.</p>
+<p><a href="final.html#Vectors_Act4b_Oscillation">Reflective text</a>.</p></main></html>

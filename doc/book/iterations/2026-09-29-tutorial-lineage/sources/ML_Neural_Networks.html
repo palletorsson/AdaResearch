@@ -1,0 +1,312 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Neural_Networks · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Neural_Networks">← Tutorial lineage</a></p><h1>ML Neural Networks</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Neural_Networks/final.md">Raw captured source</a></p><pre># A connection changed by an error
+
+Where does a network store what it has learned?
+
+&lt;!-- @neural_network_visualization --&gt;
+
+Choose one connection between two layers and watch it through several training updates. The training starts when the hall is built and runs for about fifty seconds; arrive later and the diagram is finished, its counter at 1000 of 1000, and nothing in the hall starts it again. Compare changes in its appearance with the error history. Try to distinguish the activity passing through a connection from a lasting change to the connection itself.
+
+The moving activity belongs to a forward calculation: inputs contribute to later layers through weighted connections. The connection’s weight belongs to the model’s adjustable state. Changing that weight alters how a future input will influence the next layer, even after the current activity has passed.
+
+Compare two views of progress: a single connection becoming visually different, and the aggregate error changing. They describe different scales of the update. One weight can move while the overall error changes little, because many other contributions still take part in the prediction. Conversely, a clearer improvement in the history does not identify one special wire as the location of the answer. The display asks you to relate a distributed calculation to its numerical summary.
+
+This exhibit trains on a small, fixed set of four examples with four inputs and two desired outputs. It computes predictions, compares them with those targets, and uses the resulting error to adjust the weights. The backward calculation works out how changes to earlier weights contribute to changes in the final error. It does not send a little correct answer backwards through every wire.
+
+Each weight moves by a step: the error, times what came through that wire, times a learning rate. The rate is the same kind of knob as a boid&#x27;s turning limit, how much of the difference between wanted and got is corrected at once. Too large and the network overshoots and rings; too small and it crawls. Here it is a tenth.
+
+The colour and strength of a connection help expose its sign and magnitude. A negative contribution is not a damaged connection, and a large weight is not a complete explanation of an output: the surrounding inputs, other connections and nonlinear transformations still matter. Follow the network as a calculation distributed across those relations.
+
+K-means moved centres according to assigned examples. This learner changes many connected parameters according to the error on its training examples. In both cases, apparent improvement depends on a task and a measure selected beforehand.
+
+The training display can establish that this small network is adjusting to its sample. It cannot establish that an unfamiliar case will be handled well. For a future experiment, hold out an example and compare its error with the training error. A widening difference would make the boundary between fitting and generalising visible.
+
+&lt;!-- @ --&gt;
+
+Perception next asks what enters such a model. Before a network can learn from an image, some distinctions must already be made available as input.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Neural_Networks/tutorial.md">Raw captured source</a></p><pre># ML Neural Networks
+
+Layers stacked. Each transforms its input.
+
+Build a feedforward network.
+
+```gdscript
+class_name FeedforwardNet
+
+var layers: Array = []  # array of layer dicts with W, b, activation
+
+func add_layer(input_size: int, output_size: int, activation: String) -&gt; void:
+    var W: Array = init_he(input_size, output_size)
+    var b: Array = []
+    for _i in output_size: b.append(0.0)
+    layers.append({&quot;W&quot;: W, &quot;b&quot;: b, &quot;activation&quot;: activation})
+```
+
+Each layer stores a weight matrix and a bias vector. The activation is a string key.
+
+He initialisation.
+
+```gdscript
+func init_he(fan_in: int, fan_out: int) -&gt; Array:
+    var std: float = sqrt(2.0 / fan_in)
+    var W: Array = []
+    for _i in fan_out:
+        var row: Array = []
+        for _j in fan_in:
+            row.append(randfn(0.0, std))
+        W.append(row)
+    return W
+```
+
+Scale inversely with fan_in. Prevents vanishing gradients in deep networks with ReLU.
+
+Matrix-vector product.
+
+```gdscript
+func matmul(W: Array, x: Array) -&gt; Array:
+    var result: Array = []
+    for i in W.size():
+        var sum: float = 0.0
+        for j in x.size():
+            sum += W[i][j] * x[j]
+        result.append(sum)
+    return result
+```
+
+Simple nested loop. For production use, GPU-accelerated libraries.
+
+Activation functions.
+
+```gdscript
+func activate(v: Array, name: String) -&gt; Array:
+    var r: Array = []
+    for x in v:
+        match name:
+            &quot;relu&quot;: r.append(max(0.0, x))
+            &quot;sigmoid&quot;: r.append(1.0 / (1.0 + exp(-x)))
+            &quot;tanh&quot;: r.append(tanh(x))
+            _: r.append(x)
+    return r
+```
+
+ReLU, sigmoid, tanh are standard. Each has different gradient characteristics.
+
+Forward pass.
+
+```gdscript
+func forward(x: Array) -&gt; Array:
+    var h: Array = x
+    for layer in layers:
+        h = matmul(layer.W, h)
+        for i in h.size(): h[i] += layer.b[i]
+        h = activate(h, layer.activation)
+    return h
+```
+
+Chain matrix-vector product and activation through each layer. Final output is the network&#x27;s prediction.
+
+Compute mean-squared error.
+
+```gdscript
+func mse_loss(predictions: Array, targets: Array) -&gt; float:
+    var sum: float = 0.0
+    for i in predictions.size():
+        var err: float = predictions[i] - targets[i]
+        sum += err * err
+    return sum / predictions.size()
+```
+
+Standard regression loss. Lower is better.
+
+Backward pass sketch.
+
+```gdscript
+func backward(x: Array, target: Array, lr: float) -&gt; void:
+    var activations: Array = [x]
+    var h: Array = x
+    for layer in layers:
+        h = matmul(layer.W, h)
+        for i in h.size(): h[i] += layer.b[i]
+        h = activate(h, layer.activation)
+        activations.append(h)
+    var delta: Array = []
+    for i in h.size(): delta.append(h[i] - target[i])
+    for i in range(layers.size() - 1, -1, -1):
+        var prev_h: Array = activations[i]
+        for out_idx in delta.size():
+            for in_idx in prev_h.size():
+                layers[i].W[out_idx][in_idx] -= lr * delta[out_idx] * prev_h[in_idx]
+            layers[i].b[out_idx] -= lr * delta[out_idx]
+        if i &gt; 0:
+            var new_delta: Array = []
+            for in_idx in prev_h.size():
+                var sum: float = 0.0
+                for out_idx in delta.size():
+                    sum += delta[out_idx] * layers[i].W[out_idx][in_idx]
+                new_delta.append(sum)
+            delta = new_delta
+```
+
+Chain rule through layers. Simplified — assumes MSE and linear output.
+
+You can now build a feedforward network with He initialisation, compute forward passes through arbitrary layers and activations, measure loss, and run a backward pass for training. ML_Perception extends into the single neuron.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Neural_Networks/technical.md">Raw captured source</a></p><pre># ML Neural Networks — Technical
+
+The map arranges a neural network as a walkable corridor of chambers. Each chamber is a layer; each narrow passage between chambers is the weighted-sum operation that reduces dimensionality.
+
+A feedforward network is a composition of linear transformations interleaved with nonlinear activations. For input x, weights W_i, biases b_i, and activation φ, the forward pass is a chain of operations that can be written compactly as a sequence of matrix multiplications.
+
+```gdscript
+class_name FeedforwardNet extends Node
+
+var layers: Array = []  # each is {W: Array, b: Array, activation: String}
+
+func forward(x: Array) -&gt; Array:
+    var h: Array = x
+    for layer in layers:
+        h = matmul(layer.W, h)
+        h = vec_add(h, layer.b)
+        h = activate(h, layer.activation)
+    return h
+
+func activate(v: Array, name: String) -&gt; Array:
+    match name:
+        &quot;relu&quot;: return v.map(func(x): return max(0.0, x))
+        &quot;sigmoid&quot;: return v.map(func(x): return 1.0 / (1.0 + exp(-x)))
+        &quot;tanh&quot;: return v.map(func(x): return tanh(x))
+        _: return v
+```
+
+## Backpropagation
+
+Training uses backpropagation: compute the loss at the output, then propagate error gradients backward through the network using the chain rule. Each layer&#x27;s weight gradient is a function of the forward-pass activations it produced and the error signal it received from the next layer.
+
+```gdscript
+func backward(x: Array, target: Array) -&gt; Array:
+    var activations: Array = [x]
+    var h: Array = x
+    for layer in layers:
+        h = activate(vec_add(matmul(layer.W, h), layer.b), layer.activation)
+        activations.append(h)
+    var grad: Array = vec_sub(activations[-1], target)  # dL/dh_last
+    var weight_grads: Array = []
+    for i in range(layers.size() - 1, -1, -1):
+        var h_in: Array = activations[i]
+        var h_out: Array = activations[i + 1]
+        grad = mul_elementwise(grad, activation_derivative(h_out, layers[i].activation))
+        weight_grads.push_front(outer_product(grad, h_in))
+        grad = matmul(transpose(layers[i].W), grad)
+    return weight_grads
+```
+
+## Complexity
+
+For a network with L layers of width N, forward pass is O(L·N²). Backward pass is also O(L·N²) — same asymptotic cost, roughly 2× the constant factor. Training a batch of B examples costs O(B·L·N²) per step.
+
+Modern networks use GPU-accelerated matrix multiplication to reduce wall-clock cost. Godot&#x27;s built-in arrays are unsuitable for serious training; the map&#x27;s network is small enough to train on CPU at interactive rates, but a production application would use a dedicated tensor library.
+
+## Depth and Expressivity
+
+The universal approximation theorem says a two-layer network with enough hidden units can approximate any continuous function. Deeper networks are more parameter-efficient: they can express the same functions with exponentially fewer parameters for some problem classes. The map lets the learner toggle between 2-layer and 5-layer architectures and see the same classification task trained on each.
+
+Within the sequence, Neural_Networks is where depth earns its keep. ML_Perception will next zoom in on the single neuron.
+
+## Activation Functions
+
+ReLU (rectified linear unit) is the default in modern networks: fast to compute, fast gradient, no saturation for positive inputs. The negative side returns zero, which can cause dead units whose gradient is always zero and whose weights never update. Leaky ReLU and parametric ReLU fix this by allowing a small negative slope.
+
+```gdscript
+func leaky_relu(x: float, alpha: float = 0.01) -&gt; float:
+    return x if x &gt; 0.0 else alpha * x
+
+func gelu(x: float) -&gt; float:
+    # Gaussian Error Linear Unit — used in Transformers
+    return 0.5 * x * (1.0 + tanh(sqrt(2.0 / PI) * (x + 0.044715 * x * x * x)))
+```
+
+Sigmoid and tanh saturate at their extremes, causing vanishing gradients in deep networks. They remain standard for output layers (sigmoid for binary classification, softmax for multi-class) but are rare in hidden layers of modern networks.
+
+## Weight Initialisation
+
+Naive weight initialisation — random uniform or random normal — produces vanishing or exploding gradients in deep networks. Xavier initialisation scales weights by 1/sqrt(fan_in) to keep variance constant across layers. He initialisation uses 2/sqrt(fan_in) for ReLU networks to compensate for ReLU zeroing half the activations.
+
+```gdscript
+func he_init(fan_in: int, fan_out: int) -&gt; Array:
+    var std: float = sqrt(2.0 / fan_in)
+    var W: Array = []
+    for i in range(fan_out):
+        var row: Array = []
+        for j in range(fan_in):
+            row.append(randfn(0.0, std))
+        W.append(row)
+    return W
+```
+
+## Batch Normalisation
+
+BatchNorm normalises activations to zero mean and unit variance within a batch, then applies learnable scale and shift parameters. It accelerates training, enables higher learning rates, and has a mild regularisation effect. The cost is additional parameters and a more complex forward pass, but the benefits usually outweigh the cost for networks deeper than five layers.
+
+Within the sequence, the architectural choices above — activation, initialisation, normalisation — are the implementation details that separate a textbook network from one that actually trains reliably.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Neural_Networks/intent.md">Raw captured source</a></p><pre>Concept: Neural networks as function composition — layers of weighted sums and nonlinear activations stacked to approximate arbitrary mappings. Each layer transforms its input, and depth creates representational power that no single layer can achieve.
+Sequence role: Fourth map in the Machine Learning sequence (15th spine sequence, integration phase). The architectural core of the sequence. Builds on ML_Classification&#x27;s decision boundaries by showing how multiple layers bend and fold those boundaries into complex shapes. Connects back to classification (single-layer = linear boundary) and forward to ML_Perception (zooming into a single neuron) and ML_Sequence_Memory (adding temporal state). The perceptron in map 5 is a deliberate zoom-in after seeing the whole.
+Technical angle: Forward pass as matrix multiplication plus activation. Backpropagation as reverse-mode automatic differentiation — the chain rule applied layer by layer. Activation functions (ReLU, sigmoid, tanh) as the source of nonlinearity. Universal approximation theorem: one hidden layer suffices in theory, depth helps in practice. Weight initialization, vanishing/exploding gradients.
+Critical angle: A neural network is a cascade of simple functions that collectively approximate complexity — the same principle as cellular automata but with tunable parameters. The network learns representations, not rules: the hidden layers encode features no human specified. This opacity is both the power and the danger — the model works but cannot explain why, which is the central tension of the integration phase.
+Key artifacts: neural_network_3d provides a three-dimensional visualization of network architecture, forward pass data flow, weight magnitudes, and activation patterns across layers.
+Gap: Needs a representation visualizer showing what each hidden layer has learned to detect, making the internal features visible as the abstraction hierarchy deepens.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Neural_Networks/critical.md">Raw captured source</a></p><pre># ML_Neural_Networks — Critical Reflection
+
+A corridor of chambers connected by bottlenecks. Data enters one end and emerges the other end transformed. Three wider chambers hold three artifacts — `neural_networks_vr`, `neural_network_visualization`, `learn_world_stacked` — each showing the same architecture from a different angle. The bottleneck passages between chambers are width-1 corridors through h5 walls. You are the data. The architecture is the network. The chokepoints are the hidden layers.
+
+Hayles writes that in the computational universe, pattern and randomness replace presence and absence as the fundamental categories. The neural network is the machine that converts randomness into pattern. Each layer transforms its input — `a(l) = sigma(W(l) * a(l-1) + b(l))` — and the transformation is learned, not designed. The weights are adjusted through backpropagation, gradients flowing backward through the same layers the signal flowed forward, and the learning rate determines whether this process converges or oscillates. The network does not store answers. It learns features. Edges become textures become objects. Each layer throws away what the loss function does not reward and amplifies what it does.
+
+The three artifacts create an arc within the chamber sequence. The first shows the full network architecture in 3D. The second shows the learning process — neurons glowing with activations, weights shimmering with gradients, the error graph descending. The third stacks learned representations, showing how abstraction accumulates layer by layer. Together they narrate the network as transparent mechanism: here is the structure, here is the learning, here is what it learned. This transparency is the deepest fiction in the map.
+
+A neural network is not transparent. It is the paradigmatic opaque system. The hidden layers encode features no human specified, in combinations no human can parse, distributed across thousands of parameters that interact nonlinearly. The network works but cannot explain why. Hayles identifies this as the condition of the computational unconscious — processes that operate below the threshold of human awareness, shaping decisions without producing understanding. The visualization artifact makes weights and activations visible, but visibility is not legibility. You can see every neuron fire and still not know what the network knows.
+
+Chun&#x27;s work on programmed visions is precise here. Software produces habits of perception — ways of seeing that feel natural because the interface makes them automatic. The corridor architecture of this map is itself a programmed vision: you walk through layers in order, forward pass as spatial sequence, and the experience trains your body to think of neural computation as a pipeline. But modern architectures violate the clean layered metaphor — skip connections, residual layers, attention mechanisms, recursive loops. The corridor teaches a version of neural computation that was current in 1989 and is now a pedagogical convenience. The corridor is a skeuomorph of the perceptron era preserved in the architecture of a map that claims to teach the present.
+
+The `learn_world_stacked` artifact sits in the deepest chamber, closest to the exit, and its identity is the most revealing. It stacks learned representations, making visible the abstraction hierarchy: raw input at the bottom, high-level features at the top. This is the dominant narrative of deep learning — depth creates abstraction, each layer sees more than the last, the network builds a ladder from pixels to meaning. What this narrative excludes is the possibility that the layers are not building toward anything. The universal approximation theorem says one hidden layer suffices in theory; depth helps in practice. But &quot;helps in practice&quot; is not &quot;creates abstraction.&quot; The network may be memorizing shortcuts, exploiting spurious correlations, or building representations that happen to work for the training distribution but encode nothing generalizable. The stacked visualization looks like understanding. It might be coincidence frozen into weights.
+
+The bottleneck passages force compression. You cannot carry your full spatial freedom from one chamber to the next — the corridor narrows, and you squeeze through. This is the most physically honest element: neural network layers really do compress, really do force information through narrow channels, really do discard what doesn&#x27;t fit. But compression is lossy, and what is lost is not random. The network learns to discard whatever the loss function does not penalize for discarding. If the training data underrepresents certain populations, certain edge cases, certain ways of being in the world, the network learns to compress them out. The bottleneck is efficient. It is also an engine of erasure, and the things it erases are the things nobody thought to include in the loss.
+
+Generalization lives in the narrow corridor between knowing and forgetting. Too much fitting and the network memorizes. Too little and it learns nothing. The map cannot show you this corridor because it is not spatial but statistical — it lives in the gap between training error and test error, between the data you showed the network and the data you did not. The thing that makes neural networks powerful and dangerous — their ability to generalize from the seen to the unseen, silently, without justification — is the thing no visualization can contain.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Neural_Networks/artifacts.md">Raw captured source</a></p><pre># ML Neural Networks — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 3 artifacts*
+
+&gt; A corridor of chambers connected by bottlenecks. Data enters one end — raw, undifferentiated — and emerges the other end transformed into decision. Each chamber is a layer. Each narrow passage forces compression. Walk the architecture.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## NeuralNetworks_VR
+![NeuralNetworks_VR](/scene-catalog/neural_networks_vr.png)
+
+Walkable neural network with visible weights and backpropagation
+
+`neural_networks_vr`
+
+## Neural Network Visualization
+![Neural Network Visualization](/scene-catalog/neural_network_visualization.png)
+
+Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.
+
+`neural_network_visualization`
+
+## Learn World (Stacked)
+![Learn World (Stacked)](/scene-catalog/learn_world_stacked.png)
+
+Stacked learning environment — multiple ML models layered together, each learning from the previous layer&#x27;s output. Meta-learning through hierarchical composition.
+
+`learn_world_stacked`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Neural_Networks/summary.md">Raw captured source</a></p><pre># ML Neural Networks — Summary
+
+ML_Neural_Networks is the fourth map in the Machine Learning sequence. It arranges the neural network as a walkable architecture. The space is a long corridor divided into chambers; each chamber is a layer. Narrow passages between chambers force the data to compress, and the learner walks the compression with it.
+
+Data enters at one end as undifferentiated input. The first chamber is a wide hall where each input dimension has its own display panel. The next passage is a narrow doorway; the number of panels on the other side is smaller, because the first layer has reduced the feature count by a weighted sum. The second chamber is narrower than the first, the third narrower still. At the end, a single bright panel reports the classification.
+
+Each layer displays its weights as a matrix on a wall. A slider at the entrance exposes the learning rate, and a training button re-runs a small batch through the network, updating the weights and redrawing the matrices. A second display tracks the loss so the progress is visible.
+
+Within the sequence, Neural_Networks is where depth earns its keep. A single layer can only draw a linear boundary; each additional layer bends that boundary further. ML_Perception will next zoom in on the single neuron that everything depends on.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Neural_Networks/blurb.md">Raw captured source</a></p><pre>A corridor of chambers connected by bottlenecks. Data enters one end — raw, undifferentiated — and emerges the other end transformed into decision. Each chamber is a layer. Each narrow passage forces compression. Walk the architecture.
+
+Inside, neurons pulse with activation. Weight lines thicken where signal flows strong, thin where it fades. Forward pass animation shows information reshaping itself — layer by layer, representation by representation. The network doesn&#x27;t store answers. It learns *features*. Edges in one layer become textures in the next become objects in the last. Each layer throws away what doesn&#x27;t matter and keeps what does.
+
+Training is gradient descent through a landscape no one can fully see. Too much fitting and the network memorizes — collapses into rigid certainty. Too little and it learns nothing — noise without structure. Generalization lives in the narrow corridor between knowing and forgetting.</pre></section></body></html>

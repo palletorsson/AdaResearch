@@ -1,0 +1,172 @@
+{
+  "capped_physical_chain": {
+    "armed": false,
+    "capped": true,
+    "chain": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "closed": false,
+    "height": 2.7,
+    "max_throws": 5,
+    "total": 30,
+    "worked_example": [
+      6,
+      6,
+      3
+    ]
+  },
+  "checks": [
+    {
+      "name": "initial live chain empty while example is separate",
+      "passed": true
+    },
+    {
+      "name": "reuses production pickable die",
+      "passed": true
+    },
+    {
+      "name": "held die cannot create a landing",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "six records height and permits continuation",
+      "passed": true
+    },
+    {
+      "name": "one release cannot count twice",
+      "passed": true
+    },
+    {
+      "name": "return button preserves chain and adds no throw",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 3",
+      "passed": true
+    },
+    {
+      "name": "6 + 6 + 3 closes at fifteen",
+      "passed": true
+    },
+    {
+      "name": "each throw has a distinct labelled section",
+      "passed": true
+    },
+    {
+      "name": "physical column height matches total",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "completed chain refuses further throws",
+      "passed": true
+    },
+    {
+      "name": "NEW CHAIN clears live column only",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 6",
+      "passed": true
+    },
+    {
+      "name": "five sixes reach a labelled unfinished limit",
+      "passed": true
+    },
+    {
+      "name": "display ceiling bounds generated geometry",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 2",
+      "passed": true
+    },
+    {
+      "name": "unfinished cap refuses sixth throw",
+      "passed": true
+    },
+    {
+      "name": "non-six at fifth throw finishes rather than caps",
+      "passed": true
+    },
+    {
+      "name": "new chain invalidates in-flight stale result",
+      "passed": true
+    },
+    {
+      "name": "invalid faces are not recorded",
+      "passed": true
+    },
+    {
+      "name": "NEW CHAIN never takes a held die from the hand",
+      "passed": true
+    },
+    {
+      "name": "physical drop reads face 4",
+      "passed": true
+    },
+    {
+      "name": "release after held reset starts the new chain",
+      "passed": true
+    },
+    {
+      "name": "fallen die returns without inventing a throw",
+      "passed": true
+    },
+    {
+      "name": "variant spawns no reward rain",
+      "passed": true
+    }
+  ],
+  "complete_physical_chain": {
+    "armed": false,
+    "capped": false,
+    "chain": [
+      6,
+      6,
+      3
+    ],
+    "closed": true,
+    "height": 1.35,
+    "max_throws": 5,
+    "total": 15,
+    "worked_example": [
+      6,
+      6,
+      3
+    ]
+  },
+  "failures": [],
+  "scope": "Controlled native physics drops on the shipped die at a translated, rotated host. Pointer buttons are production controls. Transaction-only injections are identified in probe.gd. No headset input or fairness measurement."
+}

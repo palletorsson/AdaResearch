@@ -1,0 +1,167 @@
+{
+  "sequence": "change",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Change_Intro",
+      "primary_tokens": [
+        "tangent_slope_workbench"
+      ],
+      "question": "Where can a high curve be changing very little?",
+      "ontology": "A function gives a value at a position; its derivative gives the local rate at which that value changes. Height and slope answer different questions.",
+      "action": "Move the x sample-position slider slowly along the curve. Stop near a high point, then on a steep section. Compare the tangent direction and the f(x), f′(x) readouts before predicting the next section.",
+      "observable": "A high point can have a nearly horizontal tangent. A lower point may have a larger positive or negative slope. The derivative subplot follows the slope value rather than the height.",
+      "mechanism": "The bench evaluates f(x)=0.5+0.4sin(2x)+0.15cos(5x) and its analytic derivative 0.8cos(2x)−0.75sin(5x). The slider changes x; refresh moves markers and redraws the tangent and sign indicator.",
+      "limit": "The line is a local approximation, not a substitute for the whole curve. Near-zero slope need not mean the process never changes, nor does it by itself classify every possible stationary point.",
+      "variation": "Find two places of similar height with opposite slopes and ask which distinction a height-only report would lose. A noisy or cornered function would require a new curve option; the current one is smooth.",
+      "prior_bridge": "Live previous room: Symmetry_Seventeen",
+      "next_bridge": "Live next room: Accumulation_Riemann",
+      "sources": [
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd :: _f, _df, _on_slider_changed, _refresh_all"
+      ],
+      "source_files": [
+        "commons/maps/Change_Intro/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Change_Intro/map_data.json": "6cf99c6f74d4bb8abfa37a50c25e1433768e633c3c23bbc0d6495f44a3e1eca4",
+        "commons/artifacts/registry/change.json": "3d43cc6e97a89d8bd1aaec7501970d72540ca861a612845f98619a3a21190747",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn": "6187370bd45d62f7c5a79c1a4d31a2f0c63adfd78b16b7dc9a320d973f44048a",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "823ff80ad7f9c65c3096e807b76d4e2d84055a8bfa4cc323d20077aef4f51e56"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            6
+          ],
+          "value": "tangent_slope_workbench:270:0"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Accumulation_Riemann",
+      "primary_tokens": [
+        "riemann_sum_workbench"
+      ],
+      "question": "How much changes when an estimate uses more, thinner pieces?",
+      "ontology": "A midpoint sum estimates accumulated area by adding each rectangle’s sampled height multiplied by its width. Refinement changes the approximation while leaving the underlying curve fixed.",
+      "action": "Move the rectangle-count slider through 4,8,16,32,64,128. Watch where rectangles miss the curve and compare the sum and error readout at each stop.",
+      "observable": "Increasing the count makes rectangles thinner and the estimate approach the reference value for this smooth curve. The curve itself does not become more accurate when the rectangles change.",
+      "mechanism": "_compute_riemann_sum uses midpoint samples and width=(x_max−x_min)/N on the same f(x) as the tangent bench. The reference labelled true integral is also numerical: a dense 4096-rectangle midpoint sum.",
+      "limit": "A display that looks smooth is still a finite approximation. This experiment does not establish exact equality at N=128, a monotonic improvement for every function, or an exact analytic reference value.",
+      "variation": "Choose the coarsest estimate you would accept for a stated tolerance, then compare another visitor’s choice. A narrow spike between samples would challenge the method, but changing the curve is a proposed extension.",
+      "prior_bridge": "Live previous room: Change_Intro",
+      "next_bridge": "Live next room: Flow_Field",
+      "sources": [
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd :: N_STOPS, _compute_true_integral, _compute_riemann_sum, _on_slider_changed"
+      ],
+      "source_files": [
+        "commons/maps/Accumulation_Riemann/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Accumulation_Riemann/map_data.json": "4dc42f0ddd218a39b5b9dcd4b91339f804dc347764330a537d85a294a09077a8",
+        "commons/artifacts/registry/change.json": "3d43cc6e97a89d8bd1aaec7501970d72540ca861a612845f98619a3a21190747",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn": "e82f84f86c928cbec4e15f2d8f93d5d428065690ec76eb824b0262866e091d62",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "71fec63b1d1ced0abed94697310cebcfb450e799bc30440aacb7f1d2a3d93f0e"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            3
+          ],
+          "value": "riemann_sum_workbench:270"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Flow_Field",
+      "primary_tokens": [
+        "flow_field_painter"
+      ],
+      "question": "Can local directions explain a pattern nobody drew as a whole?",
+      "ontology": "A vector field assigns a direction at a position. Advection repeatedly reads that local direction to move a particle; its trail records the accumulated path.",
+      "action": "Follow one trail before taking in the full canvas. Adjust SCALE with SPEED held fixed, then adjust SPEED while leaving SCALE alone. Use RESET for a fresh particle distribution or SEED for a different noise field.",
+      "observable": "Changing SCALE changes the spatial organization of directions; SPEED changes travel per unit time. Many short local steps accumulate into visible streams, and particles crossing an edge return at the opposite edge.",
+      "mechanism": "Each update samples scalar Perlin noise, converts its value to an angle, then moves by (cos(angle),sin(angle))*particle_speed*delta. This is an angle field derived from noise, not the noise gradient claimed in the header. Trails retain at most trail_length samples.",
+      "limit": "The image cannot tell you every force acting on a real fluid: there are no pressure, mass or particle-particle interactions here. Wrapped boundaries join opposite edges, a particular world topology rather than an open canvas.",
+      "variation": "Track a particle approaching an edge and predict its re-entry, then consider how an absorbing or reflecting edge would change the picture. Those boundary alternatives would require code changes.",
+      "prior_bridge": "Live previous room: Accumulation_Riemann",
+      "next_bridge": "Live next room: Change_Reconciliation",
+      "sources": [
+        "commons/artifacts/flow_field_painter/flow_field_painter.gd :: _create_vr_controls, _process, _reset_particles, _new_seed"
+      ],
+      "source_files": [
+        "commons/maps/Flow_Field/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+        "commons/artifacts/flow_field_painter/flow_field_painter.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Flow_Field/map_data.json": "f59df630154306f0ec5d7fb42f57e9a101e8f153c8de47817dcc318a2796a52a",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/artifacts/flow_field_painter/flow_field_painter.tscn": "64cc6d61a619d5a48b40d4d281361186008e26efe1005bfb253a17254e9d3c26",
+        "commons/artifacts/flow_field_painter/flow_field_painter.gd": "1987a1a46436f870bb48532590c4412cd46e54d30a1409590ddd896600554fb6"
+      },
+      "placements": [
+        {
+          "cell": [
+            8,
+            9
+          ],
+          "value": "flow_field_painter"
+        }
+      ],
+      "cautions": "Header incorrectly calls the field a gradient. SCALE affects both sampling coordinates and noise frequency after adjustment; do not promise a simple linear scale law. Controls/rendering require runtime verification."
+    },
+    {
+      "room_id": "Change_Reconciliation",
+      "primary_tokens": [
+        "ftc_bridge"
+      ],
+      "question": "Can a process return to its starting value after changing all the way?",
+      "ontology": "Net change compares endpoint values. Accumulating the signed local rate recovers that difference under the calculus conditions; distance travelled is another quantity.",
+      "action": "Watch the pulse move up and over the bridge arch. Compare its height at the two ends, and separate what happened during the crossing from the difference remaining at the end.",
+      "observable": "The default arch rises and falls but its endpoints are level. The final height difference is zero even though the pulse moved through many different heights.",
+      "mechanism": "FTCBridge defaults to curve=hump and evidence=result. _curve_h uses a symmetric parabola; _process moves a pulse along _arch_point. The equation is displayed, but derivative strips and numerical endpoint brackets exist only in trace/longhand configurations and are not selected in this room.",
+      "limit": "The default bridge illustrates cancellation; it does not visibly compute the signed rate integral or prove the theorem. Its model is not confirmed as a walkable bridge, so ask visitors to observe the marker rather than climb the deck.",
+      "variation": "Name a journey with zero net change and nonzero total movement. A proposed map variant sets curve=ramp and evidence=longhand to compare a nonzero endpoint difference; the current room has not enabled that variant.",
+      "prior_bridge": "Live previous room: Flow_Field",
+      "next_bridge": "Live next room: Vectors_Act1_WhatAVectorIs",
+      "sources": [
+        "algorithms/change/ftc_bridge.gd :: default curve/evidence, _curve_h, _arch_point, _process, _build_evidence",
+        "commons/maps/Change_Reconciliation/map_data.json :: bare ftc_bridge token"
+      ],
+      "source_files": [
+        "commons/maps/Change_Reconciliation/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "algorithms/change/ftc_bridge.tscn",
+        "algorithms/change/ftc_bridge.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Change_Reconciliation/map_data.json": "c377e070f2f2bbd15f2ea38a7a1fc7cbb8a781ab1eccffb3f1f55782305a38be",
+        "commons/artifacts/registry/change.json": "3d43cc6e97a89d8bd1aaec7501970d72540ca861a612845f98619a3a21190747",
+        "algorithms/change/ftc_bridge.tscn": "10f5e6add5e3b24a5a9d4dcd7ccfe22bd1a27f105cbc55357d2feae6c9e36874",
+        "algorithms/change/ftc_bridge.gd": "9915fdab225c8c8f6ec40d3fcc5179c43ce48a292cb888deaacd81da903f6632"
+      },
+      "placements": [
+        {
+          "cell": [
+            7,
+            5
+          ],
+          "value": "ftc_bridge"
+        }
+      ],
+      "cautions": "Do not falsely align adjacent derivative_pair(wave) and integral_area(hump) as the same function. The bridge hump is parabolic while sibling hump uses its own shape. Shared vocabulary alone does not establish matched data."
+    }
+  ]
+}

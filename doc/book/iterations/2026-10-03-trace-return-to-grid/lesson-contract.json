@@ -1,0 +1,37 @@
+{
+  "maps": [
+    "Point_Trace",
+    "Point_Line_Grid"
+  ],
+  "status": "author_review_pilot",
+  "correction": "Reuse the actual released trace; do not start a different gesture in Grid.",
+  "data_flow": [
+    "Desktop mouse or tracked hand moves PointHandle",
+    "Trace selects and retains positions in order",
+    "Release saves an exact value snapshot",
+    "Grid loads that snapshot into source_points",
+    "For each source position, append a rounded value to grid_points",
+    "Display source and result without modifying either"
+  ],
+  "supplied": [
+    "TraceMemory: release callback, local-file transport, validation and status",
+    "TraceComparison: common source-based fit and two display offsets"
+  ],
+  "learner_owns": [
+    "sampling and ordered record",
+    "new output list",
+    "per-position rounding and spacing"
+  ],
+  "new_concepts": [
+    "for over values in the existing list",
+    "source and transformed result are distinct lists"
+  ],
+  "scope": [
+    "one latest record on the same device",
+    "same Study-local metre frame",
+    "no synthetic fallback on missing data"
+  ],
+  "physical_headset_tested": false,
+  "printed_code_matches": true,
+  "checks": 40
+}

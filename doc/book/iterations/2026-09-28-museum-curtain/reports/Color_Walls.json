@@ -1,0 +1,162 @@
+{
+  "authored_exit": {
+    "cell": "(9, 32)",
+    "door": "(9.5, 0.05, 32.5)",
+    "inward": "(0.0, 0.0, -1.0)",
+    "source": "t",
+    "yaw": 3.14159265358979
+  },
+  "events": [
+    {
+      "halls": 0,
+      "ms": 7611,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 9327,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 9686,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 12393,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 12437,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 12536,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 12536,
+      "phase": "architecture"
+    },
+    {
+      "ms": 305,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 12858,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 13087,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 14138,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 14172,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 14273,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 14790,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 14838,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 14889,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 14889,
+      "phase": "architecture"
+    },
+    {
+      "ms": 232,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 15137,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 15137,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 15606,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 15622,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 15910,
+      "phase": "idle"
+    }
+  ],
+  "failures": [],
+  "landing_checks": [
+    {
+      "cage": false,
+      "entry_cell": "(4, 4)",
+      "entry_source": "s",
+      "pad": "(4.5, 1.05, 4.5)",
+      "settled_feet": "(4.5, 1.0, 4.6)",
+      "slabs": 2,
+      "stage": "Direct launch"
+    },
+    {
+      "cage": false,
+      "entry_cell": "(7, 1)",
+      "entry_source": "s",
+      "pad": "(7.5, 0.05, 44.5)",
+      "settled_feet": "(7.499976, 0.0, 44.6)",
+      "slabs": 2,
+      "stage": "Forward arrival"
+    },
+    {
+      "cage": false,
+      "entry_cell": "(4, 4)",
+      "entry_source": "s",
+      "pad": "(9.5, 0.05, 31.35)",
+      "settled_feet": "(9.499975, 0.0, 31.45)",
+      "slabs": 2,
+      "stage": "Return arrival"
+    }
+  ],
+  "next": "Biome_Ladder_Color",
+  "observed_bounds_reset": false,
+  "passed": true,
+  "peak_resident_halls": 1,
+  "room": "Color_Walls",
+  "staged_rig": true,
+  "vr_simulated": true,
+  "xr_physics_body": true
+}

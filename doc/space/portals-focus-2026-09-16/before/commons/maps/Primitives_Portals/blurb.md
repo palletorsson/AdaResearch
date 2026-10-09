@@ -1,0 +1,3 @@
+A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.
+
+Systems do not connect seamlessly. Crossing epistemic boundaries requires transformation, not mere transport. Each system produces usable abstractions that are purpose-relative, historically contingent, shaped by experimental constraints. The portal stages the exit from one domain of situated success to another—neither claims to disclose how form "really is."

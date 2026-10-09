@@ -1,0 +1,39 @@
+{
+  "room": "Color_Walls",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Walls/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Walls/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Walls/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Walls/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Walls/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Walls/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Walls/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Walls/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Walls/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Walls/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Walls/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Color_Walls/map_data.json": "0defd72227afdd82cb6d47ca63ba8f857b0a752971c6a950483645ead04d723d",
+    "doc/book/iterations/2026-09-23-walls-view-and-passage/probe.gd": "e8a360d4247a63a12b5d1cf1f1c7a539eb7d4e2a94742b258d09dd545d45000e",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "e20161f1b5ed577468470020233793d05d9ef31fbe24acb38fa8c181c00cf774",
+    "ada_run/encounter_pilot/Color_Walls/control.json": "1a201c57a000cac6ab40ee16846811ab831b1e10718d0e25093f78a62a4b3e3b",
+    "ada_run/encounter_pilot/Color_Walls/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Color_Walls/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Walls/em_bake.json": "b148cfcc716b29b5f3d6e8f9ad1aa73a48082e7ddeb81b5545bb8b13dfbb04a9",
+    "commons/artifacts/registry/color.json": "c1afac46812bd4049d7bbc4d4c0f88eaee24700b2ddd1402d40ce213983f5daf",
+    "algorithms/color/gradient_interpolator/gradient_interpolator.tscn": "81502ca1b36612ec05229d0ff3e50c438f08dd2d5d1a32b8de8ee5e35ecd7527",
+    "algorithms/color/gradient_interpolator/gradient_interpolator.gd": "8638a8b0c91475d13a54f794081a303188dc0a1c94de50852c0f6f1d28029ea4",
+    "commons/artifacts/color_space_navigator/color_space_navigator.tscn": "6e222e196c2788e2a5e93066d56abc2cda7af012ff02425aa5ef01b92d5ed6bb",
+    "commons/artifacts/color_space_navigator/color_space_navigator.gd": "c41890fb097d9070963a8862d2425064de34099f063f465c622b62821b6a7d57",
+    "algorithms/color/color_mixing/color_constellation_office.gd": "8c7c207d38205d909b243442269786326477ed445fa02deff536efab969e6657",
+    "commons/ui/control_panel.gd": "7d34a50c201159954fc8ca7833fe0f80d2bd496d4cc374dc056988d05292bb9b",
+    "commons/interactables/push_button.gd": "2c12b891af99f5884354ac030890da53b49fce10262ac69e328b8d6a6e2320f9",
+    "commons/interactables/interactable_area_button_pointer.gd": "bb571e4e1f5b78e3f4c7acf8ab19ef72ad8d10c2efe4038637c8ba2064d7af92",
+    "tools/probes/transformation_encounters.gd": "8b811e7b86f86512d989bc252db7128aeb5e1e9b9e17731b82faa3a9ef829d38",
+    "tools/probes/array_entered_address.gd": "042807a5ca9caa7ea2930faae971b1eaf5cf0e30c91065c13b9ab3a01a45e32a"
+  }
+}

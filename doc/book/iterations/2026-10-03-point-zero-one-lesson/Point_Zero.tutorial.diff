@@ -1,0 +1,20 @@
+--- before/Point_Zero/tutorial.md
++++ commons/maps/Point_Zero/tutorial.md
+@@ -3,6 +3,8 @@
+ Day Zero gave you a running project. Here you decide what happens once and what keeps happening.
+ 
+ Open `hello_world.gd` in [the Point Zero study](../../../doc/book/studies/point-zero/README.md). The room supplies the floor, camera and light. The script creates its own text display. Each example can also be attached to an empty `Node3D` in your prepared scene.
++
++This download is a desktop study. The script also gives us a counter to place in Ada's world. Day Zero prepares that world and its XR tools; this example needs no controller input.
+ 
+ ## Once
+ 
+@@ -30,6 +32,8 @@
+ ## The view and the light
+ 
+ The display exists in 3D space. A `Camera3D` chooses the view shown on screen. In the study's `base.tscn`, select the camera and change its z position from 4.7 to 3.0. Run again: the text appears larger, although the text object has not grown. Restore 4.7.
++
++This is the desktop camera. In XR, the tracked view follows your head; do this position-editing exercise in the desktop study.
+ 
+ A `DirectionalLight3D` sends parallel light through the scene, like sunlight. Select it and change its `light_energy` from 1.2 to 0.0. Run again: the floor goes dark. This study uses no ambient fill light.
+ 

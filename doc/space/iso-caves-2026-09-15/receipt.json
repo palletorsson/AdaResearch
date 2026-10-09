@@ -1,0 +1,36 @@
+{
+  "started": "2026-09-15T10:25:18+02:00",
+  "finished": "2026-09-15T10:25:34+02:00",
+  "pid": 33392,
+  "exit": 0,
+  "checks": 29,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/iso_caves_probe_base.gd": "70f5f5893ffa83ca7fbd44c51984db6f41c9613391aacded29c1b7382bc27ce3",
+    "commons/maps/ISO_Caves/map_data.json": "fd6653b68166d123bae1cf4f135060e19fdf1e740b73a651221c886e21c71059",
+    "commons/maps/ISO_Caves/final.md": "e5faebde69d63adf70b402386cc64ffb9ec288b3eb47dc23363e57136affb658",
+    "commons/artifacts/timing_machines/iso_cave_workshop.gd": "f4bdfc7ae6e69e8afaf7f296ed6cca0915a53511ae9e76c5c7ec8821e4d09b7b",
+    "commons/artifacts/timing_machines/iso_cave_workshop.tscn": "18f3337ea98b7bd0a138d432e539aee546b4f063875379580730577c93181d24",
+    "commons/data/artifact_roles.json": "0309f77ee332fbd5a88b703de7f3682e847cd96279cb0ef951a3357cf5af9c5e",
+    "commons/data/book/isosurfaces.json": "d9963843e02017b383a0939a93c8f909ef03266c437ce43da3d7ce4ec3a9f19f",
+    "commons/data/trunk_branches.json": "88b092af1eb276274f07e67538b8a619e1ec389641a6ac6eb0668dd6bfa06ac7",
+    "commons/data/map_authored.json": "5f1af2c9c97c79e8a8a8e81b8da1ba65f4fd75ba9a0565ecf5e35ee91c7e2463",
+    "commons/data/museum/em_plan.json": "5ce2ed7b94f2823e2e2cc497d1507555f6c699b3afbbfa37b8b67f6c29781073",
+    "commons/artifacts/registry/isosurfaces.json": "0095a29ec9f1f1617323cec5dc53396a03f4876b9ba9739ce9985d403bee3fd6"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 29764,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "known_startup_errors": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+  ],
+  "known_shutdown_errors": [],
+  "known_startup_error_reason": "Unresolved default audio bus UID; exact baseline diagnostic; review muted."
+}

@@ -1,0 +1,355 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "first review artifact placed at full size",
+      "passed": true
+    },
+    {
+      "name": "mass: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "mass: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: mass-before",
+      "passed": true
+    },
+    {
+      "name": "mass: equal force makes inverse mass acceleration",
+      "passed": true
+    },
+    {
+      "name": "mass: motion persists after force ends",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: mass-after",
+      "passed": true
+    },
+    {
+      "name": "mass: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "mass: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "vortex: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "vortex: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: vortex-before",
+      "passed": true
+    },
+    {
+      "name": "vortex: tangential motion curves inward",
+      "passed": true
+    },
+    {
+      "name": "vortex: path accumulates actual positions",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: vortex-after",
+      "passed": true
+    },
+    {
+      "name": "vortex: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "vortex: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "roll: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "roll: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: roll-before",
+      "passed": true
+    },
+    {
+      "name": "roll: free ball gains angular velocity",
+      "passed": true
+    },
+    {
+      "name": "roll: locked ball cannot rotate",
+      "passed": true
+    },
+    {
+      "name": "roll: equal ramp leaves different outcomes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: roll-after",
+      "passed": true
+    },
+    {
+      "name": "roll: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "roll: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "pipe: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "pipe: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pipe-before",
+      "passed": true
+    },
+    {
+      "name": "pipe: contacts carry the point around the bend",
+      "passed": true
+    },
+    {
+      "name": "pipe: point falls after channel exit",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pipe-after",
+      "passed": true
+    },
+    {
+      "name": "pipe: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "pipe: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "conveyor: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "conveyor: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: conveyor-before",
+      "passed": true
+    },
+    {
+      "name": "conveyor: finite supply enters while receiver is closed",
+      "passed": true
+    },
+    {
+      "name": "conveyor: contact surface transports real boxes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: conveyor-backlog",
+      "passed": true
+    },
+    {
+      "name": "conveyor: open receiver processes the remaining queue",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: conveyor-after",
+      "passed": true
+    },
+    {
+      "name": "conveyor: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "conveyor: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "attractor: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "attractor: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: attractor-before",
+      "passed": true
+    },
+    {
+      "name": "attractor: selected point responds",
+      "passed": true
+    },
+    {
+      "name": "attractor: wider filter moves the doorstop",
+      "passed": true
+    },
+    {
+      "name": "attractor: the released door can turn further",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: attractor-after",
+      "passed": true
+    },
+    {
+      "name": "attractor: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "attractor: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "threebody: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "threebody: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: threebody-before",
+      "passed": true
+    },
+    {
+      "name": "threebody: internal pair forces conserve net momentum",
+      "passed": true
+    },
+    {
+      "name": "threebody: initial change survives into distinct positions",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: threebody-after",
+      "passed": true
+    },
+    {
+      "name": "threebody: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "threebody: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "support: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "support: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: support-before",
+      "passed": true
+    },
+    {
+      "name": "support: removing loaded corner tilts slab",
+      "passed": true
+    },
+    {
+      "name": "support: displaced support persists",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: support-after",
+      "passed": true
+    },
+    {
+      "name": "support: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "support: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "bowling: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "bowling: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bowling-before",
+      "passed": true
+    },
+    {
+      "name": "bowling: launch and recoil have opposite signs",
+      "passed": true
+    },
+    {
+      "name": "bowling: physical contacts disturb pins",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bowling-after",
+      "passed": true
+    },
+    {
+      "name": "bowling: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "bowling: reset restores all bodies",
+      "passed": true
+    },
+    {
+      "name": "catapult: existing point/cube bodies and visible controls",
+      "passed": true
+    },
+    {
+      "name": "catapult: solid visitor approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: catapult-before",
+      "passed": true
+    },
+    {
+      "name": "catapult: torque turns a real hinged arm",
+      "passed": true
+    },
+    {
+      "name": "catapult: arm contact gives point velocity",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: catapult-after",
+      "passed": true
+    },
+    {
+      "name": "catapult: reset refuses held object",
+      "passed": true
+    },
+    {
+      "name": "catapult: reset restores all bodies",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "scope": "Production scenes inside the actual museum; real rigid bodies, joints, contacts and supplied button events. Images are from this run. Headset comfort and tracked hands still need the user's VR trial."
+  },
+  "passed": true,
+  "room": "Force_Review_01_Mass",
+  "scope": "Ten production scenes in the real museum; supplied control events, engine physics and reset assertions. Every trial photographed in the same review bay for comparison. Headset ergonomics, Quest performance and all older artifact interactions remain untested in this pass."
+}

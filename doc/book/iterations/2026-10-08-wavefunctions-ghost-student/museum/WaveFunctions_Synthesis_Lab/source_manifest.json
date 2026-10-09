@@ -1,0 +1,30 @@
+{
+  "room": "WaveFunctions_Synthesis_Lab",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json": "ca5283dee6214f09806c80b360d16c6256cd7ca9fc4c52466a3ceb2471d4545a",
+    "tools/probes/wavefunctions_synthesis_museum.gd": "aeda0e7358fb10c814f6da7ba1fcb38e00d84f7f3f0ef98a5b6b11f2377172f8",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "e54163c93bfab0ad230a6e654ee995c41f64ea24d2c1ba25f47cafc33478d698",
+    "ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/control.json": "f72f48e3f87d6166dca789e99ad2df2585227db7abdfeae1c5272e296298e186",
+    "ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "ada_run/encounter_pilot/WaveFunctions_Synthesis_Lab/em_bake.json": "662dda8dc4e0a710596665b131eee0a289f332ff97f4bd29182ac5b2fedead4e",
+    "commons/artifacts/registry/commons_artifacts.json": "49cb2e2b0a41e794b3d2e77b8605936cc4ca384f23d6d118ab907bfd6998ca83",
+    "commons/artifacts/additive_wave_demo/additive_wave_demo.tscn": "fbeb6280b086c2966d707ee1b60bc57d8385dca4774e945f74c4e468d88d78f5",
+    "commons/artifacts/additive_wave_demo/additive_wave_demo.gd": "3174ca5ddc7d5cbe77753936f74a72325cbef5af4d3c911de1aa119a4290f08a"
+  }
+}

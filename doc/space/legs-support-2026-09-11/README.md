@@ -1,0 +1,13 @@
+# What Lets a Body Stand? — 11 September 2026
+
+VFM_09_Legs grows from 32x18 to 32x34. All seven original walkers shift sixteen cells along Z, retaining their tokens and arrangement. New support_polygon_lab at (16,8) has a full-scale floor experiment, two standing consoles and a wall plan. It is registered in support_experiments.json. Two primary book anchors: support_polygon_lab and the unchanged four_leg_critter. The remaining six walkers are supporting comparisons. Before files, original roles/book/core and placements are preserved here.
+
+The new artifact uses an actual 10 kg RigidBody3D plate and finite square support posts on private collision bit 22. FEET selects four, three, adjacent pair or diagonal pair of posts. SHIFT changes the body's custom mass centre, with a fixed assigned inertia tensor. Both reset the body held; RELEASE enables engine gravity/contact. RESET clears pose/velocities, retains parameters. PARTS reveals an X-ray mass centre, vertical projection, initial support hull on floor and wall, measured tilt and initial signed margin. It does not claim to track changing contact patches after tipping. Rule text names this distinction. Player collision is separate.
+
+37 desktop checks pass in the actual museum. Four supports and the inward-shifted three-support load remain level; outward shift tips about 39.9 degrees after 120 physics frames in the checked run. Adjacent and diagonal pad geometry, pointer controls, reset, explicit shared material, exact mass marker, sampled approaches, and the original four-leg walker are checked. Captures show the stable and tipping cases plus the retained walker. Headset reach, readability, comfort, sustained performance and comprehensive secondary review remain pending. Existing unresolved UID and renderer shader-cache warnings remain outside this change.
+
+The chapter replaces claims that leg count alone determines gait or that a boundary equilibrium necessarily falls. It distinguishes finite contact patches, an initial static forecast, engine contact response and authored procedural locomotion. The original row remains available; no existing walker scripts or scenes changed.
+
+Book lines, role order, core encounter hashes and source fingerprints align with final.md. The guide links backward to Gravity and forward to VFM_08_Arena. Generated museum indexes and the possible-bodies route are refreshed. No commits made.
+
+Visual follow-up: 29 interior structure cells were flattened to open the walker row. Outer walls remain; original cell values are in cleared-structure.json. The revised room was rerun with 37 passing checks and fresh inspected captures.

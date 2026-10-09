@@ -1,0 +1,121 @@
+---
+title: "Everything worked, and this happened"
+subtitle: "Inside the Forces halls: flying points, flower mowers, unstable arrangements and the pleasure of a consequence"
+date: "2026-10-08"
+author: "Ada Research"
+sequence: "forces"
+tags: ["endless-museum", "forces", "physics", "research-process", "pedagogy", "unintended"]
+thumbnail: "/book-review/doc/book/iterations/2026-10-07-everything-worked/museum/aftermath.png"
+---
+
+A chair reaches the gate sideways. A crate follows it. The conveyor keeps moving, a black sphere finds a gap, and an arrangement we intended as a delivery system becomes a pile. We can stop admitting objects. The objects already there continue to move.
+
+This was one of the discoveries of our recent work on Forces in Endless Museum: a simple instruction can produce a situation worth staying with. Get this through. Land that ring. Push this body. Keep the platform level. We understand the intention quickly enough to notice when its consequences begin to exceed it.
+
+![Crates, chairs and black spheres accumulate around a conveyor and its hinged gate inside the museum.](/book-review/doc/book/iterations/2026-10-07-everything-worked/museum/aftermath.png)
+
+*“Just get it through.” The conveyor aftermath is a native Godot capture. The pile is produced by contact and obstruction during the run; its exact arrangement is not scripted.*
+
+Across 6–7 October, we investigated physics comedy, illustrated possible encounters, surveyed the existing artifact collection, built new experiments and repeatedly changed their interfaces. The result is a growing sequence where the point from the beginning of the book gains the ability to push, fly, collide, resist and disturb. The familiar cube, slope and moving platform return with new responsibilities. There is pleasure in recognising something we already know and discovering what else it can do.
+
+The research began partly with a very ordinary experience: watching short videos and wanting to see what happens next. A ball approaches a narrow opening. A tower leans. An elaborate mechanism seems one step away from succeeding. We can predict enough to become invested. A precise fit and an unexpected collapse can both reward that attention.
+
+We collected a [purposive sample of 1,000 public Shorts titles from 17 channel lists](/book-review/doc/book/iterations/2026-10-07-physics-shorts-research/index.html). This was a title study, without watching the clips or measuring audience response. It helped us gather situations and vocabulary. The design proposition remained ours: give the visitor a legible intention, a visible intervention and time to follow the result. Thirty illustrated proposals turned that proposition into things we could discuss before building them.
+
+Our references ranged from Chaplin and the escaped experiment of Half-Life to the improvisation of [Garry’s Mod](https://gmod.facepunch.com/). Nikita Diakur, Theo Triantafyllidis and Katie Torn entered the conversation around function, dysfunction and bodies caught in processes. These were invitations to think about the work. The museum needed its own material experiments.
+
+One practical decision was to bring vector mathematics together in a single room. Move a black point and read its displacement. Compare the length of that displacement with a unit direction. Bring two vectors together; see what addition or projection retains. Thin cylinders give direction a body in the room, and annotations change with the points. The relation becomes something the hand can vary while the eye follows its numbers.
+
+![A black point and a pink unit-direction point stand above plinths with cylindrical arrows and live coordinate labels.](/book-review/doc/book/iterations/2026-10-07-vectors-one-room/layout/direction-moved.png)
+
+*The compact vector room. A point moves; the relation and its values become visible together.*
+
+That room prepares a distinction the rest of the sequence must preserve. A position says where. Velocity says how position changes. A force can change velocity, with mass affecting the response. An impulse gives a brief change in momentum. Those differences matter when choosing what an artifact actually teaches. [The Nature of Code’s Forces chapter](https://natureofcode.com/forces/) remains a useful companion for building up force, mass, friction, drag and attraction through small models.
+
+We gave equal-sized PointBody spheres different masses so the same push could produce different responses without size deciding the comparison for us. A loaded trolley and a push-box arrangement offer other encounters with the principle. They need not all carry the tutorial. One clear construction can teach the operation; the others can let it become strange, difficult or playful.
+
+The most direct extension of the point is the pair of flying spheres. Hold them, point where you want to travel and press the triggers. Release them and the thrust ends while motion continues under the remaining influences. An early version sent the player the wrong way. Correcting that direction was also a correction to the meaning of the interface: the hand needed to make a promise the movement would keep.
+
+![Two shiny black spheres wait on white plinths below instructions to point, hold the trigger and fly.](/book-review/doc/book/iterations/2026-10-07-flight-forward-and-confetti/flight/thrust-points.png)
+
+*The point gains power. The spheres apply player acceleration while activated; release does not erase the velocity already acquired.*
+
+A body visor makes the player part of the readout. It shows velocity and the acceleration contributions used by the movement system. We kept those labels exact: they are not a measurement of a human body’s force. Teleports connect the halls, while the flight experiment gives movement within a hall its own problem. A small flying mat takes that invitation into a course of gates.
+
+The other decisive correction came from the author: too many examples were becoming button-operated demonstrations. We needed to use our hands. Pull, push, swing, drag, strike. Keep a control close when a global adjustment is necessary. A long stick extends reach. A rose-coloured grip gives a point of intervention. The player should be able to stay with the event they have just started.
+
+This exposed a real problem with constrained objects. A swing that can simply be grabbed and carried away stops teaching its attachment. We changed those interactions so a hand applies a bounded pull while the hinge or suspension remains responsible for the motion. Coupled hanging points, spring balls and damped swings can then answer the same gesture differently.
+
+![A row of hanging purple swings sits beneath black frames in the Oscillation hall.](/book-review/doc/book/iterations/2026-10-07-forces-stick-hinges-and-catalyst/museum/Vectors_Act4b_Oscillation/stick-and-swings.png)
+
+*Different rates of settling become a spatial comparison. The attachment remains part of the encounter when the player disturbs it.*
+
+The collection became wonderfully excessive. A ten-pin bowling lane acquired banks and room for misses. A recoil cart lets the launcher move too. A donut-cake mortar throws physical rings towards posts; their holes matter to what can catch and what can pass. Its stacked base brings back the earlier fascination with primitive resolution, now enlisted in a ridiculous instrument.
+
+![A mortar on a tiered polygonal base launches pink rings towards an upright target.](/book-review/doc/book/iterations/2026-10-07-forces-extravaganza/after/Vectors_Act5_ForceAsPlace/donut-cake.png)
+
+*The donut-cake mortar during an earlier Forces pass. Later revisions added more targets. The ring’s opening is retained by its collision construction.*
+
+The human catapult now begins a three-second countdown when boarded. Its red arc points along the intended launch, and stepping away cancels the countdown. The player becomes the projectile. Jump pads offer a smaller version of the same transition: an initial change, then a journey subject to gravity. The enlarged firework fountain can pause its trajectories, leaving a brief event available for inspection.
+
+![A human catapult and boarding ramp sit beneath a red projected flight arc.](/book-review/doc/book/iterations/2026-10-07-human-catapult-launch/museum/red-trajectory.png)
+
+*A visible beginning and a predicted journey. The catapult’s launch is prescribed by the game; its animated arm is not a simulated mechanism calculating that impulse.*
+
+Friction needed architecture as much as code. The slope bodies were too hard to reach and see. We added a walk-up route and viewing deck, contained the arrivals in basins, and made one body drop every seven seconds across the comparison lanes. Trails keep enough of the journey visible to compare sliding, rolling and rough contact. The ramp finally gives us somewhere to stand and ask the question.
+
+![Four coloured slope lanes lead into shallow basins containing black bodies and pink obstacles.](/book-review/doc/book/iterations/2026-10-07-slopes-walk-up-and-drop/museum/basin-trails.png)
+
+*The slope does not choose the ending. Access, containment and a repeated release make a moving comparison easier to encounter.*
+
+Drag grew into large regions through which bodies and the player can travel. Their resistance depends on motion. Wind gives the relative movement another direction. A held sphere can pull against that field. Elsewhere, a large magnet gathers nearby objects and releases them after three seconds; a separate gravity-gun point gives attraction a handheld address. Mutual attraction lets several moving bodies alter one another’s paths, with the visitor able to enter as another source.
+
+The word “drag” also opened an association we want the reflective writing to keep. Physical resistance and cultural drag have different meanings. Their meeting can still prompt a question about how a body is carried, performed or made to move differently. The writing has to stay with that difference rather than turn a force equation into an explanation of identity.
+
+One of the happiest changes was the lawn mower. Its physical handle now lets the player push forward and steer, with resistance in the motion. Across a large lawn, cutting leaves stubble and flowers. The trail records an intervention, and the tool’s expected purpose shifts. Tidying a surface becomes a way of drawing another one.
+
+![A curved strip of flowers crosses freshly cut grass, surrounded by tall green blades inside the museum.](/book-review/doc/book/iterations/2026-10-07-mower-grass-to-flowers/museum/flowers-in-the-cut.png)
+
+*The mower leaves flowers in its wake. The visible path belongs to the player’s movement through the lawn.*
+
+We also built situations where support is the central question: a brick tower with a removable lower element, a table whose leg can be pulled away, a long hinged gate, a seesaw, a suspended plank and articulated attachments. These make the location of a push or a missing support consequential. The oversized science-fiction club and hanging punching bag extend that inquiry into contact. Hit, release, watch the return. The familiar black sphere becomes a ball to send across the room.
+
+![A large black-and-pink club stands beside a suspended pink punching bag, with recoil carts behind it.](/book-review/doc/book/iterations/2026-10-07-club-and-punching-bag/museum/hanging-bag.png)
+
+*A club, a suspended body and a returning motion. The bag uses a rigid body and a joint; its appearance does not imply simulated soft filling.*
+
+The existing Catalyst returned alongside these objects. Its presence matters to the longer ambition: an object we learn to understand can become an instrument for acting elsewhere. At present, the Catalyst, thrust spheres and gravity-gun point are separate implementations. Their continuity is a design and teaching commitment, not a claim that one persistent instance already travels through every hall. Target practice also gained a clearer response: laser hits can destroy the target ball and produce confetti.
+
+The largest invitation is the Gravity Oval. Chairs, crates, extinguishers and points rise in a column, turn above us and descend again. Step into the stream and the same circulation can carry the player. The field becomes a place one can enter. Its ordinary prefabs help the extraordinary motion remain readable: we know what these things usually do.
+
+![Chairs, crates and black spheres circulate around a tall vertical oval with coloured trails above the museum floor.](/book-review/doc/book/iterations/2026-10-07-gravity-oval/museum/whole-oval.png)
+
+*Twenty-four bodies in a circulating field. “Gravity Oval” names the encounter; a designed acceleration field produces the cycle.*
+
+These distinctions are part of the research. We enabled the Jolt backend already available in the project’s Godot version for contacts, bodies and joints. Some other exhibits use deliberately simplified models: the liquid regions combine drag and buoyancy; the oval steers circulation; the catapult supplies a launch velocity. Exactness means knowing which model makes the observed event possible. A convincing image cannot settle that by itself.
+
+The conveyor draws these threads into the question that kept returning: what does it mean to begin a process and relinquish some control? Crates and chairs do not share our idea of successful delivery. Their accumulated positions and velocities become the next event’s conditions. The body carries a history through its state. Keats’s negative capability gave us a phrase to think with here: can we remain attentive when an experiment produces a situation we have not yet named?
+
+**Everything worked, and this happened.** That is the sentence we carried into the reflective text. It allows a mechanically intelligible consequence to complicate an intention. We still fix bugs. We also leave room for a result that is awkward, funny or difficult to contain. A jam can be worth investigating before pressing reset.
+
+The method needed its own restraint. We assembled a review gallery of 216 candidate records, including older work, and used the author’s selections to begin curating the halls. Some archive entries were incomplete. A keep vote preserved something for consideration; it did not require every object to become equally prominent. Elevated captures helped judge spacing, and views from inside the rooms exposed problems that a diagram missed. The current route has eleven halls.
+
+The lesson plan is narrower than that collection. The point remains the preferred carrier when it can make the principle clear. One artifact teaches a first operation; comparisons and freer experiments surround it. We have recorded proposed tutorial carriers and checks, while the full Forces tutorial rewrite remains ahead. The miniature stacking table also still needs to become the intended sorting interface for the larger primitive stack. Recording these edges keeps an exciting prototype from quietly becoming a claim of completion.
+
+The latest addition is Endless Drive: a small arcade car with a hand-operated wheel and a track that continues through recycled road sections. It brings the question of control into a longer rhythm of steering, speed and correction. The track moves around the cockpit; this is an arcade driving model rather than a tyre-and-suspension study. It belongs to the expanding field of play from which the final teaching sequence will be selected.
+
+![A pink car faces an endless road bordered by pale pillars and pink and cyan rails under a starry sky.](/book-review/doc/book/iterations/2026-10-07-endless-drive/museum/endless-bend.png)
+
+*Endless Drive, reached from the museum. Reused road sections make continuation possible without an ever-growing scene.*
+
+Throughout this work, illustrations, code, tests, captures and the author’s corrections kept changing one another. Eyes appeared on the tips of the phase rods and followed the visitor. A dull control became something to pull. An inaccessible comparison acquired a path. A mower began leaving flowers. These small decisions gave the larger inquiry its character.
+
+The saved engine checks cover particular behaviours: launch direction, joint retention, timed release, receiver response and bounded object counts. They provide evidence for those claims. They do not yet tell us whether every encounter feels good in a headset or whether a student can reconstruct it from the book. The next pass needs both kinds of experience.
+
+What we have made is a much richer set of things to act with. The sphere can carry a lesson into another room. The room can answer an action with more than we asked of it. We can become more capable and still find ourselves surprised by what those capabilities bring into motion.
+
+---
+
+*Work journal published 8 October 2026, covering the Forces investigations and builds of 6–7 October. All eleven images are saved captures from Godot running the museum, taken at the relevant stages of development.*
+
+*Further material: [the thirty illustrated proposals](/book-review/doc/book/iterations/2026-10-07-forces-thirty-upgrades/illustrations.html), [the expanded experiments](/book-review/doc/book/iterations/2026-10-07-forces-extravaganza/index.html), [the conveyor and its reflective passage](/book-review/doc/book/iterations/2026-10-07-everything-worked/index.html), [proposed tutorial carriers](/book-review/doc/book/iterations/2026-10-07-forces-stick-hinges-and-catalyst/index.html#tutorial), and [Endless Drive](/book-review/doc/book/iterations/2026-10-07-endless-drive/index.html).*

@@ -1,0 +1,546 @@
+{
+  "goal_id": "book_softbodies",
+  "goal_title": "Book: Soft Bodies & Morphogenesis: Matter That Finds Its Shape — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in softbodies became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "softbodies",
+    "order": 16,
+    "phase": "integration",
+    "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+    "chapters": [
+      "SoftBodies_Soft_Body_Deformation",
+      "SoftBodies_Cloth_Physics",
+      "SoftBodies_Carusell",
+      "SoftBodies_Obsticals",
+      "SoftBodies_Obsticals_Part2",
+      "SoftBodies_Playground_of_Joy",
+      "SoftBodies_Affect_Theory_Visualization",
+      "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "Topology_Entropy_Morphogenesis"
+    ],
+    "words": 3558,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "PG_Mirrored_Patterns (last of proceduralgeneration)",
+      "SoftBodies_Soft_Body_Deformation",
+      "SoftBodies_Cloth_Physics",
+      "SoftBodies_Carusell",
+      "SoftBodies_Obsticals",
+      "SoftBodies_Obsticals_Part2",
+      "SoftBodies_Playground_of_Joy",
+      "SoftBodies_Affect_Theory_Visualization",
+      "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "Topology_Entropy_Morphogenesis",
+      "ISO_Introduction (first of isosurfaces)"
+    ],
+    "reading": {
+      "arc": "The sequence takes a body from a single yielding cube to a surface cut out of a field. It opens by asking what holds a deformable thing together (three coefficients on a desk, a mill that can be halted while the sphere goes on moving), then which points are forbidden to move (pins against a support that turns out to be scenery), then what changes when the support itself is driven (the carousel), when the architecture is the body (breathing walls), how to compare contacts honestly (a gallery with replay, hold and variation), and what a frozen form keeps of the process that made it (an instrument that feeds back on its own reading, a vessel reconstructed at 40/200/400 steps). It then turns on resemblance itself: radiolaria that look alive without any simulation. Two field-to-form mappings close it, Gray-Scott chemistry and a gyroid whose master control is called entropy, and the last hall asks who connected the controls. The discipline throughout is that every control is described by what it does and what it does not do, so the reader learns to separate material, boundary, drive, contact, instrument and name.",
+      "holds": [
+        "The desk: every hall carries the same soft_workshop_console with five or six named controls, a two-line readout and a RULE card; the prose addresses the controls in capitals, so the reader always knows what is at hand.",
+        "The refrain 'it does X; it does not do Y' (RESET restores coefficients, not vertices; STOP zeroes the rate, not velocity or gravity; HOLD DRIVE holds phase, not vertices; RELEASE restores pins, not an original body; FEEDBACK off restores pressure, not the body you had).",
+        "Carried objects: the four stopped spheres (softstopscene) stand in Cloth and return in Reaction as 'soft-body samples'; radiolaria is flagged in hall 1 as a warning to keep for later and delivered in hall 7; the entropy surface stands in Playground as 'field sculpture' before its own hall; the cloth strips carry from Cloth into Carousel.",
+        "The pin thread: pinned points named as part of the cube's conditions, then PINS eight-two-none, then a driven pin, then pinned wall edges, then HOLD pinning every vertex, then the vessel's pinned upper region.",
+        "The resemblance-versus-mechanism thread: 'Calling it breathing is an invitation to bodily recognition', radiolaria's 'recognition before explanation', the parameter 'called entropy in the source'.",
+        "Each chapter ends by naming the next hall's question, and each title is a question the hall answers with a control."
+      ],
+      "hall_notes": [
+        {
+          "hall": "SoftBodies_Soft_Body_Deformation",
+          "words": 358,
+          "note": "Opens with the cube yielding and the three coefficients (stiffness, damping, pressure; all three assignments verified in jelly_cube.gd:79/87/95), then the mill whose drive can be held while the sphere's physics continues. Reads cleanly and plants radiolaria as a warning for later; it reaches back to Transformation rather than receiving the previous sequence's closing question."
+        },
+        {
+          "hall": "SoftBodies_Cloth_Physics",
+          "words": 796,
+          "note": "The strongest chapter and more than twice the length of the others: eight strips, a support that vanishes while the held edge stays, the pin rule shown in code (exactly soft_workshop.gd:95-97; 8 of 112 vertices per strip, PlaneMesh 6x12 subdivisions), PINS eight-to-two, RELEASE, REBUILD, then the four stopped spheres. One instruction order is wrong (LANDING removes the rail before the reader is told to watch the rail) and the last line promises the wrong hanging body for the next hall."
+        },
+        {
+          "hall": "SoftBodies_Carusell",
+          "words": 322,
+          "note": "Driven hub in radians per second (revolving_joy_ride.gd:15, 293), SPEED/REVERSE/STOP each described by what they leave running; a short, clear chapter that correctly says the cloth beside it keeps a fixed support and lists the sticks, cubes, flex pad and mushroom that are actually on the map."
+        },
+        {
+          "hall": "SoftBodies_Obsticals",
+          "words": 330,
+          "note": "The sine-to-pressure bridge is exact (breathing_room_scene.gd:12-13) and the 'invitation to bodily recognition' paragraph is the sequence's ethical centre. It names three of the desk's five controls and closes with the builder phrase 'the museum crossing', which a visitor cannot parse."
+        },
+        {
+          "hall": "SoftBodies_Obsticals_Part2",
+          "words": 292,
+          "note": "Replay, variation, hold, release and group are all real and all rebuild (softbody_test_gallery.gd:665-689); the named cells belong to the visible group. Reads as a careful method chapter about not mistaking proximity for a controlled comparison; only the example name 'Jelly' is from a group the reader is not looking at."
+        },
+        {
+          "hall": "SoftBodies_Playground_of_Joy",
+          "words": 476,
+          "note": "The instrument that measures an axis-aligned box (rounded_softbody.gd:757-767) and then feeds back on it is the sequence's sharpest idea, and the vessel section is right about closed topology and collision. It tells the reader SQUEEZE changes a strength without ever saying how a hand squeezes."
+        },
+        {
+          "hall": "SoftBodies_Affect_Theory_Visualization",
+          "words": 297,
+          "note": "Recognition before explanation; the claim that COLOUR rebuilds geometry under an unpinned seed is true (radiolaria.gd:1157-1167 regenerates; seed 0 leaves the RNG unseeded). Short, exact, and it names its own place in the arc as a contrast, not a soft body."
+        },
+        {
+          "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "words": 371,
+          "note": "Gray-Scott update, double buffering, wrapped edges and clamping all match turing_pattern_generator.gd:439-461. It alludes to the 100 STEPS button without naming it and invokes Turing and Gray-Scott with no attribution in a corpus that footnotes such names."
+        },
+        {
+          "hall": "Topology_Entropy_Morphogenesis",
+          "words": 316,
+          "note": "The lerp lines are exact (entropy_morphogenesis_vr.gd:172-174) and the closing paragraph is the sequence's summary. The LEVEL control it advertises silently fails on its fourth press, and 'the player' is the one lapse from the sequence's 'your body' vocabulary."
+        }
+      ],
+      "stumbles": [
+        "SoftBodies_Cloth_Physics: 'Watch one meet the rail' follows the instruction to press LANDING, and the first press replaces the rail with the pan.",
+        "SoftBodies_Cloth_Physics to SoftBodies_Carusell: 'this time the cloth will know', but the driven support in the next hall carries soft spheres; the cloth there keeps a fixed support, as the next chapter itself says.",
+        "SoftBodies_Obsticals: 'the museum crossing still has independent support' is builder vocabulary from the map's design notes, never defined for a visitor.",
+        "SoftBodies_Obsticals: the desk has STIFFNESS and RESET PHASE; the prose names only AMPLITUDE, RATE and HOLD DRIVE, so two buttons sit unexplained on the hall whose argument is 'drive versus solver'.",
+        "SoftBodies_Obsticals_Part2: 'A name like \"Jelly\"' points at a Part 1 cell while the opening group is Part 2.",
+        "SoftBodies_Playground_of_Joy: SQUEEZE is explained as a strength, but a headset visitor is never told that squeezing is holding the grip with a hand at the body.",
+        "Topology_Entropy_Morphogenesis: cycling LEVEL back to 'minimal' leaves the threshold where 'broken' put it; the readout shows the number not moving.",
+        "Topology_Entropy_Morphogenesis: 'too narrow for the player' is the only 'player' in the sequence; elsewhere it is 'your body' and 'the visitor'.",
+        "ProceduralGeneration_Reaction_Diffusion_Systems: 'A hundred updates' describes a button labelled 100 STEPS without naming it the way every other control is named.",
+        "SoftBodies_Soft_Body_Deformation: the opening does not receive the previous sequence's closing question ('What bodies are possible now?') and reaches back to Transformation instead."
+      ],
+      "keep": [
+        {
+          "hall": "SoftBodies_Cloth_Physics",
+          "quote": "Boundary conditions are not a detail of the setup. Here they are most of what you have been looking at."
+        },
+        {
+          "hall": "SoftBodies_Cloth_Physics",
+          "quote": "A convincing support does not prove how a simulation is attached to it. You have just taken the support away and watched the attachment survive it."
+        },
+        {
+          "hall": "SoftBodies_Cloth_Physics",
+          "quote": "Two questions leave this room together. What makes a body deform, and what makes us stop looking?"
+        },
+        {
+          "hall": "SoftBodies_Soft_Body_Deformation",
+          "quote": "A soft appearance does not announce every freedom a body possesses."
+        },
+        {
+          "hall": "SoftBodies_Playground_of_Joy",
+          "quote": "A number that helped us look has become a number the body is asked to follow."
+        },
+        {
+          "hall": "SoftBodies_Playground_of_Joy",
+          "quote": "A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing."
+        },
+        {
+          "hall": "SoftBodies_Affect_Theory_Visualization",
+          "quote": "Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it."
+        },
+        {
+          "hall": "Topology_Entropy_Morphogenesis",
+          "quote": "The point is not to exhaust desire by naming every rule. It is to gain enough purchase on a rule to change what it permits—and notice what the next construction still leaves out."
+        }
+      ],
+      "handover_in": "PG_Mirrored_Patterns closes: 'we have selected, guided, branched, connected, carved, sampled and copied... What bodies are possible now? We can answer with a construction, try its limits, and carry the unresolved part into the next hall.' SoftBodies_Soft_Body_Deformation opens with a cube that gives way, which does answer the question, but it never receives it: its only backward reference is 'We have already changed whole objects by translation, rotation and scale', two sequences back. The bodies thread is implicit; one sentence would make it explicit.",
+      "handover_out": "Strong and verified. Topology_Entropy_Morphogenesis ends on a summary of the sequence and 'notice what the next construction still leaves out'; ISO_Introduction opens 'A boundary made from values' and says outright 'The porous specimen in the previous room introduced the same distinction between values and visible form.' The entropy surface is a marching-cubes gyroid cut at a threshold (entropy_morphogenesis_vr.gd:197-209, LEVEL moves threshold_center), so ISO's LEVEL control continues exactly the question hall 9 opened.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_softbodies.001",
+      "title": "LEVEL's return to 'minimal' does not move the threshold",
+      "spec": "[encounter] Topology_Entropy_Morphogenesis\nQuote: “LEVEL changes the threshold arrangement.”\nWhy: The desk cycles minimal, thickened, pinched, broken; the fourth press sends 'minimal' but the artifact's level branch writes nothing for it, so threshold_center stays at 0.95 from 'broken', the surface regenerates unchanged and the readout shows the same threshold. The reader is told a control does something and watches it do nothing.\nDo: In soft_workshop.gd's LEVEL branch, set model.threshold_center = 0.0 before applying 'minimal' (or make _apply_level write 0.0 for 'minimal' only when _built is true), so the cycle closes and the readout moves on every press.\nEvidence: commons/artifacts/timing_machines/soft_workshop.gd:198 cycles [\"minimal\",\"thickened\",\"pinched\",\"broken\"] through apply_grid_config; algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd:150-159 _apply_level writes -0.60/0.60/0.95 for the other three and `_: pass` for minimal; :291-295 and :306-310 regenerate with the unchanged threshold_center; readout soft_workshop.gd:216 prints current_threshold.\nFile: commons/maps/Topology_Entropy_Morphogenesis/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Topology_Entropy_Morphogenesis"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Topology_Entropy_Morphogenesis",
+      "quote": "LEVEL changes the threshold arrangement.",
+      "why": "The desk cycles minimal, thickened, pinched, broken; the fourth press sends 'minimal' but the artifact's level branch writes nothing for it, so threshold_center stays at 0.95 from 'broken', the surface regenerates unchanged and the readout shows the same threshold. The reader is told a control does something and watches it do nothing.",
+      "proposal": "In soft_workshop.gd's LEVEL branch, set model.threshold_center = 0.0 before applying 'minimal' (or make _apply_level write 0.0 for 'minimal' only when _built is true), so the cycle closes and the readout moves on every press.",
+      "evidence": "commons/artifacts/timing_machines/soft_workshop.gd:198 cycles [\"minimal\",\"thickened\",\"pinched\",\"broken\"] through apply_grid_config; algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd:150-159 _apply_level writes -0.60/0.60/0.95 for the other three and `_: pass` for minimal; :291-295 and :306-310 regenerate with the unchanged threshold_center; readout soft_workshop.gd:216 prints current_threshold.",
+      "review": "confirmed by a code checker (cited files only): soft_workshop.gd:198 LEVEL cycles [\"minimal\",\"thickened\",\"pinched\",\"broken\"] via model.apply_grid_config; :216 morphogenesis readout prints model.current_threshold. entropy_morphogenesis_vr.gd:150-159 _apply_level writes -0.60/0.60/0.95 for thickened/pinched/broken and `_: pass` for minimal (header comment :148-149 says so explicitly); :291-295 accepts level when it differs, :306-310 calls _apply_level then _regenerate with threshold_center untouched. Returning to minimal from broken keeps 0.95.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.002",
+      "title": "Watch the rail before pressing LANDING",
+      "spec": "[prose] SoftBodies_Cloth_Physics\nQuote: “LANDING exchanges the thing underneath them and drops them again. Watch one meet the rail: the contact is a line rather than a plane”\nWhy: The map opens this artifact on the rail, and the desk's first LANDING press installs the pan (two walls), so a reader who follows the sentence order watches the wrong contact. The line-versus-plane observation belongs to the opening state.\nDo: Reverse the two instructions: 'The spheres are resting on a rail: the contact is a line rather than a plane, and each body has had to resolve a shape around it. Then press LANDING. It exchanges the thing underneath them and drops them again; the pan that arrives makes a different contact.'\nEvidence: commons/maps/SoftBodies_Cloth_Physics/map_data.json interactables cell (18,12) `softstopscene#landing:rail`; commons/artifacts/timing_machines/soft_workshop.gd:139 cycles [\"floor\",\"pan\",\"rail\",\"cone\"] with _next starting from index 0, so the first press is pan; algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd:541-548 (rail is a bar) and :530-535 (pan is two walls); :622-638 _rebuild drops the bodies again.\nFile: commons/maps/SoftBodies_Cloth_Physics/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Cloth_Physics"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SoftBodies_Cloth_Physics",
+      "quote": "LANDING exchanges the thing underneath them and drops them again. Watch one meet the rail: the contact is a line rather than a plane",
+      "why": "The map opens this artifact on the rail, and the desk's first LANDING press installs the pan (two walls), so a reader who follows the sentence order watches the wrong contact. The line-versus-plane observation belongs to the opening state.",
+      "proposal": "Reverse the two instructions: 'The spheres are resting on a rail: the contact is a line rather than a plane, and each body has had to resolve a shape around it. Then press LANDING. It exchanges the thing underneath them and drops them again; the pan that arrives makes a different contact.'",
+      "evidence": "commons/maps/SoftBodies_Cloth_Physics/map_data.json interactables cell (18,12) `softstopscene#landing:rail`; commons/artifacts/timing_machines/soft_workshop.gd:139 cycles [\"floor\",\"pan\",\"rail\",\"cone\"] with _next starting from index 0, so the first press is pan; algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd:541-548 (rail is a bar) and :530-535 (pan is two walls); :622-638 _rebuild drops the bodies again.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.003",
+      "title": "The next hall's moving support carries spheres, not cloth",
+      "spec": "[handover] SoftBodies_Cloth_Physics\nQuote: “Carry the fixed edge into the next hall. There, the support itself moves, and this time the cloth will know.”\nWhy: The revolving joy ride hangs SoftBody3D spheres from pin-joint chains, and the cloth strips in the Carousel hall keep a fixed support, as that chapter says in its own words. The promise sends the reader looking for a cloth that never moves.\nDo: Change the last clause to 'and the bodies hanging from it will know', keeping 'Carry the fixed edge' so the cloth beside the ride remains the comparison the next chapter offers.\nEvidence: algorithms/softbodies/joyride/revolving_joy_ride.gd:4 ('PinJoint3D chains suspending SoftBody3D spheres') and :191-215 (SoftBody3D.new with a SphereMesh, top_level); commons/maps/SoftBodies_Carusell/final.md:19 'The cloth strips nearby retain a fixed support.'\nFile: commons/maps/SoftBodies_Cloth_Physics/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Cloth_Physics"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "SoftBodies_Cloth_Physics",
+      "quote": "Carry the fixed edge into the next hall. There, the support itself moves, and this time the cloth will know.",
+      "why": "The revolving joy ride hangs SoftBody3D spheres from pin-joint chains, and the cloth strips in the Carousel hall keep a fixed support, as that chapter says in its own words. The promise sends the reader looking for a cloth that never moves.",
+      "proposal": "Change the last clause to 'and the bodies hanging from it will know', keeping 'Carry the fixed edge' so the cloth beside the ride remains the comparison the next chapter offers.",
+      "evidence": "algorithms/softbodies/joyride/revolving_joy_ride.gd:4 ('PinJoint3D chains suspending SoftBody3D spheres') and :191-215 (SoftBody3D.new with a SphereMesh, top_level); commons/maps/SoftBodies_Carusell/final.md:19 'The cloth strips nearby retain a fixed support.'",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.004",
+      "title": "Say how a hand squeezes the body",
+      "spec": "[vr] SoftBodies_Playground_of_Joy\nQuote: “SQUEEZE changes the strength used by the artifact's existing squeeze interaction.”\nWhy: In the headset the squeeze is holding the controller's grip with a hand within 0.25 m of the body, which pushes vertices away from the hand; the desk button only scales that push (and its third setting turns it off). A visitor who never grips sees SQUEEZE do nothing and cannot follow 'Watch the instrument as well as the silhouette'.\nDo: Add one sentence before it: 'Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off.'\nEvidence: algorithms/softbodies/rounded_softbody.gd:15 (grip_click activates hand squeeze), :654-656 (_update_vr_hand reads grip_click), :678-690 (_apply_squeeze pushes vertices within _squeeze_radius 0.25 by _squeeze_strength), :586-587 (_on_squeeze_changed remaps 0..1 to 0..5); commons/artifacts/timing_machines/soft_workshop.gd:173 SQUEEZE sends [0.0,0.2,0.6] from index 1, so the presses give 1.0, 3.0, 0.0 against a default of 2.0.\nFile: commons/maps/SoftBodies_Playground_of_Joy/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "SoftBodies_Playground_of_Joy",
+      "quote": "SQUEEZE changes the strength used by the artifact's existing squeeze interaction.",
+      "why": "In the headset the squeeze is holding the controller's grip with a hand within 0.25 m of the body, which pushes vertices away from the hand; the desk button only scales that push (and its third setting turns it off). A visitor who never grips sees SQUEEZE do nothing and cannot follow 'Watch the instrument as well as the silhouette'.",
+      "proposal": "Add one sentence before it: 'Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off.'",
+      "evidence": "algorithms/softbodies/rounded_softbody.gd:15 (grip_click activates hand squeeze), :654-656 (_update_vr_hand reads grip_click), :678-690 (_apply_squeeze pushes vertices within _squeeze_radius 0.25 by _squeeze_strength), :586-587 (_on_squeeze_changed remaps 0..1 to 0..5); commons/artifacts/timing_machines/soft_workshop.gd:173 SQUEEZE sends [0.0,0.2,0.6] from index 1, so the presses give 1.0, 3.0, 0.0 against a default of 2.0.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.005",
+      "title": "'The museum crossing' is builder vocabulary",
+      "spec": "[prose] SoftBodies_Obsticals\nQuote: “Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.”\nWhy: 'Museum crossing' comes from the map design notes and the eye-shot brief; nothing in reader prose defines it, so the sentence that is supposed to reassure the visitor about the floor reads as a term they missed.\nDo: Replace the first sentence with 'Yet the floor that carries you through this hall does not deform.' and keep the second.\nEvidence: commons/maps/SoftBodies_Cloth_Physics/map_data.json map_info.metadata.design_notes 'separate the museum crossing from specimens'; commons/maps/SoftBodies_Soft_Body_Deformation/eye_shot.md 'independent museum circulation'; no definition in any of the nine final.md files (grep).\nFile: commons/maps/SoftBodies_Obsticals/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Obsticals"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SoftBodies_Obsticals",
+      "quote": "Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.",
+      "why": "'Museum crossing' comes from the map design notes and the eye-shot brief; nothing in reader prose defines it, so the sentence that is supposed to reassure the visitor about the floor reads as a term they missed.",
+      "proposal": "Replace the first sentence with 'Yet the floor that carries you through this hall does not deform.' and keep the second.",
+      "evidence": "commons/maps/SoftBodies_Cloth_Physics/map_data.json map_info.metadata.design_notes 'separate the museum crossing from specimens'; commons/maps/SoftBodies_Soft_Body_Deformation/eye_shot.md 'independent museum circulation'; no definition in any of the nine final.md files (grep).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.006",
+      "title": "Two desk controls are never named",
+      "spec": "[prose] SoftBodies_Obsticals\nQuote: “AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices.”\nWhy: The desk in this hall also carries STIFFNESS (the walls' resistance) and RESET PHASE (the drive back to its cycle start). The chapter's own argument is 'a periodic instruction now enters a system that can respond', and the one control on the responding side is the one it does not mention.\nDo: Add after HOLD DRIVE: 'STIFFNESS changes the walls' resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.'\nEvidence: commons/artifacts/timing_machines/soft_workshop.json:69-76 lists AMPLITUDE, RATE, HOLD DRIVE, STIFFNESS, RESET PHASE, RULE; commons/artifacts/timing_machines/soft_workshop.gd:156-158 STIFFNESS sets linear_stiffness [0.5,0.2,0.8] on both walls, :159 RESET PHASE sets _time = 0.0.\nFile: commons/maps/SoftBodies_Obsticals/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Obsticals"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SoftBodies_Obsticals",
+      "quote": "AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices.",
+      "why": "The desk in this hall also carries STIFFNESS (the walls' resistance) and RESET PHASE (the drive back to its cycle start). The chapter's own argument is 'a periodic instruction now enters a system that can respond', and the one control on the responding side is the one it does not mention.",
+      "proposal": "Add after HOLD DRIVE: 'STIFFNESS changes the walls' resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.'",
+      "evidence": "commons/artifacts/timing_machines/soft_workshop.json:69-76 lists AMPLITUDE, RATE, HOLD DRIVE, STIFFNESS, RESET PHASE, RULE; commons/artifacts/timing_machines/soft_workshop.gd:156-158 STIFFNESS sets linear_stiffness [0.5,0.2,0.8] on both walls, :159 RESET PHASE sets _time = 0.0.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.007",
+      "title": "Attribute Turing and Gray-Scott",
+      "spec": "[footnote] ProceduralGeneration_Reaction_Diffusion_Systems\nQuote: “This is the Gray-Scott model, not a direct implementation of Turing's original chemical equations.”\nWhy: Two names are invoked to make a precise distinction and neither is attributed, in a corpus where 31 chapters carry [^n] footnotes for exactly this kind of claim. The feed/kill presets the REGIME button cycles come from Pearson's map of the Gray-Scott parameter plane.\nDo: Add [^1] after the sentence: Turing, 'The Chemical Basis of Morphogenesis' (Phil. Trans. R. Soc. B, 1952); Gray and Scott's autocatalytic scheme (1984); Pearson, 'Complex Patterns in a Simple System' (Science 261, 1993), whose feed/kill survey the presets follow; and one line saying the excerpt is Pearson's discretised form.\nEvidence: commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md has no footnote; footnote convention: 31 of 213 final.md files use [^1]: (grep); commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd:439-441 (Gray-Scott update) and :420-425 (_apply_preset reads feed/kill from PRESETS).\nFile: commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ProceduralGeneration_Reaction_Diffusion_Systems"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "quote": "This is the Gray-Scott model, not a direct implementation of Turing's original chemical equations.",
+      "why": "Two names are invoked to make a precise distinction and neither is attributed, in a corpus where 31 chapters carry [^n] footnotes for exactly this kind of claim. The feed/kill presets the REGIME button cycles come from Pearson's map of the Gray-Scott parameter plane.",
+      "proposal": "Add [^1] after the sentence: Turing, 'The Chemical Basis of Morphogenesis' (Phil. Trans. R. Soc. B, 1952); Gray and Scott's autocatalytic scheme (1984); Pearson, 'Complex Patterns in a Simple System' (Science 261, 1993), whose feed/kill survey the presets follow; and one line saying the excerpt is Pearson's discretised form.",
+      "evidence": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md has no footnote; footnote convention: 31 of 213 final.md files use [^1]: (grep); commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd:439-441 (Gray-Scott update) and :420-425 (_apply_preset reads feed/kill from PRESETS).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.008",
+      "title": "A still of the vessel at 40, 200 and 400 steps",
+      "spec": "[figure] SoftBodies_Playground_of_Joy\nQuote: “DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed.”\nWhy: Reconstructing frees the previous skin, so only one vessel ever stands in the hall; the comparison the chapter asks for cannot be held in view at once. The vessel is frozen, so a still captures it faithfully, and none of the nine chapters carries an image.\nDo: A three-panel figure (sim_steps 40 / 200 / 400, gravity_x 0, same camera) placed after this paragraph, captioned with the step counts and the sentence 'These are numerical steps in a reconstruction, not seconds', following the corpus image convention under doc/book/iterations.\nEvidence: commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:204-211 (apply_grid_config frees every child and rebuilds), :40 sim_steps, :77-79 gravity and constraint_passes; commons/artifacts/timing_machines/soft_workshop.gd:175 DURATION cycles [200,40,400]; images: 0 of 9 softbodies chapters vs 28 of 213 final.md across the corpus (grep '!\\[').\nFile: commons/maps/SoftBodies_Playground_of_Joy/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "SoftBodies_Playground_of_Joy",
+      "quote": "DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed.",
+      "why": "Reconstructing frees the previous skin, so only one vessel ever stands in the hall; the comparison the chapter asks for cannot be held in view at once. The vessel is frozen, so a still captures it faithfully, and none of the nine chapters carries an image.",
+      "proposal": "A three-panel figure (sim_steps 40 / 200 / 400, gravity_x 0, same camera) placed after this paragraph, captioned with the step counts and the sentence 'These are numerical steps in a reconstruction, not seconds', following the corpus image convention under doc/book/iterations.",
+      "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:204-211 (apply_grid_config frees every child and rebuilds), :40 sim_steps, :77-79 gravity and constraint_passes; commons/artifacts/timing_machines/soft_workshop.gd:175 DURATION cycles [200,40,400]; images: 0 of 9 softbodies chapters vs 28 of 213 final.md across the corpus (grep '!\\[').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.009",
+      "title": "Receive the previous sequence's closing question",
+      "spec": "[handover] SoftBodies_Soft_Body_Deformation\nQuote: “We have already changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another.”\nWhy: The previous hall ends 'What bodies are possible now? ... carry the unresolved part into the next hall', and this opening never picks it up; its only backward glance skips the sequence just walked. The reader who was told to carry something is not met.\nDo: Prepend one sentence: 'The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another.'\nEvidence: commons/maps/PG_Mirrored_Patterns/final.md:38 ('we have selected, guided, branched, connected, carved, sampled and copied... What bodies are possible now?... carry the unresolved part into the next hall'); commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 is the only backward reference.\nFile: commons/maps/SoftBodies_Soft_Body_Deformation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "SoftBodies_Soft_Body_Deformation",
+      "quote": "We have already changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another.",
+      "why": "The previous hall ends 'What bodies are possible now? ... carry the unresolved part into the next hall', and this opening never picks it up; its only backward glance skips the sequence just walked. The reader who was told to carry something is not met.",
+      "proposal": "Prepend one sentence: 'The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another.'",
+      "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:38 ('we have selected, guided, branched, connected, carved, sampled and copied... What bodies are possible now?... carry the unresolved part into the next hall'); commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 is the only backward reference.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.010",
+      "title": "Name a cell the reader can see",
+      "spec": "[prose] SoftBodies_Obsticals_Part2\nQuote: “A name like “Jelly” cannot substitute for that construction.”\nWhy: 'Jelly' is test 6, in Part 1; this hall's gallery opens on Part 2 (tests 13-24), so the reader looks for the named cell and does not find it. 'Super Soft' or 'Slippery Collider' are in front of them and make the same point.\nDo: Change to 'A name like “Super Soft” cannot substitute for that construction.'\nEvidence: algorithms/softbodies/softbody_test_gallery.gd:165-167 (Jelly, index 5), :458-465 (Part 1 = 0..12, Part 2 = 12..24), :317 (Super Soft, index 21), :243 (Slippery Collider, index 13); algorithms/softbodies/softbody_gallery_part2.tscn:7 gallery_part = 2; commons/maps/SoftBodies_Obsticals_Part2/map_data.json cell (9,10) carries no gallery_part override.\nFile: commons/maps/SoftBodies_Obsticals_Part2/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Obsticals_Part2"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SoftBodies_Obsticals_Part2",
+      "quote": "A name like “Jelly” cannot substitute for that construction.",
+      "why": "'Jelly' is test 6, in Part 1; this hall's gallery opens on Part 2 (tests 13-24), so the reader looks for the named cell and does not find it. 'Super Soft' or 'Slippery Collider' are in front of them and make the same point.",
+      "proposal": "Change to 'A name like “Super Soft” cannot substitute for that construction.'",
+      "evidence": "algorithms/softbodies/softbody_test_gallery.gd:165-167 (Jelly, index 5), :458-465 (Part 1 = 0..12, Part 2 = 12..24), :317 (Super Soft, index 21), :243 (Slippery Collider, index 13); algorithms/softbodies/softbody_gallery_part2.tscn:7 gallery_part = 2; commons/maps/SoftBodies_Obsticals_Part2/map_data.json cell (9,10) carries no gallery_part override.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.011",
+      "title": "'The player' in a sequence that says 'your body'",
+      "spec": "[vr] Topology_Entropy_Morphogenesis\nQuote: “An opening that appears in a rendering may still be too narrow for the player.”\nWhy: It is the only 'player' in the nine chapters; the sequence otherwise addresses the headset visitor directly ('Its surface can meet your body', 'how much room remains for the visitor?'). The game word breaks the address at the one moment the sentence is about the reader's own clearance.\nDo: Change to 'too narrow for your body.'\nEvidence: grep for player|desktop|mouse|click across the nine final.md files returns only commons/maps/Topology_Entropy_Morphogenesis/final.md:19; contrast commons/maps/SoftBodies_Playground_of_Joy/final.md:30 and commons/maps/SoftBodies_Obsticals/final.md:17.\nFile: commons/maps/Topology_Entropy_Morphogenesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Topology_Entropy_Morphogenesis"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Topology_Entropy_Morphogenesis",
+      "quote": "An opening that appears in a rendering may still be too narrow for the player.",
+      "why": "It is the only 'player' in the nine chapters; the sequence otherwise addresses the headset visitor directly ('Its surface can meet your body', 'how much room remains for the visitor?'). The game word breaks the address at the one moment the sentence is about the reader's own clearance.",
+      "proposal": "Change to 'too narrow for your body.'",
+      "evidence": "grep for player|desktop|mouse|click across the nine final.md files returns only commons/maps/Topology_Entropy_Morphogenesis/final.md:19; contrast commons/maps/SoftBodies_Playground_of_Joy/final.md:30 and commons/maps/SoftBodies_Obsticals/final.md:17.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.012",
+      "title": "Name the 100 STEPS control",
+      "spec": "[prose] ProceduralGeneration_Reaction_Diffusion_Systems\nQuote: “STEP performs one update. A hundred updates make the consequence easier to see while keeping the same rule.”\nWhy: Every other control in the sequence is named in capitals as it appears on the desk; here the button 100 STEPS is only paraphrased, so a reader scanning the desk for 'a hundred updates' has to guess.\nDo: Change to 'STEP performs one update; 100 STEPS performs a hundred, which makes the consequence easier to see while keeping the same rule.'\nEvidence: commons/artifacts/timing_machines/soft_workshop.json:145-146 lists STEP and 100 STEPS; commons/artifacts/timing_machines/soft_workshop.gd:186-191 runs _simulation_step() 1 or 100 times, yielding a frame every ten.\nFile: commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ProceduralGeneration_Reaction_Diffusion_Systems"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "quote": "STEP performs one update. A hundred updates make the consequence easier to see while keeping the same rule.",
+      "why": "Every other control in the sequence is named in capitals as it appears on the desk; here the button 100 STEPS is only paraphrased, so a reader scanning the desk for 'a hundred updates' has to guess.",
+      "proposal": "Change to 'STEP performs one update; 100 STEPS performs a hundred, which makes the consequence easier to see while keeping the same rule.'",
+      "evidence": "commons/artifacts/timing_machines/soft_workshop.json:145-146 lists STEP and 100 STEPS; commons/artifacts/timing_machines/soft_workshop.gd:186-191 runs _simulation_step() 1 or 100 times, yielding a frame every ten.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.013",
+      "title": "Name the source of the resemblance",
+      "spec": "[footnote] SoftBodies_Affect_Theory_Visualization\nQuote: “Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.”\nWhy: The chapter's argument is that recognition arrives before explanation; the recognition it trades on is Haeckel's radiolarian plates, which the registry names and the chapter does not. A footnote lets the reader see that the forms quote a drawn vocabulary, not a measured organism, which is the chapter's own point.\nDo: Add [^1]: Ernst Haeckel, Kunstformen der Natur (1899-1904), the Radiolaria plates, with one line stating that this generator's families echo those plates' geometric vocabulary and that no parameter here is a measured property of a living radiolarian.\nEvidence: commons/artifacts/registry/computational_biology.json entry radiolaria: 'Geometry so perfect it inspired Ernst Haeckel's Art Forms in Nature'; commons/maps/SoftBodies_Affect_Theory_Visualization/final.md has no footnote; algorithms/computationalbiology/radiolaria2/radiolaria.gd:26-28 the parameters the chapter cites.\nFile: commons/maps/SoftBodies_Affect_Theory_Visualization/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Affect_Theory_Visualization"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "SoftBodies_Affect_Theory_Visualization",
+      "quote": "Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.",
+      "why": "The chapter's argument is that recognition arrives before explanation; the recognition it trades on is Haeckel's radiolarian plates, which the registry names and the chapter does not. A footnote lets the reader see that the forms quote a drawn vocabulary, not a measured organism, which is the chapter's own point.",
+      "proposal": "Add [^1]: Ernst Haeckel, Kunstformen der Natur (1899-1904), the Radiolaria plates, with one line stating that this generator's families echo those plates' geometric vocabulary and that no parameter here is a measured property of a living radiolarian.",
+      "evidence": "commons/artifacts/registry/computational_biology.json entry radiolaria: 'Geometry so perfect it inspired Ernst Haeckel's Art Forms in Nature'; commons/maps/SoftBodies_Affect_Theory_Visualization/final.md has no footnote; algorithms/computationalbiology/radiolaria2/radiolaria.gd:26-28 the parameters the chapter cites.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.014",
+      "title": "An unmentioned wandering agent in the hall",
+      "spec": "[encounter] SoftBodies_Playground_of_Joy\nQuote: “The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form.”\nWhy: The map also places a gridagent, a CharacterBody3D that wanders with a navigation agent and shows a thought label, with five waypoints laid near the exit; the chapter's 'remain nearby' sentence accounts for two of the three secondary works. In a hall about reading bodies, and right before a hall about what looks alive, a moving sphere with thoughts is a stray encounter unless it is named; whether it wanders or stands still here, the reader is not told what it is.\nDo: Either add a clause naming it as a passing agent from an earlier sequence that this hall does not use, or, if it is inert without a grid to work on, decide whether the placement belongs here; the prose should match whichever the author chooses.\nEvidence: commons/maps/SoftBodies_Playground_of_Joy/map_data.json interactables cell (4,26) `gridagent`, utilities `wp` at (7,33) (11,34) (5,36) (12,37) (8,39); commons/maps/SoftBodies_Playground_of_Joy/artifacts.md:8 lists gridagent as secondary; commons/hazards/gridagent/grid_agent_base.gd:4-5 (wandering CharacterBody3D with NavigationAgent3D and thought_label), :72 current_grid from GridInterface.get_grid_at_position, :204/:222/:260 early returns when there is no grid.\nFile: commons/maps/SoftBodies_Playground_of_Joy/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SoftBodies_Playground_of_Joy",
+      "quote": "The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form.",
+      "why": "The map also places a gridagent, a CharacterBody3D that wanders with a navigation agent and shows a thought label, with five waypoints laid near the exit; the chapter's 'remain nearby' sentence accounts for two of the three secondary works. In a hall about reading bodies, and right before a hall about what looks alive, a moving sphere with thoughts is a stray encounter unless it is named; whether it wanders or stands still here, the reader is not told what it is.",
+      "proposal": "Either add a clause naming it as a passing agent from an earlier sequence that this hall does not use, or, if it is inert without a grid to work on, decide whether the placement belongs here; the prose should match whichever the author chooses.",
+      "evidence": "commons/maps/SoftBodies_Playground_of_Joy/map_data.json interactables cell (4,26) `gridagent`, utilities `wp` at (7,33) (11,34) (5,36) (12,37) (8,39); commons/maps/SoftBodies_Playground_of_Joy/artifacts.md:8 lists gridagent as secondary; commons/hazards/gridagent/grid_agent_base.gd:4-5 (wandering CharacterBody3D with NavigationAgent3D and thought_label), :72 current_grid from GridInterface.get_grid_at_position, :204/:222/:260 early returns when there is no grid.",
+      "review": "confirmed by a code checker (cited files only): SoftBodies_Playground_of_Joy interactables (4,26) = 'gridagent'; utilities 'wp' at (7,33),(11,34),(5,36),(12,37),(8,39); artifacts.md:8 lists gridagent as secondary; registry hazards.json:4788 keys the token. grid_agent_base.gd:4-5 is a wandering CharacterBody3D with NavigationAgent3D, :60 thought_label: Label3D, :72 current_grid from GridInterface.get_grid_at_position, :204/:222/:260 fall back to WANDERING or return false when no grid. final.md:15 names only the branching study and field sculpture.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

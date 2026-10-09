@@ -1,0 +1,23 @@
+[
+  {
+    "before": "propagation-replay-before",
+    "after": "propagation-final-after",
+    "changed_watched_paths_between_runs": [],
+    "before_stable": true,
+    "after_stable": true,
+    "same_camera": true
+  },
+  {
+    "before": "sound-before",
+    "after": "sound-after",
+    "changed_watched_paths_between_runs": [
+      "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd",
+      "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd",
+      "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd",
+      "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json"
+    ],
+    "before_stable": true,
+    "after_stable": true,
+    "same_camera": true
+  }
+]

@@ -1,0 +1,62 @@
+--- before/commons/data/museum_core_encounters.json
++++ current/commons/data/museum_core_encounters.json
+@@ -166,7 +166,7 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Pre/final.md",
+-      "text_sha256": "205e7063239dc8aab2daddb30f6495e5fb4d84e49d20b41fc7a947f7a1a998cc",
++      "text_sha256": "a32f4c4c1a329090be6f8e89207e906682fa9e1fbcbac55aa22c5ab059db4053",
+       "map_sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+       "learner_verified": false
+     },
+@@ -195,7 +195,7 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Translation/final.md",
+-      "text_sha256": "c775cec8b9d3e70b96f2d4eea07f611cd5d5c72256a2d4116a3a82a61b23e7b0",
++      "text_sha256": "453908d41b8cdaa13f8a6fa5e6bf93fe45c799a515253f17764904f7306694a0",
+       "map_sha256": "8ef1b5213526f0b19eb1b7da2b18e038a41ebf7909a1997c4ece7a849a82298c",
+       "learner_verified": false
+     },
+@@ -217,15 +217,16 @@
+       "primary_tokens": [
+         "rotation_wall_crossings",
+         "rotation_array_compare",
++        "axial_sweep",
+         "boolean_tunnel",
+         "carousel_cake"
+       ],
+-      "reason": "Compare a level Y bridge and upright X/Z rides, two body widths in rotated arrays, a tunnel and five carousel profiles. Which dimensions make space for this body?",
++      "reason": "Crossings, rotated arrays, a compact axial-sweep study, a hollow tunnel and five carousel profiles. Follow what stays fixed, what moves and the space occupied over a turn; all prior works are retained.",
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Rotation/final.md",
+-      "text_sha256": "86a9fea52da61a0b0d471b410d42262cd02a0adc7f5527d40b94beb6b5951653",
+-      "map_sha256": "e50c469be7cc3360630efc78036c2f9323ebf70d93597f93e2b7750f6b2c8ab0",
++      "text_sha256": "80b517172cc3dadcd9d74f39497426fe605483571457b597645bbd7842b88728",
++      "map_sha256": "80894662e18662869901786c8f991296fb27ee828e2cdea4bc00c90dea189d88",
+       "learner_verified": false
+     },
+     "Trans_RotationSpectacle": {
+@@ -249,8 +250,8 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Scale/final.md",
+-      "text_sha256": "ee9cbc1847e08e342a55cb7f63d07623da6665af664f0666de6ed2fa578cd18f",
+-      "map_sha256": "c08af215657c23b1d1ee770f0a36ae790fb6e84414e1b51c7f3e977311109af3",
++      "text_sha256": "d526e4cdcea3da7e0735e91feda19b7d70304b72524c4a9fb9f28507122b54f4",
++      "map_sha256": "0746e3b72d6d51cbd893e65b22adb3c6d071869ab81fa3d90981f3b31a1fe008",
+       "learner_verified": false
+     },
+     "Trans_Pit": {
+@@ -264,8 +265,8 @@
+       "status": "draft",
+       "sequence": "transformation",
+       "text_path": "commons/maps/Trans_Pit/final.md",
+-      "text_sha256": "ef8c536a58d17b5f9918d3810a0af94bde631645830d4f3163c0c97a36de49b6",
+-      "map_sha256": "c0320524345d7b0bb532300a2df111b0b00f42e92bb92eee95d267542371c5df",
++      "text_sha256": "629be533e3f70946e936431fd6dae12b175d0ac7008ed50c62b92f510b2280b5",
++      "map_sha256": "815a991603ada7c4dda269cbac505e6e866c4f280237efee8ce917016f4bdf9e",
+       "learner_verified": false
+     },
+     "Array": {

@@ -1,0 +1,1128 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-08 18:03:43",
+	"boot_ms": {
+		"autoloads": 2624,
+		"bake_parsed": 1001,
+		"boot_tail": 3840,
+		"engine_pak": 822,
+		"engine_to_ready": 5089,
+		"entry": 1,
+		"first_frame": 4050,
+		"first_physics": 2422,
+		"grid_warm": 1538,
+		"guests_loaded": 1613,
+		"loading_shell": 27,
+		"modules_loaded": 319,
+		"modules_pool": 395,
+		"museum_data": 395,
+		"plan_parsed": 972,
+		"pool_done": 904,
+		"scene_chain": 1643,
+		"segment0_built": 3840,
+		"world_ready": 2422
+	},
+	"plan": "res://doc/book/iterations/2026-10-08-ca-the-surface-includes-you/museum/plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						7,
+						4
+					],
+					"token": "decaying_bridge",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						0.0,
+						4.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.25,
+					"tile_cell": [
+						9,
+						18
+					],
+					"token": "crossway_ca",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.8,
+						18.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.12,
+					"tile_cell": [
+						1,
+						19
+					],
+					"token": "ca_chair_test",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.5,
+						0.0,
+						19.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						3,
+						24
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						3.5,
+						0.0,
+						24.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						24
+					],
+					"token": "catalyst_vent",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						24.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						1,
+						25
+					],
+					"token": "catalyst_prompter_box",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.5,
+						0.0,
+						25.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.35,
+					"tile_cell": [
+						12,
+						25
+					],
+					"token": "cellular_automata_3d_tree",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						25.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						26
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca expandingspace · 01",
+					"index": 1,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "01\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.3,
+						1.0,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca expandingspace · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "02\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca expandingspace · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "03\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						2
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca expandingspace · 04",
+					"index": 4,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "04\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.1,
+						2.6
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						26
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca expandingspace · 05",
+					"index": 5,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "05\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.6,
+						1.1,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca expandingspace · 06",
+					"index": 6,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "06\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca expandingspace · 07",
+					"index": 7,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "07\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						4
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca expandingspace · 08",
+					"index": 8,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "08\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.2,
+						4.2
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						26
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca expandingspace · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "09\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.2,
+						1.2,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						9,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca expandingspace · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "10\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca expandingspace · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "11\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						6
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca expandingspace · 12",
+					"index": 12,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "12\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.0,
+						6.3
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						26
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 180.0,
+					"id": "cellularautomata · ca expandingspace · 13",
+					"index": 13,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "13\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.3,
+						1.0,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						11,
+						1
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 0.0,
+					"id": "cellularautomata · ca expandingspace · 14",
+					"index": 14,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "14\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						8
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": 90.0,
+					"id": "cellularautomata · ca expandingspace · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "15\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						8.2
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						8
+					],
+					"chapter": "cellularautomata",
+					"facing_deg": -90.0,
+					"id": "cellularautomata · ca expandingspace · 16",
+					"index": 16,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "ca expandingspace",
+					"segment": 0,
+					"text": "16\ncellularautomata · ca expand",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0251428578048944,
+						"pixel_size": 0.000228571428571429,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.1,
+						8.6
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.#########################",
+				"................p###########",
+				"##..............p###########",
+				"##.............#############",
+				"######...###################",
+				"##.............#############",
+				"##..ssssssss...#############",
+				"##..ssssssss...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##..ss#####s...#############",
+				"##....#####....#############",
+				"##....#####....#############",
+				"##....#####....#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##.............#############",
+				"##........sss..#############",
+				"##s.......sss..#############",
+				"##........sss..#############",
+				"##........sss..#############",
+				"##........sss..#############",
+				"##.............#############",
+				"##..s.....s....#############",
+				"##s..........s.#############",
+				"##.............#############",
+				"######...###################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 28,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "neue-nationalgalerie-free-plan",
+			"pearl": "ca expandingspace",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,19": "ca_chair_test",
+				"1,25": "catalyst_prompter_box",
+				"10,10": "decaying_bridge",
+				"10,18": "crossway_ca",
+				"10,19": "crossway_ca",
+				"10,2": "decaying_bridge",
+				"10,20": "crossway_ca",
+				"10,21": "crossway_ca",
+				"10,22": "crossway_ca",
+				"10,3": "decaying_bridge",
+				"10,4": "decaying_bridge",
+				"10,5": "decaying_bridge",
+				"10,6": "decaying_bridge",
+				"10,7": "decaying_bridge",
+				"10,8": "decaying_bridge",
+				"10,9": "decaying_bridge",
+				"11,18": "crossway_ca",
+				"11,19": "crossway_ca",
+				"11,20": "crossway_ca",
+				"11,21": "crossway_ca",
+				"11,22": "crossway_ca",
+				"12,25": "cellular_automata_3d_tree",
+				"3,10": "decaying_bridge",
+				"3,2": "decaying_bridge",
+				"3,24": "dark_sphere",
+				"3,3": "decaying_bridge",
+				"3,4": "decaying_bridge",
+				"3,5": "decaying_bridge",
+				"3,6": "decaying_bridge",
+				"3,7": "decaying_bridge",
+				"3,8": "decaying_bridge",
+				"3,9": "decaying_bridge",
+				"4,10": "decaying_bridge",
+				"4,2": "decaying_bridge",
+				"4,3": "decaying_bridge",
+				"4,4": "decaying_bridge",
+				"4,5": "decaying_bridge",
+				"4,6": "decaying_bridge",
+				"4,7": "decaying_bridge",
+				"4,8": "decaying_bridge",
+				"4,9": "decaying_bridge",
+				"5,2": "decaying_bridge",
+				"5,3": "decaying_bridge",
+				"6,2": "decaying_bridge",
+				"6,3": "decaying_bridge",
+				"7,2": "decaying_bridge",
+				"7,3": "decaying_bridge",
+				"8,2": "decaying_bridge",
+				"8,3": "decaying_bridge",
+				"9,18": "crossway_ca",
+				"9,19": "crossway_ca",
+				"9,2": "decaying_bridge",
+				"9,20": "crossway_ca",
+				"9,21": "crossway_ca",
+				"9,22": "crossway_ca",
+				"9,24": "catalyst_vent",
+				"9,3": "decaying_bridge"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 15,
+			"z0": -4,
+			"z1": 28
+		}
+	]
+}

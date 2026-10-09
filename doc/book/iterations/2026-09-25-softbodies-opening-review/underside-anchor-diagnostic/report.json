@@ -1,0 +1,393 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": true
+    },
+    {
+      "name": "desk bound to cube with six controls",
+      "passed": true
+    },
+    {
+      "name": "cube uses five solver passes",
+      "passed": true
+    },
+    {
+      "name": "initial coefficients match manuscript",
+      "passed": true
+    },
+    {
+      "name": "hall holds one underside point with a visible attachment",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-one",
+      "passed": true
+    },
+    {
+      "name": "STIFFNESS changes stiffness alone",
+      "passed": true
+    },
+    {
+      "name": "DAMPING changes damping alone",
+      "passed": true
+    },
+    {
+      "name": "RESET restores coefficients in the same body",
+      "passed": true
+    },
+    {
+      "name": "first PRESSURE press sets zero",
+      "passed": true
+    },
+    {
+      "name": "cube stays at its support after zero pressure",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-zero",
+      "passed": true
+    },
+    {
+      "name": "next PRESSURE press sets two",
+      "passed": true
+    },
+    {
+      "name": "cube stays at its support after pressure two",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-two",
+      "passed": true
+    },
+    {
+      "name": "held point stays fixed through the setting changes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deformation-hall",
+      "passed": true
+    },
+    {
+      "name": "MILL holds drive without disabling the soft bodies",
+      "passed": true
+    },
+    {
+      "name": "MILL releases the drive",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "cube stays at its support after zero pressure",
+    "cube stays at its support after pressure two"
+  ],
+  "observations": {
+    "after_DAMPING_2": [
+      [
+        8.37203598022461,
+        0.593138098716736,
+        8.12476921081543
+      ],
+      [
+        8.80661964416504,
+        1.07715833187103,
+        8.60645484924316
+      ]
+    ],
+    "after_MILL_6": [
+      [
+        8.37845611572266,
+        0.59817510843277,
+        8.13556957244873
+      ],
+      [
+        8.80060577392578,
+        1.05000007152557,
+        8.63519382476807
+      ]
+    ],
+    "after_MILL_7": [
+      [
+        8.37471771240234,
+        0.599026143550873,
+        8.13669300079346
+      ],
+      [
+        8.79989528656006,
+        1.06437337398529,
+        8.6372241973877
+      ]
+    ],
+    "after_PRESSURE_4": [
+      [
+        8.34921836853027,
+        0.584301769733429,
+        8.15809154510498
+      ],
+      [
+        8.8239688873291,
+        1.06077754497528,
+        8.63251876831055
+      ]
+    ],
+    "after_PRESSURE_5": [
+      [
+        8.32045555114746,
+        0.581054389476776,
+        8.2086124420166
+      ],
+      [
+        8.73457717895508,
+        1.05000007152557,
+        8.66182041168213
+      ]
+    ],
+    "after_RESET_3": [
+      [
+        8.36390590667725,
+        0.584650874137878,
+        8.13747406005859
+      ],
+      [
+        8.81867027282715,
+        1.06963837146759,
+        8.61731243133545
+      ]
+    ],
+    "after_STIFFNESS_1": [
+      [
+        8.36071872711182,
+        0.585287034511566,
+        8.14471530914307
+      ],
+      [
+        8.78549385070801,
+        1.07528781890869,
+        8.60925388336182
+      ]
+    ],
+    "initial_extent": [
+      [
+        8.41147804260254,
+        0.645119309425354,
+        8.19024562835693
+      ],
+      [
+        8.78662204742432,
+        1.05000007152557,
+        8.5902214050293
+      ]
+    ],
+    "initial_tick_0": [
+      [
+        8.41717910766602,
+        0.629453361034393,
+        8.17161464691162
+      ],
+      [
+        8.84619426727295,
+        1.06736707687378,
+        8.5543327331543
+      ]
+    ],
+    "initial_tick_1": [
+      [
+        8.43158340454102,
+        0.635100364685059,
+        8.1975154876709
+      ],
+      [
+        8.81993770599365,
+        1.06503176689148,
+        8.56088447570801
+      ]
+    ],
+    "initial_tick_10": [
+      [
+        8.36777877807617,
+        0.571549713611603,
+        8.31611156463623
+      ],
+      [
+        8.76573467254639,
+        1.05000007152557,
+        8.74420833587646
+      ]
+    ],
+    "initial_tick_11": [
+      [
+        8.32751369476318,
+        0.583910286426544,
+        8.28299617767334
+      ],
+      [
+        8.79077434539795,
+        1.05000007152557,
+        8.72900009155273
+      ]
+    ],
+    "initial_tick_12": [
+      [
+        8.31509494781494,
+        0.583983182907104,
+        8.24119758605957
+      ],
+      [
+        8.79723167419434,
+        1.05000007152557,
+        8.70445442199707
+      ]
+    ],
+    "initial_tick_13": [
+      [
+        8.31812191009521,
+        0.575282216072083,
+        8.20969200134277
+      ],
+      [
+        8.79285526275635,
+        1.05000007152557,
+        8.64953899383545
+      ]
+    ],
+    "initial_tick_14": [
+      [
+        8.33300971984863,
+        0.588740468025208,
+        8.18043231964111
+      ],
+      [
+        8.78468704223633,
+        1.05000007152557,
+        8.63734149932861
+      ]
+    ],
+    "initial_tick_2": [
+      [
+        8.42763519287109,
+        0.644393801689148,
+        8.22309494018555
+      ],
+      [
+        8.79465484619141,
+        1.05000007152557,
+        8.57001876831055
+      ]
+    ],
+    "initial_tick_3": [
+      [
+        8.41571807861328,
+        0.63150691986084,
+        8.24448871612549
+      ],
+      [
+        8.77768230438232,
+        1.05000007152557,
+        8.61223983764648
+      ]
+    ],
+    "initial_tick_4": [
+      [
+        8.40631866455078,
+        0.622747540473938,
+        8.24575805664063
+      ],
+      [
+        8.7789831161499,
+        1.05000007152557,
+        8.62153244018555
+      ]
+    ],
+    "initial_tick_5": [
+      [
+        8.38463592529297,
+        0.609838306903839,
+        8.2468318939209
+      ],
+      [
+        8.78382778167725,
+        1.05000007152557,
+        8.67598342895508
+      ]
+    ],
+    "initial_tick_6": [
+      [
+        8.36719799041748,
+        0.589561522006989,
+        8.25438022613525
+      ],
+      [
+        8.79813098907471,
+        1.05000007152557,
+        8.73619842529297
+      ]
+    ],
+    "initial_tick_7": [
+      [
+        8.3535041809082,
+        0.576007664203644,
+        8.26470947265625
+      ],
+      [
+        8.8134880065918,
+        1.05000007152557,
+        8.7697229385376
+      ]
+    ],
+    "initial_tick_8": [
+      [
+        8.3544454574585,
+        0.571002244949341,
+        8.28738307952881
+      ],
+      [
+        8.80738353729248,
+        1.05000007152557,
+        8.76905632019043
+      ]
+    ],
+    "initial_tick_9": [
+      [
+        8.3586311340332,
+        0.573842883110046,
+        8.32336330413818
+      ],
+      [
+        8.78595066070557,
+        1.05510771274567,
+        8.74506568908691
+      ]
+    ],
+    "pressure_two_after_3s_extent": [
+      [
+        8.38215065002441,
+        0.613282382488251,
+        8.13710975646973
+      ],
+      [
+        8.81824111938477,
+        1.05379235744476,
+        8.64046955108643
+      ]
+    ],
+    "zero_pressure_after_3s_extent": [
+      [
+        8.3724422454834,
+        0.611473381519318,
+        8.21221542358398
+      ],
+      [
+        8.85824012756348,
+        1.05000007152557,
+        8.69229221343994
+      ]
+    ]
+  },
+  "passed": false,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Native museum with completed stamp queue; supplied pointer events, solver vertex bounds and original captures. No tracked hand, force feedback or headset acceptance."
+}

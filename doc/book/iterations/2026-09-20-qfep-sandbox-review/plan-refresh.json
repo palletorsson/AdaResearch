@@ -1,0 +1,81 @@
+{
+  "sequence": "qfeplaboratory",
+  "maps": [
+    "QFEP_Sandbox"
+  ],
+  "live_sequence_maps": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+  ],
+  "museum_template": "teshima-droplet",
+  "template_source": "Retained from existing plan rows for the selected rooms or chapter",
+  "mode": "apply",
+  "changed_paths": [
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "source_sha256": {
+    "ada_run/em_plan.json": "352236b6175331b705a6d57aca0642b7395a4c96a4394ed03b79d0f1c633919b",
+    "commons/data/museum/em_plan.json": "352236b6175331b705a6d57aca0642b7395a4c96a4394ed03b79d0f1c633919b",
+    "commons/data/map_authored.json": "6a43dcbaafcd3f421caefdb494d5ef4c097b9609e9087c0d5222cb5c666a3cdc",
+    "commons/maps/curriculum_spine.json": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed",
+    "commons/maps/sequences/qfeplaboratory.json": "7a8548578fced5ffc8f119e2b4670e2a4e1465b988b283e73157315a0036ba7b",
+    "tools/em_map_halls.py": "31aba845c482e06580d7e6e43fea27a62c2a49ddab54ccc25047443e68ffac55",
+    "tools/em_refresh_sequence.py": "1548f320f27283c0e962ac09d8f4e95a034add991a9376157d05c8d7ebfc9ad3",
+    "commons/maps/QFEP_Sandbox/map_data.json": "e5fbc64e6cba06d618c41d49177a47b818af624f5da4de3eae54a18a0b901c4e"
+  },
+  "proposed_sha256": {
+    "ada_run/em_plan.json": "f275839a72e28fd71f09f8321bdd223bf542a9992ce1da41247ee8181041036e",
+    "commons/data/museum/em_plan.json": "f275839a72e28fd71f09f8321bdd223bf542a9992ce1da41247ee8181041036e",
+    "commons/data/map_authored.json": "6a43dcbaafcd3f421caefdb494d5ef4c097b9609e9087c0d5222cb5c666a3cdc"
+  },
+  "rows_before": {
+    "ada_run/em_plan.json": 200,
+    "commons/data/museum/em_plan.json": 200
+  },
+  "rows_after": {
+    "ada_run/em_plan.json": 200,
+    "commons/data/museum/em_plan.json": 200
+  },
+  "preservation": "All unrelated geometry, artifacts, content, top-level metadata and relative order retained; only named chapter ordering fields may align.",
+  "ordering_changes": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "remaining_order_drift": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "unselected_live_rooms_missing_from_plan": {
+    "ada_run/em_plan.json": [],
+    "commons/data/museum/em_plan.json": []
+  },
+  "idempotent": true,
+  "learner_verified": false,
+  "derived": [
+    {
+      "map": "QFEP_Sandbox",
+      "pearl_index": 6,
+      "room": {
+        "w": 14,
+        "h": 16
+      },
+      "artifacts": 6,
+      "ruling": {
+        "src_w": 14,
+        "src_h": 16,
+        "rotated": false,
+        "pad": 0,
+        "pad_closed": false,
+        "ring": null
+      }
+    }
+  ],
+  "backup": "ada_run/encounter_pilot/plan_refresh/20260920T165457399369Z"
+}

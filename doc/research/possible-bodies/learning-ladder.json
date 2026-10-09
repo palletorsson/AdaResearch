@@ -1,0 +1,346 @@
+{
+  "status": "proposal_only",
+  "date": "2026-09-13",
+  "question": "What bodies become possible with this capability, and what remains outside it?",
+  "current_ca_order": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_EdgeOfChaos"
+  ],
+  "proposed_ca_order": [
+    "CA_Introduction",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ElementaryRules",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_EdgeOfChaos",
+    "CA_AgentsCircuits"
+  ],
+  "ca": [
+    {
+      "map": "CA_Introduction",
+      "title": "A neighbourhood makes the next row",
+      "inherit": "Arrays, binary state, clocks and repeatable beginnings.",
+      "addition": "One local rule reads an ordered neighbourhood; answers go into a separate next-state buffer.",
+      "encounter": "Begin with ca_rule_explorer. The rug and line network remain as further encounters with other mechanisms.",
+      "experiment": "Predict one marked cell, STEP, then change the seed while keeping the rule. Inspect the wrapped edge.",
+      "crack": "Which distinctions survive the neighbourhood? A count loses information that ordered left/self/right bits can preserve.",
+      "transfer": "Explain a new three-bit case and show why writing into the old row could change later answers.",
+      "next_action": "Complete the prepared Introduction engine review. Treat the rug and network as returns after the row, so the first explanation does not have to teach three mechanisms at once.",
+      "readiness": "Source prepared; Introduction engine review pending.",
+      "sources": [
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+        "commons/maps/CA_Introduction/final.md"
+      ],
+      "current_primary": [
+        "ca_rule_explorer",
+        "persian_rug",
+        "line_network_ca"
+      ],
+      "placements": [
+        "synthesis_stand#subject:dark_sphere#mode:hero",
+        "dark_sphere",
+        "persian_rug:0:0.025#plinth:0",
+        "ca_rule_explorer:180:1.04#study:neighbours#rule:90#speed:4#plinth:0",
+        "grid_substrate_runner",
+        "langton_swarm",
+        "line_network_ca",
+        "rule110_computer",
+        "ca_showcase"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_GameOfLife",
+      "title": "Give the past a direction",
+      "inherit": "The one-dimensional row and its local rule.",
+      "addition": "Retain generations and map their order onto depth. Drawing history is distinct from adding spatial neighbours.",
+      "encounter": "ca_bridge with study:history: a desk, support tiles and ornamental lattice share one record. The four other works remain in the rear gallery.",
+      "experiment": "Read the same Rule 30 generation on a flat record and on the bridge. Predict the next row before following the structure.",
+      "crack": "A visible neighbour may be an earlier moment. A drawn cube also needs collision before it can carry a body.",
+      "transfer": "Identify which axis is time and which values belong to the same current state.",
+      "next_action": "The shared history and the following Life-dish application are implemented. Review these in a headset later; continue through the completed exchange study to CA_EdgeOfChaos.",
+      "readiness": "Implemented: one 15-site, 24-row Rule 30 history, six controls, three mappings and full-size retained lab; real desktop checks and museum captures at ca-history-bridge.html.",
+      "sources": [
+        "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+        "commons/maps/CA_GameOfLife/final.md"
+      ],
+      "current_primary": [
+        "ca_bridge"
+      ],
+      "placements": [
+        "ca_bridge:0:0#study:history#plinth:0",
+        "lab_room#room_width:8.0#room_depth:7.0#room_height:3.8#south_wall_is_glass:false#show_back_window:true#back_window_size:6.5,2.4#show_front_window:true#front_window_size:1.4,0.7#front_window_offset_x:-2.4#front_window_y:2.55#show_sliding_door:true#door_wall:east#door_width:1.5#door_height:2.2#door_sensor_radius:2.6#accent_color:0.227,0.482,1.0#signage_top:TURING MACHINE LAB#signage_sub:Rule 110 → universal computation#annotation_top:M = (Q, Σ, Γ, δ, q0, F) — Game of Life is Turing complete#annotation_bottom:belt = Γ*, panel = q, server rack = δ, button = HALT#mounted_artifact_scene:res://commons/artifacts/turing_apparatus/turing_apparatus.tscn",
+        "dark_sphere",
+        "ca_columns:0:-0.5:0.2",
+        "mirrored_cellular_automata:0:-0.5"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "title": "A pattern travels; its cells stay",
+      "inherit": "A row, an update schedule and the distinction between state and its displayed history.",
+      "addition": "A two-dimensional present with eight neighbours; collective patterns persist or travel through fixed addresses.",
+      "encounter": "game_of_life_petri with study:addresses: one present in a dish and floor, three fixed cell addresses driving three lamps. All five other works remain.",
+      "experiment": "STEP a clean glider; follow A and the travelling figure separately. Compare BLINKER and MEET. Disconnect LINK while continuing the automaton.",
+      "crack": "What is the travelling body if none of its cell addresses travels with it? The state remains binary despite the room ID.",
+      "transfer": "Distinguish an oscillator, a travelling pattern and a displaced drawing; predict a local B3/S23 update.",
+      "next_action": "Primary implemented and desktop reviewed. Headset and retained secondary encounters remain. CA_ExpandingSpace is now desktop reviewed; the live field is now reviewed; continue to CA_EdgeOfChaos.",
+      "readiness": "30 Godot desktop checks passed; fixed-address lamps, clean comparisons and revised final. All six works retained. Photographs and remote model at ca-life-addresses.html.",
+      "sources": [
+        "commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+        "commons/maps/CA_BeyondBinary/final.md"
+      ],
+      "current_primary": [
+        "game_of_life_petri"
+      ],
+      "placements": [
+        "game_of_life_petri:0:0#study:addresses#plinth:0",
+        "mold_network",
+        "science_screen:180:1.5#mode:grid",
+        "dark_sphere",
+        "hexagon_ca_vr",
+        "ca_growth_network"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "title": "A cell takes time to disappear",
+      "inherit": "A stored state, a neighbourhood and a recognisable pattern.",
+      "addition": "A three-dimensional neighbourhood and a refractory state. These are two additions, so demonstrate them in two passes.",
+      "encounter": "The retained structure_growth study and its state/height finish comparison.",
+      "experiment": "First locate face, edge and corner neighbours around one address. Then follow 1 → 2 → 0 and compare a fading cell with an empty cell under the same active-neighbour count.",
+      "crack": "Presence, participation and visibility differ. Changing the finish can conceal distinctions without changing the state.",
+      "transfer": "Explain why an empty cell with seven active neighbours can be born while a fading cell must first become empty.",
+      "next_action": "Keep the completed study. Add a neighbourhood witness or slice if depth cannot be read; optimise its measured 144 ms full-volume update before headset acceptance.",
+      "readiness": "21 desktop checks and real screenshots; full-volume performance and headset review pending.",
+      "sources": [
+        "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd",
+        "algorithms/cellularautomata/cellular_automata_3d/structure_study.gd",
+        "commons/maps/CA_ElementaryRules/final.md"
+      ],
+      "current_primary": [
+        "structure_growth"
+      ],
+      "placements": [
+        "structure_growth:0:0#study:states#plinth:0",
+        "dark_sphere:0:0#plinth:0"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "title": "The visitor enters the update",
+      "inherit": "Persistence, disappearance, fields, thresholds and the player body from earlier chapters.",
+      "addition": "A surface stores graded health; proximity affects it and a threshold changes collision. The observer becomes an input to the system.",
+      "encounter": "decaying_bridge, with the existing tree, crossway and chair retained as further architectural constructions.",
+      "experiment": "Approach from a safe rim, wait, withdraw. Compare health, appearance and actual support. Hold distance while varying observation time.",
+      "crack": "The bridge responds to a tracked body origin, not measured weight. SYNC and SCAN expose whether a newly recovered neighbour is available during this pass or the next.",
+      "transfer": "Tell whether a change came from proximity, elapsed time, neighbours or the collision threshold.",
+      "next_action": "Primary implemented: revisit in a headset later and review the retained gallery. The live field in CA_SoftRules is now desktop reviewed; continue to CA_EdgeOfChaos.",
+      "readiness": "36 real Godot checks, including tracked-body falling and ramp recovery. Witness, matched schedule comparison and shared health frieze built; photographs and remote model at ca-proximity.html.",
+      "sources": [
+        "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+        "commons/maps/CA_ExpandingSpace/final.md"
+      ],
+      "current_primary": [
+        "decaying_bridge"
+      ],
+      "placements": [
+        "decaying_bridge:0:0#study:proximity#plinth:0",
+        "ca_chair_test:90",
+        "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto",
+        "catalyst_prompter_box:0:0#emergence:doors#sequence:auto#lease_s:45",
+        "dark_sphere",
+        "cellular_automata_3d_tree:90#host_lighting:1",
+        "crossway_ca:0"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_SoftRules",
+      "title": "What can one cell exchange?",
+      "inherit": "Graded health, synchronous arrays and display mappings.",
+      "addition": "Two concentrations and a five-point exchange term; local reaction, feed and removal continue when exchange is disabled.",
+      "encounter": "rd_artifact: a held matched Gray–Scott study with table fields and curved wall coatings. The clockmaker remains a second primary diagram; all six authored works now load.",
+      "experiment": "Follow W outside the seed: STEP with B exchange OFF, then toggle it ON and compare matching beginnings. Change VIEW and COAT without advancing the state.",
+      "crack": "Fractional values still occupy a finite periodic lattice; an 8-bit colour mapping can hide their differences. A static fractional ring is not a running Lenia field.",
+      "transfer": "Distinguish neighbourhood exchange, local reaction, an intervention and the projection of a field onto architecture.",
+      "next_action": "Primary study implemented and desktop reviewed. The matched intervention in CA_EdgeOfChaos is now desktop reviewed; headset and retained-secondary reviews remain.",
+      "readiness": "37 Godot checks: first-step arithmetic, legacy-solver agreement, full-field equality, GPU texture mapping, eight real controls and physical walking. Photographs, remote model and two book passages at ca-soft-rules.html.",
+      "sources": [
+        "commons/artifacts/rd_artifact/live_field.gd",
+        "commons/artifacts/rd_artifact/exchange_study.gd",
+        "commons/maps/CA_SoftRules/final.md"
+      ],
+      "current_primary": [
+        "rd_artifact",
+        "the_clockmaker_of_rules"
+      ],
+      "placements": [
+        "rd_artifact:0:0#study:exchange#plinth:0",
+        "the_clockmaker_of_rules:180:0#plinth:0",
+        "lattice_gas_pump",
+        "ca_sphere:90",
+        "crack_propagation_ca",
+        "rule_30_110_gravity:90"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "title": "Does a difference spread?",
+      "inherit": "Neighbour coupling, chance, replay and the distinction between an observation and a claim.",
+      "addition": "An experiment on sensitivity: compare matched runs, change one cell, measure the difference over a stated duration.",
+      "encounter": "self_organization_ca; retain the screen, disease, crack and fog works as differently specified systems.",
+      "experiment": "Compare paired runs with shared address-indexed forcing and one altered cell. Switch integer/fractional storage; compare affected count, maximum difference and magnification. Spatial Z does not advance time.",
+      "crack": "The new controls separate pull and disturbance. Integer storage can erase a trace; fractional storage can spread it while its maximum fades. Read display gain and count tolerance before naming a regime.",
+      "transfer": "Distinguish a stationary pattern, an observation-budget stop, a repeating cycle and a growing difference; state which measure supports the claim.",
+      "next_action": "Primary implemented and desktop reviewed. Revisit in a headset and develop the four retained secondary works. Next active hall: Fractal_Recursion.",
+      "readiness": "Implemented: 45 Godot checks, paired 11-cube volumes, twelve controls, spatial slices and a shared difference floor. All five works retained; review at ca-edge-difference.html.",
+      "sources": [
+        "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+        "commons/maps/CA_EdgeOfChaos/final.md"
+      ],
+      "current_primary": [
+        "self_organization_ca"
+      ],
+      "placements": [
+        "self_organization_ca:0:0#study:difference#plinth:0",
+        "ca_screen:180:1.5:10#plinth:0",
+        "disease_spread_ca:0:3.4:0.25#museum_budget:true#plinth:0",
+        "volumetric_fog_ca:0:2:0.4#preview_grid:12#plinth:0",
+        "crackpropagation_ca:0:0.9:0.8#plinth:0"
+      ],
+      "active": true
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "title": "The same resemblance, another construction",
+      "inherit": "Repeated local updates, visible history and controlled comparison.",
+      "addition": "Compare local evolution with explicit recursive copying; establish the hinge into the fractals chapter.",
+      "encounter": "The existing ca_rule_explorer and sierpinski_pyramid. Keep the historical ID while giving the encounter an accurate public title.",
+      "experiment": "Name one relation among gaps in Rule 90 history, then test that relation in the recursive pyramid. Change the row seed and see which resemblance survives.",
+      "crack": "Related silhouettes need not share a procedure. The pyramid and the flat history need not match in every relation; neither proves a circuit or computational universality.",
+      "transfer": "Explain one construction using neighbour updates and the other using smaller copies and a stopping condition.",
+      "next_action": "Review and restore this omitted map at the CA exit when its spatial and textual links are ready. It currently exists in the curriculum but not in the seven-hall active museum route.",
+      "readiness": "Two existing placements; absent from active route. Restoration proposed, not applied.",
+      "sources": [
+        "commons/maps/CA_AgentsCircuits/map_data.json",
+        "commons/maps/CA_AgentsCircuits/final.md"
+      ],
+      "current_primary": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "placements": [
+        "sierpinski_pyramid:0:6",
+        "ca_rule_explorer:0:0.5:1#mount:wall"
+      ],
+      "active": false
+    }
+  ],
+  "randomness": [
+    {
+      "map": "Random_Definition",
+      "title": "A draw has a beginning",
+      "addition": "Seed and draw order",
+      "experiment": "Repeat the same beginning; discard one draw and inspect which neighbours change."
+    },
+    {
+      "map": "Random_Entropy",
+      "title": "A measure keeps only some differences",
+      "addition": "Frequency versus arrangement",
+      "experiment": "Sort the same multiset: identify what the entropy reading retains and what spatial relations it loses."
+    },
+    {
+      "map": "Random_Remove",
+      "title": "Chance acts inside a permitted set",
+      "addition": "Selection without replacement / eligibility",
+      "experiment": "Name a cube outside the selectable set; inspect how the set changes after removal."
+    },
+    {
+      "map": "Random_Walk",
+      "title": "A choice accumulates into a path",
+      "addition": "Position, increment and displayed trail",
+      "experiment": "Distinguish the state used by the next step from the longer trail shown to the visitor."
+    },
+    {
+      "map": "Random_Gaussian",
+      "title": "Sampling makes a distribution visible",
+      "addition": "Distribution and histogram bins",
+      "experiment": "Keep the samples and change the bins before attributing a changed picture to a changed generator."
+    },
+    {
+      "map": "Random_Mushrooms",
+      "title": "A distribution becomes a body",
+      "addition": "Mapping draws to constrained parameters",
+      "experiment": "Ask which stem/cap combinations the recipe cannot produce; vary one mapping, not only the seed."
+    },
+    {
+      "map": "Random_Game",
+      "title": "Chance changes what an action affords",
+      "addition": "Timing, support and consequence",
+      "experiment": "Predict a crossing from known timing, then identify which sampled wait changed the outcome."
+    }
+  ],
+  "noise": [
+    {
+      "map": "Random_Noise_Types",
+      "title": "Which changes remain possible?",
+      "addition": "Address, domain and relation among samples",
+      "experiment": "Follow point constraints into independent versus related samples. Give nearby addresses comparable spacing."
+    },
+    {
+      "map": "Noise_Columns",
+      "title": "Where does change enter the body?",
+      "addition": "Coordinate, time and displacement",
+      "experiment": "Compare the columns without assuming every moving surface uses the same process."
+    },
+    {
+      "map": "Noise_One",
+      "title": "A value can become different attributes",
+      "addition": "Sample versus mapping to colour or form",
+      "experiment": "Give the same values two outputs; locate what changed in the mapping."
+    },
+    {
+      "map": "Noise_Voxel",
+      "title": "A value becomes occupied space",
+      "addition": "Threshold and classification",
+      "experiment": "Keep field and seed fixed; change the threshold and inspect a named empty as well as occupied address."
+    },
+    {
+      "map": "Noise_6_Wall",
+      "title": "A composed field dresses a room",
+      "addition": "Layering and a shared spatial application",
+      "experiment": "Trace which part of the sum reaches walls and objects; keep floor support separate from its appearance."
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "title": "Where is the field being read?",
+      "addition": "Local/world coordinates and enclosure",
+      "experiment": "Stand inside the sphere and compare an attached address with an address shared with the surrounding space."
+    },
+    {
+      "map": "Noise_Space_10",
+      "title": "The field carries a body",
+      "addition": "Sampling scale, relief and traversal",
+      "experiment": "Keep player and route fixed; compare effort, access and concealment across different terrain settings."
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "title": "What makes a comparison fair?",
+      "addition": "Matched samples and the limits of the organic filter",
+      "experiment": "Match coordinates and mapping before naming a difference; ask which desired behaviour requires more than a sampled field."
+    }
+  ],
+  "routes_changed": false,
+  "artifacts_removed": 0
+}

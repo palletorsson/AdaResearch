@@ -1,0 +1,21 @@
+[
+  {
+    "fault": "wrong-restoring-direction",
+    "rejected": true,
+    "failures": [
+      "positive turning point accelerates toward centre",
+      "negative turning point accelerates toward centre",
+      "six-second release makes repeated crossings",
+      "per-tick damping changes with physics tick rate"
+    ]
+  },
+  {
+    "fault": "forgot-velocity",
+    "rejected": true,
+    "failures": [
+      "same position with opposite velocities separates",
+      "six-second release makes repeated crossings",
+      "per-tick damping changes with physics tick rate"
+    ]
+  }
+]

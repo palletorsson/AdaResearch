@@ -1,0 +1,46 @@
+{
+  "id": "Vectors_Act4a_KineticForces",
+  "title": "Make resistance depend on motion",
+  "storyboard": "AIR, WATER and HONEY launch cubes at the same speed, then let them travel different distances. Bringing the pulse receiver and Fields’ distinction between a value and its operation, the student owns one linear drag function: force equals minus coefficient times current velocity. The coefficient has units of kilograms per second. A supplied rigid-body adapter passes that force to the engine; the learner does not integrate the same force again. They predict how doubling mass changes the initial acceleration at fixed speed and coefficient, then compare before either run leaves the frame. The kept resistance function supplies Oscillation’s damping term. Walking resistance, the mower’s signed work and the ring’s prescribed circle remain comparisons: different accounts can describe movement, and a return does not undo the cut lawn.",
+  "storyboard_short": "Own one drag function, F = -b v, with b in kg/s. Reuse Motion’s force receiver and Fields’ operation distinction. Predict initial acceleration for two masses at equal speed and fixed b; compare before frame exit. Supply engine integration, launcher and readouts. Carry resistance into spring damping. Keep walking, mower work and prescribed circular motion optional comparisons; the material names are not measured fluid properties.",
+  "mode": "make",
+  "brings": [
+    "force-to-acceleration relation and retained velocity",
+    "the distinction between a sampled value and its receiving operation",
+    "known dot product for the optional work comparison"
+  ],
+  "learns": [
+    "linear resistance as a force computed from current state",
+    "fixed drag coefficient and changed mass produce different acceleration",
+    "an engine force receiver is distinct from a controller speed mapping"
+  ],
+  "carries": "The small force function -b*v with b in kg/s, reused as damping in the proposed scalar spring study; the rigid-body adapter itself need not be carried.",
+  "supplied": [
+    "rigid bodies and engine integration, with gravity and inherited damping removed",
+    "equal-speed launcher and mass/reset controls",
+    "readouts and finite observation window",
+    "existing walking, mower and circular-path comparisons"
+  ],
+  "artifact_refs": [
+    "drag_corridor",
+    "force_mower",
+    "centrifuge_ring"
+  ],
+  "review_note": "Summary proposal only. Installed kinetic_drag applies -b*body.linear_velocity directly as force; no dt multiplication belongs in that argument. Its rigid bodies ignore contacts and are frozen at the observation cutoff; using a rigid-body engine does not imply this exhibit tests collisions. WALK is a separate chosen controller multiplier; mower work uses a nominal force, not measured hand effort; the ring prescribes a path. Exact learner drag-function binding remains open. Future focused text review: final.md’s categorical claim that air at any throwable cube speed follows a square law is broader than this source comparison establishes; this summary pass does not edit it or claim a replacement empirical result.",
+  "prior_maps": [
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act2_VectorArithmetic"
+  ],
+  "independent_check": "Before FIRE, use v = +4 m/s and b = 1.3 kg/s to predict F = -5.2 N for both masses. Predict initial acceleration -5.2 m/s² at 1 kg and -2.6 m/s² at 2 kg. Then compare which retains more speed at the same early elapsed time, before frame exit; do not compare different stopping times or treat the cutoff as resistance doing work.",
+  "source_refs": [
+    "commons/maps/Vectors_Act4a_KineticForces/final.md",
+    "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json",
+    "commons/artifacts/drag_corridor/drag_corridor.gd",
+    "commons/artifacts/drag_corridor/kinetic_drag.gd",
+    "commons/artifacts/force_mower/force_mower.gd",
+    "commons/artifacts/centrifuge_ring/centrifuge_ring.gd"
+  ],
+  "change_reason": "The state-update strand gains one reusable force term without turning every artifact into another assignment or conflating engine force, annotated work and prescribed motion."
+}

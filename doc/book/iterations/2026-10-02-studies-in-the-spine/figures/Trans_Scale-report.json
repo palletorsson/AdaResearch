@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "Trans_Scale assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "passage full size",
+      "passed": true
+    },
+    {
+      "name": "passage visible",
+      "passed": true
+    },
+    {
+      "name": "passage controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "passage amount changed by pointer",
+      "passed": true
+    },
+    {
+      "name": "passage occupied-area guard",
+      "passed": true
+    },
+    {
+      "name": "passage bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "passage bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "reference_passage standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_passage support along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_passage standing clearance along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_passage support along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_passage capture",
+      "passed": true
+    }
+  ],
+  "map": "Trans_Scale",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

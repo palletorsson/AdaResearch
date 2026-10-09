@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Trace — positions kept</title><link rel="stylesheet" href="style.css"></head><body><main><header><p>ADA / ONE TUTORIAL AT A TIME · 3 October 2026</p><nav><a href="#reading">Read Point Trace</a><a href="#code">Complete script</a><a href="#lineage">What it adds</a><a href="Point_Trace.tutorial.diff">Text diff</a></nav></header><article id="reading"><h1>Point Trace — keep the way through</h1>
+<p>Move the point in a loop. Let go. The point stops, but the loop remains: a line through positions the point has left behind.</p>
+<p>In Point Lines, two positions were enough to draw a segment. Each frame replaced the previous reading. Here we keep readings in order, so the route can outlast the movement.</p>
+<p>Open <code>point_trace.tscn</code> in the <a href="../2026-10-03-ada-xr-starter/index.html#guide">Ada student starter</a>. The lesson script is <code>studies/point_trace/trace.gd</code>. Hold the point as you did in Lines. This study makes one continuous record; releasing holds the point still, and taking it again continues that record. Restart the scene for a fresh drawing.</p>
+<figure><a href="fine.png"><img src="fine.png" alt="A pale trace with pink saved positions forms a loop in the Godot room; the readout shows 47 positions kept"></a><figcaption>Inside the shared starter. A scripted movement leaves 47 positions at eight-centimetre spacing. Actual Godot render.</figcaption></figure><h2>1. Give positions somewhere to stay</h2>
+<pre><code class="language-gdscript">var points: Array[Vector3] = []
+var spacing := 0.08
+var capacity := 128
+</code></pre>
+<p><code>points</code> is an <strong>Array</strong>: an ordered list. <code>Array[Vector3]</code> says what it can hold. Each entry is one position, with three coordinates. The list itself has one index: first entry, second entry, third entry. It is a one-dimensional list of three-dimensional positions.</p>
+<p><code>[]</code> starts it empty. Inside <code>_ready()</code>, after placing the point, we keep its first position:</p>
+<pre><code class="language-gdscript">    points.append(point.position)
+</code></pre>
+<p><code>append()</code> adds a value at the end. It stores the position at that moment. Moving the point later does not move that saved position.</p>
+<h2>2. Decide when to keep another</h2>
+<p>These lines run inside <code>_process()</code>:</p>
+<pre><code class="language-gdscript">    var displacement := point.position - points[-1]
+    if displacement.length() &gt;= spacing:
+        points.append(point.position)
+</code></pre>
+<p><code>points[-1]</code> reads the last entry. We reuse Lines' subtraction and length to measure from that saved position to the point now.</p>
+<p><code>if</code> introduces a condition. <code>&gt;=</code> means “greater than or equal to”. The indented line runs only when the distance reaches <code>spacing</code>: here, 0.08 metres, or eight centimetres. Smaller movements accumulate as a separation from the last saved position; they do not each become entries.</p>
+<p>Move slowly, then stop. The count stops increasing. Point Zero's frames still pass, but this list records positions rather than elapsed time. A long pause leaves no extra entry to show how long you waited.</p>
+<h2>3. Join neighbours in the list</h2>
+<p>After adding a position, the script redraws the retained route:</p>
+<pre><code class="language-gdscript">        drawing.clear()
+        for i in range(1, points.size()):
+            drawing.join(points[i - 1], points[i])
+</code></pre>
+<p><code>size()</code> gives the number of entries. Their indexes start at zero. With four positions, the indexes are <code>0, 1, 2, 3</code>.</p>
+<p>The <strong>for loop</strong> repeats its indented line. <code>range(1, points.size())</code> supplies indexes from 1 up to, but excluding, the size. With four entries, <code>i</code> becomes 1, then 2, then 3. The pairs are therefore <code>0–1</code>, <code>1–2</code>, <code>2–3</code>: three segments through four positions.</p>
+<p>This loop finishes a traversal of the saved list. <code>_process()</code> returns each frame to inspect movement. One repeats through entries; the other repeats over time.</p>
+<p><code>TraceDrawing</code> is the supplied display. <code>clear()</code> clears the drawing; it leaves <code>points</code> alone. Each <code>join(a, b)</code> reuses Lines' segment renderer and marks its endpoints with small pink dots. Drawing thickness and mesh construction stay in that helper. The loop deciding which positions to join is yours.</p>
+<div class="pair"><figure><a href="fine.png"><img src="fine.png" alt="Fine sampling keeps 47 positions" loading="lazy"></a><figcaption>Spacing 0.08 m · 47 positions.</figcaption></figure><figure><a href="coarse.png"><img src="coarse.png" alt="Coarse sampling keeps 17 positions and visibly cuts corners" loading="lazy"></a><figcaption>The same movement, spacing 0.25 m · 17 positions.</figcaption></figure></div><h2>4. Change what the route can retain</h2>
+<p>Change <code>spacing</code> to <code>0.25</code>. Run again and make a similar loop. Fewer positions are kept; the straight connections cut across more of the curve. Restore <code>0.08</code> and compare.</p>
+<p>Spacing is a minimum separation, not a guarantee that every eight centimetres is recorded. We inspect once per frame. A fast move can leave a larger gap, and the drawing joins its ends without knowing what happened between them.</p>
+<p>The record also has a limit:</p>
+<pre><code class="language-gdscript">        if points.size() &gt; capacity:
+            points.pop_front()
+</code></pre>
+<p><code>pop_front()</code> removes the oldest entry. The remaining entries keep their order. Change <code>capacity</code> to <code>32</code> and continue drawing. Once the count reaches 32, a new position replaces the oldest; the far end of the route begins to disappear. Waiting alone removes nothing. Restore <code>128</code> when you want a longer record.</p>
+<p>The museum's pens combine a movement threshold with a grid that shapes each saved position. This smaller study follows the handle's centre without snapping it to a grid. All positions use Study's reference frame. Grid is the next distinction: keeping a position and assigning it to a cell are different decisions.</p><figure><a href="memory.png"><img src="memory.png" alt="The trace holds 32 recent positions; the older portion of the loop has disappeared" loading="lazy"></a><figcaption>Capacity 32 · recent positions remain; the earlier part of the route has gone. A capacity limit acts when another position arrives.</figcaption></figure><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the starter with Point Trace</a></p><p class="small">Open point_trace.tscn · Run Current Scene (F6).</p></article><details id="code"><summary>trace.gd · the complete working lesson</summary><div><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const TraceDrawing = preload(&quot;res://prepared/trace_drawing.gd&quot;)
+
+var point := PointHandle.new()
+var drawing := TraceDrawing.new()
+var readout := Label3D.new()
+var points: Array[Vector3] = []
+var spacing := 0.08
+var capacity := 128
+
+func _ready():
+    point.position = Vector3(-0.75, 1.25, 0.0)
+    add_child(point)
+    add_child(drawing)
+    readout.position = Vector3(0.0, 2.4, -0.6)
+    add_child(readout)
+    points.append(point.position)
+    readout.text = str(points.size()) + &quot; positions kept&quot;
+
+func _process(_delta):
+    var displacement := point.position - points[-1]
+    if displacement.length() &gt;= spacing:
+        points.append(point.position)
+        if points.size() &gt; capacity:
+            points.pop_front()
+        drawing.clear()
+        for i in range(1, points.size()):
+            drawing.join(points[i - 1], points[i])
+        readout.text = str(points.size()) + &quot; positions kept&quot;
+</code></pre><p>The construction reuses PointHandle and Label3D. The new display helper draws each pair the student's loop passes to it.</p><p><a href="trace.gd" download>Download trace.gd</a> · <a href="trace_drawing.gd">Supplied TraceDrawing</a> · <a href="point_handle.gd">PointHandle</a> · <a href="segment.gd">Segment</a></p></div></details><section id="lineage" class="lineage"><h2>The route outlasts its point.</h2><p>A position in Point One. A relation between two positions in Lines. In Trace, a list keeps positions and a loop follows their order. The student can now make a record, choose what enters it and determine how much survives.</p><p>The for loop traverses the retained list when another position is added. The engine's process callback offers another opportunity to sample each frame. Repetition through a collection and repetition over time are different operations.</p><p>Grid will ask what changes when a saved position is assigned to a cell. Coordinates still retains its earlier place in the spine; its shared-starter writing pass remains pending.</p><p class="small">The canonical tutorial and executable companion are updated. The critical manuscript and live museum are unchanged. This is one continuous centre-position study; the museum pens have additional rules for nib position, snapping and separate strokes.</p></section><details id="checked"><summary>34 checks passed · evidence and limits</summary><div><p>Fresh ZIP import and native Godot 4.6 checks cover retention, the distance threshold, ordered drawing, changed spacing, bounded memory, waiting, geometry reuse, desktop pickup and synthetic XR grip. Every printed code excerpt matches the downloadable script.</p><p>The images show the same scripted route for comparison. They are actual desktop renders, not a recorded visitor gesture. A physical headset and beginner reading trial remain pending.</p><p><a href="verification.json">Native results</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="DECISIONS.md">Editorial decisions</a></p></div></details></main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

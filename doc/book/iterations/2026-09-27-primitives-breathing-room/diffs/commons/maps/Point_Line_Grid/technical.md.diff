@@ -1,0 +1,11 @@
+--- before/commons/maps/Point_Line_Grid/technical.md
++++ current/commons/maps/Point_Line_Grid/technical.md
+@@ -74,6 +74,8 @@
+ 
+ The cased panel names source count and length, enlargement and display pitch. Rows show the latest source's world coordinates to three decimal places, ten per page, advancing every two seconds. The summary covers the latest ten releases; the scene can still contain older replay meshes. Displayed length and source length should not be confused. The original source array is unchanged by either rendering transform.
+ 
++PREVIOUS and NEXT hold a page of source positions for comparison with the displayed line. AUTO resumes the page cycle; either arrow returns to a held page. These controls page through the record without changing its positions or either rendered trace.
++
+ ## The numbered plan
+ 
+ The placed `plan_vitrine` wraps `commons/artifacts/simulation_grid/simulation_grid.tscn`. Its script creates 25 cell meshes with indices X/Z = 0 through 4. Their local centres use `Vector3(x-2, -0.024, z-2)`: the plan's cell `(2,2)` is horizontally centred at local zero. A one-metre change in either index moves a cell by one metre.

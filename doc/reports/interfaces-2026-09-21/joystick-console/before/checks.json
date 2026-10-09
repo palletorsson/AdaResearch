@@ -1,0 +1,34 @@
+{
+	"baseline": true,
+	"checks": [
+		{
+			"message": "variant 0: grip and grab centre coincide",
+			"passed": false
+		},
+		{
+			"message": "variant 0: declared release rule matches scene configuration",
+			"passed": true
+		},
+		{
+			"message": "variant 1: grip and grab centre coincide",
+			"passed": true
+		},
+		{
+			"message": "variant 1: declared release rule matches scene configuration",
+			"passed": true
+		},
+		{
+			"message": "variant 2: grip and grab centre coincide",
+			"passed": true
+		},
+		{
+			"message": "variant 2: declared release rule matches scene configuration",
+			"passed": false
+		}
+	],
+	"failures": [
+		"variant 0: grip and grab centre coincide",
+		"variant 2: declared release rule matches scene configuration"
+	],
+	"headset_tested": false
+}

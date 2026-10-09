@@ -1,0 +1,63 @@
+{
+ "_readme": "Every cell stamp.py has changed in this map, oldest first. Each op carries the literal it replaced, so a revision can be replayed backwards: python tools/stamp.py --map=VFM_08_Arena --revert",
+ "map": "VFM_08_Arena",
+ "revisions": [
+  {
+   "tool": "stamp.py",
+   "op": "stamp",
+   "lane_before": 3,
+   "lane_after": 3,
+   "carved": 1,
+   "displaced": 1,
+   "revision": 1,
+   "ops": [
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      13,
+      8
+     ],
+     "token": "1",
+     "literal": "\"1\"",
+     "expect": "2",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       13,
+       8
+      ],
+      "token": "2",
+      "literal": "\"2\""
+     },
+     "because": "queer_cylinder_target",
+     "why": "carved so queer_cylinder_target has its floor"
+    },
+    {
+     "op": "set",
+     "layer": "structure",
+     "cell": [
+      13,
+      7
+     ],
+     "token": "2",
+     "literal": "\"2\"",
+     "expect": "1",
+     "undo": {
+      "op": "set",
+      "layer": "structure",
+      "cell": [
+       13,
+       7
+      ],
+      "token": "1",
+      "literal": "\"1\""
+     },
+     "because": "queer_cylinder_target",
+     "why": "the wall carved at r8 c13, moved not deleted"
+    }
+   ]
+  }
+ ]
+}

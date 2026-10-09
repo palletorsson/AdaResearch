@@ -1,0 +1,20 @@
+--- before/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md
++++ commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md
+@@ -4,7 +4,7 @@
+ 
+ <!-- @bias_from_inside -->
+ 
+-Choose two pink labels. Move the Perspective slider partway, compare their separation, then repeat with two grey labels. Hold the slider at one value while moving your own viewpoint.
++Choose two pink labels. Move the COMPRESSION slider partway, compare their separation, then repeat with two grey labels. Hold the slider at one value while moving your own viewpoint.
+ 
+ The slider changes the positions of the labels themselves. Moving your head changes the view of that arrangement. Keep these two transformations separate.
+ 
+@@ -19,7 +19,7 @@
+ _marginalized_multimesh.multimesh.set_instance_transform(i, xf)
+ ```
+ 
+-The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The script calls this perspective, but it changes the represented geometry. It is not a camera command.
++The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The handle changes the represented geometry. Moving your head changes its projection from where you stand.
+ 
+ [Implementation](../../../commons/artifacts/bias_from_inside/bias_from_inside.gd). This is an excerpt from the artifact, not a standalone program.
+ 

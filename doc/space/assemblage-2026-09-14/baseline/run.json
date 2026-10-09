@@ -1,0 +1,52 @@
+{
+  "started": "2026-09-14T19:54:14+02:00",
+  "finished": "2026-09-14T19:54:26+02:00",
+  "pid": 30512,
+  "exit": 1,
+  "checks": 2,
+  "failures": [
+    "all 9 original works exist"
+  ],
+  "source_sha256": {
+    "ada_run/assemblage_probe_base.gd": "6e136d9a4cee01883b5daff8cf7dee7a2fc4eea9ea2784eee894945e74d6ed37",
+    "ada_run/assemblage_acceptance.gd": "ce434bb22a41caccdffb4d653a26397f032556a4d92f74acd7191e09d673e7ce",
+    "commons/maps/Assemblage_Same_Desire/map_data.json": "8c3635c77bbe7481d42594043c475e9e637c6e193f269e4b650b38e52975cb0f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/assemblage-review-2026-09-14/review-plan.json": "745938f1ae854553575aeaa766f8eb98868b52152965fb9ef50ee9b0bdc8d72d",
+    "commons/grid/mutators/grid_substrate_runner.tscn": "bd3152fc23e4bef859e23d95f3dc7161852255e4160cfe6a5d24503c7977eeff",
+    "commons/grid/mutators/grid_substrate_runner.gd": "5aabb6aa9d5e21aa714595074d45dcee7b166a3e0739b4ebdc6c0196b6ee7966",
+    "commons/interfaces/foundations/godel_statement_plaque.tscn": "2b470089601abaf589d77b88902a346b7aefa72663864238c2aee914c40741b2",
+    "commons/interfaces/foundations/godel_statement_plaque.gd": "eb59d836820902ce213089b4da2f904fd01d6cf7d4c68e04eb313456509caf3c",
+    "commons/instruments/incompleteness_scale.tscn": "c5edc3e10180f5cb9cd856a10de1725fcc2336ea4da79055f2a35ec7d0ad0ded",
+    "commons/instruments/incompleteness_scale.gd": "ea9bc1b0f84dbe73b836935f69d0d7a93f0ef12d4e35c1ed718d918bd0065b17",
+    "commons/artifacts/dragon_bench/dragon_bench.tscn": "326ee9aa0c36ffbaf367f9b94639743c3350c50a8a4b2446cad928d87d51b9f4",
+    "commons/artifacts/dragon_bench/dragon_bench.gd": "a3f44be11743a332fda1144515f89ab761e1060c5d35e481f11edd270ebe4caa",
+    "commons/ui/panel_bridge/test_panel_bridge.tscn": "98be85f8f2f1a18639a5029de44b1c95c33509b34f32dd63b654c4f8dec72e4b",
+    "commons/ui/panel_bridge/test_panel_bridge.gd": "42399f2bc47ac66582b25dbaa385c0c1df51bfc9355af23058dea608f297239d",
+    "commons/ui/panel_bridge/panel_bridge_loader.gd": "238b46ef21ab05afc6b569b22200089159f0ca86b01dadfe4a4ffe730deee214",
+    "commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.tscn": "63e31b4a48fc93f549d47229039b80a9cc9002b236b2c53e547133830a3e2528",
+    "commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.gd": "722cf63120a84aca6f55c0c4ffa17e999a3daad19222d0fdf1a00a26df44b962",
+    "commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.tscn": "ec2dc48d5483b88d01bb25cfcf8c4f773e3f24cbe93d760c4595642782c2d533",
+    "commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.gd": "17b523aecdb0dc0b5e2312f45fcf9eb85bba1b5d34834f820829359aa3e95fa4",
+    "commons/artifacts/ten_print_textile/ten_print_textile.tscn": "9abfb9bbbf43b5cebbd53c12ae4eb995bc6688e158b8417ead9b1e53ccba4037",
+    "commons/artifacts/ten_print_textile/ten_print_textile.gd": "c7ba11990f0baf4b73df89c30f48fb96a66456c667c865d0d3d8b403d8bb62d9",
+    "commons/artifacts/synthesis/synthesis_stand.tscn": "acf12df931668bfe6c56d2e58ae50b561a7fcaedea82c6b57af9a056533e89c2",
+    "commons/artifacts/synthesis/synthesis_stand.gd": "aabd604193112ade0231501d8a08554241bc19058a9f6d3bdc8ef60b8da35259",
+    "commons/artifacts/_embodied/embodied_prop.gd": "6761bf93ff638d32b97859d5f6c96218cdef66c1643382fb6bde6a4627a2bfc0",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "3f764528950b8f076a5c58c7e60af3edd1e1c580cc973c50b63674834e6b7471",
+    "commons/data/trunk_branches.json": "69f320e7dce2f1166255c5d5eb7b72e58cbff0bcc624f9ce0440262f4be23b1e",
+    "commons/maps/Assemblage_Same_Desire/final.md": "92e6decfaf65c8317db002af6f69bbe084d462dec4d33c563b08c6cfff9aad0a"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

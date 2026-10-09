@@ -1,0 +1,468 @@
+{
+  "Random_Space_Geometry": [
+    {
+      "cell": [
+        6,
+        23
+      ],
+      "token": "perlin_noise_bridge:0:-0.5",
+      "key": "perlin_noise_bridge",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        5,
+        24
+      ],
+      "token": "env_one:0:4:0.5",
+      "key": "env_one",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/env_one.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/envOne.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        9,
+        24
+      ],
+      "token": "curl_noise_particles:0:-0.5",
+      "key": "curl_noise_particles",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/curl_noise_particles/curl_noise_particles.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/curl_noise_particles/curl_noise_particles.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        3,
+        25
+      ],
+      "token": "random_transformations_geometric:0:1:0.2",
+      "key": "random_transformations_geometric",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/random_transformations/RandomTransformations.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        2,
+        26
+      ],
+      "token": "sculpt_one",
+      "key": "sculpt_one",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/sculpt_one.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/SculptOne.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        6,
+        27
+      ],
+      "token": "dark_sphere",
+      "key": "dark_sphere",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/lsystems.json",
+          "scene": "commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+          ]
+        }
+      ]
+    }
+  ],
+  "Randomness_Examples_of_Randomness": [
+    {
+      "cell": [
+        7,
+        6
+      ],
+      "token": "pollock_painting_in_3d:180:0:1#support:floor",
+      "key": "pollock_painting_in_3d",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        4,
+        12
+      ],
+      "token": "monte_carlo_dartboard:180:0:1#disclosure:works#controls:compact#control_front:1.0",
+      "key": "monte_carlo_dartboard",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        10,
+        15
+      ],
+      "token": "pipe_dream:180:1.15:0.25#residue:path",
+      "key": "pipe_dream",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/pipedream/pipe_dream.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/pipedream/PipeDream.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        5,
+        20
+      ],
+      "token": "extreme_randomness:180:1.5:0.2#chapter:all#gallery_radius:7",
+      "key": "extreme_randomness",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd"
+          ]
+        }
+      ]
+    }
+  ],
+  "Random_Pheromone": [
+    {
+      "cell": [
+        4,
+        5
+      ],
+      "token": "dark_sphere",
+      "key": "dark_sphere",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/lsystems.json",
+          "scene": "commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        5,
+        5
+      ],
+      "token": "pheromone_terrain",
+      "key": "pheromone_terrain",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        2,
+        6
+      ],
+      "token": "clipboard#pheromone_axioms:194:1.0",
+      "key": "clipboard",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/commons_artifacts.json",
+          "scene": "commons/context/clipboard/clipboard.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/context/clipboard/clipboard.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        3,
+        7
+      ],
+      "token": "clipboard#queer_energy:194:1.0",
+      "key": "clipboard",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/commons_artifacts.json",
+          "scene": "commons/context/clipboard/clipboard.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/context/clipboard/clipboard.gd"
+          ]
+        }
+      ]
+    }
+  ],
+  "Random_Space": [
+    {
+      "cell": [
+        4,
+        3
+      ],
+      "token": "noise_mixer:0:-0.5",
+      "key": "noise_mixer",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/noise_mixer/noise_mixer.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/noise_mixer/noise_mixer.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        8,
+        4
+      ],
+      "token": "worley_noise:0:-0.5",
+      "key": "worley_noise",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/worley_noise/worley_noise.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/worley_noise/worley_noise.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        6,
+        6
+      ],
+      "token": "random_space:0:-0.3:1.4",
+      "key": "random_space",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/commons_artifacts.json",
+          "scene": "commons/context/walkgrids/random_space.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/context/walkgrids/RandomSpace.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        5,
+        7
+      ],
+      "token": "dark_sphere",
+      "key": "dark_sphere",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/lsystems.json",
+          "scene": "commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        4,
+        9
+      ],
+      "token": "shannon_entropy_meter:0:-0.5",
+      "key": "shannon_entropy_meter",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+          ]
+        }
+      ]
+    }
+  ],
+  "Random_Game": [
+    {
+      "cell": [
+        9,
+        6
+      ],
+      "token": "r_c:0:3#stand:chasm#cue:advance#controls:compact#control_front:-2.6#control_facing:-z#control_height:1.38#control_floor:0.28#control_fixed:true",
+      "key": "r_c",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/random_cubes.json",
+          "scene": "commons/primitives/cubes/random_cycle_cube.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/primitives/cubes/random_cycle_cube.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        9,
+        17
+      ],
+      "token": "random_removal_arena:0:3#columns:9#rows:9#glass_width:11#glass_depth:11#glass_height:4.5#glass_title:THE SET UNDERFOOT#glass_grid:false#controls:compact#control_front:-6.0#control_facing:-z",
+      "key": "random_removal_arena",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/randomness_space/removal_arena.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/randomness_space/removal_arena.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        9,
+        29
+      ],
+      "token": "random_doors#controls:compact#control_front:-4.0#control_facing:-z",
+      "key": "random_doors",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/randomness_space/random_doors.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/randomness_space/random_doors.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        9,
+        37
+      ],
+      "token": "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24#stand:field#controls:compact#control_front:-5.0#control_facing:-z",
+      "key": "cube_projectile_spawner",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/primitives.json",
+          "scene": "commons/primitives/cubes/cube_spawner.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/primitives/cubes/CubeSpawner.gd"
+          ]
+        }
+      ]
+    },
+    {
+      "cell": [
+        9,
+        47
+      ],
+      "token": "waiting_profile#controls:compact#control_front:-1.7#control_facing:-z",
+      "key": "waiting_profile",
+      "entries": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "commons/artifacts/randomness_space/waiting_profile.tscn",
+          "exists": true,
+          "map_ready": true,
+          "scripts": [
+            "res://commons/artifacts/randomness_space/waiting_profile.gd"
+          ]
+        }
+      ]
+    }
+  ]
+}

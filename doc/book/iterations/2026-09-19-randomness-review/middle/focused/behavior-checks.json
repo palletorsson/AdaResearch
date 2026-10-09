@@ -1,0 +1,49 @@
+{
+  "checks": 41,
+  "evidence": {
+    "arrivals": {
+      "dress_seed": 801,
+      "history": [
+        4,
+        2,
+        1,
+        3,
+        5,
+        0
+      ]
+    },
+    "rotate": {
+      "after": {
+        "changed_after_one_second": true,
+        "elapsed_after": 12.9999999999998,
+        "elapsed_before": 11.9999999999998
+      },
+      "before": {
+        "changed_after_one_second": false,
+        "elapsed_after": 1.0,
+        "elapsed_before": 11.9999999999998
+      }
+    },
+    "walk_samples": [
+      {
+        "maximum": 0.0150000005960464,
+        "minimum": 0.0149999987334013,
+        "mode": 0
+      },
+      {
+        "maximum": 0.015000001527369,
+        "minimum": 0.0149999987334013,
+        "mode": 1
+      },
+      {
+        "maximum": 0.149993225932121,
+        "minimum": 0.0149258691817522,
+        "mode": 2
+      }
+    ]
+  },
+  "failures": [
+    "RESET restores original couture geometry"
+  ],
+  "headset_tested": false
+}

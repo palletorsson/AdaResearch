@@ -1,0 +1,194 @@
+{
+	"checks": [
+		{
+			"check": "twelve persistent panels",
+			"pass": true
+		},
+		{
+			"check": "arrangement button 0 preserves colours",
+			"pass": true
+		},
+		{
+			"check": "colour button 0 preserves arrangement 0",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 0/0",
+			"pass": true
+		},
+		{
+			"check": "saved canopy-alternating",
+			"pass": true
+		},
+		{
+			"check": "colour button 1 preserves arrangement 0",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 0/1",
+			"pass": true
+		},
+		{
+			"check": "saved canopy-bands",
+			"pass": true
+		},
+		{
+			"check": "colour button 2 preserves arrangement 0",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 0/2",
+			"pass": true
+		},
+		{
+			"check": "saved canopy-one-colour",
+			"pass": true
+		},
+		{
+			"check": "saved canopy-eye",
+			"pass": true
+		},
+		{
+			"check": "arrangement button 1 preserves colours",
+			"pass": true
+		},
+		{
+			"check": "colour button 0 preserves arrangement 1",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 1/0",
+			"pass": true
+		},
+		{
+			"check": "saved screens-alternating",
+			"pass": true
+		},
+		{
+			"check": "colour button 1 preserves arrangement 1",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 1/1",
+			"pass": true
+		},
+		{
+			"check": "saved screens-bands",
+			"pass": true
+		},
+		{
+			"check": "colour button 2 preserves arrangement 1",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 1/2",
+			"pass": true
+		},
+		{
+			"check": "saved screens-one-colour",
+			"pass": true
+		},
+		{
+			"check": "saved screens-eye",
+			"pass": true
+		},
+		{
+			"check": "arrangement button 2 preserves colours",
+			"pass": true
+		},
+		{
+			"check": "colour button 0 preserves arrangement 2",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 2/0",
+			"pass": true
+		},
+		{
+			"check": "saved gathering-alternating",
+			"pass": true
+		},
+		{
+			"check": "colour button 1 preserves arrangement 2",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 2/1",
+			"pass": true
+		},
+		{
+			"check": "saved gathering-bands",
+			"pass": true
+		},
+		{
+			"check": "colour button 2 preserves arrangement 2",
+			"pass": true
+		},
+		{
+			"check": "panel identities preserved in state 2/2",
+			"pass": true
+		},
+		{
+			"check": "saved gathering-one-colour",
+			"pass": true
+		},
+		{
+			"check": "saved gathering-eye",
+			"pass": true
+		},
+		{
+			"check": "pane is visibly transparent",
+			"pass": true
+		},
+		{
+			"check": "canopy leaves central body-height path open",
+			"pass": true
+		},
+		{
+			"check": "canopy is solid overhead",
+			"pass": true
+		},
+		{
+			"check": "standing capsule walks under canopy and stays on floor",
+			"pass": true
+		},
+		{
+			"check": "screens block the former straight path",
+			"pass": true
+		},
+		{
+			"check": "transparent screen stops the standing capsule",
+			"pass": true
+		},
+		{
+			"check": "standing capsule enters the open gathering centre",
+			"pass": true
+		},
+		{
+			"check": "Walk button activates the visitor camera",
+			"pass": true
+		},
+		{
+			"check": "layout change is refused while visitor occupies the panel area",
+			"pass": true
+		},
+		{
+			"check": "layout change works after returning to the edge",
+			"pass": true
+		},
+		{
+			"check": "Reset restores canopy, alternating colour and overview",
+			"pass": true
+		},
+		{
+			"check": "saved controls",
+			"pass": true
+		}
+	],
+	"scope": "Native desktop gallery. Button signals, state invariants, collision rays and scripted CharacterBody3D traversal. No physical-keyboard, tracked-hand or headset test.",
+	"walk_final_z": {
+		"canopy": -3.43332600593567,
+		"gathering": -3.43332386016846,
+		"screens": 2.32727146148682
+	}
+}

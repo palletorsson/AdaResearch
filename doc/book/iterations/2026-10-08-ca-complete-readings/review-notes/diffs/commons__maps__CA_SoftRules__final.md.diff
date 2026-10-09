@@ -1,0 +1,21 @@
+--- before/commons/maps/CA_SoftRules/final.md
++++ after/commons/maps/CA_SoftRules/final.md
+@@ -10,15 +10,11 @@
+ 
+ EXCHANGE B turns its neighbourhood exchange on and restores both beginnings. Advance again. The two fields now agree. Switch exchange off, replay, and look for the first place where they differ. We can locate the missing relation before giving the result a name.
+ 
+-In the previous hall a neighbour above half health counted as one contribution to recovery. Here a cell stores two concentrations, U and V. It receives differences in concentration from the four sites beside it. For each concentration, it adds the four neighbours and subtracts four copies of the centre.
++In the previous hall a neighbour had to be healthy enough to count. Here each cell holds two concentrations, U and V; how much a neighbour differs becomes part of what it can offer. Both fields perform the same local reaction.[^ca-gray-scott] Only one can receive through the surrounding cells.
+ 
+-The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Each cell now holds two fractions, and a neighbour matters by how much its concentration differs.
++Return to W. Nothing was planted there. Something has arrived on the left. On the right, the initial square has nearly faded by the end of those hundred updates. Keep the two pictures beside one another for a while.
+ 
+-There is also a reaction at the address itself. The product U × V × V removes some U and adds some V. A feed term replenishes U; another term removes V. The installation uses the same arithmetic as the project's existing Gray–Scott generator,[^ca-gray-scott] now exposed one update at a time.
+-
+-With exchange off, the right-hand field still reacts. But at an unseeded address V is zero, so U × V × V is also zero. Nothing in that local reaction can make its first V arrive. The left-hand field can receive it. This difference is small enough to calculate and large enough to alter the wall. By the end of the first hundred updates, the right-hand square has nearly faded. The same local reaction has had a different future without exchange.
+-
+-Keep that distinction in hand. “Soft” is not a promise that the rule is gentle or that every boundary has disappeared. Both fields still occupy a 32-by-32 grid. The arithmetic writes into separate next arrays before swapping them into the present. Values are clamped between zero and one. At an edge, the remainder operator wraps the neighbour index to the opposite side. The wall has a visible border that the calculation does not share.
++“Soft” is not a promise that every boundary has disappeared. At the edge of this grid, neighbours wrap to the opposite side. The wall has a visible border that the calculation does not share. The tutorial opens the arithmetic of that exchange.
+ 
+ Use VIEW U/V. Another distribution appears without a single new update. The initial view doubles V before mapping it into colour; the U view has its own palette. A colour can saturate while the stored value still has room to change. An image is already an interpretation of the field.
+ 

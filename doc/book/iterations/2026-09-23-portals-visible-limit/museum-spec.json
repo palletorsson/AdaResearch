@@ -1,0 +1,98 @@
+{
+  "shots": [
+    {
+      "tag": "portal-entry",
+      "from": [
+        3.5,
+        1.7,
+        1.0
+      ],
+      "look_at": [
+        3.5,
+        2,
+        25
+      ],
+      "fov": 72
+    },
+    {
+      "tag": "portal-overview",
+      "from": [
+        18,
+        18,
+        36
+      ],
+      "look_at": [
+        4,
+        1,
+        17
+      ],
+      "fov": 70
+    },
+    {
+      "tag": "portal-instrument",
+      "from": [
+        6.7,
+        1.65,
+        0.75
+      ],
+      "look_at": [
+        6.6,
+        1.4,
+        3.5
+      ],
+      "fov": 65
+    },
+    {
+      "tag": "portal-last",
+      "from": [
+        3.5,
+        1.7,
+        27.0
+      ],
+      "look_at": [
+        3.5,
+        2,
+        32
+      ],
+      "fov": 72
+    }
+  ],
+  "walks": [
+    {
+      "tag": "along-first-half",
+      "from": [
+        3.5,
+        0.05,
+        3
+      ],
+      "to": [
+        3.5,
+        0,
+        17
+      ],
+      "seconds": 9
+    },
+    {
+      "tag": "along-last-half",
+      "from": [
+        3.5,
+        0.05,
+        17
+      ],
+      "to": [
+        3.5,
+        0,
+        32
+      ],
+      "seconds": 9
+    }
+  ],
+  "rays": [
+    {
+      "tag": "floor-final-ring",
+      "x": 3.5,
+      "z": 31.1,
+      "top": 0
+    }
+  ]
+}

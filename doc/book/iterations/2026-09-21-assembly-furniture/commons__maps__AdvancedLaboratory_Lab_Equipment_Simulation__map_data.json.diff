@@ -1,0 +1,44 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json
+@@ -2,7 +2,7 @@
+   "map_info": {
+     "name": "Lab Equipment Simulation",
+     "lookup_name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+-    "description": "Compare an automatic catalogue, a gold body whose positions and one connection you can edit, and a separate coral-ring ragdoll that pulls its neighbours and falls on release. The gold workshop alone keeps its released arrangement for the final hall.",
++    "description": "Compare an automatic catalogue, a gold editable body, a human ragdoll, and articulated chair, table and lamp. Pull coral rings to transmit force through connected parts; release and watch them settle. The gold workshop alone keeps its released arrangement for the final hall.",
+     "version": "1.0",
+     "format": "json",
+     "dimensions": {
+@@ -14,7 +14,7 @@
+       "difficulty": "advanced",
+       "category": "advanced_laboratory",
+       "spatial_temperature": 0.8,
+-      "design_notes": "Automatic catalogue at (3,5), standing-scale gold workshop to its right, and a separate ragdoll mat at map (3.5,9.2) facing the central lane. Ragdoll opts into actual physical limbs and free pin joints; the gold graph remains editable and saved. No new control bank; one physical HANG AGAIN button."
++      "design_notes": "Preserved catalogue at (3,5), gold workshop to its right, and ragdoll at (3.5,9.2). New independently resettable furniture studies: Chair (3,2.3), Table (8.7,2.3), Lamp (9.2,9.8). Their free joints and gravity become active without staging supports on first grab; all objects remain available together. Central entrance/exit passage remains open."
+     },
+     "title": "The Inventory Before the Body",
+     "museum": {
+@@ -23,10 +23,10 @@
+       "wall_height": 4,
+       "sculpture_clear_rects": [
+         [
+-          2,
+-          2,
+-          10,
+-          10
++          1,
++          1,
++          11,
++          11
+         ]
+       ],
+       "piers": false,
+@@ -460,7 +460,7 @@
+         " ",
+         " ",
+         " ",
+-        "MolecularDesigner:0:0:2#body_study:true#body_workshop:true#body_ragdoll:true#float_duration:8#assemble_duration:18",
++        "MolecularDesigner:0:0:2#body_study:true#body_workshop:true#body_ragdoll:true#body_furniture:true#float_duration:8#assemble_duration:18",
+         " ",
+         " ",
+         " ",

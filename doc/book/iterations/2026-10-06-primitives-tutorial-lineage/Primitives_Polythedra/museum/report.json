@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "lesson script can instantiate",
+      "passed": true
+    },
+    {
+      "name": "exact learner program mounted in requested hall",
+      "passed": true
+    },
+    {
+      "name": "study has museum floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: learner-study",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: learner-close",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: learner-close",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "hall": "Primitives_Polythedra",
+  "observations": {
+    "drawing": "Synthetic recorded positions for this capture; user archive restored by runner.",
+    "learner_main": "res://doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/lesson.gd",
+    "station_local": [
+      4.5,
+      0.0,
+      3.0
+    ]
+  },
+  "passed": true,
+  "scope": "Exact printed program mounted temporarily in the real Endless Museum hall. Synthetic input; no permanent placement or headset claim."
+}

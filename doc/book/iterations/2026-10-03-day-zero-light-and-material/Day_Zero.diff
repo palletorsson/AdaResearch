@@ -1,0 +1,21 @@
+--- before/day-zero.md
++++ doc/book/day-zero.md
+@@ -29,6 +29,18 @@
+ Download and extract the [student starter](/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip). Import its `project.godot` in Godot's Project Manager and let the first import finish. Open `main.tscn` and run the project. It starts on desktop by default. Click to look, use WASD to walk, and approach the pink cube. Aim at it and press E to pick it up; press E again to let go. R returns it to the plinth. Esc releases the mouse.
+ 
+ Open `studies/hello_world.gd`. Change `count += 1` to `count += 2`, save and run again. The counter now takes steps of two. Restore the original line. Point Zero will explain this script; here we are checking that an edit reaches the running world. The [starter guide](studies/ada-xr-starter/README.md) identifies the supplied room and player, the study, and the headset controls.
++
++## Give the work a light
++
++The first object deserves a considered image. A lit face, a shaded face and a shadow on the plinth let us read the cube's depth before we describe it. The floor gives it somewhere to rest. These are conditions we prepare alongside the player.
++
++The starter supplies a studio arrangement: off-white walls, a charcoal floor, a warm main light and a weaker, cooler fill. Light from the sky keeps shaded surfaces visible. The cube has a smoother material than its plinth. On desktop, soft shadows and tone mapping keep bright surfaces from collapsing into flat white; anti-aliasing smooths the edges. The studio is a starting choice we can return to and alter.
++
++Open `main.tscn` and select **AdaRoom**. In the Inspector, expand **Studio Light**. Change **Key Energy** from `0.65` to `0`, save and run. The cast shadow disappears. The cube remains visible because the sky and fill still contribute light. Restore `0.65`. We have removed one source, and found others already at work.
++
++The supplied `prepared/studio_environment.tres` holds the sky and tone-mapping settings. We do not need to explain every control now. Keep this working arrangement while the early tutorials attend to a point, a line and a trace. Later, colour gives us a reason to examine these conditions more closely.
++
++The desktop studio uses Forward+. The Android version uses a lighter Compatibility configuration; the starter guide also explains choosing it on a computer. Compare images when changing renderer, and test performance on the actual headset. A good still image alone does not tell us how the room feels while moving.
+ 
+ ## The small desktop check
+ 

@@ -1,0 +1,56 @@
+{
+  "artifacts": {
+    "rotation_wall_crossings": {
+      "lookup_name": "rotation_wall_crossings",
+      "name": "Centre blades: bridge and climb",
+      "scene": "res://commons/artifacts/rotation_studies/wall_crossings.tscn",
+      "description": "Three 8.4 metre centre-mounted blades, turning in the reversed direction. Y swings across a level gap; x and z pause on slopes reaching grid landings three metres higher. All static landings belong to the source grid.",
+      "category": "transforms",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        34,
+        8.4,
+        16
+      ],
+      "size_group": "large",
+      "parameters": {
+        "footprint": [
+          34,
+          8.4,
+          16
+        ],
+        "size_group": "large"
+      },
+      "map_sequences": [
+        "transformation"
+      ]
+    },
+    "rotation_array_compare": {
+      "lookup_name": "rotation_array_compare",
+      "name": "Forward through a tilted 2D array",
+      "scene": "res://commons/artifacts/rotation_studies/array_compare.tscn",
+      "description": "Four 4 by 10 arrays compare x, y, z and combined X-then-Y-then-Z rotation. Angles increase ten degrees per row from zero to ninety along forward z. Fixed centres, matching collision and visible cube edges expose the changing route.",
+      "category": "transforms",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        45,
+        4,
+        24
+      ],
+      "size_group": "large",
+      "parameters": {
+        "footprint": [
+          45,
+          4,
+          24
+        ],
+        "size_group": "large"
+      },
+      "map_sequences": [
+        "transformation"
+      ]
+    }
+  }
+}

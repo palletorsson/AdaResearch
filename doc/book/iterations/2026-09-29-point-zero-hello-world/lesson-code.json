@@ -1,0 +1,5 @@
+{
+  "greeting": "extends Node3D\n\nfunc _ready():\n    $Greeting.text = \"Hello, world.\"\n",
+  "counter": "extends Node3D\n\nvar count := 0\n\nfunc _ready():\n    $Greeting.text = \"Hello, world.\"\n\nfunc _process(_delta):\n    count += 1\n    $Counter.text = str(count)\n",
+  "once": "extends Node3D\n\nvar count := 0\n\nfunc _ready():\n    $Greeting.text = \"Hello, world.\"\n    count += 1\n    $Counter.text = str(count)\n"
+}

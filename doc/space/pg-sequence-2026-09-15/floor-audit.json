@@ -1,0 +1,121 @@
+{
+  "PG_Branching_Growth": {
+    "old_dimensions": [
+      14,
+      12
+    ],
+    "new_dimensions": [
+      26,
+      42
+    ],
+    "structure_offset": [
+      2,
+      24
+    ],
+    "explicit_floor_covers": 23,
+    "preserved_tokens": [
+      "branching_growth_algorithm",
+      "organic_space"
+    ],
+    "historic_reference": "doc/space/pg-floor-audit-2026-09-14/historical",
+    "staging_status": "runtime check pending",
+    "rear_circulation_rows_added": 4,
+    "reason": "The first physical crossing caught the footprint of the inherited wall despite an open tile row. Retain the structure; provide a wider separate circulation strip."
+  },
+  "PG_Percolation_Network": {
+    "old_dimensions": [
+      14,
+      17
+    ],
+    "new_dimensions": [
+      26,
+      44
+    ],
+    "structure_offset": [
+      2,
+      21
+    ],
+    "explicit_floor_covers": 0,
+    "preserved_tokens": [
+      "percolationnetwork_ca",
+      "dark_sphere",
+      "synthesis_stand"
+    ],
+    "historic_reference": "doc/space/pg-floor-audit-2026-09-14/historical",
+    "staging_status": "runtime check pending",
+    "rear_circulation_rows_added": 4,
+    "reason": "The first physical crossing caught the footprint of the inherited wall despite an open tile row. Retain the structure; provide a wider separate circulation strip."
+  },
+  "PG_Caves_Mazes": {
+    "old_dimensions": [
+      16,
+      12
+    ],
+    "new_dimensions": [
+      38,
+      48
+    ],
+    "structure_offset": [
+      2,
+      30
+    ],
+    "explicit_floor_covers": 32,
+    "preserved_tokens": [
+      "caverandomwalk",
+      "maze_generation",
+      "binary_space_partitioning"
+    ],
+    "historic_reference": "doc/space/pg-floor-audit-2026-09-14/historical",
+    "staging_status": "runtime check pending",
+    "rear_circulation_rows_added": 4,
+    "reason": "The first physical crossing caught the footprint of the inherited wall despite an open tile row. Retain the structure; provide a wider separate circulation strip."
+  },
+  "PG_Sculpted_Forms": {
+    "old_dimensions": [
+      14,
+      14
+    ],
+    "new_dimensions": [
+      32,
+      44
+    ],
+    "structure_offset": [
+      2,
+      24
+    ],
+    "explicit_floor_covers": 42,
+    "preserved_tokens": [
+      "cube_mound_scene",
+      "dome",
+      "layered_membrane"
+    ],
+    "historic_reference": "doc/space/pg-floor-audit-2026-09-14/historical",
+    "staging_status": "runtime check pending",
+    "rear_circulation_rows_added": 4,
+    "reason": "The first physical crossing caught the footprint of the inherited wall despite an open tile row. Retain the structure; provide a wider separate circulation strip."
+  },
+  "PG_Mirrored_Patterns": {
+    "old_dimensions": [
+      13,
+      11
+    ],
+    "new_dimensions": [
+      32,
+      48
+    ],
+    "structure_offset": [
+      2,
+      31
+    ],
+    "explicit_floor_covers": 34,
+    "preserved_tokens": [
+      "mirror_cellular_texture_for_3d",
+      "rhizomatic_maze_space",
+      "pattern_tunnel_machine"
+    ],
+    "historic_reference": "doc/space/pg-floor-audit-2026-09-14/historical",
+    "staging_status": "runtime check pending",
+    "rear_circulation_rows_added": 4,
+    "reason": "The first physical crossing caught the footprint of the inherited wall despite an open tile row. Retain the structure; provide a wider separate circulation strip."
+  }
+}

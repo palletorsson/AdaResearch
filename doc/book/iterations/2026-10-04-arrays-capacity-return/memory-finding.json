@@ -1,0 +1,85 @@
+{
+  "id": "finding-cb9118e955504b82a99515fafdd46bab",
+  "scope": "sequence:array_tutorial",
+  "kind": "decision",
+  "text": "Updated all five Arrays full/short teaching summaries and sequence metadata. Addressing is the main opening; retained Molnar departures are optional. Teach grid[x][z] to volume[y][z][x] explicitly; distinguish occupancy, quarter-turns and score events. Review: doc/book/iterations/2026-10-04-arrays-capacity-return/index.html. Guide: doc/book/course/storyboards/ARRAYS.md.",
+  "reason": "User requested report-led improvements one sequence at a time with before/after text and museum images. Arrays is an early capacity gap and has a concrete companion contradiction. Keep its strong main text and reflective wall passage.",
+  "sequence_effect": "Carry a read/write operation with explicitly named records and readers. Independent variations expose understanding of addresses, spacing, transpose, orientation and timing. Reduced display/geometry bindings and record transfer remain proposed. All five halls and ordering preserved.",
+  "project_effect": "Colour and Tiling can reuse addressed assignment and cyclic reading without pretending all stored values share a meaning. 202 other route halls and full tutorial/final/map files unchanged. Disco old full companion still needs rewriting; summary edits do not resolve it.",
+  "status": "proposed",
+  "method": "Parallel text/lineage and implementation source review; before/after snapshots, scope/hash and generated-route checks; illustrated browser review. Reused dated museum captures. No new runtime or learner test.",
+  "created_by": "Codex",
+  "created_at": "2026-10-04T15:49:53.127088Z",
+  "review_note": "",
+  "reviewed_at": "",
+  "related_scopes": [
+    "sequence:primitives",
+    "sequence:transformation",
+    "sequence:color",
+    "sequence:tiling",
+    "sequence:wavefunctions"
+  ],
+  "sources": [
+    {
+      "path": "doc/book/course/storyboards/early.json",
+      "sha256": "f17bbc4438553ffae3c3ea3c5fff5bcc45a1b3cd9eeb6039187b41ca87160677",
+      "current_sha256": "f17bbc4438553ffae3c3ea3c5fff5bcc45a1b3cd9eeb6039187b41ca87160677",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/course/storyboards/ARRAYS.md",
+      "sha256": "35cbe7bef0f2a93e5445e586e98001aa145db96b2788141ab1c74a248a23a37b",
+      "current_sha256": "35cbe7bef0f2a93e5445e586e98001aa145db96b2788141ab1c74a248a23a37b",
+      "status": "current"
+    },
+    {
+      "path": "commons/maps/sequences/array_tutorial.json",
+      "sha256": "b348c9466224ea96e8072f812b40aa8db50026b8970b05ecd265c10c52f5b70a",
+      "current_sha256": "b348c9466224ea96e8072f812b40aa8db50026b8970b05ecd265c10c52f5b70a",
+      "status": "current"
+    },
+    {
+      "path": "algorithms/arrays/grid_2d_4x4.gd",
+      "sha256": "4039e424056bffdb6732ce678863681ab4cace2c13ed78d7327769a61c5e48b6",
+      "current_sha256": "4039e424056bffdb6732ce678863681ab4cace2c13ed78d7327769a61c5e48b6",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/regularity/array_flight_lab.gd",
+      "sha256": "c36f5318c175db1f7b0eef9d2db9f8b716b0506910a2f88ec320dd888bb17562",
+      "current_sha256": "c36f5318c175db1f7b0eef9d2db9f8b716b0506910a2f88ec320dd888bb17562",
+      "status": "current"
+    },
+    {
+      "path": "commons/artifacts/regularity/tiling_pattern.gd",
+      "sha256": "27a317a8a7fcf8b551545739026ee3660f2dbf07192d11055e1a96138f836558",
+      "current_sha256": "27a317a8a7fcf8b551545739026ee3660f2dbf07192d11055e1a96138f836558",
+      "status": "current"
+    },
+    {
+      "path": "commons/audio/sequencer/sequencer_ui.gd",
+      "sha256": "f39b128c1223ea0bd4c6932b9fe69dc32dd3be6d424644e31bec8fac65826a89",
+      "current_sha256": "f39b128c1223ea0bd4c6932b9fe69dc32dd3be6d424644e31bec8fac65826a89",
+      "status": "current"
+    },
+    {
+      "path": "commons/context/discofloor/DiscoSequencerBridge.gd",
+      "sha256": "934419e460b521f8a7e6f3ca8132e6c4454553cd15f8763ccf00e8863b59334f",
+      "current_sha256": "934419e460b521f8a7e6f3ca8132e6c4454553cd15f8763ccf00e8863b59334f",
+      "status": "current"
+    },
+    {
+      "path": "commons/maps/Tutorial_Disco/tutorial.md",
+      "sha256": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e",
+      "current_sha256": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e",
+      "status": "current"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-arrays-capacity-return/REPORT.md",
+      "sha256": "676b868a38bc79e22f2fdd9ed77a43593188dc5042714038c56fb2a722655379",
+      "current_sha256": "676b868a38bc79e22f2fdd9ed77a43593188dc5042714038c56fb2a722655379",
+      "status": "current"
+    }
+  ],
+  "freshness": "current"
+}

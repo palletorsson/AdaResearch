@@ -1,0 +1,205 @@
+extends Node3D
+## Museum studies of a line's material and its relations on separate plinths.
+## The wall drawings stay fixed, so a moved body can disagree with its first view.
+const LINE := preload("res://commons/artifacts/line_relations_gallery/line_body.gd")
+const DETAIL := preload("res://commons/scenes/em/em_detail.gd")
+const KIT := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+var lines: Array[Node3D] = []
+var first_poses: Array[Transform3D] = []
+
+func get_artifact_reaction_targets() -> Array:
+	# Each held rod is an example. A strike must not erase the whole gallery.
+	var targets: Array = lines.duplicate()
+	for child in get_children():
+		if child is MeshInstance3D: targets.append(child)
+	return targets
+
+const PODIUM_TOP := 0.9
+const RELATION_SPAN := 1.2
+const CROSS_DEPTH := 0.18
+
+func _ready() -> void:
+	relation_podiums()
+	material_podium()
+	# Later studies keep the transition from a plane to a spatial grid.
+	for k in range(3):
+		var v: float = (k-1)*0.8
+		rod("grid_horizontal_%d"%k,Vector3(7,1.35+v,5.0),Vector3.RIGHT,2.4,"stick")
+		rod("grid_vertical_%d"%k,Vector3(7+v,1.35,5.08),Vector3.UP,2.4,"stick")
+	# A sparse spatial grid beyond the planar one: walking sideways separates
+	# its depth planes. It deliberately offers no fitted surfaces.
+	rod("depth_a",Vector3(6.2,1.25,8.5),Vector3.BACK,2.4,"beam")
+	rod("depth_b",Vector3(7.8,1.25,8.5),Vector3.BACK,2.4,"beam")
+	rod("depth_cross",Vector3(7,1.25,8.5),Vector3.RIGHT,2.4,"stick")
+	floor_words("GRAB A LINE. LEAVE ANOTHER ARRANGEMENT.",Vector3(-0.5,0.016,8.0),Vector2(7,0.22))
+	wall_studies()
+	wall_planks()
+	room_perspective()
+	# One continuous mark runs right into the east wall, then up its face.
+	paint(Vector3(-6,0.016,13.7),Vector3(12.49,0.016,13.7),0.10,Color("202329"))
+	get_child(get_child_count()-1).name="FollowFloor"
+	paint(Vector3(12.49,0.016,13.7),Vector3(12.49,3.9,13.7),0.10,Color("202329"))
+	get_child(get_child_count()-1).name="FollowWall"
+	for entry in [["FOLLOW",8.5,1.7],["THIS LINE",8.05,2.25]]:
+		floor_words(entry[0],Vector3(entry[1],0.018,14.95),Vector2(entry[2],0.33))
+		get_child(get_child_count()-1).rotation_degrees.y=-90
+	study_light("FollowLight",Vector3(10.5,4.1,14.5),Vector3(12.4,1.4,13.7))
+
+func relation_podiums() -> void:
+	# One metre twenty between point centres in every study. The relationship
+	# changes; endpoint appearance and span do not. Leave 2.2m gaps for walking.
+	var titles := ["HORIZONTAL","VERTICAL","PARALLEL","PLUS","X"]
+	for i in range(5):
+		var x := -8.0+float(i)*4.0
+		podium("RelationPodium%d"%i,Vector3(x,0,0),Vector3(1.8,PODIUM_TOP,1.15),titles[i])
+		study_light("RelationLight%d"%i,Vector3(x,3.9,-1.1),Vector3(x,1.3,0))
+	var bottom := PODIUM_TOP+LINE.ENDPOINT_RADIUS
+	var centre := bottom+RELATION_SPAN*0.5
+	rod("horizontal",Vector3(-8,bottom,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("vertical",Vector3(-4,centre,0),Vector3.UP,RELATION_SPAN,"point_line")
+	rod("parallel_a",Vector3(0,bottom,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("parallel_b",Vector3(0,bottom+0.5,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("plus_horizontal",Vector3(4,centre,-CROSS_DEPTH*0.5),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("plus_vertical",Vector3(4,centre,CROSS_DEPTH*0.5),Vector3.UP,RELATION_SPAN,"point_line")
+	var cross_y := bottom+RELATION_SPAN*0.5/sqrt(2.0)
+	rod("cross_a",Vector3(8,cross_y,-CROSS_DEPTH*0.5),Vector3(1,1,0).normalized(),RELATION_SPAN,"point_line")
+	rod("cross_b",Vector3(8,cross_y,CROSS_DEPTH*0.5),Vector3(1,-1,0).normalized(),RELATION_SPAN,"point_line")
+	floor_words("TWO ENDS. ANOTHER RELATION.",Vector3(0,0.016,-2.0),Vector2(5.5,0.22))
+
+func material_podium() -> void:
+	podium("MaterialPodium",Vector3(-7,0,6),Vector3(3.6,PODIUM_TOP,1.2),"A BODY FOR A LINE")
+	var skins := ["plank","stick","light","measure"]
+	var labels := ["PLANK","ROD","LIGHT","MEASURE"]
+	for i in range(4):
+		var x := -8.2+float(i)*0.8
+		rod("material_"+skins[i],Vector3(x,PODIUM_TOP+0.9,6),Vector3.UP,1.8,skins[i])
+		if skins[i]=="plank":
+			# Present the broad wooden face to the approaching visitor.
+			lines[-1].rotate_object_local(Vector3.RIGHT,PI*0.5)
+			first_poses[-1]=lines[-1].transform
+		var label: MeshInstance3D=KIT.stencil(labels[i],Vector2(0.65,0.10),Color("25282d"))
+		label.name="MaterialLabel%d"%i;label.position=Vector3(x,0.7,5.396)
+		label.rotation.y=PI;get_node("MaterialPodium").add_child(label)
+		# Label coordinates above are gallery-local; the podium is offset.
+		label.position-=Vector3(-7,0,6)
+	study_light("MaterialLight",Vector3(-7,4.1,4.5),Vector3(-7,1.5,6))
+
+func podium(id: String, at: Vector3, size_m: Vector3, title: String) -> void:
+	# Furniture stays outside the tool-reaction targets; only studies can break.
+	var body := StaticBody3D.new();body.name=id;body.position=at
+	body.collision_layer=1;body.collision_mask=0;add_child(body)
+	var mesh := MeshInstance3D.new();mesh.name="Plinth"
+	var box := BoxMesh.new();box.size=size_m;mesh.mesh=box
+	var mat := StandardMaterial3D.new();mat.albedo_color=Color("eee8dd");mat.roughness=0.82
+	mesh.material_override=mat;mesh.position.y=size_m.y*0.5;body.add_child(mesh)
+	var collision := CollisionShape3D.new();collision.name="Boundary"
+	var shape := BoxShape3D.new();shape.size=size_m
+	collision.shape=shape;collision.position=mesh.position;body.add_child(collision)
+	var label: MeshInstance3D=KIT.stencil(title,Vector2(minf(size_m.x-0.18,2.8),0.13),Color("25282d"))
+	label.name="Title";label.position=Vector3(0,0.43,-size_m.z*0.5-0.003)
+	label.rotation.y=PI;body.add_child(label)
+
+func study_light(id: String, at: Vector3, target: Vector3) -> void:
+	var light := SpotLight3D.new();light.name=id;add_child(light)
+	light.position=at;light.look_at(to_global(target))
+	light.light_color=Color("fff1da");light.light_energy=2.5
+	light.spot_range=6.5;light.spot_angle=43;light.spot_attenuation=0.7
+	# Existing museum sun supplies shadows; these are local, cheap gallery fills.
+	light.shadow_enabled=false
+
+func rod(id: String, at: Vector3, direction: Vector3, length_m: float, finish: String) -> void:
+	var body := LINE.new()
+	body.name=id;body.span=length_m;body.skin=finish
+	body.collision_layer=6;body.collision_mask=1
+	body.transform=Transform3D(Basis(Quaternion(Vector3.RIGHT,direction)),at)
+	add_child(body);lines.append(body);first_poses.append(body.transform)
+
+func paint(a: Vector3, b: Vector3, width: float, colour: Color) -> void:
+	var mesh := MeshInstance3D.new();var box := BoxMesh.new()
+	box.size=Vector3(a.distance_to(b),width,width);mesh.mesh=box
+	mesh.transform=Transform3D(Basis(Quaternion(Vector3.RIGHT,(b-a).normalized())),(a+b)*0.5)
+	var mat := StandardMaterial3D.new();mat.albedo_color=colour;mat.roughness=0.8
+	mesh.material_override=mat
+	if absf(a.y-b.y)<0.0001 and a.y<0.04:
+		# Floor marks are thin ink; elevated lines keep their actual thickness.
+		box.size.y=0.003
+		mesh.position.y=0.012
+		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(mesh)
+
+func floor_words(words: String, at: Vector3, size_m: Vector2) -> void:
+	var label: MeshInstance3D=KIT.stencil(words,size_m,Color("25282d"))
+	if label==null:return
+	label.rotation_degrees.x=-90;label.rotation_degrees.y=180;label.position=at;add_child(label)
+
+func wall_studies() -> void:
+	var z := 18.48
+	var ink := Color("25282d")
+	paint(Vector3(-9.2,1.6,z),Vector3(-6.8,1.6,z),0.065,ink)
+	paint(Vector3(-8,0.4,z),Vector3(-8,2.8,z),0.065,ink)
+	# Equal physical gaps on the wall; perspective belongs to the visitor.
+	for x in [-3.6,-2.4]:paint(Vector3(x,0.2,z),Vector3(x,3.4,z),0.06,ink)
+	paint(Vector3(0.6,1.6,z),Vector3(3.4,1.6,z),0.04,ink)
+	paint(Vector3(2,0.05,z),Vector3(2,3.8,z),0.07,ink)
+	for i in range(4):
+		var p: float = float(i)*0.65
+		paint(Vector3(6+p,0.55,z),Vector3(6+p,2.5,z),0.035,ink)
+		paint(Vector3(6,0.55+p,z),Vector3(7.95,0.55+p,z),0.035,ink)
+
+func restore_arrangements() -> void:
+	# Native room reset may call this; no automatic snapping interrupts a hand.
+	for i in range(lines.size()):
+		if not lines[i].is_picked_up():lines[i].transform=first_poses[i]
+
+func wall_planks() -> void:
+	# Seven lengths share one angle and section. Account for the section so
+	# each lower corner rests on the floor and the upper edge meets the wall.
+	var angle := deg_to_rad(70.0)
+	var direction := Vector3(cos(angle),sin(angle),0)
+	for i in range(7):
+		var length_m := 1.0 + float(i)*0.5
+		var centre := Vector3(
+			12.48 - length_m*0.5*cos(angle) - 0.06*sin(angle),
+			length_m*0.5*sin(angle) + 0.06*cos(angle),
+			1.0 + float(i)*0.9)
+		rod("wall_plank_%d" % (i+1),centre,direction,length_m,"plank")
+
+func room_perspective() -> void:
+	# The two existing parallels make a depth study through the room.
+	var ink := Color("202329")
+	for x in [-6.4,-1.6]:
+		paint(Vector3(x,0.031,-8.15),Vector3(x,0.031,11.5),0.06,ink)
+		for k in range(10):
+			var z: float = -7.5 + float(k)*2.0
+			paint(Vector3(x-0.2,0.031,z),Vector3(x+0.2,0.031,z),0.045,ink)
+	# Side canopies put a quiet, actual surface behind the ceiling edge. Most
+	# of the roof stays open. The museum still owns its architectural height.
+	var ceiling_y: float = DETAIL.CEIL_SOFFIT
+	var edge_y := ceiling_y-0.065
+	var canopy_width := 2.4
+	var edge_x := 12.5-canopy_width
+	for side in [-1.0,1.0]:
+		var soffit := MeshInstance3D.new()
+		soffit.name="CeilingStripLeft" if side<0 else "CeilingStripRight"
+		var box := BoxMesh.new();box.size=Vector3(canopy_width,0.12,26.4)
+		soffit.mesh=box;soffit.position=Vector3(side*(12.5-canopy_width*0.5),ceiling_y+0.06,4.75)
+		var mat := StandardMaterial3D.new();mat.albedo_color=Color("e5e1d8");mat.roughness=0.9
+		soffit.material_override=mat;add_child(soffit)
+		paint(Vector3(side*edge_x,edge_y,-8.45),Vector3(side*edge_x,edge_y,17.95),0.12,ink)
+	# Closer and thicker than the first version: the separation should be
+	# visible during an ordinary step, rather than requiring a diagram.
+	var eye := Vector3(-4,1.65,-7)
+	var edge_a := Vector3(-edge_x,edge_y,-5.5)
+	var edge_b := Vector3(-edge_x,edge_y,16.5)
+	var fraction := 0.38
+	var a := eye.lerp(edge_a,fraction)
+	var b := eye.lerp(edge_b,fraction)
+	paint(a,b,0.12*fraction,ink)
+	get_child(get_child_count()-1).name="DetachedCeilingLine"
+	set_meta("alignment_eye",eye)
+	set_meta("alignment_edge",[edge_a,edge_b])
+	set_meta("alignment_line",[a,b])
+	# Alignment occurs along a plane of possible eyes, not one privileged
+	# height. A short lateral strip lets lower/taller visitors find their view.
+	paint(Vector3(-5.5,0.012,-7),Vector3(-2.5,0.012,-7),0.045,ink)
+	floor_words("FIND THE EDGE. STEP ASIDE.",Vector3(-4,0.016,-7.65),Vector2(4.4,0.23))

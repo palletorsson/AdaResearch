@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "commons\\maps\\SoftBodies_Soft_Body_Deformation\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Soft_Body_Deformation\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Cloth_Physics\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Cloth_Physics\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Carusell\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Carusell\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Obsticals\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Obsticals\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Obsticals_Part2\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Obsticals_Part2\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Affect_Theory_Visualization\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\SoftBodies_Affect_Theory_Visualization\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\ProceduralGeneration_Reaction_Diffusion_Systems\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\ProceduralGeneration_Reaction_Diffusion_Systems\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\Topology_Entropy_Morphogenesis\\final.md preserved",
+      "passed": true
+    },
+    {
+      "check": "commons\\maps\\Topology_Entropy_Morphogenesis\\map_data.json preserved",
+      "passed": true
+    },
+    {
+      "check": "only map edit is the lesson configuration on the existing bench",
+      "passed": true
+    },
+    {
+      "check": "book, roles, core and chapter share two ordered primary encounters",
+      "passed": true
+    },
+    {
+      "check": "primary vessel is not repeated as secondary",
+      "passed": true
+    },
+    {
+      "check": "core hash matches final.md",
+      "passed": true
+    },
+    {
+      "check": "core hash matches map_data.json",
+      "passed": true
+    },
+    {
+      "check": "learner verification is not inferred from runtime",
+      "passed": true
+    },
+    {
+      "check": "artifact_roles changes only this hall",
+      "passed": true
+    },
+    {
+      "check": "museum_core_encounters changes only this hall",
+      "passed": true
+    },
+    {
+      "check": "registry changes only the two specimen implementations and harness",
+      "passed": true
+    },
+    {
+      "check": "workshop definitions change only the sampling chapter",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json changes only the lesson bench config",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json changes only the lesson bench config",
+      "passed": true
+    },
+    {
+      "check": "active museum plans agree",
+      "passed": true
+    },
+    {
+      "check": "all 65 controlled runtime checks pass",
+      "passed": true
+    },
+    {
+      "check": "algorithms/softbodies/rounded_softbody.gd matches tested source",
+      "passed": true
+    },
+    {
+      "check": "algorithms/softbodies/rounded_softbody_test.gd matches tested source",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd matches tested source",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/timing_machines/soft_workshop.gd matches tested source",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/timing_machines/pg_workshop.gd matches tested source",
+      "passed": true
+    },
+    {
+      "check": "ada_run/encounter_pilot/SoftBodies_Playground_of_Joy/museum_snapshot.gd matches tested source",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "before": [
+    {
+      "x": 3,
+      "z": 6,
+      "token": "chroma_stack#rule:one"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "chroma_stack#rule:by_shape"
+    },
+    {
+      "x": 13,
+      "z": 6,
+      "token": "chroma_stack#rule:by_height"
+    },
+    {
+      "x": 18,
+      "z": 6,
+      "token": "chroma_stack#rule:by_neighbour"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "chroma_stack#rule:by_shape#stack:bauhaus"
+    },
+    {
+      "x": 11,
+      "z": 12,
+      "token": "chroma_stack#rule:by_shape#stack:turned"
+    },
+    {
+      "x": 18,
+      "z": 12,
+      "token": "chroma_stack#rule:by_shape#stack:cut"
+    },
+    {
+      "x": 2,
+      "z": 19,
+      "token": "chroma_translation#along:x#colour_by:distance"
+    },
+    {
+      "x": 9,
+      "z": 19,
+      "token": "chroma_translation#along:y#colour_by:distance"
+    },
+    {
+      "x": 13,
+      "z": 19,
+      "token": "chroma_translation#along:z#colour_by:distance"
+    },
+    {
+      "x": 16,
+      "z": 19,
+      "token": "chroma_translation#along:diagonal#colour_by:distance"
+    },
+    {
+      "x": 2,
+      "z": 27,
+      "token": "chroma_translation#along:x#colour_by:kept"
+    },
+    {
+      "x": 9,
+      "z": 27,
+      "token": "chroma_translation#along:x#colour_by:distance"
+    },
+    {
+      "x": 16,
+      "z": 27,
+      "token": "chroma_translation#along:x#colour_by:step"
+    },
+    {
+      "x": 5,
+      "z": 30,
+      "token": "serial_principle:180"
+    },
+    {
+      "x": 13,
+      "z": 33,
+      "token": "crackpropagation_ca"
+    },
+    {
+      "x": 16,
+      "z": 33,
+      "token": "csg_architecture_cavity"
+    },
+    {
+      "x": 17,
+      "z": 33,
+      "token": "dna_color_stacks_stack_triadic_primary"
+    },
+    {
+      "x": 17,
+      "z": 34,
+      "token": "dna_color_stacks_stack_monochrome_blue"
+    },
+    {
+      "x": 18,
+      "z": 34,
+      "token": "dna_color_stacks_stack_value_steps_warm"
+    },
+    {
+      "x": 9,
+      "z": 35,
+      "token": "dna_color_furniture_furniture_becker_utensilo_bauhaus"
+    },
+    {
+      "x": 10,
+      "z": 35,
+      "token": "dna_color_furniture_furniture_vignelli_metafora_primary"
+    },
+    {
+      "x": 11,
+      "z": 35,
+      "token": "dna_color_stacks_stack_simultaneous_contrast"
+    },
+    {
+      "x": 12,
+      "z": 35,
+      "token": "dna_color_stacks_stack_complementary_red_green"
+    },
+    {
+      "x": 17,
+      "z": 35,
+      "token": "dna_modern_art_albers_homage_warm"
+    },
+    {
+      "x": 18,
+      "z": 35,
+      "token": "dna_color_furniture_furniture_coco_pendant_warm"
+    },
+    {
+      "x": 7,
+      "z": 36,
+      "token": "primitive_assembler"
+    },
+    {
+      "x": 8,
+      "z": 36,
+      "token": "primitive_combo_puzzle"
+    },
+    {
+      "x": 10,
+      "z": 36,
+      "token": "dna_color_furniture_furniture_lamp_warm_glow"
+    },
+    {
+      "x": 18,
+      "z": 36,
+      "token": "dna_modern_art_kandinsky_bauhaus_triad"
+    },
+    {
+      "x": 9,
+      "z": 37,
+      "token": "dna_modern_art_rothko_chromatic_field"
+    },
+    {
+      "x": 17,
+      "z": 37,
+      "token": "dna_primitive_stack_ps01_bauhaus_totem_green"
+    },
+    {
+      "x": 10,
+      "z": 38,
+      "token": "dress_selector"
+    },
+    {
+      "x": 17,
+      "z": 38,
+      "token": "dna_modern_art_mondrian_de_stijl"
+    },
+    {
+      "x": 18,
+      "z": 38,
+      "token": "constraint_sculptor"
+    }
+  ],
+  "after": [
+    {
+      "x": 4,
+      "z": 6,
+      "token": "chroma_stack:180#rule:one",
+      "study": "One assembly, four colour rules"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "chroma_stack:180#rule:by_shape",
+      "study": "One assembly, four colour rules"
+    },
+    {
+      "x": 14,
+      "z": 6,
+      "token": "chroma_stack:180#rule:by_height",
+      "study": "One assembly, four colour rules"
+    },
+    {
+      "x": 18,
+      "z": 6,
+      "token": "chroma_stack:180#rule:by_neighbour",
+      "study": "One assembly, four colour rules"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "chroma_stack:180#rule:by_shape#stack:bauhaus",
+      "study": "Different primitive alphabets, the same assignment"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "chroma_stack:180#rule:by_shape#stack:turned",
+      "study": "Different primitive alphabets, the same assignment"
+    },
+    {
+      "x": 16,
+      "z": 12,
+      "token": "chroma_stack:180#rule:by_shape#stack:cut",
+      "study": "Different primitive alphabets, the same assignment"
+    },
+    {
+      "x": 4,
+      "z": 18,
+      "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:aligned",
+      "study": "Fixed rotation, XZ scale, and their combination"
+    },
+    {
+      "x": 8,
+      "z": 18,
+      "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:twist",
+      "study": "Fixed rotation, XZ scale, and their combination"
+    },
+    {
+      "x": 14,
+      "z": 18,
+      "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:taper",
+      "study": "Fixed rotation, XZ scale, and their combination"
+    },
+    {
+      "x": 18,
+      "z": 18,
+      "token": "chroma_stack:180#rule:by_shape#stack:cut#pose:combined",
+      "study": "Fixed rotation, XZ scale, and their combination"
+    },
+    {
+      "x": 7,
+      "z": 26,
+      "token": "chroma_translation:180#along:x#colour_by:kept",
+      "study": "Translation keeps the assigned colours"
+    },
+    {
+      "x": 20,
+      "z": 26,
+      "token": "chroma_translation:180#along:x#colour_by:distance",
+      "study": "The same copies coloured by displacement"
+    },
+    {
+      "x": 7,
+      "z": 35,
+      "token": "chroma_translation:180#along:x#colour_by:step",
+      "study": "Colour counts the copy index"
+    },
+    {
+      "x": 20,
+      "z": 35,
+      "token": "chroma_translation:180#along:diagonal#colour_by:kept",
+      "study": "Change direction while keeping the colours"
+    }
+  ],
+  "disposition": "Old placement tokens and all source files archived before restructuring; registry artifacts preserved. Filters, drums and Life were not placed and are deferred outside this opening hall."
+}

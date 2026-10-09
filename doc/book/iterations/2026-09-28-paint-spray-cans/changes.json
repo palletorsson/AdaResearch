@@ -1,0 +1,58 @@
+[
+  {
+    "before": "A coloured ball is already moving across the canvas.",
+    "after": "A spray can is already moving across the canvas."
+  },
+  {
+    "before": "Here, look back at a place the ball has left.",
+    "after": "Here, look back at a place the nozzle has left."
+  },
+  {
+    "before": "Thirty pigment balls wait on the low tray. Pick one up and aim it at the canvas. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish. Release the ball. It returns to its place, and your marks stop arriving. The other painter continues.",
+    "after": "Thirty spray cans wait on the low tray. Pick up a colour, aim the nozzle at the canvas and hold the trigger. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish.\n\nBring the nozzle closer. The mark gathers into a smaller area. Draw back and the same colour spreads more thinly. Hold still for a moment: the patch deepens. Movement is only one way to make a difference here. Staying also leaves more behind.\n\nRelease the trigger. Your marks stop arriving while the other painter continues. Let go of the can and it returns to its place."
+  },
+  {
+    "before": "![The same museum canvas before pickup, during a second gesture, after release and a little later.](/book-review/doc/book/iterations/2026-09-23-paint-shared-memory/the-surface-keeps-working.png)",
+    "after": "![Spray cans on the tray beside the shared painting surface inside the museum.](/book-review/doc/book/iterations/2026-09-28-paint-spray-cans/shared-canvas.png)"
+  },
+  {
+    "before": "*A pigment ball is held and moved across the automatic line, then released. The ball returns to the tray while the painting continues to change.*",
+    "after": "*Close and distant deposits, then a gesture across the automatic path. Thirty cans offer colours; the distance of the hand changes how each colour arrives.*"
+  },
+  {
+    "before": "The moving ball is the visible companion of this calculation; no collision is needed for its paint to arrive.",
+    "after": "The moving can follows this calculation; its paint is placed directly on the surface."
+  },
+  {
+    "before": "Your ball takes another route. A ray finds the canvas you are aiming at. The hit becomes a position on that surface, then a pair of coordinates between zero and one. The canvas is four metres wide and two and a half high. Those proportions matter: assuming a square would quietly move your mark away from where you aimed.",
+    "after": "The can in your hand takes another route. A ray leaves the nozzle and finds the canvas you are aiming at. The hit becomes a position on that surface, then a pair of coordinates between zero and one. The canvas is four metres wide and two and a half high. Those proportions matter: assuming a square would quietly move your mark away from where you aimed. Tilt the can and its round footprint stretches across the surface."
+  },
+  {
+    "before": "Both routes reach the same drawing operation.",
+    "after": "Both routes reach the same spray operation."
+  },
+  {
+    "before": "surface.draw_line(previous,uv,color,12,256)",
+    "after": "surface.draw_spray(hit, -normal, 0.06, color, 1.0 - exp(-7.0 * deposit_time), strokes)"
+  },
+  {
+    "before": "That is the automatic caller: brush radius twelve pixels, positions snapped to 256 divisions along each axis. The manual balls carry their own brush sizes and snap resolutions. Try another ball. Colour changes, but it is not the only difference in your hand. The apparently continuous movement passes through a finite choice of positions, as the drawn line did in Trace.",
+    "after": "That is the automatic caller. It leaves a soft patch with a radius of six centimetres. Your nozzle makes a patch whose radius depends on its distance from the canvas. The shader scatters its coverage into grain, thickest near the centre. One deposit is partly transparent; another can cover more of what was there. The apparent mist is still an arrangement of pixels."
+  },
+  {
+    "before": "The wet canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, shifts the sampling position, and fades the result toward white.",
+    "after": "The canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, allowing a little spreading, downward drift and fading toward the ground colour."
+  },
+  {
+    "before": "vec4 color = mix(vec4(1.0), prev_color, dissipation);",
+    "after": "color = mix(ground_color, prev_color, pow(dissipation, step_scale));"
+  },
+  {
+    "before": "White enters the work again. It is the direction of forgetting in this particular simulation.",
+    "after": "Here the ground is white. It enters the work again as the direction of forgetting in this particular simulation."
+  },
+  {
+    "before": "The automatic brush advances by elapsed time. The wet surface updates with rendered frames. Even their clocks differ. A slower rendering pace can change how much the image has faded during the same time on your watch. The computer's ability to keep up participates in what the painting becomes.",
+    "after": "The nozzle releases separate deposits, and the surface becomes another image at each rendered frame. Elapsed time controls their strength, but the computer still has to make each image. Sweep quickly and you may find spaces between the marks. Even this soft edge has a resolution."
+  }
+]

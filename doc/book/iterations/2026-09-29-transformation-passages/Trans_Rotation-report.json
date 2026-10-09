@@ -1,0 +1,164 @@
+{
+  "authored_exit": {
+    "cell": "(19, 58)",
+    "door": "(24.5, 0.05, 65.8)",
+    "inward": "(0.0, 0.0, -1.0)",
+    "marker": "(24.5, 0.05, 63.5)",
+    "outset": 2.3,
+    "source": "t",
+    "yaw": 3.14159265358979
+  },
+  "events": [
+    {
+      "halls": 0,
+      "ms": 6821,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 9857,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 10272,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 11791,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 11803,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 11942,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 11942,
+      "phase": "architecture"
+    },
+    {
+      "ms": 376,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 12323,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 12372,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 13479,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 13537,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 13550,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 15042,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 15075,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 15089,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 15089,
+      "phase": "architecture"
+    },
+    {
+      "ms": 259,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 15355,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 15355,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 17119,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 17131,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 17133,
+      "phase": "idle"
+    }
+  ],
+  "failures": [],
+  "landing_checks": [
+    {
+      "cage": false,
+      "entry_cell": "(19, 2)",
+      "entry_source": "s",
+      "pad": "(24.5, 0.05, 7.5)",
+      "settled_feet": "(24.49998, 0.0, 7.6)",
+      "slabs": 2,
+      "stage": "Direct launch"
+    },
+    {
+      "cage": true,
+      "entry_cell": "(10, 0)",
+      "entry_source": "s",
+      "pad": "(10.5, 0.05, 72.65)",
+      "settled_feet": "(10.49998, 0.0, 72.75)",
+      "slabs": 2,
+      "stage": "Forward arrival"
+    },
+    {
+      "cage": false,
+      "entry_cell": "(19, 2)",
+      "entry_source": "s",
+      "pad": "(24.5, 0.05, 64.65)",
+      "settled_feet": "(24.49998, 0.0, 64.75)",
+      "slabs": 2,
+      "stage": "Return arrival"
+    }
+  ],
+  "next": "Trans_Scale",
+  "observed_bounds_reset": false,
+  "passed": true,
+  "peak_resident_halls": 1,
+  "room": "Trans_Rotation",
+  "staged_rig": false,
+  "vr_simulated": true,
+  "xr_physics_body": true
+}

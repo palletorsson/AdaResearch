@@ -1,0 +1,95 @@
+--- before/commons/audio/sequencer/step_sequencer.gd
++++ after/commons/audio/sequencer/step_sequencer.gd
+@@ -269,7 +269,7 @@
+ 	_sequencer_ui.bpm_changed.connect(_on_bpm_changed)
+ 	_sequencer_ui.preset_changed.connect(_on_preset_changed)
+ 	_sequencer_ui.pattern_preset_changed.connect(_on_pattern_preset_changed)
+-	_sequencer_ui.set_sound_preset(sound_preset)
++	_sync_sound_ui()
+ 
+ 
+ func _on_cell_toggled(track: int, step: int, active: bool) -> void:
+@@ -326,8 +326,19 @@
+ 	# Pad if needed
+ 	while _track_sounds.size() < num_tracks:
+ 		_track_sounds.append(_track_sounds[0] if _track_sounds.size() > 0 else _resolve_sound_type("BASIC_SINE_WAVE"))
+-	if _sequencer_ui:
+-		_sequencer_ui.set_sound_preset(preset_name)
++	_sync_sound_ui()
++
++
++func _sync_sound_ui() -> void:
++	if not _sequencer_ui:
++		return
++	_sequencer_ui.set_sound_preset(sound_preset)
++	var names: Array[String] = []
++	# Read the resolved sounds, so preset fallback and padded tracks stay honest.
++	for track in range(num_tracks):
++		var display_name := AudioSynthesizer.get_sound_type_name(_track_sounds[track])
++		names.append("" if display_name == "Unknown Sound" else display_name)
++	_sequencer_ui.set_track_names(names)
+ 
+ 
+ func _create_audio_players() -> void:
+--- before/commons/audio/sequencer/sequencer_ui.gd
++++ after/commons/audio/sequencer/sequencer_ui.gd
+@@ -32,6 +32,7 @@
+ ## Background color - Light theme
+ const BG_COLOR: Color = Color(0.85, 0.85, 0.88)  # Light gray
+ const HEADER_BG_COLOR: Color = Color(0.9, 0.9, 0.92)  # Slightly lighter
++const TRACK_LABEL_WIDTH: float = 210.0
+ 
+ const SOUND_PRESETS: Array[String] = [
+ 	"808_kit", "trap_beats", "synth_kit", "tech_noir", "retro", "90s_house", "juno_pads",
+@@ -59,6 +60,7 @@
+ var _pattern_button: OptionButton
+ var _step_label: Label
+ var _playhead_indicators: Array[Panel] = []
++var _track_labels: Array[Label] = []
+ 
+ 
+ func _ready() -> void:
+@@ -198,7 +200,8 @@
+ 
+ 	# Spacer for track labels
+ 	var spacer = Control.new()
+-	spacer.custom_minimum_size = Vector2(60, 10)
++	# GridHBox has 4 px separation; this row adds its own 2 px separation.
++	spacer.custom_minimum_size = Vector2(TRACK_LABEL_WIDTH + 2.0, 10)
+ 	playhead_row.add_child(spacer)
+ 
+ 	# Playhead indicators - Light theme
+@@ -226,16 +229,16 @@
+ 	labels_vbox.add_theme_constant_override("separation", 2)
+ 	grid_hbox.add_child(labels_vbox)
+ 
+-	var track_names = ["Kick", "Snare", "HiHat", "Bass"]
+ 	for track in range(num_tracks):
+ 		var label = Label.new()
+-		label.text = track_names[track] if track < track_names.size() else "T%d" % track
+-		label.custom_minimum_size = Vector2(60, 30)
++		label.text = "Track %d" % (track + 1)
++		label.custom_minimum_size = Vector2(TRACK_LABEL_WIDTH, 30)
+ 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+ 		# Use track color for labels
+ 		label.add_theme_color_override("font_color", TRACK_COLORS[track % TRACK_COLORS.size()].darkened(0.2))
+ 		label.add_theme_font_size_override("font_size", 14)
+ 		labels_vbox.add_child(label)
++		_track_labels.append(label)
+ 
+ 	# Button grid
+ 	_grid_container = GridContainer.new()
+@@ -353,6 +356,13 @@
+ 	bpm_changed.emit(bpm)
+ 
+ 
++## Labels come from the sounds the parent actually loaded, without preview audio.
++func set_track_names(names: Array[String]) -> void:
++	for track in range(_track_labels.size()):
++		var known_name := names[track] if track < names.size() else ""
++		_track_labels[track].text = known_name if not known_name.is_empty() else "Track %d" % (track + 1)
++
++
+ func set_sound_preset(preset_name: String) -> void:
+ 	## Reflect model/config state without emitting a visitor selection event.
+ 	sound_preset = preset_name

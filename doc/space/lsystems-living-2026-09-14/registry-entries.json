@@ -1,0 +1,738 @@
+{
+  "living_paper_fern": {
+    "name": "Living Paper \u2014 L-System Fern",
+    "lookup_name": "living_paper_fern",
+    "description": "Barnsley fern via L-system on a grabbable 2D canvas.",
+    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
+    "category": "substrate",
+    "artifact_type": "interactive_algorithm",
+    "sequence": "lsystems",
+    "tags": [
+      "substrate",
+      "living_paper",
+      "lsystem",
+      "fern",
+      "barnsley"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "dev_themes": [
+      "art",
+      "origami",
+      "paper",
+      "procedural"
+    ],
+    "geometry_spec": {
+      "mesh_type": "texture_plane",
+      "topology": "planar",
+      "construction": {
+        "method": "pixel_computation",
+        "primitives": [],
+        "operations": [
+          "create_image",
+          "compute_pixels",
+          "apply_texture"
+        ]
+      },
+      "material": {
+        "type": "generated_texture",
+        "shading_model": "emissive",
+        "key_properties": [
+          "emission",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "~4 (quad)"
+    },
+    "spatial_needs": {
+      "platform": "pedestal",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.19,
+        0.2,
+        0.01
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1,
+        1
+      ],
+      "max_dimension_m": 0.2,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1,
+      1,
+      1
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 1,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.142129Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "Barnsley's fern condensing out of random dots \u2014 four affine maps played as dice, and a plant appears. The page grows a fern with no drawing at all, only probability landing where the leaf was always going to be."
+  },
+  "living_paper_tree": {
+    "name": "Living Paper \u2014 L-System Tree",
+    "lookup_name": "living_paper_tree",
+    "description": "L-system tree drawn stroke by stroke on a grabbable 2D canvas.",
+    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
+    "category": "substrate",
+    "artifact_type": "interactive_algorithm",
+    "sequence": "lsystems",
+    "tags": [
+      "substrate",
+      "living_paper",
+      "lsystem",
+      "tree"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "dev_themes": [
+      "art",
+      "origami",
+      "paper",
+      "procedural"
+    ],
+    "geometry_spec": {
+      "mesh_type": "texture_plane",
+      "topology": "planar",
+      "construction": {
+        "method": "pixel_computation",
+        "primitives": [],
+        "operations": [
+          "create_image",
+          "compute_pixels",
+          "apply_texture"
+        ]
+      },
+      "material": {
+        "type": "generated_texture",
+        "shading_model": "emissive",
+        "key_properties": [
+          "emission",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "~4 (quad)"
+    },
+    "spatial_needs": {
+      "platform": "pedestal",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.19,
+        0.2,
+        0.01
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1,
+        1
+      ],
+      "max_dimension_m": 0.2,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1,
+      1,
+      1
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 1,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.142129Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "An L-system tree drawn stroke by stroke \u2014 the grammar chapter's sentence-becomes-forest performed at reading distance, branch by rewritten branch."
+  },
+  "living_paper_dragon": {
+    "name": "Living Paper \u2014 Dragon Curve",
+    "lookup_name": "living_paper_dragon",
+    "description": "Dragon curve via L-system on a grabbable 2D canvas.",
+    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
+    "category": "substrate",
+    "artifact_type": "interactive_algorithm",
+    "sequence": "lsystems",
+    "tags": [
+      "substrate",
+      "living_paper",
+      "lsystem",
+      "dragon_curve"
+    ],
+    "complexity": "intermediate",
+    "include_in_map_data": true,
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "dev_themes": [
+      "art",
+      "origami",
+      "paper",
+      "procedural"
+    ],
+    "geometry_spec": {
+      "mesh_type": "texture_plane",
+      "topology": "planar",
+      "construction": {
+        "method": "pixel_computation",
+        "primitives": [],
+        "operations": [
+          "create_image",
+          "compute_pixels",
+          "apply_texture"
+        ]
+      },
+      "material": {
+        "type": "generated_texture",
+        "shading_model": "emissive",
+        "key_properties": [
+          "emission",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "~4 (quad)"
+    },
+    "spatial_needs": {
+      "platform": "pedestal",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.19,
+        0.2,
+        0.01
+      ],
+      "aabb_center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "grid_cells": [
+        1,
+        1
+      ],
+      "max_dimension_m": 0.2,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1,
+      1,
+      1
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 1,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.142129Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "The dragon curve unfolding \u2014 the crease pattern of a strip of paper folded again and again, drawn as one unbroken line. The living paper showing what paper itself remembers when folded."
+  },
+  "genetic_tree_sculptor": {
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "pressure": [
+          "none",
+          "reach",
+          "spread",
+          "thicket",
+          "spare"
+        ]
+      },
+      "default": "pressure=none - a pure no-op. _evolve() returns on its first line when pressure is \"none\", so _dna is still CritterDNA.random_kingdom(0, dna_seed) with dna_seed at its shipped -1, which is byte-for-byte the old CritterDNA.random_kingdom(0) call (the parameter's own default is -1, so the same unseeded randomize runs). _build_ui builds the same eight-slider rack at the same position and rotation, the same pedestal, and _rebuild_tree calls TreeMorphology.build(_dna, _tree_root, _mapper, 2) unchanged. All five placements (LSystems_Living, Corridor_LSystems_Living, Curation_Bay_lsystems_2, AutoGenTest, AutoGenTest2) are bare tokens passing none of these keys, and apply_grid_config now regrows only when a value actually DIFFERS and only after _ready has built once - the shipped version regrew the whole tree on the mere presence of dna_seed.",
+      "was": "no axis and no exports at all - the runner refused this token for NO TURNABLE KNOBS. The entry claims 'genetic algorithm selection' and there was no selection in the script: _ready drew one unseeded random genome and built it, so the picture in every room was always generation 0 - the thing evolution starts from, standing in for the thing evolution produces. The eight sliders are a designer's hand, and a still cannot photograph a hand moving.",
+      "note": "pressure states in the geometry WHAT the genome was selected for, which is the argument the name has been making without evidence: selection is never for better, it is always for something, and one ancestor under four tastes grows four incompatible trees. reach = deep recursion, narrow forks, no droop. spread = wide forks, many branches, tropism. thicket = deep, many-forked, heavily leaved. spare = shallow, two-forked, bare, fast taper. Each is a seeded greedy hill-climb over the SAME eight genes the sliders expose - mutate, score, keep if better, `generations` times - so an evolved tree is always a tree a player could also have dialled by hand, and the search is deterministic given dna_seed. GENERATIONS IS DELIBERATELY NOT AN AXIS: convergence is asymptotic, a gen-20 and a gen-40 climb under one taste land on the same tree, and the upper rungs of a generation ladder would be identical frames dressed as an experiment. Its bottom rung is pressure=none already. REBUILD_COOLDOWN is not an axis either - a 0.3 s debounce is time-domain and invisible to a still.",
+      "kin": "`selection` (drift|uniform|culled|runaway|split, four declarations: evolved_creatures, evolving_flowers, evolvingflowers, non_teleological_evolution) was handed to this artifact and DECLINED. It asks the right question - what a pressure did, and whether any was applied - and its first rung, the unselected shipped default, maps onto this one exactly. But three of its five values are POPULATION pictures: culled is three survivors on a sixteen-plot grid with thirteen plots bare, split is two incompatible tastes filling opposite halves of a 20 m plane, uniform is sixteen copies of one optimum. This artifact is a workbench with ONE tree on a 0.6 m pedestal - its identity is 'design a tree's genome, watch it grow live' - and turning it into a bed of sixteen would make it a second evolving_flowers rather than a sculptor. Taking the word with a different value list is the exact failure check_dna_declarations exists to catch, so the word was left alone. pressure is a new word: same question asked of one genome instead of a population, and the two should NOT be expected to measure alike. lsystem_editor.grammar and lsystem_tree.evidence/habit were also considered and are about which rule is run and how much of it is shown, which this artifact does not vary at all.",
+      "fixture": {
+        "bench": "bare",
+        "dna_seed": 7,
+        "generations": 24
+      },
+      "fixture_note": "TWO things the sweep must be given or the axis is unmeasurable. bench=bare omits the eight-slider control rack; the rack sits at (0, 0.85, 1.2) rotated -25 degrees and the registry's own measurement of this token is aabb 4.91 x 22.68 x 0.08, i.e. a flat panel, so an AABB-fitted camera frames the furniture and photographs the tree at a few pixels. dna_seed=7 pins the ancestor: CritterDNA.random_kingdom(0) is unseeded by default, and five variants of an unseeded generative artifact are five different trees rather than five pictures of one search. bench is a String enum and not a bool on purpose - a typed bool export rejects a fixture string before _ready. generations=24 is the script default restated so the fixture reads as a complete statement of the bench.",
+      "measurement_risk": "TreeMorphology seeds its own rng from root.get_instance_id(), which differs per instantiation, and that seed gates leaf PRESENCE (rng.randf() < leaf_chance) and per-branch material variation. The branch skeleton is fully determined by the DNA and is clean; the foliage carries per-variant noise that no seed reachable from this artifact can pin. thicket and spare therefore push depth and fork count as hard as they push leaf_density, so both differ structurally and not only in leaves. Leaves are also batched into a MultiMeshInstance3D, which the capture AABB does not count - the frame is set by the branch tubes. Do not read a faint thicket/spare pair as a dead axis without looking at the silhouettes.",
+      "still_note": "every value is standing geometry decided before the first frame. The only motion in the artifact is the 0.3 s slider debounce in _process and the 0.3 s PLANT tween, neither of which runs with no player in the scene."
+    },
+    "category": "procedural",
+    "complexity": "advanced",
+    "description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms \u2014 combines grammar-based growth with fitness-driven optimization.",
+    "dev_themes": [
+      "biology",
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "genetic_tree_sculptor",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "Genetic Tree Sculptor",
+    "qfep_connection": "Evolution as F-search: genetic algorithms explore the space of possible L-system parameters, selecting trees by fitness criteria. Natural selection as a meta-grammar operating on grammars.",
+    "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
+    "tags": [
+      "l_system",
+      "procedural",
+      "simulation",
+      "sorting",
+      "tree"
+    ],
+    "geometry_spec": {
+      "mesh_type": "delegated_scene",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "scene_instantiation",
+        "primitives": [
+          "cylinder"
+        ],
+        "operations": [
+          "load_scene",
+          "instantiate",
+          "configure"
+        ]
+      },
+      "material": {
+        "type": "standard",
+        "shading_model": "pbr",
+        "key_properties": []
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "varies"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 9,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "systems",
+        "evolution",
+        "concepts"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 9,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        1.2,
+        1.53,
+        1.87
+      ],
+      "aabb_center": [
+        0.0,
+        0.36,
+        0.33
+      ],
+      "grid_cells": [
+        2,
+        2
+      ],
+      "max_dimension_m": 1.87,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      2,
+      1,
+      2
+    ],
+    "spatial_profile": {
+      "dir_group": "floor",
+      "range": 10,
+      "density": "medium",
+      "min_clearance": 2,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "lsystem_tree": {
+    "category": "procedural",
+    "complexity": "advanced",
+    "description": "Classic deterministic L-system tree \u2014 the foundational teaching example showing how a simple grammar rule produces organic branching structure.",
+    "dev_themes": [
+      "education",
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "lsystem_tree",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems",
+      "proceduralgeneration",
+      "proceduralgeneration_all"
+    ],
+    "name": "L-System Tree",
+    "parameters": {
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size_group": "compact"
+    },
+    "qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "evidence": [
+          "result",
+          "trace",
+          "longhand",
+          "axiom"
+        ],
+        "habit": [
+          "planar",
+          "fanned",
+          "whorled",
+          "spiral"
+        ]
+      },
+      "default": "evidence=result, habit=planar - a deliberate no-op on both axes. result draws only the last generation, which is the single string the shipped rewrite loop left in _current_string; planar sets the roll to exactly 0.0 and the roll is then skipped by an `if roll_rad != 0.0` rather than applied as a zero rotation, so the turtle runs the shipped instruction sequence and no float is touched. With one column the layout shift is skipped outright, so the bounds, the centre and the scale factor are computed from the same numbers as before. All 7 existing placements draw the identical tree, and the Label3D keeps its shipped three lines - the two extra lines are appended only away from the defaults.",
+      "was": "six exports and every one a dial: iterations, base_angle, base_length, display_size and two colours. The rule itself, F->F[+F]F[-F]F, was a hard-coded _rules dictionary; the turtle only ever rotated about dir.cross(right), so the classic plant was a flat drawing; and every generation but the last was computed and thrown away inside the rewrite loop. apply_grid_config called _generate() unconditionally, so any unrelated key on a map token re-ran the whole rewrite - and two placements do pass unrelated layout keys.",
+      "note": "hand promotion 2026-08-03, refused by the runner for NO TURNABLE KNOBS: the exports were there but every one was a scalar dial, nothing the artifact argues. evidence lifts the derivation the code already computes and discards - trace nests the earlier generations inside the finished plant at one origin, longhand lays generation 1..N side by side at one scale, axiom draws ONE application of the production, the rule as a picture instead of its limit. Generation 0 is never selected by any value: a single bare segment carries no picture, and after the bounds-fit it would be a hairline filling the frame. habit lifts the roll the turtle never had - 0 / 30 / 90 / 137.5 degrees applied to the branching plane at each push, planar being the shipped flat drawing and spiral the golden angle.",
+      "kin": "lsystem_editor.grammar (koch|sierpinski|dragon|plant|bush|fern|binary_tree) was DECLINED here rather than reused. It is a real axis and it asks a real question - which grammar - but this artifact's whole claim is that ONE rule makes a plant, and swapping its rule for six others would make it a second editor with the same seven pictures. The editor varies the grammar and holds the drawing fixed; the tree holds the grammar and varies what is shown of it. Different question, different word. evidence is the corpus family word (19 declarations, result|trace|longhand|axiom character for character) and this artifact measures alike with them: the question is whether the working is on show or only the answer."
+    },
+    "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
+    "tags": [
+      "l_system",
+      "procedural",
+      "simulation",
+      "tree"
+    ],
+    "geometry_spec": {
+      "mesh_type": "procedural_line",
+      "topology": "non_manifold",
+      "construction": {
+        "method": "l_system_turtle",
+        "primitives": [
+          "cylinder"
+        ],
+        "operations": [
+          "string_rewrite",
+          "turtle_interpret",
+          "emit_lines"
+        ]
+      },
+      "material": {
+        "type": "vertex_color",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "reference",
+        "whole",
+        "sequence"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.48,
+        0.48,
+        0.48
+      ],
+      "aabb_center": [
+        0.0,
+        0.21,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.48,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "branching_coral": {
+    "category": "procedural",
+    "complexity": "intermediate",
+    "description": "Marine L-system coral colony \u2014 multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "branching_coral",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "Branching Coral",
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "growth_form": [
+          "staghorn",
+          "fan",
+          "table",
+          "whip",
+          "brain"
+        ],
+        "condition": [
+          "living",
+          "bleached",
+          "fluorescent",
+          "encrusted"
+        ]
+      },
+      "default": "growth_form=staghorn, condition=living - staghorn IS the shipped build, value for value: its rules are the old CORAL_RULES strings unchanged, angle_scale and decay_scale are 1.0 so current_angle stays base_angle and decay stays length_decay, and spread 0.6 / out 0.3 / lift 1.0 are the literals that were baked into _grow_shoot's shoot_angle and base_dir. living returns [base_color, Color(0.8, 0.35, 0.3), tip_color], the third of which was a local named mid_color inside _draw_coral. So both existing placements (LSystems_Competition at (6,4), LSystems_Living at (2,6), plus the three curation_station rosters that list the token) draw the identical colony.",
+      "was": "no enum export at all. One grammar: CORAL_RULES was a const read directly by _grow_shoot, the fork angle was base_angle alone, the shoot fan was the literals 0.6 and 0.3, and the depth ramp was base_color -> a local mid_color -> tip_color. Every knob that existed (iterations, num_shoots, base_angle, length_decay, display_size) turned the SIZE of one fixed coral; nothing turned the coral into a different coral. apply_grid_config also called _generate() unconditionally, so any config pass redrew the mesh.",
+      "note": "growth_form is the grammar, not the scale - a different production read by the same turtle, off a differently tilted holdfast. fan drops the roll symbols so branching stays in the shoot's own plane and the shoots barely spread (one surface held into the current); table tilts the holdfast almost flat and throws the shoots right around, growing sideways for light instead of upward for height; whip runs long between rare forks; brain pushes the fork angle past 60 degrees, which folds each branch back over itself so the colony closes into a mound instead of opening into a thicket. condition turns what the colour gradient REPORTS. In this artifact the purple-brown-to-pink ramp is a readout of recursion depth - a segment's colour says how deep in the grammar it sits. bleached does not reshape one branch; it deletes that readout, so the colony is still there and no longer says where it is. fluorescent and encrusted re-key the same three stops without touching the geometry, which makes the pair separable: growth_form moves the lines, condition moves only their colour.",
+      "kin": "growth_form, not form. branching_growth_algorithm, recursive_tree and space_colonization_algorithm already spend the bare word `form` as a VALUE of their staging axis `aftermath`, and reusing it as an axis NAME here would have made the family's vocabulary ambiguous in the one place it is meant to be shared. No sibling in the corpus declares growth_form or condition, so both words are new rather than borrowed-and-bent.",
+      "fixture_note": "no fixture is needed. The colony was already fully determined - _ready seeds the rng at 77 and every shoot reseeds to 77 + shoot_idx * 13 before it draws - so two values of an axis differ by the axis and nothing else. The literal 77 is now the var _base_seed, which also makes the pre-existing but dead `seed` config key actually reach the geometry (it used to set _rng.seed only to have _grow_shoot overwrite it on the next line); no placed token passes seed, so nothing shipped moves.",
+      "reads": "the .tscn root is the scripted node (branching_coral.gd, class_name BranchingCoral) so both axes are reachable from a map token and from the sweep. apply_grid_config accepts growth_form (or form) and condition, IGNORES an unknown value instead of assigning it - a silent fallback to the default is how a sweep publishes N identical frames and calls the axis inert - and rebuilds only when a value actually changed AND _ready has already built once."
+    },
+    "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
+    "tags": [
+      "color",
+      "l_system",
+      "procedural",
+      "simulation",
+      "swarm"
+    ],
+    "geometry_spec": {
+      "mesh_type": "procedural_line",
+      "topology": "non_manifold",
+      "construction": {
+        "method": "l_system_turtle",
+        "primitives": [
+          "box"
+        ],
+        "operations": [
+          "string_rewrite",
+          "turtle_interpret",
+          "emit_lines"
+        ]
+      },
+      "material": {
+        "type": "vertex_color",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "lsystem_tree",
+        "single",
+        "trunk",
+        "multi",
+        "shoot"
+      ],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.35,
+        0.53,
+        0.28
+      ],
+      "aabb_center": [
+        0.0,
+        0.23,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.53,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "floor",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  }
+}

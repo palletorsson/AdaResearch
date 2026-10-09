@@ -1,0 +1,407 @@
+{
+  "sequence": "tiling",
+  "declared_maps": [
+    "Pattern_Disco",
+    "Pattern_Foundry",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Symmetry_Seventeen",
+    "Ribbon_Patterns_01",
+    "Ribbon_Patterns_02",
+    "Ribbon_Patterns_03"
+  ],
+  "museum_map_authored_order": [
+    "Pattern_Disco",
+    "Pattern_Foundry",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Symmetry_Seventeen",
+    "Ribbon_Patterns_01",
+    "Ribbon_Patterns_02",
+    "Ribbon_Patterns_03"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "Pattern_Disco",
+      "recorded_status": "source_checked_draft",
+      "text_words": 460,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "disco_controls",
+          "standalone_disco",
+          "step_sequencer"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "tiling",
+        "text_path": "commons/maps/Pattern_Disco/final.md",
+        "text_sha256": "508d7cbc06927da571a4e6a679baf03726f5c347df4955b351397b011bf14b83",
+        "map_sha256": "dd651b4afd2870da18a8666592231429e3ed43edbe5bf2df6c3260777ab10c89",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "disco_controls",
+        "standalone_disco",
+        "step_sequencer"
+      ],
+      "role_primary_order": [
+        "disco_controls",
+        "standalone_disco",
+        "step_sequencer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Pattern_Foundry",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1964,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pattern_architecture",
+          "pattern_tile_4x4",
+          "pattern_tile_mirror",
+          "pattern_machine_a"
+        ],
+        "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+        "status": "source_checked_draft",
+        "sequence": "tiling",
+        "text_path": "commons/maps/Pattern_Foundry/final.md",
+        "text_sha256": "415c1b854c1129b217c7a55a1b164b0c67a24e700e5cd2cf37c7326981d83f4a",
+        "map_sha256": "e4aed04049a9ad9a2d70cfa77e3a35bc0959ebfec33dcae507f4a0a220357b57",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pattern_architecture",
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "role_primary_order": [
+        "pattern_architecture",
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "recorded_status": "source_checked_draft",
+      "text_words": 706,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pattern_maker_station"
+        ],
+        "reason": "What stays the same when you change the rule but keep the motif?",
+        "status": "source_checked_draft",
+        "sequence": "tiling",
+        "text_path": "commons/maps/Tutorial_Pattern/final.md",
+        "text_sha256": "83d4ad634e1e3805f97de643de691a7beeb134760bfd91e531e0b8a91cd57fed",
+        "map_sha256": "09d0c6788dd0cea82de96d404fdcd6284c81793f5c3f37fa55d8d56b8a6b1314",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pattern_maker_station"
+      ],
+      "role_primary_order": [
+        "pattern_maker_station"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Array_Patterns",
+      "recorded_status": "source_checked_draft",
+      "text_words": 739,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pattern_tunnel_machine",
+          "pattern_tile_brick"
+        ],
+        "reason": "When does repetition become an environment rather than a picture?",
+        "status": "source_checked_draft",
+        "sequence": "tiling",
+        "text_path": "commons/maps/Array_Patterns/final.md",
+        "text_sha256": "a8a77345b0f4e88596455b06b67d3b83d2cf966b6e8df511314d79aac9208052",
+        "map_sha256": "259969aef0af13121dce65b0520441b39f8e0042dae9b8fabc12ae14890a9e8c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "role_primary_order": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "recorded_status": "source_checked_draft",
+      "text_words": 689,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "vr_tile_editor",
+          "wallpaper_cage"
+        ],
+        "reason": "What assumptions make a catalogue of symmetries finite?",
+        "status": "source_checked_draft",
+        "sequence": "tiling",
+        "text_path": "commons/maps/Symmetry_Seventeen/final.md",
+        "text_sha256": "9d9e3d5d8ec8afe0aac8d46688c12cebbe27c31664e4ac101f8b55162ae7ee60",
+        "map_sha256": "8967f5270c051b6adc8bd779b222fb8be4bd7b82a07f17db14be9fb2eba28e55",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "role_primary_order": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "recorded_status": "text_pending",
+      "text_words": 702,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "tiling",
+        "status": "text_pending",
+        "primary_tokens": [
+          "grid_2d_4x4",
+          "grid_3d_4x4x4"
+        ],
+        "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+        "learner_verified": false,
+        "map_sha256": "6ec9274a57a55ff1734dffefa2f395562f23ec0ff8f8d3467a011643fac85352"
+      },
+      "manuscript_artifact_order": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "role_primary_order": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "recorded_status": "text_pending",
+      "text_words": 720,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "tiling",
+        "status": "text_pending",
+        "primary_tokens": [
+          "SimultaneousContrast",
+          "MetamerismLab"
+        ],
+        "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+        "learner_verified": false,
+        "map_sha256": "7a08388ae374d73a081376e81e70b00a8f507ef7bbf132335b6246d09ed18a18"
+      },
+      "manuscript_artifact_order": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "role_primary_order": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "recorded_status": "text_pending",
+      "text_words": 971,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "tiling",
+        "status": "text_pending",
+        "primary_tokens": [
+          "minimalglitch",
+          "textureglitch"
+        ],
+        "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+        "learner_verified": false,
+        "map_sha256": "53d06dd10392d1b6eba476a5100a64a822efa92f596da02c9e2377e95381d45a"
+      },
+      "manuscript_artifact_order": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "role_primary_order": [
+        "minimalglitch",
+        "textureglitch"
+      ],
+      "anchors_not_in_primary_roles": [
+        "drag_catwalk",
+        "fabric_shader_studio",
+        "super_drag_mirror"
+      ],
+      "primary_roles_without_anchors": [
+        "minimalglitch",
+        "textureglitch"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn",
+      "addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd",
+      "algorithms/arrays/binary_table/binary_table_display.tscn",
+      "algorithms/arrays/grid_2d_4x4.gd",
+      "algorithms/arrays/grid_2d_4x4.tscn",
+      "algorithms/arrays/grid_3d_4x4x4.gd",
+      "algorithms/arrays/grid_3d_4x4x4.tscn",
+      "algorithms/arrays/layer_pattern_lesson.gd",
+      "algorithms/color/carrier_comparison.gd",
+      "algorithms/color/metamerism_lab/MetamerismLab.gd",
+      "algorithms/color/metamerism_lab/MetamerismLab.tscn",
+      "algorithms/color/minimalglitch/minimalglitch.gd",
+      "algorithms/color/minimalglitch/minimalglitch.tscn",
+      "algorithms/color/simultaneous_contrast/SimultaneousContrast.gd",
+      "algorithms/color/simultaneous_contrast/SimultaneousContrast.tscn",
+      "algorithms/color/textureglitch/glitch.gdshader",
+      "algorithms/color/textureglitch/texture_glitch_optimized.gd",
+      "algorithms/color/textureglitch/textureglitch.tscn",
+      "algorithms/symmetry/wallpaper_cage/wallpaper_cage.gd",
+      "algorithms/symmetry/wallpaper_cage/wallpaper_cage.tscn",
+      "commons/artifacts/drag_catwalk/drag_catwalk.gd",
+      "commons/artifacts/drag_catwalk/drag_catwalk.tscn",
+      "commons/artifacts/drag_catwalk/runway_agent.gd",
+      "commons/artifacts/fabric_shader_studio/fabric_recipe.gd",
+      "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd",
+      "commons/artifacts/fabric_shader_studio/fabric_shader_studio.tscn",
+      "commons/artifacts/pattern_machine_a/loom_recipe.gd",
+      "commons/artifacts/pattern_machine_a/pattern_machine_a.gd",
+      "commons/artifacts/pattern_machine_a/pattern_machine_a.tscn",
+      "commons/artifacts/pattern_machine_a/recipe_study.gd",
+      "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd",
+      "commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+      "commons/artifacts/pattern_maker_station/pattern_maker_station.tscn",
+      "commons/artifacts/pattern_tunnel/display_console.tscn",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel.tscn",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn",
+      "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd",
+      "commons/artifacts/regularity/disco_controls.gd",
+      "commons/artifacts/regularity/disco_controls.tscn",
+      "commons/artifacts/regularity/pattern_architecture.gd",
+      "commons/artifacts/regularity/pattern_architecture.tscn",
+      "commons/artifacts/regularity/room_tools.gd",
+      "commons/artifacts/super_drag_mirror/super_drag_mirror.gd",
+      "commons/artifacts/super_drag_mirror/super_drag_mirror.tscn",
+      "commons/audio/generators/AudioSynthesizer.gd",
+      "commons/audio/generators/CustomSoundGenerator.gd",
+      "commons/audio/sequencer/sequencer_ui.gd",
+      "commons/audio/sequencer/sequencer_ui.tscn",
+      "commons/audio/sequencer/step_sequencer.gd",
+      "commons/audio/sequencer/step_sequencer.tscn",
+      "commons/context/discofloor/DiscoSequencerBridge.gd",
+      "commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "commons/context/discofloor/standalone_disco_floor.tscn",
+      "commons/interactables/push_button.tscn",
+      "commons/interactables/slider_horizontal.tscn",
+      "commons/player/super_drag_outfit.gd",
+      "commons/primitives/arrays/pattern_tile_cube.tscn",
+      "commons/primitives/arrays/pattern_tile_puzzle.gd",
+      "commons/primitives/arrays/pattern_tile_puzzle.tscn",
+      "commons/primitives/arrays/symmetry_compare_lesson.gd",
+      "commons/primitives/arrays/vr_tile_editor.gd",
+      "commons/primitives/arrays/vr_tile_editor.tscn",
+      "commons/resourses/shaders/wallpaper_tile.gdshader",
+      "commons/scenes/mapobjects/pick_up_cube.tscn",
+      "commons/ui/control_panel.gd",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/objects/pickable.tscn",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://algorithms/arrays/binary_table/binary_table_display.gd",
+      "res://algorithms/color/carrier_comparison.gdshader",
+      "res://commons/artifacts/dream_bodies/dream_shaders.gd",
+      "res://commons/artifacts/dream_bodies/dream_skin.gd",
+      "res://commons/artifacts/fabric_shader_studio/fabric.gdshader",
+      "res://commons/artifacts/pattern_tunnel/display_console.gd",
+      "res://commons/artifacts/pattern_tunnel/pattern_tunnel.gd",
+      "res://commons/audio/AudioSynthesizer.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/joystick_smooth.tscn",
+      "res://commons/interactables/materials/ui_shadow.tres",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/interactables/slider_horizontal.gd",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/arrays/pattern_tile_cube.gd",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/scenes/mapobjects/pick_up_cube.gd",
+      "res://commons/ui/materials/handle_glow.tres",
+      "res://commons/ui/materials/metal_dark.tres",
+      "res://commons/ui/materials/panel_white.tres",
+      "res://commons/ui/materials/track_groove.tres",
+      "res://commons/ui/text_screen.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

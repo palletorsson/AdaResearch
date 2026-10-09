@@ -1,0 +1,84 @@
+--- before/rainbow_celebration.gd
++++ current/rainbow_celebration.gd
+@@ -4,6 +4,11 @@
+ const Controls = preload("res://commons/ui/control_panel.gd")
+ const MODES := ["six", "roygbiv", "continuous", "two"]
+ const COUNTS := [6, 7, 48, 2]
++const PartyPickup = preload("res://algorithms/primitives/rainbow/rainbow_party_pickup.tscn")
++const SparkBurst = preload("res://algorithms/primitives/rainbow/rainbow_spark_burst.gd")
++var walk_pickups: Node3D
++var spark_bursts: Node3D
++var collected_cubes := 0
+ var arch: Node3D
+ var mode_index := 0
+ var readout: Label
+@@ -27,6 +32,7 @@
+ 	arch.set_process(false)
+ 	_build_party()
+ 	_apply_palette()
++	_build_walk_celebration()
+ 
+ func _material(c: Color, metallic: float = 0.0) -> StandardMaterial3D:
+ 	var m := StandardMaterial3D.new()
+@@ -221,3 +227,61 @@
+ 		var basis := Basis.from_euler(Vector3(t * 2 + a, t * 3, a))
+ 		confetti.multimesh.set_instance_transform(i, Transform3D(basis, p))
+ 		confetti.multimesh.set_instance_color(i, Color.from_hsv(fposmod(i * 0.137, 1.0), 0.6, 1.0))
++
++func _build_walk_celebration() -> void:
++	walk_pickups = Node3D.new()
++	walk_pickups.name = "WalkPickups"
++	add_child(walk_pickups)
++	spark_bursts = Node3D.new()
++	spark_bursts.name = "WalkSparks"
++	add_child(spark_bursts)
++	for i in range(5):
++		var cube: Node3D = PartyPickup.instantiate()
++		cube.name = "CelebrationCube_%d" % (i + 1)
++		cube.position = Vector3(0, 0.1, 4.2 - i * 2.1)
++		cube.party_collected.connect(_cube_collected)
++		walk_pickups.add_child(cube)
++	_build_finish_banner()
++
++func _cube_collected(world_point: Vector3) -> void:
++	collected_cubes += 1
++	# The signal arrives during physics; build the visual burst after the flush.
++	_release_sparks.call_deferred(world_point)
++
++func _release_sparks(world_point: Vector3) -> void:
++	# There are five one-shot cubes per hall visit. Also cap the active pool.
++	if spark_bursts.get_child_count() >= 5:
++		var oldest := spark_bursts.get_child(0)
++		spark_bursts.remove_child(oldest)
++		oldest.queue_free()
++	var burst: Node3D = SparkBurst.new()
++	burst.palette.assign(arch.rainbow_colors)
++	burst.position = spark_bursts.to_local(world_point)
++	spark_bursts.add_child(burst)
++
++func _build_finish_banner() -> void:
++	# A separate six-stripe banner: changing the arch does not rewrite flags.
++	for side in [-1, 1]:
++		var pole := CylinderMesh.new()
++		pole.top_radius = 0.045
++		pole.bottom_radius = 0.055
++		pole.height = 4.95
++		pole.radial_segments = 12
++		_mesh("FinishPoleLeft" if side < 0 else "FinishPoleRight", pole, Vector3(side * 3.4, 2.475, -7.0), _material(Color("e5c387"), 0.35), true)
++		_box("FinishPoleFoot", Vector3(side * 3.4, 0.045, -7), Vector3(0.4, 0.09, 0.4), Color("eee9df"), true)
++	var colours := [Color("ee4053"), Color("ff952d"), Color("ffdc55"), Color("46bb82"), Color("4e88e5"), Color("9b67d9")]
++	for stripe in range(6):
++		var surface := SurfaceTool.new()
++		surface.begin(Mesh.PRIMITIVE_TRIANGLES)
++		for section in range(40):
++			var u0: float = float(section) / 40.0
++			var u1: float = float(section + 1) / 40.0
++			var v0: float = float(stripe) / 6.0
++			var v1: float = float(stripe + 1) / 6.0
++			for uv in [Vector2(u0,v0), Vector2(u0,v1), Vector2(u1,v0), Vector2(u1,v0), Vector2(u0,v1), Vector2(u1,v1)]:
++				var sag: float = sin(uv.x * PI)
++				surface.add_vertex(Vector3(lerpf(-3.4, 3.4, uv.x), 4.7 - uv.y * 1.6 - sag * 0.25, sin(uv.x * TAU * 3.0) * sag * 0.12))
++		surface.generate_normals()
++		var mat := _material(colours[stripe])
++		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++		_mesh("FinishBannerStripe_%d" % stripe, surface.commit(), Vector3(0,0,-7), mat)

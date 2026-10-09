@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "upright pair loaded",
+      "passed": true
+    },
+    {
+      "name": "two distinct receiving surfaces retained",
+      "passed": true
+    },
+    {
+      "name": "support starts at bench: relief",
+      "passed": true
+    },
+    {
+      "name": "support meets maximum inward relief: relief",
+      "passed": true
+    },
+    {
+      "name": "ring remains upright: relief",
+      "passed": true
+    },
+    {
+      "name": "support starts at bench: colour",
+      "passed": true
+    },
+    {
+      "name": "support meets maximum inward relief: colour",
+      "passed": true
+    },
+    {
+      "name": "ring remains upright: colour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: upright-pair",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "posts": [
+      {
+        "base": 0.779999993741512,
+        "kind": "relief",
+        "top": 0.979999996721745
+      },
+      {
+        "base": 0.779999993741512,
+        "kind": "colour",
+        "top": 0.979999996721745
+      }
+    ],
+    "scope": "Native geometry and museum photograph. Existing repair retained; no new ring geometry in this pass."
+  },
+  "passed": true,
+  "room": "Noise_One",
+  "scope": "Real museum, supplied input events and support checks; no headset or learner acceptance."
+}

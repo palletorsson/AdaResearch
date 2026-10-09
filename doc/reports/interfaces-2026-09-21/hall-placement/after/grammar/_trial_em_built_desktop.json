@@ -1,0 +1,1750 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-09-21 08:09:00",
+	"boot_ms": {
+		"autoloads": 2277,
+		"bake_parsed": 950,
+		"boot_tail": 3588,
+		"engine_pak": 1007,
+		"engine_to_ready": 4804,
+		"entry": 1,
+		"first_physics": 3731,
+		"grid_warm": 1398,
+		"guests_loaded": 1466,
+		"loading_shell": 29,
+		"modules_loaded": 346,
+		"modules_pool": 412,
+		"museum_data": 412,
+		"plan_parsed": 919,
+		"pool_done": 855,
+		"scene_chain": 1520,
+		"segment0_built": 3588,
+		"world_ready": 2052
+	},
+	"plan": "res://doc/reports/interfaces-2026-09-21/hall-placement/after/grammar/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						7
+					],
+					"token": "lsystem_editor",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						17
+					],
+					"token": "mesh_grammar_lsystem_tree",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						17.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 0.4,
+					"tile_cell": [
+						11,
+						17
+					],
+					"token": "science_screen",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						1.5,
+						17.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						6,
+						19
+					],
+					"token": "grammar_provenance",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						6.5,
+						0.0,
+						19.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						9,
+						19
+					],
+					"token": "lsystem_tree",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						9.5,
+						0.0,
+						19.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						10,
+						20
+					],
+					"token": "fractal_lsystem_string",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						0.0,
+						20.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						12,
+						20
+					],
+					"token": "city_bench",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						20.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						22
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						22.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						4,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						13
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 01",
+					"index": 1,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "01\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						15
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 02",
+					"index": 2,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "02\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.3,
+						1.0,
+						15.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						24
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "03\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						26
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						27
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 04",
+					"index": 4,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "04\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.2,
+						1.2,
+						27.0
+					]
+				},
+				{
+					"backing_cell": [
+						10,
+						28
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						10,
+						27
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 05",
+					"index": 5,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "05\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						10.3,
+						1.0,
+						28.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 06",
+					"index": 6,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "06\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 07",
+					"index": 7,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "07\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						11,
+						26
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						10,
+						26
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 08",
+					"index": 8,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "08\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						11.0,
+						1.1,
+						26.6
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						28
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						13,
+						28
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "09\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.0,
+						1.2,
+						28.2
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						16
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "10\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						1.1,
+						16.6
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						16,
+						15
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "11\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.0,
+						1.1,
+						15.6
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						2
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 12",
+					"index": 12,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "12\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.0,
+						2.3
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						15
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						15
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "13\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.0,
+						1.2,
+						15.2
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						16
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						16
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 14",
+					"index": 14,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "14\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.0,
+						1.0,
+						16.3
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						27
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						9,
+						27
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "15\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						9.0,
+						1.2,
+						27.2
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						13
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 16",
+					"index": 16,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "16\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						7,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						15
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 17",
+					"index": 17,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "17\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						7.6,
+						1.1,
+						15.0
+					]
+				},
+				{
+					"backing_cell": [
+						5,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						5,
+						24
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 18",
+					"index": 18,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "18\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						5.2,
+						1.2,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 19",
+					"index": 19,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "19\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 20",
+					"index": 20,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "20\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						18
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 21",
+					"index": 21,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "21\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						1.2,
+						18.2
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						17
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						16,
+						17
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 22",
+					"index": 22,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "22\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.0,
+						1.2,
+						17.2
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						4
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 23",
+					"index": 23,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "23\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.1,
+						4.6
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						17
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						17
+					],
+					"chapter": "lsystems",
+					"facing_deg": -90.0,
+					"id": "lsystems · lsystems grammar lab · 24",
+					"index": 24,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "24\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						3.0,
+						1.0,
+						17.3
+					]
+				},
+				{
+					"backing_cell": [
+						3,
+						18
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						18
+					],
+					"chapter": "lsystems",
+					"facing_deg": 90.0,
+					"id": "lsystems · lsystems grammar lab · 25",
+					"index": 25,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "25\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.0,
+						1.1,
+						18.6
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						13
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 26",
+					"index": 26,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "26\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.3,
+						1.0,
+						14.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						14
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						15
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 27",
+					"index": 27,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "27\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.2,
+						1.2,
+						15.0
+					]
+				},
+				{
+					"backing_cell": [
+						7,
+						25
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						7,
+						24
+					],
+					"chapter": "lsystems",
+					"facing_deg": 180.0,
+					"id": "lsystems · lsystems grammar lab · 28",
+					"index": 28,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "28\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						7.3,
+						1.0,
+						25.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						1
+					],
+					"chapter": "lsystems",
+					"facing_deg": 0.0,
+					"id": "lsystems · lsystems grammar lab · 29",
+					"index": 29,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "lsystems grammar lab",
+					"segment": 0,
+					"text": "29\nlsystems · lsystems grammar ",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0248324517160654,
+						"pixel_size": 0.000225749559082892,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						1.0
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.#############################",
+				"................p..#############",
+				"##..............p..#############",
+				"##.................#############",
+				"#########...####################",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##....sssssssss....#############",
+				"##....sssssssss....#############",
+				"##....sssssssss....#############",
+				"##......sssss......#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##..#####...#####..#############",
+				"##..#...........#..#############",
+				"##..#...........#..#############",
+				"##..#.s....sss..#..#############",
+				"##..#.......sss.#..#############",
+				"##..#ssssss.sss.#..#############",
+				"##..#sssss.ssss.#..#############",
+				"##..#sssss......#..#############",
+				"##..#....s......#..#############",
+				"##..#...........#..#############",
+				"##..#...........#..#############",
+				"#########...####################",
+				"##########..####################",
+				"##########.....#################",
+				"#############..#################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 29,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "grande-galerie-axial",
+			"pearl": "lsystems grammar lab",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"10,17": "science_screen",
+				"10,20": "fractal_lsystem_string",
+				"10,5": "lsystem_editor",
+				"10,6": "lsystem_editor",
+				"10,7": "lsystem_editor",
+				"10,8": "lsystem_editor",
+				"11,17": "science_screen",
+				"11,18": "city_bench",
+				"11,19": "city_bench",
+				"11,20": "city_bench",
+				"11,5": "lsystem_editor",
+				"11,6": "lsystem_editor",
+				"11,7": "lsystem_editor",
+				"11,8": "lsystem_editor",
+				"12,17": "science_screen",
+				"12,18": "city_bench",
+				"12,19": "city_bench",
+				"12,20": "city_bench",
+				"12,5": "lsystem_editor",
+				"12,6": "lsystem_editor",
+				"12,7": "lsystem_editor",
+				"13,18": "city_bench",
+				"13,19": "city_bench",
+				"13,20": "city_bench",
+				"13,5": "lsystem_editor",
+				"13,6": "lsystem_editor",
+				"13,7": "lsystem_editor",
+				"4,19": "grammar_provenance",
+				"4,20": "grammar_provenance",
+				"4,21": "grammar_provenance",
+				"5,17": "mesh_grammar_lsystem_tree",
+				"5,19": "grammar_provenance",
+				"5,20": "grammar_provenance",
+				"5,21": "grammar_provenance",
+				"5,5": "lsystem_editor",
+				"5,6": "lsystem_editor",
+				"5,7": "lsystem_editor",
+				"6,19": "grammar_provenance",
+				"6,20": "grammar_provenance",
+				"6,21": "grammar_provenance",
+				"6,5": "lsystem_editor",
+				"6,6": "lsystem_editor",
+				"6,7": "lsystem_editor",
+				"7,19": "grammar_provenance",
+				"7,20": "grammar_provenance",
+				"7,21": "grammar_provenance",
+				"7,5": "lsystem_editor",
+				"7,6": "lsystem_editor",
+				"7,7": "lsystem_editor",
+				"7,8": "lsystem_editor",
+				"8,19": "grammar_provenance",
+				"8,20": "grammar_provenance",
+				"8,21": "grammar_provenance",
+				"8,22": "dark_sphere",
+				"8,5": "lsystem_editor",
+				"8,6": "lsystem_editor",
+				"8,7": "lsystem_editor",
+				"8,8": "lsystem_editor",
+				"9,19": "lsystem_tree",
+				"9,5": "lsystem_editor",
+				"9,6": "lsystem_editor",
+				"9,7": "lsystem_editor",
+				"9,8": "lsystem_editor"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 19,
+			"z0": -4,
+			"z1": 29
+		}
+	]
+}

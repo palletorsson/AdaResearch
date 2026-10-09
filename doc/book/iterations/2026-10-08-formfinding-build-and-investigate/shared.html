@@ -1,0 +1,165 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Shared code</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="FormFinding_Descent/parallel.html">Descent</a> <a href="FormFinding_Catenary/parallel.html">Catenary</a> <a href="FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="FormFinding_Annealing/parallel.html">Annealing</a> <a href="FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="RETHINK.md">Read the purpose and status</a>.</p><h1>Form Finding — working inside the museum</h1>
+<p>Continue after Forces in the existing Endless Museum. Try the primary exhibit, reconstruct its selected operation, then make another experiment. The remaining exhibits belong to the wider inquiry; you do not need to rebuild every one.</p>
+<p>Keep the point class from Lines and Coordinates. A class and saved code travel onward; this does not imply that the museum automatically carries a single physical instance between halls. Use your existing PointStudy Node3D and replace its lesson script. Place it in the stated clear bay under the current hall, at unit scale with Y up. If your scene uses a saved study instance rather than a runtime hall child, give it the same world transform as that hall-local position. Do not put it under a scaled artifact.</p>
+<p>All four shared files below and the current lesson script live in one folder. Descent introduces landscape.gd; Annealing reuses it unchanged. The already installed XRToolsPickable class and res://commons/interactables/push_button.tscn are declared museum dependencies. No unnamed node or dollar reference is required.</p>
+<p>PointBody still supplies a sphere, boundary and pickup. make_point adds its black material. Markers have collision disabled; endpoint points remain grabbable and stay where released. The rod, caption, button and sampled surface are display helpers, printed below in full. None chooses a search step, relaxes a chain, balances a lever or judges a construction. Those operations remain in the lessons.</p>
+<p>The cube helper repeats the earlier mesh-and-collider construction using BoxMesh. It releases into Jolt physics. Its contact geometry is part of the environment for the last lesson; the acceptance rule remains yours to inspect.</p>
+<h2>point_body.gd</h2>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2>study.gd</h2>
+<!-- student-code:study.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+# Supplied display/control furniture; no motion or force calculation.
+const Point = preload(&quot;point_body.gd&quot;)
+const PushButton = preload(&quot;res://commons/interactables/push_button.tscn&quot;)
+var buttons: Dictionary = {}
+
+func caption(words: String, at := Vector3(0, 1.8, -0.5)) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = 36
+    text.pixel_size = 0.004
+    text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(text)
+    return text
+
+func button(title: String, at: Vector3, action: Callable) -&gt; void:
+    var control = PushButton.instantiate()
+    control.position = at
+    control.rotation.x = -PI / 2.0
+    add_child(control)
+    control.pressed.connect(action)
+    buttons[title] = control
+    caption(title, at + Vector3.UP * 0.16)
+
+func rod() -&gt; MeshInstance3D:
+    var surface := MeshInstance3D.new()
+    var shape := CylinderMesh.new()
+    shape.top_radius = 0.015
+    shape.bottom_radius = 0.015
+    shape.height = 1.0
+    surface.mesh = shape
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(&quot;ef87bc&quot;)
+    surface.material_override = material
+    add_child(surface)
+    return surface
+
+func join(surface: MeshInstance3D, a: Vector3, b: Vector3) -&gt; void:
+    var d := b - a
+    surface.visible = d.length() &gt; 0.0001
+    if not surface.visible:
+        return
+    surface.position = (a + b) / 2.0
+    surface.quaternion = Quaternion(Vector3.UP, d.normalized())
+    surface.scale = Vector3(1, d.length(), 1)
+
+func make_point(at: Vector3, can_hold := true) -&gt; Node3D:
+    var point := Point.new()
+    point.position = at
+    if not can_hold:
+        point.collision_layer = 0
+        point.collision_mask = 0
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(&quot;16141b&quot;)
+    material.roughness = 0.22
+    for child in point.get_children():
+        if child is MeshInstance3D:
+            child.material_override = material
+    add_child(point)
+    return point
+
+func landscape_surface(valleys: bool) -&gt; MeshInstance3D:
+    var field = preload(&quot;landscape.gd&quot;)
+    var surface := SurfaceTool.new()
+    surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for x in 24:
+        for z in 24:
+            var a := Vector2(-3 + x * 0.25, -3 + z * 0.25)
+            var b := a + Vector2(0.25, 0)
+            var c := a + Vector2(0.25, 0.25)
+            var d := a + Vector2(0, 0.25)
+            for p in [a, c, b, a, d, c]:
+                surface.add_vertex(field.plot(p, valleys))
+    surface.generate_normals()
+    var mesh := MeshInstance3D.new()
+    mesh.mesh = surface.commit()
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(&quot;a4bccc&quot;)
+    material.cull_mode = BaseMaterial3D.CULL_DISABLED
+    mesh.material_override = material
+    add_child(mesh)
+    return mesh
+</code></pre>
+<h2>landscape.gd</h2>
+<!-- student-code:landscape.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+# The same two functions used by the hall's descent landscape.
+static func cost(p: Vector2, valleys: bool) -&gt; float:
+    if valleys:
+        return 0.08 * pow(p.x * p.x - 4.0, 2) + 0.25 * p.y * p.y + 0.15 * p.x
+    return 0.25 * p.length_squared()
+
+static func gradient(p: Vector2, valleys: bool) -&gt; Vector2:
+    var h := 0.03
+    var x := Vector2(h, 0)
+    var y := Vector2(0, h)
+    return Vector2(cost(p + x, valleys) - cost(p - x, valleys),
+        cost(p + y, valleys) - cost(p - y, valleys)) / (2.0 * h)
+
+static func plot(p: Vector2, valleys: bool) -&gt; Vector3:
+    return Vector3(p.x * 0.45, 0.9 + 0.12 * cost(p, valleys), p.y * 0.45)
+</code></pre>
+<h2>cube_body.gd</h2>
+<!-- student-code:cube_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+# The earlier grabbable body's construction, now with a cube mesh and boundary.
+func _init() -&gt; void:
+    collision_layer = 4
+    collision_mask = 196615
+    mass = 1.0
+    release_mode = XRToolsPickable.ReleaseMode.UNFROZEN
+    var surface := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = Vector3.ONE * 0.2
+    surface.mesh = mesh
+    var material := StandardMaterial3D.new()
+    material.albedo_color = Color(&quot;ee84b8&quot;)
+    surface.material_override = material
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := BoxShape3D.new()
+    shape.size = mesh.size
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre></main>

@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VFM_07_Gravity · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=VFM_07_Gravity">← Tutorial lineage</a></p><h1>VFM 07 Gravity</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="VFM_07_Gravity/final.md">Raw captured source</a></p><pre># Who gets to stay still?
+
+&lt;!-- @orbital_mechanics_demo --&gt;
+
+The spring had an address to return to. You could move its body through that address without moving the address itself. Here the reference has acquired a body: a pink sphere, apparently untroubled by the small gold one waiting beside it.
+
+Press RUN. Let the gold body go round. Then change SPEED and start again. The attraction has not changed; something about the beginning has. A circle narrows into a closer passage, or opens toward the golden frame. Which part of the path did the starting speed decide? Which part is being decided now?
+
+Walk into the drawing. The spheres pass through you. You are inside its spatial explanation, but you have not become one of its masses. Already the room contains two kinds of body.
+
+Reveal PARTS. The arrow on the satellite points toward the source even when the satellite travels across that direction. Motion keeps what the previous moments gave it; acceleration changes what comes next. The turn is made again at every step.
+
+```gdscript
+var arm: Vector3 = state.p[j] - state.p[i]
+var pair_force: Vector3 = G * masses[i] * masses[j] * arm / pow(arm.length_squared() + EPS * EPS, 1.5)
+```
+
+The subtraction we learned as a gap now gives an interaction its direction. Distance also enters its strength. This room chooses G = 1, a source of 12 kg and a satellite of 1 kg. At three metres, the opening sideways speed is calculated for a circular orbit under this particular softened law. SPEED offers four multiples of that beginning. It does not push the current body; it prepares another run.
+
+Try REVERSE while the satellite is moving. Its velocity changes sign, its position stays, and the clock continues forward. In this isolated model it can retrace the path it has just made. The earlier spring with damping could not offer the same experiment merely by reversing velocity: resistance would keep dissipating motion. A return depends on what the update preserves.
+
+Look again at the pink body. Why has it not moved? Press **RULE** to inspect which body receives the acceleration.
+
+```gdscript
+if mutual or i!=0:a[i] += pair_force / masses[i]
+if mutual or j!=0:a[j] -= pair_force / masses[j]
+```
+
+Here `mutual` is false and body zero receives no acceleration. The source is held in place by the implementation. Newton&#x27;s third law, that every pull is paired with an equal pull the other way, has been switched off by that one word. Its stillness is useful: it lets us learn one moving body&#x27;s relation to a fixed reference. It also withholds a response. What happens if the thing we called the centre is allowed to answer?
+
+&lt;!-- @three_body_problem --&gt;
+
+The next floor begins with two equal masses. Press RUN before adding anything. Both move. Neither has the privilege the pink source had. A small white cross marks their centre of mass; it can remain still while the two bodies travel around it. A reference need not be occupied.
+
+Now press BODIES. Time returns to zero and a third body waits above the pair in the floor plan. The original two keep their starting positions and velocities; the newcomer starts at rest. Run again. Follow one of the original paths. Where does it first cease to be the path you expected?
+
+No new instruction says “be complicated.” Each pair contributes the same softened attraction, with an equal and opposite force on its partner: the third law switched back on. All three masses are 4 kg. The arrangement has changed, so the forces summed at each body change. The original pair&#x27;s circular beginning is no longer a promise about its future.
+
+```gdscript
+var a=accelerations(state)
+for i in state.p.size():
+    state.v[i] += a[i] * (STEP * 0.5)
+    state.p[i] += state.v[i] * STEP
+a=accelerations(state)
+for i in state.p.size():state.v[i] += a[i] * (STEP * 0.5)
+```
+
+A little change of velocity. A step in position. Read every relation again. Another little change of velocity. The code advances all bodies through these shared stages, 240 times per model second.
+
+NUDGE prepares a second beginning. Only the last body&#x27;s X coordinate changes, by three centimetres on the first press. Velocities remain identical. The translucent bodies belong to that second calculation; they are drawn higher so we can distinguish the copies, although both calculations stay in the X–Z plane. They do not attract the solid bodies below them.
+
+Watch a corresponding pair, then read the displayed difference. It combines the distances between corresponding bodies as a root mean square. In the checked three-body run, three centimetres added to one initial coordinate gave about 7.6 centimetres of this paired difference after four seconds. Reset and compare again. This is a measured departure under specified conditions. A tangled trail alone would not establish chaos, and this short comparison does not establish an exponential rate of separation.
+
+The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincaré showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 1993 and proved in 2000.[^three-body] Behind these floors, a sculpture does the same sum for every pair of many bodies, as many pairs as there are bodies squared, which is why simulations of galaxies do not.
+
+There are two white crosses now. Moving that one initial coordinate also moved its copy&#x27;s centre of mass. We did not secretly recentre it. Even an experiment about difference has to decide which differences it will retain.
+
+Return to `EPS * EPS`. The quarter-metre softening, called Plummer softening, keeps close encounters finite by changing the attraction near coincidence.[^plummer] The visible spheres have no hard surfaces in this calculation: they neither collide nor merge. Their glow suggests bodies with skins; the rule offers positions and masses. What kind of encounter could we make by adding a skin?
+
+The floor keeps at most 240 samples for each trail, taken twenty times a second: roughly twelve seconds of visible past. Hiding PATH does not stop this recording. Large acceleration arrows stop growing at two metres, while the numerical acceleration continues beyond that drawing limit. At the golden frame the whole experiment pauses with its outgoing state intact. The edge says our observation has ended; it does not prove that a body has escaped its partners.
+
+We have allowed the centre to move and the third body to alter a relation already underway. Your feet, meanwhile, have remained on the museum floor. Gravity in the next encounter will need an answer from the ground. What lets a body stand?
+
+[^plummer]: The added squared length softens the short-distance interaction. The [galpy Plummer potential documentation](https://docs.galpy.org/en/latest/reference/potentialplummer.html) gives the corresponding potential; this hall uses a softening length of 0.25 metres.
+
+[^three-body]: Henri Poincaré&#x27;s prize essay of 1890 on the three-body problem showed that no general closed solution exists. Periodic orbits do: Cristopher Moore found the figure-eight numerically in 1993, and Alain Chenciner and Richard Montgomery proved it in 2000 (*Annals of Mathematics* 152). The sculptures behind the floors, nbody_simulation, example_2_9_n_body_attraction_vr, gravity_well and chaos_attractor, sum every pair; the Barnes–Hut tree of 1986 is how simulations of galaxies avoid doing so.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="VFM_07_Gravity/tutorial.md">Raw captured source</a></p><pre># Gravity: two encounters, one interaction law
+
+Start with RUN, watch, then use the left bank to change a beginning. PARTS and RULE reveal the model after observation. Stable primary tokens are orbital_mechanics_demo and three_body_problem. Both opt into commons/artifacts/orbital_mechanics_demo/gravity_relations.gd; the original standalone scenes remain available without the lesson metadata.
+
+## Controls
+
+| Control | Effect |
+| --- | --- |
+| RUN | Pause/resume retained state; a frame exit requires RESET. |
+| RESET | Reset both copies and their clocks/trails, retaining selected parameters; wait paused. |
+| SPEED, first station | Reset with 0.6, 1, 1.25 or 1.6 times this softened model&#x27;s circular speed at radius 3 m. |
+| REVERSE, first station | Negate current satellite velocity without resetting position or time. |
+| BODIES, second station | Toggle two/three equal 4 kg masses; reset. The first pair&#x27;s initial states remain the same. |
+| NUDGE, second station | Reset paired copies with 0, 0.03 or 0.15 m added only to the last body&#x27;s initial X in copy B. |
+| PATH | Hide/show history; recording continues. |
+| PARTS | Show acceleration arrows, scaled 0.30 m per m/s² and capped at 2 m; baseline maximum acceleration stays numerical on the board. |
+| RULE | Reveal softened law, units, integration frequency and fixed/mutual response. |
+
+## Model and retained state
+
+G=1 m³/(kg s²), epsilon=0.25 m. Pair force is G mi mj r/(r²+epsilon²)^(3/2). The first experiment assigns no acceleration to source zero (12 kg); satellite mass is 1 kg. The second adds equal and opposite pair forces before dividing by each 4 kg receiving mass. This is a changed model of close attraction, not an exact point-gravity solver.
+
+Velocity Verlet advances at 1/240 s. Each step computes all accelerations, half-kicks velocity, drifts positions, recomputes accelerations and finishes the kick. Frame-delta catch-up caps at 0.25 s, so a longer stall does not simulate all elapsed wall time.
+
+The equal pair begins at X=-2/+2 with opposite tangential velocities calculated for a softened circular pair. The third begins at (0,0,2.6), velocity zero. A nudged comparison retains its changed centre of mass: no recentering or velocity adjustment. RMS separation measures corresponding positions at the same model time; it is not a Lyapunov exponent.
+
+Both models calculate in X–Z. Opaque bodies render at Y=1.45; translucent comparison bodies at Y=2.10. This offset is display only. Bodies have no mutual collision or player-force coupling. The visitor can stand within the plan.
+
+Trails sample at 20 Hz, retain 240 positions per body and reuse mesh resources. The entire experiment freezes when any body&#x27;s absolute X or Z exceeds 5.2 m. Outgoing velocity is preserved. This is an observation cutoff, neither a wall response nor a proof of escape.
+
+## Evidence
+
+The actual-museum desktop probe commons/testing/probe_gravity_relations.gd passes 51 checks: circular motion, reversal, conservation tolerances, third-body contributions, controlled nudges, deterministic replay, frame cutoff, bounded trails, controls and sampled capsule approaches. At four seconds, the selected three-body baseline has momentum residual 0.00001985 kg m/s and energy ratio 0.99992286 relative to its beginning. Tested momentum tolerance is 0.001 kg m/s; the solver uses finite-precision Vector3 state. These bounds describe this checked interval, not all possible configurations. Headset reach, comfort, performance and detailed secondary review remain open.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="VFM_07_Gravity/intent.md">Raw captured source</a></p><pre># Gravity: Moving References
+
+Question: what changes when a reference becomes a responding body?
+
+Two primaries in walking order: orbital_mechanics_demo (lesson:gravity_orbit), then three_body_problem (lesson:gravity_relations). First change an initial speed and reverse a current velocity around a held source. Next run a mutual pair, introduce a third mass, and compare paired beginnings through one changed X coordinate.
+
+The source of attraction becomes mobile; vector subtraction now describes a relation that changes as both ends move. Model limits remain visible: omitted reaction in the first model, softened close encounters, no collisions, two planar copies separated only for display, bounded history and a finite observation frame.
+
+All eleven artifact identities remain; nine supporting pieces wait beyond the two experiments. Next: VFM_09_Legs, where contact and support become necessary. Headset reach and comfort remain pending.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="VFM_07_Gravity/critical.md">Raw captured source</a></p><pre># The centre is an assignment
+
+The first apparatus makes its source immune to the response it produces. Its zero acceleration is a branch in the code, not a natural distinction between kinds of matter. In the second apparatus, the same pair law acts on both receivers. The centre of mass becomes a relational location, unoccupied by any privileged object.
+
+Adding a third body lets the visitor change the conditions under which the earlier pair existed. It does not license a leap from complexity to freedom, or from an irregular path to chaos. The comparison retains a declared change to one initial coordinate, including its shift of the centre of mass. The visible separation belongs to that experiment.
+
+Ask where the apparent skin of the glowing body goes during a close passage. The model has mass and position but no collision surface. Its epsilon changes close attraction; its trail discards older positions; its observation boundary freezes an outgoing state. Each is a particular condition of this world&#x27;s existence, and an available place to vary it later.
+
+The visitor is another receiver again: visually inside the calculation but not among its attracting masses. VFM_09_Legs can bring this withheld relation to the foreground through support and contact. A queer reading can begin with those assignable permissions—who may act, who must respond, what can overlap—while keeping their exact implementation available to question.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="VFM_07_Gravity/artifacts.md">Raw captured source</a></p><pre># Gravity: Moving References — artifacts
+
+Two primary book anchors; all eleven artifact identities preserved.
+
+| Role | Artifact |
+| --- | --- |
+| secondary | `exercise_1_8_solution_attraction_magnitude_vr` |
+| secondary | `gravity_well` |
+| primary | `orbital_mechanics_demo` |
+| primary | `three_body_problem` |
+| secondary | `nbody_simulation` |
+| secondary | `forcedirected3d` |
+| secondary | `orbit_pair` |
+| secondary | `example_2_8_two_body_attraction_vr` |
+| secondary | `example_2_9_n_body_attraction_vr` |
+| secondary | `grid3d_force_directed` |
+| secondary | `chaos_attractor` |
+
+The first two encounters use the shared gravity_relations.gd experiment. Nine retained supporting artifacts have separate legacy implementations; their detailed controls and models are not recertified by this pass.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="VFM_07_Gravity/blurb.md">Raw captured source</a></p><pre>Who gets to stay still? Alter an orbit around a held source, then let two and three bodies respond to one another. Compare a changed beginning without changing the interaction law.
+</pre></section></body></html>

@@ -1,0 +1,90 @@
+--- Shader_01_Shaping/title/before
++++ Shader_01_Shaping/title/after
+@@ -1 +1 @@
+-Write a rule for each surface sample
++Give a familiar form a surface rule
+--- Shader_01_Shaping/storyboard/before
++++ Shader_01_Shaping/storyboard/after
+@@ -1 +1 @@
+-At the five graph panels, the student follows a threshold and then a moving wave. They bring functions, sine, coordinates and colour mapping, then write one small fragment rule that reads supplied UV coordinates and assigns a colour. A named uniform exposes one input; step and smoothstep offer distinct transitions. The panel mesh, shader material connection and graph overlay are supplied. They leave with a usable surface shader and understand why reading TIME anew differs from advancing a stored phase, without retelling sine as if it had never appeared.
++At the graph panels, the student returns to the point, distance and the boundary of a face. Bringing coordinates, functions, colour mapping and the garment studio’s first shader, they make one circular mark from distance to a chosen centre. A threshold turns that distance into an inside and an outside; a narrow transition softens the visible edge. The existing graphs explain the rule. The panel, material binding and coordinate display are supplied. The student changes centre and radius independently, then explains why the mark moved while the panel did not. They carry a small mask function and its parameters. A band or box is a later variation; the timed graph remains a comparison, not a second opening lesson.
+--- Shader_01_Shaping/storyboard_short/before
++++ Shader_01_Shaping/storyboard_short/after
+@@ -1 +1 @@
+-Use graph panels. Reuse functions, sine, coordinates and colour mapping. Teach a fragment rule reading UV and assigning colour, with one uniform; compare step and smoothstep. Supply panel mesh, material connection and graph overlay. Carry a usable shader; distinguish reading TIME from advancing stored phase. Open: settle the inconsistent FREQUENCY versus TIME-times-speed demonstration.
++Use graph panels to explain a circular mark. Reuse point distance, functions, colour mapping and garment UVs. Teach coordinate → distance → mask; expose centre/radius and compare sharp/soft edge. Supply panel/material binding. Check: move centre without changing radius; explain unchanged mesh. Carry mask + settings. Optional band/box; defer clock analysis. Open: learner binding; softened edge needs valid bounds.
+--- Shader_05_Patterns/title/before
++++ Shader_05_Patterns/title/after
+@@ -1 +1 @@
+-Make a tile address inside every tile
++Transform the form inside its address
+--- Shader_05_Patterns/storyboard/before
++++ Shader_05_Patterns/storyboard/after
+@@ -1 +1 @@
+-The tiled panel shrinks one shape into a repeated field, while the garden carries pattern across fixed flowers. Bringing array addresses, tiling and the earlier garment sampler, the student deepens shader coordinate use by separating a tile's integer address from its local fractional position. They use the address to choose a variation and local position to draw the same motif. The panel, shape-distance helper and garden receiver are supplied. The outcome is a reusable procedural pattern whose seams and phase can be explained without creating one geometry node for every mark.
++The tiled squares return to the earlier floor and garment, where a pattern already depended on how it was sampled. The student brings the retained mask, transforms and array addresses. They first offset and turn a band or asymmetric version of the mark around a named centre, then repeat it in a four-by-four study. The integer tile address chooses a variation; the fractional coordinate evaluates the form inside that tile. One chosen tile turns while the rest keep their orientation. They carry the mask, coordinate transform and address rule as separate parts. The garden offers a further comparison: its supplied world projection lets a pattern cross several bodies. Moving the learner’s function there needs an explicit adapter that preserves that projection.
+--- Shader_05_Patterns/storyboard_short/before
++++ Shader_05_Patterns/storyboard_short/after
+@@ -1 +1 @@
+-Use tiled panel and garden. Reuse garment sampling, array addresses and fragment rules. Teach integer tile address for variation and fractional position for drawing one motif; inspect seams and phase. Supply panel, shape-distance helper with explicit inputs/output and garden receiver. Carry procedural repetition without per-mark nodes. Open: applying the learner's material to the garden remains proposed.
++Use tiled panels; return to floor/garment sampling. Reuse mask, transforms and array addresses. Offset/turn an asymmetric mark, then repeat 4×4. Teach floor = tile ID; fract = local coordinate. Check: turn one tile only. Carry mask + transform + address rule. Supply host; garden projection stays world-based. Open: binding/transfer adapter. Deferral: no new Shapes/Matrices halls.
+--- Shader_11_QueerRubber/title/before
++++ Shader_11_QueerRubber/title/after
+@@ -1 +1 @@
+-Make a surface answer the viewer
++Let one material meet different bodies
+--- Shader_11_QueerRubber/storyboard/before
++++ Shader_11_QueerRubber/storyboard/after
+@@ -1 +1 @@
+-Walking around the black ring, the student separates its moving rainbow rim from the lamp's highlight. They bring dot products and shader colour output, then meet the normal: a supplied vector describing the surface's direction. With normal and view direction normalized in the same reference frame, their dot product becomes a rim rule. The vectors, material host and lit exhibit bodies are supplied; a teaching material is proposed on an existing comparison body. They learn to compose view-dependent emission and carry a reusable rim material, distinguishing its response to the viewer from received light.
++The black ring catches a rainbow rim while the larger primitive bodies answer the lamps. The student returns to the faceted sphere, the garment’s curved receiver and the distinction between moving an object and moving around it. They compare one proposed teaching material on a sphere and a cube before adding a rim from supplied normal and view vectors in the same frame. Dot products now become an appearance. Keeping the material fixed, they change the body or viewpoint and account for the difference. They carry a material whose receiver matters. The existing leather, plastic and oil-like appearances remain available for looking and interpretation; the lesson does not require rebuilding all of them.
+--- Shader_11_QueerRubber/storyboard_short/before
++++ Shader_11_QueerRubber/storyboard_short/after
+@@ -1 +1 @@
+-Use black ring's rainbow rim and lamp highlight. Reuse dot products and shader colour. Teach supplied surface normal; normalize it and view direction in one frame before forming a rim rule. Supply vectors, material host and lit bodies. Carry view-dependent emission distinct from received light. Open: teaching material on a comparison body remains proposed; no installed desks.
++Use ring and staged primitives. Reuse faceted sphere, curved garment, transforms, dot product and retained material. Compare one material on sphere/cube; teach rim from unit normal/view vectors in one frame. Check: predict changed rim with body/viewpoint changed and material fixed. Carry receiver-aware material. Supply geometry/vectors/lamps. Open: shared-material and hold controls absent; emission is not a lamp.
+--- Shader_09_FBM/title/before
++++ Shader_09_FBM/title/after
+@@ -1 +1 @@
+-Layer a material and locate its support
++Let a field enter the form
+--- Shader_09_FBM/storyboard/before
++++ Shader_09_FBM/storyboard/after
+@@ -1 +1 @@
+-The student crosses the glass above the basin, then studies the layered noise panels. They bring weighted field sums and a working fragment shader, and make a finite octave loop that retains frequency and amplitude as separate running values. They map its result into colour, producing a material they can apply to another supplied surface. The base noise function, panel material and basin assembly are supplied. The glass bears the visitor while water moves beneath it; its existing displacement remains supplied, so this lesson deepens field composition without silently introducing the vertex-shader stage.
++The student crosses the glass above the moving basin, then returns to the noise panels with the form function they have kept. Noise and weighted sums are familiar; here a finite shader loop combines a few scales with separate frequency and amplitude updates. A bounded contribution disturbs the mask’s boundary while the panel mesh stays fixed. Compare no disturbance with the chosen amount before adding time. The student changes the finest contribution while retaining the broad form and explains the difference. They carry a field function and its range. The basin’s vertex displacement and normal construction are supplied comparisons: its surface moves, but the glass is what carries the visitor.
+--- Shader_09_FBM/storyboard_short/before
++++ Shader_09_FBM/storyboard_short/after
+@@ -1 +1 @@
+-Use layered panels and glass above moving water. Reuse weighted fields and fragment shader. Teach finite octave accumulation with separate frequency/amplitude values, then colour mapping. Supply base noise, panel material and basin assembly, including water displacement and normals. Carry reusable layered material. Glass supplies support; the water material supplies no collision. Defer vertex-stage teaching.
++Use noise panels and glass-covered basin. Reuse mask, weighted sums and Noise. Teach bounded octave loop; keep frequency/amplitude separate. Perturb mask boundary; compare zero contribution before adding time. Check: change fine detail while retaining broad form. Carry field + range. Supply base noise/material host and basin displacement/normals. Glass supplies support. Defer vertex teaching; coordinate warp optional.
+--- Shader_12_PinkExtravaganza/title/before
++++ Shader_12_PinkExtravaganza/title/after
+@@ -1 +1 @@
+-Compose excess with known operations
++Compose a body and its appearance
+--- Shader_12_PinkExtravaganza/storyboard/before
++++ Shader_12_PinkExtravaganza/storyboard/after
+@@ -1 +1 @@
+-Among the pink water, sagging sphere and assembled plural body, the student chooses an effect to keep. Bringing transformations, waves and view-dependent materials, they compose known colour and emission rules beside a supplied sine-displacement effect, recording which operation changes appearance and which moves vertices. The exhibit geometry, lamps and displacement are supplied. No new shader stage is required: the gain is deliberate composition and an account of what the surface actually does. They carry a material recipe without mistaking emitted colour for a lamp or decorative water for a fluid interaction.
++Among the pink water, sagging sphere and plural body, the student chooses an arrangement worth keeping. They bring the form, repetition, rim and layered field developed here, together with Melencolia’s earlier work of composition. Choosing a supplied body, they combine a limited set of those operations and record what each contributes. One alternate version keeps the geometry but changes its appearance. They distinguish whole-object transformation, supplied vertex deformation and fragment colour. The outcome is a material recipe with reasons for its choices, not a new compulsory technique. The room’s associations remain open: which setting is a default, and who gets to call its appearance excessive?
+--- Shader_12_PinkExtravaganza/storyboard_short/before
++++ Shader_12_PinkExtravaganza/storyboard_short/after
+@@ -1 +1 @@
+-Use pink water, sagging sphere and plural body. Reuse transforms, waves and view-dependent materials. Compose colour and emission beside supplied sine displacement; identify appearance changes versus moving vertices. Supply geometry, lamps and displacement. Carry a deliberate material recipe; emission is not a lamp, nor decorative water fluid interaction. Open: composition station remains proposed; require no new shader stage.
++Use pink water, sagging sphere and plural body. Reuse Melencolia composition + retained form, repetition, rim and field. Compose limited known effects on supplied body; record choices. Check: make an alternate appearance with geometry fixed; distinguish transform/vertex/fragment. Carry material recipe. Supply lamps/geometry/deformation. Open: composition binding absent. No new compulsory syntax; pink alone is not a theory of queerness.
+--- Shader_10_ReactionDiffusion/title/before
++++ Shader_10_ReactionDiffusion/title/after
+@@ -1 +1 @@
+-Name what a changing image must remember
++Ask what the form must remember
+--- Shader_10_ReactionDiffusion/storyboard/before
++++ Shader_10_ReactionDiffusion/storyboard/after
+@@ -1 +1 @@
+-The green reaction-diffusion panel asks for a previous texture it does not receive; beside it, branching frost changes without retaining growth. Bringing fragment functions, time and stored state, the student draws a small data-flow account of each image and identifies what must be kept between updates for a simulation to evolve. The panels, shader excerpts and texture-reading function are supplied. This is a reflective threshold, not a demand to repair the exhibit. They carry the explicit requirement for separate old and new state into the next room's working cellular automaton.
++The green panel asks for a previous texture it does not receive. Beside it, branching frost looks grown without retaining that growth. The student brings the form recomputed from coordinates, Paint’s retained image and earlier old-state/new-state updates. They trace which inputs produce each picture, then sketch what would have to be stored for a changed mark to affect the next update. Restarting a clock and restoring a saved state become different operations. They carry this explicit state contract into Cellular Automata. The existing panels and texture-reading excerpts are supplied; this reflective threshold does not require repairing the exhibit or claim that its missing feedback already works.
+--- Shader_10_ReactionDiffusion/storyboard_short/before
++++ Shader_10_ReactionDiffusion/storyboard_short/after
+@@ -1 +1 @@
+-Use green reaction-diffusion panel and branching frost. Reuse fragment functions, time and stored state. Draw each image's data flow; identify required previous input. Supply panels, shader excerpts and texture-reading function. Carry separate old/new state into Cellular Automata. Preserve reflection: the host lacks previous-frame feedback and frost retains no growth; do not promise evolving chemistry or repair the exhibit.
++Use green panel and apparently grown frost. Reuse retained form, Paint history and old/new state. Trace inputs; name what a changed mark must leave for next update. Check: explain clock restart versus state restore. Carry old-state → rule → new-state contract into CA. Supply panels/texture-reading excerpts. Host lacks previous-frame feedback; no promise of evolving chemistry or implemented transport.

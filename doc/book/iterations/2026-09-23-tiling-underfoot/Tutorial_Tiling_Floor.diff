@@ -1,0 +1,23 @@
+--- before/commons/maps/Tutorial_Tiling_Floor/final.md
++++ commons/maps/Tutorial_Tiling_Floor/final.md
+@@ -1,6 +1,6 @@
+ How much floor can one small decision make?
+ 
+-The cubes gave us addresses. Now the addresses receive a motif: a square divided diagonally into black and white. Six fields lie underfoot. Before reading their names, find two that seem related. What has stayed the same between them?
++The cubes gave us addresses and room to move between them. Back on the ground, the addresses receive a motif: a square divided diagonally into black and white. Six fields lie underfoot. Before reading their names, find two that seem related. What has stayed the same between them?
+ 
+ <!-- @tiling_principles -->
+ 
+@@ -22,7 +22,11 @@
+ 
+ Now look at ONE EXCEPTION. Initially it repeats the unexceptional translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. Find the difference from a distance, then approach it. Does it read as a direction, an error, an opening? Choose one reading. What would you have to add to make that reading available to someone else?
+ 
+-These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous.
++![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
++
++*The six images used by the floor artifact, shown face-on for comparison. The source orientation is the same in all six; EXCEPTION is switched on in the last field. The little square at the top is their source motif.*
++
++These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous. Your eye can find a ridge where your foot finds no step.
+ 
+ <!-- @ -->
+ 

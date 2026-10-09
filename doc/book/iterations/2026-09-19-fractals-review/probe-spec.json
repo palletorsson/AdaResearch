@@ -1,0 +1,12 @@
+{
+  "rays": [
+    {"tag":"gallery-entry", "x":9.5,"z":19.5,"top":0},
+    {"tag":"pyramid-approach", "x":6.5,"z":22.65,"top":0},
+    {"tag":"comparison-aisle", "x":9.5,"z":25.5,"top":0},
+    {"tag":"exit", "x":9.5,"z":27.5,"top":0}
+  ],
+  "shots": [
+    {"tag":"pyramid", "from":[8.8,1.7,22.8],"look_at":[6.5,1.35,25.5],"fov":65},
+    {"tag":"desk", "from":[6.5,1.7,22.3],"look_at":[6.5,1.35,25.4],"fov":70}
+  ]
+}

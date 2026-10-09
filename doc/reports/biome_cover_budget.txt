@@ -1,0 +1,48 @@
+── probe_biome_cover ──
+kingdom   recipe        verts   tris fraction
+  ... building flora/blade
+flora     blade             9      7     0.50
+  ... building flora/frond
+flora     frond            10     12     0.30
+  ... building flora/bloom
+flora     bloom            11     15     0.20
+flora                           10.1  (mean per instance)
+  ... building fungus/cap
+fungus    cap              25     30     0.45
+  ... building fungus/toadstool
+fungus    toadstool        20     24     0.30
+  ... building fungus/bracket
+fungus    bracket          14     20     0.25
+fungus                          25.7  (mean per instance)
+  ... building fauna/burrow
+fauna     burrow           13     18     0.40
+  ... building fauna/track
+fauna     track             8      4     0.35
+  ... building fauna/egg
+fauna     egg              14     24     0.25
+fauna                           14.6  (mean per instance)
+  ... building mineral/shard
+mineral   shard            13     18     0.65
+  ... building mineral/chip
+mineral   chip              5      4     0.35
+mineral                         13.1  (mean per instance)
+  ... building water/reed
+water     reed             10     15     0.45
+  ... building water/lily
+water     lily              9      7     0.40
+  ... building water/sedge
+water     sedge             9      7     0.15
+water                           10.6  (mean per instance)
+  ... building meta/mote
+meta      mote              6      8     0.70
+  ... building meta/stroke
+meta      stroke            4      2     0.30
+meta                             6.2  (mean per instance)
+  ... building ?/tuft
+?         tuft              4      2     1.00
+?                                2.0  (mean per instance)
+
+worst kingdom mean = 25.7 tris/instance
+projected worst-case map = 241 cells x 50 instances = 309685 tris
+
+PASS

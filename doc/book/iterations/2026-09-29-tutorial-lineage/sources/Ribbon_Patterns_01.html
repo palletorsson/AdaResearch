@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ribbon_Patterns_01 · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Ribbon_Patterns_01">← Tutorial lineage</a></p><h1>Ribbon Patterns 01</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Ribbon_Patterns_01/final.md">Raw captured source</a></p><pre># A mark acquires an inside
+
+The mark has acquired an inside. Can you find it?
+
+In the previous room, one source could repeat, reverse and slip across a plane. The corridor wrapped a pattern around several faces. Here, look between the faces. There are addresses behind the ones you can see.
+
+&lt;!-- @grid_2d_4x4 --&gt;
+
+The two grids near the entrance begin this study. The bars, shelves and sorting race further along the hall offer other ways to revisit arrays; start here with the low array. Sixteen cubes hold the same arrangement of four colours you have met in the pattern lessons. Find the blue corner, then the bend in red. The pale cells belong to the array too. Pale does not mean absent.
+
+These cubes have bodies, but their addresses use only two indices: a row and a column. Giving a cell a visible thickness has not added a third index to its data. The room has made a two-dimensional arrangement out of three-dimensional objects.
+
+At the console, press **X +** and **Z +**. Follow the turquoise frames. One frame selects a cell in the volume. The other shows the source cell from which it takes its colour. The displayed order is `SOURCE [z][x]` and `VOLUME [y][z][x]`; the same coordinates are placed in the room as `Vector3(x, y, z)`. We have to choose an order for storage as well as directions for space.
+
+&lt;!-- @grid_3d_4x4x4 --&gt;
+
+Press **LAYER +**. Keep x and z where they are. The selected address rises, while the source frame remains on the same cell. Do it again. For now, the four layers repeat the same source. Sixteen values have supplied sixty-four positions, but the added room is not yet being used to vary the pattern with height.
+
+Turn on **SLICE** with **SLICE / ALL**. Three layers disappear from view. Read the counter: sixteen visible, sixty-four stored. Press **LAYER +** to inspect another layer. You are choosing what the display reveals, not cutting data out of the array. The hidden cells have not become empty.
+
+Now press **REPEAT / SHIFT**. Stay with the selected volume address and watch the source frame. At layer one it reads one column further along the source. At layer two it reads two further along. Crossing the fourth column wraps the lookup back to zero.
+
+Move through the slices before turning **ALL** back on. Can you anticipate where the blue will appear above its current position? In the full volume, the layers make a stepped relation that no single slice contains.
+
+The changed rule is small. This is the lookup used to fill the volume:
+
+```gdscript
+func sample(x: int, y: int, z: int) -&gt; int:
+    var source_x: int = (x + y) % 4 if shifted else x
+    return SOURCE[z][source_x]
+```
+
+Each result is stored at `values[y][z][x]` and selects a colour for the cube at `Vector3(x, y, z)`. The cubes keep their positions. Height has entered the colour lookup. Changing appearance across layers and moving the layers are different operations, even when both can suggest a slant.
+
+Use **UNDO** to recover a previous rule, slice view or selected address. Find a change you can explain by following the source frame, then one that is difficult to see from where you stand. A stored value may be accessible to the program while another cube hides its visible body from you.
+
+&lt;!-- @ --&gt;
+
+What bodies are possible here? The extra index gives us another direction in which to arrange relationships. This particular rule makes repeated or shifted colour layers. It has not made a solid you can carve, a fabric that bends, or an organism that grows. Those would require further rules about what a value does.
+
+There is already a decision worth returning to: every palette index receives a cube. Zero is a pale body. If zero meant no body, the same arrangement of numbers could admit gaps. If a value controlled density, resistance or affinity, other relations would become possible. We have not implemented those meanings at this station. We have found where they could enter.
+
+For now, a slice lets you see by withholding most of the display. That is a useful reduction, provided we remember the forty-eight cells it leaves out. Turn the full volume back on before leaving. In **Ribbon_Patterns_02**, carry this distinction between stored value and visible appearance into the material and conditions that let a pattern be seen.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Ribbon_Patterns_01/technical.md">Raw captured source</a></p><pre># A source becomes four layers
+
+The two primary artifacts are `grid_2d_4x4` and `grid_3d_4x4x4`. The latter enables `#lesson:layer_pattern`, pairing with the planar artifact inside the same museum hall. Both sit in the west bay so the central museum route does not divide the comparison.
+
+The fixed source is a 4 by 4 array of palette indices, stored as `SOURCE[z][x]`. The lesson fills `values[y][z][x]`, a 4 by 4 by 4 array. In REPEAT, each height layer reads `SOURCE[z][x]`. In SHIFT, it reads `SOURCE[z][(x+y)%4]`. Integer lookup changes the colours without changing cell positions. The existing CubeBaseMesh nodes display the values; each has its own material. Flat and volume source palettes agree.
+
+Six pointer controls select X, Z and LAYER, switch SLICE/ALL and REPEAT/SHIFT, and UNDO the previous state. Index controls wrap at four. Undo holds up to 32 states. A turquoise frame marks the selected volume cell; the other marks its actual source lookup. The console spells out index order and shows 16 visible/64 stored in SLICE, or 64 visible/64 stored in ALL.
+
+Slice visibility only changes Node3D.visible. It retains all 64 nodes and array values. The study freezes the existing pickup cubes and disables their collection detection in these two instances, so decorative bobbing and collection do not change the addresses being compared. These displays are not a climbable or carveable solid. Other instances retain pickup behaviour.
+
+The 3D artifact rebuild now detaches old generated children synchronously before generating replacements. It also retains configuration received before _ready and applies it after the default build. Previously early and deferred initialization could leave duplicate lattices. The probe counts physical Cube_ children as well as the lesson&#x27;s references.
+
+Primary/book anchors agree. The other nine artifacts remain secondary; sorting is an optional revisit rather than a required step in this lesson. Headset reach and continuous gestures are deferred. Rendering uses coloured cube meshes, not a newly authored volume shader; the closing shader/fabric studio remains later in the route.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Ribbon_Patterns_01/critical.md">Raw captured source</a></p><pre># What does a value permit?
+
+The same zero can mean a pale cube, an empty cell or a prohibition on entering. At this station it means the first. The array does not decide that meaning on its own; a rendering rule gives the number a body. Changing that rule would change the kinds of space the arrangement could offer.
+
+The added height index permits independent positions above a source cell, but our two recipes constrain their values. Repeating and shifting a source do not exhaust the volume&#x27;s possibilities. A capability and the particular use we make of it should remain distinguishable.
+
+Slice view is another authored decision. It makes an interior available by hiding forty-eight bodies, retaining their data. That reduction helps us learn. Its visible/stored counter also admits the cost: what the reader can inspect now is less than what is there. A useful interface keeps that difference recoverable.
+
+The book asks what bodies become possible with each added capability. Here the question lands on addresses, palette indices, display visibility and the rule that assigns a body to a value. Material response, deformation and inhabitation still require their own encounters.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Ribbon_Patterns_01/summary.md">Raw captured source</a></p><pre># An address gains depth
+
+A paired planar and volumetric study follows Symmetry_Seventeen. Select corresponding addresses, repeat one motif through four layers, then make the source lookup depend on height. Slice view reveals the interior while retaining all 64 values. The distinction is between changing a lookup, changing visibility and changing geometry.
+
+Primary: grid_2d_4x4 and grid_3d_4x4x4. Both now occupy the west bay with a shared plinth console. Nine supporting artifacts remain in the collection, with sorting treated as an optional revisit. Continue to Ribbon_Patterns_02 for the carrier and viewing conditions. Shader and garment applications remain in the closing-room plan.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Ribbon_Patterns_01/blurb.md">Raw captured source</a></p><pre>The mark acquires an inside. Follow a source address into four layers, then let height change what it reads. Hide three layers to see one clearly; the counter remembers what the view leaves out.
+</pre></section></body></html>

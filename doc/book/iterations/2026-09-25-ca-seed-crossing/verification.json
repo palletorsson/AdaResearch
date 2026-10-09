@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "only original INJECT paragraph expanded",
+      "passed": true
+    },
+    {
+      "name": "last three original INJECT sentences retained",
+      "passed": true
+    },
+    {
+      "name": "three code excerpts preserved exactly",
+      "passed": true
+    },
+    {
+      "name": "clockmaker and concluding passage preserved",
+      "passed": true
+    },
+    {
+      "name": "artifact anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "unchanged blurb.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged critical.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged eye_shot.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged field_notes.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged summary.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged walked.md",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/artifacts/rd_artifact/live_field.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/artifacts/rd_artifact/rd_artifact.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/graph_grammar/operations/rd_displace_op.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/maps/sequences/cellularautomata.json",
+      "passed": true
+    },
+    {
+      "name": "map differs only by opt-in seed flag",
+      "passed": true
+    },
+    {
+      "name": "all native root placements retained",
+      "passed": true
+    },
+    {
+      "name": "49 native assertions pass",
+      "passed": true
+    },
+    {
+      "name": "eight real pointer events pass",
+      "passed": true
+    },
+    {
+      "name": "no GDScript errors",
+      "passed": true
+    },
+    {
+      "name": "only this core room updated",
+      "passed": true
+    },
+    {
+      "name": "core manuscript and map hashes current",
+      "passed": true
+    },
+    {
+      "name": "canonical image is original native photograph",
+      "passed": true
+    }
+  ]
+}

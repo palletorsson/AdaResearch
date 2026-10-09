@@ -1,0 +1,47 @@
+--- before/final.md
++++ current/final.md
+@@ -2,7 +2,7 @@
+ 
+ In the previous hall, a cube learned to rise, turn and swell. You could watch those movements, walk around them, leave them running.
+ 
+-Here the floor is missing.
++Here the floor is missing. Fire glows at the bottom of the basins. If you fall into the fire, you die. The museum returns you to a save point, and you can try the crossing again.
+ 
+ Stand at the first gap. Look across, then down. The far side is already there. What would have to change for it to become somewhere you can go?
+ 
+@@ -65,7 +65,7 @@
+ mesh_instance.rotation_degrees = rotation_axis * current_angle
+ ```
+ 
+-The visible plank and its collision body turn together, between zero and ninety degrees, with a four-second pause at each end. The plank is 3.6 metres long, one metre wide and 20 centimetres thick. Its upper face stays level with the floor; its ends overlap the banks when aligned.
++The visible plank and its collision body turn together, between zero and ninety degrees, with a four-second pause at each end. The plank is three metres long, one metre wide and 20 centimetres thick. Its upper face stays level with the floor; its ends meet the banks when aligned.
+ 
+ From the bank, follow one end with your eyes as it turns away again. The centre stays in place while the end sweeps a curve around it, carrying the edge of your crossing out of reach.
+ 
+@@ -77,13 +77,13 @@
+ 
+ The plank has the same length, the same centre, the same quarter-turn. You have moved the place it needs to reach.
+ 
+-At the starting setting, the aligned plank overlaps the landing by thirty centimetres. Move the bank beyond that overlap and a gap opens between their surfaces. The readout measures their separation; a minus sign means they still overlap.
++At the starting setting, the aligned plank meets the landing edge to edge. Move the bank and a gap opens between their surfaces. The readout measures how far apart they have become.
+ 
+-![The aligned plank overlaps the landing at BANK +0.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-at-crossing.png)
++![The aligned plank meets the landing at BANK +0.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-edges-meet.png)
+ 
+-![A gap opens beyond the same plank at BANK +1.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-gap.png)
++![A gap opens beyond the same plank at BANK +1.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-full-gap.png)
+ 
+-*The same crossing at two bank settings: thirty centimetres of overlap, then seventy centimetres of gap. The plank holds the same quarter-turn in both views. The camera has not moved.*
++*The same crossing at two bank settings: meeting edges, then a one-metre gap. The plank holds the same quarter-turn in both views. The camera has not moved.*
+ 
+ Let the plank turn again. An operation that worked a moment ago keeps running exactly as before. The crossing has lost one of its agreements.
+ 
+@@ -100,6 +100,8 @@
+ 
+ Bring the landing back with RESET. The plank has kept making the same turn through both crossings. The bank was part of what made one of them work; giving it a handle lets us find out how.
+ 
++The travelling cube asks you to board and stay with it. The growing cube asks you to wait until it reaches the banks, then cross before it shrinks. The turning plank gives you a pause in which to cross. A place to stand can also be a moment you have to meet.
++
+ The timers keep going while you think. The simulation supplies an opening and a duration. It does not know how long you need to understand what just carried you.
+ 
+ There is more to examine beside the route: measurements, matrices, the order of operations. For now, take the experience of crossing into the next hall, where displacement has more work to do.

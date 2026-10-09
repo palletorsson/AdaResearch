@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-05",
+  "scope": "This pass changes tutorial.md and its teaching metadata. It leaves final.md and museum runtime code intact. The images are earlier captures from inside the Endless Museum, with dates and provenance; they are not new playtests. Student code edits are exercises described in the lessons, not changes applied to the museum. Source reading supports the explanations; hands-on learning and headset comfort still need a trial.",
+  "topics": [
+    [
+      "Pickup / release",
+      "Point_Coordinates",
+      "Separate the body from its connection to the hand; release restores this sphere's frozen state."
+    ],
+    [
+      "Grip alignment",
+      "Point_Trace",
+      "Move the grip relative to the nib, keeping the recorded tip explicit."
+    ],
+    [
+      "Named actions",
+      "Color_Paint",
+      "Follow trigger_click press/release and trigger pressure through the supplied input route."
+    ],
+    [
+      "Interaction states",
+      "Trans_Introduction",
+      "Introduce target/current state; Paint returns to held, active and receiving states."
+    ],
+    [
+      "Targeting",
+      "Color_Paint",
+      "Follow the nozzle ray, first eligible collision, receiving surface and range checks."
+    ],
+    [
+      "Snapping",
+      "Point_Line_Grid",
+      "Round fitted display coordinates in XYZ while preserving the source drawing."
+    ],
+    [
+      "Feedback",
+      "Trans_Introduction",
+      "Read actual bank motion; Paint distinguishes valve feedback from successful deposition."
+    ],
+    [
+      "Surface painting",
+      "Color_Paint",
+      "Convert a world hit into surface UV and call the existing shared drawing operation."
+    ]
+  ],
+  "halls": [
+    {
+      "map": "Point_Coordinates",
+      "title": "Carry a position",
+      "topics": [
+        "Pickup / release"
+      ],
+      "before": "The lesson already followed the black sphere and compared local with world coordinates. Release was mentioned without explaining what happens to the body.",
+      "change": "Keep that focus. Explain that releasing ends the hold and restores this point's frozen state. The sphere stays in the room; its own held-state guide disappears.",
+      "exercise": "Disable pickup, restore it, choose another starting position, then carry and release the point while naming each coordinate frame.",
+      "carry": "A held body and a position can be connected without treating the hand, mesh, collider and coordinate frame as one thing.",
+      "sources": [
+        "commons/primitives/point/point_condition.gd",
+        "commons/primitives/point/interactive_point_origin.gd",
+        "commons/primitives/point/interactive_point_origin.tscn",
+        "addons/godot-xr-tools/objects/pickable.gd",
+        "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd"
+      ],
+      "images": [
+        {
+          "source": "doc/book/iterations/2026-10-03-coordinates-existing-point/held-point.png",
+          "file": "figures/coordinates.png",
+          "date": "2026-10-03",
+          "caption": "The black held point is in the foreground. Its coordinate frame and LOCAL readout remain in the room.",
+          "evidence": "doc/book/iterations/2026-10-03-coordinates-existing-point/source_manifest.json",
+          "kind": "Existing museum capture",
+          "sha256": "8ef92c9316b6e5a5b30b63b0e8dbb1f07be62af30fb22d5f6753def5b0b4ea82"
+        }
+      ],
+      "tutorial_sha256": "d9c92c1aa50d785b6168396e10460086a6dea649e2ac6b74f20617d1845d4c26",
+      "words": 837,
+      "subjects": [
+        "Pickable",
+        "3D coordinate system",
+        "Local and world position"
+      ],
+      "source_hashes": {
+        "commons/primitives/point/point_condition.gd": "8b0b7eca1cc404a7668561d748c3cb1f46682dfae40fa14431334faba09e58f7",
+        "commons/primitives/point/interactive_point_origin.gd": "c3fc5ae2b0e114677d17a93cb6a1c5f4b7c30bdbf33c2b1abc002abe553478bc",
+        "commons/primitives/point/interactive_point_origin.tscn": "05db77a52d667a3f5fbad53f18d22a943c017c1c90e2e0e014dac57f5f396129",
+        "addons/godot-xr-tools/objects/pickable.gd": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7",
+        "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd": "9bad812f30fc9fa327beb0fbf818b9e7fccbe15280c22326ab6fe5be177e1b16"
+      }
+    },
+    {
+      "map": "Point_Trace",
+      "title": "A grip, a tip, a retained line",
+      "topics": [
+        "Grip alignment"
+      ],
+      "before": "The earlier lesson taught a portable starter and a different persistence arrangement. The museum pen's grip and shaped, cumulative record were not the teaching host.",
+      "change": "Follow the existing red pen: movement gate, shaped world position, ordered list and neighbour traversal. Distinguish WritingGrip from WritingTip; release copies the retained record into session storage.",
+      "exercise": "Move the grip three centimetres towards the nib, compare the held reach with each hand, then restore it. Draw and release a bend for Grid.",
+      "carry": "A relation between hand and tool, and the student's cumulative ordered drawing. The list is bounded and lasts for this game session.",
+      "sources": [
+        "commons/primitives/point/draw_dot.gd",
+        "commons/primitives/point/draw_dot.tscn",
+        "commons/primitives/point/drawing_pen.gd",
+        "commons/primitives/point/player_trace.gd",
+        "commons/globals/trace_data.gd"
+      ],
+      "images": [
+        {
+          "source": "doc/book/iterations/2026-09-29-trace-clean-room/clean-hall.png",
+          "file": "figures/trace.png",
+          "date": "2026-09-29",
+          "caption": "The museum's pens and plinth readouts. The lesson follows the red pen and its retained positions; the other exhibits remain part of the encounter.",
+          "evidence": "doc/book/iterations/2026-09-29-trace-clean-room/source_manifest.json",
+          "kind": "Existing museum capture",
+          "sha256": "be1abb4245d9a11f4c56c859d471ff58b094a85e522b15b6c4f442ad6678cf93"
+        }
+      ],
+      "tutorial_sha256": "8acf270f4df71217ef0790a8a16b9c29d3ed0fa015d5ff910dddcdd18bf8c836",
+      "words": 685,
+      "subjects": [
+        "Ordered position lists",
+        "Sampling conditions",
+        "Indices and neighbour loops",
+        "Pen grip and writing tip"
+      ],
+      "source_hashes": {
+        "commons/primitives/point/draw_dot.gd": "ec471ea3fa8df011a4c9c88205dee5ae1c23694c3172d8887c9371509b559de2",
+        "commons/primitives/point/draw_dot.tscn": "6f387a85ea15b5c40488c0edb4d5739900d7cfedc4c529b0db6e397366f259d7",
+        "commons/primitives/point/drawing_pen.gd": "540ca6328c9f970e8c398ff52e9520d935a49508121bebdae5d7fe5e4ed71adf",
+        "commons/primitives/point/player_trace.gd": "77eb6fd479ed10f26026a6f52e3beece34e4347bf4ae17189e6520ad4c3ce298",
+        "commons/globals/trace_data.gd": "fafdfa6fc3ace5c45cd30e74cdaf5a590cd19581aaf245226e81dc7c15ecb3f1"
+      }
+    },
+    {
+      "map": "Point_Line_Grid",
+      "title": "One record, another spacing",
+      "topics": [
+        "Snapping"
+      ],
+      "before": "The starter-based account rounded source coordinates before display fitting and described persistence across runs.",
+      "change": "Use the actual museum handoff: preserve the released world-position list, fit it for the display, then snap XYZ display positions. An index names a sample; a spatial address names a place.",
+      "exercise": "Set three display subdivisions before starting a new run. Draw and release a fresh trace; compare its fitted pink and snapped green versions beside the unchanged source rows.",
+      "carry": "Source and derived data remain separate. Snapping here is coordinate quantization, not an XR docking zone; finer pitch cannot recover unrecorded movement.",
+      "sources": [
+        "commons/globals/trace_data.gd",
+        "commons/primitives/line/grid_lines.gd",
+        "commons/primitives/line/grid_lines.tscn"
+      ],
+      "images": [
+        {
+          "source": "doc/book/iterations/2026-09-21-interface-spine-primitives-review/after-grid-encounter.png",
+          "file": "figures/grid.png",
+          "date": "2026-09-21",
+          "caption": "The ruled basin, pink and green trace display, and source readout inside the museum. This older capture includes an earlier plinth design.",
+          "evidence": "doc/book/iterations/2026-09-21-interface-spine-primitives-review/sources.json",
+          "kind": "Existing museum capture",
+          "sha256": "36c6403afd1d90cef27c192d669ea8465abdbcc1d4208dd5861d35c790b9f237"
+        },
+        {
+          "source": "doc/book/iterations/2026-09-21-interface-spine-primitives-review/after-grid-reading.png",
+          "file": "figures/grid-reading.png",
+          "date": "2026-09-21",
+          "caption": "The panel separates source world positions from the centred, scaled display and its 0.1667 m snap pitch. This is an archived demonstration record.",
+          "evidence": "doc/book/iterations/2026-09-21-interface-spine-primitives-review/after-grid-checks.json",
+          "kind": "Existing museum capture",
+          "sha256": "c643e3515b0b68238ea363f1659249fd07dec48def62f19be46cfb7009cd7bed"
+        }
+      ],
+      "tutorial_sha256": "15a20fa943f66fa17a20104a15e3aa3bc4c9d5fca9a02aa2e4781c8fc55ed6cd",
+      "words": 774,
+      "subjects": [
+        "Reusing a retained list",
+        "Display coordinates",
+        "Snapping in X, Y and Z",
+        "Source and derived positions"
+      ],
+      "source_hashes": {
+        "commons/globals/trace_data.gd": "fafdfa6fc3ace5c45cd30e74cdaf5a590cd19581aaf245226e81dc7c15ecb3f1",
+        "commons/primitives/line/grid_lines.gd": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08",
+        "commons/primitives/line/grid_lines.tscn": "63bc0cb3b2867d7260ce5bb96395b37d94ea619facd3ffdce71e26ebd436ca7b"
+      }
+    },
+    {
+      "map": "Trans_Introduction",
+      "title": "Ask the bank to move",
+      "topics": [
+        "Interaction states",
+        "Feedback"
+      ],
+      "before": "The intended event/reset focus was not yet anchored to the installed MOVE THE BANK controls.",
+      "change": "Trace the slider and RESET signals into one shared setter. Separate requested from current displacement; explain the physics update and feedback of actual motion.",
+      "exercise": "Double SPEED and predict a full journey of about two seconds instead of four. RESET returns gradually to the same home position. Restore the original value.",
+      "carry": "A request can change immediately while the body takes time to fulfil it. A readout must say which state it reports.",
+      "sources": [
+        "commons/artifacts/adjustable_landing/adjustable_landing.gd",
+        "commons/interactables/slider_horizontal.gd",
+        "commons/audio/rack_templates/RackTemplates.gd"
+      ],
+      "images": [
+        {
+          "source": "doc/book/iterations/2026-09-27-crossings-fire-and-fit/bank-control-close.png",
+          "file": "figures/bank.png",
+          "date": "2026-09-28",
+          "caption": "MOVE THE BANK and its readout beside the crossing, captured in the Endless Museum. The triangulated floor belongs to this hall's existing scene.",
+          "evidence": "doc/book/iterations/2026-09-27-crossings-fire-and-fit/source_manifest.json",
+          "kind": "Existing museum capture",
+          "sha256": "4a3e61e4b0f534cab659cc4a65ba42d6dd50b71c9d29f7f63b16aaa9e649e15f"
+        }
+      ],
+      "tutorial_sha256": "8e87c8655a41872721a2022a2fc7ae874d6c9614e444088799e041f08374abd1",
+      "words": 690,
+      "subjects": [
+        "Signals and event handlers",
+        "One function for shared behaviour",
+        "Target and current state",
+        "Gradual reset",
+        "Readout feedback"
+      ],
+      "source_hashes": {
+        "commons/artifacts/adjustable_landing/adjustable_landing.gd": "459181afb7eb7cb652ce2f721c8e67a04ddb04235d96a070dea26848b4bc37c8",
+        "commons/interactables/slider_horizontal.gd": "23ea5c37c01fc50d6bd2195f29cb56d7e13d77a8858ba95981e7836a4d867ad2",
+        "commons/audio/rack_templates/RackTemplates.gd": "56e9e4839c87597226e53fdebac9a634fca656b96bb98d3ab686cab0050c6ed7"
+      }
+    },
+    {
+      "map": "Color_Paint",
+      "title": "Aim, activate, leave a mark",
+      "topics": [
+        "Named actions",
+        "Interaction states",
+        "Targeting",
+        "Feedback",
+        "Surface painting"
+      ],
+      "before": "The automatic UV path led the lesson. The hand's route from pickup through activation to a valid receiving surface was secondary.",
+      "change": "Start with the manual can. Distinguish trigger_click events from trigger pressure, held from active, and mist from a successful hit. Convert world hit to local surface UV and return to the shared draw_spray method.",
+      "exercise": "Halve manual spray reach. From beyond and within that range, predict when mist becomes a canvas deposit; restore the original reach.",
+      "carry": "A reusable input-to-receiver chain. Manual and automatic callers share an operation, while the image they alter is not a recoverable list of gestures.",
+      "sources": [
+        "commons/context/drawingboard/spray_can.gd",
+        "commons/context/drawingboard/paper_draw_surface.gd",
+        "commons/context/drawingboard/ball_painting_automation.gd",
+        "commons/context/drawingboard/ball_painting_demo_v2.tscn",
+        "addons/godot-xr-tools/functions/function_pickup.gd",
+        "openxr_action_map.tres"
+      ],
+      "images": [
+        {
+          "source": "doc/book/iterations/2026-09-28-paint-aerosol-and-runs/shared-aerosol.png",
+          "file": "figures/paint.png",
+          "date": "2026-09-28",
+          "caption": "The manual cans, their tray and shared canvas in the museum. Mist, deposits and accumulated colour are different stages of the interaction.",
+          "evidence": "doc/book/iterations/2026-09-28-paint-aerosol-and-runs/source_manifest.json",
+          "kind": "Existing museum capture",
+          "sha256": "9e31834a53899abb070ace8b142721477215b83268aa622368115792fcffa88d"
+        }
+      ],
+      "tutorial_sha256": "2d7cef31ac7a1a442891b63cc5afffc21bac1d0b57263eb1b966d75a44eeb7cd",
+      "words": 781,
+      "subjects": [
+        "Named actions and interaction states",
+        "Ray targets",
+        "Surface coordinates",
+        "Shared drawing methods",
+        "Interaction feedback"
+      ],
+      "source_hashes": {
+        "commons/context/drawingboard/spray_can.gd": "90e380df2b81872780c5e279727c83b0dc8b07258d178a5a477d8afaca5dac6c",
+        "commons/context/drawingboard/paper_draw_surface.gd": "cc516fd4220831de470928aa64119ebbb0d653e540008b4d2356ec16bbc5ded8",
+        "commons/context/drawingboard/ball_painting_automation.gd": "31a8490f7fc794a481ccb8cb3679e6ab14c38172c17b00f0cd8eaf8ed0133b3e",
+        "commons/context/drawingboard/ball_painting_demo_v2.tscn": "04335a622d69b7fca113fa6f2f12189546b578aeaa8840c675b719d90e4f933f",
+        "addons/godot-xr-tools/functions/function_pickup.gd": "c0af90a317b83db630f61fe173f685226f6a24635bc8c17bf427033095736939",
+        "openxr_action_map.tres": "79ef39c734e17cf8b686254c1e91723adfdf50d5fcd729bfd8bfdc5fd6743390"
+      }
+    }
+  ]
+}

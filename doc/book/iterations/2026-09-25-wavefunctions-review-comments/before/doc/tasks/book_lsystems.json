@@ -1,0 +1,539 @@
+{
+  "goal_id": "book_lsystems",
+  "goal_title": "Book: L-Systems: Rules Grow Structure — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in lsystems became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "lsystems",
+    "order": 14,
+    "phase": "lambda_edge",
+    "title": "L-Systems: Rules Grow Structure",
+    "chapters": [
+      "LSystems_Grammar_Lab",
+      "LSystems_Growth",
+      "LSystems_Grammars_And_Curves",
+      "LSystems_Architecture",
+      "LSystems_Competition",
+      "LSystems_Living",
+      "LSystems_Shape_Grammars",
+      "Assemblage_Same_Desire"
+    ],
+    "words": 6582,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "LSystems_Grammar_Lab",
+      "LSystems_Growth",
+      "LSystems_Grammars_And_Curves",
+      "LSystems_Architecture",
+      "LSystems_Competition",
+      "LSystems_Living",
+      "LSystems_Shape_Grammars",
+      "Assemblage_Same_Desire",
+      "Fractal_Synthesis (last of fractals, for the handover in)",
+      "PG_Genetic_Evolution (first of proceduralgeneration, for the handover out)"
+    ],
+    "reading": {
+      "arc": "The sequence takes one object out of the fractal halls, a sentence read by a turtle, and splits it into the two moments that were fused there: rewriting the sentence and reading it as movement. Each hall then adds one thing the bare grammar leaves out. Grammar Lab separates NEXT from TURN with HOLD as a witness; Growth follows the saved state through a bracket and lets length inherit; Grammars_And_Curves shows that even 'forward' is an assignment the reader makes; Architecture gives the line width, walls, rooms and a body that must fit; Competition gives the same rule a shared field and a turn order; Living goes behind the grammar to the raw gene and the counting threshold; Shape Grammars moves the rule from letters to faces and enlarges the result until the visitor stands beneath it; Assemblage closes on two marks and the paths a viewer reads into them. The question the sequence keeps asking, in nearly every closing paragraph, is what would have to be added before any of these drawings could hold, shelter, admit or obstruct a body. It is disciplined, checkable and unusually consistent in voice; its weaknesses are local (one desktop sentence, one unnamed button, two dangling callbacks, two missing attributions) rather than structural.",
+      "holds": [
+        "The refrain 'these thin drawings have no collision surfaces / not yet somewhere to stand' closes Grammar Lab, Growth and Grammars_And_Curves, becomes the whole experiment in Architecture (a width and a body), returns as 'the floor stays solid' in Assemblage, and is picked up by Genetic Evolution's opening.",
+        "HOLD as a carried device: a witness copy of the current reading in Grammar Lab, Growth, Living and Assemblage; Living names it 'a witness', Assemblage cites Living for it, Genetic Evolution keeps it.",
+        "The bracket stack as the carried object: saved and restored state named at the end of Grammar Lab ('Carry the bracket into the next room'), enacted in Growth, re-read in Curves, given an address in Architecture, called 'the familiar brackets' in Competition, and found again inside Living's instrument.",
+        "The experimental form 'same X, different Y' at every desk: same sentence / different angle; same sentence / different reader; same grammar / different soil and turn order; same gene / different rounding; same samples / different marks.",
+        "Metres against fitting: Grammar Lab declares both drawings 'fitted to their display'; Growth and Curves put metre rulers beside unfitted readings; the distinction between what is drawn and what is measured runs to the 4x canopy in Shape Grammars and the 4x branch displays in Competition.",
+        "Every chapter ends by naming the next hall and the question it will carry, so the walk reads as one argument rather than eight exhibits."
+      ],
+      "hall_notes": [
+        {
+          "hall": "LSystems_Grammar_Lab",
+          "words": 693,
+          "note": "Opens the sequence at one desk with two plinths and separates rewriting (NEXT) from interpretation (TURN), with HOLD as the witness; every count in it (five segments, 49 symbols / 25 instructions, four generations, 4,096 budget, 120 visible symbols) is checkable against grammar_lesson.gd and lsystem_editor.gd. Tight and well paced; it ends by handing the bracket to Growth."
+        },
+        {
+          "hall": "LSystems_Growth",
+          "words": 795,
+          "note": "Steps through F[+F]F[-F]F one symbol at a time in metres, making the stack and the inherited length (0.800 to 0.576) concrete, then turns length_decay above 1.0 into a small surprise (0.92 m branches, a 7.2 m trunk). The most instrument-like chapter and the one whose numbers are most carefully earned; its only slips are cosmetic."
+        },
+        {
+          "hall": "LSystems_Grammars_And_Curves",
+          "words": 761,
+          "note": "Three readers of one sentence: reference, changed angle, and the x/y exchange. Its best move is reading the 'believing' turtle as a reflection across x = y that keeps lengths, angles and connectivity. Slightly abstract in the middle, and the reader is asked to verify a geometric claim by matching forks in the headset with no figure to check against."
+        },
+        {
+          "hall": "LSystems_Architecture",
+          "words": 727,
+          "note": "The plan acquires width, walls, rooms and a boundary policy; the two-R / one-address trick and the 'leave the frame before you rebuild' rule are strong and both are real in the code. Contains the sequence's one desktop sentence, which is also wrong for the headset body, and the closing list of the rear collection omits a hatch and a vent that a visitor will meet."
+        },
+        {
+          "hall": "LSystems_Competition",
+          "words": 710,
+          "note": "A controlled pair on shared soil, with order, season and soil separated into buttons; the 2.250 / 1.980 uptakes reproduce exactly from the 5x5 sampling square and the one-cell offset in ForestCompetition.gd. Reads cleanly except that the button that takes a turn (STEP) is never named."
+        },
+        {
+          "hall": "LSystems_Living",
+          "words": 818,
+          "note": "Goes behind the grammar to the raw gene and its rounding threshold (4.8 rounds to 2, 5.0 to 3), then HOLD and PLANT as witnesses that had to be written as copies. Conceptually the richest hall; weakened by one callback with no antecedent and a 'push to the upper limits' instruction that the compact desk makes laborious."
+        },
+        {
+          "hall": "LSystems_Shape_Grammars",
+          "words": 1220,
+          "note": "Two works and four served figures: the family of six cubes is patient and exact (0.4 m extrusion, 8% and 28% inset, twelve faces), and the canopy's 'Walk beneath it' is the sequence's one bodily reversal. Half again as long as any other chapter, and the closing paragraph spends itself on cross-references to Form Finding and Genetic Evolution rather than on the hall."
+        },
+        {
+          "hall": "Assemblage_Same_Desire",
+          "words": 858,
+          "note": "Closes on two marks and reader-made paths: ALPHABET holds the choices, ODDS holds the samples, STEP discards a row, and the floor pattern makes 'no collision boundary follows these lines' walkable. The coda on the loom and the galleries is generous and correctly attributed to Kristina Torsson, but the textile's own source, 10 PRINT, is never named although the exhibit label says it."
+        }
+      ],
+      "stumbles": [
+        "LSystems_Competition: 'Let A take a turn' and 'Now let B take its turn' with no A or B button on the desk; the turn button is STEP and the chapter never names it.",
+        "LSystems_Architecture: 'The desktop body's collision capsule is sixty centimetres across' is spoken to a headset visitor whose body is forty centimetres across; the narrow passage is also forty centimetres, so the refusal the chapter promises is a desktop fact.",
+        "LSystems_Living: 'We have encountered this gap before. A trace records a hand at particular moments' has no earlier chapter behind it; the callback lands on nothing.",
+        "LSystems_Grammar_Lab: 'We have encountered an invisible point before' is a real callback to Point_One, the spine's first hall, thirteen sequences back, but it is unnamed.",
+        "LSystems_Growth: 'The pink point stays at the new tip' when the tip marker is pale cream in both views; pink is the held drawing.",
+        "Assemblage_Same_Desire: the original textile behind the desk is labelled '10 PRINT textile' and the chapter never says what 10 PRINT is.",
+        "LSystems_Architecture: the rear collection contains a floor hatch that opens as you approach and a vent that emits three walking bodies once a crystal is lifted; the closing paragraph lists only 'structure, dragon path, seed and mesh studies'.",
+        "LSystems_Grammars_And_Curves: 'reflects the entire construction across the diagonal x = y' must be verified by fork-matching in the hall; the chapter has no figure while Shape Grammars has four.",
+        "LSystems_Shape_Grammars: at 1220 words the chapter is 40 to 75 percent longer than every other; the canopy half re-explains extrusion and then leaves the hall for two cross-references before the handover.",
+        "LSystems_Grammar_Lab: 'Some segments may overlap' after TURN to 120 degrees; the five Koch segments at 120 degrees do not overlap, so the reader looks for something that is not there."
+      ],
+      "keep": [
+        {
+          "hall": "LSystems_Grammar_Lab",
+          "quote": "Our eyes receive a composed result: rewriting, interpretation, fitting, thickness, light. None is the untouched original behind the others."
+        },
+        {
+          "hall": "LSystems_Growth",
+          "quote": "F still means draw forward, but how far forward now depends on the state in which the turtle reads it."
+        },
+        {
+          "hall": "LSystems_Grammars_And_Curves",
+          "quote": "The commitment is executable: F is assigned a direction through this code. We can change that assignment. We can also ask what the change has left untouched."
+        },
+        {
+          "hall": "LSystems_Architecture",
+          "quote": "A plan can be legible to an eye long before it is usable by a body."
+        },
+        {
+          "hall": "LSystems_Competition",
+          "quote": "A body can remain visibly still while changing the conditions around it. To discover that here, we needed the field as well as the tree."
+        },
+        {
+          "hall": "LSystems_Living",
+          "quote": "A control's appearance cannot tell us what kind of change it offers."
+        },
+        {
+          "hall": "LSystems_Shape_Grammars",
+          "quote": "The form stays still; your movement changes what covers you."
+        },
+        {
+          "hall": "Assemblage_Same_Desire",
+          "quote": "The pleasure of finding a way through need not disappear when we learn how little the generator knew about it."
+        }
+      ],
+      "handover_in": "Clean. Fractal_Synthesis ends by sending the reader 'into the grammar laboratory' with the preset 'Koch Curve' that 'replaces F with F+F-F-F+F and turns ninety degrees' and the question 'What does an instruction become when another reader gives it a body?'. Grammar Lab opens on exactly that preset at generation zero (grammar_lesson.gd:34-36 sets preset 0, generations 0; lsystem_editor.gd:103 confirms the name, rule and 90 degrees), says 'We brought a construction out of the fractal halls', and asks 'Can one sentence have two bodies?'. The carried object (an explicit rule) and the carried question (a reader giving it a body) both arrive.",
+      "handover_out": "Works, with one wobble. Assemblage closes 'Next, generated forms will be compared using a numerical score... What changes when a program is asked to decide which result should continue?', and PG_Genetic_Evolution opens 'Six boxes wait beyond the desk... choose a body you would want to keep' and 'Here the program adds a judgement'. The next chapter's backward glance, however, reaches past Assemblage to Shape Grammars ('The cube family let us compare an altered amount with an altered face selection. We kept all six results'), which Shape Grammars had pre-announced ('Later, Genetic Evolution will let a score choose among described bodies'). The reader who has just left the textile hall is told they arrived from the cube hall; Assemblage's closing could carry one clause about the kept six results so the reference lands.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_lsystems.001",
+      "title": "Replace the desktop capsule sentence with the headset body, and make the narrow width bite for it",
+      "spec": "[vr] LSystems_Architecture\nQuote: “The desktop body's collision capsule is sixty centimetres across. A forty-centimetre passage cannot admit it even though the line continues without a break.”\nWhy: The reader is a headset visitor whose body (XRToolsPlayerBody) has radius 0.2 m, i.e. forty centimetres across, exactly the narrow passage's clear width; the sixty-centimetre refusal is a desktop_player fact, and for the VR body the 0.4 m passage is an untested borderline jam rather than the clean refusal the paragraph builds on.\nDo: Lower WIDTHS[0] in architecture_lesson.gd from 0.4 to 0.3 (or 0.25) and rewrite: 'Your body's collision capsule is forty centimetres across. A thirty-centimetre passage cannot admit it even though the line continues without a break', updating 'The clear width cycles through 2.2 metres, 0.4 metres' to match; then walk the narrow version in the headset before committing.\nEvidence: addons/godot-xr-tools/player/player_body.gd:60 (`@export var player_radius : float = 0.2`, no override in commons/scenes/base.tscn); commons/scenes/desktop_player.tscn:8-9 (`radius = 0.3`, `height = 1.8`); commons/artifacts/architecture_lesson/architecture_lesson.gd:5 (`const WIDTHS := [0.4, 1.4, 2.2]`) and :144-147 (walls sit outside the occupied cells, offset key.x*0.05 with thickness 0.1, so the clear gap is the full 0.4 m); chapter line 39.\nFile: commons/maps/LSystems_Architecture/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Architecture"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "LSystems_Architecture",
+      "quote": "The desktop body's collision capsule is sixty centimetres across. A forty-centimetre passage cannot admit it even though the line continues without a break.",
+      "why": "The reader is a headset visitor whose body (XRToolsPlayerBody) has radius 0.2 m, i.e. forty centimetres across, exactly the narrow passage's clear width; the sixty-centimetre refusal is a desktop_player fact, and for the VR body the 0.4 m passage is an untested borderline jam rather than the clean refusal the paragraph builds on.",
+      "proposal": "Lower WIDTHS[0] in architecture_lesson.gd from 0.4 to 0.3 (or 0.25) and rewrite: 'Your body's collision capsule is forty centimetres across. A thirty-centimetre passage cannot admit it even though the line continues without a break', updating 'The clear width cycles through 2.2 metres, 0.4 metres' to match; then walk the narrow version in the headset before committing.",
+      "evidence": "addons/godot-xr-tools/player/player_body.gd:60 (`@export var player_radius : float = 0.2`, no override in commons/scenes/base.tscn); commons/scenes/desktop_player.tscn:8-9 (`radius = 0.3`, `height = 1.8`); commons/artifacts/architecture_lesson/architecture_lesson.gd:5 (`const WIDTHS := [0.4, 1.4, 2.2]`) and :144-147 (walls sit outside the occupied cells, offset key.x*0.05 with thickness 0.1, so the clear gap is the full 0.4 m); chapter line 39.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.002",
+      "title": "Name STEP as the button that takes a turn",
+      "spec": "[prose] LSystems_Competition\nQuote: “Let A take a turn. A small branch appears, and a square patch of soil drops. Now let B take its turn.”\nWhy: The desk has STEP, ORDER, SEASON, SOIL, RESET and RULE; there is no A or B control, and the chapter names every other button but never the one that advances the comparison, so a visitor at the desk has to guess which of six buttons 'lets A take a turn'.\nDo: Write 'Press STEP: A takes a turn. A small branch appears, and a square patch of soil drops. Press STEP again: B's turn' and, once, 'the readout names who is next'; later 'Take two turns' can stay as is once STEP has been named.\nEvidence: commons/artifacts/competition_lesson/competition_lesson.gd:23 (button list `[\"STEP\", \"ORDER\", \"SEASON\", \"SOIL\", \"RESET\", \"RULE\"]`), :44-51 (STEP calls model._grow_step() and reports 'A took ... / B took ...'), :111 (readout prints 'next A' or 'next B'); chapter lines 7 and 31.\nFile: commons/maps/LSystems_Competition/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Competition"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Competition",
+      "quote": "Let A take a turn. A small branch appears, and a square patch of soil drops. Now let B take its turn.",
+      "why": "The desk has STEP, ORDER, SEASON, SOIL, RESET and RULE; there is no A or B control, and the chapter names every other button but never the one that advances the comparison, so a visitor at the desk has to guess which of six buttons 'lets A take a turn'.",
+      "proposal": "Write 'Press STEP: A takes a turn. A small branch appears, and a square patch of soil drops. Press STEP again: B's turn' and, once, 'the readout names who is next'; later 'Take two turns' can stay as is once STEP has been named.",
+      "evidence": "commons/artifacts/competition_lesson/competition_lesson.gd:23 (button list `[\"STEP\", \"ORDER\", \"SEASON\", \"SOIL\", \"RESET\", \"RULE\"]`), :44-51 (STEP calls model._grow_step() and reports 'A took ... / B took ...'), :111 (readout prints 'next A' or 'next B'); chapter lines 7 and 31.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.003",
+      "title": "Account for the crystal hatch and the creature vent in the rear collection",
+      "spec": "[encounter] LSystems_Architecture\nQuote: “The retained orthogonal structure, folded dragon path, seed and mesh studies offer further readings. We will return to them.”\nWhy: The hall also places catalyst_prompter_box (a floor hatch whose lid tips open as the visitor approaches, offering a crystal) and catalyst_vent (which, once a crystal is picked up, emits three CatalystFoe bodies after five seconds, one every 2.5 s); a visitor who walks the rear collection meets an opening hatch and, if they lift the crystal, three walking bodies, and the chapter gives them no sentence to hold that by.\nDo: Either add one sentence to the closing ('Beyond the seed study a floor hatch opens as you approach; lift its crystal and the grey pillar by the petal flower answers with three walking bodies, an encounter another chapter will read') or, if the encounter is not meant for this hall, remove the two tokens from rows 24 and 31 of the interactables layer.\nEvidence: commons/maps/LSystems_Architecture/map_data.json layers.interactables row 24 col 4 (`catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`) and row 31 col 7 (`catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`); commons/hazards/catalyst_foe/catalyst_vent.gd:30 (`require_catalyst_armed: bool = true`) and :200-216 (warmup starts only once armed, then emits one foe per interval up to wave_size); commons/artifacts/registry/hazards.json:1276 (prompter box: 'lid tips open ... when the player approaches') and :10677 (vent: 'emits CatalystFoe bodies on a timer'); chapter line 49.\nFile: commons/maps/LSystems_Architecture/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Architecture"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "LSystems_Architecture",
+      "quote": "The retained orthogonal structure, folded dragon path, seed and mesh studies offer further readings. We will return to them.",
+      "why": "The hall also places catalyst_prompter_box (a floor hatch whose lid tips open as the visitor approaches, offering a crystal) and catalyst_vent (which, once a crystal is picked up, emits three CatalystFoe bodies after five seconds, one every 2.5 s); a visitor who walks the rear collection meets an opening hatch and, if they lift the crystal, three walking bodies, and the chapter gives them no sentence to hold that by.",
+      "proposal": "Either add one sentence to the closing ('Beyond the seed study a floor hatch opens as you approach; lift its crystal and the grey pillar by the petal flower answers with three walking bodies, an encounter another chapter will read') or, if the encounter is not meant for this hall, remove the two tokens from rows 24 and 31 of the interactables layer.",
+      "evidence": "commons/maps/LSystems_Architecture/map_data.json layers.interactables row 24 col 4 (`catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`) and row 31 col 7 (`catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`); commons/hazards/catalyst_foe/catalyst_vent.gd:30 (`require_catalyst_armed: bool = true`) and :200-216 (warmup starts only once armed, then emits one foe per interval up to wave_size); commons/artifacts/registry/hazards.json:1276 (prompter box: 'lid tips open ... when the player approaches') and :10677 (vent: 'emits CatalystFoe bodies on a timer'); chapter line 49.",
+      "review": "confirmed by a code checker (cited files only): LSystems_Architecture interactables row 24 col 4 = catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto; row 31 col 7 = catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45. catalyst_vent.gd:30 require_catalyst_armed = true; :200-216 warmup ticks only once armed, first emission after start_delay_s, then one per emit_interval_s; :192 stops at wave_size. hazards.json:1281 prompter box 'lid tips open ... when the player approaches'; :10682 vent 'emits CatalystFoe bodies on a timer until wave_size is reached'. final.md:49 is the quoted closing with no mention of hatch or vent. Small addition: vent.gd:88-91 multiplies wave_size by the ecology stage's wave_mult when > 1, so 'three' is the floor, not a fixed count.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.004",
+      "title": "Fix the callback to a hand's trace that no earlier hall stages",
+      "spec": "[prose] LSystems_Living\nQuote: “We have encountered this gap before. A trace records a hand at particular moments; the record cannot contain every position between them.”\nWhy: No chapter in the thirteen sequences before lsystems contains a trace of a hand (a search of every final.md in those sequences for 'trace' together with 'hand' finds nothing; the phrase occurs only in this file), so the reader is told they remember something they never read, and the paragraph's real point, sampling a continuous control into whole generations, is delayed by it.\nDo: Either name the hall meant, if one exists outside the spine, or drop the first two sentences and open the paragraph on the fact itself: 'Here a continuous control is translated into whole rewriting generations. Several distinct settings produce the same instruction.'\nEvidence: commons/maps/LSystems_Living/final.md:21; commons/maps/curriculum_spine.json spine.sequences 1-13 (primitives through fractals) map lists, none of whose final.md files match both 'trace' and 'hand'; the only file matching 'records a hand' in commons/maps/*/final.md is LSystems_Living itself.\nFile: commons/maps/LSystems_Living/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Living"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Living",
+      "quote": "We have encountered this gap before. A trace records a hand at particular moments; the record cannot contain every position between them.",
+      "why": "No chapter in the thirteen sequences before lsystems contains a trace of a hand (a search of every final.md in those sequences for 'trace' together with 'hand' finds nothing; the phrase occurs only in this file), so the reader is told they remember something they never read, and the paragraph's real point, sampling a continuous control into whole generations, is delayed by it.",
+      "proposal": "Either name the hall meant, if one exists outside the spine, or drop the first two sentences and open the paragraph on the fact itself: 'Here a continuous control is translated into whole rewriting generations. Several distinct settings produce the same instruction.'",
+      "evidence": "commons/maps/LSystems_Living/final.md:21; commons/maps/curriculum_spine.json spine.sequences 1-13 (primitives through fractals) map lists, none of whose final.md files match both 'trace' and 'hand'; the only file matching 'records a hand' in commons/maps/*/final.md is LSystems_Living itself.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.005",
+      "title": "Attribute the bracketed sentences to The Algorithmic Beauty of Plants",
+      "spec": "[footnote] LSystems_Growth\nQuote: “The sentence is already written:\n\nF[+F]F[-F]F”\nWhy: Growth's F[+F]F[-F]F, Competition's F[+F]F[-F][F], the Curves reader's FF+[+F-F-F]-[-F+F+F] and Grammar Lab's Plant preset are Prusinkiewicz and Lindenmayer's figure 1.24 examples (a, b, a mirror of c, a mirror of f); the sequence file lists the book but no chapter names it, so the sentences read as invented and the reader has nowhere to go for the rest of the family.\nDo: Add one sentence where the sentence first appears: 'It is the first of a small family printed in Prusinkiewicz and Lindenmayer, The Algorithmic Beauty of Plants (1990), figure 1.24; Competition's rule and the three readers in the next hall come from the same page.'\nEvidence: commons/maps/sequences/lsystems.json:76 (key_texts names the book); grep 'Prusinkiewicz|Lindenmayer' across commons/maps/LSystems_*/final.md returns nothing; commons/artifacts/growth_lesson/growth_lesson.gd:38 and the Growth map token (`base_length:0.8#base_angle:40#...#length_decay:0.72`) for the sentence; algorithms/lsystems/Ecosystem/ForestCompetition.gd:314 (`lsys.add_rule(\"F\", \"F[+F]F[-F][F]\")`); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:27 (`rule_f: String = \"FF+[+F-F-F]-[-F+F+F]\"`); commons/artifacts/lsystem_editor/lsystem_editor.gd:106 (Plant: `X -> F+[[X]-X]-F[-FX]+X`).\nFile: commons/maps/LSystems_Growth/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Growth"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "LSystems_Growth",
+      "quote": "The sentence is already written:\n\nF[+F]F[-F]F",
+      "why": "Growth's F[+F]F[-F]F, Competition's F[+F]F[-F][F], the Curves reader's FF+[+F-F-F]-[-F+F+F] and Grammar Lab's Plant preset are Prusinkiewicz and Lindenmayer's figure 1.24 examples (a, b, a mirror of c, a mirror of f); the sequence file lists the book but no chapter names it, so the sentences read as invented and the reader has nowhere to go for the rest of the family.",
+      "proposal": "Add one sentence where the sentence first appears: 'It is the first of a small family printed in Prusinkiewicz and Lindenmayer, The Algorithmic Beauty of Plants (1990), figure 1.24; Competition's rule and the three readers in the next hall come from the same page.'",
+      "evidence": "commons/maps/sequences/lsystems.json:76 (key_texts names the book); grep 'Prusinkiewicz|Lindenmayer' across commons/maps/LSystems_*/final.md returns nothing; commons/artifacts/growth_lesson/growth_lesson.gd:38 and the Growth map token (`base_length:0.8#base_angle:40#...#length_decay:0.72`) for the sentence; algorithms/lsystems/Ecosystem/ForestCompetition.gd:314 (`lsys.add_rule(\"F\", \"F[+F]F[-F][F]\")`); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:27 (`rule_f: String = \"FF+[+F-F-F]-[-F+F+F]\"`); commons/artifacts/lsystem_editor/lsystem_editor.gd:106 (Plant: `X -> F+[[X]-X]-F[-FX]+X`).",
+      "review": "quote NOT found in the chapter as written; check before acting (script) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.006",
+      "title": "Name 10 PRINT, which the exhibit label already says",
+      "spec": "[footnote] Assemblage_Same_Desire\nQuote: “The original diagonal alphabet gives its bar one of two rotations:”\nWhy: The automatic textile behind the desk carries the billboard label '10 PRINT textile' and the hall's floor plan calls the work ten_print_textile, but the chapter never uses the words 10 PRINT, so the visitor reads a title they cannot place and the coin-flip's origin (a one-line Commodore 64 program) goes uncredited.\nDo: Add one sentence before or after the rotation excerpt: 'The textile is named for a one-line Commodore 64 program, 10 PRINT CHR$(205.5+RND(1)); : GOTO 10, which printed exactly this coin-flip between two diagonals down the screen (Montfort et al., 10 PRINT, 2012).'\nEvidence: commons/artifacts/ten_print_textile/ten_print_textile.gd:115 (`_billboard_label(\"10 PRINT textile\", ...)`) and :8 (lineage comment '10 PRINT as a Jacquard loom'); commons/artifacts/ten_print_textile/assemblage_lesson.gd:41-46 (stage_original moves that labelled textile behind the desk); grep -c '10 PRINT' commons/maps/Assemblage_Same_Desire/final.md returns 0.\nFile: commons/maps/Assemblage_Same_Desire/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Assemblage_Same_Desire"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Assemblage_Same_Desire",
+      "quote": "The original diagonal alphabet gives its bar one of two rotations:",
+      "why": "The automatic textile behind the desk carries the billboard label '10 PRINT textile' and the hall's floor plan calls the work ten_print_textile, but the chapter never uses the words 10 PRINT, so the visitor reads a title they cannot place and the coin-flip's origin (a one-line Commodore 64 program) goes uncredited.",
+      "proposal": "Add one sentence before or after the rotation excerpt: 'The textile is named for a one-line Commodore 64 program, 10 PRINT CHR$(205.5+RND(1)); : GOTO 10, which printed exactly this coin-flip between two diagonals down the screen (Montfort et al., 10 PRINT, 2012).'",
+      "evidence": "commons/artifacts/ten_print_textile/ten_print_textile.gd:115 (`_billboard_label(\"10 PRINT textile\", ...)`) and :8 (lineage comment '10 PRINT as a Jacquard loom'); commons/artifacts/ten_print_textile/assemblage_lesson.gd:41-46 (stage_original moves that labelled textile behind the desk); grep -c '10 PRINT' commons/maps/Assemblage_Same_Desire/final.md returns 0.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.007",
+      "title": "Give the x = y reflection a served figure",
+      "spec": "[figure] LSystems_Grammars_And_Curves\nQuote: “With the same angle, exchanging x and y at every step reflects the entire construction across the diagonal x = y, relative to its origin.”\nWhy: This is the chapter's central geometric claim and the only way the reader can check it is by matching blue forks to green ones in the hall; the chapter has no image at all while Shape Grammars has four, and a single overhead capture with the diagonal drawn would let the reader see the reflection, the preserved fork count and the 'not a rotation' point at once.\nDo: Capture the green reference and blue READ F readings at TREE (generation 2, 172 symbols / 64 segments each) from straight ahead with the x = y diagonal drawn through the origin, store it in a doc/book/iterations/<date>-believing-turtle/ folder like the form-grammar ones, and embed it after this paragraph with a one-line caption naming the counts.\nEvidence: commons/artifacts/interpreter_lesson/interpreter_lesson.gd:41 (readings at 25 degrees forward and 25 degrees sideways share sentence and 0.32 m stride) and :53-54 (TREE gives generation 2); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:145-148 (the swap and the planar step); the served image route ada_encyclopedia/src/app/book-review/[[...path]]/route.ts:38 accepts doc/book/iterations/ paths, as used by LSystems_Shape_Grammars/final.md:13.\nFile: commons/maps/LSystems_Grammars_And_Curves/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Grammars_And_Curves"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "LSystems_Grammars_And_Curves",
+      "quote": "With the same angle, exchanging x and y at every step reflects the entire construction across the diagonal x = y, relative to its origin.",
+      "why": "This is the chapter's central geometric claim and the only way the reader can check it is by matching blue forks to green ones in the hall; the chapter has no image at all while Shape Grammars has four, and a single overhead capture with the diagonal drawn would let the reader see the reflection, the preserved fork count and the 'not a rotation' point at once.",
+      "proposal": "Capture the green reference and blue READ F readings at TREE (generation 2, 172 symbols / 64 segments each) from straight ahead with the x = y diagonal drawn through the origin, store it in a doc/book/iterations/<date>-believing-turtle/ folder like the form-grammar ones, and embed it after this paragraph with a one-line caption naming the counts.",
+      "evidence": "commons/artifacts/interpreter_lesson/interpreter_lesson.gd:41 (readings at 25 degrees forward and 25 degrees sideways share sentence and 0.32 m stride) and :53-54 (TREE gives generation 2); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:145-148 (the swap and the planar step); the served image route ada_encyclopedia/src/app/book-review/[[...path]]/route.ts:38 accepts doc/book/iterations/ paths, as used by LSystems_Shape_Grammars/final.md:13.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.008",
+      "title": "Give the provenance trees a sentence in the closing",
+      "spec": "[prose] LSystems_Grammar_Lab\nQuote: “The earlier trees, string study and city grammar remain beyond the desk.”\nWhy: The hall also places grammar_provenance, three L-system trees from three traditions ('Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion ... Asks: whose grammar?'); it is the one rear work that bears directly on this book's question and the visitor who finds it has no sentence to hold it by, since 'the earlier trees' reads as the two engine trees.\nDo: Extend the sentence: 'The earlier trees, the string study, the city grammar and three trees grown from three traditions' axioms remain beyond the desk; the last of these asks whose grammar a rule is', keeping the caution that resemblance does not prove a shared live sentence.\nEvidence: commons/maps/LSystems_Grammar_Lab/map_data.json layers.interactables contains `grammar_provenance` alongside lsystem_tree, mesh_grammar_lsystem_tree, fractal_lsystem_string and city_bench; commons/artifacts/registry/lsystems.json:1156 (grammar_provenance description: 'Same engine, different axioms, different worlds. Asks: whose grammar?'); chapter line 44.\nFile: commons/maps/LSystems_Grammar_Lab/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Grammar_Lab"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Grammar_Lab",
+      "quote": "The earlier trees, string study and city grammar remain beyond the desk.",
+      "why": "The hall also places grammar_provenance, three L-system trees from three traditions ('Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion ... Asks: whose grammar?'); it is the one rear work that bears directly on this book's question and the visitor who finds it has no sentence to hold it by, since 'the earlier trees' reads as the two engine trees.",
+      "proposal": "Extend the sentence: 'The earlier trees, the string study, the city grammar and three trees grown from three traditions' axioms remain beyond the desk; the last of these asks whose grammar a rule is', keeping the caution that resemblance does not prove a shared live sentence.",
+      "evidence": "commons/maps/LSystems_Grammar_Lab/map_data.json layers.interactables contains `grammar_provenance` alongside lsystem_tree, mesh_grammar_lsystem_tree, fractal_lsystem_string and city_bench; commons/artifacts/registry/lsystems.json:1156 (grammar_provenance description: 'Same engine, different axioms, different worlds. Asks: whose grammar?'); chapter line 44.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.009",
+      "title": "Send the upper-limit test to the side-rack sliders, not MORE",
+      "spec": "[vr] LSystems_Living\nQuote: “Push Depth and Forks towards their upper limits and read the command count.”\nWhy: MORE moves a gene by 0.025 of its range per press, so pushing Depth from 5 to its limit of 10 is twenty-five presses and Forks another dozen, a chore at a headset button; the eight original sliders the chapter has just named do it in one drag each, and the 200-command budget the paragraph wants the visitor to hit is reached only near those limits.\nDo: Write 'On the side rack, drag Depth and Forks towards their upper limits and read the command count on the desk' so the instruction uses the control the hall provides for large moves.\nEvidence: commons/artifacts/genetic_tree_sculptor/living_lesson.gd:65-72 (LESS/MORE step the normalized value by 0.025) and :32-36 (the original slider rack repositioned beside the desk, labelled 'ALL EIGHT GENES / original sliders + RANDOM'); commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd:72-75 (segments range 2 to 10); algorithms/nature_system/morphology/tree_morphology.gd:34 (`LOD_MAX_BRANCHES := [30, 80, 200, 500]`); chapter line 40.\nFile: commons/maps/LSystems_Living/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Living"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "LSystems_Living",
+      "quote": "Push Depth and Forks towards their upper limits and read the command count.",
+      "why": "MORE moves a gene by 0.025 of its range per press, so pushing Depth from 5 to its limit of 10 is twenty-five presses and Forks another dozen, a chore at a headset button; the eight original sliders the chapter has just named do it in one drag each, and the 200-command budget the paragraph wants the visitor to hit is reached only near those limits.",
+      "proposal": "Write 'On the side rack, drag Depth and Forks towards their upper limits and read the command count on the desk' so the instruction uses the control the hall provides for large moves.",
+      "evidence": "commons/artifacts/genetic_tree_sculptor/living_lesson.gd:65-72 (LESS/MORE step the normalized value by 0.025) and :32-36 (the original slider rack repositioned beside the desk, labelled 'ALL EIGHT GENES / original sliders + RANDOM'); commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd:72-75 (segments range 2 to 10); algorithms/nature_system/morphology/tree_morphology.gd:34 (`LOD_MAX_BRANCHES := [30, 80, 200, 500]`); chapter line 40.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.010",
+      "title": "The tip marker is not pink",
+      "spec": "[prose] LSystems_Growth\nQuote: “HOLD this reading. The pink point stays at the new tip.”\nWhy: Both views draw the tip marker in the same pale cream; pink is the colour of the held drawing's tubes, so a visitor looking for a pink point finds none and may doubt that HOLD worked.\nDo: Write 'HOLD this reading. The held drawing keeps its pale point at the new tip.'\nEvidence: commons/artifacts/growth_lesson/growth_lesson.gd:77-78 (marker material \"fff2c9\" for every view) and :84 (live tint \"70d5c2\", held tint \"edafd3\"); chapter line 17.\nFile: commons/maps/LSystems_Growth/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Growth"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Growth",
+      "quote": "HOLD this reading. The pink point stays at the new tip.",
+      "why": "Both views draw the tip marker in the same pale cream; pink is the colour of the held drawing's tubes, so a visitor looking for a pink point finds none and may doubt that HOLD worked.",
+      "proposal": "Write 'HOLD this reading. The held drawing keeps its pale point at the new tip.'",
+      "evidence": "commons/artifacts/growth_lesson/growth_lesson.gd:77-78 (marker material \"fff2c9\" for every view) and :84 (live tint \"70d5c2\", held tint \"edafd3\"); chapter line 17.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.011",
+      "title": "Name Point One in the invisible-point callback",
+      "spec": "[prose] LSystems_Grammar_Lab\nQuote: “We have encountered an invisible point before. This absence has a different cause:”\nWhy: The antecedent is real, the spine's first hall, but it is thirteen sequences behind the reader and unnamed, so the contrast the sentence sets up (an absent point there, an undrawn symbol here) is lost on anyone who cannot place it.\nDo: Write 'We met an invisible point in the first hall, Point One. This absence has a different cause:'\nEvidence: commons/maps/Point_One/final.md contains 'invisible point' (the only other final.md in the corpus that does); commons/maps/curriculum_spine.json spine.sequences lists primitives first and lsystems fourteenth; chapter line 32.\nFile: commons/maps/LSystems_Grammar_Lab/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Grammar_Lab"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Grammar_Lab",
+      "quote": "We have encountered an invisible point before. This absence has a different cause:",
+      "why": "The antecedent is real, the spine's first hall, but it is thirteen sequences behind the reader and unnamed, so the contrast the sentence sets up (an absent point there, an undrawn symbol here) is lost on anyone who cannot place it.",
+      "proposal": "Write 'We met an invisible point in the first hall, Point One. This absence has a different cause:'",
+      "evidence": "commons/maps/Point_One/final.md contains 'invisible point' (the only other final.md in the corpus that does); commons/maps/curriculum_spine.json spine.sequences lists primitives first and lsystems fourteenth; chapter line 32.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.012",
+      "title": "Let the closing carry the kept six results into the score",
+      "spec": "[handover] Assemblage_Same_Desire\nQuote: “Next, generated forms will be compared using a numerical score. Until now a path could matter because we chose to follow it.”\nWhy: The next chapter opens by recalling 'The cube family let us compare an altered amount with an altered face selection. We kept all six results', a hall the reader left two chapters ago, while the hall they are actually leaving is this one; one clause here would make that backward glance land.\nDo: Write 'Next, generated forms will be compared using a numerical score. The cube family kept all six of its results, and here a path could matter because we chose to follow it. What changes when a program is asked to decide which result should continue?'\nEvidence: commons/maps/PG_Genetic_Evolution/final.md:7 ('The cube family let us compare ... We kept all six results.'); commons/maps/LSystems_Shape_Grammars/final.md:61 ('Later, Genetic Evolution will let a score choose among described bodies'); commons/maps/sequences/proceduralgeneration.json lists PG_Genetic_Evolution first; chapter line 52.\nFile: commons/maps/Assemblage_Same_Desire/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Assemblage_Same_Desire"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Assemblage_Same_Desire",
+      "quote": "Next, generated forms will be compared using a numerical score. Until now a path could matter because we chose to follow it.",
+      "why": "The next chapter opens by recalling 'The cube family let us compare an altered amount with an altered face selection. We kept all six results', a hall the reader left two chapters ago, while the hall they are actually leaving is this one; one clause here would make that backward glance land.",
+      "proposal": "Write 'Next, generated forms will be compared using a numerical score. The cube family kept all six of its results, and here a path could matter because we chose to follow it. What changes when a program is asked to decide which result should continue?'",
+      "evidence": "commons/maps/PG_Genetic_Evolution/final.md:7 ('The cube family let us compare ... We kept all six results.'); commons/maps/LSystems_Shape_Grammars/final.md:61 ('Later, Genetic Evolution will let a score choose among described bodies'); commons/maps/sequences/proceduralgeneration.json lists PG_Genetic_Evolution first; chapter line 52.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.013",
+      "title": "Trim the canopy's closing cross-references",
+      "spec": "[structure] LSystems_Shape_Grammars\nQuote: “These forms did not settle under weight. The gallery holds them fixed. Form Finding asked which arrangements could hold and which would count as a result.”\nWhy: At 1220 words the chapter is 40 to 75 percent longer than any other in the sequence, and its last two paragraphs leave the hall for a recap of Form Finding and a preview of Genetic Evolution that the next sequence's first chapter repeats itself ('The height test in Form Finding already showed...'); the hall's own point, the change of address from looking down to standing beneath, is the thing that gets buried.\nDo: Cut the recap sentence 'Earlier, extrusion connected a lifted face to the edges it left below, making side walls' and reduce the Form Finding / Genetic Evolution paragraph to one sentence ('Nothing here has been weighed or scored; that comes next'), keeping the Assemblage handover as it is.\nEvidence: Word counts of the eight chapters: 693, 795, 761, 727, 710, 818, 1220, 858; commons/maps/LSystems_Shape_Grammars/final.md:45 and :61; commons/maps/PG_Genetic_Evolution/final.md:7 restates the Form Finding point.\nFile: commons/maps/LSystems_Shape_Grammars/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Shape_Grammars"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "LSystems_Shape_Grammars",
+      "quote": "These forms did not settle under weight. The gallery holds them fixed. Form Finding asked which arrangements could hold and which would count as a result.",
+      "why": "At 1220 words the chapter is 40 to 75 percent longer than any other in the sequence, and its last two paragraphs leave the hall for a recap of Form Finding and a preview of Genetic Evolution that the next sequence's first chapter repeats itself ('The height test in Form Finding already showed...'); the hall's own point, the change of address from looking down to standing beneath, is the thing that gets buried.",
+      "proposal": "Cut the recap sentence 'Earlier, extrusion connected a lifted face to the edges it left below, making side walls' and reduce the Form Finding / Genetic Evolution paragraph to one sentence ('Nothing here has been weighed or scored; that comes next'), keeping the Assemblage handover as it is.",
+      "evidence": "Word counts of the eight chapters: 693, 795, 761, 727, 710, 818, 1220, 858; commons/maps/LSystems_Shape_Grammars/final.md:45 and :61; commons/maps/PG_Genetic_Evolution/final.md:7 restates the Form Finding point.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_lsystems.014",
+      "title": "PLAN keeps the slabs as a drawing",
+      "spec": "[prose] LSystems_Architecture\nQuote: “PLAN removes the built walls and slabs; RESET returns to the opening comparison.”\nWhy: In PLAN the corridor footprints stay on the floor as thin, non-solid slabs (16 mm, no collision) with the four centrelines above them; only the walls, the raised base and the collision go, so a visitor who presses PLAN and still sees the footprint may think the button failed.\nDo: Write 'PLAN removes the walls and lowers the footprints to a drawing you can walk across; RESET returns to the opening comparison.'\nEvidence: commons/artifacts/architecture_lesson/architecture_lesson.gd:57 (PLAN sets built = false), :89 (slabs drawn at 0.016 m thickness with solid = built, i.e. no collision in PLAN), :93 (build_boundaries only when built), :95-97 (centrelines drawn in every state); chapter line 45.\nFile: commons/maps/LSystems_Architecture/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "LSystems_Architecture"
+      ],
+      "sequence_refs": [
+        "lsystems"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "LSystems_Architecture",
+      "quote": "PLAN removes the built walls and slabs; RESET returns to the opening comparison.",
+      "why": "In PLAN the corridor footprints stay on the floor as thin, non-solid slabs (16 mm, no collision) with the four centrelines above them; only the walls, the raised base and the collision go, so a visitor who presses PLAN and still sees the footprint may think the button failed.",
+      "proposal": "Write 'PLAN removes the walls and lowers the footprints to a drawing you can walk across; RESET returns to the opening comparison.'",
+      "evidence": "commons/artifacts/architecture_lesson/architecture_lesson.gd:57 (PLAN sets built = false), :89 (slabs drawn at 0.016 m thickness with solid = built, i.e. no collision in PLAN), :93 (build_boundaries only when built), :95-97 (centrelines drawn in every state); chapter line 45.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

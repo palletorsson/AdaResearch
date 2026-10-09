@@ -1,0 +1,122 @@
+{
+  "checks": [
+    {
+      "name": "Canonical text equals reviewed manuscript",
+      "passed": true
+    },
+    {
+      "name": "Code excerpt unchanged",
+      "passed": true
+    },
+    {
+      "name": "Artifact anchors unchanged",
+      "passed": true
+    },
+    {
+      "name": "Only three existing paragraphs revised",
+      "passed": true
+    },
+    {
+      "name": "Opening and handoff unchanged",
+      "passed": true
+    },
+    {
+      "name": "Native figure shared with canonical chapter",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Color_Pillar/intent.md",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Color_Pillar/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Color_Pillar/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: algorithms/color/grabcolor/color_sets_overview.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/primitives/pillar/pillar.tscn",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/primitives/panels/DigitalPaper/grab_paper.tscn",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/primitives/cubes/grab_cube_grid_snap.gd",
+      "passed": true
+    },
+    {
+      "name": "Complete earlier critical draft retained",
+      "passed": true
+    },
+    {
+      "name": "Core manuscript hash current",
+      "passed": true
+    },
+    {
+      "name": "Only selected core manuscript hash changed",
+      "passed": true
+    },
+    {
+      "name": "All 32 focused runtime assertions pass",
+      "passed": true
+    },
+    {
+      "name": "No GDScript errors",
+      "passed": true
+    },
+    {
+      "name": "Recorded capture source hashes still current",
+      "passed": true
+    },
+    {
+      "name": "Six native views and shared composite retained",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: field-and-passage.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: Color_Pillar.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: source_manifest.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "Native and composed views visually inspected",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Focused source/manuscript preservation and HTTP publication. Separate runtime report has 32 assertions; no headset or learner claim."
+}

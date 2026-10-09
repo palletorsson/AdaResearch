@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="1b19132a2d35f55bcb299feaa766021600cfb5e829cead1c7ff60af08fab8a2a"><title>commons/maps/Tutorial_3D/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Tutorial_3D/tutorial.md</p><p>Current encounter, 2026-09-17</p>
+<p>array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.</p>
+<p>The step-by-step reading is in final.md. Earlier objects and layouts remain in the archive; they are not the current walkthrough.</p>
+<!-- study-spine:open_structures -->
+
+<h2>Return: A rule takes up space</h2>
+<p>Replace (column + row) % 5 with column; keep all 25 addresses. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses line, coordinates, transform, array. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>open</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-lewitt-reading-a-rule/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-spine:reference_suspension -->
+
+<h2>Return: A place still held</h2>
+<p>Change fragment roughness without changing any of the 75 positions. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses array, coordinates. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>suspension</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-hatoum-grid-under-load/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-edit:open_structures -->
+
+<h3>One source change: A rule takes up space</h3>
+<p>In form_at(), replace the cyclic return with this expression. Read one row, then one column; every address remains occupied.</p>
+<pre><code class="language-gdscript">return column
+</code></pre>
+<p>Source: <code>commons/artifacts/spine_studies/open_rules.gd</code>. Use the prepared scene to run and compare.</p>
+<!-- study-edit:reference_suspension -->
+
+<h3>One source change: A place still held</h3>
+<p>This is the existing corner rule in fragment(). Change only the multiplier on offset, for example amount * 0.5. The enclosing loops still place 75 fragments.</p>
+<pre><code class="language-gdscript">corners.append(base + offset * amount)
+</code></pre>
+<p>Source: <code>commons/artifacts/reference_studies/suspension.gd</code>. Use the prepared scene to run and compare.</p></body></html>

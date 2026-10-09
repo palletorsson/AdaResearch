@@ -1,0 +1,22 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -203,6 +203,19 @@
+ 
+ Make a second arrangement by changing only places and the point's initial position. Keep the classes unchanged. Show how a different interval or overlap changes what you notice. You should be able to reconstruct both arrangements from their saved script values.
+ 
++## After the chapter: an arrangement without a recipe
++
++Choose a different arrangement in a clear part of your working museum hall. Use the earlier files as references, but write your own small main script. This is an independent challenge; there is no new construction hidden in a supplied answer.
++
++- Generate a list of at least five positions with a rule you can explain. Keep an unchanged source list and modify an independently owned copy.
++- Reuse PointBody and FaceBody. Choose three non-collinear entries from the list and connect them as a face.
++- Show two spheres of equal radius with different resolutions, using the construction already studied in Godot Primitives.
++- Decide their spacing and arrangement. Keep the known collider behaviour; making a new walkable structure is outside this task.
++
++Show the arrangement to someone who has not seen your script. Locate the stored values, the variable referring to each body, and the indices establishing the face. Explain what the generator decided, what resolution changed, what you preserved, and one aesthetic choice that no calculation required.
++
++Run your script and check that changing the copy leaves the source intact, that the selected face has area, and that each sphere keeps its own mesh. Then change one choice and predict the result before running again. Successful execution is evidence about the program; explaining and transferring the choices gives evidence about what you learned.
++
+ Carry CubeBody and PointBody into Transformation. A body that you can place is ready to become a body whose position, rotation or scale changes over time.
+ 
+ ## Source and scope

@@ -1,0 +1,750 @@
+{
+  "arrival": {
+    "amplitudes": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "at_mark": {
+      "index": 159,
+      "phase": 16.4564015177748,
+      "rows": [
+        {
+          "drawn": true,
+          "value": -0.68049521398946
+        },
+        {
+          "drawn": true,
+          "value": 0.498634586692894
+        },
+        {
+          "drawn": true,
+          "value": -0.260075596389284
+        },
+        {
+          "drawn": true,
+          "value": 0.0368254245136608
+        },
+        {
+          "drawn": true,
+          "value": 0.113027282884517
+        }
+      ],
+      "sum_of_drawn_rows": -0.292083516287673,
+      "total": -0.292083516287673
+    },
+    "baseline": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "components": "ladder",
+    "differences": [],
+    "formula": "f(t) = 1.0·sin(ωt) + 0.5·sin(2ωt) + 0.3·sin(3ωt) + 0.3·sin(4ωt) + 0.2·sin(5ωt)",
+    "held": true,
+    "lift": 1.75,
+    "mark_index": 159,
+    "mark_x": 0.247058823529412,
+    "preset": "ARRIVAL RECIPE",
+    "stand": "bench",
+    "waveform": "sawtooth"
+  },
+  "checks": [
+    {
+      "message": "frozen current loader compiles",
+      "ok": true
+    },
+    {
+      "message": "actual Synthesis museum hall loads",
+      "ok": true
+    },
+    {
+      "message": "actual museum uses frozen loader",
+      "ok": true
+    },
+    {
+      "message": "authored additive bench instantiates",
+      "ok": true
+    },
+    {
+      "message": "actual authored token reaches bench and arrival recipe",
+      "ok": true
+    },
+    {
+      "message": "museum bench retains unit scale",
+      "ok": true
+    },
+    {
+      "message": "five wired sliders and exactly one readout",
+      "ok": true
+    },
+    {
+      "message": "desktop pointer HOLD freezes comparison",
+      "ok": true
+    },
+    {
+      "message": "arrival recipe naming policy verified in museum",
+      "ok": true
+    },
+    {
+      "message": "all five arrival coefficients remain unchanged",
+      "ok": true
+    },
+    {
+      "message": "standing capture position admits capsule",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: arrival",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: arrival",
+      "ok": true
+    },
+    {
+      "message": "desktop pointer H1 ALONE changes coefficients and reveals recognition",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: first-alone",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: first-alone",
+      "ok": true
+    },
+    {
+      "message": "desktop pointer BASELINE restores named finite recipe",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: restored",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: restored",
+      "ok": true
+    }
+  ],
+  "first_alone": {
+    "amplitudes": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "at_mark": {
+      "index": 159,
+      "phase": 16.4564015177748,
+      "rows": [
+        {
+          "drawn": true,
+          "value": -0.68049521398946
+        },
+        {
+          "drawn": false,
+          "value": 0.0
+        },
+        {
+          "drawn": false,
+          "value": 0.0
+        },
+        {
+          "drawn": false,
+          "value": 0.0
+        },
+        {
+          "drawn": false,
+          "value": 0.0
+        }
+      ],
+      "sum_of_drawn_rows": -0.68049521398946,
+      "total": -0.68049521398946
+    },
+    "baseline": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "components": "ladder",
+    "differences": [
+      "a2 0.50→0.00",
+      "a3 0.33→0.00",
+      "a4 0.25→0.00",
+      "a5 0.20→0.00"
+    ],
+    "formula": "f(t) = 1.0·sin(ωt)",
+    "held": true,
+    "lift": 1.75,
+    "mark_index": 159,
+    "mark_x": 0.247058823529412,
+    "preset": "Pure Sine Wave",
+    "stand": "bench",
+    "waveform": "sawtooth"
+  },
+  "hall": "WaveFunctions_Synthesis_Lab",
+  "headset_tested": false,
+  "inventory": [
+    {
+      "cell": [],
+      "key": "window",
+      "position": "(7.5, 1.7, -3.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "view",
+      "position": "(7.5, 1.7, -2.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "counter",
+      "position": "(11.0, 1.6, -2.94)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "extinguisher",
+      "position": "(1.14, 0.0, -1.4)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "elevator",
+      "position": "(15.94, 0.0, -1.8)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "pallet",
+      "position": "(15.1, 0.0, -1.8)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "point_zero",
+      "position": "(0.0, 0.0, -4.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        1
+      ],
+      "key": "dna_specimen",
+      "position": "(2.5, 0.4, 1.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        3,
+        1
+      ],
+      "key": "holographicdisplay",
+      "position": "(3.5, 1.0, 1.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        4,
+        1
+      ],
+      "key": "electronicscales",
+      "position": "(4.5, 1.0, 1.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        1,
+        2
+      ],
+      "key": "air_music_display_case",
+      "position": "(1.5, 1.0, 2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        4,
+        2
+      ],
+      "key": "additive_wave_demo",
+      "position": "(4.5, 0.0, 2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        7,
+        2
+      ],
+      "key": "dark_sphere",
+      "position": "(7.5, 0.0, 2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        9,
+        2
+      ],
+      "key": "biomagneticresonator",
+      "position": "(9.5, 1.0, 2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        10,
+        2
+      ],
+      "key": "UnitCircleTrig",
+      "position": "(10.5, 0.0, 2.5)",
+      "scale": "(0.1, 0.1, 0.1)"
+    },
+    {
+      "cell": [
+        12,
+        2
+      ],
+      "key": "record_room",
+      "position": "(12.5, 0.0, 2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        4
+      ],
+      "key": "GlassRack",
+      "position": "(2.5, 0.8, 4.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        8,
+        4
+      ],
+      "key": "hallway_scene",
+      "position": "(8.5, 1.0, 4.5)",
+      "scale": "(0.1, 0.1, 0.1)"
+    },
+    {
+      "cell": [
+        10,
+        4
+      ],
+      "key": "synthesis_stand",
+      "position": "(10.5, 0.0, 4.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        6
+      ],
+      "key": "lissajous_curves",
+      "position": "(2.5, 1.0, 6.5)",
+      "scale": "(0.1, 0.1, 0.1)"
+    },
+    {
+      "cell": [
+        2,
+        8
+      ],
+      "key": "seismograph",
+      "position": "(2.5, 0.0, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        9,
+        8
+      ],
+      "key": "samplevialrack",
+      "position": "(9.5, 1.0, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        10,
+        8
+      ],
+      "key": "oscilloscope",
+      "position": "(10.5, 0.5, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        9
+      ],
+      "key": "double_helix_scene",
+      "position": "(2.5, 0.0, 9.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        6,
+        9
+      ],
+      "key": "spring_demo",
+      "position": "(6.5, 0.5, 9.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        7,
+        9
+      ],
+      "key": "SoundscapeRadioRack",
+      "position": "(7.5, 1.4, 9.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        9,
+        10
+      ],
+      "key": "petri_dish_worms",
+      "position": "(9.5, 0.8, 10.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        10,
+        10
+      ],
+      "key": "atmosphericmonitoring",
+      "position": "(10.5, 1.0, 10.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        7,
+        11
+      ],
+      "key": "chladni_plate",
+      "position": "(7.5, 0.0, 11.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        7,
+        12
+      ],
+      "key": "microscope",
+      "position": "(7.5, 1.0, 12.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        9,
+        12
+      ],
+      "key": "chemicalapparatus",
+      "position": "(9.5, 1.0, 12.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        10,
+        12
+      ],
+      "key": "multimeter",
+      "position": "(10.5, 1.0, 12.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(7.5, 0.0, 0.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(3.0, 1.58, 11.991)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(6.0, 1.58, 16.009)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(8.0, 1.58, 20.991)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(2.0, 1.58, 1.009)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(4.0, 1.58, 2.009)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(1.009, 1.58, 2.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(10.991, 1.58, 5.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(12.009, 1.58, 5.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(12.991, 1.58, 3.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(2.009, 1.58, 4.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(5.009, 1.58, 17.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(5.991, 1.58, 5.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(6.009, 1.58, 13.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(7.009, 1.58, 5.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(8.991, 1.58, 14.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(5.0, 1.58, 11.991)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(10.0, 1.58, 1.009)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(6.0, 1.58, 2.009)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(10.991, 1.58, 7.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(12.009, 1.58, 7.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(12.991, 1.58, 5.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "",
+      "position": "(2.009, 1.58, 6.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "exit_sign",
+      "position": "(7.5, 3.52, -1.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "exit_sign",
+      "position": "(7.5, 3.0, 21.0)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "emergency_button",
+      "position": "(8.0, 2.4, 12.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "wall_clock",
+      "position": "(1.02, 2.25, -3.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "info_screen",
+      "position": "(11.0, 1.7, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "whiteboard",
+      "position": "(12.0, 0.9, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "electrical_panel",
+      "position": "(1.0, 1.5, -2.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "ceiling_vent",
+      "position": "(3.75, 4.64, 6.225)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "cable_tray",
+      "position": "(7.5, 4.36, 10.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "floor_grate",
+      "position": "(7.5, 0.0, 1.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "fire_hose_box",
+      "position": "(12.72, 0.85, 3.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "dream_bodies",
+      "position": "(12.5, 0.42, 4.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "dream_bodies",
+      "position": "(6.5, 0.42, 16.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "dream_bodies",
+      "position": "(11.5, 0.42, 3.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [],
+      "key": "dream_bodies",
+      "position": "(5.5, 0.42, 8.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    }
+  ],
+  "loaded_museum_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+  "position": "(4.5, 0.0, 2.5)",
+  "restored": {
+    "amplitudes": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "at_mark": {
+      "index": 159,
+      "phase": 16.4564015177748,
+      "rows": [
+        {
+          "drawn": true,
+          "value": -0.68049521398946
+        },
+        {
+          "drawn": true,
+          "value": 0.498634586692894
+        },
+        {
+          "drawn": true,
+          "value": -0.260075596389284
+        },
+        {
+          "drawn": true,
+          "value": 0.0368254245136608
+        },
+        {
+          "drawn": true,
+          "value": 0.113027282884517
+        }
+      ],
+      "sum_of_drawn_rows": -0.292083516287673,
+      "total": -0.292083516287673
+    },
+    "baseline": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "components": "ladder",
+    "differences": [],
+    "formula": "f(t) = 1.0·sin(ωt) + 0.5·sin(2ωt) + 0.3·sin(3ωt) + 0.3·sin(4ωt) + 0.2·sin(5ωt)",
+    "held": true,
+    "lift": 1.75,
+    "mark_index": 159,
+    "mark_x": 0.247058823529412,
+    "preset": "≈ Sawtooth Wave (all harmonics)",
+    "stand": "bench",
+    "waveform": "sawtooth"
+  },
+  "scale": "(1.0, 1.0, 1.0)",
+  "standing_hits": []
+}

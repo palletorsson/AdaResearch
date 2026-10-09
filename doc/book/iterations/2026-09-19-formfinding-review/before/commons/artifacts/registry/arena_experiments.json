@@ -1,0 +1,22 @@
+{
+  "artifacts": {
+    "arena_relation_lab": {
+      "lookup_name": "arena_relation_lab",
+      "name": "What Makes an Encounter?",
+      "scene": "res://commons/artifacts/arena_relation_lab/arena_relation_lab.tscn",
+      "description": "A scoped crab experiment: nominated visitor or beacon, nearest visible food, sight screen, two-second feeding and five-meal stopping threshold. Paired with collision carts to distinguish controller decisions from collision laws.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "interactions": [
+        "RUN and RESET the encounter",
+        "BEACON moves its nominated target; VISITOR switches between beacon and player",
+        "FOOD offers one mushroom at a time",
+        "SCREEN blocks low sight lines",
+        "PARTS and RULE reveal target choice, distance and feeding state"
+      ],
+      "qfep_connection": "Relations change through sensing and retained state; feeding counts and stopping thresholds are programmed, not evidence of learning."
+    }
+  }
+}

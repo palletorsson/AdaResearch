@@ -1,0 +1,32 @@
+{
+  "room": "Color_Flashlight",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Color_Flashlight/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Color_Flashlight/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Color_Flashlight/map_data.json": "d976651a2b33a7874dc4415c73ac4344f257a8242356ab4cf72f5b7b085240dc",
+    "doc/book/iterations/2026-09-23-flashlight-faceted-sphere/probe.gd": "1f7b9f12060268adde7700c88248cf6201c6f0584479b85dea64b24c4222b5be",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "e20161f1b5ed577468470020233793d05d9ef31fbe24acb38fa8c181c00cf774",
+    "ada_run/encounter_pilot/Color_Flashlight/control.json": "d0fd00be117c0ff160de68dec7e267b3cd37f2de9297f0ec8183f730f16067d5",
+    "ada_run/encounter_pilot/Color_Flashlight/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Color_Flashlight/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Color_Flashlight/em_bake.json": "b148cfcc716b29b5f3d6e8f9ad1aa73a48082e7ddeb81b5545bb8b13dfbb04a9",
+    "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd": "296cd65828312cc71fa2cb0199d16f06f707247ac479adb030f6b990440e9000",
+    "algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn": "d78761c0223608dd41d4d2d2fc5294b51e95ee2032e4652342a3c962447c6ade",
+    "algorithms/postprocessing/flashlight_demo/flashlight.tscn": "79af388a18fdd53a14eba94031aaf4e9136b2ed62edbb17b07329fbd9ec3a26e",
+    "commons/grid/GridInteractablesComponent.gd": "8f774ef6538c81cab99107dea695256e148bd62404b94831a3cbd21d965cf383"
+  }
+}

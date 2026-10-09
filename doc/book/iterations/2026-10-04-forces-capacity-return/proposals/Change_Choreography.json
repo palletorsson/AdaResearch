@@ -1,0 +1,46 @@
+{
+  "id": "Change_Choreography",
+  "title": "Keep an offset, change a rate",
+  "storyboard": "Twenty rods turn together, form a wave, then drift apart; the conveyor gives a rate mismatch a different material consequence. Reuse indexed repetition and rate over elapsed time; introduce period and phase with the rods before returning to the supplied paired dials. Make the existing tutorial's one source edit: halve DRIFT_RATIO's excess above one, keeping the twelve-second period. Predict the gap after thirty seconds, then use SAME RATE to stop its growth without closing it. Carry a tested distinction between changing a stored angle and changing the rate added to it. Keep the conveyor as a comparison with contact, arrival and finite capacity. The paired-clock reference remains open to interpretation; this shared engine clock supplies neither independent ageing nor the bodily history of its reference.",
+  "storyboard_short": "Keep rods, conveyor and paired dials in their existing order. Reuse indexed repetition and elapsed time; introduce period and phase at the rods. Follow the existing DRIFT_RATIO edit from 1.04 to 1.02; predict thirty seconds of separation, then preserve the gap with SAME RATE. Supply display and controls. Carry offset versus accumulated rate difference. Conveyor contacts and the clocks' historical reference remain comparisons, not extra builds or claims of bodily simulation.",
+  "mode": "deepen",
+  "brings": [
+    "indexed repetition and timed transforms",
+    "rate multiplied by elapsed time",
+    "Oscillation's returning movement, without assuming period or phase has been taught"
+  ],
+  "learns": [
+    "period names a cycle's duration and phase names its angular offset",
+    "a rate change preserves the existing angle in the paired score",
+    "equal rates preserve a phase gap without closing it",
+    "prescribed rotation and a contact-driven queue need different accounts"
+  ],
+  "carries": "A small tested rate edit and an explanation of which difference stays fixed, grows or is erased by an assignment.",
+  "supplied": [
+    "phase_rod_array, conveyor_backlog and the paired_time museum study",
+    "paired_time_score.gd with its twelve-second base period and stored angles",
+    "dial geometry, controls, museum player and conveyor contact model"
+  ],
+  "artifact_refs": [
+    "phase_rod_array",
+    "conveyor_backlog",
+    "paired_time"
+  ],
+  "review_note": "This uses an actual authored source exercise already present in tutorial.md, replacing the proposed extra marker-row build. Oscillation does not establish period and phase; introduce those terms at the rods. The rods assign absolute angle from elapsed time, so configuration changes may jump; the paired score instead advances stored angles, and SAME RATE preserves them. The conveyor has finite rigid parcels, contact and admission limits. Both dials share engine delta and discard whole-turn counts; neither battery ageing nor the material and bodily conditions of the Gonzalez-Torres reference are simulated. No new runtime or tutorial work is applied by this summary.",
+  "prior_maps": [
+    "Array",
+    "Change_Intro",
+    "Vectors_Act4b_Oscillation"
+  ],
+  "independent_check": "Change DRIFT_RATIO from 1.04 to 1.02 in the supplied study. Before RESET and DRIFT RIGHT, predict an 18-degree gap after thirty seconds rather than 36 degrees; explain why SAME RATE then keeps that gap instead of aligning the hands.",
+  "source_refs": [
+    "commons/maps/Change_Choreography/final.md",
+    "commons/maps/Change_Choreography/tutorial.md",
+    "commons/artifacts/timing_machines/phase_rod_array.gd",
+    "commons/artifacts/timing_machines/conveyor_backlog.gd",
+    "commons/artifacts/spine_studies/paired_time_score.gd",
+    "commons/artifacts/spine_studies/paired_time.gd",
+    "commons/artifacts/spine_studies/station.gd"
+  ],
+  "change_reason": "A concrete exercise already exists. It makes the earlier rate and phase skills reusable while leaving rods, conveyor and the artistic reference room to offer different kinds of comparison."
+}

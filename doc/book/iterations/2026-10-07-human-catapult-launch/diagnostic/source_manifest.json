@@ -1,0 +1,32 @@
+{
+  "room": "VFM_05_Launch",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/VFM_05_Launch/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/VFM_05_Launch/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/VFM_05_Launch/map_data.json": "1a47bd6e51107c5547c0d9ad68026e1cb19e314256328b7449f29c29cb3712cc",
+    "tools/probes/human_catapult_museum.gd": "c424ec824f4d74d909a1bcdb769a3a54966a5b9b2e5526dd4b0b872ea71e3f8e",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "a1c86c02a2d3f47ff45d91c6d6849dd4364ecc150540fde6f0ccb17f3222a618",
+    "ada_run/encounter_pilot/VFM_05_Launch/control.json": "efd9ad109fa0399ac722b6d91fd19d195b2b0e40a926c312dea3f14c19832a5c",
+    "ada_run/encounter_pilot/VFM_05_Launch/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/VFM_05_Launch/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/VFM_05_Launch/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/vectors_demos.json": "ea4e1bb78afe348d96a45e5f257fce1a4e5b99621b02c0d9d2e7a07cb7121dcc",
+    "commons/artifacts/launch_arc/launch_arc.tscn": "7fc64af9e56402f2c02a8250d5fc57287e133d5099e1ba2368736f9ef254849d",
+    "commons/artifacts/launch_arc/launch_arc.gd": "ee4117ff9841ac2471c6a486f46968fc8ed4f8461da3f0122ea2b7a492e25f6e",
+    "commons/artifacts/_toy_console/toy_console.gd": "318a05b58d3c55fa15f5ee6d39fed211ba418af6f97d4569406b99f1f7aedfef"
+  }
+}

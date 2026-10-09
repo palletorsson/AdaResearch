@@ -1,0 +1,34 @@
+{
+  "hall": "Boolean_Gallery",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "six_families": true,
+    "twenty_four_placements": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "registry_resolution": true
+  },
+  "families": {
+    "csg_difference_demo": 4,
+    "csg_union_demo": 4,
+    "csg_intersection_demo": 4,
+    "subtraction_suite": 4,
+    "coincident_face": 4,
+    "removal_room": 4
+  },
+  "primary_artifacts": [
+    "csg_difference_demo",
+    "removal_room"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Boolean_Gallery\\map_data.json": "e69fff77aab674f969e50b3b3e91a940fac751c5785ab486797448566696384b",
+    "commons\\maps\\Boolean_Gallery\\final.md": "c99174be04428be6ffad757ad5592cb1fcfa8cca37fd93f84370633d0f3644e3",
+    "commons\\maps\\Boolean_Gallery\\tutorial.md": "01a22be04b755d4b4a6a591e60e9fe93d77679e3671a118e0a75a8a67daaaa18",
+    "commons\\maps\\Boolean_Gallery\\technical.md": "e3b18ccc568af4a74c95143f5088b878869f7d3138c845f9861f3a3ec3e8101f",
+    "commons\\maps\\Boolean_Gallery\\critical.md": "eb8aba7c140d7bf79bf6dc5c5f130083e5d4ad23ba68c4b325e68c91c73700a5"
+  }
+}

@@ -1,0 +1,316 @@
+{
+ "hall": "Symmetry_Seventeen",
+ "hall_description": "",
+ "chapter_opening": "",
+ "stations": [
+  {
+   "token": "pattern_loom",
+   "cell": [
+    10,
+    6
+   ],
+   "what_it_is": "Dark machine frame with emissive accents, glowing warp threads + a pulsing weave bar, and a wallpaper-textured cloth that scrolls out of the weave line. DNA: group (p1..p6m), palette, motif_seed, loom_style (roller carpet-press / warp tapestry / mirror twin-panel), density.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "SEED %d",
+     "set_in": "_on_seed",
+     "file": "pattern_loom.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/artifacts/pattern_loom/pattern_loom.tscn, commons/artifacts/pattern_loom/pattern_loom.gd"
+  },
+  {
+   "token": "pattern_tile_puzzle",
+   "cell": [
+    11,
+    10
+   ],
+   "what_it_is": "Create patterns on a small tile grid. Watch them repeat across a carpet. Handmade meets computational - from textile traditions to pixel art.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "pattern_tile_puzzle.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_build_paint_grid",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "PALETTE",
+     "set_in": "_build_palette",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CONTROLS",
+     "set_in": "_build_sliders",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "CLEAR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": -0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "MIRROR",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.0,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": "ROTATE",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    },
+    {
+     "text": ": 0.08,",
+     "set_in": "_build_controls",
+     "file": "pattern_studio_plate.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "",
+   "source": "commons/primitives/arrays/pattern_tile_puzzle.tscn, commons/primitives/arrays/pattern_tile_puzzle.gd, commons/primitives/arrays/array_sequencer.gd"
+  },
+  {
+   "token": "vr_tile_editor",
+   "cell": [
+    20,
+    10
+   ],
+   "what_it_is": "VR workspace for designing tile patterns. Edit a grid at desk height, see it tile across a floor carpet in real-time. Cycle wallpaper groups with VR controllers.",
+   "configured_as": [
+    "lesson:symmetry_compare"
+   ],
+   "readable_text": [
+    {
+     "text": "VR Tile Editor",
+     "set_in": "_create_labels",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Unknown",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "lattice",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Wallpaper Group %d",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "Mode %d",
+     "set_in": "_update_mode_label",
+     "file": "vr_tile_editor.gd"
+    },
+    {
+     "text": "ONE MARK / THREE RULES",
+     "set_in": "_ready",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "SOURCE",
+     "set_in": "_ready",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "PAINT",
+     "set_in": "_ready",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "Finite samples / 8 x 8 source blocks / 4 x 4 cells per source",
+     "set_in": "_ready",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "source",
+     "set_in": "snapshot",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "caption",
+     "set_in": "snapshot",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "HELD /",
+     "set_in": "hold_sample",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "LIVE /",
+     "set_in": "refresh",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "PAINT / %d\\n\\n%s\\n\\nHOLD keeps pixels",
+     "set_in": "refresh",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "REPEAT",
+     "set_in": "refresh",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "REVERSE X",
+     "set_in": "refresh",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "REVERSE X\\n+ 2 SOURCE ROWS",
+     "set_in": "refresh",
+     "file": "symmetry_compare_lesson.gd"
+    },
+    {
+     "text": "Step %d / %d  |  BPM: %d  |  %s",
+     "set_in": "_update_step_label",
+     "file": "array_sequencer.gd"
+    },
+    {
+     "text": "ENTER THE PATTERN",
+     "set_in": "_ready",
+     "file": "curved_pattern_room.gd"
+    },
+    {
+     "text": "PATTERN STUDIO",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / 2 x 2",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "result",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "02  REPEATED SURFACE",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT 1",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "status",
+     "set_in": "_ready",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "_value",
+     "set_in": "selector",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "01  SOURCE / %d x %d",
+     "set_in": "rebuild_grid",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "WEB PALETTE",
+     "set_in": "refresh",
+     "file": "pattern_studio_console.gd"
+    },
+    {
+     "text": "PAINT %d / %s",
+     "set_in": "refresh_palette",
+     "file": "pattern_studio_console.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "Begin at the tilted console in the side bay. Its sixteen buttons hold an asymmetric mark: a bent line, a second colour near a corner, a third near the bend. The left panel holds a sample. The right panel and the carpet follow the current source and rule.\n\nChoose **PM**. Keep your eyes on the corner colour. Find it in the next block. Has the mark travelled, or has it also reversed? Compare it with the held **P1** sample. You have changed no source address.\n\nNow choose **PG**. The reversal remains, but the colour no longer arrives opposite its neighbour. Follow it along the other direction. The rule has slipped the reflected copy by half the source height. With four source rows, that is two rows.\n\nTry to describe the difference before pressing **HOLD**. This saves the current image on the left. It gives your next change somewhere to return to.\n\nThe three buttons select translation, reflection and glide reflection. In the editor's integer lookup, the last two differ by one line. This is the PG branch of `WallpaperGroups.get_symmetric_color`, with its local source coordinates:\n\n```gdscript\nvar tile_x = px / tile_size\ntx = px % tile_size\nty = py % tile_size\nif tile_x % 2 == 1:\n    tx = tile_size - 1 - tx\n    ty = (ty + tile_size / 2) % tile_size\n```\n\nAn odd block reverses the source column. Then the row shifts halfway round the source and wraps. The array stays where it was; the lookup changes which of its addresses is read. The panel shows eight source blocks across and eight down. A source block is not necessarily a full translation period: reversal makes you wait for another block before its orientation returns.\n\nSelect a colour, then press one of the sixteen source cells. The live panel and floor change together; the held image keeps its pixels. **UNDO** can recover a paint edit, a rule choice or the previous held sample. **RESET** restores the initial mark and P1 while leaving the held comparison available.\n\nNow make the source less distinctive. Remove the corner colour, or make both sides alike. Does the difference between rules remain easy to see? A rule can still execute while your chosen mark conceals what it does. The selected button names a construction; it does not prove that the finished image has exactly that symmetry group. An unusually symmetric source can introduce more symmetry.",
+   "source": "commons/primitives/arrays/vr_tile_editor.tscn, commons/primitives/arrays/vr_tile_editor.gd, commons/primitives/arrays/symmetry_compare_lesson.gd"
+  }
+ ]
+}

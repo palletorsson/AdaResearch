@@ -1,0 +1,158 @@
+{
+ "sweep": "grid2d",
+ "peak_changed_pct": 4.051,
+ "subject_pct": 82.89,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "algorithm": "GAME_OF_LIFE"
+   },
+   "b": {
+    "algorithm": "SEEDS"
+   },
+   "changed_px": 1519,
+   "changed_pct": 0.263
+  },
+  {
+   "a": {
+    "algorithm": "GAME_OF_LIFE"
+   },
+   "b": {
+    "algorithm": "BRIANS_BRAIN"
+   },
+   "changed_px": 2018,
+   "changed_pct": 0.349
+  },
+  {
+   "a": {
+    "algorithm": "GAME_OF_LIFE"
+   },
+   "b": {
+    "algorithm": "RULE30"
+   },
+   "changed_px": 23116,
+   "changed_pct": 4.002
+  },
+  {
+   "a": {
+    "algorithm": "GAME_OF_LIFE"
+   },
+   "b": {
+    "algorithm": "RULE110"
+   },
+   "changed_px": 22140,
+   "changed_pct": 3.833
+  },
+  {
+   "a": {
+    "algorithm": "GAME_OF_LIFE"
+   },
+   "b": {
+    "algorithm": "RULE90"
+   },
+   "changed_px": 21902,
+   "changed_pct": 3.792
+  },
+  {
+   "a": {
+    "algorithm": "SEEDS"
+   },
+   "b": {
+    "algorithm": "BRIANS_BRAIN"
+   },
+   "changed_px": 1986,
+   "changed_pct": 0.344
+  },
+  {
+   "a": {
+    "algorithm": "SEEDS"
+   },
+   "b": {
+    "algorithm": "RULE30"
+   },
+   "changed_px": 22853,
+   "changed_pct": 3.957
+  },
+  {
+   "a": {
+    "algorithm": "SEEDS"
+   },
+   "b": {
+    "algorithm": "RULE110"
+   },
+   "changed_px": 21569,
+   "changed_pct": 3.734
+  },
+  {
+   "a": {
+    "algorithm": "SEEDS"
+   },
+   "b": {
+    "algorithm": "RULE90"
+   },
+   "changed_px": 21738,
+   "changed_pct": 3.764
+  },
+  {
+   "a": {
+    "algorithm": "BRIANS_BRAIN"
+   },
+   "b": {
+    "algorithm": "RULE30"
+   },
+   "changed_px": 23400,
+   "changed_pct": 4.051
+  },
+  {
+   "a": {
+    "algorithm": "BRIANS_BRAIN"
+   },
+   "b": {
+    "algorithm": "RULE110"
+   },
+   "changed_px": 22456,
+   "changed_pct": 3.888
+  },
+  {
+   "a": {
+    "algorithm": "BRIANS_BRAIN"
+   },
+   "b": {
+    "algorithm": "RULE90"
+   },
+   "changed_px": 22082,
+   "changed_pct": 3.823
+  },
+  {
+   "a": {
+    "algorithm": "RULE30"
+   },
+   "b": {
+    "algorithm": "RULE110"
+   },
+   "changed_px": 3117,
+   "changed_pct": 0.54
+  },
+  {
+   "a": {
+    "algorithm": "RULE30"
+   },
+   "b": {
+    "algorithm": "RULE90"
+   },
+   "changed_px": 3044,
+   "changed_pct": 0.527
+  },
+  {
+   "a": {
+    "algorithm": "RULE110"
+   },
+   "b": {
+    "algorithm": "RULE90"
+   },
+   "changed_px": 2827,
+   "changed_pct": 0.489
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>One impact, then the world</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>One impact, then the world</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Impulse</li>
+<li>Momentum change</li>
+<li>A one-shot action</li>
+<li>Collision response</li>
+</ul>
+<p>Send the black bowling point down the lane. Watch the first pin it reaches and follow that pin into the next contact. Your throw starts a sequence you no longer direct.</p>
+<h2>Make the small study</h2>
+<p>Use the same point twice: one striker and one target. Give the striker one impulse, then let their collision unfold. Start without gravity or a floor so the first question is the impact.</p>
+<p><strong>The hall adds:</strong> The hall adds ten pins, floor friction, rolling and a score. Its ROLL control can be used repeatedly; your study allows one launch before a restart.</p>
+<p>Save <code>10_impulse.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 10_impulse.gd</h2>
+<!-- student-code:10_impulse.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var point = Point.new()
+var target: RigidBody3D
+var used := false
+var impulse := Vector3(0, 0, 3) # N·s in the study frame
+
+func _ready() -&gt; void:
+    add_child(point)
+    point.position = Vector3(0, 1.2, -1)
+    target = Point.new()
+    add_child(target)
+    target.position = Vector3(0, 1.2, 1)
+    for body in [point, target]:
+        body.mass = 1.0
+        body.collision_layer = 4
+        body.collision_mask = 4
+    caption(&quot;One impulse. Then the contact has its turn.&quot;)
+    button(&quot;ROLL ONCE&quot;, Vector3(0, 1, -1.8), roll)
+
+func roll() -&gt; void:
+    if used:
+        return
+    used = true
+    point.apply_central_impulse(global_basis * impulse)
+</code></pre>
+<h2>Read the change</h2>
+<p>An impulse changes momentum in one action. With a 1 kg body, the chosen 3 N·s impulse gives a velocity change of 3 m/s before contact. Doubling mass halves that initial change in velocity.</p>
+<p><code>roll()</code> calls <code>apply_central_impulse</code> once. The <code>used</code> flag stops another button event from adding a second impulse. This differs from the sustained force you applied during repeated physics updates.</p>
+<p>Both points use collision layer and mask 4, so they can meet. The script never assigns a velocity to the target. Its response comes from contact with the striker.</p>
+<h2>Change one thing</h2>
+<p>Double the striker’s mass while keeping the impulse. Predict its initial speed, then observe the collision separately. Restart each trial. A prediction about the launch speed does not yet tell you how the whole collision will end.</p>
+<h2>Return to the hall</h2>
+<p>Back at the lane, throw slightly off-centre. Follow the first sideways deflection and the contacts it makes possible. A small change in aim can produce a different arrangement of fallen pins.</p>
+<h2>Model notes</h2>
+<p>Impulse is measured in N·s, equivalent to kg·m/s. The collision settings and body properties determine the contact response; this code does not promise a perfectly elastic collision. The study’s points meet in mid-air, before the hall adds rolling and floor contact.</p>
+<h2>Into the next room</h2>
+<p>An impulse happens once. In the last hall, hold a trigger to keep adding acceleration to your own movement.</p>
+<p><a href="final.html#VFM_08_Arena">Reflective text</a>.</p></main></html>

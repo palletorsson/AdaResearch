@@ -1,0 +1,93 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -7,9 +7,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Pre/final.md",
+-    "text_sha256": "1e0ae66249fa0ab87c8b403d626915f475105ceb47f7b512bb241087eb00aeb0",
++    "text_sha256": "b34cf164d23fbb4a5d9e52c83687bba1573a2a294f8035e757a477b99436b5af",
+     "map_sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Pre"
+   },
+   "Trans_Introduction": {
+     "primary_tokens": [
+@@ -22,9 +23,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Introduction/final.md",
+-    "text_sha256": "273f7bce50490f3bc4e83b0abd5c181e854e82e889f0fec0941d7d95f2f08387",
++    "text_sha256": "86d81b63407084ea7ed08c50949d47cb7884aecf8ad618cdf6070e30d29acc62",
+     "map_sha256": "fe69005af558ba231024f72bdd7f8fbedcdd35ed80bd538ca16c9fd1f19435a2",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Introduction"
+   },
+   "Trans_Translation": {
+     "primary_tokens": [
+@@ -36,9 +38,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Translation/final.md",
+-    "text_sha256": "ec7b29995832350446881a6e2f1b4f916c51c0937941df413c05f9541cd6aa0e",
++    "text_sha256": "c3b2f66196d0b26114567ce60c1796ca9dbc66628dfbc5f0a32bfa5cda2e23d3",
+     "map_sha256": "91dd759ce20b305412aa2836729176cc877bb587843017c913478bb713489d08",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Translation"
+   },
+   "Trans_Rotation": {
+     "primary_tokens": [
+@@ -53,9 +56,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Rotation/final.md",
+-    "text_sha256": "0b9a05d41f0d1ff9bda4c0a85ab946ec629ec92f8f5670ce3ffdff690c879172",
++    "text_sha256": "334b466fede08c7157c26dc669204ea86f92a6fbe068767b7af96cba24def5ed",
+     "map_sha256": "3a18a836fdc11e7511c79b64b4914e4971d7a0e8cc3ab8203656b3a274fdf774",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Rotation"
+   },
+   "Trans_Scale": {
+     "primary_tokens": [
+@@ -65,9 +69,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Scale/final.md",
+-    "text_sha256": "6f4cf75382995324a151e50a7a0375e804b6cabab09b78dd738321a29b114a83",
++    "text_sha256": "1007542927ff54d86dbd7704de13d97d5234bf29813c3bf977a01c41c4992855",
+     "map_sha256": "0746e3b72d6d51cbd893e65b22adb3c6d071869ab81fa3d90981f3b31a1fe008",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Scale"
+   },
+   "Trans_Body": {
+     "primary_tokens": [
+@@ -79,9 +84,10 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Body/final.md",
+-    "text_sha256": "f3f3d50be6ffd00875d199652f3ed8fb85324438833e49459760d4c5e1c35096",
++    "text_sha256": "96d1d895434d79defbbc62f4ec2c0b1c7281fd158b82caf85af39172c34c6ef9",
+     "map_sha256": "19bddcd6ff6efec677215c81e4e6dcf7222a731dce00e5479ec97e5ed4371fa5",
+-    "learner_verified": false
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Body"
+   },
+   "Trans_Pit": {
+     "primary_tokens": [
+@@ -94,8 +100,9 @@
+     "status": "draft",
+     "sequence": "transformation",
+     "text_path": "commons/maps/Trans_Pit/final.md",
+-    "text_sha256": "06124e3ec49a3a8586cd2696526f3067473f26fb5686d2523793494f2585fc33",
+-    "map_sha256": "815a991603ada7c4dda269cbac505e6e866c4f280237efee8ce917016f4bdf9e",
+-    "learner_verified": false
++    "text_sha256": "832511305433ed1422acf4243f481083229689d6612dcd3560d26e36131381ff",
++    "map_sha256": "2f600e428f43903b2d59f86cfbd9ec03a4412b4cbb6ad36599b87383fa4db162",
++    "learner_verified": false,
++    "local_review": "http://localhost:3003/book-tasks/review?seq=transformation&map=Trans_Pit"
+   }
+ }

@@ -1,0 +1,226 @@
+--- before/commons/ui/control_panel.gd
++++ commons/ui/control_panel.gd
+@@ -34,6 +34,13 @@
+ 
+ @export var title: String = "": set = _set_title
+ @export var spacing: float = 0.30: set = _set_spacing       # metres between slots
++## Opt-in wrapping. Zero retains the original single-row layout.
++@export_range(0, 16, 1) var layout_columns: int = 0: set = _set_layout_columns
++## Optional row width in panel metres. Oversized controls keep their size and
++## receive their own row. A zero width disables this limit.
++@export var layout_max_width: float = 0.0: set = _set_layout_max_width
++## Clear space between a row's labels and the next row's controls.
++@export var row_gap: float = 0.035: set = _set_row_gap
+ @export var tilt_degrees: float = -20.0: set = _set_tilt     # recline toward the player
+ @export var panel_height: float = 0.42
+ 
+@@ -76,6 +83,7 @@
+ var _readout_disp: Node3D     # persistent dark display at the top (if add_readout)
+ var _readout_label: Label     # the live number — a 2D Label inside a SubViewport
+ var _relayout_pending: bool = false   # set when _relayout is skipped pre-tree; flushed by _ready on tree entry
++var _settle_pending := false
+ 
+ 
+ func _ready() -> void:
+@@ -204,7 +212,7 @@
+ 
+ # ── Layout ────────────────────────────────────────────────────────────────
+ 
+-func _relayout() -> void:
++func _relayout(settle: bool = true) -> void:
+ 	# Internal layout reads child global_transforms (see _min_z_in_tilt), which error
+ 	# if the panel isn't in the tree yet — e.g. sliders added during an artifact's
+ 	# _ready, before the panel is mounted. Defer; _ready re-runs us on tree entry.
+@@ -221,6 +229,14 @@
+ 	# board (no controls) still gets a full plate (was: early-return on n==0,
+ 	# which left readout-only boards plateless).
+ 	if not has_controls and not has_readout and title == "":
++		return
++	if _uses_rows():
++		_layout_rows()
++		# Controls may build their visuals in deferred ready callbacks. Measure
++		# again once, after those callbacks; never run a per-frame layout loop.
++		if settle and not _settle_pending:
++			_settle_pending = true
++			call_deferred("_settle_rows")
+ 		return
+ 	# Each item occupies `slots` of horizontal width — wide items (screens) get more.
+ 	var slot_w: Array = []
+@@ -272,8 +288,99 @@
+ 	call_deferred("_fit_items_to_cells")
+ 
+ 
+-## Scale each item uniformly so it fits within one grid cell — cell width
+-## (spacing) and the control-zone height (CTRL_H). Contain, never stretch.
++func _uses_rows() -> bool:
++	return layout_columns > 0 or layout_max_width > 0.0
++
++
++func _settle_rows() -> void:
++	_settle_pending = false
++	if is_inside_tree() and _uses_rows(): _relayout(false)
++
++
++## Bounds in the row's axes, including input shapes. Keep authored scale and
++## rotation; a wide slider or custom hit area must get space, not be shrunk.
++func _control_bounds(node: Node3D) -> AABB:
++	var inverse := _row.global_transform.affine_inverse()
++	var result := AABB()
++	var first := true
++	var stack: Array[Node] = [node]
++	while not stack.is_empty():
++		var child: Node = stack.pop_back()
++		var bounds := AABB()
++		var include := false
++		if child is VisualInstance3D and child.is_visible_in_tree() and not String(child.name).to_lower().contains("shadow"):
++			bounds = child.get_aabb()
++			include = true
++		elif child is CollisionShape3D and child.shape != null and not child.disabled:
++			bounds = child.shape.get_debug_mesh().get_aabb()
++			include = true
++		if include:
++			var transform_in_row: Transform3D = inverse * child.global_transform
++			for corner in 8:
++				var point: Vector3 = transform_in_row * bounds.get_endpoint(corner) - node.position
++				if first:
++					result = AABB(point, Vector3.ZERO)
++					first = false
++				else: result = result.expand(point)
++		for child_node in child.get_children(): stack.append(child_node)
++	return result
++
++
++func _layout_rows() -> void:
++	for child in _row.get_children():
++		if String(child.name).begins_with("Label_"):
++			_row.remove_child(child)
++			child.free()
++	var rows: Array[Dictionary] = []
++	var row := {"items": [], "width": 0.0, "height": CTRL_H, "labels": false}
++	for index in _items.size():
++		var item: Dictionary = _items[index]
++		var node: Node3D = item.node
++		if not is_instance_valid(node): continue
++		var bounds := _control_bounds(node)
++		var width := maxf(spacing * (1.4 if item.get("wide", false) else 1.0), bounds.size.x + GAP * 2.0)
++		var full: bool = layout_columns > 0 and row.items.size() >= layout_columns
++		var too_wide: bool = layout_max_width > 0.0 and float(row.width) + width > layout_max_width + 0.00001
++		if not row.items.is_empty() and (full or too_wide):
++			rows.append(row)
++			row = {"items": [], "width": 0.0, "height": CTRL_H, "labels": false}
++		row.items.append({"index": index, "width": width, "bounds": bounds})
++		row.width += width
++		row.height = maxf(row.height, bounds.size.y)
++		row.labels = row.labels or not String(item.label).is_empty()
++	if not row.items.is_empty(): rows.append(row)
++	var total_width := spacing * 2.0 if rows.is_empty() else 0.0
++	var total_height := 0.0
++	for band in rows:
++		total_width = maxf(total_width, band.width)
++		total_height += float(band.height) + (0.010 + LBL_H if band.labels else 0.0)
++	total_height += row_gap * maxi(0, rows.size() - 1)
++	var top := total_height * 0.5
++	var y := top
++	for band in rows:
++		var cy: float = y - float(band.height) * 0.5
++		var label_y: float = y - float(band.height) - 0.010 - LBL_H * 0.5
++		var cursor: float = -float(band.width) * 0.5
++		for cell in band.items:
++			var item: Dictionary = _items[cell.index]
++			var node: Node3D = item.node
++			var cx: float = cursor + float(cell.width) * 0.5
++			var centre: Vector3 = cell.bounds.get_center()
++			node.position = Vector3(cx - centre.x, cy - centre.y, CONTROL_Z)
++			if not String(item.label).is_empty():
++				var label_width := maxf(spacing * 0.74, float(cell.width) - PAD * 2.0)
++				var label := _label_node(item.label, label_color, Vector2(label_width, LBL_H))
++				label.name = "Label_%d" % int(cell.index)
++				label.position = Vector3(cx, label_y, PLATE_Z + 0.001)
++				_row.add_child(label)
++			cursor += float(cell.width)
++		y -= float(band.height) + (0.010 + LBL_H if band.labels else 0.0) + row_gap
++	_build_chrome(_compute_box(total_width, false, not rows.is_empty(), top, -top))
++	_fit_items_to_cells()
++
++
++## Legacy rows contain non-physics visuals; wrapped rows preserve every control's
++## authored dimensions. Both paths seat the control's back on the shared plate.
+ func _fit_items_to_cells() -> void:
+ 	if _row == null:
+ 		return
+@@ -283,7 +390,7 @@
+ 		var node = item["node"]
+ 		if not is_instance_valid(node):
+ 			continue
+-		node.scale = Vector3.ONE
++		if not _uses_rows(): node.scale = Vector3.ONE
+ 		var ab := _local_aabb(node)
+ 		if ab.size.x <= 0.0001 or ab.size.y <= 0.0001:
+ 			continue
+@@ -291,7 +398,7 @@
+ 		# Godot physics does not support scaled bodies; a scaled grab eats part
+ 		# of every hand movement → the jumpy/sticky VR drag). They keep scale 1
+ 		# and get room via their item's slot span instead.
+-		if not _has_rigid_body(node):
++		if not _uses_rows() and not _has_rigid_body(node):
+ 			# Contain only — shrink items that overflow the cell, never enlarge a
+ 			# small control (keep natural size, don't balloon to fill the cell).
+ 			var s: float = minf(cell_w / ab.size.x, CTRL_H / ab.size.y)
+@@ -379,7 +486,7 @@
+ 
+ ## The box model: stack zones around the controls (at y=0) and return every
+ ## zone's y plus the content-sized plate dimensions. Compact — no fixed height.
+-func _compute_box(total_w: float, has_labels: bool, has_controls: bool = true) -> Dictionary:
++func _compute_box(total_w: float, has_labels: bool, has_controls: bool = true, row_top: float = NAN, row_bottom: float = NAN) -> Dictionary:
+ 	var has_title := title != ""
+ 	var has_readout := _readout_disp != null
+ 	var has_header := has_title or has_readout
+@@ -387,6 +494,8 @@
+ 	# the plate is compact around the header instead of leaving a hollow middle.
+ 	var ctrl_top := (CTRL_H * 0.5) if has_controls else 0.0
+ 	var ctrl_bot := (-CTRL_H * 0.5) if has_controls else 0.0
++	if not is_nan(row_top): ctrl_top = row_top
++	if not is_nan(row_bottom): ctrl_bot = row_bottom
+ 	# Below the controls: the baked labels, then padding.
+ 	var label_y := ctrl_bot - 0.010 - LBL_H * 0.5
+ 	var bottom := (label_y - LBL_H * 0.5 if has_labels else ctrl_bot) - PAD
+@@ -497,6 +606,18 @@
+ 	spacing = maxf(0.12, v)
+ 	if is_inside_tree(): _relayout()
+ 
++func _set_layout_columns(v: int) -> void:
++	layout_columns = maxi(0, v)
++	if is_inside_tree(): _relayout()
++
++func _set_layout_max_width(v: float) -> void:
++	layout_max_width = maxf(0.0, v)
++	if is_inside_tree(): _relayout()
++
++func _set_row_gap(v: float) -> void:
++	row_gap = maxf(GAP, v)
++	if is_inside_tree(): _relayout()
++
+ func _set_tilt(v: float) -> void:
+ 	tilt_degrees = v
+ 	if _tilt and is_instance_valid(_tilt):
+--- before/commons/artifacts/pattern_machine_a/recipe_study.gd
++++ commons/artifacts/pattern_machine_a/recipe_study.gd
+@@ -47,10 +47,16 @@
+ 	add_wall_receiver("NORTH",Vector3(3.49,0.5,1.0),90,4.8)
+ 	add_wall_receiver("EAST",Vector3(0.5,0.5,6.51),180,1.8)
+ 	box("SpecimenBench",Vector3(-3.1,0.4,1.2),Vector3(3.0,0.8,0.9))
+-	box("ConsoleStand",Vector3(-3.1,0.46,0.1),Vector3(2.6,0.92,0.55))
++	box("ConsoleStand",Vector3(-3.1,0.39,0.1),Vector3(1.35,0.78,0.55))
+ 	var panel:Node3D=load("res://commons/ui/control_panel.gd").new()
++	panel.name="RecipeControls"
+ 	panel.title="ONE RULE / FIVE SURFACES"
+-	panel.position=Vector3(-3.1,1.14,0.1); panel.rotation_degrees.y=180; add_child(panel)
++	# Keep all eight actions and full-size hit targets within one backed group.
++	panel.layout_columns=4
++	panel.label_color=Color(0.07,0.07,0.08)
++	panel.title_color=Color(0.07,0.07,0.08)
++	# Keep the taller board below the sample comparison rather than in its way.
++	panel.position=Vector3(-3.1,1.01,0.1); panel.rotation_degrees.y=180; add_child(panel)
+ 	for title in ["MARK","SAVE","RESTORE","LINK / HOLD","TARGET","UNDO LINK","REPEAT SIZE","OFFSET +5CM"]: buttons.append(panel.add_button(title))
+ 	readout=panel.add_readout("LINK TARGET: CURVE / LIVE")
+ 	buttons[0].pressed.connect(func(): loom.call("_toggle_peg",1,2))

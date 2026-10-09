@@ -1,0 +1,11 @@
+# Ribbon_Patterns_03 — from source to skirt
+
+Completed 2026-09-10 for the user's request to continue Patterns. New primary studio plus existing live mirror and runway; all fourteen earlier placements retained as secondary. The rotating laser moves to (58,50) with shorter beams. Embedded configuration contains the coloured-line, minimal-glitch and advanced-glitch exhibits without removing their objects. Minimal-glitch now ignores non-grid configuration keys when deciding to rebuild; this avoids duplicate creation during early museum configuration.
+
+The book (971 words) follows real actions from painted source, UVs and repetition to fragment cut-outs, material finish, static displacement, saved skirt assignment and performers. All three primary names match placed tokens and live composed-book anchors. Technical, critical, summary and blurb texts are aligned. All seven current Patterns rooms now have focused book passages; secondary exhibit reviews remain open.
+
+Verification: `commons/testing/probe_fabric_studio.gd` loads the actual ordinary museum and passes 39 desktop checks. Five captures were inspected. Final run has no script errors; pre-existing boot UID warning `uid://rwex60pqapc` remains. Probe save paths are isolated in ada_run; actual player appearance and progression were not written by the probe. Three capsule approaches are clear. Headset reach/readability, continuous gestures and mirror stereo comfort remain untested.
+
+Evidence and guide: http://localhost:3003/research/possible-bodies/ribbon-patterns-03.html . Seventeen published local Encyclopedia files match source bytes over HTTP. Live compose-docs returns no stale blocks. Guide JavaScript syntax and scoped diff whitespace checks pass. Source hashes are in doc/research/possible-bodies/verification.json; source-files.json here enumerates the implementation and evidence inputs. Before snapshots preserve modified existing source and texts. No commit was made.
+
+Next: Change_Intro, beginning with rate rather than another arbitrary appearance change. The closing fabric recipe and Foundry/editor formats are still separate. Additional garment adapters, cross-tool recipe interoperability, continuous gestures and full secondary curation are future work; do not call them completed.

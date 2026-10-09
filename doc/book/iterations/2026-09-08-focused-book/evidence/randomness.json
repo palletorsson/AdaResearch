@@ -1,0 +1,582 @@
+{
+  "sequence": "randomness",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Random_Definition",
+      "primary_tokens": [
+        "seed_replay_demo"
+      ],
+      "question": "Can a pattern look unpredictable and still return exactly?",
+      "ontology": "A pseudorandom sequence is determined by generator state and the order of draws. A seed supplies a repeatable starting state; visual irregularity does not distinguish determinism from nondeterminism.",
+      "action": "Pick a recognisable part of the coloured grid, press REPLAY and compare. Use RANDOM to choose another seed, then replay that pattern too. The SEED slider offers deliberate selection of a seed.",
+      "observable": "REPLAY reconstructs the same pattern at the current seed; a new seed generally reorganises all the colours. Nearby seed numbers need not produce nearby-looking patterns.",
+      "mechanism": "_regenerate resets a local RandomNumberGenerator.seed for each display column and consumes three randf draws per cube in a fixed order. Default comparison=single, seed42; buttons regenerate or select a seed0–999.",
+      "limit": "The seed reproduces this procedure with these parameters and draw order. It does not name a universal world independent of the generator or program version, and irregular colour alone cannot establish a physical entropy source.",
+      "variation": "Ask another visitor to choose a pattern they call random, then reproduce it. A paired replica view exists as an authoring option; it is not necessarily the current presentation.",
+      "prior_bridge": "Live previous room: WaveFunctions_Synthesis_Lab. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Entropy. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/seed_replay/seed_replay_demo.gd :: _regenerate, _build_panel, _on_seed_slider, _randomize_seed"
+      ],
+      "source_files": [
+        "commons/maps/Random_Definition/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+        "algorithms/randomness/seed_replay/seed_replay_demo.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Definition/map_data.json": "341ef6bfa561c55c83163db06f79fc123ad51442ed74ed270919da6ef73ac999",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/seed_replay/seed_replay_demo.tscn": "10ea4bea4d4391659706c3ab0486db53340f249a78be81a730f87d1423e1e3e2",
+        "algorithms/randomness/seed_replay/seed_replay_demo.gd": "661a54199e7388dbd65c9ccde064021599d3cf09ca3f80a313a2ea588b90f688"
+      },
+      "placements": [
+        {
+          "cell": [
+            3,
+            12
+          ],
+          "value": "seed_replay_demo:0:-0.5"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Entropy",
+      "primary_tokens": [
+        "shannon_entropy_meter"
+      ],
+      "question": "What can one number tell you about the uncertainty in a sequence?",
+      "ontology": "Symbol-frequency entropy measures uncertainty under a distribution of symbol counts. It is a property of a chosen representation and sample, not a general score for disorder or meaning.",
+      "action": "Inspect the displayed symbol strip and histogram. Identify a common and a less common symbol, then compare the reported entropy with the marked maximum. This meter presents a completed sample; there is no distribution slider to operate.",
+      "observable": "The bars show uneven sample counts even though the source selects uniformly among ten symbols. Its estimated entropy is near but generally below log2(10), the maximum for ten equally likely symbols.",
+      "mechanism": "_run_measurement draws sequence_length200 symbols once from a locally seeded uniform generator, counts them, then computes −sum(p*log2(p)). _ready/_build_all run it; there is no continuously resampling _process.",
+      "limit": "Reordering a sequence leaves its one-symbol histogram and this entropy unchanged. A repetitive-looking ordering and a shuffled ordering can receive the same reading; this meter does not measure dependencies or semantic significance.",
+      "variation": "Imagine rearranging the displayed symbols into sorted groups without changing any counts. Predict what the number would miss. An ordering-sensitive comparison would require another measure or display.",
+      "prior_bridge": "Live previous room: Random_Definition. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Remove. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd :: _ready, _run_measurement, disclosure default works"
+      ],
+      "source_files": [
+        "commons/maps/Random_Entropy/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Entropy/map_data.json": "c45774d9e628acafbd72539f6c0416248cedb2a79adf1e4054e8c56c814c68cd",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn": "def91e9cfe5731dd724b02e19539dade179ea3df9633bf4ae6152f4aabc5a0a8",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": "77bdf97b8c6a94e22c1d5d2ac72b5a0a0e66126adc5e41edcdcefe4b1aaf2719"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            6
+          ],
+          "value": "shannon_entropy_meter"
+        }
+      ],
+      "cautions": "Legacy identity says continuous resampling and randomness IS evenness; both are misleading. The symbol strip shows only the first forty of200 draws, not the complete data."
+    },
+    {
+      "room_id": "Random_Remove",
+      "primary_tokens": [
+        "remove_random"
+      ],
+      "question": "What does a removal rule choose before chance chooses an object?",
+      "ontology": "Random selection takes place over an eligible set. Deletion changes that set and the resulting space; the range defining eligibility is an authored condition.",
+      "action": "Inspect the area in which pieces are meant to be removed. If the removal demonstration is active, compare the object briefly highlighted with the gap left afterwards and follow several selections. No picking or undo control is provided.",
+      "observable": "The intended observable is one selected piece shrinking or disappearing at a time, leaving negative space. Current museum host binding is unverified, so absent removal must be recorded as a development gap rather than evidence of the concept.",
+      "mechanism": "RemoveRandom searches a GridMultiMesh, otherwise candidate scene nodes. Range/Column/Row/All restrict candidates; the timer chooses random remaining indices, highlights and hides/deletes them. The artifact owns no demonstration mesh and can fall back to a broad scene search.",
+      "limit": "Randomness does not make the eligible set neutral. A range can exclude an object with certainty before random choice begins. Automatic deletion without an undo also loses the visible history of what stood there.",
+      "variation": "Proposed restoration: explicitly bind an owned cube lattice, expose the eligible region and preserve a before-state or undo. This is a room improvement, not a currently available visitor experiment.",
+      "prior_bridge": "Live previous room: Random_Entropy. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Randomness_10_PRINT_Algorithm. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/RemoveRandom.gd :: _ready host search, _should_include_instance, _remove_node, removal timer"
+      ],
+      "source_files": [
+        "commons/maps/Random_Remove/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/remove_random.tscn",
+        "algorithms/randomness/RemoveRandom.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Remove/map_data.json": "e6c7c863eceed1c0613663d49a2ef4984121a537e634d114cbc7c17702cbfa03",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/remove_random.tscn": "b883fa85094bb378a7603baf86343cdea215c059d5726c29c11b7e236a6cb103",
+        "algorithms/randomness/RemoveRandom.gd": "8a6cca6874a29ecf2b4845994d7e0e680706c129713f0f9e1f43c1cce0411350"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            7
+          ],
+          "value": "remove_random:90"
+        }
+      ],
+      "cautions": "CENTRAL DEVELOPMENT GAP: museum no longer guarantees the old GridMultiMesh host; broad fallback may select unrelated geometry. Do not author a confident completed interaction or run destructive scene fallback against user runtime as verification."
+    },
+    {
+      "room_id": "Randomness_10_PRINT_Algorithm",
+      "primary_tokens": [
+        "ten_print_maze_3d"
+      ],
+      "question": "When do independent marks begin to look like a maze?",
+      "ontology": "One binary choice per grid cell can become a larger visual structure through adjacency and a chosen way of drawing each outcome.",
+      "action": "Choose a small group of cells and distinguish its two diagonal orientations. Follow a contour across several cell corners, then watch a diagonal change and see which apparent connections change with it.",
+      "observable": "A repeated two-choice rule creates long-looking lines and enclosures without designing them individually. The animated version changes selected wall orientations over time; a separate ant attempts navigation through that changing layout.",
+      "mechanism": "generate_maze stores randi()%2 per cell, chooses an entrance/exit, and builds a finer navigation grid. The scene sets wall_change_interval0.08; the default animate path runs a timer that alters selected walls. Representation modes draw the bits as strokes, characters, walls or tiles.",
+      "limit": "A pattern that resembles a maze does not guarantee a connected route between its endpoints. The ant and pathfinder are additional procedures, not consequences contained in the original binary choice.",
+      "variation": "Read the result once as a texture and once as a route, naming what extra promises the second reading makes. A frozen copy would help compare one change at a time; freezing is an authoring option, not a visitor button here.",
+      "prior_bridge": "Live previous room: Random_Remove. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Cubes. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd :: generate_maze, build_navigation_grid, setup_wall_movement_timer",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn :: timer override"
+      ],
+      "source_files": [
+        "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json": "06e692a18aee7c842aa2a5ddc9e68867968c51cba06a09ff616980d2f4171a1c",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn": "8c1272fc2a0185286e4e3005cece86b41d8ef96524e7c7eedf309d1b8cd76dca",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd": "dd892e67aa669f197902681bfc1f51dad516cda302222984d766a33c38958fc4"
+      },
+      "placements": [
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "value": "ten_print_maze_3d:0:1"
+        },
+        {
+          "cell": [
+            11,
+            2
+          ],
+          "value": "ten_print_maze_3d:0:1"
+        },
+        {
+          "cell": [
+            1,
+            12
+          ],
+          "value": "ten_print_maze_3d:90:1"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Cubes",
+      "primary_tokens": [
+        "dice_throw"
+      ],
+      "question": "How much can one throw tell you about a die?",
+      "ontology": "A discrete outcome is one result; a distribution describes probabilities across possible results. Empirical counts and a theoretical fairness assumption are different kinds of evidence.",
+      "action": "Take and throw the die. Wait for it to settle and compare its upward face with the reported result. Repeat several times, watching the histogram and running mean rather than judging from the most spectacular roll.",
+      "observable": "Each settled throw adds to one face count. Ball rain scales with the result. The running mean changes with every roll and need not equal3.5 in a small sample.",
+      "mechanism": "The die is an XRTools pickable rigid body. After a dropped signal, settle thresholds gate reading the face with the largest transformed upward normal. Counters record that physical result; balls_per_pip16 controls reward count.",
+      "limit": "The simulated die does not prove equiprobability merely by being a cube. Throw technique, geometry and physics can affect results. More reward balls measure the reward rule, not evidence that a rare or high result is more deserved.",
+      "variation": "Compare a gentle and a vigorous style of throw while keeping a record of which style produced which result. Pooling both records too early would erase the intervention you are trying to investigate.",
+      "prior_bridge": "Live previous room: Randomness_10_PRINT_Algorithm. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Rotate_Random_XYZ. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/dice_throw/dice_throw.gd :: _on_dice_dropped, settle detection, _read_dice_result, reward generation"
+      ],
+      "source_files": [
+        "commons/maps/Random_Cubes/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/dice_throw/dice_throw.tscn",
+        "algorithms/randomness/dice_throw/dice_throw.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Cubes/map_data.json": "a8bbd32bd3644f79ccfc75d42fa40fa8033a2111d1e7a2b9e33cd5851cc0c9d9",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/dice_throw/dice_throw.tscn": "946b09461cab2c93a97235d506eb4f8a978c589fba13bf00eedd7341ccc06771",
+        "algorithms/randomness/dice_throw/dice_throw.gd": "68573664f4d9a413de10f6125695aff13b0e4f71f18066d8bf2d5fa0efeb1827"
+      },
+      "placements": [
+        {
+          "cell": [
+            3,
+            2
+          ],
+          "value": "dice_throw"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Rotate_Random_XYZ",
+      "primary_tokens": [
+        "random_decay_multimesh"
+      ],
+      "question": "Which part of an arrangement can change while its pieces remain?",
+      "ontology": "A displayed state includes position, orientation, colour and scale. Random perturbations can affect selected components without deleting the objects themselves.",
+      "action": "Watch the two stacks long enough for changes to begin. Compare a cube’s orientation and position with its original neighbours, then use TOGGLE to pause and RESET to recover the initial arrangement.",
+      "observable": "The stacks drift, rotate and darken at different configured rates. Their item sizes remain fixed in this scene, so disorder of placement does not have to mean shrinkage or disappearance.",
+      "mechanism": "The scene owns its two MultiMesh stacks. _advance_layer seeds per-item decay values, adds bounded random drift/angular changes, sinks and recolours them. Current scene sets movement_xy_only and rotation_xy_plane_only true, force_uniform_item_size true, and distinct cube/prism decay speed scales.",
+      "limit": "This is an authored perturbation model, not a measurement of thermodynamic entropy or a physical explanation of material decay. The two stacks have different rates, so their difference cannot be attributed only to shape.",
+      "variation": "Pause and describe what changed using separate position/orientation/colour terms. A rotation-only comparison at matched rates would be a useful future map variant.",
+      "prior_bridge": "Live previous room: Random_Cubes. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Walk. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd :: _create_layers, _advance_layer, _create_vr_controls",
+        "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn :: display-plane/uniform-size/rate overrides"
+      ],
+      "source_files": [
+        "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+        "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Rotate_Random_XYZ/map_data.json": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn": "a11aa0ab8ad853da37733495c469e39ce54000c4bd3725a3d325e650ccc2ae0a",
+        "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd": "ce6cbe4873f1f269580afb87db18c7eb822e010c47506ea07cd394019871d467"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            10
+          ],
+          "value": "random_decay_multimesh"
+        }
+      ],
+      "cautions": "The room’s namesake Random_Rotate_Random_XYZ is a host-mutating script with no owned grid. It needs explicit museum host binding before promotion; this selected self-contained stack supports the present chapter."
+    },
+    {
+      "room_id": "Random_Walk",
+      "primary_tokens": [
+        "random_walk_terrarium"
+      ],
+      "question": "What can a path remember that its next step does not use?",
+      "ontology": "A random walk accumulates sampled increments. Its trail is a record kept by the display, while its next-step rule need not consult that history.",
+      "action": "Watch one walker, then switch between2D,3D and LEVY using the labelled buttons. Compare the shapes of the trails and use RESET for a new run.",
+      "observable": "The2D walk stays on a plane; the3D walk explores volume. The LEVY option includes occasional longer jumps. Walls reflect positions and keep the finite trajectories in the enclosure.",
+      "mechanism": "_generate_step samples angles uniformly for2D and spherical directions for3D, with fixed step_size; LEVY scales that direction by a capped heavy-tailed factor. _reflect_boundaries folds positions back at edges. A finite history is rendered separately.",
+      "limit": "A reflected finite enclosure cannot establish the long-time unbounded diffusion law printed in some descriptions. Its mean-square displacement eventually depends on the boundary; its capped LEVY mode is a limited approximation.",
+      "variation": "Find a tangled trail and predict whether its next step must avoid it. Then watch for crossings. A self-avoiding or trail-attracted walker would use a different decision rule.",
+      "prior_bridge": "Live previous room: Random_Rotate_Random_XYZ. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Gaussian. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd :: _generate_step, _reflect_boundaries, controls, statistics"
+      ],
+      "source_files": [
+        "commons/maps/Random_Walk/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Walk/map_data.json": "dac38a76008538ef7c5171c7f2d55e51778b8a168f98269259624c487695f777",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn": "65e6a66d76f2fde25707569f473667c5dc86175d68f3b1cb514fc7662216a35f",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd": "ee37d3f21f6776cb9a22635889db059eddaf18964880f692ab4c51c942dc80f7"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            1
+          ],
+          "value": "random_walk_terrarium:180:-0.3"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Gaussian",
+      "primary_tokens": [
+        "distribution_sampler"
+      ],
+      "question": "What changes when randomness follows a different law?",
+      "ontology": "A probability distribution specifies how outcomes are weighted. A histogram records finite samples from that law; its bars are evidence, not the law itself.",
+      "action": "Select GAUSS and watch samples accumulate. Use CLEAR and watch the early uneven bars form again. Compare UNIFORM while keeping attention on the whole histogram rather than the next individual sample.",
+      "observable": "The Gaussian setting tends to concentrate near its mean, while uniform sampling spreads across the interval. Early runs fluctuate; more samples reveal a more stable overall shape.",
+      "mechanism": "_sample_distribution uses a Box–Muller-style Gaussian transform, uniform draws, a product-loop Poisson sampler and an inverse-log exponential sampler. Values are clamped/rescaled into[0,1]. Buttons select laws or clear samples; mean/std are not live sliders.",
+      "limit": "The bounded display clips tails, so it is not an unlimited Gaussian. A bell shape is a model of a measured quantity, not evidence that a person near the middle is more normal or valuable. Sample count and binning shape the picture.",
+      "variation": "Choose a sparse early histogram and describe what you cannot yet conclude. Compare a second run instead of treating the first striking cluster as the distribution.",
+      "prior_bridge": "Live previous room: Random_Walk. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Mushrooms. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/distribution_sampler/distribution_sampler.gd :: _create_vr_controls, _sample_distribution, _update_bars, _clear_samples"
+      ],
+      "source_files": [
+        "commons/maps/Random_Gaussian/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+        "commons/artifacts/distribution_sampler/distribution_sampler.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Gaussian/map_data.json": "35e4de411e96f2b44512e068e4f95eee6911eb68fd8c43e11d1678dfa0033534",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/artifacts/distribution_sampler/distribution_sampler.tscn": "09d7bb8709b4b845bc42c0ff1dd8b36b0d23197840cf7f5cb03a9520858222ce",
+        "commons/artifacts/distribution_sampler/distribution_sampler.gd": "33323e748c6b4168be99826237f080fac1a47a33bd96244f883b67d196765bbb"
+      },
+      "placements": [
+        {
+          "cell": [
+            11,
+            19
+          ],
+          "value": "distribution_sampler:180:0.5:1"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Mushrooms",
+      "primary_tokens": [
+        "mushrooms"
+      ],
+      "question": "Which parts of a seemingly natural arrangement were explicitly designed?",
+      "ontology": "Procedural placement combines random candidates, acceptance rules, templates and authored pattern routines. Irregularity and repeated structure can come from different parts of the same generator.",
+      "action": "Compare a scattered patch with a ring or cluster. Follow the spacing and species within each, then look at the neighbouring clearings. This meadow is generated at entry; it does not grow in response to your movement.",
+      "observable": "Scattered candidates leave noise-filtered gaps, while separate routines arrange additional rings and clusters. The repeated forms use a small collection of mushroom templates with variation.",
+      "mechanism": "generate_mushroom_positions draws spatial candidates and rejects noise values below−0.3. create_mushroom_patterns explicitly calls fairy-ring and cluster builders. The ground uses sampled random heights with matching mesh collision; the visible fungus is not an ecological agent simulation.",
+      "limit": "A ring that looks emergent may have been placed by a ring-making routine. The result does not demonstrate nutrient flow, reproduction or ecological competition just because it resembles a meadow.",
+      "variation": "Choose a feature and propose two ways it could have been generated. Distinguishing them would require comparing histories or controlled variants, not simply deciding which looks more natural.",
+      "prior_bridge": "Live previous room: Random_Gaussian. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Space_Geometry. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd :: generate_mushroom_positions, create_mushroom_patterns, create_fairy_ring"
+      ],
+      "source_files": [
+        "commons/maps/Random_Mushrooms/map_data.json",
+        "commons/artifacts/registry/procgen_extra.json",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Mushrooms/map_data.json": "2b3731abed8b4b1e3591d6e249354492f0299e3ab309ff0db2dbf86a5703bca0",
+        "commons/artifacts/registry/procgen_extra.json": "88df489f1a39e80084740f34ef520f8e6474ed370b9a9adcb16d2c536e358e07",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn": "c2114c785c9bf514a12dbe1b02a43b2360a816f413c1969fb0210d60a559e992",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd": "e0fefc4c3f559a395fe4a0299fdd835d42053c628d398d3ef1efad8848ed7e92"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            6
+          ],
+          "value": "mushrooms"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Space_Geometry",
+      "primary_tokens": [
+        "perlin_noise_bridge"
+      ],
+      "question": "What makes neighbouring random heights belong together?",
+      "ontology": "Independent samples and spatially correlated noise can occupy comparable numeric ranges while producing different relationships between nearby positions.",
+      "action": "Compare neighbouring columns in the WHITE NOISE and PERLIN NOISE grids. Adjust FREQUENCY without changing SEED, then choose another seed or RESAMPLE and compare again.",
+      "observable": "The white-noise heights jump independently; the coherent-noise grid forms broader related features. Changing frequency reorganises the spatial scale while a fixed seed makes the comparison repeatable.",
+      "mechanism": "_rebuild_grids resets a local RNG and FastNoiseLite to the chosen seed. It draws independent randf heights on one16x16 grid and samples Perlin noise on the other, mapping values to height/colour. Frequency is a live slider.",
+      "limit": "The terrain-like result is a heightfield model, not simulated geology. The OCTAVES slider writes fractal_octaves but fractal_type is never enabled, so do not promise that this slider adds visible octave detail.",
+      "variation": "Look for a landscape in the independent grid and a discontinuity in the coherent one. Your interpretation and the correlation rule are separate; neither picture proves how a real landscape formed.",
+      "prior_bridge": "Live previous room: Random_Mushrooms. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Randomness_Examples_of_Randomness. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd :: _ready, _rebuild_grids, _create_vr_controls"
+      ],
+      "source_files": [
+        "commons/maps/Random_Space_Geometry/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Space_Geometry/map_data.json": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn": "31c3b13c6629963970518299c1af44d2be21d58897155dcac159863cac65eda4",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd": "5287f3fcf25f70f8b59efea569afd40aef6c03b944e6122e76997a0b83dfaed9"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            23
+          ],
+          "value": "perlin_noise_bridge:0:-0.5"
+        }
+      ],
+      "cautions": "OCTAVES control likely inert under FastNoiseLite default FRACTAL_NONE; log as development issue. Avoid asserting exact matching distributions between normalized Perlin and uniform samples."
+    },
+    {
+      "room_id": "Randomness_Examples_of_Randomness",
+      "primary_tokens": [
+        "monte_carlo_dartboard"
+      ],
+      "question": "How can random points estimate a shape’s area?",
+      "ontology": "Monte Carlo estimation converts a sampling fraction into a geometric ratio under a specified sampling law.",
+      "action": "Press THROW to add a sampled point, compare whether it lies inside the circle, and follow the counters. Switch AUTO on for more samples, then RESET to compare a second run.",
+      "observable": "Each point changes the fraction inside the inscribed circle. Four times that fraction gives the displayed estimate of pi; its fluctuations tend to become less dramatic as the sample grows, without improving on every step.",
+      "mechanism": "_throw_dart samples uniform coordinates in the square and tests squared distance to the centre against0.25. The readout uses4*inside/total; THROW/AUTO/RESET are wired buttons. These are generated points, not hand-aimed physical darts.",
+      "limit": "The ratio estimates area because the sampling law covers the square uniformly. Aiming near the centre would bias the method; sample count cannot repair a systematically biased generator.",
+      "variation": "Predict how deliberately favouring the centre would change the answer. A biased-sampler mode would make that failure testable, but it is a proposed extension.",
+      "prior_bridge": "Live previous room: Random_Space_Geometry. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Pheromone. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd :: _throw_dart, _update_display, _create_vr_controls"
+      ],
+      "source_files": [
+        "commons/maps/Randomness_Examples_of_Randomness/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Randomness_Examples_of_Randomness/map_data.json": "fa1472e16bd3b13dfb4f2e3664297266aa645ea404458f992c53ab9f1974c29b",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn": "2733c18f2e8a55f5e81b7637d6bacbfcfe6bc2fad6cd2f957cca44921aa32de6",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd": "7350d7d73ce0f060b12db8eb871d500bca5c63b9901a7af83f1f61740f3eee27"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            11
+          ],
+          "value": "monte_carlo_dartboard"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Pheromone",
+      "primary_tokens": [
+        "pheromone_terrain"
+      ],
+      "question": "What changes when a walker helps make the evidence its next decision will read?",
+      "ontology": "Stigmergy couples local movement to a shared environmental trace: walkers deposit a signal, then later movements can follow that signal.",
+      "action": "Watch a small patch of terrain and follow more than one visit. Compare a repeatedly used path with a quieter area and notice the terrain accumulating where walkers return.",
+      "observable": "Visits leave pheromone and raise the terrain. The scent decays, while subsequent choices can favour stronger scent; paths can reinforce themselves without any walker planning the entire network.",
+      "mechanism": "_walk_step deposits pheromone and changes local height; _choose_next_position mixes random movement with strongest-scent selection using pheromone_attraction. Default rule=trail examines eight directions, with ordered tie-breaking. Pheromone decay is separate from terrain height.",
+      "limit": "The popular route is partly popular because it was already used. That feedback does not establish that it is globally shortest or best. A scent trace and a persistent raised surface keep different histories.",
+      "variation": "Predict whether an early accidental path could become established through repeated use. An avoid-trail configuration exists, but comparing it in this room would be a proposed authored variant, not a live visitor switch.",
+      "prior_bridge": "Live previous room: Randomness_Examples_of_Randomness. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Space. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd :: _walk_step, _choose_next_position, pheromone decay"
+      ],
+      "source_files": [
+        "commons/maps/Random_Pheromone/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Pheromone/map_data.json": "5e151bd709d9be048ac393b9453a7d1bbf6dc0482ae2756421e79be7382f083f",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn": "7e4fad31cda8fcad4aca0a444ad6cc97b6755092557b23e32d54cfb6e79a62d2",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd": "376bc6d83e1179123184a0a86215c557e79a67c48e98471297efd5d0d94cc777"
+      },
+      "placements": [
+        {
+          "cell": [
+            5,
+            5
+          ],
+          "value": "pheromone_terrain"
+        }
+      ],
+      "cautions": "No live rule/attraction controls. Source models local synthetic walkers, not the full biology of ants or slime mould."
+    },
+    {
+      "room_id": "Random_Space",
+      "primary_tokens": [
+        "noise_mixer"
+      ],
+      "question": "How much of a landscape can be made by repeating a rule at different scales?",
+      "ontology": "A layered field adds scaled copies of a base function. Octave count, frequency ratio and amplitude ratio determine how coarse and fine contributions coexist.",
+      "action": "Reduce OCT to one, then add layers while holding LAC and PER fixed. Compare large forms with fine detail. Adjust PER next to change how strongly later layers contribute; use SEED for another arrangement.",
+      "observable": "More layers add different scales of detail. LAC changes the frequency multiplier between layers and PER their amplitude multiplier. The palette makes the resulting values resemble water, vegetation or stone.",
+      "mechanism": "_fbm accumulates _sin_noise at increasing frequency and decreasing amplitude using seeded offsets. _sin_noise is a fixed sum of five sine expressions, not Perlin noise. The texture is min/max normalized before the earth-colour ramp. Three live sliders and a SEED button regenerate it.",
+      "limit": "The colours assign a landscape reading to a scalar field. They are not evidence of water flow or geological process, and normalization can make small absolute differences look as dramatic as large ones.",
+      "variation": "Describe the same picture as high/low values before using terrain names. A neutral palette or shared fixed height scale would expose a different part of the model; those are proposed variants.",
+      "prior_bridge": "Live previous room: Random_Pheromone. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Game. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/artifacts/noise_mixer/noise_mixer.gd :: _fbm, _sin_noise, _generate_texture, _create_vr_controls"
+      ],
+      "source_files": [
+        "commons/maps/Random_Space/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "commons/artifacts/noise_mixer/noise_mixer.tscn",
+        "commons/artifacts/noise_mixer/noise_mixer.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Space/map_data.json": "03307d0e358ec577bdb2b4eb687921038b5f23896e82a3bcd6d140b090f22a0a",
+        "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+        "commons/artifacts/noise_mixer/noise_mixer.tscn": "561e641251f6ffc54bdf0bc0b38f5823ae6437a301455b701616272bcd819314",
+        "commons/artifacts/noise_mixer/noise_mixer.gd": "05fa7ec7b9d253f793ddfe6b82c540eb7bdf17df8185eddd35ac6a094c4261b9"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            3
+          ],
+          "value": "noise_mixer:0:-0.5"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Random_Game",
+      "primary_tokens": [
+        "r_c"
+      ],
+      "question": "What can you know about a platform without knowing when it will move?",
+      "ontology": "A state machine can have a fixed sequence of states and randomly timed transitions. Uncertain timing does not imply that every aspect of its behaviour is uncertain.",
+      "action": "Watch a cycling cube from the surrounding floor. Follow its colour and indicator through departure, absence and return. Compare several waiting intervals before deciding what the warning actually tells you.",
+      "observable": "The cube sinks and returns in the same state order, but the waits vary. Colour and the indicator disclose movement states; the cube’s own collider is disabled while it is hidden and re-enabled as it returns.",
+      "mechanism": "random_cycle_cube._begin_cycle_loop draws visible and hidden waits, calls GOING_OUT/HIDDEN/COMING_IN/IDLE, and sequences vertical tweens with collider delays. Default warning=beacon lights a small sphere during movement, not a countdown before it starts.",
+      "limit": "The cue announces a state rather than predicting an exact future time. Museum floor beneath the cube may remain, so disappearance of its collider alone does not establish a hole or a fall.",
+      "variation": "Predict the next state while refusing to guess its exact start time. A countdown or a longer advance warning would change what a visitor can plan; those are proposed access improvements.",
+      "prior_bridge": "Live previous room: Random_Space. Carry forward only the distinction its manuscript actually establishes.",
+      "next_bridge": "Live next room: Random_Noise_Types. Connect the current observable distinction to its question; do not follow outdated sequence order in legacy briefs.",
+      "sources": [
+        "commons/primitives/cubes/random_cycle_cube.gd :: _begin_cycle_loop, _set_state, wait draw, collider control"
+      ],
+      "source_files": [
+        "commons/maps/Random_Game/map_data.json",
+        "commons/artifacts/registry/random_cubes.json",
+        "commons/primitives/cubes/random_cycle_cube.tscn",
+        "commons/primitives/cubes/random_cycle_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Random_Game/map_data.json": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+        "commons/artifacts/registry/random_cubes.json": "ea5318d75a1914f370a272c36f0f513a1079055eeabdf910541838ef6d6a84c2",
+        "commons/primitives/cubes/random_cycle_cube.tscn": "3f180a8f17ebdd253d9b09c6a413cff7ea37396c2f80468f2e4e7d6a83f6e7e7",
+        "commons/primitives/cubes/random_cycle_cube.gd": "09f71823f09b6f64bfd3fd28003b313048c5cb903fb23391fdb35445bbda8731"
+      },
+      "placements": [
+        {
+          "cell": [
+            12,
+            16
+          ],
+          "value": "r_c:0:0:1#4"
+        }
+      ],
+      "cautions": "Selected r_c instead of old MonteCarloVR standalone rig (private XR origin, obsolete material property). Verify support beneath the cube before any instruction to step onto it or expect a fall."
+    }
+  ]
+}

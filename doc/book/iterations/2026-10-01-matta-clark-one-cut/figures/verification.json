@@ -1,0 +1,78 @@
+{
+	"checks": [
+		{
+			"check": "default cut is enabled and centred",
+			"pass": true
+		},
+		{
+			"check": "shared cone opens a sightline through all three walls",
+			"pass": true
+		},
+		{
+			"check": "uncut wall still blocks a ray",
+			"pass": true
+		},
+		{
+			"check": "ordinary door route remains clear at torso height",
+			"pass": true
+		},
+		{
+			"check": "remaining wall has a generated CSG mesh",
+			"pass": true
+		},
+		{
+			"check": "remaining wall has a generated CSG mesh",
+			"pass": true
+		},
+		{
+			"check": "remaining wall has a generated CSG mesh",
+			"pass": true
+		},
+		{
+			"check": "saved cut-approach",
+			"pass": true
+		},
+		{
+			"check": "saved cut-inside",
+			"pass": true
+		},
+		{
+			"check": "saved cut-offcuts",
+			"pass": true
+		},
+		{
+			"check": "before state closes the central sightline",
+			"pass": true
+		},
+		{
+			"check": "doors still connect the rooms before cutting",
+			"pass": true
+		},
+		{
+			"check": "saved cut-before",
+			"pass": true
+		},
+		{
+			"check": "off-centre ray passes the original cut",
+			"pass": true
+		},
+		{
+			"check": "same ray is blocked after translating the shared cone",
+			"pass": true
+		},
+		{
+			"check": "translated axis opens a new sightline",
+			"pass": true
+		},
+		{
+			"check": "reset restores the original opening",
+			"pass": true
+		}
+	],
+	"scope": "Desktop scene; UI callbacks, CSG meshes and collision rays. Not a tracked-hand or walking-body test.",
+	"wall_triangles": [
+		416,
+		416,
+		416
+	]
+}

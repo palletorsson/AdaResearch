@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "name": "Canonical chapter equals reviewed chapter",
+      "passed": true
+    },
+    {
+      "name": "Both code excerpts unchanged",
+      "passed": true
+    },
+    {
+      "name": "Artifact anchors unchanged",
+      "passed": true
+    },
+    {
+      "name": "Only the erroneous thickness paragraph replaced",
+      "passed": true
+    },
+    {
+      "name": "Book figure references delivered native composition",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Color_Rainbow/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: commons/maps/Color_Rainbow/intent.md",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: algorithms/primitives/rainbow/rainbow.gd",
+      "passed": true
+    },
+    {
+      "name": "Unchanged: algorithms/primitives/rainbow/rainbow_celebration.gd",
+      "passed": true
+    },
+    {
+      "name": "Current core manuscript hash",
+      "passed": true
+    },
+    {
+      "name": "Only selected core manuscript hash changed",
+      "passed": true
+    },
+    {
+      "name": "40 runtime assertions pass",
+      "passed": true
+    },
+    {
+      "name": "No GDScript errors in the focused run",
+      "passed": true
+    },
+    {
+      "name": "Capture source hashes still current",
+      "passed": true
+    },
+    {
+      "name": "All eight native captures retained",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: four-arrangements.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: Color_Rainbow.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: source_manifest.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP publishes exact bytes: SUMMARY.md",
+      "passed": true
+    },
+    {
+      "name": "Native and composed figures visually inspected",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Focused preservation and publication checks; separate runtime report has 40 assertions. Native/composed images inspected. No headset or learner claim."
+}

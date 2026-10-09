@@ -1,0 +1,43 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "cube and its desk placed in the requested hall"
+  ],
+  "observations": {
+    "loaded_scripts": [
+      "res://commons/artifacts/large_window/large_window.gd",
+      "res://commons/primitives/temporal/animated_folding_past.gd",
+      "res://commons/visualaid/frame_counter/frame_counter_display.gd",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd",
+      "res://commons/artifacts/station/station_door.gd",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.gd",
+      "res://commons/primitives/origin/origin.gd",
+      "res://commons/primitives/line/cube_lines.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/primitives/line/line_static.gd",
+      "res://commons/ui/text_screen.gd"
+    ]
+  },
+  "passed": false,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

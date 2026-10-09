@@ -1,0 +1,1282 @@
+{
+  "checks": 29,
+  "failures": [],
+  "headset_verified": false,
+  "map": "ISO_Caves",
+  "measurements": {
+    "desk_area_paths": [
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/PushButton/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212/HandPoseArea",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+      "/root/EndlessMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215/HandPoseArea"
+    ],
+    "desk_buttons": [
+      {
+        "id": "PLUMB",
+        "layer": 1048576,
+        "position": "(14.82, 1.045, 5.62)",
+        "visible": true
+      },
+      {
+        "id": "OCTAVES",
+        "layer": 1048576,
+        "position": "(14.5, 1.045, 5.62)",
+        "visible": true
+      },
+      {
+        "id": "PORTALS",
+        "layer": 1048576,
+        "position": "(14.18, 1.045, 5.62)",
+        "visible": true
+      },
+      {
+        "id": "BURIAL",
+        "layer": 1048576,
+        "position": "(14.82, 1.045, 5.39)",
+        "visible": true
+      },
+      {
+        "id": "HOLD",
+        "layer": 1048576,
+        "position": "(14.5, 1.045, 5.39)",
+        "visible": true
+      },
+      {
+        "id": "RESET",
+        "layer": 1048576,
+        "position": "(14.18, 1.045, 5.39)",
+        "visible": true
+      },
+      {
+        "id": "RULE",
+        "layer": 1048576,
+        "position": "(14.82, 1.045, 5.16)",
+        "visible": true
+      }
+    ],
+    "driver_log": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          12.5,
+          0.00100000004749745,
+          3.30000019073486
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.65,
+            3.55
+          ],
+          "forward": [
+            0.74,
+            -0.19,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.05,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.75,
+            -0.17,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "ssMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/PushButton",
+          "control_inspect": {
+            "area": "chio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+              "-v2/CaveWorkshop/PushButton/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "telvecchio-pinch-v2/CaveWorkshop/PushButton/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+              "-v2/CaveWorkshop/PushButton/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "ssMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/PushButton",
+            "global_position": [
+              14.82,
+              1.045,
+              5.62
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.82,
+                  1.045,
+                  5.592
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.82,
+                  1.033,
+                  5.62
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "chio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.75,
+              -0.17,
+              0.64
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "_castelvecchio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "pointer_dir": [
+              0.75,
+              -0.17,
+              0.64
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "_castelvecchio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.77,
+              1.06,
+              5.58
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.7,
+            -0.19,
+            0.69
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.7,
+            -0.19,
+            0.69
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2200/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200",
+            "global_position": [
+              14.5,
+              1.045,
+              5.62
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.5,
+                  1.045,
+                  5.592
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.5,
+                  1.033,
+                  5.62
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.7,
+              -0.19,
+              0.69
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "pointer_dir": [
+              0.7,
+              -0.19,
+              0.69
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2200/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.46,
+              1.06,
+              5.58
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.63,
+            -0.2,
+            0.75
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.63,
+            -0.2,
+            0.75
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2203/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203",
+            "global_position": [
+              14.18,
+              1.045,
+              5.62
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.18,
+                  1.045,
+                  5.592
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.18,
+                  1.033,
+                  5.62
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.63,
+              -0.2,
+              0.75
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "pointer_dir": [
+              0.63,
+              -0.2,
+              0.75
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2203/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.14,
+              1.06,
+              5.57
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.78,
+            -0.18,
+            0.6
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.78,
+            -0.18,
+            0.6
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2206/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206",
+            "global_position": [
+              14.82,
+              1.045,
+              5.39
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.82,
+                  1.045,
+                  5.362
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.82,
+                  1.033,
+                  5.39
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.78,
+              -0.18,
+              0.6
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "pointer_dir": [
+              0.78,
+              -0.18,
+              0.6
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.77,
+              1.06,
+              5.35
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.73,
+            -0.2,
+            0.65
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.73,
+            -0.2,
+            0.65
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2209/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209",
+            "global_position": [
+              14.5,
+              1.045,
+              5.39
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.5,
+                  1.045,
+                  5.362
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.5,
+                  1.033,
+                  5.39
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.73,
+              -0.2,
+              0.65
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "pointer_dir": [
+              0.73,
+              -0.2,
+              0.65
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2209/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.46,
+              1.06,
+              5.35
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.82,
+            -0.19,
+            0.55
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.82,
+            -0.19,
+            0.55
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2215/Button",
+              "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215",
+            "global_position": [
+              14.82,
+              1.045,
+              5.16
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.82,
+                  1.045,
+                  5.132
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.82,
+                  1.033,
+                  5.16
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.82,
+              -0.19,
+              0.55
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "pointer_dir": [
+              0.82,
+              -0.19,
+              0.55
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2215/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.77,
+              1.06,
+              5.13
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.67,
+            -0.21,
+            0.71
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "CavesReview/@Node@2233/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            12.42,
+            1.6,
+            3.55
+          ],
+          "forward": [
+            0.67,
+            -0.21,
+            0.71
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.42,
+            0.0,
+            3.55
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212",
+          "control_inspect": {
+            "area": "io-pinch-v2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "lvecchio-pinch-v2/CaveWorkshop/@Node3D@2212/Button",
+              "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+              "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+              "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "control": "Museum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212",
+            "global_position": [
+              14.18,
+              1.045,
+              5.39
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_1310720": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  14.18,
+                  1.045,
+                  5.362
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  14.18,
+                  1.033,
+                  5.39
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "io-pinch-v2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.67,
+              -0.21,
+              0.71
+            ],
+            "camera_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "independent_ray": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "pointer_dir": [
+              0.67,
+              -0.21,
+              0.71
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              12.42,
+              1.6,
+              3.55
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "astelvecchio-pinch-v2/CaveWorkshop/@Node3D@2212/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              14.14,
+              1.06,
+              5.35
+            ]
+          },
+          "stand": [
+            12.5,
+            0.0,
+            3.3
+          ]
+        }
+      }
+    ],
+    "first_control_inspect": {
+      "area": "chio-pinch-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "at_position_mask_1310720": [
+        "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+        "-v2/CaveWorkshop/PushButton/InteractableAreaButton"
+      ],
+      "at_position_mask_4294967295": [
+        "telvecchio-pinch-v2/CaveWorkshop/PushButton/Button",
+        "elvecchio-pinch-v2/CaveWorkshop/@StaticBody3D@2190",
+        "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+        "-v2/CaveWorkshop/PushButton/InteractableAreaButton"
+      ],
+      "cap_normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "control": "ssMuseum/Seg0_castelvecchio-pinch-v2/CaveWorkshop/PushButton",
+      "global_position": [
+        14.82,
+        1.045,
+        5.62
+      ],
+      "global_scale": [
+        1.15,
+        1.15,
+        1.15
+      ],
+      "inside_tree": true,
+      "layer": 1048576,
+      "mask": 393216,
+      "monitorable": true,
+      "monitoring": true,
+      "process_mode": 0,
+      "ray_along_normal_from_0.3_mask_1310720": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+      "ray_along_normal_from_0.3_mask_4294967295": "2/CaveWorkshop/@Node3D@2206/InteractableAreaButton",
+      "ray_camera_to_centre_mask_1310720": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "ray_camera_to_centre_mask_4294967295": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "ray_camera_to_outer_cap_mask_1310720": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "ray_camera_to_outer_cap_mask_4294967295": "-v2/CaveWorkshop/PushButton/InteractableAreaButton",
+      "shapes": [
+        {
+          "at": [
+            14.82,
+            1.045,
+            5.592
+          ],
+          "disabled": false,
+          "radius": -1.0,
+          "shape": "CylinderShape3D"
+        },
+        {
+          "at": [
+            14.82,
+            1.033,
+            5.62
+          ],
+          "disabled": false,
+          "radius": -1.0,
+          "shape": "BoxShape3D"
+        }
+      ],
+      "visible": true
+    },
+    "inventory_tokens": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "showing",
+      "exit_sign",
+      "wall_clock",
+      "info_screen",
+      "electrical_panel",
+      "ceiling_vent",
+      "dream_bodies",
+      "weapon_cabinet",
+      "iso_cave_console",
+      "mc_portal_landscape",
+      "mc_inside_cave",
+      "queer_marching_cave",
+      "rhizome_cave_demo",
+      "raymarched_metaballs"
+    ],
+    "readout": "LEFT bedded / 6 octaves\nRIGHT 7 portals / straddling\nHOLD keeps the earlier boundary behind the live one."
+  }
+}

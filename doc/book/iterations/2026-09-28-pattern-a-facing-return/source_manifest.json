@@ -1,0 +1,31 @@
+{
+  "room": "Tutorial_Pattern",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "46f53f0f0eb48a251aea568ae864ccc7eaabcc0833025682eb84c83e7ea60343",
+    "commons/maps/Tutorial_Pattern/map_data.json": "45c0b9105cabc993d1daec3364097ea20a1878480722f50760e739f9afc09c3c",
+    "doc/book/iterations/2026-09-28-pattern-a-facing-return/probe.gd": "aa655c83abb583a9390abc26a3f5a8b5d54b5a2f38148666a1352f920cde810c",
+    "doc/book/iterations/2026-09-28-pattern-a-facing-return/run_probe.py": "991863413ce6c847a99d702803247e4c0e45301a1c15b9589299d2d44abf5470",
+    "ada_run/em_plan.json": "1f035f9e10312141559247ca785d59299c26e1089477128facf279aef4b957ea",
+    "ada_run/encounter_pilot/Tutorial_Pattern_facing_return/control.json": "cc0d7adad59010a3aca501928292893ed29304f85722641141dafc5f9afead09",
+    "ada_run/encounter_pilot/Tutorial_Pattern_facing_return/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Tutorial_Pattern_facing_return/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394",
+    "commons/artifacts/registry/arrays.json": "9888367a0d49caed0c3d666495430b2a867da4e2239e1572ec5c69a2a448fa79",
+    "commons/artifacts/pattern_maker_station/pattern_maker_station.tscn": "391ba52ab45f20022411f2e93914cf56e9937ea18faa7994450374caecfbd1b9",
+    "commons/artifacts/pattern_maker_station/pattern_maker_station.gd": "5f73acd2af93eb5796c3285a8dce7c9abf8c69505c510db9deba2cc1cc311422"
+  }
+}

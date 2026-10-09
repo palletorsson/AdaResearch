@@ -1,0 +1,1042 @@
+{
+  "Vectors_Act1_WhatAVectorIs": {
+    "artifacts": [
+      {
+        "lookup": "3t",
+        "cell": [
+          6,
+          2
+        ],
+        "token": "3t#text:WHAT_IS_A_VECTOR_BEFORE_IT_IS_ANY_PARTICULAR_ARROW#size:0.5",
+        "role": "decoration",
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/scenes/mapobjects/word_is.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "route_vector",
+        "cell": [
+          9,
+          4
+        ],
+        "token": "route_vector",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/route_vector/route_vector.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "CoordinateSystem3M",
+        "cell": [
+          7,
+          5
+        ],
+        "token": "CoordinateSystem3M",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorBasics",
+        "cell": [
+          4,
+          8
+        ],
+        "token": "VectorBasics:90:1.1:1#lesson:room_reading#pin:1#plinth:0",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "length_lantern",
+        "cell": [
+          9,
+          11
+        ],
+        "token": "length_lantern",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/length_lantern.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/length_lantern/length_lantern.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_normalize_demo",
+        "cell": [
+          6,
+          14
+        ],
+        "token": "vector_normalize_demo",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+        "scene_exists": true
+      }
+    ],
+    "anchors": [
+      "VectorBasics",
+      " ",
+      "vector_normalize_demo",
+      " "
+    ],
+    "order": {
+      "primary": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "secondary": [
+        "route_vector",
+        "CoordinateSystem3M",
+        "length_lantern"
+      ],
+      "decoration": [
+        "3t"
+      ]
+    },
+    "counts": {
+      "primary": 2,
+      "secondary": 3,
+      "decoration": 1,
+      "null": 0
+    }
+  },
+  "VFM_02_Operations": {
+    "artifacts": [
+      {
+        "lookup": "adder_board",
+        "cell": [
+          12,
+          6
+        ],
+        "token": "adder_board:180:0:1#lesson:room_sum#pin:1#plinth:0",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/adder_board.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/adder_board/adder_board.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_projection_demo",
+        "cell": [
+          1,
+          11
+        ],
+        "token": "vector_projection_demo",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "2d_in_3d_vectors_vis",
+        "cell": [
+          3,
+          11
+        ],
+        "token": "2d_in_3d_vectors_vis:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/commons_artifacts.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "basis_vectors_rig",
+        "cell": [
+          7,
+          11
+        ],
+        "token": "basis_vectors_rig:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "coordinate_system_switcher",
+        "cell": [
+          9,
+          11
+        ],
+        "token": "coordinate_system_switcher:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorSubtraction",
+        "cell": [
+          12,
+          11
+        ],
+        "token": "VectorSubtraction",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "example_1_4_vector_multiplication_vr",
+        "cell": [
+          14,
+          11
+        ],
+        "token": "example_1_4_vector_multiplication_vr:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "stretch_bench",
+        "cell": [
+          16,
+          11
+        ],
+        "token": "stretch_bench:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/stretch_bench.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/stretch_bench/stretch_bench.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_addition_demo",
+        "cell": [
+          18,
+          11
+        ],
+        "token": "vector_addition_demo:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_addition_xl",
+        "cell": [
+          20,
+          11
+        ],
+        "token": "vector_addition_xl:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorAddition",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_magnitude_demo",
+        "cell": [
+          22,
+          11
+        ],
+        "token": "vector_magnitude_demo:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_subtraction_demo",
+        "cell": [
+          1,
+          13
+        ],
+        "token": "vector_subtraction_demo:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_dot_product_xl",
+        "cell": [
+          4,
+          13
+        ],
+        "token": "vector_dot_product_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorDotProduct",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_cross_product_xl",
+        "cell": [
+          19,
+          13
+        ],
+        "token": "vector_cross_product_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorCrossProduct",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_translation_demo",
+        "cell": [
+          22,
+          13
+        ],
+        "token": "vector_translation_demo:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "dot_aligner",
+        "cell": [
+          4,
+          15
+        ],
+        "token": "dot_aligner",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "torque_crank",
+        "cell": [
+          19,
+          15
+        ],
+        "token": "torque_crank",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/torque_crank/torque_crank.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorTorque",
+        "cell": [
+          10,
+          16
+        ],
+        "token": "VectorTorque",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "dot_product_projector",
+        "cell": [
+          22,
+          18
+        ],
+        "token": "dot_product_projector",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorWorkbench",
+        "cell": [
+          4,
+          19
+        ],
+        "token": "VectorWorkbench",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_add",
+        "cell": [
+          14,
+          19
+        ],
+        "token": "vector_add",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_projection_reflection_xl",
+        "cell": [
+          16,
+          19
+        ],
+        "token": "vector_projection_reflection_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorProjectionReflection",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "projection_shadow",
+        "cell": [
+          16,
+          21
+        ],
+        "token": "projection_shadow",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "agreement_gauge",
+        "cell": [
+          5,
+          23
+        ],
+        "token": "agreement_gauge",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/agreement_gauge.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "opening_pair",
+        "cell": [
+          9,
+          23
+        ],
+        "token": "opening_pair:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/opening_pair.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/opening_pair/opening_pair.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "torque_demo",
+        "cell": [
+          13,
+          23
+        ],
+        "token": "torque_demo",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "exercise_5_9_angle_between",
+        "cell": [
+          21,
+          23
+        ],
+        "token": "exercise_5_9_angle_between",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/steering.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
+        "scene_exists": true
+      }
+    ],
+    "anchors": [
+      "adder_board"
+    ],
+    "order": {
+      "primary": [
+        "adder_board"
+      ],
+      "secondary": [
+        "vector_projection_demo",
+        "2d_in_3d_vectors_vis",
+        "basis_vectors_rig",
+        "coordinate_system_switcher",
+        "VectorSubtraction",
+        "example_1_4_vector_multiplication_vr",
+        "stretch_bench",
+        "vector_addition_demo",
+        "vector_addition_xl",
+        "vector_magnitude_demo",
+        "vector_subtraction_demo",
+        "vector_dot_product_xl",
+        "vector_cross_product_xl",
+        "vector_translation_demo",
+        "dot_aligner",
+        "torque_crank",
+        "VectorTorque",
+        "dot_product_projector",
+        "VectorWorkbench",
+        "vector_add",
+        "vector_projection_reflection_xl",
+        "projection_shadow",
+        "agreement_gauge",
+        "opening_pair",
+        "torque_demo",
+        "exercise_5_9_angle_between"
+      ],
+      "decoration": []
+    },
+    "counts": {
+      "primary": 1,
+      "secondary": 26,
+      "decoration": 0,
+      "null": 0
+    }
+  },
+  "Vectors_Act2_VectorArithmetic": {
+    "artifacts": [
+      {
+        "lookup": "vector_addition_walk",
+        "cell": [
+          4,
+          4
+        ],
+        "token": "vector_addition_walk:270",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_add",
+        "cell": [
+          13,
+          4
+        ],
+        "token": "vector_add",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_sub",
+        "cell": [
+          6,
+          9
+        ],
+        "token": "vector_sub:180:0:1#lesson:room_gap#pin:1#plinth:0",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/vector_op_console/vector_sub.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+        "cell": [
+          11,
+          11
+        ],
+        "token": "example_2_3_gravity_scaled_by_mass_vr",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/physics_simulation.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "dot_aligner",
+        "cell": [
+          6,
+          15
+        ],
+        "token": "dot_aligner",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_dot_product_xl",
+        "cell": [
+          14,
+          15
+        ],
+        "token": "vector_dot_product_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorDotProduct",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "projection_shadow",
+        "cell": [
+          6,
+          21
+        ],
+        "token": "projection_shadow:180:0:1#lesson:room_projection#pin:1#plinth:0",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_projection_reflection_xl",
+        "cell": [
+          14,
+          21
+        ],
+        "token": "vector_projection_reflection_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorProjectionReflection",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "torque_crank",
+        "cell": [
+          6,
+          27
+        ],
+        "token": "torque_crank",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/torque_crank/torque_crank.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_cross_product_xl",
+        "cell": [
+          14,
+          27
+        ],
+        "token": "vector_cross_product_xl",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorCrossProduct",
+        "delegate_params": {
+          "scale_multiplier": 5.0
+        },
+        "resolved_scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_addition_xl_laser",
+        "cell": [
+          1,
+          36
+        ],
+        "token": "vector_addition_xl_laser",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorAddition",
+        "delegate_params": {
+          "scale_multiplier": 8.0,
+          "laser_endpoints": true
+        },
+        "resolved_scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "vector_subtraction_xl_laser",
+        "cell": [
+          18,
+          36
+        ],
+        "token": "vector_subtraction_xl_laser",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": "VectorSubtraction",
+        "delegate_params": {
+          "scale_multiplier": 8.0,
+          "laser_endpoints": true
+        },
+        "resolved_scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+        "scene_exists": true
+      }
+    ],
+    "anchors": [
+      "vector_add",
+      "vector_sub",
+      "dot_aligner",
+      "projection_shadow",
+      "torque_crank"
+    ],
+    "order": {
+      "primary": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank",
+        "#note-1",
+        "#note-2"
+      ],
+      "secondary": [
+        "vector_addition_walk",
+        "example_2_3_gravity_scaled_by_mass_vr",
+        "vector_dot_product_xl",
+        "vector_projection_reflection_xl",
+        "vector_cross_product_xl",
+        "vector_addition_xl_laser",
+        "vector_subtraction_xl_laser"
+      ],
+      "decoration": []
+    },
+    "counts": {
+      "primary": 5,
+      "secondary": 7,
+      "decoration": 0,
+      "null": 0
+    }
+  },
+  "VFM_05_Launch": {
+    "artifacts": [
+      {
+        "lookup": "launch_arc",
+        "cell": [
+          17,
+          7
+        ],
+        "token": "launch_arc:180:0:1#lesson:launch_chamber#pin:1#plinth:0",
+        "role": "primary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/launch_arc/launch_arc.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "ForceMagnitudeDemo",
+        "cell": [
+          15,
+          14
+        ],
+        "token": "ForceMagnitudeDemo:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorForces",
+        "cell": [
+          17,
+          14
+        ],
+        "token": "VectorForces:0:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "catapult",
+        "cell": [
+          14,
+          16
+        ],
+        "token": "catapult:90:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/catapult.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/catapult/catapult.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "hl_turret_vectors",
+        "cell": [
+          28,
+          17
+        ],
+        "token": "hl_turret_vectors:270:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "turret_boll_infoboard",
+        "cell": [
+          32,
+          17
+        ],
+        "token": "turret_boll_infoboard:270:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "mortar_vector_siege",
+        "cell": [
+          4,
+          18
+        ],
+        "token": "mortar_vector_siege",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/mortar_vector_siege.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "firework_burst",
+        "cell": [
+          18,
+          19
+        ],
+        "token": "firework_burst:90",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/firework_burst/firework_burst.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "VectorThrowing",
+        "cell": [
+          14,
+          20
+        ],
+        "token": "VectorThrowing:90:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "firework_launcher",
+        "cell": [
+          24,
+          23
+        ],
+        "token": "firework_launcher:90",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/physics_simulation.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "return_launcher",
+        "cell": [
+          9,
+          25
+        ],
+        "token": "return_launcher",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/return_launcher/return_launcher.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "human_catapult",
+        "cell": [
+          3,
+          29
+        ],
+        "token": "human_catapult:90:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/human_catapult.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/human_catapult/human_catapult.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "force_pad",
+        "cell": [
+          28,
+          30
+        ],
+        "token": "force_pad",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/force_pad.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/force_pad/force_pad.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "drag_lane",
+        "cell": [
+          3,
+          31
+        ],
+        "token": "drag_lane:90",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/drag_lane/drag_lane.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "circle_train",
+        "cell": [
+          28,
+          32
+        ],
+        "token": "circle_train:90",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/vectors_demos.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/circle_train/circle_train.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "slingshot_launcher",
+        "cell": [
+          3,
+          34
+        ],
+        "token": "slingshot_launcher:90:0",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/physics_simulation.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
+        "scene_exists": true
+      },
+      {
+        "lookup": "foresight_range",
+        "cell": [
+          16,
+          36
+        ],
+        "token": "foresight_range",
+        "role": "secondary",
+        "registry": "commons/artifacts/registry/foresight_range.json",
+        "delegate_to": null,
+        "delegate_params": null,
+        "resolved_scene": "res://commons/artifacts/foresight_range/foresight_range.tscn",
+        "scene_exists": true
+      }
+    ],
+    "anchors": [
+      "launch_arc"
+    ],
+    "order": {
+      "primary": [
+        "launch_arc"
+      ],
+      "secondary": [
+        "ForceMagnitudeDemo",
+        "VectorForces",
+        "catapult",
+        "hl_turret_vectors",
+        "turret_boll_infoboard",
+        "mortar_vector_siege",
+        "firework_burst",
+        "VectorThrowing",
+        "firework_launcher",
+        "return_launcher",
+        "human_catapult",
+        "force_pad",
+        "drag_lane",
+        "circle_train",
+        "slingshot_launcher",
+        "foresight_range"
+      ],
+      "decoration": []
+    },
+    "counts": {
+      "primary": 1,
+      "secondary": 16,
+      "decoration": 0,
+      "null": 0
+    }
+  }
+}

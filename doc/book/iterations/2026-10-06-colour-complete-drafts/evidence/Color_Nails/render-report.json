@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "id": "start/image_available",
+      "passed": true
+    },
+    {
+      "id": "red/image_available",
+      "passed": true
+    },
+    {
+      "id": "wide/image_available",
+      "passed": true
+    },
+    {
+      "id": "outside/image_available",
+      "passed": true
+    },
+    {
+      "id": "choice/image_available",
+      "passed": true
+    },
+    {
+      "id": "transfer/image_available",
+      "passed": true
+    },
+    {
+      "id": "start/red_blue_above_green",
+      "passed": true
+    },
+    {
+      "id": "red/red_dominates",
+      "passed": true
+    },
+    {
+      "id": "wide/red_reduced",
+      "passed": true
+    },
+    {
+      "id": "wide/green_blue_unchanged",
+      "passed": true
+    },
+    {
+      "id": "outside/green_blue_above_red",
+      "passed": true
+    },
+    {
+      "id": "choice/green_above_red",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true,
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "samples": {
+    "choice": [
+      0.29019621014595,
+      1.0,
+      0.917647242546082
+    ],
+    "outside": [
+      0.0191276520490646,
+      1.0,
+      0.764705717563629
+    ],
+    "red": [
+      1.0,
+      0.0191276520490646,
+      0.0191276520490646
+    ],
+    "start": [
+      1.0,
+      0.29019621014595,
+      0.917647242546082
+    ],
+    "transfer": [
+      1.0,
+      0.29019621014595,
+      0.917647242546082
+    ],
+    "wide": [
+      0.607843339443207,
+      0.29019621014595,
+      0.917647242546082
+    ]
+  },
+  "scope": "Exact lesson variants in a supplied rendering fixture; no museum or headset capture."
+}

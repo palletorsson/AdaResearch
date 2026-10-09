@@ -1,0 +1,427 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "check": "Eight declared halls"
+    },
+    {
+      "passed": true,
+      "check": "Declared order retained"
+    },
+    {
+      "passed": true,
+      "check": "Authored route matches declaration"
+    },
+    {
+      "passed": true,
+      "check": "Active book pearls follow route"
+    },
+    {
+      "passed": true,
+      "check": "Off-route book entries retained"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: eight halls in order"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: eight halls in order"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "Local and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "All artifact roles byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Foundations: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Layout: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Pathfinding: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Network_Analysis: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Connectivity: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "Only Matching and Flow registry entries changed"
+    },
+    {
+      "passed": true,
+      "check": "Graph Theory registry byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: unrelated chapters preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: unrelated hand edits preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: other records preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: routing and token edits preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Foundations"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Layout"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Pathfinding"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Network_Analysis"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Connectivity"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Spanning_Trees"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Flow"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/trunk_branches.json: current wall speech for GT_Matching"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: unrelated chapters preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: unrelated hand edits preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: other records preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: routing and token edits preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Foundations"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Layout"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Pathfinding"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Network_Analysis"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Connectivity"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Spanning_Trees"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Flow"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/trunk_branches.json: current wall speech for GT_Matching"
+    },
+    {
+      "passed": true,
+      "check": "model-checks.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "navigation.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "GT_Spanning_Trees: all graph vertices above the floor"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "GT_Flow: all graph vertices above the floor"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "GT_Matching: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "Matching controls within reach at 0.93 and 1.2 m"
+    },
+    {
+      "passed": true,
+      "check": "Actual museum: three then five pairs on same graph"
+    },
+    {
+      "passed": true,
+      "check": "All frozen before-files still match their recorded hashes"
+    }
+  ],
+  "count": 105,
+  "failures": [],
+  "passed": true
+}

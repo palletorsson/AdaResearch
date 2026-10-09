@@ -1,0 +1,354 @@
+{
+	"checks": [
+		{
+			"name": "GPU displays complementary banks on opposite sides of the floor",
+			"passed": true
+		},
+		{
+			"name": "mode 0: every address has a binary value",
+			"passed": true
+		},
+		{
+			"name": "mode 0: inventory is exactly 2048 of each",
+			"passed": true
+		},
+		{
+			"name": "mode 0: geometry stays fixed",
+			"passed": true
+		},
+		{
+			"name": "mode 0: same seed and procedure reproduce the array",
+			"passed": true
+		},
+		{
+			"name": "mode 0: 4x4 sample reads the same array addresses",
+			"passed": true
+		},
+		{
+			"name": "mode 0: visitor crosses entire display floor",
+			"passed": true
+		},
+		{
+			"name": "mode 0: floor remains physically solid",
+			"passed": true
+		},
+		{
+			"name": "mode 1: every address has a binary value",
+			"passed": true
+		},
+		{
+			"name": "mode 1: inventory is exactly 2048 of each",
+			"passed": true
+		},
+		{
+			"name": "mode 1: geometry stays fixed",
+			"passed": true
+		},
+		{
+			"name": "mode 1: same seed and procedure reproduce the array",
+			"passed": true
+		},
+		{
+			"name": "row shuffle preserves every complete original row",
+			"passed": true
+		},
+		{
+			"name": "mode 1: another seed chooses another permutation",
+			"passed": true
+		},
+		{
+			"name": "mode 1: 4x4 sample reads the same array addresses",
+			"passed": true
+		},
+		{
+			"name": "mode 1: visitor crosses entire display floor",
+			"passed": true
+		},
+		{
+			"name": "mode 1: floor remains physically solid",
+			"passed": true
+		},
+		{
+			"name": "mode 2: every address has a binary value",
+			"passed": true
+		},
+		{
+			"name": "mode 2: inventory is exactly 2048 of each",
+			"passed": true
+		},
+		{
+			"name": "mode 2: geometry stays fixed",
+			"passed": true
+		},
+		{
+			"name": "mode 2: same seed and procedure reproduce the array",
+			"passed": true
+		},
+		{
+			"name": "mode 2: another seed chooses another permutation",
+			"passed": true
+		},
+		{
+			"name": "mode 2: 4x4 sample reads the same array addresses",
+			"passed": true
+		},
+		{
+			"name": "mode 2: visitor crosses entire display floor",
+			"passed": true
+		},
+		{
+			"name": "mode 2: floor remains physically solid",
+			"passed": true
+		},
+		{
+			"name": "all three modes change native pixels",
+			"passed": true
+		},
+		{
+			"name": "reset restores seed, mode, inspected rows and offset",
+			"passed": true
+		},
+		{
+			"name": "reset restores exact rendered image",
+			"passed": true
+		},
+		{
+			"name": "one row step shifts display without resampling",
+			"passed": true
+		},
+		{
+			"name": "256 steps return the same displayed record",
+			"passed": true
+		},
+		{
+			"name": "floor-to-wall fold joins positions and UVs exactly",
+			"passed": true
+		},
+		{
+			"name": "all room displays share one tiny texture",
+			"passed": true
+		},
+		{
+			"name": "the room uses fewer than 100 immediate children",
+			"passed": true
+		},
+		{
+			"name": "no automatic pattern process runs",
+			"passed": true
+		},
+		{
+			"name": "back wall stops the visitor",
+			"passed": true
+		},
+		{
+			"name": "side wall stops the visitor",
+			"passed": true
+		},
+		{
+			"name": "walk button selects eye camera and hides overlay",
+			"passed": true
+		},
+		{
+			"name": "exit walk restores review camera and controls",
+			"passed": true
+		},
+		{
+			"name": "new seed control updates both display and readout",
+			"passed": true
+		}
+	],
+	"failures": 0,
+	"renderer": "NVIDIA GeForce RTX 3070",
+	"room_children": 41,
+	"views": [
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "repeat.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Repeat",
+				"neighbour_changes": 2288,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "repeat.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Repeat",
+				"neighbour_changes": 2288,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "rows.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Shuffle rows",
+				"neighbour_changes": 2240,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "cells.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Shuffle cells",
+				"neighbour_changes": 3949,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "reset.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Repeat",
+				"neighbour_changes": 2288,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (0.925342, 0.0, -0.379133), Y: (0.0, 1.0, 0.0), Z: (0.379133, 0.0, 0.925342), O: (4.9, 1.7, 6.4)]",
+			"file": "inside.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Repeat",
+				"neighbour_changes": 2288,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (-0.938876, 0.0, 0.344255), Y: (-0.029519, 0.996317, -0.080506), Z: (-0.342987, -0.085747, -0.935418), O: (-3.0, 1.8, -6.0)]",
+			"file": "return.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Shuffle cells",
+				"neighbour_changes": 3949,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.97967, -0.200615), Z: (0.0, 0.200615, 0.97967), O: (-4.47, 1.3, 12.55)]",
+			"file": "sample.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Shuffle cells",
+				"neighbour_changes": 3949,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		},
+		{
+			"camera": "[X: (1.0, 0.0, 0.0), Y: (0.0, 0.998926, 0.046342), Z: (0.0, -0.046342, 0.998926), O: (0.0, 1.7, 10.4)]",
+			"file": "controls.png",
+			"size": [
+				1600,
+				1000
+			],
+			"state": {
+				"automatic_animation": false,
+				"columns": 16,
+				"mode": "Shuffle cells",
+				"neighbour_changes": 3949,
+				"neighbour_pairs": 7920,
+				"offset": 0,
+				"ones": 2048,
+				"rows": 256,
+				"seed": 2026,
+				"shannon_bits_per_symbol": 1.0,
+				"zeros": 2048
+			}
+		}
+	]
+}

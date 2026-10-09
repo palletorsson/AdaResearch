@@ -1,0 +1,65 @@
+--- before/commons/artifacts/flow_field_painter/flow_field_painter.gd
++++ commons/artifacts/flow_field_painter/flow_field_painter.gd
+@@ -1,11 +1,13 @@
+ # flow_field_painter.gd
+-## Implements Perlin noise flow-field advection to visualize particle dynamics.
+-## Particles convert a 2D+time noise value to an angle, leaving colored trails
+-## that create organic, paint-like patterns. The noise field evolves continuously,
+-## producing ever-changing flow structures.
+-## Key parameters: noise_scale controls field frequency, particle_speed sets advection rate.
++## Particles sample a Perlin-derived direction field at their current positions.
++## A 2D+time noise value becomes an angle, then a unit direction; each update
++## moves by direction * particle_speed * delta and retains a finite trail.
++## The field clock can advance or be held independently of particle movement.
++## Key parameters: noise_scale controls spatial variation; particle_speed sets speed.
+ ##
+-## QFEP: Noise as structured randomness — not chaos, not order, but λ-edge
++## Research association: structured noise can invite questions about order and
++## variation. This direction sampler does not calculate a QFEP λ-edge, a noise
++## gradient, forces, or fluid dynamics.
+ 
+ # @identity
+ # essence: a small canvas across which hundreds of particles drift, each one
+@@ -13,28 +15,28 @@
+ #   colored trail behind it. No particle is told where to go; it only reads the
+ #   field beneath its feet and steps. The image is the AGGREGATE of those steps
+ #   — paint laid down by a crowd that never agreed on a destination.
+-# desire: to make an invisible vector field visible by letting things FALL
+-#   through it. The field has no color, no shape, no edge; only when bodies
++# desire: to make an invisible direction field visible by letting particles STEP
++#   through it. The field has no color; only when bodies
+ #   advect along it do its grain and swirls appear. It wants to show that
+ #   structure can be felt before it can be seen.
+ # critical_parameter: noise_scale — the spatial frequency of the field. Low and
+-#   the particles sweep in broad laminar rivers; high and the field shatters
+-#   into tight turbulent eddies. It is the dial between calm and chaos without
+-#   ever touching the particles themselves. (noise_speed evolves the field in
+-#   time so no frame's flow is the last word.)
++#   the directions vary over broader distances; high and they vary over shorter
++#   distances. River and eddy are visual associations, not simulated fluid
++#   regimes. (noise_speed advances the field's time coordinate when enabled.)
+ # triggers: _ready() builds the canvas and seeds particles; _process(dt)
+-#   advances _time, samples the noise value at each particle, advects it by
++#   advances _time if enabled, samples the noise value at each particle, moves it by
+ #   particle_speed, and redraws fading trails into an ImmediateMesh
+-# emerges: large scale reads CURRENT / RIVER; small scale reads TURBULENCE /
+-#   STORM. Same particles, the field's frequency IS the difference between flow
+-#   that reads as ordered and flow that reads as chaotic — the λ-edge made paint
++# emerges: the same local direction rule makes many different trajectories as
++#   each new position becomes the next lookup address. Their aggregate can read
++#   as a current or a storm; those readings belong to the picture.
+ # relationships: sibling to other noise artifacts (all turn structured
+ #   randomness into form); cousin to forces/flocking artifacts (both move bodies
+-#   by a field rather than by command); peer to barnsley_fern (both fill a plane
++#   through local rules, though this painter stores no velocity or force);
++#   peer to barnsley_fern (both fill a plane
+ #   from many cheap iterations, but the fern's points CONVERGE while these flow)
+-# truth: noise is not the absence of order but order at a length scale you have
+-#   not yet named. The painter is that thesis enacted — randomness given a
+-#   frequency becomes a current, and a current given bodies becomes a picture.
++# truth: a simple local rule can leave a complicated history. The picture records
++#   finite positions and also connects samples across a wrap; a visible stroke
++#   need not be a route that a particle actually travelled.
+ 
+ extends Node3D
+ 

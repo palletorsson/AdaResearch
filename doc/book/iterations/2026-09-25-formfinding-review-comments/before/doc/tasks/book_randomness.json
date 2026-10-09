@@ -1,0 +1,1141 @@
+{
+  "goal_id": "book_randomness",
+  "goal_title": "Book: Randomness: What Can Chance Change? — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in randomness became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "randomness",
+    "order": 10,
+    "phase": "E_entropy",
+    "title": "Randomness: What Can Chance Change?",
+    "chapters": [
+      "Random_Definition",
+      "Random_Entropy",
+      "Random_Remove",
+      "Randomness_10_PRINT_Algorithm",
+      "Random_Cubes",
+      "Random_Rotate_Random_XYZ",
+      "Random_Walk",
+      "Random_Gaussian",
+      "Random_Mushrooms",
+      "Random_Space_Geometry",
+      "Randomness_Examples_of_Randomness",
+      "Random_Pheromone",
+      "Random_Space",
+      "Random_Game"
+    ],
+    "words": 15914,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "WaveFunctions_Synthesis_Lab (handover in)",
+      "Random_Definition",
+      "Random_Entropy",
+      "Random_Remove",
+      "Randomness_10_PRINT_Algorithm",
+      "Random_Cubes",
+      "Random_Rotate_Random_XYZ",
+      "Random_Walk",
+      "Random_Gaussian",
+      "Random_Mushrooms",
+      "Random_Space_Geometry",
+      "Randomness_Examples_of_Randomness",
+      "Random_Pheromone",
+      "Random_Space",
+      "Random_Game",
+      "Random_Noise_Types (handover out)"
+    ],
+    "reading": {
+      "arc": "The sequence takes one verb, draw, and gives it fourteen jobs. A seed becomes a picture only through a procedure (Definition); a gauge condenses a sample and forgets its order (Entropy); a rule fixes the eligible set before chance picks, and a second piece of code turns a disappearance into a fall (Remove); two marks become contours, a floor, slabs at shoulder width and an ant's map (10 PRINT); a thrown die is read from its orientation and kept as frequencies (Cubes); turning accumulates without a trail (Rotate); a trail is kept but never consulted (Walk); a histogram's shape is a matter of law, clipping and bins (Gaussian); a wardrobe samples within a recipe that chance cannot extend (Mushrooms); neighbours share or do not (Geometry); chance gets four different jobs in a gallery (Examples); a mark enters the next decision (Pheromone); layers add up to something that looks like land (Space); and the closing crossing asks which decisions are already made and which a body must still find out (Game). The through-line is a refusal to let the word random cover three decisions at once: what may vary, how it is drawn, and what is kept. The reader is asked again and again to predict before pressing, and to compare records that forget different things.",
+      "holds": [
+        "The refrain of three decisions folded into one word: \"Filter, draw, delete… only the middle one is\" (Remove) returns as palette / line rule / canvas (Examples), wardrobe vs construction (Mushrooms), sampling / clipping / binning (Gaussian), and stands / leaves / gone / returns (Game).",
+        "The seed as a name that is not the whole recipe: seed + generator + calls + use (Definition) → \"Changing modes retains the seed but spends its draws differently\" (Walk) → \"a seed is not a promise that every branch of a program spends its draws in the same way\" (Mushrooms), carried by a REPLAY / NEW SEED console in almost every hall (board, floor, terrarium, sampler, silhouettes, couture, crossing, doors, podium).",
+        "Records that forget different things: the gauge without order (Entropy), the glass without landing places (Cubes), the trail without its beginning (Walk), bins that move while values stay (Gaussian), scent vs raised terrain (Pheromone), counters vs the newest 300 marks (Examples).",
+        "The body as the test of a mark: slot plate vs withdrawn collider (Remove), ridges you walk through vs slabs you cannot (10 PRINT), the floor that removes support under you (Remove, returning in Game), the stone that leaves while you stand on it (Game).",
+        "Returning objects: the removal floor comes back \"smaller now\" in Random_Game; the entropy gauge stands again in Random_Space; the Trace drawing dot returns with a random offset; the 10 PRINT diagonals recur on the textile bolts (Definition) and the Molnar grids.",
+        "Every chapter opens by naming the previous room's move and closes by naming the next room's question, so the sequence reads as one walk rather than fourteen labels."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Random_Definition",
+          "words": 999,
+          "note": "REPLAY, +1 DRAW and the seed slider separate a seed from the procedure that spends it; the textile bolts, the 1955 page and the crank are three ways to keep or lose a draw. The strongest opening in the sequence: predict-then-press throughout, every claim backed by the two loops it quotes."
+        },
+        {
+          "hall": "Random_Entropy",
+          "words": 1785,
+          "note": "The gauge, SORT and CONTRAST show what a categorical entropy keeps and forgets; then the jar, the displaced-point field, the ruin and the museum's own weathering wall make the omission bodily. The longest chapter: the DISCLOSE paragraph reads as a control manual, and the ruin section could lose a hundred words without losing a move."
+        },
+        {
+          "hall": "Random_Remove",
+          "words": 1475,
+          "note": "The board makes filter, draw and delete three visible steps with a code excerpt for each, then the floor gives the same draw a consequence by withdrawing collision. Tight and exact; the ROW/COLUMN comparison under one seed is the sequence's best small experiment."
+        },
+        {
+          "hall": "Randomness_10_PRINT_Algorithm",
+          "words": 1339,
+          "note": "One BASIC line taken apart at its constant and its semicolon, then the same stream as Molnar grids, a floor of ridges, slabs at shoulder width and an ant's map. Reads well, but \"Look down\" arrives without a walk, and the slab wall it climaxes on is not yet in the museum's deal."
+        },
+        {
+          "hall": "Random_Cubes",
+          "words": 801,
+          "note": "A thrown die read from orientation, a coin with gauges for its conditions, a heap that loses pieces and a field of bounded profiles: four records that forget different things. Short and clear; two desktop asides break the headset voice."
+        },
+        {
+          "hall": "Random_Rotate_Random_XYZ",
+          "words": 808,
+          "note": "Rust that records your movement, then two stacks whose only change is accumulated turning under the hall's #study:rotation, then a tilt field that is a rule about place. Good comparison discipline; one sentence (\"Nothing there turns\") contradicts the field's clocked motion."
+        },
+        {
+          "hall": "Random_Walk",
+          "words": 1413,
+          "note": "Steps proposed from the position reached, reflected at the glass, recorded in a trail the generator never reads; then a wandering drawing dot and a floor that rises where it is visited. Its best passage is the read-aloud of three lines; the self-avoiding sculpture, the paper rack and the leash go unplaced."
+        },
+        {
+          "hall": "Random_Gaussian",
+          "words": 1090,
+          "note": "PAUSE, BATCH, the two laws' code, the u1 guard, the clip and BINS separate sampling, clipping and binning of the same stored values; the splatter's refused centre closes it. Precise and well paced; the clipped-count vs edge-bin distinction is a fine touch."
+        },
+        {
+          "hall": "Random_Mushrooms",
+          "words": 1497,
+          "note": "SHOW, SIZE, KIND and the named seed read a population's construction; then silhouettes (DRESS vs FORMS) and three couture bodies separate a wardrobe from a change of recipe. Long but earns it; one desktop aside."
+        },
+        {
+          "hall": "Random_Space_Geometry",
+          "words": 625,
+          "note": "White vs Perlin columns under SEED, FREQUENCY and OCTAVES, with the discipline of withholding the landscape reading. Reads as a bench note rather than a walk: no arrival, no placement, and in the built museum the bench stands in a wall row beside a plank over the hall's void."
+        },
+        {
+          "hall": "Randomness_Examples_of_Randomness",
+          "words": 1205,
+          "note": "Pollock homage, dartboard estimate, pipe and particle study each give chance a different job. Clear and honest about its limits (500 darts, 300 marks, 180 segments); opens with a curator's \"returned\"."
+        },
+        {
+          "hall": "Random_Pheromone",
+          "words": 632,
+          "note": "Walkers whose deposits enter the next decision; ATTRACT vs AVOID at the same step count; the clipboard's optimal-route claim corrected in prose. A good argument whose two numbers (40 %, four walkers) do not match the field (30 %, five)."
+        },
+        {
+          "hall": "Random_Space",
+          "words": 611,
+          "note": "OCT, LAC and PER on a sine-based mixer, the independent-corner floor underfoot, the palette named as an interpretation. Short and sound; the Worley display and the returning gauge get no sentence."
+        },
+        {
+          "hall": "Random_Game",
+          "words": 1634,
+          "note": "Cycling stones with drawn waits and a tablet that shows the stored deadline, the removal floor returning, three doors decided before the press, a projectile field and a podium whose delays are drawn as a ridge. The sequence's strongest closing hall; one desktop aside, two unserved anchors, and a closer that skips the biome ladder."
+        }
+      ],
+      "stumbles": [
+        "Random_Space_Geometry: the chapter opens \"Look closely at neighbouring columns in the two small grids\" with no arrival and no placement; in the map the bench sits at interactables (6,23) on a structure row that is wall, and the five works beyond it have no structure row at all, so the built hall puts them over a void beside a one-cell plank.",
+        "Randomness_10_PRINT_Algorithm: \"Now return to the taller slabs near the entrance\" sends the reader into a wall form that exists only in today's uncommitted map edit; both museum plans still deal the old hall (a science_screen and one floor-form structure).",
+        "Randomness_10_PRINT_Algorithm: \"Look down. The newest seven rows of the screen are also under your feet\" — the floor form stands at (11,12), eight cells from the printer at (3,11) where the reader was just told to stand.",
+        "Random_Cubes: \"On a desktop the object is dropped rather than thrown\" and \"On a desktop, these are drops\" — a headset reader is told about a rig they are not holding, twice.",
+        "Random_Pheromone: the quoted label \"signal-guided: 40%\" and \"the four walkers\" contradict the field, which prints 30 % and runs five walkers; a reader who checks the label loses trust in the rest.",
+        "Random_Rotate_Random_XYZ: \"a low field of cubes begins to tilt\" followed by \"Nothing there turns\" — the field pitches on a sine clock and the reader watching it is told nothing moves.",
+        "Randomness_Examples_of_Randomness: \"Four works have returned to the gallery\" — returned from where? A curation note in the reader's voice.",
+        "Random_Walk: \"the grip from Trace\" — the earlier room is Point_Trace, whose chapter has no title and never calls itself Trace; and the self-avoiding sculpture is introduced \"between this cabinet and the basin\" when it stands six cells off to the side with no anchor.",
+        "Random_Entropy: the DISCLOSE paragraph (\"Press DISCLOSE… press it again… Keep pressing…\") reads as a control manual inside an otherwise well-paced chapter.",
+        "Random_Game: \"Press CUE again and all three stones carry a ring\" implies only the middle stone had one before; the crossing builds the crown on all three stones from the start (random_cycle_cube.gd:709–714), so the reader looks for a difference that is not there."
+      ],
+      "keep": [
+        {
+          "hall": "Random_Remove",
+          "quote": "Filter, draw, delete: three decisions that are easy to fold into one word, random, and only the middle one is."
+        },
+        {
+          "hall": "Random_Definition",
+          "quote": "Nothing in a draw says that it is red. Red is the use made of its place in these three calls."
+        },
+        {
+          "hall": "Random_Entropy",
+          "quote": "A high reading is not a certificate of meaninglessness and a low one is not a certificate of value"
+        },
+        {
+          "hall": "Randomness_10_PRINT_Algorithm",
+          "quote": "Each cell was decided alone. Whether you can cross depends on their arrangement together. A body meets a consequence that no single draw contains."
+        },
+        {
+          "hall": "Random_Cubes",
+          "quote": "No side of the cube bears that number. It belongs to a distribution, while the observed mean belongs to the throws made so far."
+        },
+        {
+          "hall": "Random_Walk",
+          "quote": "Read the order aloud. Keep where we were. Shorten the record. Put the bead where we are now."
+        },
+        {
+          "hall": "Random_Gaussian",
+          "quote": "A finite run need not contain such a draw; the model's tail is a probability, not an appointment."
+        },
+        {
+          "hall": "Random_Game",
+          "quote": "Before describing a missed step as poor timing, ask where its warning was readable."
+        }
+      ],
+      "handover_in": "Clean. WaveFunctions_Synthesis_Lab ends on what must be retained to bring an unfamiliar result back, and Random_Definition opens by naming the five amounts and the familiar curve before turning to a patch of colour nobody would have chosen; the question (what does a name leave out of a making?) is exactly what the seed console answers. One blemish: the Synthesis Lab closer writes the next room as \"Random_Definition\", with an underscore, a file token rather than a room name, while every closer inside randomness writes room names as words (\"In Random Gaussian\", \"in Random Space Geometry\", \"In Noise Types\").",
+      "handover_out": "Random_Game closes \"In Noise Types we will carry that question between neighbouring places\", and Random_Noise_Types opens \"The stones behind us could disappear. Their order of movement stayed intact; the drawn waits changed how long we had to cross\" — an accurate recall of the crossing, and the plane-clipping point that follows is a fair next step from \"which decisions are already made\". But the museum deals Biome_Ladder_Randomness between the two (em_plan plans[76] → [77] nine biome vitrines → [78]), and neither chapter mentions it, whereas the Mushrooms closer names its cage interlude; the visitor walks a hall the book does not acknowledge before the promised next room.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_randomness.001",
+      "title": "Put the noise bench on the hall's floor",
+      "spec": "[encounter] Random_Space_Geometry\nQuote: “Look closely at neighbouring columns in the two small grids.”\nWhy: The chapter's only anchored work stands where the map gives it no floor: the visitor reaches a wall line with a one-cell plank over a void and cannot stand at the grids, so none of the chapter's instructions (keep SEED fixed, choose three adjacent columns, move one position along) can be followed.\nDo: Move perlin_noise_bridge and the five works beyond it into the floored room (structure rows 1–22), or extend the structure floor through row 28; then run `python tools/em_map_halls.py --apply` and `python tools/map_pathfinder.py check Random_Space_Geometry --verbose`, and give the chapter one arrival sentence saying where the bench stands.\nEvidence: commons/maps/Random_Space_Geometry/map_data.json: structure and utilities have 24 rows, interactables 30; structure row 23 = `1 1 3 3 3 3 3 3 3 3 1 1` (x=6 is a height-3 wall) while perlin_noise_bridge sits at interactables (6,23); env_one (5,24), curl_noise_particles (9,24), random_transformations_geometric (3,25), sculpt_one (2,26) and dark_sphere (6,27) have no structure row at all. ada_run/em_plan.json plans[72] (authored=map): tile rows 24–28 are `4 1 1 4 4 1 4 4 4 4 4 1 1 4` then four rows of `4 0 0 0 0 1 0 0 0 0 0 0 0 4` (void with a one-cell plank at x=5); the works are dealt at [7,24] (a '4' cell) and [6,25], [10,25], [4,26], [3,27], [7,28] (all '0'). `map_pathfinder.py check` prints OK but counts \"1 artifacts\" of six.\nFile: commons/maps/Random_Space_Geometry/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space_Geometry"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Space_Geometry",
+      "quote": "Look closely at neighbouring columns in the two small grids.",
+      "why": "The chapter's only anchored work stands where the map gives it no floor: the visitor reaches a wall line with a one-cell plank over a void and cannot stand at the grids, so none of the chapter's instructions (keep SEED fixed, choose three adjacent columns, move one position along) can be followed.",
+      "proposal": "Move perlin_noise_bridge and the five works beyond it into the floored room (structure rows 1–22), or extend the structure floor through row 28; then run `python tools/em_map_halls.py --apply` and `python tools/map_pathfinder.py check Random_Space_Geometry --verbose`, and give the chapter one arrival sentence saying where the bench stands.",
+      "evidence": "commons/maps/Random_Space_Geometry/map_data.json: structure and utilities have 24 rows, interactables 30; structure row 23 = `1 1 3 3 3 3 3 3 3 3 1 1` (x=6 is a height-3 wall) while perlin_noise_bridge sits at interactables (6,23); env_one (5,24), curl_noise_particles (9,24), random_transformations_geometric (3,25), sculpt_one (2,26) and dark_sphere (6,27) have no structure row at all. ada_run/em_plan.json plans[72] (authored=map): tile rows 24–28 are `4 1 1 4 4 1 4 4 4 4 4 1 1 4` then four rows of `4 0 0 0 0 1 0 0 0 0 0 0 0 4` (void with a one-cell plank at x=5); the works are dealt at [7,24] (a '4' cell) and [6,25], [10,25], [4,26], [3,27], [7,28] (all '0'). `map_pathfinder.py check` prints OK but counts \"1 artifacts\" of six.",
+      "review": "confirmed by a code checker (cited files only): Random_Space_Geometry map_data.json: structure and utilities have 24 rows, interactables 30; structure row 23 = 1 1 3 3 3 3 3 3 3 3 1 1 (x=6 height-3 wall) under perlin_noise_bridge at interactables (6,23); env_one (5,24), curl_noise_particles (9,24), random_transformations_geometric (3,25), sculpt_one (2,26), dark_sphere (6,27) have no structure row. em_plan.json plans[72] tile row 24 = 41144144444114 and rows 25-28 = 40000100000004; the six works are dealt at [7,24],[6,25],[10,25],[4,26],[3,27],[7,28]. final.md:7 gives the column-comparison instructions. The pathfinder '1 artifacts' count was not re-run (not asked).",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.002",
+      "title": "Deal the slab wall into the museum plan",
+      "spec": "[encounter] Randomness_10_PRINT_Algorithm\nQuote: “Now return to the taller slabs near the entrance. They retain the first twelve characters printed when the hall was built”\nWhy: The wall-form structure the chapter walks into exists only in today's uncommitted map edit; both museum plans still deal the old hall, with a science_screen the map no longer has and only the floor-form structure, so a visitor meets no slabs, no closed room and no crossing.\nDo: Commit the map edit and re-run `python tools/em_map_halls.py --apply` (post to the forum first: ada_run/em_plan.json is modified in the working tree, so another session may be writing it), then check that plans[65] carries `ten_print_structure … form:wall … count:12` and no science_screen.\nEvidence: `git status`: ` M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json` (mtime 2026-09-24 14:30, last commit 19b44161f 2026-09-16); `git diff` adds `ten_print_structure:180#form:wall#size:1.1#cols:4#rows:3#solid:on#seed:1982#count:12#plate:none` at (11,8) and removes `science_screen:180:1.5#mode:grid`. ada_run/em_plan.json plans[65] (mtime 09-23 22:36) and commons/data/museum/em_plan.json plans[65] (mtime 09-24 16:07) both list science_screen [12,4] cfg {mode: grid} and a single ten_print_structure [12,13] cfg {form: floor}. The wall the chapter describes is real in code: ten_print_structure.gd:45–47 (2.4 m slabs, corridor = size/√2 minus the slab), :134–135 FORM_HEIGHT wall 2.4.\nFile: commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "quote": "Now return to the taller slabs near the entrance. They retain the first twelve characters printed when the hall was built",
+      "why": "The wall-form structure the chapter walks into exists only in today's uncommitted map edit; both museum plans still deal the old hall, with a science_screen the map no longer has and only the floor-form structure, so a visitor meets no slabs, no closed room and no crossing.",
+      "proposal": "Commit the map edit and re-run `python tools/em_map_halls.py --apply` (post to the forum first: ada_run/em_plan.json is modified in the working tree, so another session may be writing it), then check that plans[65] carries `ten_print_structure … form:wall … count:12` and no science_screen.",
+      "evidence": "`git status`: ` M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json` (mtime 2026-09-24 14:30, last commit 19b44161f 2026-09-16); `git diff` adds `ten_print_structure:180#form:wall#size:1.1#cols:4#rows:3#solid:on#seed:1982#count:12#plate:none` at (11,8) and removes `science_screen:180:1.5#mode:grid`. ada_run/em_plan.json plans[65] (mtime 09-23 22:36) and commons/data/museum/em_plan.json plans[65] (mtime 09-24 16:07) both list science_screen [12,4] cfg {mode: grid} and a single ten_print_structure [12,13] cfg {form: floor}. The wall the chapter describes is real in code: ten_print_structure.gd:45–47 (2.4 m slabs, corridor = size/√2 minus the slab), :134–135 FORM_HEIGHT wall 2.4.",
+      "review": "confirmed by a code checker (cited files only): git status: M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json, last commit 19b44161f (2026-09-16). git diff adds 'ten_print_structure:180#form:wall#size:1.1#cols:4#rows:3#solid:on#seed:1982#count:12#plate:none' (now at cell (11,8)) and removes 'science_screen:180:1.5#mode:grid'. ada_run/em_plan.json plans[65] and commons/data/museum/em_plan.json plans[65] both still list science_screen [12,4] {mode: grid} and a single ten_print_structure [12,13] {form: floor}. ten_print_structure.gd:44-48 wall = 2.4 m slabs, corridor = size/sqrt2 minus the slab; :134-135 FORM_HEIGHT wall 2.4. final.md:55 'Now return to the taller slabs near the entrance.' (mtimes not re-checked).",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.003",
+      "title": "Drop the two desktop asides at the die and the coins",
+      "spec": "[vr] Random_Cubes\nQuote: “On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation.”\nWhy: Two sentences in reader prose describe a desktop rig the headset visitor is not holding; the second (\"On a desktop, these are drops: the hand's throw is unavailable.\") repeats it at the coins.\nDo: Delete both sentences; the surrounding text already carries the point (\"How your hand let go, the cube's shape and its contact with the felt have already done their work\"; \"A gentle toss and a forceful one can leave different readings\").\nEvidence: commons/maps/Random_Cubes/final.md lines 13 and 29. dice_throw.gd:12 documents both the VR `_on_dice_dropped()` path and `on_desktop_drop`; :14 lists \"XRToolsPickable grab + throw [has]\" as the encounter; coin_toss.gd:14 likewise \"XRToolsPickable coins [has]\".\nFile: commons/maps/Random_Cubes/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Cubes"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Cubes",
+      "quote": "On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation.",
+      "why": "Two sentences in reader prose describe a desktop rig the headset visitor is not holding; the second (\"On a desktop, these are drops: the hand's throw is unavailable.\") repeats it at the coins.",
+      "proposal": "Delete both sentences; the surrounding text already carries the point (\"How your hand let go, the cube's shape and its contact with the felt have already done their work\"; \"A gentle toss and a forceful one can leave different readings\").",
+      "evidence": "commons/maps/Random_Cubes/final.md lines 13 and 29. dice_throw.gd:12 documents both the VR `_on_dice_dropped()` path and `on_desktop_drop`; :14 lists \"XRToolsPickable grab + throw [has]\" as the encounter; coin_toss.gd:14 likewise \"XRToolsPickable coins [has]\".",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.004",
+      "title": "Drop the desktop-carry aside at the edible mushroom",
+      "spec": "[vr] Random_Mushrooms\nQuote: “The desktop carry lets you inspect it, but holds it beyond that eating distance.”\nWhy: A desktop aside in reader prose; the headset visitor has only the hand, and the preceding sentence already opens with \"In the headset\", which becomes redundant once the aside goes.\nDo: Delete the sentence and change \"In the headset, hold one and bring it close to your face\" to \"Hold one and bring it close to your face\".\nEvidence: commons/maps/Random_Mushrooms/final.md line 70. commons/hazards/mushroom/edible_mushroom.gd:28 `eat_distance = 0.25`, :36 `effect_duration = 10.0`, :69 0.5 s dissolve; :17–18 the desktop branch is a debug 'E' key. mushrooms.gd:1187 `edible == \"some\"` → 3, matching \"Three spotted red-capped mushrooms\".\nFile: commons/maps/Random_Mushrooms/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Mushrooms",
+      "quote": "The desktop carry lets you inspect it, but holds it beyond that eating distance.",
+      "why": "A desktop aside in reader prose; the headset visitor has only the hand, and the preceding sentence already opens with \"In the headset\", which becomes redundant once the aside goes.",
+      "proposal": "Delete the sentence and change \"In the headset, hold one and bring it close to your face\" to \"Hold one and bring it close to your face\".",
+      "evidence": "commons/maps/Random_Mushrooms/final.md line 70. commons/hazards/mushroom/edible_mushroom.gd:28 `eat_distance = 0.25`, :36 `effect_duration = 10.0`, :69 0.5 s dissolve; :17–18 the desktop branch is a debug 'E' key. mushrooms.gd:1187 `edible == \"some\"` → 3, matching \"Three spotted red-capped mushrooms\".",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.005",
+      "title": "Drop the desktop-carry aside at the podium",
+      "spec": "[vr] Random_Game\nQuote: “In a headset, arrivals wait while either cube is held; a desktop carry does not pause them.”\nWhy: A desktop aside in reader prose in the sequence's closing hall; the headset visitor needs only the rule.\nDo: Replace with \"Arrivals wait while either cube is held.\"\nEvidence: commons/maps/Random_Game/final.md line 98. commons/artifacts/randomness_space/waiting_profile.gd:65–71 `_held()` reads `cube.is_picked_up()` and gates `_spawn`; :86 the plate prints \"Holding a cube suspends arrivals\".\nFile: commons/maps/Random_Game/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Game",
+      "quote": "In a headset, arrivals wait while either cube is held; a desktop carry does not pause them.",
+      "why": "A desktop aside in reader prose in the sequence's closing hall; the headset visitor needs only the rule.",
+      "proposal": "Replace with \"Arrivals wait while either cube is held.\"",
+      "evidence": "commons/maps/Random_Game/final.md line 98. commons/artifacts/randomness_space/waiting_profile.gd:65–71 `_held()` reads `cube.is_picked_up()` and gates `_spawn`; :86 the plate prints \"Holding a cube suspends arrivals\".",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.006",
+      "title": "Correct the field's label and walker count",
+      "spec": "[code-claim] Random_Pheromone\nQuote: “the label over the field reads signal-guided: 40%”\nWhy: The label prints pheromone_attraction × 100, which is 30 % at the shipped value the map does not override, and the field runs five walkers, not \"the four walkers\" the AVOID paragraph names; a reader who reads the label loses trust in the chapter's other numbers.\nDo: Change to \"signal-guided: 30%\" and \"the five walkers\" (or, if 40 % and four were intended, add `#pheromone_attraction:0.4#walker_count:4` to the map cell — but the museum's bench stamp hands over only a token's first key, so fixing the prose is the safe change).\nEvidence: algorithms/randomness/pheromone_terrain/pheromone_terrain.gd:18 `walker_count: int = 5`, :26 `pheromone_attraction: float = 0.3`, :542–544 label format \"walkers: %d  %s: %.0f%%\" with influence \"signal-guided\" under comparison, :524 the label hangs at max_height + 2 over the field; :566 and :572 are the only assignments and read config keys the map cell `pheromone_terrain#comparison:true#walk_seed:190919` does not carry.\nFile: commons/maps/Random_Pheromone/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Pheromone"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Random_Pheromone",
+      "quote": "the label over the field reads signal-guided: 40%",
+      "why": "The label prints pheromone_attraction × 100, which is 30 % at the shipped value the map does not override, and the field runs five walkers, not \"the four walkers\" the AVOID paragraph names; a reader who reads the label loses trust in the chapter's other numbers.",
+      "proposal": "Change to \"signal-guided: 30%\" and \"the five walkers\" (or, if 40 % and four were intended, add `#pheromone_attraction:0.4#walker_count:4` to the map cell — but the museum's bench stamp hands over only a token's first key, so fixing the prose is the safe change).",
+      "evidence": "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd:18 `walker_count: int = 5`, :26 `pheromone_attraction: float = 0.3`, :542–544 label format \"walkers: %d  %s: %.0f%%\" with influence \"signal-guided\" under comparison, :524 the label hangs at max_height + 2 over the field; :566 and :572 are the only assignments and read config keys the map cell `pheromone_terrain#comparison:true#walk_seed:190919` does not carry.",
+      "review": "confirmed by a code checker (cited files only): pheromone_terrain.gd:18 walker_count = 5; :26 pheromone_attraction = 0.3; :542-544 label 'walkers: %d  %s: %.0f%%' with 'signal-guided' when comparison; :524 label at max_height + 2. The only assignments are :566/:572 reading config keys walker_count / pheromone_attraction. Map Random_Pheromone (6,3) 'pheromone_terrain#comparison:true#walk_seed:190919' carries neither. final.md:11 'signal-guided: 40%', :19 'the four walkers'. Label would read 'walkers: 5  signal-guided: 30%'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.007",
+      "title": "Say what the tilt field does not do",
+      "spec": "[prose] Random_Rotate_Random_XYZ\nQuote: “Nothing there turns, and nothing there was drawn.”\nWhy: Two sentences earlier the same field \"begins to tilt\", and the script pitches every cube between 0° and its row's maximum on a sine clock; the reader watching it move is told nothing turns.\nDo: \"Nothing there is kicked by chance: the pitch rises and falls on a clock, each row by its place along the field, and the same motion returns every time the hall is built.\"\nEvidence: algorithms/randomness/SlopeGradientCubes.gd (the script behind the RotateGridCubes token's SlopeGradientCubes.tscn, registry randomness.json): :16 `animate_slope: bool = true`, :51–60 `_process` lerps `current_max` with `(sin(_time)+1)/2`, :74–84 `cube.rotation.x = -angle_rad`; :92–93 `apply_grid_config` is a no-op, so the map's `RotateGridCubes:0:-0.5` cannot switch the animation off.\nFile: commons/maps/Random_Rotate_Random_XYZ/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Rotate_Random_XYZ"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Random_Rotate_Random_XYZ",
+      "quote": "Nothing there turns, and nothing there was drawn.",
+      "why": "Two sentences earlier the same field \"begins to tilt\", and the script pitches every cube between 0° and its row's maximum on a sine clock; the reader watching it move is told nothing turns.",
+      "proposal": "\"Nothing there is kicked by chance: the pitch rises and falls on a clock, each row by its place along the field, and the same motion returns every time the hall is built.\"",
+      "evidence": "algorithms/randomness/SlopeGradientCubes.gd (the script behind the RotateGridCubes token's SlopeGradientCubes.tscn, registry randomness.json): :16 `animate_slope: bool = true`, :51–60 `_process` lerps `current_max` with `(sin(_time)+1)/2`, :74–84 `cube.rotation.x = -angle_rad`; :92–93 `apply_grid_config` is a no-op, so the map's `RotateGridCubes:0:-0.5` cannot switch the animation off.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.008",
+      "title": "Anchor and place the self-avoiding sculpture",
+      "spec": "[figure] Random_Walk\nQuote: “Between this cabinet and the basin, a sculpture of small cubes shows one way to build it.”\nWhy: The sculpture is pixel_cloud, which has no anchor in the chapter, so its capture is never served with the passage that needs it; and \"between\" misplaces it — it stands six cells off the cabinet's axis, to the visitor's right.\nDo: Insert `<!-- @pixel_cloud -->` before the sentence and write \"Off to your right, between this cabinet and the basin, a sculpture of small cubes…\".\nEvidence: commons/maps/Random_Walk/map_data.json interactables: pixel_cloud at (3,9) (`pixel_cloud:180:0.1:0.18#walk_seed:101`), random_walk_terrarium at (9,5), random_walk_128 at (9,17); algorithms/randomness/pixelcloud/pixel_cloud.gd:2 \"self-avoiding walk with upward bias\", :39 `num_cubes: int = 23`. `final_tags.py --map=Random_Walk` shows 3 tagged works; em_plan plans[68] deals 6.\nFile: commons/maps/Random_Walk/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Walk"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Random_Walk",
+      "quote": "Between this cabinet and the basin, a sculpture of small cubes shows one way to build it.",
+      "why": "The sculpture is pixel_cloud, which has no anchor in the chapter, so its capture is never served with the passage that needs it; and \"between\" misplaces it — it stands six cells off the cabinet's axis, to the visitor's right.",
+      "proposal": "Insert `<!-- @pixel_cloud -->` before the sentence and write \"Off to your right, between this cabinet and the basin, a sculpture of small cubes…\".",
+      "evidence": "commons/maps/Random_Walk/map_data.json interactables: pixel_cloud at (3,9) (`pixel_cloud:180:0.1:0.18#walk_seed:101`), random_walk_terrarium at (9,5), random_walk_128 at (9,17); algorithms/randomness/pixelcloud/pixel_cloud.gd:2 \"self-avoiding walk with upward bias\", :39 `num_cubes: int = 23`. `final_tags.py --map=Random_Walk` shows 3 tagged works; em_plan plans[68] deals 6.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.009",
+      "title": "Anchor the podium and the five profiles",
+      "spec": "[figure] Random_Game\nQuote: “At the last podium, wait for a small wooden cube.”\nWhy: The podium, its two slots and the five cutout profiles are one separate work (waiting_profile), but the passage sits inside the cube_projectile_spawner region, so the thread and figure for the podium are unserved.\nDo: Insert `<!-- @waiting_profile -->` before \"At the last podium\".\nEvidence: `final_tags.py --map=Random_Game`: 4 tagged works; em_plan plans[76] deals five including waiting_profile; map cell (9,47) `waiting_profile#controls:compact#control_front:-1.7#control_facing:-z`; waiting_profile.gd:20–22 (5 layers, eye 1.7 m), :36 (17 points, seeds 1955+i), :84 (0.3–1.3 s draws) — the numbers the passage quotes.\nFile: commons/maps/Random_Game/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Random_Game",
+      "quote": "At the last podium, wait for a small wooden cube.",
+      "why": "The podium, its two slots and the five cutout profiles are one separate work (waiting_profile), but the passage sits inside the cube_projectile_spawner region, so the thread and figure for the podium are unserved.",
+      "proposal": "Insert `<!-- @waiting_profile -->` before \"At the last podium\".",
+      "evidence": "`final_tags.py --map=Random_Game`: 4 tagged works; em_plan plans[76] deals five including waiting_profile; map cell (9,47) `waiting_profile#controls:compact#control_front:-1.7#control_facing:-z`; waiting_profile.gd:20–22 (5 layers, eye 1.7 m), :36 (17 points, seeds 1955+i), :84 (0.3–1.3 s draws) — the numbers the passage quotes.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.010",
+      "title": "Name the biome ladder before Noise Types",
+      "spec": "[handover] Random_Game\nQuote: “In Noise Types we will carry that question between neighbouring places.”\nWhy: The museum deals Biome_Ladder_Randomness between Random_Game and Random_Noise_Types, so the visitor walks a hall of nine biome vitrines before the promised room; the Mushrooms closer names its cage interlude, this one should name the ladder.\nDo: \"After the biome ladder, Noise Types will carry that question between neighbouring places.\"\nEvidence: ada_run/em_plan.json plans[76] Random_Game → plans[77] Biome_Ladder_Randomness (nine biome_vitrine bodies) → plans[78] Random_Noise_Types; commons/maps/sequences/randomness.json museum_interludes: Biome_Ladder_Randomness \"after\": \"Random_Game\"; commons/maps/Random_Mushrooms/final.md line 94 \"Carry that question through the cage interlude.\"\nFile: commons/maps/Random_Game/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Random_Game",
+      "quote": "In Noise Types we will carry that question between neighbouring places.",
+      "why": "The museum deals Biome_Ladder_Randomness between Random_Game and Random_Noise_Types, so the visitor walks a hall of nine biome vitrines before the promised room; the Mushrooms closer names its cage interlude, this one should name the ladder.",
+      "proposal": "\"After the biome ladder, Noise Types will carry that question between neighbouring places.\"",
+      "evidence": "ada_run/em_plan.json plans[76] Random_Game → plans[77] Biome_Ladder_Randomness (nine biome_vitrine bodies) → plans[78] Random_Noise_Types; commons/maps/sequences/randomness.json museum_interludes: Biome_Ladder_Randomness \"after\": \"Random_Game\"; commons/maps/Random_Mushrooms/final.md line 94 \"Carry that question through the cage interlude.\"",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.011",
+      "title": "Remove the curator's 'returned'",
+      "spec": "[prose] Randomness_Examples_of_Randomness\nQuote: “Four works have returned to the gallery.”\nWhy: Returned from where? The visitor has no earlier state of this hall; the sentence is a note from the curation history speaking in the reader's voice.\nDo: \"Four works share the gallery.\"\nEvidence: commons/maps/Randomness_Examples_of_Randomness/final.md line 3; em_plan plans[73] deals exactly the four works the chapter tags (pollock_painting_in_3d, monte_carlo_dartboard, pipe_dream, extreme_randomness).\nFile: commons/maps/Randomness_Examples_of_Randomness/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_Examples_of_Randomness"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Randomness_Examples_of_Randomness",
+      "quote": "Four works have returned to the gallery.",
+      "why": "Returned from where? The visitor has no earlier state of this hall; the sentence is a note from the curation history speaking in the reader's voice.",
+      "proposal": "\"Four works share the gallery.\"",
+      "evidence": "commons/maps/Randomness_Examples_of_Randomness/final.md line 3; em_plan plans[73] deals exactly the four works the chapter tags (pollock_painting_in_3d, monte_carlo_dartboard, pipe_dream, extreme_randomness).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.012",
+      "title": "Give the Worley display and the returning gauge a sentence",
+      "spec": "[structure] Random_Space\nQuote: “Look down: the pale patches breaking through the grey floor are the tops of a random surface you walk across, built another way.”\nWhy: Two more works stand in the hall with no text: the cellular (Worley) field and the entropy gauge the reader learned in room 2; the sequence's own rationale for this hall promises a comparison with \"retained cellular, spatial and statistical representations\", and the reader meets an instrument they know without being told what it is doing here.\nDo: Add one short paragraph with `<!-- @worley_noise -->` and `<!-- @shannon_entropy_meter -->`: where each stands, the cellular field's cells against the mixer's layers, and what the gauge's two-hundred-symbol count can and cannot say about a field.\nEvidence: commons/maps/Random_Space/map_data.json interactables: worley_noise (8,4), shannon_entropy_meter (4,9); em_plan plans[75] deals both; `grep -c -i \"worley\\|cellular\\|gauge\" commons/maps/Random_Space/final.md` = 0; commons/maps/sequences/randomness.json artifact_groups Random_Space rationale.\nFile: commons/maps/Random_Space/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Random_Space",
+      "quote": "Look down: the pale patches breaking through the grey floor are the tops of a random surface you walk across, built another way.",
+      "why": "Two more works stand in the hall with no text: the cellular (Worley) field and the entropy gauge the reader learned in room 2; the sequence's own rationale for this hall promises a comparison with \"retained cellular, spatial and statistical representations\", and the reader meets an instrument they know without being told what it is doing here.",
+      "proposal": "Add one short paragraph with `<!-- @worley_noise -->` and `<!-- @shannon_entropy_meter -->`: where each stands, the cellular field's cells against the mixer's layers, and what the gauge's two-hundred-symbol count can and cannot say about a field.",
+      "evidence": "commons/maps/Random_Space/map_data.json interactables: worley_noise (8,4), shannon_entropy_meter (4,9); em_plan plans[75] deals both; `grep -c -i \"worley\\|cellular\\|gauge\" commons/maps/Random_Space/final.md` = 0; commons/maps/sequences/randomness.json artifact_groups Random_Space rationale.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.013",
+      "title": "Name the 1955 book of random digits",
+      "spec": "[footnote] Random_Definition\nQuote: “a page of five-digit numbers takes its look from a book of random digits printed in 1955, a table anyone could open at the same line and read the same digits again”\nWhy: The book is never named, so a reader cannot find it, while every other borrowed work in the sequence (10 PRINT, Molnar, Lucier) gets its name and a link.\nDo: Add a footnote: RAND Corporation, A Million Random Digits with 100,000 Normal Deviates (Free Press, 1955), with one line on how its tables were used (open at a page, start at a column, read down) and that the page here keeps the look and not the return.\nEvidence: commons/maps/Random_Definition/final.md line 53; algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd:82 `cascade_speed = 1.0` rows per second, :102 `page_seed = -1` (global generator, matching \"no seed set for them in this room\"), :267 `side_number` 100–999.\nFile: commons/maps/Random_Definition/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Definition"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Random_Definition",
+      "quote": "a page of five-digit numbers takes its look from a book of random digits printed in 1955, a table anyone could open at the same line and read the same digits again",
+      "why": "The book is never named, so a reader cannot find it, while every other borrowed work in the sequence (10 PRINT, Molnar, Lucier) gets its name and a link.",
+      "proposal": "Add a footnote: RAND Corporation, A Million Random Digits with 100,000 Normal Deviates (Free Press, 1955), with one line on how its tables were used (open at a page, start at a column, read down) and that the page here keeps the look and not the return.",
+      "evidence": "commons/maps/Random_Definition/final.md line 53; algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd:82 `cascade_speed = 1.0` rows per second, :102 `page_seed = -1` (global generator, matching \"no seed set for them in this room\"), :267 `side_number` 100–999.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.014",
+      "title": "Name the room the drawing dot comes from",
+      "spec": "[prose] Random_Walk\nQuote: “This is the grip from Trace with one addition.”\nWhy: The earlier room is Point_Trace in the primitives sequence; its chapter has no title line and never calls itself Trace, so the reader cannot place the reference, which the chapter makes twice (\"as it did in Trace\").\nDo: \"This is the drawing dot from the Point Trace room, with one addition.\" and \"as it did there\".\nEvidence: commons/maps/Point_Trace/final.md begins \"Bring the detour.\" with no H1 and carries `<!-- @draw_dot -->` (line 7); commons/maps/Random_Walk/final.md lines 73 and 82; random_draw_dot.gd:11–13 STEP_TIME 1/30, STEP_SIZE 0.012, RADIUS 0.25 — the constants the chapter quotes.\nFile: commons/maps/Random_Walk/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Walk"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Random_Walk",
+      "quote": "This is the grip from Trace with one addition.",
+      "why": "The earlier room is Point_Trace in the primitives sequence; its chapter has no title line and never calls itself Trace, so the reader cannot place the reference, which the chapter makes twice (\"as it did in Trace\").",
+      "proposal": "\"This is the drawing dot from the Point Trace room, with one addition.\" and \"as it did there\".",
+      "evidence": "commons/maps/Point_Trace/final.md begins \"Bring the detour.\" with no H1 and carries `<!-- @draw_dot -->` (line 7); commons/maps/Random_Walk/final.md lines 73 and 82; random_draw_dot.gd:11–13 STEP_TIME 1/30, STEP_SIZE 0.012, RADIUS 0.25 — the constants the chapter quotes.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.015",
+      "title": "Decide which text stands: the block's checked chapter or the 14:19 rewrite",
+      "spec": "[prose] Randomness_10_PRINT_Algorithm\nWhy: Another session rewrote the live final.md at 14:19 on 24 Sept, after the block installed a version reviewed by a panel; the rewrite drops the breathing-coin reading and the probability-versus-count arithmetic that the walkable block was built to teach.\nDo: Read both (doc/book/iterations/2026-09-24-claude-randomness-onwards/Randomness_10_PRINT_Algorithm/after.md against the live final.md) and choose; copying after.md back restores the checked text byte for byte.\nEvidence: HASHES.txt LIVE line in that folder; forum 260924-zgl38\nFile: commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "quote": "",
+      "why": "Another session rewrote the live final.md at 14:19 on 24 Sept, after the block installed a version reviewed by a panel; the rewrite drops the breathing-coin reading and the probability-versus-count arithmetic that the walkable block was built to teach.",
+      "proposal": "Read both (doc/book/iterations/2026-09-24-claude-randomness-onwards/Randomness_10_PRINT_Algorithm/after.md against the live final.md) and choose; copying after.md back restores the checked text byte for byte.",
+      "evidence": "HASHES.txt LIVE line in that folder; forum 260924-zgl38",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.016",
+      "title": "Decide which text stands: the block's checked chapter or the 14:19 rewrite",
+      "spec": "[prose] Random_Cubes\nWhy: Rewritten at 14:19 after install; the rewrite loses the dead-level/tilted drop instruction and the reward's pip rule, both gated in probe_random_cubes.gd.\nDo: Compare Random_Cubes/after.md with the live final.md and choose.\nEvidence: Random_Cubes/HASHES.txt LIVE line\nFile: commons/maps/Random_Cubes/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Cubes"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Random_Cubes",
+      "quote": "",
+      "why": "Rewritten at 14:19 after install; the rewrite loses the dead-level/tilted drop instruction and the reward's pip rule, both gated in probe_random_cubes.gd.",
+      "proposal": "Compare Random_Cubes/after.md with the live final.md and choose.",
+      "evidence": "Random_Cubes/HASHES.txt LIVE line",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.017",
+      "title": "Walk the printed maze in the headset",
+      "spec": "[vr] Randomness_10_PRINT_Algorithm\nWhy: The walkable block (12 characters as 2.40 m walls, one way through) is gated headless only; the seventy-centimetre channel is computed, not felt.\nDo: Walk in, find the sealed room and the way through, and say whether the channel reads as a corridor or a squeeze.\nEvidence: probe_ten_print_walkable.gd; DECISIONS.md Limits\nFile: commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "quote": "",
+      "why": "The walkable block (12 characters as 2.40 m walls, one way through) is gated headless only; the seventy-centimetre channel is computed, not felt.",
+      "proposal": "Walk in, find the sealed room and the way through, and say whether the channel reads as a corridor or a squeeze.",
+      "evidence": "probe_ten_print_walkable.gd; DECISIONS.md Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.018",
+      "title": "Throw the die and the coin in the headset",
+      "spec": "[vr] Random_Cubes\nWhy: The reading repairs were gated in headless physics (the die at 60 and 90 Hz, the coin at 60 Hz only); nothing was thrown by a hand.\nDo: Sixteen throws each; watch that the glass reads the face on top and that the rain never knocks the die over.\nEvidence: probe_random_cubes.out.txt\nFile: commons/maps/Random_Cubes/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Cubes"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Cubes",
+      "quote": "",
+      "why": "The reading repairs were gated in headless physics (the die at 60 and 90 Hz, the coin at 60 Hz only); nothing was thrown by a hand.",
+      "proposal": "Sixteen throws each; watch that the glass reads the face on top and that the rain never knocks the die over.",
+      "evidence": "probe_random_cubes.out.txt",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.019",
+      "title": "The landed die still hops and turns on its felt at 60 Hz",
+      "spec": "[encounter] Random_Cubes\nQuote: “It may go on rocking slowly on its face after it lands.”\nWhy: Only the reading was repaired. At the headset's 90 Hz it mostly comes to rest (15 of 16 shipped throws), so this matters less in VR than on desktop, but the sweep shows no single physics setting fixes it without changing the throw on 22 maps.\nDo: Leave it, or tune bounce/gravity per placement once a headset has thrown it.\nEvidence: Random_Cubes/die_settle_sweep.out.txt\nFile: commons/maps/Random_Cubes/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Cubes"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Cubes",
+      "quote": "It may go on rocking slowly on its face after it lands.",
+      "why": "Only the reading was repaired. At the headset's 90 Hz it mostly comes to rest (15 of 16 shipped throws), so this matters less in VR than on desktop, but the sweep shows no single physics setting fixes it without changing the throw on 22 maps.",
+      "proposal": "Leave it, or tune bounce/gravity per placement once a headset has thrown it.",
+      "evidence": "Random_Cubes/die_settle_sweep.out.txt",
+      "review": "quote NOT found in the chapter as written; check before acting (script) · from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.020",
+      "title": "Walk the matched rotation study in the headset",
+      "spec": "[vr] Random_Rotate_Random_XYZ\nWhy: #study:rotation and the map placement were gated headless; the rig along the wall and the lowered exit step have not been walked.\nDo: Walk in, compare the two stacks, find the exit.\nEvidence: probe_rotation_study.gd; hall_rr_plan_map.png\nFile: commons/maps/Random_Rotate_Random_XYZ/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Rotate_Random_XYZ"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Rotate_Random_XYZ",
+      "quote": "",
+      "why": "#study:rotation and the map placement were gated headless; the rig along the wall and the lowered exit step have not been walked.",
+      "proposal": "Walk in, compare the two stacks, find the exit.",
+      "evidence": "probe_rotation_study.gd; hall_rr_plan_map.png",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.021",
+      "title": "The 7 x 30 cube field (RotateGridCubes) lies mostly beyond the hall",
+      "spec": "[encounter] Random_Rotate_Random_XYZ\nWhy: SlopeGradientCubes.tscn is a 7 x 30 field of 1 m cubes; in this hall most of it stands outside the walls.\nDo: A smaller grid_size for this placement, if the field should stay.\nEvidence: INTEGRATION.md section 7\nFile: commons/maps/Random_Rotate_Random_XYZ/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Rotate_Random_XYZ"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Rotate_Random_XYZ",
+      "quote": "",
+      "why": "SlopeGradientCubes.tscn is a 7 x 30 field of 1 m cubes; in this hall most of it stands outside the walls.",
+      "proposal": "A smaller grid_size for this placement, if the field should stay.",
+      "evidence": "INTEGRATION.md section 7",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.022",
+      "title": "Colonnade piers stand on the arena's apron until the plan is re-run",
+      "spec": "[encounter] Random_Remove\nWhy: map_info.museum.piers is now false, but the museum reads piers from the plan row; twenty piers stay on the apron until tools/em_map_halls.py --apply rewrites ada_run/em_plan.json (Astra's file).\nDo: Re-run the plan, then boot the hall and check the apron.\nEvidence: Random_Remove/map.diff; em_plan.json 'piers: template colonnade x20'\nFile: commons/maps/Random_Remove/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Remove"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Remove",
+      "quote": "",
+      "why": "map_info.museum.piers is now false, but the museum reads piers from the plan row; twenty piers stay on the apron until tools/em_map_halls.py --apply rewrites ada_run/em_plan.json (Astra's file).",
+      "proposal": "Re-run the plan, then boot the hall and check the apron.",
+      "evidence": "Random_Remove/map.diff; em_plan.json 'piers: template colonnade x20'",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.023",
+      "title": "Walk onto the removal floor in the headset",
+      "spec": "[vr] Random_Remove\nQuote: “Entry asks for one removal.”\nWhy: The arena ignored the VR body until today's fix (it compared every body against a walker the headset branch never builds); the fix is gated headless with a stand-in museum, not walked.\nDo: Enter the arena in the headset and watch the first cell go.\nEvidence: probe_removal_arena_vr.out.txt; removal_arena.diff\nFile: commons/maps/Random_Remove/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Remove"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Remove",
+      "quote": "Entry asks for one removal.",
+      "why": "The arena ignored the VR body until today's fix (it compared every body against a walker the headset branch never builds); the fix is gated headless with a stand-in museum, not walked.",
+      "proposal": "Enter the arena in the headset and watch the first cell go.",
+      "evidence": "probe_removal_arena_vr.out.txt; removal_arena.diff",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.024",
+      "title": "Colonnade piers in the glass field and along the ruin's wall line",
+      "spec": "[encounter] Random_Entropy\nWhy: The plan row stamps 27 piers into this hall; the prose does not depend on them, but they stand in the glass field.\nDo: Decide piers:false for this map too, then re-run the plan.\nEvidence: em_plan.json 'piers: template colonnade x27'\nFile: commons/maps/Random_Entropy/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Entropy"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Entropy",
+      "quote": "",
+      "why": "The plan row stamps 27 piers into this hall; the prose does not depend on them, but they stand in the glass field.",
+      "proposal": "Decide piers:false for this map too, then re-run the plan.",
+      "evidence": "em_plan.json 'piers: template colonnade x27'",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.025",
+      "title": "The ruin does not wait: give entropy_ruin an autostart:false option",
+      "spec": "[encounter] Random_Entropy\nWhy: The chapter carries two sentences about arriving mid-run only because the ruin starts before the visitor.\nDo: An autostart:false option, as on the weathering wall; then remove the two sentences added in the hall's change 6.\nEvidence: Random_Entropy/DECISIONS.md change 6 and Limits\nFile: commons/maps/Random_Entropy/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Entropy"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Entropy",
+      "quote": "",
+      "why": "The chapter carries two sentences about arriving mid-run only because the ruin starts before the visitor.",
+      "proposal": "An autostart:false option, as on the weathering wall; then remove the two sentences added in the hall's change 6.",
+      "evidence": "Random_Entropy/DECISIONS.md change 6 and Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.026",
+      "title": "The compact console may hide the readout plate from the standing spot",
+      "spec": "[encounter] Random_Gaussian\nWhy: By the audit's arithmetic the #controls:compact#control_front:1.05 casing stands between the marked standing position and the plate the chapter reads from (in flight, clipped, mean, sigma, the paused line). Plausible, not seen.\nDo: Look from the standing spot; if hidden, drop #controls:compact or raise the plate.\nEvidence: museum_exhibit_stage.gd:95-121; distribution_sampler.gd:892-898\nFile: commons/maps/Random_Gaussian/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Gaussian"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Gaussian",
+      "quote": "",
+      "why": "By the audit's arithmetic the #controls:compact#control_front:1.05 casing stands between the marked standing position and the plate the chapter reads from (in flight, clipped, mean, sigma, the paused line). Plausible, not seen.",
+      "proposal": "Look from the standing spot; if hidden, drop #controls:compact or raise the plate.",
+      "evidence": "museum_exhibit_stage.gd:95-121; distribution_sampler.gd:892-898",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.027",
+      "title": "A stray default PrismMesh stands in the bed, with a spare Camera3D and a 24 m FillLight",
+      "spec": "[encounter] Random_Mushrooms\nWhy: Scene leftovers the chapter has to ignore.\nDo: The audit's _prepare_stand fix, or delete the prism from mushrooms.tscn.\nEvidence: mushrooms.tscn:5, 25-26\nFile: commons/maps/Random_Mushrooms/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Mushrooms",
+      "quote": "",
+      "why": "Scene leftovers the chapter has to ignore.",
+      "proposal": "The audit's _prepare_stand fix, or delete the prism from mushrooms.tscn.",
+      "evidence": "mushrooms.tscn:5, 25-26",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.028",
+      "title": "The random ground severs the museum walker",
+      "spec": "[encounter] Random_Space\nWhy: A walkable trimesh floor of +/-0.12 m bumps over the whole hall is treated as an obstacle by the walk map; a body walks it, the museum's own walker cannot ([em-walk] Random_Space: SEVERED).\nDo: A venue flag for floor-like bodies, or accept the log line.\nEvidence: INTEGRATION.md section 7\nFile: commons/maps/Random_Space/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Random_Space",
+      "quote": "",
+      "why": "A walkable trimesh floor of +/-0.12 m bumps over the whole hall is treated as an obstacle by the walk map; a body walks it, the museum's own walker cannot ([em-walk] Random_Space: SEVERED).",
+      "proposal": "A venue flag for floor-like bodies, or accept the log line.",
+      "evidence": "INTEGRATION.md section 7",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.029",
+      "title": "Walk to the mixer on its plinth in the headset",
+      "spec": "[vr] Random_Space\nWhy: The hall was map-placed and the mixer lifted onto a 0.9 m plinth from a museum boot, not a walk.\nDo: Walk the raised ring and reach the mixer's sliders.\nEvidence: Random_Space/hall_plan_map.png\nFile: commons/maps/Random_Space/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Space",
+      "quote": "",
+      "why": "The hall was map-placed and the mixer lifted onto a 0.9 m plinth from a museum boot, not a walk.",
+      "proposal": "Walk the raised ring and reach the mixer's sliders.",
+      "evidence": "Random_Space/hall_plan_map.png",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.030",
+      "title": "Press ATTRACT/AVOID and REPLAY in the headset",
+      "spec": "[vr] Random_Pheromone\nWhy: The comparison console exists only since the hall was map-placed; a scratch boot read it back, nobody pressed it.\nDo: Walk in, press the three controls, watch the two trails.\nEvidence: Random_Pheromone/DECISIONS.md readback\nFile: commons/maps/Random_Pheromone/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Pheromone"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Random_Pheromone",
+      "quote": "",
+      "why": "The comparison console exists only since the hall was map-placed; a scratch boot read it back, nobody pressed it.",
+      "proposal": "Walk in, press the three controls, watch the two trails.",
+      "evidence": "Random_Pheromone/DECISIONS.md readback",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.031",
+      "title": "The clipboard ten_print_axioms misdescribes the hall",
+      "spec": "[prose] Randomness_10_PRINT_Algorithm\nQuote: “Every second, a wall rotates.”\nWhy: Five wrong claims (collision, rate, 'cellular automata', 'Next: Noise', the ant); the clipboard is shared with two halls outside the block, so it was not edited.\nDo: Apply the replacements in INTEGRATION.md section 2.\nEvidence: commons/context/clipboard/tutorial_text/ten_print_axioms.gd\nFile: commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "quote": "Every second, a wall rotates.",
+      "why": "Five wrong claims (collision, rate, 'cellular automata', 'Next: Noise', the ant); the clipboard is shared with two halls outside the block, so it was not edited.",
+      "proposal": "Apply the replacements in INTEGRATION.md section 2.",
+      "evidence": "commons/context/clipboard/tutorial_text/ten_print_axioms.gd",
+      "review": "quote NOT found in the chapter as written; check before acting (script) · from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.032",
+      "title": "The science screen shows invented data; four leftover placements",
+      "spec": "[encounter] Randomness_10_PRINT_Algorithm\nWhy: science_screen#mode:grid draws a placeholder heatmap in a hall with no SimGrid; remove_random, pickup_cube_placer, nature_system_demo and a dark_sphere do nothing for the chapter.\nDo: Remove the screen token or give it a text mode; decide the four leftovers (INTEGRATION.md sections 3-4).\nEvidence: INTEGRATION.md sections 3 and 4\nFile: commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Randomness_10_PRINT_Algorithm",
+      "quote": "",
+      "why": "science_screen#mode:grid draws a placeholder heatmap in a hall with no SimGrid; remove_random, pickup_cube_placer, nature_system_demo and a dark_sphere do nothing for the chapter.",
+      "proposal": "Remove the screen token or give it a text mode; decide the four leftovers (INTEGRATION.md sections 3-4).",
+      "evidence": "INTEGRATION.md sections 3 and 4",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.033",
+      "title": "The heading 'A hand with company' now falls mid-chapter",
+      "spec": "[structure] Random_Walk\nQuote: “## A hand with company”\nWhy: In reading order it comes before the 128 field and the closing, so a renderer that scopes by heading groups them under it.\nDo: Drop the heading or move the dot region.\nEvidence: Random_Walk/DECISIONS.md\nFile: commons/maps/Random_Walk/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Walk"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Random_Walk",
+      "quote": "## A hand with company",
+      "why": "In reading order it comes before the 128 field and the closing, so a renderer that scopes by heading groups them under it.",
+      "proposal": "Drop the heading or move the dot region.",
+      "evidence": "Random_Walk/DECISIONS.md",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.034",
+      "title": "The dartboard's SPACE toggles AUTO from the desktop walking keys",
+      "spec": "[encounter] Randomness_Examples_of_Randomness\nWhy: Desktop only (D/SPACE/R fire from the walking keys); in the headset there is no keyboard, so this matters for visual tests, not the visitor.\nDo: Gate the keys on focus, or ignore.\nEvidence: monte_carlo_dartboard.gd:276-284\nFile: commons/maps/Randomness_Examples_of_Randomness/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_Examples_of_Randomness"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Randomness_Examples_of_Randomness",
+      "quote": "",
+      "why": "Desktop only (D/SPACE/R fire from the walking keys); in the headset there is no keyboard, so this matters for visual tests, not the visitor.",
+      "proposal": "Gate the keys on focus, or ignore.",
+      "evidence": "monte_carlo_dartboard.gd:276-284",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

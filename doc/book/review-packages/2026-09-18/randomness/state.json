@@ -1,0 +1,576 @@
+{
+  "sequence": "randomness",
+  "declared_maps": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game"
+  ],
+  "museum_map_authored_order": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Biome_Cage",
+    "Randomness_Examples_of_Randomness",
+    "Random_Game",
+    "Biome_Ladder_Randomness"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "Random_Definition",
+      "recorded_status": "source_checked_draft",
+      "text_words": 828,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "seed_replay_demo"
+        ],
+        "reason": "Can a pattern look unpredictable and still return exactly?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Definition/final.md",
+        "text_sha256": "a2159027dbaeb80766c6b5a5409d49d2d850598f89de61a9b4dcf5d43e17b104",
+        "map_sha256": "341ef6bfa561c55c83163db06f79fc123ad51442ed74ed270919da6ef73ac999",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "seed_replay_demo"
+      ],
+      "role_primary_order": [
+        "seed_replay_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Entropy",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1566,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shannon_entropy_meter"
+        ],
+        "reason": "What can one number tell you about the uncertainty in a sequence?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Entropy/final.md",
+        "text_sha256": "a06434ff4ef2c39fec09d32628efd15848af194eab9ceaa4122f7170cf9a205a",
+        "map_sha256": "c45774d9e628acafbd72539f6c0416248cedb2a79adf1e4054e8c56c814c68cd",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "entropy_ruin"
+      ],
+      "role_primary_order": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "entropy_ruin"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Remove",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1263,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "remove_random"
+        ],
+        "reason": "What does a removal rule choose before chance chooses an object?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Remove/final.md",
+        "text_sha256": "a17afdc7ef711ba73ad85f3cebcb3f9d2b6ff5debc5ce6210939e384784c485f",
+        "map_sha256": "896054c3ff82e5a431315a4134b45a411c26072bf4e5cb8555476080a5cd2668",
+        "learner_verified": false,
+        "pilot_action_id": "remove-bounded-candidates",
+        "runtime_check": {
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+          "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+        }
+      },
+      "manuscript_artifact_order": [
+        "remove_random",
+        "random_removal_arena"
+      ],
+      "role_primary_order": [
+        "remove_random",
+        "random_removal_arena"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "recorded_status": "source_checked_draft",
+      "text_words": 424,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ten_print_maze_3d"
+        ],
+        "reason": "When do independent marks begin to look like a maze?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+        "text_sha256": "259612018d5721a305e97399d9c5652c5db6917fe019651bca5774c8f4fd8535",
+        "map_sha256": "06e692a18aee7c842aa2a5ddc9e68867968c51cba06a09ff616980d2f4171a1c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ten_print_maze_3d"
+      ],
+      "role_primary_order": [
+        "ten_print_maze_3d"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Cubes",
+      "recorded_status": "source_checked_draft",
+      "text_words": 410,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "dice_throw"
+        ],
+        "reason": "How much can one throw tell you about a die?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Cubes/final.md",
+        "text_sha256": "a7b9c7d24246a4be627e2e3dc74492aac82ea2b9d4a69ac2f38144775a48536f",
+        "map_sha256": "a8bbd32bd3644f79ccfc75d42fa40fa8033a2111d1e7a2b9e33cd5851cc0c9d9",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "dice_throw"
+      ],
+      "role_primary_order": [
+        "dice_throw"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "recorded_status": "source_checked_draft",
+      "text_words": 409,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "random_decay_multimesh"
+        ],
+        "reason": "Which part of an arrangement can change while its pieces remain?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+        "text_sha256": "4ab6e6a1681f6ad918c3f9d09914c2f4836c995f0d7e0e8edf1279a62dd34c6e",
+        "map_sha256": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "random_decay_multimesh"
+      ],
+      "role_primary_order": [
+        "random_decay_multimesh"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Walk",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1322,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "random_walk_terrarium"
+        ],
+        "reason": "What can a path remember that its next step does not use?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Walk/final.md",
+        "text_sha256": "04ea233436e3734dcb804fdbcb5b2998ef7119445c068265ac8569d5a41bb623",
+        "map_sha256": "dac38a76008538ef7c5171c7f2d55e51778b8a168f98269259624c487695f777",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "random_walk_terrarium",
+        "random_walk_128",
+        "random_draw_dot"
+      ],
+      "role_primary_order": [
+        "random_walk_terrarium",
+        "random_walk_128",
+        "random_draw_dot"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Gaussian",
+      "recorded_status": "source_checked_draft",
+      "text_words": 921,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "distribution_sampler"
+        ],
+        "reason": "What changes when randomness follows a different law?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Gaussian/final.md",
+        "text_sha256": "8dd403ee9ce118e4ccbe5f457d9505edf6d2b2b42ce7b4b8a31d2c2ce0d09d7a",
+        "map_sha256": "35e4de411e96f2b44512e068e4f95eee6911eb68fd8c43e11d1678dfa0033534",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "distribution_sampler"
+      ],
+      "role_primary_order": [
+        "distribution_sampler"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Mushrooms",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1358,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mushrooms"
+        ],
+        "reason": "Which parts of a seemingly natural arrangement were explicitly designed?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Mushrooms/final.md",
+        "text_sha256": "fe2b70a3323b52652ceda925a661aa8b4738900751e4adf1b33a661a5ba53f50",
+        "map_sha256": "2b3731abed8b4b1e3591d6e249354492f0299e3ab309ff0db2dbf86a5703bca0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "mushrooms"
+      ],
+      "role_primary_order": [
+        "mushrooms"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "recorded_status": "source_checked_draft",
+      "text_words": 399,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "perlin_noise_bridge"
+        ],
+        "reason": "What makes neighbouring random heights belong together?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Space_Geometry/final.md",
+        "text_sha256": "29bf71622aa8c6b6ffb794168029e019f20a1afacef24c3a7a44ca96f7c2e8e4",
+        "map_sha256": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "perlin_noise_bridge"
+      ],
+      "role_primary_order": [
+        "perlin_noise_bridge"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1058,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "monte_carlo_dartboard"
+        ],
+        "reason": "How can random points estimate a shapeâ€™s area?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+        "text_sha256": "a71c92e05c9c62e95f3dd35d257abf72631eadc3e70e8aa2f760d11fa1694b6f",
+        "map_sha256": "fa1472e16bd3b13dfb4f2e3664297266aa645ea404458f992c53ab9f1974c29b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pollock_painting_in_3d",
+        "monte_carlo_dartboard",
+        "pipe_dream",
+        "extreme_randomness"
+      ],
+      "role_primary_order": [
+        "pollock_painting_in_3d",
+        "monte_carlo_dartboard",
+        "pipe_dream",
+        "extreme_randomness"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Pheromone",
+      "recorded_status": "source_checked_draft",
+      "text_words": 411,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pheromone_terrain"
+        ],
+        "reason": "What changes when a walker helps make the evidence its next decision will read?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Pheromone/final.md",
+        "text_sha256": "c5f7c334ffc655035c960f245caa1292af2c63b1d893ea240c5947c8487dd9cb",
+        "map_sha256": "5e151bd709d9be048ac393b9453a7d1bbf6dc0482ae2756421e79be7382f083f",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pheromone_terrain"
+      ],
+      "role_primary_order": [
+        "pheromone_terrain"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Space",
+      "recorded_status": "source_checked_draft",
+      "text_words": 409,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noise_mixer"
+        ],
+        "reason": "How much of a landscape can be made by repeating a rule at different scales?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Space/final.md",
+        "text_sha256": "5ee4f8d430a547742015918ba2cbe935dfd120c197d07f6c27115019bd9b466a",
+        "map_sha256": "03307d0e358ec577bdb2b4eb687921038b5f23896e82a3bcd6d140b090f22a0a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noise_mixer"
+      ],
+      "role_primary_order": [
+        "noise_mixer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Random_Game",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1440,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "r_c"
+        ],
+        "reason": "What can you know about a platform without knowing when it will move?",
+        "status": "source_checked_draft",
+        "sequence": "randomness",
+        "text_path": "commons/maps/Random_Game/final.md",
+        "text_sha256": "3b7a7a9f9ef5f0d00086d0c2e1829a55b0554a8e352de6345a2b293ef9ea0338",
+        "map_sha256": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "cube_projectile_spawner"
+      ],
+      "role_primary_order": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "cube_projectile_spawner"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "addons/godot-xr-tools/objects/pickable.tscn",
+      "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+      "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
+      "algorithms/randomness/RandomWalk128Algorithm.gd",
+      "algorithms/randomness/RemoveRandom.gd",
+      "algorithms/randomness/dice_throw/dice_throw.gd",
+      "algorithms/randomness/dice_throw/dice_throw.tscn",
+      "algorithms/randomness/entropy_axiom/entropy_axiom.gd",
+      "algorithms/randomness/entropy_axiom/entropy_axiom.tscn",
+      "algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.gd",
+      "algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+      "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd",
+      "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+      "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd",
+      "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+      "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd",
+      "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+      "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd",
+      "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+      "algorithms/randomness/pipedream/PipeDream.gd",
+      "algorithms/randomness/pipedream/pipe_dream.tscn",
+      "algorithms/randomness/prng_crank_machine/prng_crank_machine.gd",
+      "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+      "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/paint_dripping_2d.gd",
+      "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/paint_dripping_2d.tscn",
+      "algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd",
+      "algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd",
+      "algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
+      "algorithms/randomness/random_walk_128.tscn",
+      "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+      "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd",
+      "algorithms/randomness/remove_random.tscn",
+      "algorithms/randomness/remove_random_fixture.gd",
+      "algorithms/randomness/seed_replay/seed_replay_demo.gd",
+      "algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/distribution_sampler/distribution_sampler.gd",
+      "commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+      "commons/artifacts/noise_mixer/noise_mixer.gd",
+      "commons/artifacts/noise_mixer/noise_mixer.tscn",
+      "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+      "commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+      "commons/artifacts/randomness_space/entropy_ruin.gd",
+      "commons/artifacts/randomness_space/entropy_ruin.tscn",
+      "commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "commons/artifacts/randomness_space/random_doors.gd",
+      "commons/artifacts/randomness_space/random_doors.tscn",
+      "commons/artifacts/randomness_space/random_draw_dot.gd",
+      "commons/artifacts/randomness_space/random_draw_dot.tscn",
+      "commons/artifacts/randomness_space/removal_arena.gd",
+      "commons/artifacts/randomness_space/removal_arena.tscn",
+      "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd",
+      "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/hazards/mushroom/edible_mushroom.tscn",
+      "commons/primitives/cubes/CubeSpawner.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/primitives/cubes/cube_spawner.tscn",
+      "commons/primitives/cubes/projectile_cube.tscn",
+      "commons/primitives/cubes/random_cycle_cube.gd",
+      "commons/primitives/cubes/random_cycle_cube.tscn",
+      "commons/primitives/point/draw_dot.gd",
+      "commons/primitives/point/draw_dot.tscn",
+      "commons/primitives/point/grab_sphere_point.tscn",
+      "commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "res://addons/godot-xr-tools/objects/pickable.gd",
+      "res://commons/hazards/mushroom/edible_mushroom.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/cubes/ProjectileCube.gd",
+      "res://commons/primitives/cubes/cube_scene.gd",
+      "res://commons/primitives/point/grab_sphere.gd",
+      "res://commons/primitives/point/point_color.gd",
+      "res://commons/primitives/point/point_mesh.gd",
+      "res://commons/primitives/point/qfep_term_grasp.gd",
+      "res://commons/scenes/main_menu/components/linear_progress.gdshader",
+      "res://commons/ui/instrument_panel_case.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

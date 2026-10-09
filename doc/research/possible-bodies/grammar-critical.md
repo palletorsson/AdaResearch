@@ -1,0 +1,17 @@
+# What the reader permits
+
+The same sentence appears beneath two different drawings. HOLD and TURN make the difference inspectable: the held snapshot keeps its old angle while the live interpreter assigns another angle to the same turning signs. This gives a specific foothold for asking whose grammar we inhabit. A production is one decision; what its symbols are allowed to do is another.
+
+The undrawn X prevents us from identifying visibility with participation. It can influence the next generation through its replacement even though it contributes no segment to this reading. This is not a hidden organism in the machine. It is an implemented distinction between the alphabet of rewriting and the interpreter's drawing commands. What else might we overlook when we treat the visible output as the whole operation?
+
+The score-and-performance analogy is useful up to a point. A final string is not guaranteed to contain a recoverable history of every prior generation; different histories may lead to the same string. A picture also has properties the abstract sentence does not specify by itself: spatial scale, line thickness, material and a position relative to our eyes. Neither representation is automatically the more complete body. We need to say what question each can answer.
+
+These limits complicate the earlier critical text's appeal to individuation and cultural grammars. Seven mathematical presets are not evidence of seven cosmotechnics, nor do tree-like silhouettes establish that we found a numerical boundary between life and monotony. Those theoretical connections remain research questions requiring their own sources and comparisons. This hall can already support a narrower experiment: hold the production, change its reading, then ask what conditions that change actually alters.
+
+The desire for another outline is allowed to remain pleasurable. It does not have to prove a liberation every time. The next pressure comes when we want to live in the drawing. Its lines have no collision surfaces. Changing the angle changes geometry, but does not by itself establish a new abstract branching graph, a traversable passage, or an increase in entropy. Intersections in the drawing do not automatically become connected junctions in the interpreter. An inhabiting body brings scale, support and access into the account.
+
+Entropic morality gives us a way to keep these consequences separate: reducing a representation differs from enforcing its omissions on another's conditions of existence. Here, a text prefix can omit most of a sentence while the full accepted drawing remains. A computation budget instead prevents a further generation from being built. The interface names both restrictions so that a practical limit does not quietly become the world's only possible law.
+
+The physical desk offers seven presets and a few operations. That is a pedagogical starting point, not an exhaustive space of possible bodies. A later rule-writing instrument should let a visitor keep a reference, predict a small consequence, revise a production and recover from an unhelpful change. More symbols alone would give us no guarantee of a better encounter. What matters is whether the new operation opens something we can actually investigate.
+
+All eight earlier works remain. Selecting one primary gives this experiment a clear starting place without treating the other works as failed answers to it. Their differences may carry the next question.

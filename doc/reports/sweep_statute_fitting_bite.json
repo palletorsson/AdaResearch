@@ -1,0 +1,1448 @@
+{
+ "sweep": "statute_fitting",
+ "peak_changed_pct": 48.946,
+ "subject_pct": 53.719,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "changed_px": 13863,
+   "changed_pct": 2.4
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "changed_px": 1294,
+   "changed_pct": 0.224
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "changed_px": 46204,
+   "changed_pct": 7.999
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "changed_px": 199695,
+   "changed_pct": 34.573
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "changed_px": 213558,
+   "changed_pct": 36.973
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 200989,
+   "changed_pct": 34.797
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 224275,
+   "changed_pct": 38.829
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 262067,
+   "changed_pct": 45.372
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 262067,
+   "changed_pct": 45.372
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 263274,
+   "changed_pct": 45.581
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 261752,
+   "changed_pct": 45.317
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262312,
+   "changed_pct": 45.414
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262312,
+   "changed_pct": 45.414
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263519,
+   "changed_pct": 45.623
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 264185,
+   "changed_pct": 45.738
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "changed_px": 15157,
+   "changed_pct": 2.624
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "changed_px": 60067,
+   "changed_pct": 10.399
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "changed_px": 213558,
+   "changed_pct": 36.973
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "changed_px": 199695,
+   "changed_pct": 34.573
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 214852,
+   "changed_pct": 37.197
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 238138,
+   "changed_pct": 41.229
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 262067,
+   "changed_pct": 45.372
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 262067,
+   "changed_pct": 45.372
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 263274,
+   "changed_pct": 45.581
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 261752,
+   "changed_pct": 45.317
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262312,
+   "changed_pct": 45.414
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262312,
+   "changed_pct": 45.414
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263519,
+   "changed_pct": 45.623
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 264185,
+   "changed_pct": 45.738
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "changed_px": 46205,
+   "changed_pct": 7.999
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "changed_px": 200989,
+   "changed_pct": 34.797
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "changed_px": 214852,
+   "changed_pct": 37.197
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 199695,
+   "changed_pct": 34.573
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 224276,
+   "changed_pct": 38.829
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 263274,
+   "changed_pct": 45.581
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 263274,
+   "changed_pct": 45.581
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 262050,
+   "changed_pct": 45.369
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 261753,
+   "changed_pct": 45.317
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 263520,
+   "changed_pct": 45.623
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 263520,
+   "changed_pct": 45.623
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 262294,
+   "changed_pct": 45.411
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 264186,
+   "changed_pct": 45.739
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "changed_px": 243953,
+   "changed_pct": 42.236
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "changed_px": 257816,
+   "changed_pct": 44.636
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 243954,
+   "changed_pct": 42.236
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 182501,
+   "changed_pct": 31.596
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 281907,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 281907,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 281908,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 219816,
+   "changed_pct": 38.057
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 282436,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 282436,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 282437,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "issue",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 224414,
+   "changed_pct": 38.853
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "changed_px": 13863,
+   "changed_pct": 2.4
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 1294,
+   "changed_pct": 0.224
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 66784,
+   "changed_pct": 11.562
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 262072,
+   "changed_pct": 45.373
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 262072,
+   "changed_pct": 45.373
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 263279,
+   "changed_pct": 45.582
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 282256,
+   "changed_pct": 48.867
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262382,
+   "changed_pct": 45.426
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262382,
+   "changed_pct": 45.426
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263589,
+   "changed_pct": 45.635
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 282710,
+   "changed_pct": 48.946
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "changed_px": 15157,
+   "changed_pct": 2.624
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 80647,
+   "changed_pct": 13.962
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 262072,
+   "changed_pct": 45.373
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 262072,
+   "changed_pct": 45.373
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 263279,
+   "changed_pct": 45.582
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 282256,
+   "changed_pct": 48.867
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262382,
+   "changed_pct": 45.426
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262382,
+   "changed_pct": 45.426
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263589,
+   "changed_pct": 45.635
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 282710,
+   "changed_pct": 48.946
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "changed_px": 66785,
+   "changed_pct": 11.562
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 263279,
+   "changed_pct": 45.582
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 263279,
+   "changed_pct": 45.582
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 262055,
+   "changed_pct": 45.37
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 282257,
+   "changed_pct": 48.867
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 263590,
+   "changed_pct": 45.635
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 263590,
+   "changed_pct": 45.635
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 262364,
+   "changed_pct": 45.423
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 282711,
+   "changed_pct": 48.946
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "changed_px": 281907,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 281907,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 281908,
+   "changed_pct": 48.807
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 221766,
+   "changed_pct": 38.394
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 282436,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 282436,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 282437,
+   "changed_pct": 48.898
+  },
+  {
+   "a": {
+    "statute": "notice",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 225511,
+   "changed_pct": 39.043
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 1319,
+   "changed_pct": 0.228
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 66910,
+   "changed_pct": 11.584
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262254,
+   "changed_pct": 45.404
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262304,
+   "changed_pct": 45.413
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263461,
+   "changed_pct": 45.613
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 281756,
+   "changed_pct": 48.78
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "changed_px": 1319,
+   "changed_pct": 0.228
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 66910,
+   "changed_pct": 11.584
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 262254,
+   "changed_pct": 45.404
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 262304,
+   "changed_pct": 45.413
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 263461,
+   "changed_pct": 45.613
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 281756,
+   "changed_pct": 48.78
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "changed_px": 66911,
+   "changed_pct": 11.584
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 263461,
+   "changed_pct": 45.613
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 263511,
+   "changed_pct": 45.622
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 262237,
+   "changed_pct": 45.401
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 281757,
+   "changed_pct": 48.781
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "changed_px": 282061,
+   "changed_pct": 48.833
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 282111,
+   "changed_pct": 48.842
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 282062,
+   "changed_pct": 48.833
+  },
+  {
+   "a": {
+    "statute": "joinery",
+    "currency": "absent"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 224860,
+   "changed_pct": 38.93
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "changed_px": 13637,
+   "changed_pct": 2.361
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 1324,
+   "changed_pct": 0.229
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "certified"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 65228,
+   "changed_pct": 11.293
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "changed_px": 14961,
+   "changed_pct": 2.59
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "overdue"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 78865,
+   "changed_pct": 13.654
+  },
+  {
+   "a": {
+    "statute": "lapse",
+    "currency": "discharged"
+   },
+   "b": {
+    "statute": "lapse",
+    "currency": "absent"
+   },
+   "changed_px": 65229,
+   "changed_pct": 11.293
+  }
+ ]
+}

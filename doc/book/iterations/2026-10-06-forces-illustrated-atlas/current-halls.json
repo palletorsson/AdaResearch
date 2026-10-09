@@ -1,0 +1,568 @@
+[
+  {
+    "slug": "forces-same-difference",
+    "map": "Vectors_Act1_WhatAVectorIs",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+    "title": "THE SAME DIFFERENCE",
+    "focus": "Displacement persists under translation; projection discards a component, normalization preserves direction only for nonzero inputs.",
+    "summary": "Two pins move together while their wall arrows stay. A zero gap needs a supplied direction; a unit companion keeps length while the input grows.",
+    "footer": "Many pairs of points can make this same arrow.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "The wall has been asked for the difference between the pins.",
+        "Visitor moves a small pin pair on a pale bench; short cyan arrow tail START to END. Wall has TWO gold diagrams, side X/Y and top X/Z, visibly separate and labelled. They show components of the same displacement, not visitor position. Companion watches the difference."
+      ],
+      [
+        "Both addresses have changed by the same amount, so their difference has not.",
+        "Schematic comparison on wall labelled BEFORE / SHIFT BOTH. Start and end pins translated right equally; same oriented arrow at a new location in bench picture. Wall component arrows anchored at their own diagram origins stay unchanged. Mark dashed old locations only in schematic, not extra live pins."
+      ],
+      [
+        "A movement can be missing from a picture while still taking place in the room.",
+        "Visitor lifts end pin vertically. In side X/Y view vertical component grows, in top X/Z view unchanged; show same two adjacent planar diagrams. Hand physically lifts one pin, not wholebench. No universalclaimthatpicturesallomitmovement."
+      ],
+      [
+        "There was no little arrow hidden inside zero, waiting to be enlarged.",
+        "ZERO both pins coincide; small closeup zero dot no arrow. Separate next schematic labelled SHORT: pins separate along a supplied diagonal, caption label 'CHOSEN DIRECTION (1,1,1)'. Zero does not contain a direction; preserve distinction between before and after."
+      ],
+      [
+        "Lengthen the input: its companion keeps its length. Change the direction: both turn.",
+        "Two schematic normalize examples LONG INPUT / SHORT INPUT at different input lengths same angle; unit companions at a common equal radius on pale sphere ring, not wholeinputsnormalizedinplace. Visitor and companion see one physical unit diagram with doubled inset temporalcomparison."
+      ],
+      [
+        "That small neighbourhood belongs to the implementation.",
+        "Closeup normalize console with simple rule 'length ≤ 0.001 → ZERO'. Tinyinput yields no companion arrow; a ring/sphere forreference remains. Visitor pauses looking at threshold, oldercompanion nearby. No nonzero direction comesoutoftinyinput."
+      ]
+    ],
+    "source_review": "Arrow pictures are projected schematics, not full three-dimensional coordinate plots. Shift, zero and the implementation threshold remain distinct.",
+    "subtitle": "What a vector is",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"THE SAME DIFFERENCE\". Subtitle \"What a vector is · final text\".\nPanel 1: Caption exactly \"The wall has been asked for the difference between the pins.\". Scene: Visitor moves a small pin pair on a pale bench; short cyan arrow tail START to END. Wall has TWO gold diagrams, side X/Y and top X/Z, visibly separate and labelled. They show components of the same displacement, not visitor position. Companion watches the difference.\nPanel 2: Caption exactly \"Both addresses have changed by the same amount, so their difference has not.\". Scene: Schematic comparison on wall labelled BEFORE / SHIFT BOTH. Start and end pins translated right equally; same oriented arrow at a new location in bench picture. Wall component arrows anchored at their own diagram origins stay unchanged. Mark dashed old locations only in schematic, not extra live pins.\nPanel 3: Caption exactly \"A movement can be missing from a picture while still taking place in the room.\". Scene: Visitor lifts end pin vertically. In side X/Y view vertical component grows, in top X/Z view unchanged; show same two adjacent planar diagrams. Hand physically lifts one pin, not wholebench. No universalclaimthatpicturesallomitmovement.\nPanel 4: Caption exactly \"There was no little arrow hidden inside zero, waiting to be enlarged.\". Scene: ZERO both pins coincide; small closeup zero dot no arrow. Separate next schematic labelled SHORT: pins separate along a supplied diagonal, caption label 'CHOSEN DIRECTION (1,1,1)'. Zero does not contain a direction; preserve distinction between before and after.\nPanel 5: Caption exactly \"Lengthen the input: its companion keeps its length. Change the direction: both turn.\". Scene: Two schematic normalize examples LONG INPUT / SHORT INPUT at different input lengths same angle; unit companions at a common equal radius on pale sphere ring, not wholeinputsnormalizedinplace. Visitor and companion see one physical unit diagram with doubled inset temporalcomparison.\nPanel 6: Caption exactly \"That small neighbourhood belongs to the implementation.\". Scene: Closeup normalize console with simple rule 'length ≤ 0.001 → ZERO'. Tinyinput yields no companion arrow; a ring/sphere forreference remains. Visitor pauses looking at threshold, oldercompanion nearby. No nonzero direction comesoutoftinyinput.\nFooter exactly \"Many pairs of points can make this same arrow.\".",
+    "source_sha256": "ca8fea625467648ac58d714696e5331a0d4eb320abb36e38eeb14940a143284c"
+  },
+  {
+    "slug": "forces-journey-zero",
+    "map": "VFM_02_Operations",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_02_Operations/final.md",
+    "title": "THE JOURNEY THAT ADDS UP TO NOTHING",
+    "focus": "Addition preserves a destination under exchange, but distance and elapsed journey differ; reset sets the measurement boundary.",
+    "summary": "A cube changes its corner but keeps its destination. Out and back cancels displacement while travelled distance accumulates.",
+    "footer": "Zero has not meant that nothing happened.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "The turn happens somewhere else. The destination has not moved.",
+        "Glass edged floorgrid pale cube with amber A then pink B rightangle route to CYAN END. Small two-panel overhead SCHEMATIC: A→B vs B→A, same home and destination, differentcorner. Shared metreaxes. Visitor SWAPconsole."
+      ],
+      [
+        "There is already something here that the destination cannot tell us.",
+        "Visitors stand at corner of cuberoute; light trail up to corner and cyanend elsewhere. Compare path to endpoint without claimingbodyforce. Leave readable labels HOME / TURN / END; scenequiet."
+      ],
+      [
+        "The corner has gone, but the destination remains.",
+        "DIRECT mode straightcyan diagonalhome→end shown beside faint priorrightangle route. Tiny labels 'DIRECT ≈1.41 m' / 'VIA A =2 m'. Sameendpoint. Cubemoved byprogram at prescribed speed, no forcearrow or handthrow."
+      ],
+      [
+        "The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.",
+        "CANCEL out-and-back route alongstraightline betweenHOME andcorner. Cube halfwayreturn cyanend atHOME, distinct outwardamber andreturnpink arrows opposing. Board DISTANCE GROWS / DISPLACEMENT ZERO. Temporaltrace makesrealexcursion clear."
+      ],
+      [
+        "This time the cube stays home.",
+        "CANCEL+DIRECT pale cube restingHOME no movementtrail; same A andoppositeBghostvectors shown schematic only. Visitor choosesDIRECT, oldcorner journey present onlysmall comparisoninset, not live movingsecondcube."
+      ],
+      [
+        "That reset is not part of the distance it reports.",
+        "Visitor at GO while oldroute tracefades, cubeinstantlyatHOME newcounter0. Smallschematic 'RESET TO HOME' dashed return distinctfrom 'MEASURED TRIP' solidroute. No countingresetjourney. Companion consideringwhichmovementretained."
+      ]
+    ],
+    "source_review": "Route markers and the reset diagram are schematic. The distance counter is described as growing, without inventing a reading for the pictured intermediate position.",
+    "subtitle": "Vector operations",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"THE JOURNEY THAT ADDS UP TO NOTHING\". Subtitle \"Vector operations · final text\".\nPanel 1: Caption exactly \"The turn happens somewhere else. The destination has not moved.\". Scene: Glass edged floorgrid pale cube with amber A then pink B rightangle route to CYAN END. Small two-panel overhead SCHEMATIC: A→B vs B→A, same home and destination, differentcorner. Shared metreaxes. Visitor SWAPconsole.\nPanel 2: Caption exactly \"There is already something here that the destination cannot tell us.\". Scene: Visitors stand at corner of cuberoute; light trail up to corner and cyanend elsewhere. Compare path to endpoint without claimingbodyforce. Leave readable labels HOME / TURN / END; scenequiet.\nPanel 3: Caption exactly \"The corner has gone, but the destination remains.\". Scene: DIRECT mode straightcyan diagonalhome→end shown beside faint priorrightangle route. Tiny labels 'DIRECT ≈1.41 m' / 'VIA A =2 m'. Sameendpoint. Cubemoved byprogram at prescribed speed, no forcearrow or handthrow.\nPanel 4: Caption exactly \"The cube leaves, reaches the corner, and comes back. The travelled counter grows. The sum stays zero.\". Scene: CANCEL out-and-back route alongstraightline betweenHOME andcorner. Cube halfwayreturn cyanend atHOME, distinct outwardamber andreturnpink arrows opposing. Board DISTANCE GROWS / DISPLACEMENT ZERO. Temporaltrace makesrealexcursion clear.\nPanel 5: Caption exactly \"This time the cube stays home.\". Scene: CANCEL+DIRECT pale cube restingHOME no movementtrail; same A andoppositeBghostvectors shown schematic only. Visitor choosesDIRECT, oldcorner journey present onlysmall comparisoninset, not live movingsecondcube.\nPanel 6: Caption exactly \"That reset is not part of the distance it reports.\". Scene: Visitor at GO while oldroute tracefades, cubeinstantlyatHOME newcounter0. Smallschematic 'RESET TO HOME' dashed return distinctfrom 'MEASURED TRIP' solidroute. No countingresetjourney. Companion consideringwhichmovementretained.\nFooter exactly \"Zero has not meant that nothing happened.\".",
+    "source_sha256": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d"
+  },
+  {
+    "slug": "forces-line-keeps",
+    "map": "Vectors_Act2_VectorArithmetic",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+    "title": "WHAT THE LINE CAN KEEP",
+    "focus": "Subtraction reverses roles; dot threshold adds a label; projection retains a remainder; unit-direction crank sets pose without momentum.",
+    "summary": "A gap reverses, an angle becomes FRIEND, and a remainder finds a place. The final crank holds a pose rather than gaining momentum.",
+    "footer": "Nothing needs to disappear if we keep both parts.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-forces-review/opening/after-frozen/standing.png"
+    ],
+    "panels": [
+      [
+        "Which one we are trying to reach has.",
+        "Griddedblockbench AMBER A onright PINK B onleft. CYAN gap arrow strictly B→A; inset SWAP makes Aleft Bright and CYAN B→A now leftward. Samegaplength. Visitor switches, companion watches; sharedworld origin small."
+      ],
+      [
+        "The direction changes continuously. The name changes at once.",
+        "Adultvisitor at aimingconsole, two normalizeddirectionarrows almostaligned. Before threshold targetplain; after 'FRIEND'. Tinylabel 'dot ≥ 0.985'. Directioncontinuoussweep differentfromabruptnamedecision; noenemyfigures nointentionsdrawn."
+      ],
+      [
+        "Nothing about the target's intentions entered the calculation.",
+        "Close visitor looks from FRIENDname to blank geometrictargetmarker. Offwhiteconsole and nearlyparallel directions remain. Human criticalexpression no moralclaim aboutactualcompanion. Noaffectionrelationship inferred."
+      ],
+      [
+        "Nothing needs to disappear if we keep both parts.",
+        "SCHEMATIC projection ondarkwall: CYAN GAP diagonalstartsO endsC; GOLD KEPT alongunitrail fromO toP, PINK REMAINDER fromP toC perpendicularrail. Clearheadtotail partsformcyan. Visitor pointsatpinknoterasing. No actualforceclaim."
+      ],
+      [
+        "The direction of the question changed.",
+        "SameCYANdiagonalfixed; rail turns30degrees; newgoldprojectionalongturnedrail fromO toP, pinkperpendicularfromPtoC. Caption below marks 'GAP FIXED · RAIL TURNED'. Two smallbeforeafterdiagramsconsistentequalcyanendpoint. No movinginput."
+      ],
+      [
+        "But setting a pose has not yet given the wheel momentum.",
+        "Referencecrank bench: pivot arm wheel angle45, visitor LEVERAGEslider handthenletgo; wheelholdsposition. Unitdirectionslever/push, littlelabel ANGULAR FACTOR. No spinblur or unforced continuedrotation. Companion seespause."
+      ]
+    ],
+    "source_review": "Projection triangles are head-to-tail schematic relations rather than angle measurements. The crank uses unit directions and holds a pose; it does not simulate retained momentum.",
+    "subtitle": "Vector arithmetic",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHAT THE LINE CAN KEEP\". Subtitle \"Vector arithmetic · final text\".\nPanel 1: Caption exactly \"Which one we are trying to reach has.\". Scene: Griddedblockbench AMBER A onright PINK B onleft. CYAN gap arrow strictly B→A; inset SWAP makes Aleft Bright and CYAN B→A now leftward. Samegaplength. Visitor switches, companion watches; sharedworld origin small.\nPanel 2: Caption exactly \"The direction changes continuously. The name changes at once.\". Scene: Adultvisitor at aimingconsole, two normalizeddirectionarrows almostaligned. Before threshold targetplain; after 'FRIEND'. Tinylabel 'dot ≥ 0.985'. Directioncontinuoussweep differentfromabruptnamedecision; noenemyfigures nointentionsdrawn.\nPanel 3: Caption exactly \"Nothing about the target's intentions entered the calculation.\". Scene: Close visitor looks from FRIENDname to blank geometrictargetmarker. Offwhiteconsole and nearlyparallel directions remain. Human criticalexpression no moralclaim aboutactualcompanion. Noaffectionrelationship inferred.\nPanel 4: Caption exactly \"Nothing needs to disappear if we keep both parts.\". Scene: SCHEMATIC projection ondarkwall: CYAN GAP diagonalstartsO endsC; GOLD KEPT alongunitrail fromO toP, PINK REMAINDER fromP toC perpendicularrail. Clearheadtotail partsformcyan. Visitor pointsatpinknoterasing. No actualforceclaim.\nPanel 5: Caption exactly \"The direction of the question changed.\". Scene: SameCYANdiagonalfixed; rail turns30degrees; newgoldprojectionalongturnedrail fromO toP, pinkperpendicularfromPtoC. Caption below marks 'GAP FIXED · RAIL TURNED'. Two smallbeforeafterdiagramsconsistentequalcyanendpoint. No movinginput.\nPanel 6: Caption exactly \"But setting a pose has not yet given the wheel momentum.\". Scene: Referencecrank bench: pivot arm wheel angle45, visitor LEVERAGEslider handthenletgo; wheelholdsposition. Unitdirectionslever/push, littlelabel ANGULAR FACTOR. No spinblur or unforced continuedrotation. Companion seespause.\nFooter exactly \"Nothing needs to disappear if we keep both parts.\".",
+    "source_sha256": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5"
+  },
+  {
+    "slug": "forces-inside-curve",
+    "map": "VFM_05_Launch",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_05_Launch/final.md",
+    "title": "STAND INSIDE THE CURVE",
+    "focus": "Initial velocity plus constant gravity produces arcs; paired angles share range but not time or world address, apex is not zero acceleration.",
+    "summary": "Two launches reach equal horizontal range at different times. The visitor stands within an arc whose model omits their collision.",
+    "footer": "Will it bounce, break, roll or stay? This model stops before answering.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-24-launch-and-motion/images/launch_chamber_inside.png"
+    ],
+    "panels": [
+      [
+        "There was a straight arrow at the start. The marker took a curve.",
+        "Roomsizeamberprojectilelane pale sphere smalllaunchmarker, straight initialvelocityarrow atlaunchpoint and sweepinggoldarc forward; visitorbesidelane. No bodythrownbyhand, no drag."
+      ],
+      [
+        "One is already down while the other is still in the air.",
+        "Paired temporalmodel SCHEMATIC: both10m/s, 30° lowlane markeratfloor at1second;60°highlane markerstillairborne at1second. Samehorizontalrange8.66m targets ontheirSEPARATEparallelfloorlanes. Two labels LOW 30° / HIGH60°. Do not show sameworldlandingdot."
+      ],
+      [
+        "Their markers reach the same distance along the floor, not the same world address.",
+        "Overheadcrop TWOparallelseparatedlanes with separate launchstarts andlandingpoints; bothstarttoend equalhorizontalrangemarks. Forward/endaddressesdifferent bylaneseparation. Visitorsbesidebothlandingmarks."
+      ],
+      [
+        "The diagram makes that possible by leaving out the collision.",
+        "Visitor standsinside projectedarc while movinglightmarker passesbeside/through schematicbodyoutline; caption exact. No impact orvisitor deflection. Scene ordinarymuseum notphysicalthrownheavyball. Smalllabel MODEL: NO VISITOR COLLISION."
+      ],
+      [
+        "It has not stopped being accelerated downward.",
+        "ApexcloseupSCHEMATIC marker withcyan horizontalvRIGHT andgoldaccelerationDOWN. Explicit 'VERTICAL VELOCITY=0' / 'DOWNWARD ACCELERATION≠0'. No verticalvelocityarrow atapex, horizontalvremains."
+      ],
+      [
+        "Will it bounce, break, roll or stay? This model stops before answering.",
+        "Markerjustabove/atlanding floor freezespreimpact, retainedgoldpath. Visitorlooksdown companion nearcontrol. Label STOP BEFORE IMPACT. No bounce trails, fracture, rolling or postimpactforces."
+      ]
+    ],
+    "source_review": "The paired-flight diagram uses a common instant and schematic ranges, not calibrated marker positions. The two lanes occupy distinct world addresses. Acceleration is downward at the apex; the model ends before impact.",
+    "subtitle": "Launch",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"STAND INSIDE THE CURVE\". Subtitle \"Launch · final text\".\nPanel 1: Caption exactly \"There was a straight arrow at the start. The marker took a curve.\". Scene: Roomsizeamberprojectilelane pale sphere smalllaunchmarker, straight initialvelocityarrow atlaunchpoint and sweepinggoldarc forward; visitorbesidelane. No bodythrownbyhand, no drag.\nPanel 2: Caption exactly \"One is already down while the other is still in the air.\". Scene: Paired temporalmodel SCHEMATIC: both10m/s, 30° lowlane markeratfloor at1second;60°highlane markerstillairborne at1second. Samehorizontalrange8.66m targets ontheirSEPARATEparallelfloorlanes. Two labels LOW 30° / HIGH60°. Do not show sameworldlandingdot.\nPanel 3: Caption exactly \"Their markers reach the same distance along the floor, not the same world address.\". Scene: Overheadcrop TWOparallelseparatedlanes with separate launchstarts andlandingpoints; bothstarttoend equalhorizontalrangemarks. Forward/endaddressesdifferent bylaneseparation. Visitorsbesidebothlandingmarks.\nPanel 4: Caption exactly \"The diagram makes that possible by leaving out the collision.\". Scene: Visitor standsinside projectedarc while movinglightmarker passesbeside/through schematicbodyoutline; caption exact. No impact orvisitor deflection. Scene ordinarymuseum notphysicalthrownheavyball. Smalllabel MODEL: NO VISITOR COLLISION.\nPanel 5: Caption exactly \"It has not stopped being accelerated downward.\". Scene: ApexcloseupSCHEMATIC marker withcyan horizontalvRIGHT andgoldaccelerationDOWN. Explicit 'VERTICAL VELOCITY=0' / 'DOWNWARD ACCELERATION≠0'. No verticalvelocityarrow atapex, horizontalvremains.\nPanel 6: Caption exactly \"Will it bounce, break, roll or stay? This model stops before answering.\". Scene: Markerjustabove/atlanding floor freezespreimpact, retainedgoldpath. Visitorlooksdown companion nearcontrol. Label STOP BEFORE IMPACT. No bounce trails, fracture, rolling or postimpactforces.\nFooter exactly \"Will it bounce, break, roll or stay? This model stops before answering.\".",
+    "source_sha256": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd"
+  },
+  {
+    "slug": "forces-push-ends",
+    "map": "VFM_03_Motion",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_03_Motion/final.md",
+    "title": "WHEN THE PUSH ENDS",
+    "focus": "Force contributes to retained velocity; coast, braking, reset and damping remove different things.",
+    "summary": "The command ends but the cube continues. Its mass changes the acquired speed; a painted perimeter constrains the cube and leaves the visitor free.",
+    "footer": "The latest instruction does not contain the whole movement.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-24-launch-and-motion/images/motion_chamber_inside.png"
+    ],
+    "panels": [
+      [
+        "The command lasts one second. The cube keeps going.",
+        "Floatingpale cube one metreoverfloor insideamberoutlinedexperiment; horizontalonly, gravityoff. Ambercommandarrow disappearsin AFTER1SECONDscene butcyanvelocityarrow andcubeleft-to-rightmotionremain. PUSHEXPERIMENTnotbodypickedup."
+      ],
+      [
+        "Something of that contribution is still crossing the room.",
+        "Visitor touchesCOAST control cubecontinuingwithcyanvelocity only, goldcommandzero. Smalllabel 'NO NEW FORCE · VELOCITY RETAINED'. No brake orinstantstop."
+      ],
+      [
+        "The cube looks the same size.",
+        "Pairedschematic SAMEPULSE1sec2N:1kgcube cyanvlonger,2kgcube cyanvhalf-length. Identicalphysicalcubedimensionsnotheavierbigger. Label 'MASS CHANGED · SIZE FIXED' conventionalbeforeaftercomparisonnotnewdoubletrialmode."
+      ],
+      [
+        "The latest instruction does not contain the whole movement.",
+        "Existingcubealready movingright; PUSHFnewgoldforwardarrow perpendicular existingv; resultingcyanvdiagonal. Distinguish earlierretainedv faintcyanright vsnewcontributiongoldforward. Museumconsoleplusadultwatching, no reset."
+      ],
+      [
+        "For the cube, the line is a limit. For us, it can be a place to stand and watch.",
+        "Cubeatamberperimeter rebounds smallschematicbefore/aftercyanarrow reverses relevantcomponent. Visitorstraddlesamberoutlineunaffected. Roomfloorcontinuous, amberboundarynotwallaroundvisitor."
+      ],
+      [
+        "Compare that cut with the large cube's gradual braking.",
+        "Two diagraminsets BRAKE: long→shortcyanvgradually; STATIC RAMP SWITCH: v→0immediatelyevenmoving. Smallfrictionramp nexttomaincubeconsole. Samevisitor looksbetweenthesestations. Not claimingreversaltimeorenergyconservation."
+      ]
+    ],
+    "source_review": "The mass comparison is a temporal schematic rather than an extra simultaneous-trial mode. Main-cube braking is distinct from the ramp switch that immediately resets velocity.",
+    "subtitle": "Motion",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHEN THE PUSH ENDS\". Subtitle \"Motion · final text\".\nPanel 1: Caption exactly \"The command lasts one second. The cube keeps going.\". Scene: Floatingpale cube one metreoverfloor insideamberoutlinedexperiment; horizontalonly, gravityoff. Ambercommandarrow disappearsin AFTER1SECONDscene butcyanvelocityarrow andcubeleft-to-rightmotionremain. PUSHEXPERIMENTnotbodypickedup.\nPanel 2: Caption exactly \"Something of that contribution is still crossing the room.\". Scene: Visitor touchesCOAST control cubecontinuingwithcyanvelocity only, goldcommandzero. Smalllabel 'NO NEW FORCE · VELOCITY RETAINED'. No brake orinstantstop.\nPanel 3: Caption exactly \"The cube looks the same size.\". Scene: Pairedschematic SAMEPULSE1sec2N:1kgcube cyanvlonger,2kgcube cyanvhalf-length. Identicalphysicalcubedimensionsnotheavierbigger. Label 'MASS CHANGED · SIZE FIXED' conventionalbeforeaftercomparisonnotnewdoubletrialmode.\nPanel 4: Caption exactly \"The latest instruction does not contain the whole movement.\". Scene: Existingcubealready movingright; PUSHFnewgoldforwardarrow perpendicular existingv; resultingcyanvdiagonal. Distinguish earlierretainedv faintcyanright vsnewcontributiongoldforward. Museumconsoleplusadultwatching, no reset.\nPanel 5: Caption exactly \"For the cube, the line is a limit. For us, it can be a place to stand and watch.\". Scene: Cubeatamberperimeter rebounds smallschematicbefore/aftercyanarrow reverses relevantcomponent. Visitorstraddlesamberoutlineunaffected. Roomfloorcontinuous, amberboundarynotwallaroundvisitor.\nPanel 6: Caption exactly \"Compare that cut with the large cube's gradual braking.\". Scene: Two diagraminsets BRAKE: long→shortcyanvgradually; STATIC RAMP SWITCH: v→0immediatelyevenmoving. Smallfrictionramp nexttomaincubeconsole. Samevisitor looksbetweenthesestations. Not claimingreversaltimeorenergyconservation.\nFooter exactly \"The latest instruction does not contain the whole movement.\".",
+    "source_sha256": "5c26fa4807d44fb4ee645cdae9f33e8f9a551506755fe30235b729af83679f9b"
+  },
+  {
+    "slug": "forces-receiver",
+    "map": "Vectors_Act3_FieldsAndMotion",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+    "title": "THE ARROW DOES NOT DECIDE",
+    "focus": "Identical field numbers set velocity or accumulate acceleration; reverse and boundary pause expose what each receiver retains.",
+    "summary": "Cyan slows at the sink while pink crosses it. The same field enters two bodies with different units and different memories.",
+    "footer": "Follow it to what receives it.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-24-field-and-receiver/images/field_receivers_inside.png"
+    ],
+    "panels": [
+      [
+        "They started together.",
+        "Sinkfieldfloor-gridwalloverviewmatchingreference. Cyanandpinkstartsamehorizontaladdress butverticallyseparatedfortworeadablemarkers. Goldfieldarrowstowardcentre. Label SAME HORIZONTAL START; neitherstartoffsetinXZ."
+      ],
+      [
+        "A line can keep the places visited without showing how often, or in which direction, the body passed.",
+        "SinkcentreCYAN approaches andslows beforecenter PINKpassescentre andreturnspath. Diagonalschematicwithpinkfaint retracedline, no counts ontrail. Cyan/pinkheightdifferencevisualonlyfieldhorizontal. No repulsionbetweenmarkers."
+      ],
+      [
+        "The receiver gives the number its physical meaning.",
+        "Closeuplabel cards besideexistingconsole: CYAN 'velocity = field · m/s'; PINK 'velocity += field × step · m/s²'. Goldsamefieldinput branchingtworeceivercards, nottwodifferentfields. Adultpointsattheassignment, companionaskswithexpression."
+      ],
+      [
+        "For a while, it continues into a field pointing the other way.",
+        "REVERSE fieldgoldarrowsreverse. Cyanimmediatelytakesnewvelocityleft, pinkstillmovingrightwithnewaccelerationleft. Show cyanvleft, pinkvright pluspinkgoldaleft, cleararrowcolorkey. Temporalcomparisonschematicnotnegativeforceonviewer."
+      ],
+      [
+        "The field extends across the room, but it has not settled how either body will receive it.",
+        "UNIFORMgoldarrowsallright, repeatedsame. Cyan/PINKfromsamehorizontalreststartone-secondschematic cyanfartherthanpink; label SAME FIELD · DIFFERENT RECEIVERS. No mutualinteraction or sharedphysicalunitsinrawinput."
+      ],
+      [
+        "Here the line ends an observation.",
+        "PINK reachesgoldoutlineframe andbothreceiverspausedwithlastvelocityarrowretained. Visitorwalksacrosslineunaffected. Label FRAME: PAUSE, NO REBOUND. DistinguishMotion'spreviouscube-rebound; no reflectionarrow."
+      ]
+    ],
+    "source_review": "Field diagrams and separated marker heights are explanatory views of a horizontal model. The receiver assigns units to the field input; the path, reversal and uniform comparison are schematic rather than runtime trajectories.",
+    "subtitle": "Fields and receivers",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"THE ARROW DOES NOT DECIDE\". Subtitle \"Fields and receivers · final text\".\nPanel 1: Caption exactly \"They started together.\". Scene: Sinkfieldfloor-gridwalloverviewmatchingreference. Cyanandpinkstartsamehorizontaladdress butverticallyseparatedfortworeadablemarkers. Goldfieldarrowstowardcentre. Label SAME HORIZONTAL START; neitherstartoffsetinXZ.\nPanel 2: Caption exactly \"A line can keep the places visited without showing how often, or in which direction, the body passed.\". Scene: SinkcentreCYAN approaches andslows beforecenter PINKpassescentre andreturnspath. Diagonalschematicwithpinkfaint retracedline, no counts ontrail. Cyan/pinkheightdifferencevisualonlyfieldhorizontal. No repulsionbetweenmarkers.\nPanel 3: Caption exactly \"The receiver gives the number its physical meaning.\". Scene: Closeuplabel cards besideexistingconsole: CYAN 'velocity = field · m/s'; PINK 'velocity += field × step · m/s²'. Goldsamefieldinput branchingtworeceivercards, nottwodifferentfields. Adultpointsattheassignment, companionaskswithexpression.\nPanel 4: Caption exactly \"For a while, it continues into a field pointing the other way.\". Scene: REVERSE fieldgoldarrowsreverse. Cyanimmediatelytakesnewvelocityleft, pinkstillmovingrightwithnewaccelerationleft. Show cyanvleft, pinkvright pluspinkgoldaleft, cleararrowcolorkey. Temporalcomparisonschematicnotnegativeforceonviewer.\nPanel 5: Caption exactly \"The field extends across the room, but it has not settled how either body will receive it.\". Scene: UNIFORMgoldarrowsallright, repeatedsame. Cyan/PINKfromsamehorizontalreststartone-secondschematic cyanfartherthanpink; label SAME FIELD · DIFFERENT RECEIVERS. No mutualinteraction or sharedphysicalunitsinrawinput.\nPanel 6: Caption exactly \"Here the line ends an observation.\". Scene: PINK reachesgoldoutlineframe andbothreceiverspausedwithlastvelocityarrowretained. Visitorwalksacrosslineunaffected. Label FRAME: PAUSE, NO REBOUND. DistinguishMotion'spreviouscube-rebound; no reflectionarrow.\nFooter exactly \"Follow it to what receives it.\".",
+    "source_sha256": "9b080531fb62be6f8344fff1055290e3043e488bcbc1364105ae90ad0852c53b"
+  },
+  {
+    "slug": "forces-return-not-undo",
+    "map": "Vectors_Act4a_KineticForces",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+    "title": "THE RETURN IS NOT AN UNDO",
+    "focus": "Linear drag has separate cube and walking implementations; signed work may cancel while cut grass does not return; prescribed circular speed creates centripetal acceleration.",
+    "summary": "Three named media slow probes differently. A mower returns along its cut while its path persists; a circle changes velocity without changing speed.",
+    "footer": "Each is keeping a different account.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/figures/forces/inside-the-passage-museum.png"
+    ],
+    "panels": [
+      [
+        "These names suggest substances, but no liquid is being simulated here.",
+        "Threecolouredfloorstrips AIR/WATER/HONEY withsame-sizedpaleprobecubes enteringatsame4m/s. Cyanvelocitydifferentdecay, ordinaryflatdrymaterial noactualwater/honey. Fineglasswalkingpassageperreference; visitoratentrance."
+      ],
+      [
+        "One visible medium contains two implementations.",
+        "SplitdetailinsideWATERstrip onecubecard F=−c v, anothervisitorstickcard REQUESTED SPEED×FACTOR. Cubeandpersonsamezone butdistinctreceivepaths. Visitorwalksfreelynaturallegs, notvisibleviscousfluid. Noforcearrowphysicallypullingleg."
+      ],
+      [
+        "The signed work reading comes back toward its earlier value. The grass does not grow back.",
+        "Uprightmowergrippedbystandingvisitor returnspastcutgrass WITHOUT turningmower. NominalFpointsforwardawayfromreturnmotion; displacementbackwards soF·Δxnegative. Cutstripbrown/shortremainsbehind. Label RETURN WITHOUT TURN; noinstantrestore."
+      ],
+      [
+        "Each is keeping a different account.",
+        "Mowerconsole close: schematic 'SIGNED WORK: TOWARD 0' and 'PATH: STILL GROWING'. Widecropgrasscutstripshowsthat out-and-backleftmaterialchange. Not measuredhumanmuscleenergy; smalllabel NOMINAL FORCE."
+      ],
+      [
+        "An acceleration can change direction while leaving speed constant.",
+        "Circlepod diagramshowsonemarker movingroundcircle; CYANv tangent, GOLDa inwardperpendicular. No outwardsacceleration, notphysicalcentrifugalforce. Visitorviewsprogrammedpath; label PRESCRIBED CIRCLE. Speedunchangedwithinthisview."
+      ],
+      [
+        "An arrow needs units, a receiver, and an account of how it entered the movement.",
+        "Visitorandcompanionatcirclepod SPEEDcontrol; two smallSCHEMATICv2/v4showtangentsdouble,inwardaccelfourfoldatfixedradius. Labels SPEED×2 / ACCELERATION×4. Clearlyschematiccomparisons notmotionofvisitor. Floorstripsremain background."
+      ]
+    ],
+    "source_review": "Drag curves describe the continuous law schematically, not measured integration data. Walking scales a requested speed. Signed work, recorded path and cut grass keep different accounts; the mower force is nominal.",
+    "subtitle": "Kinetic forces",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"THE RETURN IS NOT AN UNDO\". Subtitle \"Kinetic forces · final text\".\nPanel 1: Caption exactly \"These names suggest substances, but no liquid is being simulated here.\". Scene: Threecolouredfloorstrips AIR/WATER/HONEY withsame-sizedpaleprobecubes enteringatsame4m/s. Cyanvelocitydifferentdecay, ordinaryflatdrymaterial noactualwater/honey. Fineglasswalkingpassageperreference; visitoratentrance.\nPanel 2: Caption exactly \"One visible medium contains two implementations.\". Scene: SplitdetailinsideWATERstrip onecubecard F=−c v, anothervisitorstickcard REQUESTED SPEED×FACTOR. Cubeandpersonsamezone butdistinctreceivepaths. Visitorwalksfreelynaturallegs, notvisibleviscousfluid. Noforcearrowphysicallypullingleg.\nPanel 3: Caption exactly \"The signed work reading comes back toward its earlier value. The grass does not grow back.\". Scene: Uprightmowergrippedbystandingvisitor returnspastcutgrass WITHOUT turningmower. NominalFpointsforwardawayfromreturnmotion; displacementbackwards soF·Δxnegative. Cutstripbrown/shortremainsbehind. Label RETURN WITHOUT TURN; noinstantrestore.\nPanel 4: Caption exactly \"Each is keeping a different account.\". Scene: Mowerconsole close: schematic 'SIGNED WORK: TOWARD 0' and 'PATH: STILL GROWING'. Widecropgrasscutstripshowsthat out-and-backleftmaterialchange. Not measuredhumanmuscleenergy; smalllabel NOMINAL FORCE.\nPanel 5: Caption exactly \"An acceleration can change direction while leaving speed constant.\". Scene: Circlepod diagramshowsonemarker movingroundcircle; CYANv tangent, GOLDa inwardperpendicular. No outwardsacceleration, notphysicalcentrifugalforce. Visitorviewsprogrammedpath; label PRESCRIBED CIRCLE. Speedunchangedwithinthisview.\nPanel 6: Caption exactly \"An arrow needs units, a receiver, and an account of how it entered the movement.\". Scene: Visitorandcompanionatcirclepod SPEEDcontrol; two smallSCHEMATICv2/v4showtangentsdouble,inwardaccelfourfoldatfixedradius. Labels SPEED×2 / ACCELERATION×4. Clearlyschematiccomparisons notmotionofvisitor. Floorstripsremain background.\nFooter exactly \"Each is keeping a different account.\".",
+    "source_sha256": "70c6e2f8e8e31de062f7a07b9dc3d08388d05b6a8e2fa3903fcf9a472eddc95c"
+  },
+  {
+    "slug": "forces-coming-back",
+    "map": "Vectors_Act4b_Oscillation",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+    "title": "COMING BACK TAKES YOU THROUGH",
+    "focus": "Restoring force does not imply stopping at rest; release discards hand velocity, damping and parameter changes have distinct effects.",
+    "summary": "A released cube crosses its rest line. Critical and heavy damping return differently; the chosen centre and retained state can be inspected.",
+    "footer": "We can inspect the chosen centre.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "It has not brought it to rest.",
+        "Offwhitebenchhorizontalcoilattachedfixedframe andpale cube toRIGHT ofrestline movingLEFT towardrest. Nextschematic atRESTx0 cyanvelocityLEFT nonzero springforcezero. No verticale/gravitymodel; viewerlooksatpassage."
+      ],
+      [
+        "Here it carries a position, while velocity begins at zero.",
+        "Visitorgripshorizontalhandle pullingcubeoneaxis; RELEASEinset currentxdisplaced,v=0. Handthrow explicitlynottransferred. Tinylabel 'RELEASE: KEEP x, RESET v'. Cubedrawnjustbeforemovementstarts."
+      ],
+      [
+        "Extra resistance has delayed the return.",
+        "Three smalltimeplotslabel LIGHT / CRITICAL / HEAVY, commonstartx>0. Lightovershoots throughbaseline, criticalapproaches0fastwithoutovershoot, heavyapproaches0moreslowlywithoutovershoot. ClearlySCHEMATIC, no falsequantitativecurve. Companion comparescontrolsettings."
+      ],
+      [
+        "It does not promise to keep energy.",
+        "Visitor changesMASS/STIFFNESS whilecubeawayfromrest; smallcard 'POSITION KEPT · VELOCITY KEPT'. Oldenergy/newenergyunspecified; noenergyconservationsealorclaim. Numericnotneeded; tensionvisibleremains."
+      ],
+      [
+        "We can inspect the chosen centre.",
+        "RESTmarker onbenchwhiteverticalrule, coilforcearrowtowardsit. GOLDsumandtwoforcepartsinsmallinset: cubeRIGHTmovingLEFT springLEFT,dampingRIGHTopposesv. Netdependsmagnitudes; avoidclaimcancellationexact. Adulteyesfollowrestmarker."
+      ],
+      [
+        "Looking alike does not establish the same mechanism.",
+        "Foreground horizontalnumericalspringcube; backgroundmuseum hangingmobile andprescribedpendulum shownseparately, notconnected. Companion/visitorcomparekineticlooks. Labels 'RESTORING MODEL' / 'POSED RHYTHM'; no claimtheyallsimulatesamephysicsorCalderinfluence."
+      ]
+    ],
+    "source_review": "Damping curves are qualitative comparisons rather than samples from the numerical integrator. Release retains displacement and resets velocity. The nearby mobile and pendulum are not asserted to share the spring mechanism.",
+    "subtitle": "Springs and oscillation",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"COMING BACK TAKES YOU THROUGH\". Subtitle \"Springs and oscillation · final text\".\nPanel 1: Caption exactly \"It has not brought it to rest.\". Scene: Offwhitebenchhorizontalcoilattachedfixedframe andpale cube toRIGHT ofrestline movingLEFT towardrest. Nextschematic atRESTx0 cyanvelocityLEFT nonzero springforcezero. No verticale/gravitymodel; viewerlooksatpassage.\nPanel 2: Caption exactly \"Here it carries a position, while velocity begins at zero.\". Scene: Visitorgripshorizontalhandle pullingcubeoneaxis; RELEASEinset currentxdisplaced,v=0. Handthrow explicitlynottransferred. Tinylabel 'RELEASE: KEEP x, RESET v'. Cubedrawnjustbeforemovementstarts.\nPanel 3: Caption exactly \"Extra resistance has delayed the return.\". Scene: Three smalltimeplotslabel LIGHT / CRITICAL / HEAVY, commonstartx>0. Lightovershoots throughbaseline, criticalapproaches0fastwithoutovershoot, heavyapproaches0moreslowlywithoutovershoot. ClearlySCHEMATIC, no falsequantitativecurve. Companion comparescontrolsettings.\nPanel 4: Caption exactly \"It does not promise to keep energy.\". Scene: Visitor changesMASS/STIFFNESS whilecubeawayfromrest; smallcard 'POSITION KEPT · VELOCITY KEPT'. Oldenergy/newenergyunspecified; noenergyconservationsealorclaim. Numericnotneeded; tensionvisibleremains.\nPanel 5: Caption exactly \"We can inspect the chosen centre.\". Scene: RESTmarker onbenchwhiteverticalrule, coilforcearrowtowardsit. GOLDsumandtwoforcepartsinsmallinset: cubeRIGHTmovingLEFT springLEFT,dampingRIGHTopposesv. Netdependsmagnitudes; avoidclaimcancellationexact. Adulteyesfollowrestmarker.\nPanel 6: Caption exactly \"Looking alike does not establish the same mechanism.\". Scene: Foreground horizontalnumericalspringcube; backgroundmuseum hangingmobile andprescribedpendulum shownseparately, notconnected. Companion/visitorcomparekineticlooks. Labels 'RESTORING MODEL' / 'POSED RHYTHM'; no claimtheyallsimulatesamephysicsorCalderinfluence.\nFooter exactly \"We can inspect the chosen centre.\".",
+    "source_sha256": "0f771da76884988def6a0d554e52802ee9ced20877f6b21ff375e800a3240922"
+  },
+  {
+    "slug": "forces-out-of-time",
+    "map": "Change_Choreography",
+    "sequence": "forces",
+    "source": "commons/maps/Change_Choreography/final.md",
+    "title": "TOGETHER, OUT OF TIME",
+    "focus": "Phase offset differs from rate drift; finite queues retain history; equal clock rates do not recover an earlier phase.",
+    "summary": "Rods share a beat and make a travelling relationship. Parcels accumulate; touching clock rims remain together while their hands separate.",
+    "footer": "Matching their speed has not recovered the time between them.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "The difference is an offset, not a growing delay.",
+        "CROPPED DETAIL ofrodfield, severalbasesfixedonsquaregrid whiteendtips rotating. Onepink highlightedrod consistently45degreesphaseoffsetotherssamefrequency. Small labels SAME RATE / OFFSET45°. Do notdrawexact20ifcropped. Visitorfocusonealongneighbors."
+      ],
+      [
+        "What you see travelling is a relationship between them.",
+        "CroppedrowfixedbasesdifferentphasesformingWAVE; twoorderedmomentinsetspatternshiftwhile rod basesstay markedatfixedaddresses. No physicalrod movingfromcelltocell; controlledlightandwarmmuseum."
+      ],
+      [
+        "A difference in frequency keeps changing the difference in phase.",
+        "Backrowrodsgainphaserelativefrontrow. Smallschematic SAME START -> DIFFERENT RATE, back+4%, no fixedoffsetclaim/no150sec countdown. VisitorDRIFTcontrol, panoramaofthefieldcroppedtosomebases."
+      ],
+      [
+        "Increasing the collection rate and erasing the history are different operations.",
+        "Parcels actualrigidbodies pileendofconveyor; visitorRECOVERcollectorfaster, samepilebeginningtodrainsequentially. Label RECOVER notRESET; pilesnotinstantlygone; futurearrivalskeepcoming, finitecapacityadmissionwaits. No rigidparcelsfloatingongraphs."
+      ],
+      [
+        "Matching their speed has not recovered the time between them.",
+        "TwoPALEroundclocks sidebysidewithRIMSTOUCHING, pinktipsboth sameangularratebutdistinctangles. VisitorSAMERATEswitch; handsremainseparate. Tinylabel SAME RATE · PHASE GAP REMAINS. Neverinterpretasbatterybreakage or portraitofillness."
+      ],
+      [
+        "The two rims remain in contact throughout.",
+        "Closetwoadjacenttouchingclockrimsandsamevisitoroldercompanionbeyondthem. InsetALIGNhands coincideinstant; subsequentdifferentRATESseparateagain. Physicalrimsremaintouchingno gap. Figurewarmquietreflection withoutclaimhistoricalrecreation."
+      ]
+    ],
+    "source_review": "Rod views are cropped details, not a census of the twenty-rod field. Clock faces schematize phase and rate while keeping rim contact; no illness is depicted. Queue recovery differs from reset.",
+    "subtitle": "Choreography",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"TOGETHER, OUT OF TIME\". Subtitle \"Choreography · final text\".\nPanel 1: Caption exactly \"The difference is an offset, not a growing delay.\". Scene: CROPPED DETAIL ofrodfield, severalbasesfixedonsquaregrid whiteendtips rotating. Onepink highlightedrod consistently45degreesphaseoffsetotherssamefrequency. Small labels SAME RATE / OFFSET45°. Do notdrawexact20ifcropped. Visitorfocusonealongneighbors.\nPanel 2: Caption exactly \"What you see travelling is a relationship between them.\". Scene: CroppedrowfixedbasesdifferentphasesformingWAVE; twoorderedmomentinsetspatternshiftwhile rod basesstay markedatfixedaddresses. No physicalrod movingfromcelltocell; controlledlightandwarmmuseum.\nPanel 3: Caption exactly \"A difference in frequency keeps changing the difference in phase.\". Scene: Backrowrodsgainphaserelativefrontrow. Smallschematic SAME START -> DIFFERENT RATE, back+4%, no fixedoffsetclaim/no150sec countdown. VisitorDRIFTcontrol, panoramaofthefieldcroppedtosomebases.\nPanel 4: Caption exactly \"Increasing the collection rate and erasing the history are different operations.\". Scene: Parcels actualrigidbodies pileendofconveyor; visitorRECOVERcollectorfaster, samepilebeginningtodrainsequentially. Label RECOVER notRESET; pilesnotinstantlygone; futurearrivalskeepcoming, finitecapacityadmissionwaits. No rigidparcelsfloatingongraphs.\nPanel 5: Caption exactly \"Matching their speed has not recovered the time between them.\". Scene: TwoPALEroundclocks sidebysidewithRIMSTOUCHING, pinktipsboth sameangularratebutdistinctangles. VisitorSAMERATEswitch; handsremainseparate. Tinylabel SAME RATE · PHASE GAP REMAINS. Neverinterpretasbatterybreakage or portraitofillness.\nPanel 6: Caption exactly \"The two rims remain in contact throughout.\". Scene: Closetwoadjacenttouchingclockrimsandsamevisitoroldercompanionbeyondthem. InsetALIGNhands coincideinstant; subsequentdifferentRATESseparateagain. Physicalrimsremaintouchingno gap. Figurewarmquietreflection withoutclaimhistoricalrecreation.\nFooter exactly \"Matching their speed has not recovered the time between them.\".",
+    "source_sha256": "7bdd0bf49cfad2f6b9636629114e900dcad81b46c70dfebfe066325e2ce701a6"
+  },
+  {
+    "slug": "forces-stay-still",
+    "map": "VFM_07_Gravity",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_07_Gravity/final.md",
+    "title": "WHO GETS TO STAY STILL?",
+    "focus": "Fixed source withholds reaction; mutual bodies can share an unoccupied centre; displaced initial conditions and clipped observations do not establish chaos or escape.",
+    "summary": "A fixed pink source lets a satellite move. Mutual bodies leave the centre empty; a small nudge produces another retained account.",
+    "footer": "A reference need not be occupied.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-forces-review/relations/after/gravity_mutual.png"
+    ],
+    "panels": [
+      [
+        "It also withholds a response.",
+        "ExistinggoldsatellitegoesroundFIXEDpinksourceonfloorstage. Pinkbodyanchoredbyprogramnotmechanicalrope, tinylabel FIXED SOURCE: RESPONSE WITHHELD. Visitorstandsbeside, no claimNewtonviolationuniversal. Goldarcandvelocity, notmutualmotionpink."
+      ],
+      [
+        "A reference need not be occupied.",
+        "MUTUALtwobodies equal4kg movingaroundWHITEcentre-crossbetween them; crossEMPTYnotbody. Bothpink/goldmovearrows; no centremasssphere. Museumfloorboundeddiagrammatchingreference, oldercompanionlooksintogap."
+      ],
+      [
+        "Even an experiment about difference has to decide which differences it will retain.",
+        "Paired independentcalcs ofbodyarrangement, onehighertranslucent visualizationONLY. Lowersolid original3bodies, uppertranslucentlastbodyinitialX+3cm. Label SEPARATE CALCULATIONS · VISUAL HEIGHT ONLY. No gravitationalinteractionbetweencopies, no commonrecenteredCOM. Avoidclaimguaranteedchaos."
+      ],
+      [
+        "The visible spheres have no hard surfaces in this calculation: they neither collide nor merge.",
+        "Two markerpathsnear/crossindependentmovingspheres no bounce/fracture/merge. Visitor watchessoftened attraction diagram, label SOFTENED GRAVITY · NO COLLISION. Bodiesstilldistinct. Not skin/hardbodyrenderconsequence."
+      ],
+      [
+        "The edge says our observation has ended; it does not prove that a body has escaped its partners.",
+        "Onebodyreachesgoldobservationframe, allfreeze there. Label FRAME: PAUSE, notESCAPE orbounce. Curvedtrailstopextending, existingvectorsretained. Visitorsablecrossframe."
+      ],
+      [
+        "A reference need not be occupied.",
+        "WidequietvisitorandcompanionnearwhiteCOMcross withbodieson either sideandtheirretainedtrails; closehandpointstounoccupiedmarkwithoutplacingnewbodythere. Smalllabel RECENT TRACE ≈12 s makesfinitehistoryclear, no numericalchaoscertification."
+      ]
+    ],
+    "source_review": "Raised translucent markers depict a separate calculation, not gravitational partners at a new physical height. The nudge is horizontal. Simplified paths do not prove chaos, conservation accuracy or escape.",
+    "subtitle": "Gravity",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHO GETS TO STAY STILL?\". Subtitle \"Gravity · final text\".\nPanel 1: Caption exactly \"It also withholds a response.\". Scene: ExistinggoldsatellitegoesroundFIXEDpinksourceonfloorstage. Pinkbodyanchoredbyprogramnotmechanicalrope, tinylabel FIXED SOURCE: RESPONSE WITHHELD. Visitorstandsbeside, no claimNewtonviolationuniversal. Goldarcandvelocity, notmutualmotionpink.\nPanel 2: Caption exactly \"A reference need not be occupied.\". Scene: MUTUALtwobodies equal4kg movingaroundWHITEcentre-crossbetween them; crossEMPTYnotbody. Bothpink/goldmovearrows; no centremasssphere. Museumfloorboundeddiagrammatchingreference, oldercompanionlooksintogap.\nPanel 3: Caption exactly \"Even an experiment about difference has to decide which differences it will retain.\". Scene: Paired independentcalcs ofbodyarrangement, onehighertranslucent visualizationONLY. Lowersolid original3bodies, uppertranslucentlastbodyinitialX+3cm. Label SEPARATE CALCULATIONS · VISUAL HEIGHT ONLY. No gravitationalinteractionbetweencopies, no commonrecenteredCOM. Avoidclaimguaranteedchaos.\nPanel 4: Caption exactly \"The visible spheres have no hard surfaces in this calculation: they neither collide nor merge.\". Scene: Two markerpathsnear/crossindependentmovingspheres no bounce/fracture/merge. Visitor watchessoftened attraction diagram, label SOFTENED GRAVITY · NO COLLISION. Bodiesstilldistinct. Not skin/hardbodyrenderconsequence.\nPanel 5: Caption exactly \"The edge says our observation has ended; it does not prove that a body has escaped its partners.\". Scene: Onebodyreachesgoldobservationframe, allfreeze there. Label FRAME: PAUSE, notESCAPE orbounce. Curvedtrailstopextending, existingvectorsretained. Visitorsablecrossframe.\nPanel 6: Caption exactly \"A reference need not be occupied.\". Scene: WidequietvisitorandcompanionnearwhiteCOMcross withbodieson either sideandtheirretainedtrails; closehandpointstounoccupiedmarkwithoutplacingnewbodythere. Smalllabel RECENT TRACE ≈12 s makesfinitehistoryclear, no numericalchaoscertification.\nFooter exactly \"A reference need not be occupied.\".",
+    "source_sha256": "8e7d2278b9ad81b224e39b29ee2a6d62e6efb3839ebbf8017b804e6a75505ab2"
+  },
+  {
+    "slug": "forces-body-stand",
+    "map": "VFM_09_Legs",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_09_Legs/final.md",
+    "title": "WHAT LETS A BODY STAND?",
+    "focus": "Support depends on footprint and mass centre rather than outline or count; convincing commanded walking is not contact-supported motion.",
+    "summary": "A plate rests through contact. Its centre moves without its outline changing; a creature can reach the floor without receiving support from it.",
+    "footer": "Same count, different relation.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "Staying still is now an outcome of contact.",
+        "Pinkplateheldjustabovesquarefeet/pads thenRELEASEsettlesonfourposts. Offwhiteflooractualrigidcontact, labels RELEASE / CONTACT. Visitorbesideplate notstandingonit, bodycollisionexcludesvisitor."
+      ],
+      [
+        "A body can become different without acquiring a different outline.",
+        "Samepinkplatewiththreepostsunchangedgeometry. SHIFTmovesCOMsmallwhitecross frominsidefootprinttooutside; paired SCHEMATICbeforeafterplate shapeidentical untilafterrelease/outside tips. Smalllabel CENTRE SHIFTED · OUTLINE SAME. Donotrebuildsilhouetteorbignose."
+      ],
+      [
+        "Same count, different relation.",
+        "TwoSCHEMATICtopviews EXACTLYTWOsquarepads each: ADJACENT twoon same side ->shortbandhull; OPPOSITE diagonallyacross ->diagonal narrow finitearea hull. SamefourpadpossibleaddressesfaintbutonlyTWOactiveeach. Centrepositionmarked; finitepadsnotpoints."
+      ],
+      [
+        "Width can change what that count permits.",
+        "Closepadshavevisiblewidth16cm, initialhull outlinefixed floor whileliveCOMmarkmovesasplatebegins totilt. Label 'INITIAL FOOTPRINT' clearlydistinctfromlivecontacts. No claimboundarycrossalwaysinstantlyfall."
+      ],
+      [
+        "But reaching the ground and receiving support from it are different operations.",
+        "Fourlegcreature gait onefootliftarc, otherfeet plantedatcommandedlocations. Bodymovesprescribed route, schematiclabel 'COMMANDED GAIT · NOT SUPPORT SOLVER'. No forcearrowsunderfeetfakephysics. Visitorwalksbesidewatching."
+      ],
+      [
+        "The gap between a persuasive walk and a supported body is material for another experiment.",
+        "Visitor/companionseeplatephysicalexperimentbesidecreaturecommandedwalk, notmixedmechanism. Quietwarmmuseumcomparison, labels CONTACT MODEL / GAIT MODEL. Creaturedarkabstractnotcuteanimal."
+      ]
+    ],
+    "source_review": "Support diagrams retain finite square pads and distinguish the initial footprint from live mass-centre movement. The faceted walker depicts commanded gait rather than a support solver; geometry and exact dimensions are schematic.",
+    "subtitle": "Legs and support",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHAT LETS A BODY STAND?\". Subtitle \"Legs and support · final text\".\nPanel 1: Caption exactly \"Staying still is now an outcome of contact.\". Scene: Pinkplateheldjustabovesquarefeet/pads thenRELEASEsettlesonfourposts. Offwhiteflooractualrigidcontact, labels RELEASE / CONTACT. Visitorbesideplate notstandingonit, bodycollisionexcludesvisitor.\nPanel 2: Caption exactly \"A body can become different without acquiring a different outline.\". Scene: Samepinkplatewiththreepostsunchangedgeometry. SHIFTmovesCOMsmallwhitecross frominsidefootprinttooutside; paired SCHEMATICbeforeafterplate shapeidentical untilafterrelease/outside tips. Smalllabel CENTRE SHIFTED · OUTLINE SAME. Donotrebuildsilhouetteorbignose.\nPanel 3: Caption exactly \"Same count, different relation.\". Scene: TwoSCHEMATICtopviews EXACTLYTWOsquarepads each: ADJACENT twoon same side ->shortbandhull; OPPOSITE diagonallyacross ->diagonal narrow finitearea hull. SamefourpadpossibleaddressesfaintbutonlyTWOactiveeach. Centrepositionmarked; finitepadsnotpoints.\nPanel 4: Caption exactly \"Width can change what that count permits.\". Scene: Closepadshavevisiblewidth16cm, initialhull outlinefixed floor whileliveCOMmarkmovesasplatebegins totilt. Label 'INITIAL FOOTPRINT' clearlydistinctfromlivecontacts. No claimboundarycrossalwaysinstantlyfall.\nPanel 5: Caption exactly \"But reaching the ground and receiving support from it are different operations.\". Scene: Fourlegcreature gait onefootliftarc, otherfeet plantedatcommandedlocations. Bodymovesprescribed route, schematiclabel 'COMMANDED GAIT · NOT SUPPORT SOLVER'. No forcearrowsunderfeetfakephysics. Visitorwalksbesidewatching.\nPanel 6: Caption exactly \"The gap between a persuasive walk and a supported body is material for another experiment.\". Scene: Visitor/companionseeplatephysicalexperimentbesidecreaturecommandedwalk, notmixedmechanism. Quietwarmmuseumcomparison, labels CONTACT MODEL / GAIT MODEL. Creaturedarkabstractnotcuteanimal.\nFooter exactly \"Same count, different relation.\".",
+    "source_sha256": "b1394a502a0fdfba9c05f6cdb9931e4c6a55544e00cce2a46f3a4ce1aa20e457"
+  },
+  {
+    "slug": "forces-encounter",
+    "map": "VFM_08_Arena",
+    "sequence": "forces",
+    "source": "commons/maps/VFM_08_Arena/final.md",
+    "title": "WHAT MAKES AN ENCOUNTER?",
+    "focus": "Distance, visibility and state select a target; feeding crosses a designed threshold; static elastic collision diagrams conserve a total, not each body.",
+    "summary": "A beacon, a wall and a meal change a crab’s state. Nearby carts show conservation through distinct before-and-after diagrams.",
+    "footer": "Five is a threshold somebody chose; feeding has changed state, not trained a new policy.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png"
+    ],
+    "panels": [
+      [
+        "Nothing in its legs has been replaced.",
+        "SinglefourlegdarkcrabtargetingBLUEbeacon vsvisitorbecomescandidatewhenVISITORYOU. Beaconfixednotfoodalltimes. Oldercompanionbesideconsole observernotanothercandidate. Crablegsunchanged, no explosionorupgradedAI."
+      ],
+      [
+        "Food is not given a higher rank simply for being food.",
+        "Two visiblecandidates atdifferentdistances, visitornearerthanmushroomstation, crabtargetvisitorundernearestvisible rule. Tinylabel NEAREST VISIBLE WITHIN6m. Do not hostilebite/damage. Mushroomnotassignedhigherpriority."
+      ],
+      [
+        "Five is a threshold somebody chose; feeding has changed state, not trained a new policy.",
+        "Temporalstriponecrab atfood: ARRIVE ->2secondmeal ->COMPLETEDMEALcounter increments. Latercounter5 crabROOTEDsamefourlegsilhouettemotionstops. No newtreebranches/reinforcementnetwork. Visitorwatchessmallclockprogressnofake instantaneousarrivalcompletion."
+      ],
+      [
+        "It does not require each body to keep its own speed, or even its original direction.",
+        "Collisioncartstation frontfacing diagramtwo rows BEFORE/AFTER label ELASTIC · EQUAL MASS. BEFOREamberstrikermovingright targetpinkatrest; AFTERamberrestpinkright. STATICdiagramnotliveanimatedcollision, offwhitecartframes."
+      ],
+      [
+        "The quantity the model preserves and the consequence a visitor cares about need not be the same thing.",
+        "SecondSTATICbeforeaftercartdiagram LIGHT STRIKER · HEAVY TARGET: beforelightambervrightheavypinkrest; afteramberleftpinkrightbothsizesconsistentwithmasskey. TOTAL MOMENTUM conservedlabel, noindividualspeedconserved. Visitorlooksatreturnarrow, hands clearofcart."
+      ],
+      [
+        "Nothing in its legs has been replaced.",
+        "Widecrabnowrootedbynourishment inforegound samebody, collisioncartsdistantbackground. Visitorsconsider howdifferentreceiverstatesmakeencounter notblackboxsentience. No actualvisitorhealthdamage orforestgrowth."
+      ]
+    ],
+    "source_review": "The four-legged creature is an abstract interpretation of the artifact. Rooted means a state change, not growing branches or a learned policy. Collision carts show static before/after relations, not measured velocities or runtime collisions.",
+    "subtitle": "Arena",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHAT MAKES AN ENCOUNTER?\". Subtitle \"Arena · final text\".\nPanel 1: Caption exactly \"Nothing in its legs has been replaced.\". Scene: SinglefourlegdarkcrabtargetingBLUEbeacon vsvisitorbecomescandidatewhenVISITORYOU. Beaconfixednotfoodalltimes. Oldercompanionbesideconsole observernotanothercandidate. Crablegsunchanged, no explosionorupgradedAI.\nPanel 2: Caption exactly \"Food is not given a higher rank simply for being food.\". Scene: Two visiblecandidates atdifferentdistances, visitornearerthanmushroomstation, crabtargetvisitorundernearestvisible rule. Tinylabel NEAREST VISIBLE WITHIN6m. Do not hostilebite/damage. Mushroomnotassignedhigherpriority.\nPanel 3: Caption exactly \"Five is a threshold somebody chose; feeding has changed state, not trained a new policy.\". Scene: Temporalstriponecrab atfood: ARRIVE ->2secondmeal ->COMPLETEDMEALcounter increments. Latercounter5 crabROOTEDsamefourlegsilhouettemotionstops. No newtreebranches/reinforcementnetwork. Visitorwatchessmallclockprogressnofake instantaneousarrivalcompletion.\nPanel 4: Caption exactly \"It does not require each body to keep its own speed, or even its original direction.\". Scene: Collisioncartstation frontfacing diagramtwo rows BEFORE/AFTER label ELASTIC · EQUAL MASS. BEFOREamberstrikermovingright targetpinkatrest; AFTERamberrestpinkright. STATICdiagramnotliveanimatedcollision, offwhitecartframes.\nPanel 5: Caption exactly \"The quantity the model preserves and the consequence a visitor cares about need not be the same thing.\". Scene: SecondSTATICbeforeaftercartdiagram LIGHT STRIKER · HEAVY TARGET: beforelightambervrightheavypinkrest; afteramberleftpinkrightbothsizesconsistentwithmasskey. TOTAL MOMENTUM conservedlabel, noindividualspeedconserved. Visitorlooksatreturnarrow, hands clearofcart.\nPanel 6: Caption exactly \"Nothing in its legs has been replaced.\". Scene: Widecrabnowrootedbynourishment inforegound samebody, collisioncartsdistantbackground. Visitorsconsider howdifferentreceiverstatesmakeencounter notblackboxsentience. No actualvisitorhealthdamage orforestgrowth.\nFooter exactly \"Five is a threshold somebody chose; feeding has changed state, not trained a new policy.\".",
+    "source_sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea"
+  },
+  {
+    "slug": "forces-carries-across",
+    "map": "Vectors_Act5_ForceAsPlace",
+    "sequence": "forces",
+    "source": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+    "title": "WHAT CARRIES YOU ACROSS?",
+    "focus": "Field samples become separate cube and visitor acceleration receivers; zero retains incoming motion; coordinate poles and exit logic expose implementation choices.",
+    "summary": "An outlined volume crosses a gap beside a solid plank. Its arrows acquire consequences only through the bodies and controllers that receive them.",
+    "footer": "We have learned to look for the place where an instruction becomes a consequence.",
+    "references": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-06-final-comic-plates/columns.png",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/figures/forces/two-crossings-museum.png"
+    ],
+    "panels": [
+      [
+        "A direction can be well defined while one of its coordinates is not.",
+        "Machineyaw/pitchconsolemainarrowstraightDOWNatpitchpole. Turningyaw changesfaint horizontalbearingindicator butmainarrowunchangedDOWN. Label DOWN · YAW BEARING LATENT. Visitor besideconsole, no mainarrowtiltingwhenyawonly."
+      ],
+      [
+        "The arrow arrives after the movement.",
+        "Visitor movesGRABBABLEGLASSCUBE justoutsidefield. Cyanmotionarrowshownfrommeasuredpositionchange, no handforceclaim. Cubelocalcomponentlegsrotatewithcube; smalllabel 'POSITION CHANGE → VELOCITY DISPLAY'. No directionfromstillcube."
+      ],
+      [
+        "Equal instruction does not promise equal journeys.",
+        "TwoSCHEMATICreceivercards insideoutlined5mvolume: CUBE 'v += a × delta' and VISITOR 'carry velocity += a × delta'. Samefieldaccelerationinput; differentincomingv. Solidplankstillvisibleacrosspit, paleoutlinedvolumeNOTglasswalls. No numericforce1kg4kgdifferentaccel."
+      ],
+      [
+        "Zero has removed the new contribution; it has not removed what you brought.",
+        "ACCELZEROselected, cubeandvisitorinoutlinedvolume retain existingmovementrightcyanvelocityarrows; no newgoldaccelarrow. Tinylabel ZERO NEW ACCELERATION · INCOMING MOTION REMAINS. Naturalbodyposephysicalsteppingpossible, notlevitatedpuppet."
+      ],
+      [
+        "One controller erased what another had just written.",
+        "SCHEMATICcodeflowcard two competingupdates: FIELD ADDS CARRY VELOCITY -> NEXT CONTROLLER OVERWRITES. Visitoratplankovergap withoutfallsplatter; label EARLIER BROKEN CONNECTION. This paneldocumentsreason repairwasneeded notcurrentbugclaim. No classroomnewphysics."
+      ],
+      [
+        "Shared code as a medium does not make that translation automatic.",
+        "Widevisitorandoldercompanionpauseatentranceofoutlinedcarryingvolume, solidwhiteplankcontinuousbesidefield. Fieldarrownonzero; glasscubegainsmotion, visitorreceiverexplicitlabel separate. Clearunwalledvolume, openmuseumroof, bodyreceivesprogramnotmuscleforce. Invitingcontinuationnofalsecollisionwalls."
+      ]
+    ],
+    "source_review": "Field and visitor receiver cards are explanatory schematics. The controller-overwrite panel recalls an earlier software failure; it does not claim a current failure or a broken plank. The solid crossing remains available.",
+    "subtitle": "Force as place",
+    "prompt": "Use case: illustration-story. Make a polished portrait museum comic, SIX panels in TWO columns THREE rows. Cream margins, thin black borders, black condensed serif title, readable short black serif captions in white boxes. First image is STYLE and SAME FICTIONAL ADULT CHARACTERS only: short dark curly-haired adult visitor, burgundy shirt, black trousers, shoulder bag; older grey-haired companion, navy jacket. Other images are actual MUSEUM MATERIAL RELATIONS only, never copy debug HUD/renderstyle. Warm pale Endless Museum, simple offwhite consoles, restrained diagram colors. These imagined scenes interpret selected final.md encounters, not runtime captures, not tutorial reconstruction or test evidence. Keep bodies and space prominent; small diagram insets clearly labelled SCHEMATIC, preserving causal relations rather than invented software UI. Preserve chosen captions exactly. No long speech bubbles, invented historical quotes or unrelated artifacts, crowds, holographic interfaces. Preserve stated invariants; use temporal insets only with explicit before/after labels. Crop large inventories rather than draw a false exact count. No weapons, extra dangers or physical forces on visitor unless explicitly stated.\nTitle exactly \"WHAT CARRIES YOU ACROSS?\". Subtitle \"Force as place · final text\".\nPanel 1: Caption exactly \"A direction can be well defined while one of its coordinates is not.\". Scene: Machineyaw/pitchconsolemainarrowstraightDOWNatpitchpole. Turningyaw changesfaint horizontalbearingindicator butmainarrowunchangedDOWN. Label DOWN · YAW BEARING LATENT. Visitor besideconsole, no mainarrowtiltingwhenyawonly.\nPanel 2: Caption exactly \"The arrow arrives after the movement.\". Scene: Visitor movesGRABBABLEGLASSCUBE justoutsidefield. Cyanmotionarrowshownfrommeasuredpositionchange, no handforceclaim. Cubelocalcomponentlegsrotatewithcube; smalllabel 'POSITION CHANGE → VELOCITY DISPLAY'. No directionfromstillcube.\nPanel 3: Caption exactly \"Equal instruction does not promise equal journeys.\". Scene: TwoSCHEMATICreceivercards insideoutlined5mvolume: CUBE 'v += a × delta' and VISITOR 'carry velocity += a × delta'. Samefieldaccelerationinput; differentincomingv. Solidplankstillvisibleacrosspit, paleoutlinedvolumeNOTglasswalls. No numericforce1kg4kgdifferentaccel.\nPanel 4: Caption exactly \"Zero has removed the new contribution; it has not removed what you brought.\". Scene: ACCELZEROselected, cubeandvisitorinoutlinedvolume retain existingmovementrightcyanvelocityarrows; no newgoldaccelarrow. Tinylabel ZERO NEW ACCELERATION · INCOMING MOTION REMAINS. Naturalbodyposephysicalsteppingpossible, notlevitatedpuppet.\nPanel 5: Caption exactly \"One controller erased what another had just written.\". Scene: SCHEMATICcodeflowcard two competingupdates: FIELD ADDS CARRY VELOCITY -> NEXT CONTROLLER OVERWRITES. Visitoratplankovergap withoutfallsplatter; label EARLIER BROKEN CONNECTION. This paneldocumentsreason repairwasneeded notcurrentbugclaim. No classroomnewphysics.\nPanel 6: Caption exactly \"Shared code as a medium does not make that translation automatic.\". Scene: Widevisitorandoldercompanionpauseatentranceofoutlinedcarryingvolume, solidwhiteplankcontinuousbesidefield. Fieldarrownonzero; glasscubegainsmotion, visitorreceiverexplicitlabel separate. Clearunwalledvolume, openmuseumroof, bodyreceivesprogramnotmuscleforce. Invitingcontinuationnofalsecollisionwalls.\nFooter exactly \"We have learned to look for the place where an instruction becomes a consequence.\".",
+    "source_sha256": "a237bc14c03750b853c0e629795620e8352899512c9f6ea9a693662183ad786b"
+  }
+]

@@ -1,5 +1,15 @@
 # STATE — the book's re-entry point
 
+## Current framing drafts · updated 24 September 2026
+
+The requested preface and QFEP afterword now have developed working drafts: [preface](preface.md), [afterword](afterword-qfep.md), and [editorial scaffold](BOOK_FRAME.md). The [reading edition](iterations/2026-09-23-book-frame/index.html) places them before and after the complete active final.md spine. These are drafts for revision, not accepted final text. Rebuild with `python doc/book/iterations/2026-09-23-book-frame/build.py`.
+
+The preface now opens with the author-approved late-arrival image: “We arrive after the light.” The first small gesture depends on accumulated work, and the beginning is a choice of attention within a world already running.
+
+The older manuscript pipeline and coverage figures below are historical; they do not describe this final.md framing edition.
+
+---
+
 > Read this first, then the newest rulings in [RULINGS.md](RULINGS.md), then the current
 > voice-bar chapter. Ten minutes and both of us are back in the loop — after weeks away,
 > after a model upgrade, after context loss. Updated every session that touches the book.

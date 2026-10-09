@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A place for the point — Endless Museum</title>
+<style>
+:root{color-scheme:light;--paper:#f3f1ec;--ink:#17181a;--quiet:#65665f;--line:#d5d3cb}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif}header{padding:65px max(24px,calc((100vw - 1100px)/2)) 50px;background:#18191c;color:#f3f1ec}.eyebrow{font-size:12px;letter-spacing:.19em;text-transform:uppercase;color:#bebcb6}h1{font:normal clamp(40px,7vw,75px)/1.08 Georgia,serif;letter-spacing:-.035em;max-width:850px;margin:25px 0}header p{max-width:790px;color:#d5d3cd}a{color:inherit;text-underline-offset:4px}nav{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px}main{max-width:1148px;margin:auto;padding:45px 24px 65px}section{margin:0 0 55px}h2{font:normal 32px/1.2 Georgia,serif;margin:0 0 20px}p{max-width:900px}figure{margin:0 0 30px}img{display:block;width:100%;height:auto}figcaption{font-size:14px;line-height:1.5;color:var(--quiet);margin-top:10px;max-width:890px}.rule{border-top:1px solid var(--line);padding-top:30px}.note{padding:20px 24px;border-left:3px solid #9e9990;background:#eae7e0}.small{font-size:14px;color:var(--quiet)}ul{padding-left:22px}li{margin:8px 0}code{font-size:.88em;overflow-wrap:anywhere}footer{border-top:1px solid var(--line);padding-top:22px;font-size:14px;color:var(--quiet)}@media(max-width:650px){header{padding-top:40px}main{padding-top:30px}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Endless Museum · Point Coordinates · 5 October 2026</div>
+<h1>A place for the point.<br>A record of its becoming.</h1>
+<p>The grabbable black point now rests on an off-white podium. Alongside the room, the ghost-student repository keeps the code we assume the learner brings and the changes that carry it into the next lesson.</p>
+<nav><a href="#museum">The museum</a><a href="#student">The ghost student</a><a href="#evidence">Evidence</a></nav>
+</header>
+<main>
+<section id="museum">
+<h2>The support stays. The point moves.</h2>
+<figure><a href="Point_Coordinates/coordinate-podium.png"><img src="Point_Coordinates/coordinate-podium.png" alt="The black grabbable point resting on its new off-white podium in the actual Point Coordinates hall."></a><figcaption>Actual museum capture. The podium’s top is 1.05 metres above the floor, meeting the existing sphere’s lower edge. The point keeps its original size and position.</figcaption></figure>
+<p>The podium uses the same plain finish as the three supports in Point One. It belongs to the stationary exhibit, so picking up the sphere leaves both the support and its label behind.</p>
+<figure><a href="Point_Coordinates/coordinate-hall.png"><img src="Point_Coordinates/coordinate-hall.png" alt="Point Coordinates with its grabbable point and podium in the foreground, and the coordinate frame, floor-level basin and local/world displays beyond."></a><figcaption>Actual museum capture. The basin, axes and two coordinate displays remain in place. Both displays continue following the same grabbable point.</figcaption></figure>
+</section>
+<section id="student" class="rule">
+<h2>The ghost student has files.</h2>
+<figure><a href="http://localhost:3003/ghost-student?state=Point_Coordinates"><img src="ghost-student.jpg" alt="The Ghost Student repository in Ada Encyclopedia, showing the continuing point, its saved files and the historical evidence status."></a><figcaption>The working Encyclopedia page. Code, exact changes, evidence and a short brief are separate views of the same saved state.</figcaption></figure>
+<p><a href="http://localhost:3003/ghost-student">Open the ghost-student repository</a> to inspect the assumed learner code, the changes between lessons, the evidence and the short brief. It begins with Point One’s assumed incoming code and the continued code that makes the point pickable in Coordinates.</p>
+<p>The repository records a pedagogical assumption. The Point One starting file was assembled from the lesson and source; it is not a record of a real student completing that lesson. The continuation keeps the object’s construction and shows the changes needed for its next capability.</p>
+<p>Lines, Trace and Grid are planned continuations. Their learner programs have not yet been assembled or verified in this chain.</p>
+<div class="note"><strong>Evidence carries a date and a source.</strong> The <a href="../2026-10-05-lesson-state-chain/index.html">earlier continuation pilot</a> retains its 62-check result. The museum’s <code>point_condition.gd</code> has changed since that run, so the interface marks that evidence stale against the current source. The recorded run remains available; it does not certify today’s source.</div>
+</section>
+<section id="evidence" class="rule">
+<h2>26 museum checks passed</h2>
+<p>The test loads the real Point Coordinates hall and exercises the actual XR Tools pickup implementation through a synthetic controller.</p>
+<ul>
+<li>The podium supplies physical support and leaves a supported approach.</li>
+<li>The near-grab detector selects the sphere, which follows the controller.</li>
+<li>The podium and its label remain fixed during pickup and release.</li>
+<li>The released point stays where it was left; both coordinate displays report its moved position.</li>
+</ul>
+<p><a href="Point_Coordinates/report.json">Recorded checks</a> · <a href="Point_Coordinates/dependencies.json">Source hashes</a> · <a href="Point_Coordinates/engine.log">Engine log</a></p>
+<p class="small">Source hashes were stable during the run. This is a native museum and library check, not a physical headset test or evidence of student understanding. The engine reported existing resource/rendering warnings and no script errors.</p>
+<p class="small">The Encyclopedia repository passes seven backend tests and a TypeScript check scoped to the new feature. Browser checks covered state navigation, the changes, evidence and brief tabs, opening the repository guide, copying code and restoring the selected state from its URL.</p>
+</section>
+<section>
+<h2>A small scene change</h2>
+<p><a href="../../../../commons/primitives/point/point_held.gd"><code>point_held.gd</code></a> extends the existing point constructor and adds the stationary support. <a href="../../../../commons/primitives/point/point_held.tscn"><code>point_held.tscn</code></a> selects that script. The earlier scene is preserved in the <a href="before/commons/primitives/point/point_held.tscn">before snapshot</a>.</p>
+<p class="small">This pass changes the museum support and makes the learner-state record inspectable. It does not rewrite the tutorial or reflective text.</p>
+</section>
+<footer>Point One → Point Coordinates. The code continues; the support remains in the room.</footer>
+</main>
+</body>
+</html>

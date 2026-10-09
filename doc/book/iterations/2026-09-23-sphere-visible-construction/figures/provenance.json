@@ -1,0 +1,130 @@
+{
+  "source_files": {
+    "commons/artifacts/triangle_construction_plate/triangle_construction_plate.gd": "475cd8d3da252ab0d1a51958fb591e05559136d747341c981c73dcb4b6572762",
+    "commons/font/static/Roboto-Regular.ttf": "dbd285b518e398832f6f4a736109c355ce25a49546bfce41bab256c9ef7e56eb",
+    "commons/font/static/Roboto-Light.ttf": "4b2e824beab63c438c2849bd6e1d4f6708cba5a5c5f3dbe8d5af7e9682ed9373",
+    "commons/font/JetBrainsMono-Medium.ttf": "31c92d01a8a08528b718a43addf0ad3df0af2ca4b7b3290a452f70f358e14d3d",
+    "commons/primitives/shared/grid_material_factory.gd": "03f18dcdd890abe6735cf469da48d197bd1df2ab4bd8871f2911bee89337e98b",
+    "commons/primitives/shared/mesh_inspection.gd": "2b639d7e070cc48bd930f5f5c12aef94ea2fc84c7fd7790df6b87bc1450e6fe0",
+    "commons/resourses/shaders/SimpleGrid.gdshader": "12475b96ee735d3b1e4c37593a54cf6f9ed78f5c6a527940183112379c6f7b5d",
+    "commons/resourses/shaders/ParametricGrid.gdshader": "ca860664776300542810feae23e30d1b16ae0f2ab2f372d872b312fdc6713812",
+    "tools/captures/sphere_resolution_layout.gd": "b5b6b9b39268998fe43995128a2f160f174d5ad7f8151b77b91da59534173b93",
+    "tools/captures/sphere_resolution_study.gd": "4494ad172c4529b7f285e46599d778147507ca942fb04d680a77791e3e3eb162",
+    "commons/primitives/godotmeshes/sphere_high.gd": "1446e592f59e7cb947b9361764cb5f0cb8927919a370413b57bf0fa1cc5457ed",
+    "commons/primitives/godotmeshes/sphere_high.tscn": "34548323056ef4b6c50f1a198d892ff48143489da5fb7a3dce31d698a01f20c5",
+    "commons/primitives/godotmeshes/sphere_mid.gd": "fc91b58fb7399d62875c4e826e95a1ca891146b3c2711810d90f261f9bd969f7",
+    "commons/primitives/godotmeshes/sphere_mid.tscn": "2e5d9301d0983987fb35966735e8680e9ba51bd0861c488fcf5420c29d47c123",
+    "commons/primitives/godotmeshes/sphere_low.gd": "fb421b72c10cec0e76cad1e99dff95d9ddbcb1b6ac7157f3fc3ce2a0de6d7b7d",
+    "commons/primitives/godotmeshes/sphere_low.tscn": "0db19b08f94be73cec61391019cfd08c42b1826438747cdace9cc6160d221d76",
+    "commons/maps/Primitives_Ignorance/map_data.json": "41100bba1dcd2999d9512ef1736a58ad3462e3f4d581f790ace23b0de6f998ce",
+    "commons/artifacts/registry/primitives.json": "515cd8ff40b6f7efb6dad1ebe8446fa7c1f1ec1287a1c2c9041c65a0db9a7e1d"
+  },
+  "godot": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe",
+  "isolated_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-sphere-comparison-dl92kp96",
+  "same_artifact_scenes_and_configs_as_museum": true,
+  "layout": "Six existing artifacts arranged for equal-scale orthographic comparison. No new museum artifact.",
+  "placements": [
+    {
+      "token": "sphere_high",
+      "scene": "res://commons/primitives/godotmeshes/sphere_high.tscn",
+      "configs": [
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "1"
+        },
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "0"
+        }
+      ],
+      "placements": [
+        {
+          "cell": [
+            3,
+            11
+          ],
+          "token": "sphere_high:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:1"
+        },
+        {
+          "cell": [
+            5,
+            11
+          ],
+          "token": "sphere_high:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:0"
+        }
+      ]
+    },
+    {
+      "token": "sphere_mid",
+      "scene": "res://commons/primitives/godotmeshes/sphere_mid.tscn",
+      "configs": [
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "1"
+        },
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "0"
+        }
+      ],
+      "placements": [
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "token": "sphere_mid:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:1"
+        },
+        {
+          "cell": [
+            5,
+            13
+          ],
+          "token": "sphere_mid:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:0"
+        }
+      ]
+    },
+    {
+      "token": "sphere_low",
+      "scene": "res://commons/primitives/godotmeshes/sphere_low.tscn",
+      "configs": [
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "1"
+        },
+        {
+          "plinth": "0.10",
+          "offset": "0.00,0.60,0.00",
+          "inspection": "1",
+          "inspection_edges": "0"
+        }
+      ],
+      "placements": [
+        {
+          "cell": [
+            3,
+            15
+          ],
+          "token": "sphere_low:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:1"
+        },
+        {
+          "cell": [
+            5,
+            15
+          ],
+          "token": "sphere_low:0:0#plinth:0.10#offset:0.00,0.60,0.00#inspection:1#inspection_edges:0"
+        }
+      ]
+    }
+  ]
+}

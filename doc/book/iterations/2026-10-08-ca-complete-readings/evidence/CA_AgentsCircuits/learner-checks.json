@@ -1,0 +1,123 @@
+{
+  "checks": [
+    {
+      "name": "Boolean inequality matches all eight installed Rule90 cases",
+      "passed": true
+    },
+    {
+      "name": "Single seed yields two separated neighbours and preserves old row",
+      "passed": true
+    },
+    {
+      "name": "Periodic edge gives neighbours 31 and 1",
+      "passed": true
+    },
+    {
+      "name": "Three alternate seeds cancel shared neighbours",
+      "passed": true
+    },
+    {
+      "name": "240 mixed-start updates match the general installed evaluator",
+      "passed": true
+    },
+    {
+      "name": "Single-seed generation15 has sixteen cells; generation16 is empty",
+      "passed": true
+    },
+    {
+      "name": "An empty row stays empty",
+      "passed": true
+    },
+    {
+      "name": "Depth0 through4 positions exactly match production recursion",
+      "passed": true
+    },
+    {
+      "name": "Recipe returns one entry per leaf call: six to each depth",
+      "passed": true
+    },
+    {
+      "name": "One copy level includes extra crown and four lower corners",
+      "passed": true
+    },
+    {
+      "name": "Replacing XOR with OR fails shared-neighbour cancellation",
+      "passed": true
+    },
+    {
+      "name": "Writing into old row fails single-seed answer",
+      "passed": true
+    },
+    {
+      "name": "Complete printed construction has history, point, readout and216 cube instances",
+      "passed": true
+    },
+    {
+      "name": "Every stored row remains its own answer",
+      "passed": true
+    },
+    {
+      "name": "Recorded rows occupy fixed places; future rows have zero scale",
+      "passed": true
+    },
+    {
+      "name": "Spatial columns and temporal rows have distinct axes",
+      "passed": true
+    },
+    {
+      "name": "Native table supports both occupied and empty drawn cells",
+      "passed": true
+    },
+    {
+      "name": "Changing seed resets history and builds the adjacent-pair answer",
+      "passed": true
+    },
+    {
+      "name": "Seed and clock operations leave every cube transform untouched",
+      "passed": true
+    },
+    {
+      "name": "Printed independent seed edit yields only13 and19 withsame216positions",
+      "passed": true
+    },
+    {
+      "name": "Replay retains the student's edited seed",
+      "passed": true
+    },
+    {
+      "name": "Held world position selects local address15 in rotated study",
+      "passed": true
+    },
+    {
+      "name": "Inspection predicts next1 without editing seed or time",
+      "passed": true
+    },
+    {
+      "name": "Held trigger appends exactly one Rule90 generation",
+      "passed": true
+    },
+    {
+      "name": "Inspector clamps beyond rail to last address",
+      "passed": true
+    },
+    {
+      "name": "Release parks at selected address without stepping",
+      "passed": true
+    },
+    {
+      "name": "Enter steps once and ignores key repeat",
+      "passed": true
+    },
+    {
+      "name": "C chooses pair; R retains it while replaying",
+      "passed": true
+    },
+    {
+      "name": "Learner display holds at24rows without losing beginning",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed scripts; allRule90cases,240mixedupdates; actualpyramidrecursionrecorded atdepth0..4; nativegeometry/collision; suppliedXRToolspose; independentseededit andtwofaults. No physical headset or independent student."
+}

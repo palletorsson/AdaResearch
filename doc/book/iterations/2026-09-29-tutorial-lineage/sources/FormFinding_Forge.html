@@ -1,0 +1,141 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FormFinding_Forge · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=FormFinding_Forge">← Tutorial lineage</a></p><h1>FormFinding Forge</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="FormFinding_Forge/final.md">Raw captured source</a></p><pre># A shape that counts
+
+Who decides when a shape has settled well enough?
+
+&lt;!-- @balance_puzzle --&gt;
+
+Arrange the loose pieces into a stack, then let go. Watch the height and stability display. If the pieces fall into a quiet heap, compare that stillness with a taller arrangement that holds. Both can stop moving, but the puzzle does not treat them as the same result.
+
+Its recognition asks for height as well as a period of sufficiently small movement. A low heap can therefore be stable and still fail its test. When a raised arrangement meets both conditions, the transformation animation begins. The animation acknowledges the detector&#x27;s decision; it does not establish that the arrangement has become biologically alive.
+
+Try another construction before accepting the first as the answer. The pieces and their contacts constrain what can stand, while the height condition selects which standing forms will count. That second choice belongs to the task&#x27;s author as much as to gravity.
+
+Remember the fixed columns in Colour, where a saved composition could hold its shape without balancing. Here, letting go gives the arrangement another test. A description can tell a builder where to put each part; it cannot, by itself, tell us whether those parts will hold each other up. We have to supply the contacts and forces, then see what happens.
+
+&lt;!-- @self_shaping_forge --&gt;
+
+The small glass forge gathers a cloud into something with a head, a torso and two limbs. One hundred and eighty points drift into place while a bar rises and the display announces MAX Q. Stay through another cycle. The body loosens, then returns. What makes its arrival convincing?
+
+![The forge gathers a small body of green points inside the museum](/book-review/doc/book/figures/formfinding/forge-body-museum.png)
+
+*The display reaches MAX Q as the points arrive at their authored destinations.*
+
+The destination was written before the journey began. The points move toward an arrangement chosen by the maker; the bar and percentage follow a clock, reaching their maximum about every eight seconds. They do not measure how well the parts have learned to hold one another. Here, becoming a body means approaching one particular picture of a body.
+
+The gathering can still be beautiful. Its beauty need not settle the question on the banner: has the matter found a shape, or have we recognised the shape it was sent toward? Carry that distinction to the moving point nearby.
+
+&lt;!-- @gradient_descent_optimizer --&gt;
+
+At the neighbouring optimiser, follow the point and its trail across the coloured surface. The energy readout and step count give you something to compare with its motion. Look for the slowing approach to a resting region and the later start from a different position.
+
+Choose a short section of the optimiser&#x27;s trail and compare its beginning with its end. Follow the energy readout while new steps appear, then notice whether the path changes direction or simply continues straight. A curved path can arise because the direction of descent changes from place to place. When the demonstration begins from another position, choose a second section rather than assuming it must retrace the first. Compare the approaches to a low region, leaving the question of the final destination open. This gives you two histories to explain, instead of treating the resting point as the only part of the calculation that matters.
+
+Here a numerical rule estimates the local slope in two directions and takes a small step downhill. It repeats that operation, retaining a short record of previous positions. The surface supplies the quantity being reduced. After more than thirty steps, the demonstration starts again when the sampled slope is below 0.002, or when the frame edge permits a step smaller than 0.002 times the learning rate. That second ending is marked BOUNDARY: a limit on the permitted move, not a claim that the surface is flat. A small local slope is not proof that the point has found the best possible place on every landscape.
+
+&lt;!-- @ --&gt;
+
+Build a low arrangement that you find useful and the puzzle refuses. Describe its usefulness without pretending it passed. This is a precise way to question a success criterion: retain the physical result and change what you ask it to mean.
+
+Look back through the forms we have met. A cable followed the hand that drew it. A formula supplied a curve; repeated corrections left a vessel. The mobile&#x27;s balance was calculated before it appeared. A search was allowed to get worse, while the forge already knew which body it would become. Similar-looking arrivals can conceal very different freedoms. The low stack you made can stand among them even when the display refuses to recognise it.
+
+The next sequence begins with oscillation. A form can persist through returning motion as well as through rest; settling is only one way for a system to continue.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="FormFinding_Forge/tutorial.md">Raw captured source</a></p><pre># Form-Finding: Forge
+
+Shape your own — by arranging the landscape, not the form. Before it, everything this chapter has built: a cost, a slope, a body willing to fall.
+
+Write the cost you want matter to fall down.
+
+```gdscript
+@export var amp: float = 0.13
+
+func _energy(x: float, z: float) -&gt; float:
+    var bowl: float = (x * x + z * z) * 0.5
+    var wrinkle: float = sin(x * 7.0) * 0.18 + cos(z * 6.0) * 0.16
+    return amp * (bowl + wrinkle)
+```
+
+A clear global basin with local minima cut into its walls. This is the only authorship left to you: set the landscape, then stop.
+
+Take the gradient and step.
+
+```gdscript
+@export var learning_rate: float = 0.06
+
+func _grad(x: float, z: float) -&gt; Vector2:
+    var e: float = 0.012
+    var gx: float = (_energy(x + e, z) - _energy(x - e, z)) / (2.0 * e)
+    var gz: float = (_energy(x, z + e) - _energy(x, z - e)) / (2.0 * e)
+    return Vector2(gx, gz)
+
+_p -= _grad(_p.x, _p.y) * learning_rate
+```
+
+The same three lines as the first map&#x27;s marble: two samples, a subtraction, a step against the result. The readout beside it prints the step count and the energy falling — settling a soft body and training a model are one algorithm on two landscapes.
+
+Restart once the slope dies.
+
+```gdscript
+if _grad(_p.x, _p.y).length() &lt; 0.002 and _step &gt; 30:
+    _p = Vector2(_rng.randf_range(-span * 0.4, span * 0.4), _rng.randf_range(-span * 0.4, span * 0.4))
+    _step = 0
+    _trail.clear()
+```
+
+Converged is not solved. A fresh start on a different slope is the cheapest way to find out whether the basin you reached was the only one.
+
+Name the form you are descending toward.
+
+```gdscript
+var parts := [
+    { &quot;c&quot;: Vector3(0.0, 0.0, 0.0), &quot;r&quot;: 0.16, &quot;w&quot;: 80 },     # torso
+    { &quot;c&quot;: Vector3(0.0, 0.20, 0.04), &quot;r&quot;: 0.10, &quot;w&quot;: 45 },   # head
+    { &quot;c&quot;: Vector3(-0.18, -0.06, 0.0), &quot;r&quot;: 0.07, &quot;w&quot;: 28 }, # limbs
+    { &quot;c&quot;: Vector3(0.18, -0.06, 0.0), &quot;r&quot;: 0.07, &quot;w&quot;: 27 },
+]
+```
+
+180 particles across four blobs, and a readout that says only &quot;settling&quot; or &quot;MAX Q&quot;. The forge does not press this shape onto the matter. It is where the matter ends up.
+
+Carry the cloud toward it, and freeze the jitter as you go.
+
+```gdscript
+var jit := Vector3(
+    sin(_t * 2.0 + float(i) * 0.9),
+    cos(_t * 1.6 + float(i) * 0.6),
+    sin(_t * 2.3 + float(i) * 1.4),
+) * 0.035 * (1.0 - q)
+var p: Vector3 = raw.lerp(target, q) + jit
+```
+
+The jitter is the last map&#x27;s temperature, scaled by `1.0 - q` — loud while Q is low, gone by the time Q is high. Annealing and arrival are one motion seen from two ends.
+
+Prove it with your hands: stack until nothing moves.
+
+```gdscript
+var all_stable: bool = true
+for piece in _pieces:
+    if piece is RigidBody3D:
+        if piece.linear_velocity.length() &gt; stability_velocity_threshold \
+                or piece.angular_velocity.length() &gt; stability_velocity_threshold * 2:
+            all_stable = false
+            break
+```
+
+Threshold 0.05 m/s, twice that in radians. The win condition is not a shape matched against a template. It is a configuration that has stopped arguing.
+
+Make the stillness cost something to hold.
+
+```gdscript
+if all_stable:
+    _stability_timer += delta
+    if _stability_timer &gt;= stability_time:
+        _trigger_transformation()
+else:
+    _stability_timer = maxf(0, _stability_timer - delta * 2)  # Decay faster than gain
+```
+
+One wobble costs two. Rest has to be held for 1.5 seconds, not touched once.
+
+You can now write a landscape, descend it, watch a cloud fall into a coherent body as its temperature drains away, and win by making a system stop rather than making it obey. You carved none of these forms. You arranged the conditions and let them fall. The next sequence, wavefunctions, takes the same minimisation into a space where the resting state is a standing wave.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="FormFinding_Forge/blurb.md">Raw captured source</a></p><pre>Now shape your own. Feed raw matter into the forge and watch it descend an energy landscape toward its liveliest form, then emerge. Prove you have the principle by reaching a minimum with your own hands: stack the pieces until the whole system stops moving. When it goes still, you have solved it — the resting shape is the answer, and you found it the way nature does, by letting it fall.
+</pre></section></body></html>

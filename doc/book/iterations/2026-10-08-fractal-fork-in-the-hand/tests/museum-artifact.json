@@ -1,0 +1,103 @@
+{
+  "checks": [
+    {
+      "name": "Current museum fixture installs a reachable hand model",
+      "passed": true
+    },
+    {
+      "name": "Opening trunk waits and point colliders are disabled",
+      "passed": true
+    },
+    {
+      "name": "Generation has 3 connected segments",
+      "passed": true
+    },
+    {
+      "name": "Generation has 7 connected segments",
+      "passed": true
+    },
+    {
+      "name": "Generation has 15 connected segments",
+      "passed": true
+    },
+    {
+      "name": "Generation has 31 connected segments",
+      "passed": true
+    },
+    {
+      "name": "Fifth generation request stays within 31",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools grab owns the rose point",
+      "passed": true
+    },
+    {
+      "name": "Whole-tree controls defer while a point is held",
+      "passed": true
+    },
+    {
+      "name": "Hand changes the selected first direction under rotated root",
+      "passed": true
+    },
+    {
+      "name": "Sibling first branch is unchanged",
+      "passed": true
+    },
+    {
+      "name": "Only the chosen subtree inherits the turn",
+      "passed": true
+    },
+    {
+      "name": "Turning keeps lengths, count and every attachment",
+      "passed": true
+    },
+    {
+      "name": "Pose edits reuse miniature meshes and canopy collision shapes",
+      "passed": true
+    },
+    {
+      "name": "Large and small receivers share the current source pose",
+      "passed": true
+    },
+    {
+      "name": "Extreme downward input reaches the 65 degree bound",
+      "passed": true
+    },
+    {
+      "name": "Release parks the point at the represented branch tip",
+      "passed": true
+    },
+    {
+      "name": "Desktop pickup announces the same held state",
+      "passed": true
+    },
+    {
+      "name": "Desktop edit also reaches the branch",
+      "passed": true
+    },
+    {
+      "name": "Desktop release parks the point",
+      "passed": true
+    },
+    {
+      "name": "Growth after a local turn starts at the moved pending tips",
+      "passed": true
+    },
+    {
+      "name": "Reset replays the original deterministic tree",
+      "passed": true
+    },
+    {
+      "name": "Existing ternary comparison still has 121 segments",
+      "passed": true
+    },
+    {
+      "name": "Zero direction is rejected without corrupting geometry",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Actual XRTools grab driver with supplied controller poses, desktop pickup hooks, production tree and both receivers. Physical headset feel untested."
+}

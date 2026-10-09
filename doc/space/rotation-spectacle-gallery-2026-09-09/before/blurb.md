@@ -1,0 +1,1 @@
+Two corridors converge on a carousel. Layers spin at different speeds, different directions - a wedding cake of rotations. The boolean tunnel carves passage through solid form. Rotation here becomes spectacle, the mesmerizing cycle of perpetual return. Watch the layers turn and forget which way you were going.

@@ -1,0 +1,260 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VFM_03_Motion · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=VFM_03_Motion">← Tutorial lineage</a></p><h1>VFM 03 Motion</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="VFM_03_Motion/final.md">Raw captured source</a></p><pre># When the push ends
+
+&lt;!-- @VectorMotion --&gt;
+
+Step between the two control banks. The cube waits beyond them, held a metre above the grid. Press **PUSH X** once, then leave the controls alone.
+
+The command lasts one second. The cube keeps going.
+
+There is time to look back at the button. It has finished its small contribution. Something of that contribution is still crossing the room.
+
+That is the first of Newton&#x27;s laws, and the opposite of what was taught for two thousand years before him: nothing is needed to keep a body going. What is needed is a force to change it.[^newton]
+
+**COAST** does not stop it. **BRAKE** slows it. Two controls that might sound like ways of ending movement have asked different things of the body.
+
+Reset and begin again. This time, press COAST before the push has finished. The cube leaves with less speed. Cutting the command short changes how much motion it acquires; it does not take back what has already accumulated.
+
+In Launch we watched a position calculated from an initial velocity and elapsed time. Here the body keeps its current velocity in the physics engine. Each new influence meets that state. The apparatus does not supply a complete curve in advance.
+
+With **PARTS** visible, cyan gives velocity and amber gives the force requested by the controls. When the pulse ends, amber disappears. Cyan remains.
+
+## What the body brings
+
+The opening cube has a mass of one kilogram. The push requests two newtons for one second. Before a boundary intervenes, its velocity changes by about two metres per second. Acceleration equals force divided by mass; it changes velocity for as long as it acts. That is the second law, as a division.
+
+**MASS** resets the run and lets us try the same pulse with two kilograms. The velocity change is halved. The cube looks the same size. A property that matters to its response was not something its silhouette could tell us.
+
+Return to one kilogram. Let PUSH X finish, then **PUSH F**. The new command points forward. The cube travels sideways as well as forward, because the second contribution meets a velocity already there. The latest instruction does not contain the whole movement.
+
+During each physics update, the source hands the requested force to the engine:
+
+```gdscript
+body.apply_central_force(global_basis * local_force)
+```
+
+The multiplication turns the room&#x27;s local direction into a world direction. The engine integrates the response. This call neither sets a destination nor replaces velocity with the new arrow.
+
+BRAKE also applies a force, directed against the current velocity. It weakens near rest to avoid sending the cube back the other way. Without that weakening, one step of braking could carry a slow cube through rest and out the other side, and it would set off backwards under a force that only ever opposed its motion. A resistance cannot do that; a step can. The spring hall will meet the same step from the other side. Stopping takes an intervention and time. **RESET** can erase the velocity immediately because resetting an experiment has been granted a different power.
+
+With **DRAG** enabled, COAST leaves the cube slowing. The command has ended, but the damping has not. With DRAG off, this chamber removes gravity and linear damping. Continued movement becomes available under those particular conditions.
+
+## A boundary for one body
+
+At the amber perimeter the cube rebounds. We can walk across that same line.
+
+The boundary recognises a collision layer to which the cube belongs. Our body and the control furniture are excluded. We appear to share a room, while its rules give us different possible encounters. For the cube, the line is a limit. For us, it can be a place to stand and watch.
+
+The cube also keeps its height and cannot turn. These are locks, not achievements of balance. A three-dimensional body has been admitted to a horizontal experiment. Release a lock and another movement becomes possible; the controls here leave those locks in place.
+
+Pink shows acceleration measured from successive velocities. At a rebound it may jump while the command reads zero. The boundary has acted through collision response. The force we requested is only one contributor to the change we observe.
+
+**TRAIL** retains the latest 120 position samples. Follow the cube long enough and the beginning leaves the drawing. Its velocity can still carry a contribution whose trace has already been discarded.
+
+The run has room for a recent history. It has not kept everything that made the present.
+
+&lt;!-- @friction_ramp --&gt;
+
+## Before the slide
+
+Farther into the hall, a much smaller block waits on a ramp. At thirty degrees, change **μ**, the friction coefficient, until STATIC becomes SLIDING. Reset and approach that boundary again, more slowly.
+
+Now keep μ fixed and change **ANGLE**. Another adjustment can reach the beginning of movement.
+
+Just before it starts, look at the arrows. Stillness has not emptied the block of influences. Gravity pulls partly down the incline and partly into its surface. Support answers the inward component; friction can answer the downhill component, up to the bound selected here.
+
+The model tests:
+
+```gdscript
+sin(angle_rad) &gt; friction_mu * cos(angle_rad)
+```
+
+On one side it holds the block still. On the other it accumulates downhill velocity. The comparison sets the downhill component against the maximum friction supplied by this model. A continuous adjustment has crossed a condition that permits another behaviour.
+
+Let it slide and watch the speed increase. At the bottom it returns automatically, ready for another run. Friction has not thrown it uphill.
+
+There is another abrupt return inside the rule. Raise resistance into STATIC while the block is moving: the program sets its velocity to zero at once. Compare that cut with the large cube&#x27;s gradual braking.
+
+This small ramp exposes a threshold while abbreviating the motion around it. One coefficient serves both starting and sliding, and the displayed travel is slowed to fit the exhibit. What could we discover if starting friction and sliding friction differed? If a new condition had to meet the movement already under way?
+
+&lt;!-- @ --&gt;
+
+Ahead, the influences will depend on where the body arrives. A field waits across the room; a moving body reaches each part with a velocity of its own.
+
+[^newton]: Isaac Newton, *Philosophiae Naturalis Principia Mathematica* (1687), the three laws of motion. The rule it replaced is Aristotle&#x27;s, in the *Physics*: a body in forced motion stops when the force stops. The third law is switched off, and back on, two halls ahead in Gravity.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="VFM_03_Motion/tutorial.md">Raw captured source</a></p><pre># Motion: a command meets a stored velocity
+
+The two primary encounters are `VectorMotion` (this map&#x27;s `motion_chamber` variant), then `friction_ramp`. Begin with the observable comparisons in final.md; use this page to inspect the mechanisms afterward.
+
+## The chamber
+
+Stand between the control banks. PUSH X and PUSH F each request a 2 N force for one second, in local +X or local -Z. A new push replaces the previous command and restarts its duration. COAST cancels commanded force and braking while preserving velocity. BRAKE applies force opposite the current velocity, capped at 2 N; a smaller final step avoids deliberately accelerating past rest. RESET clears position, velocity, local clock and history. MASS cycles 1/2/4 kg and resets the run. Neither reset changes the selected damping or reveal switches.
+
+A `RigidBody3D` integrates motion. There is no manual position update during ordinary motion. Force is converted from the chamber frame to the world frame:
+
+```gdscript
+body.apply_central_force(global_basis * local_force)
+```
+
+For a constant force away from contacts, the useful prediction is delta_v = force / mass * duration. At 1 kg the full 2 N pulse gives about 2 m/s; at 2 kg about 1 m/s. PUSH F after PUSH X adds a perpendicular velocity component. It does not erase the earlier one.
+
+The body has zero gravity, explicit replacement damping, locked height and rotation, no sleeping and continuous collision detection. DRAG toggles linear damping between 0 and 0.8. COAST does not disable damping. The cube and four static boundaries share only collision bit 19; the visitor and furniture are excluded. Boundary materials produce an elastic reflection under the tested desktop solver. This is a selected horizontal collision world, not the museum&#x27;s complete contact world.
+
+PARTS reveals three reused arrow rigs: velocity (0.35 m per m/s), measured acceleration (0.2 m per m/s squared), commanded force (0.3 m per N). All cap at 2.5 m. Measured acceleration is the change in solver velocity divided by the physics interval. It can include contacts and damping absent from commanded force. The readout updates at 10 Hz, so brief contact peaks are not a complete force record.
+
+TRAIL displays at most 120 position samples at nominally 10 Hz. It records even while hidden and discards the oldest sample when full. The geometry rebuilds only on sampling; arrow nodes are reused. The running time belongs to this resettable experiment, not the engine&#x27;s total lifetime.
+
+## The smaller friction ramp
+
+At 30 degrees, vary the coefficient mu; then hold mu fixed and vary angle. Reset between comparisons of descent. The custom scalar model tests:
+
+```gdscript
+_is_sliding = sin(angle_rad) &gt; friction_mu * cos(angle_rad)
+```
+
+When sliding, acceleration is `G * (sin(angle_rad) - friction_mu * cos(angle_rad))`. Velocity accumulates acceleration times delta. Displayed travel accumulates velocity times delta times 0.01, and reaching the end resets the block. The STATIC branch immediately sets velocity to zero. One coefficient serves the model&#x27;s starting and sliding conditions. Do not treat that discontinuous reset as the large chamber&#x27;s braking response or the display distance as an unscaled physical measurement.
+
+The map opts into a physical stand via `#table:1`. Its placement offset is 0.1 m above the museum&#x27;s 1 m support; the panel is at world height 1.06 m. Other ramp placements are unchanged.
+
+## Red thread and evidence
+
+Launch calculated a complete flight from its initial conditions. Motion keeps a current state for the next intervention. `Vectors_Act3_FieldsAndMotion` follows: inspect whether its spatial instructions prescribe velocity or change it through acceleration before calling them forces.
+
+34 desktop checks pass in `commons/testing/probe_motion_chamber.gd`: real pointer presses, pulse/mass/coast/brake/drag/contact response, bounded history, stable arrow allocation, sampled approaches, control heights, ramp threshold and legacy compact scene. Headset reach, comfort and performance remain untested. All 17 source artifact identities remain; two are primary.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows the encounter. Exact control steps, arrow scales, timing, bounded histories and reset rules remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-launch-and-motion/before/commons/maps/VFM_03_Motion/final.md) is retained for comparison. This reading pass does not claim a new runtime or headset test.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="VFM_03_Motion/intent.md">Raw captured source</a></p><pre>A full-scale horizontal motion chamber opens the hall. The visitor stands between two inward-facing control banks, testing a finite push, coasting, braking, perpendicular force and mass before revealing measured state. Farther in, the existing friction ramp sits on a reachable stand and exposes the boundary between static and sliding, including its simplified velocity reset. Primary order: VectorMotion, friction_ramp. All 17 artifact identities remain. Next: Vectors_Act3_FieldsAndMotion, where the next influence may depend on position. Headset review deferred.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="VFM_03_Motion/critical.md">Raw captured source</a></p><pre># A boundary can recognise one body
+
+The first anomaly is a command that has ended while its effect keeps crossing the room. COAST clears a request; BRAKE spends time changing a velocity. RESET alone has permission to erase that state immediately. Ask the visitor to compare those operations before treating them as synonyms for stopping.
+
+This is an inquiry into which bodies a model permits. The cube and visitor occupy one visible room, but an amber perimeter reverses only the cube. A collision mask decides which encounters exist. Height and rotation locks keep this body in a horizontal model. Mass changes its response without changing its silhouette. The engine&#x27;s exclusions are inspectable construction choices.
+
+The claim is methodological: simulation lets us vary a rule and observe the forms of movement it permits. The mask is not evidence that human difference is reducible to a bit field. It gives a concrete place to ask who or what an arrangement recognises, and what another arrangement might make possible. The visitor can cross the line precisely because this apparatus has assigned the two bodies different relations to it.
+
+The trace gives another limit. It retains 120 samples while velocity carries the current result of earlier influences. Once old samples leave the drawing, the stored state is insufficient to reconstruct every event that produced it. The chapter can make that loss discoverable without claiming that the body remembers its full past.
+
+The ramp offers a sharper cut. Continuous changes in angle or friction cross a conditional, permitting or withholding sliding. Yet the STATIC branch also zeros existing velocity immediately. That is a programmed abbreviation, exposed beside a chamber that brakes through force over time. We can value the threshold demonstration and still ask for a richer account of the transition.
+
+No entropy measure is computed here. The concrete questions are about retained state, eligibility for contact, temporal resolution and the rules granting a body movement. These are useful footholds for the later investigation of fields and possible forms of existence.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="VFM_03_Motion/artifacts.md">Raw captured source</a></p><pre># VFM 03 Motion — Artifacts
+*Vectors &amp; Forces: From Direction to Dynamics · oscillation · 17 artifacts*
+
+&gt; Velocity, acceleration, and what forces do over time.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Book primaries
+
+1. `VectorMotion` — the map opts into the full-scale motion chamber, with central force controls and measured state.
+2. `friction_ramp` — angle and friction threshold on a standing-height plinth.
+
+The following catalogue preserves the supporting exhibits; catalogue membership does not imply book primacy.
+
+## Bouncing Ball
+![Bouncing Ball](/scene-catalog/bouncing_ball.png)
+
+SEE that the bounce coefficient controls how much chaos (energy) survives each collision
+
+`bouncing_ball`
+
+## Trajectory Artifact
+![Trajectory Artifact](/scene-catalog/trajectory_artifact.png)
+
+Placeable force-trajectory wrapper. Integrates the configured force system (Lorenz, three-body, double pendulum, etc.) and renders the resulting trails as a single MultiMesh of cylinder segments, colored start→end. Time becomes a spatial axis; chaos becomes sculptural.
+
+`trajectory_artifact`
+
+## VectorMotion
+![VectorMotion](/scene-catalog/VectorMotion.png)
+
+VectorMotion
+
+`VectorMotion`
+
+## ForceMagnitudeDemo
+![ForceMagnitudeDemo](/scene-catalog/ForceMagnitudeDemo.png)
+
+FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally
+
+`ForceMagnitudeDemo`
+
+## VectorForces
+![VectorForces](/scene-catalog/VectorForces.png)
+
+VectorForces
+
+`VectorForces`
+
+## 3D Bouncing Ball
+![3D Bouncing Ball](/scene-catalog/exercise_1_3_solution_3_d_bouncing_ball_vr.png)
+
+WATCH a bouncing ball as a clock that runs down — each bounce measures how much the universe forgot
+
+`exercise_1_3_solution_3_d_bouncing_ball_vr`
+
+## Accelerate and Decelerate
+![Accelerate and Decelerate](/scene-catalog/exercise_1_5_solution_accelerate_and_decelerate_vr.png)
+
+SEE that smooth deceleration emerges from scaling desired speed by distance — arrival is a feedback loop, not a decision
+
+`exercise_1_5_solution_accelerate_and_decelerate_vr`
+
+## example_2_5_fluid_resistance_vr
+![example_2_5_fluid_resistance_vr](/scene-catalog/example_2_5_fluid_resistance_vr.png)
+
+FEEL that drag is the medium&#x27;s memory of your velocity — the faster you move, the harder the world pushes back
+
+`example_2_5_fluid_resistance_vr`
+
+## Arbitrary Angular Motion
+![Arbitrary Angular Motion](/scene-catalog/example_3_2_forces_with_arbitrary_angular_motion_vr.png)
+
+SEE that rotation and translation are independent stories told by the same body
+
+`example_3_2_forces_with_arbitrary_angular_motion_vr`
+
+## Pointing in Direction of Motion
+![Pointing in Direction of Motion](/scene-catalog/example_3_3_pointing_in_the_direction_of_motion_vr.png)
+
+FEEL that heading is not chosen but inherited from motion — direction of motion IS orientation
+
+`example_3_3_pointing_in_the_direction_of_motion_vr`
+
+## Friction Ramp
+![Friction Ramp](/scene-catalog/friction_ramp.png)
+
+FEEL how friction coefficient controls the balance between motion and resistance on an inclined plane
+
+`friction_ramp`
+
+## Newton&#x27;s Cradle
+![Newton&#x27;s Cradle](/scene-catalog/newton_cradle.png)
+
+SEE that momentum transfers through a chain — the middle balls are messengers, not movers
+
+`newton_cradle`
+
+## Combined Forces Demo
+![Combined Forces Demo](/scene-catalog/combined_forces_demo.png)
+
+Vector addition as force combination — multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.
+
+`combined_forces_demo`
+
+## Flocking Controls
+![Flocking Controls](/scene-catalog/flocking_controls.png)
+
+Interactive boid flocking with VR sliders for separation, alignment, cohesion, speed, and perception radius. Highlights one boid with visible force vectors.
+
+`flocking_controls`
+
+## Collision Crasher
+![Collision Crasher](/scene-catalog/collision_crasher.png)
+
+Central body with 5 tethered physics blocks that bounce and collide with elastic collision math. Impulse vectors visible as arrows on impact. Momentum conservation made tangible.
+
+`collision_crasher`
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="VFM_03_Motion/blurb.md">Raw captured source</a></p><pre>Velocity, acceleration, and what forces do over time.
+</pre></section></body></html>

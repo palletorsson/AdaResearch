@@ -1,0 +1,295 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "check": "Seven declared halls"
+    },
+    {
+      "passed": true,
+      "check": "Declared order retained"
+    },
+    {
+      "passed": true,
+      "check": "Authored route matches declaration"
+    },
+    {
+      "passed": true,
+      "check": "Active book pearls follow route"
+    },
+    {
+      "passed": true,
+      "check": "Off-route book entries retained"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: seven halls in order"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: seven halls in order"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: consistent indices and totals"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: unrelated rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "Local and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived route matches"
+    },
+    {
+      "passed": true,
+      "check": "All artifact roles byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_PhysarumColony: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_FlowFields: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Boids_Algorithm: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: layers match dimensions"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: current encounter references"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: book hero is a placed primary"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: no replacement characters"
+    },
+    {
+      "passed": true,
+      "check": "commons/artifacts/registry/swarmintelligence.json: unrelated entries preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/artifacts/registry/algorithms_misc.json: unrelated entries preserved"
+    },
+    {
+      "passed": true,
+      "check": "model-checks.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "navigation.json: recorded runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Agent_Based_Modeling_ABM: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "Ant button detectors at reachable height"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Ant_Colony_Optimization: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Particle_Swarm_Optimization: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: museum primary instantiated"
+    },
+    {
+      "passed": true,
+      "check": "SwarmIntelligence_Swarm_Intelligence_Algorithms: tested approach or perimeter walk passes"
+    },
+    {
+      "passed": true,
+      "check": "Ecosystem exposes intervention record in museum"
+    },
+    {
+      "passed": true,
+      "check": "All frozen before-files still match their recorded hashes"
+    }
+  ],
+  "count": 72,
+  "failures": [],
+  "passed": true
+}

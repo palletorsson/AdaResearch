@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "support_polygon_lab": {
+      "lookup_name": "support_polygon_lab",
+      "name": "What Lets a Body Stand?",
+      "scene": "res://commons/artifacts/support_polygon_lab/support_polygon_lab.tscn",
+      "description": "Selectable finite support patches and an editable centre of mass; release a real rigid load under gravity, then compare a static support forecast with its measured tilt.",
+      "category": "physics",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": [
+        "forces",
+        "support",
+        "centre of mass",
+        "contact"
+      ],
+      "interactions": [
+        "FEET selects four, three, adjacent pair or diagonal pair of support pads",
+        "SHIFT selects a custom centre of mass before release",
+        "RELEASE enables rigid-body gravity and collisions",
+        "PARTS reveals support hull, mass projection and tilt",
+        "RESET returns the load to its held beginning"
+      ],
+      "qfep_connection": "Makes the assumptions of static support visible; a prescribed walking diagram is not evidence of dynamic balance."
+    }
+  }
+}

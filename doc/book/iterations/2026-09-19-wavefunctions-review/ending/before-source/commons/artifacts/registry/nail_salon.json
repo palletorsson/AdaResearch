@@ -1,0 +1,20 @@
+{
+  "id": "nail_salon",
+  "name": "Grand / Petit",
+  "artifacts": {
+    "nail_salon": {
+      "lookup_name": "nail_salon",
+      "name": "Grand / Petit — Nail Salon",
+      "scene": "res://commons/artifacts/nail_salon/nail_salon.tscn",
+      "description": "A 4.3 metre surreal hand and a petite 32 cm copy share nail and skin colours selected by the existing RGB controllers. A fine manicure table, polish bottles and velvet stools place the contrast at body scale.",
+      "category": "body",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [6, 6, 7],
+      "size_group": "large",
+      "tags": ["hand", "nails", "salon", "colour", "scale", "surreal"],
+      "interactions": ["Use nearby nail_color_controller and hand_color_controller to recolour both display hands"],
+      "qfep_connection": "One mesh and two material addresses support two scales of bodily appearance; the same colour becomes monumental and intimate."
+    }
+  }
+}

@@ -1,0 +1,480 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -931,11 +931,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Definition/final.md",
+-      "text_sha256": "449ee9880e7685f86ea4c66aad7df90a44d4cd065c7d94daf910589ed1600104",
++      "text_sha256": "a38185f6b49ae97663585972d8876ab1b06498470f5be8eec9933d9bf6d3d1c8",
+       "map_sha256": "9345ed71e5f76dbd341a4d6fef475d0a825518dedbc9ec6f94764952f2f4c411",
+       "learner_verified": false,
+       "verification_scope": "Fresh focused draw-stream/offset checks plus source and qualified historical evidence; no new full-hall or headset validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Definition/DECISIONS.md"
+     },
+     "Random_Entropy": {
+       "primary_tokens": [
+@@ -947,11 +947,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Entropy/final.md",
+-      "text_sha256": "c9616c6da7d990c61ad9837ec7a12bf53c7c5a01e238318a4391115de530c32d",
++      "text_sha256": "7ee078e1a76f9da1f2df98fc816578811b752cda1b8bc394dd5a6f3eab26bd8f",
+       "map_sha256": "9f817f4684abe19efbe024f1cfbe1e50235de31cdcd98e8a2f671291f84531bd",
+       "learner_verified": false,
+       "verification_scope": "Fresh exact categorical contrast-sample and sorting checks; retained spatial works source-reviewed. Secondary Jar display overclaims remain a development task.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Entropy/DECISIONS.md"
+     },
+     "Random_Remove": {
+       "primary_tokens": [
+@@ -962,8 +962,8 @@
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Remove/final.md",
+-      "text_sha256": "5156030db490bd18fbca0d421f33062f92994bf263dec19effb15908d4d4ea7e",
+-      "map_sha256": "16dbe8be62469f9cf9b55de47edd09b3d4c6b9193653743d9cca4d1a2fa98482",
++      "text_sha256": "6c1dabdc09f8564769826d5676e161ec39e4bf917f18a9f7bb59e625525c6de7",
++      "map_sha256": "49ba0ecea3891195af06fe5a87c686795be91713d46174f8f770db0a604998ad",
+       "learner_verified": false,
+       "pilot_action_id": "remove-bounded-candidates",
+       "runtime_check": {
+@@ -971,49 +971,54 @@
+         "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+       },
+       "verification_scope": "Current source and historical bench/arena evidence; no new full removal-floor crossing or headset validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Remove/DECISIONS.md"
+     },
+     "Randomness_10_PRINT_Algorithm": {
+       "primary_tokens": [
+-        "ten_print_maze_3d"
+-      ],
+-      "reason": "Follow binary marks into contours, then distinguish and repair their separate ant-navigation model.",
++        "ten_print",
++        "composition_stochastique",
++        "ten_print_structure"
++      ],
++      "reason": "Take one line of BASIC apart at its coin (205.5) and its semicolon, see the same stream laid on the floor, then walk into twelve of its characters stood up as solid walls to find whether they left a way through.",
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+-      "text_sha256": "259612018d5721a305e97399d9c5652c5db6917fe019651bca5774c8f4fd8535",
+-      "map_sha256": "0e379f864cf05ac6e6dc9e83775c4a6682a4979669d7ce64f21c994fd0ec2a77",
+-      "learner_verified": false,
+-      "verification_scope": "Fresh 34-check source/scene regression including rendered diagonal/raster agreement, replacement refresh and unchanged ant position. Original fails21 checks. Standalone Nature token remains deliberately ineligible.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "text_sha256": "80847f8b2c793f113fadf9b7f1791da0aeb55642f18e160281a480cc8cfc184b",
++      "map_sha256": "e7f0e4932e6e51b69f39db052dd832110d08bccf2f7d6f3c7150b44c63e4b889",
++      "learner_verified": false,
++      "verification_scope": "Two headless gates. probe_ten_print_hall.gd (11 checks): floor linked on channel hall, 0 of 122 floor cells disagree with the screen, console line reads the book's line, SEMICOLON removes ';' and collapses the floor to one column and back, BIAS moves the constant (205.1 -> 0.87 forward, 205.9 -> 0.07), default coin breathes (0.70 / 0.29 forward over characters 0-269 / 270-399), next-cell tile visible, floor has no collider, upright maze has no collider and stands in the Y-Z plane. probe_ten_print_walkable.gd (museum lane): the slab block is kept verbatim, 12 solid slabs 2.40 m, same 12 coin results as the printer, 8 regions 7 open 1 sealed, every open region has exactly two mouths (no forks; four V bays, two corners, one way through), a way through, wrap-width comparison (3, 4, 6, 12 to a row), no museum seal severance, entry to exit reachable on the museum's own walk cells, a 0.5 m capsule walks the way through. No headset walk.",
++      "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Randomness_10_PRINT_Algorithm"
+     },
+     "Random_Cubes": {
+       "primary_tokens": [
+-        "dice_throw"
+-      ],
+-      "reason": "Compare one settled physical-looking throw with a retained empirical record and its throwing conditions.",
++        "dice_throw",
++        "coin_toss",
++        "random_object_spawner",
++        "random_edge_profile"
++      ],
++      "reason": "Throw a die and a coin into two records that forget different things; walk through forty-eight bounded draws that show one rule in space.",
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Cubes/final.md",
+-      "text_sha256": "a7b9c7d24246a4be627e2e3dc74492aac82ea2b9d4a69ac2f38144775a48536f",
+-      "map_sha256": "4d7b2e05773064cd1bcffa7fac948b5dbba4184cd61f554d51f948b11fd0096c",
+-      "learner_verified": false,
+-      "verification_scope": "Source and restored route checked; no new empirical fairness, throwing, settlement or headset validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "text_sha256": "725d56d0bd902a237cdf80d298e7ba86fec2279505db96baa54fb2bf3857ce22",
++      "map_sha256": "b90c08efcc188867994a514aecc34bcd5900abeee7ea09208b521c1dd9412415",
++      "learner_verified": false,
++      "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw.",
++      "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Random_Cubes"
+     },
+     "Random_Rotate_Random_XYZ": {
+       "primary_tokens": [
+         "random_decay_multimesh"
+       ],
+-      "reason": "Inspect drift, rotation and darkening separately; pause and resume two complete stacks inside their hall.",
++      "reason": "Watch two stacks of one size turn under one rule at one rate, with drift, sinking and darkening switched off; name what still differs; restore the arrangement without replaying its future.",
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+-      "text_sha256": "4ab6e6a1681f6ad918c3f9d09914c2f4836c995f0d7e0e8edf1279a62dd34c6e",
+-      "map_sha256": "fdb8aa33404f84749f8155d212db196ceb7a9ec1b08ceff8b196ace8e791a6f8",
+-      "learner_verified": false,
+-      "verification_scope": "Fresh focused clock/fit checks and bounded actual-museum before/after placement. Older source-layer dimension mismatch remains. This does not certify later extreme perturbations or headset comfort.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "text_sha256": "a418a65eab6c5a7d9bb107880a9e2c9f2c4d126d0f02aca176a55111373bb4b8",
++      "map_sha256": "9c71df12ff7f593dcf318283e33d0c936048a46d04f23a5f5e66b6b8d0deb9d4",
++      "learner_verified": false,
++      "verification_scope": "probe_rotation_study.gd: default placement unchanged; #study:rotation matches rates (0.3/0.3), removes drift, sinking and colour, lays the prisms on 12 even columns (shipped: 11), fits the display to 10 m alone, and turns each cube exactly as a matched run does (0.000000000 rad). Map placement keeps the whole display inside the hall. No headset walk.",
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Rotate_Random_XYZ/DECISIONS.md"
+     },
+     "Random_Walk": {
+       "primary_tokens": [
+@@ -1025,11 +1030,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Walk/final.md",
+-      "text_sha256": "a72a6459a2fdb701594ba1d5b39792c1670bf24000acfea62db52388c639b1da",
++      "text_sha256": "a9aceb72597616386492bb6737021b3ba34bc3f5339b4b049eb49c751ff7698c",
+       "map_sha256": "bb7b9a11ecf811817344ae8d5e93986a684f0dea8e2bef52167608f217d50030",
+       "learner_verified": false,
+       "verification_scope": "Fresh unchanged-sampler and accumulated-position comparisons; actual-museum label capture. Headset controls not tested.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Walk/DECISIONS.md"
+     },
+     "Random_Gaussian": {
+       "primary_tokens": [
+@@ -1039,11 +1044,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Gaussian/final.md",
+-      "text_sha256": "847f74319596b18679df31dd2d53f945cb6daeee08ebe6976ca72d8fb485529b",
++      "text_sha256": "c31b41764113d4a1ee3edb0aa20c752fac8abf95e51a1055f745e9fa7ecf7100",
+       "map_sha256": "fdf8781e1981448b7efa811203590a282ee05cc1aff26a8b934ff242b329e032",
+       "learner_verified": false,
+       "verification_scope": "Fresh focused rebinning of a retained sample; no complete museum or headset visit.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Gaussian/DECISIONS.md"
+     },
+     "Random_Mushrooms": {
+       "primary_tokens": [
+@@ -1055,11 +1060,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Mushrooms/final.md",
+-      "text_sha256": "48de2a7ffa5339c77523c9c0376a125965c917c9587346d35dc4851fab86b3bc",
++      "text_sha256": "673ef28041b76753d319aed4e9c0b50d65797c8efda8d294a95bc53fbeed54da",
+       "map_sha256": "7b331ea18775e648a74b0f574c7bbcc7bd2fbf142a697005b43bd13f74e40cde",
+       "learner_verified": false,
+       "verification_scope": "Fresh wardrobe/replay/construction checks and bounded actual-museum staging/approach checks. No eating effect or headset validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Mushrooms/DECISIONS.md"
+     },
+     "Random_Space_Geometry": {
+       "primary_tokens": [
+@@ -1069,11 +1074,11 @@
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Space_Geometry/final.md",
+-      "text_sha256": "29bf71622aa8c6b6ffb794168029e019f20a1afacef24c3a7a44ca96f7c2e8e4",
++      "text_sha256": "5a4da0bac6a3b7fc22c1c796c54342b96b86a96ae57f7ecc6866f344f957cbf9",
+       "map_sha256": "623f375fab280f2b8f80d98749e9a6704569df68b7103ae66d3a14f96a12ae40",
+       "learner_verified": false,
+       "verification_scope": "Current source and restored navigation contract. Five companions lie beyond the source structure rectangle; museum derivation retains them, but their support and approaches need a dedicated physical check.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space_Geometry/DECISIONS.md"
+     },
+     "Randomness_Examples_of_Randomness": {
+       "primary_tokens": [
+@@ -1086,11 +1091,11 @@
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+-      "text_sha256": "1664e9ad746a6f978e6b63baa9b9a23eeb94d2e8a53f8c7b45e2f02ddfcf47cb",
++      "text_sha256": "2a5c95fbf29e2522f260d7fd076f15f2fa2ec43f1ed62149374cfbb6fe124302",
+       "map_sha256": "c09c7196da0d1dcdebe2c13d6a1f6cc94e3ba0309aeccd5065ab7ce6381d3fce",
+       "learner_verified": false,
+       "verification_scope": "Source audit of retained procedures and narrow display correction; no new full gallery learning or listening validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Randomness_Examples_of_Randomness/DECISIONS.md"
+     },
+     "Random_Pheromone": {
+       "primary_tokens": [
+@@ -1100,11 +1105,11 @@
+       "status": "desktop_checked_headset_pending",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Pheromone/final.md",
+-      "text_sha256": "2ceed42c99417f61686b42d7293ca470d05cf79350be0cfc007c158c66638b5e",
+-      "map_sha256": "722f2c04562e4cf7181a8cdc164b5e89725726afa06562d4b88cd9c9d1cd8dfd",
++      "text_sha256": "2883c0f7873b95d086b79ae5b8d36785464c3a9cc0093047e35de45250aca293",
++      "map_sha256": "2283ff15d3743a64c70a477b58f524f40f6d74dd52ac635a38e0405958f91901",
+       "learner_verified": false,
+       "verification_scope": "Fresh deterministic-step/reset/law comparison and actual-museum display/controls tests; rendered display scale differs from simulation-domain coordinates. No headset or full terrain traversal claim.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Pheromone/DECISIONS.md"
+     },
+     "Random_Space": {
+       "primary_tokens": [
+@@ -1114,11 +1119,11 @@
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Space/final.md",
+-      "text_sha256": "5ee4f8d430a547742015918ba2cbe935dfd120c197d07f6c27115019bd9b466a",
+-      "map_sha256": "346b85110f9d1e68b2da4df2e518fddd18844b2e4638201a8766b99c996bb6c4",
++      "text_sha256": "b4e80de791aac355e329f9a110d6e65b6efa1ccc4208255c726500a0983aa642",
++      "map_sha256": "8c6d4707ab9c2c1ae08265b865b9653777460e733c0020a0d17c570352cef765",
+       "learner_verified": false,
+       "verification_scope": "Current source and restored route. The adjacent Pheromone capture emitted a 77-cell route warning in this streamed hall; investigate it in a dedicated physical traversal. No complete museum interaction or headset claim.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/DECISIONS.md"
+     },
+     "Random_Game": {
+       "primary_tokens": [
+@@ -1131,11 +1136,11 @@
+       "status": "source_checked_draft",
+       "sequence": "randomness",
+       "text_path": "commons/maps/Random_Game/final.md",
+-      "text_sha256": "a076c53d5357dfd88ce0bedc590695bc168245c07b7f4af0e64b0d6bc42b718b",
++      "text_sha256": "7ebe94c86cb420a0864fcecd656aa1c38cb1d245998dc7b2f5569fa99c5bd760",
+       "map_sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
+       "learner_verified": false,
+       "verification_scope": "Current source including previously omitted projectile dependency, plus qualified historical evidence. No new bodily crossing, headset or safety-performance validation.",
+-      "local_review": "doc/book/iterations/2026-09-19-randomness-review/SUMMARY.md"
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Game/DECISIONS.md"
+     },
+     "Random_Noise_Types": {
+       "primary_tokens": [
+@@ -1145,8 +1150,8 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Random_Noise_Types/final.md",
+-      "text_sha256": "7aa551478c3170b1f6c68819d8e8f6ea7c5e4c27b1fe642cebc55a1cc70a79a0",
+-      "map_sha256": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
++      "text_sha256": "f94fc7ff88835c253ca2622e2a638acb6729b057176fe15a3bef42b55b818f30",
++      "map_sha256": "81fefdb5c28f4943ea912123791c6dff61ab2938182ff6adfa03166bf51a9466",
+       "learner_verified": false
+     },
+     "Noise_Columns": {
+@@ -1157,9 +1162,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Columns/final.md",
+-      "text_sha256": "6431a6046c435b1848a31f1cad5cd7a3d55e93fc0cc296c6eb4d99db6c4af0c9",
+-      "map_sha256": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+-      "learner_verified": false
++      "text_sha256": "57cfa534fde3c3c3842de491bbc2ad34c2e72718f189470daa6194123e0b4c88",
++      "map_sha256": "06b174a5ef314896bf53620930252de9b58544b4e1faaa384866aae6c230ce1f",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Columns/DECISIONS.md"
+     },
+     "Noise_One": {
+       "primary_tokens": [
+@@ -1169,9 +1175,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_One/final.md",
+-      "text_sha256": "24eb619b5cf18b5bdc15ebb7c176dab080d72f9af6fd5a1e7ee04c034798ac20",
+-      "map_sha256": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+-      "learner_verified": false
++      "text_sha256": "b0f02dc3f2a7bcbb9671432b4df4ed442e8ba5c07e58efa5f2f46f1b28098536",
++      "map_sha256": "6c8620e7368a67b4a648389f12602fd49995a8f6a7fcb5fa2db1f85ce0e7ce0d",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_One/DECISIONS.md"
+     },
+     "Noise_Voxel": {
+       "primary_tokens": [
+@@ -1182,9 +1189,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Voxel/final.md",
+-      "text_sha256": "06264cd74c028c727fa63ad728325826f1ca38706d75a58d62e6844de6bdfc77",
+-      "map_sha256": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+-      "learner_verified": false
++      "text_sha256": "1714ff63c8bb015cbe067cce746d80fbfb9c3ba3754465c6415d16c211c35a8d",
++      "map_sha256": "101246a5433011743c3a2bee79414684cdb21d164fa487f39d4c5c7b17821893",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Voxel/DECISIONS.md"
+     },
+     "Noise_6_Wall": {
+       "primary_tokens": [
+@@ -1194,9 +1202,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_6_Wall/final.md",
+-      "text_sha256": "399a8f654aba82fcce3dc28a21901d8f5bf1de642b64bbe4e38bc57da1aa34a6",
+-      "map_sha256": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+-      "learner_verified": false
++      "text_sha256": "fc9bc18446aff43a62e6700aa7ce2fe2ce73323ba2572ae8c7272f8b4f8addcb",
++      "map_sha256": "63dc252b334ea6af29028239ff0bec504e5b80e15c488ca2c5cdc3020f539169",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_6_Wall/DECISIONS.md"
+     },
+     "Noise_Inside_Noise": {
+       "primary_tokens": [
+@@ -1206,9 +1215,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Inside_Noise/final.md",
+-      "text_sha256": "f10412f3539ca924de3e5764a4ce87722d5878bb4a8a009865c9e6446552176c",
+-      "map_sha256": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+-      "learner_verified": false
++      "text_sha256": "121a5664f996a2b354607119716f77a646fa99dfc6f5ba88b311cdca0e79f6ba",
++      "map_sha256": "f1a082ed07da35e4f417f22d05443dc8bbb33fe08b7ccc86f98c9245fbbfddcf",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Inside_Noise/DECISIONS.md"
+     },
+     "Noise_Space_10": {
+       "primary_tokens": [
+@@ -1218,9 +1228,10 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Space_10/final.md",
+-      "text_sha256": "32e6473ae9e727d1de3e51cd092636990bc3758e293f8c71b143a4af4b413cbf",
+-      "map_sha256": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+-      "learner_verified": false
++      "text_sha256": "66acc8cc33efd1eee6583ec766ac014c383ccd78aa6d118873083caaf7a4cbdc",
++      "map_sha256": "0c3d80cd8890d2f4335cdd5c9ba4c77ec75b9a4528646e3753a7c07c188b335e",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Space_10/DECISIONS.md"
+     },
+     "Noise_Perlin_Simplex": {
+       "primary_tokens": [
+@@ -1228,12 +1239,14 @@
+         "perlin_noise"
+       ],
+       "reason": "What would make two noise surfaces a fair comparison?",
+-      "status": "source_checked_draft",
++      "status": "desktop_checked_headset_pending",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+-      "text_sha256": "669c8888b7f1176176574e5cf36b760e91dca2d4e580df81d94c55e55d6ea47a",
+-      "map_sha256": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+-      "learner_verified": false
++      "text_sha256": "a54dedc09e512083cabf6a9bfd378df367bbda0574fd1e9c67e23370d5083ac7",
++      "map_sha256": "1964d1bb14a85542ea5709bd6a9d2a7b04632cb141579ffb2ab33ff3e3b6fa35",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Noise_Perlin_Simplex",
++      "verification_scope": "Native production-pair probe: VIEW keeps regenerated seeds, generator configuration, sampled answers and colours while flattening every cube; return to relief preserves both fields; MATCH restores declared seeds. Four studio captures in this pass include the noise pair. No headset interaction."
+     },
+     "Lab_Path": {
+       "primary_tokens": [
+@@ -1243,21 +1256,26 @@
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Lab_Path/final.md",
+-      "text_sha256": "30ec6de21896f63ab272d36d012cef582ef4bdd577687830bb8b14eda6512fc2",
++      "text_sha256": "f566363c70e8f4bdadb93630784b462da8751cdaa7cdd8127d3b9187a2b8ee6e",
+       "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+-      "learner_verified": false
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Lab_Path/DECISIONS.md"
+     },
+     "CA_Introduction": {
+       "primary_tokens": [
+-        "ca_rule_explorer"
+-      ],
+-      "reason": "How much of the next row can you predict from three cells?",
+-      "status": "source_checked_draft",
++        "ca_rule_explorer",
++        "persian_rug",
++        "line_network_ca"
++      ],
++      "reason": "A held row, a mirrored rug, and twenty recorded stages of a line network distinguish local rules, imposed symmetry and the history a drawing keeps.",
++      "status": "desktop_checked_headset_pending",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_Introduction/final.md",
+-      "text_sha256": "491dd3cd3a193dc8e8441173458345fd591e4b011d46cd1a5ad916e3d3e69b17",
+-      "map_sha256": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+-      "learner_verified": false
++      "text_sha256": "837bd0dff953a6c9674b1a49456a877aa61983608d923afff182a73092d5105b",
++      "map_sha256": "78deb24278c364a31751d235a3cca88b1189097f3d7c18456cde07f28b26ef8f",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#CA_Introduction",
++      "verification_scope": "Claude museum placement/readback retained. This pass adds #study:arrival to line_network_ca; native studio checks compare connections against ordinary growth on three seeds, retain twenty stages, test arrival and physical replay signal, preserve old vertex positions in a fixed final fit. Default placements remain unchanged. No new full-museum walk or headset test."
+     },
+     "CA_ElementaryRules": {
+       "primary_tokens": [
+@@ -1267,9 +1285,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_ElementaryRules/final.md",
+-      "text_sha256": "76266e161d5dd41920df0b7300418cc34654dd3ba1b9d0ba4ce2e92183de75d8",
+-      "map_sha256": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+-      "learner_verified": false
++      "text_sha256": "0ce19707a1be0e7d9be98b92f81584fac7bdbbfefb109a1f8871a89fdbe5d1da",
++      "map_sha256": "2ca45cf62d98ce89102e93615b42aa4838f359face570373d7a99e91b46f7aaf",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_ElementaryRules/DECISIONS.md"
+     },
+     "CA_GameOfLife": {
+       "primary_tokens": [
+@@ -1279,9 +1298,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_GameOfLife/final.md",
+-      "text_sha256": "7bd487ca69fdf64fad630dcf2f763aa6ddf9d3a12eab80dce31d22558e222d51",
+-      "map_sha256": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+-      "learner_verified": false
++      "text_sha256": "5dfbd9069735b3890ac882fb86259f9db3d8931acefd5af8e66907fc032ee149",
++      "map_sha256": "a4486083e834db8061f919ed37388069bf6cd64a51ca9ac1dda58d12e5d81808",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_GameOfLife/DECISIONS.md"
+     },
+     "CA_BeyondBinary": {
+       "primary_tokens": [
+@@ -1291,9 +1311,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_BeyondBinary/final.md",
+-      "text_sha256": "9922a99ec9f42e89a7957e120abf1d2918f1c9bb90d5728ac7ad388e8d539262",
+-      "map_sha256": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+-      "learner_verified": false
++      "text_sha256": "2110f41e925bd25889d2e29d7b2b5960e5a40a3ac921587be7a179330217931b",
++      "map_sha256": "cc4b09ea600f2dccc676f5060f72c3f5c80b725267623364e87875246eeeed57",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_BeyondBinary/DECISIONS.md"
+     },
+     "CA_ExpandingSpace": {
+       "primary_tokens": [
+@@ -1303,9 +1324,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_ExpandingSpace/final.md",
+-      "text_sha256": "a206ec9904d6bada67762ef6ed46f2bbdb9abd3c8d0ea5704790f0d11b2f5e7f",
+-      "map_sha256": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+-      "learner_verified": false
++      "text_sha256": "a4d172fc5f2e1885202137e3328d156aa4dc5782e307ae08f34b2fb11d94b9cd",
++      "map_sha256": "1580ee6bc3100cd09d980cab2fff66683de3c4e0a744bcf9c8a15c4e881115f2",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_ExpandingSpace/DECISIONS.md"
+     },
+     "CA_SoftRules": {
+       "primary_tokens": [
+@@ -1315,9 +1337,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_SoftRules/final.md",
+-      "text_sha256": "ef9a7fe34cfb1077be13a65d22f668260e8703c6af40beacddd06a3ae14cf543",
+-      "map_sha256": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+-      "learner_verified": false
++      "text_sha256": "1da9b7e3681701062041d516cc771b736ca2fce4b5ea5a11e1532f6a5488c997",
++      "map_sha256": "6eeea6ca3ca1008ef23874351f126453ca7684fbd271d2ceab23fd2a809e575d",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_SoftRules/DECISIONS.md"
+     },
+     "CA_AgentsCircuits": {
+       "primary_tokens": [
+@@ -1328,9 +1351,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_AgentsCircuits/final.md",
+-      "text_sha256": "b192cbe9b731e350850ef3a9d9dde90c649fe615d9edbe44f281734e2bfca3b1",
++      "text_sha256": "b17878f9d56510bdf200ac6e2b58155e1472e462ae6fc17f74141ca1b3da682f",
+       "map_sha256": "d0fcd3ec00d56254c9fe97d229b824797424b46de1bffd75f4c7ccadcd54080d",
+-      "learner_verified": false
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_AgentsCircuits/DECISIONS.md"
+     },
+     "CA_EdgeOfChaos": {
+       "primary_tokens": [
+@@ -1340,9 +1364,10 @@
+       "status": "source_checked_draft",
+       "sequence": "cellularautomata",
+       "text_path": "commons/maps/CA_EdgeOfChaos/final.md",
+-      "text_sha256": "86d3283b51843f23678340ecb80ae6c8400463436894384b54487bb4e47165ec",
+-      "map_sha256": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+-      "learner_verified": false
++      "text_sha256": "992937ab3cdaf9719e007c973a75ddb65076d94f95a0e1d70a5d1cf93b1be0e3",
++      "map_sha256": "ab0576883518ebca6cad2b42a1bb8971ecec1d9b34ed568ac1d997c46d82f602",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_EdgeOfChaos/DECISIONS.md"
+     },
+     "Fractal_Recursion": {
+       "primary_tokens": [

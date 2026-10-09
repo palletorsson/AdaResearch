@@ -1,0 +1,41 @@
+{
+  "rays": [
+    {
+      "tag": "pickup support",
+      "x": 2.5,
+      "z": 4.5,
+      "top": 0
+    },
+    {
+      "tag": "western approach support",
+      "x": 1.5,
+      "z": 4.5,
+      "top": 0
+    },
+    {
+      "tag": "western corridor support",
+      "x": 0.5,
+      "z": 5.5,
+      "top": 0
+    }
+  ],
+  "walks": [],
+  "shots": [
+    {
+      "tag": "pickup-before-eye",
+      "from": [
+        0.5,
+        1.65,
+        4.5
+      ],
+      "look_at": [
+        2.5,
+        0.3,
+        4.5
+      ]
+    }
+  ],
+  "room": "Tutorial_Single",
+  "sequence": "array_tutorial",
+  "run": "res://ada_run/encounter_pilot/Tutorial_Single/"
+}

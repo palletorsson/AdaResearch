@@ -1,0 +1,35 @@
+--- before/commons/maps/Point_Lines/final.md
++++ after/commons/maps/Point_Lines/final.md
+@@ -1,6 +1,14 @@
+ # Lines, Networks, Measure
+ 
+ The point gave us somewhere to begin. Now put two positions into relation.
++
++<!-- @line_black_box -->
++
++In the black room, a pale line hangs between two small points. Take one end and move it. The line grows longer, turns, shortens. Release it. The end stays where your hand left it, still joined to the other.
++
++A number on the wall follows the distance between them. Try changing the direction without changing that number. The dark room leaves very little else to look at: two positions, and what happens between them.
++
++Through the side passage, another line has acquired an instruction.
+ 
+ <!-- @line_demo -->
+ 
+@@ -20,7 +28,7 @@
+ 
+ The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.
+ 
+-In Point One, leaving the target made another arrival possible. Here, the first connection leaves a passage open even after the points separate. The rooms keep different things from the gestures we make in them.
++In Coordinates, leaving the target made another arrival possible. Here, the first connection leaves a passage open even after the points separate. The rooms keep different things from the gestures we make in them.
+ 
+ <!-- @line -->
+ 
+@@ -28,7 +36,7 @@
+ 
+ Hold one end still and move the other around it. Try keeping the same distance. The segment can turn while its length stays steady. Once we choose to go from A to B, we can calculate a displacement with a distance and a direction.
+ 
+-Here is an example using the positions we began learning to write in Point One:
++Here is an example using the positions we began learning to write in Coordinates:
+ 
+ ```gdscript
+ var a := Vector3(0, 0, 0)

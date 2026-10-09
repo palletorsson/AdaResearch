@@ -1,0 +1,38 @@
+{
+  "started": "2026-09-14T18:30:14+02:00",
+  "finished": "2026-09-14T18:30:42+02:00",
+  "pid": 33480,
+  "exit": 0,
+  "checks": 52,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/competition_probe_base.gd": "0d0d3c2319bdc7b4ef4e7fc08a1d5066434e0c6504043dec2de6b7b51eb3fe3a",
+    "ada_run/competition_acceptance.gd": "dfb3659f38d844ce036827e104e498a7a845a776e28a926f06ab8ac02d059040",
+    "commons/maps/LSystems_Competition/map_data.json": "56d0f1892bdfcce7bb66633b5793495b48094a655edbd8a3e6c59b5d4263cc58",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/competition-review-2026-09-14/review-plan.json": "0e496558f73513470021efb0a46ae836ba22c5f3cd4b3e586ff2c730879fbccd",
+    "algorithms/lsystems/Ecosystem/ForestCompetition.tscn": "b66081bc1dc28af2285ddc20bdd773956471d150643d8af0c6d569b66efa79bd",
+    "algorithms/lsystems/Ecosystem/ForestCompetition.gd": "8d7dc2e82f6bd21b2b8278636515cd30f2bc29a4f5998cca1be11a3307f9b287",
+    "commons/artifacts/branching_coral/branching_coral.tscn": "838dbac3fe247e6fc8b4ac3bd020004bbca870c5f37a9ff2b00abe8d832cd985",
+    "commons/artifacts/branching_coral/branching_coral.gd": "6652f7ea45afb6da2e06438f57f8c48ac685c4dabc77c46407fee9e160ff9fc6",
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "utils/lsystem.gd": "8cb9d5b035b291c2c5987ddf46b66e4885b8a08b68181977d3060507c39a57d9",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "59e46ca4e7614dd5a68015a4e92b993660cbdb26629758ab6ca11219107113fc",
+    "commons/data/trunk_branches.json": "7a7cbfba8e561662c9223de1e2440b766d3b023bfaa443bc831f18448a9e6d6a",
+    "commons/maps/LSystems_Competition/final.md": "e0af1e67aeb737f9e13f579129d09ffb6bc85b8ef338cfbbf8be033080e303b8",
+    "commons/artifacts/competition_lesson/competition_lesson.gd": "d85fafc1a3582aaeadec3d09b8cfc6a49d8e995a782321aae48f0b5aeacb5eda"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

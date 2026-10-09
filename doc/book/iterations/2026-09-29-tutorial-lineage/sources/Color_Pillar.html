@@ -1,0 +1,289 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Pillar · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Pillar">← Tutorial lineage</a></p><h1>Color Pillar</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Pillar/final.md">Raw captured source</a></p><pre># The colour between the pillars
+
+&lt;!-- @pillarcolorcollection --&gt;
+
+Step onto the dark floor and look up. A palette stretches across the ceiling, meeting the tops of the pillars. Follow one line of pillars farther into the field: the hue stays recognisable while saturation increases. Walk across it and hue changes too. Two directions, two different ways to change a colour.
+
+Look up a pillar. Near its base, the colour disappears into black. Higher up, it becomes brighter. Height has become a third colour coordinate: **value**. Each pillar keeps one hue and saturation while showing the values between black and its brightest colour.
+
+The grey column beside the field reaches white at the top. The coloured columns do not. Raising value brightens their colours; reaching white also requires saturation to be zero. Even at the same value, a yellow and a blue need not appear equally bright.[^value]
+
+![Colour spreads across the ceiling above pillars that darken towards the floor.](/book-review/doc/book/iterations/2026-09-28-pillar-colour-ceiling/ceiling-and-column.png)
+
+*Hue across, saturation along, value up. At their tops, the pillars meet the same colours in the ceiling.*
+
+Look up along the pillar. Where does it end? The edge becomes difficult to follow, as though the pillar were entering a fog of its own colour. Its geometry still has a boundary. Knowing where it ends and seeing where it ends are different things. Here, making the colour rule clearer has made the shape less certain.
+
+The ceiling holds value at one. Above each pillar, the same hue and saturation continue into the surface overhead. Beneath it, the floor stays near black. These colours are drawn without the room&#x27;s lighting changing them; the passage from dark to bright is assigned by the rule. Colour gives this part of the room a roof.
+
+Pick up the small sampling card. Raise it while keeping its place over the floor as steady as you can. Its colour brightens. A dot climbs the thin upright beside it, showing where that sample belongs in the full height of the field. Your hand moves through a shorter distance: the nearby scale maps that movement onto the whole column. The card names the represented height as FIELD Y.
+
+Read the two lines on the card. **HSV** gives hue, saturation and value. **RGB** gives red, green and blue channel values. These are two descriptions of the same sampled colour. As you raise value while keeping hue and saturation fixed, the RGB channels scale together; a channel at zero stays there. Move across or along the field and the other coordinates change too.
+
+The rule now uses all three coordinates of the represented point:
+
+```gdscript
+var hue := clampf(p.x / 12.8, 0.0, 1.0) * 0.85
+var saturation := lerpf(0.25, 1.0, clampf(p.z / 19.2, 0.0, 1.0))
+var value := clampf((p.y - VALUE_BOTTOM) / (VALUE_TOP - VALUE_BOTTOM), 0.0, 1.0)
+return Vector3(hue, saturation, value)
+```
+
+`p` is the dot&#x27;s position in the field. The horizontal divisions turn metres into fractions of the field&#x27;s width and length. The vertical fraction runs from zero at the coloured column&#x27;s bottom, 0.46 metres above the floor, to one at its top, 4.6 metres. `clampf` keeps the fractions within their ranges. `Color.from_hsv` converts the result into the RGB colour shown by the card.
+
+Lower it again. At value zero, different addresses arrive at the same black. The hue and saturation coordinates remain on the card, but the colour alone can no longer tell you which address it came from.
+
+Five columns by seven rows, with 3.2 metres between samples. Overhead, the colour continues through the gaps. Below, those gaps are where you can walk. Adding a column in one of them would give another colour a body and take away somewhere you could stand.
+
+Release the card to leave a sample in place, then step back until several pillars overlap. Their values remain fixed. What their company makes visible keeps changing.
+
+&lt;!-- @color_sets_overview --&gt;
+
+Beyond the field, twelve collections hang on a framed wall. Their colours have names, and their groups have names too: Bauhaus School Colors, Frida Kahlo&#x27;s Palette, Harlem Renaissance Jazz. Someone has chosen which colours will stand here under those titles. The names suggest histories that these small lists cannot contain. These sets were assembled. The field was evaluated. Both are ways of deciding which colours belong together.
+
+Take a swatch if you want to carry that decision into another view. This one keeps its colour as you move it. Its label pairs a hexadecimal RGB code with the nearest colour name from a small list. The code travels with it; its neighbours stay on the wall. Compare it with a pillar, with another swatch, with the space around your hand. The label stays the same in this new company. Does the colour still look as though it belongs where you found it?
+
+The wall does not finish the gradient. It gives you another method of collecting it, with another set of omissions.
+
+&lt;!-- @ --&gt;
+
+On the next floor, follow what happens when a rule assigns colours to grid cells. Keep the spaces between these samples in mind.
+
+[^value]: HSV value is the largest of the RGB channel values; it is not a measurement of perceived lightness. The field uses Godot&#x27;s [HSV-to-RGB colour conversion](https://docs.godotengine.org/en/4.6/classes/class_color.html#class-color-method-from-hsv). Stanford&#x27;s [colour lecture](https://web.stanford.edu/class/archive/cs/cs448b/cs448b.1166/cgi-bin/wiki/images/4/4e/Lec448B-20160427.pdf) explains why HSV does not provide perceptually uniform brightness. The sampler&#x27;s hue and saturation are retained as coordinates even when its RGB result is black; recovering them from black alone would not be possible.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Pillar/tutorial.md">Raw captured source</a></p><pre># Three directions through colour
+
+Begin on the near-black floor and look up. X changes hue; Z changes saturation. The ceiling holds value at 1 and meets the pillar tops at 4.6 m. At each pillar centre, its ceiling colour matches the top of that pillar. The ceiling extends beyond the outer samples; the extension clamps to the field edges, so the added width does not stretch the colour coordinates.
+
+Look up the thirty-five columns. Each keeps the hue and saturation of its x/z address, while value rises from 0 at the coloured mesh&#x27;s bottom (0.46 m) to 1 at its top (4.6 m). A separate zero-saturation column runs from black to white. The main field keeps saturation between 0.25 and 1, so its coloured tops do not turn white merely by reaching value 1.
+
+Pick up the sampling card using the existing grab interaction. Its x/z position samples the horizontal field. A physical hand-height range of 0.65–1.85 m covers value 0–1; the marker and FIELD Y readout show the corresponding position in the taller field. This is an explicit change of scale. At the two limits the value clamps. Beyond the horizontal field it samples the closest edge and displays EDGE. Release leaves the frozen card available where it was placed.
+
+Raise the card without deliberately moving sideways. Compare HSV and RGB: hue and saturation stay fixed, value changes, and the RGB channels scale together. Then carry it across a gap to change hue, or farther along the field to change saturation. At value zero every colour becomes RGB (0,0,0), while the address can retain its hue and saturation coordinates. The display&#x27;s value is not a promise of equal perceived brightness across hues.
+
+The upright columns, ceiling, marker and sampler use the same unshaded colour calculation. The ceiling is the full-value boundary, the columns are vertical ranges, and the marker is a selected sample. The dark floor is a neutral near-black surface over the existing walkable floor. The zero-saturation reference remains beside the coloured canopy.
+
+Finally take a swatch from the named collection wall. That existing swatch keeps its assigned colour when you move it; the new sampler changes colour as you move it. The two actions now offer a useful comparison: carrying a chosen value, and evaluating a value at a new position. The wall titles are authored associations, not complete representations of the artists or movements they name.
+
+The next hall, Color_Grid_Pallet, lets you write a colour to an address and return to find it there.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Pillar/technical.md">Raw captured source</a></p><pre># A three-coordinate colour field
+
+Current implementation: 28 September 2026, ceiling revision. `pillarcolorcollection` retains its default named-palette layout; the museum&#x27;s existing `#layout:spatial_gradient` placement opts into this field. No map geometry or placement was changed.
+
+The 5 × 7 columns retain their 3.2 m spacing and 4.6 m height. Each column receives the hue `clampf(x/12.8,0,1)*0.85` and saturation `lerpf(0.25,1,clampf(z/19.2,0,1))`. Value is evaluated vertically from 0 at field-local y=0.46 to 1 at y=4.6. The coloured mesh has local vertex y=-1.8..1.8 and is scaled by the existing 1.15 prefab transform. The reference column at (-1.8,0,0) uses saturation zero, giving black-to-white independently of hue. It is separate from the thirty-five coloured samples.
+
+`hsv_field.gdshader` draws fixed samples, vertical ranges and a V=1 ceiling using one HSV conversion. All are unshaded. The shader uses encoded RGB directly for Compatibility and decodes sRGB before writing ALBEDO for Mobile/Forward+. These choices preserve the coordinate comparison; they do not claim calibrated display output or uniform perceived lightness. The old floor and columns previously differed in lighting response; that comparison is superseded by the current shared display shader.
+
+`field_sampler.tscn` inherits the existing grab-paper scene and pickup system. Its subclass disables grid snapping, retains XR/direct and ranged pickup, and freezes on release. Horizontal position samples the field directly; hand y=0.65..1.85 maps to V=0..1 and hence field y=0.46..4.6. The marker and FIELD Y readout make the represented coordinate explicit. RGB and HSV are updated from the same sample. Bounds clamp; horizontal clamping displays EDGE. This is a hand-scale controller for the taller field, not a claim that the marker is at the hand&#x27;s physical height.
+
+The sampler keeps the source H/S coordinates even at V=0. It does not round-trip them from RGB black. The existing wall swatches retain their colour and label when carried, offering the contrasting action of moving a stored value.
+
+The ceiling is a two-sided PlaneMesh, 15.2 × 21.6 m, centred at (6.4,4.6,9.6). Its mesh-space x/z plus the explicit (6.4,9.6) offset recover the same field coordinates as the pillars. Colour clamps beyond the 12.8 × 19.2 m sample span. The overhang therefore covers the outer columns without rescaling their colours. It is a visual canopy with no added overhead collision or light source.
+
+A 16.7 × 21.6 m near-black (#080a0e) plane at y=0.026 replaces the bright floor overlay, extending to include the separate grey reference. Its roughness is 1 and shading is unlit; existing floor collision continues to support walking. No map layout or artifact placement was changed.
+
+Focused native checks cover all 35 ceiling-to-pillar coordinate/colour matches, full height, near-black ground, actual sampler pickup and release, RGB/HSV agreement, named swatches and ordinary-controller walks. The run report and native interior images are in `doc/book/iterations/2026-09-28-pillar-colour-ceiling/`. Compatibility rendering is exercised. Tracked-hand reach, headset comfort, display calibration and other rendering paths remain unverified.
+
+---
+
+## Historical record — the flat samples before this extension
+
+The following record describes the previous fixed-value, lit-column implementation. Its dates and claims remain as historical evidence, not the current vertical encounter.
+
+# A field of colour samples — implementation
+
+The museum placement opts in with `#layout:spatial_gradient`. In `algorithms/color/pillarcolorcollection/pillarcolorcollection.gd`, both the pillar samples and the floor shader evaluate the same HSV field:
+
+```gdscript
+var u := clampf(p.x / 12.8, 0.0, 1.0)
+var v := clampf(p.z / 19.2, 0.0, 1.0)
+return Color.from_hsv(u * 0.85, lerpf(0.25,1.0,v),0.95)
+```
+
+The floor evaluates between the discrete samples. This is a coordinate field, not additive light mixing. The prefab&#x27;s 4 m height is multiplied by 1.15. Its material receives the colour sampled at the pillar&#x27;s local position. Labels identify the grid address and colour code.
+
+`color_sets_overview` uses `#mount:wall` to arrange twelve existing sets in six columns and two rows. Swatches retain the existing grab interaction. The named palette construction remains separate from the spatial HSV field. Other placements retain the default layouts.
+
+The former tutorial is archived under `doc/space/color-recovery-2026-09-09/before/commons/maps/Color_Pillar`.
+
+## Native comparison and carrying, 23 September 2026
+
+The shared book figure pairs an elevated museum view with the view from the ordinary walker&#x27;s reached position plus 1.65 metres. Both show the actual placed field. No geometry, controls or placement changed. The floor remains unshaded; columns receive lighting, so equal assigned values do not require equal rendered pixels.
+
+32 focused assertions pass in the isolated production museum: all 35 material samples and labels match the coordinate function, floor UV corners agree with its directions, saturation/hue comparisons hold, twelve named wall sets are present, and a real wall swatch follows the production pickable mechanism through pickup, supplied movement and release. The swatch is returned to its original placement. Its label uses an 8-bit hexadecimal RGB code and the nearest entry in the artifact&#x27;s small name list, selected by squared RGB distance; it does not establish a culturally universal name or perceptual distance.
+
+Supplied key input drives the ordinary museum controller along a gap between columns, across a gap between rows and back toward the pale edge. These selected paths retain ground support. Figures and the run record are in `doc/book/iterations/2026-09-23-pillar-colour-between/`. No tracked-controller reach, headset comfort, colour calibration, learner or performance claim.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Pillar/intent.md">Raw captured source</a></p><pre># Color Pillar — field, sample and collection
+
+The primary encounter is `pillarcolorcollection` in its spatial-gradient configuration, followed by the wall-mounted `color_sets_overview`. A coordinate field continues between thirty-five embodied samples; twelve authored palette collections offer another way to decide what belongs together. The question is what the collection makes present and what its gaps leave open.
+
+Keep the field still while the visitor moves: follow increasing saturation, cross into another hue, then look up into increasing value. A full-value palette forms a ceiling at the pillar tops, with a near-black floor below. A hand-scale pickable sampler shows the same selected colour in RGB and HSV, with a marker at the represented field height; a zero-saturation reference explains why value 1 is not always white. Finally carry a named wall swatch into another company. The sampler changes with its position; the wall swatch retains its assigned value.
+
+The existing mixing, spectrum and stick artifacts retain their secondary roles; the dark sphere retains its decoration role. All remain available in the room. Their relevance should be tested through encounters rather than removed to meet a quota. The first guided route remains field → sample → named collection, preparing the writeable address in `Color_Grid_Pallet`.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Pillar/critical.md">Raw captured source</a></p><pre># The colours that get a column
+
+The field does not stop at its thirty-five samples. Its rule supplies colours between them, but only selected positions have been given a column. Sampling makes some values stand before the visitor while others continue across the ceiling. The gaps also let a body pass. A less sparse selection would change more than the number of colours on display: it would change the available room.
+
+All the columns have the same dimensions. Their colour differences acquire equal architectural weight, although the regular spacing is itself a choice. This is a particular collection of the field, not a complete inventory of its possibilities. The ceiling now carries the full-value slice where each column ends. Between those columns, colour makes a continuous roof above the dark walk. The visitor occupies the interval between the sampled colours, beneath the surface that gathers them. Moving a palette from floor to ceiling changes how it belongs to the room: it is overhead, reached by looking, while the sampling card keeps a way of handling it within reach.
+
+The framed wall makes another kind of collection. Its palette titles invoke moods, artists and movements; the shipped colour lists are authored interpretations, not evidence that a history has one correct palette. Their membership comes from those lists, not from the coordinate rule of the field. Preserve the difference between an attribution and a claim to represent everything it names.
+
+A swatch can leave that company. Its material and label travel with it. The hexadecimal RGB code records a colour value; the word beneath it is selected by proximity to a short list of named RGB values. One name can receive many distinct values. Naming makes a colour available to conversation while also gathering differences under a common word.
+
+The room lets the visitor compare these choices through movement: enter the gaps, read an address, take a swatch away from its group. None of those actions is a colour-comprehension test. The critical question is how a field becomes a collection, and how a collection gives particular colours a body, a name and neighbours.
+
+The vertical extension gives this selection another limit. At zero value, different hue and saturation coordinates produce the same RGB black. The address can retain differences that its appearance cannot disclose. The sampler makes a second decision explicit: a short hand movement is scaled to the full height of the columns. The reachable gesture and the represented position are related by a chosen mapping, shown by the marker rather than treated as natural equivalence.
+
+A wall swatch carries an assigned colour away from its group; the sampler acquires another colour as it moves. One keeps a value, the other evaluates a position. The same act of carrying can therefore preserve or change the colour, depending on which object the hand has taken.
+
+---
+
+## Historical companion — earlier gauntlet layout
+
+The earlier draft below is retained as development material. It describes a previous route and contains claims about collection counters, compulsory engagement, flashlight behaviour and a terminal spectrum that are not verified descriptions of the current field-and-wall encounter. It should not govern the current chapter; secondary artifacts remain available for future encounters.
+
+# Color_Pillar - Critical Reflection
+
+## Additive vs. Subtractive: Two Worlds of Color
+
+Children learn color mixing with paint: red + blue = purple, red + yellow = orange, all colors mixed = muddy brown. This is subtractive color - pigments absorbing wavelengths, each addition removing light.
+
+Screens work oppositely. Red + green = yellow. Red + green + blue = white. Each addition adds light. This is additive color - the color system of light, of displays, of digital media.
+
+The visual color mixing station shows additive mixing. If you expect paint behavior, you will be surprised. Yellow from red and green feels wrong - yet it is physically correct for light.
+
+We are taught one color system and must unlearn it for another. The pillar gauntlet teaches light&#x27;s logic.
+
+## Color as Gathered Resource
+
+The grabbable color sticks turn color into collectible items. You reach out, grasp, accumulate. Color becomes resource - something you have or don&#x27;t have, something that can be gathered, stored, spent.
+
+This is the gamification of color. Achievement unlocked: collected all primaries. But it also mirrors how color works in industry: Pantone swatches, color libraries, design systems. Color as asset, color as inventory.
+
+The pillar runway makes literal what design practice makes metaphorical. You gather colors like picking flowers, building a bouquet of hues.
+
+## The Flashlight Reveals
+
+Point colored light at a surface, and the surface&#x27;s &quot;color&quot; changes. A blue ball under red light appears black - there&#x27;s no blue in the light to reflect. The ball hasn&#x27;t changed; only the illumination has changed.
+
+This is the flashlight demo&#x27;s lesson: color is not in objects but in the relationship between object and light. &quot;The ball is blue&quot; is shorthand for &quot;the ball reflects blue wavelengths when illuminated with light containing blue wavelengths.&quot;
+
+Without the right light, the color disappears. Color is conditional, relational, dependent on context. The flashlight proves it.
+
+## The Gauntlet Structure
+
+The map is a gauntlet - a linear path with challenges on both sides. You cannot avoid the color stations; you must pass through them. The architecture forces engagement.
+
+Gauntlets are tests. They measure whether you can survive the passage, whether you can collect what&#x27;s required, whether you reach the end. The color pillar gauntlet tests color comprehension through interaction.
+
+But gauntlets are also celebrations. Running a gauntlet of well-wishers, a gauntlet of honors. The color stations might be challenges or gifts, depending on your orientation.
+
+## Simultaneous Discovery
+
+The stations are arranged along the path: pillar collection, flashlight demo, visual mixing. Each reveals a different aspect of color. But the arrangement is not random - it builds.
+
+First: color exists in pillars (color as property). Then: flashlight shows color depends on light (color as relation). Then: visual mixing shows colors combine (color as process).
+
+The sequence is pedagogical, each station preparing for the next. You could not understand mixing without first understanding light-dependence. The gauntlet is curriculum.
+
+## Collection and Completion
+
+Games train us to collect things. Coins, stars, rings, orbs - whatever the visual token, the mechanic is the same. See item, pick up item, count increments.
+
+The color sticks invoke this training. You see colors, you want to collect them, you feel satisfaction when the count increases. But what does it mean to &quot;have&quot; a color?
+
+In physical reality, you cannot collect colors. You can collect colored objects - paints, dyes, fabrics. But the color itself is not a thing. The game makes color thing-like so it can be collected. This is reification: treating abstractions as concrete objects.
+
+## The Pillar as Monument
+
+Pillars are architectural monuments - vertical assertions of presence, markers of significance. Temples have pillars. Government buildings have pillars. Power expresses itself through columns.
+
+Color pillars are monuments to hues. Each color raised on a pedestal, honored with vertical emphasis. The pillar says: this color matters. This color deserves a monument.
+
+But which colors get pillars? The primaries? The full spectrum? The selection is a valuation. Colors without pillars are colors without monuments - present but not honored.
+
+## Mixing Without Contamination
+
+Digital color mixing is clean. Red and green combine to yellow with no residue, no mess, no contamination. The colors remain pure until the moment of mixing, then produce a pure result.
+
+Physical mixing is messier. Paints contaminate each other. Dyes bleed. The mixed color is never quite as clean as the inputs. Entropy increases; purity decreases.
+
+The visual color mixing station shows idealized mixing - the mathematical combination, not the physical process. This is both useful (showing true additive behavior) and misleading (suggesting mixing has no cost).
+
+## The Runway as Progress
+
+Twenty-two cells of forward movement. The runway stretches out, stations positioned along its length. Progress is visible - you can see how far you&#x27;ve come, how far you have to go.
+
+This is the narrative structure of levels: beginning, middle, end. The runway makes progress spatial. Advancement through color knowledge is advancement through physical space.
+
+But progress implies a goal. What is the goal of color learning? Completion? Mastery? The runway promises arrival somewhere - the teleporter at the end. But arrival is only departure to the next map.
+
+## Light in Darkness
+
+The flashlight demo requires darkness - or at least dim ambient light - to be visible. You must reduce the environment&#x27;s illumination to see how your illumination affects surfaces.
+
+This is the condition of revelation: darkness first, then controlled light. The scientist&#x27;s laboratory is dark; the artist&#x27;s studio controls its windows. To see how light works, you must subtract the light you cannot control.
+
+The dark_sphere provides this darkness - an envelope of shadow within which colored light can demonstrate its effects.
+
+## The Spectrum at the End
+
+SpectrumVisualizer waits at the terminus. After collecting, after mixing, after flashlight revelations - the full spectrum, laid out as culmination.
+
+This is summary and synthesis. You&#x27;ve encountered individual colors; now see them in order. You&#x27;ve experienced mixing; now see the unmixed progression. The spectrum is the reference, the standard, the complete set from which all colors derive.
+
+The pillar gauntlet ends with the spectrum because the spectrum is origin. All the colors you collected came from here.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Pillar/artifacts.md">Raw captured source</a></p><pre># Color Pillar — Artifacts
+*Color and Composition · F_order · 6 artifacts*
+
+&gt; Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness. The visual color mixing station shows what happens when primaries combine. Here color is not just seen but gathered, mixed, understood as process rather than property.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## visual_color_mixing
+![visual_color_mixing](/scene-catalog/visual_color_mixing.png)
+
+visual_color_mixing
+
+`visual_color_mixing`
+
+## pillarcolorcollection
+![pillarcolorcollection](/scene-catalog/pillarcolorcollection.png)
+
+Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.
+
+`pillarcolorcollection`
+
+## grab_rainbow_stick
+![grab_rainbow_stick](/scene-catalog/grab_rainbow_stick.png)
+
+grab_rainbow_stick
+
+`grab_rainbow_stick`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## SpectrumVisualizer
+![SpectrumVisualizer](/scene-catalog/SpectrumVisualizer.png)
+
+SEE that the color wheel is a perceptual invention — magenta is the seam where the brain closes what physics leaves open
+
+`SpectrumVisualizer`
+
+## Color Sets Overview
+![Color Sets Overview](/scene-catalog/color_sets_overview.png)
+
+Interactive color set grabber — explore color families, hue relationships, and palette structures through physical manipulation.
+
+`color_sets_overview`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Pillar/summary.md">Raw captured source</a></p><pre># A field of colour samples
+
+Thirty-five pillars stand in a 5 by 7 field, spaced 3.2 m apart and rising 4.6 m. Their colours sample a continuous floor gradient: x changes hue, z changes saturation, and value remains 0.95. Beyond the field, twelve named palette sets hang on a framed wall. Existing mixing and spectrum artifacts remain secondary.
+
+The recovered source footprint is preserved inside a new perimeter wall. See `museum_recovery.md` for historical provenance and placement exceptions.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Pillar/blurb.md">Raw captured source</a></p><pre>Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness. The visual color mixing station shows what happens when primaries combine. Here color is not just seen but gathered, mixed, understood as process rather than property.
+</pre></section></body></html>

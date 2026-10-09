@@ -1,0 +1,104 @@
+{
+  "checks": [
+    {
+      "label": "large garden is a fixed sibling of the moving mower",
+      "passed": true
+    },
+    {
+      "label": "lawn offers 560 square metres",
+      "passed": true
+    },
+    {
+      "label": "thousands of grass tufts use bounded instance batches",
+      "passed": true
+    },
+    {
+      "label": "mower is a grounded fourteen kilogram rigid body",
+      "passed": true
+    },
+    {
+      "label": "only the handle can be picked up",
+      "passed": true
+    },
+    {
+      "label": "grass starts uncut with no planted flowers",
+      "passed": true
+    },
+    {
+      "label": "actual XR pickup takes the handle",
+      "passed": true
+    },
+    {
+      "label": "pushing the hand moves the actual mower forward",
+      "passed": true
+    },
+    {
+      "label": "mower motion stays on its ground plane",
+      "passed": true
+    },
+    {
+      "label": "lawn does not move with the mower",
+      "passed": true
+    },
+    {
+      "label": "actual deck travel cuts grass and leaves flowers",
+      "passed": true
+    },
+    {
+      "label": "work is accumulated from applied model push and displacement",
+      "passed": true
+    },
+    {
+      "label": "revisiting the same cut cannot add duplicate flowers",
+      "passed": true
+    },
+    {
+      "label": "reset refuses to steal a held handle",
+      "passed": true
+    },
+    {
+      "label": "right hand displacement steers right instead of strafing",
+      "passed": true
+    },
+    {
+      "label": "left hand displacement turns back left",
+      "passed": true
+    },
+    {
+      "label": "release removes drive but keeps inertia",
+      "passed": true
+    },
+    {
+      "label": "drag slows released mower",
+      "passed": true
+    },
+    {
+      "label": "released handle remains at the mower grip",
+      "passed": true
+    },
+    {
+      "label": "nearby reset returns mower and restores the whole lawn",
+      "passed": true
+    },
+    {
+      "label": "desktop grab reaches the same steering handle",
+      "passed": true
+    },
+    {
+      "label": "desktop hand displacement pushes the same rigid body",
+      "passed": true
+    },
+    {
+      "label": "desktop release clears drive",
+      "passed": true
+    },
+    {
+      "label": "unloading mower removes its independent garden and handle",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "physics": "Jolt Physics",
+  "scope": "Actual rigid body, XRTools pickup and desktop hand delivery; supplied hand poses, no headset claim."
+}

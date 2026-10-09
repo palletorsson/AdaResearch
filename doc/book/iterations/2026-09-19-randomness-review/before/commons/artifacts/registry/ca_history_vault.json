@@ -1,0 +1,15 @@
+{
+  "artifacts": {
+    "ca_history_vault": {
+      "lookup_name": "ca_history_vault",
+      "name": "Walk through a recorded process",
+      "scene": "res://commons/artifacts/ca_history_vault/ca_history_vault.tscn",
+      "map_ready": true,
+      "description": "An experimental full-size history vault. A 25 by 15 two-dimensional cellular section is stacked through 28 generations. Compare straight history, sine bending, sine scaling and sine-modulated birth thresholds. A declared corridor can be reserved; it is not an emergent passage.",
+      "category": "cellular_automata",
+      "tags": ["history", "sine", "architecture", "walkthrough", "experimental"],
+      "spatial_needs": {"footprint_cells": 24, "clearance_m": 1.0},
+      "interactions": ["Select one of four strategies", "Change phase", "Reserve or release the corridor", "Show 8, 16 or 28 generations", "Replay the same beginning"]
+    }
+  }
+}

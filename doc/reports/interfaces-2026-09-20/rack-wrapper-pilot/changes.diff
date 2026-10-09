@@ -1,0 +1,601 @@
+--- before/commons/audio/rack_controls/vr_wrappers/VRRackControl.gd
++++ commons/audio/rack_controls/vr_wrappers/VRRackControl.gd
+@@ -6,6 +6,8 @@
+ extends Node3D
+ class_name VRRackControl
+ 
++const PointerSurface = preload("res://commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd")
++
+ ## Which RackControlBase scene to embed
+ @export var control_scene_path: String = ""
+ 
+@@ -14,6 +16,9 @@
+ 
+ ## Physical size in meters (auto-calculated from tokens if zero)
+ @export var physical_size: Vector2 = Vector2.ZERO
++
++## Pointer input, not a physical grab handle. Passive displays never get a hit box.
++@export var pointer_enabled: bool = true
+ 
+ ## Bezel depth
+ const BEZEL_DEPTH := 0.02
+@@ -31,6 +36,10 @@
+ var _control_instance: Control
+ var _pending_style_variant: String = ""
+ var _pending_step_count: int = 0
++var _pending_label: String = ""
++var _pending_value: float = .5
++var _has_pending_value := false
++var _pointer_surface: StaticBody3D
+ 
+ 
+ func _ready() -> void:
+@@ -83,12 +92,10 @@
+ 	_viewport.size = viewport_resolution
+ 	_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+ 
+-	# 2D control inside viewport (fills it)
+-	_control_instance.anchors_preset = Control.PRESET_FULL_RECT
+-	_control_instance.anchor_right = 1.0
+-	_control_instance.anchor_bottom = 1.0
+-	_control_instance.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+-	_control_instance.size_flags_vertical = Control.SIZE_EXPAND_FILL
++	# Keep canonical layout units and scale the entire drawing to the viewport.
++	# Stretching the Control's rectangle alone shrinks its text relative to the case.
++	_control_instance.size = px_size
++	_control_instance.scale = Vector2(viewport_resolution) / px_size
+ 	_viewport.add_child(_control_instance)
+ 	add_child(_viewport)
+ 
+@@ -106,6 +113,17 @@
+ 	_screen_mesh.material_override = screen_mat
+ 	_screen_mesh.position.z = SCREEN_OFFSET
+ 	add_child(_screen_mesh)
++	var passive: bool = _control_instance.get("_control_type") in ["meter", "mtr", "label", "lbl", "divider", "div", "group", "grp"]
++	if pointer_enabled and not passive:
++		_pointer_surface = PointerSurface.new()
++		_pointer_surface.name = "PointerSurface"
++		_screen_mesh.add_child(_pointer_surface)
++		_pointer_surface.configure(_viewport, quad.size)
++
++
++func pointer_event(event) -> void:
++	if is_instance_valid(_pointer_surface):
++		_pointer_surface.pointer_event(event)
+ 
+ 
+ ## Access the inner 2D control for property changes
+@@ -115,6 +133,7 @@
+ 
+ ## Convenience: set label on the inner control
+ func set_param_name(text: String) -> void:
++	_pending_label = text
+ 	if _control_instance and _control_instance.has_method("set_control_label"):
+ 		_control_instance.set("control_label", text)
+ 	elif _control_instance and "control_label" in _control_instance:
+@@ -123,6 +142,8 @@
+ 
+ ## Convenience: set normalized value
+ func set_normalized_value(val: float) -> void:
++	_pending_value = val
++	_has_pending_value = true
+ 	if _control_instance and "normalized_value" in _control_instance:
+ 		_control_instance.normalized_value = val
+ 
+@@ -176,6 +197,7 @@
+ func _apply_pending_properties() -> void:
+ 	if not _control_instance:
+ 		return
++	set_param_name(_pending_label)
+ 	if not _pending_style_variant.is_empty() and "style_variant" in _control_instance:
+ 		_control_instance.style_variant = _pending_style_variant
+ 	if _pending_step_count > 0:
+@@ -183,3 +205,6 @@
+ 			_control_instance.step_count = _pending_step_count
+ 		elif "steps" in _control_instance:
+ 			_control_instance.steps = _pending_step_count
++	# Quantize against the final step count, not the scene's default count first.
++	if _has_pending_value:
++		set_normalized_value(_pending_value)
+--- before/commons/audio/rack_controls/vr_wrappers/ModuleFaceTexture.gd
++++ commons/audio/rack_controls/vr_wrappers/ModuleFaceTexture.gd
+@@ -332,106 +332,27 @@
+ 
+ 
+ var _collision_body: StaticBody3D
+-var _is_pointer_pressed: bool = false
+-var _active_pointer: Node3D = null
+-
+-
+-## Create a StaticBody3D with collision shape matching the panel quad.
+-## The body has pointer_event() method so XRToolsPointerEvent.report() finds it.
++
++
++## Same input bridge as the individually cased rack controls.
+ func _setup_pointer_collision() -> void:
+-	_collision_body = StaticBody3D.new()
++	_collision_body = preload("res://commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd").new()
+ 	_collision_body.name = "PanelCollision"
+-	# Pointable layer (21) + UI layer (23) — matches XR pointer DEFAULT_MASK
+-	_collision_body.collision_layer = (1 << 20) | (1 << 22)
+-	_collision_body.collision_mask = 0
+-
+-	var shape := CollisionShape3D.new()
+-	var box := BoxShape3D.new()
+-	box.size = Vector3(_physical_w, _physical_h, 0.005)
+-	shape.shape = box
+-	_collision_body.add_child(shape)
+-
+-	# Attach a tiny script that forwards pointer_event to us
+-	var script := GDScript.new()
+-	script.source_code = """extends StaticBody3D
+-
+-var _face_texture: Node3D
+-
+-func pointer_event(event) -> void:
+-	if _face_texture and _face_texture.has_method("_on_pointer_event"):
+-		_face_texture._on_pointer_event(event)
+-"""
+-	script.reload()
+-	_collision_body.set_script(script)
+-	_collision_body.set("_face_texture", self)
+-
+ 	add_child(_collision_body)
+-
+-
+-## Handle XR pointer events — convert 3D hit position to 2D viewport coordinates.
++	_collision_body.configure(_viewport, Vector2(_physical_w, _physical_h))
++
++
+ func pointer_event(event) -> void:
+ 	_on_pointer_event(event)
+ 
+ 
+ func _on_pointer_event(event) -> void:
+-	if not _viewport or not is_instance_valid(_viewport):
+-		return
+-	# The other hand may hover, but it must not move or release this hand's drag.
+-	if _is_pointer_pressed and event.pointer != _active_pointer:
+-		return
+-
+-	var pos_2d := _global_to_viewport(event.position)
+-
+-	match event.event_type:
+-		0:  # ENTERED
+-			pass
+-		1:  # EXITED
+-			if _is_pointer_pressed:
+-				_push_mouse_button(pos_2d, false)
+-				_is_pointer_pressed = false
+-				_active_pointer = null
+-		2:  # PRESSED
+-			if _is_pointer_pressed:
+-				return
+-			_is_pointer_pressed = true
+-			_active_pointer = event.pointer
+-			_push_mouse_button(pos_2d, true)
+-		3:  # RELEASED
+-			if not _is_pointer_pressed:
+-				return
+-			_push_mouse_button(pos_2d, false)
+-			_is_pointer_pressed = false
+-			_active_pointer = null
+-		4:  # MOVED
+-			_push_mouse_motion(pos_2d)
+-
+-
+-## Convert a 3D world position to 2D viewport coordinates.
++	if is_instance_valid(_collision_body):
++		_collision_body.pointer_event(event)
++
++
+ func _global_to_viewport(world_pos: Vector3) -> Vector2:
+-	var local_pos := global_transform.affine_inverse() * world_pos
+-	# Map from local 3D (-w/2..w/2, -h/2..h/2) to viewport pixels (0..vp_w, 0..vp_h)
+-	var vp_size := Vector2(_viewport.size)
+-	var x := (local_pos.x / _physical_w + 0.5) * vp_size.x
+-	var y := (0.5 - local_pos.y / _physical_h) * vp_size.y  # Y flipped
+-	return Vector2(clampf(x, 0, vp_size.x), clampf(y, 0, vp_size.y))
+-
+-
+-func _push_mouse_button(pos: Vector2, pressed: bool) -> void:
+-	var ev := InputEventMouseButton.new()
+-	ev.button_index = MOUSE_BUTTON_LEFT
+-	ev.pressed = pressed
+-	ev.position = pos
+-	ev.global_position = pos
+-	_viewport.push_input(ev)
+-
+-
+-func _push_mouse_motion(pos: Vector2) -> void:
+-	var ev := InputEventMouseMotion.new()
+-	ev.position = pos
+-	ev.global_position = pos
+-	if _is_pointer_pressed:
+-		ev.button_mask = MOUSE_BUTTON_MASK_LEFT
+-	_viewport.push_input(ev)
++	return _collision_body.pixel_at(world_pos)
+ 
+ 
+ func _apply_button_color(ctrl_node: Control, color: Color) -> void:
+--- before/commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd
++++ commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd
+@@ -0,0 +1,71 @@
++# A flat, pointable screen. Converts world-space hits into viewport GUI input.
++# Shared by complete module faces and individual cased rack controls.
++extends StaticBody3D
++
++var viewport: SubViewport
++var screen_size := Vector2.ONE
++var _pressed := false
++var _owner: Node3D
++var _last_pixel := Vector2.ZERO
++
++func configure(target: SubViewport, dimensions: Vector2) -> void:
++	viewport = target
++	screen_size = dimensions
++	collision_layer = (1 << 20) | (1 << 22)
++	collision_mask = 0
++	var shape := CollisionShape3D.new()
++	shape.name = "HitShape"
++	var box := BoxShape3D.new()
++	box.size = Vector3(dimensions.x, dimensions.y, .004)
++	shape.shape = box
++	add_child(shape)
++	set_process(false)
++
++func pixel_at(world_point: Vector3) -> Vector2:
++	var local := to_local(world_point)
++	var pixels := Vector2(viewport.size)
++	return Vector2(clampf(local.x / screen_size.x + .5, 0, 1),
++		clampf(.5 - local.y / screen_size.y, 0, 1)) * pixels
++
++func pointer_event(event) -> void:
++	if not is_instance_valid(viewport): return
++	if _pressed and event.pointer != _owner: return
++	_last_pixel = pixel_at(event.position)
++	match event.event_type:
++		XRToolsPointerEvent.Type.PRESSED:
++			if _pressed: return
++			_owner = event.pointer
++			_pressed = true
++			set_process(true)
++			_button(true)
++		XRToolsPointerEvent.Type.RELEASED, XRToolsPointerEvent.Type.EXITED:
++			cancel()
++		XRToolsPointerEvent.Type.MOVED:
++			var motion := InputEventMouseMotion.new()
++			motion.position = _last_pixel
++			motion.global_position = _last_pixel
++			motion.button_mask = MOUSE_BUTTON_MASK_LEFT if _pressed else 0
++			viewport.push_input(motion, true)
++
++## Release on cancellation too, so spring controls and momentary buttons reset.
++func cancel() -> void:
++	if _pressed and is_instance_valid(viewport):
++		_button(false)
++	_pressed = false
++	_owner = null
++	set_process(false)
++
++func _button(pressed: bool) -> void:
++	var event := InputEventMouseButton.new()
++	event.button_index = MOUSE_BUTTON_LEFT
++	event.pressed = pressed
++	event.position = _last_pixel
++	event.global_position = _last_pixel
++	viewport.push_input(event, true)
++
++func _process(_delta: float) -> void:
++	if not is_instance_valid(_owner): cancel()
++
++func _notification(what: int) -> void:
++	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
++		cancel()
+--- before/commons/interactables/artifact_controls.gd
++++ commons/interactables/artifact_controls.gd
+@@ -73,9 +73,12 @@
+ 	param_name: String,
+ 	initial_value: float,
+ 	on_change: Callable,
++	step_count: int = 5,
+ ) -> Node:
+ 	if _use_rack:
+-		return _add_rack_control(RACK_SLIDER_STEPPED, param_name, initial_value, on_change)
++		var ctrl := _add_rack_control(RACK_SLIDER_STEPPED, param_name, initial_value, on_change)
++		ctrl.set_step_count(step_count)
++		return ctrl
+ 	else:
+ 		return _add_legacy_slider(param_name, initial_value, on_change)
+ 
+@@ -102,16 +105,25 @@
+ 		return add_label(param_name, "0.0")
+ 
+ 
+-## Add a text label.
+-func add_label(label_id: String, initial_text: String = "", font_size: int = 14) -> Label3D:
+-	var label := Label3D.new()
++## Add a backed 2D status screen. Update through update_label(), as before.
++func add_label(label_id: String, initial_text: String = "", font_size: int = 14) -> Node3D:
++	var label := Node3D.new()
+ 	label.name = "Label_%s" % label_id
+-	label.text = initial_text
+-	label.font_size = font_size
+-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+-	label.position = _next_slot_position() + Vector3(0, 0, 0.02)
+-	label.modulate = Color(1, 1, 1, 0.8)
++	label.position = _next_slot_position()
+ 	add_child(label)
++	var casing := MeshInstance3D.new()
++	var box := BoxMesh.new()
++	box.size = Vector3(.20, .052, .02)
++	casing.mesh = box
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = Color(.12, .14, .16)
++	casing.material_override = mat
++	label.add_child(casing)
++	var surface: Dictionary = preload("res://commons/ui/control_value_surface.gd").build(label, Vector2(.184, .042), Vector3(0, 0, .011))
++	var value: Label = surface.label
++	value.add_theme_font_size_override("font_size", clampi(font_size * 3, 24, 64))
++	value.text = initial_text
++	label.set_meta("status_surface", surface)
+ 	_controls[label_id] = label
+ 	_slot_index += 1
+ 	return label
+@@ -127,8 +139,11 @@
+ ## Update a label's text.
+ func update_label(label_id: String, text: String) -> void:
+ 	var ctrl = _controls.get(label_id)
+-	if ctrl is Label3D:
+-		ctrl.text = text
++	if ctrl and ctrl.has_meta("status_surface"):
++		var surface: Dictionary = ctrl.get_meta("status_surface")
++		if surface.label.text != text:
++			surface.label.text = text
++			surface.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+ 	elif ctrl and ctrl.has_method("set_text"):
+ 		ctrl.set_text(text)
+ 
+@@ -148,8 +163,7 @@
+ 	var ctrl := VRRackControl.new()
+ 	ctrl.control_scene_path = scene_path
+ 	ctrl.name = "Rack_%s" % param_name.replace(" ", "_")
+-	# VRRackControl._build() runs in _ready, set label after add_child
+-	ctrl.set_deferred("_set_label_deferred", param_name)
++	ctrl.set_param_name(param_name)
+ 	return ctrl
+ 
+ 
+@@ -205,8 +219,12 @@
+ 		return
+ 	ctrl.set_param_name(label_text)
+ 	var inner: Control = ctrl.get_control()
+-	if inner and inner.has_signal("pressed"):
+-		inner.pressed.connect(func(): on_press.call())
++	if inner and inner.has_signal("value_changed"):
++		# RackButton emits normalized state, not a `pressed` signal.
++		# Only its rising edge invokes an action; release and exit don't repeat it.
++		inner.value_changed.connect(func(value: float):
++			if value >= .5: on_press.call()
++		)
+ 
+ 
+ # ── Internal: Legacy fallback ──────────────────────────────────
+--- before/commons/artifacts/grammar_provenance/grammar_provenance.gd
++++ commons/artifacts/grammar_provenance/grammar_provenance.gd
+@@ -136,13 +136,28 @@
+ func _build_controls() -> void:
+ 	_controls = ArtifactControls.new()
+ 	_controls.name = "Controls"
+-	_controls.position = Vector3(2.0, 1.2, 0.0)
++	# Local +Z is the viewing side: player -> controls -> three grammar forms.
++	# A low inclined face keeps the central form visible over the controls.
++	_controls.position = Vector3(0.0, .86, 1.7)
++	_controls.rotation_degrees.x = -55.0
++	_controls.scale = Vector3.ONE * 1.5
++	_controls.set_spacing(.15)
+ 	add_child(_controls)
+ 
+-	_controls.add_slider("DEPTH", float(generation_depth - 1) / 5.0, func(v: float):
++	_controls.add_stepped_slider("DEPTH", float(generation_depth - 1) / 5.0, func(v: float):
+ 		generation_depth = int(round(v * 5.0)) + 1
+-	)
++	, 6)
+ 	_controls.add_label("depth_display", "Depth: %d" % generation_depth)
++	# Support the selector and its nearby status screen as one small station.
++	var casing := _plate(Vector3(.23, .30, .03))
++	casing.position = Vector3(0, -.05, -.032)
++	_controls.add_child(casing)
++	var stem := _plate(Vector3(.08, .74, .08))
++	stem.position = Vector3(0, .37, 1.72)
++	add_child(stem)
++	var foot := _plate(Vector3(.36, .025, .30))
++	foot.position = Vector3(0, .025, 1.72)
++	add_child(foot)
+ 
+ 
+ func _build_header() -> void:
+--- before/commons/testing/test_rack_wrapper_input.gd
++++ commons/testing/test_rack_wrapper_input.gd
+@@ -0,0 +1,181 @@
++extends SceneTree
++## Generated rays hit actual colliders, then GUI events drive shared controls
++## and an existing artifact. This is desktop automation, not headset evidence.
++const OUT := "res://doc/reports/interfaces-2026-09-20/rack-wrapper-pilot/"
++const Wrapper = preload("res://commons/audio/rack_controls/vr_wrappers/VRRackControl.gd")
++var checks := 0
++var failures: Array[String] = []
++var pointer: Node3D
++var world: Node3D
++var camera: Camera3D
++var actions := 0
++
++func _initialize() -> void: run.call_deferred()
++func check(ok: bool, message: String) -> void:
++	checks += 1
++	print("WRAPPER ", "PASS " if ok else "FAIL ", message)
++	if not ok: failures.append(message)
++
++func run() -> void:
++	world = Node3D.new()
++	root.add_child(world)
++	var env := WorldEnvironment.new()
++	env.environment = Environment.new()
++	env.environment.background_mode = Environment.BG_COLOR
++	env.environment.background_color = Color(.08, .10, .12)
++	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
++	env.environment.ambient_light_color = Color(.9, .93, 1)
++	env.environment.ambient_light_energy = .8
++	world.add_child(env)
++	var light := DirectionalLight3D.new()
++	light.rotation_degrees = Vector3(-35, -25, 0)
++	world.add_child(light)
++	pointer = Node3D.new()
++	world.add_child(pointer)
++	camera = Camera3D.new()
++	camera.current = true
++	camera.fov = 40
++	world.add_child(camera)
++	root.msaa_3d = Viewport.MSAA_4X
++	var slider := make("RackSliderH", Vector3(-1, 1.2, 0))
++	slider.set_param_name("RATE")
++	slider.set_normalized_value(.25)
++	world.add_child(slider)
++	var snap := make("RackSliderStepped", Vector3(-.65, 1.2, 0))
++	snap.set_step_count(6)
++	snap.set_normalized_value(.37)
++	world.add_child(snap)
++	var spring := make("RackSliderBipolar", Vector3(-.4, 1.2, 0))
++	world.add_child(spring)
++	var meter := make("RackMeter", Vector3(-.15, 1.2, 0))
++	world.add_child(meter)
++	var label := make("RackLabel", Vector3(.1, 1.2, 0))
++	world.add_child(label)
++	var disabled := make("RackSliderH", Vector3(.4, 1.2, 0))
++	disabled.pointer_enabled = false
++	world.add_child(disabled)
++	for frame in 5: await physics_frame
++	check(slider.get_control().control_label == "RATE", "Label configured before tree entry survives")
++	check(is_equal_approx(slider.get_normalized_value(), .25), "Initial value configured before tree entry survives")
++	check(slider.get_control().size == Vector2(180, 50), "Canonical layout units preserved inside the viewport")
++	check(slider.get_control().scale == Vector2(2, 2), "Text scales with the control, not just its rectangle")
++	check(is_equal_approx(snap.get_normalized_value(), .4), "Initial discrete value quantizes once against the configured six steps")
++	var surf: Node3D = slider._pointer_surface
++	check(surf.get_node("HitShape").shape.size.is_equal_approx(Vector3(.18 * .92, .05 * .92, .004)), "Hit bounds match the visible screen inside its bezel")
++	check(meter._pointer_surface == null and label._pointer_surface == null, "Passive meters and labels do not intercept pointers")
++	check(disabled._pointer_surface == null, "Authored input opt-out remains available")
++	await send(slider, Vector2(50, 17), XRToolsPointerEvent.Type.PRESSED)
++	await send(slider, Vector2(130, 17), XRToolsPointerEvent.Type.MOVED)
++	await send(slider, Vector2(130, 17), XRToolsPointerEvent.Type.RELEASED)
++	check(is_equal_approx(slider.get_normalized_value(), .75), "Ray hit and rightward GUI drag yield 0.75")
++	await send(snap, Vector2(30, 30), XRToolsPointerEvent.Type.PRESSED)
++	await send(snap, Vector2(30, 30), XRToolsPointerEvent.Type.RELEASED)
++	check(snap.get_normalized_value() == 1 and snap.get_control().steps == 6, "Wrapped six-step selection operates and persists")
++	await send(spring, Vector2(30, 30), XRToolsPointerEvent.Type.PRESSED)
++	print("RETURN_LIMIT_VALUE ", spring.get_normalized_value())
++	check(is_equal_approx(spring.get_normalized_value(), 1), "Wrapped returning control reaches positive limit")
++	var owner := pointer
++	pointer = Node3D.new()
++	world.add_child(pointer)
++	await send(spring, Vector2(30, 142), XRToolsPointerEvent.Type.RELEASED)
++	check(is_equal_approx(spring.get_normalized_value(), 1), "Another pointer cannot release the wrapped control")
++	pointer.queue_free()
++	pointer = owner
++	await send(spring, Vector2(30, 30), XRToolsPointerEvent.Type.EXITED)
++	check(spring.get_normalized_value() == .5, "Exiting wrapped screen returns its command to zero")
++	await send(spring, Vector2(30, 30), XRToolsPointerEvent.Type.PRESSED)
++	spring._pointer_surface.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
++	await process_frame
++	check(spring.get_normalized_value() == .5, "Focus loss cancels a held command")
++	await send(spring, Vector2(30, 30), XRToolsPointerEvent.Type.PRESSED)
++	pointer.queue_free()
++	await process_frame
++	await process_frame
++	check(spring.get_normalized_value() == .5, "A removed pointer cannot leave a command stuck")
++	pointer = Node3D.new()
++	world.add_child(pointer)
++	slider.rotation_degrees = Vector3(-18, 37, 12)
++	slider.scale = Vector3(1.4, .8, 1.2)
++	await physics_frame
++	await send(slider, Vector2(30, 17), XRToolsPointerEvent.Type.PRESSED)
++	await send(slider, Vector2(30, 17), XRToolsPointerEvent.Type.RELEASED)
++	check(is_equal_approx(slider.get_normalized_value(), .125), "Rotation and nonuniform world scale preserve coordinate mapping")
++	# Existing artifact-helper callback path, including the formerly missing signal.
++	var helper := ArtifactControls.new()
++	helper.position = Vector3(1, 1.2, 0)
++	world.add_child(helper)
++	var action: Node3D = helper.add_button("STEP", func(): actions += 1)
++	var text_surface: Node3D = helper.add_label("status", "READY")
++	for frame in 4: await physics_frame
++	await send(action, Vector2(35, 15), XRToolsPointerEvent.Type.PRESSED)
++	await send(action, Vector2(35, 15), XRToolsPointerEvent.Type.PRESSED)
++	check(actions == 1, "ArtifactControls callback fires once on press, even with a duplicate event")
++	await send(action, Vector2(35, 15), XRToolsPointerEvent.Type.RELEASED)
++	check(actions == 1 and not action.get_control().is_pressed, "Button release resets feedback without repeating the action")
++	await send(action, Vector2(35, 15), XRToolsPointerEvent.Type.PRESSED)
++	await send(action, Vector2(35, 15), XRToolsPointerEvent.Type.EXITED)
++	check(actions == 2 and not action.get_control().is_pressed, "A second click works; pointer exit resets its feedback")
++	helper.update_label("status", "DONE")
++	var display: Dictionary = text_surface.get_meta("status_surface")
++	check(display.label.text == "DONE" and display.screen.mesh is QuadMesh, "Helper status updates a real 2D screen")
++	check(helper.find_children("*", "Label3D", true, false).is_empty(), "Artifact helper creates no floating text")
++	for child in [slider, snap, spring, meter, label, disabled, helper]: child.queue_free()
++	await process_frame
++	# A real consumer: its grammar implementation and provenance text are untouched.
++	var grammar: Node3D = load("res://commons/artifacts/grammar_provenance/grammar_provenance.tscn").instantiate()
++	grammar.generation_depth = 1
++	world.add_child(grammar)
++	for frame in 5: await physics_frame
++	var selector: Node3D = grammar._controls._controls["DEPTH"]
++	check(selector.get_control().steps == 6, "Grammar selector represents precisely six generations")
++	check(grammar._immediate_meshes[0].surface_get_arrays(0)[Mesh.ARRAY_VERTEX].size() == 10, "First generation has five actual rendered segments")
++	await send(selector, Vector2(30, lerpf(142, 30, .2)), XRToolsPointerEvent.Type.PRESSED)
++	await send(selector, Vector2(30, lerpf(142, 30, .2)), XRToolsPointerEvent.Type.RELEASED)
++	check(grammar.generation_depth == 2, "Pointer input changes the existing artifact to generation two")
++	check(grammar._immediate_meshes[0].surface_get_arrays(0)[Mesh.ARRAY_VERTEX].size() == 50, "Receiver geometry changes to twenty-five segments")
++	var status: Dictionary = grammar._controls._controls["depth_display"].get_meta("status_surface")
++	check(status.label.text == "Depth: 2", "Grammar display reports the actual generation")
++	check(grammar.find_children("*", "Label3D", true, false).is_empty(), "Grammar's text is on flat supported surfaces")
++	camera.position = Vector3(.35, 1.60, 2.15)
++	camera.look_at(Vector3(0, .86, 1.7))
++	await capture("grammar-controls")
++	camera.position = Vector3(0, 1.65, 2.1)
++	camera.fov = 85
++	camera.look_at(Vector3(0, .30, .4))
++	await capture("grammar-artifact")
++	var file := FileAccess.open(OUT + "checks.json", FileAccess.WRITE)
++	file.store_string(JSON.stringify({"checks": checks, "failures": failures, "headset_tested": false,
++		"method": "Physics ray intersections -> screen pointer bridge -> viewport GUI input -> consumer callbacks -> rendered geometry"}, "\t"))
++	file.close()
++	print("WRAPPER_RESULT ", checks, " checks, ", failures.size(), " failures")
++	world.queue_free()
++	await process_frame
++	quit(0 if failures.is_empty() else 1)
++
++func make(type: String, at: Vector3) -> Node3D:
++	var instance := Wrapper.new()
++	instance.control_scene_path = "res://commons/audio/rack_controls/%s.tscn" % type
++	instance.position = at
++	return instance
++
++func send(wrapper: Node3D, local: Vector2, type: int) -> void:
++	var control: Control = wrapper.get_control()
++	var pixel: Vector2 = control.get_global_transform() * local
++	var dims: Vector2 = wrapper._screen_mesh.mesh.size
++	var vp_size := Vector2(wrapper._viewport.size)
++	var hit: Vector3 = wrapper._screen_mesh.to_global(Vector3((pixel.x / vp_size.x - .5) * dims.x,
++		(.5 - pixel.y / vp_size.y) * dims.y, 0))
++	var normal: Vector3 = wrapper._screen_mesh.global_basis.z.normalized()
++	var query := PhysicsRayQueryParameters3D.create(hit + normal * .2, hit - normal * .02, (1 << 20) | (1 << 22))
++	var result := world.get_world_3d().direct_space_state.intersect_ray(query)
++	if result.is_empty():
++		check(false, "Ray missed " + wrapper.name)
++		return
++	check(result.collider == wrapper._pointer_surface, "Ray reaches " + wrapper.name + " screen")
++	XRToolsPointerEvent.report(XRToolsPointerEvent.new(type, pointer, result.collider, result.position, result.position))
++	await process_frame
++
++func capture(tag: String) -> void:
++	await process_frame
++	await RenderingServer.frame_post_draw
++	root.get_texture().get_image().save_png(OUT + tag + ".png")

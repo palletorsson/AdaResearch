@@ -1,0 +1,38 @@
+{
+	"artifacts": {
+		"comment_box": {
+			"lookup_name": "comment_box",
+			"scene": "res://commons/artifacts/comment_box/comment_box.tscn",
+			"class_name": "CommentBox",
+			"name": "Comment Box",
+			"description": "A lectern with a screen on its slant where a visitor leaves a comment: click the text, type (the physical keyboard on desktop, the keys on the screen by laser in VR, the same keys under the crosshair), press SEND. The comment lands in ada_run/desktop_feedback.md, the file the Desktop-AI bridge already reads, under a `## <time> | <Map>` header with `- Source: comment_box` and `- Box: <id>` so the next agent knows where it was said; the screen shows how many comments have been left at this box and the last one. Written 2026-09-05 from Palle's ask for 'a comment artifact that we can add and that has a comment box for input'. A singleton with no DNA axes on purpose: it is a utility, not a family.",
+			"category": "interactables",
+			"ada_kind": "interactable",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"tags": [
+				"feedback",
+				"bridge",
+				"comment",
+				"input",
+				"text",
+				"visitor",
+				"vr",
+				"desktop"
+			],
+			"parameters": {
+				"label": "the title above the lectern (default 'Leave a comment')",
+				"box": "an id for this box, written as `- Box:` into every entry it sends (default '')",
+				"prompt": "the placeholder in the empty text (default 'click here, then type')",
+				"out": "a path override for the feedback file, for probes (default '' = res://ada_run/desktop_feedback.md, falling back to user://desktop_feedback/)"
+			},
+			"spatial_needs": {
+				"footprint_cells": 1,
+				"platform": "floor",
+				"wall_backing": false
+			}
+		}
+	}
+}

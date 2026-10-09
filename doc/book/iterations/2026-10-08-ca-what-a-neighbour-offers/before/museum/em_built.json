@@ -1,0 +1,954 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-08 17:07:53",
+	"boot_ms": {
+		"autoloads": 2391,
+		"bake_parsed": 1190,
+		"boot_tail": 2877,
+		"engine_pak": 145,
+		"engine_to_ready": 3989,
+		"entry": 1,
+		"first_frame": 2964,
+		"first_physics": 2073,
+		"grid_warm": 1615,
+		"guests_loaded": 1692,
+		"loading_shell": 21,
+		"modules_loaded": 370,
+		"modules_pool": 483,
+		"museum_data": 483,
+		"plan_parsed": 1154,
+		"pool_done": 1078,
+		"scene_chain": 1453,
+		"segment0_built": 2877,
+		"world_ready": 2074
+	},
+	"plan": "res://commons/data/museum/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						0,
+						0
+					],
+					"token": "force_hall_01",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.5,
+						0.0,
+						0.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						4,
+						7
+					],
+					"token": "force_point_direction",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						11,
+						7
+					],
+					"token": "force_point_addition",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.5,
+						0.0,
+						7.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						8,
+						14
+					],
+					"token": "force_point_projection",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						0.0,
+						14.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						18
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · vectors act1 whatavectoris · 01",
+					"index": 1,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "01\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						19.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · vectors act1 whatavectoris · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "02\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · vectors act1 whatavectoris · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "03\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						2
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · vectors act1 whatavectoris · 04",
+					"index": 4,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "04\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						1.0,
+						2.3
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						18
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · vectors act1 whatavectoris · 05",
+					"index": 5,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "05\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						19.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · vectors act1 whatavectoris · 06",
+					"index": 6,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "06\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · vectors act1 whatavectoris · 07",
+					"index": 7,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "07\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						4
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · vectors act1 whatavectoris · 08",
+					"index": 8,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "08\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						1.1,
+						4.6
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						18
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · vectors act1 whatavectoris · 09",
+					"index": 9,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "09\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.6,
+						1.1,
+						19.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · vectors act1 whatavectoris · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "10\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · vectors act1 whatavectoris · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "11\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						15,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						6
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · vectors act1 whatavectoris · 12",
+					"index": 12,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "12\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						15.0,
+						1.2,
+						6.2
+					]
+				},
+				{
+					"backing_cell": [
+						14,
+						19
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						14,
+						18
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · vectors act1 whatavectoris · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "vectors act1 whatavectoris",
+					"segment": 0,
+					"text": "13\nforces · vectors act1 whatav",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.026268657296896,
+						"pixel_size": 0.000238805970149254,
+						"w": 0.128000006079674
+					},
+					"world": [
+						14.2,
+						1.2,
+						19.0
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.##########################",
+				"................p############",
+				"##..............p############",
+				"##..............#############",
+				"#######.....#################",
+				"##..............#############",
+				"##..............#############",
+				"##sss...........#############",
+				"##sss...........#############",
+				"##ssssss..sssss.#############",
+				"##ssssss..sssss.#############",
+				"##.sssss..sssss.#############",
+				"##.sssss..sssss.#############",
+				"##.sssss..sssss.#############",
+				"##..............#############",
+				"##..............#############",
+				"##.....sssss....#############",
+				"##.....sssss....#############",
+				"##.....sssss....#############",
+				"##.....sssss....#############",
+				"##.....sssss....#############",
+				"##..............#############",
+				"##..............#############",
+				"#######.....#################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 20,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "vectors act1 whatavectoris",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,3": "force_hall_01",
+				"1,4": "force_hall_01",
+				"1,5": "force_hall_01",
+				"1,6": "force_hall_01",
+				"10,12": "force_point_projection",
+				"10,13": "force_point_projection",
+				"10,14": "force_point_projection",
+				"10,15": "force_point_projection",
+				"10,16": "force_point_projection",
+				"10,5": "force_point_addition",
+				"10,6": "force_point_addition",
+				"10,7": "force_point_addition",
+				"10,8": "force_point_addition",
+				"10,9": "force_point_addition",
+				"11,5": "force_point_addition",
+				"11,6": "force_point_addition",
+				"11,7": "force_point_addition",
+				"11,8": "force_point_addition",
+				"11,9": "force_point_addition",
+				"12,5": "force_point_addition",
+				"12,6": "force_point_addition",
+				"12,7": "force_point_addition",
+				"12,8": "force_point_addition",
+				"12,9": "force_point_addition",
+				"13,5": "force_point_addition",
+				"13,6": "force_point_addition",
+				"13,7": "force_point_addition",
+				"13,8": "force_point_addition",
+				"13,9": "force_point_addition",
+				"2,3": "force_hall_01",
+				"2,4": "force_hall_01",
+				"2,5": "force_hall_01",
+				"2,6": "force_hall_01",
+				"2,7": "force_point_direction",
+				"2,8": "force_point_direction",
+				"2,9": "force_point_direction",
+				"3,3": "force_hall_01",
+				"3,4": "force_hall_01",
+				"3,5": "force_hall_01",
+				"3,6": "force_hall_01",
+				"3,7": "force_point_direction",
+				"3,8": "force_point_direction",
+				"3,9": "force_point_direction",
+				"4,5": "force_point_direction",
+				"4,6": "force_point_direction",
+				"4,7": "force_point_direction",
+				"4,8": "force_point_direction",
+				"4,9": "force_point_direction",
+				"5,5": "force_point_direction",
+				"5,6": "force_point_direction",
+				"5,7": "force_point_direction",
+				"5,8": "force_point_direction",
+				"5,9": "force_point_direction",
+				"6,12": "force_point_projection",
+				"6,13": "force_point_projection",
+				"6,14": "force_point_projection",
+				"6,15": "force_point_projection",
+				"6,16": "force_point_projection",
+				"6,5": "force_point_direction",
+				"6,6": "force_point_direction",
+				"6,7": "force_point_direction",
+				"6,8": "force_point_direction",
+				"6,9": "force_point_direction",
+				"7,12": "force_point_projection",
+				"7,13": "force_point_projection",
+				"7,14": "force_point_projection",
+				"7,15": "force_point_projection",
+				"7,16": "force_point_projection",
+				"8,12": "force_point_projection",
+				"8,13": "force_point_projection",
+				"8,14": "force_point_projection",
+				"8,15": "force_point_projection",
+				"8,16": "force_point_projection",
+				"9,12": "force_point_projection",
+				"9,13": "force_point_projection",
+				"9,14": "force_point_projection",
+				"9,15": "force_point_projection",
+				"9,16": "force_point_projection",
+				"9,5": "force_point_addition",
+				"9,6": "force_point_addition",
+				"9,7": "force_point_addition",
+				"9,8": "force_point_addition",
+				"9,9": "force_point_addition"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 16,
+			"z0": -4,
+			"z1": 20
+		}
+	]
+}

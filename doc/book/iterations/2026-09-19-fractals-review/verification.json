@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "unchanged: commons/maps/Fractal_Recursion/final.md": true,
+    "unchanged: commons/maps/Fractal_RecursiveTrees/final.md": true,
+    "unchanged: commons/maps/Fractal_CantorSet/final.md": true,
+    "unchanged: commons/maps/Fractal_MengerSponge/final.md": true,
+    "unchanged: commons/maps/Fractal_GoldenSpiral/final.md": true,
+    "unchanged: commons/maps/Fractal_Synthesis/final.md": true,
+    "unchanged: commons/maps/sequences/fractals.json": true,
+    "unchanged: commons/data/map_authored.json": true,
+    "unchanged: commons/scenes/endless_museum.gd": true,
+    "only target changed: commons/maps/Fractal_KochSierpinski/map_data.json": true,
+    "only target changed: commons/artifacts/registry/cellular_automata.json": true,
+    "only target changed: commons/data/museum_core_encounters.json": true,
+    "only pyramid placement changed: ada_run/em_plan.json": true,
+    "only pyramid placement changed: commons/data/museum/em_plan.json": true,
+    "primary roles, order, core and book markers agree": true,
+    "core manuscript hash current": true,
+    "core map hash current": true,
+    "runtime checks passed": true,
+    "Fractals anchor present": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/before-desk.png": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/desk.png": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/SUMMARY.md": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/six-calls.png": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/five-calls.png": true,
+    "comparison target exists: doc/book/iterations/2026-09-19-fractals-review/controls-report.json": true,
+    "comparison target exists: commons/maps/Fractal_KochSierpinski/final.md": true
+  },
+  "deltas": {
+    "commons/maps/Fractal_KochSierpinski/map_data.json": [
+      "/layers/interactables/25/6"
+    ],
+    "commons/artifacts/registry/cellular_automata.json": [
+      "/artifacts/sierpinski_pyramid/description",
+      "/artifacts/sierpinski_pyramid/dna/default",
+      "/artifacts/sierpinski_pyramid/dna/kin",
+      "/artifacts/sierpinski_pyramid/dna/note",
+      "/artifacts/sierpinski_pyramid/dna/still_note",
+      "/artifacts/sierpinski_pyramid/dna/was",
+      "/artifacts/sierpinski_pyramid/interactions",
+      "/artifacts/sierpinski_pyramid/parameters/lesson",
+      "/artifacts/sierpinski_pyramid/qfep_connection"
+    ],
+    "commons/data/museum_core_encounters.json": [
+      "/rooms/Fractal_KochSierpinski/map_sha256",
+      "/rooms/Fractal_KochSierpinski/primary_tokens/length",
+      "/rooms/Fractal_KochSierpinski/reason",
+      "/rooms/Fractal_KochSierpinski/status",
+      "/rooms/Fractal_KochSierpinski/text_sha256"
+    ],
+    "ada_run/em_plan.json": [
+      "/plans/97/artifacts/8/config/lesson",
+      "/plans/97/artifacts/8/config/plinth",
+      "/plans/97/artifacts/8/rotation"
+    ],
+    "commons/data/museum/em_plan.json": [
+      "/plans/97/artifacts/8/config/lesson",
+      "/plans/97/artifacts/8/config/plinth",
+      "/plans/97/artifacts/8/rotation"
+    ]
+  },
+  "passed": true,
+  "scope": "Frozen local snapshots, final source relations, generated page targets and targeted museum controls/physics. Not whole-sequence or headset acceptance."
+}

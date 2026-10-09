@@ -1,0 +1,2313 @@
+{
+  "meta": {
+    "date": "2026-10-02",
+    "scope": "Source-audited planning atlas; no game or spine edits.",
+    "entries": 100,
+    "distinct_artist_labels": 99,
+    "categories": 12,
+    "profiles": 24,
+    "candidate_artifacts": 37,
+    "candidate_artifacts_with_direct_spine_tokens": 19,
+    "maps_scanned": 204,
+    "sequences_scanned": 25,
+    "judgements": {
+      "reuse": 10,
+      "compose": 38,
+      "develop": 32,
+      "research": 20
+    },
+    "artist_evidence": "Descriptions and search URLs supplied by the user; not independently verified art history.",
+    "placement_scope": "Exact registry key in layers.interactables in current active-spine map_data.json files. No direct token does not exclude generated, nested, branch or dynamic placement.",
+    "readiness_scope": "Capability gates use the declared ladder, whose nodes currently have proposed status. They do not prove a finished tutorial, student competence or artifact runtime health."
+  },
+  "matches": [
+    {
+      "id": "entry-001",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Lygia Clark",
+      "provided_operation": "Bichos / O dentro é o fora. Hinged planes; topology becomes interaction.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Lygia+Clark+Bicho",
+      "profiles": [
+        "hinge"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Use the hinge-and-return companion: compare retained and restored poses, then two corner paths to the same pose.",
+      "critical_remainder": "The fixed support and kinematic angles remain our decisions; physical weight and contact are the next investigation.",
+      "artifacts": [
+        "bicho_hinge"
+      ]
+    },
+    {
+      "id": "entry-002",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Susan Weil",
+      "provided_operation": "folded / bent image surfaces; painting treated as deformable plane.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Susan+Weil+folded+painting",
+      "profiles": [
+        "bend",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Place one image on a deformable plane and retain the same UV coordinates through a fold.",
+      "critical_remainder": "A fold must act on the image as well as its supporting geometry.",
+      "artifacts": [
+        "fold_wall",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-003",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Ulla Viotti",
+      "provided_operation": "ceramic fold; rigid material carrying the memory of bending.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Ulla+Viotti+ceramic",
+      "profiles": [
+        "bend",
+        "soft"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Compare an authored curved sheet with a frozen settled mesh.",
+      "critical_remainder": "A rigid result can suggest bending without claiming ceramic behaviour.",
+      "artifacts": [
+        "fold_wall",
+        "rounded_softbody",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "id": "entry-004",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Martin Puryear",
+      "provided_operation": "bent structure; curvature as construction rather than decoration.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Martin+Puryear+sculpture",
+      "profiles": [
+        "bend",
+        "network"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Make a curved frame from connected segments and expose its joins.",
+      "critical_remainder": "Keep construction and material labour visible; a spline alone is insufficient.",
+      "artifacts": [
+        "fold_wall",
+        "rhizomatic_structure"
+      ]
+    },
+    {
+      "id": "entry-005",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Dan Graham",
+      "provided_operation": "curved glass / pavilion space; reflection folds viewer and environment together.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Dan+Graham+pavilion",
+      "profiles": [
+        "planes",
+        "reflection"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Add a verified reflected view to one transparent partition before curving it.",
+      "critical_remainder": "Alpha overlap is not simultaneous optical reflection and transmission.",
+      "artifacts": [
+        "color_constellation_office",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-006",
+      "category": {
+        "id": "01",
+        "title": "FOLD / HINGE / ARTICULATED TRANSFORMATION"
+      },
+      "artist": "Richard Serra",
+      "provided_operation": "Torqued Ellipses; bending changes navigation, horizon and bodily orientation.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Richard+Serra+Torqued+Ellipses",
+      "profiles": [
+        "bend",
+        "passage"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Enlarge an authored bent surface and test the walking clearance around it.",
+      "critical_remainder": "Navigation requires a matching collider; steel weight is not supplied by a grey material.",
+      "artifacts": [
+        "fold_wall",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-007",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Claes Oldenburg",
+      "provided_operation": "Soft Toilet and soft sculpture; hard object translated into limp body.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Claes+Oldenburg+Soft+Toilet",
+      "profiles": [
+        "soft"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Give a familiar rigid prop a matched deformable version under the same load.",
+      "critical_remainder": "The translation depends on recognising the original object as well as seeing softness.",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "id": "entry-008",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Eva Hesse",
+      "provided_operation": "Contingent / Expanded Expansion; sagging, hanging, serial soft matter.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Eva+Hesse+Contingent",
+      "profiles": [
+        "cloth"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Change one suspension point in a row of hanging sheets.",
+      "critical_remainder": "Use sag and relation; do not claim the solver reproduces the work’s materials or ageing.",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps"
+      ]
+    },
+    {
+      "id": "entry-009",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Magdalena Abakanowicz",
+      "provided_operation": "Abakans; textile becomes suspended body / architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Magdalena+Abakanowicz+Abakan",
+      "profiles": [
+        "cloth",
+        "passage"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Scale a hanging sheet around a walking route and compare two support arrangements.",
+      "critical_remainder": "Body scale, enclosure and fibre thickness need more than a flag preset.",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-010",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "El Anatsui",
+      "provided_operation": "draped metallic skins; grid made soft by gravity.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=El+Anatsui+draped+metal",
+      "profiles": [
+        "cloth",
+        "repeat"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Attach repeated small plates to a simulated supporting sheet.",
+      "critical_remainder": "A sheet solver supplies motion, not the construction or history of assembled metal units.",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-011",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Do Ho Suh",
+      "provided_operation": "translucent fabric architecture; soft memory of rooms and thresholds.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Do+Ho+Suh+fabric+architecture",
+      "profiles": [
+        "cloth",
+        "planes"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Sew a translucent room from panels with explicit seam constraints.",
+      "critical_remainder": "The project has sheets and transparency; architectural cloth seams and room-specific memory still need development.",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps",
+        "color_constellation_office"
+      ]
+    },
+    {
+      "id": "entry-012",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Jeanne Silverthorne",
+      "provided_operation": "rubber / soft sculptural bodies; sluggish, synthetic tactility.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jeanne+Silverthorne+sculpture",
+      "profiles": [
+        "soft",
+        "body"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Compare the same synthetic body under different stiffness and damping.",
+      "critical_remainder": "Material response should be felt, not inferred from a rubber shader.",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel",
+        "reference_plural_body",
+        "super_drag_mirror"
+      ]
+    },
+    {
+      "id": "entry-013",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Jessica Stockholder",
+      "provided_operation": "suspended and propped materials; provisional balance.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jessica+Stockholder+installation",
+      "profiles": [
+        "assemble",
+        "cloth"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Let a found part rest against one support and hang another from a pin.",
+      "critical_remainder": "Balance must arise from the tested attachments rather than a frozen screenshot.",
+      "artifacts": [
+        "found_object_assembler",
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps"
+      ]
+    },
+    {
+      "id": "entry-014",
+      "category": {
+        "id": "02",
+        "title": "SOFTNESS / SAG / DRAPE / GRAVITY"
+      },
+      "artist": "Sheila Hicks",
+      "provided_operation": "fiber as mass, pile, knot and architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Sheila+Hicks+installation",
+      "profiles": [
+        "network",
+        "cloth"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Start with a small bundle whose strands share a support and collide.",
+      "critical_remainder": "Drawn tubes are available; knotting, strand contact and pile behaviour are not established here.",
+      "artifacts": [
+        "rhizomatic_structure",
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps"
+      ]
+    },
+    {
+      "id": "entry-015",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Yayoi Kusama",
+      "provided_operation": "Infinity Rooms / Obliteration Room; repetition erases stable scale.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Yayoi+Kusama+Infinity+Room",
+      "profiles": [
+        "repeat",
+        "reflection",
+        "inscribe"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Make a repeated field with accumulating marks before attempting recursive mirrors.",
+      "critical_remainder": "A single planar reflection does not supply an Infinity Room; bodily scale and participation remain separate questions.",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting",
+        "super_drag_mirror",
+        "mirror",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-016",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Mona Hatoum",
+      "provided_operation": "serial domestic / industrial forms; grids become bodily and threatening.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Mona+Hatoum+grid+installation",
+      "profiles": [
+        "suspend"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Use the existing fragment variation at fixed grid addresses.",
+      "critical_remainder": "Keep the fragments and support relations legible; repetition does not explain their material associations.",
+      "artifacts": [
+        "reference_suspension"
+      ]
+    },
+    {
+      "id": "entry-017",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Tara Donovan",
+      "provided_operation": "accumulation of ordinary units into emergent form.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Tara+Donovan+installation",
+      "profiles": [
+        "assemble",
+        "repeat"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Accumulate one ordinary unit and change only the local packing rule.",
+      "critical_remainder": "An authored pile is not yet an emergent packing process.",
+      "artifacts": [
+        "found_object_assembler",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-018",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Agnes Martin",
+      "provided_operation": "grid as perceptual threshold and low-intensity repetition.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Agnes+Martin+grid",
+      "profiles": [
+        "repeat"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Use the existing line grid and vary only opacity, spacing or line width.",
+      "critical_remainder": "The current grid is exact and procedural; material irregularity and sustained looking need a separate choice.",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-019",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Ryoji Ikeda",
+      "provided_operation": "datamatics / data grids; mathematical resolution translated into spatial experience.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Ryoji+Ikeda+datamatics",
+      "profiles": [
+        "signals"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Use the whole-room repeat/row-shuffle/cell-shuffle comparison.",
+      "critical_remainder": "The current values are synthetic; source-data encoding is a later, distinct operation.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-020",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Casey Reas",
+      "provided_operation": "software structures; rule-based fields and repeated computational decisions.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Casey+Reas+Software+Structures",
+      "profiles": [
+        "agents",
+        "repeat"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Expose one local decision and its accumulating field.",
+      "critical_remainder": "Choose a declared rule and state; do not label arbitrary particle motion an implementation of a supplied artwork.",
+      "artifacts": [
+        "ecosystem_simulation",
+        "boid_manager",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-021",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "Vera Molnar",
+      "provided_operation": "algorithmic line/grid variation; rule plus deviation.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Vera+Molnar+plotter",
+      "profiles": [
+        "repeat"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Reuse the nested-frame study’s translation, rotation and scale controls.",
+      "critical_remainder": "Preserve the distinction between a retained deviation and fresh random sampling.",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-022",
+      "category": {
+        "id": "03",
+        "title": "GRID / REPETITION / ACCUMULATION"
+      },
+      "artist": "TeamLab",
+      "provided_operation": "responsive projection fields; repetition behaves as environment.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=teamLab+Borderless",
+      "profiles": [
+        "inscribe",
+        "agents",
+        "light"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Connect one measured visitor input to one retained mark and one response.",
+      "critical_remainder": "Whole-room multi-person sensing and long-lived interaction still need explicit input and persistence design.",
+      "artifacts": [
+        "ball_painting_demo",
+        "running_text_display",
+        "ecosystem_simulation",
+        "boid_manager",
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-023",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Robert Rauschenberg",
+      "provided_operation": "Combines; image/object boundaries overrun their frame.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Robert+Rauschenberg+Combine",
+      "profiles": [
+        "assemble",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Attach a retained image surface to an assembled group of offcuts.",
+      "critical_remainder": "The source and previous use of a found object cannot be replaced by a generic primitive without saying so.",
+      "artifacts": [
+        "found_object_assembler",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-024",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Jason Rhoades",
+      "provided_operation": "maximal assemblage; density, cable, object and circulation.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jason+Rhoades+installation",
+      "profiles": [
+        "assemble",
+        "network"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Let a cable network and a dense arrangement compete for a walking route.",
+      "critical_remainder": "Increase density while measuring access; clutter is not itself a social account of objects.",
+      "artifacts": [
+        "found_object_assembler",
+        "rhizomatic_structure"
+      ]
+    },
+    {
+      "id": "entry-025",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Sarah Sze",
+      "provided_operation": "fragmented spatial ecosystems; small objects establish large-scale fields.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Sarah+Sze+installation",
+      "profiles": [
+        "assemble",
+        "network",
+        "trace"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Keep small parts fixed while one connection or sightline changes.",
+      "critical_remainder": "The apparatus must make relations inspectable instead of adding arbitrary detail.",
+      "artifacts": [
+        "found_object_assembler",
+        "rhizomatic_structure",
+        "head_trace_projection"
+      ]
+    },
+    {
+      "id": "entry-026",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Cornelia Parker",
+      "provided_operation": "Cold Dark Matter; explosion arrested as suspended topology.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Cornelia+Parker+Cold+Dark+Matter",
+      "profiles": [
+        "suspend",
+        "assemble"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Suspend a selected set of fragments and vary one outward displacement.",
+      "critical_remainder": "Current fragments are generated shapes, not remains of a simulated or historical explosion.",
+      "artifacts": [
+        "reference_suspension",
+        "found_object_assembler"
+      ]
+    },
+    {
+      "id": "entry-027",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Chiharu Shiota",
+      "provided_operation": "thread networks; drawing becomes navigable 3D entanglement.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Chiharu+Shiota+Key+in+the+Hand",
+      "profiles": [
+        "network",
+        "passage"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Stretch a declared connection graph across a room and keep a route through it.",
+      "critical_remainder": "Drawn edges need their own collision, textile character and object associations.",
+      "artifacts": [
+        "rhizomatic_structure",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-028",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Thomas Hirschhorn",
+      "provided_operation": "overloaded, provisional architectures of information and matter.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Thomas+Hirschhorn+installation",
+      "profiles": [
+        "assemble",
+        "inscribe"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Stage one actual document and its supporting structure before multiplying material.",
+      "critical_remainder": "The social and political address of information must be authored; density alone is a weak match.",
+      "artifacts": [
+        "found_object_assembler",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-029",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Bill Woodrow",
+      "provided_operation": "found-object transformation; sculpture exposed as cut, index and direction.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Bill+Woodrow+sculpture",
+      "profiles": [
+        "assemble",
+        "void"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Keep an object’s source mesh alongside the piece cut from it.",
+      "critical_remainder": "Arbitrary-mesh cutting and a retained cut lineage are not supplied by the current offcut table.",
+      "artifacts": [
+        "found_object_assembler",
+        "facade_room_cast"
+      ]
+    },
+    {
+      "id": "entry-030",
+      "category": {
+        "id": "04",
+        "title": "FRAGMENT / ASSEMBLAGE / DENSITY / SUSPENSION"
+      },
+      "artist": "Laris Strunke",
+      "provided_operation": "grid and fragment; broken pictorial structure.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Laris+Strunke",
+      "profiles": [
+        "repeat",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Break the continuity of one drawn grid while retaining its earlier state.",
+      "critical_remainder": "Identify the particular work before claiming which pictorial operation is being translated.",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-031",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Rachel Whiteread",
+      "provided_operation": "House / casts of interiors; emptiness becomes positive mass.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Rachel+Whiteread+House",
+      "profiles": [
+        "void"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Reuse the room/positive pair and alter the same opening in both.",
+      "critical_remainder": "The digital volume is available; casting process, dwelling and loss remain outside that calculation.",
+      "artifacts": [
+        "facade_room_cast"
+      ]
+    },
+    {
+      "id": "entry-032",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Anish Kapoor",
+      "provided_operation": "void, concavity, reflection; surface destabilizes depth.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Anish+Kapoor+void+mirror",
+      "profiles": [
+        "void",
+        "reflection"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Compare a real cavity with an apparent depth made by a surface.",
+      "critical_remainder": "Curved live reflections and a calibrated depth illusion are not furnished by the flat mirror.",
+      "artifacts": [
+        "facade_room_cast",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-033",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Antony Gormley",
+      "provided_operation": "bodies, fields and voids; the body as spatial measure.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Antony+Gormley+installation",
+      "profiles": [
+        "body",
+        "passage",
+        "repeat"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Repeat a chosen body volume, then test the intervals it leaves.",
+      "critical_remainder": "The chosen volume must be declared; one capsule cannot represent every body.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_passage",
+        "scale_me",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-034",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "James Turrell",
+      "provided_operation": "light as volumetric material; perception becomes architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=James+Turrell+Ganzfeld",
+      "profiles": [
+        "light"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Use the changing white chamber and open ceiling levels with two fixed viewpoints.",
+      "critical_remainder": "The light and geometry are available; perceptual effects require viewing tests rather than an artist label.",
+      "artifacts": [
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-035",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Olafur Eliasson",
+      "provided_operation": "light, mist, mirror and atmosphere as perceptual apparatus.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Olafur+Eliasson+Weather+Project",
+      "profiles": [
+        "light",
+        "reflection"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Hold a visible light source fixed while changing the receiving atmosphere or view.",
+      "critical_remainder": "A mist field is additional work; illumination is not a physical weather model.",
+      "artifacts": [
+        "colour_light_rooms",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-036",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Dan Graham",
+      "provided_operation": "reflective transparency; seeing and being seen share the same surface.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Dan+Graham+glass+pavilion",
+      "profiles": [
+        "planes",
+        "reflection"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Compare seeing through a pane with seeing a reflected camera on it.",
+      "critical_remainder": "The two mechanisms exist separately; optical integration and curved geometry remain unbuilt.",
+      "artifacts": [
+        "color_constellation_office",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-037",
+      "category": {
+        "id": "05",
+        "title": "VOID / NEGATIVE SPACE / REFLECTION / PERCEPTUAL DISTORTION"
+      },
+      "artist": "Liz Deschenes",
+      "provided_operation": "photographic surface as object and self-reflective field.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Liz+Deschenes+installation",
+      "profiles": [
+        "surface",
+        "reflection"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Make one surface change with viewpoint and disclose its rendering rule.",
+      "critical_remainder": "Choose a specific photographic operation; a shiny shader is not photographic materiality.",
+      "artifacts": [
+        "reference_pattern_garden",
+        "glitch_mirror",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-038",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Marina Abramović",
+      "provided_operation": "duration, fluids, endurance and bodily limit.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Marina+Abramovic+performance",
+      "profiles": [
+        "trace",
+        "sound"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Retain duration and one measured action without scoring endurance.",
+      "critical_remainder": "A timeline cannot substitute for a performer’s body, risk or relation to an audience.",
+      "artifacts": [
+        "head_trace_projection",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-039",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Janine Antoni",
+      "provided_operation": "body and material mutually transform one another.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Janine+Antoni+sculpture+performance",
+      "profiles": [
+        "soft",
+        "inscribe"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Let one bodily input permanently deform or mark a material proxy.",
+      "critical_remainder": "Persistent contact-driven sculpting needs more than a returning soft-body animation.",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-040",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Stelarc",
+      "provided_operation": "technological extensions of the body; agency distributed across flesh and machine.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Stelarc+Third+Hand",
+      "profiles": [
+        "body",
+        "trace"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Drive one added limb from a declared controller channel.",
+      "critical_remainder": "A procedural limb is not yet a controlled extension or a distributed agency experiment.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "head_trace_projection"
+      ]
+    },
+    {
+      "id": "entry-041",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "ORLAN",
+      "provided_operation": "body as constructed and technologically mutable image.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=ORLAN+Carnal+Art",
+      "profiles": [
+        "body",
+        "surface"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Compare an avatar’s chosen surface with its recorded source and authoring decisions.",
+      "critical_remainder": "A material switch does not reproduce surgical performance or its stakes.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_pattern_garden",
+        "glitch_mirror"
+      ]
+    },
+    {
+      "id": "entry-042",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Nick Cave",
+      "provided_operation": "Soundsuits; wearable sculptural environments around the body.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Nick+Cave+Soundsuits",
+      "profiles": [
+        "body",
+        "sound"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Attach an authored costume to the real player and map motion to sound.",
+      "critical_remainder": "The wardrobe supplies attachment, not a Soundsuit’s materials or cultural account.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-043",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Pope.L",
+      "provided_operation": "crawl works; ground contact, friction and public space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Pope.L+crawl",
+      "profiles": [
+        "passage",
+        "trace"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Document ground contact and route constraints for a declared virtual body.",
+      "critical_remainder": "Do not turn a crawl work into a low-height obstacle course and call its politics reproduced.",
+      "artifacts": [
+        "reference_passage",
+        "scale_me",
+        "head_trace_projection"
+      ]
+    },
+    {
+      "id": "entry-044",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Lena Cronqvist",
+      "provided_operation": "doll / child / self-image as mutable psychic body.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Lena+Cronqvist+sculpture",
+      "profiles": [
+        "body",
+        "assemble"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Arrange a small set of figures whose scale and gaze can be changed.",
+      "critical_remainder": "Identify the specific work and relation before treating a doll-like mesh as an adequate translation.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "found_object_assembler"
+      ]
+    },
+    {
+      "id": "entry-045",
+      "category": {
+        "id": "06",
+        "title": "BODY / PERFORMANCE / PRESSURE / METAMORPHOSIS"
+      },
+      "artist": "Nathalie Djurberg",
+      "provided_operation": "clay bodies in continual grotesque metamorphosis.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Nathalie+Djurberg+claymation",
+      "profiles": [
+        "soft",
+        "body"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Author one consequential transformation and retain its stages.",
+      "critical_remainder": "Deforming a mesh supplies no stop-motion timing, character or narrative by itself.",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel",
+        "reference_plural_body",
+        "super_drag_mirror"
+      ]
+    },
+    {
+      "id": "entry-046",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Pipilotti Rist",
+      "provided_operation": "projected image as room-scale color, body and atmosphere.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Pipilotti+Rist+Pixel+Forest",
+      "profiles": [
+        "light",
+        "signals"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Project an authored moving-image surface into a coloured room.",
+      "critical_remainder": "Live camera monitors are available; licensed source imagery and projection mapping need their own workflow.",
+      "artifacts": [
+        "colour_light_rooms",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-047",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Ann Hamilton",
+      "provided_operation": "installation through cloth, air, sound, text and repetitive gesture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Ann+Hamilton+installation",
+      "profiles": [
+        "cloth",
+        "sound",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Link one repeating action to a cloth response, a sound and a line of text.",
+      "critical_remainder": "Keep the action and its timing meaningful; synchronised effects alone are insufficient.",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps",
+        "soundboxes",
+        "sound_timeline",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-048",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Carsten Höller",
+      "provided_operation": "slides and participatory devices; gravity becomes experience.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Carsten+Holler+Test+Site",
+      "profiles": [
+        "gravity",
+        "passage"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Build one slope with a matching collider and compare descent under a fixed body.",
+      "critical_remainder": "A gravity demonstration is not yet a comfortable, traversable VR slide.",
+      "artifacts": [
+        "gravity_well",
+        "cloth_simulation",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-049",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Jaume Plensa",
+      "provided_operation": "bodies, letters, sound and silence as spatial envelopes.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jaume+Plensa+installation",
+      "profiles": [
+        "inscribe",
+        "body",
+        "sound"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Arrange legible letter forms around a declared body volume and listening position.",
+      "critical_remainder": "Scrolling text exists; a letter-built envelope and authored sound/silence must be constructed.",
+      "artifacts": [
+        "ball_painting_demo",
+        "running_text_display",
+        "reference_plural_body",
+        "super_drag_mirror",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-050",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Laurie Anderson",
+      "provided_operation": "narrative, voice, media and virtual environment.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Laurie+Anderson+VR",
+      "profiles": [
+        "sound",
+        "signals",
+        "trace"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Keep one voice passage, viewpoint and event on a replayable timeline.",
+      "critical_remainder": "The inspected audio apparatus is not a complete spatial narrative authoring system.",
+      "artifacts": [
+        "soundboxes",
+        "sound_timeline",
+        "signal_room",
+        "monitorsystem",
+        "head_trace_projection"
+      ]
+    },
+    {
+      "id": "entry-051",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Nam June Paik",
+      "provided_operation": "electronic image as sculptural and architectural material.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Nam+June+Paik+TV+Buddha",
+      "profiles": [
+        "signals"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Arrange existing camera monitors so the recording apparatus is part of the scene.",
+      "critical_remainder": "A camera feedback loop needs a bounded render design and an explicit relation between subject and image.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-052",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Zach Lieberman",
+      "provided_operation": "code, light and gesture forming responsive environments.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Zach+Lieberman+interactive+installation",
+      "profiles": [
+        "trace",
+        "inscribe",
+        "light"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Map one measured gesture to one visible or audible response.",
+      "critical_remainder": "First disclose what the input really measures; camera motion is not full gesture recognition.",
+      "artifacts": [
+        "head_trace_projection",
+        "ball_painting_demo",
+        "running_text_display",
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-053",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Daniel Rozin",
+      "provided_operation": "responsive mirrors; the viewer becomes live material.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Daniel+Rozin+mirror",
+      "profiles": [
+        "signals",
+        "reflection"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Sample a live camera image and drive a coarse array of moving elements.",
+      "critical_remainder": "The viewport and array exist; luminance-to-actuator mapping and physical response remain to be built.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "super_drag_mirror",
+        "mirror"
+      ]
+    },
+    {
+      "id": "entry-054",
+      "category": {
+        "id": "07",
+        "title": "IMMERSION / ATMOSPHERE / LIGHT / SOUND / SENSORIAL SPACE"
+      },
+      "artist": "Jim Campbell",
+      "provided_operation": "low-resolution light fields; image hovering between data and perception.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jim+Campbell+Exploded+View",
+      "profiles": [
+        "signals",
+        "repeat"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Map a retained image to a sparse array of light sources.",
+      "critical_remainder": "A flat texture is available; the spatial light arrangement and image reconstruction task are new.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-055",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Ian Cheng",
+      "provided_operation": "Emissaries; real-time worlds whose agents continue without the viewer.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Ian+Cheng+Emissaries",
+      "profiles": [
+        "agents"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Make a small world that keeps a state history while the viewer leaves and returns.",
+      "critical_remainder": "Current local rules are available; narrative agents and persistent world history are separate work.",
+      "artifacts": [
+        "ecosystem_simulation",
+        "boid_manager"
+      ]
+    },
+    {
+      "id": "entry-056",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Refik Anadol",
+      "provided_operation": "machine-learning image fields built from datasets and architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Refik+Anadol+Machine+Hallucinations",
+      "profiles": [
+        "learning",
+        "signals"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Start with an explicit dataset manifest and a real inference output sent to a display.",
+      "critical_remainder": "The GAN diagram is not a dataset-trained visual model.",
+      "artifacts": [
+        "neural_networks_vr",
+        "generative_adversarial_networks_gans_vr",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-057",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Mario Klingemann",
+      "provided_operation": "generative AI portrait systems; continuous synthetic production.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Mario+Klingemann+Memories+of+Passersby",
+      "profiles": [
+        "learning",
+        "signals"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Connect a documented model to a retained sequence of generated outputs.",
+      "critical_remainder": "Continuous production requires actual inference and provenance, not animated loss labels.",
+      "artifacts": [
+        "neural_networks_vr",
+        "generative_adversarial_networks_gans_vr",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-058",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Sofia Crespo",
+      "provided_operation": "neural bio-morphology; synthetic organisms and imagined natural histories.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Sofia+Crespo+Artificial+Natural+History",
+      "profiles": [
+        "learning",
+        "body"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Compare a procedural organism with an output from a declared image model.",
+      "critical_remainder": "Do not relabel procedural morphology as neural generation.",
+      "artifacts": [
+        "neural_networks_vr",
+        "generative_adversarial_networks_gans_vr",
+        "reference_plural_body",
+        "super_drag_mirror"
+      ]
+    },
+    {
+      "id": "entry-059",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Anna Ridler",
+      "provided_operation": "dataset construction as artistic material; model behavior tied to archive structure.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Anna+Ridler+Mosaic+Virus",
+      "profiles": [
+        "learning",
+        "inscribe"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Build an inspectable dataset-selection table before connecting a model.",
+      "critical_remainder": "Training data, annotation decisions and source permissions are not present in the inspected learning diagram.",
+      "artifacts": [
+        "neural_networks_vr",
+        "generative_adversarial_networks_gans_vr",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-060",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Marina Zurkow",
+      "provided_operation": "animated ecological systems and speculative environments.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Marina+Zurkow+Slurb",
+      "profiles": [
+        "agents",
+        "surface"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Let one ecological relation change a visible state that persists over time.",
+      "critical_remainder": "Name restocking and boundary policies; the simulator is a chosen ecology.",
+      "artifacts": [
+        "ecosystem_simulation",
+        "boid_manager",
+        "reference_pattern_garden",
+        "glitch_mirror"
+      ]
+    },
+    {
+      "id": "entry-061",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Tabor Robak",
+      "provided_operation": "game-engine surfaces and synthetic world behavior.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Tabor+Robak+20XX",
+      "profiles": [
+        "surface",
+        "agents",
+        "signals"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Combine a live procedural world with its visible rendering and timing controls.",
+      "critical_remainder": "Visual polish and game-engine behaviour are different capacities and should remain inspectable.",
+      "artifacts": [
+        "reference_pattern_garden",
+        "glitch_mirror",
+        "ecosystem_simulation",
+        "boid_manager",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-062",
+      "category": {
+        "id": "08",
+        "title": "SIMULATION / GENERATIVE SYSTEMS / AI / DATA"
+      },
+      "artist": "Rafael Lozano-Hemmer",
+      "provided_operation": "biometric and interactive systems; presence becomes data in space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Rafael+Lozano-Hemmer+Pulse+Room",
+      "profiles": [
+        "trace",
+        "signals"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Begin with a labelled simulated pulse input, then design a real sensor adapter.",
+      "critical_remainder": "Headset position is not a heartbeat; biometric acquisition and consent need their own implementation.",
+      "artifacts": [
+        "head_trace_projection",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-063",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Jacolby Satterwhite",
+      "provided_operation": "choreographed virtual worlds built from drawings, bodies and 3D objects.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jacolby+Satterwhite+Country+Ball",
+      "profiles": [
+        "trace",
+        "body",
+        "assemble"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Keep a drawn source alongside one figure generated from its geometry.",
+      "critical_remainder": "Drawing-to-form lineage and authored choreography are not delivered by the generic body assembly.",
+      "artifacts": [
+        "head_trace_projection",
+        "reference_plural_body",
+        "super_drag_mirror",
+        "found_object_assembler"
+      ]
+    },
+    {
+      "id": "entry-064",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Jonathan Monaghan",
+      "provided_operation": "hyper-polished CG architecture and uncanny object systems.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jonathan+Monaghan+CGI",
+      "profiles": [
+        "body",
+        "surface",
+        "planes"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Arrange familiar synthetic objects with one precise architectural rule.",
+      "critical_remainder": "A material library does not itself supply the narrative carried by the reference’s objects.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_pattern_garden",
+        "glitch_mirror",
+        "color_constellation_office"
+      ]
+    },
+    {
+      "id": "entry-065",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Jesse Kanda",
+      "provided_operation": "elastic digital bodies and unstable anatomical surfaces.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jesse+Kanda+art",
+      "profiles": [
+        "soft",
+        "body"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Make one connected body deform through a deliberately authored sequence.",
+      "critical_remainder": "The current multi-part pose is not a continuous anatomical mesh or finished animation system.",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel",
+        "reference_plural_body",
+        "super_drag_mirror"
+      ]
+    },
+    {
+      "id": "entry-066",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "LuYang",
+      "provided_operation": "avatar bodies, game logic and techno-spiritual simulation.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=LuYang+DOKU",
+      "profiles": [
+        "body",
+        "signals"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Bind an avatar’s pose, movement and selected state to explicit controls.",
+      "critical_remainder": "A controllable rig and sourced iconography must be authored; the plural-body study does not provide them.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-067",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Jon Rafman",
+      "provided_operation": "virtual worlds, internet subcultures and simulated subjectivity.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Jon+Rafman+VR",
+      "profiles": [
+        "signals",
+        "passage"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Study one chosen virtual-world convention through a room and a retained view.",
+      "critical_remainder": "Specific subcultures, sources and simulated subjectivity cannot be inferred from a generic VR room.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-068",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Eva Papamargariti",
+      "provided_operation": "hybrid digital organisms, skins and environments.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Eva+Papamargariti",
+      "profiles": [
+        "body",
+        "surface",
+        "agents"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Let a procedural organism and its material respond to the same state.",
+      "critical_remainder": "Name the state and response rather than using hybrid appearance as the whole argument.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_pattern_garden",
+        "glitch_mirror",
+        "ecosystem_simulation",
+        "boid_manager"
+      ]
+    },
+    {
+      "id": "entry-069",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Mike Pelletier",
+      "provided_operation": "procedural bodies and motion as deformation systems.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Mike+Pelletier+3D+art",
+      "profiles": [
+        "body",
+        "soft"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Drive deformation with a retained motion sequence and compare two interpretations.",
+      "critical_remainder": "A motion source, rig correspondence and deformation mapping are still required.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "rounded_softbody",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "id": "entry-070",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Kouhei Nakama",
+      "provided_operation": "digitally generated organic bodies and morphogenesis.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Kouhei+Nakama+art",
+      "profiles": [
+        "body",
+        "surface",
+        "agents"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Move from a posed body to one growth rule with retained state.",
+      "critical_remainder": "A surface shader does not implement morphogenesis.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_pattern_garden",
+        "glitch_mirror",
+        "ecosystem_simulation",
+        "boid_manager"
+      ]
+    },
+    {
+      "id": "entry-071",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Cool 3D World",
+      "provided_operation": "low-resolution CGI bodies, slapstick physics and unstable surfaces.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Cool+3D+World",
+      "profiles": [
+        "body",
+        "soft",
+        "gravity"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Give a simple body a collision-driven event with an authored recovery.",
+      "critical_remainder": "Slapstick needs timing and consequential contact, not only a distorted mesh.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "rounded_softbody",
+        "frozen_glass_vessel",
+        "gravity_well",
+        "cloth_simulation"
+      ]
+    },
+    {
+      "id": "entry-072",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Pussykrew",
+      "provided_operation": "immersive speculative environments and queer synthetic ecologies.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Pussykrew+art",
+      "profiles": [
+        "body",
+        "surface"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Reuse the existing plural-body study and vary the attachments or skin rule.",
+      "critical_remainder": "This is an original geometric companion, not a rigged reconstruction of the reference.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "reference_pattern_garden",
+        "glitch_mirror"
+      ]
+    },
+    {
+      "id": "entry-073",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Morehshin Allahyari",
+      "provided_operation": "3D objects as archive, politics and counter-history.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Morehshin+Allahyari+3D+Additivist",
+      "profiles": [
+        "assemble",
+        "inscribe"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Pair one sourced object with a visible record of who supplied and interpreted it.",
+      "critical_remainder": "An arbitrary archive importer and a political counter-archive are not established by an assembly table.",
+      "artifacts": [
+        "found_object_assembler",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-074",
+      "category": {
+        "id": "09",
+        "title": "CG / VIRTUAL BODIES / POST-INTERNET MATERIALITY"
+      },
+      "artist": "Rosa Menkman",
+      "provided_operation": "glitch as material condition and failure-space of digital images.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Rosa+Menkman+glitch",
+      "profiles": [
+        "surface"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Expose a quantisation or channel operation and preserve its unprocessed input.",
+      "critical_remainder": "The current glitch panel is synthetic; actual format failure must be implemented and named separately.",
+      "artifacts": [
+        "reference_pattern_garden",
+        "glitch_mirror"
+      ]
+    },
+    {
+      "id": "entry-075",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Rirkrit Tiravanija",
+      "provided_operation": "social situation as artwork; space organized through use, food and encounter.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Rirkrit+Tiravanija+installation",
+      "profiles": [
+        "assemble",
+        "passage"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Define what visitors can do together before placing any furniture.",
+      "critical_remainder": "A single-player arrangement cannot certify a relational social situation.",
+      "artifacts": [
+        "found_object_assembler",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-076",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Suzanne Lacy",
+      "provided_operation": "collective participation and public choreography.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Suzanne+Lacy+performance",
+      "profiles": [
+        "trace",
+        "agents"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Begin with a participant-authored score and compare it with any simulated agent version.",
+      "critical_remainder": "Boids are not human collective participation or public choreography.",
+      "artifacts": [
+        "head_trace_projection",
+        "ecosystem_simulation",
+        "boid_manager"
+      ]
+    },
+    {
+      "id": "entry-077",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Santiago Sierra",
+      "provided_operation": "labor, exclusion and institutional power made spatially explicit.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Santiago+Sierra+art",
+      "profiles": [
+        "power",
+        "passage"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Make one stated exclusion rule and its record inspectable.",
+      "critical_remainder": "A collider is not labour, payment or institutional power; these require an authored situation.",
+      "artifacts": [
+        "surveillance_panopticon",
+        "refusal_booth",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-078",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Hans Haacke",
+      "provided_operation": "institutional systems, ownership and information structures.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Hans+Haacke+installation",
+      "profiles": [
+        "power",
+        "inscribe"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Show a sourced ownership or institutional relation as an inspectable record.",
+      "critical_remainder": "A provenance claim needs actual external evidence; a procedural graph alone is insufficient.",
+      "artifacts": [
+        "surveillance_panopticon",
+        "refusal_booth",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-079",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Lawrence Abu Hamdan",
+      "provided_operation": "voice, acoustics and forensic listening as political space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Lawrence+Abu+Hamdan+Conflicted+Phonemes",
+      "profiles": [
+        "sound",
+        "trace"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Link one recording to a spatial listening test with retained source metadata.",
+      "critical_remainder": "The audio timeline is not a forensic evidence chain or a testimony interface.",
+      "artifacts": [
+        "soundboxes",
+        "sound_timeline",
+        "head_trace_projection"
+      ]
+    },
+    {
+      "id": "entry-080",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Teresa Margolles",
+      "provided_operation": "material traces of violence transferred into gallery and public space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Teresa+Margolles+Pista+de+baile",
+      "profiles": [
+        "inscribe",
+        "soft"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Define the material trace and its source before choosing a visual proxy.",
+      "critical_remainder": "A generic stain would erase the specificity the supplied index asks us to retain.",
+      "artifacts": [
+        "ball_painting_demo",
+        "running_text_display",
+        "rounded_softbody",
+        "frozen_glass_vessel"
+      ]
+    },
+    {
+      "id": "entry-081",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "David Hammons",
+      "provided_operation": "social codes and urban material economies.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=David+Hammons+Bliz-aard+Ball+Sale",
+      "profiles": [
+        "assemble",
+        "repeat"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Stage a declared exchange around an ordinary object rather than only its arrangement.",
+      "critical_remainder": "An object’s social code and circulation need context, actors and authorship.",
+      "artifacts": [
+        "found_object_assembler",
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ]
+    },
+    {
+      "id": "entry-082",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Amanda Williams",
+      "provided_operation": "color as architectural, social and territorial operation.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Amanda+Williams+Color(ed)+Theory",
+      "profiles": [
+        "planes",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Attach one chosen colour to a documented place and keep that relation visible.",
+      "critical_remainder": "Colour coordinates do not supply the architectural and territorial account.",
+      "artifacts": [
+        "color_constellation_office",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-083",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Ronald Rael + Virginia San Fratello",
+      "provided_operation": "border infrastructure reimagined as social interface.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Rael+San+Fratello+Teeter+Totter+Wall",
+      "profiles": [
+        "hinge",
+        "passage"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Couple two sides of a barrier through one shared mechanical action.",
+      "critical_remainder": "The project has joints and thresholds; two-person coupling and the border situation are additional requirements.",
+      "artifacts": [
+        "bicho_hinge",
+        "reference_passage",
+        "scale_me"
+      ]
+    },
+    {
+      "id": "entry-084",
+      "category": {
+        "id": "10",
+        "title": "SOCIAL SPACE / RELATIONAL SYSTEMS / POWER / BORDER"
+      },
+      "artist": "Chto Delat",
+      "provided_operation": "political pedagogy, theater and collective spatial practice.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Chto+Delat+installation",
+      "profiles": [
+        "power",
+        "sound",
+        "inscribe"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Start from a collective script with room for disagreement and revision.",
+      "critical_remainder": "A sequence of prompts is not collective political pedagogy by itself.",
+      "artifacts": [
+        "surveillance_panopticon",
+        "refusal_booth",
+        "soundboxes",
+        "sound_timeline",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-085",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "William Kentridge",
+      "provided_operation": "projected drawing, stage, machine and temporal layering.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=William+Kentridge+Refusal+of+Time",
+      "profiles": [
+        "trace",
+        "signals",
+        "sound"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Retain drawn states and synchronise their replay with one mechanical or sound event.",
+      "critical_remainder": "A mark recorder is not yet a multi-channel staged montage system.",
+      "artifacts": [
+        "head_trace_projection",
+        "signal_room",
+        "monitorsystem",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-086",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Hito Steyerl",
+      "provided_operation": "image circulation, visibility, surveillance and virtualized space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Hito+Steyerl+How+Not+to+Be+Seen",
+      "profiles": [
+        "signals",
+        "power"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Let a visibility rule affect a retained image and disclose who set the rule.",
+      "critical_remainder": "Camera views and opacity do not by themselves account for surveillance or image circulation.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "surveillance_panopticon",
+        "refusal_booth"
+      ]
+    },
+    {
+      "id": "entry-087",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Harun Farocki",
+      "provided_operation": "Serious Games; simulation as apparatus for training, war and perception.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Harun+Farocki+Serious+Games",
+      "profiles": [
+        "signals",
+        "trace",
+        "power"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Record the same simulated action from participant and observer views.",
+      "critical_remainder": "The training apparatus, task and consequences must be specified; generic game footage is insufficient.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "head_trace_projection",
+        "surveillance_panopticon",
+        "refusal_booth"
+      ]
+    },
+    {
+      "id": "entry-088",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Camille Henrot",
+      "provided_operation": "montage as a compressed world-model / desktop cosmology.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Camille+Henrot+Grosse+Fatigue",
+      "profiles": [
+        "signals",
+        "inscribe"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Build an authored set of image/text sources with visible montage decisions.",
+      "critical_remainder": "A viewport does not supply archive selection, sequencing or source provenance.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-089",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Arthur Jafa",
+      "provided_operation": "montage, image intensity and Black visual culture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Arthur+Jafa+APEX",
+      "profiles": [
+        "signals",
+        "sound"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Define the licensed image sequence and temporal relationships before choosing displays.",
+      "critical_remainder": "Image intensity and Black visual culture cannot be reduced to a contrast or playback parameter.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-090",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Ryan Trecartin",
+      "provided_operation": "manic networked identities in unstable architectural/video space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Ryan+Trecartin+video",
+      "profiles": [
+        "body",
+        "signals",
+        "sound"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Synchronise one authored avatar event, voice track and camera cut.",
+      "critical_remainder": "The required performance and editing system exceeds the current monitor apparatus.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "signal_room",
+        "monitorsystem",
+        "soundboxes",
+        "sound_timeline"
+      ]
+    },
+    {
+      "id": "entry-091",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Kara Walker",
+      "provided_operation": "silhouette, projection and monumental spatial narrative.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Kara+Walker+A+Subtlety",
+      "profiles": [
+        "inscribe",
+        "body",
+        "light"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Construct one legible silhouette and state the narrative and source it carries.",
+      "critical_remainder": "Monumental scale or shadow alone does not recreate the work’s historical address.",
+      "artifacts": [
+        "ball_painting_demo",
+        "running_text_display",
+        "reference_plural_body",
+        "super_drag_mirror",
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-092",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Mary Reid Kelley",
+      "provided_operation": "performed graphic worlds; body, language and set collapse together.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Mary+Reid+Kelley",
+      "profiles": [
+        "body",
+        "inscribe",
+        "signals"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Bind a figure, graphic set and authored text to the same timed event.",
+      "critical_remainder": "A complete performance, language and scene-sequencing system is still required.",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror",
+        "ball_painting_demo",
+        "running_text_display",
+        "signal_room",
+        "monitorsystem"
+      ]
+    },
+    {
+      "id": "entry-093",
+      "category": {
+        "id": "11",
+        "title": "MOVING IMAGE / MONTAGE / NARRATIVE SPACE"
+      },
+      "artist": "Peter Greenaway",
+      "provided_operation": "baroque layering, tableau and image architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Peter+Greenaway+installation",
+      "profiles": [
+        "assemble",
+        "signals",
+        "light"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Arrange a fixed tableau with two authored views and an explicit timing relation.",
+      "critical_remainder": "The components exist; a sustained image architecture requires editorial sequencing.",
+      "artifacts": [
+        "found_object_assembler",
+        "signal_room",
+        "monitorsystem",
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-094",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Tomás Saraceno",
+      "provided_operation": "web structures, balloons and airborne architectures; gravity becomes variable.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Tomas+Saraceno+Aerocene",
+      "profiles": [
+        "network",
+        "cloth",
+        "gravity"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Test one tensioned network before adding flotation or a room-scale enclosure.",
+      "critical_remainder": "Drawn webs do not establish load paths; buoyancy and coupled air/structure behaviour need new mechanics.",
+      "artifacts": [
+        "rhizomatic_structure",
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps",
+        "gravity_well"
+      ]
+    },
+    {
+      "id": "entry-095",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Maya Lin",
+      "provided_operation": "landscape cuts, cracks and topographic inscription.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Maya+Lin+landscape+installation",
+      "profiles": [
+        "terrain",
+        "inscribe"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Cut or inscribe a declared path into a sampled landscape.",
+      "critical_remainder": "Use a real site dataset if the work depends on one; procedural terrain is not a survey.",
+      "artifacts": [
+        "noise_terrain",
+        "ball_painting_demo",
+        "running_text_display"
+      ]
+    },
+    {
+      "id": "entry-096",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Mirosław Bałka",
+      "provided_operation": "architectural fragments, darkness, thresholds and bodily memory.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Miroslaw+Balka+How+It+Is",
+      "profiles": [
+        "passage",
+        "assemble",
+        "light"
+      ],
+      "judgement": "reuse",
+      "smallest_next_study": "Reuse the passage study and give one threshold a precise relation to the body.",
+      "critical_remainder": "It is a new width experiment; memory and the specific reference are not contained in that dimension.",
+      "artifacts": [
+        "reference_passage",
+        "scale_me",
+        "found_object_assembler",
+        "colour_light_rooms"
+      ]
+    },
+    {
+      "id": "entry-097",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Cildo Meireles",
+      "provided_operation": "dense multisensory environments where scale and orientation are destabilized.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Cildo+Meireles+Babel",
+      "profiles": [
+        "sound",
+        "passage",
+        "assemble"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Make two sound fields and an obstructed sightline share a navigable room.",
+      "critical_remainder": "A multisensory arrangement needs actual source, scale and overlap tests.",
+      "artifacts": [
+        "soundboxes",
+        "sound_timeline",
+        "reference_passage",
+        "scale_me",
+        "found_object_assembler"
+      ]
+    },
+    {
+      "id": "entry-098",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Superstudio",
+      "provided_operation": "continuous grid and speculative total environment.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Superstudio+Continuous+Monument",
+      "profiles": [
+        "repeat",
+        "terrain"
+      ],
+      "judgement": "compose",
+      "smallest_next_study": "Carry one grid across several surfaces and expose what it overrides.",
+      "critical_remainder": "A continuous pattern is only the starting point; the speculative claim must be written and spatially tested.",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting",
+        "noise_terrain"
+      ]
+    },
+    {
+      "id": "entry-099",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Monika Bielskyte",
+      "provided_operation": "speculative worldbuilding / protopian futures as design space.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Monika+Bielskyte+Protopia+Futures",
+      "profiles": [
+        "agents",
+        "passage",
+        "assemble"
+      ],
+      "judgement": "research",
+      "smallest_next_study": "Choose one worldbuilding assumption and give participants a way to change it.",
+      "critical_remainder": "Protopian futures are not a visual style or a procedural-biome preset.",
+      "artifacts": [
+        "ecosystem_simulation",
+        "boid_manager",
+        "reference_passage",
+        "scale_me",
+        "found_object_assembler"
+      ]
+    },
+    {
+      "id": "entry-100",
+      "category": {
+        "id": "12",
+        "title": "ARCHITECTURE / FIELD / ECOLOGY / ALTERNATIVE PHYSICS"
+      },
+      "artist": "Keiichi Matsuda",
+      "provided_operation": "augmented urban layers; interface becomes architecture.",
+      "provided_image_search": "https://www.google.com/search?tbm=isch&q=Keiichi+Matsuda+Hyper-Reality",
+      "profiles": [
+        "signals",
+        "inscribe",
+        "passage"
+      ],
+      "judgement": "develop",
+      "smallest_next_study": "Attach competing information layers to the viewer and the room, then test occlusion.",
+      "critical_remainder": "A registered AR/interface layer and its attention rules are not supplied by fixed monitor screens.",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem",
+        "ball_painting_demo",
+        "running_text_display",
+        "reference_passage",
+        "scale_me"
+      ]
+    }
+  ]
+}

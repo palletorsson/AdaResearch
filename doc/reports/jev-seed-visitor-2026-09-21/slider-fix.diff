@@ -1,0 +1,24 @@
+--- before-this-task/seed_replay_demo.gd
++++ after-this-task/seed_replay_demo.gd
+@@ -467,10 +467,11 @@
+ 			area.button_pressed.connect(func(_b): toggle_extra_draw())
+ 
+ 
++# Compact museum staging reparents Panel beneath ReachConsole; locate its live slider.
+ func _on_seed_slider(_value: float) -> void:
+ 	if _syncing_seed_slider:
+ 		return
+-	var slider: Node = get_node_or_null("Panel/Param_0")
++	var slider: Node = find_child("Param_0", true, false)
+ 	if slider and slider.has_method("get_normalized_value"):
+ 		var norm: float = clampf(slider.get_normalized_value(), 0.0, 1.0)
+ 		_current_seed = roundi(norm * 999.0)
+@@ -480,7 +481,7 @@
+ 
+ ## Keep a programmatic seed update from being mistaken for a visitor's gesture.
+ func _sync_seed_slider() -> void:
+-	var slider: Node = get_node_or_null("Panel/Param_0")
++	var slider: Node = find_child("Param_0", true, false)
+ 	if slider and slider.has_method("set_normalized_value"):
+ 		_syncing_seed_slider = true
+ 		slider.set_normalized_value(clampf(float(_current_seed) / 999.0, 0.0, 1.0))

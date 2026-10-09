@@ -1,0 +1,199 @@
+{
+  "date": "2026-09-13T21:05:06.038079+02:00",
+  "status": "Source prepared; Godot runtime pending",
+  "checks": [
+    {
+      "name": "GDScript grammar: commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+      "passed": true
+    },
+    {
+      "name": "GDScript grammar: commons/artifacts/ca_rule_explorer/neighbour_study.gd",
+      "passed": true
+    },
+    {
+      "name": "GDScript grammar: ada_run/ca_intro_probe_base.gd",
+      "passed": true
+    },
+    {
+      "name": "GDScript grammar: ada_run/ca_intro_acceptance.gd",
+      "passed": true
+    },
+    {
+      "name": "structure unchanged",
+      "passed": true
+    },
+    {
+      "name": "utilities unchanged",
+      "passed": true
+    },
+    {
+      "name": "all nine authored placements retained",
+      "passed": true
+    },
+    {
+      "name": "other plan rows unchanged: ada_run/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "nine placements derived without refusal: ada_run/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "no extra automatic plinth for ca_rule_explorer: ada_run/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "no extra automatic plinth for persian_rug: ada_run/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "other plan rows unchanged: commons/data/museum/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "nine placements derived without refusal: commons/data/museum/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "no extra automatic plinth for ca_rule_explorer: commons/data/museum/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "no extra automatic plinth for persian_rug: commons/data/museum/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "primary order, book lines, hero and final anchors agree",
+      "passed": true
+    },
+    {
+      "name": "other roles unchanged",
+      "passed": true
+    },
+    {
+      "name": "other order unchanged",
+      "passed": true
+    },
+    {
+      "name": "other CA book passages unchanged",
+      "passed": true
+    },
+    {
+      "name": "book code excerpt 1 matches source",
+      "passed": true
+    },
+    {
+      "name": "book code excerpt 2 matches source",
+      "passed": true
+    },
+    {
+      "name": "book code excerpt 3 matches source",
+      "passed": true
+    }
+  ],
+  "source_checks_passed": 22,
+  "godot_runtime_verified": false,
+  "headset_verified": false,
+  "godot_busy_pid": 40112,
+  "runtime_command": "python -X utf8 ada_run/review_ca_intro.py",
+  "source_sha256": {
+    "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd": "02c277de0a760857bfba88a2e679689f9463d90ae32edab5b5a75dfef3cf7226",
+    "commons/artifacts/ca_rule_explorer/neighbour_study.gd": "6014daeefeac8fd5b8128cc30f57fa6238ad93e4de4a925a46c84a7093f5bc78",
+    "commons/maps/CA_Introduction/map_data.json": "88493d21a1b1322fd8f3f9f701bd9649c13d27411fd869e4956215b9b7851f07"
+  },
+  "browser": {
+    "checks": [
+      {
+        "name": "held single seed; next answer initially concealed",
+        "passed": true
+      },
+      {
+        "name": "Rule 90 predicts zero for neighbourhood 010",
+        "passed": true
+      },
+      {
+        "name": "Rule 90 first generation matches independent expected cells",
+        "passed": true
+      },
+      {
+        "name": "two adjacent seeds produce the expected four cells",
+        "passed": true
+      },
+      {
+        "name": "Rule 255 turns every output on",
+        "passed": true
+      },
+      {
+        "name": "RESET clears every visible older row",
+        "passed": true
+      },
+      {
+        "name": "Rule 30 first generation matches expected cells",
+        "passed": true
+      },
+      {
+        "name": "26 generations retain exactly 24 rows",
+        "passed": true
+      },
+      {
+        "name": "witness and highlighted neighbours wrap from 31 through zero",
+        "passed": true
+      },
+      {
+        "name": "all eight Rule 255 table entries are visible and correct",
+        "passed": true
+      },
+      {
+        "name": "RUN advances the browser clock",
+        "passed": true
+      },
+      {
+        "name": "HOLD pauses the browser clock",
+        "passed": true
+      },
+      {
+        "name": "review has no horizontal overflow",
+        "passed": true
+      },
+      {
+        "name": "both referenced images loaded",
+        "passed": true
+      },
+      {
+        "name": "book exposes three source excerpts and carries the blob argument",
+        "passed": true
+      },
+      {
+        "name": "necklace has three primaries in book order, all written",
+        "passed": true
+      },
+      {
+        "name": "each primary card opens its matching passage",
+        "passed": true
+      }
+    ],
+    "passed": 17,
+    "visual": {
+      "codeBlocks": 5,
+      "images": [
+        {
+          "loaded": true,
+          "src": "noise-perlin-simplex-terrain.png"
+        },
+        {
+          "loaded": true,
+          "src": "ca-introduction-plan.svg"
+        }
+      ],
+      "viewport": 691,
+      "width": 676
+    },
+    "corrected_assertion": {
+      "name": "book exposes three source excerpts and the blob transition",
+      "passed": false,
+      "reason": "The exact phrase mental algorithmic wall appears in the critical thread; the book opens with the same argument in different words. Checked each section separately."
+    },
+    "godot_runtime_verified": false,
+    "headset_verified": false
+  }
+}

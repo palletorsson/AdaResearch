@@ -12,7 +12,18 @@ A chapter is a module.
 The book is a program.
 It compiles when every need is given before it.
 Its code runs, and what the lines claim, the run shows.
-`check.py` proves both.
+`check.py` checks declared dependencies and runnable examples.
+It does not prove that a lesson teaches its claims or that a student understands them.
+
+## Reconstruction gate, 5 October 2026
+
+[Can the student make it?](RECONSTRUCTION.md) adds the missing test: define one capability, declare the incoming student code and supplied support, print the complete small program, explain the new operation, then test that exact result. Continue the same point from Point One; carry its code and show the resulting program without reteaching every inherited line. The test must not fill missing construction from an undeclared production script. Its six-field compressed brief guides the draft. Its small checker verifies code correspondence and declared dependencies; learner explanation and transfer remain separate evidence. Pilot the grabbable point before changing other lessons. This supplements the existing checker; it does not promote the older numeric taxonomy or its language constraints to the current museum route.
+
+## Staged teaching plan, 3 October 2026
+
+The [subject register](../sketch/SUBJECT_REGISTER.md) records the proposed map-based progression through Randomness: encountered, supplied, introduced, reused and deepened. A usable introduction gives a limited operation the student can deliberately change. A deeper return adds a named capability. This permits sine in Transformation before its geometric study in Waves, and a bounded random draw in Array before the different kinds of randomness are studied.
+
+The existing taxonomy below still serves the older functional draft. Keep its exact token identities; update teaching locations only with the corresponding rewritten lesson, declarations and executable example. The new [authored plan](../sketch/subject_lineage.json) and [observed-use index](../sketch/taxonomy_use_index.json) are separate. A lexical match cannot promote a planned subject into taught status. Critical prose and museum encounters need not follow the tutorial's implementation prerequisites.
 
 ## 1 The hard taxonomy
 

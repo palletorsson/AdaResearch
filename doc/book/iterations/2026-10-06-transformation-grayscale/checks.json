@@ -1,0 +1,91 @@
+{
+  "all_seven_halls_passed": true,
+  "printed_code_blocks_unchanged": true,
+  "halls": [
+    {
+      "room": "Trans_Pre",
+      "checks": 456,
+      "moving_nodes": 19,
+      "presentation_poll_median_ms": 0.97
+    },
+    {
+      "room": "Trans_Introduction",
+      "checks": 840,
+      "moving_nodes": 15,
+      "presentation_poll_median_ms": 2.605
+    },
+    {
+      "room": "Trans_Translation",
+      "checks": 674,
+      "moving_nodes": 16,
+      "presentation_poll_median_ms": 1.798
+    },
+    {
+      "room": "Trans_Rotation",
+      "checks": 967,
+      "moving_nodes": 42,
+      "presentation_poll_median_ms": 3.103
+    },
+    {
+      "room": "Trans_Scale",
+      "checks": 729,
+      "moving_nodes": 1,
+      "presentation_poll_median_ms": 2.634
+    },
+    {
+      "room": "Trans_Body",
+      "checks": 575,
+      "moving_nodes": 2,
+      "presentation_poll_median_ms": 1.437
+    },
+    {
+      "room": "Trans_Pit",
+      "checks": 529,
+      "moving_nodes": 8,
+      "presentation_poll_median_ms": 1.097
+    }
+  ],
+  "changed_manuscripts": [
+    "commons/maps/Trans_Introduction/final.md",
+    "commons/maps/Trans_Pit/final.md",
+    "commons/maps/Trans_Pre/final.md",
+    "commons/maps/Trans_Pre/tutorial.md",
+    "commons/maps/Trans_Rotation/final.md",
+    "commons/maps/Trans_Rotation/tutorial.md",
+    "commons/maps/Trans_Translation/final.md"
+  ],
+  "scope": "Native desktop Compatibility rendering and material assertions. Behavioural regression reports are linked separately. Headset comfort/performance has not been verified.",
+  "sources": {
+    "commons/maps/Trans_Introduction/final.md": "9d1ec3f52b15385ed233fdb4389b56913eac8ba84dea4cc7d33dcc68d932fc8e",
+    "commons/maps/Trans_Pit/final.md": "a45b761bec9a80f6a8b6eb6cd97f9f5f81ddfd1f7861c7d2bd8cd2f305cea2a2",
+    "commons/maps/Trans_Pre/final.md": "0c2cd9f700ffb50fbe6fe08f0b7cc2b1f0a0f665565bbc2966becf2a4de6409e",
+    "commons/maps/Trans_Pre/tutorial.md": "35f3501f60c314eb1c7cc66707e3c3abaaa412a23069aafe9f6263e1bfa15c76",
+    "commons/maps/Trans_Rotation/final.md": "383fc50a7b3bdf49d8d57e06acfcfdb715f1337b25e2dda44794a8a018415e40",
+    "commons/maps/Trans_Rotation/tutorial.md": "cb2506506689bfc16c4ff6d3cf5646153c73781bd4dfbcc90c7b918fdae76f13",
+    "commons/maps/Trans_Translation/final.md": "ad78549493944968a5c7661c13873472d0c286abc83364a5cd3a631c852a9e10",
+    "commons/rendering/museum_grayscale.gd": "d85c82af965ffbe3906a111d67d134f4ed124b8bbc9e36ad4423901f7dad9f94",
+    "commons/scenes/endless_museum.gd": "657765bbdd9100d9a027f0570955bd7e4b30abd47e9951d4480ba69cddadd6a2",
+    "tools/probes/transformation_grayscale.gd": "2d0e43135c4ad6b3689a4ed693d112d0afa9a213fb7d9de9d4eabb9528e31941",
+    "doc/book/studies/ada-xr-starter/studies/trans_pre/marked_cube.gd": "efc53def0765c6353b098821e095b20609d3d674b0af042890e1d9d848586cb1"
+  },
+  "interaction_regressions": [
+    {
+      "room": "Trans_Introduction",
+      "passed": true,
+      "checks": 16,
+      "report": "Trans_Introduction/behaviour/report.json"
+    },
+    {
+      "room": "Trans_Rotation",
+      "passed": true,
+      "checks": 81,
+      "report": "Trans_Rotation/behaviour/report.json"
+    },
+    {
+      "room": "Trans_Translation",
+      "passed": true,
+      "checks": 53,
+      "report": "Trans_Translation/behaviour/report.json"
+    }
+  ]
+}

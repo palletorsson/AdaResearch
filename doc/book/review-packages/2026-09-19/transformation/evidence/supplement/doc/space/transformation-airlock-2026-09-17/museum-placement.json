@@ -1,0 +1,75 @@
+{
+  "artifact_sha256": "8143080a496bfc6474d009108d81a2bc8fd941e2aa533f86014dd84fb912fff9",
+  "door_source_position": "(7.0, 0.5, 29.0)",
+  "grid_origin": "(5.5, -0.5, 5.5)",
+  "headset_checked": false,
+  "map_sha256": "c0320524345d7b0bb532300a2df111b0b00f42e92bb92eee95d267542371c5df",
+  "mode": "actual_museum",
+  "results": [
+    {
+      "check": "Trans_Pit uses its actual embedded grid",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "airlock builds inside the Trans_Pit grid",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "door remains at source cell (7,29)",
+      "detail": "(7.0, 0.5, 29.0)",
+      "pass": true
+    },
+    {
+      "check": "door keeps metre scale",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "closed leaves block a 44 cm body",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved museum-airlock-closed",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved museum-airlock-moving",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "open leaves admit the same body",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved museum-airlock-open",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "frame joins side wall at x=-4.25",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "frame joins side wall at x=4.25",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "runway rows25 through32 stay on the existing floor level",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "saved museum-airlock-angle",
+      "detail": null,
+      "pass": true
+    }
+  ]
+}

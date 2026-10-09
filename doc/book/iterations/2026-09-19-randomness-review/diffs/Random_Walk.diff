@@ -1,0 +1,23 @@
+--- before/commons/maps/Random_Walk/final.md
++++ commons/maps/Random_Walk/final.md
+@@ -6,9 +6,9 @@
+ 
+ Five beads move inside a glass tank on a dark cabinet. One is bright red. The other four are dimmed, still moving. Follow the red one for a moment. A turn begins to look like hesitation; a curve seems to be taking it somewhere. Choose a place you think it will reach. Keep that expectation beside what happens.
+ 
+-The keypad offers 2D, 3D, LEVY and RESET. Begin with 2D. The trail can turn in any heading, yet it never leaves its level. Walk around the tank: the thin arrangement holds. Press 3D. Now the bead can rise and fall. A route that looked crowded from one side may open when you look through another. Find an apparent crossing and change your viewpoint. Do the two stretches meet, or did you put them together by looking?
++The keypad offers 2D, 3D, LONG STEP and RESET. Begin with 2D. The trail can turn in any heading, yet it never leaves its level. Walk around the tank: the thin arrangement holds. Press 3D. Now the bead can rise and fall. A route that looked crowded from one side may open when you look through another. Find an apparent crossing and change your viewpoint. Do the two stretches meet, or did you put them together by looking?
+ 
+-The previous room let a draw choose a cube from a set. Here the draw proposes a movement from the position already reached. The earlier rooms have supplied the parts: a point, coordinates, a line made from samples, an array to keep them, an increment to add. In 2D, one number becomes a heading:
++Earlier, a draw chose a cube from an eligible set. The last room let perturbations accumulate in a stack. Here the draw proposes a movement from the position already reached. The earlier rooms have supplied the parts: a point, coordinates, a line made from samples, an array to keep them, an increment to add. In 2D, one number becomes a heading:
+ 
+ ```gdscript
+ 		WalkMode.WALK_2D:
+@@ -18,7 +18,7 @@
+ 
+ The proposed step is 0.015 metres long. Its y component is zero. The code has room for three coordinates and has declined to change one. That flatness is a decision made each time the function returns.
+ 
+-In 3D two draws choose a direction on a sphere; the proposed length stays the same. LEVY draws a length too. Try it, then return to 3D. Look for what the longer movements do to the tangle. The cabinet is using this particular rule:
++In 3D two draws choose a direction on a sphere; the proposed length stays the same. LONG STEP draws a length too. Try it, then return to 3D. Look for what the longer movements do to the tangle. The cabinet is using this particular rule:
+ 
+ ```gdscript
+ 			var u = _rand()

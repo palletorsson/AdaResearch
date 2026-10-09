@@ -1,0 +1,211 @@
+{
+	"checks": {
+		"21_surfaces": true,
+		"all_meshes_have_triangles": true,
+		"exists res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd": true,
+		"four_phases": true,
+		"sources_exist": true,
+		"sum_before_extraction": true
+	},
+	"duration": 24.0,
+	"evidence": {
+		"cell_size": 0.2,
+		"grid": [
+			32,
+			24,
+			24
+		],
+		"iso_level": 1.0,
+		"mesh_samples": 21,
+		"private_rng_seed": 113,
+		"sample_records": [
+			{
+				"first": 0.680555522441864,
+				"position": "(-2.0, 0.0, 0.6)",
+				"second": 0.0,
+				"sum": 0.680555522441864
+			},
+			{
+				"first": 0.942307710647583,
+				"position": "(-1.8, 0.0, 0.6)",
+				"second": 0.0,
+				"sum": 0.942307710647583
+			},
+			{
+				"first": 1.22499990463257,
+				"position": "(-1.6, 0.0, 0.6)",
+				"second": 0.052350427955389,
+				"sum": 1.27735030651093
+			},
+			{
+				"first": 1.36111104488373,
+				"position": "(-1.4, 0.0, 0.6)",
+				"second": 0.0597561001777649,
+				"sum": 1.42086708545685
+			},
+			{
+				"first": 1.22500002384186,
+				"position": "(-1.2, 0.0, 0.6)",
+				"second": 0.0688202232122421,
+				"sum": 1.29382026195526
+			},
+			{
+				"first": 0.942307710647583,
+				"position": "(-1.0, 0.0, 0.6)",
+				"second": 0.0800653621554375,
+				"sum": 1.0223730802536
+			},
+			{
+				"first": 0.680555582046509,
+				"position": "(-0.8, 0.0, 0.6)",
+				"second": 0.0942307710647583,
+				"sum": 0.774786353111267
+			},
+			{
+				"first": 0.490000039339066,
+				"position": "(-0.6, 0.0, 0.6)",
+				"second": 0.112385325133801,
+				"sum": 0.602385342121124
+			},
+			{
+				"first": 0.360294133424759,
+				"position": "(-0.4, 0.0, 0.6)",
+				"second": 0.136111110448837,
+				"sum": 0.496405243873596
+			},
+			{
+				"first": 0.272222220897675,
+				"position": "(-0.2, 0.0, 0.6)",
+				"second": 0.167808219790459,
+				"sum": 0.440030455589294
+			},
+			{
+				"first": 0.211206898093224,
+				"position": "(0.0, 0.0, 0.6)",
+				"second": 0.211206898093224,
+				"sum": 0.422413796186447
+			},
+			{
+				"first": 0.167808219790459,
+				"position": "(0.2, 0.0, 0.6)",
+				"second": 0.272222220897675,
+				"sum": 0.440030455589294
+			},
+			{
+				"first": 0.136111110448837,
+				"position": "(0.4, 0.0, 0.6)",
+				"second": 0.360294133424759,
+				"sum": 0.496405243873596
+			},
+			{
+				"first": 0.112385325133801,
+				"position": "(0.6, 0.0, 0.6)",
+				"second": 0.490000039339066,
+				"sum": 0.602385342121124
+			},
+			{
+				"first": 0.0942307710647583,
+				"position": "(0.8, 0.0, 0.6)",
+				"second": 0.680555582046509,
+				"sum": 0.774786353111267
+			},
+			{
+				"first": 0.0800653621554375,
+				"position": "(1.0, 0.0, 0.6)",
+				"second": 0.942307710647583,
+				"sum": 1.0223730802536
+			},
+			{
+				"first": 0.0688202232122421,
+				"position": "(1.2, 0.0, 0.6)",
+				"second": 1.22500002384186,
+				"sum": 1.29382026195526
+			},
+			{
+				"first": 0.0597561001777649,
+				"position": "(1.4, 0.0, 0.6)",
+				"second": 1.36111104488373,
+				"sum": 1.42086708545685
+			},
+			{
+				"first": 0.052350427955389,
+				"position": "(1.6, 0.0, 0.6)",
+				"second": 1.22499990463257,
+				"sum": 1.27735030651093
+			},
+			{
+				"first": 0.0,
+				"position": "(1.8, 0.0, 0.6)",
+				"second": 0.942307710647583,
+				"sum": 0.942307710647583
+			},
+			{
+				"first": 0.0,
+				"position": "(2.0, 0.0, 0.6)",
+				"second": 0.680555522441864,
+				"sum": 0.680555522441864
+			}
+		],
+		"separations": [
+			2.8,
+			2.705,
+			2.61,
+			2.515,
+			2.42,
+			2.325,
+			2.23,
+			2.135,
+			2.04,
+			1.945,
+			1.85,
+			1.755,
+			1.66,
+			1.565,
+			1.47,
+			1.375,
+			1.28,
+			1.185,
+			1.09,
+			0.995,
+			0.9
+		],
+		"source_calls": [
+			"_precompute_grid_positions",
+			"_update_influence_radii",
+			"generate_mesh"
+		],
+		"source_count": 2,
+		"source_never_entered_tree": true,
+		"sum_error": 0.000000715255737304688,
+		"triangle_counts": [
+			1008,
+			944,
+			960,
+			1008,
+			1072,
+			1024,
+			1056,
+			1072,
+			1120,
+			1064,
+			1112,
+			1048,
+			1032,
+			1048,
+			952,
+			952,
+			872,
+			1000,
+			1000,
+			984,
+			952
+		]
+	},
+	"geometry_nodes": 30,
+	"passed": true,
+	"phases": 4,
+	"source_paths": [
+		"res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd"
+	],
+	"title": "Two contributions become one boundary"
+}

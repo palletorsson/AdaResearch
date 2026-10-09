@@ -1,0 +1,50 @@
+--- before/commons/artifacts/registry/postfoundationscrisis.json
++++ pending/commons/artifacts/registry/postfoundationscrisis.json
+@@ -850,13 +850,26 @@
+       "spatial_needs": {
+         "footprint_cells": 6,
+         "clearance_m": 1.2
++      },
++      "lookup_name": "the_fourth_limit",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "postfoundationscrisis"
++      ],
++      "parameters": {
++        "footprint": [
++          8,
++          3,
++          3
++        ]
+       }
+     },
+     "the_commons_table": {
+       "name": "The Commons Table",
+       "class_name": "TheCommonsTable",
+       "scene": "res://commons/artifacts/the_commons_table/the_commons_table.tscn",
+-      "description": "The post-crisis SUPER OBJECT and the spine's closing body: a round table with NO HEAD. Partial instruments sit around it, each honest about its outside - a classifier whose OTHER drawer outnumbers its labelled bins (counts computed), a sorter with its comparator printed, two contradictory readings held in one bracket without collapse, a camera admitting it is somewhere, a rootless rhizome of cords, and the engine's defaults shelved as somebody's opinion. Where a chairman would sit: a lit ring around nothing. 2026-08-27.",
++      "description": "A ring table with an empty centre and six miniature studies: computed classification, an authored height order, opposed pointers, a model camera, a multiply connected graph and selected engine defaults. Walk around it; an absent head does not remove the rules that built it.",
+       "category": "postfoundationscrisis",
+       "tags": [
+         "postcrisis",
+@@ -869,6 +882,19 @@
+       "spatial_needs": {
+         "footprint_cells": 4,
+         "clearance_m": 0.6
++      },
++      "lookup_name": "the_commons_table",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "postfoundationscrisis"
++      ],
++      "parameters": {
++        "footprint": [
++          4,
++          2,
++          4
++        ]
+       }
+     },
+     "assembly_return": {

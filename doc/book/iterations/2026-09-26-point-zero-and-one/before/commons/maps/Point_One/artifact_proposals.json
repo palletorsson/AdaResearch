@@ -1,0 +1,362 @@
+{
+ "_meta": {
+  "map": "Point_One",
+  "file": "final.md",
+  "generated_at": "2026-09-04T20:49:14.238Z",
+  "source": "ada-writer final-pipeline",
+  "final_sha": "62a5fa4778c3",
+  "final_words": 1717,
+  "final_saved": false,
+  "focus": [
+   "CoordinateSystem3M",
+   "coordinate_readout",
+   "drag_point_target",
+   "folding_past",
+   "frame_counter_display",
+   "interactive_point_origin_force",
+   "origin"
+  ],
+  "judges": {
+   "canon": 87,
+   "voice": 87
+  }
+ },
+ "proposals": [
+  {
+   "id": "update-drag_point_target-1",
+   "kind": "update",
+   "artifact": "drag_point_target",
+   "title": "Show the catch volume, not just a ring on the floor",
+   "claim": "The tolerance the room enforces is a 0.45 m sphere centred 1.20 m up, but the only thing drawn at that radius is a torus lying on the floor at y=0.015. A visitor aims at the ring, which is directly below the catch and not the catch, so the one number the section is about — how exact the room insists you be — is the one thing the artifact does not show. The stem tethers the arrow to the place; nothing marks the volume.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "Compare two tolerances. A test for whether two points are the same uses a thousandth of a metre, because floating-point equality is unreliable. This room accepts nearly half a metre, because a hand in the air is not a unit test."
+    },
+    {
+     "source": "final",
+     "quote": "The catch is a sphere of radius forty-five centimetres, hanging at chest height where a held bead actually rides."
+    },
+    {
+     "source": "drag_point_target.gd",
+     "quote": "var centre := global_position + Vector3(0.0, catch_height, 0.0)"
+    },
+    {
+     "source": "drag_point_target.gd",
+     "quote": "_ring.position = Vector3(0.0, 0.015, 0.0)"
+    }
+   ],
+   "build": "In _build(), add a faint additive wire sphere of radius catch_radius at Vector3(0, catch_height, 0) — same arrow_color, alpha well under the stem's 0.38, cull_front so it never covers the bead — behind a new `@export var show_catch: bool = true` and a `#show_catch:0` config key in apply_grid_config. Rebuild it with the ring in _rebuild() so a changed catch_radius moves both.",
+   "effort": "small",
+   "confidence": 0.78
+  },
+  {
+   "id": "update-interactive_point_origin_force-2",
+   "kind": "update",
+   "artifact": "interactive_point_origin_force",
+   "title": "A retention value that keeps the path, not the position",
+   "claim": "The section's closing question is about the arc the hand made, and no value of `retention` keeps an arc. `trace` keeps one reading exactly as taken, `archive` keeps seven past positions, `wax` sinks past positions under a sheet — five values, all of them samples. The thing the text says is lost is the trajectory between samples, and the axis has no term for it.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "While you held it, your arm was the instrument writing its coordinates, sampled ninety times a second. The arc, the small correction, the pause before you committed — none of that survives the release."
+    },
+    {
+     "source": "final",
+     "quote": "The switch is here, and it is off, and the arc your hand made is gone. Which of your positions was this room ever willing to keep?"
+    },
+    {
+     "source": "interactive_point_origin_force.gd",
+     "quote": "@export var retention: String = \"none\""
+    },
+    {
+     "source": "interactive_point_origin_force.gd",
+     "quote": "##   trace     one dotted measurement stands after the hand leaves, ending in its marker —"
+    }
+   ],
+   "build": "Add `path` to RETENTIONS and to the axis doc block: while held, sample global_position into a local-space polyline at a fixed interval (the existing diagram space, so it stays hand-sized wherever the point stands); on release, commit it as an ImmediateMesh line beside the point, ending in the same marker `trace` uses. Default stays `none`, so the legacy lineage and the 5-value sweep are untouched until a map asks with `#retention:path`.",
+   "effort": "medium",
+   "confidence": 0.72
+  },
+  {
+   "id": "update-folding_past-3",
+   "kind": "update",
+   "artifact": "folding_past",
+   "title": "Let the four arrangements be switched from inside the room",
+   "claim": "The section makes its argument by comparing nested against abreast, and a visitor standing in front of the fold can see only nested. `recession` is reachable from a map token and from apply_grid_config and from nowhere else, so the claim the text says you can check in a single still image is exactly the thing the room will not show you. The artifact's own identity block has been asking for this since it was written.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "Four shapes for the past live in that line, and only the first is running."
+    },
+    {
+     "source": "final",
+     "quote": "One thing to carry out of this corner, and you can check it in a single still image: how an object arranges time is a claim, and this one claims containment."
+    },
+    {
+     "source": "animated_folding_past.gd",
+     "quote": "@export_enum(\"nested\", \"collapsed\", \"abreast\", \"strata\") var recession: String = \"nested\""
+    },
+    {
+     "source": "animated_folding_past.gd",
+     "quote": "# needs: [renders and animates on ready [has], missing a way for the learner to scrub or freeze the fold]"
+    }
+   ],
+   "build": "Extract the body of apply_grid_config into `func set_recession(name: String) -> void` (validate through _pick_axis, bail when unchanged, set_process, reset _animation_time, _update_frames) and have apply_grid_config call it. Add the node to a group `ada_folding_past` in _ready and emit `recession_changed(name)`. That makes the axis drivable by anything already in the hall — drag_point_target's `point_arrived` is one line away from stepping it — without changing a single one of the 51 existing placements, which still pass no config.",
+   "effort": "medium",
+   "confidence": 0.7
+  },
+  {
+   "id": "update-frame_counter_display-4",
+   "kind": "update",
+   "artifact": "frame_counter_display",
+   "title": "Print both clocks, so the panel's refusal is visible",
+   "claim": "The section turns on the panel knowing when you arrived and not saying so. It does know: _arrival_frame is written in _ready and the captions already carry an 'arrival' wording for every reading. But `epoch` is a choice of one, so a placement shows either the machine's total or yours, never the gap between them — and the gap is the whole point of the paragraph.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "The panel does know when you arrived. It writes the number down, and then declines to use it."
+    },
+    {
+     "source": "final",
+     "quote": "The number on the glass could start from that line. It ships starting from boot."
+    },
+    {
+     "source": "frame_counter_display.gd",
+     "quote": "_arrival_frame = int(Engine.get_process_frames())"
+    },
+    {
+     "source": "frame_counter_display.gd",
+     "quote": "@export_enum(\"boot\", \"arrival\") var epoch: String = \"boot\""
+    }
+   ],
+   "build": "Add a third epoch value `both`: the big readout keeps the boot figure and the existing prompt line at the screen's bottom-left prints the arrival figure small, with the CAPTIONS entry for 'arrival' as its label. No new geometry — the Prompt Label3D is already built and positioned; it only ever says '> _'. Default stays `boot`, so the 39 placements are untouched; Point_One asks with `#epoch:both`.",
+   "effort": "small",
+   "confidence": 0.68
+  },
+  {
+   "id": "update-drag_point_target-5",
+   "kind": "update",
+   "artifact": "drag_point_target",
+   "title": "The sign's height is the one number a map cannot set",
+   "claim": "Every other dimension of this artifact is an export — text, catch_radius, catch_height, colour, and all eight fall parameters — but the label's height is the literal 1.62 added to catch_height, putting the capitals at 2.82 m while the arrow's shaft tops out at 2.32 m. The sign hangs half a metre clear above the assembly it belongs to, and a map that lowers catch_height for a seated hall carries the gap along unchanged.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "A red arrow bobs over a ring on the floor, with a line of capitals under it: DRAG POINT HERE."
+    },
+    {
+     "source": "drag_point_target.gd",
+     "quote": "_label.position = Vector3(0.0, catch_height + 1.62, 0.0)"
+    },
+    {
+     "source": "drag_point_target.gd",
+     "quote": "shaft.position = Vector3(0.0, catch_height + cone.height + rod.height * 0.5, 0.0)"
+    }
+   ],
+   "build": "Add `@export var label_height: float = 1.62` (metres above catch_height) plus a `label_height` key in apply_grid_config, and use it at line 208. Either keep 1.62 as the default and let Point_One tune it, or set the default from the shaft's own top — catch_height + cone.height + rod.height + 0.10 — so the sign sits on the arrow it labels at any catch_height.",
+   "effort": "small",
+   "confidence": 0.65
+  },
+  {
+   "id": "update-origin-6",
+   "kind": "update",
+   "artifact": "origin",
+   "title": "Line 60 is the one sentence in the hall that claims a centre",
+   "claim": "The comment above the origin variable asserts the centre of the universe; the file's own truth line, twelve lines earlier, says the origin is a convention and not a place. The section is built on that disagreement and can only resolve it one way — the second claim is the testable one. The comment is not documentation of the code, it is a rival argument sitting in the artifact that is supposed to make the other one.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "The comment claims the centre of the universe. The artifact's own truth line, written elsewhere in the same file, says the origin is a convention and not a place."
+    },
+    {
+     "source": "origin.gd",
+     "quote": "# The origin - the center of our 3D universe"
+    },
+    {
+     "source": "origin.gd",
+     "quote": "# truth: the origin is a convention, not a place — but every space must agree on one."
+    }
+   ],
+   "build": "Replace the line-60 comment with the truth line's claim — the agreed zero this space measures from, not its centre — in the same register as the surrounding doc comments. One line, no behaviour, and it stops the artifact contradicting itself in front of a reader who has just been told to ask why that is the middle of anything.",
+   "effort": "small",
+   "confidence": 0.8
+  }
+ ],
+ "role_suggestions": [],
+ "signals": [
+  {
+   "artifact": "3t",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "CoordinateSystem3M",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 1,
+   "signal": null
+  },
+  {
+   "artifact": "coordinate_readout",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 1,
+   "signal": null
+  },
+  {
+   "artifact": "drag_point_target",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 1,
+   "signal": null
+  },
+  {
+   "artifact": "floating_sphere_field",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "folding_past",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "fontana_puncture",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "frame_counter_display",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 1,
+   "signal": null
+  },
+  {
+   "artifact": "grab_sphere_point_snap",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "interactive_point_origin_force",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 1,
+   "signal": null
+  },
+  {
+   "artifact": "origin",
+   "role": "primary",
+   "tagged": true,
+   "mentions": 5,
+   "signal": null
+  },
+  {
+   "artifact": "spore_mushroom",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "street_talker",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "the_invisible_point",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "wireframe_threshold",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  },
+  {
+   "artifact": "you_are_here",
+   "role": "secondary",
+   "tagged": false,
+   "mentions": 0,
+   "signal": null
+  }
+ ],
+ "history": [
+  {
+   "id": "update-coordinatesystem3m-5",
+   "kind": "update",
+   "artifact": "CoordinateSystem3M",
+   "title": "The hanging sign says \"point zero\" over a zero the wall no longer measures from",
+   "claim": "The sign is hung at the frame's own origin and reads `point zero`, but `readout_space` now ships as `world`, so the card on the wall reports distances from Vector3.ZERO while the sign directly above the frame's origin still names that spot as the zero — the frame asserts a zero it no longer uses.",
+   "evidence": [
+    {
+     "source": "final",
+     "quote": "a point is three numbers measured from a zero somebody else agreed on"
+    },
+    {
+     "source": "final",
+     "quote": "Place the point, then ask whose zero it answers to."
+    },
+    {
+     "source": "CoordinateSystem3M.gd",
+     "quote": "@export var origin_sign_text: String = \"point zero\""
+    },
+    {
+     "source": "CoordinateSystem3M.gd",
+     "quote": "@export_enum(\"world\", \"local\") var readout_space: String = \"world\""
+    }
+   ],
+   "build": "In `_add_origin_sign` (lines 166-212), build a second small face line under the caption, the way coordinate_readout builds `_caption` under `_label` (lines 99-107): on `readout_space == \"world\"`, print this frame's own world position — `frame at 5.0, 0.0, 8.0` — under the sign text, and on `local` print nothing, since local is the only case in which the sign is telling the truth. Gate it behind `@export var origin_sign_space: bool = true` so a map can drop it. The words are already the frame's job (lines 48-52); this makes the sign name whose zero it is, rather than claiming to be the zero.",
+   "effort": "small",
+   "confidence": 0.58,
+   "status": "built",
+   "built_at": "2026-09-04T13:40:00.000Z",
+   "built_note": "tick_space export (axis | world); world divides tick_step by display_scale; the Point_One placement has tick_step:0, so no ticks show there"
+  },
+  {
+   "id": "update-coordinate_readout-4",
+   "kind": "update",
+   "artifact": "coordinate_readout",
+   "title": "Caption the space in the default case, and fix the identity line that names the wrong one",
+   "claim": "(see built_note)",
+   "evidence": [],
+   "build": "",
+   "effort": "medium",
+   "confidence": 0.58,
+   "status": "built",
+   "built_at": "2026-09-04T13:40:00.000Z",
+   "built_note": "SpaceCaption built for every card; a frame card prints the space the feed names (CoordinateSystem3M passes want_space)"
+  },
+  {
+   "id": "update-frame_counter_display-6",
+   "kind": "update",
+   "artifact": "frame_counter_display",
+   "title": "Let the panel actually tick every rendered frame",
+   "claim": "(see built_note)",
+   "evidence": [],
+   "build": "",
+   "effort": "small",
+   "confidence": 0.55,
+   "status": "built",
+   "built_at": "2026-09-04T13:40:00.000Z",
+   "built_note": "refresh_s export (0 = every rendered frame), routed through apply_grid_config; the Point_One placement uses reading=count, which already redrew every frame"
+  }
+ ]
+}

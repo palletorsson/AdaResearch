@@ -1,0 +1,29 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json
+@@ -2,7 +2,7 @@
+   "map_info": {
+     "name": "Lab Equipment Simulation",
+     "lookup_name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+-    "description": "Walk from an automatic catalogue of bodies to a body you can rearrange by hand. Gold joints change position; two turquoise collars reroute either end of one connection. The original and released arrangements are kept for the final hall.",
++    "description": "Compare an automatic catalogue, a gold body whose positions and one connection you can edit, and a separate coral-ring ragdoll that pulls its neighbours and falls on release. The gold workshop alone keeps its released arrangement for the final hall.",
+     "version": "1.0",
+     "format": "json",
+     "dimensions": {
+@@ -14,7 +14,7 @@
+       "difficulty": "advanced",
+       "category": "advanced_laboratory",
+       "spatial_temperature": 0.8,
+-      "design_notes": "Two bays on an open floor: two-times-scale automatic catalogue at (3,5), and a body-size editable VRBody to its right. No limb-length correction; bonds remain visual relations. Direct VR and desktop grabbing, no console."
++      "design_notes": "Automatic catalogue at (3,5), standing-scale gold workshop to its right, and a separate ragdoll mat at map (3.5,9.2) facing the central lane. Ragdoll opts into actual physical limbs and free pin joints; the gold graph remains editable and saved. No new control bank; one physical HANG AGAIN button."
+     },
+     "title": "The Inventory Before the Body",
+     "museum": {
+@@ -460,7 +460,7 @@
+         " ",
+         " ",
+         " ",
+-        "MolecularDesigner:0:0:2#body_study:true#body_workshop:true#float_duration:8#assemble_duration:18",
++        "MolecularDesigner:0:0:2#body_study:true#body_workshop:true#body_ragdoll:true#float_duration:8#assemble_duration:18",
+         " ",
+         " ",
+         " ",

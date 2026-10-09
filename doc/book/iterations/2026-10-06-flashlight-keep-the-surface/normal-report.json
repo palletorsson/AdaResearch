@@ -1,0 +1,414 @@
+{
+  "checks": [
+    {
+      "id": "separate/one_board_two_lights",
+      "passed": true
+    },
+    {
+      "id": "separate/familiar_box",
+      "passed": true
+    },
+    {
+      "id": "separate/board_pose",
+      "passed": true
+    },
+    {
+      "id": "separate/material_unchanged",
+      "passed": true
+    },
+    {
+      "id": "separate/material_receives_light",
+      "passed": true
+    },
+    {
+      "id": "separate/distinct_lights",
+      "passed": true
+    },
+    {
+      "id": "separate/first_light_colour",
+      "passed": true
+    },
+    {
+      "id": "separate/second_stays_green",
+      "passed": true
+    },
+    {
+      "id": "separate/first_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "separate/second_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "separate/first_world_target",
+      "passed": true
+    },
+    {
+      "id": "separate/second_world_target",
+      "passed": true
+    },
+    {
+      "id": "separate/range_angle_energy_0",
+      "passed": true
+    },
+    {
+      "id": "separate/range_angle_energy_1",
+      "passed": true
+    },
+    {
+      "id": "separate/light_edit_preserves_surface",
+      "passed": true
+    },
+    {
+      "id": "separate/light_edit_is_independent",
+      "passed": true
+    },
+    {
+      "id": "separate/live_aim_changes_direction",
+      "passed": true
+    },
+    {
+      "id": "separate/live_aim_keeps_position",
+      "passed": true
+    },
+    {
+      "id": "separate/live_aim_keeps_second",
+      "passed": true
+    },
+    {
+      "id": "separate/live_aim_keeps_surface",
+      "passed": true
+    },
+    {
+      "id": "blue/one_board_two_lights",
+      "passed": true
+    },
+    {
+      "id": "blue/familiar_box",
+      "passed": true
+    },
+    {
+      "id": "blue/board_pose",
+      "passed": true
+    },
+    {
+      "id": "blue/material_unchanged",
+      "passed": true
+    },
+    {
+      "id": "blue/material_receives_light",
+      "passed": true
+    },
+    {
+      "id": "blue/distinct_lights",
+      "passed": true
+    },
+    {
+      "id": "blue/first_light_colour",
+      "passed": true
+    },
+    {
+      "id": "blue/second_stays_green",
+      "passed": true
+    },
+    {
+      "id": "blue/first_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "blue/second_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "blue/first_world_target",
+      "passed": true
+    },
+    {
+      "id": "blue/second_world_target",
+      "passed": true
+    },
+    {
+      "id": "blue/range_angle_energy_0",
+      "passed": true
+    },
+    {
+      "id": "blue/range_angle_energy_1",
+      "passed": true
+    },
+    {
+      "id": "blue/light_edit_preserves_surface",
+      "passed": true
+    },
+    {
+      "id": "blue/light_edit_is_independent",
+      "passed": true
+    },
+    {
+      "id": "blue/live_aim_changes_direction",
+      "passed": true
+    },
+    {
+      "id": "blue/live_aim_keeps_position",
+      "passed": true
+    },
+    {
+      "id": "blue/live_aim_keeps_second",
+      "passed": true
+    },
+    {
+      "id": "blue/live_aim_keeps_surface",
+      "passed": true
+    },
+    {
+      "id": "overlap/one_board_two_lights",
+      "passed": true
+    },
+    {
+      "id": "overlap/familiar_box",
+      "passed": true
+    },
+    {
+      "id": "overlap/board_pose",
+      "passed": true
+    },
+    {
+      "id": "overlap/material_unchanged",
+      "passed": true
+    },
+    {
+      "id": "overlap/material_receives_light",
+      "passed": true
+    },
+    {
+      "id": "overlap/distinct_lights",
+      "passed": true
+    },
+    {
+      "id": "overlap/first_light_colour",
+      "passed": true
+    },
+    {
+      "id": "overlap/second_stays_green",
+      "passed": true
+    },
+    {
+      "id": "overlap/first_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "overlap/second_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "overlap/first_world_target",
+      "passed": true
+    },
+    {
+      "id": "overlap/second_world_target",
+      "passed": true
+    },
+    {
+      "id": "overlap/range_angle_energy_0",
+      "passed": true
+    },
+    {
+      "id": "overlap/range_angle_energy_1",
+      "passed": true
+    },
+    {
+      "id": "overlap/light_edit_preserves_surface",
+      "passed": true
+    },
+    {
+      "id": "overlap/light_edit_is_independent",
+      "passed": true
+    },
+    {
+      "id": "overlap/live_aim_changes_direction",
+      "passed": true
+    },
+    {
+      "id": "overlap/live_aim_keeps_position",
+      "passed": true
+    },
+    {
+      "id": "overlap/live_aim_keeps_second",
+      "passed": true
+    },
+    {
+      "id": "overlap/live_aim_keeps_surface",
+      "passed": true
+    },
+    {
+      "id": "away/one_board_two_lights",
+      "passed": true
+    },
+    {
+      "id": "away/familiar_box",
+      "passed": true
+    },
+    {
+      "id": "away/board_pose",
+      "passed": true
+    },
+    {
+      "id": "away/material_unchanged",
+      "passed": true
+    },
+    {
+      "id": "away/material_receives_light",
+      "passed": true
+    },
+    {
+      "id": "away/distinct_lights",
+      "passed": true
+    },
+    {
+      "id": "away/first_light_colour",
+      "passed": true
+    },
+    {
+      "id": "away/second_stays_green",
+      "passed": true
+    },
+    {
+      "id": "away/first_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "away/second_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "away/first_world_target",
+      "passed": true
+    },
+    {
+      "id": "away/second_world_target",
+      "passed": true
+    },
+    {
+      "id": "away/range_angle_energy_0",
+      "passed": true
+    },
+    {
+      "id": "away/range_angle_energy_1",
+      "passed": true
+    },
+    {
+      "id": "away/light_edit_preserves_surface",
+      "passed": true
+    },
+    {
+      "id": "away/light_edit_is_independent",
+      "passed": true
+    },
+    {
+      "id": "away/live_aim_changes_direction",
+      "passed": true
+    },
+    {
+      "id": "away/live_aim_keeps_position",
+      "passed": true
+    },
+    {
+      "id": "away/live_aim_keeps_second",
+      "passed": true
+    },
+    {
+      "id": "away/live_aim_keeps_surface",
+      "passed": true
+    },
+    {
+      "id": "choice/one_board_two_lights",
+      "passed": true
+    },
+    {
+      "id": "choice/familiar_box",
+      "passed": true
+    },
+    {
+      "id": "choice/board_pose",
+      "passed": true
+    },
+    {
+      "id": "choice/material_unchanged",
+      "passed": true
+    },
+    {
+      "id": "choice/material_receives_light",
+      "passed": true
+    },
+    {
+      "id": "choice/distinct_lights",
+      "passed": true
+    },
+    {
+      "id": "choice/first_light_colour",
+      "passed": true
+    },
+    {
+      "id": "choice/second_stays_green",
+      "passed": true
+    },
+    {
+      "id": "choice/first_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "choice/second_position_fixed",
+      "passed": true
+    },
+    {
+      "id": "choice/first_world_target",
+      "passed": true
+    },
+    {
+      "id": "choice/second_world_target",
+      "passed": true
+    },
+    {
+      "id": "choice/range_angle_energy_0",
+      "passed": true
+    },
+    {
+      "id": "choice/range_angle_energy_1",
+      "passed": true
+    },
+    {
+      "id": "choice/light_edit_preserves_surface",
+      "passed": true
+    },
+    {
+      "id": "choice/light_edit_is_independent",
+      "passed": true
+    },
+    {
+      "id": "choice/live_aim_changes_direction",
+      "passed": true
+    },
+    {
+      "id": "choice/live_aim_keeps_position",
+      "passed": true
+    },
+    {
+      "id": "choice/live_aim_keeps_second",
+      "passed": true
+    },
+    {
+      "id": "choice/live_aim_keeps_surface",
+      "passed": true
+    },
+    {
+      "id": "ownership/materials_are_independent",
+      "passed": true
+    },
+    {
+      "id": "ownership/surface_edit_does_not_recolour_light",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true
+}

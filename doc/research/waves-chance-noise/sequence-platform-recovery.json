@@ -1,0 +1,4549 @@
+{
+  "at": "2026-09-10T13:51:45.410572+00:00",
+  "summary": {
+    "audited_maps": 31,
+    "changed_maps": 17,
+    "changed_active": 10,
+    "new_platform_cells": 294,
+    "new_active_platform_cells": 128,
+    "boundary_cells_made_explicit": 255,
+    "active_plan_rows_refreshed": 9,
+    "additional_exit_landings": 1
+  },
+  "maps": [
+    {
+      "map": "Random_Definition",
+      "sequence": "randomness",
+      "active": true,
+      "changed": false,
+      "before_sha256": "f15ed644db07d2dd29ee17a014f8db832d2a6aa8db5e66050507ec2b82673ae1",
+      "interior_platform_cells": [
+        [
+          5,
+          14
+        ],
+        [
+          1,
+          15
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          1,
+          17
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          1,
+          18
+        ]
+      ],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "547602b34a03654314ff3a8da7626977d7daa3819fbf5516f6880658e4a7c1ce",
+          "dimensions": [
+            5,
+            20
+          ],
+          "two_cells": 8
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "3a227afca1d5eeb8c2a9973b3ba9df55e433ad7cd250722745e8ce49d77c0536",
+          "dimensions": [
+            5,
+            20
+          ],
+          "two_cells": 8
+        }
+      }
+    },
+    {
+      "map": "Random_Entropy",
+      "sequence": "randomness",
+      "active": true,
+      "changed": false,
+      "before_sha256": "c45774d9e628acafbd72539f6c0416248cedb2a79adf1e4054e8c56c814c68cd",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "bef6678e77800be49112dbcaa8ab9953803a6e5f3ecca53e7a56e192a1a0605b",
+          "dimensions": [
+            16,
+            10
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "3501c1fd36258b787fa465462ebb459cb51f3e8fa692c284e3c92db6e968bb13",
+          "dimensions": [
+            16,
+            10
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "Random_Remove",
+      "sequence": "randomness",
+      "active": true,
+      "changed": true,
+      "before_sha256": "3a1eaf1850e7d10d7892bd4e5b28d08300613eac0ed8b7344193cd0e1244ca20",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [
+        [
+          0,
+          16
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          1,
+          17
+        ],
+        [
+          11,
+          17
+        ]
+      ],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "aae7c89f8b460a6f59676b8e5500da352816beaf6b7915d5fa0064a0278af71f",
+          "dimensions": [
+            13,
+            18
+          ],
+          "two_cells": 4
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "e112590d54dc94a089a83999ffd70c8f3620d92405e1e7a16024bf9a9fde2711",
+          "dimensions": [
+            13,
+            18
+          ],
+          "two_cells": 4
+        }
+      }
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "sequence": "randomness",
+      "active": false,
+      "changed": true,
+      "before_sha256": "06e692a18aee7c842aa2a5ddc9e68867968c51cba06a09ff616980d2f4171a1c",
+      "interior_platform_cells": [
+        [
+          4,
+          2
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          4,
+          2
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "432c0f8d1ea2be63827aa5cf494053c4a50916097b2242833c932e3d896d2856",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 1
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "db45b3cab37524e8fbc02bf907b6a3829b74646987a20b51faf357de92b5cbae",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 1
+        }
+      }
+    },
+    {
+      "map": "Random_Cubes",
+      "sequence": "randomness",
+      "active": false,
+      "changed": true,
+      "before_sha256": "a8bbd32bd3644f79ccfc75d42fa40fa8033a2111d1e7a2b9e33cd5851cc0c9d9",
+      "interior_platform_cells": [
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          6
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          11,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          0,
+          19
+        ],
+        [
+          11,
+          19
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "d0d21dee0c6850182afa370c91caeba46789b01df8c20b8188e6de1c9be8d231",
+          "dimensions": [
+            12,
+            20
+          ],
+          "two_cells": 35
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "9f23ad7b370db41dfdaddfbc504caf1756c538f2befb150a8677b2ec2a2b44c0",
+          "dimensions": [
+            12,
+            20
+          ],
+          "two_cells": 35
+        }
+      }
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "sequence": "randomness",
+      "active": false,
+      "changed": true,
+      "before_sha256": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+      "interior_platform_cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          11,
+          14
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          9,
+          2
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          11,
+          14
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          11,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          0,
+          15
+        ],
+        [
+          1,
+          15
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          3,
+          15
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          8,
+          15
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          12,
+          15
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "ed7afe243c0f3e3e8ac61798c229071634ab50d05e6e962f4fc14394f4391121",
+          "dimensions": [
+            13,
+            16
+          ],
+          "two_cells": 92
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "68e2002dd9a237052d29d130187b798aa0bf68d8e85266332ff21998c0200b32",
+          "dimensions": [
+            13,
+            16
+          ],
+          "two_cells": 92
+        }
+      }
+    },
+    {
+      "map": "Random_Walk",
+      "sequence": "randomness",
+      "active": true,
+      "changed": true,
+      "before_sha256": "dac38a76008538ef7c5171c7f2d55e51778b8a168f98269259624c487695f777",
+      "interior_platform_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          11,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "2439c9d2e5e701c9d287cb79b0170349bb749b88466ffbe03b5c0168ae74f1c1",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 94
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "7e3de81a6a078d33d0dcffb6afffacc3ed53eb4ea4f6e1f737f68f7c333034cf",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 94
+        }
+      }
+    },
+    {
+      "map": "Random_Gaussian",
+      "sequence": "randomness",
+      "active": true,
+      "changed": true,
+      "before_sha256": "35e4de411e96f2b44512e068e4f95eee6911eb68fd8c43e11d1678dfa0033534",
+      "interior_platform_cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          12,
+          10
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          12,
+          10
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "2626a20de375968966a320ae7f296ff989321ac22d6ca963b17f65acd2e51d00",
+          "dimensions": [
+            12,
+            21
+          ],
+          "two_cells": 20
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "0b5480d829991d1f51ec2dee6f53cf3ae83fc032c76cd1d978b3e9469182ab06",
+          "dimensions": [
+            12,
+            21
+          ],
+          "two_cells": 20
+        }
+      }
+    },
+    {
+      "map": "Random_Mushrooms",
+      "sequence": "randomness",
+      "active": true,
+      "changed": true,
+      "before_sha256": "2b3731abed8b4b1e3591d6e249354492f0299e3ab309ff0db2dbf86a5703bca0",
+      "interior_platform_cells": [
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          11,
+          9
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          11,
+          9
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          7,
+          12
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "0d50579808a6d78e256a90250407a760e4f72c9175d72e904f2d912590982e17",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 25
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "c304b3ae933064ff6c2382ee4989e2b2649a5d132b9e4c38f8340095c7b6a07b",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 25
+        }
+      }
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "sequence": "randomness",
+      "active": false,
+      "changed": false,
+      "before_sha256": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "0d53b95a595a61b1c8c3ad69667682f9f1db21cc9fb57c2cb1d0d798fa216f4a",
+          "dimensions": [
+            12,
+            24
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "cdf9b76939c8ecd01fae91ca209c6a608009268f5eb431cbe449d5a4ca538da9",
+          "dimensions": [
+            12,
+            24
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "sequence": "randomness",
+      "active": false,
+      "changed": true,
+      "before_sha256": "fa1472e16bd3b13dfb4f2e3664297266aa645ea404458f992c53ab9f1974c29b",
+      "interior_platform_cells": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          0,
+          0
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "373b854ee62674276ed83d5dc753b862a1b5d44e70b8cc1ef6bdc4e34b669a18",
+          "dimensions": [
+            12,
+            17
+          ],
+          "two_cells": 3
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "4d3a570b83fcb684742d5949f799ebea1d71900526f817d9e86ba7c3e60ef8c9",
+          "dimensions": [
+            12,
+            17
+          ],
+          "two_cells": 3
+        }
+      }
+    },
+    {
+      "map": "Random_Pheromone",
+      "sequence": "randomness",
+      "active": false,
+      "changed": false,
+      "before_sha256": "5e151bd709d9be048ac393b9453a7d1bbf6dc0482ae2756421e79be7382f083f",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "ae975c5ef352f99e5e96d01f6f89164c42c8f2a423ade7ad2324be5225cdccfc",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "60836f230b098c858997bb00e05b82501d45451e7b315629d298becec3e6b0b6",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "Random_Space",
+      "sequence": "randomness",
+      "active": false,
+      "changed": true,
+      "before_sha256": "03307d0e358ec577bdb2b4eb687921038b5f23896e82a3bcd6d140b090f22a0a",
+      "interior_platform_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          11,
+          13
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          11,
+          13
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          11,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          14
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "232f7fa34803e1a7610842886565d920f66454a3d392ea320345aa53e5012c66",
+          "dimensions": [
+            13,
+            15
+          ],
+          "two_cells": 91
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "26f02ba8e62397361ee66aeb1e502444927cc4eb4b7789ebf097f179e9e0cfff",
+          "dimensions": [
+            13,
+            15
+          ],
+          "two_cells": 91
+        }
+      }
+    },
+    {
+      "map": "Random_Game",
+      "sequence": "randomness",
+      "active": true,
+      "changed": true,
+      "before_sha256": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+      "interior_platform_cells": [
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "8059df4a11353436bf8460970610ab74e316c30269e8dbe7112c7875a6cbeee4",
+          "dimensions": [
+            13,
+            16
+          ],
+          "two_cells": 5
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "cacd95c86d5fe456f03cad047deb039b1bb1653d110730d9132588000f11ded8",
+          "dimensions": [
+            13,
+            16
+          ],
+          "two_cells": 5
+        }
+      }
+    },
+    {
+      "map": "Random_Noise_Types",
+      "sequence": "noise",
+      "active": true,
+      "changed": true,
+      "before_sha256": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+      "interior_platform_cells": [
+        [
+          7,
+          2
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          7,
+          2
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "512f5be278af80d813fa2281cb8321b539f39cbf5e90207780d43be13cfcaf97",
+          "dimensions": [
+            7,
+            9
+          ],
+          "two_cells": 4
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "d96c07bca8650ac3e236e1e35e95dc42154606603ffe4203a47b7a028e5a5aaa",
+          "dimensions": [
+            7,
+            9
+          ],
+          "two_cells": 4
+        }
+      }
+    },
+    {
+      "map": "Noise_Columns",
+      "sequence": "noise",
+      "active": true,
+      "changed": true,
+      "before_sha256": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+      "interior_platform_cells": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          12,
+          14
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          12,
+          14
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "4466ac7c63b458a6525af227c8d624f2aec9fa1307fb75b371e751af2a1a1132",
+          "dimensions": [
+            12,
+            14
+          ],
+          "two_cells": 42
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "141597ac12d9b82a18d5ed40fd6968fae17efa7c2bf43128373e8bc5af39bda2",
+          "dimensions": [
+            12,
+            14
+          ],
+          "two_cells": 42
+        }
+      }
+    },
+    {
+      "map": "Noise_One",
+      "sequence": "noise",
+      "active": true,
+      "changed": true,
+      "before_sha256": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+      "interior_platform_cells": [
+        [
+          10,
+          1
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          10,
+          9
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          10,
+          1
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          10,
+          9
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "014ccb622b5bc893f83762608f07f051a05066218137cd2c77c10130fa3cad34",
+          "dimensions": [
+            11,
+            11
+          ],
+          "two_cells": 35
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "bbf7f00b8d67fdb7ed9a4327f08f43ab89b1f900a2d2f6e463b18d2799eddbeb",
+          "dimensions": [
+            11,
+            11
+          ],
+          "two_cells": 35
+        }
+      }
+    },
+    {
+      "map": "Noise_Voxel",
+      "sequence": "noise",
+      "active": true,
+      "changed": true,
+      "before_sha256": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+      "interior_platform_cells": [
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "f752420c6f0146350e3048fbcec32c7937e1f6be7dbbcf70ba8c2350238dbb72",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 2
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "d8feb14d982e6751e1f40c44252fc4aa87ff3b84aaa5ea70be5ff5b561adba31",
+          "dimensions": [
+            13,
+            14
+          ],
+          "two_cells": 2
+        }
+      }
+    },
+    {
+      "map": "Noise_6_Wall",
+      "sequence": "noise",
+      "active": true,
+      "changed": false,
+      "before_sha256": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "a879764371abd67e02c8663f146c2d5be74d81c0f9c1cf8affe3154bd540abec",
+          "dimensions": [
+            11,
+            11
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "e31c0b623cb3eb7b43ec68ab89ec7a779eaca9fb01945e48a7b6eda9dafbeeea",
+          "dimensions": [
+            11,
+            11
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "sequence": "noise",
+      "active": false,
+      "changed": true,
+      "before_sha256": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+      "interior_platform_cells": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          7,
+          11
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          8,
+          11
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          8,
+          12
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "ebb07fba12e47dfdafa41afd68419140ce0eeb8214c7cf222f76694c709dd011",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 21
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "c538cf350d1d0b500678fe5e7013da9d6c2178e1f414580710842e8744243fdc",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 21
+        }
+      }
+    },
+    {
+      "map": "Noise_Space_10",
+      "sequence": "noise",
+      "active": false,
+      "changed": true,
+      "before_sha256": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+      "interior_platform_cells": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          11,
+          13
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          11,
+          13
+        ]
+      ],
+      "perimeter_2_to_w": [
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          11,
+          0
+        ],
+        [
+          12,
+          0
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          1,
+          14
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          14
+        ]
+      ],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "4277413320099227afa54aced1eba2a643ccd4917214f8a274841ea2f7df8eef",
+          "dimensions": [
+            13,
+            15
+          ],
+          "two_cells": 95
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "d65364d3ad75fa35fe125292533f6851f13e72c134a822edd6a5a23b9e25f7be",
+          "dimensions": [
+            13,
+            15
+          ],
+          "two_cells": 95
+        }
+      }
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "sequence": "noise",
+      "active": true,
+      "changed": false,
+      "before_sha256": "2d5317625e201205c92d5f1ba97549d136fad7b7225a3af280e852b6b823075c",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "b079ee34c3f465b37e4ca2dd49a3e7f971b0e264dad7dd58062bfbfb8c16d148",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "b079ee34c3f465b37e4ca2dd49a3e7f971b0e264dad7dd58062bfbfb8c16d148",
+          "dimensions": [
+            12,
+            13
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "Lab_Path",
+      "sequence": "noise",
+      "active": false,
+      "changed": false,
+      "before_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "d9174b61c4a501bc064680c827b5151d3cbb68f5d4543e4cd6b3d82564dac717",
+          "dimensions": [
+            5,
+            5
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "e32a5001c2fb1c2cbc30e2515f0bb6a4b44abca899fa9d274aff338081ee6b66",
+          "dimensions": [
+            5,
+            5
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_Introduction",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": false,
+      "before_sha256": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "ca83df6965f6963e74b708ff2b1297b2eafc55a8c2a92681eb01b4f7ba56b260",
+          "dimensions": [
+            7,
+            17
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "90169f27dc5d8781da758e6cd2f8feb3ea8010e931bbc675388ec1ba50273b2e",
+          "dimensions": [
+            7,
+            17
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "sequence": "cellularautomata",
+      "active": false,
+      "changed": false,
+      "before_sha256": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "d00854ff3a283a94bc1452653bc29db738ea757be7afc22be102e576e1ae80aa",
+          "dimensions": [
+            7,
+            10
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "b9850ee74a2104f28a8a157389a1ca700555a5f5da10ad69d047281d11590a02",
+          "dimensions": [
+            7,
+            10
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_GameOfLife",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": true,
+      "before_sha256": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+      "interior_platform_cells": [
+        [
+          10,
+          2
+        ]
+      ],
+      "newly_platform_cells": [
+        [
+          10,
+          2
+        ]
+      ],
+      "perimeter_2_to_w": [],
+      "geometry_changes": true,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "0e131ccc04bf04bc08f9e6b85f7023ca0c49f8cc2dfea76c767fd1a50085eae1",
+          "dimensions": [
+            10,
+            16
+          ],
+          "two_cells": 1
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "0e131ccc04bf04bc08f9e6b85f7023ca0c49f8cc2dfea76c767fd1a50085eae1",
+          "dimensions": [
+            10,
+            16
+          ],
+          "two_cells": 1
+        }
+      }
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": false,
+      "before_sha256": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "6f58778a5a23322ebfe53906165b06409dfb7b38b5670533fcdd17e6431da1b7",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "505abe7c2b0f9774db97f2ddb5287fdf21d630d5b84841832f8b76dae58b5be6",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": false,
+      "before_sha256": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "56e02d6eea5477ded0aca2718ca14e0c1874f6bb384decdc64d64b952b08aa17",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "3734606a058a9c30b08f19040cb77b616b7a3ccc5da23bbd581863c6b64ea43b",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_SoftRules",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": false,
+      "before_sha256": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "5c07c1c9ef4c3b7267195b44e0340b101d8aabb67ba8c716e61c23570a2d11c4",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "b9362cc8ed1474677d3baf5a81dc7a23db2275a4878093eda8a709e9e2162c95",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "sequence": "cellularautomata",
+      "active": false,
+      "changed": false,
+      "before_sha256": "0bd90c88a790dabe974396630b2c610852d7118db8913b897d2d62f886b8d457",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "1a48e62bbe5d49a0d10f44677ad63f9b575354a55b97343ca743e354afcf06e7",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "1a48e62bbe5d49a0d10f44677ad63f9b575354a55b97343ca743e354afcf06e7",
+          "dimensions": [
+            7,
+            8
+          ],
+          "two_cells": 0
+        }
+      }
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "sequence": "cellularautomata",
+      "active": true,
+      "changed": false,
+      "before_sha256": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+      "interior_platform_cells": [],
+      "newly_platform_cells": [],
+      "perimeter_2_to_w": [],
+      "geometry_changes": false,
+      "history": {
+        "pre-museum": {
+          "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+          "sha256": "b678d117e945dcb45704ee1f08422671a810a64665f44a3ba9133b27ced6e5aa",
+          "dimensions": [
+            7,
+            9
+          ],
+          "two_cells": 0
+        },
+        "pre-rewrite": {
+          "commit": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46",
+          "sha256": "b678d117e945dcb45704ee1f08422671a810a64665f44a3ba9133b27ced6e5aa",
+          "dimensions": [
+            7,
+            9
+          ],
+          "two_cells": 0
+        }
+      }
+    }
+  ],
+  "historical_refs": {
+    "pre-museum": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+    "pre-rewrite": "4d8dc7c7cbea69bc189b259b5c998a44b4a13e46"
+  },
+  "active_routes": {
+    "randomness": [
+      "Random_Definition",
+      "Random_Entropy",
+      "Random_Remove",
+      "Random_Walk",
+      "Random_Gaussian",
+      "Random_Mushrooms",
+      "Random_Game"
+    ],
+    "noise": [
+      "Random_Noise_Types",
+      "Noise_Columns",
+      "Noise_One",
+      "Noise_Voxel",
+      "Noise_6_Wall",
+      "Noise_Perlin_Simplex"
+    ],
+    "cellularautomata": [
+      "CA_Introduction",
+      "CA_GameOfLife",
+      "CA_BeyondBinary",
+      "CA_ExpandingSpace",
+      "CA_SoftRules",
+      "CA_EdgeOfChaos"
+    ]
+  },
+  "refreshed_plan_maps": [
+    "CA_GameOfLife",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Random_Game",
+    "Random_Gaussian",
+    "Random_Mushrooms",
+    "Random_Noise_Types",
+    "Random_Walk"
+  ],
+  "boundary": "Actual structure rectangle; no origin shift or old-footprint guessing.",
+  "before_sha256": {
+    "commons/maps/sequences/randomness.json": "0ae1641c2439fbd3fb39b639ba8efbb22263faf739c5ba9b2a8286be707c6264",
+    "commons/maps/Random_Definition/map_data.json": "f15ed644db07d2dd29ee17a014f8db832d2a6aa8db5e66050507ec2b82673ae1",
+    "commons/maps/Random_Entropy/map_data.json": "c45774d9e628acafbd72539f6c0416248cedb2a79adf1e4054e8c56c814c68cd",
+    "commons/maps/Random_Remove/map_data.json": "3a1eaf1850e7d10d7892bd4e5b28d08300613eac0ed8b7344193cd0e1244ca20",
+    "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json": "06e692a18aee7c842aa2a5ddc9e68867968c51cba06a09ff616980d2f4171a1c",
+    "commons/maps/Random_Cubes/map_data.json": "a8bbd32bd3644f79ccfc75d42fa40fa8033a2111d1e7a2b9e33cd5851cc0c9d9",
+    "commons/maps/Random_Rotate_Random_XYZ/map_data.json": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+    "commons/maps/Random_Walk/map_data.json": "dac38a76008538ef7c5171c7f2d55e51778b8a168f98269259624c487695f777",
+    "commons/maps/Random_Gaussian/map_data.json": "35e4de411e96f2b44512e068e4f95eee6911eb68fd8c43e11d1678dfa0033534",
+    "commons/maps/Random_Mushrooms/map_data.json": "2b3731abed8b4b1e3591d6e249354492f0299e3ab309ff0db2dbf86a5703bca0",
+    "commons/maps/Random_Space_Geometry/map_data.json": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+    "commons/maps/Randomness_Examples_of_Randomness/map_data.json": "fa1472e16bd3b13dfb4f2e3664297266aa645ea404458f992c53ab9f1974c29b",
+    "commons/maps/Random_Pheromone/map_data.json": "5e151bd709d9be048ac393b9453a7d1bbf6dc0482ae2756421e79be7382f083f",
+    "commons/maps/Random_Space/map_data.json": "03307d0e358ec577bdb2b4eb687921038b5f23896e82a3bcd6d140b090f22a0a",
+    "commons/maps/Random_Game/map_data.json": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+    "commons/maps/sequences/noise.json": "4a7ca520a93f5f2044a74317dfd6ea4fe0059699b8fbb01c7a1dce3951e01d4a",
+    "commons/maps/Random_Noise_Types/map_data.json": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+    "commons/maps/Noise_Columns/map_data.json": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+    "commons/maps/Noise_One/map_data.json": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+    "commons/maps/Noise_Voxel/map_data.json": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+    "commons/maps/Noise_6_Wall/map_data.json": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+    "commons/maps/Noise_Inside_Noise/map_data.json": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+    "commons/maps/Noise_Space_10/map_data.json": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+    "commons/maps/Noise_Perlin_Simplex/map_data.json": "2d5317625e201205c92d5f1ba97549d136fad7b7225a3af280e852b6b823075c",
+    "commons/maps/Lab_Path/map_data.json": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+    "commons/maps/sequences/cellularautomata.json": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd",
+    "commons/maps/CA_Introduction/map_data.json": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+    "commons/maps/CA_ElementaryRules/map_data.json": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+    "commons/maps/CA_GameOfLife/map_data.json": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+    "commons/maps/CA_BeyondBinary/map_data.json": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+    "commons/maps/CA_ExpandingSpace/map_data.json": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+    "commons/maps/CA_SoftRules/map_data.json": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+    "commons/maps/CA_AgentsCircuits/map_data.json": "0bd90c88a790dabe974396630b2c610852d7118db8913b897d2d62f886b8d457",
+    "commons/maps/CA_EdgeOfChaos/map_data.json": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+    "ada_run/em_plan.json": "657031f40db3136271379f2cbe5f9b01382df1932708e9a388f9a24178a25825",
+    "commons/data/museum/em_plan.json": "657031f40db3136271379f2cbe5f9b01382df1932708e9a388f9a24178a25825",
+    "commons/data/map_authored.json": "106958a11d4d76774b967db5d8381c6d10f049954d9530f6854f0f7bd30c3fcf",
+    "commons/data/museum_order_effective.json": "c419182965776d0e931e319a0a65c1307bf986a7f3f05687e15668f8576f743f",
+    "commons/data/artifact_roles.json": "a545257e032a832e833942eeed1e430b2f22acc336020499095be6573ecc6070",
+    "commons/data/spine_artifact_order.json": "216af4dffdab4e72c2f29bb30417c1599e4e823d34005b83ca23d4bd7e887504"
+  },
+  "changed_files": [
+    "commons/maps/Random_Remove/map_data.json",
+    "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+    "commons/maps/Random_Cubes/map_data.json",
+    "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "commons/maps/Random_Walk/map_data.json",
+    "commons/maps/Random_Gaussian/map_data.json",
+    "commons/maps/Random_Mushrooms/map_data.json",
+    "commons/maps/Randomness_Examples_of_Randomness/map_data.json",
+    "commons/maps/Random_Space/map_data.json",
+    "commons/maps/Random_Game/map_data.json",
+    "commons/maps/Random_Noise_Types/map_data.json",
+    "commons/maps/Noise_Columns/map_data.json",
+    "commons/maps/Noise_One/map_data.json",
+    "commons/maps/Noise_Voxel/map_data.json",
+    "commons/maps/Noise_Inside_Noise/map_data.json",
+    "commons/maps/Noise_Space_10/map_data.json",
+    "commons/maps/CA_GameOfLife/map_data.json",
+    "ada_run/em_plan.json",
+    "commons/data/museum/em_plan.json"
+  ],
+  "runtime": "pending; source derivation is not a physical collision test",
+  "preservation": "Artifact layers/configurations, dimensions, route/role/order sources and unselected plan rows preserved. Two spawn tokens moved onto existing floor and one interior exit landing added after before/after reachability exposed blocked routes.",
+  "access_repairs": [
+    {
+      "map": "Random_Mushrooms",
+      "change": "spawn (0,0) -> existing floor (1,1)"
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "change": "spawn (0,0) -> existing floor (1,1)"
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "change": "add height-2 landing at (7,11) before unchanged exit (7,12)"
+    }
+  ]
+}

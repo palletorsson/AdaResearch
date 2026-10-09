@@ -1,0 +1,1564 @@
+{
+  "checks": 22,
+  "failures": [],
+  "headset_verified": false,
+  "map": "PG_Percolation_Network",
+  "measurements": {
+    "captures": {
+
+    },
+    "driver_log": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          13.5,
+          0.00100000004749745,
+          0.930000066757202
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "ot/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/PushButton",
+          "hover": "ia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "eum/Seg0_dia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eum/Seg0_dia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.8,
+              1.08,
+              1.58
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3739",
+          "hover": "-beacon-field/PGWorkshop/@Node3D@3739/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3739/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3739/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.5,
+              1.08,
+              1.58
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "ot/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/PushButton",
+          "hover": "ia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "eum/Seg0_dia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "eum/Seg0_dia-beacon-field/PGWorkshop/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.8,
+              1.08,
+              1.58
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3741",
+          "hover": "-beacon-field/PGWorkshop/@Node3D@3741/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3741/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3741/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.2,
+              1.08,
+              1.58
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3743",
+          "hover": "-beacon-field/PGWorkshop/@Node3D@3743/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3743/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3743/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.8,
+              1.09,
+              1.36
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3745",
+          "hover": "-beacon-field/PGWorkshop/@Node3D@3745/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3745/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3745/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.5,
+              1.1,
+              1.35
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            0.93
+          ],
+          "forward": [
+            -0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "/EndlessMuseum/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3747",
+          "hover": "-beacon-field/PGWorkshop/@Node3D@3747/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              13.5,
+              1.6,
+              0.93
+            ],
+            "independent_ray": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3747/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "m/Seg0_dia-beacon-field/PGWorkshop/@Node3D@3747/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              13.2,
+              1.09,
+              1.36
+            ]
+          },
+          "stand": [
+            13.5,
+            0.0,
+            0.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            24.0,
+            1.61,
+            3.0
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            24.0,
+            0.01,
+            3.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 450,
+        "moved": [
+          0.0,
+          -0.01,
+          37.42
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            24.0,
+            1.6,
+            40.42
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rig": [
+            24.0,
+            0.0,
+            40.42
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            24.0,
+            1.6,
+            40.42
+          ],
+          "forward": [
+            -1.0,
+            0.0,
+            0.01
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            24.0,
+            0.0,
+            40.42
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 126,
+        "moved": [
+          -10.5,
+          0.0,
+          0.08
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            40.5
+          ],
+          "forward": [
+            -1.0,
+            0.0,
+            0.01
+          ],
+          "rig": [
+            13.5,
+            0.0,
+            40.5
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            40.5
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            40.5
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 60,
+        "moved": [
+          0.0,
+          0.0,
+          5.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            45.5
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rig": [
+            13.5,
+            0.0,
+            45.5
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            13.5,
+            1.6,
+            45.5
+          ],
+          "forward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            13.5,
+            0.0,
+            45.5
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 35,
+        "moved": [
+          2.92,
+          0.0,
+          0.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            16.42,
+            1.6,
+            45.5
+          ],
+          "forward": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "rig": [
+            16.42,
+            0.0,
+            45.5
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            16.42,
+            1.6,
+            45.5
+          ],
+          "forward": [
+            0.08,
+            0.01,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            16.42,
+            0.0,
+            45.5
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 12,
+        "moved": [
+          0.08,
+          0.0,
+          1.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@4005",
+          "eye": [
+            16.5,
+            1.6,
+            46.5
+          ],
+          "forward": [
+            0.08,
+            0.01,
+            1.0
+          ],
+          "rig": [
+            16.5,
+            0.0,
+            46.5
+          ]
+        }
+      }
+    ],
+    "exit_path": "[(13, 45), (16, 45), (16, 46)]",
+    "exit_tile": [
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ]
+    ],
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@3729",
+            "position": [
+              12.9399995803833,
+              0.889999985694885,
+              1.28000020980835
+            ],
+            "size": [
+              1.1200008392334,
+              0.120000004768372,
+              0.439999580383301
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3732",
+            "position": [
+              13.8800001144409,
+              0.0,
+              1.34999990463257
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3735",
+            "position": [
+              13.039999961853,
+              0.0,
+              1.34999990463257
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.300000190734863
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.7711248397827,
+              1.03925001621246,
+              1.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.7854995727539,
+              1.05074989795685,
+              1.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.7740001678467,
+              1.05483615398407,
+              1.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.4511251449585,
+              1.03925001621246,
+              1.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.4654998779297,
+              1.05074989795685,
+              1.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.4540004730225,
+              1.05483615398407,
+              1.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.1311254501343,
+              1.03925001621246,
+              1.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.1455001831055,
+              1.05074989795685,
+              1.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.1340007781982,
+              1.05483615398407,
+              1.57399988174438
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.7711248397827,
+              1.03925001621246,
+              1.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.7854995727539,
+              1.05074989795685,
+              1.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.7740001678467,
+              1.05483615398407,
+              1.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.4511251449585,
+              1.03925001621246,
+              1.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.4654998779297,
+              1.05074989795685,
+              1.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.4540004730225,
+              1.05483615398407,
+              1.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              13.1311254501343,
+              1.03925001621246,
+              1.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              13.1455001831055,
+              1.05074989795685,
+              1.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              13.1340007781982,
+              1.05483615398407,
+              1.34400033950806
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0920000076293945
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3749",
+            "position": [
+              12.9399995803833,
+              0.824999988079071,
+              1.25250053405762
+            ],
+            "size": [
+              1.1200008392334,
+              0.149999976158142,
+              0.0249996185302734
+            ]
+          },
+          {
+            "name": "Glass",
+            "position": [
+              12.9099998474121,
+              1.12255263328552,
+              1.81675624847412
+            ],
+            "size": [
+              1.18000030517578,
+              0.294894695281982,
+              0.206487655639648
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3751",
+            "position": [
+              12.8900003433228,
+              1.10321927070618,
+              1.79987859725952
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222835540771484
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3752",
+            "position": [
+              12.8900003433228,
+              1.4144971370697,
+              2.01783752441406
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222835540771484
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3753",
+            "position": [
+              14.0920000076294,
+              1.10977244377136,
+              1.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3754",
+            "position": [
+              12.8919992446899,
+              1.10977244377136,
+              1.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3755",
+            "position": [
+              13.9709997177124,
+              0.980000019073486,
+              1.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3756",
+            "position": [
+              13.0109996795654,
+              0.980000019073486,
+              1.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          }
+        ],
+        "position": "(13.5, 0.0, 7.5)",
+        "token": "pg_workshop_console"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              10.75,
+              0.25,
+              11.25
+            ],
+            "size": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              10.25,
+              0.25,
+              11.25
+            ],
+            "size": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          }
+        ],
+        "position": "(10.5, 4.5, 15.5)",
+        "token": "percolationnetwork_ca"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@3697",
+            "position": [
+              18.8299999237061,
+              0.0,
+              17.8299999237061
+            ],
+            "size": [
+              1.34000015258789,
+              0.0599999986588955,
+              1.34000015258789
+            ]
+          },
+          {
+            "name": "Orb0",
+            "position": [
+              19.5865058898926,
+              0.50418883562088,
+              18.367618560791
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb1",
+            "position": [
+              19.5317287445068,
+              0.361182779073715,
+              18.5385055541992
+            ],
+            "size": [
+              0.184577941894531,
+              0.15825816988945,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb2",
+            "position": [
+              19.3543090820313,
+              0.499727785587311,
+              18.5830135345459
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb3",
+            "position": [
+              19.229061126709,
+              0.365643799304962,
+              18.4452171325684
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb4",
+            "position": [
+              19.2838382720947,
+              0.508649826049805,
+              18.2743320465088
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb5",
+            "position": [
+              19.4612579345703,
+              0.370104849338531,
+              18.2298240661621
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              19.2349281311035,
+              0.067500002682209,
+              18.2349281311035
+            ],
+            "size": [
+              0.530143737792969,
+              0.00499999523162842,
+              0.530143737792969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3698",
+            "position": [
+              18.8299999237061,
+              0.01999999769032,
+              19.3024997711182
+            ],
+            "size": [
+              1.34000015258789,
+              0.00000000372529029846191,
+              0.0550003051757813
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3699",
+            "position": [
+              18.8299999237061,
+              0.0,
+              17.8299999237061
+            ],
+            "size": [
+              1.34000015258789,
+              0.0599999986588955,
+              1.34000015258789
+            ]
+          },
+          {
+            "name": "Orb0",
+            "position": [
+              19.5865058898926,
+              0.50418883562088,
+              18.367618560791
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb1",
+            "position": [
+              19.5317287445068,
+              0.361182779073715,
+              18.5385055541992
+            ],
+            "size": [
+              0.184577941894531,
+              0.15825816988945,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb2",
+            "position": [
+              19.3543090820313,
+              0.499727785587311,
+              18.5830135345459
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb3",
+            "position": [
+              19.229061126709,
+              0.365643799304962,
+              18.4452171325684
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb4",
+            "position": [
+              19.2838382720947,
+              0.508649826049805,
+              18.2743320465088
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "Orb5",
+            "position": [
+              19.4612579345703,
+              0.370104849338531,
+              18.2298240661621
+            ],
+            "size": [
+              0.184577941894531,
+              0.158258199691772,
+              0.187797546386719
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              19.2349281311035,
+              0.067500002682209,
+              18.2349281311035
+            ],
+            "size": [
+              0.530143737792969,
+              0.00499999523162842,
+              0.530143737792969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@3701",
+            "position": [
+              18.8299999237061,
+              0.01999999769032,
+              19.3024997711182
+            ],
+            "size": [
+              1.34000015258789,
+              0.00000000372529029846191,
+              0.0550003051757813
+            ]
+          }
+        ],
+        "position": "(19.5, 0.0, 22.5)",
+        "token": "synthesis_stand"
+      },
+      {
+        "meshes": [
+          {
+            "name": "SphereDisplay",
+            "position": [
+              19.0805053710938,
+              0.240322262048721,
+              19.0731925964355
+            ],
+            "size": [
+              0.8389892578125,
+              0.719355583190918,
+              0.853614807128906
+            ]
+          },
+          {
+            "name": "HaloRing",
+            "position": [
+              19.0799999237061,
+              0.00749999983236194,
+              19.0799999237061
+            ],
+            "size": [
+              0.840000152587891,
+              0.00499999942258,
+              0.840000152587891
+            ]
+          }
+        ],
+        "position": "(19.5, 0.0, 23.5)",
+        "token": "dark_sphere"
+      }
+    ],
+    "lattice_readout": "Lattice p=0.4 | step 32/64\n1413 reached sites | 18 on opposite face\nWhite = solid; pink = no collision",
+    "readout": "FACE contact | step 1/64\n1 reached sites | 0 on opposite face\nWhite = solid; pink = no collision"
+  }
+}

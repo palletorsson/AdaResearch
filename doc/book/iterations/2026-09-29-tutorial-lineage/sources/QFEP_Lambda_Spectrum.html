@@ -1,0 +1,240 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QFEP_Lambda_Spectrum · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=QFEP_Lambda_Spectrum">← Tutorial lineage</a></p><h1>QFEP Lambda Spectrum</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="QFEP_Lambda_Spectrum/final.md">Raw captured source</a></p><pre># The path the hall recommends
+
+Which part of this hall invites you to stay, and how does it make that invitation?
+
+&lt;!-- @lambda_hall --&gt;
+
+Look towards the repeated lattice on one side, then towards the dispersed moving forms on the other. Compare the rows between them. Locate the lit route and decide what makes it appear preferable before accepting its position as the answer to the room.
+
+The hall distributes an authored contrast across space. Regular repetition occupies one extreme; broken and animated forms occupy the other. Intermediate rows interpolate between them. The highlighted route lies at a chosen lambda value, making a numerical setting into something you can orient yourself towards.
+
+Choose one repeated element and compare its neighbours along the regular side. Then look for a comparable relation among the moving forms. Describe what becomes easier to anticipate and what becomes harder to locate again. This keeps the comparison in the encounter itself: a repeated interval can support orientation, while a change of position can draw attention to a particular element. Those are observable consequences of the staging before either side receives a theoretical label.
+
+In the project formula, lambda weights the contribution associated with entropy. On the introductory console, changing it altered an arithmetic balance. This hall instead provides a spatial analogy for that weighting. Its forms are built from their assigned positions across the spectrum; it does not measure the entropy of each structure and then discover where it belongs.
+
+The lit route is therefore a curatorial argument. Its chosen value is not a universal threshold at which life, creativity or queerness appears. A welcoming middle can be an evocative design without becoming a result established by physics. The board by the door has already chalked life at λ ≈ 0.4. Read it as the thesis this hall puts to the test, not as its result.
+
+Try reversing the expected evaluation. Find something the repeated side offers that the dispersed side makes difficult: a landmark, a dependable interval, a place to compare small differences. Then find something the dispersed side permits that the regular side suppresses. Neither observation needs to erase the other.
+
+The entropy fan asked which alternatives were available. The hall adds another question: which available alternatives are made inviting? A pathway, colour or rhythm can recommend an answer before any explanatory text does.
+
+Return to the small console at the entrance. Move LIT STRIP. The light slides across the floor; the rows do not follow. Their colours keep their earlier emphasis and the moving forms continue their own motion. Try a recommendation near each end of the rail, then press RETURN. Which invitation did you find easiest to believe?
+
+Watch for disagreement. The bright strip may now point beneath a form instead of through the gap the architecture prepared. Light has made a recommendation, not cleared a passage. The rail moves between 0.20 and 0.80 to keep its strip inside the hall’s kerbs; even this power to recommend has been given a limit.
+
+There are two kinds of preference visible now: the one you can move, and the one already built into the rows. Moving the light does not erase the arrangement that made the first invitation convincing. Would another visitor choose differently after seeing your version first?
+
+QFEP asks who may revise a model’s terms. Here you can change one of the room’s terms of persuasion. Its forms, its colours and the possibilities on the rail remain authored. What else would you need to change before this felt like your decision?
+
+Phi introduces time. A system’s present arrangement and its response to change will no longer be the same question.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="QFEP_Lambda_Spectrum/tutorial.md">Raw captured source</a></p><pre># Lambda Spectrum
+
+Your position is the λ value. Walk from crystal at λ=0 to dissolution at λ=1, through the edge of chaos in between.
+
+Declare the lambda reader.
+
+```gdscript
+class_name LambdaReader
+extends Node3D
+
+@export var track_start: Vector3 = Vector3.ZERO
+@export var track_end: Vector3 = Vector3(20.0, 0.0, 0.0)
+
+func lambda_for(player_pos: Vector3) -&gt; float:
+    var total := track_start.distance_to(track_end)
+    var here := track_start.distance_to(player_pos)
+    return clamp(here / total, 0.0, 1.0)
+```
+
+A straight track with a start and end. Player position projects onto the track to yield λ. The reader is the only translator between body and number.
+
+Sample the player every frame.
+
+```gdscript
+func _process(_dt: float) -&gt; void:
+    var l := lambda_for(player.global_position)
+    lambda_label.text = &quot;λ = %.2f&quot; % l
+    world.apply_lambda(l)
+```
+
+The label updates with each step. The world reshapes itself to match.
+
+Shape the world by λ.
+
+```gdscript
+func apply_lambda(l: float) -&gt; void:
+    crystallizer.strength = 1.0 - l
+    chaos_field.strength = l
+    edge_field.strength = _edge_weight(l)
+```
+
+Three fields scale with λ. Order dominates near zero.
+
+Chaos dominates near one. Edge peaks in the middle.
+
+Compute the edge weight.
+
+```gdscript
+func _edge_weight(l: float) -&gt; float:
+    return exp(-pow((l - 0.4) / 0.12, 2.0))
+```
+
+A Gaussian centred on λ=0.4 with tight sigma. The edge is narrow. Miss by 0.2 and complexity falls off sharply.
+
+Populate the edge with living patterns.
+
+```gdscript
+func populate_edge() -&gt; void:
+    for i in 18:
+        var pattern := preload(&quot;res://commons/artifacts/qfep/edge_creature.tscn&quot;).instantiate()
+        pattern.position = Vector3(track_start.x + 8.0 + randf_range(-2, 2), 0, randf_range(-2, 2))
+        add_child(pattern)
+```
+
+Eighteen small creatures live only in the middle band. Their meshes breathe. They vanish at either end.
+
+Drain each creature&#x27;s life by distance from the edge.
+
+```gdscript
+func update_creature(creature: Node3D, l: float) -&gt; void:
+    var life := _edge_weight(l)
+    creature.scale = Vector3.ONE * life
+    creature.modulate.a = life
+```
+
+Outside the edge band, the creatures shrink and fade. The learner watches complexity retreat as they step toward either end.
+
+Mark the three stations.
+
+```gdscript
+func label_stations() -&gt; void:
+    crystal_sign.text = &quot;λ = 0\ncrystal&quot;
+    edge_sign.text = &quot;λ ≈ 0.4\nthe edge&quot;
+    dissolution_sign.text = &quot;λ = 1\ndissolution&quot;
+```
+
+Signs name the three regimes. The learner is not reading about them; the learner is standing in them.
+
+You have walked the spectrum. The next map, Phi Term, adds the system&#x27;s attitude toward movement along it.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Log the learner&#x27;s λ trajectory.
+
+```gdscript
+func log_trajectory(l: float) -&gt; void:
+    var now := Time.get_ticks_msec() / 1000.0
+    trajectory.append({&quot;t&quot;: now, &quot;lambda&quot;: l})
+```
+
+Each λ reading is stamped with time. The trajectory reveals where the learner lingered and where they raced through.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="QFEP_Lambda_Spectrum/technical.md">Raw captured source</a></p><pre># A recommendation independent of its surroundings
+
+In the Introduction, lambda weights the E contribution to an arithmetic total. Here it becomes a spatial analogy: an authored spectrum has repeated cubes on one side, jittered and animated cubes on the other, and six intermediate rows. No entropy distribution is measured to assign their places.
+
+The existing lambda_value configuration controls the corridor&#x27;s initial clearance and the colour/emission emphasis of its rows. It remains at 0.35 in this hall. Previously changing it also moved the lit floor, so a comparison could not distinguish a changed recommendation from changed surroundings.
+
+The optional recommendation_control:on adds a LIT STRIP rail and RETURN button at the entrance. Its recommendation_position ranges from 0.20 to 0.80. The lit strip has no separate collider. It moves above a continuous floor:
+
+```gdscript
+_recommendation.position.x = (value - 0.5) * hall_width
+```
+
+The recommendation node contains the lit floor mesh, its two bright edge strips and its inscriptions. Changing this value moves that node and updates the suggested-value labels and console reading. It does not rebuild the spectrum, move its rows, recolour their materials, reseed them, move the capture camera or reset animation time. RETURN restores the initial authored recommendation without rebuilding the environment.
+
+The slider interval keeps the 1.4 m strip inside the side kerbs of the seven-metre hall. Those bounds are interface choices. They are not claims about optimal lambda. The kerbs have taller invisible containment colliders than their visible mesh. The cube rows themselves are rendered forms without individual solid collision; the continuous floor carries the walker. A glowing strip under a cube is therefore a visual contradiction, not a newly computed traversable route.
+
+The full fourteen-metre-long artifact now fits inside a seventeen-by-twenty-four gallery. Nine secondary placements remain in the outer bays. The bifurcation_walkway token is retained but its registry still disables it; enabling that comparison is separate development work. The other works do not receive this rail&#x27;s value. A malformed noise hash in the dissolving form&#x27;s shader is corrected so that retained comparison can render again. The map&#x27;s older along-z/body-as-slider captions are removed because no such player-position coupling is implemented. artifact_placement:map makes these placements authoritative over an older stamped necklace that omitted the main hall. The central encounter is kept clear of automatically added sculptures.
+
+Default placements without recommendation_control keep their original coupling between configured lambda, geometry and floor placement, without the new console. Configuration rebuilds now free only nodes made by the artifact, preserving external framing.
+
+The comparison asks whether moving a recommendation changes a visitor&#x27;s preference. The runtime checks establish that the controls keep the intended variables fixed; a response from visitors is still needed to investigate the question.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="QFEP_Lambda_Spectrum/intent.md">Raw captured source</a></p><pre>Concept: Walk the spectrum from order to chaos — your physical position IS the λ value. At λ=0: crystal, rigid, dead. At λ≈0.4: complexity, life, the edge. At λ=1: dissolution, noise, death.
+Sequence role: Fourth map in QFEP Lab; the experiential core. After isolating F and E, this map combines them via λ and makes the combination walkable. The learner&#x27;s body traces the spectrum from frozen crystal through complex emergence to chaotic dissolution. Langton&#x27;s edge of chaos — where cellular automata compute, where life exists — is at λ≈0.3-0.5; follows QFEP_E_Term; leads to QFEP_Phi_Term.
+Technical angle: λ as continuous parameter from 0 to 1, crystal_formation at low λ, complexity_pattern at edge λ, dissolving_form at high λ. The bifurcation_walkway maps the bifurcation diagram to physical space. The artifacts are spatially arranged along the spectrum: ordered_grid → edge_particles → chaos_particles.
+Critical angle: The spectrum is not metaphorical — it is the curriculum itself. Primitives (low λ, pure structure) → Randomness (high λ, pure entropy) → the maps where complexity emerged (Cellular Automata, Fractals, L-Systems) → were always at the edge. Walking the spectrum is walking the curriculum&#x27;s arc in compressed form. The body as λ-probe: you feel the transitions.
+Key artifacts: crystal_formation (λ≈0), complexity_pattern (λ≈0.4), dissolving_form (λ≈1) mark the three regimes; bifurcation_walkway maps the bifurcation diagram to walkable space; ordered_grid and chaos_particles bracket the extremes; edge_particles mark where life happens.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="QFEP_Lambda_Spectrum/critical.md">Raw captured source</a></p><pre># The invitation can move
+
+The light has moved. The room has not made room for it.
+
+At first the green strip fits an arrangement that seems to welcome it: rows stand aside and nearby forms take on its colour. Move the recommendation and the agreement comes apart. One suggestion travels with your hand; another remains in the disposition of the cubes.
+
+This is a small distinction with consequences. Moving a label is easier than redistributing the conditions that made its old location persuasive. A new invitation can leave the old arrangement intact. It may even recommend standing where a form already appears to be.
+
+The repeated side also deserves more than the role of a dead opposite. Its intervals make comparisons possible. Something can be relied on long enough to notice a small difference. The dispersed side can draw attention and unsettle that expectation. Neither effect supplies a verdict about what a body ought to prefer.
+
+In the project&#x27;s QFEP documents, keeping a model revisable includes asking who has the capacity to change its terms. This encounter grants a limited version of that authority. You may move the suggestion. You cannot alter its green, extend the rail past its stops, or rearrange the rows through this interface. Self-Q also turns the question on the maker: how much has the original glowing middle trained our own idea of what a good place should look like?
+
+Keep the hall&#x27;s pleasure. Its attraction gives the investigation something to work with. The question is whether we can feel a preference taking shape and still find handles for changing the conditions that produced it.
+
+Source framing: [QFEP development notes](../../../doc/research/qfep/README.md) and [Self-Q](../../../doc/ENTRY.md#the-self-q-recursive-qfep). The claims about visitor preference remain questions for an encounter, not established findings.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="QFEP_Lambda_Spectrum/artifacts.md">Raw captured source</a></p><pre># QFEP Lambda Spectrum — Artifacts
+*QFEP Laboratory: The Formula Made Interactive · synthesis · 7 artifacts*
+
+&gt; *Your position IS the λ value.*
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Crystal Formation
+![Crystal Formation](/scene-catalog/crystal_formation.png)
+
+Ordered crystal cluster for λ=0 zone. Pure order, frozen pattern.
+
+`crystal_formation`
+
+## Ordered Grid
+![Ordered Grid](/scene-catalog/ordered_grid.png)
+
+Perfectly aligned cube grid representing low λ. Order, predictability, rigidity.
+
+`ordered_grid`
+
+## Bifurcation Walkway
+![Bifurcation Walkway](/scene-catalog/bifurcation_walkway.png)
+
+WALK phase transition
+
+`bifurcation_walkway`
+
+## Edge Particles
+![Edge Particles](/scene-catalog/edge_particles.png)
+
+Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.
+
+`edge_particles`
+
+## Complexity Pattern
+![Complexity Pattern](/scene-catalog/complexity_pattern.png)
+
+Game of Life cellular automata at edge of chaos. Self-organizing complexity.
+
+`complexity_pattern`
+
+## Dissolving Form
+![Dissolving Form](/scene-catalog/dissolving_form.png)
+
+A mesh that appears to dissolve/disintegrate. High λ territory.
+
+`dissolving_form`
+
+## Chaos Particles
+![Chaos Particles](/scene-catalog/chaos_particles.png)
+
+λ=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.
+
+`chaos_particles`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="QFEP_Lambda_Spectrum/summary.md">Raw captured source</a></p><pre># Lambda — the path the hall recommends
+
+Fourth of eight declared QFEP Laboratory halls. The primary lambda_hall presents a fixed authored spectrum across its width, from repeated to dispersed forms. A compact entrance console moves only its glowing floor recommendation and inscriptions. Its rows, colours and animation keep their own settings.
+
+Try recommendations at different positions, then press RETURN. Compare what the movable light invites with what the existing geometry and colours already favour. The control does not measure entropy, move the visitor or reveal a universal interval for life.
+
+The 17 by 24 level gallery contains the full-size 7 by 14 artifact and all nine existing secondary works. Entry, the original clear passage and exit are retained. The older supporting drafts survive as historical proposals. Visitor preference, tracked-hand reach and headset comfort remain to be tested.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="QFEP_Lambda_Spectrum/blurb.md">Raw captured source</a></p><pre>*The light has moved. Has the invitation?*
+
+Slide the recommended path to another part of the hall. The forms keep their places.
+
+Which do you follow: the light, the gap, or the preference you brought with you?
+</pre></section></body></html>

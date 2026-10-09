@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "SoftBodies_Cloth_Physics assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "tension full size",
+      "passed": true
+    },
+    {
+      "name": "tension visible",
+      "passed": true
+    },
+    {
+      "name": "tension controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "load changes centre height with same anchors",
+      "passed": true
+    },
+    {
+      "name": "more give settles lower under same load",
+      "passed": true
+    },
+    {
+      "name": "four anchors remain fixed under load and give",
+      "passed": true
+    },
+    {
+      "name": "reset restores exact initial settled state",
+      "passed": true
+    },
+    {
+      "name": "repeatable pull holds the material point",
+      "passed": true
+    },
+    {
+      "name": "release moves without the visitor",
+      "passed": true
+    },
+    {
+      "name": "released motion damps towards unloaded state",
+      "passed": true
+    },
+    {
+      "name": "XR grab acquires the fabric handle",
+      "passed": true
+    },
+    {
+      "name": "held XR position drives the membrane",
+      "passed": true
+    },
+    {
+      "name": "reset refuses to move a held handle",
+      "passed": true
+    },
+    {
+      "name": "XR release hands motion back to solver",
+      "passed": true
+    },
+    {
+      "name": "desktop ray finds pink grip",
+      "passed": true
+    },
+    {
+      "name": "desktop pickup drives the same material point",
+      "passed": true
+    },
+    {
+      "name": "desktop release restores solver ownership",
+      "passed": true
+    },
+    {
+      "name": "extreme grab remains finite and above floor",
+      "passed": true
+    },
+    {
+      "name": "native membrane capture rest",
+      "passed": true
+    },
+    {
+      "name": "native membrane capture pull",
+      "passed": true
+    },
+    {
+      "name": "native membrane capture loaded",
+      "passed": true
+    },
+    {
+      "name": "tension bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "tension bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "tension_membrane standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "tension_membrane support along side 2",
+      "passed": true
+    },
+    {
+      "name": "tension_membrane standing clearance along side 27",
+      "passed": true
+    },
+    {
+      "name": "tension_membrane support along side 27",
+      "passed": true
+    },
+    {
+      "name": "tension_membrane capture",
+      "passed": true
+    }
+  ],
+  "map": "SoftBodies_Cloth_Physics",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

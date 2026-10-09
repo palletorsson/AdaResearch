@@ -1,0 +1,22 @@
+{
+  "captured_at": "2026-09-24T13:33:27.945609+00:00",
+  "base_commit": "823cdb6073f68c45e04c4a3d367a71225b97758a",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "change",
+  "sequence_sha256": "f9c2d45dd638f3ab5c85e46ed56033b892255275303e78062bc3aa4daee16bf7",
+  "maps": [
+    {
+      "map": "Change_Intro",
+      "path": "commons/maps/Change_Intro/final.md",
+      "sha256": "a05f06ffada211a6c937bee51934b0518fac6cd902a84b2e92f23e62492bc8c0"
+    },
+    {
+      "map": "Flow_Field",
+      "path": "commons/maps/Flow_Field/final.md",
+      "sha256": "999c2421fd4b3d7d4ae610c825bc59379196748a7a7b0ecbcb5cd433d242d92d"
+    }
+  ],
+  "output_sha256": "b4efc5a3713ebac398e0c8c8c426a4b45540a55245d3f2887080d22a27b5e8cf"
+}

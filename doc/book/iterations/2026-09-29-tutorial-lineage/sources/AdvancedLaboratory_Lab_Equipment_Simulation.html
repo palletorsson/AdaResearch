@@ -1,0 +1,274 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AdvancedLaboratory_Lab_Equipment_Simulation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=AdvancedLaboratory_Lab_Equipment_Simulation">← Tutorial lineage</a></p><h1>AdvancedLaboratory Lab Equipment Simulation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/final.md">Raw captured source</a></p><pre># Where a body is expected
+
+Where was this body&#x27;s destination decided?
+
+&lt;!-- @MolecularDesigner --&gt;
+
+A hand waits at the end of an arm. Take it a little farther than an arm ought to reach. The elbow stays behind. The slender connection follows, becoming longer. Let go.
+
+The body keeps your alteration.
+
+It stands close to your height, with warm metal joints and just enough between them for you to recognise shoulders, knees, a head. You may already have begun correcting it. Bringing the hand back. Making the two sides agree. Nobody in the room asked for symmetry; perhaps you brought that instruction with you.
+
+Try leaving the hand somewhere else. Move around the body. From one side it is reaching; from another, falling. Lower its head towards the hand. A few displacements make a gesture, and the gesture makes you read the whole arrangement again. The little spheres have no expression. Where did the expression enter?
+
+Across the floor, a larger assembly is finding its places without you. Scattered pieces approach one another. Lines join them. A body appears, or a chair, and later something with more legs. The unused pieces gather along the wall. Stay long enough to see an arrangement loosen and another begin.
+
+One piece carries an amber ring. Follow it. The ring stays with the same carrier, but the shape inside can change. What was a sphere can become a panel. A torso and a seat need not be made from different stuff here; the program gives one instance another mesh and another job. If the next arrangement needs more carriers, it can make them. This inventory has permissions that a cupboard of physical parts would not have.
+
+Yet the apparent freedom has a destination. Before a piece begins to move, its place has been written in the assembly file. The approach uses a restoring force we met earlier:
+
+```gdscript
+var to_target = target_pos - global_position
+
+velocity = (velocity + to_target * dock_spring * delta) * dock_damp
+global_position += velocity * delta
+```
+
+The first line measures the difference between where the piece is and where it is expected. That difference changes its velocity; velocity carries it towards the expected place. There is movement to watch, an approach to wait for. The destination has not been discovered by the moving piece.
+
+A body can look as though it is coming into being while it is coming into agreement with a description.
+
+Return to the joint you moved. Here your hand supplies a different destination. Its position is recorded in the little body&#x27;s own coordinates:
+
+```gdscript
+targets[index] = to_local(handle.global_position)
+```
+
+We are back with a point, a local space, a line between points. The first rooms have not been left behind. You now have enough of their operations to move a hand without moving a shoulder, to lengthen a forearm, to put a knee where this figure has never had one. Let go and the pose remains while the other assembly continues its cycle. There is time to walk around what you have done.
+
+There is also a useful resistance to notice. Moving the hand does not pull the elbow after it. The gold connection follows its endpoints, but it does not enforce the length of a bone. This model can hold a gesture your muscles could not sustain. What looks like a limb is, here, a declared relation drawn across a distance.
+
+Now leave the joints where they are. Find the turquoise collar beside the left hand. Take it towards the head. The forearm&#x27;s connection comes with you; the hand stays behind. A small ring marks the joint the loose end can meet. Release it there.
+
+The line that used to end at the hand now ends at the head. The body still has thirteen joints and twelve connections. Not one point needed to move.
+
+![The starting body, the connection rerouted to the head, and the elbow end brought to the hand](/book-review/doc/book/figures/postfoundationscrisis/rerouted-connection-three-states.png)
+
+*One connection, rerouted twice, drawn from the assembly file. Amber joints, straw lines; the changed line in the turquoise of the final hall. No joint moves in any of the three.*
+
+Follow the lines with your eyes. With this change to the starting body, you can go from the head through the torso and left shoulder, down to the elbow, and back to the head. A loop has appeared. The hand waits outside that circuit, with no line reaching it. It has not disappeared from the room. It has disappeared from the body&#x27;s connected part.
+
+The program changes one entry:
+
+```gdscript
+pairs[bond_index].y = candidate
+```
+
+Here the pair names the two joints a connection joins. Its second entry now names the joint where you let go. A list of positions would miss what happened. To reconstruct this body, we also need to know which points have been made neighbours.
+
+The familiar shape can conceal that change. From far enough away, the isolated sphere may still read as a hand. Come closer and the relation no longer supports the reading. Which account are you following: the outline, the name, or the connection?
+
+You could take the collar back to the hand. But there is another way to bring the hand into the body. Leave this end at the head. Find the second turquoise collar beside the elbow and carry it to the waiting hand. Release it there.
+
+Now the hand joins the head directly. Follow the connections again: every joint belongs to the connected body, although the hand has not returned to its old neighbour. The loop has opened. Nothing has been added, and no point has moved.
+
+The hand has come back without going back. Does it still seem to belong at the end of an arm? The drawing offers another relation before we have a familiar name for it.
+
+Both ends of this connection are available to you. Try another pair. An end released in empty space returns to its previous attachment; the connection still asks for two distinct neighbours. The other eleven connections remain authored.
+
+In the source, the hand is still called `l_hand`, wherever you put it. A name can survive the proportions that made it seem obvious. How far can this arrangement travel from its familiar outline before you cease to see a body? And how much of that limit belongs to the arrangement, rather than to what you have learned to recognise?
+
+The rhizome gave us passages through connections. Here a connection helps something become legible as a body, and your own body reaches into that description. The catalogue offers spheres, rods and panels. The assembly supplies roles and neighbours. You can revise a position, then a neighbour. The two operations change different parts of the description. What other part would have to become available for the body you want to make?
+
+Eventually a joint meets the edge of its working space. There is still a room around this experiment, a limit someone supplied. The catalogue beside it has spare parts. This body cannot yet take one. Perhaps the next desire is another joint, another connection, more room. The useful question is which operation would let that desire take form.
+
+## Another body
+
+Another body waits over a dark mat. You recognise its head, shoulders, hands. Coral rings mark places your hand can take. Pull one wrist.
+
+This elbow comes with it.
+
+The upper arm turns; the shoulder is drawn after it. Your small displacement travels through the body. Keep the hand up and watch the other arm hang. You have given one part a destination, but the remaining parts still have weight. Their arrangement has to answer both.
+
+Let go.
+
+The gesture cannot stay where you left it. Knees fold, a shoulder meets the floor, the head comes to rest. The same invitation — take a hand, move it, release it — has produced another kind of body.
+
+The gold connection could lengthen as far as its workspace allowed. These limbs keep their lengths. Their joints turn, gravity pulls, and contact with the floor changes what can happen next. A relation has acquired a consequence. The little figure may look tired, hurt, absurdly relaxed. None of those states was supplied as an emotion. We meet them in the falling arrangement.
+
+Hang it up again with the small control on the stand. Try a foot. Try holding two parts. How much of the body&#x27;s apparent intention belongs to the way you are supporting it?
+
+This body has been given a different set of permissions, too. Its joints turn more freely than yours. That freedom can produce a collapse you could not imitate. The model lets us try a body without making that body the measure of every other one.
+
+## The furniture
+
+A chair has legs too. Find the one held under fine lines. The supports keep its opening pose available long enough to recognise it. Take the coral ring on its back. The supports let go. Pull a little higher: the seat follows, and the legs swing into another arrangement. Release it. For a moment the chair looks as though it is trying to sit down.
+
+The back, seat and four legs are still connected. Their joints have been allowed to turn where you may have expected them to stay fixed. The familiar parts have not been enough to preserve the familiar use.
+
+Across the passage, lift one leg of the table and watch the top. Its flatness survives; its promise of being level does not. The lamp beside it bends and goes on shining, its light following the bulb to the floor. Falling has not broken a circuit here, because that consequence was never included. Failure has to be specified too.
+
+Each stand can reassemble its object. Try taking a different part. The same rule for pulling can pass from a wrist to a chair back, from a foot to a table leg. The names offer different expectations before the movement begins. What is the connection actually obliged to keep?
+
+&lt;!-- @ --&gt;
+
+Leave the amber-jointed body a little unlike the one you found. A changed joint or connection in that workshop is kept for the final hall, where the body will stand beside the one it began with. You can leave the room and meet the difference again. What will have survived the journey?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md">Raw captured source</a></p><pre># Where was this body&#x27;s destination decided?
+
+We carry primitives, arrays, transformations and restoring forces into a catalogue of possible assemblies.
+
+&lt;!-- @MolecularDesigner --&gt;
+
+Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+
+The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+
+The source makes the operation inspectable:
+
+```gdscript
+var to_target = target_pos - global_position
+
+# Spring force toward target
+velocity = (velocity + to_target * dock_spring * delta) * dock_damp
+global_position += velocity * delta
+```
+
+Here the restoring force returns from the earlier halls. The vector to_target points from a part to its assigned destination. The spring changes velocity and velocity changes position. A moving piece can look as if it has found its place, although another file already supplied the target. dock_damp is applied each frame, which also makes the settling depend on the update rate. The clock remains inside the body we are watching.
+
+[Implementation](../../../algorithms/computationalbiology/molecular_framework/Part.gd). This is an excerpt from the artifact, not a standalone program.
+
+The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a kind of part the catalogue does not describe? The initial inventory is mutable: an assembly can retype an existing instance or create more instances. Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
+
+&lt;!-- @ --&gt;
+
+A useful catalogue is a choice with consequences. The last hall asks us to keep one consequence available for revision.
+
+## Next experiment — not yet a visitor control
+
+Expose one editable target with a visible link to its source assembly. Compare the same docking motion at two fixed update rates before changing damping. Let a visitor alter one relation and keep the resulting body beside the original.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/technical.md">Raw captured source</a></p><pre># Assemble a body — implementation and encounter
+
+The primary artifact is `MolecularDesigner`. Its [scene](../../../algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn) and [implementation](../../../algorithms/computationalbiology/molecular_framework/Part.gd) supply the behaviour described here.
+
+The scene starts with forty reusable part instances. This hall configures eight seconds of floating, eighteen seconds of assembly, scale 2 and body_study=true. An amber ring stays attached to the first instance as its catalogue type changes. The source scene&#x27;s default phases remain ten seconds elsewhere. _assemble() reads node specifications, reapplies each part&#x27;s catalogue mesh and calls set_target(target_pos); the call does not supply a target basis. Bonds are read from the assembly data. Part._dock_to_target() integrates a damped spring in _process(), while idle translation accumulates a sine-derived offset weighted by elapsed time. Inventory positions are local to the exhibit; target positions use to_global(), so museum position, rotation and scale apply to the assembly. Changing assembly releases surplus instances from their previous targets. In body_study mode the controller moves unused instances into two visible side racks; their own floating process resumes on release. This display arrangement is authored too. Keyboard shortcuts exist in the script, but the book does not rely on them in VR. The automatic display remains a catalogue showcase, not a chemistry solver. This hall also enables `body_workshop=true`; other placements retain the earlier default.
+
+## Operation to read after the encounter
+
+```gdscript
+var to_target = target_pos - global_position
+
+# Spring force toward target
+velocity = (velocity + to_target * dock_spring * delta) * dock_damp
+global_position += velocity * delta
+```
+
+Here the restoring force returns from the earlier halls. The vector to_target points from a part to its assigned destination. The spring changes velocity and velocity changes position. A moving piece can look as if it has found its place, although another file already supplied the target. dock_damp is applied each frame, which also makes the settling depend on the update rate. The clock remains inside the body we are watching.
+
+## What to compare
+
+Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+
+The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+
+## A body whose positions the visitor can change
+
+[AssemblyBodyStudy.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd) reads the same `VRBody` assembly: thirteen named joints and twelve declared connections. It builds a separate body at 1.12 times the assembly coordinates, with real XRTools pickable joints. The top-level study has a unit global basis, avoiding scaled rigid bodies beneath the two-times-scale automatic display. Its position is derived from the configured exhibit transform. The automatic display is placed at cell (3,5); its workshop stands 5.2 metres to the right and 1.2 metres along its local Z direction.
+
+Grip and move a joint in VR. On desktop, point at a joint, right-click to carry it, and right-click again to release it; the standard mouse wheel changes carrying distance. Both paths retain the new position. Connections redraw between endpoints. They do not transmit forces or preserve limb lengths. Moving a gold joint alone does not alter adjacency. The independent catalogue cycle cannot overwrite this pose. Spare carriers in the automatic study now gather along the left wall, leaving the comparison aisle clear.
+
+```gdscript
+targets[index] = to_local(handle.global_position)
+```
+
+Joint centres are bounded to local X/Z ±1.9 metres and Y 0.12–2.35 metres. A thin square floor inlay marks the horizontal bounds. There is no anatomical validation. The bounds concern joint centres; the visible sphere can extend beyond them. Joints have pickup collision on layer 3, while connections are visual. Neither body is a wearable avatar or a load-bearing chair.
+
+A changed release now keeps one latest pose through [AssemblyPoseRecord.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd), normally at `user://ada_research/assembly_pose.json`. Starting and released positions, joint identities, radii, original and current connections, and the source hash travel together. Schema 2 retains both graphs; existing schema-1 pose records remain readable with their original graph. A changed connection counts as a released edit even when no point moves. Another held joint is saved at its previous released position. Re-entering this workshop restores a valid matching pose and continues its edit count. The final hall reconstructs both versions at standing scale. Failed disk writes retain an explicitly labelled session-only record. `export_pose()` reports released coordinates; it is not a hand trajectory. `reset_pose()` remains an authoring/probe API, restores both positions and connections, refuses to reset during a held joint or collar edit, and does not save automatically; no reset panel is added. See the [persistence and final-hall checks](../../../doc/book/iterations/2026-09-21-synthesis-return/SUMMARY.md).
+
+## Limits and next test
+
+The gold joints change geometry. Two turquoise collars now open both ends of the original left forearm connection: pick up either collar, carry it to a different gold joint and release within 0.28 m to change its neighbour. A green ring previews a valid target. Both ends of this one connection are editable; the other eleven connections and all thirteen joints remain. Taking the hand end to the head isolates the hand; taking the elbow end to that hand reconnects all thirteen joints without restoring their original adjacency. When both collars are held, each release commits only its own endpoint. The second release is validated against the first released change; an attempted self-connection or duplicate is rejected. Self-connections, duplicates and empty-space drops return to the previous attachment. They create no saved edit. The finite workspace applies to the held collar too. Both desktop carry and XRTools pickup use the same begin/release actions. A new joint remains a possible later operation. The spring damping in the automatic study is still applied per frame; compare fixed update rates before changing that separate behaviour.
+
+The private museum probe checks instantiated behaviour and selected walking routes. See the [two-end encounter evidence](../../../doc/book/iterations/2026-09-21-assembly-belonging/SUMMARY.md). Headset readability, comfort, Quest performance and learner understanding remain unverified. The automatic catalogue and gold workshop are visual objects without supporting collision: walking among them does not establish a chair you can sit on or a body you can wear.
+
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
+
+[Reconnection encounter and latest checks](../../../doc/book/iterations/2026-09-21-assembly-reconnection/index.html): same points and same edge count can have different connectivity. The record retains both graphs, so the final gallery can show the original and altered connections honestly.
+
+## A body whose connections carry force
+
+This hall also opts into `body_ragdoll=true`. `AssemblyRagdoll.gd` makes a separate, unsaved physics comparison from the existing VRBody points. The same thirteen names remain available as coral grab rings. Ten rigid parts supply a torso, head and two segments per arm and leg; nine PinJoint3D constraints join them. The hip attachments are separated by 0.24 m so the hanging legs remain distinct. These are freely rotating pin joints, without anatomical angle limits. Non-adjacent parts collide with one another and the museum floor; directly joined pairs exclude mutual collision.
+
+The study stands at map coordinates (3.5, 0, 9.2), facing the central lane, with a 2.8 m square, 0.024 m high mat and a hanging support. Its global basis has unit scale despite the catalogue&#x27;s two-times placement. The head is initially supported. Taking any ring releases that support. The target follows desktop carry or the XRTools grab driver, while a capped damped spring applies force at the corresponding attachment point of the unfrozen physical limb. A thin coral tether makes the gap between held target and physical attachment visible. This separates hand tracking from rigid-body motion; grabbing does not teleport the limb or impose a pose. Two controllers can pull different limbs at once. A finite target region and 90 N force cap bound the interaction.
+
+Releasing a ring stops its pulling force, leaving gravity, inertia and constraints to act. The HANG AGAIN button on the stand resets velocities and authored part transforms, then recreates the head support. It refuses while a limb is held. Physics transforms are explicitly synchronized before constructing joints and after resetting, avoiding stale attachment frames. No external pose or visitor save is written: the existing gold body and its Synthesis return remain independent.
+
+[Godot PinJoint3D documentation](https://docs.godotengine.org/en/4.6/classes/class_pinjoint3d.html) describes the free joint; [RigidBody3D documentation](https://docs.godotengine.org/en/4.6/classes/class_rigidbody3d.html) describes force application. This is a stylized physics puppet, not a biomechanics model or an avatar worn by the player. Headset reach, comfort, haptic feel and Quest performance still require on-device testing. [Actual museum captures and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-ragdoll/index.html).
+
+## Furniture with the same pulling rule
+
+`body_furniture=true` adds three simultaneous studies via `AssemblyFurnitureStudy.gd`, which inherits the existing ragdoll&#x27;s force application, coral grips, elastic tethers and reset behavior. Chair, Table and Lamp retain the part names, relative source positions, part masses and connection lists from `assemblies.json`. Their collision geometry is fitted explicitly: the chair back is vertical, panels have finite thickness, legs reach the support surface, and the lamp gets a conical shade and a light on its bulb. This is a staged physics interpretation of those graphs, not a literal reproduction of every catalogue mesh.
+
+Chair has six rigid parts and five pin joints; Table has five and four; Lamp has four and three. Chair and Lamp use a 1.2 physical size multiplier, Table 1.15; all have unit node scale and a 0.04 m floor offset. Non-adjacent parts collide. The links freely rotate, so these are articulated experiments rather than ordinary welded furniture or seating for the player.
+
+Thin visible lines mark initial staging supports. One extra pin per part holds its centre in the authored starting arrangement. Taking any coral ring removes all staging pins for that object. Its structural joints remain. Released objects settle through gravity and contact; each REASSEMBLE button restores only its own supported pose, refusing during a hold. The lamp&#x27;s bulb retains its light when it falls; electrical breakage is not simulated. Furniture changes are not saved into the gold body&#x27;s return record.
+
+The studies stand at map coordinates Chair (3.0, 0, 2.3), Table (8.7, 0, 2.3), and Lamp (9.2, 0, 9.8), facing the central passage. Each mat is 2.6 m square and 0.024 m high. The automatic sculpture exclusion grows to [1,1,11,11] to keep these workspaces available. The existing catalogue, gold workshop and human ragdoll are preserved. [Actual museum images, source diffs and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-furniture/index.html). On-headset reach, comfort and performance remain unverified.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/intent.md">Raw captured source</a></p><pre>Concept: A clean laboratory where formal systems become tangible — the molecular designer snaps atoms to valence rules, bonds obey geometry, and the orderly surface conceals a void pit revealing something underneath.
+Sequence role: Third and final map in Post-Foundations Crisis; the return to formalization after critique. After bias exposed formalization&#x27;s dangers and the rhizome offered alternatives, the laboratory reasserts that formal systems remain necessary — they just require awareness of their limits. The molecular designer is a formal system that works: atoms follow rules, bonds form, molecules emerge. The void pit reminds: every ordered surface has an underside; follows SpeculativeComputation_Rhizome_Network.
+Technical angle: Molecular modeling as formal system (valence rules, bond angles, molecular geometry), the MolecularDesigner artifact implementing chemical constraint satisfaction. The laboratory aesthetic (clean benches, organized tools) embodies the F-term; the void pit embodies the E-term lurking beneath.
+Critical angle: The sequence&#x27;s answer to &quot;what do we build?&quot; is: formal systems, with humility. The laboratory is not innocent — it is a site of power, classification, and control. But it is also where discovery happens. The void pit is the curriculum&#x27;s final spatial metaphor: every laboratory, every formal system, every order sits on top of something it cannot fully contain. Knowing this is the post-crisis capacity.
+Key artifacts: MolecularDesigner implements chemical formalization as interactive construction — atoms snapping to rules, bonds obeying geometry, structure emerging from constraints.
+
+Gap: MolecularDesigner needs VR grab on parts.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/critical.md">Raw captured source</a></p><pre># Where was this body&#x27;s destination decided?
+
+Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+
+The name MolecularDesigner suggests chemistry, but the current controller arranges catalogue parts and draws declared bonds. It does not establish chemical validity. Its constructive question is still substantial: can a new body be made by changing positions and relations, or does it demand a kind of part the catalogue does not describe? The initial inventory is mutable: an assembly can retype an existing instance or create more instances. Reusing an instance while replacing its visible form offers another question about identity. Neither physical emergence nor freedom is established by a persuasive animation.
+
+Here the restoring force returns from the earlier halls. The vector to_target points from a part to its assigned destination. The spring changes velocity and velocity changes position. A moving piece can look as if it has found its place, although another file already supplied the target. dock_damp is applied each frame, which also makes the settling depend on the update rate. The clock remains inside the body we are watching.
+
+The material comparison is specific: the controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+
+A useful catalogue is a choice with consequences. The last hall asks us to keep one consequence available for revision.
+
+## The hand can now supply a destination
+
+Beside the automatic catalogue, a body repeats the existing VRBody graph at standing scale. The visitor can grab any joint and leave it elsewhere. The body retains that pose, and a changed release keeps it for the final hall. A changed hand lengthens a connection without dragging the elbow or enforcing a bone&#x27;s length. This intervention makes the difference between a position, a relation and a bodily expectation available to inspection.
+
+The name `l_hand` persists even when the joint moves somewhere that makes the name awkward. Recognition may falter before the program&#x27;s classification does. The visitor may also restore symmetry without being asked: the body&#x27;s expected form is partly in the assembly and partly in the observer. Those are questions for the encounter, not findings about how every visitor responds.
+
+The workshop now opens one relation as well as positions. Taking the turquoise collar from the hand to the head leaves the thirteen points in place and retains twelve connections, yet isolates the hand and makes a loop elsewhere. A count and an outline can conceal that change. The isolated point can still look like a hand while the graph no longer joins it to the body. The second collar makes a different reunion possible: the isolated hand can join the head directly. Connectivity can return without a return to the assigned anatomy. This is an invitation to investigate recognition and belonging, not a general claim that more connections mean freedom. The other eleven relations and the inventory remain authored; growing another joint still asks for another operation. The changed pose now survives the loaded visit and returns beside its starting arrangement in the final hall. The record keeps destinations and both arrangements of connections but leaves out the path of the hand. That new permission brings a further question about what remembering a change should mean.
+
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+
+## When a connection has a consequence
+
+The new ragdoll makes the earlier absence of force available as a comparison. Pull the gold hand and the elbow stays; pull the coral wrist and the elbow follows. On release, one body retains the pose while the other falls. This difference is produced by assigned mass, rigid parts, rotating joints and contact. It does not belong to the visible outline alone.
+
+A slump can look exhausted or comic without an emotional state in the program. That is a useful question for the viewer, not proof that every visitor reads it the same way. Conversely, the presence of gravity does not certify a natural body: the puppet&#x27;s unrestricted joint angles remain a deliberate simplification. The comparison can ask which constraints make a gesture sustainable, and what another set would let a body do. Its falling state is not added to the persistent gold-body record.
+
+## A chair has legs too
+
+The same pulling rule now acts on a chair, table and lamp from the existing catalogue. Their names invite a familiar use, but the joints turn where fixed construction would usually be expected. The table keeps a flat top while losing its level; the collapsed lamp continues to illuminate the floor. These are specific differences between a recognisable form, a connection and an assigned consequence.
+
+The initial support lines matter. Recognition has been staged before the visitor removes that support by taking a part. The experiment can expose an expectation without pretending it has discovered the natural behavior of furniture. What would need to be fixed, allowed to turn or made capable of breaking for another use to become possible? The lamp&#x27;s continued light is also a limit of the model: electrical damage was not implemented. Shared physics permits the comparison without making a body, a chair and a table equivalent in every respect.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/artifacts.md">Raw captured source</a></p><pre># AdvancedLaboratory Lab Equipment Simulation — Artifacts
+*Post-Crisis: Applied Limits · synthesis · 1 artifacts*
+
+&gt; A laboratory. Benches at regulation height. Surfaces clean. Tools organized. The molecular designer sits at the center — a formal system made tangible, atoms snapping to valence rules, bonds obeying electron logic. Build a molecule. Watch it fold. The simulation enforces constraints that are not arbitrary but physical. Chemistry as proof theory. Each valid structure a theorem.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Molecular Designer
+![Molecular Designer](/scene-catalog/MolecularDesigner.png)
+
+Interactive molecular construction tool — atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.
+
+`MolecularDesigner`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/summary.md">Raw captured source</a></p><pre># Assemble a body
+
+Where was this body&#x27;s destination decided?
+
+We carry primitives, arrays, transformations and restoring forces into a catalogue of possible assemblies.
+
+Primary: `MolecularDesigner`.
+
+Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+
+The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+
+A useful catalogue is a choice with consequences. The last hall asks us to keep one consequence available for revision.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="AdvancedLaboratory_Lab_Equipment_Simulation/blurb.md">Raw captured source</a></p><pre>Where was this body&#x27;s destination decided? A useful catalogue is a choice with consequences. The last hall asks us to keep one consequence available for revision.
+</pre></section></body></html>

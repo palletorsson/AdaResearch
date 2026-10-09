@@ -1,0 +1,25 @@
+{
+  "id": "CA_EdgeOfChaos",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A paired-state experiment with stated storage and display gain.",
+  "change": "Copy a beginning, alter one address and compare both the magnitude and spread of differences under the same update and forcing schedule.",
+  "dependsOn": [
+    "Random_Entropy",
+    "CA_ElementaryRules",
+    "Noise_Perlin_Simplex"
+  ],
+  "reuses": "Independent retained copies.; State and its display counts differ.; Matched conditions make comparisons interpretable.",
+  "given": "volume solver; slice displays; body-selected depth",
+  "later": "Do not explain every visible artifact. The teaching comparison must use the same forcing schedule on both copies; no universal edge-of-chaos threshold is claimed.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A paired-state experiment with stated storage and display gain.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The current guide enables observation but omits the learner's copying and difference-measurement operations; it does not establish a universal critical point.",
+  "baseline": {
+    "tutorial": "3663a6fe639770d6df6111c74468d671aeb52cd9800908d5a6b19155229aa48e",
+    "choice": "9231723ffa54d4a955bb56b8e4a1ffc094fba2e1798b713ad08028018fcc8795"
+  },
+  "summary": "Copy one beginning, alter a single address and run both states under the same update and forcing schedule. Record both the size and spatial spread of their difference while keeping display gain declared. Solver and slices are supplied. Carry a paired-state experiment; a visually dramatic divergence is evidence about this run, not by itself a general classification of the system as chaotic."
+}

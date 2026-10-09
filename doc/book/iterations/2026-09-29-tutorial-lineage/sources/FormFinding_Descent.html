@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FormFinding_Descent · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=FormFinding_Descent">← Tutorial lineage</a></p><h1>FormFinding Descent</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="FormFinding_Descent/final.md">Raw captured source</a></p><pre># Where does downhill take you?
+
+&lt;!-- @descent_landscape_lab --&gt;
+
+The last room let a field carry you across a gap. You brought motion into it; the field changed that motion; something of the journey remained when you left. Here a gold point waits above a blue surface. There is no gap to jump. There is a button marked STEP.
+
+Before pressing it, choose where you think the point will go.
+
+One press leaves a short line behind. Another extends it. The number called cost changes. Try a few more presses before RUN. What repeats? What gets smaller? Does the point travel the same distance each time?
+
+RUN lends the operation a rhythm. It repeats the same step, with a pause between updates so you can follow it. The pause helps us watch; it is not time inside the equation. Stop the run and take over with STEP again. The line remembers where the point has been, but that memory does not propel it.
+
+This is already a departure from Forces. There is no stored velocity here.
+
+## A direction without a destination
+
+Press PARTS. The pink arrow offers a local direction. It lies horizontally, above the drawing; its length is capped at one metre. It does not point at a destination that the program has found elsewhere. The program has looked a little to either side of the current address.
+
+In the x direction it asks how much cost changes between x minus 0.03 and x plus 0.03. It divides that difference by the distance between the samples. It does the same along z. Two comparisons make a vector: the sampled gradient. Its negative gives the direction the point will try.
+
+Now reveal RULE. The moving point becomes a short instruction:
+
+```gdscript
+proposed = point - rate * gradient(point)
+```
+
+The subtraction is familiar. We have carried vectors, combined them and used them to cross space. Here subtraction changes an address in a search. RATE decides how far to trust the local direction. It does not name speed in metres per second. No mass is divided out; no acceleration is accumulated.
+
+On the opening bowl, the cost is a quarter of the sum of x squared and z squared. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre&#x27;s address to make those steps. We can see the whole bowl; the update uses nearby samples.
+
+Eventually the display says SMALL SLOPE. Look at that wording before calling the run solved.
+
+## Two beginnings
+
+Switch SURFACE. The blue drawing now has two unequal valleys. Changing a setting starts a fresh run, so the next trail belongs to that setting alone. Keep RATE at 0.7 and STOP at 0.01. Run from the first START, note the final cost, then select the second START and repeat.
+
+Both runs can stop at a small slope. They do not arrive at the same cost.
+
+In a recorded comparison with these settings, the first run finishes near -0.304 and the second near 0.295. The rule, tolerance and surface are shared. The beginning differs. One valley is lower, but the point in the other valley has no instruction to cross the intervening rise in search of it.
+
+The surface makes this difference visible all at once. The moving point encounters it locally, one update at a time. You can walk around the plot and see the other valley. That knowledge has not entered the algorithm merely because it has entered your view.
+
+What would have to change for the point to search there? Keep the question. Annealing will give us one way of approaching it later.
+
+## How much is enough?
+
+Try a looser STOP setting. A larger tolerance accepts a larger remaining slope. The run can finish earlier, at a different address and cost. Nothing in the surface has announced that this much unfinished movement is acceptable. We supplied that threshold.
+
+Then return to the bowl and increase RATE. A downhill direction is a local statement; a long step can pass the useful part of it. Cost can rise. At the largest setting, a proposed step can leave the six-metre frame. The display says LEFT FRAME and keeps the last valid point. It does not silently push the point back against an edge and congratulate itself.
+
+A third ending, STEP LIMIT, means the budget of 160 moves was spent. These endings answer different questions. Small slope describes a local measurement. Leaving the frame describes a boundary. Spending the budget describes how long we agreed to search.
+
+Even a zero gradient would not by itself prove a global minimum. A maximum or a saddle can have one too. Here we can inspect the authored surface and compare runs. Elsewhere that overview may be unavailable.
+
+## The surface we agreed to search
+
+The plot is drawn with 48 by 48 cells, each split into two triangles. The gradient samples the cost function directly, at offsets of 0.03. It does not read the rendered triangles. What you see and what the point measures are related representations with different resolutions.
+
+Its displayed height is another choice:
+
+```gdscript
+height = 0.40 + 0.22 * cost(point)
+```
+
+The height makes cost legible across a table. It is not gravitational potential energy, and the blue mesh is not a floor for your body to climb. The point&#x27;s apparent descent comes from changing an address and drawing the result.
+
+## Comparisons
+
+&lt;!-- @descent_marble_toy --&gt;
+
+In the small swaying bowl, the marble carries motion from one moment into the next. Damping reduces it; a programmed kick every five seconds starts a new disturbance. Watch it pass a place the gold point would approach in shrinking steps. Looking downhill has not given these two bodies the same way to move.
+
+&lt;!-- @gradient_descent --&gt;
+
+The terrain station takes the local comparison onto seeded Perlin ground. Here too, samples to either side give a direction, and a threshold or a budget of 160 steps ends the search. The surface has become less orderly; the rule still knows only its neighbourhood.
+
+&lt;!-- @gradient_descent_well --&gt;
+
+At the glowing well, marbles descend, settle, pulse and begin again. Its title says that falling is how it learns. The marbles combine the local slope with retained motion; the LOSS readout follows the first marble on this authored landscape. A return to the top gives it another beginning, not a memory of the previous lesson. What does the falling let us understand about learning, and what does that resemblance leave out?
+
+&lt;!-- @settling_tremble --&gt;
+
+The small inset holds an amber curve beside blue points, then magnifies their differences eight times. Nothing trembles. These are fixed, seeded offsets from a sampled catenary, as its plaque says, rather than the residue of a solver. Magnification makes a small disagreement hard to overlook. Whether it matters is still a question for whoever accepts the result.
+
+&lt;!-- @science_screen --&gt;
+
+The nearby screen is another receiver: being visible in the room does not, by itself, make any of these histories a measurement it can read.
+
+&lt;!-- @ --&gt;
+
+There is room for a different body in these small changes. One beginning inhabits a valley another beginning misses. A threshold admits one endpoint and rejects the next. Yet lowering cost only means improving according to the cost we wrote. Nothing in the arithmetic establishes that this measure contains everything worth keeping.
+
+For now the landscape is authored and the point searches it. We have not yet let a connected shape emerge under load. In the next hall, hold two ends of a cable and let the space between them become the question. What can change when some things must remain fixed?
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="FormFinding_Descent/tutorial.md">Raw captured source</a></p><pre># One local update, several endings
+
+Primary: descent_landscape_lab. Ask for a predicted next position, press STEP, then RUN. Reveal PARTS and RULE after observing. RUN performs one discrete optimisation update per presentation interval of at least 0.22 seconds; there is no physical delta in the descent equation.
+
+The parameter domain is x,z in [-3,3]. Bowl cost: 0.25*(x*x+z*z). Two valleys: 0.08*(x*x-4)^2+0.25*z*z+0.15*x. Central differences sample the analytic cost at offsets +/-0.03 along each axis. The drawing has 48 by 48 cells; height is 0.40+0.22*cost. Its surface has no collision; the pedestal does. The arrow shows negative gradient horizontally, capped at one metre.
+
+Rates: 0.2, 0.7, 2.5, 5.0. Slope tolerances: 0.01, 0.08, 0.3. Starts: (-2.8,-2), (2.8,-2), (0,-2). Default rate 0.7 and tolerance 0.01. Settings reset the run; RESET preserves settings. PARTS and RULE reveal representations without resetting. STEP pauses continuous playback.
+
+At each update, reaching 160 moves reports STEP LIMIT; a sampled gradient below tolerance reports SMALL SLOPE; a proposed address outside the domain reports LEFT FRAME without committing the move. Otherwise position changes by -rate*gradient and the trail gains a sample. No velocity, momentum, mass or gravity participates. At most 161 samples are retained in a reused ImmediateMesh.
+
+Compare first and second starts on two valleys: observed final costs -0.304257 and 0.295496 with identical rate/tolerance. Compare loose versus tight tolerance on the bowl. Large finite steps can increase cost or leave the domain despite following a locally descending direction.
+
+Five earlier exhibits remain secondary. The marble toy retains velocity and periodically receives random kicks; it is not a hand-tipped rigid marble or this optimiser. Legacy gradient_descent is scaled to 0.14 and raised 0.8 to contain its original 20-metre surface in a side exhibit. The well has momentum and multiple starts. Science Screen has not been connected to the new lab; the lab has its own display. Do not claim those exhibits share a single solver or stopping rule.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="FormFinding_Descent/intent.md">Raw captured source</a></p><pre># Where does downhill take you?
+
+One primary, descent_landscape_lab, leads from prediction through STEP/RUN to a two-start comparison, then reveals gradient sampling and the update. Keep the five existing exhibits as supporting comparisons. Never equate their different dynamics merely because all appear to descend.
+
+Carry forward vectors and the distinction between acceleration and position updates. Prepare Catenary by distinguishing a point searching an authored landscape from a connected shape changing under constraints. Desktop evidence is available; a headset and learner visit remain open.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="FormFinding_Descent/critical.md">Raw captured source</a></p><pre># Who supplied the cost?
+
+Two starting points, one rule, two accepted endings. The lower valley remains visible from the other. That is the encounter&#x27;s critical opening: the visitor&#x27;s overview contains a possibility the update has no means to pursue.
+
+SMALL SLOPE is an operational judgment. Its tolerance is chosen, its samples are finite, and its endpoint need not be globally best. LEFT FRAME and STEP LIMIT retain different reasons for stopping. Keeping those names visible prevents a technical ending from quietly becoming a claim of completeness.
+
+The queer possibility here belongs to what changing a beginning, rule or threshold makes inhabitable. It does not require calling every minimum death or every departure freedom. A cost function can omit relationships we care about. Changing that function changes what the search values; improving its answer need not repair the omission.
+
+The plotted landscape and the sampled function are also different constructions. Triangles give the visitor a surface; finite differences give the update a local measurement. Neither provides unencoded access to an original. Their disagreement is something we can inspect and work with.
+
+This hall does not establish that organisms, learning systems and hanging chains all minimise the same quantity. It prepares a methodological question for each subsequent model: what is variable, what is held fixed, which measure organises change, and who decides when enough has happened?
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="FormFinding_Descent/blurb.md">Raw captured source</a></p><pre>Two beginnings. One downhill instruction. Two valleys. Take a step before revealing the rule, then ask what the word finished can actually mean.
+</pre></section></body></html>

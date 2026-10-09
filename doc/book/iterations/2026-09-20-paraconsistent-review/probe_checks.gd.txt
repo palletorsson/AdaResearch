@@ -1,0 +1,71 @@
+
+	report["checks"]=[]
+	var study: Node3D=nodes.get("merge_conflict_visualizer")
+	if study==null:
+		push_error("Missing merge study")
+		quit(1)
+		return
+	check(report,study.scale.is_equal_approx(Vector3.ONE),"Full-size branch study")
+	check(report,study.merge=="junction" and study.interactive,"Hall starts with interactive JUNCTION")
+	var vault: Node3D=nodes.get("rhizome_vault")
+	check(report,is_instance_valid(vault) and is_zero_approx(vault.ground_top),"Vault ground is flush with museum floor")
+	var vault_default=load("res://commons/artifacts/rhizome_vault/rhizome_vault.gd").new()
+	check(report,is_equal_approx(vault_default.ground_top,.03),"Other vault placements retain the raised floor default")
+	vault_default.free()
+	var console: Node=study._console
+	var external:=Node3D.new()
+	external.name="ExternalLabelMarker"
+	study.add_child(external)
+	var parts: Dictionary={}
+	for value in ["junction","overlap","resolved","fork"]:
+		press_merge(study,value)
+		await process_frame
+		check(report,study.merge==value,"Button selects "+value)
+		check(report,branches(study).size()==2,"Both named branches remain in "+value)
+		check(report,study._console==console and is_instance_valid(external),"Rebuild preserves console and external child: "+value)
+		check(report,study.find_children("*","StaticBody3D",true,false).size()>=2,"Matching branch collision exists: "+value)
+		parts[value]=study._spawned.size()
+		var a: MeshInstance3D=branches(study)[0]
+		var b: MeshInstance3D=branches(study)[1]
+		if value=="junction":
+			check(report,is_equal_approx(absf(a.position.x-b.position.x)-a.mesh.size.x,.6),"JUNCTION retains 0.6m clear gap")
+		elif value=="overlap":
+			var crossing:=Vector3(0,study.BASE_X/tan(deg_to_rad(study.OVERLAP_LEAN_DEG)),0)
+			check(report,a.get_aabb().has_point(a.transform.affine_inverse()*crossing) and b.get_aabb().has_point(b.transform.affine_inverse()*crossing),"OVERLAP has a point inside both oriented boxes")
+		elif value=="resolved":
+			check(report,is_equal_approx(a.mesh.size.y,1.8) and is_equal_approx(b.mesh.size.y,.2) and is_zero_approx(a.position.x),"RESOLVED keeps A full-height at centre and B as 0.2m stump")
+			check(report,not is_instance_valid(study._conflict_glow),"RESOLVED contains no conflict marker")
+		else:
+			var top_a: Vector3=a.transform*Vector3(0,a.mesh.size.y*.5,0)
+			var top_b: Vector3=b.transform*Vector3(0,b.mesh.size.y*.5,0)
+			check(report,absf(top_a.x-top_b.x)>1.8 and is_equal_approx(study._conflict_glow.position.y,.15),"FORK separates tops and lowers marker")
+	press_merge(study,"overlap")
+	await process_frame
+	var poses_before: Array=branch_poses(study)
+	var identities_before: Array=branches(study).map(func(n):return n.get_instance_id())
+	study._panel.find_child("Btn_4",true,false).get_node("InteractableAreaButton").button_pressed.emit(null)
+	check(report,not study.marker_visible and not study._conflict_glow.visible,"MARKER hides the glow")
+	check(report,branch_poses(study)==poses_before and branches(study).map(func(n):return n.get_instance_id())==identities_before,"Marker toggle preserves exact branch instances and transforms")
+	press_merge(study,"fork")
+	check(report,not study._conflict_glow.visible,"Marker choice survives plan change")
+	press_merge(study,"overlap")
+	check(report,study._spawned.size()==parts.overlap,"Rebuild does not accumulate parts")
+	study.apply_grid_config({"merge":"typo"})
+	check(report,study.merge=="overlap","Invalid merge leaves current state intact")
+	for i in range(5):
+		var btn: Node3D=study._panel.find_child("Btn_%d" % i,true,false)
+		check(report,btn.global_position.distance_to(origin+Vector3(4.5,1.3,3.0))<.85,"Button %d within selected 0.85m reach" % i)
+	var original=load("res://algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn").instantiate()
+	original.position=Vector3(1000,10,0)
+	root.add_child(original)
+	check(report,original.merge=="junction" and not original.interactive and branches(original).size()==2 and not is_instance_valid(original._console),"Unconfigured placement retains passive junction")
+	original.queue_free()
+	external.queue_free()
+	# Walk with the widest branch configuration present.
+	press_merge(study,"fork")
+	var gate: Dictionary=museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		museum.get("_mod_gate").call("step_open",gate,10.0)
+		await physics_frame
+	check(report,gate.is_empty() or float(museum.get("_gate_t"))>=0.0,"Arrival gate grants before walking")

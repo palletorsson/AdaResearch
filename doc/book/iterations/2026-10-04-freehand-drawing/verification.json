@@ -1,0 +1,136 @@
+{
+	"checks": [
+		{
+			"check": "Face outline: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Face outline: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Left eye: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Left eye: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Right eye: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Right eye: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Nose: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Nose: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Pen-up movement adds no connecting marks",
+			"passed": true
+		},
+		{
+			"check": "Mouth: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Mouth: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Hair: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Hair: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Left shoulder: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Left shoulder: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Right shoulder: pen-down begins at the pointer",
+			"passed": true
+		},
+		{
+			"check": "Right shoulder: releasing stops the stroke",
+			"passed": true
+		},
+		{
+			"check": "Whole drawing fits without recycling its first marks",
+			"passed": true
+		},
+		{
+			"check": "Depth layers span at least 0.8 metres",
+			"passed": true
+		},
+		{
+			"check": "Native capture: portrait-soft.png",
+			"passed": true
+		},
+		{
+			"check": "Spheres retain every stroke position and colour",
+			"passed": true
+		},
+		{
+			"check": "Native capture: portrait-spheres.png",
+			"passed": true
+		},
+		{
+			"check": "Light points retain every stroke position and colour",
+			"passed": true
+		},
+		{
+			"check": "Native capture: portrait-lines.png",
+			"passed": true
+		},
+		{
+			"check": "Undo removes one complete stroke",
+			"passed": true
+		},
+		{
+			"check": "Test drawing saves locally",
+			"passed": true
+		},
+		{
+			"check": "Test drawing reloads unchanged",
+			"passed": true
+		},
+		{
+			"check": "Native capture: portrait-side.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture: portrait-controls.png",
+			"passed": true
+		},
+		{
+			"check": "Wheel moves a held stroke out of its original plane",
+			"passed": true
+		},
+		{
+			"check": "Losing window focus ends drawing",
+			"passed": true
+		},
+		{
+			"check": "An unfocused held pointer adds no further marks",
+			"passed": true
+		}
+	],
+	"depth_span_metres": 0.900001525878906,
+	"passed": true,
+	"portrait_marks": 584,
+	"scope": "Scripted mouse-event replay of an irregular drawing plus an actual desktop drag session. No tracked hand or headset test."
+}

@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PG_Percolation_Network · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PG_Percolation_Network">← Tutorial lineage</a></p><h1>PG Percolation Network</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PG_Percolation_Network/final.md">Raw captured source</a></p><pre># Touching is not enough
+
+&lt;!-- @percolationnetwork_ca --&gt;
+
+Two cubes stand near the floor of a much larger possible lattice. One is pink, the source. The other is white. Look at their contact before pressing STEP. Where could something pass between them?
+
+At a face contact the white site becomes flowing. Press CONTACT to start again with a different arrangement. The cubes now meet at a corner. STEP leaves the white one waiting. Their visual contact has not disappeared. The program simply does not consult that relation.
+
+Its neighbourhood consists of six positions: one step in either direction along x, y and z. It does not include the diagonal positions. This is an explicit local definition, not a universal meaning of nearness.
+
+```gdscript
+Vector3i(x+1, y, z), Vector3i(x-1, y, z),
+Vector3i(x, y+1, z), Vector3i(x, y-1, z),
+Vector3i(x, y, z+1), Vector3i(x, y, z-1)
+```
+
+The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
+
+Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied along one whole side of the cube. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those on the side facing the source. The desk permits 64 generations before another reset.
+
+One such field cannot establish a universal critical threshold. Its seed, dimensions, boundary source and neighbourhood are part of the experiment. We can learn from a failed crossing without claiming that a whole kind of space has become impossible. Keep changing one condition at a time, and name the condition when you describe the result.
+
+There is another distinction already under your hands. White occupied sites have collision. Pink source and flowing sites do not. The signal travels through the occupied network; as it arrives, that particular obstacle to your body is removed. The same event is connection for one system and a change of resistance for another.
+
+The museum floor supplies an independent way around the field. That support is authored separately from the lattice. We should not call the pink route walkable just because a sequence of neighbour tests succeeded. A body needs dimensions, headroom and somewhere to stand.
+
+The dark sphere and its stand remain in the room as supporting works. They are not hidden steps in this flow calculation. Our next comparison is Caves / Mazes: how can a rule construct the interior that our signal did not need?
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PG_Percolation_Network/tutorial.md">Raw captured source</a></p><pre># Touching is not enough — encounter
+
+&lt;!-- @percolationnetwork_ca --&gt;
+
+Two cubes stand near the floor of a much larger possible lattice. One is pink, the source. The other is white. Look at their contact before pressing STEP. Where could something pass between them?
+
+At a face contact the white site becomes flowing. Press CONTACT to start again with a different arrangement. The cubes now meet at a corner. STEP leaves the white one waiting. Their visual contact has not disappeared. The program simply does not consult that relation.
+
+Its neighbourhood consists of six positions: one step in either direction along x, y and z. It does not include the diagonal positions. This is an explicit local definition, not a universal meaning of nearness.
+
+```gdscript
+Vector3i(x+1, y, z), Vector3i(x-1, y, z),
+Vector3i(x, y+1, z), Vector3i(x, y-1, z),
+Vector3i(x, y, z+1), Vector3i(x, y, z-1)
+```
+
+The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
+
+Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied from one z face. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those reached on the opposite face. The desk permits 64 generations before another reset.
+
+One such field cannot establish a universal critical threshold. Its seed, dimensions, boundary source and neighbourhood are part of the experiment. We can learn from a failed crossing without claiming that a whole kind of space has become impossible. Keep changing one condition at a time, and name the condition when you describe the result.
+
+There is another distinction already under your hands. White occupied sites have collision. Pink source and flowing sites do not. The signal travels through the occupied network; as it arrives, that particular obstacle to your body is removed. The same event is connection for one system and a change of resistance for another.
+
+The museum floor supplies an independent way around the field. That support is authored separately from the lattice. We should not call the pink route walkable just because a sequence of neighbour tests succeeded. A body needs dimensions, headroom and somewhere to stand.
+
+The dark sphere and its stand remain in the room as supporting works. They are not hidden steps in this flow calculation. Our next comparison is Caves / Mazes: how can a rule construct the interior that our signal did not need?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PG_Percolation_Network/technical.md">Raw captured source</a></p><pre># Touching is not enough — implementation
+
+Sources: percolationnetwork_ca.gd::update_percolation_automata, calculate_neighbor_flow, update_cube_collision.
+
+The opt-in `pg_workshop_console` binds the named artifacts within its own museum hall; controls are implemented in commons/artifacts/timing_machines/pg_workshop.gd. Six push buttons occupy one compact 3×2 desk with an inclined translucent readout. RULE reveals the implementation card. Actions are guarded while a rebuild is in progress.
+
+Compare face and corner contact before following flow through a finite lattice.
+
+At a face contact the white site becomes flowing. Press CONTACT to start again with a different arrangement. The cubes now meet at a corner. STEP leaves the white one waiting. Their visual contact has not disappeared. The program simply does not consult that relation.
+
+Its neighbourhood consists of six positions: one step in either direction along x, y and z. It does not include the diagonal positions. This is an explicit local definition, not a universal meaning of nearness.
+
+The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
+
+Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied from one z face. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those reached on the opposite face. The desk permits 64 generations before another reset.
+
+There is another distinction already under your hands. White occupied sites have collision. Pink source and flowing sites do not. The signal travels through the occupied network; as it arrives, that particular obstacle to your body is removed. The same event is connection for one system and a change of resistance for another.
+
+Space: the inherited structure is retained in a larger surround; relocated objects have an independent museum aisle. Source zeros remain present and receive explicitly listed museum.floor_cells covers. The floor audit records offsets and covers. Raised historic cells are retained witnesses, not universally certified decks.
+
+Validation: see doc/space/pg-sequence-2026-09-15 and ada_run/pg-review-2026-09-15. Report actual runtime checks separately from outstanding human headset/clearance review.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PG_Percolation_Network/intent.md">Raw captured source</a></p><pre># Intent
+
+Compare face and corner contact before following flow through a finite lattice.
+
+Ask what the current construction permits a body, signal or representation to do. Ground the critical question in an observed operation and the code that produces it. Do not infer access from an image or entropy from apparent complexity.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PG_Percolation_Network/critical.md">Raw captured source</a></p><pre># Touching is not enough — the assumption to test
+
+Two cubes stand near the floor of a much larger possible lattice. One is pink, the source. The other is white. Look at their contact before pressing STEP. Where could something pass between them?
+
+At a face contact the white site becomes flowing. Press CONTACT to start again with a different arrangement. The cubes now meet at a corner. STEP leaves the white one waiting. Their visual contact has not disappeared. The program simply does not consult that relation.
+
+Its neighbourhood consists of six positions: one step in either direction along x, y and z. It does not include the diagonal positions. This is an explicit local definition, not a universal meaning of nearness.
+
+The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
+
+Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied from one z face. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those reached on the opposite face. The desk permits 64 generations before another reset.
+
+One such field cannot establish a universal critical threshold. Its seed, dimensions, boundary source and neighbourhood are part of the experiment. We can learn from a failed crossing without claiming that a whole kind of space has become impossible. Keep changing one condition at a time, and name the condition when you describe the result.
+
+There is another distinction already under your hands. White occupied sites have collision. Pink source and flowing sites do not. The signal travels through the occupied network; as it arrives, that particular obstacle to your body is removed. The same event is connection for one system and a change of resistance for another.
+
+The museum floor supplies an independent way around the field. That support is authored separately from the lattice. We should not call the pink route walkable just because a sequence of neighbour tests succeeded. A body needs dimensions, headroom and somewhere to stand.
+
+The dark sphere and its stand remain in the room as supporting works. They are not hidden steps in this flow calculation. Our next comparison is Caves / Mazes: how can a rule construct the interior that our signal did not need?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="PG_Percolation_Network/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `pg_workshop_console` — decoration
+- `percolationnetwork_ca` — primary
+- `synthesis_stand` — secondary
+- `dark_sphere` — decoration
+
+Primary markers match the book passages. The workshop desk controls the works; it is not an additional required algorithm.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PG_Percolation_Network/summary.md">Raw captured source</a></p><pre># Touching is not enough
+
+Compare face and corner contact before following flow through a finite lattice.
+
+Primary: percolationnetwork_ca. Supporting collection retained. The physical workshop desk operates these existing programs. Follow final.md in artifact order.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PG_Percolation_Network/blurb.md">Raw captured source</a></p><pre># Touching is not enough
+
+Compare face and corner contact before following flow through a finite lattice.
+</pre></section></body></html>

@@ -1,0 +1,90 @@
+{
+  "artifact": "seed_replay_demo",
+  "map_configuration": "Random_Definition",
+  "status": "Two live tests completed; conclusions match observations; both runs have incomplete coverage",
+  "live_jev_called": true,
+  "api_requests": 12,
+  "baseline": "ada_run\\jev_seed_visitor\\20260921-fixed-slider-04/report.json",
+  "negative_control": "ada_run\\jev_seed_visitor\\20260921-negative-final-05/report.json",
+  "slider_regression_before": "ada_run\\jev_seed_visitor\\20260921-stale-slider-before-03/report.json",
+  "baseline_passed": true,
+  "negative_correctly_failed": true,
+  "slider_fixed": true,
+  "unit_tests": 32,
+  "scope": "Isolated artifact fixture with structured material samples. No whole-hall navigation, pixel perception, human learning, headset reach or comfort claim.",
+  "known_diagnostic": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+  ],
+  "live": {
+    "report": "ada_run/jev_seed_visitor/20260921-jev-live-01/report.json",
+    "requested_model": "jev-latest",
+    "returned_models": [
+      "jev-1.13.0"
+    ],
+    "actions": [
+      "replay",
+      "random",
+      "replay",
+      "finish"
+    ],
+    "usage": {
+      "input_tokens": 16890,
+      "output_tokens": 303
+    },
+    "model_conclusions": {
+      "replay_observation": "reproduced",
+      "seed_alone": "not_observed"
+    },
+    "model_conclusions_match_observations": true,
+    "coverage_complete": false,
+    "passed": false,
+    "engine_exit": 0,
+    "fixture_checks_passed": true,
+    "sources_unchanged": true,
+    "interpretation": "Jev stopped without +1 DRAW. The evaluator requires two extra-draw changes, but that quota was not stated in the task. Incomplete coverage does not establish incorrect reasoning.",
+    "independent_receipt_audit": "Confirmed actions, model, usage, public-only payload histories, source stability, diagnostics and conclusion agreement.",
+    "api_requests": 5
+  },
+  "authorization": "Two separately authorized live runs, each limited to 11 requests; first used 5, second used 7. No third live run was made.",
+  "latest_live": {
+    "report": "ada_run/jev_seed_visitor/20260921-jev-coverage-02/report.json",
+    "task": "coverage",
+    "requested_model": "jev-latest",
+    "returned_models": [
+      "jev-1.13.0"
+    ],
+    "api_requests": 7,
+    "max_api_requests": 11,
+    "max_actions": 10,
+    "actions": [
+      "replay",
+      "random",
+      "extra_draw",
+      "extra_draw",
+      "extra_draw",
+      "finish"
+    ],
+    "usage": {
+      "input_tokens": 31013,
+      "output_tokens": 406
+    },
+    "coverage": {
+      "replay_trials": 1,
+      "random_trials": 1,
+      "random_changes_observed": 1,
+      "extra_draw_changes_observed": 3
+    },
+    "coverage_complete": false,
+    "passed": false,
+    "model_conclusions": {
+      "replay_observation": "reproduced",
+      "seed_alone": "counterexample_observed"
+    },
+    "model_conclusions_match_observations": true,
+    "engine_exit": 0,
+    "fixture_checks_passed": true,
+    "sources_unchanged": true,
+    "interpretation": "Tried +1 DRAW three times and correctly observed different colours at the same seed. Finished after only one REPLAY, despite two explicitly required and unused budget. No explanation of why was returned.",
+    "independent_receipt_audit": "18 independent checks passed: response-command correspondence, reconstructed public histories and signatures, source fingerprints, observation order, private-data exclusion and actual effects. One visitor REPLAY; later fixture diagnostic REPLAY correctly excluded."
+  }
+}

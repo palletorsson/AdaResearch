@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A chosen centre</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../Trans_Translation/tutorial.html">Previous</a><a href="../Trans_Scale/tutorial.html">Next</a></nav></header><main class="spread"><article><p class="badge">Tutorial · draft</p><h1>Give the turn a centre</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Axis, angle and pivot</li>
+<li>Degrees and radians</li>
+<li>A child offset from a rotating parent</li>
+<li>A face mark that makes orientation visible</li>
+</ul>
+<p>A quarter-turn can restore a cube's square outline without returning the same face. Follow the mark on the installed cube. Then watch the end of a turning blade: a fixed centre does not mean the whole body stays in one place.</p>
+<p>Keep the box construction and elapsed clock. Remove the translation route. Put the cube under a new <code>pivot</code>, and make the pivot turn. The small dark mark belongs to the cube so it follows the same transform.</p>
+<h2>The complete study</h2>
+<p>Attach <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> on clear museum floor. Leave room around it for a two-metre offset. The museum supplies the room and viewer; this script creates the pivot, cube and mark.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var pivot := Node3D.new()
+var cube := MeshInstance3D.new()
+var mark := MeshInstance3D.new()
+var axis := Vector3.UP
+var offset := Vector3.ZERO
+var speed := 45.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(axis.length() &gt; 0.0)
+    add_child(pivot)
+    pivot.position = Vector3(0, 1.2, 0)
+    cube.mesh = BoxMesh.new()
+    pivot.add_child(cube)
+    cube.position = offset
+
+    var mark_mesh := BoxMesh.new()
+    mark_mesh.size = Vector3(0.3, 0.12, 0.02)
+    mark.mesh = mark_mesh
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    mark.material_override = ink
+    cube.add_child(mark)
+    mark.position = Vector3(0.18, 0.2, 0.51)
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var angle := deg_to_rad(speed * elapsed)
+    pivot.basis = Basis(axis.normalized(), angle)
+</code></pre>
+<p><code>axis</code> chooses the direction of the rotation axis in the study's frame. <code>Vector3.UP</code> means Y. <code>normalized()</code> keeps that direction and gives it length one. <code>Basis(axis, angle)</code> constructs the orientation for a turn about that axis. It expects radians, so <code>deg_to_rad</code> converts the degrees produced by <code>speed * elapsed</code>.</p>
+<p>At 45 degrees per second, two seconds gives a quarter-turn and eight gives a full turn. We assign the orientation from elapsed time, rather than repeatedly adding the accumulated angle.</p>
+<h2>Move the cube away from the pivot</h2>
+<p>With <code>offset = Vector3.ZERO</code>, the pivot passes through the cube's centre. Its centre stays fixed while its corners move.</p>
+<p>Change <code>offset</code> to <code>Vector3(2, 0, 0)</code>. The cube remains two metres along the pivot's <strong>local</strong> X axis. As the parent turns, that local direction turns in the museum. The cube's centre now travels around the pivot while its orientation turns with it. The mark remains attached to the same face.</p>
+<p>The child's local position has stayed fixed; its world position has changed. This returns to Coordinates with a moving reference frame. Internal distances stay the same in both examples, but the offset version needs more surrounding space.</p>
+<h2>Choose the axis</h2>
+<p>Keep the two-metre offset and change <code>axis</code> to <code>Vector3.FORWARD</code>. In Godot this is negative Z. The centre now follows a vertical circle instead of a horizontal one. At two seconds, predict which side of the pivot it reaches. Part of the circle goes below the floor; raise the study if you want to see the complete orbit.</p>
+<p>The museum's standing platforms use an additional rule to keep their riders upright. Our cube turns with its parent; it is not a rider mechanism. Reversing two rotations is another comparison in the hall, beyond this lesson's single axis.</p>
+<p>Carry the pivot with you. In Scale, the location of the origin will also decide which part of a change stays put.</p></article><article><p class="badge">Reflection · existing final.md</p><h1>Rotation: room for a turn</h1>
+<p>The transport cube carried you without needing to turn. Here, a blade stays attached to its middle while its ends sweep across the gap. Follow one end. The other moves away.</p>
+<!-- @rotation_wall_crossings -->
+
+<h2>Staying upright</h2>
+<p>The level blade turns around the vertical y axis. At ninety degrees it pauses, its length reaching across your route. Walk over while the crossing holds.</p>
+<p>At the X-axis blade, one end descends as the other rises. It turns around x, like a paddle wheel. The far landing is three grid cubes higher. During the pause, the blade offers a slope you can climb. Through vertical, your feet lose their agreement with it.</p>
+<p>Beside its lower end is a small level platform. Board it and stay through the turn. You rise, move forward, and arrive beside the higher grid. Your head has stayed upright.</p>
+<p>The platform follows an arc while keeping its surface level. It is mounted to one side so the blade can pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.</p>
+<p>The X-axis ride's arc, before that sideways offset, is calculated as:</p>
+<pre><code class="language-gdscript">var radial := Vector3(0, -1.5, -3.5)
+var orbit := Basis(Vector3.RIGHT, PI * progress) * radial
+var endpoint := Vector3(0, 1.5, 0) + orbit
+</code></pre>
+<p><code>radial</code> reaches from the centre to the starting point. <code>Basis</code> turns that reach around x; <code>progress</code> from zero to one supplies half a revolution. Adding the centre gives the new position. The platform carries you until you step off or jump.</p>
+<p>The sideways ride's blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.</p>
+<p>Both rides pause for twelve seconds, then take twelve for the half-turn. Staying aboard brings you back along the upper arc. The grid wedges and still aisles offer other returns.</p>
+<!-- @ -->
+
+<p>Beyond the blades, the cubes hold their angles. You bring the movement.</p>
+<!-- @rotation_array_compare -->
+
+<h2>An angle underfoot</h2>
+<p>Four bands each contain two columns and six rows of cubes. Begin at zero and walk forward along z.</p>
+<p>Eighteen degrees. Thirty-six. Fifty-four.</p>
+<p>The centres keep their spacing; each row adds an angle. X makes rises and falls across your route. Z makes ridges along it. Y turns the square footprints while keeping their tops horizontal. The fourth band combines x, then y, then z.</p>
+<pre><code class="language-gdscript">var degrees := float(cube.get_meta(&quot;row&quot;)) * row_angle_step
+cube.basis = rotation_for_band(band, degrees)
+</code></pre>
+<p>The row supplies the angle; the band supplies the axis or combination. Waiting will not change the slope. The still aisles let you inspect a difficult row from beside it.</p>
+<p>A stand in the central aisle starts another walk. Narrow capsules, 0.44 metres wide, set off along all four bands. Wider capsules follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings retain their endpoints; the trial repeats, and <strong>REPLAY</strong> starts it again.</p>
+<p>Watch the z band. The narrow body catches on a ridge; the wider one can slide sideways and continue. Wider need not mean less room to move. These bodies neither jump nor choose a detour: the collision solver supplies their slides. You can walk through them and try a route they did not take.</p>
+<!-- @ -->
+
+<p>The last row reaches ninety degrees. In the Y band, compare it with the first. The cube's outline returns, but the pale L on its top points another way. That flat-looking row still waits beyond all the tilted ones.</p>
+<p>Each cube has kept its shape throughout. What changes is how it meets its neighbours and your body.</p>
+<!-- @transform_composition_workbench -->
+
+<h2>Two turns</h2>
+<p>Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. The left form receives X first; the right receives Y first.</p>
+<p>Follow the fin through the smaller intermediate forms. In the two results it points different ways. The display separates the forms for us; both calculations use the same origin.</p>
+<pre><code class="language-gdscript">var left_xform: Transform3D = t2 * t1
+var right_xform: Transform3D = t1 * t2
+</code></pre>
+<p>The operation on the right acts first. In Translation, upward and sideways movements could exchange order and share a destination. These two turns cannot: the second receives the orientation left by the first.</p>
+<p>Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. The fin gives you something to follow through both journeys.</p>
+<!-- @axial_sweep -->
+
+<h2>What returned?</h2>
+<p>A small cube turns on a spindle beside the way onward. Follow the pale L on its face. After a quarter-turn, the cube fits the space it occupied before. The marked face has gone around the corner.</p>
+<p>What returned depends on what you were following.</p>
+<p><img alt="The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png" /></p>
+<p><em>Two paused moments from one place. The mark moves from the left-hand face to the right.</em></p>
+<p>Press <strong>BOUNDARY</strong>. A cylinder appears around the turn. A corner reaches its round side, then leaves. The contour keeps that place while the corner is elsewhere.</p>
+<p>Pause. Part of the cylinder is empty. It describes the outside of all the positions the cube occupies over a full turn. A turn needs room that a single pose leaves empty.</p>
+<p>Change <strong>SHAPE</strong> to the triangle. Its upright edge lies on the axle. As the face turns, the wide bottom sweeps a circle and the sloping edge describes a cone. Hide the boundary and follow the sweep with your eyes; bring it back. The outline helps you keep a whole turn in view. It has made no new solid wall.</p>
+<p><img alt="The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png" /></p>
+<p><em>In this earlier colour study, the contours describe full turns. Each solid body is paused in one position. The museum now shows these studies in grayscale.</em></p>
+<p>The triangle from Primitives has acquired another possibility without acquiring another corner.</p>
+<!-- @ -->
+
+<p>Walk on into the last court.</p>
+<!-- @boolean_tunnel -->
+
+<h2>Inside the turns</h2>
+<p>Look through the first hollow cube. Four more stand beyond it. Each adds eighteen degrees.</p>
+<pre><code class="language-gdscript">angle_deg = i * rotation_per_segment
+</code></pre>
+<p>Subtracting an inner box made each cube hollow. The turns arrange those openings around a continuous floor. Walk inside and follow a corner with your eye.</p>
+<p>Five segments occupy fifteen metres. They stand still; your walk unfolds their differences. Turn back and the sequence unwinds.</p>
+<p>Which edge did you take for a horizon?</p>
+<!-- @carousel_cake -->
+
+<p>Outside the tunnel, the stacks keep turning. Follow a stripe on a low layer, then near the top. Their relations change while you stand still.</p>
+<p>The lowest layer turns at half a radian per second; each successive layer turns 1.2 times as fast. In the tunnel, eighteen degrees separated neighbours. Here, speed keeps changing the angle through time.</p>
+<p>Eight layers make each of five profiles: a brim, a column, a taper, a pinched spindle, a flare. They share heights and turning speeds. Walk between them and compare the room each leaves around itself.</p>
+<!-- @ -->
+
+<!-- study-spine:hinge_release -->
+
+<!-- @hinge_release -->
+
+<p>A small plate waits on a hinge. Turn it; its neighbours travel with it. Release it under KEEP. The pose stays where you left it. Choose RETURN, turn again, then release. The joint moves towards the earlier angle, as if the object had a preferred answer.</p>
+<p>The fixed support and stored angles make this an Ada response to Lygia Clark's articulated works. They give us a way to ask what an invitation permits. A joint can be available to your hand while the rule after release quietly takes the last word. Switch on TRACE and watch one corner: two journeys can arrive at the same pose without leaving the same line.</p>
+<!-- @ -->
+
+<p>In the next hall, the surroundings change size while your body stays the same. What will fit then?</p></article></main></body></html>

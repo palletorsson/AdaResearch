@@ -1,0 +1,19 @@
+{
+  "scope": "Two production fixes restore visible local ground; map and remaining recorded encounter sources are unchanged. Shader and loader captured as current dependencies.",
+  "sources": {
+    "commons/artifacts/pattern_machine_a/pattern_machine_a.gd": "e66b11e65eb6896b04bbfee71f7414e36c214887b857331de1635d2806efd731",
+    "commons/artifacts/pattern_machine_a/recipe_study.gd": "9380d8708184e8cf00cd8c83c8f610d52221b455278d9e2038a831944ea5c8ea",
+    "commons/artifacts/regularity/pattern_architecture.gd": "5e9ba7546dfb06db0b3629b06ca1c18398f98babb9e37febc1c56113c9aff502",
+    "commons/maps/Pattern_Foundry/map_data.json": "e4aed04049a9ad9a2d70cfa77e3a35bc0959ebfec33dcae507f4a0a220357b57",
+    "commons/primitives/arrays/curved_pattern_room.gd": "cb03db40d60a25f2d6f9d8b1b74f8ee7af62bfdf866121215827fe4e455d6f41",
+    "commons/primitives/arrays/pattern_studio_console.gd": "26ab3b9906bc0d6919e1daf85f26b44ac1a04be736da8c0a011e85636348e263",
+    "commons/primitives/arrays/pattern_studio_plate.gd": "ce5d6833744731e461f62f414c5d2a8b3cadb6deba32425fe0950f2467e1cbf7",
+    "commons/primitives/arrays/studio_surface_controls.gd": "3701c6a90b5e63b2bd91d988322c04823b4729eb17136013f9e1b718a9b1ac77",
+    "commons/resourses/shaders/wallpaper_tile.gdshader": "b94470084785d4134e7494f8f85848d5021ddf7d18e7c61f9642e2dc2f359789",
+    "commons/patterns/pattern_loader.gd": "b2d81270cf4487337555f52d88e901e6a2ed1d7b0a06bcc312a37884001ae7f2"
+  },
+  "changed": [
+    "commons/artifacts/regularity/pattern_architecture.gd",
+    "commons/primitives/arrays/curved_pattern_room.gd"
+  ]
+}

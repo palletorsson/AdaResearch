@@ -1,0 +1,50 @@
+{
+  "started": "2026-09-14T15:22:13+02:00",
+  "finished": "2026-09-14T15:22:33+02:00",
+  "pid": 32396,
+  "exit": 0,
+  "checks": 2,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/grammar_probe_base.gd": "1a09fa40008fc1bc7be3fa0543d85ff69bedbec820b00a588fdd46b0ad47d96c",
+    "ada_run/grammar_acceptance.gd": "9f1fba8c2013d2a3a53f4f66575061f3b5feffd6d73ae91771cc6e90d0ab16d7",
+    "commons/maps/LSystems_Grammar_Lab/map_data.json": "edc7f15a85199a12ec7688b29517758f3ffe3c06baa46ec6ba8ba2a7f1a6e0e8",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/grammar-review-2026-09-14/review-plan.json": "5e7695fe77da3897e64c4895e6f7bafd2bc742c3b6ce1d48fb2afb2b520f1b98",
+    "commons/artifacts/lsystem_editor/lsystem_editor.tscn": "0f5cb1e9b9d4ebacbe421528c239ff9be8afa95b8b3ca48cb5a9881a3118ba6f",
+    "commons/artifacts/lsystem_editor/lsystem_editor.gd": "4c330483e53cdef8bd74705be28b52e6f42d78130dd8197d4f710c1d2bbd8abe",
+    "commons/artifacts/grammar_provenance/grammar_provenance.tscn": "609a9160ac409ff2de26c5de9c2857f88c24715716361f98dbb06e3e008d296a",
+    "commons/artifacts/grammar_provenance/grammar_provenance.gd": "8079f22781893035b557ef1d31cb50a317a84bc27df8bdc2d906687a86ab9e14",
+    "commons/artifacts/lsystem_tree/lsystem_tree.tscn": "53b0b1f60c176c5f90742ea1d471fad469952ba3d927ad193133a7724edafd0d",
+    "commons/artifacts/lsystem_tree/lsystem_tree.gd": "202254d9f15c70139c871bc0a60206fc67faa54352981ae8a295bd415d1dd11e",
+    "commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn": "74697caa52eef0db5a325b3b7fa7b527b1fa6d788b70cb0cf6987ae851d3df2e",
+    "commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.gd": "8df7cc3b22969253b031db9f1e39d698a1e51673232ac73dab6800fc74e27490",
+    "commons/artifacts/city_bench/city_bench.tscn": "1c3dfc50351cf88566343eca5d826960fd08950facc0cb1ea98f5a3494759398",
+    "commons/artifacts/city_bench/city_bench.gd": "dab7bd035a1e9c8e4b6f34acc8538343c1d1827204ef223483726f44212eae86",
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "commons/mesh_grammar/mesh_grammar_node.tscn": "2a3820aa7335a595a1dfca047a1ce534ec045b9528ce49c2aa2cef26a4626882",
+    "commons/mesh_grammar/mesh_grammar_node.gd": "e1170a3931707e44a3fde3eb5225c155f47a74531e87af81029da8975db0279e",
+    "commons/artifacts/science_screen/science_screen.tscn": "3c67ce5e09a8a433d75343bc5feb16fb7d3f1ecea208d749477a4e73ac190f96",
+    "commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "d9e43b0555e3afdbf381e3ef67bb6fcdcdbe6b883409708c58f2e2f1de9c56f2",
+    "commons/data/trunk_branches.json": "39c690bb1869f99f2014e96fe7c692f363c759294e93ef05d9c8886eaf8bb2fe",
+    "commons/maps/LSystems_Grammar_Lab/final.md": "48bbdc58e954b5b83995b6214c16c074b536636ccb146fc6975c7ef0bdd91769"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "source": "Native Godot museum captures",
+  "run": "museum-runtime.json",
+  "generator": "probe_museum.gd",
+  "images": [
+    "portal-room.png",
+    "before-entry.png",
+    "small-surface.png",
+    "find-return.png",
+    "normal-again.png",
+    "small-high-relief.png"
+  ],
+  "comparison": "Before entry, small arrival, return approach and normal landing have different camera positions; terrain and field are unchanged. High relief photograph is a separate height preset selected before miniaturizing.",
+  "headset_capture": false
+}

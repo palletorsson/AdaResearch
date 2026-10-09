@@ -1,0 +1,95 @@
+{
+	"artifacts": {
+		"chroma_drum": {
+			"dna": {
+				"axes": {
+					"face": [
+						"shingle",
+						"fin"
+					],
+					"grain": [
+						"coarse",
+						"medium",
+						"fine"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "face=fin: grain=medium vs grain=fine",
+					"predicted_focus_pct": 15.0,
+					"arithmetic": "Sweep camera 16.2 m out at 76.7 px/m: medium fins 9 px apart, fine 2.4 px. At medium a 0.20 m face leaning 30 deg fills 83% of each 0.104 m gap, so the dark core (lum 0.22) shows as ~1.5 px slivers between yellow faces (0.75): 0.53 halved by MSAA over ~17% of that half, more than the hottest 5% of a ~9 m2 crop, so >= 0.15. Shingle grain pairs are stripe PHASE differences at up to 0.40 over half the drum (30-40%) and show moire, not fusion; face pairs swap half the drum's luminance by 0.40 (35%+)."
+				}
+			},
+			"lookup_name": "chroma_drum",
+			"name": "Chroma Drum",
+			"class_name": "ChromaDrum",
+			"scene": "res://commons/artifacts/chroma_drum/chroma_drum.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "A 4.40 m drum of blue and yellow - a dark base disc r 0.98 m and 0.10 m tall, a dark core r 0.75 m, a dark cap disc - whose stripes are either painted on as shingles or stood out as two-faced fins, so that the colour a standpoint sees is decided by where the body stands and how far off it is. Two axes, both word-valued on the map token. face (default shingle): shingle builds N tangential stripes round the core, blue and yellow alternating (N is even in every value, so the ring closes) - painted on, so the stripes stay where they are as you walk round; fin builds N radial fins, each two 10 mm boxes back to back with BLUE on the +tangent face and YELLOW on the -tangent face, so from any standpoint the drum is half blue and half yellow, split on the fin that faces you, and the split walks round the drum as you do - no fin has a colour and every fin has two. grain (default coarse) sets N from a constant table, never from a token number: coarse 16 (stripe chord 0.379 m, fin gap 0.353 m at r 0.95), medium 48 (0.126 / 0.104), fine 192 (0.032 / 0.011). On fin the dark core shows between coarse fins (a 0.20 m face leaning 30 degrees fills 27% of a 0.37 m gap, 83% of a 0.12 m gap) and disappears at fine: coarse fins read as a dark drum with coloured blades, fine fins as two solid halves. On shingle the fine stripes are 0.032 m, finer than the headset draws from the far end of the hall (about 26 m from row 15 to the south wall of Color_Context_Placed): there blue and yellow are one grey - not the green of the paint pot and not the dark green the filters leave, so the same two colours mix three ways in this hall and which way depends on the company. The fusion is display-limited, never retinal: at 26 m a 3.2 cm stripe subtends about 4 arcmin (the eye resolves about 1); it is the headset's roughly 2.4 arcmin per pixel that fuses them. Colours are chroma_stack's BLUE (0.16, 0.36, 0.80) and YELLOW (0.92, 0.78, 0.18), chosen for their 0.40 luminance gap. Lineage: the gallery's ps07_kras_slon_round two-colour stripe pedestal (its 1.05 chord overlap is the shipped Kras seam and is kept), ps07_kras_rainbow and ps07_kras_red_cream; taken further, not repeated - the stripes become fins and the grain, not the palette, is the axis. This is the VIEWER companion to chroma_stack, which holds the viewer still, and the partitive leg of chroma_filter's subtractive argument. A 0.90 m text plate on the +Z side at 1.20 m names the two words in force and states what the face does in one sentence, held off the axis by a dark mount that runs out through the ring, rebuilt on every rebuild. Built-in meshes only, plain MeshInstance3D (no MultiMesh, so the capture AABB is honest), no randomness, no emission, one roughness of 0.55 so only hue differs; the origin is the base centre so min y is 0; one cylinder collider r 0.98 x 4.40 m for the whole drum (no unit reaches the cap radius) and one box for the plate. Geometry: 1.96 m wide, 4.40 m tall, 1.99 m deep with the plate, identical for all six values. Pillar height is family loyalty, not need: the grain needs the hall's length and the fins need the walk-round; 4.4 m does no harm and the plate does not claim the height earns anything. NOT COMPILED OR CAPTURED in the session that wrote it; every number here is arithmetic, not a render.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				3,
+				3,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"drum",
+				"fins",
+				"stripes",
+				"viewer",
+				"partitive",
+				"op_art",
+				"kras",
+				"dna"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 3,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.96,
+					4.4,
+					1.99
+				],
+				"source": "procedural, arithmetic not a render: the base and cap discs are r 0.98 so X is 1.96 exactly; the base disc spans y 0..0.10, the core and every unit 0.10..4.30, the cap 4.30..4.40, so Y is 4.40 exactly. No unit reaches the cap radius: a coarse shingle stripe's far corner is at sqrt(0.95^2 + 0.19^2) = 0.969 and a fin's at sqrt(0.95^2 + 0.01^2) = 0.950. Z is the rim's 0.98 plus what the plate stands proud of the rim plane: the text_screen node sits at z = 0.98 + 0.001 + 0.014 = 0.995 with its baked text at +0.004 and a few millimetres of panel, so the far face is near 1.005 and the extent from -0.98 is 1.985, written as 1.99. The plate mount (0.08 square, z 0..0.982) is inside those bounds. Identical for all six values, so the sweep camera never moves."
+			},
+			"interactions": [],
+			"dev_themes": [
+				"a colour as a property of where you stand: the seam that walks with the viewer",
+				"the same two colours mixed three ways - pot, pane, distance - and which depends on the company",
+				"fusion as a fact about the headset's pixels, never about the eye"
+			],
+			"qfep_connection": "Color_Context_Placed's truth is that a colour value enters an encounter - a light, a surface, a position, a neighbour and a viewer. chroma_stack holds the viewer still; this drum makes the viewer the axis. Under fin no fin has a colour and every fin has two, and which one you get is a fact about your meridian: the seam walks with you and blue stays on the same hand, so the colour is a property of where you stand and not of the thing. Under shingle fine the same blue and yellow fuse to a grey from the far end of the hall - a third mix from two colours, beside the pot's green and the filter's dark green - and it is the headset's pixels, not the eye, that do the mixing. A colour value is a relation; here the relation is the standpoint and the distance, and which of the three mixes you get depends on the company.",
+			"note": "NEW 2026-09-17. Config keys: #face:<shingle|fin> and #grain:<coarse|medium|fine>. Both are word-valued, so neither key needs to sit in GridInteractablesComponent.CONFIG_PARAM_NAMES - only a #key:<number> on an unlisted key is eaten as the tutorial's rotation shorthand; N is never read from a token number (UNITS = coarse 16, medium 48, fine 192, every value even so the alternation closes). An unknown word warns and falls back to the default. The museum stamps config_* metadata before _ready and the grid calls apply_grid_config after: the script reads the metadata in _ready, builds once, and apply_grid_config rebuilds only when one of the two words actually changes, so curation_station's blanket apply_grid_config({\"emissive\": false}) touches nothing. NO dna block written by hand - derive it with tools/apply_dna_block.py --token=chroma_drum --axes=face,grain. Mesh counts per value, plain MeshInstance3D: shingle 16/48/192 and fin 32/96/384 units, plus 3 cylinders, the plate mount and the plate - fin.fine is 384 MeshInstance3D for the units alone; one drum is fine, measure before placing two. Predicted degeneracy, arithmetic and a lower bound: the closest pair is face=fin, grain=medium vs grain=fine, predicted 15%. The bounding sphere is 2.6 m, so the sweep camera stands 16.2 m out with a 9.9 m frame, 76.7 px/m; medium fins are 9 px apart, fine 2.4 px. At medium a 0.20 m face leaning 30 degrees fills 83% of each 0.104 m gap, so the dark core (luminance 0.22) shows as about 1.5 px slivers; at fine the faces overlap fully. On the yellow half those sliver pixels move 0.53 (0.75 vs 0.22), halved by 8x MSAA to about 0.27, over about 17% of that half's pixels - more than the hottest 5% of a roughly 9 m^2 crop - so at least 0.15. Shingle grain pairs are PHASE differences between stripe patterns (yellow where the other has blue) at up to 0.40 over half the drum: 30-40%, and the fine tile shows moire, not fusion - never cite it as evidence that the grain teaches anything. The face pairs swap half the drum's luminance by 0.40: 35% or more. A sweep below 15% on the named row is the harness: widen the ladder (12/36/216) or set dna.framing 0.8 before touching the design. Fusion is a claim about the headset, display-limited and never retinal (at 26 m a 3.2 cm stripe subtends about 4 arcmin, the eye resolves about 1, the headset draws about 2.4 arcmin per pixel): walk the shingle.fine drum in the Quest before the plate's sentence ships; if the stripes still separate at the south wall, set the fine constant to 288 (0.020 m) or drop grain to coarse|fine - one constant either way. The fin facing the camera exactly is edge-on and shows both 10 mm boxes as a dark hairline over the dark core - not a z-fight, the boxes do not share a plane. From above the cap hides the fins, so probe_anamorphic's from-above standpoint looks dead by design. At the sweep's yaw 0.62 the fin seam sits about 35 degrees right of +Z and the plate covers about 4% of the drum face at 1.2 m; keep the plate, it is the family's contract. The plate's title uses a middle dot (U+00B7) written as a \\u00b7 escape so the source stays ASCII; the baked typeface is Roboto, which carries the glyph. NOT COMPILED OR CAPTURED in the session that wrote it."
+		}
+	}
+}

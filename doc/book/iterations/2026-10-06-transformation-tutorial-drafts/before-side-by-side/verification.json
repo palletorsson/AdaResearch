@@ -1,0 +1,300 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "assertions": 176,
+  "variant_count": 19,
+  "hall_count": 7,
+  "variants": {
+    "Trans_Pre": {
+      "still": [
+        [
+          "var rise := 0.35",
+          "var rise := 0.0"
+        ],
+        [
+          "var turn_speed := 45.0",
+          "var turn_speed := 0.0"
+        ],
+        [
+          "var pulse := 0.2",
+          "var pulse := 0.0"
+        ]
+      ],
+      "rise": [
+        [
+          "var turn_speed := 45.0",
+          "var turn_speed := 0.0"
+        ],
+        [
+          "var pulse := 0.2",
+          "var pulse := 0.0"
+        ]
+      ],
+      "rise_turn": [
+        [
+          "var pulse := 0.2",
+          "var pulse := 0.0"
+        ]
+      ],
+      "slow": [
+        [
+          "var period := 4.0",
+          "var period := 8.0"
+        ]
+      ]
+    },
+    "Trans_Introduction": {
+      "near": [
+        [
+          "var animate := true",
+          "var animate := false"
+        ]
+      ],
+      "far": [
+        [
+          "var animate := true",
+          "var animate := false"
+        ],
+        [
+          "var pose := 0.0",
+          "var pose := 1.0"
+        ]
+      ],
+      "moved": [
+        [
+          "var animate := true",
+          "var animate := false"
+        ],
+        [
+          "var pose := 0.0",
+          "var pose := 1.0"
+        ],
+        [
+          "var far_gap := 0.0",
+          "var far_gap := 0.5"
+        ]
+      ],
+      "middle": [
+        [
+          "var animate := true",
+          "var animate := false"
+        ],
+        [
+          "var pose := 0.0",
+          "var pose := 0.5"
+        ]
+      ]
+    },
+    "Trans_Translation": {
+      "corner": [
+        [
+          "var via_corner := false",
+          "var via_corner := true"
+        ]
+      ],
+      "diagonal": [
+        [
+          "var via_corner := false",
+          "var via_corner := true"
+        ],
+        [
+          "var finish := Vector3(2, 3, 0)",
+          "var finish := Vector3(2, 3, 2)"
+        ]
+      ]
+    },
+    "Trans_Rotation": {
+      "orbit": [
+        [
+          "var offset := Vector3.ZERO",
+          "var offset := Vector3(2, 0, 0)"
+        ]
+      ],
+      "vertical": [
+        [
+          "var offset := Vector3.ZERO",
+          "var offset := Vector3(2, 0, 0)"
+        ],
+        [
+          "var axis := Vector3.UP",
+          "var axis := Vector3.FORWARD"
+        ]
+      ]
+    },
+    "Trans_Scale": {
+      "large": [
+        [
+          "var factors := Vector3.ONE",
+          "var factors := Vector3(4, 4, 4)"
+        ]
+      ],
+      "wide": [
+        [
+          "var factors := Vector3.ONE",
+          "var factors := Vector3(4, 1, 1)"
+        ]
+      ],
+      "double": [
+        [
+          "var factors := Vector3.ONE",
+          "var factors := Vector3(2, 2, 1)"
+        ]
+      ]
+    },
+    "Trans_Body": {
+      "turn": [
+        [
+          "var turn_instead := false",
+          "var turn_instead := true"
+        ]
+      ],
+      "far": [
+        [
+          "var far_distance := 4.0",
+          "var far_distance := 6.0"
+        ]
+      ]
+    },
+    "Trans_Pit": {
+      "slow": [
+        [
+          "var duration := 3.0",
+          "var duration := 6.0"
+        ]
+      ],
+      "wider": [
+        [
+          "var slide := 1.15",
+          "var slide := 1.5"
+        ]
+      ]
+    }
+  },
+  "faults": {
+    "frozen_turn": {
+      "map": "Trans_Pre",
+      "mutation": [
+        "cube.rotation_degrees.y = turn_speed * elapsed",
+        "cube.rotation_degrees.y = turn_speed"
+      ],
+      "required_failure": "pre/continuous_turn",
+      "detected": true
+    },
+    "disconnected_pickup": {
+      "map": "Trans_Pre",
+      "mutation": [
+        "sensor.body_entered.connect(_on_body_entered)",
+        "pass # Deliberately disconnect pickup."
+      ],
+      "required_failure": "pre/overlap_em_walker",
+      "detected": true
+    },
+    "one_axis_growth": {
+      "map": "Trans_Introduction",
+      "mutation": [
+        "grow.scale = Vector3.ONE * lerpf(0.25, 1.0, t)",
+        "grow.scale = Vector3(1.0, lerpf(0.25, 1.0, t), 1.0)"
+      ],
+      "required_failure": "intro/start_growth",
+      "detected": true
+    },
+    "turning_translation": {
+      "map": "Trans_Translation",
+      "mutation": [
+        "elapsed += delta",
+        "elapsed += delta\n    cube.rotation_degrees.y = elapsed * 30.0"
+      ],
+      "required_failure": "translation/level_base30",
+      "detected": true
+    },
+    "wrong_pivot": {
+      "map": "Trans_Rotation",
+      "mutation": [
+        "pivot.basis = Basis(axis.normalized(), angle)",
+        "cube.basis = Basis(axis.normalized(), angle)"
+      ],
+      "required_failure": "rotation/quarter_centre_orbit",
+      "detected": true
+    },
+    "scaled_witness": {
+      "map": "Trans_Scale",
+      "mutation": [
+        "add_child(point)",
+        "doorway.add_child(point)"
+      ],
+      "required_failure": "scale/witness_fixed_large",
+      "detected": true
+    },
+    "height_leaks_into_distance": {
+      "map": "Trans_Body",
+      "mutation": [
+        "separation.y = 0.0",
+        "pass # Deliberately retain height."
+      ],
+      "required_failure": "body/height_ignored_em_walker",
+      "detected": true
+    },
+    "floating_base": {
+      "map": "Trans_Body",
+      "mutation": [
+        "cube.position.y = factor * 0.5",
+        "cube.position.y = 0.5"
+      ],
+      "required_failure": "body/floor_em_walker0.0",
+      "detected": true
+    },
+    "frame_based_door": {
+      "map": "Trans_Pit",
+      "mutation": [
+        "delta / duration",
+        "1.0 / duration"
+      ],
+      "required_failure": "pit/progress_slow30",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/run_checks.py": "dfefb4c38e2873c5f1feee1566351cea98904eb0f62a2b52f7f18b479ba246a0",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/verify.gd": "8e3603690f485405497dc1f161c842b8e4ad44cea2c6bafd459f3e829d40034e",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/native-project.godot": "793c1610969b73124d9724e09992d421bd0ca29536c2b93a0bc7cc8a87209c4e",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Pre/tutorial.md": "61622fbca91a811612dd289db54bd121ae1dd65b046ba4f14749e027b300eb25",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Pre/lesson.gd": "44b325cc4aaa4859fa698c948e688ddb322a4585f6945fd15587d5f37b57f6af",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Introduction/tutorial.md": "d5b60eb2da6b527a14fa39fb3cf3f5483adc677f7d872999930c349f62c2ec6a",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Introduction/lesson.gd": "8d33edea9a296aa189ec7b0f935e715d9cf5038f38d2a6f0657313c4ce21e0bc",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Translation/tutorial.md": "16d270d798652e21d1c750bb13cce31c21a9ac26f1505b477a891194a56a8580",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Translation/lesson.gd": "8e3f2a748962f83bbcf4586bb8478a59d1e0df8b25afe223213f0c34b627b5be",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Rotation/tutorial.md": "f742271e7d08d2d1590a310d5ab0cbeaaf0e503fa93ffad3b07fc623e0c4b0fd",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Rotation/lesson.gd": "7192b6709596a488dee88e38e6fe2c3c508fbdbbcd81919635504f347605ae43",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Scale/tutorial.md": "034e1e0cb3ac08abb2a1b51033aea444e7b6f78eaaffa6d252b6f56fc295da66",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Scale/lesson.gd": "9fbf053a9fecb0f142c5e33741fb92c9b57223ad1b7e4ad9f5ef7aa1d4c93252",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Body/tutorial.md": "e63a948c16fb0bb0bf1b2943a27100b1c5c543c8943d36e42f4557d384529526",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Body/lesson.gd": "59fe73891e880563c49b4a8c5be31ef7eb181685bb09cda43f53a1d858f8f304",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Pit/tutorial.md": "ccc3628a793814cc952c1038f0d59c9f22f1ee43c9ffbaacefcd78790458d647",
+    "doc/book/iterations/2026-10-06-transformation-tutorial-drafts/Trans_Pit/lesson.gd": "93f5a60dc3ea24d97ba06f8203460cd249bf15f7b00b9121fdb3ae292e96f389"
+  },
+  "preserved": {
+    "commons/maps/Trans_Pre/tutorial.md": true,
+    "commons/maps/Trans_Pre/final.md": true,
+    "commons/maps/Trans_Pre/map_data.json": true,
+    "commons/maps/Trans_Introduction/tutorial.md": true,
+    "commons/maps/Trans_Introduction/final.md": true,
+    "commons/maps/Trans_Introduction/map_data.json": true,
+    "commons/maps/Trans_Translation/tutorial.md": true,
+    "commons/maps/Trans_Translation/final.md": true,
+    "commons/maps/Trans_Translation/map_data.json": true,
+    "commons/maps/Trans_Rotation/tutorial.md": true,
+    "commons/maps/Trans_Rotation/final.md": true,
+    "commons/maps/Trans_Rotation/map_data.json": true,
+    "commons/maps/Trans_Scale/tutorial.md": true,
+    "commons/maps/Trans_Scale/final.md": true,
+    "commons/maps/Trans_Scale/map_data.json": true,
+    "commons/maps/Trans_Body/tutorial.md": true,
+    "commons/maps/Trans_Body/final.md": true,
+    "commons/maps/Trans_Body/map_data.json": true,
+    "commons/maps/Trans_Pit/tutorial.md": true,
+    "commons/maps/Trans_Pit/final.md": true,
+    "commons/maps/Trans_Pit/map_data.json": true
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-transformation-drafts-yu6svj0v",
+  "scope": "Exact printed programs in native Godot; numeric transform/geometry checks; controlled time plus real process callback; real physics overlaps with synthetic desktop/XR bodies. No headset or human-learning claim; no rider or solid-door reconstruction."
+}

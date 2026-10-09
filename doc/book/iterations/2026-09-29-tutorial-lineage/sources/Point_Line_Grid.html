@@ -1,0 +1,402 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Line_Grid · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Line_Grid">← Tutorial lineage</a></p><h1>Point Line Grid</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Line_Grid/final.md">Raw captured source</a></p><pre># Grid Quantizes Movement
+
+Look for your bend. It may have grown.
+
+A drawing released in Trace can arrive here as a list of positions. Over the ruled field, a small movement has acquired another size. Keep it in view. We are going to give positions addresses, then ask what those addresses help us make.
+
+## Find somewhere to return
+
+&lt;!-- @grab_sphere_point_snap --&gt;
+
+Pick up the snapping sphere and move it slowly. Its marker follows your hand while the retained line waits, then gains another corner. Between those changes, there is room to move.
+
+Trace already made choices about which positions to keep. Here the table shows the last ten kept positions, naming each in metres and in whole-number steps from the origin. With five centimetres between grid positions, `0.15` metres along X has index `3`: three steps from world zero. The same place has two names.
+
+The calculation, reduced to one axis, is:
+
+```gdscript
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+```
+
+Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, `0.12` becomes `0.10`; `0.13` becomes `0.15`. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.
+
+Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.[^point-grid-bowker-star]
+
+Both columns in the table describe the position the program kept. Your hand can still be somewhere between the addresses.
+
+## Give the interval a rhythm
+
+&lt;!-- @player_trace --&gt;
+
+Walk a small loop, then look behind you. Two accounts of the walk remain: a finer sampled reference and a path rounded to one-metre spacing in the recorder&#x27;s own frame.
+
+Find a place where you can move while the coarse address holds. Slowly cross into another. Cross back. There is a rhythm in the jump, and room to move within the interval. A rule for making positions agree has also given us something to dance with.[^point-grid-ahmed-return]
+
+A lean with your feet planted can enter this record too: it follows your headset across the floor. It must choose a point before it can draw a path called yours.
+
+The lines connect the positions it keeps. A diagonal can cut across ground you went around. Returning to an earlier address can add another turn to the record; the program keeps an order of visits, not just a collection of places visited once. The address marks a return; your reason for coming back has stayed with you.
+
+## Let the drawing find another use
+
+&lt;!-- @grid_lines --&gt;
+
+Return to the ruled field. Find your bend in pink, then compare green. Is it still your bend at this size?[^point-grid-carry]
+
+This display subtracts the centre of the received drawing&#x27;s bounds and applies a scale:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+Pink gives the drawing another centre and size. Green rounds those displayed positions onto a new grid. The panel still lists the original positions: the program can give a record another appearance without rewriting what it received.[^point-grid-replay]
+
+A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.
+
+## Give the address a floor
+
+&lt;!-- @plan_vitrine --&gt;
+
+Step onto the small plan in its glass enclosure. Five rows cross five columns: twenty-five one-metre cells. Their printed indices run from zero to four.
+
+Entering in VR gives each hand a pen. Draw a small circle with the cyan left hand, then try it with the amber right. Cyan follows the sampled movement. Amber places its horizontal positions above the nearest cell centres. A small circle of your hand may leave the amber line waiting at one address.
+
+The floor has entered the drawing. Its addresses reach up into the air, but they have not taken over every direction. Lift the amber hand without moving it sideways: height still has room to vary. Stepping out returns the pens; the traces linger briefly, then clear.
+
+Find a cell using both numbers. Leave it and find it again. You can now describe where a cube might stand without pointing. Two indices can become an instruction for placing it.[^point-grid-scott]
+
+Cross a row, then cut diagonally. The drawn divisions do not stop you. A continuous collision surface supports the plan. Over the other basin, the museum supplies walkable glass; the replayed lines provide no floor of their own.
+
+An address can tell a program where to put something. What lets a body reach it needs further work.[^point-grid-lefebvre]
+
+&lt;!-- @ --&gt;
+
+A shared address can help us repeat a placement or coordinate a meeting. The grid gives us a way to name a place and return to it together.
+
+We can bring endpoints back to places where they meet. Next, join three points that do not all lie on one straight line, and close the last gap. The grid can help the corners meet; it does not fill the space between them. What must we add before there is a face inside?
+
+[^point-grid-bowker-star]: Geoffrey C. Bowker and Susan Leigh Star, [*Sorting Things Out: Classification and Its Consequences*](https://mitpress.mit.edu/9780262024617/sorting-things-out/) (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. The operational comparison here is treating different inputs as equivalent: it can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence.
+
+[^point-grid-ahmed-return]: Return to Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument.
+
+[^point-grid-scott]: James C. Scott, [*Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed*](https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/) (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place.
+
+[^point-grid-lefebvre]: Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&amp;option=com_eshop&amp;title=The+Production+of+Space&amp;view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.
+
+[^point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.
+
+[^point-grid-replay]: Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions with six intervals per metre along each axis. The [technical companion](/book?map=Point_Line_Grid&amp;section=technical) gives the transforms and the panel&#x27;s page controls.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Line_Grid/tutorial.md">Raw captured source</a></p><pre># Point_Line_Grid — from a retained position to an address
+
+The dot in Point_Trace retained selected positions. This room gives positions integer addresses within a chosen grid and tests what we can do with them. Follow the four primary artifacts in [final.md](final.md); [technical.md](technical.md) provides the full source reference.
+
+## 1. Metres and indices
+
+Pick up `grab_sphere_point_snap`, move, release, and read its table. Its scene sets `grid_size = 0.05` metres. The source rounds world X, Y and Z independently. On one axis, the operation can be written as:
+
+```gdscript
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+```
+
+At this spacing, X = 0.12 gives index 2 and retained X = 0.10. X = 0.13 gives index 3 and retained X = 0.15. The integer counts intervals from world zero; multiplying by the spacing converts that index back to metres.
+
+Move within a rounding region, then cross its halfway boundary. Nearby input positions share an address. The table&#x27;s two columns describe the retained output in different units; they do not compare raw and rounded measurements. A lattice address names a representative point. Do not confuse it with every possible scheme for numbering the areas enclosed by drawn lines.
+
+On release, the handle moves by the correction needed to align the sampled marker, preserving the marker&#x27;s offset from the handle. The retained table stays visible. This release can append a repeated address, so its row count is not a count of distinct places.
+
+## 2. The chosen point and the ordered path
+
+Walk with `player_trace`. Desktop uses the active walking body; VR uses headset world X/Z and rig-origin world Y. The source then enters the recorder&#x27;s local frame:
+
+```gdscript
+var local_point = to_local(current_global)
+local_point.y += trace_height_offset
+local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
+```
+
+The room sets `seam_grid` to one metre. A finer sampled reference accompanies the coarse path. Compare a small loop with a larger one, and in VR compare leaning with stepping. You are testing both the rounding and the choice of point being measured.
+
+The recorder suppresses consecutive repeated rounded positions but can return to a previous address later. It retains an ordered list, including time/speed data in this recorder, and draws direct segments between accepted positions. It does not compute a route along grid edges. Counting recorded segments does not measure distance in metres: their lengths can differ, and they can be diagonal.
+
+## 3. A copy is given another scale
+
+Release a Trace dot or stick with at least two retained positions. `TraceData` duplicates that list. The whiteboard image and walking path are separate; neither is this input.
+
+At `grid_lines`, find the released drawing. The display computes the source bounds&#x27; centre and a scale capped to keep the longest dimension within five metres:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+Pink uses this transformation. Green snaps those displayed positions to 1/6 metre on each display axis. The source list is unchanged. Its coordinates in the panel therefore need not match the displayed locations. The technical reference distinguishes the source frame, display pitch and the other grids in this room.
+
+## 4. Use two indices to arrange a plan
+
+The placed `plan_vitrine` contains `simulation_grid`. Its source makes five rows of five cell meshes. With the tile mesh and materials already prepared, this is the placement portion of the loop:
+
+```gdscript
+for z in range(SIDE):
+    for x in range(SIDE):
+        var mesh := MeshInstance3D.new()
+        mesh.name = &quot;Cell_%d_%d&quot; % [x,z]
+        mesh.mesh = tile
+        mesh.material_override = light if (x+z)%2 == 0 else dark
+        mesh.position = Vector3(x-2, -0.024, z-2)
+        add_child(mesh)
+```
+
+`SIDE` is 5. Indices run from 0 through 4; subtracting 2 centres the plan. The small vertical offset places the tile surfaces just above the host floor to avoid flicker. These finite cell labels differ from the snapping tool&#x27;s world-space lattice indices.
+
+Find a cell by its two numbers, walk away and return. The divisions help describe placements without restricting walking to grid edges. A separately created five-by-five box collider supplies the continuous floor. The glass enclosure&#x27;s panes have no colliders.
+
+Carry this distinction into Point_Triangle_Context: naming or connecting positions does not automatically produce a visible face or a supporting surface.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Line_Grid/technical.md">Raw captured source</a></p><pre># Point Line Grid — positions, frames and replay
+
+Point_Trace distinguished the dot&#x27;s position list from the whiteboard&#x27;s painted image. Here, several artifacts apply rounding in different coordinate frames. Point_Triangle_Context follows by asking what a closed boundary needs before it can become a face.
+
+The first passage follows `grab_sphere_point_snap`, `player_trace`, `grid_lines` and the placed `plan_vitrine`. The room&#x27;s other three artifact types remain secondary. This reference expands the shorter program in [tutorial.md](tutorial.md).
+
+## Begin with the held point
+
+`grab_sphere_point_snap` uses a 0.05 m grid in world X, Y and Z. Its central operation is:
+
+```gdscript
+return Vector3(
+    round(pos.x / grid_size) * grid_size,
+    round(pos.y / grid_size) * grid_size,
+    round(pos.z / grid_size) * grid_size
+)
+```
+
+Divide by the spacing, round, multiply back. With 0.05 m spacing, 0.12 m rounds to 0.10 m and 0.13 m rounds to 0.15 m. The two outcomes are one lattice interval apart. The inputs can lie arbitrarily close on opposite sides of the halfway boundary.
+
+Move the held tool slowly and compare its marker with the trace. Its ground table reports retained positions in metres and signed lattice indices: a retained X of 0.15 m has index 3. These are two descriptions of the retained sample. There is no second column containing the original unrounded input.
+
+On release the tool moves its handle by the correction required to place the visible sampled tip on the grid:
+
+```gdscript
+var tip_position: Vector3 = _draw_sphere.global_position
+var snapped_pos: Vector3 = snap_position_to_grid(tip_position)
+_grab_point.global_position += snapped_pos - tip_position
+```
+
+The local offset of the marker is preserved. The released tip is appended to the retained array and the table remains available. The callback can therefore append the release position even if that position was already the last recorded point. A row count is a count of stored entries, not necessarily of unique addresses.
+
+## Choose which point in the visitor to record
+
+`player_trace` follows the active museum walking body on desktop. In VR, `_tracked_position()` combines headset-camera world X/Z with rig-origin world Y. Physical movement inside a stationary rig enters the record; a horizontal lean can enter too. Vertical head movement alone does not change this chosen floor position.
+
+The installed token enables `seam_grid:1.0` and `show_discarded:1`. The finer reference is sampled from the same selected position. It is still a sampled record. The coarser path uses:
+
+```gdscript
+var local_point = to_local(current_global)
+local_point.y += trace_height_offset
+local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
+```
+
+Only local X and Z are rounded. The display offset is 0.05 m. After the movement gate, consecutive duplicate rounded positions are suppressed. The path retains up to 1024 positions with sample times and speeds; the finer reference has its own limit of four times that count. Fading is off in this placement.
+
+Walk within one rounding region, then cross its edge. Compare how much the reference changes with how much the coarse position changes. The rounding regions extend halfway between lattice nodes. They are not necessarily the squares enclosed by a separately drawn set of grid lines.
+
+An ordered path can return to an earlier address. It is not a set containing each visited cell once. Both path meshes connect their accepted points directly; diagonal segments are allowed. Neither computes an axis-by-axis route or guarantees that the connecting segment follows walkable ground.
+
+## What arrives at grid_lines
+
+Releasing `draw_dot` or `draw_stick` sends its retained world-position list through `TraceData.add_trace()`. The store accepts lists with at least two points and duplicates them. `grid_lines` loads existing snapshots when it enters the scene and receives later ones through `trace_added`.
+
+The store is an autoload in this running game. It survives changes of room but supplies no disk save here. It stores positions without the originating pen&#x27;s colour, identity or timestamps. The separate whiteboard painting and `player_trace` do not publish their records to this store.
+
+`grid_lines.tscn` supplies six lines in each direction. The script positions them one metre apart, from -2.5 to +2.5 in local X/Z, making five-by-five cells. This finite drawing neither limits the coordinate system nor defines the walking recorder&#x27;s origin. Since five cells place zero between two rulings, no ruling is coloured as a zero axis in this scene.
+
+For each released trace, `_display_frame()` finds its bounding-box centre and chooses a scale: fivefold enlargement, reduced if necessary to keep its largest dimension within five display metres. The pink mesh uses:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+The green mesh rounds the transformed positions:
+
+```gdscript
+var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
+var snapped = scaled.snapped(Vector3.ONE * snap_step)
+```
+
+The scene sets six subdivisions, so `snap_step` is 1/6 m in display space, in all three axes. Consecutive results must also pass the existing squared-distance threshold of 0.001 before entering the green mesh. With this pitch, identical snapped positions fail and distinct neighbours pass. Green is displayed only when at least two positions survive. Rotation is disabled by this map&#x27;s token; the lattice itself never rotates.
+
+The cased panel names source count and length, enlargement and display pitch. Rows show the latest source&#x27;s world coordinates to three decimal places, ten per page, advancing every two seconds. The summary covers the latest ten releases; the scene can still contain older replay meshes. Displayed length and source length should not be confused. The original source array is unchanged by either rendering transform.
+
+PREVIOUS and NEXT hold a page of source positions for comparison with the displayed line. AUTO resumes the page cycle; either arrow returns to a held page. These controls page through the record without changing its positions or either rendered trace.
+
+## The numbered plan
+
+The placed `plan_vitrine` wraps `commons/artifacts/simulation_grid/simulation_grid.tscn`. Its script creates 25 cell meshes with indices X/Z = 0 through 4. Their local centres use `Vector3(x-2, -0.024, z-2)`: the plan&#x27;s cell `(2,2)` is horizontally centred at local zero. A one-metre change in either index moves a cell by one metre.
+
+These indices name finite cells in this particular plan. The held tool&#x27;s signed lattice indices count from world zero. Neither numbering scheme defines the walking recorder&#x27;s local origin. Keep the frame and the kind of thing being indexed explicit when comparing them.
+
+Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine&#x27;s glass panes have no colliders. Its configured controller-mounted drawing comparison now belongs to the primary encounter, as described below; headset validation remains open.
+
+## The basin and the next boundary
+
+The current museum map requests a one-metre-deep basin with a glass lid. The museum builder supplies the walkable glass; `grid_lines` supplies line geometry without a floor collider. The readout stands beside the right rim, 1.2 m above deck height when stamped at that basin depth.
+
+Positions can be named beyond the drawn lattice. Whether someone can stand there needs collision geometry and a route; coordinates alone do not answer it. The next room makes a related distinction between an edge loop and a filled triangle.
+
+Possible later controls include changing the walking grid&#x27;s spacing or moving its origin while keeping the same source positions. They are proposals, not installed controls. The current experiment already lets the visitor change the gesture&#x27;s purpose: use a coarse region to hold a stable address, or use crossings to compose a rhythm.
+
+
+## Encounter reference, 15 September 2026
+
+[Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.
+
+Source entry points: `commons/primitives/point/grab_sphere_point_snap.gd` and its scene; `commons/primitives/point/player_trace.gd`; `commons/globals/trace_data.gd`; `commons/primitives/line/grid_lines.gd` and its scene; `commons/artifacts/plan_vitrine/plan_vitrine.gd`; `commons/artifacts/simulation_grid/simulation_grid.gd`.
+
+## Two spatial pens on the plan — 21 September 2026
+
+The placement opts into `#pen_pair:space_grid`. Entering with both active VR controllers mounts a cyan left pen and an amber right pen. Both retain `draw_dot`&#x27;s movement sampling and 2048-position capacity. Neither consumes elapsed time as a coordinate or projects onto a nearby whiteboard. Desktop keeps the numbered floor but has no mounted pens.
+
+The cyan pen stores sampled world positions unchanged. The amber pen converts each accepted position into the vitrine&#x27;s local frame, rounds X and Z to integer metres, keeps local Y, then converts back to world space. Local X/Z integers coincide with the centres of the one-metre plan cells; indices 0–4 name the centres at local -2–2. This uses the artifact frame, so translating or rotating the exhibit does not detach its addresses from its floor. There is no additional height lattice.
+
+```gdscript
+var on_plan := grid_frame.to_local(p)
+on_plan.x = roundf(on_plan.x)
+on_plan.z = roundf(on_plan.z)
+return grid_frame.to_global(on_plan)
+```
+
+The 6 mm movement gate still samples actual tip movement before shaping. Consecutive identical shaped positions are omitted. A held hand without movement does not add positions; changing height can add positions while the horizontal address stays fixed. Segments connect accepted samples, so a diagonal jump need not follow cell edges. Pens have marker nibs without colliders or pickup/drop signals and do not publish their records to TraceData. Entry clears the previous visit&#x27;s traces. On exit, pens detach from the controllers and the traces remain for the configured six seconds before clearing.
+
+Other placements retain the default `space_time` pair. This chapter&#x27;s configuration postpones that comparison without removing its implementation. See [the finishing-pass evidence](../../../doc/book/iterations/2026-09-21-primitives-finish/SUMMARY.md) for controlled runtime scope; headset use remains untested.
+
+## Recording and platform scope — review clarification, 24 September 2026
+
+The snapping sphere&#x27;s table displays the latest ten retained positions while the count can be larger. Both table columns describe retained positions, one in metres and one in lattice indices.
+
+The walking recorder takes X/Z from the headset and height from the rig&#x27;s origin; its desktop fallback follows the walking body. The book follows the headset visit. The plan&#x27;s controller-mounted pen pair requires active tracked controllers; on desktop the numbered plan remains available to walk across, without those pens.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Line_Grid/intent.md">Raw captured source</a></p><pre># Point_Line_Grid — a place we can name again
+
+The room&#x27;s question is: **what lets us return to the same place?** Its new capability is using a chosen frame and spacing to give positions repeatable addresses, then using addresses to arrange a space.
+
+Point_Trace has already introduced sampling and rounding. Do not restart with a supposedly continuous, unmediated trace that this room alone makes discrete. Build from the retained list: identify a lattice index, compare an ordered walking record, recognise the released drawing at another scale, then stand on the numbered plan.
+
+## Primary route
+
+1. `grab_sphere_point_snap`: compare retained metres with integer lattice indices; release aligns the sampled marker. The five-centimetre lattice offers repeatable placement with tolerance around each representative.
+2. `player_trace`: the same operation in the body&#x27;s movement, with one-metre local spacing. Moving within an address and crossing its boundary can become a rhythm. The recorder follows a chosen point, and keeps an ordered path that can revisit addresses.
+3. `grid_lines`: the released Trace list is copied, centred and scaled. Pink and green compare display choices while source positions remain unchanged. An enlarged gesture can invite interpretation as a score; it is not a newly built walkable bridge.
+4. `plan_vitrine`: the placed wrapper contains a five-by-five simulation plan. Cell indices can specify an arrangement; separate collision geometry supports the visitor.
+
+## Focus and room richness
+
+All seven physical artifact placements remain. `room_grammar`, `floating_sphere_field` and `modulor_man_demo` are secondary encounters, with routes back in [detours.md](detours.md). The internal `simulation_grid` is described through its placed wrapper rather than counted as another standalone primary artifact.
+
+The critical question follows the actual operation: when is sharing an address useful, and what further rules turn a position into an instruction, a right of access or a constraint? Rounding alone does not settle those relations. A coarse record can support precision in assembly and room for variation in movement.
+
+The next room, Point_Triangle_Context, separates a closed boundary from a visible face. This room prepares that distinction by separating addresses and line geometry from bodily support.
+
+[Earlier texts and editorial record](../../../doc/space/point-grid-focus-2026-09-16/README.md) preserve the previous routes and code sketches for later work.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Line_Grid/critical.md">Raw captured source</a></p><pre># Point Line Grid — what a position is allowed to mean
+
+Trace asked what a record can retain of a gesture. Grid asks what a repeatable address lets us do with that record. When should positions count as the same place, and for what purpose? The question begins with a small action: move while keeping the same coarse address. There is activity here that this particular record can afford to leave out.
+
+Sharing an address can help two pieces meet, or let someone name a meeting point without pointing. It gives a chosen precision to an arrangement. The same interval that omits variation can make assembly less demanding. The critical question concerns what we make that agreement serve.
+
+## Which part of you moved?
+
+The VR walking recorder follows the headset horizontally and uses rig-origin height. Lean with your feet planted and its reference path can change. Crouch straight down and the chosen floor position stays put. The program has selected a point through which to describe you.
+
+Neither response is, by itself, a failure. A projected head position can be useful for locating a visitor in a room. Calling its path a record of footsteps would ask it to support a claim it cannot make. The difference lies between the measurement and its proposed use.
+
+This is where a critical reading can become an implementation question. Would a learner need separate head and body paths to distinguish a lean from a step? Would that extra record serve this experiment? What would collecting it cost, and who would be able to read it? More information can help a chosen task without becoming an obligation to describe someone completely.
+
+## The same address, differently lived
+
+The one-metre lattice gives nearby positions a shared representative. Within a rounding region, the coarse address can hold while the hand, head or body keeps moving. At the boundary, a small displacement can produce a one-metre change in the recorded coordinate. The rule is consistent; its consequences are uneven across a walk.
+
+One use of this interval would be to criticise the detail it loses. Another would be to find a comfortable range of movement while keeping an address steady. Crossing its edge can become a rhythm. A loop too small to survive as geometry can still be something someone wanted to do.
+
+Here the queer possibility belongs to changing what the operation is for. A rule introduced to regularise movement can become material for play, accompaniment or a refusal to optimise the route. The visitor need not discover an unencoded, supposedly authentic movement behind the apparatus. There are already differences to work with inside the encounter.
+
+Nor does a record&#x27;s omission establish freedom. A system that ignores an action might leave room for it, or might fail to recognise a need. The consequential question is what decisions will be made from that record, and whether the person supplying it can contest those decisions.
+
+## A gesture becomes a score
+
+The grid display receives a released dot&#x27;s list of positions. It recentres and enlarges them, colours one replay pink, then makes a green version by rounding in display space. The original pen&#x27;s colour is absent from this store. So are the duration and purpose of the gesture.
+
+Recognising your loop at another scale can be pleasurable. The transform also makes another use possible: a wrist-sized bend becomes a shape another body might follow. That possibility does not depend on pretending the display preserves the original distance. It depends on admitting the multiplier and negotiating what the transformed line might now ask of someone.
+
+The source coordinates remain unchanged. This matters methodologically: a visual argument can change through rendering even when its input data stays fixed. The cased readout states source length, enlargement and display pitch so a reader can question that argument. A diagram is something made from data, with choices of emphasis and scale; its presence does not make those choices self-evident.
+
+Even the instrument offers a partial reading. It pages through the latest source and summarises ten releases, while older replay meshes may remain. We have to choose between reading another page, following a line and continuing the lesson. The unread part does not stop existing when we turn away.
+
+## What holds you above the drawing
+
+The museum places this lattice in a lowered basin beneath walkable glass. The source map&#x27;s absent floor tiles no longer imply an unwalkable hole. The museum builder has added another structure. The lines provide a drawing; collision geometry provides support.
+
+The distinction allows a precise version of the political question about grids. A coordinate can locate a parcel, a meeting point or a target. It does not itself establish ownership, permission or a right to act there. Those relations need further rules and institutions. A critical account should identify that additional work rather than attribute every possible consequence to rounding alone.
+
+The numbered plan lets us encounter that distinction underfoot. Its cell meshes mark twenty-five places, while a continuous collider supplies support across their edges. The visitor can walk diagonally. To confine movement to those addresses, the program would need another operation. The diagram and the body&#x27;s permitted movement are related here through specific implementation choices.
+
+For the later QFEP rooms, carry the problem of choosing which variation a model must retain. This hall makes several thresholds available for comparison, but it does not calculate an entropy value or assign a numerical degree of freedom to the visitor. The differences observed here give later models something concrete to answer to.
+
+Before the next room, choose a movement worth repeating for a reason of your own. Decide what another person would need to know to join it. The grid can help you communicate a place; something else will have to communicate the invitation.
+
+[Return visits](detours.md) keep the room grammar, drifting spheres and body-scale reference available. [Earlier texts](../../../doc/space/point-grid-focus-2026-09-16/README.md) preserve the other routes through this question.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Line_Grid/artifacts.md">Raw captured source</a></p><pre># Point_Line_Grid — artifacts
+
+Seven physical placements; four primary artifacts in book order. No placement is removed by the 16 September 2026 editorial pass. These roles match `commons/data/artifact_roles.json` for this room.
+
+## Primary
+
+- **grab_sphere_point_snap** — move and release the sphere; compare retained metres with integer indices on its five-centimetre world grid.
+- **player_trace** — follow the finer and one-metre local records of a chosen point in the visitor; try holding an address, crossing it and returning.
+- **grid_lines** — find a released Trace drawing, centred and scaled in pink, rounded again in green; read the source coordinates beside the display.
+- **plan_vitrine** — step onto the enclosed five-by-five plan and find cells by two indices. The internal `simulation_grid` supplies the numbered tiles and continuous floor collider. In VR, the configured `space_grid` pair compares sampled cyan drawing with amber drawing rounded over the floor cells; height remains continuous.
+
+## Secondary
+
+- **room_grammar** — compare a generated wall-and-door arrangement with a route someone might take.
+- **floating_sphere_field** — watch movement outside the walking recorder&#x27;s chosen input.
+- **modulor_man_demo** — compare an address with the space a represented body occupies.
+
+[Detours](detours.md) develop these optional encounters. [The map summary](summary.md) records all placement coordinates. The book&#x27;s markers select the primary passage; the wider room remains available to explore.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Line_Grid/summary.md">Raw captured source</a></p><pre># Point_Line_Grid — map summary
+
+The question is what a repeatable address makes possible. Build on Point_Trace&#x27;s already sampled position list: name a place, return to it, replay a gesture, specify an arrangement. The next hall is Point_Triangle_Context, where a closed boundary and a rendered face are distinguished.
+
+## Primary encounter order
+
+| Artifact | Discover through action | Carry forward |
+| --- | --- | --- |
+| `grab_sphere_point_snap` | Move, release, compare retained metres with lattice indices | Five-centimetre world spacing makes repeatable positions with tolerance around each representative. |
+| `player_trace` | Walk within one coarse address, cross its boundary, return | The one-metre local record keeps an order of visits; a chosen body point and direct segments shape what it describes. |
+| `grid_lines` | Recognise a released Trace drawing in pink and compare green | A copied list can acquire another scale and use; source and display frames differ. |
+| `plan_vitrine` | Find a cell by its two indices, leave and return | Twenty-five finite cells specify an arrangement; a separate collider supports walking across their edges. |
+
+## Current layout
+
+The portable map is 20 columns by 15 rows, with an eastern extension containing the numbered plan. Its declared basin is one metre deep, with museum-supplied walkable glass above the replay field. A zero in the source structure is therefore insufficient evidence of an unwalkable hole in the assembled museum.
+
+All seven placements remain. The source grid coordinates below are column/row indices, not final museum world coordinates:
+
+| Artifact | Column, row | Role |
+| --- | --- | --- |
+| `grab_sphere_point_snap` | 3, 10 | Primary |
+| `player_trace` | 9, 1 | Primary |
+| `grid_lines` | 5, 5 | Primary |
+| `plan_vitrine` | 15, 7 | Primary |
+| `room_grammar` | 7, 13 | Secondary |
+| `floating_sphere_field` | 5, 10 | Secondary |
+| `modulor_man_demo` | 2, 13 | Secondary |
+
+The roles express teaching order, not a newly enforced walking route. The vitrine wraps `simulation_grid`; there is no separate eighth placement. Existing secondary encounters are described in [detours.md](detours.md).
+
+## Reading and implementation
+
+[final.md](final.md) is the first passage. [tutorial.md](tutorial.md) follows its actual program; [technical.md](technical.md) distinguishes the grids, frames, buffers and colliders. [critical.md](critical.md) asks what decisions are made from a shared address. The earlier texts and historical layout descriptions are preserved in the [editorial archive](../../../doc/space/point-grid-focus-2026-09-16/README.md).
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Line_Grid/blurb.md">Raw captured source</a></p><pre>What lets us return to the same place? A snapping sphere gives retained positions integer addresses; a walking recorder lets you move inside an interval or give its boundary a rhythm. Your released drawing returns at another scale. On a five-by-five plan, two indices can describe where a cube might stand.
+
+A shared address can help pieces meet and people find one another. It does not decide what should be built, who may enter, or whether a line will carry a body. Those possibilities need further work.
+</pre></section></body></html>

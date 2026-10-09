@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "array_flight_lab": {
+      "lookup_name": "array_flight_lab",
+      "name": "Fly into the third index",
+      "scene": "res://commons/artifacts/regularity/array_flight_lab.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        12,
+        14,
+        12
+      ],
+      "parameters": {
+        "footprint": [
+          12,
+          14,
+          12
+        ],
+        "size_group": "large"
+      },
+      "description": "64 familiar pickup cubes spaced 2.4m apart in the existing 12m Menger glass flight enclosure. X/Y/Z controls select a slot; collecting records zero without shifting its address.",
+      "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+    }
+  }
+}

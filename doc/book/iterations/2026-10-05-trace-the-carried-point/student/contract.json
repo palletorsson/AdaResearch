@@ -1,0 +1,866 @@
+{
+  "mode": "continuation_complete_script",
+  "lesson": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/tutorial.md",
+  "canonical_lesson": "commons/maps/Point_Trace/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/trace.gd",
+  "host": "The existing unit-scale PointStudy station in the prepared XR project; the full printed Lines renderer remains supplied.",
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/incoming.gd",
+    "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69",
+    "provenance": "The exact current, printed and verified Lines state, descended from student-built Point One and Coordinates."
+  },
+  "operations": [
+    {
+      "id": "sampling-distance",
+      "kind": "insert_after",
+      "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+      "text": "const MIN_SEGMENT_DISTANCE := 0.05\n"
+    },
+    {
+      "id": "history-state",
+      "kind": "replace",
+      "before": "var point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n",
+      "after": "var positions: Array[Vector3] = []\nvar trail: Node3D\n"
+    },
+    {
+      "id": "seed-instead-of-second-end",
+      "kind": "replace",
+      "before": "    point_b = point.duplicate() as XRToolsPickable\n    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n    add_child(point_b)\n\n    line = LineSkin.new()\n    add_child(line)\n",
+      "after": "    trail = Node3D.new()\n    add_child(trail)\n    positions.append(point.position)\n"
+    },
+    {
+      "id": "retain-and-join-neighbours",
+      "kind": "replace",
+      "before": "    var a := local_position\n    var b := to_local(point_b.global_position)\n    var displacement := b - a\n    distance = displacement.length()\n    line.show_segment(a, displacement, distance)\n    readout.text += \"\\nDISTANCE \" + str(distance)\n",
+      "after": "    var last := positions[positions.size() - 1]\n    if (local_position - last).length() >= MIN_SEGMENT_DISTANCE:\n        positions.append(local_position)\n\n        for segment in trail.get_children():\n            segment.queue_free()\n\n        for i in range(1, positions.size()):\n            var a := positions[i - 1]\n            var displacement := positions[i] - a\n            var segment := LineSkin.new()\n            trail.add_child(segment)\n            segment.show_segment(a, displacement, displacement.length())\n\n    readout.text += \"\\nPOINTS \" + str(positions.size())\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "role": "Complete printed supplied renderer, byte-identical to Lines."
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "ba2b77276e0cf7a2814b17128ff1dc7c84512aad6b14f29a9aaf57f22a22b411"
+    },
+    {
+      "path": "commons/maps/Point_Lines/tutorial.md",
+      "sha256": "463885db537ebb9a8b07b0d78ee988625c7c2a4be4c024b6ef2c89b50af817f9"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line.gd",
+      "sha256": "077b21a8e8d632da4d2690d40c0dc867351c05f666370fe6839b826c0af99d69"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/report-runtime.json",
+      "sha256": "c974f7d8a9161e9398a279a37e8c49f1c7dfc54ea67d93fb25125121018c30cd"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/tutorial.md",
+      "sha256": "38f1bf89931deefb8036d4f7a49d12d0113755b45f1d329e866d0c514012c10d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "carry/original_point",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Trace keeps the exact original Lines point geometry, pose, material defaults and pickup settings."
+    },
+    {
+      "id": "carry/one_body",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Trace deliberately removes the duplicate endpoint and keeps only the original sphere body."
+    },
+    {
+      "id": "carry/history_container",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "A station-local trail container replaces the former live two-point segment."
+    },
+    {
+      "id": "carry/typed_array",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The program retains positions in the printed typed Vector3 array."
+    },
+    {
+      "id": "carry/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The original station readout keeps its parent, placement and size."
+    },
+    {
+      "id": "seed/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "seed/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "seed/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "seed/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "seed/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "held/near_overlap",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Actual XR Tools overlap selects the retained original point."
+    },
+    {
+      "id": "held/pickup",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The real XR Tools pickup library holds the point."
+    },
+    {
+      "id": "sample/step_0.02/driver",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The real grab driver reaches the intended local sample position."
+    },
+    {
+      "id": "sample/step_0.02/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "sample/step_0.02/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "sample/step_0.02/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "sample/step_0.02/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "sample/step_0.02/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "sample/step_0.04/driver",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The real grab driver reaches the intended local sample position."
+    },
+    {
+      "id": "sample/step_0.04/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "sample/step_0.04/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "sample/step_0.04/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "sample/step_0.04/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "sample/step_0.04/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "sample/step_0.06/driver",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The real grab driver reaches the intended local sample position."
+    },
+    {
+      "id": "sample/step_0.06/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "sample/step_0.06/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "sample/step_0.06/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "sample/step_0.06/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "sample/step_0.06/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "pause/no_growth",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Remaining at one position adds no entries merely because frames pass."
+    },
+    {
+      "id": "pause/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "pause/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "pause/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "pause/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "pause/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "route/point_3/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "route/point_3/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "route/point_3/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "route/point_3/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "route/point_3/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "route/point_4/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "route/point_4/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "route/point_4/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "route/point_4/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "route/point_4/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "route/point_5/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "route/point_5/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "route/point_5/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "route/point_5/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "route/point_5/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "history/value_copy",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Moving the live point never changes the already retained Vector3 seed."
+    },
+    {
+      "id": "history/return_kept",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Returning to the start retains another ordered entry instead of erasing the detour."
+    },
+    {
+      "id": "held/original_resources",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Drawing moves the original sphere surface/collider and retains both resources."
+    },
+    {
+      "id": "release/stays",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Release restores collision settings and keeps the point fixed as the empty controller moves away."
+    },
+    {
+      "id": "release/history_stays",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Moving an empty controller does not grow the released point's retained history."
+    },
+    {
+      "id": "released/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "released/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "released/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "released/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "released/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "resume/keeps_history",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Picking up the original point again preserves the existing record."
+    },
+    {
+      "id": "resumed/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "resumed/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "resumed/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "resumed/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "resumed/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "resume/released",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Releasing after continuation keeps the point at the new retained position."
+    },
+    {
+      "id": "frame/local_point_stable",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Station translation and rotation change the world address while keeping the point's local position."
+    },
+    {
+      "id": "changed_frame/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "changed_frame/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "changed_frame/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "changed_frame/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "changed_frame/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "new_instance/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "new_instance/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "new_instance/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "new_instance/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "new_instance/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/baseline/step_0.06/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/baseline/step_0.06/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/baseline/step_0.06/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/baseline/step_0.06/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/baseline/step_0.06/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/baseline/step_0.12/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/baseline/step_0.12/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/baseline/step_0.12/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/baseline/step_0.12/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/baseline/step_0.12/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/baseline/step_0.24/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/baseline/step_0.24/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/baseline/step_0.24/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/baseline/step_0.24/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/baseline/step_0.24/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.06/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.06/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.06/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.06/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.06/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.12/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.12/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.12/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.12/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.12/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.24/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.24/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.24/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.24/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/threshold_020/step_0.24/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_2/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_2/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_2/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_2/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_2/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_3/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_3/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_3/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_3/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_3/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_4/retained_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The array contains exactly the accepted positions, including its initial seed."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_4/retained_values",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Retained vector values keep the expected local positions in drawing order."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_4/segment_count",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The neighbour loop creates exactly the intended number of visual segments."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_4/neighbour_endpoints",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "Every visible cylinder connects one consecutive retained pair in the station's frame with the correct length."
+    },
+    {
+      "id": "experiment/omit_last_pair/point_4/readout",
+      "kind": "native",
+      "action": "Execute the exact Trace continuation or printed exercise in native Godot.",
+      "expect": "The inherited live LOCAL/WORLD text remains correct and POINTS reports the retained count."
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Trace/tutorial.md",
+    "commons/maps/Point_Lines/tutorial.md",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line.gd",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/report-runtime.json",
+    "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/line_skin.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/run_checks.py",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/verify.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/incoming.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/trace.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/assembled.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/expected.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/line_skin.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/tutorial.md",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/next-input.json",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/exercise-variants.json",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/variants/threshold_020.gd",
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/variants/omit_last_pair.gd"
+  ],
+  "exercise_variants": {
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/variants/threshold_020.gd": {
+      "sha256": "a4a51e717280b37d32a688432fef8c10bd9d522f04af07568de028e5162eebe0",
+      "native_filename": "threshold_020.gd",
+      "edit": {
+        "id": "threshold_020",
+        "kind": "replace",
+        "before": "const MIN_SEGMENT_DISTANCE := 0.05\n",
+        "after": "const MIN_SEGMENT_DISTANCE := 0.20\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-trace-the-carried-point/student/variants/omit_last_pair.gd": {
+      "sha256": "29eae6df4594b6b27e5049826d35f7563a2f883658f460a2df783a9098c534d6",
+      "native_filename": "omit_last_pair.gd",
+      "edit": {
+        "id": "omit_last_pair",
+        "kind": "replace",
+        "before": "        for i in range(1, positions.size()):\n",
+        "after": "        for i in range(1, positions.size() - 1):\n"
+      }
+    }
+  },
+  "native_report": "doc/book/iterations/2026-10-05-trace-the-carried-point/student/report-runtime.json",
+  "printed_complete_script_equals_native_input": true,
+  "composed_equals_printed_complete_script": true,
+  "coordinate_contract": "Retained Vector3 values belong to the unit-scale station's local frame. The array lives in the running station only, with no timestamps, saved file or Grid transfer."
+}

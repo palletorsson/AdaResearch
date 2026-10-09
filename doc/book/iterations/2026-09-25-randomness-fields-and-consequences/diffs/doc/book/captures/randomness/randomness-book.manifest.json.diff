@@ -1,0 +1,49 @@
+--- before/doc/book/captures/randomness/randomness-book.manifest.json
++++ doc/book/captures/randomness/randomness-book.manifest.json
+@@ -1,6 +1,6 @@
+ {
+-  "captured_at": "2026-09-25T08:48:32.418723+00:00",
+-  "base_commit": "da1d05422c4dc62d53d7496fe73ba30861c8d181",
++  "captured_at": "2026-09-25T09:31:13.341314+00:00",
++  "base_commit": "5607f3ad3efbd8d575b0edb70c07afa6008ea65d",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+   "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+@@ -50,17 +50,17 @@
+     {
+       "map": "Random_Mushrooms",
+       "path": "commons/maps/Random_Mushrooms/final.md",
+-      "sha256": "20e14769eb14fabc814649f604974f73dcb2f5097b5e999a8fc7d6906d9124ef"
++      "sha256": "4dd782143a1fe5953230da9837a3eae0370b86fc8a680db4426e799a2f7da904"
+     },
+     {
+       "map": "Random_Space_Geometry",
+       "path": "commons/maps/Random_Space_Geometry/final.md",
+-      "sha256": "eff650918de11dba3a9d5ff20c1eede253428acaa486ff8d72f6d5b94c4dc9b4"
++      "sha256": "a1c6b125423fb29314b40c675295bb9a1441c62152430c192581d9873b4b9643"
+     },
+     {
+       "map": "Randomness_Examples_of_Randomness",
+       "path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+-      "sha256": "6079197b6948d6ca340c91363f14524fe057e63f62b816f4aca1fc26766aed12"
++      "sha256": "1696c987d0c44693128c4a3da594bedfdabbf32bbe518f9d73cb08c49cb45062"
+     },
+     {
+       "map": "Random_Pheromone",
+@@ -70,13 +70,13 @@
+     {
+       "map": "Random_Space",
+       "path": "commons/maps/Random_Space/final.md",
+-      "sha256": "b4e80de791aac355e329f9a110d6e65b6efa1ccc4208255c726500a0983aa642"
++      "sha256": "3750b3b7ea693fbfc2e8f1f766959afa3803fd1dd2e97bfa40edb89a2c008885"
+     },
+     {
+       "map": "Random_Game",
+       "path": "commons/maps/Random_Game/final.md",
+-      "sha256": "3656ca51bde4cd1b6782f89a043e1ddae13bcb5b7f8a54ad9b47178f064556e6"
++      "sha256": "5a3220a1f42de10c868851eaaaedb0fca9cc38cb18a7338027e18e14b84cc6a3"
+     }
+   ],
+-  "output_sha256": "95710c62cf9adda8bdf5b44e283a2887c3ee509672b4da73dc706821fb4583ac"
++  "output_sha256": "e341ea38d08d3b5198b99ca7da4d7975f240ff1419fb92de9461c0b321d8b3ee"
+ }

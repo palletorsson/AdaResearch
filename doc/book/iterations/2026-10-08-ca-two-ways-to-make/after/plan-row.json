@@ -1,0 +1,396 @@
+{
+  "museum": "neue-nationalgalerie-free-plan",
+  "open_roof": true,
+  "piers": false,
+  "gate": false,
+  "gate_depth_rows": 0,
+  "tile": [
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ]
+  ],
+  "h": 18,
+  "rooms": 0,
+  "artifacts": [
+    {
+      "token": "ca_rule_explorer",
+      "cell": [
+        3,
+        5
+      ],
+      "tile_cell": [
+        3,
+        5
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_AgentsCircuits",
+        "cell": [
+          3,
+          5
+        ]
+      },
+      "config": {
+        "study": "neighbours",
+        "rule": "90",
+        "plinth": "0",
+        "room": "comparison"
+      },
+      "offset": [
+        0.0,
+        1.04,
+        0.0
+      ]
+    },
+    {
+      "token": "film_ca_triplet",
+      "cell": [
+        11,
+        6
+      ],
+      "tile_cell": [
+        11,
+        6
+      ],
+      "rotation": 270,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_AgentsCircuits",
+        "cell": [
+          11,
+          6
+        ]
+      },
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "token": "sierpinski_pyramid",
+      "cell": [
+        9,
+        12
+      ],
+      "tile_cell": [
+        9,
+        12
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.25,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_AgentsCircuits",
+        "cell": [
+          9,
+          12
+        ]
+      },
+      "config": {
+        "plinth": "0.25"
+      },
+      "scale": 0.42
+    }
+  ],
+  "rejected": [],
+  "room": {
+    "w": 13,
+    "h": 18
+  },
+  "apron": 0,
+  "interior_count": 182,
+  "ordered": true,
+  "pages": [],
+  "sequence": "cellularautomata",
+  "pearl": "ca agentscircuits",
+  "pearl_index": 6,
+  "map": "CA_AgentsCircuits",
+  "pearls_total": 8,
+  "authored": "map",
+  "source": "em_map_halls: the map IS the hall",
+  "_ruling": {
+    "src_w": 13,
+    "src_h": 18,
+    "rotated": false,
+    "pad": 0,
+    "pad_closed": false,
+    "ring": null
+  },
+  "dressing": "piers: refused by map_info.museum.piers (bare map kept open)"
+}

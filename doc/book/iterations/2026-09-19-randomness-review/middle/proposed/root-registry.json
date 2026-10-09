@@ -1,0 +1,32 @@
+[
+  {
+    "path": "commons/artifacts/registry/commons_artifacts.json",
+    "keys": [
+      "artifacts",
+      "random_walk_terrarium",
+      "description"
+    ],
+    "old": "Five random walkers in a reflecting glass tank: fixed-length 2D/3D proposals or bounded power-law LEVY steps. The default tail keeps 200 previous positions; the optional logbook stand exposes the named seed, two clocks and ONE/ALL visual emphasis.",
+    "new": "Five random walkers in a reflecting glass tank: fixed-length 2D/3D proposals or bounded inverse-square-root LONG STEP proposals. The legacy LEVY_FLIGHT enum remains compatible. A 200-position tail and optional logbook expose the named seed, two clocks and ONE/ALL emphasis."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "random_decay_multimesh",
+      "description"
+    ],
+    "old": "Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.",
+    "new": "Two MultiMesh stacks accumulate bounded drift, rotation, sinking and darkening at different configured rates. Both use fixed one-metre specimen units by default. Optional stack_fit fits both complete displays to a given width with a common geometry scale, a 0.6m gap and floor-aligned initial faces; controls retain full size. TOGGLE preserves the ramp clock; RESET restarts it."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "silhouette_arrivals",
+      "description"
+    ],
+    "old": "Seeded sampling of six places and independently sampled silhouette dress. Bounded non-hostile arrivals with replay.",
+    "new": "Seeded sampling without replacement fills six authored places. DRESS resamples the wardrobe; FORMS switches branching instructions while retaining its dress seed. Both leave arrival order unchanged; REPLAY restores that order. Flat billboard figures gain different outlines, not locomotion."
+  }
+]

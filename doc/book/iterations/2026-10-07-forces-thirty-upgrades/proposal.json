@@ -1,0 +1,1585 @@
+{
+  "title": "The point gains power: thirty upgrades for Vectors & Forces",
+  "date": "2026-10-07",
+  "status": "Design proposal only; current thirteen-hall order retained. No runtime, tutorial.md or final.md changes. Source inspection is not a runtime test.",
+  "premise": "You bring the familiar point into a wing where you first describe a movement, then influence a body, and finally work with the consequences left in the room. Each apparatus makes a promise you can test. The same point can arrive precisely, miss, or leave a situation worth using next.",
+  "compression": "SAME POINT + SAME CUBE. 13 core lessons + 12 practice + 5 optional extensions. PROMISE → PREDICT → RELEASE → REVEAL → RESIDUE. Describe → influence → work with what happened. Keep quantity/frame/receiver exact. Retain aftermath with explicit recovery. Invite observation; preserve agency. Verify rules, not a required catastrophe.",
+  "acts": [
+    {
+      "title": "I. Describe the journey",
+      "halls": [
+        1,
+        2,
+        3
+      ],
+      "ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "story": "The point is familiar. What changes is how you describe its relation to another place. You learn to preserve a direction, combine a route and decide which part of a gap matters."
+    },
+    {
+      "title": "II. Give the point motion",
+      "halls": [
+        4,
+        5
+      ],
+      "ids": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "story": "A predicted arc reaches across the room. Then the point keeps a velocity after your command ends. The same object becomes a thruster; now you must learn how to arrive."
+    },
+    {
+      "title": "III. Meet the room",
+      "halls": [
+        6,
+        7
+      ],
+      "ids": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "story": "The room has its own conditions. Identical arrows produce different receiver responses. Surfaces resist, channels guide and a released point continues beyond the apparatus."
+    },
+    {
+      "title": "IV. Let one event reach another",
+      "halls": [
+        8,
+        9
+      ],
+      "ids": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "story": "A spring returns the point. Another body receives its movement. Cycles can align or drift, and the conveyor makes delay accumulate into an altered room."
+    },
+    {
+      "title": "V. Other bodies answer",
+      "halls": [
+        10,
+        11
+      ],
+      "ids": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "story": "Attraction affects more than a nominated target. A source may also move; a support may cease to support. The student encounters bodies with their own conditions of stability."
+    },
+    {
+      "title": "VI. Make another way through",
+      "halls": [
+        12,
+        13
+      ],
+      "ids": [
+        29,
+        30
+      ],
+      "story": "A deflection opens a passage and leaves the obstacle somewhere else. The final task asks the student to use learned operations and the actual remaining arrangement. Work with what happened becomes an independent capacity, with several valid solutions."
+    }
+  ],
+  "halls": [
+    {
+      "order": 1,
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "title": "A relation I can carry",
+      "tutorial_summary": "Revisit the point and line. Move both endpoints together, then change their separation. The learner distinguishes a position, a displacement and its displayed arrow; a unit direction becomes available for later aiming.",
+      "reflection_question": "What survives when a relation moves?",
+      "ideas": [
+        1,
+        2
+      ]
+    },
+    {
+      "order": 2,
+      "map": "VFM_02_Operations",
+      "title": "One destination, more than one journey",
+      "tutorial_summary": "Join two displacements using the familiar point. Compare the resultant with the travelled route, then make another route to the same place. This prepares addition of compatible velocity or force contributions without treating them as the same quantity.",
+      "reflection_question": "What does a destination omit?",
+      "ideas": [
+        3,
+        4
+      ]
+    },
+    {
+      "order": 3,
+      "map": "Vectors_Act2_VectorArithmetic",
+      "title": "What part of the relation matters?",
+      "tutorial_summary": "Use a moving target to construct a gap, compare directions, and resolve the gap along a rail plus a remainder. Keep projection as the main code lesson. Dot-product aiming is a return; the lever is a preview whose physical dynamics arrive later.",
+      "reflection_question": "Who decides which component counts?",
+      "ideas": [
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "order": 4,
+      "map": "VFM_05_Launch",
+      "title": "A prediction crosses the room",
+      "tutorial_summary": "Give the point an initial velocity and compare the predicted path with a chosen receiver. Use the already supplied trajectory runner; name gravity and starting conditions without teaching an entire solver. A launch-pad crossing lets the player experience the same trajectory idea.",
+      "reflection_question": "What did the prediction assume about arrival?",
+      "ideas": [
+        9,
+        10
+      ]
+    },
+    {
+      "order": 5,
+      "map": "VFM_03_Motion",
+      "title": "The point keeps moving",
+      "tutorial_summary": "Continue with an actual dynamic point. Apply a finite force, release it, brake it, and compare masses. The new lesson is retained velocity under force. Two held points then reuse normalization and addition to provide the agreed thrust ability.",
+      "reflection_question": "What continues after the command ends?",
+      "ideas": [
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "order": 6,
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "title": "The room answers",
+      "tutorial_summary": "Give two receivers the same spatial vector: one takes it as velocity, the other as acceleration. Reuse the point's state instead of replacing it with a fresh particle system. The vortex combines radial and tangential contributions as practice.",
+      "reflection_question": "Does an arrow command a speed or change it?",
+      "ideas": [
+        14,
+        15
+      ]
+    },
+    {
+      "order": 7,
+      "map": "Vectors_Act4a_KineticForces",
+      "title": "Contact changes the journey",
+      "tutorial_summary": "Carry the moving point into contact and resistance. Keep velocity-dependent drag as the new code lesson; use friction, an incline and a transparent curved channel as controlled comparisons. Make each model's constraints visible before adding spectacle.",
+      "reflection_question": "Which histories does a model keep or erase?",
+      "ideas": [
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "order": 8,
+      "map": "Vectors_Act4b_Oscillation",
+      "title": "A relation pulls back",
+      "tutorial_summary": "Attach the point to a visible anchor. Extend it and release; compare return and damping while retaining velocity. Colliding spring balls and a hinged bridge are applications or optional joint studies, not prerequisites for understanding the spring.",
+      "reflection_question": "What happens when the place of return can move?",
+      "ideas": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "order": 9,
+      "map": "Change_Choreography",
+      "title": "One cycle changes the next",
+      "tutorial_summary": "Reuse a known movement to make two cycles meet. Separate phase from rate in the small lesson, then use the conveyor's input and receiver rates to make accumulation visible. A robot-arm duet is an optional interpretation with supplied controllers.",
+      "reflection_question": "Can two successful tasks prevent a shared result?",
+      "ideas": [
+        23,
+        24
+      ]
+    },
+    {
+      "order": 10,
+      "map": "VFM_07_Gravity",
+      "title": "The source is also a body",
+      "tutorial_summary": "Upgrade the familiar point into a bounded attractor. Begin with one target, then compare a held source with a released source receiving the opposite interaction force. A three-body comparison is an optional later experiment.",
+      "reflection_question": "What was being supported while the source looked fixed?",
+      "ideas": [
+        25,
+        26
+      ]
+    },
+    {
+      "order": 11,
+      "map": "VFM_09_Legs",
+      "title": "A body needs support",
+      "tutorial_summary": "Place the known cube on finite supports; shift its mass distribution and release it. Make the static balance prediction and its limits explicit. The four-legged character is a supplied extension, whose commanded gait must not be mistaken for physical balance.",
+      "reflection_question": "Which capacities does a body need to remain here?",
+      "ideas": [
+        27,
+        28
+      ]
+    },
+    {
+      "order": 12,
+      "map": "VFM_08_Arena",
+      "title": "Other bodies have conditions",
+      "tutorial_summary": "Use the point's projectile to redirect a dynamic target, with selection and occlusion shown separately from collision response. Reuse known impulse and momentum; the new lesson is the receiver's eligibility and state. A bowling layout offers a quiet practice version.",
+      "reflection_question": "Must making a passage mean destroying a body?",
+      "ideas": [
+        29
+      ]
+    },
+    {
+      "order": 13,
+      "map": "Vectors_Act5_ForceAsPlace",
+      "title": "The experiment becomes a place",
+      "tutorial_summary": "Deliver the point through a local acceleration field using the available tools. First compare the same field's cube and visitor adapters; then compose launch, brake, guide and support. The student chooses a route and explains its consequences.",
+      "reflection_question": "What can we do with the room we have changed?",
+      "ideas": [
+        30
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "id": 1,
+      "title": "The arrow you can carry",
+      "role": "core",
+      "hall": "Vectors_Act1_WhatAVectorIs",
+      "question": "Does the relation change when both points move?",
+      "upgrade": "Use the familiar black point as the movable endpoint. A paired handle shifts both ends; the arrow and two wall projections follow. Recall the unit-direction operation; idea 2 isolates it as practice.",
+      "learning_elements": [
+        "Displacement",
+        "Reference frame",
+        "Magnitude",
+        "Direction normalization (revisited)"
+      ],
+      "carried_forward": "Point, coordinates and line.",
+      "precision": "Both endpoints translate together while their difference remains unchanged.",
+      "possible_consequence": "A wall projection can shrink although the three-dimensional gap stays the same.",
+      "source_paths": [
+        "algorithms/vectors/01_vector_basics/VectorBasics.gd"
+      ],
+      "source_status": "The hall already has the room-reading vector and projection study.",
+      "implementation_work": "Add recognizable point handles and one shared displacement readout; preserve the existing geometry model.",
+      "acceptance_check": "Translate both ends by the same offset and assert equal displacement; verify a changed gap and declared display scale.",
+      "requires": [],
+      "dramaturgy": {
+        "promise": "Carry this relation elsewhere.",
+        "prediction": "Will its length survive moving both ends?",
+        "release": "Finish a paired translation; leave both points at their new positions.",
+        "reveal": "The same difference appears at another location.",
+        "residue": "Keep a ghost of the original pair and the relocated pair for comparison.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 2,
+      "title": "Aim without changing strength",
+      "role": "practice",
+      "hall": "Vectors_Act1_WhatAVectorIs",
+      "question": "Can a longer pointing gesture keep the same direction?",
+      "upgrade": "Pair the long displacement arrow with a unit arrow carried by the same point. Change length, then direction; at coincident endpoints show no available direction.",
+      "learning_elements": [
+        "Normalization",
+        "Direction versus magnitude",
+        "Zero-vector policy"
+      ],
+      "carried_forward": "A direction reused by aiming and thrust.",
+      "precision": "Long and short nonzero gaps produce the same unit direction.",
+      "possible_consequence": "Coincident points cannot supply a direction; a visible threshold prevents an invented aim.",
+      "source_paths": [
+        "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd"
+      ],
+      "source_status": "The normalization study already uses a 0.001 magnitude threshold and reference sphere/rings.",
+      "implementation_work": "Connect the familiar point input; retain and disclose that threshold rather than silently changing it.",
+      "acceptance_check": "Above threshold, unit length and collinearity; at/below threshold, documented zero result.",
+      "requires": [
+        1
+      ],
+      "dramaturgy": {
+        "promise": "Keep the aim while changing the gesture.",
+        "prediction": "Will doubling the gap double the unit arrow?",
+        "release": "Set a length, then stop adjusting.",
+        "reveal": "The direction agrees while the unit magnitude stays fixed; coincident points expose the threshold.",
+        "residue": "Retain one long and one short input beside their unit directions.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 3,
+      "title": "Two moves deliver one point",
+      "role": "core",
+      "hall": "VFM_02_Operations",
+      "question": "Where do these two movements take it?",
+      "upgrade": "Extend vector_addition_walk into a delivery diagram: two placed displacement arrows carry the point to a marked plinth. Reveal the single resultant.",
+      "learning_elements": [
+        "Vector addition",
+        "Head-to-tail construction",
+        "Compatible quantities"
+      ],
+      "carried_forward": "The same endpoint and displacement values.",
+      "precision": "Two legs end at origin plus a plus b.",
+      "possible_consequence": "A reversed contribution changes the destination; the cancelled route may still have travelled a distance.",
+      "source_paths": [
+        "commons/artifacts/vector_addition_walk/vector_addition_walk.gd",
+        "commons/artifacts/vector_op_console/vector_op_console.gd"
+      ],
+      "source_status": "Walked and console addition studies exist.",
+      "implementation_work": "Add destination/route comparison around their arithmetic; this remains prescribed displacement, not force simulation.",
+      "acceptance_check": "Assert endpoint equals origin+a+b, including opposing inputs; label units as metres.",
+      "requires": [
+        1
+      ],
+      "dramaturgy": {
+        "promise": "Deliver the point with two instructions.",
+        "prediction": "Mark where two arrows together will end.",
+        "release": "Commit the two prescribed displacements.",
+        "reveal": "The point reaches the sum, including a return to its start when contributions cancel.",
+        "residue": "Keep both route legs and their resultant; label this prescribed movement.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 4,
+      "title": "Same arrival, different journey",
+      "role": "practice",
+      "hall": "VFM_02_Operations",
+      "question": "Can two routes finish together and still differ?",
+      "upgrade": "Save two short routes for the point, both ending on the same plinth. Keep their traces, lengths and encountered obstacles beside the shared resultant.",
+      "learning_elements": [
+        "Displacement versus path length",
+        "Ordered samples"
+      ],
+      "carried_forward": "Trace records and the sum from the previous encounter.",
+      "precision": "Two different routes agree on final displacement.",
+      "possible_consequence": "One passes behind a screen or crosses an occupied space; a shared result does not promise the same experience.",
+      "source_paths": [
+        "commons/artifacts/vector_addition_walk/vector_addition_walk.gd"
+      ],
+      "source_status": "The installed addition route already distinguishes travelled distance from the result.",
+      "implementation_work": "Reuse the Trace sample contract for a second bounded route; no automatic cross-hall persistence is assumed.",
+      "acceptance_check": "Compare equal endpoints, distinct recorded paths and summed segment lengths.",
+      "requires": [
+        3
+      ],
+      "dramaturgy": {
+        "promise": "Find another way to the same place.",
+        "prediction": "Will equal destinations mean equal journeys?",
+        "release": "Commit the second recorded route.",
+        "reveal": "The endpoints coincide while route lengths and intermediate positions differ.",
+        "residue": "Preserve both bounded traces.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 5,
+      "title": "The target moved",
+      "role": "practice",
+      "hall": "Vectors_Act2_VectorArithmetic",
+      "question": "What remains between the point and its destination?",
+      "upgrade": "Continue the shared gap room with the familiar point and a movable target cup. Moving either updates target minus source; swap them to reverse the gap.",
+      "learning_elements": [
+        "Vector subtraction",
+        "Relative position"
+      ],
+      "carried_forward": "The same two positions, later used by attraction.",
+      "precision": "The arrow reaches the target from the source.",
+      "possible_consequence": "Moving the destination changes the instruction even though the point has not moved.",
+      "source_paths": [
+        "commons/artifacts/vector_op_console/gap_projection_room.gd"
+      ],
+      "source_status": "A bounded room_gap station and shared gap/projection data already exist.",
+      "implementation_work": "Restyle endpoints as the carried point and receiver; keep the existing bounds visible.",
+      "acceptance_check": "Subtract, swap, coincide and shift both ends; assert sign and translation invariance.",
+      "requires": [
+        1,
+        3
+      ],
+      "dramaturgy": {
+        "promise": "Reach the cup that has moved.",
+        "prediction": "Predict the new gap before revealing its arrow.",
+        "release": "Place the cup and stop editing.",
+        "reveal": "The gap changes; moving both endpoints together leaves it unchanged.",
+        "residue": "Keep the earlier gap as a labelled comparison, not a second active command.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 6,
+      "title": "The rail keeps only part",
+      "role": "core",
+      "hall": "Vectors_Act2_VectorArithmetic",
+      "question": "How much of this gap lies along the rail?",
+      "upgrade": "Make the projection station a small delivery rail. Show the point's along-rail destination and leave the perpendicular remainder visible as a second line.",
+      "learning_elements": [
+        "Target minus source",
+        "Signed dot product",
+        "Projection",
+        "Perpendicular remainder"
+      ],
+      "carried_forward": "The gap from the previous encounter.",
+      "precision": "Along component plus remainder recovers the original gap.",
+      "possible_consequence": "A point on the rail can be as close as this rule permits and still miss the target.",
+      "source_paths": [
+        "commons/artifacts/vector_op_console/gap_projection_room.gd",
+        "commons/artifacts/projection_shadow/projection_shadow.gd"
+      ],
+      "source_status": "The installed room_projection already exposes a unit rail, retained component and remainder.",
+      "implementation_work": "Add a clear receiver at the projected position; treat the rail as a geometric constraint here.",
+      "acceptance_check": "Assert recombination and perpendicular remainder, including reversed rail and zero gap.",
+      "requires": [
+        1,
+        3
+      ],
+      "dramaturgy": {
+        "promise": "Bring the point as close as this rail permits.",
+        "prediction": "Choose the place on the rail you think will be nearest.",
+        "release": "Commit a rail direction and reveal the projection.",
+        "reveal": "An along-rail result leaves a visible perpendicular remainder.",
+        "residue": "Retain the gap, its component and its remainder together.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 7,
+      "title": "The receiver is looking elsewhere",
+      "role": "practice",
+      "hall": "Vectors_Act2_VectorArithmetic",
+      "question": "Is the point inside the receiver's cone of attention?",
+      "upgrade": "Replace the dot_aligner's implied combat with an aimable receiver and a visible acceptance cone. Put the point ahead, sideways and behind before trying a threshold.",
+      "learning_elements": [
+        "Normalized dot product",
+        "Angular threshold",
+        "Selection rule"
+      ],
+      "carried_forward": "Unit directions and signed dot.",
+      "precision": "A clearly aligned point is accepted.",
+      "possible_consequence": "The nearest point can remain outside the receiver's chosen direction.",
+      "source_paths": [
+        "commons/artifacts/dot_aligner/dot_aligner.gd"
+      ],
+      "source_status": "DotAligner renders angular cases and a slider-driven classification; it is not a verified moving sensor.",
+      "implementation_work": "Add actual point/controller directions and a declared threshold; keep distance and occlusion separate.",
+      "acceptance_check": "Check dot values for parallel, perpendicular and opposing directions, plus threshold boundaries.",
+      "requires": [
+        2,
+        5,
+        6
+      ],
+      "dramaturgy": {
+        "promise": "Let the receiver recognise your point.",
+        "prediction": "Predict acceptance at the edge of its cone.",
+        "release": "Hold one aim and commit a sensor sample.",
+        "reveal": "Acceptance follows the declared angle threshold; near does not necessarily mean eligible.",
+        "residue": "Keep the sampled directions and decision until the next trial.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 8,
+      "title": "Where you push will matter",
+      "role": "extension",
+      "hall": "Vectors_Act2_VectorArithmetic",
+      "question": "Which applied direction can turn this lever?",
+      "upgrade": "Keep torque_crank as a geometric preview. Move the indicated application point and direction; compare parallel and perpendicular cases, then mark its later hinge return.",
+      "learning_elements": [
+        "Cross product",
+        "Lever arm",
+        "Torque direction"
+      ],
+      "carried_forward": "The relation r cross F, reused with real dynamics later.",
+      "precision": "The preview identifies the same moment from a long weak and short strong push.",
+      "possible_consequence": "Pushing along the lever can show zero moment despite a large force magnitude.",
+      "source_paths": [
+        "commons/artifacts/torque_crank/torque_crank.gd"
+      ],
+      "source_status": "Current crank is a static angular-factor diagram with generated readouts, not measured rotational dynamics.",
+      "implementation_work": "Improve the preview labels now; physical hinge response belongs to idea 22 after Motion.",
+      "acceptance_check": "Verify vector cross-product direction and zero parallel moment; do not test a rendered angle as an angular acceleration.",
+      "requires": [
+        6,
+        7
+      ],
+      "dramaturgy": {
+        "promise": "Choose a push that could turn the lever.",
+        "prediction": "Compare along-arm and across-arm directions.",
+        "release": "Commit one geometric comparison; no dynamic release is claimed.",
+        "reveal": "The displayed cross product distinguishes moments, not measured angular acceleration.",
+        "residue": "Keep the two force/arm diagrams for their later physical return.",
+        "mode": "geometric commitment"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 9,
+      "title": "The cup across the room",
+      "role": "core",
+      "hall": "VFM_05_Launch",
+      "question": "Will this initial velocity reach the receiver?",
+      "upgrade": "Keep the launch chamber's analytic predictor and place a cup at its proposed landing. Reuse the point appearance; compare high and low paths before enabling a physical trial variant.",
+      "learning_elements": [
+        "Initial velocity",
+        "Constant acceleration",
+        "Trajectory assumptions"
+      ],
+      "carried_forward": "The direction, magnitude and saved trace.",
+      "precision": "A trial with matching declared assumptions reaches the predicted neighbourhood.",
+      "possible_consequence": "An intervening ring contact changes the physical flight beyond the collision-free prediction.",
+      "source_paths": [
+        "commons/artifacts/launch_arc/launch_chamber.gd",
+        "commons/artifacts/catapult/catapult.gd"
+      ],
+      "source_status": "An analytic launch chamber and separate catapult artifacts exist; their matching is not yet verified.",
+      "implementation_work": "Build a controlled comparison with matched initial state and gravity. Full force accumulation is explained in Motion.",
+      "acceptance_check": "Check sampled trajectory and landing height; compare a no-contact dynamic trial within a declared integration tolerance.",
+      "requires": [
+        1,
+        3,
+        6
+      ],
+      "dramaturgy": {
+        "promise": "Land the point in the cup.",
+        "prediction": "Mark the expected landing before launch.",
+        "release": "Launch from the declared initial velocity; the collision-free predictor stays visible.",
+        "reveal": "A clean arrival agrees with the model; a ring collision introduces a condition absent from it.",
+        "residue": "Keep the actual resting point and a bounded predicted/observed trace comparison.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 10,
+      "title": "Your body follows the arc",
+      "role": "practice",
+      "hall": "VFM_05_Launch",
+      "question": "Can you land where you sent the point?",
+      "upgrade": "Put a short launch-pad course beside the sphere trial: generous platforms first, poles over the existing void only as an optional challenge.",
+      "learning_elements": [
+        "Launch state",
+        "Ballistic motion",
+        "Landing velocity"
+      ],
+      "carried_forward": "The known launch setting applied through the player adapter.",
+      "precision": "A clear launch and landing complete the crossing.",
+      "possible_consequence": "The correct destination with excessive arrival speed carries the body onward.",
+      "source_paths": [
+        "commons/artifacts/force_pad/force_pad.gd",
+        "commons/artifacts/human_catapult/human_catapult.gd"
+      ],
+      "source_status": "Player launch artifacts exist; receiver behavior differs from the analytic point.",
+      "implementation_work": "Declare whether each pad sets launch velocity or adds impulse; one activation per entry; desktop/VR adapter and landing checks.",
+      "acceptance_check": "Assert the chosen launch policy and re-entry behavior; test collisions and a recoverable landing before the void.",
+      "requires": [
+        9
+      ],
+      "dramaturgy": {
+        "promise": "Land where the point landed.",
+        "prediction": "Judge arrival velocity as well as the destination.",
+        "release": "Enter the pad; keep ordinary player controls and the declared launch behavior.",
+        "reveal": "A measured arrival stays; an overshoot may continue beyond the correct landing position.",
+        "residue": "Keep the landing/flight trace when feasible; recover the player explicitly after a fall.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 11,
+      "title": "Let go of the command",
+      "role": "core",
+      "hall": "VFM_03_Motion",
+      "question": "Does the point stop when the push stops?",
+      "upgrade": "Upgrade motion_chamber with the familiar point beside its cube. PUSH, COAST and BRAKE retain their distinct meanings; a visible trail records the result.",
+      "learning_elements": [
+        "Force",
+        "Mass and acceleration",
+        "Retained velocity",
+        "Engine integration"
+      ],
+      "carried_forward": "One dynamic point, later used for thrust and targets.",
+      "precision": "A timed push followed by braking stops near the chosen mark.",
+      "possible_consequence": "COAST leaves velocity; the point can pass its intended destination.",
+      "source_paths": [
+        "algorithms/vectors/08_vector_motion/motion_chamber.gd"
+      ],
+      "source_status": "A real RigidBody3D pulse/coast/brake chamber exists with private collision layers and a bounded trail.",
+      "implementation_work": "Add a same-contract sphere receiver; preserve the isolated baseline before opening it to room props.",
+      "acceptance_check": "Off contact and without damping, compare delta-v to F*t/m; COAST retains velocity; BRAKE opposes it without an authored overshoot.",
+      "requires": [
+        3,
+        9
+      ],
+      "dramaturgy": {
+        "promise": "Bring the point to the mark.",
+        "prediction": "Predict what will continue after the force pulse ends.",
+        "release": "Let the timed push expire, or choose COAST.",
+        "reveal": "Velocity remains; braking is a further intervention.",
+        "residue": "Keep the point's state and bounded trail until a deliberate reset.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 12,
+      "title": "Same push, different body",
+      "role": "practice",
+      "hall": "VFM_03_Motion",
+      "question": "Which body changes its velocity most?",
+      "upgrade": "Give equal-sized point receivers different explicitly labelled masses. Apply the same timed force and compare velocities before comparing collisions.",
+      "learning_elements": [
+        "F=ma",
+        "Controlled comparison",
+        "Mass versus visual size"
+      ],
+      "carried_forward": "The force scheduler and receiver from Motion.",
+      "precision": "The measured velocity change follows the selected mass.",
+      "possible_consequence": "A visually identical point is harder to accelerate because an invisible parameter differs.",
+      "source_paths": [
+        "algorithms/vectors/08_vector_motion/motion_chamber.gd",
+        "algorithms/forces/example_2_2_forces_mass_variation_vr.gd"
+      ],
+      "source_status": "Motion already cycles 1/2/4 kg; an additional mass study exists.",
+      "implementation_work": "Use Motion's actual receiver for side-by-side comparison; keep damping and contacts controlled.",
+      "acceptance_check": "Hold force/duration constant; test inverse mass response. Do not suggest heavier objects fall faster under common gravitational acceleration.",
+      "requires": [
+        11
+      ],
+      "dramaturgy": {
+        "promise": "Give both points the same opportunity.",
+        "prediction": "Predict which equal-looking mass changes velocity more.",
+        "release": "Apply equal timed forces under matched conditions.",
+        "reveal": "Different masses acquire different velocity changes.",
+        "residue": "Keep the two trials and their declared mass/force values.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 13,
+      "title": "Two points can carry you",
+      "role": "practice",
+      "hall": "VFM_03_Motion",
+      "question": "Can two hands give you one controlled flight?",
+      "upgrade": "Continue the point as a thruster in each hand. Aim down/back and press triggers to rise/advance; change one hand, release both, then counter-thrust to land.",
+      "learning_elements": [
+        "Vector sum of forces",
+        "Sustained thrust",
+        "Counter-thrust"
+      ],
+      "carried_forward": "The familiar point becomes a reusable player ability.",
+      "precision": "Balanced contributions produce an intended approach and landing.",
+      "possible_consequence": "Releasing one hand changes the sum; releasing both leaves motion and gravity.",
+      "source_paths": [
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd",
+        "commons/artifacts/force_field_zone/field_carry_provider.gd"
+      ],
+      "source_status": "Catalyst and XR receiver adapter exist; dual-point flight is still proposed.",
+      "implementation_work": "One movement owner sums both inputs. Define mass/gravity/strength and a separate firing mode; resolve catalyst auto-return explicitly.",
+      "acceptance_check": "Each release removes only that input; no duplicate integration or velocity reset; compare desktop and synthetic XR before headset validation.",
+      "requires": [
+        2,
+        3,
+        11,
+        12
+      ],
+      "dramaturgy": {
+        "promise": "Reach the ledge with the points in your hands.",
+        "prediction": "Predict the sum of the two thrust directions.",
+        "release": "Release one or both triggers; steering and counter-thrust remain available.",
+        "reveal": "The contribution ends while motion and gravity continue.",
+        "residue": "Retain the approach trace and settings; player recovery never depends on watching a cinematic.",
+        "mode": "continuing agency"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 14,
+      "title": "Same arrows, different journeys",
+      "role": "core",
+      "hall": "Vectors_Act3_FieldsAndMotion",
+      "question": "What does this receiver do with the field?",
+      "upgrade": "Give two familiar points the same sampled field. One assigns velocity; the other receives acceleration into its retained velocity. Let the student switch the receiving rule.",
+      "learning_elements": [
+        "Field sampling",
+        "Assignment versus accumulation",
+        "State update"
+      ],
+      "carried_forward": "The same point state and vector arithmetic.",
+      "precision": "Both trajectories match their declared update rules.",
+      "possible_consequence": "Identical field arrows produce different paths because the receivers keep different state.",
+      "source_paths": [
+        "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd"
+      ],
+      "source_status": "The hall already compares two receiver contracts.",
+      "implementation_work": "Replace anonymous display particles with a small recognizable pair; reuse the same bounded field sample.",
+      "acceptance_check": "Feed equal field values; assert velocity assignment on one and velocity increment on the other, including zero field.",
+      "requires": [
+        11
+      ],
+      "dramaturgy": {
+        "promise": "Send two points through one field.",
+        "prediction": "Predict whether identical arrows imply identical paths.",
+        "release": "Start both receivers from the declared state.",
+        "reveal": "Assignment and accumulation produce their respective journeys.",
+        "residue": "Keep paired trails and the receiver-rule labels.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 15,
+      "title": "The drain becomes an orbit",
+      "role": "practice",
+      "hall": "Vectors_Act3_FieldsAndMotion",
+      "question": "Will gathering the point bring it to the centre?",
+      "upgrade": "Begin with one sphere and a radial attraction; add a tangential contribution. Then release a few loose cubes and let entry speed change the result.",
+      "learning_elements": [
+        "Radial and tangential vectors",
+        "Force superposition",
+        "Incoming velocity"
+      ],
+      "carried_forward": "Direction, addition and an acceleration receiver.",
+      "precision": "A chosen field carries a point toward its receiver or into a sustained circulating path.",
+      "possible_consequence": "A collecting rule can produce circulation or congestion instead of arrival.",
+      "source_paths": [
+        "commons/artifacts/force_vortex/force_vortex.gd",
+        "commons/artifacts/force_field_zone/force_field_zone.gd"
+      ],
+      "source_status": "The installed vortex replaces player velocity; it cannot yet substantiate this acceleration-based encounter.",
+      "implementation_work": "Make an explicit new additive variant; begin with loose points, then connect the player after matching contracts.",
+      "acceptance_check": "Bound the centre term; preserve incoming velocity; verify each contribution separately and zero contribution on exit.",
+      "requires": [
+        2,
+        3,
+        14
+      ],
+      "dramaturgy": {
+        "promise": "Gather the point into the basin.",
+        "prediction": "Predict the effect of adding a sideways contribution.",
+        "release": "Release the point into the additive field; the field control remains usable.",
+        "reveal": "It may approach, circulate or crowd with other bodies; stability is not guaranteed.",
+        "residue": "Leave the circulating/resting arrangement inspectable within a visible body bound.",
+        "mode": "continuing agency"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 16,
+      "title": "The tray refuses to move",
+      "role": "practice",
+      "hall": "Vectors_Act4a_KineticForces",
+      "question": "How much of the applied push reaches movement?",
+      "upgrade": "Return to friction_ramp beside a small movable tray. Compare an increasing push on a level surface, then a changed incline; keep the original simplified model labelled.",
+      "learning_elements": [
+        "Static threshold",
+        "Sliding friction",
+        "Normal contact"
+      ],
+      "carried_forward": "The same cube and force schedule.",
+      "precision": "A deliberate change crosses the starting threshold and permits delivery.",
+      "possible_consequence": "A stuck tray can release and travel farther than expected; stopping is another task.",
+      "source_paths": [
+        "commons/artifacts/friction_ramp/friction_ramp.gd"
+      ],
+      "source_status": "Existing ramp is a prescribed one-axis scalar model with immediate static stop and end reset.",
+      "implementation_work": "Add a separate physical tray comparison; do not silently present the old ramp as a full static/kinetic contact model.",
+      "acceptance_check": "Measure onset and post-release behavior for the declared model; check that a damping change is not mislabelled friction.",
+      "requires": [
+        11,
+        12
+      ],
+      "dramaturgy": {
+        "promise": "Slide the tray to its place.",
+        "prediction": "Estimate the push needed to begin movement.",
+        "release": "Apply the selected force schedule; removing a hold and removing force are distinct controls.",
+        "reveal": "The tray stays, starts, or overshoots according to the contact model and force duration.",
+        "residue": "Keep the final tray position; an optional drawn path is a recorded trace, not simulated abrasion.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 17,
+      "title": "The room takes speed away",
+      "role": "core",
+      "hall": "Vectors_Act4a_KineticForces",
+      "question": "Why do equal starts finish differently?",
+      "upgrade": "Use drag_corridor's existing rigid receivers with matching initial speed. Give the point the same drag law, then use the mower as an optional signed-work comparison.",
+      "learning_elements": [
+        "Velocity-dependent drag",
+        "Coefficient",
+        "Mass response"
+      ],
+      "carried_forward": "The inherited velocity state and force application.",
+      "precision": "A chosen resistance produces a repeatable slowdown.",
+      "possible_consequence": "Equal initial speed does not guarantee equal distance; reversing motion reverses drag.",
+      "source_paths": [
+        "commons/artifacts/drag_corridor/kinetic_drag.gd",
+        "commons/artifacts/force_mower/force_mower.gd"
+      ],
+      "source_status": "Physical drag study exists. Mower reports configured nominal work, not measured hand effort.",
+      "implementation_work": "Carry the point into the existing drag runner; keep work as a labelled side comparison rather than a second compulsory lesson.",
+      "acceptance_check": "For linear drag, force opposes velocity and vanishes at rest; compare damping and contact settings explicitly.",
+      "requires": [
+        11,
+        14
+      ],
+      "dramaturgy": {
+        "promise": "Stop the point in the receiving strip.",
+        "prediction": "Predict the slowdown from the chosen drag coefficient.",
+        "release": "Release equal-speed receivers into matched lanes.",
+        "reveal": "Resistance changes the journey; drag reverses when velocity reverses.",
+        "residue": "Retain stopping positions and bounded velocity histories.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 18,
+      "title": "Slide, roll or tip?",
+      "role": "extension",
+      "hall": "Vectors_Act4a_KineticForces",
+      "question": "Does changing one constraint change the race?",
+      "upgrade": "Build a shallow incline comparison from the wedge/ramp family. First release the same body with rotation locked and free; only then compare the sphere and cube.",
+      "learning_elements": [
+        "Angular freedom",
+        "Friction",
+        "Shape and contact"
+      ],
+      "carried_forward": "The familiar bodies and controlled experiment.",
+      "precision": "A chosen constraint/shape produces an expected mode of movement.",
+      "possible_consequence": "A cube catches an edge and tips, changing the contact that determined its path.",
+      "source_paths": [
+        "commons/artifacts/friction_ramp/friction_ramp.gd",
+        "commons/artifacts/torque_crank/torque_crank.gd"
+      ],
+      "source_status": "Ramp and torque studies supply concepts; a coupled rigid-body roll/slide comparison is new.",
+      "implementation_work": "Create a short physical lane with visible lock state and matched initial conditions; no scripted winner.",
+      "acceptance_check": "Verify lock/free cases and measured angular velocity; change one factor at a time before comparing shapes.",
+      "requires": [
+        8,
+        11,
+        16
+      ],
+      "dramaturgy": {
+        "promise": "Choose a body that reaches its receiver.",
+        "prediction": "Predict locked-rotation and free-rotation trials before comparing shapes.",
+        "release": "Release the same body on the same incline.",
+        "reveal": "Slide, roll or tip follows the declared contact and angular constraints.",
+        "residue": "Keep final orientations and trial settings, not an invented permanent deformation.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 19,
+      "title": "Where the pipe lets go",
+      "role": "practice",
+      "hall": "Vectors_Act4a_KineticForces",
+      "question": "Does the point keep curving after the guide ends?",
+      "upgrade": "Return the point to a transparent curved channel. A declared launch sends it around the bend; move a cup to predict its departure.",
+      "learning_elements": [
+        "Contact constraint",
+        "Tangential departure",
+        "Gravity after release"
+      ],
+      "carried_forward": "The launch point and current velocity.",
+      "precision": "The cup receives the sphere after it leaves the channel.",
+      "possible_consequence": "The receiver placed along an imagined continuing curve misses the free path.",
+      "source_paths": [
+        "commons/artifacts/centrifuge_ring/centrifuge_ring.gd",
+        "commons/artifacts/launch_arc/launch_chamber.gd"
+      ],
+      "source_status": "The ring currently prescribes circular motion; it is not a free contact-driven pipe.",
+      "implementation_work": "Build actual segmented channel colliders and a visible outlet; compare with the prescribed ring rather than replacing it covertly.",
+      "acceptance_check": "Check collisions inside the curve and velocity direction at departure; no position snapping after exit.",
+      "requires": [
+        9,
+        11,
+        17
+      ],
+      "dramaturgy": {
+        "promise": "Catch the point leaving the transparent curve.",
+        "prediction": "Place the cup where you expect the outgoing path.",
+        "release": "Launch into the channel, then watch its outlet.",
+        "reveal": "The channel guides through contact; departure follows current velocity and gravity.",
+        "residue": "Keep the point where it lands and its outlet trace; do not snap it back to the curve.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 20,
+      "title": "The point returns",
+      "role": "core",
+      "hall": "Vectors_Act4b_Oscillation",
+      "question": "What makes it come back, and what makes it settle?",
+      "upgrade": "Continue spring_tower with the familiar point on a visible spring. Change rest length or stiffness, release from a chosen extension, then compare damping.",
+      "learning_elements": [
+        "Restoring force",
+        "Rest length",
+        "Damping",
+        "Equilibrium"
+      ],
+      "carried_forward": "The point's velocity and force accumulator.",
+      "precision": "A chosen displacement produces a readable return that settles under damping.",
+      "possible_consequence": "The point passes the resting position because restoring force does not erase velocity.",
+      "source_paths": [
+        "commons/artifacts/spring_tower/restoring_forces.gd"
+      ],
+      "source_status": "An explicit one-axis spring-damper study and grab handle exist.",
+      "implementation_work": "Preserve the minimal one-axis lesson; spatial tether becomes practice after this verified baseline.",
+      "acceptance_check": "Test force sign about rest, zero restoring force at rest, retained velocity and energy loss under damping.",
+      "requires": [
+        11,
+        17
+      ],
+      "dramaturgy": {
+        "promise": "Bring the stretched point home.",
+        "prediction": "Predict whether it will stop at the rest position.",
+        "release": "Release the grabbed handle without erasing velocity.",
+        "reveal": "It may pass equilibrium and return again, depending on damping.",
+        "residue": "Leave the actual moving/settled state and a bounded displacement trace.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 21,
+      "title": "The second spring answers",
+      "role": "practice",
+      "hall": "Vectors_Act4b_Oscillation",
+      "question": "Will the returning point strike its neighbour?",
+      "upgrade": "Place two spring-mounted points close enough to collide. Adjust spacing and release only one; later compare fixed versus movable anchors.",
+      "learning_elements": [
+        "Coupled consequences",
+        "Contact transfer",
+        "Dynamic anchors"
+      ],
+      "carried_forward": "The spring law and the same point receiver.",
+      "precision": "A timed collision transfers motion in an intelligible rhythm.",
+      "possible_consequence": "A slight spacing change creates a miss, an extra collision or a changed return.",
+      "source_paths": [
+        "commons/artifacts/spring_tower/restoring_forces.gd",
+        "algorithms/physicssimulation/springsystem/spring_system.gd"
+      ],
+      "source_status": "Spring references exist; free contact-coupled receivers and dynamic anchors need construction.",
+      "implementation_work": "Keep spring force and collision integration owned once; apply opposite spring response to a dynamic anchor.",
+      "acceptance_check": "Verify isolated spring behavior before coupling; check contact, finite forces and anchor response without requiring a particular comic ending.",
+      "requires": [
+        20
+      ],
+      "dramaturgy": {
+        "promise": "Let one returning point reach the other.",
+        "prediction": "Predict a hit or miss from the spacing.",
+        "release": "Release one stored spring extension.",
+        "reveal": "Contact can transfer motion or a miss can leave the neighbour quiet.",
+        "residue": "Keep both oscillator states and their contact history; no tangled knot is promised without a supported rope model.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 22,
+      "title": "A pole becomes your bridge",
+      "role": "extension",
+      "hall": "Vectors_Act4b_Oscillation",
+      "question": "Where will the free end meet the ground?",
+      "upgrade": "Upgrade the existing hinge family into a falling pole with a visible pivot and stop. Release it toward a receiver; a slider latch can hold or release it in a later variant.",
+      "learning_elements": [
+        "Hinge axis",
+        "Limits",
+        "Torque and support"
+      ],
+      "carried_forward": "The geometric lever relation becomes physical.",
+      "precision": "The pole settles on a support and makes a crossing.",
+      "possible_consequence": "A poorly chosen stop leaves it short or knocks a loose support aside.",
+      "source_paths": [
+        "algorithms/joint/03_hinge_crank/HingeCrank.gd",
+        "algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.gd",
+        "algorithms/joint/04_slider_press/SliderPress.gd"
+      ],
+      "source_status": "Hinge and slider demos exist; inspected crank/drawbridge scripts set target speed without enabling their motors.",
+      "implementation_work": "Verify motor flags, axes and limits first; begin with passive gravity-driven hinge release. Slider is supplied optional apparatus.",
+      "acceptance_check": "Assert allowed/blocked rotation, stable contact at support and usable reset. Motor-enabled behavior must be tested separately from passive swing.",
+      "requires": [
+        8,
+        11,
+        18
+      ],
+      "dramaturgy": {
+        "promise": "Make a bridge with one falling pole.",
+        "prediction": "Mark where its free end should meet the support.",
+        "release": "Release the passive hinge latch.",
+        "reveal": "The pole settles on support, stops short, or displaces a loose receiver.",
+        "residue": "Retain the actual bridge or obstruction; keep another usable route and explicit reset.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 23,
+      "title": "Two cycles try to meet",
+      "role": "core",
+      "hall": "Change_Choreography",
+      "question": "Is the gap between them fixed, or growing?",
+      "upgrade": "Use paired_time/phase rods to time a moving cup against a release gate. Adjust phase alone, then rate alone. A two-robot-arm exchange is an optional theatrical version.",
+      "learning_elements": [
+        "Phase",
+        "Period",
+        "Relative rate"
+      ],
+      "carried_forward": "Known motion and named state.",
+      "precision": "Matched rate and chosen offset produce repeated successful handoffs.",
+      "possible_consequence": "A small rate mismatch turns an initially perfect handoff into a later miss.",
+      "source_paths": [
+        "commons/artifacts/spine_studies/paired_time.gd",
+        "commons/artifacts/timing_machines/phase_rod_array.gd",
+        "commons/artifacts/robot_arm/robot_arm.gd"
+      ],
+      "source_status": "Paired time and rods exist; robot arms are posed props without the proposed transfer controllers.",
+      "implementation_work": "Keep the two-cycle comparison small. Add a cup/gate receiver; supply rather than teach robot kinematics here.",
+      "acceptance_check": "At equal rates verify constant phase difference; at unequal rates verify drift; reset clock and offset independently.",
+      "requires": [
+        9,
+        20
+      ],
+      "dramaturgy": {
+        "promise": "Make two cycles meet again.",
+        "prediction": "Predict whether a phase offset stays fixed or drifts.",
+        "release": "Start the two declared clocks.",
+        "reveal": "Equal rates retain their offset; a rate mismatch changes later handoffs.",
+        "residue": "Keep phase/rate history and missed receiver positions. A robot-arm duet remains supplied optional apparatus.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 24,
+      "title": "The conveyor remembers the delay",
+      "role": "practice",
+      "hall": "Change_Choreography",
+      "question": "Can the receiver keep up?",
+      "upgrade": "Return the familiar cubes to the existing conveyor. Pause the receiver briefly, restart it at equal rate, then increase its rate and compare the retained backlog.",
+      "learning_elements": [
+        "Input/output rate",
+        "Accumulation",
+        "State through time"
+      ],
+      "carried_forward": "The earlier cube, loops and timing.",
+      "precision": "A receiver faster than input clears the stored excess.",
+      "possible_consequence": "Matching rates after the pause stops further growth but does not automatically erase the backlog.",
+      "source_paths": [
+        "commons/artifacts/timing_machines/conveyor_backlog.gd",
+        "commons/artifacts/cube_sorting_line/cube_sorting_line.gd"
+      ],
+      "source_status": "Actual rigid-box conveyors exist with finite-body and stored-stock policies.",
+      "implementation_work": "Expose feed/receive counts and the visible capacity bound; preserve accumulation between edits.",
+      "acceptance_check": "Track stock accounting, compare rates and test reset; do not imply infinite active bodies or assert an exact avalanche shape.",
+      "requires": [
+        11,
+        23
+      ],
+      "dramaturgy": {
+        "promise": "Keep the receiver supplied.",
+        "prediction": "Predict the backlog after a pause and equal-rate restart.",
+        "release": "Start the feed, pause the receiver, then resume it.",
+        "reveal": "Equal rates stop additional growth; excess stock remains until outflow exceeds inflow.",
+        "residue": "Retain actual boxes and accounted stored stock; show capacity and recovery instead of silently deleting a jam.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 25,
+      "title": "The point retrieves more than you asked",
+      "role": "core",
+      "hall": "VFM_07_Gravity",
+      "question": "Does the source know which object you wanted?",
+      "upgrade": "Extend the held attracting point with explicit range and receiver filtering. Put a wanted sphere beside a useful loose doorstop, then compare held and freely responding sources.",
+      "learning_elements": [
+        "Pair forces",
+        "Receiver eligibility",
+        "Equal and opposite response"
+      ],
+      "carried_forward": "The point becomes a bounded attraction tool.",
+      "precision": "A declared filter retrieves the intended receiver.",
+      "possible_consequence": "An unfiltered source can also remove a support; freeing the source lets both bodies move.",
+      "source_paths": [
+        "commons/primitives/point/interactive_point_origin_force.gd"
+      ],
+      "source_status": "Held point already queries rigid bodies and applies bounded central force; reciprocal free-source version requires verification.",
+      "implementation_work": "Make source policy explicit, add a target/filter comparison and a simple mutual-response variant.",
+      "acceptance_check": "Test filter/range and bounded near-source force; free pairs receive opposite forces while accelerations depend on mass; release retains velocity.",
+      "requires": [
+        1,
+        6,
+        11
+      ],
+      "dramaturgy": {
+        "promise": "Retrieve the sphere you want.",
+        "prediction": "Name every receiver that lies within the rule.",
+        "release": "Engage then release bounded attraction.",
+        "reveal": "The chosen filter determines what moves; an eligible doorstop can change support elsewhere.",
+        "residue": "Keep the displaced supports and objects. They are a cluster of bodies, not automatically fused geometry.",
+        "mode": "continuing agency"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 26,
+      "title": "Three bodies, two beginnings",
+      "role": "extension",
+      "hall": "VFM_07_Gravity",
+      "question": "How long do nearby starts remain close?",
+      "upgrade": "Return the attraction law as two small three-body experiments with trails. Change one initial velocity slightly; include an organised reference as well as a sensitive case.",
+      "learning_elements": [
+        "Pair accumulation",
+        "Initial conditions",
+        "Sensitivity versus integration error"
+      ],
+      "carried_forward": "The shared attraction law and Trace.",
+      "precision": "A chosen reference maintains its expected organisation within the model's tolerance.",
+      "possible_consequence": "Another initial state changes the partnership or sends a body outward.",
+      "source_paths": [
+        "algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd"
+      ],
+      "source_status": "Three-body scene already contains several starting configurations and trails.",
+      "implementation_work": "Provide side-by-side bounded replay; preserve parameters and distinguish physical-model behavior from timestep error.",
+      "acceptance_check": "Repeat identical starts; compare timesteps before claiming sensitive dynamics. Do not label every orbit chaotic.",
+      "requires": [
+        25
+      ],
+      "dramaturgy": {
+        "promise": "Compare two nearly identical beginnings.",
+        "prediction": "Predict how long their traces remain near.",
+        "release": "Start deterministic trials with one declared perturbation.",
+        "reveal": "A chosen case diverges or stays organised; compare integration error before interpreting it.",
+        "residue": "Keep bounded paired trajectories and initial-state values, with explicit boundary recovery.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 27,
+      "title": "Take away one support",
+      "role": "core",
+      "hall": "VFM_09_Legs",
+      "question": "Which part can you remove while it still stands?",
+      "upgrade": "Use support_polygon_lab with the familiar cube as load. Shift the mass marker, remove one support and predict before release; preserve the fallen arrangement.",
+      "learning_elements": [
+        "Support region",
+        "Mass projection",
+        "Static balance limits"
+      ],
+      "carried_forward": "The cube, gravity and the lever relation.",
+      "precision": "A supported configuration stays upright.",
+      "possible_consequence": "A changed support or mass position causes a tilt that can create a ramp or obstruction.",
+      "source_paths": [
+        "commons/artifacts/support_polygon_lab/support_polygon_lab.gd"
+      ],
+      "source_status": "An actual rigid load, finite supports and static-hull forecast exist.",
+      "implementation_work": "Make the goal a small supported display; retain aftermath and distinguish initial static prediction from dynamic stability.",
+      "acceptance_check": "Test centre and shifted load cases, removed supports and measured tilt; do not treat a hull test as a general gait guarantee.",
+      "requires": [
+        11,
+        25
+      ],
+      "dramaturgy": {
+        "promise": "Keep the display standing.",
+        "prediction": "Choose the support to remove and predict stability.",
+        "release": "Remove that support and release the load.",
+        "reveal": "The body stays, tilts, or falls under the actual contact conditions.",
+        "residue": "Leave the fallen body as a potential ramp or obstruction; retain safe access to the next hall.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 28,
+      "title": "The dog must brace before it fires",
+      "role": "extension",
+      "hall": "VFM_09_Legs",
+      "question": "What supports its action?",
+      "upgrade": "Use the four-legged walker as a supplied character. First show planted feet and declared firing state; later compare a verified physical brace/load rig with its commanded gait.",
+      "learning_elements": [
+        "Support versus commanded pose",
+        "Stateful action",
+        "Optional recoil"
+      ],
+      "carried_forward": "Known support and impulse concepts.",
+      "precision": "A braced action is legible and leaves a route for the player.",
+      "possible_consequence": "A changed support interrupts a declared firing condition; a future physical variant can respond to recoil.",
+      "source_paths": [
+        "commons/hazards/octapod_crawler/four_leg_critter.gd"
+      ],
+      "source_status": "Existing gait is commanded movement plus IK, not a self-balancing rigid-body dog; weapon and physical reaction are new.",
+      "implementation_work": "Stage implementation: visible support states, supplied character behavior, then tested dynamics. Do not require a robot controller tutorial.",
+      "acceptance_check": "Assert telegraphed state transitions and declared support criterion; claim physical recoil only after a dynamic receiver test.",
+      "requires": [
+        27
+      ],
+      "dramaturgy": {
+        "promise": "Watch a body prepare to act.",
+        "prediction": "Predict whether its declared support state permits firing.",
+        "release": "Let the supplied action cycle run; movement remains available.",
+        "reveal": "The state permits or interrupts the action; physical recoil requires the separate dynamic implementation.",
+        "residue": "Retain the action/support log. Do not present commanded pose as the physical history of a balancing robot.",
+        "mode": "continuing agency"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 29,
+      "title": "Make a passage with one shot",
+      "role": "core",
+      "hall": "VFM_08_Arena",
+      "question": "Can you redirect what blocks your way?",
+      "upgrade": "Let the point catalyst fire at one dynamic obstructing body. Show target eligibility and occlusion before the shot; let the impact change motion. A bowling arrangement reuses this receiver as practice.",
+      "learning_elements": [
+        "Eligibility and occlusion",
+        "Interaction states",
+        "Impulse received once"
+      ],
+      "carried_forward": "The same point, aiming rule and dynamic-body contract.",
+      "precision": "A measured deflection opens the passage.",
+      "possible_consequence": "The obstacle moves into a different position; a stronger shot can create another obstruction.",
+      "source_paths": [
+        "commons/artifacts/arena_relation_lab/arena_relation_lab.gd",
+        "commons/artifacts/collision_carts/collision_carts.gd",
+        "algorithms/forces/games/force_bowling_vr.gd",
+        "commons/artifacts/ignorance_gallery/resolution_catalyst.gd"
+      ],
+      "source_status": "Arena has explicit selection/state but commanded motion; collision carts are analytic, bowling uses custom Mover. None alone proves a dynamic impulse target.",
+      "implementation_work": "Add one real receiver first; keep sensing, scripted agency and physical response separate. Extend into bowling only after contact checks.",
+      "acceptance_check": "Occluders block selection; one collision applies one declared impulse; motion is retained after the event. Reset restores a known baseline.",
+      "requires": [
+        6,
+        11,
+        25
+      ],
+      "dramaturgy": {
+        "promise": "Open a passage with one shot.",
+        "prediction": "Choose a direction and predict the target's new position.",
+        "release": "Fire once at the eligible dynamic receiver.",
+        "reveal": "The impulse redirects it; a stronger shot may relocate the obstruction.",
+        "residue": "Keep displaced targets in the room so another approach remains possible.",
+        "mode": "physical or clocked trial"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    },
+    {
+      "id": 30,
+      "title": "Deliver it through the room you changed",
+      "role": "core",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "question": "Can your learned abilities make another route?",
+      "upgrade": "Upgrade force_as_place into a bounded delivery room. Compare local acceleration on the point/cube and the player, then choose among launch, thrust, spring, support or a repaired conveyor path.",
+      "learning_elements": [
+        "Field membership",
+        "Receiver adapters",
+        "Composition and transfer"
+      ],
+      "carried_forward": "Point, cube, vector operations and the abilities built through the sequence.",
+      "precision": "The student delivers the point and explains which operations made the route possible.",
+      "possible_consequence": "A missed delivery leaves a usable ramp, moving receiver or blocked path that can be incorporated into another attempt.",
+      "source_paths": [
+        "commons/artifacts/force_field_zone/force_field_zone.gd",
+        "commons/artifacts/force_field_zone/field_carry_provider.gd",
+        "commons/artifacts/force_cube/force_cube.gd",
+        "commons/artifacts/vector_machine/vector_machine.gd"
+      ],
+      "source_status": "The opt-in room already has cube/desktop/XR field adapters with different exit contracts. A coherent delivery task and retained tool state are proposed.",
+      "implementation_work": "Start with a small selection of verified tools; declare field entry/exit, per-body integration owner and intentional cross-hall state transfer. Keep the existing passage usable.",
+      "acceptance_check": "Verify each adapter separately, retained entry velocity, zero-field behavior and documented exit. Accept multiple solutions; test rules and reset rather than a required ending.",
+      "requires": [
+        9,
+        11,
+        14,
+        17,
+        20,
+        23,
+        25,
+        27,
+        29
+      ],
+      "dramaturgy": {
+        "promise": "Deliver the point through the room you changed.",
+        "prediction": "Choose a route using known tools and the current aftermath.",
+        "release": "Commit an action and stay free to intervene or take another route.",
+        "reveal": "A delivery can succeed; a miss may create a useful next configuration.",
+        "residue": "Work with the actual retained arrangement. Clearing an encounter is deliberate; cross-hall records require explicit persistence.",
+        "mode": "continuing agency"
+      },
+      "future_dramaturgy_check": "Check that the intended goal and decisive event are visible, compare at least one baseline success and one lawful alternative, retain the declared evidence, and verify the specified recovery. Do not require a particular failure or disable general player control."
+    }
+  ],
+  "ground_rules": [
+    "Preserve the identity/look of PointBody and the inherited cube. Extend behavior where compatible; do not claim that current independent artifacts already share one runtime instance.",
+    "Declare the state handed between halls: body configuration, learned tool modes and selected trace/experiment records. Implement the transport explicitly; do not assume live nodes survive a map unload.",
+    "Every visible arrow names its quantity and frame: displacement in m, velocity in m/s, acceleration in m/s², force in N. Compatible quantities may be added; their types are not interchangeable.",
+    "Opening mathematical models can be prescribed geometry. Label them; compare with physical receivers only after defining the different contracts.",
+    "One owner integrates each body. Never add a custom velocity/position integration on top of a Godot rigid-body solver that already advances the same state.",
+    "Keep player camera orientation level and separate tracked motion from software propulsion. Physical headset comfort remains a later test, not guaranteed by desktop assertions.",
+    "Give each core tutorial one rebuildable focus and print its complete changed code plus an exact reference to inherited code. Core success includes an independent changed example.",
+    "Reflection asks what a rule retains, excludes or makes possible. It need not explain every museum artifact; optional apparatus can remain outside both written tracks.",
+    "Do not stage numerical failure as evidence of a force. Tunnelling, unstable joints and fake deformation are not substitutes for a tested mechanical relation.",
+    "Leave aftermath inspectable, with an explicit reset. Bound active bodies and reveal that capacity; a test must not demand a specific collapse.",
+    "Noise, flocking, fluid pressure, cloth, robot inverse kinematics and physical quadruped locomotion remain later topics or supplied systems.",
+    "The thirteen core lessons depend on earlier core knowledge. Practice provides additional attempts; extension concepts are never prerequisites for the core route. Listed idea dependencies are knowledge/behavior dependencies, not a promise of shared runtime code today.",
+    "Use the dramaturgy rules for release, observation and residue. They are proposed interaction contracts; historical traces and live bodies are not silently assumed to survive a hall unload."
+  ],
+  "delivery": [
+    {
+      "phase": "1. Confirm the spine of the lesson",
+      "ids": [
+        1,
+        3,
+        6,
+        9,
+        11,
+        14,
+        17,
+        20,
+        23,
+        25,
+        27,
+        29,
+        30
+      ],
+      "detail": "One agreed paragraph and reconstructable lesson per existing hall. Review the abstract/analytic/physical distinction before expanding full code."
+    },
+    {
+      "phase": "2. Build one continuous point",
+      "ids": [
+        9,
+        11,
+        13
+      ],
+      "detail": "Establish the dynamic point and selected persistence contract, verify launch versus force, then implement the approved two-hand thrust in the existing museum."
+    },
+    {
+      "phase": "3. Make consequences observable",
+      "ids": [
+        15,
+        19,
+        20,
+        21,
+        24,
+        29
+      ],
+      "detail": "Upgrade one field, one channel, one spring pair, the conveyor and one target; each has a baseline success and a retained aftermath."
+    },
+    {
+      "phase": "4. Add optional apparatus selectively",
+      "ids": [
+        8,
+        18,
+        22,
+        26,
+        28
+      ],
+      "detail": "Choose extension specimens after the core route works. They must not become prerequisites for finishing the basic force tutorial."
+    }
+  ],
+  "verification": "Future mechanism and dramaturgy checks are specified per idea but not run. Proposal checks cover completeness, the unchanged role/hall/dependency structure, five beats per idea, source existence, protected-file hashes and report links. No claim of human comprehension, runtime physics or headset testing.",
+  "references": [
+    {
+      "title": "The Nature of Code — Vectors",
+      "url": "https://natureofcode.com/vectors/",
+      "use": "Reference progression for displacement, vector operations, motion and acceleration; Ada's apparatus are original proposals."
+    },
+    {
+      "title": "The Nature of Code — Forces",
+      "url": "https://natureofcode.com/forces/",
+      "use": "Reference for force accumulation, mass, resistance and attraction; no claim that it excludes unintended consequences."
+    },
+    {
+      "title": "Godot — RigidBody3D",
+      "url": "https://docs.godotengine.org/en/stable/classes/class_rigidbody3d.html",
+      "use": "Integration ownership and the distinction between continuous force and one-off impulse."
+    }
+  ],
+  "revision": {
+    "date": "2026-10-07",
+    "name": "Work with what happened",
+    "source": "feedback-source.txt",
+    "scope": "Dramaturgy and proposal presentation only. Before-version retained in before-dramaturgy/. Hall order, roles, lesson dependencies and runtime are unchanged."
+  },
+  "dramatic_arc": [
+    {
+      "attitude": "I can describe it",
+      "halls": [
+        1,
+        2,
+        3
+      ],
+      "space": "Clear work surfaces, paired points and a visible destination. Keep comparisons beside each other; commit a prediction without pretending a diagram is physics.",
+      "change": "The student learns what an operation preserves and what it leaves out."
+    },
+    {
+      "attitude": "I can influence what happens",
+      "halls": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "space": "Apparatus extend into the room. Keep the launch, contact and receiver visible together. Return the same point as a projectile, thruster and spring-bound body.",
+      "change": "Release exposes the gap between issuing an instruction and deciding the outcome."
+    },
+    {
+      "attitude": "I can work with what happened",
+      "halls": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "space": "Accumulation, displaced supports and earlier trial traces remain visible. Offer clear routes through an altered laboratory; history must be saved explicitly when halls unload.",
+      "change": "The student chooses another use for the remaining arrangement, including a precise successful one."
+    }
+  ],
+  "dramaturgy_rules": [
+    "Promise → prediction → release → reveal → residue. These are design beats, not compulsory screens, dialogue or timed steps.",
+    "Keep the goal and decisive contact within a readable view; subtle cases may need optional arrows, a trace or a replay. Do not assume an uncaptioned viewer can understand every force.",
+    "For a small physical trial, aim for a readable 5–20 second reveal where appropriate. Setup, reflection, continuous flight and orbit studies have no universal time limit.",
+    "Release means an action has consequences that continue. It does not mean disabling locomotion, grabbing, counter-thrust or emergency recovery. Let natural travel time create the pause.",
+    "In the opening geometry halls, release is committing a comparison or prescribed route. Do not manufacture a physics event to satisfy the five-beat template.",
+    "Preserve aftermath by default when a trial ends in a miss or jam. Separate deliberate artifact reset from player respawn, lost-object recovery and finite simulation capacity; disclose recovery and retain evidence where feasible.",
+    "Residue is first an actual arrangement, remaining motion, configuration or bounded recorded trace. Dents, abrasion, torn material, fused bodies and tangled rope require separately implemented receiver models.",
+    "Mathematical predictions remain conditional. A collision outside a collision-free launch model changes the conditions; it does not refute the model.",
+    "Spatial spectacle and tutorial role are separate. The optional hinged bridge can be a major encounter without becoming a prerequisite for the core course.",
+    "Promise and precision stay credible: show a baseline success, not a machine rigged to collapse. Test mechanisms, records and recovery; do not assert an exact gag as the learning outcome."
+  ],
+  "major_scenes": [
+    {
+      "title": "The launch meets its receiver",
+      "ideas": [
+        9
+      ],
+      "decisive_view": "Launcher, optional ring and cup in one view; preserve the predicted arc beside the physical result."
+    },
+    {
+      "title": "A landing is not a stop",
+      "ideas": [
+        10
+      ],
+      "decisive_view": "Show the landing surface and the space beyond it, with a recoverable first trial before the optional void."
+    },
+    {
+      "title": "Collection becomes circulation",
+      "ideas": [
+        15
+      ],
+      "decisive_view": "A shallow visible basin makes the radial and tangential outcomes distinguishable."
+    },
+    {
+      "title": "The tray crosses its threshold",
+      "ideas": [
+        16
+      ],
+      "decisive_view": "Keep the target mark and final tray position visible; disclose continued force rather than relying on a scripted burst."
+    },
+    {
+      "title": "The curve ends",
+      "ideas": [
+        19
+      ],
+      "decisive_view": "A transparent outlet reveals the last guiding contact and the free path to the cup."
+    },
+    {
+      "title": "The pole finds its support",
+      "ideas": [
+        22
+      ],
+      "decisive_view": "Show pivot, stop, free end and receiver together. This remains an optional extension."
+    },
+    {
+      "title": "The interruption remains",
+      "ideas": [
+        24
+      ],
+      "decisive_view": "Receiver and growing stock must be seen together; show the finite capacity rather than unlimited spawning."
+    },
+    {
+      "title": "Retrieval changes something elsewhere",
+      "ideas": [
+        25
+      ],
+      "decisive_view": "Place the wanted sphere and eligible support within a discoverable relationship; do not hide the cause for a cheap surprise."
+    },
+    {
+      "title": "The fallen body becomes architecture",
+      "ideas": [
+        27
+      ],
+      "decisive_view": "Show support removal, the falling load and the resulting usable or blocked passage."
+    },
+    {
+      "title": "Work with what happened",
+      "ideas": [
+        29,
+        30
+      ],
+      "decisive_view": "The displaced obstruction persists into the next attempt within the final encounter; carry between halls only through an explicit saved state."
+    }
+  ],
+  "feedback_decisions": [
+    {
+      "decision": "Adopt",
+      "topic": "Five-beat encounter grammar",
+      "reason": "Added concrete promise, prediction, release, reveal and residue to all thirty cards; geometry remains geometric."
+    },
+    {
+      "decision": "Adopt",
+      "topic": "An explicit change in the student's attitude",
+      "reason": "Added three attitudes across the existing thirteen halls, with spatial consequences. Kept the six-part teaching route and all role/dependency decisions."
+    },
+    {
+      "decision": "Adopt",
+      "topic": "Ten prominent physical scenes",
+      "reason": "Marked ten scene groups using eleven existing idea IDs. Visual prominence does not promote the optional bridge into a core lesson."
+    },
+    {
+      "decision": "Adapt",
+      "topic": "Never reset automatically",
+      "reason": "Preserve inspectable aftermath by default, with declared exceptions for player recovery, lost objects and capacity. Do not promise infinite state or prevent an exit."
+    },
+    {
+      "decision": "Adapt",
+      "topic": "The player cannot intervene",
+      "reason": "Invite a pause through flight time, distance and clear view. Keep movement and available corrective actions; interruption becomes another recorded cause."
+    },
+    {
+      "decision": "Adapt",
+      "topic": "Every event manufactures a damaged artifact",
+      "reason": "Begin with actual arrangements, motion and recorded paths. A friction trail is not abrasion, two oscillators are not automatically a knot, and a cluster is not a fused mesh."
+    },
+    {
+      "decision": "Adapt",
+      "topic": "Every scene reads silently in 5–20 seconds",
+      "reason": "Use it as a target for simple physical reveals, not a hard timing, accessibility or comprehension claim for every lesson."
+    },
+    {
+      "decision": "Keep",
+      "topic": "Physical and pedagogical exactness",
+      "reason": "Precision and lawful alternative outcomes both count. Separate model limits, selected conditions and numerical errors. Tutorial code reconstructs one focus; reflection can follow the aftermath."
+    }
+  ]
+}

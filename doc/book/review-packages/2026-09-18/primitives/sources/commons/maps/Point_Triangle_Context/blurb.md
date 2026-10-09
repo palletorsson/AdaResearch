@@ -1,0 +1,1 @@
+Three edges meet. The middle stays empty until you ask the machine to show a face. Then draw your own outline and begin it again from another corner. The boundary stays put; the fill may stray beyond it. What did the program add, and which of its decisions would you keep?

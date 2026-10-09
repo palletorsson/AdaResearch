@@ -1,0 +1,34 @@
+{
+  "map": "Point_Lines",
+  "status": "author_review_pilot",
+  "inherits": [
+    "Point Zero: variables, ready/process, Label3D, str()",
+    "Point One: position and marker construction",
+    "Coordinates: common reference frame and supplied hold"
+  ],
+  "introduces": [
+    "two positions in one frame",
+    "vector subtraction returns a displacement",
+    "length() returns a float distance",
+    "const/preload name supplied scripts",
+    "two-decimal string formatting displays a measured value"
+  ],
+  "supplied": [
+    "PointHandle: XR Tools pickup and frozen release",
+    "Segment: midpoint, orientation, radius and near-zero handling",
+    "Day Zero room, light and player"
+  ],
+  "learner_actions": [
+    "change one coordinate",
+    "turn without lengthening",
+    "reverse displacement",
+    "hold and move an endpoint",
+    "coincide and separate endpoints",
+    "compare identical endpoints after a detour"
+  ],
+  "next": "Trace: retain the positions in between",
+  "coordinates_rewrite_pending": true,
+  "printed_code_matches_download": true,
+  "source_sha256": "b9cb2ff8a7e5cdc010feb904751e7efef526a92938d5d26d7e5e5617f01bf5b4",
+  "physical_headset_tested": false
+}

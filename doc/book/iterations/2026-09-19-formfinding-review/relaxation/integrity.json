@@ -1,0 +1,32 @@
+{
+  "checks": [
+    {
+      "assertion": "current production matches accepted capture: commons/artifacts/verlet_workbench/verlet_workbench.gd",
+      "pass": true
+    },
+    {
+      "assertion": "current production matches accepted capture: commons/maps/FormFinding_Relaxation/map_data.json",
+      "pass": true
+    },
+    {
+      "assertion": "only map change is opt-in token at(6,2)",
+      "pass": true
+    },
+    {
+      "assertion": "workbench before/after camera exactly matches",
+      "pass": true
+    },
+    {
+      "assertion": "accepted current run passes25checks",
+      "pass": true
+    },
+    {
+      "assertion": "legacy replay differs only by removing global class registration",
+      "pass": true
+    }
+  ],
+  "production_sha256": {
+    "commons/artifacts/verlet_workbench/verlet_workbench.gd": "93a6e7690f1b1b2ea3ca9da42a4d02e56de550ef78e1dcdba34e7fdfca0df14a",
+    "commons/maps/FormFinding_Relaxation/map_data.json": "e8f61c07b352c3d810beb326defbcb7d35aec34be72ffb0014a13c6d76afd625"
+  }
+}

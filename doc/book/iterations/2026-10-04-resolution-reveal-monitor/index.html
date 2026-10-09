@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many parts make a curve? — Ada</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#10151c;color:#e8e9ed}*{box-sizing:border-box}body{margin:0}main{max-width:1200px;margin:auto;padding:55px 28px 80px}header{max-width:830px;margin-bottom:30px}.eyebrow{color:#a6cbd0;letter-spacing:.13em;font-size:12px;text-transform:uppercase}h1{font-weight:500;font-size:clamp(32px,5vw,61px);line-height:1.04;margin:18px 0}h2{font-weight:500;font-size:25px;margin-top:40px}p{max-width:790px;line-height:1.65;color:#bfc8d3}a{color:#f0ccd6}strong{color:#e8e9ed}figure{margin:0;background:#19212c;border:1px solid #33404e;border-radius:10px;overflow:hidden}img,video{display:block;width:100%;height:auto}video{background:#0c1016;aspect-ratio:16/9}figcaption{padding:17px 22px;font-size:14px;line-height:1.55;color:#bfccd9}.columns{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.notice{border-left:2px solid #a6cbd0;padding-left:18px;margin:28px 0}.controls{display:grid;grid-template-columns:minmax(140px,.6fr) 2fr;gap:0;margin:24px 0;max-width:900px;border-top:1px solid #33404e}.controls dt,.controls dd{margin:0;padding:12px 0;border-bottom:1px solid #33404e;font-size:14px;line-height:1.55}.controls dt{color:#f0ccd6;font-family:ui-monospace,monospace}.controls dd{color:#bfccd9;padding-left:18px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.55}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #33404e;padding:15px 14px}th{color:#e8e9ed;font-weight:500}td{color:#bfccd9}td:first-child{color:#f0ccd6;white-space:nowrap}small{color:#a8b6c5}footer{border-top:1px solid #33404e;margin-top:45px;padding-top:20px;font-size:14px}@media(max-width:700px){main{padding:30px 15px}.columns{grid-template-columns:1fr}.controls{grid-template-columns:120px 1fr}th,td{padding:12px 9px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<main>
+<header><div class="eyebrow">Ada · Endless Museum · Primitive Ignorance</div><h1>How many parts<br>make a curve?</h1><p>A cylinder, a capsule and a sphere stand beside each other. Change one count and watch where each body changes. A sharper corner, a rounder cap, another row of triangles: the same setting does different work in different forms.</p></header>
+<figure id="film"><video controls preload="metadata" poster="comparison.png" src="resolution-film.mp4" playsinline aria-label="Godot film comparing segment and ring counts on a cylinder, capsule and sphere">Your browser cannot play this video. <a href="resolution-film.mp4">Open the resolution film</a>.</video><figcaption>A camera films native Godot meshes in a private 3D scene. The film first changes the number of segments with rings held at 4, then changes rings with segments held at 12, and finally visits selected combinations. Play, pause or scrub the film above.</figcaption></figure>
+<p class="notice">The film samples a few settings. In the museum, the controls let you try <strong>every integer segment count from 4 to 64</strong> and <strong>every ring count from 0 to 32</strong>. The sphere starts at 1 ring; its label shows that minimum when the other two are at 0.</p>
+
+<h2>Two counts, three constructions</h2>
+<div class="table-scroll"><table><thead><tr><th>Body</th><th>Segments: around the body</th><th>Rings: along its height</th></tr></thead><tbody>
+<tr><td>Cylinder</td><td>More sides make its circular outline finer.</td><td>R rings add R cuts along the straight wall, making R + 1 bands. The outline stays the same.</td></tr>
+<tr><td>Capsule</td><td>More sides divide its circumference more finely.</td><td>Each cap and the straight middle have R + 1 bands. The caps become rounder as their curved profiles receive more samples.</td></tr>
+<tr><td>Sphere</td><td>More sectors run around its circumference.</td><td>R + 1 bands span pole to pole. More bands change the vertical approximation of the curve.</td></tr>
+</tbody></table></div>
+<p>The counts describe how each generator builds its surface. They do not measure beauty. Four sides can be a deliberate form; sixty-four can be an unnecessary expense. The question is what the next division makes possible.</p>
+
+<div class="columns"><figure><img src="low.png" alt="Cylinder, capsule and sphere with sparse surface divisions"><figcaption><strong>A few divisions.</strong> The edges expose how each body is assembled. Low resolution can be a chosen character of the work.</figcaption></figure><figure><img src="rings.png" alt="The three native mesh forms compared while their ring count changes"><figcaption><strong>Another ring.</strong> The cylinder receives another cut along a straight surface. The capsule and sphere also sample their curves more finely.</figcaption></figure></div>
+<div class="columns"><figure><img src="dense.png" alt="The same three forms with more segments and rings and their triangle edges visible"><figcaption><strong>More divisions.</strong> Extra triangles can refine a curve, or repeat a surface already described by fewer parts.</figcaption></figure><figure><img src="smooth.png" alt="Cylinder, capsule and sphere with the drawn triangle edges hidden"><figcaption><strong>Hide the edges.</strong> SURFACE changes the presentation. It does not change the number of triangles or the silhouette.</figcaption></figure></div>
+
+<h2>Stop at your own combination</h2>
+<dl class="controls">
+<dt>S− / S+</dt><dd>Decrease or increase segments by one, from 4 to 64.</dd>
+<dt>R− / R+</dt><dd>Decrease or increase rings by one, from 0 to 32. The sphere remains at its native minimum of 1.</dd>
+<dt>PLAY / PAUSE</dt><dd>Pause the film. After a manual count change, PLAY turns the selected forms while keeping your counts fixed.</dd>
+<dt>REPLAY</dt><dd>Return to the beginning of the automatic comparison.</dd>
+<dt>STEP</dt><dd>Inspect the next stage of the comparison.</dd>
+<dt>SURFACE</dt><dd>Show or hide the black triangle edges.</dd>
+</dl>
+<p>Changing a count pauses the animation so the result stays available to inspect. The two counts are independent: all combinations within the monitor’s range are available. These upper limits belong to this exhibit; Godot’s setters do not impose the same upper bounds.</p>
+
+<h2>Inside the Endless Museum</h2>
+<figure id="museum"><img src="museum.png" alt="The resolution monitor installed inside the Primitive Ignorance museum hall"><figcaption>The monitor belongs to <strong>Primitives_Ignorance</strong>, alongside the existing studies of primitive forms. It uses the same native engine generators as the gallery and creates its own specimens.</figcaption></figure>
+<p>Look at the screen and the film runs. Look away and it holds its place. Manual pause stays in force when you look back. The screen is a camera view of a separate Godot world; its changing meshes leave the original museum artifacts untouched.</p>
+<figure><img src="preview.png" alt="Native Godot preview of the resolution monitor with playback and count controls"><figcaption>The native preview has the same screen and controls. Its three forms are real meshes that can be viewed in depth.</figcaption></figure>
+
+<p class="note">Verified: 5,978 legal mesh combinations; 128 checks passed. Film: 49.67 seconds, rendered in Godot. Headset testing remains open.</p>
+<footer><a href="DECISIONS.md">Construction and source notes</a> · <a href="resolution-film.mp4">Open the film</a> · <a href="../2026-10-04-polyhedra-reveal-monitor/index.html">Previous: Four faces / an enclosure</a><p><small>Gaze activation uses the player camera’s direction, not hardware eye tracking. Headset readability, reach and performance remain to be checked.</small></p></footer>
+</main>
+<script>const film=document.querySelector('video');document.addEventListener('visibilitychange',()=>{if(document.hidden)film.pause();});</script>
+</html>

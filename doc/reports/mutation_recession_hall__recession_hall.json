@@ -1,0 +1,53 @@
+{
+ "parent": "recession_hall",
+ "mutant": "recession_hall",
+ "axis": "recession",
+ "kind": "unspecified",
+ "shared": [
+  "nested",
+  "collapsed",
+  "abreast",
+  "strata"
+ ],
+ "gained": [],
+ "lost": [],
+ "drift": {
+  "nested": {
+   "mean": 0.0,
+   "moved": 0.0
+  },
+  "collapsed": {
+   "mean": 0.0,
+   "moved": 0.0
+  },
+  "abreast": {
+   "mean": 0.0,
+   "moved": 0.0
+  },
+  "strata": {
+   "mean": 0.0,
+   "moved": 0.0
+  }
+ },
+ "parent_spread": {
+  "n": 6,
+  "min": 0.66,
+  "max": 1.469,
+  "mean": 1.011,
+  "closest": [
+   "nested",
+   "collapsed"
+  ]
+ },
+ "mutant_spread": {
+  "n": 6,
+  "min": 0.66,
+  "max": 1.469,
+  "mean": 1.011,
+  "closest": [
+   "nested",
+   "collapsed"
+  ]
+ },
+ "verdict": "axis carries at comparable strength in both"
+}

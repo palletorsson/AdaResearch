@@ -1,0 +1,182 @@
+{
+ "chapter": "lsystems",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "grammar lab",
+   "map": "LSystems_Grammar_Lab",
+   "lines": [
+    {
+     "token": "grammar_provenance",
+     "text": "the grammar is never just math — it is always also a claim about what counts as growth",
+     "by": "draft"
+    },
+    {
+     "token": "lsystem_editor",
+     "text": "Seven presets, one turtle — the grammar is the artist",
+     "by": "draft",
+     "note": "the editor rewrites every rule but never the turtle — F has no meaning any production can supply — and by the depth where the drawing finally reads as a plant, the rule has disappeared inside its own output.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Grammar_Lab/critical.md",
+      "quote": "A different interpreter could read the same string and produce a different geometry."
+     }
+    },
+    {
+     "token": "lsystem_tree",
+     "text": "One rule, one angle, one axiom — a tree grows",
+     "by": "draft"
+    },
+    {
+     "token": "fractal_lsystem_string",
+     "text": "The string is the structure — the tree is just one way to read it",
+     "by": "draft"
+    }
+   ],
+   "hero": "lsystem_editor"
+  },
+  {
+   "pearl": "growth",
+   "map": "LSystems_Growth",
+   "lines": [
+    {
+     "token": "ContextSensitiveTree",
+     "text": "Context sensitivity is how real trees grow — the environment is part of the grammar",
+     "by": "draft",
+     "note": "the grammar has no symbol for the wall: the tree must grow a branch into the obstacle before it can prune it, so the shape that records the corridor is paid for in branches attempted and clipped.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Growth/critical.md",
+      "quote": "You can only clip a branch that the grammar prescribed."
+     }
+    },
+    {
+     "token": "AnimatedTree",
+     "text": "Watching a tree grow generation by generation teaches more than seeing the final form",
+     "by": "draft"
+    },
+    {
+     "token": "parametric_lsystem",
+     "text": "Randomness in the parameters, not the rules, is what makes grammar look like nature",
+     "by": "draft"
+    }
+   ],
+   "hero": "ContextSensitiveTree"
+  },
+  {
+   "pearl": "grammars and curves",
+   "map": "LSystems_Grammars_And_Curves",
+   "lines": [
+    {
+     "token": "ContextFreeGrammars",
+     "text": "Context-Free Grammars visualizer — animated parse trees showing Chomsky hierarchy (regular → context-free → context-sensitive → …",
+     "by": "draft",
+     "note": "the rule does not fill a given space, it constitutes the grid it visits — so every point exactly once holds only in a limit with no final generation, and the floor can exhibit only the resolution where you stopped.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Grammars_And_Curves/critical.md",
+      "quote": "There is no final generation."
+     }
+    }
+   ],
+   "hero": "ContextFreeGrammars"
+  },
+  {
+   "pearl": "architecture",
+   "map": "LSystems_Architecture",
+   "lines": [
+    {
+     "token": "CityGenerator",
+     "text": "Change the angle from 25° to 90° and the tree becomes a city",
+     "by": "draft",
+     "note": "the grammar writes streets and nothing else: the blocks, the lots, everything a city is lived in is the space the rules failed to reach — the inhabited part is a remainder no production can name.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Architecture/critical.md",
+      "quote": "The lots are the regions the streets failed to reach."
+     }
+    },
+    {
+     "token": "lsystem_dungeon",
+     "text": "Two rules and a turtle — the dungeon writes itself",
+     "by": "draft"
+    }
+   ],
+   "hero": "CityGenerator"
+  },
+  {
+   "pearl": "competition",
+   "map": "LSystems_Competition",
+   "lines": [
+    {
+     "token": "ForestCompetition",
+     "text": "Competition emerges when grammars share resources — ecology is grammar plus scarcity",
+     "by": "draft"
+    },
+    {
+     "token": "branching_coral",
+     "text": "A coral is not one tree — it is many grammars growing from the same rock",
+     "by": "draft",
+     "note": "scarcity appears in no grammar: light, soil, the coral's shared rock are state the rules never mention, so a losing tree is not a wrong grammar but a silenced one — shaded out by whoever reached the canopy first.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Competition/critical.md",
+      "quote": "The grammar still exists — the rules have not been erased — but they have been functionally silenced."
+     }
+    }
+   ],
+   "hero": "branching_coral"
+  },
+  {
+   "pearl": "living",
+   "map": "LSystems_Living",
+   "lines": [
+    {
+     "token": "genetic_tree_sculptor",
+     "text": "A tree is eight numbers — change them and you are doing what evolution does",
+     "by": "draft",
+     "note": "the sculptor has eight genes and no fitness function — selection needs a value neither the grammar nor the forest can supply — so the learner's taste is the unstated term, and the world then judges it by light alone.",
+     "note_src": {
+      "file": "commons/maps/LSystems_Living/critical.md",
+      "quote": "The values come from somewhere the code cannot see."
+     }
+    }
+   ],
+   "hero": "genetic_tree_sculptor"
+  },
+  {
+   "pearl": "lsystems",
+   "map": "Chamber_LSystems",
+   "lines": [],
+   "drop": true,
+   "edge": "a production rule reads only its own string, so the vine cannot answer without something outside both grammars measuring the learner's branch angle and handing it over — the dialogue depends on a translator neither side wrote.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_LSystems/critical.md",
+    "quote": "the vine sprouts new laterals whose branch angles mirror the incoming structure"
+   }
+  },
+  {
+   "pearl": "assemblage same desire",
+   "map": "Assemblage_Same_Desire",
+   "lines": [
+    {
+     "token": "mamma_monster_gallery",
+     "text": "the excavation record was never impersonal. The general intellect has a face here",
+     "by": "draft"
+    },
+    {
+     "token": "incompleteness_scale",
+     "text": "Gödel as furniture — the limit is not a bug to fix but the shape of the thing",
+     "by": "draft"
+    },
+    {
+     "token": "godel_statement_plaque",
+     "text": "every sufficiently powerful formal system contains true statements it cannot prove",
+     "by": "draft",
+     "note": "that the weaver and the logician want the same thing is a claim about both systems and provable inside neither, so the room carries it as an axis between cloth and proof — an argument only a walking body collects.",
+     "note_src": {
+      "file": "commons/maps/Assemblage_Same_Desire/walked.md",
+      "quote": "The room is arranged so the weave and the proof have to look at each other."
+     }
+    }
+   ],
+   "hero": "godel_statement_plaque"
+  }
+ ]
+}

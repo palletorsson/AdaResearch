@@ -1,0 +1,404 @@
+[
+  {
+    "id": "finding-9dfcf0a898e7494e857c505bdceab1e9",
+    "scope": "map:Color_Context_Placed",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Context_Placed: Use the existing forms; change their palette rule. Begin with list position and make shape categories a small optional return.",
+    "reason": "Keep the opening focused on how colour regroups familiar parts.",
+    "sequence_effect": "A palette and a selection rule, with a declared material receiver.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:04.826334Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Context_Placed.json",
+        "sha256": "5fafb3c726e5a957e5ca8c3165744c8653e39ab40418478295ee60a2cdb2468c",
+        "current_sha256": "5fafb3c726e5a957e5ca8c3165744c8653e39ab40418478295ee60a2cdb2468c",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Context_Placed/final.md",
+        "sha256": "80873d7a9e82bbe459fc8c9d20e89e0536e29e38e1ad92e8e0749bf57a0f8c2d",
+        "current_sha256": "80873d7a9e82bbe459fc8c9d20e89e0536e29e38e1ad92e8e0749bf57a0f8c2d",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/chroma_stack/chroma_stack.gd",
+        "sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+        "current_sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-2fc148e171ab425bb2eb88141beb3837",
+    "scope": "map:Color_Flashlight",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Flashlight: Use the museum lamp and the small source edit already taught here. Change colour and aim separately.",
+    "reason": "The existing encounter already provides the necessary experiment.",
+    "sequence_effect": "An explained existing light reference and a controlled comparison of receiving conditions.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:07.298211Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Flashlight.json",
+        "sha256": "d8691c6455a7b21f84c851dc7cde17597b3fc00301c3bfa9c59162a35622469d",
+        "current_sha256": "d8691c6455a7b21f84c851dc7cde17597b3fc00301c3bfa9c59162a35622469d",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Flashlight/final.md",
+        "sha256": "408b58ceecf5b96bffe4abe3444666526bea88644994f1cd485c30d6d6012a8f",
+        "current_sha256": "408b58ceecf5b96bffe4abe3444666526bea88644994f1cd485c30d6d6012a8f",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/postprocessing/flashlight_demo/flashlight_color.gd",
+        "sha256": "aed0d06589136ac6b0caebe0c75eb4f59013dcbf6a92b5ab352a4eb58bd1b058",
+        "current_sha256": "aed0d06589136ac6b0caebe0c75eb4f59013dcbf6a92b5ab352a4eb58bd1b058",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/colour_light_rooms/colour_light_rooms.gd",
+        "sha256": "8d7e72fce2e4ecc0368106008a25078b880937f53bbf41ab9ab7107a3cbf8940",
+        "current_sha256": "8d7e72fce2e4ecc0368106008a25078b880937f53bbf41ab9ab7107a3cbf8940",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-3fc1975f871d46379dd912594beb2b85",
+    "scope": "map:Color_Nails",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Nails: Specify one small local-position → RGB function and one preview material. Keep the hand system supplied and preserve the critical skin/polish passage.",
+    "reason": "Give the student a reusable operation without making the salon a wiring lesson.",
+    "sequence_effect": "A bounded RGB function and a recorded result that can be reused deliberately.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:09.763217Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Nails.json",
+        "sha256": "e4214933db4864b909abb02f0eae80ac5b2e7ece4a1374aafbe2cb957073868a",
+        "current_sha256": "e4214933db4864b909abb02f0eae80ac5b2e7ece4a1374aafbe2cb957073868a",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Nails/final.md",
+        "sha256": "227dd0299c9386774b4593bce2ca02e10e62f020a19757941f36ef1962389208",
+        "current_sha256": "227dd0299c9386774b4593bce2ca02e10e62f020a19757941f36ef1962389208",
+        "status": "current"
+      },
+      {
+        "path": "commons/interfaces/value_mapper_3d.gd",
+        "sha256": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265",
+        "current_sha256": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265",
+        "status": "current"
+      },
+      {
+        "path": "commons/interfaces/nail_color_controller.gd",
+        "sha256": "90a30fe1d07c80845f00591ac3df5360295b935c74c4b1a232239ddb95ffeffa",
+        "current_sha256": "90a30fe1d07c80845f00591ac3df5360295b935c74c4b1a232239ddb95ffeffa",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-cfe84becd1f049879927681f0a63c448",
+    "scope": "map:Color_Rainbow",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Rainbow: Make palette substitution and fixed-width partitioning optional. A chosen Nails colour can return through a recorded value; celebration needs no task.",
+    "reason": "Preserve the room’s generosity and avoid treating every artwork as homework.",
+    "sequence_effect": "A chosen palette and an understanding of what its partition preserves.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:12.238236Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Rainbow.json",
+        "sha256": "847442f5a296fc4316f4d68503ab14850a6ff026a7e19bc8b16fb3177d268230",
+        "current_sha256": "847442f5a296fc4316f4d68503ab14850a6ff026a7e19bc8b16fb3177d268230",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Rainbow/final.md",
+        "sha256": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+        "current_sha256": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/primitives/rainbow/rainbow.gd",
+        "sha256": "efe38d72f1b16020871874b3a6559d5b015cf30edf48dd0826df1c4c3e04a048",
+        "current_sha256": "efe38d72f1b16020871874b3a6559d5b015cf30edf48dd0826df1c4c3e04a048",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-a9334f1f11b34735830c73920a60b651",
+    "scope": "map:Color_Pillar",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Pillar: Return to Nails’ function with explicit HSV coordinates and height conversion. Keep one sample for the next hall; preserve the fog-like ceiling encounter.",
+    "reason": "Make the change of representation teachable without claiming one formula serves both rooms unchanged.",
+    "sequence_effect": "A stated colour-field function and one recorded sample for an addressed write.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:14.737045Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Pillar.json",
+        "sha256": "82f7cc215b305c707b6d38a14faee9d4c088955630f76062cd930f79c14dbad6",
+        "current_sha256": "82f7cc215b305c707b6d38a14faee9d4c088955630f76062cd930f79c14dbad6",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Pillar/final.md",
+        "sha256": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+        "current_sha256": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+        "sha256": "92e2d161ec632f730f3954d736a50821de89b72ac0ec68dc6aef4e67594f3b7d",
+        "current_sha256": "92e2d161ec632f730f3954d736a50821de89b72ac0ec68dc6aef4e67594f3b7d",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/pillarcolorcollection/field_sampler.gd",
+        "sha256": "fb26c2bea40a85366b5241d1009a8d48a60bb7a6ec23c9fb2c00e099761bca43",
+        "current_sha256": "fb26c2bea40a85366b5241d1009a8d48a60bb7a6ec23c9fb2c00e099761bca43",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-b698b03fd5314872adfe33b14727aebf",
+    "scope": "map:Color_Grid_Pallet",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Grid_Pallet: Keep a colour from Nails or Pillar at one address using the existing instance model. Teach leaving, returning and overwriting; protection becomes optional.",
+    "reason": "Make the strongest sequence handoff concrete while distinguishing the proposed input from the installed four inks.",
+    "sequence_effect": "A colour value stored at an address and a known rule for replacing it.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:17.185486Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Grid_Pallet.json",
+        "sha256": "293d59f239459d5a07ff0c310d0ce316505fdb8f5585b871a074486f6b9d2860",
+        "current_sha256": "293d59f239459d5a07ff0c310d0ce316505fdb8f5585b871a074486f6b9d2860",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Grid_Pallet/final.md",
+        "sha256": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+        "current_sha256": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/gridcolorizer/address_lesson.gd",
+        "sha256": "4669b301b83240170a4193a38ab9b5231f9f168dbb066100feb1c773e8527e4d",
+        "current_sha256": "4669b301b83240170a4193a38ab9b5231f9f168dbb066100feb1c773e8527e4d",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/gridcolorizer/gridcolorizer.gd",
+        "sha256": "5e8a909c74cc235725da6e4b287a83ef5764a61681b6676eeeffb75aa12612b5",
+        "current_sha256": "5e8a909c74cc235725da6e4b287a83ef5764a61681b6676eeeffb75aa12612b5",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-00336c827779429e906873442bb62470",
+    "scope": "map:Color_Paint",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Paint: Edit the existing automatic path. Both painters already use the same spray operation; distinguish accumulating, fading paint from a saved trace.",
+    "reason": "Use the implemented encounter to teach one meaningful change, with less machinery.",
+    "sequence_effect": "An editable path and an explicit account of what the canvas keeps and changes.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:19.640455Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Paint.json",
+        "sha256": "18fac855614c2f6a1501d2dcfb8d5d97d0d023541b4e3dc0b43097c8425cba74",
+        "current_sha256": "18fac855614c2f6a1501d2dcfb8d5d97d0d023541b4e3dc0b43097c8425cba74",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Paint/final.md",
+        "sha256": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+        "current_sha256": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+        "status": "current"
+      },
+      {
+        "path": "commons/context/drawingboard/ball_painting_automation.gd",
+        "sha256": "31a8490f7fc794a481ccb8cb3679e6ab14c38172c17b00f0cd8eaf8ed0133b3e",
+        "current_sha256": "31a8490f7fc794a481ccb8cb3679e6ab14c38172c17b00f0cd8eaf8ed0133b3e",
+        "status": "current"
+      },
+      {
+        "path": "commons/context/drawingboard/paper_draw_surface.gd",
+        "sha256": "cc516fd4220831de470928aa64119ebbb0d653e540008b4d2356ec16bbc5ded8",
+        "current_sha256": "cc516fd4220831de470928aa64119ebbb0d653e540008b4d2356ec16bbc5ded8",
+        "status": "current"
+      },
+      {
+        "path": "commons/context/drawingboard/spray_can.gd",
+        "sha256": "90e380df2b81872780c5e279727c83b0dc8b07258d178a5a477d8afaca5dac6c",
+        "current_sha256": "90e380df2b81872780c5e279727c83b0dc8b07258d178a5a477d8afaca5dac6c",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-45925d8236ec4754ac04ed8b139c43ee",
+    "scope": "map:Color_Walls",
+    "kind": "proposal",
+    "text": "Colour revision — Color_Walls: Use an existing pane or palette edit. Keep view versus passage central and carry palette-versus-arrangement into Tiling.",
+    "reason": "Preserve an accomplished ending without adding another required construction.",
+    "sequence_effect": "A palette and arrangement that can be varied independently in the returning disco floor.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:10:22.123076Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:color"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Walls.json",
+        "sha256": "0716e49a32023032e499a15d88bb895f3a57baf13d555d4ef9a3ff8fc4450553",
+        "current_sha256": "0716e49a32023032e499a15d88bb895f3a57baf13d555d4ef9a3ff8fc4450553",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/COLOUR.md",
+        "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "current_sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Color_Walls/final.md",
+        "sha256": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b",
+        "current_sha256": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/color_mixing/color_constellation_office.gd",
+        "sha256": "5ec0093334b09565d2f59034e7d75ebddae90c24699a3230c641ea14bf768bf1",
+        "current_sha256": "5ec0093334b09565d2f59034e7d75ebddae90c24699a3230c641ea14bf768bf1",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/colour_wall_studies/study.gd",
+        "sha256": "89c1f58fce7efa901dd0413d3fc3382dd3dbef5fd52e28acfa2b9b53cccfe205",
+        "current_sha256": "89c1f58fce7efa901dd0413d3fc3382dd3dbef5fd52e28acfa2b9b53cccfe205",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  }
+]

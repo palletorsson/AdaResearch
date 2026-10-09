@@ -1,0 +1,20 @@
+--- before/commons/maps/Color_Walls/map_data.json
++++ after/commons/maps/Color_Walls/map_data.json
+@@ -2,7 +2,7 @@
+   "map_info": {
+ 	"name": "Color_Walls",
+ 	"lookup_name": "Color_Walls",
+-	"description": "The view has partitions: compare glass and opaque cubicles with unchanged passage, inspect RGB and HSV coordinates, then change the path between two colours.",
++	"description": "The view has partitions: walk among overlapping colour planes, compare filter and opaque surfaces with unchanged passage, then inspect colour coordinates and interpolation.",
+ 	"version": "placed-promenade",
+ 	"format": "json",
+ 	"dimensions": {
+@@ -3986,7 +3986,7 @@
+ 		"",
+ 		"",
+ 		"",
+-		"color_constellation_office:0:0:1#layout:cubicles#compare:visibility#plinth:0",
++		"color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0",
+ 		"",
+ 		"",
+ 		"",

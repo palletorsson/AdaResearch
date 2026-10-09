@@ -1,0 +1,43 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored contrast lesson present in loaded museum",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: contrast-neighbours",
+      "passed": true
+    },
+    {
+      "name": "real SURROUNDS button selects equal backgrounds",
+      "passed": true
+    },
+    {
+      "name": "targets preserved and surrounds match their RGB",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: contrast-equal",
+      "passed": true
+    },
+    {
+      "name": "UNDO restores unequal surrounds",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "lesson_world": [
+      6.5,
+      0.0,
+      5.5
+    ]
+  },
+  "passed": true,
+  "room": "Ribbon_Patterns_02",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

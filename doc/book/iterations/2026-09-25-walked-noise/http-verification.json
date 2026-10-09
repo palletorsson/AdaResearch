@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/figures/Noise_Space_10/walked-route.png",
+      "status": 200,
+      "bytes": 2282179,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/before-view/room.png",
+      "status": 200,
+      "bytes": 2279847,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/changes.diff",
+      "status": 200,
+      "bytes": 23740,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/figure-provenance.json",
+      "status": 200,
+      "bytes": 591,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/index.html",
+      "status": 200,
+      "bytes": 6085,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/museum-log.txt",
+      "status": 200,
+      "bytes": 48014,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/museum-runtime.json",
+      "status": 200,
+      "bytes": 54307,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/other-proposal.png",
+      "status": 200,
+      "bytes": 2280439,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/source-manifest.json",
+      "status": 200,
+      "bytes": 3895,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/strong-attempt.png",
+      "status": 200,
+      "bytes": 2362122,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/text-diff.html",
+      "status": 200,
+      "bytes": 19959,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/verification.json",
+      "status": 200,
+      "bytes": 3363,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-walked-noise/walked-room.png",
+      "status": 200,
+      "bytes": 2282179,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/compose/sources?map=Noise_Space_10&doc=final",
+      "status": 200,
+      "bytes": 32063,
+      "byte_identical": null
+    }
+  ]
+}

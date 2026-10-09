@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patterns: the room wears what we make</title><style>body{background:#f4f0e8;color:#242727;font:18px/1.65 system-ui;margin:0}main{max-width:1050px;margin:auto;padding:36px 24px 80px}h1{font:clamp(36px,6vw,64px)/1.1 Georgia}h2{font:30px/1.3 Georgia;margin-top:44px}h3{font-size:21px}a{color:#9b2449}table{border-collapse:collapse;display:block;overflow-x:auto;font-size:15px}td,th{padding:12px;border:1px solid #cec7bd;text-align:left;vertical-align:top}th{background:#e7ded2}code{font-size:.84em;overflow-wrap:anywhere}li{margin:12px 0}p{max-width:900px}</style><main><a href="index.html#Pattern_Foundry">Back to the working guide</a><h1>Patterns: the room wears what we make</h1>
+<p><strong>Current implementation:</strong> all seven Patterns rooms now have focused book passages and primary encounters. Ribbon_Patterns_03 implements the closing source/shader/skirt studio, live player mirror and saved-fabric runway. <a href="ribbon-patterns-03.html">Review the evidence</a>. Headset testing, continuous gestures, more garment receivers and a common cross-tool recipe library remain open. The plan and earlier milestones below preserve the route by which we arrived here.</p>
+<p>Current implementation plan · 10 September 2026</p>
+<p>This revision governs the next Patterns pass. It supersedes the proposed encounter order in the two 9 September plans, while retaining their source research. It does not change the live seven-room order or claim that the upgrades below are already built.</p>
+<p><strong>Make a motif → repeat it → give it different bodies → perform it → inspect its shader → wear and keep a fabric.</strong></p>
+<p>Colour ended with a message and its receivers. Patterns asks what bodies a shared rule can dress, organise or enable. The hall is itself a receiving body. The avatar is another. Their common recipe lets us compare them without pretending they have identical geometry, mapping or collision.</p>
+<h2>What exists, and what needs building</h2>
+<table>
+<thead>
+<tr>
+<th>Existing material</th>
+<th>Source evidence</th>
+<th>Required upgrade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pattern_machine_a</code></td>
+<td>Editable punch card, touch areas, wallpaper groups and scrolling carpet</td>
+<td>Export an editable recipe; receive edits from the hall panel and gesture input; send output beyond its own carpet</td>
+</tr>
+<tr>
+<td><code>pattern_maker_station</code></td>
+<td>Palette cells, source transforms, wallpaper groups, CPU texture and GPU carpet</td>
+<td>Share the recipe and target adapters; distinguish motif shape from carrier shape</td>
+</tr>
+<tr>
+<td><code>super_drag_mirror</code> and catwalk</td>
+<td>Mirror and four authored outfits, reused by the player and walking agents</td>
+<td>Apply a saved fabric to named garment regions; keep outfit silhouette independently selectable</td>
+</tr>
+<tr>
+<td>Existing shader lessons</td>
+<td>Coordinates, shaping, repetition and material sources</td>
+<td>Select and verify a closing shader studio; do not activate every legacy shader gallery</td>
+</tr>
+</tbody>
+</table>
+<p>The loom supports direct hand edits already. This does not establish continuous hand-motion control, whole-hall control, arbitrary surface mapping or motif-to-avatar transfer. Those connections are explicit work items.</p>
+<h2>First build: a hall instrument with several outputs</h2>
+<p>Keep one machine as the authoring instrument. Upgrade <code>pattern_machine_a</code> first, with <code>pattern_maker_station</code> using the same recipe interface afterward. Avoid making a separate editor for every receiver.</p>
+<p>The first demonstrable result is one asymmetric motif appearing on a swatch, a wall bay, a curved sculpture and one avatar garment region. Change the motif once and inspect all four. Then detach one receiver and keep a local difference. The four existing outfits remain available; they are not replaced by a single patterned suit.</p>
+<p><strong>Different forms means two things.</strong> Motifs must eventually include hand-drawn contours and imported masks as well as square colour cells. Carriers must include flat panels, bent surfaces, compound sculptures and moving garments. Begin with the existing cell motif and a plane plus a curved specimen; add contour input after the shared output works. Do not present a raster resolution increase as support for every form.</p>
+<h3>The hall control panel</h3>
+<p>Place one reachable, clearly labelled panel at the hall entrance. Its master setting controls every registered pattern-bearing part of that hall: machine outputs, floor and wall fields, sculpture surfaces and consenting garment previews. A target selector offers <strong>Whole hall / Architecture / Sculpture / Garment / Selected surface</strong>. A visible highlight identifies what will change. Another hall must not change because it shares a material resource.</p>
+<p>Provide motif, palette, repetition scale in metres, orientation, repetition rule, mapping frame and local animation speed. Expose only the controls needed by the current lesson; later controls open when their operation has been encountered. Lighting has a separate comparison control so a material change can be tested under fixed light.</p>
+<p><strong>Hold / Play / Vary</strong> governs the installation's own process. Taking a control holds its local automatic score at the current state; resuming is explicit. Hold does not stop the museum clock, tracking or the visitor's movement. Vary changes only selected axes within displayed bounds. Undo and restore recover the prior recipe, including its phase.</p>
+<p>“Whole hall” is a deliberate registered scope, including its architectural surfaces. It must not recolour labels, controls or neighbouring exhibits by indiscriminately replacing every material in the scene tree.</p>
+<h3>Hand movement as another input</h3>
+<p>Use an explicit grip or held handle to begin and end a gesture. Walking through the room with ordinary hand motion must not silently edit it. Offer one selected mapping at a time:</p>
+<table>
+<thead>
+<tr>
+<th>Gesture</th>
+<th>Pattern parameter</th>
+<th>Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Move one held hand sideways</td>
+<td>Pattern offset</td>
+<td>The field moves while the wall stays still</td>
+</tr>
+<tr>
+<td>Move two held hands apart</td>
+<td>Repeat spacing</td>
+<td>The same motif occupies more or less room</td>
+</tr>
+<tr>
+<td>Turn a held dial or handle</td>
+<td>Pattern orientation</td>
+<td>Rotating the sample frame differs from turning the body</td>
+</tr>
+<tr>
+<td>Trace on a drawing surface</td>
+<td>Motif contour</td>
+<td>The sampled trace returns as a repeatable mark</td>
+</tr>
+</tbody>
+</table>
+<p>The panel and hand controls write to the same parameter state. The active gesture owns that parameter until release; automation cannot fight it. A panel/pointer equivalent remains available. Show the affected value and preserve the released state. Hand speed can become a later rate experiment, once Change has supplied the needed distinction.</p>
+<h2>Revised teaching route</h2>
+<p>Keep the current room order while upgrading and writing hall by hall. The last section is a required shader-and-fabric conclusion, not an optional glitch collection.</p>
+<table>
+<thead>
+<tr>
+<th>Room</th>
+<th>Question and material</th>
+<th>Required result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Pattern_Foundry</code></td>
+<td>What can share one decision? Existing asymmetric tile comparisons, then the loom as a room instrument</td>
+<td>First machine-to-swatch, wall, curved form and garment demonstration; a hall panel with visible scope</td>
+</tr>
+<tr>
+<td><code>Tutorial_Pattern</code></td>
+<td>What changes when the mark stays fixed?</td>
+<td>Shared motif under translation and reflection; deliberate hand control of one parameter</td>
+</tr>
+<tr>
+<td><code>Array_Patterns</code></td>
+<td>What turns repetition into an environment?</td>
+<td>Extend controlled outputs across tunnel/wall surfaces; inspect corners, scale and actual passage</td>
+</tr>
+<tr>
+<td><code>Symmetry_Seventeen</code></td>
+<td>What does a symmetry preserve, and under which assumptions?</td>
+<td>Hold the motif while comparing operations; keep classification distinct from taste</td>
+</tr>
+<tr>
+<td><code>Ribbon_Patterns_01</code></td>
+<td>What changes when an address gains depth?</td>
+<td>Compare a planar arrangement with a spatial array; distinguish volume from a pattern wrapped around a surface</td>
+</tr>
+<tr>
+<td><code>Ribbon_Patterns_02</code></td>
+<td>What does the carrier and its viewing condition contribute?</td>
+<td>Same recipe on different forms and under fixed/changing light; seam and sampling comparisons; keep recovered colour exhibits as supporting material</td>
+</tr>
+<tr>
+<td><code>Ribbon_Patterns_03</code> — closing shader and fabric studio</td>
+<td>Where does the pattern run, and what does the material promise?</td>
+<td>Coordinates → repetition → edge/mask → material response → visible deformation; save a fabric and try it on the avatar in the existing mirror/catwalk</td>
+</tr>
+</tbody>
+</table>
+<p>The existing glitch objects do not by themselves complete the final room. Use verified configurations from the shader lesson sources to supply the missing steps. Keep glitches as optional limit experiments. If the terminal room cannot hold this progression comfortably, propose a split from a measured layout; do not silently add every shader map to the route.</p>
+<p>Shaders may power earlier exhibits. Their code becomes the explicit object of discovery at the end: UV versus body/world coordinates, <code>floor</code>/<code>fract</code>, threshold and soft edge, then roughness/specular/alpha and a separately tested vertex displacement. A shaded hole, discarded fragment, displaced vertex and physical opening require different accounts. Noise, feedback and reaction-diffusion return later with their prerequisites.</p>
+<h2>Fabric as a result the player can keep</h2>
+<p>A fabric recipe stores a version, resolved motif or contour samples, palette, repetition rule, physical scale, mapping frame, finish parameters, local phase, seeds and resolved generator choices. It records intended garment regions and the source recipe. Save the recipe and a preview; applying it to an avatar is a separate action from changing a wall.</p>
+<p>Support <strong>linked preview</strong>, <strong>detached copy</strong>, <strong>save</strong>, <strong>wear</strong>, <strong>undo</strong> and <strong>restore outfit</strong>. Keep skin, garment, trim and silhouette separate. Do not overwrite the visitor's skin or every agent's outfit when they dress one garment. Let a runway agent preview the same fabric by explicit selection; its motions provide another mapping test.</p>
+<p>Matte print, glossy latex, reflective metal and cutout lace are material comparisons to author and inspect. Calling a surface fabric does not mean cloth dynamics exist. Pattern continuity across primitive parts, seams, world-locked mapping during movement, and the difference between visible softness and rigid support are part of the discovery.</p>
+<p>Drag, fetish and desire enter through attention and choice: a seam enlarged until it dominates a wall, a print that refuses to stay aligned with the body, a familiar silhouette taking an unexpected finish. The learner can make an unanticipated combination; the machine does not score how queer an outfit is.</p>
+<h2>Build queue and completion evidence</h2>
+<ol>
+<li><strong>Implemented, desktop verified:</strong> export/import one resolved loom recipe; restore source and history pixels, card, palette and animation phase without changing another instance. JSON fractional values are checked within parser roundoff.</li>
+<li><strong>Plane and curved-sheet pilot implemented:</strong> matching 1.2 metre surface dimensions and UV addresses, linked or locally held curved preview. The existing inner wall now receives a larger field at matching metre spacing. The selector addresses each of five surfaces, the three-wall ARCHITECTURE group, or ALL FIVE; garment-region adapters and seam comparisons remain open.</li>
+<li><strong>First registered scope and undo implemented:</strong> source editing stays shared, while TARGET and LINK / HOLD govern five explicit receivers; UNDO LINK restores held images or live links. REPEAT SIZE now offers 15, 30 and 60 cm, saved with the source recipe; held images retain their own spacing. ARCHITECTURE now groups the original wall plus NORTH and EAST, with reversible mixed membership. OFFSET +5CM now advances sampling from zero to 30 cm while preserving the motif and repeat size; held receivers and source saving retain offset. Next add explicit held-hand input. Whole-hall Hold/Play/Vary and gesture takeover remain open.</li>
+<li>Add the three parameter gestures, then bounded contour sampling; verify release, tracking loss, reset and panel equivalence.</li>
+<li>Save and wear one fabric; restore the previous outfit and verify that other garments, agents and rooms remain independent.</li>
+<li>Stage the shader conclusion with readable code tied to each live operation; test appearance, mesh and collision separately.</li>
+<li>Walk the whole route, profile its selected shaders and transparent surfaces on the target headset, and write/update the primary-linked book passages from those observations.</li>
+</ol>
+<p>The immediate next action is explicit held-hand control of the bounded pattern offset, including release, tracking loss and panel equivalence. Pattern_Foundry now connects two specimens and three existing inner-wall faces, with individual selection, an ARCHITECTURE group and ALL FIVE. Group undo preserves mixed link states and held images. Whole-hall coverage remains open: these names deliberately describe the registered subset. The loom now joins the two tile lessons as a primary artifact with a matching book passage. Whole-hall control, continuous hand gestures and garment transfer remain to be built; shaders remain the required conclusion. See the working guide for the museum capture and test report.</p>
+<p>Source anchors: <code>commons/artifacts/pattern_machine_a/pattern_machine_a.gd</code>, <code>commons/artifacts/pattern_maker_station/pattern_maker_station.gd</code>, <code>commons/resourses/shaders/wallpaper_tile.gdshader</code>, <code>commons/player/super_drag_outfit.gd</code>, <code>commons/artifacts/super_drag_mirror/super_drag_mirror.gd</code>, <code>commons/artifacts/drag_catwalk/README.md</code>, and <code>algorithms/shaders/book_of_shaders/</code>.</p>
+<h2>Workshop interfaces, 10 September follow-up</h2>
+<p>The physical Pattern Studio is now upgraded and desktop verified: native motif resolution, corrected group selection, source/preview layout, undo, and loading saved web packages with their existing shader finish. Its own source editor remains separate from the Foundry loom recipe. Before adding another editor, consolidate the physical studio, Pattern Maker Station and existing Panel Bridge pattern state adapters. The provided loom, meander, mosaic and facade editors each retain a distinct source model. See <a href="../research/possible-bodies/studio-workshop.html">the workshop comparison</a> for the relevant source files, reuse points, missing adapters and sequence of next actions. Shaders remain the final explicit teaching section; using the shader to display a saved pattern here does not complete that section.</p>
+<h3>Explicit studio-to-surface adapter</h3>
+<p>Implemented the first cross-editor receiving adapter: the physical studio selects one of the Foundry's five surfaces, the three-wall Architecture scope or All Five. APPLY LIVE, HOLD, LOOM and shared UNDO LINK track both the source and accepted material. Source recipes remain distinct. Live links catch up to their owner; held images survive source edits and source departure. This establishes the receiver protocol for future Panel Bridge, mosaic and weaving adapters without claiming they are already connected. The immediate next step remains deliberate held-hand control or the next source adapter; whole-hall coverage, avatar transfer and the shader conclusion remain open.</p>
+<h3>Inhabit the source: curved studio room</h3>
+<p>Pattern_Foundry now includes an eight-metre curved studio room in the northern runway annex. ROOM WALL and ROOM FLOOR are independent receivers; ROOM selects both. Its 300-degree wall, broad entrance and roof opening make the editable pattern surround the player. Wall repetition follows arc length; floor repetition follows a planar grid. Holding one while editing the other separates stored state from the shape that carries the body. The existing five samples and three-wall Architecture scope retain their meanings.</p>
+<p>The source, receiver controls, museum route, collision and shared undo pass 86 studio/room checks; 99 existing Foundry regression checks also pass. The next step is a headset walkthrough of approach, readability and turning, then deliberate held-hand control of pattern offset with release/tracking-loss handling. Garment transfer, the other editor adapters and the closing shader lesson remain open.</p>
+<h3>Continue the route: Tutorial_Pattern</h3>
+<p>User deferred headset and gesture work while working remotely. The next-room pass now equips Tutorial_Pattern with a primary Pattern Maker comparison bay: one editable 4x4 source, fixed P1 and PM panels, selectable floor rule, source flip/rotation, undo and reset. The book and room documents follow the verified controls. 41 desktop museum checks pass. Continue to Array_Patterns next; gestures and headset inspection remain open for later.</p>
+<h3>Ground-up route and Array_Patterns</h3>
+<p>The agreed progression builds on arrays and colour: address and palette index → motif → repetition → relations between copies → surface mapping → shader/material → dressed body. Shaders appear first as short code tied to a visible operation; the closing room gathers coordinates, lookup, edges and material response. Repeated physical objects and repeated surface images need separate comparisons because they affect passage differently.</p>
+<p>Array_Patterns now supplies the address-to-environment step. A fixed 4x4 source feeds a six-metre passage with floor/right-wall address inspection, 40/60cm cells, drawn-grid visibility and undo. Surface directions and partial edge cells make the carrier's role visible. The earlier generic timed reveal is deferred in this lesson; no gesture or headset requirement blocks the route. Continue to Symmetry_Seventeen next: organise the encountered operations and state the classification's assumptions. Garment transfer and the shader conclusion remain open.</p>
+<h2>Symmetry_Seventeen: hold a comparison</h2>
+<p><a href="symmetry-seventeen.html">One mark, three rules</a> now follows the raised Array_Patterns corridor. The primary editor supplies P1, PM and PG, sixteen editable source addresses, four paints, HOLD, UNDO and RESET. The held panel owns its pixels while the live panel and carpet share the changing result. A plain backing wall and a reachable console stage the comparison in the existing east bay.</p>
+<p>The book now asks what remains the same before naming the symmetry. An unusually symmetric source can conceal a construction rule or add symmetries; pressing a group button does not certify the resulting image's exact group. The cage remains a diagram. The next room is Ribbon_Patterns_01. Forty desktop checks pass; headset work remains deferred.</p>
+<h2>Ribbon_Patterns_01: an address gains depth</h2>
+<p><a href="ribbon-patterns-01.html">The paired array study and book passage</a> follow the saved plan's surface-to-volume progression. Sixteen source cells supply four height layers. A shared console selects x, z and height, switches repeated/shifted lookup, reveals a single slice and undoes changes. The source frame tracks the lookup while the volume address stays fixed. Visible and stored counts distinguish hiding from deletion.</p>
+<p>The two primary arrays stand together in the west bay. Nine secondary exhibits remain. Initialization now avoids a duplicate volume when configuration arrives before _ready. Twenty-two desktop checks cover the lesson and the default/early-configuration paths. Headset work remains deferred. Next: Ribbon_Patterns_02 for carrier and viewing conditions, then the planned closing shader/fabric studio.</p>
+<h2>Ribbon_Patterns_02: what the surface contributes</h2>
+<p><a href="ribbon-patterns-02.html">The context and carrier studies</a> now lead the room. One comparison changes surrounds while holding target RGB values fixed. The other shares a source texture across a plane and half-cylinder with matched physical spacing, then varies a stated directional shading rule. Repeat boundaries, horizontal repeat size, light side, undo and reset have mounted controls.</p>
+<p>Twenty-three desktop checks pass. The inherited MetamerismLab token supplies the carrier study, with no claim of spectral computation. The other ten exhibits remain supporting material. Next: Ribbon_Patterns_03 for the closing shader/fabric studio and garment transfer. Headset and gesture work remain deferred.</p>
+<h2>Closing studio implemented — 10 September</h2>
+<p>Ribbon_Patterns_03 now contains <code>fabric_shader_studio</code>, <code>super_drag_mirror</code> and <code>drag_catwalk</code> as its three book primaries. The fourteen existing exhibits remain secondary. The console edits a 4x4 source; its own spatial shader separates UV view, offset/repeat, fragment discard, matte/metal response and static vertex displacement. Wall and skirt each use their own UV domain; no claim of equal metre spacing or cloth dynamics is made.</p>
+<p>SAVE stores a validated versioned recipe. WEAR SAVED targets the current player's selected skirt and persists that appearance independently of progression. RUNWAY SAVED targets four current performer skirts. Neither action follows unsaved preview changes. Undo restores prior assignments; SAVE is not a versioned history. The mirror reflects actual live geometry.</p>
+<p>Next actionable room: <strong>Change_Intro</strong>. Keep the distinction between a configuration, its rate of change, accumulated history and the forces that govern its motion. Open workshop work: headset/standing reach and stereo comfort, continuous deliberate gestures, full secondary curation, more named garment adapters, and explicit interoperability between the existing Foundry/editor recipes and the closing fabric recipe. Do not describe those as completed.</p></main></html>

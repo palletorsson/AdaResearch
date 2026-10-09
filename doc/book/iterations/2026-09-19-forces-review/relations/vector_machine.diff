@@ -1,0 +1,30 @@
+--- before/commons/artifacts/vector_machine/vector_machine.gd
++++ after/commons/artifacts/vector_machine/vector_machine.gd
+@@ -2,18 +2,18 @@
+ class_name VectorMachine
+ 
+ ## @identity
+-## lineage: the dial of gravity — a workbench that aims and sizes the one vector ruling every
+-##   force_field in the room. Point it down for the void to swallow; tilt it up-and-across to
+-##   turn the void into a bridge.
+-## essence: three sliders — PITCH (down ↔ up), YAW (which way across), FORCE (how hard) —
+-##   compose a single force vector, drawn live as a big arrow on the stage, and pushed straight
+-##   into every force_field. The default is gravity: straight down, 9.8.
+-## truth: a field is only ever as dangerous as the vector you hand it; this bench is where the
+-##   danger is chosen.
++## lineage: the dial of local acceleration — a workbench that aims and sizes the vector
++##   supplied to compatible force_field zones. A crossing depends on the receiver's incoming
++##   movement, contact and controller as well as this setting.
++## essence: PITCH and YAW compose a direction; the magnitude slider supplies acceleration.
++##   The default is 9.8 m/s² downward. The force_as_place lesson labels the slider ACCEL and
++##   publishes only to lesson zones in the same museum hall. Legacy controls retain FORCE/F
++##   labels and publish to unscoped zones; the velocity update still treats the vector as acceleration.
++## truth: a vector setting becomes motion only through the receiving zone and body controller.
+ ##
+ ## Built on the shared InterfacePresets "workbench" housing (the Reformed_Instruments look):
+ ## a tilted slider plate + a floating viz stage. Slider values are polled each frame (the
+-## workbench pattern), the vector pushed to group "force_field" via set_field_vector().
++## workbench pattern), the acceleration published through set_field_vector() with the scope above.
+ 
+ const InterfacePresets := preload("res://commons/ui/interface_presets.gd")
+ 

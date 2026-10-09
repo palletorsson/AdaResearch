@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Original editor present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "editor_transform": "[X: (-1.0, 0.0, 0.0), Y: (0.0, 1.0, 0.0), Z: (-0.0, 0.0, -1.0), O: (9.5, 0.0, 7.5)]",
+    "entry": {
+      "cage": false,
+      "cell": "(9, 1)",
+      "door": "(9.5, 0.05, 0.35)",
+      "landing": "(9.5, 0.05, 1.5)",
+      "marker": "(9.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cells": [
+        "(8, 23)"
+      ],
+      "invalid": true,
+      "rejected": [
+        {
+          "distance": 0.4,
+          "door": "(8.5, 0.05, 23.5)",
+          "inward": "(0.0, 0.0, -1.0)",
+          "reason": "approach blocked"
+        },
+        {
+          "door": "(8.5, 0.05, 23.5)",
+          "inward": "(-1.0, 0.0, 0.0)",
+          "reason": "frame blocked"
+        },
+        {
+          "door": "(8.5, 0.05, 23.5)",
+          "inward": "(1.0, 0.0, 0.0)",
+          "reason": "frame blocked"
+        },
+        {
+          "door": "(8.5, 0.05, 23.5)",
+          "inward": "(0.0, 0.0, 1.0)",
+          "join": "(8.5, 0.05, 25.8)",
+          "reason": "approach unsupported"
+        }
+      ],
+      "source": "t"
+    }
+  },
+  "passed": true,
+  "room": "LSystems_Grammar_Lab",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

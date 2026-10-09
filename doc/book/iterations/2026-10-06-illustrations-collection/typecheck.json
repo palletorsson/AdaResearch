@@ -1,0 +1,10 @@
+{
+  "extends": "../../../../../ada_encyclopedia/tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": [
+    "../../../../../ada_encyclopedia/next-env.d.ts",
+    "../../../../../ada_encyclopedia/src/lib/illustrations.ts",
+    "../../../../../ada_encyclopedia/src/app/illustrations/*.tsx"
+  ],
+  "exclude": []
+}

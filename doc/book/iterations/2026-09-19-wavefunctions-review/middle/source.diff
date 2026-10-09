@@ -1,0 +1,222 @@
+--- before/algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd
++++ after/algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd
+@@ -1,10 +1,10 @@
+ ﻿# @identity
+ # essence: a 2D grid of mass-spring oscillators where each cell nudges its neighbors via configurable coupling — independent at coupling=0, lattice-locked at high values, with central excitation driving the spectrum
+ # desire: to make the player feel that "wave" is not a thing but a relationship — when one oscillator moves, the lattice answers, and standing modes are simply patterns of agreement
+-# critical_parameter: coupling_strength — at 0 the grid is independent oscillators; at high values it locks into collective Chladni-like modes; the entire wave spectrum lives on this slider
+-# triggers: _physics_process() integrates each cell with its neighbors using natural_frequency and damping_coefficient; excitation_amplitude × excitation_frequency drives the central pulse outward through coupling_range
++# critical_parameter: coupling_strength — at 0 the oscillators are independent; a positive value lets displacement differences between neighbours contribute force
++# triggers: _process() integrates a driven, damped lattice; the optional comparison uses fixed 1/120-second steps and resets the same state for each selected drive and coupling condition
+ # emerges: standing waves on a grid — synchronization fronts, breathing modes, traveling pulses; the lattice becomes a tunable resonance instrument the player can walk into
+-# needs: VR walking through the lattice [has]; live coupling-strength slider [missing]; mode-visualization toggle [missing]; apply_grid_config [missing]
++# needs: optional COUPLING / DRIVE / RESET push buttons [has]; fabric variants [has]; no claim that the default 2 Hz drive produces a large response at every cell
+ # relationships: pairs with wave_interference, sine_space, and seismograph in wavefunctions as the medium that the others measure or excite; reappears in advancedlaboratory's Systems Theory Laboratory as the keystone artifact
+ # truth: a wave is not a particle traveling — it is a pattern of agreement across coupled cells; the lattice IS the medium
+ 
+@@ -68,6 +68,19 @@
+ ## displacement colouring. Every value reads the SAME oscillators[] array the physics
+ ## writes; they disagree only about what a medium looks like.
+ @export var fabric: String = "nodes"
++## Local lesson opt-in; other placements retain their original animation and fabric.
++@export var comparison: bool = false
++const COMPARISON_STEP := 1.0 / 120.0
++const COMPARISON_BUTTON = preload("res://commons/interactables/push_button.tscn")
++var buttons: Dictionary = {}
++var _comparison_labels: Dictionary = {}
++var _comparison_readout: Label3D
++var _comparison_panel: Node3D
++var _comparison_accumulator := 0.0
++var _comparison_strength := 1.5
++var _coupled := true
++var _neighbor_peak := 0.0
++var simulation_steps := 0
+ const FABRICS: PackedStringArray = ["nodes", "bonds", "sheet", "boundary"]
+ const BOND_THICKNESS := 0.035
+ 
+@@ -92,9 +105,24 @@
+ 	# FABRIC, applied LAST so every Oscillator_N above keeps its index and its name.
+ 	# "nodes" falls through and adds nothing at all.
+ 	_apply_fabric()
++	if has_meta("config_comparison"):
++		comparison = str(get_meta("config_comparison")).to_lower() in ["true", "1"]
++	_comparison_strength = coupling_strength if coupling_strength > 0.0 else 1.5
++	_coupled = coupling_strength > 0.0
++	if comparison and not Engine.is_editor_hint():
++		_build_comparison()
+ 
+ func _process(delta: float) -> void:
+ 	if Engine.is_editor_hint():
++		return
++	if comparison:
++		# Bound catch-up work after a stall; the readout reports simulated time.
++		_comparison_accumulator += minf(delta, 0.1)
++		while _comparison_accumulator >= COMPARISON_STEP:
++			comparison_step(COMPARISON_STEP)
++			_comparison_accumulator -= COMPARISON_STEP
++		_update_visualization()
++		_refresh_comparison()
+ 		return
+ 
+ 	time += delta
+@@ -217,7 +245,7 @@
+ 
+ 		forces[i] = total_force
+ 
+-	# Integrate using velocity Verlet or simple Euler
++	# Symplectic Euler: update velocity, then position using that new velocity.
+ 	for i in range(oscillators.size()):
+ 		var osc = oscillators[i]
+ 		var force = forces[i]
+@@ -307,7 +335,97 @@
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	if config.has("comparison"):
++		comparison = str(config.comparison).to_lower() in ["true", "1"]
++	# Tokens may arrive before tree entry: store them, then build once in _ready.
++	if is_node_ready() and comparison and not Engine.is_editor_hint():
++		_build_comparison()
++
++
++func _build_comparison() -> void:
++	if is_instance_valid(_comparison_panel):
++		return
++	_comparison_panel = Node3D.new()
++	_comparison_panel.name = "Comparison"
++	_comparison_panel.set_meta("em_local_instrument", true)
++	# The east edge stays outside the adjacent moving tile field in this hall.
++	_comparison_panel.position = Vector3(2.9, 0.0, 1.2)
++	_comparison_panel.rotation_degrees.y = 90
++	add_child(_comparison_panel)
++	_comparison_box(Vector3(0, .84, .15), Vector3(1.48, .12, .5))
++	for x in [-.64, .64]:
++		_comparison_box(Vector3(x, .40, .15), Vector3(.05, .8, .05))
++	_comparison_box(Vector3(0, 1.18, -.08), Vector3(1.48, .43, .035))
++	for i in 3:
++		var id: String = ["COUPLING", "DRIVE", "RESET"][i]
++		var button = COMPARISON_BUTTON.instantiate()
++		button.name = id
++		button.position = Vector3((i - 1) * .48, .915, .17)
++		button.rotation_degrees.x = 35
++		button.scale = Vector3.ONE * .8
++		button.play_press_sound = false
++		_comparison_panel.add_child(button)
++		button.pressed.connect(act.bind(id))
++		buttons[id] = button
++		var label := _comparison_label(id, Vector3((i - 1) * .48, .94, .34), 24)
++		label.rotation_degrees.x = -50
++		_comparison_labels[id] = label
++	_comparison_readout = _comparison_label("", Vector3(0, 1.18, -.055), 27)
++	_comparison_label("Change one relation. Follow one sphere.", Vector3(0, .80, .407), 25)
++	_refresh_comparison()
++
++
++func _comparison_box(at: Vector3, size: Vector3) -> void:
++	var mesh := MeshInstance3D.new()
++	var box := BoxMesh.new(); box.size = size; mesh.mesh = box
++	var material := StandardMaterial3D.new()
++	material.albedo_color = Color(.035, .05, .075); material.roughness = .7
++	mesh.material_override = material; mesh.position = at
++	_comparison_panel.add_child(mesh)
++
++
++func _comparison_label(text: String, at: Vector3, font: int) -> Label3D:
++	var label := Label3D.new()
++	label.text = text; label.position = at; label.font_size = font
++	label.pixel_size = .0012; label.outline_size = 2
++	label.modulate = Color(.75, .9, 1.0)
++	label.no_depth_test = false
++	_comparison_panel.add_child(label)
++	return label
++
++
++func act(id: String) -> void:
++	if not comparison or id not in ["COUPLING", "DRIVE", "RESET"]:
++		return
++	if id == "COUPLING":
++		_coupled = not _coupled
++		coupling_strength = _comparison_strength if _coupled else 0.0
++	elif id == "DRIVE":
++		excitation_mode = "Pulse" if excitation_mode == "Sine" else "Sine"
++	time = 0.0; pulse_triggered = false; simulation_steps = 0
++	_comparison_accumulator = 0.0; _neighbor_peak = 0.0
++	for osc in oscillators:
++		osc.displacement = 0.0; osc.velocity = 0.0; osc.acceleration = 0.0
++	_update_visualization()
++	_refresh_comparison()
++
++
++func comparison_step(delta: float) -> void:
++	time += delta
++	if excite_center: _apply_excitation(delta)
++	_update_oscillators(delta)
++	simulation_steps += 1
++	var cx := lattice_size.x / 2
++	var cy := lattice_size.y / 2
++	_neighbor_peak = maxf(_neighbor_peak, absf(get_displacement_at(cx, mini(cy + 1, lattice_size.y - 1))))
++
++
++func _refresh_comparison() -> void:
++	if not is_instance_valid(_comparison_readout): return
++	var mode := "COUPLED" if _coupled else "INDEPENDENT"
++	_comparison_labels.COUPLING.text = mode
++	_comparison_labels.DRIVE.text = excitation_mode.to_upper()
++	_comparison_readout.text = "%s / %s\nNeighbour peak %.1f mm | t %.2f s\nEach button restarts the same still lattice." % [mode, excitation_mode.to_upper(), _neighbor_peak * 1000.0, time]
+ 
+ 
+ # ── FABRIC ───────────────────────────────────────────────────────────────────
+--- before/algorithms/wavefunctions/mariocontrol/DualBallFMController.gd
++++ after/algorithms/wavefunctions/mariocontrol/DualBallFMController.gd
+@@ -7,8 +7,8 @@
+ 
+ 
+ # @identity
+-# essence: FM synthesis — carrier(t) * sin(mod_ratio * carrier * mod_index)
+-# desire: Grab two balls in VR to sculpt sound through frequency modulation
++# essence: phase modulation — sin(2π * carrier_freq * t + modulator(t)), under amplitude envelopes
++# desire: Grab two balls in VR to hear one oscillator changing another oscillator's phase
+ # critical_parameter: evidence — how much of the FM arithmetic the rig puts on the table.
+ #   One ordered ladder, monotone in disclosure: result (the colour cube alone, the legacy
+ #   default) < trace (the output waveform on a scope) < sources (the two operand oscillators,
+@@ -23,7 +23,7 @@
+ #   basic waveforms); unlocks timbre_sculptor. Carries the `evidence` ladder of
+ #   [[wave_interference_tank]] and [[sine_wave_controller]] and parses a token through that
+ #   family's one reader rather than keeping a second table.
+-# truth: All timbral complexity is phase modulation of simple oscillators.
++# truth: This instrument changes timbre by modulating a carrier's phase; it is one synthesis method, not a claim about all sound.
+ 
+ # ─────────────────────────────────────────────────────────────────────────────
+ # STAGE-2 DNA PROMOTION (2026-08-03). This artifact had ZERO exports and a
+@@ -408,14 +408,15 @@
+ func _create_title_label() -> void:
+ 	title_label = Label3D.new()
+ 	title_label.name = "TitleLabel"
+-	title_label.text = "FM Synth"
++	title_label.text = "Phase modulation\nFM-style synth"
+ 	title_label.position = Vector3(0.25, SHELF_H + 0.42, 0.25) if stand == "desks" else Vector3(0, -1.0, 0)
+ 	title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+ 	title_label.font_size = 32
+ 	title_label.modulate = Color(0.9, 0.9, 1.0)
+ 	title_label.outline_size = 4
+ 	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+-	title_label.scale = Vector3.ONE * 0.08
++	title_label.pixel_size = 0.0015
++	title_label.scale = Vector3.ONE
+ 	add_child(title_label)
+ 
+ func _update_preview_cube() -> void:
+--- before/algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd
++++ after/algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd
+@@ -9,8 +9,8 @@
+ # essence: ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling
+ # desire: Stand in a space where algorithmic composition endlessly generates cyberpunk ambience
+ # critical_parameter: num_effect_players — determines the density of the random sound event texture
+-# triggers: stochastic timers trigger random effect generation; drone layer provides continuous foundation
+-# emerges: endless non-repeating ambient music from a small vocabulary of synthesis rules
++# triggers: a per-frame random threshold schedules prepared effect clips; drone and city ambience provide continuous layers
++# emerges: varied arrangements of a finite synthesized vocabulary; recurrence remains possible
+ # needs: VR presence [has], 3D loading bar visualization [has]
+ # relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
+ # truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.

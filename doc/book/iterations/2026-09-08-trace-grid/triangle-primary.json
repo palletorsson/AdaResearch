@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-08",
+  "room": "Point_Triangle_Context",
+  "primary": [
+    "triangle_line_puzzle",
+    "draw_triangle_faces"
+  ],
+  "improvements": [
+    "Separate post-closure fill visibility button on triangle puzzle",
+    "Side instruments; numbered drawing corners and active first corner; actual fan triangle count",
+    "Retained closed boundaries visible with fill hidden",
+    "Release stops held-time sampling",
+    "World-coordinate editable points remain aligned under artifact translation and rotation"
+  ],
+  "interaction_checks": {
+    "checks": 23,
+    "failures": [],
+    "scope": "Actual endpoint and pointer events, supplied held positions, rotated translated scenes; headset usability unverified."
+  },
+  "existing_L_fan_regression": {
+    "passed": true,
+    "scope": "One real scene, pointer-button restart, timed placement and emitted meshes with supplied hand positions; no human/headset trial. Area sums include overlaps, not union area.",
+    "outside_centroids": [
+      0,
+      2
+    ]
+  },
+  "previews": [
+    "ada_run/triangle_primary/puzzle.png",
+    "ada_run/triangle_primary/drawing.png"
+  ],
+  "remaining": "Human headset pass for endpoint pickup, control reach, labels and L-outline construction in the full museum."
+}

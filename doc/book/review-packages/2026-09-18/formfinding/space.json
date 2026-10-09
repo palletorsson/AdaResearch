@@ -1,0 +1,2299 @@
+{
+  "FormFinding_Descent": {
+    "map_source": "commons/maps/FormFinding_Descent/map_data.json",
+    "text_source": "commons/maps/FormFinding_Descent/final.md",
+    "map_sha256": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+    "text_sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b",
+    "map_info": {
+      "name": "Form-Finding: The Descent",
+      "title": "Where Does Downhill Take You?",
+      "lookup_name": "FormFinding_Descent",
+      "description": "Change an optimiser start, objective surface, step size and stopping tolerance; inspect what its local update can establish. Compare the original settling and noise exhibits after the controlled experiment.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 28,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "Estimate a local gradient from neighbouring samples",
+          "Distinguish a descent step from acceleration",
+          "Compare starts, step sizes and stopping thresholds",
+          "Distinguish a small gradient from a global minimum"
+        ]
+      },
+      "museum": {
+        "artifact_placement": "map",
+        "gate_depth_rows": 0,
+        "wall_height": 3,
+        "sculpture_clear_rects": [
+          [
+            1,
+            1,
+            12,
+            15
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "descent_landscape_lab",
+        "commented_out": false,
+        "lookup_hint": "descent_landscape_lab",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 17,
+        "raw_token": "settling_tremble",
+        "commented_out": false,
+        "lookup_hint": "settling_tremble",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 19,
+        "raw_token": "descent_marble_toy#plinth:1.1",
+        "commented_out": false,
+        "lookup_hint": "descent_marble_toy",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 21,
+        "raw_token": "gradient_descent:0:0.8:0.14",
+        "commented_out": false,
+        "lookup_hint": "gradient_descent",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 23,
+        "raw_token": "gradient_descent_well",
+        "commented_out": false,
+        "lookup_hint": "gradient_descent_well",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 23,
+        "raw_token": "science_screen",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 18,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 25,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Descent",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1039,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "descent_landscape_lab"
+        ],
+        "reason": "Predict and take a local step; compare beginnings, step sizes and stopping rules.",
+        "sequence": "formfinding",
+        "status": "desktop_verified_headset_pending",
+        "learner_verified": false,
+        "map_sha256": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+        "text_sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b"
+      },
+      "manuscript_artifact_order": [
+        "descent_landscape_lab"
+      ],
+      "role_primary_order": [
+        "descent_landscape_lab"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "FormFinding_Catenary": {
+    "map_source": "commons/maps/FormFinding_Catenary/map_data.json",
+    "text_source": "commons/maps/FormFinding_Catenary/final.md",
+    "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+    "text_sha256": "49df26a33ccdf2fb45c3ecd4867312d51175748ca4bda4ac31e67a1c19e63f54",
+    "map_info": {
+      "name": "Form-Finding: Chain and Film",
+      "title": "Form-Finding: Chain and Film",
+      "lookup_name": "FormFinding_Catenary",
+      "description": "The two oldest solved minimizations. A hanging chain finds the catenary — the shape of least potential; a soap film finds the minimal surface — the least area spanning its frame. No one draws them; they solve.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "The catenary: the hanging chain's least-energy curve",
+          "The minimal surface: least area"
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "cable_builder",
+        "commented_out": false,
+        "lookup_hint": "cable_builder",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "raw_token": "catenoid",
+        "commented_out": false,
+        "lookup_hint": "catenoid",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 7,
+        "raw_token": "helicoid",
+        "commented_out": false,
+        "lookup_hint": "helicoid",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 7,
+        "raw_token": "science_screen",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "laundry_line_cathedral",
+        "commented_out": false,
+        "lookup_hint": "laundry_line_cathedral",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Catenary",
+      "recorded_status": "existing_text_retained",
+      "text_words": 951,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "cable_builder",
+          "catenoid"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Catenary/final.md",
+        "text_sha256": "49df26a33ccdf2fb45c3ecd4867312d51175748ca4bda4ac31e67a1c19e63f54",
+        "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid",
+        "helicoid",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "cable_builder",
+        "catenoid"
+      ],
+      "anchors_not_in_primary_roles": [
+        "helicoid",
+        "laundry_line_cathedral",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "FormFinding_Relaxation": {
+    "map_source": "commons/maps/FormFinding_Relaxation/map_data.json",
+    "text_source": "commons/maps/FormFinding_Relaxation/final.md",
+    "map_sha256": "48dd20392e58877ae1c3b2ecaf2c7e7ea5698c5ea42c7fcc7a663fb4ce36ddb0",
+    "text_sha256": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+    "map_info": {
+      "name": "FormFinding_Relaxation",
+      "title": "FormFinding_Relaxation",
+      "lookup_name": "FormFinding_Relaxation",
+      "description": "A mesh of masses and springs, released, settles toward its rest lengths — relaxation, the algorithm every fabric and every glass obeys. The vessel here got its shape from physics, not from a designer.\n\n[Placement applied humanoid_walker engine — constraint 0.868→0.947, walkability 0.542→0.609]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "Relaxation: settling to rest length",
+          "Form as a fossil of the forces that made it"
+        ]
+      },
+      "eye_shot_adopted": "Trial_eye_FormFinding_Relaxation"
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "mass_spring_bench:270",
+        "commented_out": false,
+        "lookup_hint": "mass_spring_bench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "verlet_workbench:90",
+        "commented_out": false,
+        "lookup_hint": "verlet_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 2,
+        "raw_token": "frozen_glass_vessel:90",
+        "commented_out": false,
+        "lookup_hint": "frozen_glass_vessel",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "science_screen:90",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Relaxation",
+      "recorded_status": "existing_text_retained",
+      "text_words": 910,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "verlet_workbench",
+          "mass_spring_bench"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Relaxation/final.md",
+        "text_sha256": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+        "map_sha256": "48dd20392e58877ae1c3b2ecaf2c7e7ea5698c5ea42c7fcc7a663fb4ce36ddb0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "verlet_workbench",
+        "mass_spring_bench"
+      ],
+      "anchors_not_in_primary_roles": [
+        "frozen_glass_vessel",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "FormFinding_Equilibrium": {
+    "map_source": "commons/maps/FormFinding_Equilibrium/map_data.json",
+    "text_source": "commons/maps/FormFinding_Equilibrium/final.md",
+    "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+    "text_sha256": "40e01a633d3f6f5107cc5e9dfba642813a70431720088c744978974a31d888ec",
+    "map_info": {
+      "name": "Form-Finding: The Balance",
+      "title": "Form-Finding: The Balance",
+      "lookup_name": "FormFinding_Equilibrium",
+      "description": "Where forces cancel, form holds. A Calder mobile balances every arm by the lever law; a fractal truss spans the most with the least; a tensegrity triangle stands on tension you cannot see. Gaudi hung the chain and turned it upside down to find the arch.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "Equilibrium: form where forces cancel",
+          "Prestress: structure as an invisible field of tension"
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "calder_mobile",
+        "commented_out": false,
+        "lookup_hint": "calder_mobile",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "fractal_truss_tower",
+        "commented_out": false,
+        "lookup_hint": "fractal_truss_tower",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 6,
+        "raw_token": "tensegrity_triangle",
+        "commented_out": false,
+        "lookup_hint": "tensegrity_triangle",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "science_screen",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Equilibrium",
+      "recorded_status": "existing_text_retained",
+      "text_words": 895,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "calder_mobile",
+          "tensegrity_triangle"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Equilibrium/final.md",
+        "text_sha256": "40e01a633d3f6f5107cc5e9dfba642813a70431720088c744978974a31d888ec",
+        "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "calder_mobile",
+        "tensegrity_triangle",
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "anchors_not_in_primary_roles": [
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "FormFinding_Annealing": {
+    "map_source": "commons/maps/FormFinding_Annealing/map_data.json",
+    "text_source": "commons/maps/FormFinding_Annealing/final.md",
+    "map_sha256": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+    "text_sha256": "d1aa490701065b2e49a4b6f49a791c0947c6d7a6db6ed3d43dd0af4250409b7c",
+    "map_info": {
+      "name": "FormFinding_Annealing",
+      "title": "FormFinding_Annealing",
+      "lookup_name": "FormFinding_Annealing",
+      "description": "The first stable shape is rarely the best — you land in a local minimum and stick. Annealing shakes the system with heat so it can climb out and find deeper rest. But the deepest well is a dead-perfect crystal; the alive form stops short.\n\n[Placement applied humanoid_walker engine — constraint 0.827→0.983, walkability 0.526→0.590]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "Local minima: getting stuck in a good-enough shape",
+          "Annealing: heat to escape; and where to STOP"
+        ]
+      },
+      "eye_shot_adopted": "Trial_eye_FormFinding_Annealing"
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "max_q_basin_room:270",
+        "commented_out": false,
+        "lookup_hint": "max_q_basin_room",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "energy_landscape_bench:90",
+        "commented_out": false,
+        "lookup_hint": "energy_landscape_bench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 2,
+        "raw_token": "simulated_annealing:90",
+        "commented_out": false,
+        "lookup_hint": "simulated_annealing",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "raw_token": "impossible_end_table",
+        "commented_out": false,
+        "lookup_hint": "impossible_end_table",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "science_screen:90",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Annealing",
+      "recorded_status": "existing_text_retained",
+      "text_words": 1017,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "energy_landscape_bench",
+          "simulated_annealing"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "existing_text_retained",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Annealing/final.md",
+        "text_sha256": "d1aa490701065b2e49a4b6f49a791c0947c6d7a6db6ed3d43dd0af4250409b7c",
+        "map_sha256": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "max_q_basin_room",
+        "impossible_end_table",
+        "science_screen"
+      ],
+      "role_primary_order": [
+        "energy_landscape_bench",
+        "simulated_annealing"
+      ],
+      "anchors_not_in_primary_roles": [
+        "impossible_end_table",
+        "max_q_basin_room",
+        "science_screen"
+      ],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "FormFinding_Forge": {
+    "map_source": "commons/maps/FormFinding_Forge/map_data.json",
+    "text_source": "commons/maps/FormFinding_Forge/final.md",
+    "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+    "text_sha256": "9b37c121ad49f071c1eeb43bdfa952dfda11f95edfb1fc692f71f4c1ac791b3d",
+    "map_info": {
+      "name": "Form-Finding: The Forge",
+      "title": "Form-Finding: The Forge",
+      "lookup_name": "FormFinding_Forge",
+      "description": "Shape your own. Feed raw matter into the forge and it descends toward its liveliest form and emerges; then prove it — stack the pieces until the whole system stops moving, the minimum reached by your own hand.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "algorithms",
+        "estimated_time": "3-5 minutes",
+        "learning_objectives": [
+          "Find a form by descent",
+          "Prove it: reach the resting minimum"
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.05,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "all",
+      "background": "dark"
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "type": "spawn",
+        "description": "spawn point"
+      },
+      "t": {
+        "type": "teleporter",
+        "description": "exit teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "self_shaping_forge",
+        "commented_out": false,
+        "lookup_hint": "self_shaping_forge",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "raw_token": "balance_puzzle",
+        "commented_out": false,
+        "lookup_hint": "balance_puzzle",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 7,
+        "raw_token": "gradient_descent_optimizer",
+        "commented_out": false,
+        "lookup_hint": "gradient_descent_optimizer",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 7,
+        "raw_token": "science_screen",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 11,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "FormFinding_Forge",
+      "recorded_status": "source_checked_draft",
+      "text_words": 454,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "balance_puzzle",
+          "gradient_descent_optimizer"
+        ],
+        "reason": "Who decides when a shape has settled well enough?",
+        "status": "source_checked_draft",
+        "sequence": "formfinding",
+        "text_path": "commons/maps/FormFinding_Forge/final.md",
+        "text_sha256": "9b37c121ad49f071c1eeb43bdfa952dfda11f95edfb1fc692f71f4c1ac791b3d",
+        "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "role_primary_order": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

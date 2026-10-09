@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One | Coordinates, then two points</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:#f6f3eb;color:#292b29;font:19px/1.75 Georgia,serif}main{max-width:1100px;margin:auto;padding:56px 28px}header{padding-bottom:35px;border-bottom:1px solid #d4d1c7}header h1{font:normal clamp(38px,6vw,68px)/1.12 Georgia,serif;max-width:900px;margin:18px 0}header>p{max-width:760px}a{color:#864752;text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:10px 22px;font:14px/1.6 system-ui,sans-serif}.eyebrow,.meta,summary{font:12px/1.6 system-ui,sans-serif}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:#63645f}.meta{color:#63645f}article,.excerpt{max-width:750px;margin:65px auto}article h1{font-size:34px;font-weight:normal;line-height:1.25}h2{font-size:28px;font-weight:normal}p{margin:0 0 23px}section{padding-top:38px}details{border-top:1px solid #d4d1c7;padding:20px 0;margin:25px 0}summary{cursor:pointer;font-size:15px;font-weight:600}details[open]>summary{margin-bottom:24px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:40px;font-size:16px}.comparison>div{min-width:0}.comparison h1{font-size:26px}pre{padding:18px;background:#e9e6dd;overflow:auto;font:13px/1.6 Consolas,monospace}code{font:.86em Consolas,monospace}pre code{font:inherit}.footnote{font-size:14px;overflow-wrap:anywhere}.footnote p{margin:10px 0}.excerpt{border-left:3px solid #ac7c7a;padding-left:24px}footer{font:13px/1.6 system-ui,sans-serif;border-top:1px solid #d4d1c7;padding-top:24px}a:focus-visible,summary:focus-visible{outline:3px solid #557a85;outline-offset:5px}@media(max-width:760px){body{font-size:18px}main{padding:28px 20px}.comparison{display:block}.comparison>div{margin-bottom:40px}}@media print{nav,details,footer{display:none}body{background:white;font-size:12pt}main{padding:0}article{break-before:page}}
+.reading pre{font-size:14px;border-left:2px solid #859a8b;background:#ecede5;line-height:1.65}.reading pre code{font:inherit}.reading pre{white-space:pre-wrap;overflow-wrap:anywhere}.comparisons{margin-top:35px}.comparison pre{font-size:12px}
+header{margin-bottom:3rem}.turn-page{margin:4rem auto;padding-top:2rem;border-top:1px solid #cdcfc3;max-width:740px}.turn-page a{font-size:1.1rem}.editorial{margin:4rem auto;max-width:740px}.reading{margin-bottom:2rem}table{border-collapse:collapse;font:14px/1.5 system-ui,sans-serif}td,th{border-bottom:1px solid #d4d1c7;padding:12px;text-align:left;vertical-align:top}table{display:block;overflow:auto}.button{display:inline-block;border:1px solid #c5c5b5;padding:10px 16px;text-decoration:none;margin-top:12px}</style></head><body><main>
+<header><p class="eyebrow">Point One · First making passage</p>
+<nav aria-label="Reading"><a href="index.html#reading">← Read the encounter</a><a href="index.html#agreement">What this hall carries</a><a href="/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#day-zero">Day Zero</a></nav>
+<a class="button" href="point-one-study.zip" download>Download the working study</a></header>
+<article class="reading" id="making"><h1>Point One — give a position a place</h1>
+<p>Day Zero has prepared the environment. Open <code>points.gd</code> in <a href="study/README.md">the Point One study</a>. The supplied <code>coordinates.tscn</code> uses the same base and adds two small white markers, named <code>A</code> and <code>B</code>, and three coloured coordinate guides. The downloaded script shows both markers; we will build up to it.</p>
+<p>The guides and markers are supplied objects. Here we learn to place them. The first change is deliberately invisible.</p>
+<h2>Keep a position</h2>
+<p>Replace the contents of <code>points.gd</code> with:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var a := Vector3(-0.75, 1.12, 0.0)
+</code></pre>
+<p>Run it. The floor and guides remain; neither white marker appears. We have kept three numbers without giving either marker that position.</p>
+<p><code>extends Node3D</code> gives this script a place in the 3D scene. Godot calls <code>_ready()</code> when the scene is ready; our instructions go inside it, indented. <code>var</code> gives a value a name. <code>:=</code> lets Godot infer its type: here, <code>Vector3</code>, which holds three numbers. Used as a position, those numbers are X, Y and Z coordinates relative to an origin.</p>
+<p>The origin is where the three supplied guides meet. From there, <code>a</code> is 0.75 metres along negative X, 1.12 metres up Y, and zero along Z. The editor may warn that <code>a</code> is unused. That describes exactly what we have done so far: keep a value without using it.</p>
+<h2>Let a marker show it</h2>
+<p>Add these two lines beneath the position, with the same indentation:</p>
+<pre><code class="language-gdscript">    $A.position = a
+    $A.visible = true
+</code></pre>
+<p><code>$A</code> refers to the existing marker named <code>A</code> in this scene. The first line puts its centre at <code>a</code>; the second makes it visible.</p>
+<p>A small sphere now marks the position. Its surface helps us find a centre that has no surface of its own. The sphere has a radius; the position has three coordinates. Changing one need not change the other. We borrow the sphere's construction for this first exercise.</p>
+<p>Change only <code>-0.75</code> to <code>0.75</code>. The marker crosses to the other side of the Y guide. Restore X, then change <code>1.12</code> to <code>1.7</code>. It rises. Restore Y, then change the last number from <code>0.0</code> to <code>0.7</code>. It moves along positive Z, towards the camera in this prepared view.</p>
+<p>The red guide marks X, green Y and blue Z. Their labels identify the positive directions. Follow one change at a time. The marker moves between runs because the saved coordinates changed; we have not yet written movement over time.</p>
+<h2>Keep another position</h2>
+<p>Restore <code>a</code> and add a second position and its marker. The complete script is now:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var a := Vector3(-0.75, 1.12, 0.0)
+    var b := Vector3(0.75, 1.12, 0.0)
+
+    $A.position = a
+    $A.visible = true
+    $B.position = b
+    $B.visible = true
+</code></pre>
+<p>Both markers use the same supplied sphere. Their different coordinates put them on opposite sides of the origin. Change only <code>b</code>: <code>a</code> stays where it was.</p>
+<p>Try putting B above A. Try putting it behind A. Finally give <code>b</code> the same coordinates as <code>a</code>. The two objects occupy the same place, so this view can show one sphere where the script still names two. Separate them again.</p>
+<p>You can now make an arrangement by choosing two positions. The markers and coordinate guides help you see that choice. Their construction is available to inspect, but neither the distance arrow nor the coordinate labels need to become a programming task here.</p>
+<p>The museum's solid and held points ask further questions about what a visible body permits. We keep those encounters in the main text. Their physics and pickup systems are outside this first exercise; <a href="construction.html">the optional construction study</a> retains the earlier mesh and collision examples.</p>
+<p>We leave with <code>a</code> and <code>b</code> expressed in the same coordinate frame. Point Lines can begin by connecting them. The relation has two ends before we give it a visible body.</p></article>
+<div class="turn-page"><p><a href="study/points.gd">Complete short script</a> · <a href="study/coordinates.tscn">Supplied coordinate scene</a> · <a href="construction.html">Optional construction study</a></p><p><a href="index.html#reading">Return to the encounter →</a></p>
+<p class="meta">Actual lesson snippets and coordinate variations pass 28 native Godot checks. No learner or headset trial is claimed. The next Line tutorial still needs to be rebuilt around the two positions.</p></div>
+</main></body></html>

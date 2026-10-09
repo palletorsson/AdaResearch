@@ -1,0 +1,167 @@
+{
+  "name": "Graph Theory: What Connections Permit",
+  "truth": "The same connections can host different journeys. What the graph leaves out will not be recovered by choosing another route.",
+  "qfep_term": "Integration",
+  "qfep_connection": "Ada uses graph encounters to ask what a representation makes reachable, cheap or permissible. These are distinct questions; a minimum, a drawing and an available route do not establish one universal measure of value.",
+  "description": "Eight encounters distinguish visit order, drawing, route availability, network measures, directed return, minimum connection cost, capacity and pairing. Keep the relations visible as the question changes.",
+  "layer": "relation",
+  "prerequisites": [
+    "transformation",
+    "array_tutorial"
+  ],
+  "unlocks": [],
+  "difficulty": "advanced",
+  "estimated_time": "30-40 minutes",
+  "learning_objectives": [
+    "Compare queue and stack traversals on one graph",
+    "Distinguish adjacency from layout coordinates",
+    "Observe rerouting when a represented option disappears or returns",
+    "Distinguish drawn prominence from a measured relation",
+    "Trace directed paths and return paths",
+    "Distinguish minimum total connection cost from short journeys and resilience",
+    "Read capacity, preflow and excess; identify the missing reverse adjustments",
+    "Compare maximal and maximum matching through different edge orders on one graph"
+  ],
+  "content": [
+    "GT_Foundations: Two travellers, one graph",
+    "GT_Layout: A connection is not a coordinate",
+    "GT_Pathfinding: The route after a stone disappears",
+    "GT_Network_Analysis: Important by which measure?",
+    "GT_Connectivity: A way back",
+    "GT_Spanning_Trees: The price of one more route",
+    "GT_Flow: What a junction cannot pass on",
+    "GT_Matching: A pair that blocks two pairs"
+  ],
+  "maps": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "audio": {
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
+  },
+  "return_to": "lab",
+  "lab_map": "Lab/map_data_post_graphtheory",
+  "completion_rewards": [
+    "graph_theory_badge"
+  ],
+  "merge_plan": {
+    "_note": "Maps created by merging interactables from original 14 maps",
+    "GT_Foundations": [
+      "GraphTheory_Graphspace (graphspace, KonigsbergBridge)",
+      "GraphTheory_Graphspace_3d (graphspace3d)"
+    ],
+    "GT_Layout": [
+      "GraphTheory_Force_Directed_Graph_Layout (force_directed_layout)",
+      "GraphTheory_Force_Directed_3d (forcedirected3d)"
+    ],
+    "GT_Pathfinding": [
+      "GraphTheory_Path_Finding_3d (pathfinding3d)"
+    ],
+    "GT_Network_Analysis": [
+      "GraphTheory_Network_Analysis (networkflow3d, network_analysis)"
+    ],
+    "GT_Connectivity": [
+      "GraphTheory_Tarjan_s_Algorithm (tarjan_algorithm)",
+      "GraphTheory_Kosaraju_s_Algorithm (kosaraju_algorithm)",
+      "GraphTheory_Topological_Sort (topological_sort_algorithm)"
+    ],
+    "GT_Spanning_Trees": [
+      "GraphTheory_Minimum_Spanning_Tree (mst_visualization)"
+    ],
+    "GT_Flow": [
+      "GraphTheory_Push_Relabel_Algorithm (push_relabel_algorithm)",
+      "GraphTheory_Karger_s_Algorithm (karger_algorithm)"
+    ],
+    "GT_Matching": [
+      "GraphTheory_Edmonds_Algorithm (edmonds_algorithm)"
+    ]
+  },
+  "deferred_maps": [
+    "GraphTheory_Maximum_Flow_Algorithms",
+    "Chamber_GraphTheory"
+  ],
+  "deferred_reason": {
+    "Chamber_GraphTheory": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+  },
+  "artifact_groups": [
+    {
+      "map": "GT_Foundations",
+      "position": "intro",
+      "artifacts": [
+        "two_travelers"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Layout",
+      "position": "intro",
+      "artifacts": [
+        "force_directed_layout"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Pathfinding",
+      "position": "foundation",
+      "artifacts": [
+        "impatient_river"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "position": "exploration",
+      "artifacts": [
+        "network_analysis"
+      ],
+      "size_budget": "mixed",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Connectivity",
+      "position": "exploration",
+      "artifacts": [
+        "tarjan_algorithm"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "position": "integration",
+      "artifacts": [
+        "mst_visualization"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Flow",
+      "position": "integration",
+      "artifacts": [
+        "push_relabel_algorithm"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    },
+    {
+      "map": "GT_Matching",
+      "position": "synthesis",
+      "artifacts": [
+        "edmonds_algorithm"
+      ],
+      "size_budget": "compact_only",
+      "rationale": "Begin with the manuscript encounter; retain the supporting comparisons already placed in this hall."
+    }
+  ]
+}

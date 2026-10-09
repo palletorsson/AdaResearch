@@ -1,0 +1,1848 @@
+{
+  "date": "2026-10-05",
+  "scope": "Proposed teaching lineage; not learner or runtime verification",
+  "halls": [
+    {
+      "map": "Point_Zero",
+      "subjects": [
+        "Initialization",
+        "Per-frame updates",
+        "Function calls"
+      ],
+      "focus": "Move the existing counter reading between initialization and repeated updates; predict when its text changes. The counter construction and museum remain supplied.",
+      "builds_on": [],
+      "adds": "Introduces when a callback runs and how a call returns a reading.",
+      "carries": "A distinction between one-time initialization and repeated execution.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "b21716490ad2c04b71ca4c5629c74f431a12743e7e09e8df39601de44a7e2be8",
+      "tutorial_sha256_after": "6fbb33c115486869b91df027b379a13857f4cb8afe89d2537276d568586bf61c"
+    },
+    {
+      "map": "Point_One",
+      "subjects": [
+        "Position values",
+        "Variables and constants",
+        "Object references",
+        "Visible and physical boundaries"
+      ],
+      "focus": "Change a named position and radius; distinguish the value, displayed mesh and separately constructed collision boundary. Read resource creation and property assignment in the existing corridor.",
+      "builds_on": [
+        {
+          "map": "Point_Zero",
+          "why": "Initialization gives the construction a known execution point."
+        }
+      ],
+      "adds": "Introduces named values, assignment, object references and the separation of position, appearance and collision.",
+      "carries": "A position and object reference whose visible and physical uses can be traced.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "09979370381493e170ce349368ae4d3ec72286f6fd1b4d468dfa0680eb2039e2",
+      "tutorial_sha256_after": "84fea920fc51e990a071ccbb9948ec240687e86bf60273a3937d69963de71bfa"
+    },
+    {
+      "map": "Point_Coordinates",
+      "subjects": [
+        "Pickable",
+        "3D coordinate system",
+        "Local and world position"
+      ],
+      "focus": "Carry the existing black sphere and compare LOCAL with WORLD. Read what makes the body grabbable and how its position is expressed in each coordinate frame. The XR player setup is supplied; the pickable-body connection is part of this lesson. Distance calculation belongs in Point Lines.",
+      "builds_on": [
+        {
+          "map": "Point_One",
+          "why": "A position, mesh and collider already have distinct roles."
+        },
+        {
+          "map": "Point_Zero",
+          "why": "Repeated updates can read a moving body's current property."
+        }
+      ],
+      "adds": "Adds pickup and release, distinguishes the body from the hold, and converts positions between explicitly named frames.",
+      "carries": "A body that can be carried and released, with its position read in a chosen frame.",
+      "status": "aligned",
+      "review": "The authored focus is preserved. Release restores this sphere's frozen state; it does not introduce falling or distance calculation. Source checked; no new headset test. The drawn black arm points toward -Z; the prose now follows its actual sign.",
+      "tutorial_sha256_before": "b2d2b97c334b5edbd31d54a6c2271791c0f753e97ae772d8b519202eca8f3bb8",
+      "tutorial_sha256_after": "1f41c8f7926ecd7c13b506fac5bfa33f857d7d259832435b20f909bb2c4d2f52",
+      "revision_report": "doc/book/iterations/2026-10-05-eight-interaction-lessons/index.html"
+    },
+    {
+      "map": "Point_Lines",
+      "subjects": [
+        "Displacement",
+        "Distance",
+        "Returned values"
+      ],
+      "focus": "Subtract two positions in one frame, obtain the displacement length and find a different direction with equal distance. Endpoint input and the segment renderer are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Coordinates",
+          "why": "Both endpoints must be expressed in the same reference frame."
+        },
+        {
+          "map": "Point_One",
+          "why": "Named position values can be passed through expressions."
+        }
+      ],
+      "adds": "Adds a vector difference and its scalar length; distinguishes position, displacement and distance.",
+      "carries": "A reusable relation between two positions, including coincidence.",
+      "status": "needs_revision",
+      "review": "The calculation is taught, but the tutorial sends the student to the portable starter. Bind this focus to the existing museum line; do not imply that its prepared handles are the museum host.",
+      "tutorial_sha256_before": "b9cb2ff8a7e5cdc010feb904751e7efef526a92938d5d26d7e5e5617f01bf5b4",
+      "tutorial_sha256_after": "62fd4524d637f3563d457479bf46445df19b5332ebac4927dcb16d0a15b84b2c"
+    },
+    {
+      "map": "Point_Trace",
+      "subjects": [
+        "Ordered position lists",
+        "Sampling conditions",
+        "Indices and neighbour loops",
+        "Pen grip and writing tip"
+      ],
+      "focus": "Draw with the existing pen. Append accepted world positions, read indices and connect neighbours. Adjust its declared grip offset while keeping the writing tip and retained record distinct. Release copies the cumulative drawing to the session store.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Displacement length decides whether a new sample is far enough away."
+        },
+        {
+          "map": "Point_Zero",
+          "why": "A per-frame callback is different from one traversal of a list."
+        }
+      ],
+      "adds": "Introduces an ordered Vector3 list, sampling condition, indexed neighbour traversal and a grip offset distinct from the recorded tip.",
+      "carries": "A retained drawing copied on release for this session, plus a declared relation between hand, grip and writing tip.",
+      "status": "aligned",
+      "review": "Now follows the museum pen rather than the portable starter. Recording is shaped and bounded; release publishes the cumulative retained list, not a cross-run file. Grip comfort still needs hands-on testing.",
+      "tutorial_sha256_before": "be6c012cb77d3ad0c6015de8b1c7a9894a56b5caa0e0f56ade0cc1628aad87f7",
+      "tutorial_sha256_after": "8acf270f4df71217ef0790a8a16b9c29d3ed0fa015d5ff910dddcdd18bf8c836",
+      "revision_report": "doc/book/iterations/2026-10-05-eight-interaction-lessons/index.html"
+    },
+    {
+      "map": "Point_Line_Grid",
+      "subjects": [
+        "Reusing a retained list",
+        "Display coordinates",
+        "Snapping in X, Y and Z",
+        "Source and derived positions"
+      ],
+      "focus": "Reuse the released museum trace in the same session. Fit its world positions to the existing display, then snap displayed XYZ positions to a chosen pitch. Keep the source record separate and compare a sample index with a spatial address.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "An ordered retained list can be read again without repeating the gesture."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "A position's meaning depends on its named frame."
+        }
+      ],
+      "adds": "Adds fit-before-snapping, a three-dimensional display address distinct from list order, and separation of original and derived positions.",
+      "carries": "A source drawing and its fitted and snapped representations, without claiming lossless inversion or cross-run persistence.",
+      "status": "aligned",
+      "review": "The museum lesson now fits before rounding. Snapping means coordinate quantization here, not docking in an XR snap zone. The code edit precedes a fresh run and fresh trace; headset workflow is not newly tested.",
+      "tutorial_sha256_before": "870e87926090f940daa2e6be02a16209b6ad14bafc1067ff2156ea5234421eeb",
+      "tutorial_sha256_after": "15a20fa943f66fa17a20104a15e3aa3bc4c9d5fca9a02aa2e4781c8fc55ed6cd",
+      "revision_report": "doc/book/iterations/2026-10-05-eight-interaction-lessons/index.html"
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "subjects": [
+        "Corners and edges",
+        "Closed boundaries",
+        "Triangular faces",
+        "Vertex order"
+      ],
+      "focus": "Choose three non-collinear corners, connect a closed boundary and submit a face in a stated order. The existing input, materials and mesh display are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "A segment connects each pair of corners."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A list can retain and select position values."
+        },
+        {
+          "map": "Point_One",
+          "why": "A visible surface and a physical boundary are separate."
+        }
+      ],
+      "adds": "Adds a triangular face to connected corners; order belongs to the mesh construction.",
+      "carries": "Three chosen corners usable as a boundary or a face.",
+      "status": "needs_revision",
+      "review": "The starter teaches corners, edges and faces, but the museum drawing-tool binding is unresolved. Its two-sided material does not support the foundation plan's proposed visible-side winding test.",
+      "tutorial_sha256_before": "d4ac069e400c56a688ec9f535f718b4f379325e929d0ecf7139ce4d6c383d0eb",
+      "tutorial_sha256_after": "f406aee8aba090a3c5dfa06be4a8d354569792c3027726e60afedbd29ba112d4"
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "subjects": [
+        "Shared vertices",
+        "Face indices",
+        "Nested traversal",
+        "Enclosure"
+      ],
+      "focus": "Close a small tetrahedron with face rows that refer to shared positions. Move one corner and identify every affected face; keep mesh assembly and pickup support supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Triangle_Context",
+          "why": "A face consists of three ordered corners."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Indices and traversal can address a retained list."
+        }
+      ],
+      "adds": "Adds connectivity stored separately from coordinates and traversal through face rows.",
+      "carries": "A mesh description with separately editable positions and connections.",
+      "status": "needs_revision",
+      "review": "The face-list lesson is written in a starter scene using saved TraceMemory. Its relationship to the museum's existing solids must be declared before treating this as the museum exercise.",
+      "tutorial_sha256_before": "ddb38b5d620c27bd298b3127b699eeb7a606a1d57c54f35b8adf3c8d11a288e2",
+      "tutorial_sha256_after": "e5ee34242a6f76b5e05482fb7df33c6bdffcbdcc06cb5e06ad88f13f5257e0ac"
+    },
+    {
+      "map": "Point_Animatedcube",
+      "subjects": [
+        "Triangulation",
+        "Shared-corner edits",
+        "Mesh and node transforms"
+      ],
+      "focus": "Move a shared cube corner, then change the diagonal across one side while keeping the corner positions. Distinguish editing mesh data from moving its whole node; comparison rendering is supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Face indices connect shared positions."
+        },
+        {
+          "map": "Point_One",
+          "why": "The displayed object has a position distinct from its mesh data."
+        }
+      ],
+      "adds": "Practice of indexed meshes; deepens how the same corners can define different surfaces.",
+      "carries": "A deliberate choice of connectivity and an explanation of which faces an edit affects.",
+      "status": "needs_revision",
+      "review": "The starter supplies a clear diagonal exercise; bind it to the museum comparison without claiming the existing cube/net/prefab encounters are one portable learner construction.",
+      "tutorial_sha256_before": "f5a72009ec3bda3ab386639b11d56325e2385a15bbcbbb1bc2462ed4d3eb8601",
+      "tutorial_sha256_after": "4f44f5acebd9281dfe3336f45ff5601a6c1e315b7df3a428d868dee6ff7ed71b"
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "subjects": [
+        "Functions",
+        "Parameters and arguments",
+        "Return values",
+        "Generated positions"
+      ],
+      "focus": "Read, call and vary a small radius-to-position-list function. Compare editing its returned corners with changing its input; face connections, display and unfamiliar sampling formulas stay supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Polythedra",
+          "why": "A position list can be displayed through separately supplied face connections."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A loop builds an ordered list of values."
+        }
+      ],
+      "adds": "Introduces a learner-readable returning function, its parameter, local values and explicit call.",
+      "carries": "A geometric generator with a named input and a reusable list result.",
+      "status": "needs_revision",
+      "review": "The function is taught in the portable primitive_rules study. The existing museum host remains to be aligned; the function returns data and does not discover faces or constrain later hand edits.",
+      "tutorial_sha256_before": "9e06017ebbb5f2e33d6fa68411d809cc9848e0939213ffd0c74bb141cc9374bc",
+      "tutorial_sha256_after": "4c5abecd68f44c0e5754a189712a3847684bf44a5207fe8dbe8734f5c7312295"
+    },
+    {
+      "map": "Primitives_Godot",
+      "subjects": [
+        "Classes and instances",
+        "Mesh resources",
+        "Resource properties",
+        "Scene composition"
+      ],
+      "focus": "Inspect one familiar engine mesh resource, change a documented setting and identify which instance receives it. Compare the resource with the material, collision and behaviour supplied by its scene.",
+      "builds_on": [
+        {
+          "map": "Point_One",
+          "why": "Resource creation and node references have distinct roles."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A generated result can be separated from the rule producing it."
+        }
+      ],
+      "adds": "Practice of existing classes and instances; adds inspection of an engine-supplied resource contract.",
+      "carries": "A choice of supplied geometry with understood settings and scene responsibilities.",
+      "status": "needs_revision",
+      "review": "This file is a teaching-intent stub. Choose the small edit host and demonstrate independent resources; the fixed library has no universal parameter controls. Authoring a new class belongs later.",
+      "tutorial_sha256_before": "5dd8876659fcc0f9a2791094d0def4d3fc33f621a56426b6796d4ce7793e06ac",
+      "tutorial_sha256_after": "28ee0aa7eb7edc4080859c6b517d40e575a5138536173d95781556904cab0470"
+    },
+    {
+      "map": "Primitives_Columns",
+      "subjects": [
+        "Profiles",
+        "Height",
+        "Radial resolution",
+        "Nested repetition"
+      ],
+      "focus": "Reuse a list, loop and function to vary profile, full height and side count separately. Compare equal forms at different resolution before varying the family; sampling and mesh stitching are supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Ignorance",
+          "why": "Parameters can control a reusable geometric generator."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Repeated rings need connections as well as positions."
+        }
+      ],
+      "adds": "Composition of known generators and traversal; separates shape inputs from sampling density.",
+      "carries": "A column recipe whose profile, height and side count can change independently.",
+      "status": "needs_revision",
+      "review": "The file only points to the reduced column study. Its straight intervals differ from the museum's curved sections; the learner column's museum placement and nested-loop explanation remain unresolved.",
+      "tutorial_sha256_before": "08164e6c0c203f9a914622509bc70312d11a5f640143d72dd703448432d2592b",
+      "tutorial_sha256_after": "1901d5ee7d924aed76cf5034d49f3942c608ec9bb05218a5aab7d05479eb4c72"
+    },
+    {
+      "map": "Primitives_Profiles",
+      "subjects": [
+        "Source outlines",
+        "Section routes",
+        "Scale along a route",
+        "Construction limits"
+      ],
+      "focus": "Follow a flat source region into one supplied body, then vary one disclosed recipe input. Distinguish the carried outline from its route and scale; font extraction, triangulation and sweep construction stay supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Columns",
+          "why": "A profile is distinct from height and sampling resolution."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A generator has explicit inputs that can be varied separately."
+        }
+      ],
+      "adds": "Composition and selected exploration of a profile under another construction rule.",
+      "carries": "A profile-plus-route specification with stated openings and use limits.",
+      "status": "needs_revision",
+      "review": "The file is a teaching-intent stub and defers its bounded edit host. Preserve the O sill, missing vessel bottom and disconnected colon; do not promise a general topology or sweep lesson.",
+      "tutorial_sha256_before": "e8e82d47845d9c0d9cae29ffe6fcc640119bd36c98b307dc53924876bfe24c25",
+      "tutorial_sha256_after": "ce73f59028b0922d0e18bf04fcc775f1f65b6f16bc6e1f4d537ddd5598b624bd"
+    },
+    {
+      "map": "Primitives_Portals",
+      "subjects": [
+        "Perimeter accumulation",
+        "Finite resolution",
+        "Tolerance",
+        "Stopping criteria"
+      ],
+      "focus": "Sum neighbouring distances around a closed sampled boundary, compare the shortfall and choose a tolerance. The circle sampler and display are supplied; the student owns the sum and acceptance criterion.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Each edge length comes from two positions."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Neighbour traversal provides the boundary order."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A function can accept a list and return a number."
+        }
+      ],
+      "adds": "Deepens loops through a running total and a chosen numerical acceptance threshold.",
+      "carries": "A finite construction justified against an explicit tolerance.",
+      "status": "needs_revision",
+      "review": "The perimeter lesson is in the portable starter. Declare its museum connection; the tolerance compares lengths, not visual edge distance, exactness or artistic quality.",
+      "tutorial_sha256_before": "429ec13d403c517ee2997de773f2be6a54f650371b102ed0d6e6a3b326e0da73",
+      "tutorial_sha256_after": "62e27da96fdc77ec7c85663c14b1650d2421ce63c82487f9730c962ceffe29ec"
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "subjects": [
+        "Repeated construction",
+        "Spatial arrangement",
+        "Viewpoint",
+        "Composition"
+      ],
+      "focus": "Arrange a small family of known forms and explain how changed positions alter gaps and overlap from two views. Geometry and museum staging are supplied; no new syntax is required.",
+      "builds_on": [
+        {
+          "map": "Primitives_Polythedra",
+          "why": "A body can be assembled from known positions and face connections."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A reusable construction can provide another instance."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Whole-body placement has a reference frame."
+        }
+      ],
+      "adds": "Composition and independent practice of values, lists, loops and placement.",
+      "carries": "An authored arrangement whose placement is distinct from its constituent geometry.",
+      "status": "needs_revision",
+      "review": "The written composition runs in the portable starter. Keep the reflective museum encounter and decide how the student's arrangement is encountered there; defer unfamiliar scale controls.",
+      "tutorial_sha256_before": "67a1c2fb733b2b321de7daf0cc53909fd5b6dfe2c84e9dd35165c0f437990251",
+      "tutorial_sha256_after": "b0f2707eb4677909c7387ca142fcbe05a48e39c00ce0199ce47427c69c892d3c"
+    },
+    {
+      "map": "Trans_Pre",
+      "subjects": [
+        "Elapsed time",
+        "Conditions",
+        "Interpolation",
+        "Timed transforms",
+        "Sine interpolation"
+      ],
+      "focus": "Accumulate elapsed seconds, change one body's position within bounds and add timed rotation or scale. Compare steady travel with the small supplied sine variation; room, readout and collection remain supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Zero",
+          "why": "Repeated updates supply frame intervals."
+        },
+        {
+          "map": "Point_One",
+          "why": "A retained object reference gives properties to change."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A condition controls whether an operation runs."
+        }
+      ],
+      "adds": "Develops time-based state and bounded interpolation; gives sine a small usable preview before Waves.",
+      "carries": "A timed transformation rule with separately chosen extent and duration.",
+      "status": "needs_revision",
+      "review": "The main lesson uses a portable starter; sine is only taught in the linked companion. The foundations plan's duration-boundary if/else exercise is not the present stage-switch exercise. Align one museum teaching path.",
+      "tutorial_sha256_before": "26940be60bcb1b1e750ecf79596657d944d01ccb28a4f8ba70cc07af83847796",
+      "tutorial_sha256_after": "ce7219153c28dee4f76a50d85229f034fa973653d28e9c8b29dbaaf5606cb2b4"
+    },
+    {
+      "map": "Trans_Introduction",
+      "subjects": [
+        "Signals and event handlers",
+        "One function for shared behaviour",
+        "Target and current state",
+        "Gradual reset",
+        "Readout feedback"
+      ],
+      "focus": "Use MOVE THE BANK. Follow slider and RESET signals into one target setter, then distinguish target from current displacement while the physics callback moves the existing landing. Change SPEED and predict duration without changing the destination.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "A timed transformation has state that can be restarted."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A named function runs when called."
+        },
+        {
+          "map": "Point_One",
+          "why": "Displayed and physical constructions need separate responsibilities."
+        }
+      ],
+      "adds": "Adds event-to-handler connections, one shared function, target/current state and feedback of current motion.",
+      "carries": "A way to separate a request from its execution, reuse a setter for reset and read feedback without confusing it with the target.",
+      "status": "aligned",
+      "review": "Rebased on the installed adjustable_landing script. RESET requests zero and the bank returns gradually; the readout describes gap geometry, not a proof of safe passage. Source checked; no new runtime test.",
+      "tutorial_sha256_before": "6f77e55328bbb96367be66f7db975f1f47f83686a2e32d9c84b5c81c5eebc940",
+      "tutorial_sha256_after": "8e87c8655a41872721a2022a2fc7ae874d6c9614e444088799e041f08374abd1",
+      "revision_report": "doc/book/iterations/2026-10-05-eight-interaction-lessons/index.html"
+    },
+    {
+      "map": "Trans_Translation",
+      "subjects": [
+        "Waypoint lists",
+        "Direction and length",
+        "Guard conditions",
+        "Route state"
+      ],
+      "focus": "Read a short route, guard zero-length legs and retain the current waypoint index across updates. Compare intermediate travel with the direct displacement; the preview marker and optional rider adapter are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "A route is an ordered position list."
+        },
+        {
+          "map": "Point_Lines",
+          "why": "A leg has displacement and length."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "Elapsed time can advance a position between endpoints."
+        }
+      ],
+      "adds": "Deepens list traversal into retained route state and introduces a guarded normalized direction.",
+      "carries": "A route follower that preserves waypoints and handles repeated positions.",
+      "status": "needs_revision",
+      "review": "The current tutorial lists translation/tween utilities and door constraints. It does not teach the proposed waypoint index, zero-length guard or reduced route binding; choose preview or carrying explicitly.",
+      "tutorial_sha256_before": "c881a66a286d48ca60c21afe3878037ec2dba8e67fb53b40e0da7ba3ab23f6db",
+      "tutorial_sha256_after": "500b4b667c0a365021dc125ad64557fefa4ed0ce5b5f7ffb2f371df88abf0794"
+    },
+    {
+      "map": "Trans_Rotation",
+      "subjects": [
+        "Pivots",
+        "Axes and angles",
+        "Rotated offsets",
+        "Operation order"
+      ],
+      "focus": "Rotate an offset around a named axis and add its centre; compare two turns in reversed order. Timed angles and small returning functions are reused; physical rides and readouts remain supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Coordinates",
+          "why": "An offset and centre must use a named frame."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A small function can return generated positions."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "Angles can advance with elapsed time."
+        }
+      ],
+      "adds": "Adds pivoted position construction and noncommuting rotation composition.",
+      "carries": "A reusable rotation-about-centre rule with an explicit operation order.",
+      "status": "needs_revision",
+      "review": "The companion describes existing arrays, rides and the composition workbench, but does not present the selected small returning position function. Keep ride physics and full arrays supplied.",
+      "tutorial_sha256_before": "50b33d34a2d7a1ad58923f5d5f7b86a6584f328ccdac4003b1ebd1738774eb0a",
+      "tutorial_sha256_after": "53a6f1e03ff047d8f01e437eb416e3b390f69935d6586b24c61f6de20ac7d288"
+    },
+    {
+      "map": "Trans_Scale",
+      "subjects": [
+        "Uniform scale",
+        "Parent-child transforms",
+        "Fixed references"
+      ],
+      "focus": "Compare how scaling the room changes child sizes and spacing while the visitor and fixed doorway stay the same. Read relocation as a separate operation and vary one supplied opening comparison.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "Uniform scale changes a body's proportions together."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Local positions belong to a parent frame."
+        },
+        {
+          "map": "Point_One",
+          "why": "A visible change and a physical boundary have different roles."
+        }
+      ],
+      "adds": "Deepens transform ownership through a parent and its children; practice of controlled comparison.",
+      "carries": "A prediction of what a grouped scale changes and which outside references stay fixed.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "00f0c96e30ecc41f9acb5535cfdd5b43d831920d0d13b2b803111d1bd88c8795",
+      "tutorial_sha256_after": "58fdbb1055f0dbc516b354c9342d1c60ca7ffe9d5c980323c82aba656280ed16"
+    },
+    {
+      "map": "Trans_Body",
+      "subjects": [
+        "Proximity mapping",
+        "Boolean conditions",
+        "Retained flags",
+        "Reversible response"
+      ],
+      "focus": "Map current distance into one grounded block's size, then compare a freshly computed proximity boolean with a remembered visit. Visitor-position input and collision updates are supplied; carving remains a comparison.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Distance supplies a scalar proximity input."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "Interpolation maps one value into a transform."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A condition decides what to retain."
+        }
+      ],
+      "adds": "Develops current conditions versus retained state and simple combined conditions.",
+      "carries": "A bounded response function and a distinction between present input and remembered change.",
+      "status": "needs_revision",
+      "review": "Current prose documents slats, deletion and scaling but does not teach the proposed learner block or boolean/flag comparison. Bind the small update without asking learners to implement visitor recognition or carving.",
+      "tutorial_sha256_before": "8c406a71c19e38dd4151d0e66a594fc8d64afaa74fe359bc35c9f55f0c5aa29c",
+      "tutorial_sha256_after": "398c46f142ff47ebfaaea518523a3913d8bdc395e6eecf1d0e4581274882d7f3"
+    },
+    {
+      "map": "Trans_Pit",
+      "subjects": [
+        "Shared control values",
+        "Coordinated transforms",
+        "Occupancy conditions",
+        "Reset sequences"
+      ],
+      "focus": "Compose two leaves whose position, angle and size share one opening fraction. Hold an intermediate pose and choose an opening/reset condition; the frame, occupancy input and physical wrappers are supplied.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "A bounded fraction drives timed transforms."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "Current occupancy and remembered state differ."
+        },
+        {
+          "map": "Trans_Introduction",
+          "why": "An event can invoke a deliberate reset."
+        }
+      ],
+      "adds": "Composition and practice of known functions, conditions and timed state; no new syntax.",
+      "carries": "An authored opening sequence whose intermediate clearance can be inspected.",
+      "status": "needs_revision",
+      "review": "The current tutorial covers timed pushers, slabs and growers, not the proposed two-leaf airlock composition. The hall is a level-ground study; the new learner binding and preceding reset lesson remain open.",
+      "tutorial_sha256_before": "f54f6b846cffcbbde844438a72f63644598939e0c2f804deab594564116de7ad",
+      "tutorial_sha256_after": "4833b8e82b40eb447a0917b2f67dbbe5178acf02fb3e7a18c310b041be1b855e"
+    },
+    {
+      "map": "Array",
+      "subjects": [
+        "Independent instances",
+        "Object references",
+        "Indexed writes",
+        "Nested traversal",
+        "Occupancy records"
+      ],
+      "focus": "Begin with a short row of independent objects and retained references; change one object and one occupancy entry separately. Extend to a plane only after indexed writes are clear; creation, display and collection are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "Lists, indices and traversal already have a proposed first encounter."
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "why": "Repeated construction can make separately placed bodies."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "A retained reference lets an update address one body."
+        }
+      ],
+      "adds": "Develops value versus reference, independent object state, indexed writes and nested collection traversal.",
+      "carries": "An addressed record and a declared reader, with object ownership kept separate.",
+      "status": "missing",
+      "review": "Array/tutorial.md is absent. Choose the reduced creation/display contract. The proposed reference and nested-loop foundation cannot be counted as delivered, and no random draw is assigned here.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Tutorial_3D",
+      "subjects": [
+        "Three-dimensional addresses",
+        "Storage order",
+        "Indexed reads and writes"
+      ],
+      "focus": "Convert the earlier XZ plane explicitly into values[y][z][x], then write and read one unequal XYZ address without shifting neighbours. Flight, selection and collection are supplied.",
+      "builds_on": [
+        {
+          "map": "Array",
+          "why": "A plane record separates occupancy from object references and placement."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Three spatial axes require a named frame."
+        }
+      ],
+      "adds": "Extends addressing by one dimension and makes storage order explicit.",
+      "carries": "A reliable conversion between displayed XYZ and stored YZX indices.",
+      "status": "needs_revision",
+      "review": "The existing file has a date line instead of an H1 and mostly operating/return-study notes. It does not explain converting grid_data[x][z] to values[y][z][x]; Array's prerequisite lesson is also missing.",
+      "tutorial_sha256_before": "1b19132a2d35f55bcb299feaa766021600cfb5e829cead1c7ff60af08fab8a2a",
+      "tutorial_sha256_after": "a2e6dab8907fc8b3f43b4f2eb48041901e585634333fba7f605cb077d50590d9"
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "subjects": [
+        "Remainder",
+        "Address-to-turn rules",
+        "Exceptions",
+        "Nested traversal"
+      ],
+      "focus": "Predict a small field whose address chooses a quarter-turn, add one exception and enlarge the same rule. Zero means an orientation here; the asymmetric motif and raster renderer are supplied.",
+      "builds_on": [
+        {
+          "map": "Array",
+          "why": "Nested traversal visits an addressed plane."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "A turn changes a motif's orientation."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A condition can select an exception."
+        }
+      ],
+      "adds": "Adds remainder as a repeating address rule; composes known traversal and conditions.",
+      "carries": "A motif, repeat rule and explicit exception independent of the renderer.",
+      "status": "needs_revision",
+      "review": "The file has a date line and redirects to final.md. It does not teach remainder or the reduced rule binding; the museum rasterizes images rather than building colliding per-tile bodies.",
+      "tutorial_sha256_before": "01abf86bd51201f4b14c21d3808659dc18c11ff67ab016b2cbf582f3b3cf6e71",
+      "tutorial_sha256_after": "38c56f91c562848ecfdf8d2bc5db3a4d9a115e2bd4bd70861c9a391815658b04"
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "subjects": [
+        "Source images",
+        "Receiving surfaces",
+        "Image and body rotation",
+        "Appearance and access"
+      ],
+      "focus": "Reuse the floor image on a supplied upright receiver. Predict the difference between turning the image and turning the wall's surface plus collision; compare appearance and passage.",
+      "builds_on": [
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "why": "A generating rule can supply an image."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "Turning a body differs from changing the data it displays."
+        },
+        {
+          "map": "Point_One",
+          "why": "Visible surface and collision are separate constructions."
+        }
+      ],
+      "adds": "Composition and reflection using the same image on another receiver; no new syntax.",
+      "carries": "A distinction between a source rule, its viewed appearance and physical access.",
+      "status": "needs_revision",
+      "review": "The date-led operating note explains current receivers but does not bind the learner's generated image. Existing floor and wall generators do not establish automatic transfer of the student's result.",
+      "tutorial_sha256_before": "6c8d9f89eb734d8d487b4a5468a07352a661233bf085324cf2fd5d6218dbe21d",
+      "tutorial_sha256_after": "8c91e1c2e14ab36e2cf006b586bac18c815c0d88c6721bca7759e3c2fdbaf0a7"
+    },
+    {
+      "map": "Tutorial_Disco",
+      "subjects": [
+        "Boolean scores",
+        "Playhead indices",
+        "Tempo",
+        "Cyclic reads"
+      ],
+      "focus": "Read one short boolean score through a timed playhead. Move an event at fixed tempo, then change tempo while retaining the score; sound, display and catch-up scheduling are supplied.",
+      "builds_on": [
+        {
+          "map": "Array",
+          "why": "An addressed record can be read without moving its entries."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "Elapsed seconds advance a retained state."
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "why": "Remainder wraps an index through a finite range."
+        }
+      ],
+      "adds": "Composition of indexed data and time into a repeatable event reader.",
+      "carries": "A score whose stored events remain distinct from their playback timing.",
+      "status": "needs_revision",
+      "review": "The tutorial still describes a 17x17 footstep-recording floor and Chamber_Arrays. The current instrument has four tracks of sixteen boolean steps and a separate twelve-column floor; rewrite from the actual score.",
+      "tutorial_sha256_before": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e",
+      "tutorial_sha256_after": "fa1cd78b10c7f31cb8140e0d5118d4184332a82eb303c368b91f9e900188602e"
+    },
+    {
+      "map": "Color_Context_Placed",
+      "subjects": [
+        "Palette lookup",
+        "Colour assignment",
+        "Grouping",
+        "Geometry and appearance"
+      ],
+      "focus": "Choose palette entries for existing parts while keeping their geometry fixed. Regroup separated parts by colour and inspect the selected index; direct material references and optional numeric categories are supplied.",
+      "builds_on": [
+        {
+          "map": "Array",
+          "why": "Indices can address retained values and object references."
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "why": "An arrangement has separately chosen positions and parts."
+        },
+        {
+          "map": "Tutorial_Disco",
+          "why": "An index can select a value under a repeated rule."
+        }
+      ],
+      "adds": "Practice of lookup and assignment with colour as the stored value.",
+      "carries": "A palette and selection rule separable from geometry and placement.",
+      "status": "needs_revision",
+      "review": "The companion mainly describes comparisons and source inventories. Choose one small part/material binding before claiming the learner can author the assignment; do not require the richer dictionary records.",
+      "tutorial_sha256_before": "5d9fa6c924287e859c76db207f9597d52488f52b3620867da9c61b86791cd1f0",
+      "tutorial_sha256_after": "14165897ec836485a0b3e0361490c79069c82a0c70a5571c304b42148601bf2d"
+    },
+    {
+      "map": "Color_Flashlight",
+      "subjects": [
+        "Light colour",
+        "Material colour",
+        "Receiving surfaces",
+        "Controlled comparison"
+      ],
+      "focus": "Change the existing lamp's colour with its receiver fixed, then aim it with the value fixed. Reuse the named light reference; grabbing, room geometry and rendering are supplied.",
+      "builds_on": [
+        {
+          "map": "Color_Context_Placed",
+          "why": "Colour assignment is distinct from geometry."
+        },
+        {
+          "map": "Point_One",
+          "why": "Lighting and a surface's physical boundary are separate."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "A held object's position changes within a frame."
+        }
+      ],
+      "adds": "Practice of property assignment; deepens the distinction between a light value and surface appearance.",
+      "carries": "A bounded light-colour edit and a comparison with controlled viewing conditions.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "71c0c8088739464d2a96c5914a1716e8d4412c92dd5b39b2f6c50c7cb275fabe",
+      "tutorial_sha256_after": "a73f7685c2b9b182e59477ee1c8a7f3a8d932a9a8769097c99b99e0e3eda1371"
+    },
+    {
+      "map": "Color_Nails",
+      "subjects": [
+        "Function contracts",
+        "Coordinate-to-colour mapping",
+        "Clamping",
+        "Returned colours"
+      ],
+      "focus": "Write a complete position-to-Color function using positive box dimensions, local values, clamping and return. Check origin, opposite corner and an outside point; grabbing, hands and one named preview receiver are supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Ignorance",
+          "why": "Functions take parameters and return data."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Input positions need a stated local frame."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "A bounded mapping limits input before assignment."
+        }
+      ],
+      "adds": "Develops a complete reusable calculation separately from its material receiver.",
+      "carries": "A tested position-to-colour function with explicit bounds and return type.",
+      "status": "needs_revision",
+      "review": "The existing text offers observation and signal tracing, not this authored function or preview binding. The salon's retained colours do not automatically feed Rainbow or Grid.",
+      "tutorial_sha256_before": "5437ec1394fbec1f4c3c0f481e7d99bec52101c36cd449984a3439c8e48aeab4",
+      "tutorial_sha256_after": "ac67684b0654e5e136bf3fa1536edf9c796e626a7a825fa78aa54dc043bbc325"
+    },
+    {
+      "map": "Color_Rainbow",
+      "subjects": [
+        "Palettes",
+        "Partitions",
+        "Fixed total width",
+        "Optional composition"
+      ],
+      "focus": "Compare different band counts at fixed total width and optionally choose a hand-picked palette. The arch builder and accessible route are supplied; celebration remains independent of making an edit.",
+      "builds_on": [
+        {
+          "map": "Color_Context_Placed",
+          "why": "A palette chooses appearance without determining all geometry."
+        },
+        {
+          "map": "Array",
+          "why": "A list can contain a chosen number of entries."
+        }
+      ],
+      "adds": "Reflection and optional composition; distinguishes list length from the span it partitions.",
+      "carries": "A palette/partition distinction without a new syntax requirement.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "fea9d131c3ca930dcb472f886e94ba40c25722bfe818e07b629158fd13870e5f",
+      "tutorial_sha256_after": "96507eb1e7360381c7ae792148115733bd138db266ff7dc8fee626bca5713e08"
+    },
+    {
+      "map": "Color_Pillar",
+      "subjects": [
+        "HSV coordinates",
+        "Function substitution",
+        "Coordinate adapters",
+        "Sampling"
+      ],
+      "focus": "Reuse the position-to-Color contract with HSV inputs, varying value while hue and saturation stay fixed. Explain the hand-height adapter separately; conversion, sampler and readouts are supplied.",
+      "builds_on": [
+        {
+          "map": "Color_Nails",
+          "why": "A function can return a bounded colour for a position."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "A coordinate frame and its scale must be named."
+        },
+        {
+          "map": "Color_Flashlight",
+          "why": "Equal assigned values do not imply equal appearance."
+        }
+      ],
+      "adds": "Deepens function reuse through another coordinate convention and an explicit input adapter.",
+      "carries": "An interchangeable colour function whose coordinate assumptions are visible.",
+      "status": "needs_revision",
+      "review": "The companion explains sampling well but does not teach the proposed returning function or its learner binding. Keep physical hand height distinct from field height and avoid an automatic Grid transfer claim.",
+      "tutorial_sha256_before": "6b8597c49a074760e92aef5df5007b9b2d947f5ca9da02d9a8d5f047a4161945",
+      "tutorial_sha256_after": "429592b24cba12d3e9e3f64add39509f1c5c00e7b261e9725d174d99ed589ad4"
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "subjects": [
+        "Classes",
+        "Instance state",
+        "Methods",
+        "Palette indices",
+        "Addressed assignment"
+      ],
+      "focus": "Define a small Palette class with a nonempty colour list and current index, then create two instances and advance one. Send a returned colour through the supplied address-to-floor receiver and revisit the written address.",
+      "builds_on": [
+        {
+          "map": "Primitives_Ignorance",
+          "why": "Parameters and return values give methods a readable function contract."
+        },
+        {
+          "map": "Array",
+          "why": "Independent references and indexed values must be distinguished."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "A returned Color can be assigned by a separate receiver."
+        }
+      ],
+      "adds": "Introduces an authored class with state and methods; separate instances keep independent indices.",
+      "carries": "Two palette instances and a colour result that can be written to a named address.",
+      "status": "needs_revision",
+      "review": "The proposed Palette class, methods and two-instance exercise are absent. Current COLOUR cycles four INKS and writes MultiMesh instance colours; no per-cell material or custom function binding is delivered.",
+      "tutorial_sha256_before": "d5f23fc0b70100417e7366de324e600e9dd238487a91a5ec048ae4ac9b91bbfb",
+      "tutorial_sha256_after": "d6585b30e7da688edea9c8713165e7bf128fe3ac43716f8dded51616945fda84"
+    },
+    {
+      "map": "Color_Paint",
+      "subjects": [
+        "Named actions and interaction states",
+        "Ray targets",
+        "Surface coordinates",
+        "Shared drawing methods",
+        "Interaction feedback"
+      ],
+      "focus": "Carry a manual spray can; separate hold, action and trigger pressure. Follow the nozzle ray to a valid receiver, convert the world hit into surface UV and call the shared drawing method. Change reach and compare mist with actual deposits.",
+      "builds_on": [
+        {
+          "map": "Point_Coordinates",
+          "why": "Pickup/release and conversion between local and world frames."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A retained position list provides a contrast with an evolving image."
+        },
+        {
+          "map": "Trans_Introduction",
+          "why": "Signals call handlers; state and feedback describe different stages."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "A colour value can be supplied to a shared operation."
+        }
+      ],
+      "adds": "Adds named actions, held/active conditions, eligible ray targets, world-to-surface coordinates and a reusable receiver method.",
+      "carries": "An input-to-receiver chain with distinct action and hit feedback; manual and automatic callers can use the same drawing operation.",
+      "status": "aligned",
+      "review": "Manual interaction now leads; the automatic path returns as a second caller of draw_spray. The canvas is an evolving image, not a stored gesture list. Renderer, input bindings and device setup remain supplied; no new headset test.",
+      "tutorial_sha256_before": "2b9f335c169db050c34c924b621457cc8d2b8f0c62935e36a89811b2bec95565",
+      "tutorial_sha256_after": "2d7cef31ac7a1a442891b63cc5afffc21bac1d0b57263eb1b966d75a44eeb7cd",
+      "revision_report": "doc/book/iterations/2026-10-05-eight-interaction-lessons/index.html"
+    },
+    {
+      "map": "Color_Walls",
+      "subjects": [
+        "Palette composition",
+        "Independent state",
+        "Part arrangements",
+        "Transparency and passage"
+      ],
+      "focus": "Compose a small existing pane or part arrangement using a returning colour function and independently held palette state. Predict shared values versus separate instance state; lighting, transparency and collision remain supplied.",
+      "builds_on": [
+        {
+          "map": "Color_Grid_Pallet",
+          "why": "A palette instance owns its current state."
+        },
+        {
+          "map": "Color_Nails",
+          "why": "A returning function separates calculation from assignment."
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "why": "Placement changes relationships among fixed forms."
+        }
+      ],
+      "adds": "Composition and practice of foundation concepts; no required new syntax.",
+      "carries": "An explained arrangement combining functions, assignment and separate state.",
+      "status": "needs_revision",
+      "review": "The existing pane and palette edits remain useful, but the proposed class-instance synthesis is absent because Grid's class is not taught. The spacing prose says 0.18 while its example uses 0.21; resolve during lesson revision.",
+      "tutorial_sha256_before": "04bb373e9a49b6de7c059d12f4a724b1f9679315a5d477f6d7e939b19737ad86",
+      "tutorial_sha256_after": "9aecf5086e09dc5edd8196d13f2b9e48e211469c9dfc65ea7cf4a864384baad7"
+    },
+    {
+      "map": "Pattern_Disco",
+      "subjects": [
+        "Palette substitution",
+        "Pattern values",
+        "Phase",
+        "Independent clocks"
+      ],
+      "focus": "Hold the floor and score, change a colour pair, then advance phase with the palette fixed. Separate the calculated values, their displayed colours and the score clock; floor and controls are supplied.",
+      "builds_on": [
+        {
+          "map": "Color_Walls",
+          "why": "A palette can change while an arrangement stays fixed."
+        },
+        {
+          "map": "Tutorial_Disco",
+          "why": "A score and its clock have separate state."
+        },
+        {
+          "map": "Color_Grid_Pallet",
+          "why": "A lookup selects an assigned colour."
+        }
+      ],
+      "adds": "Practice and comparison of value, reader and appearance; no new data structure.",
+      "carries": "A controlled distinction between palette substitution and a changed pattern input.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "15ac946afdefde6e61975de525cb02dee025596be9f1d08d392a7363c1953e42",
+      "tutorial_sha256_after": "1f1a7c11685809d5aca5c2fedf81f49a590485dba92ec59cbf5d462597356847"
+    },
+    {
+      "map": "Pattern_Foundry",
+      "subjects": [
+        "Source arrays",
+        "Wrapped lookup",
+        "Palette indices",
+        "Copies and references"
+      ],
+      "focus": "Edit one small source[row][column] motif and read it through wrapped addresses into a supplied preview. On a later return compare an independent nested copy with a live reference; keep held images distinct from copied source data.",
+      "builds_on": [
+        {
+          "map": "Array",
+          "why": "An indexed write changes one retained entry."
+        },
+        {
+          "map": "Pattern_Disco",
+          "why": "A palette reads values without changing their pattern."
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "why": "Remainder supplies repeating addresses."
+        }
+      ],
+      "adds": "Deepens addressed data into a source-and-reader pair, then independent copies versus shared references.",
+      "carries": "A motif with an explicit reader and a stated copy/reference relationship.",
+      "status": "needs_revision",
+      "review": "The current companion documents many studio receivers and save/hold controls, but does not teach the reduced source array or copy exercise. A held texture is not the implementation of a copied nested source array.",
+      "tutorial_sha256_before": "018061a5b6cb9c17425afdff19f4e807102766deeeb7247a500f5e2fb02d8bb5",
+      "tutorial_sha256_after": "dc88b8753f3884e05fcdd23fa258a468508cbf68ab0468b0e8dadead476f3fc6"
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "subjects": [
+        "Reflected lookup",
+        "Source mutation",
+        "Asymmetric motifs",
+        "Translation period"
+      ],
+      "focus": "Use an asymmetric mark to compare reflected reads with reversing entries within each source row. Inspect which source values change; displays and the pattern renderer are supplied.",
+      "builds_on": [
+        {
+          "map": "Pattern_Foundry",
+          "why": "A source record is distinct from the rule reading it."
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "why": "Address rules repeat a motif."
+        },
+        {
+          "map": "Trans_Rotation",
+          "why": "A spatial operation changes orientation."
+        }
+      ],
+      "adds": "Deepens source-versus-reader reasoning through reflection and an observable two-column repeat.",
+      "carries": "A diagnostic motif that distinguishes transformed reads from changed data.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f",
+      "tutorial_sha256_after": "fb5f89b6610498c8d7e75bdd6101ea38124c5e094e55adbdfdc1818a3e23812a"
+    },
+    {
+      "map": "Array_Patterns",
+      "subjects": [
+        "Surface addresses",
+        "Local axes",
+        "Physical cell width",
+        "Repeat span"
+      ],
+      "focus": "Follow one surface address back to a fixed source, compare floor and wall axes, then change cell width. Predict the whole motif's metre span; tunnel, collision and selector are supplied.",
+      "builds_on": [
+        {
+          "map": "Tutorial_Pattern",
+          "why": "Wrapped reads can repeat one source without altering it."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Different surfaces need named frames."
+        },
+        {
+          "map": "Tutorial_Tiling_Walls",
+          "why": "The receiver affects appearance and physical access separately."
+        }
+      ],
+      "adds": "Deepens address conversion by giving one source cell an explicit physical scale.",
+      "carries": "A surface-to-source mapping with stated axes, origin and cell width.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "f7e4eea41859a769da644fd8db45e307f464d1c873572a8aabbb031d3fb5aa1d",
+      "tutorial_sha256_after": "81957284e9601eb21c880104debb54bf1eb2a7fb966307b14637dc853a2c90b8"
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "subjects": [
+        "Reflection",
+        "Glide reflection",
+        "Symmetry-breaking marks",
+        "Translation periods"
+      ],
+      "focus": "Compare wrapping, reflected blocks and a two-row glide on the four-row source. Use an asymmetric mark to expose the rule and inspect the resulting period; editor, image hold and classification display are supplied.",
+      "builds_on": [
+        {
+          "map": "Tutorial_Pattern",
+          "why": "An asymmetric source can reveal a reflected read."
+        },
+        {
+          "map": "Pattern_Foundry",
+          "why": "A palette-index source is sampled through a chosen rule."
+        }
+      ],
+      "adds": "Adds a bounded glide operation and deepens construction rule versus resulting symmetry.",
+      "carries": "A tested motif and period with limits on what the comparison establishes.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "a65fa4f95c20b54d3e22e9dafd23af32be54d44ebb21a7117385826248e35d8a",
+      "tutorial_sha256_after": "d26de88de16e170ee31474b78663b02b1b5990a86a052f055389b10c0a4eba88"
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "subjects": [
+        "Layered arrays",
+        "Storage conventions",
+        "Height-dependent lookup",
+        "Value meaning"
+      ],
+      "focus": "Reuse volume[y][z][x] and a SOURCE[z][x] plane, then shift the wrapped source column by height. Predict unequal indices; cubes, slicing and selection are supplied. Zero now names a pale colour, not vacancy.",
+      "builds_on": [
+        {
+          "map": "Tutorial_3D",
+          "why": "Displayed XYZ and stored YZX have an explicit conversion."
+        },
+        {
+          "map": "Pattern_Foundry",
+          "why": "A source array can be read repeatedly through another address."
+        }
+      ],
+      "adds": "Composition of volume addressing and wrapped lookup; adds height as an input to the reader.",
+      "carries": "A layered reader whose storage order and value meaning are declared.",
+      "status": "missing",
+      "review": "tutorial.md is absent. Keep sixteen visible slice entries distinct from sixty-four stored entries; this uses a fixed motif rather than importing the student's earlier edit.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "subjects": [
+        "Numerical equality",
+        "Surrounding colour",
+        "Surface spacing",
+        "Projected appearance"
+      ],
+      "focus": "Compare equal target values with different surrounds, then the same source spacing on flat and curved carriers. Keep numerical equality, arc length and projected width distinct; controls and shading are supplied.",
+      "builds_on": [
+        {
+          "map": "Color_Flashlight",
+          "why": "Appearance depends on receiving and viewing conditions."
+        },
+        {
+          "map": "Array_Patterns",
+          "why": "Physical cell spacing differs from the whole repeat span."
+        },
+        {
+          "map": "Pattern_Foundry",
+          "why": "The same source can have different receivers."
+        }
+      ],
+      "adds": "Reflective practice of controlled comparison; no new code or dot-product prerequisite.",
+      "carries": "An explanation separating equal values and distances from viewed appearance.",
+      "status": "missing",
+      "review": "tutorial.md is absent. A short comparison lesson is enough; no perceptual response, spectral-metamerism result or new shader authorship is required here.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "subjects": [
+        "Texture coordinates",
+        "Repeat and offset",
+        "Fragment output",
+        "Saved recipes"
+      ],
+      "focus": "Use the existing studio host for a tiny UV-times-repeat-plus-offset sampling rule that writes ALBEDO. Predict count and offset separately; palette-to-texture conversion, materials, meshes and wardrobe are supplied.",
+      "builds_on": [
+        {
+          "map": "Array_Patterns",
+          "why": "Physical spacing and repeated source cells have separate meanings."
+        },
+        {
+          "map": "Pattern_Foundry",
+          "why": "A source and saved version are distinct from their current receiver."
+        },
+        {
+          "map": "Ribbon_Patterns_02",
+          "why": "Equal UV counts need not give equal physical spacing."
+        }
+      ],
+      "adds": "Introduces a small fragment sampling operation through an explained existing host.",
+      "carries": "A repeat-and-offset shader operation plus a bounded saved appearance recipe.",
+      "status": "missing",
+      "review": "tutorial.md is absent. Select the excerpt and edit location in the existing host. SAVE stores supported cells/settings, not palette, shader source, mesh or a general garment; deformation waits for Shaders.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Change_Intro",
+      "subjects": [
+        "Finite differences",
+        "Signed intervals",
+        "Finite sums",
+        "Sample rules",
+        "Numerical references"
+      ],
+      "focus": "First calculate a finite rate from two supplied curve values over nonzero h; then sum sampled height times width. Predict sign and one contribution before totals. Curve, analytic tangent and plotting are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "A difference describes change between two values."
+        },
+        {
+          "map": "Primitives_Portals",
+          "why": "Traversal can accumulate a scalar total."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A function has explicit inputs and a returned value."
+        }
+      ],
+      "adds": "Adds rate per input unit and numerical accumulation as two separate mathematical operations.",
+      "carries": "Small rate and sum functions with declared domain, units and sampling rule.",
+      "status": "needs_revision",
+      "review": "The current companion describes the workbenches and calculations, but no exact learner edit/receiver binding. Keep the bridge's different arch and signed-rate sum separate; the 4096-sample reference is finite.",
+      "tutorial_sha256_before": "24c2e4cc6cbb615a08938c45ca415f8662887bb2c65f675131cad513c19743a5",
+      "tutorial_sha256_after": "636df8de27e51b7ae7955d1e1f308d4872c337c37d87238ad40fa97b73282be0"
+    },
+    {
+      "map": "Flow_Field",
+      "subjects": [
+        "Field sampling",
+        "Position updates",
+        "Prescribed velocity",
+        "Retained trails"
+      ],
+      "focus": "Hold field time, sample a direction at the current canvas position and update by direction times speed times seconds. Predict two steps from another start; field construction, rendering and boundaries are supplied.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "Elapsed seconds determine a time-based displacement."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A retained trail connects ordered sampled positions."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "An update has stated input units and finite step size."
+        }
+      ],
+      "adds": "Adds repeated lookup at the newly reached address; velocity is prescribed rather than retained.",
+      "carries": "A field follower and record with a declared canvas frame and boundary policy.",
+      "status": "needs_revision",
+      "review": "The companion names the sampler but omits the selected learner update binding. Canvas y maps to local Z before display rotation. Existing wrap lines and RESET/SPEED do not implement a controlled timestep comparison.",
+      "tutorial_sha256_before": "2925f1d75d727a12e67d3bb09f7c43f6c62b14c2f8923b38fab1777fa395f50e",
+      "tutorial_sha256_after": "e69d273644b82ddad5f3a3aeb6dee1aa0ee22ce7e04823c1f55b02885704a0f0"
+    },
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "subjects": [
+        "Displacement",
+        "Magnitude and direction",
+        "Normalization",
+        "Display scale"
+      ],
+      "focus": "Reuse two world positions, predict their difference under a common shift and compare short, long and zero cases. Briefly explain normalization and its zero threshold; projections and readouts are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Subtracting positions gives a displacement and scalar length."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "World and display frames must be distinguished."
+        }
+      ],
+      "adds": "Practice of displacement with an explicit normalization return and threshold.",
+      "carries": "A direction-and-magnitude account that separates measured data from its scaled drawing.",
+      "status": "needs_revision",
+      "review": "The companion lists normalization thresholds but does not explain division by length as the selected learner operation. Translation has not yet delivered its proposed normalization practice; supply or teach this short return explicitly.",
+      "tutorial_sha256_before": "b368f48852f57b52bc2fd595379995e075c088e535ce0137ec080f7e8fb03abe",
+      "tutorial_sha256_after": "d8876b0bb3a48ecfaa2391e28f35600fd8867b7b6c50238b4c2cb9db8c39aa1a"
+    },
+    {
+      "map": "VFM_02_Operations",
+      "subjects": [
+        "Vector addition",
+        "Resultant displacement",
+        "Route length",
+        "Coordinate conversion"
+      ],
+      "focus": "Predict a+b, swap the contributions and compare two-leg distance with the direct route. Cancel with b=-a and account for the excluded reset; carriage movement and wall drawing are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Displacement and length retain different information."
+        },
+        {
+          "map": "Primitives_Portals",
+          "why": "A running sum can accumulate neighbouring distances."
+        },
+        {
+          "map": "Trans_Translation",
+          "why": "An ordered route preserves intermediate travel."
+        }
+      ],
+      "adds": "Deepens vector addition by separating summed destination from summed travelled lengths.",
+      "carries": "A result vector and route-distance account in a declared local frame.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "0b080b8614d41adfd9595d10e097c3ab71e8b95e3a07b8fe4fea66467de2154b",
+      "tutorial_sha256_after": "8682a731d14d86aa10770e78e6a0d6245a1bcbf078162c8e7c4c8a19c3b59f35"
+    },
+    {
+      "map": "Vectors_Act2_VectorArithmetic",
+      "subjects": [
+        "Signed dot product",
+        "Projection",
+        "Remainders",
+        "Recombination"
+      ],
+      "focus": "Project the actual gap onto a supplied unit rail, subtract the kept vector and recombine. Predict the effect of rail reversal and perpendicular input movement; controls and diagrams are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Subtraction gives the gap between positions."
+        },
+        {
+          "map": "Vectors_Act1_WhatAVectorIs",
+          "why": "A normalized axis supplies direction independently of length."
+        },
+        {
+          "map": "VFM_02_Operations",
+          "why": "Vector sums can recombine contributions."
+        }
+      ],
+      "adds": "Adds signed scalar projection, its vector component and complementary remainder.",
+      "carries": "A projection-plus-remainder construction with an explicit receiving axis.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "eba407a6dbff63d05af16d4cbfda0f4c44588a0e8e14b7579d103d9f9ca2fbbe",
+      "tutorial_sha256_after": "d360217e5948852381439583694be00fa0ed86cc4210e9a640af2d4f48a96ca6"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "subjects": [
+        "Position functions",
+        "Initial velocity",
+        "Acceleration",
+        "Model assumptions"
+      ],
+      "focus": "Evaluate the supplied position-at-time formula and vary one beginning. Compare complementary angles and distinguish a slower local clock from stronger gravity; conversion, duration and analytic marker display are supplied.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "Elapsed time is an input to a prescribed position."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "Rate has declared units."
+        },
+        {
+          "map": "Vectors_Act1_WhatAVectorIs",
+          "why": "Vector components and display scale have separate meanings."
+        }
+      ],
+      "adds": "Adds velocity and acceleration units in a supplied analytic prediction; no integrator is introduced.",
+      "carries": "A position-at-time function with equal-height, uniform-gravity and no-drag assumptions.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "829513da55c12ee2399d84860e0f8361b551417979d6451f457fd1a3086d3a57",
+      "tutorial_sha256_after": "382af7a51b013db8149089d1c1a2013199fef1bad17ba09962b43a0a5af413f9"
+    },
+    {
+      "map": "VFM_03_Motion",
+      "subjects": [
+        "Force schedules",
+        "Mass",
+        "Retained velocity",
+        "Engine integration"
+      ],
+      "focus": "Author a finite force pulse for the supplied rigid body and predict delta-v from force, mass and duration. Compare COAST with stopping the body, using drag-off runs before contact; integration and readouts are supplied.",
+      "builds_on": [
+        {
+          "map": "VFM_05_Launch",
+          "why": "Initial velocity is distinct from a position evaluated at time."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "Rate and accumulated change have stated units."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "A timed condition can delimit a command."
+        }
+      ],
+      "adds": "Adds a force receiver whose velocity persists after the command ends.",
+      "carries": "A force schedule and quantitative velocity-change prediction.",
+      "status": "needs_revision",
+      "review": "The existing operating/source companion explains the engine force command but does not provide the proposed learner schedule binding. Pass force in newtons without another dt factor; COAST alone leaves optional damping active.",
+      "tutorial_sha256_before": "356bae8ebb7f7ec4b699bc0782292c1b14586200c5e064a010edfe6d6c75c336",
+      "tutorial_sha256_after": "c0bf327feef84e9695d62e3af64548dec7f586b16864dc17894aaace9e8d6cc4"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "subjects": [
+        "Position and velocity state",
+        "Assignment and accumulation",
+        "Acceleration updates",
+        "Reset conditions"
+      ],
+      "focus": "Compare setting velocity from a field with adding acceleration to retained velocity, then update position. Predict two uniform steps before sink motion; field, unit adapters, runner and trails are supplied.",
+      "builds_on": [
+        {
+          "map": "Flow_Field",
+          "why": "A follower resamples at its current position."
+        },
+        {
+          "map": "VFM_03_Motion",
+          "why": "Velocity can survive a changed command."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "A finite update accumulates a rate over time."
+        }
+      ],
+      "adds": "Adds explicit position/velocity state and an assignment-versus-accumulation comparison.",
+      "carries": "A small update convention reusable by later forces, with its receiver units stated.",
+      "status": "needs_revision",
+      "review": "The source rules are described, but the proposed reduced learner function and runner connection are absent. The markers have no mass or collisions and sample different values after their positions diverge; no learner state travels between halls.",
+      "tutorial_sha256_before": "3149384db6890fd55f649be165450c18fecd41fe76b0cd02de528774b691f6e0",
+      "tutorial_sha256_after": "4e733aea8d71f9895ae638bd6fef5849a82cdf9f75ff0c00dae99c4749b7e254"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "subjects": [
+        "Velocity-dependent force",
+        "Linear drag",
+        "Mass response",
+        "Receiver contracts"
+      ],
+      "focus": "Write one drag calculation F=-b*v and predict initial acceleration for two masses at equal speed. Keep the engine integration supplied; walking resistance, nominal mower work and circular motion remain separate comparisons.",
+      "builds_on": [
+        {
+          "map": "VFM_03_Motion",
+          "why": "The engine integrates force commands for a body with mass."
+        },
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "why": "Force, acceleration and assigned velocity require different receiving operations."
+        }
+      ],
+      "adds": "Adds a force that depends on the receiver's current velocity.",
+      "carries": "A reusable linear resistance calculation with coefficient units and receiver responsibility.",
+      "status": "needs_revision",
+      "review": "The companion documents -b*v but does not bind a learner drag function. WALK uses a separate multiplier, mower work is nominal and the ring prescribes motion; none substitutes for the chosen force exercise.",
+      "tutorial_sha256_before": "1a2e94a94cf086ecccfc6122b65a13e4dd1d02aaa152ff5aae89da98ad0f3db3",
+      "tutorial_sha256_after": "cb39c509ffb17ab9aceef13a6d1e23daf8df47460d37a0b54e9eb80aa3681b87"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "subjects": [
+        "Restoring force",
+        "Damping",
+        "Equilibrium",
+        "State integration"
+      ],
+      "focus": "Add restoration and drag in one dimension, then update velocity and position. Predict force direction and crossing from equal beginnings; rail, handle, timestep runner and damping-ratio adapter are supplied.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "why": "The proposed explicit state update separates velocity from position."
+        },
+        {
+          "map": "Vectors_Act4a_KineticForces",
+          "why": "Resistance depends on velocity."
+        },
+        {
+          "map": "Point_Lines",
+          "why": "Displacement can measure distance from a chosen centre."
+        }
+      ],
+      "adds": "Adds F=-kx-cv to an existing state-update pattern; equilibrium need not mean rest.",
+      "carries": "A spring-damper calculation distinct from a prescribed sine animation.",
+      "status": "needs_revision",
+      "review": "The current model is explained but the common learner update/binding is still proposed. DAMP selects a ratio, so fixed-ratio changes of mass or stiffness also change the coefficient; release starts from rest.",
+      "tutorial_sha256_before": "3d81aef75d088c15a002bffa638696e7e0d4caa15bec8c655f4560596be73441",
+      "tutorial_sha256_after": "4871d952cbe74a8ed98199f02c255f04278415b1d1495660ba740773a549b0fb"
+    },
+    {
+      "map": "Change_Choreography",
+      "subjects": [
+        "Period",
+        "Phase",
+        "Relative rate",
+        "Accumulated angle"
+      ],
+      "focus": "Introduce period and phase at the rods, then halve the paired dials' rate difference and predict their gap after thirty seconds. Hold the gap with SAME RATE; displays and controls are supplied.",
+      "builds_on": [
+        {
+          "map": "Trans_Pre",
+          "why": "An angle can advance with elapsed seconds."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "A rate difference accumulates a change."
+        },
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "why": "Returning motion motivates a cycle without already teaching phase."
+        }
+      ],
+      "adds": "Introduces period and phase; deepens assigned offsets versus accumulated rate difference.",
+      "carries": "A quantitative prediction of two stored angles under changed rates.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "fd1e553c324e8169a2c6a586134d9bf871c310019d54219047ba873b53ef91a4",
+      "tutorial_sha256_after": "d135b7c2b8a3e7dfc51a8c466fee7946d7657d70d29461d1820910f477dbbb35"
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "subjects": [
+        "Pair contributions",
+        "Receiving masses",
+        "Equal and opposite forces",
+        "Held sources"
+      ],
+      "focus": "Apply paired interaction contributions to declared receivers and compare unequal masses before integration. Supply the softened attraction law and stepper; inspect the omitted response of a held source.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Separation supplies an interaction's direction and length."
+        },
+        {
+          "map": "VFM_03_Motion",
+          "why": "Force and receiving mass determine acceleration."
+        },
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "why": "Independent bodies need separately retained state."
+        }
+      ],
+      "adds": "Adds distributing one interaction to two recipients rather than writing a new gravity solver.",
+      "carries": "A pairwise contribution pattern with explicit fixed or responsive recipients.",
+      "status": "needs_revision",
+      "review": "The tutorial describes the model but does not teach the proposed two-contribution exercise. The fixed and mutual stations also change masses and initial states, so their paths cannot isolate source release alone.",
+      "tutorial_sha256_before": "229e4c2018a9a2f9e70264df1dbb0b742e04cb6d1c1796aaf86b036d3ad7c01d",
+      "tutorial_sha256_after": "8e0d733c3245595dc2beb47f3428acc2776487e0312e0bbe7ba3f34b23b40df3"
+    },
+    {
+      "map": "VFM_09_Legs",
+      "subjects": [
+        "Support polygons",
+        "Mass projection",
+        "Static balance",
+        "Model limits"
+      ],
+      "focus": "Predict adjacent versus diagonal support for the same centred load, then release and compare. The hull and physics solver are supplied; contrast the commanded walker with the plate's contact response.",
+      "builds_on": [
+        {
+          "map": "Point_Triangle_Context",
+          "why": "A boundary can describe a geometric region."
+        },
+        {
+          "map": "VFM_03_Motion",
+          "why": "Engine-integrated motion differs from prescribed placement."
+        }
+      ],
+      "adds": "Practice and physical comparison of geometry and mass; no new hull or gait implementation.",
+      "carries": "An explicit support hypothesis with assumptions about pads, load and contact.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "da23a1a2657821c110122b977727e5174e4d2b7fde088c5746a2aafd031d7bcf",
+      "tutorial_sha256_after": "3f3ad3a347505a1592629ee6ee8d9e6f1ae5dcba48aec17601094688e45c60ae"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "subjects": [
+        "Eligibility conditions",
+        "Occlusion",
+        "Event history",
+        "Authored thresholds"
+      ],
+      "focus": "Hold positions fixed, insert the screen and predict target eligibility before feeding begins. Compare selection with completed-meal history; selector, sight test and controller remain supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Distance can enter a condition."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "A current test differs from retained state."
+        },
+        {
+          "map": "VFM_09_Legs",
+          "why": "Commanded behaviour and physical validation are different kinds of evidence."
+        }
+      ],
+      "adds": "Reflective practice of conditions and retained events; no new controller syntax.",
+      "carries": "A distinction between eligible targets, recorded events and attributed agency.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "1852042d465d22bcdb552ef23f5d3d2b9032fef2fb92f885c52dabecb29dc170",
+      "tutorial_sha256_after": "8e3dd958343eea42f3f656a3e004f51a76918d4a20af2a15ef148280008db990"
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "subjects": [
+        "Field membership",
+        "Acceleration",
+        "Retained velocity",
+        "Receiver adapters"
+      ],
+      "focus": "Use the cubes to predict zero acceleration versus an immediate stop, then compare the visitor's separate receiver. Compose existing controls; membership tests, damping and contact handling are supplied.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "why": "Acceleration changes stored velocity rather than replacing it."
+        },
+        {
+          "map": "VFM_03_Motion",
+          "why": "A body retains motion when a command ends."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "The field and recipient need named coordinate frames."
+        }
+      ],
+      "adds": "Composition of field input with declared receivers and entry/exit rules.",
+      "carries": "A receiver-aware account of acceleration, membership and persistent motion.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "f3b2815aed203bfac23137f6aafda9687fe615e1c76b910f8ee8193d5b7d50a6",
+      "tutorial_sha256_after": "ebda414bc6d5b56ca2ef217589063eb373b6e97594e262ec2d9b7b63bbe64521"
+    },
+    {
+      "map": "FormFinding_Descent",
+      "subjects": [
+        "Cost functions",
+        "Finite-difference gradients",
+        "Search steps",
+        "Stopping reasons"
+      ],
+      "focus": "Predict the next search address from the cost gradient, step the supplied optimiser and compare starts, rates and thresholds. Surface, controls and trails are supplied; distinguish search iterations from physical time.",
+      "builds_on": [
+        {
+          "map": "Change_Intro",
+          "why": "Finite differences estimate local rates."
+        },
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "why": "An update's state and units determine its meaning."
+        },
+        {
+          "map": "Vectors_Act5_ForceAsPlace",
+          "why": "Retained velocity provides a contrast with this velocity-free search."
+        }
+      ],
+      "adds": "Adds a two-axis cost gradient and descent update with separate slope, frame and budget stops.",
+      "carries": "A local search rule with a declared objective, step and reason for stopping.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "cad3c6072ed8a3902c62b58471c2b9047f46582e32fb9a1c6fdc5edffa52ed34",
+      "tutorial_sha256_after": "3781ba0ab3cf30dcdfb8e8ad8101d95f2a8dc3204fd86cc4dc84348d8f624caa"
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "subjects": [
+        "Boundary conditions",
+        "Drafted curves",
+        "Evaluated curves",
+        "Physical constraints"
+      ],
+      "focus": "Compare the hand-shaped spline, formula washing lines and fixed surface. Change one span or sag input and state which constraints it retains; samplers, tubes and analytic examples are supplied.",
+      "builds_on": [
+        {
+          "map": "Primitives_Profiles",
+          "why": "A profile or path can be evaluated by a supplied construction."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A function's inputs determine generated positions."
+        },
+        {
+          "map": "FormFinding_Descent",
+          "why": "A computed objective must be distinguished from a drawn result."
+        }
+      ],
+      "adds": "Reflective comparison of drawn, evaluated and physically settled constructions; no required new syntax.",
+      "carries": "A curve specification that names its inputs and absent physical tests.",
+      "status": "needs_revision",
+      "review": "Current prose calls the drafted sag curve gravity-derived and the fixed catenoid an instantly solved minimum. Align it with the actual spline/formula/static-surface comparison; decide whether a bounded code exercise is needed.",
+      "tutorial_sha256_before": "97e38631df61b7be846e4a34fc855102f9bb7fb1db07ed24ecac8e91df58bbcf",
+      "tutorial_sha256_after": "0a4de141386856f9047c7af18b9e6667f8d0afa1c802efcbfe1ee4446765df0b"
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "subjects": [
+        "Position history",
+        "Rest lengths",
+        "Constraint corrections",
+        "Pinned endpoints",
+        "Iteration budgets"
+      ],
+      "focus": "Use a short chain to correct neighbouring distances, guard zero separation and account for pinned endpoints. Compare correction counts with disturbance disabled; runner, line renderer and optional wind are supplied.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "Position history can be retained in ordered lists."
+        },
+        {
+          "map": "Point_Lines",
+          "why": "Neighbour distance gives a measurable error."
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "why": "Connections are data separate from positions."
+        }
+      ],
+      "adds": "Adds repeated local distance correction under a finite computation budget.",
+      "carries": "A constrained network with explicit anchors, rest lengths and correction count.",
+      "status": "needs_revision",
+      "review": "The current tutorial jumps through full cloth and frozen forms, divides by cur without a zero guard and overstates a one-over-passes law. The proposed short-chain binding and pinned-end correction explanation are absent.",
+      "tutorial_sha256_before": "21075942806c3dc35a8637d4aa9b0934215fce49b47c929e9c29a98e0735b56c",
+      "tutorial_sha256_after": "090aee4c79456fd9f0b4d14b4959a67b6249b35f2f7b57d104a98f894d1f40ea"
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "subjects": [
+        "Lever balance",
+        "Mass-distance products",
+        "Solved arm lengths",
+        "Model assumptions"
+      ],
+      "focus": "Calculate two arm lengths across a chosen span and check equal mass-distance products. Supply modelled disc masses and geometry; inspect the heavier side nearer its pivot without claiming dynamic stability.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Distances can become inputs to a numerical constraint."
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "why": "A small returning function can generate geometry parameters."
+        },
+        {
+          "map": "VFM_09_Legs",
+          "why": "Static balance is conditional and differs from a demonstrated dynamic response."
+        }
+      ],
+      "adds": "Adds an algebraic balance function; recursion and larger structural construction remain supplied.",
+      "carries": "A lever calculation with omitted rod/wire mass and other assumptions stated.",
+      "status": "needs_revision",
+      "review": "The lever calculation is present, but the tutorial expands into untaught recursion and claims strength and force balance from prescribed geometry/scale motion. Select the small function and separate display from mechanical validation.",
+      "tutorial_sha256_before": "d6445e539295fddd8603899affa20d426b28207c2714015e91de7f2d4bb6f8e8",
+      "tutorial_sha256_after": "34fcb68c2a19fee86a5d567deee86bfb2a3a5f5f8ca6ccb161848e02db57ac38"
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "subjects": [
+        "Bounded random draws",
+        "Candidate proposals",
+        "Acceptance conditions",
+        "Temperature",
+        "Current and best states"
+      ],
+      "focus": "Propose bounded candidates, keep improvements and compare a zero-to-one draw with a supplied uphill probability. Separate current from best-so-far state and compare cooling; landscapes and controls are supplied.",
+      "builds_on": [
+        {
+          "map": "FormFinding_Descent",
+          "why": "A cost function evaluates a proposed search address."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "A condition selects which value to retain."
+        },
+        {
+          "map": "Trans_Body",
+          "why": "Current state and remembered state can serve different purposes."
+        }
+      ],
+      "adds": "Introduces a local bounded random draw and probability comparison before Randomness, then non-greedy search.",
+      "carries": "A probabilistic acceptance rule with separate current and best records.",
+      "status": "needs_revision",
+      "review": "The tutorial uses randf/randf_range before explaining range and draw timing, and lacks the selected best-so-far exercise. Stagnation is not proof of entrapment and cooling does not guarantee escape or optimality.",
+      "tutorial_sha256_before": "bb415e56210542a17e7ec8f33b9a87655f582e52fb976efc43272cbe6e70d545",
+      "tutorial_sha256_after": "50b5b0bd71ecc1a86ea09fe8505a97778647a4d2c29166b148d8c5b5dcf76e93"
+    },
+    {
+      "map": "FormFinding_Forge",
+      "subjects": [
+        "Success predicates",
+        "Duration thresholds",
+        "Restart conditions",
+        "Physical and prescribed outcomes"
+      ],
+      "focus": "Write height and low-movement-duration requirements for a supplied stack measurement, then test a still but rejected construction. Compare this predicate with optimiser restarts and the clock-driven forge; contacts and measurements are supplied.",
+      "builds_on": [
+        {
+          "map": "Trans_Body",
+          "why": "A current condition can update remembered state."
+        },
+        {
+          "map": "Trans_Pre",
+          "why": "Elapsed time can accumulate while a condition holds."
+        },
+        {
+          "map": "FormFinding_Descent",
+          "why": "A search stop does not itself establish a satisfactory outcome."
+        }
+      ],
+      "adds": "Composition of conditions, timers and criteria; no new syntax or universal optimum is introduced.",
+      "carries": "An explicit success criterion and a counterexample it correctly rejects.",
+      "status": "needs_revision",
+      "review": "The tutorial omits the stack's height requirement and presents the clock-driven target/jitter as optimised physical form. Confirm the measurement interface and distinguish stability detection, search restarts and prescribed MAX Q appearance.",
+      "tutorial_sha256_before": "b1dbf107f0d779379783353f150b1536834dd31b662521b4eaae30162f3ae423",
+      "tutorial_sha256_after": "5d46ccea4151e6f1a793fa4f713e8234960fb97945bb01ca4d669bdee61bf863"
+    }
+  ]
+}

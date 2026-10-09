@@ -1,0 +1,8 @@
+{
+  "make": "One Label3D reads engine frames; compare repeated and once-only reading.",
+  "bring": "Day Zero: working project and ability to run a Node3D script.",
+  "given": "Prepared camera, light and player. No label or hidden construction helper.",
+  "build": "Print complete script once. Create and attach label in _ready; assign text in _process. Once-only experiment: move assignment after attachment, remove empty _process; do not repeat unchanged code.",
+  "check": "Extract printed base verbatim; mechanically apply the printed move. Run Godot assertions on both states. Reject missing label creation and attachment.",
+  "later": "Point One constructs a point. Coordinates inherits that exact program, adding pickup and reading local/world positions. No retaught sphere or unprinted production code."
+}

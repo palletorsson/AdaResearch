@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Triangle — Primitives facing pages · Endless Museum</title>
+<style>
+:root{--paper:#fcfaf5;--ink:#272c2b;--muted:#707570;--rule:#dcdcd3;--green:#36584e}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#e7e8e2;color:var(--ink)}body{font:16px/1.6 Georgia,'Times New Roman',serif;display:grid;grid-template-rows:auto minmax(0,1fr) auto}a{color:var(--green);text-underline-offset:3px}button,select{font:13px/1.3 system-ui,sans-serif;color:inherit}button{cursor:pointer;background:transparent;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px}button:hover{background:#f5f5ef}button:disabled{opacity:.32;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,article:focus-visible{outline:2px solid var(--green);outline-offset:3px}header{padding:17px 32px 13px;display:flex;gap:28px;align-items:center;justify-content:space-between}.brand{font-size:25px;line-height:1.1;letter-spacing:-.7px}.strap{font:10px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:6px}.chapter-title{font:13px/1.5 system-ui,sans-serif}.chapter-title strong{display:block;font-weight:500;font-size:16px}.chapter-title span{color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:9px}select{background:#f8f8f3;border:1px solid #bfc4ba;border-radius:3px;padding:9px 26px 9px 11px;max-width:220px}main{min-height:0;padding:0 28px 4px}.spread{height:100%;max-width:1680px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-shadow:0 5px 22px #28302712;border:1px solid #d5d7ce;background:var(--paper)}[hidden]{display:none!important}.page{min-width:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#bac0b3 transparent;padding:22px clamp(25px,4vw,67px) 34px;scroll-padding-top:25px}.tutorial{background:linear-gradient(to left,#e7e6dd 0, #f6f3ec 5px,var(--paper) 28px)}.final{background:linear-gradient(to right,#e7e6dd 0,#f6f3ec 5px,var(--paper) 28px);border-left:1px solid #d8d7cc}.running-head{display:flex;align-items:center;gap:10px;min-height:30px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:32px;font:10px/1.5 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.running-head a{margin-left:auto;white-space:nowrap;text-decoration:none}.intent{font-size:9px;background:#efeadc;border-radius:2px;padding:2px 5px;letter-spacing:0}.prose{font-size:18px;line-height:1.75;overflow-wrap:break-word}.prose h1,.prose h2,.prose h3,.prose h4{font-weight:400;line-height:1.2;scroll-margin-top:20px}.prose h1{font-size:clamp(28px,2.6vw,40px);letter-spacing:-.7px;margin:0 0 32px;text-wrap:balance}.prose h2{font-size:27px;margin:38px 0 18px}.prose h3{font-size:22px;margin:30px 0 15px}.prose p{margin:0 0 21px}.prose ul,.prose ol{padding-left:24px;margin:0 0 23px}.prose li{margin:6px 0}.prose blockquote{margin:27px 0;border-left:2px solid #b8c4b7;padding-left:22px;color:#4b5851}.prose pre{padding:18px 20px;margin:25px -7px;background:#edf0e9;border:1px solid #dce2d5;border-radius:2px;overflow:auto;font:12.5px/1.7 Consolas,'Courier New',monospace;tab-size:4}.prose code{font-family:Consolas,'Courier New',monospace;font-size:.79em}.prose :not(pre)>code{background:#eeeee5;padding:1px 3px;border-radius:2px;overflow-wrap:anywhere}.prose pre code{font-size:inherit;white-space:pre;overflow-wrap:normal}.prose img{display:block;max-width:100%;height:auto;margin:30px auto}.prose table{width:100%;display:block;overflow:auto;border-collapse:collapse;margin:25px 0;font:13px/1.6 system-ui,sans-serif}.prose th,.prose td{text-align:left;border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top}.prose th{font-weight:500}.prose hr{border:0;border-top:1px solid var(--rule);margin:35px 0}.prose .footnote{font-size:13px;line-height:1.6;color:#62665f}.prose sup{font-size:10px;line-height:0}.page-end{display:flex;justify-content:space-between;margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);font:11px/1.4 system-ui,sans-serif;color:var(--muted)}footer{padding:9px 33px 12px;display:flex;justify-content:space-between;gap:20px;font:11px/1.4 system-ui,sans-serif;color:var(--muted)}#position{color:#414d43}.mobile-switch{display:none}.skip{position:absolute;top:-60px;background:var(--paper);padding:8px;z-index:2}.skip:focus{top:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1750px){.prose{font-size:19px}.prose pre{font-size:14px}}
+@media(max-width:1080px){header{padding:14px 20px;gap:15px}.chapter-title{display:none}main{padding:0 16px 2px}.page{padding-left:28px;padding-right:28px}.prose{font-size:16px}.prose pre{font-size:12px}footer{padding-left:20px;padding-right:20px}}
+@media(max-width:720px){body{grid-template-rows:auto minmax(0,1fr) auto}header{flex-wrap:wrap;padding:12px 13px;gap:12px}.brand{font-size:21px}.strap{font-size:8px}nav{margin-left:auto;gap:5px}nav button{padding:8px}select{max-width:160px;padding:8px 3px}.mobile-switch{display:flex;width:100%;gap:6px}.mobile-switch button{flex:1;padding:7px;font-size:12px}.mobile-switch button[aria-pressed=true]{background:#36584e;color:white;border-color:#36584e}main{padding:0 8px}.spread{display:block}.page{height:100%;padding:17px 24px 32px;background:var(--paper)}body[data-side=tutorial] .final,body[data-side=final] .tutorial{display:none}.prose{font-size:17px}.prose h1{font-size:30px}.running-head{margin-bottom:25px}footer{font-size:10px;padding:8px 12px}.desktop-hint{display:none}}
+@media print{body{display:block;background:white;height:auto}header,footer{display:none}main{padding:0}.spread{height:auto;box-shadow:none;border:0;display:grid!important;break-after:page}.page{overflow:visible;height:auto;background:white!important;padding:12mm!important;display:block!important}.prose{font-size:10pt}.prose h1{font-size:22pt}.prose h2{font-size:16pt}.prose pre,.prose pre code{font-size:7pt;white-space:pre-wrap;overflow-wrap:anywhere}.running-head{margin-bottom:20px}.running-head a{display:none}a{color:inherit}.page-end{display:none}@page{size:A3 landscape;margin:10mm}}
+
+.nav-button{display:block;font:13px/1.3 system-ui,sans-serif;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px;text-decoration:none;color:inherit;white-space:nowrap}.nav-button:hover{background:#f5f5ef}.nav-button.disabled{opacity:.32;pointer-events:none}.contents{position:relative;font:13px/1.3 system-ui,sans-serif;z-index:3}.contents summary{cursor:pointer;list-style:none;min-width:196px;display:flex;justify-content:space-between;gap:16px;border:1px solid #bfc4ba;border-radius:3px;background:#f8f8f3;padding:9px 12px}.contents ol{position:absolute;right:0;top:29px;width:260px;max-height:70vh;overflow:auto;background:#fcfaf5;border:1px solid #c9cdbf;box-shadow:0 10px 30px #1e2b1e22;list-style:none;padding:9px;margin:10px 0}.contents a{display:block;padding:9px 12px;text-decoration:none;color:inherit}.contents a span{color:var(--muted);margin-right:9px;font-size:11px}.contents a:hover,.contents a[aria-current=page]{background:#e9ede3}.contents summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:720px){.nav-button{padding:8px;font-size:12px}.contents summary{min-width:135px;padding:8px;font-size:12px}.mobile-switch input{position:absolute;opacity:0;width:1px;height:1px}.mobile-switch label{flex:1;padding:7px;border:1px solid #bfc4ba;border-radius:3px;text-align:center;font:12px/1.3 system-ui,sans-serif;cursor:pointer}.mobile-switch input:checked+label{background:#36584e;color:white}.mobile-switch input:focus-visible+label{outline:2px solid #36584e;outline-offset:3px}body:has(#side-final:checked) .tutorial{display:none}body:has(#side-final:checked) .final{display:block}}
+</style>
+</head>
+<body data-side="tutorial">
+<a class="skip" href="#book">Skip to the texts</a>
+<header>
+  <div><div class="brand">Endless Museum</div><div class="strap">Always another room</div></div>
+  <div class="chapter-title"><strong>I. Primitives</strong><span>Points build worlds · Facing pages</span></div>
+  <nav aria-label="Chapter navigation">
+    <a class="nav-button" aria-label="Previous hall" href="Point_Line_Grid.html">← Previous</a>
+    <details class="contents"><summary aria-label="Choose a hall">07 · Triangle <span>⌄</span></summary><ol><li><a href="index.html" ><span>01</span> Point Zero</a></li>
+<li><a href="Point_One.html" ><span>02</span> Point One</a></li>
+<li><a href="Point_Coordinates.html" ><span>03</span> Coordinates</a></li>
+<li><a href="Point_Lines.html" ><span>04</span> Lines</a></li>
+<li><a href="Point_Trace.html" ><span>05</span> Trace</a></li>
+<li><a href="Point_Line_Grid.html" ><span>06</span> Grid</a></li>
+<li><a href="Point_Triangle_Context.html" aria-current=page><span>07</span> Triangle</a></li>
+<li><a href="Primitives_Polythedra.html" ><span>08</span> Polyhedra</a></li>
+<li><a href="Point_Animatedcube.html" ><span>09</span> Cube</a></li>
+<li><a href="Primitives_Ignorance.html" ><span>10</span> Primitives</a></li>
+<li><a href="Primitives_Godot.html" ><span>11</span> Godot primitives</a></li>
+<li><a href="Primitives_Columns.html" ><span>12</span> Columns</a></li>
+<li><a href="Primitives_Profiles.html" ><span>13</span> Borrowed outlines</a></li>
+<li><a href="Primitives_Portals.html" ><span>14</span> Limits</a></li>
+<li><a href="Primitives_Melencolia.html" ><span>15</span> Melencolia</a></li></ol></details>
+    <a class="nav-button" aria-label="Next hall" href="Primitives_Polythedra.html">Next →</a>
+  </nav>
+  <div class="mobile-switch" aria-label="Reading side">
+    <input type="radio" name="reading-side" id="side-tutorial" checked><label for="side-tutorial">Left · Tutorial</label>
+    <input type="radio" name="reading-side" id="side-final"><label for="side-final">Right · Reflection</label>
+  </div>
+</header>
+<main id="book" aria-label="Tutorial left, reflection right">
+<section class="spread" data-map="Point_Triangle_Context" data-label="Triangle" aria-label="Triangle facing pages"><article class="page tutorial" tabindex="0" aria-label="Triangle — tutorial">
+              <div class="running-head"><span>Make / tutorial.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Triangle_Context/tutorial.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Triangle_Context--tutorial--three-positions-become-a-face">Three positions become a face</h1>
+<h2 id="Point_Triangle_Context--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Three selected array entries</li>
+<li>A closed boundary and a face</li>
+<li>Clockwise vertex order</li>
+<li>A guard for a collapsed triangle</li>
+</ul>
+<h2 id="Point_Triangle_Context--tutorial--in-the-museum">In the museum</h2>
+<p>Your drawing has reached Grid as a sculpture. Here, choose three positions from its original record. The triangle tools in this hall show the difference between connecting corners and giving the space between them a surface. We will make that difference with the point and line classes already used.</p>
+<p>The saved record still uses the drawing station's local metres. Grid's rounded copy did not replace it. This lesson reads the original archive and creates three temporary PointBody handles at selected entries. It does not save their later edits back to the drawing.</p>
+<p>Lines already connected two positions. The new step is to store a connection as a recipe that refers to entries in a position list. Three Vector3 values alone do not instruct Godot to draw a face. We choose which entries belong together and in which order; the same stored position can later belong to several faces.</p>
+<h2 id="Point_Triangle_Context--tutorial--make-this-study">Make this study</h2>
+<p>Start with CORNERS = Vector3i(0, 1, 2). These are <strong>entry numbers</strong>, not spatial coordinates. If those entries lie on one straight segment of your drawing, lift one handle to make a face, or choose another triple in the record. A trace with fewer than three entries needs another visit to Trace.</p>
+<p>Attach lesson.gd to an empty Node3D named TriangleStudy in your working copy of this museum hall. Keep its scale at one; its translation places the study without changing the saved local measurements. The existing museum supplies the player, camera, light and XR pickup functions. This program constructs its own handles, edges, face and label.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Point_Triangle_Context--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const PointBody = preload("point_body.gd")
+const FaceBody = preload("face_body.gd")
+const Archive = preload("trace_archive.gd")
+const CORNERS := Vector3i(0, 1, 2)
+var handles: Array[Node3D] = []
+var points: Array[Vector3] = []
+var face := FaceBody.new()
+var message := Label3D.new()
+
+func _ready() -&gt; void:
+    add_child(face)
+    add_child(message)
+    message.position = Vector3(0, 2, 0)
+    message.font_size = 32
+    message.pixel_size = 0.003
+    var drawing := Archive.load_drawing()
+    if drawing == null:
+        message.text = "Return to Trace; draw and release the point."
+        return
+    var record: PackedVector3Array = drawing.get_meta("positions")
+    drawing.free()
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        if index &lt; 0 or index &gt;= record.size():
+            message.text = "Choose three indices inside the saved record."
+            return
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        var point := PointBody.new()
+        point.position = record[index]
+        add_child(point)
+        handles.append(point)
+
+func _process(_delta: float) -&gt; void:
+    if handles.size() != 3:
+        return
+    var current: Array[Vector3] = []
+    for point in handles:
+        current.append(point.position)
+    if current == points:
+        return
+    points = current
+    if face.show_faces(points, [Vector3i(0, 1, 2)]):
+        message.text = "Three positions; one face."
+    else:
+        message.text = "Separate the corners; lift one off the line."
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-point_bodygd">Dependency: point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-trace_archivegd">Dependency: trace_archive.gd</h3>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<h2 id="Point_Triangle_Context--tutorial--read-the-construction">Read the construction</h2>
+<p><code>record[index]</code> reads one saved position. <code>PointBody.new()</code> gives it the same visible, pickable body you already know. The three handles can move independently; their current local positions form a short array.</p>
+<p><code>Vector3i(0, 1, 2)</code> tells FaceBody which three entries to visit, in order. Its renderer adds three edges and a triangular surface. The points specify <strong>where</strong>; the triple specifies <strong>how they connect</strong>. This is a face recipe, not another set of positions.</p>
+<p>Order matters. Godot treats clockwise vertices, viewed from the front, as a front face. Walk around the triangle: this example keeps normal back-face culling. Reversing the triple to <code>Vector3i(0, 2, 1)</code> reverses the front. The outline remains visible from either side.</p>
+<p>Three collinear positions enclose no area. FaceBody checks the cross-product magnitude before submitting vertices and clears the previous face when the triangle collapses. The cross product is supplied here as the area-and-normal calculation; vector products return in Forces. The small threshold also rejects nearly collapsed triangles. The helper creates visible geometry, not a physical barrier.</p>
+<h2 id="Point_Triangle_Context--tutorial--make-it-your-own">Make it your own</h2>
+<p>Choose another three saved entries. Make a valid face, flatten it until it disappears, then restore it. Reverse the order and explain which side is now the front. Keep the original saved drawing unchanged.</p>
+<p>Carry forward the position array, its ordered face recipe, and FaceBody. The next hall adds a fourth position and asks whether several faces can enclose a volume.</p>
+<h2 id="Point_Triangle_Context--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Godot documents clockwise front faces and ordered vertex submission in <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html" rel="noopener" target="_blank">SurfaceTool</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Triangle_Context/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div>
+              <div class="page-end">Triangle <span>Tutorial</span></div>
+            </article><article class="page final" tabindex="0" aria-label="Triangle — final">
+              <div class="running-head"><span>Reflect / final.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Triangle_Context/final.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Triangle_Context--final--closing-a-boundary-adding-a-face">Closing a boundary, adding a face</h1>
+<p>Three edges meet. You can still see the room between them.</p>
+<!-- @triangle_line_puzzle -->
+<p>Bring the loose lines to the three waiting corners. Fit the last edge and look through the triangle. Closing it has not covered anything.</p>
+<p>Press <strong>SHOW / HIDE FILL</strong>. A translucent patch appears between the same corners. Press again. The edges stay; the patch goes.</p>
+<p>A boundary and a face have arrived through different actions. Connecting these three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. We have chosen that these corners belong together, in this order. Their positions did not make that commitment for us.</p>
+<!-- @triangle_construction_plate -->
+<p>The wall plate holds the distinction still: three points, three connected edges, a face.</p>
+<p><img alt="The same three corners shown as points, a connected boundary and a filled triangle." loading="lazy" src="http://localhost:3003/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png"/></p>
+<p>We built this plate while writing the chapter. The book needed an image; the room gained another object to approach. This illustration is a Godot view of that same construction. A sentence can ask for something to try, and making it can change the sentence.</p>
+<!-- @draw_triangle_faces -->
+<p>At the small drawing station, a triangle waits with black corners and an off-white face. If you released a drawing in Trace, your own bend waits here instead, still open. Its journey has changed it: six positions kept, its span reduced to arm's reach, its height flattened. The machine has prepared your drawing for a method that expects a plane. What did that preparation leave behind?<sup id="Point_Triangle_Context--final--fnref:point-triangle-carry"><a class="footnote-ref" href="#Point_Triangle_Context--final--fn:point-triangle-carry">3</a></sup></p>
+<p>Move the drawing point near the first corner to close that carried loop. For the simpler comparison, <strong>RESTORE TRIANGLE</strong> replaces the current drawing with three editable corners.</p>
+<!-- @triangle_live_twin -->
+<p>Look up. The small drawing has a twin in the middle of the hall. Move a corner and watch the same change arrive more than three times larger. Your hand can reach the small figure; your body can walk around the other.</p>
+<p>Leave the corners where they are. Walk towards the side of the large face. Its breadth narrows until the black edges almost meet in your view. Step back and the surface opens again. You have changed where you look from, without moving a single corner.<sup id="Point_Triangle_Context--final--fnref:point-triangle-winding"><a class="footnote-ref" href="#Point_Triangle_Context--final--fn:point-triangle-winding">1</a></sup></p>
+<p>Now return to the small drawing. Bring its upper corner down onto the line between the other two and release it. The large figure flattens too. This time walking around cannot recover the missing area. Three positions remain, but they lie along one line. Lift the corner away and a face opens between them again.</p>
+<p>From one view, these two events can look alike. In one, the face waits for another viewpoint. In the other, we must change what we made.</p>
+<!-- @draw_triangle_faces -->
+<p>Press <strong>SHOW / HIDE FILL</strong> while the triangle is open in your view. Both copies lose their faces together; the corners and edges remain. Hiding a surface has left its geometry available for a return. The large fill also lets you walk through it while it is visible. What covers your view need not stop your body.</p>
+<p>We have been calling all of these a triangle. A boundary, a rendered face, a figure seen edge-on, three corners with no area: keeping their differences lets us do more with the name.</p>
+<p>The tool will accept longer outlines too. Draw a six-corner L, close it, then release the handles and press <strong>SHIFT START</strong>. The corners stay where they were. The fill can reach across the notch you left open.<sup id="Point_Triangle_Context--final--fnref:point-triangle-construction"><a class="footnote-ref" href="#Point_Triangle_Context--final--fn:point-triangle-construction">4</a></sup></p>
+<p>Every triangle in this method shares the first corner. Choosing another beginning changes the fan. Its rule has kept working while failing to keep your intended interior. The counter still reports four triangles; counting them does not tell us whether they belong there.</p>
+<p>We can choose a suitable start, ask for a different filling method, or keep the unexpected wing as the beginning of another work.<sup id="Point_Triangle_Context--final--fnref:point-triangle-triangulation"><a class="footnote-ref" href="#Point_Triangle_Context--final--fn:point-triangle-triangulation">2</a></sup> The mistake needs an explanation, but its explanation need not decide what we want from it.</p>
+<!-- @quad_line_puzzle -->
+<p>At the far end, four edges offer another empty boundary.</p>
+<!-- @quad -->
+<p>Nearby, the quad adds two triangular faces along a diagonal. Lift a corner away from that diagonal: one face follows while the other stays. Move an end of the shared edge and both change. A shape that looked like one square has given us two surfaces that can tilt apart.</p>
+<p>Next, faces meet at a corner. What must we add to enclose a volume?</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="Point_Triangle_Context--final--fn:point-triangle-winding">
+<p>For the rendering convention, see <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html" rel="noopener" target="_blank">Godot 4.6’s SurfaceTool documentation</a>: triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider. <a class="footnote-backref" href="#Point_Triangle_Context--final--fnref:point-triangle-winding" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="Point_Triangle_Context--final--fn:point-triangle-triangulation">
+<p>One available development route is Godot’s <a href="https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon" rel="noopener" target="_blank"><code>Geometry2D.triangulate_polygon</code></a>, which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note. <a class="footnote-backref" href="#Point_Triangle_Context--final--fnref:point-triangle-triangulation" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="Point_Triangle_Context--final--fn:point-triangle-carry">
+<p>The trace travels on the same <code>TraceData</code> autoload that brings your drawing to the ruled field in Grid: releasing one of the three coloured drawing pens in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. Grid and Triangle each read that saved drawing; Triangle does not receive Grid's enlarged or snapped display. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard's image travels by no route at all. <a class="footnote-backref" href="#Point_Triangle_Context--final--fnref:point-triangle-carry" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="Point_Triangle_Context--final--fn:point-triangle-construction">
+<p>The <a href="http://localhost:3003/book?map=Point_Triangle_Context&amp;section=technical" rel="noopener" target="_blank">technical companion</a> gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners. <a class="footnote-backref" href="#Point_Triangle_Context--final--fnref:point-triangle-construction" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              <div class="page-end">Triangle <span>Reflection</span></div>
+            </article></section>
+</main>
+<footer><span id="position" role="status" aria-live="polite">07 / 15 · Triangle</span><span class="desktop-hint">Read at your own pace · Each page scrolls independently</span><span>5 October 2026 · Tutorial + reflection</span></footer>
+
+</body>
+</html>

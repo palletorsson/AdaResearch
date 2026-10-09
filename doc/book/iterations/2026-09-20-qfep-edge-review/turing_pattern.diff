@@ -1,0 +1,27 @@
+--- before/commons/interfaces/qfep/turing_pattern.gd
++++ commons/interfaces/qfep/turing_pattern.gd
+@@ -1,7 +1,6 @@
+ # turing_pattern.gd
+-# QFEP Turing Pattern - Reaction-Diffusion Visualization
+-# The mathematics of biological pattern formation
+-# Stripes, spots, and labyrinths emerge from simple rules
++# QFEP Turing Pattern - procedural patterns inspired by reaction-diffusion.
++# This shader combines noise and trigonometry; it does not evolve concentrations.
+ 
+ extends Node3D
+ 
+@@ -41,12 +40,12 @@
+ 
+ // Noise functions for pattern generation
+ float hash(vec2 p) {
+-	return fmod(sin(dot(p, vec2(127.1, 311.7, 1.0))) * 43758.5453);
++	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+ }
+ 
+ float noise(vec2 p) {
+ 	vec2 i = floor(p);
+-	vec2 f = fmod(p, 1.0);
++	vec2 f = fract(p);
+ 	f = f * f * (3.0 - 2.0 * f);
+ 	
+ 	return mix(

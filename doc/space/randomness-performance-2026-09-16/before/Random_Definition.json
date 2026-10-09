@@ -1,0 +1,506 @@
+{
+  "artifacts": [
+    {
+      "inventory": {
+        "collision_objects": 12,
+        "labels": 1,
+        "meshes": 65,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 114,
+        "particles": 0,
+        "processing_nodes": 4,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "prng_crank_machine",
+      "without": {
+        "draw_calls": {
+          "max": 3868.0,
+          "median": 3868.0,
+          "p95": 3868.0
+        },
+        "frame_interval_ms": {
+          "max": 59.824,
+          "median": 12.132,
+          "p95": 14.395
+        },
+        "frames": 162,
+        "gpu_ms": {
+          "max": 38.8600006103516,
+          "median": 10.2729997634888,
+          "p95": 11.3680000305176
+        },
+        "physics_ms": {
+          "max": 3.155,
+          "median": 3.155,
+          "p95": 3.155
+        },
+        "primitives": {
+          "max": 506026.0,
+          "median": 506026.0,
+          "p95": 506026.0
+        },
+        "process_ms": {
+          "max": 57.813,
+          "median": 54.546,
+          "p95": 57.813
+        },
+        "render_cpu_ms": {
+          "max": 8.9680004119873,
+          "median": 3.49799990653992,
+          "p95": 5.16800022125244
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 14,
+        "labels": 21,
+        "meshes": 50,
+        "multimesh_instances": 4,
+        "multimeshes": 2,
+        "nodes": 122,
+        "particles": 0,
+        "processing_nodes": 4,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "slot_machine",
+      "without": {
+        "draw_calls": {
+          "max": 3877.0,
+          "median": 3877.0,
+          "p95": 3877.0
+        },
+        "frame_interval_ms": {
+          "max": 52.566,
+          "median": 12.539,
+          "p95": 14.923
+        },
+        "frames": 154,
+        "gpu_ms": {
+          "max": 40.9269981384277,
+          "median": 10.4370002746582,
+          "p95": 11.4429998397827
+        },
+        "physics_ms": {
+          "max": 2.008,
+          "median": 1.921,
+          "p95": 2.008
+        },
+        "primitives": {
+          "max": 513760.0,
+          "median": 513760.0,
+          "p95": 513760.0
+        },
+        "process_ms": {
+          "max": 56.335,
+          "median": 51.069,
+          "p95": 56.335
+        },
+        "render_cpu_ms": {
+          "max": 11.6490001678467,
+          "median": 3.00799989700317,
+          "p95": 4.69600009918213
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 15,
+        "labels": 7,
+        "meshes": 161,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 216,
+        "particles": 0,
+        "processing_nodes": 4,
+        "rigid_bodies": 1,
+        "viewports": 0
+      },
+      "lookup": "seed_replay_demo",
+      "without": {
+        "draw_calls": {
+          "max": 2893.0,
+          "median": 2893.0,
+          "p95": 2893.0
+        },
+        "frame_interval_ms": {
+          "max": 77.06,
+          "median": 9.685,
+          "p95": 13.627
+        },
+        "frames": 185,
+        "gpu_ms": {
+          "max": 39.7869987487793,
+          "median": 8.05500030517578,
+          "p95": 11.5430002212524
+        },
+        "physics_ms": {
+          "max": 1.829,
+          "median": 0.151,
+          "p95": 0.151
+        },
+        "primitives": {
+          "max": 535260.0,
+          "median": 535260.0,
+          "p95": 535260.0
+        },
+        "process_ms": {
+          "max": 57.954,
+          "median": 57.954,
+          "p95": 57.954
+        },
+        "render_cpu_ms": {
+          "max": 9.96199989318848,
+          "median": 3.78900003433228,
+          "p95": 4.56699991226196
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 0,
+        "labels": 2,
+        "meshes": 3,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 6,
+        "particles": 0,
+        "processing_nodes": 0,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "catalyst_pickup",
+      "without": {
+        "draw_calls": {
+          "max": 4273.0,
+          "median": 4228.0,
+          "p95": 4228.0
+        },
+        "frame_interval_ms": {
+          "max": 80.577,
+          "median": 10.258,
+          "p95": 14.74
+        },
+        "frames": 172,
+        "gpu_ms": {
+          "max": 30.1180000305176,
+          "median": 5.72700023651123,
+          "p95": 11.2569999694824
+        },
+        "physics_ms": {
+          "max": 0.17,
+          "median": 0.157,
+          "p95": 0.17
+        },
+        "primitives": {
+          "max": 611896.0,
+          "median": 596444.0,
+          "p95": 596444.0
+        },
+        "process_ms": {
+          "max": 80.394,
+          "median": 72.608,
+          "p95": 80.394
+        },
+        "render_cpu_ms": {
+          "max": 15.3219995498657,
+          "median": 5.23099994659424,
+          "p95": 7.61999988555908
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 0,
+        "labels": 2,
+        "meshes": 10,
+        "multimesh_instances": 173,
+        "multimeshes": 15,
+        "nodes": 36,
+        "particles": 0,
+        "processing_nodes": 1,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "trng_vs_prng",
+      "without": {
+        "draw_calls": {
+          "max": 2068.0,
+          "median": 2068.0,
+          "p95": 2068.0
+        },
+        "frame_interval_ms": {
+          "max": 60.743,
+          "median": 11.673,
+          "p95": 13.439
+        },
+        "frames": 170,
+        "gpu_ms": {
+          "max": 39.4440002441406,
+          "median": 9.92599964141846,
+          "p95": 11.4659996032715
+        },
+        "physics_ms": {
+          "max": 0.17,
+          "median": 0.142,
+          "p95": 0.17
+        },
+        "primitives": {
+          "max": 236308.0,
+          "median": 236308.0,
+          "p95": 236308.0
+        },
+        "process_ms": {
+          "max": 78.79,
+          "median": 56.262,
+          "p95": 78.79
+        },
+        "render_cpu_ms": {
+          "max": 10.539999961853,
+          "median": 2.99699997901917,
+          "p95": 4.19899988174438
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 280,
+        "labels": 312,
+        "meshes": 1,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 874,
+        "particles": 0,
+        "processing_nodes": 1,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "random_number_book_page_1955",
+      "without": {
+        "draw_calls": {
+          "max": 3625.0,
+          "median": 3625.0,
+          "p95": 3625.0
+        },
+        "frame_interval_ms": {
+          "max": 40.571,
+          "median": 11.856,
+          "p95": 13.541
+        },
+        "frames": 177,
+        "gpu_ms": {
+          "max": 39.8730010986328,
+          "median": 10.2189998626709,
+          "p95": 11.6770000457764
+        },
+        "physics_ms": {
+          "max": 0.14,
+          "median": 0.139,
+          "p95": 0.139
+        },
+        "primitives": {
+          "max": 607820.0,
+          "median": 607820.0,
+          "p95": 607820.0
+        },
+        "process_ms": {
+          "max": 60.587,
+          "median": 40.426,
+          "p95": 60.587
+        },
+        "render_cpu_ms": {
+          "max": 8.37199974060059,
+          "median": 3.06800007820129,
+          "p95": 4.30200004577637
+        }
+      }
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 3070",
+  "engine": "4.6-stable (official)",
+  "full_after": {
+    "draw_calls": {
+      "max": 4259.0,
+      "median": 4259.0,
+      "p95": 4259.0
+    },
+    "frame_interval_ms": {
+      "max": 63.513,
+      "median": 12.615,
+      "p95": 14.982
+    },
+    "frames": 148,
+    "gpu_ms": {
+      "max": 40.1570014953613,
+      "median": 10.6359996795654,
+      "p95": 11.9029998779297
+    },
+    "physics_ms": {
+      "max": 0.166,
+      "median": 0.166,
+      "p95": 0.166
+    },
+    "primitives": {
+      "max": 614248.0,
+      "median": 614248.0,
+      "p95": 614248.0
+    },
+    "process_ms": {
+      "max": 63.377,
+      "median": 63.377,
+      "p95": 63.377
+    },
+    "render_cpu_ms": {
+      "max": 9.3459997177124,
+      "median": 3.45000004768372,
+      "p95": 5.61800003051758
+    }
+  },
+  "full_before": {
+    "draw_calls": {
+      "max": 4259.0,
+      "median": 4256.0,
+      "p95": 4259.0
+    },
+    "frame_interval_ms": {
+      "max": 56.69,
+      "median": 12.629,
+      "p95": 14.216
+    },
+    "frames": 153,
+    "gpu_ms": {
+      "max": 39.1590003967285,
+      "median": 10.5530004501343,
+      "p95": 11.8290004730225
+    },
+    "physics_ms": {
+      "max": 2.635,
+      "median": 2.634,
+      "p95": 2.635
+    },
+    "primitives": {
+      "max": 614248.0,
+      "median": 614104.0,
+      "p95": 614248.0
+    },
+    "process_ms": {
+      "max": 52.61,
+      "median": 51.016,
+      "p95": 52.61
+    },
+    "render_cpu_ms": {
+      "max": 8.83500003814697,
+      "median": 3.12100005149841,
+      "p95": 4.69199991226196
+    }
+  },
+  "headset_verified": false,
+  "map": "Random_Definition",
+  "remaining_flush_ms": 0.006,
+  "renderer": "forward_plus",
+  "resolution": "1280x800",
+  "segment_times": [
+    {
+      "ms": 1585.91,
+      "shell": false
+    }
+  ],
+  "setup_wall_ms": 8311.669,
+  "stamp_times": [
+    {
+      "lookup": "prng_crank_machine",
+      "ms": 189.252,
+      "queued": true,
+      "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "slot_machine",
+      "ms": 72.871,
+      "queued": true,
+      "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "seed_replay_demo",
+      "ms": 117.498,
+      "queued": true,
+      "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+      "success": true
+    },
+    {
+      "lookup": "catalyst_pickup",
+      "ms": 20.429,
+      "queued": true,
+      "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+      "success": true
+    },
+    {
+      "lookup": "trng_vs_prng",
+      "ms": 99.755,
+      "queued": true,
+      "scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_number_book_page_1955",
+      "ms": 398.665,
+      "queued": true,
+      "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+      "success": true
+    }
+  ],
+  "whole_segment": {
+    "collision_objects": 326,
+    "labels": 375,
+    "meshes": 631,
+    "multimesh_instances": 1053,
+    "multimeshes": 34,
+    "nodes": 2268,
+    "particles": 0,
+    "processing_nodes": 17,
+    "rigid_bodies": 1,
+    "viewports": 0
+  },
+  "without_artifacts": {
+    "draw_calls": {
+      "max": 281.0,
+      "median": 236.0,
+      "p95": 236.0
+    },
+    "frame_interval_ms": {
+      "max": 42.786,
+      "median": 11.688,
+      "p95": 12.948
+    },
+    "frames": 169,
+    "gpu_ms": {
+      "max": 39.648998260498,
+      "median": 9.5,
+      "p95": 10.7980003356934
+    },
+    "physics_ms": {
+      "max": 0.143,
+      "median": 0.111,
+      "p95": 0.143
+    },
+    "primitives": {
+      "max": 86918.0,
+      "median": 71466.0,
+      "p95": 71466.0
+    },
+    "process_ms": {
+      "max": 56.306,
+      "median": 42.67,
+      "p95": 56.306
+    },
+    "render_cpu_ms": {
+      "max": 2.35400009155273,
+      "median": 0.691999971866608,
+      "p95": 1.07200002670288
+    }
+  }
+}

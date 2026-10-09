@@ -7,6 +7,8 @@ extends SceneTree
 ## triangle faces) and what a body can feel (the collider and a dropped marble).
 ## The run prints one SCRIPT ERROR and one ERROR on purpose: the first answer's
 ## own fault, and our loop's message about it. Each is announced first.
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -22,6 +24,21 @@ const REPAIRED := [
 	[4, 7, 5], [5, 7, 6], [1, 2, 0], [0, 2, 3], [0, 3, 4], [4, 3, 7],
 	[5, 6, 1], [1, 6, 2], [2, 6, 3], [3, 6, 7], [0, 4, 1], [1, 4, 5],
 ]
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/point-cube/"   # the body this chapter hands to the room
+const PLACE := 0.8                          # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
 
 func _initialize() -> void: run.call_deferred()
 
@@ -100,6 +117,59 @@ func facing(cube: MeshInstance3D) -> Dictionary:
 
 func size_of(cube: MeshInstance3D) -> Vector3:
 	return cube.mesh.get_aabb().size
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own. It is checked far
+## from where the studies stood.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "point-cube.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/point-cube/point-cube.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var at := Vector3(40, 0, 40)
+	(guest as Node3D).position = at
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	var cube: MeshInstance3D = guest.get_node("Cube")
+	if cube.mesh == null:
+		check("the guest is the repaired cube (it has no mesh)", false)
+		guest.free()
+		return
+	var f := facing(cube)
+	var shape := cube.get_node("Body/CollisionShape3D").shape as ConcavePolygonShape3D
+	check("the guest is the repaired cube: the guest's own script holds the repaired list, its 12 triangles all face outward, it is 0.5 m on every edge and painted BODY c6ff3d; its Body is a trimesh of the same 12 triangles, backface collision left off",
+		cube.get_script().resource_path == GUEST + "point-cube.gd" and cube.triangles == REPAIRED
+		and f["outward"] == 12 and f["inward"] == 0 and f["flat"] == 0 and size_of(cube).is_equal_approx(Vector3(SIZE, SIZE, SIZE))
+		and cube.material_override.albedo_color.to_html(false) == "c6ff3d"
+		and shape != null and shape.get_faces().size() == 36 and not shape.backface_collision)
+	var box: AABB = cube.global_transform * cube.mesh.get_aabb()
+	box.position -= at
+	check("the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (%.2f, %.2f, %.2f) to (%.2f, %.2f, %.2f)" % [
+		box.position.x, box.position.y, box.position.z, box.end.x, box.end.y, box.end.z],
+		absf(box.position.y) < 0.001 and box.position.x >= -PLACE and box.position.z >= -PLACE and box.end.x <= PLACE and box.end.z <= PLACE
+		and (box.get_center() - Vector3(0, SIZE / 2.0, 0)).length() < 0.001)
+	var space := root.get_world_3d().direct_space_state
+	var from_above: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(at + Vector3(0.1, 2, -0.1), at + Vector3(0.1, 0.25, -0.1)))
+	var from_inside: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(at + Vector3(0.1, 0.25, -0.1), at + Vector3(0.1, 2, -0.1)))
+	check("a ray from above meets the guest's top at 0.50 m, and a ray from its middle upward meets nothing: the body has the eye's side, as in the lesson",
+		from_above.has("position") and absf(from_above["position"].y - SIZE) < 0.001 and from_inside.is_empty())
+	measured["guest"] = {"scene": GUEST + "point-cube.tscn", "triangles_outward": f["outward"],
+		"box": [[snappedf(box.position.x, 0.001), snappedf(box.position.y, 0.001), snappedf(box.position.z, 0.001)], [snappedf(box.end.x, 0.001), snappedf(box.end.y, 0.001), snappedf(box.end.z, 0.001)]]}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The Input Map: the nine actions of the Plane study, unchanged.
@@ -365,6 +435,9 @@ func run() -> void:
 		absf(ends[1].y - (AT.y - 0.5 + RADIUS)) < 0.02 and absf(ends[1].x - AT.x) < 0.5 and absf(ends[1].z - AT.z) < 0.5)
 	check("draft 2: the marble falls through the top and out through the bottom, to the floor: %.3f m" % ends[2].y, ends[2].y < 0.2)
 	check("draft 3: the marble rests on top: %.3f m" % ends[3].y, absf(ends[3].y - (TOP + RADIUS)) < 0.02)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

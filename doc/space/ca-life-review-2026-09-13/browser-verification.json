@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "check": "glider repeats at plus one in both axes",
+      "pass": true
+    },
+    {
+      "check": "A occupied and lit at generation eight",
+      "pass": true
+    },
+    {
+      "check": "disconnect preserves cells and generation but extinguishes lamp",
+      "pass": true
+    },
+    {
+      "check": "reconnect adds no onset",
+      "pass": true
+    },
+    {
+      "check": "blinker turns and returns; centre stays lit without onsets",
+      "pass": true
+    },
+    {
+      "check": "prepared meeting is empty by generation 24",
+      "pass": true
+    },
+    {
+      "check": "observation stops at generation 48",
+      "pass": true
+    },
+    {
+      "check": "RUN is visibly active",
+      "pass": true
+    },
+    {
+      "check": "RUN advances generations",
+      "pass": true
+    },
+    {
+      "check": "REPLAY returns held clean beginning",
+      "pass": true
+    },
+    {
+      "check": "all five real museum images load",
+      "pass": true
+    }
+  ],
+  "primaryUI": {
+    "token": "game_of_life_petri",
+    "count": 1,
+    "written": true,
+    "words": 641,
+    "passageOpened": true
+  },
+  "chapter": {
+    "codeBlocks": 2,
+    "horizontalOverflow": false
+  }
+}

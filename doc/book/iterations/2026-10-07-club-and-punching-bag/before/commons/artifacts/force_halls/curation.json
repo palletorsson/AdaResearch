@@ -1,0 +1,2288 @@
+{
+  "schema": 1,
+  "date": "2026-10-07",
+  "rule": "One tutorial artifact per principle. Other artifacts may compare or complicate it. A Keep is a collection choice, not an obligation to fill every hall.",
+  "halls": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "title": "Vectors in your hands",
+      "size": [
+        16,
+        20
+      ],
+      "principle": "Displacement, magnitude and unit direction; addition; signed projection and remainder",
+      "tutorial_artifact": "force_point_direction",
+      "tutorial_artifacts": [
+        "force_point_direction",
+        "force_point_addition",
+        "force_point_projection"
+      ],
+      "placements": [
+        {
+          "token": "force_point_direction",
+          "cell": [
+            4,
+            7
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            5,
+            5
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_point_addition",
+          "cell": [
+            11,
+            7
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            5,
+            5
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_point_projection",
+          "cell": [
+            8,
+            14
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            5,
+            5
+          ],
+          "y": 0,
+          "pedestal": false
+        }
+      ],
+      "lesson": "Carry the known grabbable PointBody through three stations in one room. First move one point relative to its local origin: read displacement, length and a separate unit direction. Next move two points and follow a then b to the rose sum; compare the route length with the direct arrival. Finally project onto the signed X rail and retain the perpendicular remainder. Live labels follow the inputs. Thin cylinders give direction a visible body. These are geometric operations; a moving point does not yet imply a force simulation.",
+      "carry": "One point class; a declared local frame; direction, sum and selected component ready for launch and force.",
+      "independent_check": "Choose an unlisted displacement, then zero. Predict length and direction. Swap two displacements and cancel them. Move perpendicular to the X rail, then behind its origin: recover a from projection + remainder.",
+      "number": 1,
+      "walk": [
+        [
+          8.5,
+          3.5
+        ],
+        [
+          13.5,
+          3.5
+        ],
+        [
+          13.5,
+          16.5
+        ]
+      ],
+      "before_count": 9,
+      "after_count": 3
+    },
+    {
+      "map": "VFM_05_Launch",
+      "title": "A beginning, then a flight",
+      "size": [
+        44,
+        88
+      ],
+      "principle": "Initial velocity and constant acceleration",
+      "tutorial_artifact": "launch_arc",
+      "placements": [
+        {
+          "token": "launch_arc",
+          "cell": [
+            14,
+            8
+          ],
+          "role": "tutorial",
+          "rotation": 180,
+          "config": "lesson:launch_chamber",
+          "zone": [
+            16,
+            12
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_trial_catapult",
+          "cell": [
+            7,
+            26
+          ],
+          "role": "experiment",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            10,
+            11
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_trial_pipe",
+          "cell": [
+            20,
+            26
+          ],
+          "role": "experiment",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            10,
+            11
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_play_torque",
+          "cell": [
+            15,
+            41
+          ],
+          "zone": [
+            22,
+            10
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "bubble_blaster",
+          "cell": [
+            32,
+            12
+          ],
+          "zone": [
+            4,
+            4
+          ],
+          "config": "",
+          "y": 0.95,
+          "pedestal": true,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "catapult",
+          "cell": [
+            33,
+            32
+          ],
+          "zone": [
+            12,
+            20
+          ],
+          "config": "default_force:9",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "human_catapult",
+          "cell": [
+            10,
+            62
+          ],
+          "zone": [
+            14,
+            32
+          ],
+          "config": "",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "firework_burst",
+          "cell": [
+            31,
+            66
+          ],
+          "zone": [
+            16,
+            16
+          ],
+          "config": "lesson:live_fountain",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Give the point an initial velocity and observe how gravity changes its journey. Reconstruct the compact analytic trajectory with its stated constant-acceleration assumptions. Then compare the hinged catapult and the open pipe: their release velocities arise from contacts. The same appearance of a curve need not mean the same mechanism. Compare a gate, seesaw and crank by pulling their rose grips at different distances from the physical pivot. The existing catapult remains the launch comparison.",
+      "carry": "Initial state and a rule for change; prediction can be compared with an actual release.",
+      "independent_check": "Change launch speed or angle and predict the landing. Explain why a collision invalidates the simple analytic prediction.",
+      "number": 2,
+      "walk": [
+        [
+          22.5,
+          3.5
+        ],
+        [
+          41.5,
+          3.5
+        ],
+        [
+          41.5,
+          83.5
+        ]
+      ],
+      "before_count": 17,
+      "after_count": 8,
+      "selection_note": "The selected Bubble Blaster carries the launch velocity in the hand. Compare the existing Launch Arc with a projectile catapult and a human catapult. The enlarged fountain runs ballistic trajectories and pauses its own clock near the apex; the museum continues running."
+    },
+    {
+      "map": "VFM_03_Motion",
+      "title": "The push ends. Motion stays.",
+      "size": [
+        28,
+        80
+      ],
+      "principle": "Force, mass and retained velocity",
+      "tutorial_artifact": "force_play_mass",
+      "placements": [
+        {
+          "token": "force_play_mass",
+          "cell": [
+            14,
+            10
+          ],
+          "zone": [
+            12,
+            10
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_trolley",
+          "cell": [
+            8,
+            28
+          ],
+          "zone": [
+            10,
+            10
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_puzzle",
+          "cell": [
+            20,
+            28
+          ],
+          "zone": [
+            10,
+            10
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_mower",
+          "cell": [
+            14,
+            46
+          ],
+          "zone": [
+            22,
+            32
+          ],
+          "config": "lesson:flower_garden#lawn_width:20#lawn_length:28",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 270,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Keep the familiar PointBody, with matched visible radius, height and collision shape. Apply the same one-newton force for one second to 1, 2 and 4 kg spheres; read acceleration and the retained velocity after the push. The loaded trolley and push-box puzzle let the same relation become a task. Reconstruct only the equal-force comparison.",
+      "carry": "A dynamic point retains velocity after an input ends.",
+      "independent_check": "Predict the velocity ordering for another mass. Verify that ending the pulse does not command a stop.",
+      "number": 3,
+      "walk": [
+        [
+          14.5,
+          3.5
+        ],
+        [
+          25.5,
+          3.5
+        ],
+        [
+          25.5,
+          75.5
+        ]
+      ],
+      "before_count": 18,
+      "after_count": 4,
+      "selection_note": "The mower turns a 20 × 28 m lawn into a flower trail. Push its held pink handle forward; lateral hand displacement steers with yaw drag. A 14 kg rigid body responds to a bounded model force and rolling resistance. The handle reads model force, drag, distance and signed work; it does not measure muscle force."
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "title": "The room gives a direction",
+      "size": [
+        28,
+        104
+      ],
+      "principle": "Sample a field; retain a moving state",
+      "tutorial_artifact": "force_play_vortex",
+      "placements": [
+        {
+          "token": "force_play_vortex",
+          "cell": [
+            14,
+            13
+          ],
+          "zone": [
+            20,
+            18
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "VectorFieldFlow",
+          "cell": [
+            14,
+            35
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "lesson:field_receivers",
+          "zone": [
+            14,
+            12
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "wind_room",
+          "cell": [
+            14,
+            52
+          ],
+          "zone": [
+            16,
+            14
+          ],
+          "config": "lesson:hands_on_wind",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "force_vortex",
+          "cell": [
+            14,
+            72
+          ],
+          "zone": [
+            10,
+            10
+          ],
+          "config": "warning:beacon",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "gravity_oval",
+          "cell": [
+            14,
+            92
+          ],
+          "zone": [
+            14,
+            16
+          ],
+          "config": "",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Give the known PointBody a position-dependent acceleration with inward and tangential components. Solid cylinder arrows make the field legible; eighteen spheres, cubes and cylinders supply receivers. Walk into it and feel the same acceleration through the existing player movement adapter. Reconstruct the field sample and its receiver, then change the balance without prescribing a path.",
+      "carry": "A local rule becomes a trajectory through repeated sampling.",
+      "independent_check": "Release from a new position and compare radial-only with sideways force. Name the retained velocity that changes the result.",
+      "number": 4,
+      "walk": [
+        [
+          14.5,
+          3.5
+        ],
+        [
+          25.5,
+          3.5
+        ],
+        [
+          25.5,
+          99.5
+        ]
+      ],
+      "before_count": 13,
+      "after_count": 5,
+      "selection_note": "The upgraded Wind Room drives rigid cubes and familiar points with relative-velocity drag. Aim a held rose point to steer the air, or use the controls at the entry. Walk through the same field. Compare the older Force Vortex, which prescribes a spiral velocity and ejects the visitor, with the primary vortex that integrates acceleration."
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "title": "What resists the journey",
+      "size": [
+        30,
+        80
+      ],
+      "principle": "Speed-dependent drag, buoyancy approximation and contact friction",
+      "tutorial_artifact": "force_play_liquids",
+      "placements": [
+        {
+          "token": "force_play_liquids",
+          "cell": [
+            15,
+            13
+          ],
+          "zone": [
+            24,
+            16
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_friction",
+          "cell": [
+            15,
+            35
+          ],
+          "zone": [
+            24,
+            16
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "viscosity_layers",
+          "cell": [
+            15,
+            52
+          ],
+          "zone": [
+            8,
+            6
+          ],
+          "config": "",
+          "y": 0.82,
+          "pedestal": true,
+          "rotation": 180,
+          "role": "comparison"
+        },
+        {
+          "token": "centrifuge_ring",
+          "cell": [
+            15,
+            69
+          ],
+          "zone": [
+            12,
+            12
+          ],
+          "config": "lesson:hand_ring",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Drop the same PointBody into three large regions and compare speed-dependent drag. Walk through the same coefficients. Distinguish this resistance model and its constant upward buoyancy term from a fluid solver. Then release cubes and balls on four slopes: smooth/rough contact changes sliding and rolling. The tutorial reconstructs the point in one drag region; the ramps are comparisons. Trails retain the consequence.",
+      "carry": "A force may depend on the state it is changing.",
+      "independent_check": "Predict how changing mass at fixed drag changes slowing. Distinguish the physical probes from the separate walking adapter.",
+      "number": 5,
+      "walk": [
+        [
+          15.5,
+          3.5
+        ],
+        [
+          27.5,
+          3.5
+        ],
+        [
+          27.5,
+          75.5
+        ]
+      ],
+      "before_count": 8,
+      "after_count": 4,
+      "selection_note": "Viscosity Layers returns the drag comparison at bench scale. The centrifuge adds a circular hand ride: hold the rose handle, travel around the ring, release into the tangent. It prescribes the circular motion; it does not simulate a physical hinge or rotate the tracked head."
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "title": "A force toward home",
+      "size": [
+        30,
+        72
+      ],
+      "principle": "Restoring force, coupling, damping and constraints",
+      "tutorial_artifact": "force_play_springs",
+      "placements": [
+        {
+          "token": "force_play_springs",
+          "cell": [
+            15,
+            11
+          ],
+          "zone": [
+            18,
+            12
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_swings",
+          "cell": [
+            15,
+            28
+          ],
+          "zone": [
+            24,
+            11
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_constraints",
+          "cell": [
+            15,
+            43
+          ],
+          "zone": [
+            24,
+            11
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "SpringSuspension",
+          "cell": [
+            8,
+            61
+          ],
+          "zone": [
+            8,
+            8
+          ],
+          "config": "lesson:museum_spring",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        },
+        {
+          "token": "spring_tower",
+          "cell": [
+            22,
+            61
+          ],
+          "zone": [
+            8,
+            8
+          ],
+          "config": "",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Return the point to a displaced rest length with a spring force; its position evolves through the physics engine. Pull one of seven hanging points and follow the response through neighbour springs. Compare three connected swing pairs with increasing damping, then basket, chain, plank and arm constraints. Reconstruct one spring first; coupling is one return of the same relation. Hinge grip proxies transmit force while preserving the joint.",
+      "carry": "Restoration and resistance can act together; a periodic appearance can have a dynamic cause.",
+      "independent_check": "Choose a new displacement and damping. Predict whether the body crosses equilibrium, then test the release.",
+      "number": 6,
+      "walk": [
+        [
+          15.5,
+          3.5
+        ],
+        [
+          27.5,
+          3.5
+        ],
+        [
+          27.5,
+          67.5
+        ]
+      ],
+      "before_count": 22,
+      "after_count": 5,
+      "selection_note": "Compare the physical 6DOF SpringSuspension joint, now pulled with a rose hand grip, with Spring Tower, whose cosine animation illustrates a period. The existing coupled PointBody springs remain the tutorial object."
+    },
+    {
+      "map": "Change_Choreography",
+      "title": "The next body arrives",
+      "size": [
+        24,
+        34
+      ],
+      "principle": "Phase, rate and accumulated backlog",
+      "tutorial_artifact": "phase_rod_array",
+      "placements": [
+        {
+          "token": "phase_rod_array",
+          "cell": [
+            12,
+            8
+          ],
+          "role": "tutorial",
+          "rotation": 180,
+          "config": "",
+          "zone": [
+            9,
+            8
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_trial_conveyor",
+          "cell": [
+            12,
+            24
+          ],
+          "role": "experiment",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            10,
+            11
+          ],
+          "y": 0,
+          "pedestal": false
+        }
+      ],
+      "lesson": "Reuse the clock and repeated objects. Change phase in the existing rod array and distinguish a fixed offset from a different rate. This lesson is prescribed motion, following the spring whose motion was integrated. At the belt, contact and a closed receiver turn continuing input into a backlog. The belt is the consequence to explore, not another program to reconstruct here.",
+      "carry": "Repeated local actions can accumulate into a new condition.",
+      "independent_check": "Make a fixed phase difference, then a growing one. Explain why opening a gate does not undo props already spilled.",
+      "number": 7,
+      "walk": [
+        [
+          12.5,
+          3.5
+        ],
+        [
+          21.5,
+          3.5
+        ],
+        [
+          21.5,
+          29.5
+        ]
+      ],
+      "before_count": 8,
+      "after_count": 2
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "title": "The source can move too",
+      "size": [
+        34,
+        80
+      ],
+      "principle": "Pairwise attraction and initial conditions",
+      "tutorial_artifact": "force_play_mutual",
+      "placements": [
+        {
+          "token": "force_play_mutual",
+          "cell": [
+            17,
+            14
+          ],
+          "zone": [
+            20,
+            20
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_magnet",
+          "cell": [
+            10,
+            36
+          ],
+          "zone": [
+            14,
+            14
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_tower",
+          "cell": [
+            26,
+            36
+          ],
+          "zone": [
+            10,
+            12
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "force_play_gravity",
+          "cell": [
+            17,
+            54
+          ],
+          "zone": [
+            22,
+            10
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "orbit_walk",
+          "cell": [
+            17,
+            70
+          ],
+          "zone": [
+            10,
+            10
+          ],
+          "config": "",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 0,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Let five PointBody spheres attract one another with paired forces, softened at close range. Initial tangential velocity and disabled contact keep this an orbital model; entering adds the visitor as a sixth model mass. Compare a selective, three-second magnet and a hand-held gravity point with ordinary gravity: remove a bottom brick, cross a release threshold, and watch existing support cease to hold. Reconstruct the pairwise relation; the other experiments expose different boundary conditions.",
+      "carry": "A source can also be a receiver; selecting bodies is part of a force system.",
+      "independent_check": "Change one initial velocity, preserve the others, and compare paths without claiming every difference proves chaos.",
+      "number": 8,
+      "walk": [
+        [
+          17.5,
+          3.5
+        ],
+        [
+          31.5,
+          3.5
+        ],
+        [
+          31.5,
+          75.5
+        ]
+      ],
+      "before_count": 11,
+      "after_count": 5,
+      "selection_note": "Orbit Walk is a prescribed two-body barycentre diagram. It is a controlled comparison beside the primary mutually attracting points, whose trajectories are integrated."
+    },
+    {
+      "map": "VFM_09_Legs",
+      "title": "What holds the body up",
+      "size": [
+        28,
+        40
+      ],
+      "principle": "Support, contact and centre of mass",
+      "tutorial_artifact": "force_play_support",
+      "placements": [
+        {
+          "token": "force_play_support",
+          "cell": [
+            14,
+            13
+          ],
+          "zone": [
+            18,
+            16
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "one_leg",
+          "cell": [
+            5,
+            31
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "driven_by_player:false#show_foot_markers:false#pace_reach:1.1#patrol_speed:0.25",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "four_leg_critter",
+          "cell": [
+            14,
+            31
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "driven_by_player:false#show_foot_markers:false#pace_reach:1.1#patrol_speed:0.25",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "six_leg_critter",
+          "cell": [
+            23,
+            31
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "driven_by_player:false#show_foot_markers:false#pace_reach:1.1#patrol_speed:0.25",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        }
+      ],
+      "lesson": "Reuse the cube as a leg and the point/cube family as a load. Four actual rigid legs support a table with a tall asymmetric stack. Pull the rose leg away by hand: no fall animation or scripted collapse decides the result. Compare the existing walking bodies as changing support arrangements. The tutorial reconstructs one support-and-load contact experiment.",
+      "carry": "A body depends on a configuration of other bodies.",
+      "independent_check": "Move the load or choose a different foot. Predict a stable or unstable result, then keep the actual aftermath.",
+      "number": 9,
+      "walk": [
+        [
+          14.5,
+          3.5
+        ],
+        [
+          25.5,
+          3.5
+        ],
+        [
+          25.5,
+          35.5
+        ]
+      ],
+      "before_count": 8,
+      "after_count": 4
+    },
+    {
+      "map": "VFM_08_Arena",
+      "title": "One push reaches another body",
+      "size": [
+        28,
+        64
+      ],
+      "principle": "Impulse, recoil and collision",
+      "tutorial_artifact": "force_play_bowling",
+      "placements": [
+        {
+          "token": "force_play_bowling",
+          "cell": [
+            8,
+            17
+          ],
+          "zone": [
+            10,
+            25
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "sentry_turret",
+          "cell": [
+            19,
+            11
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "target:balls#detection_range:6#use_laser_damage:true#laser_damage_per_hit:80",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0.82,
+          "pedestal": true
+        },
+        {
+          "token": "ball_dropper",
+          "cell": [
+            19,
+            16
+          ],
+          "role": "experiment",
+          "rotation": 0,
+          "config": "total_balls:8#spawn_spread:0.4#drop_interval_min:2#drop_interval_max:3",
+          "zone": [
+            5,
+            5
+          ],
+          "y": 2.8,
+          "pedestal": false
+        },
+        {
+          "token": "queer_cylinder_target",
+          "cell": [
+            19,
+            23
+          ],
+          "role": "experiment",
+          "rotation": 180,
+          "config": "",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 1.35,
+          "pedestal": true
+        },
+        {
+          "token": "force_play_recoil",
+          "cell": [
+            9,
+            41
+          ],
+          "zone": [
+            12,
+            10
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        },
+        {
+          "token": "momentum_cradle",
+          "cell": [
+            8,
+            55
+          ],
+          "zone": [
+            5,
+            4
+          ],
+          "config": "",
+          "y": 0,
+          "pedestal": false,
+          "rotation": 180,
+          "role": "comparison"
+        },
+        {
+          "token": "newton_cradle",
+          "cell": [
+            18,
+            55
+          ],
+          "zone": [
+            5,
+            4
+          ],
+          "config": "",
+          "y": 0.82,
+          "pedestal": true,
+          "rotation": 180,
+          "role": "comparison"
+        }
+      ],
+      "lesson": "Roll the known sphere into ten real pins along a long banked lane. The impulse initiates motion; contact distributes it. Compare a free and a braced launcher receiving equal opposite impulses. Keep the target bay as a separate question about what is selected. Reconstruct the sphere impulse and observe the pin contacts; pins need not become ten separate tutorials.",
+      "carry": "An action can redistribute motion beyond its intended recipient.",
+      "independent_check": "Predict the signs of the two velocities before release. Compare braced and free without calling both systems isolated.",
+      "number": 10,
+      "walk": [
+        [
+          14.5,
+          3.5
+        ],
+        [
+          25.5,
+          3.5
+        ],
+        [
+          25.5,
+          59.5
+        ]
+      ],
+      "before_count": 22,
+      "after_count": 7,
+      "selection_note": "Compare two presentations: Momentum Cradle shows ideal input/output poses; Newton's Cradle integrates pendulum angles with an idealized equal-mass collision exchange. Neither is the Jolt collision solver used by bowling."
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "title": "Carry the point through",
+      "size": [
+        16,
+        84
+      ],
+      "principle": "The visitor as another receiver",
+      "tutorial_artifact": "force_capability_lab",
+      "placements": [
+        {
+          "token": "force_capability_lab",
+          "cell": [
+            8,
+            37
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            14,
+            24
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "vector_machine",
+          "cell": [
+            4,
+            6
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "lesson:force_as_place",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_field_zone",
+          "cell": [
+            8,
+            12
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "config": "lesson:force_as_place",
+          "zone": [
+            12,
+            8
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "force_play_flight",
+          "cell": [
+            8,
+            68
+          ],
+          "zone": [
+            14,
+            26
+          ],
+          "role": "comparison",
+          "rotation": 0,
+          "y": 0,
+          "config": "",
+          "pedestal": false
+        }
+      ],
+      "lesson": "Return to the held black point as a source of thrust. Aim the two spheres where you want to travel and hold the triggers; release stops thrust while motion and gravity continue. The existing local-field crossing compares cube and visitor receiver contracts. In the final court the mortar, pad, moving platform, hinge, springs and loose cubes return as a space for combinations. The tutorial owns only the thrust-point-to-player connection. Wear the body visor to compare world velocity, thrust per unit mass and gravity. Turn your head without changing the world vector, then release the triggers: thrust stops before motion does. The visor reads this same connection; it adds no second movement model. The flying-mat circuit returns those same two trigger-thrust points at four raised gates. The mat is a visual carrier of the player movement model; release stops thrust while gravity remains. The mortar now has nine posts and its controls face the approach.",
+      "carry": "Earlier operations become available capacities, and their combinations leave consequences.",
+      "independent_check": "Change the two aim directions and predict their combined thrust. Deliver the unpowered point while accounting for what else moved.",
+      "number": 11,
+      "walk": [
+        [
+          7.5,
+          3.5
+        ],
+        [
+          7.5,
+          22.5
+        ],
+        [
+          7.5,
+          24.5
+        ],
+        [
+          2.5,
+          24.5
+        ],
+        [
+          2.5,
+          46.5
+        ],
+        [
+          2.5,
+          52.5
+        ],
+        [
+          13.5,
+          52.5
+        ],
+        [
+          13.5,
+          80.5
+        ]
+      ],
+      "before_count": 9,
+      "after_count": 4
+    }
+  ],
+  "keep_disposition": [
+    {
+      "token": "force_trial_mass",
+      "title": "Same force, different mass",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_vortex",
+      "title": "The drain becomes an orbit",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_roll",
+      "title": "Slide, roll or tip?",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_pipe",
+      "title": "Where the pipe lets go",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_conveyor",
+      "title": "The belt keeps going",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Change_Choreography"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_attractor",
+      "title": "It caught the doorstop",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_threebody",
+      "title": "Three bodies, two beginnings",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_support",
+      "title": "Remove one support",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_bowling",
+      "title": "One push, two directions",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_trial_catapult",
+      "title": "The lever lets go",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "bounce_well",
+      "title": "Bounce Well (restitution)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "bouncing_ball",
+      "title": "Bouncing Ball",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "calder_mobile",
+      "title": "Calder Mobile (balanced, real weights)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "calder_object_mobile",
+      "title": "Calder Mobile (project primitives)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "collision_carts",
+      "title": "Collision Carts (momentum exchange)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "dot_aligner",
+      "title": "Dot-Aligner (aim · foe = mercy)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "five_leg_critter",
+      "title": "Five Leg Critter",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "force_field_zone",
+      "title": "Force Field Zone (a force made into a place)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_mower",
+      "title": "Force Mower (W = F d cos θ)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_03_Motion"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "force_pad",
+      "title": "Force Pad",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "example_2_1_forces_vr",
+      "title": "Forces (2.1)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "force_capability_lab",
+      "title": "Forces — a capability court",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "four_leg_critter",
+      "title": "Four Leg Critter",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_09_Legs"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "gravity_well",
+      "title": "Gravity Well",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "launch_arc",
+      "title": "Launch Arc (projectile motion)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "lever_balance",
+      "title": "Lever (τ = F·d)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "momentum_cradle",
+      "title": "Momentum Cradle (p = mv conserved)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "newton_cradle",
+      "title": "Newton's Cradle",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "newtons_laws",
+      "title": "Newton's Laws",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "one_leg",
+      "title": "One Leg",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_09_Legs"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "pendulum_hall",
+      "title": "Pendulum Hall (walk-in)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "projection_shadow",
+      "title": "Projection Shadow ((a·n̂)n̂ as a shadow)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "prop_carousel",
+      "title": "Prop Carousel",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "queer_cylinder_target",
+      "title": "queer_cylinder_target",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "return_launcher",
+      "title": "Return Launcher (the way home)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "sentry_turret",
+      "title": "Sentry Turret",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "sisyphus_mower",
+      "title": "Sisyphus Mower",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "six_leg_critter",
+      "title": "Six Leg Critter",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_09_Legs"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "torque_crank",
+      "title": "Torque Crank (r × F you can feel)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "vector_add",
+      "title": "Vector Addition (a + b, two-pad console)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "weather_vane",
+      "title": "Weather Vane (wind ∝ v²)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "wedge_slide",
+      "title": "Wedge Slide (inclined-plane free body)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "film_force_motion",
+      "title": "A force changes a journey",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "ball_dropper",
+      "title": "Ball Dropper",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_08_Arena"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "basis_vectors_rig",
+      "title": "Basis Vectors Rig",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "brake_skid",
+      "title": "Brake Skid (applied friction)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "centrifuge_ring",
+      "title": "Centrifuge Ring (walk-in centripetal)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act4a_KineticForces"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "centripetal_bench",
+      "title": "Centripetal Bench (a = v2/r)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "centripetal_force_demo",
+      "title": "Centripetal Force Demo",
+      "user_decision": "Keep",
+      "status": "needs construction",
+      "halls": [],
+      "reason": "Empty scene record; not presented as a working experiment."
+    },
+    {
+      "token": "circle_train",
+      "title": "Circle Train (centripetal force, a = v²/r)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "coupled_pendulums",
+      "title": "Coupled Pendulums",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "drag_corridor",
+      "title": "Drag Corridor (walk-in air/water/honey)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "drag_lane",
+      "title": "Drag Lane (F = -b·v you feel)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "field_bench",
+      "title": "Field Bench (a vector at every point)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "field_room",
+      "title": "Field Room",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "firework_burst",
+      "title": "Firework Burst (projectile fountain)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "VFM_05_Launch"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "firework_launcher",
+      "title": "Firework Launcher",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "force_vortex",
+      "title": "Force Vortex",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "free_ball_launcher",
+      "title": "Free Ball Launcher",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "friction_ramp",
+      "title": "Friction Ramp",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "gravity_gun_test_scene",
+      "title": "gravity_gun_test_scene",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "harmonic_motion_demo",
+      "title": "Harmonic Motion Demo",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "invisible_hill",
+      "title": "Invisible Hill",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "lever_room",
+      "title": "Lever Room (walk-in balance beam)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "magnitude_bench",
+      "title": "Magnitude Bench (|v| = sqrt(x2+y2+z2))",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "magnitude_hall",
+      "title": "Magnitude Hall (walk-in |v|)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "mass_spring_damper",
+      "title": "Mass-Spring-Damper",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "matryoshka_row",
+      "title": "Matryoshka Row",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "newton_bench",
+      "title": "Newton Bench (F = m a)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "parlour_orbits",
+      "title": "Parlour Orbits",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "paused_fountain",
+      "title": "Paused Fountain",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "pendulum_swing",
+      "title": "Pendulum (T = 2π√(L/g))",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "projection_toy",
+      "title": "Projection Toy (held, onto a line)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "prop_mobile",
+      "title": "Prop Mobile",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "prop_spigot",
+      "title": "Prop Spigot",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "restitution_bench",
+      "title": "Restitution Bench (h' = e h)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "river_crossing",
+      "title": "River Crossing (applied subtraction)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "scaling_bench",
+      "title": "Scaling Bench (k x v)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "slingshot_pull",
+      "title": "Slingshot (elastic launch, PE = 1/2 k x^2)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "slingshot_launcher",
+      "title": "Slingshot Launcher",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "spring_bob",
+      "title": "Spring (F = −k x)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "spring_chain",
+      "title": "Spring Chain",
+      "user_decision": "Keep",
+      "status": "needs construction",
+      "halls": [],
+      "reason": "Empty scene record; not presented as a working experiment."
+    },
+    {
+      "token": "spring_tower",
+      "title": "Spring Tower (walk-in Hooke)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act4b_Oscillation"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "stretch_bench",
+      "title": "Stretch Bench",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "adder_board",
+      "title": "The Adder's Drafting Board",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "three_gravities",
+      "title": "Three Gravities",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "throttle_gain",
+      "title": "Throttle Gain (applied scaling)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "throw_ball",
+      "title": "throw_ball",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "torque_bench",
+      "title": "Torque Bench (tau = |r||F| sin th)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "tug_of_war",
+      "title": "Tug of War (applied addition)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "umbrella_field",
+      "title": "Umbrella Field",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vector_addition_demo",
+      "title": "Vector Addition",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vector_addition_walk",
+      "title": "Vector Addition Walk (Room Scale)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "vector_bench",
+      "title": "Vector Bench (direction + length)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vector_field_visualizer",
+      "title": "Vector Field Visualizer",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vector_fields",
+      "title": "Vector Fields",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vector_machine",
+      "title": "Vector Machine (the dial of gravity)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "vectorline",
+      "title": "vectorline",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "vectorpoint",
+      "title": "VectorPoint",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "VectorThrowing",
+      "title": "VectorThrowing",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "velocity_bench",
+      "title": "Velocity Bench (v = vx + vy)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "wind_bench",
+      "title": "Wind Bench (fan + windsock)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "wind_room",
+      "title": "Wind Room (walk-in field)",
+      "user_decision": "Keep",
+      "status": "main walk",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "wind_toy",
+      "title": "Wind Toy (held vane)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "work_meter",
+      "title": "Work Meter (W = F·d·cosθ)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "A distinct contribution in this arrangement."
+    },
+    {
+      "token": "work_room",
+      "title": "Work Room (walk-in F.d)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    },
+    {
+      "token": "work_toy",
+      "title": "Work Toy (held W = F.d.cos th)",
+      "user_decision": "Keep",
+      "status": "collection alternative",
+      "halls": [],
+      "reason": "Retained for comparison and later swaps; not crowded into this pass."
+    }
+  ],
+  "archived_halls": [
+    {
+      "map": "VFM_02_Operations",
+      "title": "Two moves, one arrival",
+      "size": [
+        20,
+        28
+      ],
+      "principle": "Vector addition and travelled route",
+      "tutorial_artifact": "force_point_addition",
+      "placements": [
+        {
+          "token": "force_point_addition",
+          "cell": [
+            10,
+            9
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            7,
+            8
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "adder_board",
+          "cell": [
+            5,
+            22
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "scale_multiplier:3",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 1.05,
+          "pedestal": true
+        },
+        {
+          "token": "vector_addition_walk",
+          "cell": [
+            15,
+            22
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "",
+          "zone": [
+            5,
+            5
+          ],
+          "y": 0,
+          "pedestal": false
+        }
+      ],
+      "lesson": "Keep the same point class and introduce a second displacement in the same frame. Place their arrows head to tail and build one result point from a+b. Compare the sum with the two travelled segments. The drafting board and walk-in construction let the same operation be read at two other scales.",
+      "carry": "A sum can preserve an endpoint without preserving the journey.",
+      "independent_check": "Choose cancelling displacements, then swap two unequal ones. Show the same arrival and a different intermediate position.",
+      "number": 2,
+      "walk": [
+        [
+          10.5,
+          3.5
+        ],
+        [
+          17.5,
+          3.5
+        ],
+        [
+          17.5,
+          23.5
+        ]
+      ],
+      "before_count": 27,
+      "after_count": 3
+    },
+    {
+      "map": "Vectors_Act2_VectorArithmetic",
+      "title": "What the rail keeps",
+      "size": [
+        22,
+        28
+      ],
+      "principle": "Projection and the remaining component",
+      "tutorial_artifact": "force_point_projection",
+      "placements": [
+        {
+          "token": "force_point_projection",
+          "cell": [
+            11,
+            9
+          ],
+          "role": "tutorial",
+          "rotation": 0,
+          "config": "",
+          "zone": [
+            7,
+            8
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "dot_aligner",
+          "cell": [
+            5,
+            22
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        },
+        {
+          "token": "torque_crank",
+          "cell": [
+            17,
+            22
+          ],
+          "role": "comparison",
+          "rotation": 180,
+          "config": "",
+          "zone": [
+            4,
+            4
+          ],
+          "y": 0,
+          "pedestal": false
+        }
+      ],
+      "lesson": "Continue with the held point. Project its displacement onto a fixed unit rail and retain the perpendicular remainder. Add the two parts to recover the original. The alignment and crank instruments are nearby comparisons: an alignment score, a component and a turning relation are different quantities. This lesson reconstructs only the projection point.",
+      "carry": "A selected component does not erase what the operation leaves over.",
+      "independent_check": "Move the point perpendicular to the rail; verify that the projection stays still while the remainder changes.",
+      "number": 3,
+      "walk": [
+        [
+          11.5,
+          3.5
+        ],
+        [
+          19.5,
+          3.5
+        ],
+        [
+          19.5,
+          23.5
+        ]
+      ],
+      "before_count": 13,
+      "after_count": 3
+    }
+  ],
+  "vector_compaction": "Three vector readings in one hall. Older comparison machines stay in the collection, outside this route.",
+  "force_play": "Eighteen larger hand-led studies added to the existing eleven-hall route; one tutorial anchor per principle, comparisons remain optional.",
+  "picker_selection": [
+    "bubble_blaster",
+    "catapult",
+    "human_catapult",
+    "firework_burst",
+    "force_mower",
+    "wind_room",
+    "force_vortex",
+    "viscosity_layers",
+    "centrifuge_ring",
+    "SpringSuspension",
+    "spring_tower",
+    "orbit_walk",
+    "momentum_cradle",
+    "newton_cradle",
+    "launch_arc"
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "incoming": {
+    "sha256": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\nconst PointBody = preload(\"point_body.gd\")\nvar places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]\nvar cubes: Array[Node3D] = []\nvar point := PointBody.new()\n\nfunc _ready() -> void:\n    for place in places:\n        var cube := CubeBody.new()\n        cube.position = place\n        add_child(cube)\n        cubes.append(cube)\n    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)\n    add_child(point)\n",
+      "after": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\n\nvar cube := CubeBody.new()\nvar start := Vector3(0, 1, 0)\nvar turn_degrees := 0.0\nvar size_factor := 1.0\nvar rise := 0.0\nvar duration := 2.0\nvar elapsed := 0.0\n\nfunc _ready() -> void:\n    assert(duration > 0.0 and size_factor > 0.0)\n    add_child(cube)\n    cube.position = start\n    cube.rotation_degrees.y = turn_degrees\n    cube.scale = Vector3.ONE * size_factor\n\nfunc _process(delta: float) -> void:\n    elapsed += delta\n    var t: float = minf(elapsed / duration, 1.0)\n    cube.position = start + Vector3.UP * rise * t\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Trans_Pre/tutorial.md",
+      "sha256": "aa8c3c9244394874733c84055bf60aac2eefa5e887645e244d4b0b8d66580a03"
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/tutorial.md",
+      "sha256": "7c9f4a05aa774be8e0fd80f16a4e69971282761b2b88ec0076c9ed6db0aa0021"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py",
+      "sha256": "efe2477d075c605a8234c37e4d302d0e601894f32ddc7d577530ad75bc6adc85"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd",
+      "sha256": "f87964989d91e1917e331510e92269e18400a965586d52ce65f4e386f09d8ae8"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd",
+      "sha256": "f417b0dfb4435bff837209d288fa4470855fb0113bf840eebde3e7aaf98776f0"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trans-pre-three-operations/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "checks": [
+    {
+      "id": "still/owns_visible_cube",
+      "kind": "native"
+    },
+    {
+      "id": "still/eight_twelve",
+      "kind": "native"
+    },
+    {
+      "id": "still/starting_pose",
+      "kind": "native"
+    },
+    {
+      "id": "still/clock_does_not_require_motion",
+      "kind": "native"
+    },
+    {
+      "id": "still/visual_not_physical",
+      "kind": "native"
+    },
+    {
+      "id": "translation/equal_displacement_all_corners",
+      "kind": "native"
+    },
+    {
+      "id": "translation/orientation_and_size_kept",
+      "kind": "native"
+    },
+    {
+      "id": "translation/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/declared_y_axis",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/corner_moves",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/all_pair_distances_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/origin_kept",
+      "kind": "native"
+    },
+    {
+      "id": "rotation/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "scale/every_distance_times_factor",
+      "kind": "native"
+    },
+    {
+      "id": "scale/bottom_centre_fixed",
+      "kind": "native"
+    },
+    {
+      "id": "scale/top_reaches_2_5",
+      "kind": "native"
+    },
+    {
+      "id": "scale/construction_kept",
+      "kind": "native"
+    },
+    {
+      "id": "transfer/new_angle_on_same_body",
+      "kind": "native"
+    },
+    {
+      "id": "transfer/neighbour_unaffected",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/0.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/1.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/2.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/30/2.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/30",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/0.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/1.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/2.0",
+      "kind": "native"
+    },
+    {
+      "id": "time/120/2.5",
+      "kind": "native"
+    },
+    {
+      "id": "time/keeps_facing_size_and_data/120",
+      "kind": "native"
+    },
+    {
+      "id": "time/equal_elapsed_equal_pose",
+      "kind": "native"
+    },
+    {
+      "id": "time/double_duration_halfway",
+      "kind": "native"
+    },
+    {
+      "id": "time/double_duration_same_destination",
+      "kind": "native"
+    },
+    {
+      "id": "combine/rise_in_study_y",
+      "kind": "native"
+    },
+    {
+      "id": "combine/fixed_turn_and_size",
+      "kind": "native"
+    },
+    {
+      "id": "combine/original_construction",
+      "kind": "native"
+    },
+    {
+      "id": "restore/rerun_original_values",
+      "kind": "native"
+    },
+    {
+      "id": "engine/actual_process_callback",
+      "kind": "native"
+    },
+    {
+      "id": "engine/callback_uses_elapsed",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Trans_Pre/tutorial.md",
+    "commons/maps/Point_Animatedcube/tutorial.md",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/cube_body.gd",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/face_body.gd",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/line_skin.gd"
+  ]
+}

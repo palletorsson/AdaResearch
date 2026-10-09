@@ -1,0 +1,457 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "last bay and torus installed",
+      "passed": true
+    },
+    {
+      "name": "existing museum moon casts shadows",
+      "passed": true
+    },
+    {
+      "name": "torus centre is five metres above hall floor",
+      "passed": true
+    },
+    {
+      "name": "torus remains horizontal",
+      "passed": true
+    },
+    {
+      "name": "real mesh casts the shadow",
+      "passed": true
+    },
+    {
+      "name": "no second moon or fill lights added to the last bay",
+      "passed": true
+    },
+    {
+      "name": "last bay has no low ceiling slab",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 0",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 0",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 1",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 1",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 2",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 2",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 3",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 3",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 4",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 4",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 5",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 5",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 6",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 6",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 7",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 7",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 8",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 8",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 9",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 9",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 10",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 10",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 11",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 11",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 12",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 12",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 13",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 13",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 14",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 14",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 15",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 15",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 16",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 16",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 17",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 17",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 18",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 18",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 19",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 19",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 20",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 20",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 21",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 21",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 22",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 22",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 23",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 23",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 24",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 24",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 25",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 25",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 26",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 26",
+      "passed": true
+    },
+    {
+      "name": "one count changes at step 27",
+      "passed": true
+    },
+    {
+      "name": "valid native mesh at step 27",
+      "passed": true
+    },
+    {
+      "name": "cycle joins without changing both counts",
+      "passed": true
+    },
+    {
+      "name": "animation preserves radii, height and orientation",
+      "passed": true
+    },
+    {
+      "name": "clock advances to the next resolution",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: moon-court",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shadow-fine",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shadow-control",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shadow-four-rings",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: moon-court-coarse",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: torus-four-by-four",
+      "passed": true
+    },
+    {
+      "name": "point meets the entrance side of the court",
+      "passed": true
+    },
+    {
+      "name": "instructions are beside the actual point",
+      "passed": true
+    },
+    {
+      "name": "front approach reaches the sphere without an intervening collider",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: catalyst-in-the-court",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: catalyst-within-reach",
+      "passed": true
+    },
+    {
+      "name": "point starts within seated and standing reach",
+      "passed": true
+    },
+    {
+      "name": "paired direction studies have the same actual mesh",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hanging-point",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rings-and-segments",
+      "passed": true
+    },
+    {
+      "name": "unheld sphere does not simplify",
+      "passed": true
+    },
+    {
+      "name": "unheld trigger cannot fire",
+      "passed": true
+    },
+    {
+      "name": "XRTools grab moves the actual point",
+      "passed": true
+    },
+    {
+      "name": "suspension releases when held",
+      "passed": true
+    },
+    {
+      "name": "two held steps reduce each count by two",
+      "passed": true
+    },
+    {
+      "name": "radius and physical boundary do not shrink",
+      "passed": true
+    },
+    {
+      "name": "held trigger creates one form",
+      "passed": true
+    },
+    {
+      "name": "shot has an independent mesh with the selected counts",
+      "passed": true
+    },
+    {
+      "name": "shot starts clear of the held point",
+      "passed": true
+    },
+    {
+      "name": "shot travels along its aim",
+      "passed": true
+    },
+    {
+      "name": "minimum remains valid: one ring, four segments",
+      "passed": true
+    },
+    {
+      "name": "readout names the current mesh",
+      "passed": true
+    },
+    {
+      "name": "later simplification does not rewrite a launched form",
+      "passed": true
+    },
+    {
+      "name": "rapid duplicate trigger respects cooldown",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held-low-resolution",
+      "passed": true
+    },
+    {
+      "name": "fired form reaches an actual collider and delivers primitives mode",
+      "passed": true
+    },
+    {
+      "name": "at most eight active forms",
+      "passed": true
+    },
+    {
+      "name": "release pauses resolution",
+      "passed": true
+    },
+    {
+      "name": "released point returns to suspension",
+      "passed": true
+    },
+    {
+      "name": "return restores the smooth starting counts",
+      "passed": true
+    },
+    {
+      "name": "desktop holding uses the same resolution rule",
+      "passed": true
+    },
+    {
+      "name": "desktop drop also returns and resets",
+      "passed": true
+    },
+    {
+      "name": "all emitted forms expire",
+      "passed": true
+    },
+    {
+      "name": "body-width route remains beside the point -1.5",
+      "passed": true
+    },
+    {
+      "name": "body-width route remains beside the point 1.5",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "moon_direction": [
+      -0.788010716438293,
+      -0.61566150188446,
+      0.0000000344450441502886
+    ],
+    "shadow_centre": [
+      5.11949157714844,
+      0.0149998664855957,
+      35.5
+    ],
+    "station_position": [
+      9.5,
+      0.0,
+      35.5
+    ],
+    "torus_centre": [
+      11.5,
+      5.0,
+      35.5
+    ]
+  },
+  "passed": true,
+  "scope": "Real Endless Museum scene. Controlled input and native rendering; headset acceptance remains open."
+}

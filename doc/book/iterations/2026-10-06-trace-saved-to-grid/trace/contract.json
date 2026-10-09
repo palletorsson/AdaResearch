@@ -1,0 +1,810 @@
+{
+  "incoming": {
+    "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+  },
+  "operations": [
+    {
+      "id": "sampling-distance",
+      "kind": "insert_after",
+      "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+      "text": "const MIN_SEGMENT_DISTANCE := 0.05\n"
+    },
+    {
+      "id": "history-state",
+      "kind": "replace",
+      "before": "var point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n",
+      "after": "var positions: Array[Vector3] = []\nvar trail: Node3D\n"
+    },
+    {
+      "id": "seed-instead-of-second-end",
+      "kind": "replace",
+      "before": "    point_b = PointBody.new()\n    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n    add_child(point_b)\n\n    line = LineSkin.new()\n    add_child(line)\n",
+      "after": "    trail = Node3D.new()\n    add_child(trail)\n    positions.append(point.position)\n"
+    },
+    {
+      "id": "retain-and-join-neighbours",
+      "kind": "replace",
+      "before": "    var a := local_position\n    var b := to_local(point_b.global_position)\n    var displacement := b - a\n    distance = displacement.length()\n    line.show_segment(a, displacement, distance)\n    readout.text += \"\\nDISTANCE \" + str(distance)\n",
+      "after": "    var last := positions[positions.size() - 1]\n    if (local_position - last).length() >= MIN_SEGMENT_DISTANCE:\n        positions.append(local_position)\n\n        for segment in trail.get_children():\n            segment.queue_free()\n\n        for i in range(1, positions.size()):\n            var a := positions[i - 1]\n            var displacement := positions[i] - a\n            var segment := LineSkin.new()\n            trail.add_child(segment)\n            segment.show_segment(a, displacement, displacement.length())\n\n    readout.text += \"\\nPOINTS \" + str(positions.size())\n"
+    },
+    {
+      "id": "archive-support",
+      "kind": "insert_after",
+      "anchor": "const LineSkin = preload(\"line_skin.gd\")\n",
+      "text": "const TraceArchive = preload(\"trace_archive.gd\")\n"
+    },
+    {
+      "id": "save-on-release",
+      "kind": "insert_after",
+      "anchor": "    positions.append(point.position)\n",
+      "text": "    point.dropped.connect(_save_trace)\n"
+    },
+    {
+      "id": "save-after-drawing-settles",
+      "kind": "insert_after",
+      "anchor": "    readout.text += \"\\nPOINTS \" + str(positions.size())\n",
+      "text": "\nfunc _save_trace(_point: Node3D) -> void:\n    await get_tree().process_frame\n    if positions.size() < 2:\n        return\n    var error := TraceArchive.save_drawing(trail, positions)\n    if error != OK:\n        push_error(\"Could not save this trace: \" + error_string(error))\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4"
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/tutorial.md",
+      "sha256": "0cc197cba22713cf207ac356a23fab1ee41ce44b1a44c885cca2f49a6f133841"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json",
+      "sha256": "f0d0bce8ede3643b727dac8d807aac8fe1875059c2d9817709a010f0d28ad9b7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/build.py",
+      "sha256": "cd359dd136db7d00e92cf0d240428ac3808baf218389220e537d617e6e2b9a63"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/build_report.py",
+      "sha256": "fa90a7f8810e8a2c6bee3655e534e0670b759d7eb7919b6222046f08784eefd4"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-grid-report.json",
+      "sha256": "e183b11aa708a2ddb2fb48a5c7ce40facaa4b8fcb178f3a7294a43fb3e1101d0"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-grid-source_manifest.json",
+      "sha256": "df853f072666e0a68f58f2cd0874634fde6cd668f5723698957939858774a5e7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-report.json",
+      "sha256": "f22e51c6be8bc6660130fe032f7b6a07b9e416370cffedd6cab8dd2b664cffae"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-trace-report.json",
+      "sha256": "428008a7338592268b4998e0113f3da8f461d5e0ed2c45857768deb1548de88d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-trace-source_manifest.json",
+      "sha256": "311c932e5bf41e8a5e588f533be61f3c17d65eca011fb8795d42967a145746ed"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum_handoff.gd",
+      "sha256": "1b6350731614ccfdcb86a888155f99e6048208bc0adc7c93db7d32aae6c2c04e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/publish.py",
+      "sha256": "585c137cbb21d2b6e9ac5e3d906bd1689f77836e2a2f5d4aa033745848e323bd"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_checks.py",
+      "sha256": "43806b65b1b1fabaa33f5b141778173480d08674b80b7de59b993938af46e1fa"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_museum.py",
+      "sha256": "f1163e9bd644268b9a5d21dc20e286276d41cd4db93c3a9d16b226aea67b3ad7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/verification.json",
+      "sha256": "392ca3ae68d2be3e775e52f4ad71996be61cd31859f888b05725f3c5583138a0"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_handoff.gd",
+      "sha256": "a41430040411ec98dced8541db82ec8ebb353f89ece3e6cc2c2261715a0e77a7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_trace.gd",
+      "sha256": "23783a0eb355decae792270c899c727d49309bc24b557ceb6ec0d544447249ff"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/assembled.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/expected.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/flat_y.gd",
+      "sha256": "f25e01338eb457bc2f8c941cc8a746f16a9548bb75b94866af28fe6db186a80e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/grid.gd",
+      "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/incoming.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/operations.json",
+      "sha256": "27df50fe9f2504ae185b11fa8448e5b7ad45a1d27f6e1fdf8cae4e01f3e2951c"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/tutorial.md",
+      "sha256": "0cc197cba22713cf207ac356a23fab1ee41ce44b1a44c885cca2f49a6f133841"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/operations.json",
+      "sha256": "9b6499c90d5d019b0413d57561672c61914c5709e5002aad871b9d073fd4bd64"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/tutorial.md",
+      "sha256": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/omit_last_pair.gd",
+      "sha256": "c0c1145c549883454c8443bc307ef51051f5271cb09318099918d2d8ce5b5ae6"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/threshold_020.gd",
+      "sha256": "483014df062bea610dde83c7ae67b603bcb7b2e104a3ba2a8d51b4c2a0a026e8"
+    }
+  ],
+  "checks": [
+    {
+      "id": "positive/carry/original_point",
+      "kind": "native"
+    },
+    {
+      "id": "positive/carry/one_body",
+      "kind": "native"
+    },
+    {
+      "id": "positive/carry/history_container",
+      "kind": "native"
+    },
+    {
+      "id": "positive/carry/typed_array",
+      "kind": "native"
+    },
+    {
+      "id": "positive/carry/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/seed/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/seed/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/seed/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/seed/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/seed/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/held/near_overlap",
+      "kind": "native"
+    },
+    {
+      "id": "positive/held/pickup",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/driver",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.02/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/driver",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.04/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/driver",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/sample/step_0.06/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/no_growth",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/pause/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_3/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_3/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_3/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_3/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_3/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_4/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_4/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_4/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_4/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_4/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_5/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_5/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_5/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_5/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/route/point_5/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/history/value_copy",
+      "kind": "native"
+    },
+    {
+      "id": "positive/history/return_kept",
+      "kind": "native"
+    },
+    {
+      "id": "positive/held/original_resources",
+      "kind": "native"
+    },
+    {
+      "id": "positive/release/stays",
+      "kind": "native"
+    },
+    {
+      "id": "positive/release/history_stays",
+      "kind": "native"
+    },
+    {
+      "id": "positive/released/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/released/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/released/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/released/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/released/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resume/keeps_history",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resumed/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resumed/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resumed/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resumed/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resumed/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/resume/released",
+      "kind": "native"
+    },
+    {
+      "id": "positive/frame/local_point_stable",
+      "kind": "native"
+    },
+    {
+      "id": "positive/changed_frame/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/changed_frame/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/changed_frame/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/changed_frame/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/changed_frame/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/new_instance/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/new_instance/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/new_instance/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/new_instance/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/new_instance/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.06/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.06/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.06/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.06/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.06/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.12/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.12/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.12/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.12/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.12/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.24/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.24/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.24/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.24/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/baseline/step_0.24/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.06/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.06/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.06/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.06/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.06/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.12/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.12/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.12/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.12/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.12/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.24/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.24/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.24/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.24/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/threshold_020/step_0.24/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_2/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_2/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_2/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_2/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_2/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_3/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_3/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_3/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_3/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_3/readout",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_4/retained_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_4/retained_values",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_4/segment_count",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_4/neighbour_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "positive/experiment/omit_last_pair/point_4/readout",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/target",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/grab",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/record",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/release",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/valid",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/local_data",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/geometry",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/same_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/snapshot",
+      "kind": "native"
+    },
+    {
+      "id": "produce/save/minimum",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Trace/tutorial.md",
+    "commons/maps/Point_Line_Grid/tutorial.md",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/build.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/build_report.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-grid-report.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-grid-source_manifest.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-report.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-trace-report.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum-trace-source_manifest.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum_handoff.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/publish.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_museum.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verification.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_handoff.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/flat_y.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/grid.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/operations.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/tutorial.md",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/operations.json",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/tutorial.md",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/omit_last_pair.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/threshold_020.gd"
+  ]
+}

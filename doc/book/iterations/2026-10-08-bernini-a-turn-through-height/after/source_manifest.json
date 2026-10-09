@@ -1,0 +1,29 @@
+{
+  "room": "Wavefunctions_Bernini",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Wavefunctions_Bernini/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/Wavefunctions_Bernini/map_data.json": "eb21d4cc30a338b5a1617be60def57b727a108cab744841c3bfa6b7a1f5a0c5a",
+    "tools/probes/wavefunctions_bernini_museum.gd": "e1998365e77c8fb95f87cb08d5478c95e3e5eebb80e43c1f813c4fc2f23ca5f8",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "43214fcae9ab1a49422a955b9125390c37751c5657915b735acd048c5c7079ad",
+    "ada_run/encounter_pilot/Wavefunctions_Bernini/control.json": "b7e4a4994f1c488c3f107f648a92720e428f921f7cedf01378adf14e0a100625",
+    "ada_run/encounter_pilot/Wavefunctions_Bernini/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Wavefunctions_Bernini/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/wavefunctions.json": "272c46c9bc2237811ed80db30571f9c7c1c322459a5140a267ecd4ca8158a18c",
+    "algorithms/wavefunctions/berninicolumns/BerniniScene.tscn": "161f06997505a3a6967f5f07eb685a1d0f5a7e5cdb3f88bb5fc67c07b0b2d780",
+    "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd": "6f4250f3122886dec4209849c358cc456e95345aa814d89606712d34ccb3bca0"
+  }
+}

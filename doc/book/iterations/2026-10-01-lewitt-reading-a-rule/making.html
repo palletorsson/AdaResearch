@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>From one frame to a family — Ada</title><style>
+:root{color-scheme:light;--paper:#f2f0e9;--ink:#232926;--muted:#59635c;--accent:#9d285c;--line:#d1d2c8}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.7 Georgia,serif}
+a{color:var(--accent);text-underline-offset:4px}a:hover{color:#651639}header{border-bottom:1px solid var(--line);padding:20px 5vw;font:13px/1.5 system-ui,sans-serif;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+header nav{display:flex;gap:22px}.brand{letter-spacing:.12em;font-weight:650}main{max-width:860px;margin:70px auto;padding:0 26px}
+h1{font-weight:400;font-size:clamp(48px,7vw,88px);line-height:1.05;letter-spacing:-.035em;margin:0 0 20px}h2{font-weight:400;font-size:31px;line-height:1.25;margin:64px 0 22px}
+p{margin:18px 0 24px}main>p:first-of-type{font:13px/1.6 system-ui;color:var(--muted);letter-spacing:.055em}
+figure{margin:0}img{display:block;width:100%;height:auto}figcaption,.small{font:14px/1.6 system-ui,sans-serif;color:var(--muted);margin:12px 0 0}
+.pair,.wide,.experiment{width:min(1240px,calc(100vw - 52px));position:relative;left:50%;transform:translateX(-50%);margin:38px 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair img{height:360px;object-fit:contain;background:#e8e8e1}.wide img{max-height:650px;object-fit:contain;background:#e8e8e1}
+table{border-collapse:collapse;width:100%;font:15px/1.6 system-ui,sans-serif;margin:28px 0}th,td{border-bottom:1px solid var(--line);text-align:left;padding:14px 12px;vertical-align:top}th{font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+code{font: .84em/1.5 Consolas,monospace;background:#e7e7df;padding:2px 5px;border-radius:3px}pre{background:#232926;color:#f5f2e9;padding:24px;overflow:auto}pre code{padding:0;background:none;color:inherit}
+.experiment{background:#e5e6dd;padding:24px;max-width:1060px}.experiment img{max-height:650px;object-fit:contain}.eyebrow{font:11px/1.4 system-ui;letter-spacing:.14em;margin:0 0 15px}.switches{display:flex;gap:10px;flex-wrap:wrap}button{font:15px/1.4 system-ui;padding:10px 18px;border:1px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;border-radius:3px}button[aria-pressed=true]{background:var(--ink);color:var(--paper)}button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.rule{margin:18px 0;font:20px/1.5 Consolas,monospace}
+footer{border-top:1px solid var(--line);padding:25px 5vw;font:13px/1.6 system-ui;color:var(--muted)}li{padding-left:5px;margin:8px 0}
+@media(max-width:700px){main{margin-top:42px;padding:0 22px}body{font-size:18px}.pair{grid-template-columns:1fr}.pair img{height:auto;max-height:390px}.pair,.wide,.experiment{width:calc(100vw - 28px)}table{font-size:13px}td,th{padding:10px 6px}h2{font-size:28px}.experiment{padding:15px}}
+@media print{header,footer,.switches{display:none}body{background:white;font-size:11pt}main{max-width:none;margin:0}.pair,.wide,.experiment{width:100%;left:0;transform:none;break-inside:avoid}.pair img{height:200px}h2{margin-top:30px}.experiment{max-width:100%}}
+</style></head>
+<body><header><span class="brand">ADA / IMAGE · RULE · ROOM</span><nav><a href="index.html">Reading the image</a><a href="making.html">Making</a><a href="open-structures.zip">Godot project ↓</a></nav></header><main id="reading"><h1>From one frame to a family</h1>
+<p>You have already run a project. Here the room, camera and bar renderer are supplied. We will work on the positions and the rules that choose between them. Open <code>rules.gd</code> beside the running study.</p>
+<h2>1. What is the smallest thing we need?</h2>
+<p>Start with <strong>Five forms</strong>, not the large installation. Look through the cube. Its interior is empty. We need eight corner positions and twelve connections: four around the bottom, four around the top, four joining the two squares.</p>
+<p>This is the Line operation repeated. Each bar has two endpoints, a midpoint and a length. The renderer gives the connection thickness so we can see it. It does not fill the opening with a face or make an invisible solid box.</p>
+<p>Move the reveal slider to the left, then slowly right. Follow the bottom square, the upper square and their connections. Orbit the result: a connection hidden by another bar from one position becomes visible from another.</p>
+<p>The cube lesson's twelve <strong>triangles</strong> and this frame's twelve <strong>edges</strong> are different descriptions. We are borrowing the idea of named corners, not turning a triangle list into an edge list unchanged.</p>
+<h2>2. Which positions change?</h2>
+<p><code>shape()</code> calls <code>Structure.corners(width, top_fraction, top_shift)</code>. Height stays at one metre. Width changes both horizontal coordinates, x and z; <code>top_fraction</code> changes the size of the upper square; <code>top_shift</code> moves that upper square sideways. These are our chosen dimensions, not measurements of the artwork.</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th align="right">Width</th>
+<th align="right">Upper fraction</th>
+<th align="right">Upper shift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cube</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Square-based pyramid</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Narrow box</td>
+<td align="right">0.38</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Truncated pyramid</td>
+<td align="right">1</td>
+<td align="right">0.52</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Sheared box</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.32</td>
+</tr>
+</tbody>
+</table>
+<p>Change the truncated pyramid's <code>0.52</code> to <code>0.8</code> in <code>shape()</code>, then run again. Before running, predict which corners will move. Does the base remain where it was? The bars keep the same thickness while the corners move.</p>
+<p>Now change <code>0.8</code> to <code>0.0</code>. The four upper addresses meet at one position. The four top edges have no length and the renderer skips them: eight nonzero edges remain. We still store eight entries, but they describe only five distinct positions. An address in a list and a place in space are not the same thing.</p>
+<p>This also marks a limit of the earlier transformation lesson. Scaling the whole cube cannot keep its base fixed while shrinking only its top. Moving the upper corners sideways is a shear here, not a rotation of the whole object.</p>
+<p>Restore <code>0.52</code>. <strong>Stop here</strong> if positions and connections are still new. You already have five forms made from one method.</p>
+<h2>3. Where does the decision happen?</h2>
+<p>Choose <strong>Twenty-five places</strong>. <code>row</code> and <code>column</code> run from 0 to 4. They locate each form; they can also decide which form appears there.</p>
+<pre><code class="language-gdscript">func form_at(column: int, row: int) -&gt; int:
+    if alternative:
+        return column
+    return (column + row) % 5
+</code></pre>
+<p>This is the live function in <code>rules.gd</code>, with spaces shown for readability. <code>% 5</code> keeps the remainder after division by five. It turns 0, 1, 2, 3, 4, 5 into 0, 1, 2, 3, 4, 0. Each number selects a form from our five-form vocabulary.</p>
+<p>At address (0, 1), the cyclic rule chooses form 1: the pyramid. Click <strong>Change array rule</strong>. The same address now chooses form 0: the cube. The supports and spacing have not moved. One rule changed the arrangement of all twenty-five objects.</p>
+<p>This is a transfer from the existing Chessboard lesson: <code>colour_of(x, z)</code> answered a colour at an address; <code>form_at(column, row)</code> answers a form. The array is not only repeated placement. It offers a place to make a decision.</p>
+<p>For your own variation, replace the last line with <code>return (column + 2 * row) % 5</code>. Predict the first two rows on paper. Run it, orbit, and compare. This is your score; it is not an assertion about LeWitt's original score. Restore the original line before replaying the supplied checks, which test the original specification.</p>
+<h2>4. What does an address permit to exist?</h2>
+<p>Choose <strong>Stacked modules</strong>. Here the unit stays a cube. Two questions change:</p>
+<ul>
+<li><code>occupied(x, z)</code> says whether a column belongs to the footprint.</li>
+<li><code>height_at(x, z, version)</code> says how many units that column contains.</li>
+</ul>
+<p>The five height rules are <code>x + 1</code>, <code>5 - x</code>, <code>z + 1</code>, <code>5 - z</code>, and <code>5</code>. Indices go from 0 to 4, so heights stay between one and five. The first four climb in different directions; the fifth gives every occupied column the same height. Inside each column, another loop supplies y positions from zero to one below its height.</p>
+<p>Click <strong>Change array rule</strong>. The footprint changes from a cross to a filled 5×5 square. The height functions stay the same. Compare the amount you can see through the structures. Shared bars between neighboring cells are drawn once by the supplied renderer.</p>
+<p>Make a different footprint by editing <code>occupied()</code> to return <code>x == z</code>. You have exchanged the cross for a diagonal. Keep the five height rules. What survives of the family resemblance? Record the edit and one view where its consequence is clear.</p>
+<h2>5. What have the five names left out?</h2>
+<p>Choose <strong>Between the forms</strong>. This view holds the base, height and thickness fixed and samples seven upper fractions from zero to one. Between the pyramid and cube stand forms that were not given their own place in the first row.</p>
+<p>We could sample more positions, tilt only one corner, omit a connection or widen the spacing until the separate frames become passages. Each proposal changes a different part of the description. Choose one; do not change all of them at once.</p>
+<p>The study currently draws objects. Turning them into architecture would require another decision: which bars resist a body, what size the openings need to be, and where a person can pass. The photograph, the visible mesh and the collision boundary are three different kinds of evidence.</p>
+<h2>A small record</h2>
+<p>Keep the supplied image, the rule you inferred, your first reconstruction and one deliberate variation together. Write three sentences: what stayed fixed, what changed, and what looking from another side made you revise. A successful resemblance does not prove you found the original rule. A useful rule lets you make and explain a new consequence.</p></main><footer>1 October 2026 · Native Godot study after supplied photographs of Sol LeWitt's work. Original arrangement rules are distinguished from our proposals. <a href="report.json">Software evidence</a></footer></body></html>

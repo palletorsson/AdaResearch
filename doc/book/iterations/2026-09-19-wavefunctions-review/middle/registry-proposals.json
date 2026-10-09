@@ -1,0 +1,52 @@
+[
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "coupled_oscillator_lattice",
+      "description"
+    ],
+    "old": "12×12 oscillator grid",
+    "new": "A 12 by 12 grid of damped oscillators exchanging forces with up to eight neighbours. Optional comparison controls restart the same lattice with coupling on or off, using the existing continuing sine drive or one pulse. Default 2 Hz sine excitation produces a subtle neighbour response; the pulse makes propagation more visible. Fabric variants change representation without changing these forces."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "DualBallFMController",
+      "description"
+    ],
+    "old": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
+    "new": "Two movable ValueMapper3D balls control a phase-modulation/FM-style instrument. Blue controls carrier frequency, attack and decay; orange controls modulation ratio, index and decay. BASELINE, HOLD, PLAY and COMPARE support listening against a retained reference. Scope variants expose operands, the phase-modulation expression and output. The signal generator is unchanged."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "bernini_columns",
+      "description"
+    ],
+    "old": "Baroque architectural wave patterns",
+    "new": "CPU-generated spiral columns combine a helical centre offset, sinusoidal radius variation and angular phase through height. Their shafts rotate through time while the repeated plan creates intervals and sight lines. Procedural accompaniment is generated separately; this is not a noise-displaced vertex shader or a touch instrument."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "john_cage_tech_noir",
+      "description"
+    ],
+    "old": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
+    "new": "A prepared vocabulary of synthesized effect clips is scheduled by chance above drone and city-ambience layers. Non-spatial AudioStreamPlayers mix the sounds; luminous forms report activity. It references John Cage without performing a particular score. Chance changes event order inside a finite vocabulary, and repeats remain possible."
+  },
+  {
+    "path": "commons/artifacts/registry/wavefunctions.json",
+    "keys": [
+      "artifacts",
+      "DualBallFMController",
+      "name"
+    ],
+    "old": "Dual Ball FM Synth",
+    "new": "Dual Ball Phase Modulation / FM-style Synth"
+  }
+]

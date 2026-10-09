@@ -1,0 +1,373 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_01_Mass",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_01_Mass",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_02_Vortex",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_02_Vortex",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_03_Roll",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_03_Roll",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_04_Pipe",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_04_Pipe",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_05_Conveyor",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_05_Conveyor",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_06_Attractor",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_06_Attractor",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_07_Threebody",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_07_Threebody",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_08_Support",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_08_Support",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_09_Bowling",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_09_Bowling",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts forward crossing",
+      "passed": true
+    },
+    {
+      "name": "route: crossing completes",
+      "passed": true
+    },
+    {
+      "name": "route: arrives at Force_Review_10_Catapult",
+      "passed": true
+    },
+    {
+      "name": "route: one resident museum hall",
+      "passed": true
+    },
+    {
+      "name": "route: authored exit clear in Force_Review_10_Catapult",
+      "passed": true
+    },
+    {
+      "name": "route: visitor arrival supported",
+      "passed": true
+    },
+    {
+      "name": "route: accepts previous hall",
+      "passed": true
+    },
+    {
+      "name": "route: returns to bowling",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "Force_Review_01_Mass": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 14.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 14.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_02_Vortex"
+    },
+    "Force_Review_02_Vortex": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 36.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 36.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_03_Roll"
+    },
+    "Force_Review_03_Roll": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 58.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 58.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_04_Pipe"
+    },
+    "Force_Review_04_Pipe": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 80.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 80.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_05_Conveyor"
+    },
+    "Force_Review_05_Conveyor": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 102.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 102.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_06_Attractor"
+    },
+    "Force_Review_06_Attractor": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 124.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 124.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_07_Threebody"
+    },
+    "Force_Review_07_Threebody": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 146.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 146.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_08_Support"
+    },
+    "Force_Review_08_Support": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 168.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 168.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_09_Bowling"
+    },
+    "Force_Review_09_Bowling": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 190.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 190.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_10_Catapult"
+    },
+    "Force_Review_10_Catapult": {
+      "exit": {
+        "cell": "(13, 14)",
+        "door": "(13.5, 0.05, 212.5)",
+        "inward": "(0.0, 0.0, -1.0)",
+        "marker": "(13.5, 0.05, 212.5)",
+        "outset": 0.0,
+        "source": "t",
+        "yaw": 3.14159265358979
+      },
+      "next": "Force_Review_01_Mass"
+    },
+    "scope": "Actual museum portal transitions: ten halls forward, one back. Supplied crossing requests; headset untested."
+  },
+  "passed": true
+}

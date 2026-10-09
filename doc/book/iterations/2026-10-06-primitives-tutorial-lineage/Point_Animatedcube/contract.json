@@ -1,0 +1,147 @@
+{
+  "incoming": {
+    "sha256": "005d88c43547a840e698286144e52226ad444bdf1ec8317854054ea737b9e3ab"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst Archive = preload(\"trace_archive.gd\")\nconst FaceBody = preload(\"face_body.gd\")\nconst CORNERS := Vector3i(0, 1, 2)\nconst DEPTH := 0.6\nvar points: Array[Vector3] = []\nvar faces: Array[Vector3i] = [\n    Vector3i(0, 1, 2), Vector3i(0, 3, 1),\n    Vector3i(1, 3, 2), Vector3i(2, 3, 0)]\nvar body := FaceBody.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    add_child(body)\n    add_child(message)\n    message.position = Vector3(0, 2, 0)\n    message.pixel_size = 0.003\n    var drawing := Archive.load_drawing()\n    if drawing == null:\n        message.text = \"Bring a drawing from Trace.\"\n        return\n    var record: PackedVector3Array = drawing.get_meta(\"positions\")\n    drawing.free()\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        if index < 0 or index >= record.size():\n            message.text = \"Choose three saved indices.\"\n            return\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        points.append(record[index])\n    var normal := (points[2] - points[0]).cross(points[1] - points[0])\n    if normal.length() < 0.00001 or DEPTH <= 0.0:\n        message.text = \"Use a valid triangle and a positive depth.\"\n        return\n    var centre := (points[0] + points[1] + points[2]) / 3.0\n    points.append(centre - normal.normalized() * DEPTH)\n    body.show_faces(points, faces)\n    message.text = \"Four positions; four faces.\"\n",
+      "after": "extends Node3D\nconst CubeBody = preload(\"cube_body.gd\")\nvar first := CubeBody.new()\nvar second := CubeBody.new()\n\nfunc _ready() -> void:\n    first.position = Vector3(-0.7, 0.7, 0)\n    second.position = Vector3(0.7, 0.7, 0)\n    add_child(first)\n    add_child(second)\n    second.other_diagonal()\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Animatedcube/tutorial.md",
+      "sha256": "7c9f4a05aa774be8e0fd80f16a4e69971282761b2b88ec0076c9ed6db0aa0021"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/cube_body.gd",
+      "sha256": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/lesson.gd",
+      "sha256": "79eef8493a6f5d02fe23c90d0e1de5f4fa6c0b37050397094bdb16a7199b8635"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "cube/visible_children_attached",
+      "kind": "native"
+    },
+    {
+      "id": "cube/eight_twelve",
+      "kind": "native"
+    },
+    {
+      "id": "cube/both_closed_outward",
+      "kind": "native"
+    },
+    {
+      "id": "cube/diagonal_only_connectivity",
+      "kind": "native"
+    },
+    {
+      "id": "cube/render_matches_recipes",
+      "kind": "native"
+    },
+    {
+      "id": "cube/independent_instances",
+      "kind": "native"
+    },
+    {
+      "id": "cube/deformed_render",
+      "kind": "native"
+    },
+    {
+      "id": "cube/placement_leaves_local_data",
+      "kind": "native"
+    },
+    {
+      "id": "cube/third_instance_from_class",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Animatedcube/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/cube_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/face_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

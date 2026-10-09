@@ -1,0 +1,20 @@
+--- before/commons/maps/Noise_6_Wall/final.md
++++ commons/maps/Noise_6_Wall/final.md
+@@ -10,7 +10,7 @@
+ 
+ Press DRESS without leaving the room. Grey takes the place of pink around you. Your hand has changed the enclosure while your body stays inside it. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+ 
+-We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What the player can physically cross and what the player imagines crossing need not arrive together.
++We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What your body can cross and what you imagine crossing need not arrive together.
+ 
+ ![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
+ 
+@@ -44,7 +44,7 @@
+         float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+ ```
+ 
+-The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white, although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
++The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
+ 
+ Try BASIS while the moment stays held. Perlin, Value, Cellular and Simplex offer different constructions to the same accumulation. These are the implementations in this shader, with their own scaling constants. Watch what happens to a contour you had begun to recognise. Returning to Perlin restores this construction at the held coordinates. There is no seed button here; the shader's hash uses fixed constants.
+ 

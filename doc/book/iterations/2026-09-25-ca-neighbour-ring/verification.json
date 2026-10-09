@@ -1,0 +1,131 @@
+{
+  "checks": [
+    {
+      "name": "Original manuscript retained apart from insertion and NEXT label correction",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original code excerpts retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Original artifact anchors and footnotes retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged algorithms/cellularautomata/ca_showcase/line_network_history.gd",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged algorithms/cellularautomata/persian_rug/persian_rug.gd",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged commons/maps/sequences/cellularautomata.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged commons/maps/CA_Introduction/critical.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unchanged commons/maps/CA_Introduction/blurb.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Explorer moved one cell with only ring opt-in added",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All other map data retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Structure and utility cells unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shared core delta accounts for concurrent Random_Space update",
+      "passed": true,
+      "detail": "This pass assigns only CA_Introduction. Random_Space independently updated text_sha256, map_sha256 and local_review during publication; its digests match its current source. No shared non-room keys or other room records changed. See concurrent-core-updates.json."
+    },
+    {
+      "name": "Primary roles unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "text digest current",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "map digest current",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Native book figure matches capture",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "45 native assertions passed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Seven physically clear mouse interactions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "No script or shader errors",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All nine authored artifacts instantiate",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Other eight artifact root positions retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Explorer retains yaw and scale",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "passed": true,
+  "scope": "Source preservation and supplied native museum inputs; no tracked headset, Quest or learner acceptance."
+}

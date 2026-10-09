@@ -1,0 +1,22 @@
+--- before/final.md
++++ after/final.md
+@@ -2,7 +2,7 @@
+ 
+ <!-- @perlin_terrain_sculptor -->
+ 
+-A green body waits on the bench, with little daylight between its blocks. A translucent yellow box marks one cell, whether or not that cell holds a block. Deep inside the body, the blocks around it can hide the box until CUT opens the near half. Across the room, a much larger body has the same irregular outline, turned half round.
++A green body waits on the bench, with little daylight between its blocks. A translucent yellow box marks one cell, whether or not that cell holds a block. Deep inside the body, the blocks around it can hide the box until CUT opens the near half. Across the room, a much larger body has the same irregular outline, facing the same way.
+ 
+ Leave SEED alone for a moment. Press THRESHOLD and watch the green body. Then watch the field value on the plate while you press again. Something has disappeared. Which number changed?
+ 
+@@ -37,6 +37,10 @@
+ The screen keeps a horizontal slice of that array. On the left, colours vary with the field after the height bias. On the right, each square receives the decision: occupied or empty. A small yellow frame marks the selected coordinate in both.
+ 
+ Press CELL at the bench. The box visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
++
++A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square drops below your eyes, then rises above your head as you continue. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
++
++![The selected horizontal slice runs below eye level around the full-size voxel body. Changing CELL moves this yellow frame while the occupied form stays put.](/book-review/doc/book/figures/Noise_Voxel/selected-slice.png)
+ 
+ Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
+ 

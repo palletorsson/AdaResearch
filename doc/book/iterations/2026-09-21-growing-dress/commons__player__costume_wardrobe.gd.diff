@@ -1,0 +1,88 @@
+--- before/commons/player/costume_wardrobe.gd
++++ current/commons/player/costume_wardrobe.gd
+@@ -28,14 +28,18 @@
+ ## nth completed sequence is the nth tier of the shift, whichever order they
+ ## happened to be finished in.
+ 
+-## the twenty-two, in spine order (curriculum_spine.json § spine.sequences)
+-const SPINE := [
+-	"primitives", "transformation", "color", "change", "forces", "formfinding",
+-	"wavefunctions", "randomness", "noise", "cellularautomata", "fractals",
+-	"lsystems", "proceduralgeneration", "softbodies", "isosurfaces",
+-	"boolean_surfaces", "swarmintelligence", "machinelearning", "graphtheory",
+-	"foundationscrisis", "qfeplaboratory", "postfoundationscrisis",
+-]
++## Read the same spine as the museum, including Arrays and Tiling.
++const SPINE_PATH := "res://commons/maps/curriculum_spine.json"
++
++static func spine_sequences() -> Array[String]:
++	var result: Array[String] = []
++	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(SPINE_PATH))
++	if data is Dictionary:
++		for row in data.get("spine", {}).get("sequences", []):
++			var key := String(row.get("name", ""))
++			if not key.is_empty() and not result.has(key):
++				result.append(key)
++	return result
+ 
+ ## PRELOAD, NOT class_name. A global class resolves only once the editor has
+ ## written the script-class cache, so a headless boot on a fresh checkout — which
+@@ -99,6 +103,7 @@
+ 
+ 	costume = Costume.new() as Node3D
+ 	costume.name = "QueerCostume"
++	costume.max_stage = maxi(1, spine_sequences().size())
+ 	_mount.add_child(costume)
+ 	var head: Node3D = get_node_or_null(head_path) as Node3D if not head_path.is_empty() else null
+ 	if head != null:
+@@ -108,7 +113,7 @@
+ 
+ 	# THE SIGNAL FIRST, THEN THE CATCH-UP. The other order drops any completion
+ 	# that lands during the sweep, which is a real window: the sweep touches
+-	# twenty-two sequences and the manager can emit inside it.
++	# spine sequences and the manager can emit inside it.
+ 	var mgr: Node = _manager()
+ 	if mgr != null and mgr.has_signal("sequence_completed"):
+ 		if not mgr.is_connected("sequence_completed", Callable(self, "give")):
+@@ -146,13 +151,13 @@
+ 
+ 
+ ## Everything already finished, in spine order, silently — this is a restore,
+-## not twenty-two celebrations.
++## not a succession of celebrations.
+ func catch_up() -> int:
+ 	var mgr: Node = _manager()
+ 	if mgr == null or not mgr.has_method("is_sequence_completed"):
+ 		return 0
+ 	var n := 0
+-	for seq in SPINE:
++	for seq in spine_sequences():
+ 		if bool(mgr.call("is_sequence_completed", seq)):
+ 			if give(seq, true):
+ 				n += 1
+@@ -164,11 +169,11 @@
+ func give(sequence: String, quiet: bool = false) -> bool:
+ 	if costume == null or not is_instance_valid(costume):
+ 		return false
+-	if _given.has(sequence):
++	if _given.has(sequence) or not spine_sequences().has(sequence):
+ 		return false
+ 	_given[sequence] = true
+ 
+-	costume.call("grow")
++	costume.call("grow", -1, not quiet)
+ 
+ 	var trophy: Node3D = Trophies.make(sequence)
+ 	if trophy != null:
+@@ -180,6 +185,11 @@
+ 				% [sequence, trophy.name, slot, int(costume.get("stage"))])
+ 	emit_signal("costume_grew", sequence, int(costume.get("stage")))
+ 	return true
++
++
++## Match the active visitor rather than the first wardrobe in a staged scene.
++func wears_head(head: Node3D) -> bool:
++	return is_instance_valid(costume) and costume.get("_head") == head
+ 
+ 
+ func worn() -> Array:

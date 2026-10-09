@@ -1,0 +1,102 @@
+--- before/Trans_Pit/final.md
++++ current/Trans_Pit/final.md
+@@ -2,9 +2,7 @@
+ 
+ A wall can arrive on level ground. You can wait beside its path, or step into the space it is about to occupy.
+ 
+-Three rooms in a row: translating blocks, turning slabs, growing cubes. The ground stays level through the studies. There is a way around the first lanes and room to watch the others from beside them. Entering an obstacle's space is a choice you can make after seeing what it does.
+-
+-Wait on the landing. Which opening is arriving, and which is about to go?
++Three rooms in a row: translating blocks, turning slabs, growing cubes. There is a way around the first lanes and room to watch the others from beside them. The ground stays level. An opening can disappear while you stand still.
+ 
+ ## Translation, from inside
+ 
+@@ -21,7 +19,7 @@
+ 
+ Each block travels two metres, but they take different times and their pauses differ. Two advance along Z; the third goes the other way. An opening that works for the first does not give you the timing of the next.
+ 
+-From outside, a pusher changes position and keeps its dimensions. From inside, standing where it wants to be, it is a wall that arrives. Look at the space beside its path too. Open floor along the side wall lets you walk around the lanes. Try a lane, then return to where you can watch.
++The block keeps its dimensions. Standing where it wants to be, you meet a wall that arrives. The displacement that carried you in an earlier hall can also occupy your place. Beside these lanes, open floor lets you walk around.
+ 
+ <!-- @ -->
+ 
+@@ -36,21 +34,19 @@
+ static_body.transform = mesh_instance.transform
+ ```
+ 
+-The collision follows the visible angle. These upright wall profiles offer a broad face to the route, then a narrow edge. Watch the room beside one open and close. The middle route lets you keep your distance.
++The collision follows the visible angle. These upright wall profiles offer a broad face to the route, then a narrow edge. Their dimensions stay the same as the clearance beside them changes. The middle route lets you keep your distance.
+ 
+-Its dimensions have not changed. The space it occupies has. A pivot is a fixed point, but it does not make the rest of the object stay still.
++Look at the floor just beyond a slab's present edge. It is empty now. Follow the edge into it. The space this slab sweeps through is larger than the space one pose shows. Your place can become part of its turn without you taking a step.
+ 
+-Look at the floor just beyond the slab's present edge. It is empty now. Follow the edge into it. The space this slab sweeps through is larger than the space one pose shows. Your place can become part of its turn without you taking a step.
+-
+-Balls arrive from the side platforms as well. Let one cross the scene while you watch the slab. There is more than one clock here, and their movements do not wait for you to finish comparing them.
++Balls arrive from the side platforms as well. There is more than one clock here, and their movements do not wait for you to finish comparing them.
+ 
+ ## Scale, from inside
+ 
+ <!-- @grower_block -->
+ 
+-The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway. Watch them together first; the repetition makes the size change easier to read.
++The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway.
+ 
+-The previous hall's blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running. Standing still does not hold the room still.
++The previous hall's blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running.
+ 
+ For this floor-anchored configuration, the size factor comes from:
+ 
+@@ -59,7 +55,7 @@
+ var current_scale: float = lerpf(min_scale, max_scale, t)
+ ```
+ 
+-All three share the same clock rate, moving from thirty centimetres to three and a half metres on a side. Watch one complete small–large–small cycle, then choose when to approach.
++Cosine carries `t` from zero to one and back; `lerpf` places the size between its two limits. All three cubes move from thirty centimetres to three and a half metres on a side, then return together.
+ 
+ ![At its smallest, the green cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
+ 
+@@ -69,19 +65,15 @@
+ 
+ Watch a bottom edge. It stays on the floor. The mesh and collision box grow together, with their centres kept half a side-length above that edge. Growth takes space upwards and sideways rather than passing through the ground.
+ 
+-As a cube expands, its colour warms. Choose a gap and watch it narrow and widen. You can compare a passable interval with an interval that would make you wait, without calling every hesitation a failure. This instance scales all three axes equally, so the cube keeps its proportions. The gap beside it has no such guarantee. Your available space is the remainder after its growth.
++As a cube expands, its colour warms. The gap beside it narrows, then widens again. All three axes scale equally, so the cube keeps its proportions. The gap has no such guarantee. Your available space is the remainder after its growth.
+ 
+ <!-- @ -->
+ 
+-## The constant
++## What returns
+ 
+-The floor supports the operations. Which body can use the openings? A translation preserves the block's dimensions. A rotation preserves distances within the slab. Here, uniform scaling preserves the cube's proportions. Those statements describe the object. Clearance also depends on your width, your pace, your viewpoint and the collision shape the program gives you. A gap that comfortably fits one body can demand another's detour.
++The block returns to its starting place, the slab to its earlier angle, the cube to its small size. You may still be waiting, or already be on the other side. An object can recover its pose while your encounter with it continues.
+ 
+-The block can come back to its starting place. The slab can recover its earlier angle. The growing cube can return to its small size. Each return can look like the beginning again. For the body waiting beside it, a passage has opened and closed in between. Sameness depends on which part of the encounter you keep.
+-
+-This is the chapter turned round: operations that carried you or made a passage can also occupy it. In this room, the way around is part of the arrangement. Choosing it is another way to read what the space permits.
+-
+-The transformations did not become false when you entered the room. They became insufficient as descriptions of what the room allows.
++Which body can use the opening? Width, pace and the collision shape assigned to you all matter. A gap may admit you before you are ready to cross. There is room here to wait, watch or take the way around.
+ 
+ ## Make room
+ 
+@@ -95,8 +87,6 @@
+ 
+ *Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
+ 
+-These are the same three operations we added to the pickup cube at the beginning of the chapter. There they made a small object conspicuous. Here they make room for you.
+-
+ The door keeps a fraction of its opening, from zero to one. Three overlapping intervals of that fraction drive position, angle and size:
+ 
+ ```gdscript
+@@ -107,8 +97,8 @@
+ 
+ `side` gives the leaves opposite directions. The local Z axis points through the doorway, so these turns happen across its face. Each leaf ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.
+ 
+-Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again.
++Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again. Its welcome has a reach, a width and a waiting time, each chosen in advance.
+ 
+-A moving boundary has become a welcome. That welcome, too, has been written: how near you must come, how much room the frame leaves, how long the door waits. What else could these three operations make possible?
++These are the same three operations we added to the pickup cube at the beginning of the sequence. There they made a small object conspicuous. Here they make room for you.
+ 
+ <!-- @ -->

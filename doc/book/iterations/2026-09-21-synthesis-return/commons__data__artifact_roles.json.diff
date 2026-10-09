@@ -1,0 +1,20 @@
+--- before/commons/data/artifact_roles.json
++++ current/commons/data/artifact_roles.json
+@@ -1789,7 +1789,8 @@
+       "edge_ground_synthesis": "secondary",
+       "bias_from_inside": "secondary",
+       "qfep_formula_3d": "secondary",
+-      "florensky_sphere": "secondary"
++      "florensky_sphere": "secondary",
++      "assembly_return": "primary"
+     },
+     "Chamber_Color": {
+       "science_screen": "secondary",
+@@ -4584,6 +4585,7 @@
+     },
+     "PostCrisis_Synthesis": {
+       "primary": [
++        "assembly_return",
+         "accountability_ledger"
+       ],
+       "secondary": [

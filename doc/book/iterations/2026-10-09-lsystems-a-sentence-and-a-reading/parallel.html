@@ -1,0 +1,303 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A sentence and a reading — facing pages</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f1ea;color:#24262c;font:18px/1.6 Georgia,serif}header,main,footer{max-width:1180px;margin:auto;padding:30px}header{border-bottom:1px solid #c3bfb8}nav{display:flex;gap:20px;flex-wrap:wrap;font:14px/1.5 system-ui}a{color:#315d64}h1{font-size:clamp(36px,5vw,66px);line-height:1.08;max-width:950px}h2{font-size:29px;line-height:1.25;margin-top:2em}.eyebrow,.caption,figcaption,footer{font:14px/1.5 system-ui;color:#535b60}.lead{font-size:24px;max-width:820px}img{width:100%;height:auto;border-radius:5px}figure{margin:26px 0}figcaption{margin-top:8px}.pair,.spread{display:grid;grid-template-columns:1fr 1fr;gap:28px}.spread{max-width:1800px}.spread article{min-width:0;padding:20px;background:#fffcf6}.spread h1{font-size:37px}pre{white-space:pre;overflow:auto;padding:20px;background:#222831;color:#f3e8df;font:13px/1.65 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.86em}article{max-width:850px;margin:auto}td,th{padding:12px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}table{border-collapse:collapse;width:100%;font-size:16px}summary{cursor:pointer;padding:15px;border:1px solid #bbb}@media(max-width:850px){.pair,.spread{grid-template-columns:1fr}header,main,footer{padding:20px}}@media print{header nav{display:none}pre{white-space:pre-wrap;background:white;color:black;font-size:9px}.spread{display:block}img{max-height:65vh;object-fit:contain}}</style></head><body><header><p class="eyebrow">Endless Museum · L-systems 01 · 9 October 2026</p><nav><a href="index.html">Museum report</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="changes.html">Before / after</a><a href="lineage.html">Eight-hall route</a><a href="grammar-lab-review.zip">Review ZIP</a></nav></header><main class="spread"><article><p class="eyebrow">Left · tutorial.md</p><h1>A sentence and a reading</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>A string, an axiom and a dictionary of replacement rules.</li>
+<li>Parallel rewriting: read the old sentence, build a separate next sentence.</li>
+<li>Interpret symbols as forward movement and turns.</li>
+<li>Keep a reading while changing its angle.</li>
+<li>Distinguish construction, interpretation and display fitting.</li>
+</ul>
+<h2>In the museum</h2>
+<p>At the editor desk, two upright lines begin with the same letter, <code>F</code>. Press NEXT once. Count the live segments before reading its counter. HOLD keeps that reading on the right. Now take the small black point and move it along the four angle positions. What changes when the sentence stays the same?</p>
+<p>The point is the one we have carried through earlier lessons. Here its held trigger means NEXT: rewrite once. HOLD remains a nearby button. TURN offers the same angles without picking up the point. The cyan drawing is live; the rose drawing keeps its sentence and angle until you press HOLD again. This comparison lasts for the current visit, not between runs.</p>
+<p>Start with RESET. The first rewrite has five <code>F</code> commands and four turning signs: nine symbols. Another rewrite has twenty-five drawing commands and forty-nine symbols. The turns take places in the sentence without drawing additional segments. A line can overlap another, so the visible outline alone cannot tell us the command count.</p>
+<p>The desk's preset called <strong>Koch</strong> uses <code>F → F+F-F-F+F</code>. It is a different replacement from the four-piece, sixty-degree Koch construction we explored earlier. Read the production before assuming what the familiar name means.</p>
+<h2>Continue from the recipe</h2>
+<p>In Fractal Synthesis, a recipe named the seed, operation and stopping depth. Here a <strong>string</strong> records the intermediate result. A <strong>dictionary</strong> says which string replaces each symbol. We reuse loops, functions, independent old/next data, PointBody and the cylinder that gives a line its thickness.</p>
+<p>Use the prepared Endless Museum workspace. Place the four complete files below together. Attach <code>sentence.gd</code> to an empty, unit-scale Node3D on its floor, facing local +Z. The museum supplies the player, camera, lighting and installed XRTools. The script creates its own point, drawings and labels; there are no named scene children to prepare. This is a compact reconstruction of the existing desk's opening interaction, beside which you can compare your result.</p>
+<p>Move the held point to choose 30, 60, 90 or 120 degrees. Trigger or Enter rewrites once; H keeps a reading; R resets only the live sentence and generation. C switches the live rules between the turning curve and Cantor, restarting from <code>F</code>. H is the desktop equivalent of the museum's HOLD button. The museum desk also includes other presets, rule readouts and furniture, supplied by its existing interface. The learner program has no virtual keyboard or hidden button helpers.</p>
+<h2>Write first; read afterwards</h2>
+<p>Read <code>rewrite()</code> first. <code>rules.get(symbol, symbol)</code> looks up a replacement; the second argument keeps the symbol itself when no rule names it. The first loop checks the length of the proposed result against a 4,096-symbol budget. The second loop writes <code>next</code>. Only after the function returns does <code>advance()</code> replace the live sentence and increment its generation. New letters are never processed during the pass that produced them. This is a logical parallel replacement; it does not require multiple threads.</p>
+<p>Read <code>read()</code> next. The turtle starts at zero, heading up. Each <code>F</code> or <code>G</code> stores two endpoints and advances one model unit. Lowercase <code>f</code> advances without storing a segment. <code>+</code> and <code>-</code> turn around the plane's normal, Godot's negative Z direction. These are planar drawings inside our three-dimensional room.</p>
+<p>A symbol such as <code>X</code> can remain in the sentence without a drawing action. Brackets are deliberately rejected in this small reader: saving and restoring a branch state is the next hall's lesson. The full museum editor already supports them.</p>
+<p><code>grammar.gd</code></p>
+<!-- student-code:grammar.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+const SYMBOL_LIMIT := 4096
+
+func rewrite(sentence: String, rules: Dictionary) -&gt; Dictionary:
+	var size := 0
+	for symbol in sentence:
+		size += str(rules.get(symbol, symbol)).length()
+		if size &gt; SYMBOL_LIMIT:
+			return {&quot;accepted&quot;: false, &quot;text&quot;: sentence}
+	var next := &quot;&quot;
+	for symbol in sentence:
+		next += str(rules.get(symbol, symbol))
+	return {&quot;accepted&quot;: true, &quot;text&quot;: next}
+
+func read(sentence: String, angle: float) -&gt; Array[Vector3]:
+	var ends: Array[Vector3] = []
+	var position := Vector3.ZERO
+	var heading := Vector3.UP
+	for symbol in sentence:
+		match symbol:
+			&quot;F&quot;, &quot;G&quot;:
+				ends.append(position)
+				position += heading
+				ends.append(position)
+			&quot;f&quot;: position += heading
+			&quot;+&quot;: heading = heading.rotated(Vector3.FORWARD, deg_to_rad(angle))
+			&quot;-&quot;: heading = heading.rotated(Vector3.FORWARD, -deg_to_rad(angle))
+			&quot;[&quot;, &quot;]&quot;: assert(false, &quot;Branch states belong to the next lesson.&quot;)
+	return ends
+</code></pre>
+<h2>Keep one reading; change another</h2>
+<p><code>keep()</code> constructs a fresh dictionary containing the text, angle and generation. These values are sufficient to reconstruct this reader's output. Later LIVE edits do not change HELD. We do not store mesh nodes as the record. The installed desk also keeps a copy of its already fitted endpoints; our smaller example redraws the saved sentence with its saved angle.</p>
+<p><code>choose()</code> changes the live angle without calling <code>rewrite()</code>. <code>_physics_process()</code> reads the held point in the study's <strong>local frame</strong>, so turning or moving the entire study does not change what the hand positions mean. Release parks the point by the current angle. Pressing the trigger calls <code>advance()</code>, which is a separate operation.</p>
+<p>Each drawing is independently fitted to a 1.4-metre span. <code>draw_reading()</code> finds the endpoint bounds, centres the drawing and gives both axes the same scale. It changes neither the sentence nor its model endpoints. Thus the pictures are useful for comparing bends, but their apparent height does not measure growth. The cylinder thickness is also a display choice. The drawing has no collision surface.</p>
+<p>The sentence readout shows at most forty symbols and names that truncation. The 4,096-symbol construction budget and four-generation limit are separate. Reaching the budget retains the previous complete generation. The full museum desk shows a longer, labelled 120-symbol prefix.</p>
+<p><code>sentence.gd</code></p>
+<!-- student-code:sentence.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+const Grammar = preload(&quot;grammar.gd&quot;)
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+const TURNS := [30.0, 60.0, 90.0, 120.0]
+const CURVE := {&quot;F&quot;: &quot;F+F-F-F+F&quot;}
+const CANTOR := {&quot;F&quot;: &quot;FfF&quot;, &quot;f&quot;: &quot;fff&quot;}
+var model = Grammar.new()
+var rules: Dictionary = CURVE.duplicate()
+var sentence := &quot;F&quot;
+var angle := 90.0
+var generation := 0
+var held: Dictionary = {}
+var limited := false
+var point: XRToolsPickable
+var drawing: Node3D
+var captions: Array[Label3D] = []
+var title: Label3D
+
+func _ready() -&gt; void:
+	drawing = Node3D.new()
+	add_child(drawing)
+	point = PointBody.new()
+	add_child(point)
+	point.action_pressed.connect(advance)
+	for x in [-0.85, 0.85]:
+		captions.append(label(&quot;&quot;, Vector3(x, 1.08, 0)))
+	title = label(&quot;&quot;, Vector3(0, 3.05, 0))
+	label(&quot;TRIGGER / ENTER: NEXT     H: HOLD     R: RESET     C: CURVE / CANTOR&quot;, Vector3(0, 0.78, 0.5))
+	for i in TURNS.size():
+		label(str(int(TURNS[i])), Vector3((i - 1.5) * 0.35, 0.99, 0.55))
+	keep()
+	park()
+
+func advance(_body = null) -&gt; void:
+	if generation &gt;= 4:
+		return
+	var result: Dictionary = model.rewrite(sentence, rules)
+	limited = not result.accepted
+	if result.accepted:
+		sentence = result.text
+		generation += 1
+	redraw()
+
+func keep() -&gt; void:
+	held = {&quot;text&quot;: sentence, &quot;angle&quot;: angle, &quot;generation&quot;: generation}
+	redraw()
+
+func reset_live() -&gt; void:
+	sentence = &quot;F&quot;
+	generation = 0
+	limited = false
+	redraw()
+
+func choose(index: int) -&gt; void:
+	var selected: float = TURNS[clampi(index, 0, TURNS.size() - 1)]
+	if angle != selected:
+		angle = selected
+		redraw()
+
+func _physics_process(_dt: float) -&gt; void:
+	if point.held():
+		choose(roundi(to_local(point.global_position).x / 0.35 + 1.5))
+	else:
+		park()
+
+func park() -&gt; void:
+	var x := (TURNS.find(angle) - 1.5) * 0.35
+	point.global_transform = global_transform * Transform3D(Basis.IDENTITY, Vector3(x, 1.15, 0.55))
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+	if not event is InputEventKey or not event.pressed or event.echo:
+		return
+	match event.keycode:
+		KEY_ENTER: advance()
+		KEY_H: keep()
+		KEY_R: reset_live()
+		KEY_C:
+			rules = CANTOR.duplicate() if rules == CURVE else CURVE.duplicate()
+			reset_live()
+
+func redraw() -&gt; void:
+	for child in drawing.get_children():
+		drawing.remove_child(child)
+		child.queue_free()
+	var live := {&quot;text&quot;: sentence, &quot;angle&quot;: angle, &quot;generation&quot;: generation}
+	for i in 2:
+		var reading: Dictionary = live if i == 0 else held
+		var ends: Array[Vector3] = model.read(reading.text, reading.angle)
+		draw_reading(ends, Vector3(-0.85 if i == 0 else 0.85, 1.42, 0), Color(&quot;78dccc&quot;) if i == 0 else Color(&quot;f0b3db&quot;))
+		var prefix: String = reading.text.substr(0, 40)
+		if reading.text.length() &gt; 40:
+			prefix += &quot; ... (first 40)&quot;
+		captions[i].text = &quot;%s / gen %d / %.0f deg\n%d symbols / %d segments\n%s&quot; % [&quot;LIVE&quot; if i == 0 else &quot;HELD&quot;, reading.generation, reading.angle, reading.text.length(), ends.size() / 2, prefix]
+	title.text = (&quot;SAME SENTENCE&quot; if sentence == held.text else &quot;DIFFERENT SENTENCES&quot;) + &quot;\nEach drawing fitted independently&quot;
+	if limited:
+		title.text += &quot;\nSYMBOL LIMIT: previous complete generation retained&quot;
+
+func draw_reading(ends: Array[Vector3], origin: Vector3, colour: Color) -&gt; void:
+	if ends.is_empty():
+		return
+	var low := ends[0]
+	var high := ends[0]
+	for end in ends:
+		low = low.min(end)
+		high = high.max(end)
+	var fit := 1.4 / maxf((high - low).x, (high - low).y)
+	var anchor := Vector3((low.x + high.x) * 0.5, low.y, 0)
+	for i in range(0, ends.size(), 2):
+		var a := origin + (ends[i] - anchor) * fit
+		var b := origin + (ends[i + 1] - anchor) * fit
+		var rod = LineSkin.new()
+		rod.material_override.albedo_color = colour
+		drawing.add_child(rod)
+		rod.show_segment(a, b - a, a.distance_to(b))
+
+func label(text: String, at: Vector3) -&gt; Label3D:
+	var tag := Label3D.new()
+	tag.text = text
+	tag.position = at
+	tag.font_size = 32
+	tag.pixel_size = 0.0012
+	tag.outline_size = 6
+	add_child(tag)
+	return tag
+</code></pre>
+<h2>The carried parts</h2>
+<p>These two files are unchanged from our Fractals studies. Keep them available, but concentrate this reading on the new <code>rewrite()</code> and <code>read()</code> functions. PointBody supplies pickup, the action signal and the desktop-held query. LineSkin places a finite cylinder between the endpoints. Neither supplies a camera or rebuilds the museum.</p>
+<p><code>point_body.gd</code></p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines&#x27; frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+	freeze = true
+	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	release_mode = XRToolsPickable.ReleaseMode.FROZEN
+	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	collision_layer = 4
+	collision_mask = 0
+	var surface := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.085
+	sphere.height = 0.17
+	sphere.radial_segments = 24
+	sphere.rings = 12
+	surface.mesh = sphere
+	add_child(surface)
+	var boundary := CollisionShape3D.new()
+	var shape := SphereShape3D.new()
+	shape.radius = 0.085
+	boundary.shape = shape
+	add_child(boundary)
+
+func _ready() -&gt; void:
+	super._ready()
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = tint
+	finish.roughness = 0.24
+	get_child(0).material_override = finish
+
+func held() -&gt; bool:
+	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+	desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+	desktop_pointer = null
+</code></pre>
+<p><code>line_skin.gd</code></p>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station&#x27;s local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = 0.012
+	cylinder.bottom_radius = 0.012
+	cylinder.radial_segments = 16
+	cylinder.rings = 0
+	mesh = cylinder
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = Color(0.98, 0.70, 0.82)
+	finish.roughness = 0.3
+	material_override = finish
+	visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+	# A zero-length segment has no direction. Do not normalize it.
+	visible = distance &gt; 0.0001
+	if not visible:
+		return
+	(mesh as CylinderMesh).height = distance
+	position = start + displacement * 0.5
+	# CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+	var direction := displacement / distance
+	var right := direction.cross(Vector3.UP).normalized()
+	if right.length() &lt; 0.001:
+		right = Vector3.RIGHT
+	var depth := right.cross(direction).normalized()
+	basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Predict, run, then change the rule</h2>
+<ol>
+<li>Start with the printed curve. Advance once, press H, then move the point from 90 to 120. Predict which values and endpoints can change. Verify that both sentences and segment counts stay equal, while HELD retains 90 degrees.</li>
+<li>Advance again. Explain why the live sentence now contains forty-nine symbols rather than forty-five. The four turning signs from the previous generation pass through unchanged.</li>
+<li>Change only <code>CURVE</code> in your own file to <code>{"F": "F+F"}</code>. Before running, predict the generation-two sentence, drawn count and path at 90 degrees. Keep the reader and renderer unchanged. The supplied test executes this edited file, not just the function from the original.</li>
+</ol>
+<p>After making your prediction: the changed rule gives <code>F+F+F+F</code>, four segments and seven symbols. At 90 degrees its endpoint returns to the origin. Its bounds contain a square; at another angle the same sentence need not close. Closure is a property of this interpretation, not of the string alone.</p>
+<h2>Return to the thirds</h2>
+<p>Press C for Cantor. The rules are <code>F → FfF</code> and <code>f → fff</code>. All symbols advance the turtle, but only uppercase F draws. After three rewrites, the twenty-seven advances contain eight drawn intervals. Divide every endpoint by twenty-seven: the positions and lengths match the third-cut, unit-normalized thirds construction from Fractal Synthesis. After four rewrites there are sixteen drawn intervals in eighty-one advances. The turn angle has no effect because this sentence has no turning commands.</p>
+<p>Find the same preset at the museum desk: RESET, then PRESET seven times. The first seven named presets still occupy their previous positions; Cantor is now reachable as the eighth. This connects two implementations of one construction. The table's quarters and two-fifths recipes require different rules or step lengths; they are not produced by these F/f rules.</p>
+<p>Carry the sentence and reader into <strong>Growth</strong>. At present the turtle has one position and one heading. A branch needs somewhere to keep those values while another line continues.</p></article><article><p class="eyebrow">Right · final.md</p><h1>The same sentence, another body</h1>
+<!-- @lsystem_editor -->
+
+<p>Two upright lines meet us. Below each, the same letter: <code>F</code>. Can one sentence have two bodies?</p>
+<p>Press NEXT once. The live line acquires turns; the held line stays where it was. Count the live segments before looking at the counter. Then press HOLD. Both drawings now share this sentence:</p>
+<pre><code class="language-text">F+F-F-F+F
+</code></pre>
+<p>Leave NEXT alone. Take the small black point and move it to the next angle, or press TURN. Follow the first bend across the two drawings. The letters below them have not changed. One reading turns through ninety degrees; the other now turns through a hundred and twenty. Five drawn segments in each, yet the same route through the symbols takes another route through space. Some segments may overlap. Count the instructions as well as the lines you can distinguish.</p>
+<p>We brought a construction out of the fractal halls. Here we can separate two moments within it: making a sentence, and reading that sentence as movement. HOLD gives us time beside a previous reading. The hand changes the live interpreter's angle. Its trigger advances the sentence; the point has acquired another task. NEXT rewrites the sentence from which it draws.</p>
+<p>Keep the new angle and press NEXT again. The held drawing remains. The live sentence has forty-nine symbols and twenty-five drawing instructions. The turning signs also take up space in the string; they do not each leave a segment. What has multiplied, and what has merely been carried forward?</p>
+<p>RULE opens the replacement used by this preset: each <code>F</code> becomes <code>F+F-F-F+F</code>. The next sentence is assembled from the old one, one symbol at a time.</p>
+<p>A symbol without a replacement passes through as itself. The newly written letters wait for the next generation; they are not rewritten again during this pass. First one <code>F</code>, then five, then twenty-five. The small loop has a rhythm, and a place where its repetition must wait.</p>
+<p>Another pass through the resulting string gives it geometry. <code>F</code> and <code>G</code> advance the turtle and draw. <code>+</code> and <code>-</code> turn its heading. The turtle is a travelling state: position, direction and a sideways axis. A line does not tell us all of that state by looking like a line.</p>
+<p>Try RESET, then PRESET three times to reach PLANT. There is an <code>X</code>, and no line above the live plinth. We met an invisible point in the first hall, Point One. This absence has a different cause: <code>X</code> belongs to the rewriting rules, but this interpreter gives it no drawing action. Press NEXT. Drawing instructions appear around the <code>X</code> symbols. What was undrawn was still capable of contributing to the next sentence.</p>
+<p>The brackets now matter. <code>[</code> saves the travelling state; <code>]</code> restores it. A branch can end without forcing every later segment to continue from its tip. The next hall will let length enter that inheritance too.</p>
+<p>Look again at the two outlines. Each is fitted to its display. More instructions need not make a taller body here. That apparent continuity of size is another operation, performed after the turtle has travelled. Our eyes receive a composed result: rewriting, interpretation, fitting, thickness, light. None is the untouched original behind the others.</p>
+<p>This desk stops at four requested generations, with a budget of 4,096 symbols. If a replacement would exceed that budget, the last complete generation remains. Its readout distinguishes the generation shown from the one requested. A long printed sentence also declares that only its first 120 symbols are visible. Two different limits, two different kinds of remainder.</p>
+<p>Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one symbol leaves a line, another crosses the gap without leaving one. They do not exhaust the bodies that a grammar could permit; the physical desk does not yet let us type a new rule. Nor does a changed outline automatically make another space habitable: these thin drawings have no collision surfaces. The desire to inhabit them brings another body, another requirement, into the question. Which operation would we have to open next?</p>
+<!-- @ -->
+
+<p>The earlier trees, the string study, the city grammar and three trees grown from three traditions’ axioms remain beyond the desk; the last of these asks whose grammar a rule is. Their resemblance can invite a comparison without proving that they share its live sentence. Carry the bracket into the next room: what must a branch remember so that another branch can begin?</p></article></main><footer>Native Godot evidence. Physical headset and independent student review remain open.</footer></body></html>

@@ -1,0 +1,33 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"_densities_for",
+			"march_cube_fixed",
+			"calculate_edge_intersections"
+		],
+		"configs": [
+			248,
+			248,
+			248,
+			248
+		],
+		"corner_count": 8,
+		"single_cell": true,
+		"source_classification": "density < threshold",
+		"threshold": 0.5,
+		"triangle_counts": [
+			3,
+			3,
+			3,
+			3
+		]
+	},
+	"geometry_nodes": 38,
+	"phases": 4,
+	"source_paths": [
+		"res://algorithms/spacetopology/marchingcubes/core/MarchingCubesGenerator.gd",
+		"res://algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd"
+	],
+	"title": "A SURFACE BETWEEN EIGHT SAMPLES"
+}

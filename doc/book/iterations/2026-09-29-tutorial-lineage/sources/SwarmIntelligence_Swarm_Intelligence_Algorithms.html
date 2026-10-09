@@ -1,0 +1,420 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SwarmIntelligence_Swarm_Intelligence_Algorithms · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SwarmIntelligence_Swarm_Intelligence_Algorithms">← Tutorial lineage</a></p><h1>SwarmIntelligence Swarm Intelligence Algorithms</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md">Raw captured source</a></p><pre># Who keeps the ecosystem going?
+
+When a population survives, how can we tell what kept it alive?
+
+&lt;!-- @ecosystem_simulation --&gt;
+
+Choose either prey or predators and watch its count alongside its visible behaviour. Follow an encounter with food or another organism, then return to the population readout. A crowded scene can hide a falling population; a count can reveal a change that is difficult to follow one body at a time.
+
+The organisms move, forage, encounter predators and reproduce. Traits can pass to offspring through a simplified combination and mutation process. The traits are five numbers: a top speed, a turning limit, how far a body can see, and how much it wants to flee and to seek. Predator and prey steer by one rule, push on the difference between the velocity you want and the one you have, with the sign of the wanting reversed. Nothing selects the prey&#x27;s numbers on purpose; the predators do it by eating. These local events give you one explanation for changes in the population. Births, feeding and losses are happening at particular places, even when the readout reports only a total.
+
+Try alternating your scale of attention. Spend a short interval following an encounter, then a similar interval watching the count. The encounter offers a candidate cause; the count reports an aggregate consequence without identifying its cause. If you cannot connect the two confidently, preserve that uncertainty. A useful observation might be “the prey count recovered while I watched this region”, rather than “this particular birth saved the population”. The smaller statement keeps the evidence available for comparison.
+
+There is another explanation to keep alongside it. The model also contains balancing interventions. When prey become scarce, it can add more. It can weaken predators when they become too numerous relative to prey, and it can restore predators under specified conditions. The continuing ecosystem is therefore produced by local behaviour together with rules that watch population totals.
+
+This distinction matters across the sequence. A flock followed neighbours; ants read traces; particles pursued remembered scores. Here the model includes a caretaker that operates at a different scale from its organisms. An overall pattern does not tell us which scale supplied the decisive action.
+
+Watch for a population recovery. Beside the living box, the POPULATION SUPPORT record counts prey and predators supplied from outside. Food has its own count; predator pressure reports when a population-level rule is reducing predator health. These marks come from the interventions themselves. A rise in prey accompanied by five supplied bodies tells a different story from a rise with no addition recorded. Neither view alone gives the whole history.
+
+Look back at the organisms after reading the record. Does the same recovery look different now? The intervention has not become more visible in their movements; you have gained another way to account for them. A future comparison could let you turn population care off while keeping the starting conditions fixed. For now the record exposes support without withdrawing it.
+
+That comparison need not make intervention shameful. Care, repair and replenishment can be necessary. The question is whether they remain visible when someone describes the result as autonomous. A claim about self-organisation should name the support that makes continued organisation possible.
+
+&lt;!-- @ --&gt;
+
+Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/tutorial.md">Raw captured source</a></p><pre># Swarm Intelligence Algorithms
+
+A gallery of swarm methods. Common agent interface.
+
+Define the common interface.
+
+```gdscript
+class_name SwarmAlgorithm
+
+func initialize(agent) -&gt; void: pass
+func perceive(agent, environment) -&gt; Dictionary: return {}
+func decide(agent, perceptions: Dictionary) -&gt; Dictionary: return {}
+func act(agent, decision: Dictionary) -&gt; void: pass
+func update_environment(environment, agent, action) -&gt; void: pass
+```
+
+Five-phase agent loop. Each algorithm overrides these hooks.
+
+Physarum algorithm.
+
+```gdscript
+class_name PhysarumAlgorithm extends SwarmAlgorithm
+
+func perceive(agent, env) -&gt; Dictionary:
+    return {
+        &quot;trail_forward&quot;: env.sample_trail(agent.position + agent.forward()),
+        &quot;trail_left&quot;: env.sample_trail(agent.position + agent.left()),
+        &quot;trail_right&quot;: env.sample_trail(agent.position + agent.right()),
+    }
+
+func decide(agent, perceptions: Dictionary) -&gt; Dictionary:
+    if perceptions.trail_left &gt; perceptions.trail_forward:
+        return {&quot;turn&quot;: -1}
+    elif perceptions.trail_right &gt; perceptions.trail_forward:
+        return {&quot;turn&quot;: 1}
+    return {&quot;turn&quot;: 0}
+
+func act(agent, decision: Dictionary) -&gt; void:
+    agent.rotate(decision.turn * 0.1)
+    agent.move_forward(1.0)
+
+func update_environment(env, agent, action) -&gt; void:
+    env.deposit_trail_at(agent.position, 0.1)
+```
+
+Trail sensing and deposition. The agent navigates by gradients in the environment.
+
+Boids algorithm.
+
+```gdscript
+class_name BoidsAlgorithm extends SwarmAlgorithm
+
+func perceive(agent, env) -&gt; Dictionary:
+    return {&quot;neighbours&quot;: env.neighbours_of(agent, 3.0)}
+
+func decide(agent, perceptions: Dictionary) -&gt; Dictionary:
+    var sep := separation(agent, perceptions.neighbours)
+    var ali := alignment(agent, perceptions.neighbours)
+    var coh := cohesion(agent, perceptions.neighbours)
+    return {&quot;steering&quot;: sep * 1.5 + ali + coh}
+```
+
+Perception is local neighbours; decision is Reynolds&#x27; three rules combined.
+
+Stack algorithms.
+
+```gdscript
+class_name LayeredSwarm
+
+var algorithms: Array = []
+
+func run_frame(agents: Array, environment):
+    for agent in agents:
+        for algo in algorithms:
+            algo.initialize(agent)
+            var perceptions: Dictionary = algo.perceive(agent, environment)
+            var decision: Dictionary = algo.decide(agent, perceptions)
+            algo.act(agent, decision)
+            algo.update_environment(environment, agent, decision)
+```
+
+Multiple algorithms applied in sequence. Each layer adds behaviour.
+
+Compare algorithms.
+
+```gdscript
+func run_comparison(algorithms: Array, env, duration: float) -&gt; Dictionary:
+    var results: Dictionary = {}
+    for algo in algorithms:
+        var agents := spawn_agents(30)
+        for algo_instance in algorithms:
+            pass  # setup
+        await get_tree().create_timer(duration).timeout
+        results[algo.get_name()] = measure_performance(agents, env)
+    return results
+```
+
+Run each algorithm on the same environment. Compare metrics like coverage, convergence, trail density.
+
+Visualise the gallery.
+
+```gdscript
+func populate_gallery(algorithms: Array) -&gt; void:
+    for i in algorithms.size():
+        var position := Vector3(i * 4, 0, 0)
+        var ghost_env := create_gallery_zone(position)
+        var ghost_agents := spawn_agents_in(ghost_env, 20)
+        ghost_env.run_algorithm(algorithms[i])
+```
+
+Each algorithm gets its own zone in the gallery. Visitors see them side by side.
+
+You can now define a common agent interface, implement physarum and boids variants, stack algorithm layers, compare performance, and populate a gallery. Chamber_Swarm closes the sequence with swarm-on-swarm encounter.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/technical.md">Raw captured source</a></p><pre># Nature solved optimization before we did — a gallery of swarm algorithms side by side, each a different answer to the same question
+
+Six maps. Six mechanisms. Physarum&#x27;s stigmergic trail networks. Flow fields&#x27; pre-built vector navigation.
+
+Boids&#x27; three-rule flocking. ABM&#x27;s general agent framework. Ant colony&#x27;s pheromone-guided graph optimization. Particle swarm&#x27;s socially-informed landscape search. Each map demonstrated one approach to the same problem: how do simple agents produce intelligent collective behavior without centralized control?
+
+This gallery places them side by side. The `SwarmShowcase` artifact implements multiple swarm algorithms within a unified visualization framework, allowing direct comparison. Each algorithm runs in its own alcove, but the spatial proximity makes the family resemblance visible: all are populations of simple agents, all rely on local interactions, all produce emergent global behavior. The differences lie in the coordination mechanism.
+
+## Unified Agent Architecture
+
+The gallery&#x27;s technical achievement is a common agent interface that different swarm algorithms instantiate differently.
+
+```gdscript
+class SwarmAlgorithm:
+    var agents: Array[Dictionary] = []
+    var environment: Dictionary = {}
+    var parameters: Dictionary = {}
+
+    func initialize(num_agents: int, params: Dictionary) -&gt; void:
+        parameters = params
+        for i in num_agents:
+            agents.append(_create_agent(i))
+
+    func step(delta: float) -&gt; void:
+        for i in agents.size():
+            var perception: Dictionary = _perceive(i)
+            var action: Dictionary = _decide(i, perception)
+            _act(i, action, delta)
+        _update_environment(delta)
+
+    func _create_agent(i: int) -&gt; Dictionary:
+        return {}  # Override per algorithm
+    func _perceive(i: int) -&gt; Dictionary:
+        return {}  # Override per algorithm
+    func _decide(i: int, perception: Dictionary) -&gt; Dictionary:
+        return {}  # Override per algorithm
+    func _act(i: int, action: Dictionary, delta: float) -&gt; void:
+        pass  # Override per algorithm
+    func _update_environment(delta: float) -&gt; void:
+        pass  # Override per algorithm
+```
+
+The base class defines the perceive-decide-act loop. Each algorithm overrides the four methods with its specific logic. The interface is consistent: `initialize` sets up agents and environment, `step` runs one frame. The gallery can run all algorithms simultaneously, call `step` on each, and render their states side by side.
+
+## Physarum Implementation
+
+```gdscript
+class PhysarumSwarm extends SwarmAlgorithm:
+    var trail_map: PackedFloat32Array
+
+    func _create_agent(i: int) -&gt; Dictionary:
+        return {
+            &quot;x&quot;: randf() * trail_width,
+            &quot;y&quot;: randf() * trail_height,
+            &quot;angle&quot;: randf() * TAU
+        }
+
+    func _perceive(i: int) -&gt; Dictionary:
+        var a: Dictionary = agents[i]
+        return {
+            &quot;left&quot;: sample_trail(a, -sensor_angle),
+            &quot;center&quot;: sample_trail(a, 0.0),
+            &quot;right&quot;: sample_trail(a, sensor_angle)
+        }
+
+    func _decide(i: int, perception: Dictionary) -&gt; Dictionary:
+        var turn: float = 0.0
+        if perception[&quot;center&quot;] &gt; perception[&quot;left&quot;] and perception[&quot;center&quot;] &gt; perception[&quot;right&quot;]:
+            turn = 0.0
+        elif perception[&quot;left&quot;] &gt; perception[&quot;right&quot;]:
+            turn = -turn_angle
+        else:
+            turn = turn_angle
+        return {&quot;turn&quot;: turn}
+
+    func _act(i: int, action: Dictionary, delta: float) -&gt; void:
+        agents[i][&quot;angle&quot;] += action[&quot;turn&quot;]
+        agents[i][&quot;x&quot;] += cos(agents[i][&quot;angle&quot;]) * move_speed
+        agents[i][&quot;y&quot;] += sin(agents[i][&quot;angle&quot;]) * move_speed
+        deposit_trail(agents[i][&quot;x&quot;], agents[i][&quot;y&quot;])
+
+    func _update_environment(delta: float) -&gt; void:
+        diffuse_trail()
+        decay_trail()
+```
+
+The Physarum implementation maps directly to the PhysarumColony artifact&#x27;s logic: sense three directions, turn toward strongest trail, deposit at current position, diffuse and decay the trail map.
+
+## Boids Implementation
+
+```gdscript
+class BoidsSwarm extends SwarmAlgorithm:
+    func _create_agent(i: int) -&gt; Dictionary:
+        return {
+            &quot;position&quot;: Vector3(randf_range(-10, 10), randf_range(2, 8), randf_range(-10, 10)),
+            &quot;velocity&quot;: Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)).normalized()
+        }
+
+    func _perceive(i: int) -&gt; Dictionary:
+        var neighbors: Array = []
+        for j in agents.size():
+            if j == i: continue
+            var dist: float = agents[i][&quot;position&quot;].distance_to(agents[j][&quot;position&quot;])
+            if dist &lt; perception_radius:
+                neighbors.append(j)
+        return {&quot;neighbors&quot;: neighbors}
+
+    func _decide(i: int, perception: Dictionary) -&gt; Dictionary:
+        var sep := compute_separation(i, perception[&quot;neighbors&quot;])
+        var ali := compute_alignment(i, perception[&quot;neighbors&quot;])
+        var coh := compute_cohesion(i, perception[&quot;neighbors&quot;])
+        return {&quot;force&quot;: sep * w_sep + ali * w_ali + coh * w_coh}
+
+    func _act(i: int, action: Dictionary, delta: float) -&gt; void:
+        agents[i][&quot;velocity&quot;] += action[&quot;force&quot;] * delta
+        agents[i][&quot;velocity&quot;] = agents[i][&quot;velocity&quot;].limit_length(max_speed)
+        agents[i][&quot;position&quot;] += agents[i][&quot;velocity&quot;] * delta
+```
+
+Three steering forces, no environment modification. The contrast with Physarum is stark: boids leave no trace, coordinate instantaneously, and forget every frame.
+
+## ACO Implementation
+
+```gdscript
+class ACOSwarm extends SwarmAlgorithm:
+    var pheromone: Dictionary = {}
+    var graph: Dictionary = {}
+
+    func _decide(i: int, perception: Dictionary) -&gt; Dictionary:
+        var current_node: int = agents[i][&quot;current_node&quot;]
+        var visited: Dictionary = agents[i][&quot;visited&quot;]
+        var options: Array = get_unvisited_neighbors(current_node, visited)
+
+        if options.is_empty():
+            return {&quot;action&quot;: &quot;backtrack&quot;}
+
+        var probabilities: Array = []
+        var total: float = 0.0
+        for node in options:
+            var key: String = edge_key(current_node, node)
+            var tau: float = pow(pheromone[key], alpha)
+            var eta: float = pow(1.0 / distances[key], beta)
+            var weight: float = tau * eta
+            probabilities.append(weight)
+            total += weight
+
+        var chosen: int = _roulette_select(options, probabilities, total)
+        return {&quot;action&quot;: &quot;move&quot;, &quot;target&quot;: chosen}
+```
+
+Graph-based navigation with probabilistic edge selection. The pheromone dictionary is the shared environment. Alpha controls pheromone influence. Beta controls distance-heuristic influence.
+
+## PSO Implementation
+
+```gdscript
+class PSOSwarm extends SwarmAlgorithm:
+    var global_best_pos: Vector3
+    var global_best_fitness: float = INF
+
+    func _decide(i: int, perception: Dictionary) -&gt; Dictionary:
+        var r1: float = randf()
+        var r2: float = randf()
+        var cognitive: Vector3 = c1 * r1 * (agents[i][&quot;personal_best&quot;] - agents[i][&quot;position&quot;])
+        var social: Vector3 = c2 * r2 * (global_best_pos - agents[i][&quot;position&quot;])
+        var inertia: Vector3 = w * agents[i][&quot;velocity&quot;]
+        return {&quot;velocity&quot;: inertia + cognitive + social}
+
+    func _act(i: int, action: Dictionary, delta: float) -&gt; void:
+        agents[i][&quot;velocity&quot;] = action[&quot;velocity&quot;]
+        agents[i][&quot;position&quot;] += agents[i][&quot;velocity&quot;] * delta
+        var fitness: float = evaluate(agents[i][&quot;position&quot;])
+        if fitness &lt; agents[i][&quot;personal_best_fitness&quot;]:
+            agents[i][&quot;personal_best&quot;] = agents[i][&quot;position&quot;]
+            agents[i][&quot;personal_best_fitness&quot;] = fitness
+        if fitness &lt; global_best_fitness:
+            global_best_fitness = fitness
+            global_best_pos = agents[i][&quot;position&quot;]
+```
+
+Agent memory replaces environmental memory. No trail, no pheromone. The environment is read-only.
+
+## The Comparison Matrix
+
+The gallery enables direct comparison along several axes:
+
+**Coordination mechanism:**
+- Stigmergic (Physarum, ACO): environment carries messages between agents
+- Social (Boids, PSO): agents read each other directly
+- Field-based (Flow fields): pre-built environment guides agents
+- General (ABM): any combination
+
+**Memory location:**
+- Environmental (Physarum trail, ACO pheromone): shared, decaying, spatial
+- Agent-internal (PSO personal best, ABM state): private, persistent, non-spatial
+- None (Boids, flow field particles): stateless, instantaneous
+
+**Problem type:**
+- Network formation (Physarum): connect points with efficient paths
+- Navigation (Flow fields): traverse a vector field
+- Coordination (Boids): maintain group coherence
+- General simulation (ABM): any agent interaction
+- Combinatorial optimization (ACO): find shortest route on a graph
+- Continuous optimization (PSO): find function minimum in real-valued space
+
+## The Multi-Level Ecosystem Layout
+
+The 10x10 map uses three platform heights (2, 3, 4) representing canopy, understory, and ground layers — an ecological stratification that metaphorically mirrors the layered nature of swarm intelligence. Different algorithms occupy different ecological niches. Ground-level alcoves host algorithms that operate on 2D surfaces (Physarum, flow fields). Mid-level platforms host algorithms with 3D spatial extent (boids). Upper platforms host algorithms that operate on abstract graphs or fitness landscapes (ACO, PSO).
+
+The ground floor connects everything. Walking between alcoves is walking between paradigms of collective intelligence — from biological stigmergy to mathematical optimization, from specific organisms to general frameworks. The gallery is both a museum and a laboratory, displaying finished algorithms and inviting the learner to see them as variations on a theme.
+
+## The Swarm Intelligence Thesis
+
+The sequence&#x27;s thesis, demonstrated across seven maps and crystallized in this gallery: intelligence does not require centralized control. It requires a population of simple agents, a coordination mechanism (environmental, social, or field-based), and time. The specific mechanism determines what kind of intelligence emerges — network formation, flocking, optimization, navigation — but the structural pattern is invariant. Local rules. Global behavior. No leader. No plan. The gallery makes this invariance visible by showing that six radically different algorithms share the same architecture: agents that perceive, decide, and act in a shared world, producing collective behavior that no individual computed.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/intent.md">Raw captured source</a></p><pre>Concept: A wide gallery with alcoves, each housing a different swarm algorithm — the exhibition map that places Physarum, boids, ACO, PSO, and other swarm methods side by side for comparison. The gallery format makes the family resemblance visible: every algorithm is a variation on the same theme of local rules producing global intelligence, but the mechanisms differ in illuminating ways.
+Sequence role: Seventh and final map in Swarm Intelligence (14th spine sequence, integration phase), intermediate difficulty. The capstone map that synthesizes the entire sequence by juxtaposing its individual algorithms. After six maps explored specific swarm techniques, this gallery invites comparison: which problems suit which algorithms? What do they share? Where do they diverge? Connects backward to every prior Swarm Intelligence map and outward to the broader integration phase across sequences 13 and 14; follows SwarmIntelligence_Particle_Swarm_Optimization.
+Technical angle: The SwarmShowcase artifact likely implements multiple swarm algorithms within a unified framework — common agent architecture, shared visualization pipeline, standardized parameter interfaces — so that switching between algorithms reveals their structural differences. Potential algorithms on display: Physarum network formation, Reynolds boids, Dorigo ACO, Kennedy-Eberhart PSO, firefly algorithm, bee colony optimization, bacterial foraging. The alcove gallery architecture gives each algorithm its own spatial context while maintaining visual coherence.
+Critical angle: The gallery is a taxonomy of collective intelligence mechanisms: stigmergic (ACO, Physarum), social (PSO, boids), chemotactic (bacterial foraging), luminescent (firefly). Each mechanism answers the same question differently: how do simple agents coordinate without central control? The integration phase thesis — that intelligence emerges from material interaction, not top-down design — reaches its fullest expression here, where six or more independent proofs of the thesis stand side by side. The wide gallery is also a museum of nature&#x27;s algorithms, acknowledging that every swarm method was invented by evolution before it was discovered by computer science.
+Key artifacts: SwarmShowcase implements a multi-algorithm gallery with unified visualization, allowing side-by-side comparison of different swarm intelligence approaches within the alcove-based spatial layout.
+Gap: Needs a shared benchmark problem — an artifact that runs all gallery algorithms on the same optimization or coordination task simultaneously, with a real-time leaderboard showing convergence speed, solution quality, and computational cost, making the tradeoffs between approaches quantitatively visible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/critical.md">Raw captured source</a></p><pre># SwarmIntelligence_Swarm_Intelligence_Algorithms — Critical Reflection
+
+## A Gallery of Relations
+
+Glissant conceived the tout-monde not as a synthesis of cultures but as a site where differences coexist without dissolving into unity. The gallery is a tout-monde of algorithms. Physarum, boids, ACO, PSO, flow fields, and ABM stand side by side. They share a family resemblance — all are populations of simple agents producing collective behavior — but they do not merge into a single algorithm. Each maintains its own logic, its own coordination mechanism, its own kind of intelligence. The gallery does not synthesize them. It places them in relation.
+
+This is the critical achievement of the integration phase: not a unified theory of swarm intelligence but a relational understanding. Stigmergic algorithms (Physarum, ACO) deposit memory in the environment. Social algorithms (boids, PSO) exchange information through direct perception or shared records. Field-based algorithms (flow fields) navigate pre-built infrastructure. General frameworks (ABM) contain all of these as special cases. Each mechanism answers the same question — how do simple agents coordinate? — with a different coordination language. The gallery does not rank these languages. It exhibits them. Glissant would approve: relation without hierarchy, diversity without resolution.
+
+## The Fugitive Archive
+
+Moten writes about the archive as an institution that selectively preserves — recording some histories and erasing others. The gallery is an archive of algorithms, and it selects. Physarum, boids, ACO, PSO are canonical. They appear in every swarm intelligence textbook. But the gallery omits algorithms that the canon has not canonized: Indigenous fire-management practices that operate as swarm-like coordination across landscapes, termite mound construction that preceded Physarum research by millions of years, fish schooling behaviors that were observed and used by Pacific navigators long before Reynolds published.
+
+The gallery presents swarm intelligence as a discovery of computer science — Dorigo 1992, Reynolds 1987, Kennedy and Eberhart 1995. The algorithms are named for their inventors, located in Western academic history. This is not false, but it is partial. Every algorithm in the gallery was evolved by biological organisms before being formalized by humans. The ants solved combinatorial optimization before Dorigo named it. The slime mold built efficient networks before anyone simulated it. The birds flocked before Reynolds wrote a single line of code.
+
+Moten&#x27;s question for the gallery: whose intelligence is being displayed? If the algorithms are discovered rather than invented, then the gallery is a museum of appropriation — formalized versions of biological techniques, stripped of their organismic context and presented as computational tools. The organisms are acknowledged in the blurbs (ants, slime mold, birds) but not credited as the originators. The gallery credits the formalizers. The critical counter-reading credits the organisms — and asks whether formalization itself is a kind of extraction.
+
+## Opacity Across the Gallery
+
+Glissant&#x27;s opacity takes a structural form in the gallery&#x27;s comparison matrix. Each algorithm is internally transparent — the code is readable, the parameters are exposed, the update rules are explicit. But the comparison between algorithms is opaque. There is no formula that converts ACO into PSO or transforms Physarum into boids. Each algorithm is irreducible to the others. They share a pattern but not a mechanism. The pattern — local rules producing global behavior — is a structural observation, not a computational one. You cannot derive one algorithm from another.
+
+This irreducibility is the gallery&#x27;s deepest teaching. The tout-monde of swarm intelligence is not a monolith. It is a constellation of approaches that resist unification. Each algorithm is opaque to the others — ACO cannot &quot;understand&quot; boids in any meaningful sense. They are different languages for different problems, each with its own grammar of coordination. The gallery exhibits this opacity without trying to resolve it.
+
+## The Integration Thesis
+
+The swarm intelligence sequence&#x27;s thesis crystallizes here: intelligence is not a property of minds. It is a property of systems. A mind is one way to produce intelligent behavior — the centralized way, with a processor that takes input, transforms it, and produces output. A swarm is another way — the distributed way, with many processors that each handle a tiny piece of the problem, coordinating through local interaction, producing solutions that no individual computes.
+
+Moten would push further: the centralized model (a mind, a processor, a controller) is the Western model. The distributed model (a swarm, a colony, a network) challenges the Western assumption that intelligence requires a subject. The slime mold has no subject. The ant colony has no decision-maker. The flock has no leader. Yet all three produce behavior that meets any reasonable definition of intelligence — finding paths, optimizing routes, maintaining coordination, adapting to change.
+
+The gallery places these leaderless systems in a museum format — alcoves, exhibition spaces, labeled displays. The institutional framing is ironic. The algorithms being displayed are precisely the algorithms that demonstrate that institutions (centralized, hierarchical, controlled) are not the only way to produce order. The gallery is an institution displaying the limits of institutions. The swarm does not need a museum to exist. It exists in the breaks, in the corridors, in the environmental traces that no curator placed.
+
+## What the Sequence Leaves
+
+Seven maps have demonstrated that local rules produce global intelligence across a range of mechanisms — stigmergic, social, field-based, agent-based. The gallery confirms the thesis by exhibiting the variations. But the sequence does not answer its own hardest question: if swarm intelligence is so effective, why do we build centralized systems? If ants can optimize, why do we need algorithms? If the flock coordinates without a leader, why do we build hierarchies?
+
+The answer — that centralized systems are faster, more predictable, and more controllable — is the answer that Glissant and Moten would critique. Speed, predictability, and control are the values of empire. The swarm values something different: resilience, adaptability, and collective production without ownership. The gallery exhibits both the algorithms and the values they encode. The learner is left to decide which values to carry forward.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/artifacts.md">Raw captured source</a></p><pre># SwarmIntelligence Swarm Intelligence Algorithms — Artifacts
+*Swarm Intelligence: No Leader, Yet Coordinated · lambda_edge · 1 artifacts*
+
+&gt; Nature solved optimization before we did. Bees dance solutions. Ants find shortest paths. Fish schools evade predators. Birds flock efficiently. Swarm intelligence algorithms borrow these strategies: decentralized, robust, adaptive. Evolution debugged these algorithms over millions of years.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Ecosystem Simulation
+![Ecosystem Simulation](/scene-catalog/ecosystem_simulation.png)
+
+Predator-prey ecosystem dynamics with emergent population behaviors
+
+`ecosystem_simulation`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/summary.md">Raw captured source</a></p><pre># SwarmIntelligence_Swarm_Intelligence_Algorithms — Summary
+
+The capstone gallery. Six swarm algorithms stand side by side — Physarum, flow fields, boids, ABM, ACO, and PSO — each in its own alcove, each running simultaneously through a unified visualization framework. The `SwarmShowcase` artifact implements a common agent interface (initialize, perceive, decide, act, update environment) that each algorithm overrides with its specific coordination logic.
+
+The gallery enables direct comparison along three axes. Coordination mechanism: stigmergic (Physarum, ACO store messages in the environment), social (boids, PSO exchange information through direct perception or shared records), field-based (flow fields navigate pre-built infrastructure). Memory location: environmental (trail maps, pheromone), agent-internal (personal best, FSM state), or none (stateless instantaneous perception). Problem type: network formation, navigation, coordination, combinatorial optimization, or continuous optimization.
+
+The multi-level map uses three platform heights as ecological layers — ground-level alcoves for 2D surface algorithms, mid-level for 3D spatial algorithms, upper platforms for abstract optimization. The ground floor connects everything, making the walk between alcoves a walk between paradigms of collective intelligence.
+
+This is the final map in the Swarm Intelligence sequence. Seven maps have demonstrated one thesis: intelligence does not require centralised control. It requires a population of simple agents, a coordination mechanism, and time.
+
+The specific mechanism determines the kind of intelligence, but the pattern is invariant. Local rules. Global behaviour. No leader, no plan. The gallery makes this invariance visible by showing that radically different algorithms share the same architecture, producing collective behaviour that no individual computed.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SwarmIntelligence_Swarm_Intelligence_Algorithms/blurb.md">Raw captured source</a></p><pre>Nature solved optimization before we did. Bees dance solutions. Ants find shortest paths. Fish schools evade predators. Birds flock efficiently. Swarm intelligence algorithms borrow these strategies: decentralized, robust, adaptive. Evolution debugged these algorithms over millions of years.
+
+`SwarmShowcase` gathers the sequence&#x27;s algorithms into a single gallery — Physarum, boids, ACO, PSO, firefly, bee colony, bacterial foraging — each in its own alcove under unified visualization. Side by side, the family resemblance becomes obvious: every algorithm answers the same question — how do simple agents coordinate without central control? — with a different mechanism. Stigmergic, social, chemotactic, luminescent. The integration phase thesis reaches its fullest expression here: intelligence emerges from material interaction, not top-down design. Every swarm method was invented by evolution before it was discovered by computer science.
+</pre></section></body></html>

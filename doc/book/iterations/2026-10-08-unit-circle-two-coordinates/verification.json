@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-08",
+  "authored_artifacts_retained": [
+    "OscillationCurve",
+    "SimpleOscillatingBridge",
+    "colorballs",
+    "cube_scene",
+    "dark_sphere",
+    "film_circle_projection",
+    "unit_circle_advanced"
+  ],
+  "grid_dimensions_verified": [
+    24,
+    29
+  ],
+  "review_local_links_resolve": true,
+  "student_checks": 26,
+  "museum_checks": 51,
+  "deliberate_faults_rejected": 3,
+  "sources": {
+    "commons/maps/WaveFunctions_Unit_Circle/map_data.json": "49503d38cdf1b30c3a8c4cce5676cf7d284a2285cdec30f043dac0b70feaa631",
+    "commons/maps/WaveFunctions_Unit_Circle/tutorial.md": "b3cd1f31a16dcfa3a3075b876abc3e2707eff3f171dd5d6c3eb9cdbc7998a010",
+    "commons/maps/WaveFunctions_Unit_Circle/final.md": "ea0cfd42d29fd78d2859ebbde681e54e255cb7d1b544be868ebaf13e120363bd",
+    "algorithms/wavefunctions/unit_circle/UnitCircle.gd": "048b650462f5565f688e6d887bd0b8f03254b0af83c6b4c5c31e31ac9c10aa58",
+    "algorithms/wavefunctions/unit_circle/unit_circle_gallery.gd": "4185b5e33eb90a4bd8ceba84735b4cc1011f052e79a8f1ca0626fa4396c77ced",
+    "algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.gd": "61854916f81186bd00c5c5dcf9ba64fc1353a8b6415d6bba3b311036a715ba12",
+    "algorithms/wavefunctions/oscillation_driver/OscillationCurve.gd": "46b61827bc90a77f4fbc5ccbdb41120ea1dba5f3278fa932752d764b85e1ce2a",
+    "doc/book/studies/wavefunctions-lineage/04_circle_coordinates.gd": "1a00fcfa717569f726ee1d76012ef27468b7e7d6b5b0351c9568e3c04dce2194",
+    "doc/book/studies/wavefunctions-lineage/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/studies/wavefunctions-lineage/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "tools/probes/wavefunctions_circle_museum.gd": "483825a35961e4606f332ca15e6c0a89f71cc02b7cb655ff3628eb04caae9745",
+    "tools/probes/wavefunctions_circle_student.gd": "68814c552200d268fca71de2aa6707e75cec47af8ec17171e4f1b8c5a8488e64",
+    "tools/test_wavefunctions_circle.py": "48e108076adef028510e4d95f7e1a2014c2e5c64ec73b9e19743dc99119ebe23",
+    "tools/capture_wavefunctions_circle.py": "0cddd5b6114d02e91ab63ab1082826f1d01649effcc0ff0022f7479b9e4398c3",
+    "tools/publish_wavefunctions_circle.py": "a29db3af80988b207a35e0d450aea4dcdede8e01581c50487880f3085289f7c5"
+  },
+  "scope": "Teacher-authored native tests, mutation tests and museum captures. No independent student or headset trial. Existing unrelated UID and compatibility-renderer warnings remain."
+}

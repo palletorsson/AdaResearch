@@ -1,0 +1,30 @@
+{
+  "words_before_including_code": 1659,
+  "words_after_including_code": 1081,
+  "reduction_percent": 34.8,
+  "primary_anchors": [
+    "rotation_wall_crossings",
+    "rotation_array_compare",
+    "boolean_tunnel",
+    "carousel_cake"
+  ],
+  "code_blocks": 5,
+  "final_sha256": "8823848ecc7f79d536f47f992a3f48bc83d2712424d81c3382617e94b00b1f52",
+  "source_sha256": {
+    "commons/artifacts/rotation_studies/wall_crossings.gd": "51affe2bd523afb892d05ea5b2ab5ec739bf75df7a7658235407b520502e3239",
+    "commons/artifacts/rotation_studies/rotation_rider_deck.gd": "625667c85e4c83883c8046ee2d6ec2afa8d5840c6fa4e10ed650a2c691a59bc2",
+    "commons/artifacts/rotation_studies/array_compare.gd": "d97f09ed0eead2ca7f544c84ad83d0a7d7cfbfca00dd5f79e8fe5bef6f760b94",
+    "commons/artifacts/rotation_studies/array_body_comparison.gd": "fcea400149f77341529bf533a0f854d09b3a60cd6f68425da75e9510b97e96a0",
+    "algorithms/transformation/booleanTunnel/booleanTunnel.gd": "7fdd2390a7c3699e4da488ab48c8fec86a46cae8c5038d76a473dae410363799",
+    "algorithms/transformation/carousel_cake/carousel_cake.gd": "43e659eccee4339dbff8515b6915ec67208ef2c6ce12fd9e88f4e1fe6e13d043"
+  },
+  "checks": [
+    "Four primary encounter anchors preserved in order",
+    "Length within roughly 1100 words including code",
+    "Code fences balanced",
+    "No unfinished markers",
+    "Exit advances size/body relation",
+    "All six runtime source dependencies exist"
+  ],
+  "runtime_test_status": "No rerun for editorial change; existing source/museum evidence from 2026-09-16 retained; map spawn alignment validated by root separately"
+}

@@ -1,0 +1,538 @@
+[
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "seed_replay_demo",
+      "description"
+    ],
+    "old": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+    "new": "Two seeded colour grids can replay the same draw procedure or compare it with one discarded draw before RGB assignment. The same seed is not sufficient when the procedure changes. A slider selects an integer seed; REPLAY rebuilds, RANDOM chooses a seed, and optional draw strips expose the stream offset."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "shannon_entropy_meter",
+      "description"
+    ],
+    "old": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+    "new": "Measures the empirical categorical Shannon entropy of a seeded sample from its symbol counts. The optional ledger retains the ordered tiles, compares a second weighted sample and sorts a display copy without changing counts or H. Disclosure reveals or withholds the measurement; it does not measure spatial disorder or thermodynamic entropy."
+  },
+  {
+    "path": "commons/artifacts/registry/algorithms_misc.json",
+    "keys": [
+      "artifacts",
+      "entropy_axiom",
+      "description"
+    ],
+    "old": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
+    "new": "A field of points whose random displacement grows along the grid’s z direction. It contrasts lattice alignment with positional variation; this artifact does not calculate Shannon entropy."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "ten_print_maze_3d",
+      "description"
+    ],
+    "old": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+    "new": "A standing field of binary diagonal marks, with a separate ant search on a finer raster. The shipped stroke scene changes one diagonal every 0.08 seconds; its stored orientation and navigation update together. A visual contour is not a guarantee of a bodily passage. Character, wall and tile impressions are additional representations; the tile variant needs a separate orientation review."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "dice_throw",
+      "description"
+    ],
+    "old": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+    "new": "A physical simulated die on a felt table, with face frequencies and a running mean read from settled orientation. Equal face probabilities and mean 3.5 are comparison hypotheses, not guarantees about a user’s throwing procedure. Rewards default to 16 balls per pip: 96 for a six and 16 for a one."
+  },
+  {
+    "path": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "13x13 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "Independent diagonal marks form contours that can look like a maze. Compare those contours with the ant’s separately computed navigation; the linked screen/floor print and exact-count diagonal board remain companion investigations."
+  },
+  {
+    "path": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Identify the two local diagonal choices and follow how their endpoints meet",
+      "Distinguish a drawn contour from an open passage and a computed route",
+      "Follow a local replacement through the ant’s refreshed navigation model",
+      "Compare independent choices with a prepared count of changed marks in retained companion works"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Cubes/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "A user-thrown simulated die connects a physical outcome to a retained statistical record and an authored reward. Compare one result, a face frequency and the running mean while keeping the throwing procedure in view."
+  },
+  {
+    "path": "commons/maps/Random_Cubes/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Compare the upward physical face with the reported result after settlement",
+      "Track one face’s frequency separately from the running numerical mean",
+      "Use the equal-face mean of 3.5 as a distribution hypothesis rather than a possible face",
+      "Keep the throwing method and reward rule distinct from a claim of fairness"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Random_Rotate_Random_XYZ",
+    "new": "What remains in a changing stack"
+  },
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied humanoid_walker engine — constraint 0.708→0.891, walkability 0.583→0.893]",
+    "new": "Two complete MultiMesh stacks fit a shared ten-metre display. Pause accumulated drift, rotation and darkening; compare fixed specimen size with unequal configured rates, then restore the initial arrangement."
+  },
+  {
+    "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Separate changes in position, orientation and appearance while specimen size remains fixed",
+      "Pause and resume accumulated perturbation without restarting the onset delay",
+      "Distinguish restoring an initial arrangement from replaying an identical stochastic future",
+      "Recognise unequal configured rates as a limit on attributing differences to shape alone"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Walk/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Compare a proposed step, its reflected endpoint and the stored trail",
+      "Distinguish the 2D, 3D and bounded LEVY rules",
+      "Replay positions at equal step counts and separate visual emphasis from population",
+      "Inspect omitted wall contacts, discarded history and capped simulation time"
+    ],
+    "new": [
+      "Compare a proposed step, its reflected endpoint and the stored trail",
+      "Distinguish 2D, 3D and bounded inverse-square-root LONG STEP rules",
+      "Replay positions at equal step counts and separate visual emphasis from population",
+      "Inspect omitted wall contacts, discarded history and capped simulation time"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Walk/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+    "new": "A seeded glass walk exposes step proposals, reflected endpoints, retained trails and two clocks. A raised-cell terrain and a held drawing point show what happens when the same family of rules meets ground or hand."
+  },
+  {
+    "path": "commons/maps/Random_Mushrooms/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+    "new": "Three encounters compare population recipes, sampled wardrobes and changed constructions: a six-template mushroom bed, six authored arrival slots with DRESS/FORMS, and a three-seed couture comparison."
+  },
+  {
+    "path": "commons/maps/Random_Mushrooms/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Follow template copies and separate their placement routines",
+      "Remove only per-instance scale variation under the same seed",
+      "Distinguish rejected candidates from outside-bed ring members",
+      "Ask which body shapes and interaction capabilities the recipe permits"
+    ],
+    "new": [
+      "Follow template copies and distinguish scattering, rings, clusters and rejected candidates",
+      "Remove per-instance scale variation while retaining the draws that place the population",
+      "Compare resampling a wardrobe with changing its available forms without changing arrivals",
+      "Hold three seeds while changing garment construction, then ask which capabilities remain absent"
+    ]
+  },
+  {
+    "path": "commons/artifacts/registry/commons_artifacts.json",
+    "keys": [
+      "artifacts",
+      "random_walk_terrarium",
+      "description"
+    ],
+    "old": "Five random walkers in a reflecting glass tank: fixed-length 2D/3D proposals or bounded power-law LEVY steps. The default tail keeps 200 previous positions; the optional logbook stand exposes the named seed, two clocks and ONE/ALL visual emphasis.",
+    "new": "Five random walkers in a reflecting glass tank: fixed-length 2D/3D proposals or bounded inverse-square-root LONG STEP proposals. The legacy LEVY_FLIGHT enum remains compatible. A 200-position tail and optional logbook expose the named seed, two clocks and ONE/ALL emphasis."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "random_decay_multimesh",
+      "description"
+    ],
+    "old": "Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.",
+    "new": "Two MultiMesh stacks accumulate bounded drift, rotation, sinking and darkening at different configured rates. Both use fixed one-metre specimen units by default. Optional stack_fit fits both complete displays to a given width with a common geometry scale, a 0.6m gap and floor-aligned initial faces; controls retain full size. TOGGLE preserves the ramp clock; RESET restarts it."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "silhouette_arrivals",
+      "description"
+    ],
+    "old": "Seeded sampling of six places and independently sampled silhouette dress. Bounded non-hostile arrivals with replay.",
+    "new": "Seeded sampling without replacement fills six authored places. DRESS resamples the wardrobe; FORMS switches branching instructions while retaining its dress seed. Both leave arrival order unchanged; REPLAY restores that order. Flat billboard figures gain different outlines, not locomotion."
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Random_Space_Geometry",
+    "new": "What neighbours share"
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied promenade engine — constraint 0.917→0.929, walkability 0.459→0.616]",
+    "new": "Compare independent seeded height samples with FastNoiseLite Perlin samples. Frequency changes the spatial scale of the coherent field; the comparable columns do not make the two distributions identical or simulate geology."
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Compare neighbouring independent and spatially correlated samples",
+      "Hold seed while changing spatial frequency",
+      "Distinguish height-field appearance from geological process"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Stigmergy and Trails",
+    "new": "A path that recruits its next visit"
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "Compare deposited, decaying pheromone with cumulative visual height. In the optional paused comparison, ATTRACT and AVOID restart the same seeded walkers; advance equal step counts to inspect how the existing steering law changes their histories."
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Distinguish observer-only trail history from a signal that steers later choices",
+      "Compare current pheromone with accumulated height",
+      "Compare existing attraction and avoidance laws from the same seed and starting walkers",
+      "Keep reinforcement distinct from shortest-path or fairness claims"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Randomness Fills Space",
+    "new": "Layers that look like land"
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "A finite sum of sine-based spatial functions at different scales. OCT selects the layer count, LAC changes frequency ratios and PER changes amplitude ratios. Seeded offsets, per-setting normalization and an earth-toned palette shape the picture without simulating landscape processes."
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Separate layer count, frequency ratio and amplitude ratio",
+      "Use one octave as the baseline for later layers",
+      "Distinguish per-setting contrast normalization from absolute values",
+      "Compare landscape associations with the implemented finite sum"
+    ]
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "perlin_noise_bridge",
+      "description"
+    ],
+    "old": "Side-by-side 16x16 heightfield grids comparing white noise (chaotic) and Perlin noise (terrain-like). Shows how gradient noise transforms raw randomness into coherent structure through spatial memory.",
+    "new": "Compare seeded uniform heights with FastNoiseLite Perlin samples in two 16×16 grids. Frequency changes the scale of spatial correlation. Both fields use comparable column displays, while their sampling procedures and distributions differ."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "noise_mixer",
+      "description"
+    ],
+    "old": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
+    "new": "A visual mixer of finite sine-based spatial layers with seeded offsets. OCT, LAC and PER regenerate the sum live; each texture is normalized to its own range before an earth-toned palette is applied."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "monte_carlo_dartboard",
+      "description"
+    ],
+    "old": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
+    "new": "Uniform generated points estimate an inscribed circle’s area fraction; four times inside/total estimates pi. THROW, AUTO and RESET expose finite sampling, whose estimate need not improve with every point."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "extreme_randomness",
+      "description"
+    ],
+    "old": "A cycling study of 100 particles: random kicks with memory, smooth trigonometric flow, spiral patterns, swarming and selection. These are distinct update rules, not five strengths of one noise source.",
+    "new": "Five cycling particle studies: persistent random pushes, smooth trigonometric flow, spiral patterns, flocking-style interactions and target-ranked following. The selection chapter moves a fixed set of particles; it does not breed a population."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "pheromone_terrain",
+      "description"
+    ],
+    "old": "Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.",
+    "new": "Walkers deposit decaying pheromone and accumulate visual height. Existing trail, sniff, avoid and grid rules change which local signal is followed. An optional paused comparison exposes attraction and avoidance from the same seed and starting walkers, with single-step, 20-step and replay controls."
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      9,
+      "lines"
+    ],
+    "old": [
+      {
+        "token": "mushrooms",
+        "text": "The sampled sizes never grow a seventh template between two others. Which difference would need another rule?",
+        "by": "astra-mushrooms-review-2026-09-12",
+        "note": "SHOW follows template copies; KIND reveals placement permissions; SIZE keeps draws but substitutes scale 1. The separately planted edible scene changes what a similar cap can do.",
+        "note_src": {
+          "file": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+          "quote": "return v if size_variation else 1.0"
+        }
+      },
+      {
+        "token": "bubbles_random",
+        "text": "A small bubble dish offers another population of similar but varied bodies without competing with the specimen bed.",
+        "by": "curated-2026-09-16"
+      }
+    ],
+    "new": [
+      {
+        "token": "mushrooms",
+        "text": "The sampled sizes never grow a seventh template between two others. Which difference would need another rule?",
+        "by": "astra-mushrooms-review-2026-09-12",
+        "note": "SHOW follows template copies; KIND reveals placement permissions; SIZE keeps draws but substitutes scale 1. The separately planted edible scene changes what a similar cap can do.",
+        "note_src": {
+          "file": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+          "quote": "return v if size_variation else 1.0"
+        }
+      },
+      {
+        "token": "silhouette_arrivals",
+        "text": "The arrivals keep their places while DRESS changes a wardrobe and FORMS changes the available outlines. Which change needs a different construction?",
+        "by": "local-review-2026-09-19"
+      },
+      {
+        "token": "couture_comparison",
+        "text": "Keep three seeds and change the garment. The same numbers meet another way of making a body.",
+        "by": "local-review-2026-09-19"
+      },
+      {
+        "token": "bubbles_random",
+        "text": "A small bubble dish offers another population of similar but varied bodies without competing with the specimen bed.",
+        "by": "curated-2026-09-16"
+      }
+    ]
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      10,
+      "hero"
+    ],
+    "old": "env_one",
+    "new": "perlin_noise_bridge"
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      10,
+      "lines",
+      2
+    ],
+    "old": {
+      "token": "perlin_noise_bridge",
+      "text": "Coherence is not the opposite of randomness — it is randomness with memory",
+      "by": "draft"
+    },
+    "new": {
+      "token": "perlin_noise_bridge",
+      "text": "Compare independent heights with correlated neighbours. Similar looking land can come from different procedures.",
+      "by": "local-review-2026-09-19"
+    }
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      12,
+      "lines",
+      0
+    ],
+    "old": {
+      "token": "pheromone_terrain",
+      "text": "Stigmergy is memory without a brain — the environment itself becomes the communication …",
+      "by": "draft",
+      "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+      "note_src": {
+        "file": "commons/maps/Random_Pheromone/critical.md",
+        "quote": "the evaporation rate is a design choice"
+      }
+    },
+    "new": {
+      "token": "pheromone_terrain",
+      "text": "Leave a mark that enters the next decision. From the same seeded starts, compare walkers drawn towards scent with walkers that avoid it.",
+      "by": "local-review-2026-09-19",
+      "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+      "note_src": {
+        "file": "commons/maps/Random_Pheromone/critical.md",
+        "quote": "the evaporation rate is a design choice"
+      }
+    }
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      13,
+      "hero"
+    ],
+    "old": "random_space",
+    "new": "noise_mixer"
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      13,
+      "lines",
+      1
+    ],
+    "old": {
+      "token": "noise_mixer",
+      "text": "Complexity is layered repetition. The same simple wave",
+      "by": "draft"
+    },
+    "new": {
+      "token": "noise_mixer",
+      "text": "Several sine-based contributions make a field. Change the layers and compare the pattern while each image rescales its own contrast.",
+      "by": "local-review-2026-09-19"
+    }
+  }
+]

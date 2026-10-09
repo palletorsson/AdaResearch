@@ -1,0 +1,43 @@
+{
+  "map": "Point_One",
+  "host": "existing Endless Museum corridor",
+  "source": "commons\\primitives\\point\\point_condition.gd",
+  "source_sha256": "8b0b7eca1cc404a7668561d748c3cb1f46682dfae40fa14431334faba09e58f7",
+  "existing_artifacts": [
+    "point_absent",
+    "point_visible",
+    "point_solid",
+    "point_pedestal",
+    "point_sun_switch"
+  ],
+  "reuses": [
+    "Day Zero: edit, save, restart the museum",
+    "Point Zero: source reading, assignment and _ready"
+  ],
+  "introduces": [
+    "named values: const, var and inferred type",
+    "Vector3 as a position",
+    "a mesh resource and the node displaying it",
+    "a separate physics body and collision shape"
+  ],
+  "supplied": [
+    "condition selection",
+    "labels, material and subdivision",
+    "large pedestal configuration",
+    "museum player and light rig"
+  ],
+  "student_edits": [
+    "small point height 1.12 to 1.7",
+    "shared small radius 0.14 to 0.3",
+    "collision radius multiplied by two"
+  ],
+  "defers": [
+    "grabbing and reference frames to Coordinates",
+    "distance to Lines",
+    "shape subdivision and materials"
+  ],
+  "new_artifacts": [],
+  "next": "Point_Coordinates after author reading",
+  "physical_headset_tested": false,
+  "native_checks": 38
+}

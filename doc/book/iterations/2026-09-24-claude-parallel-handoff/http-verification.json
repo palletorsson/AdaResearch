@@ -1,0 +1,28 @@
+{
+  "links_resolve_locally": true,
+  "duplicate_ids": false,
+  "no_scripts_required": true,
+  "zip_is_local_only": true,
+  "responses": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "exact_file_match": true
+    },
+    {
+      "path": "START_HERE.md",
+      "status": 200,
+      "exact_file_match": true
+    },
+    {
+      "path": "manuscripts/randomness.md",
+      "status": 200,
+      "exact_file_match": true
+    },
+    {
+      "path": "references/Point_One.md",
+      "status": 200,
+      "exact_file_match": true
+    }
+  ]
+}

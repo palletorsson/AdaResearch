@@ -1,0 +1,117 @@
+--- Trans_Pre/before
++++ Trans_Pre/after
+@@ -1,4 +1,4 @@
+-A transformation is a difference between a thing and its copy, and there are exactly three kinds.
++This chapter begins with three kinds of difference between a thing and its copy: translation, rotation and scale.
+ 
+ It comes first because everything after it uses these three differences to get you somewhere. Here nothing moves and nothing is crossed - but the room does climb, in three levels, and the climb is part of the argument: the deck where the cube stands alone, a shelf a metre up, a summit two metres up. One yellow block stands alone, and then the same block stands twice, four times over, and each time the copy differs from the original in one way only. You walk the difference. That is the lesson, and it is the whole of it.
+ 
+@@ -15,9 +15,9 @@
+ 
+ A yellow block with an orange wire, half a metre on a side, alone on the deck behind a two-metre wall that closes off the rest of the room. That is the cube. It is the unit the whole museum is built from, and in this room it is also the thing being copied. Walk into it and a rainbow of seven bands stands up over it; every block in the room does that once, and the first one you reach does it first.
+ 
+-Two blocks, four cells apart on the same row - and the second stands a metre up, on a plinth you reach by the ramp between them. Nothing about it is different from the first except where it is. Down here that difference is a vector with a metre of height in it, and the ramp is the part of it you walk. That difference is translation, and it is the only one of the three you could describe without looking at the block at all: a vector, four along x, nothing else.
++Two blocks, four cells apart on the same row - and the second stands a metre up, on a plinth you reach by the ramp between them. Nothing about it is different from the first except where it is. Down here that difference is a vector with a metre of height in it, and the ramp is the part of it you walk. That difference is translation, and it is the only one of the three you could describe without looking at the block at all: a vector, four along x and one up.
+ 
+-Two blocks again, and the second is turned forty-five degrees about the upright. It stands in the same place and it is the same size, and its corners point where the first block's faces do. That difference is rotation, and it is the first one that needs the block to have a shape: you cannot turn a point.
++Two blocks again, and the second is turned forty-five degrees about the upright. It stands in the same place and it is the same size, and its corners point where the first block's faces do. That difference is rotation, and its change of facing needs a shape to make it visible: a dimensionless point has no facing of its own to compare.
+ 
+ Two blocks, and the second is one and a half times the size. Same place, same facing, more of it. That difference is scale, and it is the one you cannot see from inside: were you scaled with it, nothing would have happened.
+ 
+--- Trans_Introduction/before
++++ Trans_Introduction/after
+@@ -1,6 +1,6 @@
+ A transformation is defined by what it refuses to change.
+ 
+-Melencolia left you with a solid that would not move. This is the room where the primitives finally do, and there are exactly three ways they can: a thing can go somewhere else, it can turn, or it can grow. The chapter's whole question is asked in the first hall and answered in the last: when everything changes, what stays the same? Each of the three moves has a different answer, and each is named for the one thing it gives up.
++The previous room compared transformed copies, then repeated the changes over time. This hall puts three of those operations to work across gaps: a thing can go somewhere else, it can turn, or it can grow. The chapter's whole question is asked in the first hall and answered in the last: when everything changes, what stays the same? Each of the three moves has a different answer, and each is named for the one thing it gives up.
+ 
+ ## Three ways to close a gap
+ 
+--- Trans_Pit/before
++++ Trans_Pit/after
+@@ -35,4 +35,4 @@
+ 
+ The pit does not care which move sent you into it. Fire is the same fire under all three rooms, and the reload is the same reload. The matrices in the first hall were true: translation preserved everything but position, rotation everything but direction, scale everything but size. They were true of the blocks and the slabs. You were not in the matrix. You were in the room, and from inside the room every one of those preservations arrives as a body coming toward you.
+ 
+-That is the end of the chapter, and it is the chapter turned round. Three ways of closing a gap, seen from the gap. The teleporter is at the far end, past the last block. The next chapter is colour, which moves nothing at all.
++That is the end of the chapter, and it is the chapter turned round. Three ways of closing a gap, seen from the gap. The teleporter is at the far end, past the last block. The next rooms introduce arrays: positions that can keep their addresses while their occupants change.
+--- Vectors_Act2_VectorArithmetic/before
++++ Vectors_Act2_VectorArithmetic/after
+@@ -143,4 +143,4 @@
+ 
+ That is the act, and it is a definition no page could give you, because each verb was something your body did before it was something you knew. Nothing here was a symbol. Every operation was a thing one vector did to another, and you were the thing doing it.
+ 
+-The next act takes these and spreads them over space and time, so that a vector is no longer one arrow you hold but a field of them, everywhere at once, and the arrow stops holding still.
++Before these operations spread into fields, the next room uses them to separate a launch velocity into components and compare the resulting arcs.
+--- Vectors_Act4b_Oscillation/before
++++ Vectors_Act4b_Oscillation/after
+@@ -151,6 +151,6 @@
+ 
+ ## These keep a rhythm
+ 
+-Spring, pendulum, cradle, bounce, lever, wind. Forces that repeat, conserve and balance, and every one of them keeps faith for the same reason: the pull back is proportional to how far you have been pulled, and the sign on it points home.
++Spring, pendulum, cradle, bounce, lever and wind do not repeat or balance for one shared reason. An ideal spring supplies a restoring force proportional to displacement; a pendulum approximates that relation at small angles. Collisions, static balance and wind need their own accounts.
+ 
+-The last hall asked what a force does to a body. The next one stops asking that, and asks what a force does to a room.
++The next room follows gravity through orbits. Keep the direction of the force distinct from the body's continuing motion.
+--- FormFinding_Annealing/before
++++ FormFinding_Annealing/after
+@@ -52,6 +52,6 @@
+ 
+ That is the chapter, and it ends by turning against its own first sentence. A form is the answer to a minimisation problem, and matter finds those answers by falling. Four halls of that: the marble, the chain, the settling mesh, the balanced mobile, none of them drawn, each one the shape that costs the least.
+ 
+-Then this one. If falling all the way down is how a form is found, the fully found form is a crystal, and a crystal is over. What is alive is what stopped part way, in a basin wide enough that it can be knocked about and come back, resting at a minimum it has not finished with.
++Then this one. Reaching the lowest value in a model is not the same as finding the form you want. A shallow basin can preserve a useful response to disturbance even when a deeper basin gives a lower score. That comparison is a choice about this model's purpose, not a test that separates living matter from dead matter.
+ 
+-Next: the same question in the language of matter that will not hold still at all.
++Next: build a form and inspect the rule that decides whether it has settled well enough.
+--- Fractal_Recursion/before
++++ Fractal_Recursion/after
+@@ -72,4 +72,4 @@
+ 
+ What stops any of them is the same thing: a counter, checked at the top, that eventually says no. Without it the engine does not make an infinitely detailed object; it makes nothing, because it never returns. The base case is not a safety rail bolted on afterwards. It is the half of the rule that makes the other half mean anything.
+ 
+-Next: what these rules make, measured, and the two moves that make all of it.
++Next: follow a branch into its descendants and test which relationships repeat as their sizes and directions change.
+--- Fractal_KochSierpinski/before
++++ Fractal_KochSierpinski/after
+@@ -64,6 +64,6 @@
+ 
+ A line is one-dimensional and a plane is two, and everything you were taught to draw sits on one of those whole numbers. Replace and remove both break that. The Koch curve is more than a line and less than a plane, at 1.26. The Sierpinski triangle is 1.585. The pyramid is exactly two and is not a surface.
+ 
+-The number is not a metaphor and not a ranking. It is a measured slope, taken off a log-log plot on the bench in the corner, and it says how fast detail appears as you look closer. That is what a dimension has always been. Nobody noticed it could be fractional until somebody measured a coastline.
++The number is not a metaphor and not a ranking. It is a measured slope, taken off a log-log plot on the bench in the corner, and it says how fast detail appears as you look closer. That is what a dimension has always been. Here, a non-integer dimension describes a scaling relation that an integer label would conceal.
+ 
+-Next: a fractal nobody built at all.
++Next: removal enters a volume, where openings repeat through the faces of a cube.
+--- Fractal_MandelbrotSet/before
++++ Fractal_MandelbrotSet/after
+@@ -38,4 +38,4 @@
+ 
+ That is the chapter's last honesty, and it belongs here rather than in the halls before it. Recursion had a base case that stopped it. The Koch curve had a line thickness that hid it. Julia had a zoom that breathed. And the atlas of all Julia sets has an iteration cap, which is the same admission in its final form: the rule is infinite and every look at it is finite.
+ 
+-Next: what these rules make when they are set to grow rather than to draw.
++Next: compare two recursive constructions and explain exactly what each repeats.
+--- SoftBodies_Soft_Body_Deformation/before
++++ SoftBodies_Soft_Body_Deformation/after
+@@ -43,7 +43,7 @@
+ 
+ <!-- @radiolaria -->
+ 
+-In the corner, nine glass skeletons that do not belong to this argument yet. They are silicon lattices grown by single-celled organisms, and they are the last room of this chapter standing early in the first one. Look at them and move on; the sentence that makes sense of them needs the rest of the walk.
++In the corner, nine glass skeletons that do not belong to this argument yet. They are the geometric skeletons that a later room will return to; here they stand early in the chapter, before the comparisons that make their role clearer. Look at them and move on; the sentence that makes sense of them needs the rest of the walk.
+ 
+ <!-- @ -->
+ 
+--- SoftBodies_Obsticals/before
++++ SoftBodies_Obsticals/after
+@@ -47,6 +47,6 @@
+ 
+ That is why the negotiation matters more than the moment. A rigid collision destroys its own evidence, resolving into two new velocities and nothing else. A soft collision leaves the encounter written into the object, for as long as the springs take to argue it away, and sometimes longer.
+ 
+-The chapter has now had three answers to who decides the form. The material alone. The field it hangs in. And here, the thing it runs into. The next answer is the one that outlasts all of them: what happens when the record does not argue itself away, and the encounter stays.
++The chapter has now had three answers to who decides the form. The material alone. The field it hangs in. And here, the thing it runs into. The next gallery keeps contact in view while changing its surfaces and configurations. Compare the setup before assigning the result to a property of the body.
+ 
+-Next: a skeleton that kept the shape of the water it grew in.
++Next: softness meets a different surface.

@@ -1,0 +1,35 @@
+# final.md: discovery and critical tutorial
+
+Editorial direction from Palle, carried into a six-room voice pass by Astra on 11 September 2026. This supplements the existing authorial direction in `doc/book/DISCOVERY_AND_REMAINDERS.md` and `doc/book/VOICE_STUDY.md`. It is a voice trial for Palle to read, not a declaration that the book's voice is settled.
+
+The reader is learning how to make a world while discovering what each way of making permits, selects and leaves outside it. The narrator is a knowledgeable companion who gives the reader time to notice. Code provides a precise way into an encounter. Its clarity should make another experiment possible, rather than settle the meaning of the room.
+
+## Write the encounter
+
+Begin with a particular body, relation or discrepancy: a bob crossing the same place in another direction; a mark that continues after the bob turns; a fold that changes a route. Establish enough of the scene for a reader without the headset to imagine it.
+
+Give an action before its expected consequence when the reader can discover that consequence. Let a tentative explanation last long enough to be tested. Follow with the smallest actual code operation that makes the observation understandable. Identify excerpts and omissions; preserve the names and units needed to reproduce the comparison. Put exhaustive parameter inventories and derivations in technical.md.
+
+Return to the encounter with a changed purpose. A coarse record can be useful for duration; a strobe can reveal repetition while concealing motion; an extra random draw can become a palette-making choice. The limitation is part of a working solution. Do not assume the finest, smoothest or most faithful representation is always the desirable one.
+
+Critical inquiry should arise inside these choices. Which part of a gesture is admitted? Which direction counts as width? What does a shared seed hold equal, and what does it leave unrelated? What can the current controls change? These questions can open onto bodies, access, taste and agency without declaring that a small program proves or refutes a whole theory.
+
+Keep desire available. A listener may want to return to a timbre before knowing its name; a visitor may follow an apparent passage even when its walls have no collision. The unfamiliar can invite a relation. Avoid making every anomaly a defect or every irregularity a symbol of freedom.
+
+Let sentence rhythm vary with the encounter. The book needs continuity, not an identical paragraph recipe in every room. Do not finish every observation with a second sentence explaining its moral. A room may leave the reader a new use, an unresolved comparison or a question worth carrying ahead.
+
+## Keep the account honest
+
+An invitation to try is not a claim that a person has already tried. Keep runtime and listening status in field notes and the review. Do not invent a control, promise an exact drag result, or prescribe a subjective sound quality as the only correct answer. Describe enough of the implemented consequence for a reader on the page to follow it.
+
+No pristine original is promised behind the implementation. Even a baseline has an envelope, a finish, a clock and a chosen starting condition. Explain the decisions that matter here; allow the reader to recognise that others remain for later.
+
+Preserve primary artifact anchors, and align the book hero and line with the artifact the chapter actually teaches. A technically accurate source citation cannot establish that a passage has the right voice: read it aloud and ask where the reader gets to think.
+
+## This pass
+
+Revised finals: WaveFunctions_Intro, WaveFunctions_Pendulum, WaveFunctions_Sine_Space, WaveFunctions_Effect_Sound, Random_Definition and Noise_Perlin_Simplex. Existing anchors retained. Sound and Random book heroes aligned with DualBallFMController and seed_replay_demo. Previous versions and source fingerprints are in `doc/book/iterations/2026-09-11-discovery-voice/`.
+
+Effect Sound remains provisional pending its runtime and listening pass. The revised text uses PLAY/COMPARE and the implemented parameter readout instead of promising that a small lift produces index 4 or that a listener must hear one predetermined quality. The unmodulated baseline still passes through envelope and tanh shaping; it is not described as a pure, unprocessed origin.
+
+No map, artifact behaviour or runtime result changed in this editorial pass. The supporting critical essays are research material with their own claims to examine, not automatic authority for assertions in final.md. In particular, do not import unmeasured QFEP values or claims that an isolated script settles a philosopher's theory.

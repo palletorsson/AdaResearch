@@ -1,0 +1,14 @@
+[
+  {
+    "before": "A mesh supplies the visible shape. Drawing it has not made a boundary for the visitor's body.",
+    "after": "A mesh supplies the visible shape. Its dimensions begin here:\n\n```gdscript\nvar sphere := SphereMesh.new()\nsphere.radius = radius\nsphere.height = radius * 2.0\n```\n\nHere, `radius` is 0.14 metres. Twice that gives the sphere its height. These lines give it dimensions the renderer can use. Drawing it has not made a boundary for the visitor's body."
+  },
+  {
+    "before": "The program has given the second sphere a `SphereShape3D` inside a `StaticBody3D`. One part tells the renderer what to draw; another tells the physics system where movement meets resistance. We have made those surfaces coincide. They could have been arranged otherwise.",
+    "after": "The program attaches a separate collision shape to a fixed body, a `StaticBody3D`. This second sphere uses the same radius:\n\n```gdscript\nvar sphere_shape := SphereShape3D.new()\nsphere_shape.radius = radius\n```\n\nOne part tells the renderer what to draw; another tells the physics system where movement meets resistance. Sharing a radius helps them agree. We have made those surfaces coincide. They could have been arranged otherwise."
+  },
+  {
+    "before": "`WORLD` measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses `to_local()` to express that same position relative to the frame. The `LOCAL` card prints the result beside `WORLD`. The numbers differ because they answer to different references.",
+    "after": "The two cards give the same point different addresses. `WORLD` measures from the scene's origin; `LOCAL` uses the coloured frame. We can write that relation in two lines, with `point` naming the held body and `frame` the reference beside it:\n\n```gdscript\nvar world_p := point.global_position\nvar local_p := frame.to_local(world_p)\n```\n\n`global_position` supplies the world address. `to_local()` expresses it relative to the frame, accounting for the frame's position, orientation and scale. The point has not become two things. We have asked where it is from two different references."
+  }
+]

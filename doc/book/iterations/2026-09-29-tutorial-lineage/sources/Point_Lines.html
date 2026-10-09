@@ -1,0 +1,478 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Lines · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Lines">← Tutorial lineage</a></p><h1>Point Lines</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Lines/final.md">Raw captured source</a></p><pre># Lines, Networks, Measure
+
+The point gave us somewhere to begin. Now put two positions into relation.
+
+&lt;!-- @line_black_box --&gt;
+
+In the black room, a pale line hangs between two small points. Take one end and move it. The line grows longer, turns, shortens. Release it. The end stays where your hand left it, still joined to the other.
+
+A number on the wall follows the distance between them. Try changing the direction without changing that number. The dark room leaves very little else to look at: two positions, and what happens between them.
+
+Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. We can describe that relation with two small operations:
+
+```gdscript
+var displacement := b - a
+var distance := displacement.length()
+```
+
+The first keeps a direction as well as a distance. The second gives us the length alone. Reverse the subtraction and the direction reverses; the length stays the same. Your hand may keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
+
+Through the side passage: **CAN YOU CONNECT THE DOTS?**
+
+&lt;!-- @line_demo --&gt;
+
+Two black points wait beside a barrier: **DO NOT CROSS.** Bring one close to the other, then let go. Watch for the segment that joins them. What else moved?
+
+The barrier flies apart.
+
+Keep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
+
+Already something else has attached itself to the lesson. Joining two points has opened a passage.
+
+&lt;!-- @do_not_cross_barrier --&gt;
+
+Try crossing where the barrier stood. Before it broke, an invisible collision shape filled the space from the floor to the bar. The space looked open beneath the plank, but you could not pass through it. When it breaks, that boundary stops holding too. Disconnecting the points does not close the passage. After a short interval, the barrier returns, waiting if your body is still in its place.
+
+Connecting the points sends another instruction to the barrier. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.
+
+The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line&#x27;s prohibition.
+
+In Coordinates, leaving the target made another arrival possible. Here, joining the points gives us a few seconds of passage. The clock has acquired another task: it puts a prohibition back.
+
+&lt;!-- @redline --&gt;
+
+A red line marks another division. A colour can lend urgency to the same thin form. What, here, gives it the right to stop you?
+
+Ahead, the instruction moves from a barrier to the floor.
+
+&lt;!-- @walk_this_line_marking --&gt;
+
+Across the glass cover of a shallow basin, a black stripe: **WALK THIS LINE.** The glass supports your crossing.
+
+Try following it. Then walk alongside it. Cross it at an angle. The stripe stays straight through all three journeys.
+
+Did a sideways step feel like a mistake? The marking does not measure how closely you follow it. Its script draws the stripe and lettering. Yet you may already have corrected a step in answer to the words.[^point-lines-ahmed-paths] You might also find yourself dancing around the same steady line.
+
+Choose which end to start from, and the line gives you a direction to follow. It cannot settle what following will mean to a body.
+
+&lt;!-- @player_trace --&gt;
+
+Turn and look at the route your movement has left behind. Compare it with the stripe. Where do the two lines part company?[^point-lines-ahmed-deviation] One was waiting for you; the other has taken shape while you moved.
+
+The recorder saves positions and joins them with straight segments. The X and Z come from your headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.
+
+Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.
+
+The trace has kept more positions. How many did it need? What happened between the ones it kept?
+
+&lt;!-- @line_relations_gallery --&gt;
+
+## A body for the line
+
+After the crossing, the hall opens into four views: pairs, crosses, uprights and a grid. A familiar mark begins to acquire other uses.[^point-lines-ingold]
+
+The point needed a sphere before we could see it. Here a line takes the form of a stick, a plank, a luminous rod, a measure, a beam. The mathematical line has no width. Each of these has enough width to appear, and a shape the hand can find.
+
+We might call this a *conceptual skin*: the body we give an idea so that we can encounter it. Look at what comes with that gift. The plank has a broad face and a narrow edge. The ruler divides its length into intervals. The light can seem to have hardly any substance, although this one is a mesh with a pickup body. Their common direction does not tell us what it will be like to hold them.
+
+The barrier already gave this distinction consequences. Its visible plank and its invisible collision shape occupied different amounts of space. Here the thin rods have slightly wider pickup shapes so a hand can find them. What we can see and what we can touch are being decided together, but they need not coincide.
+
+Two long black lines run along the floor, with equal intervals marked beside them. Walk between them. Their distance apart stays the same, although the gap seems to narrow ahead. A pair of lines can suggest depth in a flat drawing. Here you can walk into the depth they describe.
+
+Look up at the edge of the ceiling. A shorter length hangs nearer to you. Move a little sideways until it seems to join the edge. A lower or taller eye finds that agreement from another place. Then take another step. The line comes away from the ceiling and hangs over the room again.
+
+The two objects have stayed still. Your movement let them become one edge, then gave them back their distance. What else in the room is held together by the place from which you see it?
+
+## Four views
+
+Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it?
+
+Beside them, two planks lie parallel. Walk between them. From one end the gap narrows into the distance; moving your head changes that appearance without moving either plank. Then move a plank. Now you have changed the relation itself. The two graduated measures beyond them give the hand another pair to compare.
+
+In the third view, two beams stand upright. A thin luminous horizon crosses the space behind them. Your own upright posture has company. Turn one beam in your hand and keep it there. The room does not correct it when you let go.
+
+The fourth view begins with six lines: three in each direction. Together they suggest a plane divided into places. Pull one line towards you. Its crossings separate as you move around it; a regular drawing opens into depth. Behind it, three more bars already occupy different directions. There are edges here without a surface stretched between them.
+
+The fixed lines on the walls keep another version of these arrangements. Your hands can change the bodies in the room while the wall keeps its own arrangement.
+
+Take the measuring laser. Its number ends at the body the beam meets. Keep it on a rod and the rod breaks; the reading reaches whatever lies behind it. The instrument that measured a distance has removed one of its limits.
+
+The hammer can break these studies too; the pink gun leaves them coloured for a while. Wait, and the study returns. Take the rod again. Its ability to come back belongs to the room we have written, as much as its ability to resist a hand.
+
+## Follow this line
+
+On the floor: **FOLLOW THIS LINE.**
+
+The mark reaches the wall. It turns upwards and continues across the plaster. You can follow it with your eyes. Your next step meets the wall&#x27;s collision boundary.
+
+The earlier connection opened a barrier. This line opens nothing. An instruction has reached the limit of the body to which it was addressed. Do you stop, turn, look up? The mark remains available to another kind of following.
+
+&lt;!-- @anamorphic_cross --&gt;
+
+At the exit the passage narrows: **× + × + × +**. Cross the first X and your health falls.
+
+&lt;!-- @health_cross --&gt;
+
+The plus gives some back, opening into a brief scatter of light and a rising sound. Hurt, recovery, hurt, recovery. Two crossed lines can read as a refusal or an offer of care; here those associations have been given access to your body.
+
+&lt;!-- @ --&gt;
+
+Look back at the route you have left among these arrangements. The question taking us towards the exit has become precise: **what must we save if we want to keep something of the journey?**
+
+Two endpoints were enough for the segment. To remember the detour, we will need to add something.
+
+Bring the detour.
+
+[^point-lines-euclid]: See Euclid, [*Elements*, Book I, Postulate 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/post1.html), on drawing a straight line between two points. The construction concerns the finite segment; extending it and treating it as an unbounded line are further steps. The postulate is a historical reference, not an account of the renderer or the barrier’s programmed response.
+
+[^point-lines-ingold]: Tim Ingold, [*Lines: A Brief History*](https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399) (Routledge Classics edition, 2016), especially “Traces, Threads and Surfaces” and “Up, Across and Along.” Walking, drawing, weaving and connecting enter his inquiry as different practices of making lines. This helps us take the room’s proliferation seriously: a connector, a trace and a boundary need not perform the same work merely because we call each a line.
+
+[^point-lines-ahmed-paths]: Sara Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology) (2006), 15–20, especially 16: repeated journeys make paths, while established paths help direct later journeys. Ada takes up this relation as an experiment. Its stripe is authored rather than worn into the ground, and its instruction does not score compliance. Being oriented by a line, evaluated against one and physically blocked by one remain different operations to investigate.
+
+[^point-lines-ahmed-deviation]: Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), 20, considers how deviations can leave marks and generate other lines. This sampled drawing offers one specific record, not the whole history of the body’s deviation.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Lines/tutorial.md">Raw captured source</a></p><pre># Point Lines — keep two ends in relation
+
+In the black box, take one endpoint. The other stays where it is. Between them, the pale segment turns and changes length. The number on the wall follows.
+
+Coordinates gave us two positions in the same frame. Here we use them together. Day Zero has already supplied the running project; Point One supplied the visible markers. The new work is a relation between their positions.
+
+## Two positions, one distance
+
+Open the supplied [line study](../../../doc/book/studies/point-lines/README.md). It contains A, B, a thin cylinder and a readout. This is a small desktop construction study. The museum keeps the XR pickup we borrowed in Coordinates; this download does not include that player.
+
+In `line.gd`, A starts at `(-0.75, 1.12, 0.0)` and B at `(0.75, 1.12, 0.0)`. Their height and depth agree. Only X differs.
+
+```gdscript
+var displacement := b - a
+var distance := displacement.length()
+```
+
+Subtract the start from the end: the displacement is `(1.5, 0, 0)`. Its length is `1.5`. We use one scene unit as one metre. Change B&#x27;s X to `0.25`. The distance becomes one metre. You have changed one endpoint; the line and readout agree without editing either of them.
+
+## Turn without lengthening
+
+Keep A at its original position. Give B the position `Vector3(-0.75, 2.62, 0.0)`. The segment now stands upright. Its length is still 1.5 metres. Return B to its first position, then change its Z component instead. You have moved out of the first plane.
+
+Reverse the subtraction to `a - b`. The direction reverses; the length does not. A distance alone cannot tell us which end we chose as the start.
+
+## Read again as the endpoints move
+
+Here is the complete lesson script in the download:
+
+```gdscript
+extends Node3D
+
+func _ready() -&gt; void:
+    $A.position = Vector3(-0.75, 1.12, 0.0)
+    $B.position = Vector3(0.75, 1.12, 0.0)
+
+func _process(_delta: float) -&gt; void:
+    var a: Vector3 = $A.position
+    var b: Vector3 = $B.position
+    var displacement := b - a
+    var distance := displacement.length()
+    $Segment.show_between(a, b)
+    $Readout.text = &quot;%.2f m&quot; % distance
+```
+
+`_ready()` places the two markers once. `_process()` reads their positions again each frame. While running in the editor, use the Remote scene tree to change B&#x27;s position: both the segment and the number follow. This borrows the editor as our moving hand. In the museum, the grab system moves the endpoint instead. The relation needs the positions, whichever tool changes them.
+
+`show_between()` is our supplied drawing helper, in `segment.gd`. It places the cylinder halfway between A and B, gives it their distance as its height, then turns its long axis towards B. Its thickness is a choice made for visibility. If both ends coincide, the helper hides the cylinder rather than trying to point it in an undefined direction. Its rotation code can stay borrowed for now.
+
+`%.2f` rounds the readout to two decimal places. The underlying positions keep more precision. A hand can move without changing the displayed number.
+
+## A connection can do something else
+
+The next museum encounter asks **CAN YOU CONNECT THE DOTS?** Bring the points close and release. Their connection draws a line and breaks the nearby **DO NOT CROSS** barrier. The passage opens because an additional instruction connects those events. Distance alone cannot decide whether you are allowed through.
+
+The hammer and laser use the same reversible break response. The laser reads the first body its ray reaches; holding its beam on a study for 1.2 seconds breaks that study. Eight seconds later it returns. We leave that pickup, collision and reset machinery in the supplied museum. Implementing it is not a prerequisite for making our first segment.
+
+## What have the two ends left out?
+
+Walk the black stripe, then take a detour. Compare the recorded trail with the straight line. The same starting and ending positions give the same displacement, however you travel between them. Our script replaces its reading every frame. It keeps no journey.
+
+In the open room, two lines can make a plus or a cross; moving one away from the other reveals the depth hidden by the first view. In the exit corridor, those signs have been given different consequences: × damages, + restores. Their meanings are attachments to their geometry.
+
+Keep the two positions, subtraction, length and the supplied segment renderer. In Trace, we will begin keeping the positions in between.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Lines/technical.md">Raw captured source</a></p><pre># Point Lines — implementation reference
+
+The beginner exercise is [tutorial.md](tutorial.md). This file records the hall’s working attachments.
+
+## Segment and connection
+
+`commons/artifacts/line_black_box/line_black_box.gd` builds the entrance, two held endpoints, a live readout and a reset. It uses `commons/primitives/line/line.gd` to draw their segment. `LineStudy` is the breakable target; the box, approach and reset remain outside that target.
+
+`commons/primitives/snappoint/demos/line_demo.gd` listens to `SnapConnectionManager.connection_created`, recognises its own two points, and finds the nearest unbroken `DoNotCrossBarrier` in the same hall. The callback is deferred out of the physics flush. Disconnecting rearms the demonstration, so a rebuilt barrier can be opened again.
+
+The barrier&#x27;s visible body and collision boundary are suspended together by the shared reaction component. Restoration checks player occupancy before restoring physical collision. Its old permanent-destruction fallback remains for placements without a reaction component.
+
+## A tool that reaches the study
+
+Explicit `#reactive:break#rebuild:8` placements use `commons/interactables/artifact_reactions/router.gd` and `reaction.gd`. Tool-only surface proxies occupy physics layer 24; the original pickup and player shapes remain. The gallery exposes separate rods and fixed mesh studies. A strike does not erase all four views.
+
+`laser_measure` raycasts bodies, reports the first hit, and accumulates 1.2 seconds of dwell on one target. An opt-in reaction requires a held laser. Desktop carry uses `desktop_hook_target` and grab/drop callbacks; XR uses the existing `is_picked_up()` state. Looking away or dropping cancels accumulated dwell. A placed instrument continues measuring.
+
+The hammer takes three accepted strikes; the pink gun and catalyst tint. Breaks disable visibility, processing and collision, then restore the same instance after eight seconds. Architecture, reset controls and health services are kept usable.
+
+## The exit corridor
+
+Map cells x=12, z=29..34 hold × + × + × +. Their trigger depths are 0.42 m, separated by one-metre centres, so a body encounters them in order. `#passage:1` opts into corridor behavior without changing ordinary pickups elsewhere.
+
+X composes DangerZone and accepts both the museum Walker and XR bodies. It takes 7 health on entry, then 14 every 0.6 seconds while occupied. This uses GameManager&#x27;s direct damage operation: the generic museum route converts damage into a shared 33-point creature bite and can suppress the next gate with its cooldown. The passage keeps its own timing and uses the existing damage flash and health beep.
+
++ offers up to 21 health whenever the visitor is below full. It remains if no recovery can be delivered. A taken plus emits a generated spatial chime and twelve expanding strokes, and returns after eight seconds. No imported sound file or new audio service is needed.
+
+## Portable construction
+
+`doc/book/studies/point-lines/line.gd` places two markers once and reads them each frame. `segment.gd` owns cylinder length, midpoint and local-Y alignment; coincident endpoints hide the cylinder. Every node used by the lesson is supplied in `line.tscn` or the Day Zero base. It includes no XR rig.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Lines/intent.md">Raw captured source</a></p><pre># Point Lines — current agreement, 30 September 2026
+
+**Arrival:** Coordinates has supplied positions in a shared frame and a working hold. **New construction:** a segment between two positions; subtract endpoints, measure displacement length, update the visible relation. **Departure:** two endpoints do not remember the path; Trace will keep intermediate positions.
+
+## Three related selections
+
+- Reading: black-box measure → connect the dots / barrier → red division → walk and recorded trace → four views → laser&#x27;s consequence → wall&#x27;s limit → ×/+ passage.
+- Hall: keep the authored 27 × 37 layout and its secondary comparisons. The primary route is not a quota of one artifact. Measuring instruments and recovery gates remain available; breakable studies restore after a short delay.
+- Making: the small executable `doc/book/studies/point-lines` study uses two markers in one frame. New operations are subtraction and length. The cylinder renderer is supplied, named and available to inspect. The museum’s pickup, snapping, laser, damage and reset code is reference material, not an entrance exam for the learner.
+
+The critical question grows from each operation: a connection opens a prohibition; a straight instruction meets a crooked walk; a tool removes what it measures; two crossed strokes acquire the power to harm or care. Preserve the pleasure of arranging lines in space. Do not turn every encounter into an implementation exercise.
+
+Earlier intent and curation decisions remain in the dated review history. Current placement authority is map_data.json; final.md and tutorial.md are separate reading and making companions.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Lines/critical.md">Raw captured source</a></p><pre># Point Lines - Critical Reflection
+
+## From Sequence to Network
+
+The current Point_Lines hall begins with a single measured relation in the black box: two points, one distance.
+
+Point_Lines introduces **multiplicity**: many lines, many relations, many intersections.
+
+This is the shift from:
+- Sequence → Network
+- Relation → System
+- Measure → Framework
+
+When lines multiply, they produce not just more measurements, but a **structure for organizing all future measurements**. This is the grid.
+
+## The Grid as Governance
+
+The grid is not neutral. It is a **technology of addressability** - the system that makes space legible to power.
+
+Consider what the grid enables:
+- **Property boundaries** - &quot;This parcel belongs to owner X&quot;
+- **Taxation** - &quot;Plot (23, 45) owes $X in annual fees&quot;
+- **Surveillance** - &quot;Subject detected at coordinate (12.4, 56.7)&quot;
+- **Logistics** - &quot;Deliver package to grid cell C4&quot;
+- **Military targeting** - &quot;Ordinance strike at coordinates...&quot;
+
+The grid transforms space from lived experience into **administrative territory**.
+
+## The Cadastral System
+
+The term &quot;cadastral&quot; comes from the Latin *capitastrum* - a register for the poll tax. A cadastral map divides territory into parcels for taxation and ownership.
+
+The grid is computational space&#x27;s cadastre. It makes space:
+- **Countable** - How many plots?
+- **Ownable** - Who controls this cell?
+- **Taxable** - What is the value here?
+- **Enforceable** - Where are the boundaries?
+
+To impose a grid is to perform **cadastral capture** - transforming free space into indexed property.
+
+## Colonial Mapping
+
+Historically, grids have been tools of colonial administration:
+
+**The Jefferson Grid (U.S.)** - The Public Land Survey System divided western territories into perfect square-mile sections, ignoring indigenous territories, watersheds, and topography. The grid enabled rapid land distribution to white settlers.
+
+**The British Ordnance Survey** - Mapped Ireland in the 1820s with precise coordinate grids, facilitating tax collection and military control during colonial occupation.
+
+**The Torrens System (Australia)** - Grid-based land registration that legally erased Aboriginal land claims by requiring documentary proof within the colonial cadastral framework.
+
+The grid does not describe territory - it **produces** territory as property.
+
+## Quantization as Violence
+
+The grid requires **quantization** - forcing continuous space into discrete cells.
+
+What gets erased in quantization:
+- **Gradual transitions** - Boundaries are hard, not fuzzy
+- **Local irregularities** - The grid is uniform, ignoring terrain
+- **Embodied scale** - Grid spacing is arbitrary, not human
+- **Contested zones** - A cell cannot be partially owned
+- **Movement** - Coordinates are static snapshots, not flows
+
+Quantization is **lossy compression**. It discards information that doesn&#x27;t fit the grid&#x27;s geometric logic.
+
+## The Politics of Straightness
+
+Lines in this map are straight. Straightness is **efficiency** - the shortest path, the most direct route.
+
+But straightness is also ideology:
+
+The straight line privileges:
+- **Speed** over attention (don&#x27;t curve, don&#x27;t pause)
+- **Destination** over journey (optimize arrival time)
+- **Universality** over locality (same grid everywhere)
+- **Calculation** over intuition (measurable paths only)
+
+Queerness, by contrast, is often **curved, circuitous, looping**:
+- Wandering paths that explore rather than arrive
+- Returns and repetitions that refuse linearity
+- Detours that prioritize experience over efficiency
+
+The grid insists: **Move straight. Move efficiently. Be trackable.**
+
+## Parallel Lines and Shared Orientation
+
+The parallel_line_puzzle asks: Can you maintain parallelism?
+
+Parallelism is **shared orientation** - agreement about direction.
+
+Consider what parallel lines represent:
+- **Military formations** - Soldiers in ranks, moving in unison
+- **Highway lanes** - Traffic channeled into parallel flows
+- **Assembly lines** - Products moving along identical tracks
+- **Data structures** - Parallel arrays with aligned indices
+
+Parallelism enables **mass coordination**. It&#x27;s the geometry of synchronized movement, of collective discipline.
+
+But parallels also reveal ideology: They **never meet**. Parallel lines maintain eternal distance - they cannot converge, cannot touch, cannot merge.
+
+What would non-parallel lines look like? Lines that:
+- **Converge** - Coming together rather than staying apart
+- **Diverge** - Splitting and exploring different paths
+- **Interweave** - Crossing and tangling rather than maintaining order
+- **Spiral** - Refusing the straight axis entirely
+
+## The Modulor Man: Body as Grid
+
+The `line_builder_3d` constructs Le Corbusier&#x27;s Modulor Man - a human figure reduced to a coordinate system.
+
+Le Corbusier wrote: &quot;The Modulor is a measuring tool based on the human body and on mathematics.&quot;
+
+But which human body?
+- An adult male body
+- A European body (183cm was &quot;standard&quot; French height)
+- An able body (arms that extend precisely, legs that stand erect)
+- A body abstracted into proportions (113cm, 183cm, 226cm)
+
+The Modulor claims to be universal, but universality is always **particular universality** - one body&#x27;s proportions imposed as the standard.
+
+The grid inscribes this body into architecture: doorways, ceiling heights, room dimensions all scaled to the Modulor&#x27;s measures.
+
+**Whose body fits the grid?**
+
+## What the Grid Cannot Hold
+
+The grid, by its nature, excludes:
+
+- **Continuous movement** - Only discrete positions can be indexed
+- **Embodied locality** - The grid is the same everywhere
+- **Ambiguous boundaries** - Cells have precise edges
+- **Emergence** - The grid is predefined, not discovered
+- **Resistance** - There is no coordinate for &quot;refusal&quot;
+
+The grid makes space calculable by making it **empty of meaning**. A coordinate is just a number. (2, 3) tells you nothing about why you might want to be there.
+
+## Queer Grids
+
+What would a queer grid look like?
+
+Perhaps:
+- **Irregular spacing** - Cells sized by local importance, not universal measure
+- **Soft boundaries** - Zones that overlap and blur
+- **Affective coordinates** - &quot;The place where I felt safe&quot; as an address
+- **Contested indices** - Multiple names for the same location
+- **Drifting origins** - The (0, 0) point that moves over time
+
+A queer grid would refuse the fantasy of **neutral, universal, objective space**. It would insist that all coordinates are situated, all grids are political, all addressing systems privilege some movements over others.
+
+## The Gallery as Grid
+
+The map&#x27;s architecture - a 7×21 elongated gallery - is itself a grid.
+
+You move through discrete cells. Your position is always indexable: (x, z) = (3, 10).
+
+The space stages its own critique: You cannot move continuously through the gallery. You must walk the grid, constrained by its geometry.
+
+The VR system reports your position 90 times per second as (x, y, z) coordinates. You are **always already gridded**, always already addressable.
+
+## Conclusion: Addressability as Capture
+
+Point_Lines teaches how lines multiply into systems, how systems produce addressability, how addressability enables governance.
+
+The grid is not innocent geometry. It is **organizational technology** - the infrastructure that transforms space into territory, territory into property, property into data.
+
+When you see grid_lines overlay the world, you are witnessing the moment when continuous space becomes **cadastral space** - indexed, owned, controlled.
+
+The question is not whether to use grids (we must - we need addressable memory, navigable space, shared coordinate systems). The question is whether we can remain **aware** that every grid is a choice:
+- A choice about what counts as position
+- A choice about what scale matters
+- A choice about whose body defines proportion
+- A choice about which paths are legible
+
+The grid is not the territory. It is one **political representation** of territory, disguised as mathematical objectivity.
+
+To work with grids is to inherit this politics. The critical task is to ask: **Whose movements does this grid enable? Whose movements does it constrain?**
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Lines/artifacts.md">Raw captured source</a></p><pre># Point Lines — current artifact inventory
+
+Primary reading: black-box measure → connection / barrier → stripe / trace → four views and laser → ×/+ exit.
+
+Coordinates are source-map cells (x, z). Repeated instances remain individually listed; secondary placement does not require a passage in final.md.
+
+| Cell | Artifact |
+|---|---|
+| 6, 1 | `player_trace:0:0#plinth:0#pin:1` |
+| 20, 1 | `line_proof_pair:0:0#plinth:0#pin:1#reactive:break#rebuild:8` |
+| 2, 2 | `line_black_box:0:0#plinth:0#pin:1#offset:0.5,0,0.5#reactive:break#rebuild:8#reaction_target:LineStudy` |
+| 8, 2 | `line_demo:90:0#plinth:0#reactive:break#rebuild:8` |
+| 11, 2 | `do_not_cross_barrier:75:0#reactive:break#rebuild:8` |
+| 22, 2 | `line:90:1.5#plinth:1.12,micropod#reactive:break#rebuild:8` |
+| 24, 2 | `scale_lines:90:1#rungs:body#reactive:break#rebuild:8` |
+| 15, 4 | `redline:0:0:1.4#reactive:break#rebuild:8` |
+| 21, 5 | `parallel_line_puzzle:180:1.2#plinth:0.66#offset:0.00,0.60,0.00#reactive:break#rebuild:8` |
+| 1, 6 | `lightrod#reactive:break#rebuild:8` |
+| 20, 6 | `parallel_lines#reactive:break#rebuild:8` |
+| 21, 6 | `axis_line#reactive:break#rebuild:8` |
+| 22, 6 | `line_collection#reactive:break#rebuild:8` |
+| 24, 6 | `street_talker:180:0#reactive:colour#rebuild:8` |
+| 1, 7 | `lightrod#reactive:break#rebuild:8` |
+| 9, 7 | `walk_this_line_marking:0:0.9:2#plinth:0#pin:1#paint_color:000000#reactive:colour#rebuild:8` |
+| 20, 7 | `grabbable_line:0:1#plinth:1.13,micropod#offset:0.00,0.05,0.00#reactive:break#rebuild:8` |
+| 21, 7 | `laser_exploding_sphere:0:2#plinth:1.05,micropod#offset:0.00,0.10,0.00#reactive:break#rebuild:8` |
+| 24, 7 | `line_sledgehammer:0:3` |
+| 1, 8 | `lightrod#reactive:break#rebuild:8` |
+| 20, 8 | `laser_exploding_sphere:0:2#plinth:1.05,micropod#offset:0.00,0.05,0.00#reactive:break#rebuild:8` |
+| 21, 8 | `line_collection#reactive:break#rebuild:8` |
+| 22, 8 | `laser_measure:0:1#burns:1` |
+| 1, 9 | `modulor_man_demo:0:0#plinth:1.0#offset:0,-0.5,0#reactive:break#rebuild:8` |
+| 1, 10 | `lightrod#reactive:break#rebuild:8` |
+| 25, 10 | `wall_health_station:270` |
+| 6, 11 | `laser_measure:280:1.2#burns:1` |
+| 1, 12 | `lightrod#reactive:break#rebuild:8` |
+| 5, 15 | `laser_measure:135:1#burns:1` |
+| 25, 16 | `two_point_ruler:0:0#plinth:0#pin:1#block_base_y:0.75#reactive:break#rebuild:8` |
+| 13, 17 | `line_relations_gallery:0:0#plinth:0#pin:1#reactive:break#rebuild:8` |
+| 2, 19 | `line:0:1#plinth:1.12,micropod#offset:0.00,0.05,0.00#reactive:break#rebuild:8` |
+| 11, 22 | `sketch_monitor:0:1.0#reactive:break#rebuild:8` |
+| 2, 25 | `perspective_lines#vanishing_points:one#reactive:break#rebuild:8` |
+| 25, 25 | `two_points_line#reactive:break#rebuild:8` |
+| 25, 27 | `science_screen#reactive:break#rebuild:8` |
+| 12, 29 | `anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8` |
+| 1, 30 | `wall_abstract:0:1.6#work:cube_wire#reactive:break#rebuild:8` |
+| 12, 30 | `health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc` |
+| 25, 30 | `wall_abstract:0:1.6#work:divide_diagonal#reactive:break#rebuild:8` |
+| 12, 31 | `anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8` |
+| 12, 32 | `health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc` |
+| 12, 33 | `anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8` |
+| 12, 34 | `health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc` |
+| 4, 35 | `line_space_workshop:180:0#plinth:0#pin:1#reactive:break#rebuild:8` |
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Lines/summary.md">Raw captured source</a></p><pre># Point Lines — measure, permission, passage
+
+Fourth hall in Primitives, after Point_Coordinates and before Point_Trace. The first encounter is the 4 m black box: two held endpoints, a changing segment and a distance readout. Next, connecting the dots opens DO NOT CROSS. Walk the black stripe over the basin and compare its straightness with the player&#x27;s recorded route.
+
+The open gallery develops plus/X, parallel, vertical and grid relations through grabbable lines, perspective and ceiling-edge alignment. The held measuring laser and hammer can break the studies; they rebuild after eight seconds. The exit corridor alternates three damage Xs and three healing pluses, with a visible and audible recovery response.
+
+The making companion introduces only displacement, distance and a segment that follows two known positions. Its complete portable study borrows the renderer. Arrays, adjacency lists and a new XR controller implementation are deferred. The main text follows what a line makes possible, asks who attached those consequences, and brings the missing journey forward into Trace.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Lines/blurb.md">Raw captured source</a></p><pre>A line connects two points. Two lines cross — the X marks intersection. Parallel lines organize direction. Then: perspective, scale, the grid. Lines become measure. Measure becomes pleasure — the satisfaction of knowing distance, the elegance of proportion. Measure is also violence. What doesn&#x27;t fit the grid is remainder, error, erased. The line inherits this: efficient, relentless, forgetting everything but endpoints.
+</pre></section></body></html>

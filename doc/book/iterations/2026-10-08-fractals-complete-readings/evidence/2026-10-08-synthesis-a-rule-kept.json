@@ -1,0 +1,29 @@
+{
+  "checks": 80,
+  "reports": {
+    "lesson-and-artifact": 46,
+    "museum": 34
+  },
+  "source_sha256": {
+    "commons/artifacts/fractal_recipe_table/recipe.gd": "829bf30efe7c7745600d126a9a9edb2393a63009b701f5dad93b6b16b5360cd8",
+    "commons/artifacts/fractal_recipe_table/point_body.gd": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+    "commons/artifacts/fractal_recipe_table/museum_recipe_table.gd": "bf8ea2075088c77169bf609c9c49ae09677f4b1bc6863bf45d86a5f072a2d464",
+    "commons/artifacts/fractal_procedure_gallery/fractal_procedure_gallery.gd": "6ab1e8ddfbb7b3f6e9fa4d9fe7d90c0626e7759505f425f3abb2b849420d6f9c",
+    "commons/maps/Fractal_Synthesis/tutorial.md": "596cf7d845eba4e7c4f503f5c55dd3fe37c11294eae7930744e9cc0bc89fbb05",
+    "commons/maps/Fractal_Synthesis/final.md": "9b891f4cd63c6dc1c3b204541bc06fd010bc6d1cf9638830f04e1d00b4337a43",
+    "commons/maps/Fractal_Synthesis/technical.md": "6f0b479512c5771302278fd12306c39cf96331d62ec61fc788be41860d0056a3",
+    "commons/maps/Fractal_Synthesis/map_data.json": "528ab71d91df65486071ecf2d970777469d713ac7b7801c0093665eb4bfdf88f",
+    "tools/probes/synthesis_recipe.gd": "cd7efad93f9f51e657463b8731c44c2935bbfeeece5b312deebe90d38f8abe4b",
+    "tools/probes/synthesis_recipe_museum.gd": "97c2c1ac7fcecc214cadf22a35b8485e7f11090e3231c6070bd7b486cd03d0c9",
+    "commons/artifacts/lsystem_editor/lsystem_editor.gd": "851d2be860a8b43bc80c02c560df8a39f53f1717fe2d439cb9ad78f910224a91"
+  },
+  "student_extraction": {
+    "recipe.gd": "fd3eb451d814dea0b72eff9e2a9b164adb78edf98916b58cd4d9cd536b144009",
+    "point_body.gd": "2cf3a890cf011740bc22670b217d560973d43f29371124b16bddb11238a4cf5c"
+  },
+  "headset_verified": false,
+  "map_edit": "Only exit marker utility cells (1,31) and (9,31); original artifacts and structure preserved.",
+  "before_capture": "New table hidden in current room; repaired exit remains. Not a historical screenshot.",
+  "onward_arrival": "LSystems_Grammar_Lab confirmed by native walker input.",
+  "next_hall_issue": "Grammar Lab own onward exit reports blocked approach; no edit to that hall."
+}

@@ -1,0 +1,72 @@
+{
+  "tool": "Built-in image_gen",
+  "plates": [
+    {
+      "slug": "colour-context",
+      "map": "Color_Context_Placed",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-2a11830b-fdc3-4976-9419-667c4f250002.png",
+      "refinements": [
+        "Edit ONLY the colour stripes on the cylindrical shafts in the TWO BOTTOM PANELS. They currently form horizontal rings up the shaft, which is the wrong construction. Replace these horizontal colour bands with MANY NARROW VERTICAL STRIPES running from the shaft's base to the underside of its broad dark cap. The six-colour order red, orange, yellow, green, blue, violet repeats around the CIRCUMFERENCE, not upwards. Each visible stripe keeps ONE colour along its entire height. Around the unseen back the sequence continues. In the bottom-left paired views, show different sides of the same fixed shaft so different vertical stripes appear at its left and right edges. In bottom-right the same vertical-striped shaft supports the existing crown. Keep the caps, crowns, characters, plinths, captions, inset and ALL FOUR upper panels unchanged. Do not add rotation arrows: only the viewpoint changes."
+      ]
+    },
+    {
+      "slug": "colour-flashlight",
+      "map": "Color_Flashlight",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-d3b06e10-17ec-466c-907f-104d9e18bc9a.png",
+      "refinements": [
+        "Edit ONLY the BOTTOM-RIGHT panel. The light well is not three glowing windows cut into different walls. Replace the three glowing wall rectangles with THREE LARGE HORIZONTAL RECTANGULAR LIPS arranged at three ascending HEIGHTS around the SAME OPEN VERTICAL LIGHT WELL. Looking upwards sees nested/overlapping rectangular opening edges with pink/violet light on their undersides; the same blue-grey rendered sky remains visible through all three at the top. Solid walls close the shaft between the lips. The visitor remains on a raised landing at right and companion below, but replace the visible stairs with a shallow sloped RAMP up to that landing, retaining the handrail. No glowing wall windows, no new doors, no changing sky colour. Preserve all five other panels and EVERY caption, title, figure appearance and footer."
+      ]
+    },
+    {
+      "slug": "colour-nails",
+      "map": "Color_Nails",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-a00dc9e5-b3e0-4db4-8411-a5ad94c35771.png",
+      "refinements": [
+        "Correct the control geometry in the TWO TOP PANELS only: RGB is ONE THREE-DIMENSIONAL BOX, not three separate boxes for R, G and B. Replace each trio of little boxes with ONE open cubic frame containing ONE movable red point, with R, G and B labels on THREE PERPENDICULAR frame edges. The visitor in top-right moves that one point in the shared volume. Preserve the red swatch and same-place inset. Top-left may show one second box in the background marked SKIN, but never a row of three per-channel boxes. In BOTTOM-RIGHT, change ONLY the petite sculpture hand's skin from peach to the SAME lavender as its giant twin; its nails stay red. The visitor's hand and identity remain unchanged. All other pictures, characters, anatomy, captions and text stay exactly the same."
+      ]
+    },
+    {
+      "slug": "colour-rainbow",
+      "map": "Color_Rainbow",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e5e8932c-3ed9-4b54-99af-f69e599f0f5a.png",
+      "refinements": [
+        "Edit ONLY the RIGHT arch in the MIDDLE-LEFT panel, under the label '2 bands'. It currently has four coloured rings, which is incorrect. Make it EXACTLY TWO SOLID COLOUR BANDS: one broad warm ORANGE outer band and one broad BLUE inner band. Each takes half of the existing total coloured width. Preserve EXACTLY the existing outer semicircular boundary and inner opening so the passage is not narrowed. Remove all red and purple sub-bands from that RIGHT arch. Do not touch the LEFT six-band arch, steps, control, characters, remaining panels, labels, title or footer. Two authored colours, not a gradient."
+      ]
+    },
+    {
+      "slug": "colour-pillar",
+      "map": "Color_Pillar",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e6ac58ce-5a74-41a0-b87b-0135b55dcac3.png",
+      "refinements": [
+        "Correct ONLY TOP-LEFT and MIDDLE-LEFT panels. TOP-LEFT is a cropped view of a rectangular HSV column field. Show a simple THREE-COLUMN by THREE-ROW visible patch: across the foreground X row the columns are pale RED, pale GREEN, pale BLUE; directly behind EACH respective column, keep its SAME hue but increase saturation, so the back row is strong RED, strong GREEN, strong BLUE. Moving backwards along Z never changes red into yellow or blue. Tops match the overhead ceiling's local colour; bases darken to black. Retain floor arrows X HUE and Z SATURATION aligned to these two grid directions. Do not print 3x3 or imply this is the whole field. MIDDLE-LEFT: extend the pink foreground pillar right up to the pink CEILING so its top actually meets the ceiling. Remove any open air gap and exposed top silhouette. Matching pink obscures their join, fog-like yet with no literal fog or dissolved geometry. Keep the finite geometry inset. Preserve all other panels, characters, captions, title, footer and card values.",
+        "Edit ONLY the MIDDLE-LEFT picture's MAIN pink pillar, not its inset or text. The pink pillar must physically MEET the pink ceiling; presently it visibly stops with an exposed top face. Extend it UP until it merges into the ceiling at the upper border of this panel. Remove the visible top face and top corner silhouette. Keep the vertical sides below, with their edges becoming hard to distinguish at the matching pink ceiling, rather than stopping in midair. The ceiling and pillar share colour at the join. No transparent pillar, no smoke, no dissolved geometry. Preserve all other five panels, the finite-geometry inset and all captions/footer exactly."
+      ]
+    },
+    {
+      "slug": "colour-grid",
+      "map": "Color_Grid_Pallet",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-f4302908-9a43-4c7c-a669-5981e023d87f.png",
+      "refinements": [
+        "Edit ONLY the MIDDLE-LEFT panel. The pink square at (10,10) stays in its current position and keeps its colour. Move the white selection outline to the floor tile IMMEDIATELY TO THE RIGHT of that pink square, sharing its right edge. That adjacent tile is (11,10). Move the '(11,10)' label to sit directly above that newly outlined adjacent tile. Remove the old white outline and old (11,10) label farther right. Do not change any tile colour, the pink square's label, figures, console, captions, diagrams or any other panel. One X increment moves ONE neighbouring cell, not three."
+      ]
+    },
+    {
+      "slug": "colour-paint",
+      "map": "Color_Paint",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-3a7259b1-853f-4883-a23d-78830bd117a0.png",
+      "refinements": [
+        "Two small corrections only, preserving the other artwork and ALL captions/title/footer. BOTTOM-RIGHT: replace the four little isolated paint-mark cards on the foreground plinth with ONE square colour-and-surround study: three nested solid squares, warm ochre outer, blue middle, rose inner. It is a separate colour comparison after Albers, not an archive of the canvas's gesture marks. No extracted spray marks on that plinth. BOTTOM-LEFT: in the small inset ONLY, add readable label 'After release'; the hand's index finger is lifted OFF the nozzle button and the can is pointed aside without spraying, while the red narrow run on the canvas still extends downwards. Keep the main close-up spraying image unchanged. This distinguishes stopped hand from still-moving paint. Change nothing else.",
+        "Text correction ONLY. Replace the bottom footer line beneath the six panels with exactly this grammatically correct sentence: \"Your hand has finished before your paint has.\" The current footer incorrectly says 'the finished'. Use 'has finished'. Preserve the entire illustration, all six panels, every other caption, title and label unchanged."
+      ]
+    },
+    {
+      "slug": "colour-walls",
+      "map": "Color_Walls",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-f4c8c37a-484b-4c04-a933-c7848155c7e1.png",
+      "refinements": [
+        "Targeted diagram corrections; preserve the six-panel composition, figures, captions, title and footer. MIDDLE-LEFT: replace ONLY the HSV model's smooth multicolour cylinder surface with an openly schematic cylindrical frame bearing SEPARATED colour sample dots. Each vertical column of dots keeps one hue; bottom dots are BLACK, intermediate dots darker versions of that hue, and top dots saturated/vivid. Hue changes around the circumference, value increases upwards. Include pale dots towards the central axis to indicate lower saturation. Keep H around, S outward and V upward arrows and RGB model unchanged; label small 'HSV schematic'. MIDDLE-RIGHT: remove the endpoint number labels '1' and '16' beside BOTH comparison rows and add 'Selected samples' above the rows. Preserve the red and blue endpoints and distinct darker RGB/bright magenta HSV middles: these are selected colour samples, not an exact inventory count. BOTTOM-LEFT: change the red panel's '16' to '10'; these IDs must be within the installed twelve-panel set. BOTTOM-RIGHT: add small 'Detail' above both rail comparison pictures, so their different visible numbers read as cropped views, not disappearance of rails. All other artwork and text unchanged.",
+        "Correct ONLY colours of the HSV schematic DOTS in the MIDDLE-LEFT panel. Keep every dot's position, model outline, labels/arrows and the RGB cube untouched. For EACH VERTICAL DOT COLUMN, take its TOP dot's colour and make every dot directly BELOW a progressively darker shade of that SAME hue, finally black at the base. A red-topped column must go red, dark red, deeper red, black; NEVER yellow or orange beneath red. A green-topped column goes green, dark green, black. A blue-topped column stays blue shades. Hue changes only from one circumferential column to the next, not vertically. Pale centre-axis columns may darken from white/grey to black. This is HSV value, so all columns darken downwards without changing hue. Change NO other artwork, text, panel or footer."
+      ]
+    }
+  ]
+}

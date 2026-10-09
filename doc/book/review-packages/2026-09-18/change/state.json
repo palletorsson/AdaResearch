@@ -1,0 +1,118 @@
+{
+  "sequence": "change",
+  "declared_maps": [
+    "Change_Intro",
+    "Flow_Field"
+  ],
+  "museum_map_authored_order": [
+    "Change_Intro",
+    "Flow_Field"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "Change_Intro",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 2038,
+      "text_record_match": "not recorded",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "change",
+        "primary_tokens": [
+          "tangent_slope_workbench",
+          "riemann_sum_workbench",
+          "ftc_bridge"
+        ],
+        "status": "desktop_verified_headset_pending",
+        "learner_verified": false,
+        "reason": "Change and accumulation",
+        "map_sha256": "161c0c111cc9b333aae61dd21fe88a6351869d7e24476ee08277f0df3d9dcfbc"
+      },
+      "manuscript_artifact_order": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "role_primary_order": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Flow_Field",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 714,
+      "text_record_match": "not recorded",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "change",
+        "primary_tokens": [
+          "flow_field_painter"
+        ],
+        "status": "desktop_verified_headset_pending",
+        "learner_verified": false,
+        "reason": "Flow and trajectories",
+        "map_sha256": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11"
+      },
+      "manuscript_artifact_order": [
+        "flow_field_painter"
+      ],
+      "role_primary_order": [
+        "flow_field_painter"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/change/ftc_bridge.gd",
+      "algorithms/change/ftc_bridge.tscn",
+      "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+      "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+      "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd",
+      "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+      "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+      "commons/artifacts/tangent_slope_workbench/rate_comparison.gd",
+      "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+      "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/interactables/slider_horizontal.tscn",
+      "commons/ui/control_panel.gd",
+      "commons/ui/interface_presets.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/interactables/interactable_handle.gd",
+      "res://addons/godot-xr-tools/interactables/interactable_slider.gd",
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/joystick_smooth.tscn",
+      "res://commons/interactables/materials/ui_shadow.tres",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.gd",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/ui/control_console.gd",
+      "res://commons/ui/interface_housing.gd",
+      "res://commons/ui/materials/handle_glow.tres",
+      "res://commons/ui/materials/metal_dark.tres",
+      "res://commons/ui/materials/panel_white.tres",
+      "res://commons/ui/materials/track_groove.tres",
+      "res://commons/ui/text_screen.gd",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

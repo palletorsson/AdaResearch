@@ -1,0 +1,329 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_3D_Wave_Propagation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_3D_Wave_Propagation">← Tutorial lineage</a></p><h1>WaveFunctions 3D Wave Propagation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/final.md">Raw captured source</a></p><pre># The motion that travels
+
+How can a disturbance travel while its parts stay near their places?
+
+&lt;!-- @coupled_oscillator_lattice --&gt;
+
+Choose one sphere near the centre of the lattice. Follow that sphere alone for several movements. Then widen your attention to its neighbours. Their movement can be much smaller. Compare when they rise together and when their displacements differ, without abandoning your first sphere as a reference. The panel begins with COUPLED and SINE. RESET returns the same still lattice and starts its drive again.
+
+The spheres remain at their horizontal grid positions. Their movement is vertical. The pattern spreading across them can therefore travel without any one sphere crossing the whole display. This is the distinction to establish before naming the result a wave.
+
+Select two neighbouring spheres and look for a moment when their heights differ. Follow the pair through several movements, describing their separation rather than only the larger pattern. Now choose two spheres farther apart and make the same comparison. Similar heights at one instant do not establish that the two places are always moving together; watch which way each moves next. If you find a repeating relationship, check whether it persists through another cycle. This is a way to investigate coordination without assuming every visible crest is a travelling object. The pattern needs more than one instant to reveal what is changing and what remains related.
+
+Press SINE; the button now reads PULSE. After a short wait, the centre receives one push. Follow what happens beyond it. Press COUPLED; it becomes INDEPENDENT, and the same push begins from the same still lattice. What has stopped travelling? Press INDEPENDENT to restore COUPLED before explaining the difference. Every button restarts the comparison; it does not cut a moving wave midway.
+
+Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. Both influences follow one law: a force in proportion to how far something has been moved from where it rests, Robert Hooke&#x27;s &quot;as the extension, so the force&quot; of 1660.[^hooke] The program gathers those forces and then updates the oscillators&#x27; velocities and displacements. SINE keeps driving the centre; PULSE adds a single initial velocity after half a second. The same source can now be tried with and without the links.
+
+The readout reports the largest displacement reached by one immediate neighbour since the reset, in millimetres. Under SINE it may be easy to miss that small response among the larger centre movements. PULSE makes a different comparison visible without changing the spring, mass or damping settings. A measurement can help you notice a motion; it does not replace watching which sphere moves next.
+
+Look at an edge and then at the interior. An edge cell has fewer neighbours. A boundary is therefore part of the mechanism, not merely where the picture happens to stop. The finite arrangement cannot behave exactly like an unlimited medium, and these simplified links do not claim to reproduce every material that carries waves.
+
+Try describing the display twice: first as a collection of individual moving spheres, then as a pattern moving through their relationships. Each account makes something visible and leaves something out. Neither requires the spheres to agree consciously or to know the pattern they collectively form.
+
+&lt;!-- @ --&gt;
+
+The switch disconnects all the links at once. Removing only selected neighbours remains a further experiment: a different boundary inside the same lattice. The next room turns to sound, where one oscillation can modify another and a relationship between simple sources can change what you hear.
+
+[^hooke]: Robert Hooke announced the law as an anagram in 1660 and spelled it out in *Lectures de Potentia Restitutiva* (1678): *ut tensio, sic vis*. The pendulum&#x27;s small-angle approximation in the first hall turns its rule into this one. A spring alone, with a knob for how it dies, stands on a bench in the Synthesis Lab.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/tutorial.md">Raw captured source</a></p><pre># 3D Wave Propagation
+
+Waves spread from a source. Build ripples that attenuate with distance and interfere where they meet.
+
+Declare the source.
+
+```gdscript
+class_name WaveSource
+extends Node3D
+
+@export var frequency: float = 1.0
+@export var amplitude: float = 1.0
+@export var speed: float = 3.0
+```
+
+Source holds the three numbers every wave needs. Speed is how fast a crest travels outward.
+
+Sample the wave field at a point.
+
+```gdscript
+func sample_at(p: Vector3, t: float) -&gt; float:
+    var d := p.distance_to(global_position)
+    var falloff: float = 1.0 / max(d, 0.1)
+    return amplitude * falloff * sin(TAU * frequency * (t - d / speed))
+```
+
+Distance becomes delay. Amplitude falls as one over distance. The sample returns displacement at that point and time.
+
+Render the field on a mesh.
+
+```gdscript
+func update_field(mesh: ArrayMesh, t: float) -&gt; void:
+    for i in vertices.size():
+        var h := 0.0
+        for source in sources:
+            h += source.sample_at(vertices[i], t)
+        heights[i] = h
+    mesh.surface_update_vertex_region(0, 0, heights.to_byte_array())
+```
+
+Each vertex sums contributions from every source. The mesh updates every frame. Interference emerges from the sum.
+
+Place two sources for a double slit.
+
+```gdscript
+func build_double_source() -&gt; void:
+    var a := preload(&quot;res://commons/artifacts/wavefunctions/source.tscn&quot;).instantiate()
+    var b := preload(&quot;res://commons/artifacts/wavefunctions/source.tscn&quot;).instantiate()
+    a.position = Vector3(-1.0, 0, 0)
+    b.position = Vector3(1.0, 0, 0)
+    sources = [a, b]
+```
+
+Two sources, one metre apart. The interference pattern appears as bands. The bands move toward either source as amplitudes change.
+
+Colour peaks and troughs.
+
+```gdscript
+func tint_by_height(material: ShaderMaterial) -&gt; void:
+    material.set_shader_parameter(&quot;peak_color&quot;, Color(0.9, 0.7, 0.3))
+    material.set_shader_parameter(&quot;trough_color&quot;, Color(0.2, 0.4, 0.7))
+```
+
+Peaks warm, troughs cool. The field becomes weather across a reflective surface.
+
+Let the learner drop a pebble.
+
+```gdscript
+func _on_pebble_dropped(pos: Vector3) -&gt; void:
+    var s := preload(&quot;res://commons/artifacts/wavefunctions/source.tscn&quot;).instantiate()
+    s.position = pos
+    s.amplitude = 1.5
+    s.lifetime = 3.0
+    sources.append(s)
+```
+
+A dropped pebble spawns a short-lived source. Ripples expand outward. The learner makes weather.
+
+Attenuate lifetime.
+
+```gdscript
+func _process(dt: float) -&gt; void:
+    for s in sources:
+        s.lifetime -= dt
+    sources = sources.filter(func(s): return s.lifetime &gt; 0.0)
+```
+
+Sources fade out. The field returns to stillness unless the learner keeps dropping pebbles.
+
+You have released the wave to travel. The next map, Effect Sound, turns the wave audible.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Readout the nearest source&#x27;s phase at the player.
+
+```gdscript
+func readout_phase(player: Vector3) -&gt; float:
+    if sources.is_empty(): return 0.0
+    var nearest: Node3D = sources[0]
+    for s in sources:
+        if s.global_position.distance_to(player) &lt; nearest.global_position.distance_to(player):
+            nearest = s
+    return nearest.global_position.distance_to(player) / nearest.speed
+```
+
+Phase delay is distance divided by speed. The readout shows how far behind the source the learner is standing.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/technical.md">Raw captured source</a></p><pre># WaveFunctions 3D Wave Propagation — Technical
+
+The map fills a volume with spherical waves emanating from multiple sources. Each source emits a wavefield with distance-dependent attenuation and phase delay. Where fields overlap, they superpose.
+
+```gdscript
+class_name WaveSource extends Node3D
+
+@export var frequency: float = 2.0       # Hz
+@export var amplitude: float = 1.0
+@export var attenuation: float = 1.0     # falloff exponent (2.0 = inverse-square)
+@export var speed: float = 5.0           # propagation speed (units/sec)
+
+func amplitude_at(point: Vector3, time: float) -&gt; float:
+    var distance: float = global_position.distance_to(point)
+    if distance &lt; 0.01: return amplitude
+    var delay: float = distance / speed
+    var phase: float = 2.0 * PI * frequency * (time - delay)
+    var falloff: float = 1.0 / pow(distance, attenuation)
+    return amplitude * falloff * sin(phase)
+```
+
+## Superposition
+
+Multiple sources&#x27; fields add. Constructive interference produces maxima; destructive interference produces nodes.
+
+```gdscript
+class_name WaveField extends Node3D
+
+var sources: Array = []  # array of WaveSource
+
+func field_at(point: Vector3, time: float) -&gt; float:
+    var total: float = 0.0
+    for src in sources:
+        total += src.amplitude_at(point, time)
+    return total
+```
+
+## Visualising the Field
+
+A lattice of small markers samples the field at discrete points. Each marker&#x27;s brightness or scale reflects the local amplitude.
+
+```gdscript
+class_name MarkerLattice extends MultiMeshInstance3D
+
+@export var resolution: int = 12
+@export var extent: float = 10.0
+
+var field: WaveField
+
+func _ready() -&gt; void:
+    multimesh = MultiMesh.new()
+    multimesh.transform_format = MultiMesh.TRANSFORM_3D
+    multimesh.use_custom_data = true
+    multimesh.instance_count = resolution * resolution * resolution
+    # position each instance
+
+func _process(_delta: float) -&gt; void:
+    var t: float = Time.get_ticks_msec() / 1000.0
+    var idx := 0
+    for ix in range(resolution):
+        for iy in range(resolution):
+            for iz in range(resolution):
+                var p := instance_position(ix, iy, iz)
+                var amplitude := field.field_at(p, t)
+                multimesh.set_instance_custom_data(idx, Color(amplitude, amplitude, 1.0, 1.0))
+                idx += 1
+```
+
+## Complexity
+
+The field at a single point is O(S) for S sources. The full lattice update is O(R³ · S) per frame for resolution R. At R=12, S=4, that is 6912 source evaluations per frame, or about 410,000 per second at 60 fps — trivial on modern CPUs but expensive enough that the map caps resolution.
+
+GPU evaluation via a compute shader reduces this dramatically: the same lattice can be updated at 128³ resolution in under a millisecond on modern hardware. The map uses CPU for pedagogical readability.
+
+## Damping
+
+Real wavefields lose energy over time and distance through viscous damping and scattering. A damping term in the propagation reduces amplitude as a function of time:
+
+```gdscript
+func damped_amplitude(amplitude: float, damping: float, time: float) -&gt; float:
+    return amplitude * exp(-damping * time)
+```
+
+The map uses minimal damping so the wavefields persist long enough to observe interference patterns.
+
+## Interference Geometry
+
+For two sources separated by distance d with the same frequency, maxima form hyperbolas where the path-length difference is an integer multiple of the wavelength. The hyperbolas&#x27; asymptotes make an angle with the line between sources that depends on the wavelength-to-separation ratio.
+
+Within the sequence, 3D_Wave_Propagation is where oscillation acquires spatial extent. The subsequent maps treat waves as fields rather than as point oscillators.
+
+## Wave Equation Derivation
+
+The scalar wave equation for propagation is ∂²u/∂t² = c²∇²u, where c is the propagation speed. Finite-difference discretisation produces a stable update rule: u(x, t+dt) = 2u(x,t) - u(x,t-dt) + (c·dt/dx)²(u(x+dx,t) + u(x-dx,t) + ... - 6u(x,t)) in 3D. The Courant-Friedrichs-Lewy (CFL) condition requires c·dt/dx ≤ 1/sqrt(3) in 3D for stability.
+
+```gdscript
+class_name WaveSim extends Node3D
+
+@export var grid_size: Vector3i = Vector3i(32, 32, 32)
+@export var dx: float = 0.25
+@export var dt: float = 0.05
+@export var c: float = 1.0
+
+var u_now: PackedFloat32Array
+var u_past: PackedFloat32Array
+
+func step() -&gt; void:
+    var u_next := PackedFloat32Array()
+    u_next.resize(u_now.size())
+    var coef: float = pow(c * dt / dx, 2)
+    # Inner cells only; boundary cells are zero-damped
+    for x in range(1, grid_size.x - 1):
+        for y in range(1, grid_size.y - 1):
+            for z in range(1, grid_size.z - 1):
+                var i: int = idx(x, y, z)
+                var laplacian: float = u_now[idx(x+1,y,z)] + u_now[idx(x-1,y,z)] + u_now[idx(x,y+1,z)] + u_now[idx(x,y-1,z)] + u_now[idx(x,y,z+1)] + u_now[idx(x,y,z-1)] - 6.0 * u_now[i]
+                u_next[i] = 2.0 * u_now[i] - u_past[i] + coef * laplacian
+    u_past = u_now
+    u_now = u_next
+```
+
+The field lattice renderer samples u_now at each marker position. Grid-based wave simulation is O(N³) per step for an N×N×N grid.
+
+## Absorbing Boundaries
+
+Simulating infinite space in a finite grid requires boundary conditions that absorb outgoing waves without reflection. The simplest is a damping zone near the grid edges where amplitudes are multiplied by a factor less than 1 each step. More sophisticated approaches use Perfectly Matched Layers (PML) that absorb at all angles.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/intent.md">Raw captured source</a></p><pre>Concept: Waves as disturbances traveling through media — emanating from sources, diminishing by inverse-square law, interfering where they meet. Identity is permeable: to exist in a medium is to be distorted by it.
+Sequence role: Fifth map in Wavefunctions; the first intermediate-difficulty map. After four beginner maps establishing what oscillation is and where it comes from, this map introduces propagation — oscillation that moves through space. Distance fields, phase propagation (sin(time - dist)), attenuation, and interference are the new tools. This connects forward to the sound maps and synthesis lab; follows WaveFunctions_Unit_Circle; leads to WaveFunctions_Effect_Sound.
+Technical angle: wave(x,t) = A·sin(ωt - k·dist(x, source)) for propagation, attenuation as energy ∝ 1/(1+dist²), interference as wave summation (constructive at matching phase, destructive at opposing phase). The wave_propagation_3d artifact demonstrates all three; kusama_sine creates a polka-dot field of wave-displaced surfaces.
+Critical angle: Propagation transforms oscillation from a local phenomenon to a spatial one. A wave is not an object — it is a pattern of disturbance passing through a medium. The medium itself doesn&#x27;t move far; the pattern moves. This distinction (matter vs pattern) is one of the deepest in physics. The critical angle on identity — &quot;to exist in a medium is to be distorted by it&quot; — connects to the QFEP environment term: the system is shaped by the field it inhabits.
+Key artifacts: wave_propagation_3d demonstrates distance-based phase, attenuation, and interference; kusama_sine creates a wave-displaced dot field; dark_sphere sits in the propagation field as the distorted body.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/critical.md">Raw captured source</a></p><pre># Distance is the carrier — inverse-square law, interference, and the politics of the commons
+
+A wave leaves a source and spreads. The energy packed into the first wavefront is the same energy spread over a larger sphere one second later, so the amplitude at any given point drops as the square of the distance. This is the inverse-square law, and it is the first thing the map makes physical: the field is bright near the emitter and fades smoothly outward.
+
+Donna Haraway&#x27;s situated knowledge meets its physical analogue here. A wave does not impose itself on an empty space. It negotiates with distance. The learner standing near the emitter receives a strong signal; the learner standing at the far wall receives a weak one. What counts as the same wave is relative to position, and the map refuses to flatten the difference. Every spatial location is its own reading.
+
+Interference is where the politics become acute. When two sources share a space, their fields superpose: at some locations the crests align and amplitude doubles; at others a crest meets a trough and the field cancels. The lattice of small markers pulses in step with the local phase, and walking through the field means walking through loud bands and quiet ones. No single source produced the cancellation. It emerges from the meeting.
+
+This is a model for a commons rather than for a signal. Neither source owns the interference pattern. Both contributed; neither can remove it without also removing their own field. The pattern is a shared condition, and the map argues that this is the normal case rather than the exception. Isolated signals are the anomaly; interference is what happens whenever signals coexist.
+
+The attenuation parameter makes the commons political. When the inverse-square falloff is steep, the sources&#x27; fields barely overlap and the interference pattern is localised. When the falloff is shallow, the fields reach across the whole volume and the interference pattern fills it. The map lets the learner adjust the parameter and feel the difference. A shallow falloff produces a thicker commons; a steep falloff produces a privatised one.
+
+The phase relationship compounds the effect. Two sources at the same frequency produce stable interference; two sources at slightly different frequencies produce beating — amplitude rising and falling in a slow envelope. The map lets the learner tune frequency offset and watch the commons breathe. The beating is a temporal signature of disagreement rather than a spatial one, and the sources are still the same sources; only their timing has changed.
+
+Within the sequence, 3D_Wave_Propagation is where oscillation moves. Sine existed as a local shape in the earlier maps; now it travels, weakens, and meets other sines. The sequence&#x27;s later maps — sound, Bernini, Cage, AirMusic — all work with fields that obey these same rules. The commons the map demonstrates is the medium of the remaining sequence.
+
+The sequence&#x27;s later maps inherit the politics that this map names: a field is always shared, and the sharing is always structured by attenuation and phase.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/artifacts.md">Raw captured source</a></p><pre># WaveFunctions 3D Wave Propagation — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 4 artifacts*
+
+&gt; Waves move through space. Ripples spreading from a dropped stone, sound radiating from a speaker, light expanding from a star. Here oscillation gains direction — amplitude at every point, phase shifting with distance, interference where waves meet.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Kusama Sine
+![Kusama Sine](/scene-catalog/kusama_sine.png)
+
+Yayoi Kusama inspired sine wave patterns
+
+`kusama_sine`
+
+## 3D Wave Propagation
+![3D Wave Propagation](/scene-catalog/wave_propagation_3d.png)
+
+Three-dimensional wave dynamics simulation
+
+`wave_propagation_3d`
+
+## CoupledOscillatorLattice
+![CoupledOscillatorLattice](/scene-catalog/coupled_oscillator_lattice.png)
+
+12×12 oscillator grid
+
+`coupled_oscillator_lattice`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/summary.md">Raw captured source</a></p><pre># WaveFunctions 3D Wave Propagation — Summary
+
+A stone drops into water and a ring spreads from the point of impact. The same thing happens with sound leaving a speaker and light leaving a star, only in three dimensions. This map is a field where waves leave sources, travel through space, weaken with distance, and interfere where they meet.
+
+Several emitters sit in an open volume. Each radiates a spherical wave at a chosen frequency and amplitude. Around them, a lattice of small markers pulses in step with the local phase, so the wavefronts are visible as they expand. Distance attenuates amplitude by an inverse-square law; the field is brightest near the source and fades smoothly outward.
+
+Where two sources overlap, their fields add. In places the crests align and amplitude doubles; in others a crest meets a trough and the field cancels. The resulting interference pattern is drawn directly into the lattice, so you can walk through loud bands and quiet ones. Sliders change each emitter&#x27;s frequency, amplitude, and position.
+
+Within the sequence, this is the first intermediate map. Sine had been a local shape; now it moves. The vocabulary of sources, wavefronts, attenuation, and interference sets up the sound maps that follow and the synthesis lab at the end.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_3D_Wave_Propagation/blurb.md">Raw captured source</a></p><pre>Waves move through space. Ripples spreading from a dropped stone, sound radiating from a speaker, light expanding from a star. Here oscillation gains direction — amplitude at every point, phase shifting with distance, interference where waves meet.
+
+The `wave_propagation_3d` makes all three mechanisms legible in one field: phase changing with distance from source, amplitude falling by inverse-square, two wavefronts summing constructively where aligned and cancelling where opposed. `kusama_sine` stipples the field with polka-dots displaced by the wave so you can read the pattern at a glance. A wave is not an object — it is a disturbance passing through a medium, the medium barely moving while the pattern travels. To exist in a medium is to be distorted by it. This is the QFEP environment term rendered as physics.
+</pre></section></body></html>

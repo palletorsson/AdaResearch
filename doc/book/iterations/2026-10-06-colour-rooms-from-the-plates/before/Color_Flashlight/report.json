@@ -1,0 +1,186 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          9.0,
+          0.5,
+          9.0
+        ],
+        "name": "FlashlightDemo",
+        "source": "res://algorithms/postprocessing/flashlight_demo/flashlight_demo.gd"
+      },
+      {
+        "local_to_grid": [
+          10.5,
+          1.60000002384186,
+          6.0
+        ],
+        "name": "ColorSetter",
+        "source": "res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd"
+      },
+      {
+        "local_to_grid": [
+          9.5,
+          1.60000002384186,
+          6.0
+        ],
+        "name": "ColorSetter",
+        "source": "res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd"
+      },
+      {
+        "local_to_grid": [
+          8.5,
+          1.60000002384186,
+          6.0
+        ],
+        "name": "ColorSetter",
+        "source": "res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd"
+      },
+      {
+        "local_to_grid": [
+          7.5,
+          1.60000002384186,
+          6.0
+        ],
+        "name": "ColorSetter",
+        "source": "res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd"
+      },
+      {
+        "local_to_grid": [
+          24.5,
+          0.5,
+          9.5
+        ],
+        "name": "ColourLightRooms",
+        "source": "res://commons/artifacts/colour_light_rooms/colour_light_rooms.gd"
+      },
+      {
+        "local_to_grid": [
+          21.0,
+          0.5,
+          29.0
+        ],
+        "name": "ReferenceStudy",
+        "source": "res://commons/artifacts/spine_studies/station.gd"
+      },
+      {
+        "local_to_grid": [
+          21.0,
+          0.5,
+          29.0
+        ],
+        "name": "Study",
+        "source": "res://commons/artifacts/spine_studies/pink_sphere.gd"
+      },
+      {
+        "local_to_grid": [
+          36.0,
+          0.5,
+          10.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          36.0,
+          0.919999957084656,
+          10.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          30.0,
+          0.5,
+          5.0
+        ],
+        "name": "ArtPlinth1",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          30.0,
+          0.919999957084656,
+          5.0
+        ],
+        "name": "DreamBody1",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          10.0,
+          0.5,
+          17.0
+        ],
+        "name": "ArtPlinth2",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          10.0,
+          0.919999957084656,
+          17.0
+        ],
+        "name": "DreamBody2",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Flashlight",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,7 @@
+Concept: How a rotation makes a route depends on its axis, where that axis passes, the mounting of the surface and the surrounding banks. A second, separate study asks what belongs to the thing being turned: each cube or their shared array.
+Sequence role: Follows Trans_Translation; leads to Trans_RotationSpectacle. The visitor carries the distinction between a centre that stays and points that travel into the next hall.
+First court: rotation_wall_crossings. Three panels of equal dimensions use a flat central y mount, an upright bottom x hinge and an upright bottom z hinge. Each reaches its corresponding banks at ninety degrees. Mounting and bank orientation differ explicitly; this is not an axis-only controlled comparison.
+Second court: rotation_array_compare. Two rows of five cubes use the same y angle. One turns individual cubes about fixed centres; the other turns the shared parent. Only the shared row spans its front-to-back gap at ninety degrees.
+Critical angle: Rigid rotation preserves the topology of a solid; its changing relation with other surfaces can alter connectivity for a walker. A timed passage also sets conditions on who can cross.
+Scope: Two primary encounters, a still landing between them, a fixed surrounding grid. Composition order, rotating transport and whole-floor animation are outside these two studies. The previous map and texts are preserved in doc/space/rotation-studies-2026-09-09/before.
+Validation: 25 runtime checks pass on the real GridSystem. Human VR evaluation is pending.

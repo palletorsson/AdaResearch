@@ -1,0 +1,606 @@
+{
+  "checks": [
+    {
+      "id": "row/count",
+      "passed": true
+    },
+    {
+      "id": "row/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "row/all_present",
+      "passed": true
+    },
+    {
+      "id": "row/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "row/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "row/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "row/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "row/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "row/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "row/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "row/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "row/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "row/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "row/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "plane/count",
+      "passed": true
+    },
+    {
+      "id": "plane/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "plane/all_present",
+      "passed": true
+    },
+    {
+      "id": "plane/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "plane/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "plane/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "plane/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "plane/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "plane/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "plane/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "plane/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "plane/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "plane/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "plane/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "spaced/count",
+      "passed": true
+    },
+    {
+      "id": "spaced/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "spaced/all_present",
+      "passed": true
+    },
+    {
+      "id": "spaced/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "spaced/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "spaced/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "spaced/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "spaced/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "spaced/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "spaced/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "spaced/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "spaced/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "spaced/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "spaced/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "turned/count",
+      "passed": true
+    },
+    {
+      "id": "turned/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "turned/all_present",
+      "passed": true
+    },
+    {
+      "id": "turned/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "turned/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "turned/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "turned/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "turned/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "turned/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "turned/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "turned/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "turned/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "turned/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "turned/only_selected_turns",
+      "passed": true
+    },
+    {
+      "id": "turned/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "choice/count",
+      "passed": true
+    },
+    {
+      "id": "choice/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "choice/all_present",
+      "passed": true
+    },
+    {
+      "id": "choice/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "choice/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "choice/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "choice/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "choice/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "choice/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "choice/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "choice/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "choice/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "choice/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "choice/only_selected_turns",
+      "passed": true
+    },
+    {
+      "id": "choice/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "empty_width/count",
+      "passed": true
+    },
+    {
+      "id": "empty_width/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "empty_width/all_present",
+      "passed": true
+    },
+    {
+      "id": "empty_width/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "empty_width/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "empty_width/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "empty_width/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "empty_width/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "empty_width/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "empty_width/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/count",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/all_present",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/inner_length_1",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/inner_length_2",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/inner_length_3",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "empty_depth/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "single/count",
+      "passed": true
+    },
+    {
+      "id": "single/outer_lengths",
+      "passed": true
+    },
+    {
+      "id": "single/all_present",
+      "passed": true
+    },
+    {
+      "id": "single/inner_length_0",
+      "passed": true
+    },
+    {
+      "id": "single/independent_nodes",
+      "passed": true
+    },
+    {
+      "id": "single/independent_meshes_and_shapes",
+      "passed": true
+    },
+    {
+      "id": "single/placement_in_rotated_host",
+      "passed": true
+    },
+    {
+      "id": "single/matching_sensors",
+      "passed": true
+    },
+    {
+      "id": "single/persistent_labels",
+      "passed": true
+    },
+    {
+      "id": "single/readout_initialized",
+      "passed": true
+    },
+    {
+      "id": "single/out_of_bounds_ignored",
+      "passed": true
+    },
+    {
+      "id": "reference/second_name_same_body",
+      "passed": true
+    },
+    {
+      "id": "reference/neighbour_independent",
+      "passed": true
+    },
+    {
+      "id": "collection/immediate_zero_and_null",
+      "passed": true
+    },
+    {
+      "id": "collection/queued",
+      "passed": true
+    },
+    {
+      "id": "collection/freed_after_frame",
+      "passed": true
+    },
+    {
+      "id": "collection/study_survives",
+      "passed": true
+    },
+    {
+      "id": "collection/fifteen_bodies",
+      "passed": true
+    },
+    {
+      "id": "collection/length_0",
+      "passed": true
+    },
+    {
+      "id": "collection/length_1",
+      "passed": true
+    },
+    {
+      "id": "collection/length_2",
+      "passed": true
+    },
+    {
+      "id": "collection/length_3",
+      "passed": true
+    },
+    {
+      "id": "collection/neighbours_identical",
+      "passed": true
+    },
+    {
+      "id": "collection/address_label_remains",
+      "passed": true
+    },
+    {
+      "id": "collection/readout_correct",
+      "passed": true
+    },
+    {
+      "id": "row/one_zero_kept_length",
+      "passed": true
+    },
+    {
+      "id": "row/last_not_renumbered",
+      "passed": true
+    },
+    {
+      "id": "row/label_survives",
+      "passed": true
+    },
+    {
+      "id": "row/all_collected_slots_remain",
+      "passed": true
+    },
+    {
+      "id": "row/all_labels_remain",
+      "passed": true
+    },
+    {
+      "id": "single/last_cube_collected",
+      "passed": true
+    },
+    {
+      "id": "physics/desktop_outside",
+      "passed": true
+    },
+    {
+      "id": "physics/desktop_entry",
+      "passed": true
+    },
+    {
+      "id": "physics/desktop_body_count",
+      "passed": true
+    },
+    {
+      "id": "physics/desktop_transpose_untouched",
+      "passed": true
+    },
+    {
+      "id": "physics/desktop_label_kept",
+      "passed": true
+    },
+    {
+      "id": "physics/xr_outside",
+      "passed": true
+    },
+    {
+      "id": "physics/xr_entry",
+      "passed": true
+    },
+    {
+      "id": "physics/xr_body_count",
+      "passed": true
+    },
+    {
+      "id": "physics/xr_transpose_untouched",
+      "passed": true
+    },
+    {
+      "id": "physics/xr_label_kept",
+      "passed": true
+    },
+    {
+      "id": "physics/prop_outside",
+      "passed": true
+    },
+    {
+      "id": "physics/prop_entry",
+      "passed": true
+    },
+    {
+      "id": "physics/prop_body_count",
+      "passed": true
+    },
+    {
+      "id": "physics/prop_transpose_untouched",
+      "passed": true
+    },
+    {
+      "id": "physics/prop_label_kept",
+      "passed": true
+    },
+    {
+      "id": "physics/wrong_layer_outside",
+      "passed": true
+    },
+    {
+      "id": "physics/wrong_layer_entry",
+      "passed": true
+    },
+    {
+      "id": "physics/wrong_layer_body_count",
+      "passed": true
+    },
+    {
+      "id": "physics/wrong_layer_transpose_untouched",
+      "passed": true
+    },
+    {
+      "id": "physics/wrong_layer_label_kept",
+      "passed": true
+    },
+    {
+      "id": "physics/two_players_one_collection",
+      "passed": true
+    },
+    {
+      "id": "physics/old_position_no_longer_collects",
+      "passed": true
+    },
+    {
+      "id": "physics/moved_sensor_same_address",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true
+}

@@ -1,0 +1,59 @@
+{
+  "artifact_position": "(10.0, -0.025, 15.0)",
+  "grid_position": "(0.0, -0.5, 0.0)",
+  "materials": [
+    {
+      "emissionColor": "(0.9816, 0.7612, 0.9129, 1.0)",
+      "emission_strength": "0.458",
+      "modelColor": "(0.0688, 0.0688, 0.0688, 1.0)",
+      "node": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Tutorial_Tiling_Floor/GridMultiMesh",
+      "shader": "res://commons/resourses/shaders/Grid.gdshader",
+      "width": "3.713",
+      "wireframeColor": "(1.0, 0.0, 1.0, 1.0)"
+    }
+  ],
+  "surfaces": [
+    {
+      "collider": "@StaticBody3D@1910:<StaticBody3D#447347693353>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(6.8, 0.0, 9.0)",
+      "name": "Rule_0",
+      "position": "(6.8, 0.0, 9.0)"
+    },
+    {
+      "collider": "@StaticBody3D@1922:<StaticBody3D#447649683259>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(13.2, 0.0, 9.0)",
+      "name": "Rule_1",
+      "position": "(13.2, 0.0, 9.0)"
+    },
+    {
+      "collider": "@StaticBody3D@2282:<StaticBody3D#456709380439>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(6.8, 0.0, 15.0)",
+      "name": "Rule_2",
+      "position": "(6.8, 0.0, 15.0)"
+    },
+    {
+      "collider": "@StaticBody3D@2294:<StaticBody3D#457011370345>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(13.2, 0.0, 15.0)",
+      "name": "Rule_3",
+      "position": "(13.2, 0.0, 15.0)"
+    },
+    {
+      "collider": "@StaticBody3D@2654:<StaticBody3D#466071067525>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(6.8, 0.0, 21.0)",
+      "name": "Rule_4",
+      "position": "(6.8, 0.0, 21.0)"
+    },
+    {
+      "collider": "@StaticBody3D@2666:<StaticBody3D#466373057431>",
+      "floor_clearance": 0.000000113621354103088,
+      "floor_hit": "(13.2, 0.0, 21.0)",
+      "name": "Rule_5",
+      "position": "(13.2, 0.0, 21.0)"
+    }
+  ]
+}

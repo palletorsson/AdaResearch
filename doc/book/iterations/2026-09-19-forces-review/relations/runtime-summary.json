@@ -1,0 +1,90 @@
+[
+  {
+    "folder": "rejected-replay-1",
+    "pid": 43052,
+    "returncode": 1,
+    "seconds": 16.92749309539795,
+    "recorded_checks": null,
+    "recorded_failures": null,
+    "watched_sources_stable": true,
+    "clean_process_pass": false
+  },
+  {
+    "folder": "before",
+    "pid": 5956,
+    "returncode": 0,
+    "seconds": 21.919763803482056,
+    "recorded_checks": 58,
+    "recorded_failures": [],
+    "watched_sources_stable": true,
+    "clean_process_pass": true
+  },
+  {
+    "folder": "after",
+    "pid": 48140,
+    "returncode": 0,
+    "seconds": 22.66460156440735,
+    "recorded_checks": 58,
+    "recorded_failures": [],
+    "watched_sources_stable": true,
+    "clean_process_pass": true
+  },
+  {
+    "folder": "arena-before",
+    "pid": 39264,
+    "returncode": -1,
+    "seconds": 180.01819825172424,
+    "recorded_checks": 49,
+    "recorded_failures": [
+      "authored inventory matches baseline omissions or complete restored hall",
+      "authored instantiated placement count 14",
+      "fifth completed meal reaches stopping threshold",
+      "threshold disables movement and bite",
+      "stopped animal retains its place"
+    ],
+    "watched_sources_stable": false,
+    "clean_process_pass": false,
+    "authored_placement_count": 22,
+    "instantiated_authored_placement_count": 14,
+    "missing_tokens": [
+      "momentum_collision",
+      "parlour_orbits",
+      "paused_fountain",
+      "prop_mobile",
+      "prop_spigot",
+      "revolving_door",
+      "three_gravities",
+      "umbrella_field"
+    ]
+  },
+  {
+    "folder": "arena-after",
+    "pid": 45188,
+    "returncode": -1,
+    "seconds": 60.050452709198,
+    "recorded_checks": 49,
+    "recorded_failures": [],
+    "watched_sources_stable": true,
+    "clean_process_pass": false,
+    "authored_placement_count": 22,
+    "instantiated_authored_placement_count": 21,
+    "missing_tokens": [
+      "momentum_collision"
+    ]
+  },
+  {
+    "folder": "arena-after-clean",
+    "pid": 50620,
+    "returncode": 3221225477,
+    "seconds": 22.40047812461853,
+    "recorded_checks": 49,
+    "recorded_failures": [],
+    "watched_sources_stable": true,
+    "clean_process_pass": false,
+    "authored_placement_count": 22,
+    "instantiated_authored_placement_count": 21,
+    "missing_tokens": [
+      "momentum_collision"
+    ]
+  }
+]

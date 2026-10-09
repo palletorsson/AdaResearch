@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "id": "Color_Walls/start/two_panes",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/independent_materials",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/alpha",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/alpha_mode",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/palette_unchanged",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/filter_collision",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/first_palette_advances",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/second_unchanged",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/opaque_mode",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/opaque_collision",
+      "passed": false
+    },
+    {
+      "id": "Color_Walls/start/same_geometry",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/filter_returns",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/bounded_opacity",
+      "passed": true
+    },
+    {
+      "id": "Color_Walls/start/bounded_zero",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "Color_Walls/start/opaque_collision"
+  ],
+  "passed": false
+}

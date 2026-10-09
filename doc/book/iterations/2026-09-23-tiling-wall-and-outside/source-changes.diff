@@ -1,0 +1,48 @@
+--- before/commons/maps/Tutorial_Tiling_Walls/intent.md
++++ commons/maps/Tutorial_Tiling_Walls/intent.md
+@@ -1,9 +1,9 @@
+-Concept: The same six rules stand up. Compare a picture underfoot with a picture that faces the body.
++Concept: The same six rules stand up. A picture faces the body; its support can stop the body. Turning a tile and turning its wall have different consequences.
+ 
+ Sequence: array_tutorial; current order is declared in commons/maps/sequences/array_tutorial.json.
+ 
+-Encounter: The wall mode of tiling_principles preserves the six image rules on five-metre panels with solid backing. Changing the receiver changes projection and bodily access without changing the generating image.
++Encounters: tiling_principles carries the six floor studies onto five-metre panels. At the far right of the hall, wall_exception shares the sixth image with a hinged part of the enclosure. EXCEPTION changes that image. TURN WALL moves the sheet and its collider, allowing a walk onto a finite exterior landing and back. Both artifacts are primary: the second carries the first study into the museum's own boundary.
+ 
+-Critical question: What does the representation preserve, what can the body do here, and which rule would need to change to admit an exception?
++Critical question: How little material is enough to keep an inside around our forward walk? When a wall opens, what must still be built to make an outside inhabitable?
+ 
+-Status: Implemented first pass, 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
++Status, 23 September 2026: Existing encounter and thin-wall passage preserved. The canonical manuscript gains a native closed/open illustration and one sentence distinguishing the changed image from the wall that stops the body. Focused runtime evidence: doc/book/iterations/2026-09-23-tiling-wall-and-outside/report.json. Supplied pointer/key input and selected camera views do not establish headset comfort or learner experience. Original implementation evidence remains in doc/book/iterations/2026-09-20-wall-exception/; first-pass layouts in doc/space/regularity-split-2026-09-17/.
+--- before/commons/maps/Tutorial_Tiling_Walls/technical.md
++++ commons/maps/Tutorial_Tiling_Walls/technical.md
+@@ -1,3 +1,11 @@
+ The wall mode of tiling_principles preserves the six image rules on five-metre panels with solid backing. Changing the receiver changes projection and bodily access without changing the generating image.
+ 
++wall_exception shares the actual ONE EXCEPTION texture through the generator's patterns_changed signal. EXCEPTION replaces its image while the collision stays fixed. TURN WALL moves a 25 mm slab and its matching collision shape on an AnimatableBody3D through 90 degrees, taking about 2.5 seconds. The map's turning_wall declaration and placed owner allow the museum to omit the replaced boundary cells. A separate landing and glass rails supply a finite outside. The occupied clearance inhibits the start of a turn and pauses a turn already in progress.
++
+ Implementation: commons/artifacts/regularity/. Current authored placement: map_data.json. Read final.md for the supported controls and sequence bridge.
++
++## Shared book illustration, 23 September 2026
++
++The two-turns.png figure in doc/book/iterations/2026-09-23-tiling-wall-and-outside/ pairs native captures from one fixed camera. Both have EXCEPTION on. The left shows the unchanged enclosure, the right the sheet turned through a quarter turn. Only labels, layout and resizing are added to the original renders. No production artifact or map changes were needed for this pass.
++
++The focused report records supplied pointer callbacks, the body being stopped by the closed wall, movement through the opening onto the landing and back using supplied keys through the ordinary museum controller, and refusal to close while the landing is occupied. The cameras are staged; pointer events do not verify reach. This is not headset or learner evidence. The earlier 20 September guard and geometry checks remain separately documented.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2732,9 +2732,13 @@
+       "status": "encounter_revision_draft",
+       "sequence": "array_tutorial",
+       "text_path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+-      "text_sha256": "0bdcfd6c89466feb2aa1c0ecc3577766e7e5dce0039c8a25818aeab81ccd64e9",
++      "text_sha256": "ecef775211fb6a44198ea56b0724a3266bf60070c5b8336c89851fec6a0d5443",
+       "map_sha256": "ae691694a72dd0f559a06b3d8829188e4aef3a5a968fee13f4c47e270e212dfb",
+-      "learner_verified": false
++      "learner_verified": false,
++      "runtime_check": {
++        "evidence": "doc/book/iterations/2026-09-23-tiling-wall-and-outside/report.json",
++        "scope": "25 focused checks: supplied pointer and key input through the actual museum controller; selected boundary/landing/return route and staged native captures. No headset or learner claim."
++      }
+     },
+     "Pattern_Disco": {
+       "primary_tokens": [

@@ -1,0 +1,200 @@
+{
+  "passed": true,
+  "films": [
+    {
+      "id": "profile_travels",
+      "stage_checks": 33,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "transformation_order",
+      "stage_checks": 32,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "array_address",
+      "stage_checks": 16,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "tiling_rule",
+      "stage_checks": 142,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "colour_edge",
+      "stage_checks": 121,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "pattern_symmetry",
+      "stage_checks": 981,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "directional_slope",
+      "stage_checks": 2442,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "force_motion",
+      "stage_checks": 96,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "form_relaxation",
+      "stage_checks": 726,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "wave_neighbours",
+      "stage_checks": 1636,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "chance_passage",
+      "stage_checks": 127,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "noise_layers",
+      "stage_checks": 22,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "shader_view",
+      "stage_checks": 27,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "cellular_history",
+      "stage_checks": 557,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "menger_twenty",
+      "stage_checks": 95,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "grammar_forward",
+      "stage_checks": 122,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "branch_decision",
+      "stage_checks": 87,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "cloth_relations",
+      "stage_checks": 49,
+      "museum_checks": 17,
+      "movie_seconds": 26.0,
+      "passed": true
+    },
+    {
+      "id": "iso_cell",
+      "stage_checks": 333,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "boolean_room",
+      "stage_checks": 43,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "boid_neighbour",
+      "stage_checks": 114,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "learning_step",
+      "stage_checks": 56,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "graph_layout",
+      "stage_checks": 97,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "curvature_triangle",
+      "stage_checks": 729,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "shannon_threshold",
+      "stage_checks": 656,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    },
+    {
+      "id": "rhizome_routes",
+      "stage_checks": 160,
+      "museum_checks": 17,
+      "movie_seconds": 24.0,
+      "passed": true
+    }
+  ],
+  "films_count": 26,
+  "total_seconds": 638.0,
+  "museum_checks": 442,
+  "source_files_unchanged": 40,
+  "original_map_artifacts_preserved": 168,
+  "headset_verified": false,
+  "scope": "Native desktop captures of live films in authored Endless Museum halls; MP4 decode; source checks; original map content preserved.",
+  "visual_review": {
+    "films": 26,
+    "museum_images": 26,
+    "passed": true,
+    "method": "Independent image inspection after collision tests; Learning, Noise and Curvature retaken to remove visible obstructions."
+  }
+}

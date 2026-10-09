@@ -1,0 +1,391 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "engraving tableau in actual museum",
+      "passed": true
+    },
+    {
+      "name": "full scale",
+      "passed": true
+    },
+    {
+      "name": "placed Architecture",
+      "passed": true
+    },
+    {
+      "name": "placed Polyhedron",
+      "passed": true
+    },
+    {
+      "name": "placed Melencolia",
+      "passed": true
+    },
+    {
+      "name": "placed PuttoAndMillstone",
+      "passed": true
+    },
+    {
+      "name": "placed RestingDog",
+      "passed": true
+    },
+    {
+      "name": "placed Ladder",
+      "passed": true
+    },
+    {
+      "name": "placed Scales",
+      "passed": true
+    },
+    {
+      "name": "placed Hourglass",
+      "passed": true
+    },
+    {
+      "name": "placed MagicSquare",
+      "passed": true
+    },
+    {
+      "name": "placed Bell",
+      "passed": true
+    },
+    {
+      "name": "placed GroundTools",
+      "passed": true
+    },
+    {
+      "name": "placed DistantHorizon",
+      "passed": true
+    },
+    {
+      "name": "placed Sphere",
+      "passed": true
+    },
+    {
+      "name": "six pentagons and two triangular caps",
+      "passed": true
+    },
+    {
+      "name": "all solid faces planar",
+      "passed": true
+    },
+    {
+      "name": "solid oriented outwards",
+      "passed": true
+    },
+    {
+      "name": "twelve unique vertices and eighteen edges",
+      "passed": true
+    },
+    {
+      "name": "closed two-manifold edges",
+      "passed": true
+    },
+    {
+      "name": "magic row and column 0",
+      "passed": true
+    },
+    {
+      "name": "magic row and column 1",
+      "passed": true
+    },
+    {
+      "name": "magic row and column 2",
+      "passed": true
+    },
+    {
+      "name": "magic row and column 3",
+      "passed": true
+    },
+    {
+      "name": "magic diagonals",
+      "passed": true
+    },
+    {
+      "name": "walk-around platform (0.0, 0.0, 3.0)",
+      "passed": true
+    },
+    {
+      "name": "walk-around platform (-3.65, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "walk-around platform (3.7, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "no service tray through the composition",
+      "passed": true
+    },
+    {
+      "name": "body-width walk around tableau 0",
+      "passed": true
+    },
+    {
+      "name": "walk 0 ends on supported platform",
+      "passed": true
+    },
+    {
+      "name": "body-width walk around tableau 1",
+      "passed": true
+    },
+    {
+      "name": "walk 1 ends on supported platform",
+      "passed": true
+    },
+    {
+      "name": "body-width walk around tableau 2",
+      "passed": true
+    },
+    {
+      "name": "walk 2 ends on supported platform",
+      "passed": true
+    },
+    {
+      "name": "body-width walk around tableau 3",
+      "passed": true
+    },
+    {
+      "name": "walk 3 ends on supported platform",
+      "passed": true
+    },
+    {
+      "name": "ramp reaches 14.65",
+      "passed": true
+    },
+    {
+      "name": "ramp reaches 26.55",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tableau-front",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tableau-walk",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tools-and-body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: number-and-stone",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "contacts_(5.5, 1.03, 12.3)": [
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          5.49996471405029,
+          2.0,
+          14.65087890625
+        ]
+      },
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          5.49996471405029,
+          2.0,
+          14.6561698913574
+        ]
+      },
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          5.49996471405029,
+          2.0,
+          14.6647062301636
+        ]
+      }
+    ],
+    "contacts_(9.5, 2.03, 23.4)": [
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          9.5,
+          0.0,
+          26.5398387908936
+        ]
+      },
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          9.5,
+          0.0,
+          26.5453815460205
+        ]
+      },
+      {
+        "collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "position": [
+          9.5,
+          0.0,
+          26.5533542633057
+        ]
+      }
+    ],
+    "large_geometry": [
+      {
+        "centre": [
+          10.5,
+          4.0,
+          12.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DiamondTorusCylinders/TorusReference",
+        "size": [
+          4.09469604492188,
+          0.199999809265137,
+          4.20000076293945
+        ]
+      },
+      {
+        "centre": [
+          5.30000019073486,
+          4.65000009536743,
+          20.2999992370605
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MelencoliaEngraving/Architecture/RearWall",
+        "size": [
+          3.64999985694885,
+          5.30000019073486,
+          0.279998779296875
+        ]
+      },
+      {
+        "centre": [
+          3.40000009536743,
+          4.65000009536743,
+          19.3000011444092
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MelencoliaEngraving/Architecture/ReturnWall",
+        "size": [
+          0.21999979019165,
+          5.30000019073486,
+          2.29999923706055
+        ]
+      },
+      {
+        "centre": [
+          7.55500030517578,
+          4.82499980926514,
+          19.9449996948242
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MelencoliaEngraving/Ladder/Rail",
+        "size": [
+          0.64442253112793,
+          5.67666816711426,
+          1.18316268920898
+        ]
+      },
+      {
+        "centre": [
+          6.89499998092651,
+          4.82499980926514,
+          19.9449996948242
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MelencoliaEngraving/Ladder/@MeshInstance3D@957",
+        "size": [
+          0.64442253112793,
+          5.67666816711426,
+          1.18316268920898
+        ]
+      },
+      {
+        "centre": [
+          8.48000049591064,
+          5.06999969482422,
+          20.5900001525879
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/MelencoliaEngraving/DistantHorizon/SkyRelief",
+        "size": [
+          2.67000007629395,
+          4.38999938964844,
+          0.0900001525878906
+        ]
+      },
+      {
+        "centre": [
+          8.0,
+          2.45000004768372,
+          17.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DetailExtentAnchor",
+        "size": [
+          18.0,
+          4.90000009536743,
+          42.0
+        ]
+      }
+    ],
+    "ramp_(5.5, 1.03, 12.3)": [
+      5.49996471405029,
+      2.00084042549133,
+      14.6647062301636
+    ],
+    "ramp_(9.5, 2.03, 23.4)": [
+      9.5,
+      0.000834947917610407,
+      26.5533542633057
+    ],
+    "tableau_bounds": {
+      "centre": [
+        -0.0875048637390137,
+        2.81166696548462,
+        0.310249328613281
+      ],
+      "size": [
+        6.77501010894775,
+        5.70333385467529,
+        4.89049911499023
+      ]
+    },
+    "tableau_position": [
+      6.5,
+      2.0,
+      18.5
+    ]
+  },
+  "passed": true,
+  "scope": "Actual museum scene, closed-solid topology, printed square, body-width routes and ramps under gravity. Headset experience and Quest performance untested."
+}

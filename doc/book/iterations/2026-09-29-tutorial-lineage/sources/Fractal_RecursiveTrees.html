@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_RecursiveTrees · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_RecursiveTrees">← Tutorial lineage</a></p><h1>Fractal RecursiveTrees</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_RecursiveTrees/final.md">Raw captured source</a></p><pre># Where will the next branch go?
+
+&lt;!-- @recursive_tree_2 --&gt;
+
+A trunk waits. Where would you put its first fork?
+
+Press GROW. Two branches appear at its tip. Press again, following one of those branches rather than the outline of the whole tree. Each new pair begins where a previous segment ends. Predict the next fork before asking for it.
+
+The previous room let one call become several. Here we give those calls a place to start, a direction and a length. Four presses leave thirty-one segments, including the trunk. The fourth generation contains sixteen of them. Shorter branches do not mean fewer branches.
+
+Leave the generation count where it is and press ANGLE. The tree opens. Press again: its branches draw closer to the direction their parents were taking. The button cycles through three turns, measured from the parent direction. Follow the same first fork. Its descendants have moved, but none has been added or removed.
+
+Now press LENGTH. The ratio changes from 0.70 to 0.85: each child inherits more of its parent&#x27;s length. The next press takes it to 0.50. You can make a crowded body or a much smaller one without changing the number of segments. Walk around it. A branch that seemed short from the desk may have been pointing towards you.
+
+These lines come from the growing tree&#x27;s implementation:
+
+```gdscript
+var new_length = parent_data.length * length_reduction
+```
+
+And, after the new direction has been calculated:
+
+```gdscript
+var end_position = parent_pos + branch_direction * new_length
+```
+
+The second line hands the next fork its beginning. A vector, a multiplication and an addition carry the body further. What looked like a tree can be followed as a succession of these handovers.
+
+Press FORKS at the fourth generation. Three descendants now leave each tip. The display rises from thirty-one to one hundred and twenty-one segments. This change adds connections to the branching graph; turning or lengthening its existing edges did not. A visible crossing of two branches still does not join them in the program.
+
+RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Now press GROW once more and watch where the new branches appear. Every unfinished tip advances in the same press. The desk holds those tips in a queue and works through one generation at a time.
+
+We could instead follow one branch all the way to its last twig before returning for its siblings. A self-call can take that route. With the same fixed angles and lengths, the completed tree could look the same; watching it being made would be a different encounter. Here the next generation waits for your hand. The surrounding museum continues.
+
+There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. At the desk, the branches are visible meshes; they do not offer the player&#x27;s body a climbable support. In the aisle, the same branch geometry has been enlarged and made solid. Walk towards its trunk. It stops you. Step beside it and look up. The first fork is now above your head.
+
+Grow to the fourth generation again, then return to ANGLE and LENGTH. Open the turn to sixty-five degrees and let each child keep 0.85 of its parent&#x27;s length. Some tips turn down towards the floor. The count has stayed at thirty-one, but the space beneath them has changed. Walk back among them. What looked like a small adjustment at the desk changes how far the branches reach over you.
+
+The same fork can be something to stand beneath or something to get past. Those meanings arrive with us. The instruction contains neither. We have given the branches size and solidity; we have not taught them to make room for us.
+
+![Looking up from beneath the enlarged, solid tree in the museum aisle.](images/tree-canopy.png)
+
+&lt;!-- @recursive_tree --&gt;
+
+Across the approach, the red block tree has already spent its calls. Choose a large branch and follow it towards its smaller descendants. At a fork, predict the next division, then find another fork at a similar depth. A shared procedure need not give them the same dimensions or the same number of children.
+
+Press STRATA. Colour separates three branching levels from the trunk. Follow a route to its last visible block. REACH draws the accumulated bounds; ENDS adds marks at the handover and terminal branches. FORM returns the original colours. These readings belong to the same built geometry. Changing the view does not draw another tree.
+
+This tree does use random choices, from the seed shown on its desk. The choices vary its branches within a fixed construction rule. A seed can repeat an arrangement; it cannot tell us which arrangements the rule never permits. Even the blunt boxes can persuade us to call it organic. We can enjoy that recognition and still ask what it has made too easy to recognise.
+
+&lt;!-- @ --&gt;
+
+The small tree further in begins with a sentence. A short string is rewritten four times, then read as steps and turns. Its angle control changes how those turns are drawn. The letters can stay while the branches move.
+
+Look back at the two studies near the entrance: the growing tree keeps its proportions; the red tree repeats a seeded draw. Beside them, the little grammar tree gives instructions letters we will learn to read in a later hall. Which one most readily becomes a tree in your eyes? That recognition arrives before any of them has met soil, light or wind.
+
+Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view. They need not all answer the same question. The old enclosure remains a detour around something we cannot see from every position. We have more procedures to learn before resemblance becomes our only way to choose a body.
+
+Next comes Cantor: another generation, this time made by deciding what will be removed.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_RecursiveTrees/tutorial.md">Raw captured source</a></p><pre># Encounter order
+
+1. At recursive_tree_2, predict a fork and press GROW. Follow a parent endpoint into the next generation.
+2. Compare ANGLE and LENGTH at a held generation. Move around the tree to distinguish projection from shorter geometry.
+3. At generation four, switch FORKS. Compare 31 and 121 actual segments. RESET and replay; RULE gives a short code summary.
+4. At recursive_tree, trace a fork before pressing STRATA. Compare REACH, ENDS and FORM on the unchanged sculpture.
+5. Explore the retained collection and the historical enclosure as secondary encounters. Continue to Fractal_CantorSet.
+
+Two primary tokens are anchored in final.md and listed in the Necklace primary view. Other works remain present without being forced into those two experiments. Headset reach and comfort are pending.
+
+Earlier material remains in the [archived version](../../../doc/space/recursive-trees-2026-09-14/before/commons/maps/Fractal_RecursiveTrees/tutorial.md) for comparison and future development.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_RecursiveTrees/technical.md">Raw captured source</a></p><pre># Recursive trees: endpoints, inheritance and a finite budget
+
+The primary encounter uses `recursive_tree_2` (the tapered-cylinder implementation) and `recursive_tree` (the red geometric implementation). The entire twelve-placement collection remains.
+
+## Growing tree
+
+The opt-in `lesson:true` configuration installs a compact physical desk and starts with a 1.4 m trunk. GROW processes one breadth-first generation. Four generations after the trunk are allowed. ANGLE cycles 15/35/65 degrees relative to the parent; LENGTH cycles 0.50/0.70/0.85; FORKS switches two/three children. Changing these parameters rebuilds to the current generation. RESET restores two forks, 35 degrees, ratio 0.70 and the trunk. RULE is a shortened on-desk summary; final.md quotes two exact lines from `algorithms/fractals/recursivetree/recursive_tree.gd::create_branching_node`.
+
+For b children and d completed generations, the segment total is sum(b^k,k=0..d). Thus b=2,d=4 gives 31 and b=3,d=4 gives 121. The museum configuration disables random perturbation. The underlying script now owns its RNG for repeatable resets outside the lesson too. A 512-segment allocation ceiling also bounds other configurations; the lesson remains below it. Counts refer to segments, not draw calls, triangles, computational entropy or headset performance.
+
+Branch data stores endpoints in tree-local coordinates. All generated segments share that coordinate frame. The tapered-cylinder vertices already run from zero to length; applying an additional half-length offset would create a gap. Length inheritance is applied once per generation, including the first. A parent reference retains the logical graph even though the render nodes share one container. Reset frees only generated geometry and preserves the physical desk.
+
+The original specimen&#x27;s generated meshes have no branch colliders. Turning a branch changes its embedding, not its parent-child connectivity. Crossing meshes do not automatically merge their graph vertices.
+
+### The solid canopy
+
+Only this hall&#x27;s growing-tree token adds `room:canopy`. The optional `commons/artifacts/recursive_tree_lesson/branch_canopy.gd` reads the source&#x27;s generated branch nodes, sharing their actual mesh resources, materials and local transforms. It adds a convex collision hull for each branch, translates the root to hall-relative (8.5, 0, 7.5), and scales the whole receiver uniformly by 1.8. The initial trunk is therefore 2.52 m high. No second branching solver or new controls are introduced.
+
+GROW, ANGLE, LENGTH, FORKS and RESET update both versions. A light state check also follows external source resets, removing stale solids. There are 31 hulls for the binary tree at generation four, and 121 for three forks. Hulls follow the source taper, rather than using a broad invisible barrier. Sharing geometry does not make this a structural engineering model: strength, load, bending, weather and biological response are absent.
+
+Native checks cover all eighteen combinations of two/three forks, 15/35/65 degrees and .50/.70/.85 inherited length at generation four. Their mesh bounds stay inside the front room&#x27;s walls and before the legacy enclosure. Controlled standing-body walking meets the trunk, steps beside it, passes beneath the default branches and returns to the rear approach. The parameter sweep establishes geometry bounds, not every possible walking or climbing route. Human headset reach, crouching, comfort, Quest profiling and learner acceptance remain pending. Ordinary lesson placements and the finished red-tree study receive no canopy.
+
+
+## Finished block tree
+
+Scene seed 12345 chooses branch dimensions, direction and descendant counts through a local RNG. This implementation uses three recursive branching levels, not a fixed binary tree. Its existing aftermath modes are available as FORM, STRATA, REACH and ENDS. They restore materials or draw bounds and markers without rebuilding the tree. RESET restores FORM. The bounding volume is a reading of generated extents, not a walkable room.
+
+Branch detail blocks now use the same local frame as their sibling branch mesh. Museum placement and rotation therefore move the whole sculpture consistently. The standalone screen overlay is hidden only when the physical lesson is enabled.
+
+## Space and comparison
+
+The map is 17 × 24 cells. A ten-row approach precedes the retained stepped enclosure recovered in the April and August histories. All twelve placements remain. The two inverted trees are separated, raised and reduced in scale; their clouds use the same fixed phase. One shows strata. The oversized Möbius world is now a small specimen in this hall, with its full-scale implementation retained for its own context. The museum covers the legacy floor voids while the archived grid preserves their provenance.
+
+Buttons retain full touch targets in a 3 × 2 layout; the 1.18 × 0.36 m panel uses a single transparent plane. Desktop input and geometry checks are reported on the review page. Tracked-headset reach and comfort require later testing.
+
+Earlier material remains in the [archived version](../../../doc/space/recursive-trees-2026-09-14/before/commons/maps/Fractal_RecursiveTrees/technical.md) for comparison and future development.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_RecursiveTrees/intent.md">Raw captured source</a></p><pre># Where will the next branch go?
+
+Second hall of Fractals, between Fractal_Recursion and Fractal_CantorSet. Give the previous hall&#x27;s repeated calls a position, direction and inherited length. Start with an unfinished trunk and let the visitor anticipate a fork before seeing it.
+
+The growing tree uses fixed angles and ratios in this hall. GROW evaluates a whole generation from its queue; ANGLE and LENGTH change the placement of existing branches; FORKS changes their number. The red block tree uses a fixed seed within a bounded construction rule. STRATA, REACH and ENDS expose the same built tree. Further in, the small grammar tree rewrites a string and draws its instructions. These are particular implementations to compare, not exclusive categories of tree making.
+
+The critical question begins when these constructions become trees in our eyes. None responds to soil, light or shade. A seed repeats one permitted arrangement without enlarging what the rule permits. The growing specimen keeps its visual-only branches. Beside it, the same geometry now becomes an enlarged, solid canopy: the body meets the trunk and can stand beneath its first fork. ANGLE and LENGTH change the space around that body without adding segments; FORKS adds connections. Let this comparison carry the distinction between recognizing a tree, occupying its space and imagining shelter. The simulation has no weather, load-bearing calculation or biological response.
+
+All twelve authored works remain. Inverted trees, the small Möbius specimen, living paper and subdivision objects support other investigations; a Möbius surface is not proof of “topological recursion.” The dark sphere remains secondary. Lead onward through Cantor&#x27;s removal rule: another generation can be made by taking something away.
+
+The old parameter-explorer wish is partly met by the existing six-control desk. The larger encounter is now installed; headset reach, comfort and the question of what it means to offer shelter remain open. The earlier intent is preserved in the opening-review baseline.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_RecursiveTrees/critical.md">Raw captured source</a></p><pre># A fork is a decision we gave the world
+
+ANGLE can open the space between two branches without making another branch. FORKS changes the adjacency of the constructed tree. The distinction gives “what bodies are possible?” a specific place to land: in the rule that permits descendants, the mapping that places them, and the collision system that may or may not support another body.
+
+The same thin construction can look generous or crowded as its length ratio changes. Neither appearance establishes freedom, entropy or biological complexity. A gap visible from the desk may be inaccessible to a player. The desk specimen remains an image to walk around; its enlarged companion meets the body with solid branches. This extra decision does not come from the branching rule. We added what can obstruct us, and another scale at which to look for a place beneath it.
+
+The growing tree waits for us. Waiting is an affordance of this instrument, not a claim that the museum clock can be stopped. Its reset rejects everything after the initial trunk so that a comparison becomes possible. It is useful to ask what we discarded in order to make that beginning available.
+
+Across the approach, the fixed-seed block tree admits variation while keeping a narrow vocabulary: boxes, selected directions, limited descendants, three branching levels. The seed names one permitted arrangement. It does not enlarge that vocabulary. Organic recognition can arrive before we have understood any of these decisions.
+
+Queer invention can press the choice of descendant, direction, material or support without having to make every result a softer tree. A sideways tree, a branching stair, an unusable shelter and an inverted cloud ask different questions. This room keeps those differences present. The controls are a starting vocabulary, not a complete catalogue of possible bodies.
+
+Earlier material remains in the [archived version](../../../doc/space/recursive-trees-2026-09-14/before/commons/maps/Fractal_RecursiveTrees/critical.md) for comparison and future development.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_RecursiveTrees/artifacts.md">Raw captured source</a></p><pre># Recursive Trees — the installed collection
+
+Twelve authored placements remain. The growing tree and the red block tree are the two primary encounters. The larger canopy is attached to the growing specimen and uses its actual geometry; it is not a thirteenth solver or an independently generated tree.
+
+| Work | Grid cell (x, z) | Contribution |
+| --- | --- | --- |
+| `recursive_tree_2` | (4, 5) | Primary. Deterministic generation queue; change inherited angle, length and fork count. The compact specimen and enlarged solid canopy share the same branches. |
+| `recursive_tree` | (12, 5) | Primary. Seeded red block tree. FORM, STRATA, REACH and ENDS expose the existing construction without replacing it. |
+| `living_paper` | (7, 11) | Secondary. Configured with Mandelbrot; a separate investigation, not a trace of this tree. |
+| `fractal_lsystem_tree` | (11, 11) | Supporting comparison. String rewriting and interpretation anticipate the later grammar chapter. |
+| `small_subdivision_cube` | (2, 14), (3, 14) | Two retained supporting placements. Return to subdivision from the preceding hall. |
+| `inverted_tree_cloud` | (3, 15), (13, 17) | Two retained inverted trees; frozen cloud phase, one with strata. Other orientations of growth remain available. |
+| `dark_sphere` | (8, 16) | Secondary remnant, not the organizing work. |
+| `cube_desk` | (2, 17) | Retained furniture construction. |
+| `fractal_scene` | (5, 20) | Retained mesh-fractal comparison. |
+| `mobius_world` | (3, 22) | A small surface specimen here; its presence does not establish topological recursion. |
+
+The canopy root is (8.5, 0, 7.5) in hall-relative metres. The original growing-tree placement remains. Its desk controls both receivers. The old stepped enclosure, transport cube, ordinary floor and rear collection are retained. The earlier inventory, including its different descriptions, is preserved in the tree-canopy review folder.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_RecursiveTrees/summary.md">Raw captured source</a></p><pre># Where will the next branch go?
+
+A waiting trunk becomes a branching body through endpoint handover, turns and inherited length. A compact desk separates angle, length, descendants and generation. The same branches form an enlarged, solid canopy in the aisle; the visitor can meet its trunk and walk beneath its default forks, then compare another angle or inherited length. Across the approach, a finished geometric tree exposes its recursion levels and bounds without changing its shape. Both are primary; the other ten placements and the historical enclosure remain as further encounters. Continue through repeated removal in Cantor.
+
+Earlier material remains in the [archived version](../../../doc/space/recursive-trees-2026-09-14/before/commons/maps/Fractal_RecursiveTrees/summary.md) for comparison and future development.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_RecursiveTrees/blurb.md">Raw captured source</a></p><pre>A trunk waits for its first fork. Turn its descendants, shorten what they inherit, or give each tip another way to continue. Which change moves a body, and which changes its connections?
+</pre></section></body></html>

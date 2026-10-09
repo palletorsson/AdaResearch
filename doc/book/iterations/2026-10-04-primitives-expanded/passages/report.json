@@ -1,0 +1,721 @@
+{
+  "checks": [
+    {
+      "check": "Default portal coordinator exists",
+      "passed": true
+    },
+    {
+      "check": "Initial hall reaches supported ready state",
+      "passed": true
+    },
+    {
+      "check": "Resident hall is Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Only one hall resident: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Supported arrival: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Loading-cell support: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Authored entry usable: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Authored exit usable: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Forward doorway installed: Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Ignorance exit",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Ignorance exit",
+      "passed": true
+    },
+    {
+      "check": "Crossing accepted: Primitives_Ignorance -> Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Destination ready: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Resident hall is Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Only one hall resident: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Supported arrival: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Loading-cell support: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Authored entry usable: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Authored exit usable: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Forward doorway installed: Primitives_Godot",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Godot entrance",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Godot entrance",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Godot exit",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Godot exit",
+      "passed": true
+    },
+    {
+      "check": "Crossing accepted: Primitives_Godot -> Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Destination ready: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Resident hall is Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Only one hall resident: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Supported arrival: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Loading-cell support: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Authored entry usable: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Authored exit usable: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Forward doorway installed: Primitives_Columns",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Columns entrance",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Columns entrance",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Columns exit",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Columns exit",
+      "passed": true
+    },
+    {
+      "check": "Crossing accepted: Primitives_Columns -> Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Destination ready: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Resident hall is Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Only one hall resident: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Supported arrival: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Loading-cell support: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Authored entry usable: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Authored exit usable: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Forward doorway installed: Primitives_Profiles",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Profiles entrance",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Profiles entrance",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Profiles exit",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Profiles exit",
+      "passed": true
+    },
+    {
+      "check": "Crossing accepted: Primitives_Profiles -> Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Destination ready: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Resident hall is Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Only one hall resident: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Supported arrival: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Loading-cell support: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Authored entry usable: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Authored exit usable: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Forward doorway installed: Primitives_Portals",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Portals entrance",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Portals entrance",
+      "passed": true
+    },
+    {
+      "check": "Continuous 2.26 m doorway approach floor: Primitives_Portals exit",
+      "passed": true
+    },
+    {
+      "check": "1.7 m standing capsule clears doorway approach: Primitives_Portals exit",
+      "passed": true
+    }
+  ],
+  "crossings": [
+    {
+      "accepted": true,
+      "actual": "Primitives_Godot",
+      "elapsed_ms": 796,
+      "expected": "Primitives_Godot",
+      "failure": "",
+      "from": "Primitives_Ignorance",
+      "phase": "idle",
+      "ready": true
+    },
+    {
+      "accepted": true,
+      "actual": "Primitives_Columns",
+      "elapsed_ms": 761,
+      "expected": "Primitives_Columns",
+      "failure": "",
+      "from": "Primitives_Godot",
+      "phase": "idle",
+      "ready": true
+    },
+    {
+      "accepted": true,
+      "actual": "Primitives_Profiles",
+      "elapsed_ms": 1053,
+      "expected": "Primitives_Profiles",
+      "failure": "",
+      "from": "Primitives_Columns",
+      "phase": "idle",
+      "ready": true
+    },
+    {
+      "accepted": true,
+      "actual": "Primitives_Portals",
+      "elapsed_ms": 1261,
+      "expected": "Primitives_Portals",
+      "failure": "",
+      "from": "Primitives_Profiles",
+      "phase": "idle",
+      "ready": true
+    }
+  ],
+  "events": [
+    {
+      "halls": 0,
+      "ms": 5465,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 7980,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 8030,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 8068,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 8078,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 8092,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 8092,
+      "phase": "architecture"
+    },
+    {
+      "ms": 499,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 8598,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 8598,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 8766,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 8829,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 8842,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 8869,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 8890,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 8911,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 8911,
+      "phase": "architecture"
+    },
+    {
+      "ms": 472,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 9390,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 9390,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 9551,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 9610,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 9616,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 9636,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 9657,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 9678,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 9678,
+      "phase": "architecture"
+    },
+    {
+      "ms": 753,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 10437,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 10437,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 10606,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 10655,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 10674,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 10695,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 10722,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 10743,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 10743,
+      "phase": "architecture"
+    },
+    {
+      "ms": 431,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 11180,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 11180,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 11870,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 11940,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 11941,
+      "phase": "idle"
+    }
+  ],
+  "failures": [],
+  "halls": [
+    {
+      "arrival": [
+        9.5,
+        0.0500000230967999,
+        -1.35000002384186
+      ],
+      "doorway_probes": [
+        {
+          "clearance_passed": true,
+          "direction": 1,
+          "doorway": [
+            9.5,
+            0.0500000007450581,
+            42.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "obstructions": []
+        }
+      ],
+      "entry": "{ \"source\": \"sp\", \"cell\": (9, 0), \"marker\": (9.5, 0.05, 0.5), \"cage\": true, \"door\": (9.5, 0.05, -2.5), \"landing\": (9.5, 0.05, -1.35) }",
+      "exit": "{ \"source\": \"t\", \"cell\": (9, 42), \"marker\": (9.5, 0.05, 42.5), \"door\": (9.5, 0.05, 42.5), \"inward\": (0.0, 0.0, -1.0), \"yaw\": 3.14159265358979, \"outset\": 0.0 }",
+      "map": "Primitives_Ignorance"
+    },
+    {
+      "arrival": [
+        9.5,
+        0.0500000230967999,
+        48.5
+      ],
+      "doorway_probes": [
+        {
+          "clearance_passed": true,
+          "direction": -1,
+          "doorway": [
+            9.5,
+            0.0500000230967999,
+            47.3499984741211
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "obstructions": []
+        },
+        {
+          "clearance_passed": true,
+          "direction": 1,
+          "doorway": [
+            9.5,
+            0.0500000007450581,
+            69.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "obstructions": []
+        }
+      ],
+      "entry": "{ \"source\": \"s\", \"cell\": (9, 1), \"marker\": (9.5, 0.05, 48.5), \"cage\": false, \"door\": (9.5, 0.05, 47.35), \"landing\": (9.5, 0.05, 48.5) }",
+      "exit": "{ \"source\": \"t\", \"cell\": (9, 22), \"marker\": (9.5, 0.05, 69.5), \"door\": (9.5, 0.05, 69.5), \"inward\": (0.0, 0.0, -1.0), \"yaw\": 3.14159265358979, \"outset\": 0.0 }",
+      "map": "Primitives_Godot"
+    },
+    {
+      "arrival": [
+        13.5,
+        0.0500000230967999,
+        75.5
+      ],
+      "doorway_probes": [
+        {
+          "clearance_passed": true,
+          "direction": -1,
+          "doorway": [
+            13.5,
+            0.0500000230967999,
+            74.3499984741211
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "obstructions": []
+        },
+        {
+          "clearance_passed": true,
+          "direction": 1,
+          "doorway": [
+            13.5,
+            0.0500000007450581,
+            108.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "obstructions": []
+        }
+      ],
+      "entry": "{ \"source\": \"s\", \"cell\": (13, 1), \"marker\": (13.5, 0.05, 75.5), \"cage\": false, \"door\": (13.5, 0.05, 74.35), \"landing\": (13.5, 0.05, 75.5) }",
+      "exit": "{ \"source\": \"t\", \"cell\": (13, 34), \"marker\": (13.5, 0.05, 108.5), \"door\": (13.5, 0.05, 108.5), \"inward\": (0.0, 0.0, -1.0), \"yaw\": 3.14159265358979, \"outset\": 0.0 }",
+      "map": "Primitives_Columns"
+    },
+    {
+      "arrival": [
+        14.5,
+        0.0500000230967999,
+        114.5
+      ],
+      "doorway_probes": [
+        {
+          "clearance_passed": true,
+          "direction": -1,
+          "doorway": [
+            14.5,
+            0.0500000230967999,
+            113.349998474121
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "obstructions": []
+        },
+        {
+          "clearance_passed": true,
+          "direction": 1,
+          "doorway": [
+            14.5,
+            0.0500000007450581,
+            149.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "obstructions": []
+        }
+      ],
+      "entry": "{ \"source\": \"s\", \"cell\": (14, 1), \"marker\": (14.5, 0.05, 114.5), \"cage\": false, \"door\": (14.5, 0.05, 113.35), \"landing\": (14.5, 0.05, 114.5) }",
+      "exit": "{ \"source\": \"t\", \"cell\": (14, 36), \"marker\": (14.5, 0.05, 149.5), \"door\": (14.5, 0.05, 149.5), \"inward\": (0.0, 0.0, -1.0), \"yaw\": 3.14159265358979, \"outset\": 0.0 }",
+      "map": "Primitives_Profiles"
+    },
+    {
+      "arrival": [
+        2.5,
+        0.0500000230967999,
+        152.649993896484
+      ],
+      "doorway_probes": [
+        {
+          "clearance_passed": true,
+          "direction": -1,
+          "doorway": [
+            2.5,
+            0.0500000230967999,
+            151.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "obstructions": []
+        },
+        {
+          "clearance_passed": true,
+          "direction": 1,
+          "doorway": [
+            3.5,
+            0.0500000007450581,
+            188.5
+          ],
+          "floor_passed": true,
+          "inward": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "obstructions": []
+        }
+      ],
+      "entry": "{ \"source\": \"sp\", \"cell\": (2, 0), \"marker\": (2.5, 0.05, 154.5), \"cage\": true, \"door\": (2.5, 0.05, 151.5), \"landing\": (2.5, 0.05, 152.65) }",
+      "exit": "{ \"source\": \"t\", \"cell\": (3, 34), \"marker\": (3.5, 0.05, 188.5), \"door\": (3.5, 0.05, 188.5), \"inward\": (0.0, 0.0, -1.0), \"yaw\": 3.14159265358979, \"outset\": 0.0 }",
+      "map": "Primitives_Portals"
+    }
+  ],
+  "navigation_failure": "",
+  "passed": true,
+  "scope": "Native actual-museum default portal coordinator and collision geometry, private runtime snapshot, explicit crossing requests. Not a headset, controller-input, frame-rate or comfort test."
+}

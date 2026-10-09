@@ -1,0 +1,77 @@
+--- before/doc/book/captures/randomness/randomness-book.md
++++ doc/book/captures/randomness/randomness-book.md
+@@ -356,7 +356,7 @@
+ 
+ No random number decides the face. The program draws random values to scatter and tint the reward, but reads the die from its orientation. How your hand let go, the cube's shape and its contact with the felt have already done their work.
+ 
+-Return it with **RESET** and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.
++Return it with **RESET** and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.
+ 
+ The glass keeps the throws after their little storms have passed. Each face has a bar and a percentage; the running mean stands beside the model's 3.50. A short sequence can repeat one face or miss another without settling whether the die is fair.
+ 
+@@ -403,7 +403,7 @@
+ 
+ Across from the first die, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out. Read the ribbon as steps, heads forward and tails back: where would a walker be now, and how far has it been? The simplest random walk is a coin on a beam; two rooms on, a block on a rail takes it.
+ 
+-Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing. On a desktop, these are drops: the hand's throw is unavailable.
++Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing.
+ 
+ The gauges do not predict the next outcome. They let us see something the tally discards: every toss had conditions. Only the latest release keeps its measurements.
+ 
+@@ -457,7 +457,9 @@
+ 
+ 
+ 
+-Behind the display, a low field of cubes begins to tilt, each row by how far along the field it stands. Inside this hall you see only the first few degrees; the steeper rows lie beyond the back wall. Nothing there turns, and nothing there was drawn. The same tilt comes back every time the hall is built. Rotation can be a rule about place as easily as a record of chance.
++Behind the stacks, twenty-five cubes make a low square field. The first row lies level; the middle pitches upward; the last lies level again. Nothing keeps turning as you watch. The angle follows a row’s place along half a sine curve. Walk along its side. The same arrangement returns whenever the hall is built. Here your walk supplies the sequence: level, inclined, level again. Rotation can be a rule about place as easily as a record of chance.
++
++![Twenty-five cubes, level at both ends and tilted through the middle, fit behind the changing stacks.](/book-review/doc/book/figures/randomness/tilt-field-contained.png)
+ 
+ 
+ Here each piece shows only where its turns have added up to; the turns leave no trail, and RESET wipes even the sum. The random-walk room keeps a trail of one accumulated quantity, position, so there you can separate the next-step rule from the record of earlier steps.
+@@ -523,7 +525,11 @@
+ 
+ Read the order aloud. Keep where we were. Shorten the record. Put the bead where we are now. At step 300 the trail holds positions 100 through 299; the bead has reached position 300. The drawing is already behind the body, and the beginning has gone. Its absence from the glass does not mean those steps were never taken.
+ 
+-Nothing in the step generator reads this trail. Erasing its stored points in a controlled source test leaves the subsequent positions unchanged. The program still has memory: a current position, a generator state, a counter, a rule. What it lacks here is a way to consult the drawn history when choosing a heading. To make a walker avoid its own trail, that relation would have to be built. Between this cabinet and the basin, a sculpture of small cubes shows one way to build it. Before each step, that walk sets aside every neighbouring cell it already occupies and chooses among the rest, stopping early if none is left; it lays at most twenty-three cubes. The walk is finished when the hall is built, and what stands is the path alone: nothing marks the moves it turned down.
++Nothing in the step generator reads this trail. Erasing its stored points in a controlled source test leaves the subsequent positions unchanged. The program still has memory: a current position, a generator state, a counter, a rule. What it lacks here is a way to consult the drawn history when choosing a heading. To make a walker avoid its own trail, that relation would have to be built.
++
++
++On your right, between this cabinet and the basin, a sculpture of small cubes shows one way to build it. Before each step, that walk sets aside every neighbouring cell it already occupies and chooses among the rest, stopping early if none is left; it lays at most twenty-three cubes. The walk is finished when the hall is built, and what stands is the path alone: nothing marks the moves it turned down.
++
+ 
+ The wing beside the tank carries the logbook; its buttons now share the front console with the mode controls. ONE and ALL change which beads and trails are bright. All five continue stepping under either view. Following one has changed your access to the population, without sending the other four away.
+ 
+@@ -549,11 +555,9 @@
+ RUN repeats the experiment; HOLD lets the revealed move finish and stops the next draw. REPLAY brings both bodies to the centre and repeats their choices. Your marker can move elsewhere. It changes neither rule. A prediction has entered the room, but the machine has no obligation to meet it.
+ 
+ 
+-#### A hand with company
+-
+ Pick up the drawing dot. Move your hand slowly across the space, then hold it still. The small green tip keeps wandering. What part of this line belongs to your movement?
+ 
+-This is the grip from Trace with one addition. Thirty times per second, while you hold it, a random direction adds a small step to an offset. The next step starts from the offset already reached:
++This is the drawing dot from the Point Trace room, with one addition. Thirty times per second, while you hold it, a random direction adds a small step to an offset. The next step starts from the offset already reached:
+ 
+ ```gdscript
+ walk_offset = (walk_offset + direction * STEP_SIZE).limit_length(RADIUS)
+@@ -562,7 +566,7 @@
+ 
+ Your hand carries the origin; the tip walks around it. Each proposed step is 1.2 centimetres, and the offset cannot exceed 25 centimetres. At that boundary, the program shortens an outward proposal. Its freedom has a radius.
+ 
+-Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and try the same gesture. The point-count display still counts retained samples, as it did in Trace. The random clock proposes thirty steps a second, but the visible trail is sampled by the drawing process; a stalled frame can miss intermediate positions.
++Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and try the same gesture. The point-count display still counts retained samples, as it did there. The random clock proposes thirty steps a second, but the visible trail is sampled by the drawing process; a stalled frame can miss intermediate positions.
+ 
+ CLEAR / REPLAY restores the random seed and clears the trail. The random steps can repeat. Your hand need not. Let go and the wandering stops: this encounter gives chance movement only while someone holds it.
+ 
+@@ -593,7 +597,9 @@
+ 
+ The cabinet stands in the middle of the hall, its controls facing you as you approach. The other distribution studies stand around it. Its left panel offers UNIFORM, GAUSS, POISSON, EXPON and CLEAR. On the right are BATCH, PAUSE, NEW SEED, BINS and WIDTH. GAUSS is running when you arrive. New beads stop coming after a thousand draws, about twenty seconds; if nothing is falling when you get there, press CLEAR and they begin again.
+ 
+-Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
++Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate beside the histogram counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
++
++![The sampler’s numerical record stands beside its histogram, above the compact controls.](/book-review/doc/book/figures/randomness/sampler-visible-record.png)
+ 
+ CLEAR empties the display and restarts its named seed. While paused, it stays empty. Press BATCH. One hundred values are counted immediately, without the falling animation. Describe this particular arrangement. Press twice more, reading the total each time. A gap may close; another bar may fall further short of the pale bar behind it. More evidence does not promise that every part of the picture will improve at the next press.
+ 

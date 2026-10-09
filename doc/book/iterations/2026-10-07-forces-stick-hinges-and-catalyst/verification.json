@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "checks": 138,
+  "reports": [
+    "hand-tests.json",
+    "model-tests.json",
+    "museum/Vectors_Act4a_KineticForces/report.json",
+    "museum/Vectors_Act4b_Oscillation/report.json",
+    "museum/VFM_03_Motion/report.json",
+    "museum/VFM_08_Arena/report.json"
+  ],
+  "sources": {
+    "commons/artifacts/force_play/play_space.gd": "3611d8d478f1a08e54130185ae9830988d5b1092d1e5b61137d491d81acf1a58",
+    "commons/artifacts/force_play/encounter.gd": "592525dc05754ef5fa424badda4251c7d05b005235d1638838ec16c151aa9f0c",
+    "commons/artifacts/force_play/push_stick.gd": "c1bc106a9d761f922d4fd832da720e58cea50faa33d314646c8170a4e6a75dde",
+    "commons/artifacts/force_play/push_stick_rack.gd": "a8ac6a36b65b6822d900984fe8028624cb3f1ac68991e1da2e1cb2cd8cd79a3a",
+    "commons/scenes/DesktopInteractionPointer.gd": "205295df22c80f7631c09e23a142373f7348b5235cd6e721f268e639a27c8cfa",
+    "commons/artifacts/force_halls/hall_display.gd": "c0edf16980f9902aec99439c0311d7af8134298910bd311a2c1d39bcf5790de7",
+    "commons/hazards/becoming_catalyst/modes/forces_projectile.gd": "72b20823312089ca87f0763ec0c6ab1018806b42553ead5f89a7d4dfeaa21c7e",
+    "tools/probes/forces_hand_tools.gd": "f83300bdb644a6d97a572df28db5431ceaf52ee4041ff5a5e6bd0dcb82baf9ef",
+    "tools/probes/forces_hands_museum.gd": "07317351c7c5d30f01d2f3146211c7b4f0914c16b8403a92d599ecd535a15baa",
+    "doc/book/course/forces-tutorial-carriers.md": "e81c3bc73c0a6b38c978bdfae3066569a27162e5604003ed146a34402f2aeac4"
+  }
+}

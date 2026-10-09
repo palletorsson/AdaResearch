@@ -1,0 +1,35 @@
+{
+  "hall": "QFEP_Phi_Term",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "eight_placements": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "rigid_sculpture",
+    "fluid_form",
+    "phi_slider",
+    "preserved_pattern",
+    "lambda_promenade",
+    "transforming_pattern",
+    "tt",
+    "tt"
+  ],
+  "primary_artifacts": [
+    "phi_slider",
+    "transforming_pattern"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Phi_Term\\map_data.json": "a8bb23ba4667b938596120265323063a662bfdce7151b63606cd77bfdc2bb533",
+    "commons\\maps\\QFEP_Phi_Term\\final.md": "207244a11537a994772442c850d74b68b010448eb2fef08a4d2cc93738661b3a",
+    "commons\\maps\\QFEP_Phi_Term\\tutorial.md": "49e45ffe1be85065354bd010e9c302adcb36b4a7376d2e0f82a1a2fd5205c12f",
+    "commons\\maps\\QFEP_Phi_Term\\critical.md": "a07417f2d36406b1dde905968979937fd789ac70307b7049e5fe2dda90589f86"
+  }
+}

@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_CantorSet · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_CantorSet">← Tutorial lineage</a></p><h1>Fractal CantorSet</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_CantorSet/final.md">Raw captured source</a></p><pre># More pieces, less material
+
+&lt;!-- @cantor_set --&gt;
+
+One bar is waiting. Where could it go if we let it become two?
+
+Press NEXT. The new pair appears beneath it. Their outside ends reach as far as the first bar, but the middle is missing. Press again. Look for the new gaps before counting the pieces. Each piece has lost its own middle; the first large gap has not been divided or repaired.
+
+The trees sent another branch into space. Here another generation leaves less behind. At the fifth cut, thirty-two pieces share less than a metre of the six metres we began with. The desk counts the latest row. Above it, the old bars are still present. The whole display has become busier while the thing it is recording has become smaller in total length.
+
+Turn HISTORY off. There is much less to look at. The kept length does not change. The earlier rows were a record we added so we could follow the operation. They were never extra members of the latest generation.
+
+GHOST brings back pale marks where this generation cut its middles. They have no collision. The display can remember an absence without filling it with something that supports a body. Turn HISTORY on again and follow the larger absences upwards to the rows where they first appeared.
+
+These two lines make the next pair in the bar&#x27;s code:
+
+```gdscript
+var new_length = bar_length / 3.0
+var offset = bar_length / 3.0
+```
+
+The new bars are placed at the old centre minus that offset and the old centre plus it. Their width is `new_length`. Two thirds remain, separated by the third for which we create no solid bar. Repeating the operation gives us:
+
+```text
+pieces      = 2^n
+piece length = 6 / 3^n
+kept length  = 6 * (2/3)^n
+```
+
+The count rises as the retained length falls. Neither number tells us how much work the renderer is doing. With history visible, it draws every earlier row as well. At five cuts that means sixty-three solid bars, before we count the ghosts, the desk or the rest of the room.
+
+The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut.[^1] Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.
+
+From here the gaps can look generous. Carry that impression up the ramp.
+
+&lt;!-- @example_8_4_cantor_pagoda_vr --&gt;
+
+There is a broad opening under the pink beam. Walk through it. The same removal that interrupted a bar now offers a passage.
+
+Return to the desk and press CUT twice. Smaller openings appear beside the first one. Choose one that looks wide enough, go up the ramp and try it. At this setting the gaps include three metres, one metre and a third of a metre. All are gaps. They do not all admit the same body.
+
+The rule supplied intervals. The pagoda gave them height and depth, stacked their history above them, and made their surfaces collide with us. Here is the box shape used by its collision code:
+
+```gdscript
+shape.size = Vector3(width, block_height, block_thickness)
+```
+
+The interval&#x27;s width is only one of those three decisions. Press DEPTH: the passage becomes longer or shorter while its opening stays the same width. LATEST removes the earlier levels overhead. The ground-level intervals remain; the roof was our way of arranging their past.
+
+Try the narrow gap once more. The simulation does not collide with every fold of your clothes. It tests a proxy body. A passage can exclude that body even when the eye can travel through it. The obstruction belongs to a relation between the gap and the body we have implemented. To make a way through, we could widen the opening, change the body, or change which surfaces count as solid. Each choice makes a different world.
+
+More cuts have made more openings, but many are too small for this visitor. Nothing in the operation promises that more detail will make more room for us. And still we want to look inside. That desire can lead us back to the rule, to ask which of its decisions might move.
+
+&lt;!-- @ --&gt;
+
+At the far end of the hall, three trees stand in a row. They are one rule, three times. Each is grown by a call that makes its children and then calls itself on each of them, the self-call of the first hall, with every fork&#x27;s angle and length drawn by chance; near the trunk each fork makes three, further out two. Once grown, the branches push apart level by level until they have found room. No seed is kept. The hall builds three different trees each time it is built, and none of them can be asked for again. Every desk in this sequence returns the same object when you press RESET; these trees never do, and “the same tree” stops meaning anything you could check.
+
+The smaller Cantor drawing, the cloud and the dark sphere remain around the experiment as well. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?
+
+[^1]: Georg Cantor published the set in 1883, in the fifth of his papers “Über unendliche, lineare Punktmannichfaltigkeiten” (*Mathematische Annalen* 21); Henry J. S. Smith had described the same construction nine years earlier. The pagoda is built on Daniel Shiffman&#x27;s Example 8.4 in *The Nature of Code*.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_CantorSet/tutorial.md">Raw captured source</a></p><pre># Encounter order
+
+1. At cantor_set, predict the first gap. NEXT advances one cut; BACK returns. Count the latest row and compare its kept length.
+2. At five cuts, use HISTORY to separate current state from its record. Use GHOST to locate the new removals. The ghosts have no collision. RULE offers a summary after the experiment.
+3. At example_8_4_cantor_pagoda_vr, try the original broad opening via either retained ramp. Return to CUT twice and compare the broad, one-metre and narrow gaps.
+4. DEPTH changes the passage length. LATEST removes the earlier storeys overhead. Neither changes the latest X intervals. RESET returns the starting configuration.
+5. Explore the retained linear reference, cloud, three trees and sphere. Continue to Koch and Sierpinski: boundary growth and removal across a surface.
+
+Two book anchors and the same two Necklace primary entries establish the guided route. The remaining collection stays available for detours.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_CantorSet/technical.md">Raw captured source</a></p><pre># Finite intervals, their history and an extruded passage
+
+Two primaries: `cantor_set`, then `example_8_4_cantor_pagoda_vr`. All eight existing placements, including three stochastic trees, remain. Explicit map placement restores the cloud omitted by the previous museum arrangement. The original 19 × 23 enclosure, 13 × 9 raised deck and two approach wedges remain; museum floor coverage closes legacy exit voids.
+
+## Bar instrument
+
+`lesson:true` installs `commons/artifacts/cantor_lesson/cantor_lesson.gd`. The ordinary falling/instant modes remain available elsewhere. This lesson uses frozen bars, L=6 m, thickness 0.12 m, vertical row spacing 0.45 m and a 0.35 m base offset. It starts at n=0 and admits n=0..5. NEXT/BACK rebuild deterministic generations with the same middle-third code. RESET restores n=0, history on and removal gone.
+
+HISTORY hides earlier rows and disables their collision layers/masks. It does not modify the latest interval set. GHOST shows only the middle thirds newly removed at each displayed generation, as MeshInstance3D without collision. Earlier gaps remain empty; a row of ghosts is not a solid reconstruction of the original interval. RULE reveals a short summary on the desk. Exact GDScript excerpts in final.md are from `cantor_set.gd::perform_iteration` and the pagoda&#x27;s `_create_block`; the three equations are mathematical notation, not executable GDScript.
+
+The latest row has 2^n pieces, each L/3^n long, total L*(2/3)^n. The desk sums actual current BoxShape widths. At n=5 this gives 32 pieces, 0.790123 m kept and 63 solid bars across the full history. Finite bars have positive total length and thickness. Zero measure and uncountability refer to the mathematical limiting set, not the displayed mesh. Counts are not entropy or performance measurements.
+
+## Pagoda instrument
+
+The lesson sets base width 9 m, block height 2.2 m and n=1..3. CUT/LESS change the number of cuts. The latest generation is the bottom storey; older generations are stacked above it. DEPTH cycles extrusion through 2, 4, 1 m; this changes neither X intervals nor their count. LATEST hides earlier storeys and disables their collisions. RESET returns to n=1, extrusion 2 m and visible history. Rebuilds replace only generated blocks and preserve controls. Maximum lesson allocation is 15 blocks.
+
+At n=3 the lowest storey has 8 blocks totalling 2.666667 m of the 9 m width. Gaps include 3 m, 1 m and 1/3 m. This is an extrusion of finite 1D Cantor generations, not a three-dimensional Cantor dust and not a claim that its polygon mesh has fractal dimension. A fixed collision proxy makes different gaps traversable. The pagoda&#x27;s `get_level_info` now reports summed kept width separately from one interval&#x27;s width, and uses the inverted physical storey height. Depth zero in the underlying sculpture also avoids a division by zero in its colour calculation.
+
+## Museum placement and controls
+
+The authored deck provides a 1 m support height, applied once by the museum. The pagoda desk sits on the lower museum floor before the deck. The bar desk sits beside the approach. Both use full-size touch buttons in a 3 × 2 layout and a 1.18 × 0.36 m transparent screen. The secondary Nature of Code artifact is a linear Cantor display, configured to five cuts; the former references to radial circles were incorrect and are archived.
+
+Runtime evidence and input limitations are recorded on the illustrated Cantor review page. Physical headset reach, comfort and Quest performance remain to test.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_CantorSet/intent.md">Raw captured source</a></p><pre>Concept: Repeated middle-third removal; finite intervals versus their history and the mathematical limit.
+Sequence role: Third active fractal hall, after Recursive Trees and before Koch and Sierpinski. Carry recursion into removal, then onward to boundary growth and surface subdivision.
+Primary artifacts: cantor_set gives a manually stepped, frozen record; example_8_4_cantor_pagoda_vr extrudes the intervals into collidable passages. Both have compact physical desks and matching final.md anchors.
+Retained collection: A linear Nature of Code Cantor display, three stochastic trees, fractal cloud and dark sphere. No radial-circle claim: that was a mismatch with the actual source.
+Critical question: A gap for whom? More openings do not ensure access for the implemented body. Appearance, collision, approach and representation budget each make decisions.
+Next enquiry: Koch&#x27;s expanding boundary and Sierpinski&#x27;s removal across a surface. Do not collapse mathematical limiting sets into finite thick meshes or call object counts entropy.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_CantorSet/critical.md">Raw captured source</a></p><pre># A gap for whom?
+
+The Cantor display accumulates its history while the current intervals lose length. That arrangement can make removal resemble growth. HISTORY lets the visitor test the difference. GHOST adds another distinction: something may be present to vision and absent to collision. These are explicit choices in the instrument, not properties of the mathematical limit.
+
+The pagoda asks what the intervals can carry when they acquire thickness. Width alone does not make an opening usable. Collision, headroom, approach and the size of the player&#x27;s proxy body take part. At the third cut, a one-metre opening and a third-metre opening share the same construction rule while allowing different movements. A topology of openings still needs a metric and a body before it becomes a promise of passage.
+
+Queer invention can begin with that mismatch. We can desire the narrow opening and ask which body could use it, or change the rule that made the passage narrow. We can also discover that a beautiful garment does not change the capsule with which the world collides. Appearance and permission need not agree. Their separation is available for investigation and redesign.
+
+More recursion is not a guarantee of escape. It produces more pieces and smaller differences, each requiring representation and attention. The five-cut ceiling is a chosen budget; it does not demonstrate the mathematical limit or measure a threshold of freedom. The urge to go further matters, as does learning which operation would actually change the obstruction.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_CantorSet/artifacts.md">Raw captured source</a></p><pre># Fractal CantorSet — Artifacts
+*Fractals: Infinite Within Finite · lambda_edge · 5 artifacts*
+
+&gt; Remove the middle third. Remove it again. And again. The Cantor set is defined by absence—after infinite deletions, uncountably many points remain with zero total length. More than nothing, less than something. Dimension 0.631: between point and line.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## cantor_set
+![cantor_set](/scene-catalog/cantor_set.png)
+
+cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.
+
+`cantor_set`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## example_8_4_cantor_set_vr
+![example_8_4_cantor_set_vr](/scene-catalog/example_8_4_cantor_set_vr.png)
+
+Cantor Set - infinite subdivision creating zero measure infinite set
+
+`example_8_4_cantor_set_vr`
+
+## example_8_4_cantor_pagoda_vr
+![example_8_4_cantor_pagoda_vr](/scene-catalog/example_8_4_cantor_pagoda_vr.png)
+
+Cantor Pagoda - 3D extension of Cantor set principle
+
+`example_8_4_cantor_pagoda_vr`
+
+## stochastic_tree_separated
+![stochastic_tree_separated](/scene-catalog/stochastic_tree_separated.png)
+
+stochastic_tree_separated
+
+`stochastic_tree_separated`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_CantorSet/summary.md">Raw captured source</a></p><pre># More pieces, less material
+
+Repeated middle-third removal multiplies the pieces while reducing their total length. A compact desk separates the latest generation from its visible history and marks what each cut removed. The second desk gives the same intervals an architectural thickness: some gaps admit the player, others only the eye. The historic deck and ramps and all eight placements remain. Next: Koch and Sierpinski.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_CantorSet/blurb.md">Raw captured source</a></p><pre>Another cut gives us more pieces and less material. Walk the gap that the missing third has opened. When the openings multiply, which ones still admit your body?
+</pre></section></body></html>

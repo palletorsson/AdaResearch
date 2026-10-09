@@ -1,0 +1,1772 @@
+--- before/ada_run/em_plan.json
++++ current/ada_run/em_plan.json
+@@ -73789,9 +73789,9 @@
+             "door_sensor_radius": "2.6",
+             "accent_color": "0.227,0.482,1.0",
+             "signage_top": "TURING MACHINE LAB",
+-            "signage_sub": "Rule 110 \u2192 universal computation",
+-            "annotation_top": "M = (Q, \u03a3, \u0393, \u03b4, q0, F) \u2014 Game of Life is Turing complete",
+-            "annotation_bottom": "belt = \u0393*, panel = q, server rack = \u03b4, button = HALT",
++            "signage_sub": "Rule 110 → universal computation",
++            "annotation_top": "M = (Q, Σ, Γ, δ, q0, F) — Game of Life is Turing complete",
++            "annotation_bottom": "belt = Γ*, panel = q, server rack = δ, button = HALT",
+             "mounted_artifact_scene": "res://commons/artifacts/turing_apparatus/turing_apparatus.tscn"
+           }
+         },
+@@ -166837,6 +166837,8 @@
+     },
+     {
+       "museum": "uffizi-spine-enfilade",
++      "open_roof": true,
++      "piers": false,
+       "gate_depth_rows": 0,
+       "tile": [
+         [
+@@ -167154,38 +167156,6 @@
+             ]
+           },
+           "scale": 180.0
+-        },
+-        {
+-          "token": "accountability_ledger",
+-          "cell": [
+-            2,
+-            2
+-          ],
+-          "tile_cell": [
+-            2,
+-            2
+-          ],
+-          "rotation": 180,
+-          "mode": "freestanding",
+-          "venue": "interior",
+-          "support_height_m": 0.0,
+-          "hand": false,
+-          "ruled": {
+-            "by": "map: PostCrisis_Synthesis",
+-            "cell": [
+-              2,
+-              2
+-            ]
+-          },
+-          "config": {
+-            "log_interval": "6"
+-          },
+-          "scale": 1.8,
+-          "offset": [
+-            0.0,
+-            0.65,
+-            0.0
+-          ]
+         },
+         {
+           "token": "edge_ground_synthesis",
+@@ -167293,6 +167263,62 @@
+             0.4,
+             0.0
+           ]
++        },
++        {
++          "token": "accountability_ledger",
++          "cell": [
++            11,
++            10
++          ],
++          "tile_cell": [
++            11,
++            10
++          ],
++          "rotation": 180,
++          "mode": "freestanding",
++          "venue": "interior",
++          "support_height_m": 0.0,
++          "hand": false,
++          "ruled": {
++            "by": "map: PostCrisis_Synthesis",
++            "cell": [
++              11,
++              10
++            ]
++          },
++          "config": {
++            "log_interval": "6",
++            "visitor_record": "true"
++          },
++          "scale": 1.8,
++          "offset": [
++            0.0,
++            0.65,
++            0.0
++          ]
++        },
++        {
++          "token": "assembly_return",
++          "cell": [
++            7,
++            12
++          ],
++          "tile_cell": [
++            7,
++            12
++          ],
++          "rotation": 180,
++          "mode": "freestanding",
++          "venue": "interior",
++          "support_height_m": 0.0,
++          "hand": false,
++          "ruled": {
++            "by": "map: PostCrisis_Synthesis",
++            "cell": [
++              7,
++              12
++            ]
++          }
+         }
+       ],
+       "rejected": [],
+@@ -167310,15 +167336,7 @@
+       "map": "PostCrisis_Synthesis",
+       "pearls_total": 8,
+       "authored": "map",
+-      "source": "em_map_halls: the map IS the hall",
+-      "_ruling": {
+-        "src_w": 16,
+-        "src_h": 16,
+-        "rotated": false,
+-        "pad": 0,
+-        "pad_closed": false,
+-        "ring": null
+-      }
++      "source": "em_map_halls: the map IS the hall"
+     }
+   ],
+   "offered": [
+@@ -168003,7 +168021,7 @@
+             "anchor": "interactive_point_origin_force",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the point poem",
+@@ -168098,7 +168116,7 @@
+             "anchor": "origin",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "hero",
+             "walk_why": "a line of the point poem",
+@@ -168145,7 +168163,7 @@
+             "anchor": "you_are_here",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the point poem",
+@@ -168430,7 +168448,7 @@
+             "anchor": "line",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168459,7 +168477,7 @@
+             "anchor": "plus_line_puzzle",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168506,7 +168524,7 @@
+             "anchor": "laser_exploding_sphere",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 11 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168753,7 +168771,7 @@
+             "anchor": "laser_measure",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168803,7 +168821,7 @@
+             "anchor": "laser_measure",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168853,7 +168871,7 @@
+             "anchor": "laser_measure",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -168924,7 +168942,7 @@
+             "anchor": "modulor_man_demo",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -169065,7 +169083,7 @@
+             "anchor": "floating_sphere_field",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the lines page",
+@@ -169198,7 +169216,7 @@
+             "anchor": "mystic_writing_pad",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a line of the trace page",
+@@ -169704,7 +169722,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.0 x 4.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.0 x 4.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "folding_past",
+@@ -169729,7 +169747,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (6.0 x 4.8 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (6.0 x 4.8 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "frame_counter_display",
+@@ -170351,7 +170369,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (0.2 x 0.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (0.2 x 0.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "laser_exploding_sphere",
+@@ -170524,7 +170542,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (100.0 x 3.5 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (100.0 x 3.5 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "klee_walking_point",
+@@ -171009,7 +171027,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (1.0 x 7.5 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (1.0 x 7.5 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "animatedcubebuilder",
+@@ -171565,7 +171583,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (3.5 x 24.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (3.5 x 24.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "combine_portals",
+@@ -171590,7 +171608,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.0 x 8.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.0 x 8.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "durer_scene",
+@@ -171615,7 +171633,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (5.5 x 8.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (5.5 x 8.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "snap_pyramid_puzzle",
+@@ -172996,7 +173014,7 @@
+             "anchor": "pattern_tile_4x4",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of pattern_tile_4x4: an @identity relationships field names it",
+@@ -173054,7 +173072,7 @@
+             "anchor": "kaleidoscope",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of pattern_tile_4x4: an @identity relationships field names it",
+@@ -173161,7 +173179,7 @@
+             "anchor": "pattern_artifact",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 6 map(s)"
+           }
+         },
+@@ -173225,7 +173243,7 @@
+             "anchor": "tile_meander_floor",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it"
+           }
+         },
+@@ -173270,7 +173288,7 @@
+             "anchor": "pattern_tile_puzzle",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it"
+           }
+         },
+@@ -173881,7 +173899,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.3 x 2.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.3 x 2.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         }
+       ],
+       "dna_spatial_demand": [],
+@@ -174039,7 +174057,7 @@
+             "anchor": "column_3_z",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         },
+@@ -174398,7 +174416,7 @@
+             "anchor": "column_3_z",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         },
+@@ -174425,7 +174443,7 @@
+             "anchor": "column_3_z",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         },
+@@ -174452,7 +174470,7 @@
+             "anchor": "column_3_z",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         },
+@@ -174479,7 +174497,7 @@
+             "anchor": "column_3_z",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         }
+@@ -174636,7 +174654,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (14.0 x 1.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (14.0 x 1.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "column_3_z",
+@@ -174918,7 +174936,7 @@
+             "anchor": "pattern_machine_d",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the pattern foundry pearl (Pattern_Foundry)",
+@@ -174947,7 +174965,7 @@
+             "anchor": "pattern_machine_b",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the pattern foundry pearl (Pattern_Foundry)",
+@@ -174976,7 +174994,7 @@
+             "anchor": "pattern_machine_a",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the pattern foundry pearl (Pattern_Foundry)",
+@@ -175005,7 +175023,7 @@
+             "anchor": "pattern_machine_d",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of pattern_machine_d: an @identity relationships field names it",
+@@ -175111,7 +175129,7 @@
+             "anchor": "crackpropagation_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)"
+           }
+         },
+@@ -175395,7 +175413,7 @@
+             "anchor": "dress_selector",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it"
+           }
+         },
+@@ -175447,7 +175465,7 @@
+             "anchor": "nail_color_controller",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)"
+           }
+         },
+@@ -175717,7 +175735,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (47.2 x 24.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (47.2 x 24.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "visual_color_mixing",
+@@ -175929,7 +175947,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.6 x 8.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.6 x 8.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "color_constellation_office",
+@@ -175953,7 +175971,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.9 x 2.8 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.9 x 2.8 m) â€” not hung; it wants ground of its own and a threshold into it"
+         }
+       ],
+       "dna_spatial_demand": [],
+@@ -176122,7 +176140,7 @@
+             "anchor": "gradient_descent",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the descent pearl (FormFinding_Descent)",
+@@ -176151,7 +176169,7 @@
+             "anchor": "gradient_descent",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of gradient_descent: an @identity relationships field names it",
+@@ -176204,7 +176222,7 @@
+             "anchor": "gradient_descent_well",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of gradient_descent_well: an @identity relationships field names it",
+@@ -176286,7 +176304,7 @@
+             "anchor": "self_shaping_forge",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)",
+             "walk_kind": "edge",
+             "walk_why": "the museum could not hold it: physical_overlap: 2 body cells collide with descent_marble_toy",
+@@ -176411,7 +176429,7 @@
+             "anchor": "cable_builder",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it"
+           }
+         },
+@@ -177076,7 +177094,7 @@
+             "anchor": "rotatescalecubes",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the intro pearl (WaveFunctions_Intro)",
+@@ -177163,7 +177181,7 @@
+             "anchor": "y_oscillation_cube",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the intro pearl (WaveFunctions_Intro)",
+@@ -177250,7 +177268,7 @@
+             "anchor": "mario_cube_time_trace",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of rotatescalecubes: an @identity relationships field names it",
+@@ -177308,7 +177326,7 @@
+             "anchor": "PendulumWave",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of control_pendulum: an @identity relationships field names it",
+@@ -177462,7 +177480,7 @@
+             "anchor": "rotating_cube",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 9 map(s)"
+           }
+         },
+@@ -177489,7 +177507,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177515,7 +177533,7 @@
+             "anchor": "rotatescalecubes",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 5 map(s)"
+           }
+         },
+@@ -177567,7 +177585,7 @@
+             "anchor": "lab_table",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it"
+           }
+         },
+@@ -177846,7 +177864,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177873,7 +177891,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177900,7 +177918,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177927,7 +177945,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177954,7 +177972,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -177981,7 +177999,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -178008,7 +178026,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -178035,7 +178053,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -178062,7 +178080,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -178089,7 +178107,7 @@
+             "anchor": "sine_wall_explanation",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         }
+@@ -178711,7 +178729,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (7.6 x 11.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (7.6 x 11.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "WavePaintings",
+@@ -178736,7 +178754,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (21.1 x 4.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (21.1 x 4.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "draw_dot_time_domain",
+@@ -179111,7 +179129,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (17.0 x 11.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (17.0 x 11.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "sine_wall_corridor",
+@@ -179186,7 +179204,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (9.2 x 2.7 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (9.2 x 2.7 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "wave_propagation_3d",
+@@ -179211,7 +179229,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (22.6 x 3.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (22.6 x 3.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "coupled_oscillator_lattice",
+@@ -179622,7 +179640,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.0 x 9.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.0 x 9.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "dual_display_test",
+@@ -179672,7 +179690,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (7.8 x 10.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (7.8 x 10.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "john_cage_tech_noir",
+@@ -179698,7 +179716,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (12.0 x 4.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (12.0 x 4.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "RackAmbientDrone",
+@@ -179801,7 +179819,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (7.4 x 9.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (7.4 x 9.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "math_objects",
+@@ -179826,7 +179844,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.2 x 64.5 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.2 x 64.5 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "wave_interference",
+@@ -179851,7 +179869,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (14.0 x 8.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (14.0 x 8.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "lissajous_curves",
+@@ -179978,7 +179996,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (5.8 x 3.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (5.8 x 3.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "additive_wave_demo",
+@@ -180103,7 +180121,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (6.7 x 7.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (6.7 x 7.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "SoundscapeRadioRack",
+@@ -180977,7 +180995,7 @@
+             "anchor": "entropy_axiom",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the random definition pearl (Random_Definition)",
+@@ -181126,7 +181144,7 @@
+             "anchor": "prng_crank_machine",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the random definition pearl (Random_Definition)",
+@@ -181344,7 +181362,7 @@
+             "anchor": "slot_machine",
+             "role": "synthesis",
+             "kind": "synthesis_outcome",
+-            "rule": "synthesis bay \u00e2\u20ac\u201d the family is gathered into one authored outcome",
++            "rule": "synthesis bay â€” the family is gathered into one authored outcome",
+             "why": "the synthesis artifact explicitly names this source in its registry relationships",
+             "walk_kind": "synthesizes",
+             "walk_why": "synthesis of 11 sources, 9 from this node: prng_crank_machine, coin_toss, monte_carlo_dartboard, shannon_entropy_meter",
+@@ -181422,7 +181440,7 @@
+             "anchor": "remove_random",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 3 map(s)"
+           }
+         },
+@@ -182191,7 +182209,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (22.2 x 14.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (22.2 x 14.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "random_number_book_page_1955",
+@@ -182217,7 +182235,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (4.0 x 6.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (4.0 x 6.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "hardware_entropy_decay",
+@@ -182319,7 +182337,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (0.6 x 10.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (0.6 x 10.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "random_edge_profile",
+@@ -182519,7 +182537,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (4.0 x 6.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (4.0 x 6.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "random_walk_128",
+@@ -182647,7 +182665,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 5.7 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 5.7 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "distribution_comparator",
+@@ -182723,7 +182741,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.0 x 0.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.0 x 0.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "bubbles_random",
+@@ -182775,7 +182793,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (57.8 x 30.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (57.8 x 30.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "sculpt_one",
+@@ -182879,7 +182897,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.2 x 10.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.2 x 10.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "pipe_dream",
+@@ -182930,7 +182948,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 0.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 0.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "random_space",
+@@ -182955,7 +182973,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.0 x 0.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.0 x 0.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "miura_crawler",
+@@ -183483,7 +183501,7 @@
+             "anchor": "randompoint",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the random noise types pearl (Random_Noise_Types)",
+@@ -183818,7 +183836,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (4.1 x 7.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (4.1 x 7.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "voxelnoise",
+@@ -183843,7 +183861,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (32.0 x 32.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (32.0 x 32.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "shader_noise_space",
+@@ -183868,7 +183886,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (18.1 x 13.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (18.1 x 13.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "noisesphere",
+@@ -183892,7 +183910,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (31.1 x 31.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (31.1 x 31.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "noise_space",
+@@ -183917,7 +183935,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.0 x 3.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.0 x 3.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "simplex_noise",
+@@ -183942,7 +183960,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.0 x 2.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.0 x 2.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "perlin_noise",
+@@ -183967,7 +183985,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.0 x 1.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.0 x 1.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "noise_terrain",
+@@ -183992,7 +184010,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (100.0 x 17.5 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (100.0 x 17.5 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "perlin_noise_terrain",
+@@ -184216,7 +184234,7 @@
+             "anchor": "persian_rug",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of persian_rug: an @identity relationships field names it",
+@@ -184997,7 +185015,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (7.2 x 7.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (7.2 x 7.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "mirrored_cellular_automata",
+@@ -185124,7 +185142,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.5 x 12.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.5 x 12.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         }
+       ],
+       "dna_spatial_demand": [],
+@@ -185306,7 +185324,7 @@
+             "anchor": "fractal_recursion_2",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 3 map(s)",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the fractal recursion pearl (Fractal_Recursion)",
+@@ -185364,7 +185382,7 @@
+             "anchor": "recursive_table",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the fractal recursion pearl (Fractal_Recursion)",
+@@ -185397,7 +185415,7 @@
+             "anchor": "fibonacci_pagoda",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of fibonacci_pagoda: an @identity relationships field names it",
+@@ -185891,7 +185909,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (3.8 x 9.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (3.8 x 9.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "example_8_3_recursion_circles_vr",
+@@ -186028,7 +186046,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.4 x 14.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.4 x 14.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "recursive_tree",
+@@ -186053,7 +186071,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (15.4 x 16.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (15.4 x 16.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "cantor_set",
+@@ -186079,7 +186097,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (9.0 x 0.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (9.0 x 0.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "example_8_4_cantor_set_vr",
+@@ -186190,7 +186208,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (3.0 x 4.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (3.0 x 4.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "box_counting_dimension",
+@@ -186215,7 +186233,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (11.0 x 6.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (11.0 x 6.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "sierpinski_triangle",
+@@ -186290,7 +186308,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (9.0 x 9.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (9.0 x 9.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "fibonacci_sequences",
+@@ -186315,7 +186333,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (13.0 x 9.8 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (13.0 x 9.8 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "julia_set",
+@@ -186342,7 +186360,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (12.0 x 6.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (12.0 x 6.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "mandelbrot_set",
+@@ -186366,7 +186384,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (16.9 x 5.6 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (16.9 x 5.6 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "koch_curve",
+@@ -186391,7 +186409,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (40.7 x 35.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (40.7 x 35.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "space_filling_curve_gallery",
+@@ -186969,7 +186987,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -186996,7 +187014,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187023,7 +187041,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187050,7 +187068,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187077,7 +187095,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187104,7 +187122,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187131,7 +187149,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187158,7 +187176,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187185,7 +187203,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187212,7 +187230,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187239,7 +187257,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187266,7 +187284,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187293,7 +187311,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187320,7 +187338,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187347,7 +187365,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187374,7 +187392,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187401,7 +187419,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187428,7 +187446,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187455,7 +187473,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187482,7 +187500,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187509,7 +187527,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187536,7 +187554,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         },
+@@ -187563,7 +187581,7 @@
+             "anchor": "percolationnetwork_ca",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 4 map(s)"
+           }
+         }
+@@ -187593,7 +187611,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (30.0 x 6.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (30.0 x 6.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "space_colonization_algorithm",
+@@ -187619,7 +187637,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.0 x 10.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.0 x 10.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "percolationnetwork_ca",
+@@ -187645,7 +187663,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (9.0 x 9.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (9.0 x 9.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "organic_space",
+@@ -187670,7 +187688,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (25.8 x 25.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (25.8 x 25.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "branching_growth_algorithm",
+@@ -187696,7 +187714,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (6.0 x 6.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (6.0 x 6.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "maze_generation",
+@@ -187722,7 +187740,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (34.0 x 3.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (34.0 x 3.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "layered_membrane",
+@@ -187774,7 +187792,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.5 x 8.7 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.5 x 8.7 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "dome",
+@@ -187799,7 +187817,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 26.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 26.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "mirror_cellular_texture_for_3d",
+@@ -187849,7 +187867,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (66.8 x 146.5 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (66.8 x 146.5 m) â€” not hung; it wants ground of its own and a threshold into it"
+         }
+       ],
+       "dna_spatial_demand": [],
+@@ -187988,7 +188006,7 @@
+             "anchor": "softmill",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "hero",
+             "walk_why": "the hero of soft body deformation (hand)",
+@@ -188075,7 +188093,7 @@
+             "anchor": "soft_mushroom",
+             "role": "related",
+             "kind": "sibling",
+-            "rule": "row \u00e2\u20ac\u201d one scene under several names, dealt at even spacing",
++            "rule": "row â€” one scene under several names, dealt at even spacing",
+             "why": "same scene file, different registry name",
+             "walk_kind": "extends",
+             "walk_why": "named relation of jelly_cube: an @identity relationships field names it",
+@@ -189411,7 +189429,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (9.2 x 5.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (9.2 x 5.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "cloth_straps",
+@@ -189548,7 +189566,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 2.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 2.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "breathing_room",
+@@ -189599,7 +189617,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (26.0 x 4.7 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (26.0 x 4.7 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "rounded_softbody_test",
+@@ -189714,7 +189732,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (5.0 x 5.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (5.0 x 5.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "gallery_marker_soft-body",
+@@ -189912,7 +189930,7 @@
+             "anchor": "csg_difference_demo",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "family relation of csg_union_demo: same category and sequence",
+@@ -190261,7 +190279,7 @@
+             "anchor": "PhysarumColony",
+             "role": "related",
+             "kind": "sibling",
+-            "rule": "row \u00e2\u20ac\u201d one scene under several names, dealt at even spacing",
++            "rule": "row â€” one scene under several names, dealt at even spacing",
+             "why": "same scene file, different registry name",
+             "walk_kind": "edge",
+             "walk_why": "the museum could not hold it: escalation: precinct: no exterior venue is large enough either",
+@@ -190291,7 +190309,7 @@
+             "anchor": "boids_2d_in_3d",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 1 map(s)"
+           }
+         },
+@@ -191062,7 +191080,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (50.0 x 6.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (50.0 x 6.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "FlowFieldMain",
+@@ -191089,7 +191107,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (50.0 x 1.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (50.0 x 1.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "boids_aquarium",
+@@ -191139,7 +191157,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (24.5 x 14.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (24.5 x 14.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "AntColonyV2",
+@@ -191164,7 +191182,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (50.0 x 2.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (50.0 x 2.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "self_organizing_patterns",
+@@ -191188,7 +191206,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (6.6 x 8.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (6.6 x 8.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "fitness_landscape_politics",
+@@ -191471,7 +191489,7 @@
+             "anchor": "evolved_creatures",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the ml evolution pearl (ML_Evolution)",
+@@ -191505,7 +191523,7 @@
+             "anchor": "evolvingflowers",
+             "role": "related",
+             "kind": "sibling",
+-            "rule": "row \u00e2\u20ac\u201d one scene under several names, dealt at even spacing",
++            "rule": "row â€” one scene under several names, dealt at even spacing",
+             "why": "same scene file, different registry name",
+             "walk_kind": "extends",
+             "walk_why": "named relation of evolved_creatures: an @identity relationships field names it",
+@@ -191582,7 +191600,7 @@
+             "anchor": "loss_function_comparator",
+             "role": "related",
+             "kind": "named",
+-            "rule": "sightline \u00e2\u20ac\u201d the relative stands where the lead can be seen with it",
++            "rule": "sightline â€” the relative stands where the lead can be seen with it",
+             "why": "an @identity relationships field names it",
+             "walk_kind": "extends",
+             "walk_why": "named relation of gradient_descent_visualization: an @identity relationships field names it",
+@@ -191721,7 +191739,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (40.0 x 2.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (40.0 x 2.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "gradient_descent_visualization",
+@@ -191747,7 +191765,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (8.8 x 4.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (8.8 x 4.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "non_teleological_evolution",
+@@ -191773,7 +191791,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (2.0 x 100.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (2.0 x 100.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "evolvingflowers",
+@@ -191799,7 +191817,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 2.8 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 2.8 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "pca_visualization",
+@@ -191825,7 +191843,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (12.0 x 5.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (12.0 x 5.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "loss_function_comparator",
+@@ -191877,7 +191895,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (50.0 x 9.4 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (50.0 x 9.4 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "svm_visualization",
+@@ -191903,7 +191921,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (10.0 x 4.3 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (10.0 x 4.3 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "random_forest_visualization",
+@@ -191929,7 +191947,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (20.0 x 7.9 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (20.0 x 7.9 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "neural_network_visualization",
+@@ -191955,7 +191973,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (12.6 x 8.7 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (12.6 x 8.7 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "neural_networks_vr",
+@@ -191981,7 +191999,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (27.4 x 14.2 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (27.4 x 14.2 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "computer_vision_vr",
+@@ -192007,7 +192025,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (24.8 x 6.1 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (24.8 x 6.1 m) â€” not hung; it wants ground of its own and a threshold into it"
+         }
+       ],
+       "dna_spatial_demand": [
+@@ -192273,7 +192291,7 @@
+             "anchor": "grab_sphere_F",
+             "role": "related",
+             "kind": "sibling",
+-            "rule": "row \u00e2\u20ac\u201d one scene under several names, dealt at even spacing",
++            "rule": "row â€” one scene under several names, dealt at even spacing",
+             "why": "same scene file, different registry name",
+             "walk_kind": "sibling",
+             "walk_why": "a body of the qfep introduction pearl (QFEP_Introduction)",
+@@ -192447,7 +192465,7 @@
+             "anchor": "grab_sphere_F",
+             "role": "related",
+             "kind": "co_placed",
+-            "rule": "fill \u00e2\u20ac\u201d they already stand together in real maps",
++            "rule": "fill â€” they already stand together in real maps",
+             "why": "already stand together in 2 map(s)"
+           }
+         },
+@@ -193336,7 +193354,7 @@
+           "housed": false,
+           "reserved": false,
+           "assemble": false,
+-          "why": "precinct work (12.1 x 3.0 m) \u00e2\u20ac\u201d not hung; it wants ground of its own and a threshold into it"
++          "why": "precinct work (12.1 x 3.0 m) â€” not hung; it wants ground of its own and a threshold into it"
+         },
+         {
+           "anchor": "complexity_pattern",

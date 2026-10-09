@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Godot probe passes all focused checks",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/context/discofloor/StandaloneDiscoFloor.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/context/discofloor/DiscoSequencerBridge.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Tutorial_Disco/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/sequences/array_tutorial.json",
+      "passed": true
+    },
+    {
+      "name": "published current-source snapshots match",
+      "passed": true
+    },
+    {
+      "name": "tested runtime source hashes match",
+      "passed": true
+    },
+    {
+      "name": "reading matches canonical final.md",
+      "passed": true
+    },
+    {
+      "name": "all prior manuscript prose remains",
+      "passed": true
+    },
+    {
+      "name": "all artifact anchors retained",
+      "passed": true
+    },
+    {
+      "name": "exact manuscript diff reconstructs current comparison",
+      "passed": true
+    },
+    {
+      "name": "other halls metadata remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "primary encounters remain",
+      "passed": true
+    },
+    {
+      "name": "current chapter hash recorded",
+      "passed": true
+    },
+    {
+      "name": "96 complete native motion frames",
+      "passed": true
+    },
+    {
+      "name": "shared book figure appears in both views",
+      "passed": true
+    },
+    {
+      "name": "served index.html",
+      "passed": true
+    },
+    {
+      "name": "served triangle-combinations.png",
+      "passed": true
+    },
+    {
+      "name": "served motion-000.png",
+      "passed": true
+    },
+    {
+      "name": "served motion-031.png",
+      "passed": true
+    },
+    {
+      "name": "served motion-095.png",
+      "passed": true
+    },
+    {
+      "name": "served report.json",
+      "passed": true
+    },
+    {
+      "name": "served Tutorial_Disco.diff",
+      "passed": true
+    },
+    {
+      "name": "embedded script matches checked viewer",
+      "passed": true
+    }
+  ],
+  "runtime_checks": 121,
+  "scope": "Preservation, current source hashes, publication assets; native scene rendering and supplied input are documented separately."
+}

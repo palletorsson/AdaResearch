@@ -1,0 +1,266 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Pathfinding · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Pathfinding">← Tutorial lineage</a></p><h1>GT Pathfinding</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Pathfinding/final.md">Raw captured source</a></p><pre># The route after a stone disappears
+
+What should a traveller do when the route it planned is no longer available?
+
+&lt;!-- @impatient_river --&gt;
+
+Follow the spark’s route across the stones. Before pressing the button, choose the next connection you expect it to use. The button sinks a stone belonging to the current route. Watch where the spark goes on its next crossing, and whether it still reaches the opposite bank. The readout’s stone count is the one number that changes.
+
+A route is a sequence through available connections. Removing a stone changes the graph the search can use; it does not merely make the old drawing look different. The exhibit marks that stone unavailable and asks for another path through the remaining graph.
+
+After a removal, compare the crossing you remember with the one the spark now makes. Look for a stretch that remains useful to both. Replanning does not imply that every previous choice was wrong; some connections can survive a local change while another segment must be replaced. If the readout says NO ROUTE, trace the missing connection in your own proposed crossing. This keeps the observation tied to the available stones instead of treating a failed search as a mysterious refusal.
+
+The connections here come from a spatial rule. Nearby stones are linked, and the banks receive links to nearby stones. The search therefore works with the routes that this constructed graph permits. A gap that your eyes imagine jumping is not automatically an edge, and the spark’s hops are its calculated route, not a promise that your own body can walk it.
+
+The exhibit keeps a limited number of stones disabled. As more disappear, older ones can return. A route can consequently change because an option was removed or because an earlier option became available again. Keep both kinds of change in mind when you explain a rerouting.
+
+Sometimes there may be no route. That outcome says something precise about the available graph. It does not prove that no crossing could exist with another bridge, another connection distance or another kind of traveller. Search cannot use an option the representation never supplies.
+
+Try a second removal after the new route is established. Predict whether the remaining network has an alternative before asking the algorithm. The search is over before the spark sets off; what you watch is the route it found, not the finding. Which stones do you think it had to consider and pass over before it settled on these?
+
+&lt;!-- @ --&gt;
+
+Network analysis asks what the arrangement as a whole makes possible: which vertices connect many others, and which only look important in the drawing?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Pathfinding/tutorial.md">Raw captured source</a></p><pre># GT Pathfinding
+
+The maze is a graph. Walk it with DFS, BFS, or A*.
+
+Build a grid graph.
+
+```gdscript
+func grid_graph(size: Vector2i) -&gt; Graph:
+    var g := Graph.new()
+    for y in size.y:
+        for x in size.x:
+            g.add_vertex(Vector2i(x, y))
+    for y in size.y:
+        for x in size.x - 1:
+            g.add_edge(Vector2i(x, y), Vector2i(x + 1, y))
+    for y in size.y - 1:
+        for x in size.x:
+            g.add_edge(Vector2i(x, y), Vector2i(x, y + 1))
+    return g
+```
+
+Every cell is a vertex; adjacent cells are connected by edges. The base for maze algorithms.
+
+Remove random edges to form walls.
+
+```gdscript
+func remove_walls(g: Graph, remove_ratio: float = 0.3) -&gt; void:
+    var to_remove: Array = []
+    for edge in g.edges:
+        if randf() &lt; remove_ratio:
+            to_remove.append(edge)
+    for edge in to_remove:
+        g.edges.erase(edge)
+```
+
+Removing edges creates walls. The maze is the resulting sparse graph.
+
+Depth-first search.
+
+```gdscript
+func dfs(g: Graph, start, goal) -&gt; Array:
+    var stack: Array = [start]
+    var came_from: Dictionary = {start: null}
+    while not stack.is_empty():
+        var current = stack.pop_back()
+        if current == goal: break
+        for neighbour in g.neighbours(current):
+            if not neighbour in came_from:
+                came_from[neighbour] = current
+                stack.push_back(neighbour)
+    return reconstruct_path(came_from, goal)
+```
+
+Stack-based. Goes deep; backtracks on dead ends.
+
+Breadth-first search.
+
+```gdscript
+func bfs(g: Graph, start, goal) -&gt; Array:
+    var queue: Array = [start]
+    var came_from: Dictionary = {start: null}
+    while not queue.is_empty():
+        var current = queue.pop_front()
+        if current == goal: break
+        for neighbour in g.neighbours(current):
+            if not neighbour in came_from:
+                came_from[neighbour] = current
+                queue.push_back(neighbour)
+    return reconstruct_path(came_from, goal)
+```
+
+Queue-based. Explores in concentric waves. Finds the shortest path on unweighted graphs.
+
+Reconstruct a path.
+
+```gdscript
+func reconstruct_path(came_from: Dictionary, goal) -&gt; Array:
+    var path: Array = []
+    var current = goal
+    while current != null:
+        path.push_front(current)
+        current = came_from[current]
+    return path
+```
+
+Walk backward from goal to start via the came_from dictionary. Reverse order.
+
+A* search.
+
+```gdscript
+func astar(g: Graph, start, goal, heuristic: Callable) -&gt; Array:
+    var open := PriorityQueue.new()
+    open.push(start, 0.0)
+    var came_from: Dictionary = {start: null}
+    var g_score: Dictionary = {start: 0.0}
+    while not open.is_empty():
+        var current = open.pop()
+        if current == goal: break
+        for neighbour in g.neighbours(current):
+            var tentative: float = g_score[current] + 1.0
+            if tentative &lt; g_score.get(neighbour, INF):
+                came_from[neighbour] = current
+                g_score[neighbour] = tentative
+                var f: float = tentative + heuristic.call(neighbour, goal)
+                open.push(neighbour, f)
+    return reconstruct_path(came_from, goal)
+```
+
+Priority queue orders by estimated total cost. The heuristic focuses the search.
+
+Manhattan distance heuristic.
+
+```gdscript
+func manhattan(a: Vector2i, b: Vector2i) -&gt; float:
+    return abs(a.x - b.x) + abs(a.y - b.y)
+```
+
+Sum of axis-aligned distances. Admissible for 4-connected grids.
+
+You can now build a grid graph, carve walls, implement DFS, BFS, A*, reconstruct paths, and use Manhattan distance as a heuristic. GT_Network_Analysis extends into centrality measures.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Pathfinding/technical.md">Raw captured source</a></p><pre># GT Pathfinding — Technical
+
+The map is a maze whose corridors are graph edges and whose junctions are graph vertices. The learner walks the maze to find the exit, and their walk implicitly executes a pathfinding algorithm. Three explicit algorithm modes — DFS, BFS, and A* — can be toggled at stations along the way, and each mode highlights the maze in a different characteristic pattern.
+
+The `pathfinding3d` artifact exposes A* directly. A* searches the graph with a priority queue ordered by f(n) = g(n) + h(n), where g is the known cost from start to n and h is a heuristic estimate of the cost from n to goal.
+
+```gdscript
+func astar(start: Vector3i, goal: Vector3i) -&gt; Array[Vector3i]:
+    var open := PriorityQueue.new()
+    open.push(start, 0.0)
+    var came_from := {}
+    var g_score := {start: 0.0}
+
+    while not open.is_empty():
+        var current: Vector3i = open.pop()
+        if current == goal:
+            return reconstruct(came_from, current)
+        for nbr in neighbors(current):
+            var tentative := g_score[current] + cost(current, nbr)
+            if tentative &lt; g_score.get(nbr, INF):
+                g_score[nbr] = tentative
+                came_from[nbr] = current
+                var f := tentative + heuristic_weight * heuristic(nbr, goal)
+                open.push(nbr, f)
+    return []
+```
+
+The heuristic_weight parameter is the map&#x27;s central control. At 0.0, A* degenerates to Dijkstra — it explores everything uniformly, guaranteed to find the optimal path. At 1.0, A* is standard: it uses the heuristic to focus the search without sacrificing optimality (provided the heuristic is admissible). Above 1.0, A* becomes greedy — it trusts the heuristic completely, potentially missing shorter paths but running faster.
+
+DFS and BFS are simpler. DFS uses a stack and goes deep before wide; its backtrack is visible when the algorithm hits a dead end. BFS uses a queue and explores in concentric waves; its wavefront is visible as the distance-from-start increments. The three modes produce visibly different search patterns on the same maze, and the map lets the learner compare them side by side.
+
+Movement models extend the problem. Ground-walking treats walls as impassable. Flying ignores walls entirely. Climbing treats vertical surfaces as passable. Each mode changes the neighbour function, and the change rewrites what counts as reachable.
+
+Within the sequence, Pathfinding makes the learner&#x27;s body the search algorithm and uses the body&#x27;s experience as the ground truth against which the formal algorithms are compared. GT_Network_Analysis will next shift from traversal to measurement.
+
+## Heuristic Design
+
+A* requires an admissible heuristic — one that never overestimates the true cost to the goal. For grid-based pathfinding, the Euclidean distance is always admissible (it is the optimum unconstrained path). The Manhattan distance is admissible when movement is restricted to orthogonal directions. Chebyshev distance is admissible when diagonal movement costs the same as orthogonal.
+
+Choosing the tightest admissible heuristic matters for performance. A* with a perfectly tight heuristic explores only the optimal path — it wastes no work. A* with a loose heuristic degenerates toward Dijkstra. The map&#x27;s configurable heuristic_weight lets the learner experiment with inadmissible heuristics (weight above 1.0) that are faster but lose the optimality guarantee.
+
+## Data Structures
+
+The open set is a priority queue. A binary heap supports push and pop in O(log n), which is adequate for typical maze sizes. A Fibonacci heap achieves amortised O(1) push and O(log n) pop, theoretically faster, but the constant factors make binary heaps competitive in practice.
+
+The closed set records already-explored vertices. A hash set gives O(1) membership checks. Without the closed set, A* can loop indefinitely on graphs with cycles; with it, A* terminates after at most V vertex expansions.
+
+```gdscript
+class PriorityQueue:
+    var heap: Array = []
+
+    func push(item, priority: float) -&gt; void:
+        heap.append({&quot;item&quot;: item, &quot;pri&quot;: priority})
+        _sift_up(heap.size() - 1)
+
+    func pop():
+        var top = heap[0]
+        heap[0] = heap.pop_back()
+        if heap.size() &gt; 0:
+            _sift_down(0)
+        return top[&quot;item&quot;]
+```
+
+Path reconstruction walks the came_from dictionary backward from goal to start, then reverses. The operation is O(path length).
+
+Within the sequence, Pathfinding&#x27;s algorithms operate on the same graph data structure GT_Foundations introduced. The maze itself is a grid graph where each cell is a vertex and each unblocked wall is an edge.
+
+## One More Note on the Heuristic
+
+Manhattan distance is the default heuristic in grid mazes. It sums the absolute differences along each axis, which is exactly the minimum step count on a grid without diagonals. The map&#x27;s maze uses four-neighbour connectivity, so Manhattan is admissible and tight.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Pathfinding/intent.md">Raw captured source</a></p><pre>Concept: Navigate a maze — you are the algorithm searching for the exit. Every corridor is an edge, every junction a node, every dead end a branch that promised something and lied. Pathfinding as embodied graph traversal.
+Sequence role: Third map in Graph Theory; makes the learner&#x27;s body the search algorithm. After foundations (structure) and layout (visualization), pathfinding introduces the central graph problem: how do you get from here to there? DFS, BFS, A* — each is a different strategy the body can enact by walking; follows GT_Layout; leads to GT_Network_Analysis.
+Technical angle: Depth-first search (go deep, backtrack on dead ends), breadth-first search (explore all neighbors before going deeper), A* (heuristic-guided search using distance estimates). The pathfinding3d artifact implements all three; the maze makes the algorithmic strategies physically navigable.
+Critical angle: Pathfinding reveals that knowing the graph exists is not the same as knowing how to traverse it. The maze is fully determined — every wall is fixed — yet finding the path requires search. This is the computational complexity thesis: structure does not imply accessibility. The learner hitting dead ends and backtracking is DFS made visceral.
+Key artifacts: pathfinding3d implements the maze as a navigable graph with visible algorithmic overlays — showing which nodes have been visited, which are queued, which path is currently optimal.
+
+Gap: pathfinding3d needs slider_horizontal, push_button, Label3D.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Pathfinding/critical.md">Raw captured source</a></p><pre># GT_Pathfinding — Critical Reflection
+
+A maze. Winding corridors through h5 walls, dead-end branches, the one true path somewhere inside. You enter at the top and the exit waits at the bottom, and between them the map is a search tree made of stone. Walk forward. Hit a wall. Backtrack. Try another branch. This is depth-first search performed by a body. The algorithm does not know the layout either. It gropes forward, remembers where it has been, retreats when stuck.
+
+Foucault writes about the examination as a technology of power — the process that makes individuals visible, differentiable, measurable. The maze is an examination of the walker. Every junction is a test. Every dead end is a recorded failure. The `pathfinding3d` artifact, sitting at the maze&#x27;s center like a reward, implements A* on a 3D voxel grid — `f(n) = g(n) + h(n)` — with pluggable heuristics and movement models. Its desire is to carve a glowing path through the maze, watching the open set expand like a wavefront and the path crystallize when the goal is reached. The critical parameter is `heuristic_weight`: at 1.0 it is standard A*, above 1.0 it becomes greedy, at 0.0 it degenerates to Dijkstra. The parameter determines the trade-off between optimality and speed, between finding the best path and finding any path at all.
+
+This trade-off is Foucault&#x27;s disciplinary logic translated into search strategy. Dijkstra (weight 0.0) is the panopticon: it explores everything uniformly, sees all paths equally, finds the optimal route by exhaustive surveillance of the graph. A* (weight 1.0) is the targeted examination: it uses a heuristic to focus attention, skipping regions that appear unpromising, finding a good path quickly by assuming the heuristic is trustworthy. Greedy search (weight above 1.0) is the prejudice that dispenses with optimality entirely: it goes wherever the heuristic points, fast and confident and potentially wrong. The slider between these modes is a slider between completeness of knowledge and speed of judgment, and the maze does not tell you which is appropriate.
+
+Ranciere&#x27;s concept of the police order — the system that assigns people to places, functions, and identities before any political contestation occurs — maps directly onto the maze&#x27;s structure. The walls are fixed. The corridors are determined. The branching pattern was authored before you entered. Your agency within the maze is limited to choosing which branch to explore first — the ordering of the search, not the topology of the searchable. DFS goes deep. BFS goes wide. A* uses a heuristic. But none of them changes the maze. The pathfinding algorithms are strategies for moving through a structure that is given, not for questioning whether the structure should exist.
+
+The dead ends are the maze&#x27;s most politically charged feature. A dead end is a branch that promised something and lied. You walk down a corridor, expecting it to lead somewhere, and it terminates in a wall. The algorithm handles this with mechanical efficiency — pop the stack, return to the last junction, try the next branch. But the experience of the dead end is not mechanical. It is frustration, wasted time, the feeling of having been deceived by a space that looked passable and wasn&#x27;t. Ranciere would note that the dead end&#x27;s function is disciplinary: it teaches the walker that not all paths lead somewhere, that some options are traps, that the correct response to a dead end is retreat rather than demolition. The maze normalizes the wall. It never occurs to the pathfinding algorithm to break through.
+
+The blurb says: &quot;The shortest path exists whether or not you find it. Structure precedes discovery.&quot; This is the maze&#x27;s ontological claim, and it is a Foucauldian claim about the relationship between knowledge and power. The path was always there, encoded in the topology. The walls were always fixed. The dead ends were always traps.
+
+The searcher&#x27;s ignorance does not change the structure; it only changes the experience of discovering it. This frames knowledge as unveiling — as the removal of ignorance to reveal a pre-existing truth — and Foucault spent a career arguing that this framing is false. Knowledge is produced, not discovered. The path through the maze was placed there by the map&#x27;s designer. It is not a truth about the maze; it is a decision about the maze. The shortest path is shortest only according to the metric that counts steps, and counting steps as the measure of path quality is itself a decision that privileges certain kinds of movement.
+
+The artifact&#x27;s multiple movement models — ground, flying, swimming, climbing — gesture toward a more radical possibility. If the heuristic changes, the search changes. If the movement model changes, what counts as &quot;reachable&quot; changes. A flying agent ignores walls entirely. A climbing agent treats vertical surfaces as passable. The maze that constrains the ground walker is irrelevant to the flying one. But the map itself is walked by a body that cannot fly, cannot climb, cannot swim. The artifact demonstrates alternatives to the maze&#x27;s constraints while the maze enforces them. The disjunction between what the artifact knows and what the body can do is the map&#x27;s sharpest tension.
+
+At the center, the pathfinding artifact waits like a prize. You solve the maze to reach the thing that solves mazes. The circularity is not accidental. The map teaches pathfinding by making you pathfind, then rewards you with an artifact that formalizes what your body already did. Whether the formalization adds to or subtracts from the embodied knowledge is the question the maze asks by being a maze rather than a lecture.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Pathfinding/artifacts.md">Raw captured source</a></p><pre># GT Pathfinding — Artifacts
+*Graph Theory: Connections Define Structure · relation · 1 artifacts*
+
+&gt; A maze is a graph wearing walls. Every corridor is an edge. Every junction is a node. Every dead end is a branch that promised something and lied.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## pathfinding3d
+![pathfinding3d](/scene-catalog/pathfinding3d.png)
+
+COMPARE heuristic strategies by watching how different search rules expand through the same 3D graph.
+
+`pathfinding3d`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Pathfinding/summary.md">Raw captured source</a></p><pre># GT Pathfinding — Summary
+
+GT_Pathfinding is the third map in the Graph Theory sequence. It builds a maze and asks the learner to become the search algorithm. The corridors are edges, the junctions are nodes, and the dead ends are branches that promised a route and did not deliver.
+
+The learner walks the maze to find the exit. A trail is drawn behind them so the path taken is visible as it is built. When a dead end is reached, the trail records the backtrack. The resulting record is a depth-first search traced by a body rather than by a queue.
+
+Three alternate mode panels sit along the route. Activating one switches the maze to a breadth-first visualisation, in which every corridor at the current radius is highlighted before the search advances another step. Another activates A* mode, which overlays a heuristic distance to the exit on every junction and picks the lowest-cost next step. A third returns the maze to bare walls, so the learner can compare the felt experience of searching with the three algorithms superimposed.
+
+A small readout tracks steps taken, walls touched, and path length for each mode. Within the sequence, Pathfinding is where graph traversal becomes embodied. GT_Network_Analysis will next ask not how to move through a graph but how to read it.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Pathfinding/blurb.md">Raw captured source</a></p><pre>A maze is a graph wearing walls. Every corridor is an edge. Every junction is a node. Every dead end is a branch that promised something and lied.
+
+Walk the maze. Hit a wall. Backtrack. Try another branch. This is not failure — this is depth-first search performed by a body. The algorithm doesn&#x27;t know the layout either. It gropes forward, remembers where it&#x27;s been, retreats when stuck. Dijkstra, A*, BFS — different strategies for the same blindness. The only difference between you and the algorithm is that you feel the frustration of a dead end. The algorithm just pops the stack.
+
+At the center, something heavy waits. The shortest path exists whether or not you find it. Structure precedes discovery — the route was always there, encoded in the topology. You just had to fail enough branches to prove it.</pre></section></body></html>

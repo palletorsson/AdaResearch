@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "map_only_changes_pillar_y_token": true,
+    "rainbow_noncomment_code_identical": true,
+    "Color_Rainbow_book_identical_to_18Sep": true,
+    "Color_Pillar_book_identical_to_18Sep": true,
+    "Color_Grid_Pallet_book_identical_to_18Sep": true,
+    "Rainbow_runtime_checks_pass": true,
+    "Rainbow_runtime_check_count": 93,
+    "Grid_Pallet_runtime_checks_pass": true,
+    "Grid_Pallet_runtime_check_count": 30,
+    "Pillar_runtime_checks_pass": true,
+    "Pillar_runtime_check_count": 97,
+    "paired_camera_fov_target_identical": true,
+    "paired_original_placement_replayed": true,
+    "paired_gradient_changes_from_buried_to_visible": true,
+    "owned_runtime_processes_finished": true
+  },
+  "changes": [
+    {
+      "source": "algorithms/primitives/rainbow/rainbow.gd",
+      "before": "doc\\book\\iterations\\2026-09-19-color-review\\fields\\before\\rainbow.gd",
+      "before_sha256": "8cc0519b974354b1b54a333d2d37ce364bb36e2f27417e6988badcddf0d4e9d6",
+      "after_sha256": "efe38d72f1b16020871874b3a6559d5b015cf30edf48dd0826df1c4c3e04a048"
+    },
+    {
+      "source": "commons/maps/Color_Pillar/map_data.json",
+      "before": "doc\\book\\iterations\\2026-09-19-color-review\\fields\\before\\Color_Pillar-map_data.json",
+      "before_sha256": "f5c52af3bb63becc8d872d26ab94aa7cae9c570fd0d63e6217057535cebaffdb",
+      "after_sha256": "02d6e14dca7e1be71b2d60f42e5de8e4addc84e8db312b908ddb04966af49d16"
+    },
+    {
+      "source": "commons/maps/Color_Pillar/tutorial.md",
+      "before": "doc\\book\\iterations\\2026-09-19-color-review\\fields\\before\\Color_Pillar-tutorial.md",
+      "before_sha256": "a7e392955dd71046d4ca11210efbbd40269b319a4a47f16b2e7b020d320746ec",
+      "after_sha256": "6ba992275a8ad1e5c3ba1b1897d31a89b5042ce62d2b4cf5e5bff88bfd215884"
+    },
+    {
+      "source": "commons/maps/Color_Pillar/intent.md",
+      "before": "doc\\book\\iterations\\2026-09-19-color-review\\fields\\before\\Color_Pillar-intent.md",
+      "before_sha256": "17c0df7d2d29a7a6dd0ab3f8bf4d7727a0cbb51fe5b2a2eaaf3a4daad8cf37ea",
+      "after_sha256": "4a44524ae0bbdd26f606b6c92e388590fe475737424bb839006237409e0ebc83"
+    }
+  ]
+}

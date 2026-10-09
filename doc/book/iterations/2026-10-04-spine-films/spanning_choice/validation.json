@@ -1,0 +1,56 @@
+{
+	"checks": {
+		"exists res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd": true,
+		"four_phases": true,
+		"source_cost_matches": true,
+		"source_edges_match": true,
+		"sources_exist": true,
+		"tree_edges": true
+	},
+	"duration": 24.0,
+	"evidence": {
+		"accepted": 9,
+		"accepted_keys": [
+			"1:5",
+			"2:6",
+			"4:8",
+			"5:9",
+			"5:6",
+			"8:9",
+			"2:3",
+			"0:1",
+			"1:7"
+		],
+		"edges": 28,
+		"observer_cost": 42.5414566993713,
+		"rejected_before_complete": 15,
+		"seed": 20260729,
+		"source_calls": [
+			"initialize_graph",
+			"find_union_find",
+			"union_union_find",
+			"_solve_mst_now"
+		],
+		"source_cost": 42.5414566993713,
+		"source_keys": [
+			"1:5",
+			"2:6",
+			"4:8",
+			"5:9",
+			"5:6",
+			"8:9",
+			"2:3",
+			"0:1",
+			"1:7"
+		],
+		"source_never_entered_tree": true,
+		"vertices": 10
+	},
+	"geometry_nodes": 50,
+	"passed": true,
+	"phases": 4,
+	"source_paths": [
+		"res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd"
+	],
+	"title": "Keep a connection; refuse a cycle"
+}

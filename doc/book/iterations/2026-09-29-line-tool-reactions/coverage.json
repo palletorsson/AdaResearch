@@ -1,0 +1,371 @@
+[
+  {
+    "artifact": "player_trace",
+    "cell": [
+      6,
+      1
+    ],
+    "policy": "native/protected",
+    "reason": "Records the visitor; no separate body to break."
+  },
+  {
+    "artifact": "line_proof_pair",
+    "cell": [
+      20,
+      1
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_black_box",
+    "cell": [
+      2,
+      2
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_demo",
+    "cell": [
+      8,
+      2
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "do_not_cross_barrier",
+    "cell": [
+      11,
+      2
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line",
+    "cell": [
+      22,
+      2
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "scale_lines",
+    "cell": [
+      24,
+      2
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "redline",
+    "cell": [
+      15,
+      4
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "parallel_line_puzzle",
+    "cell": [
+      21,
+      5
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "lightrod",
+    "cell": [
+      1,
+      6
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "parallel_lines",
+    "cell": [
+      20,
+      6
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "axis_line",
+    "cell": [
+      21,
+      6
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_collection",
+    "cell": [
+      22,
+      6
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "street_talker",
+    "cell": [
+      24,
+      6
+    ],
+    "policy": "colour",
+    "seconds": 8
+  },
+  {
+    "artifact": "lightrod",
+    "cell": [
+      1,
+      7
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "walk_this_line_marking",
+    "cell": [
+      9,
+      7
+    ],
+    "policy": "colour",
+    "seconds": 8
+  },
+  {
+    "artifact": "grabbable_line",
+    "cell": [
+      20,
+      7
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "laser_exploding_sphere",
+    "cell": [
+      21,
+      7
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_sledgehammer",
+    "cell": [
+      24,
+      7
+    ],
+    "policy": "native/protected",
+    "reason": "Retains its native swinging tool behaviour."
+  },
+  {
+    "artifact": "lightrod",
+    "cell": [
+      1,
+      8
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "laser_exploding_sphere",
+    "cell": [
+      20,
+      8
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_collection",
+    "cell": [
+      21,
+      8
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "laser_measure",
+    "cell": [
+      22,
+      8
+    ],
+    "policy": "native/protected",
+    "reason": "Retains its native measuring/burning tool behaviour."
+  },
+  {
+    "artifact": "modulor_man_demo",
+    "cell": [
+      1,
+      9
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "lightrod",
+    "cell": [
+      1,
+      10
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "wall_health_station",
+    "cell": [
+      25,
+      10
+    ],
+    "policy": "native/protected",
+    "reason": "Recovery infrastructure stays usable."
+  },
+  {
+    "artifact": "laser_measure",
+    "cell": [
+      6,
+      11
+    ],
+    "policy": "native/protected",
+    "reason": "Retains its native measuring/burning tool behaviour."
+  },
+  {
+    "artifact": "health_cross",
+    "cell": [
+      25,
+      11
+    ],
+    "policy": "native/protected",
+    "reason": "Retains its native health/impact behaviour."
+  },
+  {
+    "artifact": "lightrod",
+    "cell": [
+      1,
+      12
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "laser_measure",
+    "cell": [
+      5,
+      15
+    ],
+    "policy": "native/protected",
+    "reason": "Retains its native measuring/burning tool behaviour."
+  },
+  {
+    "artifact": "two_point_ruler",
+    "cell": [
+      25,
+      16
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_relations_gallery",
+    "cell": [
+      13,
+      17
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line",
+    "cell": [
+      2,
+      19
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "sketch_monitor",
+    "cell": [
+      11,
+      22
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "perspective_lines",
+    "cell": [
+      2,
+      25
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "two_points_line",
+    "cell": [
+      25,
+      25
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "science_screen",
+    "cell": [
+      25,
+      27
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "anamorphic_cross",
+    "cell": [
+      2,
+      29
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "wall_abstract",
+    "cell": [
+      1,
+      30
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "wall_abstract",
+    "cell": [
+      25,
+      30
+    ],
+    "policy": "break",
+    "seconds": 8
+  },
+  {
+    "artifact": "line_space_workshop",
+    "cell": [
+      12,
+      33
+    ],
+    "policy": "break",
+    "seconds": 8
+  }
+]

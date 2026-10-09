@@ -1,0 +1,199 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "trial court loaded through the artifact registry",
+      "passed": true
+    },
+    {
+      "name": "court kept metre scale",
+      "passed": true
+    },
+    {
+      "name": "original acceleration field retained",
+      "passed": true
+    },
+    {
+      "name": "two learned sphere points",
+      "passed": true
+    },
+    {
+      "name": "floor underneath trial court",
+      "passed": true
+    },
+    {
+      "name": "floor continues to the final passage",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: court-entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: thrust-points",
+      "passed": true
+    },
+    {
+      "name": "mortar waits for a clear muzzle",
+      "passed": true
+    },
+    {
+      "name": "mortar fires a grabbable rigid ring",
+      "passed": true
+    },
+    {
+      "name": "ring collision has sixteen shapes around an open hole",
+      "passed": true
+    },
+    {
+      "name": "ring advances on a gravity affected trajectory",
+      "passed": true
+    },
+    {
+      "name": "eight shot budget stops firing without deleting misses",
+      "passed": true
+    },
+    {
+      "name": "authored trial court stays clear of automatic sculptures",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: donut-cake",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rings-and-posts",
+      "passed": true
+    },
+    {
+      "name": "existing transport platform actually moves",
+      "passed": true
+    },
+    {
+      "name": "release lets gravity move the real hinge body",
+      "passed": true
+    },
+    {
+      "name": "pole falls into a usable low bridge",
+      "passed": true
+    },
+    {
+      "name": "hinge stays attached at its foot",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hinge-aftermath",
+      "passed": true
+    },
+    {
+      "name": "spring point transfers a push through collision",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: spring-points",
+      "passed": true
+    },
+    {
+      "name": "real desktop grab identifies the player",
+      "passed": true
+    },
+    {
+      "name": "aim down applies upward thrust",
+      "passed": true
+    },
+    {
+      "name": "reset refuses to steal a held point",
+      "passed": true
+    },
+    {
+      "name": "held trigger lifts against gravity",
+      "passed": true
+    },
+    {
+      "name": "release stops thrust but preserves momentum",
+      "passed": true
+    },
+    {
+      "name": "desktop drop leaves a physical sphere and no thrust",
+      "passed": true
+    },
+    {
+      "name": "pad overlap queues a launch for the actual body",
+      "passed": true
+    },
+    {
+      "name": "launch vector survives normal walking ownership",
+      "passed": true
+    },
+    {
+      "name": "launched player actually rises through physics",
+      "passed": true
+    },
+    {
+      "name": "real XR body receives court movement adapter",
+      "passed": true
+    },
+    {
+      "name": "two XR grabs bind to the same real player",
+      "passed": true
+    },
+    {
+      "name": "two held points lift the XR origin through its actual provider",
+      "passed": true
+    },
+    {
+      "name": "XR trigger release preserves upward momentum while gravity slows it",
+      "passed": true
+    },
+    {
+      "name": "XR drop stops firing and restores dynamic points",
+      "passed": true
+    },
+    {
+      "name": "drag reduces travel for the same launch",
+      "passed": true
+    },
+    {
+      "name": "explicit reset clears rings and restores the latched hinge",
+      "passed": true
+    },
+    {
+      "name": "the actual carried point triggers the destination on arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: drag-and-destination",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: launch-and-platform",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "court_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "court_world": [
+      8.5,
+      0.0,
+      37.5
+    ],
+    "drag_distances": [
+      0.751522064208984,
+      0.514030456542969
+    ],
+    "launch_height_gain": 1.78499929606915,
+    "limits": "Desktop events and supplied player body tested; headset, Quest performance and subjective comfort need a physical VR visit.",
+    "xr_lift_metres": 2.84075212478638
+  },
+  "passed": true,
+  "room": "Vectors_Act5_ForceAsPlace",
+  "scope": "Production museum and physics, supplied desktop input and receiver; no headset acceptance claim."
+}

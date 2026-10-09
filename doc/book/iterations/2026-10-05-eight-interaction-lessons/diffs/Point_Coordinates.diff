@@ -1,0 +1,19 @@
+--- before/Point_Coordinates.md
++++ after/Point_Coordinates.md
+@@ -25,6 +25,8 @@
+ The sphere's mesh makes it visible. Its collision shape gives it a physical boundary. The pickable behaviour lets the prepared grab system take hold of the body. A mesh or collider alone does not supply that interaction.
+ 
+ Take the sphere, move it and release it. The mesh and collider belong to the held body, so they move together. The station's label belongs elsewhere and stays behind.
++
++Release ends the connection to the hand. This point's scene starts with `freeze = true`, and the pickable's release mode restores that original setting. It stays where you leave it; letting go does not necessarily mean falling. In `interactive_point_origin.gd`, `_on_picked_up()` sets `_is_held = true`; `_on_dropped()` sets it to `false` and hides the point's own position label and guide. The body remains in the room. The supplied grab system moves the body; these handlers respond to the beginning and end of that hold.
+ 
+ Open `commons/primitives/point/point_condition.gd`. In the `held` branch, find `held.position = CENTRE`. Immediately below it, add:
+ 
+@@ -86,6 +88,6 @@
+ 
+ Carry the sphere beyond an arrow's end. The drawing stops, but its coordinate system still describes positions beyond it. Watch the guides and readings continue to follow your hand.
+ 
+-Choose another starting position in the station. Predict which component will change, try it, then carry the sphere to the frame. Explain what WORLD and LOCAL each measure from. You can now change where a body begins, control whether it can be grabbed, and name the frame used to read its position.
++Choose another starting position in the station. Predict which component will change, try it, then carry the sphere to the frame. Release it and move your empty hand: which object stops following? Explain what WORLD and LOCAL each measure from. You can now change where a body begins, control whether it can be grabbed, and name the frame used to read its position.
+ 
+ In Point Lines, we will keep two positions and examine what joins them. Distance calculation begins there.

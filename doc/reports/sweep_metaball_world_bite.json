@@ -1,0 +1,3048 @@
+{
+ "sweep": "metaball_world",
+ "peak_changed_pct": 7.431,
+ "subject_pct": 4.816,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "changed_px": 3388,
+   "changed_pct": 0.587
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "changed_px": 19571,
+   "changed_pct": 3.388
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "changed_px": 9093,
+   "changed_pct": 1.574
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 25632,
+   "changed_pct": 4.438
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "changed_px": 20089,
+   "changed_pct": 3.478
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 18460,
+   "changed_pct": 3.196
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 30444,
+   "changed_pct": 5.271
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 24844,
+   "changed_pct": 4.301
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 26745,
+   "changed_pct": 4.63
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 15748,
+   "changed_pct": 2.726
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 23181,
+   "changed_pct": 4.013
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 26683,
+   "changed_pct": 4.62
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 23978,
+   "changed_pct": 4.151
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 21211,
+   "changed_pct": 3.672
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 17482,
+   "changed_pct": 3.027
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 26778,
+   "changed_pct": 4.636
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 24543,
+   "changed_pct": 4.249
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 21399,
+   "changed_pct": 3.705
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 20404,
+   "changed_pct": 3.533
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "changed_px": 21163,
+   "changed_pct": 3.664
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "changed_px": 7138,
+   "changed_pct": 1.236
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 26833,
+   "changed_pct": 4.646
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "changed_px": 20975,
+   "changed_pct": 3.631
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 19226,
+   "changed_pct": 3.329
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 31604,
+   "changed_pct": 5.472
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 17447,
+   "changed_pct": 3.021
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 27439,
+   "changed_pct": 4.751
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 16530,
+   "changed_pct": 2.862
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 22519,
+   "changed_pct": 3.899
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 27725,
+   "changed_pct": 4.8
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 18048,
+   "changed_pct": 3.125
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 22781,
+   "changed_pct": 3.944
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 17897,
+   "changed_pct": 3.099
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 27710,
+   "changed_pct": 4.797
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 19719,
+   "changed_pct": 3.414
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 22807,
+   "changed_pct": 3.949
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 19343,
+   "changed_pct": 3.349
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "changed_px": 27819,
+   "changed_pct": 4.816
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 15262,
+   "changed_pct": 2.642
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "changed_px": 20689,
+   "changed_pct": 3.582
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 15058,
+   "changed_pct": 2.607
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 21019,
+   "changed_pct": 3.639
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 19331,
+   "changed_pct": 3.347
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 16633,
+   "changed_pct": 2.88
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 13732,
+   "changed_pct": 2.377
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 28022,
+   "changed_pct": 4.851
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 17490,
+   "changed_pct": 3.028
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 22092,
+   "changed_pct": 3.825
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 12385,
+   "changed_pct": 2.144
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 25605,
+   "changed_pct": 4.433
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 20493,
+   "changed_pct": 3.548
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 19816,
+   "changed_pct": 3.431
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 10747,
+   "changed_pct": 1.861
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 20175,
+   "changed_pct": 3.493
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 31708,
+   "changed_pct": 5.49
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "changed_px": 31945,
+   "changed_pct": 5.531
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 24318,
+   "changed_pct": 4.21
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 35794,
+   "changed_pct": 6.197
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 19771,
+   "changed_pct": 3.423
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 31707,
+   "changed_pct": 5.489
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 22526,
+   "changed_pct": 3.9
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 24449,
+   "changed_pct": 4.233
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 31820,
+   "changed_pct": 5.509
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 18756,
+   "changed_pct": 3.247
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 28523,
+   "changed_pct": 4.938
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 32953,
+   "changed_pct": 5.705
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 32873,
+   "changed_pct": 5.691
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 22045,
+   "changed_pct": 3.817
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 29061,
+   "changed_pct": 5.031
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "column",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 22170,
+   "changed_pct": 3.838
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "changed_px": 15081,
+   "changed_pct": 2.611
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 13116,
+   "changed_pct": 2.271
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 12283,
+   "changed_pct": 2.127
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 27138,
+   "changed_pct": 4.698
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 28891,
+   "changed_pct": 5.002
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 20720,
+   "changed_pct": 3.587
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 36361,
+   "changed_pct": 6.295
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 8823,
+   "changed_pct": 1.528
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 19224,
+   "changed_pct": 3.328
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 12733,
+   "changed_pct": 2.204
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 22403,
+   "changed_pct": 3.879
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 24569,
+   "changed_pct": 4.254
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 23899,
+   "changed_pct": 4.138
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 16259,
+   "changed_pct": 2.815
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 23574,
+   "changed_pct": 4.081
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "changed_px": 7924,
+   "changed_pct": 1.372
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 20565,
+   "changed_pct": 3.56
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 29092,
+   "changed_pct": 5.037
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 30845,
+   "changed_pct": 5.34
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 22674,
+   "changed_pct": 3.926
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 38315,
+   "changed_pct": 6.633
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 20975,
+   "changed_pct": 3.631
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 19857,
+   "changed_pct": 3.438
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 16648,
+   "changed_pct": 2.882
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 11013,
+   "changed_pct": 1.907
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 26378,
+   "changed_pct": 4.567
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 24904,
+   "changed_pct": 4.312
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 18281,
+   "changed_pct": 3.165
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 21527,
+   "changed_pct": 3.727
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "changed_px": 20225,
+   "changed_pct": 3.502
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 22069,
+   "changed_pct": 3.821
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 23822,
+   "changed_pct": 4.124
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 15651,
+   "changed_pct": 2.71
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 31292,
+   "changed_pct": 5.418
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 18751,
+   "changed_pct": 3.246
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 13265,
+   "changed_pct": 2.297
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 10981,
+   "changed_pct": 1.901
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 14318,
+   "changed_pct": 2.479
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 21268,
+   "changed_pct": 3.682
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 18327,
+   "changed_pct": 3.173
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 12009,
+   "changed_pct": 2.079
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 17717,
+   "changed_pct": 3.067
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 34115,
+   "changed_pct": 5.906
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 35857,
+   "changed_pct": 6.208
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 27697,
+   "changed_pct": 4.795
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 42922,
+   "changed_pct": 7.431
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 9607,
+   "changed_pct": 1.663
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 22800,
+   "changed_pct": 3.947
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 17370,
+   "changed_pct": 3.007
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 24950,
+   "changed_pct": 4.32
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 30405,
+   "changed_pct": 5.264
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 29788,
+   "changed_pct": 5.157
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 21822,
+   "changed_pct": 3.778
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "ring",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 29066,
+   "changed_pct": 5.032
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "changed_px": 15791,
+   "changed_pct": 2.734
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 13198,
+   "changed_pct": 2.285
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 10676,
+   "changed_pct": 1.848
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 31673,
+   "changed_pct": 5.484
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 30120,
+   "changed_pct": 5.215
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 18160,
+   "changed_pct": 3.144
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 33169,
+   "changed_pct": 5.743
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 26524,
+   "changed_pct": 4.592
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 20572,
+   "changed_pct": 3.562
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 17487,
+   "changed_pct": 3.028
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 21161,
+   "changed_pct": 3.664
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "changed_px": 15775,
+   "changed_pct": 2.731
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 23245,
+   "changed_pct": 4.024
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 32559,
+   "changed_pct": 5.637
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 32235,
+   "changed_pct": 5.581
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 19810,
+   "changed_pct": 3.43
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 35942,
+   "changed_pct": 6.223
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 24526,
+   "changed_pct": 4.246
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 25858,
+   "changed_pct": 4.477
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 19115,
+   "changed_pct": 3.309
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 25881,
+   "changed_pct": 4.481
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "changed_px": 15966,
+   "changed_pct": 2.764
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 25828,
+   "changed_pct": 4.472
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 24780,
+   "changed_pct": 4.29
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 11783,
+   "changed_pct": 2.04
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 28777,
+   "changed_pct": 4.982
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 21438,
+   "changed_pct": 3.712
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 17421,
+   "changed_pct": 3.016
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 11502,
+   "changed_pct": 1.991
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 17529,
+   "changed_pct": 3.035
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 39649,
+   "changed_pct": 6.864
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 37516,
+   "changed_pct": 6.495
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 27008,
+   "changed_pct": 4.676
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 39302,
+   "changed_pct": 6.804
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 34067,
+   "changed_pct": 5.898
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 27597,
+   "changed_pct": 4.778
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 26411,
+   "changed_pct": 4.573
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "pair",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 27594,
+   "changed_pct": 4.777
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "changed_px": 19246,
+   "changed_pct": 3.332
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 14500,
+   "changed_pct": 2.51
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 22504,
+   "changed_pct": 3.896
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 24761,
+   "changed_pct": 4.287
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 26986,
+   "changed_pct": 4.672
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 21386,
+   "changed_pct": 3.703
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 26318,
+   "changed_pct": 4.556
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "changed_px": 17180,
+   "changed_pct": 2.974
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 20781,
+   "changed_pct": 3.598
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 27705,
+   "changed_pct": 4.797
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 22192,
+   "changed_pct": 3.842
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 20324,
+   "changed_pct": 3.519
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 22133,
+   "changed_pct": 3.832
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "changed_px": 21685,
+   "changed_pct": 3.754
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 19423,
+   "changed_pct": 3.363
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 17676,
+   "changed_pct": 3.06
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 8836,
+   "changed_pct": 1.53
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 17730,
+   "changed_pct": 3.07
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "changed_px": 31456,
+   "changed_pct": 5.446
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 30059,
+   "changed_pct": 5.204
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 24789,
+   "changed_pct": 4.292
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "shell",
+    "kernel": "cone"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 23318,
+   "changed_pct": 4.037
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "changed_px": 18183,
+   "changed_pct": 3.148
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 16634,
+   "changed_pct": 2.88
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "inverse_square"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 20182,
+   "changed_pct": 3.494
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "changed_px": 15024,
+   "changed_pct": 2.601
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "wyvill"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 8895,
+   "changed_pct": 1.54
+  },
+  {
+   "a": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "gaussian"
+   },
+   "b": {
+    "metaball_seed": 7,
+    "max_steps": 0,
+    "emplacement": "scatter",
+    "kernel": "cone"
+   },
+   "changed_px": 15008,
+   "changed_pct": 2.598
+  }
+ ]
+}

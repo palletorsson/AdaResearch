@@ -1,0 +1,5 @@
+# Synthesis — a rule kept
+
+Between the existing interval and tree desks, move the familiar point to retain a quarter, third or two fifths at each interval end. Reconstruct the known replacement from a seed, named settings and a bounded loop. KEEP copies one recipe into an independent comparison, while LIVE can change; both are rebuilt and drawn at the same scale. Predict and execute a four-cut variation. Distinguish changing a generating rule from changing a view, then carry the thirds construction into the next laboratory’s F/f rewriting rule.
+
+Synthesis | carry PointBody + intervals; seed6m; end-fraction1/4,1/3,2/5; depth3/cap5; live+kept dict copies; rebuild from seed; common scale0.34; trigger KEEP; release before NEXT/RESTORE/RESET; RESET live only; local snapshot/no disk; predict+execute depth4 thirds=16 pieces,32/27m; actual next F/f grammar matches thirds after normalization; other fractions differ; ten artifacts retained; exit moved(1,31)→(9,31), arrival GrammarLab tested; GrammarLab onward exit pending.

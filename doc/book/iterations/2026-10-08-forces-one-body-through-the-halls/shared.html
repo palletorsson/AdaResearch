@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Shared code</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>Forces — one body gains responses</h1>
+<p>Walk through the existing Endless Museum. Try the artifact first, then reconstruct one operation with the point you built earlier. The room contains more than the tutorial asks you to make. Return to those larger experiments when you want to combine what you have learned.</p>
+<p>The point gains motion, force, resistance and attachments. The cube returns when support and shape matter. In the last hall, the points move you.</p>
+<h2>Set up once</h2>
+<p>Keep <code>point_body.gd</code>, <code>free_point.gd</code> and <code>study.gd</code> in one Forces study folder. Their <a href="shared.html">complete source</a> accompanies the lessons:</p>
+<ul>
+<li><code>point_body.gd</code> is your unchanged Lines point: sphere, collider and pickup.</li>
+<li><code>free_point.gd</code> extends it with physical release. Gravity and damping begin at zero; each lesson changes these settings when needed.</li>
+<li><code>study.gd</code> supplies a caption, a button and a thin cylinder for drawing relations. Each lesson contains its own motion or force rule.</li>
+</ul>
+<p>Use your existing <code>PointStudy</code> Node3D in a clear working bay inside each hall, with a floor-level origin and scale <code>(1, 1, 1)</code>. Save each lesson script and replace the script attached to <code>PointStudy</code> as you proceed. You carry the class and your saved code; a single physical sphere does not automatically travel between halls.</p>
+<p>The museum supplies the floor, lighting, camera and XR hands. These scripts use its installed Godot XR Tools and the declared <code>push_button.tscn</code>. The flight lesson also uses the existing capability court’s player movement adapter.</p>
+<h2>Compare, then combine</h2>
+<p>Predict one change before editing. Restart the study to compare from the same beginning. Use metres, kilograms and seconds throughout. After the comparison, return to the larger artifact: another body, a second push or a changed release can make the next event harder to predict.</p>
+<p>Each lesson keeps the complete code visible. “Model notes” records the limits and implementation details you may want to revisit after the first experiment.</p>
+<h2>point_body.gd</h2>
+<p>Unchanged from Lines: a visible sphere, matching collision boundary and XR pickup.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2>free_point.gd</h2>
+<p>A new subclass: physical release, explicit damping and gravity settings. Each lesson chooses whether to enable gravity or freeze its marker.</p>
+<pre><code class="language-gdscript">extends &quot;point_body.gd&quot;
+
+func _ready() -&gt; void:
+    super()
+    release_mode = XRToolsPickable.ReleaseMode.UNFROZEN
+    freeze = false
+    gravity_scale = 0.0
+    linear_damp_mode = RigidBody3D.DAMP_MODE_REPLACE
+    linear_damp = 0.0
+    angular_damp_mode = RigidBody3D.DAMP_MODE_REPLACE
+    angular_damp = 0.0
+    can_sleep = false
+    var black := StandardMaterial3D.new()
+    black.albedo_color = Color(&quot;17191c&quot;)
+    black.roughness = 0.16
+    get_child(0).material_override = black
+</code></pre>
+<h2>study.gd</h2>
+<p>Supplied display furniture. Buttons emit the named action once per press. The thin cylinder is a drawing of a relation, without a collider.</p>
+<pre><code class="language-gdscript">extends Node3D
+# Supplied display/control furniture; no motion or force calculation.
+const Point = preload(&quot;free_point.gd&quot;)
+const PushButton = preload(&quot;res://commons/interactables/push_button.tscn&quot;)
+var buttons: Dictionary = {}
+
+func caption(words: String, at := Vector3(0, 1.8, -0.5)) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = 36
+    text.pixel_size = 0.004
+    text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(text)
+    return text
+
+func button(title: String, at: Vector3, action: Callable) -&gt; void:
+    var control = PushButton.instantiate()
+    control.position = at
+    control.rotation.x = -PI / 2.0
+    add_child(control)
+    control.pressed.connect(action)
+    buttons[title] = control
+    caption(title, at + Vector3.UP * 0.16)
+
+func rod() -&gt; MeshInstance3D:
+    var surface := MeshInstance3D.new()
+    var shape := CylinderMesh.new()
+    shape.top_radius = 0.015
+    shape.bottom_radius = 0.015
+    shape.height = 1.0
+    surface.mesh = shape
+    add_child(surface)
+    return surface
+
+func join(surface: MeshInstance3D, a: Vector3, b: Vector3) -&gt; void:
+    var d := b - a
+    surface.visible = d.length() &gt; 0.0001
+    if not surface.visible:
+        return
+    surface.position = (a + b) / 2.0
+    surface.quaternion = Quaternion(Vector3.UP, d.normalized())
+    surface.scale = Vector3(1, d.length(), 1)
+</code></pre>
+<h2>Existing receiver for the last hall</h2>
+<p><code>commons/artifacts/force_capability_lab/force_capability_lab.gd</code> sums <code>acceleration()</code> from <code>ada_thrust_points</code> whose <code>receiver()</code> matches the player. <code>commons/artifacts/force_field_zone/field_carry_provider.gd</code> performs the XRTools movement handoff. These supplied museum components own collisions and gravity. Rebuilding the player is not part of this lesson. The continuation introduces the point’s action and its receiver contract.</p></main></html>

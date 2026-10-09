@@ -1,0 +1,28 @@
+{
+  "room": "Pattern_Disco",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Pattern_Disco_colour_return/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "ab6af7c58e20732b183a729e9f3d75c35df22ce787558938f7a79d20eb9d35a1",
+    "commons/maps/Pattern_Disco/map_data.json": "359195ad5f5a940e78673cd0407c6bfbccec38c452f9d4cd75fc0b96e3327318",
+    "doc/book/iterations/2026-09-28-disco-colour-in-step/probe.gd": "ba6373fd2baeae28973ec5baba6f67d314c80c987f00551c2d1497080853d6c8",
+    "doc/book/iterations/2026-09-28-disco-colour-in-step/run_probe.py": "59509775a16940a6865e6d455ab3e1d2d4f536701d177a638a0b74651de10572",
+    "ada_run/em_plan.json": "1f035f9e10312141559247ca785d59299c26e1089477128facf279aef4b957ea",
+    "ada_run/encounter_pilot/Pattern_Disco_colour_return/control.json": "e9cc03ecd06c569a175223c09c00c1982d29f4847c83300e056e749fd450605e",
+    "ada_run/encounter_pilot/Pattern_Disco_colour_return/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Pattern_Disco_colour_return/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Pattern_Disco_colour_return/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394"
+  }
+}

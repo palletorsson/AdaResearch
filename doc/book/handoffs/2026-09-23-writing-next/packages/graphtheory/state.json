@@ -1,0 +1,369 @@
+{
+  "sequence": "graphtheory",
+  "declared_maps": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "museum_map_authored_order": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "GT_Foundations",
+      "recorded_status": "source_checked_draft",
+      "text_words": 405,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "two_travelers"
+        ],
+        "reason": "Does a graph already contain the order in which we should visit it?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Foundations/final.md",
+        "text_sha256": "7e7e883c45e3c3d7f250584cef53e65d99c25e0d3ccdb928f70e02dd3be18dfc",
+        "map_sha256": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "two_travelers"
+      ],
+      "role_primary_order": [
+        "two_travelers"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Layout",
+      "recorded_status": "source_checked_draft",
+      "text_words": 407,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "force_directed_layout"
+        ],
+        "reason": "Can the picture change while the graph stays the same?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Layout/final.md",
+        "text_sha256": "d611d7eebda2f9e71cf4b2b56f38f1df5adf47bcc4381975983ec359e406659e",
+        "map_sha256": "a864ab420b06e3131b09c72c0aa260367ce8066a07503907b38f0b973d798e56",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "force_directed_layout"
+      ],
+      "role_primary_order": [
+        "force_directed_layout"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Pathfinding",
+      "recorded_status": "source_checked_draft",
+      "text_words": 416,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "impatient_river"
+        ],
+        "reason": "What happens to the shortest route when a stone disappears?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Pathfinding/final.md",
+        "text_sha256": "be4cae950e37a4c187602ef3eda78a94746419501008ff005a2b2f9e8f903d28",
+        "map_sha256": "fca0d2d0f6a2dbd01729e31fe8a51fdb2fedfd377c8493a80eea15db7e40ac53",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "impatient_river"
+      ],
+      "role_primary_order": [
+        "impatient_river"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 404,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "network_analysis"
+        ],
+        "reason": "Is the biggest node the one whose connections matter most?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Network_Analysis/final.md",
+        "text_sha256": "67b9122dbc9cdfb22ffcf7655c553923055ff433749ff58b4b0d1cf5e7263936",
+        "map_sha256": "9eea3efc21c4815e882742b2a75f2c99e5d98ffbe223840397f36ef070b7a1c9",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "network_analysis"
+      ],
+      "role_primary_order": [
+        "network_analysis"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Connectivity",
+      "recorded_status": "source_checked_draft",
+      "text_words": 412,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tarjan_algorithm"
+        ],
+        "reason": "If you can reach another node, can you get back?",
+        "status": "source_checked_draft",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Connectivity/final.md",
+        "text_sha256": "e657d9ac21123ee3f42f0bb4742c7d3db1864212e56fbe50f03ba26b579c7812",
+        "map_sha256": "c8c5dc314572376ba918caa06b56b9a3f661ed771c40a9e6767fc31e6aedde88",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tarjan_algorithm"
+      ],
+      "role_primary_order": [
+        "tarjan_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 404,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "mst_visualization"
+        ],
+        "reason": "Which connections can be removed while keeping everyone connected?",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Spanning_Trees/final.md",
+        "text_sha256": "22a212a47d918e95e32e9a259b8d155312604bf6bac3367105536775c1181434",
+        "map_sha256": "c69792390dffc6fcbe42614c5bc734bcaaed4b31d733afdfeadadcea396b2f87",
+        "learner_verified": false,
+        "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+        "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "mst_visualization"
+      ],
+      "role_primary_order": [
+        "mst_visualization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Flow",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 484,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "push_relabel_algorithm"
+        ],
+        "reason": "When a junction receives more than it can send onward, where does the excess go?",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Flow/final.md",
+        "text_sha256": "49b283200b822805c3de9679022b52a8b0e1d285bfd525df5d464358639dc722",
+        "map_sha256": "6e67bddf8d078bd85a11df867cff8714d842bf57d232c4c6dc02a9e750bb3fc8",
+        "learner_verified": false,
+        "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+        "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "push_relabel_algorithm"
+      ],
+      "role_primary_order": [
+        "push_relabel_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "GT_Matching",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 574,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "edmonds_algorithm"
+        ],
+        "reason": "Can an early pairing prevent a larger set of pairings later?",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "graphtheory",
+        "text_path": "commons/maps/GT_Matching/final.md",
+        "text_sha256": "11caaf7de55d7cf80f39040859824ddddb6681efdbcbe73b9844f212dd21f055",
+        "map_sha256": "80742e73d65564546ddaecb40c506701227a3cbe80fadb36edfb55e62212de90",
+        "learner_verified": false,
+        "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+        "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "edmonds_algorithm"
+      ],
+      "role_primary_order": [
+        "edmonds_algorithm"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/effects/fade.tscn",
+      "addons/godot-xr-tools/player/player_body.gd",
+      "addons/godot-xr-tools/player/player_body.tscn",
+      "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+      "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+      "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+      "algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+      "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+      "algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+      "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+      "algorithms/graphtheory/network_analysis/network_analysis.tscn",
+      "algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "algorithms/graphtheory/push_relabel/push_relabel.tscn",
+      "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+      "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/impatient_river/impatient_river.gd",
+      "commons/artifacts/impatient_river/impatient_river.tscn",
+      "commons/artifacts/two_travelers/two_travelers.gd",
+      "commons/artifacts/two_travelers/two_travelers.tscn",
+      "commons/audio/runtime/CubeAudioPlayer.gd",
+      "commons/grid/GridCommon.gd",
+      "commons/grid/GridStructureComponent.gd",
+      "commons/grid/GridUtilitiesComponent.gd",
+      "commons/grid/UtilityRegistry.gd",
+      "commons/interactables/push_button.tscn",
+      "commons/primitives/cubes/cube_scene.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/PinkTeleport.gdshader",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/scenes/endless_museum.gd",
+      "commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "commons/scenes/mapobjects/ScoreCubeController.gd",
+      "commons/scenes/mapobjects/info_board.tscn",
+      "commons/scenes/mapobjects/score_cube.tscn",
+      "commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "commons/scenes/mapobjects/teleport.gd",
+      "commons/scenes/mapobjects/teleport_scene.tscn",
+      "commons/scenes/mapobjects/transport_cube.gd",
+      "commons/scenes/mapobjects/transport_cube.tscn",
+      "commons/scenes/mapobjects/walkableprism.tscn",
+      "commons/ui/text_screen.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://adaresearch/Common/Scripts/Managers/artifact_data.gd",
+      "res://addons/godot-xr-tools/effects/fade.gd",
+      "res://addons/godot-xr-tools/effects/fade.gdshader",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+      "res://commons/artifacts/large_window/large_window.tscn",
+      "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "res://commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "res://commons/artifacts/station/%s.tscn",
+      "res://commons/artifacts/station/station_door.tscn",
+      "res://commons/artifacts/station/station_plinth.tscn",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+      "res://commons/context/clipboard/codeDisplay.tscn",
+      "res://commons/grid/grid_system.tscn",
+      "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/movement/museum_flight_box.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/player/costume_wardrobe.gd",
+      "res://commons/primitives/cubes/grab_cube.tscn",
+      "res://commons/primitives/origin/origin.tscn",
+      "res://commons/primitives/shared/solid_primitive_finish.gd",
+      "res://commons/primitives/temporal/animated_folding_past.tscn",
+      "res://commons/scenes/em/em_cartridge.gd",
+      "res://commons/scenes/em/em_desktop_pointer.gd",
+      "res://commons/scenes/em/em_detail.gd",
+      "res://commons/scenes/em/em_lighting.gd",
+      "res://commons/scenes/em/em_portal_stream.gd",
+      "res://commons/scenes/em/em_simplex_corners.gd",
+      "res://commons/scenes/em/em_simulation_stage.gd",
+      "res://commons/scenes/em/em_splatter.gd",
+      "res://commons/scenes/em/em_transform_gizmo.gd",
+      "res://commons/scenes/em/em_wall_fit.gd",
+      "res://commons/scenes/em/em_weathering_wall.gd",
+      "res://commons/scenes/em/floor_seams.gdshader",
+      "res://commons/scenes/endless_museum.tscn",
+      "res://commons/scenes/mapobjects/bridge_path.tscn",
+      "res://commons/scenes/mapobjects/jump_pad.tscn",
+      "res://commons/utils/baked_text_albedo.gd",
+      "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "scope": "Primary artifact scenes and active utility scenes plus two static resource-reference hops; utility registry/grid/museum dispatch context copied without further traversal. Text resources only. Dynamic loads, class-name dependencies, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

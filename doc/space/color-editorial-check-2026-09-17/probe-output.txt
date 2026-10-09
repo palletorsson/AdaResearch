@@ -1,0 +1,62 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+PASS  filter: Pane_0 carries a StandardMaterial3D surface override
+PASS  filter: transparency is TRANSPARENCY_ALPHA (transparent pass)
+PASS  filter: blend_mode is MUL
+PASS  filter: unshaded
+PASS  filter: cull_mode is CULL_BACK (one multiply per pane)
+PASS  filter: pane casts no shadow
+PASS  filter: pane 0 is cyan under triad=paint
+PASS  filter: height 4.40 (got 4.40)
+PASS  filter: min y is 0 (got 0.000)
+PASS  veil: MIX at alpha 0.5
+PASS  unknown triad 'cmy' fell back to paint (cyan pane 0)
+FAIL  life seed: live set and neighbour counts match the spec (5 columns, expected 5)
+PASS  life seed: the six fixture cells are dead
+PASS  life seed: min y 0
+PASS  life crowd: live set and neighbour counts match the spec (18 columns, expected 18)
+PASS  life crowd: the six fixture cells are dead
+PASS  life crowd: min y 0
+PASS  life field: live set and neighbour counts match the spec (16 columns, expected 16)
+PASS  life field: the six fixture cells are dead
+PASS  life field: min y 0
+PASS  drum shingle/coarse: 20 MeshInstance3D children (expected about 20)
+PASS  drum shingle/medium: 52 MeshInstance3D children (expected about 52)
+PASS  drum shingle/fine: 196 MeshInstance3D children (expected about 196)
+PASS  drum fin/coarse: 36 MeshInstance3D children (expected about 36)
+PASS  drum fin/medium: 100 MeshInstance3D children (expected about 100)
+PASS  drum fin/fine: 388 MeshInstance3D children (expected about 388)
+PASS  drum: AABB constant across all six values ((1.96, 4.400001, 1.979))
+SUMMARY probe_chroma2: 26 pass, 1 fail
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)
+WARNING: chroma_filter: unknown triad 'cmy' - using 'paint'
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _axis_word (res://commons/artifacts/chroma_filter/chroma_filter.gd:428)
+       [1] _read_meta_overrides (res://commons/artifacts/chroma_filter/chroma_filter.gd:415)
+       [2] _ready (res://commons/artifacts/chroma_filter/chroma_filter.gd:209)
+       [3] _spawn (res://doc/space/color-editorial-check-2026-09-17/probe_chroma2_deferred.gd:47)
+       [4] _run (res://doc/space/color-editorial-check-2026-09-17/probe_chroma2_deferred.gd:79)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)

@@ -7,9 +7,23 @@ _one line per chapter, per pearl, per body; [hand] Palle, [claude] written in hi
 > `[hand]`
 
 ### point
-you arrive late. the clock is already running. the folding past keeps running. the frame counter. point zero; origin, (0,0,0), the root of all vectors, Vector.ZERO. the one point. no point without a coordinate system.  `[hand]`
+You arrive late. No reboot.
+The folding past keeps running.
 
-the frame counter: the clock is already running  `[hand]`  
+The internal clock is running,
+the frame counter update cycle.
+
+Standing at Vector.ZERO,
+
+Point zero, * ,
+Vector(0,0,0)
+The root of all vectors.
+
+The origin, No turning back.  `[hand]`
+
+The folding past keeps running.  `[hand]`  
+Standing at Vector.ZERO, Point zero, * , Vector(0,0,0) The root of all vectors. The origin, No turning back.  `[hand]`  
+The internal clock is running, the frame counter update cycle.  `[hand]`  
 you are here — the one point  `[claude]`  
 the one point, pierced  `[claude]`  
 points, drifting, there is always the drift.   `[hand]`  
@@ -17,14 +31,14 @@ points, drifting, there is always the drift.   `[hand]`
 do not cross — the first line is a rule  `[claude]`  
 a line is a point that went for a walk  `[claude]`  
 a point you can take; it snaps  `[claude]`  
+grid lines  `[hand]`  
+all life is encoded — that is enough  `[hand]`  
 
     walk this line  `[claude]`  
-all life is encoded — that is enough  `[hand]`  
 
 ### lines
 two points is a line. it measures; it is a laser; it forms a vector in 3d space. parallel, perspective, horizontal, vertical, grid lines. VR hands.  `[hand]`
 
-grid lines  `[hand]`  
 perspective line  `[hand]`  
 here it forms a vector in 3d space  `[claude]`  
 a line is a laser  `[hand]`  

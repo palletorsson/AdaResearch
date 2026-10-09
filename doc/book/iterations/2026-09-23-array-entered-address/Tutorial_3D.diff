@@ -1,0 +1,30 @@
+--- before/commons/maps/Tutorial_3D/final.md
++++ commons/maps/Tutorial_3D/final.md
+@@ -1,6 +1,6 @@
+ How do you reach an address above your head?
+ 
+-The familiar cubes have risen into a volume. Four across, four upwards, four deep: sixty-four possible encounters. Before entering, follow one vertical line with your eyes. Which part of the address changes as it climbs?
++In the last hall, you could walk around the nested cubes. Here the familiar pickup cubes are spaced far enough apart for your body to move between them. Four across, four upwards, four deep: sixty-four possible encounters. Before entering, follow one vertical line with your eyes. Which part of the address changes as it climbs?
+ 
+ <!-- @array_flight_lab -->
+ 
+@@ -9,6 +9,8 @@
+ Walk through the ground-level opening. Inside this frame you can fly. On desktop, look and use WASD, with Space to rise and Ctrl to descend. In VR, the left stick follows the tilted left controller. Release the controls to hover. The permission belongs to this enclosure; descend to either ground-level doorway to leave it.
+ 
+ Rise beside a column, then move between layers. The cubes are spaced 2.4 metres apart. There is room for a body between neighbouring samples. An indexed volume need not be a solid block.
++
++The gap is not an extra entry. You can pass between two named places without arriving at another. The array gives us a way to address its cubes; it does not number every position your body can occupy.
+ 
+ The placement extends the earlier row's operation along three directions:
+ 
+@@ -28,6 +30,10 @@
+ 
+ <!-- @ -->
+ 
++![The selected cube at address 1,2,0 before collection and the same transparent marker after it has gone, with the console changing from value 1 to value 0.](/book-review/doc/book/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png)
++
++*The same address before and after arrival. The cube and its label leave; the selection marker remains. The console reads zero while the visitor hovers at that place. Native views of the working museum.*
++
+ Hover where a cube used to be. For a moment, your body occupies the neighbourhood of a recorded absence. The table still says zero: it records cubes, not everything that could exist there. What would have to change for it to notice you?
+ 
+ The third index has extended what we can address. Flight has extended what we can reach. Keep those changes separate as you descend. Next, we return to the ground and ask how one small shape can organise a whole surface.

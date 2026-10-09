@@ -1,0 +1,768 @@
+{
+  "FormFinding_Descent": {
+    "order": {
+      "primary": [
+        "descent_landscape_lab"
+      ],
+      "secondary": [
+        "descent_marble_toy",
+        "gradient_descent",
+        "gradient_descent_well",
+        "settling_tremble",
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "descent_landscape_lab",
+        "cell": [
+          6,
+          8
+        ],
+        "token": "descent_landscape_lab",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/formfinding_experiments.json",
+            "scene": "res://commons/artifacts/descent_landscape_lab/descent_landscape_lab.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd": "33cbbbe491e7d1343451ea4ed0e01e5b7c3a9d3ec98b5317626db0f9d2bf69b3"
+            }
+          }
+        ]
+      },
+      {
+        "key": "settling_tremble",
+        "cell": [
+          10,
+          17
+        ],
+        "token": "settling_tremble",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/formfinding.json",
+            "scene": "res://algorithms/formfinding/settling_tremble/settling_tremble.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/formfinding/settling_tremble/settling_tremble.gd"
+            ],
+            "script_hashes": {
+              "res://algorithms/formfinding/settling_tremble/settling_tremble.gd": "9acc7092e08eb1af84a3d9df81862e78bbc86038e790204873a25dbc471d9abb"
+            }
+          }
+        ]
+      },
+      {
+        "key": "descent_marble_toy",
+        "cell": [
+          5,
+          19
+        ],
+        "token": "descent_marble_toy#plinth:1.1",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/descent_marble_toy/descent_marble_toy.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/descent_marble_toy/descent_marble_toy.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/descent_marble_toy/descent_marble_toy.gd": "dcc3b448977e460b3e50ecbc1710b7afcfb4b40f4a9b17440c150dda57d7a677"
+            }
+          }
+        ]
+      },
+      {
+        "key": "gradient_descent",
+        "cell": [
+          9,
+          21
+        ],
+        "token": "gradient_descent:0:0.8:0.14",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/machinelearning.json",
+            "scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd"
+            ],
+            "script_hashes": {
+              "res://algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd": "bf6be97bdee0402527320b65a52486cf025d8ce778211772eac8aaf7b034d860"
+            }
+          }
+        ]
+      },
+      {
+        "key": "gradient_descent_well",
+        "cell": [
+          4,
+          23
+        ],
+        "token": "gradient_descent_well",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/self_portrait.json",
+            "scene": "res://commons/artifacts/gradient_descent_well/gradient_descent_well.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/gradient_descent_well/gradient_descent_well.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/gradient_descent_well/gradient_descent_well.gd": "bf3e63a9562b3063005885305310c975cf895968dc4c8d4d72170f9db4b78921"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          10,
+          23
+        ],
+        "token": "science_screen",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "FormFinding_Catenary": {
+    "order": {
+      "primary": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid"
+      ],
+      "secondary": [
+        "helicoid",
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "cable_builder",
+        "cell": [
+          5,
+          3
+        ],
+        "token": "cable_builder",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+            ],
+            "script_hashes": {
+              "res://algorithms/wavefunctions/line_builder_3d/cable_builder.gd": "9e952b284d35dcbe59d29a2f2f3f0b931793d235212f938d0b9307564b131e3b"
+            }
+          }
+        ]
+      },
+      {
+        "key": "catenoid",
+        "cell": [
+          9,
+          5
+        ],
+        "token": "catenoid",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/parametric.json",
+            "scene": "res://commons/primitives/parametric/catenoid.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/parametric/catenoid.gd"
+            ],
+            "script_hashes": {
+              "res://commons/primitives/parametric/catenoid.gd": "1621b8ae135d5208367687210df112feabe84787d7ec9710b570a0bc5f9c3fa2"
+            }
+          }
+        ]
+      },
+      {
+        "key": "helicoid",
+        "cell": [
+          4,
+          7
+        ],
+        "token": "helicoid",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/parametric.json",
+            "scene": "res://commons/primitives/parametric/helicoid.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/parametric/helicoid.gd"
+            ],
+            "script_hashes": {
+              "res://commons/primitives/parametric/helicoid.gd": "0b0a3fcd5b3c33d00316b80e6dd6b47b51e5312226383b7f15c6967c67daf057"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          10,
+          7
+        ],
+        "token": "science_screen",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      },
+      {
+        "key": "laundry_line_cathedral",
+        "cell": [
+          2,
+          9
+        ],
+        "token": "laundry_line_cathedral",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd": "d50b99b37cd096a05d48c77b36993dcb3e81dc011f33a255395ab3586b5e5634"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "FormFinding_Relaxation": {
+    "order": {
+      "primary": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel"
+      ],
+      "secondary": [
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "mass_spring_bench",
+        "cell": [
+          2,
+          2
+        ],
+        "token": "mass_spring_bench:270",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/mass_spring_bench/mass_spring_bench.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/mass_spring_bench/mass_spring_bench.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/mass_spring_bench/mass_spring_bench.gd": "ec609c654b95198867e443f2198115a648c56c8dc37de7ca344e365d3b21253e"
+            }
+          }
+        ]
+      },
+      {
+        "key": "verlet_workbench",
+        "cell": [
+          6,
+          2
+        ],
+        "token": "verlet_workbench:90#comparison:true",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/verlet_workbench/verlet_workbench.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/verlet_workbench/verlet_workbench.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/verlet_workbench/verlet_workbench.gd": "93a6e7690f1b1b2ea3ca9da42a4d02e56de550ef78e1dcdba34e7fdfca0df14a"
+            }
+          }
+        ]
+      },
+      {
+        "key": "frozen_glass_vessel",
+        "cell": [
+          9,
+          2
+        ],
+        "token": "frozen_glass_vessel:90",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd": "fab72efb66b50534faed18784394a1c925736642d72de3f34821084f43c7b0ee"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          8,
+          9
+        ],
+        "token": "science_screen:90",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "FormFinding_Equilibrium": {
+    "order": {
+      "primary": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "secondary": [
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "calder_mobile",
+        "cell": [
+          5,
+          3
+        ],
+        "token": "calder_mobile",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/calder_mobile/calder_mobile.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/calder_mobile/calder_mobile.gd": "09763212a932661bbe3178791961d9e6a23400ee2e1c22728c660d4c524ae7fb"
+            }
+          }
+        ]
+      },
+      {
+        "key": "fractal_truss_tower",
+        "cell": [
+          9,
+          4
+        ],
+        "token": "fractal_truss_tower",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/fractals.json",
+            "scene": "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd": "0c91a4eb6500c3c674791d2ba7bc5f44929944d0b81a70087b05f68a572fae75"
+            }
+          }
+        ]
+      },
+      {
+        "key": "tensegrity_triangle",
+        "cell": [
+          4,
+          6
+        ],
+        "token": "tensegrity_triangle",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.gd"
+            ],
+            "script_hashes": {
+              "res://commons/primitives/tensegrity_triangle/tensegrity_triangle.gd": "65a93d47c6ad2e489cc31bdd320bebeffbe7d835db7870408449abfb34cdf512"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          8,
+          7
+        ],
+        "token": "science_screen",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "FormFinding_Annealing": {
+    "order": {
+      "primary": [
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "max_q_basin_room"
+      ],
+      "secondary": [
+        "impossible_end_table",
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "energy_landscape_bench",
+        "cell": [
+          3,
+          2
+        ],
+        "token": "energy_landscape_bench:90",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd": "6338dba0fd8822d7a480977937f7437674a168a42e608afb215ed5e889a936c6"
+            }
+          }
+        ]
+      },
+      {
+        "key": "simulated_annealing",
+        "cell": [
+          10,
+          2
+        ],
+        "token": "simulated_annealing:90",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/algorithms_misc.json",
+            "scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd"
+            ],
+            "script_hashes": {
+              "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd": "9a7e040029647cd787047ae880b99cccff9aedf1c5eabdce7a5cf73d46fb8899"
+            }
+          }
+        ]
+      },
+      {
+        "key": "max_q_basin_room",
+        "cell": [
+          6,
+          3
+        ],
+        "token": "max_q_basin_room:0#reveal_on_request:true#floor_size:4.9",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/max_q_basin_room/max_q_basin_room.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/max_q_basin_room/max_q_basin_room.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/max_q_basin_room/max_q_basin_room.gd": "535cf0af91035be42b8ce1451867ec06867dafe768961df9daa733a4915c8b73"
+            }
+          }
+        ]
+      },
+      {
+        "key": "impossible_end_table",
+        "cell": [
+          9,
+          5
+        ],
+        "token": "impossible_end_table",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/artifacts/impossible_end_table/impossible_end_table.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/impossible_end_table/impossible_end_table.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/impossible_end_table/impossible_end_table.gd": "2b9adc308b3e03fd2acfa308621a8bb8a6d9fb501f4ec1410900a49a3806a0a2"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          8,
+          9
+        ],
+        "token": "science_screen:90",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "FormFinding_Forge": {
+    "order": {
+      "primary": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "secondary": [
+        "self_shaping_forge",
+        "science_screen"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "self_shaping_forge",
+        "cell": [
+          5,
+          3
+        ],
+        "token": "self_shaping_forge",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/self_shaping_forge/self_shaping_forge.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/self_shaping_forge/self_shaping_forge.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/self_shaping_forge/self_shaping_forge.gd": "e940ee84fa504dee002d073f8290b652ca9bee53993607ac4317765b6f4ca700"
+            }
+          }
+        ]
+      },
+      {
+        "key": "balance_puzzle",
+        "cell": [
+          9,
+          5
+        ],
+        "token": "balance_puzzle",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/furniture.json",
+            "scene": "res://commons/primitives/balance/balance_puzzle.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/balance/balance_puzzle.gd"
+            ],
+            "script_hashes": {
+              "res://commons/primitives/balance/balance_puzzle.gd": "e9b9ebfb94d70bfe02e0d8c18e96198e6d58a706eab4fc2a7d9f2ff5456d9237"
+            }
+          }
+        ]
+      },
+      {
+        "key": "gradient_descent_optimizer",
+        "cell": [
+          4,
+          7
+        ],
+        "token": "gradient_descent_optimizer",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/soft_bodies.json",
+            "scene": "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd": "619203684824357e1fb9f8b72cd3c1ebbd3c261d476429427a0c951e8173b6d0"
+            }
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "cell": [
+          10,
+          7
+        ],
+        "token": "science_screen",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ],
+            "script_hashes": {
+              "res://commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

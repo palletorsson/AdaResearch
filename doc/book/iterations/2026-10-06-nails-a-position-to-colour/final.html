@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The choosing hand</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR 3 / 8 · NAILS · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="nails-review.zip">Code + tests</a></nav></header><main><h1>The choosing hand</h1>
+<p>What changes when a colour becomes part of the body you act through?</p>
+<p>The lamps changed what reached a surface. Here a hand has outgrown the furniture. A small manicure table stands before it, complete with bottles, stools and another hand small enough to rest between the tools. Which of these bodies are you about to dress?</p>
+<!-- @nail_color_controller -->
+
+<p>Find the movable point in the RGB box on its open plinth beside the manicure table. Take it along one axis, then bring it back. A colour you left can be found again at the same place.</p>
+<p>Look up at the giant nails, then down at the petite hand on the table. Both answer the same choice. A movement small enough for your hand to make crosses two very different scales. Does the colour feel equally delicate on both?</p>
+<p><img alt="The giant hand and the petite hand on the manicure table, seen from inside the museum salon." src="/book-review/doc/book/figures/Color_Nails/salon-red.png" /></p>
+<p>Raise the hand you are choosing with and turn its nails toward you. Compare them with the petite hand, the giant nails and the swatch. The colour has reached the hand you use to choose it. What seemed like dressing an object now includes the body doing the dressing.</p>
+<p>The nail material adds its own response to light. A colour selected in the box can look different on a small glossy surface from the way it appears on the flat preview.</p>
+<p>The point's three coordinates are constrained to the box and converted into red, green and blue channel values, each between zero and one. Moving along one axis changes one channel. Moving diagonally can change several at once. The box turns a colour choice into a position that your hand can revisit.</p>
+<p>This is a three-channel description of colour. It does not divide every difference you can perceive into three equally noticeable kinds. Equal distances in the box need not feel like equal changes in the preview.</p>
+<!-- @hand_color_controller -->
+
+<p>At the controller for the hand surface, leave the nails at the colour you chose and move the point for the skin. Look again at the nails against this new background. Their assigned colour has stayed fixed. Do they still look the same?</p>
+<p>The two stations use the same position-to-colour mechanism but target different surfaces. The salon hands are two copies of the same source mesh. Their nail materials receive the nail-colour signal; their skin materials receive the hand-colour signal. Each receiving material is assigned the selected value:</p>
+<pre><code class="language-gdscript">material.albedo_color = colour
+</code></pre>
+<p>The scale difference lives in the geometry's transform. It does not require a second colour recipe. A nail can become monumental while its material still receives the same three channels as the small one on the cushion.</p>
+<p>The two points move with the same ease. Changing polish and changing skin can feel like neighbouring choices. Yet changing a rendered skin colour does not give us another person's lived history, or undo the racism through which skin is read. Polish is read through the body too: a colour may be called elegant, excessive or defiant according to whose hand wears it.</p>
+<p>Audre Lorde asks us to recognise difference while confronting the power that turns it into inferiority.<sup id="fnref:color-nails-lorde"><a class="footnote-ref" href="#fn:color-nails-lorde">1</a></sup> Look again at the hand you have chosen. Which colours feel available to you? Which seem to require an explanation, and to whom?</p>
+<p>The bottles never need opening. No brush crosses these nails, and no polish has to dry. The room keeps the cushion, the stools, the promise of a hand being attended to. The application has become an assignment. What remains of the manicure in the pleasure of choosing?</p>
+<p>The colour leaves with you. Your hands carry it into the halls ahead.</p>
+<!-- @ -->
+
+<p>Choose a colour because you want it, without requiring a naturalistic match. Try a nail or hand that interrupts the palette you expected from this body. Reach for the point again. The hand making the next choice is already wearing the last one.</p>
+<p>You have chosen their colour. The fingers have kept their length. What else might you want to change?</p>
+<p>Carry one of those chosen colours toward the rainbow. Where would you put it among the bands? The next room gives colour a familiar order; look for the decisions that hold that order in place.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:color-nails-lorde">
+<p>Audre Lorde, <a href="https://www.ualberta.ca/en/institute-intersectionality-studies/media-library/intersectionality-readings/lorde-age-race-class-and-sex.pdf">“Age, Race, Class, and Sex: Women Redefining Difference”</a>, in <em>Sister Outsider</em> (Crossing Press, 1984), pp. 114–123, especially 115–116 and 120–121. Lorde examines the unequal power attached to difference and refuses to let one aspect of a person stand for their whole life. The comparison between this salon's skin and nail controls is the book's application of her argument.&#160;<a class="footnote-backref" href="#fnref:color-nails-lorde" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></main></html>

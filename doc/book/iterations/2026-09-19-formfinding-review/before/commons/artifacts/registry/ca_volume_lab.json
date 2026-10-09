@@ -1,0 +1,17 @@
+{
+  "artifacts": {
+    "ca_volume_lab": {
+      "lookup_name": "ca_volume_lab",
+      "name": "A volume can become a room",
+      "scene": "res://commons/artifacts/ca_volume_lab/ca_volume_lab.tscn",
+      "map_ready": true,
+      "description": "A 13 cubed, synchronous, 26-neighbour cellular automaton with three seeds and two authored rules. Compare solid, boundary-frame and faceted-shell architecture, with collision following the chosen material. Sine changes birth conditions; bending and an explicit inspection cut leave the cellular state intact. This is a standalone experiment, not a trained generative model.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "qfep_connection": "Inspect how seed, survival conditions and material mapping admit different bodies. The shell aperture policy is an explicit architectural choice; cellular complexity alone does not establish body access or a numerical entropy threshold.",
+      "spatial_needs": {"footprint_cells": 40, "clearance_m": 2.0},
+      "tags": ["3d", "cellular automata", "morphogenesis", "sine", "architecture", "experimental"],
+      "interactions": ["Choose a seed and rule", "Step through volume evolution", "Compare solid, frame and shell", "Inspect a cut", "Apply sine to the rule or bend coordinates", "Replay the recorded generation"]
+    }
+  }
+}

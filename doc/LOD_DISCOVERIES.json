@@ -786,6 +786,12 @@
       "topic": "stranded-work",
       "insight": "A GitHub Desktop branch switch auto-stashes and restores the whole tree (3981b6493, 09-28 11:56->12:01), which resets every file's mtime. Before trusting an age reading, match the file's blob against the stash commits (git log --all). The book JSON (commons/data/book) has been uncommitted since 09-12 and no gate checks it.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-10-08T07:24:35.497527+00:00",
+      "topic": "release gates",
+      "insight": "2026-10-08 breath: a stale .git/index.lock (0 bytes, dated 3 days back, no git process alive) blocks every git add in the shared tree; check its mtime and tasklist for git/GitHubDesktop before removing. Landing 80 stranded files (L 12, M 11, N 57) as pure additions took gates 8/15 -> 9/15, N to PASS, L to its forum-claimed floor of 4, M to its 21-live + 31-gitignored floor.",
+      "lod": 3
     }
   ]
 }

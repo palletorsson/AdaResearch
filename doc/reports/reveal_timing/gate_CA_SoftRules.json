@@ -1,0 +1,59 @@
+{
+ "hall": "CA_SoftRules",
+ "stations": [
+  {
+   "hall": "CA_SoftRules",
+   "token": "rd_artifact",
+   "cell": [
+    8,
+    5
+   ],
+   "states_conclusion": null,
+   "when": null,
+   "when_confidence": null,
+   "verdict": null,
+   "source": "commons/artifacts/rd_artifact/rd_artifact.tscn, commons/artifacts/rd_artifact/rd_artifact.gd, commons/artifacts/rd_artifact/exchange_study.gd"
+  },
+  {
+   "hall": "CA_SoftRules",
+   "token": "the_clockmaker_of_rules",
+   "cell": [
+    8,
+    13
+   ],
+   "states_conclusion": null,
+   "when": null,
+   "when_confidence": null,
+   "verdict": null,
+   "source": "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn, commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd"
+  },
+  {
+   "hall": "CA_SoftRules",
+   "token": "lattice_gas_pump",
+   "cell": [
+    10,
+    17
+   ],
+   "states_conclusion": null,
+   "when": null,
+   "when_confidence": null,
+   "verdict": null,
+   "source": "commons/artifacts/lattice_gas_pump/lattice_gas_pump.tscn, commons/artifacts/lattice_gas_pump/lattice_gas_pump.gd"
+  },
+  {
+   "hall": "CA_SoftRules",
+   "token": "crack_propagation_ca",
+   "cell": [
+    1,
+    24
+   ],
+   "states_conclusion": null,
+   "when": null,
+   "when_confidence": null,
+   "verdict": null,
+   "source": "algorithms/cellularautomata/ca_showcase/crack_propagation_ca.tscn, algorithms/cellularautomata/ca_showcase/crack_propagation_ca.gd, algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd"
+  }
+ ],
+ "usage": {},
+ "note": "dry run — TYPESAFE_API_KEY not set"
+}

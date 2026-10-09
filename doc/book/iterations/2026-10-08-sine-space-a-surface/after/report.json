@@ -1,0 +1,967 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing primary artifact present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: primary",
+      "passed": true
+    },
+    {
+      "name": "study front has floor",
+      "passed": true
+    },
+    {
+      "name": "study front is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "study side has floor",
+      "passed": true
+    },
+    {
+      "name": "study side is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "printed mesh and point exist in museum",
+      "passed": true
+    },
+    {
+      "name": "point remains the carried sphere",
+      "passed": true
+    },
+    {
+      "name": "sphere is above the museum floor after contact",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "coarse example is nearly flat in real hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coarse",
+      "passed": true
+    },
+    {
+      "name": "four named encounters loaded",
+      "passed": true
+    },
+    {
+      "name": "route 2.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 2.5 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 7.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 7.0 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 12.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 12.5 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 16.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 16.0 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 21.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 21.0 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 30.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 30.0 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "route 37.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "route 37.5 is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "tray controls has floor",
+      "passed": true
+    },
+    {
+      "name": "tray controls is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "corridor controls has floor",
+      "passed": true
+    },
+    {
+      "name": "corridor controls is unobstructed",
+      "passed": true
+    },
+    {
+      "name": "explanation raised to readable height",
+      "passed": true
+    },
+    {
+      "name": "corridor lies along onward route",
+      "passed": true
+    },
+    {
+      "name": "corridor walls remain noncolliding",
+      "passed": true
+    },
+    {
+      "name": "corridor retains its supporting slab",
+      "passed": true
+    },
+    {
+      "name": "half-turn makes constant local X gap",
+      "passed": true
+    },
+    {
+      "name": "freeze preserves phase",
+      "passed": true
+    },
+    {
+      "name": "reset restores moving passage",
+      "passed": true
+    },
+    {
+      "name": "walk placement uses the static topology surface",
+      "passed": true
+    },
+    {
+      "name": "large terrain has matching drawn and collision faces",
+      "passed": true
+    },
+    {
+      "name": "exact fit closes the eight by eighteen metre basin",
+      "passed": true
+    },
+    {
+      "name": "other sine floors retain the old fit by default",
+      "passed": true
+    },
+    {
+      "name": "unconfigured walk floor retains unscaled half waves",
+      "passed": true
+    },
+    {
+      "name": "exact fit can also be configured after ready",
+      "passed": true
+    },
+    {
+      "name": "fitted basin edge has support (2.01, 0.0, 24.0)",
+      "passed": true
+    },
+    {
+      "name": "fitted basin edge has support (9.99, 0.0, 24.0)",
+      "passed": true
+    },
+    {
+      "name": "fitted basin edge has support (6.0, 0.0, 17.01)",
+      "passed": true
+    },
+    {
+      "name": "fitted basin edge has support (6.0, 0.0, 34.99)",
+      "passed": true
+    },
+    {
+      "name": "sine basin supports at (0.0, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "sine basin supports at (1.0, 0.0, 1.0)",
+      "passed": true
+    },
+    {
+      "name": "sine basin supports at (-1.0, 0.0, 2.0)",
+      "passed": true
+    },
+    {
+      "name": "size control changes body not surface",
+      "passed": true
+    },
+    {
+      "name": "reset restores middle size and relief",
+      "passed": true
+    },
+    {
+      "name": "real release control starts complete batch",
+      "passed": true
+    },
+    {
+      "name": "released bodies enter physical motion",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: tray",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corridor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          1.85000026226044,
+          0.0,
+          2.1399998664856
+        ],
+        "bounds_size": [
+          4.3899998664856,
+          2.58084869384766,
+          4.27250051498413
+        ],
+        "position": [
+          3.5,
+          0.0,
+          4.5
+        ],
+        "token": "sine_flow_tray"
+      },
+      {
+        "bounds_position": [
+          3.04220080375671,
+          0.800000011920929,
+          8.8750581741333
+        ],
+        "bounds_size": [
+          0.75779914855957,
+          0.900000035762787,
+          1.1249418258667
+        ],
+        "position": [
+          3.5,
+          1.0,
+          9.5
+        ],
+        "token": "sine_wall_explanation"
+      },
+      {
+        "bounds_position": [
+          4.97499990463257,
+          0.0,
+          8.60092735290527
+        ],
+        "bounds_size": [
+          2.78292322158813,
+          4.0,
+          7.46907234191895
+        ],
+        "position": [
+          6.5,
+          0.0,
+          12.5
+        ],
+        "token": "sine_wall_corridor"
+      },
+      {
+        "bounds_position": [
+          10.072925567627,
+          0.00749999983236194,
+          25.0652141571045
+        ],
+        "bounds_size": [
+          0.854148864746094,
+          0.953177630901337,
+          0.869573593139648
+        ],
+        "position": [
+          10.5,
+          0.0,
+          25.5
+        ],
+        "token": "dark_sphere"
+      },
+      {
+        "bounds_position": [
+          2.0,
+          -0.699999988079071,
+          17.0
+        ],
+        "bounds_size": [
+          8.0,
+          1.39999997615814,
+          18.0
+        ],
+        "position": [
+          6.5,
+          0.0,
+          26.5
+        ],
+        "token": "sine_space"
+      },
+      {
+        "bounds_position": [
+          4.85999965667725,
+          0.0,
+          0.295000016689301
+        ],
+        "bounds_size": [
+          3.28000068664551,
+          3.41199994087219,
+          0.409999966621399
+        ],
+        "position": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "token": "gate:wavefunctions sine space"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          2.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          2.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          4.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          4.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          9.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          9.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          6.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          6.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.0,
+          1.58000004291534,
+          38.9910011291504
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          8.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          8.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          10.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          10.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          12.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          12.9910001754761,
+          1.58000004291534,
+          12.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          6.77500009536743,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.449999809265137,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          7.0,
+          3.51999998092651,
+          -1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          3.02499985694885,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.950000286102295,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          3.5,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "token": "ceiling_vent"
+      },
+      {
+        "bounds_position": [
+          1.27999997138977,
+          0.550000011920929,
+          2.18379998207092
+        ],
+        "bounds_size": [
+          0.288000106811523,
+          0.600000083446503,
+          0.616199970245361
+        ],
+        "position": [
+          1.27999997138977,
+          0.850000023841858,
+          2.5
+        ],
+        "token": "fire_hose_box"
+      }
+    ],
+    "bay": [
+      10.5,
+      0,
+      8.5
+    ],
+    "corridor controls": [],
+    "lesson": "res://doc/book/iterations/2026-10-08-sine-space-a-surface/extracted/03_sine_surface.gd",
+    "route 12.5": [],
+    "route 16.0": [],
+    "route 2.5": [],
+    "route 21.0": [],
+    "route 30.0": [],
+    "route 37.5": [],
+    "route 7.0": [],
+    "scope": "Real museum route and temporarily mounted printed program; native Godot/Jolt checks, no independent student or headset claim.",
+    "student_point_position": [
+      -0.0843162536621094,
+      1.01767015457153,
+      -0.0843029022216797
+    ],
+    "study front": [],
+    "study side": [],
+    "tray controls": []
+  },
+  "passed": true,
+  "room": "WaveFunctions_Sine_Space",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

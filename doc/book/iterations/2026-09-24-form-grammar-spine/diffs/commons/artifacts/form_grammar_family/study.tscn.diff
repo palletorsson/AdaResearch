@@ -1,0 +1,7 @@
+--- before/commons/artifacts/form_grammar_family/study.tscn
++++ after/commons/artifacts/form_grammar_family/study.tscn
+@@ -0,0 +1,4 @@
++[gd_scene load_steps=2 format=3]
++[ext_resource type="Script" path="res://commons/artifacts/form_grammar_family/study.gd" id="1"]
++[node name="ShapeGrammarStudy" type="Node3D"]
++script = ExtResource("1")

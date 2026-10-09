@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "name": "Exact printed files initialise label, point and 343 addresses",
+      "passed": true
+    },
+    {
+      "name": "Authored twelve-cell seed has eleven active neighbours",
+      "passed": true
+    },
+    {
+      "name": "343 integer addresses map uniquely into array",
+      "passed": true
+    },
+    {
+      "name": "Full surrounding cube counts 26 rather than 27",
+      "passed": true
+    },
+    {
+      "name": "Centre's own state is excluded",
+      "passed": true
+    },
+    {
+      "name": "Twenty-six visible fading neighbours contribute zero",
+      "passed": true
+    },
+    {
+      "name": "All 81 transition-table entries match stated three-state rule",
+      "passed": true
+    },
+    {
+      "name": "Seven neighbours: empty births, fading empties",
+      "passed": true
+    },
+    {
+      "name": "Evolution leaves input intact and returns independent array",
+      "passed": true
+    },
+    {
+      "name": "First update leaves a fading centre",
+      "passed": true
+    },
+    {
+      "name": "Second update empties centre",
+      "passed": true
+    },
+    {
+      "name": "Independent adjacent-pair seed produces exactly two fading cells",
+      "passed": true
+    },
+    {
+      "name": "Adjacent pair then leaves whole volume empty",
+      "passed": true
+    },
+    {
+      "name": "Ordinary solver instance gains no study or hand control",
+      "passed": true
+    },
+    {
+      "name": "Counter mutation is rejected",
+      "passed": true
+    },
+    {
+      "name": "Premature rebirth mutation is rejected",
+      "passed": true
+    },
+    {
+      "name": "Eight deterministic mixed-state seeds across eight updates match installed solver",
+      "passed": true
+    },
+    {
+      "name": "Reverse traversal produces identical volumes",
+      "passed": true
+    },
+    {
+      "name": "Every outer face stays empty in all trials",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools grab/movement does not edit or step cells",
+      "passed": true
+    },
+    {
+      "name": "Pickable action advances exactly one generation",
+      "passed": true
+    },
+    {
+      "name": "Release parks in rotated local frame without another update",
+      "passed": true
+    },
+    {
+      "name": "Keyboard steps once and ignores repeat",
+      "passed": true
+    },
+    {
+      "name": "Keyboard replay restores seed and clock",
+      "passed": true
+    },
+    {
+      "name": "Drawing leaves state unchanged",
+      "passed": true
+    },
+    {
+      "name": "Every occupied cell is drawn and empty cells are hidden",
+      "passed": true
+    },
+    {
+      "name": "Stored state selects correct rendered colour",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed code, complete transition table, actual production solver parity, independent seed, reverse traversal, fault rejection and XRTools with supplied poses. No physical headset or human student."
+}

@@ -1,0 +1,25 @@
+{
+	"checks": {
+		"different_objects": true,
+		"exact_inks": true,
+		"independent_advance": true,
+		"reused_meshes": true,
+		"same_reference": true,
+		"three_ink_cycle": true
+	},
+	"evidence": {
+		"explicit_refresh": true,
+		"inks": [
+			"#cf709b",
+			"#5db7b0",
+			"#d9b358"
+		],
+		"limitation": "Proposed Palette teaching model; it does not bind to the museum's existing floor cells.",
+		"native_class": "RefCounted Palette",
+		"source_lines": [
+			96,
+			112
+		]
+	},
+	"passed": true
+}

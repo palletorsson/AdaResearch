@@ -1,0 +1,74 @@
+{
+  "scope": [
+    "Pattern_Disco",
+    "Pattern_Foundry"
+  ],
+  "regression_hall": "Tutorial_Disco",
+  "suites": [
+    {
+      "suite": "Pattern Disco independence",
+      "report": "pulse-final/Pattern_Disco-checks.json",
+      "checks": 29,
+      "failures": []
+    },
+    {
+      "suite": "Tutorial Disco regression",
+      "report": "mono-final/Tutorial_Disco-checks.json",
+      "checks": 28,
+      "failures": []
+    },
+    {
+      "suite": "Foundry machine/architecture sources",
+      "report": "verified-runtime/Pattern_Foundry-checks.json",
+      "checks": 33,
+      "failures": []
+    },
+    {
+      "suite": "Foundry recipe and receivers",
+      "report": "verified-runtime/probe_pattern_recipe.json",
+      "checks": 101,
+      "failures": []
+    },
+    {
+      "suite": "Foundry studio/room ownership",
+      "report": "verified-runtime/probe_pattern_studio.json",
+      "checks": 88,
+      "failures": []
+    },
+    {
+      "suite": "Disco two-hall bridge regression",
+      "report": "verified-runtime/disco_bridge.json",
+      "checks": 17,
+      "failures": []
+    },
+    {
+      "suite": "Old controller rendered replay",
+      "report": "pulse-visual-before/Pattern_Disco-checks.json",
+      "checks": 11,
+      "failures": []
+    },
+    {
+      "suite": "Repaired controller rendered run",
+      "report": "pulse-visual-after/Pattern_Disco-checks.json",
+      "checks": 11,
+      "failures": []
+    }
+  ],
+  "assertions_total": 318,
+  "failures_total": 0,
+  "headset_tested": false,
+  "human_listening_tested": false,
+  "learner_verified": false,
+  "production_files": [
+    "commons/maps/Pattern_Disco/map_data.json",
+    "commons/artifacts/regularity/disco_controls.gd",
+    "commons/maps/Pattern_Foundry/final.md"
+  ],
+  "chosen_images": {
+    "surround_before": "baseline/Pattern_Disco-inside.png",
+    "surround_after": "pulse-visual-after/Pattern_Disco-held-pulse.png",
+    "pulse_before": "pulse-visual-before/Pattern_Disco-held-pulse.png",
+    "pulse_after": "pulse-visual-after/Pattern_Disco-held-pulse.png"
+  },
+  "preservation": "Every original Foundry final paragraph remains verbatim; only two optional-route paragraphs inserted. Disco final unchanged. No secondary artifacts removed."
+}

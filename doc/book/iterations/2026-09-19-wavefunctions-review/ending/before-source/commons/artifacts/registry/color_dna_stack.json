@@ -1,0 +1,80 @@
+{
+	"artifacts": {
+		"color_dna_stack": {
+			"dna": {
+			 "axes": {
+			 "study": [
+			 "mondrian",
+			 "albers",
+			 "memphis",
+			 "bauhaus_tall",
+			 "blue",
+			 "kras_rainbow",
+			 "rainbow_crown",
+			 "memphis_beacon"
+			 ]
+			 }
+			},
+			"lookup_name": "color_dna_stack",
+			"name": "Colour DNA Columns",
+			"class_name": "ColorDNAStack",
+			"scene": "res://commons/artifacts/color_dna_stack/color_dna_stack.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"sequence": "color",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				3,
+				3,
+				8
+			],
+			"map_sequences": [
+				"color"
+			],
+			"description": "Eight static gallery studies at 5-7.4 m: Mondrian, Albers, Memphis, tall Bauhaus, blues, an elongated ps07_kras_rainbow, and two combined stacks. Reuses primitive_stack.build with copied source configs. Explicit Kraš shaft overrides and per-part height normalization are saved in studies.json. Convex collision per primitive. Labels stay at 1.2 m, beyond each silhouette. No animation or physical balance simulation.",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					8
+				],
+				"size_group": "large"
+			},
+			"tags": [
+				"colour",
+				"composition",
+				"primitives",
+				"dna",
+				"stack",
+				"art",
+				"kras",
+				"rainbow",
+				"static"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 3,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach"
+			},
+			"interactions": [],
+			"dev_themes": [
+				"Use existing gallery DNA as compositional vocabulary",
+				"Raise a striped pedestal into a column",
+				"Combine several configurations into one vertical body"
+			],
+			"qfep_connection": "A fixed alphabet permits different bodies when dimensions, ordering and colour assignment are composed. Monumental height and recognizable styles arise from explicit parameter choices; the scene does not claim physical balance or reconstruct the cited artworks.",
+			"note": "Gallery source snapshots, source hashes and current map validation: doc/space/color-dna-columns-2026-09-17/."
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "waiting podium present",
+      "passed": true
+    },
+    {
+      "name": "five profile layers remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: waiting-and-seeing",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+
+  },
+  "passed": true,
+  "room": "Random_Game",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

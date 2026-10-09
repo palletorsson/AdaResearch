@@ -1,0 +1,473 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_Unit_Circle · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_Unit_Circle">← Tutorial lineage</a></p><h1>WaveFunctions Unit Circle</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_Unit_Circle/final.md">Raw captured source</a></p><pre># A circle becoming a graph
+
+How can going round a circle make a line that rises and falls?
+
+&lt;!-- @unit_circle_advanced --&gt;
+
+Follow the point on the circle and look at the projection rods beside it. When the point reaches the top, compare its height with the corresponding part of the wave. Repeat at a side and at the bottom. The graph builds for two turns, then keeps its steps. The point goes on turning beside what its movement has left.
+
+![The turning point at the top of the complete circle, inside the museum.](/book-review/doc/book/figures/wavefunctions/unit-circle-return-museum.png)
+
+The point&#x27;s vertical position rises and falls while its journey continues around the circumference. Its horizontal position follows another cycle. The two projections do not reach their extremes together: when one is at an extreme, the other passes through its middle.
+
+Pick four reference positions around the circle: right, top, left and bottom. At each, compare the point&#x27;s horizontal and vertical offsets from the centre. At the top and bottom, the horizontal offset returns to its middle while the vertical offset reaches opposite extremes. At the sides, those roles exchange. Use that sequence to predict a quarter of the adjacent graph before following it. Then start your reading from a different reference position. You have changed where you begin describing the cycle without changing its order. A beginning is needed to label the progression, even though the circle itself has no privileged first point.
+
+For a circle of unit radius, those coordinate values are sine and cosine. And the angle has a unit this room can show. On a circle of radius one, the angle is the distance the point has travelled along the rim, measured in radii: a little over six for a whole turn. The graph stretches that turn to fourteen radii, so its axis is the rim unrolled, though not to scale. The adjacent graph gives angle progression a new axis and uses one changing coordinate as height. It unfolds a relationship already present in the circular motion. The graph is not the path the point takes across the floor; its horizontal direction has a different meaning from the circle&#x27;s horizontal coordinate.
+
+Find a height that appears twice in a cycle. One occurrence belongs to a rising part and the other to a falling part. Knowing the height therefore does not recover the whole angular position. The missing distinction matters whenever a cyclic process is described by one measured value.
+
+The other rod does recover it. Height and sideways offset together fix the point on the circle; that is why a program that needs an angle from a direction is given both numbers rather than their ratio. A ratio returns the same answer for a direction and its opposite, and every graphics library carries a two-argument arctangent to tell them apart.
+
+The displayed construction is finite. It adds sampled steps until its allotted cycles are complete. The point returns to the top; no new step arrives. Those kept positions let you count and compare, but the spaces between them remain. Resembling a bridge does not, by itself, make this graph a route for your body.
+
+&lt;!-- @ --&gt;
+
+Next, a lattice of oscillators asks what happens when neighbouring cycles influence one another. You have followed one point and its projections; now look for relationships between many moving points.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_Unit_Circle/tutorial.md">Raw captured source</a></p><pre># Unit Circle
+
+A point travels a circle; its shadow traces a wave. Build the amphitheater where rotation becomes oscillation.
+
+Declare the rotating point.
+
+```gdscript
+class_name CircleRunner
+extends Node3D
+
+@export var radius: float = 1.0
+@export var omega: float = 1.0
+var angle: float = 0.0
+```
+
+Radius and angular velocity. The runner travels the unit circle at rate omega.
+
+Step the angle.
+
+```gdscript
+func _process(dt: float) -&gt; void:
+    angle += omega * dt
+    position = Vector3(cos(angle) * radius, sin(angle) * radius, 0.0)
+```
+
+Position follows cosine and sine of angle. The runner traces a circle in the xy plane.
+
+Project the shadow.
+
+```gdscript
+func project_shadow(screen_x: float, time: float) -&gt; Vector3:
+    return Vector3(screen_x, sin(omega * time) * radius, 0.0)
+```
+
+The shadow is sine against time. It strips away the x-component and leaves the sine trace scrolling along a screen.
+
+Draw the projection line.
+
+```gdscript
+func draw_projection(line: ImmediateMesh, runner_pos: Vector3, shadow_pos: Vector3) -&gt; void:
+    line.clear_surfaces()
+    line.surface_begin(Mesh.PRIMITIVE_LINES)
+    line.surface_add_vertex(runner_pos)
+    line.surface_add_vertex(shadow_pos)
+    line.surface_end()
+```
+
+A faint line connects the runner to its shadow. The line lengthens and shortens; the learner sees where the sine comes from.
+
+Build the oscillating bridge.
+
+```gdscript
+func update_bridge(plank: Node3D, offset: float) -&gt; void:
+    plank.position.y = sin(omega * Time.get_ticks_msec() / 1000.0 + offset) * 0.3
+```
+
+Planks rise and fall with staggered phase. The bridge becomes a travelling wave the learner walks across.
+
+Label the angle readout.
+
+```gdscript
+func update_angle_label(label: Label3D) -&gt; void:
+    label.text = &quot;θ = %.2f rad\nsin(θ) = %+0.2f\ncos(θ) = %+0.2f&quot; % [angle, sin(angle), cos(angle)]
+```
+
+Three numbers update each frame. The label makes the mapping between angle and projection explicit.
+
+Offer a second runner for cosine.
+
+```gdscript
+func spawn_cosine_runner() -&gt; void:
+    cos_runner = preload(&quot;res://commons/artifacts/wavefunctions/runner.tscn&quot;).instantiate()
+    cos_runner.phase_offset = PI / 2.0
+    add_child(cos_runner)
+```
+
+A second runner lags by 90 degrees. Its shadow traces cosine. Two shadows on one screen show the fundamental phase relationship.
+
+You have seen the origin of trigonometry. The next map, 3D Wave Propagation, releases the wave to travel.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Draw the chord from cosine to sine runners.
+
+```gdscript
+func draw_chord(mesh: ImmediateMesh, a: Vector3, b: Vector3) -&gt; void:
+    mesh.clear_surfaces()
+    mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+    mesh.surface_add_vertex(a)
+    mesh.surface_add_vertex(b)
+    mesh.surface_end()
+```
+
+The chord length visualises the phase difference as distance. When phase equals a quarter turn, chord length equals the radius.
+
+Label the two runners.
+
+```gdscript
+func label_runners() -&gt; void:
+    sin_runner.label = &quot;sin&quot;
+    cos_runner.label = &quot;cos&quot;
+```
+
+Each runner wears its function name. The amphitheater becomes legible to a first-time visitor.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_Unit_Circle/technical.md">Raw captured source</a></p><pre># An amphitheater sunk into the void where a spinning point on a circle casts its shadow as the sine wave the learner already knows
+
+Sine Space froze the wave in architecture — amplitude as height, frequency as compression, phase as shift. The learner walked through the equation&#x27;s output. But the equation itself remained unexplained. Where does sine come from? Why does it oscillate? Why that particular shape and no other?
+
+The Unit Circle map answers by rewinding to the origin: a point traveling at constant speed around a circle. Watch it from the side and the vertical position traces a sine wave. Watch from above and the horizontal position traces cosine. The wave is not a fundamental shape. It is a shadow — the projection of uniform circular motion onto a line. Every oscillation the learner encountered in previous maps reduces to this: something spinning, seen from a constrained angle.
+
+The amphitheater layout encodes the revelation spatially. Elevated ramparts ring a central void. The unit_circle_advanced artifact floats in that void, rotating its point, drawing its projections. Below, at the base, SimpleOscillatingBridge artifacts make the resulting wave physical — platforms rising and falling under the learner&#x27;s feet. The architecture descends from observation to embodiment: see the circle, then stand on its consequence.
+
+## The Unit Circle: Coordinates from Rotation
+
+A circle of radius 1 centered at the origin defines the unit circle. A point on its circumference at angle theta from the positive x-axis sits at coordinates `(cos(theta), sin(theta))`. This is the definition of cosine and sine — not a formula derived from triangles, not a Taylor series, not an equation on a blackboard. Cosine is the x-coordinate of a point on the unit circle. Sine is the y-coordinate. The circle is primary. The functions are projections.
+
+The UnitCircle artifact constructs this directly:
+
+```gdscript
+var angle: float = 0.0
+
+func _process(delta: float) -&gt; void:
+    angle += rotation_speed * delta
+
+    var x: float = cos(angle) * radius
+    var y: float = sin(angle) * radius
+    var p: Vector3 = Vector3(x, y, 0)
+    rotating_point.position = p
+```
+
+Each frame, `angle` advances by `rotation_speed * delta`. The position `p` is computed from `cos(angle)` and `sin(angle)`, scaled by `radius`. The point moves along the circle at constant angular velocity. No explicit path is stored. No waypoints are defined. The circle emerges entirely from evaluating two trigonometric functions at the same angle and assigning the results to x and y. The parametric equation `(cos(theta), sin(theta))` is the circle.
+
+When `radius` equals 1.0, the point traces the unit circle exactly. The x-coordinate oscillates between -1 and 1. The y-coordinate oscillates between -1 and 1. At `angle = 0`, the point sits at `(1, 0)` — rightmost.
+
+At `angle = PI/2`, it reaches `(0, 1)` — topmost. At `angle = PI`, it arrives at `(-1, 0)` — leftmost. At `angle = 3*PI/2`, it drops to `(0, -1)` — bottommost. One full revolution — `2*PI` radians, or `TAU` — returns it to the start. The journey is periodic because the circle is closed.
+
+## Projection: From Circle to Wave
+
+The unit circle lives in two dimensions. A sine wave lives in one. The connection is projection — collapsing one axis and watching what remains.
+
+The UnitCircle artifact draws this projection as colored lines:
+
+```gdscript
+func _create_projection_lines() -&gt; void:
+    sine_line = _make_line_node(Vector3.ZERO, Vector3.ZERO, sine_color, line_thickness)
+    cosine_line = _make_line_node(Vector3.ZERO, Vector3.ZERO, cosine_color, line_thickness)
+
+func _update_rotator_and_indicators() -&gt; void:
+    var x: float = cos(angle) * radius
+    var y: float = sin(angle) * radius
+    var p: Vector3 = Vector3(x, y, 0)
+
+    _update_line_node(sine_line, Vector3(x, 0, 0), p, line_thickness)
+    _update_line_node(cosine_line, Vector3(0, y, 0), p, line_thickness)
+```
+
+The `sine_line` connects the point `p` to its projection on the x-axis: `Vector3(x, 0, 0)`. This vertical segment has length `|y|` — the absolute value of `sin(angle) * radius`. The `cosine_line` connects `p` to its projection on the y-axis: `Vector3(0, y, 0)`. This horizontal segment has length `|x|` — the absolute value of `cos(angle) * radius`.
+
+As the point rotates, the sine line stretches and contracts vertically. It reaches maximum length when the point is at the top or bottom of the circle (angle = PI/2 or 3*PI/2), and collapses to zero when the point crosses the x-axis (angle = 0 or PI). That stretching and contracting, plotted over time, is the sine wave. The projection line is the wave drawn one sample at a time.
+
+The cosine line does the same horizontally. It reaches maximum at angle = 0 and PI, collapses at PI/2 and 3*PI/2. Cosine leads sine by a quarter cycle — PI/2 radians. The two functions are identical in shape, displaced in phase. The unit circle makes this visible: the horizontal shadow and the vertical shadow perform the same dance, offset by 90 degrees.
+
+## The Dotted Circle: Discretization of Continuity
+
+The circle outline is not drawn as a continuous curve. It is constructed from discrete dots:
+
+```gdscript
+func _create_unit_circle_outline() -&gt; void:
+    var res: int = 64
+    mm.instance_count = res
+
+    for i in range(res):
+        var th: float = float(i) / float(res) * TAU
+        var p: Vector3 = Vector3(cos(th) * radius, sin(th) * radius, 0)
+        mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, p))
+```
+
+Sixty-four sphere instances, each placed at `(cos(th), sin(th))` for evenly spaced values of `th`. The MultiMesh renders all 64 in a single draw call. The circle appears continuous to the eye, but the code knows it is sampled. This is the fundamental tension of digital simulation: continuous mathematics approximated by discrete steps.
+
+The `res` variable controls fidelity. At 64, the dots merge into a ring. At 8, the circle becomes an octagon. The underlying equation does not change. The sampling resolution does.
+
+The color wheel option maps each dot&#x27;s hue to its angular position:
+
+```gdscript
+func _get_wheel_color(theta: float, value: float) -&gt; Color:
+    var hue = fposmod(theta / TAU, 1.0)
+    return Color.from_hsv(hue, wheel_saturation, value)
+```
+
+`fposmod(theta / TAU, 1.0)` normalizes the angle from `[0, TAU]` to `[0, 1]` — the hue range in HSV color space. At theta = 0, hue = 0 (red). At theta = TAU/3, hue = 0.333 (green). At theta = 2*TAU/3, hue = 0.667 (blue). The full revolution maps to the full color spectrum. This is not decoration. It encodes angle as color, providing a second perceptual channel. When the bridge platforms inherit these colors, the learner reads the wave&#x27;s phase position chromatically — red at the start, green at one-third, blue at two-thirds, red again at the close.
+
+## The Bridge: Wave as Walkable Structure
+
+The UnitCircle artifact does not merely display the circle. It builds a physical bridge from the projection. As the point rotates, platform segments materialize along the x-axis at heights determined by `sin(angle)`:
+
+```gdscript
+func _create_bridge_step(step_angle: float, idx: int) -&gt; void:
+    var t: float = float(idx) / float(max(samples_per_cycle - 1, 1))
+    var x: float = start_x + t * wave_length
+    var y: float = sin(step_angle) * radius
+
+    var node := Node3D.new()
+    node.position = Vector3(x, y, 0)
+
+    var mi := MeshInstance3D.new()
+    var bm := BoxMesh.new()
+    bm.size = platform_size
+    mi.mesh = bm
+```
+
+Each platform is a box mesh positioned at `(x, y, 0)`. The x-position advances linearly along the bridge length. The y-position is `sin(step_angle) * radius` — the sine of the current angle, scaled by the circle&#x27;s radius. The bridge unfurls in real time as the point rotates, one platform per angular step. The learner watches the circle spin and the bridge grow simultaneously. The connection between rotation and oscillation is not explained — it is constructed, plank by plank, in front of the learner&#x27;s eyes.
+
+The `num_cycles` parameter extends the bridge across multiple revolutions:
+
+```gdscript
+@export var num_cycles: int = 2
+
+var total_angle := TAU * num_cycles
+if angle &gt; total_angle:
+    angle = total_angle
+```
+
+Two full rotations produce two complete sine waves along the bridge. The periodicity is visible: the bridge&#x27;s shape repeats exactly after one wavelength. The platforms at angle = 0 and angle = TAU sit at the same height. The bridge pattern tiles because the circle is closed.
+
+Collision bodies accompany each platform:
+
+```gdscript
+if enable_collision:
+    var body := StaticBody3D.new()
+    var shape := CollisionShape3D.new()
+    var box := BoxShape3D.new()
+    box.size = platform_size
+    shape.shape = box
+    body.add_child(shape)
+    node.add_child(body)
+```
+
+The sine wave becomes a surface the learner stands on. The physics engine enforces the function&#x27;s boundary — feet cannot pass through `sin(theta)`. The embodiment that Sine Space introduced through frozen terrain now extends to a wave that the learner watches being born from circular motion.
+
+## The Oscillating Bridge: Phase-Shifted Platforms in Motion
+
+The SimpleOscillatingBridge operates on a different principle from the UnitCircle&#x27;s static bridge. Its platforms move continuously:
+
+```gdscript
+func update_platform_positions():
+    for platform in platforms:
+        var phase = platform.get_meta(&quot;phase_offset&quot;, 0.0)
+        var oscillation_angle = time + phase
+
+        var x_offset = cos(oscillation_angle) * oscillation_amplitude_x
+        var y_offset = sin(oscillation_angle) * oscillation_amplitude_y
+
+        platform.position = Vector3(x_offset, y_offset, base_z)
+```
+
+Each platform stores a phase offset set at creation: `index * phase_offset_per_platform`. The oscillation angle for each platform is `time + phase`. Cosine drives horizontal displacement. Sine drives vertical displacement. Each platform traces an ellipse in the x-y plane — the same circular motion the unit circle demonstrates, stretched by independent amplitude parameters.
+
+The phase offset between platforms creates a traveling wave. No platform moves along the z-axis. Each one oscillates in place. But because neighboring platforms are phase-shifted, the peaks and troughs propagate spatially.
+
+The learner standing on platform 5 sees platform 6 begin its ascent a fraction of a second later, then platform 7, then 8. The wave appears to travel down the bridge. It does not. The motion is local. The pattern is emergent.
+
+This is the spatial consequence of phase that Sine Space introduced through wall offsets. The corridor walls differed by a fixed phase and breathed asymmetrically. The oscillating bridge distributes phase incrementally across twenty platforms, producing wave propagation from individual oscillation. The phi term in QFEP&#x27;s state evolution operates similarly — phase relationships between field contributions create coherent patterns from independently oscillating components. The bridge is a mechanical demonstration of constructive interference along a single spatial axis.
+
+## Angular Velocity and TAU
+
+The UnitCircle artifact advances its angle by `rotation_speed * delta` each frame. The quantity `rotation_speed` is angular velocity — radians per second. One full revolution equals `TAU` radians (approximately 6.2832). At `rotation_speed = 0.8`, the point completes one cycle in `TAU / 0.8` seconds — roughly 7.85 seconds.
+
+```gdscript
+@export var rotation_speed: float = 0.8
+
+angle += rotation_speed * delta
+```
+
+The angular velocity is constant. The point moves at the same rate everywhere on the circle. This is uniform circular motion — the simplest possible rotation. The sine and cosine that result are pure, undistorted oscillations. Vary the angular velocity and the wave&#x27;s frequency changes proportionally. Double `rotation_speed` and the point completes two cycles in the time it previously completed one. The bridge compresses. The wave frequency doubles.
+
+Godot provides `TAU` as a built-in constant — the full circle in radians. It appears throughout the artifact:
+
+```gdscript
+var total_angle := TAU * num_cycles
+
+for i in range(res):
+    var th: float = float(i) / float(res) * TAU
+```
+
+TAU is the natural unit of angular measurement. One TAU is one revolution. Half TAU is a semicircle. Quarter TAU is a right angle. The decision to use TAU rather than `2 * PI` is a clarity choice — it maps one-to-one with the concept of &quot;one full turn.&quot; The unit circle completes in TAU. The sine function repeats every TAU. The color wheel cycles through all hues in TAU. The constant unifies rotation, oscillation, and periodicity under a single value.
+
+## The Radius Line: Connecting Origin to Circumference
+
+A thin rod stretches from the circle&#x27;s center to the rotating point:
+
+```gdscript
+radius_line = _make_line_node(Vector3.ZERO, Vector3(radius, 0, 0), point_color, line_thickness)
+
+func _update_rotator_and_indicators() -&gt; void:
+    _update_line_node(radius_line, Vector3.ZERO, p, line_thickness)
+```
+
+The line rotates with the point, sweeping around the origin like a clock hand. Its length equals the radius — constant, unchanging. The sine and cosine projection lines vary; the radius does not. This visual contrast encodes the decomposition: the radius is the hypotenuse of a right triangle whose legs are `cos(angle) * radius` (horizontal) and `sin(angle) * radius` (vertical). The Pythagorean identity holds at every frame:
+
+```
+cos(angle)^2 + sin(angle)^2 = 1
+```
+
+The radius has length 1 (for a unit circle). The horizontal projection squared plus the vertical projection squared always equals the radius squared. The learner sees three lines — radius, sine projection, cosine projection — forming a right triangle that rotates smoothly. The triangle&#x27;s shape changes as the angle sweeps, but its hypotenuse never stretches or shrinks. The identity is geometric before it is algebraic.
+
+## The OscillationCurve: Time Made Visible
+
+Flanking the amphitheater, the OscillationCurve artifact draws the wave as a trailing line:
+
+```gdscript
+func _process(delta):
+    time += delta
+    var signal_value = sin(time * frequency)
+    var y_pos = signal_value * amplitude
+
+    driver_ball.position.y = y_pos
+
+    points.push_front(Vector3(0, y_pos, 0))
+    for i in range(points.size()):
+        points[i].x += speed * delta
+
+    if points.size() &gt; max_points:
+        points.pop_back()
+```
+
+A ball oscillates vertically — pure sine motion. Each frame, the ball&#x27;s current position is pushed to the front of a point array. All existing points shift rightward by `speed * delta`. The result is an oscilloscope trace: the ball writes its own history as a curve extending into space. New values appear at the ball&#x27;s position and scroll away.
+
+The `ImmediateMesh` renders the trace as a line strip:
+
+```gdscript
+func _draw_trail():
+    trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+    for p in points:
+        trail_mesh.surface_add_vertex(p)
+    trail_mesh.surface_end()
+```
+
+Every frame, the mesh is cleared and rebuilt from the current point array. This is brute-force rendering — no retained geometry, no optimization. For 200 points, the cost is negligible. The result is a live sine wave unspooling from the oscillating ball. The learner sees the unit circle&#x27;s projection (via the rotating point) and the OscillationCurve&#x27;s trace (via the scrolling line) and recognizes them as the same shape. Two artifacts, two rendering strategies, one function.
+
+## Color as Phase Encoding
+
+The UnitCircle artifact maps angular position to the HSV color wheel. The bridge platforms inherit this mapping:
+
+```gdscript
+if color_platforms_from_wheel and use_color_wheel:
+    var wheel_color = _get_wheel_color(step_angle, platform_wheel_value)
+    m.albedo_color = wheel_color
+    m.emission_enabled = true
+    m.emission = wheel_color * 0.35
+```
+
+A platform at `step_angle = 0` is red. At `step_angle = TAU/3`, green. At `step_angle = 2*TAU/3`, blue. The color repeats every TAU — one full cycle, one full spectrum. The bridge becomes a chromatic record of the circle&#x27;s rotation. Walking along it, the learner traverses the color wheel linearly. The hue gradient reinforces periodicity: when the colors repeat, the wave has completed a cycle.
+
+The emission component — `wheel_color * 0.35` — provides self-illumination proportional to color intensity. The bridge glows. In VR, this glow ensures legibility in low-ambient environments. The `platform_wheel_value` parameter controls brightness independently of hue, allowing the bridge to read distinctly from the brighter circle outline (which uses `wheel_value` at a higher setting).
+
+The colorballs artifact scattered through the amphitheater adds perceptual punctuation — physics-driven spheres in palette colors that bounce and roll, marking spatial positions without mathematical significance. Their randomness contrasts with the precision of the circle and bridge. Order and chaos coexist in the same space. The learner distinguishes signal from noise by observing which elements follow the sine curve and which do not.
+
+## Possible Artifacts
+
+**projection_unwinder** — An interactive artifact that lets the learner grab the rotating point and drag it around the circle manually. As the point moves, the sine and cosine projection lines update in real time, and a trace extends along the bridge axis showing the wave being drawn. A pause button freezes the point at any angle, displaying the exact values of sin(theta) and cos(theta) alongside the right triangle formed by the radius and projections. Converts passive observation into active exploration of the rotation-to-oscillation mapping.
+
+**frequency_dial** — A physical dial artifact mounted on the amphitheater wall that controls the UnitCircle&#x27;s `rotation_speed`. Turning the dial clockwise increases angular velocity; the point spins faster, the bridge platforms compress, the OscillationCurve trace tightens. Turning counterclockwise slows everything. A readout displays the current frequency in hertz (cycles per second) and the corresponding period in seconds. Connects the abstract concept of frequency to a tangible control and its visible consequence on wave shape.
+
+**dual_circle_phase_comparator** — Two unit circles side by side, rotating at the same speed but offset by a configurable phase angle. Each circle projects its own sine wave onto a shared bridge. The two waves overlap, and their sum is drawn as a third curve. At zero phase offset, the waves reinforce perfectly — double amplitude. At PI offset, they cancel — flat line. At intermediate offsets, the interference pattern varies continuously. Demonstrates superposition and phase interference using the same circular-motion foundation, bridging directly into the wave propagation concepts of the next map.
+
+**pythagorean_identity_visualizer** — An artifact that displays three bars alongside the unit circle: one representing cos(theta) squared, one representing sin(theta) squared, and one representing their sum. As the point rotates, the first two bars fluctuate inversely — when cosine squared grows, sine squared shrinks — but the third bar remains fixed at exactly 1.0. A numerical readout confirms the identity at every angle. Makes the Pythagorean relationship tactile: the learner sees that the two projections always trade magnitude while their squared sum stays constant.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_Unit_Circle/intent.md">Raw captured source</a></p><pre>Concept: Rotation creates oscillation — a point on a spinning circle projects its shadow as a sine wave, revealing that trigonometry&#x27;s origin is circular motion. The amphitheater frames the unit circle as theater; oscillating bridges make the wave physical underfoot.
+Sequence role: Fourth map in Wavefunctions; the conceptual keystone. After sine as equation (Intro), sine as physics (Pendulum), and sine as space (Sine_Space), this map reveals where sine comes from: the projection of uniform circular motion. This is the deepest explanation in the sequence — every subsequent wave phenomenon reduces to rotation; follows WaveFunctions_Sine_Space; leads to WaveFunctions_3D_Wave_Propagation.
+Technical angle: Unit circle: x = cos(θ), y = sin(θ) as θ sweeps from 0 to 2π. The projection of circular motion onto a line produces sinusoidal oscillation. The unit_circle_advanced artifact animates this projection; OscillationCurve draws the resulting wave; SimpleOscillatingBridge makes the oscillation physical — the ground moves under the learner&#x27;s feet.
+Critical angle: The unit circle reveals that oscillation and rotation are the same phenomenon seen from different angles. This is a deep structural insight: periodic motion is circular motion viewed in fewer dimensions. The amphitheater layout — elevated ramparts looking down into the void where the unit circle floats — frames this revelation as spectacle. The oscillating bridges close the loop: you don&#x27;t just see the wave, you stand on it.
+Key artifacts: unit_circle_advanced animates the rotation-to-oscillation projection; OscillationCurve draws the output sine wave; SimpleOscillatingBridge embodies the wave as physical surface; colorballs mark phase positions; cube_scene provides spatial context; dark_sphere anchors.
+
+Gap: OscillationCurve needs VR sliders for amplitude/frequency; colorballs needs VR grab.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_Unit_Circle/critical.md">Raw captured source</a></p><pre># The angle is a choice about where to measure from — the unit circle as a standpoint rather than a truth
+
+The unit circle is usually introduced as a self-evident object: a circle of radius one centred at the origin, with angles measured from the positive x-axis. Sine and cosine are defined as projections of a rotating point onto two perpendicular lines. The definitions feel like discoveries, as though the functions were there in the geometry waiting to be named.
+
+Donna Haraway&#x27;s situated knowledge insists otherwise. There is no view from nowhere. Every coordinate system is a standpoint, and the unit circle is a standpoint made to look universal. The choice of origin, the choice of radius, the choice to measure angles counter-clockwise from east — these are conventions, and the conventions encode a particular tradition. Greek geometry set some of them. Eighteenth-century analysis set others. The unit circle the learner walks around in the map is the inheritance of a long set of decisions none of which were inevitable.
+
+The amphitheatre staging makes the convention visible. A rotating marker moves around a ring; its vertical drop is projected onto one axis as sin; its horizontal drop is projected onto the other as cos. Reversing the direction of rotation flips the sign of sin. Rotating the frame ninety degrees swaps the two functions. The map lets the learner run these permutations and watch the definitions rewrite themselves under the new conventions. Sin and cos are not properties of the circle. They are properties of a circle with a chosen frame.
+
+The oscillating bridges extend the lesson into the walker&#x27;s body. Stepping from one side of the amphitheatre to the other puts the wave under the learner&#x27;s feet: the bridges rise and fall according to the projections the central marker generates. Walking them is reading the sine curve from inside. The learner&#x27;s movement and the marker&#x27;s rotation synchronise, and the unit circle stops being an external object and becomes the apparatus that decides what the learner&#x27;s own trajectory looks like on the wall.
+
+This is the keystone map in the sequence because it makes the sequence&#x27;s single assumption visible. Every later demonstration — wave propagation, interference, Fourier synthesis — takes sine and cosine as given. This map asks where they come from. The answer is: from a rotating point projected onto chosen lines, and every piece of that sentence is a choice.
+
+The political register follows immediately. If sin is a projection, then the question of which projection to take is a question about which information to discard. The radial distance is erased; only the vertical component survives. Trigonometry is a discipline of selective forgetting, and the forgetting is exactly what makes the functions tractable. The map does not hide this cost; it stages it as the procedure by which the cost is incurred.
+
+Within the sequence, Unit_Circle is where the learner learns to locate their own sine function. After this, every wave in the later maps is a particular projection chosen from inside a particular frame, and the learner carries the knowledge of the choice forward.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_Unit_Circle/artifacts.md">Raw captured source</a></p><pre># WaveFunctions Unit Circle — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 6 artifacts*
+
+&gt; Rotation becomes oscillation. A point traveling in a circle traces a sine wave when watched from the side. The unit circle is where trigonometry begins — where angle becomes number, where spinning becomes swinging.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Basic Cube Scene
+![Basic Cube Scene](/scene-catalog/cube_scene.png)
+
+TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.
+
+`cube_scene`
+
+## Advanced Unit Circle
+![Advanced Unit Circle](/scene-catalog/unit_circle_advanced.png)
+
+Enhanced trigonometric visualization
+
+`unit_circle_advanced`
+
+## colorballs
+![colorballs](/scene-catalog/colorballs.png)
+
+N rigid spheres sampled from named color palettes — physics + palette = chromatic rain
+
+`colorballs`
+
+## Simple Oscillating Bridge
+![Simple Oscillating Bridge](/scene-catalog/SimpleOscillatingBridge.png)
+
+A walkable surface that breathes—rising and falling in sine wave motion. Cross it to feel oscillation in your body, the ground itself becoming unstable in a predictable rhythm.
+
+`SimpleOscillatingBridge`
+
+## OscillationCurve
+![OscillationCurve](/scene-catalog/OscillationCurve.png)
+
+Visualizing oscillation over time
+
+`OscillationCurve`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_Unit_Circle/summary.md">Raw captured source</a></p><pre># WaveFunctions Unit Circle — Summary
+
+A point travels around a circle at a steady angular rate. Seen from the side, its shadow traces a sine wave. The unit circle is where trigonometry starts, and this map stages that identity as a small amphitheatre so the relationship between rotation and oscillation is visible from the seats.
+
+At the centre, a rotating marker moves around a ring of radius one. Two projections are drawn live: the vertical drop becomes sin, the horizontal drop becomes cos. The two curves scroll past the edge of the ring as the marker turns, so the angle, its sine, and its cosine all share one frame.
+
+Around the amphitheatre, oscillating bridges rise and fall according to those same functions. Walking across them puts the wave under your feet. A tangent line flicks out from the marker at each moment and shows why tan runs to infinity every ninety degrees. Sliders adjust radius, angular frequency, and phase offset.
+
+Within the sequence, this is the keystone. Every earlier map has shown sine in one form — equation, swinging mass, walkable surface — and every later map assumes you know where sine comes from. Unit Circle is the answer: uniform circular motion, projected onto a line. Rotation and oscillation are the same event watched from different sides.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_Unit_Circle/blurb.md">Raw captured source</a></p><pre>Rotation becomes oscillation. A point traveling in a circle traces a sine wave when watched from the side. The unit circle is where trigonometry begins — where angle becomes number, where spinning becomes swinging.
+
+The `unit_circle_advanced` animates the projection: a dot sweeps the circumference, its shadow falls onto an axis, the shadow is the sine. The `OscillationCurve` draws the resulting wave to the side so you can see source and output in the same frame. Stand on the `SimpleOscillatingBridge` and feel it — the ground moves under you the way the shadow moves on the wall. Rotation and oscillation are the same phenomenon observed in different numbers of dimensions. Every wave in the rest of the sequence reduces to a circle you cannot yet see.
+</pre></section></body></html>

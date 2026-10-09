@@ -1,0 +1,47 @@
+Change is short, two halls. Same method: second reader and verifier in the background while I read it myself.
+
+Read. Change is the book's best mathematics so far, and it contains one missed connection worth the whole review. Saving notes while the checks finish.
+
+Change is read and my notes are saved. The second reader and the source verifier are still running, and I'll bring the full review when they report.
+
+The main finding is already clear from my own read. The book's first question comes back here and the prose doesn't notice. In Point_Lines, `b - a` gave the same answer for a direct walk and a detour, keeping no record of the turn you took. The bridge in Change_Intro is the same idea one level up. Summing a slope recovers the height difference, and a journey's net change can be zero while its climbs and drops were large. That is the fundamental theorem of calculus answering the book's opening line, and one sentence could name it.
+
+Change checks out completely against the source. Every control the prose names exists and does what it says, and every number recomputes exactly: 2.23665, 2.88669, the 4,096-rectangle reference. The only mismatches are the five code blocks, which are paraphrases with renamed identifiers rather than quotations. That is a book-wide question I come back to at the end.
+
+Change is the book's best mathematics so far. In one hall it takes a curve through a finite difference, a Riemann sum and the fundamental theorem of calculus, and each bench turns on a surprise the reader can see. Two samples report a fall while the curve is still rising. Four midpoint rectangles lose to four right-edge ones. A bridge climbs and descends to a net change of zero. The critical question grows out of the arithmetic instead of being laid over it: "Ada needs such reductions to run. The question is where to reopen them."
+
+## Passages to protect
+
+- **Change_Intro:** "Both reports describe this same curve. They answer questions at different scales." Also "The heights do not become slopes by changing their label: the calculation changes," and "the data retained something true while leaving out a relation."
+- **Change_Intro:** "One height has been asked to represent everything that happens across that width." Also "An address, a height, a width, an addition. The loop keeps doing the same small thing." And "A familiar method has no entitlement to win every coarse comparison," which the numbers bear out.
+- **Change_Intro:** "Zero net change does not mean that nothing happened." And "What would a report of zero leave out of your journey?"
+- **Flow_Field:** "That position becomes the address used by its next update. The loop starts making its own route through the field." Also "The line suggests a crossing the update did not make," and "A world can provide a return route and still contain a seam."
+
+## What the chapter is missing
+
+- **The clock tiling promised never arrives, then appears unannounced.** Tiling ends with "Its next possibility may need a clock." Change_Intro refuses the clock three times. Flow_Field then multiplies by `delta` without a word. Forces follows and needs velocity as position changing over time, which the reader has never met.
+- **The missing hall already exists.** The deferred Change_Velocity pairs a velocity arrow with `player_trace`: the slope of your own walked position over time, shown as the arrow's length. That would bring Point_Trace's record of your body back as a velocity, the strongest possible return. The deferred Change_Slope_Surface, with two slopes at one point, is the natural step between a single slope and Flow_Field's arrow at every point. Both are artifact decisions for you.
+- **Two connections sit in the text unnamed.** The bridge is Point_Lines' `b - a` one level up: a net difference that keeps no record of the turns taken. And Flow_Field's update is the Riemann loop run forward in time. `total += f(x) * width` becomes `position += direction * speed * delta`, one rectangle per frame, with each next sample chosen by the running total. Change_Intro even anticipates this with "a rate multiplied by a time interval could give an amount gained", and Flow_Field never calls it back.
+- **"The fabric can come with you"** opens the chapter and is never kept. No fabric appears in either hall.
+- **Flow_Field uses noise five chapters before the Noise chapter**, with no sentence saying what a noise value is here.
+
+## Revisions, in order
+
+1. **Flow_Field, after the first code block: name the clock.**
+   > You have seen this shape before. At the accumulation bench the loop added a height times a width. Here it adds a direction times a speed times `delta`, a rate times a small interval of time. This is the clock the previous hall kept refusing. Each frame is one rectangle, and the particle's position is the running total. What is new is that the total chooses where the next sample is taken.
+2. **Change_Intro, the bridge: name the return to the second room.**
+   > In the second room, `b - a` gave the same answer for a direct walk and a detour. The bridge makes that point with a slope. Add every rise and every fall and you recover only the difference between the ends. The turns are still there in the strips, and the total cannot show them.
+3. **Change_Intro, first paragraph.** Cut "The fabric can come with you", or give it one concrete handle.
+4. **The clock disclaimers.** Keep the first, about speed not being velocity. Cut the next two, or turn the second into a forward pointer to Flow_Field.
+5. **The walking-controller sentence** reads as an audit. The second reader's version opens a possibility instead:
+   > A walking body that read the slope as well as the height could lean before the incline arrives. Nothing here yet does. That code is a body we could write.
+6. **Seed acceleration for Forces.** At the plot of slopes along the curve, ask one question: how is the slope itself changing? Forces needs a rate of a rate, and the plot already shows one.
+7. **Smaller cuts.** Add one sentence on what noise is in Flow_Field. Drop the reference to "the neighbouring vector-field exhibit", which the prose never introduces. Drop "We have preserved three encounters here", which is curatorial reporting. Change_Intro's `##` subsections share the heading level of the halls, so the capture reads them as halls.
+
+**Questions for you**
+
+- Should Change_Velocity come back as the chapter's middle hall? It is written, it fills the gap Forces depends on, and it turns the reader's own trace into a velocity.
+- Could the bridge offer one change, such as an uneven arch or a raised endpoint? It is currently the one bench where the reader can only watch.
+- **The book-wide one: are code blocks quotations or teaching sketches?** Here all five are paraphrases, with `f` for `_f`, `slope_at` for `_curve_slope`, and one vector update for two per-component ones. Tiling's were reformatted too. Primitives frames its code as "can be written like this", and the bridge is honest with "This is the structure of". But "The calculation is short enough to read aloud" implies the literal source. A reader who accepts the book's invitation to open the source should find what the framing promised. One consistent phrase for a sketch would fix it everywhere.
+
+Forces is next, at 13 halls the longest chapter so far.

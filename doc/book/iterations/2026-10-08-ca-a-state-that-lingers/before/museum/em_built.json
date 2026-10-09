@@ -1,0 +1,1378 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-07 22:01:27",
+	"boot_ms": {
+		"autoloads": 3316,
+		"bake_parsed": 896,
+		"boot_tail": 2979,
+		"engine_pak": 2244,
+		"engine_to_ready": 235557,
+		"entry": 2,
+		"first_frame": 3133,
+		"first_physics": 1656,
+		"grid_warm": 962,
+		"guests_loaded": 963,
+		"loading_shell": 25,
+		"modules_loaded": 26,
+		"modules_pool": 106,
+		"museum_data": 106,
+		"plan_parsed": 869,
+		"pool_done": 801,
+		"scene_chain": 229997,
+		"segment0_built": 2979,
+		"world_ready": 1657
+	},
+	"plan": "res://ada_run/em_plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": true,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						0,
+						0
+					],
+					"token": "force_hall_09",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.5,
+						0.0,
+						0.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						12,
+						8
+					],
+					"token": "phase_rod_array",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						8.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [
+						12,
+						24
+					],
+					"token": "force_trial_conveyor",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						0.0,
+						24.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						33
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						32
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · change choreography · 01",
+					"index": 1,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "01\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.3,
+						1.0,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · change choreography · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "02\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · change choreography · 03",
+					"index": 3,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "03\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						23,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						22,
+						2
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · change choreography · 04",
+					"index": 4,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "04\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						23.0,
+						1.1,
+						2.6
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						33
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						32
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · change choreography · 05",
+					"index": 5,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "05\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.6,
+						1.1,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · change choreography · 06",
+					"index": 6,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "06\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · change choreography · 07",
+					"index": 7,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "07\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						23,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						22,
+						4
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · change choreography · 08",
+					"index": 8,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "08\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						23.0,
+						1.2,
+						4.2
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						33
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						32
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · change choreography · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "09\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.2,
+						1.2,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · change choreography · 10",
+					"index": 10,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "10\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · change choreography · 11",
+					"index": 11,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "11\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						23,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						22,
+						6
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · change choreography · 12",
+					"index": 12,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "12\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						23.0,
+						1.0,
+						6.3
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						33
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						32
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · change choreography · 13",
+					"index": 13,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "13\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.3,
+						1.0,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						8,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						8,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · change choreography · 14",
+					"index": 14,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "14\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						8.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						8
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · change choreography · 15",
+					"index": 15,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "15\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						8.2
+					]
+				},
+				{
+					"backing_cell": [
+						23,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						22,
+						8
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · change choreography · 16",
+					"index": 16,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "16\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						23.0,
+						1.1,
+						8.6
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						33
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						16,
+						32
+					],
+					"chapter": "forces",
+					"facing_deg": 180.0,
+					"id": "forces · change choreography · 17",
+					"index": 17,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "17\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.6,
+						1.1,
+						33.0
+					]
+				},
+				{
+					"backing_cell": [
+						16,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						16,
+						1
+					],
+					"chapter": "forces",
+					"facing_deg": 0.0,
+					"id": "forces · change choreography · 18",
+					"index": 18,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "18\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						16.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						10
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						10
+					],
+					"chapter": "forces",
+					"facing_deg": 90.0,
+					"id": "forces · change choreography · 19",
+					"index": 19,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "19\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						10.3
+					]
+				},
+				{
+					"backing_cell": [
+						23,
+						10
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						22,
+						10
+					],
+					"chapter": "forces",
+					"facing_deg": -90.0,
+					"id": "forces · change choreography · 20",
+					"index": 20,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "change choreography",
+					"segment": 0,
+					"text": "20\nforces · change choreography",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0247887317091227,
+						"pixel_size": 0.000225352112676056,
+						"w": 0.128000006079674
+					},
+					"world": [
+						23.0,
+						1.2,
+						10.2
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.##################################",
+				"................p.......#############",
+				"##..............p.......#############",
+				"##......................#############",
+				"###########.....#####################",
+				"##......................#############",
+				"##......................#############",
+				"##sss...................#############",
+				"##sss.....sssssss.......#############",
+				"##sss.....sssssss.......#############",
+				"##sss.....sssssss.......#############",
+				"##........sssssss.......#############",
+				"##........sssssss.......#############",
+				"##........sssssss.......#############",
+				"##........sssssss.......#############",
+				"##........sssssss.......#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......sssssssssss.....#############",
+				"##......................#############",
+				"##......................#############",
+				"##......................#############",
+				"###########.....#####################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 34,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "sainsbury-false-perspective-enfilade",
+			"pearl": "change choreography",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,3": "force_hall_09",
+				"1,4": "force_hall_09",
+				"1,5": "force_hall_09",
+				"1,6": "force_hall_09",
+				"10,10": "phase_rod_array",
+				"10,11": "phase_rod_array",
+				"10,19": "force_trial_conveyor",
+				"10,20": "force_trial_conveyor",
+				"10,21": "force_trial_conveyor",
+				"10,22": "force_trial_conveyor",
+				"10,23": "force_trial_conveyor",
+				"10,24": "force_trial_conveyor",
+				"10,25": "force_trial_conveyor",
+				"10,26": "force_trial_conveyor",
+				"10,27": "force_trial_conveyor",
+				"10,28": "force_trial_conveyor",
+				"10,29": "force_trial_conveyor",
+				"10,4": "phase_rod_array",
+				"10,5": "phase_rod_array",
+				"10,6": "phase_rod_array",
+				"10,7": "phase_rod_array",
+				"10,8": "phase_rod_array",
+				"10,9": "phase_rod_array",
+				"11,10": "phase_rod_array",
+				"11,11": "phase_rod_array",
+				"11,19": "force_trial_conveyor",
+				"11,20": "force_trial_conveyor",
+				"11,21": "force_trial_conveyor",
+				"11,22": "force_trial_conveyor",
+				"11,23": "force_trial_conveyor",
+				"11,24": "force_trial_conveyor",
+				"11,25": "force_trial_conveyor",
+				"11,26": "force_trial_conveyor",
+				"11,27": "force_trial_conveyor",
+				"11,28": "force_trial_conveyor",
+				"11,29": "force_trial_conveyor",
+				"11,4": "phase_rod_array",
+				"11,5": "phase_rod_array",
+				"11,6": "phase_rod_array",
+				"11,7": "phase_rod_array",
+				"11,8": "phase_rod_array",
+				"11,9": "phase_rod_array",
+				"12,10": "phase_rod_array",
+				"12,11": "phase_rod_array",
+				"12,19": "force_trial_conveyor",
+				"12,20": "force_trial_conveyor",
+				"12,21": "force_trial_conveyor",
+				"12,22": "force_trial_conveyor",
+				"12,23": "force_trial_conveyor",
+				"12,24": "force_trial_conveyor",
+				"12,25": "force_trial_conveyor",
+				"12,26": "force_trial_conveyor",
+				"12,27": "force_trial_conveyor",
+				"12,28": "force_trial_conveyor",
+				"12,29": "force_trial_conveyor",
+				"12,4": "phase_rod_array",
+				"12,5": "phase_rod_array",
+				"12,6": "phase_rod_array",
+				"12,7": "phase_rod_array",
+				"12,8": "phase_rod_array",
+				"12,9": "phase_rod_array",
+				"13,10": "phase_rod_array",
+				"13,11": "phase_rod_array",
+				"13,19": "force_trial_conveyor",
+				"13,20": "force_trial_conveyor",
+				"13,21": "force_trial_conveyor",
+				"13,22": "force_trial_conveyor",
+				"13,23": "force_trial_conveyor",
+				"13,24": "force_trial_conveyor",
+				"13,25": "force_trial_conveyor",
+				"13,26": "force_trial_conveyor",
+				"13,27": "force_trial_conveyor",
+				"13,28": "force_trial_conveyor",
+				"13,29": "force_trial_conveyor",
+				"13,4": "phase_rod_array",
+				"13,5": "phase_rod_array",
+				"13,6": "phase_rod_array",
+				"13,7": "phase_rod_array",
+				"13,8": "phase_rod_array",
+				"13,9": "phase_rod_array",
+				"14,10": "phase_rod_array",
+				"14,11": "phase_rod_array",
+				"14,19": "force_trial_conveyor",
+				"14,20": "force_trial_conveyor",
+				"14,21": "force_trial_conveyor",
+				"14,22": "force_trial_conveyor",
+				"14,23": "force_trial_conveyor",
+				"14,24": "force_trial_conveyor",
+				"14,25": "force_trial_conveyor",
+				"14,26": "force_trial_conveyor",
+				"14,27": "force_trial_conveyor",
+				"14,28": "force_trial_conveyor",
+				"14,29": "force_trial_conveyor",
+				"14,4": "phase_rod_array",
+				"14,5": "phase_rod_array",
+				"14,6": "phase_rod_array",
+				"14,7": "phase_rod_array",
+				"14,8": "phase_rod_array",
+				"14,9": "phase_rod_array",
+				"15,10": "phase_rod_array",
+				"15,11": "phase_rod_array",
+				"15,19": "force_trial_conveyor",
+				"15,20": "force_trial_conveyor",
+				"15,21": "force_trial_conveyor",
+				"15,22": "force_trial_conveyor",
+				"15,23": "force_trial_conveyor",
+				"15,24": "force_trial_conveyor",
+				"15,25": "force_trial_conveyor",
+				"15,26": "force_trial_conveyor",
+				"15,27": "force_trial_conveyor",
+				"15,28": "force_trial_conveyor",
+				"15,29": "force_trial_conveyor",
+				"15,4": "phase_rod_array",
+				"15,5": "phase_rod_array",
+				"15,6": "phase_rod_array",
+				"15,7": "phase_rod_array",
+				"15,8": "phase_rod_array",
+				"15,9": "phase_rod_array",
+				"16,19": "force_trial_conveyor",
+				"16,20": "force_trial_conveyor",
+				"16,21": "force_trial_conveyor",
+				"16,22": "force_trial_conveyor",
+				"16,23": "force_trial_conveyor",
+				"16,24": "force_trial_conveyor",
+				"16,25": "force_trial_conveyor",
+				"16,26": "force_trial_conveyor",
+				"16,27": "force_trial_conveyor",
+				"16,28": "force_trial_conveyor",
+				"16,29": "force_trial_conveyor",
+				"17,19": "force_trial_conveyor",
+				"17,20": "force_trial_conveyor",
+				"17,21": "force_trial_conveyor",
+				"17,22": "force_trial_conveyor",
+				"17,23": "force_trial_conveyor",
+				"17,24": "force_trial_conveyor",
+				"17,25": "force_trial_conveyor",
+				"17,26": "force_trial_conveyor",
+				"17,27": "force_trial_conveyor",
+				"17,28": "force_trial_conveyor",
+				"17,29": "force_trial_conveyor",
+				"2,3": "force_hall_09",
+				"2,4": "force_hall_09",
+				"2,5": "force_hall_09",
+				"2,6": "force_hall_09",
+				"3,3": "force_hall_09",
+				"3,4": "force_hall_09",
+				"3,5": "force_hall_09",
+				"3,6": "force_hall_09",
+				"7,19": "force_trial_conveyor",
+				"7,20": "force_trial_conveyor",
+				"7,21": "force_trial_conveyor",
+				"7,22": "force_trial_conveyor",
+				"7,23": "force_trial_conveyor",
+				"7,24": "force_trial_conveyor",
+				"7,25": "force_trial_conveyor",
+				"7,26": "force_trial_conveyor",
+				"7,27": "force_trial_conveyor",
+				"7,28": "force_trial_conveyor",
+				"7,29": "force_trial_conveyor",
+				"8,19": "force_trial_conveyor",
+				"8,20": "force_trial_conveyor",
+				"8,21": "force_trial_conveyor",
+				"8,22": "force_trial_conveyor",
+				"8,23": "force_trial_conveyor",
+				"8,24": "force_trial_conveyor",
+				"8,25": "force_trial_conveyor",
+				"8,26": "force_trial_conveyor",
+				"8,27": "force_trial_conveyor",
+				"8,28": "force_trial_conveyor",
+				"8,29": "force_trial_conveyor",
+				"9,10": "phase_rod_array",
+				"9,11": "phase_rod_array",
+				"9,19": "force_trial_conveyor",
+				"9,20": "force_trial_conveyor",
+				"9,21": "force_trial_conveyor",
+				"9,22": "force_trial_conveyor",
+				"9,23": "force_trial_conveyor",
+				"9,24": "force_trial_conveyor",
+				"9,25": "force_trial_conveyor",
+				"9,26": "force_trial_conveyor",
+				"9,27": "force_trial_conveyor",
+				"9,28": "force_trial_conveyor",
+				"9,29": "force_trial_conveyor",
+				"9,4": "phase_rod_array",
+				"9,5": "phase_rod_array",
+				"9,6": "phase_rod_array",
+				"9,7": "phase_rod_array",
+				"9,8": "phase_rod_array",
+				"9,9": "phase_rod_array"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 24,
+			"z0": -4,
+			"z1": 34
+		}
+	]
+}

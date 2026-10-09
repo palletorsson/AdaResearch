@@ -1,0 +1,30 @@
+[
+  {
+    "before": "Choose a square before you choose a colour. The white outline marks one piece of the floor. On the console, two numbers give its address. Press X +. The outline moves across. Press Z +. It moves along the other direction. The floor stays where it was.",
+    "after": "Choose a square before you choose a colour. The white outline marks one piece of the floor. On the console, two numbers give its address. X + moves the outline across the floor; Z + moves it along the other direction. Choose a place you will recognise when you come back."
+  },
+  {
+    "before": "At the pillars, a position supplied a sample. Here you can write something back.",
+    "after": "At the pillars, moving the sampler changed its colour. Here you can leave a colour behind."
+  },
+  {
+    "before": "Press COLOUR. One cell receives pink. Press again and it receives another of the four available inks. Find a colour you want to leave there. Move the outline away. Keep going until the address returns: each direction cycles through five positions. The colour is still waiting at the address you left.",
+    "after": "Press COLOUR. The outlined square turns pink. Another press gives it another of four inks. Stop at one you want to leave here.\n\nMove the outline away. Your colour stays behind, now one square among the others. Each coordinate cycles through five positions. Keep going until the outline comes back to the place you chose. The colour is still waiting."
+  },
+  {
+    "before": "![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-review/doc/book/iterations/2026-09-23-grid-colour-kept/an-address-keeps-colour.png)",
+    "after": "![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-review/doc/book/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png)"
+  },
+  {
+    "before": "One line writes to one instance. `selected` holds the two coordinates you chose; `cells` connects that address to a cube in the room's drawing buffer. Moving the selection changes what the console reads. It does not carry the stored colour from cube to cube.",
+    "after": "Godot draws these cubes together in a `multimesh`, but each cube has its own colour entry. `selected` holds the two coordinates you chose; `cells[selected]` finds the corresponding cube. This line changes that cube's colour. Moving the outline reads another entry and leaves the previous one alone."
+  },
+  {
+    "before": "Now press RULE.\n\nYour exception gives way to the floor's repeating assignment. The address remains. Walk toward the place you changed: the cube still supports your body. There has been no new geometry, no hole, no repair of the route. What changed was which colour that position received.",
+    "after": "Walk over to your square. You can stand on a value you have just changed.\n\nReturn to the console and press RULE.\n\nYour exception gives way to the floor's repeating assignment. The address remains. Walk back to the place you changed: the same cube still supports you. Its colour has been replaced; the ground has not given way."
+  },
+  {
+    "before": "The console lets you select twenty-five positions and write one of four inks. RULE reaches beyond that region, across the interior floor. You can stand on a square whose colour the program can change and whose address the console will not let you choose. Why should its reach exceed yours?",
+    "after": "Try to choose a square farther away. X + and Z + bring you back through the same twenty-five addresses. RULE reaches beyond that region, across the interior floor. You can walk to a square whose colour the program can change and whose address the console will not let you choose. The floor carries you beyond the reach of your edits. Why should the program's reach exceed yours?"
+  }
+]

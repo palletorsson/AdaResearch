@@ -1,0 +1,24 @@
+{
+  "id": "CA_ExpandingSpace",
+  "decision": "draft",
+  "mode": "build",
+  "object": "An input-update-output pattern with separate support thresholds.",
+  "change": "Map a supplied position to bounded health changes, apply neighbour recovery and compare shared-old-state updates with in-place scanning.",
+  "dependsOn": [
+    "CA_BeyondBinary",
+    "VFM_02_Operations"
+  ],
+  "reuses": "An explicit simulation output.; Distance to a named position.",
+  "given": "player-position interface; bridge renderer; collision thresholds",
+  "later": "Do not explain every visible artifact. Use the probe for repeatable comparisons; no need to teach the entire player tracking system.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "An input-update-output pattern with separate support thresholds.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The guide offers a strong PROBE/SYNC/SCAN comparison but not the reduced input function or recovery update the learner would own.",
+  "baseline": {
+    "tutorial": "6903ca03a1ab207c8f1346558222c02fec833ead9aace241ea8e3fa0c48ab295",
+    "choice": "1d2b4ba0f9a5e8b1a09fb345ecf4320bb75d2ee0a01d4f46ec71d9b4abbf5d22"
+  },
+  "summary": "Map a supplied visitor position to bounded cell-health changes and combine this with a neighbour recovery rule. Compare shared-old-state updates with in-place scanning on one small example and predict where order matters. Bridge drawing and collision thresholds are supplied. Carry an input-update-output pattern, keeping a displayed health value separate from the threshold that provides physical support."
+}

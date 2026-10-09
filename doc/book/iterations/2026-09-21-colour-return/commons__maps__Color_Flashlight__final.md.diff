@@ -1,0 +1,11 @@
+--- before/commons/maps/Color_Flashlight/final.md
++++ current/commons/maps/Color_Flashlight/final.md
+@@ -20,7 +20,7 @@
+     spot.light_color = light_color
+ ```
+ 
+-Four copies of the same scene receive four values. The red instance is given `Color(1, 0, 0, 1)`; the green instance `Color(0, 1, 0, 1)`. The first three numbers address red, green and blue channels. The last is alpha. The assignment happens when the scene starts. Your hand supplies the subsequent movement; the lamp does not need to change its colour value to make the surface look different.
++Four copies of the same scene receive four values. The red instance is given `Color(1, 0, 0, 1)`; the green instance `Color(0, 1, 0, 1)`. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The final number, alpha, stays at one here; transparency will become a separate question at the glass walls. The assignment happens when the scene starts. Your hand supplies the subsequent movement; the lamp does not need to change its colour value to make the surface look different.
+ 
+ Aim a beam off the board and onto the floor or the cube standing to its side. The cone can cross the boundary of its intended exhibit. Does the colour still read the same way? Follow a shadow or an edge before giving the result a name. The lamp carries a value, but it cannot carry a complete account of what you will see wherever you point it.
+ 

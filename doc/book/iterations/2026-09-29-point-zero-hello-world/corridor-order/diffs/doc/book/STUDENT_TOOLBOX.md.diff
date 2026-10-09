@@ -1,0 +1,32 @@
+--- before/doc/book/STUDENT_TOOLBOX.md
++++ doc/book/STUDENT_TOOLBOX.md
+@@ -26,7 +26,7 @@
+ | --- | --- | --- |
+ | Day Zero (preface) | Establish a working environment and recognise inherited infrastructure | Open, change, save, run and stop the supplied base; establish the separate headset route before its use. |
+ | Point_Zero | Arrival in something already underway; once at readiness and repeatedly during processing | Set a greeting in _ready(), keep an integer between calls, and change a counter in _process(). The display is supplied; engine construction and timing calculations wait. |
+-| Point_One | Encounter position, appearance, resistance, holding and reference | Keep two positions in one frame; place supplied markers and vary X, Y and Z. Collider/pickup construction is not a first-lesson prerequisite. |
++| Point_One | Encounter position, appearance, resistance, holding and reference | Follow absence, visibility, resistance and holding. Change a position, visible radius and supplied collision radius; borrow pickup. Coordinates and a second position follow the corridor. |
+ | Point_Lines | Put two known positions into relation | A reusable way to connect and measure between positions, using the points already made. |
+ | Point_Trace | Let successive positions remain | A small introduced list of positions and a supplied or taught way to display it. Do not silently assume the later Array sequence has already been read. |
+ | Point_Line_Grid | Compare movement with selected addresses | A way to snap a position and compare the result with the unsnapped position or trace. |
+@@ -38,9 +38,9 @@
+ 
+ A first work could arrange three points carrying the same name, while their positions, sizes and permissions differ. Which can be passed through? Which must be walked around? Which can leave its place in a hand? The student chooses the arrangement and what it makes another body encounter.
+ 
+-The hall carries the fuller comparison. The first tutorial selects position and coordinates: place a supplied marker, change one coordinate and arrange a second position. The axes, distance arrow and labels help the comparison; constructing them would introduce a different subject. Physics and pickup remain encounters whose machinery can be borrowed or inspected later.
++The tutorial follows the hall through the changing point conditions, then reaches coordinates. It selects small real code changes at each relevant stop: position, visible radius and collision radius. The surrounding construction is supplied. The axes, distance arrow and labels help the comparison; constructing them would introduce a different subject. Physics construction and pickup machinery can be supplied without losing their places in the encounter.
+ 
+-Point One now starts with coordinates.tscn and points.gd in doc/book/studies/point-one. The previous mesh/collision construction remains available as study.tscn and CONSTRUCTION.md. This fixed-camera kit does not supply portable walking or XR pickup. Native execution and a beginner's ability to work independently are separate checks.
++Point One starts with study.tscn and its three condition scripts in doc/book/studies/point-one. coordinates.tscn and points.gd follow when the tutorial reaches the coordinate room. CONSTRUCTION.md remains a fuller source explanation. This fixed-camera kit does not supply portable walking or XR pickup. Native execution and a beginner's ability to work independently are separate checks.
+ 
+ ## Keep the reason for Ada in the operation
+ 
+@@ -81,3 +81,8 @@
+ The hello-world tutorial at commons/maps/Point_Zero/tutorial.md now sits between Day Zero setup and Point One coordinates. Its supplied study teaches _ready(), _process(), assignment and a retained named value. The counter is a small concrete case of once and again. Point One can assume familiarity with _ready() and var, while explaining its new Vector3 value and reference.
+ 
+ These functions belong here because arrival and continuation are the hall's subject. Selecting them does not require teaching the engine loop, display construction or all uses of elapsed time. The main encounter remains a separate reading.
++
++
++## A tutorial can follow the walk without teaching every mechanism
++
++Point One's author correction is about order, not simply adding the word point. Absent -> visible -> solid -> held -> coordinates is the corridor's argument. The making passage should inherit that order. Choose short changes where they expose the current relation; use supplied behavior or observation for the other stops. Separate texts can select different depths while keeping the same movement of attention.

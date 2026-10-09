@@ -1,0 +1,227 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,81 +1,169 @@
+-# Primitives — a rule for positions
++# A rule produces positions
+
+-**Learning elements — proposed focus**
++## Learning elements
+
+-*The labels below set the revision focus; the existing lesson still needs alignment.*
++- Functions and typed return values
++- Parameters and arguments
++- Symmetry as a construction rule
++- Independent generated results
+
+-- Functions
+-- Parameters and arguments
+-- Return values
+-- Generated positions
++## In the museum
+
+-An octahedron has six corners: two on each axis, equally far from its centre. We can use that regularity to generate its positions.
++Among the Platonic solids, the octahedron offers a compact rule: put a position at each end of three perpendicular axes. Six positions replace a long list of coordinates. The geometry courtyard gives the result a place; this lesson makes its construction available to you.
+
+-Open `primitive_rules.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). The left study is the octahedron; the right is a sphere with its triangle edges exposed. Both use the same room and player as Cube.
++You already have arrays, loops and a face renderer. The new step is to give a repeated construction a name and an input. We supply the eight face triples so that the lesson stays with generating positions.
+
+-## 1. Give a rule a name
++## Make this study
+
+-Open `studies/primitive_rules/octahedron.gd`. Find this function:
++Attach lesson.gd to a Node3D named GeneratorStudy in this museum hall. FaceBody and LineSkin are unchanged. The two calls deliberately use different radii and store their results separately.
+
++Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.
++
++### The program
++
++<!-- student-code:lesson.gd -->
+ ```gdscript
++extends Node3D
++const FaceBody = preload("face_body.gd")
++# Connectivity is supplied; this lesson generates the positions.
++const FACES: Array[Vector3i] = [
++    Vector3i(2, 0, 4), Vector3i(2, 4, 1),
++    Vector3i(2, 1, 5), Vector3i(2, 5, 0),
++    Vector3i(3, 4, 0), Vector3i(3, 1, 4),
++    Vector3i(3, 5, 1), Vector3i(3, 0, 5)]
++var small_points: Array[Vector3] = []
++var large_points: Array[Vector3] = []
++
++func _ready() -> void:
++    small_points = octahedron_positions(0.3)
++    large_points = octahedron_positions(0.6)
++    var small := FaceBody.new()
++    var large := FaceBody.new()
++    small.position = Vector3(-0.7, 1.1, 0)
++    large.position = Vector3(0.7, 1.1, 0)
++    add_child(small)
++    add_child(large)
++    small.show_faces(small_points, FACES)
++    large.show_faces(large_points, FACES)
++
+ func octahedron_positions(radius: float) -> Array[Vector3]:
+-    var directions: Array[Vector3] = [
+-        Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1),
+-    ]
+-    var points: Array[Vector3] = []
+-    for direction in directions:
+-        points.append(direction * radius)
+-        points.append(-direction * radius)
+-    return points
++    assert(radius > 0.0)
++    var result: Array[Vector3] = []
++    for axis in [Vector3.RIGHT, Vector3.UP, Vector3.BACK]:
++        result.append(axis * radius)
++        result.append(-axis * radius)
++    return result
+ ```
+
+-The three directions point along positive X, Y and Z. The loop scales each by `radius`, then adds its opposite. The minus sign reverses the direction. Six positions enter the list in order: +X, −X, +Y, −Y, +Z, −Z.
++### Dependency: face_body.gd
+
+-`radius` is a **parameter**: a named input to the function. Here it means the distance from the centre to a corner. Use a positive value. `float` declares a number that can have a fractional part. `-> Array[Vector3]` declares the result: a list of positions. `return points` sends that list back to the code that called the function.
++<!-- student-code:face_body.gd -->
++```gdscript
++extends Node3D
++## Visible triangular faces and their edges. This class adds no collision.
++const LineSkin = preload("line_skin.gd")
++var surface := MeshInstance3D.new()
++var edges := Node3D.new()
+
+-The function calculates coordinates around `(0, 0, 0)`. It creates no visible object. The scene places this whole study above the floor, to your left.
++func _init() -> void:
++    add_child(surface)
++    add_child(edges)
++    var paper := StandardMaterial3D.new()
++    paper.albedo_color = Color(0.92, 0.91, 0.87)
++    paper.roughness = 0.75
++    surface.material_override = paper
+
+-## 2. Call it with another value
+-
+-In `_ready()`, the script asks for the positions:
+-
+-```gdscript
+-    positions = octahedron_positions(0.55)
++func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -> bool:
++    surface.mesh = null
++    for edge in edges.get_children():
++        edge.free()
++    if faces.is_empty():
++        return false
++    for face in faces:
++        for index in [face.x, face.y, face.z]:
++            if index < 0 or index >= points.size():
++                return false
++        var a := points[face.x]
++        var b := points[face.y]
++        var c := points[face.z]
++        if (c - a).cross(b - a).length() < 0.00001:
++            return false
++    var builder := SurfaceTool.new()
++    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
++    for face in faces:
++        var a := points[face.x]
++        var b := points[face.y]
++        var c := points[face.z]
++        # Godot's front faces use clockwise winding.
++        var normal := (c - a).cross(b - a).normalized()
++        for point in [a, b, c]:
++            builder.set_normal(normal)
++            builder.add_vertex(point)
++        for pair in [[a, b], [b, c], [c, a]]:
++            var edge := LineSkin.new()
++            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
++            edges.add_child(edge)
++            var difference: Vector3 = pair[1] - pair[0]
++            edge.show_segment(pair[0], difference, difference.length())
++    surface.mesh = builder.commit()
++    return true
+ ```
+
+-`0.55` is the **argument**, the value passed into `radius` for this call. The returned list becomes `positions`.
++### Dependency: line_skin.gd
+
+-Godot calls `_ready()` when the node is ready. Our new function runs because we call it there. It is not another automatic callback.
++<!-- student-code:line_skin.gd -->
++```gdscript
++# Supplied renderer, adapted from commons/primitives/line/line.gd.
++# This finite cylinder gives the segment a visible thickness. It is not a collider.
++# Inputs share the parent station's local frame; that station has unit scale.
++extends MeshInstance3D
+
+-Change `0.55` to `0.75` and run again. All six corners move farther from the centre. Their opposite pairing and equal distances remain. The edge length changes too: this radius measures centre to corner, not corner to corner.
++func _init() -> void:
++	var cylinder := CylinderMesh.new()
++	cylinder.top_radius = 0.012
++	cylinder.bottom_radius = 0.012
++	cylinder.radial_segments = 16
++	cylinder.rings = 0
++	mesh = cylinder
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = Color(0.98, 0.70, 0.82)
++	finish.roughness = 0.3
++	material_override = finish
++	visible = false
+
+-The existing face list connects these positions into eight triangles. Its indices were supplied separately; the function does not discover which corners belong to a face. We reuse Cube's handles, segments and nested face-building loop.
+-
+-## 3. Move outside the rule
+-
+-Restore `0.55` and run again. Hold one numbered corner and move it sideways. Use aim and E on desktop, or near grip in VR.
+-
+-The neighbouring triangles follow. The result still has the same connections, but it is no longer a regular octahedron. The generated list was a starting arrangement, not a constraint on your hand.
+-
+-`_process()` reads the edited handle positions each frame. It does not call the generator again. Restarting runs `_ready()` and restores the rule's result; temporary edits are not saved.
+-
+-## 4. Return to the sphere
+-
+-In Point One, SphereMesh gave a point a visible body. Open `studies/primitive_rules/sphere.gd`:
+-
+-```gdscript
+-    sphere_mesh.radius = 0.55
+-    sphere_mesh.height = 1.1
+-    sphere_mesh.radial_segments = 8
+-    sphere_mesh.rings = 4
++func show_segment(start: Vector3, displacement: Vector3, distance: float) -> void:
++	# A zero-length segment has no direction. Do not normalize it.
++	visible = distance > 0.0001
++	if not visible:
++		return
++	(mesh as CylinderMesh).height = distance
++	position = start + displacement * 0.5
++	# CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
++	var direction := displacement / distance
++	var right := direction.cross(Vector3.UP).normalized()
++	if right.length() < 0.001:
++		right = Vector3.RIGHT
++	var depth := right.cross(direction).normalized()
++	basis = Basis(right, direction, depth)
+ ```
+
+-Radius and full height set the dimensions. `radial_segments` divides the turn around the vertical axis; `rings` controls subdivisions along the height.
++## Read the construction
+
+-Change only `radial_segments` to `16` and run again. Follow the additional edges around the sphere. Restore `8`, then change only `rings` to `8`. The subdivision changes in the other direction. The radius and height settings stay fixed in both trials.
++`radius` is the function's parameter. The numbers 0.3 and 0.6 are arguments supplied by two calls. `-> Array[Vector3]` names the kind of value returned: a list of positions. The positive-radius assertion states the function's domain.
+
+-SphereMesh generates its own positions and connections. The supplied MeshEdges guide reads that resulting mesh and draws its edges; it does not make a different sphere. The guide and numbered handles are teaching aids. Neither study's surface has a collider.
++For each positive axis, the loop appends one position and its opposite. The order is +X, −X, +Y, −Y, +Z, −Z. The supplied face list depends on that order. Rearranging the list without changing the faces would make a different set of connections.
+
+-The museum's pillars, sphere comparisons and capsule extend this investigation. Here we have gained one reusable operation: a function that takes a value and returns data. A short rule can produce a body; its output remains something we can inspect and alter.
++The function builds a fresh `result` on every call and returns it. It does not place a body in the room or draw anything. FaceBody takes the returned data and renders it. This separates generating positions from displaying them without introducing a general-purpose factory.
+
+-Continue through [Godot’s supplied forms](../Primitives_Godot/summary.md) to [Columns](../Primitives_Columns/summary.md). The existing [One column — an outline made of numbers](tutorial-column.md) study uses the same list, loop and function to separate a profile, its full height and the number of sides. Borrowed Outlines follows before Portals. The column study remains at this link so existing references continue to work.
++Changing a returned position changes one result. Changing the rule changes future results. Neither operation makes a claim about which sculpture is better. Radius, geometric relationship and aesthetic judgment are different decisions.
++
++## Make it your own
++
++Call the function with 0.45. Use the returned array to display a third body. Move one entry in that array, redraw only that body, and verify that the other two remain unchanged. Describe the symmetry your edit broke.
++
++Carry the idea of a parameter controlling a construction. In Godot Primitives, return to your original sphere and make two of the engine's construction parameters available while holding it.
++
++## Source and scope
++
++The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.
++

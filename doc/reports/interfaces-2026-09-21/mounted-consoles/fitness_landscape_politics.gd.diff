@@ -1,0 +1,21 @@
+--- before/commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd
++++ after/commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd
+@@ -139,6 +139,7 @@
+ 	_init_swarm()
+ 	_color_terrain()
+ 	_update_landscape_label()
++	preload("res://commons/ui/exhibit_control_mount.gd").refresh(self)
+ 
+ 
+ func apply_grid_config(config_data: Dictionary) -> void:
+@@ -570,6 +571,10 @@
+ 		stand.add_child(mesh)
+ 
+ 
++func exhibit_control_parts() -> Array[Node3D]:
++	return [_controls, get_node("ConsoleStand")]
++
++
+ func _sync_controls() -> void:
+ 	if not is_instance_valid(_controls): return
+ 	_controls.set_selected(int(current_landscape))

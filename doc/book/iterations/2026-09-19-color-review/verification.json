@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-19",
+  "final_chapters_match_start_of_pass": {
+    "Color_Context_Placed": true,
+    "Color_Flashlight": true,
+    "Color_Nails": true,
+    "Color_Rainbow": true,
+    "Color_Pillar": true,
+    "Color_Grid_Pallet": true,
+    "Color_Paint": true,
+    "Color_Walls": true,
+    "Chamber_Color": true
+  },
+  "final_chapters_match_frozen_package": {
+    "Color_Context_Placed": true,
+    "Color_Flashlight": true,
+    "Color_Nails": true,
+    "Color_Rainbow": true,
+    "Color_Pillar": true,
+    "Color_Grid_Pallet": true,
+    "Color_Paint": true,
+    "Color_Walls": true,
+    "Chamber_Color": true
+  },
+  "original_review_inputs_unchanged": {
+    "zip": true,
+    "review_text": true,
+    "01-review.md": true
+  },
+  "runtime": {
+    "Color_Context_Placed": {
+      "report": "opening/runtime/context/runtime-checks.json",
+      "checks": 691,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Flashlight": {
+      "report": "opening/runtime/flashlight-after-checks.json",
+      "checks": 30,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Nails": {
+      "report": "opening/runtime/probe_nail_salon.json",
+      "checks": 36,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Rainbow": {
+      "report": "fields/evidence/probe_rainbow_celebration.json",
+      "checks": 93,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Pillar": {
+      "report": "fields/evidence/after/pillar-field-checks.json",
+      "checks": 97,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Grid_Pallet": {
+      "report": "fields/evidence/probe_grid_address.json",
+      "checks": 30,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Paint": {
+      "report": "late/verified/probe_paint_encounter.json",
+      "checks": 27,
+      "failures": [],
+      "all_passed": true
+    },
+    "Color_Walls": {
+      "report": "late/after/probe_walls_encounter.json",
+      "checks": 59,
+      "failures": [],
+      "all_passed": true
+    },
+    "Chamber_Color": {
+      "report": "late/verified/probe_chamber_colour.json",
+      "checks": 32,
+      "failures": [],
+      "all_passed": true
+    }
+  },
+  "total_final_assertions": 1095,
+  "count_note": "Includes repeated per-object geometry/material assertions; not independent learner tests.",
+  "comparison_page": {
+    "path": "doc/book/iterations/2026-09-19-review-comparison/index.html",
+    "has_color_section": true,
+    "local_links_and_assets_checked": 62,
+    "missing": [],
+    "image_count": 19,
+    "all_images_have_alt": true,
+    "teaching_excerpts_match_sources": true,
+    "new_image_sha256": {
+      "doc/book/iterations/2026-09-19-color-review/opening/runtime/flashlight-before-overview.png": "337cdf800371de90066974ba8ecc615a7cd3f9ff04a2814607bf4f8fcd914f90",
+      "doc/book/iterations/2026-09-19-color-review/opening/runtime/flashlight-after-overview-final.png": "2e67ebacef390f524009b4e550b7f298c7cd957a581d22ad8d088b00cccbfd8d",
+      "doc/book/iterations/2026-09-19-color-review/opening/runtime/nails-corrected-before/nails-after-choice.png": "649504906d3d3418ca3f4d43fca4758acffc0fec8931b8f496296a85f3ec1d33",
+      "doc/book/iterations/2026-09-19-color-review/opening/runtime/nails-after-choice.png": "9c976f725707cff05774805fb6d9f2e406000b902e5c16d49f0aa4521b723f4d",
+      "doc/book/iterations/2026-09-19-color-review/fields/evidence/paired/pillar-field-before.png": "f5cab4b8a9dfcc264482513528e84996e8868ad8ce36e999537ac6ff9df4df2a",
+      "doc/book/iterations/2026-09-19-color-review/fields/evidence/paired/pillar-field-after.png": "48e4196a419d7da1473e0d71fe57f06e0924a3fe7d0c43554b61e577455b7537",
+      "doc/book/iterations/2026-09-19-color-review/late/before/Color_Walls-overview.png": "bdffccb528e83e270c1fd448bc98ef0ab187b6f5593d65e13c437bd18a77972c",
+      "doc/book/iterations/2026-09-19-color-review/late/after/Color_Walls-overview.png": "bff105b6628f74a5cbe921b68937de1027e2538fc10f65f44444af060e91525e"
+    },
+    "inspection": "All four Color image pairs viewed directly. HTML local references checked. Browser file URL inspection was blocked by Browser Use URL policy; no browser layout QA or workaround claimed."
+  },
+  "headset_tested": false
+}

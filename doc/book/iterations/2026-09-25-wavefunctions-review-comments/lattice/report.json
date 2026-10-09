@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "comparison lattice exists",
+      "passed": true
+    },
+    {
+      "name": "initial captions are SINE and COUPLED",
+      "passed": true
+    },
+    {
+      "name": "SINE button changes caption to PULSE and restarts",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pulse-coupled",
+      "passed": true
+    },
+    {
+      "name": "COUPLED changes caption to INDEPENDENT and restarts",
+      "passed": true
+    },
+    {
+      "name": "same pulse reaches neighbours only through coupling",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pulse-independent",
+      "passed": true
+    },
+    {
+      "name": "INDEPENDENT restores COUPLED",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "pulse_peak_m": {
+      "coupled": 0.260946882609685,
+      "independent": 0.0
+    }
+  },
+  "passed": true,
+  "room": "WaveFunctions_3D_Wave_Propagation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

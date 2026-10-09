@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Motion — reflection before and after</title><style>body{margin:0;background:#eae7df;color:#202026;font:18px/1.65 Georgia,serif}main{max-width:1480px;padding:34px;margin:auto}h1{font-size:2.7rem;line-height:1.12}h2{font-size:1.55rem;line-height:1.25;margin-top:1.7em}nav,.meta,table{font:14px/1.55 system-ui}nav{display:flex;flex-wrap:wrap;gap:18px}a{color:#733a56}article,.panel{background:#fffdf8;padding:28px;margin:22px 0}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.pair article{min-width:0}pre{background:#20232a;color:#f6f0e8;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace}code{font-family:Consolas,monospace}blockquote{border-left:3px solid #ad8194;margin-left:0;padding-left:20px}.badge{background:#e4d8df;padding:15px}img{width:100%;height:auto}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #ccc;padding:12px}summary{cursor:pointer} @media(max-width:1000px){.pair{grid-template-columns:1fr}main{padding:16px}} @media print{nav{display:none}pre{white-space:pre-wrap}.pair{display:block}}</style><main><nav><a href="index.html">Review</a><a href="parallel.html">Tutorial / reflection</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="before.html">Reflection before / after</a><a href="shared.html">Shared code</a></nav><h1>Keep the argument; meet the current spheres</h1><p>The earlier cube, console and ramp account is preserved here. The new text follows the current mass comparison and its bounded trail.</p><div class="pair"><article><p class="meta">BEFORE · ARCHIVED ENCOUNTER</p><h1>When the push ends</h1>
+<!-- @VectorMotion -->
+
+<p>Step between the two control banks. The cube waits beyond them, held a metre above the grid. Press <strong>PUSH X</strong> once, then leave the controls alone.</p>
+<p>The command lasts one second. The cube keeps going.</p>
+<p>There is time to look back at the button. It has finished its small contribution. Something of that contribution is still crossing the room.</p>
+<p>That is the first of Newton's laws, and the opposite of what was taught for two thousand years before him: nothing is needed to keep a body going. What is needed is a force to change it.<sup id="fnref:newton"><a class="footnote-ref" href="#fn:newton">1</a></sup></p>
+<p><strong>COAST</strong> does not stop it. <strong>BRAKE</strong> slows it. Two controls that might sound like ways of ending movement have asked different things of the body.</p>
+<p>Reset and begin again. This time, press COAST before the push has finished. The cube leaves with less speed. Cutting the command short changes how much motion it acquires; it does not take back what has already accumulated.</p>
+<p>In Launch we watched a position calculated from an initial velocity and elapsed time. Here the body keeps its current velocity in the physics engine. Each new influence meets that state. The apparatus does not supply a complete curve in advance.</p>
+<p>With <strong>PARTS</strong> visible, cyan gives velocity and amber gives the force requested by the controls. When the pulse ends, amber disappears. Cyan remains.</p>
+<h2>What the body brings</h2>
+<p>The opening cube has a mass of one kilogram. The push requests two newtons for one second. Before a boundary intervenes, its velocity changes by about two metres per second. Acceleration equals force divided by mass; it changes velocity for as long as it acts. That is the second law, as a division.</p>
+<p><strong>MASS</strong> resets the run and lets us try the same pulse with two kilograms. The velocity change is halved. The cube looks the same size. A property that matters to its response was not something its silhouette could tell us.</p>
+<p>Return to one kilogram. Let PUSH X finish, then <strong>PUSH F</strong>. The new command points forward. The cube travels sideways as well as forward, because the second contribution meets a velocity already there. The latest instruction does not contain the whole movement.</p>
+<p>During each physics update, the source hands the requested force to the engine:</p>
+<pre><code class="language-gdscript">body.apply_central_force(global_basis * local_force)
+</code></pre>
+<p>The multiplication turns the room's local direction into a world direction. The engine integrates the response. This call neither sets a destination nor replaces velocity with the new arrow.</p>
+<p>BRAKE also applies a force, directed against the current velocity. It weakens near rest to avoid sending the cube back the other way. Without that weakening, one step of braking could carry a slow cube through rest and out the other side, and it would set off backwards under a force that only ever opposed its motion. A resistance cannot do that; a step can. The spring hall will meet the same step from the other side. Stopping takes an intervention and time. <strong>RESET</strong> can erase the velocity immediately because resetting an experiment has been granted a different power.</p>
+<p>With <strong>DRAG</strong> enabled, COAST leaves the cube slowing. The command has ended, but the damping has not. With DRAG off, this chamber removes gravity and linear damping. Continued movement becomes available under those particular conditions.</p>
+<h2>A boundary for one body</h2>
+<p>At the amber perimeter the cube rebounds. We can walk across that same line.</p>
+<p>The boundary recognises a collision layer to which the cube belongs. Our body and the control furniture are excluded. We appear to share a room, while its rules give us different possible encounters. For the cube, the line is a limit. For us, it can be a place to stand and watch.</p>
+<p>The cube also keeps its height and cannot turn. These are locks, not achievements of balance. A three-dimensional body has been admitted to a horizontal experiment. Release a lock and another movement becomes possible; the controls here leave those locks in place.</p>
+<p>Pink shows acceleration measured from successive velocities. At a rebound it may jump while the command reads zero. The boundary has acted through collision response. The force we requested is only one contributor to the change we observe.</p>
+<p><strong>TRAIL</strong> retains the latest 120 position samples. Follow the cube long enough and the beginning leaves the drawing. Its velocity can still carry a contribution whose trace has already been discarded.</p>
+<p>The run has room for a recent history. It has not kept everything that made the present.</p>
+<!-- @friction_ramp -->
+
+<h2>Before the slide</h2>
+<p>Farther into the hall, a much smaller block waits on a ramp. At thirty degrees, change <strong>μ</strong>, the friction coefficient, until STATIC becomes SLIDING. Reset and approach that boundary again, more slowly.</p>
+<p>Now keep μ fixed and change <strong>ANGLE</strong>. Another adjustment can reach the beginning of movement.</p>
+<p>Just before it starts, look at the arrows. Stillness has not emptied the block of influences. Gravity pulls partly down the incline and partly into its surface. Support answers the inward component; friction can answer the downhill component, up to the bound selected here.</p>
+<p>The model tests:</p>
+<pre><code class="language-gdscript">sin(angle_rad) &gt; friction_mu * cos(angle_rad)
+</code></pre>
+<p>On one side it holds the block still. On the other it accumulates downhill velocity. The comparison sets the downhill component against the maximum friction supplied by this model. A continuous adjustment has crossed a condition that permits another behaviour.</p>
+<p>Let it slide and watch the speed increase. At the bottom it returns automatically, ready for another run. Friction has not thrown it uphill.</p>
+<p>There is another abrupt return inside the rule. Raise resistance into STATIC while the block is moving: the program sets its velocity to zero at once. Compare that cut with the large cube's gradual braking.</p>
+<p>This small ramp exposes a threshold while abbreviating the motion around it. One coefficient serves both starting and sliding, and the displayed travel is slowed to fit the exhibit. What could we discover if starting friction and sliding friction differed? If a new condition had to meet the movement already under way?</p>
+<!-- @ -->
+
+<p>Ahead, the influences will depend on where the body arrives. A field waits across the room; a moving body reaches each part with a velocity of its own.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:newton">
+<p>Isaac Newton, <em>Philosophiae Naturalis Principia Mathematica</em> (1687), the three laws of motion. The rule it replaced is Aristotle's, in the <em>Physics</em>: a body in forced motion stops when the force stops. The third law is switched off, and back on, two halls ahead in Gravity.&#160;<a class="footnote-backref" href="#fnref:newton" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><p class="meta">AFTER · CURRENT MOTION HALL</p><h1>When the push ends</h1>
+<!-- @force_play_mass -->
+
+<p>Three black spheres wait above their lanes. They are the same size. Press <strong>PUSH 1 s</strong>, then leave the controls alone.</p>
+<p>The command lasts one second. The points keep going.</p>
+<p>There is time to look back at the button. It has finished its small contribution. Something of that contribution is still crossing the room.</p>
+<p>The spheres separate. One kilogram, two, four: the labels offer a difference their silhouettes could not tell us. Each has received the same push for the same time. The heaviest acquires the least speed. Equal treatment has produced different movements here; mass is the particular difference this experiment lets us inspect.</p>
+<p>The bodies have been kept at one height and along separate lanes. Gravity and linear damping are absent from this comparison. Their easy continuation has been arranged, just as the neighbouring trolley needs an arrangement in which it can be moved. The small study gives us time to notice something that other influences could quickly conceal.</p>
+<p>Wait until the pulse has ended, then press again. The new push meets the movement already there. It does not begin a second journey from rest. The latest instruction does not contain the whole movement.</p>
+<p>In Launch, the marker occupied a position calculated from its beginning and a clock. These points keep a current velocity. There is no complete curve waiting for them to follow. Catching one, releasing it, or letting it meet another object gives the next event a different beginning.</p>
+<h2>What the drawing keeps</h2>
+<p>A coloured trace follows each point. It can show you where to look again, but it keeps only a recent part of the journey. After enough movement, the earliest part leaves the drawing. A contribution to the present velocity can outlast the mark of where it began.</p>
+<p>The run has room for a recent history. It has not kept everything that made the present.</p>
+<p>We met a trace earlier as something we could carry into another hall. Here the record is continually being shortened. Both are made from positions. What can be asked of them depends on what has been kept.</p>
+<p>Nor can a path, however long, tell us every influence that produced it. The trace does not separately record the button, your hand and each contact. You watched the push happen. Someone arriving now sees its consequence.</p>
+<p><strong>RESET</strong> puts the points back and clears their motion and trails. The apparatus can offer a fresh trial. You still remember the earlier one.</p>
+<p>Move your hand toward the control again. One point is farther along its lane than the others. The button waits for the same action; the bodies no longer wait in the same state.</p></article></div></main></html>

@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-13T23:22:51+02:00",
+  "finished": "2026-09-13T23:23:15+02:00",
+  "pid": 30560,
+  "exit": 0,
+  "checks": 30,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/ca_life_probe_base.gd": "92b7fab8848d2c5118b20cc242c3b739e978107df74aa3ae1ca7f86107586d25",
+    "ada_run/ca_life_acceptance.gd": "42e0ca52a3d11ea2c4a6571d86cb9b88f40781671383b76ce50ec313b1f3ff0e",
+    "commons/maps/CA_BeyondBinary/map_data.json": "cc4b09ea600f2dccc676f5060f72c3f5c80b725267623364e87875246eeeed57",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-life-review-2026-09-13/review-plan.json": "894ef370476fb6b35426c1ed7c6678fc55b50dc459f3bb08c73d672cfb13643c",
+    "commons/artifacts/game_of_life_petri/address_study.gd": "1940cbaba7a09c3f20cb8a25d4cf5f62ec834fc3dc199e535d650b4667bc36a5",
+    "commons/artifacts/game_of_life_petri/game_of_life_petri.gd": "50b6b681d83626ed8cab41da3cbad896275e22ed50ec936786c7064fb403f2e1",
+    "commons/artifacts/game_of_life_petri/life_address_receiver.gd": "729b82f3d48acf5004e9b8bf650c24907109c6c84c3d1d59b4def22f701a881a"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

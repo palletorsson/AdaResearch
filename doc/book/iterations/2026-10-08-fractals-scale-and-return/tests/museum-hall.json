@@ -1,0 +1,138 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Existing recursive tree remains in its authored hall",
+      "passed": true
+    },
+    {
+      "name": "Hand model and full canopy installed in production",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-model",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before-turn",
+      "passed": true
+    },
+    {
+      "name": "Actual museum point steers through the XR grab driver",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-turn",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: under-canopy",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "Point within standing reach: RosePoint",
+      "passed": true
+    },
+    {
+      "name": "Point within standing reach: BlackPoint",
+      "passed": true
+    },
+    {
+      "name": "Hand-model approach has actual museum floor",
+      "passed": true
+    },
+    {
+      "name": "Route floor 0",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 0",
+      "passed": true
+    },
+    {
+      "name": "Route floor 1",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 1",
+      "passed": true
+    },
+    {
+      "name": "Route floor 2",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 2",
+      "passed": true
+    },
+    {
+      "name": "Route floor 3",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 3",
+      "passed": true
+    },
+    {
+      "name": "Plan and side readings are installed in the real tree hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-readings-before",
+      "passed": true
+    },
+    {
+      "name": "Live hall drawings change while chosen endpoints remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-readings-after",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: readings-and-canopy",
+      "passed": true
+    },
+    {
+      "name": "Reading station has floor beneath its approach",
+      "passed": true
+    },
+    {
+      "name": "Standing body has clearance at the reading station",
+      "passed": true
+    },
+    {
+      "name": "Actual desktop ray reaches CLEAR without changing live tree",
+      "passed": true
+    },
+    {
+      "name": "Actual desktop ray keeps the current reading",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "direction_after_turn": [
+      0.693244814872742,
+      0.422618269920349,
+      0.58378541469574
+    ],
+    "reading_obstructions": [],
+    "scope": "Real museum: inherited hand/canopy route checks plus live/kept projections, standing clearance, actual ray button input and new native captures. Supplied poses; no headset test.",
+    "segment_count": 31
+  },
+  "passed": true,
+  "room": "Fractal_RecursiveTrees",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

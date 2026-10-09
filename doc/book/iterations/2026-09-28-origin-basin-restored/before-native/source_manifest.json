@@ -1,0 +1,28 @@
+{
+  "room": "Point_Zero",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Point_Zero/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Point_Zero/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Point_Zero/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Point_Zero/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Point_Zero/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Point_Zero/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Point_Zero/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Point_Zero/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Point_Zero/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Point_Zero/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Point_Zero/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07fe08753fda37c03c491273bf4df2001c0ba0c13b374e6214b08353aa8beaf6",
+    "commons/maps/Point_Zero/map_data.json": "6ca7da248a8d4d5fa3c9085584174efc44d54e2ab67723829ef2c7f269f5ff87",
+    "doc/book/iterations/2026-09-28-origin-basin-restored/probe.gd": "b575e795664675292299824af6b276d3ce66b8d1afdb4ae5d6f07e452e8f46de",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "1fbe25f0fd6c2bb7f57554fe1957e0d61d7b6d281b9bd4c429524be75f01a065",
+    "ada_run/encounter_pilot/Point_Zero/control.json": "f88dd53ffb53f9da0be835850f9de48ef5a2cbc02be84b7c6645b09dba27a6e8",
+    "ada_run/encounter_pilot/Point_Zero/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Point_Zero/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Point_Zero/em_bake.json": "b892871d4783549cf2b31dc9ade62858d19ad25e2888536e2aac1718fd19bd81"
+  }
+}

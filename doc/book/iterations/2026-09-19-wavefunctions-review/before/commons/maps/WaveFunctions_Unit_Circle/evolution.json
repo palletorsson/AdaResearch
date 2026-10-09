@@ -1,0 +1,81 @@
+{
+  "artifact": "OscillationCurve",
+  "title": "Building a Sine Wave That Is the Shadow of a Circle",
+  "concept_layer": "sine and cosine as projections of uniform circular motion; time\u2194space equivalence; frequency and amplitude as circle parameters",
+  "technique_first": ["ImmediateMesh trail (LINE_STRIP)", "time integration via _process", "sin(omega*t) for oscillation", "2D unit circle \u2192 1D projection", "point arrays with max length"],
+  "technique_reference": ["Node3D hierarchy (Point_One)", "Vector3 position (Trans_Translation)", "for-loop over point array (Tutorial_Single)", "Vector3 accumulation (ForcesFoundations trails)"],
+  "domain_deferred": ["Fourier synthesis \u2192 WaveFunctions_Synthesis_Lab", "wave propagation in space \u2192 WaveFunctions_3D_Wave_Propagation", "interference + beats \u2192 WaveFunctions_Effect_Sound", "quaternions and complex rotation \u2192 foundations/QFEP"],
+  "capture_leaks": {
+    "two_dimensional_circle": "The unit circle is drawn as a 2D loop. In higher dimensions, rotations live on SO(n) \u2014 manifolds with more degrees of freedom. Trans_Rotation foreshadowed this with gimbal lock.",
+    "continuous_time": "The _process loop ticks in frame-sized discrete steps. The sine wave renders smooth but samples at ~60Hz. Aliasing is inevitable; wave_interference_3d reveals it.",
+    "single_frequency": "One sine. But most interesting signals are sums of sines \u2014 Fourier. The full story arrives at Synthesis_Lab.",
+    "no_medium": "A sine wave needs nothing to propagate in this demo. Add a spring-mass lattice and it becomes waves-through-matter (coupled_oscillator_lattice, then softbodies).",
+    "deterministic_signal": "The sine repeats exactly. Add noise and you get real signals (randomness \u2192 noise sequences). Add chaos and you get everything else (foundationscrisis)."
+  },
+  "limit": "A sine wave that draws itself is beautiful. It is also a strong claim: that one parameter (frequency) and one function (sin) captures a universe of periodic behavior. Almost every oscillating system \u2014 light, sound, pendulums, orbits, heartbeats, quantum states \u2014 decomposes into sines via Fourier. The limit is that decomposition assumes linearity. Nonlinear oscillators (later in the curriculum) refuse to be sines.",
+  "grammar_alignment": {
+    "sequence": "wavefunctions",
+    "operations_taught": ["oscillate"],
+    "operations_deferred_to_sequence": ["interfere (wave_interference_3d)", "resonate (coupled_oscillator_lattice)", "propagate (wave_propagation_3d)", "fourier_compose (Synthesis_Lab)"],
+    "note": "OscillationCurve teaches the atomic operation: sin(omega*t). All other wavefunctions operations compose from this one."
+  },
+  "biome_alignment": {
+    "sequence": "wavefunctions",
+    "density_at_entry": 0.25,
+    "kingdoms_unlocked": ["flower", "tree"],
+    "hand_verbs_gained": ["oscillate", "tune_frequency"],
+    "catalyst_mode": "waveform",
+    "hazard_type": "waterbomb_enemy",
+    "note": "The biome now breathes \u2014 flowers and trees sway. The catalyst is 'waveform' meaning the player can transform forms into oscillating versions of themselves. Hand verb 'oscillate' lets the player drive the sine parameter directly."
+  },
+  "stages": [
+    {
+      "title": "From array to wave",
+      "thinking": "Tutorial_Single taught that an array is space made countable \u2014 positions indexed by integer. Now a question: what if the index is continuous instead of discrete? What if, instead of [0], [1], [2], [3], we had a smooth variable t? An array has positions at integer indices; a wave has positions at every real value. The jump from countable to continuous is one of the deepest moves in math. Sin makes that jump visible.",
+      "code": "# Tutorial_Single:\n#   for i in range(4):\n#     cube[i].position = Vector3(0, 0, i * spacing)\n#   # 4 discrete samples\n#\n# Now:\n#   for every real t:\n#     y(t) = sin(t)\n#   # infinite continuous samples\n#\n# How do you represent a continuous function in code?\n# You sample it. Densely. With trails.\n# This is what the oscillation curve does.",
+      "concepts": ["continuous vs discrete", "function as infinite array", "sampling"]
+    },
+    {
+      "title": "The simplest oscillator",
+      "thinking": "y = sin(t). One variable in, one variable out. As t flows, y traces a wave that repeats every 2\u03c0. This is the primordial oscillator. Everything else \u2014 springs, pendulums, light, sound \u2014 eventually reduces to this shape via linearization or Fourier decomposition. Start here. Believe it is enough.",
+      "code": "extends Node3D\n\n@export var frequency: float = 1.0\n@export var amplitude: float = 1.5\n@export var speed: float = 2.0  # how fast t advances\n@export var max_points: int = 200\n\nvar time: float = 0.0\nvar points: Array[Vector3] = []\n\nfunc _process(delta: float) -> void:\n\ttime += delta\n\t# x advances with time\n\tvar x = time * speed\n\t# y is the wave: amplitude \u00d7 sin(frequency \u00d7 time)\n\tvar y = amplitude * sin(frequency * time)\n\tvar new_point = Vector3(x, y, 0)\n\tpoints.append(new_point)\n\tif points.size() > max_points:\n\t\tpoints.pop_front()",
+      "concepts": ["y = A sin(\u03c9t)", "amplitude vs frequency", "time integration", "bounded point array"]
+    },
+    {
+      "title": "Render the trail with ImmediateMesh",
+      "thinking": "To show the wave, we redraw its full history every frame. ImmediateMesh with PRIMITIVE_LINE_STRIP connects consecutive points into a continuous curve. The mesh is rebuilt each _process tick \u2014 efficient for a few hundred points, wasteful for millions. But for teaching, clarity beats performance.",
+      "code": "func _setup_visuals() -> void:\n\ttrail_mesh = ImmediateMesh.new()\n\ttrail_instance.mesh = trail_mesh\n\tvar material = StandardMaterial3D.new()\n\tmaterial.albedo_color = Color(0.2, 1.0, 0.5)  # Green trail\n\tmaterial.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED\n\ttrail_instance.material_override = material\n\nfunc _redraw_trail() -> void:\n\ttrail_mesh.clear_surfaces()\n\tif points.size() < 2:\n\t\treturn\n\ttrail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)\n\tfor p in points:\n\t\ttrail_mesh.surface_add_vertex(p)\n\ttrail_mesh.surface_end()",
+      "concepts": ["ImmediateMesh", "PRIMITIVE_LINE_STRIP", "per-frame mesh rebuild", "unshaded material"]
+    },
+    {
+      "title": "Show the driver ball at (cos, sin)",
+      "thinking": "Here is where the unit circle becomes the keystone. A ball rotates in a circle at constant angular velocity. Its Y coordinate as a function of time IS the sine wave. The circle is not a separate demo; the circle IS the wave, seen from above. Project the ball's motion onto the Y axis and you get exactly the sine curve we're drawing to its right.",
+      "code": "# driver_ball orbits the unit circle at (cos(t), sin(t))\n# Its Y coordinate is exactly what gets plotted on the trail.\n\nfunc _update_driver_ball() -> void:\n\tvar angle = frequency * time\n\tdriver_ball.position = Vector3(\n\t\tcos(angle) * amplitude,       # x on circle\n\t\tsin(angle) * amplitude,       # y on circle = y on wave trail\n\t\t0\n\t)\n\n# Watch the ball + trail together.\n# The ball's Y is the wave's Y.\n# The circle IS the wave, rolled up.",
+      "concepts": ["unit circle", "sine as projection", "parametric (cos, sin)", "circle-wave equivalence"]
+    },
+    {
+      "title": "Trim the trail so it doesn't grow forever",
+      "thinking": "points.append + points.pop_front when size exceeds max_points. A sliding window. This is a lesson embedded in the implementation: infinite time can't be represented by an infinite array. You always choose a horizon. max_points=200 at ~60fps means ~3 seconds of visible history. Longer max_points = more memory + more render cost. Shorter = the past vanishes faster. The trade-off is the artifact's critical parameter after frequency.",
+      "code": "points.append(new_point)\nif points.size() > max_points:\n\tpoints.pop_front()\n\n# The array is finite; time is not.\n# We see the recent past, no more.\n#\n# max_points is a choice:\n#   200 at 60fps \u2248 3.3 seconds of wave\n#   1000 \u2248 16 seconds (more RAM, smoother)\n#   50 \u2248 0.8 seconds (feels present-tense, ephemeral)\n#\n# Every streaming system makes this choice.\n# Audio buffers, video scrubbers, chat histories.",
+      "concepts": ["sliding window", "bounded buffer", "memory-vs-history trade-off", "streaming vs batch"]
+    },
+    {
+      "title": "Expose frequency and amplitude for live tuning",
+      "thinking": "Two @export parameters. In the editor or via apply_grid_config, the map author or player can change these at runtime. Frequency changes how many cycles fit per unit x-distance. Amplitude changes how tall the wave is. Both are visible immediately because the trail redraws every frame. This is where pedagogy meets play: change a number, see the wave respond. Build intuition through manipulation.",
+      "code": "@export var frequency: float = 1.0\n@export var amplitude: float = 1.5\n\nfunc apply_grid_config(config: Dictionary) -> void:\n\tif config.has(\"frequency\"):\n\t\tfrequency = float(config[\"frequency\"])\n\tif config.has(\"amplitude\"):\n\t\tamplitude = float(config[\"amplitude\"])\n\tif config.has(\"speed\"):\n\t\tspeed = float(config[\"speed\"])\n\nfunc _on_freq_slider(pos: float) -> void:\n\tfrequency = remap(pos, 0.0, 1.0, 0.25, 4.0)\n\t# Low end: slow fat waves\n\t# High end: fast tight ripples\n\t# Same equation, radically different behavior",
+      "concepts": ["@export parameters", "runtime tuning", "remap() for slider ranges", "parameter as intuition-builder"]
+    },
+    {
+      "title": "The wave forgets where it came from",
+      "thinking": "A subtle point. The trail renders where the ball has been, but the ball itself doesn't remember. Given the current time t, sin(t) is enough to draw the current y. No accumulated state. No history in the formula. The WAVE is stateful (the trail); the OSCILLATOR is not. This distinction \u2014 stateless function vs stateful rendering \u2014 matters when you later try to synchronize multiple waves, or rewind time, or predict the future.",
+      "code": "# The wave's equation is memoryless:\n#   y(t) = A \u00b7 sin(\u03c9 \u00b7 t)\n# Given t, you get y. No history needed.\n#\n# But the rendered trail IS history:\n#   points = [(x\u2080,y\u2080), (x\u2081,y\u2081), ..., (x\u2099,y\u2099)]\n#\n# This is why sin is so useful:\n# you can jump to any time, compute instantly,\n# without simulating all prior ticks.\n#\n# Compare to Forces_Foundations:\n#   F \u2192 a \u2192 v \u2192 p\n#   Each frame depends on the last.\n#   You cannot skip to t=100 without simulating.\n#\n# Sine is jumpable. Integration is not.",
+      "concepts": ["stateless function", "jumpability", "state in rendering vs computation", "memoryless signal"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "An oscillation curve knows what it is. Not a wiggling green line \u2014 the shadow of a circle, projected onto time. It also knows its limits: one frequency, one amplitude, one dimension, no medium. Everything that comes next in the wavefunctions sequence (and beyond, into softbodies and into QFEP) is a generalization of this atom. The sine is the prime.",
+      "code": "# @identity\n# essence: y(t) = A * sin(omega * t), plotted as trail in 3D\n# desire: Watch a sine wave draw itself in space as time flows along the Z axis\n# critical_parameter: frequency \u2014 controls how many oscillations per unit length\n# triggers: time progression continuously extends the wave trail\n# emerges: the connection between circular motion parameters and wave shape\n# needs: VR sliders for amplitude/frequency [missing]\n# relationships: depends on ImmediateMesh trail; contrasts with UnitCircleTrig (projection vs direct plot); unlocks wave parameter intuition\n# truth: A sine wave is the shadow of uniform circular motion projected onto a line.",
+      "concepts": ["@identity", "circle-as-wave equivalence", "shadow projection", "memoryless oscillator", "truth"]
+    }
+  ]
+}

@@ -1,0 +1,1989 @@
+{
+  "SwarmIntelligence_PhysarumColony": {
+    "map_source": "commons/maps/SwarmIntelligence_PhysarumColony/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+    "map_sha256": "d4607abede73ff790b84de3cee3be4aec05fa9135f99ca4961c6a8c4c8b4293a",
+    "text_sha256": "2a527b6831544109fd080fbcee3dfd9b70f975bc5de68d6d905ac7bd2083ec60",
+    "map_info": {
+      "name": "Physarum Colony",
+      "lookup_name": "SwarmIntelligence_PhysarumColony",
+      "description": "An organic cave housing a branching slime mold network. Voids serve as nutrient pools in an irregular cavern.\n\n[Placement applied hybrid engine — constraint 0.850→0.934, walkability 0.356→0.420]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 11,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.55,
+        "design_notes": "Irregular cave walls with void nutrient pools. Organic, non-rectilinear."
+      },
+      "title": "Physarum Colony"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "PhysarumColony:90",
+        "commented_out": false,
+        "lookup_hint": "PhysarumColony",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 3,
+        "raw_token": "ant_agent",
+        "commented_out": false,
+        "lookup_hint": "ant_agent",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 4,
+        "raw_token": "particle_swarm_optimization_legacy",
+        "commented_out": false,
+        "lookup_hint": "particle_swarm_optimization_legacy",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 6,
+        "z": 9,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "recorded_status": "source_checked_draft",
+      "text_words": 415,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "PhysarumColony"
+        ],
+        "reason": "Can a path remember which way to grow when no individual holds the whole network?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+        "text_sha256": "2a527b6831544109fd080fbcee3dfd9b70f975bc5de68d6d905ac7bd2083ec60",
+        "map_sha256": "bc26039f9496d9e4218d50c5b5e2e72c6ea474a390131c482e8a89235400c833",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "PhysarumColony"
+      ],
+      "role_primary_order": [
+        "PhysarumColony"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_FlowFields": {
+    "map_source": "commons/maps/SwarmIntelligence_FlowFields/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_FlowFields/final.md",
+    "map_sha256": "f08856ffdcc333eb3b1f9360e6bf1e582584cc05874462514fb7c6fda04a8ed7",
+    "text_sha256": "30e9e9ed291ea280b0a5f220e6b6eeeba0a140016e39ec1a4143538af6af947b",
+    "map_info": {
+      "name": "Flow Fields",
+      "lookup_name": "SwarmIntelligence_FlowFields",
+      "description": "An open channel with a central ridge suggesting directional flow. Vector fields visualize particle currents.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 10,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.5,
+        "design_notes": "Wide channel with central elevation ridge. Side walls pinch inward mid-room creating flow feeling."
+      },
+      "title": "Flow Fields"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "FlowFieldMain:90",
+        "commented_out": false,
+        "lookup_hint": "FlowFieldMain",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "AntColonyV2",
+        "commented_out": false,
+        "lookup_hint": "AntColonyV2",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 6,
+        "raw_token": "ecosystem_simulation",
+        "commented_out": false,
+        "lookup_hint": "ecosystem_simulation",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 9,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 9,
+        "z": 8,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_FlowFields",
+      "recorded_status": "source_checked_draft",
+      "text_words": 428,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "FlowFieldMain"
+        ],
+        "reason": "If many agents turn together, must they be watching one another?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_FlowFields/final.md",
+        "text_sha256": "30e9e9ed291ea280b0a5f220e6b6eeeba0a140016e39ec1a4143538af6af947b",
+        "map_sha256": "df55a34da73c97ed010994975d78395ce1c6b94aee51e08d3201290c4974452e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "FlowFieldMain"
+      ],
+      "role_primary_order": [
+        "FlowFieldMain"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_Boids_Algorithm": {
+    "map_source": "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+    "map_sha256": "327d3d8b9c65bdc1fe2ca1ff8cf790dcfc1a15599eda8ae0c81a9b0d966acc8a",
+    "text_sha256": "ef27362697ecd55e5d7a7db50cfd6ae5ae59a669c7d0047ac2a33fc7fe7a9360",
+    "map_info": {
+      "name": "Boids Algorithm Arena",
+      "lookup_name": "SwarmIntelligence_Boids_Algorithm",
+      "description": "A wide-open arena with scattered observation platforms at different heights. Watch flocking behavior from multiple vantage points.\n\n[Placement applied humanoid_walker engine — constraint 0.962→0.971, walkability 0.510→0.516]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 13,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.55,
+        "design_notes": "Open arena with height-3 and height-4 observation platforms scattered around. Four artifact stations for boids demos."
+      },
+      "title": "Boids Algorithm"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "boid_flocking",
+        "commented_out": false,
+        "lookup_hint": "boid_flocking",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 2,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 6,
+        "raw_token": "boids_aquarium",
+        "commented_out": false,
+        "lookup_hint": "boids_aquarium",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "boids_2d_in_3d:90",
+        "commented_out": false,
+        "lookup_hint": "boids_2d_in_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 8,
+        "raw_token": "boid_manager",
+        "commented_out": false,
+        "lookup_hint": "boid_manager",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 9,
+        "raw_token": "flocking_controls",
+        "commented_out": false,
+        "lookup_hint": "flocking_controls",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 8,
+        "z": 8,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "recorded_status": "source_checked_draft",
+      "text_words": 425,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "flocking_controls"
+        ],
+        "reason": "Which local relationship is making this flock hold together?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+        "text_sha256": "ef27362697ecd55e5d7a7db50cfd6ae5ae59a669c7d0047ac2a33fc7fe7a9360",
+        "map_sha256": "074b54a857290dfd2f4acf4e0017ae75efd2bc1f73ae90781384ff11013bc693",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "flocking_controls"
+      ],
+      "role_primary_order": [
+        "flocking_controls"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+    "map_source": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+    "map_sha256": "0388ec0dbaae566d0661cb193c36611b466f23df5de9083b4c432d277e63769f",
+    "text_sha256": "6ec78d1a6bb4bcad3b145bc53ee7b630a48326c2d47b093bbc017b5205e73277",
+    "map_info": {
+      "name": "Agent-Based Modeling",
+      "lookup_name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "description": "A grid of corridors and pillars where agents navigate pathways. The regularity mirrors grid-based ABM simulations.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 10,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.5,
+        "design_notes": "Periodic wall pillars create a grid of corridors. Agents navigate intersection choices."
+      },
+      "title": "Agent-Based Modeling"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 1,
+        "raw_token": "catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45",
+        "commented_out": false,
+        "lookup_hint": "catalyst_prompter_box",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "ant_colony_optimization",
+        "commented_out": false,
+        "lookup_hint": "ant_colony_optimization",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "physarum_colony",
+        "commented_out": false,
+        "lookup_hint": "physarum_colony",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 5,
+        "raw_token": "catalyst_foe",
+        "commented_out": false,
+        "lookup_hint": "catalyst_foe",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 7,
+        "raw_token": "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto",
+        "commented_out": false,
+        "lookup_hint": "catalyst_vent",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 7,
+        "z": 8,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "recorded_status": "source_checked_draft",
+      "text_words": 429,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ant_colony_optimization"
+        ],
+        "reason": "How much of a collective result changes when one rule changes?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+        "text_sha256": "6ec78d1a6bb4bcad3b145bc53ee7b630a48326c2d47b093bbc017b5205e73277",
+        "map_sha256": "8ed87776d65532eb7017922c649ca8690ef6c996f00f6b44e2d9244ebdc64e86",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ant_colony_optimization"
+      ],
+      "role_primary_order": [
+        "ant_colony_optimization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_Ant_Colony_Optimization": {
+    "map_source": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+    "map_sha256": "b9f8d6e49525d00407cb478aff684fb60dd110e1f13ae7238a5aec6627e17770",
+    "text_sha256": "d26e1d5319847d4442e2703636bafaa8fed4985d642837109e3d0302ccbb3ceb",
+    "map_info": {
+      "name": "Ant Colony Optimization",
+      "lookup_name": "SwarmIntelligence_Ant_Colony_Optimization",
+      "description": "A branching corridor system with forking paths. Pheromone trails diverge at decision points.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 10,
+        "depth": 7,
+        "max_height": 1
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.6,
+        "design_notes": "Y-shaped corridor system. Two paths diverge from spawn to exit, mimicking ant trail bifurcation."
+      },
+      "title": "Ant Colony Optimization"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "AntColonyV2:90",
+        "commented_out": false,
+        "lookup_hint": "AntColonyV2",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 8,
+        "z": 6,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 431,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "AntColonyV2"
+        ],
+        "reason": "How can an ant leave useful directions without carrying a map?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+        "text_sha256": "d26e1d5319847d4442e2703636bafaa8fed4985d642837109e3d0302ccbb3ceb",
+        "map_sha256": "b9f8d6e49525d00407cb478aff684fb60dd110e1f13ae7238a5aec6627e17770",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "AntColonyV2"
+      ],
+      "role_primary_order": [
+        "AntColonyV2"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_Particle_Swarm_Optimization": {
+    "map_source": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+    "map_sha256": "62aa03ecc74f02b25a0dfd10e5597b135f9b30788cac4effe1e6ddaffdc79ae0",
+    "text_sha256": "89a97dacc128ad10474efd60f43f028b2639b9dacbbcfd5bc812107646b15ab4",
+    "map_info": {
+      "name": "Particle Swarm Optimization",
+      "lookup_name": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "description": "A landscape descending to a central valley optimum. Heights represent the fitness landscape that particles explore.\n\n[Placement applied hybrid engine — constraint 0.905→0.960, walkability 0.610→0.657]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 11,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.6,
+        "design_notes": "Concentric height rings descend from h4 rim to h1 center. The optimum is the valley floor."
+      },
+      "title": "Particle Swarm Optimization"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 11,
+        "z": 1,
+        "raw_token": "tick_flock",
+        "commented_out": false,
+        "lookup_hint": "tick_flock",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "self_organizing_patterns:90",
+        "commented_out": false,
+        "lookup_hint": "self_organizing_patterns",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "fitness_landscape_politics",
+        "commented_out": false,
+        "lookup_hint": "fitness_landscape_politics",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "ant_colony_v2",
+        "commented_out": false,
+        "lookup_hint": "ant_colony_v2",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 2,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 7,
+        "z": 8,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 8,
+        "z": 8,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "wp:90",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 418,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "fitness_landscape_politics"
+        ],
+        "reason": "When a swarm improves, who decided what better means?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+        "text_sha256": "89a97dacc128ad10474efd60f43f028b2639b9dacbbcfd5bc812107646b15ab4",
+        "map_sha256": "dd42ab107006a953e454347b48df3b8fe04bb71811ebbc5126c148697ff80dd2",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "fitness_landscape_politics"
+      ],
+      "role_primary_order": [
+        "fitness_landscape_politics"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SwarmIntelligence_Swarm_Intelligence_Algorithms": {
+    "map_source": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/map_data.json",
+    "text_source": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+    "map_sha256": "dae90306000c9a908b2312bf273f57158ab1c0d626e9318b265cf4b5e17e329a",
+    "text_sha256": "9706354bc60e7bfc9f4d24998b6eab48f4f32efbbbfc4b8a090e9a9190ddf290",
+    "map_info": {
+      "name": "Swarm Intelligence Algorithms",
+      "lookup_name": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "description": "A multi-level ecosystem with platforms at three heights representing canopy, understory, and ground layers.\n\n[Placement applied hybrid engine — constraint 0.960→1.000, walkability 0.705→0.707]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 10,
+        "depth": 10,
+        "max_height": 1
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "swarm_intelligence",
+        "spatial_temperature": 0.65,
+        "design_notes": "Three platform heights (2,3,4) as ecological layers. Ground floor connects everything. Ecosystem stratification."
+      },
+      "title": "Swarm Algorithms"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "ecosystem_simulation",
+        "commented_out": false,
+        "lookup_hint": "ecosystem_simulation",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 8,
+        "z": 8,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "recorded_status": "source_checked_draft",
+      "text_words": 427,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ecosystem_simulation"
+        ],
+        "reason": "If this small ecosystem persists, which rules are helping it persist?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+        "text_sha256": "9706354bc60e7bfc9f4d24998b6eab48f4f32efbbbfc4b8a090e9a9190ddf290",
+        "map_sha256": "dae90306000c9a908b2312bf273f57158ab1c0d626e9318b265cf4b5e17e329a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ecosystem_simulation"
+      ],
+      "role_primary_order": [
+        "ecosystem_simulation"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

@@ -1,0 +1,81 @@
+--- before/commons/maps/sequences/change.json
++++ commons/maps/sequences/change.json
+@@ -2,12 +2,12 @@
+   "sequences": {
+     "change": {
+       "name": "Change: Rate, Accumulation, and Flow",
+-      "truth": "Things change. Change accumulates. Accumulation flows.",
++      "truth": "A value, a local rate and an accumulated total retain different things. Repeated updates can make the next address depend on the path already taken.",
+       "qfep_term": "F",
+-      "qfep_connection": "Foundation \u00e2\u20ac\u201d the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
++      "qfep_connection": "Calculus vocabulary for later research: distinguish local change, finite accumulation and retained history. The encounters support these comparisons; they do not measure a QFEP term or entropy threshold.",
+       "formula": "rate = rise / h; total += f(x) * width; position += direction(position, time) * speed * delta",
+-      "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target \u00e2\u20ac\u201d accumulation made bracelet-felt.",
+-      "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
++      "demonstration": "Compare a wide finite difference with an analytic local rate. Keep the function fixed while changing the samples used for an area estimate. Predict the net height difference of an arch, then compare it with a finite sum of its signed rate. Let each particle update determine the address of its next direction lookup.",
++      "description": "Two halls build from addresses and sampling: value versus local rate; contribution versus total; signed accumulation versus endpoint difference; then trajectories in a direction field. Each comparison makes a limit of its representation inspectable before Forces introduces velocity, acceleration and carried motion.",
+       "layer": "F_order",
+       "prerequisites": [
+         "tiling"
+@@ -20,13 +20,14 @@
+       "difficulty": "intermediate",
+       "estimated_time": "20-30 minutes",
+       "learning_objectives": [
+-        "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
+-        "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
+-        "Accumulation as continuous addition: the integral; area under a curve; total from rate",
+-        "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
+-        "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
+-        "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
+-        "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
++        "Distinguish a function value from its local rate with respect to a named independent variable",
++        "Compare finite differences across nonzero intervals with the analytic derivative of the same smooth function",
++        "Build finite area estimates from height-times-width contributions; vary sampling rule and count independently",
++        "Distinguish a finite numerical reference and drawn curve from the limiting integral",
++        "Compare signed accumulation of a derivative with endpoint difference; explain why recovering absolute height also needs a starting value",
++        "Follow a direction field at a moving address so each update determines where the next sample is taken",
++        "Distinguish field time, particle updates and displayed-arrow sampling; inspect what trails retain or invent at a wrap",
++        "Prepare Forces by distinguishing prescribed direction and speed from acceleration, velocity and carried motion"
+       ],
+       "content": [
+         "Change_Intro: Change and accumulation",
+@@ -47,8 +48,8 @@
+         "calculus_badge",
+         "sustain_affordance"
+       ],
+-      "_status": "Two consolidated halls; desktop probes pass; headset and secondary exhibit review pending.",
+-      "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) \u00e2\u20ac\u201d addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern.",
++      "_status": "Two consolidated halls; targeted local source, staging and reveal pass complete on 19 September 2026. Desktop checks passed for the four book encounters; headset and learner verification remain pending.",
++      "_provenance": "Proposed 2026-05-13; consolidated 2026-09-11. The pre-review overview is preserved in curation_history; current metadata describes the two active maps and their existing comparison adapters.",
+       "artifact_groups": [
+         {
+           "map": "Change_Intro",
+@@ -86,7 +87,27 @@
+         "1_measure_and_accumulate": "Change_Intro: finite difference, Riemann sum, signed net change.",
+         "2_follow_a_field": "Flow_Field: sample local direction, update position, inspect the retained path."
+       },
+-      "consolidation_ledger": "doc/space/change-two-halls-2026-09-11/ledger.json"
++      "consolidation_ledger": "doc/space/change-two-halls-2026-09-11/ledger.json",
++      "curation_history": [
++        {
++          "recorded_context": "Pre-review overview preserved on 19 September 2026. This records earlier framing; current objectives below describe the consolidated two-hall encounters.",
++          "truth": "Things change. Change accumulates. Accumulation flows.",
++          "qfep_connection": "Foundation â€” the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
++          "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target â€” accumulation made bracelet-felt.",
++          "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
++          "learning_objectives": [
++            "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
++            "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
++            "Accumulation as continuous addition: the integral; area under a curve; total from rate",
++            "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
++            "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
++            "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
++            "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
++          ],
++          "_status": "Two consolidated halls; desktop probes pass; headset and secondary exhibit review pending.",
++          "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) â€” addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern."
++        }
++      ]
+     }
+   }
+ }

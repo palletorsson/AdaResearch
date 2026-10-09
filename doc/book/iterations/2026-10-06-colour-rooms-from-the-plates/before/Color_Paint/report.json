@@ -1,0 +1,393 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          5.0,
+          1.5,
+          5.0
+        ],
+        "name": "DarkSphere",
+        "source": "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+      },
+      {
+        "local_to_grid": [
+          5.0,
+          1.0,
+          15.0
+        ],
+        "name": "AlbersWallGallery",
+        "source": "res://algorithms/primitives/homagetothesquare/albers_wall_gallery.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          1.0,
+          15.0
+        ],
+        "name": "BallPaintingDemoV2",
+        "source": "res://commons/context/drawingboard/ball_painting_automation.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          2.25,
+          14.5
+        ],
+        "name": "PaperDrawSurface",
+        "source": "res://commons/context/drawingboard/paper_draw_surface.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          1.54999995231628,
+          16.1499996185303
+        ],
+        "name": "PaintBalls",
+        "source": "res://commons/context/drawingboard/ball_spawner.gd"
+      },
+      {
+        "local_to_grid": [
+          10.7399997711182,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_01",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          10.9200000762939,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_02",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.1000003814697,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_03",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.2799997329712,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_04",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.460000038147,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_05",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.6400003433228,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_06",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.8199996948242,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_07",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_08",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.1800003051758,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_09",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.3599996566772,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_10",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.539999961853,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_11",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.7200002670288,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_12",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.8999996185303,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_13",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          13.0799999237061,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_14",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          13.2600002288818,
+          1.75999999046326,
+          16.1499996185303
+        ],
+        "name": "SprayCan_15",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          10.7399997711182,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_16",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          10.9200000762939,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_17",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.1000003814697,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_18",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.2799997329712,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_19",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.460000038147,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_20",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.6400003433228,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_21",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          11.8199996948242,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_22",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_23",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.1800003051758,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_24",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.3599996566772,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_25",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.539999961853,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_26",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.7200002670288,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_27",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          12.8999996185303,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_28",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          13.0799999237061,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_29",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          13.2600002288818,
+          1.75999999046326,
+          16.3999996185303
+        ],
+        "name": "SprayCan_30",
+        "source": "res://commons/context/drawingboard/spray_can.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.5,
+          5.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          7.0,
+          0.919999957084656,
+          5.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Paint",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

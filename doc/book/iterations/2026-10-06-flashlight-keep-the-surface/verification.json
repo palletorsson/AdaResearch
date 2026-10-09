@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "native_assertions": 102,
+  "render_assertions": 13,
+  "printed_exercise_variants": 3,
+  "independent_choice_examples": 1,
+  "variant_edits": {
+    "separate": [],
+    "blue": [
+      [
+        "var beam_colour := Color(1, 0, 0)",
+        "var beam_colour := Color(0, 0, 1)"
+      ]
+    ],
+    "overlap": [
+      [
+        "var first_target := Vector3(-1, 1.5, 0)",
+        "var first_target := Vector3(1, 1.5, 0)"
+      ]
+    ],
+    "away": [
+      [
+        "var first_target := Vector3(-1, 1.5, 0)",
+        "var first_target := Vector3(-1, 1.5, 5)"
+      ]
+    ],
+    "choice": [
+      [
+        "var first_target := Vector3(-1, 1.5, 0)",
+        "var first_target := Vector3(0, 2, 0)"
+      ]
+    ]
+  },
+  "faults_rejected": 5,
+  "faults": {
+    "repainted_surface": {
+      "mutation": [
+        "surface.albedo_color = Color(0.9, 0.9, 0.9)",
+        "surface.albedo_color = beam_colour"
+      ],
+      "required_failure": "separate/material_unchanged",
+      "detected": true
+    },
+    "local_used_as_world": {
+      "mutation": [
+        "lamp.look_at(to_global(target))",
+        "lamp.look_at(target)"
+      ],
+      "required_failure": "separate/first_world_target",
+      "detected": true
+    },
+    "backward_aim": {
+      "mutation": [
+        "lamp.look_at(to_global(target))",
+        "lamp.look_at(to_global(target), Vector3.UP, true)"
+      ],
+      "required_failure": "separate/first_world_target",
+      "detected": true
+    },
+    "zero_energy": {
+      "mutation": [
+        "lamp.light_energy = 2.5",
+        "lamp.light_energy = 0.0"
+      ],
+      "required_failure": "separate/range_angle_energy_0",
+      "detected": true
+    },
+    "shared_light": {
+      "mutation": [
+        "second_light = make_light(Color(0, 1, 0), Vector3(1, 1.5, 2.5), Vector3(1, 1.5, 0))",
+        "second_light = first_light"
+      ],
+      "required_failure": "separate/distinct_lights",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/tutorial.md": "df875056a0289511e5fea53cdf4362fe1230d9abb97b01b65cbe421eb79b0bbe",
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/lesson.gd": "ad4748d2eef1afe771c3b17a40748b11df576c4f208c1a4be9632d44e95e4cb1",
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/verify.gd": "9ddfcf2224438ef7c2c0ead28f801996e5b4d9db38cf4570f127540089394395",
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/render_check.gd": "d82f950b1d1382fc5d5ebc32f7a75e0873d33d76ca4911946fdab675892d4d8d",
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/run_checks.py": "d2ffc857321a1d66e566b554b938795646068a77588e0e780a36659dae721fd2",
+    "doc/book/iterations/2026-10-06-flashlight-keep-the-surface/native-project.godot": "71a51cefa7fe0c96b533a85ee8e01bfe990ee5786f0543b00166ff5c451d7d17"
+  },
+  "images": {
+    "away.png": "db7ede6aca1db125e67b642a47415a94552627033309efd1b8d54795e3740097",
+    "blue.png": "e5b27d616bc5beec76efb652e0c24d56202ee7ebe00392bd01065cec1e1f07ce",
+    "choice.png": "0bc54c4adc67bc7cc2e99d74d45e62f705b451c07835e28909c0256d76d8b12c",
+    "overlap.png": "d4b477357dfc6ae3108bde292a0d74407b62257d0a0823b7d238a8e4f82ae84a",
+    "separate.png": "ff63228f8e5e1a3b9e2e59665a1e5020e987f1ded2759388f35f0f3b6ffa792f"
+  },
+  "preserved": {
+    "commons/maps/Color_Flashlight/tutorial.md": "a73f7685c2b9b182e59477ee1c8a7f3a8d932a9a8769097c99b99e0e3eda1371",
+    "commons/maps/Color_Flashlight/final.md": "408b58ceecf5b96bffe4abe3444666526bea88644994f1cd485c30d6d6012a8f",
+    "commons/maps/Color_Flashlight/map_data.json": "24b225bd7c96ccfd70098edcc08257efab47b71f2ccd13b23b02d08a9b5bf60b",
+    "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+    "algorithms/postprocessing/flashlight_demo/flashlight_color.gd": "aed0d06589136ac6b0caebe0c75eb4f59013dcbf6a92b5ab352a4eb58bd1b058",
+    "algorithms/postprocessing/flashlight_demo/flashlight.tscn": "79af388a18fdd53a14eba94031aaf4e9136b2ed62edbb17b07329fbd9ec3a26e",
+    "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd": "296cd65828312cc71fa2cb0199d16f06f707247ac479adb030f6b990440e9000",
+    "doc/book/course/execution-plan/plan.json": "7ea2524f93441abb3bed08a94ae3f0604c4eb3abbda6d021779a9d9a7d8c32f6"
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-flashlight-draft-n60pqyt1",
+  "scope": "Exact printed program; native scene/material/light behaviour in translated/rotated host; exact exercise variants; isolated GPU renders sampled for colour, overlap and withdrawal with fixed camera, board and ambient light. No full museum integration, headset or human-learning test."
+}

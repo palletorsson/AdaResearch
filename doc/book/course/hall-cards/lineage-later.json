@@ -1,0 +1,1623 @@
+{
+  "date": "2026-10-05",
+  "scope": "Proposed teaching lineage; not learner or runtime verification",
+  "halls": [
+    {
+      "map": "ISO_Introduction",
+      "subjects": [
+        "Scalar fields",
+        "Level sets",
+        "Finite sampling"
+      ],
+      "focus": "Hold a surface, change its extraction level, then vary sample spacing while keeping the field recipe and domain fixed.",
+      "builds_on": [
+        {
+          "map": "Noise_Voxel",
+          "why": "Reuse values sampled at volume addresses."
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "why": "Reuse the distinction between a surface and its triangular faces."
+        }
+      ],
+      "adds": "Separate a field, a selected boundary and a finite mesh approximation.",
+      "carries": "A controlled comparison of level and sampling for later surfaces.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "a6fc9a42d7dbb2bb47e2846fb373f0cf28a5dffe2c096f3949d52d91be5a8e58",
+      "tutorial_sha256_after": "cafdcc8869735d5cc5cfa09e8d26c98660831d96c0af83192008e9dbfa9baecb"
+    },
+    {
+      "map": "ISO_LookupTable",
+      "subjects": [
+        "Corner classification",
+        "Linear interpolation",
+        "Local connectivity"
+      ],
+      "focus": "Calculate one edge crossing and compare value pairs that retain their classifications while moving the crossing.",
+      "builds_on": [
+        {
+          "map": "ISO_Introduction",
+          "why": "Reuse level comparisons at sampled positions."
+        },
+        {
+          "map": "Trans_Introduction",
+          "why": "Reuse interpolation between two endpoints."
+        }
+      ],
+      "adds": "Distinguish the values that select connectivity from the magnitudes that locate a crossing.",
+      "carries": "An edge crossing calculation and an explicit corner convention.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "b4c7fad9900781a8850d3303b763dc421c86b41732308a353aec6fcce608d149",
+      "tutorial_sha256_after": "cd52638fa90c1330c343f0a2ac40008ada91e3c3353c498b589a421f6964ff55"
+    },
+    {
+      "map": "ISO_ShapesGallery",
+      "subjects": [
+        "Field composition",
+        "Union and subtraction",
+        "Description versus sampling"
+      ],
+      "focus": "Read the cup expression as joined and removed regions, then compare a held form with a changed extraction level.",
+      "builds_on": [
+        {
+          "map": "ISO_LookupTable",
+          "why": "Keep the same extraction process while replacing its input field."
+        }
+      ],
+      "adds": "Compose shape descriptions while separating a changed recipe from loss through sampling.",
+      "carries": "A readable composition of fields, ready for periodic and Boolean forms.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "7cec856a7ca1d88a9380fd00101ccbf404dd604fd136bd9ddbf9e71749c6dbfe",
+      "tutorial_sha256_after": "17f5b8736431961a88ece7cb33ccbfcf83cd2fdcff518b404854023c4b3d04fa"
+    },
+    {
+      "map": "ISO_TorusGyroid",
+      "subjects": [
+        "Periodic fields",
+        "Spatial frequency",
+        "Clearance probes"
+      ],
+      "focus": "Change the coordinate multiplier in the periodic expression, compare a held surface, and state what the straight capsule probe tests.",
+      "builds_on": [
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "why": "Reuse spatial phase and frequency."
+        },
+        {
+          "map": "ISO_ShapesGallery",
+          "why": "Reuse a field expression as input to a common extractor."
+        }
+      ],
+      "adds": "Produce repetition within a field and distinguish a visible opening from one bounded clearance test.",
+      "carries": "A spatial frequency choice with explicit sampling and probe limits.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "be2406169db2d10d9fe08b2f6a825aeed000c192f6700b9bfe19262b63b52512",
+      "tutorial_sha256_after": "88facedc280e3af75ad467926baeff7e0dd98b2fe9b484a1446ab09a4dd0218c"
+    },
+    {
+      "map": "ISO_Sculpting",
+      "subjects": [
+        "Spatial contributions",
+        "Operation history",
+        "Ordered subtraction"
+      ],
+      "focus": "Compare ADD after ERASE with ERASE after ADD at the same location, retaining the earlier boundary as a reference.",
+      "builds_on": [
+        {
+          "map": "ISO_ShapesGallery",
+          "why": "Reuse union and subtraction of evaluated fields."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse an ordered record whose contents outlast an event."
+        }
+      ],
+      "adds": "Read the surface as the result of an ordered history, where erasure adds a cut rather than undoing a gesture.",
+      "carries": "An account of operation order and the limits of retained history.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "59d09eafa7034b1a317fec111cddf214e3b5704ba166e48936bfc76a3d935607",
+      "tutorial_sha256_after": "0dbf6cbd678d65b6e9b394e239ea8c13201ebe63a3bddc0c780a1291916aa3ff"
+    },
+    {
+      "map": "ISO_FlatTerrain",
+      "subjects": [
+        "Height fields",
+        "Volumetric fields",
+        "Boundary crossings"
+      ],
+      "focus": "Keep the height recipe fixed while changing an interior contribution and count crossings along a marked vertical column.",
+      "builds_on": [
+        {
+          "map": "Noise_Columns",
+          "why": "Reuse one assigned height at each horizontal address."
+        },
+        {
+          "map": "ISO_Introduction",
+          "why": "Reuse sampling and selected levels."
+        }
+      ],
+      "adds": "Explain why a volume can contain floor, gap and ceiling at one horizontal address while a height field cannot.",
+      "carries": "A distinction between an upper profile, an interior and an accessible entrance.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "3c043c81946d8977d6dd1d92c7c6bb915a6045e6e2dc51097676a64bce13044c",
+      "tutorial_sha256_after": "f515acdc86bce1d12833b57a5235a6e3cde57d3039fa71d6e268e82afcab1a1f"
+    },
+    {
+      "map": "ISO_PortalLandscape",
+      "subjects": [
+        "Spatial masks",
+        "Signed field composition",
+        "Controlled comparisons"
+      ],
+      "focus": "Add one located field contribution to the retained terrain and predict which region it can change before inspecting the boundary.",
+      "builds_on": [
+        {
+          "map": "ISO_FlatTerrain",
+          "why": "Reuse a height field extended by a volumetric contribution."
+        },
+        {
+          "map": "Shader_09_FBM",
+          "why": "Return to layered noise while separating a supplied sampler from the composition that uses it."
+        }
+      ],
+      "adds": "Compose purposeful local changes through masks and weights rather than treating a named landform as guaranteed output.",
+      "carries": "A terrain expression with named contributions and a predicted region of change.",
+      "status": "needs_revision",
+      "review": "The recipe calls fbm and ridged without contracts or definitions. It also describes intermediate terms as guaranteed passages despite its opening caveat; select a small supplied study and teach two contributions first. The proposed prior lesson also lacks tutorial.md: Shader_09_FBM.",
+      "tutorial_sha256_before": "0367b5222e877fcef574a15ce23bcb4182aa1c7f10f404e8498372be12a82644",
+      "tutorial_sha256_after": "98680826fd4478ecbb1b78770ff57715a83c86578ec64c75b24fcaee1c2d4704"
+    },
+    {
+      "map": "ISO_Caves",
+      "subjects": [
+        "Entrance conditions",
+        "Enclosing boundaries",
+        "Bodily clearance"
+      ],
+      "focus": "Compare a ring opening with its relation to the ground, then inspect the enclosing cave from a route that permits return.",
+      "builds_on": [
+        {
+          "map": "ISO_PortalLandscape",
+          "why": "Reuse composed openings without assuming that their names guarantee passage."
+        },
+        {
+          "map": "PG_Caves_Mazes",
+          "why": "Reuse the distinction between connected space and room for a body."
+        }
+      ],
+      "adds": "Treat burial, headroom, collision and arrival as separate conditions of an entrance.",
+      "carries": "An explicit entrance condition for a later cave or room.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "e5faebde69d63adf70b402386cc64ffb9ec288b3eb47dc23363e57136affb658",
+      "tutorial_sha256_after": "13c12b08f64d40bd54202748102501e9e9e83328f269b9c2f29fed2b41ddf51b"
+    },
+    {
+      "map": "ISO_CaveGeneration",
+      "subjects": [
+        "Field scale",
+        "Sampling resolution",
+        "Construction methods"
+      ],
+      "focus": "Compare two cave fields with one coordinate scale changed, then distinguish the extracted field from the neighbouring ring-built tunnel.",
+      "builds_on": [
+        {
+          "map": "ISO_TorusGyroid",
+          "why": "Reuse a coordinate multiplier within a fixed sample domain."
+        },
+        {
+          "map": "ISO_Caves",
+          "why": "Reuse enclosure and entrance as questions to test."
+        }
+      ],
+      "adds": "Relate field scale to physical domain and sample spacing without equating a similar silhouette with a shared construction.",
+      "carries": "A reproducible field recipe with its scale and sampling declared.",
+      "status": "needs_revision",
+      "review": "The proposed controlled pair is absent. The tutorial treats detail beyond an octave as simply thrown away, leaves GPU/base-class machinery unexplained, and promises an entire cave from a dispatch; separate supplied extraction from the learner scale experiment.",
+      "tutorial_sha256_before": "76b9246651939eb106037584c072615a7eb57889269256d879e9f4eee2be1753",
+      "tutorial_sha256_after": "c0977a42f019a8e460c4e05dcc9e448ad45e4979e3408b5ad8e0e906a170dcc7"
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "subjects": [
+        "Fixed sample addresses",
+        "Time dependent values",
+        "Occupancy histories"
+      ],
+      "focus": "Record occupied and empty states at one fixed address while the supplied noise offset changes, then compare that record with apparent travel.",
+      "builds_on": [
+        {
+          "map": "ISO_Introduction",
+          "why": "Reuse values at fixed volume samples."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse a bounded history over time."
+        }
+      ],
+      "adds": "Distinguish changing values at places from the identity and motion of persistent particles.",
+      "carries": "A short occupancy history tied to one address.",
+      "status": "needs_revision",
+      "review": "The current text teaches a remeshed triangle surface through undefined extract, while the storyboard studies block occupancy. Its two-field blend is not four-dimensional noise, and field animation is described as a derivative without a corresponding calculation.",
+      "tutorial_sha256_before": "7c950f1f633d2b7ef648a56a99d481816af2addefa78d092a6004d9fd006bf5d",
+      "tutorial_sha256_after": "0bd7a050c2d9a23e4a401f48558bba8009f7e6b39c09124c80c2be66223c909c"
+    },
+    {
+      "map": "ISO_Metaballs",
+      "subjects": [
+        "Influence accumulation",
+        "Source arrangements",
+        "Falloff functions"
+      ],
+      "focus": "Sum the contributions at one sample position and compare source arrangement separately from the reach of each contribution.",
+      "builds_on": [
+        {
+          "map": "ISO_Sculpting",
+          "why": "Reuse located contributions to an implicit field."
+        },
+        {
+          "map": "Vectors_Act2_VectorArithmetic",
+          "why": "Reuse accumulation of contributions before interpreting the combined result."
+        }
+      ],
+      "adds": "Build one boundary from multiple overlapping influences without counting lobes as separate sources.",
+      "carries": "A source list and an accumulation loop for another field description.",
+      "status": "needs_revision",
+      "review": "The summation loop is present, but kernel(source, p) has no declared input contract, falloff or finite behaviour. Supply one bounded kernel and locate the editable source record before claiming the learner can construct the field.",
+      "tutorial_sha256_before": "dfc6b34e0d82a15beb1e04d2efebe290e725f648ec642b60a4d16eb7f3493436",
+      "tutorial_sha256_after": "c8fe69d3412c569b94022fbd184cedbb5df842cec71aeb3376ea0becdc9c41a6"
+    },
+    {
+      "map": "ISO_ImplicitModeling",
+      "subjects": [
+        "Signed distance fields",
+        "Shape composition",
+        "Surface representations"
+      ],
+      "focus": "Compose a small field, compare it through supplied mesh and raymarch views, and test collision as a separate construction.",
+      "builds_on": [
+        {
+          "map": "ISO_Metaballs",
+          "why": "Reuse a position-to-value description."
+        },
+        {
+          "map": "ISO_ShapesGallery",
+          "why": "Reuse union and subtraction at the same sample position."
+        }
+      ],
+      "adds": "Keep a spatial rule distinct from the representations and physical affordances made from it.",
+      "carries": "One field description with explicit rendering and collision receivers.",
+      "status": "needs_revision",
+      "review": "The paired receivers are asserted rather than supplied in the lesson. It promises walkability from marching cubes alone, gives smooth-union k=0 despite division by k, and overstates what implicit blending uniquely permits.",
+      "tutorial_sha256_before": "7db74322e30ae6b398098bab840fef6a90082a730d12bfa4c3658cf8f0950360",
+      "tutorial_sha256_after": "396c72be55ebd9e734142d6b24587b1270a402e405f51a1404571eccbb010f96"
+    },
+    {
+      "map": "ISO_RhizomeBody",
+      "subjects": [
+        "Route records",
+        "Connectivity and clearance",
+        "Inhabitable surfaces"
+      ],
+      "focus": "Sketch encountered junctions and returns, then predict how narrowing a passage could preserve a drawn edge while changing access.",
+      "builds_on": [
+        {
+          "map": "ISO_Caves",
+          "why": "Reuse entrance and body-clearance conditions."
+        },
+        {
+          "map": "ISO_ImplicitModeling",
+          "why": "Separate field, extracted surface and collider."
+        }
+      ],
+      "adds": "Synthesize a planned connection with the routes a particular body can establish.",
+      "carries": "A route sketch with uncertain or inaccessible connections marked.",
+      "status": "missing",
+      "review": "tutorial.md is absent. Storyboard proposes a route sketch; its paper or in-project host remains undecided.",
+      "tutorial_sha256_before": null,
+      "tutorial_sha256_after": null
+    },
+    {
+      "map": "Boolean_Verbs",
+      "subjects": [
+        "Union",
+        "Intersection",
+        "Ordered difference"
+      ],
+      "focus": "Explain what each operation retains, including empty intersection and reversed subtraction, while noticing the exhibited operands differ.",
+      "builds_on": [
+        {
+          "map": "ISO_ShapesGallery",
+          "why": "Reuse combining and subtracting implicit regions."
+        }
+      ],
+      "adds": "Make the set-operation vocabulary explicit without mistaking different specimens for a controlled experiment.",
+      "carries": "A two-operand vocabulary for reading and composing solids.",
+      "status": "aligned",
+      "review": "",
+      "tutorial_sha256_before": "8d3786d8a85da2930472907a5ac32a54c1f91cb4164e76d7b7e9283c721df634",
+      "tutorial_sha256_after": "2d2d978ad763ac836bec07bf8a77c0b70c9e938d43996aebc50ae4bdb7614869"
+    },
+    {
+      "map": "Boolean_Gallery",
+      "subjects": [
+        "Parameter variation",
+        "Presentation order",
+        "Visible operands"
+      ],
+      "focus": "Arrange a short collection of one family’s configurations and compare the order of presentation with the geometric parameter it varies.",
+      "builds_on": [
+        {
+          "map": "Boolean_Verbs",
+          "why": "Reuse the three set operations and operand order."
+        },
+        {
+          "map": "Array",
+          "why": "Reuse an ordered collection interpreted by a receiver."
+        }
+      ],
+      "adds": "Author a comparison whose explanatory order can differ from its geometric parameter order.",
+      "carries": "A legible sequence of configurations for an architectural composition.",
+      "status": "needs_revision",
+      "review": "The current tutorial asks for code/registry/rendered catalogue comparison but supplies no learner-owned configuration list or factory interface. Keep that catalogue as material for the proposed presentation exercise. The proposed prior lesson also lacks tutorial.md: Array.",
+      "tutorial_sha256_before": "c26f9248a3f0b2ff950ed3dce26cd3af6860991b351a499066d5c42a688021b6",
+      "tutorial_sha256_after": "aa2e5407063e28828e9dfe425049c3a0f3ddb929be9fcd0822af41818279ca20"
+    },
+    {
+      "map": "Boolean_Works",
+      "subjects": [
+        "Architectural subtraction",
+        "Shared transforms",
+        "Collision and appearance"
+      ],
+      "focus": "Translate the shared cutter, test entry and sightline, then compare black and chalk while keeping the cavity geometry fixed.",
+      "builds_on": [
+        {
+          "map": "Boolean_Verbs",
+          "why": "Reuse ordered subtraction."
+        },
+        {
+          "map": "ISO_Caves",
+          "why": "Reuse bodily clearance and entrance tests."
+        },
+        {
+          "map": "Color_Flashlight",
+          "why": "Reuse changing appearance while retaining geometry."
+        }
+      ],
+      "adds": "Compose and inspect an inhabitable cut while separating geometry, contact and material response.",
+      "carries": "A cut and an appearance choice whose different consequences can be explained.",
+      "status": "aligned",
+      "review": "The appended museum setter studies deliver this bounded focus; the earlier egg exercise still switches to a Day Zero duplicate and does not yet teach a new room composition.",
+      "tutorial_sha256_before": "b18670f1c7aaa84842972157d15cf42b48499c9067267b414a3051a0b513d97e",
+      "tutorial_sha256_after": "be6ccb51476738d4281889f47757810407c4cde52c80e540d30ef0c2309976eb"
+    },
+    {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "subjects": [
+        "Environmental memory",
+        "Local sensing",
+        "Deposition and decay"
+      ],
+      "focus": "Compare three trail samples, turn a small agent population toward a stronger trace and compare two decay settings from one beginning.",
+      "builds_on": [
+        {
+          "map": "Random_Pheromone",
+          "why": "Reuse a trace that changes later motion."
+        },
+        {
+          "map": "CA_Introduction",
+          "why": "Reuse addressed state and repeated local updates."
+        }
+      ],
+      "adds": "Use a shared field as memory that survives the agents that deposited it.",
+      "carries": "A local sensing-and-deposit rule with a named decay choice.",
+      "status": "needs_revision",
+      "review": "sense_with_offset is undefined and the movement/boundary contract is unstated. Food sources are absent from the shown loop, yet the opening and ending promise shortest paths and a complete colony; limit the claim to local trail coordination.",
+      "tutorial_sha256_before": "b22a782eb16982fc6753da6914876fed8f37b5b59754a6b6508137756a237b60",
+      "tutorial_sha256_after": "692ee8f1b9c095372ec80094cb79cea3fedeeb143a02e2649ce9faeeff33bf4d"
+    },
+    {
+      "map": "SwarmIntelligence_FlowFields",
+      "subjects": [
+        "Vector fields",
+        "Grid lookup",
+        "Field following"
+      ],
+      "focus": "Write a direction at each address and trace how an agent reads that direction to update its velocity.",
+      "builds_on": [
+        {
+          "map": "Flow_Field",
+          "why": "Reuse position-to-vector lookup."
+        },
+        {
+          "map": "SwarmIntelligence_PhysarumColony",
+          "why": "Contrast shared environmental guidance with a trace changed by agents."
+        }
+      ],
+      "adds": "Coordinate several agents through a retained direction field, keeping field construction separate from following it.",
+      "carries": "A direction field and its sampling interface.",
+      "status": "aligned",
+      "review": "The direct radial construction supports these labels. The extra route-finding recipe leaves get_neighbours undefined and changes neighbourhood conventions; it should not be counted as a completed Dijkstra lesson.",
+      "tutorial_sha256_before": "6a885701146cc2da11eefca6ecd336b99c7232f6839dd94b441c6de65bae98e3",
+      "tutorial_sha256_after": "5b2b87e79d2c99dc446ba437704f72dd52b58bc451da2275e56e5cd10fe80b3e"
+    },
+    {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "subjects": [
+        "Local neighbourhoods",
+        "Vector averages",
+        "Weighted steering"
+      ],
+      "focus": "Compute separation, mean neighbour velocity and mean position for a small flock, then vary their weights independently.",
+      "builds_on": [
+        {
+          "map": "Vectors_Act2_VectorArithmetic",
+          "why": "Reuse vector sums, averages and differences."
+        },
+        {
+          "map": "SwarmIntelligence_FlowFields",
+          "why": "Reuse steering while replacing field lookup with neighbour observations."
+        }
+      ],
+      "adds": "Make a changing neighbourhood determine the steering contributions received by each agent.",
+      "carries": "A neighbourhood selector and three separately weighted steering rules.",
+      "status": "aligned",
+      "review": "The three-rule calculation is present; boundary policy and room/body avoidance are not taught, and in-place updates should not be described as simultaneous independent decisions.",
+      "tutorial_sha256_before": "eda0ddf7813ad1441ff1158cfc532ff4023f6b1964b61843627b526878183789",
+      "tutorial_sha256_after": "b383ccd3b810c13f3652785a0989280eb890a97a3e8d4731691c88ad36d339db"
+    },
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "subjects": [
+        "Agent states",
+        "State transitions",
+        "Shared history"
+      ],
+      "focus": "Give a foraging agent two states with different sensing and deposition rules, then compare replacing agents with resetting their trail.",
+      "builds_on": [
+        {
+          "map": "SwarmIntelligence_PhysarumColony",
+          "why": "Reuse environmental memory."
+        },
+        {
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "why": "Reuse local perception that selects an action."
+        }
+      ],
+      "adds": "Separate individual state from the persistent shared field and state which one a restart changes.",
+      "carries": "A state record and transition rule for outward and returning travellers.",
+      "status": "needs_revision",
+      "review": "The current majority-copying society recipe differs from the foraging exhibit. dominant_state and initialise_swarm are undeclared; replacing a population is called a fresh start without any shared-field reset distinction.",
+      "tutorial_sha256_before": "8b1e5a8e162a37979b40cb2405e4cf0a0710d943d11520cc17a2619d645d5215",
+      "tutorial_sha256_after": "4905352f761e9d5cb4769478591e2e11c7ca60706591423016aa345ffa9d89d5"
+    },
+    {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "subjects": [
+        "Two channel communication",
+        "Foraging states",
+        "Trail reinforcement"
+      ],
+      "focus": "Keep home and food traces separate and switch which channel an agent reads and writes when it reaches a destination.",
+      "builds_on": [
+        {
+          "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "why": "Reuse state-dependent behaviour."
+        },
+        {
+          "map": "SwarmIntelligence_PhysarumColony",
+          "why": "Reuse trail sensing, deposition and evaporation."
+        }
+      ],
+      "adds": "Change the meaning of a deposited value through the traveller’s state and selected channel.",
+      "carries": "A two-channel foraging rule with explicit destination transitions.",
+      "status": "needs_revision",
+      "review": "The tutorial instead builds a travelling-tour graph, assumes edge distances exist for candidate vertices and calls undefined tour_length. It does not teach the demonstrated two-channel foraging mechanism or establish shortest-tour convergence.",
+      "tutorial_sha256_before": "b5cb71110e2c5568b7061bff76a1326a6d6e823b05d866d941178b91191722ea",
+      "tutorial_sha256_after": "0a8c8760270fab1ef0d56e3336e71938e20057cc91997410216bfbd71fe04330"
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "subjects": [
+        "Objective functions",
+        "Personal and shared memory",
+        "Weighted search motion"
+      ],
+      "focus": "Store each best position beside its score, combine the three motion terms, and reconsider remembered scores when the objective changes.",
+      "builds_on": [
+        {
+          "map": "FormFinding_Descent",
+          "why": "Reuse an explicitly chosen scalar objective."
+        },
+        {
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "why": "Reuse weighted vector steering."
+        }
+      ],
+      "adds": "Guide search by evaluated memories and make their validity depend on the objective and reference state.",
+      "carries": "An objective, candidate positions and accountable best-state records.",
+      "status": "needs_revision",
+      "review": "The fixed Rastrigin recipe does not cover the exhibit’s changing novelty archive. Global best is not evaluated before the first velocity update or cleared by reset_swarm, yet convergence to the global minimum is promised.",
+      "tutorial_sha256_before": "dee67def74ffa896419a481e40786fa30aae2ac60f81504871ec778cfeb4894a",
+      "tutorial_sha256_after": "e3c5aec4d794742b5f8a1ce91a84a2b3f83f6193be2d6a6b2a1756a79e43e78e"
+    },
+    {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "subjects": [
+        "Event provenance",
+        "Population accounting",
+        "External support"
+      ],
+      "focus": "Keep births and losses distinct from population replenishment, then explain one apparent recovery only as far as its event record allows.",
+      "builds_on": [
+        {
+          "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "why": "Reuse agent states and population counts."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse a record of events over time."
+        }
+      ],
+      "adds": "Compose an account of collective persistence that retains intervention and uncertainty.",
+      "carries": "A population event account that identifies supplied support.",
+      "status": "needs_revision",
+      "review": "The current text is an abstract algorithm-interface gallery with empty hooks and missing comparison helpers. It does not teach the ecosystem’s support/event record, and its ending points to Chamber_Swarm outside this route.",
+      "tutorial_sha256_before": "6a3441d72bed94f715e909ec790f5de9edd684796d8b5fb8fb42ac6818d42e7c",
+      "tutorial_sha256_after": "39898ea469835773a929e75b6401b4e8a2310204f7d76f469aecbd5c66c3695b"
+    },
+    {
+      "map": "ML_Evolution",
+      "subjects": [
+        "Heritable parameters",
+        "Variation and selection",
+        "Evaluation criteria"
+      ],
+      "focus": "Copy a short movement recipe with bounded mutations, evaluate it under one stated rule and decide which candidates continue.",
+      "builds_on": [
+        {
+          "map": "PG_Genetic_Evolution",
+          "why": "Return to variation and selection in procedural generation."
+        },
+        {
+          "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "why": "Carry the distinction between reproduction and externally supported persistence."
+        }
+      ],
+      "adds": "Separate the inherited candidate, its trial outcome and the replacement decision.",
+      "carries": "A candidate-and-score record with a reproducible selection rule.",
+      "status": "needs_revision",
+      "review": "Genome has no fitness field although selection assigns and reads it. The creature’s set_weights interface does not explain how genes affect motion, and elitism is said to prevent regression without stating repeatable evaluation conditions.",
+      "tutorial_sha256_before": "88c2462b9dfaf0e77cbec65b9671fd9c6d303a0555cf96044dcfee51f612900f",
+      "tutorial_sha256_after": "5fe8eed08cb89523fbbfa24d43ae016b86ca5a1f625d4d0aab7b6e48a16a5c7d"
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "subjects": [
+        "Prediction functions",
+        "Loss aggregation",
+        "Numerical gradients",
+        "Descent steps"
+      ],
+      "focus": "Score a one-parameter predictor against retained observations, estimate the loss slope and compare a small descent step under two losses.",
+      "builds_on": [
+        {
+          "map": "FormFinding_Descent",
+          "why": "Reuse moving against an estimated slope."
+        },
+        {
+          "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "why": "Reuse separating a candidate from its score."
+        }
+      ],
+      "adds": "Construct a learning objective from prediction errors rather than accepting an unexplained landscape.",
+      "carries": "Separate predictor, loss and update functions.",
+      "status": "needs_revision",
+      "review": "The tutorial uses a preset Himmelblau function, then surveys momentum and Adam. It does not construct the exhibit’s data-dependent regression loss, and render_surface leaves triangulation omitted while mark_position is undefined.",
+      "tutorial_sha256_before": "f2e5f8daacbfc17a4971f8cbf74a5e82ddae91d84459e4c2dec9774aa21a8c4d",
+      "tutorial_sha256_after": "e67c8ff78eb76417a65ff013b5bc38f1fd8d6d96539dfc83d9031f3b8d95bd93"
+    },
+    {
+      "map": "ML_Classification",
+      "subjects": [
+        "Nearest centre assignment",
+        "Centroid updates",
+        "Clustering"
+      ],
+      "focus": "Assign a small point set to its nearest centres, recompute their means and repeat while preserving an empty group’s previous centre.",
+      "builds_on": [
+        {
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "why": "Reuse distance-based neighbourhoods and mean positions."
+        },
+        {
+          "map": "ML_Gradient_Landscape",
+          "why": "Reuse an adjustable model state that is compared against data."
+        }
+      ],
+      "adds": "Alternate discrete assignments with continuous centre updates instead of treating group labels as given truth.",
+      "carries": "A small clustering loop with an explicit empty-group rule.",
+      "status": "aligned",
+      "review": "The k-means loop supplies this narrow operation. The surrounding SVM/neural survey overstates the scope of one hall, and its uninitialised network forward pass should not count as taught training.",
+      "tutorial_sha256_before": "d500df467fcd4b28d8daa52d5cd3ee5311cd43a27200fb37462636f88def5338",
+      "tutorial_sha256_after": "6f83dc9bdc1a7c05ebae484f9b8065ad87f8e56402ab8a3774f4298e236e119f"
+    },
+    {
+      "map": "ML_Neural_Networks",
+      "subjects": [
+        "Weighted sums",
+        "Function composition",
+        "Activations and weights",
+        "Prediction error"
+      ],
+      "focus": "Trace a tiny forward network from retained weight lists and compare how one changed weight alters a later prediction.",
+      "builds_on": [
+        {
+          "map": "ML_Classification",
+          "why": "Reuse adjustable model state and a point representation."
+        },
+        {
+          "map": "ML_Gradient_Landscape",
+          "why": "Reuse prediction and loss as separate operations."
+        }
+      ],
+      "adds": "Distinguish transient activity from retained parameters and connect a parameter change to an observable prediction.",
+      "carries": "A small forward model whose weights and outputs can be inspected separately.",
+      "status": "needs_revision",
+      "review": "Forward arithmetic is present, but the backward sketch omits hidden activation derivatives and uses already-updated weights while claiming general training. Provide a declared correct training-step interface and repeatable held-out comparison; do not label backpropagation as learned here.",
+      "tutorial_sha256_before": "36fd74a87b739c0e14d8088555c348e8dbce4727c0a39667af60fa3735f0bb3f",
+      "tutorial_sha256_after": "5db4546338d6c7145c917bb0260b389d3ea2f73ae439805bc918c73b93ae1262"
+    },
+    {
+      "map": "ML_Perception",
+      "subjects": [
+        "Image neighbourhoods",
+        "Convolution kernels",
+        "Edge magnitude"
+      ],
+      "focus": "Apply a fixed Sobel kernel to one neighbourhood, traverse the image and combine the two directional responses into edge strength.",
+      "builds_on": [
+        {
+          "map": "ML_Neural_Networks",
+          "why": "Reuse a weighted sum."
+        },
+        {
+          "map": "CA_Introduction",
+          "why": "Reuse neighbourhood operations over an addressed grid."
+        }
+      ],
+      "adds": "Make the selected local intensity differences visible as an intermediate representation.",
+      "carries": "An inspectable edge-strength image with its retained and omitted information named.",
+      "status": "aligned",
+      "review": "The convolution and magnitude loops support this focus. Keep their fixed filters distinct from learned object recognition and avoid presenting the separate perceptron recipe as a prerequisite for the filter.",
+      "tutorial_sha256_before": "33d519bee127f122db995b408b82216f734f9192fe535324a080cf7c92565a75",
+      "tutorial_sha256_after": "901dac60528d2ad976185a2e9f459589bc324ab3f073651f50b4ea8cd6ed65d3"
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "subjects": [
+        "Retained state",
+        "Gated updates",
+        "History dependence"
+      ],
+      "focus": "Calculate retained and admitted contributions separately, then compare two token histories that end with the same final input.",
+      "builds_on": [
+        {
+          "map": "ML_Neural_Networks",
+          "why": "Reuse weighted inputs and exposed outputs."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse a state record accumulated over time."
+        }
+      ],
+      "adds": "Make the present output depend on a controlled recurrence, distinguishing hand-set gates from a trained LSTM.",
+      "carries": "A small gated recurrence and two histories that distinguish its behaviour.",
+      "status": "needs_revision",
+      "review": "The lesson surveys RNN and LSTM recipes rather than the linear hand-set cell. Vector helpers and gradient_at_timestep are undefined, and teacher forcing is only a comment although the ending claims it can be trained.",
+      "tutorial_sha256_before": "6b577ba77a20525c10967ff4431d2901dc0d03856e3895795b5dde565afd35b8",
+      "tutorial_sha256_after": "4b0222d2e89ee6bc99f188425d78a4fee3e5d0178d1944f219ca34f71e807329"
+    },
+    {
+      "map": "ML_Generative",
+      "subjects": [
+        "Candidate generation",
+        "Reference samples",
+        "Critic scores",
+        "Learning updates"
+      ],
+      "focus": "Generate a small candidate batch and compare it through a supplied inspectable critic, then name the two states a real adversarial update would change.",
+      "builds_on": [
+        {
+          "map": "Random_Gaussian",
+          "why": "Reuse sampled random inputs."
+        },
+        {
+          "map": "ML_Neural_Networks",
+          "why": "Reuse a forward model with retained weights."
+        },
+        {
+          "map": "ML_Gradient_Landscape",
+          "why": "Reuse a declared loss for evaluating change."
+        }
+      ],
+      "adds": "Separate producing samples from learning a distribution and identify the reference set embedded in the judgement.",
+      "carries": "A candidate generator and an explicit account of what its critic compares.",
+      "status": "needs_revision",
+      "review": "Essential GAN backward methods and VAE encoder helpers are absent. The chapter claims training and decoding from those calls and adds diffusion without a learned reverse process; the museum’s scripted losses cannot supply evidence of learning.",
+      "tutorial_sha256_before": "dda947611385f311e54aea4985c1632f45bfe5e4e725521acfe357a8299b906c",
+      "tutorial_sha256_after": "fac87ef8cd5600576a0099780e19ba2cd9ff8f85f321b598d11a2861c4383b20"
+    },
+    {
+      "map": "ML_Synthesis",
+      "subjects": [
+        "Reference populations",
+        "Coordinate scaling",
+        "Outlier scores",
+        "Decision thresholds"
+      ],
+      "focus": "Retain each coordinate’s contribution to a score, compare it with a threshold and keep a flagged case for further inquiry.",
+      "builds_on": [
+        {
+          "map": "Random_Gaussian",
+          "why": "Reuse spread and deviation from a reference."
+        },
+        {
+          "map": "ML_Classification",
+          "why": "Reuse the distinction between data positions and algorithmically assigned groups."
+        }
+      ],
+      "adds": "Compose a flag from representation, reference population and decision rule while preserving the case being judged.",
+      "carries": "A flagged case with its reference, scaling and threshold still visible.",
+      "status": "needs_revision",
+      "review": "The entire current tutorial is an RL, language-model and retraining survey. It does not teach the storyboard’s outlier calculation; policy_gradient, compute_returns, lm_forward and other core helpers are undefined.",
+      "tutorial_sha256_before": "dc268840941f3bcaca095b4fd543cade660970d36768e5eac33454d645c6e1c0",
+      "tutorial_sha256_after": "3dd6c14b6313ee2ded007cc9846f4385386e5142bd02facbed8acf98f9a429a6"
+    },
+    {
+      "map": "GT_Foundations",
+      "subjects": [
+        "Vertex identifiers",
+        "Adjacency lists",
+        "Pending work",
+        "Traversal order"
+      ],
+      "focus": "Record a small graph and compare taking the oldest pending vertex with taking the newest while keeping its connections fixed.",
+      "builds_on": [
+        {
+          "map": "Point_Triangle_Context",
+          "why": "Return to vertices linked by explicit connections."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse a list whose ordering controls how retained items are revisited."
+        }
+      ],
+      "adds": "Make breadth and depth arise from the choice of pending-work order over the same relation record.",
+      "carries": "A graph record and a traversal procedure ready to retain predecessors.",
+      "status": "needs_revision",
+      "review": "The current lesson teaches edge lists and an Euler walk test, not the storyboard’s queue/stack traversal. Its Euler condition also omits connectivity; introduce traversal in this hall before later recipes rely on unexplained neighbours and bfs_distances.",
+      "tutorial_sha256_before": "641051c0a43df4bb066a0693aa100e8c8bdb158363025b8b95e9897f375a9c41",
+      "tutorial_sha256_after": "e7a490aa8da4772b6e895c5975dd0fcce8ab7e9bd3cd5da43d7a93adb2815d0a"
+    },
+    {
+      "map": "GT_Layout",
+      "subjects": [
+        "Connectivity and position",
+        "Spring layouts",
+        "Damped motion"
+      ],
+      "focus": "Retain vertex identities while computing attraction along listed edges and repulsion between positions, then compare another arrangement.",
+      "builds_on": [
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse vertex identifiers and edge pairs."
+        },
+        {
+          "map": "SoftBodies_Cloth_Physics",
+          "why": "Reuse restoring forces, velocities and damping."
+        }
+      ],
+      "adds": "Assign spatial positions to a graph without changing which vertices it connects.",
+      "carries": "A layout whose moving picture remains separate from its relation record.",
+      "status": "aligned",
+      "review": "The force calculations support this focus. The optional stress calculation calls undefined bfs_distances and the visual update moves spheres without updating edges; neither should be counted as a completed rendering or stress lesson.",
+      "tutorial_sha256_before": "b8627b6436074601670061ddd17707a5be479eada1b66c8a7dff45697799e922",
+      "tutorial_sha256_after": "81fe4344c390eec240a40f2a617b980dcae6f8197d78433030bb752c704cedc3"
+    },
+    {
+      "map": "GT_Pathfinding",
+      "subjects": [
+        "Breadth first search",
+        "Predecessor records",
+        "Path reconstruction",
+        "Unreachable destinations"
+      ],
+      "focus": "Retain each newly reached vertex’s predecessor, reconstruct one available route and return an explicit result when no route reaches the goal.",
+      "builds_on": [
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse a queue and adjacency lookup for traversal."
+        }
+      ],
+      "adds": "Separate the explored search from the route recovered through a predecessor chain.",
+      "carries": "A path record with an explicit unreachable case.",
+      "status": "needs_revision",
+      "review": "Graph.neighbours is never introduced by the earlier Graph class. reconstruct_path indexes a missing goal after failed search, and A* adds an undeclared PriorityQueue; teach one complete BFS path operation before claiming three search methods.",
+      "tutorial_sha256_before": "70c6254604df6dcc279b1312a2ce969f352be1404ab9bfcf279860c10d79dec9",
+      "tutorial_sha256_after": "3675203014d885f36362f6b82f35c5149b90847875d81e0ebc5cebcb508dea2e"
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "subjects": [
+        "Directed relations",
+        "Incoming and outgoing counts",
+        "Source records",
+        "Layout invariance"
+      ],
+      "focus": "Remove one fictional relation, predict the two affected counts and move the drawing while keeping the relation records fixed.",
+      "builds_on": [
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse endpoint identifiers and edge records."
+        },
+        {
+          "map": "GT_Layout",
+          "why": "Reuse the separation between relation and drawing."
+        }
+      ],
+      "adds": "Attach a precise count to recorded relations while retaining provenance and distinguishing visual prominence from the measure.",
+      "carries": "A directed relation record with inspectable source and counts.",
+      "status": "aligned",
+      "review": "The appended evidence-network study supplies this focus. The preceding broad centrality survey still assumes helpers and generalises simple-graph normalisation to the earlier multigraph; those methods are outside these labels.",
+      "tutorial_sha256_before": "3a79659f14fe1d92df33bc895a8dbe12dbb927d942ff300888b6a6554ab5e40e",
+      "tutorial_sha256_after": "132efefed85933346fffe2bae3ed5c496b77be74e9c08cee44fe113007de8422"
+    },
+    {
+      "map": "GT_Connectivity",
+      "subjects": [
+        "Directed reachability",
+        "Reversed graphs",
+        "Mutual reachability"
+      ],
+      "focus": "Find reachable vertices in a graph and its reversal, then intersect the results for one chosen start.",
+      "builds_on": [
+        {
+          "map": "GT_Pathfinding",
+          "why": "Reuse visited-state traversal."
+        },
+        {
+          "map": "GT_Network_Analysis",
+          "why": "Reuse directed source and destination records."
+        }
+      ],
+      "adds": "Construct mutual reachability through two explicit searches before comparing with a supplied component algorithm.",
+      "carries": "A component defined by routes in both directions, with costs and clearance left open.",
+      "status": "needs_revision",
+      "review": "The tutorial jumps directly to a recursive Tarjan lambda without teaching low-link invariants; it does not provide the proposed two-reachability construction. Room creation and directed arrows are also undeclared apparatus, not learner capabilities.",
+      "tutorial_sha256_before": "2a12cf81c449f8db30ce971413f83dc3096001d4734ce3783b98ae6bcd725cd3",
+      "tutorial_sha256_after": "b0494dcadeb6bbafb0d76f223e18bae7ce3179f7452c7ce542f0ec8330f95025"
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "subjects": [
+        "Weighted connections",
+        "Cycle checks",
+        "Minimum spanning trees",
+        "Alternative routes"
+      ],
+      "focus": "Sort a small edge list, accept edges joining separate groups and restore one rejected edge when a second route is the chosen aim.",
+      "builds_on": [
+        {
+          "map": "GT_Connectivity",
+          "why": "Reuse reachability to ask whether endpoints are already connected."
+        },
+        {
+          "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "why": "Reuse the need to state an objective before calling a result best."
+        }
+      ],
+      "adds": "Distinguish economical connection under an edge-weight objective from the value of a redundant route.",
+      "carries": "A selected connection set with its cost objective and deliberate extra route.",
+      "status": "needs_revision",
+      "review": "The code explains Kruskal but does not teach the proposed resilience comparison. verify_mst checks tree size and cycles, not minimum weight; Prim lacks a disconnected-graph exit. Separate a valid spanning tree from optimality before claiming verification.",
+      "tutorial_sha256_before": "12b30c7b206b0cc0959cc9818f7c4a7a1cda37d991f83cffc2f3f9213a670c35",
+      "tutorial_sha256_after": "b367b89f50853103e15797a6ce872fb836e44105ae4574870e06cb9d7dc0de0e"
+    },
+    {
+      "map": "GT_Flow",
+      "subjects": [
+        "Capacity and flow",
+        "Residual capacity",
+        "Excess",
+        "Reversible allocation"
+      ],
+      "focus": "Calculate one admissible push limited by excess and residual capacity, including the reverse adjustment that can undo earlier allocation.",
+      "builds_on": [
+        {
+          "map": "GT_Network_Analysis",
+          "why": "Reuse directed relation records."
+        },
+        {
+          "map": "GT_Pathfinding",
+          "why": "Reuse tracing routes through an available subgraph."
+        }
+      ],
+      "adds": "Keep an edge’s limit, assigned amount and a vertex’s unallocated excess distinct while making revision possible.",
+      "carries": "A reversible local allocation and a small rerouting example.",
+      "status": "needs_revision",
+      "review": "The current text teaches Edmonds–Karp augmenting paths while the proposed exhibit lesson uses push/relabel. Excess and algorithmic height are absent; all_vertices and visual helpers are undeclared. Choose and explain the local push interface before claiming the full solver.",
+      "tutorial_sha256_before": "79d80f2c6ea334af23f9f524fc197070aee02d5f39b017dea874b9803fdc2237",
+      "tutorial_sha256_after": "c2d9e5653b02865157a394e493e4ba06f7d2da7cc36427729b497a9783c397c7"
+    },
+    {
+      "map": "GT_Matching",
+      "subjects": [
+        "Pairing constraints",
+        "Greedy order",
+        "Augmenting paths",
+        "Validity and optimality"
+      ],
+      "focus": "Run greedy pairing in two edge orders, then replace one chosen edge with two along a specific alternating path.",
+      "builds_on": [
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse vertices, edge pairs and occupied-state checks."
+        },
+        {
+          "map": "GT_Flow",
+          "why": "Reuse reversal of an earlier allocation."
+        }
+      ],
+      "adds": "Improve a locally valid matching by revising a previous choice rather than confusing validity with maximum size.",
+      "carries": "A concrete matching counterexample and one explicit augmentation.",
+      "status": "needs_revision",
+      "review": "The Hungarian loop is explicitly omitted; bfs_layers and dfs_augment are undefined. The tutorial still claims these methods and blossom contraction are learned, switches from the exhibit’s general graph to bipartite assignment, and incorrectly ends the curriculum here.",
+      "tutorial_sha256_before": "33188cf04180e47d581e305716bf8f0bb68e6548a546278c62329a92dd26a67f",
+      "tutorial_sha256_after": "32ff078a9f1550cb281464d90eb784db70a3810ac15f839e221a3e8dfe312ac1"
+    },
+    {
+      "map": "Euclid_Parallel",
+      "subjects": [
+        "Geometric assumptions",
+        "Constructed examples",
+        "Measurement and proof"
+      ],
+      "focus": "State the rules and distance convention of one triangle construction, then separate its measured corners from a general claim.",
+      "builds_on": [
+        {
+          "map": "Point_Triangle_Context",
+          "why": "Reuse a triangle made from chosen points."
+        },
+        {
+          "map": "GT_Matching",
+          "why": "Reuse distinguishing a valid example from a general optimality claim."
+        }
+      ],
+      "adds": "Identify which assumptions a geometric example already relies on before using it as evidence.",
+      "carries": "A triangle with its construction rules declared for another geometry.",
+      "status": "needs_revision",
+      "review": "The current task builds plinths and toggles a chaos preview, then treats the picture as what follows from removing the fifth postulate. It does not supply the proposed triangle comparison or separate an authored preview from an independence argument.",
+      "tutorial_sha256_before": "60e019244d1944053013c2ce3906eb1328df8d98a74fc95875af5e1522800da4",
+      "tutorial_sha256_after": "7ca981fdcaf2ada729b43a32061255bace9efda84a091c2d99f86e39b1c26203"
+    },
+    {
+      "map": "NonEuclidean_Spaces",
+      "subjects": [
+        "Distance models",
+        "Geodesics",
+        "Triangle comparisons"
+      ],
+      "focus": "Give endpoints to supplied plane, sphere and disk path samplers and compare model-aware corner angles under their stated conventions.",
+      "builds_on": [
+        {
+          "map": "Euclid_Parallel",
+          "why": "Reuse the same triangle question while declaring its geometric assumptions."
+        },
+        {
+          "map": "Vectors_Act1_WhatAVectorIs",
+          "why": "Reuse coordinate positions and directions."
+        }
+      ],
+      "adds": "Recognise that a straight route is defined by a distance model, not just its displayed shape.",
+      "carries": "A geometric comparison whose samplers and angle convention remain explicit.",
+      "status": "needs_revision",
+      "review": "The lesson labels a radial Euclidean warp and repeated tangent heuristic as hyperbolic/elliptic geometry. That code does not establish the claimed models; supply model-specific geodesic/angle interfaces instead of equating a slider with curvature.",
+      "tutorial_sha256_before": "5d938705b88b0d453afa6fb0f3274b366625a0333e408775fe2ce6556eaf2088",
+      "tutorial_sha256_after": "7067ab084c904e3fc9deca458a2b22757e4725667f04f29eb8d399a68a8d2644"
+    },
+    {
+      "map": "Russell_Paradox",
+      "subjects": [
+        "Membership predicates",
+        "Finite domains",
+        "Self reference",
+        "Restricted construction"
+      ],
+      "focus": "Trace both membership cases, then filter a stated finite domain without assuming that every descriptive condition creates a set.",
+      "builds_on": [
+        {
+          "map": "CA_ElementaryRules",
+          "why": "Reuse exhaustive checking of small Boolean cases."
+        },
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse a declared finite collection of identified objects."
+        }
+      ],
+      "adds": "Distinguish testing a predicate over available objects from asserting unrestricted self-containing collections.",
+      "carries": "A finite membership construction with its domain and limits declared.",
+      "status": "needs_revision",
+      "review": "A filtered list of named boxes is treated as Russell’s unrestricted collection. The alarm and disabled inference are programmed effects, not consequences derived by a formal system; the finite alternative needs an explicit domain and scope.",
+      "tutorial_sha256_before": "0912483a9ee0438c7ec57e22a1535a2844cab868ddc8c2cb53cbb6870a4984ee",
+      "tutorial_sha256_after": "4bea5e70d426ba1f0cab209916f37527a8c683a847bc2a3cda6a15dc2d3b5b18"
+    },
+    {
+      "map": "Godel_Incompleteness",
+      "subjects": [
+        "Proof checking",
+        "Bounded search",
+        "Unprovability claims"
+      ],
+      "focus": "Inspect one finite proof candidate and compare its check with a search that returns no proof within a stated bound.",
+      "builds_on": [
+        {
+          "map": "Russell_Paradox",
+          "why": "Carry the distinction between a constructed finite example and an unrestricted claim."
+        },
+        {
+          "map": "GT_Pathfinding",
+          "why": "Reuse a search result with a declared domain and failure condition."
+        }
+      ],
+      "adds": "Separate checking a supplied derivation, failing to find one and establishing that none exists.",
+      "carries": "A precise statement of what a stopped search has established.",
+      "status": "needs_revision",
+      "review": "search_proof calls undefined _derives and returns not found; evaluate_godel converts that directly to a true unprovable statement. The toy encoding and authored verdict do not supply a theorem or its assumptions; use the machine as a reflective prompt, not a proof.",
+      "tutorial_sha256_before": "5b6a407cb3d5f8f73d37dbacd3e118180758d3f562f52980d0d5d5365883118c",
+      "tutorial_sha256_after": "b79ebd32faf0a5d0a29c987fed0f3f6bd16892f8a7673e7a2c17ea4b9abcd5e8"
+    },
+    {
+      "map": "Escher_Impossible",
+      "subjects": [
+        "Closed path differences",
+        "Projection",
+        "Local and global claims"
+      ],
+      "focus": "Sum height changes around one complete circuit and inspect the same staircase from a second viewpoint.",
+      "builds_on": [
+        {
+          "map": "Point_Lines",
+          "why": "Reuse differences between endpoint coordinates."
+        },
+        {
+          "map": "GT_Pathfinding",
+          "why": "Reuse a complete route record."
+        },
+        {
+          "map": "Godel_Incompleteness",
+          "why": "Keep an illustrative device distinct from what its procedure establishes."
+        }
+      ],
+      "adds": "Use a closed-loop check to locate the difference between an impossible-looking projection and the constructed geometry.",
+      "carries": "A circuit with its height changes and viewpoint assumptions visible.",
+      "status": "needs_revision",
+      "review": "The code’s complete sum telescopes to zero, while the prose says all four rises are positive and the total is nonzero. The return edge descends; the lesson must retain this distinction and stop presenting the staircase as Gödel’s result.",
+      "tutorial_sha256_before": "130cbae1fbb8282e0a6e827fb25c8b4babfc26cf20a6e849917255160e8355df",
+      "tutorial_sha256_after": "03e7ea995a13ff1cff200860445a73f39712f320e7912a689fb84fabfe888326"
+    },
+    {
+      "map": "Brouwer_Intuitionism",
+      "subjects": [
+        "Finite prefixes",
+        "Witnesses",
+        "Open continuations"
+      ],
+      "focus": "Keep a chosen bit prefix and return a position witnessing a one when it exists, without treating an absent witness as a claim about every continuation.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "Reuse an incrementally retained ordered record."
+        },
+        {
+          "map": "Godel_Incompleteness",
+          "why": "Reuse distinguishing finite search failure from a general impossibility claim."
+        }
+      ],
+      "adds": "Give a finite construction an inspectable witness while leaving its unmade continuation open.",
+      "carries": "A prefix and a witness query with deliberately limited claims.",
+      "status": "needs_revision",
+      "review": "The lesson substitutes a required-string checklist and constructed flag for logical validity. It calls not-yet-constructed a third truth option and ends with blanket rejection of contradiction proofs; the proposed prefix/witness exercise is absent.",
+      "tutorial_sha256_before": "6f501c6016892a07a24464413702cfba244b677131885629cc550365aebf3791",
+      "tutorial_sha256_after": "6f5e59ad71fd8b6eddde036d136923681e01bd08992f606a9b6e1c4e10edfb17"
+    },
+    {
+      "map": "Florensky_Paraconsistent",
+      "subjects": [
+        "Independent reports",
+        "Contradictory information",
+        "Consequence rules"
+      ],
+      "focus": "Retain OPEN and CLOSED reports with their sources, then use a declared small consequence table to test whether an unrelated alarm has support.",
+      "builds_on": [
+        {
+          "map": "Russell_Paradox",
+          "why": "Reuse checking the scope of a contradictory pair."
+        },
+        {
+          "map": "Brouwer_Intuitionism",
+          "why": "Reuse keeping the evidence for a conclusion explicit."
+        }
+      ],
+      "adds": "Distinguish preserving contradictory data from choosing the rules that infer consequences from it.",
+      "carries": "Two source-tagged reports and a bounded inference rule ready for practical disagreement.",
+      "status": "needs_revision",
+      "review": "The current probability pair is described as quantum superposition and paraconsistency. safe_infer is only a confidence filter; the example does not supply a consequence relation, and complementary probabilities do not preserve independent evidential support.",
+      "tutorial_sha256_before": "314c961c040f26f8d644221dd3626c270aa54f5748a14d060801e8fb565a17db",
+      "tutorial_sha256_after": "6bf2236312672087b87066ea49672835ededc3835e43efb7da5097ecb4779ea4"
+    },
+    {
+      "map": "Crisis_Synthesis",
+      "subjects": [
+        "Sentence arrays",
+        "Presentation scale",
+        "Display rhythm",
+        "Claims and warrant"
+      ],
+      "focus": "Write one short sentence, send it through label, strip and wall, and compare how scale and pace change its apparent authority.",
+      "builds_on": [
+        {
+          "map": "Tutorial_Disco",
+          "why": "Reuse a timed reader over an ordered collection."
+        },
+        {
+          "map": "Primitives_Portals",
+          "why": "Return to the supplied geometry of written signs."
+        },
+        {
+          "map": "Godel_Incompleteness",
+          "why": "Retain the distinction between presenting a verdict and establishing it."
+        }
+      ],
+      "adds": "Compose the presentation of a claim while preserving the question of its warrant.",
+      "carries": "An authored sentence and a question about what would make the QFEP proposal accountable.",
+      "status": "aligned",
+      "review": "The appended sentence study teaches this composition and explicitly separates display from truth. The older summit/bifurcation recipe still leaves helpers unexplained and presents the formula more conclusively than the proposed research framing.",
+      "tutorial_sha256_before": "eea82b565777fa365f66d070e133bf82af5bee136b3746c28530c7248b0b5a9e",
+      "tutorial_sha256_after": "caa673cb760328a3af8ee9313d22d559439e040b00bcdf0b4a11d61dc3a1661e"
+    },
+    {
+      "map": "QFEP_Introduction",
+      "subjects": [
+        "Weighted expressions",
+        "Scalar summaries",
+        "Retained inputs",
+        "Research proposals"
+      ],
+      "focus": "Calculate the workbench expression and retain all four inputs beside its total, then find two arrangements with nearly the same result.",
+      "builds_on": [
+        {
+          "map": "Crisis_Synthesis",
+          "why": "Carry a distinction between the authority of a formula’s display and its warrant."
+        },
+        {
+          "map": "Point_Trace",
+          "why": "Reuse a record that preserves what a summary leaves out."
+        }
+      ],
+      "adds": "Expose compensating contributions to a scalar and treat the QFEP expression as a revisable project proposal.",
+      "carries": "An explicit weighted calculation and its unreduced input record.",
+      "status": "needs_revision",
+      "review": "The tutorial builds labelled term spheres and prints a formula; it does not implement the calculation, preserve input records or compare equal totals. The supplied change value and reference names need explicit evidential limits.",
+      "tutorial_sha256_before": "9efb04de6d91a1284bdc076218d51c63ef9bce508069fb4a44f224007e1cb53a",
+      "tutorial_sha256_after": "9b43af36e69e9a615c04e83cd04165bcabd74383facebef80b8789d97abdf278"
+    },
+    {
+      "map": "QFEP_F_Term",
+      "subjects": [
+        "Constant predictors",
+        "Mistake counts",
+        "Expected error",
+        "Source uncertainty"
+      ],
+      "focus": "Keep a bit sample fixed, change the constant prediction and count mistakes before comparing expected error with source uncertainty.",
+      "builds_on": [
+        {
+          "map": "ML_Gradient_Landscape",
+          "why": "Reuse prediction, observations and loss as different objects."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "Return to uncertainty defined over a stated source."
+        }
+      ],
+      "adds": "Improve an explicit predictor without changing observations, separating observed mistakes from uncertainty and expectation.",
+      "carries": "A retained sample, a predictor and a transparent error count.",
+      "status": "needs_revision",
+      "review": "The current text calls absolute distance variational free energy, moves observations toward targets and stages a zero-F dark room. It never supplies the proposed fixed-bit predictor comparison; the elementary score must retain its own name and limits.",
+      "tutorial_sha256_before": "e2e4e63a86d197a919afd7d2a948bd48f76f12f3fa3e6e2310c707487d9938fa",
+      "tutorial_sha256_after": "69216124638e7cd76f317dcd62b7ecc6efa4a2e6ba29a2d24f5146a9248c20ca"
+    },
+    {
+      "map": "QFEP_E_Term",
+      "subjects": [
+        "Branching choices",
+        "Leaf counts",
+        "Equal probability assumptions",
+        "Retained exclusions"
+      ],
+      "focus": "Count the leaves of a small choice tree, close one branch and retain what was excluded before proposing an additional alternative.",
+      "builds_on": [
+        {
+          "map": "Fractal_RecursiveTrees",
+          "why": "Reuse branching records and recursive traversal."
+        },
+        {
+          "map": "Random_Entropy",
+          "why": "Reuse the dependence of entropy on probabilities, not just a picture."
+        }
+      ],
+      "adds": "Relate outcome counting to declared equal weights while distinguishing a reopened diagram from recovery of a lost history.",
+      "carries": "A choice tree with a leaf count, probability assumption and retained closure.",
+      "status": "needs_revision",
+      "review": "The current recipe measures positional spread, then its freeze handler sets the meter to 0.01 and calls that a finding about entropy. It contains no choice tree or leaf counter; neither spread nor a staged meter is the proposed equal-weight outcome calculation.",
+      "tutorial_sha256_before": "56846b11195dd67c601143e793b11a7607043cecaef027898821c330004bfd01",
+      "tutorial_sha256_after": "f8e452f99b7defb8e91489dd4b4fc234c245bbed68b9321d68fcde19c809e157"
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "subjects": [
+        "Spatial recommendations",
+        "Parameter mappings",
+        "Available routes"
+      ],
+      "focus": "Propose another lit route through the retained surroundings and compare what the recommendation invites with what a body can reach.",
+      "builds_on": [
+        {
+          "map": "Boolean_Works",
+          "why": "Reuse separate geometry, appearance and clearance choices."
+        },
+        {
+          "map": "QFEP_Introduction",
+          "why": "Reuse the distinction between an authored weighting and evidence for it."
+        }
+      ],
+      "adds": "Read a spatial recommendation as a design choice rather than a measurement of a universal regime.",
+      "carries": "A route proposal with its recommendation and access conditions separated.",
+      "status": "needs_revision",
+      "review": "The tutorial programs complexity into a Gaussian centred at 0.4 and removes creatures away from it, then treats that authored effect as an edge-of-chaos result. Its distance ratio is also described as projection; the route-composition lesson is absent.",
+      "tutorial_sha256_before": "863857f858706675558d9cc81fde30b40a37edbce96ad6a8e578ac5a57536414",
+      "tutorial_sha256_after": "a14568078440fbb6b1493d71ec95b4aad17d68748537a855a5073e19df241629"
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "subjects": [
+        "Finite differences",
+        "Rates of change",
+        "Signed weights",
+        "Receivers"
+      ],
+      "focus": "Keep paired readings and their interval, calculate change and rate separately, then multiply the same change by opposite weights.",
+      "builds_on": [
+        {
+          "map": "Change_Intro",
+          "why": "Reuse the distinction between a difference and a rate."
+        },
+        {
+          "map": "QFEP_Introduction",
+          "why": "Reuse separating a weighted calculation from its interpretation."
+        }
+      ],
+      "adds": "Track exactly what is changed, weighted and delivered to a receiver before assigning meaning to a sign.",
+      "carries": "A change calculation with its interval, signed weight and receiver stated.",
+      "status": "needs_revision",
+      "review": "The lesson calls a finite difference an instantaneous rate, changes the formula’s delta to a rate without accounting for the choice, and assigns political identities and reward/penalty meanings directly to slider signs. The data source and receiver need explicit contracts.",
+      "tutorial_sha256_before": "49e45ffe1be85065354bd010e9c302adcb36b4a7376d2e0f82a1a2fd5205c12f",
+      "tutorial_sha256_after": "366127db89c8d105de2bc34ac068223afdda8d2975c1f8d6cad983e79341c0d7"
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "subjects": [
+        "Time steps",
+        "Equal time comparisons",
+        "Model parameters",
+        "Numerical behaviour"
+      ],
+      "focus": "Run the supplied update from the same initial field using two step sizes, stop at equal simulated time and compare one retained feature.",
+      "builds_on": [
+        {
+          "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "why": "Reuse a field changed by local reaction and diffusion."
+        },
+        {
+          "map": "Change_Intro",
+          "why": "Reuse elapsed time as part of an update’s meaning."
+        }
+      ],
+      "adds": "Separate changes to a model from changes to its numerical execution.",
+      "carries": "A paired numerical comparison with initial state, step size and duration declared.",
+      "status": "needs_revision",
+      "review": "The current recipe calls undefined _apply_rd, scripts an edge window and deletes patterns outside it while generalising to life and unrelated algorithms. It provides no equal-time step-size comparison and cannot establish a universal lambda band.",
+      "tutorial_sha256_before": "9b9676233da428a64b712b885f3e3a43ec6029a3604d0db5d55349c53de0fad0",
+      "tutorial_sha256_after": "04c8eafb4b72f8852025ea3b2fa8cf50fb9eb1f93cca90a568fae005a4a1562d"
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "subjects": [
+        "Input routing",
+        "Retained inputs",
+        "Receiver mappings"
+      ],
+      "focus": "Move a disconnected handle, compare its displayed value with the receiver’s used value, then reconnect and explain the delivered change.",
+      "builds_on": [
+        {
+          "map": "Color_Nails",
+          "why": "Reuse an input-to-output mapping with a particular receiver."
+        },
+        {
+          "map": "QFEP_Phi_Term",
+          "why": "Reuse keeping a numerical weight distinct from what actually receives it."
+        }
+      ],
+      "adds": "Distinguish control position, connection state and the last value retained by a receiver.",
+      "carries": "An account of one connected route and what its receiver changes.",
+      "status": "aligned",
+      "review": "The present control comparison supports these labels. Constructing a separate learner receiver, as proposed by the storyboard, still needs a declared control interface and a short mapping example.",
+      "tutorial_sha256_before": "579bf6fdd358c9e0a45cce7cbc5090c26336c8f09ca5ed11b660b1e8b0efab57",
+      "tutorial_sha256_after": "4d2d4be1621d3fcf7dedd0963fa3206b7f9425ca97dd73842add7d08099b1499"
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "subjects": [
+        "Stiffness and damping",
+        "Forcing and response",
+        "Coupled controls"
+      ],
+      "focus": "Hold the pressure pulse steady, compare one region through time and identify which coefficients change under each control.",
+      "builds_on": [
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "why": "Reuse a deforming body and restoring response."
+        },
+        {
+          "map": "QFEP_Sandbox",
+          "why": "Reuse separating displayed controls from the values a receiver uses."
+        }
+      ],
+      "adds": "Read motion through forcing, restoring and dissipative choices without treating coefficient readouts as measured entropy.",
+      "carries": "A specific body response with its changed and retained coefficients identified.",
+      "status": "aligned",
+      "review": "The current comparison teaches coupled controls honestly. The storyboard’s independently mapped stiffness/damping controls and retained trace remain a later construction, not an existing isolated experiment.",
+      "tutorial_sha256_before": "e1a6c16749ede887fcda934ac2ec3ab4045c744cf4b4390c6fd0a9b83a2ce3cf",
+      "tutorial_sha256_after": "bebd2de7fbd8bf1694c4ce01864219de59df33e06dfa114ea07fbd9daabc71b8"
+    },
+    {
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "subjects": [
+        "Spatial interpolation",
+        "Viewpoint and geometry",
+        "Representational distinctions"
+      ],
+      "focus": "Compare the same named label pair under compression, then hold geometry fixed while changing viewpoint and name one distinction the arrangement obscures.",
+      "builds_on": [
+        {
+          "map": "Trans_Introduction",
+          "why": "Reuse interpolation between retained positions."
+        },
+        {
+          "map": "QFEP_Lambda_Spectrum",
+          "why": "Reuse examining how an authored spatial mapping recommends an interpretation."
+        }
+      ],
+      "adds": "Locate the consequences and exclusions of a chosen representation without treating a spatial analogy as a measured embedding.",
+      "carries": "A named pair, viewpoint and representational distinction to preserve.",
+      "status": "aligned",
+      "review": "The written comparison and limits are present. Authoring two new label arrangements remains proposed; their renderer and indexed record need to be supplied explicitly for that extension.",
+      "tutorial_sha256_before": "377aaeaa29427c544136d23ed0ea35ec0c3c63c4a5dc918de28a58e43ccb3e05",
+      "tutorial_sha256_after": "7bbaa772e3de614cfb72a416cb1f791ebe1455924dbcb8391b26feb17007c357"
+    },
+    {
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "subjects": [
+        "Spatial arrangements",
+        "Comparison variables",
+        "Participation conditions"
+      ],
+      "focus": "Count chairs, compare scale and sightlines, then change the colour recommendation while leaving each arrangement fixed.",
+      "builds_on": [
+        {
+          "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+          "why": "Reuse separating represented geometry from its presentation."
+        },
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "why": "Reuse angular spacing for generated positions."
+        }
+      ],
+      "adds": "State what equal spacing guarantees and what participation would still require people to test.",
+      "carries": "A design question tied to a particular participant’s approach or sightline.",
+      "status": "aligned",
+      "review": "The lesson explicitly identifies confounded count/scale/position variables. A matched learner-built arrangement and testing with participants are correctly presented as a next experiment.",
+      "tutorial_sha256_before": "3c0d2db9874070ab41d0a37ff03a51ddf643cb58ff48a89f710b5949d88d452f",
+      "tutorial_sha256_after": "710f4f2dfcab40bdbd4f9747bd7c70ea358f0b0a51d727d6ed6e817c41f6e8ef"
+    },
+    {
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "subjects": [
+        "Source tagged reports",
+        "Decision records",
+        "Revisable resolutions"
+      ],
+      "focus": "Keep two situated reports and record a separate chosen action with its reason, then revise the decision without deleting either source.",
+      "builds_on": [
+        {
+          "map": "Florensky_Paraconsistent",
+          "why": "Reuse the distinction between storing contradiction and inferring consequences."
+        },
+        {
+          "map": "GT_Network_Analysis",
+          "why": "Reuse provenance attached to a recorded relation."
+        }
+      ],
+      "adds": "Make a practical resolution revisable without erasing the reports that made it difficult.",
+      "carries": "Two retained reports and a separate decision with its reason.",
+      "status": "needs_revision",
+      "review": "The current lesson carefully distinguishes sculpture, storage and inference, but does not construct a source-tagged report/decision record. Its next experiment proposes an inference table instead; decide the bounded construction and its supplied record/display interface.",
+      "tutorial_sha256_before": "8045caa40402f27a28a32473728d2dad19fc4f5b438c60e8d0a86d1e6235e8fd",
+      "tutorial_sha256_after": "abc7797c01a2a5e56dcc353c7c563705f2af87cf84157447ab56519997d66dba"
+    },
+    {
+      "map": "SpeculativeComputation_Situated_Computation",
+      "subjects": [
+        "Observation provenance",
+        "Exposure time",
+        "Camera transforms",
+        "Retained views"
+      ],
+      "focus": "Change delay, compare exposure times and move a camera while distinguishing its present pose from the pose retained with a held frame.",
+      "builds_on": [
+        {
+          "map": "Point_Trace",
+          "why": "Reuse retention of an earlier state."
+        },
+        {
+          "map": "Point_Coordinates",
+          "why": "Reuse a position in a declared frame."
+        },
+        {
+          "map": "SpeculativeComputation_Paraconsistent_Engineering",
+          "why": "Carry a source and context with a report."
+        }
+      ],
+      "adds": "Keep an observation’s source, time and viewpoint distinct from the current receiver or camera position.",
+      "carries": "A located observation whose earlier exposure remains interpretable.",
+      "status": "aligned",
+      "review": "The appended delay edit and portable-camera explanation support this focus. Building a new image-reference record remains proposed; capture, buffer and pickup internals are supplied rather than counted as learned.",
+      "tutorial_sha256_before": "cdc542de6b1003f3a6922e8b091a1de6d37f42085589c607d0ec854154d27a15",
+      "tutorial_sha256_after": "1967c0778abaf177242192ddf5e420284cc0c6de0996ac1be64ef332b53b4a9d"
+    },
+    {
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "subjects": [
+        "Event counts",
+        "Distinct contributors",
+        "Revision provenance",
+        "Shared authority"
+      ],
+      "focus": "Compare additions with distinct sources, trace one piece to its contributor and inspect what a revision and a new version retain.",
+      "builds_on": [
+        {
+          "map": "SpeculativeComputation_Situated_Computation",
+          "why": "Reuse a source-tagged retained observation."
+        },
+        {
+          "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "why": "Return to separating visible activity from the support and history behind it."
+        }
+      ],
+      "adds": "Account for contributions and revisions without making activity counts or an open centre stand for distributed authority.",
+      "carries": "A contribution record with source, version and a question about who may revise the rule.",
+      "status": "aligned",
+      "review": "Counting and retained-source distinctions are taught. A learner-built shared form and a rule another participant can actually revise remain proposals; the automatic stream does not demonstrate collaboration.",
+      "tutorial_sha256_before": "7dcf9e1b1d250c25785a01a9920dee81dc7f3b9a73f2aec6870a0ff485d88ff3",
+      "tutorial_sha256_after": "402b229b43481e902aa16739f09dfded74d85d155367fcccdcdf5dac34435b38"
+    },
+    {
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "subjects": [
+        "Graph connections",
+        "Passage geometry",
+        "Alternative routes",
+        "Uneven access"
+      ],
+      "focus": "Walk a cave return first, then compare link rules and removal in the separate fixed-point model without treating its connections as cave edits.",
+      "builds_on": [
+        {
+          "map": "GT_Connectivity",
+          "why": "Reuse connected groups and reachability."
+        },
+        {
+          "map": "ISO_Caves",
+          "why": "Reuse bodily clearance and entrances."
+        },
+        {
+          "map": "SpeculativeComputation_Collective_Knowledge",
+          "why": "Reuse questioning how a shared form allocates access and revision."
+        }
+      ],
+      "adds": "Compose graph and bodily accounts of a route while recognising how proximity and arrival order distribute opportunities.",
+      "carries": "A proposed connection whose graph relation and inhabitable route must both be tested.",
+      "status": "aligned",
+      "review": "The present walking and link-control comparisons teach these distinctions. Adding a chamber connection is explicitly a further experiment; no existing cave-edit control or automatic graph-to-cave handoff is assumed.",
+      "tutorial_sha256_before": "afed59755295e8346767027a279bbb61ac854546017d69b0d2c4101a43c2297d",
+      "tutorial_sha256_after": "665e8eacda3d9541954673dda6173b73dc7abf8e4f64c55037f6b543f323e99f"
+    },
+    {
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "subjects": [
+        "Pose and connectivity",
+        "Local coordinates",
+        "Relational constraints",
+        "Retained assemblies"
+      ],
+      "focus": "Change one joint position and one connection endpoint separately, compare them with the original body and retain the revised assembly.",
+      "builds_on": [
+        {
+          "map": "GT_Foundations",
+          "why": "Reuse endpoint pairs as an explicit connection record."
+        },
+        {
+          "map": "SoftBodies_Cloth_Physics",
+          "why": "Reuse constraints that transmit consequences."
+        },
+        {
+          "map": "SpeculativeComputation_Rhizome_Network",
+          "why": "Reuse separating an altered connection from an altered spatial route."
+        }
+      ],
+      "adds": "Compose a body through positions and relations, distinguishing a drawn bond from a constraining relation.",
+      "carries": "The learner’s own revised body record, including its connection change.",
+      "status": "needs_revision",
+      "review": "The current tutorial follows catalogue docking and describes relation editing only as a future experiment. It does not teach the proposed joint/endpoint edit, dynamic-body comparison or retained learner record needed by the final hall.",
+      "tutorial_sha256_before": "0ee3296eadaa2756474dca21480ce7c81df1a16e3f781cdda54733d89d93fc31",
+      "tutorial_sha256_after": "0aac52e1a349f9ece2ea39b4169ad97e3c57e8ddc8d11b3978ee70d3df400667"
+    },
+    {
+      "map": "PostCrisis_Synthesis",
+      "subjects": [
+        "Versioned records",
+        "Recoverable arrangements",
+        "Counts and memory",
+        "Future revisions"
+      ],
+      "focus": "Keep an earlier and a revised assembly with an optional note, reconstruct both and name what the record leaves out of the original gesture.",
+      "builds_on": [
+        {
+          "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "why": "Carry the same learner-authored positions and connections."
+        },
+        {
+          "map": "SpeculativeComputation_Collective_Knowledge",
+          "why": "Reuse source/version distinctions and the limits of retained history."
+        },
+        {
+          "map": "Point_Zero",
+          "why": "Return to a running count while distinguishing it from remembered contents."
+        }
+      ],
+      "adds": "Choose what a later return can recover and carry an unfinished construction into independent work.",
+      "carries": "Two recoverable arrangements and a chosen next body or passage.",
+      "status": "needs_revision",
+      "review": "The text teaches a six-line scripted ledger and honestly says it saves no visitor decisions. It does not yet return the learner’s body, retain versions or teach reconstruction; that ending remains a proposed construction, not delivered persistence.",
+      "tutorial_sha256_before": "a9b45074b6faf25dbdc2b54edb6a80b80a1210de8fd85f2224d4c563b5826c12",
+      "tutorial_sha256_after": "c98b768394fbef0ea9b63e1b37e695ed1e08570840e69cdda060846b44c165ac"
+    }
+  ]
+}

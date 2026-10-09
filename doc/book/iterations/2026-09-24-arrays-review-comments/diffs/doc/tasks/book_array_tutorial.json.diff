@@ -1,0 +1,350 @@
+--- before/doc/tasks/book_array_tutorial.json
++++ doc/tasks/book_array_tutorial.json
+@@ -141,9 +141,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_3D"
+       ],
+@@ -158,9 +158,12 @@
+       "proposal": "Replace the two sentences with: \"Push the left stick forward and you travel where the left controller points: aim it upward to climb, downward to descend, level to cross the enclosure. Push the stick sideways to slide across that aim.\" Keep \"Release the controls to hover.\"",
+       "evidence": "commons/movement/museum_flight_provider.gd:22-26; commons/movement/museum_flight_box.gd:30-39 (flight_velocity, desktop_velocity), :105 (sign text).",
+       "review": "amended: Quote exact (Tutorial_3D/final.md:9). Code confirmed: museum_flight_provider.gd:22-26 builds the VR velocity from the left controller's global_basis and its \"primary\" stick and passes no vertical term (flight_velocity's `vertical` defaults to 0.0); museum_flight_box.gd:31-33 `direction = view.x*axes.x - view.z*axes.y`, :30 \"Neutral input hovers\"; WASD/Space/Ctrl exist only in desktop_velocity :35-39; the sign at :105 already carries both lines, so a desktop walker loses nothing. One mapping in the proposal is wrong: with the stick forward you travel along the controller's own forward (-view.z), so pitching it up climbs and down descends, but \"tilt it sideways to drift\" is not what the code does - rolling the controller leaves its -Z unchanged; sideways travel comes from pushing the stick sideways (view.x*axes.x, the controller's right).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced desktop keys in the chapter with the actual VR mapping: forward stick follows controller aim; sideways stick moves across that aim. Rolling the controller is not a sideways command. The existing museum sign retains desktop instructions.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:03.310Z"
+     },
+     {
+       "id": "book_array_tutorial.002",
+@@ -169,9 +172,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Array"
+       ],
+@@ -186,9 +189,12 @@
+       "proposal": "After that sentence, once the headset check is clean, add: 'Something else is writing here. The small sphere wandering the floor reads the room's own grid the way the tables read theirs, and every few seconds it takes a cube or copies one, without asking. Watch a cell it has visited. Which record would have to change for the tables to know?'",
+       "evidence": "commons/maps/Array/map_data.json (15,17); commons/hazards/gridagent/grid_agent_base.gd:21, :63, :66-92, :188-200, :209-214, :292-299, :621-623, :635-640; commons/hazards/gridagent/grid_operations.gd:478-487; commons/hazards/gridagent/evolution_tiers.gd:86; commons/grid/GridStructureComponent.gd:762; commons/grid/GridInteractablesComponent.gd:669, :957-1043; commons/scenes/endless_museum.gd:11051-11084, :11386-11403.",
+       "review": "amended: Quote exact (Array/final.md:45). Map confirmed: (15,17) `gridagent:copy` on a floor whose rows 1-21 are all \"1\". Code confirmed: grid_agent_base.gd:21 operation_interval 2.0; :66-92 finds the nearest GridStructureComponent (grid_interface.gd:7-37) and starts WANDERING; :188-200 every interval 30% FEEDING else WORKING (can_feed is true because GridStructureComponent.gd:762 has remove_cube_at); :209-214 feeding removes the nearest occupied cell within 3 cells; :292-299 copies a cube to a random adjacent cell, six directions incl. Up (grid_operations.gd:478-487); captions :621 \"Searching...\" / :623 \"Consuming (XP: %d)\". Sequence-note quote confirmed in array_tutorial.json deferred_reason; artifact_roles --brief lists it secondary. Two corrections. (1) The sphere is light blue, not cyan: GridInteractablesComponent.gd:1036-1043 sets the tier and set_tier (:635-640) replaces the CYAN default (:63) with EvolutionTiers.get_color(TIER_1_COPY) = Color(0.5,0.8,1.0) (evolution_tiers.gd:86). (2) The museum question can be narrowed from code: Array's map_info.museum.simulation.grid is true, so endless_museum.gd:11051-11084 stands the REAL grid_system.tscn in the hall (its GridInteractablesComponent parses `gridagent:` at :669 and :957-1043), the disarm pass :11386-11403 matches the script path (\"hazard\") but only switches off Area3D monitoring, and the agent owns no Area3D, so its wander/feed/copy loop runs in the museum against floor cubes whose tops are flush with the deck (:11057-11059). The headset check is therefore about holes in the walk; if it opens them, the map or the disarm pass is the fix and the passage should wait.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nDeveloped the changing floor, as the author requested. The blue sphere now writes once per operation into the hall’s real grid. Entry-side PAUSE / RESUME and RESTORE FLOOR controls expose those changes. Perimeter/threshold cells and the existing Molnár pad are protected. A consumed exposed cell reveals the surface one metre below; an actual museum body descends onto it. Restore waits for an occupying body. Added this encounter to final.md and the primary reading order. Headset traversal, recovery and comfort still need observation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:05.357Z"
+     },
+     {
+       "id": "book_array_tutorial.003",
+@@ -197,9 +203,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Tiling_Walls"
+       ],
+@@ -214,9 +220,12 @@
+       "proposal": "Change to: 'Near the far end, on the left, past ONE EXCEPTION, the same pattern reaches a narrow part of the museum wall.'",
+       "evidence": "commons/maps/Tutorial_Tiling_Walls/map_data.json interactables (20,25) 'wall_exception' on the x=20 boundary (registry tiling_principles.json: 'two floor cells on the east boundary'); spawn is a bare 's' at (10,1), commons/grid/GridSpawnComponent.gd:247-263 faces the interactables centroid (15,20) with atan2(-x,-z) under 'default forward = -Z', so the visitor faces +Z and +X is on the left; commons/grid/GridUtilitiesComponent.gd:366 maps grid x to world x and rows to world z unmirrored; commons/artifacts/regularity/tiling_principles.gd:18 puts the odd fields, including ONE EXCEPTION (i=5), at x=+6.7, the same side.",
+       "review": "kept: Quote exact (Tutorial_Tiling_Walls/final.md:25). Map: (20,25) `wall_exception:0:0:1#plinth:0#pin:1`, boundary opened at (20,25) and (20,26), map_info.museum.turning_wall side \"east\"; registry tiling_principles.json says \"two floor cells on the east boundary\". Spawn `s` at (10,1); GridSpawnComponent.gd:247-263 faces the interactables centroid (15,20) with atan2(-dx,-dz), yaw about -165 deg, forward about (0.25,0,0.97): the visitor faces +Z, and with right = forward x up = -X, east (+X) is on the LEFT. GridUtilitiesComponent.gd:366 maps grid x to world x and rows to world z unmirrored; tiling_principles.gd:18 puts odd fields at x=+6.7, so ONE EXCEPTION (i=5) stands at local (+6.7,+6), world about (16.7,21): same side, four rows before the hinge. The museum agrees: _prepare_turning_wall (endless_museum.gd:25007-25019) takes the wall cells at x = w-1, w (the high-x edge) and z = start_z + VESTIBULE_H with rows increasing along the walk, so a visitor entering from the vestibule walks +Z there too and has east on the left. Anchoring on ONE EXCEPTION is direction-free and real help. Note: index 7 edits the same sentence; if both land, use the merged sentence given there.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReplaced the mistaken right-hand cue with the direction-free landmark beyond ONE EXCEPTION. This is the same sentence corrected for image stretching in comment 008.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:07.404Z"
+     },
+     {
+       "id": "book_array_tutorial.004",
+@@ -225,9 +234,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Array"
+       ],
+@@ -242,9 +251,12 @@
+       "proposal": "Change to: 'Find the row of four numbered positions, each label hanging over its cube. A second line of four, its numbers on plates at the cubes' feet, stands across the hall counting the other direction; the row is enough for now.'",
+       "evidence": "commons/maps/Array/map_data.json (3,6) and (15,5); algorithms/arrays/row_3_x.gd:58-66; algorithms/arrays/column_3_z.gd:4, :34-37, :102; tools/artifact_roles.py --brief --map Array.",
+       "review": "amended: Quote exact (Array/final.md:9). Map confirmed: (3,6) `row_3_x:0:0` and (15,5) `column_3_z:0:0#notation:plate`; column_3_z.gd:4 and :102 (count default 4): four labelled cubes along Z; artifact_roles lists column_3_z secondary and the chapter never names it. Two lines of four, twelve cells apart in the visitor's first view, so the defect is real. But the why misdescribes them: the row is not plated - row_3_x.gd:58-66 hangs a billboard \"[i]\" Label3D on each cube (which is why the chapter later says 'In the row, the cube took its label with it'); only the column carries `#notation:plate` (column_3_z.gd:34-37: the address stays behind when the cube goes). That difference is what tells the two lines apart at a glance, so use it.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nDistinguished the row’s overhead labels from the second line’s number plates at the cubes’ feet. The secondary column remains available for comparison.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:09.459Z"
+     },
+     {
+       "id": "book_array_tutorial.005",
+@@ -253,9 +265,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Array"
+       ],
+@@ -270,9 +282,12 @@
+       "proposal": "Change to: 'Press DEPTH until it reads 1 / 4, then RESET: the study arrives already disturbed.'",
+       "evidence": "commons/artifacts/molnar_cube_study/molnar_cube_study.gd:12 default amount Vector3(0.22,0.32,0.18); :68-69 cycle_layers goes 4 to 1 in one press; :71-74 reset_order; :165-166 labels 'DEPTH %d / 4' and 'RESET'; commons/artifacts/registry/molnar_cube_study.json interactions name DEPTH and RESET.",
+       "review": "kept: Quote exact (Array/final.md:51). molnar_cube_study.gd:12 default amount Vector3(0.22,0.32,0.18) and :153 initialises each slider to amount[i], so the frames are displaced on arrival; :68-69 cycle_layers goes 4 to 1 in one press; :71-74 reset_order zeroes the amounts and the sliders; the button reads \"DEPTH  %d / 4\" (format set at :85 - :165 creates that label empty and :166 the \"RESET\" label, so the cited :165-166 is one line short of the format string); registry interactions name DEPTH and RESET. The proposal is exact and short: a headset visitor gets two named buttons instead of two verbs.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed the actual starting state and the DEPTH 1 / 4 and RESET controls. The Molnár study arrives displaced; the reader now has a concrete way to establish the ordered comparison.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:11.507Z"
+     },
+     {
+       "id": "book_array_tutorial.006",
+@@ -281,9 +296,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_3D"
+       ],
+@@ -298,9 +313,12 @@
+       "proposal": "Reorder into one pass: 'At the console, select an address and read it. Walk through the doorway, rise to the marker and collect its cube by contact.' Then the hover paragraph (now before the figure), with 'The table still says zero' becoming 'Outside, the console now says zero for that address'. Then: 'Descend and leave by the doorway. The console reads zero. The other cubes have not slid into the vacancy.' followed by the values[y][z][x] code and the figure.",
+       "evidence": "commons/artifacts/regularity/array_flight_lab.gd:26, :57-60; commons/movement/museum_flight_box.gd:19-22, :127-133; commons/movement/museum_flight_provider.gd:15-19; commons/artifacts/regularity/room_tools.gd:34-43 (panel yaw 180).",
+       "review": "amended: Quote exact (Tutorial_3D/final.md:23). array_flight_lab.gd:26 console at local (3.5,1.2,-6.9); museum_flight_box.gd:19-22 contains_point requires |z| < 6, :127-133 doors on both z faces; museum_flight_provider.gd:15-19 zeroes velocity and deactivates outside a zone - so 'Return to the console' does send the visitor down, out through a door and back in for the hover. Two more facts sharpen the fix. Kit.panel (room_tools.gd:34-43) yaws every panel 180 deg, so the console faces the entrance side and shows its back to anyone inside the glass: it cannot be read while hovering, and the figure's console strip is a separate crop. And the readout shows the SELECTED address, refreshed by _removed (:57-60) the instant the cube leaves, so the natural single pass is select first, then fly, collect, hover, and read the zero on the way out - the chapter's own first paragraph already has the reader pressing X+/Y+/Z+. The proposal's order would leave 'The table still says zero' referring to something not yet read.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nReordered the visit: select an address outside, fly to its cube, collect it, hover in the vacancy, then descend and return to read zero. The console inset is identified as a separate view outside the enclosure; the prose no longer implies it can be read while hovering.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:13.553Z"
+     },
+     {
+       "id": "book_array_tutorial.007",
+@@ -309,9 +327,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Disco"
+       ],
+@@ -326,9 +344,12 @@
+       "proposal": "Change to: 'The console controls this visual clock. Six metres to the right as you came in, the sequencer has another.'",
+       "evidence": "commons/maps/Tutorial_Disco/map_data.json: disco_controls (9,4), step_sequencer (3,5), standalone_disco (9,13), spawn (9,1), row-0 opening x 8-10, settings.cube_size 1; commons/grid/GridUtilitiesComponent.gd:366; commons/grid/GridSpawnComponent.gd:247-263.",
+       "review": "amended: Quote exact (Tutorial_Disco/final.md:29). Map confirmed: disco_controls (9,4), step_sequencer (3,5), standalone_disco (9,13), spawn (9,1), entrance opening at x 8-10 of row 0; settings cube_size 1, so six cells are six metres (GridUtilitiesComponent.gd:366). 'Beside it' is wrong - but 'Across the entrance' is wrong too: the console stands ON the entrance's axis (x=9, in line with the opening) and the sequencer is six metres to the west of it, not on the far side of the doorway. Walking in along +Z (the map-tester spawn faces the centroid, mostly +Z; museum halls run +Z from the vestibule, endless_museum.gd:25017), west is on the right (right = forward x up = -X).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nLocated the sequencer near the entrance, six metres to the right of the console as one enters. Replaced the misleading claim that it stands beside the console.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:15.617Z"
+     },
+     {
+       "id": "book_array_tutorial.008",
+@@ -337,9 +358,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Tiling_Walls"
+       ],
+@@ -354,9 +375,12 @@
+       "proposal": "Change the sentence to: 'Near the far end, on the left, past ONE EXCEPTION, the same image reaches a narrow part of the museum wall, stretched to the sheet's tall face so that each triangle stands more than twice as tall as it is wide.'",
+       "evidence": "commons/artifacts/regularity/wall_exception.gd:38, :89; commons/scenes/em/em_detail.gd:141; commons/artifacts/regularity/room_tools.gd:55-60; commons/artifacts/regularity/tiling_principles.gd:28, :51-57.",
+       "review": "amended: Quote exact (Tutorial_Tiling_Walls/final.md:25). wall_exception.gd:38 face Vector2(1.94, WALL_HEIGHT-0.06) with WALL_H 4.5 (em_detail.gd:141) gives 1.94 x 4.44 m; room_tools.gd:55-60 textured_plane is a QuadMesh with default 0-1 UVs, so the whole texture spans the quad; :89 the sheet borrows surfaces[5]'s texture; tiling_principles.gd:28 panels are 5 x 5 m and :51-57 the texture is 256 px in 32-px tiles, 8 x 8 - squares of 62.5 cm on the panels become 24 x 55 cm on the sheet, a 2.29 stretch. Claim confirmed and worth a clause, since the chapter's own point is that the receiver changes what is read. But 'every triangle stands more than twice its height' is muddled (each sheet triangle is about 0.9x the panel triangle's height and 0.4x its width; what is true is that it is 2.3x taller than it is wide), and the sentence is the one index 2 edits, so give one merged sentence.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nNamed the stretch caused by the tall wall sheet: its triangles are more than twice as tall as they are wide. Preserved the chapter’s argument about the receiver changing the image; merged with the orientation repair in comment 003.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:17.667Z"
+     },
+     {
+       "id": "book_array_tutorial.009",
+@@ -365,9 +389,9 @@
+       "effort": "half-day",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Tiling_Walls"
+       ],
+@@ -382,9 +406,12 @@
+       "proposal": "Recapture two-turns.png (Tutorial_Tiling_Walls), fixed-addresses-changing-values.png and triangle-combinations.png (Tutorial_Disco) with MushroomHand.show_desktop_count off, or from a lane where the HUD is not built, and republish the three composites at the same paths. Hall for this task: Tutorial_Tiling_Walls and Tutorial_Disco.",
+       "evidence": "doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png, doc/book/iterations/2026-09-23-disco-separate-clocks/fixed-addresses-changing-values.png, doc/book/iterations/2026-09-23-disco-super-triangle/triangle-combinations.png (viewed, HUD present); doc/book/iterations/2026-09-23-array-molnar-volume/array-departures.png and doc/book/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png (viewed, clean); commons/managers/MushroomHand.gd:33, :89, :306-333.",
+       "review": "amended: Quote exact (Tutorial_Tiling_Walls/final.md:33). Viewed all five PNGs: two-turns.png, fixed-addresses-changing-values.png and triangle-combinations.png carry 'mushrooms ····· [F]' bottom-left in every frame; array-departures.png and an-address-you-can-enter.png do not. Two corrections. The overlay is not the hand-inventory HUD: it is MushroomHand's desktop count label (commons/managers/MushroomHand.gd:306-333, text \"mushrooms  %s%s   [F]\"), built only when show_desktop_count is true (:33, default true) and not in VR (:89) - so a headset visitor never sees it, which is exactly why it does not belong in the book. And two of the three figures belong to Tutorial_Disco (final.md:17 and :25), so the task spans two halls. Naming the switch makes the recapture reproducible. I did not run Godot; effort L stands (three captures plus three composites).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nRecaptured all three affected figures in the working Godot museum with the desktop-only MushroomHand count hidden by the capture probes. Published clean native composites at stable book paths; preserved historical originals. The wall and disco runs passed their inherited controls/collision/capture checks.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:19.714Z"
+     },
+     {
+       "id": "book_array_tutorial.010",
+@@ -393,9 +420,9 @@
+       "effort": "10min",
+       "skill": "verify",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Disco"
+       ],
+@@ -410,9 +437,12 @@
+       "proposal": "Change to: 'The remainder returns here as `step % grid_width`, and this floor is twelve wide.'",
+       "evidence": "commons/context/discofloor/DiscoSequencerBridge.gd:67 _pulse_column(step % disco_floor.grid_width); commons/artifacts/regularity/disco_controls.gd:86 step_index % floor_node.grid_width; commons/maps/Tutorial_Disco/map_data.json token 'standalone_disco#width:12'.",
+       "review": "kept: Quote exact (Tutorial_Disco/final.md:51). Confirmed: DiscoSequencerBridge.gd:67 `_pulse_column(step % disco_floor.grid_width)`; disco_controls.gd:86 `pulse_remaining[step_index % floor_node.grid_width]`; grid_width defaults to 8 (StandaloneDiscoFloor.gd:19) and becomes 12 only through the map token `standalone_disco#width:12` (:400); sixteen steps is step_sequencer.gd:22. `step % 12` appears nowhere in the source; `step % grid_width` is what both call sites do. The surrounding flash-while-held claim also holds: auto_start (:29, :69) leaves is_running true, disco_controls only disables the floor's _process (:43, :56) and HOLD toggles the console's own `running` (:105-107), so both pulse paths fire while the pattern is held.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nUsed the exact source expression step % disco_floor.grid_width. The floor is twelve columns wide here; the width belongs to the configured floor rather than a hard-coded twelve in the bridge.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:21.761Z"
+     },
+     {
+       "id": "book_array_tutorial.011",
+@@ -421,9 +451,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Tutorial_Disco"
+       ],
+@@ -438,9 +468,12 @@
+       "proposal": "Change to: 'Keep the empty pattern and turn on one cell.'",
+       "evidence": "commons/audio/sequencer/sequencer_ui.gd:183 '_pattern_button.selected = 0  # Default to \"empty\"'; the Tutorial_Disco token carries only '#sound_preset:90s_house', no pattern_preset (commons/maps/Tutorial_Disco/map_data.json).",
+       "review": "kept: Quote exact (Tutorial_Disco/final.md:35). sequencer_ui.gd:183 selects item 0, \"empty\", and :72-78 initialises every cell false; step_sequencer.gd:455-457 and :472-473 load a pattern preset only when the config carries `pattern_preset` or a shorthand KEY (:460-461 iterates keys, so the value \"90s_house\" is never seen by the alias table at :495-554), and the Tutorial_Disco token carries only `sound_preset:90s_house` - the grid arrives empty. 'Keep' spares a headset visitor the 2D dropdown inside the Viewport2Din3D (step_sequencer.gd:247-252).",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nSaid that the sequencer starts with an empty pattern, then invited the first cell. The text no longer sends a visitor into the dropdown to select its existing state.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:23.807Z"
+     },
+     {
+       "id": "book_array_tutorial.012",
+@@ -449,9 +482,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-24",
+       "map_refs": [
+         "Array"
+       ],
+@@ -466,9 +499,12 @@
+       "proposal": "Change the alt text to: '...then all four layers seen at an angle.'",
+       "evidence": "doc/book/iterations/2026-09-23-array-molnar-volume/array-departures.png panel '03 / Four layers - depth' is an oblique view (viewed).",
+       "review": "kept: Quote exact (Array/final.md:57). Viewed array-departures.png: panel '03 / Four layers · depth' is a three-quarter view of the 4x4x4 volume, not a profile. 'seen at an angle' is right.",
+-      "notes": "",
+-      "source": "one reader + one skeptic (Claude workflow)",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 24 September 2026\nChanged the Molnár illustration’s alt text to describe all four layers seen at an angle, matching the oblique view.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-arrays-review-comments/index.html",
++      "source": "one reader + one skeptic (Claude workflow)",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-24",
++      "updated_at": "2026-09-24T19:06:25.852Z"
+     }
+   ]
+ }

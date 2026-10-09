@@ -1,0 +1,16 @@
+--- before/algorithms/randomness/simplexnoise/pair_study.gd
++++ algorithms/randomness/simplexnoise/pair_study.gd
+@@ -57,7 +57,12 @@
+ 
+ func toggle_view() -> void:
+ 	plate=not plate
+-	for work in pair:work.apply_grid_config({"readout":"plate" if plate else "relief"})
++	# VIEW changes the current samples' expression, without restoring a placement seed.
++	for work in pair:
++		work.readout = "plate" if plate else "relief"
++		work.noise_field.readout = work.readout
++		work.noise_field.update_noise_field()
++		work._refresh_readout()
+ 	refresh()
+ 
+ func match_pair() -> void:

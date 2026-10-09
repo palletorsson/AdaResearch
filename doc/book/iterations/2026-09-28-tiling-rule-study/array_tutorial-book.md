@@ -1,0 +1,312 @@
+# array_tutorial: the chapters
+
+## Array
+
+*Array*
+
+### The same cube, counted
+
+This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company: four copies, a metre apart, with a number above each one.
+
+
+Look for the row with labels hanging above the cubes. A second line across the hall counts another direction, with its numbers on plates at the cubes’ feet.
+
+Approach the cube marked [2]. It disappears on contact, taking its label with it. In the accompanying table, its value changes from one to zero. The cube marked [3] stays where it was. The row has a gap, and the count has not closed around it.
+
+An array keeps values in an indexed sequence. The index names a slot; the value is what we store there. Slot two still exists. Its value is now zero, which this program uses to record that the cube has gone. The remaining entries keep their numbers.
+
+The row begins in a loop. These lines from its builder create and place the copies; the surrounding code gives them labels and connects their collection:
+
+```gdscript
+array_data = [[1, 1, 1, 1]]
+for i in range(4):
+    var cube_instance = pickup_cube_scene.instantiate()
+    cube_instance.position = Vector3(i * 1.0, 0, 0)
+    add_child(cube_instance)
+```
+
+`range(4)` supplies 0, 1, 2, 3. The indented instructions run once for each number, with `i` changing each time. Four cubes, but the last address is three. Multiplying `i` by one metre gives each copy its place along X. The same instruction makes the many by changing what it receives.
+
+Look at the double brackets. The inner list holds four values; the outer list holds that one row. This is already an array inside an array. `array_data[0][i]` selects row zero, then entry `i` within it. In a moment, the grid will give us more rows to choose from.
+
+The table has recorded your collection as an absence. It keeps no destination for the cube.
+
+
+In the square grid, each address stands on a small plate at its cube’s feet. Find [1, 2] and approach. The cube disappears, but its plate remains. Its entry in the table is now zero; the floor still names the empty place.
+
+Two indices distinguish positions along two directions. This grid writes them as [x, z] and stores the value as `grid_data[x][z]`: choose one row of values, then one entry inside it. Face the accompanying table. Its X indices run down the rows and its Z indices across the columns. The plate [1, 2] names the second row and third column, because both counts begin at zero. At [2, 1], the same numbers exchanged take you somewhere else.
+
+The grid adds a way of locating values, rather than a new kind of cube. A zero here means absence under this particular rule. In another array it could mean a measured quantity, a silent beat or a colour. The data structure does not supply that meaning on its own.
+
+
+Turn back to the row. Its missing cube took its label with it. In the grid, the plate still names the slot. The data preserves both addresses. Whether you can find them again also depends on where we put their names.
+
+An empty place might be reserved for someone, left for a rest, or waiting for something to arrive. Here, the zero cannot distinguish those possibilities. The record keeps the address, but none of those reasons. They would need another value or another record.
+
+The regular spacing helps you find a slot, but the address and the spacing are different decisions. We could place the same indexed cubes at unequal distances. An array needs a way to distinguish its entries; it does not require them to look alike, stand straight or remain occupied.
+
+
+A light-blue sphere moves low over the floor. Wait near it and watch the cells beneath it. A copy can rise into your route; a consumed cell leaves a hollow. There is still a surface a metre below. What looked like an address on a diagram has become a place where your body can drop.
+
+The sphere is writing into the hall’s own grid. Its label names the last cell it copied or consumed. The small pickup tables keep their separate records: collecting their cubes and changing this floor are different acts. Here the program changes both what you see and what supports you.
+
+Near the entrance, PAUSE / RESUME holds the floor where it is. Pause after a change and walk around it. The gaps and raised cells remain, while the perimeter, thresholds and the transparent study’s floor pad stay outside the sphere’s reach. RESTORE FLOOR returns the changed cells to their starting arrangement, waiting wherever a body occupies one. The sphere stays paused until you release it again.
+
+An empty slot was something we could point to. Underfoot, absence asks something of our balance. The address remains available to the program even when it no longer offers our feet a place to rest.
+
+![The hall’s floor after cells have been copied and consumed.](/book-review/doc/book/figures/Array/museum-floor-changed.png)
+
+![The same floor after restoration, seen from the same position.](/book-review/doc/book/figures/Array/museum-floor-restored.png)
+
+*The same part of the working museum, seen from standing height before and after RESTORE FLOOR. These views hold a supplied set of copy and consume operations for comparison.*
+
+
+We have repeated the cube, but we do not have to repeat its fate. At each address, another decision becomes possible.
+
+The transparent study takes its starting point from Vera Molnár’s *(Des)Ordres*: concentric squares disturbed within a repeated arrangement.[^Array--molnar] Here the squares have become nested cubes. The frames arrive already displaced. Press DEPTH until it reads 1 / 4, then RESET. Face it squarely, then move to one side. The drawing has depth. Lines that seemed to meet separate as you walk.
+
+Turn a little. Translate a little. Change the scale. These are the operations we brought from Transformation, now applied throughout an array. Each nested cube has its own assigned departures; the three controls let you increase or reduce them. Returning a control to the same setting brings back the same arrangement. You can compare a change without losing it to another roll of the dice.
+
+Watch one of the small grey points. Its surrounding frames can drift away, but the point stays at the indexed site. The address gives us somewhere to return and something to disagree with. How far can the frames depart before you lose the place you were following?
+
+![One layer of ordered nested cubes, the same sites with translation, rotation and scale, then all four layers seen at an angle.](/book-review/doc/book/iterations/2026-09-23-array-molnar-volume/array-departures.png)
+
+*The same working Godot artifact supplies these three views. Sixteen visible sites become sixty-four when all four layers are shown; each holds four nested cubes. An Ada Research spatial interpretation after Molnár.*
+
+Add the other layers. Through the transparent faces, nearby edges cross distant ones. A small displacement that was easy to follow alone can disappear among the others. More copies give us more places for difference, and more work to distinguish them. Their transparency lets us see through the structure without promising that we can read it.
+
+The rule has admitted variation, but it has also set its limits: how far to move, how much to turn, which sizes remain possible. We can open those ranges in the program. Each additional site will still ask for storage, and the machine must draw what we ask it to show. The invitation to continue has a material cost.
+
+
+Carry forward two separate questions: where is the slot, and what can happen at it? We have looked through layers. In the next hall the copies rise above your head, and you can enter their arrangement. To visit those layers, your body will need a permission that the array itself cannot give.
+
+[^Array--molnar]: Vera Molnár, *(Des)Ordres*, 1974. The [Digital Art Museum](https://dam.org/museum/artists_ui/artists/molnar-vera/des-ordres/) describes the disruption of concentric squares within a repeated structure. The cubes, depth and controls here are our interpretation, not a reconstruction of her drawing or algorithm.
+
+---
+
+## Tutorial 3D
+
+*Tutorial_3D*
+
+### Fly into the third index
+
+How do you reach an address above your head?
+
+In the last hall, you could walk around the nested cubes. Here the familiar pickup cubes are spaced far enough apart for your body to move between them. Four across, four upwards, four deep: sixty-four possible encounters.
+
+
+At the console beside the glass enclosure, press Y +. A transparent marker moves up one layer. The X +, Y + and Z + buttons each change one index; after three comes zero again. Set the address to [1, 2, 0], the place shown in the illustration below. Look for its marker among the cubes. It is above the ground layer. You have named a place you cannot yet walk to.
+
+Walk through the ground-level opening. Inside this frame you can fly. Push the left stick forward to travel where the left controller points: aim upwards to climb, downwards to descend, level to cross the enclosure. Push the stick sideways to move across that aim. Release the controls to hover. The permission belongs to this enclosure; descend to either ground-level doorway to leave it.
+
+Rise beside a column, then move between layers. The cubes are spaced 2.4 metres apart. There is room for a body between neighbouring samples. An indexed volume need not be a solid block.
+
+The gap is not an extra entry. You can pass between two named places without arriving at another. The array gives us a way to address its cubes; it does not number every position your body can occupy.
+
+The placement extends the earlier row's operation along three directions:
+
+```gdscript
+cube_instance.position = Vector3(x * spacing, y * spacing, z * spacing)
+```
+
+An index becomes a position through this multiplication. Changing the spacing would change the distances you travel without adding an entry. Changing the number of entries would be another operation.
+
+Find the cube at the address you selected before entering. Approach and collect it by contact.
+
+Hover where the cube used to be. Its label has gone; the transparent marker remains. Release the controls and stay a moment. Above and below you, the other layers keep their places.
+
+Descend and leave through the ground-level opening. Back at the console, read the same selected address. Its value is now zero. The other cubes have not slid into the vacancy. This small record writes collection as an absence:
+
+```gdscript
+values[y][z][x] = 0
+```
+
+Zero marks the cube’s departure. It stayed zero while you hovered there: your body could occupy the place without becoming part of this record.
+
+The row inside an array has gained another enclosing list. Read `values[y][z][x]` from left to right: `values[y]` selects one layer containing rows; `[z]` selects a row in that layer; `[x]` selects its entry. The display names coordinates in x, y, z order, while the storage opens them in y, z, x order. Those conventions must be connected explicitly. Neither a list nor a number arrives with a direction built into it.
+
+
+![The selected cube at address 1,2,0 before collection and the same transparent marker after it has gone, with the console changing from value 1 to value 0.](/book-review/doc/book/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png)
+
+*The same address before and after arrival. The cube and its label leave; the selection marker remains. The console inset is a separate view of the readout outside the enclosure; it is read on returning to the doorway.*
+
+The third index has extended what we can address. Flight has extended what we can reach. Back on the ground, the next array will lie underfoot. Its entries will receive a small black-and-white shape, repeated across a surface.
+
+---
+
+## Tutorial Tiling Floor
+
+*Tutorial_Tiling_Floor*
+
+### A rule underfoot
+
+How much floor can one small decision make?
+
+The cubes gave us addresses and room to move between them. Back on the ground, the addresses receive a motif: a square divided diagonally into black and white. Six fields lie underfoot. Before reading their names, find two that seem related. Keep that resemblance in mind as you walk between them.
+
+
+At the entrance, two four-by-four samples sit beside a short instruction. For now, both repeat the same tile. Press APPLY / UNDO. The left sample holds still; on the right, each address receives an extra turn. A figure crosses the joints. No larger tile has been added.
+
+The larger field beside the desk changes with it. An orange outline marks the same sixteen addresses inside a field of 256. The instruction has not grown longer. It is being asked again at more places.
+
+NEXT TILE moves a small outline through the samples. Beside it, the rule works out what happens at that address. At [1, 0], the added turn is one quarter-turn; at [2, 0], it is two. Undo the instruction and those differences disappear together. NEXT RULE offers another small alteration: exchange black and white, reflect a column, shift a row. ONE EXCEPTION lets the change stay at one address. A local edit and a rule repeated everywhere need not have the same reach.
+
+![The four-by-four rule study inside the museum, with unchanged and changed samples beside the instruction.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/floor-rule-after.png)
+
+*The same tile before and after adding an address-dependent quarter-turn. The marked address can be followed through all sixteen places. The larger floor field uses the same calculation.*
+
+Carry one of these changes into the six comparison fields. Begin at TRANSLATE. Follow the diagonal through a row. The same square returns at the next address with the same orientation. A single tile has become a field through placement.
+
+At ALTERNATE, neighbouring tiles exchange black and white. At QUARTER TURN, the tile's orientation advances with its address. REFLECT reverses it in alternate columns. SHIFT ROWS displaces every other row by half a tile. Walk between these fields before trying to name the larger shapes you see. A chevron or a band may belong to several tiles together. The unit that you notice need not be the unit stored by the program.
+
+At the console for the six fields, press TURN MOTIF. The source triangle turns ninety degrees in all six fields. Their arrangement rules remain in place. Return to the two fields you first compared. Does the resemblance survive? One changed source can have different consequences under different rules.
+
+This is one of the instructions making those differences:
+
+```gdscript
+if rule == 2: rotation += (cx+cy)%4
+```
+
+Here `cx` and `cy` count columns and rows in the tile image. They name directions across that image, which can lie on a floor or stand on a wall; `cy` does not mean height in the room.
+
+The `%` sign gives the remainder after division. As these non-negative counts increase, `%4` returns 0, 1, 2, 3, then 0 again. You met that return at the flight console: after index three, the selection came back to zero. Here the remainder chooses a quarter-turn. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn. Keep this way of returning in mind when repetition begins to sound.
+
+Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours.
+
+![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
+
+*The six images used by the floor artifact, shown face-on for comparison. The source orientation is the same in all six; EXCEPTION is switched on in the last field. The little square at the top is their source motif.*
+
+These are flat images on the floor. Their dark triangles are not holes, and the apparent ridges do not lift your feet. Walk across a boundary while watching it. The picture can divide a space that the collision surface keeps continuous. Your eye can find a ridge where your foot finds no step.
+
+
+Black and white already make figure and ground. We have limited the palette to make the arrangement easier to compare; we have not removed perception from the experiment.
+
+Turn the exception off, then on once more. It returns at the same address. A common source makes repetition economical; here, a separate switch gives one copy an extra turn. The motif has stayed the same. What differs is the instruction attached to that place. First, let the same six rules stand up.
+
+---
+
+## Tutorial Tiling Walls
+
+*Tutorial_Tiling_Walls*
+
+### The same rule stands up
+
+What changes when a floor stands up?
+
+The same six black and white studies have become walls. Walk along the central aisle. A field that was beneath your feet now faces you, rising well above your head.
+
+
+Near the entrance, a tall chart resembles the one used to test eyesight. Its marks are patterns. One large sample stands above rows of three, five, seven and nine, each row smaller than the last. Every mark contains the same four-by-four arrangement you met at the desk.
+
+Cycle NEXT RULE beside the chart. All the marks change together, and the desk shows the instruction responsible. APPLY / UNDO returns them to plain repetition. Stay with one rule and move closer, then back. Where can you still follow an individual turn? Where do the squares begin to gather into texture? The instruction remains exact at a distance where its work becomes difficult to read.
+
+![A pattern eye chart inside the wall hall, repeating one four-by-four arrangement at five decreasing sizes.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/wall-eye-chart.png)
+
+*Twenty-five copies of the same sample. A new rule changes them together; moving your body changes how much of each one you can distinguish.*
+
+Now find TRANSLATE and QUARTER TURN. Approach until one square becomes easy to distinguish, then step back until several squares begin to make another figure. The source has not acquired more detail. Your distance changes which relations are easiest to see.
+
+The six panels use the same image generator as the previous floor. Each is five metres across and five metres high, with a solid backing. TURN MOTIF rotates the source in all six. EXCEPTION changes one cell in the field that carries that name. Return to the pair you followed on the floor. You can now stand before the figures you walked across.
+
+Behind both versions, the program assigns each pixel one of two values:
+
+```gdscript
+image_.set_pixel(x,y,Color.BLACK if black else Color.WHITE)
+```
+
+The wall does not introduce another tiling rule. It gives the image another orientation, scale of encounter and physical support. A black triangle on this surface is still a colour value. The backing, with its separate collision, is what stops your body.
+
+Walk beside the reflected field. The diagonals change their apparent angles as you pass. The stored image stays fixed. Perspective is doing some of the work that we might otherwise attribute to the pattern.
+
+At SHIFT ROWS, follow a horizontal joint. The offset asks the next row to begin halfway through the interval you expected. At ONE EXCEPTION, find the isolated turn again. “By the turned square” could be enough to tell someone where to meet you.
+
+
+Near the far end, beyond ONE EXCEPTION, the same image reaches a narrow part of the museum wall. It stretches across the tall sheet: each triangle is now more than twice as tall as it is wide. EXCEPTION changes a tile here too. Walk towards it. The image has changed; the wall still holds you on this side.
+
+Find TURN WALL beside it. Press, then wait for the sheet to finish turning. Its pattern travels with it. The opening leads onto a small landing outside the hall. Step through and look back along the edge.
+
+From here the panel is almost nothing. A thin sheet, a hinge, the plain reverse of the image. It was enough to stop us. Beyond the landing there is no floor to continue this walk. Until now, it was easy to keep looking ahead: another room, another thing to learn. Room after room, a thin enclosure kept an inside around our forward walk. Here we can look at its other side.
+
+The two turns have done different work. EXCEPTION changed an orientation inside the image. TURN WALL moved the surface and the collision shape that travels with it. The first changed what we could read; the second changed where we could go.
+
+![The patterned wall closed and turned open, seen from the same position.](/book-review/doc/book/figures/Tutorial_Tiling_Walls/two-turns.png)
+
+*The same pattern, on the same sheet. Left: a tile has turned, but the wall is still closed. Right: the sheet has turned through a quarter turn, opening onto the landing.*
+
+The landing was made too. Even this little outside has a floor and a rail. What else would we have to build to carry the walk further?
+
+Return inside before turning the wall back. The wall will not turn through a body: it waits while someone occupies the landing or the space it sweeps, and pauses if someone enters during a turn. We can leave the path here, and we can rejoin it.
+
+
+The image gives the wall a rhythm; the wall gives that rhythm a place in your walk.
+
+The next floor will add a clock. Its tiles will keep their places while their black and white values change.
+
+---
+
+## Tutorial Disco
+
+*Tutorial_Disco*
+
+### A grid with a clock
+
+How can an arrangement that sits still make a rhythm?
+
+You have seen slots hold values and a motif repeat across floors and walls. Here the floor is black and white again. Stand still and let the pattern move beneath you. Then stop one of its clocks.
+
+
+Press PLAY / HOLD at the floor console. Watch the pattern settle. Press ONE STEP: the next arrangement arrives without waiting for the automatic clock. Change PATTERN while holding. CHECKER alternates the tiles, ROWS visits one row at a time, DIAGONALS sends bands across the addresses, and SNAKE follows a route that reverses direction in every other row.
+
+Start playback, then change SPEED. The same rule can hurry or wait. This small expression supplies the checker:
+
+```gdscript
+return (x+z+phase)%2
+```
+
+Two spatial indices and a changing phase enter the same remainder operation. The tiles have not moved; the values displayed at their addresses have changed. Stand on one tile and watch what arrives there. Then cross the floor and let your movement meet its movement.
+
+![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-review/doc/book/figures/Tutorial_Disco/fixed-addresses-changing-values.png)
+
+*One step apart. Every tile keeps its place; black and white exchange addresses. Another step brings this checker back.*
+
+Change PATTERN once more, past SNAKE, to SUPER TRIANGLE. A diagonal divides each square into black and white. Let it play. Neighbouring triangles turn toward one another; a chevron appears, then a diamond. Later the motif grows across several tiles. Keep your foot in place and follow the shape that now includes it.
+
+Press HOLD during a turn. The floor keeps that unfinished arrangement. ONE STEP takes it to the next pose. The square joints still mark the old addresses, though your eye can join the triangles into another figure. How large is the thing you are following: one tile, four, the floor? The array supplies places to change; it does not tell us where a figure must end.
+
+![Six black and white triangle combinations on the same museum floor.](/book-review/doc/book/figures/Tutorial_Disco/triangle-combinations.png)
+
+*Six moments in the same movement. The triangles turn and gather into larger figures; the floor beneath the foot stays level.*
+
+The console controls this visual clock. The sequencer stands near the entrance, six metres to the right of the console as you enter. It has another clock. Begin with one cell and listen for the time it becomes audible.
+
+
+Find the sequencer's grid. Each row is a **track**, assigned a sound; each column is a **step**, one place in the repeating count. The moving highlight is the playhead: it reads one column at a time.
+
+The sequencer starts with an empty pattern. Turn on one cell. It sounds immediately as a preview. Let that sound finish, then start playback. Wait for the highlight to reach the cell. The note returns with it, once each time around.
+
+Now give that note company. Add a second cell in the same track. Listen to the interval between them. Move the second event by turning its old cell off and another on. The instrument stays the same; its place in the pattern changes when it sounds.
+
+Switch one cell off again. On the next pass its address is still there, but that visit asks for no new note. The grid keeps your choices; the playhead keeps returning to read them.
+
+Change the tempo without moving either address. The time between visits changes. Stay with the rhythm for a few loops.
+
+
+Leave the floor console on PLAY and stop the sequencer. Let the last sound fade while you watch the floor. The pattern keeps passing beneath you. What seemed to move together has come apart: one clock reads the score; another changes the floor.
+
+Restart the sequencer, then HOLD the floor's pattern. The music continues. Watch for a brief brightening on the otherwise settled floor. A connection in the code sends each sounding step to a floor column. The two clocks are separate, but the sound can still leave a visible response.
+
+Keep the floor held for a few beats. A flash appears against the settled pattern. Release HOLD, and fresh arrangements can overtake it.
+
+There are sixteen steps but twelve floor columns. The bridge uses `step % disco_floor.grid_width`, taking the remainder by this floor’s width: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. The flash returns to the same place underfoot, at another place in the count. The sequencer tells the addresses apart; that flash alone cannot.
+
+Walk with a pulse, then keep your own rhythm across it. Distinguish the score, the floor's independent animation and your movement. Sounding steps can reach the floor, but your footsteps are not written back into the score. Sharing a space with a rhythm is different from being measured by it.
+
+
+Put a beat somewhere that interrupts the repetition you expected. Does it become a mistake, an accent, or the part you wait for? Keep it for a few loops before deciding. A position that first sounded wrong may become the reason to return.
+
+Let it run while you cross the floor. Your next step need not wait for the next note.
+
+Next, our familiar forms gather in coloured stacks. A stored value can assign a colour to a surface. What happens when that colour meets its neighbours?
+
+---

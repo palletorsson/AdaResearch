@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "detail": null,
+      "name": "row begins with four occupied addresses",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "row address label belongs to collected cube",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "desktop-group physical overlap collects row cube",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "row cube takes its label with it",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "contact changes only row slot 2",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "row visible table updates to zero",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "off-diagonal plate is a sibling of its cube",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "XR-body-group physical overlap collects grid cube",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "[x,z] updates correct off-diagonal address",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "visible table preserves x-row z-column ordering",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "grid plate remains after occupant collection",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "flight lattice contains 64 live cubes",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "console selects x y z independently",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "marker connects display order to spatial position",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "physical overlap collects selected volume cube",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "collection writes y layer z row x entry without transposing",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "selected address remains readable as zero",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "visitor inside recorded vacancy does not replace cube occupancy",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "neutral flight input produces zero velocity",
+      "passed": true
+    },
+    {
+      "detail": "(0.0, 1.2, -2.078461)",
+      "name": "tilted forward basis carries ascent and forward motion",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "combined flight direction respects 2.4m/s bound",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "both ground door approaches lie outside flight permission",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "live XR movement provider loads with its dependencies",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Isolated live scripts, real Area3D/capsule overlap, table labels, address order and flight-vector contract; no headset controls or museum route tested"
+}

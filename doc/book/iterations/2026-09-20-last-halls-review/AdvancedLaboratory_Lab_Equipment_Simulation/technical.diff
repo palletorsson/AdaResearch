@@ -1,0 +1,28 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
+@@ -2,7 +2,7 @@
+ 
+ The primary artifact is `MolecularDesigner`. Its [scene](../../../algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn) and [implementation](../../../algorithms/computationalbiology/molecular_framework/Part.gd) supply the behaviour described here.
+ 
+-MolecularDesigner.tscn enables automatic ten-second floating and assembling phases and starts with forty part instances. _assemble() reads node specifications, reapplies each part's catalogue mesh and calls set_target(target_pos); the call does not supply a target basis. Bonds are read from the assembly data. Part._dock_to_target() integrates a damped spring in _process(), while idle translation accumulates a sine-derived offset each frame. Keyboard shortcuts exist in the script, but the book does not rely on them in VR. No in-room catalogue editor or chemistry solver is implemented by this primary.
++The scene starts with forty reusable part instances. This hall configures eight seconds of floating, eighteen seconds of assembly, scale 2 and body_study=true. An amber ring stays attached to the first instance as its catalogue type changes. The source scene's default phases remain ten seconds elsewhere. _assemble() reads node specifications, reapplies each part's catalogue mesh and calls set_target(target_pos); the call does not supply a target basis. Bonds are read from the assembly data. Part._dock_to_target() integrates a damped spring in _process(), while idle translation accumulates a sine-derived offset weighted by elapsed time. Inventory positions are local to the exhibit; target positions use to_global(), so museum position, rotation and scale apply to the assembly. Changing assembly releases surplus instances from their previous targets. In body_study mode the controller moves unused instances into two visible side racks; their own floating process resumes on release. This display arrangement is authored too. Keyboard shortcuts exist in the script, but the book does not rely on them in VR. No in-room catalogue editor or chemistry solver is implemented by this primary.
+ 
+ ## Operation to read after the encounter
+ 
+@@ -18,7 +18,7 @@
+ 
+ ## What to compare
+ 
+-Choose a visible part during the floating phase. Follow it as an assembly forms. Watch another floating phase and a different assembly; notice both its destination and any change of shape or colour.
++Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+ 
+ The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+ 
+@@ -26,6 +26,6 @@
+ 
+ Expose one editable target with a visible link to its source assembly. Compare the same docking motion at two fixed update rates before changing damping. Let a visitor alter one relation and keep the resulting body beside the original.
+ 
+-This source audit does not establish headset readability, comfortable reach, collision clearance or frame rate. Those remain runtime observations. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
++The private museum probe checks instantiated behaviour and selected walking routes. See the [current evidence](../../../doc/book/iterations/2026-09-20-last-halls-review/SUMMARY.md). Headset readability, comfort, Quest performance and learner understanding remain unverified. The assembly parts are visual objects without supporting collision: walking among them does not establish a chair you can sit on or a body you can wear.
+ 
+ [Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.

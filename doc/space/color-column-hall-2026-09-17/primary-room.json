@@ -1,0 +1,48 @@
+{
+  "map": "Color_Context_Placed",
+  "cards": [
+    {
+      "token": "chroma_stack",
+      "row": 6,
+      "col": 4,
+      "count": 11,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "",
+      "ruled": true,
+      "from_book": true
+    },
+    {
+      "token": "chroma_translation",
+      "row": 26,
+      "col": 7,
+      "count": 4,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [],
+  "notes": [],
+  "layout": {
+    "primary": [
+      {
+        "kind": "card",
+        "token": "chroma_stack"
+      },
+      {
+        "kind": "card",
+        "token": "chroma_translation"
+      }
+    ],
+    "secondary": [],
+    "decoration": []
+  },
+  "seq": "color",
+  "positions": {},
+  "ok": true
+}

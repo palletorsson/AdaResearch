@@ -1,0 +1,243 @@
+--- before/algorithms/change/ftc_bridge.gd
++++ algorithms/change/ftc_bridge.gd
+@@ -5,20 +5,21 @@
+ # f(b) − f(a). Across the span runs the beam label ∫ f'(x) dx = f(b) − f(a), and a glowing
+ # pulse runs the deck from a to b repeatedly.
+ #
+-# This is the *capstone* of the change sequence — the unifying claim that derivative and
+-# integral are inverse operations. Sets up the entire QFEP rate-term Δ(S,t).
++# The capstone compares a finite accumulation of sampled height rates with endpoint
++# difference. The net-change theorem motivates that comparison; the display is not a proof.
++# Its QFEP association is interpretive: a net report can leave the intervening journey out.
+ #
+ # @qfep_term: F at the boundary, pointing at Δ(S,t) as the bridge.
+ #
+ # @identity
+ # essence: an arched deck whose shape is the antiderivative f, standing on pillars at a and b whose height difference is f(b) − f(a), with the rate f' and its signed area drawn underneath
+ # desire: to stage the Fundamental Theorem of Calculus as a spatial crossing — the two directions of change meeting over one arch
+-# critical_parameter: curve — which antiderivative the deck traces, and therefore whether the theorem this bridge is labelled with says anything at all
++# critical_parameter: curve — whether signed rates cancel across a return or leave unequal endpoint heights
+ # triggers: _ready() builds pillars, deck, pulse marker, the FTC label and whatever evidence is asked for; _process runs the pulse from a to b, naming both in turn
+-# emerges: derivative and integral shown as inverse operations — the capstone that unifies the whole change sequence
++# emerges: signed rates can cancel across a nontrivial journey; accumulating the derivative recovers net change
+ # needs: two pillars + arch [present]; running pulse marker [present]; FTC label [present]; class_name FTCBridge [present]; @identity [present, 2026-07-12]
+-# relationships: the synthesis of partial_derivative_terrain (slope) and riemann_pump (accumulation); shares the `curve` axis word for word with integral_area and derivative_pair, so the same f can be met three times across the sequence; points forward to QFEP's rate-term Δ(S,t)
+-# truth: differentiation and integration are the same bridge walked in opposite directions — to accumulate a rate is to recover the thing that was changing.
++# relationships: connects slope and accumulation; shares curve names with integral_area and derivative_pair, with artifact-specific hump implementations; points interpretively toward QFEP's rate-term Δ(S,t)
++# truth: integrating a continuously differentiable function's derivative gives its net change; recovering its height also requires an initial value. This artifact compares finite estimates from one selected curve.
+ 
+ extends Node3D
+ class_name FTCBridge
+@@ -26,18 +27,14 @@
+ ## ── the curve axis ────────────────────────────────────────────────────────────────────
+ ## WHICH ANTIDERIVATIVE THE DECK IS. The word and its five values are taken character for
+ ## character from integral_area and derivative_pair, the two artifacts this one is the
+-## capstone of, and the five shapes are the same five functions of u in [0,1] — so a player
+-## can meet `ramp` as a rate in one room, as an accumulation in the next, and as a bridge
+-## here. Every member is smooth on [0,1], including `step`, which is an atan and not a jump;
+-## a genuinely discontinuous f would be a counter-example to the theorem this deck carries,
+-## not an instance of it, and the family does not offer one.
++## capstone of. They name related shapes against u in [0,1]; the hump implementation differs
++## as described below. Every member here is smooth on [0,1], including `step`, which is an
++## atan and not a jump. A discontinuous f would fall outside the continuously differentiable
++## conditions used for this encounter, and the family does not offer one.
+ ##
+-## THE FINDING THAT MADE THIS AXIS NECESSARY. The shipped deck is a symmetric parabola, so
+-## its two ends sit at the SAME height: f(a) = f(b), and the right-hand side of the equation
+-## painted on the beam is exactly zero. This bridge has been labelled with a theorem that,
+-## on its own geometry, reads 0 = 0. `hump` keeps that case, because it is the shipped one
+-## and 26 maps are standing on it — but `ramp` and `step` are decks whose ends are at
+-## different heights, and only there does the beam say something.
++## The symmetric `hump` returns to its starting height: its signed rates cancel despite
++## the rise and fall along the deck. `ramp` and `step` offer a different comparison, with
++## unequal endpoint heights and a nonzero accumulated rate.
+ ##   wave   sin(cx) + 0.35 sin(2cx). Four lobes; the deck returns to its start height, so
+ ##          the accumulated rate cancels to nothing over the full span.
+ ##   hump   one arch over the whole span — THE SHIPPED DECK, a parabola, both ends level.
+@@ -58,14 +55,17 @@
+ ##   result    the claim asserted and nothing computed — THE SHIPPED BUILD.
+ ##   trace     the left-hand side drawn: f' plotted under the deck with its SIGNED area
+ ##             shaded, strips hanging below the axis where the rate is negative.
+-##   longhand  both sides, equated: that area, plus the two endpoint heights read off a
+-##             common datum, the difference bracketed between them, and the numbers.
++##   longhand  that area, plus endpoint heights read off a common datum, their bracketed
++##             difference, and a finite numerical comparison. `reveal_on_request` lets a
++##             visitor predict before COMPARE TOTALS reveals the endpoint comparison.
+ 
+ @export_category("Bridge Settings")
+ ## Stage-2 DNA axis — which antiderivative the deck traces. Shared, word for word, with integral_area and derivative_pair.
+ @export_enum("wave", "hump", "ramp", "spike", "step") var curve: String = "hump"
+ ## Stage-2 DNA axis — how much of the theorem's working stands on the bridge.
+ @export_enum("result", "trace", "longhand") var evidence: String = "result"
++## Opt-in prediction stage for longhand evidence; unrelated placements retain their reveal.
++@export var reveal_on_request: bool = false
+ @export var pillar_color: Color = Color(0.5, 0.55, 0.7, 1.0)
+ @export var arch_color: Color = Color(0.95, 0.8, 0.45, 1.0)
+ @export var pulse_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@@ -87,13 +87,16 @@
+ const RATE_BASE_Y: float = 0.62
+ const RATE_AMP: float = 0.34
+ const RATE_STRIPS: int = 40
+-## Sample count for the numeric integral under `longhand`. Trapezoid, which is exact enough
+-## that the printed total and the printed difference agree to the two decimals shown.
++## Intervals for the finite trapezoid estimate under `longhand`. Display agreement at two
++## decimals is a numerical comparison, not an exact integral or proof of the theorem.
+ const QUAD_SAMPLES: int = 512
+ 
+ var _pulse_marker: MeshInstance3D
+ var _arch_segments_nodes: Array = []
+ var _t: float = 0.0
++var _difference_root: Node3D
++var _comparison_button: Node3D
++var _comparison_status: Label
+ 
+ 
+ func _ready() -> void:
+@@ -110,12 +113,8 @@
+ 	_build_evidence()
+ 
+ 
+-## The two numeric knobs keep their pre-promotion behaviour exactly: assigned, and never
+-## rebuilt for, because nothing rebuilt for them before. The two axis words DO rebuild —
+-## but only when the word is in the allow-list, only when it actually differs from the word
+-## already held, and only once _ready has built the scene a first time. No placement passes
+-## any key to this token today (all 26 are bare `ftc_bridge` / `ftc_bridge:0:0`), so this
+-## path is unreachable from any map that exists.
++## Geometry settings are assigned before construction. Evidence/curve/reveal changes also
++## rebuild an already constructed bridge, returning an opt-in comparison to its hidden state.
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	if config_data.has("bridge_span"):
+ 		bridge_span = float(config_data["bridge_span"])
+@@ -132,6 +131,11 @@
+ 		if e != evidence:
+ 			evidence = e
+ 			dirty = true
++	if config_data.has("reveal_on_request"):
++		var reveal: bool = str(config_data["reveal_on_request"]).to_lower() in ["true", "1"]
++		if reveal != reveal_on_request:
++			reveal_on_request = reveal
++			dirty = true
+ 	if dirty and is_node_ready():
+ 		_rebuild()
+ 
+@@ -147,6 +151,9 @@
+ 		remove_child(c)
+ 		c.queue_free()
+ 	_pulse_marker = null
++	_difference_root = null
++	_comparison_button = null
++	_comparison_status = null
+ 	_arch_segments_nodes.clear()
+ 	_build_all()
+ 
+@@ -186,8 +193,8 @@
+ 			return ARCH_H * (1.0 - pow(2.0 * u - 1.0, 2.0))
+ 
+ 
+-## d(deck)/dx, in metres of rise per metre of span. Central difference — the family members
+-## are all smooth, and asking the geometry beats hand-transcribing five derivatives.
++## Estimate of d(deck)/dx, in metres of rise per metre of span. A small central difference
++## is clamped near the endpoints and becomes one-sided at each end of the smooth curve.
+ func _curve_slope(u: float) -> float:
+ 	var e: float = 0.0005
+ 	var u0: float = clampf(u - e, 0.0, 1.0)
+@@ -324,6 +331,29 @@
+ 	_build_rate_plot()
+ 	if evidence == "longhand":
+ 		_build_difference_reading()
++		if reveal_on_request:
++			_difference_root.hide()
++			_build_comparison_control()
++
++
++func _build_comparison_control() -> void:
++	# Beside the left pillar: a central cabinet would conceal the signed strips.
++	var presets = load("res://commons/ui/interface_presets.gd")
++	var console: Node3D = presets.build("machine", "PREDICT THE DIFFERENCE")
++	console.name = "ComparisonConsole"
++	console.face_to_origin = false
++	console.body_height = 0.85
++	console.board_width = 0.9
++	console.position = Vector3(-bridge_span * 0.5 - 1.2, 0.0, 0.45)
++	add_child(console)
++	_comparison_status = console.add_readout("Compare when ready")
++	_comparison_button = console.add_button("COMPARE TOTALS")
++	_comparison_button.pressed.connect(_toggle_comparison)
++
++
++func _toggle_comparison() -> void:
++	_difference_root.visible = not _difference_root.visible
++	_comparison_status.text = "Press again to hide" if _difference_root.visible else "Compare when ready"
+ 
+ 
+ ## The LEFT-HAND SIDE. f' plotted on a zero line under the deck, with the region between the
+@@ -390,16 +420,21 @@
+ 	add_child(tag)
+ 
+ 
+-## The RIGHT-HAND SIDE, and the two of them equated. Both pillar tops are dropped onto one
+-## datum so the difference between them is a length you can look at, and the same quantity
+-## is printed twice — once as the accumulated area, once as f(b) − f(a).
++## Endpoint difference beside a finite accumulation of the sampled rate. Both pillar tops
++## share one datum; the grouped reading can be hidden while the visitor predicts.
+ func _build_difference_reading() -> void:
++	_difference_root = Node3D.new()
++	_difference_root.name = "EndpointComparison"
++	add_child(_difference_root)
+ 	var fa: float = _curve_h(0.0)
+ 	var fb: float = _curve_h(1.0)
+ 	var datum: float = pillar_height + minf(fa, fb)
+ 	var x_read: float = bridge_span * 0.5 + 0.30
+-	# Two ticks at the endpoint heights, carried out past the right pillar.
+-	for pair in [[fa, "f(a)"], [fb, "f(b)"]]:
++	# Level endpoints share one tick and label instead of drawing two labels on top of one another.
++	var readings: Array = [[fa, "f(a)"], [fb, "f(b)"]]
++	if is_equal_approx(fa, fb):
++		readings = [[fa, "f(a) = f(b)"]]
++	for pair in readings:
+ 		var h: float = float(pair[0])
+ 		var tick := MeshInstance3D.new()
+ 		var tbox := BoxMesh.new()
+@@ -407,12 +442,12 @@
+ 		tick.mesh = tbox
+ 		tick.material_override = _flat_mat(pillar_color, 0.6)
+ 		tick.position = Vector3(x_read, pillar_height + h, 0.0)
+-		add_child(tick)
++		_difference_root.add_child(tick)
+ 		var tl := _plot_label(pillar_color)
+ 		tl.text = str(pair[1])
+ 		tl.font_size = 22
+ 		tl.position = Vector3(x_read + 0.24, pillar_height + h, 0.0)
+-		add_child(tl)
++		_difference_root.add_child(tl)
+ 	# The difference itself, as a bar spanning the two ticks.
+ 	var diff: float = fb - fa
+ 	var bar := MeshInstance3D.new()
+@@ -421,19 +456,21 @@
+ 	bar.mesh = bbox
+ 	bar.material_override = _flat_mat(Color(0.55, 1.0, 0.7, 1.0), 1.1)
+ 	bar.position = Vector3(x_read, datum + absf(diff) * 0.5, 0.0)
+-	add_child(bar)
++	_difference_root.add_child(bar)
+ 	# Both sides as numbers. The integral is quadrature over the same slope function the
+ 	# strips were drawn from, so agreement here is a statement about the geometry rather
+ 	# than a constant typed in beside it.
+ 	var total: float = _integrate_slope()
+ 	var readout := _plot_label(Color(0.55, 1.0, 0.7, 1.0))
+-	readout.text = "∫ f' dx = %+.2f     f(b) − f(a) = %+.2f" % [total, diff]
++	readout.name = "Totals"
++	readout.text = "rate sum ≈ %+.2f     f(b) − f(a) = %+.2f" % [total, diff]
+ 	readout.font_size = 26
+ 	readout.position = Vector3(0.0, datum - 0.30, 0.4)
+-	add_child(readout)
+-
+-
+-## Trapezoid rule over dx, which is exactly the area the strips above are shading.
++	_difference_root.add_child(readout)
++
++
++## Finite trapezoid rule over the sampled slope. The 40 display strips share the same
++## rate function, but are not the 512 intervals used by this numerical estimate.
+ func _integrate_slope() -> float:
+ 	var total: float = 0.0
+ 	var dx: float = bridge_span / float(QUAD_SAMPLES)

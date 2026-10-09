@@ -1,0 +1,59 @@
+{
+	"artifacts": [
+		{
+			"id": "dark_sphere",
+			"placeholder": false,
+			"position": "(5.0, 0.0, 4.0)",
+			"scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn"
+		},
+		{
+			"id": "kusama_sine",
+			"placeholder": false,
+			"position": "(5.0, 5.0, 6.0)",
+			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn"
+		},
+		{
+			"id": "wave_propagation_3d",
+			"placeholder": false,
+			"position": "(7.0, 4.0, 8.0)",
+			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
+		},
+		{
+			"id": "coupled_oscillator_lattice",
+			"placeholder": false,
+			"position": "(8.0, -0.94, 13.0)",
+			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn"
+		}
+	],
+	"dimensions": {
+		"depth": 22.0,
+		"max_height": 5.0,
+		"width": 16.0
+	},
+	"engine": "4.6-stable (official)",
+	"json": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-10-08-wave-original-grid/WaveFunctions_3D_Wave_Propagation/map_data.json",
+	"json_sha256": "e797c4cab05936089d096e03a91c79b51f7f6df385f20ae05efae43da17209fd",
+	"map": "WaveFunctions_3D_Wave_Propagation",
+	"renderer": "real GridSystem / current artifacts",
+	"shots": [
+		{
+			"eye": "(27.0, 23.0, -17.0)",
+			"file": "overview.png",
+			"target": "(7.0, 1.0, 8.0)"
+		},
+		{
+			"eye": "(7.0, 12.0, -5.0)",
+			"file": "basin.png",
+			"target": "(7.0, 0.5, 9.0)"
+		},
+		{
+			"eye": "(1.0, 2.15, 1.0)",
+			"file": "entry.png",
+			"target": "(8.0, 0.6, 8.0)"
+		}
+	],
+	"structure_cubes": 165,
+	"structure_rows": 18,
+	"verified": true,
+	"zero_cells": 185
+}

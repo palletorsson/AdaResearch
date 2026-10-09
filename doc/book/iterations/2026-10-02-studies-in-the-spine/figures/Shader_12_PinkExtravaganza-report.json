@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "Shader_12_PinkExtravaganza assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "body full size",
+      "passed": true
+    },
+    {
+      "name": "body visible",
+      "passed": true
+    },
+    {
+      "name": "body controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "body amount changed by pointer",
+      "passed": true
+    },
+    {
+      "name": "body bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "body bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "reference_plural_body standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_plural_body support along side 2",
+      "passed": true
+    },
+    {
+      "name": "reference_plural_body standing clearance along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_plural_body support along side 18",
+      "passed": true
+    },
+    {
+      "name": "reference_plural_body capture",
+      "passed": true
+    }
+  ],
+  "map": "Shader_12_PinkExtravaganza",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

@@ -1,0 +1,191 @@
+{
+  "checks": [
+    {
+      "message": "both laws start with the same seeded walkers",
+      "ok": true
+    },
+    {
+      "message": "fixed-step attraction replays exactly",
+      "ok": true
+    },
+    {
+      "message": "fixed-step avoidance replays exactly",
+      "ok": true
+    },
+    {
+      "message": "existing law change produces different histories",
+      "ok": true
+    },
+    {
+      "message": "same-count runs produce measurably different coverage",
+      "ok": true
+    }
+  ],
+  "runs": [
+    {
+      "above_one": 59,
+      "initial": [
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 0,
+          "x": 48,
+          "y": 63
+        },
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 1,
+          "x": 14,
+          "y": 50
+        },
+        {
+          "active": true,
+          "hx": 0,
+          "hy": 1,
+          "x": 69,
+          "y": 11
+        },
+        {
+          "active": true,
+          "hx": -1,
+          "hy": 1,
+          "x": 31,
+          "y": 16
+        }
+      ],
+      "peak": 4.00000047683716,
+      "rng_state": "2271720331198256023",
+      "rule": "trail",
+      "signature": "81625733333439f185d7b8084120884571e122325f4e6c5bac84da37ba9039c2",
+      "steps": 300,
+      "sum_height": 206.200018391013,
+      "sum_signal": 124.040000000001,
+      "visited": 226
+    },
+    {
+      "above_one": 35,
+      "initial": [
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 0,
+          "x": 48,
+          "y": 63
+        },
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 1,
+          "x": 14,
+          "y": 50
+        },
+        {
+          "active": true,
+          "hx": 0,
+          "hy": 1,
+          "x": 69,
+          "y": 11
+        },
+        {
+          "active": true,
+          "hx": -1,
+          "hy": 1,
+          "x": 31,
+          "y": 16
+        }
+      ],
+      "peak": 4.00000047683716,
+      "rng_state": "-3304143818856775997",
+      "rule": "avoid",
+      "signature": "b075a12c93e9ce4d0353cf1e89b05bd7b23598f1521cd44790405ee89d51d051",
+      "steps": 300,
+      "sum_height": 182.200011879206,
+      "sum_signal": 83.64,
+      "visited": 351
+    },
+    {
+      "above_one": 59,
+      "initial": [
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 0,
+          "x": 48,
+          "y": 63
+        },
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 1,
+          "x": 14,
+          "y": 50
+        },
+        {
+          "active": true,
+          "hx": 0,
+          "hy": 1,
+          "x": 69,
+          "y": 11
+        },
+        {
+          "active": true,
+          "hx": -1,
+          "hy": 1,
+          "x": 31,
+          "y": 16
+        }
+      ],
+      "peak": 4.00000047683716,
+      "rng_state": "2271720331198256023",
+      "rule": "trail",
+      "signature": "81625733333439f185d7b8084120884571e122325f4e6c5bac84da37ba9039c2",
+      "steps": 300,
+      "sum_height": 206.200018391013,
+      "sum_signal": 124.040000000001,
+      "visited": 226
+    },
+    {
+      "above_one": 35,
+      "initial": [
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 0,
+          "x": 48,
+          "y": 63
+        },
+        {
+          "active": true,
+          "hx": 1,
+          "hy": 1,
+          "x": 14,
+          "y": 50
+        },
+        {
+          "active": true,
+          "hx": 0,
+          "hy": 1,
+          "x": 69,
+          "y": 11
+        },
+        {
+          "active": true,
+          "hx": -1,
+          "hy": 1,
+          "x": 31,
+          "y": 16
+        }
+      ],
+      "peak": 4.00000047683716,
+      "rng_state": "-3304143818856775997",
+      "rule": "avoid",
+      "signature": "b075a12c93e9ce4d0353cf1e89b05bd7b23598f1521cd44790405ee89d51d051",
+      "steps": 300,
+      "sum_height": 182.200011879206,
+      "sum_signal": 83.64,
+      "visited": 351
+    }
+  ],
+  "scope": "source algorithms in isolated node, no renderer or continuous live timing"
+}

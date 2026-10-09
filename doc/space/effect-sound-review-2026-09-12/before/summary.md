@@ -1,0 +1,9 @@
+# WaveFunctions Effect Sound — Summary
+
+Sound is oscillation made audible. This hall converts the waves of the earlier rooms into pressure waves you can hear, and puts one oscillation inside another's rule so that the change can be heard before it is named.
+
+The room is a small audio bench. Along row five stand the synthesiser racks — a sine rack, a Moog bass, a DX7 piano, a 303 — with their controllers, an audio monitor that draws what is playing, and, around them, a chord spring that turns intervals into pull, a harmonic-distance table, a timbre sculptor, a melody chaser, a cable builder and the organ-pipe system that makes pitch out of length.
+
+Apart from the racks, in the south-east quarter, two reading desks hold the primary; the timbre sculptor three metres off sleeps until a listener comes within three metres of it. A blue ball sets the carrier (frequency, attack, decay); an orange ball sets the modulator (ratio, index, modulator decay). BASELINE deals an unmodulated 440 Hz note: index zero, with its envelope and tanh shaping still in place. HOLD keeps that note as the reference. A lift of the orange ball changes the beginning of the next note; COMPARE plays the reference, a quarter second of silence, then the note you made; the readout above the panel names the one value that changed and how long the note took to synthesise. The scope above the desks draws the modulator, the bare carrier, a rule, and the output — the same expression the rig computes, sample by sample.
+
+Within the sequence, Effect Sound is the pivot from seeing to hearing. On the active route AirMusic follows, with a struck resonance; the later rooms — Bernini, Cage, the walking path, the Synthesis Lab — assume the learner can now fix one thing, change one thing, and listen through the tail before deciding what they heard.

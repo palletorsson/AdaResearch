@@ -1,0 +1,146 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "machine field and probe loaded",
+      "passed": true
+    },
+    {
+      "name": "local carry lesson enabled",
+      "passed": true
+    },
+    {
+      "name": "yaw at pole preserves downward vector",
+      "passed": true
+    },
+    {
+      "name": "yaw at pole changes the held bearing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: aim-before-lift",
+      "passed": true
+    },
+    {
+      "name": "small tilt still uses idle readout",
+      "passed": true
+    },
+    {
+      "name": "horizontal pitch admits full yaw",
+      "passed": true
+    },
+    {
+      "name": "acceleration limit is fifteen",
+      "passed": true
+    },
+    {
+      "name": "field receives local machine vector",
+      "passed": true
+    },
+    {
+      "name": "small motion clears arrow at 2",
+      "passed": true
+    },
+    {
+      "name": "small motion clears arrow at 3",
+      "passed": true
+    },
+    {
+      "name": "small motion clears arrow at 4",
+      "passed": true
+    },
+    {
+      "name": "arrow returns for visible motion",
+      "passed": true
+    },
+    {
+      "name": "small motion clears arrow at 6",
+      "passed": true
+    },
+    {
+      "name": "motion just above threshold returns",
+      "passed": true
+    },
+    {
+      "name": "small motion clears arrow at 8",
+      "passed": true
+    },
+    {
+      "name": "legacy resting vector remains nonzero",
+      "passed": true
+    },
+    {
+      "name": "lesson has no invented resting vector",
+      "passed": true
+    },
+    {
+      "name": "entry retains incoming velocity",
+      "passed": true
+    },
+    {
+      "name": "next step retains post-contact velocity",
+      "passed": true
+    },
+    {
+      "name": "release removes retained carry state",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-crossings",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "headset": "Not tested. Supplied position differences and receiver state, native standing museum cameras.",
+    "motion_display_states": [
+      {
+        "drawn_length": 0.0799989700317383,
+        "mesh_count": 19,
+        "speed": 0.16
+      },
+      {
+        "drawn_length": 0.0,
+        "mesh_count": 0,
+        "speed": 0.03
+      },
+      {
+        "drawn_length": 0.0,
+        "mesh_count": 0,
+        "speed": 0.0
+      },
+      {
+        "drawn_length": 0.0,
+        "mesh_count": 0,
+        "speed": 0.03
+      },
+      {
+        "drawn_length": 0.100002288818359,
+        "mesh_count": 19,
+        "speed": 0.2
+      },
+      {
+        "drawn_length": 0.0,
+        "mesh_count": 0,
+        "speed": 0.039
+      },
+      {
+        "drawn_length": 0.0204992294311523,
+        "mesh_count": 17,
+        "speed": 0.041
+      },
+      {
+        "drawn_length": 0.0,
+        "mesh_count": 0,
+        "speed": 0.0
+      }
+    ],
+    "stillness_fix_present": true
+  },
+  "passed": true,
+  "room": "Vectors_Act5_ForceAsPlace",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

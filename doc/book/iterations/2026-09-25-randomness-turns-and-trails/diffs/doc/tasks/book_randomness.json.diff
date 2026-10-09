@@ -1,0 +1,305 @@
+--- before/doc/tasks/book_randomness.json
++++ doc/tasks/book_randomness.json
+@@ -251,9 +251,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Cubes"
+       ],
+@@ -268,9 +268,12 @@
+       "proposal": "Delete both sentences; the surrounding text already carries the point (\"How your hand let go, the cube's shape and its contact with the felt have already done their work\"; \"A gentle toss and a forceful one can leave different readings\").",
+       "evidence": "commons/maps/Random_Cubes/final.md lines 13 and 29. dice_throw.gd:12 documents both the VR `_on_dice_dropped()` path and `on_desktop_drop`; :14 lists \"XRToolsPickable grab + throw [has]\" as the encounter; coin_toss.gd:14 likewise \"XRToolsPickable coins [has]\".",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nRemoved the two desktop-specific asides. Keep the die’s possibility of rocking and the distinctions between release, orientation and reward; moving platform limitations out of the chapter does not resolve the headset task.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.145Z"
+     },
+     {
+       "id": "book_randomness.004",
+@@ -363,9 +366,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Rotate_Random_XYZ"
+       ],
+@@ -380,9 +383,12 @@
+       "proposal": "\"Nothing there is kicked by chance: the pitch rises and falls on a clock, each row by its place along the field, and the same motion returns every time the hall is built.\"",
+       "evidence": "algorithms/randomness/SlopeGradientCubes.gd (the script behind the RotateGridCubes token's SlopeGradientCubes.tscn, registry randomness.json): :16 `animate_slope: bool = true`, :51–60 `_process` lerps `current_max` with `(sin(_time)+1)/2`, :74–84 `cube.rotation.x = -angle_rad`; :92–93 `apply_grid_config` is a no-op, so the map's `RotateGridCubes:0:-0.5` cannot switch the animation off.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nThe review read the script default but missed animate_slope=false in SlopeGradientCubes.tscn. The native baseline and revised hall both remain still after a supplied update. Replaced “begins to tilt” with a spatial progression through the whole half-sine field; no clock is claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.177Z"
+     },
+     {
+       "id": "book_randomness.008",
+@@ -391,9 +397,9 @@
+       "effort": "10min",
+       "skill": "design",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Walk"
+       ],
+@@ -408,9 +414,12 @@
+       "proposal": "Insert `<!-- @pixel_cloud -->` before the sentence and write \"Off to your right, between this cabinet and the basin, a sculpture of small cubes…\".",
+       "evidence": "commons/maps/Random_Walk/map_data.json interactables: pixel_cloud at (3,9) (`pixel_cloud:180:0.1:0.18#walk_seed:101`), random_walk_terrarium at (9,5), random_walk_128 at (9,17); algorithms/randomness/pixelcloud/pixel_cloud.gd:2 \"self-avoiding walk with upward bias\", :39 `num_cubes: int = 23`. `final_tags.py --map=Random_Walk` shows 3 tagged works; em_plan plans[68] deals 6.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nAdded the pixel_cloud encounter anchor and located it on the visitor’s right, between cabinet and basin. Reopened the terrarium anchor for its following logbook paragraph so those paragraphs remain attached to the right work.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.208Z"
+     },
+     {
+       "id": "book_randomness.009",
+@@ -559,9 +568,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Walk"
+       ],
+@@ -576,9 +585,12 @@
+       "proposal": "\"This is the drawing dot from the Point Trace room, with one addition.\" and \"as it did there\".",
+       "evidence": "commons/maps/Point_Trace/final.md begins \"Bring the detour.\" with no H1 and carries `<!-- @draw_dot -->` (line 7); commons/maps/Random_Walk/final.md lines 73 and 82; random_draw_dot.gd:11–13 STEP_TIME 1/30, STEP_SIZE 0.012, RADIUS 0.25 — the constants the chapter quotes.",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+-      "notes": "",
++      "notes": "Codex review — 25 September 2026\nNamed the Point Trace room and its drawing dot explicitly; retained the distinction between a hand’s gesture and a accumulated random offset.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
+       "source": "one reader (skeptic pending)",
+-      "created_at": "2026-09-24"
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.240Z"
+     },
+     {
+       "id": "book_randomness.015",
+@@ -618,9 +630,9 @@
+       "effort": "1h",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Cubes"
+       ],
+@@ -635,9 +647,12 @@
+       "proposal": "Compare Random_Cubes/after.md with the live final.md and choose.",
+       "evidence": "Random_Cubes/HASHES.txt LIVE line",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nRetain the current chapter. It already carries the reward policy, level versus tilted release, lost order in the histogram, and the newer paired-dice / continuing-die studies. An older rewrite would lose those newer encounters. Only the two desktop asides were removed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.270Z"
+     },
+     {
+       "id": "book_randomness.017",
+@@ -678,7 +693,7 @@
+       "skill": "edit",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Cubes"
+@@ -694,9 +709,12 @@
+       "proposal": "Sixteen throws each; watch that the glass reads the face on top and that the rain never knocks the die over.",
+       "evidence": "probe_random_cubes.out.txt",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. This pass did not perform the requested sixteen tracked-hand throws of the die and coin. Desktop photographs and supplied signals cannot establish headset reading or reward-rain safety.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.289Z"
+     },
+     {
+       "id": "book_randomness.019",
+@@ -706,7 +724,7 @@
+       "skill": "build",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Cubes"
+@@ -722,9 +740,12 @@
+       "proposal": "Leave it, or tune bounce/gravity per placement once a headset has thrown it.",
+       "evidence": "Random_Cubes/die_settle_sweep.out.txt",
+       "review": "quote NOT found in the chapter as written; check before acting (script) · from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nLeave physics unchanged pending headset throws. The report itself found no single setting that fixes hopping without changing throws across 22 maps; the prose still permits rocking. This is a deferred tuning question, not a repaired simulation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.317Z"
+     },
+     {
+       "id": "book_randomness.020",
+@@ -734,7 +755,7 @@
+       "skill": "edit",
+       "depends_on": [],
+       "status": "open",
+-      "claimed_by": null,
++      "claimed_by": "codex",
+       "done_at": null,
+       "map_refs": [
+         "Random_Rotate_Random_XYZ"
+@@ -750,9 +771,12 @@
+       "proposal": "Walk in, compare the two stacks, find the exit.",
+       "evidence": "probe_rotation_study.gd; hall_rr_plan_map.png",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nStill open. The native museum field is now contained and visible, but the complete matched-stack approach, comparison and exit have not been walked in a headset.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "comment",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.352Z"
+     },
+     {
+       "id": "book_randomness.021",
+@@ -761,9 +785,9 @@
+       "effort": "1h",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Rotate_Random_XYZ"
+       ],
+@@ -778,9 +802,12 @@
+       "proposal": "A smaller grid_size for this placement, if the field should stay.",
+       "evidence": "INTEGRATION.md section 7",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nThis placement opts into study:compact: a 5×5 field of 0.6 m cubes on 0.75 m spacing, covering the complete level / 30-degree / level progression. Moved from cell (3,11) to (6,11), with local cube lift clear of the floor. All 25 bounds fit the interior. Other placements retain the authored 7×30 scene.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.396Z"
+     },
+     {
+       "id": "book_randomness.022",
+@@ -913,9 +940,9 @@
+       "effort": "10min",
+       "skill": "build",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Gaussian"
+       ],
+@@ -930,9 +957,12 @@
+       "proposal": "Look from the standing spot; if hidden, drop #controls:compact or raise the plate.",
+       "evidence": "museum_exhibit_stage.gd:95-121; distribution_sampler.gd:892-898",
+       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nConfirmed visually from the marked standing position: the console concealed the old record. This hall opts into readout:wing, moving and enlarging the same record beside the histogram on a stem, keeping the compact controls. Native BINS retains the 300 values; WIDTH changes spread and clears them. Legacy cabinets retain their old plate. A look toward the wing now exposes all six lines; headset comfort remains untested.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.428Z"
+     },
+     {
+       "id": "book_randomness.027",
+@@ -1115,9 +1145,9 @@
+       "effort": "10min",
+       "skill": "edit",
+       "depends_on": [],
+-      "status": "open",
+-      "claimed_by": null,
+-      "done_at": null,
++      "status": "done",
++      "claimed_by": "codex",
++      "done_at": "2026-09-25",
+       "map_refs": [
+         "Random_Walk"
+       ],
+@@ -1132,9 +1162,12 @@
+       "proposal": "Drop the heading or move the dot region.",
+       "evidence": "Random_Walk/DECISIONS.md",
+       "review": "quote checked: verbatim in the chapter (script, no agent) · from the block handback of 24 Sept; not re-checked by the skeptic",
+-      "notes": "",
+-      "source": "the block handback of 24 Sept",
+-      "created_at": "2026-09-24"
++      "notes": "Codex review — 25 September 2026\nRemoved the mid-chapter “A hand with company” heading; the random_draw_dot anchor and its prose stay in place.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-turns-and-trails/index.html",
++      "source": "the block handback of 24 Sept",
++      "created_at": "2026-09-24",
++      "triage": "fix",
++      "triaged_at": "2026-09-25",
++      "updated_at": "2026-09-25T08:52:10.472Z"
+     },
+     {
+       "id": "book_randomness.034",

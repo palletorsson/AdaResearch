@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "disco_controls": {
+      "lookup_name": "disco_controls",
+      "name": "A grid with a clock",
+      "scene": "res://commons/artifacts/regularity/disco_controls.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        2,
+        2,
+        2
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          2,
+          2
+        ],
+        "size_group": "large"
+      },
+      "description": "Local console selects checker, rows, diagonals or snake on the existing disco floor; hold, single step and speed. Colour mode adds a separate palette control.",
+      "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered."
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "Color_Walls assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "assembly full size",
+      "passed": true
+    },
+    {
+      "name": "assembly visible",
+      "passed": true
+    },
+    {
+      "name": "assembly controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "screens selected by pointer",
+      "passed": true
+    },
+    {
+      "name": "colour preserves arrangement",
+      "passed": true
+    },
+    {
+      "name": "panel identities retained",
+      "passed": true
+    },
+    {
+      "name": "assembly occupied-area guard",
+      "passed": true
+    },
+    {
+      "name": "assembly bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "assembly bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "colour_assembly standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "colour_assembly support along side 2",
+      "passed": true
+    },
+    {
+      "name": "colour_assembly standing clearance along side 34",
+      "passed": true
+    },
+    {
+      "name": "colour_assembly support along side 34",
+      "passed": true
+    },
+    {
+      "name": "colour_assembly capture",
+      "passed": true
+    },
+    {
+      "name": "wall full size",
+      "passed": true
+    },
+    {
+      "name": "wall visible",
+      "passed": true
+    },
+    {
+      "name": "wall controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "spacing and depth pointers",
+      "passed": true
+    },
+    {
+      "name": "omission hides rail and collider",
+      "passed": true
+    },
+    {
+      "name": "restoration restores collider",
+      "passed": true
+    },
+    {
+      "name": "wall occupied-area guard",
+      "passed": true
+    },
+    {
+      "name": "wall bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "wall bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "colour_wall_studies standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "colour_wall_studies support along side 2",
+      "passed": true
+    },
+    {
+      "name": "colour_wall_studies standing clearance along side 34",
+      "passed": true
+    },
+    {
+      "name": "colour_wall_studies support along side 34",
+      "passed": true
+    },
+    {
+      "name": "colour_wall_studies capture",
+      "passed": true
+    }
+  ],
+  "map": "Color_Walls",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

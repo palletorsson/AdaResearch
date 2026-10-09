@@ -1,0 +1,35 @@
+{
+  "id": "Ribbon_Patterns_01",
+  "title": "Let height enter the pattern",
+  "storyboard": "The marked source and selected volume cube let the student follow one lookup through height. Bring the earlier volume convention, values[y][z][x], and explicitly name the source plane SOURCE[z][x]. Repeat the source through four layers, then let the layer index shift its source column: SOURCE[z][(x+y)%4]. Predict a selected address before using its marker. Cube creation, selection and slicing are supplied. Turning SLICE on hides forty-eight of the sixty-four stored values; the comparison changes visibility without deleting entries. Zero now selects a pale colour, not vacancy. Carry the layer-dependent reader and these declared meanings. The familiar starting motif returns as installed data, not a claim that a previous edit was imported.",
+  "storyboard_short": "Reuse volume[y][z][x]; source plane is SOURCE[z][x]. Repeat then shift lookup SOURCE[z][(x+y)%4]. Predict unequal indices before marker check. Supply cubes/selection/slicing. SLICE:16 visible,64 stored; zero=pale colour, not absence. Carry layer reader and value meaning. Fixed familiar motif, no previous-edit import. Missing full companion remains to write.",
+  "mode": "make",
+  "brings": [
+    "three-index arrays",
+    "motif sampler"
+  ],
+  "learns": [
+    "layer-dependent source lookup in an explicit storage convention",
+    "visibility distinct from stored values"
+  ],
+  "carries": "A volume reader with declared palette-index values and nondestructive slice views.",
+  "supplied": [
+    "volume display",
+    "slice and address selectors"
+  ],
+  "artifact_refs": [
+    "grid_2d_4x4",
+    "grid_3d_4x4x4"
+  ],
+  "review_note": "Preserve the YZX storage convention from the flight volume while explicitly changing values from occupancy to palette indices. The source uses ZX. Supplied rendering and selectors are not new learning prerequisites. tutorial.md is absent; this remains a plan.",
+  "independent_check": "For x=3,y=2,z=1, predict source [1][1]; change only the displayed slice and explain why no stored entry should change.",
+  "prior_maps": [
+    "Tutorial_3D",
+    "Pattern_Foundry",
+    "Symmetry_Seventeen"
+  ],
+  "source_refs": [
+    "algorithms/arrays/layer_pattern_lesson.gd"
+  ],
+  "change_reason": "Reuse the earlier volume knowledge without silently changing what its values mean."
+}

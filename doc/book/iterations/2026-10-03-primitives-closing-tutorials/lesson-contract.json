@@ -1,0 +1,31 @@
+{
+  "status": "author_review_pilots",
+  "route": ["Primitives_Ignorance: existing function lesson", "Primitives_Ignorance: column companion", "Primitives_Portals: existing tolerance lesson", "Primitives_Melencolia: composition"],
+  "column": {
+    "source": "commons/maps/Primitives_Ignorance/tutorial-column.md",
+    "scene": "primitive_column.tscn",
+    "needs": ["typed arrays", "Vector3 components and scalar multiplication", "nested loops", "function parameters and return", "a position list distinct from a face list"],
+    "introduces": ["a profile represented as Array[float]", "a row of radii becomes rings of positions", "separate profile, full height and angular sampling"],
+    "learner_owns": ["profile", "height", "sides", "column_positions"],
+    "supplied": ["CircleSamples, including trigonometry", "ColumnSurface, including seam, caps, normals and SurfaceTool", "stone material", "prepared desktop/XR studio"],
+    "bounds": "2..32 strictly positive radii <= 0.8 m; height > 0 and <= 2.5 m; 3..256 sides",
+    "does_not_claim": ["a curved profile", "adding entries is an independent smoothness control", "dimensionless perfect curves", "surface collision", "the full colonnade is installed in the museum spine"]
+  },
+  "composition": {
+    "source": "commons/maps/Primitives_Melencolia/tutorial.md",
+    "scene": "primitive_composition.tscn",
+    "needs": ["Vector3 local position", "new and add_child", "lists and loops", "vertex positions distinct from triangle connections"],
+    "introduces": ["a list can place whole constructed bodies", "changing a mesh vertex and placing a mesh instance affect different data", "viewpoint and placement change apparent size and overlap"],
+    "learner_owns": ["the three placement values", "the loop that creates and positions copies", "a chosen arrangement"],
+    "supplied": ["a five-vertex pyramid construction", "clockwise winding and flat lighting normals", "material", "prepared studio and input"],
+    "reuses": ["Polyhedra position/face lists", "Cube's square divided into two triangles", "the shared triangle surface builder"],
+    "does_not_claim": ["a reconstruction of the engraving", "a historical argument established by code", "walking clearances or colliders", "animated transformation"]
+  },
+  "all_lesson_geometry_created_in_code": true,
+  "scene_child_lookups_in_learner_scripts": false,
+  "canonical_final_md_changed": false,
+  "museum_placement_changed": false,
+  "physical_headset_tested": false,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true
+}

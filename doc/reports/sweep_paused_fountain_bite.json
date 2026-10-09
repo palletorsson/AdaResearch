@@ -1,0 +1,38 @@
+{
+ "sweep": "paused_fountain",
+ "peak_changed_pct": 1.775,
+ "subject_pct": 4.744,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "time_slice": "shipped"
+   },
+   "b": {
+    "time_slice": "fine"
+   },
+   "changed_px": 7856,
+   "changed_pct": 1.36
+  },
+  {
+   "a": {
+    "time_slice": "shipped"
+   },
+   "b": {
+    "time_slice": "coarse"
+   },
+   "changed_px": 8564,
+   "changed_pct": 1.483
+  },
+  {
+   "a": {
+    "time_slice": "fine"
+   },
+   "b": {
+    "time_slice": "coarse"
+   },
+   "changed_px": 10253,
+   "changed_pct": 1.775
+  }
+ ]
+}

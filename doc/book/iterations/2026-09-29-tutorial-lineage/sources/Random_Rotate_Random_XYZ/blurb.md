@@ -1,0 +1,3 @@
+Two stacks of the same pieces, twenty cubes and a hundred and twenty prisms, stand across the hall and begin to turn. Nothing else about them changes: in this room their drift, sinking and darkening are switched off and both run at one rate, so what differs between them is shape, colour, number and spacing, not the setting.
+
+Each piece carries a hidden number that grows by itself and is bumped by random kicks; the larger it is, the harder the piece is shaken, and the small turns add up without limit. TOGGLE pauses, RESET puts every piece back in line without rewinding the draws, so what follows is new. By the door, a rig of three shapes weathers from your own movement and draws no random number at all.

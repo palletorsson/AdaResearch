@@ -1,0 +1,661 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Four encounters · Ada Research</title><style>*{box-sizing:border-box}body{margin:0;background:#13212a;color:#eee9df;font:18px/1.7 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:32px 24px 80px}a{color:#f4b8c7}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font:clamp(36px,6vw,70px)/1.1 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}h3{font:24px/1.3 Georgia,serif}.lead{font:25px/1.5 Georgia,serif;max-width:860px}.date,figcaption{color:#b2c0c5;font-size:14px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}.card{border:1px solid #51606b;border-radius:6px;padding:24px;background:#1b303a}.card h2{margin:0 0 16px}img{width:100%;height:auto;display:block}figure{margin:30px 0}figcaption{margin-top:10px}pre{background:#081720;padding:20px;overflow:auto}code{font-size:.9em}details{border-top:1px solid #51606b;padding:24px 0}summary{cursor:pointer;font-size:24px}article{max-width:790px;margin:30px auto}p{max-width:880px}.tag{font-size:13px;color:#a9d8c9}.table{overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:15px;border-bottom:1px solid #51606b;text-align:left;vertical-align:top}small{color:#b2c0c5}h1{margin-bottom:20px}article h1{font-size:52px}article{margin:40px auto}table{font-size:16px}blockquote{border-left:3px solid #f4b8c7;padding-left:20px} @media(max-width:650px){article h1{font-size:38px}td,th{padding:8px}table{font-size:14px}}section.chapter{border-top:1px solid #51606b;margin-top:65px;padding-top:20px}h2.chapter-title{font-size:46px}article h2{font-size:29px}details.reference summary{font-size:17px} .chapter-nav{font-size:15px} :target{scroll-margin-top:25px}</style></head><body><main><nav><a href="primitives-reading-review.html">Reading review</a><a href="critical-tutorial-pilot.html">Original pilot</a></nav><article><p class="date">Working reading · 15 September 2026</p><h1>Somewhere to begin.<br>Something to carry.</h1><p class="lead">Find a position. Carry a line. Keep a gesture. Give it another use.</p><p><strong>Point One is restored to the earlier text Palle preferred.</strong> Line, Trace and Grid remain the latest working versions. The shorter Point One trial is preserved beneath that chapter for comparison. Reading reactions will guide local proposals before further changes enter the book.</p><p><a href="primitives-reading-review.html">Our review of the rest of Primitives and the new revision process</a></p><nav><a href="#Point_One">Point One</a> · <a href="#Point_Lines">Point–Line</a> · <a href="#Point_Trace">Point Trace</a> · <a href="#Point_Line_Grid">Point–Line–Grid</a></nav><section class="chapter" id="Point_One"><h2 class="chapter-title">Point One</h2><p><a href="/necklace/thread?map=Point_One&amp;role=primary">Artifacts and book</a></p><p>You arrive late.</p>
+<!-- @frame_counter_display -->
+
+<p>The number is already changing. Its first number for you is not its first number. While you find somewhere to stand, the room continues with whatever it was doing before you arrived.</p>
+<p>Follow the number for a moment. Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot calls <code>_process</code> once per process frame while this node is processing. The engine supplies the repetition. Each call reaches the indented line: add one to <code>_count</code>. One, then two, then three. Declared outside the function, <code>_count</code> keeps its value between calls. Its zero belongs to the beginning of this node.</p>
+<p><code>delta</code> carries this update's time interval in seconds. We receive it here but do not use it yet. Adding one counts calls. The same count could have accumulated through different durations; the number keeps how many, leaving how long unanswered.</p>
+<p>The room's counter reads a total that began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p><code>Engine.get_process_frames()</code> counts process frames since the engine started. The panel reads and displays that total on each <code>_process</code> call. It includes frames before the panel existed, and before you found the number. The work of building the room has already occupied some of those intervals.</p>
+<p>We begin with a number that includes something we did not witness.</p>
+<p>We have read the line that asks for that number. Much of the code making it readable remains unopened.</p>
+<!-- @folding_past -->
+
+<p>Through the entrance window, frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.</p>
+<p>The source gives this particular depth a small inventory: ten frames, scaled and moved through a repeating cycle. It makes a figure of a past. It has no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.</p>
+<p>We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to <code>_process</code>. Any of those questions could take the rest of our time here. To begin with the point, we have to leave some invitations unanswered. The lesson borrows operations we have not learned to examine yet.</p>
+<p>The code we leave unread keeps working. It gives the number its appearance and the room its possibilities while our attention moves elsewhere. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?</p>
+<p>Alice's rabbit is already ahead. There are functions we would like to open, but we still have a point to find. We carry a question forward; others fold behind us.</p>
+<!-- @the_invisible_point -->
+
+<p>In the glass case, four brass arrows address an empty centre. Two thin red lines meet there. Follow either line towards the crossing. There is no dot to take over the work of locating it.</p>
+<p>What have you found, if there is no body there?</p>
+<p>The source names the meeting place:</p>
+<pre><code class="language-gdscript">const FOCUS := Vector3(0.0, 1.25, 0.0)
+</code></pre>
+<p><code>Vector3</code> holds three components. Here we use them as a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. These are coordinates relative to the case. They specify a location without making anything visible.</p>
+<p>The arrows and lines are built in relation to <code>FOCUS</code>. They make its location available through things beside it and passing through it. The point itself is never drawn. It has no hidden mesh and no later appearance to wait for.</p>
+<p>That is a strange thing to exhibit: a position you can locate, with no body of its own. The source offers another access to it. You can read the address and follow how the surrounding construction was arranged. The position has become available through those relations, without acquiring a surface.</p>
+<!-- @code_evolution_screen -->
+
+<p>The nearby code screen builds a visible marker in a separate example. Its excerpts give a sphere a position, then colour and a label. The screen does not execute these scripts. Their sphere belongs to that example; the point in the case remains undrawn. The complete illustrative scripts accompany the excerpts in the room's source.</p>
+<p>In a later stage, <code>_process(delta)</code> adds <code>delta</code> to <code>elapsed</code>. The example accumulates time rather than adding one per call; that elapsed time selects when its marker would be drawn. Its position stays the same. This is a construction we could make from a position. The invisible point keeps its empty centre.</p>
+<p>The additions matter separately, even though they arrive together when we look at the finished object. A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.</p>
+<!-- @interactive_point_origin_force -->
+
+<p>The dark point offers itself to your hands. Pick it up. Follow it a little to one side, then back. Its appearance can change as you handle it; successive pickups also cycle its coordinate display through several formats, including one that hides the label.</p>
+<p>The first point has already broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.</p>
+<p>A mathematical point specifies a location without extension. This artifact gives it a sphere, a collision shape and ways to respond. Those additions let us meet it through movement. They also give it possibilities that a position alone does not have.</p>
+<pre><code class="language-gdscript">var p := Vector3(1.0, 0.5, 0.0)
+</code></pre>
+<p>Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. The position can be used by a program that records those things separately. On its own, it does not tell that story.</p>
+<p>What drew your hand towards the point may be among the things its coordinates cannot report. Knowing how the sphere was made need not finish that interest. It gives you places to intervene: another surface, another response, another way to make a location felt.</p>
+<!-- @origin -->
+
+<p>Find the origin marker. Zero has been given a place in this room too.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<p>The origin is a point chosen as the reference from which these coordinates are measured. Calling it zero establishes a relation with other positions. It does not put zero outside the world it helps describe.</p>
+<!-- @coordinate_readout -->
+
+<p>Put down the dark point. The coloured frame carries a second, movable point of its own. Take that one for the next comparison: the frame's guides and the white card follow this point.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The reporting operation can be written like this:</p>
+<pre><code class="language-gdscript">func report_position(point: Node3D) -&gt; String:
+    var p := point.global_position
+    return &quot;(%.2f, %.2f, %.2f)&quot; % [p.x, p.y, p.z]
+</code></pre>
+<p><code>%.2f</code> rounds each component to two decimal places in the text. The stored position is left alone. The card has made the location easier to read by allowing several nearby positions to share a printed address. The apparent stillness belongs to that report.</p>
+<!-- @CoordinateSystem3M -->
+
+<p>Follow the coloured frame's guides as you move its point. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p>The frame has its own origin, orientation and scale. Its script uses <code>to_local()</code> to express a world position relative to that frame. The white card and the coloured frame can therefore give different addresses for the same place. Remember the case's <code>FOCUS</code>: its 1.25 was measured from the case, too.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.</p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.</p>
+<!-- @drag_point_target -->
+
+<p>The red arrow says “drag point here”. Carry the point towards it. Watch for the falling balls. Leave and return by another route.</p>
+<p>“Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:</p>
+<pre><code class="language-gdscript">@export var catch_radius: float = 0.45
+@export var catch_height: float = 1.20
+
+func accepts_position(p: Vector3) -&gt; bool:
+    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+    return p.distance_to(centre) &lt;= catch_radius
+</code></pre>
+<p>The comparison accepts a position within 0.45 metres of a centre 1.20 metres above the target's origin. A hand has room to arrive. The accepted position can be close enough without being identical to the centre.</p>
+<p>The target checks points registered in its coordinate-point group. It requires no release and rearms when the point leaves. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. The rhythm of your arrivals changes what the room's instruction is useful for. A detour may matter to that rhythm while remaining absent from the success test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.</p>
+<!-- @wireframe_threshold -->
+
+<p>The ring on the floor offers another way to look. Step inside it, then outside. It asks the renderer for a wireframe view while occupied and restores the previous view when the last visitor leaves.</p>
+<p>The surfaces become available as edges. The case's glass, arrows and lines have geometry; the point they locate has no triangles of its own. Seeing these meshes will not reveal the comparison that accepted your arrival at the red arrow. That was another kind of construction, accessible in the source.</p>
+<p>One opening leads to another. No single view has supplied everything.</p>
+<!-- @fontana_puncture -->
+
+<p>The punctured surface houses another instance of the changing point. Look into it from another opening. The body remains inside, while a different part of it becomes available through the cut. Here the surface gives us another way to approach a “here”, alongside the sphere, the arrows and the written address.</p>
+<!-- @floating_sphere_field -->
+
+<p>Small spheres drift nearby. Their bodies carry positions too, but they give those positions another pace and appearance. There are already several ways for a point to become part of a world, and several ways for us to take an interest in it.</p>
+<!-- @ -->
+
+<p>The counter has continued through all of this. A position has acquired a body, different addresses, a tolerance for arrival. It still leaves questions unanswered.</p>
+<p>One of them travels with us: how did it get there?</p>
+<p>The next room brings two points into relation. A line begins.</p><details class="reference"><summary>Companion notes</summary><h1>Point One: encounter reference</h1>
+<p>Companion to the revised final.md, 15 September 2026. These distinctions support the main encounters without requiring every reader to inspect them during the first walk.</p>
+<h2>Counter and the empty centre</h2>
+<p>The opening <code>_count</code> example is a local illustrative counter. The installed panel reads <code>Engine.get_process_frames()</code>. Neither counts seconds. <code>_process(delta)</code> receives a frame interval; the opening example does not accumulate it. The folding-past construction uses ten cycling frames and does not archive the visitor's history.</p>
+<p><code>FOCUS = Vector3(0, 1.25, 0)</code> is local to the invisible point's case. Arrows and lines locate it; no point mesh is created. The neighbouring code screen describes a separate, non-executing example with a visible marker. Later stages accumulate <code>elapsed</code> and use that to select drawing. They do not reveal the invisible point.</p>
+<h2>Coordinates and arrival</h2>
+<p>The WORLD card belongs to the coloured frame's movable point, separate from the changing dark point. Its two-decimal formatting rounds a report, not the stored location. The frame uses <code>to_local()</code>; the world and local addresses must retain their reference frames. Drawn axes are finite, but the point can move beyond them.</p>
+<p>The target centre is 1.20 m above its origin; the accepted radius is 0.45 m. It checks points in its coordinate-point group, requires no release, and rearms after departure. Intention and route are not inputs to that distance test.</p>
+<p>The floor ring requests wireframe rendering while occupied and restores the previous view after the last visitor leaves. This can expose mesh edges; it cannot expose the target's acceptance comparison or give the invisible point triangles.</p>
+<h2>Further code from the earlier passage</h2>
+<p>These excerpts are preserved from the preceding chapter version for reference. They include illustrative reductions; consult the surrounding notes and technical.md before treating one as a complete implementation.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<pre><code class="language-gdscript">func report_position(point: Node3D) -&gt; String:
+    var p := point.global_position
+    return &quot;(%.2f, %.2f, %.2f)&quot; % [p.x, p.y, p.z]
+</code></pre>
+<pre><code class="language-gdscript">@export var catch_radius: float = 0.45
+@export var catch_height: float = 1.20
+
+func accepts_position(p: Vector3) -&gt; bool:
+    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+    return p.distance_to(centre) &lt;= catch_radius
+</code></pre></details><details class="reference"><summary>Compare the shortened trial</summary><p>You arrive late.</p>
+<!-- @frame_counter_display -->
+
+<p>The number is already changing. Its first number for you is not its first number. While you find somewhere to stand, the room continues with whatever it was doing before you arrived.</p>
+<p>Follow the number for a moment. Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot calls <code>_process</code> once per process frame while this node is processing. Each call reaches the indented line: add one to <code>_count</code>. One, then two, then three. Declared outside the function, <code>_count</code> keeps its value between calls. Its zero belongs to the beginning of this node.</p>
+<p><code>delta</code> brings the update's time interval in seconds. We receive it without using it yet. Adding one counts calls; adding the intervals would accumulate time. The same count could have taken different durations.</p>
+<p>The room's panel reads a total that began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p>This counts process frames since the engine started, including frames before the panel existed. We begin with a number that includes something we did not witness.</p>
+<!-- @folding_past -->
+
+<p>Through the entrance window, frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything might be explained in order.</p>
+<p>This particular depth has a small inventory: ten frames, scaled and moved through a repeating cycle. It makes a figure of a past. It keeps no record of your arrival. A few repeated shapes can invite a much longer journey than the one their program holds.</p>
+<p>We could turn back into the counter: how a digit gets its shape, how the glass is drawn, how the engine returns to <code>_process</code>. Any of those questions could take the rest of our time here. To begin with the point, we have to leave some invitations unanswered. The lesson borrows operations we have not learned to examine yet.</p>
+<p>The code we leave unread keeps working. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?</p>
+<p>Alice's rabbit is already ahead. We still have a point to find.</p>
+<h2>Somewhere, without a body</h2>
+<!-- @the_invisible_point -->
+
+<p>In the glass case, four brass arrows address an empty centre. Two thin red lines meet there. Follow either line towards the crossing. There is no dot to take over the work of locating it.</p>
+<p>What have you found, if there is no body there?</p>
+<p>The source names the meeting place:</p>
+<pre><code class="language-gdscript">const FOCUS := Vector3(0.0, 1.25, 0.0)
+</code></pre>
+<p><code>Vector3</code> holds three components. Here they specify a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. The case supplies the reference. These numbers give a location without making anything visible.</p>
+<p>The arrows and lines are arranged around <code>FOCUS</code>. The point itself is never drawn. There is no hidden mesh, no later appearance to wait for. We have found it through its relations to other things.</p>
+<p>The source gives us another way to approach the same empty centre. An address can be read. A position can organise a room without wearing a surface.</p>
+<!-- @code_evolution_screen -->
+
+<p>On the nearby code screen, a separate example begins to dress a position: a sphere, colour, a label. Later, an accumulated time decides when that marker would appear. These are illustrative scripts to read; the screen does not execute them. The point in the case stays invisible.</p>
+<p>A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.</p>
+<h2>Dress the point</h2>
+<!-- @interactive_point_origin_force -->
+
+<p>The dark point offers itself to your hands. Pick it up. Follow it a little to one side, then back. Its appearance can change as you handle it; successive pickups also change how its coordinates are displayed, sometimes hiding the label.</p>
+<p>Already, the point has broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.</p>
+<p>A mathematical point has no extension. This artifact gives it a sphere, a collision shape and ways to respond. Those additions let us meet a position through movement.</p>
+<pre><code class="language-gdscript">var p := Vector3(1.0, 0.5, 0.0)
+</code></pre>
+<p>Three components again. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. A program could record some of those things separately. Here, the position gives us a place to begin making.</p>
+<p>What drew your hand towards it? Knowing how the sphere was made need not finish that interest. Another surface, another response: there are already several ways to make a location felt.</p>
+<!-- @origin -->
+
+<p>Find the origin marker. Zero has been given a place too. <code>Vector3.ZERO</code> names the reference from which other positions can be measured. It belongs to a coordinate frame. It is a beginning we can use.</p>
+<!-- @coordinate_readout -->
+
+<p>Put down the dark point. The coloured frame has a movable point of its own. Take that one and watch the card marked <code>WORLD</code>. Move it slightly. A printed number may stay unchanged through movement you can see.</p>
+<p>The card rounds its account to two decimal places. Nearby positions can share a printed address while the stored position continues to change. That little stillness has been made for reading.</p>
+<!-- @CoordinateSystem3M -->
+
+<p>Red follows X, green follows Y, blue follows Z. Move the point along one guide, then across it. The frame uses <code>to_local()</code> to express the point's world position relative to its own origin, orientation and scale. The same place can have different addresses. Remember the case: its 1.25 was measured from there.</p>
+<p>Carry the point beyond an arrow's end. The drawn guide stops; the coordinate system can keep describing the movement. An earlier version confined the point to the arrows' span. A drawing intended to explain space had become a rule for where movement must end. Now you can take the point farther.</p>
+<!-- @drag_point_target -->
+
+<p>The red arrow says “drag point here”. Carry the point towards it. Watch for falling balls. Leave and return by another route.</p>
+<p>The target accepts the point within 0.45 metres of its chosen centre. A hand has room to arrive. Passing through can count as arriving too; the test asks for proximity, without asking why you came. Leave, return, and a destination can become an instrument. Give the falling balls a rhythm.</p>
+<!-- @wireframe_threshold -->
+
+<p>Step inside the floor ring. Surfaces become edges in the wireframe view. The glass case has geometry; the invisible point has no triangles to reveal. Nor will this view show the comparison that accepted your arrival at the arrow. That opening waits in the source.</p>
+<!-- @fontana_puncture -->
+
+<p>The punctured surface offers another instance of the changing point. Look through a different opening. A cut can give you another approach to the body inside. We have an address, a sphere, an opening: each lets us come near differently.</p>
+<!-- @floating_sphere_field -->
+
+<p>Small spheres drift nearby. Positions have acquired another pace and appearance. There is more here to follow than we have time to follow now.</p>
+<!-- @ -->
+
+<p>The counter has continued through all of this. We have located a point, dressed it, carried it, given ourselves somewhere to return.</p>
+<p>Keep a place you would like to reach. In the next room, we will hold two positions together. A line begins.</p></details></section><section class="chapter" id="Point_Lines"><h2 class="chapter-title">Point–Line</h2><p><a href="/necklace/thread?map=Point_Lines&amp;role=primary">Artifacts and book</a></p><p>The point gave us somewhere to begin. Now there is something to follow.</p>
+<!-- @line_demo -->
+
+<p>Two black points wait beside a barrier: <strong>DO NOT CROSS.</strong> Bring the points near one another and release to request a connection. Watch for the segment between them. What else moved?</p>
+<p>The barrier flies apart. You joined two positions, and something nearby lost its power to stop you. Move an endpoint. The connection can remain while its length and direction change.</p>
+<p>The connection manager keeps each point as the other's neighbour. On their first connection, this demonstration also calls the barrier's <code>trigger_explosion()</code>. Someone joined those events in code. Making a line has become a way to open a passage. We could have written a different consequence. Keep that possibility beside the one you have just tried.</p>
+<!-- @line -->
+
+<p>Compare your connection with the already drawn line. Its two endpoints give us a compact way to describe a segment:</p>
+<pre><code class="language-gdscript">var a := Vector3(0, 0, 0)
+var b := Vector3(1, 0, 0)
+var displacement := b - a
+var distance := displacement.length()
+</code></pre>
+<p>From A to B: one metre along the positive X-axis. The subtraction keeps a direction as well as an amount. The length gives us the amount alone. Two distinct positions determine a straight line; the part between them is a segment. These few lines let us hold a relation steady enough to compare it with another.</p>
+<h2>Read it with your feet</h2>
+<!-- @walk_this_line_marking -->
+
+<p>On the floor, a white stripe: <strong>WALK THIS LINE.</strong></p>
+<p>Try moving along it. Let your pace be your own. You might look down to keep it under you, then look ahead and trust it for a while. Move alongside it. The stripe is still available. It can help you find a direction without having to become the whole of your journey.</p>
+<p>I keep thinking of a dance pole: the rod stays straight; the body finds turns around it. Here the line lies on the floor. What movements does that change invite? Following, crossing, keeping company at a small distance. There is pleasure in having something steady to vary a relation with.</p>
+<p>The words may also make you correct yourself. A little sideways movement can begin to feel like a mistake. This marking does not score your walk. Its script makes the stripe and lettering; it does not check whether you obey. Yet you have read an instruction, and perhaps begun to arrange yourself around it. Stay with that perhaps. Another visitor may read an invitation where you read a demand.</p>
+<!-- @do_not_cross_barrier -->
+
+<p>The barrier made a different kind of request. While intact, its collider extended from the floor to the bar: the visible gap beneath the plank did not offer passage. Now its former position can be crossed. Disconnecting your points does not put it back.</p>
+<p>A phrase, a painted stripe, an invisible collision boundary: each can take part in directing a body. They have been made separately. Changing the words and opening the way are different acts.</p>
+<h2>Carry the whole line</h2>
+<!-- @grabbable_line -->
+
+<p>Pick up the short rod. Carry it across your view. Turn it. Its two ends move together, keeping their distance. A direction you followed on the floor can now be a direction you hold in your hand.</p>
+<p>Compare turning it with pulling the demonstration's endpoints apart. One operation carries a fixed span; the other changes the span itself. A length that stays fixed can become a unit for comparing other lengths.</p>
+<p>Move the held rod slowly through the room. Near whole-number values on a world axis, it begins to jitter and sound; a tracked controller can pulse too. Its position has met an authored rule. Search for a quiet place, then return to the disturbance. Something that interrupts carrying can become an instrument you play by carrying.</p>
+<!-- @two_point_ruler -->
+
+<p>The ruler offers a half-metre span beside two blocks. Compare them by looking. Here the unit stays still for you. Later we could make measuring one object change another. For now, there is already something to borrow: a distance held steady so other distances can be read.</p>
+<!-- @two_points_line -->
+
+<p>Watch the bead travel between its two endpoints. Wait for its return. It slows near the ends; a straight route has room for a changing pace.</p>
+<pre><code class="language-gdscript">var p := a.lerp(b, t)
+</code></pre>
+<p><code>lerp</code> interpolates: at <code>t = 0</code>, the position is A; at <code>t = 1</code>, B. Values between them give positions along the segment. The bead's script uses a cosine to move <code>t</code> back and forth. One operation supplies the route, another the rhythm. We will return to that rhythm when we learn how values change over time.</p>
+<h2>Where the beam ends</h2>
+<!-- @laser_measure -->
+
+<p>Take the measuring instrument and aim through the place where the barrier stood. The beam reports the first physics body it hits. If the barrier is still intact, hold the beam on it: this hall enables burning, and the barrier can break that way too. Watch where the measurement ends afterward.</p>
+<p>A ray begins at a position and goes in a direction. The bodies it encounters help determine the answer it returns. Here a measurement can participate in changing what can be measured.</p>
+<!-- @laser_exploding_sphere -->
+
+<p>The orange sphere bursts when the controller pointer enters it, then returns after a cooldown. That pointer is another interface, separate from the measuring beam. Similar-looking lines can ask different things of the room. The returning sphere invites another try; the broken barrier leaves a changed route.</p>
+<!-- @parallel_lines -->
+
+<p>Walk around the three parallel segments. Their apparent separation changes with your viewpoint. They keep their shared orientation. Alongside is another relation a line can offer: company without a meeting point.</p>
+<!-- @ -->
+
+<p>Choose two positions and travel between them by a detour. The subtraction <code>b - a</code> still gives the same answer as it would for a direct passage. Your curve, your hesitation, the time spent looking at something halfway: none of those events entered those two variables.</p>
+<p>There is usefulness in that small answer. We can measure without carrying every journey into the measurement. There is also a reason to want more. I want to keep the turn your hand made, the movement the two ends cannot tell apart from a direct passage.</p>
+<p>The next room gives us a way to begin keeping it. We will save positions along the movement. Even then, we will have to choose how many.</p>
+<p>Bring the detour.</p><details class="reference"><summary>Companion notes</summary><h1>Point–Line: encounter reference</h1>
+<p>Companion to the revised final.md, 15 September 2026.</p>
+<h2>Relations, geometry and consequences</h2>
+<p>The connection manager appends each endpoint to the other's adjacency list after duplicate checks. The demo listens for <code>connection_created</code> and recognises its endpoints. Their first connection calls the nearby barrier's <code>trigger_explosion()</code> in this hall. The collider is removed and visible pieces scatter; disconnecting does not reconstruct the barrier. Larger endpoint spheres previously hid a short connecting segment, illustrating the difference between maintaining a relation and drawing it legibly.</p>
+<p>The floor marking generates a stripe and lettering, without obedience tracking. The intact barrier uses a collider extending from the floor to its plank. The picked-up rod is one body with a fixed span. Its resistance effect responds to proximity to whole-number world coordinates, rather than its length. The dance-pole association in final.md describes a possible way of thinking about the relation; the short rod is not a physically supporting pole.</p>
+<h2>Instruments</h2>
+<p>The half-metre ruler is a visual comparison display. A measuring action that changes another object remains a proposal. The bead uses interpolation along a segment and cosine to vary its parameter. The measuring laser reports its first physics hit within its range; this hall enables dwelling on the barrier to break it. The orange sphere responds instead to controller pointer entry and returns after a cooldown.</p>
+<p>Parallel segments retain their shared orientation as viewpoint changes; their spacings need not all be equal. Ordinary Euclidean straightness is not changed by viewing the line in VR.</p>
+<p>The endpoint subtraction in final.md is an illustrative calculation. For distinct endpoints, displacement divided by its nonzero length supplies a unit direction. Geometry and the graph's adjacency data serve different purposes.</p>
+<h2>Further code from the earlier passage</h2>
+<p>These excerpts are preserved from the preceding chapter version for reference. They include illustrative reductions; consult the surrounding notes and technical.md before treating one as a complete implementation.</p>
+<pre><code class="language-gdscript">_adjacency[point_a].append(point_b)
+_adjacency[point_b].append(point_a)
+</code></pre>
+<pre><code class="language-gdscript">var direction := displacement / distance
+</code></pre></details><details class="reference"><summary>Compare with the preceding chapter</summary><p>A point had no parts. Keep two positions now, in the same coordinate system. What can you change about their connection without changing which points are connected?</p>
+<!-- @line_demo -->
+
+<p>Before touching the two black points, look at what stands beside them: <em>DO NOT CROSS.</em> Bring the points near one another and release to request a connection. Watch for the segment between them. What else moved?</p>
+<p>The barrier flies apart. You joined two positions, and something a little way off lost its power to stop you. Keep the line. Move one endpoint a short distance. Predict which part of the connection will change, then move it another way.</p>
+<p>The connection manager keeps the relation in both directions:</p>
+<pre><code class="language-gdscript">_adjacency[point_a].append(point_b)
+_adjacency[point_b].append(point_a)
+</code></pre>
+<p>These lines sit inside checks against duplicate connections. Each point gets a neighbour. A changed length or direction need not be a changed neighbour.</p>
+<p>The explosion takes another connection, this time between events. The manager emits <code>connection_created</code>; the demonstration recognises its two endpoints and, on their first connection, calls the nearby barrier's <code>trigger_explosion()</code> in this hall. That instruction removes the collider and scatters the visible pieces. No property of a straight line required this consequence. Someone connected making a line to undoing a prohibition.</p>
+<p>What would this room teach if the same success erected the barrier instead?</p>
+<!-- @line -->
+
+<p>Compare the connection you made with the already drawn line. A visible segment can be represented by its two endpoints:</p>
+<pre><code class="language-gdscript">var a := Vector3(0, 0, 0)
+var b := Vector3(1, 0, 0)
+var displacement := b - a
+var distance := displacement.length()
+</code></pre>
+<p>Here the distance is one metre. The displacement also tells us which way from A to B. Two distinct points determine an infinite straight line; restricting it to what lies between them gives a segment. Storing that geometry and storing a neighbour relation answer different questions.</p>
+<p>The demonstration had to learn how to show this. When its spheres grew larger, they swallowed the short connecting line. The connection existed in the program and disappeared in the picture. Making a relation legible takes another decision after making it exist.</p>
+<!-- @ -->
+
+<h2>Read it with your feet</h2>
+<!-- @walk_this_line_marking -->
+
+<p>The white stripe comes with a verb: <em>WALK THIS LINE.</em></p>
+<p>Follow it for a few steps, then walk beside it. Try following it backwards. Compare what happens in the room with the correction you may feel tempted to make to your own gait.</p>
+<p>The marking draws an instruction. It has no tracking code that rewards your obedience or registers your departure. Whatever correction you made through reading belongs to an encounter between a sign and a reader.</p>
+<p>A line can be a useful guide. It can also make walking alongside it feel like getting something wrong. Walking it backwards keeps to the geometry and changes the walk.</p>
+<!-- @do_not_cross_barrier -->
+
+<p>If you made the connection first, the words have already gone with the plank. Approach the place where the barrier stood and compare it with the paint. You can cross its former position. If you came here before making the line, look below the plank before testing passage.</p>
+<p>While intact, the barrier has a collider: a box extending from the floor to the bar. A gap below the visible plank need not offer a gap in that box. Changing the words changes the request; removing the collider changes the obstruction. Neither requires moving the two ends. Disconnecting your points does not put the barrier back. The room keeps one consequence while letting you revise another.</p>
+<p>Geometry, instruction and enforcement can occupy the same place. They still have to be made separately.</p>
+<!-- @ -->
+
+<h2>Carry the whole line</h2>
+<!-- @grabbable_line -->
+
+<p>Pick up the short rod. Turn it, carry it, then compare that movement with pulling the demonstration's endpoints apart. Which length stayed fixed?</p>
+<p>The rod's ends belong to one body, so moving it carries both together. Turning changes its direction while its length stays fixed. A fixed span can become a unit for comparing other spans.</p>
+<p>Move the held rod slowly through the room. Near whole-number values on a world axis, its centre triggers jitter, changing sound and, with a tracked controller, pulses. The disturbance belongs to its address, not its length.</p>
+<p>Use that disturbance as an instrument: search for a quiet position, then find an edge where the noise returns. An imposed interruption can become a way to investigate the rule imposing it.</p>
+<!-- @two_point_ruler -->
+
+<p>The ruler holds a half-metre span between two marks. Beside it stand a pale block and a blue one. Compare the span with the pale block by looking. A unit is a distance somebody has decided to hold steady.</p>
+<p>This placed display does not yet provide a hand-operated measurement action. Its intended extension is a more difficult question: measuring one object would alter the other while leaving the reported dimension true. For the working encounter here, keep the fixed span; the laser supplies a measurement you can perform.</p>
+<!-- @ -->
+
+<h2>Move between the ends</h2>
+<!-- @two_points_line -->
+
+<p>Watch the bright bead move between the two coloured endpoints. Before it turns, predict where it will slow down. Would the same segment require the same pace?</p>
+<p>Interpolation places a point along a segment:</p>
+<pre><code class="language-gdscript">var p := a.lerp(b, t)
+</code></pre>
+<p>At <code>t = 0</code>, it is at A; at <code>t = 1</code>, at B. Values between them stay on the segment. This bead's script moves the parameter back and forth with a cosine, slowing near each end.</p>
+<p>The geometry supplies a route. Another function supplies a pace. Straightness alone never required haste, constant speed, or arrival at B as the end of the story. Watch the bead return.</p>
+<!-- @ -->
+
+<h2>Measure, then change the measurement</h2>
+<!-- @laser_measure -->
+
+<p>Take up the measuring instrument. Aim through the place where the barrier stood. What stops the beam now? If you reached the instrument before making the connection, the intact barrier offers another experiment: keep the beam on it and compare the reading before and after it breaks.</p>
+<p>A ray needs a starting position and a direction. For distinct endpoints, dividing displacement by its length gives a unit direction:</p>
+<pre><code class="language-gdscript">var direction := displacement / distance
+</code></pre>
+<p>The tool casts forward up to its maximum range and reports the first physics body it hits. Its visible beam ends at that collision. This room enables its burning behavior: dwelling on the barrier calls the barrier's explosion action and removes its collider.</p>
+<p>On that route, measurement changes what can be measured. On the other, making a connection has already changed the beam's destination. The number alone cannot explain why the distance changed.</p>
+<!-- @laser_exploding_sphere -->
+
+<p>The orange sphere provides another response to compare: controller pointer entry triggers its burst, and it returns after a cooldown. The measuring beam and the controller pointer are separate interfaces here. Similar-looking lines need not ask the same question of an object.</p>
+<p>The sphere can return; the broken barrier stays gone for this loaded instance. One response supports repetition, while the other changes the route. That difference was authored after the geometry.</p>
+<!-- @parallel_lines -->
+
+<p>Walk around the three fixed parallel segments. Their apparent separation changes with your viewpoint. Their shared orientation remains, and their spacing need not be equal. Staying alongside one another leaves more undecided than a command to walk in one direction.</p>
+<!-- @ -->
+
+<p>Choose two positions in the room. Travel between them directly, then by a detour. Explain what a segment between the endpoints would keep from both journeys, and what it could not distinguish. You can do this alone, or let someone else choose the second route before comparing.</p>
+<p>Next comes Point Trace. Instead of keeping only the ends, we will keep positions along a movement. Bring the detour. The next room has somewhere to store it.</p></details></section><section class="chapter" id="Point_Trace"><h2 class="chapter-title">Point Trace</h2><p><a href="/necklace/thread?map=Point_Trace&amp;role=primary">Artifacts and book</a></p><p>Bring the detour.</p>
+<p>There was time between the ends. We passed through it. Let the next line try to keep something of the passage.</p>
+<h2>Let the hand leave a line</h2>
+<!-- @draw_dot -->
+
+<p>The drawing points wait on their plinths. Take the first dot and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.</p>
+<p>Watch during the pause. Does another point enter merely because time passes?</p>
+<p>Move again. Give the loop a tail, then release the dot. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.</p>
+<p>The count comes from a list:</p>
+<pre><code class="language-gdscript">var point_count = _trail_points.size()
+</code></pre>
+<p>Each accepted position occupies a place in that ordered list. The recorder joins neighbouring positions with straight segments. Enough small segments can let us see a curve. Go closer to a turn: the smooth-looking gesture has acquired joints.</p>
+<p>The dot waits for at least five millimetres of movement before considering another sample. Below that movement threshold, the update can return without adding a position. A stationary pause can leave the list unchanged while Point One's counter has plenty more calls to count.</p>
+<p>There is already more code at work than we can read here: pickup, tracking, drawing, the letters on the screen. We choose the movement gate because it answers the question our hand just asked. The other processes continue to support the experiment while we leave them unread.</p>
+<p>Read two neighbouring rows. The coordinates give places in world metres. If your loop has more than ten points, its first row may have left the table: the instrument shows the last ten, while the larger count names the whole retained list. The line can hold something its small window is no longer showing.</p>
+<h2>Another resolution, another gesture</h2>
+<p>Try the other drawing dots. Red rounds positions to a 10 mm grid, green to 40 mm, blue to 80 mm. The first dot adds no such grid. Read the instrument to find which rule you are holding.</p>
+<p>Repeat a small bend with the blue dot. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.</p>
+<p>The grid operation is small enough to read. With <code>rec</code> as a position and <code>s</code> as the spacing in metres:</p>
+<pre><code class="language-gdscript">rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+</code></pre>
+<p>Each component moves to the nearest multiple of the spacing. If the result repeats the last stored position, the recorder does not add it again. The movement gate decides whether to consider a reading; the grid helps decide where that reading can stand. These are different choices.</p>
+<p>The segments can cross the grid diagonally. Follow one of those shortcuts. The program connects what it kept; it did not measure every place along that connection. Even the finest dot reads positions during successive calls while the rest of the museum runs between them.</p>
+<p>Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?</p>
+<!-- @draw_stick -->
+
+<p>Take the stick. Keep your fist nearly still and turn your wrist. The tip travels an arc. This tool uses the same recorder, but puts the sampling point at the end of a rod. A small turn can become a large mark. The line has gained another way to extend your movement.</p>
+<p>The record has a finite capacity: 4096 accepted points. Beyond that, a new position pushes the oldest out:</p>
+<pre><code class="language-gdscript">if _trail_points.size() &gt; trail_max_points:
+    _trail_points.pop_front()
+</code></pre>
+<p>The number could stay at 4096 while the beginning of the line changes. We can read that limit without filling it now. The current dots do not fade their live trails merely because time passes. Looking at the line need not spend another place in it.</p>
+<h2>Touch the page</h2>
+<!-- @whiteboard -->
+
+<p>Four pens hang in front of the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.</p>
+<p>Your hand travelled across the gap. The picture leaves it white.</p>
+<p>This pen writes near the board's surface, within its edges. Lifting beyond the contact allowance begins a new stroke when you return. The dot carried a line into the room; this pen lets contact interrupt it. An empty interval can become part of a drawing.</p>
+<p>The board brings the nib's world position into its own frame:</p>
+<pre><code class="language-gdscript">var p := to_local(world_tip)
+</code></pre>
+<p>Across and up the board become two coordinates. The coloured pens apply the same 10, 40 and 80 mm spacings we met in the air. Try a bend that red can keep and blue cannot, then enlarge it for blue. The pen marked NO GRID omits that rounding, but its marks still enter a pixel canvas. There is always another construction to examine when we look closer.</p>
+<p>Take the eraser across a mark. Leave another beside it. Something worth keeping may appear through removing. The board holds a painted image during this visit; the dot holds a list of positions. Those records give us different materials to work with next.</p>
+<!-- @hand_telemetry_diptych -->
+
+<p>At the paired monitors, check whether the footer says <code>TRACKING</code> or <code>DEMO FEED</code>. With a tracked controller, you can follow a hand through timed rows, including while it stays still. The demonstration feed supplies an example when tracking is absent. A full-looking record needs an account of where it came from.</p>
+<!-- @automatic_writing_desk -->
+
+<p>The desk offers wordless handwriting. When it finds a headset camera, movement of that camera changes the writing's amplitude; otherwise a demonstration can keep it moving. Try leaning, then resting. Something like a confession appears, although you have composed no words. What makes a mark feel as if it knows you?</p>
+<!-- @ -->
+
+<p>Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. A whiteboard image is kept differently and will not take this route.</p>
+<p>The trace is transmissible as data and irrecoverable as event. We can carry its positions into another room, even though we cannot carry the original movement there. We can also give them another task.</p>
+<p>In the next room, look for your bend. It may have grown.</p><details class="reference"><summary>Companion notes</summary><h1>Point Trace: encounter reference</h1>
+<p>Companion to the revised final.md, 15 September 2026.</p>
+<h2>Three decisions in the recorder</h2>
+<p>The installed drawing dots use a 5 mm movement threshold and 4096-point capacity. The gate compares current world position with <code>_last_global_position</code>. On passing the gate, that reference updates <strong>before</strong> shaping and duplicate rejection. It is therefore not necessarily the last position retained in the trail, and the distance check is not simply movement since the previous engine frame.</p>
+<p>In free space, the first dot adds no recording lattice; the red, green and blue variants round to 10, 40 and 80 mm. After shaping, a consecutive duplicate is rejected. Calls, movement-qualified readings and retained points are different counts. The straight connecting segments may be diagonal. Sampling cadence and spatial rounding are distinct causes of changes in a drawn curve.</p>
+<p>The display shows retained count/capacity, movement threshold and lattice spacing. It shows the last ten retained positions, in world metres with at least three decimal places. An eighteen-point trail therefore displays rows 9–18 while the earlier points remain in the trail. The display previously rounded more coarsely than the recorder; that was a reporting defect, not evidence that the saved positions were identical.</p>
+<h2>Capacity and persistence</h2>
+<p>Default live-trail fading is off in these placements. Above capacity the oldest point is removed; row numbers address the current list and shift when its first element is removed. Capacity is not a fixed duration. A smaller capacity would make eviction easier to witness, but is not an installed control. Some plinth traces are generated demonstrations, not recovered visitor gestures.</p>
+<p>Releasing a drawing dot or stick publishes a copy of its retained positions to TraceData when there are at least two positions. That store survives room changes in the current game; this is not a disk-save promise. The whiteboard image takes another route.</p>
+<h2>Board and other records</h2>
+<p>The board has its own pens. Contact requires the nib within 35 mm of the plane and inside its edges. Lifting beyond that allowance makes the next contact start a new stroke. Coordinates are transformed into the board's frame, optionally rounded to the pen's lattice, then mapped to a 1024 × 768 pixel canvas. NO GRID omits one rounding operation; it does not remove pixels. The brush connects accepted contacts without having measured every filled pixel.</p>
+<p>The paired telemetry panels distinguish TRACKING from DEMO FEED. The automatic-writing desk uses available headset-camera position changes to alter amplitude, with fallback demonstration motion. Neither establishes attention or a confession.</p>
+<h2>Further code from the earlier passage</h2>
+<p>These excerpts are preserved from the preceding chapter version for reference. They include illustrative reductions; consult the surrounding notes and technical.md before treating one as a complete implementation.</p>
+<pre><code class="language-gdscript">var dist = current_global.distance_to(_last_global_position)
+
+if dist &lt; min_segment_distance:
+    if fade_trail:
+        _cleanup_old_points()
+        _rebuild_trail()
+    _refresh_data_table_if_due()
+    return
+</code></pre>
+<pre><code class="language-gdscript">var s: float = resolution_mm / 1000.0
+rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+</code></pre></details><details class="reference"><summary>Compare with the preceding chapter</summary><p>Bring the detour.</p>
+<p>In the last room, making a line could bring down a barrier. You could keep changing the line after the way opened. Keep two of its positions now: the place you started and the place you finished. Could that connection tell a direct walk from a wandering one?</p>
+<p>There was time between the ends. We passed through it. Let the next line try to keep something of the passage.</p>
+<h2>What the line forgot</h2>
+<!-- @draw_dot -->
+
+<p>The drawing points wait on their plinths. Take the first dot and draw a short loop in the air, then pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions. Watch it during the pause. Does another point enter merely because time passes?</p>
+<p>Move again: a small bend followed by a larger one. Look for the places where the line turns. Compare them with the turns you remember making. Keep drawing until the count passes twelve, then release the dot. The cased display stays beside the trace. Your hand can rest while you read.</p>
+<p>Find the first row in the table. Where is row 1? Follow the line back towards its beginning before deciding what has disappeared.</p>
+<p>The large count names the whole retained record. The table opens a window onto its last ten positions. A line of eighteen points shows rows 9 to 18; the earlier eight can still belong to the line. The instrument has made another selection, this time for the reader.</p>
+<p>The count comes from the list itself:</p>
+<pre><code class="language-gdscript">var point_count = _trail_points.size()
+</code></pre>
+<p>A row names a place in that list. It does not name a frame of the game clock, a second, or a bend you remember making. Two gestures can leave equally long lists with very different coordinates.</p>
+<p>A segment can be described by two endpoints and a rule for the between. There is nowhere in that description for a hesitation to be. This recorder adds an ordered list of positions. It can keep an overshoot or correction when those movements produce different accepted samples. A stationary pause, by itself, supplies no new position.</p>
+<p>The readout gives a retained count and its capacity, the movement threshold and the recording grid. These placed drawing dots use a <strong>5 mm movement threshold</strong> and a capacity of <strong>4096 accepted points</strong>. The recorder first checks movement, then shapes the position, then rejects a shaped sample if it duplicates the last one.</p>
+<p>That is three decisions before the line reaches your eyes: whether to look, where to put the reading, and whether another reading adds anything the list distinguishes.</p>
+<p>The movement gate begins here:</p>
+<pre><code class="language-gdscript">var dist = current_global.distance_to(_last_global_position)
+
+if dist &lt; min_segment_distance:
+    if fade_trail:
+        _cleanup_old_points()
+        _rebuild_trail()
+    _refresh_data_table_if_due()
+    return
+</code></pre>
+<p>Below the threshold, the callback can refresh the display and return without adding a position. The engine has done more work; the list has not grown. Point One's counter would have something to count during your pause. Here the hand waits, the list waits, and the museum keeps running.</p>
+<p>There is already more code at work than we can read before leaving this hall: pickup, tracking, drawing, the letters on this small screen. We choose the movement gate because it answers the question our hand just asked. The other processes continue to support the experiment while we leave them unread.</p>
+<p>Read two neighbouring rows. Their coordinates are in world metres, with at least three decimal places. The table once printed only two: a recorder could keep two positions that its own display made look identical. The record and the account of the record each have a resolution. We had to change the account to let this experiment be read.</p>
+<!-- @ -->
+
+<h2>The same gesture, on four different grids</h2>
+<p>Try the other three drawing dots. Their traces differ in colour and in where they can turn: red, green and blue round to <strong>10 mm</strong>, <strong>40 mm</strong> and <strong>80 mm</strong> spacing. The first dot has no added recording grid. Read each instrument to check its rule. Four instances of one recorder have been told differently where a reading is allowed to stand.</p>
+<p>Repeat the small bend with the 80 mm dot. Then make a larger loop. Find a movement that changes the finer record while leaving the coarse recorder at the same stored lattice position. Use the readout to check which recorder you have, rather than relying on colour alone.</p>
+<p>Away from a whiteboard, the spatial part of its rule is:</p>
+<pre><code class="language-gdscript">var s: float = resolution_mm / 1000.0
+rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
+</code></pre>
+<p>This controls <strong>where</strong> a reading may land. The movement threshold is another rule, controlling when the tool considers a new reading. Coarse spacing can collapse different hand positions onto a position already occupied. The duplicate is never added to the list.</p>
+<p>The accepted positions are connected by straight segments. Some segments may be diagonal; the tool does not promise an axis-by-axis staircase. The corners it keeps belong to the recording lattice, not necessarily to every bend of the hand.</p>
+<p>None of these records is the movement. Even the finer recorder receives discrete measurements. Its line connects them, making the unobserved between look continuous.</p>
+<p>The calls arrive while the rest of the museum is also running. The recorder reads one available position on a call; it cannot go back and measure every turn that happened between calls. Drawing faster can spread those readings farther apart. The spatial grid adds a separate decision afterward. A sparse record and a coarse grid may both change a curve, but they do not change it by the same operation.</p>
+<p>Now give the coarse recorder a task it might suit. Try making a corner you can return to, or keeping one stored address steady while your hand wanders around it. Find the edge where it changes. Something that could not keep your small loop may help you hold a place. Which difference does this drawing need?</p>
+<!-- @draw_stick -->
+
+<p>Take the stick and try the loop again. Keep your fist nearly still and turn your wrist. Compare the movement of the fist with the movement at the tip.</p>
+<p>The stick uses the same recorder as the dot, but the recording point sits at the end of a rod. A small turn of the hand can move that tip through a much larger arc. Changing what is sampled changes what the gesture becomes, even before changing the sampling rule.</p>
+<!-- @ -->
+
+<h2>It forgets too</h2>
+<p>Go back to the beginning of a line you have made. Can you still locate it after a pause? What would have to happen for that earliest retained point to leave?</p>
+<p>The current drawing dots do not fade the live trail with age. Reading a line takes time without necessarily spending any more of its memory. Their capacity rule is:</p>
+<pre><code class="language-gdscript">if _trail_points.size() &gt; trail_max_points:
+    _trail_points.pop_front()
+</code></pre>
+<p>After 4096 accepted points, another accepted point pushes the oldest out. The display could keep saying 4096 while the line changes. Its count would still be correct. To discover that exchange, we would have to inspect which positions remain.</p>
+<p>The row numbers address the current retained list. They are not permanent names attached to samples: removing its first member shifts the others towards the beginning. This is a point-count horizon, not a fixed number of frames or seconds. A pause does not spend another place. A gesture that repeatedly reaches new stored positions spends them differently from one that keeps returning to the same coarse position.</p>
+<p>A smaller capacity would make that eviction easier to watch; changing it is a possible later experiment. The current encounter asks you to distinguish the rule from the number of seconds you have been drawing. We can read the removal here without pretending we have already watched all 4096 places fill.</p>
+<p>Some of the plinths already carry example traces. They were generated for the display; they are not recovered gestures from an earlier visitor. An archive needs both something retained and an account of where it came from.</p>
+<!-- @whiteboard -->
+
+<p>Four pens hang in front of the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again. Does the board join the two marks?</p>
+<p>Your hand travelled across the gap. The picture leaves it white. A pen that writes only in contact has made a different selection from the dot that follows you through the room.</p>
+<p>Contact here has a small allowance: the nib must be within 35 millimetres of the writing plane and inside the board's edges. Lift beyond that allowance and the next contact begins a new stroke. The program has to decide what touching means before it can leave a mark.</p>
+<p>The board takes the nib's world position into its own frame:</p>
+<pre><code class="language-gdscript">var p := to_local(world_tip)
+</code></pre>
+<p>Across and up the board become two coordinates. The pen marked NO GRID adds no rounding to them; red, green and blue round to 10, 40 and 80 millimetres. Try a bend with blue that red can keep. Enlarge it until blue changes too. Can you use that interval to repeat a shape?</p>
+<p>The positions are then mapped onto a 1024 by 768 pixel canvas. NO GRID still meets a grid here. Its name describes one operation we have omitted; the image still needs somewhere to put the ink. Between accepted contacts, the brush fills a connecting line. It has not measured every place it colours.</p>
+<p>The drawing dot's instrument lets us read a list of retained world positions. This board keeps a painted image. Neither gives us the hand back. They offer different things to carry forward: addresses we can inspect, or a surface we can write over.</p>
+<p>Take the eraser across one mark. Leave another beside it. What remains may make a new shape worth keeping. The board holds the image during this loaded encounter; saving it for another visit would need another act of storage.</p>
+<!-- @ -->
+
+<h2>A record of whom?</h2>
+<!-- @hand_telemetry_diptych -->
+
+<p>At the paired monitors, read the footer first: <code>TRACKING</code> or <code>DEMO FEED</code>. With a tracked controller, move one hand and follow its own panel. Keep it still for a moment and look at the timed rows. Compare that recording with the drawing dot that waits for qualifying movement.</p>
+<p>In desktop use, a demonstration feed can supply the moving numbers. It illustrates a log; it does not establish that your hand was measured. A full-looking record still needs a source.</p>
+<p>The two panels divide a body into independently tracked parts. That can be useful. It also leaves the reader to decide what those parts mean together, and neither a coordinate nor a blinking recording light can supply that meaning by itself.</p>
+<!-- @automatic_writing_desk -->
+
+<p>The desk writes a different-looking record. When it finds a headset camera, movement of the camera's position changes the amplitude of its wordless script. Try leaning while watching the page, then holding still. Without that input, its demonstration motion can keep the page writing.</p>
+<p>Head movement is not attention, and the marks are not words you composed. The warmth of handwriting can make a mechanical reading feel like a confession. Keep the movement, the encoding and the interpretation apart long enough to ask who is claiming to have read whom.</p>
+<!-- @ -->
+
+<p>Before leaving, invent two gestures the coarse recorder struggles to distinguish. One could include a deliberate pause; another could vary within one lattice position. Say what extra information would preserve the difference you care about: a timestamp, another sample, a pressure reading, a note in your own words. Those are proposals for another recorder, not information this line secretly contains.</p>
+<p><strong>The trace is transmissible as data and irrecoverable as event.</strong> Copy every retained position and the original gesture still does not happen again. Yet the copy can be useful, and choosing what it needs to preserve is work you can participate in.</p>
+<p>The next room takes this hand-scale question under your feet: how far can you move while a grid continues to report the same place?</p></details></section><section class="chapter" id="Point_Line_Grid"><h2 class="chapter-title">Point–Line–Grid</h2><p><a href="/necklace/thread?map=Point_Line_Grid&amp;role=primary">Artifacts and book</a></p><p>Your hand may have been here before you.</p>
+<p>If you released a drawing dot or stick in Trace, a copy of its retained positions can arrive ahead of you. Look for the line over the ruled field. A small movement may now occupy enough space to suggest a route. Keep it in view while we learn what a grid can help us do with it.</p>
+<h2>Hold a place</h2>
+<!-- @grab_sphere_point_snap -->
+
+<p>Pick up the snapping sphere. Move it a little, then a little more. Follow its drawing marker and read the ground table. Can your hand move while the retained line admits no new place?</p>
+<p>This tool uses a five-centimetre grid. Along one axis, a sequence of stored positions might read <code>0.10</code>, <code>0.15</code>, <code>0.20</code> metres. Their grid indices would be <code>2</code>, <code>3</code>, <code>4</code>: count the spacings from zero, or measure them in metres. Two readings of the same position.</p>
+<p>Release the sphere and compare the marker with the last retained row. The marker aligns to the lattice on release. The grid gives a place you can return to, with an interval around it in which small differences can share an address.</p>
+<h2>Let a walk draw</h2>
+<!-- @player_trace -->
+
+<p>Walk a small loop beside the recorder, then a wider diagonal. Look behind you. One path keeps a finer sampled reference; the other rounds positions onto a one-metre lattice. Both are drawings made from readings of movement.</p>
+<p>In the headset, try leaning with your feet planted, then standing upright and taking a step. The paths can respond to both. The recorder uses the headset's horizontal position and the rig origin's height. It needs some point to follow before it can call the result a path.</p>
+<p>The recorder brings that position into its own frame. Then it rounds the horizontal components:</p>
+<pre><code class="language-gdscript">local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
+</code></pre>
+<p>Divide by the spacing, round to an integer, multiply back. At one-metre spacing, several nearby positions become the same address. Near the boundary between two rounding regions, a small movement can change that address by a metre.</p>
+<p>Find an edge by moving slowly. Cross it and return. Give the change a rhythm. Then find room to move while keeping one address steady. There is a dance available on either side of the rule: using the jump, inhabiting the interval.</p>
+<p>The line connects successive retained positions, sometimes diagonally across places you did not traverse. You can return to a place and add another part of the journey; this is an ordered path, rather than a single mark for each visited cell. The record gives us a construction we can compare with our walk.</p>
+<h2>A gesture becomes a score</h2>
+<!-- @grid_lines -->
+
+<p>Return to the ruled field and look for the bend you made in Trace. If the instrument reports no released trace, make a line there with at least two retained points, let go of the dot or stick, and return. The release supplies the copy. The whiteboard's ink and the path now growing behind you are separate records.</p>
+<p>Pink carries the received shape after recentering and enlargement. Green rounds that displayed shape again. Find one small turn in pink and follow what green does with it.</p>
+<p>The display starts with the midpoint of the source's bounding box, <code>center</code>. It subtracts that centre from each position <code>p</code> and multiplies the result by <code>final_scale</code>:</p>
+<pre><code class="language-gdscript">mesh.surface_add_vertex((p - center) * final_scale)
+</code></pre>
+<p>A small trace is enlarged five times. A larger one is scaled less if necessary to fit within five metres along its longest dimension. The stored positions remain available; the display makes another set of positions from them. Green applies its grid afterward, with six intervals per metre along each displayed axis.</p>
+<p>Look back at your hand. A little bend of the wrist has acquired another extent. Imagine another body following it. What was easy to draw might ask for a detour; a turn made without thought might become the part someone else wants to repeat.</p>
+<p>This is one reason to keep a record: it can become useful for something we did not do the first time. We could treat the enlarged line as a score. We would still have to decide how to read it together—where to begin, what counts as following, how much room to leave for another person's movement.</p>
+<p>The instrument's coordinate rows describe the source positions, even while the line stands somewhere else at a different scale. Follow a row, then look up. A number needs its frame; an instruction needs someone to interpret it. The shared record does not settle either relation by itself.</p>
+<p>Below the glass, five-by-five cells continue across the lowered basin. The museum's glass supports you above the ruled field. The lines have no collision surface of their own. A grid can supply addresses for building; something else must make a floor that carries a body.</p>
+<!-- @floating_sphere_field -->
+
+<p>Small spheres drift while your path is being recorded. Their movement accompanies yours without entering that recorder. The room has more going on than one instrument follows.</p>
+<!-- @room_grammar -->
+
+<p>A plan generated by rules brings the question to walls and doors. An address lets us place something. We still have to make an approach to it, leave room beside it, decide what kinds of bodies should be able to pass. A plan can hold an arrangement before anyone has found a way to inhabit it.</p>
+<!-- @plan_vitrine -->
+
+<p>Step into the glass enclosure around the small five-by-five plan beside the main gallery. Count a row, then a column. Twenty-five cells, each one metre across. Their numbers run from zero to four along each direction.</p>
+<p>Walk across a row and cut diagonally. These edges can help us place objects without becoming walls for our bodies. Here a cube could stand; beside it, a wedge could become a ramp. A few relations could begin to make a level. The line that asked you to follow now gives you places to compose.</p>
+<!-- @ -->
+
+<p>Keep a purpose for your path: accompanying someone, returning to a view, making a loop for its own pleasure. The coarse record may be enough to share part of that purpose. You may want to add something—a time, a word, another position—or leave the record open to another interpretation.</p>
+<p>We began with a location. A line offered a relation; a trace kept positions from a movement; a grid made places comparable and available for another construction. Each gives us more to work with, and another choice about what matters.</p>
+<p>The next room adds a third point. We can return a path to its beginning. What else must we make before that closed boundary becomes a face?</p><details class="reference"><summary>Companion notes</summary><h1>Point–Line–Grid: encounter reference</h1>
+<p>Companion to the revised final.md, 15 September 2026. The existing technical.md supplies the fuller source walkthrough.</p>
+<h2>Different grids, different frames</h2>
+<p>The held snapping tool uses a 0.05 m world grid. Its table records retained samples and lattice indices, not a raw-versus-rounded comparison. On release it corrects the handle position so that the sampled marker aligns to the lattice; the release callback can append the position even if already retained.</p>
+<p>The walking recorder follows the walking body on desktop. In VR it combines camera world X/Z with rig-origin world Y, then converts to its own frame and rounds local X/Z to a one-metre lattice. It adds a display-height offset. Leaning and stepping can both move its chosen point; it does not record footsteps. Consecutive duplicates are suppressed. The record holds up to 1024 positions with sample times and speeds; fading is off. The finer reference is sampled too. Direct segments can cross untraversed ground.</p>
+<p>Rounding regions extend halfway between lattice nodes. Their boundaries need not coincide with a separate visible grid drawing. Reapplying the same rounding rule to a rounded position leaves it unchanged (idempotence); this does not establish that the first application preserved every difference.</p>
+<h2>Replay and its account</h2>
+<p>TraceData copies at least two retained positions from a released drawing dot or stick. The store does not include the original pen colour, timestamps or interpretation. It is shared across rooms in the running game, without a disk-save operation here. The whiteboard and player_trace do not publish this record.</p>
+<p>The replay subtracts the source bounding-box centre and enlarges fivefold, reduced if needed to keep the longest dimension within five metres. Pink shows that transformation. Green then snaps all three displayed axes to 1/6 m; a mesh needs at least two surviving points. Source positions remain unchanged.</p>
+<p>The panel reports the latest source count/length, enlargement and display pitch. Its source-world rows advance ten per page every two seconds. Its summary covers the latest ten releases; older meshes can remain. Source and displayed lengths are different quantities.</p>
+<h2>The placed plan</h2>
+<p>The current map places <code>plan_vitrine</code>, which wraps <code>simulation_grid</code>; the book now anchors the placed wrapper. Its five-by-five one-metre cells have a continuous floor collider. Glass panes visually enclose the plan but carry no colliders. The wrapper also contains controller-mounted drawing behavior; that is not a promised desktop interaction or a newly headset-verified encounter in this writing pass.</p>
+<p>Separately, the museum basin for grid_lines has a one-metre depth and a glass lid supplied by the museum builder. The grid lines themselves have no floor collider. Changing walking-grid spacing or origin through new controls remains future work.</p>
+<h2>Further code from the earlier passage</h2>
+<p>These excerpts are preserved from the preceding chapter version for reference. They include illustrative reductions; consult the surrounding notes and technical.md before treating one as a complete implementation.</p>
+<pre><code class="language-gdscript">position_sample.x = camera.global_position.x
+position_sample.z = camera.global_position.z
+</code></pre></details><details class="reference"><summary>Compare with the preceding chapter</summary><p>How far can you move while the record continues to report the same place?</p>
+<p>The last room let a dot keep positions and a whiteboard keep ink. Both met grids along the way. A little loop could disappear into one stored position; the same rule could help you return to a corner. Carry that change of purpose here. The grid is about to take up more space, and the point it follows will be somewhere in your own movement.</p>
+<p>There may already be a line here that you did not draw in this room. Keep it in view. We will come back to how it arrived.</p>
+<h2>A grid in the hand</h2>
+<!-- @grab_sphere_point_snap -->
+
+<p>Pick up the snapping sphere. Move it a little, then a little more. Watch the line that follows its small marker. Can your hand move while that line refuses another place? Now read the ground table: spacing, retained positions in metres and lattice indices. Move slowly along one direction until two successive retained positions are neighbours. How far apart are the numbers? Release, then compare the marker with the last retained position.</p>
+<p>This artifact uses a <strong>0.05 m grid: five centimetres</strong>. Keep that spacing in mind. The walking recorder will apply a related rule on a much larger lattice.</p>
+<p>At five-centimetre spacing, successive coordinates along one axis can read <code>0.10</code>, <code>0.15</code>, <code>0.20</code> metres while the corresponding lattice indices read <code>2</code>, <code>3</code>, <code>4</code>. The index names a position in units of the grid spacing. The metre value gives the retained position in world units. They are two ways to read the same stored sample.</p>
+<p>The table is a history of retained positions, not a raw-versus-rounded comparison. Follow the small drawing marker: the tool samples that point and aligns the same marker to the lattice on release. The retained table stays visible so you can compare the released marker with its last recorded position. Use this table for the experiment; the tiny floating label is a separate position display.</p>
+<p>Try two nearby hand positions whose samples round to the same lattice point. Then cross the boundary that admits a different point. At what spacing would the difference you intended become readable?</p>
+<!-- @ -->
+
+<h2>Put the grid under your feet</h2>
+<!-- @player_trace -->
+
+<p>Walk a small loop beside the recorder, then a wider diagonal. Look behind you for the two paths. Compare their turns before trying to explain the gap between them. Pause, retrace part of your route, and watch what another crossing adds.</p>
+<p>In the headset, keep your feet planted and lean a little to one side. Look again. Has something travelled? Then stand upright and take a step. The paths may respond to both. Keep the difference between those actions in mind.</p>
+<p>One path is a finer sampled reference. The other records positions rounded onto this placement's <strong>one-metre lattice</strong>. Both are records made by the machine; the fainter line is not an unsampled copy of your movement.</p>
+<p>Before rounding anything, the recorder must choose a position to follow. In VR it takes horizontal coordinates from the headset camera and height from the rig origin. In desktop use it follows the museum's walking body, whose origin is at its feet. Neither source supplies a list of footsteps.</p>
+<p>These two assignments bring physical movement inside the VR play area into the record:</p>
+<pre><code class="language-gdscript">position_sample.x = camera.global_position.x
+position_sample.z = camera.global_position.z
+</code></pre>
+<p>The rig origin alone can remain still while you walk around it. Following only that origin used to leave this kind of movement out. Following the headset admits the step, and also the lean. Repairing an omission gives us another question about what the new reading means.</p>
+<p>The recorder translates this chosen position into its own frame, then rounds local X and Z. It retains the chosen height with a small display offset, so the vertical coordinate is not rounded by this lattice. The result is an ordered path, with consecutive duplicate positions suppressed.</p>
+<p>The spatial operation in this recorder is:</p>
+<pre><code class="language-gdscript">local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
+</code></pre>
+<p>Divide by the spacing, round to an integer, multiply back. Several input positions become the same lattice position. Starting at a lattice node with one-metre spacing, half a metre along an axis reaches the boundary between neighbouring rounding regions. Near such a boundary, a small movement can change the recorded address abruptly.</p>
+<p>Find one of those changes by walking. Then find a smaller loop that stays within a single rounding region. A large difference in your experience can become a small difference in the record; a small step across a boundary can become a whole metre in the record's coordinates.</p>
+<p>You can work with that disproportion. Move back and forth across an edge and give the change a rhythm. Then move within one region while keeping its address steady. The first task uses the discontinuity; the second uses the interval it leaves open. Neither needs the grid to become a complete account of your movement.</p>
+<!-- @grid_lines -->
+
+<p>Return to the ruled grid. If you released a drawing dot or stick in Trace, look for a bend you made there. It may be much larger now. Follow it with your eyes before reading the instrument. What has travelled from the other room?</p>
+<p>The release sends a copy of the dot's retained positions to a store shared across rooms in this running game. The grid receives that list. It does not receive the hand, the pen's colour, or a record of what the gesture meant. A whiteboard stroke takes another route: its painted image is not sent here. Nor is this replay the walking path currently growing behind you.</p>
+<p>If the panel says there is no released trace, that absence is useful information. Make a short line with a dot in Trace and let go. There must be at least two retained points. Return and look again; the grid should have something of that line to display.</p>
+<p>Find a pink line and its green companion. Pink carries the source shape after recentering and enlargement. Green rounds that displayed shape again. The instrument gives the latest source count and length, the display multiplier, and the new snapping interval. Its coordinate rows still belong to the source world. Why do those numbers fail to describe where the pink line stands now?</p>
+<p>The display begins by finding the midpoint of the source's bounding box. Each position is moved relative to that centre and multiplied:</p>
+<pre><code class="language-gdscript">mesh.surface_add_vertex((p - center) * final_scale)
+</code></pre>
+<p>A small trace is enlarged five times. If that would make its longest bounding-box dimension exceed five metres, the multiplier is reduced to fit. The source positions stay in the store; the mesh receives transformed ones. The same coordinates can support another appearance without being rewritten.</p>
+<p>Green is made after this enlargement. Here each metre of display space is divided into six snapping intervals: about 16.7 centimetres. This rule rounds all three displayed axes. It is separate from the walking recorder's one-metre horizontal lattice and the hand tool's five-centimetre world lattice. A grid can look like the room's shared rule while several different grids are at work.</p>
+<p>The instrument's source rows turn a page every two seconds. It shows the latest release and summarises the last ten; older replay lines can remain visible. The page has moved on before we finished reading it. We can wait for its return, choose one coordinate to follow, or go back to the original dot's retained table. Choosing a reading takes time too.</p>
+<p>Look through the glass at the ruled field. Its five-by-five cells continue across the lowered basin. The museum's glass supports the visitor above it; the drawn lines supply no collision surface. An address, a visible line and something that can hold your weight have been made by different parts of the program.</p>
+<p>Try imagining this enlarged trace as a route for another body. A bend that barely moved your wrist could ask for a detour at this scale. It can become useful as a score for movement precisely because it is no longer a faithful measure of the original gesture. What would you keep fixed so another person could interpret the score with you?</p>
+<!-- @ -->
+
+<h2>A path, not a census</h2>
+<p>Return to a part of the room you have already crossed. Does the line retain the new journey, or merely announce that this place has been visited before?</p>
+<p>The current recorder keeps lists of positions, sample times and speeds. Its capacity is <strong>1024 accepted points</strong>, and it removes the oldest entries when that capacity is exceeded. It is not a permanent dictionary with one entry per visited cell. A position can recur later in the ordered path.</p>
+<p>Revisiting, pausing and remaining within one coarse position are different events. The record can distinguish only what its sample trigger and retained fields allow. In particular, a stationary pause does not continually add more position samples. Default fading is off, so merely waiting does not erase an older point either.</p>
+<p>Applying the same rounding rule again to an already rounded position leaves it in place. This property is called <em>idempotence</em>. It says something precise about repeating the operation. It does not say the first application lost nothing.</p>
+<p>The segments between accepted positions can be diagonal. The recorder connects what it kept; it does not reconstruct every step of a walk by choosing one axis at a time. Look for where a straight connection crosses ground you did not actually traverse.</p>
+<!-- @ -->
+
+<h2>Whose grid, and for what?</h2>
+<!-- @floating_sphere_field -->
+
+<p>The floating field offers movement you can watch while your own path is being recorded. A room can contain much more motion than one instrument follows. Being in the room is not the same as being in the dataset.</p>
+<!-- @room_grammar -->
+
+<p>A plan generated by rules asks a related question at the scale of walls and doors. An address is useful for composing a room, but the address alone does not say whether a visitor can reach what has been placed there. A second account of bodies, access and purpose is needed.</p>
+<!-- @simulation_grid -->
+
+<p>Step into the small five-by-five plan beside the main gallery. Count a row, then a column. There are twenty-five square cells, each one metre across. The numbers name the cells from zero to four; the boundary lines separate areas you can stand in.</p>
+<p>Walk across a row, then cut diagonally. The squares offer places for a later construction, but their edges need not become walls for your body. Keep this little floor in mind: cubes can stand on it, wedges can become ramps, and a few placed forms can begin to make a level. First we still need to ask how a boundary becomes a face.</p>
+<!-- @ -->
+
+<p>A grid can make positions comparable under shared units and a shared frame. The same choices decide which differences that comparison can express. That does not make every use of a grid surveillance, nor every lost difference harmful. It makes the choice answerable to a task and to the people whose movement supplies the record.</p>
+<p>Choose a purpose for your path other than reaching an endpoint: a pause beside something interesting, a detour to accompany someone, a small loop made for its own pleasure. Repeat it so that the coarse path looks as similar as you can make it. Explain which difference matters to your purpose and which additional record would let it count.</p>
+<p>You can also keep the coarse record and decline to make it a complete account of you. The fit and the misfit can remain visible together.</p>
+<p>The next room adds a third point. A path has been able to return to where it began; now we will ask what a closed boundary needs before it becomes a face.</p></details></section></article></main></body></html>

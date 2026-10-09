@@ -1,0 +1,28 @@
+{
+  "room": "Trans_Introduction",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Trans_Introduction/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Trans_Introduction/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07fe08753fda37c03c491273bf4df2001c0ba0c13b374e6214b08353aa8beaf6",
+    "commons/maps/Trans_Introduction/map_data.json": "71681d5b579be0a60badaf9d9801c0dc17e0bb0bcbfb9700fbe24a00bf57a78d",
+    "tools/probes/introduction_fire_and_fit.gd": "48ce67a3ee0426f29943672bad5fe2d7af14f6a09cfc4ed0a2fdfca963693eb6",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "74280296475c5e5b72bfd45ee601d35fee180f9544c47eb5e52599ef3f357313",
+    "ada_run/encounter_pilot/Trans_Introduction/control.json": "695f035a395d8e16c4f265d1dc5bf171eaed0aab4e33f59ec01994b9ab807ad2",
+    "ada_run/encounter_pilot/Trans_Introduction/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Trans_Introduction/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Trans_Introduction/em_bake.json": "fdc8a601b3cc46a706301464799d126cb0bb28cff3a898bbf0eb88b821a1ef63"
+  }
+}

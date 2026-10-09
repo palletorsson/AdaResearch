@@ -1,0 +1,428 @@
+{
+ "hall": "FormFinding_Annealing",
+ "hall_description": "The first stable shape is rarely the best — you land in a local minimum and stick. Annealing shakes the system with heat so it can climb out and find deeper rest. But the deepest well is a dead-perfect crystal; the alive form stops short.\n\n[Placement applied humanoid_walker engine — constraint 0.827→0.983, walkability 0.526→0.590]",
+ "chapter_opening": "",
+ "hall_captions": [],
+ "stations": [
+  {
+   "token": "max_q_basin_room",
+   "cell": [
+    2,
+    2
+   ],
+   "what_it_is": "A room with a deep narrow DEAD well (rigid, one shape) and a shallow wide ALIVE well (soft, a shape it keeps re-finding). Max Q is the liveliest minimum, not the deepest.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "DEAD WELL\\ndeep · narrow · one frozen shape",
+     "set_in": "_build",
+     "file": "max_q_basin_room.gd"
+    },
+    {
+     "text": "ALIVE WELL\\nshallow · wide · keeps re-finding",
+     "set_in": "_build",
+     "file": "max_q_basin_room.gd"
+    },
+    {
+     "text": "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST",
+     "set_in": "_build",
+     "file": "max_q_basin_room.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "And then the turn, and you will have to look up to find it. Two wells cut into one seven-metre plate, and the plate is hanging three and a third metres over your head: it shares its cell with the spawn and got bumped, then the grounding pass lifted it clear of the walls, so the room's argument is on the ceiling and the frozen cube in its dead well dangles at about your eye level.\n\nOn one side a narrow pit two and a fifth metres deep with steep walls, holding a single rigid half-metre cube. It is at the lowest energy here, it is perfectly settled, and it will never be anything else. On the other a broad shallow basin with something soft in it that keeps moving, finding a shape and losing it and finding it again. That one is higher up. By the arithmetic of the previous four halls it is worse.\n\nThe claim on the floor is that it is the better minimum, and the room calls the difference Q. The deepest well is a dead-perfect crystal, finished. A form that can still be moved has to be resting somewhere shallow enough to be moved out of, which means the liveliest place in an energy landscape is never the bottom of it.",
+   "source": "commons/artifacts/max_q_basin_room/max_q_basin_room.tscn, commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+   "no_text_found": false
+  },
+  {
+   "token": "energy_landscape_bench",
+   "cell": [
+    6,
+    2
+   ],
+   "what_it_is": "A soft body settling on a wavy energy-landscape surface where height is energy, descending into the nearest basin.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "IT FINDS THE NEAREST VALLEY, NOT THE DEEPEST",
+     "set_in": "_build",
+     "file": "energy_landscape_bench.gd"
+    },
+    {
+     "text": "GAUGE",
+     "set_in": "_assay_gauge",
+     "file": "energy_landscape_bench.gd"
+    },
+    {
+     "text": "CONTROL",
+     "set_in": "_assay_control",
+     "file": "energy_landscape_bench.gd"
+    },
+    {
+     "text": "CHART",
+     "set_in": "_assay_chart",
+     "file": "energy_landscape_bench.gd"
+    },
+    {
+     "text": "VITRINE",
+     "set_in": "_assay_vitrine",
+     "file": "energy_landscape_bench.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "A bench with a wrinkled tabletop: four hundred and eighty-four little boxes standing at the height of an energy field, three sine waves crossed, coloured from blue in the troughs to violet on the ridges. A soft yellow blob sits in one of the hollows. It descends into whichever basin it was dropped above and stays there, which is the first hall's marble again on a surface with more than one bottom, and it is here as the thing that needs fixing.",
+   "source": "commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn, commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd",
+   "no_text_found": false
+  },
+  {
+   "token": "simulated_annealing",
+   "cell": [
+    10,
+    2
+   ],
+   "what_it_is": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "SIMULATED ANNEALING",
+     "set_in": "_create_labels",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "P(accept) distribution",
+     "set_in": "_create_labels",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "T=%.2f  E=%.3f  best=%.3f  [%s]  iter=%d",
+     "set_in": "_update_labels",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "accept=%.1f%%  improve=%d  reject=%d  moves=%d",
+     "set_in": "_update_labels",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "P(accept | ΔE>0) = exp(-ΔE/T)   T=%.2f   uphill taken=%d",
+     "set_in": "_update_working_label",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "ADAPTIVE  rate=%.3f  window_accept=%.1f%%  target=%.0f%%  hops=%d",
+     "set_in": "_update_working_label",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "schedule=%s  rate=%.3f  hops=%d",
+     "set_in": "_update_working_label",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "slider_h",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "TEMP",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "default",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "COOL",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "button",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "RESET",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "HOP",
+     "set_in": "_create_vr_controls",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "TitleLabel",
+     "set_in": "signs",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "ProbLabel",
+     "set_in": "signs",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "THERMAL ESCAPE FROM LOCAL MINIMA",
+     "set_in": "signs",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "P(ACCEPT)",
+     "set_in": "signs",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "terminal",
+     "set_in": "signs",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "_start_optimization",
+     "set_in": "_reset_optimization",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "exponential",
+     "set_in": "_update_temperature",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "linear",
+     "set_in": "_update_temperature",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "logarithmic",
+     "set_in": "_update_temperature",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "initial_temperature",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "cooling_rate",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "cooling_schedule",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "max_iterations",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "equilibrium_steps",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "problem_type",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    },
+    {
+     "text": "search_space_size",
+     "set_in": "_perform_basin_hop",
+     "file": "simulated_annealing_visualization.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "The cabinet that fixes it: a dark survey table, waist high, with a milled basin holding a metre and a half of glowing relief. The surface is the Rastrigin function, which is the standard cruelty of this field, a smooth bowl with a cosine corrugation laid over it so that it has one true bottom and a regular grid of decoys all the way out. A temperature starts at a hundred and cools toward a tenth. A gauge along the rail shows how often a worse move is being accepted.\n\nRun it hot and the search wanders almost anywhere, uphill as readily as down. Run it cold and it is gradient descent again, refusing every backward step. Cool it in between and it explores first and commits later.\n\nThe numbers behind the gauge are worth a moment. A move costing five hundredths of an energy unit is accepted about four times in five at a temperature of a fifth, and never at all at two thousandths. And when the search stops improving for long enough, the cabinet does not wait: it hops the whole solution to a new basin and starts again from there. This is a machine built around the admission that its own best rule gets stuck.",
+   "source": "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn, algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+   "no_text_found": false
+  },
+  {
+   "token": "impossible_end_table",
+   "cell": [
+    9,
+    5
+   ],
+   "what_it_is": "The Equilibrium hero (formfinding), elevating tensegrity_triangle to furniture: an end table whose top never touches its base - one cable hangs it, three stop the sway, a teacup sits unbothered. Islands of compression in a sea of tension. Category-heroes pass, 2026-08-27.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "IMPOSSIBLE END TABLE - tensegrity",
+     "set_in": "_build_plaque",
+     "file": "impossible_end_table.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "The proof that this is not a metaphor, standing in the room as furniture, and the tensegrity the last hall promised and did not deliver. An end table whose top never touches its base: two steel Y-brackets whose arms overlap in plan with sixteen centimetres of daylight between them, one central cable holding the top down against three perimeter cables that stop it swaying. A teacup on top, unbothered.\n\nIslands of compression in a sea of tension. Nothing here is resting on anything. Every part is being pulled, hard, in a direction that exactly cancels, and the stillness of the teacup is the sum of forces that never stop.",
+   "source": "commons/artifacts/impossible_end_table/impossible_end_table.tscn, commons/artifacts/impossible_end_table/impossible_end_table.gd",
+   "no_text_found": false
+  },
+  {
+   "token": "science_screen",
+   "cell": [
+    8,
+    9
+   ],
+   "what_it_is": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+   "configured_as": [],
+   "readable_text": [
+    {
+     "text": "_load_map_text",
+     "set_in": "_ready",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "_deferred_first_scan",
+     "set_in": "_ready",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "map_name",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "Drag to interact. The screen shows what you do.",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "Concept:",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "Critical angle:",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "Interact with the artifacts. The screen shows the math.",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "[ScienceScreen] Loaded %d info lines from %s",
+     "set_in": "_load_map_text",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "POINT TRACKER",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "LINE ANALYZER",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "TRACE RECORDER",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "triangle",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "TRIANGLE ANALYZER",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "CUBE NET",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "pendulum",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "WAVEFORM",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "voxel_slice",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "VOXEL SECTION",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "FIELD MAP",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "scatter",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "SCATTER PLOT",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "automata",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "GRID VIEW",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "histogram",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "BAR CHART",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "SCIENCE SCREEN",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "[ScienceScreen] Explicit mode set: %s",
+     "set_in": "_set_explicit_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "generic",
+     "set_in": "_get_active_mode",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "[ScienceScreen] Mode locked (explicit): %s",
+     "set_in": "_deferred_first_scan",
+     "file": "science_screen.gd"
+    },
+    {
+     "text": "[ScienceScreen] Mode locked (scan): %s",
+     "set_in": "_deferred_first_scan",
+     "file": "science_screen.gd"
+    }
+   ],
+   "captions_beside_it": [],
+   "chapter_passage": "A screen, washing the wall green. Had it looked up it would have drawn two basins and drawn the deeper one deeper, because depth is the only quantity a diagram of this kind carries. Q is the difference between those two wells, and depth is precisely the axis on which the shallow one loses.",
+   "source": "commons/artifacts/science_screen/science_screen.tscn, commons/artifacts/science_screen/science_screen.gd, commons/artifacts/science_screen/screen_overlay.gd",
+   "no_text_found": false
+  }
+ ]
+}

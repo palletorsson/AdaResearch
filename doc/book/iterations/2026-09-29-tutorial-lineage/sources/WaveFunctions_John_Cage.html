@@ -1,0 +1,323 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_John_Cage · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_John_Cage">← Tutorial lineage</a></p><h1>WaveFunctions John Cage</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_John_Cage/final.md">Raw captured source</a></p><pre># The limits of the unexpected
+
+What remains composed when the next event is left to chance?
+
+&lt;!-- @john_cage_tech_noir --&gt;
+
+Let the soundscape load, then listen long enough to separate a continuous layer from intermittent events. Count a few entrances without trying to force them into a regular beat. On a second listening, attend to the intervals rather than to the events themselves.
+
+The background can remain recognisable while particular sounds arrive differently. There is a difference between not knowing which event comes next and hearing something the system has no means to produce. Listen for the vocabulary that persists through the variation: the kinds of sound available, their textures and their recurring relationships to the drone.
+
+For one listening interval, attend only to whether the background continues beneath an event. For the next, attend to how the event begins and fades. A sound can arrive unexpectedly while retaining a recognisable envelope or texture. If a related sound returns, compare what seems shared and what differs without assuming it is exactly the same prepared variation. Then leave an event uncounted and listen to what remains around it. This gives you several ways to hear organisation even when the entrances resist a regular pulse. Your attention supplies a repeatable listening task, although the generator does not promise to repeat the same sequence for you.
+
+The composition prepares a collection of generated sounds, including variations of several effect types, then makes choices about their playback. Randomness operates within that prepared collection. The program has already decided what can be selected and has supplied the rules that govern selection. Chance changes the sequence without escaping its frame.
+
+The luminous forms respond to sound activity, but looking at them does not reveal every scheduling choice. The listening experiment also does not depend on treating them as physically located sources whose volume you can mix by walking around. Give the sound itself time to disclose its layers.
+
+Try deciding that an interval is the part you are waiting for. This changes your listening without changing the generator. A version that admitted sounds recorded from visitors or the surrounding room would change the available vocabulary; that remains a proposed extension.
+
+&lt;!-- @ --&gt;
+
+The room&#x27;s title offers a reference, not a claim to perform a particular John Cage score. Its concrete question is about authorship inside a chance procedure. In Air Music, a strike will supply a more direct beginning: you will choose when an oscillation starts and hear what continues after your contact ends.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_John_Cage/tutorial.md">Raw captured source</a></p><pre># John Cage
+
+4&#x27;33&quot; made the silence the piece. Build a room where absence is measurable and the noise floor is never actually zero.
+
+Declare the listener.
+
+```gdscript
+class_name SilenceListener
+extends Node3D
+
+@export var sample_seconds: float = 0.25
+var noise_floor_db: float = -60.0
+```
+
+A listener records short windows and computes the noise floor. Nothing is ever fully silent; the listener measures how quiet the room actually is.
+
+Sample the ambient level.
+
+```gdscript
+func sample_ambient(bus: int) -&gt; float:
+    return AudioServer.get_bus_peak_volume_left_db(bus, 0)
+```
+
+Godot&#x27;s AudioServer reports the bus peak in dB. Lower numbers are quieter. The method returns the current read.
+
+Update the floor display.
+
+```gdscript
+func update_floor_display(label: Label3D) -&gt; void:
+    var level := sample_ambient(ambient_bus)
+    noise_floor_db = lerp(noise_floor_db, level, 0.1)
+    label.text = &quot;floor: %.1f dB&quot; % noise_floor_db
+```
+
+Exponential smoothing keeps the reading stable. The label shows the floor changing with the learner&#x27;s own breath and movement.
+
+Mark the 4&#x27;33&quot; sections.
+
+```gdscript
+const CAGE_SECTIONS := [30.0, 162.0, 81.0]
+
+func compute_total() -&gt; float:
+    var total := 0.0
+    for s in CAGE_SECTIONS: total += s
+    return total
+```
+
+Cage&#x27;s score prescribes three movements with specific durations. The total matches the title. The constant records the piece.
+
+Drive a timer against the sections.
+
+```gdscript
+func _process(dt: float) -&gt; void:
+    elapsed += dt
+    if elapsed &gt; CAGE_SECTIONS[current_section]:
+        current_section = min(current_section + 1, CAGE_SECTIONS.size() - 1)
+        elapsed = 0.0
+        movement_label.text = &quot;movement %d&quot; % (current_section + 1)
+```
+
+The timer advances through the sections. Movement labels change quietly. The piece performs itself without a musician.
+
+Generate an aleatoric event.
+
+```gdscript
+func aleatoric_event() -&gt; void:
+    if randf() &lt; 0.005:
+        var sound := preload(&quot;res://commons/artifacts/wavefunctions/ambient_click.tscn&quot;).instantiate()
+        sound.position = Vector3(randf_range(-3, 3), randf_range(1, 2), randf_range(-3, 3))
+        add_child(sound)
+```
+
+Rare, random clicks. The room performs chance. Cage&#x27;s indeterminacy as a spawn rule.
+
+Log each event for reflection.
+
+```gdscript
+func log_event(at: float, kind: String) -&gt; void:
+    events.append({&quot;at&quot;: at, &quot;kind&quot;: kind})
+```
+
+The log captures what happened in the silence. Every visit generates a different piece. The score is the rule; the performance is unique.
+
+You have listened to the space between. The next map, AirMusic, lets position in space become note.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Offer a print mode of the generated piece.
+
+```gdscript
+func print_piece() -&gt; String:
+    var out := &quot;events:
+&quot;
+    for e in events:
+        out += &quot;  %5.2f  %s
+&quot; % [e.at, e.kind]
+    return out
+```
+
+The piece can be exported as text. The silence becomes a score.
+
+Dim the lights during the movements.
+
+```gdscript
+func dim_room(dt: float) -&gt; void:
+    world_environment.environment.ambient_light_energy = lerp(world_environment.environment.ambient_light_energy, 0.2, dt)
+```
+
+Ambient drops gradually. The room prepares the listener for attention.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_John_Cage/technical.md">Raw captured source</a></p><pre># WaveFunctions John Cage — Technical
+
+The map stages Cage&#x27;s 4&#x27;33&quot; via a controlled audio environment that exposes the ambient noise floor. A toggle switches between &quot;play&quot; mode (a synthesized tone) and &quot;pause&quot; mode (silence from the synth but the room&#x27;s ambience remains audible).
+
+```gdscript
+class_name CageStation extends Node3D
+
+@export var noise_floor_meter: RangeControl
+@export var countdown_timer: Timer
+
+var is_playing: bool = false
+var tone_player: AudioStreamPlayer
+
+func _ready() -&gt; void:
+    countdown_timer.wait_time = 4 * 60 + 33  # 4 minutes 33 seconds
+    countdown_timer.timeout.connect(_on_piece_end)
+
+func start_piece() -&gt; void:
+    countdown_timer.start()
+    begin_noise_floor_recording()
+
+func toggle_tone() -&gt; void:
+    is_playing = not is_playing
+    if is_playing:
+        tone_player.play()
+    else:
+        tone_player.stop()
+
+func _process(_delta: float) -&gt; void:
+    var floor_level: float = measure_ambient_noise()
+    noise_floor_meter.value = floor_level
+```
+
+## Noise Floor Measurement
+
+The ambient noise floor is measured from the input bus — microphone input, if available, or the system&#x27;s reported audio baseline otherwise.
+
+```gdscript
+func measure_ambient_noise() -&gt; float:
+    # dB below reference (typically 0 dBFS)
+    var db_left: float = AudioServer.get_bus_peak_volume_left_db(input_bus_idx, 0)
+    var db_right: float = AudioServer.get_bus_peak_volume_right_db(input_bus_idx, 0)
+    return max(db_left, db_right)
+```
+
+In the absence of microphone input, the map uses a simulated noise floor that varies slowly according to a noise function, producing visible variation on the meter.
+
+## Aleatoric Devices
+
+Three chance devices drive aleatoric composition: dice for pitch, coin for rhythm, spinner for duration.
+
+```gdscript
+class_name AleatoricDevice extends Node3D
+
+@export var parameter_name: String  # &quot;pitch&quot;, &quot;rhythm&quot;, &quot;duration&quot;
+
+func roll() -&gt; float:
+    match parameter_name:
+        &quot;pitch&quot;:
+            var dice := randi() % 6 + 1
+            return dice * 100.0  # Hz, simplified
+        &quot;rhythm&quot;:
+            return randf() &lt; 0.5  # coin toss, returns 0 or 1
+        &quot;duration&quot;:
+            return randf_range(0.1, 2.0)
+    return 0.0
+```
+
+The rolled values drive a minimal composition engine that plays short tones at the chosen pitches, rhythms, and durations.
+
+## Attention vs Signal
+
+The map&#x27;s argument about silence operates through the meter rather than through the audio. Cage&#x27;s piece claims that silence is a reassignment of attention rather than an absence of sound, and the noise-floor meter makes this claim mechanically: the meter never reads zero, and the learner can see that the &quot;silence&quot; contains continuous signal.
+
+## Complexity
+
+Audio measurement is O(1) per frame. Aleatoric devices are O(1) per roll. The map&#x27;s computational cost is negligible; the entire station runs within a fraction of a millisecond per frame.
+
+Within the sequence, Cage is the philosophical counter-weight. AirMusic will next reintroduce sound as emergent rather than composed.
+
+## Compositional Context
+
+Cage composed 4&#x27;33&quot; in 1952. The piece instructs the performer to sit at the piano for the specified duration without playing any notes. The published score divides the duration into three movements (30 seconds, 2 minutes 23 seconds, 1 minute 40 seconds) and instructs &quot;tacet&quot; (silence) for each.
+
+The piece has been performed thousands of times since its premiere. Different performances vary substantially in what is audible, which is the composition&#x27;s thesis: the performance is whatever the audience is attending to during the specified duration.
+
+## Aleatoric Composition Tools
+
+Cage&#x27;s later aleatoric works used the I Ching, star charts, and random number tables to generate compositional material. The map&#x27;s three chance devices are simplified equivalents.
+
+```gdscript
+class_name IChing
+
+func hexagram() -&gt; Array:
+    var lines: Array = []
+    for _i in range(6):
+        # Three coin flips per line
+        var sum: int = 0
+        for _j in range(3):
+            sum += 2 if randf() &lt; 0.5 else 3
+        lines.append(sum)
+    return lines
+```
+
+An I Ching hexagram has 64 possible outcomes corresponding to 64 hexagram names and interpretations. Cage mapped these to musical parameters in his *Music of Changes* (1951).
+
+## Dynamic Noise Floor
+
+The ambient noise floor has structure at multiple time scales: fast components (HVAC cycling, ventilation) and slow components (building settling, diurnal temperature variation). The map&#x27;s simulated noise floor uses layered noise to produce realistic variation over several time scales.
+
+```gdscript
+func simulated_noise_floor(time: float) -&gt; float:
+    var slow := 0.3 * sin(time * 0.01)  # very slow drift
+    var medium := 0.2 * noise.get_noise_1d(time * 0.5)
+    var fast := 0.1 * noise.get_noise_1d(time * 5.0)
+    return -45.0 + slow + medium + fast  # dB
+```
+
+## Silence as Signal
+
+The noise floor meter demonstrates that silence in a recorded environment is never actually zero. The meter&#x27;s minimum value is set by the recording equipment&#x27;s inherent noise — typically -60 dB below full scale for consumer microphones, -80 dB for professional equipment.
+
+## Piece Duration Counter
+
+A countdown timer displays the remaining time for the piece. When the timer reaches zero, the piece ends automatically and the station reopens for a new performance.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_John_Cage/intent.md">Raw captured source</a></p><pre>Concept: Silence as the space between waves — Cage&#x27;s 4&#x27;33&quot; reveals that music is attention, not sound. Aleatoric algorithms use chance as compositional method; the noise floor proves zero signal is impossible; ambient computation simulates the uneventful.
+Sequence role: Eighth map in Wavefunctions; the philosophical counterpoint to the sequence&#x27;s accumulating complexity. After seven maps building oscillation from simple to baroque, Cage inverts everything: what happens when oscillation stops? The answer — it doesn&#x27;t, there&#x27;s always noise — is the deepest lesson. Connects to Randomness sequence (aleatoric operations) and to the QFEP entropy term (noise as irreducible); follows Wavefunctions_Bernini; leads to WaveFunctions_AirMusic.
+Technical angle: Aleatoric algorithms via randf() as compositional tool, noise floor (thermal noise in circuits, blood rushing in ears), ambient computation (code that runs but produces only drift), noise.get_noise_1d() for wandering without destination. The john_cage_tech_noir artifact implements the aesthetic of productive silence.
+Critical angle: Cage reframed silence as space of infinite potential — not absence but presence of everything unintended. The audience coughing, rain falling, chairs creaking: these are the oscillations that persist when all designed sound stops. &quot;Do not look for the puzzle. Just listen. The algorithm is just breathing.&quot; This is the queer-silence thesis: productivity in apparent inactivity, meaning in noise.
+Key artifacts: john_cage_tech_noir implements the silence-as-composition environment; ruth_asawa_sculpture provides the visual analog — wire sculpture as frozen wave, form from nothing but tension; dual_display_test provides the diagnostic frame; dark_sphere as the silent presence.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_John_Cage/critical.md">Raw captured source</a></p><pre># 4&#x27;33&quot; is infrastructure — silence, the ambient, and the politics of the unmarked
+
+Cage&#x27;s 4&#x27;33&quot; tells the performer to play nothing. What the audience hears is not nothing. They hear coughs, ventilation, traffic, the creak of chairs, the rustle of programmes. The piece claims these as the composition. It reframes the attention as the event and the performed absence as the occasion.
+
+Trinh T. Minh-ha writes about the unmarked as the place where the politics of a frame become visible. The marked content is what a system presents as itself; the unmarked content is everything the system assumes as background. Cage&#x27;s piece inverts the marking. What was background becomes foreground; what was content becomes frame. The map stages this inversion at walkable scale.
+
+The room is deliberately quiet. A small stage holds a closed piano and a stopwatch. The stopwatch counts down the piece&#x27;s duration. The piano&#x27;s closed lid makes explicit that the performer&#x27;s silence is not a lack of readiness but a structural feature. During the countdown, the room&#x27;s own sounds become audible: the ventilation, the learner&#x27;s own footsteps, the low hum of the space&#x27;s lighting. A noise-floor readout on the wall tracks the ambient signal and confirms that it never settles to zero.
+
+Three aleatoric devices sit on a low table. The dice assign pitches. The coin assigns rhythms. The spinner assigns durations. Cage&#x27;s compositional practice used chance operations to remove authorial preference from the score, and the three devices reproduce the practice physically. The learner can run them and produce a small composition without making any creative decision about its content.
+
+The toggle station completes the argument. In &quot;play&quot; mode, a synthesised tone fills the room. In &quot;pause&quot; mode, the tone stops and the noise floor becomes the only audible signal. Switching between the two demonstrates that silence is not the absence of signal but a reassignment of attention. The ambient was there in play mode too; the tone masked it. Turning the tone off unmasks what was always already present.
+
+The philosophical stakes are in the noise floor. A purely silent room would be a room without infrastructure: no lights, no ventilation, no bodies, no computation. Such a room does not exist in any inhabited building. The noise floor is the signature of the infrastructure that makes inhabitation possible, and it can never reach zero because reaching zero would mean the infrastructure had stopped. The room&#x27;s silence is always a relative silence, and the relation is political: who decides what level of ambient noise counts as silence is a power question.
+
+Within the sequence, Cage is the philosophical counter-weight. The preceding maps accumulated oscillation into denser and more complex forms; this map withdraws oscillation and asks what frequency-zero actually contains. The answer — that there is always something, and the something has a structure — sets up the ambient and generative sound of AirMusic next.
+
+The sequence&#x27;s claim to have tracked oscillation in every register lands on Cage&#x27;s refusal: oscillation includes its own absence, and the absence is the hardest case for the thesis to absorb.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_John_Cage/artifacts.md">Raw captured source</a></p><pre># WaveFunctions John Cage — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 4 artifacts*
+
+&gt; Silence is the space between waves. John Cage&#x27;s 4&#x27;33&quot; reveals that music is not sound but attention—the framework that makes waves meaningful. Absence as frequency zero, the pause that gives oscillation its shape, the rest that makes rhythm possible.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## dual_display_test
+![dual_display_test](/scene-catalog/dual_display_test.png)
+
+Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time
+
+`dual_display_test`
+
+## Ruth Asawa Sculpture
+![Ruth Asawa Sculpture](/scene-catalog/ruth_asawa_sculpture.png)
+
+Wire forms inspired by Ruth Asawa&#x27;s crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.
+
+`ruth_asawa_sculpture`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## john_cage_tech_noir
+![john_cage_tech_noir](/scene-catalog/john_cage_tech_noir.png)
+
+Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.
+
+`john_cage_tech_noir`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_John_Cage/summary.md">Raw captured source</a></p><pre># WaveFunctions John Cage — Summary
+
+Cage&#x27;s 4&#x27;33&quot; instructs the performer to play nothing. The piece claims the silence that results, the coughs, the ventilation, the traffic outside. This map takes that claim seriously and builds a space in which oscillation has been removed in order to reveal what remains.
+
+The room is quiet. A small stage holds a closed piano and a stopwatch. On a low table, three aleatoric devices compose by chance: a set of dice tied to pitch, a coin chained to rhythm, a spinner that selects duration. A noise floor readout on the wall shows the ambient signal of the space itself, which never settles to zero.
+
+A second station lets the learner switch between two modes. In &quot;play&quot; mode, a synthesized tone fills the room. In &quot;pause&quot; mode, the tone stops and the noise-floor readout becomes the only sound. Toggling between them demonstrates that silence is not the absence of signal but a reassignment of attention.
+
+Within the sequence, Cage is the philosophical counter-weight. After six maps that accumulate oscillation, this map withdraws it and asks what frequency-zero actually contains. The answer — that there is always something — sets up the ambient and generative sound of AirMusic next.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_John_Cage/blurb.md">Raw captured source</a></p><pre>Silence is the space between waves. John Cage&#x27;s 4&#x27;33&quot; reveals that music is not sound but attention—the framework that makes waves meaningful. Absence as frequency zero, the pause that gives oscillation its shape, the rest that makes rhythm possible.
+</pre></section></body></html>

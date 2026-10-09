@@ -1,0 +1,40 @@
+{
+  "checks": 3,
+  "failures": [
+    "all six authored works exist",
+    "bare reaction diffusion artifact builds nothing"
+  ],
+  "headset_verified": false,
+  "map": "CA_SoftRules",
+  "measurements": {
+    "captures": {
+
+    },
+    "inventory": [
+      {
+        "meshes": [],
+        "position": "(6.5, 0.0, 6.5)",
+        "token": "rule_30_110_gravity"
+      },
+      {
+        "meshes": [
+          {
+            "name": "@MeshInstance3D@759",
+            "position": [
+              2.50113272666931,
+              -1.0,
+              1.50113248825073
+            ],
+            "size": [
+              1.99773478507996,
+              2.0,
+              1.99773502349854
+            ]
+          }
+        ],
+        "position": "(3.5, 0.0, 6.5)",
+        "token": "ca_sphere"
+      }
+    ]
+  }
+}

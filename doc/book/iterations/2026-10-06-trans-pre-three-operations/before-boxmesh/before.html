@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Earlier Trans_Pre tutorial</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#22221f;font:19px/1.65 Georgia,serif}main{max-width:1160px;margin:auto;padding:55px 38px}.reading{max-width:900px}h1{font-size:clamp(38px,6vw,68px);font-weight:400;line-height:1.05}h2{font-weight:400;font-size:31px;line-height:1.2;margin-top:45px}h3{font:600 17px system-ui}a{color:inherit}nav,.meta,figcaption,button{font:14px/1.6 system-ui}nav{display:flex;gap:20px;flex-wrap:wrap;margin:25px 0}.meta{color:#625e54}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;display:block}figcaption{padding:10px 0}pre{background:#222528;color:#f6f2e9;overflow:auto;padding:25px;font:14px/1.55 Consolas,monospace}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border-bottom:1px solid #c8c2b6;text-align:left;vertical-align:top;padding:10px}li{margin:8px 0}summary{cursor:pointer}details{margin:35px 0}.note{border-block:1px solid #c4bcae;padding:20px 0}@media(max-width:700px){main{padding:28px 20px}.gallery{grid-template-columns:1fr}table{font-size:14px}}</style><main class="reading"><nav><a href="index.html">Review</a><a href="tutorial.html">New tutorial</a></nav><h1>A body that changes</h1>
+<p><strong>Learning elements — proposed focus</strong></p>
+<p><em>The labels below set the revision focus; the existing lesson still needs alignment.</em></p>
+<ul>
+<li>Elapsed time</li>
+<li>Conditions</li>
+<li>Interpolation</li>
+<li>Timed transforms</li>
+<li>Sine interpolation</li>
+</ul>
+<p>In the last lesson, you placed three bodies. They stayed where you put them. Now keep one cube and change its position while the scene runs. Then add a turn and a change in size.</p>
+<p>Open <code>trans_pre.tscn</code> in the <a href="/book-review/doc/book/studies/ada-xr-starter/README.md">shared starter</a>. Edit <code>studies/trans_pre/motion.gd</code>. The supplied <code>Cube</code> makes a 0.6-metre pale gray box with a dark mark on one face. Throughout Transformation, keep that contrast: the mark lets you follow a face while the body moves. Colour becomes a subject in its own sequence. The room and the small numerical display are also supplied. Every lesson object is created in code.</p>
+<h2>1. Let the clock run</h2>
+<p>The study starts with:</p>
+<pre><code class="language-gdscript">var stage := 0
+var elapsed := 0.0
+</code></pre>
+<p>Run it. The cube stays still, but the elapsed time below it increases.</p>
+<p>Point Zero counted frames. Here <code>_process(delta)</code> receives the time since the previous frame, in seconds:</p>
+<pre><code class="language-gdscript">    elapsed += delta
+</code></pre>
+<p>Adding those intervals gives us a clock. The animation will use seconds, so rendering more frames does not make it run faster.</p>
+<h2>2. Move between two heights</h2>
+<p>Set <code>stage</code> to <code>1</code> and run again. The cube rises, reverses and returns. These variables determine its journey:</p>
+<pre><code class="language-gdscript">var centre := Vector3(0, 1.3, 0)
+var travel := 0.25
+var leg_seconds := 1.5
+</code></pre>
+<p>The centre starts 1.3 metres above the floor. Its lower and upper limits are 1.05 and 1.55 metres. <code>travel</code> is the distance from the middle to either end.</p>
+<p>Inside <code>_process</code>, one value carries time into position:</p>
+<pre><code class="language-gdscript">    var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)
+    if stage &gt;= 1:
+        cube.position.y = lerp(centre.y - travel, centre.y + travel, t)
+</code></pre>
+<p><code>pingpong</code> produces a value that travels from 0 to 1 and back at a steady rate. The added <code>0.5</code> starts it halfway up. <code>lerp</code> uses that value to choose a position between the two heights: 0 gives the lower end, 1 the upper end, and 0.5 their midpoint.</p>
+<p><code>if stage &gt;= 1</code> runs this indented line whenever the stage is at least 1. The later stages will keep this movement.</p>
+<p>Set <code>travel</code> to <code>0.4</code>. The cube now reaches 0.9 and 1.7 metres. Restore <code>0.25</code>, then set <code>leg_seconds</code> to <code>3.0</code>. The distance stays fixed; the journey slows. This value is the time between the ends. A complete return takes twice as long. Because we start in the middle, the first arrival takes only half a leg.</p>
+<p>Restore <code>leg_seconds</code> to <code>1.5</code> before continuing.</p>
+<h2>3. Add a turn</h2>
+<p>Set <code>stage</code> to <code>2</code>. The same cube keeps rising and falling, and now turns:</p>
+<pre><code class="language-gdscript">    if stage &gt;= 2:
+        cube.rotate_y(turn_speed * delta)
+</code></pre>
+<p>The dark mark lets you follow a particular face. The turn is around the cube's centre, about the vertical Y axis. Its centre still follows the same path.</p>
+<p><code>turn_speed</code> is <code>TAU / 8.0</code> radians per second. <code>TAU</code> is one complete turn in radians, so this setting takes eight seconds per turn. Multiplying by <code>delta</code> gives the angle to add in this frame. Change the divisor to <code>4.0</code> for a four-second turn, then restore <code>8.0</code>.</p>
+<h2>4. Change size as well</h2>
+<p>Set <code>stage</code> to <code>3</code>:</p>
+<pre><code class="language-gdscript">    if stage &gt;= 3:
+        var factor: float = lerp(1.0 - pulse, 1.0 + pulse, t)
+        cube.scale = Vector3.ONE * factor
+</code></pre>
+<p>With <code>pulse</code> at <code>0.3</code>, the factor travels between 0.7 and 1.3. <code>Vector3.ONE</code> is <code>(1, 1, 1)</code>: multiplying all three components by the same factor preserves the cube's proportions. Its mesh remains 0.6 metres wide; the displayed width ranges from 0.42 to 0.78 metres.</p>
+<p>The assignment writes a new scale each frame. It does not keep multiplying the previous scale. The same <code>t</code> drives height and size, so the cube is largest at the top. Turning has its own rate.</p>
+<p>Try <code>pulse</code> at <code>0.1</code>. Keep a version whose timing and extent you like. You can now change a body's position, orientation and size without rebuilding its mesh.</p>
+<p>For a short comparison, <a href="/book-review/commons/maps/Trans_Pre/tutorial-sine.md">replace steady travel with sine</a>. The endpoints stay fixed; the way the cube arrives changes.</p>
+<p>The museum adds touch detection and collection to these operations. This reduced study animates a visible body. In the next hall, a moving surface will also have to support the visitor.</p></main></html>

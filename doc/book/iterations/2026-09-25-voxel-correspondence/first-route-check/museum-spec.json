@@ -1,0 +1,91 @@
+{
+  "shots": [],
+  "rays": [
+    {
+      "tag": "comparison standing floor",
+      "x": 5.5,
+      "z": 4.2,
+      "top": 0,
+      "tolerance": 0.15
+    },
+    {
+      "tag": "west side of volume",
+      "x": 6.2,
+      "z": 9.5,
+      "top": 0,
+      "tolerance": 0.15
+    }
+  ],
+  "walks": [
+    {
+      "tag": "enter toward model",
+      "from": [
+        7.5,
+        0.1,
+        1.5
+      ],
+      "to": [
+        5.5,
+        0.1,
+        5.8
+      ],
+      "seconds": 5
+    },
+    {
+      "tag": "model to volume west aisle",
+      "from": [
+        5.5,
+        0.1,
+        5.8
+      ],
+      "to": [
+        6.2,
+        0.1,
+        9.0
+      ],
+      "seconds": 5
+    },
+    {
+      "tag": "west aisle to rear",
+      "from": [
+        6.2,
+        0.1,
+        9.0
+      ],
+      "to": [
+        6.2,
+        0.1,
+        13.0
+      ],
+      "seconds": 5
+    },
+    {
+      "tag": "behind volume",
+      "from": [
+        6.2,
+        0.1,
+        13.0
+      ],
+      "to": [
+        12.8,
+        0.1,
+        13.0
+      ],
+      "seconds": 5
+    },
+    {
+      "tag": "east aisle",
+      "from": [
+        12.8,
+        0.1,
+        13.0
+      ],
+      "to": [
+        12.8,
+        0.1,
+        6.0
+      ],
+      "seconds": 5
+    }
+  ]
+}

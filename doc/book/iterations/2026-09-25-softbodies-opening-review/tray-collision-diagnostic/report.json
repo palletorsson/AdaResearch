@@ -1,0 +1,125 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": true
+    },
+    {
+      "name": "desk bound to cube with six controls",
+      "passed": true
+    },
+    {
+      "name": "cube uses five solver passes",
+      "passed": true
+    },
+    {
+      "name": "initial coefficients match manuscript",
+      "passed": true
+    },
+    {
+      "name": "this hall opts into a tray with nine matching collision pieces",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-one",
+      "passed": true
+    },
+    {
+      "name": "STIFFNESS changes stiffness alone",
+      "passed": true
+    },
+    {
+      "name": "DAMPING changes damping alone",
+      "passed": true
+    },
+    {
+      "name": "RESET restores coefficients in the same body",
+      "passed": true
+    },
+    {
+      "name": "first PRESSURE press sets zero",
+      "passed": true
+    },
+    {
+      "name": "cube retained on tray after zero pressure",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-zero",
+      "passed": true
+    },
+    {
+      "name": "next PRESSURE press sets two",
+      "passed": true
+    },
+    {
+      "name": "cube retained on tray after pressure two",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-two",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deformation-hall",
+      "passed": true
+    },
+    {
+      "name": "MILL holds drive without disabling the soft bodies",
+      "passed": true
+    },
+    {
+      "name": "MILL releases the drive",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "cube retained on tray after zero pressure",
+    "cube retained on tray after pressure two"
+  ],
+  "observations": {
+    "initial_extent": [
+      [
+        8.28175449371338,
+        -0.00175702851265669,
+        8.34536075592041
+      ],
+      [
+        8.67050075531006,
+        0.37329226732254,
+        8.6923713684082
+      ]
+    ],
+    "pressure_two_after_3s_extent": [
+      [
+        8.00956249237061,
+        0.0454988107085228,
+        7.92290639877319
+      ],
+      [
+        8.46549606323242,
+        0.384608060121536,
+        8.38103199005127
+      ]
+    ],
+    "zero_pressure_after_3s_extent": [
+      [
+        7.98385429382324,
+        -0.0306016001850367,
+        7.93713808059692
+      ],
+      [
+        8.41445636749268,
+        0.359029829502106,
+        8.33700752258301
+      ]
+    ]
+  },
+  "passed": false,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Native museum with completed stamp queue; supplied pointer events, solver vertex bounds and original captures. No tracked hand, force feedback or headset acceptance."
+}

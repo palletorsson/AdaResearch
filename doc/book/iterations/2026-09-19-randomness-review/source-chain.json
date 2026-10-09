@@ -1,0 +1,3043 @@
+{
+  "Random_Definition": {
+    "order": {
+      "primary": [
+        "seed_replay_demo"
+      ],
+      "secondary": [
+        "prng_crank_machine",
+        "slot_machine",
+        "trng_vs_prng",
+        "random_number_book_page_1955",
+        "catalyst_pickup",
+        "textile_comparison"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "prng_crank_machine",
+        "token": "prng_crank_machine:180:0.62",
+        "cell": [
+          3,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "slot_machine",
+        "token": "slot_machine:180",
+        "cell": [
+          10,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/slot_machine/slot_machine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "seed_replay_demo",
+        "token": "seed_replay_demo:180#display:wall#comparison:replicas#stand:table#controls:compact#control_front:1.0",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/seed_replay/seed_replay_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "catalyst_pickup",
+        "token": "catalyst_pickup:180#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20",
+        "cell": [
+          10,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lab.json",
+            "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/catalyst_pickup/catalyst_pickup.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "textile_comparison",
+        "token": "textile_comparison#controls:compact#control_front:-1.7#control_facing:-z",
+        "cell": [
+          6,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/textile_comparison.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/dna_comparison.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "trng_vs_prng",
+        "token": "trng_vs_prng:180:1.12:0.1",
+        "cell": [
+          3,
+          16
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/trng_vs_prng/TrngVsPrng.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_number_book_page_1955",
+        "token": "random_number_book_page_1955:0:2.7:0.8",
+        "cell": [
+          9,
+          16
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Entropy": {
+    "order": {
+      "primary": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "entropy_ruin"
+      ],
+      "secondary": [
+        "entropy_jar",
+        "hardware_entropy_decay",
+        "random_butterflies"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "entropy_jar",
+        "token": "entropy_jar:180",
+        "cell": [
+          3,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/entropy_jar/entropy_jar.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "shannon_entropy_meter",
+        "token": "shannon_entropy_meter:180#stand:ledger#disclosure:ledger#controls:compact#control_front:1.7",
+        "cell": [
+          8,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_butterflies",
+        "token": "random_butterflies:180",
+        "cell": [
+          13,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hardware_entropy_decay",
+        "token": "hardware_entropy_decay:180:0.45:0.6",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "entropy_axiom",
+        "token": "entropy_axiom#square:true#glass_width:10#glass_depth:10#glass_height:4.5#glass_title:ORDER / DISPLACEMENT",
+        "cell": [
+          8,
+          15
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/algorithms_misc.json",
+            "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/entropy_axiom/entropy_axiom.gd"
+            ]
+          },
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "entropy_ruin",
+        "token": "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z",
+        "cell": [
+          8,
+          26
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/entropy_ruin.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/entropy_ruin.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Remove": {
+    "order": {
+      "primary": [
+        "remove_random",
+        "random_removal_arena"
+      ],
+      "secondary": [],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "remove_random",
+        "token": "remove_random:180#local_grid:true#controls:compact#control_front:1.15",
+        "cell": [
+          8,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/remove_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/RemoveRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_removal_arena",
+        "token": "random_removal_arena:0:3#columns:9#rows:11#glass_width:11#glass_depth:13#glass_height:4.5#glass_title:WALK / REMOVE#glass_grid:false#controls:compact#control_front:-7.0#control_facing:-z",
+        "cell": [
+          8,
+          17
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/removal_arena.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/removal_arena.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Randomness_10_PRINT_Algorithm": {
+    "order": {
+      "primary": [
+        "ten_print_maze_3d"
+      ],
+      "secondary": [
+        "remove_random",
+        "pickup_cube_placer",
+        "science_screen",
+        "clipboard",
+        "nature_system_demo"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "remove_random",
+        "token": "remove_random:90",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/remove_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/RemoveRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:0:1",
+        "cell": [
+          1,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pickup_cube_placer",
+        "token": "pickup_cube_placer:90",
+        "cell": [
+          2,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/PickupCubePlacer.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:0:1",
+        "cell": [
+          11,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "token": "science_screen:180:1.5#mode:grid",
+        "cell": [
+          11,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "clipboard",
+        "token": "clipboard#ten_print_axioms:194:1.0",
+        "cell": [
+          6,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/context/clipboard/clipboard.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/context/clipboard/clipboard.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "nature_system_demo",
+        "token": "nature_system_demo:90",
+        "cell": [
+          6,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/nature_system.json",
+            "scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+            "map_ready": false,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/nature_system/demo/nature_system_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print",
+        "token": "ten_print:180:1.5:0.1875#semicolon:on#when_full:scroll#seed:1982#count:400#own_light:off#controls:panel#channel:hall",
+        "cell": [
+          3,
+          11
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ten_print/TenPrint.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "composition_stochastique",
+        "token": "composition_stochastique:180",
+        "cell": [
+          6,
+          11
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/composition_stochastique.json",
+            "scene": "res://commons/artifacts/composition_stochastique/composition_stochastique.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/composition_stochastique/composition_stochastique.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:90:1",
+        "cell": [
+          1,
+          12
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_structure",
+        "token": "ten_print_structure:180#form:floor#rows:7#channel:hall#plate:none",
+        "cell": [
+          11,
+          12
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/ten_print_structure.json",
+            "scene": "res://commons/artifacts/ten_print_structure/ten_print_structure.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/ten_print_structure/ten_print_structure.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Cubes": {
+    "order": {
+      "primary": [
+        "dice_throw"
+      ],
+      "secondary": [
+        "coin_toss",
+        "random_object_spawner",
+        "random_edge_profile"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "dice_throw",
+        "token": "dice_throw",
+        "cell": [
+          3,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/dice_throw/dice_throw.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "coin_toss",
+        "token": "coin_toss",
+        "cell": [
+          8,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/coin_toss/coin_toss.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          6,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_object_spawner",
+        "token": "random_object_spawner",
+        "cell": [
+          5,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/random_object_spawner.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_object_spawner",
+        "token": "random_object_spawner",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/random_object_spawner.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Rotate_Random_XYZ": {
+    "order": {
+      "primary": [
+        "random_decay_multimesh"
+      ],
+      "secondary": [
+        "hardware_entropy_decay",
+        "Random_Rotate_Random_XYZ",
+        "RotateGridCubes"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "hardware_entropy_decay",
+        "token": "hardware_entropy_decay",
+        "cell": [
+          0,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Random_Rotate_Random_XYZ",
+        "token": "Random_Rotate_Random_XYZ",
+        "cell": [
+          3,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/RandomRotateRandomXYZ/RandomRotateRandomXYZ.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          10
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_decay_multimesh",
+        "token": "random_decay_multimesh#stack_fit:10",
+        "cell": [
+          6,
+          10
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "RotateGridCubes",
+        "token": "RotateGridCubes:0:-0.5",
+        "cell": [
+          3,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/SlopeGradientCubes.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/SlopeGradientCubes.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Walk": {
+    "order": {
+      "primary": [
+        "random_walk_terrarium",
+        "random_walk_128",
+        "random_draw_dot"
+      ],
+      "secondary": [
+        "random_walk_collection",
+        "random_walk_leash",
+        "pixel_cloud"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "random_walk_collection",
+        "token": "random_walk_collection:180#plinth:0.75#bench_bare_rack:1",
+        "cell": [
+          3,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/randomwalk/scenes/place_me.gd",
+              "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_walk_terrarium",
+        "token": "random_walk_terrarium:180#stand:logbook#controls:compact#control_front:1.25",
+        "cell": [
+          9,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_walk_leash",
+        "token": "random_walk_leash:180",
+        "cell": [
+          15,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/random_walk_leash/random_walk_leash.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_draw_dot",
+        "token": "random_draw_dot:0",
+        "cell": [
+          6,
+          8
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/random_draw_dot.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/random_draw_dot.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pixel_cloud",
+        "token": "pixel_cloud:180:0.1:0.18#walk_seed:101",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/pixelcloud/pixel_cloud.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_walk_128",
+        "token": "random_walk_128:180#glass_width:12#glass_depth:12#glass_height:5#glass_title:WALK / RETAIN#glass_moat:true",
+        "cell": [
+          9,
+          17
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/random_walk_128.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/RandomWalk128Algorithm.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Gaussian": {
+    "order": {
+      "primary": [
+        "distribution_sampler"
+      ],
+      "secondary": [
+        "galton_board",
+        "distribution_comparator",
+        "GaussianPaintSplatter"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "distribution_sampler",
+        "token": "distribution_sampler:180#stand:cabinet#controls:compact#control_front:1.05",
+        "cell": [
+          5,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/distribution_sampler/distribution_sampler.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "GaussianPaintSplatter",
+        "token": "GaussianPaintSplatter:180:1.5:0.65",
+        "cell": [
+          2,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "galton_board",
+        "token": "galton_board:180:0.9:1.5",
+        "cell": [
+          2,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/galton_board/galton_board.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "distribution_comparator",
+        "token": "distribution_comparator:180:0.83",
+        "cell": [
+          8,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/distribution_comparator/distribution_comparator.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Mushrooms": {
+    "order": {
+      "primary": [
+        "mushrooms",
+        "silhouette_arrivals",
+        "couture_comparison"
+      ],
+      "secondary": [
+        "bubbles_random"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "bubbles_random",
+        "token": "bubbles_random:180:0.85:0.25#plinth:0.85",
+        "cell": [
+          3,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/random_bubbles/BubblesRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mushrooms",
+        "token": "mushrooms:180#stand:specimen#size:6#edible:some#glass_width:8#glass_depth:8#glass_height:4.5#glass_title:POPULATION / DIFFERENCE#glass_entry:4#controls:compact#control_front:5.1",
+        "cell": [
+          8,
+          11
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/procgen_extra.json",
+            "scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "silhouette_arrivals",
+        "token": "silhouette_arrivals#controls:compact#control_front:-1.65#control_facing:-z",
+        "cell": [
+          13,
+          17
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/silhouette_arrivals.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/silhouette_arrivals.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "couture_comparison",
+        "token": "couture_comparison#controls:compact#control_front:-1.7#control_facing:-z",
+        "cell": [
+          8,
+          20
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/couture_comparison.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/dna_comparison.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Space_Geometry": {
+    "order": {
+      "primary": [
+        "perlin_noise_bridge"
+      ],
+      "secondary": [
+        "env_one",
+        "curl_noise_particles",
+        "random_transformations_geometric",
+        "sculpt_one"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "perlin_noise_bridge",
+        "token": "perlin_noise_bridge:0:-0.5",
+        "cell": [
+          6,
+          23
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "env_one",
+        "token": "env_one:0:4:0.5",
+        "cell": [
+          5,
+          24
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/env_one.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/envOne.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "curl_noise_particles",
+        "token": "curl_noise_particles:0:-0.5",
+        "cell": [
+          9,
+          24
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/curl_noise_particles/curl_noise_particles.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/curl_noise_particles/curl_noise_particles.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_transformations_geometric",
+        "token": "random_transformations_geometric:0:1:0.2",
+        "cell": [
+          3,
+          25
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/random_transformations/RandomTransformations.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sculpt_one",
+        "token": "sculpt_one",
+        "cell": [
+          2,
+          26
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/sculpt_one.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/SculptOne.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          6,
+          27
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Randomness_Examples_of_Randomness": {
+    "order": {
+      "primary": [
+        "pollock_painting_in_3d",
+        "monte_carlo_dartboard",
+        "pipe_dream",
+        "extreme_randomness"
+      ],
+      "secondary": [],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "pollock_painting_in_3d",
+        "token": "pollock_painting_in_3d:180:0:1#support:floor",
+        "cell": [
+          7,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/pollock_painting_in_3d.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "monte_carlo_dartboard",
+        "token": "monte_carlo_dartboard:180:0:1#disclosure:works#controls:compact#control_front:1.0",
+        "cell": [
+          4,
+          12
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pipe_dream",
+        "token": "pipe_dream:180:1.15:0.25#residue:path",
+        "cell": [
+          10,
+          15
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/pipedream/PipeDream.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "extreme_randomness",
+        "token": "extreme_randomness:180:1.5:0.2#chapter:all#gallery_radius:7",
+        "cell": [
+          5,
+          20
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Pheromone": {
+    "order": {
+      "primary": [
+        "pheromone_terrain"
+      ],
+      "secondary": [
+        "clipboard"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "pheromone_terrain",
+        "token": "pheromone_terrain#comparison:true#walk_seed:190919",
+        "cell": [
+          6,
+          3
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          2,
+          5
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "clipboard",
+        "token": "clipboard#pheromone_axioms:194:1.0",
+        "cell": [
+          2,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/context/clipboard/clipboard.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/context/clipboard/clipboard.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "clipboard",
+        "token": "clipboard#queer_energy:194:1.0",
+        "cell": [
+          3,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/context/clipboard/clipboard.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/context/clipboard/clipboard.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Space": {
+    "order": {
+      "primary": [
+        "noise_mixer"
+      ],
+      "secondary": [
+        "worley_noise",
+        "random_space",
+        "shannon_entropy_meter"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "noise_mixer",
+        "token": "noise_mixer:0:-0.5",
+        "cell": [
+          4,
+          3
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/noise_mixer/noise_mixer.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/noise_mixer/noise_mixer.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "worley_noise",
+        "token": "worley_noise:0:-0.5",
+        "cell": [
+          8,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/worley_noise/worley_noise.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/worley_noise/worley_noise.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_space",
+        "token": "random_space:0:-0.3:1.4",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/context/walkgrids/random_space.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/context/walkgrids/RandomSpace.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "shannon_entropy_meter",
+        "token": "shannon_entropy_meter:0:-0.5",
+        "cell": [
+          4,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Game": {
+    "order": {
+      "primary": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "cube_projectile_spawner"
+      ],
+      "secondary": [
+        "waiting_profile"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "r_c",
+        "token": "r_c:0:3#stand:chasm#cue:advance#controls:compact#control_front:-2.6#control_facing:-z#control_height:1.38#control_floor:0.28#control_fixed:true",
+        "cell": [
+          9,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/random_cubes.json",
+            "scene": "res://commons/primitives/cubes/random_cycle_cube.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/random_cycle_cube.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_removal_arena",
+        "token": "random_removal_arena:0:3#columns:9#rows:9#glass_width:11#glass_depth:11#glass_height:4.5#glass_title:THE SET UNDERFOOT#glass_grid:false#controls:compact#control_front:-6.0#control_facing:-z",
+        "cell": [
+          9,
+          17
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/removal_arena.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/removal_arena.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_doors",
+        "token": "random_doors#controls:compact#control_front:-4.0#control_facing:-z",
+        "cell": [
+          9,
+          29
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/random_doors.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/random_doors.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "cube_projectile_spawner",
+        "token": "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24#stand:field#controls:compact#control_front:-5.0#control_facing:-z",
+        "cell": [
+          9,
+          37
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/cube_spawner.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/primitives/cubes/CubeSpawner.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "waiting_profile",
+        "token": "waiting_profile#controls:compact#control_front:-1.7#control_facing:-z",
+        "cell": [
+          9,
+          47
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/waiting_profile.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/waiting_profile.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Biome_Cage": {
+    "order": null,
+    "placements": [
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:180#stage:randomness#size:8#seed:11#evolve:on#duration:20#controls:panel",
+        "cell": [
+          7,
+          9
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Biome_Ladder_Randomness": {
+    "order": null,
+    "placements": [
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Definition#size:5#seed:7#evolve:off",
+        "cell": [
+          4,
+          4
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Gaussian#size:5#seed:7#family:kandinsky#evolve:off",
+        "cell": [
+          11,
+          4
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Entropy#size:5#seed:7#evolve:off",
+        "cell": [
+          4,
+          10
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Mushrooms#size:5#seed:7#family:malevich#evolve:off",
+        "cell": [
+          11,
+          10
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Remove#size:5#seed:7#evolve:off",
+        "cell": [
+          4,
+          16
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Randomness_Examples_of_Randomness#size:5#seed:7#family:klee#evolve:off",
+        "cell": [
+          11,
+          16
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Randomness_10_PRINT_Algorithm#size:5#seed:7#evolve:off",
+        "cell": [
+          4,
+          22
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Game#size:5#seed:7#family:moholy#evolve:off",
+        "cell": [
+          11,
+          22
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "biome_vitrine",
+        "token": "biome_vitrine:90#stage:Random_Walk#size:5#seed:7#evolve:off",
+        "cell": [
+          4,
+          28
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/biome_vitrine.json",
+            "scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+            "map_ready": true,
+            "include_in_map_data": true,
+            "scene_exists": true,
+            "scripts": [
+              "res://commons/artifacts/biome_vitrine/biome_vitrine.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,582 @@
+--- before/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
++++ after/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd
+@@ -13,7 +13,7 @@
+ 
+ class_name EdgeOfChaosUnlocked
+ 
+-const TextScreenScript = preload("res://commons/ui/text_screen.gd")
++const ValueSurface = preload("res://commons/ui/control_value_surface.gd")
+ 
+ ## Grid resolution for reaction-diffusion
+ @export var grid_size: int = 64
+@@ -29,7 +29,10 @@
+ @export_range(1, 10) var display_rate: int = 2
+ 
+ ## Legacy speed selector; each unit now requests 3 model-time units per second.
+-@export_range(1, 8) var sim_steps: int = 4
++@export_range(1, 8) var sim_steps: int = 4:
++	set(value):
++		sim_steps = clampi(value, 1, 8)
++		_update_regime_label()
+ 
+ # Tenure controls access to lambda, not which equations or integrator are used.
+ # Earlier capture variants used a different solver from the interactive mode.
+@@ -38,21 +41,6 @@
+ 
+ ## Who holds lambda and at what setting.
+ @export_enum("unlocked", "clamped", "withheld", "frozen", "chaos") var tenure: String = "unlocked"
+-
+-# Rack slot pitch — must match ArtifactControls._slot_spacing so the blanking
+-# plate lands exactly where the LAMBDA fader would have been.
+-const SLOT_PITCH: float = 0.09
+-const RACK_ORIGIN := Vector3(1.2, 1.0, 0.0)
+-
+-# Where withheld's amendment notice stands. Chosen to sit INSIDE the artifact's
+-# existing AABB — x 0.842..1.398 against the readout's own 1.418 right edge,
+-# y 0.291..0.649 under a rack whose lowest control bottoms out at 0.70 in this
+-# tenure, clear of the 1.5 m quad that ends at x 0.75. A variant that grows the
+-# bounding box moves the auto-framing camera, and then every pixel in the frame
+-# differs for a reason that has nothing to do with the axis.
+-const NOTICE_ORIGIN := Vector3(1.12, 0.0, 0.0)
+-const NOTICE_WIDTH: float = 0.52
+-const NOTICE_HEIGHT: float = 0.47
+ 
+ # Preset poles advance for the same 192 model-time units as the old stable presets.
+ const PREROLL_DURATION: float = 192.0
+@@ -72,12 +60,11 @@
+ var _fine_image: Image
+ var _fine_texture: ImageTexture
+ var _fine_display: MeshInstance3D
+-var _dt_labels: Array[Label3D] = []
++var _dt_labels: Array[Dictionary] = []
+ var _study_readout: Label
+ var _study_sliders: Array[Node3D] = []
+ var _study_buttons: Array[Node3D] = []
+ var _paused: bool = false
+-const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
+ 
+ # Fixed seed: the still has to be the same still every run.
+ const SEED_RNG: int = 0x5EED17
+@@ -102,11 +89,7 @@
+ 
+ # UI
+ var _controls: Node
+-var _regime_label: Label3D
+-var _lambda_label: Label3D
+-var _title_label: Label3D
+-var _readout: Node3D
+-var _notice: Node3D
++var _title_label: Node3D
+ 
+ # Lifecycle
+ var _built: bool = false
+@@ -205,10 +188,6 @@
+ 	_display_quad = null
+ 	_controls = null
+ 	_title_label = null
+-	_regime_label = null
+-	_lambda_label = null
+-	_readout = null
+-	_notice = null
+ 	_texture = null
+ 	_image = null
+ 	_frame_count = 0
+@@ -409,12 +388,11 @@
+ 	_display_quad.material_override = mat
+ 
+ 	# Tilt the quad to face the viewer
+-	_display_quad.position = Vector3(0, 0.85, 0)
+-	_display_quad.rotation_degrees.x = -15
++	_display_quad.position = Vector3(0, 1.65, 0)
+ 	_own(_display_quad)
+ 
+ 	if comparison_study:
+-		_display_quad.position = Vector3(-0.85, 1.85, 0)
++		_display_quad.position = Vector3(-0.85, 1.65, 0)
+ 		_display_quad.rotation_degrees.x = 0
+ 		_fine_image = Image.create(grid_size, grid_size, false, Image.FORMAT_RGB8)
+ 		_fine_texture = ImageTexture.create_from_image(_fine_image)
+@@ -424,21 +402,23 @@
+ 		var fine_mat := mat.duplicate() as StandardMaterial3D
+ 		fine_mat.albedo_texture = _fine_texture
+ 		_fine_display.material_override = fine_mat
+-		_fine_display.position = Vector3(0.85, 1.85, 0)
++		_fine_display.position = Vector3(0.85, 1.65, 0)
+ 		_own(_fine_display)
+ 		for x in [-0.85, 0.85]:
+-			var dt_label := Label3D.new()
+-			dt_label.position = Vector3(x, 2.70, 0.02)
+-			dt_label.pixel_size = 0.0015
+-			dt_label.font_size = 32
+-			_own(dt_label)
++			var dt_label := _flat_readout("StepLabel", Vector2(.60, .085), Vector3(x, 2.49, .02), Vector2i(720, 102), 64)
+ 			_dt_labels.append(dt_label)
++
++	# Screens are mounted objects with frames and supports, not floating quads.
++	for display in [_display_quad, _fine_display]:
++		if not is_instance_valid(display): continue
++		_box(display, "Frame", Vector3(1.54, 1.54, .035), Vector3(0, 0, -.025))
++		_box(display, "Post", Vector3(.08, .93, .08), Vector3(0, -1.185, -.06))
+ 
+ 	# Base
+ 	var base := MeshInstance3D.new()
+ 	base.name = "Base"
+ 	var box := BoxMesh.new()
+-	box.size = Vector3(1.6, 0.06, 0.3)
++	box.size = Vector3(3.3 if comparison_study else 1.6, 0.06, 0.3)
+ 	base.mesh = box
+ 	var bmat := StandardMaterial3D.new()
+ 	bmat.albedo_color = Color(0.1, 0.1, 0.12)
+@@ -470,364 +450,110 @@
+ 	if comparison_study and _fine_image != null and not _fine_b.is_empty():
+ 		_paint_field(_fine_b, _fine_image)
+ 		_fine_texture.update(_fine_image)
+-		_dt_labels[0].text = "DT %.3f" % time_step
+-		_dt_labels[1].text = "DT %.3f" % (time_step * 0.5)
+-		if _study_readout:
+-			_study_readout.text = "lambda %.2f | t %.1f | seed %d\nB difference %.5f" % [lambda, model_time, seed_value - SEED_RNG, comparison_error()]
++		_set_flat_text(_dt_labels[0], "DT %.3f" % time_step)
++		_set_flat_text(_dt_labels[1], "DT %.3f" % (time_step * 0.5))
+ 	_update_regime_label()
+ 
+ 
+ # ── Controls ────────────────────────────────────────────────
+ 
+ func _build_controls() -> void:
+-	if comparison_study:
+-		_build_comparison_controls()
+-		return
+-	_controls = ArtifactControls.new()
++	_controls = preload("res://commons/ui/physical_parameter_console.gd").new()
+ 	_controls.name = "Controls"
+-	if tenure == "withheld":
+-		# Slot 0 is left empty for the blanking plate. Push the whole rack down
+-		# one pitch so SIM SPEED and RESEED keep the exact y they hold in every
+-		# other tenure — the rack must read as the SAME rack, minus one control.
+-		_controls.position = RACK_ORIGIN + Vector3(0.0, -SLOT_PITCH, 0.0)
+-	else:
+-		_controls.position = RACK_ORIGIN
++	_controls.title = "SAME START / SAME TIME" if comparison_study else "PATTERN PARAMETERS"
++	var access := "open" if tenure == "unlocked" else ("absent" if tenure == "withheld" else "held")
++	_controls.parameters.assign([
++		{"label": "LAMBDA", "value": lambda, "continuous": true, "access": access},
++		{"label": "SIM SPEED", "value": float(sim_steps - 1) / 7.0, "continuous": false, "steps": 8},
++	])
++	_controls.actions = PackedStringArray(["RESTART", "NEW SEED", "DT .3 / .15", "HOLD / RUN"] if comparison_study else ["RESTART", "NEW SEED"])
++	_controls.position = Vector3(0, .88, 1.0)
++	_controls.rotation_degrees.x = -55
+ 	_own(_controls)
+-
+-	if tenure != "withheld":
+-		_controls.add_slider("LAMBDA", lambda, func(v: float):
+-			# unlocked is the only tenure where the fader writes anything. On
+-			# clamped / frozen / chaos the bracket is bolted across its travel,
+-			# so the handle is hardware, not a control.
+-			if tenure == "unlocked":
+-				lambda = v
+-		)
+-
+-	_controls.add_slider("SIM SPEED", float(sim_steps - 1) / 7.0, func(v: float):
+-		sim_steps = int(round(v * 7.0)) + 1
++	_controls.parameter_changed.connect(func(index: int, value: float):
++		if index == 0 and tenure == "unlocked": lambda = value
++		elif index == 1: sim_steps = roundi(value * 7.0) + 1
+ 	)
+-	_controls.add_button("RESTART", restart)
+-	_controls.add_button("NEW SEED", new_seed)
+-
+-	match tenure:
+-		"clamped", "frozen", "chaos":
+-			_own(_build_clamp_bracket())
+-		"withheld":
+-			_own(_build_blanking_plate())
+-
+-
+-func _build_comparison_controls() -> void:
+-	_controls = InterfacePresets.build("machine", "Same start / same time", 1.0)
+-	_controls.position = Vector3(0, 1.0, 0.85)
+-	_own(_controls)
+-	_study_readout = _controls.add_readout("")
+-	var l: Node3D = _controls.add_slider("LAMBDA", "Lambda")
+-	l.set_normalized_value(lambda)
+-	l.slider_moved.connect(func(_v):
+-		if tenure == "unlocked": lambda = l.get_normalized_value()
+-	)
+-	var speed: Node3D = _controls.add_slider("SIM SPEED", "Speed")
+-	speed.set_normalized_value(float(sim_steps - 1) / 7.0)
+-	speed.slider_moved.connect(func(_v): sim_steps = int(round(speed.get_normalized_value()*7.0))+1)
+-	_study_sliders = [l, speed]
+-	var buttons = load("res://commons/ui/control_panel.gd").new()
+-	buttons.position = Vector3(0, 0.84, 1.15)
+-	buttons.spacing = 0.26
+-	_own(buttons)
+ 	var callbacks: Array[Callable] = [restart, new_seed, toggle_step, _toggle_pause]
+-	var words := ["RESTART", "NEW SEED", "DT .3 / .15", "HOLD / RUN"]
+-	for i in range(words.size()):
+-		var button: Node3D = buttons.add_button(words[i])
+-		button.get_node("InteractableAreaButton").button_pressed.connect(func(_body): callbacks[i].call())
+-		_study_buttons.append(button)
++	_controls.action_pressed.connect(func(index: int): callbacks[index].call())
++	_study_sliders = _controls.sliders
++	_study_buttons = _controls.buttons
++	_study_readout = _controls._readout.label
++	var stand := Node3D.new()
++	stand.name = "ConsoleStand"
++	stand.position.z = 1.0
++	_own(stand)
++	_box(stand, "Stem", Vector3(.10, .80, .10), Vector3(0, .42, -.05))
++	_box(stand, "Foot", Vector3(.54, .045, .42), Vector3(0, .0225, -.05))
++	_update_regime_label()
+ 
+ 
+ func _toggle_pause() -> void:
+ 	_paused = not _paused
+-
+-
+-## A bar bolted across the LAMBDA fader's travel. Wider than the 0.18 m fader
+-## because it has to reach past it to the rack on either side — that overhang is
+-## what makes it read as a clamp and not as a second control.
+-func _build_clamp_bracket() -> Node3D:
+-	var node := Node3D.new()
+-	node.name = "LambdaClamp"
+-	node.position = RACK_ORIGIN
+-
+-	var steel := StandardMaterial3D.new()
+-	steel.albedo_color = Color(0.62, 0.63, 0.65)
+-	steel.metallic = 0.85
+-	steel.roughness = 0.35
+-
+-	var bar := MeshInstance3D.new()
+-	bar.name = "Bracket"
+-	var bar_box := BoxMesh.new()
+-	bar_box.size = Vector3(0.34, 0.05, 0.03)
+-	bar.mesh = bar_box
+-	bar.material_override = steel
+-	# The rack chassis is 0.02 deep and its lit screen quad sits at z = 0.011,
+-	# so the bar clears the glyphs it is holding shut.
+-	bar.position = Vector3(0.0, 0.0, 0.030)
+-	node.add_child(bar)
+-
+-	# Feet. A bar floating across a fader is a bar; a bar on straps that reach the
+-	# chassis is a clamp. Held to 0.09 m tall — the fader's own slot pitch — so the
+-	# assembly never reads as seizing SIM SPEED or RESEED, which are still live.
+-	var gunmetal := StandardMaterial3D.new()
+-	gunmetal.albedo_color = Color(0.22, 0.23, 0.25)
+-	gunmetal.metallic = 0.7
+-	gunmetal.roughness = 0.45
+-
+-	for i in range(2):
+-		var strap_side: float = -1.0 if i == 0 else 1.0
+-		var strap := MeshInstance3D.new()
+-		strap.name = "Strap%s" % ("L" if i == 0 else "R")
+-		var strap_box := BoxMesh.new()
+-		strap_box.size = Vector3(0.05, 0.09, 0.016)
+-		strap.mesh = strap_box
+-		strap.material_override = gunmetal
+-		strap.position = Vector3(0.15 * strap_side, 0.0, 0.020)
+-		node.add_child(strap)
+-
+-	var bolt_steel := StandardMaterial3D.new()
+-	bolt_steel.albedo_color = Color(0.48, 0.49, 0.52)
+-	bolt_steel.metallic = 0.9
+-	bolt_steel.roughness = 0.28
+-
+-	for i in range(2):
+-		var side: float = -1.0 if i == 0 else 1.0
+-		var bolt := MeshInstance3D.new()
+-		bolt.name = "Bolt%s" % ("L" if i == 0 else "R")
+-		var cyl := CylinderMesh.new()
+-		cyl.top_radius = 0.010
+-		cyl.bottom_radius = 0.010
+-		cyl.height = 0.020
+-		bolt.mesh = cyl
+-		bolt.material_override = bolt_steel
+-		bolt.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+-		bolt.position = Vector3(0.15 * side, 0.0, 0.048)
+-		node.add_child(bolt)
+-
+-	return node
+-
+-
+-## No fader. A riveted blank in its slot — the sequence's politics as an object.
+-## Anthracite is deliberately the label framer's own panel colour: the plate and
+-## the framed captions read as the same institutional material.
+-func _build_blanking_plate() -> Node3D:
+-	var node := Node3D.new()
+-	node.name = "LambdaBlankingPlate"
+-	node.position = RACK_ORIGIN
+-
+-	var anthracite := StandardMaterial3D.new()
+-	anthracite.albedo_color = Color(0.12, 0.12, 0.135)
+-	anthracite.metallic = 0.2
+-	anthracite.roughness = 0.55
+-
+-	var plate := MeshInstance3D.new()
+-	plate.name = "Plate"
+-	var box := BoxMesh.new()
+-	box.size = Vector3(0.30, 0.09, 0.012)
+-	plate.mesh = box
+-	plate.material_override = anthracite
+-	plate.position = Vector3(0.0, 0.0, 0.012)
+-	node.add_child(plate)
+-
+-	var rivet_mat := StandardMaterial3D.new()
+-	rivet_mat.albedo_color = Color(0.34, 0.34, 0.36)
+-	rivet_mat.metallic = 0.8
+-	rivet_mat.roughness = 0.4
+-
+-	for i in range(4):
+-		var sx: float = -1.0 if (i % 2) == 0 else 1.0
+-		var sy: float = -1.0 if i < 2 else 1.0
+-		var rivet := MeshInstance3D.new()
+-		rivet.name = "Rivet%d" % i
+-		var cyl := CylinderMesh.new()
+-		cyl.top_radius = 0.006
+-		cyl.bottom_radius = 0.006
+-		cyl.height = 0.008
+-		rivet.mesh = cyl
+-		rivet.material_override = rivet_mat
+-		rivet.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+-		rivet.position = Vector3(0.13 * sx, 0.032 * sy, 0.020)
+-		node.add_child(rivet)
+-
+-	return node
+-
+-
+-# ── Labels ──────────────────────────────────────────────────
+-#
+-# TWO hanging Label3Ds remain, and both are meant to be framed by
+-# GridInteractablesComponent at spawn: title and subtitle. Their y positions are
+-# chosen for the OPAQUE plate the framer builds behind them (text width + 0.05,
+-# height + 0.035), not for the see-through glyphs the old capture harness drew.
+-#
+-# The two live readouts are NOT hanging labels any more. Framed, they became a
+-# 1.05 x 0.21 m plate centred at floor level and a 0.77 x 0.18 m plate centred
+-# 0.15 m BELOW the floor, standing 0.19 m in front of the 1.6 x 0.06 x 0.3 m
+-# base and masking its whole front face from any camera below eye height. They
+-# are promoted to one TextScreen on the rack side instead.
+-
+-## WITHHELD IS THE ONE TENURE WHOSE SUBJECT IS THIS TEXT. Every other value can
+-## leave the caption alone, and clamped MUST: a sign reading UNLOCKED above a
+-## bolted fader is the contradiction that value is made of. But an artifact that
+-## does not fit the control cannot go on advertising it in 36 pt, and the axis
+-## doc has said so in words since the day it was written — "the artifact whose
+-## whole title is UNLOCKED, shipped locked". So under withheld the title says
+-## WITHHELD and goes anthracite, and the caption underneath stops promising the
+-## slider. Same character count as UNLOCKED, deliberately: LabelFramer sizes one
+-## shared plate from the widest line it measures, and a longer word would move
+-## furniture that four other tenures share.
++	_update_regime_label()
++
++
+ func _build_labels() -> void:
++	if comparison_study: return
++	# Retain the deliberate contradiction: CLAMPED still advertises UNLOCKED.
++	var title := "PATTERN — WITHHELD" if tenure == "withheld" else "PATTERN — UNLOCKED"
++	var sub := "The slider the map withheld. Not fitted here." if tenure == "withheld" else "The slider the map withheld. Now it is yours."
++	var title_plate := _flat_readout("Title", Vector2(1.8, .13), Vector3(0, 2.69, .02), Vector2i(1080, 78), 64)
++	_title_label = title_plate.screen
++	_set_flat_text(title_plate, title)
++	var subtitle := _flat_readout("Subtitle", Vector2(1.8, .09), Vector3(0, 2.55, .02), Vector2i(1440, 72), 47)
++	_set_flat_text(subtitle, sub)
++
++
++func _flat_readout(node_name: String, size: Vector2, at: Vector3, pixels: Vector2i, font_size: int) -> Dictionary:
++	var holder := Node3D.new()
++	holder.name = node_name
++	holder.position = at
++	_own(holder)
++	var surface := ValueSurface.build(holder, size, Vector3.ZERO)
++	surface.viewport.size = pixels
++	surface.label.size = Vector2(pixels)
++	surface.viewport.get_child(0).size = Vector2(pixels)
++	surface.label.add_theme_font_size_override("font_size", font_size)
++	_box(holder, "Bezel", Vector3(size.x + .024, size.y + .024, .025), Vector3(0, 0, -.017))
++	return surface
++
++
++func _set_flat_text(surface: Dictionary, text: String) -> void:
++	if surface.label.text == text: return
++	surface.label.text = text
++	surface.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
++
++
++func _box(parent: Node3D, node_name: String, size: Vector3, at: Vector3) -> void:
++	var mesh := MeshInstance3D.new()
++	mesh.name = node_name
++	mesh.mesh = BoxMesh.new()
++	mesh.mesh.size = size
++	mesh.position = at
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = Color(.16, .19, .21)
++	mat.roughness = .72
++	mesh.material_override = mat
++	parent.add_child(mesh)
++
++
++func _update_regime_label() -> void:
++	if not is_instance_valid(_controls): return
++	_controls.set_parameter(0, lambda)
++	_controls.set_parameter(1, float(sim_steps - 1) / 7.0)
++	var state := "FAULT" if solver_fault else ("HOLD" if _paused else "RUN")
++	var text := "%s | SPEED %d | %s\nt %.1f | seed %d | DT %.3f" % [_lambda_line(), sim_steps, state, model_time, seed_value - SEED_RNG, time_step]
+ 	if comparison_study:
+-		return  # Per-display timestep labels and the console carry this encounter.
+-	_title_label = Label3D.new()
+-	_title_label.name = "Title"
+-	_title_label.text = "PATTERN — WITHHELD" if tenure == "withheld" \
+-			else "PATTERN — UNLOCKED"
+-	_title_label.font_size = 36
+-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+-	# KEPT. Framed plate ~1.72 x 0.25 m spans y 1.875–2.125; the display quad's
+-	# top edge is at (0, 1.574, -0.194), so it clears the artwork by 0.30 m.
+-	_title_label.position = Vector3(0, 2.0, 0)
+-	_title_label.modulate = Color(0.42, 0.44, 0.46, 0.9) if tenure == "withheld" \
+-			else Color(0.4, 1.0, 0.6, 0.9)
+-	_own(_title_label)
+-
+-	var sub := Label3D.new()
+-	sub.name = "Subtitle"
+-	# EXACTLY 45 characters, the same as the line it replaces, and the replaced
+-	# tail is the same 17 characters as " Now it is yours." LabelFramer sizes one
+-	# shared plate from the widest line in the stack, and this stack is close
+-	# enough between its two lines that a longer caption could take over as the
+-	# widest — widening the plate, widening the AABB, and pulling the auto-framing
+-	# camera back for this tenure alone. A variant that re-frames the shot is not
+-	# a variant, it is a different photograph.
+-	sub.text = "The slider the map withheld. Not fitted here." \
+-			if tenure == "withheld" else "The slider the map withheld. Now it is yours."
+-	sub.font_size = 20
+-	sub.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+-	# MOVED 1.85 -> 1.76. At 1.85 the framed plate spanned 1.765–1.935 and
+-	# shingled 0.06 m into the title plate's bottom edge at 1.875 — two
+-	# anthracite slabs overlapping. At 1.76 it spans 1.675–1.845: 0.03 m clear
+-	# under the title, 0.10 m clear above the display's top edge.
+-	sub.position = Vector3(0, 1.76, 0)
+-	sub.modulate = Color(0.7, 0.8, 0.7, 0.7)
+-	_own(sub)
+-
+-	_build_readout()
+-	if tenure == "withheld":
+-		_notice = _build_withheld_notice()
+-		_own(_notice)
+-	_update_regime_label()
+-
+-
+-## The regime word and the lambda value on ONE TextScreen (SCREEN mode), parked
+-## above the control rack and just outboard of the display quad's right edge.
+-## Board 0.636 x 0.41 m: x 0.782–1.418 (quad ends at 0.75), y 1.215–1.625 (rack
+-## top ~1.03). Nothing in the viewing corridor.
+-func _build_readout() -> void:
+-	_readout = Node3D.new()
+-	_readout.name = "ReadoutHolder"
+-	_readout.position = Vector3(1.10, 1.42, 0.02)
+-	_own(_readout)
+-
+-	# Deliberately untyped: the script is preloaded rather than reached through
+-	# its class_name, which is what keeps it resolvable headless.
+-	var screen = TextScreenScript.new()
+-	screen.name = "RegimeScreen"
+-	screen.mode = 0                     # TextScreen.Mode.SCREEN
+-	screen.width_m = 0.60
+-	screen.title = "PARAMETER SETTING"
+-	screen.body = "lambda = %.2f" % lambda
+-	_readout.add_child(screen)
+-
+-	# The Label3D nodes survive as the text source so anything reading .text
+-	# keeps working, but they hang on nothing now: billboard DISABLED means the
+-	# framer skips them (its own skip rule), and invisible means they add no
+-	# glyphs and no AABB of their own to the camera's framing.
+-	_regime_label = Label3D.new()
+-	_regime_label.name = "RegimeLabel"
+-	_regime_label.font_size = 28
+-	_regime_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+-	_regime_label.visible = false
+-	_regime_label.position = Vector3.ZERO
+-	_readout.add_child(_regime_label)
+-
+-	_lambda_label = Label3D.new()
+-	_lambda_label.name = "LambdaValue"
+-	_lambda_label.font_size = 22
+-	_lambda_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+-	_lambda_label.visible = false
+-	_lambda_label.position = Vector3(0, -0.05, 0)
+-	_lambda_label.modulate = Color(0.8, 0.8, 0.8, 0.7)
+-	_readout.add_child(_lambda_label)
+-
+-
+-## The amendment, standing beside the instrument. withheld only.
+-##
+-## WHY A WHOLE OBJECT AND NOT A BIGGER BLANKING PLATE. The blanking plate says
+-## the true thing in the true place, and at the scale a viewer meets this
+-## artifact it is 0.027 m^2 on a rack that is under 1% of the picture — which is
+-## why clamped and withheld measured as one picture at 1.53% focus. The answer is
+-## not to inflate rack hardware until it photographs (a clamp the size of the
+-## instrument would be a second false declaration). It is that the two values
+-## differ in KIND, and the doc already says how: clamped is an object, withheld
+-## is a sentence — the artifact still calling itself UNLOCKED while shipping
+-## locked. A sentence in this project gets a body, and the body is TextScreen.
+-##
+-## 0.556 x 0.358 m of framed dark glass on a 0.31 m post, standing in the empty
+-## floor space between the display quad's right edge and the rack. Kept strictly
+-## inside the existing AABB — see NOTICE_ORIGIN.
+-func _build_withheld_notice() -> Node3D:
+-	var node := Node3D.new()
+-	node.name = "WithheldNotice"
+-	node.position = NOTICE_ORIGIN
+-
+-	# Untyped for the same reason the readout is: preloaded rather than reached
+-	# through class_name, which is what keeps it resolvable headless.
+-	var screen = TextScreenScript.new()
+-	screen.name = "AmendmentScreen"
+-	screen.mode = 1                     # TextScreen.Mode.STAND
+-	screen.width_m = NOTICE_WIDTH
+-	screen.stand_height = NOTICE_HEIGHT
+-	screen.title = "LAMBDA WITHHELD"
+-	screen.body = "fader not fitted\nheld at %.2f" % lambda
+-	node.add_child(screen)
+-	return node
+-
+-
+-func _update_regime_label() -> void:
+-	if not _regime_label:
+-		return
+-	var word: String = "LAMBDA MID"
+-	var tint: Color = Color(0.2, 1.0, 0.5, 0.9)
+-	if lambda < 0.2:
+-		word = "LAMBDA LOW"
+-		tint = Color(0.4, 0.6, 1.0, 0.9)
+-	elif lambda >= 0.55:
+-		word = "LAMBDA HIGH"
+-		tint = Color(1.0, 0.3, 0.2, 0.9)
+-
+-	_regime_label.text = word
+-	_regime_label.modulate = tint
+-
+-	var value_line: String = _lambda_line()
+-	if _lambda_label:
+-		_lambda_label.text = value_line
+-
+-	if _readout and is_instance_valid(_readout):
+-		var screen = _readout.get_node_or_null("RegimeScreen")
+-		if screen:
+-			screen.title_color = tint
+-			screen.set_text(word, value_line)
+-
+-
+-## The value, and who is allowed to move it. Costs nothing in the still — the
+-## readout's body line is about 60 x 8 px at capture scale — and is not why the
+-## twin is fixed. It is here so a person standing in front of the instrument can
+-## read the same fact the axis declares, instead of inferring it from a bolt.
++		text += "\nB difference %.5f" % comparison_error()
++	else:
++		text += "\nLAMBDA follows one authored parameter route"
++	_controls.set_reading(text)
++	if comparison_study:
++		_controls.set_action_selected(2, time_step < .2)
++		_controls.set_action_selected(3, _paused)
++
++
+ func _lambda_line() -> String:
+ 	var line: String = "lambda = %.2f" % lambda
+ 	match tenure:

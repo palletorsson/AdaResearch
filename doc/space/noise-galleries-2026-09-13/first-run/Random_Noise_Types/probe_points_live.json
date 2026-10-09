@@ -1,0 +1,43 @@
+{
+  "checks": 81,
+  "control_path": "REDRAW / NEW SEED / RULE / RESTORE through InteractableAreaButton.button_pressed (one argument); the live port presses NEW SEED and REDRAW through the desktop pointer and carries a point with the pointer's own grab",
+  "engine": "4.6-stable (official)",
+  "failures": [
+    "WhiteNoiseGallery pointer selects WHITE",
+    "WhiteNoiseGallery sound stream is active for WHITE",
+    "WhiteNoiseGallery status names sound and its separate source",
+    "WhiteNoiseGallery pointer selects PINK",
+    "WhiteNoiseGallery sound stream is active for PINK",
+    "WhiteNoiseGallery status names sound and its separate source",
+    "WhiteNoiseGallery pointer selects BROWN",
+    "WhiteNoiseGallery sound stream is active for BROWN",
+    "WhiteNoiseGallery status names sound and its separate source",
+    "NoiseColors3D pointer selects WHITE",
+    "NoiseColors3D sound stream is active for WHITE",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects PINK",
+    "NoiseColors3D sound stream is active for PINK",
+    "NoiseColors3D status names sound and its separate source",
+    "NoiseColors3D pointer selects BROWN",
+    "NoiseColors3D sound stream is active for BROWN",
+    "NoiseColors3D status names sound and its separate source"
+  ],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Noise_Types",
+  "measurements": {
+    "captures": {
+
+    },
+    "galleries": {
+      "audio_lane": "dry generated samples and stream state; not recorded room output",
+      "heard_by_person": false,
+      "records": "galleries.json",
+      "tokens": [
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ]
+    }
+  },
+  "physics_fps": 60
+}

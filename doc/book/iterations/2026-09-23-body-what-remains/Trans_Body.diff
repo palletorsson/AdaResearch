@@ -1,0 +1,50 @@
+--- before/commons/maps/Trans_Body/final.md
++++ after/commons/maps/Trans_Body/final.md
+@@ -14,7 +14,7 @@
+ var openness: float = (1.0 - t) * (1.0 - d)
+ ```
+ 
+-Two distances, multiplied. The implementation smooths this value and opens a neighbouring run of slats far enough for a body to pass. The first is how far this slat is from you along the wall; the second is how far you are from the wall. The slat does not know whether you meant to come. Its mechanism holds which side you approached from while it swings, then settles back. Even this small response needs a little state.
++Two distances, multiplied: how far the slat is from you along the wall, and how far you are from the wall. The program smooths the response and opens neighbouring slats far enough for a body to pass. The slat does not know whether you meant to come. Its mechanism holds which side you approached from while it swings, then settles back. Even this small response needs a little state.
+ 
+ A door gives you a place to approach. This wall lets the place of approach move with you. Someone has still chosen how close counts as close, how wide the opening should become, and which collision bodies it will notice. The invitation has dimensions. The slats remain attached to their hinges, the material is the same, nothing has been consumed. Your position changes what that arrangement allows.
+ 
+@@ -28,23 +28,27 @@
+ 
+ They are removed. You advance a shell at a time, leaving an open-topped cut through the block. For a standing visitor this is closer to a trench than a tunnel. Your view was above it before your legs had a way through.
+ 
+-The test is one line, and the interesting part is a number:
++This extra reach has a name:
+ 
+ ```gdscript
+ @export var bite_m: float = 0.16
+ ```
+ 
+-The lattice is solid and so are you, so the physics engine stops you at the surface and your collider never actually overlaps a cube. A lattice that deleted only what it strictly intersected would delete nothing, for ever, and would look exactly like this one. `bite_m` is the margin by which you are allowed to reach past the place you were stopped. At zero the room is a wall. At 0.16 against a 0.34 cell it clears about one shell per press.
++`bite_m` gives the collision shape another sixteen centimetres of reach. The physics engine stops your body at the solid cells; this margin lets the deletion reach beyond that stop. With cells spaced thirty-four centimetres apart, it clears roughly one layer at a time. You press forward, the surface gives, and there is another surface.
+ 
+ Your movement supplies the input, but the operation on the lattice is deletion. Translation alone would leave every cube somewhere. Here the count changes. The whole behaviour also hangs on a tolerance: the difference between a body being stopped and a position allowed to reach beyond it.
+ 
+ The cut stays while this room remains loaded. Look at its stepped sides. It records where the lattice met the collision shape used for your body, expanded by that small margin. The cubes can only retain the contact at their own resolution. Some of you passed above the entire record.
+ 
++![The low cube lattice before a passage and the open-topped cut left by the museum body, photographed from the same elevated viewpoint.](/book-review/doc/book/iterations/2026-09-23-body-what-remains/the-cut-remains.png)
++
++*The body has left the second view. These elevated museum views show the missing cells; the opening was made by walking through the block.*
++
+ Somebody following behind you will find the cut already made. Will their body fit the passage yours left?
+ 
+ <!-- @approach_scale -->
+ 
+-Nine blocks, set closer together than a pair of shoulders. At rest the gap between neighbours is thirty-five centimetres, which is not "tight". It is shut.
++Nine blocks. At rest, the gap between neighbours is thirty-five centimetres.
+ 
+ Walk in anyway.
+ 
+@@ -64,6 +68,6 @@
+ 
+ <!-- @ -->
+ 
+-In every other room in this chapter you have watched a cube be moved, turned or grown. Here your approach has turned slats, removed cells and reduced blocks. Two boundaries return; one keeps the cut. Walking felt like walking, while the room was doing different kinds of work.
++The cube carried you; the bottle changed the room around you. Here your approach has turned slats, removed cells and reduced blocks. Two boundaries return; one keeps the cut. Walking felt like walking, while the room was doing different kinds of work.
+ 
+ What the room offers depends on the body its code can recognise. The next room continues changing even when you stand still.

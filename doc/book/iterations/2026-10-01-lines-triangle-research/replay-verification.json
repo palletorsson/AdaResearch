@@ -1,0 +1,16 @@
+{
+  "scope": "Fresh native process, same probe/configuration and working sources; geometric/state comparison, not pixel identity",
+  "checks": {
+    "initial_points_world": true,
+    "restored_points_world": true,
+    "initial_area_m2": true,
+    "collapsed_area_m2": true,
+    "route": true,
+    "both_passed": true
+  },
+  "passed": true,
+  "check_counts": [
+    25,
+    25
+  ]
+}

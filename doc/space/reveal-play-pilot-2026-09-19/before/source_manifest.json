@@ -1,0 +1,28 @@
+{
+  "room": "CA_SoftRules",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/CA_SoftRules/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/CA_SoftRules/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+    "commons/maps/CA_SoftRules/map_data.json": "6eeea6ca3ca1008ef23874351f126453ca7684fbd271d2ceab23fd2a809e575d",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "a1e90ff659e3ffaea037643d6661b71fcff4ceca1a6ee0e323d591c3e32762ec",
+    "ada_run/encounter_pilot/CA_SoftRules/control.json": "40281d63d7b47121751e8b70b26d748255ef8c5123e1f0659afba70a84781870",
+    "ada_run/encounter_pilot/CA_SoftRules/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/CA_SoftRules/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/CA_SoftRules/em_bake.json": "64813887fd9f36b06eec6ca6e18108af33acbbaec5a4f42fd2a9d744b35457f9"
+  }
+}

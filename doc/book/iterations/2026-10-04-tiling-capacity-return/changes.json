@@ -1,0 +1,58 @@
+[
+  {
+    "id": "Pattern_Disco",
+    "title": "Keep the pattern, change its palette",
+    "before": "The checker rule and palette were separated, but the plan could read as another construction exercise.",
+    "after": "Reuse the existing floor rule. Change palette and phase separately; keep the triangle shader an optional comparison.",
+    "reason": "Let Colour return through an operation the student already knows."
+  },
+  {
+    "id": "Pattern_Foundry",
+    "title": "Author the source others repeat",
+    "before": "A four-by-four source, copying and the loom’s curved receivers were bundled into one lesson.",
+    "after": "Start with one small motif and wrapping lookup. Move copying to a return visit; distinguish the tile, loom and held images.",
+    "reason": "Reduce first-visit load without losing the richer questions of sharing and keeping."
+  },
+  {
+    "id": "Tutorial_Pattern",
+    "title": "Transform the lookup or the source",
+    "before": "“Reversed source rows” left the direction of the source edit ambiguous.",
+    "after": "Make horizontal reversal explicit: read columns backwards, or reverse entries within each row. Check which operation actually changes the source.",
+    "reason": "Keep a visually similar result from concealing two different operations."
+  },
+  {
+    "id": "Array_Patterns",
+    "title": "Give an address physical dimensions",
+    "before": "Physical cell size was included, but transfer and surface conventions stayed open.",
+    "after": "Use the installed fixed motif and name each face’s directions. Distinguish one cell’s width from the width of the complete repeat.",
+    "reason": "Give the same number an unambiguous unit and meaning."
+  },
+  {
+    "id": "Symmetry_Seventeen",
+    "title": "Make a reversal visible",
+    "before": "The glide was described, but a source block could still be mistaken for its full repeating unit.",
+    "after": "Inspect two neighbouring blocks and test the translation period. Keep the seventeen-group claim separate from this bounded comparison.",
+    "reason": "Make the limit of the demonstrated rule as clear as its visible effect."
+  },
+  {
+    "id": "Ribbon_Patterns_01",
+    "title": "Let height enter the pattern",
+    "before": "The height shift and slicing were clear, but the storage convention was implicit.",
+    "after": "Name source [z][x] and volume [y][z][x], then predict one shifted lookup. Keep zero-as-colour distinct from earlier occupancy.",
+    "reason": "Reuse the earlier volume knowledge without silently changing what its values mean."
+  },
+  {
+    "id": "Ribbon_Patterns_02",
+    "title": "Compare what the carrier contributes",
+    "before": "The reflective comparison already worked well.",
+    "after": "Keep it. Clarify equal surface distance versus apparent width; leave the lighting calculation supplied and require no perceptual answer.",
+    "reason": "Allow the sequence to deepen attention without adding more programming."
+  },
+  {
+    "id": "Ribbon_Patterns_03",
+    "title": "Carry a small recipe onto fabric",
+    "before": "A tiny shader was proposed, but its host and what SAVE could carry were left open.",
+    "after": "Name the existing texture/material host. Teach repeat, offset and sampling only; distinguish saved recipe data from shader code and metre spacing.",
+    "reason": "Give the sequence a small, usable shader ending without implying the whole studio must be rebuilt."
+  }
+]

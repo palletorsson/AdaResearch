@@ -1,0 +1,25 @@
+--- before/commons/maps/Color_Grid_Pallet/final.md
++++ commons/maps/Color_Grid_Pallet/final.md
+@@ -9,6 +9,10 @@
+ Press COLOUR. One cell receives pink. Press again and it receives another of the four available inks. Find a colour you want to leave there. Move the outline away. Keep going until the address returns: each direction cycles through five positions. The colour is still waiting at the address you left.
+ 
+ The white outline has travelled. Your exception has not followed it.
++
++![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-review/doc/book/iterations/2026-09-23-grid-colour-kept/an-address-keeps-colour.png)
++
++*Write, leave, return, rewrite. The pink square keeps its colour while the white outline moves. RULE replaces that value; the same cube still supports the walker.*
+ 
+ ```gdscript
+ colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
+@@ -33,9 +37,9 @@
+ 
+ We could mistake this regularity for a requirement of the grid. Yet you have just made an exception. The cube held it perfectly well. The rule did not return because the exception was impossible. It returned because you pressed a button that wrote across the floor again.
+ 
+-The apparatus has its own narrow permissions. Five positions in each direction can be selected here. Four inks can be assigned. The rule reaches farther, across the interior floor. Why should its reach exceed yours? These limits are choices in this lesson's code; the experiment makes them available to question. A later version could let an exception travel, protect it from a rewrite, or change the rule itself. None of those possibilities happens merely because we can name it.
++The console lets you select twenty-five positions and write one of four inks. RULE reaches beyond that region, across the interior floor. You can stand on a square whose colour the program can change and whose address the console will not let you choose. Why should its reach exceed yours?
+ 
+-There is no history stack behind this console. An edit remains while you look elsewhere, but RULE replaces it and reloading the room starts again. To remember more would require another place to keep what has been overwritten.
++Each address keeps only its current colour. An edit remains while you look elsewhere, but RULE replaces it and reloading the room starts again. To remember more would require another place to keep what has been overwritten.
+ 
+ <!-- @ -->
+ 

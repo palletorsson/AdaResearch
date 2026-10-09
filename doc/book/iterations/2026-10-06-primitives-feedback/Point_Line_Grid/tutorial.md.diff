@@ -1,0 +1,20 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -4,13 +4,16 @@
+ 
+ - Loading your saved trace
+ - Reusing a drawing as a sculpture
++- One record, different representations
+ - Source positions and grid addresses
+ - Integer coordinates and rounding
+ - Changing a copy while keeping the original
+ 
+ We are in the Endless Museum. In Trace, you moved the held point and released it to save the drawing. Here, place that drawing beside the ruled field. The gesture has become something you can walk around.
+ 
+-The pink sculpture is your saved work: the same retained positions and the same segment geometry. We do not build another point or ask for another gesture. Its data gives us a second question: what changes when those positions receive grid addresses?
++The pink sculpture is your saved work: the same retained positions and the same segment geometry. We do not build another point or ask for another gesture. **One record can support different representations.** Here we derive grid addresses from it and change a separate green copy.
++
++Trace stored selected samples of movement, not the whole continuous gesture. Its ordered array, visible segments and rounded addresses each let us do different work. Keeping the source means another interpretation can begin without pretending that rounding recovered everything the hand did.
+ 
+ ## Bring your drawing
+ 

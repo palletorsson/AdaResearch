@@ -1,0 +1,11 @@
+--- before/doc/book/figures/README.md
++++ doc/book/figures/README.md
+@@ -25,3 +25,8 @@
+ `Array/museum-approach.png`, `museum-floor-changed.png` and `museum-floor-restored.png` replace the tight book views with the entrance and standing viewpoints. The current museum itself embeds this wireframe Array room; no material or surrounding geometry was substituted for a photograph. Earlier images and tests remain unchanged. The floor pair uses supplied mutations held for comparison.
+ 
+ All eight images are unmodified native Godot viewport captures. Camera positions and controls were supplied by probes. Evidence and SHA256 provenance: `doc/book/iterations/2026-09-24-colour-review-comments/`. No headset or learner observation is claimed.
++
++
++## Tiling — native museum views, 24 September 2026
++
++Four unmodified Godot viewport captures from the loaded halls: held P1/live PG, unequal/equal contrast surrounds, and the fabric studio. Standing cameras preserve the actual architecture, materials and neighbouring artifacts. These are GL compatibility renders, not tracked-headset screenshots. [Provenance and hashes](../iterations/2026-09-24-tiling-review-comments/figure-provenance.json).

@@ -1,0 +1,27 @@
+--- before/doc/book/preface.md
++++ doc/book/preface.md
+@@ -1,12 +1,14 @@
+ # Before the first point
+ 
+-*Preface · working draft, revised 28 September 2026*
++*Preface · working draft, revised 29 September 2026*
+ 
+ We arrive after the light.
+ 
+ Someone has already taught this machine how to make a point visible. The counter has advanced. We move a hand, and work that took generations answers. A small gesture can contain an immense inheritance.[^preface-room-history]
+ 
+ We cannot unfold all of it before beginning. We choose one operation, follow it for a while, and leave other doors unopened. What looks like the beginning is the place where we have decided to pay attention.
++
++Even “Hello, world” needs somewhere to happen. Before the first room, we give the work of preparation its own time: Day Zero. Downloading an engine, opening a project, making a change appear—these are part of learning to arrive. We begin with a supplied environment and, in the museum, a player whose construction we have not yet learned. That borrowed work lets us turn our attention towards the point. It also gives the point a world in which to matter.
+ 
+ What bodies are possible with the tools we have? The question follows us through this book. We begin by attending to a position, a line, a few ways to give something a surface. Later we can make a field, a branching structure, a body that responds to its neighbours. Each addition changes what we can imagine building. It also brings decisions we may only notice when something refuses to behave as we expected.
+ 
+@@ -42,6 +44,8 @@
+ 
+ Our route is one arrangement of attention. Other objects stand beside it; other histories could change its order. What matters is that following it gives us enough understanding to begin making such changes, together or alone.
+ 
++[Day Zero — Hello, world](day-zero.md) is the practical chapter of this preface. It prepares the working environment once. The making passages that follow assume we can already open, change and run the supplied project.
++
+ We have to begin somewhere. The first room is already running.
+ 
+ [^preface-room-history]: In 1968, Ivan E. Sutherland's experimental head-mounted display put its viewer inside a room drawn in wireframe. Turning the head changed the view; walls, ceiling and floor were already part of the experiment. See Ivan E. Sutherland, [“A Head-Mounted Three Dimensional Display”](https://doi.org/10.1145/1476589.1476686) (1968), especially “Results”; [accessible paper](https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf). The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent.

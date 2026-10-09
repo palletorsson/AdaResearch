@@ -1,0 +1,32 @@
+{
+  "id": "Fractal_MengerSponge",
+  "decision": "draft",
+  "mode": "build",
+  "object": "The known cube, a list of retained centres and the carried PointBody as a cell reader.",
+  "change": "Use a Boolean predicate to keep twenty of twenty-seven offsets; replace every retained cube and compare count, volume, bounds and bodily access.",
+  "dependsOn": [
+    "Tutorial_3D",
+    "Fractal_Recursion",
+    "Fractal_CantorSet",
+    "Fractal_KochSierpinski"
+  ],
+  "reuses": "BoxMesh, PointBody, local coordinates, nested grid loops, Boolean functions, current/next replacement and represented versus displayed scale.",
+  "given": "Prepared museum, XRTools/player and inherited pickup class. Full mesh renderer and first-cell reader printed. Large solid sponge, collision and local flight remain existing museum infrastructure.",
+  "later": "Two cuts only. Reader always addresses the first 27 cells; KEEP does not mean all later descendants remain. Geometry, visibility and body access are separate claims. Supporting artifacts remain optional.",
+  "checks": [
+    "Exact printed files run in Godot; no hidden scene references.",
+    "Predicate matches all 27 production addresses; stages 1/20/400 agree in positions, bounds and retained volume.",
+    "Executed corner-only variant retains 8/64 cubes with the same outer bounds.",
+    "Actual XRTools supplied pickup/action/release; nearby desktop-ray controls and occupant interlock.",
+    "Museum floor/clearance, finite passage versus ray access, flight ascent/hover/exit and onward portal."
+  ],
+  "transfer": "Predict, execute and explain the middles == 0 corner-only rule: 8 then 64 cubes, one-metre final edges, 64 cubic metres, fixed nine-metre bounds. This is another construction, not a better sponge.",
+  "carry": "A tested selection function over three-dimensional cells, distinguishing represented volume, outer size and inhabitable space.",
+  "next": "Golden Spiral: a numerical recurrence, then an explicit choice of spatial mapping.",
+  "notes": "Complete two-file tutorial and native verification in the Menger cell-and-room report. Production reader copies existing generator data. Monitor and portal addresses corrected after spatial checks. No shared generator, movement or portal logic changed; headset and learner understanding still need observation.",
+  "baseline": {
+    "tutorial": "808d58b59b493fe4101ef51e836b5976013d77ef05f9a79282744c10bae377db",
+    "choice": "8d4677a0e00bb0e7ba8951284208438f70192178b76c4330434214cda027d77d"
+  },
+  "summary": "Move the familiar point through a transparent cube model and read KEEP or REMOVE at one of twenty-seven first-level cells; the same address is framed on the large sponge. Reconstruct the selection with three nested loops and a Boolean function, retaining fewer than two middle coordinates. Use a separate next list to repeat the rule twice, predicting twenty then four hundred cubes, decreasing volume and fixed outer bounds. Make and test a corner-only variation. Enter the existing flight enclosure to distinguish a visible opening from one a body can use, then carry the difference between a rule and its spatial representation into Golden Spiral."
+}

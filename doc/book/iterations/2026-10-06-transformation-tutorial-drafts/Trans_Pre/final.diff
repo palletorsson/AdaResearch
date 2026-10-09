@@ -1,0 +1,38 @@
+--- canonical/Trans_Pre/final.md
++++ review-draft/Trans_Pre/final.md
+@@ -10,13 +10,7 @@
+ 
+ This cube moves up and down. Follow it through a complete rise and fall. Its position changes while its size and facing stay the same. Moving an object from one position to another is **translation**. Here that movement follows the vertical Y direction.
+ 
+-The script chooses a height between two endpoints:
+-
+-```gdscript
+-global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+-```
+-
+-The animation moves `t` back and forth between zero and one. `lerp`, short for **linear interpolation**, uses that number to choose a height between the lower and upper endpoints. At `t = 0.5`, the cube is halfway between them. Each rise and fall takes it through the same heights, at a steady speed on each leg.
++Each rise and fall takes it through the same heights, at a steady speed on each leg. At the top and bottom it reverses. The shape has kept its dimensions while its place changes.
+ 
+ The third cube keeps moving up and down. What has been added?
+ 
+@@ -26,18 +20,13 @@
+ rotate_y(rotation_speed * delta)
+ ```
+ 
+-Point Zero's small counter example received `delta` without using it. Here `delta` is the time since the previous update. Multiplying the turning speed by those elapsed seconds gives the turn to add now. A longer interval calls for a larger turn.
++The turn keeps pace with elapsed time. A longer interval between updates calls for a larger turn.
+ 
+ The rise and the turn continue together. Follow the same corner once more: it travels around the upright axis as well as up and down.
+ 
+ At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is **scale**.
+ 
+-```gdscript
+-var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+-_apply_pulse(size_factor)
+-```
+-
+-The same `lerp` now chooses a size factor between 0.7 and 1.3. `_apply_pulse` multiplies the cube's starting size by that factor. A factor of one leaves the size unchanged; below one it shrinks, above one it grows. All three dimensions change together, so it keeps its cube shape.
++Its size moves between 0.7 and 1.3 times the starting size. All three dimensions change together, so it keeps its cube shape.
+ 
+ Beside each moving example, a smaller marker isolates the operation just added: one moves up and down, one turns in place, one grows and shrinks. They let us separate movements that the larger cubes combine.
+ 

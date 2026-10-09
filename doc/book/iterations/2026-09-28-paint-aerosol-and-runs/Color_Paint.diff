@@ -1,0 +1,35 @@
+--- before/Color_Paint/final.md
++++ current/Color_Paint/final.md
+@@ -6,17 +6,19 @@
+ 
+ At the grid, a colour waited at an address until another write replaced it. Here, look back at a place the nozzle has left. Something of its passage remains. Something is already changing.
+ 
+-Thirty spray cans wait on the low tray. Pick up a colour, aim the nozzle at the canvas and hold the trigger. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish.
++Thirty spray cans wait on the low tray. Pick up a colour, aim the nozzle at the canvas and hold the trigger. A hiss begins at your hand. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish.
+ 
+-Bring the nozzle closer. The mark gathers into a smaller area. Draw back and the same colour spreads more thinly. Hold still for a moment: the patch deepens. Movement is only one way to make a difference here. Staying also leaves more behind.
++Bring the nozzle closer. The mark gathers into a smaller area. Draw back and the same colour spreads more thinly. Make a quick pass, then slow your hand. Colour gathers where you give it more time.
++
++Stay close in one place for longer. A narrow run slips below the patch. Release the trigger and watch it continue, then stop. Your hand has finished before your paint has. Staying also leaves a movement behind.
+ 
+ Release the trigger. Your marks stop arriving while the other painter continues. Let go of the can and it returns to its place.
+ 
+ Which part of the image can you still call yours?
+ 
+-![Spray cans on the tray beside the shared painting surface inside the museum.](/book-review/doc/book/iterations/2026-09-28-paint-spray-cans/shared-canvas.png)
++![Spray cans beside the shared canvas, with light and dense passes, overspray and a narrow paint run.](/book-review/doc/book/iterations/2026-09-28-paint-aerosol-and-runs/shared-aerosol.png)
+ 
+-*Close and distant deposits, then a gesture across the automatic path. Thirty cans offer colours; the distance of the hand changes how each colour arrives.*
++*The moving hand, the waiting hand. Distance spreads the colour; speed changes how much arrives in one place. A close, lingering spray can leave a run.*
+ 
+ The canvas has its own addresses. `u` and `v` measure position across the surface, each from zero at one edge to one at the other. The automatic painter supplies both coordinates:
+ 
+@@ -44,7 +46,7 @@
+ 
+ Here the ground is white. It enters the work again as the direction of forgetting in this particular simulation. We could ask for another ground, another rate of fading, another way for two colours to meet. None is the natural behaviour of code. Here we can point to the line that makes the decision.
+ 
+-The nozzle releases separate deposits, and the surface becomes another image at each rendered frame. Elapsed time controls their strength, but the computer still has to make each image. Sweep quickly and you may find spaces between the marks. Even this soft edge has a resolution.
++Look along the edge of a light pass. Separate specks reach beyond the thick centre. The software fills between nearby samples of the moving nozzle, but it cannot keep every possible position of your hand. Even this soft edge has a resolution.
+ 
+ <!-- @albers_wall_gallery -->
+ 

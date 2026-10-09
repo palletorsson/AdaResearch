@@ -1,0 +1,241 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_KochSierpinski · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_KochSierpinski">← Tutorial lineage</a></p><h1>Fractal KochSierpinski</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_KochSierpinski/final.md">Raw captured source</a></p><pre># The boundary takes a detour
+
+&lt;!-- @fractal_koch_curve --&gt;
+
+Four metres of line wait behind the desk. Keep its ends in view. Where could more line go?
+
+Press NEXT. The middle lifts into a peak. Follow it up and down before reading the counter. The ends have not moved apart, but travelling between them along the line now takes longer. Press again. Each of the four new segments takes its own detour, including the ones already climbing.
+
+At the fourth step, 256 segments share a path a little over twelve and a half metres long. The endpoints still stand four metres apart. Distance between them and distance along the boundary have begun telling different stories.
+
+This is the small decision inside each replacement:
+
+```gdscript
+var b := start + dir * (len / 3.0)
+var d := start + dir * (2.0 * len / 3.0)
+var c := mid_point + perpendicular * height
+```
+
+The next list joins `start → b → c → d → end`. Four segments, each a third of the old length. The next call receives these segments as its beginning. In the cellular automata halls every cell wrote its next state into a separate array before the arrays were swapped; this list is that swap, with segments for cells, and in the next sequence it will be a sentence. Each of the 256 pieces at the fourth step is a separate object in that list; nothing here has yet asked one of them to move. A multiplication of four thirds can be followed with the eye.
+
+Try TURN. The detours go to the other side. The count and path length survive the reversal. They have not told us everything about the shape.
+
+RESET, then FORM. A triangle closes the starting line into a boundary. NEXT sends its peaks outward; TURN folds them inward. There is an inside to negotiate now. An instruction about direction has become a decision about where an enclosure extends.
+
+Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.[^1] This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?
+
+&lt;!-- @sierpinski_triangle --&gt;
+
+A filled triangle waits across the aisle. We have spent several rooms making descendants. What if the next generation occupied less of its parent?
+
+Press NEXT. Find the middle before looking at the three corners. The middle is now an opening in the drawing. Another press makes a new opening inside each retained corner. The large absence remains; the small ones accumulate around it.
+
+The code locates three midpoints:
+
+```gdscript
+var m1 = (v1 + v2) / 2.0
+var m2 = (v2 + v3) / 2.0
+var m3 = (v3 + v1) / 2.0
+```
+
+The next calls receive the three corner triangles. Their sides are half as long, so each has a quarter of its parent&#x27;s area. Three quarters remain. At four cuts, eighty-one kept triangles occupy about 4.93 square metres of the original 15.59. There are more pieces to address and less surface to colour.
+
+Now press VIEW. Pale middles appear where the rule made its removals. Press again. The kept corners disappear from the drawing, and the middles stand in their colours. What we had called the waste now holds the room&#x27;s attention.
+
+The program still computes the same corner triangles. It has changed which results receive meshes. The negative view draws forty removed middles from the four cuts. These are parts the operation already located; we did not need a new fractal to find another subject inside it.
+
+DEPTH gives the drawn pieces more thickness. Their planar area does not change. Neither view makes these pieces load-bearing: the sculpture has no collision, although its control desk does. An opening in an image, a hole in a solid and a passage for our body ask different things of the implementation.
+
+We can change the view back. That matters here. The ease with which this display restores a discarded part belongs to this stored construction. It does not make every act of removal reversible.
+
+&lt;!-- @box_counting_dimension --&gt;
+
+The next triangle arrives as points. This bench has its own generator: eight thousand repeated moves halfway towards a chosen corner. It is related to the triangle we just cut, but it is not reading that sculpture&#x27;s mesh.
+
+Press FINER. The grid tightens over the same points. Try COVER. Coloured cells mark where at least one sample was found. A crowded cell and a cell holding one point each count once. An empty cell contributes nothing, even when the ideal construction might place detail there.
+
+Here is the counting decision:
+
+```gdscript
+var ix := int(shifted.x / box_size)
+var iz := int(shifted.z / box_size)
+var key := ix * 10000 + iz
+occupied[key] = true
+```
+
+The key gives this cell an address. Writing it again does not create another occupied cell. Arrays and grids have returned as a measuring instrument.
+
+RANGE reveals a plot and fits the three coarsest measurements. Press it again for the three finest, then for all six. The reported slope moves while the point cloud stays put. Which value would you have called the triangle&#x27;s dimension if only one had been shown?
+
+The ideal Sierpinski triangle has dimension `log(3) / log(2)`, about 1.585.[^2] This instrument fits a finite sample at six box sizes. The number it returns depends on those choices; it is evidence from a procedure, with a range beyond which we have not tested it. RESET reproduces the same sample so the comparison can begin again.
+
+The unoccupied cells tell us where this reading found no points. They have no authority over what may exist. The question becomes sharper when a model is used to decide what the world should retain: what happens to what it did not count? Here we can start with the smaller act: change the grid, look again, and leave room for an answer the first reading could not hold.
+
+&lt;!-- @sierpinski_pyramid --&gt;
+
+The cube pyramid returns from the cellular automata rooms. There we put its resemblance beside another way of making a pattern. Here, walk around it. Keep one of its rising edges in view, then press COMPARE.
+
+Something has been held back. The top comes down. Did the cubes shrink? Come closer: the cubes have kept their size. Press again and the taller construction returns. Follow an edge that survived both versions. Where did its neighbours go?
+
+An earlier comment in the source promised five recursive calls. The program made six. We have kept that inherited construction as the first view. COMPARE holds back the extra upper call wherever the recipe repeats. The remaining calls keep their positions and the same three levels of recursion.
+
+RULE reveals the count after we have looked: 216 cube instances become 125. One call withheld, ninety-one instances gone. That call had descendants of its own. Some cubes overlap, so counting what the program creates is not the same as counting separate blocks we can see.
+
+The discrepancy could have disappeared in a correction. Instead it has become a way to touch the recipe. The name invited us to recognise a form; the switch lets that recognition falter. Which version would you have accepted if the other had never been offered? RESET brings back the inherited one. We can keep the strange result and still learn how it was made.
+
+&lt;!-- @ --&gt;
+
+Around these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.
+
+In the next hall, removal enters a volume. We will approach the Menger sponge with a body that can fly. Which of its openings will become somewhere we can go?
+
+[^1]: Helge von Koch, “Sur une courbe continue sans tangente, obtenue par une construction géométrique élémentaire”, *Arkiv för matematik, astronomi och fysik* 1 (1904). The replacement on this desk is carried from Daniel Shiffman&#x27;s Example 8.5 in *The Nature of Code*.
+
+[^2]: Wacław Sierpiński, “Sur une courbe dont tout point est un point de ramification”, *Comptes rendus de l&#x27;Académie des sciences* 160 (1915).
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_KochSierpinski/tutorial.md">Raw captured source</a></p><pre># Walk: the boundary takes a detour
+
+1. At **fractal_koch_curve**, find both ends of the waiting line. Predict what NEXT might change. Compare endpoint distance, segment count and measured path length. Try TURN, then RESET → FORM → NEXT. Ask which geometric differences survive in the same count. Reveal RULE after the comparison.
+2. At **sierpinski_triangle**, cut once and find the removed middle. Continue to four cuts, comparing area with number of pieces. VIEW cycles kept parts, pale removals, then removals alone. DEPTH changes thickness. Ask what is being computed and what is merely being drawn. The sculpture has no collision.
+3. At **box_counting_dimension**, hold the 8,000-point sample. FINER and COARSER change the grid; COVER marks occupied cells. RANGE compares coarse, fine and all six measurements. Check that the sample stays unchanged. Reveal RULE and compare the finite fit with the ideal triangle&#x27;s scaling law.
+4. Explore the retained secondary collection. The bent arch, assembled cubes and six-call pyramid offer related but distinct procedures. Do not assign the triangle&#x27;s rule to every triangular-looking object.
+5. Pass around the original raised cell and follow the exit to **Fractal_MengerSponge**. Ask which holes can become passages for a finite body.
+
+The first three artifacts are primary and own the three book anchors, in this order. The other seven placements remain. The learner may follow the desks alone or discuss held quantities and changed quantities with a group. Headset reach and comfort still need a physical review.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_KochSierpinski/technical.md">Raw captured source</a></p><pre># Replacement, removal and finite measurement
+
+Three primary artifacts follow the book&#x27;s order. All ten map placements remain. The old 13×11 room is retained as the rear collection, translated by (3,18) inside a 19×29 enclosure. Its raised cell remains; old exit voids receive museum floor coverage. The new front study area supplies reachable controls and room for the comparisons.
+
+## Controls and data
+
+| Artifact | Controls | Held quantities / changing quantities |
+|---|---|---|
+| fractal_koch_curve | NEXT, BACK, FORM, TURN, RESET, RULE | Depth 0–4; open endpoints 4 m apart; FORM starts a 3.5 m-sided triangle; TURN reverses peak direction. |
+| sierpinski_triangle | NEXT, BACK, VIEW, DEPTH, RESET, RULE | Depth 0–4, side 6 m. VIEW changes drawing of retained/removed parts. DEPTH switches 0.08/0.35 m thickness. |
+| box_counting_dimension | FINER, COARSER, COVER, RANGE, RESET, RULE | 8,000 points, seed 2026. Grids 2,4,8,16,32,64. RANGE cycles coarse three, fine three, all six. |
+
+`#lesson:true` installs `commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd` on these placements. It holds their timers, starts at the first construction and reuses the existing algorithms. Each desk has six physical touch buttons in a 3×2 arrangement and a tilted 1.18×0.36 m text plane at alpha 0.14. Source scenes without that flag keep their ordinary modes. The measurement registry entry previously had `map_ready:false`; the hall loader therefore skipped it even though its scene existed. This pass enables the tested scene.
+
+## Koch
+
+`algorithms/fractals/example_8_5_koch_curve_vr.gd` stores start/end dictionaries per generation. `_koch_subdivide` replaces one segment by four joined segments of one-third length. The open lesson begins with local length 0.8 and mesh scale 5, hence 4 m. Counts are 4^n; path lengths are 4(4/3)^n. At n=4 this is 256 segments and about 12.642 m. FORM uses three local sides of length 0.7, giving initial perimeter 10.5 m. Its first replacement has perimeter 14 m. For lesson snowflakes, the counterclockwise initial triangle receives outward peaks; TURN reverses this. Reversed constructions retain segment counts/lengths without inheriting every property of the standard non-overlapping Koch limit.
+
+The lesson draws two triangles per segment as a 0.02 m-wide ribbon. This provides readable width in the compatibility renderer, where a requested line width would not reliably produce it. Finite ribbons, finite polylines and mathematical limiting sets have different dimensional claims. `log(4)/log(3)` describes the standard ideal Koch curve; non-integer dimension is not a universal definition of every fractal.
+
+## Sierpinski
+
+`algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd` computes midpoints and three corner triangles. At side 6 m, initial area is 9√3 m². The lesson displays only the current kept generation, whose area is 9√3(3/4)^n. Four cuts yield 81 kept triangles and about 4.932 m². Ghost and negative modes draw each newly removed middle across the full construction history: (3^n−1)/2 pieces, or 40 at n=4. Negative mode still computes the corner data. Changing thickness does not alter the planar area calculation.
+
+The original script rotates its root; the lesson instead rotates generated meshes, leaving the desk upright. Rebuild detaches old meshes immediately before deferred deletion. The sculpture has no colliders. The desk and measurement backing do. There is no claim that the triangle&#x27;s apparent openings support or constrain locomotion.
+
+## Box counting
+
+`algorithms/fractals/box_counting_dimension/box_counting_dimension.gd` owns an independent chaos-game point cloud. This is not a live measurement of either neighbouring sculpture. A dedicated seeded RNG makes RESET reproducible without reseeding the global stream. `N` counts unique grid addresses occupied by at least one point. COVER draws exactly two triangles for every occupied cell at the selected resolution. Display mapping scales the six-unit square to 3.3 m and turns it upright; the readout keeps box size in source units.
+
+RANGE selects three coarse samples, three fine samples, or all six for least-squares slope of log₂(N) versus log₂(1/box_size). All six measured points remain in the plot; the fit is computed only from the named subset and its line is drawn across the plot. The selected grid point has a cross. Box counts remain fixed when changing fit range. The ideal triangle&#x27;s 1.585 dimension is a comparison, not an expected exact finite output. More resolution can eventually expose sampling sparsity; a finite cloud does not supply detail indefinitely.
+
+## Retained collection and source cautions
+
+`recursion_observatory`, `cube_cabin`, `cube_bookshelf`, `koch_curve_3d`, `sierpinski_pyramid`, and `science_screen` remain secondary; `dark_sphere` is decoration. The observatory supports comparison with prior constructions. The cabin and shelf are assembled architectures. The Koch arch bends a generated curve into a head and legs, repeated through depth; this does not establish a fractal dimension equal to its planar value plus one. The registry&#x27;s pyramid resolves to `algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd`: it has two distinct top calls plus four lower calls, despite five-copy comments. Treat it as its implemented six-call variant, not a four-copy tetrahedron. The trace screen remains an unconnected reference display; no new trace feed is claimed.
+
+The previous map and prose are archived in `doc/space/koch-sierpinski-2026-09-14/before/`. Runtime evidence separates synthetic input through the project&#x27;s DesktopPlayer rig, native museum walker interaction, and headset use. Only explicitly recorded checks are verified; VR reach, comfort and Quest frame time remain pending.
+
+Reference for the broader recursion progression: [The Nature of Code, Fractals](https://natureofcode.com/fractals/). Numerical claims above follow these local implementations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_KochSierpinski/intent.md">Raw captured source</a></p><pre>Concept: Separate path length, retained area and finite-scale measurement through three controlled encounters.
+Sequence role: Fourth active fractal hall, after Cantor and before Menger. Carry forward trace resolution, triangle geometry, arrays, transforms, recursion and removal.
+Technical angle: Finite Koch replacement, Sierpinski midpoints and complement views, seeded chaos-game sample, occupied-cell counts and selectable log-log fitting ranges.
+Critical angle: A display&#x27;s omitted part can become another subject. A measurement&#x27;s omission does not establish absence or justify removal. Counts and dimension do not measure freedom or entropy.
+Primary artifacts: fractal_koch_curve, sierpinski_triangle, box_counting_dimension, matching final.md and Necklace in that order.
+Spatial argument: Reachable compact desks in a study approach before the retained collection. Preserve all ten placements, the old rear enclosure and raised cell; route around it to the exit.
+Next: Removal in a volume, connected openings, finite bodies and the flight capability in Fractal_MengerSponge.
+Pending: Human headset reach, comfort and Quest frame-time assessment; deeper audit of the six-call pyramid variant and additional input for the secondary trace screen.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_KochSierpinski/critical.md">Raw captured source</a></p><pre># What the reading leaves room for
+
+Koch changes the path between held endpoints. Sierpinski distributes less area across more pieces. The counting bench changes its estimate without changing its sample. None of these observations needs a general equation between complexity and freedom. Each gives us a different decision to examine.
+
+The negative triangle is especially useful. Its source already locates the middles that the canonical drawing omits. Promoting them to the visible work changes the object of attention without changing the corner recurrence. Queer misuse can begin in this existing distinction: which computed part is permitted to become the figure? The experiment should let the visitor encounter that switch before interpreting it.
+
+There are limits to the analogy. The mesh can be rebuilt because vertices and rules remain available. Restoring a view is not equivalent to restoring a destroyed relation. The observer controls all three buttons of VIEW; the represented parts do not decide whether they wish to be displayed. Asking who may revise the rule therefore exceeds the currently implemented controls. It remains a design question, not an achievement certified by this sculpture.
+
+The box counter makes a related distinction concrete. Empty means no sampled point was assigned to this grid address. It cannot mean no significant relation exists there. Changing the fitting range while keeping all 8,000 points holds one source of difference still and exposes another. A better fitted line might improve a description without improving the conditions of anything described.
+
+Read this beside [Entropic morality](../../../doc/research/qfep/entropic-morality.md): an incomplete model does not by itself authorize irreversible loss of what it leaves out. The hall supplies a small encounter with the incompleteness of a reading. It does not derive an ethical rule from fractal dimension. Counts, occupied area, finite-scale slope and Shannon entropy are different quantities; this hall computes no entropy score.
+
+The four-generation boundary also sustains an encounter. It keeps controls responsive and comparisons legible, although performance must still be measured on a headset. More generations might reveal a useful distinction or bury the existing one. A protective limit can make exploration possible. The question is whether that limit can be inspected, revised and justified for the bodies who use the room.
+
+Carry this into Menger: additional holes do not guarantee accessible passages. We will have to examine both the space and the capabilities lent to the visitor.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_KochSierpinski/artifacts.md">Raw captured source</a></p><pre># Fractal KochSierpinski — Artifacts
+*Fractals: Infinite Within Finite · lambda_edge · 9 artifacts*
+
+&gt; Replace every edge with a spike. Do it again. The Koch curve has infinite length contained in finite area—a line that wants to be a plane but never quite arrives. Dimension 1.262: coastline logic. Remove the center of a triangle, repeat on each remainder—the Sierpinski triangle has zero area yet infinite structure, dimension 1.585. Both constructions refuse integer dimensions.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Cube Cabin
+![Cube Cabin](/scene-catalog/cube_cabin.png)
+
+Rustic cabin created through architectural cube subdivision - walls, door, windows, gabled roof, chimney and porch
+
+`cube_cabin`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Koch Curve
+![Koch Curve](/scene-catalog/fractal_koch_curve.png)
+
+Koch snowflake curve fractal with recursive edge patterns
+
+`fractal_koch_curve`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## 3D Koch Curve
+![3D Koch Curve](/scene-catalog/koch_curve_3d.png)
+
+Three-dimensional recursive Koch snowflake curve generation
+
+`koch_curve_3d`
+
+## sierpinski_triangle
+![sierpinski_triangle](/scene-catalog/sierpinski_triangle.png)
+
+sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
+
+`sierpinski_triangle`
+
+## Cube Bookshelf
+![Cube Bookshelf](/scene-catalog/cube_bookshelf.png)
+
+Bookshelf created through cube subdivision - grid of shelves with frame and trim
+
+`cube_bookshelf`
+
+## Box Counting Dimension
+![Box Counting Dimension](/scene-catalog/box_counting_dimension.png)
+
+Interactive fractal dimension calculator using the box-counting method. Place a grid over a fractal, count boxes touching the boundary, scale down — the scaling ratio IS the fractal dimension.
+
+`box_counting_dimension`
+
+## Sierpinski Pyramid
+![Sierpinski Pyramid](/scene-catalog/sierpinski_pyramid.png)
+
+Recursive Sierpinski Pyramid construction using cubes.
+
+`sierpinski_pyramid`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_KochSierpinski/summary.md">Raw captured source</a></p><pre># The boundary takes a detour
+
+Koch holds endpoints while adding path length. Sierpinski multiplies kept pieces while reducing their summed area, then lets discarded middles become the visible work. A fixed-sample box counter changes grid size and fitting range to expose the conditions of a numerical reading. Three primaries anchor the book; all ten existing placements remain. The next hall carries removal into the Menger sponge&#x27;s volume and asks which openings admit the player.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_KochSierpinski/blurb.md">Raw captured source</a></p><pre># The boundary takes a detour
+
+Keep the endpoints in view. Follow the growing line, turn the removed middles into the work, then change the grid that measures it. How much of the shape belongs to the reading?
+</pre></section></body></html>

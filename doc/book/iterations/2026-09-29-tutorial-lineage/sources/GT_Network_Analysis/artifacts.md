@@ -1,0 +1,36 @@
+# GT Network Analysis — Artifacts
+*Graph Theory: Connections Define Structure · relation · 3 artifacts*
+
+> Every network has a center. Find it.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## networkflow3d
+![networkflow3d](/scene-catalog/networkflow3d.png)
+
+IDENTIFY bottlenecks and explain how augmenting paths raise the total flow through a network.
+
+`networkflow3d`
+
+## Rhizomatic Structure
+![Rhizomatic Structure](/scene-catalog/rhizomatic_structure.png)
+
+COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.
+
+`rhizomatic_structure`
+
+## network_analysis
+![network_analysis](/scene-catalog/network_analysis.png)
+
+INTERPRET centrality and community structure from motion, glow, and network hierarchy.
+
+`network_analysis`
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.

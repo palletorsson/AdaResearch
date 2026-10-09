@@ -1,0 +1,362 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SwarmIntelligence_FlowFields · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SwarmIntelligence_FlowFields">← Tutorial lineage</a></p><h1>SwarmIntelligence FlowFields</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SwarmIntelligence_FlowFields/final.md">Raw captured source</a></p><pre># Directions already in the ground
+
+If hundreds of agents turn together, must they be watching one another?
+
+&lt;!-- @FlowFieldMain --&gt;
+
+Find an arrow near an agent and predict which way that agent will turn. Follow the automatic tour as an open field gains obstacles, then compare those scenes with wind and noise. Give each arrangement time: the tour changes roughly every ten seconds and eventually remains with the noise field.
+
+The arrows offer directions throughout the space. Many agents can follow the same organisation without consulting one another. Around an obstacle, a useful direction may initially point away from the destination you can see, because the direct route is blocked.
+
+During an obstacle scene, compare two agents that arrive at the same patch at different moments. Their immediate histories can differ while the arrow they encounter gives the same local recommendation. Then compare two nearby arrows on opposite sides of an obstacle. Nearness alone need not produce the same direction. This gives you two small checks on your explanation: the field organises movement by position, and the obstacle matters through its effect on that organisation.
+
+In the route-finding scenes, the model first spreads costs outward from a target through a grid. It then assigns directions towards neighbouring cells with lower costs. Each moving agent reads the direction at its present position and steers towards it. Steering has a precise meaning here. The agent compares the direction it has read with the velocity it already has, and pushes on the difference. A pull like gravity never asks how a body is moving; this rule asks first, and the answer is in the push. That comparison, made inside the mover, is what the word agent adds to the word particle. The expensive task of organising a route is shared through the field; it is not solved afresh by every agent at every step.
+
+Wind makes the distinction sharper. A field can give a direction without giving a destination. The route scenes are path finding: the field is a solved problem, flooded outward from a destination. The wind and noise scenes are field following, with no problem solved at all. The agents behave the same in both; only the field knows which it is. Noise supplies local variation without the same coherent route.
+
+Physarum’s agents helped write the field they subsequently sensed. These agents receive a field prepared for them. From far away, both populations can look collectively intelligent. Looking at the relation between agent and field tells us which explanation the movement supports.
+
+The cost map also contains decisions: which cells are blocked, which routes are costly, and what destination matters. Shared navigation can reproduce those decisions very efficiently. Efficiency alone cannot tell us whether every traveller can use the permitted route. At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders. That wandering is a new random direction every frame, smoothed a little by the same steering, which is why an agent at the target buzzes rather than roams. Reynolds&#x27;s own wanderers keep most of yesterday&#x27;s heading and add a little chance to it; the beads in the Randomness terrarium will show the difference between the two again.
+
+Try following one arrow that surprises you instead of the largest stream of agents. The piece can be placed with its arrows hidden and one scene held still, and that placement is the test of this hall&#x27;s thesis: without the arrows, would you still say the agents were following something, or would you say they agreed? This hall shows the arrows so that the cause stays visible. The version without them is one token away, and not yet placed.
+
+The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.
+
+&lt;!-- @ --&gt;
+
+Boids will remove that supplied direction and let nearby agents become one another’s moving reference.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SwarmIntelligence_FlowFields/tutorial.md">Raw captured source</a></p><pre># Flow Fields
+
+Precompute directions across a grid. Agents follow the field.
+
+Build a 2D vector field.
+
+```gdscript
+@export var grid_size: Vector2i = Vector2i(32, 32)
+var field: Array = []  # 2D array of Vector2
+
+func initialise_field() -&gt; void:
+    for y in grid_size.y:
+        field.append([])
+        for x in grid_size.x:
+            field[y].append(Vector2.ZERO)
+```
+
+Each cell stores a direction. Agents sample the field at their position.
+
+Compute a radial field.
+
+```gdscript
+func compute_radial_field(centre: Vector2i) -&gt; void:
+    for y in grid_size.y:
+        for x in grid_size.x:
+            var direction: Vector2 = Vector2(centre.x - x, centre.y - y)
+            if direction.length() &gt; 0:
+                field[y][x] = direction.normalized()
+```
+
+Every cell points toward the centre. Agents released into this field converge.
+
+Compute a Dijkstra field.
+
+```gdscript
+func compute_dijkstra_field(goal: Vector2i, is_passable: Callable) -&gt; void:
+    var distance: Array = []
+    for y in grid_size.y:
+        distance.append([])
+        for x in grid_size.x:
+            distance[y].append(INF)
+    distance[goal.y][goal.x] = 0
+    var queue: Array = [goal]
+    while not queue.is_empty():
+        var current: Vector2i = queue.pop_front()
+        for neighbour in get_neighbours(current):
+            if not is_passable.call(neighbour): continue
+            var new_dist: float = distance[current.y][current.x] + 1
+            if new_dist &lt; distance[neighbour.y][neighbour.x]:
+                distance[neighbour.y][neighbour.x] = new_dist
+                queue.push_back(neighbour)
+    for y in grid_size.y:
+        for x in grid_size.x:
+            field[y][x] = steepest_descent(x, y, distance)
+```
+
+BFS-based. The field points agents toward the nearest goal along the shortest walkable path.
+
+Find steepest descent.
+
+```gdscript
+func steepest_descent(x: int, y: int, distance: Array) -&gt; Vector2:
+    var best := Vector2.ZERO
+    var best_dist: float = distance[y][x]
+    for dy in [-1, 0, 1]:
+        for dx in [-1, 0, 1]:
+            if dx == 0 and dy == 0: continue
+            var nx: int = x + dx; var ny: int = y + dy
+            if nx &lt; 0 or nx &gt;= grid_size.x or ny &lt; 0 or ny &gt;= grid_size.y: continue
+            if distance[ny][nx] &lt; best_dist:
+                best_dist = distance[ny][nx]; best = Vector2(dx, dy)
+    return best.normalized()
+```
+
+Search neighbours for the cell with lowest distance. Field direction points there.
+
+Sample the field for an agent.
+
+```gdscript
+func sample_field(position: Vector2) -&gt; Vector2:
+    var x: int = clamp(int(position.x), 0, grid_size.x - 1)
+    var y: int = clamp(int(position.y), 0, grid_size.y - 1)
+    return field[y][x]
+```
+
+Direct cell lookup. For smoother motion, bilinear interpolation between four corners.
+
+Agents follow the field.
+
+```gdscript
+func _physics_process(delta: float) -&gt; void:
+    for agent in agents:
+        var force: Vector2 = sample_field(agent.position) * 2.0
+        agent.velocity += force * delta
+        agent.velocity = agent.velocity.limit_length(3.0)
+        agent.position += agent.velocity * delta
+```
+
+Apply field force; cap velocity; move. The agent traces a path along the field.
+
+You can now build a 2D flow field, compute radial and Dijkstra variants, and steer agents through it. SwarmIntelligence_Boids_Algorithm extends into reynolds flocking.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SwarmIntelligence_FlowFields/technical.md">Raw captured source</a></p><pre># The flow field assigns direction to space — agents read the field and follow, producing global streams from local obedience
+
+Physarum agents coordinated through trail — chemical substance deposited and sensed, persisting across time, accumulated through reinforcement. The trail map was both output and input: agents wrote to it, and agents read from it. The coordination was indirect, mediated by a substance in the environment.
+
+Flow fields abstract this. Instead of trail that agents deposit and sense, a vector field assigns a direction to every point in space before any agent arrives. The field is the program. Agents are the execution.
+
+Each particle reads the local vector at its position and moves accordingly. No deposit. No memory. No agent-to-agent interaction. Just a pre-existing field of arrows and particles that follow them.
+
+This is the mathematical substrate underlying all the swarm phenomena that follow. Physarum&#x27;s trail gradient is a vector field. Boids&#x27; steering forces compute local vectors. Ant pheromone gradients define vector fields on graphs. The flow field map makes the abstraction explicit by stripping away the agent-generated feedback loop and presenting the field itself as the primary object.
+
+## The Vector Field
+
+A flow field is a function that assigns a 2D or 3D vector to every point in a continuous domain. In practice, the field is sampled on a grid.
+
+```gdscript
+var field_width: int = 64
+var field_height: int = 64
+var field: PackedVector2Array
+
+func _ready() -&gt; void:
+    field.resize(field_width * field_height)
+    _generate_perlin_field()
+
+func _generate_perlin_field() -&gt; void:
+    var noise := FastNoiseLite.new()
+    noise.noise_type = FastNoiseLite.TYPE_PERLIN
+    noise.frequency = noise_scale
+
+    for y in field_height:
+        for x in field_width:
+            # Use noise to generate angle at each grid point
+            var angle: float = noise.get_noise_2d(float(x), float(y)) * TAU
+            var idx: int = y * field_width + x
+            field[idx] = Vector2(cos(angle), sin(angle))
+```
+
+Perlin noise maps grid coordinates to a scalar value between -1 and 1. Multiplying by TAU converts that scalar to an angle. The angle becomes a unit vector. Each grid cell holds a direction. The noise&#x27;s spatial coherence ensures that nearby cells point in similar directions — the field has structure, not chaos. Streams will flow in smooth curves, not random walks.
+
+The `noise_scale` parameter controls the field&#x27;s spatial frequency. Low frequency produces broad, sweeping currents — large vortices and long parallel streams. High frequency produces tight, turbulent patterns — small eddies and rapid direction changes. The same noise generator that produced terrain heights in the procedural generation sequences now produces flow directions.
+
+## Curl Noise: Divergence-Free Flow
+
+For fluid-like behavior, the field should be divergence-free — no sources or sinks. Particles should flow without accumulating or depleting. Curl noise achieves this by computing the curl of a scalar potential field.
+
+```gdscript
+func _generate_curl_field() -&gt; void:
+    var noise := FastNoiseLite.new()
+    noise.noise_type = FastNoiseLite.TYPE_PERLIN
+    noise.frequency = noise_scale
+    var epsilon: float = 0.01
+
+    for y in field_height:
+        for x in field_width:
+            # Finite difference approximation of curl
+            var fx: float = float(x) / float(field_width)
+            var fy: float = float(y) / float(field_height)
+
+            var dn_dx: float = (noise.get_noise_2d(fx + epsilon, fy) -
+                                noise.get_noise_2d(fx - epsilon, fy)) / (2.0 * epsilon)
+            var dn_dy: float = (noise.get_noise_2d(fx, fy + epsilon) -
+                                noise.get_noise_2d(fx, fy - epsilon)) / (2.0 * epsilon)
+
+            # Curl of 2D scalar field: rotate gradient 90 degrees
+            var idx: int = y * field_width + x
+            field[idx] = Vector2(-dn_dy, dn_dx).normalized()
+```
+
+The curl computation takes the gradient of the noise (the direction of steepest increase) and rotates it 90 degrees. The result is a vector field that flows along the contours of the noise landscape rather than across them. Particles follow these contours in closed or spiraling paths. No particle converges to a point or radiates outward. The flow preserves density.
+
+This is the same mathematics that generates weather patterns. Atmospheric flow follows pressure contours. Ocean currents follow temperature contours. The curl noise field is a miniature meteorological system — structurally identical to a weather map, produced by the same operation applied to a different scalar potential.
+
+## Particle Advection
+
+Particles are minimal: position and nothing else. No velocity memory, no heading, no state. Each frame, a particle reads the field at its current position and moves.
+
+```gdscript
+var num_particles: int = 500
+var particle_positions: PackedVector2Array
+var particle_speed: float = 0.1
+
+func _ready() -&gt; void:
+    particle_positions.resize(num_particles)
+    for i in num_particles:
+        particle_positions[i] = Vector2(randf(), randf())
+
+func advect_particles(delta: float) -&gt; void:
+    for i in num_particles:
+        var pos: Vector2 = particle_positions[i]
+        var field_vec: Vector2 = sample_field(pos)
+        particle_positions[i] = pos + field_vec * particle_speed * delta
+
+        # Wrap at boundaries
+        particle_positions[i].x = fposmod(particle_positions[i].x, 1.0)
+        particle_positions[i].y = fposmod(particle_positions[i].y, 1.0)
+```
+
+No integration of acceleration. No force accumulation. The velocity at each frame is entirely determined by the local field vector. The particle has no momentum — if the field points north at time t and east at time t+1, the particle turns instantly. This is first-order advection: position updates directly from the field, with no intermediary dynamics.
+
+## Bilinear Interpolation
+
+The field is discrete (sampled on a grid). Particle positions are continuous. Sampling the field at a non-grid-aligned position requires interpolation.
+
+```gdscript
+func sample_field(pos: Vector2) -&gt; Vector2:
+    var fx: float = pos.x * float(field_width - 1)
+    var fy: float = pos.y * float(field_height - 1)
+    var ix: int = int(fx)
+    var iy: int = int(fy)
+    var tx: float = fx - float(ix)
+    var ty: float = fy - float(iy)
+
+    var ix1: int = mini(ix + 1, field_width - 1)
+    var iy1: int = mini(iy + 1, field_height - 1)
+
+    var v00: Vector2 = field[iy * field_width + ix]
+    var v10: Vector2 = field[iy * field_width + ix1]
+    var v01: Vector2 = field[iy1 * field_width + ix]
+    var v11: Vector2 = field[iy1 * field_width + ix1]
+
+    var top: Vector2 = v00.lerp(v10, tx)
+    var bottom: Vector2 = v01.lerp(v11, tx)
+    return top.lerp(bottom, ty)
+```
+
+Four nearest grid vectors are blended using the fractional position within the cell. The result is a smooth vector field that particles experience as continuous, even though the underlying data is discrete. Without interpolation, particles would snap to grid-aligned directions, producing jagged, staircase-like paths. With it, they trace smooth curves that reveal the field&#x27;s topology.
+
+## Time Evolution
+
+The field can evolve. Adding a time parameter to the noise generator produces a field that changes continuously, creating patterns that flow through the domain rather than standing still.
+
+```gdscript
+var time_offset: float = 0.0
+var time_speed: float = 0.1
+
+func _process(delta: float) -&gt; void:
+    time_offset += delta * time_speed
+    _regenerate_field_with_time(time_offset)
+    advect_particles(delta)
+    update_display()
+
+func _regenerate_field_with_time(t: float) -&gt; void:
+    var noise := FastNoiseLite.new()
+    noise.noise_type = FastNoiseLite.TYPE_PERLIN
+    noise.frequency = noise_scale
+
+    for y in field_height:
+        for x in field_width:
+            var angle: float = noise.get_noise_3d(
+                float(x), float(y), t) * TAU
+            field[y * field_width + x] = Vector2(cos(angle), sin(angle))
+```
+
+The noise function gains a third dimension — time. The angle at each grid point drifts smoothly. Vortices migrate. Streams shift direction. Convergence zones move across the domain. Particles that were following a stream find the stream relocating and must adapt. The field is no longer a static infrastructure but a living medium.
+
+## The Central Ridge
+
+The map&#x27;s channel geometry — a wide floor with a central ridge — creates a topological feature in the flow. The ridge divides the channel into two zones. Flow patterns bifurcate around the ridge, creating a saddle point or divergence zone where streams split. Particles approaching the ridge from one side are deflected; particles that cross it enter a different flow regime.
+
+The ridge is the field&#x27;s only architectural constraint. Everything else is open. The contrast between the constrained central feature and the unconstrained periphery makes the flow topology legible — the learner can see convergence, divergence, and saddle behavior organized around a single spatial landmark.
+
+## From Physarum to Pure Field
+
+Physarum built its field. The trail map was an emergent vector field — gradients formed by accumulated deposits, shaped by agent behavior, evolving through feedback. The flow field map presents the field pre-built. No agent authored it. No feedback loop shapes it. The field exists independently of the particles that traverse it.
+
+This separation clarifies what is agent and what is environment. In Physarum, the distinction was blurred — agents created the field they navigated. Here, the distinction is sharp — the field is given, the agents merely follow. The pedagogical purpose is to isolate the concept of field-guided motion from the concept of field generation, so that when boids (next map) introduce agent-generated fields through peer interaction, the learner can recognize what is new: agents computing their own vectors from neighbor queries, rather than reading vectors from a pre-existing grid.
+
+The flow field is also the mathematical bridge to fluid dynamics, meteorology, and electromagnetic theory. Every vector field visualization in science — wind maps, ocean current maps, magnetic field line diagrams — is a flow field. The particles are probes. The field is the physics. The `FlowFieldMain` artifact makes this visible in VR: thousands of particles streaming through invisible currents, their paths revealing the field&#x27;s hidden structure.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SwarmIntelligence_FlowFields/intent.md">Raw captured source</a></p><pre>Concept: Vector fields as invisible infrastructure — an open channel with a central ridge where particle currents become visible, revealing how a field of local directions produces global flow patterns. Flow fields are the mathematical abstraction underlying all swarm navigation: each agent reads a local vector and the collective motion emerges from the field&#x27;s topology.
+Sequence role: Second map in Swarm Intelligence (14th spine sequence, integration phase), intermediate difficulty. After Physarum demonstrated biological flow networks, this map abstracts the principle: a vector field assigns a direction to every point in space, and particles following local directions produce coherent global streams. Connects backward to the vector sequence (vectors as fields, not just arrows) and forward to SwarmIntelligence_Boids_Algorithm where agents generate their own flow through neighbor interaction; follows SwarmIntelligence_PhysarumColony.
+Technical angle: 2D or 3D vector field defined on a grid, with particles advected by bilinear interpolation of nearby grid vectors. Perlin noise or curl noise as the field generator for organic-looking flow. The central ridge in the channel creates a topological feature — a saddle point or divergence zone — where flow patterns bifurcate. Visualization via streamlines, particle traces, or line integral convolution (LIC).
+Critical angle: Flow fields make stigmergy mathematical: the environment carries directional information, and agents need no communication channel beyond reading the field at their location. This is the swarm intelligence thesis distilled — local rules produce global intelligence because the environment mediates between agents. The flow field is also an aesthetic object: the patterns of convergence, divergence, and curl are the visual grammar of fluid dynamics and meteorology.
+Key artifacts: FlowFieldMain implements the flow field simulation with particle advection, likely including the open channel geometry with central ridge and controls for field parameters (noise scale, particle count, speed).
+Gap: Needs a field editor — an artifact that lets the learner paint custom vector directions onto the grid and immediately see how particles respond, making the causal relationship between local field values and global flow patterns manually explorable.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SwarmIntelligence_FlowFields/critical.md">Raw captured source</a></p><pre># SwarmIntelligence_FlowFields — Critical Reflection
+
+## Opacity of the Current
+
+Édouard Glissant described opacity as the right of every being to resist transparent understanding — to remain irreducible to the categories imposed by an observer. The flow field is opaque in this literal sense. The vector field is invisible. The arrows exist at every grid point, but the learner cannot see them directly. What the learner sees are particles — tiny bodies moving through space, tracing paths that reveal the field&#x27;s structure without exposing it completely.
+
+This is relation without transparency. The particles relate to the field. The learner relates to the particles. The field itself remains opaque — accessible only through its effects on moving bodies. No particle carries the field. No particle knows the field. Each particle knows only the vector at its current position. The global structure — vortices, laminar streams, saddle points, divergence zones — is visible only to the observer who watches many particles simultaneously and infers the pattern.
+
+Glissant would recognize this as the condition of creolization: a system whose structure cannot be read from any single element but emerges from the totality of relations between elements. The flow field is a tout-monde — a whole-world of directional tendency that governs local motion without being localizable in any single particle or grid cell. The field is everywhere and nowhere. It is the relation itself.
+
+## The Undercommons of the Field
+
+Fred Moten&#x27;s undercommons names a social space that operates beneath and between institutional structures — fugitive, productive, uncaptured. The flow field simulation presents a paradox that resonates with this concept. The field is authored — a Perlin noise generator created it, parameterized by frequency and amplitude. It is, in this sense, an institution: a pre-existing structure that particles must navigate. Particles cannot refuse the field. They cannot deposit trail or modify vectors. They can only follow.
+
+But the patterns they produce — spirals, convergence streams, bifurcation cascades — were not authored. The noise generator did not intend vortices. No programmer placed the saddle point where streams split around the central ridge. These structures are fugitive: they exist in the gap between the authored field and its navigated consequences. They are the undercommons of the vector field — productive structures that no authority planned.
+
+When time evolution is enabled, the field drifts. Vortices migrate. Streams shift. Particles that were following a stable path find it dissolving. The infrastructure they navigated is itself in motion. This is the condition Moten describes: the ground moves. The institutions relocate. What seemed like stable passage was always contingent on a field that no one controlled. The particles&#x27; only strategy is continuous re-reading — sensing the local vector at each step, adapting to a changing world without memory or planning.
+
+## Relation as Field
+
+Glissant&#x27;s concept of relation — the productive encounter between different elements that does not require either to become the other — finds its mathematical form in the vector field. Each grid cell points in its own direction. No cell needs to agree with its neighbors. Yet because Perlin noise ensures spatial coherence, nearby cells tend to point similarly. The agreement is statistical, not enforced. It emerges from the noise function&#x27;s spatial correlation, not from any communication between cells.
+
+This is relation without consensus. Neighboring vectors are correlated but not identical. The correlation produces streams — particles moving together not because they coordinated but because the field beneath them happens to align. Increase the noise frequency and the correlation drops. Streams fragment. Particles scatter. Decrease it and the correlation rises. Streams widen. The field becomes more uniform, more directive, less diverse. The noise frequency is a dial on the field&#x27;s capacity for relation: high frequency means many different directions coexisting in a small space; low frequency means broad agreement over large distances.
+
+Glissant valued difference without hierarchy. The flow field at medium frequency achieves this: diverse directions, smooth transitions, no dominant vector that subordinates the others. At low frequency, a single direction dominates — the field becomes imperial, a monoculture of flow. The parameter has political meaning whether or not the room names it.
+
+## What the Room Strips Away
+
+Physarum&#x27;s critical insight was that agents build their own field through stigmergy — the environment carries the message because agents wrote it there. The flow field map strips this away. Agents do not author their environment. They navigate a given world. The field is imposed, not constructed.
+
+This is a pedagogical choice, but it is also a political one. By separating field generation from field navigation, the room divides the swarm into two roles: the author (the noise function) and the subjects (the particles). The particles have no agency beyond following. They cannot protest the field, reroute it, or refuse it. Moten would ask: what kind of intelligence is this? The particles are disciplined bodies in a pre-structured space. Their collective beauty — the streams and spirals they produce — is an artifact of obedience, not creativity.
+
+The room does not interrogate this. It presents the flow field as neutral mathematics — a vector at every point, particles that follow. The critical move would be to ask: who authors the fields that govern real swarms? Whose noise function shapes the currents that real organisms navigate? Ocean currents are not neutral. They carry temperature gradients shaped by industrial emissions. Wind patterns are not apolitical. They distribute pollution from specific sources to specific communities. The flow field is a model of environmental governance — a structure that determines where particles go, imposed by a process they cannot see or change.
+
+The room teaches the mathematics of flow. It does not teach the politics. But the mathematics is exact enough that the politics can be read into it by anyone who asks: whose noise, whose frequency, whose field?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SwarmIntelligence_FlowFields/artifacts.md">Raw captured source</a></p><pre># SwarmIntelligence FlowFields — Artifacts
+*Swarm Intelligence: No Leader, Yet Coordinated · lambda_edge · 1 artifacts*
+
+&gt; The flow field assigns direction to space. Agents read the field and follow. No pathfinding, no goals — just local obedience to arrows. Thousands of agents streaming through invisible currents. The field is the program; the swarm is the execution.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## FlowFieldMain
+![FlowFieldMain](/scene-catalog/FlowFieldMain.png)
+
+v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire &quot;decision&quot; is a lookup
+
+`FlowFieldMain`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SwarmIntelligence_FlowFields/summary.md">Raw captured source</a></p><pre># SwarmIntelligence_FlowFields — Summary
+
+The flow field assigns direction to space. A vector field defined on a grid — generated by Perlin noise or curl noise — gives every point a direction. Particles read the local vector at their position, move accordingly, and trace paths that reveal the field&#x27;s hidden topology: vortices, laminar streams, saddle points, and divergence zones. No pathfinding, no goals, no memory. Just local obedience to arrows.
+
+The field is the mathematical abstraction underlying all swarm navigation. Physarum&#x27;s trail gradients, boids&#x27; steering forces, and ant pheromone maps are all vector fields. This map isolates the concept by presenting the field pre-built — no agent authored it, no feedback loop shapes it. Curl noise produces divergence-free flow where particles follow contour lines without accumulating or depleting, mimicking atmospheric and oceanic currents. Bilinear interpolation smooths the discrete grid into continuous trajectories. Time evolution drifts the noise parameter, moving vortices and shifting streams so particles must continuously adapt.
+
+The map&#x27;s open channel geometry with a central ridge creates a topological feature where flow patterns bifurcate — streams split around the ridge, making convergence and divergence behavior spatially legible. The `FlowFieldMain` artifact renders thousands of particles streaming through invisible currents.
+
+This is the second map in the Swarm Intelligence sequence. After Physarum demonstrated biological flow networks built by agents, this map strips away the feedback loop and presents the field itself as the primary object. The separation clarifies what is agent and what is environment, preparing the learner for boids (next map), where agents will compute their own vectors from neighbor queries rather than reading a pre-existing grid.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SwarmIntelligence_FlowFields/blurb.md">Raw captured source</a></p><pre>The flow field assigns direction to space. Agents read the field and follow. No pathfinding, no goals — just local obedience to arrows. Thousands of agents streaming through invisible currents. The field is the program; the swarm is the execution.
+
+`FlowFieldMain` renders the field as streamlines in the open channel: a central ridge splits the flow, creating saddle points and divergence zones where behavior bifurcates. Particles advect through bilinear interpolation of nearby grid vectors. The flow field makes stigmergy mathematical — the environment carries directional information, and agents need no communication beyond reading the field at their location. The patterns of convergence, divergence, and curl are also the visual grammar of fluid dynamics and meteorology. The world is full of such fields we walk without seeing.
+</pre></section></body></html>

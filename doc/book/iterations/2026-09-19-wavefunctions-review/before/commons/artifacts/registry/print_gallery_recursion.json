@@ -1,0 +1,70 @@
+{
+	"artifacts": {
+		"print_gallery_recursion": {
+			"lookup_name": "print_gallery_recursion",
+			"name": "Print Gallery — The Signed Blank",
+			"class_name": "PrintGalleryRecursion",
+			"scene": "res://commons/artifacts/print_gallery_recursion/print_gallery_recursion.tscn",
+			"category": "foundations",
+			"artifact_type": "prop",
+			"complexity": "advanced",
+			"sequence": "foundationscrisis",
+			"description": "A framed picture on a low plinth whose subject is the gallery it stands in: a plaster wall, a gilt frame hanging on that wall, and inside that frame the same wall again, four levels deep, each turned thirty degrees further and shrunk to 0.55 as it recedes. Built from real geometry and not from a texture - every level is a rectangular annulus, and a twisted band of wall carries the eye from one opening to the next, so the recursion is legible from the front in a single still and comes apart if you stand to the side. At the dead centre, where the levels would have to meet and cannot, a chased silver seal sits proud of the board: a turned bead, twenty-four radial flutes, and a raised square spiral of five bars turning inward and stopping. Under the seal the board is not painted dark - the aperture is open geometry, and the colliders are the plinth, the case shell, its gilt lip and the seal but never the opening, so a hand or a pointer entering the hole meets nothing and a visitor with an eye to it looks through the artwork into whatever the hall put behind it. Escher left the centre of Print Gallery (1956) blank and covered it with his monogram; Lenstra and de Smit reconstructed it at Leiden in 2003, and he never could. The argument is that the gap is not hidden but SIGNED, and that an artist putting his name over the place his construction fails is a more honest account of incompleteness than any statement of it.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "medium",
+			"tags": [
+				"escher",
+				"recursion",
+				"incompleteness",
+				"self_reference",
+				"picture",
+				"frame",
+				"aperture",
+				"signature"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"footprint_source": "designed"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.42,
+					1.67,
+					0.51
+				],
+				"source": "COMPUTED, not measured. Derived from the shipped defaults - plinth 1.42 x 0.62 x 0.51, case 1.35 x 1.05 x 0.37 standing on it - because the engine was not available to the session that built it. Re-measure with probe_aabb_hogs before quoting."
+			},
+			"relationships": {
+				"stands_with": [
+					"escher_room",
+					"godel_sentence_machine",
+					"incompleteness_tower"
+				],
+				"argues_with": [
+					"the_frame_you_were_given"
+				]
+			},
+			"dev_themes": [
+				"the gap that is signed rather than hidden",
+				"a construction that cannot close itself",
+				"self-reference you can put your eye to"
+			],
+			"qfep_connection": "foundationscrisis holds that every formal system has an outside and complete order is impossible. Its siblings state that; this one fails to draw it and signs the failure. The hole is real geometry rather than dark paint, so the claim survives a laser, a hand and a walk round the side - and the seal over it is the artifact's actual subject, because incompleteness that has been noticed, named and covered by its own author is a different fact from incompleteness that was merely true.",
+			"note": "Built 2026-09-09. WALL_BACKING IS FALSE ON PURPOSE and placement is doing half the argument: a blank wall behind this reads as a plugged hole and says nothing, a doorway or a lit depth behind reads as an outside and says everything. Config keys, all four safe under the grid's shorthand rule: #lid:closed|open|gone - #spiral:wide|escher|none - #rings:2..6 (also #count:) for the level count - #scale:0.2..4 (also #size:). Do NOT write #levels:<n> in a map: 'levels' is not in CONFIG_PARAM_NAMES, so the grid reads the number as tutorial shorthand and sets this node's yaw instead. #spiral:escher is the print's own ratio (x4 per quarter turn, x256 per full turn) and is not the default: at shrink 0.25 the fourth aperture would be 4.7 mm, under the build's 12 mm floor, so escher TRUNCATES TO THREE LEVELS with an 18.8 mm aperture and a 25 mm seal - the ratio runs out of picture before it runs out of levels, which is the difficulty Escher was actually in. #lid:open does not hinge the seal, it SETS IT ASIDE on the outermost wall band: the seal is 147 mm across and its own bay is 200 x 150 x 90 mm, so a swung disc reaches past the next frame's plane at every angle from -75 to -118 degrees and its 73.4 mm half-height clips that frame's 63.9 mm optical half-height. Measured in Python before the build, not found in a render. All the figures in this note are arithmetic. Reviewed 2026-09-09, two faults repaired in the .gd and nothing else touched: (1) the gilt lip stood 55 mm proud of the case mouth with NO collision shape at all - the frontmost, most touchable band on the object, running from y 0.670 to 1.620 - and now carries four box shapes matching its four bars, which leaves the aperture as open as it was; (2) apply_grid_config accepted a BOOL for rings/count/levels/scale/size, so a map writing #levels:4 (the shorthand trap the note above warns about) delivered `true`, int(true) = 1, clamped to 2, and built a TWO-level picture while the map file still read 4 - bools are now refused and the default stands. Still uncompiled and unrendered. No dna.axes block: the axes here are honest but unswept, and a hand-typed declaration that has never met a bite critic is the fault this project most often catches in itself."
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{
+  "comparisons": [
+    {
+      "path": "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+      "recorded_sha256": "296cd65828312cc71fa2cb0199d16f06f707247ac479adb030f6b990440e9000",
+      "current_sha256": "296cd65828312cc71fa2cb0199d16f06f707247ac479adb030f6b990440e9000",
+      "same": true
+    },
+    {
+      "path": "algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn",
+      "recorded_sha256": "d78761c0223608dd41d4d2d2fc5294b51e95ee2032e4652342a3c962447c6ade",
+      "current_sha256": "d78761c0223608dd41d4d2d2fc5294b51e95ee2032e4652342a3c962447c6ade",
+      "same": true
+    },
+    {
+      "path": "algorithms/postprocessing/flashlight_demo/flashlight.tscn",
+      "recorded_sha256": "79af388a18fdd53a14eba94031aaf4e9136b2ed62edbb17b07329fbd9ec3a26e",
+      "current_sha256": "79af388a18fdd53a14eba94031aaf4e9136b2ed62edbb17b07329fbd9ec3a26e",
+      "same": true
+    },
+    {
+      "path": "commons/maps/Color_Flashlight/map_data.json",
+      "before_path": "doc/book/iterations/2026-09-24-colour-review-comments/before/commons/maps/Color_Flashlight/map_data.json",
+      "before_matches_recorded_runtime": true,
+      "only_change": "Standalone utility at (4,4) changed from sp to s on 24 September. Receiver token, geometry placement and other map data are unchanged."
+    }
+  ],
+  "scope": "Existing native sphere figure retained. Artifact builder and scene hashes agree; map has the recorded spawn correction. This does not revalidate the evolving museum engine or headset interaction. flashlight_color.gd was inspected now but not separately hashed in the old report."
+}

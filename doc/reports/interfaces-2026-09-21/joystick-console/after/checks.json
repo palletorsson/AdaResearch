@@ -1,0 +1,395 @@
+{
+	"baseline": false,
+	"checks": [
+		{
+			"message": "Focused interactable demo builds three actual joystick scenes",
+			"passed": true
+		},
+		{
+			"message": "All reference lettering is on flat surfaces",
+			"passed": true
+		},
+		{
+			"message": "Controls stand in front of the visible consequences",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 0: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 0: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 0: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "continuous yaw 90: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "detented yaw 90: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: physics control keeps metre scale",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: grip coincides with grab target",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: Left grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: Right grab-pose redirect resolves",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: shaft and collision align",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: actual XR grab sets both axes",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: a stationary hand does not accumulate rotation",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: visible point follows the actual angles",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: printed reading follows the joint",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: release preserves its declared rule",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: both axes clamp at the original limits",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: physical face receives the ray",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: pointer uses the tilted control's local axes",
+			"passed": true
+		},
+		{
+			"message": "returning yaw 90: pointer release matches physical release",
+			"passed": true
+		},
+		{
+			"message": "Second pointer cannot steal an active control",
+			"passed": true
+		},
+		{
+			"message": "Owner pointer remains active",
+			"passed": true
+		},
+		{
+			"message": "Pointer exit returns to zero and ends processing",
+			"passed": true
+		},
+		{
+			"message": "A removed pointer cannot leave a spring control held",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false
+}

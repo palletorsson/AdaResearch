@@ -1,0 +1,72 @@
+# What, exactly, is repeated?
+
+<!-- @cantor_set -->
+
+Can you explain two recursive constructions without using their names?
+
+Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Point to an example of the input, the descendants and the gap. Then identify where the displayed construction stops.
+
+Try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. After one cut there are two pieces, each two metres long. Before the second cut, predict both the number of pieces and their combined length. They will not change in the same direction.
+
+Here is the step that actually creates a descendant's size:
+
+```gdscript
+var new_length = bar_length / 3.0
+```
+
+In `cantor_set.gd`, `perform_iteration()` creates a left bar and a right bar of that length, each centred a third of the parent's length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.
+
+After three cuts, press HISTORY. The upper rows appear. Has any material returned to the current generation?
+
+The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What returned was the visible record of earlier stages. Hide it and bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.
+
+This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.
+
+The fifth cut is the desk's last. It leaves thirty-two finite pieces. The stopping point gives our attention and this instrument somewhere to stand. It does not establish that further difference is impossible. RESET returns to the uncut beginning; it does not rewind the museum.
+
+<!-- @recursive_tree -->
+
+The red block tree has already branched. Find a fork that seems to end, and follow it backward. What would a call have to remember to place a smaller branch there?
+
+Press STRATA. The blocks change colour according to their recorded branch levels. Press REACH and volumes enclose the extents accumulated through those levels. ENDS marks the joint where the trunk hands off and every deepest recorded block. FORM brings the solid reading back. Compare the same fork through these views: none of these buttons grows a new tree.
+
+The source receives a parent, an origin, a number of branches and two depth values. Its stopping condition is small enough to read in one breath:
+
+```gdscript
+if current_depth >= max_depth:
+    return
+```
+
+Later in `recursive_tree.gd`, `generate_branches()` passes the continuation on:
+
+```gdscript
+generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
+```
+
+The surrounding code chooses dimensions, directions and descendant counts with a local random-number generator. This placement starts from seed 12345. The nested calls stop after three branching levels. A seed is one part of that recipe; the generator, draw order and ranges also matter. The desk's changing colours and cages read the resulting geometry without drawing those random choices again.
+
+Try the incomplete description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. A cage around its reach adds another representation: it encloses empty space as well as blocks. It is not a new shelter with solid walls.
+
+We have accumulated ways to make form, and ways to mistake a reading for the form. The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those are different interventions, with different consequences.
+
+<!-- @ -->
+
+The collection beyond offers further procedures to compare. Its held examples leave time for looking; the moving works keep their own clocks. We do not need to turn every resemblance into the same law.
+
+Think back to the tree between your hands, its two drawings, and the canopy above you. The endpoints travelled between them. Solidity, reach and the room available to your body did not follow from those endpoints alone. Each version made something available to inspect and required other choices. Returning to the little tree after walking beneath it, you could ask for a different turn for a reason you had not found at the desk.
+
+That return is part of how this museum is written. A sentence proposes an encounter. A drawing gives it positions and edges. Code gives those arrangements behaviour, and a body discovers what the proposal did not describe. We return to the sentence with something to change. The plan did not contain the walk in full; the revised words will not contain it either. What survives the passage matters, and so does what has become newly noticeable.
+
+I call this movement *fractal thinking*: returning to a question at another scale, with another way to act upon it. It names a research practice here, not a mathematical property proved by putting rooms inside sequences or objects inside rooms. A scene hierarchy is not enough to make a fractal. What can recur is the work of setting a boundary, changing something within it, attending to the consequence, and deciding what deserves another encounter.
+
+Walking explores the world we have made. Changing a generating rule explores worlds it could become. Neither route lets us examine everything. We keep a few versions, arrange a comparison, choose where to spend another call. The frame that helps us notice one difference also leaves others outside it.
+
+An unexpected branch need not reorganise the book. It might remain a pleasure in this room. It might expose a mismatch between what we wrote and what the body could do. If that mismatch returns elsewhere, it can change the question that carries us through the sequence. The program can reproduce the difference and an AI can help us search for it. Neither repetition nor the number of variants decides its importance. We still have to say what it changes, for whom, and why we choose to follow it.
+
+The trees around this hall were grown by a rule too, and it is not any of the desks’. The biome’s own generator writes a sentence with an L-system and reads it with a turtle in three dimensions; how many generations, how many branches at a fork, the angle and the taper come from that plant’s own genes, so no two are the same tree. The flag in the stage file that calls this flora fractal is a name nothing reads. What the ring inherits that the desks do not show is a body per plant: a different sentence for each, and a reader that gives it tubes and leaves. That grammar is where the next sequence begins.
+
+The names on these desks arrived late in another sense. Cantor's set is dated 1883, Koch's curve 1904, Sierpinski's triangle 1915, Menger's sponge 1926, and the word that gathers them, *fractal*, 1975. The structure is older than any of them. The Ba-ila settlements of what is now Zambia were built as a ring of enclosures, each enclosure itself a ring, with the chief's ring at the back of the village repeating the whole at a smaller scale, long before a mathematician called the arrangement self-similar,[^1] and the geometric ornament of Islamic architecture repeats a motif inside itself at descending scales for reasons of its own. A rule can be practised for centuries before it is written down. These desks show the written form. They do not show who was already building it.
+
+Carry one explicit rule into the grammar laboratory. There, a string is rewritten before it is read as movement, and the interval you cut five times in the Cantor hall is two letters and two rules: `F` draws a step, `f` walks one without drawing, and every rewrite turns `F` into `FfF` and `f` into `fff`. Read the sentence after five rewrites and the bar's thirty-two pieces and their gaps are already in it, in order, before any turtle has moved; the lab keeps it as the preset called “Cantor”. Its preset called “Koch Curve” is a different Koch from our snowflake, one that replaces `F` with `F+F-F-F+F` and turns ninety degrees, so even a familiar name leaves work for us to do. What does an instruction become when another reader gives it a body?
+
+[^1]: Ron Eglash, *African Fractals: Modern Computing and Indigenous Design* (Rutgers University Press, 1999).

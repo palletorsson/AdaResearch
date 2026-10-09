@@ -1,0 +1,54 @@
+{
+  "s": {
+    "registry_file": "commons/grid/UtilityRegistry.gd",
+    "registry_sha256": "461c2a3cf6d3988e26ba1e07dea907b00e535ebc717ddeb6c808c494d90447cc",
+    "entry": {
+      "name": "spawn_point",
+      "file": "spawn_point_scene.tscn",
+      "category": "transport",
+      "description": "Optional — explicit player start. Defaults to floor centroid facing interactables.",
+      "supports_parameters": true
+    },
+    "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn",
+    "resolution": "literal registry scene"
+  },
+  "t": {
+    "registry_file": "commons/grid/UtilityRegistry.gd",
+    "registry_sha256": "461c2a3cf6d3988e26ba1e07dea907b00e535ebc717ddeb6c808c494d90447cc",
+    "entry": {
+      "name": "teleport",
+      "file": "teleport_scene.tscn",
+      "category": "transport",
+      "description": "Instant location changes",
+      "supports_parameters": true
+    },
+    "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn",
+    "resolution": "literal registry scene"
+  },
+  "an": {
+    "registry_file": "commons/grid/UtilityRegistry.gd",
+    "registry_sha256": "461c2a3cf6d3988e26ba1e07dea907b00e535ebc717ddeb6c808c494d90447cc",
+    "entry": {
+      "name": "annotation_cube",
+      "file": "info_board.tscn",
+      "category": "ui",
+      "description": "Displays current map name and description",
+      "supports_parameters": true
+    },
+    "scene": "res://commons/scenes/mapobjects/info_board.tscn",
+    "resolution": "literal registry scene"
+  },
+  "wp": {
+    "registry_file": "commons/grid/UtilityRegistry.gd",
+    "registry_sha256": "461c2a3cf6d3988e26ba1e07dea907b00e535ebc717ddeb6c808c494d90447cc",
+    "entry": {
+      "name": "walkway",
+      "file": "walkableprism.tscn",
+      "category": "transport",
+      "description": "walkway walk your way",
+      "supports_parameters": true
+    },
+    "scene": "res://commons/scenes/mapobjects/walkableprism.tscn",
+    "resolution": "literal registry scene"
+  }
+}

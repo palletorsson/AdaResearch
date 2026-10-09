@@ -1,0 +1,390 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "both the existing lamp exhibit and new rooms are in the museum",
+      "passed": true
+    },
+    {
+      "name": "seven-sided original receiver remains",
+      "passed": true
+    },
+    {
+      "name": "source and six concealed washes exist",
+      "passed": true
+    },
+    {
+      "name": "central chamber ceiling is solid",
+      "passed": true
+    },
+    {
+      "name": "all three central ceiling openings are genuinely open",
+      "passed": true
+    },
+    {
+      "name": "side opening admits the body route",
+      "passed": true
+    },
+    {
+      "name": "central wall stops a lateral approach",
+      "passed": true
+    },
+    {
+      "name": "room footprint leaves central walking cells open",
+      "passed": true
+    },
+    {
+      "name": "museum walk map includes the new annex interior",
+      "passed": true
+    },
+    {
+      "name": "museum uses partitions without sealing the room interior",
+      "passed": true
+    },
+    {
+      "name": "museum partition footprint includes the solid room wall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: white-room-rose",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: white-room-blue",
+      "passed": true
+    },
+    {
+      "name": "changing only light changes the actual rendered room",
+      "passed": true
+    },
+    {
+      "name": "white material and room geometry stay fixed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: white-room-source-off",
+      "passed": true
+    },
+    {
+      "name": "removing the central light changes the receiving walls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: apertures-from-floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: aperture-room",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (-6.5, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (-2.0, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (2.0, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (6.5, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (11.0, 0.08, 4.9)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (13.7, 0.08, 4.9)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (13.7, 1.25, -4.4)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (13.7, 1.25, -5.7)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker reaches (10.5, 1.25, -5.7)",
+      "passed": true
+    },
+    {
+      "name": "ramp lifts the body to the upper landing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: apertures-from-landing",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (13.7, 1.25, -5.7)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (13.7, 1.25, -4.4)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (13.7, 0.08, 4.9)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (10.2, 0.08, 4.9)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (6.5, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (2.0, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns via (-6.5, 0.08, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "light changes continue without a panel",
+      "passed": true
+    },
+    {
+      "name": "room study completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "room_position": [
+      25.0,
+      0.0,
+      10.0
+    ],
+    "walks": [
+      {
+        "arrived": true,
+        "reached": [
+          -6.51752471923828,
+          0.000943214748986065,
+          0.00359535217285156
+        ],
+        "target": [
+          -6.5,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          -2.04748725891113,
+          0.0101962257176638,
+          0.000416755676269531
+        ],
+        "target": [
+          -2.0,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          1.96747779846191,
+          0.0101962257176638,
+          0.0
+        ],
+        "target": [
+          2.0,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          6.46206665039063,
+          0.0100912004709244,
+          0.0
+        ],
+        "target": [
+          6.5,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          10.9696712493896,
+          0.0100912004709244,
+          4.86566352844238
+        ],
+        "target": [
+          11.0,
+          0.0799999982118607,
+          4.90000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.6877956390381,
+          0.0100912004709244,
+          4.90707302093506
+        ],
+        "target": [
+          13.6999998092651,
+          0.0799999982118607,
+          4.90000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.6999607086182,
+          1.24016940593719,
+          -4.39291906356812
+        ],
+        "target": [
+          13.6999998092651,
+          1.25,
+          -4.40000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.6998920440674,
+          1.19934523105621,
+          -5.68055248260498
+        ],
+        "target": [
+          13.6999998092651,
+          1.25,
+          -5.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          10.5317668914795,
+          1.19934523105621,
+          -5.70217943191528
+        ],
+        "target": [
+          10.5,
+          1.25,
+          -5.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.6902675628662,
+          1.19934523105621,
+          -5.69334268569946
+        ],
+        "target": [
+          13.6999998092651,
+          1.25,
+          -5.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.7070560455322,
+          1.24055576324463,
+          -4.39855146408081
+        ],
+        "target": [
+          13.6999998092651,
+          1.25,
+          -4.40000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          13.6989688873291,
+          0.0102827586233616,
+          4.90919589996338
+        ],
+        "target": [
+          13.6999998092651,
+          0.0799999982118607,
+          4.90000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          10.2457599639893,
+          0.0102827586233616,
+          4.90407085418701
+        ],
+        "target": [
+          10.1999998092651,
+          0.0799999982118607,
+          4.90000009536743
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          6.51454544067383,
+          0.0102827586233616,
+          0.0251989364624023
+        ],
+        "target": [
+          6.5,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          2.02159118652344,
+          0.0107703432440758,
+          0.00626659393310547
+        ],
+        "target": [
+          2.0,
+          0.0799999982118607,
+          0.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          -6.47484970092773,
+          0.00032112468034029,
+          0.00678157806396484
+        ],
+        "target": [
+          -6.5,
+          0.0799999982118607,
+          0.0
+        ]
+      }
+    ],
+    "white_albedo": [
+      0.920000016689301,
+      0.910000026226044,
+      0.879999995231628
+    ]
+  },
+  "passed": true,
+  "room": "Color_Flashlight",
+  "scope": "Native museum; real renderer and ordinary controller, no headset or photometric claim."
+}

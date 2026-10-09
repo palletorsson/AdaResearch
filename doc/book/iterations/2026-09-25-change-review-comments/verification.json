@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "check": "Change_Intro: valid chapter",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: map unchanged",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: current text/map hashes",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: roles retained",
+      "passed": true
+    },
+    {
+      "check": "Change_Intro: reader serves current final.md",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: valid chapter",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: map unchanged",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: current text/map hashes",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: roles retained",
+      "passed": true
+    },
+    {
+      "check": "Flow_Field: reader serves current final.md",
+      "passed": true
+    },
+    {
+      "check": "Unrelated current core records retained",
+      "passed": true
+    },
+    {
+      "check": "All companion manuscripts retained",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/sequences/change.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Ribbon_Patterns_03/final.md: unchanged",
+      "passed": true
+    },
+    {
+      "check": "algorithms/change/velocity_arrow.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "intro: native checks pass and process exits normally",
+      "passed": true
+    },
+    {
+      "check": "intro: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "flow: native checks pass and process exits normally",
+      "passed": true
+    },
+    {
+      "check": "flow: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/change/two-readings-near-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact figure served doc/book/figures/change/two-readings-near-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/change/four-held-eight-live-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact figure served doc/book/figures/change/four-held-eight-live-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/change/flow-field-near-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact figure served doc/book/figures/change/flow-field-near-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Current Change capture and manifest match both canonical final.md files",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Source, manuscript preservation, live publication and native supplied controls. No tracked-headset or reader-acceptance claim."
+}

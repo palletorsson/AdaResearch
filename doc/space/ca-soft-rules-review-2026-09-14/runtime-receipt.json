@@ -1,0 +1,31 @@
+{
+  "started": "2026-09-14T06:25:58+02:00",
+  "finished": "2026-09-14T06:26:35+02:00",
+  "pid": 38676,
+  "exit": 0,
+  "checks": 37,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/ca_soft_rules_probe_base.gd": "85cb24aa9ddee036f81e1e8d28688a3d3a6a0ae62a3e55ea2a54591a4b8757c5",
+    "ada_run/ca_soft_rules_acceptance.gd": "a59d443d78f9d2bca820007ea849ad3bf8cb797d06f8ffea235583ffb74561e6",
+    "commons/maps/CA_SoftRules/map_data.json": "6eeea6ca3ca1008ef23874351f126453ca7684fbd271d2ceab23fd2a809e575d",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-soft-rules-review-2026-09-14/review-plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "commons/artifacts/rd_artifact/exchange_study.gd": "14fbb482231d99bc29c2d5ecb118150b625f1b9ec668df5fa0c19d9f0f2dddd9",
+    "commons/artifacts/rd_artifact/live_field.gd": "ade99861f3dc4d2b040a2556adafd4582a6bb9a9730d8afda0d46a2169f4661f",
+    "commons/artifacts/rd_artifact/rd_artifact.gd": "1de4dc73156703351c05dda6d619de7e8e0f5964630e73e0cd26de9a96f6ddb6",
+    "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd": "dd79660ac9eeaf7a7bbbb538b5afc7aacb1bad073fcc1a43baa04d4e8d819628",
+    "commons/artifacts/registry/cellular_automata.json": "030cc76f10bbae7ceb7842fbf153f62063b6bcfd5ddd1728afd2560640eb40a7"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

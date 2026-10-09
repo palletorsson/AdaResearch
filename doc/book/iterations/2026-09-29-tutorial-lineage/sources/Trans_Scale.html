@@ -1,0 +1,216 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Scale · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Trans_Scale">← Tutorial lineage</a></p><h1>Trans Scale</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Trans_Scale/final.md">Raw captured source</a></p><pre># A door, at last
+
+&lt;!-- @scale_me --&gt;
+
+In the rotation hall, you tried the openings against the size of your body. Here, something waits to be taken.
+
+A figure stands behind a tower of food. Crystal grows through her suit; broad panels lean around her body. The food has begun to flower. Porcelain plates climb above it, and smaller serving plates wind down the side. These are familiar enough to approach, strange enough to keep looking at. In the far wall, beside the figure, a little gold frame surrounds a door.
+
+Try to put yourself through it.
+
+You can see the opening. You can point to the space beyond. Your body will not follow. For the moment, calling it an exit describes somebody else&#x27;s possibility.
+
+There is a bottle on the highest plate. DRINK ME. Take it.
+
+A cut. Now the plate is under your feet. The figure rises beyond you, her leaning panels large enough to seem architectural. The table has become a place to stand. Look down along the serving plates. What could be read at a glance now asks for a journey.
+
+The bottle is gone. You have not watched the room swell through the sizes between. The room and its contents are suddenly four times as large: the food, the figure, the spaces between them. Your body has kept its size. The effect may feel like shrinking. The program has made that feeling by changing the other side of the comparison.
+
+```gdscript
+room.scale = Vector3.ONE * FACTOR
+```
+
+`FACTOR` is four. The food and the figure belong to `room`, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Increasing only their dimensions would have left the distance between them unchanged.
+
+The arrival on the plate is another operation. Scaling the room would not put you there. The program takes the top plate&#x27;s local position and asks where it has arrived in the enlarged world:
+
+```gdscript
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+```
+
+Then it places your feet there, eight centimetres above the porcelain. The room has changed size, and you have been given a new place from which to meet it.
+
+Follow the plates down. Their winding descent was already present when they were small. Nothing in their arrangement needed to be invented after you took the bottle. Yet the distance from one to the next now belongs to balance, gravity and the time spent falling. The program did not multiply your walking speed or the gravity with the room. Uniform scaling has left a very uneven experience.
+
+Find the little door again. It was forty-five centimetres wide and sixty high. Now it is 1.8 metres wide and 2.4 high. Walk through.
+
+Just beyond it stands a second gold frame, also 1.8 metres wide and 2.4 high. Pass through that one too. It stood at this size before you took the bottle.
+
+![The tiny gold doorway and its enlarged version viewed from the same standing height and distance.](/book-review/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png)
+
+*The camera stays 1.65 metres above the floor and 2.5 metres from the opening in both views. On the right, the second gold frame beyond the doorway has stayed at its original size.*
+
+The little doorway has kept its proportions. There is a difference between preserving a shape and preserving what someone can do there. If the bottle had enlarged you by the same factor, would that doorway have become an exit?
+
+The figure has not become hostile by becoming enormous. Her unfamiliar body remains with you through the change. The same is true of the food: its strangeness preceded its usefulness as a landscape. You can learn a route through something without exhausting what it is.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+&lt;!-- @reference_passage --&gt;
+
+Another wall waits beyond the enlarged room. Its opening changes width; your body stays the same. At the narrow setting the strip on the floor continues through a passage you cannot take. Walk around the wall instead.
+
+The displaced dark disc belongs to this sparse arrangement too. Following the supplied Bałka reference, a few architectural parts make the missing room present. The code can name a clearance. It cannot decide whose body ought to be the measure. Widen the opening and return to the same strip.
+
+&lt;!-- @ --&gt;
+
+Beyond the changing opening, turn toward the museum&#x27;s own exit. There is still a short walk to the next hall. The museum and its second frame have kept their ordinary size. The code placed the furnished room inside the change and left them outside it. In the next hall, your approach will be enough to make the surroundings respond.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Trans_Scale/tutorial.md">Raw captured source</a></p><pre># What changed enough to let you through?
+
+Enter the room and inspect the tiny door beside the standing figure. Try it before taking the bottle. Look at the food tower&#x27;s plates and at the distance between the table and the figure.
+
+Take the DRINK ME bottle on the top plate: VR grip/pickup, or the museum&#x27;s desktop right-button carry gesture. The room changes size in a cut, and your next position is on the enlarged table. You do not see the sizes between. Find the figure and door again before descending the porcelain steps.
+
+Only after comparing the two views, inspect the implementation:
+
+```gdscript
+room.scale = Vector3.ONE * FACTOR
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+```
+
+The first line multiplies the room and its children&#x27;s dimensions and relative positions. The second computes the arrival point; moving the body is a separate operation. `FACTOR` is four. The assignment changes the scale at once. After a physics frame, the program relocates the body to the enlarged table; it does not animate growth. The museum, body, gravity and walking speed are outside that multiplication.
+
+Descend the serving plates and walk out of the room through the former tiny door. It has changed from 0.45 by 0.60 metres to 1.8 by 2.4 metres. Pass through the equally sized gold frame beyond it: that frame remained fixed throughout. Then turn toward the museum exit. The fixed wall at the room entrance makes this a route through the experiment; it does not scale with the room. Which proportions survived? Which distances became tasks? If the body and its movement had also scaled, would the door have become usable?
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Return: Who fits through?
+
+Change opening width while keeping the body and opening height. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses coordinates, transform. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`passage`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:reference_passage --&gt;
+
+### One source change: Who fits through?
+
+Change the minimum opening from 0.48 to 0.60 metres. Keep the 0.56-metre comparison strip and test the narrow state again.
+
+```gdscript
+var width := lerpf(0.60, 1.68, amount)
+```
+
+Source: `commons/artifacts/reference_studies/passage.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Trans_Scale/technical.md">Raw captured source</a></p><pre># A bounded fourfold change
+
+The source token is `scale_me:0:0:1#encounter:drink_me#plinth:0`. `algorithms/primitives/scaleme/scale_me.gd` detects that configuration before binding the legacy target and builds `drink_me_room.gd`. Unconfigured scale_me instances retain their legacy behavior.
+
+`Room` owns the architecture and the two seeded dream figures. It begins four metres wide and deep, with a 3.2-metre ceiling. Its floor sits 4 cm above the museum deck to avoid coincident surfaces. Its far-side door is a genuine gap between colliders, 0.45 by 0.60 metres. The entrance is 1.4 by 2.4 metres.
+
+The food tower uses spread=blooming and service=tower; the crystal suit uses crust=spire and panels=leaning. Sculpture meshes are combined into one static concave collision shape per sculpture. Thirteen visible porcelain serving plates have matching cylinder colliders. Their tops descend from 1.76 m in 0.135 m increments, becoming drops of 0.54 m after scaling.
+
+`drink_me_bottle.gd` extends XRToolsPickable. VR picked_up resolves the grabbing controller&#x27;s player body. Desktop uses the shared pointer&#x27;s optional on_desktop_grab callback and resolves its owning CharacterBody3D. Both defer consumption, release the hand, hide/disable the bottle, and call the same encounter operation. Mere proximity does not trigger it.
+
+```gdscript
+room.scale = Vector3.ONE * FACTOR
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+```
+
+FACTOR is 4. The scale assignment is instantaneous; there is no interpolation through intermediate sizes. After the physics frame updates, XRToolsPlayerBody.teleport moves the VR body and origin together; desktop moves the character transform. Velocity is cleared. The body, museum, locomotion and gravity remain unchanged. There is no timed reversal; the encounter resets when the hall is freshly loaded.
+
+The source map reserves a 21-by-22-cell hall for the 16-by-16-metre expanded room. Its fixed structure-4 wall spans row 2 except cells 9–11, where the small room&#x27;s own entrance remains accessible. The wall joins that room to the hall sides, preventing a forward bypass around its exterior. It intersects the room front only, leaving the expanded interior and far exit clear. This wall is outside the scaled hierarchy. The standalone spawn is `s` at (10,0), with `utility_definitions.s.properties.player_rotation = 180`; `sp` would create a score point, not a spawn. Its continuous museum floor remains underneath, 4 cm below the room floor, and supports entry and exit at both states. This is a gallery, without an embedded grid basin. An optional em_visibility_bounds metadata AABB tells museum distance culling to measure from the expanded room boundary instead of its now-distant placement anchor.
+
+A separate `UnscaledDoorway` is a sibling of `Room`, never a descendant. Its 1.8-by-2.4-metre opening lines up just beyond the expanded exit. Both admit the same body after the change, but only the room doorway has been multiplied. This fixed comparison makes the transform hierarchy visible.
+
+Verification: commons/testing/probe_drink_me_room.gd loads the actual museum hall, takes the bottle through the desktop pointer, checks both door sizes against a body capsule, scale boundaries, arrival clearance, landing collision, descent and visibility near the exit. Headset comfort and learner discovery remain to be walked by a person.
+
+
+## Shared book illustration — 23 September
+
+The chapter&#x27;s paired door image comes from the actual museum encounter before and after taking the bottle through the desktop pointer. Both cameras sit 1.65 m above the room floor and 2.5 m in front of the opening, look toward a point 1.2 m above its centre, and use the same 70-degree field of view. Camera position follows the doorway when the room grows; camera height, viewing distance and pitch do not scale. The second gold frame visible beyond the enlarged door retains its original world transform.
+
+`tools/probes/scale_book_illustrations.gd` records those views and checks a 0.44 m wide, 1.6 m high capsule before and after the change. A hypothetical fourfold body is only a probe comparison, not a new visitor control. No room, sculpture, map or runtime behavior changed. The earlier full serving-plate descent remains historical evidence; this illustration pass does not rewalk it.
+
+[Full reading, paired image and scope](../../../doc/book/iterations/2026-09-23-scale-door-and-body/index.html).
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Installed application: Who fits through?
+
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
+
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Trans_Scale/intent.md">Raw captured source</a></p><pre>Concept: Uniform scale preserves proportions while changing access relative to a fixed body.
+Primary: scale_me configured with encounter:drink_me. It composes the blooming/service-tower food table and spire/leaning crystal suit; these are room contents, not duplicate standalone placements.
+Sequence: From carousel radii in Trans_Rotation to body-relative space here, then Trans_Body.
+Encounter: Enter a four-metre room. Inspect the tiny far-side door. Take the labelled bottle on the food tower. A cut changes only this room and its contents to fourfold scale; the visitor is placed on the top serving plate. Descend the thirteen porcelain landings and leave through the enlarged room door and fixed witness frame, then turn toward the museum exit. A fixed wall joins the small room front to the hall sides, making it the forward route while leaving retreat possible.
+Comparison: A second 1.8 x 2.4 m frame stays fixed outside the scaling hierarchy. Door 0.45 x 0.60 m becomes 1.8 x 2.4 m. Body, walking speed, gravity and museum retain their own scales.
+Status: Authored prototype; automated spatial checks do not constitute a learner or headset walkthrough.
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Installed application: Who fits through?
+
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
+
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Trans_Scale/critical.md">Raw captured source</a></p><pre># An opening for whom?
+
+A doorway can remain geometrically similar and change its practical meaning. Here a 0.45 by 0.60 metre opening becomes 1.8 by 2.4 metres while the visitor&#x27;s body remains fixed. Uniform positive scaling does not change the topology of the room&#x27;s mesh. It changes the space available to a body with particular dimensions and movement capacities. Those claims should remain distinct.
+
+The change is a cut followed by relocation onto the enlarged table. The experience therefore combines a new room scale with a new viewpoint; the sudden sense of shrinking is not evidence of a continuously changing body. The two lines of code let that construction be questioned.
+
+The simulation chooses its boundary: room and contents belong inside the multiplication; the museum, visitor, speed and gravity remain outside. This exclusion makes the encounter work. It also prevents the effect from being a complete physical model of shrinking an organism. The scene is a specific visual and bodily argument whose assumptions can be examined.
+
+The crystal figure&#x27;s difference precedes the visitor&#x27;s new scale. Her enlargement supplies no reason to make her an enemy. Food that has opened into flowers can become a landscape without becoming fully familiar. The encounter lets the unfamiliar host movement and attention.
+
+The serving steps are an authored accommodation. They are visible at both scales, and do not imply that the original sculpture was naturally traversable. A different body or movement system may require another route. Return to this question with sine, noise and the later discussions of terrain and existence.
+
+The wall across the hall is also a choice: it makes the doorway experiment part of forward passage while allowing retreat. Its demand to pass through this room is an authored teaching condition, rather than a necessity of scaling itself.
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Installed application: Who fits through?
+
+The displaced dark disc belongs to this sparse arrangement too. Following the supplied Bałka reference, a few architectural parts make the missing room present. The code can name a clearance. It cannot decide whose body ought to be the measure. Widen the opening and return to the same strip.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Trans_Scale/artifacts.md">Raw captured source</a></p><pre># Primary encounter
+
+- `scale_me:0:0:1#encounter:drink_me#plinth:0` at source cell (10,2). A composed room, bottle, instantaneous uniform scale change, separate body relocation and descent.
+
+Contents created once inside that encounter:
+
+- `dream_food_table__spread-blooming__service-tower`, seed 1, with thirteen added porcelain serving landings and a labelled bottle at the crown.
+- `dream_crystal_suit__crust-spire__panels-leaning`, seed 1, standing behind the table.
+- A four-by-four-metre room, normal entry and a far-side 0.45-by-0.60-metre doorway.
+
+The nested sculptures are not additional map tokens. One primary card links the composed experience to its book passage. The old chair, prisms, screens and transport utilities are preserved in the dated source snapshot.
+
+The two doorways are part of this encounter: one is a child of Room and grows, the witness is a sibling and stays at 1.8 x 2.4 m.
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Installed application: Who fits through?
+
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
+
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Trans_Scale/summary.md">Raw captured source</a></p><pre>Trans_Scale is one composed scale_me encounter. A small enclosed room holds dream_crystal_suit__crust-spire__panels-leaning behind dream_food_table__spread-blooming__service-tower. Taking the DRINK ME bottle changes the room and its contents to fourfold scale at once, then relocates the visitor onto the tower&#x27;s crown. The encounter presents a cut, not a continuous growth animation. Thirteen visible porcelain serving plates offer a winding descent. The far-side doorway grows from 45 x 60 cm to 1.8 x 2.4 m.
+
+This replaces the former grid gauntlet. The source map and manuscripts remain in doc/space/scale-drink-me-2026-09-09/before. The primary inventory is scale_me; the two exact dream variants are instantiated inside its encounter.
+
+The expanded room occupies 16 by 16 metres inside a 21 by 22 metre museum hall. A fixed 1.8 by 2.4 metre doorway beyond the exit gives a second, unchanged reference for the body.
+
+A fixed transverse wall joins the small room entrance to the hall sides. Forward passage goes through the room and its enlarged doorway; the separate museum exit remains beyond the fixed witness frame.
+
+
+&lt;!-- study-spine:reference_passage --&gt;
+
+## Installed application: Who fits through?
+
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
+
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Trans_Scale/blurb.md">Raw captured source</a></p><pre>The door is visible. Your body cannot follow it. Take the bottle, and the table becomes a place to stand: the proportions survive, while an exit becomes possible.
+</pre></section></body></html>

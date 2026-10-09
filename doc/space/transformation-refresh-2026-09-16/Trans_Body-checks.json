@@ -1,0 +1,51 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "body threshold retained /approach_wall.gd",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "body threshold retained /carve_grid.gd",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "body threshold retained /approach_scale.gd",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "body exit continuous floor at row 22.0",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "body exit continuous floor at row 23.0",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "name": "body exit continuous floor at row 24.0",
+      "passed": true,
+      "value": 0.0
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Body",
+  "measurements": {
+    "grid_origin": "(5.5, -0.5, 5.5)"
+  }
+}

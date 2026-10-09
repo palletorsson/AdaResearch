@@ -1,0 +1,110 @@
+[
+  {
+    "map": "WaveFunctions_Intro",
+    "title": "The cube returns",
+    "subjects": "Periodic motion, amplitude, frequency, phase",
+    "primary": "y_oscillation_cube",
+    "summary": "Continue Transformation with the cube. Read its height from time; compare how far it moves, how often it returns and where its cycle begins. Build two cubes with independent phases.",
+    "review": "Author correction: start with the cube. Pendulum is a comparison, not the opening tutorial object.",
+    "carry": "Carry elapsed time and cycle parameters into a comparison with a recorded swing."
+  },
+  {
+    "map": "WaveFunctions_Pendulum",
+    "title": "Record",
+    "subjects": "Responding swing, sampling, timestamps, bounded history",
+    "primary": "PendulumWave",
+    "summary": "Compare the prescribed cube cycle with a responding pendulum. Reuse Trace to retain named position/time records and give their age visible depth. Compare coarse and fine sampling.",
+    "review": "Rewritten and natively tested: cube bob, named position/time records, bounded history. The room is now an open gallery with a larger pendulum, floor projection, enlarged paintings and an accessible hand timeline.",
+    "carry": "A sampled return can become spatial spacing."
+  },
+  {
+    "map": "WaveFunctions_Sine_Space",
+    "title": "Space",
+    "subjects": "Spatial frequency, height field, collision",
+    "primary": "sine_flow_tray",
+    "summary": "Return to the grid and familiar triangles. Sample one spatial rule and predict its relief. Release the sphere over the separate collision surface.",
+    "review": "Rewritten and natively tested: one static surface, the carried PointBody, and a coarse grid that misses the crests. The room now gives tray, corridor and terrain a supported route.",
+    "carry": "A repeating coordinate invites inspection of its circle construction."
+  },
+  {
+    "map": "WaveFunctions_Unit_Circle",
+    "title": "Projection",
+    "subjects": "Radians, sine/cosine, phase",
+    "primary": "unit_circle_advanced",
+    "summary": "Open the circular sampler used earlier. Move the same point around a circle, project its coordinates and predict the quarter turns.",
+    "review": "Rewritten and natively tested: one centred circle function, shared angle and a graph with declared axes. Seven exhibits retained in an open gallery with a reachable angle control.",
+    "carry": "A local oscillator can now be coupled to its neighbours."
+  },
+  {
+    "map": "WaveFunctions_3D_Wave_Propagation",
+    "title": "Neighbour",
+    "subjects": "Local coupling, old/next arrays",
+    "primary": "coupled_oscillator_lattice",
+    "summary": "Carry PointBody and LineSkin into nine vertical oscillators. Raise the centre. Read one shared old state before committing the next; compare coupled and independent motion, then test seven points and half the initial height.",
+    "review": "Rewritten and natively tested: 28 printed-code checks, three rejected faults and 54 actual-museum checks. All five exhibits retained in separate bays. Distinguish neighbour coupling from the prescribed radial field.",
+    "carry": "A rule can let one oscillation affect another."
+  },
+  {
+    "map": "WaveFunctions_Effect_Sound",
+    "title": "Modulation",
+    "subjects": "Phase modulation, time units, sampling",
+    "primary": "DualBallFMController",
+    "summary": "Use one sine inside another\u2019s phase. Retain a reference, change depth, predict a sample and listen through a declared encoder.",
+    "review": "Preserve the accurate phase-modulation distinction despite the artifact\u2019s FM name.",
+    "carry": "The same periodic coordinates can also build a surface."
+  },
+  {
+    "map": "Wavefunctions_Bernini",
+    "title": "Twist",
+    "subjects": "Ring profiles, phase through height",
+    "primary": "bernini_columns",
+    "summary": "Return to Primitives\u2019 rings and connectivity. Rotate successive profiles by different angles. Stop whole-object rotation and inspect the twist that remains.",
+    "review": "Replace the old breathing-mesh framing with the installed shaft\u2019s construction.",
+    "carry": "Distinguish a stored spatial pattern from events arriving in time."
+  },
+  {
+    "map": "WaveFunctions_John_Cage",
+    "title": "Event",
+    "subjects": "Bounded choice, event list, replay",
+    "primary": "john_cage_tech_noir",
+    "summary": "Compose from a declared vocabulary. Keep chosen events and their times, then replay the record before asking for another.",
+    "review": "Current reflection is useful. Tutorial needs a bounded score; do not claim a microphone or a Cage score.",
+    "carry": "A strike supplies an event whose response has its own age."
+  },
+  {
+    "map": "WaveFunctions_AirMusic",
+    "title": "Voice",
+    "subjects": "Independent onset, age, decay",
+    "primary": "resonating_metallophone",
+    "summary": "Strike one voice, then another. Keep each voice\u2019s start time. Compare overlapping voices with restriking a voice whose buffer restarts.",
+    "review": "Keep the distinction between a synthesised response and a physical bar model.",
+    "carry": "Sampling and timing also determine a route a body can use."
+  },
+  {
+    "map": "Wavefunctions_Sky_Stairs",
+    "title": "Footing",
+    "subjects": "Circular placement, rise, usable width",
+    "primary": "sine_cylinder_staircase",
+    "summary": "Reuse the circular sampler to place a few treads. Compare centre spacing with inner and outer edges. Inspect the collision that actually supports the visitor.",
+    "review": "Remove archived alternative-stair material from the tutorial when rewriting.",
+    "carry": "A regular rule can still give unequal conditions across its extent."
+  },
+  {
+    "map": "WaveFunctions_TrigWalkingPath",
+    "title": "Beat",
+    "subjects": "Frequency difference, signed sum, gain",
+    "primary": "beat_frequency_demo",
+    "summary": "Sample two close frequencies at shared times. Keep A, B and their raw sum; predict reinforcement before normalising any drawing.",
+    "review": "Separate the beat exhibit from the finite circulating path; remove the obsolete endless-path proposal.",
+    "carry": "Two components become a finite recipe of many components."
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "title": "Compose",
+    "subjects": "Harmonic coefficients, shared phase, finite sum",
+    "primary": "additive_wave_demo",
+    "summary": "Store five coefficients and evaluate every term at one time. Retain another recipe and compare. State what the restricted coefficient set cannot express.",
+    "review": "Keep room-memory listening as another encounter, not a hidden audio dependency of the five-term lesson.",
+    "carry": "Carry explicit recipes and limits into the next sequence."
+  }
+]

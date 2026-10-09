@@ -1,0 +1,38 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored Color_Walls grid present",
+      "passed": true
+    },
+    {
+      "name": "office and the two colour benches remain in the museum",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-glass",
+      "passed": true
+    },
+    {
+      "name": "baseline records the former forty-pane office",
+      "passed": true
+    },
+    {
+      "name": "inspection completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "office_world": [
+      23.5,
+      0.0,
+      20.5
+    ]
+  },
+  "passed": true,
+  "scope": "Actual isolated production museum and ordinary controller; supplied pointer events. Native interior cameras. No headset or learner trial."
+}

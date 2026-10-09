@@ -1,0 +1,266 @@
+{
+	"approaches": [
+		{
+			"clear": true,
+			"direction": [
+				-0.0000000874227765734759,
+				0.0,
+				-1.0
+			],
+			"passed": true,
+			"supported": true,
+			"travel": 1.0
+		},
+		{
+			"clear": true,
+			"direction": [
+				-1.0,
+				0.0,
+				0.000000131134157754786
+			],
+			"passed": false,
+			"supported": true,
+			"travel": 0.3125
+		},
+		{
+			"clear": true,
+			"direction": [
+				1.0,
+				0.0,
+				-0.0000000437113882867379
+			],
+			"passed": true,
+			"supported": true,
+			"travel": 1.0
+		}
+	],
+	"artifact_position": [
+		4.5,
+		0.708000004291534,
+		11.5
+	],
+	"checks": [
+		{
+			"message": "Requested polyhedra hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored artifact found",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits beside the exhibit",
+			"passed": true
+		},
+		{
+			"message": "A supported clear final metre reaches the object",
+			"passed": true
+		},
+		{
+			"message": "base_back_left in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "base_back_left within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "base_back_left has a clear native grab ray",
+			"passed": true
+		},
+		{
+			"message": "base_back_right in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "base_back_right within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "base_back_right has a clear native grab ray",
+			"passed": true
+		},
+		{
+			"message": "base_front_right in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "base_front_right within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "base_front_right has a clear native grab ray",
+			"passed": true
+		},
+		{
+			"message": "base_front_left in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "base_front_left within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "base_front_left has a clear native grab ray",
+			"passed": true
+		},
+		{
+			"message": "apex in direct-grab working height band",
+			"passed": true
+		},
+		{
+			"message": "apex within the bounded specimen footprint",
+			"passed": true
+		},
+		{
+			"message": "apex has a clear native grab ray",
+			"passed": true
+		},
+		{
+			"message": "base_back_left has a supported clear near-grab pose within 0.70 m",
+			"passed": true
+		},
+		{
+			"message": "base_back_right has a supported clear near-grab pose within 0.70 m",
+			"passed": true
+		},
+		{
+			"message": "base_front_right has a supported clear near-grab pose within 0.70 m",
+			"passed": true
+		},
+		{
+			"message": "base_front_left has a supported clear near-grab pose within 0.70 m",
+			"passed": true
+		},
+		{
+			"message": "apex has a supported clear near-grab pose within 0.70 m",
+			"passed": true
+		},
+		{
+			"message": "Reset retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "Reset inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "Reset within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "Reset has unobstructed interaction ray from operating pose",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.708000101149082,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/base_back_left",
+			"horizontal_distance": 0.996243298053741,
+			"label": "base_back_left"
+		},
+		{
+			"clear_ray": true,
+			"height": 0.708000101149082,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/base_back_right",
+			"horizontal_distance": 0.996243298053741,
+			"label": "base_back_right"
+		},
+		{
+			"clear_ray": true,
+			"height": 0.708000101149082,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/base_front_right",
+			"horizontal_distance": 0.460977286100388,
+			"label": "base_front_right"
+		},
+		{
+			"clear_ray": true,
+			"height": 0.708000101149082,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/base_front_left",
+			"horizontal_distance": 0.460977286100388,
+			"label": "base_front_left"
+		},
+		{
+			"clear_ray": true,
+			"height": 1.50800011307001,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/apex",
+			"horizontal_distance": 0.650000095367432,
+			"label": "apex"
+		},
+		{
+			"clear_ray": true,
+			"height": 0.934275902807713,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/pyramid_edit/RecoveryPanel/ResetButton/InteractableAreaButton",
+			"horizontal_distance": 0.585789799690247,
+			"label": "Reset",
+			"position": [
+				3.95000004768372,
+				0.934275805950165,
+				11.0516176223755
+			]
+		}
+	],
+	"failures": [],
+	"floor": {
+		"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+		"height": -0.0000000968575477600098
+	},
+	"grab_poses": [
+		{
+			"feet": [
+				5.15000009536743,
+				-0.0000000968575477600098,
+				11.5
+			],
+			"handle": "base_back_left",
+			"horizontal_distance": 0.460977286100388
+		},
+		{
+			"feet": [
+				3.84999990463257,
+				-0.0000000968575477600098,
+				11.5
+			],
+			"handle": "base_back_right",
+			"horizontal_distance": 0.460977286100388
+		},
+		{
+			"feet": [
+				4.5,
+				-0.0000000968575477600098,
+				10.8500003814697
+			],
+			"handle": "base_front_right",
+			"horizontal_distance": 0.460977286100388
+		},
+		{
+			"feet": [
+				4.5,
+				-0.0000000968575477600098,
+				10.8500003814697
+			],
+			"handle": "base_front_left",
+			"horizontal_distance": 0.460977286100388
+		},
+		{
+			"feet": [
+				4.5,
+				-0.0000000968575477600098,
+				10.8500003814697
+			],
+			"handle": "apex",
+			"horizontal_distance": 0.650000095367432
+		}
+	],
+	"passed": true,
+	"room": "Primitives_Polythedra",
+	"scope": "Actual authored hall; static reach, approach and native grab geometry. Desktop capture, no headset test.",
+	"shots": [
+		"reading.png",
+		"controls.png",
+		"encounter.png"
+	],
+	"standing_obstacles": []
+}

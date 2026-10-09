@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "both existing studies are placed",
+      "passed": true
+    },
+    {
+      "name": "six wall fields and shared pattern",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: wall-fields",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: closed-pattern",
+      "passed": true
+    },
+    {
+      "name": "existing pattern controls found",
+      "passed": true
+    },
+    {
+      "name": "EXCEPTION updates the actual enclosure image",
+      "passed": true
+    },
+    {
+      "name": "image change leaves the boundary fixed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: changed-pattern",
+      "passed": true
+    },
+    {
+      "name": "changed image still stops ordinary walking",
+      "passed": true
+    },
+    {
+      "name": "visitor retreats clear of the hinge",
+      "passed": true
+    },
+    {
+      "name": "wall turns gradually with its collision body",
+      "passed": true
+    },
+    {
+      "name": "wall completes a quarter turn",
+      "passed": true
+    },
+    {
+      "name": "turning the surface preserves the image",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: opened-wall",
+      "passed": true
+    },
+    {
+      "name": "ordinary walking reaches the exterior landing",
+      "passed": true
+    },
+    {
+      "name": "landing supports the visitor at hall floor height",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: outside-return",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: plain-reverse",
+      "passed": true
+    },
+    {
+      "name": "the outside landing has a finite floor",
+      "passed": true
+    },
+    {
+      "name": "occupied landing prevents closure",
+      "passed": true
+    },
+    {
+      "name": "ordinary walking returns inside",
+      "passed": true
+    },
+    {
+      "name": "wall closes after the visitor returns",
+      "passed": true
+    },
+    {
+      "name": "image returns to its original pixels",
+      "passed": true
+    },
+    {
+      "name": "encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "closed_walk_end": [
+      -0.331342697143555,
+      -0.000128743296954781,
+      1.0
+    ],
+    "commons/artifacts/regularity/room_tools.gd": "ef8fdf5be340f3f29f2182a01c0a1860a0a8c5aa5db5803769677b2e082d8c67",
+    "commons/artifacts/regularity/tiling_principles.gd": "d1b64b53995d708f4f5721044ae074e5d853d8d1548709d4dcf6ad80e37bd155",
+    "commons/artifacts/regularity/wall_exception.gd": "35865b92fc8707332409377d82fff8e95bc150935b4c7a757b060c6c666ff4d3",
+    "landing_walk_end": [
+      3.25494575500488,
+      0.000810206867754459,
+      1.00031471252441
+    ],
+    "tools/probes/array_entered_address.gd": "042807a5ca9caa7ea2930faae971b1eaf5cf0e30c91065c13b9ab3a01a45e32a",
+    "wall_world": [
+      20.5,
+      0.0,
+      25.5
+    ]
+  },
+  "passed": true,
+  "room": "Tutorial_Tiling_Walls",
+  "scope": "Isolated production museum; supplied pointer events and key input through the ordinary museum controller. Selected walking approaches, return route and camera positions; no headset or learner claim. The remotely supplied control events test callbacks, not physical reach."
+}

@@ -1,0 +1,124 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid exists",
+      "passed": true
+    },
+    {
+      "name": "production spray installation exists",
+      "passed": true
+    },
+    {
+      "name": "slower sweep lays down more pigment",
+      "passed": true
+    },
+    {
+      "name": "fast stroke remains continuous between physics samples",
+      "passed": true
+    },
+    {
+      "name": "ordinary moving passes do not start runs",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: speed-and-coverage",
+      "passed": true
+    },
+    {
+      "name": "overspray includes visible pigment specks and uncovered gaps",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: aerosol-edge",
+      "passed": true
+    },
+    {
+      "name": "stationary close spray overloads the local paint reservoir",
+      "passed": true
+    },
+    {
+      "name": "held valve depresses and produces local hiss",
+      "passed": true
+    },
+    {
+      "name": "run pigment extends downward beyond the spray footprint",
+      "passed": true
+    },
+    {
+      "name": "release stops new deposits and hiss while existing paint can run",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held-too-long",
+      "passed": true
+    },
+    {
+      "name": "runs come to rest rather than falling forever",
+      "passed": true
+    },
+    {
+      "name": "release leaves the space between separate gestures clean",
+      "passed": true
+    },
+    {
+      "name": "empty-space spray emits and hisses without painting",
+      "passed": true
+    },
+    {
+      "name": "release closes the valve in empty space",
+      "passed": true
+    },
+    {
+      "name": "reset clears wet-load history as well as pigment",
+      "passed": true
+    },
+    {
+      "name": "interpolated rays respect the intervening obstacle",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shared-aerosol",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: spray-close-up",
+      "passed": true
+    },
+    {
+      "name": "render stamp pool stays bounded",
+      "passed": true
+    },
+    {
+      "name": "wet-load grid and runs stay bounded",
+      "passed": true
+    },
+    {
+      "name": "aerosol experiment completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "overspray": {
+      "gap_pixels": 726,
+      "speck_pixels": 2221
+    },
+    "run": {
+      "above": 0.0,
+      "below": 0.0303237565006165,
+      "started": 1
+    },
+    "sweep": {
+      "fast": 0.0841001673667193,
+      "gaps": 0,
+      "slow": 0.201032344212348
+    }
+  },
+  "passed": true,
+  "room": "Color_Paint",
+  "scope": "Native museum, actual GPU pigment and can raycasts with supplied hand inputs. Desktop carry regression checked separately. Tracked trigger pressure, headset performance and perceived sound remain unverified."
+}

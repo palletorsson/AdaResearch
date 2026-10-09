@@ -1,0 +1,39 @@
+--- before/commons/maps/Color_Rainbow/technical.md
++++ commons/maps/Color_Rainbow/technical.md
+@@ -11,3 +11,11 @@
+ A canonical ControlPanel provides RE-DIVIDE and CELEBRATE. A welcome Area3D recognises em_walker, player, player_body and vr_player groups. Its physics overlap calls the same celebration function. Confetti uses one 96-instance MultiMesh, with a 3.5-second lifetime; another activation restarts that pool. There are no new scores, unlocks or global NextCube listeners.
+ 
+ The museum probe exercises the actual button signals, all four generated partitions, fixed width and route geometry, bounded/repeatable confetti, physics overlap with the museum walker, and a level-route sweep using its capsule dimensions. Tracked-hand button use and headset comfort remain untested. See field_notes.md for the run and capture.
++
++## Native comparison, 23 September 2026
++
++The shared book figure shows the four generated partitions from one camera in the actual museum. The generator's 5.6-unit band thickness is local: scale 0.23 makes it approximately 1.288 metres in this hall, while the inner opening spans 6.9 metres. These values were measured from the world-transformed mesh. Changing the band count preserves both dimensions; the fourteen step/paver transforms stay fixed as their colours change.
++
++The focused run passes 40 assertions. Supplied pressed/released pointer events operate the actual RE-DIVIDE and CELEBRATE buttons. The ordinary museum controller walks the level centre path into the welcome volume, beneath the arch and back through the welcome volume. Both passages trigger the existing celebration. The confetti reuses 96 instances and expires after its configured lifetime. Static comparison captures suppress confetti, while a separate native view retains it. No production source or placement changed.
++
++Evidence and native views: `doc/book/iterations/2026-09-23-rainbow-room-for-another/`. The under-arch camera uses the reached walker position plus 1.65 metres. Supplied desktop input and selected camera views do not establish tracked-hand reach, headset comfort, learner experience or performance.
+--- before/commons/maps/Color_Rainbow/field_notes.md
++++ commons/maps/Color_Rainbow/field_notes.md
+@@ -15,3 +15,11 @@
+ The new final.md begins with colour divisions and celebration, then exposes the running thickness and HSV code before asking what this authored rainbow leaves out. The next manuscript encounter is Pillar's spatial sampling.
+ 
+ 93 desktop museum checks pass: actual button signals, generated band counts, unchanged geometry, arrival physics overlap, bounded repeatable confetti and an unobstructed level route. Evidence: `ada_run/probe_rainbow_celebration.json` and `ada_run/rainbow_celebration_museum.png`. Headset comfort and tracked-controller interaction remain untested. The final run retains pre-existing unknown-UID and catalyst viewport warnings.
++
++## 2026-09-23 — Room for another colour
++
++Kept the existing celebration, primary artifact, controls and level path. The chapter already carries the encounter's pleasure and its particular limit: four authored arrangements can suggest further choices without supplying them. Corrected its one spatial measurement claim: the 5.6-unit generator thickness is scaled to 1.288 metres here. Added a shared native four-arrangement illustration; all other earlier prose, code and anchors remain.
++
++40 focused checks pass in the isolated production museum: real pointer callbacks, four band counts and fixed world-space dimensions, unchanged route geometry, reusable/confined confetti, ordinary-controller entry, passage beneath the arch and return. Native captures include the celebration, banners, dressed mushrooms and the view from the reached body position. No production changes, live museum restart, live save/bake replacement or frozen book/audio rebuild. No headset, learner or performance claim.
++
++Review: `doc/book/iterations/2026-09-23-rainbow-room-for-another/index.html`. Next: Color_Pillar, where a colour field has values between the bodies that sample it.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2586,7 +2586,7 @@
+       "map_sha256": "86a0d12b4a69ed9b24271deff703d302475c8e1f5dd8e1ed04c9eb43ae9e2e4c",
+       "learner_verified": false,
+       "text_path": "commons/maps/Color_Rainbow/final.md",
+-      "text_sha256": "8ff53b35ddc4040f1176a05444ec7dc196cf7c9c5ace5174e070836be32e875a"
++      "text_sha256": "2294d321e44b8cccaba9f5e1d680f7a122902fdf842b05774d0a090999780a3e"
+     },
+     "Chamber_Color": {
+       "primary_tokens": [

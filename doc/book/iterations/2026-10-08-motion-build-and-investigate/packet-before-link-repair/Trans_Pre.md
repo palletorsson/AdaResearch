@@ -1,0 +1,104 @@
+# Move, turn, change size
+
+**Learning elements**
+
+- Translation: position
+- Rotation: orientation
+- Scale: size
+- Animation: changing a transform over time
+- Pickup: overlap detection and a signal
+
+The cubes in Trans_Pre introduce one change at a time: rising, turning, then growing and shrinking. Here we use a single cube mesh. Its `MeshInstance3D` gives it a position, rotation and scale. Change those properties to transform the whole object.
+
+## One cube
+
+The Endless Museum supplies the room, player, camera and light. Attach this script to an empty `Node3D` named `TransformStudy` beside the installed examples. Its origin sits at floor level, with zero rotation and unit scale. Coordinates below are local to that study.
+
+This is the complete `lesson.gd`. It needs no companion scripts.
+
+<!-- student-code:lesson.gd -->
+```gdscript
+extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(0, 1, 0)
+var turn_degrees := 0.0
+var size_factor := 1.0
+var rise := 0.0
+var duration := 2.0
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(duration > 0.0 and size_factor > 0.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position = start
+    cube.rotation_degrees.y = turn_degrees
+    cube.scale = Vector3.ONE * size_factor
+
+    var sensor := Area3D.new()
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    cube.add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    hitbox.shape = BoxShape3D.new()
+    sensor.add_child(hitbox)
+    sensor.body_entered.connect(_on_body_entered)
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    var t: float = minf(elapsed / duration, 1.0)
+    cube.position = start + Vector3.UP * rise * t
+
+func _on_body_entered(body: Node3D) -> void:
+    if body.is_in_group("em_walker") or body.is_in_group("player_body"):
+        print("Collected")
+        queue_free()
+```
+
+`MeshInstance3D` displays the shape; `BoxMesh.new()` supplies a one-metre cube centred on its origin. `add_child(cube)` places it in the scene. We transform that one node. There are no separate faces to manage.
+
+The cube starts one metre above the study origin. With `rise` at zero, it remains still.
+
+## Translate, rotate, scale
+
+Edit one value on its existing `var` line, then run. Restore it before trying the next change.
+
+| Value | Result |
+| --- | --- |
+| `start = Vector3(1, 1, 0)` | Translate one metre along X. Facing and size stay fixed. |
+| `turn_degrees = 45.0` | Rotate 45 degrees around Y, through the cube's centre. Its size stays fixed. |
+| `size_factor = 1.5` | Scale all three dimensions to 1.5 times their size. The centre stays fixed. |
+
+`position`, `rotation_degrees` and `scale` belong to the instance. The `BoxMesh` still describes the same cube. `Vector3.ONE * size_factor` applies one factor equally along X, Y and Z, preserving its proportions.
+
+## Make the translation move
+
+Restore the starting values, then set `rise` to `1.0`. The cube travels one metre upward in two seconds and stops.
+
+`elapsed += delta` counts seconds. Dividing by `duration` gives the fraction of the journey completed; `minf(..., 1.0)` stops that fraction at one. The final line assigns **start + upward displacement × fraction**. At one second, the cube has risen half a metre.
+
+Set `duration` to `4.0`. The destination stays the same; reaching it takes twice as long. The assertion at the start requires a positive duration and size.
+
+Now combine what you know: keep the rise, set the angle to 45 degrees and the scale factor to 1.5. The larger, turned cube moves upward. Its facing and size remain fixed during that journey. Continuous turning and pulsing develop the same three properties further.
+
+## Try another change
+
+Choose a new angle, size or destination. Predict the result before running it. Change only one property first; then combine two.
+
+## Walk into it: collect the cube
+
+Restore `rise` to zero so the cube stays within reach. Walk into it. It disappears, and `Collected` appears in Output.
+
+The script gives the cube an `Area3D` containing a `CollisionShape3D`. `BoxShape3D` supplies the one-metre detection box. It follows the cube's position, rotation and scale because the sensor is a child of the cube. This area detects overlap; it does not block your movement.
+
+When a physics body enters, `body_entered` emits a **signal**. The `connect` line sends that event to `_on_body_entered(body)`. This function checks that the entering body belongs to the player, then `queue_free()` removes this study and its cube at the end of the frame. An ordinary object entering the area does not collect it.
+
+The museum supplies two player arrangements: the desktop walker uses layer 1 and group `em_walker`; the XR body uses layer 20 and group `player_body`. The sensor's mask listens to those layers. The group check distinguishes the player from other bodies on layer 1. Those names connect this example to the existing museum; we do not rebuild the player here.
+
+Try moving the cube sideways and walking through its former position. Only its new position should collect it. Translation, rotation and scale now affect where an interaction can happen.
+
+This small pickup prints a confirmation and disappears. The installed pickup's score, sound and collection flourish can be added later. Carry **translate → rotate → scale → detect an overlap → collect** into the next hall.
+
+[Working code and native checks](../../../doc/book/iterations/2026-10-06-trans-pre-three-operations/index.html)

@@ -1,0 +1,361 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "two metres of approach space added",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 0",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 1",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 2",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 3",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 4",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 5",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 6",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 7",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 8",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 9",
+      "passed": true
+    },
+    {
+      "name": "old row retained: structure 10",
+      "passed": true
+    },
+    {
+      "name": "new rows match purpose: structure",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 0",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 1",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 2",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 3",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 4",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 5",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 6",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 7",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 8",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 9",
+      "passed": true
+    },
+    {
+      "name": "old row retained: utilities 10",
+      "passed": true
+    },
+    {
+      "name": "new rows match purpose: utilities",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 0",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 1",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 2",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 3",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 4",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 5",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 6",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 7",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 8",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 9",
+      "passed": true
+    },
+    {
+      "name": "old row retained: interactables 10",
+      "passed": true
+    },
+    {
+      "name": "new rows match purpose: interactables",
+      "passed": true
+    },
+    {
+      "name": "all other top-level map data preserved",
+      "passed": true
+    },
+    {
+      "name": "all other map info preserved",
+      "passed": true
+    },
+    {
+      "name": "only depth dimension changes",
+      "passed": true
+    },
+    {
+      "name": "museum settings retained except approach clearance",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: commons/resourses/shaders/noiseTorus.gdshader",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: algorithms/randomness/noisetorus/noisetorus.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: algorithms/randomness/noiselayers/noiselayers.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: algorithms/randomness/noiselayers/noiselayers_stage.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: algorithms/randomness/noiselayers/noiselayers.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged file: commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "production methods retained",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _ready",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _torus",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _apply_stray",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _apply_readout",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _is_truthy",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _read_meta_overrides",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: apply_grid_config",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _hash2",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _noise2",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: field_value",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: relief_of",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: colour_of",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _sample_point",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _apply_pair_params",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _place_markers",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _process",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _update_pair_readout",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: toggle_pair_freeze",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: next_sample",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: cycle_amplitude",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: cycle_frequency",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: pair_state",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: toggle_remap",
+      "passed": true
+    },
+    {
+      "name": "only two original prose paragraphs altered",
+      "passed": true
+    },
+    {
+      "name": "code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "book encounter anchors retained",
+      "passed": true
+    },
+    {
+      "name": "entire terrain and closing prose retained",
+      "passed": true
+    },
+    {
+      "name": "every primary role list preserved",
+      "passed": true
+    },
+    {
+      "name": "no role-related core fields changed in Noise One",
+      "passed": true
+    },
+    {
+      "name": "core hash current: final.md",
+      "passed": true
+    },
+    {
+      "name": "core hash current: map_data.json",
+      "passed": true
+    },
+    {
+      "name": "registry records retained",
+      "passed": true
+    },
+    {
+      "name": "only noisetorus description and interpretation changed in registry",
+      "passed": true
+    },
+    {
+      "name": "48 native museum checks pass",
+      "passed": true
+    },
+    {
+      "name": "five walking routes pass",
+      "passed": true
+    },
+    {
+      "name": "two floor rays pass",
+      "passed": true
+    },
+    {
+      "name": "no script/shader compile errors",
+      "passed": true
+    },
+    {
+      "name": "book figure is an unchanged native image",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer."
+  ],
+  "scope": "Private museum snapshot, injected native pointer events and controlled CharacterBody routes; no headset, learner or Quest performance acceptance."
+}

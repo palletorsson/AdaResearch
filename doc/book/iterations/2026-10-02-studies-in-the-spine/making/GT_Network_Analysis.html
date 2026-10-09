@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="3a79659f14fe1d92df33bc895a8dbe12dbb927d942ff300888b6a6554ab5e40e"><title>commons/maps/GT_Network_Analysis/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/GT_Network_Analysis/tutorial.md</p><h1>GT Network Analysis</h1>
+<p>Which node matters most? Degree, betweenness, eigenvector.</p>
+<p>Compute degree centrality.</p>
+<pre><code class="language-gdscript">func degree_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices:
+        c[v] = float(g.degree(v)) / (g.vertices.size() - 1)
+    return c
+</code></pre>
+<p>Normalised by the maximum possible degree. Values in [0, 1].</p>
+<p>Compute betweenness via Brandes.</p>
+<pre><code class="language-gdscript">func betweenness_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices: c[v] = 0.0
+    for s in g.vertices:
+        var dist: Dictionary = {s: 0}
+        var sigma: Dictionary = {s: 1}
+        var pred: Dictionary = {}
+        var queue: Array = [s]
+        var stack: Array = []
+        while not queue.is_empty():
+            var u = queue.pop_front()
+            stack.push_back(u)
+            for w in g.neighbours(u):
+                if not w in dist:
+                    dist[w] = dist[u] + 1
+                    queue.push_back(w)
+                if dist[w] == dist[u] + 1:
+                    sigma[w] = sigma.get(w, 0) + sigma[u]
+                    pred.get_or_add(w, [])
+                    pred[w].append(u)
+        var delta: Dictionary = {}
+        for v in g.vertices: delta[v] = 0.0
+        while not stack.is_empty():
+            var w = stack.pop_back()
+            for u in pred.get(w, []):
+                delta[u] += sigma[u] / float(sigma[w]) * (1 + delta[w])
+            if w != s:
+                c[w] += delta[w]
+    return c
+</code></pre>
+<p>Brandes' algorithm computes betweenness in O(V·(V+E)). Counts shortest paths passing through each vertex.</p>
+<p>Compute eigenvector centrality via power iteration.</p>
+<pre><code class="language-gdscript">func eigenvector_centrality(g: Graph, iterations: int = 50) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices: c[v] = 1.0
+    for _i in iterations:
+        var next: Dictionary = {}
+        for v in g.vertices:
+            next[v] = 0.0
+            for u in g.neighbours(v):
+                next[v] += c[u]
+        var norm: float = 0.0
+        for v in g.vertices: norm += next[v] * next[v]
+        norm = sqrt(norm)
+        if norm &gt; 0:
+            for v in g.vertices: next[v] /= norm
+        c = next
+    return c
+</code></pre>
+<p>Power iteration on the adjacency matrix. Converges to the dominant eigenvector.</p>
+<p>Compute closeness centrality.</p>
+<pre><code class="language-gdscript">func closeness_centrality(g: Graph) -&gt; Dictionary:
+    var c: Dictionary = {}
+    for v in g.vertices:
+        var total: int = 0
+        var distances: Dictionary = bfs_distances(v, g.adjacency_list())
+        for other in distances:
+            total += distances[other]
+        c[v] = 1.0 / total if total &gt; 0 else 0.0
+    return c
+</code></pre>
+<p>Reciprocal of average shortest-path distance. High closeness means short average reach.</p>
+<p>Colour vertices by centrality.</p>
+<pre><code class="language-gdscript">func colour_by_centrality(centrality: Dictionary) -&gt; void:
+    var max_c: float = centrality.values().max()
+    for child in get_children():
+        if child.has_meta(&quot;vertex_id&quot;):
+            var v = child.get_meta(&quot;vertex_id&quot;)
+            var t: float = centrality[v] / max_c if max_c &gt; 0 else 0.0
+            var mat: StandardMaterial3D = child.material_override
+            mat.albedo_color = Color.BLUE.lerp(Color.RED, t)
+</code></pre>
+<p>Blue for low centrality, red for high. Visual ranking of importance.</p>
+<p>You can now compute degree, betweenness, eigenvector, and closeness centralities, and colour the graph by any of them. GT_Connectivity extends into directed graphs.</p>
+<p>Detect a central node.</p>
+<pre><code class="language-gdscript">func most_central(centrality: Dictionary):
+    var best = null
+    var best_score: float = -INF
+    for v in centrality:
+        if centrality[v] &gt; best_score:
+            best_score = centrality[v]
+            best = v
+    return best
+</code></pre>
+<p>Return the vertex with highest centrality. Useful as a graph's designated hub.</p>
+<!-- study-spine:evidence_network -->
+
+<h2>Return: A relation needs a record</h2>
+<p>Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses graph, line, array. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>network</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html">Study and making notes</a>. The display stays fixed while its data, words or images change. RESET returns the original comparison.</p>
+<!-- study-edit:evidence_network -->
+
+<h3>One source change: A relation needs a record</h3>
+<p>In RECORDS, remove this final entry. Predict whose incoming and outgoing counts fall by one. FILTER to payment, then change LAYOUT: a different position must not create a different count. These are fictional source records, not historical evidence. The curved-line renderer is supplied.</p>
+<pre><code class="language-gdscript">[3,7,&quot;payment&quot;,&quot;04-16&quot;,&quot;P04: Office pays Maintenance 1 unit.&quot;]
+</code></pre>
+<p>Source: <code>commons/artifacts/spine_studies/evidence_network.gd</code>. Use the prepared scene to run and compare.</p>
+<!-- study-reference:evidence_network -->
+
+<h3>Reference and scope</h3>
+<p>Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.</p>
+<p><a href="https://whitney.org/artists/7340">Whitney Museum: Mark Lombardi</a>.</p></body></html>

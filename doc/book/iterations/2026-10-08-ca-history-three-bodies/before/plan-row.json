@@ -1,0 +1,25 @@
+{
+  "id": "CA_GameOfLife",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A retained history with two explicit receivers.",
+  "change": "Copy completed Rule 30 rows into history and map generation/site addresses to both a drawing and supplied occupied pieces.",
+  "dependsOn": [
+    "CA_Introduction",
+    "Random_Entropy",
+    "Noise_Voxel"
+  ],
+  "reuses": "A row engine.; A copied record must not alias a changing state.; Occupancy and its receiver have different responsibilities.",
+  "given": "desk display; collision tiles; screen geometry",
+  "later": "Do not explain every visible artifact. The current primary is a one-dimensional Rule 30 history; actual Life follows in CA_BeyondBinary. The learner receiver connection is proposed.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A retained history with two explicit receivers.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The current primary is a Rule 30 history, not Conway Life; the file is an encounter guide rather than the proposed snapshot-and-receiver construction.",
+  "baseline": {
+    "tutorial": "38a536f0362c9ff0bf4622aa37a7c42626a9ce5ba2885f252885c545264dd00d",
+    "choice": "8e6ec6baa06ccf6ed44de7c7082e5373668b46b5a0b79ca180f0da5d8ffae018"
+  },
+  "summary": "Return to the inspected Rule 30 row engine and copy each completed row into a separate history. Map generation and site indices to a drawing and supplied occupied pieces; change an old display without altering the current generation. Carry independently retained history and two receivers. The title is misleading here: do not teach Conway's Life until the following hall's actual binary B3/S23 operation."
+}

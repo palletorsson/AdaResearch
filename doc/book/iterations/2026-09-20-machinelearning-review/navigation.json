@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "message": "eight halls and a plan owner",
+      "ok": true
+    },
+    {
+      "message": "select ML_Evolution",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Evolution",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Evolution",
+      "ok": true
+    },
+    {
+      "message": "select ML_Gradient_Landscape",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Gradient_Landscape",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Gradient_Landscape",
+      "ok": true
+    },
+    {
+      "message": "select ML_Classification",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Classification",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Classification",
+      "ok": true
+    },
+    {
+      "message": "select ML_Neural_Networks",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Neural_Networks",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Neural_Networks",
+      "ok": true
+    },
+    {
+      "message": "select ML_Perception",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Perception",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Perception",
+      "ok": true
+    },
+    {
+      "message": "select ML_Sequence_Memory",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Sequence_Memory",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Sequence_Memory",
+      "ok": true
+    },
+    {
+      "message": "select ML_Generative",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Generative",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Generative",
+      "ok": true
+    },
+    {
+      "message": "select ML_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "owner for ML_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "advance from ML_Synthesis",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "route": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

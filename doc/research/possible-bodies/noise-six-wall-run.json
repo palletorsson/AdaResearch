@@ -1,0 +1,24 @@
+{
+  "started": "2026-09-13T12:52:11+02:00",
+  "finished": "2026-09-13T12:52:37+02:00",
+  "pid": 26032,
+  "exit": 0,
+  "checks": 39,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/wall_probe_base.gd": "81504c2d91868404fc46e8b9272b2461db58ec5ad434be19d6c3de4205f12e07",
+    "ada_run/wall_acceptance.gd": "94b8c8ff37d6888f3d0abc9c67316cc3122bc9f43e6b4454d1405e116ec66320",
+    "commons/maps/Noise_6_Wall/map_data.json": "3155fbd8215c2091b74245b80fc48aca8cfbaa7a7823b33bf1550d045f079cf0",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "algorithms/randomness/shadernoisespace/noiseroom.gd": "d246d74c2071242b77f3f40e144c6443eba5e90549b46c461284a855f3aa4dc7",
+    "algorithms/randomness/shadernoisespace/noiseroom.tscn": "51c68bad4569504b4fe336ccf91ef66765c83181d7e8ea3bd3f3447bca2d66c0",
+    "algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader": "9a40a1531b39b28e860193e4af60524e7df4fb96e054911639fc88fd0a602be2",
+    "algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader": "4732a1bf57164490f9216cfc566bc7b0dd9cc3ca590a4c9e5e86c570a119aade",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

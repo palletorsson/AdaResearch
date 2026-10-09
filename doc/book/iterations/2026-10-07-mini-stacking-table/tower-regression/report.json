@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "tower: constructed with finite bodies and a reset",
+    "tower: tall brick stack initially supported",
+    "tower: removed key stays outside the stack",
+    "tower: removing the bottom brick causes real collapse",
+    "tower: collapse stays in bounds without recovery",
+    "tower: finite motion",
+    "tower: reset restores original transforms",
+    "tower: reset survives the next physics frames"
+  ],
+  "failures": [],
+  "godot_version": "4.6-stable (official)",
+  "measurements": {
+    "tower_recovered": 0,
+    "tower_top": [
+      5.34285831451416,
+      0.193873077630997
+    ]
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "physics_server": "PhysicsServer3D",
+  "scope": "Real Jolt Physics bodies, contact, joints and force integration. Simulated hand/receiver inputs; no headset claim."
+}

@@ -1,0 +1,2314 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          9.17000007629395,
+          0.123787596821785,
+          7.47000074386597
+        ],
+        "min": [
+          4.8299994468689,
+          -0.00100006267894059,
+          4.52999925613403
+        ],
+        "size": [
+          4.34000062942505,
+          0.124787658452988,
+          2.94000148773193
+        ]
+      },
+      "lookup": "pollock_painting_in_3d",
+      "position": [
+        7.0,
+        0.0,
+        6.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          4.4850001335144,
+          1.77999985218048,
+          12.1199998855591
+        ],
+        "min": [
+          3.32100009918213,
+          -0.379999995231628,
+          10.3699998855591
+        ],
+        "size": [
+          1.16400003433228,
+          2.15999984741211,
+          1.75
+        ]
+      },
+      "lookup": "monte_carlo_dartboard",
+      "position": [
+        4.0,
+        0.0,
+        12.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          11.4665260314941,
+          2.1425998210907,
+          16.4671649932861
+        ],
+        "min": [
+          9.24597454071045,
+          0.157399982213974,
+          13.5328330993652
+        ],
+        "size": [
+          2.22055149078369,
+          1.9851998090744,
+          2.9343318939209
+        ]
+      },
+      "lookup": "pipe_dream",
+      "position": [
+        10.0,
+        1.14999997615814,
+        15.0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          5.57800006866455,
+          2.24399995803833,
+          21.1550884246826
+        ],
+        "min": [
+          4.36968994140625,
+          0.159772858023643,
+          20.0
+        ],
+        "size": [
+          1.2083101272583,
+          2.08422708511353,
+          1.15508842468262
+        ]
+      },
+      "lookup": "extreme_randomness",
+      "position": [
+        5.0,
+        1.5,
+        20.0
+      ],
+      "scale": [
+        0.200000002980232,
+        0.200000002980232,
+        0.200000002980232
+      ],
+      "yaw": -179.999984741211
+    }
+  ],
+  "checks": [
+    {
+      "check": "pollock_painting_in_3d is present exactly once: 1",
+      "passed": true
+    },
+    {
+      "check": "monte_carlo_dartboard is present exactly once: 1",
+      "passed": true
+    },
+    {
+      "check": "pipe_dream is present exactly once: 1",
+      "passed": true
+    },
+    {
+      "check": "extreme_randomness is present exactly once: 1",
+      "passed": true
+    },
+    {
+      "check": "Pollock uses its original floor support",
+      "passed": true
+    },
+    {
+      "check": "Pollock canvas sprite is visible",
+      "passed": true
+    },
+    {
+      "check": "Pollock has a populated image backing its live texture",
+      "passed": true
+    },
+    {
+      "check": "Monte Carlo has a compact museum console",
+      "passed": true
+    },
+    {
+      "check": "Btn_0 is within 0.8 m of standing mark",
+      "passed": true
+    },
+    {
+      "check": "Btn_0 is at hand height",
+      "passed": true
+    },
+    {
+      "check": "Btn_1 is within 0.8 m of standing mark",
+      "passed": true
+    },
+    {
+      "check": "Btn_1 is at hand height",
+      "passed": true
+    },
+    {
+      "check": "Btn_2 is within 0.8 m of standing mark",
+      "passed": true
+    },
+    {
+      "check": "Btn_2 is at hand height",
+      "passed": true
+    },
+    {
+      "check": "Console retains exactly three buttons",
+      "passed": true
+    },
+    {
+      "check": "AUTO pauses generated darts",
+      "passed": true
+    },
+    {
+      "check": "RESET clears both counters through original signal",
+      "passed": true
+    },
+    {
+      "check": "THROW adds one sample through original signal",
+      "passed": true
+    },
+    {
+      "check": "AUTO resumes generated darts",
+      "passed": true
+    },
+    {
+      "check": "AUTO advances sample count",
+      "passed": true
+    },
+    {
+      "check": "RESET still works after AUTO",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (7.0, 0.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (7.0, 24.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (3.0, 6.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (11.0, 6.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (1.0, 12.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (13.0, 12.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (7.0, 15.0)",
+      "passed": true
+    },
+    {
+      "check": "Entrance, exit or bypass floor supported at (10.0, 20.0)",
+      "passed": true
+    },
+    {
+      "check": "Museum arrival camera stays at the requested 1.7 m eye position",
+      "passed": true
+    },
+    {
+      "check": "Saved museum arrival screenshot",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=0",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=0",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=0",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=0",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=1",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=1",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=1",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=1",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=2",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=2",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=2",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=2",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=3",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=3",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=3",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=3",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=4",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=4",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=4",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=4",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=5",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=5",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=5",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=5",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=6",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=6",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=6",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=6",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=7",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=7",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=7",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=7",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=8",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=8",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=8",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=8",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=9",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=9",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=9",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=9",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=10",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=10",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=10",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=10",
+      "passed": true
+    },
+    {
+      "check": "Pollock live image adds paint while the museum runs",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=11",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=11",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=11",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=11",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=12",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=12",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=12",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=12",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=13",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=13",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=13",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=13",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=14",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=14",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=14",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=14",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=15",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=15",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=15",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=15",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=16",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=16",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=16",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=16",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=17",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=17",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=17",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=17",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=18",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=18",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=18",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=18",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=19",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=19",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=19",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=19",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 stays in room and above floor at t=20",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pollock_painting_in_3d at t=20",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap monte_carlo_dartboard at t=20",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 2 does not overlap pipe_dream at t=20",
+      "passed": true
+    },
+    {
+      "check": "Pipe reaches its authored 180-segment limit",
+      "passed": true
+    },
+    {
+      "check": "Mature pipe geometry stays above floor and inside its bay",
+      "passed": true
+    },
+    {
+      "check": "Mature pipe bounds fit the scaled authored volume",
+      "passed": true
+    },
+    {
+      "check": "Mature pipe has finite bounds",
+      "passed": true
+    },
+    {
+      "check": "Museum gallery camera stays at the requested 1.7 m eye position",
+      "passed": true
+    },
+    {
+      "check": "Saved museum gallery screenshot",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=21",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=21",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=21",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=21",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=22",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=22",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=22",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=22",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=23",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=23",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=23",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=23",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=24",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=24",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=24",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=24",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=25",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=25",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=25",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=25",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=26",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=26",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=26",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=26",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=27",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=27",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=27",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=27",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 stays in room and above floor at t=28",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pollock_painting_in_3d at t=28",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap monte_carlo_dartboard at t=28",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 3 does not overlap pipe_dream at t=28",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=29",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=29",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=29",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=29",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=30",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=30",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=30",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=30",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=31",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=31",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=31",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=31",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=32",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=32",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=32",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=32",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=33",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=33",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=33",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=33",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=34",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=34",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=34",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=34",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=35",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=35",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=35",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=35",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=36",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=36",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=36",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=36",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 stays in room and above floor at t=37",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pollock_painting_in_3d at t=37",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap monte_carlo_dartboard at t=37",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 4 does not overlap pipe_dream at t=37",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=38",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=38",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=38",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=38",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=39",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=39",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=39",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=39",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=40",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=40",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=40",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=40",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=41",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=41",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=41",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=41",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=42",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=42",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=42",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=42",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=43",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=43",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=43",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=43",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=44",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=44",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=44",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=44",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 stays in room and above floor at t=45",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pollock_painting_in_3d at t=45",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap monte_carlo_dartboard at t=45",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 0 does not overlap pipe_dream at t=45",
+      "passed": true
+    },
+    {
+      "check": "Museum painting camera stays at the requested 1.7 m eye position",
+      "passed": true
+    },
+    {
+      "check": "Saved museum painting screenshot",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=46",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=46",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=46",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=46",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=47",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=47",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=47",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=47",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=48",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=48",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=48",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=48",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=49",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=49",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=49",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=49",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=50",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=50",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=50",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=50",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=51",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=51",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=51",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=51",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 stays in room and above floor at t=52",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pollock_painting_in_3d at t=52",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap monte_carlo_dartboard at t=52",
+      "passed": true
+    },
+    {
+      "check": "Particle mode 1 does not overlap pipe_dream at t=52",
+      "passed": true
+    },
+    {
+      "check": "All five particle chapters cycle in the actual museum",
+      "passed": true
+    },
+    {
+      "check": "Particle chapter remains all",
+      "passed": true
+    },
+    {
+      "check": "Gallery opts into its declared radius-seven containment",
+      "passed": true
+    },
+    {
+      "check": "pollock_painting_in_3d and monte_carlo_dartboard have separate visible bounds",
+      "passed": true
+    },
+    {
+      "check": "pollock_painting_in_3d and pipe_dream have separate visible bounds",
+      "passed": true
+    },
+    {
+      "check": "pollock_painting_in_3d and extreme_randomness have separate visible bounds",
+      "passed": true
+    },
+    {
+      "check": "monte_carlo_dartboard and pipe_dream have separate visible bounds",
+      "passed": true
+    },
+    {
+      "check": "monte_carlo_dartboard and extreme_randomness have separate visible bounds",
+      "passed": true
+    },
+    {
+      "check": "pipe_dream and extreme_randomness have separate visible bounds",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "headset_verified": false,
+  "map": "Randomness_Examples_of_Randomness",
+  "origin": [
+    0.5,
+    0.0,
+    0.5
+  ],
+  "particle_samples": [
+    {
+      "bounds": {
+        "max": [
+          6.28797197341919,
+          2.67448616027832,
+          21.1769180297852
+        ],
+        "min": [
+          3.77893161773682,
+          0.305500388145447,
+          18.7083606719971
+        ],
+        "size": [
+          2.50904035568237,
+          2.36898565292358,
+          2.46855735778809
+        ]
+      },
+      "mode": 0,
+      "second": 0
+    },
+    {
+      "bounds": {
+        "max": [
+          6.28242778778076,
+          2.68000411987305,
+          21.186990737915
+        ],
+        "min": [
+          3.78410243988037,
+          0.278700709342957,
+          18.7197456359863
+        ],
+        "size": [
+          2.49832534790039,
+          2.4013032913208,
+          2.46724510192871
+        ]
+      },
+      "mode": 0,
+      "second": 1
+    },
+    {
+      "bounds": {
+        "max": [
+          6.27274513244629,
+          2.68871307373047,
+          21.2008419036865
+        ],
+        "min": [
+          3.79250240325928,
+          0.24541674554348,
+          18.7341022491455
+        ],
+        "size": [
+          2.48024272918701,
+          2.44329643249512,
+          2.46673965454102
+        ]
+      },
+      "mode": 0,
+      "second": 2
+    },
+    {
+      "bounds": {
+        "max": [
+          5.84676742553711,
+          0.978244066238403,
+          21.0901069641113
+        ],
+        "min": [
+          4.22092294692993,
+          0.459478259086609,
+          20.7421188354492
+        ],
+        "size": [
+          1.62584447860718,
+          0.518765807151794,
+          0.347988128662109
+        ]
+      },
+      "mode": 1,
+      "second": 3
+    },
+    {
+      "bounds": {
+        "max": [
+          5.72197866439819,
+          1.06071972846985,
+          21.1597423553467
+        ],
+        "min": [
+          4.33750057220459,
+          0.340927958488464,
+          20.6154155731201
+        ],
+        "size": [
+          1.3844780921936,
+          0.719791769981384,
+          0.544326782226563
+        ]
+      },
+      "mode": 1,
+      "second": 4
+    },
+    {
+      "bounds": {
+        "max": [
+          5.66016721725464,
+          1.06880867481232,
+          21.3160991668701
+        ],
+        "min": [
+          4.27054500579834,
+          0.395537734031677,
+          20.5669898986816
+        ],
+        "size": [
+          1.3896222114563,
+          0.67327094078064,
+          0.749109268188477
+        ]
+      },
+      "mode": 1,
+      "second": 5
+    },
+    {
+      "bounds": {
+        "max": [
+          5.65380144119263,
+          1.03589689731598,
+          21.2781581878662
+        ],
+        "min": [
+          4.26306962966919,
+          0.384606242179871,
+          20.427942276001
+        ],
+        "size": [
+          1.39073181152344,
+          0.651290655136108,
+          0.850215911865234
+        ]
+      },
+      "mode": 1,
+      "second": 6
+    },
+    {
+      "bounds": {
+        "max": [
+          5.56835746765137,
+          1.00141227245331,
+          21.1571254730225
+        ],
+        "min": [
+          4.18563318252563,
+          0.310533404350281,
+          20.2589569091797
+        ],
+        "size": [
+          1.38272428512573,
+          0.690878868103027,
+          0.898168563842773
+        ]
+      },
+      "mode": 1,
+      "second": 7
+    },
+    {
+      "bounds": {
+        "max": [
+          5.37889719009399,
+          0.96923440694809,
+          21.1695156097412
+        ],
+        "min": [
+          4.25049161911011,
+          0.292242884635925,
+          20.2196826934814
+        ],
+        "size": [
+          1.12840557098389,
+          0.676991522312164,
+          0.949832916259766
+        ]
+      },
+      "mode": 1,
+      "second": 8
+    },
+    {
+      "bounds": {
+        "max": [
+          5.23191547393799,
+          1.02605438232422,
+          21.1784229278564
+        ],
+        "min": [
+          4.43604946136475,
+          0.189151272177696,
+          20.3150215148926
+        ],
+        "size": [
+          0.795866012573242,
+          0.836903095245361,
+          0.863401412963867
+        ]
+      },
+      "mode": 1,
+      "second": 9
+    },
+    {
+      "bounds": {
+        "max": [
+          5.16328716278076,
+          1.04400503635406,
+          21.2152671813965
+        ],
+        "min": [
+          4.4086332321167,
+          0.145885333418846,
+          20.1356258392334
+        ],
+        "size": [
+          0.754653930664063,
+          0.898119688034058,
+          1.07964134216309
+        ]
+      },
+      "mode": 1,
+      "second": 10
+    },
+    {
+      "bounds": {
+        "max": [
+          5.1648964881897,
+          1.04730498790741,
+          21.1958808898926
+        ],
+        "min": [
+          4.35817956924438,
+          0.128348454833031,
+          20.1136627197266
+        ],
+        "size": [
+          0.806716918945313,
+          0.918956518173218,
+          1.08221817016602
+        ]
+      },
+      "mode": 1,
+      "second": 11
+    },
+    {
+      "bounds": {
+        "max": [
+          5.22610759735107,
+          1.03585624694824,
+          21.2256984710693
+        ],
+        "min": [
+          4.38119697570801,
+          0.135859832167625,
+          20.074390411377
+        ],
+        "size": [
+          0.844910621643066,
+          0.899996399879456,
+          1.15130805969238
+        ]
+      },
+      "mode": 1,
+      "second": 12
+    },
+    {
+      "bounds": {
+        "max": [
+          5.96328544616699,
+          2.45359420776367,
+          20.3928890228271
+        ],
+        "min": [
+          4.03411960601807,
+          0.677180886268616,
+          19.6154384613037
+        ],
+        "size": [
+          1.92916584014893,
+          1.77641332149506,
+          0.777450561523438
+        ]
+      },
+      "mode": 2,
+      "second": 13
+    },
+    {
+      "bounds": {
+        "max": [
+          5.9293999671936,
+          2.47192740440369,
+          20.5668334960938
+        ],
+        "min": [
+          4.07908916473389,
+          0.619669616222382,
+          19.5034923553467
+        ],
+        "size": [
+          1.85031080245972,
+          1.85225772857666,
+          1.06334114074707
+        ]
+      },
+      "mode": 2,
+      "second": 14
+    },
+    {
+      "bounds": {
+        "max": [
+          5.91781854629517,
+          2.50827288627625,
+          20.7559909820557
+        ],
+        "min": [
+          4.08206796646118,
+          0.540871560573578,
+          19.2697830200195
+        ],
+        "size": [
+          1.83575057983398,
+          1.96740126609802,
+          1.48620796203613
+        ]
+      },
+      "mode": 2,
+      "second": 15
+    },
+    {
+      "bounds": {
+        "max": [
+          5.93833160400391,
+          2.53571152687073,
+          20.8727264404297
+        ],
+        "min": [
+          4.07275152206421,
+          0.51023405790329,
+          19.1847400665283
+        ],
+        "size": [
+          1.8655800819397,
+          2.02547740936279,
+          1.68798637390137
+        ]
+      },
+      "mode": 2,
+      "second": 16
+    },
+    {
+      "bounds": {
+        "max": [
+          5.95100021362305,
+          2.49057626724243,
+          20.8225345611572
+        ],
+        "min": [
+          4.0075945854187,
+          0.543084859848022,
+          19.2705230712891
+        ],
+        "size": [
+          1.94340562820435,
+          1.94749140739441,
+          1.55201148986816
+        ]
+      },
+      "mode": 2,
+      "second": 17
+    },
+    {
+      "bounds": {
+        "max": [
+          5.93235301971436,
+          2.40211367607117,
+          20.6142768859863
+        ],
+        "min": [
+          3.96766805648804,
+          0.55467027425766,
+          19.3219318389893
+        ],
+        "size": [
+          1.96468496322632,
+          1.84744334220886,
+          1.29234504699707
+        ]
+      },
+      "mode": 2,
+      "second": 18
+    },
+    {
+      "bounds": {
+        "max": [
+          5.92209434509277,
+          2.36361980438232,
+          20.4256687164307
+        ],
+        "min": [
+          3.98489952087402,
+          0.559767663478851,
+          19.4717884063721
+        ],
+        "size": [
+          1.93719482421875,
+          1.80385208129883,
+          0.953880310058594
+        ]
+      },
+      "mode": 2,
+      "second": 19
+    },
+    {
+      "bounds": {
+        "max": [
+          5.95041370391846,
+          2.42944288253784,
+          20.5385150909424
+        ],
+        "min": [
+          4.09443664550781,
+          0.539815843105316,
+          19.5147399902344
+        ],
+        "size": [
+          1.85597705841064,
+          1.88962697982788,
+          1.02377510070801
+        ]
+      },
+      "mode": 2,
+      "second": 20
+    },
+    {
+      "bounds": {
+        "max": [
+          5.22871446609497,
+          1.67114508152008,
+          20.2973213195801
+        ],
+        "min": [
+          4.70154571533203,
+          1.06772029399872,
+          19.6996116638184
+        ],
+        "size": [
+          0.527168750762939,
+          0.603424787521362,
+          0.597709655761719
+        ]
+      },
+      "mode": 3,
+      "second": 21
+    },
+    {
+      "bounds": {
+        "max": [
+          5.25884771347046,
+          1.48992800712585,
+          20.2336349487305
+        ],
+        "min": [
+          4.67043590545654,
+          0.917607843875885,
+          19.6600742340088
+        ],
+        "size": [
+          0.588411808013916,
+          0.572320163249969,
+          0.57356071472168
+        ]
+      },
+      "mode": 3,
+      "second": 22
+    },
+    {
+      "bounds": {
+        "max": [
+          5.27749252319336,
+          1.15349435806274,
+          20.2119617462158
+        ],
+        "min": [
+          4.6336669921875,
+          0.573987245559692,
+          19.6386260986328
+        ],
+        "size": [
+          0.643825531005859,
+          0.579507112503052,
+          0.573335647583008
+        ]
+      },
+      "mode": 3,
+      "second": 23
+    },
+    {
+      "bounds": {
+        "max": [
+          5.26068496704102,
+          0.755832433700562,
+          20.1798362731934
+        ],
+        "min": [
+          4.62741136550903,
+          0.202372178435326,
+          19.5907135009766
+        ],
+        "size": [
+          0.633273601531982,
+          0.553460240364075,
+          0.589122772216797
+        ]
+      },
+      "mode": 3,
+      "second": 24
+    },
+    {
+      "bounds": {
+        "max": [
+          5.29768085479736,
+          0.388037919998169,
+          20.1963119506836
+        ],
+        "min": [
+          4.54881906509399,
+          0.103268496692181,
+          19.5057792663574
+        ],
+        "size": [
+          0.748861789703369,
+          0.284769415855408,
+          0.690532684326172
+        ]
+      },
+      "mode": 3,
+      "second": 25
+    },
+    {
+      "bounds": {
+        "max": [
+          5.37220048904419,
+          0.557692646980286,
+          20.312385559082
+        ],
+        "min": [
+          4.465163230896,
+          0.136103019118309,
+          19.4016361236572
+        ],
+        "size": [
+          0.907037258148193,
+          0.421589612960815,
+          0.910749435424805
+        ]
+      },
+      "mode": 3,
+      "second": 26
+    },
+    {
+      "bounds": {
+        "max": [
+          5.35443210601807,
+          0.685266613960266,
+          20.2018527984619
+        ],
+        "min": [
+          4.60054016113281,
+          0.304674983024597,
+          19.4510288238525
+        ],
+        "size": [
+          0.753891944885254,
+          0.380591630935669,
+          0.750823974609375
+        ]
+      },
+      "mode": 3,
+      "second": 27
+    },
+    {
+      "bounds": {
+        "max": [
+          5.46389436721802,
+          0.947605669498444,
+          20.0593109130859
+        ],
+        "min": [
+          4.8072772026062,
+          0.542442858219147,
+          19.3920783996582
+        ],
+        "size": [
+          0.656617164611816,
+          0.405162811279297,
+          0.667232513427734
+        ]
+      },
+      "mode": 3,
+      "second": 28
+    },
+    {
+      "bounds": {
+        "max": [
+          5.57405614852905,
+          1.55693006515503,
+          20.1018657684326
+        ],
+        "min": [
+          5.18844890594482,
+          1.40592420101166,
+          19.9120101928711
+        ],
+        "size": [
+          0.385607242584229,
+          0.151005864143372,
+          0.189855575561523
+        ]
+      },
+      "mode": 4,
+      "second": 29
+    },
+    {
+      "bounds": {
+        "max": [
+          5.33420276641846,
+          1.23790121078491,
+          19.9419040679932
+        ],
+        "min": [
+          4.96350240707397,
+          1.08090925216675,
+          19.7729721069336
+        ],
+        "size": [
+          0.370700359344482,
+          0.156991958618164,
+          0.16893196105957
+        ]
+      },
+      "mode": 4,
+      "second": 30
+    },
+    {
+      "bounds": {
+        "max": [
+          5.6893482208252,
+          1.19675004482269,
+          19.9064674377441
+        ],
+        "min": [
+          5.4588189125061,
+          1.02902352809906,
+          19.7421112060547
+        ],
+        "size": [
+          0.230529308319092,
+          0.167726516723633,
+          0.164356231689453
+        ]
+      },
+      "mode": 4,
+      "second": 31
+    },
+    {
+      "bounds": {
+        "max": [
+          5.67773199081421,
+          1.3739515542984,
+          20.0923194885254
+        ],
+        "min": [
+          5.5088415145874,
+          1.16219842433929,
+          19.8958435058594
+        ],
+        "size": [
+          0.168890476226807,
+          0.211753129959106,
+          0.196475982666016
+        ]
+      },
+      "mode": 4,
+      "second": 32
+    },
+    {
+      "bounds": {
+        "max": [
+          5.58234310150146,
+          1.61774444580078,
+          20.2462368011475
+        ],
+        "min": [
+          5.45709228515625,
+          1.43781936168671,
+          20.092586517334
+        ],
+        "size": [
+          0.125250816345215,
+          0.179925084114075,
+          0.153650283813477
+        ]
+      },
+      "mode": 4,
+      "second": 33
+    },
+    {
+      "bounds": {
+        "max": [
+          5.43080615997314,
+          1.90752422809601,
+          20.248067855835
+        ],
+        "min": [
+          5.20580911636353,
+          1.63835275173187,
+          20.0967235565186
+        ],
+        "size": [
+          0.224997043609619,
+          0.269171476364136,
+          0.151344299316406
+        ]
+      },
+      "mode": 4,
+      "second": 34
+    },
+    {
+      "bounds": {
+        "max": [
+          5.12255144119263,
+          1.98106348514557,
+          20.1163330078125
+        ],
+        "min": [
+          4.90251588821411,
+          1.82304906845093,
+          19.9327068328857
+        ],
+        "size": [
+          0.220035552978516,
+          0.158014416694641,
+          0.183626174926758
+        ]
+      },
+      "mode": 4,
+      "second": 35
+    },
+    {
+      "bounds": {
+        "max": [
+          4.80698108673096,
+          1.92354965209961,
+          19.9203510284424
+        ],
+        "min": [
+          4.62730503082275,
+          1.74289095401764,
+          19.7440338134766
+        ],
+        "size": [
+          0.179676055908203,
+          0.18065869808197,
+          0.17631721496582
+        ]
+      },
+      "mode": 4,
+      "second": 36
+    },
+    {
+      "bounds": {
+        "max": [
+          4.6065845489502,
+          1.66909110546112,
+          19.8966426849365
+        ],
+        "min": [
+          4.42895174026489,
+          1.46465361118317,
+          19.7441253662109
+        ],
+        "size": [
+          0.177632808685303,
+          0.204437494277954,
+          0.152517318725586
+        ]
+      },
+      "mode": 4,
+      "second": 37
+    },
+    {
+      "bounds": {
+        "max": [
+          5.95041513442993,
+          2.46527361869812,
+          21.0050411224365
+        ],
+        "min": [
+          4.03273344039917,
+          0.483458876609802,
+          18.9986534118652
+        ],
+        "size": [
+          1.91768169403076,
+          1.98181474208832,
+          2.00638771057129
+        ]
+      },
+      "mode": 0,
+      "second": 38
+    },
+    {
+      "bounds": {
+        "max": [
+          6.04785871505737,
+          2.51277208328247,
+          21.1126251220703
+        ],
+        "min": [
+          3.92466402053833,
+          0.470680117607117,
+          18.9875774383545
+        ],
+        "size": [
+          2.12319469451904,
+          2.04209184646606,
+          2.12504768371582
+        ]
+      },
+      "mode": 0,
+      "second": 39
+    },
+    {
+      "bounds": {
+        "max": [
+          6.09649467468262,
+          2.50140047073364,
+          21.1778755187988
+        ],
+        "min": [
+          3.88121271133423,
+          0.463760495185852,
+          18.9098873138428
+        ],
+        "size": [
+          2.21528196334839,
+          2.03764009475708,
+          2.26798820495605
+        ]
+      },
+      "mode": 0,
+      "second": 40
+    },
+    {
+      "bounds": {
+        "max": [
+          6.10053205490112,
+          2.48168277740479,
+          21.2187995910645
+        ],
+        "min": [
+          3.8492317199707,
+          0.454585909843445,
+          18.8750896453857
+        ],
+        "size": [
+          2.25130033493042,
+          2.02709674835205,
+          2.34370994567871
+        ]
+      },
+      "mode": 0,
+      "second": 41
+    },
+    {
+      "bounds": {
+        "max": [
+          6.09269952774048,
+          2.49760055541992,
+          21.2396984100342
+        ],
+        "min": [
+          3.82015323638916,
+          0.432368278503418,
+          18.8598918914795
+        ],
+        "size": [
+          2.27254629135132,
+          2.0652322769165,
+          2.37980651855469
+        ]
+      },
+      "mode": 0,
+      "second": 42
+    },
+    {
+      "bounds": {
+        "max": [
+          6.0920147895813,
+          2.49707221984863,
+          21.2513236999512
+        ],
+        "min": [
+          3.79666900634766,
+          0.437126517295837,
+          18.8553581237793
+        ],
+        "size": [
+          2.29534578323364,
+          2.05994558334351,
+          2.39596557617188
+        ]
+      },
+      "mode": 0,
+      "second": 43
+    },
+    {
+      "bounds": {
+        "max": [
+          6.10085296630859,
+          2.50134992599487,
+          21.2461967468262
+        ],
+        "min": [
+          3.78597402572632,
+          0.418781161308289,
+          18.8431720733643
+        ],
+        "size": [
+          2.31487894058228,
+          2.08256864547729,
+          2.40302467346191
+        ]
+      },
+      "mode": 0,
+      "second": 44
+    },
+    {
+      "bounds": {
+        "max": [
+          6.10427856445313,
+          2.50405645370483,
+          21.2411155700684
+        ],
+        "min": [
+          3.80226612091064,
+          0.388305902481079,
+          18.8150482177734
+        ],
+        "size": [
+          2.30201244354248,
+          2.11575055122375,
+          2.42606735229492
+        ]
+      },
+      "mode": 0,
+      "second": 45
+    },
+    {
+      "bounds": {
+        "max": [
+          6.03672122955322,
+          1.17855167388916,
+          21.1236095428467
+        ],
+        "min": [
+          4.00932550430298,
+          0.285191535949707,
+          20.579662322998
+        ],
+        "size": [
+          2.02739572525024,
+          0.893360137939453,
+          0.543947219848633
+        ]
+      },
+      "mode": 1,
+      "second": 46
+    },
+    {
+      "bounds": {
+        "max": [
+          5.94323635101318,
+          1.09277975559235,
+          21.1192111968994
+        ],
+        "min": [
+          4.06925296783447,
+          0.24428878724575,
+          20.5591926574707
+        ],
+        "size": [
+          1.87398338317871,
+          0.848490953445435,
+          0.560018539428711
+        ]
+      },
+      "mode": 1,
+      "second": 47
+    },
+    {
+      "bounds": {
+        "max": [
+          5.80036163330078,
+          0.985027611255646,
+          21.1678123474121
+        ],
+        "min": [
+          4.26244878768921,
+          0.197265014052391,
+          20.4642963409424
+        ],
+        "size": [
+          1.53791284561157,
+          0.787762582302094,
+          0.703516006469727
+        ]
+      },
+      "mode": 1,
+      "second": 48
+    },
+    {
+      "bounds": {
+        "max": [
+          5.7519097328186,
+          0.98726212978363,
+          21.1076126098633
+        ],
+        "min": [
+          4.37821292877197,
+          0.150832518935204,
+          20.284049987793
+        ],
+        "size": [
+          1.37369680404663,
+          0.836429595947266,
+          0.823562622070313
+        ]
+      },
+      "mode": 1,
+      "second": 49
+    },
+    {
+      "bounds": {
+        "max": [
+          5.75273704528809,
+          0.987236142158508,
+          21.2269172668457
+        ],
+        "min": [
+          4.30376625061035,
+          0.1633590310812,
+          20.2365341186523
+        ],
+        "size": [
+          1.44897079467773,
+          0.823877096176147,
+          0.990383148193359
+        ]
+      },
+      "mode": 1,
+      "second": 50
+    },
+    {
+      "bounds": {
+        "max": [
+          5.75426769256592,
+          0.985715448856354,
+          21.1729393005371
+        ],
+        "min": [
+          4.30963325500488,
+          0.186360940337181,
+          20.2003784179688
+        ],
+        "size": [
+          1.44463443756104,
+          0.799354493618011,
+          0.972560882568359
+        ]
+      },
+      "mode": 1,
+      "second": 51
+    },
+    {
+      "bounds": {
+        "max": [
+          5.55861139297485,
+          0.965311706066132,
+          21.1550884246826
+        ],
+        "min": [
+          4.36968994140625,
+          0.159772858023643,
+          20.0668754577637
+        ],
+        "size": [
+          1.1889214515686,
+          0.805538833141327,
+          1.08821296691895
+        ]
+      },
+      "mode": 1,
+      "second": 52
+    }
+  ],
+  "particle_union": {
+    "max": [
+      6.28797197341919,
+      2.68871307373047,
+      21.3160991668701
+    ],
+    "min": [
+      3.77893161773682,
+      0.103268496692181,
+      18.7083606719971
+    ],
+    "size": [
+      2.50904035568237,
+      2.585444688797,
+      2.60773849487305
+    ]
+  }
+}

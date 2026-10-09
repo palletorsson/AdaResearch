@@ -1,0 +1,76 @@
+{
+  "images": [
+    {
+      "loaded": true,
+      "src": "noise-voxel-bench.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-readout.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-screen.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-volume.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-cut.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-orb.png"
+    },
+    {
+      "loaded": true,
+      "src": "noise-voxel-plan.png"
+    }
+  ],
+  "overflow": false,
+  "fieldStable": true,
+  "maskChanged": true,
+  "initialCounts": "6,767 of 13,824 cells occupied · 25 separate pieces · largest 6,661",
+  "highCounts": "2,685 of 13,824 cells occupied · 32 separate pieces · largest 2,577",
+  "low": {
+    "counts": "11,040 of 13,824 cells occupied · 4 separate pieces · largest 11,028",
+    "reading": "Cell 12,12,12 · field -0.0038 · biased score -0.0147 > -0.20 → OCCUPIED"
+  },
+  "next": "Cell 13,12,12 · field -0.1353 · biased score -0.1462 > 0.20 → EMPTY",
+  "book": {
+    "codeBlocks": 5,
+    "hasEnding": true,
+    "open": true,
+    "words": 1122
+  },
+  "primary": {
+    "hasActualPredicate": true,
+    "hasOrbCode": true,
+    "passages": [
+      {
+        "open": true,
+        "words": 453
+      },
+      {
+        "open": true,
+        "words": 241
+      },
+      {
+        "open": true,
+        "words": 292
+      },
+      {
+        "open": true,
+        "words": 137
+      }
+    ],
+    "titles": [
+      "1. perlin_terrain_sculptor",
+      "2. science_screen",
+      "3. voxelnoise",
+      "4. dark_sphere"
+    ]
+  }
+}

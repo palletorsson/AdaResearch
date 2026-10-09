@@ -1,0 +1,1 @@
+You know the shapes. Now give them colour. Simple comparisons become richer stacks; art and design studies rise into columns, and whole configurations become parts of taller bodies. Walk among them before the next hall asks what makes a colour appear.

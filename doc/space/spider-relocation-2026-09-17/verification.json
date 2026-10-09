@@ -1,0 +1,30 @@
+{
+  "checks_passed": 23,
+  "checks": [
+    "Trans_Introduction: floor unchanged",
+    "Trans_Introduction: utilities unchanged",
+    "Trans_Introduction: only intended placement cell changed",
+    "Trans_Introduction: intended token",
+    "SpeculativeComputation_Situated_Computation: floor unchanged",
+    "SpeculativeComputation_Situated_Computation: utilities unchanged",
+    "SpeculativeComputation_Situated_Computation: only intended placement cell changed",
+    "SpeculativeComputation_Situated_Computation: intended token",
+    "no stale source role",
+    "destination secondary role",
+    "ada_run/em_plan.json: source removed",
+    "ada_run/em_plan.json: one destination spider",
+    "ada_run/em_plan.json: configuration retained",
+    "ada_run/em_plan.json: other teaching hall retained",
+    "commons/data/museum/em_plan.json: source removed",
+    "commons/data/museum/em_plan.json: one destination spider",
+    "commons/data/museum/em_plan.json: configuration retained",
+    "commons/data/museum/em_plan.json: other teaching hall retained",
+    "live and shipped plans agree",
+    "long museum: Trans_Introduction",
+    "long museum: SpeculativeComputation_Situated_Computation",
+    "source prose updated",
+    "destination prose updated"
+  ],
+  "runtime_tested": false,
+  "headset_tested": false
+}

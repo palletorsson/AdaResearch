@@ -1,0 +1,80 @@
+{
+  "status": "encounters repaired; book preserved",
+  "summary": "Four concrete repairs support a mature nine-hall progression: a missing receiver, misplaced controls, a hidden field and reversed encounter order. Read the changes beside actual Godot captures; distinguish book prose from supporting tutorial and source text.",
+  "items": [
+    {
+      "title": "Nine chapters retained",
+      "description": "The local pass supports the existing progression from assigned colour to light, bodies, fields, stored choices, traces, partitions and messages. All nine final.md files match the original review package. The changes below strengthen encounters and supporting teaching notes; they do not rewrite the book.",
+      "report": "doc/book/iterations/2026-09-19-color-review/SUMMARY.md"
+    },
+    {
+      "title": "Flashlight: give the light another surface",
+      "description": "The chapter asks you to move a lamp from the board onto a cube beside it. That cube was missing. The standing installation now supplies a matte one-metre receiver with collision, while keeping the lamp controls and chapter unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-19-color-review/opening/runtime/flashlight-before-overview.png",
+        "doc/book/iterations/2026-09-19-color-review/opening/runtime/flashlight-after-overview-final.png"
+      ],
+      "captions": [
+        "Before · the lamps and board are present; the promised side cube is absent.",
+        "After · a cube beside the board makes the surface comparison available."
+      ],
+      "image_note": "Actual museum captures from the same camera. This pair shows the added receiver; the audit separately checks floor alignment, the approach aisle and aiming red light onto its unchanged material. No headset test is claimed.",
+      "report": "doc/book/iterations/2026-09-19-color-review/opening/SUMMARY.md"
+    },
+    {
+      "title": "Nails: put the controls where the hands can reach them",
+      "description": "The giant and petite hands already receive both colour choices. Their controls had been placed behind the salon instead of on the labelled plinths in front. Four map cells now restore the two controls to the existing plinths, accounting for the salon’s rotation.",
+      "images": [
+        "doc/book/iterations/2026-09-19-color-review/opening/runtime/nails-corrected-before/nails-after-choice.png",
+        "doc/book/iterations/2026-09-19-color-review/opening/runtime/nails-after-choice.png"
+      ],
+      "captions": [
+        "Before · NAILS and SKIN plinths are empty; the controls float behind the giant hand.",
+        "After · each control stands on its labelled plinth beside the manicure table."
+      ],
+      "image_note": "Actual museum placement comparison: identical camera and deliberately identical teal skin / pink nails. Room illumination differs between launches; no lighting change is claimed. The map lighting was preserved, while shared museum source changed concurrently. Simulated grabbing and capsule checks support the repair; physical reach remains for a headset visit.",
+      "report": "doc/book/iterations/2026-09-19-color-review/opening/SUMMARY.md"
+    },
+    {
+      "title": "Pillar: uncover the colour between the columns",
+      "description": "The correct gradient existed half a metre below the museum floor. One placement value now seats it 2.6 cm above that floor. The chapter’s invitation to look between thirty-five samples can finally point to the continuous field it describes.",
+      "images": [
+        "doc/book/iterations/2026-09-19-color-review/fields/evidence/paired/pillar-field-before.png",
+        "doc/book/iterations/2026-09-19-color-review/fields/evidence/paired/pillar-field-after.png"
+      ],
+      "captions": [
+        "Old placement replayed · the museum floor hides the gradient and column footings.",
+        "Current placement · the field remains visible between its discrete samples."
+      ],
+      "image_note": "Actual museum renders in one runtime, replaying the saved old artifact Y position and restoring the repaired position. Same camera at 1.7 m, target, light and 70-degree FOV. These are reconstructed old/current placements, not two independently captured software versions. Independent before/after runs are also retained in the audit.",
+      "report": "doc/book/iterations/2026-09-19-color-review/fields/AUDIT.md"
+    },
+    {
+      "title": "Pillar: align the teaching notes with the hall",
+      "description": "The book already follows field → sample → named collection. The older tutorial still taught a segmented tower. This supporting text now begins with the available encounter; secondary works remain for further comparisons.",
+      "before": "Pillars collect colour. Mixing reveals process.\n\nBuild a pillar of coloured segments.",
+      "after": "Begin at the pale edge of `pillarcolorcollection`. Follow one line of columns into the field, then cross that line. Ask which colour property each direction changes before introducing its name.",
+      "text_kind": "tutorial.md opening excerpt",
+      "report": "doc/book/iterations/2026-09-19-color-review/fields/Color_Pillar-tutorial.md.diff"
+    },
+    {
+      "title": "Walls: meet the office before the model",
+      "description": "The chapter first asks you to compare looking through a pane with walking through an opening. RGB/HSV and interpolation benches now stand beyond the office, so that bodily encounter comes before the representational comparison. Existing secondary exhibits stay.",
+      "images": [
+        "doc/book/iterations/2026-09-19-color-review/late/before/Color_Walls-overview.png",
+        "doc/book/iterations/2026-09-19-color-review/late/after/Color_Walls-overview.png"
+      ],
+      "captions": [
+        "Before · the colour-model exhibits sit between arrival and the office.",
+        "After · the models stand beyond the office, near its far end."
+      ],
+      "image_note": "Separate actual-museum pre/post runs from the same camera. Ambient sculptures vary between runs; the authored repair moves two model exhibits and extends their sculpture-clear space. Six capsule route checks cover the office, model approaches and onward exit.",
+      "report": "doc/book/iterations/2026-09-19-color-review/late/AUDIT.md"
+    },
+    {
+      "title": "What did not need changing",
+      "description": "Rainbow’s celebration, Grid Pallet’s stored choices, Paint’s accumulation and Chamber’s receiving rules have fresh runtime support. Missing files in the old ZIP were not evidence that these encounters were absent. Rainbow and navigator source comments were corrected; the chapters were preserved. Making Paint’s two update clocks directly comparable for a beginner remains a development task.",
+      "report": "doc/book/iterations/2026-09-19-color-review/SUMMARY.md"
+    }
+  ]
+}

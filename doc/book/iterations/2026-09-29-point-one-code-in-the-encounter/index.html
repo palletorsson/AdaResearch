@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One | Code inside the encounter</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:#f6f3eb;color:#292b29;font:19px/1.75 Georgia,serif}main{max-width:1100px;margin:auto;padding:56px 28px}header{padding-bottom:35px;border-bottom:1px solid #d4d1c7}header h1{font:normal clamp(38px,6vw,68px)/1.12 Georgia,serif;max-width:900px;margin:18px 0}header>p{max-width:760px}a{color:#864752;text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:10px 22px;font:14px/1.6 system-ui,sans-serif}.eyebrow,.meta,summary{font:12px/1.6 system-ui,sans-serif}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:#63645f}.meta{color:#63645f}article,.excerpt{max-width:750px;margin:65px auto}article h1{font-size:34px;font-weight:normal;line-height:1.25}h2{font-size:28px;font-weight:normal}p{margin:0 0 23px}section{padding-top:38px}details{border-top:1px solid #d4d1c7;padding:20px 0;margin:25px 0}summary{cursor:pointer;font-size:15px;font-weight:600}details[open]>summary{margin-bottom:24px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:40px;font-size:16px}.comparison>div{min-width:0}.comparison h1{font-size:26px}pre{padding:18px;background:#e9e6dd;overflow:auto;font:13px/1.6 Consolas,monospace}code{font:.86em Consolas,monospace}pre code{font:inherit}.footnote{font-size:14px;overflow-wrap:anywhere}.footnote p{margin:10px 0}.excerpt{border-left:3px solid #ac7c7a;padding-left:24px}footer{font:13px/1.6 system-ui,sans-serif;border-top:1px solid #d4d1c7;padding-top:24px}a:focus-visible,summary:focus-visible{outline:3px solid #557a85;outline-offset:5px}@media(max-width:760px){body{font-size:18px}main{padding:28px 20px}.comparison{display:block}.comparison>div{margin-bottom:40px}}@media print{nav,details,footer{display:none}body{background:white;font-size:12pt}main{padding:0}article{break-before:page}}
+.reading pre{font-size:14px;border-left:2px solid #859a8b;background:#ecede5;line-height:1.65}.reading pre code{font:inherit}.reading pre{white-space:pre-wrap;overflow-wrap:anywhere}.comparisons{margin-top:35px}.comparison pre{font-size:12px}</style></head><body><main>
+<header><p class="eyebrow">Point One / 29 September 2026</p><h1>Code inside the encounter.</h1><p>Seven added code lines open three decisions: a visible shape, a separate boundary, and two ways to address the same body.</p><nav><a href="#reading">Read the revised chapter</a><a href="#changes">The three changes</a><a href="/compose/sources?map=Point_One&amp;doc=final">Read and comment</a></nav></header>
+<article class="reading" id="reading"><p class="eyebrow">Current canonical final.md</p><h1>Point One — A body for a position</h1>
+<!-- @point_absent -->
+<p>The corridor begins with a label: “Point one”. Above it, nothing.</p>
+<p>There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, pass your hand through the empty space.</p>
+<!-- @point_visible -->
+<p>Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.</p>
+<p>Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.</p>
+<p>A mesh supplies the visible shape. Its dimensions begin here:</p>
+<pre><code class="language-gdscript">var sphere := SphereMesh.new()
+sphere.radius = radius
+sphere.height = radius * 2.0
+</code></pre>
+<p>Here, <code>radius</code> is 0.14 metres. Twice that gives the sphere its height. These lines give it dimensions the renderer can use. Drawing it has not made a boundary for the visitor's body.</p>
+<!-- @point_solid -->
+<p>The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.</p>
+<p>This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.</p>
+<p>The program attaches a separate collision shape to a fixed body, a <code>StaticBody3D</code>. This second sphere uses the same radius:</p>
+<pre><code class="language-gdscript">var sphere_shape := SphereShape3D.new()
+sphere_shape.radius = radius
+</code></pre>
+<p>One part tells the renderer what to draw; another tells the physics system where movement meets resistance. Sharing a radius helps them agree. We have made those surfaces coincide. They could have been arranged otherwise.</p>
+<!-- @point_held -->
+<p>At the fourth label the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.</p>
+<p>Its visible size has not changed. Pickup code has added another relation: while held, the body's movement answers to yours. Put it down and look back at the label. “Point one” stays in the corridor; the point has gone elsewhere.</p>
+<p>Which part did the name belong to? The position, the sphere, the possibility of taking hold?</p>
+<p>A mathematical point specifies a location without extension.<sup id="reading-fnref:point-one-euclid"><a class="footnote-ref" href="#reading-fn:point-one-euclid">1</a></sup> Each sphere occupies space. Each station also has a different address, although its label repeats the same name. A position can be written with three numbers:</p>
+<pre><code class="language-gdscript">var point_position := Vector3(1.0, 0.5, 0.0)
+</code></pre>
+<p><code>Vector3</code> holds the components X, Y and Z. Here they name a position relative to an origin. They say nothing about white or black, a radius, a collision, a hand. Those decisions need something beyond the address.</p>
+<p>The corridor lets us encounter the decisions separately. In an ordinary object they arrive together, and we can forget that what appears solid has been given a separate reason to resist us.</p>
+<p>Keep the black point. There are other ways to approach it in the wider room: arrows meeting at an empty centre, a screen unfolding the code, another point whose surface changes in your hand. We can return to them. For now, carry this one towards the coloured frame.</p>
+<!-- @coordinate_readout -->
+<h2>Two addresses</h2>
+<p>Keep the point in your hand and watch the white card as you move.</p>
+<p>The corridor opens into the coordinate room. Its guides and the card follow the point you are already holding.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The reporting operation can be written like this:</p>
+<pre><code class="language-gdscript">func report_position(point: Node3D) -&gt; String:
+    var p := point.global_position
+    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
+</code></pre>
+<p><code>%.2f</code> rounds each component to two decimal places in the text: <code>1.231</code> and <code>1.234</code> both print as <code>1.23</code>. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.</p>
+<p>Now compare it with the card marked <code>LOCAL</code>. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?</p>
+<!-- @CoordinateSystem3M -->
+<p>Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p>The two cards give the same point different addresses. <code>WORLD</code> measures from the scene's origin; <code>LOCAL</code> uses the coloured frame. We can write that relation in two lines, with <code>point</code> naming the held body and <code>frame</code> the reference beside it:</p>
+<pre><code class="language-gdscript">var world_p := point.global_position
+var local_p := frame.to_local(world_p)
+</code></pre>
+<p><code>global_position</code> supplies the world address. <code>to_local()</code> expresses it relative to the frame, accounting for the frame's position, orientation and scale. The point has not become two things. We have asked where it is from two different references.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.<sup id="reading-fnref:point-one-haraway"><a class="footnote-ref" href="#reading-fn:point-one-haraway">2</a></sup></p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.</p>
+<!-- @drag_point_target -->
+<h2>Room to arrive</h2>
+<p>The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.</p>
+<p>“Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:</p>
+<pre><code class="language-gdscript">@export var catch_radius: float = 0.45
+@export var catch_height: float = 1.20
+
+func accepts_position(p: Vector3) -&gt; bool:
+    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+    return p.distance_to(centre) &lt;= catch_radius
+</code></pre>
+<p><code>distance_to()</code> measures the gap between the point and the target's centre. <code>&lt;=</code> asks whether that distance is 0.45 metres or less. The centre sits 1.20 metres above the target's origin. A hand has room to arrive. “Here” has become a small region.</p>
+<p>The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.</p>
+<!-- @point_pedestal -->
+<h2>The size of a point</h2>
+<p>Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.</p>
+<p>The small sphere travelled in your hand. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.</p>
+<p>Look from the sphere you carried to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.</p>
+<p>The next room brings two points into relation. A line begins.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="reading-fn:point-one-euclid">
+<p>Euclid, <a href="https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html"><em>Elements</em>, Book I, Definition 1</a>, defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart. <a class="footnote-backref" href="#reading-fnref:point-one-euclid" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="reading-fn:point-one-haraway">
+<p>Donna Haraway, <a href="https://doi.org/10.2307/3178066">“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”</a>, <em>Feminist Studies</em> 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits? <a class="footnote-backref" href="#reading-fnref:point-one-haraway" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></article>
+<section id="changes"><h1>Code inside the encounter</h1>
+<p>The author wants the main text closer to a coding tutorial while preserving the critical and poetic reason for Ada. This pass adds seven code lines in three places, with short surrounding explanations.</p>
+<ol>
+<li><strong>Visible sphere:</strong> the same source that supplies the white sphere exposes its radius and height. This follows the visitor's ability to pass through it.</li>
+<li><strong>Solid sphere:</strong> a separate SphereShape3D uses the same radius. The prose names its attachment to a fixed collision body. The excerpt is not represented as a complete construction; the source also supplies position and node attachment.</li>
+<li><strong>Two addresses:</strong> a reduced two-line example expresses the held body's world position relative to the coloured frame. The actual frame reads pt.global_position and to_local(pt.global_position), then sends the appropriate value to each card.</li>
+</ol>
+<p>All other final.md prose, original code blocks, footnotes and encounter anchors are preserved exactly. This keeps the absent label, the question of naming, the possibility of differently arranged boundaries, the limit of the coordinate report, intention missing from the arrival test, the detour's rhythm and the final sculpture. The critical question grows out of the operation instead of being supplied as an unrelated commentary.</p>
+<p>Pickup remains in prose here: the inherited pickable scene requires more setup than a one-line change to a sphere. The older tutorial.md still needs its own progression pass. This edit does not certify it or promote the unreviewed Foundry tutorial draft.</p>
+<p>Canonical final.md and its intent/technical notes are updated. Catalogue and Primitives capture follow. No artifact, map, pickup behavior or coordinate system changed. Verification is source comparison and publication checking; no new runtime, headset or novice-reader result is claimed.</p><div class="comparisons"><details><summary>A visible sphere</summary><div class="comparison"><div><p class="eyebrow">Before</p><p>A mesh supplies the visible shape. Drawing it has not made a boundary for the visitor's body.</p></div><div><p class="eyebrow">Current</p><p>A mesh supplies the visible shape. Its dimensions begin here:</p>
+<pre><code class="language-gdscript">var sphere := SphereMesh.new()
+sphere.radius = radius
+sphere.height = radius * 2.0
+</code></pre>
+<p>Here, <code>radius</code> is 0.14 metres. Twice that gives the sphere its height. These lines give it dimensions the renderer can use. Drawing it has not made a boundary for the visitor's body.</p></div></div></details><details><summary>A separate collision shape</summary><div class="comparison"><div><p class="eyebrow">Before</p><p>The program has given the second sphere a <code>SphereShape3D</code> inside a <code>StaticBody3D</code>. One part tells the renderer what to draw; another tells the physics system where movement meets resistance. We have made those surfaces coincide. They could have been arranged otherwise.</p></div><div><p class="eyebrow">Current</p><p>The program attaches a separate collision shape to a fixed body, a <code>StaticBody3D</code>. This second sphere uses the same radius:</p>
+<pre><code class="language-gdscript">var sphere_shape := SphereShape3D.new()
+sphere_shape.radius = radius
+</code></pre>
+<p>One part tells the renderer what to draw; another tells the physics system where movement meets resistance. Sharing a radius helps them agree. We have made those surfaces coincide. They could have been arranged otherwise.</p></div></div></details><details><summary>Two addresses</summary><div class="comparison"><div><p class="eyebrow">Before</p><p><code>WORLD</code> measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses <code>to_local()</code> to express that same position relative to the frame. The <code>LOCAL</code> card prints the result beside <code>WORLD</code>. The numbers differ because they answer to different references.</p></div><div><p class="eyebrow">Current</p><p>The two cards give the same point different addresses. <code>WORLD</code> measures from the scene's origin; <code>LOCAL</code> uses the coloured frame. We can write that relation in two lines, with <code>point</code> naming the held body and <code>frame</code> the reference beside it:</p>
+<pre><code class="language-gdscript">var world_p := point.global_position
+var local_p := frame.to_local(world_p)
+</code></pre>
+<p><code>global_position</code> supplies the world address. <code>to_local()</code> expresses it relative to the frame, accounting for the frame's position, orientation and scale. The point has not become two things. We have asked where it is from two different references.</p></div></div></details></div><p class="meta"><a href="Point_One.diff">Exact chapter difference</a> / <a href="Point_One.current.md">Current Markdown</a> / <a href="primitives-book.md">Updated Primitives capture</a> / <a href="verification.json">Publication checks</a></p><details><summary>Full earlier chapter</summary><h1>Point One — A body for a position</h1>
+<!-- @point_absent -->
+<p>The corridor begins with a label: “Point one”. Above it, nothing.</p>
+<p>There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, pass your hand through the empty space.</p>
+<!-- @point_visible -->
+<p>Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.</p>
+<p>Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.</p>
+<p>A mesh supplies the visible shape. Drawing it has not made a boundary for the visitor's body.</p>
+<!-- @point_solid -->
+<p>The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.</p>
+<p>This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.</p>
+<p>The program has given the second sphere a <code>SphereShape3D</code> inside a <code>StaticBody3D</code>. One part tells the renderer what to draw; another tells the physics system where movement meets resistance. We have made those surfaces coincide. They could have been arranged otherwise.</p>
+<!-- @point_held -->
+<p>At the fourth label the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.</p>
+<p>Its visible size has not changed. Pickup code has added another relation: while held, the body's movement answers to yours. Put it down and look back at the label. “Point one” stays in the corridor; the point has gone elsewhere.</p>
+<p>Which part did the name belong to? The position, the sphere, the possibility of taking hold?</p>
+<p>A mathematical point specifies a location without extension.<sup id="before-fnref:point-one-euclid"><a class="footnote-ref" href="#before-fn:point-one-euclid">1</a></sup> Each sphere occupies space. Each station also has a different address, although its label repeats the same name. A position can be written with three numbers:</p>
+<pre><code class="language-gdscript">var point_position := Vector3(1.0, 0.5, 0.0)
+</code></pre>
+<p><code>Vector3</code> holds the components X, Y and Z. Here they name a position relative to an origin. They say nothing about white or black, a radius, a collision, a hand. Those decisions need something beyond the address.</p>
+<p>The corridor lets us encounter the decisions separately. In an ordinary object they arrive together, and we can forget that what appears solid has been given a separate reason to resist us.</p>
+<p>Keep the black point. There are other ways to approach it in the wider room: arrows meeting at an empty centre, a screen unfolding the code, another point whose surface changes in your hand. We can return to them. For now, carry this one towards the coloured frame.</p>
+<!-- @coordinate_readout -->
+<h2>Two addresses</h2>
+<p>Keep the point in your hand and watch the white card as you move.</p>
+<p>The corridor opens into the coordinate room. Its guides and the card follow the point you are already holding.</p>
+<p>The card marked <code>WORLD</code> puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.</p>
+<p>The reporting operation can be written like this:</p>
+<pre><code class="language-gdscript">func report_position(point: Node3D) -&gt; String:
+    var p := point.global_position
+    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
+</code></pre>
+<p><code>%.2f</code> rounds each component to two decimal places in the text: <code>1.231</code> and <code>1.234</code> both print as <code>1.23</code>. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.</p>
+<p>Now compare it with the card marked <code>LOCAL</code>. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?</p>
+<!-- @CoordinateSystem3M -->
+<p>Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.</p>
+<p><code>WORLD</code> measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses <code>to_local()</code> to express that same position relative to the frame. The <code>LOCAL</code> card prints the result beside <code>WORLD</code>. The numbers differ because they answer to different references.</p>
+<p>A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.<sup id="before-fnref:point-one-haraway"><a class="footnote-ref" href="#before-fn:point-one-haraway">2</a></sup></p>
+<p>Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.</p>
+<!-- @drag_point_target -->
+<h2>Room to arrive</h2>
+<p>The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.</p>
+<p>“Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:</p>
+<pre><code class="language-gdscript">@export var catch_radius: float = 0.45
+@export var catch_height: float = 1.20
+
+func accepts_position(p: Vector3) -&gt; bool:
+    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+    return p.distance_to(centre) &lt;= catch_radius
+</code></pre>
+<p><code>distance_to()</code> measures the gap between the point and the target's centre. <code>&lt;=</code> asks whether that distance is 0.45 metres or less. The centre sits 1.20 metres above the target's origin. A hand has room to arrive. “Here” has become a small region.</p>
+<p>The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.</p>
+<p>Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.</p>
+<!-- @point_pedestal -->
+<h2>The size of a point</h2>
+<p>Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.</p>
+<p>The small sphere travelled in your hand. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.</p>
+<p>Look from the sphere you carried to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.</p>
+<p>The next room brings two points into relation. A line begins.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="before-fn:point-one-euclid">
+<p>Euclid, <a href="https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html"><em>Elements</em>, Book I, Definition 1</a>, defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart. <a class="footnote-backref" href="#before-fnref:point-one-euclid" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="before-fn:point-one-haraway">
+<p>Donna Haraway, <a href="https://doi.org/10.2307/3178066">“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”</a>, <em>Feminist Studies</em> 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits? <a class="footnote-backref" href="#before-fnref:point-one-haraway" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></details></section>
+<footer><p>The <a href="/book-review/doc/book/iterations/2026-09-29-point-one-facing-pages/index.html">original facing-page test</a> keeps its earlier snapshots for comparison. The tutorial has not been rewritten in this pass.</p></footer></main></body></html>

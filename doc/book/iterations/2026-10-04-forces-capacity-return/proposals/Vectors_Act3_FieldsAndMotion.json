@@ -1,0 +1,41 @@
+{
+  "id": "Vectors_Act3_FieldsAndMotion",
+  "title": "Give the same field two meanings",
+  "storyboard": "Cyan approaches the centre while pink crosses and returns. The student brings Flow Field’s sampled direction and Motion’s retained velocity into one small study with position and velocity as named state. A supplied runner calls their update: one receiver assigns velocity from the field; the other adds acceleration times the step, then both advance position using the new velocity. The same dimensionless field receives different unit conversions. Before trying the sink, they predict two steps in a uniform field from equal beginnings. Reversing the field then asks whether changing an influence erases motion already acquired. Markers, sampling and trails stay supplied; these numerical receivers have neither mass nor collisions. The learner keeps the update convention for Oscillation, through their own notes or companion file, rather than an assumed transfer between halls.",
+  "storyboard_short": "Reuse Flow Field sampling and Motion’s retained velocity. In a proposed small position/velocity study, own assignment versus accumulation and the subsequent position update. Predict two uniform-field steps before the sink comparison; reverse influence without erasing state. Supply dimensionless field, unit adapters, fixed runner, markers and trails. Carry the update convention manually toward Oscillation. Installed markers have no mass or collisions, and no shared learner state travels between halls.",
+  "mode": "make",
+  "brings": [
+    "Flow_Field’s position-dependent sampling and follower step",
+    "Motion’s distinction between force ending and velocity persisting",
+    "Change’s rate-times-step accumulation"
+  ],
+  "learns": [
+    "assigning velocity versus accumulating acceleration",
+    "a field value receives units through its receiver",
+    "updating position with newly updated velocity in a fixed-step model"
+  ],
+  "carries": "One declared position/velocity update convention and a prediction table, manually retained in a companion study or notes and adapted to one dimension in Oscillation.",
+  "supplied": [
+    "dimensionless field sampler and stated velocity/acceleration conversions",
+    "fixed 1/120 s runner and reset interface",
+    "two numerical markers, trails and observation cutoff"
+  ],
+  "artifact_refs": [
+    "VectorFieldFlow"
+  ],
+  "review_note": "Summary proposal only. field_receivers already exposes independent positions and velocities and semi-implicit accumulation in source. Each marker samples the same function at its own current position, not necessarily the same value after divergence. FIELD, GAIN and REVERSE keep state; RESET clears state and pauses while retaining parameters. Frame exit freezes outgoing state rather than colliding. A reduced learner edit function and its connection to the supplied runner are still unresolved. The proposed carried study is not an installed persistent record or crosshall transport feature. No runtime or learner-execution claim.",
+  "prior_maps": [
+    "Change_Intro",
+    "Flow_Field",
+    "VFM_03_Motion"
+  ],
+  "independent_check": "For the supplied uniform field at gain 1, let h be the fixed step and start both at rest. Predict displacement after two steps: cyan 1.6h metres, pink 2.4h² metres, with pink velocity 1.6h m/s. Explain the different units of the 0.8 sample conversions. Then reverse a moving run: cyan changes its assigned velocity immediately; pink first changes its acceleration while retaining velocity. These are paper or companion-study predictions; no single-step museum control is claimed.",
+  "source_refs": [
+    "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+    "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+    "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json",
+    "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+    "algorithms/vectors/10_vector_field_flow/field_receivers.gd"
+  ],
+  "change_reason": "Assignment versus accumulation becomes something the learner can change and predict, while the runner and display remain supplied and museum state stays honestly separate."
+}

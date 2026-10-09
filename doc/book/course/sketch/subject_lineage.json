@@ -1,0 +1,3531 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-03",
+  "scope": {
+    "through_sequence": "randomness",
+    "sequence_count": 10,
+    "map_count": 87
+  },
+  "rules": [
+    "Scope: the first ten sequences, through Randomness, plus named later returns. The rest of the 25-sequence taxonomy remains indexed but is not assigned an invented new map order.",
+    "Encountered, supplied, introduced, reused and deepened are different states. Only an introduction with a named learner action counts as a teaching prerequisite.",
+    "Small introductions are allowed before the sequence named after the subject. Sine in Transformation and bounded random variation in Array are intentional teaching, not forbidden premature vocabulary.",
+    "Every deeper return names the extra capability: a range-and-period introduction to sine is not yet a lesson on phase relationships, waves or audio sampling.",
+    "Planned uses select tutorial operations. Museum-only artifacts and final.md references need not be exhaustively taught or listed as student coding requirements.",
+    "All subject locations are proposed. Current code-token occurrences are recorded separately and never promoted automatically into taught status.",
+    "Exact API tokens, supplied interfaces and numeric lesson locations must be checked when the individual tutorial is written; grouping APIs under a subject does not license unexplained code.",
+    "A subject can recur under a different contract: a Vector3 can hold position, displacement, velocity or force, and those meanings must not be collapsed.",
+    "Lesson objects are created in code and kept through direct variable references. No dollar references or other node-path lookups to named scene children. Day Zero may supply explicitly named viewing and input context.",
+    "One prepared Ada XR world is the shared course context. Portable desktop studies are allowed; each lesson declares its environment and input dependencies. Day Zero owns setup. The compact starter is packaged with desktop and simulated-controller checks; physical headset and Quest export verification remain pending."
+  ],
+  "subjects": [
+    {
+      "id": "setup",
+      "title": "Prepared project and explicit supplied parts",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "supplied",
+        "scene",
+        "editor",
+        "FileSystem",
+        "Inspector",
+        "base_scene",
+        "first_sphere_script"
+      ],
+      "introduced": {
+        "map": "Day_Zero",
+        "capability": "Open and run the prepared project; distinguish the shared XR environment from a desktop study and name the supplied viewing/input context."
+      },
+      "prerequisites": [],
+      "used_in": [
+        "Point_Zero",
+        "Point_One",
+        "Point_Coordinates"
+      ],
+      "deepen": [],
+      "previews": []
+    },
+    {
+      "id": "nodes",
+      "title": "Node, scene tree and ownership",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "node",
+        "root_node",
+        "scene_tree",
+        "parent",
+        "child",
+        "Node3D",
+        "extends",
+        "script"
+      ],
+      "introduced": {
+        "map": "Day_Zero",
+        "capability": "Identify the node receiving the script and its parent; use the supplied root."
+      },
+      "prerequisites": [
+        "setup"
+      ],
+      "used_in": [
+        "Point_Zero",
+        "Point_One",
+        "Point_Coordinates",
+        "Trans_Rotation"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Rotation",
+          "capability": "Read a transform relative to its parent."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "callbacks",
+      "title": "Ready once, process repeatedly",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "func",
+        "_ready",
+        "_process",
+        "indent"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Recognise when each callback runs; place one instruction in each."
+      },
+      "prerequisites": [
+        "nodes"
+      ],
+      "used_in": [
+        "Point_One",
+        "Point_Lines",
+        "Point_Trace",
+        "Trans_Pre",
+        "Array",
+        "WaveFunctions_Pendulum",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Pre",
+          "capability": "Retain a changing value between process calls."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "view",
+      "title": "A camera chooses the view",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "camera"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Move the prepared camera closer; distinguish apparent size from the size of the object."
+      },
+      "prerequisites": [
+        "nodes"
+      ],
+      "used_in": [
+        "Point_One",
+        "Point_Coordinates",
+        "Primitives_Portals",
+        "Color_Flashlight"
+      ],
+      "deepen": [
+        {
+          "map": "Point_Coordinates",
+          "capability": "Relate the view to positions and reference frames."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "counter",
+      "title": "A counter and a displayed reading",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "frame",
+        "Engine",
+        "get_process_frames",
+        "Label3D",
+        "text",
+        "str",
+        "counter_panel",
+        "print",
+        "output_panel"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Create a text display in code, retain a count and distinguish the node count from the engine total."
+      },
+      "prerequisites": [
+        "callbacks",
+        "instances"
+      ],
+      "used_in": [
+        "Point_Trace",
+        "Tutorial_Disco",
+        "Change_Choreography",
+        "Random_Entropy",
+        "Random_Cubes"
+      ],
+      "deepen": [
+        {
+          "map": "Point_Trace",
+          "capability": "Count recorded samples rather than rendered frames."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "number_types",
+      "title": "Whole counts and measured values",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "integer",
+        "float"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Distinguish a whole frame count from a measured fraction; name the type actually used."
+      },
+      "prerequisites": [
+        "callbacks"
+      ],
+      "used_in": [
+        "Point_One",
+        "Point_Trace",
+        "Array",
+        "Change_Intro"
+      ],
+      "deepen": [
+        {
+          "map": "Change_Intro",
+          "capability": "Keep division and units explicit in a rate."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "variables",
+      "title": "Variables and assignment",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "variable",
+        "var",
+        "=",
+        ":=",
+        "property"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Keep a display reference and a whole count; read and change their values across callbacks."
+      },
+      "prerequisites": [
+        "callbacks",
+        "number_types"
+      ],
+      "used_in": [
+        "Point_One",
+        "Point_Coordinates",
+        "Point_Lines",
+        "Point_Trace",
+        "Trans_Pre",
+        "Array",
+        "Color_Pillar",
+        "VFM_03_Motion",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Point_One",
+          "capability": "Use a variable for a position; distinguish that value from the node displaying it."
+        },
+        {
+          "map": "Trans_Pre",
+          "capability": "Keep state across updates"
+        },
+        {
+          "map": "Color_Pillar",
+          "capability": "Distinguish stored values from values recalculated from position."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "instances",
+      "title": "Create an instance and attach it",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "Label3D",
+        "built_in_class",
+        "new",
+        "MeshInstance3D",
+        "add_child"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Create a Label3D with new(), keep its reference and attach it with add_child()."
+      },
+      "prerequisites": [
+        "nodes",
+        "variables"
+      ],
+      "used_in": [
+        "Point_One",
+        "Primitives_Polythedra",
+        "Array",
+        "Color_Context_Placed",
+        "Color_Paint"
+      ],
+      "deepen": [
+        {
+          "map": "Point_One",
+          "capability": "Apply the same creation pattern to a MeshInstance3D and its mesh resource."
+        },
+        {
+          "map": "Color_Paint",
+          "capability": "Compare independent state in several instances."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "calls",
+      "title": "Read a call and its arguments",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "call",
+        "function"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Read new(), add_child(display) and str(count) as calls; identify what is passed to each operation."
+      },
+      "prerequisites": [
+        "callbacks",
+        "variables"
+      ],
+      "used_in": [
+        "Point_One",
+        "Point_Lines",
+        "Point_Trace",
+        "Array",
+        "Color_Context_Placed",
+        "VFM_03_Motion",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Primitives_Ignorance",
+          "capability": "Write a small operation of your own that returns positions."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "point_position",
+      "title": "A point and its position value",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "point",
+        "position",
+        "Vector3"
+      ],
+      "introduced": {
+        "map": "Point_One",
+        "capability": "Keep a position value distinct from its visible marker."
+      },
+      "prerequisites": [
+        "variables"
+      ],
+      "used_in": [
+        "Point_Coordinates",
+        "Point_Lines",
+        "Point_Trace",
+        "Point_Triangle_Context",
+        "Array",
+        "Flow_Field",
+        "Random_Walk"
+      ],
+      "deepen": [
+        {
+          "map": "Point_Coordinates",
+          "capability": "Change one coordinate and distinguish references."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "mesh",
+      "title": "Visible geometry and dimensions",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "mesh",
+        "SphereMesh",
+        "radius",
+        "height"
+      ],
+      "introduced": {
+        "map": "Point_One",
+        "capability": "Give a position a surface and change its dimensions in code."
+      },
+      "prerequisites": [
+        "instances",
+        "point_position"
+      ],
+      "used_in": [
+        "Point_Triangle_Context",
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Trans_Scale"
+      ],
+      "deepen": [
+        {
+          "map": "Primitives_Ignorance",
+          "capability": "Inspect how resolution generates finite geometry."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "collision",
+      "title": "Visible shape and contact shape",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "shape",
+        "body",
+        "StaticBody3D",
+        "CollisionShape3D",
+        "SphereShape3D",
+        "feeler"
+      ],
+      "introduced": {
+        "map": "Point_One",
+        "capability": "Add a supplied-size collision shape separately from the mesh; compare contact."
+      },
+      "prerequisites": [
+        "mesh"
+      ],
+      "used_in": [
+        "Point_Triangle_Context",
+        "Primitives_Polythedra",
+        "Trans_Scale",
+        "Color_Walls",
+        "VFM_09_Legs"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_09_Legs",
+          "capability": "Compare contact-supported motion with a prescribed animation."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "booleans",
+      "title": "Two states before a branch",
+      "group": "Prepared context and the running scene",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "true",
+        "false",
+        "bool"
+      ],
+      "introduced": {
+        "map": "Point_One",
+        "capability": "Use a true/false property to enable or hide one part; no branching required yet."
+      },
+      "prerequisites": [
+        "variables"
+      ],
+      "used_in": [
+        "Point_Trace",
+        "Trans_Translation",
+        "Trans_Body",
+        "Pattern_Foundry",
+        "Random_Remove"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Translation",
+          "capability": "Use the value in a condition."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "coordinates",
+      "title": "Coordinates, axes and reference",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "origin",
+        "metre",
+        "axis",
+        "coordinate",
+        "x",
+        "y",
+        "z"
+      ],
+      "introduced": {
+        "map": "Point_Coordinates",
+        "capability": "Change one coordinate while keeping the others; identify the origin and units."
+      },
+      "prerequisites": [
+        "point_position"
+      ],
+      "used_in": [
+        "Point_Lines",
+        "Point_Line_Grid",
+        "Point_Triangle_Context",
+        "Array",
+        "Tutorial_3D",
+        "Color_Pillar",
+        "Vectors_Act2_VectorArithmetic"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Rotation",
+          "capability": "Inspect local and parent reference frames."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "input",
+      "title": "A supplied hand or desktop input",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "mouse_point()",
+        "walker",
+        "Input",
+        "is_action_pressed",
+        "action",
+        "ui_left",
+        "ui_right",
+        "ui_accept",
+        "quotes"
+      ],
+      "introduced": {
+        "map": "Point_Coordinates",
+        "capability": "Use an explicitly supplied position or hold; identify when the input changes."
+      },
+      "prerequisites": [
+        "coordinates"
+      ],
+      "used_in": [
+        "Point_Lines",
+        "Point_Trace",
+        "Color_Nails",
+        "Color_Paint",
+        "Vectors_Act5_ForceAsPlace",
+        "WaveFunctions_AirMusic"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Body",
+          "capability": "Connect a simple input condition to a response."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "arithmetic",
+      "title": "Arithmetic on values",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "+",
+        "-",
+        "*",
+        "/",
+        "+=",
+        "-="
+      ],
+      "introduced": {
+        "map": "Point_Lines",
+        "capability": "Subtract endpoints and scale a value; explain every operator used by the example."
+      },
+      "prerequisites": [
+        "coordinates",
+        "number_types"
+      ],
+      "used_in": [
+        "Point_Trace",
+        "Trans_Pre",
+        "Array",
+        "Change_Intro",
+        "VFM_03_Motion",
+        "WaveFunctions_Synthesis_Lab"
+      ],
+      "deepen": [
+        {
+          "map": "Change_Intro",
+          "capability": "Relate subtraction and division to a measured rate."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Point_Zero",
+          "scope": "A supplied counter may show += 1; explain that single operation here if the student edits it.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "displacement",
+      "title": "Displacement, segment and distance",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "line",
+        "segment",
+        "vector",
+        "length",
+        "line()"
+      ],
+      "introduced": {
+        "map": "Point_Lines",
+        "capability": "Compute B minus A and its length in one frame; supply the line renderer."
+      },
+      "prerequisites": [
+        "arithmetic"
+      ],
+      "used_in": [
+        "Point_Trace",
+        "Point_Triangle_Context",
+        "Trans_Translation",
+        "VFM_02_Operations",
+        "Vectors_Act2_VectorArithmetic",
+        "VFM_05_Launch",
+        "Random_Walk"
+      ],
+      "deepen": [
+        {
+          "map": "Vectors_Act1_WhatAVectorIs",
+          "capability": "Move both endpoints and preserve the difference"
+        },
+        {
+          "map": "VFM_02_Operations",
+          "capability": "Distinguish the summed displacement from route length."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "list",
+      "title": "An ordered one-dimensional list",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "array",
+        "item",
+        "index",
+        "[]",
+        "append",
+        "size"
+      ],
+      "introduced": {
+        "map": "Point_Trace",
+        "capability": "Append positions, read an indexed entry and count the list."
+      },
+      "prerequisites": [
+        "variables",
+        "point_position"
+      ],
+      "used_in": [
+        "Point_Line_Grid",
+        "Point_Triangle_Context",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Array",
+        "Tutorial_Disco",
+        "Pattern_Foundry",
+        "FormFinding_Relaxation",
+        "WaveFunctions_Pendulum",
+        "Random_Definition",
+        "Random_Walk"
+      ],
+      "deepen": [
+        {
+          "map": "Array",
+          "capability": "Generate entries and assign addresses"
+        },
+        {
+          "map": "Random_Cubes",
+          "capability": "Compare an ordered record with counts that discard order."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "traversal",
+      "title": "A for loop over retained entries",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "loop",
+        "for",
+        "in",
+        "loop_variable"
+      ],
+      "introduced": {
+        "map": "Point_Trace",
+        "capability": "Visit each retained position once; distinguish this traversal from process over time."
+      },
+      "prerequisites": [
+        "list"
+      ],
+      "used_in": [
+        "Point_Line_Grid",
+        "Point_Triangle_Context",
+        "Primitives_Ignorance",
+        "Array",
+        "Pattern_Foundry",
+        "Change_Intro",
+        "WaveFunctions_Synthesis_Lab",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Array",
+          "capability": "Generate values from counted indices and nest traversals."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "sampling",
+      "title": "Samples and recording cadence",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "sample"
+      ],
+      "introduced": {
+        "map": "Point_Trace",
+        "capability": "Choose when a position enters the record and identify what a pause leaves."
+      },
+      "prerequisites": [
+        "list",
+        "callbacks"
+      ],
+      "used_in": [
+        "Point_Line_Grid",
+        "Change_Intro",
+        "Flow_Field",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Unit_Circle",
+        "Random_Gaussian"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Pendulum",
+          "capability": "Separate physics, recording and display rates"
+        },
+        {
+          "map": "Change_Intro",
+          "capability": "Compare sample intervals against the function being measured."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "bounded_record",
+      "title": "A record with finite capacity",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "push_front",
+        "resize",
+        "copy",
+        "duplicate"
+      ],
+      "introduced": {
+        "map": "Point_Trace",
+        "capability": "Compare a kept copy with the live list; cap the record deliberately."
+      },
+      "prerequisites": [
+        "list"
+      ],
+      "used_in": [
+        "Point_Line_Grid",
+        "Pattern_Foundry",
+        "WaveFunctions_Pendulum",
+        "Random_Walk",
+        "Random_Cubes"
+      ],
+      "deepen": [
+        {
+          "map": "Pattern_Foundry",
+          "capability": "Hold a snapshot while the source continues to change."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "grid_address",
+      "title": "From position to grid address",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "address",
+        "grid",
+        "cell",
+        "snapped"
+      ],
+      "introduced": {
+        "map": "Point_Line_Grid",
+        "capability": "Convert a position using chosen spacing and compare it with the unsnapped value."
+      },
+      "prerequisites": [
+        "coordinates",
+        "arithmetic"
+      ],
+      "used_in": [
+        "Array",
+        "Tutorial_3D",
+        "Tutorial_Tiling_Floor",
+        "Color_Grid_Pallet",
+        "Array_Patterns",
+        "Ribbon_Patterns_01",
+        "Random_Pheromone"
+      ],
+      "deepen": [
+        {
+          "map": "Array",
+          "capability": "Generate positions from indices, reversing the earlier mapping."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "face",
+      "title": "Edges, vertices and a face",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "vertex",
+        "face",
+        "triangle()",
+        "surface"
+      ],
+      "introduced": {
+        "map": "Point_Triangle_Context",
+        "capability": "Keep three corners and their order; draw edges separately from a face."
+      },
+      "prerequisites": [
+        "list",
+        "displacement"
+      ],
+      "used_in": [
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "WaveFunctions_Sine_Space"
+      ],
+      "deepen": [
+        {
+          "map": "Point_Animatedcube",
+          "capability": "Follow one shared vertex into adjacent faces."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "mesh_submission",
+      "title": "The supplied mesh submission interface",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "ArrayMesh",
+        "SurfaceTool",
+        "Mesh",
+        "PRIMITIVE_TRIANGLES",
+        "begin",
+        "add_vertex",
+        "generate_normals",
+        "commit",
+        "create_trimesh_shape"
+      ],
+      "introduced": {
+        "map": "Point_Triangle_Context",
+        "capability": "Use a named renderer receiving positions and connections; know that contact is separate."
+      },
+      "prerequisites": [
+        "face",
+        "collision"
+      ],
+      "used_in": [
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "WaveFunctions_Sine_Space"
+      ],
+      "deepen": [
+        {
+          "sequence": "noise",
+          "capability": "Open buffer construction and collision generation where the surface lesson needs them."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Point_One",
+          "scope": "SphereMesh generates a surface internally; the student creates the mesh resource but need not implement its tessellation.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "enclosure",
+      "title": "Enclosure and volume",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "solid",
+        "volume"
+      ],
+      "introduced": {
+        "map": "Primitives_Polythedra",
+        "capability": "Compare open faces, a closed boundary and a body with contact."
+      },
+      "prerequisites": [
+        "face",
+        "collision"
+      ],
+      "used_in": [
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Ribbon_Patterns_01"
+      ],
+      "deepen": [
+        {
+          "sequence": "boolean_surfaces",
+          "capability": "Make inside/outside operations explicit."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "connectivity",
+      "title": "Shared corners and connections",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "graph",
+        "adjacency_list"
+      ],
+      "introduced": {
+        "map": "Point_Animatedcube",
+        "capability": "Inspect which faces use one corner index; change it and follow those faces."
+      },
+      "prerequisites": [
+        "face",
+        "list"
+      ],
+      "used_in": [
+        "Primitives_Ignorance",
+        "FormFinding_Relaxation"
+      ],
+      "deepen": [
+        {
+          "sequence": "graphtheory",
+          "capability": "Generalise connections to graph queries and algorithms."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "symmetry_generator",
+      "title": "A regular set generated by a rule",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "primitive",
+        "BoxMesh",
+        "CylinderMesh",
+        "PrismMesh",
+        "TorusMesh",
+        "top_radius",
+        "reflection"
+      ],
+      "introduced": {
+        "map": "Primitives_Ignorance",
+        "capability": "Generate opposite axis points of an octahedron; keep face connections explicit."
+      },
+      "prerequisites": [
+        "coordinates",
+        "traversal",
+        "face"
+      ],
+      "used_in": [
+        "Trans_Pre",
+        "Array",
+        "Tutorial_Pattern",
+        "Symmetry_Seventeen"
+      ],
+      "deepen": [
+        {
+          "map": "Symmetry_Seventeen",
+          "capability": "Test the transformations that preserve a chosen pattern."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "own_function",
+      "title": "A function with parameters and a result",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "parameter",
+        "return",
+        "void",
+        "->",
+        "local_variable"
+      ],
+      "introduced": {
+        "map": "Primitives_Ignorance",
+        "capability": "Write a function taking radius and returning positions; explain its type contract."
+      },
+      "prerequisites": [
+        "calls",
+        "traversal"
+      ],
+      "used_in": [
+        "Array",
+        "Color_Context_Placed",
+        "Color_Pillar",
+        "Tutorial_Pattern",
+        "Change_Intro",
+        "FormFinding_Descent",
+        "WaveFunctions_Synthesis_Lab",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Color_Pillar",
+          "capability": "Map a position to an attribute"
+        },
+        {
+          "map": "FormFinding_Descent",
+          "capability": "Map a candidate position to a cost."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Point_Zero",
+          "scope": "The callback template contains func and may contain a return annotation; explain the template, not all function design.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "resolution",
+      "title": "Resolution and finite approximation",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "radial_segments"
+      ],
+      "introduced": {
+        "map": "Primitives_Ignorance",
+        "capability": "Change divisions while retaining the generating construction."
+      },
+      "prerequisites": [
+        "mesh",
+        "traversal"
+      ],
+      "used_in": [
+        "Primitives_Portals",
+        "WaveFunctions_Sine_Space",
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "deepen": [
+        {
+          "map": "Primitives_Portals",
+          "capability": "Compare more samples with exactness and representation limits."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "normal",
+      "title": "A surface direction",
+      "group": "Positions, records and generated geometry",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "normal"
+      ],
+      "introduced": {
+        "map": "Point_Triangle_Context",
+        "capability": "Name the supplied face direction where it changes visibility; derive only if needed."
+      },
+      "prerequisites": [
+        "face"
+      ],
+      "used_in": [
+        "Primitives_Polythedra",
+        "Color_Flashlight",
+        "WaveFunctions_Sine_Space",
+        "Ribbon_Patterns_02"
+      ],
+      "deepen": [
+        {
+          "sequence": "noise",
+          "capability": "Compute directions from surface geometry."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "clock",
+      "title": "Elapsed time and rate",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "delta",
+        "frame_rate",
+        "rate"
+      ],
+      "introduced": {
+        "map": "Trans_Pre",
+        "capability": "Accumulate seconds and multiply by a rate; distinguish seconds from frame count."
+      },
+      "prerequisites": [
+        "variables",
+        "arithmetic",
+        "callbacks"
+      ],
+      "used_in": [
+        "Trans_Translation",
+        "Trans_Rotation",
+        "Tutorial_Disco",
+        "Change_Choreography",
+        "VFM_03_Motion",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_AirMusic"
+      ],
+      "deepen": [
+        {
+          "map": "Change_Intro",
+          "capability": "Measure a rate between readings rather than only prescribe it."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "sine",
+      "title": "Sine as a repeating value",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "sin",
+        "sine",
+        "oscillation",
+        "periodic"
+      ],
+      "introduced": {
+        "map": "Trans_Pre",
+        "capability": "Evaluate a value between -1 and 1 from elapsed time and use it for height."
+      },
+      "prerequisites": [
+        "clock",
+        "calls"
+      ],
+      "used_in": [
+        "Tutorial_Disco",
+        "Color_Paint",
+        "Change_Intro",
+        "Vectors_Act4b_Oscillation",
+        "Change_Choreography",
+        "FormFinding_Annealing",
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "Wavefunctions_Bernini"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "capability": "Relate the value to a rotating point component"
+        },
+        {
+          "map": "WaveFunctions_3D_Wave_Propagation",
+          "capability": "Apply the rule at different distances"
+        },
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "capability": "Combine repeated components."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Primitives_Portals",
+          "scope": "A supplied circle sampler can contain sine; its geometric source will be opened in Waves.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "cycle_parameters",
+      "title": "Extent, period and frequency",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "amplitude",
+        "period",
+        "frequency"
+      ],
+      "introduced": {
+        "map": "Trans_Pre",
+        "capability": "Change how far the cube moves and how long one cycle takes."
+      },
+      "prerequisites": [
+        "clock"
+      ],
+      "used_in": [
+        "Tutorial_Disco",
+        "Change_Choreography",
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Sky_Stairs",
+        "WaveFunctions_TrigWalkingPath"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_TrigWalkingPath",
+          "capability": "Compare close frequencies"
+        },
+        {
+          "map": "WaveFunctions_Effect_Sound",
+          "capability": "Hear the effect of changing rates and amounts."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "phase",
+      "title": "Phase and radians",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "phase",
+        "radian",
+        "TAU"
+      ],
+      "introduced": {
+        "map": "Trans_Pre",
+        "capability": "Name the cycle input; one full cycle advances by TAU radians."
+      },
+      "prerequisites": [
+        "clock"
+      ],
+      "used_in": [
+        "Trans_Rotation",
+        "Tutorial_Disco",
+        "Change_Choreography",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "capability": "Read phase geometrically"
+        },
+        {
+          "map": "Change_Choreography",
+          "capability": "Compare a fixed phase offset with a growing gap from unequal rates."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "transforms",
+      "title": "Position, orientation and scale",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "transform",
+        "rotation",
+        "scale",
+        "translate",
+        "rotate_y",
+        "rotation_degrees"
+      ],
+      "introduced": {
+        "map": "Trans_Pre",
+        "capability": "Change one transform property while keeping the others."
+      },
+      "prerequisites": [
+        "coordinates",
+        "clock"
+      ],
+      "used_in": [
+        "Trans_Introduction",
+        "Trans_Translation",
+        "Trans_Rotation",
+        "Trans_Scale",
+        "Trans_Body",
+        "Trans_Pit",
+        "Array",
+        "Color_Context_Placed",
+        "Random_Rotate_Random_XYZ"
+      ],
+      "deepen": [
+        {
+          "map": "Trans_Rotation",
+          "capability": "Compose turns and compare parent frames"
+        },
+        {
+          "map": "Trans_Scale",
+          "capability": "Compare dimensions with clearance."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "interpolation",
+      "title": "Between two values",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "lerp",
+        "interpolation",
+        "pingpong"
+      ],
+      "introduced": {
+        "map": "Trans_Translation",
+        "capability": "Evaluate an intermediate position and compare rate of progress with endpoints."
+      },
+      "prerequisites": [
+        "arithmetic",
+        "clock"
+      ],
+      "used_in": [
+        "Trans_Rotation",
+        "Trans_Scale",
+        "Trans_Pit",
+        "Color_Paint"
+      ],
+      "deepen": [
+        {
+          "map": "Change_Intro",
+          "capability": "Distinguish interpolating readings from observing an actual path."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "conditions",
+      "title": "Comparisons and conditional action",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "conditional",
+        "comparison",
+        "if",
+        "<",
+        ">",
+        "==",
+        "!=",
+        "else",
+        "elif",
+        "and",
+        "or",
+        "not",
+        "threshold"
+      ],
+      "introduced": {
+        "map": "Trans_Translation",
+        "capability": "Test a limit and choose what happens next."
+      },
+      "prerequisites": [
+        "variables",
+        "booleans",
+        "arithmetic"
+      ],
+      "used_in": [
+        "Trans_Body",
+        "Trans_Pit",
+        "Color_Grid_Pallet",
+        "Random_Remove",
+        "VFM_03_Motion",
+        "VFM_08_Arena",
+        "FormFinding_Forge",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Game",
+          "capability": "Separate deciding an outcome from revealing it."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "cosine",
+      "title": "Cosine as a shifted companion",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "cos"
+      ],
+      "introduced": {
+        "map": "Trans_Rotation",
+        "capability": "Use cosine with sine for a point circling an axis; give its range and phase relation."
+      },
+      "prerequisites": [
+        "sine",
+        "phase"
+      ],
+      "used_in": [
+        "Change_Choreography",
+        "FormFinding_Catenary",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle",
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "capability": "Read both components on one rotating point."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "basis",
+      "title": "A transform frame",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "basis",
+        "Transform3D"
+      ],
+      "introduced": {
+        "map": "Trans_Rotation",
+        "capability": "Recognise a supplied frame and read parent/local effects; keep general matrix algebra supplied."
+      },
+      "prerequisites": [
+        "transforms",
+        "coordinates"
+      ],
+      "used_in": [
+        "Trans_Scale",
+        "Trans_Body",
+        "Color_Walls"
+      ],
+      "deepen": [
+        {
+          "sequence": "fractals",
+          "capability": "Compose local frames recursively."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "state_machine",
+      "title": "State retained between events",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "stopping_rule"
+      ],
+      "introduced": {
+        "map": "Trans_Body",
+        "capability": "Keep open/closed state and a timer; distinguish memory from recomputation."
+      },
+      "prerequisites": [
+        "conditions",
+        "clock"
+      ],
+      "used_in": [
+        "Trans_Pit",
+        "Tutorial_Disco",
+        "VFM_08_Arena",
+        "FormFinding_Forge",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Game",
+          "capability": "Assign, reveal and resolve in distinct states."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "event_connections",
+      "title": "Receiving an event",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "signal",
+        "connect",
+        "disconnect"
+      ],
+      "introduced": {
+        "map": "Trans_Body",
+        "capability": "Connect one supplied proximity or contact event to a named response."
+      },
+      "prerequisites": [
+        "conditions",
+        "calls"
+      ],
+      "used_in": [
+        "Trans_Pit",
+        "Color_Nails",
+        "Color_Paint",
+        "VFM_08_Arena",
+        "Vectors_Act5_ForceAsPlace",
+        "WaveFunctions_AirMusic",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_AirMusic",
+          "capability": "Give each triggered response its own beginning."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "counted_loops",
+      "title": "Counted and nested generation",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "nested_loop",
+        "lattice"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Generate a row from indices, then a plane; add a third index later."
+      },
+      "prerequisites": [
+        "traversal",
+        "grid_address"
+      ],
+      "used_in": [
+        "Tutorial_3D",
+        "Tutorial_Tiling_Floor",
+        "Color_Context_Placed",
+        "Ribbon_Patterns_01",
+        "WaveFunctions_Synthesis_Lab",
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "deepen": [
+        {
+          "map": "Tutorial_3D",
+          "capability": "Separate dimensions of storage from dimensions of position."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "while",
+      "title": "A loop with an explicit stopping condition",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "while"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Use a small bounded while example only when the stopping condition matters."
+      },
+      "prerequisites": [
+        "conditions",
+        "traversal"
+      ],
+      "used_in": [
+        "Random_Remove",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Game",
+          "capability": "Keep an open chain bounded and explain termination"
+        },
+        {
+          "sequence": "proceduralgeneration",
+          "capability": "Use stopping conditions in search and growth."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "occupancy",
+      "title": "Address and occupant",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "collection_record",
+        "queue_free"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Remove an occupant without silently shifting the address scheme."
+      },
+      "prerequisites": [
+        "list",
+        "grid_address",
+        "conditions"
+      ],
+      "used_in": [
+        "Tutorial_3D",
+        "Ribbon_Patterns_01",
+        "Random_Remove"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Remove",
+          "capability": "Change the eligible set without erasing the record of previous choices."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "prefabs",
+      "title": "A reusable prepared scene",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "preload",
+        "PackedScene",
+        "instantiate",
+        "cube_scene",
+        "tile_scene",
+        "diagonal_tile"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Name what a prepared scene supplies; create teaching geometry yourself when that is the lesson."
+      },
+      "prerequisites": [
+        "instances"
+      ],
+      "used_in": [
+        "Color_Context_Placed",
+        "Pattern_Foundry"
+      ],
+      "deepen": [
+        {
+          "map": "Color_Context_Placed",
+          "capability": "Distinguish shared source configuration from instance attributes."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "random_draw",
+      "title": "A bounded random draw",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "random",
+        "RandomNumberGenerator",
+        "randf",
+        "randi_range"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Use a local generator to vary a copy within stated bounds; compare ranges."
+      },
+      "prerequisites": [
+        "counted_loops",
+        "variables"
+      ],
+      "used_in": [
+        "Color_Context_Placed",
+        "FormFinding_Equilibrium",
+        "FormFinding_Annealing",
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_Synthesis_Lab",
+        "Random_Definition",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk",
+        "Random_Mushrooms"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Definition",
+          "capability": "Inspect generator state and request order"
+        },
+        {
+          "map": "Random_Gaussian",
+          "capability": "Compare distribution laws"
+        },
+        {
+          "map": "Random_Mushrooms",
+          "capability": "Assign draws to construction parameters."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Primitives_Polythedra",
+          "scope": "Irregular rocks are encountered without requiring students to implement their generator.",
+          "kind": "encountered"
+        }
+      ]
+    },
+    {
+      "id": "seed",
+      "title": "A repeatable beginning",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "seed"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Reset a local generator to repeat the same small request sequence."
+      },
+      "prerequisites": [
+        "random_draw"
+      ],
+      "used_in": [
+        "Color_Context_Placed",
+        "FormFinding_Annealing",
+        "Random_Definition",
+        "Random_Remove",
+        "Random_Walk",
+        "Random_Mushrooms"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Definition",
+          "capability": "Keep seed and procedure distinct; change request order and inspect the result."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "wrapping",
+      "title": "Returning to an index",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "%",
+        "remainder",
+        "wrap",
+        "fposmod"
+      ],
+      "introduced": {
+        "map": "Tutorial_Tiling_Floor",
+        "capability": "Use a small repeating index rule and read one whole repeat."
+      },
+      "prerequisites": [
+        "grid_address",
+        "arithmetic"
+      ],
+      "used_in": [
+        "Tutorial_Disco",
+        "Pattern_Disco",
+        "Tutorial_Pattern",
+        "Array_Patterns",
+        "Flow_Field"
+      ],
+      "deepen": [
+        {
+          "map": "Array_Patterns",
+          "capability": "Map receiver addresses back into a small source"
+        },
+        {
+          "map": "Flow_Field",
+          "capability": "Distinguish wrapping a continuous position from wrapping an index."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "clocked_sequence",
+      "title": "Read a sequence through time",
+      "group": "Time, conditions, repetition and an early sine/random introduction",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "note_per_track",
+        "AudioStreamPlayer",
+        "cell_at()"
+      ],
+      "introduced": {
+        "map": "Tutorial_Disco",
+        "capability": "Advance a stored step index; supply the sound player and connect one event."
+      },
+      "prerequisites": [
+        "list",
+        "clock",
+        "wrapping"
+      ],
+      "used_in": [
+        "Pattern_Disco",
+        "Change_Choreography",
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_AirMusic",
+          "capability": "Separate an event start from a continuing response."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "colour_value",
+      "title": "Colour values and material assignment",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "Color",
+        "rgb",
+        "material",
+        "albedo_color",
+        "StandardMaterial3D",
+        "inverted"
+      ],
+      "introduced": {
+        "map": "Color_Context_Placed",
+        "capability": "Assign a colour to a known body; change the value without moving the body."
+      },
+      "prerequisites": [
+        "variables",
+        "mesh"
+      ],
+      "used_in": [
+        "Color_Flashlight",
+        "Color_Nails",
+        "Color_Rainbow",
+        "Color_Pillar",
+        "Color_Grid_Pallet",
+        "Color_Paint",
+        "Color_Walls",
+        "Pattern_Disco",
+        "Random_Definition"
+      ],
+      "deepen": [
+        {
+          "map": "Color_Flashlight",
+          "capability": "Compare illumination with material assignment."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Point_One",
+          "scope": "A prepared material can supply appearance; explain a simple assignment here if the example exposes it.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "light",
+      "title": "Light as a separate input",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "SpotLight3D",
+        "light_color"
+      ],
+      "introduced": {
+        "map": "Point_Zero",
+        "capability": "Change the prepared directional light intensity and compare the shaded floor with unshaded text."
+      },
+      "prerequisites": [
+        "nodes"
+      ],
+      "used_in": [
+        "Point_One",
+        "Color_Flashlight",
+        "Color_Nails",
+        "Color_Walls",
+        "Ribbon_Patterns_02"
+      ],
+      "deepen": [
+        {
+          "map": "Color_Flashlight",
+          "capability": "Vary coloured illumination and compare different receiving materials; introduce the spotlight."
+        },
+        {
+          "sequence": "shaders",
+          "capability": "Open the rules that make a surface respond to illumination."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "normalised_mapping",
+      "title": "Mapping a range",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "map_range",
+        "ValueMapper3D"
+      ],
+      "introduced": {
+        "map": "Color_Pillar",
+        "capability": "Map a bounded position range to an attribute range; state clipping or extension."
+      },
+      "prerequisites": [
+        "own_function",
+        "coordinates",
+        "arithmetic"
+      ],
+      "used_in": [
+        "WaveFunctions_Effect_Sound"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Effect_Sound",
+          "capability": "Map a held position to named sound parameters."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "hsv",
+      "title": "Hue, saturation and value",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "from_hsv",
+        "hsv",
+        "hue",
+        "saturation",
+        "band_mesh"
+      ],
+      "introduced": {
+        "map": "Color_Pillar",
+        "capability": "Vary one HSV coordinate and compare with RGB assignment."
+      },
+      "prerequisites": [
+        "colour_value",
+        "own_function"
+      ],
+      "used_in": [
+        "Color_Grid_Pallet",
+        "Pattern_Disco"
+      ],
+      "deepen": [
+        {
+          "map": "Color_Pillar",
+          "capability": "Compare continuous values with the sampled pillars; the earlier rainbow can remain a supplied comparison."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "palette",
+      "title": "Palette and indexed colour",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "palette"
+      ],
+      "introduced": {
+        "map": "Color_Rainbow",
+        "capability": "Read an ordered set of colours and select one entry."
+      },
+      "prerequisites": [
+        "list",
+        "colour_value"
+      ],
+      "used_in": [
+        "Color_Pillar",
+        "Color_Grid_Pallet",
+        "Pattern_Disco",
+        "Pattern_Foundry",
+        "Tutorial_Pattern"
+      ],
+      "deepen": [
+        {
+          "map": "Pattern_Disco",
+          "capability": "Keep pattern values while changing their palette."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "stored_attribute",
+      "title": "Store, overwrite or recompute",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "array_of_arrays"
+      ],
+      "introduced": {
+        "map": "Color_Grid_Pallet",
+        "capability": "Keep a colour at an address; compare one write with a complete rule pass."
+      },
+      "prerequisites": [
+        "list",
+        "grid_address",
+        "colour_value"
+      ],
+      "used_in": [
+        "Pattern_Foundry",
+        "Array_Patterns",
+        "Ribbon_Patterns_01",
+        "Random_Entropy",
+        "Random_Pheromone"
+      ],
+      "deepen": [
+        {
+          "map": "Pattern_Foundry",
+          "capability": "Hold a copy while the shared source changes."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "image_write",
+      "title": "An image that accumulates marks",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "Image",
+        "set_pixel",
+        "create_empty",
+        "FORMAT_RGB8",
+        "paint_call",
+        "point_on_canvas()"
+      ],
+      "introduced": {
+        "map": "Color_Paint",
+        "capability": "Supply hit detection; update one surface sample and compare repeated deposition."
+      },
+      "prerequisites": [
+        "stored_attribute",
+        "arithmetic"
+      ],
+      "used_in": [
+        "Pattern_Foundry",
+        "Randomness_Examples_of_Randomness"
+      ],
+      "deepen": [
+        {
+          "map": "Pattern_Foundry",
+          "capability": "Edit a small source image that many receivers read."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "own_class",
+      "title": "Several instances with independent state",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "class",
+        "object",
+        "method",
+        "class_name",
+        "@export"
+      ],
+      "introduced": {
+        "map": "Color_Paint",
+        "capability": "Give two cans their own colour state using a small script class when needed."
+      },
+      "prerequisites": [
+        "instances",
+        "own_function",
+        "colour_value"
+      ],
+      "used_in": [
+        "WaveFunctions_AirMusic",
+        "Random_Mushrooms"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_AirMusic",
+          "capability": "Give each responding bar its own state and start time."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "transparency",
+      "title": "Opacity and visible passage",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "alpha",
+        "transparency",
+        "TRANSPARENCY_ALPHA"
+      ],
+      "introduced": {
+        "map": "Color_Walls",
+        "capability": "Change opacity and compare appearance with the unchanged collision body."
+      },
+      "prerequisites": [
+        "colour_value",
+        "collision"
+      ],
+      "used_in": [
+        "Ribbon_Patterns_02",
+        "Ribbon_Patterns_03"
+      ],
+      "deepen": [
+        {
+          "sequence": "shaders",
+          "capability": "Distinguish fragment discard, blending and actual geometry."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "texture",
+      "title": "Image, texture and receiver",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "texture",
+        "ImageTexture",
+        "create_from_image",
+        "albedo_texture",
+        "texture_filter",
+        "PlaneMesh",
+        "QuadMesh"
+      ],
+      "introduced": {
+        "map": "Pattern_Foundry",
+        "capability": "Give a small source image to a surface; name the conversion and receiver."
+      },
+      "prerequisites": [
+        "image_write"
+      ],
+      "used_in": [
+        "Tutorial_Pattern",
+        "Array_Patterns",
+        "Ribbon_Patterns_02"
+      ],
+      "deepen": [
+        {
+          "sequence": "shaders",
+          "capability": "Read the source through explicit sampling coordinates."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "source_rule",
+      "title": "The motif and the rule that repeats it",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "wallpaper_group"
+      ],
+      "introduced": {
+        "map": "Tutorial_Pattern",
+        "capability": "Keep the source fixed and compare translation with reflection."
+      },
+      "prerequisites": [
+        "wrapping",
+        "texture"
+      ],
+      "used_in": [
+        "Array_Patterns",
+        "Symmetry_Seventeen",
+        "Ribbon_Patterns_01"
+      ],
+      "deepen": [
+        {
+          "map": "Symmetry_Seventeen",
+          "capability": "Specify which transformations count as preserving the pattern."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "save_recipe",
+      "title": "A saved copy and a live source",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "version",
+        "FileAccess",
+        "JSON",
+        "stringify",
+        "user_dir",
+        "READ_WRITE",
+        "WRITE",
+        "seek_end"
+      ],
+      "introduced": {
+        "map": "Ribbon_Patterns_03",
+        "capability": "Copy and reapply a small recipe; supply persistence rather than teaching the entire file API."
+      },
+      "prerequisites": [
+        "stored_attribute"
+      ],
+      "used_in": [
+        "Random_Mushrooms"
+      ],
+      "deepen": [
+        {
+          "sequence": "postfoundationscrisis",
+          "capability": "Open persistence and provenance where the saved artifact is the subject."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Pattern_Foundry",
+          "scope": "Holding a copy in memory does not require file persistence.",
+          "kind": "encountered"
+        }
+      ]
+    },
+    {
+      "id": "shader_interface",
+      "title": "A supplied surface program",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "shader",
+        "shading_language",
+        "gpu",
+        "pixel",
+        "UV",
+        "uniform",
+        "set_shader_parameter"
+      ],
+      "introduced": {
+        "map": "Ribbon_Patterns_02",
+        "capability": "Name the inputs changed on a supplied shader and what appearance they affect."
+      },
+      "prerequisites": [
+        "texture",
+        "colour_value"
+      ],
+      "used_in": [
+        "Ribbon_Patterns_03"
+      ],
+      "deepen": [
+        {
+          "sequence": "shaders",
+          "capability": "Write and run the surface program, separate vertex and fragment operations."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "deformation",
+      "title": "Visible displacement and physical support",
+      "group": "Attributes, source and receiver",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "displace()"
+      ],
+      "introduced": {
+        "map": "Ribbon_Patterns_03",
+        "capability": "Change a supplied deformation parameter; compare the visible edge with collision."
+      },
+      "prerequisites": [
+        "mesh",
+        "collision",
+        "shader_interface"
+      ],
+      "used_in": [
+        "WaveFunctions_Sine_Space",
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "deepen": [
+        {
+          "sequence": "shaders",
+          "capability": "Write a vertex displacement"
+        },
+        {
+          "sequence": "softbodies",
+          "capability": "Compare it with a body whose physical state deforms."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "finite_difference",
+      "title": "Two samples give a rate estimate",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "finite_difference",
+        "secant",
+        "tangent",
+        "slope"
+      ],
+      "introduced": {
+        "map": "Change_Intro",
+        "capability": "Subtract readings and divide by their signed separation; vary the interval."
+      },
+      "prerequisites": [
+        "sampling",
+        "arithmetic"
+      ],
+      "used_in": [
+        "VFM_03_Motion",
+        "FormFinding_Descent"
+      ],
+      "deepen": [
+        {
+          "map": "FormFinding_Descent",
+          "capability": "Estimate change in more than one direction."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "accumulation",
+      "title": "Add contributions over an interval",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "accumulation"
+      ],
+      "introduced": {
+        "map": "Change_Intro",
+        "capability": "Add sample times interval; keep signed total distinct from route length."
+      },
+      "prerequisites": [
+        "traversal",
+        "arithmetic"
+      ],
+      "used_in": [
+        "VFM_03_Motion",
+        "Change_Choreography",
+        "WaveFunctions_Synthesis_Lab"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_03_Motion",
+          "capability": "Use a timestep when accumulating velocity and position."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "field",
+      "title": "A position queries a field",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "field",
+        "flow_field",
+        "particle",
+        "field_direction()",
+        "f()",
+        "trail()"
+      ],
+      "introduced": {
+        "map": "Flow_Field",
+        "capability": "Read a direction at the current position; use it for the next step."
+      },
+      "prerequisites": [
+        "coordinates",
+        "own_function",
+        "clock"
+      ],
+      "used_in": [
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act5_ForceAsPlace",
+        "Random_Space_Geometry",
+        "Random_Pheromone"
+      ],
+      "deepen": [
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "capability": "Apply the same sample through different receiver rules."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "unit_direction",
+      "title": "Separate magnitude from direction",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "unit_vector",
+        "normalized",
+        "draw_arrow()"
+      ],
+      "introduced": {
+        "map": "Vectors_Act1_WhatAVectorIs",
+        "capability": "Normalise a nonzero displacement; handle zero explicitly."
+      },
+      "prerequisites": [
+        "displacement",
+        "conditions"
+      ],
+      "used_in": [
+        "Vectors_Act2_VectorArithmetic",
+        "VFM_07_Gravity",
+        "Random_Walk"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_07_Gravity",
+          "capability": "Use direction and distance separately in an influence."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "projection",
+      "title": "Dot product and projection",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "dot",
+        "projection"
+      ],
+      "introduced": {
+        "map": "Vectors_Act2_VectorArithmetic",
+        "capability": "Keep the component along a chosen direction; inspect what remains."
+      },
+      "prerequisites": [
+        "unit_direction",
+        "arithmetic"
+      ],
+      "used_in": [
+        "VFM_05_Launch"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_05_Launch",
+          "capability": "Resolve a supplied initial velocity into chosen components."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "velocity",
+      "title": "A remembered velocity",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "velocity"
+      ],
+      "introduced": {
+        "map": "VFM_05_Launch",
+        "capability": "Identify a supplied velocity as displacement per second in the analytic flight."
+      },
+      "prerequisites": [
+        "clock",
+        "displacement"
+      ],
+      "used_in": [
+        "VFM_03_Motion",
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "VFM_07_Gravity"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_03_Motion",
+          "capability": "Retain velocity and update position from it"
+        },
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "capability": "Compare replacement with accumulated change."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "acceleration",
+      "title": "Change in velocity",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "acceleration",
+        "gravity"
+      ],
+      "introduced": {
+        "map": "VFM_05_Launch",
+        "capability": "Read constant acceleration in the supplied flight; distinguish it from current velocity."
+      },
+      "prerequisites": [
+        "velocity",
+        "clock"
+      ],
+      "used_in": [
+        "VFM_03_Motion",
+        "Vectors_Act4b_Oscillation",
+        "VFM_07_Gravity"
+      ],
+      "deepen": [
+        {
+          "map": "VFM_03_Motion",
+          "capability": "Accumulate acceleration over each step"
+        },
+        {
+          "map": "VFM_07_Gravity",
+          "capability": "Let a rule determine acceleration from relative positions."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "fixed_step",
+      "title": "Fixed-step numerical motion",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "fixed_step",
+        "_physics_process"
+      ],
+      "introduced": {
+        "map": "VFM_03_Motion",
+        "capability": "Update a small model at a stated timestep and compare frame partitions."
+      },
+      "prerequisites": [
+        "acceleration",
+        "accumulation"
+      ],
+      "used_in": [
+        "Vectors_Act4b_Oscillation",
+        "VFM_07_Gravity",
+        "FormFinding_Relaxation",
+        "WaveFunctions_Pendulum"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Pendulum",
+          "capability": "Separate physics step from trace sampling."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "force",
+      "title": "Force, mass and a receiver",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "force",
+        "mass",
+        "RigidBody3D",
+        "apply_central_force"
+      ],
+      "introduced": {
+        "map": "VFM_03_Motion",
+        "capability": "Relate force and mass to acceleration in one reduced model; name engine-supplied physics."
+      },
+      "prerequisites": [
+        "acceleration",
+        "fixed_step"
+      ],
+      "used_in": [
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "VFM_07_Gravity",
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "deepen": [
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "capability": "Compare how two receivers consume an input."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "drag",
+      "title": "Drag, friction and damping",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "drag",
+        "friction",
+        "damping"
+      ],
+      "introduced": {
+        "map": "Vectors_Act4a_KineticForces",
+        "capability": "Apply one velocity-dependent drag law; distinguish it from a contact threshold."
+      },
+      "prerequisites": [
+        "force",
+        "velocity"
+      ],
+      "used_in": [
+        "Vectors_Act4b_Oscillation",
+        "VFM_07_Gravity",
+        "FormFinding_Relaxation"
+      ],
+      "deepen": [
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "capability": "Compare oscillation and settling under a damping parameter."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "spring",
+      "title": "A restoring relation",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "spring",
+        "rest_length",
+        "stiffness"
+      ],
+      "introduced": {
+        "map": "Vectors_Act4b_Oscillation",
+        "capability": "Compute a restoring force from displacement and observe overshoot."
+      },
+      "prerequisites": [
+        "force",
+        "drag"
+      ],
+      "used_in": [
+        "FormFinding_Catenary",
+        "FormFinding_Relaxation",
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum"
+      ],
+      "deepen": [
+        {
+          "map": "FormFinding_Relaxation",
+          "capability": "Turn a desired distance into a positional correction."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "queue",
+      "title": "Throughput and a queue",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "queue",
+        "pop_front",
+        "capacity"
+      ],
+      "introduced": {
+        "map": "Change_Choreography",
+        "capability": "Count admitted and removed entries and retain their order."
+      },
+      "prerequisites": [
+        "list",
+        "clock",
+        "conditions"
+      ],
+      "used_in": [
+        "WaveFunctions_AirMusic"
+      ],
+      "deepen": [
+        {
+          "sequence": "graphtheory",
+          "capability": "Use a queue as part of traversal."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "attraction",
+      "title": "Attraction from relative position",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "attraction"
+      ],
+      "introduced": {
+        "map": "VFM_07_Gravity",
+        "capability": "Use relative position to compute a stated influence; compare fixed and mutual response."
+      },
+      "prerequisites": [
+        "force",
+        "unit_direction"
+      ],
+      "used_in": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "deepen": [
+        {
+          "sequence": "swarmintelligence",
+          "capability": "Combine local influences without confusing their meanings."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "support",
+      "title": "Support and centre of mass",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "centre_of_mass",
+        "support_outline",
+        "Geometry2D",
+        "convex_hull"
+      ],
+      "introduced": {
+        "map": "VFM_09_Legs",
+        "capability": "Move a supplied load or support and predict which relation changes."
+      },
+      "prerequisites": [
+        "collision",
+        "force"
+      ],
+      "used_in": [
+        "FormFinding_Equilibrium",
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "map": "FormFinding_Equilibrium",
+          "capability": "Calculate a small balance; keep a general hull algorithm supplied."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "region",
+      "title": "Entering a region and receiving an influence",
+      "group": "Rates, motion and influence",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "Area3D",
+        "body_entered",
+        "body_exited"
+      ],
+      "introduced": {
+        "map": "Vectors_Act5_ForceAsPlace",
+        "capability": "Connect region membership to the named receiver; state what happens on exit."
+      },
+      "prerequisites": [
+        "event_connections",
+        "force"
+      ],
+      "used_in": [
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "sequence": "swarmintelligence",
+          "capability": "Give another body type an explicit receiver."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "cost",
+      "title": "A function evaluating a candidate",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "cost_function",
+        "landscape()"
+      ],
+      "introduced": {
+        "map": "FormFinding_Descent",
+        "capability": "Return a cost from a position; compare candidates under the same rule."
+      },
+      "prerequisites": [
+        "own_function"
+      ],
+      "used_in": [
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "map": "FormFinding_Forge",
+          "capability": "Change the criterion rather than claim that a low score is universally good."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "gradient",
+      "title": "Gradient and local descent",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "gradient",
+        "central_difference",
+        "gradient_descent",
+        "learning_rate"
+      ],
+      "introduced": {
+        "map": "FormFinding_Descent",
+        "capability": "Estimate directional changes and take one controlled downhill step."
+      },
+      "prerequisites": [
+        "cost",
+        "finite_difference"
+      ],
+      "used_in": [
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "sequence": "machinelearning",
+          "capability": "Apply the update to model parameters and a loss."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "curve_sampler",
+      "title": "A supplied hanging curve",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "cosh",
+        "Curve3D"
+      ],
+      "introduced": {
+        "map": "FormFinding_Catenary",
+        "capability": "Change anchors in a named curve sampler; distinguish its formula from a settling simulation."
+      },
+      "prerequisites": [
+        "own_function"
+      ],
+      "used_in": [
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "deepen": [
+        {
+          "sequence": "softbodies",
+          "capability": "Compare an evaluated curve with a constrained moving body."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "constraints",
+      "title": "A distance constraint and repeated corrections",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "constraint",
+        "relax",
+        "pin",
+        "boundary_condition"
+      ],
+      "introduced": {
+        "map": "FormFinding_Relaxation",
+        "capability": "Hold one point and correct one distance, then repeat with an explicit budget."
+      },
+      "prerequisites": [
+        "list",
+        "spring"
+      ],
+      "used_in": [
+        "FormFinding_Equilibrium",
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "sequence": "softbodies",
+          "capability": "Apply coupled constraints to more points."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "position_history",
+      "title": "Motion from current and previous positions",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "verlet"
+      ],
+      "introduced": {
+        "map": "FormFinding_Relaxation",
+        "capability": "Keep two positions and inspect the update; distinguish storage from current velocity."
+      },
+      "prerequisites": [
+        "velocity",
+        "list",
+        "fixed_step"
+      ],
+      "used_in": [
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "sequence": "softbodies",
+          "capability": "Compare integrator and constraint choices."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "balance",
+      "title": "A small balance calculation",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "lever_law",
+        "calder_builder"
+      ],
+      "introduced": {
+        "map": "FormFinding_Equilibrium",
+        "capability": "Calculate a pivot from two contributions; keep the full mobile builder supplied."
+      },
+      "prerequisites": [
+        "support",
+        "arithmetic"
+      ],
+      "used_in": [
+        "FormFinding_Forge"
+      ],
+      "deepen": [],
+      "previews": []
+    },
+    {
+      "id": "annealing",
+      "title": "A proposal may deliberately worsen the score",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "simulated_annealing",
+        "exp",
+        "chance()",
+        "accept_reject"
+      ],
+      "introduced": {
+        "map": "FormFinding_Annealing",
+        "capability": "Run a short random-proposal example and accept uphill with a stated probability; explain the decision."
+      },
+      "prerequisites": [
+        "random_draw",
+        "seed",
+        "cost",
+        "conditions"
+      ],
+      "used_in": [
+        "FormFinding_Forge"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Definition",
+          "capability": "Inspect repeatability and consumed draws"
+        },
+        {
+          "map": "Random_Gaussian",
+          "capability": "Compare proposal distributions"
+        },
+        {
+          "sequence": "machinelearning",
+          "capability": "Return to objective, schedule and stopping assumptions."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "probability",
+      "title": "A probability threshold",
+      "group": "Search and constraints",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "probability"
+      ],
+      "introduced": {
+        "map": "FormFinding_Annealing",
+        "capability": "Compare a uniform draw with a number between zero and one; do not promise an exact short-run frequency."
+      },
+      "prerequisites": [
+        "random_draw",
+        "conditions"
+      ],
+      "used_in": [
+        "WaveFunctions_John_Cage",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Remove",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Entropy",
+          "capability": "Distinguish probabilities from measured frequencies"
+        },
+        {
+          "map": "Random_Gaussian",
+          "capability": "Compare probability laws."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "angular_motion",
+      "title": "Angular velocity and acceleration",
+      "group": "Waves and sound as a deeper return",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "angular_velocity",
+        "angular_acceleration"
+      ],
+      "introduced": {
+        "map": "WaveFunctions_Intro",
+        "capability": "Read the pendulum state and update its angle; distinguish it from a clocked pose."
+      },
+      "prerequisites": [
+        "velocity",
+        "acceleration",
+        "phase"
+      ],
+      "used_in": [
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Unit_Circle"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Pendulum",
+          "capability": "Relate recorded angle to its own time history."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "polar",
+      "title": "Circle components and polar position",
+      "group": "Waves and sound as a deeper return",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "polar_coordinates"
+      ],
+      "introduced": {
+        "map": "WaveFunctions_Unit_Circle",
+        "capability": "Use angle and radius to construct a point; read sine and cosine as components."
+      },
+      "prerequisites": [
+        "sine",
+        "cosine",
+        "phase"
+      ],
+      "used_in": [
+        "WaveFunctions_3D_Wave_Propagation",
+        "Wavefunctions_Bernini",
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "deepen": [],
+      "previews": []
+    },
+    {
+      "id": "superposition",
+      "title": "Sum several contributions",
+      "group": "Waves and sound as a deeper return",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "weighted_sum",
+        "weight",
+        "wave"
+      ],
+      "introduced": {
+        "map": "WaveFunctions_3D_Wave_Propagation",
+        "capability": "Add evaluated components and compare with each separate contribution."
+      },
+      "prerequisites": [
+        "sine",
+        "traversal"
+      ],
+      "used_in": [
+        "WaveFunctions_Effect_Sound",
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab",
+        "Random_Space"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "capability": "Store and edit the component amounts."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "audio_samples",
+      "title": "Audio samples and a supplied player",
+      "group": "Waves and sound as a deeper return",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "AudioStreamWAV",
+        "PackedByteArray",
+        "encode_s16"
+      ],
+      "introduced": {
+        "map": "WaveFunctions_Effect_Sound",
+        "capability": "Change a synthesis expression while using a supplied buffer writer and playback path."
+      },
+      "prerequisites": [
+        "sine",
+        "sampling"
+      ],
+      "used_in": [
+        "WaveFunctions_AirMusic",
+        "WaveFunctions_Synthesis_Lab"
+      ],
+      "deepen": [
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "capability": "Relate synthesis parameters to the computed output without confusing the scope with heard sound."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "event_time",
+      "title": "An event has its own beginning",
+      "group": "Waves and sound as a deeper return",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "await",
+        "get_tree",
+        "create_timer",
+        "create_tween",
+        "drawn_wait"
+      ],
+      "introduced": {
+        "map": "WaveFunctions_AirMusic",
+        "capability": "Start one response and then another; supply scheduling API internals until needed."
+      },
+      "prerequisites": [
+        "clock",
+        "event_connections"
+      ],
+      "used_in": [
+        "WaveFunctions_Synthesis_Lab",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Game",
+          "capability": "Distinguish scheduled assignment from disclosure."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Trans_Pit",
+          "scope": "The door timer is plain elapsed state; asynchronous scheduling and audio events arrive later.",
+          "kind": "encountered"
+        }
+      ]
+    },
+    {
+      "id": "random_state",
+      "title": "Generator state and request order",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "random",
+        "RandomNumberGenerator",
+        "randf",
+        "seed"
+      ],
+      "introduced": {
+        "map": "Random_Definition",
+        "capability": "Reset, request and assign; discard one draw and inspect which values become neighbours."
+      },
+      "prerequisites": [
+        "random_draw",
+        "seed",
+        "list"
+      ],
+      "used_in": [
+        "Random_Entropy",
+        "Random_Remove",
+        "Random_Walk",
+        "Random_Mushrooms",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Game",
+          "capability": "Separate the hidden outcome from what the player has been told."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "histogram",
+      "title": "Counts, samples and a histogram",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "histogram",
+        "distribution"
+      ],
+      "introduced": {
+        "map": "Random_Entropy",
+        "capability": "Count a finite alphabet; rearrange the same values and compare what the count loses."
+      },
+      "prerequisites": [
+        "list",
+        "traversal"
+      ],
+      "used_in": [
+        "Random_Cubes",
+        "Random_Gaussian"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Gaussian",
+          "capability": "Change bins while retaining the sample."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "entropy",
+      "title": "Entropy of the counted alphabet",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "entropy",
+        "log"
+      ],
+      "introduced": {
+        "map": "Random_Entropy",
+        "capability": "Read a supplied Shannon calculation and specify its alphabet and sample; do not equate it with visual disorder."
+      },
+      "prerequisites": [
+        "histogram"
+      ],
+      "used_in": [
+        "Random_Space_Geometry"
+      ],
+      "deepen": [
+        {
+          "sequence": "qfeplaboratory",
+          "capability": "Compare precisely defined quantities rather than carry the same word between unlike measurements."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "eligible_set",
+      "title": "The set a choice may draw from",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "selection"
+      ],
+      "introduced": {
+        "map": "VFM_08_Arena",
+        "capability": "Identify the eligible candidates before choosing a target; make excluded cases visible."
+      },
+      "prerequisites": [
+        "list",
+        "conditions"
+      ],
+      "used_in": [
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Remove",
+          "capability": "Draw from a changing eligible list"
+        },
+        {
+          "sequence": "proceduralgeneration",
+          "capability": "Compare selection rules and their admitted populations."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "random_walk",
+      "title": "A random next step and its retained trace",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "random_walk",
+        "trace()"
+      ],
+      "introduced": {
+        "map": "Random_Walk",
+        "capability": "Draw a heading, apply the boundary and append the accepted position."
+      },
+      "prerequisites": [
+        "random_state",
+        "displacement",
+        "list"
+      ],
+      "used_in": [
+        "Random_Pheromone"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Pheromone",
+          "capability": "Let retained traces enter the next choice."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "uniform",
+      "title": "Uniform sampling and what it refers to",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "uniform_distribution"
+      ],
+      "introduced": {
+        "map": "Array",
+        "capability": "Name the interval sampled uniformly; do not extend the claim to every transformed output."
+      },
+      "prerequisites": [
+        "random_draw"
+      ],
+      "used_in": [
+        "Random_Definition",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Rotate_Random_XYZ",
+          "capability": "Compare uniform angles with uniform orientations"
+        },
+        {
+          "map": "Randomness_Examples_of_Randomness",
+          "capability": "State the sampling domain of an estimate."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "gaussian",
+      "title": "Normal sampling and distribution shape",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "normal_distribution",
+        "randfn"
+      ],
+      "introduced": {
+        "map": "Random_Gaussian",
+        "capability": "Use a supplied sampler and compare centre and spread in repeated draws."
+      },
+      "prerequisites": [
+        "histogram",
+        "uniform"
+      ],
+      "used_in": [
+        "Random_Mushrooms"
+      ],
+      "deepen": [
+        {
+          "map": "Random_Mushrooms",
+          "capability": "Check the actual distribution used by each construction parameter."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "mean",
+      "title": "Mean and a finite record",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "mean"
+      ],
+      "introduced": {
+        "map": "Random_Cubes",
+        "capability": "Compute sum divided by count and compare it with the individual outcomes."
+      },
+      "prerequisites": [
+        "accumulation",
+        "histogram"
+      ],
+      "used_in": [
+        "Random_Gaussian",
+        "Randomness_Examples_of_Randomness"
+      ],
+      "deepen": [
+        {
+          "map": "Randomness_Examples_of_Randomness",
+          "capability": "Separate an estimate from the population quantity it targets."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "population",
+      "title": "A recipe admits kinds of variation",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "population"
+      ],
+      "introduced": {
+        "map": "Random_Mushrooms",
+        "capability": "Assign draws to named recipe parameters; hold one choice fixed while changing another."
+      },
+      "prerequisites": [
+        "own_function",
+        "random_state"
+      ],
+      "used_in": [
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness"
+      ],
+      "deepen": [
+        {
+          "sequence": "proceduralgeneration",
+          "capability": "Add selection, mutation and fitness only when the process uses them."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "noise_sampler",
+      "title": "A supplied coherent field",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "noise",
+        "FastNoiseLite",
+        "get_noise_1d",
+        "get_noise_2d",
+        "get_noise_3d",
+        "white_noise",
+        "noise_type",
+        "simplex"
+      ],
+      "introduced": {
+        "map": "Random_Space_Geometry",
+        "capability": "Compare independent samples with a coherent sampler; identify what neighbours share."
+      },
+      "prerequisites": [
+        "uniform",
+        "field"
+      ],
+      "used_in": [
+        "Random_Space"
+      ],
+      "deepen": [
+        {
+          "sequence": "noise",
+          "capability": "Construct and compare spatial dependence; distinguish different noise algorithms."
+        }
+      ],
+      "previews": [
+        {
+          "map": "Flow_Field",
+          "scope": "Use a declared direction sampler; do not infer that its internal noise algorithm was taught.",
+          "kind": "supplied"
+        }
+      ]
+    },
+    {
+      "id": "layered_field",
+      "title": "A weighted sum at several scales",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "octave",
+        "fractal_sum",
+        "lacunarity",
+        "gain"
+      ],
+      "introduced": {
+        "map": "Random_Space",
+        "capability": "Change layer count, frequency ratio and weights; identify this display's base function."
+      },
+      "prerequisites": [
+        "superposition",
+        "random_state"
+      ],
+      "used_in": [
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "sequence": "noise",
+          "capability": "Compare normalisation and the chosen base noise across scales."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "feedback",
+      "title": "A trace can affect the next choice",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "trail_grid",
+        "agent"
+      ],
+      "introduced": {
+        "map": "Random_Pheromone",
+        "capability": "Deposit a value at an address and let the next query use it; compare attract and avoid."
+      },
+      "prerequisites": [
+        "random_walk",
+        "stored_attribute",
+        "field"
+      ],
+      "used_in": [
+        "Random_Game"
+      ],
+      "deepen": [
+        {
+          "sequence": "swarmintelligence",
+          "capability": "Compare local feedback among several agents."
+        }
+      ],
+      "previews": []
+    },
+    {
+      "id": "game_state",
+      "title": "Assignment, revelation and consequence",
+      "group": "Randomness as a deeper investigation",
+      "status": "proposed_not_promoted",
+      "taxonomy_ids": [
+        "gate"
+      ],
+      "introduced": {
+        "map": "Random_Game",
+        "capability": "Keep a chosen result and reveal it later; distinguish changed knowledge from a new draw."
+      },
+      "prerequisites": [
+        "random_state",
+        "state_machine",
+        "conditions"
+      ],
+      "used_in": [],
+      "deepen": [
+        {
+          "sequence": "postfoundationscrisis",
+          "capability": "Return to the permissions defined by an authored rule."
+        }
+      ],
+      "previews": []
+    }
+  ]
+}

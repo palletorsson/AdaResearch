@@ -1,0 +1,68 @@
+{
+  "review": "Incoming Fable runtime evidence; no new Godot run by Astra",
+  "parses": 8,
+  "W1_excerpts_matching_source_lines": 26,
+  "reports": [
+    {
+      "path": "ada_run/waves_chance_noise/probe_w1_reload.json",
+      "checks": 24,
+      "failures": [],
+      "scope": "artifact scenes under a bare root, not the museum hall; two instances 3-4 m apart; unload/reload of one",
+      "sha256": "8251df3e6a5742be01d84237fac71a1084c3ab2e0a24b860866b2f69e8995eca",
+      "coverage_limitation": "artifact scenes under a bare root, not the museum hall; two instances 3-4 m apart; unload/reload of one"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/Noise_Perlin_Simplex/probe_noise_pair.json",
+      "checks": 51,
+      "failures": [],
+      "scope": "Noise_Perlin_Simplex",
+      "sha256": "b9b518fe7f815bbd3e7dc31e581241a8e52b9414c798717849dafe4f1713a43e",
+      "coverage_limitation": "slider_moved emitted on simplex FREQ/OCTAVES; REPLAY button_pressed emitted after slider changes; seed-cycle buttons called by method; no tracked hand"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/Random_Definition/probe_random_definition.json",
+      "checks": 25,
+      "failures": [],
+      "scope": "Random_Definition",
+      "sha256": "5f4fb196c758378ba0e8e11fb75dd3fb1bd4e5b34a5c257e731fe3a4096c66f3",
+      "coverage_limitation": "InteractableAreaButton.button_pressed emitted programmatically; slider read, not driven; no tracked hand"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Intro/probe_intro.json",
+      "checks": 22,
+      "failures": [],
+      "scope": "WaveFunctions_Intro",
+      "sha256": "f3439fe633debedda9413351ae85763e1f9264f7e5fe1db7eb8aa6914a539005",
+      "coverage_limitation": "NOT TESTABLE in a SceneTree probe: grab_sphere.gd / XR Tools pickable name autoloads at compile time (see engine.log); the bob is built in the shipped game"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Pendulum/probe_pendulum.json",
+      "checks": 50,
+      "failures": [],
+      "scope": "WaveFunctions_Pendulum",
+      "sha256": "feb404131d1b0569de3775957479bce86494217ebb1034f862af43d2d739f3f0",
+      "coverage_limitation": "button_pressed emitted programmatically on the panel's push buttons; no tracked hand"
+    },
+    {
+      "path": "ada_run/waves_chance_noise/WaveFunctions_Sine_Space/probe_sine_space.json",
+      "checks": 57,
+      "failures": [],
+      "scope": "WaveFunctions_Sine_Space",
+      "sha256": "a921f3e34013e8139000ede242bec2a829db66328d42fb1d8a28a1bf1eddf6cb",
+      "coverage_limitation": "slider_moved and button_pressed emitted programmatically on the panel's own controls; no tracked hand"
+    }
+  ],
+  "source_sha256": {
+    "commons/testing/probe_wcn_intro.gd": "870780f666acec9985adfe6d2ce2c6046a92684827122ee16e0309b950b6426f",
+    "commons/testing/probe_wcn_random_definition.gd": "b19c728f65c347084bf5087f9136f88948ab4a1f56135a95de830b1502d08165",
+    "commons/testing/probe_wcn_noise_pair.gd": "43a1f918e9de5540abd119e558da5aaf573489a190eb78edac3d2cf6a241ad67",
+    "commons/testing/probe_wcn_pendulum.gd": "0c25b0bbb6a5b43b3b044129b0eb64422926371dc901e260e4874d51c471465f",
+    "commons/testing/probe_wcn_sine_space.gd": "11d50ed3996e9b12861aa6e4f8bf2a9ff3e5f2735b4a45a4b18812cb3710740e",
+    "commons/testing/probe_wcn_w1_reload.gd": "ffe99908cad19fbce4b8fbe32a0c463c6d5bbc4adc2bf704c79d1e1bbee0709e",
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "ebbee4c1a3d50e548dfd0af2c92f0e8a2b6fb0ea5022f338bead877b6f9484e5",
+    "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd": "d43247da7a596e45215b5f2ffe288f676c7bc0d2854579c4920765d3a795d5d6"
+  },
+  "intro_probe_changed_after_recorded_run": true,
+  "headset_verified": false,
+  "reported_check_total": 229
+}

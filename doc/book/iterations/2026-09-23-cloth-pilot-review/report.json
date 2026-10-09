@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "live hall places cloth and its desk",
+      "passed": true
+    },
+    {
+      "name": "desk bound to actual cloth and all seven controls",
+      "passed": true
+    },
+    {
+      "name": "eight active strips",
+      "passed": true
+    },
+    {
+      "name": "each strip initially pins eight of 112 points",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: gantry",
+      "passed": true
+    },
+    {
+      "name": "first actual SUPPORT press removes the frame",
+      "passed": true
+    },
+    {
+      "name": "same cloth nodes and pinned set survive",
+      "passed": true
+    },
+    {
+      "name": "pinned points remain fixed when frame removed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: no-frame",
+      "passed": true
+    },
+    {
+      "name": "SUPPORT callback reaches hoop",
+      "passed": true
+    },
+    {
+      "name": "SUPPORT callback reaches mast",
+      "passed": true
+    },
+    {
+      "name": "SUPPORT callback reaches wall",
+      "passed": true
+    },
+    {
+      "name": "SUPPORT callback reaches gantry",
+      "passed": true
+    },
+    {
+      "name": "console readout reflects the support",
+      "passed": true
+    },
+    {
+      "name": "PINS callback changes eight to two per strip",
+      "passed": true
+    },
+    {
+      "name": "formerly pinned top edge actually moves",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corners",
+      "passed": true
+    },
+    {
+      "name": "RELEASE callback leaves zero pins",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: released",
+      "passed": true
+    },
+    {
+      "name": "REBUILD restores eight top-row pins",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: desk",
+      "passed": true
+    },
+    {
+      "name": "review run completes",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "algorithms/softbodies/cloth_straps/cloth_straps.gd": "b3e112fe529f03cf198966d84e2262b0ece667a5be6404051b4592a27c3b631c",
+    "commons/artifacts/timing_machines/soft_workshop.gd": "bd6687e7789efe8fbb51896ae263337a2720f9165bca382c0efde88f4fefb0be",
+    "commons/artifacts/timing_machines/soft_workshop.json": "bd67fb5002d95e0a1c70144956c37dfc045073e47658108ce2f527efb6d55983",
+    "frame_removed_all_points_motion_m": 0.000437819195212796,
+    "initial_full_cloth_motion_1s_m": 0.0112533438950777,
+    "initial_pinned_motion_1s_m": 0.0,
+    "newly_unpinned_top_points_motion_m": 0.153967007994652
+  },
+  "passed": true,
+  "scope": "Actual isolated museum, synthetic pointer events through the existing push-button path. Sampled solver vertices and fixed-camera native captures. No physical reach, walking or headset test."
+}

@@ -1,0 +1,399 @@
+{
+  "kind": "book-framing-reading-edition",
+  "generated_at": "2026-09-29T07:15:16.299500+00:00",
+  "status": "working drafts; not accepted final manuscript",
+  "order": [
+    "preface",
+    "Day Zero",
+    "active spine",
+    "QFEP afterword"
+  ],
+  "canonical_manuscripts": [
+    "doc/book/preface.md",
+    "doc/book/day-zero.md",
+    "doc/book/afterword-qfep.md"
+  ],
+  "sequence_count": 25,
+  "hall_count": 203,
+  "chapters": [
+    {
+      "sequence": "primitives",
+      "maps": [
+        "Point_Zero",
+        "Point_One",
+        "Point_Lines",
+        "Point_Trace",
+        "Point_Line_Grid",
+        "Point_Triangle_Context",
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Primitives_Portals",
+        "Primitives_Melencolia"
+      ]
+    },
+    {
+      "sequence": "transformation",
+      "maps": [
+        "Trans_Pre",
+        "Trans_Introduction",
+        "Trans_Translation",
+        "Trans_Rotation",
+        "Trans_Scale",
+        "Trans_Body",
+        "Trans_Pit"
+      ]
+    },
+    {
+      "sequence": "array_tutorial",
+      "maps": [
+        "Array",
+        "Tutorial_3D",
+        "Tutorial_Tiling_Floor",
+        "Tutorial_Tiling_Walls",
+        "Tutorial_Disco"
+      ]
+    },
+    {
+      "sequence": "color",
+      "maps": [
+        "Color_Context_Placed",
+        "Color_Flashlight",
+        "Color_Nails",
+        "Color_Rainbow",
+        "Color_Pillar",
+        "Color_Grid_Pallet",
+        "Color_Paint",
+        "Color_Walls"
+      ]
+    },
+    {
+      "sequence": "tiling",
+      "maps": [
+        "Pattern_Disco",
+        "Pattern_Foundry",
+        "Tutorial_Pattern",
+        "Array_Patterns",
+        "Symmetry_Seventeen",
+        "Ribbon_Patterns_01",
+        "Ribbon_Patterns_02",
+        "Ribbon_Patterns_03"
+      ]
+    },
+    {
+      "sequence": "change",
+      "maps": [
+        "Change_Intro",
+        "Flow_Field"
+      ]
+    },
+    {
+      "sequence": "forces",
+      "maps": [
+        "Vectors_Act1_WhatAVectorIs",
+        "VFM_02_Operations",
+        "Vectors_Act2_VectorArithmetic",
+        "VFM_05_Launch",
+        "VFM_03_Motion",
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "Change_Choreography",
+        "VFM_07_Gravity",
+        "VFM_09_Legs",
+        "VFM_08_Arena",
+        "Vectors_Act5_ForceAsPlace"
+      ]
+    },
+    {
+      "sequence": "formfinding",
+      "maps": [
+        "FormFinding_Descent",
+        "FormFinding_Catenary",
+        "FormFinding_Relaxation",
+        "FormFinding_Equilibrium",
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ]
+    },
+    {
+      "sequence": "wavefunctions",
+      "maps": [
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle",
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Bernini",
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic",
+        "Wavefunctions_Sky_Stairs",
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab"
+      ]
+    },
+    {
+      "sequence": "randomness",
+      "maps": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Cubes",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk",
+        "Random_Gaussian",
+        "Random_Mushrooms",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness",
+        "Random_Pheromone",
+        "Random_Space",
+        "Random_Game"
+      ]
+    },
+    {
+      "sequence": "noise",
+      "maps": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise",
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ]
+    },
+    {
+      "sequence": "shaders",
+      "maps": [
+        "Shader_01_Shaping",
+        "Shader_05_Patterns",
+        "Shader_11_QueerRubber",
+        "Shader_09_FBM",
+        "Shader_12_PinkExtravaganza",
+        "Shader_10_ReactionDiffusion"
+      ]
+    },
+    {
+      "sequence": "cellularautomata",
+      "maps": [
+        "CA_Introduction",
+        "CA_ElementaryRules",
+        "CA_GameOfLife",
+        "CA_BeyondBinary",
+        "CA_ExpandingSpace",
+        "CA_SoftRules",
+        "CA_AgentsCircuits",
+        "CA_EdgeOfChaos"
+      ]
+    },
+    {
+      "sequence": "fractals",
+      "maps": [
+        "Fractal_Recursion",
+        "Fractal_RecursiveTrees",
+        "Fractal_CantorSet",
+        "Fractal_KochSierpinski",
+        "Fractal_MengerSponge",
+        "Fractal_GoldenSpiral",
+        "Fractal_Synthesis"
+      ]
+    },
+    {
+      "sequence": "lsystems",
+      "maps": [
+        "LSystems_Grammar_Lab",
+        "LSystems_Growth",
+        "LSystems_Grammars_And_Curves",
+        "LSystems_Architecture",
+        "LSystems_Competition",
+        "LSystems_Living",
+        "LSystems_Shape_Grammars",
+        "Assemblage_Same_Desire"
+      ]
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "maps": [
+        "PG_Genetic_Evolution",
+        "PG_Space_Colonization",
+        "PG_Branching_Growth",
+        "PG_Percolation_Network",
+        "PG_Caves_Mazes",
+        "PG_Sculpted_Forms",
+        "PG_Mirrored_Patterns"
+      ]
+    },
+    {
+      "sequence": "softbodies",
+      "maps": [
+        "SoftBodies_Soft_Body_Deformation",
+        "SoftBodies_Cloth_Physics",
+        "SoftBodies_Carusell",
+        "SoftBodies_Obsticals",
+        "SoftBodies_Obsticals_Part2",
+        "SoftBodies_Playground_of_Joy",
+        "SoftBodies_Affect_Theory_Visualization",
+        "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "Topology_Entropy_Morphogenesis"
+      ]
+    },
+    {
+      "sequence": "isosurfaces",
+      "maps": [
+        "ISO_Introduction",
+        "ISO_LookupTable",
+        "ISO_ShapesGallery",
+        "ISO_TorusGyroid",
+        "ISO_Sculpting",
+        "ISO_FlatTerrain",
+        "ISO_PortalLandscape",
+        "ISO_Caves",
+        "ISO_CaveGeneration",
+        "ISO_AnimatedNoise",
+        "ISO_Metaballs",
+        "ISO_ImplicitModeling",
+        "ISO_RhizomeBody"
+      ]
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "maps": [
+        "Boolean_Verbs",
+        "Boolean_Gallery",
+        "Boolean_Works"
+      ]
+    },
+    {
+      "sequence": "swarmintelligence",
+      "maps": [
+        "SwarmIntelligence_PhysarumColony",
+        "SwarmIntelligence_FlowFields",
+        "SwarmIntelligence_Boids_Algorithm",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM",
+        "SwarmIntelligence_Ant_Colony_Optimization",
+        "SwarmIntelligence_Particle_Swarm_Optimization",
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+      ]
+    },
+    {
+      "sequence": "machinelearning",
+      "maps": [
+        "ML_Evolution",
+        "ML_Gradient_Landscape",
+        "ML_Classification",
+        "ML_Neural_Networks",
+        "ML_Perception",
+        "ML_Sequence_Memory",
+        "ML_Generative",
+        "ML_Synthesis"
+      ]
+    },
+    {
+      "sequence": "graphtheory",
+      "maps": [
+        "GT_Foundations",
+        "GT_Layout",
+        "GT_Pathfinding",
+        "GT_Network_Analysis",
+        "GT_Connectivity",
+        "GT_Spanning_Trees",
+        "GT_Flow",
+        "GT_Matching"
+      ]
+    },
+    {
+      "sequence": "foundationscrisis",
+      "maps": [
+        "Euclid_Parallel",
+        "NonEuclidean_Spaces",
+        "Russell_Paradox",
+        "Godel_Incompleteness",
+        "Escher_Impossible",
+        "Brouwer_Intuitionism",
+        "Florensky_Paraconsistent",
+        "Crisis_Synthesis"
+      ]
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "maps": [
+        "QFEP_Introduction",
+        "QFEP_F_Term",
+        "QFEP_E_Term",
+        "QFEP_Lambda_Spectrum",
+        "QFEP_Phi_Term",
+        "QFEP_Edge_Of_Chaos",
+        "QFEP_Sandbox",
+        "QFEP_Synthesis"
+      ]
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "maps": [
+        "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "CriticalAlgorithms_Applied_Ethics",
+        "SpeculativeComputation_Paraconsistent_Engineering",
+        "SpeculativeComputation_Situated_Computation",
+        "SpeculativeComputation_Collective_Knowledge",
+        "SpeculativeComputation_Rhizome_Network",
+        "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "PostCrisis_Synthesis"
+      ]
+    }
+  ],
+  "first": "Point_Zero",
+  "last": "PostCrisis_Synthesis",
+  "sources_sha256": {
+    "doc/book/preface.md": "c0deeee5705bf1ff10e4a3826dcf3992ac319f8358192717008708cee7702acf",
+    "doc/book/day-zero.md": "5c099ac81ac40b5f3b4649212bf299bcbbf53c66b21ef83f9494f3d6ba66fe4a",
+    "doc/book/afterword-qfep.md": "1f5d926d4e509276fa3988771f31e0cd3751c727b7e15a7a2f119d52efae9187",
+    "doc/research/qfep/entropic-morality.md": "754631e206c1434ce8546fcb96455540aa5ed8e06a1f0b419d1d5be32b1c0d3c",
+    "doc/book/iterations/QFEP_READING.md": "cf3f3c38dcbd8fc024a278094097d06b74300e3340846374a1f2aeb7ba90726b",
+    "commons/maps/Point_One/final.md": "6c071ca94607d4c6bf7edd9a57a5e25682e0f7987f2f2681126f2701bb934a96",
+    "commons/maps/Point_Trace/final.md": "6f18920fb10e3c58c40af81c081f05d92f17cd07c3cd5c9aa240c784fe1bb6e4",
+    "commons/maps/Point_Line_Grid/final.md": "92444555d2228b2f2535b5896b3eea28394e7ef1dde36f85848a17201d1aaa80",
+    "doc/research/qfep/README.md": "5acc6c4bb844e913fedbde0891dcc795a83a73a320a64851682a51a8b73a62f7",
+    "commons/maps/QFEP_F_Term/final.md": "ec51d6cd89c9c88c546dde5fc4cfacaf0edc45959eb0a22a43c0e1c8ecbc8bc4",
+    "commons/maps/QFEP_E_Term/final.md": "393e31577e7e91038a65e3777d0f00ced09b6f47b47754eab531f0d42f538cce",
+    "commons/maps/Point_Lines/final.md": "b9cc54e6497766876510b0e53296257e729d489f28a7c5edb9d7fde1b1b52bd4",
+    "commons/maps/QFEP_Introduction/final.md": "b599c5e323e35e4849feba90644d5fabd31f65967dbcaff718c991b75b91a529",
+    "commons/maps/QFEP_Sandbox/final.md": "f17a66f424511f91e663fc63e66cb098d450be50db975ddef9a2be240f9ab14b",
+    "commons/maps/QFEP_Synthesis/final.md": "13cdc7c30465af10627618dacb4d92d2172dc2689b4583642c9e2f2a576ceda9",
+    "doc/ENTRY.md": "13ced5601f1302d4d0f00815a973088fe9b4664c91ec0627620ae401e0711c3a",
+    "doc/book/BOOK_FRAME.md": "8ea4736a3abdb8b2c84c309ad2e14aec7e1ad8016d6c5cbfdf7355e3739e7545",
+    "doc/book/STUDENT_TOOLBOX.md": "d39fd06a67f2802c1a5cb264853d6944d0a1d071775b3a9aaf6ce11ff9205be8",
+    "commons/maps/curriculum_spine.json": "fea5f0a0ad98ce94fbd3f1651cf1e4c162c0aa5d677451ae2d70efaaa743bead",
+    "commons/maps/sequences/primitives.json": "608f15828251378786a9c2aaa4de6b5ca3ae9e1d44248649e76adfbef30c5142",
+    "commons/maps/sequences/transformation.json": "11560133f7065898cec18fe56835f4e2744bf86bb53949bc713309e86152769e",
+    "commons/maps/sequences/array_tutorial.json": "ec1696a3b44add942e9452625bf1a73c8c824a65dbf17222fa447277aa320496",
+    "commons/maps/sequences/color.json": "5dd13255d60e0ebbc820f8f36b4871889043f754cb5e184351b804d777ad975b",
+    "commons/maps/sequences/tiling.json": "074b210d5c61c8e57396929e44779903e0a1d6284bf0c0c43fda6b8753107a24",
+    "commons/maps/sequences/change.json": "f9c2d45dd638f3ab5c85e46ed56033b892255275303e78062bc3aa4daee16bf7",
+    "commons/maps/sequences/forces.json": "04653a8a1d19aedd548bc0a3051249aa870898e7ed959736f8035a2153ee9f2f",
+    "commons/maps/sequences/formfinding.json": "348678399e5d4091664db3d4608e38d1401997788838be8d3dd05e6ff73b8d7b",
+    "commons/maps/sequences/wavefunctions.json": "f72def8880ce0eb186a0ce4cacd7eea2ffa61e0bc31cf27546f4c8b5ef04c2b9",
+    "commons/maps/sequences/randomness.json": "eb9c6122b996eaf56a3005e02c1be2afb4a29556fc2a4e6cc7c6c8d95e59f6da",
+    "commons/maps/sequences/noise.json": "8470c73f6617d144a1dfb7c7a3c3331a43465c5ae4b774cd05645c6c7b1c6fa7",
+    "commons/maps/sequences/shaders.json": "ff6cdfcb009301221fc5b77b3c75c5d5222e345239eb656a5836feff7ede1b8d",
+    "commons/maps/sequences/cellularautomata.json": "304d37c6b6d23bda19b839db1fa89c01138eedc1dc3115346935d2b40c5d9eb1",
+    "commons/maps/sequences/fractals.json": "98fc39595025112a2e130e6829c08efdf0558957d90d6794924ea33650925deb",
+    "commons/maps/sequences/lsystems.json": "48c6f8e2d76b8069d2cc9e7d2a2600d53f8bfc98e354aadd9048299d2cd30a5a",
+    "commons/maps/sequences/proceduralgeneration.json": "4ef7fd9ed1f5e20216f46c486559d68eef1a20094b4fda84d41132be3b3f37d5",
+    "commons/maps/sequences/softbodies.json": "48f2d69cb0bab73f67be7007d048cc2173748ebf778d661559667c7aa8fda24c",
+    "commons/maps/sequences/isosurfaces.json": "e0724f16ba868f9b81c96626ca9ec85f3d1b67ebd25f3b47522ab0127b7ac58b",
+    "commons/maps/sequences/boolean_surfaces.json": "72bd3c6247153aac214b0e2ef3e0127a47c9e492120e350fb87aa754d8708281",
+    "commons/maps/sequences/swarmintelligence.json": "71cd3680b239044ef8d9bb8e5ea8f3f2125e55edfb4a03c698eec737fe0ba24f",
+    "commons/maps/sequences/machinelearning.json": "2726a02dfbb1093c7b9a1c83ee023552bb5c7e3684aadfb833b4744fcac09afb",
+    "commons/maps/sequences/graphtheory.json": "89a51f0a8ce236f2e27e345262a8eab59e512e8775810d8317e86abb01e28d7f",
+    "commons/maps/sequences/foundationscrisis.json": "2e0fe47f02cc041385c352d743a6789154e1131d8a9c255551a93408d8ca3bc6",
+    "commons/maps/sequences/qfeplaboratory.json": "0424d1a366076c798f26f5f67ca46d26858e55f15b02090df5017d942d0faf9f",
+    "commons/maps/sequences/postfoundationscrisis.json": "3968b71dadf16ddb172e007d84db348cd217267b573019f55a79c4b5d88e4324",
+    "commons/maps/Point_Zero/final.md": "5b2b76f0d49b62383dcc9b3f0953bb25f3d5a3b5a388fddfac823fd71d859e4d",
+    "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+  },
+  "preview_url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-23-book-frame/index.html"
+}

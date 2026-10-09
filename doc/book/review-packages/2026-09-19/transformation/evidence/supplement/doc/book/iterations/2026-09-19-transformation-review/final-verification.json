@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-19",
+  "original_review_inputs_unchanged": {
+    "zip": true,
+    "review_text": true
+  },
+  "archived_global_class_paths_remaining": 0,
+  "exporter_tests": {
+    "command": "python -X utf8 -m unittest discover -s tests -p test_sequence_review_packages.py -v",
+    "tests": 6,
+    "failed": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 4.192
+  },
+  "museum_regression_report": "ada_run/test-results/museum/20260919T120449Z-7f15527d/report.md",
+  "changed_source_sha256": {
+    "tools/build_sequence_review_packages.py": "62605c78c95efbaebf3ebdac83817152fc884211b30b5de0f46971277c367054",
+    "tests/test_sequence_review_packages.py": "ef98afbf568736838312d92e2b51c02c526ea6617b21cbaf32a1efc561d60d8a",
+    "doc/book/review-packages/.gdignore": "d9a05709c0c7fae926a6f938bb2273bdd0c360441b53308e4df4790549fb8a12",
+    "commons/artifacts/registry/commons_artifacts.json": "6c8d90077c872a571be2cbab86c66ded0aa87be0e57fd08e0fa6740823a3bf1c",
+    "algorithms/transformation/carousel_cake/carousel_cake.gd": "eef1c359e5af74e249df172a8a60ae75fa0c4ec1d59ebdc15a4e2aae5cac4602",
+    "algorithms/primitives/scaleme/scale_me.gd": "33e22bba61295f65403e3dbed1540ba535ccc5b35192c3e242b9e293a2a09ec1",
+    "commons/hazards/transformation_blocks/grower_block.gd": "c4c7a5be7159c0a008a8dd1e3c1a9e5b5a5daa69ccd2c7a099c02c4939c94b8a"
+  },
+  "limits": "No headset, tracked-controller, unassisted learner or continuous whole-sequence traversal performed. See opening-audit.md for the partial Translation result.",
+  "final_chapters_match_original_package": {
+    "Trans_Pre": true,
+    "Trans_Introduction": true,
+    "Trans_Translation": true,
+    "Trans_Rotation": true,
+    "Trans_Scale": true,
+    "Trans_Body": true,
+    "Trans_Pit": true
+  }
+}

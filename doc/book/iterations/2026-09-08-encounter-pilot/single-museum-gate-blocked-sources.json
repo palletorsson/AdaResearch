@@ -1,0 +1,32 @@
+{
+  "room": "Tutorial_Single",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Tutorial_Single/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Tutorial_Single/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "eb106a0da0ef494660f184e4276266d9c1e3d87c12f73ad45991cd744e3f7d67",
+    "commons/maps/Tutorial_Single/map_data.json": "b97ab523e1b63f61379013a6a17bade9ccaff0bb336e5d12f5d8876ce897b8c7",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "21a2972b8d764559d8624ee7a64f81b07f9096052b988a99ade3fde0c55ef187",
+    "ada_run/encounter_pilot/Tutorial_Single/control.json": "7de82886ca6172ea506e0e8e1b3063f0e42bc21a17f1e6f5f8e99580e696870f",
+    "ada_run/encounter_pilot/Tutorial_Single/necklace_hand.json": "643ebb578a3d8aba41bf364be493ab6f5c10a0537124f491e81e8de8db4892b9",
+    "ada_run/encounter_pilot/Tutorial_Single/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Tutorial_Single/em_bake.json": "04eca89eeb9555eb107be37b50ba696cc3279ea2f7066d3a3104176300487f4a",
+    "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+    "commons/scenes/mapobjects/pick_up_cube.tscn": "b58dd2b472b40498ce7bb2fa388126eb7fcdc7c52a054bac4464b1d274bac619",
+    "commons/scenes/mapobjects/pick_up_cube.gd": "fc4599790d901965a0688c5f031812653d3261ad4e611bd9c35b2137e04b617c",
+    "commons/maps/Tutorial_Single/technical.md": "5f71a56e061497245df7bfb01c7389c6292d0545744214fc7846d8c48cea1d76"
+  }
+}

@@ -1,0 +1,2656 @@
+{
+  "bias_visualizer": [
+    {
+      "registry_file": "commons/artifacts/registry/commons_artifacts.json",
+      "registry_sha256": "76b2509e7406332a44e04662eb8b08a9a0883c64c3a332f17d14a279e7d61651",
+      "entry_key": "bias_visualizer",
+      "entry": {
+        "category": "emergence",
+        "complexity": "intermediate",
+        "description": "Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
+        "dev_themes": [
+          "art",
+          "commons",
+          "emergence",
+          "mixed"
+        ],
+        "include_in_map_data": true,
+        "interaction": "observe",
+        "interactions": [
+          "observe"
+        ],
+        "lookup_name": "bias_visualizer",
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "name": "Bias Visualizer",
+        "parameters": {
+          "footprint": [
+            2.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "qfep_connection": "Bias is frozen E(S) â€” entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical Ï†: questioning whose data, whose categories.",
+        "scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
+        "sequence": "postfoundationscrisis",
+        "tags": [
+          "bias",
+          "statistics",
+          "critical_theory",
+          "visualization",
+          "fairness"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "vertex_color",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "particle_lifecycle",
+            "driven_by": "cpu_simulation",
+            "affects": [
+              "transform",
+              "color"
+            ]
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "critical",
+            "algorithmic",
+            "thinking",
+            "depends"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.2,
+            0.55,
+            1.37
+          ],
+          "aabb_center": [
+            0.0,
+            0.03,
+            0.09
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.37,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          2.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.082521Z",
+          "derived_from": "aabb_size + category"
+        },
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "disclosure": [
+              "oracle",
+              "tally",
+              "ledger",
+              "works",
+              "origin"
+            ],
+            "analogy_type": [
+              0,
+              1,
+              2
+            ]
+          },
+          "default": "disclosure=origin, analogy_type=0 - both existing placements are untouched. Every rung of this ladder is already on the face of the case (axis inlay, connection lines, analogy screen, interpretive caption), so `origin` IS the shipped state and the only value that changes nothing; analogy_type=0 is the export default the .tscn already sets.",
+          "was": "The case showed all five rungs unconditionally and apply_grid_config was `pass`, so every token a map put on a placement was parsed, logged and silently discarded. analogy_type existed as a working export but was never declared, which is why the runner reported NO TURNABLE KNOBS.",
+          "note": "`disclosure` is prng_crank_machine's ladder, read by preload from the file that owns it (the same link slot_machine makes) rather than copied — oracle < tally < ledger < works < origin, monotone. Read here: oracle = twenty words coloured by the gender the embedding gave them, with no axis drawn, no lines, a dark screen and a blank label — the deployed condition, where the skew arrives inside the output and the machine does not mention it. Then + the aggregate (the MASC/FEM axis machined into the deck), + the per-item record (each profession wired to the pole that pulled it), + the mechanism (man - woman + nurse = ?), + the origin (Who was in the training data?). NOTE the default departs from the family's legacy `works` because this artifact's legacy face carries the caption; an unreadable token therefore falls back to `origin`, not `works`, so a typo cannot strip the provenance question off a wall two rooms already read. analogy_type is declared as its int samples because cabinet_sweep coerces numerics and the gate range-checks them; the words behind them are Gender-Profession, Gender-Trait, Algorithmic Redlining."
+        }
+      }
+    }
+  ],
+  "bias_from_inside": [
+    {
+      "registry_file": "commons/artifacts/registry/algorithms_misc.json",
+      "registry_sha256": "cac37fec0cf9c1c4f9c01b6544ee2c6c89e9b640bd3bafd82486c3844a8752a7",
+      "entry_key": "bias_from_inside",
+      "entry": {
+        "category": "critical",
+        "complexity": "intermediate",
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "perspective_blend": [
+              0.0,
+              0.5,
+              1.0
+            ]
+          },
+          "default": "perspective_blend=0.0 - the pre-promotion state, so its three existing placements are unchanged",
+          "was": "perspective_blend is this artifact's declared critical_parameter and was a PRIVATE var pinned at 0.0, with apply_grid_config() an empty pass. Every placement showed the god's-eye view; the compressed perspective the artifact exists to deliver was reachable only by grabbing a VR slider, and appeared in no capture, gallery or still.",
+          "note": "Hero artifact of postfoundationscrisis, the spine-terminal sequence, where it recurs across three maps."
+        },
+        "description": "Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god's-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).",
+        "dev_themes": [
+          "algorithms",
+          "education",
+          "misc"
+        ],
+        "include_in_map_data": true,
+        "interaction": "interact",
+        "lookup_name": "bias_from_inside",
+        "map_ready": true,
+        "map_sequences": [
+          "criticalalgorithms"
+        ],
+        "name": "Bias From Inside",
+        "parameters": {
+          "footprint": [
+            2.0,
+            2.0,
+            2.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/artifacts/bias_from_inside/bias_from_inside.tscn",
+        "sequence": "criticalalgorithms",
+        "tags": [
+          "algorithmic_bias",
+          "embedding",
+          "perspective",
+          "critical_algorithms",
+          "compression",
+          "word_vectors"
+        ],
+        "geometry_spec": {
+          "mesh_type": "instanced_particles",
+          "topology": "scattered",
+          "construction": {
+            "method": "multimesh_instancing",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "allocate_instances",
+              "set_transforms",
+              "update_per_frame"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "multimesh",
+          "vertex_estimate": "~288"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "algorithmic_bias",
+            "algorithmic_bias_visualization",
+            "sibling"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.37,
+            0.71,
+            1.36
+          ],
+          "aabb_center": [
+            -0.04,
+            0.24,
+            0.03
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.37,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          2.0
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.035559Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "science_screen": [
+    {
+      "registry_file": "commons/artifacts/registry/shaders.json",
+      "registry_sha256": "565f7f2712e6ec41c7c27f55e5cd79659c707a5e548c18c8dc45364a1880af8f",
+      "entry_key": "science_screen",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "support": [
+              "stand",
+              "frame",
+              "cabinet",
+              "pylon"
+            ],
+            "surface": [
+              "plane",
+              "curve",
+              "triptych",
+              "tiles"
+            ]
+          },
+          "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+          "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
+        },
+        "category": "shaders",
+        "complexity": "intermediate",
+        "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+        "dev_themes": [
+          "shaders",
+          "visual"
+        ],
+        "footprint": [
+          4,
+          3,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "science_screen",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Science Screen",
+        "parameters": {
+          "footprint": [
+            4,
+            3,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+        "sequence": "patterngeneration",
+        "size_group": "standard",
+        "tags": [
+          "projection",
+          "transformation",
+          "screen",
+          "abstraction",
+          "2d",
+          "reflection",
+          "display",
+          "viewport",
+          "grid",
+          "configurable"
+        ],
+        "qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+        "gamwell_reference": "",
+        "capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+        "interactions": [
+          "bring a grid-aware artifact near the screen",
+          "compare the embodied 3D object with its flat rendering",
+          "read algorithm labels and cell statistics on the display",
+          "use the screen to reflect on what projection keeps and discards"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.14,
+            2.35,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            1.14,
+            -0.08
+          ],
+          "grid_cells": [
+            4,
+            1
+          ],
+          "max_dimension_m": 3.14,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 10,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.268877Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "situated_readout": [
+    {
+      "registry_file": "commons/artifacts/registry/algorithms_misc.json",
+      "registry_sha256": "cac37fec0cf9c1c4f9c01b6544ee2c6c89e9b640bd3bafd82486c3844a8752a7",
+      "entry_key": "situated_readout",
+      "entry": {
+        "dna": {
+          "axes": {
+            "address": [
+              "footnote",
+              "erasure",
+              "witness",
+              "parallax",
+              "survey"
+            ]
+          }
+        },
+        "category": "critical",
+        "complexity": "basic",
+        "description": "A panel displaying an authored verdict about SUBJECT #4729 with confidence and a location footer. A map can explicitly assign the verdict; otherwise a position hash selects it. Four panels invite comparison of sources, not evidence-based classification.",
+        "include_in_map_data": true,
+        "interaction": "read",
+        "lookup_name": "situated_readout",
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "name": "Situated Readout",
+        "parameters": {
+          "footprint": [
+            1.2,
+            1.4,
+            0.1
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/artifacts/situated_readout/situated_readout.tscn",
+        "sequence": "postfoundationscrisis",
+        "tags": [
+          "situated_knowledge",
+          "haraway",
+          "critical_algorithms",
+          "perspective",
+          "position_dependent",
+          "bias"
+        ],
+        "identity": {
+          "essence": "A verdict that changes with where it speaks from",
+          "desire": "To be read alongside three siblings showing incompatible answers to the same input",
+          "truth": "There is no view from nowhere — the classification belongs to the location, not the subject"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.2,
+            0.9,
+            0.04
+          ],
+          "aabb_center": [
+            0.0,
+            0.85,
+            0.0
+          ],
+          "grid_cells": [
+            2.0,
+            1.0
+          ],
+          "max_dimension_m": 1.2,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 4,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.036080Z",
+          "derived_from": "aabb_size + category"
+        },
+        "content": "text"
+      }
+    }
+  ],
+  "tt": [
+    {
+      "registry_file": "commons/artifacts/registry/commons_artifacts.json",
+      "registry_sha256": "76b2509e7406332a44e04662eb8b08a9a0883c64c3a332f17d14a279e7d61651",
+      "entry_key": "tt",
+      "entry": {
+        "dna": {
+          "axes": {
+            "support": [
+              "none",
+              "stand",
+              "frame",
+              "pylon"
+            ]
+          }
+        },
+        "name": "Tutorial Text Display",
+        "lookup_name": "tt",
+        "description": "In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.",
+        "scene": "res://commons/context/clipboard/codeDisplay.tscn",
+        "category": "utilities",
+        "interaction": "read",
+        "artifact_type": "text_display",
+        "notes": "Token processed by GridUtilitiesComponent._parse_tutorial_display_utility(). Can appear in interactables layer with tt: prefix followed by tutorial key.",
+        "map_ready": false,
+        "include_in_map_data": false,
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            1.2,
+            0.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 1.2,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 4,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.084544Z",
+          "derived_from": "aabb_size + category"
+        },
+        "content": "text",
+        "qfep_connection": "The plate that speaks — in-world tutorial text as a framed 2D-in-3D board rather than a floating label. The project's chosen way for a room to say something and stay a room: text seated in the world on a surface, the humble carrier of nearly every explanation the curriculum offers."
+      }
+    }
+  ],
+  "room_shape_demonstrator": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "room_shape_demonstrator",
+      "entry": {
+        "dna": {
+          "axes": {
+            "plan": [
+              "pair",
+              "head",
+              "circle",
+              "panopticon",
+              "vacant"
+            ]
+          }
+        },
+        "name": "Room Shape Demonstrator",
+        "lookup_name": "room_shape_demonstrator",
+        "description": "Two scale-model rooms on pedestals: centralized vs distributed seating. Furniture layout as moral object.",
+        "scene": "res://algorithms/postfoundationscrisis/room_shape_demonstrator.tscn",
+        "category": "postfoundations",
+        "sequence": "postfoundationscrisis",
+        "artifact_type": "postfoundations",
+        "qfep_term": "Edge",
+        "capacity": "SHAPE is policy",
+        "dev_themes": [
+          "postfoundationscrisis",
+          "sieve_2026_05_13"
+        ],
+        "dev_category": "postfoundationscrisis",
+        "complexity": "intermediate",
+        "tags": [
+          "architecture",
+          "ethics",
+          "spatial_politics"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "mixed"
+        },
+        "qfep_connection": "The same scale-model room, seated twice: a long table with one chair at the head, then the identical walls with the chairs in a circle. Who may speak first was decided by the floor plan before anyone entered — architecture as the policy it pretends merely to house.",
+        "measurements": {
+          "aabb_size": [
+            3.8,
+            1.3,
+            1.2
+          ],
+          "aabb_center": [
+            0.0,
+            0.65,
+            0.0
+          ],
+          "grid_cells": [
+            4,
+            2
+          ],
+          "max_dimension_m": 3.8,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          4,
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "excluded_class_visualizer": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "excluded_class_visualizer",
+      "entry": {
+        "dna": {
+          "axes": {
+            "exclusion": [
+              "fringe",
+              "erased",
+              "slab",
+              "majority"
+            ]
+          }
+        },
+        "name": "Excluded Class Visualizer",
+        "lookup_name": "excluded_class_visualizer",
+        "description": "Two clusters separated by a classifier boundary, plus a third red cluster ON the boundary. Bias as visible structural incompleteness.",
+        "scene": "res://algorithms/postfoundationscrisis/excluded_class_visualizer.tscn",
+        "category": "postfoundations",
+        "sequence": "postfoundationscrisis",
+        "artifact_type": "postfoundations",
+        "qfep_term": "Edge",
+        "capacity": "SEE what the model misses",
+        "dev_themes": [
+          "postfoundationscrisis",
+          "sieve_2026_05_13"
+        ],
+        "dev_category": "postfoundationscrisis",
+        "complexity": "intermediate",
+        "tags": [
+          "bias",
+          "classifier",
+          "applied",
+          "incompleteness"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "qfep_connection": "Two clean clusters, one confident boundary, and a third cluster pulsing red beside the line: the points the model never had words for. Bias is not staged as an error but as a shape — every classifier drawn this sharply has an outside, and here you can walk around it.",
+        "measurements": {
+          "aabb_size": [
+            1.8,
+            0.14,
+            1.8
+          ],
+          "aabb_center": [
+            0.0,
+            0.06,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 1.8,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "godel_statement_plaque": [
+    {
+      "registry_file": "commons/artifacts/registry/foundations.json",
+      "registry_sha256": "85e3d9a4a271fded577c09b742ebeac9a3f006cb713aa984caae198c389d1621",
+      "entry_key": "godel_statement_plaque",
+      "entry": {
+        "dna": {
+          "axes": {
+            "outside": [
+              "quotation",
+              "margin",
+              "breach",
+              "omission",
+              "habitat"
+            ]
+          }
+        },
+        "lookup_name": "godel_statement_plaque",
+        "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
+        "class_name": "GodelStatementPlaque",
+        "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
+        "gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
+        "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
+        "signals": [
+          "statement_changed",
+          "paradox_triggered"
+        ],
+        "interactions": [
+          "click to advance statement",
+          "grab to cycle"
+        ],
+        "parameters": {
+          "current_index": "Starting statement (0-8)",
+          "grabbable": "Enable XR grab interaction",
+          "footprint": [
+            2,
+            2,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "dev_themes": [
+          "philosophy",
+          "qfep"
+        ],
+        "dev_category": "foundations_crisis",
+        "category": "philosophy",
+        "complexity": "advanced",
+        "tags": [
+          "godel",
+          "self_reference",
+          "paradox",
+          "incompleteness",
+          "interactive"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "foundationscrisis"
+        ],
+        "sequence": "foundationscrisis",
+        "name": "GÃ¶del Statement Plaque",
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": [
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "escher_staircase",
+            "visual",
+            "contrasts",
+            "russell_set_box"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.64,
+            0.44,
+            0.05
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.64,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.106998Z",
+          "derived_from": "aabb_size + category"
+        },
+        "content": "text"
+      }
+    }
+  ],
+  "synthesis_stand": [
+    {
+      "registry_file": "commons/artifacts/registry/synthesis.json",
+      "registry_sha256": "8562bf645fb4eaba8741b61917e88cb43632a5c078b032a229b5f25b66db1f47",
+      "entry_key": "synthesis_stand",
+      "entry": {
+        "dna": {
+          "axes": {
+            "mode": [
+              "auto",
+              "hero",
+              "series"
+            ]
+          }
+        },
+        "name": "Synthesis Stand",
+        "lookup_name": "synthesis_stand",
+        "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+        "category": "synthesis",
+        "complexity": "intermediate",
+        "description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure — because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands.",
+        "measurements": {
+          "aabb_size": [
+            5.34,
+            1.25,
+            1.31
+          ],
+          "aabb_center": [
+            0.0,
+            0.21,
+            -0.01
+          ],
+          "grid_cells": [
+            6,
+            2
+          ],
+          "max_dimension_m": 5.34,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          6,
+          1,
+          2
+        ],
+        "map_ready": true,
+        "include_in_map_data": true
+      }
+    }
+  ],
+  "florensky_sphere": [
+    {
+      "registry_file": "commons/artifacts/registry/foundations.json",
+      "registry_sha256": "85e3d9a4a271fded577c09b742ebeac9a3f006cb713aa984caae198c389d1621",
+      "entry_key": "florensky_sphere",
+      "entry": {
+        "dna": {
+          "axes": {
+            "seam": [
+              "none",
+              "hairline",
+              "gap",
+              "scaffold",
+              "field"
+            ]
+          }
+        },
+        "lookup_name": "florensky_sphere",
+        "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
+        "class_name": "FlorenskySphere",
+        "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
+        "gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
+        "qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
+        "signals": [
+          "state_observed",
+          "superposition_entered",
+          "superposition_collapsed"
+        ],
+        "interactions": [
+          "left-click to observe (collapses temporarily)",
+          "right-click to cycle states"
+        ],
+        "parameters": {
+          "current_state": "A, NOT_A, BOTH, or NEITHER",
+          "allow_observation": "Whether observation collapses superposition",
+          "footprint": [
+            2,
+            2,
+            2
+          ],
+          "size_group": "compact"
+        },
+        "dev_themes": [
+          "philosophy",
+          "qfep"
+        ],
+        "dev_category": "foundations_crisis",
+        "category": "philosophy",
+        "complexity": "expert",
+        "tags": [
+          "florensky",
+          "paraconsistent_logic",
+          "superposition",
+          "quantum",
+          "interactive"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "foundationscrisis"
+        ],
+        "sequence": "foundationscrisis",
+        "name": "Florensky Sphere",
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "schrodinger_box",
+            "quantum",
+            "logical",
+            "superposition"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.44,
+            1.16,
+            0.71
+          ],
+          "aabb_center": [
+            0.0,
+            0.06,
+            0.05
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.44,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.106998Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "shannon_workbench": [
+    {
+      "registry_file": "commons/artifacts/registry/qfep.json",
+      "registry_sha256": "4027648f230507745b203f782a3aa799b459c06dd582a2c7a72263a0f45558cc",
+      "entry_key": "shannon_workbench",
+      "entry": {
+        "dna": {
+          "axes": {
+            "evidence": [
+              "sample",
+              "none",
+              "anecdote",
+              "census"
+            ]
+          }
+        },
+        "name": "Shannon Workbench",
+        "lookup_name": "shannon_workbench",
+        "description": "An interactive workbench for the binary entropy function. One slider drives p ∈ [0,1]; a 16×16 Bernoulli(p) bit grid regenerates from a fixed seed (same draws, migrating threshold), a live readout shows H(p) bits/symbol and the theoretical-min bit count, and a glowing red marker rides the entropy hill H(p) = -p log₂ p - (1-p) log₂(1-p) above the table. The slope of H is the rate at which structure becomes possible; the peak (p=0.5) is where structure is maximally absent. Sister to shannon_entropy_meter (this is the source side; that is the measurement side).",
+        "scene": "res://commons/artifacts/shannon_workbench/shannon_workbench.tscn",
+        "category": "qfep",
+        "interaction": "grab_slide",
+        "sequence": "qfeplaboratory",
+        "artifact_type": "qfep_controller",
+        "qfep_term": "λ_edge",
+        "capacity": "WALK the entropy hill",
+        "dev_themes": [
+          "qfep",
+          "information_theory",
+          "shannon",
+          "lambda_edge"
+        ],
+        "dev_category": "qfep_instrument",
+        "complexity": "intermediate",
+        "tags": [
+          "interactive",
+          "slider",
+          "entropy",
+          "shannon",
+          "information_theory",
+          "bit_grid",
+          "compression",
+          "binary_entropy",
+          "lambda_edge"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "qfeplaboratory",
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            2,
+            3,
+            2
+          ],
+          "size_group": "medium"
+        },
+        "spatial_needs": {
+          "platform": "floor",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "shannon_entropy_meter",
+            "lambda_slider",
+            "qfep_term_compass",
+            "halting_bench",
+            "cantor_diagonal"
+          ],
+          "preferred_zone": "any"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.23,
+            2.51,
+            1.26
+          ],
+          "aabb_center": [
+            0.0,
+            1.25,
+            -0.53
+          ],
+          "grid_cells": [
+            2,
+            2
+          ],
+          "max_dimension_m": 2.51,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "superposition_display": [
+    {
+      "registry_file": "commons/artifacts/registry/quantumalgorithms.json",
+      "registry_sha256": "470ed716d121db85e6b8187043759703746e3624f9657dbfc0c4b032e7158896",
+      "entry_key": "superposition_display",
+      "entry": {
+        "dna": {
+          "axes": {
+            "remainder": [
+              "core",
+              "twin",
+              "seam",
+              "haze",
+              "witness"
+            ],
+            "vantage": [
+              "specimen",
+              "stele",
+              "chamber"
+            ]
+          }
+        },
+        "name": "Superposition Display",
+        "lookup_name": "superposition_display",
+        "description": "Interactive visualization of quantum superposition |psi> = alpha|0> + beta|1> with VR slider to control the amplitude ratio between basis states.",
+        "scene": "res://commons/artifacts/superposition_display/superposition_display.tscn",
+        "category": "quantumalgorithms",
+        "tags": [
+          "quantum",
+          "superposition",
+          "qubit",
+          "amplitude",
+          "interactive",
+          "slider"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "foundationscrisis",
+          "testmaps"
+        ],
+        "sequence": "quantumalgorithms",
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "complexity": "expert",
+        "dev_themes": [
+          "algorithms",
+          "quantum"
+        ],
+        "geometry_spec": {
+          "mesh_type": "delegated_scene",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "scene_instantiation",
+            "primitives": [
+              "sphere"
+            ],
+            "operations": [
+              "load_scene",
+              "instantiate",
+              "configure"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "varies"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "schrodinger_box",
+            "abstract",
+            "physical",
+            "superposition"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.66,
+            0.65,
+            0.74
+          ],
+          "aabb_center": [
+            0.0,
+            0.23,
+            0.27
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 0.74,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.242447Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "schrodinger_box": [
+    {
+      "registry_file": "commons/artifacts/registry/foundations.json",
+      "registry_sha256": "85e3d9a4a271fded577c09b742ebeac9a3f006cb713aa984caae198c389d1621",
+      "entry_key": "schrodinger_box",
+      "entry": {
+        "dna": {
+          "axes": {
+            "remainder": [
+              "core",
+              "twin",
+              "seam",
+              "haze",
+              "witness"
+            ],
+            "vantage": [
+              "specimen",
+              "stele",
+              "chamber"
+            ]
+          }
+        },
+        "lookup_name": "schrodinger_box",
+        "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
+        "class_name": "SchrodingerBox",
+        "description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
+        "gamwell_reference": "Quantum mechanics and measurement problem",
+        "qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
+        "signals": [
+          "box_opened",
+          "state_collapsed",
+          "superposition_entered"
+        ],
+        "interactions": [
+          "click to observe (collapse superposition)",
+          "auto-resets to superposition"
+        ],
+        "parameters": {
+          "box_size": "Physical dimensions",
+          "auto_reset_time": "Seconds before returning to superposition",
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "dev_themes": [
+          "philosophy",
+          "qfep"
+        ],
+        "dev_category": "foundations_crisis",
+        "category": "philosophy",
+        "complexity": "intermediate",
+        "tags": [
+          "schrodinger",
+          "quantum",
+          "superposition",
+          "collapse",
+          "interactive"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "foundationscrisis"
+        ],
+        "sequence": "foundationscrisis",
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "few",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "contrasts",
+            "florensky_sphere",
+            "quantum",
+            "paraconsistent",
+            "superposition"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.42,
+            0.32,
+            0.31
+          ],
+          "aabb_center": [
+            0.0,
+            0.01,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.42,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.106998Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "merge_conflict_visualizer": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "merge_conflict_visualizer",
+      "entry": {
+        "dna": {
+          "axes": {
+            "merge": [
+              "junction",
+              "overlap",
+              "resolved",
+              "fork"
+            ]
+          }
+        },
+        "name": "Merge Conflict Visualizer",
+        "lookup_name": "merge_conflict_visualizer",
+        "description": "Two intersecting pillars (branch A, branch B) meeting at a glowing junction. Paraconsistent logic as architecture.",
+        "scene": "res://algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn",
+        "category": "postfoundations",
+        "sequence": "postfoundationscrisis",
+        "artifact_type": "postfoundations",
+        "qfep_term": "Edge",
+        "capacity": "HOLD both branches",
+        "dev_themes": [
+          "postfoundationscrisis",
+          "sieve_2026_05_13"
+        ],
+        "dev_category": "postfoundationscrisis",
+        "complexity": "intermediate",
+        "tags": [
+          "paraconsistent",
+          "merge_conflict",
+          "applied"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "qfep_connection": "Branch A and branch B meet at the junction and the artifact declines to choose: both geometries occupy the shared volume, glowing, and the structure stands anyway. Paraconsistency as engineering — contradiction held under load rather than resolved away.",
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            1.8,
+            0.5
+          ],
+          "aabb_center": [
+            0.0,
+            0.9,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 1.8,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "cap_theorem_walk": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "cap_theorem_walk",
+      "entry": {
+        "dna": {
+          "axes": {
+            "sacrifice": [
+              "cycle",
+              "consistency",
+              "availability",
+              "partition",
+              "whole"
+            ]
+          }
+        },
+        "name": "CAP Theorem Walk",
+        "lookup_name": "cap_theorem_walk",
+        "description": "Three pillars in a triangle. A slow rotation lights two at a time. The CAP trade-off cycle made visible.",
+        "scene": "res://algorithms/postfoundationscrisis/cap_theorem_walk.tscn",
+        "category": "postfoundations",
+        "sequence": "postfoundationscrisis",
+        "artifact_type": "postfoundations",
+        "qfep_term": "Edge",
+        "capacity": "WALK the trade space",
+        "dev_themes": [
+          "postfoundationscrisis",
+          "sieve_2026_05_13"
+        ],
+        "dev_category": "postfoundationscrisis",
+        "complexity": "intermediate",
+        "tags": [
+          "cap_theorem",
+          "distributed_systems",
+          "applied"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "qfep_connection": "Three pillars, and the light can only ever hold two: consistency, availability, partition tolerance traded in a slow rotation where the dim pillar names today's sacrifice. The walk refuses an optimum — living with a proven limit is shown as a rhythm, not a settlement.",
+        "measurements": {
+          "aabb_size": [
+            1.78,
+            1.5,
+            1.57
+          ],
+          "aabb_center": [
+            0.0,
+            0.75,
+            -0.23
+          ],
+          "grid_cells": [
+            2.0,
+            2.0
+          ],
+          "max_dimension_m": 1.78,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          2.0
+        ]
+      }
+    }
+  ],
+  "rhizome_vault": [
+    {
+      "registry_file": "commons/artifacts/registry/concept_architecture.json",
+      "registry_sha256": "5d8038daec08e1477d46489a0704bd2ea5b98b92e656dfd1b246fb5982e0f3df",
+      "entry_key": "rhizome_vault",
+      "entry": {
+        "lookup_name": "rhizome_vault",
+        "scene": "res://commons/artifacts/rhizome_vault/rhizome_vault.tscn",
+        "class_name": "RhizomeVault",
+        "name": "Rhizome Vault",
+        "description": "Pods and crossing tunnels with no main entrance, no center, no front — glowing root-runners propagating between heterogeneous chambers. Enter anywhere; a map, not a tracing.",
+        "category": "concept_architecture",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "tags": [
+          "rhizome",
+          "post-crisis",
+          "architecture",
+          "engulfing"
+        ],
+        "footprint": [
+          10,
+          4,
+          10
+        ],
+        "measurements": {
+          "aabb_size": [
+            9.83,
+            2.62,
+            9.8
+          ],
+          "aabb_center": [
+            0.01,
+            1.28,
+            0.0
+          ],
+          "grid_cells": [
+            10,
+            10
+          ],
+          "max_dimension_m": 9.83,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ],
+  "head_crab": [
+    {
+      "registry_file": "commons/artifacts/registry/hazards.json",
+      "registry_sha256": "c72714c93be651071a8d0d72a864c4b56b1019d5240436cfe070ea1c31a39411",
+      "entry_key": "head_crab",
+      "entry": {
+        "category": "hazard",
+        "complexity": "intermediate",
+        "description": "A small black spider-crab on four long jointed legs, walking a real plant-and-step gait. Graphite body, brass joints, polished like a made object rather than a grown one. It looks for the visitor and follows.",
+        "dev_themes": [
+          "core",
+          "hazards"
+        ],
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "head_crab",
+        "map_ready": true,
+        "map_sequences": [
+          "forces",
+          "transformation"
+        ],
+        "name": "head_crab",
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/hazards/head_crab/head_crab.tscn",
+        "size_group": "compact",
+        "tags": [
+          "creature",
+          "walker",
+          "gait"
+        ]
+      }
+    }
+  ],
+  "the_fourth_limit": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "the_fourth_limit",
+      "entry": {
+        "name": "The Fourth Limit",
+        "class_name": "TheFourthLimit",
+        "scene": "res://commons/artifacts/the_fourth_limit/the_fourth_limit.tscn",
+        "description": "Four gates in one rank, built to one standard so the eye compares them without being asked. I is solid brass with the Konigsberg graph in relief - four banks, seven bridges - and it will not open because it CANNOT. II has a peephole that is dark: you may look, and looking tells you nothing. III stands ajar at 45 degrees with three fading ghosts of itself at 67.5, 78.75 and 84.4, each push taking half of what remains. IV is GLASS, locked, with a small screw beside the plate and a warm lamp burning behind it. Three limits you accept, live or approach; the fourth you can SEE THROUGH. A default has no image of its own - the only way to picture one is to stand it in the rank beside real limits. No plaques. Roman numerals cut into the sill and nothing else. 2026-08-27.",
+        "category": "postfoundationscrisis",
+        "tags": [
+          "postcrisis",
+          "limits",
+          "the-edge",
+          "default",
+          "desire",
+          "surreal"
+        ],
+        "spatial_needs": {
+          "footprint_cells": 6,
+          "clearance_m": 1.2
+        }
+      }
+    }
+  ],
+  "peer_production_tool": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundations_crisis.json",
+      "registry_sha256": "69ab2b03f4d136670837f2f7eec4087b7254336c6a0dae17e16a69eb44b51724",
+      "entry_key": "peer_production_tool",
+      "entry": {
+        "lookup_name": "peer_production_tool",
+        "scene": "res://commons/artifacts/peer_production_tool/peer_production_tool.tscn",
+        "class_name": "PeerProductionTool",
+        "name": "PeerProductionTool",
+        "description": "Contributions streaming from many peers accreting into a shared artifact - the many over the one.",
+        "category": "postfoundations",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "tags": [
+          "postfoundations",
+          "applied"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "postfoundations",
+          "applied_limits"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            0.65,
+            0.9
+          ],
+          "aabb_center": [
+            0.0,
+            0.66,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 1.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "wiki_fragment": [
+    {
+      "registry_file": "commons/artifacts/registry/algorithms_misc.json",
+      "registry_sha256": "cac37fec0cf9c1c4f9c01b6544ee2c6c89e9b640bd3bafd82486c3844a8752a7",
+      "entry_key": "wiki_fragment",
+      "entry": {
+        "category": "critical",
+        "complexity": "basic",
+        "description": "A deliberately incomplete reading panel. Each fragment ends with a cross-reference to another fragment elsewhere in the room — and the chain cycles. No one panel carries the thesis. Walking the four of them does. Enacts the commons as response to incompleteness: what one editor cannot hold, the ledger can.",
+        "include_in_map_data": true,
+        "interaction": "read",
+        "lookup_name": "wiki_fragment",
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "name": "Wiki Fragment",
+        "parameters": {
+          "footprint": [
+            1.4,
+            1.6,
+            0.1
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/artifacts/wiki_fragment/wiki_fragment.tscn",
+        "sequence": "postfoundationscrisis",
+        "tags": [
+          "commons",
+          "distributed_cognition",
+          "wiki",
+          "incompleteness",
+          "critical_algorithms",
+          "collective_knowledge"
+        ],
+        "identity": {
+          "essence": "A claim that admits it needs the others",
+          "desire": "To be read as one of four, never alone",
+          "truth": "No node is true alone. A wiki is not consistent; it is corrigible — which is more honest."
+        },
+        "measurements": {
+          "aabb_size": [
+            1.4,
+            1.1,
+            0.04
+          ],
+          "aabb_center": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "grid_cells": [
+            2.0,
+            1.0
+          ],
+          "max_dimension_m": 1.4,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          2.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 4,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.036080Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "the_commons_table": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundationscrisis.json",
+      "registry_sha256": "1f1d029567095930911070bcb592c15d90f45e565dc4d2d72c0da88368596ebe",
+      "entry_key": "the_commons_table",
+      "entry": {
+        "name": "The Commons Table",
+        "class_name": "TheCommonsTable",
+        "scene": "res://commons/artifacts/the_commons_table/the_commons_table.tscn",
+        "description": "The post-crisis SUPER OBJECT and the spine's closing body: a round table with NO HEAD. Partial instruments sit around it, each honest about its outside - a classifier whose OTHER drawer outnumbers its labelled bins (counts computed), a sorter with its comparator printed, two contradictory readings held in one bracket without collapse, a camera admitting it is somewhere, a rootless rhizome of cords, and the engine's defaults shelved as somebody's opinion. Where a chairman would sit: a lit ring around nothing. 2026-08-27.",
+        "category": "postfoundationscrisis",
+        "tags": [
+          "postcrisis",
+          "super",
+          "synthesis",
+          "commons",
+          "limits",
+          "surreal"
+        ],
+        "spatial_needs": {
+          "footprint_cells": 4,
+          "clearance_m": 0.6
+        }
+      }
+    }
+  ],
+  "rhizome_cave_demo": [
+    {
+      "registry_file": "commons/artifacts/registry/isosurfaces.json",
+      "registry_sha256": "5a2789057313f7983ea41cc603ef580fbba7f33c7d3b4b139361351f7e6ad12b",
+      "entry_key": "rhizome_cave_demo",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-12",
+          "stage": 2,
+          "family": "ONE SCENE, TWO REGISTRY NAMES. `rhizome_cave_demo` and `rhizome_cave_system` both resolve to res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn, so both entries declare the same two axes and a sweep of either measures the same object. Path verified rather than assumed: that .tscn's ext_resource names the real RhizomeCaveDemoController.gd and the ROOT node carries it, so both axes are reachable from a map token. DO NOT read algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn — a second file of that name exists there and is an empty three-line stub ([gd_scene format=3] plus a bare Root node), and neither registry entry points at it.",
+          "default": "anastomosis=netted returns the float 6.0 — the same literal the controller's hardcoded rhizome_params dict has always handed to set_growth_rules — and bore=tunnel returns 1.0, where `radius * 1.0` is the identical bit pattern for every finite float, so carve_sphere receives the argument it always did. Both are SHORT-CIRCUITS out of a constant dictionary, not values re-derived from a formula that happens to land nearby. REACH MEASURED, and it is 3 direct grid placements plus 16 indirect hosts: `rhizome_cave_demo` bare in SpeculativeComputation_Rhizome_Network and bare in ISO_Showcase_12; `rhizome_cave_system:0:-0.5` in Gallery_ProceduralGeneration, which is rotation and y-offset and carries no config; two curation_station rosters (Corridor_SpeculativeComputation_Rhizome_Network and Curation_Bay_postfoundationscrisis_2); and fourteen `exhibit_furniture#kind:floor_work#size:s#mount:rhizome_cave_demo` mounts across eight Trial_* museum maps. The `#` parameters on those host tokens belong to the HOST and are never forwarded to the mounted artifact. Neither registry entry declares default_params, so merged_config is empty at every one of the nineteen and GridInteractablesComponent does not reach _apply_artifact_config at all — the guarded rebuild below is unreachable from every map that exists.",
+          "was": "merge_distance = 6.0, typed into the rhizome_params dict at RhizomeCaveDemoController:62. The carve radius had no multiplier at all: carve_sphere used node.radius directly, from the initial node radius 3.0 (RhizomeCaveGenerator:332) and the chamber multiplier 2.0 (:366).",
+          "note": "WHERE THIS ARTIFACT'S FIELD COMES FROM, which is what wave 3 of the isosurfaces sequence is asking. Nowhere else in the sequence is the answer 'from a history'. Every other member samples a function at each lattice point — a gyroid, a noise, a sum of metaball kernels. This one evaluates nothing: generate_cave_async fills the whole chunk with density 1.0 (:346-349) and then SUBTRACTS, carve_sphere writing min(current, dist/voxel_radius) (:265) along a graph that grew iteration by iteration out of an RNG. The field is a record of what happened. Both axes are lifted out of that record, one from the growth and one from the carve, and they are orthogonal by construction: anastomosis decides the graph and never touches a radius; bore scales the radius and cannot reach the graph, because the graph is finished before the first voxel is written. ANASTOMOSIS asks whether a branch that meets an existing one rejoins it or stops. RhizomeGrowthPattern.find_merge_candidate (:171-176) returns the first existing node within merge_distance of a proposed branch tip; on a hit create_connection adds an EDGE and `continue` suppresses the new node, which is the only way a circuit can enter this graph. tree=0.0: nothing is ever within 0 m, so nothing ever merges — a pure arborescence with dead ends and no circuit, the figure Deleuze and Guattari oppose and the thing this artifact's own truth statement claims to refute, rendered here for the first time. netted=6.0 SHIPPED. matted=12.0. knotted=20.0. THE CONFOUND, stated rather than hidden: raising merge_distance both adds edges and SUPPRESSES nodes, because the merging branch does not create the node it was going to create. The network gets loopier and smaller at the same time and no still can separate the two. BORE asks how wide the same graph is carved. The multiplier lives inside carve_sphere, the single gate every carve passes through (carve_tunnel reaches the field only by calling it), so the graph is bit-for-bit identical across all four rungs — same seed, same nodes, same positions, same rng draws. At thread the carve radius is 1.2 m against a 1.0 m voxel and the solid boundary sits at 0.6 of a voxel, so the tube is thinner than the sampling lattice and a continuous field extracts as a broken string of beads; at hollow the tubes swallow each other and the surface merges what the graph deliberately kept apart. Same field-making history, different surface: the boundary is not a property of the field alone.",
+          "shares_vocabulary_with": "NEW WORDS, both. `anastomosis` is already the project's own — the mycelium substrate work names it as its open gap — and the nearest taken word is `fusion` (the metaballs family), which is how much two FIELDS merge; this is whether two PATHS rejoin, decided in the graph before any field exists. `bore` is not `bulge` (queer_marching_cave), which swells a wall locally as a function of position, and it is deliberately not `resolution`: voxel_scale is held at 1.0 on every rung and only the carve radius moves, which is exactly what makes the lattice interaction legible at thread instead of confounded with it.",
+          "crossed_wire": "The two axes are orthogonal in the arithmetic and NOT in the picture. A large bore visually fuses tubes the graph never joined, so inside the `hollow` column anastomosis reads weak and inside the `tree` row bore reads weak — both frames are the same swallowed box. GROUP THE CRITIC'S NUMBERS BY VALUE PAIR ACROSS CONTEXTS, not by per-axis mean, or anastomosis will be convicted of the bore's doing. Measured on the replica at the fixture's seed: the weakest single CELL is bore hall x hollow inside the tree row at 0.6%, and the weakest grouped PAIR is anastomosis netted x matted at ~26%. Those two numbers are forty times apart and they are about the same sixteen tiles.",
+          "declined": "threshold (0.5, RhizomeCaveGenerator:10) — taken by mc_torus_sculpture, and worse: on a field carved as the linear ramp dist/voxel_radius a constant threshold is EXACTLY a uniform change of carve radius, so it would argue with bore for the same pixels. vertical_bias (0.3, applied as direction.y *= vertical_bias at RhizomeGrowthPattern:157) — real and visible, the difference between a flat sheet of tunnels and a ball of them, but it is the same question as `plumb` (mc_cave, mc_inside_cave): which way the field prefers to go. Declined for the rhyme and recorded here rather than dropped. chamber_probability (0.25) — too close to `bulge`, and stochastic: at 0.25 over ~30 iterations the variance between seeds would exceed the difference between rungs. branch_probability (0.6) and max_depth (4) — population counts, the same shape of question as `metaball_count`. voxel_scale and chunk_size — the sampling lattice, i.e. `resolution`, already taken twice. REPORTED, NOT SWEPT: setup_parameters (:285-292) read only chunk_size, voxel_scale and threshold, so the `seed` key every caller has always passed — `\"seed\": randi()` in this controller, `\"seed\": 12345, # Reproducible generation` in examples/simple_cave.gd — has never reached the RNG. That key is now read, defaulting to -1, which is the sentinel RhizomeGrowthPattern._init already understood. It is not a bug that shows, which is why it survived.",
+          "fixture": {
+            "cave_seed": 7,
+            "chunk_extent": 24,
+            "min_branch_length": 3.0,
+            "max_branch_length": 26.0,
+            "build_synchronously": true
+          },
+          "fixture_why": "FOUR NUMBERS AND A FLAG, EACH ANSWERING A MEASURED FAULT. cave_seed=7: RhizomeCaveGenerator:321 built RhizomeGrowthPattern.new(randi()), so five variants of this artifact were five different caves and any bite number would have been noise dressed as evidence (law 4). chunk_extent=24: RhizomeVoxelChunk._init never takes a world_position, so it defaults to Vector3.ZERO and the sampled volume is world 0..N. min/max branch length 3.0..26.0: NOT cosmetic — see `finding`. build_synchronously=true: _ready deferred generate_cave_async and the build then spent five awaited process_frames plus a mesh loop that yields whenever it passes 8 ms, so law 6 was not met as shipped and the capture's 1.1 s settle was a race. The flag is read at the four `await get_tree().process_frame` sites inside the generator and nowhere else, so there is one build path and one thing that can be wrong; every player-facing placement leaves it false, because a 13k-voxel march must not gate map load.",
+          "finding": "TWO THINGS THE READING FOUND, both invisible to every gate in the loop, both measured on a numpy replica of RhizomeGrowthPattern's growth loop and RhizomeCaveGenerator's carve rather than argued. (1) THE PROPOSED CAPTURE FIXTURE WOULD HAVE PRODUCED A DEAD AXIS THAT LOOKED LIKE A DESIGN FAILURE. find_merge_candidate compares a proposed branch tip against every existing node, and the tip sits at most branch_length from its own parent, which is already a node. So a merge_distance above max_branch_length merges EVERY attempt with its parent, create_connection rejects the self-edge (node1 != node2), and the network never grows past its seed node. At the approved 2.0..6.0 the four rungs replicate as merge rates 0 / 100 / 100 / 100 percent and node counts 175 / 1 / 1 / 1 — netted, matted and knotted would all have photographed as ONE carved sphere, the closest pair would have been 0.00% twice, and the verdict would have been a fact about a fixture. The shipped 5.0..20.0 collapses knotted alone, since 20.0 is exactly max_branch_length. The fixture uses 3.0..26.0, which measures 0 / 34 / 59 / 89 percent merged and 175 / 65 / 18 / 3 nodes: four different graphs, monotone, none degenerate. (2) bore=hollow AT THE APPROVED 3.5 CANNOT BE PHOTOGRAPHED. The multiplier lands on node.radius and create_chambers has already multiplied that by rng 2.0..4.0, so at 3.5 a single chamber reaches 42 m and swallows any chunk this artifact can afford to march. Replicated, the hollow column at 3.5 is 100 / 100 / 93 / 9 percent of the box carved: tree and netted are the same empty box and that anastomosis pair measures 0.0%. hall and hollow are therefore implemented at 1.6 and 2.4, which leaves surface in fifteen of the sixteen cells; thread=0.4 and tunnel=1.0 are exactly as approved, because they are the default and the lattice argument and that is where this axis makes its point.",
+          "predicted_degeneracy": "PREDICTED BEFORE THE CAPTURE, from the replica run at the fixture's own seed, extent and branch lengths. Grouped BY VALUE PAIR across all four bore columns — which is how `crossed_wire` demands they be read — the weakest anastomosis pair is netted x matted at ~26% of the projected silhouette: the two middle rungs differ 3.6x in node count (65 against 18) but both silhouettes are dominated by the same root chamber and its first-generation tunnels. tree x netted is ~34% and matted x knotted ~33%. The weakest bore pair is hall x hollow at ~16%. The silhouette is a projection and therefore an UPPER bound on a rendered frame, so expect roughly a third of these on frame: netted x matted around 8%, hall x hollow around 5%. THE APPROVED DESIGN PREDICTED matted x knotted as the closest anastomosis pair at ~7%, and the replica disagrees — it is the strongest of the three, because knotted collapses to three nodes while matted still carries eighteen. A prediction that agrees with the sweep is worth nothing; this one already disagrees with the design it came from, and the disagreement is what found the fixture fault above.",
+          "budget": "chunk_extent 24 is 13,824 voxels against the shipped 1,728 — 8x — and the mesh march is one 8-corner lookup per voxel per tile. The carve is the real cost and it is bore-dependent: replicated over all sixteen tiles at the fixture's seed it totals 13.0M voxel writes, about 0.8M per tile. That is only affordable because carve_tunnel's sample spacing is now floored at a quarter of the carved radius on the rungs above 1.0; at the shipped half-voxel spacing bore=hollow alone sweeps the entire chunk about fifty times per tunnel. Four samples per radius cannot leave a seam between consecutive spheres, and the gate is `carve_radius_scale > 1.0`, so bore=tunnel and bore=thread evaluate the shipped expression unchanged. Do not reach for 40^3: that is 37x and will meet the 16-second rule.",
+          "rebuild_guard": "apply_grid_config was a bare `pass` — a method that existed only so the grid's has_method() check would find it. It now stamps config_<key> metadata, re-reads the overrides and compares a signature built from the same accessors the build calls (_merge_distance(), _bore_scale(), cave_seed, chunk_extent, both branch lengths, build_synchronously), so the signature cannot drift out of step with what reaches the generator. Equal signature returns before touching anything. A real change calls _rebuild(), which frees ONLY RhizomeCaveGenerator._owned — the CaveMesh and CaveCollision this script created — and re-runs the same build; a blanket free of get_children() is what cost three scripts a pass in an earlier wave. _ready reads the metadata BEFORE building, and on the grid's own ordering (config stamped at GridInteractablesComponent:1195, add_child at :1220, apply_grid_config deferred afterwards) the first build already has the right values and the deferred call finds nothing to do: exactly one build per spawn.",
+          "still_note": "Nothing in this scene runs _process. More usefully, the picture is unusually literal about the axis: the chunk starts solid and RhizomeVoxelChunk.get_density (:38) returns 1.0 out of bounds, so the outer faces of the box carry no surface of their own and the only geometry is the inner wall of the carved network, drawn cull_mode CULL_DISABLED (:384). The frame IS the graph as a set of tubes, and a tree and a knotted net are different objects on sight. The one thing a still cannot separate is the confound named in `note`: loopier and smaller arrive together.",
+          "kin": "isosurfaces wave 3, the field-provenance wave. metaballs owns `fusion` and `metaball_count`, gyroid_demo `intrusion` and `period`, mc_torus_sculpture `threshold`, queer_marching_cave `bulge`, mc_cave and mc_inside_cave `plumb` — all of them properties of a function being sampled. This is the only member whose field is carved rather than evaluated, which is why its two words are about a history (whether paths rejoined) and a tool (how wide the cut was).",
+          "placements": 3,
+          "axes": {
+            "anastomosis": [
+              "netted",
+              "tree",
+              "matted",
+              "knotted"
+            ],
+            "bore": [
+              "tunnel",
+              "thread",
+              "hall",
+              "hollow"
+            ]
+          }
+        },
+        "lookup_name": "rhizome_cave_demo",
+        "category": "procedural",
+        "scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+        "class_name": "RhizomeCaveDemoController",
+        "description": "Rhizomatic cave — Deleuze-inspired branching cave generation using growth patterns + marching cubes.",
+        "compute": "HEAVY — CPU growth simulation + marching cubes",
+        "tags": [
+          "marching_cubes",
+          "rhizome",
+          "cave",
+          "growth",
+          "cpu",
+          "working"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "sequence": "postfoundationscrisis",
+        "parameters": {
+          "footprint": [
+            1,
+            16,
+            26
+          ],
+          "size_group": "world_scale"
+        },
+        "name": "rhizome_cave_demo",
+        "complexity": "advanced",
+        "dev_themes": [
+          "3d",
+          "isosurfaces",
+          "math"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "qfep_connection": "A cave grown as rhizome — Deleuze's centerless, multiply-connected figure carved into stone by branching growth and marching cubes. The post-crisis answer in geology: after the foundations fell, you build spaces with no single entrance and no privileged path, structures that are all middle. A world you enter anywhere and cross more than one way — formalization's limits turned into an architecture of the between."
+      }
+    }
+  ],
+  "rhizome_grower": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundations_crisis.json",
+      "registry_sha256": "69ab2b03f4d136670837f2f7eec4087b7254336c6a0dae17e16a69eb44b51724",
+      "entry_key": "rhizome_grower",
+      "entry": {
+        "lookup_name": "rhizome_grower",
+        "scene": "res://commons/artifacts/rhizome_grower/rhizome_grower.tscn",
+        "class_name": "RhizomeGrower",
+        "name": "RhizomeGrower",
+        "description": "A device growing a rhizome live - new nodes link to many, never to a single root; it grows sideways, not up.",
+        "category": "postfoundations",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "tags": [
+          "postfoundations",
+          "applied"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "postfoundations",
+          "applied_limits"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            0.72,
+            0.93
+          ],
+          "aabb_center": [
+            0.0,
+            0.7,
+            0.05
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 1.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "MolecularDesigner": [
+    {
+      "registry_file": "commons/artifacts/registry/computational_biology.json",
+      "registry_sha256": "6ca06daff79f1b5d197dd7b32c59e6b4e0c573775bd97210f7d75a215c41d652",
+      "entry_key": "MolecularDesigner",
+      "entry": {
+        "lookup_name": "MolecularDesigner",
+        "scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+        "name": "Molecular Designer",
+        "description": "Automatic catalogue assembly exhibit: reusable parts move towards authored body, furniture and molecular-style arrangements. Bonds are declared connections; chemical valence is not simulated.",
+        "category": "biology",
+        "complexity": "advanced",
+        "tags": [
+          "molecular",
+          "chemistry",
+          "constraint_satisfaction",
+          "valence",
+          "biology",
+          "interactive"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            6,
+            8
+          ],
+          "size_group": "environment"
+        },
+        "dev_themes": [
+          "biology",
+          "simulation"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "unlocks",
+            "reductionist",
+            "design",
+            "thinking",
+            "depends"
+          ],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 12,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.13,
+            2.21,
+            3.68
+          ],
+          "aabb_center": [
+            -0.37,
+            2.22,
+            0.43
+          ],
+          "grid_cells": [
+            4.0,
+            4.0
+          ],
+          "max_dimension_m": 3.68,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          4.0,
+          1,
+          4.0
+        ],
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 10,
+          "density": "medium",
+          "min_clearance": 2,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.100444Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "accountability_ledger": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundations_crisis.json",
+      "registry_sha256": "69ab2b03f4d136670837f2f7eec4087b7254336c6a0dae17e16a69eb44b51724",
+      "entry_key": "accountability_ledger",
+      "entry": {
+        "lookup_name": "accountability_ledger",
+        "scene": "res://commons/artifacts/accountability_ledger/accountability_ledger.tscn",
+        "class_name": "AccountabilityLedger",
+        "name": "AccountabilityLedger",
+        "description": "A scrolling display of prewritten design-choice and exclusion pairs. A bounded six-line buffer and cumulative count invite discussion; the exhibit does not record or save visitor decisions.",
+        "category": "postfoundations",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "tags": [
+          "postfoundations",
+          "applied"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "postfoundations",
+          "applied_limits"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.97,
+            0.63,
+            0.37
+          ],
+          "aabb_center": [
+            -0.01,
+            0.31,
+            0.01
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.97,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ]
+      }
+    }
+  ],
+  "edge_ground_synthesis": [
+    {
+      "registry_file": "commons/artifacts/registry/postfoundations_crisis.json",
+      "registry_sha256": "69ab2b03f4d136670837f2f7eec4087b7254336c6a0dae17e16a69eb44b51724",
+      "entry_key": "edge_ground_synthesis",
+      "entry": {
+        "lookup_name": "edge_ground_synthesis",
+        "scene": "res://commons/artifacts/edge_ground_synthesis/edge_ground_synthesis.tscn",
+        "class_name": "EdgeGroundSynthesis",
+        "name": "EdgeGroundSynthesis",
+        "description": "The trilogy synthesis: incompleteness, bias, contradiction, rhizome each turn from problem into design material feeding one constructive core.",
+        "category": "postfoundations",
+        "complexity": "advanced",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "postfoundationscrisis"
+        ],
+        "tags": [
+          "postfoundations",
+          "applied"
+        ],
+        "parameters": {
+          "emissive": "Bool"
+        },
+        "dev_themes": [
+          "postfoundations",
+          "applied_limits"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "designed"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.0,
+            0.72,
+            1.0
+          ],
+          "aabb_center": [
+            0.0,
+            0.7,
+            0.0
+          ],
+          "grid_cells": [
+            1,
+            1
+          ],
+          "max_dimension_m": 1.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "qfep_formula_3d": [
+    {
+      "registry_file": "commons/artifacts/registry/qfep.json",
+      "registry_sha256": "4027648f230507745b203f782a3aa799b459c06dd582a2c7a72263a0f45558cc",
+      "entry_key": "qfep_formula_3d",
+      "entry": {
+        "name": "QFEP Formula 3D",
+        "lookup_name": "qfep_formula_3d",
+        "description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
+        "scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
+        "category": "qfep",
+        "interaction": "observe",
+        "sequence": "qfeplaboratory",
+        "artifact_type": "qfep_visualization",
+        "qfep_term": "all",
+        "capacity": "SEE the theory",
+        "dna": {
+          "promoted": "2026-07-29",
+          "stage": "2 - variation",
+          "axes": {
+            "posture": [
+              "line",
+              "stack",
+              "arc",
+              "ring"
+            ],
+            "emphasis": [
+              "none",
+              "QFE",
+              "F",
+              "lambda",
+              "E",
+              "phi",
+              "delta",
+              "E_rate"
+            ]
+          },
+          "default": "posture=line, emphasis=none - line runs the original centring loop verbatim and emphasis=none leaves highlighted_term empty, so all 13 existing placements render exactly as before",
+          "was": "one hard-coded horizontal row of TextMesh with nothing lit: the script's own critical_parameter (highlighted_term, which term the equation is read through) was reachable only from code that never called it, and the posture of the line was not a parameter at all",
+          "note": "declared by hand 2026-07-29 - the sweep refused it as NO TURNABLE KNOBS because the five existing exports (animate, pulse_speed, glow_intensity, font_size, depth) had no apply_grid_config to reach them, and none of them changes what the formula argues. The axis is named posture, not layout, because curation_station already owns the key `layout` with an overlapping vocabulary (row/corner/ring)",
+          "framing": 0.72,
+          "framing_note": "emphasis lights one term inside a whole equation, so fitting the entire formula renders the lit glyph too small to read — 2.22% at default framing. 0.72 moves in far enough to see which term is lit while still holding the posture values, which change the whole layout."
+        },
+        "dev_themes": [
+          "qfep",
+          "philosophy"
+        ],
+        "dev_category": "qfep_visualization",
+        "complexity": "intermediate",
+        "tags": [
+          "visualization",
+          "formula",
+          "theory",
+          "3d"
+        ],
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [
+          "foundationscrisis",
+          "qfeplaboratory"
+        ],
+        "parameters": {
+          "footprint": [
+            1,
+            1,
+            1
+          ],
+          "size_group": "compact"
+        },
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "emissive",
+            "key_properties": [
+              "emission"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 3,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "central",
+            "display",
+            "depends",
+            "lambda_slider",
+            "phi_slider"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 3,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            1.64,
+            0.13,
+            0.02
+          ],
+          "aabb_center": [
+            -0.25,
+            -0.02,
+            0.0
+          ],
+          "grid_cells": [
+            2,
+            1
+          ],
+          "max_dimension_m": 1.64,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          2,
+          1,
+          1
+        ],
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 6,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.233795Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "synthesis: the whole formula in the air — QFE = F − λE(S) + φΔE(S,t), each term glowing its signature color, answering the sliders live. The project's thesis as a walkable object: free energy, entropy drive, and the felt rate of change, summed."
+      }
+    }
+  ]
+}

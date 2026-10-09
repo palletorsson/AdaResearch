@@ -1,0 +1,324 @@
+[
+  {
+    "id": "Vectors_Act1_WhatAVectorIs",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A direction-and-magnitude account that separates measured data from its scaled drawing.",
+    "change": "Reuse two world positions, predict their difference under a common shift and compare short, long and zero cases. Briefly explain normalization and its zero threshold; projections and readouts are supplied.",
+    "dependsOn": [
+      "Point_Lines",
+      "Point_Coordinates"
+    ],
+    "reuses": "Subtracting positions gives a displacement and scalar length.; World and display frames must be distinguished.",
+    "given": "VectorBasics with lesson:room_reading, existing pins and sample_vector(); XY/XZ wall drawings and SHORT/LONG/SHIFT/ZERO/PARTS controls; vector_normalize_demo and its unit-length reference",
+    "later": "Do not explain every visible artifact. Keep this opening a short return. sample_vector() measures world positions; wall drawings scale by 0.85 and clip to radius 1.05 without clipping the numeric vector. SHORT/LONG supply the diagonal below 0.0001, whereas the separate normalization companion returns zero at or below 0.001. Translation's final explains direction and distance, but its present tutorial does not establish normalization practice. No new display binding is implied.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A direction-and-magnitude account that separates measured data from its scaled drawing.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The companion lists normalization thresholds but does not explain division by length as the selected learner operation. Translation has not yet delivered its proposed normalization practice; supply or teach this short return explicitly.",
+    "baseline": {
+      "tutorial": "d8876b0bb3a48ecfaa2391e28f35600fd8867b7b6c50238b4c2cb9db8c39aa1a",
+      "choice": "f9dfb97212c04b6dd92e155f1619d2fd3fc50edb8827f1ab7fe02fa59a32f35d"
+    },
+    "summary": "Return to two endpoints and calculate their difference in world coordinates. Shift both together, predict the unchanged displacement and inspect what XY and XZ projections omit. Compare short, long and zero vectors; explain normalization and its small-length guard before using it independently. Projections and readouts are supplied. Carry direction and magnitude with a declared frame, keeping the measured vector distinct from the display's scale."
+  },
+  {
+    "id": "VFM_02_Operations",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A result vector and route-distance account in a declared local frame.",
+    "change": "Predict a+b, swap the contributions and compare two-leg distance with the direct route. Cancel with b=-a and account for the excluded reset; carriage movement and wall drawing are supplied.",
+    "dependsOn": [
+      "Point_Lines",
+      "Primitives_Portals",
+      "Trans_Translation"
+    ],
+    "reuses": "Displacement and length retain different information.; A running sum can accumulate neighbouring distances.; An ordered route preserves intermediate travel.",
+    "given": "adder_board with lesson:room_sum and A/B/component controls; existing guarded carriage and waypoint traversal at prescribed speed; wall/floor drawings, travelled counter and GO/PATH/SWAP/CANCEL/RULE controls; floor_point() conversion from local plan coordinates to the scene",
+    "later": "Do not explain every visible artifact. The installed room uses buttons, not draggable pins. Vector2 stores local X/forward in metres, and floor_point maps forward to -Z. refresh() already supplies the common result to drawings and the route built by GO. The physics callback counts actual prescribed movement and consumes remaining movement budget across corners; leave it supplied. GO and input/path edits reset the counter, while RULE and selecting A/B do not. Do not claim a learner function is already bound to a separate host.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A result vector and route-distance account in a declared local frame.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "8682a731d14d86aa10770e78e6a0d6245a1bcbf078162c8e7c4c8a19c3b59f35",
+      "choice": "726bc4cc9653990bdabb4b2d81e897a573906a023033d449f8269d8da5c6b652"
+    },
+    "summary": "Add two displacements, then compare travelling their two legs with taking the direct result. Swap their order and predict the same destination but another corner; cancel with the opposite vector and explain a nonzero journey with zero displacement. Carriage and drawing are supplied. Carry separate endpoint and path-length accounts, with the instantaneous reset explicitly excluded from the reported trip."
+  },
+  {
+    "id": "Vectors_Act2_VectorArithmetic",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A projection-plus-remainder construction with an explicit receiving axis.",
+    "change": "Project the actual gap onto a supplied unit rail, subtract the kept vector and recombine. Predict the effect of rail reversal and perpendicular input movement; controls and diagrams are supplied.",
+    "dependsOn": [
+      "Point_Lines",
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations"
+    ],
+    "reuses": "Subtraction gives the gap between positions.; A normalized axis supplies direction independently of length.; Vector sums can recombine contributions.",
+    "given": "vector_sub with lesson:room_gap and projection_shadow with lesson:room_projection; same-hall source lookup and contributions_changed connection; nonzero unit rail and RESET/SLIDE/TURN/FLIP/RULE controls; scaled floor/wall diagrams; existing dot_aligner and torque_crank comparisons",
+    "later": "Do not explain every visible artifact. This is a real same-hall connection, not transport from the previous room: connect_source() finds the source under the same em_map owner and subscribes refresh(). Coordinates are model X/forward, displayed at half scale, not visitor positions. TURN changes the rail by 30 degrees; bounded SLIDE requests move source A perpendicular by 0.5. FRIEND's 0.985 threshold and torque's unit-direction cross product are independent demonstrations, not subscribers. Keep normalization and subtraction as returns; the substantial new lesson is projection with its remainder.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A projection-plus-remainder construction with an explicit receiving axis.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "d360217e5948852381439583694be00fa0ed86cc4210e9a640af2d4f48a96ca6",
+      "choice": "703ce97b412a91ac94e6c6f3b323cab4b036aea780e2ed914d2e29f83f2a3dda"
+    },
+    "summary": "Project a measured gap onto a supplied unit rail using a dot product. Construct the retained component and subtract it to obtain a remainder, then recombine both to check the original. Predict rail reversal and movement perpendicular to the rail. Controls and diagrams are supplied. Carry a signed along-axis measurement, its omitted component and the requirement that the receiving axis be normalized."
+  },
+  {
+    "id": "VFM_05_Launch",
+    "decision": "draft",
+    "mode": "build",
+    "object": "The familiar sphere as a prescribed flight marker, driven by a position-at-time function",
+    "change": "Evaluate the supplied position-at-time formula and vary one beginning. Compare complementary angles and distinguish a slower local clock from stronger gravity; conversion, duration and analytic marker display are supplied.",
+    "dependsOn": [
+      "Trans_Pre",
+      "Change_Intro",
+      "Vectors_Act1_WhatAVectorIs"
+    ],
+    "reuses": "Elapsed time is an input to a prescribed position.; Rate has declared units.; Vector components and display scale have separate meanings.",
+    "given": "launch_arc with lesson:launch_chamber and its flight markers; launch_velocity() angle conversion and duration() equal-height landing time; flight_position() constant-acceleration formula and flight_velocity(); 64-segment PATH drawing and FIRE/PAIR/SLOW/PARTS/GRAVITY/SPEED controls",
+    "later": "Do not explain every visible artifact. Launch precedes Motion. Supply p(t)=origin+v0*t+0.5*g*t*t, angle-to-velocity conversion and duration rather than asking for their derivation. The existing host clamps each lane to its own equal-height landing time; the frozen velocity is pre-impact. PATH is 64 equal-time segments, while live markers are evaluated analytically. PAIR has separate lane origins, so equal range does not mean the same world endpoint. Parameter edits reset the flight; SLOW only rescales its local clock. No learner-path binding or ballistic solver is newly installed.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A position-at-time function with equal-height, uniform-gravity and no-drag assumptions.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": " Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "382af7a51b013db8149089d1c1a2013199fef1bad17ba09962b43a0a5af413f9",
+      "choice": "6bdd544791db8313f8c6abd78582eac4c9bf5851e5538d9747a55480029b17f3"
+    },
+    "summary": "Return to the familiar sphere as a flight marker, keeping its visual recipe. Drive it with the supplied constant-acceleration position formula and change one initial condition. Predict an apex or landing comparison; distinguish slower playback from different gravity. Angle conversion and duration are supplied. Carry the position-at-time function and its no-drag assumptions. This marker is prescribed motion; the next lesson introduces a physical receiver without redesigning the sphere."
+  },
+  {
+    "id": "VFM_03_Motion",
+    "decision": "draft",
+    "mode": "build",
+    "object": "The familiar sphere as an explicitly configured dynamic receiver of a timed force",
+    "change": "Author a finite force pulse for the supplied rigid body and predict delta-v from force, mass and duration. Compare COAST with stopping the body, using drag-off runs before contact; integration and readouts are supplied.",
+    "dependsOn": [
+      "VFM_05_Launch",
+      "Change_Intro",
+      "Trans_Pre"
+    ],
+    "reuses": "Initial velocity is distinct from a position evaluated at time.; Rate and accumulated change have stated units.; A timed condition can delimit a command.",
+    "given": "rigid-body integration and bounded collision chamber; pulse timing adapter, including a partial final physics step; mass/reset controls, velocity readout and optional trail",
+    "later": "Do not explain every visible artifact. Summary proposal only. The installed motion_chamber sends force in newtons to apply_central_force; the engine supplies time integration. Do not multiply that force by dt again. Its active/delta factor only averages a partial final pulse step. COAST leaves optional engine damping active, so the controlled comparison explicitly turns DRAG off. Exact binding from a learner-authored pulse function to the supplied receiver remains to be chosen; the current operating/source companion is not evidence of that authoring interface. No new runtime check in this pass.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A force schedule and quantitative velocity-change prediction.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The existing operating/source companion explains the engine force command but does not provide the proposed learner schedule binding. Pass force in newtons without another dt factor; COAST alone leaves optional damping active. Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "c0bf327feef84e9695d62e3af64548dec7f586b16864dc17894aaace9e8d6cc4",
+      "choice": "bb121612df1406ad16ecce1059b8291fc693281e62962daed09ff59063236013"
+    },
+    "summary": "Keep the familiar sphere's geometry and appearance, but explicitly replace frozen pickup behaviour with the declared dynamic-body setup. Author a finite force pulse and predict velocity change from force, mass and duration. Compare two masses with drag off before contact; COAST ends the command without erasing motion. The engine supplies integration and collision. Carry the sphere and force schedule, with its changed physical responsibility explained once."
+  },
+  {
+    "id": "Vectors_Act3_FieldsAndMotion",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A small update convention reusable by later forces, with its receiver units stated.",
+    "change": "Compare setting velocity from a field with adding acceleration to retained velocity, then update position. Predict two uniform steps before sink motion; field, unit adapters, runner and trails are supplied.",
+    "dependsOn": [
+      "Flow_Field",
+      "VFM_03_Motion",
+      "Change_Intro"
+    ],
+    "reuses": "A follower resamples at its current position.; Velocity can survive a changed command.; A finite update accumulates a rate over time.",
+    "given": "dimensionless field sampler and stated velocity/acceleration conversions; fixed 1/120 s runner and reset interface; two numerical markers, trails and observation cutoff",
+    "later": "Do not explain every visible artifact. Summary proposal only. field_receivers already exposes independent positions and velocities and semi-implicit accumulation in source. Each marker samples the same function at its own current position, not necessarily the same value after divergence. FIELD, GAIN and REVERSE keep state; RESET clears state and pauses while retaining parameters. Frame exit freezes outgoing state rather than colliding. A reduced learner edit function and its connection to the supplied runner are still unresolved. The proposed carried study is not an installed persistent record or crosshall transport feature. No runtime or learner-execution claim.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A small update convention reusable by later forces, with its receiver units stated.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The source rules are described, but the proposed reduced learner function and runner connection are absent. The markers have no mass or collisions and sample different values after their positions diverge; no learner state travels between halls. Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "4e733aea8d71f9895ae638bd6fef5849a82cdf9f75ff0c00dae99c4749b7e254",
+      "choice": "9a3a28948f1044c1e7f64ef5752c87b1eb47e108cac40f8de201afa4b21f430f"
+    },
+    "summary": "Give a small numerical receiver position and velocity state. Compare assigning velocity from a sampled field with adding acceleration to retained velocity, then advance position using the new velocity. Predict two uniform-field steps before trying a sink. The runner, samples and drawing are supplied. Carry this explicit update convention and unit conversions; reversing an influence need not immediately reverse an already moving receiver."
+  },
+  {
+    "id": "Vectors_Act4a_KineticForces",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A reusable linear resistance calculation with coefficient units and receiver responsibility.",
+    "change": "Write one drag calculation F=-b*v and predict initial acceleration for two masses at equal speed. Keep the engine integration supplied; walking resistance, nominal mower work and circular motion remain separate comparisons.",
+    "dependsOn": [
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion"
+    ],
+    "reuses": "The engine integrates force commands for a body with mass.; Force, acceleration and assigned velocity require different receiving operations.",
+    "given": "rigid bodies and engine integration, with gravity and inherited damping removed; equal-speed launcher and mass/reset controls; readouts and finite observation window; existing walking, mower and circular-path comparisons",
+    "later": "Do not explain every visible artifact. Summary proposal only. Installed kinetic_drag applies -b*body.linear_velocity directly as force; no dt multiplication belongs in that argument. Its rigid bodies ignore contacts and are frozen at the observation cutoff; using a rigid-body engine does not imply this exhibit tests collisions. WALK is a separate chosen controller multiplier; mower work uses a nominal force, not measured hand effort; the ring prescribes a path. Exact learner drag-function binding remains open. Future focused text review: final.md’s categorical claim that air at any throwable cube speed follows a square law is broader than this source comparison establishes; this summary pass does not edit it or claim a replacement empirical result.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A reusable linear resistance calculation with coefficient units and receiver responsibility.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The companion documents -b*v but does not bind a learner drag function. WALK uses a separate multiplier, mower work is nominal and the ring prescribes motion; none substitutes for the chosen force exercise. Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "cb39c509ffb17ab9aceef13a6d1e23daf8df47460d37a0b54e9eb80aa3681b87",
+      "choice": "f8e2e77aa39a01c71e88e55a4e7d73604e253ccde36a64f2a2485d8738e9bdfe"
+    },
+    "summary": "Write one linear resistance function, force equals minus coefficient times velocity, and send it through the supplied rigid-body adapter. Predict initial acceleration for two masses at equal speed and coefficient before comparing runs. Keep coefficient units explicit and let the engine integrate. Carry a reusable drag term into Oscillation; walking resistance, mower work and prescribed circular motion remain separate comparisons rather than extra required implementations."
+  },
+  {
+    "id": "Vectors_Act4b_Oscillation",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A spring-damper calculation distinct from a prescribed sine animation.",
+    "change": "Add restoration and drag in one dimension, then update velocity and position. Predict force direction and crossing from equal beginnings; rail, handle, timestep runner and damping-ratio adapter are supplied.",
+    "dependsOn": [
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Point_Lines"
+    ],
+    "reuses": "The proposed explicit state update separates velocity from position.; Resistance depends on velocity.; Displacement can measure distance from a chosen centre.",
+    "given": "fixed 1/120 s runner and finite observation cutoff; rail, constrained pickable handle and display; parameter controls and reset/release adapter; release sets velocity to zero",
+    "later": "Do not explain every visible artifact. Summary proposal only. The installed restoring_forces variant computes scalar motion; its frozen pickable is input/display, not another body solver. k is N/m, c is kg/s, and F/m is acceleration, not F/dt. DAMP selects a ratio and computes c = 2*ratio*sqrt(k*m); changing mass or stiffness therefore changes c at a fixed nonzero ratio. Hold m and k fixed for the damping comparison. Parameter changes preserve state, whereas release starts from rest. The common learner update and its edit binding remain proposed, with manual reuse rather than automatic transport. Keep legacy cosine towers distinct; do not add a full numerical-methods lesson.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A spring-damper calculation distinct from a prescribed sine animation.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The current model is explained but the common learner update/binding is still proposed. DAMP selects a ratio, so fixed-ratio changes of mass or stiffness also change the coefficient; release starts from rest. Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "4871d952cbe74a8ed98199f02c255f04278415b1d1495660ba740773a549b0fb",
+      "choice": "f2da5f136552874a370c707ea759d283fc4679b14552a66f7fc79494382f7745"
+    },
+    "summary": "Adapt the numerical position/velocity study to one axis. Sum restoring force and the familiar drag term, update velocity from force and mass, then update displacement. Predict the force direction and explain why the body can cross zero displacement with continuing velocity. Rail, handle and timestep runner are supplied. Carry a spring-damper calculation, distinct from the earlier animation that prescribed a sine-shaped position."
+  },
+  {
+    "id": "Change_Choreography",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A quantitative prediction of two stored angles under changed rates.",
+    "change": "Introduce period and phase at the rods, then halve the paired dials' rate difference and predict their gap after thirty seconds. Hold the gap with SAME RATE; displays and controls are supplied.",
+    "dependsOn": [
+      "Trans_Pre",
+      "Change_Intro",
+      "Vectors_Act4b_Oscillation"
+    ],
+    "reuses": "An angle can advance with elapsed seconds.; A rate difference accumulates a change.; Returning motion motivates a cycle without already teaching phase.",
+    "given": "phase_rod_array, conveyor_backlog and the paired_time museum study; paired_time_score.gd with its twelve-second base period and stored angles; dial geometry, controls, museum player and conveyor contact model",
+    "later": "Do not explain every visible artifact. This uses an actual authored source exercise already present in tutorial.md, replacing the proposed extra marker-row build. Oscillation does not establish period and phase; introduce those terms at the rods. The rods assign absolute angle from elapsed time, so configuration changes may jump; the paired score instead advances stored angles, and SAME RATE preserves them. The conveyor has finite rigid parcels, contact and admission limits. Both dials share engine delta and discard whole-turn counts; neither battery ageing nor the material and bodily conditions of the Gonzalez-Torres reference are simulated. No new runtime or tutorial work is applied by this summary.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A quantitative prediction of two stored angles under changed rates.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "d135b7c2b8a3e7dfc51a8c466fee7946d7657d70d29461d1820910f477dbbb35",
+      "choice": "108e3991c0befef775e6af375aefb1c46b560d221d2fb6e142d079fcdf398922"
+    },
+    "summary": "Return to timed angles and introduce period and phase through the rods. In the paired-dial study, halve the excess rate difference while retaining the period, and predict the gap after thirty seconds. SAME RATE should stop further drift without closing the existing gap. Displays are supplied. Carry a quantitative distinction between editing a stored angle and editing the rate that continues to change it."
+  },
+  {
+    "id": "VFM_07_Gravity",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A pairwise contribution pattern with explicit fixed or responsive recipients.",
+    "change": "Apply paired interaction contributions to declared receivers and compare unequal masses before integration. Supply the softened attraction law and stepper; inspect the omitted response of a held source.",
+    "dependsOn": [
+      "Point_Lines",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion"
+    ],
+    "reuses": "Separation supplies an interaction's direction and length.; Force and receiving mass determine acceleration.; Independent bodies need separately retained state.",
+    "given": "gravity_relations.gd and its existing accelerations() pair loop; softened attraction with EPS=0.25 and velocity Verlet stepping; initial states, displays, bounded trails and existing museum controls",
+    "later": "Do not explain every visible artifact. The two-line contribution exercise is a proposed teaching emphasis on existing source, not an already rewritten tutorial or a new solver. Supply the law and integrator intact; assess the contributions before integration. The first station uses 12 kg and 1 kg with a held source; the mutual station starts with equal 4 kg bodies and different positions/velocities. Do not present their paths as an otherwise identical fixed/mutual experiment. Softened markers have no mutual collisions or player coupling. NUDGE's paired beginning and finite observation window warrant a measured comparison, not a proof of chaos or escape.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A pairwise contribution pattern with explicit fixed or responsive recipients.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "The tutorial describes the model but does not teach the proposed two-contribution exercise. The fixed and mutual stations also change masses and initial states, so their paths cannot isolate source release alone. Author visual-continuity rule: reuse the earlier sphere geometry and finish for the selected learner receiver. Keep comparisons distinguishable through declared labels or role colours. State whether this is a numerical marker or an engine-driven body; do not inherit frozen pickup settings or add a second integrator silently. This is a proposed learner adaptation, not a claim that the current museum artifact has changed.",
+    "baseline": {
+      "tutorial": "8e0d733c3245595dc2beb47f3428acc2776487e0312e0bbe7ba3f34b23b40df3",
+      "choice": "1f4dcb483fd586494d66cae5f40e5589a9a5c013306a9d6be4b2b325f2e4abe0"
+    },
+    "summary": "Use a supplied softened attraction law to calculate one pair's force. Apply opposite contributions to two receivers, dividing each by its own mass, and predict their unequal accelerations before integration. The pair loop and stepper are supplied. Compare a responsive source with an explicitly held one. Carry paired contributions and the omitted-response question; many-pair cost is a bounded introduction to computational work, not an optimization course."
+  },
+  {
+    "id": "VFM_09_Legs",
+    "decision": "draft",
+    "mode": "reuse",
+    "object": "An explicit support hypothesis with assumptions about pads, load and contact.",
+    "change": "Predict adjacent versus diagonal support for the same centred load, then release and compare. The hull and physics solver are supplied; contrast the commanded walker with the plate's contact response.",
+    "dependsOn": [
+      "Point_Triangle_Context",
+      "VFM_03_Motion"
+    ],
+    "reuses": "A boundary can describe a geometric region.; Engine-integrated motion differs from prescribed placement.",
+    "given": "support_polygon_lab's finite pads, plate and FEET/SHIFT/RELEASE controls; initial support hull, mass-centre projection and rigid-body solver; the existing four-leg walker and its supplied gait and body movement",
+    "later": "Do not explain every visible artifact. Preserve this hall as comparison and independent judgement. The actual plate is a rigid body; the pads have finite square tops, and the hull uses their corners. The outline is an initial horizontal support estimate, not a changing contact solver. SHIFT changes the custom mass centre while keeping the configured inertia; scope the claim accordingly. The walker advances its body and places feet through authored rules without a hull-based balance test. Do not infer a required anatomy, demand that learners build a controller, or use the walker as physical validation of the plate.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "An explicit support hypothesis with assumptions about pads, load and contact.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "3f3ad3a347505a1592629ee6ee8d9e6f1ae5dcba48aec17601094688e45c60ae",
+      "choice": "65a0c0bf9c88d6969a721080dad55939d10df5f7094bfd6e1c3c7bf74ac91ef3"
+    },
+    "summary": "Predict whether adjacent or diagonal support pads hold the same centred load, then release and compare. State the assumptions about pad positions, contact and load before interpreting a fall. Hull construction and the physics solver are supplied. Carry a testable support hypothesis, distinguishing the commanded walker from a plate whose movement responds to contact; this comparison does not require rebuilding either complete mechanism."
+  },
+  {
+    "id": "VFM_08_Arena",
+    "decision": "draft",
+    "mode": "reuse",
+    "object": "A distinction between eligible targets, recorded events and attributed agency.",
+    "change": "Hold positions fixed, insert the screen and predict target eligibility before feeding begins. Compare selection with completed-meal history; selector, sight test and controller remain supplied.",
+    "dependsOn": [
+      "Point_Lines",
+      "Trans_Body",
+      "VFM_09_Legs"
+    ],
+    "reuses": "Distance can enter a condition.; A current test differs from retained state.; Commanded behaviour and physical validation are different kinds of evidence.",
+    "given": "lesson_crab's existing eligible-candidate selector and line-of-sight query; museum beacon, mushroom, screen and controls; feeding events, steering and gait; the separate analytic collision-cart comparison",
+    "later": "Do not explain every visible artifact. Change the former make obligation to reflect: the current final/tutorial support an encounter and source comparison, not a prerequisite to author a new selector, gait or event framework. Selection uses a strict six-metre candidate range and a supplied visibility test; active feeding and temporary ignoring affect when selection resumes. The five completed meals trigger an authored stop, not learned policy. The carts display a supplied analytic elastic-collision account rather than measuring the crab's collisions. Keep critical interpretation available without presenting friendship, intent or conservation as facts proved by target selection.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A distinction between eligible targets, recorded events and attributed agency.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "8e3dd958343eea42f3f656a3e004f51a76918d4a20af2a15ef148280008db990",
+      "choice": "095cb88c7a0b925cea3371679178b3947e1ac3a2317c3ebc2403a4fcec6141a8"
+    },
+    "summary": "Hold positions fixed and insert a screen, then predict which target remains eligible before feeding begins. Trace a small eligibility condition separately from the selected target and completed-meal history. Sight testing, selection machinery and controller are supplied. Carry the distinction between an available action, a recorded event and an attributed intention, ready to use the same discipline when later agents appear purposeful."
+  },
+  {
+    "id": "Vectors_Act5_ForceAsPlace",
+    "decision": "draft",
+    "mode": "build",
+    "object": "A receiver-aware account of acceleration, membership and persistent motion.",
+    "change": "Use the cubes to predict zero acceleration versus an immediate stop, then compare the visitor's separate receiver. Compose existing controls; membership tests, damping and contact handling are supplied.",
+    "dependsOn": [
+      "Vectors_Act3_FieldsAndMotion",
+      "VFM_03_Motion",
+      "Point_Coordinates"
+    ],
+    "reuses": "Acceleration changes stored velocity rather than replacing it.; A body retains motion when a command ends.; The field and recipient need named coordinate frames.",
+    "given": "vector_machine's angle and magnitude controls; force_field_zone's membership detection and cube receiver; force_cube's damping and collision behaviour; the separate visitor carry provider; the next hall's existing gradient descent as a source comparison, not an added Forces build",
+    "later": "Do not explain every visible artifact. The cube receiver adds field_vector * delta directly to linear_velocity; field_vector is acceleration, with no division by mass. Inside the zone ordinary gravity is suppressed, but damping and contacts remain; leaving restores saved gravity. The visitor has a separate locomotion/carry contract. Both can retain motion, so zero field does not mean stopped body. The next hall instead evaluates point - rate * gradient(point), with no velocity term or physics-delta factor; its display trail is history, not momentum. Preserve that change of model and do not promise a new receiver or descent implementation in this summary.",
+    "checks": [],
+    "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+    "carry": "A receiver-aware account of acceleration, membership and persistent motion.",
+    "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+    "notes": "",
+    "baseline": {
+      "tutorial": "ebda414bc6d5b56ca2ef217589063eb373b6e97594e262ec2d9b7b63bbe64521",
+      "choice": "974d957200c9f5b0169ea9f969f96227fcb1624e34dad788891195a5d046f03a"
+    },
+    "summary": "Compose the existing field controls and predict what zero acceleration does to a moving cube. Compare this with an immediate stop and with the visitor's separately implemented receiver. Membership, damping and contact handling are supplied. Carry a receiver-aware account of a place's influence: the same apparent region can change different bodies differently, and leaving an influence does not necessarily erase motion already acquired."
+  }
+]

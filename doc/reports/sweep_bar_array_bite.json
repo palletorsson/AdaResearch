@@ -1,0 +1,158 @@
+{
+ "sweep": "bar_array",
+ "peak_changed_pct": 0.812,
+ "subject_pct": 81.953,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "algorithm": "BUBBLE_SORT"
+   },
+   "b": {
+    "algorithm": "INSERTION_SORT"
+   },
+   "changed_px": 3537,
+   "changed_pct": 0.612
+  },
+  {
+   "a": {
+    "algorithm": "BUBBLE_SORT"
+   },
+   "b": {
+    "algorithm": "SELECTION_SORT"
+   },
+   "changed_px": 4059,
+   "changed_pct": 0.703
+  },
+  {
+   "a": {
+    "algorithm": "BUBBLE_SORT"
+   },
+   "b": {
+    "algorithm": "MERGE_SORT"
+   },
+   "changed_px": 4457,
+   "changed_pct": 0.772
+  },
+  {
+   "a": {
+    "algorithm": "BUBBLE_SORT"
+   },
+   "b": {
+    "algorithm": "QUICKSORT"
+   },
+   "changed_px": 4020,
+   "changed_pct": 0.696
+  },
+  {
+   "a": {
+    "algorithm": "BUBBLE_SORT"
+   },
+   "b": {
+    "algorithm": "HEAP_SORT"
+   },
+   "changed_px": 4263,
+   "changed_pct": 0.738
+  },
+  {
+   "a": {
+    "algorithm": "INSERTION_SORT"
+   },
+   "b": {
+    "algorithm": "SELECTION_SORT"
+   },
+   "changed_px": 3990,
+   "changed_pct": 0.691
+  },
+  {
+   "a": {
+    "algorithm": "INSERTION_SORT"
+   },
+   "b": {
+    "algorithm": "MERGE_SORT"
+   },
+   "changed_px": 3878,
+   "changed_pct": 0.671
+  },
+  {
+   "a": {
+    "algorithm": "INSERTION_SORT"
+   },
+   "b": {
+    "algorithm": "QUICKSORT"
+   },
+   "changed_px": 4471,
+   "changed_pct": 0.774
+  },
+  {
+   "a": {
+    "algorithm": "INSERTION_SORT"
+   },
+   "b": {
+    "algorithm": "HEAP_SORT"
+   },
+   "changed_px": 4159,
+   "changed_pct": 0.72
+  },
+  {
+   "a": {
+    "algorithm": "SELECTION_SORT"
+   },
+   "b": {
+    "algorithm": "MERGE_SORT"
+   },
+   "changed_px": 4086,
+   "changed_pct": 0.707
+  },
+  {
+   "a": {
+    "algorithm": "SELECTION_SORT"
+   },
+   "b": {
+    "algorithm": "QUICKSORT"
+   },
+   "changed_px": 4689,
+   "changed_pct": 0.812
+  },
+  {
+   "a": {
+    "algorithm": "SELECTION_SORT"
+   },
+   "b": {
+    "algorithm": "HEAP_SORT"
+   },
+   "changed_px": 4021,
+   "changed_pct": 0.696
+  },
+  {
+   "a": {
+    "algorithm": "MERGE_SORT"
+   },
+   "b": {
+    "algorithm": "QUICKSORT"
+   },
+   "changed_px": 3942,
+   "changed_pct": 0.682
+  },
+  {
+   "a": {
+    "algorithm": "MERGE_SORT"
+   },
+   "b": {
+    "algorithm": "HEAP_SORT"
+   },
+   "changed_px": 3785,
+   "changed_pct": 0.655
+  },
+  {
+   "a": {
+    "algorithm": "QUICKSORT"
+   },
+   "b": {
+    "algorithm": "HEAP_SORT"
+   },
+   "changed_px": 4291,
+   "changed_pct": 0.743
+  }
+ ]
+}

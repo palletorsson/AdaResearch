@@ -1,0 +1,131 @@
+{
+  "incoming": {
+    "sha256": "108fad54e6a19c47127d90e182d5000ce554af42766273a364be926a708217c0"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst Circle = preload(\"circle_samples.gd\")\nconst ColumnSurface = preload(\"column_surface.gd\")\nconst PROFILE: Array[float] = [0.35, 0.35, 0.18, 0.25, 0.4, 0.4]\nconst HEIGHT := 2.2\n\nfunc _ready() -> void:\n    var choices := [4, 6, 8, 12, 16]\n    for i in range(choices.size()):\n        var column := MeshInstance3D.new()\n        var points := column_positions(PROFILE, HEIGHT, choices[i])\n        column.mesh = ColumnSurface.make(points, choices[i])\n        column.position.x = (i - 2) * 1.0\n        var finish := StandardMaterial3D.new()\n        finish.albedo_color = Color(0.92, 0.91, 0.87)\n        finish.roughness = 0.7\n        column.material_override = finish\n        add_child(column)\n\nfunc column_positions(profile: Array[float], height: float, sides: int) -> Array[Vector3]:\n    assert(profile.size() >= 2 and height > 0.0 and sides >= 3)\n    var result: Array[Vector3] = []\n    for ring in range(profile.size()):\n        var y := height * ring / (profile.size() - 1)\n        for point in Circle.make(sides, profile[ring]):\n            result.append(point + Vector3(0, y, 0))\n    return result\n",
+      "after": "extends Node3D\nconst Sweep = preload(\"profile_sweep.gd\")\nconst FONT = preload(\"JetBrainsMono-Medium.ttf\")\nconst WIDTH := 1.4\nconst DEPTH := 1.6\nconst OFFSET := 0.5\nvar section: Dictionary\nvar frames: Array[Transform3D] = []\nvar body := MeshInstance3D.new()\n\nfunc _ready() -> void:\n    section = Sweep.profile(FONT, \"O\")\n    for i in range(5):\n        var fraction := i / 4.0\n        var at := Vector3(OFFSET * fraction, 1.1, DEPTH * fraction)\n        var frame := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * WIDTH), at)\n        frames.append(frame)\n    body.mesh = Sweep.make(section, frames)\n    var finish := StandardMaterial3D.new()\n    finish.albedo_color = Color(0.78, 0.62, 0.72)\n    finish.roughness = 0.4\n    body.material_override = finish\n    add_child(body)\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "profile_sweep.gd",
+      "sha256": "00ee671a4146d9d4634e5f5e29016a33982a8229c73e1addb6436ca9a6f70c39"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Profiles/tutorial.md",
+      "sha256": "ef177e4d8f236fe16974ab6d3fa0195c01cf0926394d1b0f9d106b9069d5aae7"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/lesson.gd",
+      "sha256": "b09bc8431e267794abd510cd1ab3fdf72f1999929ff437eaf786c33b21bf3f4d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/profile_sweep.gd",
+      "sha256": "00ee671a4146d9d4634e5f5e29016a33982a8229c73e1addb6436ca9a6f70c39"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/JetBrainsMono-Medium.ttf",
+      "sha256": "31c92d01a8a08528b718a43addf0ad3df0af2ca4b7b3290a452f70f358e14d3d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/JetBrainsMono-OFL.txt",
+      "sha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/declared_outline_and_frames",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/route_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/closed_material_boundary",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/open_through_centre",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/lower_sill_exists",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/route_variant_keeps_outline",
+      "kind": "native"
+    },
+    {
+      "id": "profiles/lesson_does_not_claim_collision",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Profiles/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/profile_sweep.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/JetBrainsMono-Medium.ttf",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Profiles/JetBrainsMono-OFL.txt"
+  ]
+}

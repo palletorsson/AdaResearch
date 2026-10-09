@@ -1,0 +1,150 @@
+{
+  "map_info": {
+    "name": "Trans_Pre",
+    "lookup_name": "Trans_Pre",
+    "description": "Build the pickup cube: inert form, then linear up-and-down travel, then turning, then growing and shrinking. Walk the wedge ramp to four collectible cubes along a raised route.",
+    "format": "json",
+    "version": "1.0",
+    "dimensions": {
+      "width": 9,
+      "depth": 24,
+      "max_height": 4
+    },
+    "museum": {
+      "wall_height": 4,
+      "plinths": false,
+      "simulation": {
+        "grid": true,
+        "staged": true,
+        "margin": 2,
+        "padding": 2,
+        "depth": 2.5,
+        "fire": false
+      }
+    },
+    "metadata": {
+      "source": "editor",
+      "n_artifacts": 13,
+      "difficulty": "beginner",
+      "category": "tutorial",
+      "estimated_time": "3 minutes",
+      "learning_objectives": ["Recognise the cube before animation", "Add translation, rotation and scale cumulatively using lerp before wave functions", "Recognise the completed pickup in a small grid level", "Walk wedges to a raised platform"]
+    }
+  },
+  "documentation": {
+    "summary": "One cube, three added operations, then a small level.",
+    "layout": "9 by 24. Four cumulative demonstrations at x4,z2/5/8/11; three principle markers at x6,z5/8/11. Three wedge lanes at row 14 reach a raised route carrying four animated pickups; row 22 carries the descent. Two health crosses flank the central route.",
+    "objective": "Connect the construction of a familiar pickup with its placement in a level.",
+    "key_elements": ["still at (4,2), centred on the room", "rise and fall at (4,5)", "rise, fall and turn at (4,8)", "rise, fall, turn and swell at (4,11)", "markers beside the later demonstrations at (6,5),(6,8),(6,11)", "three wp:0 wedges at row 14, columns 3 through 5", "four collectible cubes at (4,16),(4,18),(4,19),(4,20)", "health crosses at (2,18),(6,18) remain supporting works", "three wp:180 descent wedges at row 22, columns 3 through 5"]
+  },
+  "layers": {
+    "structure": [
+      ["4", "4", "4", "1", "1", "1", "4", "4", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "1", "1", "2", "2", "2", "1", "1", "4"],
+      ["4", "1", "1", "2", "2", "2", "1", "1", "4"],
+      ["4", "2", "2", "2", "2", "2", "2", "2", "4"],
+      ["4", "2", "2", "2", "2", "2", "2", "2", "4"],
+      ["4", "2", "2", "2", "2", "2", "2", "2", "4"],
+      ["4", "1", "1", "2", "2", "2", "1", "1", "4"],
+      ["4", "1", "1", "2", "2", "2", "1", "1", "4"],
+      ["4", "1", "1", "1", "1", "1", "1", "1", "4"],
+      ["4", "4", "4", "1", "1", "1", "4", "4", "4"]
+    ],
+    "utilities": [
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "s", "", "", "", ""],
+      ["", "", "3t:1 - cube", "", "", " ", " ", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", " ", "", ""],
+      ["", "", "3t:2 - add rise and fall", "", "", " ", "", " ", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", " ", "", ""],
+      ["", "", "3t:3 - add turning", "", "", " ", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", " ", "", ""],
+      ["", "", "3t:4 - add swelling", "", "", " ", "", "", ""],
+      ["", "", "", "", "", "3t:the same forms - a small level", "", "", ""],
+      ["", "", "", "", "", " ", "", "", ""],
+      ["", "", "", "wp:0", "wp:0", "wp:0", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", " ", " ", " ", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", " ", " ", " ", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "wp:180", "wp:180", "wp:180", "", "", ""],
+      ["", "", "", "", "t", "", "", "", ""]
+    ],
+    "interactables": [
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "pick_up_cube:0:0#hold:demo#motion:still#motion_curve:lerp", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", " ", "", "pick_up_cube:0:0#hold:demo#motion:slide#motion_curve:lerp", "", "y_translation_cube:180:0.7", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", " ", "", "pick_up_cube:0:0#hold:demo#motion:idle#motion_curve:lerp", "", "rotation_oscillation_cube:180:0.7#mode:continuous", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", " ", "", "pick_up_cube:0:0#hold:demo#motion:all#motion_curve:lerp", "", "uniform_scale_marker:180:0.7#motion_curve:lerp", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", " ", "", "", "", ""],
+      ["", "", "", "", "pick_up_cube:0:0#motion:all#motion_curve:lerp", "", "", "", ""],
+      ["", "", "", "", " ", "", "", "", ""],
+      ["", "", "health_cross:0:1", " ", "pick_up_cube:0:0#motion:all#motion_curve:lerp", " ", "health_cross:0:1", "", ""],
+      ["", "", "", "", "pick_up_cube:0:0#motion:all#motion_curve:lerp", "", "", "", ""],
+      ["", "", "", "", "pick_up_cube:0:0#motion:all#motion_curve:lerp", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", ""]
+    ]
+  },
+  "settings": {
+    "cube_size": 1,
+    "gutter": 0,
+    "show_grid": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.08,
+        0.1,
+        0.18
+      ]
+    },
+    "grid_animation": {
+      "enabled": false
+    },
+    "initial_tile_visibility": "hidden_except_corners"
+  },
+  "utility_definitions": {
+    "s": {
+      "type": "spawn"
+    },
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  }
+}

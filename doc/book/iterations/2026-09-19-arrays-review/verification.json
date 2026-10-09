@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-19",
+  "final_chapters_match_frozen_package": {
+    "Array": true,
+    "Tutorial_3D": true,
+    "Tutorial_Tiling_Floor": true,
+    "Tutorial_Tiling_Walls": true,
+    "Tutorial_Disco": true
+  },
+  "original_review_inputs_unchanged": {
+    "zip": true,
+    "review_text": true
+  },
+  "comparison_page": {
+    "path": "doc/book/iterations/2026-09-19-review-comparison/index.html",
+    "images": 11,
+    "links_and_assets_checked": 40,
+    "missing": [],
+    "browser_visual_inspection": "Browser Use URL policy blocked file:// inspection; no alternative browser workaround used. Local HTML references checked and all image pairs inspected directly."
+  },
+  "runtime_reports": {
+    "opening": "opening/contact-checks.json",
+    "floor": "surfaces/after/Tutorial_Tiling_Floor-checks.json",
+    "walls": "surfaces/after/Tutorial_Tiling_Walls-checks.json",
+    "surface_evidence": "surfaces/verification.json",
+    "disco_labels": "disco/verified-checks.json",
+    "disco_encounter": "disco/encounter-checks.json"
+  },
+  "headset_tested": false
+}

@@ -1,0 +1,11 @@
+--- before/commons/maps/Trans_Pre/final.md
++++ commons/maps/Trans_Pre/final.md
+@@ -1,6 +1,6 @@
+-We leave Primitives with a cube, a wedge and a grid. Now we can make a familiar game object: a Mario-style pickup cube.
++In Melencolia, the pyramids stayed still while your viewpoint changed. Here, stay a moment and let an object change in front of you. What survives its movement?
+ 
+-Watch how its movement is built up, one addition at a time.
++We bring the cube, the wedge and the grid with us. Begin with the cube. It can become a familiar game pickup by adding movement, one operation at a time. Watch for what each addition changes, and what lets you keep recognising it.
+ 
+ <!-- @pick_up_cube -->
+ 

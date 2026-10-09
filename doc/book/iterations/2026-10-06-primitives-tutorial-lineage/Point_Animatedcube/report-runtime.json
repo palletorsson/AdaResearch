@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "cube/visible_children_attached",
+      "passed": true
+    },
+    {
+      "id": "cube/eight_twelve",
+      "passed": true
+    },
+    {
+      "id": "cube/both_closed_outward",
+      "passed": true
+    },
+    {
+      "id": "cube/diagonal_only_connectivity",
+      "passed": true
+    },
+    {
+      "id": "cube/render_matches_recipes",
+      "passed": true
+    },
+    {
+      "id": "cube/independent_instances",
+      "passed": true
+    },
+    {
+      "id": "cube/deformed_render",
+      "passed": true
+    },
+    {
+      "id": "cube/placement_leaves_local_data",
+      "passed": true
+    },
+    {
+      "id": "cube/third_instance_from_class",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Point_Animatedcube",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "cube_body.gd",
+      "before": "faces[0] = Vector3i(4, 6, 5)\n    faces[1] = Vector3i(4, 7, 6)",
+      "after": "faces[0] = Vector3i(4, 7, 5)\n    faces[1] = Vector3i(5, 7, 6)"
+    },
+    "required_failure": "cube/diagonal_only_connectivity",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "cube/visible_children_attached",
+          "passed": true
+        },
+        {
+          "id": "cube/eight_twelve",
+          "passed": true
+        },
+        {
+          "id": "cube/both_closed_outward",
+          "passed": true
+        },
+        {
+          "id": "cube/diagonal_only_connectivity",
+          "passed": false
+        },
+        {
+          "id": "cube/render_matches_recipes",
+          "passed": true
+        },
+        {
+          "id": "cube/independent_instances",
+          "passed": true
+        },
+        {
+          "id": "cube/deformed_render",
+          "passed": true
+        },
+        {
+          "id": "cube/placement_leaves_local_data",
+          "passed": true
+        },
+        {
+          "id": "cube/third_instance_from_class",
+          "passed": true
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "cube/diagonal_only_connectivity"
+      ],
+      "hall": "Point_Animatedcube",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Point_Animatedcube/tutorial.md": "7c9f4a05aa774be8e0fd80f16a4e69971282761b2b88ec0076c9ed6db0aa0021",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/lesson.gd": "79eef8493a6f5d02fe23c90d0e1de5f4fa6c0b37050397094bdb16a7199b8635",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Animatedcube/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

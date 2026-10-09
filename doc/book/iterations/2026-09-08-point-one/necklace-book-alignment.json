@@ -1,0 +1,31 @@
+{
+  "book_artifacts": [
+    "frame_counter_display",
+    "folding_past",
+    "the_invisible_point",
+    "code_evolution_screen",
+    "interactive_point_origin_force",
+    "origin",
+    "coordinate_readout",
+    "CoordinateSystem3M",
+    "drag_point_target",
+    "wireframe_threshold",
+    "fontana_puncture",
+    "floating_sphere_field"
+  ],
+  "primary_count": 12,
+  "order_matches": true,
+  "grouping_preserved": true,
+  "saved_positions_preserved": true,
+  "scope": "Point One role/order aligned to all artifact passages. Shared UI shows all primary cards, passage access and flags tagged passages outside primary. Generated entrance inventory uses the existing museum-progress resolver; it does not add a grid placement. Other rooms retain their authored role choices.",
+  "validation": {
+    "python_tests": 19,
+    "typescript_diagnostics": 0,
+    "browser": "12 primary, 12 written; text flows with thread. Narrow panel cards visually inspected."
+  },
+  "sources": {
+    "tools/artifact_roles.py": "a9f72e0708ac4d27644b5b9b76685e1174efa2e7f93ea84d75e546156d1b3761",
+    "commons/data/artifact_roles.json": "1a8079b1e03dea38815d765c8c38a299c99f572fe57786cfb9fc7bb433fdb303",
+    "commons/maps/Point_One/final.md": "bdd653591fd8379ee5723d3d9bcbe2e5c1a26e9dfa51af1e48decff6d87dd861"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "hall": "QFEP_Introduction",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "eleven_placements": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "qfep_balance_workbench",
+    "grab_sphere_F",
+    "lambda_slider",
+    "science_screen",
+    "phi_slider",
+    "synthesis_stand",
+    "qfep_formula_3d",
+    "orange_and_apples",
+    "grab_sphere_E",
+    "grab_sphere_lambda"
+  ],
+  "primary_artifacts": [
+    "qfep_balance_workbench"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Introduction\\map_data.json": "9579b04f8cb7a1282e2fd1cd180dba5d73f88dc52ad309dcbc60a15dc8abf9ba",
+    "commons\\maps\\QFEP_Introduction\\final.md": "c768c5bb38adc6ea85cdb257517c5bf3be0cdc69f0cc3e26bf3646f2b0246f2a",
+    "commons\\maps\\QFEP_Introduction\\tutorial.md": "9efb04de6d91a1284bdc076218d51c63ef9bce508069fb4a44f224007e1cb53a",
+    "commons\\maps\\QFEP_Introduction\\technical.md": "6daa4ab39a9f887ab0e0df450d95e9ee11f292949ce3a9b3b2456dfbe75e5aa4",
+    "commons\\maps\\QFEP_Introduction\\critical.md": "ba9624c2324f2d62a65ad36fb65c13f65fec42499005a70b49dd81cf91f8780b"
+  }
+}

@@ -1,0 +1,158 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_Recursion</title><style>
+:root{color-scheme:light;--paper:#f5f1e9;--ink:#26232b;--rose:#cb7292}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}header,main,footer{max-width:1280px;margin:auto;padding:28px 5vw}nav{display:flex;gap:22px;flex-wrap:wrap}a{color:#823856;text-underline-offset:4px}h1{font:clamp(38px,5vw,68px)/1.05 Georgia,serif;max-width:900px}h2{font:34px/1.15 Georgia,serif;margin-top:55px}h3{font-size:20px}p{max-width:75ch}.eyebrow{letter-spacing:.15em;text-transform:uppercase;font-size:12px}.lead{font-size:22px;max-width:65ch}.pill{background:#25232b;color:#fff;padding:9px 16px;display:inline-block;border-radius:30px;font-size:14px}img{width:100%;display:block;border-radius:3px}figure{margin:24px 0}figcaption{font-size:14px;color:#59545d;margin-top:8px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{min-width:0;background:#fffdf8;padding:24px}table{border-collapse:collapse;width:100%;background:#fffdf8}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #d8d2ca;padding:16px}pre{white-space:pre;overflow:auto;font:13px/1.6 Consolas,monospace;padding:18px;background:#25232b;color:#f7eef1}code{font-family:Consolas,monospace;font-size:.87em}blockquote{margin:25px 0;padding:12px 26px;border-left:4px solid var(--rose);font:25px/1.5 Georgia,serif}.reading p{max-width:70ch}.reading h2{font-size:27px}.reading h1{font-size:38px}.reading pre{max-height:none}.notes{background:#e9e4dc;padding:22px}button{font:inherit;border:1px solid #b8a7ad;background:#fffdf8;padding:8px 15px;margin:10px 8px 10px 0;cursor:pointer}button[aria-pressed=true]{background:#25232b;color:white}@media(max-width:850px){.pair{grid-template-columns:1fr}header,main,footer{padding:22px}th,td{padding:10px}pre{font-size:12px}}@media print{nav,button{display:none}.pair{display:block}body{background:white}pre{white-space:pre-wrap}article{break-before:page}}
+</style><header><p class="eyebrow">Endless Museum · 8 October 2026 · Fractals / first pass</p><nav><a href="index.html">Museum & changes</a><a href="recursion.html">Recursion: tutorial / reflection</a><a href="trees.html">Trees: tutorial / reflection</a><a href="student-files.zip">Student scripts</a></nav></header><main class="pair reading"><article><p class="eyebrow">Tutorial · reconstruct the operation</p><h1>Recursion — one more frame</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>A function calling itself</li>
+<li>A smaller argument and a stopping condition</li>
+<li>A finite construction budget</li>
+</ul>
+<p>In the museum, press MORE at the frame study. Another frame appears, smaller than the last. Change its arrangement and try the doorway version. A frame your eye can follow may be too small for your body. We will reconstruct the repeated frame; the room's doors and controls already exist.</p>
+<h2>Continue with the line</h2>
+<p>You bring positions, lists, loops and functions from earlier halls. Keep the <code>LineSkin</code> supplied in Point Lines. Four segments make one square. The new operation is to call the square-making function again with a smaller size and one fewer step available.</p>
+<p>Keep your previous study as a working version. Save <code>frames.gd</code> and <code>line_skin.gd</code> together and attach <code>frames.gd</code> to your existing, empty <code>PointStudy</code> Node3D in the prepared museum workspace. Use unit scale; position and rotate the station to face you. The museum supplies the camera, lights and player. This script creates only the study. Do not attach it to the museum's generator or remove the room's existing artifact.</p>
+<h2>frames.gd</h2>
+<p>Run it with <code>depth = 3</code>. Predict the sizes before counting the visible frames.</p>
+<!-- student-code:frames.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+const MAX_DEPTH := 7
+const MIN_SIZE := 0.08
+@export_range(0, 7) var depth := 3
+@export_range(0.25, 0.85) var ratio := 0.65
+var sizes: Array[float] = []
+var frames: Node3D
+
+func _ready() -&gt; void:
+    frames = Node3D.new()
+    add_child(frames)
+    rebuild()
+
+func rebuild() -&gt; void:
+    for child in frames.get_children():
+        frames.remove_child(child)
+        child.queue_free()
+    sizes.clear()
+    repeat_frame(Vector3(0, 1.3, 0), 1.8, clampi(depth, 0, MAX_DEPTH))
+
+func repeat_frame(centre: Vector3, size: float, remaining: int) -&gt; void:
+    if remaining &lt;= 0 or size &lt; MIN_SIZE:
+        return
+    sizes.append(size)
+    draw_frame(centre, size)
+    repeat_frame(centre, size * clampf(ratio, 0.25, 0.85), remaining - 1)
+
+func draw_frame(centre: Vector3, size: float) -&gt; void:
+    var half := size * 0.5
+    var corners: Array[Vector3] = [
+        centre + Vector3(-half, -half, 0),
+        centre + Vector3(half, -half, 0),
+        centre + Vector3(half, half, 0),
+        centre + Vector3(-half, half, 0)
+    ]
+    for i in range(4):
+        var start := corners[i]
+        var displacement := corners[(i + 1) % 4] - start
+        var line := LineSkin.new()
+        frames.add_child(line)
+        line.show_segment(start, displacement, displacement.length())
+</code></pre>
+<p><code>repeat_frame()</code> receives the centre, the current size and the steps remaining. Its first <code>if</code> is the base case: when no step remains, or the square is smaller than our chosen limit, return without drawing.</p>
+<p>Otherwise it draws one frame. The last line calls the same function with the same centre, a smaller size and <code>remaining - 1</code>. With the default values, the sizes are 1.8, 1.17 and 0.7605 metres. The next call receives zero remaining steps and returns. Each earlier call then finishes.</p>
+<p>The loop in <code>draw_frame()</code> constructs four sides. Recursion repeats the whole construction. <code>(i + 1) % 4</code> returns to the first corner after the fourth; the last line closes the square.</p>
+<p><code>depth</code> controls how many frames may be made. <code>ratio</code> controls their relative sizes. They are separate choices. The small-size cutoff is another stopping condition: raising the depth does not guarantee that every allowed frame will be drawn. <code>clampi()</code> also caps scripted depth requests at seven; the limit applies beyond the Inspector slider.</p>
+<h2>Supplied line skin — line_skin.gd</h2>
+<p>This is the same finite cylinder renderer from Point Lines, printed here so the example has no missing helper. Its thickness makes an abstract segment visible. Keep it unchanged for this lesson.</p>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Make a prediction of your own</h2>
+<p>Change <code>ratio</code> to 0.5 and keep <code>depth</code> at 3. Before running, write down the three sizes. They should be 1.8, 0.9 and 0.45. Explain why there are still three frames. Now set depth to zero: no frame should be created. Restore depth to three.</p>
+<p>You should be able to change the reduction and predict the result without replacing the drawing function. The next hall keeps the stopping condition but lets a call make two children. Shorter pieces can then produce many more pieces.</p></article><article><p class="eyebrow">Final · encounter and reflection</p><h1>How many times can <em>again</em> happen?</h1>
+<!-- @fractal_recursion_2 -->
+
+<p>A square waits above the first desk. Press MORE. Another square appears inside it, half as wide. Ask again. The instruction is brief enough to hold in your head; the shrinking squares soon become harder to hold in your eyes.</p>
+<p>Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.</p>
+<p>Here is the self-call from the artifact:<sup id="fnref:noc"><a class="footnote-ref" href="#fn:noc">2</a></sup></p>
+<pre><code class="language-gdscript">var new_size: float = size * size_reduction
+_draw_recursive_pattern(center, new_size, d - 1)
+</code></pre>
+<p>The function has just drawn a square. It now calls itself with a smaller size and one less level to spend. At the beginning of each call, this condition can return it to the caller:</p>
+<pre><code class="language-gdscript">if d &lt;= 0 or size &lt; TERM_MIN_SIZE:
+    return
+</code></pre>
+<p><code>TERM_MIN_SIZE</code> is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.</p>
+<p>Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.</p>
+<p>Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.</p>
+<p><img alt="The same shrinking terms become doorframes on the museum floor." src="images/Fractal_Recursion-recursion-thresholds.png" /></p>
+<p>Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> Here we reach a last square. The room has stopped where a rule could go on.</p>
+<p>We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.</p>
+<!-- @example_8_3_recursion_circles_vr -->
+
+<p>The other desk begins with one ring. Predict the count after MORE. Five. Once more: twenty-one. The footprint remains roughly the same while the number of things occupying it changes quickly.</p>
+<p>Each call draws its ring, then makes four smaller calls, shifting their centres right, left, up and down. Four levels leave <code>1 + 4 + 16 + 64</code> rings: eighty-five. The fifth leaves three hundred and forty-one. “One more” has acquired a different cost.</p>
+<p>Return to depth four and try PACKING. The child radius changes; the number of rings stays. Press PACKING until the readout says dust, then ask for depth five: the fifth ring’s requested radius, two metres times 0.25 four times over, is about eight millimetres, below the source’s one-centimetre cutoff, and a whole level is lost. A depth allowance does not guarantee that every call will draw. Some overlap, some meet, some separate. TURN releases their planes into the artifact's rotating motion. Stop it to return to the frontal comparison. An apparent tangle can come from placement and pose as well as from adding more things.</p>
+<p>The room can accommodate three hundred and forty-one rings. That does not mean it has made three hundred and forty-one distinctions easy to read. We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.</p>
+<!-- @cube_subdivision -->
+
+<p>Now a cube waits on a plinth. Press SPLIT. Eight smaller cubes take its place. Press again. Fifteen, not sixty-four. This machine divides one selected cell at a time.</p>
+<p>Choose DRILL and spend the twelve splits. Then choose SPREAD and spend the same allowance. Both end with eighty-five cells. DRILL follows one corner into smaller and smaller scales; SPREAD chooses a cell from the shallowest remaining level. The readout reaches depth twelve in one case and depth three in the other. Equal counts have bought different bodies.</p>
+<p>LOTS draws from the remaining population. Its seed is fixed here. BEGIN lets you repeat the same choices and inspect something you missed. Repetition becomes a way of paying attention.</p>
+<p>The source sets a child's scale like this:</p>
+<pre><code class="language-gdscript">var new_scale = cube_scale * 0.5 * 0.9
+</code></pre>
+<p>Half, then a little smaller. The gaps that make the division legible are authored too. And the tiny cell that DRILL keeps choosing still costs something even after its difference becomes difficult to see. More work need not yield more experience. Where would you spend the next split?</p>
+<!-- @recursive_chair -->
+
+<p>At the last desk, NEXT starts to make a chair. After the first cut, press GHOST. Eleven pale cells return around the sixteen that were kept. SCAR marks the discarded centres; GONE hides those witnesses again. The choice of what to keep has become visible beside its result.</p>
+<p>Something else moved. The first stage lifts the divided lattice; subsequent stages flatten the seat, extend legs and back, then add armrests. The chair was not simply waiting inside the original cube. Parts are selected, translated, stretched and added according to an intention about chairs.</p>
+<p>This artifact carries “recursive” in its name, but its construction runs through five authored stages. There is no self-call in that sequence. Its presence beside the squares is useful precisely because a familiar appearance can conceal a different procedure.</p>
+<!-- @ -->
+
+<p>The table, staircase, pagoda and other works remain beyond the desks, a collection to return to with these distinctions in hand. We do not have to make every object evidence for the same claim.</p>
+<p>A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Benoît Mandelbrot coined <em>fractal</em> in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in <a href="https://natureofcode.com/fractals/#what-is-a-fractal">“What Is a Fractal?”, <em>The Nature of Code</em></a>. It is a way into the examples, not a complete mathematical definition.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:noc">
+<p>The square and ring source files credit Daniel Shiffman's <em>The Nature of Code</em>, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.&#160;<a class="footnote-backref" href="#fnref:noc" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></main><footer>Native Godot captures. Supplied test input; physical headset feel and learner understanding remain untested.</footer></html>

@@ -1,0 +1,112 @@
+{
+  "checks": [
+    {
+      "name": "actual Animated Cube museum hall assembled",
+      "passed": true
+    },
+    {
+      "name": "existing net uses opt-in fall cycle",
+      "passed": true
+    },
+    {
+      "name": "net finds the actual floor before beginning",
+      "passed": true
+    },
+    {
+      "name": "six original faces form the visible net",
+      "passed": true
+    },
+    {
+      "name": "museum capture open",
+      "passed": true
+    },
+    {
+      "name": "museum capture folding",
+      "passed": true
+    },
+    {
+      "name": "all faces meet into a cube before release",
+      "passed": true
+    },
+    {
+      "name": "museum capture closed",
+      "passed": true
+    },
+    {
+      "name": "closed cube physically settles on the museum floor",
+      "passed": true
+    },
+    {
+      "name": "museum capture think",
+      "passed": true
+    },
+    {
+      "name": "museum capture reopen",
+      "passed": true
+    },
+    {
+      "name": "gravity accelerates the finished cube",
+      "passed": true
+    },
+    {
+      "name": "pause retains a resting cube",
+      "passed": true
+    },
+    {
+      "name": "return begins at the floor pose without a teleport",
+      "passed": true
+    },
+    {
+      "name": "two complete cycles return to the original open net",
+      "passed": true
+    },
+    {
+      "name": "six face nodes survive folding falling and restart",
+      "passed": true
+    },
+    {
+      "name": "unfolded net has no enclosing collider",
+      "passed": true
+    },
+    {
+      "name": "static DNA pose retires the cycle and restores original faces",
+      "passed": true
+    },
+    {
+      "name": "existing net closes after reconfiguration: latin_cross",
+      "passed": true
+    },
+    {
+      "name": "existing net closes after reconfiguration: staircase",
+      "passed": true
+    },
+    {
+      "name": "existing net closes after reconfiguration: zed",
+      "passed": true
+    },
+    {
+      "name": "existing net closes after reconfiguration: two_rows",
+      "passed": true
+    },
+    {
+      "name": "museum cycle can restart after live reconfiguration",
+      "passed": true
+    },
+    {
+      "name": "no native script errors",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "phases": [
+    "OPEN",
+    "FOLD",
+    "HALF",
+    "CLOSED",
+    "FALL",
+    "THINK",
+    "RISE",
+    "REOPEN"
+  ],
+  "scope": "Actual museum assembly, two physics cycles, geometry continuity and native captures. Physical headset untested."
+}

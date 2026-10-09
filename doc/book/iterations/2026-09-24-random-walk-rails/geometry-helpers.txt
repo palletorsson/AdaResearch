@@ -1,0 +1,36 @@
+func _label(host: Node3D, text: String, pos: Vector3, height: float, colour: Color = Color(0.93,0.95,0.92)) -> Label3D:
+	var label := Label3D.new()
+	label.text = text
+	label.position = pos
+	label.font_size = 48
+	label.pixel_size = height / 48.0
+	label.modulate = colour
+	label.outline_size = 0 if colour == INK else 4
+	host.add_child(label)
+	return label
+
+func _box(host: Node3D, title: String, pos: Vector3, size: Vector3, colour: Color, solid: bool) -> void:
+	var mesh := MeshInstance3D.new()
+	mesh.name = title
+	mesh.position = pos
+	var shape := BoxMesh.new()
+	shape.size = size
+	mesh.mesh = shape
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = colour
+	mat.roughness = 0.35
+	if colour.a < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mat.no_depth_test = false
+	mesh.material_override = mat
+	host.add_child(mesh)
+	if solid:
+		var body := StaticBody3D.new()
+		body.position = pos
+		var collision := CollisionShape3D.new()
+		var box := BoxShape3D.new()
+		box.size = size
+		collision.shape = box
+		body.add_child(collision)
+		host.add_child(body)

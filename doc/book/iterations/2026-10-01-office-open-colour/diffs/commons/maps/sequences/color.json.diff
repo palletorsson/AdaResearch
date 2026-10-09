@@ -1,0 +1,11 @@
+--- before/commons/maps/sequences/color.json
++++ after/commons/maps/sequences/color.json
+@@ -50,7 +50,7 @@
+ 	"Color_Pillar: A spatial gradient sampled by pillars; named palettes on a wall",
+ 	"Color_Grid_Pallet: Color Grid Pallet",
+ 	"Color_Paint: A painting continues before you touch it",
+-    "Color_Walls: Colour at office scale through orthogonal glass cubicles"
++    "Color_Walls: Overlapping colour planes, fixed gaps, colour coordinates and paths"
+    ],
+    "maps": [
+ 	"Color_Context_Placed",

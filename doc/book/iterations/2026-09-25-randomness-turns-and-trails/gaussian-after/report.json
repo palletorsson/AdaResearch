@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "sampler cabinet is present in actual museum",
+      "passed": true
+    },
+    {
+      "name": "three batches retain 300 values",
+      "passed": true
+    },
+    {
+      "name": "compact console has a marked standing place",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sampler-standing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sampler-readout",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sampler-overview",
+      "passed": true
+    },
+    {
+      "name": "BINS button regroups the retained values",
+      "passed": true
+    },
+    {
+      "name": "WIDTH button changes spread and clears values",
+      "passed": true
+    },
+    {
+      "name": "other cabinets retain the original readout",
+      "passed": true
+    },
+    {
+      "name": "readout can move after ready without clearing values",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "readout": {
+      "lines": [
+        "GAUSS · μ 0.50 σ 0.15 · Box-Muller",
+        "landed 300 · in flight 0 · cap 1000",
+        "clipped 0 of 300 drawn · first bin 1 · last 0",
+        "bins 30 · mean 0.506 · σ 0.147 (binned)",
+        "seed 86588 · CLEAR replays it",
+        "paused · BATCH lands 100"
+      ],
+      "plate_local": [
+        -0.860000014305115,
+        1.42999994754791,
+        0.172000005841255
+      ],
+      "standing_eye": [
+        5.5,
+        1.70000004768372,
+        4.87999963760376
+      ],
+      "world": [
+        6.3600001335144,
+        1.42999994754791,
+        6.32800006866455
+      ]
+    },
+    "width_cycle": {
+      "after": 0.25,
+      "before": 0.15
+    }
+  },
+  "passed": true,
+  "room": "Random_Gaussian",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

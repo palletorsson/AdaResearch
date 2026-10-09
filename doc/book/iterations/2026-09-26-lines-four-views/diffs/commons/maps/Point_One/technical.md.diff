@@ -1,0 +1,13 @@
+--- before/commons/maps/Point_One/technical.md
++++ after/commons/maps/Point_One/technical.md
+@@ -60,8 +60,6 @@
+ 
+ The coordinate frame’s optional origin sign is blank in this placement (`origin_sign_text`), so “Point zero” belongs to the origin in the previous chapter. The wider room has a continuous floor and a clear approach to the closing sculpture.
+ 
+-## Coordinate basin — 26 September 2026
++## Coordinate basin — revised 26 September 2026
+ 
+-The coordinate frame stands in a 7 × 7 m basin (map cells x=3..9, z=15..21), one metre below the surrounding floor. Its origin is at y=-0.9 m relative to the deck, leaving the horizontal axes visible above the basin bottom. A transparent glass cover at deck height supports walking. The pool has no fire or damage volume. WORLD still reports the held point’s world position; LOCAL measures from the lowered frame. The two cards remain outside the pool. This is a Point_One placement, using existing museum basin support.
+-
+-The museum already seats artifacts in declared basin cells at the bottom. The frame therefore uses a +0.10 m placement offset above that seat, rather than a second negative offset.
++An L-shaped glass-covered basin follows the horizontal axes: map cells x=4, z=15..20 and z=20, x=4..9. The 11 pool cells are one metre deep. The coordinate origin is at floor level, with a +1.0 m placement offset above the museum’s automatic basin seat. The glass supports a level crossing. WORLD and LOCAL still follow the same carried point. The uncut quadrant stays ordinary floor; no damage volume is enabled.

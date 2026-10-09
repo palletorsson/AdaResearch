@@ -1,0 +1,2664 @@
+{
+  "CriticalAlgorithms_Algorithmic_Bias_Visualization": {
+    "map_source": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/map_data.json",
+    "text_source": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+    "map_sha256": "3a2fdf3db30d8a7c6fa00e2f76edd5fe446cf9383f15055258e051ca7a9317af",
+    "text_sha256": "cce23fb029848631f935bd816aa88ecab84dfb084a25282579371ee79c4a6c80",
+    "map_info": {
+      "name": "Algorithmic Bias Visualization",
+      "lookup_name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "description": "A divided room â€” the left half is spacious, the right half cramped. The bias is spatial: unequal allocation of space.\n\n[Placement applied humanoid_walker engine — constraint 0.852→0.945, walkability 0.367→0.545]\n\n[Placement applied humanoid_walker engine — constraint 0.945→0.945, walkability 0.528→0.545]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 11,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "critical_algorithms",
+        "spatial_temperature": 0.7,
+        "design_notes": "Wall divides room into ~5-col spacious half and ~2-col cramped half. Inequality made visible through architecture."
+      },
+      "title": "Bias as Structural Incompleteness"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "bias_visualizer:90",
+        "commented_out": false,
+        "lookup_hint": "bias_visualizer",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "bias_from_inside",
+        "commented_out": false,
+        "lookup_hint": "bias_from_inside",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 4,
+        "raw_token": "situated_readout",
+        "commented_out": false,
+        "lookup_hint": "situated_readout",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "wp:90",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 7,
+        "z": 8,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 414,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "bias_from_inside"
+        ],
+        "reason": "Which differences disappear when a representation gives some terms less room?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+        "text_sha256": "fd166e9333d7689f5f9d832cf95970d363681e6a8fb53b41012297c441ac4dbb",
+        "map_sha256": "3a2fdf3db30d8a7c6fa00e2f76edd5fe446cf9383f15055258e051ca7a9317af",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "bias_from_inside"
+      ],
+      "role_primary_order": [
+        "bias_from_inside"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "CriticalAlgorithms_Applied_Ethics": {
+    "map_source": "commons/maps/CriticalAlgorithms_Applied_Ethics/map_data.json",
+    "text_source": "commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+    "map_sha256": "2725acb252c87456512f761dec46d9e8d24b151e424ba5802b5aad2db08a21b3",
+    "text_sha256": "848f231e0387442793524c156e3af9ed16a14d8e022d957327d8a54770f708bd",
+    "map_info": {
+      "name": "Applied Ethics After Gödel",
+      "lookup_name": "CriticalAlgorithms_Applied_Ethics",
+      "description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step — it's the shape of the room.\n\n[Placement applied humanoid_walker engine — constraint 0.872→0.932, walkability 0.463→0.450]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "critical_algorithms",
+        "status": "scaffold",
+        "design_notes": "SCAFFOLD — walls carve an off-center path, forcing the player through the 'outside' of the otherwise symmetric grid. Artifacts TBD in phase 2."
+      },
+      "title": "Ethical Design After Incompleteness"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:90:qfep_critical:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "room_shape_demonstrator",
+        "commented_out": false,
+        "lookup_hint": "room_shape_demonstrator",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "excluded_class_visualizer",
+        "commented_out": false,
+        "lookup_hint": "excluded_class_visualizer",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "bias_from_inside:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "bias_from_inside",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 2,
+        "raw_token": "godel_statement_plaque:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "godel_statement_plaque",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 3,
+        "raw_token": "synthesis_stand#subject:tt#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "3t:THE OUTSIDE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 6,
+        "raw_token": "3t:EVERY CLASSIFIER HAS ONE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "3t:ETHICS IS ARCHITECTURE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "recorded_status": "source_checked_draft",
+      "text_words": 434,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "room_shape_demonstrator"
+        ],
+        "reason": "Who is made easiest to address before anybody has spoken?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+        "text_sha256": "7db30dc9f21f55ee017866c29f416dec579e1dbb270d4784bbf586b4fdfd714d",
+        "map_sha256": "e35d06b6a50cf97055f270f8511a4bd600d3e1ef138bc072e25d829d3d1e5696",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "room_shape_demonstrator"
+      ],
+      "role_primary_order": [
+        "room_shape_demonstrator"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SpeculativeComputation_Paraconsistent_Engineering": {
+    "map_source": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/map_data.json",
+    "text_source": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+    "map_sha256": "e7d69150af6f3b6226f2a0b3f12408790a6255fbf8d987f312371f3d24103b44",
+    "text_sha256": "14598897b9a317663615e3999c3f92a57bcd48393f8a1a8a57a27b2ac31d33e0",
+    "map_info": {
+      "name": "Paraconsistent Engineering",
+      "lookup_name": "SpeculativeComputation_Paraconsistent_Engineering",
+      "description": "What Florensky observed, the engineer applies: systems that hold A and not-A without collapsing. Version control. Eventual consistency. Schrödinger's build.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "speculative_computation",
+        "status": "scaffold",
+        "design_notes": "SCAFFOLD — two overlapping zones with contradictory states coexisting. Artifacts TBD (merge-conflict visualizer, version tree, CAP-theorem walk)."
+      },
+      "title": "Holding Contradiction in Production"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "florensky_sphere:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "florensky_sphere",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 5,
+        "raw_token": "shannon_workbench",
+        "commented_out": false,
+        "lookup_hint": "shannon_workbench",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 6,
+        "raw_token": "superposition_display:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "superposition_display",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 6,
+        "raw_token": "schrodinger_box:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "schrodinger_box",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 8,
+        "raw_token": "merge_conflict_visualizer",
+        "commented_out": false,
+        "lookup_hint": "merge_conflict_visualizer",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 8,
+        "raw_token": "cap_theorem_walk",
+        "commented_out": false,
+        "lookup_hint": "cap_theorem_walk",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 9,
+        "raw_token": "tt:90:qfep_application:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "rhizome_vault",
+        "commented_out": false,
+        "lookup_hint": "rhizome_vault",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "3t:A AND NOT-A",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 6,
+        "raw_token": "3t:HOLD WITHOUT COLLAPSE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "3t:BRANCH, DO NOT BREAK",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "recorded_status": "source_checked_draft",
+      "text_words": 422,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "merge_conflict_visualizer"
+        ],
+        "reason": "Must one account disappear before two accounts can share a system?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+        "text_sha256": "7b954bc820c5f73bfeecebb29bc0cc65418067aa810a1dc89cbe47fbc9a9de66",
+        "map_sha256": "8e77b351cfc104bdcd980c81f25a122c8ebeb64a4b85bf27a1314713fc1b0d31",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "merge_conflict_visualizer"
+      ],
+      "role_primary_order": [
+        "merge_conflict_visualizer"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SpeculativeComputation_Situated_Computation": {
+    "map_source": "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json",
+    "text_source": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+    "map_sha256": "0a293b4894ba0087aced16caa648eb5a982b6df0f100ff1e7761c82afb3efe61",
+    "text_sha256": "a669b53f70ed94170d18888fe1f41b7a68e6c73f73b70deaed128c6bead3b45a",
+    "map_info": {
+      "name": "Situated Computation",
+      "lookup_name": "SpeculativeComputation_Situated_Computation",
+      "description": "The view from nowhere was always a view from somewhere. Haraway's situated knowledge, wired into the machine: every computation has a body, a place, a time.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+        "width": 10,
+        "depth": 10,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "speculative_computation",
+        "status": "scaffold",
+        "design_notes": "SCAFFOLD — the same computation returns different results in different parts of the room. Artifacts TBD (embodied-sensor walk, position-dependent output)."
+      },
+      "title": "Knowledge With a Body"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "situated_readout:0:0.3#verdict:NW",
+        "commented_out": false,
+        "lookup_hint": "situated_readout",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "situated_readout:0:0.3#verdict:NE",
+        "commented_out": false,
+        "lookup_hint": "situated_readout",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 5,
+        "raw_token": "head_crab:180#detection:14",
+        "commented_out": false,
+        "lookup_hint": "head_crab",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "raw_token": "situated_readout:0:0.3#verdict:SW",
+        "commented_out": false,
+        "lookup_hint": "situated_readout",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "situated_readout:0:0.3#verdict:SE",
+        "commented_out": false,
+        "lookup_hint": "situated_readout",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 4,
+        "z": 1,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 1,
+        "z": 3,
+        "raw_token": "3t:NO VIEW FROM NOWHERE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 1,
+        "z": 6,
+        "raw_token": "3t:SAME SUBJECT. FOUR VERDICTS.",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 4,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "SpeculativeComputation_Situated_Computation",
+      "recorded_status": "source_checked_draft",
+      "text_words": 501,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "situated_readout"
+        ],
+        "reason": "What changes when the subject stays the same but the source of the verdict changes?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+        "text_sha256": "3cabe65f9cd1b114ba45c55729761d05c1c11eed5b05c19b0f0a454f98a5b4fd",
+        "map_sha256": "ac30de151668288af3792cd9b9f6e7aeb465a4356a502dc3fd6b00ed4c04ef86",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "situated_readout"
+      ],
+      "role_primary_order": [
+        "situated_readout"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SpeculativeComputation_Collective_Knowledge": {
+    "map_source": "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json",
+    "text_source": "commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+    "map_sha256": "bae5bed96413146726690ecaf166f7390e297a9f1ee0eaaab949d200d25e1930",
+    "text_sha256": "05ebdd15e35c097636a8b026da75aed417fb3356cf386ae3c38a8dc3ae719c4f",
+    "map_info": {
+      "name": "Collective Knowledge",
+      "lookup_name": "SpeculativeComputation_Collective_Knowledge",
+      "description": "No single formal system is complete. But a commons — a wiki, a peer review, a distributed cognition — can route around any one system's blind spots.\n\n[Placement applied hybrid engine — constraint 1.000→1.000, walkability 0.523→0.552]\n\n[Placement applied hybrid engine — constraint 1.000→1.000, walkability 0.609→0.680]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 13,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "speculative_computation",
+        "status": "scaffold",
+        "design_notes": "SCAFFOLD — many small reading stations, none complete on its own. Artifacts TBD (wiki fragment, peer-edit ledger, citation graph node)."
+      },
+      "title": "The Commons as Response"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "the_fourth_limit",
+        "commented_out": false,
+        "lookup_hint": "the_fourth_limit",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "peer_production_tool:90",
+        "commented_out": false,
+        "lookup_hint": "peer_production_tool",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 8,
+        "raw_token": "wiki_fragment:0:0.3#fragment:NORTH",
+        "commented_out": false,
+        "lookup_hint": "wiki_fragment",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "the_commons_table",
+        "commented_out": false,
+        "lookup_hint": "the_commons_table",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "3t:NO NODE IS TRUE ALONE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 3,
+        "z": 8,
+        "raw_token": "3t:THE LEDGER HOLDS WHAT ONE CANNOT",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "recorded_status": "source_checked_draft",
+      "text_words": 434,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "peer_production_tool"
+        ],
+        "reason": "When many marks accumulate, what makes the result knowledge rather than a pile?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+        "text_sha256": "9457cd1c88676de412d7bcdc7b04d61d17a8f454ca05fbce7dcc330254566c51",
+        "map_sha256": "ab407d37b940c92a720c16c6e8ea75bb3eea74333f562f86d38c14007395c0bd",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "peer_production_tool"
+      ],
+      "role_primary_order": [
+        "peer_production_tool"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "SpeculativeComputation_Rhizome_Network": {
+    "map_source": "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json",
+    "text_source": "commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+    "map_sha256": "8c904f72f355b6c3f89f206cb865710dd85fb059280c64eb7c2e32c0432ae939",
+    "text_sha256": "2aef4af9a49d67152457652213b54be6e71628c4dcebf4d8c9ca7533e3f4875d",
+    "map_info": {
+      "name": "Rhizome Network",
+      "lookup_name": "SpeculativeComputation_Rhizome_Network",
+      "description": "An organic cave with four interconnected chambers separated by wall bridges. No hierarchy — multiple paths connect every chamber. Rhizomatic.\n\n[Placement applied hybrid engine — constraint 0.960→0.960, walkability 0.399→0.722]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "speculative_computation",
+        "spatial_temperature": 0.75,
+        "design_notes": "Four chambers in corners connected by narrow passages. Central void. No single path dominates — Deleuze/Guattari spatial."
+      },
+      "title": "Networks Without Hierarchy"
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "p:3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "p:1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "p:3",
+        "p:3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "p:3",
+        "p:3",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "p:3",
+        "1",
+        "1",
+        "p:1",
+        "p:1",
+        "1",
+        "1",
+        "p:3",
+        "p:1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "p:3",
+        "1",
+        "1",
+        "p:1",
+        "p:1",
+        "1",
+        "1",
+        "p:3",
+        "p:1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "p:3",
+        "p:3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "p:3",
+        "p:3",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "p:3",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "5",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "5",
+        "1",
+        "1",
+        "5",
+        "5",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 8,
+        "z": 3,
+        "raw_token": "rhizome_cave_demo",
+        "commented_out": false,
+        "lookup_hint": "rhizome_cave_demo",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "rhizome_grower",
+        "commented_out": false,
+        "lookup_hint": "rhizome_grower",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "3t:CONNECT TO NEARBY NODES",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "3t:NO NAMED ROOT",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 8,
+        "z": 6,
+        "raw_token": "3t:WHO GETS MORE LINKS?",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "3t:THE MAP IS NOT THE TERRITORY",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "recorded_status": "source_checked_draft",
+      "text_words": 434,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "rhizome_grower"
+        ],
+        "reason": "Can a network grow through local connections without being given a root?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+        "text_sha256": "cbcc061a9fc89e4683fc3dd9d7eef80ea9ca91b06d948535ebac1146a3b89bc8",
+        "map_sha256": "edd8d96385a47740672acf16547c36d36818609aec2f753bfd33d555f265f125",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "rhizome_grower"
+      ],
+      "role_primary_order": [
+        "rhizome_grower"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "AdvancedLaboratory_Lab_Equipment_Simulation": {
+    "map_source": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json",
+    "text_source": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+    "map_sha256": "23d99a6b09df8407eaabad276af656f0c149f52032c295aaebe1b9a975b30375",
+    "text_sha256": "bb045080b41cf96b870f37eb12ba04af2b32fa1cc657e267609030bedb600bf4",
+    "map_info": {
+      "name": "Lab Equipment Simulation",
+      "lookup_name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "description": "A clean laboratory with raised work surfaces and a void pit revealing something underneath. Orderly but with one surprise.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 9,
+        "depth": 8,
+        "max_height": 2
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "advanced_laboratory",
+        "spatial_temperature": 0.8,
+        "design_notes": "Lab benches (h2) arranged around room. Central void pit. Clean, systematic layout with one disruption."
+      },
+      "title": "Molecular Design After Crisis",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "0"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next",
+        "description": "Continue to next step",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 4,
+        "z": 3,
+        "raw_token": "MolecularDesigner:90",
+        "commented_out": false,
+        "lookup_hint": "MolecularDesigner",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s"
+      },
+      {
+        "x": 1,
+        "z": 0,
+        "raw_token": "an",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 4,
+        "z": 1,
+        "raw_token": "3t:BUILD FROM A CATALOGUE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "3t:GEOMETRY IS CONSTRAINT",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "3t:DESIGN WITH LIMITS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 4,
+        "z": 5,
+        "raw_token": "3t:POST-REDUCTIONIST PRACTICE",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 7,
+        "z": 6,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "recorded_status": "source_checked_draft",
+      "text_words": 460,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "MolecularDesigner"
+        ],
+        "reason": "How can the same inventory become more than one recognisable body?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+        "text_sha256": "a0c790e5d1f585197bd3257769b74d7b96d65cf16472b886aa5db5055ca7de44",
+        "map_sha256": "15f3311f2526065cc89ce227fb657b93a51a3f9948b9eed499789586b2c5d8df",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "MolecularDesigner"
+      ],
+      "role_primary_order": [
+        "MolecularDesigner"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "PostCrisis_Synthesis": {
+    "map_source": "commons/maps/PostCrisis_Synthesis/map_data.json",
+    "text_source": "commons/maps/PostCrisis_Synthesis/final.md",
+    "map_sha256": "96afbe89393008bebf7ff6309689680598a10aa31c6d716efb0ae67d2aaaff93",
+    "text_sha256": "74e5044ec6ced1089a0a080fd176369961fdaccf37b8aee79d0dc9e3e86ff254",
+    "map_info": {
+      "name": "Post-Crisis Synthesis",
+      "lookup_name": "PostCrisis_Synthesis",
+      "description": "Knowing the limits, we built. Ethics as architecture. Contradiction as method. Situated knowledge. A commons. Rhizome. Molecular design. The crisis was not the end — it was the ground.\n\n[Placement applied humanoid_walker engine — constraint 0.855→0.982, walkability 0.538→0.410]",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 16,
+        "depth": 16,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "synthesis",
+        "status": "scaffold",
+        "design_notes": "SCAFFOLD — central raised platform with 7 stations ringing it, each recalling one prior post-crisis map. Artifacts TBD in phase 2."
+      },
+      "title": "The Edge Is the Ground",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {},
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Return to Lab",
+        "description": "Return transformed. The crisis is now your material.",
+        "properties": {
+          "destination": "Lab",
+          "lab_variant": "post_postfoundationscrisis"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:90:qfep_synthesis:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "accountability_ledger:90",
+        "commented_out": false,
+        "lookup_hint": "accountability_ledger",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "edge_ground_synthesis:90",
+        "commented_out": false,
+        "lookup_hint": "edge_ground_synthesis",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 2,
+        "raw_token": "bias_from_inside:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "bias_from_inside",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 2,
+        "raw_token": "qfep_formula_3d:0:2",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 5,
+        "raw_token": "florensky_sphere:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "florensky_sphere",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub"
+      },
+      {
+        "x": 6,
+        "z": 3,
+        "raw_token": "3t:BIAS SEEN",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 9,
+        "z": 3,
+        "raw_token": "3t:ETHICS BUILT",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "3t:CONTRADICTION HELD",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 10,
+        "z": 5,
+        "raw_token": "3t:SITUATED",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "el:3:1",
+        "commented_out": false,
+        "lookup_hint": "el"
+      },
+      {
+        "x": 5,
+        "z": 9,
+        "raw_token": "3t:COMMONS",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 10,
+        "z": 9,
+        "raw_token": "3t:RHIZOME",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 11,
+        "raw_token": "3t:MOLECULAR DESIGN",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 13,
+        "raw_token": "3t:THE EDGE IS THE GROUND",
+        "commented_out": false,
+        "lookup_hint": "3t"
+      },
+      {
+        "x": 7,
+        "z": 14,
+        "raw_token": "t:lab",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "PostCrisis_Synthesis",
+      "recorded_status": "source_checked_draft",
+      "text_words": 434,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "accountability_ledger"
+        ],
+        "reason": "Can you name one person a useful design choice could leave out?",
+        "status": "source_checked_draft",
+        "sequence": "postfoundationscrisis",
+        "text_path": "commons/maps/PostCrisis_Synthesis/final.md",
+        "text_sha256": "0959be9f226807a885a6054f15b5634d43c6cc143aec71735771f7ab3b1bbd65",
+        "map_sha256": "432c91d0eeeff41f5d0250e7da9e88ab435944eb679682b3ddf441faa920affb",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "accountability_ledger"
+      ],
+      "role_primary_order": [
+        "accountability_ledger"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

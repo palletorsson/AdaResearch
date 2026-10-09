@@ -1,0 +1,379 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_Effect_Sound · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_Effect_Sound">← Tutorial lineage</a></p><h1>WaveFunctions Effect Sound</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_Effect_Sound/final.md">Raw captured source</a></p><pre># One wave inside another
+
+In Sine Space, a sampled wave carried spheres and two moving walls suggested a passage. Here the wave enters another rule. Past the racks, near the far end of the hall, two balls sit in separate cages above desks. Begin with one note.
+
+&lt;!-- @DualBallFMController --&gt;
+
+The blue ball belongs to the carrier, the orange to the modulator. Their desks leave room to approach each separately. Press BASELINE, let the short note end, then press HOLD to keep it as the comparison&#x27;s A.
+
+Leave the blue ball where it is. Lift the orange one a little and listen again; PLAY sounds the current setting without another movement. While the ball is moving far enough to retrigger, the rig starts fresh notes at most once every 0.3 seconds. A drag can become a run of beginnings. Let the ball rest and give the note time to finish. Before giving the change a name, decide where you heard it: at the beginning, through the middle, or near the end.
+
+COMPARE returns A, leaves a quarter-second gap, then plays the current note B. You do not have to keep the first sound intact in memory. Look at the `differs:` line. If the lift changed only I, the modulation index, we have one change to listen through. If other values moved too, return to BASELINE and try a more deliberate lift.
+
+At index zero, the modulator contributes nothing to the carrier&#x27;s phase. Raising it gives that contribution more depth. A sound may become brassy, brittle, bell-like, or acquire a quality for which you have no ready name. Keep listening before choosing a familiar object to stand in for it.
+
+The two oscillations meet in this line:
+
+```gdscript
+var output = sin(2.0 * PI * carrier_freq * t + modulator) * carrier_env
+```
+
+The modulator is inside the sine&#x27;s argument. Adding it there advances or delays the carrier&#x27;s phase; the envelope outside controls the note&#x27;s rise and fading. The instrument names this phase modulation: an FM-style synthesis method that also changes instantaneous frequency. The orange contribution is not mixed in as a second audible output. It changes how the other oscillation proceeds.
+
+Now keep the height of the orange ball as steady as you can and change its depth along the desk. That direction changes the modulator&#x27;s decay. Listen through the tail before moving again. Can the altered character persist while the note grows quiet?
+
+The modulator has a fading of its own:
+
+```gdscript
+var mod_env = exp(-t / mod_decay)
+var modulator_freq = carrier_freq * mod_ratio
+var modulator = sin(2.0 * PI * modulator_freq * t) * mod_index * mod_env
+```
+
+A longer `mod_decay` keeps the phase disturbance present for more of the note. The carrier&#x27;s envelope can remain the same. Something we first heard as one fading has separated into two processes we can vary.
+
+Try the orange ball&#x27;s left-to-right direction last. It changes the ratio between the oscillators&#x27; frequencies. Keep a reference and compare. Listen for a relation you want to return to, even if it refuses the name of an instrument you know. A setting that would spoil one imitation may be the beginning of another sound.
+
+BASELINE is a chosen reference too: a 440-hertz carrier, an attack and a decay, index zero. Four hundred and forty returns a second is one return every 2.3 thousandths of a second; the two carrier periods on the scope are under five thousandths of a second of the note. The plate in the pendulum hall measured a period and let you divide by it; hertz is that division done the other way round. The generator still applies its `tanh` shaping and gain to the output. Calling this the beginning makes a comparison possible; it does not uncover a sound before all decisions.
+
+HOLD can keep a note without knowing what you liked about it. COMPARE gives that decision back to your ear. The rig reports changed parameters, but there is no field in its list for the difference that made you want to listen again.
+
+&lt;!-- @ --&gt;
+
+Look back at the scope. Once the orange contribution is above zero, raising its index need not make the orange trace taller: the display divides that lane by the index to fit it. The output changes while the apparent height of its cause can stay much the same. Even this small window has an arrangement to uncover. It shows two carrier periods near the attack, not the whole fading note. The coloured cube gives some of the settings another appearance. Neither can take over the listening.
+
+Next, Bernini gives periodic change another direction: along the height of a column. Walk around it. What changes as you move, and what keeps moving when you stand still?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_Effect_Sound/tutorial.md">Raw captured source</a></p><pre># One wave enters another rule
+
+In Sine Space we applied sine to a position and asked what the resulting surface let a body do. Effect Sound keeps the oscillation and changes its destination: one sine enters the phase of another. AirMusic will carry this listening into a struck body whose response continues after contact.
+
+Begin at the two desks. Press BASELINE, wait for the note, then HOLD. Lift only the orange ball, let it settle and press COMPARE. A is the held note; B is the current setting, played after A and a quarter-second gap. Decide where the change happens before reading the formula: near the onset, through the middle, or in the tail.
+
+## A position becomes three values
+
+The primary artifact is `DualBallFMController`. Each ball belongs to a `ValueMapper3D` cage with a half-metre span. Its three local axes supply three numbers.
+
+| Ball | Local x | Local y | Local z |
+|---|---|---|---|
+| Blue carrier | Frequency, 100–2000 Hz | Attack, 0.01–0.5 s | Decay, 0.1–3 s |
+| Orange modulator | Frequency ratio, 0.5–8 | Phase depth / index, 0–10 | Modulator decay, 0.1–2 s |
+
+These are the cage&#x27;s axes. The whole instrument faces north in this room, so follow its arrows rather than assuming screen-right is positive world x. Translation supplies a parameter here; it does not carry the sound to the ball&#x27;s new location. The rig&#x27;s audio player stays with the instrument.
+
+The orange cage&#x27;s signal reaches this assignment in `_on_modulator_changed`:
+
+```gdscript
+mod_ratio = x
+mod_index = y
+mod_decay = z
+```
+
+A hand can change several values at once. The `differs:` line compares the six current values with the held reference. Use it to make a deliberate one-variable comparison. It has a reporting tolerance: changes up to 1 Hz for carrier frequency, or 0.005 for another value, are not listed. An empty list is agreement within those tolerances.
+
+## The other wave goes inside the sine
+
+The generator computes a time for each sample:
+
+```gdscript
+var t = float(i) / SAMPLE_RATE
+```
+
+`SAMPLE_RATE` is 44,100. This is an index into the note being generated, not the running museum clock. All the samples are calculated before that note begins playback. The baseline&#x27;s 1.8 seconds contain 79,380 samples.
+
+The orange values make a decaying contribution to phase:
+
+```gdscript
+var mod_env = exp(-t / mod_decay)
+```
+
+```gdscript
+var modulator_freq = carrier_freq * mod_ratio
+var modulator = sin(2.0 * PI * modulator_freq * t) * mod_index * mod_env
+```
+
+The ratio gives the modulator frequency relative to the carrier. Index sets how far it displaces the carrier&#x27;s phase; its unit here is radians. The decay controls how quickly that displacement fades. At index zero the entire contribution is zero, whatever its frequency or decay.
+
+Now read the carrier&#x27;s line:
+
+```gdscript
+var carrier_env = attack_env * decay_env
+var output = sin(2.0 * PI * carrier_freq * t + modulator) * carrier_env
+```
+
+The modulator is added inside the argument. It advances and delays the carrier&#x27;s phase. It is not added to the final signal as a separate voice. The instrument is called FM; this expression implements phase modulation, whose changing phase also changes instantaneous frequency.
+
+Return to the orange ball. Keep its height and left-to-right position steady while changing depth. COMPARE again. A longer modulator decay can keep changing the character while the carrier&#x27;s own envelope grows quiet. One apparent fading contains two adjustable processes.
+
+## An envelope is another rule
+
+Before the carrier line, the actual generator constructs its amplitude envelope:
+
+```gdscript
+var attack_env = 1.0
+if t &lt; attack_time:
+    attack_env = t / attack_time
+```
+
+```gdscript
+var decay_env = 1.0
+if t &gt; attack_time:
+    decay_env = exp(-(t - attack_time) / decay_time)
+```
+
+The attack ramps to one; the subsequent decay falls exponentially. The generator later applies:
+
+```gdscript
+output = tanh(output * 0.8) * 0.5
+```
+
+Even BASELINE has an envelope, this nonlinear shaping, gain and 16-bit quantisation. Index zero gives an unmodulated reference, not a sound before processing.
+
+The note&#x27;s file ends according to a separate rule:
+
+```gdscript
+var duration = min(decay_time * 1.2, 3.0)
+```
+
+An exponential has not mathematically reached zero when this finite buffer ends. Listen to the tail as an ending the implementation chose. PLAY lets the whole buffer run if another action does not replace it. During a drag the movement threshold and 0.3-second minimum interval can repeatedly restart playback, so moving continuously does not audition the same thing as letting one note finish.
+
+## What HOLD saves, and what the scope selects
+
+HOLD captures both parameters and a rendered sample buffer. Changing B does not regenerate A. COMPARE replays A, waits its duration plus 0.25 seconds, then renders the current B. Leave the controls alone during that pair if you want the comparison you prepared.
+
+The scope is computed from the synthesis expression. It is a selected window, two carrier periods beginning at `attack_time`, with 1,200 points in each waveform lane. The orange lane is divided by index; the output lane is magnified twofold. The carrier lane is shown without its amplitude envelope. These choices make shapes inspectable, but equal screen heights do not mean equal signal amplitudes. The scope is neither a microphone recording nor the whole note.
+
+Keep one sound because you want to hear it again. Change one relation that made it, then listen. This is the capability we carry to AirMusic: a body can answer a brief contact over time, and the way we inspect that answer can reveal one difference while hiding another.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_Effect_Sound/technical.md">Raw captured source</a></p><pre># Effect Sound — parameters, samples and comparison
+
+This chapter builds on Sine Space&#x27;s distinction between an expression, its sampled representation and its physical consequence. Its primary is the existing `DualBallFMController` at (8,11), rotated 180 degrees, with `#stand:desks#evidence:longhand`. AirMusic follows on the effective museum route. `tutorial.md` walks through the encounter with verified excerpts; this file records the implementation and limits.
+
+## Mapping and generation
+
+Source: `algorithms/wavefunctions/mariocontrol/DualBallFMController.gd`.
+
+| Cage axis | Carrier | Modulator |
+|---|---|---|
+| Local x | `carrier_freq`: 100–2000 Hz | `mod_ratio`: 0.5–8 |
+| Local y | `attack_time`: 0.01–0.5 s | `mod_index`: 0–10 radians |
+| Local z | `decay_time`: 0.1–3 s | `mod_decay`: 0.1–2 s |
+
+Each half-metre ValueMapper3D cage emits its values. The controller ignores an unchanged triple. A movement exceeding 1 cm since the last recorded movement can request a note; `min_play_interval = 0.3` bounds movement-triggered playback. It is a minimum interval, not a promise of an exact periodic trigger. Explicit audition buttons can trigger notes separately.
+
+`_generate_fm_sound()` computes a whole mono note on the main thread. Sample time is `i / 44100.0`. Duration is `min(decay_time * 1.2, 3.0)`; the optional `drag_note_cap` is zero in this placement. The modulator is `m(t) = I exp(-t / tau_m) sin(2 pi R fc t)`. The output before shaping is `sin(2 pi fc t + m(t)) * env(t)`, a phase-modulated carrier. Its envelope has a linear attack and exponential decay after the attack. The sample is then shaped by `tanh(output * 0.8) * 0.5` and packed as signed 16-bit PCM. This bounds this generator&#x27;s samples; it does not certify the headroom of every sound mixed on the output bus.
+
+BASELINE sets carrier `(440, 0.01, 1.5)` and modulator `(2, 0, 0.5)`. It generates 79,380 samples / 1.8 seconds. The zero index removes modulation while preserving envelope, shaping and quantisation. The finite buffer cuts off the exponential tail; a new trigger replaces the current stream and restarts playback.
+
+## Held comparison
+
+HOLD stores a six-value dictionary, a generated `AudioStreamWAV`, and its length. COMPARE replays the saved stream, starts a timer for that length plus 0.25 seconds, then renders B from the values current at the timer callback. Without a held reference COMPARE first holds the current note and returns. PLAY renders the current B. Do not move controls during the comparison when testing a prepared pair.
+
+The readout reports current and held values, changed parameters, playback state, buffer duration, synthesis milliseconds and note count. `differences_from_reference()` lists differences greater than 1 Hz for carrier frequency and greater than 0.005 for the other values. It is a tolerance-based comparison. Synthesis milliseconds measure generating the buffer; they do not include every contribution to hand-to-ear latency.
+
+## Visible evidence
+
+The scope uses `_fm_sample()` to evaluate the same synthesis rule without PCM packing. It displays two carrier periods beginning at the end of the attack, 1,200 points per waveform lane. The modulator lane divides by `max(mod_index, 0.001)`; above that threshold a change in index is normalised out of that lane&#x27;s height. The carrier lane has no amplitude envelope. The output lane is twice the generator&#x27;s floating-point output. A rule line separates operands and result. It is a constructed view, not an audio-input measurement or an equal-gain overlay.
+
+The desks support the cages at 0.92 m. The low front panel and readout leave the hand space visible. CARRIER and MODULATOR labels are pinned to the desk fronts at 0.86 m; the scope&#x27;s bottom is 1.50 m. Claude&#x27;s last repair changed the empty structure cell (9,10) from a raised block to floor because the block enclosed the readout. The protected rectangle `[6,9,11,13]` excludes procedural plinths around the operating area.
+
+The scope&#x27;s selected interval cannot show how the full tail changes. Nor can sample differences alone establish a perceptual difference. Use the recorded A/B notes for listening alongside the numbers.
+
+## Sampling and limits
+
+At 44,100 Hz, 22,050 Hz is the Nyquist frequency. This generator does not explicitly band-limit its phase modulation or nonlinear shaping. To see why an instantaneous-frequency estimate needs care, differentiate its phase:
+
+`f_inst(t) = fc + I exp(-t/tau_m) [R fc cos(2 pi R fc t) - sin(2 pi R fc t)/(2 pi tau_m)]`.
+
+This is the derivative of the implemented phase before its final shaping, not a bound on every spectral component. The earlier shorthand omitted the derivative of the fading modulator envelope. Neither this expression nor a scope image proves which aliasing a listener notices.
+
+## Local sound and evidence
+
+Desk staging reduces the audio player&#x27;s maximum distance to 18 m. Distance attenuation and that range are not architectural soundproofing. The nearby timbre sculptor&#x27;s `#sound:near` enables its continuous tone only when the viewport&#x27;s current camera is within 3 m. This is a camera-distance rule, not acoustic occlusion.
+
+The existing live probe exercises mapper paths, audition buttons, sample comparisons, scope relationships, approach routes, nearby sound activation, audio-bus cleanup and room rebuild. Its desktop rig clicks actual buttons; ball movement is probe-driven through the mapper and is not a verified desktop grab or tracked-hand interaction. Independent review evidence is in `doc/space/effect-sound-review-2026-09-12/`. Listening and headset reach remain separate observations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_Effect_Sound/intent.md">Raw captured source</a></p><pre>Concept: One oscillation entering another&#x27;s rule — phase modulation heard before it is named. A baseline tone, one parameter changed, the two compared back to back, and the readout naming what differed.
+
+Sequence role: The pivot of Wavefunctions from waves you see and walk to a wave you hear. Intro distinguished position from state, Pendulum distinguished motion from its selected record, Sine Space compared a physical contact tray with a visible, noncolliding corridor; Effect Sound asks what another sampling system — synthesis at 44,100 samples a second, a buffer, the air, the ear — makes audible. On the active route AirMusic follows, with a struck resonance; Bernini and Cage lie further along the chapter.
+
+Technical angle: `DualBallFMController` — carrier (frequency, attack, decay) and modulator (ratio, index, modulator decay) as two grabbable balls in 0.5 m cages, staged on two reading desks at hand height (`#stand:desks`). The modulator m(t) = I·e^(−t/τm)·sin(2π·R·fc·t) enters the carrier&#x27;s phase; a linear attack and an exponential decay shape the note; a tanh keeps every sample within half of full scale; a note lasts 1.2 × the decay, three seconds at most, and is synthesised on the main thread when a ball moves (one note per 0.3 s at most) or a button is pressed. The evidence scope (`#evidence:longhand`) draws modulator, carrier, the rule and the output from a companion evaluator of the synthesis expression, with separate gains for the lanes. An AUDITION panel (BASELINE / HOLD / PLAY / COMPARE) and a cased readout make the one-parameter comparison an instrument rather than a memory: HOLD keeps the synthesised note itself as A.
+
+Critical angle: The stack between the expression and the ear is not hidden. The readout prints how long the note took to synthesise, the scope shows what is being computed, and the racks, the monitor and the cables stand for the wider infrastructure of sound. A comparison you can replay is a small politics of listening: the reference is held, not remembered, so a preference has to survive hearing A again.
+
+Key artifacts: DualBallFMController (primary, on desks in the south-east quarter at (8,11), facing north; the timbre sculptor at (9,8) carries `#sound:near` so its tone sleeps until a listener is within three metres); the bench row — RackSineBasic, RackMoogBass, RackDX7Piano, Rack303Acid and the AudioContr racks; VRAudioMonitor; timbre_sculptor, chord_tension_spring, harmonic_distance_table; MelodyChaser3D; BigPipeSystem; cable_builder; the audio_catalog_tablet.
+
+Gap: the desktop lane cannot grab a ball (an XR Tools pickable needs a hand), so on desktop the balls are moved by the probe and the panel is clicked; a headset walk is pending; the racks&#x27; own sounds against the audition floor have been counted by the probe (nothing sounding within 5 m at rest), not heard by a person.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_Effect_Sound/critical.md">Raw captured source</a></p><pre># Sound is an infrastructure — latency, quantisation, and the politics of what can be heard
+
+The waveform on the scope and the sound in the room are not the same thing. The mathematical expression is evaluated at discrete times; the scope draws selected samples with lane-specific gains, while the audio buffer is converted into a physical signal by the playback system. Speakers or headphones and ears take part in an encounter the formula alone does not contain. Between the function and the experience is a full stack of infrastructure, and this hall does not hide it.
+
+Wendy Chun argues that software&#x27;s power is the power to make infrastructure invisible. When a system works, the learner hears the note; when it fails, they hear nothing, or noise, or a glitch. Chun&#x27;s insight is that the invisibility is not neutral. It is a political achievement: a claim that the translation from waveform to sound is a trustworthy process, and that the translation&#x27;s costs can be ignored.
+
+The hall&#x27;s primary unhides one stretch of that stack. The FM rig on its two desks does not play a recording; a new note is computed when movement passes its trigger conditions or PLAY is pressed; HOLD preserves a rendered reference for replay — 44,100 samples for each second, a decaying sinusoid inside the carrier&#x27;s phase, an attack, a decay, a tanh that keeps the result within half of full scale — and the low readout prints the time spent generating a new sample buffer. That number measures one stage. Movement detection, scheduling, playback buffering and the listening equipment also contribute to latency. Real-time is a claim, not a property. The scope above the desks selects two carrier periods near the attack: a rescaled modulator, a bare carrier, a rule, and an enlarged output. Its image can hide a change in modulation depth by normalising that lane. Making a cause visible still involves choosing what its picture preserves. The colour cube on the shelf shows only three of the six values as a hue nobody can decode, and the hall says so; it is a sign, not a drawing.
+
+The racks along row five extend the argument the other way, toward a studio&#x27;s density of gear. The sine rack is the atom; the Moog carves harmonics away until a bass remains; the DX7 lets sines modulate sines into a piano that never had strings; the 303 bends a filter into melody. The audio monitor draws whatever plays; the timbre sculptor stacks integer multiples of one fundamental. That restricts its partials to harmonic relations; it does not decide whether someone will describe the result as bell-like. A mapping can discard a difference, preserve it, or generate further components through a nonlinear operation. We need to inspect which operation this instrument performs before assigning every change the same story of loss.
+
+The audition panel is the hall&#x27;s politics of listening. HOLD keeps the synthesised note itself, not a memory of it; COMPARE replays it beside the note you just made; the readout lists values that differ beyond its reporting tolerances. A preference has to survive hearing the reference again. That is a small discipline, but it is the one that the rest of the chapter&#x27;s sound rooms assume: fix one thing, change one thing, listen through the tail.
+
+Within the sequence, Effect Sound is the pivot from visible oscillation to audible oscillation. The rooms before treated the wave as something to see or walk; this one treats it as something to hear, and shows the machinery that hearing depends on. AirMusic follows on the active route with a struck resonance; Bernini&#x27;s twisted columns and Cage&#x27;s silence lie further along, and all of them depend on the infrastructure this hall makes visible. The learner leaves knowing that hearing is as constructed as seeing, and that the construction is always political.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_Effect_Sound/artifacts.md">Raw captured source</a></p><pre># WaveFunctions Effect Sound — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 21 artifact types / 33 placements*
+
+&gt; Sound is oscillation made audible. Waveforms become bleeps and bloops — the 8-bit aesthetic of classic games built from square waves and frequency sweeps. Play with the building blocks of chiptune music, hear mathematics sing.
+
+The primary book encounter is **DualBallFMController** at (8,11). Its two desks carry BASELINE, HOLD, PLAY and COMPARE. All other works below remain secondary exploration or staging; this catalogue order is not the book order.
+
+## Big Pipe System
+![Big Pipe System](/scene-catalog/BigPipeSystem.png)
+
+Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.
+
+`BigPipeSystem`
+
+## Pick Up Cube
+![Pick Up Cube](/scene-catalog/pick_up_cube.png)
+
+MOVE an object through space and understand translation as carried displacement.
+
+`pick_up_cube`
+
+## AudioContr
+![AudioContr](/scene-catalog/AudioContr.png)
+
+UniversalVRAudioController
+
+`AudioContr`
+
+## Glass Rack
+![Glass Rack](/scene-catalog/GlassRack.png)
+
+Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.
+
+`GlassRack`
+
+## Sine Wave Rack
+![Sine Wave Rack](/scene-catalog/RackSineBasic.png)
+
+Basic sine wave synthesizer rack with frequency, amplitude, and duration controls. Includes waveform display. The purest sound—a single frequency oscillating smoothly. Grab sliders in VR to shape the wave, hear mathematics become music.
+
+`RackSineBasic`
+
+## Cable Builder
+![Cable Builder](/scene-catalog/cable_builder.png)
+
+Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.
+
+`cable_builder`
+
+## VR Audio Monitor
+![VR Audio Monitor](/scene-catalog/VRAudioMonitor.png)
+
+Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.
+
+`VRAudioMonitor`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Dual Ball FM Synth
+![Dual Ball FM Synth](/scene-catalog/DualBallFMController.png)
+
+Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another&#x27;s phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.
+
+`DualBallFMController`
+
+## 303 Acid Rack
+![303 Acid Rack](/scene-catalog/Rack303Acid.png)
+
+Roland TB-303 style acid bass synthesizer with cutoff and resonance knobs. The squelchy sound that defined acid house—filter sweeps turning simple waveforms into liquid screams. Resonance creates feedback peaks at the cutoff frequency.
+
+`Rack303Acid`
+
+## Moog Bass Rack
+![Moog Bass Rack](/scene-catalog/RackMoogBass.png)
+
+Classic Moog-style bass/lead synthesizer with ladder filter cutoff and resonance. The fat analog sound—oscillators through the famous 4-pole filter. Cutoff frequency determines which harmonics pass; resonance emphasizes the cutoff point.
+
+`RackMoogBass`
+
+## DX7 Piano Rack
+![DX7 Piano Rack](/scene-catalog/RackDX7Piano.png)
+
+Yamaha DX7 FM electric piano synthesizer with attack and release envelope controls. The sound of the 80s—FM synthesis creating bell-like tones impossible with analog. Frequency modulation: one oscillator modulating another&#x27;s frequency.
+
+`RackDX7Piano`
+
+## Audio Catalog Tablet
+![Audio Catalog Tablet](/scene-catalog/audio_catalog_tablet.png)
+
+Handheld sound library. Browse 73+ audio presets across 15 categories, preview sounds, edit parameters in VR.
+
+`audio_catalog_tablet`
+
+## Wave Interference 3D
+![Wave Interference 3D](/scene-catalog/wave_interference_3d.png)
+
+Two wave sources on a 16x16 sphere grid. Each sphere rises and falls as the sum of two circular sine waves. Constructive interference builds peaks; destructive interference flattens nodes. Adjust frequency, source separation, and amplitude to reshape the pattern.
+
+`wave_interference_3d`
+
+## Harmonic Distance Table
+![Harmonic Distance Table](/scene-catalog/harmonic_distance_table.png)
+
+Tabletop artifact with 12 chromatic pitch nodes in circle-of-fifths layout. Grab nodes to hear intervals; spatial distance corresponds to harmonic consonance. Activate a node as tonal center to see all others recolor by harmonic function (tonic=green, dominant=blue, subdominant=yellow). Glowing overtone connection lines show shared harmonics between pitches. Cognitive compression: harmonic distance becomes a felt spatial relationship.
+
+`harmonic_distance_table`
+
+## Chord Tension Spring
+![Chord Tension Spring](/scene-catalog/chord_tension_spring.png)
+
+Four pitch nodes connected by visible springs. Consonant chord = springs relax, nodes settle. Dissonant chord = springs vibrate, nodes jitter. Drag nodes to change pitch and feel tension physically. Preset buttons for major, minor, dom7, dim, aug, sus4, tritone. Resolution IS relaxation.
+
+`chord_tension_spring`
+
+## Timbre Sculptor
+![Timbre Sculptor](/scene-catalog/timbre_sculptor.png)
+
+VR rack panel with 8 vertical sliders controlling harmonic amplitudes for real-time additive synthesis. Waveform and spectrum displays show the result. Preset buttons morph to known timbres: sine, square, sawtooth, triangle, and vowel approximations (A, E, I, O, U). Cognitive compression: timbre IS harmonic recipe — the slider heights ARE the spectrum. Build Fourier transforms with your hands.
+
+`timbre_sculptor`
+
+## MarioSoundController
+![MarioSoundController](/scene-catalog/MarioSoundController.png)
+
+waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square, FM}
+
+`MarioSoundController`
+
+## MelodyChaser3D
+![MelodyChaser3D](/scene-catalog/MelodyChaser3D.png)
+
+Follow-the-leader musical instrument - a glowing point traces a helix pattern through pitch space, play notes by following it with your hand
+
+`MelodyChaser3D`
+
+## Lab Table
+![Lab Table](/scene-catalog/lab_table.png)
+
+Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.
+
+`lab_table`
+
+## Rack Room
+
+`rack_room` at (6,5) is part of the bench staging and is classified as decoration.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_Effect_Sound/summary.md">Raw captured source</a></p><pre># WaveFunctions Effect Sound — Summary
+
+Sound is oscillation made audible. This hall converts the waves of the earlier rooms into pressure waves you can hear, and puts one oscillation inside another&#x27;s rule so that the change can be heard before it is named.
+
+The room is a small audio bench. Along row five stand the synthesiser racks — a sine rack, a Moog bass, a DX7 piano, a 303 — with their controllers, an audio monitor that draws what is playing, and, around them, a chord spring that turns intervals into pull, a harmonic-distance table, a timbre sculptor, a melody chaser, a cable builder and a pipe assembly.
+
+Apart from the racks, in the south-east quarter, two reading desks hold the primary; the timbre sculptor three metres off sleeps until a listener comes within three metres of it. A blue ball sets the carrier (frequency, attack, decay); an orange ball sets the modulator (ratio, index, modulator decay). BASELINE deals an unmodulated 440 Hz note: index zero, with its envelope and tanh shaping still in place. HOLD keeps that note as the reference. A lift of the orange ball changes the beginning of the next note; COMPARE plays the reference, a quarter second of silence, then the note you made; the low readout on the carrier desk lists changed values and how long the note took to synthesise. The scope above the desks draws the modulator, the bare carrier, a rule, and the output — a short, rescaled view of the synthesis expression, rather than the full note.
+
+Within the sequence, Effect Sound is the pivot from seeing to hearing. On the active route AirMusic follows, with a struck resonance; the later rooms — Bernini, Cage, the walking path, the Synthesis Lab — assume the learner can now fix one thing, change one thing, and listen through the tail before deciding what they heard.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_Effect_Sound/blurb.md">Raw captured source</a></p><pre>Two desks, two balls, one note to keep. Press BASELINE and HOLD; change one orange-ball direction, then COMPARE. A wave has entered another wave&#x27;s rule. Listen through the tail before deciding what changed.
+
+The low readout names changed parameters. The scope makes a short piece of the arithmetic visible, with gains chosen to fit each lane. Let the sound and its picture disagree productively: what did this way of showing it leave out?
+</pre></section></body></html>

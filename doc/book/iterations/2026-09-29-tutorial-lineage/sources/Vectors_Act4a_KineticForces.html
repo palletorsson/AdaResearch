@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vectors_Act4a_KineticForces · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Vectors_Act4a_KineticForces">← Tutorial lineage</a></p><h1>Vectors Act4a KineticForces</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Vectors_Act4a_KineticForces/final.md">Raw captured source</a></p><pre># The return is not an undo
+
+&lt;!-- @drag_corridor --&gt;
+
+Three strips cross the floor. AIR, WATER, HONEY. Each holds a cube, waiting at the same starting X coordinate. The controls stand before the passage between them.
+
+Press **FIRE**. All three leave at four metres per second. Watch which one gives up distance first.
+
+Honey barely carries its cube. Water lets another travel farther. Air is still letting go of its launch. These names suggest substances, but no liquid is being simulated here. Each strip supplies a different coefficient to the same rule.
+
+Press **PARTS**. Pink arrows point against the movement. Their lengths shrink as the cubes slow. The influence changes with the state of the body it acts on: less velocity, less opposing force.
+
+In the previous hall, one receiver replaced velocity and another accumulated acceleration. Here the receiver is a rigid body. **RULE** reveals the request sent to the physics engine on each update:
+
+```gdscript
+body.apply_central_force(-COEFFICIENTS[i] * body.linear_velocity)
+```
+
+A minus sign makes the force oppose velocity. The coefficient has units of kilograms per second; multiplied by metres per second, it gives newtons. The three values are 0.4, 1.3 and 3.2. They are chosen for this comparison, not measured properties of air, water or honey.
+
+This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed instead, a law whose coefficient carries kilograms per metre; this corridor does not model it, which is one more reason the strips are names.
+
+The opening mass is one kilogram. Increase **MASS** to two, then FIRE again. The same resistance now changes velocity more slowly. The force at a given speed has not doubled to match the body. Dividing by the greater mass produces a smaller acceleration.
+
+MASS cycles through one, two and four kilograms, returning the probes to their starting positions and holding them there. FIRE begins another equal-speed comparison. A strip keeps its own coefficient throughout the flight, even when its cube passes through the glass boundary of the walking passage. The glass divides another kind of encounter.
+
+Turn on **WALK**, then go through the centre: air, water, honey. The same movement of the stick carries you progressively less quickly. Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.
+
+Your controller is a different receiver. Its requested walking speed is multiplied by approximately 0.71, 0.43 or 0.24. That mapping is chosen to make resistance apparent; it does not integrate the cube&#x27;s drag force through your body. In a headset, the program can slow a stick request. It cannot make your physical legs walk more slowly through the room you are standing in.
+
+One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.
+
+![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-review/doc/book/figures/forces/inside-the-passage-museum.png)
+
+*The cubes cross the strips; the walking passage runs through them. A cube receives a force. The stick receives a change to its requested speed.*
+
+The cubes ignore furniture and the visitor. Gravity and inherited damping are removed. If a cube reaches the end of its eight-metre observation window, the apparatus freezes it and labels FRAME EXIT. It has reached the limit of what we are watching, not a wall that did work to stop it. The displayed velocity remains its outgoing value.
+
+&lt;!-- @force_mower --&gt;
+
+Farther into the hall, grass stands around a mower. Take hold of it and push it forward. A strip is cut, the wheels turn, and the path counter increases.
+
+Now bring it back without turning it around.
+
+The signed work reading comes back toward its earlier value. The grass does not grow back. The path counter has kept both parts of the journey.
+
+Look at the distinction before asking which number tells the truth. Each is keeping a different account. Path adds the lengths of the movements. Signed work uses a chosen force and the direction of each displacement. The lawn changes when the cutting deck passes close enough to a blade. None of those records contains the others in full.
+
+The mower&#x27;s drawn force is nominal: a selected value pointing forward and down its handle. The controller is carrying the mower; we are not measuring how hard your hand pushes. The readout now says so. It accumulates:
+
+```gdscript
+_work += nominal_force.dot(disp)
+```
+
+Forward movement contributes positively. Backward movement with the same orientation contributes negatively. Sideways movement contributes zero to this nominal horizontal force component, even though it adds to the path length and may take the deck across more grass.
+
+Keep the mower facing the same way for that return comparison. Turn it around before returning and you have turned the nominal force too: another experiment, with a different account of work.
+
+The downward component contributes no work along a level displacement. That does not make downward force universally useless. In a fuller contact model it could change the normal force and friction. This mower&#x27;s annotation has left those interactions out. Its handle angle is configured in the artifact; raising your hand does not adjust that parameter, because the grab is constrained to keep the mower upright and on its ground plane.
+
+The cut lawn is a small remainder that the return journey cannot cancel. Zero net nominal work has not meant that nothing happened. Nor is the work reading a complete energy budget for cutting grass. A body can return to an address while leaving changes there that another register has forgotten.
+
+&lt;!-- @centrifuge_ring --&gt;
+
+At the ring, a pod follows a circle. Stand beside the controls outside the circle and watch it pass. Press **SPEED** to go from two to four metres per second.
+
+The velocity arrow doubles. The inward acceleration arrow grows fourfold.
+
+At six metres per second the contrast grows again. The radius stays at 3.4 metres. More speed demands more change of direction during each second if the pod is to remain on that circle.
+
+The ring now uses the same speed for its movement and its readout:
+
+```gdscript
+_omega = lerpf(2.0, 9.0, speed) / radius
+```
+
+Angular speed is linear speed divided by radius. The inward acceleration required for the circle is speed squared divided by radius. At two metres per second it is about 1.18 metres per second squared; at four, about 4.71.
+
+The arrows remain perpendicular: one tangent to the circle, one inward. An acceleration can change direction while leaving speed constant. That is a different possibility from the drag arrow opposing the direction of travel.
+
+But look at what this particular machine does. The pod is placed along a prescribed circular path. The inward arrow reports the acceleration that path requires; it is not a simulated force holding a free rigid body in orbit. The ring does not pull the visitor inward. SPEED keeps the pod&#x27;s current phase when changing its pace, so the experiment continues from where you intervened.
+
+We have met a force applied to a body, a force chosen for a work annotation, and an acceleration calculated from a prescribed path. The visual argument becomes useful when those differences can be examined. An arrow needs units, a receiver, and an account of how it entered the movement.
+
+&lt;!-- @ --&gt;
+
+Next, oscillation and balance. What happens when the restoring influence changes sign as a body crosses its resting place, and the accumulated motion carries it across once more?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Vectors_Act4a_KineticForces/tutorial.md">Raw captured source</a></p><pre># Kinetic forces: inspect the receiver
+
+This hall follows the field receiver comparison and precedes Vectors_Act4b_Oscillation. Book primary order: drag_corridor, force_mower, centrifuge_ring. All eight source artifacts remain.
+
+## Physical drag
+
+The map opts drag_corridor into kinetic_drag. Three RigidBody3D probes start at local X=-4 with velocity 4 m/s along +X. Each holds a fixed coefficient b: 0.4, 1.3, 3.2 kg/s. The applied force is -b times world velocity. Default mass is 1 kg; MASS cycles 1/2/4 and resets the bodies to a held state. FIRE restarts. Linear and angular damping are explicitly replaced by zero, gravity is zero, rotation is locked and the local scene is at unit scale with no yaw. The observation freezes a probe after X reaches +4, retaining its outgoing state. There is no collision response at that cutoff.
+
+Away from the cutoff the continuous prediction is v(t)=v0 exp(-b t/m). The discrete engine response is checked against this with a numerical tolerance. The coefficient is a chosen model value, not a measured fluid property. Pink force arrows reuse three rigs, drawn at 0.12 m/N. Readouts update at 10 Hz. The force calculation continues each physics update.
+
+WALK starts off. In the central strip |X|&lt;=1.35, Z from -4.5 to +4.5 and local Y between -0.2 and 2.3, it returns a locomotion multiplier 1/(1+b_numeric), where b_numeric is the numeric coefficient in kg/s. This is an explicit illustrative mapping, equivalent to normalising b by 1 kg/s, not another integration of the probe&#x27;s force.
+
+The ordinary endless-museum desktop path applies that factor to horizontal velocity after input/feel computes it and before move_and_slide. It leaves vertical velocity untouched. The XR adapter runs at order 90 after direct movement requests and scales ground_control_velocity. It respects exclusive movement. Because XRTools caches its providers at ready, the body-owned adapter is inserted once into the cached list when this opted-in room finds an XR body; newly added XR bodies are handled too. It remains a no-op when no enabled medium contains the body. Tracked physical walking is not damped. Headset comfort is untested.
+
+## Signed mower work
+
+The mower remains a constrained pickable prop. Its path counter sums displacement lengths. Signed nominal work now sums nominal_force.dot(displacement), with the drawn F_MAG=0.95 N force aligned to current mower orientation and configured angle. A forward-and-back traversal with fixed orientation cancels nominal work but adds two legs of path. A sideways move contributes zero nominal work. This is not measured hand effort or a physical energy budget. Grass cutting remains a proximity operation and is not undone by returning. The initial placement is excluded from the ledger by seeding the first measured position on the first process update.
+
+## Prescribed circle
+
+The ring&#x27;s actual angular speed now equals its displayed linear speed divided by radius. The prior two unrelated speed mappings disagreed. This map adds a SPEED button cycling 2/4/6 m/s at radius 3.4 m. An angular phase accumulates independently, so speed edits preserve position on the circle. The button rebuild is deferred until after its press event completes. Two arrows are built on parameter changes and transformed with the pod each frame, avoiding repeated mesh creation. Velocity uses 0.18 m per m/s; required centripetal acceleration uses 0.10 m per m/s squared. The inward arrow is an acceleration, not a mass-specific applied force.
+
+## Verification
+
+The desktop probe exercises actual physics decay, mass response, live pointer controls, the ordinary desktop movement path, XRTools adapter registration and stick-request transformation without hardware, exclusive movement, signed mower work, ring speed/phase, clear corridor samples and control reach. This is not a headset playtest. See the illustrated guide and machine-readable check report for the final count.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Vectors_Act4a_KineticForces/intent.md">Raw captured source</a></p><pre>Open with three physical drag probes and a switchable walking passage. Then compare the mower&#x27;s signed nominal work with its accumulating path and persistent cut lawn. Close on a prescribed circular pod whose actual speed agrees with the required-acceleration readout. Retain all eight artifacts; three book primaries in order drag_corridor, force_mower, centrifuge_ring. Next: oscillation and balance. Headset comfort remains untested.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Vectors_Act4a_KineticForces/critical.md">Raw captured source</a></p><pre># What a return leaves behind
+
+The mower returns to its starting address while its lawn remains cut. Its path length increases and its signed nominal work can cancel. These differences are observable because the apparatus keeps distinct records. None is a full account of what happened. The old positive-only work counter concealed this distinction by treating every displacement as more of the same accomplishment.
+
+The revised counter still has a limit: its force is chosen, not measured from the visitor&#x27;s effort. Naming that choice makes a narrower but more defensible argument. Work against one nominal vector cannot stand for labour, usefulness or every material change. The grass is a counterexample inside the same scene, rather than an abstract objection attached afterward.
+
+The drag corridor asks which body a medium reaches. A rigid probe receives -b v as force, divided by its mass through the solver. A desktop or XR stick request receives a chosen speed factor. A person&#x27;s tracked physical steps receive neither. All three can inhabit one coloured strip. Shared appearance does not guarantee shared susceptibility, and the mapping can be switched off or bypassed.
+
+The ring reverses the direction of explanation: a path is prescribed, then the acceleration it requires is drawn. That can teach the cost of a turn, provided we do not claim the arrow caused the path. Correcting its independent speed mappings matters because the visual argument depends on the readout agreeing with the movement.
+
+For the research question of possible bodies, the method is to identify the state, the receiving rule and the omissions before generalising from an image. The field chapter separated velocity assignment from accumulation. This hall separates physical response, controller adaptation, annotation and prescribed movement. It offers specific changes to investigate; it computes no entropy threshold and does not equate a particular motion with freedom.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Vectors_Act4a_KineticForces/artifacts.md">Raw captured source</a></p><pre># Kinetic Forces - artifacts
+
+Eight artifact identities remain. Three are primary and appear in this order in `final.md` and the book arrangement.
+
+| Role | Artifact | This room&#x27;s experiment |
+| --- | --- | --- |
+| Primary | `drag_corridor` | `kinetic_drag`: three equal-speed rigid bodies with different fixed drag coefficients; optional separate desktop/XR stick walking adapter. |
+| Primary | `force_mower` | Signed nominal work, total path and persistent grass cutting. The force is configured, not measured hand effort. |
+| Primary | `centrifuge_ring` | Prescribed circular motion at 2/4/6 m/s; speed and required inward acceleration agree with the motion. The visitor is not pulled. |
+| Secondary | `wedge_slide` | Inclined-plane specimen retained for later review. |
+| Secondary | `orbit_walk` | Existing orbital visualization retained for later review. |
+| Secondary | `force_pad` | Existing launch encounter retained for later review. |
+| Secondary | `sisyphus_mower` | Existing mower/slope encounter retained for later review. |
+| Secondary | `prop_carousel` | Existing rotating prop encounter retained for later review. |
+
+The primary variant is opt-in through map metadata; the legacy drag corridor remains available elsewhere. The mower work and ring speed corrections apply to their shared scripts. The previous catalogue and manuscripts are preserved under `doc/space/kinetic-forces-2026-09-11/before/`. Supporting exhibits have not all been recertified by this pass.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Vectors_Act4a_KineticForces/summary.md">Raw captured source</a></p><pre>Kinetic Forces distinguishes a force applied to rigid bodies, a locomotion adaptation, signed nominal work and acceleration required by a prescribed circle. Three primaries ground the comparisons; five supporting artifacts remain. Discover the responses before reading their rules, then carry restoring influences and retained motion into Oscillation.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Vectors_Act4a_KineticForces/blurb.md">Raw captured source</a></p><pre>Three bodies meet resistance. A mower returns without uncutting the grass. A ring shows what a faster turn requires.
+</pre></section></body></html>

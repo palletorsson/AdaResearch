@@ -1,0 +1,115 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Illustration has a separate rendering world"
+		},
+		{
+			"passed": true,
+			"test": "Illustration has a separate physics world"
+		},
+		{
+			"passed": true,
+			"test": "Route 0 keeps endpoints"
+		},
+		{
+			"passed": true,
+			"test": "Route 0 trace exceeds straight distance"
+		},
+		{
+			"passed": true,
+			"test": "Route 1 keeps endpoints"
+		},
+		{
+			"passed": true,
+			"test": "Route 1 trace exceeds straight distance"
+		},
+		{
+			"passed": true,
+			"test": "Route 2 keeps endpoints"
+		},
+		{
+			"passed": true,
+			"test": "Route 2 trace exceeds straight distance"
+		},
+		{
+			"passed": true,
+			"test": "Elapsed time retains three further positions"
+		},
+		{
+			"passed": true,
+			"test": "pause control reachable by front ray"
+		},
+		{
+			"passed": true,
+			"test": "Pause pointer freezes the record"
+		},
+		{
+			"passed": true,
+			"test": "step control reachable by front ray"
+		},
+		{
+			"passed": true,
+			"test": "Step pointer advances exactly one sample"
+		},
+		{
+			"passed": true,
+			"test": "replay control reachable by front ray"
+		},
+		{
+			"passed": true,
+			"test": "Replay resets only this illustration and preserves pause"
+		},
+		{
+			"passed": true,
+			"test": "route control reachable by front ray"
+		},
+		{
+			"passed": true,
+			"test": "Next-route pointer changes path and resets its record"
+		},
+		{
+			"passed": true,
+			"test": "pause control reachable by front ray"
+		},
+		{
+			"passed": true,
+			"test": "Play pointer resumes"
+		},
+		{
+			"passed": true,
+			"test": "Repeated journeys reuse bounded geometry"
+		},
+		{
+			"passed": true,
+			"test": "Real Point Trace museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Museum capture uses the inspection camera"
+		},
+		{
+			"passed": true,
+			"test": "Nearby visible monitor updates"
+		},
+		{
+			"passed": true,
+			"test": "Distant monitor suspends rendering"
+		}
+	],
+	"completed_trace_metres": [
+		4.46020495891571,
+		4.55771005153656,
+		4.4339302778244
+	],
+	"failures": [],
+	"feed_environment": {
+		"camera": "/root/@Node3D@10/ConceptMonitor/PrivateIllustrationWorld/LineTraceStage/IllustrationCamera",
+		"color": "(0.0667, 0.0784, 0.1098, 1.0)",
+		"mode": 1,
+		"world_color": "(0.0667, 0.0784, 0.1098, 1.0)"
+	},
+	"passed": true,
+	"rendered_animation_frames": 99,
+	"scope": "Godot desktop runtime and synthetic XR pointer events; no headset acceptance."
+}

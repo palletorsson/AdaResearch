@@ -1,0 +1,127 @@
+{
+  "checkedAt": "2026-09-12T21:35:12.729Z",
+  "reviewUrl": "http://localhost:3003/research/possible-bodies/random-mushrooms.html",
+  "checks": [
+    {
+      "test": "Initial population",
+      "view": {
+        "count": 94,
+        "edibles": 3,
+        "images": [
+          {
+            "alt": "The six templates and their controls from the actual desktop operating position",
+            "loaded": true
+          },
+          {
+            "alt": "Captured bed at seed 31415 with size variation",
+            "loaded": true
+          },
+          {
+            "alt": "The ring routine's members marked in the actual seed-31415 bed",
+            "loaded": true
+          },
+          {
+            "alt": "The enlarged readout keeps the six lines together on the specimen table",
+            "loaded": true
+          },
+          {
+            "alt": "A separately pickable mushroom just inside the bed's edge",
+            "loaded": true
+          },
+          {
+            "alt": "The actual desktop eating path after repairing the effect shader and overlay",
+            "loaded": true
+          }
+        ],
+        "overflow": false,
+        "rejected": 9,
+        "status": "Seed 31415 · 94 population instances · 71 scattered + 9 rejected = 80 candidates · 94 highlighted · 3 separate edibles."
+      }
+    },
+    {
+      "test": "Same population at scale one",
+      "positionsUnchanged": true,
+      "view": {
+        "count": 94,
+        "photo": "random-mushrooms-population-size-off.png",
+        "unitScale": true
+      }
+    },
+    {
+      "test": "Crowded symbol click selected topmost instance 70; precise selector subsequently added",
+      "detail": "Instance 70 · template 0 · scattered. Local position (1.417, -0.046, 1.618) m; yaw 147.35°; scale 1.000."
+    },
+    {
+      "test": "Ring rule and excluded members",
+      "view": {
+        "account": "Ring 0: 17 requested, 7 placed, 10 outside the bed.",
+        "highlighted": 7,
+        "outside": 10,
+        "requested": 17,
+        "status": "Seed 31415 · 94 population instances · 71 scattered + 9 rejected = 80 candidates · 7 highlighted · 3 separate edibles."
+      }
+    },
+    {
+      "test": "Second captured seed",
+      "view": {
+        "count": 95,
+        "outside": 1,
+        "requested": 8,
+        "status": "Seed 27182 · 95 population instances · 65 scattered + 15 rejected = 80 candidates · 7 highlighted · 3 separate edibles."
+      }
+    },
+    {
+      "test": "Precise selector resolves overlapping symbols",
+      "view": {
+        "detail": "Instance 0 · template 4 · scattered. Local position (1.299, -0.027, 1.597) m; yaw 182.62°; scale 1.278.",
+        "selected": "0"
+      }
+    },
+    {
+      "test": "Rejected candidate filter",
+      "view": {
+        "markers": 9,
+        "ordinaryHighlight": 0,
+        "status": "Seed 31415 · 94 population instances · 71 scattered + 9 rejected = 80 candidates · 9 highlighted · 3 separate edibles."
+      }
+    },
+    {
+      "test": "Follow glowing template copies",
+      "view": {
+        "highlighted": 4,
+        "status": "Seed 31415 · 94 population instances · 71 scattered + 9 rejected = 80 candidates · 4 highlighted · 3 separate edibles."
+      }
+    },
+    {
+      "test": "Review book disclosure",
+      "open": true
+    },
+    {
+      "test": "Live primary and book passage",
+      "view": {
+        "cards": [
+          "1. mushrooms"
+        ],
+        "open": true,
+        "words": "primary · 836 words in the book"
+      }
+    },
+    {
+      "test": "Ring filter uses its matching Godot capture",
+      "view": {
+        "caption": "Matched camera · seed 31415 · photo shows ring members",
+        "loaded": true,
+        "outside": 10,
+        "photo": "random-mushrooms-population-ring.png",
+        "requested": 17
+      }
+    },
+    {
+      "test": "Rejected filter uses its matching Godot capture",
+      "view": {
+        "caption": "Matched camera · seed 31415 · photo shows rejected candidates",
+        "photo": "random-mushrooms-population-rejected.png"
+      }
+    }
+  ]
+}

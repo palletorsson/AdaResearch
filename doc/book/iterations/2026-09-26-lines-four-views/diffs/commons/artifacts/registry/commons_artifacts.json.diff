@@ -1,0 +1,34 @@
+--- before/commons/artifacts/registry/commons_artifacts.json
++++ after/commons/artifacts/registry/commons_artifacts.json
+@@ -16453,6 +16453,31 @@
+         "arrival",
+         "time"
+       ]
++    },
++    "line_relations_gallery": {
++      "lookup_name": "line_relations_gallery",
++      "name": "Four views of a line",
++      "scene": "res://commons/artifacts/line_relations_gallery/line_relations_gallery.tscn",
++      "category": "primitives",
++      "complexity": "beginner",
++      "description": "Four open sightlines through grabbable plus/cross, parallels, upright/horizon and grid studies. Segment skins include stick, plank, luminous mesh, ruler and beam. A floor mark meets the actual hall wall.",
++      "map_ready": true,
++      "include_in_map_data": true,
++      "map_sequences": [
++        "primitives"
++      ],
++      "footprint": [
++        24,
++        4,
++        23
++      ],
++      "tags": [
++        "line",
++        "relationship",
++        "pickup",
++        "representation",
++        "spatial"
++      ]
+     }
+   },
+   "registry_info": {

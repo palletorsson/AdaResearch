@@ -1,0 +1,47 @@
+{
+  "captured_at": "2026-10-02T09:15:38.450708+00:00",
+  "base_commit": "5219cbf4ed8faa5c3f441bc6c54d68e8d1955df8",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "transformation",
+  "sequence_sha256": "ac5dbeaddd09c23019ab09f75651b6837f7864ba5e0070f5e8a2310f401002b2",
+  "maps": [
+    {
+      "map": "Trans_Pre",
+      "path": "commons/maps/Trans_Pre/final.md",
+      "sha256": "4c3feef19920bbaf00326aba4093b26fbe9b85dec62b4b3f128ee5062ff1b535"
+    },
+    {
+      "map": "Trans_Introduction",
+      "path": "commons/maps/Trans_Introduction/final.md",
+      "sha256": "b7b1bc4143cd18e11641e41b03df325c191649acc8e9391f3435a88d4dde5d43"
+    },
+    {
+      "map": "Trans_Translation",
+      "path": "commons/maps/Trans_Translation/final.md",
+      "sha256": "ff9d5754996fc1089cceb6733a5ec329b2f8a081306a0aa40744736c749b9a33"
+    },
+    {
+      "map": "Trans_Rotation",
+      "path": "commons/maps/Trans_Rotation/final.md",
+      "sha256": "87924bd9ecbdf1e6052f1d6ea43fbc30a45e35b127e48359aab4d1f8c6f1fe9f"
+    },
+    {
+      "map": "Trans_Scale",
+      "path": "commons/maps/Trans_Scale/final.md",
+      "sha256": "e0dd72ce05f964bec07b77166dac6923683e94431d989b20d9a663c2138a0be9"
+    },
+    {
+      "map": "Trans_Body",
+      "path": "commons/maps/Trans_Body/final.md",
+      "sha256": "fb5f0c695a85aa20bf90e8064596e4448c89168deb9018cebd9bdd6eb20f7c98"
+    },
+    {
+      "map": "Trans_Pit",
+      "path": "commons/maps/Trans_Pit/final.md",
+      "sha256": "40d1fe70daf701072794aa80abac624f97fdbb61a7684a69dd7241fc1583d167"
+    }
+  ],
+  "output_sha256": "09d77462776d62febe9054cceb5064d0c42ce4a46201ac3259d964abec18b035"
+}

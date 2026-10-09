@@ -1,0 +1,88 @@
+{
+  "name": "Change: Rate, Accumulation, and Flow",
+  "truth": "Things change. Change accumulates. Accumulation flows.",
+  "qfep_term": "F",
+  "qfep_connection": "Foundation â€” the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
+  "formula": "rate = rise / h; total += f(x) * width; position += direction(position, time) * speed * delta",
+  "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target â€” accumulation made bracelet-felt.",
+  "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
+  "layer": "F_order",
+  "prerequisites": [
+    "tiling"
+  ],
+  "unlocks": [
+    "forces",
+    "wavefunctions"
+  ],
+  "ambient_preset": "calc_lab",
+  "difficulty": "intermediate",
+  "estimated_time": "20-30 minutes",
+  "learning_objectives": [
+    "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
+    "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
+    "Accumulation as continuous addition: the integral; area under a curve; total from rate",
+    "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
+    "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
+    "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
+    "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
+  ],
+  "content": [
+    "Change_Intro: Change and accumulation",
+    "Flow_Field: Flow and trajectories"
+  ],
+  "maps": [
+    "Change_Intro",
+    "Flow_Field"
+  ],
+  "axiom_files": [],
+  "algorithm_paths": {},
+  "return_to": "lab",
+  "lab_post": "Lab/map_data_post_change",
+  "unlock_requirements": [
+    "tiling"
+  ],
+  "completion_rewards": [
+    "calculus_badge",
+    "sustain_affordance"
+  ],
+  "_status": "Two consolidated halls; desktop probes pass; headset and secondary exhibit review pending.",
+  "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) â€” addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern.",
+  "artifact_groups": [
+    {
+      "map": "Change_Intro",
+      "artifacts": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "position": "intro",
+      "rationale": "Change and accumulation"
+    },
+    {
+      "map": "Flow_Field",
+      "artifacts": [
+        "flow_field_painter"
+      ],
+      "position": "synthesis",
+      "rationale": "Flow and trajectories"
+    }
+  ],
+  "deferred_maps": [
+    "Change_Velocity",
+    "Change_Slope_Surface",
+    "Accumulation_Area",
+    "Flow_Particle_Pulse",
+    "Accumulation_Riemann",
+    "Change_Reconciliation",
+    "Ribbon_Change_01",
+    "Ribbon_Change_02",
+    "Ribbon_Change_03",
+    "Ribbon_Change_04"
+  ],
+  "deferred_reason": "2026-09-11: eight active halls become two; all 23 distinct artifacts retained once. Three rate/accumulation/reconciliation encounters precede flow.",
+  "taxonomy": {
+    "1_measure_and_accumulate": "Change_Intro: finite difference, Riemann sum, signed net change.",
+    "2_follow_a_field": "Flow_Field: sample local direction, update position, inspect the retained path."
+  },
+  "consolidation_ledger": "doc/space/change-two-halls-2026-09-11/ledger.json"
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-08",
+  "surface": "in-app browser",
+  "observations": [
+    {
+      "url": "http://localhost:3003/museum-progress",
+      "observed": "190/190 room texts, 0 baselines verified; Point One shows four primary artifacts."
+    },
+    {
+      "url": "http://localhost:3003/museum-progress?sequence=noise&room=Noise_Perlin_Simplex",
+      "observed": "Written room, two primary tokens, and the specific Perlin/simplex configuration repair appears first in Room-wide check."
+    },
+    {
+      "url": "http://localhost:3003/compose?map=Noise_Perlin_Simplex",
+      "observed": "Saved new prose rendered in four regions with simplex_noise and perlin_noise tags; opening, inspected limitations and handoff match final.md."
+    }
+  ],
+  "edits_through_browser": false,
+  "runtime_museum_verified": false,
+  "learner_verified": false
+}

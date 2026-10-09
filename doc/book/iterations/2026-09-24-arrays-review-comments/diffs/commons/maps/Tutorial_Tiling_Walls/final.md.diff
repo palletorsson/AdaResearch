@@ -1,0 +1,20 @@
+--- before/commons/maps/Tutorial_Tiling_Walls/final.md
++++ commons/maps/Tutorial_Tiling_Walls/final.md
+@@ -22,7 +22,7 @@
+ 
+ <!-- @wall_exception -->
+ 
+-Near the far end, on the right, the same pattern reaches a narrow part of the museum wall. EXCEPTION changes a tile here too. Walk towards it. The image has changed; the wall still holds you on this side.
++Near the far end, beyond ONE EXCEPTION, the same image reaches a narrow part of the museum wall. It stretches across the tall sheet: each triangle is now more than twice as tall as it is wide. EXCEPTION changes a tile here too. Walk towards it. The image has changed; the wall still holds you on this side.
+ 
+ Find TURN WALL beside it. Press, then wait for the sheet to finish turning. Its pattern travels with it. The opening leads onto a small landing outside the hall. Step through and look back along the edge.
+ 
+@@ -30,7 +30,7 @@
+ 
+ The two turns have done different work. EXCEPTION changed an orientation inside the image. TURN WALL moved the surface and the collision shape that travels with it. The first changed what we could read; the second changed where we could go. A quarter turn, learned among the transformations, has returned as a way to question the enclosure.
+ 
+-![The patterned wall closed and turned open, seen from the same position.](/book-review/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png)
++![The patterned wall closed and turned open, seen from the same position.](/book-review/doc/book/figures/Tutorial_Tiling_Walls/two-turns.png)
+ 
+ *The same pattern, on the same sheet. Left: a tile has turned, but the wall is still closed. Right: the sheet has turned through a quarter turn, opening onto the landing.*
+ 

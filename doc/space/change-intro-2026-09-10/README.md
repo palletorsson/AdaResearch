@@ -1,0 +1,11 @@
+# Change_Intro — two samples before the tangent
+
+Completed 2026-09-10. The user's continuation after Ribbon_Patterns_03 authorizes the next hall. The existing tangent_slope_workbench remains the sole primary, with a map-only comparison:true adapter. Five controls share its existing slider cabinet, now floor-standing and locally lit. A green finite secant precedes the analytic tangent; narrowing the interval at x=1 changes the estimated sign. DERIVATIVE reveals/hides the analytic comparison and RESET restores discovery state. The sign indicator no longer equates a near-zero threshold with an extremum.
+
+All eleven artifact positions and orientations, utilities and grid structure are retained. The primary is pinned without a supplementary plinth; the map's stale n_artifacts count is corrected to 11. Ten secondary artifacts remain. Book, tutorial, intent, critical, blurb and artifact notes now agree with the implemented primary. The live book has 841 words and one matching anchor, with no stale blocks.
+
+21 desktop checks pass, including actual pointer actions, finite/analytic comparisons, endpoint sign, existing-slider integration, source geometry, reset, default placement behavior and standing approach. Three final captures were inspected. The final test exits with code 0 and no script errors; the pre-existing UID warning remains. One earlier run crashed on shutdown after completing its checks. The probe now waits for its legacy fixture's deferred construction and cleanup; the subsequent final run closed cleanly. No claim of a general engine shutdown fix is made.
+
+Published page: http://localhost:3003/research/possible-bodies/change-intro.html . All thirteen published Encyclopedia files match source bytes over HTTP. The guide's verification hashes are current; book and primary names agree. Source inputs are enumerated in source-files.json. Before snapshots are in before/. Headset reach/legibility and tracked-hand slider testing remain deferred. No commit made.
+
+Next actionable hall: Accumulation_Riemann. Carry value versus rate, explicit independent variable, and interval size. This room's x is position, not time; the plot is not a terrain controller. Corner/one-sided comparison and a physical receiver of slope remain future extensions.

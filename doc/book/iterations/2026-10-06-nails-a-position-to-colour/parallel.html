@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nails — two readings</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR 3 / 8 · NAILS · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="nails-review.zip">Code + tests</a></nav></header><main class="spread"><article id="tutorial"><p class="quiet">118 native checks and 12 GPU image checks passed; three printed edits, one independent colour and an additional receiver tested; 5 deliberate faults rejected. Supplied test hosts; inherited PointBody and LineSkin, actual XR Tools with a synthetic controller. No headset or learner trial.</p><h1>Nails — a position becomes a colour</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Local coordinates as input</li>
+<li>Function parameters and a returned Color</li>
+<li>Normalising three channels</li>
+<li>Clamping to a range</li>
+<li>Assigning the result to a material</li>
+</ul>
+<p>Take the point in the museum's NAILS box. Move sideways, then upwards. One movement changes red; the other changes green. The swatch and the two salon hands answer the same choice.</p>
+<p>In Coordinates, we read the point's position. Here we give that position another use. Flashlight changed the light reaching a surface; this lesson changes a surface's assigned colour.</p>
+<h2>Continue with the point</h2>
+<p>Keep <code>point_body.gd</code> and <code>line_skin.gd</code> from Lines and Trace. Their construction and pickup behaviour are unchanged. <a href="point_body.gd">PointBody</a> and <a href="line_skin.gd">LineSkin</a> are included here as the exact inherited files; <a href="../2026-10-05-primitives-facing-pages/Point_Lines.html">their first explanation</a> remains available.</p>
+<p>Save <code>lesson.gd</code> below beside those two files. Attach it to a Node3D named <code>ColourStudy</code> in your working copy of the Endless Museum Nails hall. Place its origin about one metre above an open patch of floor: this is the lower corner of our colour box. Keep the study and its parents at unit scale. The museum supplies its room, camera, light, configured XR hands and XR Tools. Run only this study instance at the chosen place.</p>
+<p>The script creates one familiar point, one preview tile, a readout and three guides. The guides show the positive X, Y and Z extents from the corner. The point begins within their 0.6-metre ranges. On desktop you can change <code>start</code> and run again; in the prepared VR scene, grip and carry the point.</p>
+<p>This study sends its result directly to its preview. The installed salon already distributes colours to nail and skin materials and keeps them through GameManager. Those connections remain supplied museum infrastructure; this script does not attach itself to the salon hands.</p>
+<h2>The complete continuation — lesson.gd</h2>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+
+var box_size := Vector3(0.6, 0.6, 0.6)
+var start := Vector3(0.48, 0.12, 0.36)
+var point: XRToolsPickable
+var preview: MeshInstance3D
+var swatch: StandardMaterial3D
+var readout: Label3D
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = start
+    add_child(point)
+
+    preview = MeshInstance3D.new()
+    var box := BoxMesh.new()
+    box.size = Vector3(0.32, 0.32, 0.04)
+    preview.mesh = box
+    preview.position = Vector3(-0.35, 0.3, 0)
+    swatch = StandardMaterial3D.new()
+    swatch.roughness = 0.35
+    preview.material_override = swatch
+    add_child(preview)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0.3, 0.85, 0)
+    readout.font_size = 32
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+    for end in [Vector3(box_size.x, 0, 0), Vector3(0, box_size.y, 0), Vector3(0, 0, box_size.z)]:
+        var guide := LineSkin.new()
+        add_child(guide)
+        guide.show_segment(Vector3.ZERO, end, end.length())
+
+func _process(_delta: float) -&gt; void:
+    var local_position := to_local(point.global_position)
+    var chosen := colour_at(local_position, box_size)
+    swatch.albedo_color = chosen
+    readout.text = &quot;RGB %.2f  %.2f  %.2f&quot; % [chosen.r, chosen.g, chosen.b]
+
+func colour_at(p: Vector3, size: Vector3) -&gt; Color:
+    assert(size.x &gt; 0 and size.y &gt; 0 and size.z &gt; 0)
+    var channels := (p / size).clamp(Vector3.ZERO, Vector3.ONE)
+    return Color(channels.x, channels.y, channels.z)
+</code></pre>
+<p>At the starting position, the readout should show <code>RGB 0.80  0.20  0.60</code>. Move along local X while keeping Y and Z still. Only the red number should change. Return to the same local position and the same three numbers return.</p>
+<h2>A position goes in; a colour comes back</h2>
+<p><code>colour_at(p: Vector3, size: Vector3) -&gt; Color</code> names a function with two inputs and one output. <code>p</code> is a position measured from the study's corner. <code>size</code> gives the positive distance from that corner to the far boundary on each axis. These are parameters: names for the values supplied by a particular call.</p>
+<p>Our call supplies <code>local_position</code> and <code>box_size</code>. The function has no hand, light or material reference. It calculates and returns a colour. <code>var chosen := ...</code> keeps that returned value; <code>swatch.albedo_color = chosen</code> gives it to the preview's material. Calculating a colour and deciding where to apply it are separate operations.</p>
+<p>The assertion states the input requirement: all three dimensions must be greater than zero. A zero dimension cannot be a divisor. Keep positive dimensions; the assertion catches a broken requirement while running with Godot's debugging checks.</p>
+<p><code>p / size</code> divides each position component by its corresponding dimension. At X = 0.3 in a box 0.6 metres wide, red is 0.5. Doubling the box's width while keeping that position halves the red value. The same operation runs independently for green and blue.</p>
+<p><code>clamp(Vector3.ZERO, Vector3.ONE)</code> limits each resulting component to the interval 0–1. Below zero it returns zero; above one it returns one. Values already inside the range stay unchanged. <code>Color(channels.x, channels.y, channels.z)</code> uses them as red, green and blue, with alpha defaulting to one.</p>
+<p>For the original box, predict these before trying them as <code>start</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Local position</th>
+<th>Returned RGB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0, 0, 0)</td>
+<td>(0, 0, 0)</td>
+</tr>
+<tr>
+<td>(0.6, 0.6, 0.6)</td>
+<td>(1, 1, 1)</td>
+</tr>
+<tr>
+<td>(0.6, 0, 0)</td>
+<td>(1, 0, 0)</td>
+</tr>
+<tr>
+<td>(-0.2, 0.9, 0.3)</td>
+<td>(0, 1, 0.5)</td>
+</tr>
+</tbody>
+</table>
+<p>The function bounds the <strong>colour</strong>, not the body. Our point can move beyond the guides; the affected channel then stops changing. The installed salon also constrains its point to the box. This smaller example keeps that difference visible.</p>
+<h2>Keep the frame explicit</h2>
+<p><code>point.global_position</code> belongs to the world. <code>to_local(...)</code> expresses it in ColourStudy's frame before the mapping runs. Translate or turn the study: its starting point should still give the same colour. A world X value would describe a different input.</p>
+<p>The point remains a pickup body. Its mesh, collider and release behaviour come from the inherited class. The three lines are only guides. Carrying the point does not change their lengths, move the preview or rebuild its geometry.</p>
+<p>The numbers describe an assignment. Illumination, gloss and surrounding colours affect what you see. Equal numerical steps need not look equally different.</p>
+<h2>Change one relation</h2>
+<ol>
+<li>Set <code>start</code> to <code>Vector3(0.6, 0, 0)</code>. Predict the readout, then run: red reaches one.</li>
+<li>Restore the original start. Change only <code>box_size</code> to <code>Vector3(1.2, 0.6, 0.6)</code>. The X guide doubles; the initial red value becomes 0.40. Green and blue stay at 0.20 and 0.60.</li>
+<li>Restore the original box. Set <code>start</code> to <code>Vector3(-0.2, 0.9, 0.3)</code>. The point is outside two boundaries; the readout is <code>0.00  1.00  0.50</code>.</li>
+</ol>
+<p>Restore the original values. Choose another colour and work backwards to its position. With this box, multiply each desired channel by 0.6. Then check your prediction by moving the point or changing <code>start</code>.</p>
+<p>For an independent continuation, make a second preview using the BoxMesh and separate material construction you already know. Give that material the same <code>chosen</code> value each frame, without changing <code>colour_at</code>. Both receivers should follow the point; changing one material's roughness must leave the other's settings alone. This is the small operation behind one choice reaching several surfaces.</p>
+<p>Write down a chosen RGB triple. You can place that value in Rainbow's palette; there is no automatic transfer from this study. Keep <code>colour_at</code> too. Pillar will return to position-to-colour, with a different coordinate rule.</p></article><article id="reflection"><p class="quiet">Existing final.md, unchanged. The reflective route includes more encounters than the selected tutorial.</p><h1>The choosing hand</h1>
+<p>What changes when a colour becomes part of the body you act through?</p>
+<p>The lamps changed what reached a surface. Here a hand has outgrown the furniture. A small manicure table stands before it, complete with bottles, stools and another hand small enough to rest between the tools. Which of these bodies are you about to dress?</p>
+<!-- @nail_color_controller -->
+
+<p>Find the movable point in the RGB box on its open plinth beside the manicure table. Take it along one axis, then bring it back. A colour you left can be found again at the same place.</p>
+<p>Look up at the giant nails, then down at the petite hand on the table. Both answer the same choice. A movement small enough for your hand to make crosses two very different scales. Does the colour feel equally delicate on both?</p>
+<p><img alt="The giant hand and the petite hand on the manicure table, seen from inside the museum salon." src="/book-review/doc/book/figures/Color_Nails/salon-red.png" /></p>
+<p>Raise the hand you are choosing with and turn its nails toward you. Compare them with the petite hand, the giant nails and the swatch. The colour has reached the hand you use to choose it. What seemed like dressing an object now includes the body doing the dressing.</p>
+<p>The nail material adds its own response to light. A colour selected in the box can look different on a small glossy surface from the way it appears on the flat preview.</p>
+<p>The point's three coordinates are constrained to the box and converted into red, green and blue channel values, each between zero and one. Moving along one axis changes one channel. Moving diagonally can change several at once. The box turns a colour choice into a position that your hand can revisit.</p>
+<p>This is a three-channel description of colour. It does not divide every difference you can perceive into three equally noticeable kinds. Equal distances in the box need not feel like equal changes in the preview.</p>
+<!-- @hand_color_controller -->
+
+<p>At the controller for the hand surface, leave the nails at the colour you chose and move the point for the skin. Look again at the nails against this new background. Their assigned colour has stayed fixed. Do they still look the same?</p>
+<p>The two stations use the same position-to-colour mechanism but target different surfaces. The salon hands are two copies of the same source mesh. Their nail materials receive the nail-colour signal; their skin materials receive the hand-colour signal. Each receiving material is assigned the selected value:</p>
+<pre><code class="language-gdscript">material.albedo_color = colour
+</code></pre>
+<p>The scale difference lives in the geometry's transform. It does not require a second colour recipe. A nail can become monumental while its material still receives the same three channels as the small one on the cushion.</p>
+<p>The two points move with the same ease. Changing polish and changing skin can feel like neighbouring choices. Yet changing a rendered skin colour does not give us another person's lived history, or undo the racism through which skin is read. Polish is read through the body too: a colour may be called elegant, excessive or defiant according to whose hand wears it.</p>
+<p>Audre Lorde asks us to recognise difference while confronting the power that turns it into inferiority.<sup id="fnref:color-nails-lorde"><a class="footnote-ref" href="#fn:color-nails-lorde">1</a></sup> Look again at the hand you have chosen. Which colours feel available to you? Which seem to require an explanation, and to whom?</p>
+<p>The bottles never need opening. No brush crosses these nails, and no polish has to dry. The room keeps the cushion, the stools, the promise of a hand being attended to. The application has become an assignment. What remains of the manicure in the pleasure of choosing?</p>
+<p>The colour leaves with you. Your hands carry it into the halls ahead.</p>
+<!-- @ -->
+
+<p>Choose a colour because you want it, without requiring a naturalistic match. Try a nail or hand that interrupts the palette you expected from this body. Reach for the point again. The hand making the next choice is already wearing the last one.</p>
+<p>You have chosen their colour. The fingers have kept their length. What else might you want to change?</p>
+<p>Carry one of those chosen colours toward the rainbow. Where would you put it among the bands? The next room gives colour a familiar order; look for the decisions that hold that order in place.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:color-nails-lorde">
+<p>Audre Lorde, <a href="https://www.ualberta.ca/en/institute-intersectionality-studies/media-library/intersectionality-readings/lorde-age-race-class-and-sex.pdf">“Age, Race, Class, and Sex: Women Redefining Difference”</a>, in <em>Sister Outsider</em> (Crossing Press, 1984), pp. 114–123, especially 115–116 and 120–121. Lorde examines the unequal power attached to difference and refuses to let one aspect of a person stand for their whole life. The comparison between this salon's skin and nail controls is the book's application of her argument.&#160;<a class="footnote-backref" href="#fnref:color-nails-lorde" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></main></html>

@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "both authored workbench comparisons loaded",
+      "passed": true
+    },
+    {
+      "name": "wide interval falls while local derivative rises",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-readings-wide",
+      "passed": true
+    },
+    {
+      "name": "narrow interval reports rising at the same position",
+      "passed": true
+    },
+    {
+      "name": "slope plot is revealed above the curve",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-readings-near",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rate-console",
+      "passed": true
+    },
+    {
+      "name": "RULE reaches RIGHT without losing held image",
+      "passed": true
+    },
+    {
+      "name": "RULE reaches LEFT without losing held image",
+      "passed": true
+    },
+    {
+      "name": "RULE reaches MID without losing held image",
+      "passed": true
+    },
+    {
+      "name": "count slider gives eight live rectangles and four held",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: four-held-eight-live",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: accumulation-console",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: change-hall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "accumulation_readout": "MID / N 4 / sum 2.23665\ncell 1/4: 0.7296 x 1.2500 = 0.91202",
+    "closer_sample": {
+      "h": 0.125,
+      "next": 1.125,
+      "rate": 0.189012100288181,
+      "rise": 0.0236265125360227,
+      "x": 1.0
+    },
+    "first_sample": {
+      "h": 0.5,
+      "next": 1.5,
+      "rate": -0.595649995301112,
+      "rise": -0.297824997650556,
+      "x": 1.0
+    },
+    "headset_readability": "OPEN: native standing views and existing readout strings only; no headset judgement.",
+    "rate_readout": "x 1.000 / f 0.9063 / h +0.1250\nrise +0.0236 / h = +0.1890 / analytic f' +0.3863",
+    "rule_cycle": [
+      "RIGHT",
+      "LEFT",
+      "MID"
+    ]
+  },
+  "passed": true,
+  "room": "Change_Intro",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

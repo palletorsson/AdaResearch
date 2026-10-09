@@ -1,0 +1,244 @@
+{
+  "archive_sha256": "bc0ddcd83b9e7173a15989b87ca12b8b682af7d37641d5b52abde190c537813b",
+  "checks": [
+    {
+      "id": "grid/process_quit_did_not_overwrite_drawing",
+      "passed": true
+    },
+    {
+      "id": "grid/previous_process_drawing_arrives",
+      "passed": true
+    },
+    {
+      "id": "grid/the_same_sample_count",
+      "passed": true
+    },
+    {
+      "id": "grid/independent_resources_0",
+      "passed": true
+    },
+    {
+      "id": "grid/independent_resources_1",
+      "passed": true
+    },
+    {
+      "id": "grid/independent_resources_2",
+      "passed": true
+    },
+    {
+      "id": "grid/independent_resources_3",
+      "passed": true
+    },
+    {
+      "id": "grid/independent_resources_4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/0",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/1",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/2",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/3",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.5/5",
+      "passed": true
+    },
+    {
+      "id": "grid/original_data_0.5",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.5/0",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.5/1",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.5/2",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.5/3",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.5/4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/0",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/1",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/2",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/3",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.1/5",
+      "passed": true
+    },
+    {
+      "id": "grid/original_data_0.1",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.1/0",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.1/1",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.1/2",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.1/3",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.1/4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/0",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/1",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/2",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/3",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/4",
+      "passed": true
+    },
+    {
+      "id": "grid/address_0.25/5",
+      "passed": true
+    },
+    {
+      "id": "grid/original_data_0.25",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.25/0",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.25/1",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.25/2",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.25/3",
+      "passed": true
+    },
+    {
+      "id": "grid/original_geometry_0.25/4",
+      "passed": true
+    },
+    {
+      "id": "grid/file_unchanged_after_all_interpretations",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(0, 0, 0)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(-2, 0, 0)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(-2, 0, 0)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(2, 0, 0)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(2, 0, 0)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_y_exercise_(0, 0, 1)",
+      "passed": true
+    },
+    {
+      "id": "grid/flat_edit_preserves_source",
+      "passed": true
+    },
+    {
+      "id": "triangle/three_selections_arrive",
+      "passed": true
+    },
+    {
+      "id": "triangle/selected_noncollinear_face_visible",
+      "passed": true
+    },
+    {
+      "id": "triangle/lit_face",
+      "passed": true
+    },
+    {
+      "id": "polyhedra/interior_remains_visible",
+      "passed": true
+    },
+    {
+      "id": "polyhedra/first_enclosure",
+      "passed": true
+    },
+    {
+      "id": "polyhedra/omitted_connection_opens_face",
+      "passed": true
+    },
+    {
+      "id": "lineage/triangle_and_polyhedra_keep_original",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "mode": "consume",
+  "passed": true
+}

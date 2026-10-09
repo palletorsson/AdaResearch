@@ -1,0 +1,43 @@
+{
+  "checks": 30,
+  "failures": [],
+  "headset_verified": false,
+  "engine": "Godot 4.6 stable",
+  "test": "res://commons/testing/probe_drink_me_room.gd",
+  "room_before_metres": [
+    6,
+    6
+  ],
+  "old_factor": 10,
+  "old_expanded_metres": [
+    60,
+    60
+  ],
+  "room_after_metres": [
+    4,
+    4
+  ],
+  "factor": 4,
+  "expanded_metres": [
+    16,
+    16
+  ],
+  "hall_grid": [
+    21,
+    22
+  ],
+  "tiny_exit_metres": [
+    0.45,
+    0.6
+  ],
+  "usable_exit_metres": [
+    1.8,
+    2.4
+  ],
+  "foreign_room_colliders": [],
+  "source_sha256": {
+    "algorithms/primitives/scaleme/drink_me_room.gd": "6eefe36bfde21f2753fd203bb99b3368a1ebf13ed9aebb817312a577d5e0a98d",
+    "commons/maps/Trans_Scale/map_data.json": "ead9c37b83d41001adf3e166975dc416445a5604da2fae3edfb5af3b5699459c",
+    "commons/testing/probe_drink_me_room.gd": "2db383df2206b983838f5a688a8d85c7b74599354ddd52abee4b6a9b2f544c50"
+  }
+}

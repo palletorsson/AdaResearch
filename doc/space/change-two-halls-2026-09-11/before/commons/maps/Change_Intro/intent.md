@@ -1,0 +1,7 @@
+Concept: Separate the value at a position from change across an interval and the derivative at that position. The independent variable is spatial x, not time.
+Sequence role: Opens Change after the Patterns shader/fabric studio. Position-dependent appearance becomes a question about variation; Accumulation_Riemann next gathers contributions across an interval.
+Primary: tangent_slope_workbench with comparison:true. The initial green two-sample line can point down while the analytic tangent points up because the interval crosses a crest. STEP narrows the interval; DERIVATIVE reveals the analytic comparison after an opportunity to predict.
+Technical angle: One smooth sine/cosine function, direct analytic derivative, four bounded finite-difference intervals, signed backward sampling at the right endpoint, slider plus discrete sample steps, explicit reset.
+Critical angle: Sampling may preserve true endpoint values while hiding the relation between them. Near-zero is a declared display threshold, not a proof of an extremum. Neither the derivative nor a short secant replaces a description of the whole curve.
+Space: Existing grid configuration and eleven artifact placements retained; the primary is pinned without an added plinth. The new controls share its existing cabinet. Ten other artifacts remain secondary material for later curation.
+Open: A corner/one-sided derivative comparison, a physical receiver that uses the slope, headset reach and legibility. Existing artifact names are not evidence for interactions until their source and runtime are inspected.

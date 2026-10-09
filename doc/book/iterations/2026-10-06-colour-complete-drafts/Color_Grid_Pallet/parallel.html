@@ -1,0 +1,204 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Grid — Endless Museum</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#25262b;font:17px/1.65 Georgia,serif}a{color:#275d64;text-underline-offset:.2em}header{background:#f4f0e7f5;border-bottom:1px solid #d7d0c5;padding:12px 4vw;position:sticky;top:0;z-index:5;font:14px/1.6 system-ui}header a{margin-right:16px}main{max-width:1260px;margin:auto;padding:40px 4vw 80px}h1,h2,h3{line-height:1.16}h1{font-size:clamp(34px,4vw,64px);font-weight:400;margin:10px 0 24px}h2{font-size:29px;margin-top:2em}h3{font-size:22px}p{max-width:75ch}small,.eyebrow,figcaption,.meta{font:13px/1.55 system-ui;color:#696761}.eyebrow{text-transform:uppercase;letter-spacing:.15em}.lead{font-size:23px;max-width:60ch}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.actions a{background:#22595d;color:white;padding:9px 15px;text-decoration:none;border-radius:3px;font:14px/1.5 system-ui}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:35px}.card{border-top:1px solid #bdb7ac;padding:20px 0}.card h2{margin:12px 0;font-size:30px}.card img{width:100%;height:230px;object-fit:cover;background:#d9d6d0}.card p{font-size:16px}img{max-width:100%;height:auto}figure{margin:20px 0}figcaption{margin-top:7px}pre{background:#e8e5de;padding:18px;overflow:auto;line-height:1.55;font:13px/1.55 Consolas,monospace;border-left:3px solid #608080}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}table{border-collapse:collapse;font:14px/1.5 system-ui;width:100%;margin:25px 0}th,td{padding:10px;border-bottom:1px solid #d0c9be;text-align:left;vertical-align:top}blockquote{border-left:2px solid #b9668c;margin:25px 0;padding-left:22px}nav.halls{display:flex;flex-wrap:wrap;gap:5px}nav.halls a{padding:3px 8px;border:1px solid #d4cec4;margin:0}.selected{background:#275d64;color:white}.spread{max-width:none;padding:0;display:grid;grid-template-columns:1.05fr 1fr;gap:0}.page{padding:30px 3vw;min-width:0;height:calc(100vh - 117px);overflow:auto;scroll-behavior:smooth}.page+.page{border-left:1px solid #ccc4b7;background:#faf7f0}.page h1{font-size:37px}.page h2{font-size:26px}.page pre{font-size:12px}.reading{max-width:880px}.chapter{border-top:1px solid #b9b3a8;margin-top:65px;padding-top:24px;scroll-margin-top:90px}.notice{padding:16px 20px;background:#e7ede7;border-left:3px solid #52705b}.sources{word-break:break-word}details{margin:20px 0}summary{cursor:pointer;font:15px/1.5 system-ui}footer{margin-top:60px;font:13px/1.6 system-ui;color:#696761}@media(max-width:900px){.spread{display:block}.page{height:auto}.page+.page{border-left:0;border-top:1px solid #aaa}.cards{grid-template-columns:1fr}}@media print{header,.actions,nav{display:none}.spread{display:block}.page{height:auto;overflow:visible}.page+.page{border:0}.chapter,.page{break-before:page}pre{white-space:pre-wrap;font-size:10px}body{background:white}main{padding:0}h1{font-size:30px}}</style></head><body><header><div><a href="../index.html">COLOUR · REVIEW DRAFT</a><a href="../all.html">All tutorials</a><a href="../final.html">All reflections</a><a href="../review.html">Reviewer brief & evidence</a><a href="../feedback.html">Feedback revision</a></div><nav class="halls"><a href="../Color_Context_Placed/parallel.html">Colour</a><a href="../Color_Flashlight/parallel.html">Flashlight</a><a href="../Color_Nails/parallel.html">Nails</a><a href="../Color_Rainbow/parallel.html">Rainbow</a><a href="../Color_Pillar/parallel.html">Pillar</a><a href="../Color_Grid_Pallet/parallel.html">Grid</a><a href="../Color_Paint/parallel.html">Paint</a><a href="../Color_Walls/parallel.html">Walls</a></nav></header><main class="spread"><article class="page"><p class="eyebrow">Tutorial · Working in the Endless Museum</p><p class="meta"><a href="../Color_Pillar/parallel.html">← Pillar</a> · 6 / 8 · <a href="../Color_Paint/parallel.html">Paint →</a></p><details><summary>See the tested code study</summary><figure><img src="../grid-mark.png" alt="Grid isolated code study"><figcaption>Isolated native Godot study render, 6 October. This is verification of the printed example, not a capture of the installed museum.</figcaption></figure></details><h1>Grid — a colour left at an address</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>An address selecting stored instance colour</li>
+<li>A small class holding a palette and its current index</li>
+<li>Independent instances of the same class</li>
+<li>A local edit beside a rule over the whole grid</li>
+</ul>
+<p>In the museum's grid, select a place and leave a colour there. Move to another place. The first choice remains. An address keeps the colour after your attention has moved on.</p>
+<p>Arrays gave us indexed parts. Nails and Pillar returned a colour from a position. Now one of those returned colours becomes stored data. The new class keeps an ordered palette and remembers which entry comes next.</p>
+<h2>Make two palettes</h2>
+<p>Save the four files printed here together. Attach <code>lesson.gd</code> to a Node3D on a clear display surface in your working copy of the Grid hall. The museum supplies your view and movement. This compact 5 by 5 model reconstructs the addressed colour operation; the installed floor and its interaction console remain in place.</p>
+<p><code>GridSurface</code> supplies 25 visible tiles and a dictionary connecting each <code>Vector2i(x, z)</code> address to a MultiMesh instance. Its <code>read</code>, <code>write</code> and <code>mark</code> methods are printed below. The second component of a Vector2i is called <code>y</code> in code; here we use it for the floor's Z address.</p>
+<h2>The complete continuation — lesson.gd</h2>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const Palette = preload(&quot;palette.gd&quot;)
+const GridSurface = preload(&quot;grid_surface.gd&quot;)
+const Controls = preload(&quot;controls.gd&quot;)
+
+var selected := Vector2i(2, 2)
+var palette_index := 0
+var palettes: Array = []
+var grid: Node3D
+
+func _ready() -&gt; void:
+    var sample := Color(0.1875, 0.5, 0.359375)
+    palettes = [
+        Palette.new([sample, Color.WHITE, Color.BLACK]),
+        Palette.new([Color(0.8, 0.2, 0.6), Color(1, 0.8, 0.15)])
+    ]
+    grid = GridSurface.new()
+    add_child(grid)
+    add_child(Controls.new())
+    apply_rule()
+    select_address(selected)
+
+func select_address(address: Vector2i) -&gt; void:
+    if not grid.cells.has(address):
+        return
+    selected = address
+    grid.mark(selected)
+
+func paint_selected() -&gt; void:
+    var palette = palettes[palette_index]
+    grid.write(selected, palette.current_colour())
+    palette.next_colour()
+    grid.mark(selected)
+
+func next_palette() -&gt; void:
+    palette_index = (palette_index + 1) % palettes.size()
+
+func apply_rule() -&gt; void:
+    var colours: Array[Color] = palettes[palette_index].colours
+    for address: Vector2i in grid.cells:
+        var i := (address.x + address.y) % colours.size()
+        grid.write(address, colours[i])
+    grid.mark(selected)
+</code></pre>
+<h2>The state we keep — palette.gd</h2>
+<!-- student-code:palette.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+
+var colours: Array[Color] = []
+var index := 0
+
+func _init(choices: Array[Color]) -&gt; void:
+    assert(not choices.is_empty())
+    colours.assign(choices)
+
+func current_colour() -&gt; Color:
+    return colours[index]
+
+func next_colour() -&gt; Color:
+    index = (index + 1) % colours.size()
+    return current_colour()
+</code></pre>
+<p><code>Palette.new(choices)</code> creates an instance. Its <code>_init</code> copies the chosen list with <code>assign</code>, so changing the caller's list later will not quietly change this palette. Colour values are copied; this is not a general deep-copy rule for objects.</p>
+<p><code>current_colour</code> returns the entry at <code>index</code>. <code>next_colour</code> advances the index, wraps it with <code>%</code>, and returns the new current entry. <code>paint_selected</code> first writes the current colour, then advances. The next press therefore uses the next entry. An empty palette violates the constructor's assertion.</p>
+<p>We already used a PointBody class. This class has no mesh or position: its useful behaviour is remembering an ordered choice. The two instances have separate lists and indices. Advancing the first cannot advance the second.</p>
+<p>The first palette includes the RGB sample recorded in Pillar. The second includes our earlier Nails choice. Those are explicit recorded values, not an automatic connection to either previous hall.</p>
+<h2>Leave one mark</h2>
+<p>Run. Press <strong>X</strong> or <strong>Z</strong> to advance the selected address along that axis, wrapping after four. Press <strong>C</strong> to write the active palette's current colour there. Move the selection: the colour remains at the old address. Press <strong>P</strong> to select the other palette; this alone changes no tile. Press <strong>C</strong> again to use it.</p>
+<p>Selection and painting are separate functions. <code>select_address</code> first checks that the address exists, then moves the marker. <code>paint_selected</code> changes the stored instance colour. Neither operation changes tile positions.</p>
+<p>Press <strong>R</strong>. <code>apply_rule</code> visits every address and chooses <code>(x + z) % colours.size()</code> from the active palette. The sum advances along either axis, producing diagonal repetition. This replaces individual edits in the study's 25 tiles. A local memory can be overwritten by a later rule.</p>
+<h2>Check what remains independent</h2>
+<p>Paint twice with the first palette. Switch to the second and paint once. Switch back: the first should continue at its third entry. Selecting another tile should neither consume an entry nor recolour it.</p>
+<p>Try a one-entry first palette: replace its choices with <code>[sample]</code>. Every index wraps to zero. Then try four entries, <code>[sample, Color.WHITE, Color.BLACK, Color(0.8, 0.2, 0.6)]</code>. Predict how the diagonals change when you press R. The address dictionary and tile geometry stay unchanged.</p>
+<p>For your own continuation, choose a new palette and make a small arrangement by painting selected addresses. Record one address and its colour. Predict which entry the rule will put there, then press R and compare. Explain the difference between the address, the instance index and the palette index.</p>
+<h2>Supplied display — grid_surface.gd</h2>
+<!-- student-code:grid_surface.gd -->
+
+<pre><code class="language-gdscript"># Supplied addressed receiver; a compact model of address_lesson.gd's floor.
+extends Node3D
+
+var cells: Dictionary = {}
+var instances: MultiMesh
+var marker: MeshInstance3D
+var readout: Label3D
+
+func _ready() -&gt; void:
+    var tile := BoxMesh.new()
+    tile.size = Vector3(0.28, 0.06, 0.28)
+    var material := StandardMaterial3D.new()
+    material.vertex_color_use_as_albedo = true
+    material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    tile.material = material
+    instances = MultiMesh.new()
+    instances.transform_format = MultiMesh.TRANSFORM_3D
+    instances.use_colors = true
+    instances.mesh = tile
+    instances.instance_count = 25
+    var view := MultiMeshInstance3D.new()
+    view.multimesh = instances
+    add_child(view)
+    var index := 0
+    for z in range(5):
+        for x in range(5):
+            var address := Vector2i(x, z)
+            cells[address] = index
+            instances.set_instance_transform(index, Transform3D(Basis.IDENTITY, Vector3(x * 0.32, 0, z * 0.32)))
+            instances.set_instance_color(index, Color.WHITE)
+            index += 1
+    marker = MeshInstance3D.new()
+    var ring := TorusMesh.new()
+    ring.inner_radius = 0.19
+    ring.outer_radius = 0.205
+    marker.mesh = ring
+    add_child(marker)
+    readout = Label3D.new()
+    readout.position = Vector3(0.64, 0.65, 0.2)
+    readout.font_size = 24
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+func write(address: Vector2i, colour: Color) -&gt; bool:
+    if not cells.has(address):
+        return false
+    instances.set_instance_color(cells[address], colour)
+    return true
+
+func read(address: Vector2i) -&gt; Color:
+    assert(cells.has(address))
+    return instances.get_instance_color(cells[address])
+
+func mark(address: Vector2i) -&gt; void:
+    marker.position = instances.get_instance_transform(cells[address]).origin + Vector3(0, 0.06, 0)
+    readout.text = &quot;(%d, %d) #%s\nX / Z: select   C: colour   P: palette   R: rule&quot; % [address.x, address.y, read(address).to_html(false)]
+</code></pre>
+<p><code>use_colors</code> is enabled before the instance count is assigned. The shared mesh material reads each instance's colour through <code>vertex_color_use_as_albedo</code>. The tiles share a material; they do not require 25 separate materials. The dictionary declares the address-to-index connection rather than assuming that every museum floor uses the same ordering.</p>
+<h2>Supplied desktop adapter — controls.gd</h2>
+<!-- student-code:controls.gd -->
+
+<pre><code class="language-gdscript"># Supplied desktop test adapter. Museum console bindings call the same methods.
+extends Node
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if not event is InputEventKey or not event.pressed or event.echo:
+        return
+    var study := get_parent()
+    match event.keycode:
+        KEY_X:
+            study.select_address(Vector2i((study.selected.x + 1) % 5, study.selected.y))
+        KEY_Z:
+            study.select_address(Vector2i(study.selected.x, (study.selected.y + 1) % 5))
+        KEY_C:
+            study.paint_selected()
+        KEY_P:
+            study.next_palette()
+        KEY_R:
+            study.apply_rule()
+</code></pre>
+<p>These keys call the same named operations as a console could. The installed museum console and larger, irregularly addressed floor remain supplied infrastructure. The small study has no walking-floor collider or VR console of its own.</p>
+<p>Keep <code>Palette</code>. Walls will give two surfaces their own instances. Paint first changes the scale of the stored mark: from one tile to a region of a surface.</p></article><article class="page"><p class="eyebrow">Reflection · Existing final.md</p><p class="meta"><a href="../Color_Pillar/parallel.html">← Pillar</a> · 6 / 8 · <a href="../Color_Paint/parallel.html">Paint →</a></p><h1>Find the colour again</h1>
+<!-- @gridcolorizer -->
+
+<p>Choose a square before you choose a colour. The white outline marks one piece of the floor. On the console, two numbers give its address. X + moves the outline across the floor; Z + moves it along the other direction. Choose a place you will recognise when you come back.</p>
+<p>At the pillars, moving the sampler changed its colour. Here you can leave a colour behind.</p>
+<p>Press COLOUR. The outlined square turns pink. Another press gives it another of four inks. Stop at one you want to leave here.</p>
+<p>Move the outline away. Your colour stays behind, now one square among the others. Each coordinate cycles through five positions. Keep going until the outline comes back to the place you chose. The colour is still waiting.</p>
+<p>The white outline has travelled. Your exception has not followed it.</p>
+<p><img alt="A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs." src="../assets/783896b8749f-an-address-keeps-colour.png" /></p>
+<p><em>Write, leave, return, rewrite. The pink square keeps its colour while the white outline moves. RULE replaces that value; the same cube still supports you.</em></p>
+<pre><code class="language-gdscript">colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
+</code></pre>
+<p>Godot draws these cubes together in a <code>multimesh</code>, but each cube has its own colour entry. <code>selected</code> holds the two coordinates you chose; <code>cells[selected]</code> finds the corresponding cube. This line changes that cube's colour. Moving the outline reads another entry and leaves the previous one alone.</p>
+<p>Look from the small swatch beside the controls to the floor. Both receive the stored value. Their size, angle, light and neighbours differ. A matching number does not settle how the colour will meet you. The room where colour needed company has followed us here.</p>
+<p>Walk over to your square. You can stand on a value you have just changed.</p>
+<p>Return to the console and press RULE.</p>
+<p>Your exception gives way to the floor's repeating assignment. The address remains. Walk back to the place you changed: the same cube still supports you. Its colour has been replaced; the ground has not given way.</p>
+<pre><code class="language-gdscript">var colour_index: int = (address.x + address.y) % palette.size()
+colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
+</code></pre>
+<p>In this two-coordinate address, <code>address.y</code> names the room's z direction. Add the coordinates. <code>%</code> keeps the remainder after division by the number of colours in the palette. Another cell can have the same remainder and receive the same colour. Compare addresses (8, 9) and (9, 8) after applying the rule: both sums are seventeen. The diagonal relationships were already inside that addition.</p>
+<p>Try PALETTE. The collection changes; the assignment keeps its form. The floor finds another appearance without learning another way to stand.</p>
+<p>We could mistake this regularity for a requirement of the grid. Yet you have just made an exception. The cube held it perfectly well. The rule did not return because the exception was impossible. It returned because you pressed a button that wrote across the floor again.</p>
+<p>Try to choose a square farther away. X + and Z + bring you back through the same twenty-five addresses. RULE reaches beyond that region, across the interior floor. You can walk to a square whose colour the program can change and whose address the console will not let you choose. The floor carries you beyond the reach of your edits. Why should the program's reach exceed yours?</p>
+<p>Each address keeps only its current colour. An edit remains while you look elsewhere, but RULE replaces it and reloading the room starts again. To remember more would require another place to keep what has been overwritten.</p>
+<!-- @ -->
+
+<p>Ahead, a spray can is already moving across a canvas. We leave the address with its current value and approach a surface on which marks accumulate. What will that surface keep of a movement after the body has passed?</p></article></main></body></html>

@@ -1,0 +1,369 @@
+[
+  {
+    "map": "Change_Intro",
+    "instances": [
+      {
+        "lookup": "tangent_slope_workbench",
+        "x": 9,
+        "z": 5,
+        "token": "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0",
+        "role": "primary",
+        "sources": [
+          {
+            "key": "tangent_slope_workbench",
+            "scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "riemann_sum_workbench",
+        "x": 20,
+        "z": 9,
+        "token": "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0",
+        "role": "primary",
+        "sources": [
+          {
+            "key": "riemann_sum_workbench",
+            "scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "velocity_arrow",
+        "x": 23,
+        "z": 10,
+        "token": "velocity_arrow:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "velocity_arrow",
+            "scene": "res://algorithms/change/velocity_arrow.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "ftc_bridge",
+        "x": 6,
+        "z": 12,
+        "token": "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand#reveal_on_request:true",
+        "role": "primary",
+        "sources": [
+          {
+            "key": "ftc_bridge",
+            "scene": "res://algorithms/change/ftc_bridge.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "derivative_pair",
+        "x": 20,
+        "z": 12,
+        "token": "derivative_pair:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "derivative_pair",
+            "scene": "res://algorithms/change/derivative_pair.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "integral_area",
+        "x": 18,
+        "z": 17,
+        "token": "integral_area:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "integral_area",
+            "scene": "res://algorithms/change/integral_area.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "riemann_pump",
+        "x": 23,
+        "z": 17,
+        "token": "riemann_pump:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "riemann_pump",
+            "scene": "res://algorithms/change/riemann_pump.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "gradient_descent_well",
+        "x": 6,
+        "z": 19,
+        "token": "gradient_descent_well:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "gradient_descent_well",
+            "scene": "res://commons/artifacts/gradient_descent_well/gradient_descent_well.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/self_portrait.json"
+          }
+        ]
+      },
+      {
+        "lookup": "code_display",
+        "x": 9,
+        "z": 20,
+        "token": "code_display:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "code_display",
+            "scene": "res://commons/context/clipboard/codeDisplay.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/commons_artifacts.json"
+          }
+        ]
+      },
+      {
+        "lookup": "paper_regatta",
+        "x": 20,
+        "z": 21,
+        "token": "paper_regatta:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "paper_regatta",
+            "scene": "res://commons/artifacts/paper_regatta/paper_regatta.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "slope_tangent_demo",
+        "x": 23,
+        "z": 24,
+        "token": "slope_tangent_demo:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "slope_tangent_demo",
+            "scene": "res://algorithms/change/slope_tangent_demo.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "partial_derivative_terrain",
+        "x": 6,
+        "z": 25,
+        "token": "partial_derivative_terrain:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "partial_derivative_terrain",
+            "scene": "res://algorithms/change/partial_derivative_terrain.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "descent_marble_toy",
+        "x": 20,
+        "z": 27,
+        "token": "descent_marble_toy:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "descent_marble_toy",
+            "scene": "res://commons/artifacts/descent_marble_toy/descent_marble_toy.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/soft_bodies.json"
+          }
+        ]
+      },
+      {
+        "lookup": "riemann_pi",
+        "x": 2,
+        "z": 29,
+        "token": "riemann_pi:0:0:0.18#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "riemann_pi",
+            "scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/alternative_geometries.json"
+          }
+        ]
+      },
+      {
+        "lookup": "zeno_staircase",
+        "x": 10,
+        "z": 29,
+        "token": "zeno_staircase:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "zeno_staircase",
+            "scene": "res://algorithms/change/zeno_staircase/zeno_staircase.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "science_screen",
+        "x": 18,
+        "z": 30,
+        "token": "science_screen:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "science_screen",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/shaders.json"
+          }
+        ]
+      },
+      {
+        "lookup": "synthesis_stand",
+        "x": 20,
+        "z": 32,
+        "token": "synthesis_stand:0:0:1#subject:science_screen#mode:hero#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "synthesis_stand",
+            "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/synthesis.json"
+          }
+        ]
+      }
+    ],
+    "anchors": [
+      "tangent_slope_workbench",
+      "riemann_sum_workbench",
+      "ftc_bridge"
+    ],
+    "anchors_placed": true,
+    "primary_order_matches_book": true
+  },
+  {
+    "map": "Flow_Field",
+    "instances": [
+      {
+        "lookup": "flow_field_painter",
+        "x": 5,
+        "z": 5,
+        "token": "flow_field_painter:0:1.05:2.5#pin:1#plinth:0#lesson:shared_field",
+        "role": "primary",
+        "sources": [
+          {
+            "key": "flow_field_painter",
+            "scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/commons_artifacts.json"
+          }
+        ]
+      },
+      {
+        "lookup": "vector_field_visualizer",
+        "x": 13,
+        "z": 5,
+        "token": "vector_field_visualizer:0:0.8:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "vector_field_visualizer",
+            "scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/vectors.json"
+          }
+        ]
+      },
+      {
+        "lookup": "vector_field_grid",
+        "x": 5,
+        "z": 11,
+        "token": "vector_field_grid:0:0.8:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "vector_field_grid",
+            "scene": "res://algorithms/change/vector_field_grid.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "particle_flow_swarm",
+        "x": 13,
+        "z": 11,
+        "token": "particle_flow_swarm:0:0.8:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "particle_flow_swarm",
+            "scene": "res://algorithms/change/particle_flow_swarm.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      },
+      {
+        "lookup": "noc_5_04_flow_field",
+        "x": 5,
+        "z": 17,
+        "token": "noc_5_04_flow_field:0:0.8:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "noc_5_04_flow_field",
+            "scene": "res://algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/steering.json"
+          }
+        ]
+      },
+      {
+        "lookup": "grand_zoetrope",
+        "x": 13,
+        "z": 17,
+        "token": "grand_zoetrope:0:0:1#pin:1#plinth:0",
+        "role": "secondary",
+        "sources": [
+          {
+            "key": "grand_zoetrope",
+            "scene": "res://commons/artifacts/grand_zoetrope/grand_zoetrope.tscn",
+            "exists": true,
+            "registry_file": "commons/artifacts/registry/change.json"
+          }
+        ]
+      }
+    ],
+    "anchors": [
+      "flow_field_painter"
+    ],
+    "anchors_placed": true,
+    "primary_order_matches_book": true
+  }
+]

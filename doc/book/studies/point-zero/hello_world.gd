@@ -1,10 +1,13 @@
 extends Node3D
 
+var display := Label3D.new()
 var count := 0
 
 func _ready():
-    $Greeting.text = "Hello, world."
+    display.position.y = 1.5
+    display.text = str(count)
+    add_child(display)
 
 func _process(_delta):
     count += 1
-    $Counter.text = str(count)
+    display.text = str(count)

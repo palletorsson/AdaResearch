@@ -1,0 +1,1160 @@
+{
+  "version": 1,
+  "date": "2026-09-10",
+  "author": "Astra",
+  "intended_implementer": "Fable 5.1 (user's requested model; not dispatched)",
+  "status": "Fable runtime reports reviewed; Intro interaction and Random visibility need completion; desktop/headset acceptance partial",
+  "sequences": [
+    {
+      "sequence": "wavefunctions",
+      "title": "Wavefunctions · returning, relating, composing",
+      "thread": "A body can return without occupying the same state. A trace makes that return inspectable; projection and phase let repetition organise space; excitation and composition make several returns act together.",
+      "necessity": "A specified state or coordinate, a reference for progression, and a rule relating them. Distinguish a dynamically integrated pendulum from a prescribed sine, and a moving pattern from transport of matter.",
+      "handoff": "Formfinding precedes Waves on the current spine. Carry equilibrium and restoring behaviour into oscillation. Leave Waves able to distinguish a complex appearance from an unspecified process; Randomness then asks what a procedure chooses.",
+      "route": "Keep the current six-room museum route for the first implementation. Unit Circle and Propagation are strong candidates for later insertion between the trace and Sine Space, after their footprints are repaired. Bernini, Cage, Sky Stairs and TrigWalkingPath remain independently developed extension rooms. Recheck transitions against the route actually shipped."
+    },
+    {
+      "sequence": "randomness",
+      "title": "Randomness · choosing, accumulating, excluding",
+      "thread": "A reproducible procedure supplies choices; an eligibility rule and distribution decide their possibilities; accumulated choices form paths and populations; feedback and uncertain timing alter what a body can do.",
+      "necessity": "A defined outcome space and selection procedure. Seed/state, draw order, distribution, boundary and interpretation are different decisions. A histogram cannot recover the order it discarded.",
+      "handoff": "The five-harmonic sum is repeatable without looking simple. Start here by replaying an irregular-looking field. Finish with a body planning around random waits; Noise asks how neighbouring samples can be related.",
+      "route": "Keep the seven active halls while improving all fourteen authored maps. The extension rooms supply concrete routes into estimation, feedback and correlation; they are not automatically extra museum halls. In particular Random_Space_Geometry and Random_Space overlap the next sequence: use them as comparison laboratories, not duplicate introductory lectures."
+    },
+    {
+      "sequence": "noise",
+      "title": "Noise · neighbouring, sampling, inhabiting",
+      "thread": "A spatial relation constrains variation. A field becomes colour, relief, occupied volume or a route through distinct reading rules. Layers and coordinate warps expand what those fields can do; fair comparisons reveal which change actually mattered.",
+      "necessity": "A sampling domain and coordinates, a field-generating rule, and a mapping from values into an appearance or consequence. Correlation alone supplies no stored history, collision, ecology or intention.",
+      "handoff": "Contrast a new random draw with revisiting a coordinate in a fixed field. The current next chapter is Cellular Automata: a field supplies related values; an automaton maintains state and updates it through a neighbourhood rule. Do not promise a return to Lab_Path on the main route unless navigation is deliberately changed.",
+      "route": "Keep six active halls. Repair the Perlin/Simplex claim first. Develop domain warping and walkable noise as extension rooms; decide later whether they earn main-route slots. Lab_Path is a short optional reflective exit, not another long noise lesson."
+    }
+  ],
+  "maps": [
+    {
+      "map": "WaveFunctions_Intro",
+      "question": "When a body returns to the same place, what has changed?",
+      "body": "A suspended body; the player's releasing hand.",
+      "lead": [
+        "control_pendulum"
+      ],
+      "findings": "The grabbable bob integrates angular acceleration, velocity and angle in _physics_process. Existing regime/evidence configurations include free/damped/driven behaviour and trace/longhand views; exports are not proof of visitor controls. The room also contains many transformation cubes. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Give the bob an open, reachable installation with its complete swing clear of plinth, neighbouring exhibits and circulation. Keep a still reference and a visible centre crossing; retain useful transformation comparisons as secondary.",
+        "Start with one release experiment. Offer a deliberate reveal of angle and signed angular velocity, using the existing evidence modes where suitable. If a damping comparison is added, change only that setting; do not introduce every regime at once.",
+        "Check the initial cube collection against old map structure before consolidating. Preserve meaningful stationary/prescribed-motion examples so a calculated pendulum is distinguishable from a cube following sin(time)."
+      ],
+      "book": [
+        "Open with two visits to the centre that travel in opposite directions; invite a release before explaining.",
+        "Describe position, direction and turning points, then connect the short integration excerpt to the force work already learned.",
+        "Let a second release trouble a prediction. Avoid promising exact small-angle behaviour at large releases.",
+        "End with the need to keep a record: the next room gives elapsed history a spatial direction."
+      ],
+      "code": "control_pendulum.gd: _physics_process, _damping_multiplier, _on_bob_dropped. Quote the actual angle/velocity update; do not replace it with y=sin(t).",
+      "evidence": [
+        "Exercise the real pickup/drop path and confirm the bob is reachable at both release positions.",
+        "Record two centre crossings with opposite angular velocities; demonstrate the selected regime with its actual config.",
+        "Measure the full installation bounds and check player clearance during a swing."
+      ],
+      "latitude": "Choose the casing, material and way the motion leaves evidence. A delicate instrument or an oversized suspended body can both work if the reference remains readable.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R3 explicit time.",
+      "batch": "PILOT",
+      "status": "Partial probe evidence; required pickup/release untested",
+      "handoff": "RUNTIME_FOLLOWUP.md"
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "question": "Where does a movement put its past?",
+      "body": "A moving bob and a finite spatial record.",
+      "lead": [
+        "PendulumWave"
+      ],
+      "findings": "W1 now integrates on physics ticks and records timestamped positions under 300-mark and 10-second limits. FINE requests 25 ms; actual gaps at 60 Hz alternate around 16.7/33.3 ms and are visible on the housed readout. COARSE requests 200 ms; STROBE follows the measured period. Frame, panel and history lane are staged in the open south half. Map-controlled placement and recovered platforms retained. See w1-review.html; reach, collision and rendered appearance are unverified.",
+      "build": [
+        "Stage the bob and trace side-on with an unobstructed view along history. Place the numerical display beside the trace, not over it.",
+        "Show retained samples, sampling policy and retained duration. Prefer a bounded fixed-time sampler independent of render frequency, or make the current frame-based sampling explicit; record that decision and preserve the original version in the before snapshot.",
+        "Add a local trace reset/replay only if implemented and reachable. Reset this experiment's buffer and time, never the game clock. Compare two sampling intervals while keeping the motion driver fixed."
+      ],
+      "book": [
+        "Begin with the apparent second body behind the bob; ask what direction the record is travelling.",
+        "Let the reader locate two equivalent crossings and count intervening samples.",
+        "Show the actual append/evict code and explain that depth encodes elapsed history.",
+        "Let the oldest mark disappear in the prose. Relate this chosen memory to Point_Trace, then hand the periodic value to Sine Space."
+      ],
+      "code": "PendulumWave.gd: _physics_process, _draw_trail, recorded_interval_range, _update_readout. Source the append/evict block; distinguish target timing, actual timestamps and finite history.",
+      "evidence": [
+        "At two render rates, record sample count and time span under the chosen policy.",
+        "Verify old samples are evicted and memory use stabilises.",
+        "Capture the bob, whole trail and readable cased count in the museum."
+      ],
+      "latitude": "Use a conveyor, ribbon, scored sheet or another legible carrier of history. The count and finite retention must remain discoverable.",
+      "reuse": "R2 housed readout; R3 explicit time; R8 bounded simulation.",
+      "batch": "W1",
+      "status": "Runtime report reviewed; actual input and headset pending",
+      "handoff": "RUNTIME_FOLLOWUP.md"
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "question": "What kinds of passage can a repeating rule make?",
+      "body": "The world around the player's moving body.",
+      "lead": [
+        "sine_wall_corridor"
+      ],
+      "findings": "Runtime fixes produce a 7 m corridor with 4.5 fundamental cycles, floor at its origin, a thin supporting collision slab and no wall collision. One case remains at the west nook; rolling colour balls were removed from this hall. 57 probe checks report no failures: emitted controls, local-X gap and capsule routes. Shared sculpture-clear rectangles reserve the approach. Actual desktop input and headset checks remain open; see runtime-review.html.",
+      "build": [
+        "Retain an observation route through or alongside the animated installation. Establish actual world bounds, orientation and minimum gap before calling it traversable architecture.",
+        "Make amplitude and the relative phase of the two walls available as separate comparisons. Keep frequency and material stable initially; add local freeze for inspecting the same instant if needed.",
+        "Choose an honest physical contract: static collidable demonstration states rebuilt on deliberate changes, or animated visual skins around a stable passage. If animated collision is chosen, test the update budget and trapping cases. Mark the simulation's boundary and retain a clear museum bypass."
+      ],
+      "book": [
+        "Enter through a gap and notice how facing surfaces disagree; let the body supply the first question.",
+        "Compare moving the viewer through space with holding position while phase changes.",
+        "Read one actual sine contribution before the sum. Distinguish wavelength across space from temporal rate.",
+        "Return to the gap: a visible wall and a colliding wall may have different powers. End at the sound room on the current route, not an absent extension."
+      ],
+      "code": "SineWallCorridor.gd: _wave_displacement, _create_wall_mesh, gap_at, gap_range, _evaluate_color. Running phase enters once via phase_shift; x-gap compares matching local Z coordinates.",
+      "evidence": [
+        "Measure minimum clearance across the exposed parameter range.",
+        "Walk the implemented route with the actual player collider; record which surfaces collide.",
+        "Verify freeze/parameter changes reach the displayed material or mesh and do not leave stale colliders."
+      ],
+      "latitude": "Plush folds, architectural ribs or a translucent membrane are welcome. Choose a material that makes the crests and the gap readable.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R5 museum/arena boundary.",
+      "batch": "W1",
+      "status": "Runtime report reviewed; actual input and headset pending",
+      "handoff": "RUNTIME_FOLLOWUP.md"
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "question": "How does going around become rising and falling?",
+      "body": "A rotating point, its projections and a sampled construction.",
+      "lead": [
+        "unit_circle_advanced"
+      ],
+      "findings": "Currently outside the museum route. UnitCircle.gd supports correspondence and progressive/complete configurations; builds a finite number of steps and then stops. Wave length defaults to 28 m, beyond the 14×17 source map unless staged/scaled deliberately. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Preserve the projection construction. Identify angle progression, x=cos(angle), y=sin(angle) and the graph's separate horizontal coordinate using matched points/rods.",
+        "Offer replay and a manageable local phase scrub, reusing current correspondence variants. Keep the first encounter sine/cosine; tangent and helix can remain optional.",
+        "Separate a hand-scale explanatory graph from any walkable bridge. Restore or extend the original arena only after footprint inspection; do not squeeze a long bridge into the museum walls by hiding its ends."
+      ],
+      "book": [
+        "Ask which height will appear next, then follow one point from circle to graph.",
+        "Return to the same height twice and notice what the projection lost.",
+        "Introduce the real sine/cosine code and the changed meaning of the graph axis.",
+        "Close toward Propagation in this extension route; if inserted on the spine, revise both neighbours and the book handoff together."
+      ],
+      "code": "UnitCircle.gd: _update_rotator_and_indicators, _create_bridge_step, _process. Record sample count and completion condition.",
+      "evidence": [
+        "Check four quarter-turn correspondences and replay after completion.",
+        "Confirm every graph sample and any physical tread remain within the intended stage.",
+        "Do not call the bridge walkable without entrance, support and exit tests."
+      ],
+      "latitude": "Fable may choose a circular table, moving pointer or spatial unfolding. Maintain exact correspondence, not merely a circle beside a decorative wave.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R5 arena boundary.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "question": "Does a crest travel, or do neighbours make it again?",
+      "body": "A connected array of oscillating bodies.",
+      "lead": [
+        "coupled_oscillator_lattice"
+      ],
+      "findings": "Outside the current museum route. The lattice computes neighbour coupling and exposes apply_displacement. It has nodes/bonds/sheet/boundary views. Random excitation currently uses a probability per rendered frame; integration order and step stability need inspection before quantitative claims. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Build a reachable excitation point that produces one local pulse; compare coupling zero with a nonzero value from the same initial state.",
+        "Use the existing node/bond views to reveal the relation between cells. Show a selected cell's displacement beside the local pair; let the visitor locate the delayed response.",
+        "Use a stable simulation step and separate old/new state if needed so array iteration order does not supply an unacknowledged preferred direction. Bound the energy/input range and expose the finite boundary."
+      ],
+      "book": [
+        "Follow one marked sphere while the disturbance spreads elsewhere.",
+        "Repeat with the neighbours disconnected, then ask what carried the change.",
+        "Read the restoring, damping and neighbour terms from the implemented update.",
+        "Let the edge interrupt the idea of an unlimited medium; keep wave motion distinct from a transported object."
+      ],
+      "code": "coupled_oscillator_lattice.gd: _apply_excitation, _update_oscillators, _get_neighbors, apply_displacement. Cite whichever time-stepping scheme actually ships.",
+      "evidence": [
+        "From the same initial state, compare zero/nonzero coupling at selected cell times.",
+        "Check bounded behaviour at the maximum offered setting.",
+        "Verify boundary handling and that any pulse control triggers only the intended lattice."
+      ],
+      "latitude": "Could be linked pearls, a fabric or architectural joints. Keep a way to see individual motion under the larger pattern.",
+      "reuse": "R3 explicit time; R6 local state/seed; R8 bounded simulation.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "question": "What changes when one oscillation enters another's rule?",
+      "body": "Two hand-controlled parameters, an audible body and its trace.",
+      "lead": [
+        "DualBallFMController"
+      ],
+      "findings": "The working two-desk phase-modulation instrument has held A/B audition and a short rescaled scope. Claude repaired the labels and removed the empty platform cell enclosing the readout. Astra independently reproduced 100 passing live checks with clean exit, preserved hand state and unchanged production sources. The final and supporting tutorial now follow the actual primary. The scope normalises modulation depth out of its orange lane above the small denominator threshold; the sound and its picture need separate interpretation.",
+      "build": [
+        "Retain the repaired desks, low readout, name labels, scope and clear operating area. The current desktop view passes review.",
+        "During the later headset visit, inspect the small ball targets and audition labels from comfortable standing positions. Keep tracked-hand findings separate from the desktop probe.",
+        "Review the crowded backs of secondary displays from the hall entrance. Improve a specific sightline without removing useful instruments."
+      ],
+      "book": [
+        "Completed: the opening carries Sine Space into the phase-modulation encounter.",
+        "Completed: keep a reference, change one index or decay, listen, then read the production expression.",
+        "Completed: disclose the scope window and lane rescaling without claiming an image proves hearing.",
+        "Next: use a person's listening observations to refine descriptions; continue to AirMusic's struck response."
+      ],
+      "code": "DualBallFMController.gd: _on_carrier_changed, _on_modulator_changed, _generate_fm_sound, _fm_sample. Show actual sample rate/ranges only after checking the configured instance.",
+      "evidence": [
+        "Independent isolated live run: 100 checks, zero failures, exit 0; original saved hand unchanged.",
+        "Operating and close-readout captures inspected. Scope normalisation and all 11 tutorial/final code excerpts checked against the production source.",
+        "Three exact probe-rendered WAVs and two labelled comparison pairs are available on the review page. A listening judgement and headset visit remain pending."
+      ],
+      "latitude": "An intimate duet or an extravagant instrument can work. Preserve the one-parameter listening task and room for awkward timbres.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R8 bounded simulation.",
+      "batch": "W2 review",
+      "status": "Claude implementation retained; Astra desktop review passed 100 checks on 12 September; listening and headset pending",
+      "review_url": "/research/possible-bodies/effect-sound.html"
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "question": "Can a rhythm stand still as architecture?",
+      "body": "A twisted column and a changing viewpoint.",
+      "lead": [
+        "bernini_columns"
+      ],
+      "findings": "Outside the museum route. The mesh uses height-dependent sine/cosine and is also rotated as a whole. Existing colonnade modes include grid, ring, aisle and pair. Generated accompanying audio is not evidence of touch-driven sound. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Use the existing pair or aisle configuration to compare an untwisted reference and a twisted shaft with whole-object rotation initially stopped.",
+        "Let one control vary twist/density while material and height remain fixed; expose whole-object rotation as a separate second operation.",
+        "Fit the full column height and base inside a deliberate stage. Keep architectural atmosphere and optional dress/speech objects if they contribute an identifiable secondary encounter."
+      ],
+      "book": [
+        "Walk around an apparently moving twist before any motor starts.",
+        "Separate a profile that changes with height from an object rotating through time.",
+        "Read the mesh-coordinate construction, connecting back to Transformation.",
+        "Ask what makes the result a column when structural support is not simulated; keep any historical attribution limited to verified inspiration."
+      ],
+      "code": "BerniniColumns.gd: generate_spiral_column_mesh, _process, _plan_pair/_plan_aisle. Inspect the loaded base scene too.",
+      "evidence": [
+        "Freeze whole-object rotation and show that twist persists.",
+        "Vary twist at fixed height and check the reference remains unchanged.",
+        "Verify wall/ceiling clearance and whether any load-bearing claim has a real mechanism."
+      ],
+      "latitude": "The ornament can be excessive and desirable. Fable chooses its material and arrangement; the two kinds of change must remain separable.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "question": "What has already been composed before chance begins?",
+      "body": "A listening body inside a scheduled sound collection.",
+      "lead": [
+        "john_cage_tech_noir"
+      ],
+      "findings": "Outside the active route. The scene generates a finite vocabulary of sounds and schedules events. There are separate RNG paths for threaded generation and other operations; chance_seed does not by itself establish full audio replay. Names and visuals do not establish spatialised sound sources. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Provide a listening position, a small event ledger and an optional view of the available vocabulary. The first encounter should allow attention to settle before explanations accumulate.",
+        "If offering repeat, seed both generation and scheduling or record/replay the event schedule. A frozen visual ensemble must not be labelled repeated audio.",
+        "Inspect generation time, memory and thread teardown; avoid concurrent heavy sound generation from neighbouring halls. Add a reliable local stop/leave path while preserving the intended composition."
+      ],
+      "book": [
+        "Begin with an event arriving against a continuing background; ask what could arrive next.",
+        "Listen again for a recurring vocabulary rather than demanding a melody.",
+        "Show the actual selection/scheduling fragment after that discovery.",
+        "Treat the Cage title as a reference, not a performance of a named score. Carry finite choice into Randomness or return to AirMusic in an extension path."
+      ],
+      "code": "john_cage_tech_noir.gd: _thread_generate_sounds, _process, play_random_effect, RNG setup and visual chance configuration. Audit the per-frame threshold draw.",
+      "evidence": [
+        "Capture a short timestamped event sequence and identify its eligible sound pool.",
+        "If replay is implemented, compare two complete event logs, not only colours.",
+        "Check leaving during generation and re-entering without leaked threads or audio."
+      ],
+      "latitude": "Let silence, delay and spatial arrangement matter. No need to turn this into a quiz or make every sound visible.",
+      "reuse": "R3 explicit time; R6 local state/seed; R8 bounded simulation.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "question": "What continues after your hand has left?",
+      "body": "A struck instrument, overlapping decays and a chosen tuning.",
+      "lead": [
+        "resonating_metallophone"
+      ],
+      "findings": "The existing striker, eight bars, table, cradle and return remain. The table scope now reads 512 samples over 12 ms near each bar's own playback position, including player gain and the final PCM fade, before spatial/bus/device processing. Independent decoding and ribbon geometry checks pass alongside the retained collision, overlap, return and route checks. Book hero and primary now both name the metallophone. The audio generator is unchanged.",
+      "build": [
+        "Keep the tested table, left-end striker rest, protected operating strip and independent bar voices.",
+        "On the later headset visit, test actual held-stick reach, safe return and readout legibility with more voices.",
+        "Assess the secondary captions and ambient layers by standing and listening in the room before changing them."
+      ],
+      "book": [
+        "Completed: connect Effect Sound to contact ending before its response.",
+        "Completed: distinguish same-bar restart from two simultaneous voices, with separate ages.",
+        "Completed: explain generated PCM, the three-second decay constant, finite ending and 12 ms source window.",
+        "Next: carry separate terms and timing into the existing Synthesis Lab; use listener observations to refine the prose."
+      ],
+      "code": "ResonatingMetallophone.gd: _create_single_bar, _create_stick, _tuned_scale; follow resonating_bar.tscn to the actual synthesis/strike code.",
+      "evidence": [
+        "67 checks, zero failures, engine exit 0. Original saved hand and Claude's dated reports preserved.",
+        "New scope samples independently compared with PCM, player gains and the actual ribbon vertices; two differing playback ages recorded.",
+        "Two unchanged bar buffers exported; the review page compares them sequentially and overlapping. Listening and tracked-hand evidence remain pending."
+      ],
+      "latitude": "Fable can dress the instrument lavishly or make it very spare. Keep the contact and continuing response easy to distinguish.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R8 bounded simulation.",
+      "batch": "W3 review",
+      "status": "Claude staging retained; sampled scope added and 67 independent desktop checks passed; headset/listening pending",
+      "review_url": "/research/possible-bodies/air-music.html"
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "question": "When does a sampled curve become a route for a body?",
+      "body": "The player's feet, treads and a varying-radius spiral.",
+      "lead": [
+        "sine_cylinder_staircase"
+      ],
+      "findings": "Outside the museum route. The placed scene sets WAVE_AMPLITUDE=0.45. The script constructs 80 treads with rise, turn and radius variation; membrane/none/rail/posts provisions already exist. Collider height offset and bridging geometry require a physical check. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Recover the original footprint and start/end platforms before adapting this tall staircase to a hall.",
+        "Build one tested climb with entrance, headroom, continuous support and an exit; include a museum bypass. Correct any mismatch between visible tread and collider, rather than hiding it with an invisible lift.",
+        "Compare wave amplitude zero/nonzero at fixed rise/turn, or a short paired tread sample if a full second climb is too large. Keep the changed geometric variable explicit."
+      ],
+      "book": [
+        "Begin at the first tread and ask whether the smooth-looking spiral can carry the reader.",
+        "Inspect centres and edges separately, then try the tested ascent.",
+        "Quote the real sampled angle/radius/height construction.",
+        "Make the difference between curve continuity and bodily access tangible. A changed stride can expose a gap without the equation being wrong."
+      ],
+      "code": "sine_cylinder_staircase.gd: _compute_samples, _build, _add_plane_bridge, provision code; inspect COLLIDER_HEIGHT_OFFSET in world space.",
+      "evidence": [
+        "Traverse from entry to exit with actual player dimensions and record collision alignment.",
+        "Check the offered amplitude range for gaps/head clearance.",
+        "Capture the whole route, not only an attractive crop of the middle."
+      ],
+      "latitude": "Rail, posts or membrane may be chosen for what they do. Keep the support contract visible and the comparison controlled.",
+      "reuse": "R4 sample-to-body mapping; R5 arena boundary.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "question": "How can two continuing motions make a quiet interval?",
+      "body": "Two sources and their combined excursion.",
+      "lead": [
+        "beat_frequency_demo"
+      ],
+      "findings": "Outside the museum route. The current primary shows A, B and A+B and has two frequency sliders. It is visual and silent. TrigWalkingPath and other waves are also placed; the name alone does not establish a walking experiment. Structure recovery on 10 September: interior 2 cells are one-metre platforms, perimeter 2 cells are explicit w walls, museum.wall_height is 3, and gate_depth_rows is 0. Preserve this contract; see recovery.html and the dated doc/space archive.",
+      "build": [
+        "Make the three rows large enough to compare from one position, with frequencies and their difference in a side casing.",
+        "Provide close-frequency and equal-frequency baselines. Keep a visible reference location across the three rows; preserve input amplitudes as the sum narrows.",
+        "Decide whether the placed walking path adds a distinct bodily test. If so, make it a secondary, collidable application with separate controls; otherwise keep this hall a clear superposition encounter rather than inventing traversal."
+      ],
+      "book": [
+        "Ask whether both sources stopped when the sum became small.",
+        "Hold A fixed, move B closer, and follow the broad envelope before naming beats.",
+        "Read the actual A+B expression and frequency difference, explaining cancellation at a chosen sample.",
+        "Do not promise audible beats without audio. Carry component relationships into Synthesis Lab."
+      ],
+      "code": "beat_frequency_demo.gd: _animate_spheres, _update_beat_label, _create_controls. Check labels against the visible envelope convention.",
+      "evidence": [
+        "At equal frequencies and matched phase, compare A, B and sum samples.",
+        "At nearby frequencies record the envelope over a sufficient interval.",
+        "Exercise both sliders and verify input rows still move during cancellation."
+      ],
+      "latitude": "Fable may add an honest audible comparison or preserve silence. Any added modality must read the same parameters and be separately verified.",
+      "reuse": "R1 controlled comparison; R2 housed readout.",
+      "batch": "W-EXT"
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "question": "What shape can several simple returns make together?",
+      "body": "A composite signal with visible component bodies.",
+      "lead": [
+        "additive_wave_demo"
+      ],
+      "findings": "The five-slider bench, component ladder, marker and three controls remain. Recipe recognition now checks all five ratios and distinguishes zero, single sines and the positive odd 1/n² mix. The map layers and all 25 placements are preserved. The book hero is corrected to additive_wave_demo. This primary is visual; it does not play its sum as sound.",
+      "build": [
+        "Keep the reviewed bench, miniature hallway, recovered platforms and protected approach routes.",
+        "Later headset visit: check handle reach, upper lettering and high-amplitude curves extending beyond the dark backing.",
+        "A later material or motion specimen should share the actual coefficients and be reviewed separately; none is connected by this change."
+      ],
+      "book": [
+        "Completed: connect AirMusic independent beginnings to the shared phase of this bench.",
+        "Completed: remove and rebuild contributions before explaining the real sum and slider code.",
+        "Completed: examine naming tolerance, hidden small terms and finite corners without claiming arbitrary periodic shapes.",
+        "Next: Random_Definition and what state must be retained for replay."
+      ],
+      "code": "additive_wave_demo.gd: _calculate_wave_value, _on_harmonic_changed, set_preset, NUM_HARMONICS and WAVE_POINTS.",
+      "evidence": [
+        "110 checks, zero failures, exit 0; original saved hand and Claude evidence preserved.",
+        "Ten coefficient configurations tested through slider paths; all 256 drawn samples independently compared, worst error below 9e-8.",
+        "Current desktop captures and thirteen checked production-code excerpts; no headset or human listening claim."
+      ],
+      "latitude": "Choose a compelling bodily use for the sum, or keep the instrument alone. Five clear contributions are more useful than an uncontrolled wall of sliders.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R8 bounded simulation.",
+      "batch": "W4 review",
+      "status": "Claude staging retained; recipe labels repaired; 110 independent desktop checks passed; headset pending.",
+      "review_url": "/research/possible-bodies/synthesis-lab.html"
+    },
+    {
+      "map": "Random_Definition",
+      "question": "Can a surprise return exactly?",
+      "body": "A coloured field, a seeded procedure and the visitor's expectation.",
+      "lead": [
+        "seed_replay_demo"
+      ],
+      "findings": "Claude's west-facing table at (8,11) is clear of the west entropy cloud. All 15 placements remain. The seed slider used an obsolete node path; it now selects and displays integer seeds 0–999, synchronizing after RANDOM and rebuild. Local panel plates and lettered tags are unshaded, the cased action readout is larger, and repeat contrast passes preserve font size. 65 independent desktop checks pass, including exact colours, independent draw reconstruction, actual pointer drag, all three buttons, unload and rebuild. The engine still reports one resource at shutdown; headset reach and fine lettering remain unverified.",
+      "build": [
+        "Reviewed: replicas, REPLAY and +1 DRAW compare a fixed seed under a changed draw procedure. The same 64 cube positions remain; RGB assignments shift by one draw.",
+        "Reviewed: the seed slider now uses the actual panel path and integer readout; RANDOM may repeat a seed. The local generators leave shared random state untouched.",
+        "Preserve Claude's table, clear east approach and west entropy cloud. All 15 placements and map layers remain. Later: check tracked-hand reach and text size, and investigate the shutdown resource warning separately."
+      ],
+      "book": [
+        "Retain the patch-and-replay opening, linked from Synthesis Lab: what state must be kept for a result to return?",
+        "Let the reader break the match before showing the discarded draw and the actual three-call RGB assignment.",
+        "Notice that a continuous hand movement selects integer seeds, and that more seeds leave the 64-cell representation fixed.",
+        "Keep an offset palette as a possible result. Carry its arrangement into Random_Entropy, where counts can remain while order changes."
+      ],
+      "code": "seed_replay_demo.gd: _column_seeds, _regenerate, _randomize_seed. Preserve global game RNG state; any extra-draw experiment uses an artifact-local generator.",
+      "evidence": [
+        "65 independent desktop checks, zero assertion failures, exit 0. One ObjectDB/resource shutdown warning remains; no headset claim.",
+        "Seed 42 exports 193 source draws and both 64-cell RGB assignments. Exact bytes and independent generator reconstruction agree; matched cameras show the difference.",
+        "Actual slider move paths plus a desktop pointer drag, all three buttons, and slider/replay after unload and rebuild were exercised."
+      ],
+      "latitude": "Fable can choose fabric swatches, lit cubes or another clear carrier for the same samples. Keep the source of the difference inspectable.",
+      "reuse": "R1 controlled comparison; R6 local state/seed.",
+      "batch": "PILOT",
+      "status": "65 desktop checks passed; slider and contrast repaired; headset pending",
+      "handoff": "../../space/random-definition-review-2026-09-12/README.md",
+      "review_url": "/research/possible-bodies/random-definition.html"
+    },
+    {
+      "map": "Random_Entropy",
+      "question": "Which differences disappear when a sequence becomes one number?",
+      "body": "A symbol stream, its histogram and a measuring apparatus.",
+      "lead": [
+        "shannon_entropy_meter"
+      ],
+      "findings": "Claude's staged meter now provides SORT, CONTRAST and DISCLOSE. The 200-tile ribbon moves while the enlarged first forty retain their original neighbours. Counts and marginal H are invariant under sorting; a second cached weighted sample changes the shares. Local button contrast, panel size and the excerpt caption are corrected. All nine placements remain declared; eight build, while secondary replay_casino lacks a living scene. Headset review and recorded engine diagnostics remain open.",
+      "build": [
+        "Reviewed: sorting permutes tile positions without changing the sampled sequence, counts or H; the enlarged first forty stay as drawn.",
+        "Reviewed: CONTRAST selects one of two cached local seeded samples over ten symbols and 200 draws. Source expectations follow the active law through both disclosure/contrast orders.",
+        "Improved: unshaded local panel backing and lettered tags, larger controls, larger first-forty caption without a false uniform magnification claim.",
+        "Preserve map geometry and the prior build-once, bar-lift and ghost-law repairs. Later: tracked-hand reach, fine text, missing secondary replay_casino scene and recorded engine diagnostics."
+      ],
+      "book": [
+        "Choose neighbouring colours, sort and discover what holds still before reading the count and entropy loops.",
+        "Keep the enlarged original excerpt beside the rearranging ribbon: different arrangements can enable different uses with the same H.",
+        "Inspect four zero-count marks and the changing histogram denominator. Display height is another translation of the sample.",
+        "Distinguish positions lost to counts from counts condensed into H. Carry the question of an eligible set into Random_Remove."
+      ],
+      "code": "shannon_entropy_meter.gd: _measure, set_sorted, set_contrast, active_probabilities and disclosure. The primary samples are fixed at build; no visitor resampling control.",
+      "evidence": [
+        "149 independent desktop checks, zero assertion failures, exit 0. Real pointer/buttons, active-law ghosts, endpoint samples, access and unload/rebuild exercised; headset unverified.",
+        "Two complete 200-symbol samples exported; counts and H independently reconstructed. Three desktop captures share the same camera pose.",
+        "All 40 enlarged colours match their symbols within stored colour precision (maximum channel error 0.000386834; palette separation above 0.19199). The strip stays fixed under SORT.",
+        "No script errors. Unrecognized bus UID, root-certificate and logger errors plus an ObjectDB shutdown warning remain recorded separately from assertions."
+      ],
+      "latitude": "A ledger, sorting machine or rearranged ribbon can carry the argument. The invariant must be visible before the formula explains it.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R7 measurement contract.",
+      "batch": "R1",
+      "status": "149 desktop checks passed; text and control contrast reviewed; headset pending",
+      "review_url": "/research/possible-bodies/random-entropy.html",
+      "handoff": "../../space/entropy-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Random_Remove",
+      "question": "Who was eligible to disappear?",
+      "body": "A selected set of cells and the spaces left behind.",
+      "lead": [
+        "remove_random"
+      ],
+      "findings": "The existing owned bench has controls at right and a cased status at left. All three placements remain declared; remove_random and dark_sphere build, while hazards_demo has no living scene. 87 independent desktop checks pass, including full histories, row/column offset identity, cancellation and rapid presses. No production script or map layer changed. Book and registry prose no longer describe a hunt for the host map grid.",
+      "build": [
+        "Retain the owned 64-instance bench, persistent slot plates, right panel, left status and clear rectangle [[3,4,10,11]].",
+        "Reviewed: seven existing buttons; RESET restores original transforms and replays the seed; mode changes reset. No visitor START/STOP or seed-entry field.",
+        "Reviewed: ROW and COLUMN each remove eight cells with identical offsets under seed 777; ALL removes every cell once. Pending removals cancel on reset or mode change.",
+        "Later: headset approach/lettering; the missing secondary hazards_demo; legacy capture harness inputs/measurements; recorded startup diagnostics and generated decoration build times."
+      ],
+      "book": [
+        "Follow a grey cube through removals before reading eligibility, draw and zero-scaling as three operations.",
+        "Compare equal-sized ROW and COLUMN masks under one seed; distinguish this from changing the draw bounds with RANGE or ALL.",
+        "Inspect the persistent address, original transform and internal removal log. Visible absence retains the means of return.",
+        "Pause over an unfinished pattern. Exhausting the same range loses its visible history. Carry the changing set into Random_Walk."
+      ],
+      "code": "RemoveRandom.gd: _should_include_instance, find_all_instances, remove_one, set_random_seed; remove_random_fixture.gd for actual controls/collision.",
+      "evidence": [
+        "87 independent desktop checks, zero assertion failures, exit 0. Source stable during run; original saved hand preserved; no headset observation.",
+        "Six complete captured histories, 128 removal entries; replay identical and every order a permutation of its eligible set. ROW/COLUMN offsets 7,0,4,2,1,1,0,0 at seed 777.",
+        "Museum routes, real pointer REMOVE ONE/RESET, masks, exhausted set, rapid presses, pending reset/mode change and unload/rebuild checked.",
+        "No script errors or shutdown leak warning in this run. Startup/renderer diagnostics and slow generated decorations remain recorded."
+      ],
+      "latitude": "The disappearing cells may become an invitation, excavation or interrupted pattern. Preserve the inspectable selection rule.",
+      "reuse": "R1 controlled comparison; R5 arena boundary; R6 local state/seed.",
+      "batch": "R1",
+      "status": "87 desktop checks passed; existing bench preserved; text aligned; headset pending",
+      "review_url": "/research/possible-bodies/random-remove.html",
+      "handoff": "../../space/remove-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "question": "How much world can two choices make?",
+      "body": "A binary mark, a wall and an agent's proposed path.",
+      "lead": [
+        "ten_print_maze_3d"
+      ],
+      "findings": "Outside the active route. The generator has stroke/character/wall/tile modes, random diagonals, an ant/navigation grid and timed wall changes. It uses global seed/random calls; a new local RNG is needed for reliable isolation. Animated walls and navigation must be checked for agreement. Platform/wall recovery on 10 September: 1 interior cells restored as platforms; 0 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Begin with one fixed seeded diagonal field. Present the same choices as marks and walls using existing impression configurations.",
+        "Make wall mutation a second, explicit intervention; synchronise visible orientation, collision and navigation or clearly keep the agent demonstration separate.",
+        "Fit an optional walkable version to the room using original layout evidence. Do not promise a solvable maze from independent diagonals; keep a bypass and show disconnected regions honestly."
+      ],
+      "book": [
+        "Let a slash become an obstruction by changing its embodiment.",
+        "Read one binary choice before showing the nested grid loop.",
+        "Follow a predicted path and notice whether the wall or the navigation model disagrees.",
+        "Leave with a distinction between generating marks and guaranteeing passage; avoid a historical attribution beyond checked sources."
+      ],
+      "code": "ten_print_maze.gd: generate_maze, build_navigation_grid, _on_wall_timer_timeout, impression methods. Inspect any repeated randi/seed use across mutations.",
+      "evidence": [
+        "The mark and wall views encode the same stored diagonal matrix.",
+        "After mutation, navigation/collision match the shown wall or the limitation is explicit.",
+        "Load/reload without changing unrelated seeded artifacts."
+      ],
+      "latitude": "Fable chooses printed tile, glass partition or a more theatrical translation. The same binary data must remain traceable.",
+      "reuse": "R4 sample-to-body mapping; R5 arena boundary; R6 local state/seed.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Cubes",
+      "question": "Does a convincing die prove a fair procedure?",
+      "body": "A thrown body, its settled orientation and a tally.",
+      "lead": [
+        "dice_throw"
+      ],
+      "findings": "Outside the active route. dice_throw creates a pickable physical die, reads a settled face and produces reward balls. Reset controls and several warrant views already exist. A physical simulation is not automatically a uniform six-way draw. Platform/wall recovery on 10 September: 2 interior cells restored as platforms; 33 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Keep the die on its existing rimmed table with reachable reset and clear settled-face readout. Contain and cap reward balls so they do not become corridor obstacles.",
+        "Show individual outcomes and a growing tally. Use the existing assay/net views where useful; include unresolved tilted/edge cases rather than silently counting them as a face.",
+        "An optional beside-it uniform integer generator can make a precise contrast. Label it as a second procedure and keep sample count/face colours comparable."
+      ],
+      "book": [
+        "Throw first, then compare the face the eye sees with the one the program counted.",
+        "Repeat and let the tally grow without promising fairness from a short run.",
+        "Read the upward-normal/settling decision; locate the interval between moving body and accepted symbol.",
+        "Ask what the tally can support and what the collision model decided before the throw."
+      ],
+      "code": "dice_throw.gd: _read_dice_result, FACE_NORMALS, settling logic, _update_stats, _clean_reward_balls.",
+      "evidence": [
+        "Test six clearly settled orientations and ambiguous edge/tilted cases.",
+        "Check actual pickup/drop and both reset paths.",
+        "Observe bounded reward bodies and distinguish empirical counts from a fairness guarantee."
+      ],
+      "latitude": "Casino, assay desk or surreal oversized die all remain possible. Do not let the spectacle obscure which process produced a number.",
+      "reuse": "R2 housed readout; R7 measurement contract; R8 bounded simulation.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "question": "Which changes make an arrangement harder to inhabit?",
+      "body": "A repeated array under angular perturbation.",
+      "lead": [
+        "random_decay_multimesh"
+      ],
+      "findings": "Outside the active route. Current primary changes drift, rotation and colour, with different rates for the cube and prism stacks. It has TOGGLE/RESET; several rotation-specific artifacts are also placed. Its 'decay' is not an entropy measurement. Platform/wall recovery on 10 September: 45 interior cells restored as platforms; 47 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Start with a matched reference and a rotation-only array. Disable translation, sinking, scale and colour variation for that first comparison; inspect whether the existing rotation artifacts provide a clearer implementation.",
+        "Offer axis-specific or combined angular perturbation and a controlled magnitude at the same sample cadence and seed. Reuse the existing process controls.",
+        "Build a short collidable strip only if the bodily question is traversal. Keep the separate full decay presentation optional and label its extra variables."
+      ],
+      "book": [
+        "Recognise the same cubes, then find the gap or alignment that has changed.",
+        "Pause a rotation-only comparison and separate centre positions from edge directions.",
+        "Read the actual angular update, connecting to Trans_Rotation's axes and composition.",
+        "Ask which body can pass at the tested angle; call changed connectivity/reachability precisely, not 'topological entropy' without a defined measure."
+      ],
+      "code": "random_decay_multimesh.gd: _advance_layer, _create_vr_controls; inspect Random_Rotate_Random_XYZ and SlopeGradientCubes if promoting a more appropriate lead.",
+      "evidence": [
+        "Prove scale/position/material stay fixed in the rotation-only mode.",
+        "Replay the angular sequence at the chosen simulation cadence.",
+        "Check traversability against actual colliders if claimed; update primary/book anchors together if the lead changes."
+      ],
+      "latitude": "Fable may promote the better existing rotation artifact instead of forcing decay to teach everything. Document why it makes the question clearer.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R6 local state/seed.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Walk",
+      "question": "What does a trail remember that the next step does not use?",
+      "body": "An agent, its accumulated position and a bounded enclosure.",
+      "lead": [
+        "random_walk_terrarium"
+      ],
+      "findings": "The existing logbook terrarium remains the one primary. Three complete 300-step, five-walker histories at seed 31415 replay after deleting trail memory and selecting ALL. The trail keeps previous positions and omits wall contacts. The lab observation-window string parser is repaired. All twelve placements and recovered museum geometry remain.",
+      "build": [
+        "Preserve the dark backboard, enlarged red bead, keypad and logbook wing at the existing cell (4,1).",
+        "Seven controls checked: 2D/3D/LEVY/RESET and ONE/ALL/NEW SEED. There is no visitor pause or seed-entry field.",
+        "Use the existing boolean parser for the pavilion window token; preserve floor, raised cells and clearance.",
+        "Later: tracked-hand reach, fine trail/lettering visibility and headset performance; recorded startup diagnostics."
+      ],
+      "book": [
+        "Let a suggestive trail invite a prediction without declaring every prediction a failure.",
+        "Compare attempted movement, reflected endpoint and the previous-position drawing; wall contacts and the current bead are omitted from that line.",
+        "At equal step counts the named procedure replays. ONE/ALL changes observation while all five continue; the generator still has state.",
+        "Read a two-second frame against five accepted steps. Distinguish bounded five-body MSD from history, path length and entropy; continue to Random Gaussian."
+      ],
+      "code": "random_walk_terrarium.gd: mode/step generation, boundary reflection, trail retention and timestep accumulator. Verify RESET's seed policy instead of promising replay from its label.",
+      "evidence": [
+        "129 independent desktop checks, zero assertion failures, exit 0. No headset test.",
+        "Three 300-step histories, five walkers each, seed 31415. Every frame replayed after clearing trails at step 60 and selecting ALL.",
+        "Actual proposed steps exported without consuming extra draws; three mode images share a camera.",
+        "Existing controls, desktop pointer, reflection, catch-up, bounds, reach, museum routes and unload/rebuild exercised."
+      ],
+      "latitude": "Keep the creatures suggestive enough to invite misreading. A readable trace should let the reader test that affection rather than being told it is wrong.",
+      "reuse": "R2 housed readout; R3 explicit time; R6 local state/seed.",
+      "batch": "R1",
+      "status": "129 desktop checks passed; terrarium preserved; text aligned; headset pending",
+      "review_url": "/research/possible-bodies/random-walk.html",
+      "handoff": "../../space/walk-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Random_Gaussian",
+      "question": "What can many draws reveal that one draw cannot?",
+      "body": "A distribution, a finite histogram and its clipped edges.",
+      "lead": [
+        "distribution_sampler"
+      ],
+      "findings": "The existing sampler remains the primary. Corrected logarithm guards prevent invalid values; issued draws reserve the cap, CLEAR removes old meshes, and markers land at the drawn bars. The orange shape now stays inside the panel with its own scale labelled. Geometry and secondary artifacts remain.",
+      "build": [
+        "Preserve the existing cabinet, outboard panels, headline and six-line account.",
+        "Nine controls: PAUSE toggles issuance while flight lands; CLEAR preserves paused state; BATCH reserves airborne capacity; BINS regroups retained values.",
+        "Blue and pale counts share a scale; the orange ideal shape has its own peak scale inside the panel.",
+        "Later: tracked-hand approach, small lettering and headset performance; recorded engine startup diagnostics."
+      ],
+      "book": [
+        "Compare GAUSS and UNIFORM at N=300 after PAUSE and CLEAR; do not invent exact sparse outcomes or controls.",
+        "The Gaussian is constructed directly; extra UNIFORM draws do not change its law into a bell.",
+        "Rebin retained values and read changes in estimates from bin centres; separate edge counts from clipped values.",
+        "Distinguish clamping from the previous hall's reflection. Carry the choice of varying properties into Random Mushrooms."
+      ],
+      "code": "distribution_sampler.gd: sample generation, _clear_samples, theoretical curve, clamping and bin assignment. Verify sample_seed and mode-specific formulas.",
+      "evidence": [
+        "Independent source, control and desktop checks; final receipt linked from the review.",
+        "Four common-seed samples, deep-copied count snapshots, replay and rebin comparisons; an explicitly selected exponential edge example.",
+        "Injected logarithm endpoint inputs; flight/batch cap; synchronous CLEAR cleanup; actual bar landing; orange curve bounds."
+      ],
+      "latitude": "Use colour, falling beads or another trace if it clarifies aggregation. Keep the strange early samples visible rather than smoothing them away.",
+      "reuse": "R1 controlled comparison; R2 housed readout; R7 measurement contract.",
+      "batch": "R1",
+      "status": "156 desktop checks passed; book aligned; headset pending",
+      "review_url": "/research/possible-bodies/random-gaussian.html",
+      "handoff": "../../space/gaussian-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Random_Mushrooms",
+      "question": "Which parts of this population were allowed to vary?",
+      "body": "A field of recognisable bodies and the ground carrying them.",
+      "lead": [
+        "mushrooms"
+      ],
+      "findings": "The specimen bed already supports a controlled comparison. Unit scale preserves template dimensions; new seeds can change template details. Captures separate noise-gated candidates from explicit rings/clusters. Repaired desktop eating shader and enlarged the existing readout.",
+      "build": [
+        "Preserve six-metre bed, six explicit artifact placements and the west/south route.",
+        "Keep five controls and the three separately planted pickables. Enlarge the housed readout.",
+        "Repair the desktop effect shader; test actual rendered pixels, not only its running flag."
+      ],
+      "book": [
+        "Begin by following two apparently related bodies, then SHOW their template.",
+        "SIZE retains the draw and replaces its use; scale 1 does not imply equal dimensions.",
+        "Distinguish fixed-count candidates, ring/cluster permissions and discrete template selection.",
+        "Edible mushrooms give a similar form another capability and change the observer's view; timed peak plus fades, not an exact ten-second total."
+      ],
+      "code": "mushrooms.gd: create_mushroom_templates, generate_mushroom_positions, generate_mushroom_field, create_fairy_ring and RNG calls.",
+      "evidence": [
+        "Independent museum run, desktop pointer and route checks.",
+        "Full captured populations at two named seeds; exact SIZE/REGROW comparisons for instances, ground heights and template details.",
+        "Rendered shader passthrough and active-image comparison, matched views of the bed."
+      ],
+      "latitude": "Fable can make a luscious, oversized or miniature population. Preserve its surprise; the inspection station should reveal choices without making every specimen into a label.",
+      "reuse": "R4 sample-to-body mapping; R6 local state/seed; R8 bounded simulation.",
+      "batch": "R2",
+      "status": "117 desktop checks passed; rendered shader verified; book aligned; headset pending",
+      "review_url": "/research/possible-bodies/random-mushrooms.html",
+      "handoff": "../../space/mushrooms-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "question": "What changes when neighbouring heights are related?",
+      "body": "Two fields mapped to the same column body.",
+      "lead": [
+        "perlin_noise_bridge"
+      ],
+      "findings": "Outside the active route. perlin_noise_bridge already compares independent heights with coherent noise on paired 16×16 grids, with octave/frequency/seed/resample controls. Height bounds are similar but distributions need not match.",
+      "build": [
+        "Give the paired grids a common footprint, height axis and palette. Keep the two panels readable at the same viewing distance and do not independently normalise them without disclosing it.",
+        "Start at one octave and fixed seed. Isolate frequency before offering extra octaves; expose one selected coordinate and neighbouring samples.",
+        "Use this as the Randomness-to-Noise comparison laboratory. Reuse its paired sampler for Noise_Types or the later noise bench if helpful, while giving this extension its own geometry-mapping experiment."
+      ],
+      "book": [
+        "Describe adjacent height differences before calling either side a landscape.",
+        "Hold the seed, change coherent frequency and revisit a coordinate.",
+        "Read independent draw versus field-at-coordinate; distinguish correlation from equal distributions.",
+        "Let the same values become colour or height only if that shared-data mapping is implemented. Do not claim erosion or geology from appearance."
+      ],
+      "code": "perlin_noise_bridge.gd: _rebuild_grids, _apply_column, _create_vr_controls. Inspect FastNoiseLite basis and frequency mapping.",
+      "evidence": [
+        "Paired displays use declared common dimensions, scale and colour mapping.",
+        "Same seed/settings repeat; frequency changes leave the independent baseline stable if advertised.",
+        "Confirm selected-coordinate readouts agree with the displayed columns."
+      ],
+      "latitude": "Could be two miniature landscapes or two austere arrays. A useful alternative is a single field viewed as colour and relief after the basic comparison.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R6 local state/seed.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "question": "When can an uncertain sample support a precise estimate?",
+      "body": "A sampling region, an inclusion test and a growing ratio.",
+      "lead": [
+        "monte_carlo_dartboard"
+      ],
+      "findings": "Outside the active route. The apparatus generates samples with THROW/AUTO/RESET; it is not a hand-aimed dart game. It may begin with 140 preseeded darts and caps at 500. Existing disclosure modes expose the measurement. Platform/wall recovery on 10 September: 2 interior cells restored as platforms; 1 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/. The spawn is now on existing floor at (1,1), preserving access after the old border became a wall.",
+      "build": [
+        "Begin the lesson at zero or make preseeded history explicit. Put sample count, inside count and estimate together in the existing cabinet.",
+        "Offer one-sample THROW before AUTO. Add a deliberate biased-sampling comparison only if it is labelled and uses a separate mode; more points must not be presented as correcting bias.",
+        "Keep optional painting/pipe artifacts as a gallery of other uses of chance, with this estimator as the one clear primary experiment."
+      ],
+      "book": [
+        "Predict what an inside or outside sample will do before asking for it.",
+        "Let the estimate wobble and occasionally get worse as N grows.",
+        "Read the actual inside-circle condition and 4*inside/total expression.",
+        "Distinguish random sample placement from skillful aim and numerical stability from correctness; carry the question of selection into feedback."
+      ],
+      "code": "monte_carlo_dartboard.gd: _throw_dart, _unit_draw, _preseed, _update_display and reset seed handling.",
+      "evidence": [
+        "Generated samples remain in the intended square; counts and estimate agree.",
+        "AUTO stops/caps cleanly and RESET clears the displayed and numerical state.",
+        "If bias mode is built, demonstrate it can stabilise at the wrong value rather than selecting a flattering run."
+      ],
+      "latitude": "Fable may lean into the casino or laboratory. The experiment should reward a careful explanation, not a lucky estimate.",
+      "reuse": "R3 explicit time; R6 local state/seed; R7 measurement contract.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Pheromone",
+      "question": "When does a path begin choosing its next visitor?",
+      "body": "Agents, a decaying signal and a terrain that keeps another history.",
+      "lead": [
+        "pheromone_terrain"
+      ],
+      "findings": "Outside the active route. Visits deposit pheromone and alter height; the signal decays separately. trail/sniff/avoid/grid rule variants and seeded warmup already exist. These are genuine stateful processes, unlike a stateless field lookup.",
+      "build": [
+        "Build a matched attraction/avoidance comparison from the same initial state using existing rule modes; expose a local reset and one clearly named rule choice.",
+        "Show pheromone strength and accumulated height separately, switching or pairing their readouts from the same state. Keep deposition and decay rates fixed initially.",
+        "Fit the evolving terrain within a stable observation border. Verify collider updates if a player can walk it; the agents' grid traversal and the player's body may use different representations."
+      ],
+      "book": [
+        "Find a repeated route, then ask what the next walker is actually reading.",
+        "Compare following a trace with avoiding it before calling either best.",
+        "Read deposit, decay and next-step choice as distinct operations.",
+        "Let an old high ridge lose its current scent. State precisely where history persists, then distinguish this feedback from the stateless noise mixer."
+      ],
+      "code": "pheromone_terrain.gd: _walk_step, _decay_pheromones, _choose_next_position, _update_mesh and rule configs.",
+      "evidence": [
+        "At fixed timestep and seed, replay the initial run and log rule differences.",
+        "Show pheromone decays while accumulated height follows its separate rule.",
+        "Check index boundaries and any terrain collision updates."
+      ],
+      "latitude": "Turn the traces into scent, glow or another legible local signal. Avoid describing a globally optimal path or attributing intent the algorithm does not have.",
+      "reuse": "R3 explicit time; R4 sample-to-body mapping; R6 local state/seed.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Space",
+      "question": "Can a deterministic sum persuade us it is a landscape?",
+      "body": "A field assembled in layers and an interpretive palette.",
+      "lead": [
+        "noise_mixer"
+      ],
+      "findings": "Outside the active route. noise_mixer sums a sine-based function over octaves with seeded offsets; it is not Perlin. The generated image normalises its own range and uses terrain colours. OCT/LAC/PER and random seed controls already exist. Platform/wall recovery on 10 September: 48 interior cells restored as platforms; 43 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Stage the existing mixer on a reachable stand. Begin with one layer, then add layers while keeping the seed and base function fixed.",
+        "Provide a fixed-scale/normalised view comparison with the actual min/max values visible; changing contrast should not masquerade as changing absolute height.",
+        "Make a grayscale or neutral colour option available to compare field structure with landscape associations. Coordinate its scope with Noise_6_Wall so this room teaches interpretation/normalisation and that one teaches shader layers."
+      ],
+      "book": [
+        "Meet an apparent coastline, then remove the landscape palette.",
+        "Build the image from one layer and trace what OCT, LAC and PER each change.",
+        "Quote _sin_noise and the octave accumulation, naming the actual construction.",
+        "Let normalisation conceal a numerical difference, then reveal it. Close with a precise question about mapping rather than claiming all irregularity is randomness."
+      ],
+      "code": "noise_mixer.gd: _fbm, _sin_noise, _generate_texture, _sample_color_ramp. Confirm the control units and range remapping.",
+      "evidence": [
+        "Replay field samples at a fixed seed/settings.",
+        "Show fixed versus per-image normalisation without resampling the field.",
+        "At one octave, test the claimed effect of layer-spacing controls before describing it."
+      ],
+      "latitude": "Fable can retain the seductive terrain colours. Their power becomes more interesting when another reading is available.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R7 measurement contract.",
+      "batch": "R-EXT"
+    },
+    {
+      "map": "Random_Game",
+      "question": "How can you plan when the next state is known but its timing is not?",
+      "body": "The player and an intermittently supporting platform.",
+      "lead": [
+        "r_c"
+      ],
+      "findings": "Crossing and falling field make distinct arguments about where uncertainty enters. Repaired replay state/tween ownership, beacons, state readout, threshold access and early timer configuration. Field controls distinguish stopping a source from clearing flights. Monte Carlo has no living museum scene and incomplete extra modes; remains an open secondary placement.",
+      "build": [
+        "Keep the recovered pit and alternative route; repair threshold access and replay during movement.",
+        "Give the existing field a housed local RUN / STOP and CLEAR panel with initial-position markings.",
+        "Retain other map placements; record missing Monte Carlo and unisolated creatures explicitly."
+      ],
+      "book": [
+        "Observe state order, drawn waits and available notice separately.",
+        "Compare the regular spawn clock with random positions and initial velocities.",
+        "Explain local reset and separate projectile jitter without claiming complete world replay.",
+        "Carry the distinction between a procedure and its choices into Noise_Types."
+      ],
+      "code": "random_cycle_cube.gd: _run_cycle_loop, _next_random_wait, _set_state, _set_collision_enabled and warning configs.",
+      "evidence": [
+        "Independent rendered museum, pointer and recovery checks.",
+        "Replay during a live sink; exact first waits and unchanged cue RNG/deadline state.",
+        "Two sets of 24 launch records, cap, STOP/CLEAR and actual local button paths."
+      ],
+      "latitude": "Fable may choose a playful platform challenge or a quieter timing crossing. The uncertainty must remain specific and observable.",
+      "reuse": "R3 explicit time; R5 arena boundary; R6 local state/seed.",
+      "batch": "R2",
+      "status": "88 desktop checks passed; two book encounters aligned; headset pending",
+      "primary": [
+        "r_c",
+        "cube_projectile_spawner"
+      ],
+      "review_url": "/research/possible-bodies/random-game.html",
+      "handoff": "../../space/game-review-2026-09-12/README.md"
+    },
+    {
+      "map": "Random_Noise_Types",
+      "question": "Can randomly proposed points still keep their distance?",
+      "body": "A cloud of pickable bodies and a rule of admission.",
+      "lead": [
+        "randompoints"
+      ],
+      "findings": "All four existing works now have a place in the book. Retained point encounters and visual fields; restored full-size controls beside both miniature galleries. The galleries add independent image/sound sources, gradient mapping, display clamping and temporal memory/difference. Card questions may expand when the material warrants it.",
+      "build": [
+        "Frame and raise the single point; move it clear of the entrance wall.",
+        "Keep matched slabs, add LOAD x1/x4 with fixed spacing, enlarge the cased readout.",
+        "Count all refusals and distinct close pairs; report the bounded ghost sample and finite attempt budget.",
+        "Preserve both existing gallery fields and make their controls human-sized; repair actual pointer targets and keep the platform approach clear."
+      ],
+      "book": [
+        "Carry a point, release, then read local-coordinate clipping.",
+        "Compare every proposal kept with distance-based admission.",
+        "Increase the request and distinguish search shortfall from impossibility.",
+        "Move an admitted point and find where a generative rule stops acting.",
+        "Let height/colour and temporal filters add distinct encounters; show that the model rows do not measure audio."
+      ],
+      "code": "randompoints.gd: _generate_uniform, _generate_blue_noise, spawn_points, apply_grid_config; inspect pickable point behaviour.",
+      "evidence": [
+        "Actual museum and project desktop rig pointer presses and grabs.",
+        "Full-precision generated coordinates and separately recorded live-transform residue.",
+        "Independent candidate arithmetic, pair geometry, Gaussian accounting and ghost-cap checks.",
+        "Both gallery consumers exercised by pointer across five modes and STOP; actual generators exported as two-second dry audio with matched white innovations."
+      ],
+      "latitude": "A gathering of luminous bodies or a precise sampling cabinet can both work. Keep the excluded neighbourhood visible without prescribing a social moral.",
+      "reuse": "R1 controlled comparison; R6 local state/seed; R7 measurement contract.",
+      "batch": "N1",
+      "status": "Four primary passages; 81 gallery checks passed; earlier point review 84 passed; headset pending",
+      "primary": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ],
+      "review_url": "/research/possible-bodies/random-noise-types.html",
+      "handoff": "../../space/noise-galleries-2026-09-13/README.md"
+    },
+    {
+      "map": "Noise_Columns",
+      "question": "Where does change enter a body?",
+      "body": "Generated shafts, an independently pulsing orb, and the existing six-orb construction.",
+      "lead": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "findings": "Reviewed all three authored works. Retained the trio and both dark-sphere forms. Repaired local freeze for accessory shaders, improved the cased readout, cleared the synthesis stand approach and repaired the local passage. Corrected unsupported terrain, 3D Perlin erosion, invertibility and universal non-return claims.",
+      "build": [
+        "Retain the controlled trio and its established drivers. Its bases and capitals must obey the same local freeze as the CPU shafts.",
+        "Keep the dark orb and hush/swarm synthesis as distinct encounters; reserve a clear approach for the smaller body.",
+        "Preserve recovered structure and verify the museum route through the hall and its passage."
+      ],
+      "book": [
+        "Observe before reveal; distinguish shaft deformation, whole-body turning and shaft veining.",
+        "Let the independent orb make the scope of local time apparent.",
+        "Compare the single orb with the six-part construction; do not call it steering or flocking.",
+        "Carry the receiving operation into Noise_One: one field spent as relief or colour."
+      ],
+      "code": "MeltingBerniniColumns.gd: _process, update_column_mesh and generated mesh; marble_column.gdshader. Use a real coherent field for the new branch and label it as newly implemented.",
+      "evidence": [
+        "53 checks, actual pointer control for FREEZE/REVEAL/SPIN/MARBLE; all three authored works present.",
+        "All nine material clock inputs hold under FREEZE; the orb continues. Full shaft-vertex arrays repeat for identical phase; unchanged index arrays do not prove invertibility.",
+        "No reported hall/passage severance. Recorded driver samples, scene images and isolated saved-hand provenance."
+      ],
+      "latitude": "Give the columns a material worth looking at. The comparison may remain ambiguous until the reader asks the instrument; avoid labelling every surface before it can surprise.",
+      "reuse": "R1 controlled comparison; R3 explicit time; R4 sample-to-body mapping.",
+      "batch": "N2",
+      "primary": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "status": "Three primary passages; 53 rendered-museum checks passed; headset pending",
+      "handoff": "../../space/columns-review-2026-09-13/README.md"
+    },
+    {
+      "map": "Noise_One",
+      "question": "Is the restless thing a field, a surface or our way of reading it?",
+      "body": "One sampled field expressed as colour and relief.",
+      "lead": [
+        "noisetorus"
+      ],
+      "findings": "The torus uses value-noise shaders with moving sample coordinates and separate hue time. Its controller already offers relief/plate/none and speed configs. A material parameter at zero does not prove all time inputs are frozen. Platform/wall recovery on 10 September: 9 interior cells restored as platforms; 22 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Make a matched colour-only and relief reading of the same field on the same support; reuse the readout modes where possible.",
+        "Offer a local time freeze and a sample marker that reveals coordinate/value. Freeze both displacement sampling and independent hue motion for a controlled view.",
+        "Expose relief amplitude separately from frequency. Preserve the ring opening over the beginner range; if more extreme deformation is offered, show whether it changes only appearance or actual collision."
+      ],
+      "book": [
+        "Follow a patch, then step sideways and separate viewpoint change from field change.",
+        "Freeze the field and compare colour with silhouette.",
+        "Read the actual hash/interpolation and sample-coordinate expression before its normal-displacement mapping.",
+        "Let a visible corrugation fail to become a tactile obstacle unless implemented. Carry the value into the occupancy decision in Voxel."
+      ],
+      "code": "noisetorus.gd: _apply_readout; noiseTorus.gdshader vertex/fragment and TIME inputs. Determine which material is actually bound, including any stray sphere.",
+      "evidence": [
+        "At a fixed coordinate/time, both readouts use the same value.",
+        "After freeze, sample value and hue remain constant over several frames.",
+        "Check amplitude limits, mesh bounds and the disclosed collision contract."
+      ],
+      "latitude": "Drag, lacquer, plush or a spare grey ring can all serve the experiment. Material changes must not quietly change the field being compared.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R7 measurement contract.",
+      "batch": "N1"
+    },
+    {
+      "map": "Noise_Voxel",
+      "question": "When does a value become a place a body can occupy?",
+      "body": "A sampled volume, a threshold and a receiving terrain.",
+      "lead": [
+        "perlin_terrain_sculptor",
+        "voxelnoise"
+      ],
+      "findings": "The bench uses Perlin plus height bias; voxelnoise uses simplex with different coordinates and dimensions. They currently share control values, not identical samples. The receiver can generate a large 32×64×32 volume; scope and collision need runtime inspection. Platform/wall recovery on 10 September: 2 interior cells restored as platforms; 0 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Keep both artifacts primary as one linked encounter. Make their relationship exact: preferably share one sampler contract for basis, seed, coordinates, height bias, threshold and scale while changing representation/size.",
+        "If Fable retains two different fields, label this explicitly as shared controls and include a truly matched small comparison so the room still demonstrates the classification rule.",
+        "Show the sample value and occupied/empty decision for a selected cell; allow threshold changes at fixed seed. Debounce regeneration and bound the receiver to a museum stage with reachable controls and a stable bypass."
+      ],
+      "book": [
+        "Predict which thin connection will vanish as the threshold rises, then test it.",
+        "Show that the field can stay fixed while the occupied set changes.",
+        "Quote the actual predicate, including height bias if it remains; do not simplify it to a different algorithm.",
+        "Let the threshold's binary decision invite another possible encoding. Separate connectivity of occupied cells from verified passage for the player."
+      ],
+      "code": "perlin_terrain_sculptor.gd: _generate_terrain; voxelnoise.gd: apply_perlin_terrain_controls, _configure_noise, _generate_chunk. Audit the link's scope so it cannot retune receivers in other halls.",
+      "evidence": [
+        "Compare selected sample values and classification across the linked displays under the declared contract.",
+        "For a fixed field, raising threshold cannot add occupied samples under the implemented greater-than rule.",
+        "Check rebuild bounds, stale colliders and cross-room control isolation; physically test any claimed passage."
+      ],
+      "latitude": "A magnified model, cutaway or walk-in volume may work. Choose one scale relationship and make it true before adding more displays.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R5 arena boundary.",
+      "batch": "N2"
+    },
+    {
+      "map": "Noise_6_Wall",
+      "question": "Which layer of a surface are you attending to?",
+      "body": "An interior lined with a sum of spatial scales.",
+      "lead": [
+        "shader_noise_space"
+      ],
+      "findings": "The room controller already supports basis choices and frozen/live modes. The shaders combine six scales; colour, density and time also move. Existing final proposes octave isolation but the visitor cannot currently perform it.",
+      "build": [
+        "Keep the immersive interior, but give the entrance a stable, readable sample panel. Compare 1, 2, 4 and 6 layers under fixed seed/coordinates, contrast, colour and time.",
+        "Add an actual octave control or contribution views to the shader, reusing frozen mode. Keep basis changes as a separate comparison; do not conflate six walls with six isolated octaves.",
+        "Stage the room within the museum with a clear entrance/exit and an unobstructed margin. Use bounded shader cost and prevent material instances from changing other halls."
+      ],
+      "book": [
+        "Choose a broad patch, then find detail within it before turning to the control.",
+        "Remove layers and notice what persists.",
+        "Read the shader accumulation loop and the amplitude/frequency progression.",
+        "Ask when extra detail helps a body read a route and when it obscures it. On the current route, close toward the fair Perlin/Simplex comparison."
+      ],
+      "code": "noiseroom.gd: _apply_generator, _update_room_animation, apply_grid_config; WallNoiseShader.gdshader and QueerNoiseShader.gdshader accumulation and colour mapping.",
+      "evidence": [
+        "One layer and six layers differ only by declared contributions in the comparison mode.",
+        "Frozen mode stops every animated term used by the comparison.",
+        "Check shader compilation/performance and both museum doorway clearances."
+      ],
+      "latitude": "Make the walls a desirable material interior. Keep one modest comparison surface that can disclose how the enchantment was made.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R8 bounded simulation.",
+      "batch": "N1"
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "question": "What happens when a field changes where another field is read?",
+      "body": "A sampling grid, displaced coordinates and a curved surface.",
+      "lead": [
+        "noisesphere"
+      ],
+      "findings": "Outside the active route. The existing sphere directly samples value noise; it does not currently implement the domain-warp comparison named by the room. the_same_cloud contains an existing FastNoiseLite warp pair that can be inspected and reused selectively. Platform/wall recovery on 10 September: 13 interior cells restored as platforms; 8 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/. Keep the added landing at (7,11) before the unchanged exit at (7,12).",
+      "build": [
+        "Build a real direct-versus-warped comparison using the same base field, seed, coordinates, support and material. Warp strength zero must reproduce the direct output.",
+        "Reveal several original sample locations and their displaced locations with optional connecting marks. Vary warp strength while other values remain fixed.",
+        "Keep the sphere if it makes the displacement relation visible, or use a plane first and the sphere as a secondary application. Share the actual sampling rule; do not simulate warping by changing the seed or moving the mesh alone."
+      ],
+      "book": [
+        "Notice a familiar patch drawn into another arrangement and ask what moved.",
+        "Return warp strength to zero before explaining.",
+        "Show the actual implementation of sampling at displaced coordinates, with vector-valued displacement if used; distinguish this from post-sampling height displacement.",
+        "Let an ambiguous image require the coordinate witness. Close toward terrain mapping in this optional extension path."
+      ],
+      "code": "noisesphere.gd/noisePlanet2.gdshader for the baseline; commons/artifacts/the_same_cloud/the_same_cloud.gd: _build_warp_pair for a reuse candidate. Trace its actual FastNoiseLite settings before adapting.",
+      "evidence": [
+        "At zero warp, compare field values with the direct baseline.",
+        "At a chosen point, show q=p+warp(p) and verify the output is evaluated at q.",
+        "Freeze and replay both displays without hidden colour, time or seed differences."
+      ],
+      "latitude": "Fable can choose a stretched skin, folded map or transformed interior. The coordinate operation is the requirement; the metaphor is open.",
+      "reuse": "R1 controlled comparison; R4 sample-to-body mapping; R6 local state/seed.",
+      "batch": "N-EXT"
+    },
+    {
+      "map": "Noise_Space_10",
+      "question": "Which bodies can a field carry once it becomes ground?",
+      "body": "A heightfield, its collider and the moving player.",
+      "lead": [
+        "noise_space"
+      ],
+      "findings": "Outside the active route. NoiseSpace samples a 2D field into one height per horizontal location and constructs a mesh with collision. The current terrain is generated at startup. Configs include basis, octave count, scale and persistence; the name does not imply ten live controls. Platform/wall recovery on 10 September: 55 interior cells restored as platforms; 40 boundary cells made explicit w. Keep museum.wall_height: 3 and existing gate-depth settings. See structure-recovery.html and doc/space/sequence-platform-recovery-2026-09-10/.",
+      "build": [
+        "Recover the original ground configuration and frame it as a bounded arena with a same-level margin, intentional entry/exit and museum bypass.",
+        "Make one controlled comparison in frequency or height amplitude from a fixed seed. Rebuild mesh and collider together on deliberate changes while the player stands on the stable margin.",
+        "Offer two proposed routes or two body sizes only if they can actually be tested. Do not quietly rescale the player across the entire museum; a labelled probe body is an acceptable secondary comparison."
+      ],
+      "book": [
+        "Choose a possible route from the margin, then test the path with the actual player.",
+        "Change one field-to-height parameter and revisit the route.",
+        "Read sample→height→mesh/collision, keeping the representation chain visible.",
+        "Discover the missing cave: one height cannot hold both roof and floor at the same horizontal coordinate. Link this limit to Voxel's occupied volume."
+      ],
+      "code": "NoiseSpace.gd: _build_noise, generate_space and inherited collision/mesh creation. Verify the effective noise type and real sampling scale before giving numerical instructions.",
+      "evidence": [
+        "Check visible ground/collider alignment and complete traversal of the proposed route.",
+        "Same seed/settings regenerate the same terrain; collider changes match it.",
+        "Test steep edges, entry/exit and bounds without claiming universal accessibility."
+      ],
+      "latitude": "Fable may make a mountain refuge, a rolling promenade or another world that carries the body differently. The terrain should invite a route, not become generic noise scenery.",
+      "reuse": "R4 sample-to-body mapping; R5 arena boundary; R6 local state/seed.",
+      "batch": "N-EXT"
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "question": "What must stay the same before a difference can be attributed to a rule?",
+      "body": "Two matched fields and the conditions of their comparison.",
+      "lead": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "findings": "Both current displays default to simplex-family noise. PerlinNoise.gd and NoiseVisualizer.gd now support a generator config; no Perlin override is placed. The two implementations also vary their sampling and UI. This is a high-value correction before further prose.",
+      "build": [
+        "Set an explicit Perlin basis for the Perlin instance, using the existing configuration path if it reaches the actual generator. Keep the simplex instance explicit too.",
+        "Match sample positions, grid size, amplitude, octave count, lacunarity/persistence, animation state and colour mapping. Record seed values; the same integer in different bases means repeatable comparisons, not corresponding features.",
+        "Provide reachable common controls plus a selected-coordinate readout. Freeze first and allow one-variable changes. Keep other terrain exhibits secondary; fix the 'Return to Lab' portal's role so the main route clearly continues to Cellular Automata."
+      ],
+      "book": [
+        "Begin with a difference the visitor can point to, then ask which cause they have actually isolated.",
+        "Repeat each field, vary one shared parameter, and compare again.",
+        "Show the exact noise_type selections and shared sampling contract.",
+        "Let the names earn their claim. End with the next distinction: sampling a field versus updating a neighbourhood of stored states."
+      ],
+      "code": "PerlinNoise.gd: apply_grid_config/_update_noise_parameters; NoiseVisualizer.gd: _noise_type_for/set_dna/generate_noise_at; SimplexVisualizer.gd setup and sampling.",
+      "evidence": [
+        "Inspect actual runtime noise_type values; assert they differ as labelled.",
+        "Check shared parameters and selected coordinate values, plus per-basis replay.",
+        "Exercise controls in the museum and verify portal/bypass destination independently of source labels."
+      ],
+      "latitude": "Fable can choose twin reliefs, a shared probe or a reversible display. A fair comparison matters more than preserving the current cabinet.",
+      "reuse": "R1 controlled comparison; R6 local state/seed; R7 measurement contract.",
+      "batch": "PILOT",
+      "status": "Logic/route probe passed; actual input and headset pending",
+      "handoff": "RUNTIME_FOLLOWUP.md"
+    },
+    {
+      "map": "Lab_Path",
+      "question": "What would you test next if your explanation were still uncertain?",
+      "body": "A reader choosing a future experiment.",
+      "lead": [
+        "dark_sphere"
+      ],
+      "findings": "Outside the active museum route. It is a 5×5 reflective exit with a dark sphere and a short existing manuscript. The sphere is currently primary/book-anchored, but it does not itself validate understanding or perform a new noise experiment.",
+      "build": [
+        "Keep this a small, legible pause/return space rather than another instrument-filled lesson.",
+        "Offer links or a simple choice of concrete return destinations only through navigation mechanisms the game supports. Test every destination, especially its relation to the main Cellular Automata continuation.",
+        "Decide whether the sphere serves a real book encounter or is supporting atmosphere. If reclassified, update roles/anchors together; do not promote decoration just to fill a primary quota."
+      ],
+      "book": [
+        "Use a brief recollection of one observed difference instead of summarising every room.",
+        "Ask for two possible explanations and the one variable that would distinguish them.",
+        "Keep any short code excerpt tied to a previously visited sampler, with a reference; do not manufacture new functionality here.",
+        "Leave an attachment or unresolved question with the reader. A 150–250 word coda may be enough; use the length the encounter needs."
+      ],
+      "code": "map_data.json utility definitions and actual portal destination logic; dark_sphere.gd only for behaviours the text genuinely invokes.",
+      "evidence": [
+        "Verify each offered navigation action lands in the named room with a usable return/continuation.",
+        "Review book/role treatment after deciding whether the sphere is an encounter.",
+        "Confirm no false completion badge, assessment or saved experiment is claimed."
+      ],
+      "latitude": "A bench, an unanswering presence or a small route diagram could work. Preserve the pause; no need to force another manipulation.",
+      "reuse": "R5 arena boundary; R9 route/book reconciliation.",
+      "batch": "N-EXT"
+    }
+  ],
+  "structure_prerequisite": {
+    "status": "wave platform correction complete; interactions pending",
+    "report": "recovery.html",
+    "maps": 12,
+    "active_halls_runtime_checked": 6
+  },
+  "review": "pilot-review.html",
+  "next_batch": {
+    "id": "W1",
+    "maps": [
+      "WaveFunctions_Pendulum",
+      "WaveFunctions_Sine_Space"
+    ],
+    "handoff": "NEXT_BATCH.md",
+    "working_rhythm": "Improve encounter, discover its consequence, write and align the room, then carry the question forward",
+    "runtime_dependency": "Pilot acceptance remains open; independent W1 source work may proceed. Verify before claiming observed behaviour or reusing new shared code."
+  },
+  "platform_recovery_followup": {
+    "report": "structure-recovery.html",
+    "manifest": "sequence-platform-recovery.json",
+    "sequences": [
+      "randomness",
+      "noise",
+      "cellularautomata"
+    ],
+    "maps_inspected": 31,
+    "maps_corrected": 17,
+    "source_status": "geometry, preservation, and before/after access checks passed",
+    "runtime_status": "pending; separate physical probe prepared",
+    "additional_access_repairs": "two spawn relocations and one exit landing"
+  },
+  "w1_review": {
+    "page": "w1-review.html",
+    "source": "doc/book/handoffs/astra-wcn-w1-review-2026-09-10.md",
+    "status": "Source reviewed and corrected; five serial museum probes and headset checks pending"
+  },
+  "runtime_review": {
+    "page": "runtime-review.html",
+    "handoff": "RUNTIME_FOLLOWUP.md",
+    "source": "doc/book/handoffs/astra-wcn-runtime-review-2026-09-10.md"
+  }
+}

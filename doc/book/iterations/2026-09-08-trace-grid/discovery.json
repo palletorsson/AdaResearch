@@ -1,0 +1,132 @@
+{
+  "checks": [
+    {
+      "check": "draw_dot: distinct 6 mm positions stay distinct in metre table",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: table states frame and units",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: pause adds no position",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: released table remains readable",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: clear hides obsolete data",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: coarse grid still merges qualifying movements",
+      "passed": true
+    },
+    {
+      "check": "draw_dot: configured auto-clear leaves no stale table",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: distinct 6 mm positions stay distinct in metre table",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: table states frame and units",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: pause adds no position",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: released table remains readable",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: clear hides obsolete data",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: coarse grid still merges qualifying movements",
+      "passed": true
+    },
+    {
+      "check": "draw_stick: configured auto-clear leaves no stale table",
+      "passed": true
+    },
+    {
+      "check": "desktop recorder chooses active walker over staging rig",
+      "passed": true
+    },
+    {
+      "check": "fine reference moves while one-metre address holds",
+      "passed": true
+    },
+    {
+      "check": "crossing rounding boundary adds next metre node",
+      "passed": true
+    },
+    {
+      "check": "camera switch selects live XR rig",
+      "passed": true
+    },
+    {
+      "check": "switch clears old coarse and fine paths",
+      "passed": true
+    },
+    {
+      "check": "switch resets old quantization statistics",
+      "passed": true
+    },
+    {
+      "check": "physical headset movement changes sample with fixed origin",
+      "passed": true
+    },
+    {
+      "check": "reference uses rig floor height plus display offset",
+      "passed": true
+    },
+    {
+      "check": "crouching alone does not invent a floor path",
+      "passed": true
+    },
+    {
+      "check": "room-scale crossing reaches next coarse node",
+      "passed": true
+    },
+    {
+      "check": "rig locomotion and physical offset combine",
+      "passed": true
+    },
+    {
+      "check": "late desktop camera replaces cached XR source",
+      "passed": true
+    },
+    {
+      "check": "return to desktop clears old XR path",
+      "passed": true
+    },
+    {
+      "check": "explicit plain body retains its original position contract",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Actual scenes with supplied transforms and camera selection; headset input, room access and reading distance remain unverified.",
+  "source_hashes": {
+    "commons/primitives/point/draw_dot.gd": "db337a7a0e8c03bfd25720bc47d3ec9f8ab719b6ba4222978166bea02b3af69e",
+    "commons/primitives/point/player_trace.gd": "77eb6fd479ed10f26026a6f52e3beece34e4347bf4ae17189e6520ad4c3ce298",
+    "commons/testing/probe_trace_grid_discovery.gd": "0520d78df3d9cc8fbc6d9f0b64bb82eb3ee1d61d0ef96b8ac593a5e39c3d9790",
+    "commons/maps/Point_Trace/map_data.json": "b2faed88c51797ffbb37005c0994c7169187ebe2faa6555c9ee8f0d1f180bda5",
+    "commons/maps/Point_Trace/final.md": "24e9ae3cf0b92ec6528dbcd04842ffe2f7abee04d0255a94431826f066a33455",
+    "commons/maps/Point_Trace/technical.md": "9485c81ce410ce84bc79e4a2a19b3f4dc42dd930546caf1a1149ae2c4cd74723",
+    "commons/maps/Point_Trace/critical.md": "5c83f6b561dfc32f438e15690f460f7ea1bf404731b57a801ba0aa2053eddae3",
+    "commons/maps/Point_Line_Grid/map_data.json": "3cc38535ee06d60ad05b2f79728ee556c9a38c3ebb25cc6bb38170b092cdfe26",
+    "commons/maps/Point_Line_Grid/final.md": "6a3569a0485d350a9fe041138da6226bd483025a870b64198f33a5f10f95ab8a",
+    "commons/maps/Point_Line_Grid/technical.md": "6014f2b4481a2c81885ef1a8631f7cfa2545acbc79bf0e060578973f147d6749",
+    "commons/maps/Point_Line_Grid/critical.md": "0633779dcc1aaa00e9968eb9401f58c0997fd299571d275b61509537fba23020"
+  },
+  "exit_code": 0
+}

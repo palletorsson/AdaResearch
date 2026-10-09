@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>tension_membrane.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eeeae3;color:#302830;font:17px/1.65 system-ui}header,main,footer{max-width:1180px;margin:auto;padding:42px 30px}h1{font:clamp(58px,8vw,100px)/1.02 Georgia;margin:24px 0}h2{font:38px/1.2 Georgia}a{color:#873c59;text-underline-offset:4px}nav{display:flex;gap:25px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:770px}.reading{font:24px/1.65 Georgia;max-width:760px;margin:65px auto}.reading p{margin:0 0 28px}section{padding:32px 0;scroll-margin-top:25px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small{font-size:13px;color:#71636a}details{background:#e4dcd5;padding:22px;margin:25px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a242b;color:#ffe0ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 20px;border:1px solid #9c8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ad5178}.states figure{display:none}.states #rest:checked~.rest,.states #pull:checked~.pull,.states #loaded:checked~.loaded{display:block}.states input:checked+label{background:#853b58;color:white}.note{border-left:3px solid #b66584;padding:5px 23px}code{font-size:.9em}@media(max-width:650px){header,main,footer{padding:28px 17px}.reading{font-size:21px}}</style><main><a href="index.html#making">Back to the study</a><h1>tension_membrane.gd</h1><pre>extends &quot;res://commons/artifacts/reference_studies/build.gd&quot;
+## Original tensile encounter after Nengudi. No player/camera belongs here.
+const Score = preload(&quot;res://commons/artifacts/spine_studies/tension_score.gd&quot;)
+const Handle = preload(&quot;res://commons/artifacts/spine_studies/tension_handle.gd&quot;)
+var score := Score.new()
+var handle: RigidBody3D
+var cloth: MeshInstance3D
+var load_ball: MeshInstance3D
+var caption: Label3D
+var accumulator := 0.0
+var preset_hold := false
+var return_message := &quot;&quot;
+var uv := PackedVector2Array()
+var indices := PackedInt32Array()
+var surface := ArrayMesh.new()
+func _ready() -&gt; void:
+	var chalk := material(Color(&quot;e3e0d8&quot;))
+	var dark := material(Color(&quot;343139&quot;),0.7)
+	for i in score.pins:
+		var p: Vector3 = score.rest[i]
+		box(Vector3(p.x,(p.y-0.03)*0.5,p.z),Vector3(0.06,p.y-0.03,0.06),chalk,true)
+		ball(p,Vector3.ONE*0.075,dark)
+		box(Vector3(p.x,0.02,p.z),Vector3(0.32,0.04,0.32),chalk,true)
+	cloth = MeshInstance3D.new(); cloth.mesh=surface; add_child(cloth)
+	var fabric := ShaderMaterial.new(); fabric.shader=preload(&quot;res://commons/artifacts/spine_studies/tension_fabric.gdshader&quot;)
+	cloth.material_override=fabric
+	for z in Score.NZ:
+		for x in Score.NX:
+			uv.append(Vector2(float(x)/(Score.NX-1),float(z)/(Score.NZ-1)))
+			if x&lt;Score.NX-1 and z&lt;Score.NZ-1:
+				var a:=z*Score.NX+x
+				indices.append_array(PackedInt32Array([a,a+1,a+Score.NX,a+1,a+Score.NX+1,a+Score.NX]))
+	handle=Handle.new(); handle.name=&quot;PullHandle&quot;; add_child(handle)
+	load_ball=ball(Vector3.ZERO,Vector3.ONE*0.12,dark)
+	caption=Label3D.new(); caption.position=Vector3(0,0.40,2.65)
+	caption.font_size=32; caption.pixel_size=0.002; caption.modulate=Color(&quot;363039&quot;); caption.outline_size=0; add_child(caption)
+	plaque(&quot;A LITTLE GIVE&quot;,Vector3(0,3.6,-2.3),Color(&quot;eee9e1&quot;))
+	# Begin settled, so the first hand can reach the fabric.
+	for i in 600: score.step()
+	update_surface()
+
+func _physics_process(delta: float) -&gt; void:
+	score.grip_held=handle.held_by_visitor() or preset_hold
+	if handle.held_by_visitor():
+		preset_hold=false
+		score.grip_target=score.bounded_target(to_local(handle.global_position))
+	elif preset_hold: score.grip_target=Vector3(0,2.1,1.75)
+	accumulator=minf(accumulator+delta,Score.STEP*8)
+	while accumulator&gt;=Score.STEP:
+		score.step(); accumulator-=Score.STEP
+	update_surface()
+
+func update_surface() -&gt; void:
+	var normals:=PackedVector3Array(); normals.resize(score.points.size())
+	for i in range(0,indices.size(),3):
+		var a:=indices[i]; var b:=indices[i+1]; var c:=indices[i+2]
+		var normal:Vector3=(score.points[c]-score.points[a]).cross(score.points[b]-score.points[a])
+		normals[a]+=normal; normals[b]+=normal; normals[c]+=normal
+	for i in normals.size(): normals[i]=normals[i].normalized()
+	var arrays:=[]; arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX]=score.points; arrays[Mesh.ARRAY_NORMAL]=normals
+	arrays[Mesh.ARRAY_TEX_UV]=uv; arrays[Mesh.ARRAY_INDEX]=indices
+	surface.clear_surfaces(); surface.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	if not handle.held_by_visitor(): handle.global_position=to_global(score.points[score.grip_index])
+	load_ball.position=score.load_position()-Vector3(0,0.1,0)
+	load_ball.visible=score.load_kg&gt;0
+	caption.text=&quot;PINK / PULL AND RELEASE\nAdded load %.0f kg · centre %.2f m&quot; % [score.load_kg,score.load_position().y]
+
+func control(index: int) -&gt; void:
+	return_message=&quot;&quot;
+	if index in [0,1,4] and handle.held_by_visitor():
+		return_message=&quot;Release the pink handle first.&quot;; return
+	match index:
+		0: preset_hold=true
+		1: preset_hold=false
+		2: score.load_kg=Score.LOAD_KG[(Score.LOAD_KG.find(score.load_kg)+1)%Score.LOAD_KG.size()]
+		3: score.compliance=0.0045 if score.compliance&lt;0.004 else 0.0015
+		4:
+			preset_hold=false; score.reset(); score.compliance=0.0015; accumulator=0.0
+			for i in 600: score.step()
+	update_surface()
+</pre></main></html>

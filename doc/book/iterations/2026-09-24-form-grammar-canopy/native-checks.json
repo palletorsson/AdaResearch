@@ -1,0 +1,635 @@
+{
+  "canopy": [
+    {
+      "generated_faces": 1,
+      "id": "seed_face",
+      "parameters": {
+
+      },
+      "position": [
+        -4.30000019073486,
+        0.0,
+        3.59999990463257
+      ],
+      "rendered_triangles": 1,
+      "scale": 1.0,
+      "seed_faces": 1,
+      "surface_origin_height": 0.9
+    },
+    {
+      "generated_faces": 193,
+      "id": "petals",
+      "parameters": {
+        "count": 6,
+        "curl": 0.38,
+        "length": 1.25,
+        "segments": 16,
+        "tilt": 0.45,
+        "twist": 0.0,
+        "width": 0.52
+      },
+      "position": [
+        4.30000019073486,
+        0.0,
+        3.59999990463257
+      ],
+      "rendered_triangles": 187,
+      "scale": 1.0,
+      "seed_faces": 1,
+      "surface_origin_height": 0.9
+    },
+    {
+      "generated_faces": 193,
+      "id": "canopy",
+      "parameters": {
+        "count": 6,
+        "curl": 0.38,
+        "length": 1.25,
+        "segments": 16,
+        "tilt": 0.45,
+        "twist": 0.0,
+        "width": 0.52
+      },
+      "position": [
+        0.0,
+        0.0,
+        -4.0
+      ],
+      "rendered_triangles": 187,
+      "scale": 4.0,
+      "seed_faces": 1,
+      "surface_origin_height": 3.6
+    }
+  ],
+  "checks": [
+    {
+      "check": "six independent specimens",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed triangle count",
+      "detail": 12,
+      "pass": true
+    },
+    {
+      "check": "seed retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "seed finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "seed surface ray reaches specimen",
+      "detail": "(-4.975, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "inset triangle count",
+      "detail": 24,
+      "pass": true
+    },
+    {
+      "check": "inset retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "inset finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "inset mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "inset surface ray reaches specimen",
+      "detail": "(0.025, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "lift triangle count",
+      "detail": 36,
+      "pass": true
+    },
+    {
+      "check": "lift retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "lift finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "lift mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "lift surface ray reaches specimen",
+      "detail": "(5.025, 0.56, 3.2325)",
+      "pass": true
+    },
+    {
+      "check": "repeat triangle count",
+      "detail": 84,
+      "pass": true
+    },
+    {
+      "check": "repeat retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "repeat finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "repeat mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "repeat surface ray reaches specimen",
+      "detail": "(-4.975, 0.56, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "wider triangle count",
+      "detail": 84,
+      "pass": true
+    },
+    {
+      "check": "wider retained tips",
+      "detail": 2,
+      "pass": true
+    },
+    {
+      "check": "wider finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "wider mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "wider surface ray reaches specimen",
+      "detail": "(0.025, 0.56, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "all triangle count",
+      "detail": 444,
+      "pass": true
+    },
+    {
+      "check": "all retained tips",
+      "detail": 12,
+      "pass": true
+    },
+    {
+      "check": "all finite rendered geometry",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "all mesh collision",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "all surface ray reaches specimen",
+      "detail": "(5.025, 1.76, -3.1675)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-5.0, 0.0, 6.0)",
+      "detail": "(-4.916298, 0.000837, 6.050221)",
+      "pass": true
+    },
+    {
+      "check": "walk to (5.0, 0.0, 6.0)",
+      "detail": "(4.883569, 0.000836, 6.00059)",
+      "pass": true
+    },
+    {
+      "check": "walk to (8.0, 0.0, 6.0)",
+      "detail": "(7.883566, 0.000837, 6.000023)",
+      "pass": true
+    },
+    {
+      "check": "walk to (8.0, 0.0, 0.0)",
+      "detail": "(7.998684, 0.000834, 0.067802)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-8.0, 0.0, 0.0)",
+      "detail": "(-7.934491, 0.00083, 0.000278)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-8.0, 0.0, -7.0)",
+      "detail": "(-7.999371, 0.000829, -6.93275)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, -7.0)",
+      "detail": "(2.400368, 0.000832, -6.999362)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, 0.0)",
+      "detail": "(2.49905, 0.000834, -0.066723)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.5, 0.0, -9.0)",
+      "detail": "(2.499993, 0.000831, -8.933373)",
+      "pass": true
+    },
+    {
+      "check": "walk to (0.0, 0.0, -10.0)",
+      "detail": "(0.108553, 0.000781, -9.953687)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-7.0, 0.0, -12.0)",
+      "detail": "(-6.938615, 0.000828, -11.98233)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-7.0, 0.0, -20.0)",
+      "detail": "(-6.999352, 0.000834, -19.91544)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-2.0, 0.0, -20.0)",
+      "detail": "(-2.066729, 0.000834, -19.99887)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-2.0, 0.0, -24.0)",
+      "detail": "(-2.00114, 0.000835, -23.93167)",
+      "pass": true
+    },
+    {
+      "check": "walk to (-2.0, 0.0, -26.0)",
+      "detail": "(-2.000037, 0.000836, -25.9317)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.0, 0.0, -26.0)",
+      "detail": "(1.932724, 0.000837, -25.99885)",
+      "pass": true
+    },
+    {
+      "check": "walk to (2.0, 0.0, -24.0)",
+      "detail": "(1.997758, 0.000837, -24.0666)",
+      "pass": true
+    },
+    {
+      "check": "walk to (7.0, 0.0, -24.0)",
+      "detail": "(6.930642, 0.000825, -24.00093)",
+      "pass": true
+    },
+    {
+      "check": "walk to (7.0, 0.0, -29.0)",
+      "detail": "(6.999081, 0.000838, -28.93379)",
+      "pass": true
+    },
+    {
+      "check": "walk to (0.0, 0.0, -30.0)",
+      "detail": "(0.078905, 0.000837, -29.98798)",
+      "pass": true
+    },
+    {
+      "check": "plinth stops walking body",
+      "detail": "(-5.0, 0.000085, 4.800941)",
+      "pass": true
+    },
+    {
+      "check": "small and canopy use identical local vertices",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "same local bounding box",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "canopy is uniformly four times",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "same six-petal parameter set",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "surface begins above head",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "petal surface finite",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "added geometry beyond seed",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "open strip collides from both sides",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "canopy support stops body",
+      "detail": "(0.0, 0.000074, -25.53387)",
+      "pass": true
+    },
+    {
+      "check": "capture canopy",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture beneath",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture face-and-petals",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture small",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "capture hall",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "shots": [
+    {
+      "camera": "(8.0, 3.6, -15.0)",
+      "name": "canopy",
+      "saved": true,
+      "target": "(0.0, 3.5, -24.0)"
+    },
+    {
+      "camera": "(-2.6, 1.7, -27.6)",
+      "name": "beneath",
+      "saved": true,
+      "target": "(0.0, 4.8, -24.0)"
+    },
+    {
+      "camera": "(0.0, 3.8, -7.2)",
+      "name": "face-and-petals",
+      "saved": true,
+      "target": "(0.0, 0.9, -16.4)"
+    },
+    {
+      "camera": "(5.6, 2.5, -13.8)",
+      "name": "small",
+      "saved": true,
+      "target": "(4.3, 1.25, -16.4)"
+    },
+    {
+      "camera": "(8.4, 5.8, 9.0)",
+      "name": "hall",
+      "saved": true,
+      "target": "(0.0, 2.5, -12.0)"
+    }
+  ],
+  "specimens": [
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces": 12,
+      "growing": 2,
+      "id": "seed",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "12 triangles / two on top",
+        "id": "seed",
+        "rounds": 0,
+        "selection": "up",
+        "title": "01 / THE CUBE"
+      },
+      "station": [
+        -5.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 8
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "faces": 24,
+      "growing": 2,
+      "id": "inset",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Each top triangle draws inward",
+        "id": "inset",
+        "inset_only": true,
+        "rounds": 0,
+        "selection": "up",
+        "title": "02 / INSET"
+      },
+      "station": [
+        0.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 14
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        1.39999997615814,
+        1.0
+      ],
+      "faces": 36,
+      "growing": 2,
+      "id": "lift",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "The two inner faces rise 0.4 m",
+        "id": "lift",
+        "rounds": 1,
+        "selection": "up",
+        "title": "03 / EXTRUDE"
+      },
+      "station": [
+        5.0,
+        0.0,
+        3.20000004768372
+      ],
+      "vertices": 20
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        2.19999980926514,
+        1.0
+      ],
+      "faces": 84,
+      "growing": 2,
+      "id": "repeat",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Three rounds / inset 28%",
+        "id": "repeat",
+        "rounds": 3,
+        "selection": "up",
+        "title": "04 / REPEAT"
+      },
+      "station": [
+        -5.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 44
+    },
+    {
+      "bounds_position": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "bounds_size": [
+        1.0,
+        2.19999980926514,
+        1.0
+      ],
+      "faces": 84,
+      "growing": 2,
+      "id": "wider",
+      "plinth_size": [
+        2.6,
+        0.55,
+        2.6
+      ],
+      "recipe": {
+        "amount": 0.08,
+        "caption": "Three rounds / inset 8%",
+        "id": "wider",
+        "rounds": 3,
+        "selection": "up",
+        "title": "05 / VARY THE AMOUNT"
+      },
+      "station": [
+        0.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 44
+    },
+    {
+      "bounds_position": [
+        -1.69999992847443,
+        -1.69999992847443,
+        -1.69999992847443
+      ],
+      "bounds_size": [
+        3.39999985694885,
+        3.40000009536743,
+        3.40000009536743
+      ],
+      "faces": 444,
+      "growing": 12,
+      "id": "all",
+      "plinth_size": [
+        3.64999985694885,
+        0.55,
+        3.65000009536743
+      ],
+      "recipe": {
+        "amount": 0.28,
+        "caption": "Three rounds / all twelve seed faces",
+        "id": "all",
+        "rounds": 3,
+        "selection": "all",
+        "title": "06 / CHANGE THE SELECTION"
+      },
+      "station": [
+        5.0,
+        0.0,
+        -3.20000004768372
+      ],
+      "vertices": 224
+    }
+  ]
+}

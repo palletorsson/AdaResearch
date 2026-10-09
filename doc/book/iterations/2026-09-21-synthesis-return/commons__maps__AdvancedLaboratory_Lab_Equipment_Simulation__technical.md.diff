@@ -1,0 +1,11 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
++++ current/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md
+@@ -34,7 +34,7 @@
+ 
+ Joint centres are bounded to local X/Z ±1.9 metres and Y 0.12–2.35 metres. A thin square floor inlay marks the horizontal bounds. There is no anatomical validation. The bounds concern joint centres; the visible sphere can extend beyond them. Joints have pickup collision on layer 3, while connections are visual. Neither body is a wearable avatar or a load-bearing chair.
+ 
+-The pose lasts for the loaded hall visit. `export_pose()` supplies named coordinates for probes and future research logging; it does not automatically save to disk. `reset_pose()` is an authoring/probe API and refuses to reset during a held edit; no reset panel is added.
++A changed release now keeps one latest pose through [AssemblyPoseRecord.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd), normally at `user://ada_research/assembly_pose.json`. Starting and released positions, joint identities, radii, connections and the source hash travel together. Another held joint is saved at its previous released position. Re-entering this workshop restores a valid matching pose and continues its edit count. The final hall reconstructs both versions at standing scale. Failed disk writes retain an explicitly labelled session-only record. `export_pose()` reports released coordinates; it is not a hand trajectory. `reset_pose()` remains an authoring/probe API, refuses to reset during a held edit and does not save automatically; no reset panel is added. See the [persistence and final-hall checks](../../../doc/book/iterations/2026-09-21-synthesis-return/SUMMARY.md).
+ 
+ ## Limits and next test
+ 

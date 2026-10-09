@@ -1,0 +1,233 @@
+{
+  "artifact_only": false,
+  "checks": [
+    {
+      "message": "before snapshot compiles: commons/artifacts/flow_field_painter/flow_field_painter.gd",
+      "ok": true
+    },
+    {
+      "message": "actual museum contains Flow_Field segment",
+      "ok": true
+    },
+    {
+      "message": "ordinary authored museum transplant, without simulation-grid substitution",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: flow_field_painter",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: vector_field_visualizer",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: vector_field_grid",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: particle_flow_swarm",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: noc_5_04_flow_field",
+      "ok": true
+    },
+    {
+      "message": "authored primary/secondary remains placed once: grand_zoetrope",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: flow_field_painter",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: vector_field_visualizer",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: vector_field_grid",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: particle_flow_swarm",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: noc_5_04_flow_field",
+      "ok": true
+    },
+    {
+      "message": "runtime placement matches authored token: grand_zoetrope",
+      "ok": true
+    },
+    {
+      "message": "painter remains visible from standing approach",
+      "ok": true
+    },
+    {
+      "message": "shared-field lesson loads",
+      "ok": true
+    },
+    {
+      "message": "authored lesson retains eighty particles",
+      "ok": true
+    },
+    {
+      "message": "field initially held and arrows hidden",
+      "ok": true
+    },
+    {
+      "message": "initial display matches snapshotted or repaired reveal timing",
+      "ok": true
+    },
+    {
+      "message": "canvas and trails share XZ plane",
+      "ok": true
+    },
+    {
+      "message": "noise-to-angle returns a unit direction",
+      "ok": true
+    },
+    {
+      "message": "particle displacement follows direction times speed times delta",
+      "ok": true
+    },
+    {
+      "message": "held field clock stays fixed during particle movement",
+      "ok": true
+    },
+    {
+      "message": "ARROWS pointer event reveals arrow mesh",
+      "ok": true
+    },
+    {
+      "message": "24 glyphs each have shaft and two arrowhead strokes",
+      "ok": true
+    },
+    {
+      "message": "all drawn arrow directions agree with particle sampler at their own addresses",
+      "ok": true
+    },
+    {
+      "message": "revealed display reports correct state",
+      "ok": true
+    },
+    {
+      "message": "FIELD TIME pointer event advances field clock",
+      "ok": true
+    },
+    {
+      "message": "FIELD TIME pointer event holds current time without rewinding",
+      "ok": true
+    },
+    {
+      "message": "RESET pointer event clears every trail",
+      "ok": true
+    },
+    {
+      "message": "RESET scatters particle positions",
+      "ok": true
+    },
+    {
+      "message": "RESET retains noise seed and current field time",
+      "ok": true
+    },
+    {
+      "message": "SEED pointer event changes noise seed without rewinding field time",
+      "ok": true
+    },
+    {
+      "message": "SEED also clears trails",
+      "ok": true
+    },
+    {
+      "message": "SPEED slider signal reaches prescribed speed",
+      "ok": true
+    },
+    {
+      "message": "SCALE slider changes lesson noise frequency once",
+      "ok": true
+    },
+    {
+      "message": "opposite wrapped addresses need not share a direction",
+      "ok": true
+    },
+    {
+      "message": "probe finds outward-pointing sample near boundary",
+      "ok": true
+    },
+    {
+      "message": "coordinate return retains cross-canvas adjacent trail samples",
+      "ok": true
+    },
+    {
+      "message": "production renderer preserves the long seam stroke",
+      "ok": true
+    },
+    {
+      "message": "capture saved: standing-hidden",
+      "ok": true
+    },
+    {
+      "message": "capture saved: standing-shown",
+      "ok": true
+    },
+    {
+      "message": "capture saved: near-arrows-trails",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "learner_verified": false,
+  "observations": {
+    "capture_state": {
+      "delta": 0.0166666666666667,
+      "field_seed": 43,
+      "noise_scale": 3.0,
+      "particles": 80,
+      "random_seed": 43019,
+      "speed": 0.1,
+      "steps": 120,
+      "time": 0,
+      "trail_length": 50
+    },
+    "initial_status": "FIELD HELD / 80 PARTICLES\nARROWS = PARTICLE SAMPLER",
+    "opposite_edge_direction_distance": 1.92860949039459,
+    "painter_world_position": [
+      5.5,
+      1.04999995231628,
+      5.5
+    ],
+    "painter_world_scale": [
+      2.5,
+      2.5,
+      2.5
+    ],
+    "placed_artifacts": {
+      "ceiling_vent": 1,
+      "counter": 1,
+      "dream_bodies": 1,
+      "electrical_panel": 1,
+      "elevator": 1,
+      "exit_sign": 2,
+      "extinguisher": 1,
+      "flow_field_painter": 1,
+      "grand_zoetrope": 1,
+      "info_screen": 1,
+      "noc_5_04_flow_field": 1,
+      "pallet": 1,
+      "particle_flow_swarm": 1,
+      "point_zero": 1,
+      "station_plinth": 1,
+      "vector_field_grid": 1,
+      "vector_field_visualizer": 1,
+      "view": 1,
+      "wall_clock": 1,
+      "window": 1
+    },
+    "wrap_jump_local_metres": 0.598942697048187
+  },
+  "replay_before": true
+}

@@ -1,0 +1,21 @@
+--- before/commons/maps/Tutorial_Disco/final.md
++++ commons/maps/Tutorial_Disco/final.md
+@@ -1,6 +1,6 @@
+ How can an arrangement that sits still make a rhythm?
+ 
+-You have seen slots hold values and a motif repeat across floors and walls. Here the floor is black and white again, but its arrangement moves. Begin by stopping one of its clocks.
++You have seen slots hold values and a motif repeat across floors and walls. Here the floor is black and white again. Stand still and let the pattern move beneath you. Then stop one of its clocks.
+ 
+ <!-- @disco_controls -->
+ 
+@@ -13,6 +13,10 @@
+ ```
+ 
+ Two spatial indices and a changing phase enter the same remainder operation. The tiles have not moved; the values displayed at their addresses have changed. Stand on one tile and watch what arrives there. Then cross the floor and let your movement meet its movement.
++
++![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-review/doc/book/iterations/2026-09-23-disco-separate-clocks/fixed-addresses-changing-values.png)
++
++*One step apart. Every tile keeps its place; black and white exchange addresses. Another step brings this checker back.*
+ 
+ The console controls this visual clock. Beside it, the sequencer has another. Begin with one cell and listen for the time it becomes audible.
+ 

@@ -1,0 +1,12 @@
+--- before/commons/maps/Point_Line_Grid/technical.md
++++ commons/maps/Point_Line_Grid/technical.md
+@@ -113,3 +113,9 @@
+ The 6 mm movement gate still samples actual tip movement before shaping. Consecutive identical shaped positions are omitted. A held hand without movement does not add positions; changing height can add positions while the horizontal address stays fixed. Segments connect accepted samples, so a diagonal jump need not follow cell edges. Pens have marker nibs without colliders or pickup/drop signals and do not publish their records to TraceData. Entry clears the previous visit's traces. On exit, pens detach from the controllers and the traces remain for the configured six seconds before clearing.
+ 
+ Other placements retain the default `space_time` pair. This chapter's configuration postpones that comparison without removing its implementation. See [the finishing-pass evidence](../../../doc/book/iterations/2026-09-21-primitives-finish/SUMMARY.md) for controlled runtime scope; headset use remains untested.
++
++## Recording and platform scope — review clarification, 24 September 2026
++
++The snapping sphere's table displays the latest ten retained positions while the count can be larger. Both table columns describe retained positions, one in metres and one in lattice indices.
++
++The walking recorder takes X/Z from the headset and height from the rig's origin; its desktop fallback follows the walking body. The book follows the headset visit. The plan's controller-mounted pen pair requires active tracked controllers; on desktop the numbered plan remains available to walk across, without those pens.

@@ -1,0 +1,133 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Three independent native mesh specimens and their actual edges"
+		},
+		{
+			"passed": true,
+			"test": "Eight playback and parameter controls"
+		},
+		{
+			"passed": true,
+			"test": "Segments plus changes one count and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Rings plus changes only the along count"
+		},
+		{
+			"passed": true,
+			"test": "Both counts can return independently"
+		},
+		{
+			"passed": true,
+			"test": "Legal minima with explicit sphere exception"
+		},
+		{
+			"passed": true,
+			"test": "Manual upper range bounded"
+		},
+		{
+			"passed": true,
+			"test": "Surface toggle hides only edges, preserving geometry"
+		},
+		{
+			"passed": true,
+			"test": "Replay restarts the sweep"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one film setting"
+		},
+		{
+			"passed": true,
+			"test": "Ring sweep holds 12 segments"
+		},
+		{
+			"passed": true,
+			"test": "Pair sweep starts with the coarse combination"
+		},
+		{
+			"passed": true,
+			"test": "Looking at the screen starts the film"
+		},
+		{
+			"passed": true,
+			"test": "Film advances while viewed"
+		},
+		{
+			"passed": true,
+			"test": "Looking away freezes the film"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause survives returning gaze"
+		},
+		{
+			"passed": true,
+			"test": "Manual play turns the chosen combination without replacing it"
+		},
+		{
+			"passed": true,
+			"test": "Actual Primitive Ignorance museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Registered resolution monitor appears in the actual hall"
+		},
+		{
+			"passed": true,
+			"test": "Unobstructed viewing position inside the museum"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (-1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (-1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: pause"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: replay"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: step"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: route"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: segments_minus"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: segments_plus"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: rings_minus"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: rings_plus"
+		}
+	],
+	"passed": true
+}

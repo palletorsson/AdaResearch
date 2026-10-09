@@ -1,0 +1,324 @@
+{
+  "date": "2026-09-20",
+  "method": "Source signature audit, not a runtime usability verdict",
+  "scan_roots": [
+    "commons/artifacts",
+    "commons/ui",
+    "algorithms"
+  ],
+  "script_matches": 1022,
+  "counts": {
+    "console": {
+      "todo": 44,
+      "done": 9
+    },
+    "machine": {
+      "todo": 85,
+      "done": 11
+    },
+    "readout": {
+      "todo": 615,
+      "done": 5,
+      "converged": 1
+    },
+    "workbench": {
+      "todo": 42,
+      "converged": 9,
+      "done": 13
+    },
+    "rack": {
+      "converged": 179,
+      "done": 9
+    }
+  },
+  "demo_registry": {
+    "category": "unknown",
+    "complexity": "beginner",
+    "description": "Inspection rig laying out one of every VR control type in a single row \u2014 buttons, knobs, sliders (smooth/horizontal/snap/zero), lever, and wheel \u2014 each labelled for testing and review.",
+    "dev_themes": [
+      "commons",
+      "mixed"
+    ],
+    "footprint": [
+      1,
+      1,
+      1
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "interactable_demo",
+    "map_ready": true,
+    "map_sequences": [
+      "proceduralgeneration_all",
+      "wavefunctions"
+    ],
+    "name": "interactable_demo",
+    "parameters": {
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact"
+    },
+    "scene": "res://commons/interactables/interactable_demo.tscn",
+    "size_group": "compact",
+    "tags": [
+      "commons"
+    ],
+    "spatial_needs": {
+      "platform": "table",
+      "footprint_cells": 6,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "entry",
+      "measured_footprint_cells": 6,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        5.3,
+        1.81,
+        0.22
+      ],
+      "aabb_center": [
+        0.0,
+        0.43,
+        0.09
+      ],
+      "grid_cells": [
+        6.0,
+        1.0
+      ],
+      "max_dimension_m": 5.3,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "spatial_profile": {
+      "dir_group": "panel",
+      "range": 18,
+      "density": "high",
+      "min_clearance": 1,
+      "stack_priority": 0.85,
+      "approach_dir": "front",
+      "derived_at": "2026-04-29T09:39:46.083526Z",
+      "derived_from": "aabb_size + category"
+    },
+    "qfep_connection": "One of every VR control laid out in a row \u2014 buttons, knobs, sliders, dials \u2014 the inspection rig for how a hand touches this world. Not a wave but the *interface* to waves: the chapter's honest admission that oscillation is only teachable if you can grab a parameter and turn it, and here is every way this project lets you turn one."
+  },
+  "placements": [
+    {
+      "map": "Corridor_WaveFunctions_Effect_Sound",
+      "layer": "interactables",
+      "x": 19,
+      "z": 42,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "Curation_Bay_proceduralgeneration_all_4",
+      "layer": "interactables",
+      "x": 19,
+      "z": 7,
+      "token": "curation_station#artifacts:portal,interactable_demo,voronoi_space#with_wall:true#with_pillars:true#with_barrier:true",
+      "in_current_spine_sequence": false,
+      "direct_token": false
+    },
+    {
+      "map": "Curation_Bay_wavefunctions_4",
+      "layer": "interactables",
+      "x": 19,
+      "z": 7,
+      "token": "curation_station#artifacts:mario_cube_time_trace,AudioContr,interactable_demo#with_wall:true#with_pillars:true#with_barrier:true",
+      "in_current_spine_sequence": false,
+      "direct_token": false
+    },
+    {
+      "map": "ProceduralGeneration_Dome",
+      "layer": "interactables",
+      "x": 5,
+      "z": 6,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "Ribbon_Wavefunctions_01",
+      "layer": "interactables",
+      "x": 8,
+      "z": 4,
+      "token": "interactable_demo:90",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound_p1",
+      "layer": "interactables",
+      "x": 10,
+      "z": 10,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound_p2",
+      "layer": "interactables",
+      "x": 10,
+      "z": 10,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound_p3",
+      "layer": "interactables",
+      "x": 10,
+      "z": 10,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound_Test",
+      "layer": "interactables",
+      "x": 6,
+      "z": 4,
+      "token": "interactable_demo",
+      "in_current_spine_sequence": false,
+      "direct_token": true
+    }
+  ],
+  "routes": [
+    {
+      "url": "http://localhost:3003/interactable-demo",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    },
+    {
+      "url": "http://localhost:3003/interactable-layouts-gallery",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    },
+    {
+      "url": "http://localhost:3003/interface-presets-gallery",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    },
+    {
+      "url": "http://localhost:3003/interface-skins-gallery",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    },
+    {
+      "url": "http://localhost:3003/interface-overhaul",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    },
+    {
+      "url": "http://localhost:3003/interface-composer",
+      "status": 200,
+      "check": "HTTP only; browser interaction not tested"
+    }
+  ],
+  "demo_json_variants": 21,
+  "sources": [
+    {
+      "path": "commons/interactables/InteractableDemo.gd",
+      "sha256": "4568adfbc2f8f290872fa017910f9f26b10463270643ba0043c28d630a24e159",
+      "bytes": 58203
+    },
+    {
+      "path": "commons/interactables/interactable_demo.tscn",
+      "sha256": "e3ba8291587a821afb15b6348329cce33cd8b7a7b46f957e355aff892b4ef4f0",
+      "bytes": 424
+    },
+    {
+      "path": "commons/ui/control_panel.gd",
+      "sha256": "488dd1255dd3b6da3c4e522b798f87f54bb0f38ef923c879fd83cf72f7f7552d",
+      "bytes": 20844
+    },
+    {
+      "path": "commons/ui/control_console.gd",
+      "sha256": "6e615270ac109f7ddd894d5788039b483b697bb3bac401761ffef34184c27ae5",
+      "bytes": 32328
+    },
+    {
+      "path": "commons/ui/interface_presets.gd",
+      "sha256": "9f80d7340126754147d56d04d8678bf8c74ca48f6fb21734368b10c73433bbc6",
+      "bytes": 8625
+    },
+    {
+      "path": "commons/ui/interface_housing.gd",
+      "sha256": "88f0ea366c622b1fd342612e9ee87c681a48d86fa555c5534fdf70240ae9d175",
+      "bytes": 14634
+    },
+    {
+      "path": "commons/audio/rack_templates/RackTemplates.gd",
+      "sha256": "56e9e4839c87597226e53fdebac9a634fca656b96bb98d3ab686cab0050c6ed7",
+      "bytes": 64392
+    },
+    {
+      "path": "algorithms/forces/forces_rack_panel.gd",
+      "sha256": "c2abe6d87abf89c6ed7e0db7c33305ea369d2fbbf9305599d7e28b0d614e3b34",
+      "bytes": 5976
+    },
+    {
+      "path": "tools/ui_audit.py",
+      "sha256": "949b2bcf305698fa02a7f34b9a87e84b8f09407d75b221550f565577a9e8eb5f",
+      "bytes": 8385
+    },
+    {
+      "path": "tools/check_interaction.py",
+      "sha256": "43bc12d2962cb3d32ea426516084702ca3ceb6d9102418e3f9b68981908cd225",
+      "bytes": 7635
+    },
+    {
+      "path": "tools/artifact_controls.py",
+      "sha256": "66b83f70d3ec03b3ada4e8bc78e40f04e2a55d5b780269d8b94902a7052eeff6",
+      "bytes": 13601
+    },
+    {
+      "path": "commons/testing/capture_interactable_demo_config.gd",
+      "sha256": "a69afda44fb1a29fff772adb054f27faf90547823afe4b875c59b030be95e546",
+      "bytes": 5069
+    },
+    {
+      "path": "commons/testing/capture_interface_presets.gd",
+      "sha256": "eecf5425ed1454bfe73c83c9ca2e3a73cca09121da587307c923e0602bf1ab9f",
+      "bytes": 13263
+    },
+    {
+      "path": "commons/testing/wcn_desktop_driver.gd",
+      "sha256": "a637a0e5d0e6d4a6a604ab2844f5d8f90330e8e3dc8f2177d981c5e5318424f6",
+      "bytes": 17383
+    },
+    {
+      "path": "commons/testing/test_control_panel.gd",
+      "sha256": "e8bd6b0658f441f30841fb6372a1a4b843ff3494740fcf73bd522cba69801795",
+      "bytes": 2022
+    },
+    {
+      "path": "commons/testing/test_console_allcontrols.gd",
+      "sha256": "c647629420263d8e673627c47836cb4ac5bdf1d855742b6c63826c626c2fa8cd",
+      "bytes": 2742
+    },
+    {
+      "path": "doc/INTERFACE_OVERHAUL.md",
+      "sha256": "82fdfd309e1b56537502b8b03d2258d19ffc9c8cb4f9fc1cfbc7f92c2b0da4af",
+      "bytes": 4584
+    },
+    {
+      "path": "doc/startpacks/interaction-controls.md",
+      "sha256": "a8fd33179a0bdd4c1c02305bb17a5402703227dbb69f1749465a557b8b1b1db0",
+      "bytes": 5698
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Color — local decisions, 19 September 2026
+
+The [received review](01-review.md) remains intact. These decisions use the live source, museum placements and focused runtime checks beyond its frozen ZIP. Follow [the author's review principles](../../../REVIEW_PRINCIPLES.md): repair the encounter before weakening a useful passage, and match intervention to the maturity of each hall.
+
+All nine final chapters are preserved. No primary-artifact quota, sequence reorder or general prose compression is applied. See the [local report and verification](../../../iterations/2026-09-19-color-review/SUMMARY.md) and [paired comparisons](../../../iterations/2026-09-19-review-comparison/index.html#color).
+
+| Passage / purpose | Finding and missing layer | Decision |
+|---|---|---|
+| Context: “Colour has been here all along.” Familiar forms receive colour; 23 increasingly rich columns accumulate earlier capabilities. | The review's concern about early explanation is an editorial hypothesis. The current material supports the user's intended scientific and associative opening. | Preserve the writing and substantial encounter; do not force this mature hall into a one-object model. |
+| Flashlight: transfer illumination onto “the floor or the cube standing to its side.” | The standing version constructs the lamps and receiving board but no side cube. This is an absent comparison object. | Add the modest matte receiving cube to this configuration; keep the invitation and light controls. |
+| Nails: the RGB box stands “on its own plinth beside the manicure table”; giant and petite hands answer together. | The omitted salon source already wires both hands. Actual staging leaves the controllers behind the rotated salon and the intended plinths empty. | Restore the controls to their labelled plinths. Check signal propagation and approach geometry. Preserve the passage rather than delete the promised response. |
+| Rainbow: an authored celebration has a construction, without becoming a physically continuous spectrum. | Chapter and implementation agree on an authored arrangement. Old source comments overstate what 48 HSV strips establish. | Correct comments only. Keep the welcome, bodily crossing and book text. |
+| Pillar: “Look between the columns. The smooth field continues where no pillar stands.” | The formula, UV orientation and 35 samples exist, but the field sits below the museum floor. Teacher-facing notes still describe the old segmented tower and a misleading flashlight model. | Restore the field's visible floor placement. Replace stale tutorial/intent descriptions with the current field, sample and named-collection progression. Preserve `final.md`. |
+| Grid Pallet: choose an address, write, leave, return, then overwrite with a rule. | The source and focused runtime encounter support the chapter. No consequential missing layer is established. | Preserve. A review need not produce a change in every hall. |
+| Paint: gestures enter a shared image through different update mechanisms. | The wet shader missing from the bounded ZIP exists locally. Its omission is an evidence gap. | Preserve; verify actual feedback and controls. Do not present frame feedback as elapsed-time physics or imply that every aspect has been tested by a learner. |
+| Walls: enter the office, compare looking with entering, then compare colour representations. | The two compact colour models precede the office in the map, reversing the manuscript's intended order of discovery. Some HSL comments describe an actual HSV implementation. | Move the model exhibits beyond the office, protect their approach space, and correct source comments. Retain all artifacts and chapter text. |
+| Chamber: “Now it arrives as a message, and the receiver decides what to do with it.” | Local projectile and target implementations supply evidence absent from the ZIP. The manuscript explicitly distinguishes visual deformation from retained collision. | Preserve that distinction and the close. Verify impact/reset behavior; do not claim collision has become the visual gaps. |
+
+## How to read the evidence
+
+The local report links snapshots, actual Godot captures and runtime reports. Before/after images compare production changes from matched cameras. Alternate-state images, when used, show an experiment within the same version and are labelled as such. Source inspection alone is not a headset test.
+
+Neither a source bundle omission nor a failed assertion in an outdated probe establishes that a promised encounter is absent. For example, the old salon path probe sweeps along global -Z despite the salon's 180-degree rotation. The corrected audit must use the salon's coordinate system and retain the failed run as evidence of the diagnostic process.
+
+Keep pending headset reach, comfort, illumination and learner-discovery questions separate from the verified repairs. The next Tiling pass should examine the return to Disco as new pattern-and-palette control and the subsequent extension onto the architecture.

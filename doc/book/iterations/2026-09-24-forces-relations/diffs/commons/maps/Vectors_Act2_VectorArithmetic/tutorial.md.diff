@@ -1,0 +1,16 @@
+--- before/commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md
++++ commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md
+@@ -8,6 +8,12 @@
+ 
+ Test sequence: swap; common translation; coincidence; perpendicular slide; rail turn; sign reversal. Predict first, reveal second. Keep the input fixed while changing the receiver, then change the input in a direction the receiver cannot record. The closed loop is kept+remainder=gap. Zero gaps remain finite; the rail is never a zero direction.
+ 
+-Existing dot and torque consoles are distinct examples, not subscribers to this pair. Dot uses an alignment slider and a chosen threshold; torque uses normalized directions and a displayed wheel angle. Its rpm is generated, not observed. The final chapter now identifies those limits instead of claiming free aiming, continuous physical wheel motion or a newly simulated force.
++Existing dot and torque consoles are distinct examples, not subscribers to this pair. Dot uses an alignment slider and a chosen threshold; torque uses normalized directions and a displayed wheel angle. Its readout reports sin(theta), the chosen angle and a static wheel pose. The unit-direction cross product sets that pose; it does not integrate angular velocity or report rpm. The final chapter now identifies those limits instead of claiming free aiming, continuous physical wheel motion or a newly simulated force.
+ 
+ Next on the unchanged route: VFM_05_Launch. Motion-before-Launch remains an editorial proposal.
++
++The remaining dot console uses normalized directions and FRIEND at dot >= 0.985. Its ordinary slider spans a limited range; the full signed range of a dot product is mathematical context, not a claim that this control reaches every angle. The crank computes r_dir.cross(f_dir) from unit directions. Actual torque would include arm length and force magnitude; the displayed angular factor alone is not physical torque. Projection recombination and perpendicularity hold to ordinary floating-point precision.
++
++## Reading and retained detail
++
++The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act2_VectorArithmetic/final.md) is retained for comparison.

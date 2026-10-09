@@ -1,0 +1,37 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -2,16 +2,18 @@
+ 
+ ## Learning elements
+ 
+-- Extending PointBody
+-- A mesh resource and its parameters
+-- Held and released states
+-- Elapsed-time steps and lower bounds
++- Resolution as a construction parameter
++- Rings and radial segments
++- Visible construction and collision
++- Independent mesh resources
+ 
+ ## In the museum
+ 
+ Return to the small white sphere you could pick up in Coordinates and use to draw in Trace. In this hall, holding it changes its visible construction. Rings and radial segments decrease in small timed steps. Release it and the change pauses. Its size and physical boundary remain the same.
+ 
+-The museum's primitive library shows other engine shapes. Our tutorial stays with one familiar body, gaining a new behaviour. This is the object that can acquire further abilities in later sequences.
++The lesson is **resolution as a parameter of construction**: the same named sphere can have several finite meshes. Change rings while keeping radial segments fixed, then reverse that comparison. Keep radius and the spherical collider unchanged.
++
++Pickup returns from Coordinates. PointBody and the class extension return from earlier lessons; the short held-time controller is supplied support for this comparison. Its complete code and explanation remain below, but reconstructing the timer is not the new learning goal. The museum's wider primitive library is available to explore.
+ 
+ ## Make this study
+ 
+@@ -120,7 +122,9 @@
+ 
+ ## Make it your own
+ 
+-First hold only the left sphere. Then make a variant that decrements rings but leaves radial segments unchanged; make a second variant that changes only radial segments. Predict and compare the visible results. Release halfway through an interval, wait, and resume: the change should follow held time, not time spent looking at it.
++First hold only the left sphere. Make a variant that decrements rings but leaves radial segments unchanged; make a second variant that changes only radial segments. Predict and compare the visible results. Identify what stayed the same: radius, collider and the untouched neighbour.
++
++As a separate check of the supplied controller, release halfway through an interval, wait, and resume. Its change should follow held time, not time spent looking at the sphere.
+ 
+ Carry the same body and the distinction between shape, appearance, interaction and construction parameters. Columns next gives a family of forms three separate inputs.
+ 

@@ -1,0 +1,41 @@
+{
+  "id": "Change_Intro",
+  "title": "Measure, then accumulate",
+  "storyboard": "The wide joining line falls while the curve rises at its first sample. Bring functions and position differences; use the supplied smooth curve to write a finite-rate function from two heights and a nonzero horizontal interval. Predict the sign on another interval, then compare it with the supplied tangent. On a second visit to the next bench, reuse that callable curve in a loop summing height-times-width contributions. Keep the interval fixed while changing either count or sample position, and predict one rectangle before checking the total. Plots and controls are supplied. The reference is another finite sum, not the exact integral. The bridge introduces a different arch: use its supplied signed-rate comparison to ask why a rise and fall can leave no net height change. Carry two small functions with named inputs and units; x is position here, not elapsed time.",
+  "storyboard_short": "Reuse functions/differences/loops. Supply smooth f(x), plots, tangent and controls. First: finite rate over nonzero h; predict sign elsewhere. Next: sum f(sample)*width over fixed interval; vary count or sample fraction alone; predict one contribution. Carry rate/sum functions with units. x=position, not time. Reference=finite 4096-midpoint sum. Bridge uses DIFFERENT arch: supplied signed-rate comparison, net change not total travel. Exact learner edit location pending.",
+  "mode": "make",
+  "brings": [
+    "callable functions and differences between positions",
+    "loop totals and explicitly named inputs"
+  ],
+  "learns": [
+    "finite rate over a nonzero interval",
+    "finite accumulation from height-times-width contributions"
+  ],
+  "carries": "Two reusable finite calculation functions with explicit interval, sampling rule and units; signed change distinct from total travel.",
+  "supplied": [
+    "the existing smooth curve and plotting hosts",
+    "analytic tangent and finite reference calculation",
+    "bridge arch and its signed-rate comparison"
+  ],
+  "artifact_refs": [
+    "tangent_slope_workbench",
+    "riemann_sum_workbench",
+    "ftc_bridge"
+  ],
+  "review_note": "Two small making lessons, not a calculus survey. Keep the smooth function shared by the first two benches separate from the bridge arch. A tangent formula and finite reference are supplied comparisons; the student need not derive either. Finer samples do not guarantee monotonically smaller error. Choose the exact learner edit/receiver connection before expanding code; no replacement workbench. The bridge is a reflective return, not a third compulsory coding task.",
+  "independent_check": "Predict the rate sign on another interval and explain its units. In the sum lesson, predict one contribution after moving the sample within its rectangle while keeping the count fixed.",
+  "prior_maps": [
+    "Point_Lines",
+    "Point_Trace",
+    "Ribbon_Patterns_03"
+  ],
+  "source_refs": [
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+    "commons/artifacts/tangent_slope_workbench/rate_comparison.gd",
+    "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+    "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd",
+    "algorithms/change/ftc_bridge.gd"
+  ],
+  "change_reason": "Give each new operation room to become usable without turning the hall into a calculus survey."
+}

@@ -1,0 +1,74 @@
+--- before/algorithms/cellularautomata/living_architecture/proximity_study.gd
++++ after/algorithms/cellularautomata/living_architecture/proximity_study.gd
+@@ -100,6 +100,12 @@
+ 
+ func _build_space() -> void:
+ 	box("CollectingBasin",Vector3(5,0.12,10),Vector3(0,-0.66,4.5),Color("354650"),true)
++	# Close the shallow collecting basin at floor height. Without these faces,
++	# the museum's zero cells reveal the sky through the sides of the floor.
++	for side:float in [-2.52,2.52]:
++		box("BasinSideLeft" if side<0 else "BasinSideRight",Vector3(0.04,0.6,10.08),Vector3(side,-0.3,4.5),Color("354650"),true)
++	for end_:float in [-0.52,9.52]:
++		box("BasinEndEntry" if end_<0 else "BasinEndExit",Vector3(5,0.6,0.04),Vector3(0,-0.3,end_),Color("354650"),true)
+ 	_ramp("EntryRecovery",0.9,-0.5)
+ 	_ramp("ExitRecovery",8.1,9.5)
+ 	for x:float in [-2.55,2.55]:box("Rim",Vector3(0.08,0.07,10),Vector3(x,-0.035,4.5),Color("bf9469"))
+@@ -113,6 +119,14 @@
+ 			var cell:=Vector2i(x,z)
+ 			var panel:MeshInstance3D=box("HealthPanel_%d_%d"%[x,z],Vector3(0.1,0.29,0.53),Vector3(3.04,0.8+x*0.32,z*0.6),Color.WHITE)
+ 			panel.material_override=work.materials[cell]
++	# The same fixed address can be found at foot level and eye level.
++	# This border adds no state, receiver, controls or bridge collision.
++	var wall_w:=Vector3(2.978,0.8+WITNESS.x*0.32,WITNESS.y*0.6)
++	for sign_ in [-1,1]:
++		box("FriezeWitnessHorizontal",Vector3(0.015,0.018,0.56),wall_w+Vector3(0,sign_*0.158,0),Color("ffd484"))
++		box("FriezeWitnessVertical",Vector3(0.015,0.32,0.018),wall_w+Vector3(0,0,sign_*0.28),Color("ffd484"))
++	var wall_tag:=label("FriezeWitnessTag","W (2,6)",40)
++	wall_tag.position=wall_w+Vector3(-0.01,0.47,0);wall_tag.rotation_degrees.y=-90;add_child(wall_tag)
+ 	for z:float in [-0.3,9.3]:box("FriezePost",Vector3(0.1,2.5,0.1),Vector3(3.1,1.25,z),Color("bf9469"),true)
+ 	var caption:=label("FriezeCaption","THE SAME HEALTH / A WALL CAN WEAR IT",30)
+ 	caption.position=Vector3(3.0,2.65,4.5);caption.rotation_degrees.y=-90;add_child(caption)
+--- before/commons/maps/CA_ExpandingSpace/artifacts.md
++++ after/commons/maps/CA_ExpandingSpace/artifacts.md
+@@ -2,7 +2,7 @@
+ 
+ | Artifact | Role | This pass |
+ |---|---|---|
+-| decaying_bridge | Primary / book hero | Proximity study, shared health frieze, fixed witness and support/recovery experiment. |
++| decaying_bridge | Primary / book hero | Proximity study, shared health frieze, matching floor/wall witness and support/recovery experiment above a lined basin. |
+ | ca_chair_test | Secondary | Retained furniture study in the rear gallery. |
+ | catalyst_vent | Secondary | Retained with its existing emission configuration. |
+ | catalyst_prompter_box | Secondary | Retained; existing viewport-texture diagnostics need separate review. |
+--- before/commons/maps/CA_ExpandingSpace/final.md
++++ after/commons/maps/CA_ExpandingSpace/final.md
+@@ -9,6 +9,12 @@
+ Use NEAR/FAR to withdraw the probe and run again. Watch the edge of the depleted region before its centre. Something returns through what remained around it. There is no separate instruction ordering this particular patch to grow back into its old outline.
+ 
+ RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe's place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end of its right-hand edge, on the desk's side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
++
++Look up to find W again. A gold frame holds its place on the frieze. Wait above the tile while watching its colour there. The change stays in front of you; the consequence arrives beneath your feet. When the surface gives way, you are still looking at the same address from a little lower down.
++
++![The gold address W remains visible on the wall and the depleted bridge.](images/ca-presence-depleted.png)
++
++*One cell, two surfaces. The basin receives the body when the bridge can no longer carry it.*
+ 
+ The bridge's variable is called health. Here that means a number between zero and one. The name lends it a small biological story, but the operations are available to read. Nearby cells lose a fixed amount on each update:
+ 
+--- before/commons/maps/CA_ExpandingSpace/intent.md
++++ after/commons/maps/CA_ExpandingSpace/intent.md
+@@ -9,3 +9,5 @@
+ The radius of external proximity is separate from the four-neighbour recovery stencil. No variable-radius tree-growth slider is claimed. All seven existing works remain; six are retained for later encounters. This pass repairs player tracking, exposes scan order and gives the primary coherent space and prose. Active sequence order and artifact roles are unchanged.
+ 
+ Next: CA_SoftRules. A weighted-neighbour or coupled-field study must actually update before its softness can be explained as a new mechanism.
++
++25 September refinement: find the same W on the wall while standing above it. The visible colour remains in front of the body as the loss of support changes its height. A lined shallow basin makes the receiving surface legible. This strengthens the existing encounter without adding a rule or an interface.
+--- before/commons/maps/CA_ExpandingSpace/technical.md
++++ after/commons/maps/CA_ExpandingSpace/technical.md
+@@ -29,3 +29,7 @@
+ The map is 15 × 28. An added front bay contains the bridge, a 0.6 m collecting basin, two closed convex recovery wedges and an independent museum margin. The original seven artifacts remain, with the other six shifted together into the rear gallery. The old automatic arrangement removed crossway_ca to reopen its path; authored placement now retains it. The retained tree's optional host_lighting configuration disables its standalone sun/environment in this placement, preventing it from overexposing the hall. Geometry and growth parameters remain.
+ 
+ Real desktop checks exercise tracking, the rule, thresholds, matched schedules, all eight pointer controls, support/basin rays, a body losing support, a climbed ramp and a margin walk. Evidence is under `doc/space/ca-proximity-review-2026-09-13/`. Headset testing and the retained secondary encounters remain further work. Existing catalyst viewport-texture diagnostics are separate from this primary; the final run must have no runtime script errors.
++
++## 25 September: locating the same cell with the body
++
++W now has a fixed gold frame and address on the frieze at the existing panel for (2,6). The frame has no collision, state or clock. The panel still shares the exact floor-cell material. Four lining faces close the collecting basin below floor height; the basin bottom, both recovery ramps, tile collision, rule and console are unchanged. No global floor policy changes. See `encounter-notes.md` for current native checks and their limits.

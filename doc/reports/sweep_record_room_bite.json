@@ -1,0 +1,68 @@
+{
+ "sweep": "record_room",
+ "peak_changed_pct": 2.192,
+ "subject_pct": 39.094,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "behaviour": "event"
+   },
+   "b": {
+    "behaviour": "cycle"
+   },
+   "changed_px": 12661,
+   "changed_pct": 2.192
+  },
+  {
+   "a": {
+    "behaviour": "event"
+   },
+   "b": {
+    "behaviour": "drift"
+   },
+   "changed_px": 11750,
+   "changed_pct": 2.034
+  },
+  {
+   "a": {
+    "behaviour": "event"
+   },
+   "b": {
+    "behaviour": "steady"
+   },
+   "changed_px": 9721,
+   "changed_pct": 1.683
+  },
+  {
+   "a": {
+    "behaviour": "cycle"
+   },
+   "b": {
+    "behaviour": "drift"
+   },
+   "changed_px": 12570,
+   "changed_pct": 2.176
+  },
+  {
+   "a": {
+    "behaviour": "cycle"
+   },
+   "b": {
+    "behaviour": "steady"
+   },
+   "changed_px": 10053,
+   "changed_pct": 1.74
+  },
+  {
+   "a": {
+    "behaviour": "drift"
+   },
+   "b": {
+    "behaviour": "steady"
+   },
+   "changed_px": 10792,
+   "changed_pct": 1.868
+  }
+ ]
+}

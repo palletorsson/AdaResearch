@@ -1,0 +1,17 @@
+PREDICTION written 2026-08-12, BEFORE the gate was implemented and BEFORE the
+after-capture. Target: uffizi-spine-enfilade, segment 0, seed 46, prev_w -1.
+
+BEFORE (measured, and corroborated by the runtime log):
+  dressed wall run     170 m
+  hung showings         50   (licence 50)
+  wall cards            15
+  service props         16
+  features per metre     0.476
+
+PREDICTED AFTER the white-cube gate:
+  hung showings         11   (wall_features_max = round(200.0 * 0.1 * 0.55))
+  wall cards             3   (170 // 44)
+  service props          2   (cap 2 -> Q statutory 1 + feature 1)
+  features per metre     0.094
+  longest bare run      25.2 m   (from 11.2 m)
+  bare wall LENGTH      90.3%    (from 55.9%)

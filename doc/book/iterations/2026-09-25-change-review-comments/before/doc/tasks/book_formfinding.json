@@ -1,0 +1,647 @@
+{
+  "goal_id": "book_formfinding",
+  "goal_title": "Book: Form Finding: Rules, Constraints and Possible Shapes — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in formfinding became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "formfinding",
+    "order": 8,
+    "phase": "F_order",
+    "title": "Form Finding: Rules, Constraints and Possible Shapes",
+    "chapters": [
+      "FormFinding_Descent",
+      "FormFinding_Catenary",
+      "FormFinding_Relaxation",
+      "FormFinding_Equilibrium",
+      "FormFinding_Annealing",
+      "FormFinding_Forge"
+    ],
+    "words": 5728,
+    "read_at": "2026-09-24",
+    "source": "one reader + one skeptic (Claude workflow)",
+    "chapters_read": [
+      "FormFinding_Descent",
+      "FormFinding_Catenary",
+      "FormFinding_Relaxation",
+      "FormFinding_Equilibrium",
+      "FormFinding_Annealing",
+      "FormFinding_Forge",
+      "Vectors_Act5_ForceAsPlace (last of forces)",
+      "WaveFunctions_Intro (first of wavefunctions)"
+    ],
+    "reading": {
+      "arc": "Form Finding follows one question through six halls: when a shape looks as though it found itself, which operation actually produced it, and what decided that it could stop. Descent puts the visitor at a STEP button and lets one downhill rule end three named ways (SMALL SLOPE, LEFT FRAME, STEP LIMIT) and in two different valleys from two beginnings. Catenary and Relaxation then pull apart a hand-drafted spline, a sampled cosh, and a finite relaxation, ending at a glass vessel that is a frozen duration. Equilibrium shows a balance encoded by arithmetic beside a pulse and a tower that test nothing; Annealing supplies the one rule that can leave a valley and then argues, through the two wells, that the deepest is not necessarily the wanted one. Forge closes on a detector: the pieces settle by physics, but height and stillness are the author's criteria for what counts. The sequence keeps faith with its stated truth (an accepted endpoint depends on the model and its stopping rule) by naming, in every hall, what its objects do not test.",
+      "holds": [
+        "The stopping rule as refrain: SMALL SLOPE / LEFT FRAME / STEP LIMIT (Descent) → a frame budget and a chosen step count (Relaxation) → a final temperature, a step limit and a forced HOP (Annealing) → SMALL SLOPE versus BOUNDARY and a height-plus-stillness detector (Forge).",
+        "A growing inventory of operations recited at each close: drafted, evaluated, settled, encoded, searched, counted. Equilibrium opens by recapping it and Annealing's last section lists five of the six.",
+        "Honesty written into the objects themselves: the laundry plate (\"This is not a gravity solver\"), the truss board (\"NO LOAD TEST\"), the end-table plate (\"No forces are solved\"), the two wells' INTERPRET button. The prose leans on things in the world that say their own limits.",
+        "The science_screen coda in four halls: \"no compatible live measurement\" — a picture is not yet an instrument.",
+        "Gaudí's hanging model and its inversion, introduced at the laundry lines and returned to in Equilibrium under the same Huerta footnote.",
+        "The downhill point in three bodies: the lab's gold marker, the bench's yellow blob, the optimiser's ball — one rule, different stops."
+      ],
+      "hall_notes": [
+        {
+          "hall": "FormFinding_Descent",
+          "words": 1015,
+          "note": "The strongest hall: STEP before explanation, the sampled gradient as a pink arrow, the rule revealed as one line, two beginnings that stop at different costs, three named endings. Reads as a guided experiment and every number checks against descent_landscape_lab.gd. Its weakness is the floor: five retained comparison works stand behind the lab and the chapter gives half a sentence to one of them."
+        },
+        {
+          "hall": "FormFinding_Catenary",
+          "words": 976,
+          "note": "Separates a hand-drafted spline, sampled cosh lines with their mirrored arches, and two sampled minimal surfaces, insisting on what each does not do. Reads well in the hand (bead, catenoid and helicoid are all grabbable) and the code sits after the encounter. A few sentences slip into the author's voice (\"a further encounter to build\")."
+        },
+        {
+          "hall": "FormFinding_Relaxation",
+          "words": 911,
+          "note": "Live cloth with PASSES / RESET / WIND, a frozen lattice, a vessel that is a duration; the mean-versus-worst error is the hall's sharpest lesson and the fossil argument lands. Two facts are off: the vessel's no-collider claim, and numbers sourced from a wind-off run that the live readout will not show."
+        },
+        {
+          "hall": "FormFinding_Equilibrium",
+          "words": 965,
+          "note": "Inspect one arm, then read the crossover arithmetic: the mobile paragraph is exemplary, and the triangle and tower are deflated honestly. It re-introduces Gaudí as if new and carries an editorial aside about the room's \"older notes\"."
+        },
+        {
+          "hall": "FormFinding_Annealing",
+          "words": 1051,
+          "note": "The longest and most exact chapter: uphill acceptance, adaptive cooling and the forced hop are separated the way the code separates them, the wells are compared before INTERPRET, and the close turns against its own first sentence. Nothing needs correcting; the deep well could use the standing view the review already rendered."
+        },
+        {
+          "hall": "FormFinding_Forge",
+          "words": 543,
+          "note": "A detector that wants height and stillness, an optimiser with a BOUNDARY ending, and a fine last instruction (build something useful the puzzle refuses). Half the length of its neighbours, no words for the forge machine that stands first past the spawn and gives the hall its name, and no gathering of the sequence before the handover."
+        }
+      ],
+      "stumbles": [
+        "FormFinding_Relaxation: the chapter says the vessel has no collider and your body can walk through its wall; the working-tree code builds a trimesh skin with backface collision, so a headset visitor walks into glass.",
+        "FormFinding_Forge: the self_shaping_forge stands three cells from spawn announcing DESCENT TOWARD MAX Q and a readout that hits MAX Q, straight after Annealing taught the visitor to distrust exactly that, and the chapter says nothing about it.",
+        "FormFinding_Descent: a Perlin-terrain descent station, a glowing self-portrait well, a static tremble inset and a screen stand behind the lab unnamed; the tremble inset can be read as a running solver.",
+        "FormFinding_Descent and FormFinding_Relaxation: \"the recorded desktop comparison\" / \"a matched desktop calculation\" — the visitor in the headset has no desktop and wonders what was measured where.",
+        "FormFinding_Relaxation: told to read MEAN and WORST and then given figures from a wind-off 420-step run, the visitor sees different numbers on the driven live readout and cannot tell why.",
+        "FormFinding_Relaxation: \"the amphora is what those choose\" stops the reader at the chapter's most literal sentence.",
+        "FormFinding_Equilibrium: \"the room's own older notes claiming it turns on a breath\" refers to a file the visitor never sees.",
+        "FormFinding_Catenary / FormFinding_Equilibrium: \"a further encounter to build\", \"those encounters are still to be built\" read as the museum's to-do list rather than the visitor's chapter.",
+        "FormFinding_Equilibrium: Gaudí's hanging models are introduced as new two halls after the laundry lines introduced them with the same footnote.",
+        "FormFinding_Forge: the sequence ends on a 543-word hall that hands over to oscillation without gathering what the six halls did."
+      ],
+      "keep": [
+        {
+          "hall": "FormFinding_Descent",
+          "quote": "You can walk around the plot and see the other valley. That knowledge has not entered the algorithm merely because it has entered your view."
+        },
+        {
+          "hall": "FormFinding_Descent",
+          "quote": "Nothing in the surface has announced that this much unfinished movement is acceptable. We supplied that threshold."
+        },
+        {
+          "hall": "FormFinding_Catenary",
+          "quote": "Watch for the difference between drawing an answer, evaluating an answer, and letting a system settle toward one."
+        },
+        {
+          "hall": "FormFinding_Catenary",
+          "quote": "The formula does not choose its own boundary. Somebody has already chosen the numbers from which it will begin."
+        },
+        {
+          "hall": "FormFinding_Relaxation",
+          "quote": "The average has become small while one local relation is still far from its request. Look between those two numbers. What would we overlook if the bench reported only the reassuring one?"
+        },
+        {
+          "hall": "FormFinding_Equilibrium",
+          "quote": "The heavier child rides the shorter arm because the arithmetic gives it no choice."
+        },
+        {
+          "hall": "FormFinding_Annealing",
+          "quote": "That second branch is annealing's central permission, and it is a strange thing to write down: a rule that sometimes accepts a worse outcome so that a local improvement need not become a prison."
+        },
+        {
+          "hall": "FormFinding_Forge",
+          "quote": "Build a low arrangement that you find useful and the puzzle refuses. Describe its usefulness without pretending it passed."
+        }
+      ],
+      "handover_in": "Clean. Vectors_Act5_ForceAsPlace closes with \"In the next sequence, Form Finding, that question reaches the shape of the world itself\", and Descent opens by recalling the field that carried you over the gap, then states the departure outright: \"There is no stored velocity here.\" The reader knows what has changed and why.",
+      "handover_out": "Clean on the receiving side. Forge ends \"The next sequence begins with oscillation. A form can persist through returning motion as well as through rest\", and WaveFunctions_Intro opens on a bob that keeps leaving its ring and recalls \"position, velocity and force in earlier rooms\". The weakness is on Forge's side: at 543 words it hands over before gathering the sequence's six operations or restating its truth.",
+      "reading_errors": [
+        "stumbles: \"the tremble inset can be read as a running solver\" — the inset says otherwise in the hall: settling_tremble.gd:42 tags it \"analytic catenary / fixed offsets\" and :46 prints \"seeded offsets within +/- epsilon, not solver output / fixed points / magnified differences / no motion\". The chapter is silent about it; the object is not.",
+        "holds[3]: \"no compatible live measurement\" is presented as the shared science_screen coda in four halls, but that phrase is Catenary's only (final.md:48). Equilibrium :44 says \"no live load measurement\", Relaxation :44 and Annealing :47 say different things. Four halls carry a screen coda; they do not share the sentence. (Descent's map also places a science_screen at (10,23) with no coda in the chapter.)",
+        "hall_notes FormFinding_Relaxation: the wind-off figures are described as numbers \"the live readout will not show\". The readout shows them: WIND toggles and restarts the run (verlet_workbench.gd:414-421), the step counter starts at 60 (:241), and MEAN/WORST print at :332-334 — they are simply not the default view. The stumbles entry states it correctly (\"on the driven live readout\").",
+        "hall_notes word counts (1015 / 976 / 911 / 965 / 1051 / 543) do not match wc -w on the six files (1039 / 1036 / 966 / 1031 / 1104 / 552). The ordering and the \"half the length\" claim about Forge hold; the figures are a different counting method and should not be quoted as measured word counts without saying which.",
+        "arc: \"Forge closes on a detector\" — the detector (balance_puzzle) is the hall's first anchor and opens the chapter (final.md:5-13); the chapter closes on an instruction about the puzzle (:25) and then the oscillation handover (:27). Defensible as a reading, inexact as a description of order."
+      ]
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_formfinding.001",
+      "title": "The vessel now has a collider; the chapter invites you to walk through it",
+      "spec": "[code-claim] FormFinding_Relaxation\nQuote: “The glass does not contain you: it has no collider, so your body can walk through its wall.”\nWhy: In the working tree the vessel builds a StaticBody3D trimesh skin with backface collision, its label says \"closed skin\", and the registry says it carries two-sided surface collision; a headset visitor who takes the sentence literally walks into a wall. Both the collider and this sentence are uncommitted: HEAD's chapter (:36) made the same no-collider claim in other words and it was true of HEAD's body-less vessel; the current wave rewrote the sentence and added the skin without reconciling them.\nDo: Decide which vessel ships. If the closed skin stays (registry and label already say so), rewrite: \"It has a collider and no mouth: your hand and body stop at its wall, and the inside you can see through the glass is not a place you can enter.\" If the walkable vessel is the intent, revert the FrozenSkin block and the registry line instead. Commit whichever wins so chapter, code and registry agree.\nEvidence: commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:168-178 (StaticBody3D \"FrozenSkin\", create_trimesh_shape, backface_collision = true), :185 label \"closed skin / held after simulation\", :1 header \"A collidable frozen skin\"; git show HEAD: same file :1 \"Walkable vessel\", no StaticBody/collision; HEAD soft_bodies.json:2232 \"Walkable glass vessel\"; working tree soft_bodies.json:2240 \"carries matching two-sided surface collision\"; git show HEAD:commons/maps/FormFinding_Relaxation/final.md:36 \"it has no collider at all, and you will walk through the glass\"; frozen_glass_vessel.tscn root node carries the script.\nFile: commons/maps/FormFinding_Relaxation/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Relaxation"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "FormFinding_Relaxation",
+      "quote": "The glass does not contain you: it has no collider, so your body can walk through its wall.",
+      "why": "In the working tree the vessel builds a StaticBody3D trimesh skin with backface collision, its label says \"closed skin\", and the registry says it carries two-sided surface collision; a headset visitor who takes the sentence literally walks into a wall. Both the collider and this sentence are uncommitted: HEAD's chapter (:36) made the same no-collider claim in other words and it was true of HEAD's body-less vessel; the current wave rewrote the sentence and added the skin without reconciling them.",
+      "proposal": "Decide which vessel ships. If the closed skin stays (registry and label already say so), rewrite: \"It has a collider and no mouth: your hand and body stop at its wall, and the inside you can see through the glass is not a place you can enter.\" If the walkable vessel is the intent, revert the FrozenSkin block and the registry line instead. Commit whichever wins so chapter, code and registry agree.",
+      "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:168-178 (StaticBody3D \"FrozenSkin\", create_trimesh_shape, backface_collision = true), :185 label \"closed skin / held after simulation\", :1 header \"A collidable frozen skin\"; git show HEAD: same file :1 \"Walkable vessel\", no StaticBody/collision; HEAD soft_bodies.json:2232 \"Walkable glass vessel\"; working tree soft_bodies.json:2240 \"carries matching two-sided surface collision\"; git show HEAD:commons/maps/FormFinding_Relaxation/final.md:36 \"it has no collider at all, and you will walk through the glass\"; frozen_glass_vessel.tscn root node carries the script.",
+      "review": "amended: Code claim confirmed: working-tree frozen_glass_vessel.gd:168-178 builds StaticBody3D \"FrozenSkin\" (collision_layer 1) with am.create_trimesh_shape() and backface_collision = true; label :185 reads \"closed skin / held after simulation\"; soft_bodies.json:2240 says \"carries matching two-sided surface collision\". None of it exists at HEAD (git show HEAD: header \"Walkable vessel\", no StaticBody/collision anywhere; HEAD registry :2232 \"Walkable glass vessel\"). The tscn root carries the script, so the body is real in a map. One correction to the why: the chapter is ALSO uncommitted, and HEAD's Relaxation final.md:36 already said \"it has no collider at all, and you will walk through the glass\" — the claim was true of HEAD's code, and the working tree rewrote the sentence and added the collider in the same uncommitted wave. The contradiction is between two uncommitted files, not HEAD versus tree.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.015",
+      "title": "The forge machine is the first work past spawn and the chapter never mentions it",
+      "spec": "[encounter] FormFinding_Forge\nQuote: “At the neighbouring optimiser, follow the point and its trail across the coloured surface.”\nWhy: The map puts self_shaping_forge at (5,3), three columns from the spawn at (2,2), with a banner reading DESCENT TOWARD MAX Q and a readout that reaches \"MAX Q\" — the claim Annealing just taught the visitor to distrust — and the book names it the hall's hero (the roles file demotes it to secondary; the two disagree). Its Q is a sine clock and its form a lerp toward pre-written targets; the visitor gets no words for it.\nDo: Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Settle whether it is hero or secondary in the same change.\nEvidence: commons/maps/FormFinding_Forge/map_data.json (interactables (5,3) self_shaping_forge, (9,5) balance_puzzle, (4,7) gradient_descent_optimizer; utilities spawn (2,2)); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :112 (banner), :160-162 (readout \"MAX Q\" at _q >= 0.92), :170-171 (Q = smoothstep of sin(t·TAU·0.13)), :156 (raw.lerp(target, q)), :115-140 (targets authored); commons/data/book/formfinding.json pearls[6].hero = \"self_shaping_forge\"; python tools/artifact_roles.py --brief --seq formfinding lists it under FormFinding_Forge secondary.\nFile: commons/maps/FormFinding_Forge/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Forge"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "FormFinding_Forge",
+      "quote": "At the neighbouring optimiser, follow the point and its trail across the coloured surface.",
+      "why": "The map puts self_shaping_forge at (5,3), three columns from the spawn at (2,2), with a banner reading DESCENT TOWARD MAX Q and a readout that reaches \"MAX Q\" — the claim Annealing just taught the visitor to distrust — and the book names it the hall's hero (the roles file demotes it to secondary; the two disagree). Its Q is a sine clock and its form a lerp toward pre-written targets; the visitor gets no words for it.",
+      "proposal": "Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Settle whether it is hero or secondary in the same change.",
+      "evidence": "commons/maps/FormFinding_Forge/map_data.json (interactables (5,3) self_shaping_forge, (9,5) balance_puzzle, (4,7) gradient_descent_optimizer; utilities spawn (2,2)); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :112 (banner), :160-162 (readout \"MAX Q\" at _q >= 0.92), :170-171 (Q = smoothstep of sin(t·TAU·0.13)), :156 (raw.lerp(target, q)), :115-140 (targets authored); commons/data/book/formfinding.json pearls[6].hero = \"self_shaping_forge\"; python tools/artifact_roles.py --brief --seq formfinding lists it under FormFinding_Forge secondary.",
+      "review": "amended: Encounter confirmed: FormFinding_Forge/map_data.json places self_shaping_forge at (5,3), spawn at (2,2) (three columns and one row away; balance_puzzle (9,5), gradient_descent_optimizer (4,7), science_screen (10,7)). self_shaping_forge.gd:112 banner \"SELF-SHAPING FORGE — DESCENT TOWARD MAX Q\"; :160-162 readout prints \"MAX Q\" once _q >= 0.92; :170-171 _q = smoothstep(0.1, 0.9, sin(_t*TAU*0.13)*0.5+0.5) (period 1/0.13 ≈ 7.7 s); :156 p = raw.lerp(target, q); :115-140 targets authored as head/torso/two limbs; :15 N = 180. commons/data/book/formfinding.json pearls[6].hero = \"self_shaping_forge\". The chapter contains no mention or anchor. One clause of the why is wrong: \"the neighbouring optimiser\" does have a neighbour on the page — its paragraph follows the balance_puzzle section — so drop that clause. Worth one added line: tools/artifact_roles.py lists the forge as secondary while the book calls it the hero.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.003",
+      "title": "Four retained comparison works stand behind the lab with no words",
+      "spec": "[encounter] FormFinding_Descent\nQuote: “Behind this experiment, the retained marble toy carries velocity and receives periodic programmed kicks.”\nWhy: Five works stand between the spawn and the exit and the chapter names one in half a sentence: a Perlin-terrain descent station, a glowing \"How I learned\" well that the book calls the hall's hero, a science screen, and a static inset of a sampled catenary with seeded offsets. The inset's own plaque already says \"not solver output / no motion\", so the visitor is told by the object but not by the book; the other three get nothing at all, and Descent is the only hall with a screen on the floor and no screen coda in the chapter.\nDo: A short anchored \"Comparisons\" passage after \"The surface we agreed to search\", one sentence each: the marble (velocity, damping, a kick every five seconds, a swaying bowl); the terrain station (the same finite-difference descent on seeded Perlin ground with its own threshold and a 160-step budget); the well (marbles that fall, settle, pulse and begin again — a portrait, not an instrument); the tremble inset (a sampled curve with fixed seeded offsets magnified eight times, and its plaque says so). Close with the one-line science_screen coda the other four halls use.\nEvidence: commons/maps/FormFinding_Descent/map_data.json interactables (10,17) settling_tremble, (5,19) descent_marble_toy, (9,21) gradient_descent, (4,23) gradient_descent_well, (10,23) science_screen; utilities spawn (2,18), t (11,25); commons/artifacts/descent_marble_toy/descent_marble_toy.gd:136-137 (accel, 0.985 damping), :143-145 (kick every 5 s), :149-150 (sway); algorithms/formfinding/settling_tremble/settling_tremble.gd:42, :46 (in-world labels), :67 (mag 8.0); algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd:32 (noise_seed), :43 (max_steps 160), :76 (TYPE_PERLIN); commons/artifacts/registry/formfinding.json:9, machinelearning.json:3637, self_portrait.json:56; commons/data/book/formfinding.json pearls[0].hero = \"gradient_descent_well\"; tools/artifact_roles.py --brief --seq formfinding.\nFile: commons/maps/FormFinding_Descent/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Descent"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "FormFinding_Descent",
+      "quote": "Behind this experiment, the retained marble toy carries velocity and receives periodic programmed kicks.",
+      "why": "Five works stand between the spawn and the exit and the chapter names one in half a sentence: a Perlin-terrain descent station, a glowing \"How I learned\" well that the book calls the hall's hero, a science screen, and a static inset of a sampled catenary with seeded offsets. The inset's own plaque already says \"not solver output / no motion\", so the visitor is told by the object but not by the book; the other three get nothing at all, and Descent is the only hall with a screen on the floor and no screen coda in the chapter.",
+      "proposal": "A short anchored \"Comparisons\" passage after \"The surface we agreed to search\", one sentence each: the marble (velocity, damping, a kick every five seconds, a swaying bowl); the terrain station (the same finite-difference descent on seeded Perlin ground with its own threshold and a 160-step budget); the well (marbles that fall, settle, pulse and begin again — a portrait, not an instrument); the tremble inset (a sampled curve with fixed seeded offsets magnified eight times, and its plaque says so). Close with the one-line science_screen coda the other four halls use.",
+      "evidence": "commons/maps/FormFinding_Descent/map_data.json interactables (10,17) settling_tremble, (5,19) descent_marble_toy, (9,21) gradient_descent, (4,23) gradient_descent_well, (10,23) science_screen; utilities spawn (2,18), t (11,25); commons/artifacts/descent_marble_toy/descent_marble_toy.gd:136-137 (accel, 0.985 damping), :143-145 (kick every 5 s), :149-150 (sway); algorithms/formfinding/settling_tremble/settling_tremble.gd:42, :46 (in-world labels), :67 (mag 8.0); algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd:32 (noise_seed), :43 (max_steps 160), :76 (TYPE_PERLIN); commons/artifacts/registry/formfinding.json:9, machinelearning.json:3637, self_portrait.json:56; commons/data/book/formfinding.json pearls[0].hero = \"gradient_descent_well\"; tools/artifact_roles.py --brief --seq formfinding.",
+      "review": "amended: Encounter confirmed: FormFinding_Descent/map_data.json interactables (6,8) descent_landscape_lab, (10,17) settling_tremble, (5,19) descent_marble_toy#plinth:1.1, (9,21) gradient_descent:0:0.8:0.14, (4,23) gradient_descent_well, (10,23) science_screen; spawn (2,18), teleporter (11,25) — the five stand between spawn and exit. descent_marble_toy.gd:136-137 accel and 0.985 damping, :143-145 a random kick when fmod(_t, 5.0) < delta, :149-150 the bowl sways; registry formfinding.json:9 settling_tremble \"runs no relaxation solver\"; machinelearning.json:3637 gradient_descent \"seeded Perlin terrain\" (GradientDescentDemo.gd:76 TYPE_PERLIN, :32 noise_seed, :43 max_steps 160); self_portrait.json:56 the well; book pearls[0].hero = gradient_descent_well; artifact_roles lists the five as secondary \"retained as comparisons\". The chapter names only the marble toy (:65). One correction: the tremble inset is not silent in-world — settling_tremble.gd:42 tags it \"analytic catenary / fixed offsets\" and :46 prints \"seeded offsets within +/- epsilon, not solver output / fixed points / magnified differences / no motion\" — so the passage should echo the object's own plaque rather than correct a misreading. Also Descent is the only hall whose map places a science_screen without the coda the other four chapters carry.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.004",
+      "title": "Make the MEAN/WORST figures reproducible from the bench, not from a desktop run",
+      "spec": "[vr] FormFinding_Relaxation\nQuote: “In a matched desktop calculation after 420 total undriven steps—sixty preliminary steps and 360 more—one pass leaves a mean absolute error of about 1.409% and a worst spring error of 34.276%.”\nWhy: Besides the desktop aside, the live MEAN and WORST the visitor was just told to read will not show these numbers by default: WIND is on, so the readout is driven, and only the step counter tells you when 420 has passed. Told how to reproduce it, the visitor can check the claim in the headset; the step counter starts at 60, so 420 is what it will read.\nDo: \"Switch WIND off; the cloth restarts from its sixty preliminary steps (RESET does the same without changing a setting). When the step count reads 420, about six seconds later, one pass leaves a mean error of about 1.4% and a worst spring error of about 34%; four passes bring those to about 0.36% and 8.9%.\" (Keep the three-decimal figures if you prefer; the readout shows two.)\nEvidence: commons/maps/FormFinding_Relaxation/map_data.json interactables (6,2) verlet_workbench:90#comparison:true; commons/artifacts/verlet_workbench/verlet_workbench.gd:101 (still = false), :307 (wind_enabled = not still), :445 (gust while wind_enabled), :70 and :442-447 (fixed 1/60 s steps), :239-241 (settle_steps run, simulation_steps = settle_steps), :332-334 (readout prints step, MEAN |error| %.2f, WORST |error| %.2f), :409-421 (act: WIND and RESET both call _make_sim); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:28.\nFile: commons/maps/FormFinding_Relaxation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Relaxation"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "FormFinding_Relaxation",
+      "quote": "In a matched desktop calculation after 420 total undriven steps—sixty preliminary steps and 360 more—one pass leaves a mean absolute error of about 1.409% and a worst spring error of 34.276%.",
+      "why": "Besides the desktop aside, the live MEAN and WORST the visitor was just told to read will not show these numbers by default: WIND is on, so the readout is driven, and only the step counter tells you when 420 has passed. Told how to reproduce it, the visitor can check the claim in the headset; the step counter starts at 60, so 420 is what it will read.",
+      "proposal": "\"Switch WIND off; the cloth restarts from its sixty preliminary steps (RESET does the same without changing a setting). When the step count reads 420, about six seconds later, one pass leaves a mean error of about 1.4% and a worst spring error of about 34%; four passes bring those to about 0.36% and 8.9%.\" (Keep the three-decimal figures if you prefer; the readout shows two.)",
+      "evidence": "commons/maps/FormFinding_Relaxation/map_data.json interactables (6,2) verlet_workbench:90#comparison:true; commons/artifacts/verlet_workbench/verlet_workbench.gd:101 (still = false), :307 (wind_enabled = not still), :445 (gust while wind_enabled), :70 and :442-447 (fixed 1/60 s steps), :239-241 (settle_steps run, simulation_steps = settle_steps), :332-334 (readout prints step, MEAN |error| %.2f, WORST |error| %.2f), :409-421 (act: WIND and RESET both call _make_sim); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:28.",
+      "review": "amended: Confirmed: the Relaxation map places verlet_workbench:90#comparison:true, so the controls exist; verlet_workbench.gd:101 still = false and :307 wind_enabled = not still puts WIND on by default; :445 applies the gust while wind_enabled; :70 COMPARISON_STEP = 1/60 and :442-447 step at that fixed rate (360 steps ≈ 6 s at any frame rate); :241 simulation_steps = settle_steps (60) after the preliminary run, so the readout's \"step\" counts the 60 and reads 420 at the quoted moment; :332-334 prints step, MEAN |error| and WORST |error| with two decimals. SUMMARY.md:28 holds the figures. Two refinements to the proposal: act() at :414-416 falls through to _make_sim() for WIND as well as RESET, so switching WIND off already restarts the run and RESET is optional; and the readout will show 1.41% / 34.28%, so say \"about\".",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.005",
+      "title": "Drop \"desktop\" from the two-beginnings numbers",
+      "spec": "[vr] FormFinding_Descent\nQuote: “In the recorded desktop comparison, the first run finishes near -0.304 and the second near 0.295.”\nWhy: A headset visitor has no desktop; the word makes the numbers sound like something measured on other equipment, when they are what the lab's own readout shows with these settings.\nDo: \"Recorded once with these settings, the first run finishes near −0.304 and the second near 0.295.\"\nEvidence: commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:8 (STARTS), :31-32 (the two-valley cost), :121 (readout prints cost); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:20 (−0.3042573523 / 0.2954961030 recorded from the same primary and map).\nFile: commons/maps/FormFinding_Descent/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Descent"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "FormFinding_Descent",
+      "quote": "In the recorded desktop comparison, the first run finishes near -0.304 and the second near 0.295.",
+      "why": "A headset visitor has no desktop; the word makes the numbers sound like something measured on other equipment, when they are what the lab's own readout shows with these settings.",
+      "proposal": "\"Recorded once with these settings, the first run finishes near −0.304 and the second near 0.295.\"",
+      "evidence": "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:8 (STARTS), :31-32 (the two-valley cost), :121 (readout prints cost); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:20 (−0.3042573523 / 0.2954961030 recorded from the same primary and map).",
+      "review": "kept: Confirmed: descent_landscape_lab.gd:8 STARTS, :31-32 the two costs, :121 the readout prints \"cost %.4f\"; defaults rate_index 1 (0.7) and tolerance_index 0 (0.01) match the chapter's instruction; SUMMARY.md:20 records −0.3042573523 and 0.2954961030 from the same primary and map and calls it historical evidence, not a headset visit. The word \"desktop\" is provenance for the makers; for a headset visitor \"Recorded once with these settings\" says the same thing about the same readout. Clear prose improvement, S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.006",
+      "title": "Land the sequence before handing over to oscillation",
+      "spec": "[structure] FormFinding_Forge\nQuote: “The next sequence begins with oscillation. A form can persist through returning motion as well as through rest; settling is only one way for a system to continue.”\nWhy: Forge is the sequence's last hall and half the length of the others; the gathering of the operations happens one hall early, in Annealing's close, so the sequence hands over without landing its own truth — that an accepted endpoint depends on the model and its stopping rule.\nDo: One paragraph before the handover that adds the sixth operation to Annealing's five — a detector that counts height and stillness — and says in the visitor's terms what the six halls shared: each object stopped where a rule, a budget, a boundary or an author said it could, and none of those stops was found on the surface.\nEvidence: Word counts this session: Forge 543, the others 911–1051; commons/maps/FormFinding_Annealing/final.md:53 (the five-operation list); commons/maps/sequences/formfinding.json:6 (the sequence truth).\nFile: commons/maps/FormFinding_Forge/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Forge"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "FormFinding_Forge",
+      "quote": "The next sequence begins with oscillation. A form can persist through returning motion as well as through rest; settling is only one way for a system to continue.",
+      "why": "Forge is the sequence's last hall and half the length of the others; the gathering of the operations happens one hall early, in Annealing's close, so the sequence hands over without landing its own truth — that an accepted endpoint depends on the model and its stopping rule.",
+      "proposal": "One paragraph before the handover that adds the sixth operation to Annealing's five — a detector that counts height and stillness — and says in the visitor's terms what the six halls shared: each object stopped where a rule, a budget, a boundary or an author said it could, and none of those stops was found on the surface.",
+      "evidence": "Word counts this session: Forge 543, the others 911–1051; commons/maps/FormFinding_Annealing/final.md:53 (the five-operation list); commons/maps/sequences/formfinding.json:6 (the sequence truth).",
+      "review": "kept: Structure confirmed: wc -w gives Forge 552 against 966–1104 for the other five (the task's 543 / 911–1051 is a different counting method; the ratio holds). Annealing final.md:53 lists five operations (slope, drafted cable, formula surface, finite relaxation, mobile), the sequence truth in commons/maps/sequences/formfinding.json is \"An accepted endpoint depends on the model and its stopping rule\", and Forge's last two paragraphs (:25-27) go straight from the puzzle instruction to the oscillation handover with no gathering. A landing paragraph that adds the sixth operation (the detector's height-plus-stillness rule, balance_puzzle) is a genuine improvement for a visitor leaving the sequence, not a taste. Complementary to task 1, not overlapping.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.007",
+      "title": "Cut the aside about the room's \"older notes\"",
+      "spec": "[prose] FormFinding_Equilibrium\nQuote: “and the room's own older notes claiming it turns on a breath are describing something else.”\nWhy: The \"older notes\" are walked.md, a file the visitor never sees; in reader prose the clause corrects a document that does not exist for them and dilutes the sentence's point that the mobile is frozen.\nDo: End the sentence at \"this is frozen sculpture.\" If the breath is worth keeping, make it the visitor's: \"Any breath that seems to move it is yours.\"\nEvidence: commons/artifacts/calder_mobile/calder_mobile.gd defines no _process or _physics_process (whole file, 247 lines) and neither does its base commons/artifacts/_embodied/embodied_prop.gd; the breath claim lives in commons/maps/FormFinding_Equilibrium/walked.md (\"lets the whole thing turn on a breath\").\nFile: commons/maps/FormFinding_Equilibrium/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Equilibrium"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "FormFinding_Equilibrium",
+      "quote": "and the room's own older notes claiming it turns on a breath are describing something else.",
+      "why": "The \"older notes\" are walked.md, a file the visitor never sees; in reader prose the clause corrects a document that does not exist for them and dilutes the sentence's point that the mobile is frozen.",
+      "proposal": "End the sentence at \"this is frozen sculpture.\" If the breath is worth keeping, make it the visitor's: \"Any breath that seems to move it is yours.\"",
+      "evidence": "commons/artifacts/calder_mobile/calder_mobile.gd defines no _process or _physics_process (whole file, 247 lines) and neither does its base commons/artifacts/_embodied/embodied_prop.gd; the breath claim lives in commons/maps/FormFinding_Equilibrium/walked.md (\"lets the whole thing turn on a breath\").",
+      "review": "kept: Confirmed: calder_mobile.gd (246 lines, not 247) defines no _process or _physics_process; its only motion-related code freezes RigidBody3D children (:224-226, freeze = true) and the has_method branch at :227 is a no-op pass; the base commons/artifacts/_embodied/embodied_prop.gd extends Node3D with no process loop; the breath claim is walked.md:12 (\"lets the whole thing turn on a breath\"), a file the visitor never sees. Ending at \"this is frozen sculpture.\" removes an editorial aside. Clear prose defect, S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.008",
+      "title": "Tell the visitor how PASSES cycles before saying \"try one pass\"",
+      "spec": "[vr] FormFinding_Relaxation\nQuote: “Try one pass, then four.”\nWhy: From the default four passes, PASSES cycles 4 → 8 → 12 → 1, so the first press gives eight and a visitor following the sentence literally compares the wrong pair; the readout prints the word, which the sentence could point at.\nDo: \"Press PASSES until the readout says nudged, one pass; then once more for worked, four.\"\nEvidence: commons/artifacts/verlet_workbench/verlet_workbench.gd:74 (default \"worked\" = 4 passes), :409-413 (options [1, 4, 8, 12], next = find + 1), :332 (readout prints the word and the count).\nFile: commons/maps/FormFinding_Relaxation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Relaxation"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "FormFinding_Relaxation",
+      "quote": "Try one pass, then four.",
+      "why": "From the default four passes, PASSES cycles 4 → 8 → 12 → 1, so the first press gives eight and a visitor following the sentence literally compares the wrong pair; the readout prints the word, which the sentence could point at.",
+      "proposal": "\"Press PASSES until the readout says nudged, one pass; then once more for worked, four.\"",
+      "evidence": "commons/artifacts/verlet_workbench/verlet_workbench.gd:74 (default \"worked\" = 4 passes), :409-413 (options [1, 4, 8, 12], next = find + 1), :332 (readout prints the word and the count).",
+      "review": "kept: Confirmed: the map token verlet_workbench:90#comparison:true sets no relaxation, so verlet_workbench.gd:74 default \"worked\" = 4 applies; act() :409-413 uses options [1, 4, 8, 12] with next = find + 1, so from 4 the presses give 8, 12, 1, 4; :332 prints \"%d passes\" and the word. A visitor following \"Try one pass, then four\" literally compares 8 with 12. The proposal (\"Press PASSES until the readout says nudged, one pass; then once more for worked, four\") is exactly what the readout prints. S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.016",
+      "title": "\"A further encounter to build\" addresses the museum, not the visitor",
+      "spec": "[prose] FormFinding_Catenary\nQuote: “It is a further encounter to build, not a movement to imagine that you have already seen.”\nWhy: \"To build\" is the makers' to-do list leaking into the visitor's chapter; the preceding sentence already says that nothing in the room performs the deformation. Equilibrium has the same tic (\"Those encounters are still to be built.\").\nDo: Cut the sentence, or: \"Nothing in this room performs it, so do not count it as seen.\"\nEvidence: commons/primitives/parametric/catenoid.gd:25-86 and commons/primitives/parametric/helicoid.gd:24-84 each build one mesh in _ready and contain no deformation between the two surfaces; commons/maps/FormFinding_Equilibrium/final.md:52 for the sibling sentence.\nFile: commons/maps/FormFinding_Catenary/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Catenary"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "FormFinding_Catenary",
+      "quote": "It is a further encounter to build, not a movement to imagine that you have already seen.",
+      "why": "\"To build\" is the makers' to-do list leaking into the visitor's chapter; the preceding sentence already says that nothing in the room performs the deformation. Equilibrium has the same tic (\"Those encounters are still to be built.\").",
+      "proposal": "Cut the sentence, or: \"Nothing in this room performs it, so do not count it as seen.\"",
+      "evidence": "commons/primitives/parametric/catenoid.gd:25-86 and commons/primitives/parametric/helicoid.gd:24-84 each build one mesh in _ready and contain no deformation between the two surfaces; commons/maps/FormFinding_Equilibrium/final.md:52 for the sibling sentence.",
+      "review": "kept: Confirmed: catenoid.gd:21-86 and helicoid.gd:20-84 each build one mesh in _ready (both extend XRToolsPickable) and contain no deformation between the surfaces; Equilibrium final.md:52 carries the sibling \"Those encounters are still to be built.\" The preceding sentence already states nothing in the room performs it, so the \"to build\" sentence is the makers' backlog leaking into the visitor's page. Cut or the offered rewrite; S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.010",
+      "title": "Return to Gaudí instead of introducing him again",
+      "spec": "[structure] FormFinding_Equilibrium\nQuote: “Gaudí's hanging models offered another way to approach this problem: set up weights and supports, allow a physical relation to appear, and study its inversion as a possible compression structure.”\nWhy: Two halls earlier, at the laundry lines, the reader was already given Gaudí, the inversion and the same Huerta citation; introduced again as if new, the book seems to forget what it told them.\nDo: Open the section with the return: \"The hanging models we met at the laundry lines offered another way to approach this problem...\" and keep the footnote as a repeat citation (its Equilibrium gloss can stay).\nEvidence: commons/maps/FormFinding_Catenary/final.md:17 and :60 (Gaudí, the inversion, [^hanging-model] Huerta 2006 with a laundry-specific gloss); commons/maps/FormFinding_Equilibrium/final.md:50 and :58 (same citation, different gloss).\nFile: commons/maps/FormFinding_Equilibrium/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Equilibrium"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "FormFinding_Equilibrium",
+      "quote": "Gaudí's hanging models offered another way to approach this problem: set up weights and supports, allow a physical relation to appear, and study its inversion as a possible compression structure.",
+      "why": "Two halls earlier, at the laundry lines, the reader was already given Gaudí, the inversion and the same Huerta citation; introduced again as if new, the book seems to forget what it told them.",
+      "proposal": "Open the section with the return: \"The hanging models we met at the laundry lines offered another way to approach this problem...\" and keep the footnote as a repeat citation (its Equilibrium gloss can stay).",
+      "evidence": "commons/maps/FormFinding_Catenary/final.md:17 and :60 (Gaudí, the inversion, [^hanging-model] Huerta 2006 with a laundry-specific gloss); commons/maps/FormFinding_Equilibrium/final.md:50 and :58 (same citation, different gloss).",
+      "review": "amended: Confirmed: Catenary final.md:17 introduces Gaudí, the inversion and [^hanging-model]; :60 is the Huerta 2006 footnote. Equilibrium :50 re-explains the same inversion from scratch with the same footnote key, :58 the same citation. One evidence correction: the two footnote glosses differ (Catenary: \"on hanging models, graphical methods and equilibrium design. The inversion is conditional...\"; Equilibrium: \"The physical equilibrium method is a reference for these digital models, not a claim...\"), so it is the same citation, not the same footnote text. The returning phrase is an improvement: the book should remember what it told the reader two halls ago.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.011",
+      "title": "The bowl's cost reads as x²/4 + z²; the code is a quarter of the sum",
+      "spec": "[prose] FormFinding_Descent\nQuote: “On the opening bowl, the cost is one quarter of x squared plus z squared.”\nWhy: Read aloud it is x²/4 + z², a bowl twice as steep one way; the code is a quarter of the sum, a round bowl. Nothing on the lab's boards prints the cost formula, so the sentence is the visitor's only statement of the surface and it describes the wrong one.\nDo: \"On the opening bowl, the cost is a quarter of the sum of x squared and z squared.\"\nEvidence: commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:31 (`return 0.25 * p.length_squared()`); :124-125 (PARTS and RULE board text; no cost formula printed).\nFile: commons/maps/FormFinding_Descent/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Descent"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "FormFinding_Descent",
+      "quote": "On the opening bowl, the cost is one quarter of x squared plus z squared.",
+      "why": "Read aloud it is x²/4 + z², a bowl twice as steep one way; the code is a quarter of the sum, a round bowl. Nothing on the lab's boards prints the cost formula, so the sentence is the visitor's only statement of the surface and it describes the wrong one.",
+      "proposal": "\"On the opening bowl, the cost is a quarter of the sum of x squared and z squared.\"",
+      "evidence": "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:31 (`return 0.25 * p.length_squared()`); :124-125 (PARTS and RULE board text; no cost formula printed).",
+      "review": "amended: Confirmed: descent_landscape_lab.gd:31 `return 0.25 * p.length_squared()` — a quarter of (x² + z²), a round bowl — while \"one quarter of x squared plus z squared\" reads as x²/4 + z². One correction to the why: the RULE board does not print the cost formula (:125 prints \"p_next = p - rate * gradient(p)\", \"SMALL SLOPE is a tolerance...\", \"Cost is authored; height = 0.40 + 0.22 * cost\"), so a visitor cannot check it against the board; only the source disagrees with the sentence. The rewrite is unambiguous and costs nothing.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.012",
+      "title": "\"what those choose\" is a slip at the chapter's most literal sentence",
+      "spec": "[prose] FormFinding_Relaxation\nQuote: “Somebody chose a stiffness, a pin ring, a pulse and a number of steps, and the amphora is what those choose.”\nWhy: The grammatical slip makes the reader stop to parse the sentence exactly where the fossil argument should land.\nDo: \"...and the amphora is what those choices left.\"\nEvidence: commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:33-40 (the four exports the sentence names: pin_top_fraction, preinflate, stiffness, sim_steps).\nFile: commons/maps/FormFinding_Relaxation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Relaxation"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "FormFinding_Relaxation",
+      "quote": "Somebody chose a stiffness, a pin ring, a pulse and a number of steps, and the amphora is what those choose.",
+      "why": "The grammatical slip makes the reader stop to parse the sentence exactly where the fossil argument should land.",
+      "proposal": "\"...and the amphora is what those choices left.\"",
+      "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:33-40 (the four exports the sentence names: pin_top_fraction, preinflate, stiffness, sim_steps).",
+      "review": "kept: Confirmed: frozen_glass_vessel.gd:33 pin_top_fraction, :34 preinflate, :35 stiffness, :40 sim_steps are the four choices the sentence names, and \"the amphora is what those choose\" is a grammatical slip (choices do not choose) at the sentence the whole fossil argument lands on. \"what those choices left\" fixes it. S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.017",
+      "title": "Show the deep well from its outside edge",
+      "spec": "[figure] FormFinding_Annealing\nQuote: “Approach the narrow well from its outside edge and look down into it.”\nWhy: The review measured that the deep well reads flat from the front because every mesh normal points up, and rendered an accepted standing view from the outside edge at world eye height 1.7 m; none of the six chapters carries an image, so the reader outside the headset cannot see the depth the paragraph asks them to compare.\nDo: Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png (the 1.7 m camera; the accepted/ copy of the same name was shot from 0.85 m) after this paragraph, using the Color_Pillar embed convention, with the caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\"\nEvidence: doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); search/AUDIT.md:67 and :70 (world y = 1.7); search/standing/Annealing/q-deep-side-camera.json position (5.1, 1.7, 3.5) versus search/accepted/Annealing/q-deep-side-camera.json position (5.1, 0.85, 3.5); search/final/Annealing/ contains no q-deep-side.png; commons/artifacts/max_q_basin_room/max_q_basin_room.gd:95 (normals.append(Vector3.UP)), :139 (static cube); commons/maps/Color_Pillar/final.md:9-11 (embed convention).\nFile: commons/maps/FormFinding_Annealing/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Annealing"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "FormFinding_Annealing",
+      "quote": "Approach the narrow well from its outside edge and look down into it.",
+      "why": "The review measured that the deep well reads flat from the front because every mesh normal points up, and rendered an accepted standing view from the outside edge at world eye height 1.7 m; none of the six chapters carries an image, so the reader outside the headset cannot see the depth the paragraph asks them to compare.",
+      "proposal": "Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png (the 1.7 m camera; the accepted/ copy of the same name was shot from 0.85 m) after this paragraph, using the Color_Pillar embed convention, with the caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\"",
+      "evidence": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); search/AUDIT.md:67 and :70 (world y = 1.7); search/standing/Annealing/q-deep-side-camera.json position (5.1, 1.7, 3.5) versus search/accepted/Annealing/q-deep-side-camera.json position (5.1, 0.85, 3.5); search/final/Annealing/ contains no q-deep-side.png; commons/artifacts/max_q_basin_room/max_q_basin_room.gd:95 (normals.append(Vector3.UP)), :139 (static cube); commons/maps/Color_Pillar/final.md:9-11 (embed convention).",
+      "review": "amended: Confirmed with one path correction. SUMMARY.md:26 links search/standing/Annealing/q-deep-side.png and search/AUDIT.md:67,70 say both Q detail cameras use world y = 1.7; that file's camera json is position (5.1, 1.7, 3.5), and the PNG shows the DEEP / NARROW label, the steep well and the cube at its bottom. The task's path search/accepted/Annealing/q-deep-side.png exists but its camera json is (5.1, 0.85, 3.5) — half eye height — and search/final/Annealing/ has no q-deep-side.png at all. max_q_basin_room.gd:95 normals.append(Vector3.UP) confirmed; :139 the cube \"never moving\". No chapter in the sequence carries an image (grep '![' = 0 in all six); Color_Pillar final.md:9-11 shows the convention (image line under /book-review/doc/book/iterations/..., italic caption). Embedding one existing PNG with the convention is S, not M.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.018",
+      "title": "Give the four middle chapters a title line",
+      "spec": "[structure] FormFinding_Catenary\nQuote: “What has already been decided when a curve seems to find itself?”\nWhy: Descent and Forge open with a \"# \" title, and 148 of the spine's 196 chapters do; Catenary, Relaxation, Equilibrium and Annealing open on a bare sentence, so in any rendering that shows titles the sequence's middle has none while its ends do.\nDo: Give each of the four a one-line \"# \" title above its opening sentence (for example \"# Drawn, evaluated, settled\", \"# A fossil of forces\", \"# Balanced by arithmetic\", \"# Low enough to hold\"), leaving the opening sentences as they are.\nEvidence: commons/maps/FormFinding_Descent/final.md:1 and commons/maps/FormFinding_Forge/final.md:1 (headings); Catenary, Relaxation, Equilibrium and Annealing final.md:1 (none); scan of every map listed by curriculum_spine.json this session: 148 chapters open with \"# \", 48 do not.\nFile: commons/maps/FormFinding_Catenary/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Catenary"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "FormFinding_Catenary",
+      "quote": "What has already been decided when a curve seems to find itself?",
+      "why": "Descent and Forge open with a \"# \" title, and 148 of the spine's 196 chapters do; Catenary, Relaxation, Equilibrium and Annealing open on a bare sentence, so in any rendering that shows titles the sequence's middle has none while its ends do.",
+      "proposal": "Give each of the four a one-line \"# \" title above its opening sentence (for example \"# Drawn, evaluated, settled\", \"# A fossil of forces\", \"# Balanced by arithmetic\", \"# Low enough to hold\"), leaving the opening sentences as they are.",
+      "evidence": "commons/maps/FormFinding_Descent/final.md:1 and commons/maps/FormFinding_Forge/final.md:1 (headings); Catenary, Relaxation, Equilibrium and Annealing final.md:1 (none); scan of every map listed by curriculum_spine.json this session: 148 chapters open with \"# \", 48 do not.",
+      "review": "kept: Count verified this session over the 196 maps listed by curriculum_spine.json's 24 sequences: 148 final.md files open with \"# \", 48 do not, and the formfinding halls without a title are exactly FormFinding_Catenary, FormFinding_Relaxation, FormFinding_Equilibrium and FormFinding_Annealing; Descent (:1 \"# Where does downhill take you?\") and Forge (:1 \"# A shape that counts\") have one. The claim is hedged to renderings that show titles, and a sequence whose ends are titled and whose middle is not is a real inconsistency for the reader whichever surface they use. The suggested titles are offered as examples; S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_formfinding.002",
+      "title": "The forge machine is the first work past the door and the chapter never mentions it",
+      "spec": "[encounter] FormFinding_Forge\nQuote: “At the neighbouring optimiser, follow the point and its trail across the coloured surface.”\nWhy: Confirmed. The map puts self_shaping_forge at (5,3), three cells from the spawn at (2,2), and the museum agrees: ada_run/em_bake.json seals it at hall cell [5,7], and ada_run/em_layout_walk.json shows that seal three rows inside the north door in the door's own column, ahead of the puzzle [9,9], the optimiser [4,11] and the screen [8-12,11]. Its banner reads DESCENT TOWARD MAX Q (:112), its readout says MAX Q once Q passes 0.92 (:160-162), Q is a smoothstep of sin(t*TAU*0.13), so it peaks about every 7.7 s (:170-171), and the 180 studs lerp from a random cloud to targets written in _build_form_targets (:156, :115-140). The book names it the hall's hero and the roles tool lists it as Forge's secondary. One correction: the wall card does carry the book's draft line and reflection note (\"found not imposed, except the form is imposed ... the forge stages the descent whose whole claim is that it cannot be staged\"), so the visitor gets one wall sentence; the chapter gives none, and \"the neighbouring optimiser\" has no neighbour on the page.\nDo: Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Keep it consistent with the wall note already in commons/data/book/formfinding.json pearls[6].lines[0].note, which says the same thing in one line.\nEvidence: commons/maps/FormFinding_Forge/map_data.json:95 (self_shaping_forge at col 5, row 3), :80 (spawn col 2, row 2); ada_run/em_bake.json segments[\"formfinding|formfinding forge\"].placed (self_shaping_forge cell [5,7], balance_puzzle [9,9], gradient_descent_optimizer [4,11], science_screen [10,11]); ada_run/em_layout_walk.json halls[\"formfinding|formfinding forge\"].cells (door at row 4 cols 6-8, seal 's' at row 7 col 6); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :23 (cycle_rate 0.13), :112, :115-140, :156, :160-162, :170-171; commons/data/book/formfinding.json pearls[6].hero and pearls[6].lines[0].note; tools/artifact_roles.py --brief --seq formfinding (Forge secondary: self_shaping_forge, science_screen).\nFile: commons/maps/FormFinding_Forge/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Forge"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "FormFinding_Forge",
+      "quote": "At the neighbouring optimiser, follow the point and its trail across the coloured surface.",
+      "why": "Confirmed. The map puts self_shaping_forge at (5,3), three cells from the spawn at (2,2), and the museum agrees: ada_run/em_bake.json seals it at hall cell [5,7], and ada_run/em_layout_walk.json shows that seal three rows inside the north door in the door's own column, ahead of the puzzle [9,9], the optimiser [4,11] and the screen [8-12,11]. Its banner reads DESCENT TOWARD MAX Q (:112), its readout says MAX Q once Q passes 0.92 (:160-162), Q is a smoothstep of sin(t*TAU*0.13), so it peaks about every 7.7 s (:170-171), and the 180 studs lerp from a random cloud to targets written in _build_form_targets (:156, :115-140). The book names it the hall's hero and the roles tool lists it as Forge's secondary. One correction: the wall card does carry the book's draft line and reflection note (\"found not imposed, except the form is imposed ... the forge stages the descent whose whole claim is that it cannot be staged\"), so the visitor gets one wall sentence; the chapter gives none, and \"the neighbouring optimiser\" has no neighbour on the page.",
+      "proposal": "Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Keep it consistent with the wall note already in commons/data/book/formfinding.json pearls[6].lines[0].note, which says the same thing in one line.",
+      "evidence": "commons/maps/FormFinding_Forge/map_data.json:95 (self_shaping_forge at col 5, row 3), :80 (spawn col 2, row 2); ada_run/em_bake.json segments[\"formfinding|formfinding forge\"].placed (self_shaping_forge cell [5,7], balance_puzzle [9,9], gradient_descent_optimizer [4,11], science_screen [10,11]); ada_run/em_layout_walk.json halls[\"formfinding|formfinding forge\"].cells (door at row 4 cols 6-8, seal 's' at row 7 col 6); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :23 (cycle_rate 0.13), :112, :115-140, :156, :160-162, :170-171; commons/data/book/formfinding.json pearls[6].hero and pearls[6].lines[0].note; tools/artifact_roles.py --brief --seq formfinding (Forge secondary: self_shaping_forge, science_screen).",
+      "review": "amended: Encounter confirmed by map, bake and walk grid, not just the map: the forge stands first past the museum's north door. Amended the why to admit the wall note exists (the visitor is not wordless, the chapter is) and to add the museum evidence.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "stale": true
+    },
+    {
+      "id": "book_formfinding.009",
+      "title": "\"A further encounter to build\" addresses the museum, not the visitor (Catenary and Equilibrium)",
+      "spec": "[prose] FormFinding_Catenary\nQuote: “It is a further encounter to build, not a movement to imagine that you have already seen.”\nWhy: Confirmed. catenoid.gd and helicoid.gd each build one mesh in create_parametric_surface from _ready (catenoid :21-25, helicoid :20-24) and contain no process loop, lerp or morph, so nothing performs the deformation; the sentence's job is done by the one before it. \"To build\" is the makers' to-do list in the visitor's chapter, and Equilibrium :52 has the same tic (\"Those encounters are still to be built.\"). Both are one-line cuts; fold them into one task.\nDo: Catenary :44: cut the sentence, or \"Nothing in this room performs it, so do not count it as seen.\" Equilibrium :52: replace \"Those encounters are still to be built.\" with \"None of those experiments stands in this room.\"\nEvidence: commons/primitives/parametric/catenoid.gd:21-25, :25-86 (one mesh, no process); commons/primitives/parametric/helicoid.gd:20-24, :24-84; commons/maps/FormFinding_Catenary/final.md:44; commons/maps/FormFinding_Equilibrium/final.md:52.\nFile: commons/maps/FormFinding_Catenary/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Catenary"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "FormFinding_Catenary",
+      "quote": "It is a further encounter to build, not a movement to imagine that you have already seen.",
+      "why": "Confirmed. catenoid.gd and helicoid.gd each build one mesh in create_parametric_surface from _ready (catenoid :21-25, helicoid :20-24) and contain no process loop, lerp or morph, so nothing performs the deformation; the sentence's job is done by the one before it. \"To build\" is the makers' to-do list in the visitor's chapter, and Equilibrium :52 has the same tic (\"Those encounters are still to be built.\"). Both are one-line cuts; fold them into one task.",
+      "proposal": "Catenary :44: cut the sentence, or \"Nothing in this room performs it, so do not count it as seen.\" Equilibrium :52: replace \"Those encounters are still to be built.\" with \"None of those experiments stands in this room.\"",
+      "evidence": "commons/primitives/parametric/catenoid.gd:21-25, :25-86 (one mesh, no process); commons/primitives/parametric/helicoid.gd:20-24, :24-84; commons/maps/FormFinding_Catenary/final.md:44; commons/maps/FormFinding_Equilibrium/final.md:52.",
+      "review": "amended: Prose defect confirmed; amended only to fix the sibling sentence in the same pass since the task already names it.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "stale": true
+    },
+    {
+      "id": "book_formfinding.013",
+      "title": "Show the deep well from its outside edge (web reader only) and give the basin real normals (headset)",
+      "spec": "[figure] FormFinding_Annealing\nQuote: “Approach the narrow well from its outside edge and look down into it.”\nWhy: The measurement is confirmed: max_q_basin_room.gd:95 appends Vector3.UP for every vertex, so the well shades flat from the front, and SUMMARY.md:26 records a standing view from the outside edge at 1.7 m eye height. Three corrections. The PNG is under search/accepted/Annealing/ and search/standing/Annealing/ (SUMMARY links the standing one); search/final/Annealing/ holds only annealing-control, end-table and hall, so the task's second path is wrong. The whole review directory is untracked (`??`), as is the 2026-09-23 pillar directory the embed convention is borrowed from, so the embed would point at a 1.4 MB file not in the repo. And an embedded image never reaches the headset: the wall reads the book's pearl lines, so this task serves the reader outside the headset, which the request ranks below VR. The VR-facing counterpart the SUMMARY itself names is per-vertex normals for the basin so the depth reads from any standpoint.\nDo: Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png after this paragraph using the Color_Pillar convention (image line plus italic caption), caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\" Commit the PNG with it. Rank it after the VR fix: replace the UP normals at max_q_basin_room.gd:95 with normals computed from the well's profile (or generate_normals on the SurfaceTool), so the depth the paragraph asks the visitor to compare is visible in the headset.\nEvidence: commons/artifacts/max_q_basin_room/max_q_basin_room.gd:85-95 (normals.append(Vector3.UP)); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); ls search/accepted/Annealing/ and search/standing/Annealing/ (q-deep-side.png present, 1,430,477 bytes) vs search/final/Annealing/ (absent); git status: ?? doc/book/iterations/2026-09-19-formfinding-review/ and ?? doc/book/iterations/2026-09-23-pillar-colour-between/; commons/maps/Color_Pillar/final.md:9-11 (embed convention); commons/data/book/formfinding.json pearls (wall lines carry no images).\nFile: commons/maps/FormFinding_Annealing/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Annealing"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "FormFinding_Annealing",
+      "quote": "Approach the narrow well from its outside edge and look down into it.",
+      "why": "The measurement is confirmed: max_q_basin_room.gd:95 appends Vector3.UP for every vertex, so the well shades flat from the front, and SUMMARY.md:26 records a standing view from the outside edge at 1.7 m eye height. Three corrections. The PNG is under search/accepted/Annealing/ and search/standing/Annealing/ (SUMMARY links the standing one); search/final/Annealing/ holds only annealing-control, end-table and hall, so the task's second path is wrong. The whole review directory is untracked (`??`), as is the 2026-09-23 pillar directory the embed convention is borrowed from, so the embed would point at a 1.4 MB file not in the repo. And an embedded image never reaches the headset: the wall reads the book's pearl lines, so this task serves the reader outside the headset, which the request ranks below VR. The VR-facing counterpart the SUMMARY itself names is per-vertex normals for the basin so the depth reads from any standpoint.",
+      "proposal": "Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png after this paragraph using the Color_Pillar convention (image line plus italic caption), caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\" Commit the PNG with it. Rank it after the VR fix: replace the UP normals at max_q_basin_room.gd:95 with normals computed from the well's profile (or generate_normals on the SurfaceTool), so the depth the paragraph asks the visitor to compare is visible in the headset.",
+      "evidence": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd:85-95 (normals.append(Vector3.UP)); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); ls search/accepted/Annealing/ and search/standing/Annealing/ (q-deep-side.png present, 1,430,477 bytes) vs search/final/Annealing/ (absent); git status: ?? doc/book/iterations/2026-09-19-formfinding-review/ and ?? doc/book/iterations/2026-09-23-pillar-colour-between/; commons/maps/Color_Pillar/final.md:9-11 (embed convention); commons/data/book/formfinding.json pearls (wall lines carry no images).",
+      "review": "amended: Kept as a figure task but corrected: wrong path in the evidence, untracked source, and no benefit to the headset visitor on its own; paired with the normals fix that would give the headset the same depth.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "stale": true
+    },
+    {
+      "id": "book_formfinding.014",
+      "title": "Give the four middle chapters a title line (web rendering only)",
+      "spec": "[structure] FormFinding_Catenary\nQuote: “What has already been decided when a curve seems to find itself?”\nWhy: The count reproduces exactly: of the 210 maps listed by curriculum_spine.json's sequences, 196 have a final.md, 148 open with \"# \" and 48 do not; Descent (\"# Where does downhill take you?\") and Forge (\"# A shape that counts\") have titles, Catenary, Relaxation, Equilibrium and Annealing open on a bare sentence. Two corrections. This is invisible in the headset: wall cards read the book's pearl lines, not the chapter's H1, so it is a web-page consistency fix and ranks below the VR tasks. And three of the four suggested titles duplicate a section heading already inside the same chapter (\"## A fossil of forces\" Relaxation :48, \"## Balanced by arithmetic\" Equilibrium :5, \"## Low enough to hold, high enough to be moved\" Annealing :51). A reason to do it anyway: map_info.title is the bare lookup name for Relaxation (\"FormFinding_Relaxation\") and Annealing (\"FormFinding_Annealing\"), so any renderer that falls back to the map title prints the lookup name.\nDo: Give each of the four a one-line \"# \" title that does not repeat one of its own section headings, for example \"# Drawn, evaluated, settled\" (Catenary), \"# What a budget leaves\" (Relaxation), \"# Where forces cancel\" (Equilibrium), \"# Willing to get worse\" (Annealing), leaving the opening sentences as they are.\nEvidence: Scan this session over commons/maps/curriculum_spine.json sequences -> commons/maps/sequences/*.json maps -> commons/maps/<Map>/final.md first non-blank line: 148 with \"# \", 48 without, 14 missing; commons/maps/FormFinding_Descent/final.md:1, FormFinding_Forge/final.md:1; FormFinding_Relaxation/final.md:48, FormFinding_Equilibrium/final.md:5, FormFinding_Annealing/final.md:51 (existing H2s); map_data.json \"title\" for Relaxation and Annealing (bare lookup names).\nFile: commons/maps/FormFinding_Catenary/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Catenary"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "FormFinding_Catenary",
+      "quote": "What has already been decided when a curve seems to find itself?",
+      "why": "The count reproduces exactly: of the 210 maps listed by curriculum_spine.json's sequences, 196 have a final.md, 148 open with \"# \" and 48 do not; Descent (\"# Where does downhill take you?\") and Forge (\"# A shape that counts\") have titles, Catenary, Relaxation, Equilibrium and Annealing open on a bare sentence. Two corrections. This is invisible in the headset: wall cards read the book's pearl lines, not the chapter's H1, so it is a web-page consistency fix and ranks below the VR tasks. And three of the four suggested titles duplicate a section heading already inside the same chapter (\"## A fossil of forces\" Relaxation :48, \"## Balanced by arithmetic\" Equilibrium :5, \"## Low enough to hold, high enough to be moved\" Annealing :51). A reason to do it anyway: map_info.title is the bare lookup name for Relaxation (\"FormFinding_Relaxation\") and Annealing (\"FormFinding_Annealing\"), so any renderer that falls back to the map title prints the lookup name.",
+      "proposal": "Give each of the four a one-line \"# \" title that does not repeat one of its own section headings, for example \"# Drawn, evaluated, settled\" (Catenary), \"# What a budget leaves\" (Relaxation), \"# Where forces cancel\" (Equilibrium), \"# Willing to get worse\" (Annealing), leaving the opening sentences as they are.",
+      "evidence": "Scan this session over commons/maps/curriculum_spine.json sequences -> commons/maps/sequences/*.json maps -> commons/maps/<Map>/final.md first non-blank line: 148 with \"# \", 48 without, 14 missing; commons/maps/FormFinding_Descent/final.md:1, FormFinding_Forge/final.md:1; FormFinding_Relaxation/final.md:48, FormFinding_Equilibrium/final.md:5, FormFinding_Annealing/final.md:51 (existing H2s); map_data.json \"title\" for Relaxation and Annealing (bare lookup names).",
+      "review": "amended: Fact confirmed, proposal repaired (duplicate headings) and scoped: a web-rendering nicety with no headset effect.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "stale": true
+    }
+  ]
+}

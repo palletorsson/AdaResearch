@@ -1,0 +1,26 @@
+[
+  {
+    "fault": "wrong-coordinate-frame",
+    "rejected": true,
+    "failures": [
+      "record stores study coordinates rather than pivot offset"
+    ]
+  },
+  {
+    "fault": "missing-time-step",
+    "rejected": true,
+    "failures": [
+      "smaller time steps give a close two-second solution"
+    ]
+  },
+  {
+    "fault": "unbounded-count",
+    "rejected": true,
+    "failures": [
+      "fine history obeys count bound",
+      "fine count bound retains about three seconds",
+      "coarse age bound keeps more duration",
+      "independent 20-entry variation hits count limit"
+    ]
+  }
+]

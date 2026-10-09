@@ -1,0 +1,121 @@
+[
+  {
+    "map": "Trans_Pre",
+    "status": "draft-awaiting-author-review",
+    "title": "One cube, cumulative motion",
+    "short": "Cube rises → add turn → add pulse → collect by walking. Teach whole-object transforms; time supports motion; overlap supports collection. Keep geometry fixed.",
+    "bring": "Cube shape and creation, coordinates, initialization and updates.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "One box; elapsed wave; three transform assignments; area and player-filtered signal.",
+    "check": "Disable operations independently; stretch the wave period; collect through actual overlap.",
+    "later": "Score, flourish, a general interaction framework.",
+    "predecessor": null,
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "44b325cc4aaa4859fa698c948e688ddb322a4585f6945fd15587d5f37b57f6af",
+    "tutorial_sha256": "61622fbca91a811612dd289db54bd121ae1dd65b046ba4f14749e027b300eb25"
+  },
+  {
+    "map": "Trans_Introduction",
+    "status": "draft-awaiting-author-review",
+    "title": "Three ways to reach",
+    "short": "Reuse translate/rotate/scale in three models of the installed crossings. Hold poses; animate; move the far bank and inspect the gap.",
+    "bring": "Pre’s cube and transforms; functions and loops from Primitives.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "Repeat known construction with a returning box function; interpolate a pose fraction.",
+    "check": "At full pose, compare bank edges; move the far bank half a metre without changing the span.",
+    "later": "Rider transport, physical support and detailed control wiring.",
+    "predecessor": "Trans_Pre",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "8d33edea9a296aa189ec7b0f935e715d9cf5038f38d2a6f0657313c4ce21e0bc",
+    "tutorial_sha256": "d5b60eb2da6b527a14fa39fb3cf3f5483adc677f7d872999930c349f62c2ec6a"
+  },
+  {
+    "map": "Trans_Translation",
+    "status": "draft-awaiting-author-review",
+    "title": "Position, then route",
+    "short": "Move a level box diagonally. Compare a rise-then-across journey to the same destination. Keep orientation and size.",
+    "bring": "Travel study; displacement from Lines; time and interpolation.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "Two endpoints; direct interpolation; one optional corner and a branch.",
+    "check": "Predict halfway and final positions for both paths; add Z to the destination.",
+    "later": "General waypoint machines, curved paths and constant-speed reparameterization.",
+    "predecessor": "Trans_Introduction",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "8e3f2a748962f83bbcf4586bb8478a59d1e0df8b25afe223213f0c34b627b5be",
+    "tutorial_sha256": "16d270d798652e21d1c750bb13cce31c21a9ac26f1505b477a891194a56a8580"
+  },
+  {
+    "map": "Trans_Rotation",
+    "status": "draft-awaiting-author-review",
+    "title": "A chosen centre",
+    "short": "Turn the box through a parent pivot. Mark a face; offset the box; change the axis. Separate local position from world movement.",
+    "bring": "Cube, time, local/world coordinates; hierarchy already encountered.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "Pivot node; fixed child offset; axis-angle orientation; attached mark.",
+    "check": "Quarter-turn centre and face position; fixed internal distances; full return; another axis.",
+    "later": "Multiple rotation order, rider orientation and sweep rendering.",
+    "predecessor": "Trans_Translation",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "7192b6709596a488dee88e38e6fe2c3c508fbdbbcd81919635504f347605ae43",
+    "tutorial_sha256": "f742271e7d08d2d1590a310d5ab0cbeaaf0e503fa93ffad3b07fc623e0c4b0fd"
+  },
+  {
+    "map": "Trans_Scale",
+    "status": "draft-awaiting-author-review",
+    "title": "A group changes size",
+    "short": "Three boxes make a doorway; a black point remains outside its parent. Compare uniform enlargement and width-only change.",
+    "bring": "Parent-child relation; box function; familiar sphere construction.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "One scaled parent; known meshes placed around a threshold origin.",
+    "check": "Predict clear dimensions and unchanged witness under 4×, width-only and 2× XY changes.",
+    "later": "Room relocation, solid passage and material theory.",
+    "predecessor": "Trans_Rotation",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "9fbf053a9fecb0f142c5e33741fb92c9b57223ad1b7e4ad9f5ef7aa1d4c93252",
+    "tutorial_sha256": "034e1e0cb3ac08abb2a1b51033aea444e7b6f78eaaffa6d252b6f56fc295da66"
+  },
+  {
+    "map": "Trans_Body",
+    "status": "draft-awaiting-author-review",
+    "title": "Approach supplies the value",
+    "short": "World-space horizontal distance drives one cube’s bounded scale or turn. Preserve its floor contact; departure restores it.",
+    "bring": "Scale, turn, vectors, conditions and the museum player contract.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "Declared player group lookup; range mapping; response function.",
+    "check": "Near/middle/far values; height independence; return; extend the sensing reach.",
+    "later": "Multi-visitor blending, smoothing and cell removal.",
+    "predecessor": "Trans_Scale",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "59fe73891e880563c49b4a8c5be31ef7eb181685bb09cda43f53a1d858f8f304",
+    "tutorial_sha256": "e63a948c16fb0bb0bf1b2943a27100b1c5c543c8943d36e42f4557d384529526"
+  },
+  {
+    "map": "Trans_Pit",
+    "status": "draft-awaiting-author-review",
+    "title": "Compose an opening",
+    "short": "Two boxes translate, turn and shrink beside a fixed frame. Actual player overlap requests opening; absence requests return.",
+    "bring": "All three transforms; construction function; array, loop and Area3D.",
+    "given": "Existing Endless Museum room, camera, light and player; desktop em_walker/layer 1 or XR player_body/layer 20. Collision and riding in installed artifacts only, except the explicitly created overlap areas.",
+    "build": "Two leaves; one bounded progress value; continuing occupancy query.",
+    "check": "Closed/middle/open poses; slower duration; greater slide; props ignored; either visitor holds it open.",
+    "later": "Solid leaf collision, staged movement and the installed closing delay.",
+    "predecessor": "Trans_Body",
+    "printed_files": [
+      "lesson.gd"
+    ],
+    "source_sha256": "93f5a60dc3ea24d97ba06f8203460cd249bf15f7b00b9121fdb3ae292e96f389",
+    "tutorial_sha256": "ccc3628a793814cc952c1038f0d59c9f22f1ee43c9ffbaacefcd78790458d647"
+  }
+]

@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>tension_score.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eeeae3;color:#302830;font:17px/1.65 system-ui}header,main,footer{max-width:1180px;margin:auto;padding:42px 30px}h1{font:clamp(58px,8vw,100px)/1.02 Georgia;margin:24px 0}h2{font:38px/1.2 Georgia}a{color:#873c59;text-underline-offset:4px}nav{display:flex;gap:25px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:770px}.reading{font:24px/1.65 Georgia;max-width:760px;margin:65px auto}.reading p{margin:0 0 28px}section{padding:32px 0;scroll-margin-top:25px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small{font-size:13px;color:#71636a}details{background:#e4dcd5;padding:22px;margin:25px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a242b;color:#ffe0ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 20px;border:1px solid #9c8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ad5178}.states figure{display:none}.states #rest:checked~.rest,.states #pull:checked~.pull,.states #loaded:checked~.loaded{display:block}.states input:checked+label{background:#853b58;color:white}.note{border-left:3px solid #b66584;padding:5px 23px}code{font-size:.9em}@media(max-width:650px){header,main,footer{padding:28px 17px}.reading{font-size:21px}}</style><main><a href="index.html#making">Back to the study</a><h1>tension_score.gd</h1><pre>extends RefCounted
+## Small discrete membrane, solved at a fixed step with compliant distance links.
+## Metres / seconds / kilograms. An educational model, not measured nylon.
+const NX := 25
+const NZ := 9
+const STEP := 1.0 / 120.0
+const NODE_MASS := 0.035
+const LOAD_KG := [0.0, 1.0, 3.0]
+var compliance := 0.0015
+var damping := 2.8
+var load_kg := 0.0
+var points := PackedVector3Array()
+var previous := PackedVector3Array()
+var rest := PackedVector3Array()
+var links: Array[Vector2i] = []
+var lengths := PackedFloat32Array()
+var pins := PackedInt32Array([0, NX-1, (NZ-1)*NX, NZ*NX-1])
+var grip_index := (NZ-1)*NX + NX/2
+var load_indices := PackedInt32Array()
+var grip_held := false
+var grip_target := Vector3.ZERO
+
+func _init() -&gt; void:
+	for z in NZ:
+		for x in NX:
+			var u := float(x)/(NX-1)
+			# A narrow waist gives the sheet four tapering reaches toward its pins.
+			var width := lerpf(0.30,1.1,pow(absf(u*2.0-1.0),1.6))
+			rest.append(Vector3(lerpf(-2.8,2.8,u),2.25,lerpf(-width,width,float(z)/(NZ-1))))
+			if x&gt;0: add_link(z*NX+x-1,z*NX+x)
+			if z&gt;0: add_link((z-1)*NX+x,z*NX+x)
+			if z&gt;0 and x&gt;0:
+				add_link((z-1)*NX+x-1,z*NX+x)
+				add_link((z-1)*NX+x,z*NX+x-1)
+	for z in range(3,6):
+		for x in range(11,14): load_indices.append(z*NX+x)
+	reset()
+
+func add_link(a: int,b: int) -&gt; void:
+	links.append(Vector2i(a,b)); lengths.append(rest[a].distance_to(rest[b]))
+
+func reset() -&gt; void:
+	points = rest.duplicate(); previous = rest.duplicate()
+	load_kg = 0.0; grip_held = false
+
+func bounded_target(target: Vector3) -&gt; Vector3:
+	return Vector3(clampf(target.x,-2.2,2.2),clampf(target.y,0.45,3.6),clampf(target.z,-1.8,2.4))
+
+func inverse_mass(index: int) -&gt; float:
+	if index in pins or (grip_held and index==grip_index): return 0.0
+	return 1.0/NODE_MASS
+
+func step() -&gt; void:
+	var retention := exp(-damping*STEP)
+	for i in points.size():
+		if i in pins: points[i]=rest[i]; previous[i]=rest[i]; continue
+		if grip_held and i==grip_index:
+			points[i]=bounded_target(grip_target); previous[i]=points[i]; continue
+		var acceleration := Vector3(0,-9.81,0)
+		if i in load_indices: acceleration.y -= 9.81*load_kg/(load_indices.size()*NODE_MASS)
+		var at := points[i]
+		points[i] += (points[i]-previous[i])*retention + acceleration*STEP*STEP
+		previous[i]=at
+	var lambdas := PackedFloat32Array(); lambdas.resize(links.size())
+	var alpha := compliance/(STEP*STEP)
+	for iteration in 8:
+		for n in links.size():
+			var a := links[n].x; var b := links[n].y
+			var delta := points[b]-points[a]; var distance := delta.length()
+			var wa := inverse_mass(a); var wb := inverse_mass(b)
+			if distance&lt;0.00001 or wa+wb==0.0: continue
+			var dl := (-(distance-lengths[n])-alpha*lambdas[n])/(wa+wb+alpha)
+			lambdas[n] += dl
+			var direction := delta/distance
+			points[a] -= wa*dl*direction
+			points[b] += wb*dl*direction
+		for i in points.size():
+			if points[i].y &lt; 0.12: points[i].y=0.12; previous[i].y=0.12
+
+func load_position() -&gt; Vector3:
+	var total := Vector3.ZERO
+	for i in load_indices: total += points[i]
+	return total/float(load_indices.size())
+</pre></main></html>

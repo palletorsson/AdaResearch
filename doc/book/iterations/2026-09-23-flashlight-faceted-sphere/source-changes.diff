@@ -1,0 +1,187 @@
+--- before/algorithms/postprocessing/flashlight_demo/flashlight_demo.gd
++++ algorithms/postprocessing/flashlight_demo/flashlight_demo.gd
+@@ -23,6 +23,11 @@
+ ## Optional floor-level installation; legacy placements retain their authored heights.
+ @export_enum("legacy", "standing") var mount: String = "legacy"
+ 
++## Optional coarse receiver for the standing lesson. These are divisions around
++## the equator, not a total face count. Zero preserves other installations.
++@export var receiver_sides: int = 0
++var _receiver_root: Node3D
++
+ ## CAPTURE FIXTURE, not an axis, and OFF in every room. The lamp bodies are the
+ ## only MeshInstance3D in this scene — the board is a CSGBox3D, which the
+ ## capture AABB does not count — so a sweep frames four 4 cm cylinders and
+@@ -56,6 +61,7 @@
+ 
+ func _ready() -> void:
+ 	_read_ground()
++	receiver_sides = _normalise_receiver(get_meta("config_receiver_sides", receiver_sides))
+ 	if str(get_meta("config_mount", mount)) == "standing":
+ 		_mount_standing()
+ 	var canvas: CSGBox3D = get_node_or_null("Canvas") as CSGBox3D
+@@ -88,6 +94,62 @@
+ 		lamp.get_node("SpotLight3D").light_energy = 2.5
+ 	# White starts aimed aside so it does not wash out the first RGB comparison.
+ 	get_node("WhiteFlashlight").rotation_degrees.y = -60.0
++	_build_faceted_receiver()
++
++
++func _normalise_receiver(value: Variant) -> int:
++	var sides := int(str(value))
++	return sides if sides in [5, 7] else 0
++
++
++func _build_faceted_receiver() -> void:
++	if is_instance_valid(_receiver_root):
++		remove_child(_receiver_root)
++		_receiver_root.queue_free()
++		_receiver_root = null
++	if mount != "standing" or receiver_sides == 0:
++		return
++	_receiver_root = Node3D.new()
++	_receiver_root.name = "FacetedReceiver"
++	_receiver_root.position = Vector3(-5.6, 0, -1.0)
++	add_child(_receiver_root)
++
++	# Reuse Godot's sphere construction, but keep one normal per triangle.
++	# The ordinary primitive's emissive grid shader would mask the light lesson.
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.85
++	sphere.height = 1.7
++	sphere.radial_segments = receiver_sides
++	sphere.rings = 3
++	var vertices := sphere.get_faces()
++	var surface := SurfaceTool.new()
++	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
++	surface.set_smooth_group(-1)
++	for i in range(0, vertices.size(), 3):
++		# SphereMesh repeats pole vertices; omit zero-area cap triangles.
++		var area := (vertices[i+1]-vertices[i]).cross(vertices[i+2]-vertices[i])
++		if area.length_squared() < 0.00000001:
++			continue
++		for j in 3:
++			surface.add_vertex(vertices[i+j])
++	surface.generate_normals()
++	var body := MeshInstance3D.new()
++	body.name = "Sphere"
++	body.mesh = surface.commit()
++	body.material_override = get_node("Canvas").material
++	body.position.y = 1.5
++	_receiver_root.add_child(body)
++	body.create_trimesh_collision()
++
++	var pedestal := CSGCylinder3D.new()
++	pedestal.name = "Pedestal"
++	pedestal.radius = 0.44
++	pedestal.height = 0.65
++	pedestal.sides = receiver_sides
++	pedestal.position.y = pedestal.height * 0.5
++	pedestal.material = _matte(Color(0.14, 0.15, 0.17, 1))
++	pedestal.use_collision = true
++	_receiver_root.add_child(pedestal)
+ 
+ 
+ ## A map token reaches here as metadata the grid stamps before add_child; the
+@@ -122,6 +184,12 @@
+ ## Flashlight and a curation_station collection in Curation_Bay_color_4 — carry
+ ## no `ground` key, so this returns on its first line for them.
+ func apply_grid_config(config_data: Dictionary) -> void:
++	if config_data.has("receiver_sides"):
++		var sides := _normalise_receiver(config_data["receiver_sides"])
++		if sides != receiver_sides:
++			receiver_sides = sides
++			if _built:
++				_build_faceted_receiver()
+ 	if not config_data.has("ground"):
+ 		return
+ 	var want: String = _normalise_ground(str(config_data["ground"]))
+--- before/commons/maps/Color_Flashlight/map_data.json
++++ commons/maps/Color_Flashlight/map_data.json
+@@ -164,7 +164,7 @@
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+-   ["", "", "", "", " ", " ", " ", " ", " ", "flashlight_demo:180:0:1#plinth:0#mount:standing", " ", " ", " ", " ", " ", "", "", "", ""],
++   ["", "", "", "", " ", " ", " ", " ", " ", "flashlight_demo:180:0:1#plinth:0#mount:standing#receiver_sides:7", " ", " ", " ", " ", " ", "", "", "", ""],
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+    ["", "", "", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", "", "", ""],
+--- before/commons/maps/Color_Flashlight/intent.md
++++ commons/maps/Color_Flashlight/intent.md
+@@ -2,8 +2,10 @@
+ 
+ The visitor should discover that changing a surface's appearance need not change its material. Keep the board fixed and move the lights. Let the meeting and separation of pools precede the explanation of their RGB values.
+ 
+-Use one primary encounter, `flashlight_demo`, containing four necessary comparisons. Preserve the side cube as an alternate receiver and possible shadow caster; keep it out of the first comparison's sightline. Begin with the white lamp aimed aside, so adding it is a deliberate act.
++Use one primary encounter, `flashlight_demo`, containing the lamp comparisons. Preserve the side cube as an alternate receiver and possible shadow caster; keep it out of the first comparison's sightline. Begin with the white lamp aimed aside, so adding it is a deliberate act.
+ 
+ Sequence handoff: Context's neighbours → Flashlight's illumination → Nails' addressed body surface. The reusable method is to hold one participant fixed, change another, and identify the implementation responsible before generalising to a new receiving body.
+ 
+ The critical opening is the apparent colour's dependence on a relation, followed by the limits of this particular RGB implementation. No extra controls, spectral claims or unmeasured QFEP scores are needed to make that opening.
++
++The author's seven-division faceted sphere returns to the earlier primitive lesson. It shares the board's near-white, nonemissive material. Move a lamp around the fixed sphere before adding a second colour: changing incidence makes neighbouring faces differ without repainting them. Keep the board and side cube; the new receiver is a continuation of the same encounter, not another control panel. Seven counts divisions around the sphere, not its total faces.
+--- before/commons/maps/Color_Flashlight/technical.md
++++ commons/maps/Color_Flashlight/technical.md
+@@ -13,7 +13,7 @@
+ The map places this token at grid (9,9):
+ 
+ ```text
+-flashlight_demo:180:0:1#plinth:0#mount:standing
++flashlight_demo:180:0:1#plinth:0#mount:standing#receiver_sides:7
+ ```
+ 
+ The registry resolves `flashlight_demo` to `res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn`. That scene instances `flashlight.tscn` four times. Each copy inherits XRTools' pickable scene and contains a spotlight and a `ColorSetter` child running `flashlight_color.gd`.
+@@ -43,3 +43,13 @@
+ See `field_notes.md` for the recorded run. Tracked controllers, headset comfort and frame-rate performance are not established by this desktop test.
+ 
+ Carry the distinction into Color_Nails: a change of illumination differs from assigning colour to the material of a preview or tracked hand.
++
++## Faceted receiver — 23 September 2026
++
++The standing installation can opt into `receiver_sides:5` or `receiver_sides:7`; the default zero adds nothing. Color_Flashlight selects seven. The numeric key is registered in `GridInteractablesComponent.CONFIG_PARAM_NAMES` so it cannot be misread as a tutorial rotation. The root retains its authored 180-degree yaw.
++
++The new receiver is at local (-5.6, 0, -1), opposite the existing cube. A 0.65-metre pedestal carries a sphere of radius 0.85 metres, centred 1.5 metres above the floor. It uses Godot SphereMesh with seven radial divisions and three rings, converted to flat-shaded triangles. Degenerate pole triangles are omitted; the final mesh has 42 triangles. Seven is not its total face count. A triangle-mesh static collider follows the visible surface. Both board and sphere use the same near-white matte, nonemissive material; no emissive wire overlay masks the lamp response.
++
++The focused probe and native captures are in `doc/book/iterations/2026-09-23-flashlight-faceted-sphere/`. Forty-three checks pass in the isolated production museum: authored placement/yaw, outward flat normals, collider, supporting floor and three standing-body clearances, pickup/movement/release of all four lamps, and changed rendered red contribution on the unchanged sphere when a held lamp moves sides. All four lights remain on; no lamp toggle is introduced. Five-division authoring and legacy mounting are also checked. The book figure crops and labels two native renders from the same camera.
++
++These supplied-grabber desktop checks do not establish tracked-controller reach, headset comfort, a complete walk around the pedestal or Quest performance.
+--- before/commons/maps/Color_Flashlight/field_notes.md
++++ commons/maps/Color_Flashlight/field_notes.md
+@@ -25,3 +25,11 @@
+ The final run has no script errors. Startup still logs the existing unrecognised UID `uid://rwex60pqapc`; the tested museum scene and lamp interaction load and complete. Corpus index regeneration also reports the existing Tutorial_Disco row-width mismatch, outside this room.
+ 
+ Reusable method: keep the receiver fixed, change one contributing relation, trace the actual assignment, then carry the comparison onto a different receiver. Next missing Colour manuscript to inspect is Color_Rainbow; Color_Nails already provides the immediate book handoff.
++
++## 2026-09-23 — the construction meets the light
++
++At the author's request, add a coarse seven-division sphere to the standing flashlight installation. Keep the mature board comparison, existing receivers and four pickable lamps. The sphere uses the same near-white material as the board, so its changing appearance can return to the earlier primitives without adding painted facet colours or a new interface. Canonical final.md gains two encounter paragraphs and the shared native same-camera illustration.
++
++Two implementation issues were caught before completion: the grid's shorthand parser initially read the new numeric key as yaw, so the key is now explicitly registered; SphereMesh includes degenerate pole triangles, now removed before flat normals and collision are built. The receiver was then moved farther sideways so the older grid cube no longer obscures the pedestal on approach. Final run: 43/43 checks pass. The sphere has 42 nondegenerate triangles, with seven divisions around it. Existing unrelated startup UID and Compatibility-renderer warnings remain in the archived log; no script errors occurred in the completed run.
++
++Evidence, original files, exact text/source diffs and the current reading are under `doc/book/iterations/2026-09-23-flashlight-faceted-sphere/`. Supplied XRTools grabber motion is desktop evidence, not a headset or learner test. No live museum process was restarted and no live bake/save was overwritten. Next: Color_Nails, where the colour can become a chosen surface on the acting body.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -2620,10 +2620,10 @@
+       "sequence": "color",
+       "status": "draft",
+       "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+-      "map_sha256": "031d60bdd81aae8d574c6bae4dfcc6b3ce88d5a3269069ba1f1c39d47880839e",
++      "map_sha256": "d976651a2b33a7874dc4415c73ac4344f257a8242356ab4cf72f5b7b085240dc",
+       "learner_verified": false,
+       "text_path": "commons/maps/Color_Flashlight/final.md",
+-      "text_sha256": "d9690555505e159223e4c63b74f85f7a9c3d5090d4cf36e0e641c199aa63e561"
++      "text_sha256": "65aeaa7b29ec6094dc2ebb33e645558821d5982ef50c9935d77d7b1c501df377"
+     },
+     "Ribbon_Patterns_01": {
+       "sequence": "tiling",
+--- before/commons/grid/GridInteractablesComponent.gd
++++ commons/grid/GridInteractablesComponent.gd
+@@ -16,6 +16,7 @@
+ const CONFIG_PARAM_NAMES = [
+ 	"hits", # target hit threshold; never a tutorial rotation shorthand
+ 	"radial", "rings", "inner", "outer", "config", "height", "radius",
++	"receiver_sides", # flashlight receiver divisions, never a tutorial rotation
+ 	"width", "depth", "segments", "sides", "rows", "cols", "count",
+ 	"size", "scale", "speed", "delay", "duration", "intensity",
+ 	"number_of_rocks", "container_height", "spawn_area_x", "spawn_area_y", "spawn_area_z",

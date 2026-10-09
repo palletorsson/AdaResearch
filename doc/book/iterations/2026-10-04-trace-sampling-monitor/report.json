@@ -1,0 +1,119 @@
+{
+	"capture_provenance": "Known 3D test trajectory driven through the actual DrawDot pen; not a human headset recording.",
+	"checks": [
+		{
+			"passed": true,
+			"test": "Finds the existing DrawDot scene"
+		},
+		{
+			"passed": true,
+			"test": "Idle pen does not manufacture a gesture"
+		},
+		{
+			"passed": true,
+			"test": "Mode 0 lane 0 agrees with actual DrawDot pipeline (228 points)"
+		},
+		{
+			"passed": true,
+			"test": "Mode 0 lane 1 agrees with actual DrawDot pipeline (93 points)"
+		},
+		{
+			"passed": true,
+			"test": "Mode 0 lane 2 agrees with actual DrawDot pipeline (26 points)"
+		},
+		{
+			"passed": true,
+			"test": "Mode 1 lane 0 agrees with actual DrawDot pipeline (207 points)"
+		},
+		{
+			"passed": true,
+			"test": "Mode 1 lane 1 agrees with actual DrawDot pipeline (74 points)"
+		},
+		{
+			"passed": true,
+			"test": "Mode 1 lane 2 agrees with actual DrawDot pipeline (41 points)"
+		},
+		{
+			"passed": true,
+			"test": "Observer never writes the saved TraceData"
+		},
+		{
+			"passed": true,
+			"test": "Record preserves all observed positions and timing"
+		},
+		{
+			"passed": true,
+			"test": "Replay, mode and step leave original records intact"
+		},
+		{
+			"passed": true,
+			"test": "Monitor controls never change the real pen settings"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one observed position and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Board fixture is discovered through DrawDot's surface contract"
+		},
+		{
+			"passed": true,
+			"test": "Rotated-board projection and snapping agree with DrawDot"
+		},
+		{
+			"passed": true,
+			"test": "Stationary hand adds no retained points"
+		},
+		{
+			"passed": true,
+			"test": "Private observation has a bounded, aligned buffer"
+		},
+		{
+			"passed": true,
+			"test": "Next pickup starts a separate comparison"
+		},
+		{
+			"passed": true,
+			"test": "One gesture visibly separates fine, medium and coarse sampling"
+		},
+		{
+			"passed": true,
+			"test": "Actual Point Trace museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Registered monitor appears from the actual map token"
+		},
+		{
+			"passed": true,
+			"test": "Monitor discovers the three existing hall pens"
+		},
+		{
+			"passed": true,
+			"test": "Monitor screen has an unobstructed viewing position in the hall"
+		},
+		{
+			"passed": true,
+			"test": "Hall control is reachable: pause"
+		},
+		{
+			"passed": true,
+			"test": "Hall control is reachable: replay"
+		},
+		{
+			"passed": true,
+			"test": "Hall control is reachable: step"
+		},
+		{
+			"passed": true,
+			"test": "Hall control is reachable: route"
+		}
+	],
+	"passed": true,
+	"spacing_counts": [
+		228,
+		93,
+		26
+	]
+}

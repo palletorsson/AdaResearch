@@ -1,0 +1,99 @@
+--- before/Trans_Body/final.md
++++ current/Trans_Body/final.md
+@@ -4,11 +4,11 @@
+ 
+ <!-- @approach_wall -->
+ 
+-A wall of upright slats stands across the way. There is no handle, no plate, no light that turns green. Walk at it.
++A wall of upright slats stands across the way. There is no handle. Walk towards it.
+ 
+-The slats near you turn out of the plane, and the ones further off do not. The opening centres on where you stand rather than on the wall. Step sideways along the face and the opening comes with you; step back and it closes.
++The slats nearest you turn. Step sideways along the wall and the opening follows; step back and it closes. A doorway has come to meet you.
+ 
+-The distance part of the rule can be written simply, for a visitor within reach:
++Within reach, the distance part of the rule can be written:
+ 
+ ```gdscript
+ var t: float = absf(slat_x - visitor_x) / aperture_m
+@@ -16,45 +16,43 @@
+ var openness: float = (1.0 - t) * (1.0 - d)
+ ```
+ 
+-Two distances, multiplied: how far the slat is from you along the wall, and how far you are from the wall. The program smooths the response and opens neighbouring slats far enough for a body to pass. The slat does not know whether you meant to come. Its mechanism holds which side you approached from while it swings, then settles back. Even this small response needs a little state.
++One distance runs along the wall, from the slat to you. The other runs out from the wall to where you stand. Each is divided by its chosen reach, making a fraction. Subtracting the fractions from one gives more weight to closeness; multiplying the results lets both distances shape the opening. The program also smooths the response and opens neighbouring slats far enough for a body to pass.
+ 
+-A door gives you a place to approach. This wall lets the place of approach move with you. Someone has still chosen how close counts as close, how wide the opening should become, and which collision bodies it will notice. The invitation has dimensions. The slats remain attached to their hinges, the material is the same, nothing has been consumed. Your position changes what that arrangement allows.
++Someone has chosen that width, that reach, and which bodies the wall will notice. The invitation has dimensions. Yet you can move its centre along the wall. Your position changes what this arrangement allows.
+ 
+-Look back while you are still close: a slat may stay open for you. Continue into the space beyond its reach and wait for it to close. Crossing the plane and leaving the wall's attention are different distances.
++Pass through and look back. While you are still close, a slat may remain open for you. Go farther and wait. It settles into the wall again. You have crossed the boundary before you have left its attention.
+ 
+ <!-- @carve_grid -->
+ 
+-The next throat holds a low block of small cubes, about 1.3 metres high. You can look over it. The lattice reaches across the way, but it does not enclose your head.
++The next narrow passage holds a block of small cubes, about 1.3 metres high. You can see over it. Your legs still need a way through.
+ 
+-Press into it. The cubes your body touches stop existing.
++Press forward. A layer gives way, and another waits behind it. The missing cubes leave an open-topped trench. Your eyes had crossed this space before your body could.
+ 
+-They are removed. You advance a shell at a time, leaving an open-topped cut through the block. For a standing visitor this is closer to a trench than a tunnel. Your view was above it before your legs had a way through.
+-
+-This extra reach has a name:
++Physics stops your body at the solid cells. To let the cut begin, the program gives its removal test a little extra reach:
+ 
+ ```gdscript
+ @export var bite_m: float = 0.16
+ ```
+ 
+-`bite_m` gives the collision shape another sixteen centimetres of reach. The physics engine stops your body at the solid cells; this margin lets the deletion reach beyond that stop. With cells spaced thirty-four centimetres apart, it clears roughly one layer at a time. You press forward, the surface gives, and there is another surface.
++Sixteen centimetres beyond the collision shape used for your body. With cells spaced thirty-four centimetres apart, that margin clears roughly one layer at a time. The next step becomes possible because something has been removed.
+ 
+-Your movement supplies the input, but the operation on the lattice is deletion. Translation alone would leave every cube somewhere. Here the count changes. The whole behaviour also hangs on a tolerance: the difference between a body being stopped and a position allowed to reach beyond it.
++Moving a cube would leave it somewhere. Here, the count changes. The lattice loses cells as you advance.
+ 
+-The cut stays. Not only while this room is loaded: it is kept, and the next arrival finds it already made. Look at its stepped sides. It records where the lattice met the collision shape used for your body, expanded by that small margin. The cubes can only retain the contact at their own resolution. Some of you passed above the entire record.
++Turn back. The cut stays when you walk away. A return during the same session can reopen the cells kept in memory. Look along the stepped sides: they record where the lattice met your body's collision shape, widened by that small margin. Whole cubes are either present or absent. The record can have no finer edge than the cells that make it.
++
++Some of you passed above the entire record.
+ 
+ ![The low cube lattice before a passage and the open-topped cut left by a body, photographed from the same elevated viewpoint.](/book-review/doc/book/iterations/2026-09-23-body-what-remains/the-cut-remains.png)
+ 
+ *The body has left the second view. These elevated views show the missing cells; the opening was made by walking through the block.*
+ 
+-What is kept is not what you intended. You meant to cross; the trench is the residue of the margin that let you. Every restraint in this museum has an edge of that kind, and almost all of them are swept up behind you. This one is not.
+-
+-Somebody following behind you will find the cut already made. Will their body fit the passage yours left?
++The cut keeps the route without keeping your reason for taking it. Its width includes an allowance you may never have noticed. Somebody following would meet an opening already shaped by another passage. Would their body fit, or would they need to widen it?
+ 
+ <!-- @approach_scale -->
+ 
+-Nine blocks. At rest, the gap between neighbours is thirty-five centimetres.
++Nine blocks stand ahead. At rest, the gap between neighbours is thirty-five centimetres.
+ 
+-Walk in anyway.
++Move closer. The nearest blocks shrink. Continue between them: the opening travels with you.
+ 
+ ```gdscript
+ var t: float = clampf(sqrt(_dist2[i]) / reach_m, 0.0, 1.0)
+@@ -62,16 +60,14 @@
+ return lerpf(min_scale, 1.0, t)
+ ```
+ 
+-Each block reads its own distance to the nearest body and takes a size from it. Close, it goes to about a third; far, it is whole. Each block keeps its place in the horizontal grid. Its visible mesh and collision box shrink together; their centres lower to keep the bottom face on the floor. Nothing is deleted. The gap changes because your distance has become a size.
++Each block compares its distance from the nearest body with its sensing reach. The first line turns that comparison into a fraction between zero and one; the second smooths it. `lerpf` uses it to choose a size between about a third and full scale. The visible block and its collision box shrink together, lowering as they do so to keep their feet on the floor. Their places in the horizontal grid stay fixed.
+ 
+-So the gap you walk through was not made by clearing anything. It was made by measuring.
++All nine blocks are still there. Your distance has become their size.
+ 
+-Look behind you near the last row. Some blocks may still be small: you have passed them, but they still measure you. Walk on towards the far end of the room. Once you are outside their reach, the field fills out again. The floor caption beyond the last row asks you to step clear; it cannot declare that you already have.
+-
+-In the next room, another block will grow across your route. There, a clock supplies the factor. It will grow if you approach, if you wait, if you turn away. Here you can ask for room by moving closer. There you must learn a rhythm that does not read you.
++Look behind you near the last row. Some blocks may still be small. Take a few more steps towards the far end and watch them fill out. You can be through the gap and still be holding it open.
+ 
+ <!-- @ -->
+ 
+-The cube carried you; the bottle changed the room around you. Here your approach has turned slats, removed cells and reduced blocks. Two boundaries return; one keeps the cut. Walking felt like walking, while the room was doing different kinds of work.
++Two boundaries return; one keeps the cut. Looking back finds a wall, a trench, a field of blocks. Each has answered the same approach differently.
+ 
+-What the room offers depends on the body its code can recognise. The next room continues changing even when you stand still.
++In the next room, growing blocks follow a clock. Coming closer will no longer ask them to make room. You will have to find your moment.

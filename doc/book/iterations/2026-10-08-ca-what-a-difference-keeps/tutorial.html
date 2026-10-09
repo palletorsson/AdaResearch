@@ -1,0 +1,330 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial · What a difference keeps</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#223334;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1440px;margin:auto;padding:36px}header{padding-top:62px}h1{font-size:clamp(40px,6vw,76px);line-height:1.05;max-width:980px}h2{margin-top:2em;line-height:1.2}nav,figcaption,.eyebrow,.badge,.switch label{font:14px/1.55 system-ui,sans-serif}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:#37676a;text-underline-offset:3px}.eyebrow{text-transform:uppercase;letter-spacing:.12em}.lead{font-size:26px;max-width:830px}p,li{max-width:80ch}.badge{display:inline-block;background:#dce9e2;padding:8px 14px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border:1px solid #c7cbc5}figcaption{padding:9px 0;color:#526260}.pair,.parallel{display:grid;grid-template-columns:1fr 1fr;gap:24px}.parallel article{min-width:0;padding:24px;background:#fffdf6;border-top:4px solid #b2cec4}.parallel article:last-child{border-color:#c9adba}.parallel h1{font-size:34px}pre{background:#1d2b2e;color:#f8f1df;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace;tab-size:4}code{font-size:.83em}pre code{font-size:inherit}table{border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #becac4;text-align:left}.switch input{margin:0 6px 0 18px}.switch label{cursor:pointer}.switch .after{display:none}#after:checked~.after{display:block}#after:checked~.before{display:none}.switch figure img{max-height:1050px;object-fit:contain;background:#d8dbd6}footer{border-top:1px solid #c5cec8}@media(max-width:850px){.pair,.parallel{display:block}header,main,footer{padding:22px}.parallel article{padding:16px}}@media print{nav,.switch input,.switch label{display:none}body{font-size:11pt}pre{white-space:pre-wrap;background:white;color:#111;font-size:8pt}.parallel{display:block}}</style></head><body><header><div class="eyebrow">Endless Museum / Cellular Automata / 8 October 2026</div><h1>Tutorial · What a difference keeps</h1><nav><a href="index.html">Hall report</a><a href="index.html#layout">Before / after</a><a href="index.html#comparison">One update / twenty</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="ca-difference-review.zip">Review ZIP</a></nav></header><main><h1>What a difference keeps</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Copy a beginning and change one address.</li>
+<li>Keep the update and forcing identical in two runs.</li>
+<li>Measure how many addresses differ and how large the difference is.</li>
+<li>Compare integer truncation with retained fractional values.</li>
+<li>Select a spatial section without advancing time.</li>
+<li>Read display gain separately from the values it makes visible.</li>
+</ul>
+<h2>Bring the comparison forward</h2>
+<p>In the previous room, a changed seed altered the row history while the copied pyramid stayed fixed. Here both volumes use the same procedure. We change one starting value in B and follow what happens to that difference.</p>
+<p>Begin in the existing paired study. Set SEED to UNIFORM, DRIVE to zero, PULL to 0.25 and ONE CELL on. Both volumes start at four, except B's centre, which starts at five. Their update counter is still zero.</p>
+<p>Walk between the volumes. At Z=5, the selected section contains that centre; at Z=6, it does not. The floor and wall can lose sight of a difference without the arrays losing it. Take the familiar black point beside the console to choose the section by hand instead. While it is held, the hand takes priority. Release it to resume walking as the reader. Its trigger advances one update.</p>
+<h2>Reconstruct this experiment</h2>
+<p>Keep the Day Zero museum and save the previous study. Put <code>paired.gd</code>, <code>difference.gd</code> and your unchanged <code>point_body.gd</code> together. Attach <code>difference.gd</code> to the existing <code>PointStudy</code>, at unit scale. Approach from positive Z; leave about 3.2 × 2.5 metres clear. The existing museum supplies the player, camera, lighting and XR Tools. Every study mesh, material, label and collider is created below.</p>
+<p>The miniature keeps both complete 11³ volumes and their three section images. Move the held point forward and back along the middle rail to select Z. Trigger or Enter advances one update. It starts with the quiet, uniform, integer comparison above; the full exhibit initially uses its scattered, driven beginning. The miniature uses keyboard controls for parameters. The installation retains its nearby VR buttons and walking reader, plus the enlarged difference floor.</p>
+<h2>Copy, then intervene</h2>
+<p><code>a</code> and <code>b</code> are packed arrays of 64-bit floating-point numbers. One index represents <code>x + N*y + N*N*z</code>. <code>b = a.duplicate()</code> makes an independent copy. Only then does B gain one at <code>site</code>.</p>
+<p>For each address we keep a list of valid neighbours. This is the 26-neighbour volume from the second CA hall, with positions outside the box omitted. A corner has seven neighbours. It does not wrap to the opposite side.</p>
+<p>One update keeps three quarters of the present value and adds one quarter of the neighbours' average. More generally, <code>pull</code> selects that fraction. Both next arrays are completed from the old arrays before either becomes the present.</p>
+<p>The supplied <code>sample</code> function returns a reproducible forcing value for an address and generation. A and B receive the <strong>same</strong> value. It is a finite arithmetic schedule, not a claim of independent random samples. Its number recipe is supplied so this lesson can focus on a fair comparison.</p>
+<p><code>integer_storage</code> describes what answers we retain, not the array's machine type. In that mode, <code>int(value)</code> discards the fractional part before the result returns to the floating-point array. Fractional mode retains that part, subject to finite floating-point precision. Both modes clip answers to the range 0–9.</p>
+<h2>Complete paired model — paired.gd</h2>
+<pre><code class="language-gdscript">extends RefCounted
+const N := 11
+const COUNT := N * N * N
+const LIMIT := 100
+var site := Vector3i(5, 5, 5)
+var a := PackedFloat64Array()
+var b := PackedFloat64Array()
+var neighbours: Array[PackedInt32Array] = []
+var tick := 0
+var pull := 0.25
+var drive := 0.0
+var integer_storage := true
+var scattered := false
+var changed := true
+
+func _init() -&gt; void:
+    for z in N:
+        for y in N:
+            for x in N:
+                var ns := PackedInt32Array()
+                for dz in range(-1, 2):
+                    for dy in range(-1, 2):
+                        for dx in range(-1, 2):
+                            if dx == 0 and dy == 0 and dz == 0:
+                                continue
+                            var p := Vector3i(x + dx, y + dy, z + dz)
+                            if p.x &gt;= 0 and p.x &lt; N and p.y &gt;= 0 and p.y &lt; N and p.z &gt;= 0 and p.z &lt; N:
+                                ns.append(index(p))
+                neighbours.append(ns)
+    reset()
+
+func index(p: Vector3i) -&gt; int:
+    return p.x + N * p.y + N * N * p.z
+
+func reset() -&gt; void:
+    tick = 0
+    a.resize(COUNT)
+    for i in COUNT:
+        a[i] = float((i * 73 + i * i * 19 + 17) % 10) if scattered else 4.0
+    b = a.duplicate()
+    if changed:
+        b[index(site)] += 1.0
+
+func sample(i: int, generation: int) -&gt; float:
+    var h: int = ((i + 1) * 73856093 + (generation + 1) * 19349663 + 83492791) % 2147483647
+    h = (h * 48271) % 2147483647
+    return float(h % 2001) / 1000.0 - 1.0
+
+func step() -&gt; void:
+    if tick &gt;= LIMIT:
+        return
+    var na := PackedFloat64Array()
+    var nb := PackedFloat64Array()
+    na.resize(COUNT)
+    nb.resize(COUNT)
+    for i in COUNT:
+        var sa := 0.0
+        var sb := 0.0
+        for j in neighbours[i]:
+            sa += a[j]
+            sb += b[j]
+        var forcing := drive * sample(i, tick)
+        var va := clampf(a[i] * (1.0 - pull) + sa / neighbours[i].size() * pull + forcing, 0.0, 9.0)
+        var vb := clampf(b[i] * (1.0 - pull) + sb / neighbours[i].size() * pull + forcing, 0.0, 9.0)
+        na[i] = float(int(va)) if integer_storage else va
+        nb[i] = float(int(vb)) if integer_storage else vb
+    a = na
+    b = nb
+    tick += 1
+
+func report() -&gt; Dictionary:
+    var count := 0
+    var maximum := 0.0
+    var total := 0.0
+    for i in COUNT:
+        var difference := absf(a[i] - b[i])
+        maximum = maxf(maximum, difference)
+        total += difference
+        if difference &gt; 0.000001:
+            count += 1
+    return {&quot;count&quot;: count, &quot;maximum&quot;: maximum, &quot;mean&quot;: total / COUNT}
+</code></pre>
+<h2>Measure before judging the picture</h2>
+<p><code>report</code> subtracts the arrays address by address. The count includes only absolute differences greater than 0.000001. Maximum and mean use every stored difference, including those below that threshold. These quantities answer different questions: how widely detectable difference is distributed, how large the largest difference is, and its average over the whole volume.</p>
+<p>The A and B palettes use the same fixed 0–9 scale. The third image magnifies absolute difference by <code>gain = 1 / max(maximum, 0.000001)</code>. Gain changes only the image. It is printed beside the measurements because a bright picture can accompany a fading difference.</p>
+<p><code>select_slice</code> changes an address in the receiver, not a generation in the model. At each selected Z, X and Y remain spatial coordinates. Gold frames locate that plane in both volumes. Moving the point alone changes neither array; its trigger calls <code>step</code>. On release it parks at the selected slice.</p>
+<h2>Complete study — difference.gd</h2>
+<p>Read <code>step</code>, <code>select_slice</code> and <code>paint</code> first. <code>make_display</code> supplies the staging. As before, the model and its display have separate jobs.</p>
+<pre><code class="language-gdscript">extends Node3D
+const Pair = preload(&quot;paired.gd&quot;)
+const Point = preload(&quot;point_body.gd&quot;)
+const PITCH := 0.085
+var model = Pair.new()
+var slice_z := 5
+var gain := 1.0
+var point: Node3D
+var reading: Label3D
+var textures: Array[ImageTexture] = []
+var volumes: Array[MultiMesh] = []
+var frames: Array[Node3D] = []
+
+func _ready() -&gt; void:
+    make_display()
+    point = Point.new()
+    add_child(point)
+    point.action_pressed.connect(func(_p): step())
+    park()
+    paint()
+
+func step() -&gt; void:
+    model.step()
+    paint()
+
+func select_slice(value: int) -&gt; void:
+    var selected := clampi(value, 0, Pair.N - 1)
+    if selected != slice_z:
+        slice_z = selected
+        paint()
+
+func _physics_process(_delta: float) -&gt; void:
+    if point.held():
+        select_slice(roundi(to_local(point.global_position).z / PITCH + 5.0))
+    else:
+        park()
+
+func park() -&gt; void:
+    point.position = Vector3(0, 1.24, (slice_z - 5) * PITCH)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if not event is InputEventKey or not event.pressed or event.echo:
+        return
+    match event.keycode:
+        KEY_ENTER:
+            step()
+            return
+        KEY_R: pass
+        KEY_I: model.integer_storage = not model.integer_storage
+        KEY_C: model.changed = not model.changed
+        KEY_P: model.pull = 0.0 if model.pull &gt; 0.0 else 0.25
+        KEY_N: model.drive = 1.0 if model.drive == 0.0 else 0.0
+        KEY_B: model.scattered = not model.scattered
+        _: return
+    model.reset()
+    paint()
+
+func tint(value: float) -&gt; Color:
+    return Color(&quot;182c42&quot;).lerp(Color(&quot;efc0d6&quot;), value / 9.0)
+
+func paint() -&gt; void:
+    var result: Dictionary = model.report()
+    gain = 1.0 / maxf(result.maximum, 0.000001)
+    for side in 3:
+        var img := Image.create(Pair.N, Pair.N, false, Image.FORMAT_RGBA8)
+        for y in Pair.N:
+            for x in Pair.N:
+                var i: int = model.index(Vector3i(x, y, slice_z))
+                var colour := tint(model.a[i] if side == 0 else model.b[i])
+                if side == 2:
+                    colour = Color(&quot;112c31&quot;).lerp(Color(&quot;ffd18e&quot;), absf(model.a[i] - model.b[i]) * gain)
+                img.set_pixel(x, Pair.N - 1 - y, colour)
+        textures[side].update(img)
+    for side in 2:
+        var values: PackedFloat64Array = model.a if side == 0 else model.b
+        for i in Pair.COUNT:
+            volumes[side].set_instance_color(i, tint(values[i]))
+        frames[side].position.z = (slice_z - 5) * PITCH
+    reading.text = &quot;UPDATE %d / Z SLICE %d\n%s / %s / ONE CELL %s\nPULL %.2f / DRIVE %.1f\nDIFFERENT %d (&gt;0.000001)\nMAX %.8f / MEAN %.8f / GAIN x%.1f&quot; % [model.tick, slice_z,
+        &quot;INTEGER&quot; if model.integer_storage else &quot;FRACTIONAL&quot;, &quot;SCATTERED&quot; if model.scattered else &quot;UNIFORM&quot;,
+        &quot;ON&quot; if model.changed else &quot;OFF&quot;, model.pull, model.drive, result.count, result.maximum, result.mean, gain]
+
+func box(parent: Node3D, size: Vector3, at: Vector3, colour: Color, solid: bool = false) -&gt; void:
+    var surface := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    surface.mesh = mesh
+    surface.position = at
+    var material := StandardMaterial3D.new()
+    material.albedo_color = colour
+    surface.material_override = material
+    parent.add_child(surface)
+    if solid:
+        var body := StaticBody3D.new()
+        var boundary := CollisionShape3D.new()
+        var shape := BoxShape3D.new()
+        shape.size = size
+        boundary.shape = shape
+        surface.add_child(body)
+        body.add_child(boundary)
+
+func label(words: String, at: Vector3, pixel: float = 0.0014) -&gt; Label3D:
+    var result := Label3D.new()
+    result.text = words
+    result.position = at
+    result.font_size = 32
+    result.pixel_size = pixel
+    add_child(result)
+    return result
+
+func make_display() -&gt; void:
+    box(self, Vector3(2.95, 0.08, 1.5), Vector3(0, 1.0, 0), Color(&quot;e4dfd4&quot;), true)
+    for side in 2:
+        var cx := -0.85 if side == 0 else 0.85
+        box(self, Vector3(0.6, 0.96, 0.6), Vector3(cx, 0.48, 0), Color(&quot;e4dfd4&quot;))
+        var cells := MultiMesh.new()
+        cells.transform_format = MultiMesh.TRANSFORM_3D
+        cells.use_colors = true
+        var cube := BoxMesh.new()
+        cube.size = Vector3.ONE * 0.03
+        cells.mesh = cube
+        cells.instance_count = Pair.COUNT
+        for z in Pair.N:
+            for y in Pair.N:
+                for x in Pair.N:
+                    cells.set_instance_transform(model.index(Vector3i(x, y, z)), Transform3D(Basis.IDENTITY, Vector3(cx + (x - 5) * PITCH, 1.12 + y * PITCH, (z - 5) * PITCH)))
+        var instance := MultiMeshInstance3D.new()
+        instance.multimesh = cells
+        var material := StandardMaterial3D.new()
+        material.vertex_color_use_as_albedo = true
+        material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        instance.material_override = material
+        add_child(instance)
+        volumes.append(cells)
+        var frame := Node3D.new()
+        frame.position = Vector3(cx, 1.545, 0)
+        add_child(frame)
+        frames.append(frame)
+        for sign_ in [-1, 1]:
+            box(frame, Vector3(0.012, 0.94, 0.012), Vector3(sign_ * 0.47, 0, 0), Color(&quot;ffd18e&quot;))
+            box(frame, Vector3(0.94, 0.012, 0.012), Vector3(0, sign_ * 0.47, 0), Color(&quot;ffd18e&quot;))
+    for side in 3:
+        var cx := (side - 1) * 0.85
+        var img := Image.create(Pair.N, Pair.N, false, Image.FORMAT_RGBA8)
+        var texture := ImageTexture.create_from_image(img)
+        textures.append(texture)
+        box(self, Vector3(0.74, 0.74, 0.035), Vector3(cx, 2.5, -0.8), Color(&quot;b59a79&quot;))
+        var view := MeshInstance3D.new()
+        var quad := QuadMesh.new()
+        quad.size = Vector2(0.7, 0.7)
+        view.mesh = quad
+        view.position = Vector3(cx, 2.5, -0.777)
+        var material := StandardMaterial3D.new()
+        material.albedo_texture = texture
+        material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+        material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        view.material_override = material
+        add_child(view)
+        label([&quot;A&quot;, &quot;B&quot;, &quot;|A-B| x GAIN&quot;][side], Vector3(cx, 2.96, -0.77))
+    box(self, Vector3(0.009, 0.009, 0.94), Vector3(0, 1.08, 0), Color(&quot;ffd18e&quot;))
+    box(self, Vector3(2.6, 0.47, 0.04), Vector3(0, 0.77, 0.78), Color(&quot;172937&quot;))
+    reading = label(&quot;&quot;, Vector3(0, 0.77, 0.807), 0.001)
+    label(&quot;ENTER step / R replay / I storage / C one cell\nP pull / N drive / B seed&quot;, Vector3(0, 0.43, 0.81), 0.0009)
+</code></pre>
+<h2>Carried object — point_body.gd</h2>
+<p>Keep your existing PointBody. Its unchanged code is included so the three-file reconstruction is complete.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Make three predictions</h2>
+<p><strong>First, keep INTEGER, UNIFORM, PULL 0.25 and DRIVE 0.</strong> At the changed centre, the calculated answer is 4.75. Integer storage keeps four. Its neighbours' small increases also lose their fractions. After one update the count and maximum difference are zero. Both complete arrays agree.</p>
+<p><strong>Now press I.</strong> This selects FRACTIONAL and replays the same beginning. After one update, predict a smaller peak spread over more addresses: the centre differs by 0.75; each of its 26 neighbours differs by 0.25/26. The count is 27. Continue to update 20. Read the maximum beside the gain before calling the larger lit region an amplification.</p>
+<p><strong>Press P to set PULL to zero.</strong> With DRIVE still zero, this replays the beginning and then preserves the original difference at one address through every step. An unchanged picture can retain something that the smoothing update distributes.</p>
+<p>Press C to remove the one-cell intervention. A and B should agree. Press N to enable the shared drive; they should still agree. This is a control for the comparison. Press B to switch to the supplied scattered beginning. C, N, B, I and P all replay both arrays after changing their setting. R replays while preserving settings. None changes the selected slice. The model stops at 100 updates.</p>
+<h2>Make an independent change</h2>
+<p>In <code>paired.gd</code>, change <code>site</code> to <code>Vector3i(0, 0, 0)</code>. Run in UNIFORM, FRACTIONAL mode with PULL 0.25 and DRIVE zero. Select Z=0 to see the beginning. Before STEP, predict which addresses can receive it.</p>
+<p>After one step, <strong>eight</strong> addresses differ: the corner itself and its seven valid neighbours. The corner difference is still 0.75. A receiving cell averages its own neighbour list: the adjacent edge cell (1,0,0) receives 0.25/11; the interior cell (1,1,1) receives 0.25/26. There is no wrap to the far face. The changed location exposes a boundary choice hidden by the central example. The scaffold expects <code>site</code> inside 0–10 on each axis; its +1 experiment is compared from the uniform beginning.</p>
+<p>Explain three different disappearances: moving to a slice that misses the changed address, integer storage discarding the difference, and a stored difference falling below the count's threshold. They require different evidence.</p>
+<p>This finishes the cellular-automata passage with a testable comparison. In the unforced fractional case, averaging spreads and reduces the peak; brightness alone does not establish chaos. Fractals returns to explicit repetition: what changes when the procedure calls itself instead of waiting for neighbouring states to exchange values?</p></main><footer>CA_EdgeOfChaos · Two complete texts and native museum evidence. All eight CA hall drafts are ready for a sequence reading.</footer></body></html>

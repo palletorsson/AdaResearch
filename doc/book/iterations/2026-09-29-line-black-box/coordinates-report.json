@@ -1,0 +1,113 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Coordinates starts with held point only",
+      "passed": true
+    },
+    {
+      "name": "actual production pickable is retained",
+      "passed": true
+    },
+    {
+      "name": "frame and both cards moved together",
+      "passed": true
+    },
+    {
+      "name": "frame follows the actual held point",
+      "passed": true
+    },
+    {
+      "name": "origin is at hall floor level",
+      "passed": true
+    },
+    {
+      "name": "L basin has eleven cells",
+      "passed": true
+    },
+    {
+      "name": "basin has collision at floor level",
+      "passed": true
+    },
+    {
+      "name": "Point Zero sign not copied into coordinate frame",
+      "passed": true
+    },
+    {
+      "name": "supplied grab carries the point",
+      "passed": true
+    },
+    {
+      "name": "world reports the same moved point",
+      "passed": true
+    },
+    {
+      "name": "local reports the same moved point",
+      "passed": true
+    },
+    {
+      "name": "target retained",
+      "passed": true
+    },
+    {
+      "name": "held point still triggers target",
+      "passed": true
+    },
+    {
+      "name": "point can be released",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held-point",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinates-basin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinate-arrival",
+      "passed": true
+    },
+    {
+      "name": "black point visual radius halved to 7 cm",
+      "passed": true
+    },
+    {
+      "name": "black point collision radius also 7 cm",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "frame": [
+      4.5,
+      0.0,
+      12.5
+    ],
+    "held": [
+      7.5,
+      1.12000000476837,
+      2.5
+    ],
+    "pool_cells": [
+      "(4, 11)",
+      "(4, 12)",
+      "(4, 13)",
+      "(4, 14)",
+      "(4, 15)",
+      "(4, 16)",
+      "(5, 16)",
+      "(6, 16)",
+      "(7, 16)",
+      "(8, 16)",
+      "(9, 16)"
+    ]
+  },
+  "passed": true,
+  "room": "Point_Coordinates",
+  "scope": "Actual museum render; production pickup/release, line geometry, readout, pointer and near-hand reset, entrances and route collision. No headset or learner trial."
+}

@@ -1,0 +1,234 @@
+{
+  "checks": [
+    "mass: constructed with finite bodies and a reset",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: mesh height, collider diameter and radius agree",
+    "mass: equal force gives inverse-mass acceleration",
+    "mass: coasting continues after force ends",
+    "mass: finite motion",
+    "mass: reset restores original transforms",
+    "mass: reset survives the next physics frames",
+    "tower: constructed with finite bodies and a reset",
+    "tower: tall brick stack initially supported",
+    "tower: removing the bottom brick causes real collapse",
+    "tower: finite motion",
+    "tower: reset restores original transforms",
+    "tower: reset survives the next physics frames",
+    "gravity: constructed with finite bodies and a reset",
+    "gravity: released cargo falls",
+    "gravity: actual hinge lets trapdoor turn",
+    "gravity: finite motion",
+    "gravity: reset restores original transforms",
+    "gravity: reset survives the next physics frames",
+    "trolley: constructed with finite bodies and a reset",
+    "trolley: a physical push moves the carrier",
+    "trolley: finite motion",
+    "trolley: reset restores original transforms",
+    "trolley: reset survives the next physics frames",
+    "puzzle: constructed with finite bodies and a reset",
+    "puzzle: three distinct masses",
+    "puzzle: finite motion",
+    "puzzle: reset restores original transforms",
+    "puzzle: reset survives the next physics frames",
+    "bowling: constructed with finite bodies and a reset",
+    "bowling: ten actual rigid pins",
+    "bowling: rolling sphere hits and topples pins",
+    "bowling: finite motion",
+    "bowling: reset restores original transforms",
+    "bowling: reset survives the next physics frames",
+    "recoil: constructed with finite bodies and a reset",
+    "recoil: equal opposite impulses conserve pair momentum",
+    "recoil: brace stops cart, free cart recoils",
+    "recoil: finite motion",
+    "recoil: reset restores original transforms",
+    "recoil: reset survives the next physics frames",
+    "friction: constructed with finite bodies and a reset",
+    "friction: smooth cube travels farther than rough cube",
+    "friction: sphere rolls",
+    "friction: paths retain moving samples",
+    "friction: finite motion",
+    "friction: reset restores original transforms",
+    "friction: reset survives the next physics frames",
+    "liquids: constructed with finite bodies and a reset",
+    "liquids: greater drag slows the same falling point",
+    "liquids: visitor crosses the same resistance regions",
+    "liquids: finite motion",
+    "liquids: reset restores original transforms",
+    "liquids: reset survives the next physics frames",
+    "springs: constructed with finite bodies and a reset",
+    "springs: disturbing one point moves its neighbour",
+    "springs: seven hanging points with six coupling springs",
+    "springs: finite motion",
+    "springs: reset restores original transforms",
+    "springs: reset survives the next physics frames",
+    "swings: constructed with finite bodies and a reset",
+    "swings: strong damping leaves less movement",
+    "swings: each seat remains hinged",
+    "swings: finite motion",
+    "swings: reset restores original transforms",
+    "swings: reset survives the next physics frames",
+    "torque: constructed with finite bodies and a reset",
+    "torque: pulling grip turns a constrained gate",
+    "torque: hinge anchor stays attached",
+    "torque: finite motion",
+    "torque: reset restores original transforms",
+    "torque: reset survives the next physics frames",
+    "constraints: constructed with finite bodies and a reset",
+    "constraints: basket, chain, plank and arm use real joints",
+    "constraints: held trigger closes physical claw",
+    "constraints: finite motion",
+    "constraints: reset restores original transforms",
+    "constraints: reset survives the next physics frames",
+    "magnet: constructed with finite bodies and a reset",
+    "magnet: cargo rises under attraction",
+    "magnet: automatically releases after three seconds",
+    "magnet: gravity acts after release",
+    "magnet: point gun retains twelve eligible prefabs",
+    "magnet: gravity gun does not also thrust the player",
+    "gravity gun: held trigger acquires the aimed prefab",
+    "gravity gun: spring pulls target without freezing it",
+    "gravity gun: trigger release clears target",
+    "magnet: finite motion",
+    "magnet: reset restores original transforms",
+    "magnet: reset survives the next physics frames",
+    "vortex: constructed with finite bodies and a reset",
+    "vortex: tangential field bends cargo paths",
+    "vortex: populated solid vector field",
+    "vortex: finite motion",
+    "vortex: reset restores original transforms",
+    "vortex: reset survives the next physics frames",
+    "vortex: reset retains the specified orbital launch",
+    "mutual: constructed with finite bodies and a reset",
+    "mutual: pair forces balance without visitor",
+    "mutual: visitor becomes an additional source",
+    "mutual: orbits retain spread instead of centre pile",
+    "mutual: finite motion",
+    "mutual: reset restores original transforms",
+    "mutual: reset survives the next physics frames",
+    "mutual: reset retains the specified orbital launch",
+    "support: constructed with finite bodies and a reset",
+    "support: table initially supported",
+    "support: load remains stacked until the visitor acts",
+    "support: moving the leg overturns the loaded table",
+    "support: the load falls after the leg moves",
+    "support: finite motion",
+    "support: reset restores original transforms",
+    "support: reset survives the next physics frames",
+    "flight: constructed with finite bodies and a reset",
+    "flight: two inherited thrust points and four gates",
+    "flight: boarding assigns the actual receiver",
+    "flight: unpowered rider still experiences gravity",
+    "flight: real grab connects thrust to this rider",
+    "flight: trigger overcomes gravity",
+    "flight: release removes thrust but retains upward motion",
+    "flight: reset refuses to steal a held point",
+    "flight: dropping point ends thrust",
+    "flight: a point carried from the earlier court also works",
+    "flight: finite motion",
+    "flight: reset restores original transforms",
+    "flight: reset survives the next physics frames"
+  ],
+  "failures": [
+    "tower: removing the bottom brick causes real collapse"
+  ],
+  "godot_version": "4.6-stable (official)",
+  "measurements": {
+    "bowling_ball": [
+      "(-0.564543, 0.387583, 4.986617)",
+      "(-0.250031, -0.000001, -0.71197)"
+    ],
+    "bowling_fallen": 9,
+    "friction": [
+      [
+        1.56380641460419,
+        0.000000218657802975031
+      ],
+      [
+        1.50955450534821,
+        5.13895797729492
+      ],
+      [
+        -4.27425861358643,
+        0.0
+      ],
+      [
+        0.572691679000854,
+        9.36636161804199
+      ]
+    ],
+    "liquid_speeds": [
+      3.33559083938599,
+      1.5052205324173,
+      0.86294424533844
+    ],
+    "mass_velocities": [
+      0.749999940395355,
+      0.374999970197678,
+      0.187499985098839
+    ],
+    "pin_positions": [
+      [
+        "(-0.083332, 0.282694, 7.032561)",
+        "(1.256305, 2.861022, 1.919001)"
+      ],
+      [
+        "(-1.603104, 0.278091, 5.704849)",
+        "(0.522638, -2.007017, -1.687307)"
+      ],
+      [
+        "(1.805832, 0.277633, 5.913608)",
+        "(0.151012, 1.722219, 1.67237)"
+      ],
+      [
+        "(-2.174812, 0.284052, 7.3059)",
+        "(-1.284232, 1.651422, 1.966408)"
+      ],
+      [
+        "(0.027856, 0.291991, 7.382224)",
+        "(1.256487, 1.525912, 2.00247)"
+      ],
+      [
+        "(0.779842, 0.282605, 7.310131)",
+        "(0.465137, -0.119919, -1.689084)"
+      ],
+      [
+        "(-1.387979, 0.283229, 7.617055)",
+        "(-1.15311, 1.032123, 1.837277)"
+      ],
+      [
+        "(-0.434512, 0.282635, 7.747406)",
+        "(1.084929, 0.677319, 1.798624)"
+      ],
+      [
+        "(0.318451, 0.282656, 8.132568)",
+        "(0.866795, 2.92823, 1.734502)"
+      ],
+      [
+        "(0.93004, 0.049974, 7.710393)",
+        "(0.000243, -0.00392, 0.000112)"
+      ]
+    ],
+    "support": [
+      1.39988076686859,
+      1.63162195682526,
+      0.692451000213623
+    ],
+    "support_before": [
+      3.09893083572388,
+      0.999999284744263
+    ],
+    "swing_remaining": [
+      0.500257015228271,
+      0.0510809328407049
+    ],
+    "tower_top": [
+      5.34143257141113,
+      4.52491474151611
+    ]
+  },
+  "passed": false,
+  "physics_engine": "Jolt Physics",
+  "physics_server": "PhysicsServer3D",
+  "scope": "Real Jolt Physics bodies, contact, joints and force integration. Simulated hand/receiver inputs; no headset claim."
+}

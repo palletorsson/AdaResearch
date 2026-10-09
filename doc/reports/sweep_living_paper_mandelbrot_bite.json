@@ -1,0 +1,668 @@
+{
+ "sweep": "living_paper_mandelbrot",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 79.493,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SIMPLE"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_BROWNIAN"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_LEVY"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_SELF_AVOIDING"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FRACTAL"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "RANDOM_WALK_FIBONACCI"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE30"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "b": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE110"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "b": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_1D_RULE90"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "b": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_2D_LIFE"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "algorithm": "CA_2D_SEEDS"
+   },
+   "b": {
+    "algorithm": "CA_2D_BRIANS_BRAIN"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

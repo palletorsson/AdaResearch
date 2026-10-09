@@ -1,0 +1,63 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -9,10 +9,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "cellularautomata",
+     "text_path": "commons/maps/CA_Introduction/final.md",
+-    "text_sha256": "cd137efb21d49fd96756429ca964fa9341823cefa8c2420b0d570a173aeb05ff",
+-    "map_sha256": "3b62773b6bf0f0fe1e63e243da34fba0dfc0620290d29f5acf886c7c793dd21a",
++    "text_sha256": "5b77303f769f1358f11681a02fc62a779aec9d94b0a33d35992fc18976209652",
++    "map_sha256": "156c1d5e3ff9f725c00f3dfebf195fa41092d74c451cd453fc5dc269c29181c0",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-ca-neighbour-ring/index.html",
++    "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+     "verification_scope": "Native authored museum: 45 checks, seven actual mouse-ray clicks. Same 32-cell row and 24-row history drive an overhead ring; colours, missing-history visibility, wrap witnesses, STEP/SEED/RUN/RST/preset, bounded history and legacy opt-in verified. Explorer moved one cell clear of entrance collision; actual museum body passes beneath ring. Supplied desktop inputs, no tracked headset/Quest/learner acceptance."
+   },
+   "CA_ElementaryRules": {
+@@ -24,9 +24,9 @@
+     "sequence": "cellularautomata",
+     "text_path": "commons/maps/CA_ElementaryRules/final.md",
+     "text_sha256": "3ac68607502e812159df9df2b16c267cfb22d41cceeb81d9f921c7a16485670f",
+-    "map_sha256": "30cab585d4a2fb8a821ee3480a3393884d73b7c1481baa6dc88402cc6c3dbbab",
++    "map_sha256": "2969207f9b2ab673fc4996efd6688300d9af9fed7344fc8eda2a14af2b7269bf",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-ca-lingering-cell/index.html",
++    "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+     "verification_scope": "Native authored museum: 49 checks, eight actual desktop mouse-ray clicks, exact 27-state and colour correspondence, whole-volume replay, budget, opt-in and supplied walking body through open gaps. Full update 153.009 ms remains unoptimised. No tracked headset, Quest, whole-route or learner acceptance."
+   },
+   "CA_GameOfLife": {
+@@ -37,10 +37,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "cellularautomata",
+     "text_path": "commons/maps/CA_GameOfLife/final.md",
+-    "text_sha256": "533a3d5ee1704b56fe35c396a55d208efee7a4db6fe3813d008647302a9dc1c4",
+-    "map_sha256": "cd4b7bc35890c3b637660cdc3912c34358e3479c5f6a78956f583c12d9eb58a0",
++    "text_sha256": "e11e83ea0ad14f973a7ef1fcb290d5771516368e55eca0275b38be3757a10b50",
++    "map_sha256": "816d544e9d27b6f9ba37650dc1e04a8361eb78b4f95c07e8c49fd3857a57514f",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-ca-walking-history/index.html",
++    "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+     "verification_scope": "Native authored museum: 37 checks, seven actual desktop mouse-ray clicks, forward/backward CharacterBody walk, unchanged history/colours/collision, shared witnesses, RUN independence, 24-row budget and opt-in compatibility. Supplied player_body group convention checked, no tracked headset/Quest/whole-gallery/learner acceptance."
+   },
+   "CA_BeyondBinary": {
+@@ -54,7 +54,7 @@
+     "text_sha256": "41573fe59637a6bfbd262621821bd892f4268b1dbbef84f05184ddd794b6efe3",
+     "map_sha256": "9f2ceb7e813246c0ed98edcc542ef71199f87989449eb27b076a8c05a74d4fb1",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-ca-life-floor/index.html",
++    "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+     "verification_scope": "Native museum: 41 checks, 14 actual desktop pointer events, glider/TRACE/LINK/onsets, actual supplied-body approach and support at empty/occupied A, four floor-corner rays, legacy floor and retained hex state dimensions. Hex compact table clears its prior overlap. No tracked-headset/Quest/full-gallery/learner acceptance."
+   },
+   "CA_AgentsCircuits": {
+@@ -66,9 +66,9 @@
+     "status": "source_checked_draft",
+     "sequence": "cellularautomata",
+     "text_path": "commons/maps/CA_AgentsCircuits/final.md",
+-    "text_sha256": "b17878f9d56510bdf200ac6e2b58155e1472e462ae6fc17f74141ca1b3da682f",
++    "text_sha256": "ada55960434923fd65c072fe2f4e5d54fcb98e4a23f995bb84823848fc2b054c",
+     "map_sha256": "d0fcd3ec00d56254c9fe97d229b824797424b46de1bffd75f4c7ccadcd54080d",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_AgentsCircuits/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md"
+   }
+ }

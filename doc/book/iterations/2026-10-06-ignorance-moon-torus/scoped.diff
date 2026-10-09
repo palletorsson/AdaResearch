@@ -1,0 +1,198 @@
+--- before/commons/artifacts/ignorance_gallery/moon_torus.gd
++++ commons/artifacts/ignorance_gallery/moon_torus.gd
+@@ -0,0 +1,50 @@
++extends Node3D
++## One shape, two sampling directions, and the museum's real moving moon.
++## No painted shadow or local duplicate light: the mesh casts onto the existing floor.
++const Kit = preload("res://commons/artifacts/ignorance_gallery/gallery_kit.gd")
++const RING_STEPS := [48,32,24,16,12,8,6,4]
++const TUBE_STEPS := [24,16,12,8,6,4]
++const SECONDS_PER_STEP := 1.5
++var form := TorusMesh.new()
++var body: MeshInstance3D
++var readout: Label3D
++var steps: Array[Vector2i] = []
++var step_index := 0
++var elapsed := 0.0
++var playing := true
++
++func _ready() -> void:
++	form.inner_radius=1.4
++	form.outer_radius=2.5
++	body=MeshInstance3D.new()
++	body.name="MoonTorus"
++	body.mesh=form
++	body.material_override=Kit.material(Color(0.10,0.10,0.105))
++	body.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_ON
++	# The root is on the hall floor; the centre of the torus is five metres up.
++	body.position=Vector3(2.0,5.0,0)
++	add_child(body)
++	for rings in RING_STEPS: steps.append(Vector2i(rings,24))
++	for segments in TUBE_STEPS: steps.append(Vector2i(4,segments))
++	for i in range(RING_STEPS.size()-1,-1,-1): steps.append(Vector2i(RING_STEPS[i],4))
++	for i in range(TUBE_STEPS.size()-1,-1,-1): steps.append(Vector2i(48,TUBE_STEPS[i]))
++	Kit.block(self,Vector3(3.6,0.8,0.04),Vector3(3.5,2.6,4.86),Kit.WHITE,false)
++	Kit.label(self,"A FORM ABOVE / A SHADOW BELOW",Vector3(3.5,2.80,4.82),0.0024,PI)
++	readout=Kit.label(self,"",Vector3(3.5,2.55,4.81),0.0019,PI)
++	Kit.label(self,"One count changes at a time.",Vector3(3.5,2.33,4.80),0.0015,PI)
++	set_step(0)
++
++func _process(delta: float) -> void:
++	if not playing: return
++	elapsed+=delta
++	if elapsed < SECONDS_PER_STEP: return
++	var advances := int(elapsed/SECONDS_PER_STEP)
++	elapsed=fmod(elapsed,SECONDS_PER_STEP)
++	set_step(step_index+advances)
++
++func set_step(index: int) -> void:
++	step_index=posmod(index,steps.size())
++	var counts := steps[step_index]
++	if form.rings != counts.x: form.rings=counts.x
++	if form.ring_segments != counts.y: form.ring_segments=counts.y
++	readout.text="%d RINGS   /   %d SEGMENTS" % [counts.x,counts.y]
+--- before/commons/artifacts/ignorance_gallery/form_in_hand.gd
++++ commons/artifacts/ignorance_gallery/form_in_hand.gd
+@@ -3,27 +3,33 @@
+ const Point = preload("res://commons/artifacts/ignorance_gallery/resolution_catalyst.gd")
+ var point: XRToolsPickable
+ var specimens: Array[MeshInstance3D] = []
++var moon_torus: Node3D
+ 
+ func _ready() -> void:
+-	preload("res://commons/artifacts/ignorance_gallery/gallery_architecture.gd").bay(self,11.0,0.0,false)
++	# This last bay is an open court. Leave the museum floor exposed to the moon.
++	moon_torus=preload("res://commons/artifacts/ignorance_gallery/moon_torus.gd").new()
++	moon_torus.name="MoonStudy"
++	add_child(moon_torus)
+ 	# A suspended point at reachable height; no pedestal stands in the reach space.
+-	var thread := Kit.cylinder(self,Vector3(0,2.81,0),0.005,2.44,8,Kit.BLACK)
++	# Move it to the side and hang it from a small wall bracket; keep the shadow field clear.
++	var point_at := Vector3(5.7,1.45,-3.5)
++	Kit.block(self,Vector3(2.1,0.055,0.055),Vector3(6.72,3.15,-3.5),Kit.BLACK,false)
++	var thread := Kit.cylinder(self,Vector3(5.7,2.37,-3.5),0.005,1.56,8,Kit.BLACK)
+ 	thread.name = "Suspension"
+ 	# The cable is a display convention, not a physical constraint on the hand.
+ 	for child in thread.get_children(): child.queue_free()
+-	Kit.block(self,Vector3(0.20,0.035,0.20),Vector3(0,4.01,0),Kit.WHITE,false)
+ 	point = Point.new()
+-	point.position = Vector3(0,1.45,0)
++	point.position = point_at
+ 	add_child(point)
+ 	point.suspension = thread
+ 	Kit.block(self,Vector3(3.7,1.10,0.06),Vector3(-4.1,2.45,4.86),Kit.WHITE,false)
+ 	Kit.label(self,"A FORM IN THE HAND",Vector3(-4.1,2.78,4.82),0.0034,PI)
+ 	Kit.label(self,"Hold: fewer divisions.\nTrigger: send this form.",Vector3(-4.1,2.43,4.81),0.0019,PI)
+ 	Kit.label(self,"Release: return in two seconds.",Vector3(-4.1,2.08,4.80),0.0016,PI)
+-	point.readout = Kit.label(self,"",Vector3(0,1.04,0.2),0.0015,PI)
++	point.readout = Kit.label(self,"",point_at+Vector3(0,-0.41,0.20),0.0015,PI)
+ 	# Same sphere, same mesh counts: only the displayed direction differs.
+ 	for i in 2:
+-		var at := Vector3(-3.4 if i==0 else 3.4,0,-1.4)
++		var at := Vector3(-6.2 if i==0 else 6.2,0,2.6)
+ 		Kit.pedestal(self,at,0.9,1.15)
+ 		var mesh := SphereMesh.new()
+ 		mesh.radius=0.47; mesh.height=0.94; mesh.rings=8; mesh.radial_segments=16
+@@ -32,8 +38,7 @@
+ 		specimens.append(ball)
+ 		Kit.label(self,"RINGS" if i==0 else "SEGMENTS",at+Vector3(0,0.68,-0.585),0.002,PI)
+ 		Kit.label(self,"SAME MESH / DIFFERENT DIRECTION",at+Vector3(0,0.46,-0.586),0.001,PI)
+-	Kit.lamp(self,Vector3(-2.0,3.1,-2.2),1.4,7)
+-	Kit.lamp(self,Vector3(2.0,3.2,1.5),1.1,7)
++	# No fill lamps in this court: extra light would wash out the changing lunar shadow.
+ 
+ func _direction_lines(ball: MeshInstance3D, rings: bool) -> void:
+ 	var mesh := ImmediateMesh.new()
+--- before/commons/maps/Primitives_Ignorance/map_data.json
++++ commons/maps/Primitives_Ignorance/map_data.json
+@@ -14,6 +14,7 @@
+ 	  "n_artifacts": 28
+ 	},
+ 	"museum": {
++      "open_roof": true,
+ 	  "props_deny": [
+ 		"bench",
+ 		"dream_bodies",
+--- before/commons/maps/Primitives_Ignorance/final.md
++++ commons/maps/Primitives_Ignorance/final.md
+@@ -101,7 +101,9 @@
+ 
+ <!-- @form_in_hand -->
+ 
+-A black point hangs within reach. Take it. As you hold it, the rings and segments decrease; corners emerge where the surface seemed continuous. Its radius stays the same. The hand that examined the form now changes the terms of its construction.
++The last bay opens to the night. A torus hangs five metres above the floor, with sky visible through its centre. Its rings and segments change one count at a time. Watch the shadow: a rounded opening acquires corners without anything touching the ground. The moon carries a decision made overhead to the place where you stand.
++
++Beside it, a black point hangs within reach. Take it. As you hold it, the rings and segments decrease; corners emerge where the surface seemed continuous. Its radius stays the same. The hand that examined the form now changes the terms of its construction.
+ 
+ Press the trigger and a copy leaves your hand, keeping the divisions it had at that instant. The point remains with you. Here is the beginning of a catalyst: a form we were learning to recognise becomes something we can act with. What do we want it to do, once understanding gives us that possibility?
+ 
+--- before/commons/artifacts/registry/commons_artifacts.json
++++ commons/artifacts/registry/commons_artifacts.json
+@@ -16573,8 +16573,8 @@
+   "lookup_name": "form_in_hand",
+   "scene": "res://commons/artifacts/ignorance_gallery/form_in_hand.tscn",
+   "name": "A form in the hand",
+-  "description": "A suspended black point loses rings and radial segments while held. Trigger sends a copy of its current mesh through the catalyst interaction protocol. Paired white spheres distinguish rings from segments.",
+-  "footprint": [16, 4.1, 11],
++  "description": "An open moon court: a torus at five metres varies rings and tube segments independently, casting a real lunar shadow. Beside it, the suspended black catalyst point simplifies while held and sends its current form on trigger.",
++  "footprint": [16, 5.6, 11],
+   "size_group": "large",
+   "category": "primitives",
+   "dev_category": "primitives",
+--- before/tools/probes/ignorance_moon_torus.gd
++++ tools/probes/ignorance_moon_torus.gd
+@@ -0,0 +1,54 @@
++extends "res://tools/probes/ignorance_form_in_hand.gd"
++
++func landing_checks() -> void:
++	museum.flush_stamps()
++	await create_timer(1.0).timeout
++	var station := find_scene("/form_in_hand.gd")
++	check("last bay and torus installed",station != null and station.moon_torus != null)
++	if station == null: return
++	var study: Node3D=station.moon_torus
++	study.playing=false
++	var torus: MeshInstance3D=study.body
++	var moon: DirectionalLight3D=museum.get("_moon")
++	check("existing museum moon casts shadows",moon!=null and moon.shadow_enabled)
++	if moon == null: return
++	museum.call("_aim_moon",0.0)
++	check("torus centre is five metres above hall floor",is_equal_approx(torus.global_position.y-station.global_position.y,5.0))
++	check("torus remains horizontal",torus.global_basis.y.is_equal_approx(Vector3.UP))
++	check("real mesh casts the shadow",torus.cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_ON)
++	check("no second moon or fill lights added to the last bay",station.find_children("*","Light3D",true,false).is_empty())
++	check("last bay has no low ceiling slab",station.find_children("*","MeshInstance3D",true,false).all(func(m): return not (m.mesh is BoxMesh and m.mesh.size.x>4 and m.position.y>3.0)))
++	var radii := Vector2(study.form.inner_radius,study.form.outer_radius)
++	var pose: Transform3D=torus.global_transform
++	var previous: Vector2i=study.steps[0]
++	for i in study.steps.size():
++		study.set_step(i)
++		var now: Vector2i=study.steps[i]
++		check("one count changes at step "+str(i),now.x==previous.x or now.y==previous.y)
++		check("valid native mesh at step "+str(i),study.form.surface_get_arrays(0)[Mesh.ARRAY_VERTEX].size()>0 and now.x>=4 and now.y>=4)
++		previous=now
++	check("cycle joins without changing both counts",previous.x==study.steps[0].x or previous.y==study.steps[0].y)
++	check("animation preserves radii, height and orientation",radii==Vector2(study.form.inner_radius,study.form.outer_radius) and torus.global_transform.is_equal_approx(pose))
++	study.set_step(0);study.elapsed=0.0;study.playing=true;study._process(1.5);study.playing=false
++	check("clock advances to the next resolution",study.step_index==1 and study.form.rings==32 and study.form.ring_segments==24)
++	study.set_step(0)
++	await snapshot("moon-court",station.to_global(Vector3(-3.7,1.7,-5.8)),station.to_global(Vector3(-0.6,2.4,0)),82)
++	# Project along the actual moon ray. The image comparison below verifies its visible shadow.
++	var direction := -moon.global_basis.z
++	var centre := torus.global_position+direction*((station.global_position.y+0.015-torus.global_position.y)/direction.y)
++	observations["shadow_centre"]=xyz(centre)
++	observations["torus_centre"]=xyz(torus.global_position)
++	observations["moon_direction"]=xyz(direction)
++	var eye := centre+Vector3(-0.2,3.1,-4.4)
++	await snapshot("shadow-fine",eye,centre,64)
++	torus.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	await snapshot("shadow-control",eye,centre,64)
++	torus.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_ON
++	study.set_step(7)
++	await snapshot("shadow-four-rings",eye,centre,64)
++	study.set_step(13)
++	await snapshot("moon-court-coarse",station.to_global(Vector3(-3.7,1.7,-5.8)),station.to_global(Vector3(-0.6,2.4,0)),82)
++	await snapshot("torus-four-by-four",station.to_global(Vector3(-1.0,1.7,-3.0)),torus.global_position,66)
++	study.set_step(0)
++	# The earlier catalyst remains reachable and functional after the rearrangement.
++	await station_checks(station)

@@ -1,0 +1,143 @@
+{
+  "status": "chapter companions; no main museum placements",
+  "rooms": [
+    {
+      "id": "suspension",
+      "title": "A place still held",
+      "artist": "Mona Hatoum",
+      "sequence": "array_tutorial",
+      "maps": [
+        "Array",
+        "Tutorial_3D"
+      ],
+      "chapter": "Arrays → the third dimension",
+      "rule": "Change the fragments. Keep every address.",
+      "labels": [
+        "Regular blocks",
+        "Varied fragments"
+      ],
+      "text": "A fragment hangs where the grid says it should. Its neighbours keep the same distance, although their edges no longer agree. The arrangement can remember a place for each piece; it cannot tell us what broke, or whether anything here can be repaired. Move around the rows. A small shift of your body separates what looked like one vertical line into many. Order survives in the distances between things that have lost their regular shape.",
+      "making": "Reuse positions, loops and spacing. The fragment maker is supplied; changing its corners belongs to a later return through Randomness and Noise.",
+      "critical": "Hatoum’s Remains to be Seen (2019) uses aligned rebar and concrete-like fragments with architectural associations. An array is one way to study its arrangement. It does not explain away the building materials, confinement or destruction invoked by the reference.",
+      "source": "https://www.whitecube.com/gallery-exhibitions/remains-to-be-seen",
+      "source_label": "White Cube · Remains to be Seen",
+      "reference": "codex-clipboard-7abb8fc2-b9e0-4815-8912-9dc15d3f6b45.png",
+      "bounds": [
+        5.4,
+        5.0,
+        5.4
+      ],
+      "question": "What can a grid preserve when its contents are no longer whole?"
+    },
+    {
+      "id": "passage",
+      "title": "Who fits through?",
+      "artist": "Mirosław Bałka",
+      "sequence": "transformation",
+      "maps": [
+        "Trans_Scale",
+        "Trans_Body"
+      ],
+      "chapter": "Transformation → scale and body",
+      "rule": "Change the opening. Keep the visitor the same size.",
+      "labels": [
+        "0.48 m opening",
+        "1.68 m opening"
+      ],
+      "text": "A wall stands inside the room. There is room around it, and an opening through it. From a distance, either route looks available. Up close, one of them may refuse you. The wall has not moved; only the width of its opening has changed. Your body makes that small difference consequential. A dimension becomes a condition of entry when something tries to pass.",
+      "making": "Reuse box dimensions and collision. Two side pieces move together; the outer wall stays 5.2 m wide. Test the same 0.56 m capsule against both openings.",
+      "critical": "This is an original passage prompted by the supplied Bałka photograph. Its photographed artwork’s exact title, date, dimensions and materials have not been verified. Our wall is assembled from boxes, not made by a Boolean operation. The test capsule is one chosen body, not a model for everybody.",
+      "source": null,
+      "source_label": "User-supplied reference; identification remains open",
+      "reference": "codex-clipboard-9c517d9c-a34e-4d20-9ecf-e3d729f38a27.png",
+      "bounds": [
+        5.4,
+        3.6,
+        7.0
+      ],
+      "question": "When does a measurement become permission?"
+    },
+    {
+      "id": "landscape",
+      "title": "A world from a cone",
+      "artist": "Alex McLeod",
+      "sequence": "color",
+      "maps": [
+        "Color_Context_Placed"
+      ],
+      "chapter": "Colour → composition, with a return in shaders",
+      "rule": "Change the height. Keep the forest’s sites and parts.",
+      "labels": [
+        "Low cones",
+        "Tall trees"
+      ],
+      "text": "Three cones are enough for us to begin calling something a tree. Forty-eight groups become a forest; a glossy strip between them becomes water. Nothing in a cone knows about a tree. The resemblance gathers from repetition, colour and the things placed nearby. Lower the trees and the world becomes a collection of small objects again. The pieces have kept their addresses. What changes is the scale of the place we imagine ourselves entering.",
+      "making": "Reuse primitives, scale, repetition and materials. The seeded site generator and curved arch are supplied. First change tree height; then exchange one part or one material.",
+      "critical": "The supplied McLeod landscape is a reference for constructing a world through familiar synthetic forms. Its exact title is unverified. This kit uses original primitive arrangements; it does not infer the production method of the photographed work.",
+      "source": "https://momentabiennale.com/en/artist/alex-mcleod/",
+      "source_label": "MOMENTA · Alex McLeod",
+      "reference": "codex-clipboard-c0b3f74d-7ed0-42fa-8665-314882fd2f16.png",
+      "bounds": [
+        12,
+        4.5,
+        10
+      ],
+      "question": "How little geometry does a world need before we believe in its scale?"
+    },
+    {
+      "id": "pattern_garden",
+      "title": "The pattern crosses over",
+      "artist": "Claudia Hart",
+      "sequence": "shaders",
+      "maps": [
+        "Shader_05_Patterns"
+      ],
+      "chapter": "Shaders → patterns across surfaces",
+      "rule": "Move the pattern. Keep the flowers and room still.",
+      "labels": [
+        "Phase 0",
+        "Half a cell later"
+      ],
+      "text": "A black square reaches the edge of a petal. The flower does not move, but the square leaves it. The same change carries colour across the floor and the wall. For a moment a surface looks continuous with its surroundings; then another patch makes its edge appear again. We can still name the flower. Following its outline has become less certain. The room holds its shape while the pattern unsettles the places where we thought one thing ended and another began.",
+      "making": "Reuse shader coordinates, uniforms and repetition. A shared phase feeds three pattern rules. The three-axis projection is supplied for the first exercise and can be opened for a later close reading.",
+      "critical": "Hart’s Inside the Flower Matrix (2016) brings patterned architecture and fantastical flowers into a virtual labyrinth concerned with commercial digital space. Our coordinate experiment follows one visual question from that reference. It uses new geometry and does not reproduce her symbolic imagery, animation or score.",
+      "source": "https://claudiahart.com/Inside-the-Flower-Matrix-XR-2016",
+      "source_label": "Claudia Hart · Inside the Flower Matrix",
+      "reference": "codex-clipboard-28328dd2-5a09-4f80-8bf9-bdf8d863150f.png",
+      "bounds": [
+        12,
+        5.5,
+        10
+      ],
+      "question": "Does the pattern help you see the object, or make its boundary harder to follow?"
+    },
+    {
+      "id": "plural_body",
+      "title": "A body in the plural",
+      "artist": "Peaches & Pussykrew",
+      "sequence": "shaders",
+      "maps": [
+        "Shader_11_QueerRubber",
+        "Shader_12_PinkExtravaganza"
+      ],
+      "chapter": "Shaders → Queer Rubber and Pink Extravaganza",
+      "rule": "Unfold the body. Keep its six arms and three heads.",
+      "labels": [
+        "Gathered",
+        "Unfolded"
+      ],
+      "text": "The arms draw inward, then open. Three heads remain attached to the same trunk. Each part is a familiar surface, but their arrangement asks us to decide what belongs to a body. The pink rim follows our view; it offers no evidence that the material would yield to touch. Even this excessive figure obeys a strict agreement between its left and right sides. One next change could break that agreement. What would we keep recognising then?",
+      "making": "Reuse transforms, interpolation and view-dependent shading. Curved limbs are supplied meshes. Alter one attachment, then one side’s material. Rigging, scans and physical deformation would require separate lessons.",
+      "critical": "The last two supplied images are references to Peaches & Pussykrew’s Fill the Whole at CTM 2021. This is a new primitive assemblage, without their likenesses, scans, game, voice or music. More heads, arms or pink do not define queerness; the study asks which bodily arrangements the code permits and insists on.",
+      "source": "https://www.factmag.com/2021/02/21/ctm-2021-peaches-pussykrew-fill-the-whole/",
+      "source_label": "FACT / CTM · Fill the Whole",
+      "reference": "codex-clipboard-e30afda3-8d34-404d-887f-6a8e941ea9ce.png",
+      "bounds": [
+        6,
+        4.5,
+        5
+      ],
+      "question": "Which attachments can change while we continue to recognise a body?"
+    }
+  ]
+}

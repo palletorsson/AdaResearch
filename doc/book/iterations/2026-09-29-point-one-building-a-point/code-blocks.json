@@ -1,0 +1,5 @@
+{
+  "position": "var point_position := Vector3(0.0, 1.12, 0.0)",
+  "visible": "var radius := 0.14\nvar sphere := SphereMesh.new()\nsphere.radius = radius\nsphere.height = radius * 2.0\n\nvar visible_point := MeshInstance3D.new()\nvisible_point.mesh = sphere\nvisible_point.position = point_position\nadd_child(visible_point)",
+  "solid": "var solid := StaticBody3D.new()\nsolid.position = point_position\n\nvar sphere_shape := SphereShape3D.new()\nsphere_shape.radius = radius\nvar collider := CollisionShape3D.new()\ncollider.shape = sphere_shape\n\nsolid.add_child(collider)\nadd_child(solid)"
+}

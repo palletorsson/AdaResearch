@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "geometry court and capsule present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: court",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: capsule",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+
+  },
+  "passed": true,
+  "scope": "Real Endless Museum scene. Controlled input and native rendering; headset acceptance remains open."
+}

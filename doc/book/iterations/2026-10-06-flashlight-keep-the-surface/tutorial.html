@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flashlight — keep the surface</title><style>*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.25em;line-height:1.15}h2{font-size:1.4em;line-height:1.3;margin-top:1.8em}a{color:#714154}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#25282e;color:#faf8f2;padding:22px;font:13px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet,figcaption{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1720px;gap:44px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:540px;display:block;margin:auto}figure{margin:28px 0}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}.swatches{display:flex;height:10px;margin-bottom:22px}.swatches span{flex:1}@media(max-width:1000px){.spread{display:block}.spread article+article{border-top:1px solid #aaa;margin-top:40px;padding-top:25px}}@media print{body{background:white;font-size:11pt}nav{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · COLOUR 2 / 8 · FLASHLIGHT · REVIEW DRAFT</p><div class="swatches"><span style="background:#c7994d"></span><span style="background:#cc2929"></span><span style="background:#295ccc"></span></div><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="flashlight-review.zip">Code + tests</a></nav></header><main><p class="quiet">102 native checks and 13 GPU image checks passed; three printed edits and one independent choice tested; 5 deliberate faults rejected. Supplied test hosts. No headset or learner trial.</p><h1>Flashlight — keep the surface</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Light colour and material colour</li>
+<li>A spotlight's position, direction and cone</li>
+<li>A local target used by <code>look_at</code></li>
+<li>Comparing separate and overlapping contributions</li>
+</ul>
+<p>Take one of the coloured lamps in the museum. Aim it across the pale board, then turn it aside. The patch leaves. The board has kept its material.</p>
+<p>In the previous hall, we assigned colours to independent surfaces. Here we keep one surface colour and change a light. The room's handles already let you do this by hand. Our small program reconstructs the light-to-surface relation; we use source edits to hold and compare particular states.</p>
+<h2>A familiar box receives light</h2>
+<p>Work in the existing <code>Color_Flashlight</code> hall. Attach this complete <code>lesson.gd</code> to an empty <code>Node3D</code> named <code>LightStudy</code> on clear floor, with unit scale and local Y upright. Allow about five metres across X and three metres along positive Z. Stand on the positive-Z side of the board. The museum supplies your camera, movement, room and existing illumination.</p>
+<p>The board is the <code>BoxMesh</code> we already know, made wide and shallow. Its material construction returns from the first Colour lesson. The new objects are two <code>SpotLight3D</code> nodes, each aimed at a point on the board. They have no visible handles or pickup bodies in this reduced study; the installed lamps provide that wider interaction. No child nodes, scene paths or helper files are required by this script.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript"># Keep the board's material; change one light's colour or aim.
+extends Node3D
+
+var beam_colour := Color(1, 0, 0)
+var first_target := Vector3(-1, 1.5, 0)
+var board: MeshInstance3D
+var surface: StandardMaterial3D
+var first_light: SpotLight3D
+var second_light: SpotLight3D
+
+func _ready() -&gt; void:
+    board = MeshInstance3D.new()
+    var shape := BoxMesh.new()
+    shape.size = Vector3(4.4, 2.4, 0.12)
+    board.mesh = shape
+    board.position = Vector3(0, 1.5, 0)
+    surface = StandardMaterial3D.new()
+    surface.albedo_color = Color(0.9, 0.9, 0.9)
+    surface.roughness = 1.0
+    board.material_override = surface
+    add_child(board)
+
+    first_light = make_light(beam_colour, Vector3(-1, 1.5, 2.5), first_target)
+    second_light = make_light(Color(0, 1, 0), Vector3(1, 1.5, 2.5), Vector3(1, 1.5, 0))
+
+func make_light(colour: Color, at: Vector3, target: Vector3) -&gt; SpotLight3D:
+    var lamp := SpotLight3D.new()
+    lamp.light_color = colour
+    lamp.light_energy = 2.5
+    lamp.spot_range = 6.0
+    lamp.spot_angle = 18.0
+    lamp.shadow_enabled = true
+    lamp.position = at
+    add_child(lamp)
+    lamp.look_at(to_global(target))
+    return lamp
+</code></pre>
+<h2>Which object receives the value?</h2>
+<p>Run the study. The first lamp makes a red pool on the left; the second makes a green pool on the right. Their positions, ranges and angles are fixed. The board receives both lights wherever their cones reach it.</p>
+<p>Last time, <code>material.albedo_color</code> changed a surface's base colour. Here, <code>lamp.light_color</code> changes a light's RGB contribution. Both accept a <code>Color</code>, but they belong to different objects and affect the scene differently. Our surface keeps <code>Color(0.9, 0.9, 0.9)</code> throughout this lesson.</p>
+<p>Change <code>beam_colour</code> to <code>Color(0, 0, 1)</code> and run again. The left pool becomes blue. The right lamp stays green, and the board's stored material is unchanged. Keep your viewpoint while comparing the two runs.</p>
+<p>Other museum lights still contribute. The pool's edge may make the change easier to see than its brightest centre. The assigned RGB value is not a promise that every receiving pixel will display those same three numbers.</p>
+<h2>Aim is a transformation</h2>
+<p>Restore <code>beam_colour</code> to <code>Color(1, 0, 0)</code>. Change <code>first_target</code> to <code>Vector3(1, 1.5, 0)</code> and run again. The first lamp now points towards the second lamp's target. Look where red and green meet. Their contributions can produce a yellow region on this pale surface. Neither lamp has been assigned yellow, and no yellow has been written into the board's material.</p>
+<p><code>make_light</code> creates a light, adds it to the study and returns its reference. The two variables keep different lights. Their <code>light_energy</code>, <code>spot_range</code> and <code>spot_angle</code> are held fixed so that colour and aim are the choices we compare. Range limits how far the light reaches; angle sets the cone's spread.</p>
+<p>A spotlight shines along its local negative-Z direction. <code>look_at</code> turns that direction towards a world-space target. Our target is written in the study's local coordinates, so <code>to_global(target)</code> converts it before the call. This is the local/world distinction from Point Coordinates doing another job. Placing the study elsewhere in the museum should not make its light aim at an unrelated world origin.</p>
+<p>The lamp must already be in the scene tree for this global aiming operation. That is why <code>add_child(lamp)</code> comes before <code>look_at</code>. This call turns the lamp; it does not move the lamp to the target. In the installed exhibit, turning the grabbable handle turns its child light instead.</p>
+<h2>Withdraw one contribution</h2>
+<p>Keep the first lamp red. Change <code>first_target</code> to <code>Vector3(-1, 1.5, 5)</code> and run again. This target is behind the lamp, on the positive-Z side. The red cone points away from the board. The green pool remains. The board may still be visible under the room's other lights.</p>
+<p>We have not switched off the first lamp: its colour, energy and position remain the same. We have changed where it points. Separating colour from aim lets us name which condition changed.</p>
+<h2>Make another comparison</h2>
+<p>Choose another target on the board: keep X between -2 and 2, Y between 0.4 and 2.6, and Z at zero. Predict which way the first light must turn. Keep its colour and the second lamp fixed, then run your choice. Find what changed without attributing it to a new surface colour.</p>
+<p>Keep the references <code>first_light</code> and <code>surface</code>, and the distinction between their colour properties. Our edits are applied in <code>_ready</code>; later controls could write to those same objects while the scene runs. This lesson does not add a colour picker to the museum's handles.</p>
+<p>Back at the installed exhibit, carry a beam across the coarse sphere. Its faces meet the light in different directions. The side rooms then hold their lamps still while colour changes with time. Those encounters develop the comparison further. We have reconstructed its smallest working relation: a known surface, a light, and an aim.</p>
+<p>In Nails, a hand position will choose a colour for a surface again. Keep asking where the value is written, and what else participates in its appearance.</p></main></html>

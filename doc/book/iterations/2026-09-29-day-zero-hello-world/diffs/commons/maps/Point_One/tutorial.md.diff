@@ -1,0 +1,10 @@
+--- before/commons/maps/Point_One/tutorial.md
++++ commons/maps/Point_One/tutorial.md
+@@ -1,6 +1,6 @@
+ # Point One — build the difference
+ 
+-Start with [the supplied Point One study](../../../doc/book/studies/point-one/README.md). Import its `project.godot` in Godot 4.6 and run it with F6 from `study.tscn`, or F5 for the project. It is a small separate project with a fixed camera, floor, lights and three labels already placed. You do not need the museum or its add-ons to run these first three constructions.
++Use [the Point One study](../../../doc/book/studies/point-one/README.md) in the environment prepared in [Day Zero](../../../doc/book/day-zero.md). Its `study.tscn` inherits the same `base.tscn` and replaces the greeting with three point stations.
+ 
+ The left station has no sphere. The middle and right stations look alike. Only the right one has a collision body. This study supplies a view for making and comparing; walking and grabbing belong to the museum encounter.
+ 

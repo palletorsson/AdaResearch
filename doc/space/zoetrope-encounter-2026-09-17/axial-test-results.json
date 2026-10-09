@@ -1,0 +1,237 @@
+{
+	"checks": [
+		{
+			"detail": null,
+			"name": "analytical boundary and history start hidden",
+			"passed": true
+		},
+		{
+			"detail": {
+				"maximum_local_change_m": 0.0,
+				"vertices": 24
+			},
+			"name": "cube: actual body mesh stays locally unchanged throughout full turn",
+			"passed": true
+		},
+		{
+			"detail": {
+				"maximum_radial_excess_m": 0.0000000344622810843909,
+				"sample_count": 58080
+			},
+			"name": "cube: analytical swept volume contains rotated surface samples",
+			"passed": true
+		},
+		{
+			"detail": 0.0,
+			"name": "cube: radius query matches independent cross-section formula",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "cube: radius query ends outside vertical body range",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_radius_m": 0.424264068711929,
+				"measured_radius_m": 0.42426410317421,
+				"vertices": 2352
+			},
+			"name": "cube: rendered outer contours reach expected maximum radius",
+			"passed": true
+		},
+		{
+			"detail": 0.0000000344622810843909,
+			"name": "cube: rendered contour endpoints stay inside analytical boundary",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "cube: five seconds gives a true indexed quarter-turn",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "cube: twenty seconds returns body to full-turn pose",
+			"passed": true
+		},
+		{
+			"detail": {
+				"maximum_local_change_m": 0.0,
+				"vertices": 3
+			},
+			"name": "triangle: actual body mesh stays locally unchanged throughout full turn",
+			"passed": true
+		},
+		{
+			"detail": {
+				"maximum_radial_excess_m": 0.0000000366142817731507,
+				"sample_count": 18480
+			},
+			"name": "triangle: analytical swept volume contains rotated surface samples",
+			"passed": true
+		},
+		{
+			"detail": 0.0,
+			"name": "triangle: radius query matches independent cross-section formula",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "triangle: radius query ends outside vertical body range",
+			"passed": true
+		},
+		{
+			"detail": {
+				"expected_radius_m": 0.45,
+				"measured_radius_m": 0.450000017881393,
+				"vertices": 2080
+			},
+			"name": "triangle: rendered outer contours reach expected maximum radius",
+			"passed": true
+		},
+		{
+			"detail": 0.000000037678650421924,
+			"name": "triangle: rendered contour endpoints stay inside analytical boundary",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "triangle: five seconds gives a true indexed quarter-turn",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "triangle: twenty seconds returns body to full-turn pose",
+			"passed": true
+		},
+		{
+			"detail": 1.70000004768372,
+			"name": "viewing plate top is 1.7 metres",
+			"passed": true
+		},
+		{
+			"detail": 0.0000000476837158647214,
+			"name": "both rotating bodies stay on or above platform plane",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "cube: body and analytical boundary add no physical collider",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "cube: physics ray passes through rotating body and revealed boundary",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "triangle: body and analytical boundary add no physical collider",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "triangle: physics ray passes through rotating body and revealed boundary",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "pedestal remains physically solid",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "three real buttons exist",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "SHAPE pointer button builds triangle profile",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "SHAPE pointer button returns cube",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "BOUNDARY pointer button reveals analytical contour",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "BOUNDARY pointer button hides analytical contour",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "PLAY advances actual body under real elapsed time",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "PAUSE holds actual body and elapsed clock",
+			"passed": true
+		},
+		{
+			"detail": 24,
+			"name": "history remains capped at 24 poses across two turns",
+			"passed": true
+		},
+		{
+			"detail": 576,
+			"name": "bounded history has finite rendered geometry",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "shape changes discard old cube history",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "history OFF clears memory and hides history",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "negative seek clamps to start",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "nonfinite seek leaves valid state intact",
+			"passed": true
+		},
+		{
+			"detail": null,
+			"name": "unknown shape keeps current profile",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"limits": [
+		"Tests actual scene under translated and yaw180 parent, not full museum route or human headset use.",
+		"Swept volume is analytical union over a complete turn; rendered cyan lines are finite-resolution boundary samples, not a new solid.",
+		"History capacity test advances the real process function deterministically; live timing and real button wiring are tested separately.",
+		"Triangle is a flat profile; its rotating union occupies a cone although each individual profile has zero volume."
+	],
+	"observations": {
+		"cube": {
+			"contour_max_radius_m": 0.42426410317421,
+			"finite_contour_chord_sagitta_bound_m": 0.000127780405368348,
+			"max_radial_excess_m": 0.0000000344622810843909,
+			"surface_sample_count": 58080
+		},
+		"triangle": {
+			"contour_max_radius_m": 0.450000017881393,
+			"finite_contour_chord_sagitta_bound_m": 0.000135531586708088,
+			"max_radial_excess_m": 0.0000000366142817731507,
+			"surface_sample_count": 18480
+		}
+	},
+	"source_sha256": "ce4c7a9011199ac9dfb452cec7c869003c0480cf8c7b28fa18819b0fb39a1524",
+	"source_sha256_at_finish": "ce4c7a9011199ac9dfb452cec7c869003c0480cf8c7b28fa18819b0fb39a1524"
+}

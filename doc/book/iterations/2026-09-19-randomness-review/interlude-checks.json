@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "name": "Default chapters unchanged",
+      "ok": true
+    },
+    {
+      "name": "Anchored insertion preserves chapter order",
+      "ok": true
+    },
+    {
+      "name": "Expansion leaves its input intact",
+      "ok": true
+    },
+    {
+      "name": "Reject duplicate chapter",
+      "ok": true
+    },
+    {
+      "name": "Reject unknown anchor",
+      "ok": true
+    },
+    {
+      "name": "Reject duplicate interlude",
+      "ok": true
+    },
+    {
+      "name": "Reject unsafe name",
+      "ok": true
+    },
+    {
+      "name": "Targeted refresh keeps interludes and unrelated rows",
+      "ok": true
+    },
+    {
+      "name": "Targeted refresh retains sixteen-style order fields",
+      "ok": true
+    },
+    {
+      "name": "Targeted refresh is idempotent",
+      "ok": true
+    },
+    {
+      "name": "Authored ownership keeps interludes",
+      "ok": true
+    }
+  ],
+  "count": 11,
+  "scope": "Pure route expansion and patch preservation; no live mutations"
+}

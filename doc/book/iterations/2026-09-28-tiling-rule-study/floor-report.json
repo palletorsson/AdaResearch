@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "production tiling artifact loaded",
+      "passed": true
+    },
+    {
+      "name": "rule study is part of the placed artifact",
+      "passed": true
+    },
+    {
+      "name": "all 48 original field states remain pixel-identical",
+      "passed": true
+    },
+    {
+      "name": "undo produces identical before and after samples",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-before",
+      "passed": true
+    },
+    {
+      "name": "actual APPLY button changes the instruction",
+      "passed": true
+    },
+    {
+      "name": "after differs from the unchanged reference",
+      "passed": true
+    },
+    {
+      "name": "address evaluation names one quarter-turn at 1,0",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-after",
+      "passed": true
+    },
+    {
+      "name": "NEXT TILE advances to address 2,0 and evaluates two turns",
+      "passed": true
+    },
+    {
+      "name": "all 16 sample addresses are reachable and wrap",
+      "passed": true
+    },
+    {
+      "name": "all six selected rules keep the 4x4 exactly within the 16x16",
+      "passed": true
+    },
+    {
+      "name": "NEXT RULE cycles back through all six",
+      "passed": true
+    },
+    {
+      "name": "one exception stays one cell in the larger field",
+      "passed": true
+    },
+    {
+      "name": "undo is reversible after cycling rules",
+      "passed": true
+    },
+    {
+      "name": "old source turn also updates the study reference",
+      "passed": true
+    },
+    {
+      "name": "new large floor field uses the computed 16x16",
+      "passed": true
+    },
+    {
+      "name": "new floor pattern has no collision body",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-and-rule",
+      "passed": true
+    },
+    {
+      "name": "floor pattern retains hall support",
+      "passed": true
+    },
+    {
+      "name": "existing six fields retain their transforms",
+      "passed": true
+    },
+    {
+      "name": "reading desk approach has floor support",
+      "passed": true
+    },
+    {
+      "name": "encounter checks completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "button_world_heights": [
+      1.05171000957489,
+      1.05171000957489,
+      1.05171012878418
+    ],
+    "desk_approach": [
+      5.59999990463257,
+      0.0,
+      2.40000009536743
+    ],
+    "exception_pixels_changed": 512,
+    "tiling_pattern.gd": "27a317a8a7fcf8b551545739026ee3660f2dbf07192d11055e1a96138f836558",
+    "tiling_principles.gd": "3e10be8ce75447e5d68f40ab23cd546bbae86cc36e17f57a9963f87b749741a6",
+    "tiling_rule_study.gd": "c1f3cc8f8a66799860600b13acdca791c0fc19d07640f93823047dd5007ff0ee"
+  },
+  "passed": true,
+  "room": "Tutorial_Tiling_Floor",
+  "scope": "Isolated production museum; native controls receive supplied pointer events. Staged eye-height cameras; pixel, collision and control checks. No headset, reach comfort or learner comprehension claim."
+}

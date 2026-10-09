@@ -1,0 +1,43 @@
+# Noise_Voxel — field notes
+
+## 2026-09-13 — Astra: four retained readings of presence
+
+All four authored works now belong to the book: lattice bench, science screen, voxel volume and independent orb. The earlier N4 contract still reset the receiver to Simplex during rebuild; that path is repaired, and both grids now have 24³ samples. The source seed 31415 produces identical scalar values and occupancy across all 13,824 cells at each of five thresholds. Previous claims that a shared normalized domain made 24³ and 32³ sample arrays identical are superseded by this measured comparison.
+
+The large volume is staged at 0.20 m cell spacing in a 5.2 m frame. Only exposed faces are emitted, and the same triangles provide collision. The bench gains a plinth, cased readout, centred cell marker and a tilted four-button panel with a clear approach at (4,7). The existing screen now shows a real horizontal score slice beside stored decisions. The orb retains its own implementation. No authored artifact, recovered structural cell or utility is removed.
+
+Occupied counts descend 11040 → 9176 → 6767 → 4582 → 2685 as thresholds rise. Component counts go 4 → 15 → 25 → 21 → 32: fragments can split or disappear. CUT only changes the model view. The rewritten book lets these differences be discovered before the explanation, and distinguishes connected cells from a body-specific route.
+
+Accepted rendered run: 61 checks, zero failures, PID20528, 11:18:08–11:18:32 +02:00. Four controls work through the actual desktop pointer; collider faces, sampled roof hits, empty cleanup and cross-hall isolation pass. A cramped initial approach and a test helper's five-centimetre spawn fall explained earlier pointer failures. Headset and Quest checks remain pending. See `doc/space/voxel-review-2026-09-13/README.md`, the source snapshot and `/research/possible-bodies/noise-voxel.html`. Historical notes below are preserved; their counts and dimensions describe earlier states.
+
+## 2026-09-12 — N4: when does a value become a place a body can occupy (Fable, the fourth hall of Astra's noise arc, after Noise_One; Astra's card: "keep both artifacts primary as one linked encounter and make their relationship exact — preferably share one sampler contract for basis, seed, coordinates, height bias, threshold and scale while changing representation/size; show the sample value and occupied/empty decision for a selected cell; allow threshold changes at fixed seed; debounce regeneration and bound the receiver; audit the link's scope so it cannot retune receivers in other halls")
+
+**The ruling.** The two primaries were linked and the link passed CONTROL VALUES, not samples: the bench sampled Perlin at its own coordinates with a height bias, the receiver sampled its own noise at world integers against its own iso level, and the room could call them "the same field" only by not looking. So the sampler is written down once, as four static functions on the bench — `contract_noise`, `contract_value`, `contract_bias`, `contract_occupied` — and both displays go through them. The coordinates are NORMALISED, so a 24-cell model and a 32-cell terrain ask one field the same question at two magnifications, which is the scale relationship Astra asked to be chosen and made true.
+
+**The plate shows the case, not the verdict.** One cell is marked by a cage and the plate prints its coordinate, the field's value there, the height bias, the subtraction, the threshold and the decision those make: `-0.1364 − +0.0109 = -0.1473 > +0.10 → empty`. The predicate is greater-than with the bias kept and named; the probe checks the source for exactly that string, because Astra's card asks that it not be simplified into a different algorithm.
+
+**Monotonicity, measured over every cell.** Raising a line that values must exceed cannot admit anything new. The probe counts the occupied set at five thresholds through the contract itself — 10925, 8887, 6549, 4315, 2421 — and fails if any step rises. It also checks the count actually falls, so a control that did nothing would not pass as monotone.
+
+**The field stays while the set changes.** Pressing THRESHOLD moves the line and leaves the marked cell's value untouched to four decimals, while the occupied count moves. That is the room's distinction in one press.
+
+**Connected is not walkable, and the plate says so.** The occupancy report counts pieces of the occupied set (faces touching) and the largest piece: 4995 cells in 29 pieces, the largest 4830. That is a fact about cells. A body needs a floor, headroom, a way in and a slope it can climb, and none of those are established by adjacency. The room refuses the slide from one to the other in the plate's last line and in the final.
+
+**The broadcast was reaching other halls.** `_broadcast_controls_to_voxelnoise` used `call_group("voxelnoise_receivers", …)`, which reaches every receiver in the tree — and the museum streams several halls at once, so turning this threshold retuned a terrain in a room nobody was standing in. It now walks up to the nearest ancestor that owns a hall (an `em_map` meta or a `Seg…` name) and speaks only to receivers under it, recording who it reached. With no such ancestor — a bench scene on its own — the behaviour is the old one.
+
+**Shipped paths untouched.** At `stand:none` `_generate_terrain` keeps its own coordinates and its own maths, the eighteen existing placements sample what they sampled, `_init_noise` still seeds itself with `randi()`, and the receiver keeps its legacy link. The contract applies only under the staging, and the payload says so with a `contract` flag the receiver reads.
+
+**Exactness decisions.** Five thresholds rather than a slider, so the walk is reproducible and the monotonicity check has named steps. Five marked cells rather than a pointer, for the same reason. CUT hides the near half of the model rather than changing it — the probe checks the occupied count is identical either side, because a cutaway that changed the answer would be a different exhibit. The rebuild is timed and printed (about 10 ms for 13824 cells).
+
+**Rejected.** Making the receiver sample at the bench's own extent (a literal 1:1 copy): it would have made the terrain a magnified model and nothing else, and Astra's card asks for one relationship that is true, not for sameness. Rejected too: claiming a passage through the terrain — nothing here verifies one, and the room says that rather than implying it.
+
+**Pending.** A headset walk; a body actually trying the terrain, which is the only way the passage question can be answered; Astra's review. The receiver's own chunk bounds (32 × 64 × 32 at voxel_scale 1) are unchanged and were not the subject of this pass.
+
+## 25 September — carry the reading across the room
+
+The standing photograph showed the small and large bodies facing opposite ways. Rotated only the large placement by 180 degrees and added a CELL-linked yellow perimeter at the selected horizontal layer, with a selected-cell outline. The existing control now locates the screen reading in the full-size body. No new control or field rule. Solid cells can still hide the selected address; the frame does not cut the body or collide with the visitor.
+
+The chapter keeps all former passages except the opening orientation phrase, adding one observation paragraph and a native photograph. Current role lists and sequence are unchanged. The core record still promotes the bench and volume, while older companion/book-role records name four works; this pre-existing discrepancy is recorded, not treated as permission to promote the legacy orb. The earlier orb passage remains available as a supporting comparison.
+
+## 25 September — author asks for one-metre cells and flight
+
+Expanded the receiver from 0.20 m to 1.00 m spacing while retaining the 24³ field, miniature and decisions. Added a 28 m glass flight enclosure using the museum's existing local locomotion, with physical sides/roof and two ground doors. The larger 33 × 44 m hall keeps the bench and screen in front and the orb outside the enclosure. Current book claims and dimensions follow this revision; earlier measurements and photographs above describe the previous staging.

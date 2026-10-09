@@ -1,0 +1,167 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Color_Paint · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Color_Paint">← Tutorial lineage</a></p><h1>Color Paint</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Color_Paint/final.md">Raw captured source</a></p><pre># Before the hand
+
+&lt;!-- @ball_painting_demo --&gt;
+
+A spray can is already moving across the canvas. Wait before taking anything. The line changes direction, and the pigment changes colour as it travels. A painting is underway without your hand.
+
+At the grid, a colour waited at an address until another write replaced it. Here, look back at a place the nozzle has left. Something of its passage remains. Something is already changing.
+
+Thirty spray cans wait on the low tray. Pick up a colour, aim the nozzle at the canvas and hold the trigger. A hiss begins at your hand. Move across the automatic line. Your gesture reaches a surface that has other business; it does not wait for you to finish.
+
+Bring the nozzle closer. The mark gathers into a smaller area. Draw back and the same colour spreads more thinly. Make a quick pass, then slow your hand. Colour gathers where you give it more time.
+
+Stay close in one place for longer. A narrow run slips below the patch. Release the trigger and watch it continue, then stop. Your hand has finished before your paint has. Staying also leaves a movement behind.
+
+Release the trigger. Your marks stop arriving while the other painter continues. Let go of the can and it returns to its place.
+
+Which part of the image can you still call yours?
+
+![Spray cans beside the shared canvas, with light and dense passes, overspray and a narrow paint run.](/book-review/doc/book/iterations/2026-09-28-paint-aerosol-and-runs/shared-aerosol.png)
+
+*The moving hand, the waiting hand. Distance spreads the colour; speed changes how much arrives in one place. A close, lingering spray can leave a run.*
+
+The canvas has its own addresses. `u` and `v` measure position across the surface, each from zero at one edge to one at the other. The automatic painter supplies both coordinates:
+
+```gdscript
+var uv := Vector2(0.5+0.43*sin(elapsed*0.71),0.5+0.4*sin(elapsed*1.13+0.6))
+```
+
+Two oscillations give the automatic brush its position. Their rates differ. Follow one turn of the line and then another: neither coordinate alone describes the gesture you see. Its hue changes with elapsed time too. The moving can follows this calculation; its paint is placed directly on the surface.
+
+The can in your hand takes another route. A ray leaves the nozzle and finds the canvas you are aiming at. The hit becomes a position on that surface, then a pair of coordinates between zero and one. The canvas is four metres wide and two and a half high. Those proportions matter: assuming a square would quietly move your mark away from where you aimed. Tilt the can and its round footprint stretches across the surface.
+
+Both routes reach the same spray operation.
+
+```gdscript
+surface.draw_spray(hit, -normal, 0.06, color, 1.0 - exp(-7.0 * deposit_time), strokes)
+```
+
+That is the automatic caller. It leaves a soft patch with a radius of six centimetres. Your nozzle makes a patch whose radius depends on its distance from the canvas. The shader scatters its coverage into grain, thickest near the centre. One deposit is partly transparent; another can cover more of what was there. The apparent mist is still an arrangement of pixels.
+
+The canvas keeps working between these calls. Its shader samples the preceding image and neighbouring pixels, allowing a little spreading, downward drift and fading toward the ground colour. The surface remembers by becoming another image. It does not preserve a list of gestures that can be retrieved intact.
+
+```glsl
+color = mix(ground_color, prev_color, pow(dissipation, step_scale));
+```
+
+Here the ground is white. It enters the work again as the direction of forgetting in this particular simulation. We could ask for another ground, another rate of fading, another way for two colours to meet. None is the natural behaviour of code. Here we can point to the line that makes the decision.
+
+Look along the edge of a light pass. Separate specks reach beyond the thick centre. The software fills between nearby samples of the moving nozzle, but it cannot keep every possible position of your hand. Even this soft edge has a resolution.
+
+&lt;!-- @albers_wall_gallery --&gt;
+
+Turn from that accumulating surface to the studies after Josef Albers’s *Homage to the Square*.[^albers] Let one coloured area hold your attention, then include its surround. At the painting, a neighbour may arrive while you look. Here an arrangement holds the comparison available for longer.
+
+Return to the canvas. Some of what happened while you looked away is still visible. Some has flowed into something else. The shared surface has made room for two ways of moving without keeping them separate for you.
+
+&lt;!-- @ --&gt;
+
+Ahead, colour becomes a partition you can walk beside and look through. What happens to this question of neighbours when the coloured surface helps organise the room itself?
+
+[^albers]: Albers began [*Homage to the Square*](https://www.moma.org/collection/works/79438) in 1950. His [*Interaction of Color*](https://www.albersfoundation.org/alberses/teaching/interaction-of-color), published in 1963, develops exercises in how surrounding colours affect what we see. Our invitation to attend to a colour and its surround draws on that inquiry; the procedural gallery is our interpretation.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Color_Paint/tutorial.md">Raw captured source</a></p><pre># Enter an ongoing painting
+
+Watch the automatic can before taking a colour from the two-row tray. Hold a can, aim its nozzle at the canvas and hold the trigger. On desktop, right-click carries or returns the can and holding the left mouse button sprays. Merely picking it up makes no marks.
+
+Try the same colour close to the canvas, then farther away. The closer mark is tighter and denser; the farther mark spreads thinner. Keep the nozzle still to build coverage. Tilt it to stretch the footprint. Release the trigger while keeping the can in your hand, then let go to return it to its dock.
+
+The nozzle ray must hit this canvas without a wall or another object in between. Its range is three metres. The actual surface transform and four-by-two-and-a-half-metre mesh determine UV coordinates and the projected footprint. No coarse grid snap is applied to spray input.
+
+```gdscript
+last_radius_m = 0.012 + distance * tan(deg_to_rad(7.0))
+```
+
+This rule makes distance visible as the size of a mark. The pigment budget spreads over that area; trigger pressure and time spent in place affect coverage. The current code approximates a spray cone, not aerosol physics.
+
+The automatic painter supplies its position from two oscillations and deposits through the same surface method. Its prescribed motion continues beside your gesture. The canvas stores the resulting image, not a recoverable list of strokes.
+
+Compare that changing surface with a fixed arrangement in the Albers gallery. Continue into Color_Walls with the difference between a colour value, its neighbours and its receiving surface in mind.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Color_Paint/technical.md">Raw captured source</a></p><pre># Spray cans and a shared image — current implementation
+
+Color_Paint places `ball_painting_demo:0:0.5#automated:true#tools:spray`. The stable lookup and scene remain; the new token selects thirty cans and spray feedback. Placements without `tools:spray` retain pigment balls and the legacy brush calls.
+
+`spray_can.gd` builds a coloured cylinder, metal rims, paper label, nozzle and collision capsule. It extends the project&#x27;s pickable cube base. XRTools action press/release drives the nozzle after pickup. The museum&#x27;s desktop hand uses `on_desktop_grab` and `on_desktop_drop` because desktop carrying does not call XRTools.pick_up; its existing left-button action routing supplies the same trigger. Drop stops emission and restores the individual saved tray transform. A tracked trigger&#x27;s scalar value sets pressure; desktop uses full pressure.
+
+## Hit, distance and coverage
+
+A ray from the nozzle&#x27;s local negative z direction must hit a drawing area first. The visible surface plane is then intersected exactly, avoiding the thickness of the Area collider. Back-facing and near-grazing incidence, targets behind blockers and targets beyond three metres do not deposit. The hit surface owns the receiver; no global first-canvas lookup is used.
+
+```gdscript
+last_radius_m = 0.012 + distance * tan(deg_to_rad(7.0))
+var density := clampf(pow(0.09 / last_radius_m, 2.0), 0.06, 4.0)
+var opacity := 1.0 - exp(-8.0 * pressure * density * minf(delta, 0.05) / steps)
+```
+
+The footprint&#x27;s minor axis follows the canvas tangent; its major axis stretches by inverse incidence. Both are transformed into texture pixels using the actual rectangular surface and world transform. Optical depth is multiplied by incidence, reducing density over an oblique footprint. Coverage remains an approximation, not aerosol dynamics or spectral pigment chemistry.
+
+## Deposition and feedback
+
+`spray_stamp.gdshader` combines a concentrated soft core with separate seeded droplets in the halo. Droplet probability responds to optical depth; a light pass leaves visible uncovered gaps between specks. Alpha compositing lets repeated deposits build coverage. BrushLayer queues up to 64 stamps per rendered frame and reuses a bounded pool of Polygon2D quads. Queues and transient commands clear after use. Nozzle particles and a quiet spatial hiss follow the held trigger even in empty space; they do not determine paint hits. The button depresses with pressure. Release and either drop path stop emission and sound.
+
+Each surface duplicates its feedback material. Spray mode settles the grain with less diffusion and flow than the older wet brush. It fades toward its selected priming colour. Fade and flow use elapsed frame time, capped at 50 ms per update to bound stalls. Stochastic rounding prevents small fade increments from becoming stuck in the compatibility renderer&#x27;s 8-bit buffer. The image still has finite colour precision and finite spatial/temporal sampling; the time scaling is not a guarantee of identical output at every frame rate.
+
+Canvas initialization and reset explicitly lay the selected ground in the feedback shader for two rendered frames. This fixes a black initial surface exposed by clearing the old transient reset splat. The shared legacy splat path now also clears stale draw commands when input stops.
+
+The automatic can follows the existing UV oscillations. At most thirty updates per second deposit a six-centimetre-radius patch on its own surface using `draw_spray`. Manual nozzles sample at physics steps, distributing one tick&#x27;s pigment over at most twelve intervening rays. Every ray checks obstruction. Release, lost receiver and large jumps break continuity. More interpolation samples do not add more pigment. Both feed one image; no input history or undo stack is retained.
+
+`spray_reservoir.gd` holds a 96 by 60 transient wet-load grid shared by all callers on the same canvas. Deposition adds optical depth; load relaxes with a 1.1-second time constant. A locally overloaded patch can start a narrow run. Runs consume nearby load, follow gravity projected into the surface, and stop after roughly 1.6–2.4 seconds. At most 24 run at once. Horizontal upward-facing surfaces have no in-plane gravity and do not run. Reset clears load and runs together with the image. This models an intelligible consequence of excess, not a fluid solver. The original gentle fading toward the ground remains.
+
+## Evidence
+
+Current aerosol checks and interior images: `doc/book/iterations/2026-09-28-paint-aerosol-and-runs/`. The previous 55-check spray regression was rerun against this implementation; its report is included. The new checks cover speed/coverage, overspray grain, overload runs, stopping, clear/reset and rays through a swept obstruction. Supplied pickup/trigger input checks actual rays, rectangular UV, range, obstruction, trigger release, dock return and the rendered pigment. The real desktop carry hooks/action dispatcher and an ordinary walking approach are also exercised. Tracked-controller reach and headset comfort remain untested. Previous ball evidence is preserved in the dated 10 and 23 September records and in this review&#x27;s before-state.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Color_Paint/intent.md">Raw captured source</a></p><pre>Question: what does a surface keep after a gesture has passed?
+
+Action: watch the automatic painter, take a spray can, aim and hold the trigger, vary distance and duration, then release it and look elsewhere.
+
+Observation: manual and automatic inputs reach the same canvas. A rendered image remains and evolves; individual gestures are not stored as recoverable objects.
+
+Implementation: automatic UV positions come from two timed oscillations. A triggered manual nozzle maps its actual ray-hit canvas to UV coordinates and projects a distance-dependent footprint using the surface proportions. The spray shader adds grainy deposits to a persistent viewport, whose feedback settles and fades the preceding image toward its ground.
+
+Primary encounters: ball_painting_demo and albers_wall_gallery. Handoff: Grid Pallet&#x27;s current value becomes Paint&#x27;s evolving image; Walls gives colour an architectural role.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Color_Paint/critical.md">Raw captured source</a></p><pre># A surface with other business
+
+The automatic painter starts before the visitor participates. A manual gesture enters a surface already changing, and both inputs use the same drawing operation. Sharing an implementation does not make their ways of arriving identical: one computes UV coordinates from elapsed time; the other maps a ray hit from a held object into the contacted canvas.
+
+That difference must work materially. A nozzle that painted the first canvas in a global group would turn a local gesture into an unrelated mark. A square-coordinate assumption would displace the gesture on this rectangular surface. Correct receiver selection and correct proportions are part of the argument, not merely invisible housekeeping.
+
+The canvas retains a changing image. It does not archive individual strokes. The wet shader samples neighbours, shifts the image and fades toward white. White is therefore both an initial ground and a repeated destination in this implementation. The relation between a ground and its erasure is authored in the shader, rather than guaranteed by the word paint.
+
+The can makes distance, direction and duration part of the mark. Staying still can thicken a patch; withdrawing spreads it more thinly. These relations are authored, just as the choice of a white ground is authored. The shader models a mist through finite deposits and grain. Time-scaled feedback reduces dependence on frame rate but does not remove sampling or precision limits. No claim of physical fluid dynamics or spectral pigment mixing follows from the effect.
+
+The Albers studies hold arrangements beside the evolving canvas. One lets the visitor revisit a relatively fixed comparison; the other changes some of that comparison while attention is elsewhere. The next room carries these relations into coloured architectural partitions.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Color_Paint/artifacts.md">Raw captured source</a></p><pre># Color Paint — Artifacts
+*Color and Composition · F_order · 3 artifacts*
+
+&gt; Spray from a held can onto a shared canvas. Distance changes the footprint; time in place builds colour. The automatic painter continues beside your marks.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## albers_wall_gallery
+![albers_wall_gallery](/scene-catalog/albers_wall_gallery.png)
+
+White gallery wall with 98 Josef Albers-inspired canvases and spotlights.
+
+`albers_wall_gallery`
+
+## ball_painting_demo
+![ball_painting_demo](/scene-catalog/ball_painting_demo.png)
+
+Thirty spray cans and an automatic painter share one evolving canvas. Fine overspray surrounds the centre of a mark; slower passes build more colour, and close stationary excess can run.
+
+`ball_painting_demo`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Color_Paint/summary.md">Raw captured source</a></p><pre># A painting already in progress
+
+An automatic spray can follows two differently timed oscillations while its hue changes. Thirty grabbable cans offer colours on a two-row tray. Hold a can, aim and hold the trigger: close marks gather, distant ones spread, and time in place builds coverage. Releasing the trigger stops new marks; dropping returns the can to its dock. Desktop uses right-click to carry and the left mouse button to spray.
+
+Both inputs reach the same four-by-two-and-a-half-metre canvas. Its image accumulates, settles and fades toward its ground through shader feedback. This is a visual paint effect, not pigment chemistry or a recoverable stroke archive. The Albers gallery remains the second primary encounter inside the recovered 19 by 25 metre room.
+
+Previous room: Color_Grid_Pallet. Next: Color_Walls.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Color_Paint/blurb.md">Raw captured source</a></p><pre>Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces. This is color as action - not selected from a menu but applied through motion, each stroke a record of your throw.
+</pre></section></body></html>

@@ -1,0 +1,159 @@
+{
+  "checks": [
+    {
+      "message": "baseline compiles: algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+      "ok": true
+    },
+    {
+      "message": "reproduced old RESET redrawing observations",
+      "ok": true
+    },
+    {
+      "message": "higher outlier setting retains existing alternates and adds more",
+      "ok": true
+    },
+    {
+      "message": "RESET keeps selected observations",
+      "ok": true
+    },
+    {
+      "message": "RESET repeats all three starts and timer",
+      "ok": true
+    },
+    {
+      "message": "returning slider to a setting repeats the sample",
+      "ok": true
+    },
+    {
+      "message": "NONE and slider zero share the same clean baseline",
+      "ok": true
+    },
+    {
+      "message": "three losses score the same candidate without changing the data",
+      "ok": true
+    },
+    {
+      "message": "standalone scene default preserved",
+      "ok": true
+    },
+    {
+      "message": "museum override gives three blobs and four centres",
+      "ok": true
+    },
+    {
+      "message": "spatial controls replace desktop overlay in lesson",
+      "ok": true
+    },
+    {
+      "message": "STEP changes assignments/centres while points stay fixed",
+      "ok": true
+    },
+    {
+      "message": "DATASET selects rings with K fixed and a paused start",
+      "ok": true
+    },
+    {
+      "message": "DATASET selects block with K fixed and a paused start",
+      "ok": true
+    },
+    {
+      "message": "DATASET selects blobs with K fixed and a paused start",
+      "ok": true
+    },
+    {
+      "message": "return to BLOBS repeats the data",
+      "ok": true
+    },
+    {
+      "message": "RUN resumes the lesson",
+      "ok": true
+    },
+    {
+      "message": "RESET repeats the selected lesson without a redraw",
+      "ok": true
+    },
+    {
+      "message": "reapplying lesson configuration does not duplicate controls",
+      "ok": true
+    },
+    {
+      "message": "pre-ready configuration hides all k-means overlays and builds controls",
+      "ok": true
+    },
+    {
+      "message": "supportvectormachine/svm_visualization: pre-ready museum setting hides overlay",
+      "ok": true
+    },
+    {
+      "message": "supportvectormachine/svm_visualization: stable UI paths remain valid",
+      "ok": true
+    },
+    {
+      "message": "supportvectormachine/svm_visualization: desktop UI can be restored in place",
+      "ok": true
+    },
+    {
+      "message": "pca/pca_visualization: pre-ready museum setting hides overlay",
+      "ok": true
+    },
+    {
+      "message": "pca/pca_visualization: stable UI paths remain valid",
+      "ok": true
+    },
+    {
+      "message": "pca/pca_visualization: desktop UI can be restored in place",
+      "ok": true
+    },
+    {
+      "message": "randomforest/random_forest_visualization: pre-ready museum setting hides overlay",
+      "ok": true
+    },
+    {
+      "message": "randomforest/random_forest_visualization: stable UI paths remain valid",
+      "ok": true
+    },
+    {
+      "message": "randomforest/random_forest_visualization: desktop UI can be restored in place",
+      "ok": true
+    },
+    {
+      "message": "baseline compiles: algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+      "ok": true
+    },
+    {
+      "message": "reproduced missing example particles in old diagram",
+      "ok": true
+    },
+    {
+      "message": "diagram creates ten reference and ten candidate particles",
+      "ok": true
+    },
+    {
+      "message": "visible metrics update and declare diagram status",
+      "ok": true
+    },
+    {
+      "message": "candidate reaches discriminator in a transformed museum placement",
+      "ok": true
+    },
+    {
+      "message": "diagram reset resets displayed script state",
+      "ok": true
+    },
+    {
+      "message": "memory diagram declares scope and retains its animated stream",
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "outlier_counts": [
+      0,
+      3,
+      7,
+      9,
+      12
+    ]
+  },
+  "failures": [],
+  "scope": "Controlled model and wired-signal checks, not tracked-hand interaction"
+}

@@ -1,0 +1,52 @@
+{
+  "archive_sha256": "bc0ddcd83b9e7173a15989b87ca12b8b682af7d37641d5b52abde190c537813b",
+  "checks": [
+    {
+      "id": "trace/real_xr_pickup",
+      "passed": true
+    },
+    {
+      "id": "trace/grip_does_not_invent_a_stroke",
+      "passed": true
+    },
+    {
+      "id": "trace/pause_adds_no_entry",
+      "passed": true
+    },
+    {
+      "id": "trace/held_movement_makes_the_record",
+      "passed": true
+    },
+    {
+      "id": "trace/neighbours_make_segments",
+      "passed": true
+    },
+    {
+      "id": "trace/intentional_release_saves",
+      "passed": true
+    },
+    {
+      "id": "trace/archive_loads",
+      "passed": true
+    },
+    {
+      "id": "trace/saved_geometry_not_only_positions",
+      "passed": true
+    },
+    {
+      "id": "trace/saved_record_matches_hand",
+      "passed": true
+    },
+    {
+      "id": "trace/xr_focus_loss_does_not_save",
+      "passed": true
+    },
+    {
+      "id": "trace/scene_removal_does_not_save",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "mode": "produce",
+  "passed": true
+}

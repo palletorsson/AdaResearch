@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Obsticals_Part2 · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Obsticals_Part2">← Tutorial lineage</a></p><h1>SoftBodies Obsticals Part2</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Obsticals_Part2/final.md">Raw captured source</a></p><pre># Same fall, another encounter
+
+&lt;!-- @softbody_gallery_part2 --&gt;
+
+The array contains twelve encounters. Start with the names: Bouncy Collider, Slippery Collider, Torus, Prism, Corner Strike, High Drag, Vacuum, Tiny Sphere, Giant Sphere, Super Soft, Caving Sphere, Collapsed Box. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+
+REPLAY restarts the group from its declared seed. The opening study removes the gallery&#x27;s additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+
+```gdscript
+sb.linear_stiffness = 0.5
+sb.damping_coefficient = 0.01
+sb.pressure_coefficient = 0.0
+```
+
+The gallery applies each named cell&#x27;s settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Super Soft” cannot substitute for that construction.
+
+Read the cells against those three lines. High Drag changes one number, damping to 0.8, and nothing else: it is the one controlled comparison in the array. Vacuum sets pressure to nought, which is where every cell already starts, so its name promises a difference its numbers do not contain. Caving Sphere is the only body in the sequence that asks the solver for seven passes instead of five, and the only one whose pressure is negative, so it is drawn inward as it falls. Super Soft and Collapsed Box are both boxes without pressure, but one is half as stiff as the other and lands on a sphere where the other lands on a cube: two differences at once, and the array cannot tell you which one you are watching. Bouncy and Slippery change the collider rather than the body, one perfectly elastic and one without friction, and change its shape at the same time.
+
+HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
+
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver&#x27;s finite effort.[^effort] Those are invitations to further experiments, not conclusions available from a single silhouette.
+
+The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
+
+&lt;!-- @ --&gt;
+
+[^effort]: Five passes over every spring, every physics tick, for every body in this sequence but one; the Caving Sphere asks for seven. The bench in Form Finding put that count on a dial and read the error it leaves: at one pass the worst spring in a cloth was a third off its length; at four, a tenth.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Obsticals_Part2/tutorial.md">Raw captured source</a></p><pre># Same fall, another encounter
+
+&lt;!-- @softbody_gallery_part2 --&gt;
+
+The array contains several kinds of encounter. Start with the names: a slippery collider, a corner strike, high drag, a torus. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+
+REPLAY restarts the group from its declared seed. The opening study removes the gallery&#x27;s additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+
+```gdscript
+sb.linear_stiffness = 0.5
+sb.damping_coefficient = 0.01
+sb.pressure_coefficient = 0.0
+```
+
+The gallery applies each named cell&#x27;s settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Jelly” cannot substitute for that construction.
+
+HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
+
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver&#x27;s finite effort. Those are invitations to further experiments, not conclusions available from a single silhouette.
+
+The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Obsticals_Part2/technical.md">Raw captured source</a></p><pre># Same fall, another encounter — implementation
+
+Primary source scenes:
+
+- `res://algorithms/softbodies/softbody_gallery_part2.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers REPLAY, VARIATION, GROUP, HOLD, RELEASE, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+
+The array contains several kinds of encounter. Start with the names: a slippery collider, a corner strike, high drag, a torus. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+
+REPLAY restarts the group from its declared seed. The opening study removes the gallery&#x27;s additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+
+```gdscript
+sb.linear_stiffness = 0.5
+sb.damping_coefficient = 0.01
+sb.pressure_coefficient = 0.0
+```
+
+The gallery applies each named cell&#x27;s settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Jelly” cannot substitute for that construction.
+
+HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
+
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver&#x27;s finite effort. Those are invitations to further experiments, not conclusions available from a single silhouette.
+
+The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Obsticals_Part2/intent.md">Raw captured source</a></p><pre># Intent
+
+Which differences belong to material, contact geometry and experimental variation?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Obsticals_Part2/critical.md">Raw captured source</a></p><pre># Same fall, another encounter — question the construction
+
+Which differences belong to material, contact geometry and experimental variation?
+
+The array contains several kinds of encounter. Start with the names: a slippery collider, a corner strike, high drag, a torus. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+
+REPLAY restarts the group from its declared seed. The opening study removes the gallery&#x27;s additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+
+The gallery applies each named cell&#x27;s settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Jelly” cannot substitute for that construction.
+
+HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
+
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver&#x27;s finite effort. Those are invitations to further experiments, not conclusions available from a single silhouette.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Obsticals_Part2/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `pick_up_cube` — secondary
+- `grab_long_stick` — secondary
+- `softbody_gallery_part2` — primary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Obsticals_Part2/summary.md">Raw captured source</a></p><pre># Same fall, another encounter
+
+Which differences belong to material, contact geometry and experimental variation?
+
+Primary encounters: softbody_gallery_part2. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Obsticals_Part2/blurb.md">Raw captured source</a></p><pre># Same fall, another encounter
+
+Which differences belong to material, contact geometry and experimental variation?
+</pre></section></body></html>

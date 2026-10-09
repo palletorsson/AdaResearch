@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The surface that says depth · Ada</title>
+<style>
+:root{color-scheme:dark;--bg:#15151a;--panel:#1e1e25;--ink:#f1eee9;--muted:#b8b5ba;--line:#45444d;--rose:#f19dbb;--stone:#c7c2b6}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.65 system-ui,sans-serif}a{color:var(--rose);text-underline-offset:4px}header,main,footer{max-width:1160px;margin:auto;padding:32px}header{padding-top:76px;padding-bottom:52px}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.06}h1{font-size:clamp(48px,8vw,92px);max-width:950px;margin:20px 0}.lead{font:clamp(22px,3vw,30px)/1.5 Georgia,serif;max-width:850px;color:#ddd7d2}h2{font-size:clamp(34px,5vw,56px);margin:0 0 20px}h3{font-size:18px;margin:0 0 8px}section{padding:54px 0;border-top:1px solid var(--line);scroll-margin-top:18px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:var(--panel);padding:14px;border:1px solid var(--line)}figure{margin:0}img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain;background:#29282d}figcaption,.small{font-size:14px;color:var(--muted);padding-top:9px}article{max-width:790px;margin:28px auto;font:clamp(21px,2.5vw,27px)/1.6 Georgia,serif}blockquote{margin:32px auto;padding:4px 0 4px 22px;border-left:2px solid var(--rose);font:italic 24px/1.5 Georgia,serif;max-width:790px}pre{white-space:pre;overflow:auto;background:#0d0d11;border:1px solid var(--line);padding:18px;font:14px/1.55 ui-monospace,Consolas,monospace;color:#f0d8e2}.diagram{background:#eeece7;color:#25232a;padding:18px;border-radius:2px}.diagram svg{display:block;width:100%;height:auto}.diagram figcaption{color:#514b50}.label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}.row{display:grid;grid-template-columns:90px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}.number{font:48px/1 Georgia,serif;color:var(--rose)}.source{font-size:15px;color:var(--muted)}nav{display:flex;gap:20px;flex-wrap:wrap;margin-top:25px}nav a{font-size:15px;text-decoration:none;padding:8px 12px;border:1px solid var(--line)}footer{border-top:1px solid var(--line);padding-block:26px 50px;color:var(--muted)}table{border-collapse:collapse;width:100%;font-size:16px}th,td{vertical-align:top;text-align:left;border-bottom:1px solid var(--line);padding:12px}th{color:var(--rose);font-weight:500}.notice{border-left:2px solid var(--rose);padding:8px 18px;color:var(--muted)}@media(max-width:720px){header,main,footer{padding-left:20px;padding-right:20px}.two{grid-template-columns:1fr}.row{grid-template-columns:55px 1fr}.number{font-size:36px}section{padding:40px 0}table{font-size:14px}th,td{padding:8px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Ada / a third reading from the artist index / 1 October 2026</div>
+  <h1>The surface<br>that says depth.</h1>
+  <p class="lead">Anish Kapoor’s <em>Descent into Limbo</em> asks a question our Boolean studies do not yet ask: when the eye sees darkness, does it see a surface, or a way down?</p>
+  <nav aria-label="On this page"><a href="#encounter">Encounter</a><a href="#capacity">Existing capacity</a><a href="#study">A small study</a><a href="#spine">Where it fits</a><a href="#sources">Sources</a></nav>
+</header>
+<main>
+  <section id="encounter">
+    <div class="eyebrow">01 / The work changes what a surface can mean</div>
+    <h2>A black circle is also a room.</h2>
+    <article>
+      <p>In <em>Descent into Limbo</em> (1992), a circular opening in a gallery floor is treated with a deep black pigment. From above, the opening can read as a dark disc laid over the floor. The visible surface gives the eye almost nothing to measure. The work’s force lies in the distance between what the eye can settle and what the body knows it might approach.</p>
+      <p>This is not simply an image of a hole. It is an actual cavity whose darkness makes its depth difficult to judge. The work asks perception to carry risk and desire before certainty arrives.</p>
+      <p>For our project, the useful question is exact: can we build two circles with the same outline, one a real recessed volume and one a dark image on an intact plane, then notice what changes as the viewer moves?</p>
+    </article>
+    <div class="two">
+      <figure class="card"><img src="../2026-09-24-boolean-colour-spaces/path-inside.png" alt="Existing Ada Boolean study: a visitor's view through a curved, vividly coloured CSG passage toward a dark opening"><figcaption>Existing Boolean Surfaces capture: the curved passage is made from CSG cuts. The dark end is a view through the room, not an optical-black floor illusion.</figcaption></figure>
+      <figure class="card"><img src="../2026-09-24-facade-room-and-cast/pair.png" alt="Existing digital study showing a tenement facade at left and a pale positive volume derived from its interior at right"><figcaption>Existing facade-and-positive study: one interior definition produces a room and its corresponding mass. This teaches how geometry can carry a void; it does not yet make depth visually uncertain.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="capacity">
+    <div class="eyebrow">02 / Close reading of what is already built</div>
+    <h2>We can cut a void.<br>We cannot yet disguise its measure.</h2>
+    <table>
+      <thead><tr><th>Existing system</th><th>What it actually does</th><th>What it leaves open</th></tr></thead>
+      <tbody>
+        <tr><td><code>boolean_colour_chamber</code></td><td>Builds traversable passages from CSG subtraction, intersection, and union; supplies collision and a stable walking floor.</td><td>Its materials make expressive colour and pattern. They do not claim calibrated near-black, depth perception, or a deceptive floor surface.</td></tr>
+        <tr><td><code>facade_room_cast</code></td><td>Uses one interior volume to make a room by subtraction and a positive by intersection.</td><td>It makes the void legible through its counterpart. Kapoor asks us to meet an opening that refuses that easy legibility.</td></tr>
+        <tr><td><code>super_drag_mirror</code></td><td>Reflects a shared live world with a planar camera and off-axis view.</td><td>A reflected image is not a cavity; it does not supply curved reflection or a measured depth illusion.</td></tr>
+      </tbody>
+    </table>
+    <p class="notice">The connection is a capacity match, not a claim that an existing Ada artifact reproduces Kapoor’s work. The Boolean and mirror examples are source-inspected; the comparison below is a proposal.</p>
+  </section>
+
+  <section id="study">
+    <div class="eyebrow">03 / Proposed investigation / not a Godot capture</div>
+    <h2>Hold the circle still.<br>Change what lies below it.</h2>
+    <div class="two">
+      <figure class="diagram">
+        <svg viewBox="0 0 820 400" role="img" aria-labelledby="study-title study-desc">
+          <title id="study-title">Two equal-looking circles, one actual recess and one flat dark surface</title>
+          <desc id="study-desc">A schematic compares a circular opening with a visible recessed side and protected route to a dark circular plane above intact floor. Both share the same outline and viewing position. This is a proposal for a study, not a capture or a model of Kapoor's artwork.</desc>
+          <rect width="820" height="400" fill="#eeece7"/>
+          <text x="32" y="36" fill="#665d61" font-family="system-ui" font-size="13" letter-spacing="2">SAME CIRCLE / SAME VIEWER / TWO DEPTH CONDITIONS</text>
+          <g transform="translate(28,65)">
+            <rect x="0" y="0" width="365" height="285" rx="2" fill="#d4d0ca"/>
+            <text x="20" y="28" fill="#4a4449" font-family="system-ui" font-size="14" letter-spacing="1.5">A / GEOMETRY CONTINUES DOWN</text>
+            <path d="M38 160H124 M241 160H328" stroke="#aaa49f" stroke-width="12"/>
+            <ellipse cx="182" cy="161" rx="58" ry="30" fill="#17161b"/>
+            <path d="M124 160V230Q182 254 240 230V160" fill="#35333b" stroke="#817b82" stroke-width="3"/>
+            <path d="M125 178Q182 198 239 178" fill="none" stroke="#b9b4ba" stroke-width="2" stroke-dasharray="5 5"/>
+            <path d="M296 90L243 144" fill="none" stroke="#cb4779" stroke-width="4"/>
+            <path d="M241 144l15-2-8-11" fill="none" stroke="#cb4779" stroke-width="4"/>
+            <circle cx="302" cy="84" r="11" fill="#cb4779"/><path d="M302 97v27" stroke="#cb4779" stroke-width="4"/>
+            <path d="M25 250H92" stroke="#cb4779" stroke-width="4"/><path d="M25 238v24M92 238v24" stroke="#cb4779" stroke-width="3"/>
+            <text x="20" y="276" fill="#514b50" font-family="system-ui" font-size="12">Cutaway shown for study; body stays behind a clear boundary.</text>
+          </g>
+          <g transform="translate(427,65)">
+            <rect x="0" y="0" width="365" height="285" rx="2" fill="#d4d0ca"/>
+            <text x="20" y="28" fill="#4a4449" font-family="system-ui" font-size="14" letter-spacing="1.5">B / THE IMAGE SITS ON THE FLOOR</text>
+            <path d="M38 191H328" stroke="#aaa49f" stroke-width="12"/>
+            <ellipse cx="182" cy="173" rx="58" ry="30" fill="#08070a"/>
+            <path d="M124 160V187M240 160V187" stroke="#f4f1ec" stroke-width="2"/>
+            <path d="M125 190H239" stroke="#cb4779" stroke-width="2" stroke-dasharray="5 5"/>
+            <path d="M296 90L243 144" fill="none" stroke="#cb4779" stroke-width="4"/>
+            <path d="M241 144l15-2-8-11" fill="none" stroke="#cb4779" stroke-width="4"/>
+            <circle cx="302" cy="84" r="11" fill="#cb4779"/><path d="M302 97v27" stroke="#cb4779" stroke-width="4"/>
+            <path d="M25 250H92" stroke="#cb4779" stroke-width="4"/><path d="M25 238v24M92 238v24" stroke="#cb4779" stroke-width="3"/>
+            <text x="20" y="276" fill="#514b50" font-family="system-ui" font-size="12">Flat disc over an intact floor; the line marks the actual plane.</text>
+          </g>
+        </svg>
+        <figcaption>Study proposal: identical visible boundary, different geometry. The cutaway and marked floor plane are explanatory aids; no Godot study has been built from this schematic.</figcaption>
+      </figure>
+      <div>
+        <div class="row"><div class="number">1</div><div><h3>Keep the boundary fixed</h3><p>Use one circular outline, one viewing position, one light, and one dark value. Only the geometry below the outline changes.</p></div></div>
+        <div class="row"><div class="number">2</div><div><h3>Compare from three positions</h3><p>Look from the approach, shift sideways, then inspect the cross-section. Record what parallax, edge occlusion, and the ray hit reveal.</p></div></div>
+        <div class="row"><div class="number">3</div><div><h3>Name what the eye cannot answer</h3><p>At what point can you tell which circle is recessed? Does a stable, legible floor matter more than visual uncertainty in a space someone can enter?</p></div></div>
+      </div>
+    </div>
+    <blockquote>The eye measures a surface. The body asks whether the floor continues.</blockquote>
+    <p>This is a controlled comparison, not a dare. Keep the visitor on a supported route; reveal the actual section from a protected viewing position. The study is about how an image and a collision volume can disagree, and how a moving viewpoint changes that disagreement.</p>
+  </section>
+
+  <section id="spine">
+    <div class="eyebrow">04 / Placement in the capability ladder</div>
+    <h2>Meet the void first.<br>Make the illusion later.</h2>
+    <div class="two">
+      <div>
+        <p><strong>Encounter:</strong> late in <em>Boolean Surfaces</em>, after the student has seen a real CSG boundary and its collision. The room can present the two circles as a looking exercise. The visitor need not be taught materials or rendering internals to ask what appears continuous.</p>
+        <p><strong>Making return:</strong> later, in <em>Shaders</em>, when a learner can keep geometry fixed while changing the image on it. They can build the flat version and compare it against the already understood cut. This borrows Boolean construction and adds a render/material operation; it does not need a new foundational rung.</p>
+      </div>
+      <div>
+        <div class="row"><div class="number">B</div><div><h3>Boolean Surfaces</h3><p>Construct and inspect an actual void. Existing capacity: CSG shape, collision, supported passage.</p></div></div>
+        <div class="row"><div class="number">S</div><div><h3>Shaders</h3><p>Change the visible surface without changing the floor beneath it. New study: compare appearance with collision and parallax.</p></div></div>
+        <div class="row"><div class="number">↺</div><div><h3>Critical return</h3><p>Ask what the visitor is being asked to trust. The work’s history and bodily unease remain larger than an engine trick.</p></div></div>
+      </div>
+    </div>
+    <p class="small">Placement is a proposed encounter and later making return. No map, sequence order, tutorial graph, or <code>final.md</code> has been changed.</p>
+  </section>
+
+  <section id="sources">
+    <div class="eyebrow">05 / Historical grounding and limit</div>
+    <h2>A relation, not a reconstruction.</h2>
+    <p>Kapoor describes the Documenta room as a hole in the floor that could be mistaken for a black carpet. The artist-site essay on the work describes the dark opening and its uncertain depth. These sources ground the perceptual problem; the page does not reproduce the artwork or claim to resolve its meaning.</p>
+    <p>The digital comparison can make a cavity and a dark surface answer differently to geometry, viewpoint and collision. It cannot carry the scale, material, institutional context, bodily exposure or encounter of Kapoor’s installation. Nor does a visually similar black circle establish influence or equivalence.</p>
+    <p class="source">Anish Kapoor, <a href="https://anishkapoor.com/180/in-conversation-with-john-tusa-2">conversation with John Tusa</a>; Camille van Winkle, <a href="https://anishkapoor.com/9275/on-the-sublime-in-the-work-of-anish-kapoor-by-camile-van-winkle">“On the Sublime in the Work of Anish Kapoor”</a>, De Pont Foundation / artist site. Existing Ada references: <a href="http://localhost:3003/book-review/doc/book/iterations/2026-09-24-boolean-colour-spaces/index.html">Boolean colour spaces</a> and <a href="../2026-09-24-facade-room-and-cast/index.html">The room and its volume</a>.</p>
+  </section>
+</main>
+<footer><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-01-artist-capacity/index.html">Artist capacity atlas</a> · <a href="../2026-10-01-five-reference-rooms/index.html">Five rooms after an image</a> · <a href="../2026-10-01-hatoum-grid-under-load/index.html">The grid under load</a> · <a href="../2026-10-01-clark-a-pose-left/index.html">A pose left</a></footer>
+<section id="boolean-eggs" style="max-width:52rem;margin:3rem auto;padding:1.5rem;border:1px solid #8a79a044;background:#191827;border-radius:14px;color:#eeeaf4">
+  <p style="letter-spacing:.15em;text-transform:uppercase;font-size:.78rem;color:#c5a9d2">New companion study</p>
+  <h2>Boolean eggs: union, intersection, subtraction</h2>
+  <p>Three deep-coloured ovoids make the operations visible as sculptural choices. A restrained halo and a dark concavity give the group its transcendental register. The Godot component and its camera-and-light preview are authored as a standalone scene, separate from the main three studies.</p>
+  <p><a href="boolean-eggs.html#godot">View the three native Godot screenshots →</a> · Preview scene: <code>res://commons/artifacts/kapoor_void_studies/boolean_eggs_preview.tscn</code></p>
+  <a href="boolean-eggs.html#godot"><img src="figures/eggs-front.png" alt="Native Godot capture of the three Boolean eggs" style="display:block;width:100%;height:auto;border-radius:8px"></a>
+</section>
+</body>
+</html>

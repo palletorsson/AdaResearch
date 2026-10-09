@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "only volume yaw and map description changed",
+      "passed": true
+    },
+    {
+      "name": "unchanged: commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: contract_noise",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: contract_value",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: contract_bias",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: contract_occupied",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _generate_terrain",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _rebuild_multimesh",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: toggle_cut",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: cell_report",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: occupancy_report",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _generate_chunk",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _add_volume_boundary",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _effective_iso",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _configure_noise",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _rebuild_now",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithm: _clear_generated",
+      "passed": true
+    },
+    {
+      "name": "only one former paragraph altered",
+      "passed": true
+    },
+    {
+      "name": "code excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "all encounter anchors retained",
+      "passed": true
+    },
+    {
+      "name": "entire volume/orb/closing argument retained",
+      "passed": true
+    },
+    {
+      "name": "Noise Voxel roles and other metadata retained",
+      "passed": true
+    },
+    {
+      "name": "current hash: final.md",
+      "passed": true
+    },
+    {
+      "name": "current hash: map_data.json",
+      "passed": true
+    },
+    {
+      "name": "42 native checks pass",
+      "passed": true
+    },
+    {
+      "name": "six walking segments pass",
+      "passed": true
+    },
+    {
+      "name": "two floor rays pass",
+      "passed": true
+    },
+    {
+      "name": "no script/shader errors",
+      "passed": true
+    },
+    {
+      "name": "figure is unmodified native render",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer."
+  ],
+  "other_core_records_changed_concurrently": [
+    "Vectors_Act1_WhatAVectorIs",
+    "Vectors_Act4a_KineticForces",
+    "VFM_07_Gravity",
+    "Vectors_Act5_ForceAsPlace",
+    "Change_Choreography"
+  ],
+  "scope": "Private actual museum; injected native button events and controlled walking. No headset, ray aiming, learner or Quest acceptance."
+}

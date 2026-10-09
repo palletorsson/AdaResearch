@@ -1,0 +1,342 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "new study loaded in the actual Array hall",
+      "passed": true
+    },
+    {
+      "name": "64 fixed indexed sites",
+      "passed": true
+    },
+    {
+      "name": "256 nested cubes use one shared frame mesh",
+      "passed": true
+    },
+    {
+      "name": "all four layers initially visible",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-first-view",
+      "passed": true
+    },
+    {
+      "name": "RESET button restores zero transforms",
+      "passed": true
+    },
+    {
+      "name": "no animation work when resting",
+      "passed": true
+    },
+    {
+      "name": "DEPTH cycles from four to one layer",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: one-layer-order",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 1 value 0.7",
+      "passed": true
+    },
+    {
+      "name": "rotation control leaves translation and scale zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: one-layer-rotation",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 0 value 0.7",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 2 value 0.6",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: one-layer-combined",
+      "passed": true
+    },
+    {
+      "name": "depth layer 2 updates geometry and readout",
+      "passed": true
+    },
+    {
+      "name": "depth layer 3 updates geometry and readout",
+      "passed": true
+    },
+    {
+      "name": "depth layer 4 updates geometry and readout",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: volume-combined",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: volume-close",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: controls",
+      "passed": true
+    },
+    {
+      "name": "addresses and assigned departures survive every control",
+      "passed": true
+    },
+    {
+      "name": "all slider values reset",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 0 value 0.7",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 1 value 0.7",
+      "passed": true
+    },
+    {
+      "name": "pointer controls axis 2 value 0.6",
+      "passed": true
+    },
+    {
+      "name": "same settings recover the same object",
+      "passed": true
+    },
+    {
+      "name": "transparent faces follow outer frame",
+      "passed": true
+    },
+    {
+      "name": "all 64 addresses unique and marker positions fixed",
+      "passed": true
+    },
+    {
+      "name": "maximum departure stays above plinth",
+      "passed": true
+    },
+    {
+      "name": "maximum departure stays inside plinth footprint",
+      "passed": true
+    },
+    {
+      "name": "actual body walks around to (2.2, 0.0, 2.65)",
+      "passed": true
+    },
+    {
+      "name": "actual body walks around to (2.2, 0.0, -2.2)",
+      "passed": true
+    },
+    {
+      "name": "actual body walks around to (-2.2, 0.0, -2.2)",
+      "passed": true
+    },
+    {
+      "name": "actual body walks around to (-2.2, 0.0, 2.65)",
+      "passed": true
+    },
+    {
+      "name": "actual body walks around to (0.0, 0.0, 2.65)",
+      "passed": true
+    },
+    {
+      "name": "study completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "bounds": {
+      "horizontal_half_extent": 1.27506732940674,
+      "lowest": 0.654170513153076
+    },
+    "controls_height": [
+      1.25,
+      1.10500001907349,
+      0.959999978542328
+    ],
+    "node_count": 171,
+    "study_world": [
+      10.0,
+      0.0,
+      16.0
+    ],
+    "walk (-2.2, 0.0, -2.2)": {
+      "contacts": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "feet": [
+        -2.175048828125,
+        0.0307844001799822,
+        -2.19986152648926
+      ]
+    },
+    "walk (-2.2, 0.0, 2.65)": {
+      "contacts": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "feet": [
+        -2.19987201690674,
+        0.0307930950075388,
+        2.62506198883057
+      ]
+    },
+    "walk (0.0, 0.0, 2.65)": {
+      "contacts": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "feet": [
+        -0.0250120162963867,
+        0.030834099277854,
+        2.6497163772583
+      ]
+    },
+    "walk (2.2, 0.0, -2.2)": {
+      "contacts": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "feet": [
+        2.19987106323242,
+        0.0307821650058031,
+        -2.17494010925293
+      ]
+    },
+    "walk (2.2, 0.0, 2.65)": {
+      "contacts": [
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "collider": "/root/EndlessMuseum/Seg0_castelvecchio-endstopped-enfilade/SimGrid_Array/MolnarCubeStudy/GalleryFloor/@StaticBody3D@2879",
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      ],
+      "feet": [
+        2.17500019073486,
+        0.0307972896844149,
+        2.64999866485596
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Array",
+  "scope": "Actual isolated Array museum: new artifact placement, supplied pointer events, fixed addresses and deterministic transforms, bounded geometry and actual-body circuit around the plinth. No headset/learner claim."
+}

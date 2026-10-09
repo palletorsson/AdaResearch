@@ -1,0 +1,157 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fractal_MengerSponge · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Fractal_MengerSponge">← Tutorial lineage</a></p><h1>Fractal MengerSponge</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Fractal_MengerSponge/final.md">Raw captured source</a></p><pre># A hole becomes a place
+
+&lt;!-- @menger_sponge --&gt;
+
+The cube has no entrance. Nine metres high, nine across, nine deep. Its surface faces us without offering a way in.
+
+At the desk to the right, press NEXT. Find the opening before counting the blocks. A square of the far side has become visible. Move a little: something opens across it, sideways. The removal did more than shorten the route between two faces. It made a crossing inside the cube.
+
+Press NEXT again. Keep the large opening as a reference and look at the blocks around it. Each now carries smaller openings in the same relation. FRAME marks the outside of the original cube. The construction still reaches those edges, although more of its interior has become air.
+
+The display counts the solids: one, twenty, four hundred. Beside the count, retained volume falls from 729 to 540 to 400 cubic metres. More objects have been made to represent less material. We met that difference in Cantor&#x27;s rows. Now its gaps have acquired depth.
+
+The source addresses twenty-seven positions, three along each axis:
+
+```gdscript
+var x: int = i % 3
+var y: int = (i / 3) % 3
+var z: int = i / 9
+```
+
+Each coordinate runs from zero to two. The retained-position table skips the centre and the six face centres: seven cells making a cross through the parent. Twenty remain. The next call receives each of those twenty cubes, with its scale divided by three. The same selection can now make an opening inside something that was previously kept.
+
+Try GHOST. Pale volumes occupy the removals. After two cuts, seven large ghosts mark the first cross and 140 smaller ones mark the next. These marks have no collision. They are a record of what the construction discarded, drawn in the places our bodies might use.
+
+In the previous hall, the removed middles could become the work. Here the removed volumes may become somewhere to be. Turn GHOST off again and approach the frame at floor level.
+
+The glass cube offers another way of moving. Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.
+
+Rise towards the large opening. What looked like a dark square becomes a passage, with smaller openings in its sides. Try going through, then circle above the sponge and approach from another face. Choose one small retained cube and try identifying it in both views. The openings rearrange in projection even though their positions in the object remain fixed.
+
+Look into a smaller copy of the passage. Its axial opening is a metre across and a metre high. Light can travel through where a standing body cannot. The body the sponge collides with is a capsule forty centimetres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.
+
+There was a connection in the geometry. There was not yet a route for every body.
+
+We changed locomotion without changing the sponge&#x27;s selection rule. We could also ask what a smaller body would encounter, or what would happen if the opening were enlarged. These would be further experiments. The present room gives us one specific comparison: a large passage we can fly through and a smaller, visibly connected opening that a standing capsule cannot enter.
+
+The glass, the support below us and the borrowed flight belong to the installation. The glass confines that movement to a place where its beginning and ending can be found. At the desk, NEXT, BACK and RESET wait while a visitor remains inside; another press is needed after everyone leaves. GHOST and FRAME can still change the reading. We can discuss a different solid shape without rebuilding it around someone already inhabiting the last one.
+
+Two cuts are enough for this encounter. A third would ask for eight thousand retained cubes with edges a third of a metre long. It would bring further openings, each smaller again. That is a cost and a possibility to investigate, not evidence that the next generation would be a better room. The infinite Menger construction[^1] has a zero-volume limit; these four hundred one-metre cubes retain positive volume and real collision. The limit is not what our body is touching.
+
+The neighbouring aggregation study remains another way for form to begin: wandering particles can attach to an existing cluster. It has its own clock and rules. The catalyst installations and the dark sphere remain too. They offer detours from the cut-and-repeat procedure; this desk does not control them.
+
+Next, repetition takes a numerical form. Instead of retaining twenty descendants, we will generate each new quantity from the preceding two and inspect how its representation changes what we can compare.
+
+[^1]: Karl Menger described the sponge in 1926 (“Allgemeine Räume und Cartesische Räume”, *Proceedings of the Amsterdam Academy* 29) as a universal curve: every curve, however tangled, fits inside it.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Fractal_MengerSponge/tutorial.md">Raw captured source</a></p><pre># Encounter order: a hole becomes a place
+
+1. Find the uncut nine-metre cube and the compact desk to the right of the front entrance. Predict what removal could make possible. NEXT opens the first cross; compare the front opening with its side connection.
+2. NEXT again. Keep the large opening in view while finding its smaller copies. Read the cube count beside retained volume. FRAME holds the outside size still. GHOST locates the removed volume without restoring collision.
+3. Reveal RULE. The three coordinates address twenty-seven cells; seven are skipped and twenty receive descendants. Keep the finite result distinct from the limiting construction.
+4. Leave two cuts showing. Enter the glass frame at floor level, rise towards the large passage, release to hover, and fly through. Circle above and view from another face. The source geometry stays fixed while the projected openings rearrange.
+5. Inspect a smaller axial opening. Compare what can be seen with what this body can enter. Flight supplies reach, while the retained cubes and the player&#x27;s dimensions still constrain passage.
+6. Descend and leave through a ground door. If a visitor remains inside, the desk will refuse NEXT/BACK/RESET. Non-solid GHOST/FRAME views remain available. An empty enclosure and a fresh press are required for another shape.
+7. The DLA study, catalyst installations and dark sphere remain optional comparisons, with their own rules. Continue to Fractal_GoldenSpiral: a numerical recurrence now needs a mapping into form.
+
+One primary artifact owns this multi-part encounter and its book passage. The four other placements remain secondary/decoration. Headset reach, comfort and performance still need a human review.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Fractal_MengerSponge/technical.md">Raw captured source</a></p><pre># Finite removal, volume and embodied access
+
+The primary is `menger_sponge`. Its book anchor, role, order and Necklace card refer to the existing nine-metre specimen with `#flight_box:true#lesson:true`. All five authored placements remain in the same map cells. The 15×18 structure, basin and floor patches are unchanged.
+
+## The desk
+
+`commons/artifacts/menger_lesson/menger_lesson.gd` is an opt-in child of the existing generator. It has six full-sized touch buttons in a compact 3×2 arrangement and the small transparent tilted screen used in the preceding halls. The desk stands to the right of the front entrance, outside the flight volume, with its standing position clear of the museum wall and the glass envelope.
+
+| Control | Effect |
+|---|---|
+| NEXT | Advance one finite cut, up to two. |
+| BACK | Rebuild the preceding stage. |
+| GHOST | Show/hide the seven removed cells from each subdivided parent. |
+| FRAME | Show/hide a non-solid nine-metre outer frame. |
+| RESET | Return to the uncut cube and initial view. |
+| RULE | Explain the selection after the visitor has compared stages. |
+
+NEXT/BACK/RESET check the `em_walker`, `player_body` and `player` groups against the flight volume. They refuse a solid rebuild while a visitor is inside. Refusal does not queue a later action: the visitor must press again after the enclosure is empty. View controls remain available because they change neither the retained cubes nor collision. This is a desk interlock, not a claim that every external editor or direct script call is prevented from rebuilding the scene.
+
+## The actual construction
+
+`algorithms/fractals/mengersponge/menger_sponge.gd` scans only its own cube scenes. `InitialCube` is a one-unit cube scaled to nine metres, with centre y=4.5. Each iteration partitions its retained cubes into a 3×3×3 grid, removes the central cell and six face-centred cells, and keeps twenty positions. Integer division maps the linear index to three coordinates. The central cross connects opposite faces along all three axes.
+
+| Cut | Retained cubes | Cube edge | Summed retained volume | Smallest axial opening |
+|---|---:|---:|---:|---:|
+| 0 | 1 | 9 m | 729 m³ | None |
+| 1 | 20 | 3 m | 540 m³ | 3×3 m |
+| 2 | 400 | 1 m | 400 m³ | 1×1 m |
+
+The outer AABB remains 9×9×9 m. Counts follow 20^n; volumes follow 729(20/27)^n. The lesson computes retained volume from the determinants of the actual unit-cube transforms. At the identity placement used here, this agrees with the formula. Object counts and volumes are not entropy measurements.
+
+The complement is constructed once per stage: at cut two, seven removed cubes of edge 3 m plus 140 of edge 1 m, totalling 329 m³. These MeshInstances have no colliders. A `menger_removed` metadata tag identifies them independently of Godot&#x27;s generated node names. GHOST changes their visibility; FRAME changes twelve thin edge meshes. Neither rebuilds the solids. Rebuild detaches old generated nodes and retains the desk and flight enclosure. The desk stops at two cuts and does not allocate another generation at its ceiling. Ordinary source scenes without `lesson:true` retain their existing automatic generation and DNA configuration.
+
+## Flight and bodies
+
+`commons/movement/museum_flight_box.gd` and `museum_flight_provider.gd` remain unchanged. The twelve-metre glass envelope has two three-metre-wide ground doors. Its floor provides support independently of the map basin. Movement is capped at 2.4 m/s; neutral input hovers. Exiting at ground level returns control to ordinary locomotion. Retained cubes and glass remain solid. The same enclosure instance persists across desk rebuilds.
+
+The native museum walker has a 0.32 m-radius, 1.5 m-high capsule. Its camera is 1.65 m above the feet, so view position and collision shape are distinct. In the reviewed second-stage sponge, a ray along local x=−3,y=1.5 crosses the one-metre axial tunnel, but the standing capsule cannot enter it. The three-metre central passage admits that body during flight. XR body height follows the user&#x27;s tracking/setup; the desktop capsule is not a measurement of every VR visitor.
+
+The existing flight acceptance is rerun on the changed scene: ground entry, ascent, hover, central passage, travel around and above the sponge, roof/side collisions, descent, exit, resumed gravity, volume removal and synthetic XR controller input. Desk input uses the standalone DesktopPlayer&#x27;s real pointer pipeline inside the museum; that rig has a different 1.8 m capsule. It does not establish native museum mouse-button interaction. Headset reach, comfort and Quest frame time remain pending. Recorded build durations are observations on this desktop, not a headset benchmark.
+
+## Retained secondary works
+
+`diffusion_limited_aggregation` retains its automatic two-dimensional random walks, ten-walker cap and attachment rule. It has no new desk controls or held-seed comparison in this pass. Its particles move once per rendered update; this is not a validated physical model of frost, rivers or all branching forms. Its progression may be slow within a brief visit. The catalyst prompter and vent retain their existing behavior. The dark sphere retains its placement. None is silently relabelled as part of the sponge algorithm.
+
+Previous map, manuscript, supporting texts, source and flight fixture are archived in `doc/space/menger-encounter-2026-09-14/before/`. Earlier flight evidence remains available, and the new runtime receipt records the teaching scene now in use.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Fractal_MengerSponge/intent.md">Raw captured source</a></p><pre>Concept: Removal creates connected passages, whose dimensions and accessibility must be tested against an actual body.
+Sequence role: Fifth active fractal hall, after Koch/Sierpinski and before Golden Spiral. Carry arrays, scaling, repeated removal, finite measurement and the difference between a drawing and collision.
+Technical angle: Twenty retained cells per 3×3×3 subdivision; 1/20/400 solids at 0/1/2 cuts, 729/540/400 m³ retained at fixed nine-metre outer size. Mark the complement without rebuilding solids.
+Critical angle: A procedure&#x27;s discarded volume can become a place for a body. Connected holes, usable openings and reachable routes are different. The desk refuses solid changes while visitors inhabit the last shape; view changes remain available.
+Primary: menger_sponge with the compact desk and existing flight enclosure; one continuous book passage.
+Retain: diffusion_limited_aggregation, catalyst_prompter_box, catalyst_vent, dark_sphere; current structure, basin and floor patches.
+Next: Fractal_GoldenSpiral, recurrence and the choices that map numerical relations into form.
+Pending: Human headset review, accessibility alternatives and Quest performance; the DLA comparison retains its original autonomous behavior and is not yet a second controlled encounter.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Fractal_MengerSponge/critical.md">Raw captured source</a></p><pre># Which openings can be inhabited?
+
+The sponge offers a concrete distinction between topology, geometry and a body&#x27;s capabilities. Repeated removal creates connections. The dimensions of a particular opening decide whether a particular capsule can enter it. Flight brings a passage within reach without shrinking the visitor or disabling the walls. These are separate operations with different consequences.
+
+The object can have more connected holes while offering few additional routes to this body. The second cut makes one-metre openings. A ray crosses them; the tested standing capsule cannot. More detail has not automatically made the room more inhabitable. Nor would a smaller body necessarily encounter the same refuge or exposure as the current one. That comparison remains open.
+
+GHOST lets the space borrowed by the body appear as the procedure&#x27;s discarded volume. The deleted cells acquire another use. This is a precise place to explore queer misuse: the algorithm&#x27;s remainder becomes a visitor&#x27;s passage. It need not make every deletion liberating. In this construction we retain enough information to redraw the complement, and the map provides a separate supporting floor. Those conditions matter to what the removal can afford.
+
+The connection to [Entropic morality](../../../doc/research/qfep/entropic-morality.md) concerns who carries the consequences of a revision. A maker at the desk can request a new shape. A visitor inside depends on the previous one. The desk therefore refuses solid rebuilds until the enclosure is empty, while allowing non-solid view changes. This limited interlock does not establish a general politics of consent; it makes one dependency explicit and preserves the occupant&#x27;s current route out.
+
+The protective boundary has another role. The glass makes the domain of borrowed flight legible. Leaving its ground doorway returns the body to ordinary locomotion. A boundary can sustain a usable capability as well as constrain it. We should test whose movements this arrangement supports and whose it excludes, including those who would prefer to remain on the floor.
+
+The desire for another opening remains productive. It asks which variable needs revision: connection, aperture, movement, body size, or collision. It also meets finite costs. The third cut would contain 8,000 retained cubes and smaller passages again. Its object count is a resource question, not an entropy score or proof of greater freedom. The value of the next detail must be encountered in relation to the bodies and uses it could make possible.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Fractal_MengerSponge/artifacts.md">Raw captured source</a></p><pre># Fractal MengerSponge — Artifacts
+*Fractals: Infinite Within Finite · lambda_edge · 3 artifacts*
+
+&gt; Divide the cube, remove the center. The Cantor principle extends into three dimensions—each face loses its middle, each edge its center. What remains is neither solid nor hollow: infinite surface, zero volume, walkable absence. Dimension 2.727: between plane and solid.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## diffusion_limited_aggregation
+![diffusion_limited_aggregation](/scene-catalog/diffusion_limited_aggregation.png)
+
+diffusion_limited_aggregation
+
+`diffusion_limited_aggregation`
+
+## menger_sponge
+![menger_sponge](/scene-catalog/menger_sponge.png)
+
+menger(cube) = 20 * menger(sub-cubes at kept positions), remove 7 cross-cubes per iteration. D = log(20)/log(3) ~ 2.727.
+
+`menger_sponge`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Fractal_MengerSponge/summary.md">Raw captured source</a></p><pre># A hole becomes a place
+
+One primary sponge connects finite removal, positive retained volume and bodily access. A compact desk compares zero, one and two cuts, then marks removed cells and the unchanged outer size. The existing glass enclosure lends flight while retaining collisions. The large passage admits the museum capsule; a one-metre tunnel carries a ray but refuses that standing body. Shape changes wait for an empty enclosure. All five authored placements and the map structure remain.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Fractal_MengerSponge/blurb.md">Raw captured source</a></p><pre># A hole becomes a place
+
+The first cut makes a crossing inside a cube. The next makes smaller crossings. Borrow flight, follow one through, then find an opening the eye can enter before the body can.
+</pre></section></body></html>

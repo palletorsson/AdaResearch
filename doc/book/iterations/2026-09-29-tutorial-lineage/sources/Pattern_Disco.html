@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pattern_Disco · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Pattern_Disco">← Tutorial lineage</a></p><h1>Pattern Disco</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Pattern_Disco/final.md">Raw captured source</a></p><pre># The same floor, another palette
+
+Do you recognise the floor in its new colours?
+
+The checker is navy and pink now. Its twelve-by-twelve squares return in the same arrangement. Step onto one and wait for its colour to change. It keeps supporting you. After the coloured rooms, this familiar floor gives us somewhere to try what we have learned.
+
+&lt;!-- @disco_controls --&gt;
+
+Hold the floor and stop the sequencer. Choose CHECKER, then press COLOUR. Keep your eye on one square as the palette changes. Its neighbours change with it. Which colour seems to come forward? Does your chosen square still seem to belong to the same figure?
+
+Nothing has moved, and the square&#x27;s calculated value is still the same zero or one. Press ONE STEP. Now those values exchange places across the checker, while the palette stays fixed. Return to the previous arrangement with another step, then change COLOUR again. You have two ways to change what you see.
+
+The separation is small enough to find in the code:
+
+```gdscript
+PALETTES[palette][value_at(x,z,floor_node.grid_width,floor_node.grid_depth)]
+```
+
+For the square-cell patterns, `value_at` returns zero or one for the address `x,z`. The first pair of brackets selects a palette; the second selects one of its two colours. A square can keep its value and receive another colour because we have changed the pair it draws from.
+
+![Two palettes on the same held checker, seen from the same place on the museum floor.](/book-review/doc/book/iterations/2026-09-28-disco-colour-in-step/checker-pair.png)
+
+In the earlier palette grid, you could leave one square changed. Here one choice reaches every square carrying the same value. The four pairs are prepared for us, including black and white. We can choose among them, but this console does not let us give a single square a colour of its own. The reach of a choice belongs to the way the tool has been made.
+
+Leave the palette alone and change PATTERN. ROWS, DIAGONALS and SNAKE return from the earlier floor. A new pattern begins at step zero. COLOUR keeps the current step; SPEED changes how long a step takes. Try following one band through a slower and a faster passage.
+
+After SNAKE comes SUPER TRIANGLE. The two colours can now meet inside a square. Hold it during a turn, when the diagonals have not yet settled into chevrons or diamonds. Change COLOUR there. The unfinished turn stays unfinished. Does the same edge still draw your attention?
+
+A shader draws these divisions across the existing floor. Its palette supplies the two colours, while its movement changes how they meet. The square joints remain beneath the larger figures your eye can follow.
+
+&lt;!-- @standalone_disco --&gt;
+
+Start the floor and walk towards an approaching band. Let it pass underneath you. Its passage does not push your body. Walk with it for a moment, then across it. Can an invitation to move be felt without a force being applied?
+
+Return to black and white while it runs. The paired values are familiar again. Notice whether you follow the same parts of the pattern. Changing back cannot undo the coloured versions you have just seen beside it.
+
+&lt;!-- @step_sequencer --&gt;
+
+Bring in one repeating note, then another. Watch a chosen column brighten briefly when a sounding step reaches it. Hold the floor&#x27;s pattern and listen: the notes continue, and their flashes can still appear. Stop the sequencer too when you want both instruments to settle.
+
+The score has its own clock; the moving pattern has another. Matching their tempos does not guarantee that they reach their beginnings together. Let them run for a while. Look away from the floor and keep moving. When you look back, where do you find the beat?
+
+Your footsteps are not written into the score. You can move with a pulse, miss it, or keep another rhythm across it. The room can repeat its invitation without knowing what you make of it.
+
+&lt;!-- @ --&gt;
+
+We have been choosing among patterns and palettes already offered. In the Foundry ahead, we can change the source that the copies draw from. What would you put there for the room to repeat?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Pattern_Disco/tutorial.md">Raw captured source</a></p><pre># The same value, another colour
+
+The coloured return follows the eight Colour halls and opens the tiling sequence. Read final.md for the book encounter.
+
+1. Step onto the familiar checker before returning to its console.
+2. Hold the floor and stop the sequencer. Follow one square through the four COLOUR choices. The palette changes while the calculated zero/one values and current phase remain fixed.
+3. ONE STEP exchanges the checker values; a second step restores them. Compare a changed input to the rule with a changed pair of colours used to display its output.
+4. Trace the nested palette lookup. Compare this shared assignment with the earlier palette grid&#x27;s single-square edit.
+5. Leave the palette fixed and compare PATTERN and SPEED. Pattern restarts at phase zero; palette preserves phase. Five modes are available, including SUPER TRIANGLE.
+6. Hold a triangle turn between its integer poses and change COLOUR. Follow the same edge through both pairs.
+7. Walk with and across a moving band. The supporting floor is unchanged and does not drive the visitor&#x27;s body.
+8. Add notes to the sequencer. Hold the visual clock while musical events continue, then stop the sequencer too for a still comparison. Listen freely; phase agreement is not the task&#x27;s success condition.
+
+Foundry follows with editable source patterns and architectural receivers. This return does not need another interface: choosing the pair for every matching address is its concrete power and limit.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Pattern_Disco/technical.md">Raw captured source</a></p><pre># Pattern_Disco — shared values, separate clocks
+
+The placement reuses Tutorial_Disco&#x27;s twelve-by-twelve floor with 0.8 m tiles. `disco_controls#mode:colour` enables a fifth physical button, COLOUR, and begins with palette 1: navy/pink. Four pairs are available: black/white, navy/pink, teal/yellow and violet/mint.
+
+`commons/artifacts/regularity/disco_controls.gd` computes square-cell values through `value_at(x,z,width,depth)` and uses `PALETTES[palette][value]` to colour each fixed instance. `cycle_palette()` advances the palette and calls `paint()` without changing phase, elapsed time or triangle motion. `cycle_pattern()` resets phase, elapsed time and triangle motion to zero. `cycle_speed()` retains the fractional progress through the current interval.
+
+Five modes: CHECKER, ROWS, DIAGONALS, SNAKE and SUPER TRIANGLE. The first four colour whole tiles. SUPER TRIANGLE draws a continuous two-colour image through `super_triangle_surface.gd` and `super_triangle.gdshader`, without new collision. Holding preserves its current intermediate pose; palette changes reach the shader&#x27;s ink and paper uniforms.
+
+The step sequencer has an independent clock. Its `step_triggered` events address columns through the existing bridge. The console tracks short pulse lifetimes and restores the current pattern colour after expiry, including while the visual clock holds. Footsteps are not inputs to the score.
+
+Native review evidence: `doc/book/iterations/2026-09-28-disco-colour-in-step/`. Controls receive actual pointer callbacks; selected walks use the ordinary museum controller. Musical event checks run with the audio bus muted, so listening quality and headset acceptance remain untested. This pass changes the writing, not the production artifacts or placement.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Pattern_Disco/intent.md">Raw captured source</a></p><pre># Pattern_Disco — a familiar floor, another choice
+
+The first hall of tiling returns to the monochrome disco after Colour. Preserve the familiar arrangement so the new palette can be experienced as a changed relation. Let a chosen tile lead into the nested palette lookup, then let the visitor leave the console and walk.
+
+The shared palette is a specific limit: one choice reaches every address carrying the same value, unlike the earlier grid&#x27;s local colour edit. Five modes and four prepared pairs are enough for the comparison. SUPER TRIANGLE applies that pair inside the square and can retain an unfinished turn while the palette changes.
+
+The body can follow, cross or miss a rhythm without having its footsteps entered into the score. Musical and visual clocks remain distinct; generated musical events can still brighten floor columns. Do not treat synchronisation as the required outcome.
+
+Foundry should follow as an appetite for making a source rather than a summary of all controls. Native desktop checks verify palette/phase, actual geometry and selected walks; they do not establish listening quality, headset comfort or learner response.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Pattern_Disco/critical.md">Raw captured source</a></p><pre># The reach of a choice
+
+The palette button makes a shared decision. Every square carrying the same calculated value receives the same new colour. The visitor has a choice, but its reach is already arranged: this console cannot recolour one square independently. The earlier palette grid offered that local exception; the returning floor makes the contrast available to see.
+
+The moving pattern and musical score have separate clocks. Neither requires the body to reproduce it. A visitor can cross a band, miss a pulse or keep another rhythm. The floor&#x27;s regularity can support a movement that departs from it. This gives the hall&#x27;s queer opening a concrete place: in the possible relation between an offered order and the body answering it, without declaring a particular colour or shape inherently queer.
+
+Keep this permission distinct from a claim that the visitor is outside the program. The choices, collisions and clocks remain authored. Pattern_Foundry follows by letting the visitor change the source that many copies read. The inquiry moves from selecting among offered arrangements towards making a decision that others will repeat.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Pattern_Disco/summary.md">Raw captured source</a></p><pre>The familiar disco returns after Color. Change the palette without changing the pattern or its current phase.
+
+The same monochrome-hall geometry and four visual rules return with four selectable two-colour palettes. Pattern, palette and visual tempo are separate controls. Musical tempo is independent. Pattern_Foundry follows, extending source decisions to architecture.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Pattern_Disco/blurb.md">Raw captured source</a></p><pre>The familiar disco returns after Color. Change the palette without changing the pattern or its current phase.
+</pre></section></body></html>

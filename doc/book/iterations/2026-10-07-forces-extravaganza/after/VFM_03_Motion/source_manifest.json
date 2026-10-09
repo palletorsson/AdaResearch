@@ -1,0 +1,31 @@
+{
+  "room": "VFM_03_Motion",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/VFM_03_Motion/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/VFM_03_Motion/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/maps/VFM_03_Motion/map_data.json": "d0a7e03ade8a350b2e4c766a5b09d7f6367d19a57298827d7f5f8cdb0d868d7e",
+    "tools/probes/force_play_museum.gd": "b042c0e76eee659ec5faeac52990a7d7ad23d2a51d37cb82a8ab73abdb80da63",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "ada_run/em_plan.json": "c4ea5e1b0a3ae25e1e1a5d37edfda4b96af9e760f6ef77cf2269cba0fda63280",
+    "ada_run/encounter_pilot/VFM_03_Motion/control.json": "67c0231201ee3911d14da9c3ce4cc6c9128422ccfd46f19b20a7ea2eba31f397",
+    "ada_run/encounter_pilot/VFM_03_Motion/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/VFM_03_Motion/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/VFM_03_Motion/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0",
+    "commons/artifacts/registry/physics_simulation.json": "370f3d930dc238e27ea67b044818962fdcea13072513ca6c7df446c043cbd0e9",
+    "commons/artifacts/friction_ramp/friction_ramp.tscn": "8dec88e3a8dafe7731eda246463aaf5e0349431e6b9fa93cbe3380be6e13dfdf",
+    "commons/artifacts/friction_ramp/friction_ramp.gd": "f145f48251bbacaf8d2c8971ed350387ea0f43e6f6d4defe8e53d40dbb8b2684"
+  }
+}

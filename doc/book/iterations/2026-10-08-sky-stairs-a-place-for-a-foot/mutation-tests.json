@@ -1,0 +1,28 @@
+[
+  {
+    "fault": "missing-collision",
+    "rejected": true,
+    "failures": [
+      "native ray hits every named top in translated rotated host",
+      "released sphere rests on real tread collision"
+    ]
+  },
+  {
+    "fault": "wrong-turn",
+    "rejected": true,
+    "failures": [
+      "all treads face radially with level tops",
+      "outside midpoint distance exceeds inside",
+      "variation keeps count, rise and orientations"
+    ]
+  },
+  {
+    "fault": "wrong-height",
+    "rejected": true,
+    "failures": [
+      "sampled positions name top surfaces rather than centres",
+      "native ray hits every named top in translated rotated host",
+      "released sphere rests on real tread collision"
+    ]
+  }
+]

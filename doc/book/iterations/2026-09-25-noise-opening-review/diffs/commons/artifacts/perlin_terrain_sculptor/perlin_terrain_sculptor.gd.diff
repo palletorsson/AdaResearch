@@ -1,0 +1,30 @@
+--- before/commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd
++++ commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd
+@@ -52,6 +52,9 @@
+ ## Colors
+ @export var voxel_color: Color = Color(0.3, 0.7, 0.4)
+ @export var height_gradient: bool = true
++
++## Standalone shortcuts remain available; museum placements can reserve keys for movement.
++@export var keyboard_shortcuts: bool = true
+ 
+ # ── THE CONTRACT (stand:lattice) — N4, 12 September 2026 ────────────────────
+ #
+@@ -404,6 +407,8 @@
+ 	_update_info()
+ 
+ func _input(event):
++	if not keyboard_shortcuts:
++		return
+ 	if event is InputEventKey and event.pressed:
+ 		match event.keycode:
+ 			KEY_UP:
+@@ -488,6 +493,8 @@
+ 
+ func apply_grid_config(config_data: Dictionary):
+ 	_grid_config = config_data
++	if config_data.has("keyboard"):
++		keyboard_shortcuts = str(config_data["keyboard"]).to_lower() != "off"
+ 	for key in config_data:
+ 		if key in self:
+ 			set(key, config_data[key])

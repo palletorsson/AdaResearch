@@ -1,0 +1,559 @@
+{
+  "reader": "book_read_opening",
+  "completed_utc": "2026-09-20T21:21:53.224967+00:00",
+  "root": "C:/Users/palle/Documents/GitHub/AdaResearch_46",
+  "scope": "Full close reading of every final.md in the eight assigned sequence JSON map orders; includes prose, code snippets, footnotes and HTML artifact anchors. Linked chapters and underlying implementation files not read as part of this assignment. No runtime/headset verification. Initial console truncations/encoding failures were repaired by complete rereads of affected halls.",
+  "sequence_order": [
+    "primitives",
+    "transformation",
+    "array_tutorial",
+    "color",
+    "tiling",
+    "change",
+    "forces",
+    "formfinding"
+  ],
+  "sequences": [
+    {
+      "sequence": "primitives",
+      "sequence_path": "commons/maps/sequences/primitives.json",
+      "sequence_sha256": "de06347369fe8b732b86df32c052d49e25f7aa107e8b70ab283995a7e0b5b9c6",
+      "maps": [
+        {
+          "map": "Point_One",
+          "path": "commons/maps/Point_One/final.md",
+          "sha256": "42f1e4b4a120c0609d778041761d6fcde8ac959e94a8548522a493e860cd17b5",
+          "words_whitespace": 2103,
+          "lines": 173,
+          "read_complete": true
+        },
+        {
+          "map": "Point_Lines",
+          "path": "commons/maps/Point_Lines/final.md",
+          "sha256": "eb2c11e847cb5267001023c721b7f5bc2f0c3184cc5c7c26391ff4804d15ef09",
+          "words_whitespace": 1082,
+          "lines": 88,
+          "read_complete": true
+        },
+        {
+          "map": "Point_Trace",
+          "path": "commons/maps/Point_Trace/final.md",
+          "sha256": "e8e49ba56b57cc1fd1cf6c965260ffa50e3efe72434ea95403f60b316b5f6354",
+          "words_whitespace": 1185,
+          "lines": 85,
+          "read_complete": true
+        },
+        {
+          "map": "Point_Line_Grid",
+          "path": "commons/maps/Point_Line_Grid/final.md",
+          "sha256": "5968397789b7d1363d513c427fb91a6aff73ce10e04c07cc5e63afedc46e852a",
+          "words_whitespace": 1092,
+          "lines": 80,
+          "read_complete": true
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "path": "commons/maps/Point_Triangle_Context/final.md",
+          "sha256": "923de5da5fbbee6f84962d9e68082b7ee1bfaa127c171d0b10a5b86911b66dca",
+          "words_whitespace": 1214,
+          "lines": 79,
+          "read_complete": true
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "path": "commons/maps/Primitives_Polythedra/final.md",
+          "sha256": "4b812ea9471caf4aec36e1edd2a8a3e2453a4943f6b2a2151f8a9b66857de86a",
+          "words_whitespace": 997,
+          "lines": 83,
+          "read_complete": true
+        },
+        {
+          "map": "Point_Animatedcube",
+          "path": "commons/maps/Point_Animatedcube/final.md",
+          "sha256": "8766f7315281827273337b3eba633e4ed6c3a5aca9528cf2184619f828dcc50c",
+          "words_whitespace": 1010,
+          "lines": 70,
+          "read_complete": true
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "path": "commons/maps/Primitives_Ignorance/final.md",
+          "sha256": "ea8323dc84accf77afe5a9f90731089016a8c95190fb271be5df7c6ec8c6cc9b",
+          "words_whitespace": 1184,
+          "lines": 80,
+          "read_complete": true
+        },
+        {
+          "map": "Primitives_Portals",
+          "path": "commons/maps/Primitives_Portals/final.md",
+          "sha256": "60febd9d3fccad0ebac7f78faff06616cae2ef769a3be3f882e174c0d0c592b1",
+          "words_whitespace": 1121,
+          "lines": 69,
+          "read_complete": true
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "path": "commons/maps/Primitives_Melencolia/final.md",
+          "sha256": "8be602c7212ff964fadc2bb0cf9d49f424f58a8d57fa146e97de0f8fdb188f66",
+          "words_whitespace": 1101,
+          "lines": 81,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "transformation",
+      "sequence_path": "commons/maps/sequences/transformation.json",
+      "sequence_sha256": "968edfa520a65b2bba487b06876b6a8b8c5ced64fcb6edb9017c6aa3b5c51040",
+      "maps": [
+        {
+          "map": "Trans_Pre",
+          "path": "commons/maps/Trans_Pre/final.md",
+          "sha256": "250748b3aa518b718da48b755f19c8811ce8f8a76bc6cbf757d7188e09582bab",
+          "words_whitespace": 499,
+          "lines": 46,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Introduction",
+          "path": "commons/maps/Trans_Introduction/final.md",
+          "sha256": "6f3cf31ef89108c88fcbf109366be262710968857c630da5c53c22e7799acc5e",
+          "words_whitespace": 997,
+          "lines": 99,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Translation",
+          "path": "commons/maps/Trans_Translation/final.md",
+          "sha256": "c775cec8b9d3e70b96f2d4eea07f611cd5d5c72256a2d4116a3a82a61b23e7b0",
+          "words_whitespace": 871,
+          "lines": 73,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Rotation",
+          "path": "commons/maps/Trans_Rotation/final.md",
+          "sha256": "adb08af6b015727346427ec482fd391b0901a5e11e8c68cdddaae42547c3727a",
+          "words_whitespace": 1265,
+          "lines": 113,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Scale",
+          "path": "commons/maps/Trans_Scale/final.md",
+          "sha256": "ee9cbc1847e08e342a55cb7f63d07623da6665af664f0666de6ed2fa578cd18f",
+          "words_whitespace": 653,
+          "lines": 45,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Body",
+          "path": "commons/maps/Trans_Body/final.md",
+          "sha256": "a61584f0b9ee47b1faec56c21ce4c7e53a84f08a51ffd5e5ed6c92be91f261da",
+          "words_whitespace": 972,
+          "lines": 71,
+          "read_complete": true
+        },
+        {
+          "map": "Trans_Pit",
+          "path": "commons/maps/Trans_Pit/final.md",
+          "sha256": "dc436620b38a7d1a621506e94791b3dfcfaebda3342575d9a2178fae326672fd",
+          "words_whitespace": 1285,
+          "lines": 107,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "array_tutorial",
+      "sequence_path": "commons/maps/sequences/array_tutorial.json",
+      "sequence_sha256": "536d696cc135b2850b7bc5cee1983aeb8d46a650f7050070c26648899a1aa366",
+      "maps": [
+        {
+          "map": "Array",
+          "path": "commons/maps/Array/final.md",
+          "sha256": "284c994eb651878a5566e2b118143ea6b835c641e63ea09e5ead46674601bada",
+          "words_whitespace": 620,
+          "lines": 33,
+          "read_complete": true
+        },
+        {
+          "map": "Tutorial_3D",
+          "path": "commons/maps/Tutorial_3D/final.md",
+          "sha256": "631a0b9e559b4b203c42862654f3a8c34f8de7725097caa4eb5f71889e57af8d",
+          "words_whitespace": 438,
+          "lines": 33,
+          "read_complete": true
+        },
+        {
+          "map": "Tutorial_Tiling_Floor",
+          "path": "commons/maps/Tutorial_Tiling_Floor/final.md",
+          "sha256": "ed5b723510dc25c3146752eed153663501d670e0a969a5a4bfe5375b05f3a113",
+          "words_whitespace": 423,
+          "lines": 29,
+          "read_complete": true
+        },
+        {
+          "map": "Tutorial_Tiling_Walls",
+          "path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+          "sha256": "16ccf4aac408901c4dfd31fca804eb77549ac91f8dff719b88f0f2dbc5c217f7",
+          "words_whitespace": 621,
+          "lines": 41,
+          "read_complete": true
+        },
+        {
+          "map": "Tutorial_Disco",
+          "path": "commons/maps/Tutorial_Disco/final.md",
+          "sha256": "c4ee9f710640b8543cff6a0370def14ba21b85200b84b256a1d27e0803f14729",
+          "words_whitespace": 813,
+          "lines": 47,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "color",
+      "sequence_path": "commons/maps/sequences/color.json",
+      "sequence_sha256": "2482d9837d6e6d7a145fd8dd8e0c2359dc46e50e29fa3f5bef1af53e38273a66",
+      "maps": [
+        {
+          "map": "Color_Context_Placed",
+          "path": "commons/maps/Color_Context_Placed/final.md",
+          "sha256": "a9a7843f170cc575b9b0957f803d2a8cbd0ee97e8e9384384864564542ac762f",
+          "words_whitespace": 1190,
+          "lines": 71,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Flashlight",
+          "path": "commons/maps/Color_Flashlight/final.md",
+          "sha256": "4f848a7a7d892bb9616d310b114570014e6832b1b2fba51ddb3bac83b1f53673",
+          "words_whitespace": 584,
+          "lines": 33,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Nails",
+          "path": "commons/maps/Color_Nails/final.md",
+          "sha256": "214546e32247a68a09e1c3530e493e7fe9d1513ff163ca5a9899b225f4b36f64",
+          "words_whitespace": 593,
+          "lines": 37,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Rainbow",
+          "path": "commons/maps/Color_Rainbow/final.md",
+          "sha256": "89624ea7e30ebd62d994ffe573fc1440a1bf7110b75449a5c0e6069facbe1646",
+          "words_whitespace": 606,
+          "lines": 40,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Pillar",
+          "path": "commons/maps/Color_Pillar/final.md",
+          "sha256": "51cf3d6bea1a33c12f3b7c156a928db69606dd8ff39e8b674263b41e2cc06180",
+          "words_whitespace": 326,
+          "lines": 29,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Grid_Pallet",
+          "path": "commons/maps/Color_Grid_Pallet/final.md",
+          "sha256": "8ba544dda4c4625245ad7661d98f5ee83a31885e54b750984138b6e0e1c3070d",
+          "words_whitespace": 559,
+          "lines": 42,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Paint",
+          "path": "commons/maps/Color_Paint/final.md",
+          "sha256": "a941b43cad8ee1ef202142d4e4c9ab79104e5883dcd1013b4f10e0f77241cf3e",
+          "words_whitespace": 589,
+          "lines": 47,
+          "read_complete": true
+        },
+        {
+          "map": "Color_Walls",
+          "path": "commons/maps/Color_Walls/final.md",
+          "sha256": "148ef449203e399e03dd705ebd67082c862b5d3ad6178d3383716a2e049d54c2",
+          "words_whitespace": 715,
+          "lines": 61,
+          "read_complete": true
+        },
+        {
+          "map": "Chamber_Color",
+          "path": "commons/maps/Chamber_Color/final.md",
+          "sha256": "dc574466fbd2f09d8a192e3f0260c6571a63b84926a256675dbc306f5f2c8948",
+          "words_whitespace": 622,
+          "lines": 46,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "tiling",
+      "sequence_path": "commons/maps/sequences/tiling.json",
+      "sequence_sha256": "074b210d5c61c8e57396929e44779903e0a1d6284bf0c0c43fda6b8753107a24",
+      "maps": [
+        {
+          "map": "Pattern_Disco",
+          "path": "commons/maps/Pattern_Disco/final.md",
+          "sha256": "508d7cbc06927da571a4e6a679baf03726f5c347df4955b351397b011bf14b83",
+          "words_whitespace": 460,
+          "lines": 33,
+          "read_complete": true
+        },
+        {
+          "map": "Pattern_Foundry",
+          "path": "commons/maps/Pattern_Foundry/final.md",
+          "sha256": "0d4cbe0f81432fb69694d9978c638e98167f549fb37144bab43a4158475eab86",
+          "words_whitespace": 2067,
+          "lines": 98,
+          "read_complete": true
+        },
+        {
+          "map": "Tutorial_Pattern",
+          "path": "commons/maps/Tutorial_Pattern/final.md",
+          "sha256": "897d88c50dff322e9a9d6dedf0a88e65985c8bfef7b196119a42917cbc5a2373",
+          "words_whitespace": 706,
+          "lines": 51,
+          "read_complete": true
+        },
+        {
+          "map": "Array_Patterns",
+          "path": "commons/maps/Array_Patterns/final.md",
+          "sha256": "67cfa28ed8b81221a14c2ce061ace7930b806d57eef920a076f70e818ec2f032",
+          "words_whitespace": 739,
+          "lines": 40,
+          "read_complete": true
+        },
+        {
+          "map": "Symmetry_Seventeen",
+          "path": "commons/maps/Symmetry_Seventeen/final.md",
+          "sha256": "ed35f6d3e880e8a5e6af2353cf71860e49e66a7c0a396574800ad25e52d1c798",
+          "words_whitespace": 689,
+          "lines": 44,
+          "read_complete": true
+        },
+        {
+          "map": "Ribbon_Patterns_01",
+          "path": "commons/maps/Ribbon_Patterns_01/final.md",
+          "sha256": "494882d0579203c1678cbfea061bd57a40cb4b90430061c1cf92dd64640e1cc2",
+          "words_whitespace": 702,
+          "lines": 41,
+          "read_complete": true
+        },
+        {
+          "map": "Ribbon_Patterns_02",
+          "path": "commons/maps/Ribbon_Patterns_02/final.md",
+          "sha256": "738c850adf0b894d24386b5030ebde05df99e79b8d64f51d875042c115cb5040",
+          "words_whitespace": 720,
+          "lines": 45,
+          "read_complete": true
+        },
+        {
+          "map": "Ribbon_Patterns_03",
+          "path": "commons/maps/Ribbon_Patterns_03/final.md",
+          "sha256": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8",
+          "words_whitespace": 971,
+          "lines": 57,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "change",
+      "sequence_path": "commons/maps/sequences/change.json",
+      "sequence_sha256": "f9c2d45dd638f3ab5c85e46ed56033b892255275303e78062bc3aa4daee16bf7",
+      "maps": [
+        {
+          "map": "Change_Intro",
+          "path": "commons/maps/Change_Intro/final.md",
+          "sha256": "638b1efbc21d9aa13e04fa63b36265d02731cf68a8ec6bf0b8b095b41028b808",
+          "words_whitespace": 2052,
+          "lines": 128,
+          "read_complete": true
+        },
+        {
+          "map": "Flow_Field",
+          "path": "commons/maps/Flow_Field/final.md",
+          "sha256": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+          "words_whitespace": 714,
+          "lines": 47,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "forces",
+      "sequence_path": "commons/maps/sequences/forces.json",
+      "sequence_sha256": "19f76fae4809e3d8530d029e636fcb93ec7e89b0538de91616a1e1404bf37d08",
+      "maps": [
+        {
+          "map": "Vectors_Act1_WhatAVectorIs",
+          "path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+          "sha256": "e270dec4f34a0a1894a148093a442442e33c12b2fbaa47b5b13392c3261c6606",
+          "words_whitespace": 705,
+          "lines": 52,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_02_Operations",
+          "path": "commons/maps/VFM_02_Operations/final.md",
+          "sha256": "51edcafb21e713d250e36300b70e28d0f5ba8ee832c7804c723a6d4d7016cd9f",
+          "words_whitespace": 751,
+          "lines": 53,
+          "read_complete": true
+        },
+        {
+          "map": "Vectors_Act2_VectorArithmetic",
+          "path": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+          "sha256": "94331c97d9e05376cc8477d9236d411238f1840a2f6b8521fe0a32b7225b7492",
+          "words_whitespace": 1205,
+          "lines": 94,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_05_Launch",
+          "path": "commons/maps/VFM_05_Launch/final.md",
+          "sha256": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458",
+          "words_whitespace": 919,
+          "lines": 57,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_03_Motion",
+          "path": "commons/maps/VFM_03_Motion/final.md",
+          "sha256": "4674c8b37c0f9b89097f43fea600ca1ae44adda04311fbcf8cd07bb584b01278",
+          "words_whitespace": 1087,
+          "lines": 71,
+          "read_complete": true
+        },
+        {
+          "map": "Vectors_Act3_FieldsAndMotion",
+          "path": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+          "sha256": "3050d9438bf37064deb243305c9823223f87428dd6e2c73c2aab650efce8cea3",
+          "words_whitespace": 935,
+          "lines": 61,
+          "read_complete": true
+        },
+        {
+          "map": "Vectors_Act4a_KineticForces",
+          "path": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+          "sha256": "1f75c3d61f6b2dcc31fafd50e30f7bc88d080b25fc6b2da93c52afba70f0fc76",
+          "words_whitespace": 1166,
+          "lines": 81,
+          "read_complete": true
+        },
+        {
+          "map": "Vectors_Act4b_Oscillation",
+          "path": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+          "sha256": "dcb13eabab91ba35a0de3d52cd293dd61d276ac6070130d77da7cf7a0bb93cd0",
+          "words_whitespace": 1028,
+          "lines": 59,
+          "read_complete": true
+        },
+        {
+          "map": "Change_Choreography",
+          "path": "commons/maps/Change_Choreography/final.md",
+          "sha256": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6",
+          "words_whitespace": 907,
+          "lines": 63,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_07_Gravity",
+          "path": "commons/maps/VFM_07_Gravity/final.md",
+          "sha256": "ca438196f724c79371a732bcd85c8ad66ec7585da4cf1ccfec580c6efb7b9950",
+          "words_whitespace": 989,
+          "lines": 60,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_09_Legs",
+          "path": "commons/maps/VFM_09_Legs/final.md",
+          "sha256": "cf1c2f5112ca51a2d82126f5e83c24c508a39e760ce0db60bbd0dcdc02674018",
+          "words_whitespace": 1004,
+          "lines": 59,
+          "read_complete": true
+        },
+        {
+          "map": "VFM_08_Arena",
+          "path": "commons/maps/VFM_08_Arena/final.md",
+          "sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+          "words_whitespace": 1162,
+          "lines": 69,
+          "read_complete": true
+        },
+        {
+          "map": "Vectors_Act5_ForceAsPlace",
+          "path": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+          "sha256": "d4d38c2de47d9746e1250923c552b654d10b33d7b10f10cafe34c88fce6546e8",
+          "words_whitespace": 1278,
+          "lines": 93,
+          "read_complete": true
+        }
+      ]
+    },
+    {
+      "sequence": "formfinding",
+      "sequence_path": "commons/maps/sequences/formfinding.json",
+      "sequence_sha256": "817e9cd013defeed8ceabc924d29e87b9e0c7b73d882a460d61ab7a287986f86",
+      "maps": [
+        {
+          "map": "FormFinding_Descent",
+          "path": "commons/maps/FormFinding_Descent/final.md",
+          "sha256": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b",
+          "words_whitespace": 1039,
+          "lines": 71,
+          "read_complete": true
+        },
+        {
+          "map": "FormFinding_Catenary",
+          "path": "commons/maps/FormFinding_Catenary/final.md",
+          "sha256": "10a77ddaedbf1044fd4d7a6c56d10d14ae0eed55c73d589e622a26fa13b3daab",
+          "words_whitespace": 1036,
+          "lines": 64,
+          "read_complete": true
+        },
+        {
+          "map": "FormFinding_Relaxation",
+          "path": "commons/maps/FormFinding_Relaxation/final.md",
+          "sha256": "e6dc5f028daa2703a6ca03165f9496fe0a3705a0f58f077f29ef5675206f296f",
+          "words_whitespace": 966,
+          "lines": 56,
+          "read_complete": true
+        },
+        {
+          "map": "FormFinding_Equilibrium",
+          "path": "commons/maps/FormFinding_Equilibrium/final.md",
+          "sha256": "7a10f7826640b1ec4b3a21c0885142d56ece2c68760daf27335527aa50a7f480",
+          "words_whitespace": 1031,
+          "lines": 58,
+          "read_complete": true
+        },
+        {
+          "map": "FormFinding_Annealing",
+          "path": "commons/maps/FormFinding_Annealing/final.md",
+          "sha256": "47f2158ba9df6f9ac31ed1a86fa9265ff51f19d92b2fe3d2868ef286971b893f",
+          "words_whitespace": 1104,
+          "lines": 57,
+          "read_complete": true
+        },
+        {
+          "map": "FormFinding_Forge",
+          "path": "commons/maps/FormFinding_Forge/final.md",
+          "sha256": "3741c4e456fc72e8b2d12d6a44db040564bdfd55e3cf2e96dd2f13ea34386409",
+          "words_whitespace": 491,
+          "lines": 25,
+          "read_complete": true
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "sequences": 8,
+    "maps": 60,
+    "words_whitespace": 55953
+  }
+}

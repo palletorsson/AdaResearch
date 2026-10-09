@@ -1,0 +1,67 @@
+{
+  "edits": [
+    {
+      "title": "Carry the point into the request",
+      "incitement": "The first action should make clear that arrival is possible while the point remains in the hand. Leave the later paragraphs to develop repetition.",
+      "old": "The red arrow says “drag point here”. Carry the point towards it. Watch for the falling balls. Leave and return by another route.",
+      "new": "The red arrow says “drag point here”. Carry the point towards it without letting go. Watch for the falling balls.",
+      "purpose": "Invite an arrival while holding the point, before explaining what makes the target respond.",
+      "reader_move": "Carry the point towards the arrow and watch for the consequence.",
+      "why_here": "The point has been located and reported; it can now be brought into a request.",
+      "without": "The reader may assume that release or exact placement is required.",
+      "evidence": [
+        "arrival-size",
+        "arrival",
+        "arrival-test",
+        "arrival-repeat"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Give the comparison room",
+      "incitement": "Explain the two operations the reader needs to read the test, then return their numerical meaning to the hand.",
+      "old": "The comparison accepts a position within 0.45 metres of a centre 1.20 metres above the target's origin. A hand has room to arrive. The accepted position can be close enough without being identical to the centre.",
+      "new": "`distance_to()` measures the gap between the point and the target's centre. `<=` asks whether that distance is 0.45 metres or less. The centre sits 1.20 metres above the target's origin. A hand has room to arrive. “Here” has become a small region.",
+      "purpose": "Explain distance and the inclusive comparison while showing how a named location becomes a region that admits several positions.",
+      "reader_move": "Connect the two code operations to room for the carried point to arrive.",
+      "why_here": "The reader has just seen the reduced acceptance function and needs to understand what it admits.",
+      "without": "The numbers describe dimensions without fully opening the operation that uses them.",
+      "evidence": [
+        "arrival-size",
+        "arrival-test"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Describe the small memory through its consequence",
+      "incitement": "Group-registration and rearming terminology interrupts the scene. The visitor can investigate the same behavior by staying, leaving and returning.",
+      "old": "The target checks points registered in its coordinate-point group. It requires no release and rearms when the point leaves. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.",
+      "new": "The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.",
+      "purpose": "Make the entry memory understandable through repeated movement while keeping the distinction between proximity and intention.",
+      "reader_move": "Stay within the region, then leave and return.",
+      "why_here": "Distance explains acceptance; the small memory explains why a continuous stay is not a continuous shower.",
+      "without": "Repeated triggering remains a control term rather than a behavior the reader can understand.",
+      "evidence": [
+        "arrival-test",
+        "arrival-repeat",
+        "arrival-rearm-default"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Give the detour a rhythm",
+      "incitement": "The destination-as-instrument image already works. A direct return and a longer route give the reader a concrete way to play it.",
+      "old": "Return again, and a destination can become an instrument. The rhythm of your arrivals changes what the room's instruction is useful for. A detour may matter to that rhythm while remaining absent from the success test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.",
+      "new": "Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. A detour may matter to what you are making while remaining absent from the distance test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.",
+      "purpose": "Turn repeated arrival into a possible rhythmic practice and keep recording the journey as a further, consequential design choice.",
+      "reader_move": "Vary the route and the pause between returns.",
+      "why_here": "The rule is now understood well enough to be used for another purpose, preparing the question of a journey that the next halls develop.",
+      "without": "The image of an instrument has less bodily instruction to make it available.",
+      "evidence": [
+        "arrival-test",
+        "arrival-repeat"
+      ],
+      "assessment": "interpretive"
+    }
+  ]
+}

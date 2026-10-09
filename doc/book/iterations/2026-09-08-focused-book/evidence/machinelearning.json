@@ -1,0 +1,426 @@
+{
+  "sequence": "machinelearning",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "ML_Evolution",
+      "primary_tokens": [
+        "non_teleological_evolution"
+      ],
+      "question": "Can a population change without a single specimen being named the best?",
+      "ontology": "Variation and reproduction can change a population without an explicit ranked fitness score. Survival still depends on implemented resources and constraints.",
+      "action": "Follow a few different bodies in the small field, then compare the population, birth and death counts over time.",
+      "observable": "Bodies wander, expend energy, gain energy in previously unvisited cells, reproduce above an energy threshold, and die at zeroenergy.",
+      "mechanism": "The default drift model starts30creatures, tracks visits on20×20cells and mutates child size, speed and colour. Exploration yieldsenergy; reproduction splits it. Other selection configurations are static composed terminalstates.",
+      "limit": "No ranked objective does not mean no selection pressure. Energy for novelty, decay and populationcaps favour some behaviour over others.",
+      "variation": "Existing: watch persistence without choosing a champion. Proposed: expose the exploration reward and compare which bodies persist; curator uniform/culled modes are illustrations, not evolved results.",
+      "prior_bridge": "The previous ecosystem made its stabilizer visible; now inspect the conditions hidden in a claim of goal-free evolution.",
+      "next_bridge": "The next room makes an explicit numerical objective into a landscape.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd",
+          "line": 479,
+          "function_or_anchor": "func _process",
+          "fact": "Energy, visitedcells, reproduction and death."
+        },
+        {
+          "path": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd",
+          "line": 183,
+          "function_or_anchor": "set_process(selection",
+          "fact": "Only drift mode simulates; other modes hold composed states."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Evolution/map_data.json": "80cc03c973abdf48708648c391981cbcfb7016c696456211f5f28795f38ca4bc",
+        "commons/maps/ML_Evolution/intent.md": "a6a9ff3ed1c7d790f38a992429f7901c084e0189e3788a974b798997ca715b61",
+        "commons/maps/ML_Evolution/tutorial.md": "88c2462b9dfaf0e77cbec65b9671fd9c6d303a0555cf96044dcfee51f612900f",
+        "commons/maps/ML_Evolution/technical.md": "023d6fbee0acfe05b5fa54e173e841faf5f3c7c54fb9c09f98b6b7d044b7f5cb",
+        "commons/maps/ML_Evolution/critical.md": "1fe42e9ef1c9b61529e831fbb9e98bf07b68e5a401003d4041edfeeb1191bccc",
+        "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn": "7d588358ca15e484f82441b24e7d9776ff442fe6143f3ab371b33ab80a039037",
+        "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd": "988bcb80a40c5e0aaeded85be9fcb9cb6013b804bdbd4c1390d74bad88feda1c"
+      },
+      "placements": [
+        {
+          "x": 6,
+          "z": 3,
+          "raw": "non_teleological_evolution:0:2:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "ML_Gradient_Landscape",
+      "primary_tokens": [
+        "loss_function_comparator"
+      ],
+      "question": "Will the same observations lead to the same best fit when error is measured differently?",
+      "ontology": "A loss assigns a number to modelparameters. Here each terrain is a function of slope w and intercept b for the same small dataset.",
+      "action": "Watch the three balls descend their labelled terrains. Change Outliers, then watch where each path travels; use the reset button for another run.",
+      "observable": "MSE, Huber and the third oscillating loss produce different surfaces and paths. The Outliers knob regenerates the data and restarts balls at the same parameterpair.",
+      "mechanism": "MSE squares residuals; Huber is quadratic nearzero and linear beyond1; the third loss averages sin(3e)+.5e². Finitedifferences estimate the two gradients and a fixedlearningrate steps downhill inside[-2,2]².",
+      "limit": "A minimum is relative to the chosen penalty and model. The artifact label adversarial names a custom wavyloss, not GAN training or adversarial robustness.",
+      "variation": "Existing: add outliers and ask which deviations each loss discounts or magnifies. Proposed: mark whose observations become outliers instead of treating that designation as selfevident.",
+      "prior_bridge": "Evolution varied bodies without derivatives; this room varies parameters using local slope.",
+      "next_bridge": "Classification asks what forms of grouping and decision the objective produces.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+          "line": 326,
+          "function_or_anchor": "func _mse_loss",
+          "fact": "Three explicit residual penalties."
+        },
+        {
+          "path": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+          "line": 516,
+          "function_or_anchor": "func _gradient_step",
+          "fact": "Finite-difference descent in2parameter space."
+        },
+        {
+          "path": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+          "line": 615,
+          "function_or_anchor": "func _create_controls",
+          "fact": "Outliers slider and resetbutton connected."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Gradient_Landscape/map_data.json": "565bcdae76a35913fd72102788888c77d0e4455179b5e34974bd268c2fbe5a9b",
+        "commons/maps/ML_Gradient_Landscape/intent.md": "d0872f9a84899295d56c99433067d8a315deecd05f1402cadb14111b585b663c",
+        "commons/maps/ML_Gradient_Landscape/tutorial.md": "f2e5f8daacbfc17a4971f8cbf74a5e82ddae91d84459e4c2dec9774aa21a8c4d",
+        "commons/maps/ML_Gradient_Landscape/technical.md": "86226caee1a8965b0440e9ee93c2bb0eab089bf666d3d2944f97f0dbd3b16750",
+        "commons/maps/ML_Gradient_Landscape/critical.md": "0456861c9a0749b44803c7dd177e0dd3c8513dcb23ee0854a35ae37dc4bd5370",
+        "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn": "1381651f950d2c03252fd0bd8712cbaf63a3bf9285645847113f5498ec4462ab",
+        "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd": "ba94f197f337321231f6eb7664e384c0598b3584bb7a9b867504e72b83a0dce2"
+      },
+      "placements": [
+        {
+          "x": 6,
+          "z": 8,
+          "raw": "loss_function_comparator:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "ML_Classification",
+      "primary_tokens": [
+        "enhanced_kmeans"
+      ],
+      "question": "When points share a colour, has a group been discovered or assigned?",
+      "ontology": "K-means alternates nearest-centroid assignment with moving each centroid to its assigned points mean; k is chosen in advance.",
+      "action": "Choose one point near the boundary between colours. Watch its assignment and the neighbouring centroid move through automatic iterations.",
+      "observable": "Centroids move and point colours can change. Motion stops when totalcentroid movement falls below the threshold or50iterations are reached.",
+      "mechanism": "Default4centroids compete for100points from a generated dataset with3natural clusters plusnoise. Assignment uses Euclideandistance; update uses arithmeticmeans.",
+      "limit": "This is unsupervisedclustering, not supervisedclassification. Colours do not name natural or ethical categories. The displayed totaldistance sums ordinary distances although textbook k-means minimizes squared distances.",
+      "variation": "Existing: compare a peripheralpoint to a centralpoint. Proposed: expose k or curate ring/braid cohorts to ask whether the mean-and-distance rule preserves the grouping the visitor sees.",
+      "prior_bridge": "Loss shaped a numerical fit; now a repeated local rule assigns membership.",
+      "next_bridge": "A neuralnetwork distributes an adjustable computation across several layers.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd",
+          "line": 707,
+          "function_or_anchor": "func perform_clustering_step",
+          "fact": "Nearestassignment, arithmeticmean update and stopping rule."
+        },
+        {
+          "path": "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd",
+          "line": 267,
+          "function_or_anchor": "func _process",
+          "fact": "Automatic iteration default; keyboard/UI controls not VRcontrols."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Classification/map_data.json": "b9fe57ce05f08610b745b31f37aa7305ba1ff2af584d13ebc0ed66c752bb6db0",
+        "commons/maps/ML_Classification/intent.md": "8c6c927eff23f70770bd5bf93a2ac5a9534b632c5fd7589e3d9389705870caf3",
+        "commons/maps/ML_Classification/tutorial.md": "d500df467fcd4b28d8daa52d5cd3ee5311cd43a27200fb37462636f88def5338",
+        "commons/maps/ML_Classification/technical.md": "9241474bbdb4c4143867319398382c92a75f7a6a70c69e77e9fb55a445ad0abd",
+        "commons/maps/ML_Classification/critical.md": "b9e8d295b077af077589180dd265aeebbec6ff5ab2ba40060536ce426a8320d0",
+        "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn": "5a25263ff17962ed182a29df9ac6de921a8f99b39fb1424c7a25812a43433e36",
+        "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd": "519a7b3bd005998016633bea26584047bbf1a1c9f5c15f378f0a19847819e315"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 3,
+          "raw": "enhanced_kmeans:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Scene/map use0.6scale; no hand-driven pointedit or museum UI usability verified."
+      ]
+    },
+    {
+      "room_id": "ML_Neural_Networks",
+      "primary_tokens": [
+        "neural_network_visualization"
+      ],
+      "question": "What changes in a network when its answers become closer to the examples?",
+      "ontology": "A neuron computes an activation from weightedinputs plusbias. Backpropagation distributes outputerror into parameterupdates across layers.",
+      "action": "Follow one connection while watching the epoch/error display during automatic training. Compare its appearance early and later; also inspect the direction from inputs tooutputs.",
+      "observable": "Weighted links and activations change as actual batches update weights/biases; the error history records the batcherror, which need not decrease on every step.",
+      "mechanism": "The scene implements forward_pass, backward_pass and batchgradient accumulation on a four-example4input/2output XOR-like dataset. Positive/negative weights use differentcolours; default auto_train begins a timer.",
+      "limit": "Fitting four examples cannot establish generalintelligence or out-of-distribution reliability. A visible network diagram omits the choice of examples and targetlabels.",
+      "variation": "Existing: track a connection that changes sign or strength. Proposed: compare heldout inputs or a curator topology change while retaining the same examples.",
+      "prior_bridge": "Centroids concentrated a group into means; networks build a succession of learned transforms.",
+      "next_bridge": "Perception next asks which local features are extracted and which labels merely asserted.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+          "line": 626,
+          "function_or_anchor": "func _run_training_batch",
+          "fact": "Real forward/backward calculations update weights andbiases."
+        },
+        {
+          "path": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+          "line": 321,
+          "function_or_anchor": "func generate_training_data",
+          "fact": "Fixed4sample dataset."
+        },
+        {
+          "path": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+          "line": 793,
+          "function_or_anchor": "func update_visualization",
+          "fact": "Visual neuron/connection updates."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Neural_Networks/map_data.json": "a17e4d5fd22c56ad39c9e588ea89c3311683fc6c534967b060824df48ab9b15d",
+        "commons/maps/ML_Neural_Networks/intent.md": "e10c20492c510bf893b43fdf5406bf7c977fcd1ead9e7e015ff8b05044ee4fe9",
+        "commons/maps/ML_Neural_Networks/tutorial.md": "36fd74a87b739c0e14d8088555c348e8dbce4727c0a39667af60fa3735f0bb3f",
+        "commons/maps/ML_Neural_Networks/technical.md": "1c9a214d3edea3950e2c93ae7e0ca848ecc5e3bb13b866b86681e7841aad8a9a",
+        "commons/maps/ML_Neural_Networks/critical.md": "005f75be6e5acd15186118a07c4dc2f4e6f5d0fd31072b9b48bd895857dce025",
+        "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn": "a6f73f58b830ec011bbc7f310ea7a24c62ce22e6bac1cd1731b24b93c06eece1",
+        "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd": "1fa9b7158faebf7f91f1688ea7ba1efc713ea6ced99dbbeb6658f05d863ea201"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 3,
+          "raw": "neural_network_visualization:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not confuse with placed NeuralNetworks_VR whose loss is timed animation. Desktop R/T/space handled but not a verified sharedmuseum interaction."
+      ]
+    },
+    {
+      "room_id": "ML_Perception",
+      "primary_tokens": [
+        "computer_vision_vr"
+      ],
+      "question": "Which parts of this display were computed from pixels, and which were supplied as names?",
+      "ontology": "A local filter combines pixelvalues to produce a featuremap. Objectclassification is a separate inference from that numericaloperation.",
+      "action": "Compare the input cross/circle to its edgeimage. Follow the moving3×3window, then inspect the objectboxes and percentages.",
+      "observable": "Broad bright interiors give way to edge responses at changes. The window tours locations; the named detectionboxes are also visible, but their percentages are fixed labels.",
+      "mechanism": "Sobel x/y kernels compute gradientmagnitude, clamped0–1, on the16×16input; borderpixels becomezero. Circle92% and Cross85% are authored constants, not outputs of a fitteddetector.",
+      "limit": "A confidentcaption is not a measurement. A real localedge computation does not automatically justify the objectnames next toit.",
+      "variation": "Existing: point out an imagefeature that contributes to anedge yet has no namedbox. Proposed: visitor pixelpainting wired to the existing setter, or curator invented boxes on unchangeddata.",
+      "prior_bridge": "The previousroom actually fitted exampletargets; here separate numerical transformation from asserted recognition.",
+      "next_bridge": "Sequence models next represent relationships through time.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+          "line": 851,
+          "function_or_anchor": "func _apply_edge_detection",
+          "fact": "RealSobel filtering."
+        },
+        {
+          "path": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+          "line": 205,
+          "function_or_anchor": "func _initialize_image_data",
+          "fact": "Fixedcross anddisk pixels."
+        },
+        {
+          "path": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+          "line": 43,
+          "function_or_anchor": "detection —",
+          "fact": "Named/invented detections explicitlyhardcoded."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Perception/map_data.json": "66d00146dc352a3cb74fd00c373de6990e8c6fc2d926149339d468780b3a3e4c",
+        "commons/maps/ML_Perception/intent.md": "0aa77565f04150e4b3f78c8c8e0d9a8079d79bb127ef4231e2d443d5a30591c1",
+        "commons/maps/ML_Perception/tutorial.md": "33d519bee127f122db995b408b82216f734f9192fe535324a080cf7c92565a75",
+        "commons/maps/ML_Perception/technical.md": "999a97ab0eb5d4089604d11579645c95c7c7a73659ab71a980c0276e966ed85a",
+        "commons/maps/ML_Perception/critical.md": "69b8538c9c2b94eb34f85e0ac6c7b0da7bdb84f391f9dd3c5e516e9a27f9548b",
+        "algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn": "285a89e8a45daa1d47c533acd9e64734b0a1edbf7980e56d5954599832cd061f",
+        "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd": "32ecd698bb3c216f337562ef8e2fdd11dacc4c6849006ca52ff630d82c8b682c"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 3,
+          "raw": "computer_vision_vr:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Labels invite painting but handevents are not wired in inspectedscript. Filter API always appliesSobel; do not promise alternatefilters or classification accuracy."
+      ]
+    },
+    {
+      "room_id": "ML_Sequence_Memory",
+      "primary_tokens": [
+        "lstms_vr"
+      ],
+      "question": "What would a memory need to keep, admit and reveal separately?",
+      "ontology": "An LSTM distinguishes persistent cellstate, newinput and output; gates weight retention, writing and reading. This room provides a spatialdiagram of those roles.",
+      "action": "Locate FORGET, INPUT and OUTPUT spheres and follow the particlepath through thecell. Compare the roles before reading their names as a memoryalgorithm.",
+      "observable": "A stream crosses thecell and gateobjects change visualintensity with activation. The current stream continues independently of the gateactivations.",
+      "mechanism": "The script maps gate worldheight to0–1activation, but memoryparticles follow a timed sinusoidalpath; no recurrentstate computation or traininggradient is connected to thatpath.",
+      "limit": "A moving memorymetaphor does not demonstrate retaining a sequence. Gateobjects are RigidBody3D with collisionlayers; successful museum grabbing has not beenestablished.",
+      "variation": "Proposed nextbuild: expose a shorttoken sequence, a numericcellstate and gatecontrols that causally alter it; compare preserving an inconvenient input with forgetting it.",
+      "prior_bridge": "Perception extracted spatialfeatures; this diagram asks what a model must retain betweeninputs.",
+      "next_bridge": "Generation next turns from reporting a sequence to proposingnew samples.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+          "line": 415,
+          "function_or_anchor": "func _update_gate_activations",
+          "fact": "Height setsactivation."
+        },
+        {
+          "path": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+          "line": 450,
+          "function_or_anchor": "func _animate_memory_flow",
+          "fact": "Particlepath ignores gates."
+        },
+        {
+          "path": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+          "line": 166,
+          "function_or_anchor": "func _create_gate_sphere",
+          "fact": "Barephysicsbody; no XRpickup script bound."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Sequence_Memory/map_data.json": "a440e81cfcfd322ea101d64b151b57f1ce2fa900db8610519d8cd27cfd040be5",
+        "commons/maps/ML_Sequence_Memory/intent.md": "343a42d287657bf931e4216655d808ec20b8f51ef3d6e880100c6e10e677e11f",
+        "commons/maps/ML_Sequence_Memory/tutorial.md": "6b577ba77a20525c10967ff4431d2901dc0d03856e3895795b5dde565afd35b8",
+        "commons/maps/ML_Sequence_Memory/technical.md": "9d26d914e46d7ab721e0b2c7faecf582931a50d87433d3ef2721e1b56674ddab",
+        "commons/maps/ML_Sequence_Memory/critical.md": "a86feb01eb54b3d5e6b195e56dbaf0b7b1ae1ed86598a535e247415fa2a20576",
+        "algorithms/machinelearning/LSTMs/LSTMs_VR.tscn": "3c2ecaf40ecc09f6890b36cff9411a0c8e90133c02327abdb72695d2b7a47217",
+        "algorithms/machinelearning/LSTMs/LSTMs_VR.gd": "e2f0486aa2ea84008062aff36c51de20f011fc5d6f6fe0fb9639c614307de5c2"
+      },
+      "placements": [
+        {
+          "x": 0,
+          "z": 8,
+          "raw": "lstms_vr:0:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Only claim observationaldiagram. The promised retentionexperiment remains a buildgap; do not make grabbing prerequisite for reading."
+      ]
+    },
+    {
+      "room_id": "ML_Generative",
+      "primary_tokens": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "question": "Who judges a generated example, and how could that judgement change its maker?",
+      "ontology": "A generator proposes samples and a discriminator judges samples relative to trainingdata. Their coupled objectives make a feedbackloop; this artifact diagrams itsroles.",
+      "action": "Move your viewpoint between generator and discriminator, then trace the labelled feedbackroute and compare the two displayedlosses.",
+      "observable": "Separatezones, samplemarks, a feedbackloop and a competitionpillar animate. Generatorloss falls and discriminatorloss oscillates in thedisplay.",
+      "mechanism": "Both losses and quality are computed from elapsedtime/training_progress; feedbackparticles orbit rather than transmit calculatedgradients. No learnedgenerator/discriminator is implementedhere.",
+      "limit": "The diagram can locate the roles but cannot establish that samples improve, that judging works or that the system reached equilibrium. Similarappearance is not evidence of training.",
+      "variation": "Proposed: a small realdataset, generatedsample and discriminator score linked by anactual update; allow visitor disagreement with the selected examples ofrealness.",
+      "prior_bridge": "Memory asked what is retained; generation asks what can be proposed from what wasretained.",
+      "next_bridge": "The synthesis asks what an algorithm measures before giving authority to itsjudgement.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+          "line": 63,
+          "function_or_anchor": "func _process",
+          "fact": "Losses derive from time rather thanlearning."
+        },
+        {
+          "path": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+          "line": 536,
+          "function_or_anchor": "func _animate_feedback_loop",
+          "fact": "Circularfeedback animation."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Generative/map_data.json": "e3c4371fc4cc586c7c8af70a3cc3a0dcb6bf5d88a523e0d53e5c8ec843bdedc1",
+        "commons/maps/ML_Generative/intent.md": "7c68786bea3b126db8cbd552676f662327c0620742b49825360a185940e7ad33",
+        "commons/maps/ML_Generative/tutorial.md": "dda947611385f311e54aea4985c1632f45bfe5e4e725521acfe357a8299b906c",
+        "commons/maps/ML_Generative/technical.md": "cc8fb3d95d81076a2db8c4553dc496c62d975a7ed45c9014f709c1b82891598a",
+        "commons/maps/ML_Generative/critical.md": "b46ec136f64846f8249075dfc7197b72dd34ca9257011e36b6fe6ff081f7bce7",
+        "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn": "a0ea19b1423ee081289d7dadf03fae342f7e373cfae04b102e626fcedff1c8bd",
+        "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd": "147206593482773dfd8b37f3c44c7f4189bd2aace749eacfe0040ba62ef680d9"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "generative_adversarial_networks_gans_vr:90:0:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not claim visitor judging/noisethrowing trains aGAN. Thismap needs a causalexperiment beyond diagram coverage."
+      ]
+    },
+    {
+      "room_id": "ML_Synthesis",
+      "primary_tokens": [
+        "anomaly_detection"
+      ],
+      "question": "Is a point unusual by itself, or unusual under a particular measuringrule?",
+      "ontology": "An anomaly score measures departure from a reference; a threshold turns that score into a decision.",
+      "action": "Find one raised highlightedpoint and one unraisedpoint. Compare their positions to the maincloud and read the displayed mode/threshold.",
+      "observable": "Points meeting the active threshold rise.25units and scale1.35; the summary counts flaggedpoints. Default mode is Z-score and threshold2.4.",
+      "mechanism": "Z-score here is the sum of absolute standardizedx/y deviations. Samples include72Gaussianpoints and10deliberateouterpoints; mean andspread are computed over allsamples.",
+      "limit": "Flagging is a relation to thisdataset and chosenrule, not proof that an event or person iswrong. Other named modes are heuristics; autoencoder_error is a handwritten sinusoidalresidual, not a trainedautoencoder.",
+      "variation": "Proposed: wire existing mode/threshold APIs into visitorcontrols and retain the samepoint while its designation changes. Untilthen compare the visiblepoint positions in the defaultmode.",
+      "prior_bridge": "After a generatordiagram, demand a traceable link between displayedjudgement and implementedcalculation.",
+      "next_bridge": "Graph theory next makes relationships themselves the data.",
+      "sources": [
+        {
+          "path": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+          "line": 195,
+          "function_or_anchor": "func _score_sample",
+          "fact": "Explicitthree heuristics."
+        },
+        {
+          "path": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+          "line": 109,
+          "function_or_anchor": "func run_detection",
+          "fact": "Threshold decisions lift andscale flaggedpoints."
+        },
+        {
+          "path": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+          "line": 62,
+          "function_or_anchor": "func _generate_samples",
+          "fact": "SeededGaussian andouter samples."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/ML_Synthesis/map_data.json": "e4346e3782296b62ee4c7926e4c76cebe9531cb3ab98c768ae368546d7a77020",
+        "commons/maps/ML_Synthesis/intent.md": "9d65b73353f422a7fe05fbc2904902a1b2260bb551e775d9c20fdf78a1cb33c5",
+        "commons/maps/ML_Synthesis/tutorial.md": "dc268840941f3bcaca095b4fd543cade660970d36768e5eac33454d645c6e1c0",
+        "commons/maps/ML_Synthesis/technical.md": "f05aec50724735bf4349e02510415789b695e1f80802658dcfc783a0fb04242f",
+        "commons/maps/ML_Synthesis/critical.md": "b91ceac61e0ccb483c56510f81ae454bc0b1e719828f8b50ecc062be85932759",
+        "algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn": "b039fb5af128b8a933a1b394f99cd43bcd2cdeed326baee056b0b956d55d46f9",
+        "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd": "2cde3b4eda0e57077d69e06b5e8726aeff8bee3ffae657d00ecf39213c85ccd4"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "anomaly_detection:0:2:0.6"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "No VRcontrol is wired for mode/threshold; do not instruct knob use."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+--- before/commons/maps/Point_Trace/map_data.json
++++ commons/maps/Point_Trace/map_data.json
+@@ -8,7 +8,7 @@
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", "", "draw_dot:0:1#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:10#ink:ff0000#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:40#ink:00ff00#plinth:0.90#offset:0.00,0.25,0.00", "draw_dot:0:1#retention:trace#resolution:80#ink:0000ff#plinth:0.90#offset:0.00,0.25,0.00", "draw_stick:0:1#plinth:0.90#offset:0.00,0.25,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:3:0.5#offset:0.00,-2.95,0.00", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", "hand_telemetry_diptych:180:0#offset:0.00,1.45,0.38", " ", " ", " ", "science_screen:180:0:0.5#offset:0.50,1.45,0.47#support:pylon#screen_width:2.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+--- before/commons/maps/Point_Trace/technical.md
++++ commons/maps/Point_Trace/technical.md
+@@ -32,7 +32,7 @@
+ 
+ ## Room arrangement and tool return
+ 
+-The four drawing dots and the stick occupy five equally spaced plinths centred on the room at X = 4.5 m. Their recording configuration is unchanged. The whiteboard faces into the room from the east wall; its lower edge is 0.95 m above the floor, with a 0.925 m shelf. The hand-telemetry diptych sits 0.45 m higher than before, against the rear wall. The map excludes automatically placed benches because one blocked the drawing aisle.
++The four drawing dots and the stick occupy five equally spaced plinths centred on the room at X = 4.5 m. Their recording configuration is unchanged. The whiteboard faces into the room from the east wall; its lower edge is 0.95 m above the floor, with a 0.925 m shelf. The hand-telemetry diptych sits 0.45 m higher than before, against the rear wall. The science screen occupies the clear rear-wall panel across the doorway, using its recessed pylon housing. Its face is 1.3 by 1.1 m, centred about 2.03 m above the floor; the housing stays clear of the vertical wall trim. The map excludes automatically placed benches because one blocked the drawing aisle.
+ 
+ `#pen_shelf:1` enables the board's shelf and return behaviour in this map. Four grips distinguish the existing inks and resolutions: beads, a loop, fins and a stepped sleeve. Labels stay on the shelf. The eraser has its own place. Each tool remains the same rigid body throughout pickup, release and return.
+ 
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -52,7 +52,7 @@
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Trace/final.md",
+       "text_sha256": "8f28f93f44c50c80d4dd475a4755f5296655fc0979f871d36286b340de1dfaaa",
+-      "map_sha256": "6bed9d1effac961bd58f3b497b5c533f2e4ce09c4f76492e023718deb0644d4b",
++      "map_sha256": "cda711135f28ab3ff4deaef108a77f3f152c4860180b930c09ec294b9c648a15",
+       "learner_verified": false
+     },
+     "Point_Line_Grid": {

@@ -1,0 +1,17 @@
+--- before/commons/maps/VFM_03_Motion/map_data.json
++++ commons/maps/VFM_03_Motion/map_data.json
+@@ -15,10 +15,10 @@
+       "category": "vectors_forces_museum",
+       "estimated_time": "10-14 minutes",
+       "learning_objectives": [
+-        "Acceleration and deceleration",
+-        "Projectile trajectories",
+-        "Friction and fluid resistance",
+-        "Angular motion and flocking"
++        "Compare a finite push with coasting and braking",
++        "Observe how mass and damping change the response of a rigid body",
++        "Distinguish requested force from measured acceleration and contact response",
++        "Compare that dynamic body with the separate friction-ramp threshold model"
+       ],
+       "n_artifacts": 17
+     },

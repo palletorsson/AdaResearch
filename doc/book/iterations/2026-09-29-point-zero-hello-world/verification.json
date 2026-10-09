@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "main_manuscripts_museum_sources_and_point_one_code_unchanged": true,
+  "study_uses_unchanged_day_zero_base": true,
+  "actual_lesson_code_matches_complete_download": true,
+  "native_checks": 26,
+  "packages": {
+    "point-zero": {
+      "files": [
+        ".gitignore",
+        "base.tscn",
+        "hello_world.gd",
+        "hello_world.tscn",
+        "project.godot",
+        "README.md",
+        "TUTORIAL.md"
+      ],
+      "sha256": "dce4359f8d3f44d11beeba60db031e6a29d3788bb9115cd73c744004cdeb7675"
+    },
+    "point-one": {
+      "files": [
+        ".gitignore",
+        "base.tscn",
+        "CONSTRUCTION.md",
+        "coordinates.tscn",
+        "DAY_ZERO.md",
+        "POINT_ZERO.md",
+        "points.gd",
+        "position.gd",
+        "project.godot",
+        "README.md",
+        "solid.gd",
+        "study.tscn",
+        "TUTORIAL.md",
+        "visible.gd"
+      ],
+      "sha256": "2cc053c2ab5f2151cccdb8127863db79359e3489635e224a3271e68e79d25f52"
+    }
+  },
+  "html_anchors_and_local_links_valid": true,
+  "primitives_capture_remains_current": true,
+  "framing_toolbox_current": true,
+  "scope": "Native execution and source/publication checks; no learner or headset trial."
+}

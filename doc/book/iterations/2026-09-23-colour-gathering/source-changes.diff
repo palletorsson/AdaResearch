@@ -1,0 +1,43 @@
+--- before/commons/maps/Color_Context_Placed/intent.md
++++ commons/maps/Color_Context_Placed/intent.md
+@@ -11,3 +11,5 @@
+ Previous versions, the removed translation studies and deferred filter/drum/Life passages remain archived. Current evidence: doc/space/color-dna-columns-2026-09-17/.
+ 
+ Editorial direction, 17 September: colour is deeply scientific and deeply associative. Ground this in actual construction and observation: the indexed stack, material assignment and six-colour palette repeated around thirty stripes. Associations belong to a situated reader; the prose must not prescribe a universal meaning for a hue or turn an RGB value into a complete model of perception. The next hall changes illumination.
++
++23 September: the return from the disco floor now leads directly into simultaneous colour choices. Follow red across the intervening blue sphere to distinguish physical contact from the group that colour invites the eye to make. Preserve the full progression and richer gallery stacks. Two shared native figures make the existing comparisons available on the page; no new artifact is needed for this pass.
+--- before/commons/maps/Color_Context_Placed/tutorial.md
++++ commons/maps/Color_Context_Placed/tutorial.md
+@@ -15,3 +15,9 @@
+ The earlier tutorial's hypothetical perceived() function is archived with the previous draft. It is not an implemented model of the viewer's perception and should not be presented as one.
+ 
+ The prose introduces colour science through a reproducible assignment and the conditions of appearance, while leaving full accounts of light, surface and perception for the following halls. Memories and cultural associations are invited as possibilities, not coded outcomes or universal colour meanings.
++
++## Shared book illustrations — 23 September
++
++The current chapter uses native renders of the four placed opening columns and two views of the fixed rainbow column. The four-rule comparison keeps the same orthographic camera offset relative to each artifact; the source meshes and local transforms match. Existing illumination and backgrounds vary across the hall, so the photographs compare colour assignment in place, not calibrated display colour. The rainbow cameras are 1.65 m above the column base and the object remains fixed between views. No new viewer controls or production geometry were added.
++
++Figures and exact manuscript comparison: `doc/book/iterations/2026-09-23-colour-gathering/`. The focused isolated-museum run checks 24 conditions, including the four assignments and the retained 6.2/7.2/7.4 m heights. Existing 17 September route evidence is historical; no new walking, headset or learner trial is claimed.
+--- before/commons/maps/Color_Context_Placed/field_notes.md
++++ commons/maps/Color_Context_Placed/field_notes.md
+@@ -14,3 +14,9 @@
+ ## 2026-09-10 - Pattern machines removed
+ 
+ Removed secondary placements: `mill_memphis_p3`, `loom_drum_bauhaus_p4m`, `pattern_tunnel_machine`, `loom_bolt_memphis_p4g`, `loom_fountain_pastel_p4`. Colour primaries and final.md anchors remain unchanged. Before-state preserved in `doc/space/color-pattern-removal-2026-09-10/before/`. Placement and content checked; no new runtime or headset validation claimed.
++
++## 2026-09-23 — colour as another way to gather the parts
++
++Preserved all 23 column placements, source builders and authored geometry. A focused isolated museum capture confirms identical local forms/transforms for the four entry rules and their one/two/five/two assigned-colour counts. The tall gallery studies remain fixed, with the rainbow at 6.2 m and combinations at 7.2/7.4 m. Two prose paragraphs and the stripe-view sentence revised; native comparison figures added to final.md.
++
++24 checks pass; report, captures, exact diff and scope are in `doc/book/iterations/2026-09-23-colour-gathering/`. The first orthographic camera stood outside the entry; after image inspection it was moved inside, and the final-stacks view widened. No production fix was required. No new route, physical reach, headset, learner or colour-calibration claim; no live restart, bake/save replacement or frozen book regeneration.
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -340,7 +340,7 @@
+       "status": "draft",
+       "sequence": "color",
+       "text_path": "commons/maps/Color_Context_Placed/final.md",
+-      "text_sha256": "dbabc550e5f0fdcd5fae6341acc2585b34b4ad22cc6c85ea69cd3f840c26b35c",
++      "text_sha256": "be71ac82edd194d677c02f074c36158ecb37e846f61f9bffe513848f95c59d6a",
+       "map_sha256": "245287308f12494d7e3df1fed6578046c2a616304007b861498d7dd7cf71bdc6",
+       "learner_verified": false
+     },

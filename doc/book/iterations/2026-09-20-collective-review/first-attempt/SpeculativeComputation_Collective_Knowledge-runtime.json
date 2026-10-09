@@ -1,0 +1,1835 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "43"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				4.73999977111816,
+				0.0,
+				4.29458904266357
+			],
+			"bounds_size": [
+				3.52000045776367,
+				1.71000003814697,
+				2.18541097640991
+			],
+			"cell": [
+				6,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.61520004272461,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.61520004272461,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.5,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.5,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.38479995727539,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.38479995727539,
+						1.08779311180115,
+						4.36712455749512
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.61520004272461,
+						0.974685966968536,
+						4.31438159942627
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.61520004272461,
+						0.974685966968536,
+						4.31438159942627
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.5,
+						0.974685966968536,
+						4.31438159942627
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.5,
+						0.974685966968536,
+						4.31438159942627
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_5/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						6.38479995727539,
+						0.974685966968536,
+						4.31438159942627
+					]
+				},
+				{
+					"disabled": false,
+					"path": "COMMON_WORK/Btn_5/HandPoseArea/CollisionShape3D",
+					"position": [
+						6.38479995727539,
+						0.974685966968536,
+						4.31438159942627
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						5.65000009536743,
+						1.03999996185303,
+						5.5
+					],
+					"text": "P1"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						5.7638783454895,
+						1.03999996185303,
+						5.07499980926514
+					],
+					"text": "P2"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.07499980926514,
+						1.03999996185303,
+						4.7638783454895
+					],
+					"text": "P3"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.5,
+						1.03999996185303,
+						4.65000009536743
+					],
+					"text": "P4"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.92500019073486,
+						1.03999996185303,
+						4.7638783454895
+					],
+					"text": "P5"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						7.2361216545105,
+						1.03999996185303,
+						5.07499980926514
+					],
+					"text": "P6"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						7.34999990463257,
+						1.03999996185303,
+						5.5
+					],
+					"text": "P7"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						7.2361216545105,
+						1.03999996185303,
+						5.92500019073486
+					],
+					"text": "P8"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.92500019073486,
+						1.03999996185303,
+						6.2361216545105
+					],
+					"text": "P9"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.5,
+						1.03999996185303,
+						6.34999990463257
+					],
+					"text": "P10"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						6.07499980926514,
+						1.03999996185303,
+						6.2361216545105
+					],
+					"text": "P11"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						5.7638783454895,
+						1.03999996185303,
+						5.92500019073486
+					],
+					"text": "P12"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						7.75,
+						1.39999997615814,
+						5.29999971389771
+					],
+					"text": "VERSION 1 | PIECES 1/60\nSOURCES 1/12 | EVER 1\nADDITIONS 1\nPARTICIPATIONS 1 | REVISIONS 0\nFLOWING | COLOUR: ORDER"
+				},
+				{
+					"parent": "PeerProductionTool",
+					"position": [
+						5.25,
+						1.39999997615814,
+						5.30000019073486
+					],
+					"text": "PIECE 1 | SOURCE P1\nUNMARKED | REVISION 0\nArrival accepted automatically\nSOURCE KEPT / POSE CHANGED"
+				},
+				{
+					"parent": "COMMON_WORK",
+					"position": [
+						6.5,
+						1.15021514892578,
+						4.43012809753418
+					],
+					"text": "COMMON WORK"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "peer_production_tool"
+		},
+		{
+			"bounds_position": [
+				3.79999995231628,
+				0.749999940395355,
+				8.47999954223633
+			],
+			"bounds_size": [
+				1.39999985694885,
+				1.09999990463257,
+				0.0400009155273438
+			],
+			"cell": [
+				4,
+				8
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "WikiFragment",
+					"position": [
+						4.5,
+						1.69600009918213,
+						8.52499961853027
+					],
+					"text": "On Gödel"
+				},
+				{
+					"parent": "WikiFragment",
+					"position": [
+						4.5,
+						1.35500001907349,
+						8.52499961853027
+					],
+					"text": "Every formal system has an outside.\nBut the outside is where knowledge actually\nhappens — not as failure, as shape of the room."
+				},
+				{
+					"parent": "WikiFragment",
+					"position": [
+						4.5,
+						0.991999983787537,
+						8.52499961853027
+					],
+					"text": "→ see EAST · On Margins"
+				},
+				{
+					"parent": "WikiFragment",
+					"position": [
+						4.5,
+						0.860000014305115,
+						8.52499961853027
+					],
+					"text": "47 editors · 3 disagreements · revision 108"
+				}
+			],
+			"position": [
+				4.5,
+				0.300000011920929,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wiki_fragment"
+		},
+		{
+			"bounds_position": [
+				4.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:speculativecomputation collective knowledge"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				11.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				14.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				13.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				11.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				11.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				4.99931812286377,
+				0.420000016689301,
+				11.9993190765381
+			],
+			"bounds_size": [
+				1.00136375427246,
+				1.67999982833862,
+				1.00136184692383
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				217.245010375977,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				1.97356939315796,
+				0.419999957084656,
+				9.09488677978516
+			],
+			"bounds_size": [
+				1.13110280036926,
+				1.62433326244354,
+				0.820613861083984
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				0.419999986886978,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				198.541168212891,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"captured_states": [
+		{
+			"counts": [
+				40,
+				40,
+				6,
+				6,
+				6,
+				0,
+				1
+			],
+			"detail": "PIECE 31 | SOURCE P5\nUNMARKED | REVISION 0\nArrival accepted automatically\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 1 | PIECES 40/60\nSOURCES 6/12 | EVER 6\nADDITIONS 40\nPARTICIPATIONS 6 | REVISIONS 0\nHELD | COLOUR: ORDER",
+			"record": "{ \"source\": 4, \"original\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"previous\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"current\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"disputed\": false, \"revision\": 0, \"revised_by\": \"\" }",
+			"selected": 30,
+			"shot": "collective-order"
+		},
+		{
+			"counts": [
+				40,
+				40,
+				6,
+				6,
+				6,
+				0,
+				1
+			],
+			"detail": "PIECE 31 | SOURCE P5\nUNMARKED | REVISION 0\nArrival accepted automatically\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 1 | PIECES 40/60\nSOURCES 6/12 | EVER 6\nADDITIONS 40\nPARTICIPATIONS 6 | REVISIONS 0\nHELD | COLOUR: SOURCE",
+			"record": "{ \"source\": 4, \"original\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"previous\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"current\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"disputed\": false, \"revision\": 0, \"revised_by\": \"\" }",
+			"selected": 30,
+			"shot": "collective-sources"
+		},
+		{
+			"counts": [
+				40,
+				40,
+				6,
+				6,
+				6,
+				0,
+				1
+			],
+			"detail": "PIECE 31 | SOURCE P5\nDISPUTED | REVISION 0\nArrival accepted automatically\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 1 | PIECES 40/60\nSOURCES 6/12 | EVER 6\nADDITIONS 40\nPARTICIPATIONS 6 | REVISIONS 0\nHELD | COLOUR: SOURCE",
+			"record": "{ \"source\": 4, \"original\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"previous\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"current\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"disputed\": true, \"revision\": 0, \"revised_by\": \"\" }",
+			"selected": 30,
+			"shot": "collective-dispute"
+		},
+		{
+			"counts": [
+				40,
+				40,
+				6,
+				6,
+				6,
+				1,
+				1
+			],
+			"detail": "PIECE 31 | SOURCE P5\nDISPUTED | REVISION 1\nRevised by VISITOR\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 1 | PIECES 40/60\nSOURCES 6/12 | EVER 6\nADDITIONS 40\nPARTICIPATIONS 6 | REVISIONS 1\nHELD | COLOUR: SOURCE",
+			"record": "{ \"source\": 4, \"original\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"previous\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"current\": [X: (-0.183325, 0.0, 0.049921), Y: (0.0, 0.171, 0.0), Z: (-0.049921, 0.0, -0.183325), O: (-0.15955, 1.47, 0.042058)], \"disputed\": true, \"revision\": 1, \"revised_by\": \"VISITOR\" }",
+			"selected": 30,
+			"shot": "collective-revision"
+		},
+		{
+			"counts": [
+				40,
+				40,
+				6,
+				6,
+				6,
+				1,
+				1
+			],
+			"detail": "PIECE 31 | SOURCE P5\nDISPUTED | REVISION 1\nRevised by VISITOR\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 1 | PIECES 40/60\nSOURCES 6/12 | EVER 6\nADDITIONS 40\nPARTICIPATIONS 6 | REVISIONS 1\nHELD | COLOUR: SOURCE",
+			"record": "{ \"source\": 4, \"original\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"previous\": [X: (-0.183724, 0.0, -0.04843), Y: (0.0, 0.114, 0.0), Z: (0.04843, 0.0, -0.183724), O: (-0.15955, 1.47, 0.042058)], \"current\": [X: (-0.183325, 0.0, 0.049921), Y: (0.0, 0.171, 0.0), Z: (-0.049921, 0.0, -0.183325), O: (-0.15955, 1.47, 0.042058)], \"disputed\": true, \"revision\": 1, \"revised_by\": \"VISITOR\" }",
+			"selected": 30,
+			"shot": "collective-side"
+		},
+		{
+			"counts": [
+				3,
+				43,
+				2,
+				6,
+				8,
+				1,
+				2
+			],
+			"detail": "PIECE 1 | SOURCE P1\nUNMARKED | REVISION 0\nArrival accepted automatically\nSOURCE KEPT / POSE CHANGED",
+			"readout": "VERSION 2 | PIECES 3/60\nSOURCES 2/12 | EVER 6\nADDITIONS 43\nPARTICIPATIONS 8 | REVISIONS 1\nHELD | COLOUR: SOURCE",
+			"record": "{ \"source\": 0, \"original\": [X: (0.19, 0.0, 0.0), Y: (0.0, 0.114, 0.0), Z: (0.0, 0.0, 0.19), O: (0.22, 0.97, 0.0)], \"previous\": [X: (0.19, 0.0, 0.0), Y: (0.0, 0.114, 0.0), Z: (0.0, 0.0, 0.19), O: (0.22, 0.97, 0.0)], \"current\": [X: (0.19, 0.0, 0.0), Y: (0.0, 0.114, 0.0), Z: (0.0, 0.0, 0.19), O: (0.22, 0.97, 0.0)], \"disputed\": false, \"revision\": 0, \"revised_by\": \"\" }",
+			"selected": 0,
+			"shot": "collective-version"
+		}
+	],
+	"checks": [
+		{
+			"message": "Primary workbench instantiated",
+			"ok": true
+		},
+		{
+			"message": "Full-size interactive placement",
+			"ok": true
+		},
+		{
+			"message": "Hall has slower arrivals",
+			"ok": true
+		},
+		{
+			"message": "Config rebuild preserves museum children",
+			"ok": true
+		},
+		{
+			"message": "Config rebuild remains bounded",
+			"ok": true
+		},
+		{
+			"message": "Repeated source adds a piece but not another distinct source",
+			"ok": true
+		},
+		{
+			"message": "COLOUR exposes source identity",
+			"ok": true
+		},
+		{
+			"message": "Piece 0 keeps source colour",
+			"ok": true
+		},
+		{
+			"message": "Colour leaves piece 0 in place",
+			"ok": true
+		},
+		{
+			"message": "Piece 1 keeps source colour",
+			"ok": true
+		},
+		{
+			"message": "Colour leaves piece 1 in place",
+			"ok": true
+		},
+		{
+			"message": "Piece 2 keeps source colour",
+			"ok": true
+		},
+		{
+			"message": "Colour leaves piece 2 in place",
+			"ok": true
+		},
+		{
+			"message": "PIECE holds flow and selects next existing piece",
+			"ok": true
+		},
+		{
+			"message": "DISPUTE marks without adding a contribution",
+			"ok": true
+		},
+		{
+			"message": "REVISE increments only revision count",
+			"ok": true
+		},
+		{
+			"message": "Revision changes pose and retains previous/original pose",
+			"ok": true
+		},
+		{
+			"message": "Source persists and visitor revision does not settle dispute",
+			"ok": true
+		},
+		{
+			"message": "Unselected pieces remain unchanged",
+			"ok": true
+		},
+		{
+			"message": "Dispute can be cleared independently",
+			"ok": true
+		},
+		{
+			"message": "Held flow freezes packets and additions",
+			"ok": true
+		},
+		{
+			"message": "Packet arrival preserves its actual sender",
+			"ok": true
+		},
+		{
+			"message": "VERSION clears form and in-flight packets, then waits",
+			"ok": true
+		},
+		{
+			"message": "Previous version retains revision record",
+			"ok": true
+		},
+		{
+			"message": "Across versions participation rises but lifetime unique source does not",
+			"ok": true
+		},
+		{
+			"message": "Readout names the different counting domains",
+			"ok": true
+		},
+		{
+			"message": "Capacity is bounded at sixty pieces",
+			"ok": true
+		},
+		{
+			"message": "Interactive capacity holds for inspection",
+			"ok": true
+		},
+		{
+			"message": "Empty dispute and revision are safe",
+			"ok": true
+		},
+		{
+			"message": "Control 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 3 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 4 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 5 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Passive default retains automatic exhibit without workbench controls",
+			"ok": true
+		},
+		{
+			"message": "Grid configuration bounds prevent zero division and runaway counts",
+			"ok": true
+		},
+		{
+			"message": "Passive capacity still starts next version automatically",
+			"ok": true
+		},
+		{
+			"message": "Gate granted for selected walking tests",
+			"ok": true
+		}
+	],
+	"collections": [],
+	"failures": [
+		"walk: workbench controls",
+		"walk: left side"
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": false,
+	"rays": [],
+	"room": "SpeculativeComputation_Collective_Knowledge",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-order.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-sources.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-dispute.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-revision.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-side.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Collective_Knowledge/collective-version.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.03666305541992,
+						0.0,
+						2.33767342567444
+					],
+					"shape": "@CollisionShape3D@252:<CollisionShape3D#390741363527>"
+				}
+			],
+			"end": [
+				5.03666305541992,
+				0.00084640271961689,
+				2.33767342567444
+			],
+			"passed": true,
+			"tag": "entry left of pier",
+			"target": [
+				5.0,
+				0.1,
+				2.4
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						-1.0,
+						0.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.0,
+						1.18094217777252,
+						3.58394169807434
+					],
+					"shape": "@CollisionShape3D@266:<CollisionShape3D#391211125603>"
+				}
+			],
+			"end": [
+				5.67905759811401,
+				0.0009421426220797,
+				3.58368468284607
+			],
+			"passed": false,
+			"tag": "workbench controls",
+			"target": [
+				6.5,
+				0.1,
+				3.8
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						1.0,
+						0.000000186252478329152,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/PeerProductionTool/COMMON_WORK/Btn_3/Button",
+					"position": [
+						6.64160013198853,
+						0.971629202365875,
+						4.32093667984009
+					],
+					"shape": "<Freed Object>"
+				}
+			],
+			"end": [
+				6.96166038513184,
+				0.000539008877240121,
+				4.32068920135498
+			],
+			"passed": false,
+			"tag": "left side",
+			"target": [
+				4.25,
+				0.1,
+				4.3
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						4.25,
+						0.0,
+						6.33333158493042
+					],
+					"shape": "@CollisionShape3D@303:<CollisionShape3D#392452639661>"
+				}
+			],
+			"end": [
+				4.25,
+				0.000170901417732239,
+				6.33333158493042
+			],
+			"passed": true,
+			"tag": "along table",
+			"target": [
+				4.25,
+				0.1,
+				6.4
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.36267137527466,
+						0.0,
+						8.14157295227051
+					],
+					"shape": "@CollisionShape3D@330:<CollisionShape3D#393358609379>"
+				}
+			],
+			"end": [
+				5.36267137527466,
+				0.00082281872164458,
+				8.14157295227051
+			],
+			"passed": true,
+			"tag": "beyond pier",
+			"target": [
+				5.4,
+				0.1,
+				8.2
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.47329711914063,
+						0.0,
+						10.3465938568115
+					],
+					"shape": "@CollisionShape3D@357:<CollisionShape3D#394264579097>"
+				}
+			],
+			"end": [
+				6.47329711914063,
+				0.000838028034195304,
+				10.3465938568115
+			],
+			"passed": true,
+			"tag": "exit approach",
+			"target": [
+				6.5,
+				0.1,
+				10.4
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.5,
+						0.0,
+						12.6000280380249
+					],
+					"shape": "@CollisionShape3D@383:<CollisionShape3D#395136994381>"
+				}
+			],
+			"end": [
+				6.5,
+				0.000846400856971741,
+				12.6000280380249
+			],
+			"passed": true,
+			"tag": "exit",
+			"target": [
+				6.5,
+				0.1,
+				12.65
+			]
+		}
+	]
+}

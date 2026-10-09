@@ -1,0 +1,61 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Place the pivot</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><article><h1>Place the pivot</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Mass moments</li>
+<li>Solving a constraint</li>
+<li>Assumptions of a model</li>
+<li>Balance versus stability</li>
+</ul>
+<p>Follow one arm of the hanging mobile. The heavier side has less distance to the suspension. Its stillness was constructed from an arithmetic relation. The room’s truss and animated triangle offer other appearances of support without a load test.</p>
+<h2>What you bring</h2>
+<p>Use masses from Forces, displacement and distance from Lines, functions and the drawn rods. We only need two familiar point markers to reconstruct one arm of the recursive mobile.</p>
+<h2>Build inside the museum</h2>
+<p>Choose two positive masses and a total span. Calculate both distances from the pivot, then place the points. One nearby button changes the left mass while retaining the span.</p>
+<p>Save <code>04_balance.gd</code> beside the <a href="../../../doc/book/course/formfinding-shared-code.md">complete shared code</a>, on your existing <code>PointStudy</code> Node3D. The inspected working bay is hall-local <code>(16, 0, 7)</code> metres, floor level, upright, unit scale. The museum supplies the floor, camera, light, hands and button scene. The larger artifact remains available for comparison.</p>
+<h2>Complete code — 04_balance.gd</h2>
+<!-- student-code:04_balance.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var masses := Vector2(1, 2)
+var span := 2.0
+var distances := Vector2.ZERO
+var points: Array[Node3D] = []
+var arm: MeshInstance3D
+var wire: MeshInstance3D
+var readout: Label3D
+
+func _ready() -&gt; void:
+    points = [make_point(Vector3.ZERO, false), make_point(Vector3.ZERO, false)]
+    arm = rod()
+    wire = rod()
+    readout = caption(&quot;&quot;, Vector3(0, 2.4, 0))
+    button(&quot;LEFT MASS&quot;, Vector3(0, 1, -0.8), change_mass)
+    rebuild()
+
+func change_mass() -&gt; void:
+    masses.x = 4.0 if masses.x == 1 else 1.0
+    rebuild()
+
+func rebuild() -&gt; void:
+    assert(masses.x &gt; 0 and masses.y &gt; 0 and span &gt; 0)
+    distances = Vector2(span * masses.y, span * masses.x) / (masses.x + masses.y)
+    points[0].position = Vector3(-distances.x, 1.5, 0)
+    points[1].position = Vector3(distances.y, 1.5, 0)
+    join(arm, points[0].position, points[1].position)
+    join(wire, Vector3(0, 1.5, 0), Vector3(0, 2.15, 0))
+    readout.text = &quot;%.1f kg / %.1f kg | arms %.3f / %.3f m\nmass x arm: %.3f / %.3f kg m\nCalculated pose; massless arm&quot; % [
+        masses.x, masses.y, distances.x, distances.y,
+        masses.x * distances.x, masses.y * distances.y]
+</code></pre>
+<h2>Read the operation</h2>
+<p>For opposite vertical weights acting on a level, massless arm, equal torque magnitudes require m_left × g × d_left = m_right × g × d_right. The same g cancels. Also, the two arm lengths must add to span. Solving both relations gives d_left = span × m_right / total_mass and the opposite expression for d_right.</p>
+<p>With masses 1 and 2 kg over two metres, the arms are 4/3 and 2/3 m. The heavier mass is closer to the pivot. The label shows mass × arm in kg m; multiply by g for torque magnitude in N m. Equal products express the selected static model.</p>
+<p>The PointBody instances display the calculated places. The masses are numeric inputs, not a claim that these frozen markers are hanging under simulated forces. No joint, collision or settling solver determines this pose. That distinction also applies to the current mobile.</p>
+<h2>Predict, then change</h2>
+<p>Predict the pivot’s relation to the points when the left mass changes from 1 to 4 kg. Press LEFT MASS and compare both products. Check that the arm lengths still add to two metres. Then give the sides equal mass and predict the midpoint.</p>
+<h2>Build another experiment</h2>
+<p>Build a second two-point arm carrying masses 3 and 7 kg over 1.5 m. Display both distances and the residual m_left × d_left − m_right × d_right. It should be near zero. Construct an intentionally centred pivot as a comparison and show its nonzero residual. Explain why a zero residual in this model does not show that a disturbed physical mobile will return to rest.</p>
+<h2>Carry onward</h2>
+<p>A calculated relation can construct a pose without waiting. In Annealing we return to a search where a useful next step may first make the objective worse.</p>
+<h2>Model notes</h2>
+<p>The museum recurses over many arms and uses nominal disc masses. This lesson isolates one level. It omits rod and wire mass, friction, wind, and dynamic stability. The two points are a diagram of its inputs, not a new physics engine.</p></article></main>

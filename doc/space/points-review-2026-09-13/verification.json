@@ -1,0 +1,98 @@
+{
+  "run": {
+    "started": "2026-09-13T07:56:54+02:00",
+    "finished": "2026-09-13T07:57:39+02:00",
+    "pid": 37904,
+    "exit": 0,
+    "checks": 84,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_points_live.gd": "05e1a455e3229a9d4c30f597271aeebd23189c3da988db2f8b0628beef36e40d",
+      "algorithms/randomness/randompoints/randompoints.gd": "f655d193773e7b0da33c3267be87a7b2cbbf206960a4d301dcfafe43dd17d8b1",
+      "algorithms/randomness/randompoint/randompoint.gd": "d88eaddcde8fa0f74e6c1fa73ada967a26d98b4fd301e26a6ce240ac10ea330d",
+      "commons/maps/Random_Noise_Types/map_data.json": "3f4ee753f776b7e5b31f6fb4702133f88fdc3b688c37bbf051f5c0e8843b2831",
+      "ada_run/points_review_extra.gd": "11ea97711e305a2b604cb17238a2152ec391f2ba3bc060a4e077281039e09105",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "primary": [
+    "randompoint",
+    "randompoints"
+  ],
+  "excerpts": 6,
+  "final_words": 898,
+  "pack": {
+    "planned": 4,
+    "matched": 4,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 4,
+    "refused": 0,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "noise|random noise types"
+  },
+  "audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 1
+  },
+  "geometry": {
+    "initial": {
+      "computed_closest": 0.13137273629236762,
+      "accepted": 24,
+      "refused": 43,
+      "ghosts_checked": 43
+    },
+    "loaded": {
+      "computed_closest": 0.13012992105009097,
+      "accepted": 49,
+      "refused": 5458,
+      "ghosts_checked": 220
+    },
+    "clustered": {
+      "computed_closest": 0.018010316036465936,
+      "accepted": 24,
+      "refused": 0,
+      "ghosts_checked": 0
+    }
+  },
+  "structure_utilities_unchanged": true,
+  "placement_changes": [
+    [
+      5,
+      1,
+      "randompoint:90:0:1",
+      ""
+    ],
+    [
+      3,
+      2,
+      "",
+      "randompoint:90:1.25:1#stand:bounds#size:0.6"
+    ]
+  ],
+  "diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer."
+  ],
+  "publication_files": 57
+}

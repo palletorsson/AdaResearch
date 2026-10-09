@@ -1,0 +1,123 @@
+--- before/Point_Lines/tutorial.md
++++ commons/maps/Point_Lines/tutorial.md
+@@ -1,64 +1,83 @@
+ # Point Lines — keep two ends in relation
+ 
+-In the black box, take one endpoint. The other stays where it is. Between them, the pale segment turns and changes length. The number on the wall follows.
++Take one endpoint. The other stays where it is. Between them, a pale segment turns and changes length. Two readings follow: a displacement and its length.
+ 
+-Coordinates gave us two positions in the same frame. Here we use them together. Day Zero has already supplied the running project; Point One supplied the visible markers. The new work is a relation between their positions.
++Point One gave a position a body. Point Coordinates adds a working hold and a frame in which to read its position. Here we use two positions in that same frame. The prepared handles supply the hold; the new work is the relation between them.
+ 
+-## Two positions, one distance
++Open `point_lines.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). Use **Run Current Scene** (F6). Open `studies/point_lines/line.gd`. On desktop, approach a point, aim at it and press E to hold it. Move, then press E to release. It stays where you leave it. The XR route uses the supplied near-grip interaction.
+ 
+-Open the supplied [line study](../../../doc/book/studies/point-lines/README.md). It contains A, B, a thin cylinder and a readout. This is a small desktop construction study. The museum keeps the XR pickup we borrowed in Coordinates; this download does not include that player.
++## 1. Keep two positions
+ 
+-In `line.gd`, A starts at `(-0.75, 1.12, 0.0)` and B at `(0.75, 1.12, 0.0)`. Their height and depth agree. Only X differs.
++Inside `_ready()`, the script places two handles:
+ 
+ ```gdscript
+-var displacement := b - a
+-var distance := displacement.length()
++    a.position = Vector3(-0.75, 1.12, 0.0)
++    b.position = Vector3(0.75, 1.12, 0.0)
+ ```
+ 
+-Subtract the start from the end: the displacement is `(1.5, 0, 0)`. Its length is `1.5`. We use one scene unit as one metre. Change B's X to `0.25`. The distance becomes one metre. You have changed one endpoint; the line and readout agree without editing either of them.
++`a` and `b` are references to the handles. Each `.position` is a `Vector3`. Both handles belong to `Study`, so their positions use the same reference frame. Keep Study's scale at one. In this room, one unit represents one metre.
+ 
+-## Turn without lengthening
++The middle and last numbers agree. The first numbers place the handles 1.5 metres apart.
+ 
+-Keep A at its original position. Give B the position `Vector3(-0.75, 2.62, 0.0)`. The segment now stands upright. Its length is still 1.5 metres. Return B to its first position, then change its Z component instead. You have moved out of the first plane.
++## 2. Subtract, then measure
+ 
+-Reverse the subtraction to `a - b`. The direction reverses; the length does not. A distance alone cannot tell us which end we chose as the start.
+-
+-## Read again as the endpoints move
+-
+-Here is the complete lesson script in the download:
++Inside `_process()`, we read the relation again:
+ 
+ ```gdscript
+-extends Node3D
+-
+-func _ready() -> void:
+-    $A.position = Vector3(-0.75, 1.12, 0.0)
+-    $B.position = Vector3(0.75, 1.12, 0.0)
+-
+-func _process(_delta: float) -> void:
+-    var a: Vector3 = $A.position
+-    var b: Vector3 = $B.position
+-    var displacement := b - a
++    var displacement := b.position - a.position
+     var distance := displacement.length()
+-    $Segment.show_between(a, b)
+-    $Readout.text = "%.2f m" % distance
+ ```
+ 
+-`_ready()` places the two markers once. `_process()` reads their positions again each frame. While running in the editor, use the Remote scene tree to change B's position: both the segment and the number follow. This borrows the editor as our moving hand. In the museum, the grab system moves the endpoint instead. The relation needs the positions, whichever tool changes them.
++Subtract the start from the end. `displacement` is the change needed to get from A to B: initially `(1.5, 0.0, 0.0)`. It has a direction and a length.
+ 
+-`show_between()` is our supplied drawing helper, in `segment.gd`. It places the cylinder halfway between A and B, gives it their distance as its height, then turns its long axis towards B. Its thickness is a choice made for visibility. If both ends coincide, the helper hides the cylinder rather than trying to point it in an undefined direction. Its rotation code can stay borrowed for now.
++`.length()` measures that vector and returns one number: `1.5`. The displacement is a `Vector3`; the distance is a `float`. A distance alone does not say which way to go.
+ 
+-`%.2f` rounds the readout to two decimal places. The underlying positions keep more precision. A hand can move without changing the displayed number.
++Change B's first number from `0.75` to `0.25` in `_ready()`. Run again. The segment is now one metre long. You changed one endpoint; the relation supplied the new length. Restore `0.75`.
+ 
+-## A connection can do something else
++## 3. Turn without lengthening
+ 
+-The next museum encounter asks **CAN YOU CONNECT THE DOTS?** Bring the points close and release. Their connection draws a line and breaks the nearby **DO NOT CROSS** barrier. The passage opens because an additional instruction connects those events. Distance alone cannot decide whether you are allowed through.
++Replace B's starting position with `Vector3(-0.75, 2.62, 0.0)`.
+ 
+-The hammer and laser use the same reversible break response. The laser reads the first body its ray reaches; holding its beam on a study for 1.2 seconds breaks that study. Eight seconds later it returns. We leave that pickup, collision and reset machinery in the supplied museum. Implementing it is not a prerequisite for making our first segment.
++The segment stands upright. Its length is still 1.5 metres. The displacement is now `(0.0, 1.5, 0.0)`. A different direction can have the same length.
+ 
+-## What have the two ends left out?
++Restore B's original position. Change the subtraction to `a.position - b.position`. The displacement reverses. The distance stays the same, and the segment still joins the same two ends. Restore `b.position - a.position`.
+ 
+-Walk the black stripe, then take a detour. Compare the recorded trail with the straight line. The same starting and ending positions give the same displacement, however you travel between them. Our script replaces its reading every frame. It keeps no journey.
++## 4. Read it while it changes
+ 
+-In the open room, two lines can make a plus or a cross; moving one away from the other reveals the depth hidden by the first view. In the exit corridor, those signs have been given different consequences: × damages, + restores. Their meanings are attachments to their geometry.
++This is the whole repeated part of `line.gd`:
+ 
+-Keep the two positions, subtraction, length and the supplied segment renderer. In Trace, we will begin keeping the positions in between.
++```gdscript
++func _process(_delta):
++    var displacement := b.position - a.position
++    var distance := displacement.length()
++    segment.show_between(a.position, b.position)
++    displacement_readout.text = str(displacement)
++    distance_readout.text = "%.2f m" % distance
++```
++
++We reuse Point Zero's `_process()`. Each frame reads the current positions, draws between them and updates the text. `str()` makes text from a value. In the last line, `%` puts the distance into the `%.2f` slot: a number shown with two decimal places, followed by “m”. This rounds the display, not the stored positions. A small movement can leave the displayed number unchanged.
++
++`show_between()` is a function in our supplied `Segment` script. We pass it the two positions. It places a thin cylinder between them and adjusts its length and orientation. The cylinder has a thickness chosen so we can see it. Its drawing code is included, but turning a mesh is not today's new operation.
++
++Take one endpoint and move it. The handle supplies a new position; the relation responds. Release it. The script keeps reading even when nothing moves.
++
++## What we borrowed
++
++At the top of the file, `preload()` loads the two supplied scripts. `const` gives each a fixed name:
++
++```gdscript
++const PointHandle = preload("res://prepared/point_handle.gd")
++const Segment = preload("res://prepared/segment.gd")
++```
++
++`PointHandle.new()` creates a point with the supplied pickup behaviour. `Segment.new()` creates the cylinder. The lesson also creates its two `Label3D` readouts. Each node is added in `_ready()`; no teaching mesh or display is fetched from a scene file.
++
++These are named dependencies. We can inspect or replace them while keeping the calculation between two positions.
++
++## Two ends cannot keep a journey
++
++Give B the same starting position as A. The distance becomes zero. The renderer hides a segment too short to draw; at coincidence there is no direction from one end to the other. Separate them again and it reappears.
++
++Carry an endpoint around a detour, then return it to the same place. The calculation returns to the same result. It has kept no route.
++
++The museum's walking line makes that absence visible beside a recorded trail. In Trace, we will keep the positions in between.

@@ -1,0 +1,442 @@
+{
+  "mode": "build_from_scratch",
+  "lesson": "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/point.gd",
+  "canonical_lesson": "commons/maps/Point_One/tutorial.md",
+  "host": "Empty Node3D PointStudy in the prepared Day Zero project; configured XR hands are supplied for Coordinates.",
+  "incoming": null,
+  "operations": [],
+  "printed_complete_script_equals_native_input": true,
+  "exercise_variants": {
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/radius-030.gd": {
+      "sha256": "98d8300e0713f3bdcb28ffab10daf0d3f59b31b42dabf7f31fd8b71760c38955",
+      "native_filename": "point_one_radius.gd",
+      "edit": {
+        "kind": "replace",
+        "before": "const RADIUS := 0.14",
+        "after": "const RADIUS := 0.3"
+      }
+    },
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/centre-170.gd": {
+      "sha256": "8a519f277a5ff5b21a3748e3410e4f42812dd9dd1b358b0d3f1443e003fedf1b",
+      "native_filename": "point_one_height.gd",
+      "edit": {
+        "kind": "replace",
+        "before": "const CENTRE := Vector3(0, 1.12, 0)",
+        "after": "const CENTRE := Vector3(0, 1.7, 0)"
+      }
+    },
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/boundary-disabled.gd": {
+      "sha256": "512e51e3eb55aaf540f47f6e9d45244ccd2e3906c627c0101859384e0a713b6b",
+      "native_filename": "point_one_no_collision.gd",
+      "edit": {
+        "kind": "replace",
+        "before": "    boundary.shape = shape\n",
+        "after": "    boundary.shape = shape\n    boundary.disabled = true\n"
+      }
+    },
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/surface-hidden.gd": {
+      "sha256": "49361534b083e47264adf60ff453523569fddd014858efd5678a82d1d64eca29",
+      "native_filename": "point_one_invisible.gd",
+      "edit": {
+        "kind": "replace",
+        "before": "    surface.mesh = sphere\n",
+        "after": "    surface.mesh = sphere\n    surface.visible = false\n"
+      }
+    }
+  },
+  "composed_equals_printed_complete_script": null,
+  "sources": [
+    {
+      "path": "commons/maps/Point_One/tutorial.md",
+      "sha256": "a28499f43f50016741f54cf11e8867f3334f2ff09c33ab083f3cd151334ca628"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/tutorial.md",
+      "sha256": "a28499f43f50016741f54cf11e8867f3334f2ff09c33ab083f3cd151334ca628"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_One/tutorial.md",
+    "commons/maps/Point_Coordinates/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/run_checks.py",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/verify.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/point.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/expected.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/next-input.json",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/point.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/expected.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/tutorial.md",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/next-input.json",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/assembled.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/radius-030.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/centre-170.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/boundary-disabled.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/variants/surface-hidden.gd",
+    "doc/book/iterations/2026-10-05-points-built-and-carried/states/002-point-coordinates/variants/pickup-disabled.gd"
+  ],
+  "checks": [
+    {
+      "id": "point_one/default/static_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The first lesson constructs a static body without pickup behaviour."
+    },
+    {
+      "id": "point_one/default/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_one/default/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_one/default/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_one/default/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_one/default/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_one/default/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_one/default/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_one/default/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_one/default/ray_hit",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A native physics ray hits the boundary when enabled and misses it when disabled, independently of surface visibility."
+    },
+    {
+      "id": "point_one/default/not_pickable",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A synthetic controller overlapping the static point cannot select or hold it."
+    },
+    {
+      "id": "point_one/default/stays_fixed",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point remains fixed when the nearby controller moves away."
+    },
+    {
+      "id": "point_one/radius_030/static_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The first lesson constructs a static body without pickup behaviour."
+    },
+    {
+      "id": "point_one/radius_030/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_one/radius_030/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_one/radius_030/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_one/radius_030/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_one/radius_030/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_one/radius_030/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_one/radius_030/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_one/radius_030/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_one/radius_030/ray_hit",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A native physics ray hits the boundary when enabled and misses it when disabled, independently of surface visibility."
+    },
+    {
+      "id": "point_one/radius_030/not_pickable",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A synthetic controller overlapping the static point cannot select or hold it."
+    },
+    {
+      "id": "point_one/radius_030/stays_fixed",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point remains fixed when the nearby controller moves away."
+    },
+    {
+      "id": "point_one/height_170/static_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The first lesson constructs a static body without pickup behaviour."
+    },
+    {
+      "id": "point_one/height_170/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_one/height_170/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_one/height_170/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_one/height_170/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_one/height_170/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_one/height_170/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_one/height_170/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_one/height_170/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_one/height_170/ray_hit",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A native physics ray hits the boundary when enabled and misses it when disabled, independently of surface visibility."
+    },
+    {
+      "id": "point_one/height_170/not_pickable",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A synthetic controller overlapping the static point cannot select or hold it."
+    },
+    {
+      "id": "point_one/height_170/stays_fixed",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point remains fixed when the nearby controller moves away."
+    },
+    {
+      "id": "point_one/boundary_disabled/static_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The first lesson constructs a static body without pickup behaviour."
+    },
+    {
+      "id": "point_one/boundary_disabled/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_one/boundary_disabled/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_one/boundary_disabled/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_one/boundary_disabled/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_one/boundary_disabled/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_one/boundary_disabled/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_one/boundary_disabled/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_one/boundary_disabled/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_one/boundary_disabled/ray_hit",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A native physics ray hits the boundary when enabled and misses it when disabled, independently of surface visibility."
+    },
+    {
+      "id": "point_one/boundary_disabled/not_pickable",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A synthetic controller overlapping the static point cannot select or hold it."
+    },
+    {
+      "id": "point_one/boundary_disabled/stays_fixed",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point remains fixed when the nearby controller moves away."
+    },
+    {
+      "id": "point_one/surface_hidden/static_body",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The first lesson constructs a static body without pickup behaviour."
+    },
+    {
+      "id": "point_one/surface_hidden/one_point",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The script constructs exactly one physics body under its station."
+    },
+    {
+      "id": "point_one/surface_hidden/two_children",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point owns exactly one visible mesh node and one physical boundary."
+    },
+    {
+      "id": "point_one/surface_hidden/centre",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The body uses the declared local CENTRE under a translated, rotated unit-scale station."
+    },
+    {
+      "id": "point_one/surface_hidden/visible_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A MeshInstance3D has an assigned SphereMesh and the expected visibility."
+    },
+    {
+      "id": "point_one/surface_hidden/physical_sphere",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A sphere collision shape belongs to the body and has the expected enabled state."
+    },
+    {
+      "id": "point_one/surface_hidden/dimensions",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The visible radius, full height and collider radius agree with the declared RADIUS."
+    },
+    {
+      "id": "point_one/surface_hidden/alignment",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "Visible and physical spheres share their parent's centre and orientation."
+    },
+    {
+      "id": "point_one/surface_hidden/default_material",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The student script retains Godot's default material with no authored override."
+    },
+    {
+      "id": "point_one/surface_hidden/ray_hit",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A native physics ray hits the boundary when enabled and misses it when disabled, independently of surface visibility."
+    },
+    {
+      "id": "point_one/surface_hidden/not_pickable",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "A synthetic controller overlapping the static point cannot select or hold it."
+    },
+    {
+      "id": "point_one/surface_hidden/stays_fixed",
+      "kind": "native",
+      "action": "Execute the exact student code and stated exercise in native Godot.",
+      "expect": "The point remains fixed when the nearby controller moves away."
+    }
+  ],
+  "native_report": "doc/book/iterations/2026-10-05-points-built-and-carried/states/001-point-one/report-runtime.json"
+}

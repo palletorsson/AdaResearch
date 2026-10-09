@@ -1,0 +1,43 @@
+--- Point_One.before.md
++++ Point_One.after.md
+@@ -35,7 +35,7 @@
+ 
+ We begin with a number that includes something we did not witness.
+ 
+-We have read the line that asks for that number. Much of the code making it readable remains unopened.
++We have read the line that asks for that number. Much of the code making it readable remains unopened. It is like standing on the shoulders of giants in fog: other people's work has brought us here, but height alone does not give us a clear view.
+ 
+ <!-- @folding_past -->
+ 
+@@ -93,11 +93,11 @@
+ 
+ <!-- @interactive_point_origin_force -->
+ 
+-The dark point offers itself to your hands. Pick it up. Follow it a little to one side, then back. Its appearance can change as you handle it; successive pickups also cycle its coordinate display through several formats, including one that hides the label.
++The dark point offers itself to your hands. Pick it up. Move it a little to one side, then back. Its surface changes when you take hold. Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address.
+ 
+ The first point has already broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.
+ 
+-A mathematical point specifies a location without extension.[^point-one-euclid] This artifact gives it a sphere, a collision shape and ways to respond. Those additions let us meet it through movement. They also give it possibilities that a position alone does not have.
++A mathematical point specifies a location without extension.[^point-one-euclid] Here, a sphere makes the position visible. A collision shape and pickup code make the artifact available to your controller. Seeing it and being able to hold it are different things the program has to arrange.
+ 
+ ```gdscript
+ var p := Vector3(1.0, 0.5, 0.0)
+@@ -123,7 +123,7 @@
+     return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
+ ```
+ 
+-`%.2f` rounds each component to two decimal places in the text. The stored position is left alone. The card has made the location easier to read by allowing several nearby positions to share a printed address. The apparent stillness belongs to that report.
++`%.2f` rounds each component to two decimal places in the text: `1.231` and `1.234` both print as `1.23`. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.
+ 
+ Now compare it with the card marked `LOCAL`. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?
+ 
+@@ -131,7 +131,7 @@
+ 
+ Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+ 
+-The frame has its own origin, orientation and scale. Its script uses `to_local()` to express a world position relative to that frame. The `LOCAL` card prints that address beside `WORLD`: the same place measured from different references. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.
++`WORLD` measures the point's position in the scene's coordinate system. The coloured frame supplies another reference, with its own origin, orientation and scale. Its script uses `to_local()` to express that same position relative to the frame. The `LOCAL` card prints the result beside `WORLD`. The numbers differ because they answer to different references. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.
+ 
+ A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^point-one-haraway]
+ 

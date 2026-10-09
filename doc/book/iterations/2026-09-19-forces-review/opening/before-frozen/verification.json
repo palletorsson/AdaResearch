@@ -1,0 +1,155 @@
+{
+  "checks": [
+    {
+      "message": "frozen shared museum source compiles",
+      "ok": true
+    },
+    {
+      "message": "saved original torque source compiles",
+      "ok": true
+    },
+    {
+      "message": "actual Vector Arithmetic museum segment loads",
+      "ok": true
+    },
+    {
+      "message": "authored torque crank found in actual hall",
+      "ok": true
+    },
+    {
+      "message": "standing capsule fits before torque console",
+      "ok": true
+    },
+    {
+      "message": "live LEVERAGE control exists",
+      "ok": true
+    },
+    {
+      "message": "canonical slider signal sets leverage 0.0",
+      "ok": true
+    },
+    {
+      "message": "static wheel pose follows unit cross product 0.0",
+      "ok": true
+    },
+    {
+      "message": "readout states actual old or repaired quantity 0.0",
+      "ok": true
+    },
+    {
+      "message": "canonical slider signal sets leverage 0.5",
+      "ok": true
+    },
+    {
+      "message": "static wheel pose follows unit cross product 0.5",
+      "ok": true
+    },
+    {
+      "message": "readout states actual old or repaired quantity 0.5",
+      "ok": true
+    },
+    {
+      "message": "canonical slider signal sets leverage 1.0",
+      "ok": true
+    },
+    {
+      "message": "static wheel pose follows unit cross product 1.0",
+      "ok": true
+    },
+    {
+      "message": "readout states actual old or repaired quantity 1.0",
+      "ok": true
+    },
+    {
+      "message": "wheel does not accumulate rotation with elapsed time",
+      "ok": true
+    },
+    {
+      "message": "equal arm/push products retain cross-product area balanced",
+      "ok": true
+    },
+    {
+      "message": "purchase retains displayed angular factor balanced",
+      "ok": true
+    },
+    {
+      "message": "equal arm/push products retain cross-product area long",
+      "ok": true
+    },
+    {
+      "message": "purchase retains displayed angular factor long",
+      "ok": true
+    },
+    {
+      "message": "equal arm/push products retain cross-product area stub",
+      "ok": true
+    },
+    {
+      "message": "purchase retains displayed angular factor stub",
+      "ok": true
+    },
+    {
+      "message": "workings retains one current demo rig: outcome",
+      "ok": true
+    },
+    {
+      "message": "honest readout retained across workings: outcome",
+      "ok": true
+    },
+    {
+      "message": "workings retains one current demo rig: trace",
+      "ok": true
+    },
+    {
+      "message": "honest readout retained across workings: trace",
+      "ok": true
+    },
+    {
+      "message": "workings retains one current demo rig: operands",
+      "ok": true
+    },
+    {
+      "message": "honest readout retained across workings: operands",
+      "ok": true
+    },
+    {
+      "message": "workings retains one current demo rig: expression",
+      "ok": true
+    },
+    {
+      "message": "honest readout retained across workings: expression",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "interaction": "slider set_normalized_value plus canonical slider_moved signal; no physical hand dragging",
+  "observations": {
+    "angle_states": [
+      {
+        "factor": 0.0,
+        "leverage": 0.0,
+        "readout": "CROSS  r × F\n\nτ = 0.00\nθ = 0°\n\n0 rpm",
+        "wheel_angle": 0.0
+      },
+      {
+        "factor": 0.707106781186547,
+        "leverage": 0.5,
+        "readout": "CROSS  r × F\n\nτ = 0.71\nθ = 45°\n\n226 rpm",
+        "wheel_angle": 0.592384457588196
+      },
+      {
+        "factor": 1.0,
+        "leverage": 1.0,
+        "readout": "CROSS  r × F\n\nτ = 1.00\nθ = 90°\n\n320 rpm",
+        "wheel_angle": 0.83775806427002
+      }
+    ],
+    "torque_world_position": [
+      6.5,
+      0.0,
+      27.5
+    ]
+  },
+  "replay_before": true
+}

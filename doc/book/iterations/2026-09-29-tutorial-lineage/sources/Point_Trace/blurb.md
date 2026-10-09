@@ -1,0 +1,3 @@
+Now: duration. The trace records what the line forgets — your hand moved through space, hesitated, curved, returned. Time accumulates as visible residue. The line will compress this to two points. The trace resists.
+
+Pick up `draw_dot` and move. Each frame your position is stored; each dot marks a moment that has already passed. The `cube_scene` is the volume within which these deposits accumulate. The trace is not a line but what the line erases — Derrida's residue made geometric. Gesture, hesitation, error, return: all preserved at the frame rate, none of it symmetric with what a line can hold.

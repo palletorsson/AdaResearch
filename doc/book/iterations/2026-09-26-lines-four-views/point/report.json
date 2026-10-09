@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "coordinate frame present",
+      "passed": true
+    },
+    {
+      "name": "coordinate origin is at floor height",
+      "passed": true
+    },
+    {
+      "name": "pool follows axis (2.0, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "pool follows axis (0.0, 0.0, -2.0)",
+      "passed": true
+    },
+    {
+      "name": "inside the L stays ordinary floor",
+      "passed": true
+    },
+    {
+      "name": "same point still feeds the coordinate system",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: l-basin",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+
+  },
+  "passed": true,
+  "scope": "Native museum geometry, production pickup with supplied grabber, collision paths, and screenshots. No headset acceptance claimed."
+}

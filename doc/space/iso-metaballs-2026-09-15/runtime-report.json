@@ -1,0 +1,845 @@
+{
+  "checks": 21,
+  "failures": [],
+  "headset_verified": false,
+  "map": "ISO_Metaballs",
+  "measurements": {
+    "driver_log": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          15.1800003051758,
+          0.00100000004749745,
+          9.57999992370605
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.18,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.0,
+            -0.24,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.18,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.18,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.0,
+            -0.25,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.18,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "Seg0_castelvecchio-pinch-v2/MetaballWorkshop/PushButtonFront",
+          "control_inspect": {
+            "area": "h-v2/MetaballWorkshop/PushButtonFront/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "allWorkshop/PushButtonFront/InteractableAreaButton",
+              "allWorkshop/PushButtonFront/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "cchio-pinch-v2/MetaballWorkshop/@StaticBody3D@1656",
+              "o-pinch-v2/MetaballWorkshop/PushButtonFront/Button",
+              "allWorkshop/PushButtonFront/InteractableAreaButton",
+              "allWorkshop/PushButtonFront/InteractableAreaButton",
+              "h-v2/MetaballWorkshop/PushButtonFront/HandPoseArea"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "control": "Seg0_castelvecchio-pinch-v2/MetaballWorkshop/PushButtonFront",
+            "global_position": [
+              15.18,
+              1.045,
+              7.38
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1672/HandPoseArea",
+            "ray_camera_to_centre_mask_1310720": "allWorkshop/PushButtonFront/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "h-v2/MetaballWorkshop/PushButtonFront/HandPoseArea",
+            "ray_camera_to_outer_cap_mask_1310720": "allWorkshop/PushButtonFront/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "allWorkshop/PushButtonFront/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  15.18,
+                  1.045,
+                  7.403
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  15.18,
+                  1.033,
+                  7.38
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "h-v2/MetaballWorkshop/PushButtonFront/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "camera_from": [
+              15.18,
+              1.6,
+              9.58
+            ],
+            "independent_ray": "cchio-pinch-v2/MetaballWorkshop/PushButtonFront/InteractableAreaButton",
+            "pointer_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              15.18,
+              1.6,
+              9.58
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "cchio-pinch-v2/MetaballWorkshop/PushButtonFront/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              15.18,
+              1.06,
+              7.43
+            ]
+          },
+          "stand": [
+            15.18,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.18,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.14,
+            -0.24,
+            -0.96
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.18,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.5,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.0,
+            -0.25,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.5,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1666",
+          "control_inspect": {
+            "area": "inch-v2/MetaballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "taballWorkshop/@Node3D@1666/InteractableAreaButton",
+              "taballWorkshop/@Node3D@1666/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "cchio-pinch-v2/MetaballWorkshop/@StaticBody3D@1656",
+              "chio-pinch-v2/MetaballWorkshop/@Node3D@1666/Button",
+              "taballWorkshop/@Node3D@1666/InteractableAreaButton",
+              "inch-v2/MetaballWorkshop/@Node3D@1666/HandPoseArea",
+              "taballWorkshop/@Node3D@1666/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1666",
+            "global_position": [
+              15.5,
+              1.045,
+              7.38
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1675/HandPoseArea",
+            "ray_camera_to_centre_mask_1310720": "taballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1666/HandPoseArea",
+            "ray_camera_to_outer_cap_mask_1310720": "taballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "taballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  15.5,
+                  1.045,
+                  7.403
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  15.5,
+                  1.033,
+                  7.38
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "inch-v2/MetaballWorkshop/@Node3D@1666/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "camera_from": [
+              15.5,
+              1.6,
+              9.58
+            ],
+            "independent_ray": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "pointer_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              15.5,
+              1.6,
+              9.58
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1666/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              15.5,
+              1.06,
+              7.43
+            ]
+          },
+          "stand": [
+            15.5,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.5,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.14,
+            -0.24,
+            -0.96
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.5,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.82,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            0.0,
+            -0.25,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.82,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1669",
+          "control_inspect": {
+            "area": "inch-v2/MetaballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+              "taballWorkshop/@Node3D@1669/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "chio-pinch-v2/MetaballWorkshop/@Node3D@1669/Button",
+              "cchio-pinch-v2/MetaballWorkshop/@StaticBody3D@1656",
+              "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+              "inch-v2/MetaballWorkshop/@Node3D@1669/HandPoseArea",
+              "taballWorkshop/@Node3D@1669/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1669",
+            "global_position": [
+              15.82,
+              1.045,
+              7.38
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1669/HandPoseArea",
+            "ray_camera_to_outer_cap_mask_1310720": "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "taballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  15.82,
+                  1.045,
+                  7.403
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  15.82,
+                  1.033,
+                  7.38
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "inch-v2/MetaballWorkshop/@Node3D@1669/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "camera_from": [
+              15.82,
+              1.6,
+              9.58
+            ],
+            "independent_ray": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "pointer_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              15.82,
+              1.6,
+              9.58
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1669/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              15.82,
+              1.06,
+              7.43
+            ]
+          },
+          "stand": [
+            15.82,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.82,
+            1.6,
+            9.58
+          ],
+          "forward": [
+            -0.15,
+            -0.27,
+            -0.95
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.82,
+            0.0,
+            9.58
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.5,
+            1.6,
+            9.81
+          ],
+          "forward": [
+            0.0,
+            -0.25,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.5,
+            0.0,
+            9.81
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1675",
+          "control_inspect": {
+            "area": "inch-v2/MetaballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+              "taballWorkshop/@Node3D@1675/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "chio-pinch-v2/MetaballWorkshop/@Node3D@1675/Button",
+              "cchio-pinch-v2/MetaballWorkshop/@StaticBody3D@1656",
+              "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+              "inch-v2/MetaballWorkshop/@Node3D@1675/HandPoseArea",
+              "taballWorkshop/@Node3D@1675/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1675",
+            "global_position": [
+              15.5,
+              1.045,
+              7.61
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1675/HandPoseArea",
+            "ray_camera_to_outer_cap_mask_1310720": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "taballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  15.5,
+                  1.045,
+                  7.633
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  15.5,
+                  1.033,
+                  7.61
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "inch-v2/MetaballWorkshop/@Node3D@1675/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "camera_from": [
+              15.5,
+              1.6,
+              9.81
+            ],
+            "independent_ray": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "pointer_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              15.5,
+              1.6,
+              9.81
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1675/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              15.5,
+              1.06,
+              7.66
+            ]
+          },
+          "stand": [
+            15.5,
+            0.0,
+            9.81
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.5,
+            1.6,
+            9.81
+          ],
+          "forward": [
+            -0.14,
+            -0.24,
+            -0.96
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.5,
+            0.0,
+            9.81
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "ballsReview/@Node@1698/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            15.18,
+            1.6,
+            9.81
+          ],
+          "forward": [
+            0.0,
+            -0.25,
+            -0.97
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            15.18,
+            0.0,
+            9.81
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1672",
+          "control_inspect": {
+            "area": "inch-v2/MetaballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "at_position_mask_1310720": [
+              "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+              "taballWorkshop/@Node3D@1672/InteractableAreaButton"
+            ],
+            "at_position_mask_4294967295": [
+              "cchio-pinch-v2/MetaballWorkshop/@StaticBody3D@1656",
+              "chio-pinch-v2/MetaballWorkshop/@Node3D@1672/Button",
+              "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+              "inch-v2/MetaballWorkshop/@Node3D@1672/HandPoseArea",
+              "taballWorkshop/@Node3D@1672/InteractableAreaButton"
+            ],
+            "cap_normal": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "control": "um/Seg0_castelvecchio-pinch-v2/MetaballWorkshop/@Node3D@1672",
+            "global_position": [
+              15.18,
+              1.045,
+              7.61
+            ],
+            "global_scale": [
+              1.15,
+              1.15,
+              1.15
+            ],
+            "inside_tree": true,
+            "layer": 1048576,
+            "mask": 393216,
+            "monitorable": true,
+            "monitoring": true,
+            "process_mode": 0,
+            "ray_along_normal_from_0.3_mask_1310720": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "ray_along_normal_from_0.3_mask_4294967295": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "ray_camera_to_centre_mask_1310720": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "ray_camera_to_centre_mask_4294967295": "inch-v2/MetaballWorkshop/@Node3D@1672/HandPoseArea",
+            "ray_camera_to_outer_cap_mask_1310720": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "ray_camera_to_outer_cap_mask_4294967295": "taballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "shapes": [
+              {
+                "at": [
+                  15.18,
+                  1.045,
+                  7.633
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "CylinderShape3D"
+              },
+              {
+                "at": [
+                  15.18,
+                  1.033,
+                  7.61
+                ],
+                "disabled": false,
+                "radius": -1.0,
+                "shape": "BoxShape3D"
+              }
+            ],
+            "visible": true
+          },
+          "hover": "inch-v2/MetaballWorkshop/@Node3D@1672/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "camera_from": [
+              15.18,
+              1.6,
+              9.81
+            ],
+            "independent_ray": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "pointer_dir": [
+              0.0,
+              -0.25,
+              -0.97
+            ],
+            "pointer_enabled": true,
+            "pointer_from": [
+              15.18,
+              1.6,
+              9.81
+            ],
+            "pointer_process_mode": 0,
+            "raycast_areas": true,
+            "raycast_collider": "lvecchio-pinch-v2/MetaballWorkshop/@Node3D@1672/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              15.18,
+              1.06,
+              7.66
+            ]
+          },
+          "stand": [
+            15.18,
+            0.0,
+            9.81
+          ]
+        }
+      }
+    ],
+    "inventory_tokens": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "showing",
+      "exit_sign",
+      "wall_clock",
+      "electrical_panel",
+      "ceiling_vent",
+      "fire_hose_box",
+      "dream_bodies",
+      "weapon_cabinet",
+      "iso_metaball_console",
+      "metaball_world",
+      "raymarched_metaballs",
+      "nakama_metaballs",
+      "metaballs"
+    ],
+    "readout": "EMPLACEMENT column\nKERNEL inverse_square\nTen sources / one threshold\nHOLD keeps the earlier boundary behind the live one."
+  }
+}

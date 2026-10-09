@@ -1,0 +1,237 @@
+{
+  "checks": [
+    {
+      "name": "exactly three original prose paragraphs changed",
+      "passed": true
+    },
+    {
+      "name": "all code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "all encounter anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "all prose after the scalar comparison retained",
+      "passed": true
+    },
+    {
+      "name": "map bytes unchanged: no artifact or structural loss",
+      "passed": true
+    },
+    {
+      "name": "same set of production methods",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _ready",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _build_column_positions",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _process",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: update_column_mesh",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_shaft_material",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_spiral_column",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_crackle_normal_map",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: generate_crackle_value",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: cellular_noise",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: pseudo_random",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: smoothstep",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: generate_spiral_column_mesh",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_tube_trail_base_mesh",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: add_column_base",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: add_column_capital",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_platform",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: create_lighting",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _exit_tree",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: apply_grid_config",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _prepare_trio",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: driver_phase",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: mapped_drop",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _rebuild_column",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: _trio_process",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: toggle_freeze",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: reveal_drivers",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: toggle_spin",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: toggle_marble",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: trio_state",
+      "passed": true
+    },
+    {
+      "name": "unchanged method: rebuild_at",
+      "passed": true
+    },
+    {
+      "name": "no non-trio/configuration changes",
+      "passed": true
+    },
+    {
+      "name": "sequence order unchanged",
+      "passed": true
+    },
+    {
+      "name": "three existing book encounters match core",
+      "passed": true
+    },
+    {
+      "name": "three existing encounters match sequence group",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Random_Noise_Types",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_One",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_Voxel",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_6_Wall",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_Inside_Noise",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_Space_10",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Noise_Perlin_Simplex",
+      "passed": true
+    },
+    {
+      "name": "other group preserved: Lab_Path",
+      "passed": true
+    },
+    {
+      "name": "registry entries preserved",
+      "passed": true
+    },
+    {
+      "name": "other registry entries unchanged",
+      "passed": true
+    },
+    {
+      "name": "no unrelated core records lost",
+      "passed": true
+    },
+    {
+      "name": "map hash still current",
+      "passed": true
+    },
+    {
+      "name": "learner verification stays pending",
+      "passed": true
+    },
+    {
+      "name": "native museum passed",
+      "passed": true
+    },
+    {
+      "name": "four walking approaches passed",
+      "passed": true
+    },
+    {
+      "name": "floor ray passed",
+      "passed": true
+    },
+    {
+      "name": "no script or shader compile error",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "concurrent_core_changes": [],
+  "runtime_checks": 30,
+  "walks": 4,
+  "limits": "Private museum snapshot. Controlled desktop pointer and CharacterBody paths. No headset, learner, Quest or full-sequence acceptance; live bake and save untouched."
+}

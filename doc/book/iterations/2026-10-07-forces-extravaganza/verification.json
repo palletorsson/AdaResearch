@@ -1,0 +1,123 @@
+{
+  "passed": true,
+  "checks": 454,
+  "failures": 0,
+  "reports": [
+    {
+      "name": "VFM_05_Launch",
+      "passed": true,
+      "checks": 17,
+      "failures": [],
+      "path": "after/VFM_05_Launch/report.json"
+    },
+    {
+      "name": "VFM_03_Motion",
+      "passed": true,
+      "checks": 22,
+      "failures": [],
+      "path": "after/VFM_03_Motion/report.json"
+    },
+    {
+      "name": "Vectors_Act3_FieldsAndMotion",
+      "passed": true,
+      "checks": 15,
+      "failures": [],
+      "path": "after/Vectors_Act3_FieldsAndMotion/report.json"
+    },
+    {
+      "name": "Vectors_Act4a_KineticForces",
+      "passed": true,
+      "checks": 21,
+      "failures": [],
+      "path": "after/Vectors_Act4a_KineticForces/report.json"
+    },
+    {
+      "name": "Vectors_Act4b_Oscillation",
+      "passed": true,
+      "checks": 24,
+      "failures": [],
+      "path": "after/Vectors_Act4b_Oscillation/report.json"
+    },
+    {
+      "name": "VFM_07_Gravity",
+      "passed": true,
+      "checks": 33,
+      "failures": [],
+      "path": "after/VFM_07_Gravity/report.json"
+    },
+    {
+      "name": "VFM_09_Legs",
+      "passed": true,
+      "checks": 21,
+      "failures": [],
+      "path": "after/VFM_09_Legs/report.json"
+    },
+    {
+      "name": "VFM_08_Arena",
+      "passed": true,
+      "checks": 27,
+      "failures": [],
+      "path": "after/VFM_08_Arena/report.json"
+    },
+    {
+      "name": "Vectors_Act5_ForceAsPlace",
+      "passed": true,
+      "checks": 34,
+      "failures": [],
+      "path": "after/Vectors_Act5_ForceAsPlace/report.json"
+    },
+    {
+      "name": "Force and input models",
+      "passed": true,
+      "checks": 128,
+      "failures": [],
+      "path": "tests/models/report.json"
+    },
+    {
+      "name": "Eleven-hall teleport route",
+      "passed": true,
+      "checks": 77,
+      "failures": [],
+      "path": "tests/teleports/report.json"
+    },
+    {
+      "name": "Existing capability court",
+      "passed": true,
+      "checks": 35,
+      "failures": [],
+      "path": "tests/court/report.json"
+    }
+  ],
+  "source_sha256": {
+    "commons/artifacts/force_play/bowling.tscn": "c0132b3047adad28430d0999aa55798441f1880fcad93f3264e2e2cd8a16e272",
+    "commons/artifacts/force_play/constraints.tscn": "617af145de437c7fd865a22d23db6cdd18d25520a96849f89d2e74d96fc3b661",
+    "commons/artifacts/force_play/constraint_grip.gd": "b113b56d8374d4f177c29229b46dd49b022e7c1a860b291ab43b7a5dc11c9b8a",
+    "commons/artifacts/force_play/encounter.gd": "a17cc36c43b26d4bebed1209c5ffa452f60a8c2b0fffe46d54cddf4ac2c7bdbf",
+    "commons/artifacts/force_play/flight.tscn": "49da5bf9b66e4009116269c34e487f672c25fd8802c51267b6e36a1fd5fdc611",
+    "commons/artifacts/force_play/friction.tscn": "7d29fabb10ef98b51f1887411f11050e39859ac63e97c8925b4698fca604ac97",
+    "commons/artifacts/force_play/gravity.tscn": "8c3e3f9c6041f50de16dd82cf9b0674376133cfa5db8034b140eaeaf2f4b4807",
+    "commons/artifacts/force_play/gravity_point.gd": "ff377fa04f078e7dde63c4946d1483fdf7c7e9fb1d066c3b0d74befb4c2b9a21",
+    "commons/artifacts/force_play/liquids.tscn": "5267e6c399cbf9995a3b8f978a6ca77dc99ece8b769b1a120bd1974ede9cf72f",
+    "commons/artifacts/force_play/magnet.tscn": "7a271898164d7762627c5fd9fdc39d4cb6a5001b10c4a1e6b28d3aebc800e540",
+    "commons/artifacts/force_play/mass.tscn": "53fe1a8be094c138d7022b0f32ecdf89ecca15429e9fe6be30111e2774ca89da",
+    "commons/artifacts/force_play/mutual.tscn": "cda4fcb63ce3907afa97b9c45531c7a263775d41bbe7ca1bc70dbd7cb6e3ff64",
+    "commons/artifacts/force_play/play_body.gd": "87d86cdbccf9a2e8ffcc5d5b1e9bb113e12e68ef5477e724087ea11b8056d6ae",
+    "commons/artifacts/force_play/play_space.gd": "535882e9311ce95d20e164327f163c1c61c4a10c5309c81afb07bf99347f3b50",
+    "commons/artifacts/force_play/puzzle.tscn": "8336ae12566c84492a53b0b4664be34360bc7ff82312e471a0583a249494425b",
+    "commons/artifacts/force_play/recoil.tscn": "132dbbd1197d383d9ccf995d1e714ae1074b8408b4ba6cf0d68789513732ac08",
+    "commons/artifacts/force_play/springs.tscn": "7aa5249f4b91a6a2ee92415f473f67caad26c91eba8ee8f4fe91ef8cbb27561f",
+    "commons/artifacts/force_play/support.tscn": "72d6f39245ae9687b5fc592638ad2be3deea74e8f3b56d364836eb5d0d0afbc6",
+    "commons/artifacts/force_play/swings.tscn": "86cb1d017db4e0ca7dbb2f39b4223f27a719ff9be830ab84bfd454310daf4231",
+    "commons/artifacts/force_play/torque.tscn": "68c9ce6bd91feb73dc8f42e89e72cf3670b7179880030d66116ce5d79b51960b",
+    "commons/artifacts/force_play/tower.tscn": "52875ceadf7600525e5d63c4cceab5ffae94224e5d19c6239c5b85320f86db77",
+    "commons/artifacts/force_play/trolley.tscn": "ad4341cd78ee5a4ba079579c9b8356a08bd3955912617e1b3c80c5f597792255",
+    "commons/artifacts/force_play/vortex.tscn": "6650ac6a0e0658d57f981e8f70b1a2d65b729ac10e2905d9e8ab2f0181146fea",
+    "commons/artifacts/force_capability_lab/force_point.gd": "6a12b83f4c8438d8e6ab540215bb21f446952a3520a4d260ae5e189273b1bec5",
+    "commons/artifacts/force_capability_lab/force_capability_lab.gd": "cbed101c3c636d11468952d942860925c6b0fb7caaa80a35236835cb8394350a",
+    "commons/artifacts/force_capability_lab/ring_mortar.gd": "325ce90c7f7cc673d72cab23b0a0b10f20a085dbafacdec232195913ac7ae8d6",
+    "tools/probes/force_play_models.gd": "5ed2aa5c3dc565f245d60cb55302f40d2b04bb8cd7a31e8b7cc6ba166e218695",
+    "tools/probes/force_play_museum.gd": "c33e7a0b37a138f321439833e807629bebee07691023b37814b341beb2c4c0e1",
+    "tools/expand_force_play.py": "47652ac3d28e974c9f669a85d63abc606a4e6499d70ed80bef116285b0769c56",
+    "tools/publish_force_play.py": "0496c81c1b37e2c552299644216fb722613783e58026963b8f4f27c74ce00739"
+  }
+}

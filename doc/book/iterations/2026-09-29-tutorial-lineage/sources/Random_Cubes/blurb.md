@@ -1,0 +1,3 @@
+How much can one throw tell you about a die? Just inside the door, a die on green felt and a pedestal of eight coins are thrown by hand; nothing on either draws a random number, so the result comes from how you let go. Each keeps a record that forgets something different: the die's glass keeps how often each face came up and loses the order, the coin's ribbon keeps the order of the last thirty.
+
+In the middle of the hall small wooden cubes appear above a low block, and once twenty are out every arrival makes one vanish at random, even from your hand. Beyond, forty-eight red slabs in eight rows show one random rule laid out in space: the ends of every slab are fixed at a metre, only the middles vary.

@@ -1,0 +1,141 @@
+[
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      9,
+      "lines"
+    ],
+    "old": [
+      {
+        "token": "mushrooms",
+        "text": "The sampled sizes never grow a seventh template between two others. Which difference would need another rule?",
+        "by": "astra-mushrooms-review-2026-09-12",
+        "note": "SHOW follows template copies; KIND reveals placement permissions; SIZE keeps draws but substitutes scale 1. The separately planted edible scene changes what a similar cap can do.",
+        "note_src": {
+          "file": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+          "quote": "return v if size_variation else 1.0"
+        }
+      },
+      {
+        "token": "bubbles_random",
+        "text": "A small bubble dish offers another population of similar but varied bodies without competing with the specimen bed.",
+        "by": "curated-2026-09-16"
+      }
+    ],
+    "new": [
+      {
+        "token": "mushrooms",
+        "text": "The sampled sizes never grow a seventh template between two others. Which difference would need another rule?",
+        "by": "astra-mushrooms-review-2026-09-12",
+        "note": "SHOW follows template copies; KIND reveals placement permissions; SIZE keeps draws but substitutes scale 1. The separately planted edible scene changes what a similar cap can do.",
+        "note_src": {
+          "file": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+          "quote": "return v if size_variation else 1.0"
+        }
+      },
+      {
+        "token": "silhouette_arrivals",
+        "text": "The arrivals keep their places while DRESS changes a wardrobe and FORMS changes the available outlines. Which change needs a different construction?",
+        "by": "local-review-2026-09-19"
+      },
+      {
+        "token": "couture_comparison",
+        "text": "Keep three seeds and change the garment. The same numbers meet another way of making a body.",
+        "by": "local-review-2026-09-19"
+      },
+      {
+        "token": "bubbles_random",
+        "text": "A small bubble dish offers another population of similar but varied bodies without competing with the specimen bed.",
+        "by": "curated-2026-09-16"
+      }
+    ]
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      10,
+      "hero"
+    ],
+    "old": "env_one",
+    "new": "perlin_noise_bridge"
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      10,
+      "lines",
+      2
+    ],
+    "old": {
+      "token": "perlin_noise_bridge",
+      "text": "Coherence is not the opposite of randomness — it is randomness with memory",
+      "by": "draft"
+    },
+    "new": {
+      "token": "perlin_noise_bridge",
+      "text": "Compare independent heights with correlated neighbours. Similar looking land can come from different procedures.",
+      "by": "local-review-2026-09-19"
+    }
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      12,
+      "lines",
+      0
+    ],
+    "old": {
+      "token": "pheromone_terrain",
+      "text": "Stigmergy is memory without a brain — the environment itself becomes the communication …",
+      "by": "draft",
+      "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+      "note_src": {
+        "file": "commons/maps/Random_Pheromone/critical.md",
+        "quote": "the evaporation rate is a design choice"
+      }
+    },
+    "new": {
+      "token": "pheromone_terrain",
+      "text": "Leave a mark that enters the next decision. From the same seeded starts, compare walkers drawn towards scent with walkers that avoid it.",
+      "by": "local-review-2026-09-19",
+      "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+      "note_src": {
+        "file": "commons/maps/Random_Pheromone/critical.md",
+        "quote": "the evaporation rate is a design choice"
+      }
+    }
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      13,
+      "hero"
+    ],
+    "old": "random_space",
+    "new": "noise_mixer"
+  },
+  {
+    "path": "commons/data/book/randomness.json",
+    "keys": [
+      "pearls",
+      13,
+      "lines",
+      1
+    ],
+    "old": {
+      "token": "noise_mixer",
+      "text": "Complexity is layered repetition. The same simple wave",
+      "by": "draft"
+    },
+    "new": {
+      "token": "noise_mixer",
+      "text": "Several sine-based contributions make a field. Change the layers and compare the pattern while each image rescales its own contrast.",
+      "by": "local-review-2026-09-19"
+    }
+  }
+]

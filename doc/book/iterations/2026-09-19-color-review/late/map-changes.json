@@ -1,0 +1,51 @@
+{
+  "changed_cells": [
+    {
+      "layer": "interactables",
+      "x": 18,
+      "z": 10,
+      "before": "color_space_navigator:180:1.2:1#mount:comparison#plinth:0",
+      "after": ""
+    },
+    {
+      "layer": "interactables",
+      "x": 28,
+      "z": 10,
+      "before": "gradient_interpolator:180:0.95:1#mount:comparison#plinth:0",
+      "after": ""
+    },
+    {
+      "layer": "interactables",
+      "x": 18,
+      "z": 31,
+      "before": "",
+      "after": "color_space_navigator:180:1.2:1#mount:comparison#plinth:0"
+    },
+    {
+      "layer": "interactables",
+      "x": 28,
+      "z": 31,
+      "before": "",
+      "after": "gradient_interpolator:180:0.95:1#mount:comparison#plinth:0"
+    }
+  ],
+  "structure_unchanged": true,
+  "utilities_unchanged": true,
+  "dimensions_unchanged": true,
+  "clear_rectangle_before": [
+    [
+      16,
+      8,
+      30,
+      29
+    ]
+  ],
+  "clear_rectangle_after": [
+    [
+      16,
+      8,
+      30,
+      34
+    ]
+  ]
+}

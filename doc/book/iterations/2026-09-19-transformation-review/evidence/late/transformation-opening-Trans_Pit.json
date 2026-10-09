@@ -1,0 +1,42 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three separate pusher lanes remain",
+      "passed": false,
+      "value": null
+    },
+    {
+      "name": "three common-tempo growers remain",
+      "passed": false,
+      "value": null
+    },
+    {
+      "name": "a 52 cm capsule can use the eastern pusher bypass",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [
+    "three separate pusher lanes remain",
+    "three common-tempo growers remain"
+  ],
+  "headset_tested": false,
+  "map": "Trans_Pit",
+  "measurements": {
+    "bypass_width_probe_m": 0.52,
+    "common_grower_period_s": 6.66666666666667,
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "pusher_collision_sweep_samples": 81
+  }
+}

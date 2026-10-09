@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-19",
+  "comment_only_proof": [
+    {
+      "path": "algorithms/primitives/scaleme/scale_me.gd",
+      "before_sha256": "e55451084b1cc5839d822f7eb8d9377d54a3231a2f6dc163eaa752d191ef3186",
+      "after_sha256": "33e22bba61295f65403e3dbed1540ba535ccc5b35192c3e242b9e293a2a09ec1",
+      "executable_lines_equal": true,
+      "executable_lines_sha256": "0ebb8bd06c92c36dbee61ff6ae0a2f857bf4379775a53bd162d195207a487ee7",
+      "comparison": "Remove only blank lines and full-line comments; preserve all other line text and indentation; join with LF."
+    },
+    {
+      "path": "commons/hazards/transformation_blocks/grower_block.gd",
+      "before_sha256": "6ab97a3650b8515d609e37bfec4c346daeea781db1a71d938d937667d15c9a46",
+      "after_sha256": "c4c7a5be7159c0a008a8dd1e3c1a9e5b5a5daa69ccd2c7a099c02c4939c94b8a",
+      "executable_lines_equal": true,
+      "executable_lines_sha256": "5b0d6356a62c5bd72f71c8cd58e40a94640e33a6b383ba76113e4ee0eb497f40",
+      "comparison": "Remove only blank lines and full-line comments; preserve all other line text and indentation; join with LF."
+    }
+  ],
+  "inspected_sources": [
+    {
+      "path": "commons/maps/Trans_Scale/map_data.json",
+      "sha256": "0746e3b72d6d51cbd893e65b22adb3c6d071869ab81fa3d90981f3b31a1fe008"
+    },
+    {
+      "path": "commons/maps/Trans_Scale/final.md",
+      "sha256": "ee9cbc1847e08e342a55cb7f63d07623da6665af664f0666de6ed2fa578cd18f"
+    },
+    {
+      "path": "commons/maps/Trans_Body/map_data.json",
+      "sha256": "19bddcd6ff6efec677215c81e4e6dcf7222a731dce00e5479ec97e5ed4371fa5"
+    },
+    {
+      "path": "commons/maps/Trans_Body/final.md",
+      "sha256": "a61584f0b9ee47b1faec56c21ce4c7e53a84f08a51ffd5e5ed6c92be91f261da"
+    },
+    {
+      "path": "commons/maps/Trans_Pit/map_data.json",
+      "sha256": "815a991603ada7c4dda269cbac505e6e866c4f280237efee8ce917016f4bdf9e"
+    },
+    {
+      "path": "commons/maps/Trans_Pit/final.md",
+      "sha256": "dc436620b38a7d1a621506e94791b3dfcfaebda3342575d9a2178fae326672fd"
+    },
+    {
+      "path": "algorithms/primitives/scaleme/drink_me_room.gd",
+      "sha256": "6eefe36bfde21f2753fd203bb99b3368a1ebf13ed9aebb817312a577d5e0a98d"
+    },
+    {
+      "path": "commons/artifacts/transformation_airlock/transformation_airlock.gd",
+      "sha256": "8143080a496bfc6474d009108d81a2bc8fd941e2aa533f86014dd84fb912fff9"
+    },
+    {
+      "path": "commons/artifacts/transformation_airlock/transformation_airlock.tscn",
+      "sha256": "75761122ae415259eaa414f00a9f4449800568b9b568e2aa96aa19dc29e28e82"
+    },
+    {
+      "path": "commons/artifacts/approach_wall/approach_wall.gd",
+      "sha256": "36d30eee8ebed1c5261d45cb53fff4e7fc3d507782261b68567eeac3c954b53a"
+    },
+    {
+      "path": "commons/artifacts/carve_grid/carve_grid.gd",
+      "sha256": "b1e5a35c54aa944f60ecdf382da749a8b1ece4346126598fa03bc2480170b59a"
+    },
+    {
+      "path": "commons/artifacts/approach_scale/approach_scale.gd",
+      "sha256": "e59b1cb10d908ddbca594ad9de3506fcd7bb33edf4180b4b7754d8bca42f7d3d"
+    },
+    {
+      "path": "commons/scenes/endless_museum.gd",
+      "sha256": "4701f0857f9134b39494a15162dd70a587eff0227062ccb9e001dff3bd79611c"
+    },
+    {
+      "path": "commons/grid/GridUtilitiesComponent.gd",
+      "sha256": "c3d8c3f47c3506081bdaf2cf5bb82b5045e9aebea17185c096cb5e6234875287"
+    },
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256": "ad7de4a7977b4351ff5f7c9fb58e938ea50700efc00a3d2836eaff980ec4d7c0"
+    }
+  ]
+}

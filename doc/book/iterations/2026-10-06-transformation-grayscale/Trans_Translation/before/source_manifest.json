@@ -1,0 +1,28 @@
+{
+  "room": "Trans_Translation",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Trans_Translation/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Trans_Translation/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Trans_Translation/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Trans_Translation/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Trans_Translation/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Trans_Translation/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Trans_Translation/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Trans_Translation/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Trans_Translation/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Trans_Translation/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Trans_Translation/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "657765bbdd9100d9a027f0570955bd7e4b30abd47e9951d4480ba69cddadd6a2",
+    "commons/maps/Trans_Translation/map_data.json": "05c707b11968ac6d62105f12ba25c17e4252af9364842c6f95adc8beefce0a2a",
+    "tools/probes/transformation_grayscale.gd": "49f861a5dbb4a8b65df49995a70e13d69c5f2f50a7115b6582583a3b24ee624a",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "56c949ebb87f6436abc2ee1e0b125682ab0d003d28dc3ba64a5be9c2eb5218a6",
+    "ada_run/encounter_pilot/Trans_Translation/control.json": "a61493fcc2c3870416a145af63745a5c4d2e72e213f47bcd6fa97574d5a0c9a9",
+    "ada_run/encounter_pilot/Trans_Translation/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Trans_Translation/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Trans_Translation/em_bake.json": "8e72ff2c8e056d3d50c73e943a9b6fb73277d8ee26a75eb6ec650b46adb3d9d0"
+  }
+}

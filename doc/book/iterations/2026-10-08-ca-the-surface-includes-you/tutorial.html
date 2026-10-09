@@ -1,0 +1,256 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial · The surface includes you</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f0e9;color:#223334;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1440px;margin:auto;padding:36px}header{padding-top:62px}h1{font-size:clamp(40px,6vw,76px);line-height:1.05;max-width:980px}h2{margin-top:2em;line-height:1.2}nav,figcaption,.eyebrow,.badge,.switch label{font:14px/1.55 system-ui,sans-serif}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:#37676a;text-underline-offset:3px}.eyebrow{text-transform:uppercase;letter-spacing:.12em}.lead{font-size:26px;max-width:830px}p,li{max-width:80ch}.badge{display:inline-block;background:#dce9e2;padding:8px 14px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border:1px solid #c7cbc5}figcaption{padding:9px 0;color:#526260}.pair,.parallel{display:grid;grid-template-columns:1fr 1fr;gap:24px}.parallel article{min-width:0;padding:24px;background:#fffdf6;border-top:4px solid #b2cec4}.parallel article:last-child{border-color:#c9adba}.parallel h1{font-size:34px}pre{background:#1d2b2e;color:#f8f1df;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace;tab-size:4}code{font-size:.83em}pre code{font-size:inherit}table{border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #becac4;text-align:left}.switch input{margin:0 6px 0 18px}.switch label{cursor:pointer}.switch .after{display:none}#after:checked~.after{display:block}#after:checked~.before{display:none}.switch figure img{max-height:1050px;object-fit:contain;background:#d8dbd6}footer{border-top:1px solid #c5cec8}@media(max-width:850px){.pair,.parallel{display:block}header,main,footer{padding:22px}.parallel article{padding:16px}}@media print{nav,.switch input,.switch label{display:none}body{font-size:11pt}pre{white-space:pre-wrap;background:white;color:#111;font-size:8pt}.parallel{display:block}}</style></head><body><header><div class="eyebrow">Endless Museum / Cellular Automata / 8 October 2026</div><h1>Tutorial · The surface includes you</h1><nav><a href="index.html">Hall report</a><a href="index.html#layout">Before / after</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="ca-presence-review.zip">Review ZIP</a></nav></header><main><h1>The surface includes you</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>An external position becomes input to a cellular rule.</li>
+<li>A dictionary pairs each grid address with a fractional state.</li>
+<li>Four axial neighbours and a bounded field.</li>
+<li>Separate thresholds for recovery and physical support.</li>
+<li>Snapshot updates compared with a directional scan.</li>
+</ul>
+<h2>Bring the same point</h2>
+<p>In the previous hall, carrying the point changed nothing in the cells. It carried STEP. Here <strong>where you hold it matters</strong>. The bridge and its wall frieze show the same field. Take the black point beside the desk, bring it near a tile and press its trigger. Each press selects HAND and advances one tenth of a simulated second. A nearby tile loses health. Release the point and STEP again: recovery now depends on what remains around the tile.</p>
+<p>Try the installed bridge first. Its desk also offers a fixed PROBE and the actual VISITOR as input, RUN for repeated steps, and a full RESTORE. The gold address W appears on both floor and wall. Below 0.2, its floor tile loses collision support. The basin catches you; the ramps return you to the museum floor. A wall panel can show the same value without opening a hole in the wall.</p>
+<p>We reconstruct this operation at one-fifth scale, with the same PointBody and rule. Save the previous lesson. Attach <code>presence.gd</code> to your existing <code>PointStudy</code> Node3D in the museum. Keep unit scale, about 2 × 3 metres clear, and face its positive Z side. Place the unchanged <code>point_body.gd</code> beside it. Day Zero's museum still supplies the player, camera, light and XR Tools. These two files create all study geometry; no prepared child nodes are needed. The small model has manual steps, one point input and a tray beneath its tiles. Walk on the installed bridge, not this table.</p>
+<h2>An address keeps a fraction</h2>
+<p><code>current[Vector2i(x, y)]</code> holds a number from 0 to 1. The dictionary makes the address explicit; it replaces the flat Boolean array used in Life. All 80 addresses exist throughout the experiment. A disappearing tile does not delete its entry.</p>
+<p>Logical Y runs along the bridge, becoming physical Z in <code>cell_position</code>. <code>view_position</code> shrinks that simulation position and places it on the table. <code>input_position</code> reverses the conversion: world position → study-local position → simulation position. This lets the smaller model use the installed rule's distances. Moving or rotating the entire study does not alter those local relations.</p>
+<p>The radius is 1.35 simulation metres, which appears as 0.27 metres on this model. Distance uses all three coordinates, including height. The input is the held point's centre. In the installed VISITOR mode it is the tracked body's origin. Neither measures weight or contact pressure.</p>
+<h2>One update</h2>
+<p>For each address, <code>evolve</code> makes one choice. If the point is held and its centre is nearer than <code>RADIUS</code>, health falls by 0.04. Otherwise each healthy axial neighbour adds 0.01. The four directions are north, south, east and west; diagonals and the centre are excluded. Missing neighbours at the boundary contribute nothing. This field does not wrap as Life did.</p>
+<p><code>maxf</code> and <code>minf</code> keep the result between 0 and 1. Near the input, decay takes the whole branch: recovery is not added at the same time. Moving the point while the clock is stopped changes no cell. Trigger or Enter commits one update.</p>
+<table>
+<thead>
+<tr>
+<th>Health</th>
+<th>Helps neighbours recover?</th>
+<th>Tile supports a body?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Greater than 0.5</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>0.2 through 0.5</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Below 0.2</td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><code>redraw</code> uses the new value to change colour and collision. Each wall panel shares its floor tile's material. The wall backing and lower tray stay solid. Changing a state and deciding what that state permits remain separate operations.</p>
+<h2>Complete study — presence.gd</h2>
+<p>Read <code>input_position</code>, <code>neighbours</code>, <code>evolve</code> and <code>step</code> first. They contain the new operation. <code>make_display</code> builds the two views and their support; it is included so the reconstruction is complete. There is one <code>_ready</code>, and every reference is created or declared here.</p>
+<pre><code class="language-gdscript">extends Node3D
+const PointBody = preload(&quot;point_body.gd&quot;)
+const WIDTH := 5
+const LENGTH := 16
+const PITCH := 0.6
+const RADIUS := 1.35
+const DT := 0.1
+const LIMIT := 300
+const VIEW_SCALE := 0.2
+const VIEW_ORIGIN := Vector3(0, 1.02, 0)
+const W := Vector2i(2, 6)
+const DIRECTIONS := [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
+var current: Dictionary = {}
+var materials: Dictionary = {}
+var supports: Dictionary = {}
+var point: XRToolsPickable
+var reading := Label3D.new()
+var ticks := 0
+var chain := false
+var synchronous := true
+var backwards := false
+
+func _ready() -&gt; void:
+    for y in LENGTH:
+        for x in WIDTH:
+            current[Vector2i(x, y)] = 1.0
+    make_display()
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): step())
+    park()
+    reset()
+
+func cell_position(site: Vector2i) -&gt; Vector3:
+    return Vector3((site.x - 2) * PITCH, -0.1, site.y * PITCH)
+
+func view_position(site: Vector2i) -&gt; Vector3:
+    return VIEW_ORIGIN + cell_position(site) * VIEW_SCALE
+
+func input_position() -&gt; Vector3:
+    return (to_local(point.global_position) - VIEW_ORIGIN) / VIEW_SCALE
+
+func neighbours(old: Dictionary, site: Vector2i) -&gt; int:
+    var count := 0
+    for direction in DIRECTIONS:
+        var other: Vector2i = site + direction
+        if old.has(other) and old[other] &gt; 0.5:
+            count += 1
+    return count
+
+func evolve(old: Dictionary, at: Vector3, present: bool) -&gt; Dictionary:
+    var next := old.duplicate()
+    var read: Dictionary = old if synchronous else next
+    var order := old.keys()
+    if backwards:
+        order.reverse()
+    for site: Vector2i in order:
+        var health: float = old[site]
+        if present and cell_position(site).distance_to(at) &lt; RADIUS:
+            next[site] = maxf(0.0, health - 0.08 * DT * 5.0)
+        else:
+            next[site] = minf(1.0, health + 1.0 * DT * 0.1 * neighbours(read, site))
+    return next
+
+func step() -&gt; void:
+    if ticks == LIMIT:
+        return
+    current = evolve(current, input_position(), point.held() and not chain)
+    ticks += 1
+    redraw()
+
+func reset() -&gt; void:
+    ticks = 0
+    for site in current:
+        current[site] = 0.0 if chain else 1.0
+    if chain:
+        current[Vector2i(1, 6)] = 0.6
+        current[W] = 0.495
+    redraw()
+
+func _physics_process(_delta: float) -&gt; void:
+    if not point.held():
+        park()
+
+func park() -&gt; void:
+    point.position = Vector3(-0.65, 1.12, 0.3)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and not event.echo:
+        match event.keycode:
+            KEY_ENTER: step()
+            KEY_R: chain = false; reset()
+            KEY_C: chain = true; reset()
+            KEY_O: synchronous = not synchronous; reset()
+            KEY_V: backwards = not backwards; reset()
+            _: return
+        get_viewport().set_input_as_handled()
+
+func box(size: Vector3, at: Vector3, colour: Color) -&gt; MeshInstance3D:
+    var node := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    node.mesh = mesh
+    node.position = at
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = colour
+    node.material_override = finish
+    add_child(node)
+    return node
+
+func solid(node: MeshInstance3D, size: Vector3) -&gt; CollisionShape3D:
+    var body := StaticBody3D.new()
+    var boundary := CollisionShape3D.new()
+    var shape := BoxShape3D.new()
+    shape.size = size
+    boundary.shape = shape
+    node.add_child(body)
+    body.add_child(boundary)
+    return boundary
+
+func make_display() -&gt; void:
+    var tray := box(Vector3(0.72, 0.04, 2.0), Vector3(0, 0.86, 0.9), Color(&quot;354650&quot;))
+    solid(tray, Vector3(0.72, 0.04, 2.0))
+    box(Vector3(0.1, 0.84, 0.1), Vector3(0, 0.42, 0.9), Color(&quot;bf9469&quot;))
+    var wall := box(Vector3(0.04, 0.38, 2), Vector3(0.55, 1.28, 0.9), Color(&quot;20373a&quot;))
+    solid(wall, Vector3(0.04, 0.38, 2))
+    for site: Vector2i in current:
+        var tile := box(Vector3(0.114, 0.04, 0.114), view_position(site), Color.WHITE)
+        materials[site] = tile.material_override
+        supports[site] = solid(tile, Vector3(0.12, 0.04, 0.12))
+        var panel := box(Vector3(0.02, 0.058, 0.106), Vector3(0.52, 1.15 + site.x * 0.064, site.y * 0.12), Color.WHITE)
+        panel.material_override = materials[site]
+    var at := view_position(W) + Vector3.UP * 0.025
+    for side in [-1, 1]:
+        box(Vector3(0.124, 0.008, 0.008), at + Vector3(0, 0, side * 0.062), Color(&quot;ffd484&quot;))
+        box(Vector3(0.008, 0.008, 0.124), at + Vector3(side * 0.062, 0, 0), Color(&quot;ffd484&quot;))
+    reading.position = Vector3(0, 1.8, 0.6)
+    reading.font_size = 28
+    reading.pixel_size = 0.0014
+    reading.modulate = Color(&quot;213639&quot;)
+    reading.outline_modulate = Color(&quot;f5f0e8&quot;)
+    reading.outline_size = 4
+    add_child(reading)
+
+func redraw() -&gt; void:
+    for site: Vector2i in current:
+        var health: float = current[site]
+        var finish: StandardMaterial3D = materials[site]
+        finish.albedo_color = Color(&quot;a86c88&quot;).lerp(Color(&quot;8cd9be&quot;), health)
+        finish.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if health &lt; 0.2 else BaseMaterial3D.TRANSPARENCY_DISABLED
+        finish.albedo_color.a = 0.18 + health if health &lt; 0.2 else 1.0
+        supports[site].set_deferred(&quot;disabled&quot;, health &lt; 0.2)
+    reading.text = &quot;W (2,6) / HEALTH %.3f / SUPPORT %s\n%s / %s / %.1f s\nTRIGGER / ENTER: STEP   R: FULL   C: CHAIN\nO: SYNC/SCAN   V: REVERSE&quot; % [current[W], &quot;ON&quot; if current[W] &gt;= 0.2 else &quot;OFF&quot;, &quot;SYNC&quot; if synchronous else &quot;SCAN&quot;, &quot;REVERSE&quot; if backwards else &quot;FORWARD&quot;, ticks * DT]
+</code></pre>
+<h2>Unchanged carried object — point_body.gd</h2>
+<p>This is the same PointBody file used in the previous hall. It keeps its small dark sphere, pickup behaviour and action signal. Copy it only if it is not already beside the new script.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Let the edge recover</h2>
+<p>Hold the point's centre about 0.05 metres above W and STEP 21 times without moving it. The value reaches 0.16; the faint tile no longer supplies support. Release the point. Each later Enter press advances recovery without a proximity input. The outer edge of the depleted patch recovers first because it still has healthy neighbours. A wholly empty field has none and will not repair itself merely because you leave.</p>
+<p>Now hold the point directly above W but more than 0.27 metres from its centre. Predict the next update before pressing. Height alone can take it outside the radius. Lower it and repeat. You are testing a three-dimensional distance, not painting onto a two-dimensional grid. Desktop learners can use the museum's established grab operation and Enter while holding the point.</p>
+<h2>Does the order count?</h2>
+<p>This comparison returns to the old-to-next agreement; it does not add another input. Press C. The field begins at zero except (1,6) = 0.600 and W = 0.495. Hand influence is disabled for this comparison. In SYNC, all recovery counts read <code>old</code>. STEP once: W becomes 0.505, but (3,6) remains zero because it read W's old value.</p>
+<p>Press O to select SCAN and reset that same beginning. Now counts read <code>next</code>, including answers already written. STEP: (3,6) becomes 0.01. W's newly healthy value was available before the loop reached its neighbour. Press V to reverse the scan and reset; STEP again. That neighbour now stays at zero. SYNC gives the same answer in either order.</p>
+<p>Make one independent edit: change W's CHAIN beginning from 0.495 to <strong>0.49</strong>. Predict whether the third cell gains anything in forward SCAN, then run it. W reaches exactly 0.5. The condition is strictly greater than 0.5, so the third cell still gains nothing. The threshold, not the rounded appearance of the colour, decides.</p>
+<p>R restores the full field and permits hand input again. O and V preserve the chosen beginning while resetting time. At 300 steps—30 simulated seconds—the study holds its state until reset. Releasing the point does not advance time by itself.</p>
+<p>You leave with an input connection you can name, and two consequences you can distinguish: a value can cease to help its neighbours before it ceases to hold you. The next room asks what happens when the neighbourhood offers more than a count above a threshold.</p></main><footer>One hall, two complete texts. Native museum evidence. Next: CA_SoftRules.</footer></body></html>

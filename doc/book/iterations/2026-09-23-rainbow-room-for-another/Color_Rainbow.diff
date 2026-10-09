@@ -1,0 +1,15 @@
+--- before/commons/maps/Color_Rainbow/final.md
++++ commons/maps/Color_Rainbow/final.md
+@@ -18,7 +18,11 @@
+ return (RAINBOW_THICKNESS * 7.0) / float(maxi(1, rainbow_colors.size()))
+ ```
+ 
+-The bands together keep a thickness of 5.6 metres, measured from the inner edge to the outer edge. That is seven strips of `0.8`, shared out again. More strips each receive less of it; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
++The code keeps a total band thickness of `7 × 0.8`, shared out again whenever the list changes. The arch is scaled down to fit this hall. More strips each receive less of the fixed total; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
++
++![Six, seven, forty-eight and two bands on the same museum arch.](/book-review/doc/book/iterations/2026-09-23-rainbow-room-for-another/four-arrangements.png)
++
++*Four arrangements, seen from the same place. The coloured steps change with the arch; their height and the opening beneath it remain.*
+ 
+ The option called `continuous` still makes forty-eight strips. For each one, the code computes a hue. **HSV** names hue, saturation and value: a place around a colour circle, how far the colour is from grey at that value, and a level that reaches black at zero. Here saturation and value both stay at one. Only hue travels:
+ 

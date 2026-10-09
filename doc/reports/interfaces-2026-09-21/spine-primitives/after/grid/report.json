@@ -1,0 +1,130 @@
+{
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored artifact found, rather than its plinth",
+			"passed": true
+		},
+		{
+			"message": "Readout assembled in the hall",
+			"passed": true
+		},
+		{
+			"message": "Reading position has floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits at reading position",
+			"passed": true
+		},
+		{
+			"message": "Final metre of approach is unobstructed",
+			"passed": true
+		},
+		{
+			"message": "PreviousPage retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "PreviousPage inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "PreviousPage within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "PreviousPage has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "AutoPages retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "AutoPages inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "AutoPages within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "AutoPages has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "NextPage retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "NextPage inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "NextPage within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "NextPage has unobstructed interaction ray from operating pose",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.82581589370966,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/GridLines/ArchivePanel/PreviousPage/InteractableAreaButton",
+			"horizontal_distance": 0.444343894720078,
+			"label": "PreviousPage",
+			"position": [
+				8.42000007629395,
+				0.825815796852112,
+				12.9437465667725
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.82581589370966,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/GridLines/ArchivePanel/AutoPages/InteractableAreaButton",
+			"horizontal_distance": 0.406252861022949,
+			"label": "AutoPages",
+			"position": [
+				8.60000038146973,
+				0.825815796852112,
+				12.9437465667725
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.82581589370966,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/GridLines/ArchivePanel/NextPage/InteractableAreaButton",
+			"horizontal_distance": 0.444343894720078,
+			"label": "NextPage",
+			"position": [
+				8.78000068664551,
+				0.825815796852112,
+				12.9437465667725
+			]
+		}
+	],
+	"failures": [],
+	"panel": {
+		"height_above_floor": 1.20000014454126,
+		"position": [
+			8.60000038146973,
+			1.20000004768372,
+			12.6499996185303
+		]
+	},
+	"passed": true,
+	"room": "Point_Line_Grid",
+	"scope": "Actual museum hall; supplied stroke; desktop images and layout measurements. No headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	]
+}

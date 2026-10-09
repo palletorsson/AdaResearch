@@ -1,0 +1,115 @@
+{
+  "checks": 42,
+  "failures": [],
+  "limits": [
+    "Source grid, not full museum staging",
+    "Static crossing poses; human timing and headset comfort untested",
+    "Straight capsule walks do not rule out detours or jumping"
+  ],
+  "observations": {
+    "aisle_12.0": [
+      1.0,
+      1.0
+    ],
+    "aisle_26.0": [
+      1.0,
+      1.0
+    ],
+    "blade_X": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 10.0109596252441,
+      "y": 3.00093150138855
+    },
+    "blade_Y": {
+      "lowest": -0.00178731582127512,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 10.0,
+      "y": 0.000860158179420978
+    },
+    "blade_Z": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 10.0102272033691,
+      "y": 3.00092816352844
+    },
+    "flat_X": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 14.0332698822021,
+      "y": 0.000933608564082533
+    },
+    "flat_XYZ": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 14.0332431793213,
+      "y": 0.000933949195314199
+    },
+    "flat_Y": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 14.0000247955322,
+      "y": 0.000934752693865448
+    },
+    "flat_Z": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 14.0333080291748,
+      "y": 0.000934196868911386
+    },
+    "gradient_X": {
+      "lowest": -0.506875872612,
+      "reached": false,
+      "stop_reason": "blocked",
+      "travel": 6.89954566955566,
+      "y": -0.506875872612
+    },
+    "gradient_XYZ": {
+      "lowest": -0.862710177898407,
+      "reached": false,
+      "stop_reason": "blocked",
+      "travel": 5.22162628173828,
+      "y": -0.861372292041779
+    },
+    "gradient_Y": {
+      "lowest": 0.0,
+      "reached": true,
+      "stop_reason": "arrived",
+      "travel": 14.0332927703857,
+      "y": 0.000933839415665716
+    },
+    "gradient_Z": {
+      "lowest": 0.0,
+      "reached": false,
+      "stop_reason": "blocked",
+      "travel": 4.66173362731934,
+      "y": 0.0493399985134602
+    },
+    "return_(18.5, 3.0, 17.5)": {
+      "lowest": 0.00029594823718071,
+      "reached": false,
+      "stop_reason": "arrived",
+      "travel": 6.00085258483887,
+      "y": 0.000939807621762156
+    },
+    "return_(35.5, 3.0, 13.5)": {
+      "lowest": 0.00025996845215559,
+      "reached": false,
+      "stop_reason": "arrived",
+      "travel": 6.00478553771973,
+      "y": 0.000942089827731252
+    },
+    "tunnel_sweep": [
+      1.0,
+      1.0
+    ]
+  },
+  "quick": false
+}

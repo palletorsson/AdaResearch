@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point One | Making after Day Zero</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:#f6f3eb;color:#292b29;font:19px/1.75 Georgia,serif}main{max-width:1100px;margin:auto;padding:56px 28px}header{padding-bottom:35px;border-bottom:1px solid #d4d1c7}header h1{font:normal clamp(38px,6vw,68px)/1.12 Georgia,serif;max-width:900px;margin:18px 0}header>p{max-width:760px}a{color:#864752;text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:10px 22px;font:14px/1.6 system-ui,sans-serif}.eyebrow,.meta,summary{font:12px/1.6 system-ui,sans-serif}.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:#63645f}.meta{color:#63645f}article,.excerpt{max-width:750px;margin:65px auto}article h1{font-size:34px;font-weight:normal;line-height:1.25}h2{font-size:28px;font-weight:normal}p{margin:0 0 23px}section{padding-top:38px}details{border-top:1px solid #d4d1c7;padding:20px 0;margin:25px 0}summary{cursor:pointer;font-size:15px;font-weight:600}details[open]>summary{margin-bottom:24px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:40px;font-size:16px}.comparison>div{min-width:0}.comparison h1{font-size:26px}pre{padding:18px;background:#e9e6dd;overflow:auto;font:13px/1.6 Consolas,monospace}code{font:.86em Consolas,monospace}pre code{font:inherit}.footnote{font-size:14px;overflow-wrap:anywhere}.footnote p{margin:10px 0}.excerpt{border-left:3px solid #ac7c7a;padding-left:24px}footer{font:13px/1.6 system-ui,sans-serif;border-top:1px solid #d4d1c7;padding-top:24px}a:focus-visible,summary:focus-visible{outline:3px solid #557a85;outline-offset:5px}@media(max-width:760px){body{font-size:18px}main{padding:28px 20px}.comparison{display:block}.comparison>div{margin-bottom:40px}}@media print{nav,details,footer{display:none}body{background:white;font-size:12pt}main{padding:0}article{break-before:page}}
+.reading pre{font-size:14px;border-left:2px solid #859a8b;background:#ecede5;line-height:1.65}.reading pre code{font:inherit}.reading pre{white-space:pre-wrap;overflow-wrap:anywhere}.comparisons{margin-top:35px}.comparison pre{font-size:12px}
+header{margin-bottom:3rem}.turn-page{margin:4rem auto;padding-top:2rem;border-top:1px solid #cdcfc3;max-width:740px}.turn-page a{font-size:1.1rem}.editorial{margin:4rem auto;max-width:740px}.reading{margin-bottom:2rem}
+.downloads{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}
+.downloads a{border:1px solid #bfc4b5;border-radius:3px;padding:9px 14px;text-decoration:none;font:14px/1.4 system-ui,sans-serif}
+.reading h2{font-size:1.35em;margin:2.3em 0 1em}
+nav{flex-wrap:wrap;gap:12px} .editorial li{margin:.6em 0}
+@media print{header,.downloads,.editorial,.turn-page{display:none}}
+</style></head><body><main>
+<header><p class="eyebrow">Point One · Making passage · Prepared in Day Zero</p>
+<nav aria-label="Reading routes"><a href="/book-review/doc/book/iterations/2026-09-29-point-one-read-then-make/index.html#reading">← Read the encounter</a><a href="index.html#reading">Day Zero</a></nav>
+<div class="downloads"><a href="point-one-study.zip" download>Download the Point One study</a></div></header>
+<article class="reading" id="making"><h1>Point One — build the difference</h1>
+<p>Use <a href="point-one/README.md">the Point One study</a> in the environment prepared in <a href="index.html#reading">Day Zero</a>. Its <code>study.tscn</code> inherits the same <code>base.tscn</code> and replaces the greeting with three point stations.</p>
+<p>The left station has no sphere. The middle and right stations look alike. Only the right one has a collision body. This study supplies a view for making and comparing; walking and grabbing belong to the museum encounter.</p>
+<p>Open <code>position.gd</code>. It contains the complete first step:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    var point_position := Vector3(0.0, 1.12, 0.0)
+</code></pre>
+<p><code>extends Node3D</code> makes the script part of a station with a position in 3D. Godot runs <code>_ready()</code> when the station enters the scene. The indented lines go inside that function. <code>var</code> gives a value a name; <code>:=</code> lets Godot infer the kind of value from what follows. Here that value is a <code>Vector3</code>, holding X, Y and Z.</p>
+<p>Changing these numbers alone draws nothing. Godot may warn that the variable is unused: it is waiting for the next step. The position is local to this station, 1.12 metres up its Y direction. The three stations already occupy different places in the scene.</p>
+<h2>Give the position a visible body</h2>
+<p>In <code>visible.gd</code> the same first line is followed by the construction of a visible sphere. The full file is supplied; these are its additions inside <code>_ready()</code>:</p>
+<pre><code class="language-gdscript">var radius := 0.14
+var sphere := SphereMesh.new()
+sphere.radius = radius
+sphere.height = radius * 2.0
+
+var visible_point := MeshInstance3D.new()
+visible_point.mesh = sphere
+visible_point.position = point_position
+add_child(visible_point)
+</code></pre>
+<p><code>SphereMesh</code> is the shape description; <code>MeshInstance3D</code> is the node that displays it. <code>.new()</code> creates each part. Assigning <code>mesh</code> gives the node its shape, and assigning <code>position</code> puts it at the place we kept. <code>add_child()</code> attaches it to this station in the scene.</p>
+<p>Change <code>1.12</code> in the first line to <code>1.8</code> and run again: the middle sphere is higher. Return it to <code>1.12</code>. Change <code>radius</code> from <code>0.14</code> to <code>0.3</code>: the sphere is larger, while its centre stays put. Its height follows the radius because the code calculates it as <code>radius * 2.0</code>.</p>
+<p>You have changed a body and an address separately. These same choices will let you arrange more than one point.</p>
+<h2>Give the visible body a boundary</h2>
+<p><code>solid.gd</code> keeps all of <code>visible.gd</code> and adds:</p>
+<pre><code class="language-gdscript">var solid := StaticBody3D.new()
+solid.position = point_position
+
+var sphere_shape := SphereShape3D.new()
+sphere_shape.radius = radius
+var collider := CollisionShape3D.new()
+collider.shape = sphere_shape
+
+solid.add_child(collider)
+add_child(solid)
+</code></pre>
+<p>The fixed physics body and the visible mesh are separate children of the station. The collision shape belongs to the physics body. Both use <code>point_position</code> and <code>radius</code>, so their centres and surfaces agree.</p>
+<p>To see the otherwise invisible boundary, enable <strong>Debug → Visible Collision Shapes</strong> in the Godot editor, then run the study. Change only <code>sphere_shape.radius = radius</code> to <code>sphere_shape.radius = 0.35</code>. The physics boundary expands; the visible sphere stays small. Undo that change to make them coincide again.</p>
+<p>This is a choice you can now author: how much room must a body leave around something it sees? A collision test responds to the boundary you supplied.</p>
+<h2>A first arrangement</h2>
+<p>Select the <code>Solid</code> station in <code>study.tscn</code> and duplicate it. Move the copy using its Position in the Inspector. Both copies run the same script, so a change to <code>radius</code> in that script changes both. Their station positions remain separate.</p>
+<p>Make a small arrangement from copies of <code>Visible</code> and <code>Solid</code>. Give them space, crowd them together, or let them overlap. The geometry can look the same while its permissions differ. The inspector moves each station; <code>point_position</code> places the sphere within it. You have begun working with two references without needing to construct the whole coordinate room.</p>
+<h2>What we borrow next</h2>
+<p>The museum's black point uses <code>commons/primitives/point/interactive_point_origin.tscn</code> and the held branch of <code>point_condition.gd</code>. That branch supplies the dark finish, radius and coordinate identity. Its inherited pickup system manages hands, holding and release. These scripts are part of the full AdaResearch project, with XR Tools and museum dependencies; they are not included in this small standalone study.</p>
+<p>The first building exercise stops at position, visible shape and fixed collision. A portable pickup starter is a further teaching step. Point Lines can connect positions you already know how to keep and show.</p>
+<h2>A further look inside the museum</h2>
+<p>These three examples explain the coordinate cards and arrival target in the main text. They belong to the museum's existing components; they are not further lines to paste into <code>solid.gd</code>.</p>
+<h3>A shorter address</h3>
+<p>The report accepts a scene node called <code>point</code> and reads its world position:</p>
+<pre><code class="language-gdscript">func report_position(point: Node3D) -&gt; String:
+    var p := point.global_position
+    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
+</code></pre>
+<p><code>%.2f</code> rounds each component to two decimal places in the text: <code>1.231</code> and <code>1.234</code> both print as <code>1.23</code>. The function returns a string. The museum card displays that string; this function alone does not create a card. Formatting leaves the stored position unchanged.</p>
+<h3>Two references</h3>
+<p>Here <code>point</code> is the held body and <code>frame</code> is the coordinate frame, both existing <code>Node3D</code> objects in the museum:</p>
+<pre><code class="language-gdscript">var world_p := point.global_position
+var local_p := frame.to_local(world_p)
+</code></pre>
+<p><code>global_position</code> supplies the world address. <code>to_local()</code> expresses it relative to the frame, accounting for its position, orientation and scale. Both readings describe the same body.</p>
+<h3>Room to arrive</h3>
+<p>This reduced distance test belongs to a target node with its own position:</p>
+<pre><code class="language-gdscript">@export var catch_radius: float = 0.45
+@export var catch_height: float = 1.20
+
+func accepts_position(p: Vector3) -&gt; bool:
+    var centre := global_position + Vector3(0.0, catch_height, 0.0)
+    return p.distance_to(centre) &lt;= catch_radius
+</code></pre>
+<p><code>p</code> is the point's world position. The target's centre is 1.20 metres above its origin. <code>distance_to()</code> measures the gap; <code>&lt;=</code> accepts 0.45 metres or less. The exported values are editable parameters.</p>
+<p>The actual museum target also remembers whether the point is already inside, rearms when it leaves, and releases the falling balls on entry. This function isolates the acceptance test; it does not supply those other actions.</p></article>
+<div class="turn-page"><p><a href="point-one/position.gd">Position script</a> · <a href="point-one/visible.gd">Visible script</a> · <a href="point-one/solid.gd">Solid script</a></p>
+<p><a href="/book-review/doc/book/iterations/2026-09-29-point-one-read-then-make/index.html#reading">Return to the encounter →</a></p>
+<p class="meta">The study inherits the supplied base. Native construction and collision checks pass; this has not been trialled with a beginner or on a headset.</p></div>
+</main></body></html>

@@ -1,0 +1,190 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "the four existing corridor conditions are loaded",
+      "passed": true
+    },
+    {
+      "name": "museum walker and existing light switch are available",
+      "passed": true
+    },
+    {
+      "name": "empty station has its label but no hidden body",
+      "passed": true
+    },
+    {
+      "name": "small meshes start with equal radii and heights",
+      "passed": true
+    },
+    {
+      "name": "actual walker crosses the labelled absence",
+      "passed": true
+    },
+    {
+      "name": "actual walker crosses the visible sphere",
+      "passed": true
+    },
+    {
+      "name": "actual walker meets the solid sphere",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corridor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: absence",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: surface",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: solid",
+      "passed": true
+    },
+    {
+      "name": "printed replacement exists uniquely in source",
+      "passed": true
+    },
+    {
+      "name": "actual artifact with printed edits compiles",
+      "passed": true
+    },
+    {
+      "name": "height edit moves both small surfaces",
+      "passed": true
+    },
+    {
+      "name": "height edit also moves the solid boundary",
+      "passed": true
+    },
+    {
+      "name": "edited position still creates no sphere at the empty station",
+      "passed": true
+    },
+    {
+      "name": "pedestal centre uses its separate value",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised",
+      "passed": true
+    },
+    {
+      "name": "printed replacement exists uniquely in source",
+      "passed": true
+    },
+    {
+      "name": "actual artifact with printed edits compiles",
+      "passed": true
+    },
+    {
+      "name": "radius edit grows both small meshes with correct full height",
+      "passed": true
+    },
+    {
+      "name": "same value grows the small solid boundary",
+      "passed": true
+    },
+    {
+      "name": "large pedestal sphere keeps its own dimensions",
+      "passed": true
+    },
+    {
+      "name": "enlarged visible sphere remains passable",
+      "passed": true
+    },
+    {
+      "name": "enlarged solid sphere stops the same walker earlier",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: grown",
+      "passed": true
+    },
+    {
+      "name": "printed replacement exists uniquely in source",
+      "passed": true
+    },
+    {
+      "name": "actual artifact with printed edits compiles",
+      "passed": true
+    },
+    {
+      "name": "boundary edit leaves both rendered radii unchanged",
+      "passed": true
+    },
+    {
+      "name": "shared boundary edit doubles both collision spheres",
+      "passed": true
+    },
+    {
+      "name": "invisible growth stops the same walker earlier",
+      "passed": true
+    },
+    {
+      "name": "actual artifact with printed edits compiles",
+      "passed": true
+    },
+    {
+      "name": "restored source restores matching shape and contact",
+      "passed": true
+    },
+    {
+      "name": "existing wall button removes the directional sun",
+      "passed": true
+    },
+    {
+      "name": "turning off sunlight preserves collision and fill",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sun-off",
+      "passed": true
+    },
+    {
+      "name": "production artifact source remains unchanged",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "absent": [
+      7.5,
+      0.0,
+      2.5
+    ],
+    "baseline_contact": {
+      "distance_to_centre": 0.46875,
+      "hit": "PointCollision"
+    },
+    "enlarged_boundary_contact": {
+      "distance_to_centre": 0.614062309265137,
+      "hit": "PointCollision"
+    },
+    "pedestal": [
+      8.5,
+      0.0,
+      12.5
+    ],
+    "solid": [
+      7.5,
+      0.0,
+      8.5
+    ],
+    "visible": [
+      7.5,
+      0.0,
+      5.5
+    ]
+  },
+  "passed": true,
+  "room": "Point_One",
+  "scope": "Existing museum hall; printed source substitutions in memory at original placements, actual desktop CharacterBody3D sweeps and existing switch event. Original renderer masks retained for dynamic script variants. No physical headset or learner test."
+}

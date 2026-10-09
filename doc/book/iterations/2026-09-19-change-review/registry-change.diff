@@ -1,0 +1,45 @@
+--- before/commons/artifacts/registry/change.json
++++ commons/artifacts/registry/change.json
+@@ -790,7 +790,7 @@
+       },
+       "name": "FTC Bridge",
+       "lookup_name": "ftc_bridge",
+-      "description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",
++      "description": "An arch and travelling pulse introduce endpoint difference. Configured evidence can add the curve’s signed rate and a 512-interval trapezoid comparison with endpoint heights. The symmetric hump returns to its starting height despite rising and falling. With evidence:longhand and reveal_on_request:true, COMPARE TOTALS reveals or hides endpoint readings and the numerical comparison after a prediction. This finite comparison illustrates net change; reconstructing absolute height also needs a starting value.",
+       "scene": "res://algorithms/change/ftc_bridge.tscn",
+       "category": "change",
+       "sequence": "change",
+@@ -848,14 +848,14 @@
+     "riemann_sum_workbench": {
+       "name": "Riemann Sum Workbench",
+       "lookup_name": "riemann_sum_workbench",
+-      "description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x) on [0, 5]; a live readout shows Σ, the true ∫ ≈ 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit — at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
++      "description": "A finite-area workbench for f(x) = 0.5 + 0.4*sin(2x) + 0.15*cos(5x) on [0,5]. The count slider selects 4, 8, 16, 32, 64 or 128 rectangles. The separate reference is a 4096-midpoint estimate (about 2.86384), not an exact integral; six slider stops do not reach the limit. With comparison:true, inspect individual contributions, compare MID/RIGHT/LEFT rules, hold a picture and total, then reveal or hide the reference. The difference bar caps at 0.05; its numeric readout retains the discrepancy.",
+       "scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+       "category": "change",
+       "interaction": "grab_slide",
+       "sequence": "change",
+       "artifact_type": "change",
+       "qfep_term": "F",
+-      "capacity": "WALK the integration limit",
++      "capacity": "COMPARE finite contributions, sampling rules and totals",
+       "dev_themes": [
+         "change",
+         "calculus",
+@@ -937,14 +937,14 @@
+     "tangent_slope_workbench": {
+       "name": "Tangent Slope Workbench",
+       "lookup_name": "tangent_slope_workbench",
+-      "description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8·cos(2x) − 0.75·sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal — the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench — same f, differentiation vs. integration.",
++      "description": "An interactive workbench for function value and local rate on [0,5], sharing its smooth function with riemann_sum_workbench. The base slider moves a sample beside an analytic tangent and derivative plot. With comparison:true, begin with two samples and a finite secant: STEP changes the nonzero interval; DERIVATIVE reveals the separate analytic calculation. At x=1 a wide secant falls while the local derivative rises. The near-zero display threshold is not an extremum detector. Slider position is the independent variable, not elapsed time.",
+       "scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+       "category": "calculus",
+       "interaction": "grab_slide",
+       "sequence": "change",
+       "artifact_type": "change",
+       "qfep_term": "F",
+-      "capacity": "WALK the derivative slope",
++      "capacity": "COMPARE finite change with local rate",
+       "dev_themes": [
+         "change",
+         "calculus",

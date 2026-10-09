@@ -1,0 +1,617 @@
+--- before/algorithms/randomness/simplexnoise/noise_arch.gd
++++ after/algorithms/randomness/simplexnoise/noise_arch.gd
+@@ -0,0 +1,111 @@
++extends Node3D
++## One existing field wrapped over a walk-through arch. Same mapping on both sides.
++## Display uses vertex displacement; the collider receives identical triangles.
++const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
++const U := 56
++const V := 28
++const WIDTH := 1.35
++const HEIGHT := 2.7
++const LENGTH := 2.0
++const DEPTH := 0.55
++var work: Node3D
++var surface: MeshInstance3D
++var collider: CollisionShape3D
++var marker: MeshInstance3D
++var status: Label3D
++var raw := PackedFloat32Array()
++var vertices := PackedVector3Array()
++var displaced := PackedVector3Array()
++var indices := PackedInt32Array()
++var colours := PackedColorArray()
++var reference_mesh: ArrayMesh
++var plate := false
++var held := false
++var revision := 0
++var _signature := ""
++
++func build(source: Node3D, title: String) -> void:
++	name="NoiseArch";work=source
++	# The map's source roots are at y=1.1. Feet stay on the museum floor.
++	position=Vector3(-.25,-1.1,-5.1)
++	surface=MeshInstance3D.new();surface.name="FieldSurface";add_child(surface)
++	var material:=ShaderMaterial.new();material.shader=load("res://algorithms/randomness/simplexnoise/noise_arch.gdshader")
++	surface.material_override=material
++	var body:=StaticBody3D.new();body.name="SameSurfaceCollision";add_child(body)
++	collider=CollisionShape3D.new();body.add_child(collider)
++	var sphere:=SphereMesh.new();sphere.radius=.055;sphere.height=.11
++	marker=MeshInstance3D.new();marker.mesh=sphere;marker.material_override=Kit.emissive(Color(1,.35,.63),1);add_child(marker)
++	status=Label3D.new();status.font_size=36;status.pixel_size=.0025
++	status.position=Vector3(0,3.02,-1.06);status.rotation.y=PI;status.text=title;status.set_meta("title",title);add_child(status)
++	# Pale ribs retain the unmodified outline at both entrances.
++	var lines:=PackedVector3Array()
++	for z in [-1.005,1.005]:
++		for i in range(U):
++			lines.append(base_at(float(i)/U,(z+1)/2));lines.append(base_at(float(i+1)/U,(z+1)/2))
++	var a:Array=[];a.resize(Mesh.ARRAY_MAX);a[Mesh.ARRAY_VERTEX]=lines
++	var frame:=MeshInstance3D.new();var mesh:=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES,a)
++	frame.mesh=mesh;frame.material_override=Kit.emissive(Color(.9,.88,.77),.4);add_child(frame)
++	refresh(false,Vector2.ZERO)
++
++func base_at(u: float, v: float) -> Vector3:
++	var angle:float=PI*u
++	return Vector3(cos(angle)*WIDTH,sin(angle)*HEIGHT,(v-.5)*LENGTH)
++
++func weight_at(u: float, v: float) -> float:
++	return smoothstep(0,.12,minf(u,1-u))*smoothstep(0,.12,minf(v,1-v))
++
++func occupied() -> bool:
++	var bodies:Array=get_tree().get_nodes_in_group("em_walker")
++	bodies.append_array(get_tree().get_nodes_in_group("player_body"))
++	for body in bodies:
++		if not body is Node3D:continue
++		var p:Vector3=to_local(body.global_position)
++		if absf(p.x)<1.85 and absf(p.z)<1.25 and p.y>-.3 and p.y<3.4:return true
++	return false
++
++func refresh(flat: bool, sample: Vector2) -> void:
++	var signature:String=JSON.stringify(work.generator_readback())+str(flat)
++	if signature!=_signature:
++		held=occupied() and revision>0
++		if not held:
++			plate=flat;rebuild();_signature=signature
++	else: held=false
++	status.text=str(status.get_meta("title"))+ ("\nHeld while occupied" if held else "\nSame field / another body")
++	# Five shared addresses are exact vertices of this denser sampling grid.
++	if not displaced.is_empty():
++		var u:int=clampi(roundi((sample.x+2)/3.5*U),0,U)
++		var v:int=clampi(roundi((sample.y+2)/3.5*V),0,V)
++		var direction:=Vector3(cos(PI*float(u)/U),sin(PI*float(u)/U),0)
++		marker.position=displaced[v*(U+1)+u]-direction*.075
++
++func rebuild() -> void:
++	vertices.clear();displaced.clear();indices.clear();raw.clear();colours.clear()
++	var samples:=PackedVector2Array();var coords:=PackedVector2Array();var normals:=PackedVector3Array()
++	var depth:float=0.0 if plate else DEPTH
++	for j in range(V+1):
++		var v:float=float(j)/V
++		for i in range(U+1):
++			var u:float=float(i)/U
++			var value:float=work.sample_at(-2+3.5*u,-2+3.5*v)
++			var weight:float=weight_at(u,v)
++			var base:Vector3=base_at(u,v)
++			var direction:=Vector3(cos(PI*u),sin(PI*u),0)
++			vertices.append(base);raw.append(value);samples.append(Vector2(value,weight));coords.append(Vector2(u,v));normals.append(direction)
++			displaced.append(base+direction*value*weight*depth)
++			colours.append(Color(.16,.22,.42).lerp(Color(.96,.86,.48),(value+1)*.5))
++	for j in range(V):
++		for i in range(U):
++			var k:int=j*(U+1)+i
++			indices.append_array(PackedInt32Array([k,k+1,k+U+1,k+1,k+U+2,k+U+1]))
++	var a:Array=[];a.resize(Mesh.ARRAY_MAX)
++	a[Mesh.ARRAY_VERTEX]=vertices;a[Mesh.ARRAY_NORMAL]=normals;a[Mesh.ARRAY_TEX_UV]=samples
++	a[Mesh.ARRAY_TEX_UV2]=coords;a[Mesh.ARRAY_COLOR]=colours;a[Mesh.ARRAY_INDEX]=indices
++	var mesh:=ArrayMesh.new();mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,a)
++	surface.mesh=mesh;surface.custom_aabb=AABB(Vector3(-1.95,-.05,-1.1),Vector3(3.9,3.35,2.2))
++	surface.material_override.set_shader_parameter("relief_depth",depth)
++	a[Mesh.ARRAY_VERTEX]=displaced
++	reference_mesh=ArrayMesh.new();reference_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,a)
++	var faces:=PackedVector3Array()
++	for index in indices: faces.append(displaced[index])
++	var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);shape.backface_collision=true
++	collider.shape=shape;revision+=1
+--- before/algorithms/randomness/simplexnoise/noise_arch.gdshader
++++ after/algorithms/randomness/simplexnoise/noise_arch.gdshader
+@@ -0,0 +1,20 @@
++shader_type spatial;
++render_mode cull_disabled;
++// UV = signed sample, boundary weight. UV2 locates the point on our arch.
++uniform float relief_depth = 0.55;
++void vertex() {
++    float angle = UV2.x * 3.14159265359;
++    vec3 direction = vec3(cos(angle), sin(angle), 0.0);
++    VERTEX += direction * UV.x * UV.y * relief_depth;
++}
++void fragment() {
++    vec3 face = cross(dFdx(VERTEX), dFdy(VERTEX));
++    if (length(face) > 0.000001) {
++        face = normalize(face);
++        NORMAL = dot(face, VIEW) < 0.0 ? -face : face;
++    }
++    ALBEDO = COLOR.rgb;
++    EMISSION = COLOR.rgb * 0.08;
++    METALLIC = 0.12;
++    ROUGHNESS = 0.65;
++}
+--- before/algorithms/randomness/simplexnoise/pair_study.gd
++++ after/algorithms/randomness/simplexnoise/pair_study.gd
+@@ -3,6 +3,7 @@
+ const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ const SAMPLES: Array[Vector2] = [Vector2(-1,0.5),Vector2(1,-1),Vector2(-1,-1),Vector2.ZERO,Vector2(0.5,1)]
+ var pair: Array[Node3D] = []
++var arches: Array[Node3D] = []
+ var markers: Array[MeshInstance3D] = []
+ var sample_index: int = 0
+ var plate: bool = false
+@@ -45,6 +46,11 @@
+ 		terrain.add_child(Kit.box_collider(Vector3(1.2,0.5,1.2),Vector3(0,-0.75,0)))
+ 		var caption:=Label3D.new();caption.text="A 3D FIELD / ANOTHER SLICE\n0.5 seconds per step";caption.font_size=22;caption.pixel_size=0.0015
+ 		caption.position=Vector3(0,-0.65,-0.61);caption.rotation_degrees.y=180;terrain.add_child(caption)
++	# Opt-in belongs to this map; other pair studies keep their existing footprint.
++	if str(first.get_meta("config_enclosure","none")) == "arches":
++		for i in range(pair.size()):
++			var arch:Node3D=load("res://algorithms/randomness/simplexnoise/noise_arch.gd").new()
++			pair[i].add_child(arch);arch.build(pair[i],"OPEN SIMPLEX 2" if i==0 else "PERLIN");arches.append(arch)
+ 	refresh()
+ 
+ func _process(delta: float) -> void:
+@@ -83,6 +89,7 @@
+ 		var work: Node3D=pair[i]
+ 		markers[i].position=Vector3(p.x,(0.0 if plate else rec.values[i]*work.noise_field.amplitude)+0.36,p.y)
+ 		work._refresh_witness()
++	for arch in arches:arch.refresh(plate,p)
+ 	label.text="SAMPLE %d/5 · x %.1f z %.1f · %s\n"%[sample_index+1,p.x,p.y,rec.view.to_upper()]
+ 	label.text+="simplex %+.4f | perlin %+.4f\n"%[rec.values[0],rec.values[1]]
+ 	label.text+="perlin - simplex = %+.4f"%rec.difference
+--- before/commons/maps/Noise_Perlin_Simplex/artifacts.md
++++ after/commons/maps/Noise_Perlin_Simplex/artifacts.md
+@@ -1,13 +1,13 @@
+ # The retained cast
+ 
+-All five current placements remain. Original structure and utilities remain.
++All five current placements remain. The existing structure and utility rows remain, shifted after six new entrance rows. The pair now also supplies two walk-through arches.
+ 
+ | Work | Role | Encounter |
+ | --- | --- | --- |
+-| simplex_noise | primary, first | Replay the OpenSimplex2 field; follow a shared sample and inspect its display mapping. |
+-| perlin_noise | primary, second | Compare the actual Perlin generator; deliberately change a condition and restore it. |
+-| perlin_noise_terrain | primary, third | A moving 3D-field slice, raised above a low plinth. Its inherited name does not establish its basis. |
+-| dark_sphere | primary, fourth | A separate pulse continuing through the pair's MATCH operation. |
++| simplex_noise | primary, first | Replay the OpenSimplex2 field; follow a shared sample between its cube display and walk-through arch. |
++| perlin_noise | primary, second | Compare the actual Perlin generator on the same display and arch geometry; change a condition and restore it. |
++| perlin_noise_terrain | supporting return | A moving 3D-field slice, raised above a low plinth. Its inherited name does not establish its basis. |
++| dark_sphere | supporting return | A separate pulse continuing through the pair's MATCH operation. |
+ | configurable_portal | secondary route fixture | Labelled “Lab Path - not connected”, inactive pending a working optional route. |
+ 
+ The 100-metre noise_terrain had already been removed from map_data in the earlier repair. Its obsolete museum row is archived before being replaced by the current five-work map. No additional authored artifact is removed in this pass.
+--- before/commons/maps/Noise_Perlin_Simplex/encounter-notes.md
++++ after/commons/maps/Noise_Perlin_Simplex/encounter-notes.md
+@@ -1,3 +1,19 @@
++# The field also dresses a room — 25 September 2026
++
++The museum map opts into `enclosure:arches` on its existing `simplex_noise#study:compare` placement. PairStudy attaches one NoiseArch to each of the original roots. Other placements retain their previous behaviour. Both arches call their root's existing `sample_at`; no third generator is created. Existing shared and individual controls remain the only controls.
++
++Each base arch is 2.7 m wide, 2.7 m high and 2 m deep. Its 57 × 29 sample vertices map the same [-2, 1.5]² domain used by the cube centres, at closer intervals. Signed samples and a pinned-boundary weight feed the vertex shader; the added displacement is at most .55 m. The CPU uses the same expression to build physical wall triangles. Floor, feet and entrance ribs stay fixed. Collision faces are built directly from the displaced positions, avoiding render-mesh quantisation.
++
++VIEW removes the added relief, preserving samples, colours, seed and supplied arch geometry. SAMPLE follows the five existing addresses on all four surfaces. FREQ, OCTAVES, REGEN, REPLAY and MATCH flow through the same source readback. An occupied arch retains its old mesh and collider until departure, labels that hold, and then takes the latest settings. This accommodation means the arch can temporarily differ from its display while occupied.
++
++The hall expands from 13 × 15 to 13 × 21. Six floor rows after row 1 create a clear approach. Original later cells shift six rows; all five works remain. Source roots move to cells (3,13) and (8,13); arches stand before them with feet at museum y=0. The controls clear the museum entrance. Authored map placement remains authoritative; no live museum bake or save is replaced.
++
++The chapter gains one encounter between the paired display comparison and its account of what a controlled comparison withholds. Its four original code excerpts, supporting sheet/orb returns and blob-culture ending remain. The source/core primary pair remains the pair; the old companion list's “four primary” wording is corrected to supporting returns for the sheet and orb.
++
++Native test details and photographs: `doc/book/iterations/2026-09-25-noise-archways/index.html`. Tracked headset reach, collision comfort, visual readability and Quest performance still require a session in the device.
++
++---
++
+ # The field remains; its expression changes — encounter notes
+ 
+ 24 September 2026. Current implementation and verification for this pass.
+--- before/commons/maps/Noise_Perlin_Simplex/field_notes.md
++++ after/commons/maps/Noise_Perlin_Simplex/field_notes.md
+@@ -1,3 +1,11 @@
++# Current addition — 25 September 2026
++
++Paired walk-through arches extend the existing comparison into the space around the visitor. See [encounter notes](encounter-notes.md) for current geometry, six-row placement shift, shared controls and occupied-wall behaviour. The older placement and role statements below describe their dated passes. The current primary pair is simplex_noise / perlin_noise; the sheet and dark orb remain supporting returns.
++
++Native captures and final check record: `doc/book/iterations/2026-09-25-noise-archways/index.html`. The test uses supplied museum body movement and mouse input. It does not establish tracked headset comfort or a learning outcome.
++
++---
++
+ # Noise Perlin Simplex — what counts as the same
+ 
+ Current review: `/research/possible-bodies/noise-perlin-simplex.html`. Next: the brief Lab_Path coda and its optional connection; the main museum route continues into Cellular Automata.
+--- before/commons/maps/Noise_Perlin_Simplex/final.md
++++ after/commons/maps/Noise_Perlin_Simplex/final.md
+@@ -51,6 +51,16 @@
+ 
+ Return to relief. The same answers regain height. In Noise Space 10 we joined height to collision so a change could stop a foot. These cubes are a visual comparison with a walking aisle between them. A visible surface and a surface that carries us ask for different work from the implementation.
+ 
++Turn back towards the entrance. Two arches stand before the displays. Step beneath one and look up. The same field that gave the little cubes their heights now presses into the wall around your shoulders. Your feet stay on the flat museum floor. What you were looking across has become something you can stand inside.
++
++The arches begin with the same curve. They ask their respective fields for values across the same patch, more closely spaced than the cubes, and spend those answers on relief. Come out and press VIEW again. The little landscapes flatten; the arches remain curved. Their colour remains too. We supplied that curve before asking either noise function for anything. A surface can look grown while borrowing its room for us from a shape we chose in advance.
++
++![Two noise fields wrapped over matching walk-through arches](images/noise-archways.png)
++
++*Native museum view. The arches and cube displays read the same two fields. VIEW removes the added relief; it leaves the supplied arches standing.*
++
++Follow SAMPLE back from a cube to the pink point beneath its arch. The address returns on another body. Change the frequency from outside and walk underneath again. Here the displaced surface also has collision; the arch holds its current shape while someone is inside. We have made that accommodation too.
++
+ Matching conditions costs us possibilities. One shared finish helps compare shape while withholding what another colour treatment might reveal. Half-metre samples give the field a body we can inspect; variation between those addresses has no cube of its own. The comparison makes some distinctions easier to see by agreeing to leave others out.
+ 
+ <!-- @perlin_noise_terrain -->
+--- before/commons/maps/Noise_Perlin_Simplex/intent.md
++++ after/commons/maps/Noise_Perlin_Simplex/intent.md
+@@ -1,3 +1,5 @@
+ # Intent
+ 
+ Let the same sampled field change its expression without quietly changing its seed. Preserve the pleasure of organic form and the question of when an easy noise filter begins to stand in for learning another way to make a body.
++
++Let the visitor step beneath that expression. Two matching arches make the supplied form distinguishable from the noise added to it: VIEW removes relief but leaves the curve. The field can dress another body without having made all of its conditions.
+--- before/commons/maps/Noise_Perlin_Simplex/map_data.json
++++ after/commons/maps/Noise_Perlin_Simplex/map_data.json
+@@ -3,12 +3,12 @@
+   "name": "Perlin vs Simplex: The Evolution of Gradient Noise",
+   "title": "Perlin vs Simplex",
+   "lookup_name": "Noise_Perlin_Simplex",
+-  "description": "Two matched noise fields on one floor: one told to draw a Perlin basis, one a simplex basis, with the same seed, the same sampling, the same octaves and the same colour ramp, each with a reachable panel and a readout of the field's value at two fixed coordinates. What must stay the same before a difference can be attributed to a rule.",
++  "description": "Two noise fields share settings, sampling and finish. Their answers dress both cube displays and paired walk-through arches; existing controls connect the comparison to the body beneath it.",
+   "version": "1.0",
+   "format": "json",
+   "dimensions": {
+    "width": 13,
+-   "depth": 15,
++   "depth": 21,
+    "max_height": 3
+   },
+   "metadata": {
+@@ -28,7 +28,7 @@
+      1,
+      1,
+      11,
+-     10
++     16
+     ]
+    ],
+    "artifact_placement": "map"
+@@ -301,6 +301,96 @@
+    ],
+    [
+     "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "1",
++    "w"
++   ],
++   [
++    "w",
+     "w",
+     "w",
+     "w",
+@@ -540,6 +630,96 @@
+     "",
+     "",
+     ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
+    ]
+   ],
+   "interactables": [
+@@ -652,7 +832,97 @@
+     "",
+     "",
+     "",
+-    "simplex_noise:0:1.1#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4#witness:show#study:compare",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    "",
++    ""
++   ],
++   [
++    "",
++    "",
++    "",
++    "simplex_noise:0:1.1#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4#witness:show#study:compare#enclosure:arches",
+     "",
+     "",
+     "",
+--- before/commons/maps/Noise_Perlin_Simplex/summary.md
++++ after/commons/maps/Noise_Perlin_Simplex/summary.md
+@@ -1,5 +1,5 @@
+ # Noise Perlin Simplex
+ 
+-The preceding walk asked what a heightfield permits a moving body to do. This hall isolates the generator and then questions the isolation. Two retained 64-cube displays compare OpenSimplex2 and Perlin with matching declared settings. Their front controls now face the entrance; a supported central plate reads live generator values and reports mismatches.
++The preceding walk asked what a heightfield permits a moving body to do. This hall isolates the generator and then questions the isolation. Two retained 64-cube displays compare OpenSimplex2 and Perlin with matching declared settings. Two matching walk-through arches share those generators. Their front controls face the entrance; a supported central plate reads live generator values and reports mismatches.
+ 
+-SAMPLE marks one shared coordinate in both displays. VIEW changes both between relief and a flat colour arrangement. MATCH restores both declared generator settings. Each original FREQ/OCTAVES/REGEN/REPLAY panel remains independent. The small moving terrain and dark orb have separate book passages. The optional Lab Path portal remains as an explicitly inactive, unconnected side route; the museum aisle continues onward.
++SAMPLE marks one shared coordinate in both displays and arches. VIEW levels the cube displays and removes the arches’ added relief while retaining their base curves and colour. MATCH restores both declared generator settings. Each original FREQ/OCTAVES/REGEN/REPLAY panel remains independent. The small moving terrain and dark orb have separate book passages. The optional Lab Path portal remains as an explicitly inactive, unconnected side route; the museum aisle continues onward.
+--- before/commons/maps/Noise_Perlin_Simplex/technical.md
++++ after/commons/maps/Noise_Perlin_Simplex/technical.md
+@@ -1,4 +1,4 @@
+-> Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
++> Current encounter and verification (25 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+ 
+ # A live comparison contract
+ 
+--- before/commons/maps/Noise_Perlin_Simplex/tutorial.md
++++ after/commons/maps/Noise_Perlin_Simplex/tutorial.md
+@@ -5,7 +5,8 @@
+ 3. Compare the live generator settings. The matched pair differs in noise_type; a shared seed gives repeatability within each basis, not corresponding ridges.
+ 4. Move one FREQ or OCTAVES slider. Watch the plate name the changed condition. Use MATCH to restore both declared configurations; use either REPLAY to restore only its own side.
+ 5. Press VIEW. Check whether the answers change when relief becomes a flat colour display. Return to relief. The cube grid is a display choice shared by two different generators.
+-6. Visit the small pink terrain. Its third noise coordinate advances by .5 every .5 seconds. Then watch the independent orb. MATCH belongs to the pair and does not restart either clock.
+-7. Follow the central aisle onward. The labelled Lab Path side portal is not connected. Cellular Automata changes the operation from querying a field to updating stored neighbourhood states.
++6. Step beneath each arch. Come out and press VIEW: why do the cube fields flatten while the arches remain curved? Follow the shared sample into the arch; then change a frequency from outside and walk beneath the changed surface. An occupied arch holds its shape until the visitor leaves.
++7. Visit the small pink terrain. Its third noise coordinate advances by .5 every .5 seconds. Then watch the independent orb. MATCH belongs to the pair and does not restart either clock.
++8. Follow the central aisle onward. The labelled Lab Path side portal is not connected. Cellular Automata changes the operation from querying a field to updating stored neighbourhood states.
+ 
+ No walkability, isotropy or performance ranking follows from these small display fields. A shelter comparison would need bodies and lines of sight; a speed comparison would need measurements. Keep those questions available for a later instrument.
+--- core-before-update/Noise_Perlin_Simplex
++++ core-current/Noise_Perlin_Simplex
+@@ -7,9 +7,9 @@
+   "status": "desktop_checked_headset_pending",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+-  "text_sha256": "a54dedc09e512083cabf6a9bfd378df367bbda0574fd1e9c67e23370d5083ac7",
+-  "map_sha256": "1964d1bb14a85542ea5709bd6a9d2a7b04632cb141579ffb2ab33ff3e3b6fa35",
++  "text_sha256": "81cc4b5833a214b824027b2b98739e6d37d6df3116e01ea3bbf87201af415310",
++  "map_sha256": "8deab0d6e8907b0ac25d9d968cb38dbe93f61b2b01086eb5e3f530fec4e0d894",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Noise_Perlin_Simplex",
+-  "verification_scope": "Native production-pair probe: VIEW keeps regenerated seeds, generator configuration, sampled answers and colours while flattening every cube; return to relief preserves both fields; MATCH restores declared seeds. Four studio captures in this pass include the noise pair. No headset interaction."
++  "local_review": "doc/book/iterations/2026-09-25-noise-archways/index.html",
++  "verification_scope": "Native authored museum: 44 checks and nine real mouse-ray clicks; paired arches sample existing generators, use vertex displacement with matching collision, preserve fields through VIEW, follow SAMPLE/MATCH/REGEN/FREQ and hold occupied geometry. Supplied CharacterBody walks through both; wall rays hit from inside. Native GPU/CPU reference mean RGB difference 0.000011514. No tracked headset, comfort, learner or Quest acceptance."
+ }

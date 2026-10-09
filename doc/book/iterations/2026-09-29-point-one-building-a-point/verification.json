@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Revised passage occurs once",
+      "passed": true
+    },
+    {
+      "name": "Revised passage occurs once",
+      "passed": true
+    },
+    {
+      "name": "Revised passage occurs once",
+      "passed": true
+    },
+    {
+      "name": "Revised passage occurs once",
+      "passed": true
+    },
+    {
+      "name": "Revised passage occurs once",
+      "passed": true
+    },
+    {
+      "name": "All other chapter text preserved",
+      "passed": true
+    },
+    {
+      "name": "Encounter anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "Six code passages",
+      "passed": true
+    },
+    {
+      "name": "Assembled chapter equals position.gd",
+      "passed": true
+    },
+    {
+      "name": "Assembled chapter equals visible.gd",
+      "passed": true
+    },
+    {
+      "name": "Assembled chapter equals solid.gd",
+      "passed": true
+    },
+    {
+      "name": "All footnotes defined once",
+      "passed": true
+    },
+    {
+      "name": "Production unchanged: commons/primitives/point/point_condition.gd",
+      "passed": true
+    },
+    {
+      "name": "Production unchanged: commons/primitives/point/interactive_point_origin.gd",
+      "passed": true
+    },
+    {
+      "name": "Production unchanged: commons/primitives/point/interactive_point_origin.tscn",
+      "passed": true
+    },
+    {
+      "name": "Production unchanged: commons/maps/Point_One/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Production unchanged: commons/maps/Point_Zero/final.md",
+      "passed": true
+    },
+    {
+      "name": "Native engine evidence passed",
+      "passed": true
+    },
+    {
+      "name": "Only requested catalogue fields changed",
+      "passed": true
+    },
+    {
+      "name": "Catalogue follows final.md",
+      "passed": true
+    },
+    {
+      "name": "Capture source fingerprints match",
+      "passed": true
+    },
+    {
+      "name": "Capture matches manifest",
+      "passed": true
+    },
+    {
+      "name": "HTML anchors resolve and are unique",
+      "passed": true
+    },
+    {
+      "name": "All chapter code rendered",
+      "passed": true
+    },
+    {
+      "name": "No raw footnote marks",
+      "passed": true
+    }
+  ],
+  "scope": "Text scope, cumulative code, production fingerprints, publication. Native physics evidence is separate."
+}

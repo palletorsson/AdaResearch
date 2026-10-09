@@ -1,0 +1,124 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "3D stage and camera exist"
+		},
+		{
+			"passed": true,
+			"test": "Multiple construction phases"
+		},
+		{
+			"passed": true,
+			"test": "Source-specific validation"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause stops time"
+		},
+		{
+			"passed": true,
+			"test": "Replay returns to beginning"
+		},
+		{
+			"passed": true,
+			"test": "Step advances one phase and pauses"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@852"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@853"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 0 / @MeshInstance3D@855"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@852"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@853"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 1 / @MeshInstance3D@855"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 2 / @MeshInstance3D@855"
+		},
+		{
+			"passed": true,
+			"test": "Finite mesh: phase 3 / @MeshInstance3D@855"
+		},
+		{
+			"passed": true,
+			"test": "Film contains 3D mesh geometry"
+		},
+		{
+			"passed": true,
+			"test": "Turn view changes camera"
+		},
+		{
+			"passed": true,
+			"test": "Turn view survives the next animation refresh"
+		}
+	],
+	"duration": 24.0,
+	"evidence": {
+		"box_size": "(0.8, 0.8, 0.8)",
+		"native_operation": 1,
+		"offsets": [
+			"(0.0, 0.0, 0.0)",
+			"(0.3, 0.2, 0.1)",
+			"(0.57, 0.38, 0.19)",
+			"(0.78, 0.52, 0.26)"
+		],
+		"private_native_csg": true,
+		"radius": 0.55,
+		"source_calls": [
+			"_cut_offset",
+			"_build_intersection",
+			"_volumes"
+		],
+		"source_never_entered_tree": true,
+		"volumes": [
+			{
+				"a": 0.473032655179415,
+				"b": 0.696310230461537,
+				"both": 0.456279615895634
+			},
+			{
+				"a": 0.51194164452907,
+				"b": 0.696686735688408,
+				"both": 0.279126512623837
+			},
+			{
+				"a": 0.51368076606183,
+				"b": 0.697230469407574,
+				"both": 0.0799799910809454
+			},
+			{
+				"a": 0.509296953155516,
+				"b": 0.697055685667176,
+				"both": 0.00843077889019457
+			}
+		]
+	},
+	"id": "boolean_overlap",
+	"passed": true,
+	"phases": [
+		"The two operands arrive",
+		"Put them in the same space",
+		"Intersection keeps their shared volume",
+		"Moving one operand changes what remains"
+	],
+	"source_paths": [
+		"res://algorithms/boolean_surfaces/csg_intersection_demo.gd"
+	]
+}

@@ -1,0 +1,34 @@
+{
+  "hall": "NonEuclidean_Spaces",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "six_authored_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "walkable_split": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "triangle_curvature_workbench",
+    "curvature_slider",
+    "elliptic_surface",
+    "poincare_disk",
+    "hyperbolic_surface",
+    "riemann_sphere"
+  ],
+  "primary_artifacts": [
+    "triangle_curvature_workbench",
+    "riemann_sphere"
+  ],
+  "source_sha256": {
+    "commons\\maps\\NonEuclidean_Spaces\\map_data.json": "1f924c844ea9a640f0ed92f283408b1b6356febe94fc9bfa63f64e69f99d8f59",
+    "commons\\maps\\NonEuclidean_Spaces\\final.md": "c52511e05a8b13f1a544812a9031df8d33c6c4a7949c8e3f75caa9ab8792fe9a",
+    "commons\\maps\\NonEuclidean_Spaces\\tutorial.md": "5d938705b88b0d453afa6fb0f3274b366625a0333e408775fe2ce6556eaf2088",
+    "commons\\maps\\NonEuclidean_Spaces\\technical.md": "de2b1b0860abb96fb434d228ec4b875af31ca2dd5057aefbba15065dbe5a7d9e",
+    "commons\\maps\\NonEuclidean_Spaces\\critical.md": "6c372d02b3a2ccc9317f9458b00d1f01f1fe4ab1a1f19cd271a4203cc7643485"
+  }
+}

@@ -1,0 +1,2124 @@
+{
+	"checks": [
+		{
+			"message": "exchange study exists in the built museum",
+			"passed": true
+		},
+		{
+			"message": "arrival withholds the exchange setting",
+			"passed": true
+		},
+		{
+			"message": "both fields begin with identical values",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 0",
+			"passed": true
+		},
+		{
+			"message": "STEP exposes the independently calculated first difference at W",
+			"passed": true
+		},
+		{
+			"message": "a first step leaves interpretation open",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 3",
+			"passed": true
+		},
+		{
+			"message": "+100 completes exactly one hundred further updates",
+			"passed": true
+		},
+		{
+			"message": "observation time does not trigger an automatic answer",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 6",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 7",
+			"passed": true
+		},
+		{
+			"message": "VIEW and COAT change the display without changing the field or clock",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 6",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 7",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 5",
+			"passed": true
+		},
+		{
+			"message": "INJECT adds a matched intervention without advancing time",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 2",
+			"passed": true
+		},
+		{
+			"message": "REPLAY before comparison restores an unlabelled beginning",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 4",
+			"passed": true
+		},
+		{
+			"message": "changing EXCHANGE B reveals both current settings and resets the comparison",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 0",
+			"passed": true
+		},
+		{
+			"message": "matched exchange produces matching full fields after STEP",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 4",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 0",
+			"passed": true
+		},
+		{
+			"message": "switching back updates the label and restores the difference",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 2",
+			"passed": true
+		},
+		{
+			"message": "REPLAY preserves the explanation already revealed",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 1",
+			"passed": true
+		},
+		{
+			"message": "RUN starts the live clock",
+			"passed": true
+		},
+		{
+			"message": "pointer reaches button 1",
+			"passed": true
+		},
+		{
+			"message": "RUN can hold the clock again",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"pointer": [
+		{
+			"event": "walker_cam_guard_stopped",
+			"value": true
+		},
+		{
+			"at": [
+				4.0,
+				0.0,
+				2.34999990463257
+			],
+			"event": "spawn"
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.14,
+					-0.24,
+					0.96
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/Button",
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"global_position": [
+						4.216,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.216,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"pointer_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.21,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.14,
+					-0.24,
+					0.96
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_3/Button",
+						"__CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_3/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"global_position": [
+						3.784,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.784,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.14,
+						-0.24,
+						0.96
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"pointer_dir": [
+						-0.14,
+						-0.24,
+						0.96
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_3/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.79,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.05,
+					-0.34,
+					0.94
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/Button",
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"global_position": [
+						3.928,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.928,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.05,
+						-0.34,
+						0.94
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"pointer_dir": [
+						-0.05,
+						-0.34,
+						0.94
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.93,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.15,
+					-0.33,
+					0.93
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/Button",
+						"__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"global_position": [
+						3.784,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.784,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.15,
+						-0.33,
+						0.93
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"pointer_dir": [
+						-0.15,
+						-0.33,
+						0.93
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.79,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.05,
+					-0.34,
+					0.94
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/Button",
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"global_position": [
+						3.928,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.928,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.05,
+						-0.34,
+						0.94
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"pointer_dir": [
+						-0.05,
+						-0.34,
+						0.94
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_6/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.93,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.15,
+					-0.33,
+					0.93
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/Button",
+						"__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"global_position": [
+						3.784,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.784,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.15,
+						-0.33,
+						0.93
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"pointer_dir": [
+						-0.15,
+						-0.33,
+						0.93
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_7/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.79,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.05,
+					-0.34,
+					0.94
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_5/Button",
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"__CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_5/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"global_position": [
+						4.072,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.072,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.05,
+						-0.34,
+						0.94
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"pointer_dir": [
+						0.05,
+						-0.34,
+						0.94
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_5/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.07,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.05,
+					-0.24,
+					0.97
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/Button",
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"global_position": [
+						3.928,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.928,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.05,
+						-0.24,
+						0.97
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"pointer_dir": [
+						-0.05,
+						-0.24,
+						0.97
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.93,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.15,
+					-0.33,
+					0.93
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/Button",
+						"__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"global_position": [
+						4.216,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.216,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.15,
+						-0.33,
+						0.93
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"pointer_dir": [
+						0.15,
+						-0.33,
+						0.93
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.21,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.14,
+					-0.24,
+					0.96
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/Button",
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"global_position": [
+						4.216,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.216,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"pointer_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.21,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.15,
+					-0.33,
+					0.93
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/Button",
+						"__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"global_position": [
+						4.216,
+						1.103,
+						3.731
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.216,
+								1.118,
+								3.709
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.15,
+						-0.33,
+						0.93
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"pointer_dir": [
+						0.15,
+						-0.33,
+						0.93
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_4/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.21,
+						1.12,
+						3.68
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.14,
+					-0.24,
+					0.96
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/Button",
+						"__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"global_position": [
+						4.216,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.216,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"pointer_dir": [
+						0.14,
+						-0.24,
+						0.96
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_0/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.21,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					-0.05,
+					-0.24,
+					0.97
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/Button",
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"global_position": [
+						3.928,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								3.928,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						-0.05,
+						-0.24,
+						0.97
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"pointer_dir": [
+						-0.05,
+						-0.24,
+						0.97
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_2/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						3.93,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.05,
+					-0.24,
+					0.97
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/Button",
+						"__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"global_position": [
+						4.072,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.072,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.05,
+						-0.24,
+						0.97
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"pointer_dir": [
+						0.05,
+						-0.24,
+						0.97
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.07,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"event": "aim",
+			"pose": {
+				"current_camera": "dlessMuseum/@Node@2226/WcnDesktopRig/Head/Camera3D",
+				"eye": [
+					4.0,
+					1.6,
+					2.35
+				],
+				"forward": [
+					0.05,
+					-0.24,
+					0.97
+				],
+				"miss_deg": 0.0,
+				"rig": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		},
+		{
+			"button": 1,
+			"event": "click"
+		},
+		{
+			"event": "press",
+			"record": {
+				"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+				"control_inspect": {
+					"area": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"at_position_mask_1310720": [
+						"__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton"
+					],
+					"at_position_mask_4294967295": [
+						"tifact/ExchangeStudy/ControlStem/@StaticBody3D@745",
+						"/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/Button",
+						"__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+						"BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea"
+					],
+					"cap_normal": [
+						0.0,
+						0.57,
+						-0.82
+					],
+					"control": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"global_position": [
+						4.072,
+						1.231,
+						3.82
+					],
+					"global_scale": [
+						1.1,
+						1.1,
+						1.1
+					],
+					"inside_tree": true,
+					"layer": 1048576,
+					"mask": 393216,
+					"monitorable": true,
+					"monitoring": true,
+					"process_mode": 0,
+					"ray_along_normal_from_0.3_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_along_normal_from_0.3_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"ray_camera_to_centre_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_camera_to_centre_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"ray_camera_to_outer_cap_mask_1310720": "__CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"ray_camera_to_outer_cap_mask_4294967295": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/HandPoseArea",
+					"shapes": [
+						{
+							"at": [
+								4.072,
+								1.246,
+								3.799
+							],
+							"disabled": false,
+							"radius": -1.0,
+							"shape": "CylinderShape3D"
+						}
+					],
+					"visible": true
+				},
+				"hover": "BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+				"ray": {
+					"camera_dir": [
+						0.05,
+						-0.24,
+						0.97
+					],
+					"camera_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"independent_ray": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"pointer_dir": [
+						0.05,
+						-0.24,
+						0.97
+					],
+					"pointer_enabled": true,
+					"pointer_from": [
+						4.0,
+						1.6,
+						2.35
+					],
+					"pointer_process_mode": 0,
+					"raycast_areas": true,
+					"raycast_collider": "sole/SAME_BEGINNING___CHANGE_ONE_RELATION/Btn_1/InteractableAreaButton",
+					"raycast_colliding": true,
+					"raycast_length": 5.0,
+					"raycast_mask": 1310720,
+					"raycast_point": [
+						4.07,
+						1.25,
+						3.76
+					]
+				},
+				"stand": [
+					4.0,
+					0.0,
+					2.35
+				]
+			}
+		}
+	],
+	"scope": "Built museum with synthetic mouse input through the real desktop interaction pointer; museum movement logic paused. No learner or headset verification.",
+	"stages": [
+		{
+			"readback": {
+				"batch_usec": 0,
+				"coating": true,
+				"exchange": false,
+				"exchange_revealed": false,
+				"injections": 0,
+				"right_ticks": 0,
+				"running": false,
+				"target": 0,
+				"ticks": 0,
+				"u_a": 1.0,
+				"u_b": 1.0,
+				"v_a": 0.0,
+				"v_b": 0.0,
+				"view_u": false
+			},
+			"readout": "HELD / TICK 0 / dt 1\nW (12,15)    U        V\nA             1.000    0.000\nB             1.000    0.000\nVIEW V ×2 / FEED .037 / KILL .060\nINJECTIONS 0",
+			"stage": "arrival",
+			"titles": [
+				"A",
+				"B"
+			]
+		},
+		{
+			"readback": {
+				"batch_usec": 3962,
+				"coating": true,
+				"exchange": false,
+				"exchange_revealed": false,
+				"injections": 0,
+				"right_ticks": 101,
+				"running": false,
+				"target": 0,
+				"ticks": 101,
+				"u_a": 0.259481877088547,
+				"u_b": 1.0,
+				"v_a": 0.377237766981125,
+				"v_b": 0.0,
+				"view_u": false
+			},
+			"readout": "HELD / TICK 101 / dt 1\nW (12,15)    U        V\nA             0.259    0.377\nB             1.000    0.000\nVIEW V ×2 / FEED .037 / KILL .060\nINJECTIONS 0",
+			"stage": "observed",
+			"titles": [
+				"A",
+				"B"
+			]
+		},
+		{
+			"readback": {
+				"batch_usec": 3962,
+				"coating": true,
+				"exchange": true,
+				"exchange_revealed": true,
+				"injections": 0,
+				"right_ticks": 0,
+				"running": false,
+				"target": 0,
+				"ticks": 0,
+				"u_a": 1.0,
+				"u_b": 1.0,
+				"v_a": 0.0,
+				"v_b": 0.0,
+				"view_u": false
+			},
+			"readout": "HELD / TICK 0 / dt 1\nW (12,15)    U        V\nA             1.000    0.000\nB             1.000    0.000\nVIEW V ×2 / FEED .037 / KILL .060\nB EXCHANGE ON / INJECTIONS 0",
+			"stage": "revealed",
+			"titles": [
+				"A / EXCHANGE ON",
+				"B / EXCHANGE ON"
+			]
+		},
+		{
+			"readback": {
+				"batch_usec": 4104,
+				"coating": true,
+				"exchange": false,
+				"exchange_revealed": true,
+				"injections": 0,
+				"right_ticks": 12,
+				"running": false,
+				"target": 0,
+				"ticks": 12,
+				"u_a": 0.784915447235107,
+				"u_b": 1.0,
+				"v_a": 0.0912499129772186,
+				"v_b": 0.0,
+				"view_u": false
+			},
+			"readout": "HELD / TICK 12 / dt 1\nW (12,15)    U        V\nA             0.785    0.091\nB             1.000    0.000\nVIEW V ×2 / FEED .037 / KILL .060\nB EXCHANGE OFF / INJECTIONS 0",
+			"stage": "replayed",
+			"titles": [
+				"A / EXCHANGE ON",
+				"B / EXCHANGE OFF"
+			]
+		}
+	]
+}

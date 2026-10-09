@@ -1,0 +1,79 @@
+{
+	"artifacts": {
+		"isotype_bench": {
+			"lookup_name": "isotype_bench",
+			"name": "Isotype Bench",
+			"class_name": "IsotypeBench",
+			"scene": "res://commons/artifacts/isotype_bench/isotype_bench.tscn",
+			"category": "primitives",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"sequence": "array_tutorial",
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"description": "Otto Neurath and Gerd Arntz's Vienna Method of Pictorial Statistics (Isotype, from 1925), built as a bench a visitor cranks. One number is shown twice, side by side on one board. LEFT obeys Neurath's first rule — a greater quantity is MORE SIGNS of the same size, never a bigger sign — so the count is laid out as identical blocky figures at a fixed pitch on a ticked rail, and where the quantity does not divide by the unit the last sign is CUT: the remainder stands in the row as a part-figure at hand height, 16 mm proud of the board. RIGHT breaks it: the same number as a single figure whose linear size follows the count, so its area follows the square of the count, with half that same count nested on its face at a quarter of the ink — double the number and it looks four times bigger. The shipped value does not divide, deliberately: 27 = 5 x 5 + 2, five whole signs and a sixth cut to two fifths, because a quantity that divides evenly photographs as an ordinary pictogram chart and argues nothing. THE SIGN IS FOUR AXIS-ALIGNED BOXES and that is a constraint, not a style: clipping a box at x = c gives another box, so the part-figure is exactly the fraction it claims to be, where a lathed torso or a cylinder head would clip wrong and the chart would lie about its own arithmetic. Arntz cut his figures for a printing block and they are blocky for the same reason. It belongs in array_tutorial because it does not illustrate modulo, it runs it — the cut sign's width IS q % unit — and there is a second modulo in the same picture, because slot i sits at row = i / per_row and col = i % per_row, which is the sequence's own stated objective drawn rather than said; the rail keeps its full set of ticks under a short last row so both divisions stay visible. The right field's scale is arbitrary on purpose (normalised so the crank's maximum fills the field, a number readable nowhere on the object), because an area chart's scale cannot be recovered from the chart — which is the other half of Neurath's objection and the reason the right rail carries no ticks at all. It quietly breaks his second rule too, that colour carries category and never quantity: its two nested figures are one category in two hues, and nothing on the bench points that out.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "medium",
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"tags": [
+				"isotype",
+				"neurath",
+				"arntz",
+				"pictograph",
+				"modulo",
+				"counting",
+				"chart",
+				"crank"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "medium"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.48,
+					1.79,
+					0.42
+				],
+				"source": "COMPUTED FROM THE CONSTANTS, NOT MEASURED IN ENGINE — this session was forbidden to run Godot. x from the top slab (1.48), y from the floor to the top of the board (0 to 1.79), z from the board's back face (-0.185) to the slab's front edge (+0.23). The crank plate, its arc ticks and the pointer all stay inside that box: highest point 1.019, furthest forward 0.214. Re-measure with probe_aabb_hogs.gd before quoting."
+			},
+			"relationships": {
+				"pairs_with": [
+					"grid_2d_4x4",
+					"index_visualizer"
+				]
+			},
+			"dev_themes": [
+				"a remainder is a shape, not an untidiness",
+				"more signs, never a bigger sign",
+				"the chart the museum draws everywhere else"
+			],
+			"qfep_connection": "Nearly every artifact in this building encodes a number as a length, a height or a brightness, and asks the reader to take the encoding on trust. Neurath is the person who said which of those a reader can actually count, and what it costs to say it: the honest chart is the one that has to show a figure cut through the middle. This bench puts the corpus's own habit on the right of a board and Neurath's refusal on the left, and drives both from one crank. The refusal is the interesting half. A repeated unit hands the arithmetic back — you can count the signs, you can see the remainder, you can disagree with the chart using nothing but your eyes — where an area offers only an impression, and an impression cannot be checked. What the method forecloses is elegance: the left field is crowded, it gets more crowded as the number grows, and that awkwardness is not a defect of the method but the method admitting how big the number is.",
+			"note": "ADDED 2026-09-09. NOT YET COMPILED, NOT YET CAPTURED — written under a no-Godot rule; every figure in this entry is derived from the constants in the .gd. THE ORIGIN IS THE FLOOR at the centre of the bench, minimum Y exactly 0 (the recessed foot), so auto_ground is left at its default and is a no-op inside its own 0.01 tolerance. Config keys, EVERY numeric one drawn from GridInteractablesComponent.CONFIG_PARAM_NAMES because an unlisted #key:<number> is read as the tutorial's positional shorthand at line 1705 and never arrives: #count:27 (the quantity) - #scale:5 (how many one sign is worth, the chart's SCALE, which is the divisor that makes the cut) - #cols:4 (signs per row) - #lie:false (hide the right-hand field). SO #unit: AND #quantity: DO NOT WORK and are deliberately not offered as aliases, even though they are the obvious names — a token spelling them would look correct, keep the default, and store the number as a rotation. #lie must take a WORD: #lie:0 is a lone numeric on an unlisted key and is eaten as a rotation, and even if it arrived it would arrive as the string \"0\", which bool() reads as true. The crank is commons/interactables/dial_smooth.tscn instanced at runtime, chosen over a hand-rolled handle because it already carries both interaction paths: XRToolsInteractableHandle bodies on collision layer 262144 (bit 19) for the VR hand, and pointer_event() on its root for the desktop crosshair, whose raycast masks 1310720 = layers 19 + 21. Its grab surface is the annulus from 7 mm to 43 mm (eight 18 mm spheres at radius 25 mm); the crank hub and pointer drawn on top of it reach 26 mm and 42 mm and carry NO collider, so the thing a visitor sees is inside the thing a visitor can grab, and the drawn parts cannot shadow the ray. Text is commons/ui/text_screen.gd in mode SCREEN, three of them, none rotated — Label3D and BakedTextAlbedo.make_label_mesh were both verified blank in this project's capture, and text turned by PI aims itself into its own panel. The two board captions are DERIVED from the integers the geometry was laid out from and are re-baked on a 0.18 s settle after the crank stops, because each caption costs four font bakes and dragging the crank across its range is 47 steps. NO dna.axes block: the four knobs are a real family but nothing has swept or bitten them, and a sweep would first have to answer whether #lie:false is an axis value or a control. REVIEWED 2026-09-09, second pass: footprint corrected from [2,2,1] to [2,1,2]. The corpus order is [width, depth, height] in 1 m cells (GridSystem.cube_size = 1.0; DressingRoomInspector.gd:973 writes it as [w, depth, h]; orange_and_apples ships [3,1,2] against an AABB of 2.072 x 1.9 x 0.545), so the shipped values had depth and height transposed — reserving 2 cells of depth for a 0.42 m bench and declaring 1 cell of height for a 1.79 m one. spatial_needs.footprint_cells (2) was already right and is unchanged. Still NOT COMPILED and NOT CAPTURED."
+		}
+	}
+}

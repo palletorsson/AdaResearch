@@ -1,0 +1,271 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "all four new encounters placed",
+      "passed": true
+    },
+    {
+      "name": "one of each of five Platonic solids",
+      "passed": true
+    },
+    {
+      "name": "five distinct source families",
+      "passed": true
+    },
+    {
+      "name": "sixteen columns in eight resolutions",
+      "passed": true
+    },
+    {
+      "name": "columns start at four and end at sixty-four segments",
+      "passed": true
+    },
+    {
+      "name": "motto restored above entrance headroom",
+      "passed": true
+    },
+    {
+      "name": "twelve additional sphere constructions",
+      "passed": true
+    },
+    {
+      "name": "sphere atlas varies the two axes independently",
+      "passed": true
+    },
+    {
+      "name": "eight pedestal tiers",
+      "passed": true
+    },
+    {
+      "name": "tier resolutions run four through eleven",
+      "passed": true
+    },
+    {
+      "name": "authored capsule retains five radial segments and five rings",
+      "passed": true
+    },
+    {
+      "name": "capsule enlarged to 1.6 metres",
+      "passed": true
+    },
+    {
+      "name": "capsule rests on the top tier",
+      "passed": true
+    },
+    {
+      "name": "existing capsule still rotates",
+      "passed": true
+    },
+    {
+      "name": "eight additional engine prefab scenes",
+      "passed": true
+    },
+    {
+      "name": "PrismMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "TorusMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "PlaneMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "QuadMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "PointMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "TextMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "RibbonTrailMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "TubeTrailMesh uses its named native mesh",
+      "passed": true
+    },
+    {
+      "name": "point specimen uses a visible screen-point material",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.10 m deck",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.70 m width",
+      "passed": true
+    },
+    {
+      "name": "plain support has one mesh and no light",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.45 m deck",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 2.20 m width",
+      "passed": true
+    },
+    {
+      "name": "plain support has one mesh and no light",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.90 m deck",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 1.00 m width",
+      "passed": true
+    },
+    {
+      "name": "plain support has one mesh and no light",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 1.20 m deck",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.60 m width",
+      "passed": true
+    },
+    {
+      "name": "plain support has one mesh and no light",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 0.30 m deck",
+      "passed": true
+    },
+    {
+      "name": "plain plinth preserves 4.60 m width",
+      "passed": true
+    },
+    {
+      "name": "plain support has one mesh and no light",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: courtyard-entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: five-solids",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: resolution-chamber",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: five-on-four-to-eleven",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sphere-atlas",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: primitive-prefabs",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: secondary-alcove",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: prefab-details",
+      "passed": true
+    },
+    {
+      "name": "solid can be picked up from the podium",
+      "passed": true
+    },
+    {
+      "name": "released solid meets its support",
+      "passed": true
+    },
+    {
+      "name": "visitor-width route 0 clear",
+      "passed": true
+    },
+    {
+      "name": "route 0 has a landing floor",
+      "passed": true
+    },
+    {
+      "name": "visitor-width route 1 clear",
+      "passed": true
+    },
+    {
+      "name": "route 1 has a landing floor",
+      "passed": true
+    },
+    {
+      "name": "visitor-width route 2 clear",
+      "passed": true
+    },
+    {
+      "name": "route 2 has a landing floor",
+      "passed": true
+    },
+    {
+      "name": "visitor-width route 3 clear",
+      "passed": true
+    },
+    {
+      "name": "route 3 has a landing floor",
+      "passed": true
+    },
+    {
+      "name": "visitor-width route 4 clear",
+      "passed": true
+    },
+    {
+      "name": "route 4 has a landing floor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "positions": {
+      "atlas": [
+        3.5,
+        0.0,
+        21.5
+      ],
+      "capsule": [
+        9.5,
+        0.0,
+        22.5
+      ],
+      "court": [
+        9.5,
+        0.0,
+        6.5
+      ],
+      "prefabs": [
+        9.5,
+        0.0,
+        35.5
+      ]
+    }
+  },
+  "passed": true,
+  "scope": "Native museum geometry, supplied pickup and body-width walks. Headset and Quest untested."
+}

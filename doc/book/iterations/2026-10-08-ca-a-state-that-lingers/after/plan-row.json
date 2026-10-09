@@ -1,0 +1,301 @@
+{
+  "museum": "neue-nationalgalerie-free-plan",
+  "open_roof": true,
+  "gate": false,
+  "gate_depth_rows": 0,
+  "tile": [
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "0",
+      "0",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ]
+  ],
+  "h": 14,
+  "rooms": 0,
+  "artifacts": [
+    {
+      "token": "structure_growth",
+      "cell": [
+        6,
+        6
+      ],
+      "tile_cell": [
+        6,
+        6
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_ElementaryRules",
+        "cell": [
+          6,
+          6
+        ]
+      },
+      "config": {
+        "study": "states",
+        "plinth": "0",
+        "room": "neighbours"
+      }
+    },
+    {
+      "token": "dark_sphere",
+      "cell": [
+        10,
+        9
+      ],
+      "tile_cell": [
+        10,
+        9
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: CA_ElementaryRules",
+        "cell": [
+          10,
+          9
+        ]
+      },
+      "config": {
+        "plinth": "0"
+      }
+    }
+  ],
+  "rejected": [],
+  "room": {
+    "w": 13,
+    "h": 14
+  },
+  "apron": 0,
+  "interior_count": 119,
+  "ordered": true,
+  "pages": [],
+  "sequence": "cellularautomata",
+  "pearl": "ca elementaryrules",
+  "pearl_index": 1,
+  "map": "CA_ElementaryRules",
+  "pearls_total": 8,
+  "authored": "map",
+  "source": "em_map_halls: the map IS the hall",
+  "_ruling": {
+    "src_w": 13,
+    "src_h": 14,
+    "rotated": false,
+    "pad": 0,
+    "pad_closed": false,
+    "ring": null
+  },
+  "dressing": "piers: template colonnade x8 (bare map)"
+}

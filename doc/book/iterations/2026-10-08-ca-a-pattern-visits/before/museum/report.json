@@ -1,0 +1,237 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed Life dish found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-zero",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: address-lit",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "GLIDER reaches A at generation eight",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_window"
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_view"
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_counter"
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_extinguisher"
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_elevator"
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_pallet"
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_point_zero"
+      },
+      {
+        "key": "game_of_life_petri",
+        "local": [
+          6.5,
+          0.0,
+          8.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/GameOfLifePetri"
+      },
+      {
+        "key": "mold_network",
+        "local": [
+          1.5,
+          0.0,
+          25.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/MoldNetwork"
+      },
+      {
+        "key": "science_screen",
+        "local": [
+          6.5,
+          1.5,
+          26.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ScienceScreen"
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          4.5,
+          0.0,
+          27.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DarkSphere"
+      },
+      {
+        "key": "hexagon_ca_vr",
+        "local": [
+          9.5,
+          0.0,
+          27.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/HexagonCAVR"
+      },
+      {
+        "key": "ca_growth_network",
+        "local": [
+          3.5,
+          0.0,
+          29.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CAGrowthNetwork"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ExitSign"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          3.5,
+          3.0,
+          30.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/@Node3D@1996"
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/WallClock"
+      },
+      {
+        "key": "info_screen",
+        "local": [
+          1.0,
+          1.70000004768372,
+          23.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/InfoScreen"
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ElectricalPanel"
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          10.2250003814697
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CeilingVent"
+      },
+      {
+        "key": "station_plinth",
+        "local": [
+          10.5,
+          0.0,
+          23.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ArtPlinth0"
+      },
+      {
+        "key": "dream_bodies",
+        "local": [
+          10.5,
+          0.419999986886978,
+          23.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DreamBody0"
+      }
+    ],
+    "scope": "Native museum; actual hall overhead, raised and visitor-height. Neighbouring halls/player hidden for captures. No physical headset test.",
+    "work_local": [
+      6.5,
+      0.0,
+      8.5
+    ]
+  },
+  "passed": true
+}

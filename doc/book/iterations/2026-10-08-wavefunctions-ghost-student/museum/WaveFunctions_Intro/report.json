@@ -1,0 +1,1034 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing primary artifact present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: primary",
+      "passed": true
+    },
+    {
+      "name": "student study has museum floor",
+      "passed": true
+    },
+    {
+      "name": "student object is a single cube mesh",
+      "passed": true
+    },
+    {
+      "name": "student creates its own readout",
+      "passed": true
+    },
+    {
+      "name": "cube reaches the predicted upper height",
+      "passed": true
+    },
+    {
+      "name": "cube reaches the predicted lower height",
+      "passed": true
+    },
+    {
+      "name": "phase changes direction inside the hall",
+      "passed": true
+    },
+    {
+      "name": "display remains in the museum's frame",
+      "passed": true
+    },
+    {
+      "name": "student approach has floor",
+      "passed": true
+    },
+    {
+      "name": "student approach clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "approach_obstacles": [],
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.5,
+          15.0,
+          1.5
+        ],
+        "token": "rotatescalecubes"
+      },
+      {
+        "bounds_position": [
+          4.25,
+          1.25,
+          2.25
+        ],
+        "bounds_size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "position": [
+          4.5,
+          1.0,
+          2.5
+        ],
+        "token": "pickup_cube_static"
+      },
+      {
+        "bounds_position": [
+          2.40000009536743,
+          -0.100000001490116,
+          4.40000009536743
+        ],
+        "bounds_size": [
+          0.199999809265137,
+          0.200000002980232,
+          0.199999809265137
+        ],
+        "position": [
+          2.5,
+          0.0,
+          4.5
+        ],
+        "token": "cube_scene"
+      },
+      {
+        "bounds_position": [
+          3.40000009536743,
+          -0.0765311792492867,
+          4.40000009536743
+        ],
+        "bounds_size": [
+          0.199999809265137,
+          0.200000002980232,
+          0.199999809265137
+        ],
+        "position": [
+          3.5,
+          0.0,
+          4.5
+        ],
+        "token": "transformation_cube"
+      },
+      {
+        "bounds_position": [
+          5.38235855102539,
+          -0.100000001490116,
+          4.38235855102539
+        ],
+        "bounds_size": [
+          0.235282897949219,
+          0.200000002980232,
+          0.235282897949219
+        ],
+        "position": [
+          5.5,
+          0.0,
+          4.5
+        ],
+        "token": "rotating_cube"
+      },
+      {
+        "bounds_position": [
+          3.37502264976501,
+          1.30000007152557,
+          5.42500019073486
+        ],
+        "bounds_size": [
+          0.199977397918701,
+          0.549999952316284,
+          0.149999618530273
+        ],
+        "position": [
+          3.5,
+          1.5,
+          5.5
+        ],
+        "token": "y_oscillation_cube"
+      },
+      {
+        "bounds_position": [
+          5.28999996185303,
+          1.5,
+          5.28998994827271
+        ],
+        "bounds_size": [
+          0.420000076293945,
+          0.299999952316284,
+          0.420010089874268
+        ],
+        "position": [
+          5.5,
+          1.5,
+          5.5
+        ],
+        "token": "rotating_cube_demo"
+      },
+      {
+        "bounds_position": [
+          5.92999982833862,
+          2.46667981147766,
+          5.48000001907349
+        ],
+        "bounds_size": [
+          3.1399998664856,
+          2.35332036018372,
+          0.199999809265137
+        ],
+        "position": [
+          7.5,
+          2.5,
+          5.5
+        ],
+        "token": "science_screen"
+      },
+      {
+        "bounds_position": [
+          4.25,
+          0.308672070503235,
+          7.25
+        ],
+        "bounds_size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "position": [
+          4.5,
+          0.0,
+          7.5
+        ],
+        "token": "pickup_cube_transforming"
+      },
+      {
+        "bounds_position": [
+          4.20589590072632,
+          0.25,
+          8.20589637756348
+        ],
+        "bounds_size": [
+          0.588208198547363,
+          0.5,
+          0.588207244873047
+        ],
+        "position": [
+          4.5,
+          0.0,
+          8.5
+        ],
+        "token": "pickup_cube_rotating"
+      },
+      {
+        "bounds_position": [
+          4.07336235046387,
+          0.00749999983236194,
+          9.06567096710205
+        ],
+        "bounds_size": [
+          0.853275299072266,
+          0.953120410442352,
+          0.868658065795898
+        ],
+        "position": [
+          4.5,
+          0.0,
+          9.5
+        ],
+        "token": "dark_sphere"
+      },
+      {
+        "bounds_position": [
+          1.70000004768372,
+          -0.0699999928474426,
+          11.1899995803833
+        ],
+        "bounds_size": [
+          1.8899998664856,
+          1.89999985694885,
+          0.418000221252441
+        ],
+        "position": [
+          2.5,
+          1.5,
+          11.5
+        ],
+        "token": "control_pendulum"
+      },
+      {
+        "bounds_position": [
+          4.32353734970093,
+          1.11084687709808,
+          11.3235378265381
+        ],
+        "bounds_size": [
+          0.352925300598145,
+          0.299999952316284,
+          0.352924346923828
+        ],
+        "position": [
+          4.5,
+          0.960846781730652,
+          11.5
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "bounds_position": [
+          4.29412746429443,
+          1.13584685325623,
+          12.2941274642944
+        ],
+        "bounds_size": [
+          0.411745071411133,
+          0.349999904632568,
+          0.411745071411133
+        ],
+        "position": [
+          4.5,
+          0.960846781730652,
+          12.5
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "bounds_position": [
+          2.24501705169678,
+          0.398044109344482,
+          13.2766551971436
+        ],
+        "bounds_size": [
+          0.478330612182617,
+          0.845017552375793,
+          0.446699142456055
+        ],
+        "position": [
+          2.5,
+          0.528061628341675,
+          13.5
+        ],
+        "token": "oscillation_controlled_cube"
+      },
+      {
+        "bounds_position": [
+          4.26471710205078,
+          1.16084671020508,
+          13.2647171020508
+        ],
+        "bounds_size": [
+          0.470565795898438,
+          0.400000095367432,
+          0.470565795898438
+        ],
+        "position": [
+          4.5,
+          0.960846781730652,
+          13.5
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "bounds_position": [
+          6.35294818878174,
+          1.08584678173065,
+          13.3529481887817
+        ],
+        "bounds_size": [
+          0.294103622436523,
+          0.25,
+          0.294103622436523
+        ],
+        "position": [
+          6.5,
+          1.0,
+          13.5
+        ],
+        "token": "mario_cube_time_trace"
+      },
+      {
+        "bounds_position": [
+          4.23530626296997,
+          1.18584668636322,
+          14.2353067398071
+        ],
+        "bounds_size": [
+          0.529387474060059,
+          0.450000047683716,
+          0.529386520385742
+        ],
+        "position": [
+          4.5,
+          0.960846781730652,
+          14.5
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "bounds_position": [
+          4.20589590072632,
+          1.21084678173065,
+          15.2058963775635
+        ],
+        "bounds_size": [
+          0.588208198547363,
+          0.5,
+          0.588207244873047
+        ],
+        "position": [
+          4.5,
+          0.960846781730652,
+          15.5
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "bounds_position": [
+          0.50426584482193,
+          4.0,
+          17.5042667388916
+        ],
+        "bounds_size": [
+          1.99146842956543,
+          2.44286251068115,
+          2.57056617736816
+        ],
+        "position": [
+          1.5,
+          5.0,
+          18.5
+        ],
+        "token": "SphericalHarmonics"
+      },
+      {
+        "bounds_position": [
+          6.50426578521729,
+          4.0,
+          17.5042667388916
+        ],
+        "bounds_size": [
+          1.99146842956543,
+          2.44286251068115,
+          2.57056617736816
+        ],
+        "position": [
+          7.5,
+          5.0,
+          18.5
+        ],
+        "token": "SphericalHarmonics"
+      },
+      {
+        "bounds_position": [
+          5.85999965667725,
+          0.0,
+          0.295000016689301
+        ],
+        "bounds_size": [
+          2.28000068664551,
+          3.41199994087219,
+          0.409999966621399
+        ],
+        "position": [
+          7.0,
+          0.0,
+          0.5
+        ],
+        "token": "gate:wavefunctions intro"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          20.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          3.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          3.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.9910001754761,
+          1.58000004291534,
+          2.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          20.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          5.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          5.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.9910001754761,
+          1.58000004291534,
+          4.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          9.0,
+          1.58000004291534,
+          20.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          9.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          7.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.9910001754761,
+          1.58000004291534,
+          6.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.0,
+          1.58000004291534,
+          20.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          11.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          6.27500009536743,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.449999809265137,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          6.5,
+          3.51999998092651,
+          -1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.27499997615814,
+          2.91000008583069,
+          20.9169998168945
+        ],
+        "bounds_size": [
+          0.450000047683716,
+          0.179999828338623,
+          0.0629997253417969
+        ],
+        "position": [
+          1.5,
+          3.0,
+          21.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          11.8999996185303,
+          0.810000002384186,
+          10.25
+        ],
+        "bounds_size": [
+          0.100000381469727,
+          1.34000015258789,
+          2.5
+        ],
+        "position": [
+          12.0,
+          0.899999976158142,
+          11.5
+        ],
+        "token": "whiteboard"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          3.22499990463257,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.950000286102295,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          3.70000004768372,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "token": "ceiling_vent"
+      },
+      {
+        "bounds_position": [
+          11.4320001602173,
+          0.550000011920929,
+          2.20000004768372
+        ],
+        "bounds_size": [
+          0.288000106811523,
+          0.600000083446503,
+          0.616199970245361
+        ],
+        "position": [
+          11.7200002670288,
+          0.850000023841858,
+          2.5
+        ],
+        "token": "fire_hose_box"
+      },
+      {
+        "bounds_position": [
+          2.84689092636108,
+          0.419999986886978,
+          6.81386041641235
+        ],
+        "bounds_size": [
+          1.29465770721436,
+          1.47557604312897,
+          1.28602838516235
+        ],
+        "position": [
+          3.5,
+          0.419999986886978,
+          7.5
+        ],
+        "token": "dream_bodies"
+      },
+      {
+        "bounds_position": [
+          4.94256114959717,
+          0.420000016689301,
+          8.99776363372803
+        ],
+        "bounds_size": [
+          1.13321447372437,
+          1.53186368942261,
+          1.03805732727051
+        ],
+        "position": [
+          5.5,
+          0.419999986886978,
+          9.5
+        ],
+        "token": "dream_bodies"
+      },
+      {
+        "bounds_position": [
+          9.95828533172607,
+          0.419999986886978,
+          9.10940933227539
+        ],
+        "bounds_size": [
+          1.10408401489258,
+          1.11999988555908,
+          0.81444263458252
+        ],
+        "position": [
+          10.5,
+          0.419999986886978,
+          9.5
+        ],
+        "token": "dream_bodies"
+      }
+    ],
+    "bay": [
+      6.3,
+      0.0,
+      16.5
+    ],
+    "lesson": "res://doc/book/iterations/2026-10-08-wavefunctions-ghost-student/attempt/WaveFunctions_Intro/01_cube_return.gd",
+    "scope": "Existing museum, native rendering. Prescribed cube motion; no student-comprehension or headset claim."
+  },
+  "passed": true,
+  "room": "WaveFunctions_Intro",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

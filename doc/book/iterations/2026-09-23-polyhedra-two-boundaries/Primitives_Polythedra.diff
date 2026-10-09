@@ -1,0 +1,17 @@
+--- before/final.md
++++ final.md
+@@ -35,6 +35,14 @@
+ ```
+ 
+ The convex collision hull spans the four positions, including the base absent from the drawing.[^polyhedra-hull] Rendering leaves an opening; physics receives a closed shape. The points have entered two rules and acquired different boundaries.
++
++<!-- @polyhedra_boundary_plate -->
++
++Look at the two versions on the wall. The amber base makes visible a boundary you could not see on the object in your hand.
++
++![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/iterations/2026-09-23-polyhedra-two-boundaries/figures/polyhedra-boundaries.png)
++
++*Four positions, two boundaries. The amber face shows where the convex hull closes the opening.*
+ 
+ That does not mean your tracked hand must stop there. Which body collides, with which layers, matters too. The geometric surface remains open; passage for a particular simulated body is another question.
+ 

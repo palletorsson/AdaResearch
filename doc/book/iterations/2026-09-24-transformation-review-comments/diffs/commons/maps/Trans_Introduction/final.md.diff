@@ -1,0 +1,30 @@
+--- before/commons/maps/Trans_Introduction/final.md
++++ commons/maps/Trans_Introduction/final.md
+@@ -37,7 +37,7 @@
+ 
+ Wait until the surface is level with the floor, then walk across during its pause. Look back as it shrinks. What made a floor a moment ago is withdrawing below it.
+ 
+-This cube changes from half a metre to three metres on each side, about a fixed centre. The visible mesh begins as a one-metre cube. The script gives all three dimensions the same factor:
++The cube grows from half a metre to three metres on each side, about a fixed centre. Its mesh is built one metre on a side; the script multiplies all three dimensions by the same factor, from a half to three:
+ 
+ ```gdscript
+ var scale_vec: Vector3 = Vector3(safe_scale, safe_scale, safe_scale)
+@@ -77,6 +77,12 @@
+ 
+ At the starting setting, the aligned plank overlaps the landing by thirty centimetres. Move the bank beyond that overlap and a seam opens between their surfaces. The readout measures the seam. It cannot settle what your body can do with it.
+ 
++![The aligned plank overlaps the landing at BANK +0.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-at-crossing.png)
++
++![A gap opens beyond the same plank at BANK +1.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-gap.png)
++
++*The same crossing at two bank settings: thirty centimetres of overlap, then seventy centimetres of gap. The plank holds the same quarter-turn in both views. The camera has not moved.*
++
+ Let the plank turn again. An operation that worked a moment ago keeps running exactly as before. The crossing has lost one of its agreements.
+ 
+ The landing uses a translation too:
+@@ -94,4 +100,4 @@
+ 
+ The timers keep going while you think. The simulation supplies an opening and a duration. It does not know how long you need to understand what just carried you.
+ 
+-There is more to examine beside the route: measurements, matrices, the order of operations. For now, take the experience of crossing into the next hall. Trans_Translation will give displacement more work to do.
++There is more to examine beside the route: measurements, matrices, the order of operations. For now, take the experience of crossing into the next hall, where displacement has more work to do.

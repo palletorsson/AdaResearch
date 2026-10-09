@@ -1,0 +1,167 @@
+{
+  "checks": [
+    {
+      "name": "complete program creates shaft, control and readout",
+      "passed": true
+    },
+    {
+      "name": "carried sphere keeps its size and frozen release",
+      "passed": true
+    },
+    {
+      "name": "17 rings plus two centres give 138 positions",
+      "passed": true
+    },
+    {
+      "name": "sides and caps give 272 triangles",
+      "passed": true
+    },
+    {
+      "name": "rendered mesh contains every triangle",
+      "passed": true
+    },
+    {
+      "name": "half-turn shaft valid corner indices",
+      "passed": true
+    },
+    {
+      "name": "half-turn shaft no degenerate triangles",
+      "passed": true
+    },
+    {
+      "name": "half-turn shaft closed seam and caps: every logical edge has two faces",
+      "passed": true
+    },
+    {
+      "name": "half-turn shaft sphere topology V-E+F=2",
+      "passed": true
+    },
+    {
+      "name": "bottom keeps its starting corner",
+      "passed": true
+    },
+    {
+      "name": "half-height turns first corner ninety degrees",
+      "passed": true
+    },
+    {
+      "name": "top turns first corner one hundred eighty degrees",
+      "passed": true
+    },
+    {
+      "name": "oval has unequal radii",
+      "passed": true
+    },
+    {
+      "name": "local height works after translated and rotated host",
+      "passed": true
+    },
+    {
+      "name": "unchanged hand does not rebuild geometry",
+      "passed": true
+    },
+    {
+      "name": "lower endpoint removes twist",
+      "passed": true
+    },
+    {
+      "name": "upper endpoint makes one complete turn",
+      "passed": true
+    },
+    {
+      "name": "changing turn keeps connectivity",
+      "passed": true
+    },
+    {
+      "name": "full-turn shaft valid corner indices",
+      "passed": true
+    },
+    {
+      "name": "full-turn shaft no degenerate triangles",
+      "passed": true
+    },
+    {
+      "name": "full-turn shaft closed seam and caps: every logical edge has two faces",
+      "passed": true
+    },
+    {
+      "name": "full-turn shaft sphere topology V-E+F=2",
+      "passed": true
+    },
+    {
+      "name": "control clamps above range",
+      "passed": true
+    },
+    {
+      "name": "control clamps below range",
+      "passed": true
+    },
+    {
+      "name": "carried trigger starts whole-object rotation",
+      "passed": true
+    },
+    {
+      "name": "rotation advances at 0.4 radians per second",
+      "passed": false
+    },
+    {
+      "name": "rotation moves the rendered body in world space",
+      "passed": false
+    },
+    {
+      "name": "rotation leaves stored vertices and mesh resource unchanged",
+      "passed": false
+    },
+    {
+      "name": "second trigger stops at current pose",
+      "passed": true
+    },
+    {
+      "name": "pausing does not untwist the form",
+      "passed": true
+    },
+    {
+      "name": "witness follows stored first corner under parent rotation",
+      "passed": true
+    },
+    {
+      "name": "independent height/ring-resolution variation builds 206 positions",
+      "passed": true
+    },
+    {
+      "name": "taller form keeps top turn and changes height",
+      "passed": true
+    },
+    {
+      "name": "variation preserves original height and geometry",
+      "passed": true
+    },
+    {
+      "name": "taller twelve-sided shaft valid corner indices",
+      "passed": true
+    },
+    {
+      "name": "taller twelve-sided shaft no degenerate triangles",
+      "passed": true
+    },
+    {
+      "name": "taller twelve-sided shaft closed seam and caps: every logical edge has two faces",
+      "passed": true
+    },
+    {
+      "name": "taller twelve-sided shaft sphere topology V-E+F=2",
+      "passed": true
+    },
+    {
+      "name": "actual generated normals face outward on sides and caps",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "rotation advances at 0.4 radians per second",
+    "rotation moves the rendered body in world space",
+    "rotation leaves stored vertices and mesh resource unchanged"
+  ],
+  "passed": false,
+  "scope": "Exact printed files; teacher-authored native assertions. Not a headset or comprehension test."
+}

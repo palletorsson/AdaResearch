@@ -1,0 +1,32 @@
+--- current/Noise_Voxel/final.md
++++ proposed/Noise_Voxel/final.md
+@@ -28,7 +28,7 @@
+ 
+ The threshold button visits five values and then returns to the first. Within the rising run, −0.20 through +0.20, occupied cells can only be removed while the field and bias stay fixed. Watch a thin connection; watch a tiny island. They do not necessarily disappear at the same step.
+ 
+-The counter for separate pieces has another rhythm. With the starting seed, 31415, it reads 4, 15, 25, 21, 32 across those five thresholds. At +0.10 there are fewer cells and fewer pieces than at zero. A connection can break and leave two pieces; a small piece can vanish entirely. Counting bodies asks a different question from counting how much is occupied.
++The counter for separate pieces has another rhythm. As the threshold rises, a thin connection can break and leave two pieces. A small island can vanish entirely. Less occupied space can mean more pieces, or fewer.[^voxel-pieces] Counting bodies asks a different question from counting how much is occupied.
+ 
+ Press CUT. Part of the model opens to your gaze. Now check the occupied count. It has stayed put. The cells concealed by CUT are still in the array; this button changes which instances are drawn. Bring them back. A disappearance has acquired two possible explanations within reach of the same hand.
+ 
+@@ -40,11 +40,7 @@
+ 
+ Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot tell you how far a rejected value missed the line; the other display can.
+ 
+-This excerpt is the screen asking the bench for the stored answer:
+-
+-```gdscript
+-row.append({"value":value,"score":value-PerlinTerrainSculptor.contract_bias(v),"occupied":source.get("_voxels")[x][cell.y][z]})
+-```
++The screen reads the bench's stored decision and sets it beside the value from which that decision was made. One view can show a difference that the other has put on the same side of the line.[^voxel-screen]
+ 
+ There are two readings beside each other because each lets us ask something the other has lost. The coloured field has already passed through another rule, a colour mapping. We have no unencoded original glowing behind the screen. We have enough distinct readings to follow one transformation and put pressure on its account.
+ 
+@@ -84,3 +80,7 @@
+ <!-- @ -->
+ 
+ Carry a rejected value towards Noise 6 Wall. What else could receive it?
++
++[^voxel-pieces]: In the recorded desktop comparison of 13 September 2026, seed 31415 produced 4, 15, 25, 21 and 32 face-connected pieces at thresholds −0.20, −0.10, 0, +0.10 and +0.20. Occupied counts fell throughout. These are observations of that configuration, not required outcomes for every seed.
++
++[^voxel-screen]: The screen keeps the value, biased score and stored occupancy together: `row.append({"value":value,"score":value-PerlinTerrainSculptor.contract_bias(v),"occupied":source.get("_voxels")[x][cell.y][z]})`. The short threshold function earlier in the chapter makes the decision; this line gathers its two readings for display.

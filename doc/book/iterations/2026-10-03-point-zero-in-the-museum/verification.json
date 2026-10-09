@@ -1,0 +1,119 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing museum frame counter loaded",
+      "passed": true
+    },
+    {
+      "name": "original panel counts engine frames since boot",
+      "passed": true
+    },
+    {
+      "name": "label is code-created inside the existing console",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-counter",
+      "passed": true
+    },
+    {
+      "name": "lesson has the ready, process and once-only functions",
+      "passed": true
+    },
+    {
+      "name": "printed ready function is the actual artifact function",
+      "passed": true
+    },
+    {
+      "name": "artifact with printed edit compiles",
+      "passed": true
+    },
+    {
+      "name": "edited script creates its own existing-style display",
+      "passed": true
+    },
+    {
+      "name": "printed process edit updates the same console",
+      "passed": true
+    },
+    {
+      "name": "delta does not alter the total being read",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: every-frame",
+      "passed": true
+    },
+    {
+      "name": "artifact with printed edit compiles",
+      "passed": true
+    },
+    {
+      "name": "edited script creates its own existing-style display",
+      "passed": true
+    },
+    {
+      "name": "ready-only display keeps its initial reading",
+      "passed": true
+    },
+    {
+      "name": "engine keeps processing while display is held",
+      "passed": true
+    },
+    {
+      "name": "ready reading includes frames before panel readiness",
+      "passed": true
+    },
+    {
+      "name": "removing process removes the recurring callback",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: read-once",
+      "passed": true
+    },
+    {
+      "name": "artifact with printed edit compiles",
+      "passed": true
+    },
+    {
+      "name": "edited script creates its own existing-style display",
+      "passed": true
+    },
+    {
+      "name": "returning the assignment to process resumes updates",
+      "passed": true
+    },
+    {
+      "name": "artifact with printed edit compiles",
+      "passed": true
+    },
+    {
+      "name": "edited script creates its own existing-style display",
+      "passed": true
+    },
+    {
+      "name": "restored artifact retains the original readout",
+      "passed": true
+    },
+    {
+      "name": "production source was never changed by the probe",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "panel_world": [
+      7.5,
+      1.64999997615814,
+      4.5
+    ]
+  },
+  "passed": true,
+  "room": "Point_Zero",
+  "scope": "Printed function edits run in memory on the existing counter at its museum placement. No production script or map changes. Physical headset and beginner comprehension untested."
+}

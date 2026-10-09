@@ -1,0 +1,219 @@
+{
+	"captures": [
+		{
+			"angles": [
+				-15.0,
+				116.769145362398,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "arrival",
+			"path_samples": 0,
+			"policy": "keep"
+		},
+		{
+			"angles": [
+				50.0,
+				116.769145362398,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "left",
+			"path_samples": 0,
+			"policy": "keep"
+		},
+		{
+			"angles": [
+				-15.0,
+				116.769145362398,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "returned",
+			"path_samples": 0,
+			"policy": "return"
+		},
+		{
+			"angles": [
+				50.0,
+				30.0,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "parent-then-child",
+			"path_samples": 81,
+			"policy": "keep"
+		},
+		{
+			"angles": [
+				50.0,
+				30.0,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "child-then-parent",
+			"path_samples": 81,
+			"policy": "keep"
+		},
+		{
+			"angles": [
+				35.0,
+				116.769145362398,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "controls",
+			"path_samples": 0,
+			"policy": "keep"
+		},
+		{
+			"angles": [
+				-15.0,
+				116.769145362398,
+				-50.1470842750399,
+				27.6927491022722,
+				-34.841289832474
+			],
+			"name": "other-side",
+			"path_samples": 0,
+			"policy": "keep"
+		}
+	],
+	"checks": [
+		{
+			"name": "six visible plates and five retained hinge angles",
+			"passed": true
+		},
+		{
+			"name": "portable fallback is explicitly without the XR addon",
+			"passed": true
+		},
+		{
+			"name": "production scene graph agrees with its forward kinematics",
+			"passed": true
+		},
+		{
+			"name": "moving joint one keeps the supported root fixed",
+			"passed": true
+		},
+		{
+			"name": "moving joint one carries its descendant plates",
+			"passed": true
+		},
+		{
+			"name": "moving joint one leaves the root's other branch fixed",
+			"passed": true
+		},
+		{
+			"name": "all other local joint angles are retained",
+			"passed": true
+		},
+		{
+			"name": "leave policy preserves released angles over native frames",
+			"passed": true
+		},
+		{
+			"name": "moving a hinge changes actual native pixels",
+			"passed": true
+		},
+		{
+			"name": "return begins only after release and makes progress",
+			"passed": true
+		},
+		{
+			"name": "return reaches the exact chosen starting angles",
+			"passed": true
+		},
+		{
+			"name": "restored angle vector restores all actual plate frames",
+			"passed": true
+		},
+		{
+			"name": "opposite assignment order gives the same final plate transforms",
+			"passed": true
+		},
+		{
+			"name": "the intermediate corner positions differ",
+			"passed": true
+		},
+		{
+			"name": "the retained corner traces differ",
+			"passed": true
+		},
+		{
+			"name": "requests beyond a hinge stop clamp to its authored maximum",
+			"passed": true
+		},
+		{
+			"name": "negative requests clamp to the minimum",
+			"passed": true
+		},
+		{
+			"name": "reset clears the retained trace",
+			"passed": true
+		},
+		{
+			"name": "real mouse motion drives a ray-picked plate",
+			"passed": true
+		},
+		{
+			"name": "real mouse release ends the plate drag",
+			"passed": true
+		},
+		{
+			"name": "at least one moving plate can be picked through the actual scene collider",
+			"passed": true
+		},
+		{
+			"name": "production pointer press identifies the intended child hinge",
+			"passed": true
+		},
+		{
+			"name": "production pointer move rotates one selected hinge",
+			"passed": true
+		},
+		{
+			"name": "positive pointer rotation follows the hand's direction",
+			"passed": true
+		},
+		{
+			"name": "production pointer release closes the drag",
+			"passed": true
+		},
+		{
+			"name": "production pointer release retains its last pose",
+			"passed": true
+		},
+		{
+			"name": "real GUI mouse click selects return policy",
+			"passed": true
+		},
+		{
+			"name": "real GUI mouse click selects keep policy",
+			"passed": true
+		},
+		{
+			"name": "GUI slider changes the production hinge angle",
+			"passed": true
+		}
+	],
+	"engine": {
+		"build": "official",
+		"hash": "89cea143987d564363e15d207438530651d943ac",
+		"hex": 263680,
+		"major": 4,
+		"minor": 6,
+		"patch": 0,
+		"status": "stable",
+		"string": "4.6-stable (official)",
+		"timestamp": 0
+	},
+	"passed": true,
+	"scope": "Production specimen copied byte-for-byte, desktop fallback without XR addon. GPU, joint state, scene transforms, pointer protocol and GUI events. No gravity/contact solver, installed hall, headset or learner trial."
+}

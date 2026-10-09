@@ -1,0 +1,106 @@
+{
+	"artifacts": {
+		"chroma_stack": {
+			"dna": {
+				"axes": {
+					"rule": [
+						"one",
+						"by_shape",
+						"by_height",
+						"by_neighbour"
+					],
+					"stack": [
+						"bauhaus",
+						"turned",
+						"cut"
+					],
+					"pose": [
+						"aligned",
+						"twist",
+						"taper",
+						"combined"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "rule=one vs rule=by_height at stack=bauhaus",
+					"predicted_focus_pct": 18.0,
+					"arithmetic": "one is a single ochre; by_height paints the five elements on a blue-to-orange ramp sampled at centre height / 4.4, so the third element (hue 0.371, near ochre's 0.104 only in value) and the top two differ most; the base and second element sit close to ochre in value, so the hottest 5% of pixels moves about 18% (a lower bound, one flat light, no shadows). Closest STACK pair: bauhaus vs cut at rule=one, only the sphere/dome vs wedge silhouettes differ, about a quarter of the subject."
+				}
+			},
+			"lookup_name": "chroma_stack",
+			"name": "Chroma Stack",
+			"class_name": "ChromaStack",
+			"scene": "res://commons/artifacts/chroma_stack/chroma_stack.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "Five-piece columns composed from familiar primitives. rule selects one colour, shape categories, local height or the complement of the previous colour. stack selects bauhaus, turned or cut forms. pose selects aligned, twist, taper or combined: successive fixed turns of 22.5 degrees around Y and/or XZ scale reduced by 0.15 per level. Heights remain unchanged; colour assignment is independent of pose. The default aligned pose preserves earlier configurations. Origin at the base; full height 4.4 m. Meshes and collider boxes use the same per-level yaw and horizontal scale. One plate faces local +Z. Static construction, no animation.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				2,
+				2,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"stack",
+				"totem",
+				"bauhaus",
+				"kandinsky",
+				"complement",
+				"hue_ramp",
+				"pillar",
+				"dna",
+				"static_transform",
+				"rotation",
+				"scale"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"source": "Conservative maximum across poses: base 1.10 m, rotated upper square 0.95*sqrt(2) m; height 4.40 m. See runtime checks for placed poses.",
+				"aabb_size": [
+					1.35,
+					4.4,
+					1.35
+				]
+			},
+			"interactions": [],
+			"dev_themes": [
+				"Build with primitives and static transformations, then add colour",
+				"Hold geometry fixed while varying colour assignment",
+				"Hold colour assignment fixed while varying rotation and XZ scale"
+			],
+			"qfep_connection": "The opening colour hall compares what a fixed construction permits a body to see and walk around. Colour can group its parts differently without changing their geometry or collision; rotated and scaled geometry changes those boundaries independently.",
+			"note": "2026-09-17: pose added for Color_Context_Placed. Metadata config_rule, config_stack and config_pose are read before building. apply_grid_config rebuilds only when a supported value changes. DNA axes are derived with tools/apply_dna_block.py. Actual museum validation in doc/space/color-column-hall-2026-09-17/; headset untested."
+		}
+	}
+}

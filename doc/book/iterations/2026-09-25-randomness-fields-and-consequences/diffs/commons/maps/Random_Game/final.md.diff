@@ -1,0 +1,28 @@
+--- before/commons/maps/Random_Game/final.md
++++ commons/maps/Random_Game/final.md
+@@ -115,13 +115,17 @@
+ 
+ Another draw gives an initial downward speed between 1.6 and 2.6 metres per second. Small sideways velocities and later changes let the bodies drift. The projectile carries its own generator. A seed that repeats its launch position does not, by itself, repeat those later changes or its collisions.
+ 
+-The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that fires every half-second, or one that fires every tenth of a second with a one-in-five chance, would launch the same number of cubes an hour and make a different room to stand in; the podium's drawn delays, ahead, are the second kind. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
++The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that tries every half-second and one that tries every tenth of a second with a one-in-five chance would make the same expected number of attempts over an hour, but different rhythms. The podium ahead uses another rule again: after each arrival, it draws the length of the next wait. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
++
++<!-- @waiting_profile -->
+ 
+ At the last podium, wait for a small wooden cube. It drops from three metres above the floor onto a two-metre-square surface. Another arrives at the other position. The positions alternate; after the first one-second wait, each new delay is drawn between 0.3 and 1.3 seconds. The places are dependable while the rhythm is not.
+ 
+-Pick one up. In a headset, arrivals wait while either cube is held; a desktop carry does not pause them. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
++Pick one up. Arrivals wait while either cube is held. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
+ 
+ Beside the podium, five cutout profiles recede into the room. Their uneven horizons sit around eye height, 1.7 metres. The nearest is dark; those behind grow lighter. Move sideways and watch one contour uncover another. A landscape appears between flat panels.
++
++![The waiting podium and its five receding profiles, photographed from inside the museum.](/book-review/doc/book/figures/randomness/waiting-and-seeing.png)
+ 
+ Each panel joins seventeen heights. The two ends are fixed; the interior samples vary, with smaller permitted deviations near the edges. PROFILE changes the contours. The nearest, darkest panel shares the podium's seed, so until you press PROFILE its fifteen interior heights trace the first fifteen drawn cube delays, the ones REPLAY brings back, flattened toward its ends. Read that ridge from the end nearest the podium: a point above the level of the fixed ends stands for a wait longer than 0.8 seconds. The panels behind it are separate draws, and so is every contour after PROFILE. Here you can look back and forth along the sequence. At the podium you had to wait through it. What did seeing the whole shape let you anticipate?
+ 
+@@ -129,4 +133,4 @@
+ 
+ At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. The fire doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it. The three passages let us separate those events and walk what follows.
+ 
+-The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
++The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? Carry that question through the biome ladder, where successive compositions gather the rules we have met. In Noise Types we will then take it between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.

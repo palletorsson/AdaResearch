@@ -1,0 +1,132 @@
+[
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/accepted/focused",
+    "returncode": 0,
+    "checks": 25,
+    "passed": 25,
+    "failed": [],
+    "seconds": 5.419384241104126,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/after/focused",
+    "returncode": 1,
+    "checks": 25,
+    "passed": 24,
+    "failed": [
+      "repeated unchanged config neither duplicates nor resets history"
+    ],
+    "seconds": 5.8182549476623535,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/after/museum",
+    "returncode": 1,
+    "checks": 30,
+    "passed": 28,
+    "failed": [
+      "standing capsule clears museum obstructions",
+      "whole4.8metre display clears other collision above floor"
+    ],
+    "seconds": 20.65530753135681,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/before/feasibility",
+    "returncode": 0,
+    "checks": 5,
+    "passed": 5,
+    "failed": [],
+    "seconds": 4.090280055999756,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/before/museum",
+    "returncode": 0,
+    "checks": 8,
+    "passed": 8,
+    "failed": [],
+    "seconds": 16.97718858718872,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/current/survey",
+    "returncode": 1,
+    "checks": 0,
+    "passed": 0,
+    "failed": [],
+    "seconds": 0.4858694076538086,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/final/focused",
+    "returncode": 0,
+    "checks": 31,
+    "passed": 31,
+    "failed": [],
+    "seconds": 8.196946620941162,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/final/museum",
+    "returncode": 1,
+    "checks": 36,
+    "passed": 34,
+    "failed": [
+      "whole4.8metre display clears other collision above floor",
+      "five control sightlines clear solid museum geometry"
+    ],
+    "seconds": 24.366402626037598,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/fitted/focused",
+    "returncode": 0,
+    "checks": 27,
+    "passed": 27,
+    "failed": [],
+    "seconds": 5.990303039550781,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/lifecycle/focused",
+    "returncode": 0,
+    "checks": 32,
+    "passed": 32,
+    "failed": [],
+    "seconds": 5.348754167556763,
+    "watched_inputs_stable": true,
+    "current_accepted": true
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/shapes/survey",
+    "returncode": 1,
+    "checks": 22,
+    "passed": 21,
+    "failed": [
+      "whole4.8metre display clears other collision above floor"
+    ],
+    "seconds": 12.308774471282959,
+    "watched_inputs_stable": true,
+    "current_accepted": false
+  },
+  {
+    "path": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum",
+    "returncode": 0,
+    "checks": 36,
+    "passed": 36,
+    "failed": [],
+    "seconds": 21.9548397064209,
+    "watched_inputs_stable": true,
+    "current_accepted": true
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "shots": [
+    {
+      "tag": "portal-entry",
+      "from": [
+        8,
+        2,
+        8
+      ],
+      "look_at": [
+        9,
+        2,
+        20
+      ],
+      "fov": 75
+    },
+    {
+      "tag": "portal-overview",
+      "from": [
+        27,
+        24,
+        44
+      ],
+      "look_at": [
+        9,
+        0,
+        45
+      ],
+      "fov": 75
+    },
+    {
+      "tag": "portal-instrument",
+      "from": [
+        9.1,
+        1.8,
+        8
+      ],
+      "look_at": [
+        11.1,
+        1.5,
+        11
+      ],
+      "fov": 65
+    }
+  ],
+  "room": "Primitives_Portals",
+  "sequence": "primitives",
+  "run": "res://ada_run/encounter_pilot/Primitives_Portals/"
+}

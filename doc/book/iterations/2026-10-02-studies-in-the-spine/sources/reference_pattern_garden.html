@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="6842f43597f2ed69902543b4b35940faf82fa7fa98697eaf58089a01338ecae6"><title>commons/artifacts/reference_studies/pattern_garden.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/reference_studies/pattern_garden.gd</p><pre><code>extends &quot;./build.gd&quot;
+## Original flowers and a shared world-coordinate pattern, prompted by Hart.
+func surface(a: Color, b: Color, style: int = 0) -&gt; ShaderMaterial:
+	var result := ShaderMaterial.new()
+	result.shader = preload(&quot;./pattern.gdshader&quot;)
+	result.set_shader_parameter(&quot;colour_a&quot;, a)
+	result.set_shader_parameter(&quot;colour_b&quot;, b)
+	result.set_shader_parameter(&quot;pattern&quot;, style)
+	result.set_shader_parameter(&quot;density&quot;, 2.0)
+	result.set_shader_parameter(&quot;phase&quot;, amount * 0.5)
+	animated_materials.append(result)
+	return result
+
+func build() -&gt; void:
+	var checker := surface(Color(&quot;ebe5ef&quot;), Color(&quot;191021&quot;))
+	var hot := surface(Color(&quot;ed2268&quot;), Color(&quot;281083&quot;), 2)
+	var cyan := surface(Color(&quot;39e6ce&quot;), Color(&quot;901aee&quot;), 1)
+	var yellow := surface(Color(&quot;ffc333&quot;), Color(&quot;62179a&quot;), 1)
+	box(Vector3(0, 0.01, 0), Vector3(11.7, 0.02, 9.7), hot)
+	box(Vector3(0, 2.6, -4.86), Vector3(11.7, 5.2, 0.02), checker)
+	box(Vector3(-5.85, 2.6, 0), Vector3(0.02, 5.2, 9.7), hot)
+	for x in [-4.0, 0.0, 4.0]:
+		box(Vector3(x, 1.15, -3.6), Vector3(1.9, 0.22, 1.9), cyan)
+		box(Vector3(x, 0.52, -3.6), Vector3(0.9, 1.0, 0.9), checker)
+	var flower_positions := [Vector3(-3,0,-2),Vector3(0,0,-2.8),Vector3(3.1,0,-2.1),Vector3(-2.5,0,1.2),Vector3(2.7,0,1.0)]
+	for i in flower_positions.size():
+		var site: Vector3 = flower_positions[i]
+		var height := 2.1 + 0.35 * (i % 3)
+		var stem := PackedVector3Array()
+		for j in 25:
+			var t := float(j) / 24
+			stem.append(site + Vector3(sin(t * 2.6 + i) * t * 0.36, 0.14 + t * height, 0))
+		tube(stem, 0.12, checker)
+		var centre: Vector3 = stem[-1]
+		ball(centre, Vector3(0.27,0.27,0.27), yellow)
+		for j in 6:
+			var angle := TAU * j / 6.0
+			var petal := ball(centre + Vector3(cos(angle)*0.55, sin(angle)*0.55,0), Vector3(0.56,0.26,0.13), cyan if i % 2 == 0 else checker)
+			petal.rotation.z = angle
+		for sign_value in [-1, 1]:
+			var leaf := ball(site + Vector3(sign_value*0.4, height*0.47,0), Vector3(0.6,0.2,0.10), yellow if i % 2 == 0 else cyan)
+			leaf.rotation.z = sign_value * 0.55
+	for i in 3:
+		ring(Vector3(-3.5+i*3.5,3.5,-4.5),0.65,0.05,yellow,Vector3(90,0,0))
+	evidence = {&quot;flower_count&quot;: flower_positions.size(), &quot;positions&quot;: flower_positions, &quot;phase&quot;: amount * 0.5, &quot;density&quot;: 2.0, &quot;mapping&quot;: &quot;world triplanar&quot;, &quot;patterns&quot;: 3}
+</code></pre></body></html>

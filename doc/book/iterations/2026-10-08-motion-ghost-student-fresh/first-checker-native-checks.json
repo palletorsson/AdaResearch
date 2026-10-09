@@ -1,0 +1,214 @@
+{
+  "checks": [
+    {
+      "label": "03_mass.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "reference has three point bodies",
+      "passed": true
+    },
+    {
+      "label": "reference masses are 1 / 2 / 4 kg",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "reference pulse gives 1 / 0.5 / 0.25 m/s",
+      "passed": true
+    },
+    {
+      "label": "ending the pulse retains velocity",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "a second completed pulse adds to previous motion",
+      "passed": true
+    },
+    {
+      "label": "03_mass_eight.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "mass edit changes third body to 8 kg",
+      "passed": true
+    },
+    {
+      "label": "03_mass_eight: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "8 kg prediction survives actual integration",
+      "passed": true
+    },
+    {
+      "label": "caption identifies the changed mass",
+      "passed": true
+    },
+    {
+      "label": "comparison.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "independent comparison makes 1 kg and 2 kg",
+      "passed": true
+    },
+    {
+      "label": "comparison: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "independent clocks give 1 and 0.5 m/s after one second",
+      "passed": true
+    },
+    {
+      "label": "different masses and durations reach equal final speed",
+      "passed": true
+    },
+    {
+      "label": "equal final speeds leave approximately 1.5 m and 1 m journeys",
+      "passed": true
+    },
+    {
+      "label": "comparison displays distance and velocity units",
+      "passed": true
+    },
+    {
+      "label": "saved distance reading survives continued coasting",
+      "passed": false
+    },
+    {
+      "label": "coasting remains physical motion after snapshot",
+      "passed": true
+    },
+    {
+      "label": "comparison: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "second comparison pulse adds another 1 m/s to each body",
+      "passed": true
+    },
+    {
+      "label": "another press permits a new retained measurement",
+      "passed": true
+    },
+    {
+      "label": "student's transfer prediction follows its chosen quantities",
+      "passed": true
+    },
+    {
+      "label": "transfer.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "transfer creates one body with its declared mass",
+      "passed": true
+    },
+    {
+      "label": "transfer: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "independent transfer reaches the predicted speed",
+      "passed": true
+    },
+    {
+      "label": "independent transfer follows the expected displacement",
+      "passed": true
+    },
+    {
+      "label": "independent transfer also coasts",
+      "passed": true
+    },
+    {
+      "label": "03_mass.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "turning the study turns the world-space force",
+      "passed": true
+    },
+    {
+      "label": "03_mass.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "pressing during the pulse restarts time without erasing velocity",
+      "passed": true
+    },
+    {
+      "label": "03_mass.gd: compiles",
+      "passed": true
+    },
+    {
+      "label": "real XRTools pickup marks the point held",
+      "passed": true
+    },
+    {
+      "label": "03_mass: one supplied start button",
+      "passed": true
+    },
+    {
+      "label": "held point misses the expired pulse; zero-speed release stays still",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "saved distance reading survives continued coasting"
+  ],
+  "observations": {
+    "comparison": {
+      "display": "1 kg / 2 kg; pushes 1 s / 2 s\nSPEED 1.000 / 1.000 m/s\nDISTANCE 1.525 / 1.025 m\nPUSH LEFT 0.00 / 0.00 s\nAT BOTH PUSHES END 1.508 / 1.008 m\nSTART BOTH\n",
+      "distances_at_122_steps": [
+        1.54166567325592,
+        1.04166638851166
+      ],
+      "speeds": [
+        0.999999701976776,
+        0.999999403953552
+      ]
+    },
+    "mass_eight_speed": 0.124999962747097,
+    "mid_pulse_restart_speed": 1.49999928474426,
+    "physics": "Jolt Physics",
+    "reference_speeds": [
+      0.999999701976776,
+      0.499999850988388,
+      0.249999925494194
+    ],
+    "ticks_per_second": 60,
+    "transfer": {
+      "distance_near_push_end": 1.55833566188812,
+      "measured_speed": 1.00000190734863,
+      "spec": {
+        "duration_seconds": 3.0,
+        "expected_final_speed": 1.0,
+        "force_newtons": 1.0,
+        "mass_kg": 3.0,
+        "starting_from_rest": true
+      }
+    }
+  },
+  "passed": false,
+  "scope": "Fresh packet-only AI reconstruction and two independently authored exercises, executed in Godot/Jolt; pickup uses XRTools with supplied controller input. No physical headset or human learning claim."
+}

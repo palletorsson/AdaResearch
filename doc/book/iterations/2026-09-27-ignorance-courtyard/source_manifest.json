@@ -1,0 +1,28 @@
+{
+  "room": "Primitives_Ignorance",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "0124e1beace089cd28cd97c14bf63d8014de9a88d13ae4a7a051dc48d7ff1e1a",
+    "commons/maps/Primitives_Ignorance/map_data.json": "c315b5f30075c6939faf1e0790a02982ebd9675f6da11ec628aef3d5e24f43d6",
+    "doc/book/iterations/2026-09-27-ignorance-courtyard/probe.gd": "9fe7bf556ac7c2f3daf9636d51e26e583af839d9ca9ea60362b469377b5a828c",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "4f4c8146afe111bf1985183afaf4b409a654b681aa41579f77d2c2a6863fcb1a",
+    "ada_run/encounter_pilot/Primitives_Ignorance_courtyard/control.json": "e0a0f449d59323276f93ce43eaead5732cf4759bf5d658b99260a0c84c9fad46",
+    "ada_run/encounter_pilot/Primitives_Ignorance_courtyard/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Primitives_Ignorance_courtyard/em_bake.json": "fdc8a601b3cc46a706301464799d126cb0bb28cff3a898bbf0eb88b821a1ef63"
+  }
+}

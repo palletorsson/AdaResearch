@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "http": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-eight-interaction-lessons/figures/trace.png",
+      "status": 200,
+      "bytes": 1795227
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines-run-checks.py.txt",
+      "status": 200,
+      "bytes": 17500
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines-three-files.zip",
+      "status": 200,
+      "bytes": 1735
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines/contract.json",
+      "status": 200,
+      "bytes": 58938
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines/point_body.gd",
+      "status": 200,
+      "bytes": 647
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json",
+      "status": 200,
+      "bytes": 202115
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/lines/verify.gd",
+      "status": 200,
+      "bytes": 17649
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/trace-run-checks.py.txt",
+      "status": 200,
+      "bytes": 15801
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/trace-three-files.zip",
+      "status": 200,
+      "bytes": 1839
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/trace/contract.json",
+      "status": 200,
+      "bytes": 42019
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/trace/report-runtime.json",
+      "status": 200,
+      "bytes": 164484
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-point-a-reusable-class/trace/verify.gd",
+      "status": 200,
+      "bytes": 13546
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-primitives-facing-pages/Point_Lines.html?revision=point-class",
+      "status": 200,
+      "bytes": 38334
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-10-05-primitives-facing-pages/Point_Trace.html?revision=point-class",
+      "status": 200,
+      "bytes": 36964
+    },
+    {
+      "url": "http://localhost:3003/ghost-student?state=point-lines",
+      "status": 200,
+      "bytes": 1649497
+    },
+    {
+      "url": "http://localhost:3003/ghost-student?state=point-trace",
+      "status": 200,
+      "bytes": 1785073
+    }
+  ],
+  "ghost": [
+    {
+      "map": "Point_One",
+      "status": "current",
+      "checks": 60
+    },
+    {
+      "map": "Point_Coordinates",
+      "status": "current",
+      "checks": 46
+    },
+    {
+      "map": "Point_Lines",
+      "status": "current",
+      "checks": 170
+    },
+    {
+      "map": "Point_Trace",
+      "status": "current",
+      "checks": 124
+    }
+  ],
+  "protected_files": 72,
+  "backend_tests": 18
+}

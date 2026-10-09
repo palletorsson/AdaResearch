@@ -1,0 +1,574 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored Color_Walls grid present",
+      "passed": true
+    },
+    {
+      "name": "office and the two colour benches remain in the museum",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-glass",
+      "passed": true
+    },
+    {
+      "name": "new layout has twelve independent panes",
+      "passed": true
+    },
+    {
+      "name": "office remains at floor level",
+      "passed": true
+    },
+    {
+      "name": "three furnished positions remain",
+      "passed": true
+    },
+    {
+      "name": "one quad per filter, avoiding doubled box-face blending",
+      "passed": true
+    },
+    {
+      "name": "filters layer translucent colour once",
+      "passed": true
+    },
+    {
+      "name": "filter coefficients stay unshaded and do not fog the view twice",
+      "passed": true
+    },
+    {
+      "name": "angled edge screens interrupt the orthogonal pattern",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: layers-glass",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: across-glass",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: back-glass",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: plan-oblique",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 0",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 1",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 2",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 3",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 4",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 5",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 6",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 7",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 8",
+      "passed": true
+    },
+    {
+      "name": "glass route leg 9",
+      "passed": true
+    },
+    {
+      "name": "glass pane stops the ordinary body",
+      "passed": true
+    },
+    {
+      "name": "glass pointer event changes surface mode",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-opaque",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: layers-opaque",
+      "passed": true
+    },
+    {
+      "name": "opaque mode uses solid material and normal blend",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 0",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 1",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 2",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 3",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 4",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 5",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 6",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 7",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 8",
+      "passed": true
+    },
+    {
+      "name": "opaque route leg 9",
+      "passed": true
+    },
+    {
+      "name": "opaque pane stops the ordinary body",
+      "passed": true
+    },
+    {
+      "name": "opaque pointer event changes surface mode",
+      "passed": true
+    },
+    {
+      "name": "two switches preserve every collider, pane transform and colour",
+      "passed": true
+    },
+    {
+      "name": "reapplying placement config does not rebuild",
+      "passed": true
+    },
+    {
+      "name": "unconfigured placements retain the eighteen-pane installation",
+      "passed": true
+    },
+    {
+      "name": "old cubicle option remains available",
+      "passed": true
+    },
+    {
+      "name": "inspection completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "materials": [
+      {
+        "colour": "(0.2235, 0.9059, 0.9333, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(1.0, 0.9098, 0.1843, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.9569, 0.1922, 0.7294, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.3137, 0.4588, 0.9608, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.4039, 0.9137, 0.9255, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.9804, 0.898, 0.2902, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.3294, 0.8745, 0.4392, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.9373, 0.4, 0.7529, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.9882, 0.502, 0.3647, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.4118, 0.5294, 0.9569, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.4706, 0.8706, 0.902, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      },
+      {
+        "colour": "(0.9843, 0.698, 0.4078, 0.52)",
+        "fog_disabled": true,
+        "shading": 0
+      }
+    ],
+    "office_world": [
+      23.5,
+      0.0,
+      20.5
+    ],
+    "routes": [
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          0.0,
+          0.000120440497994423,
+          -2.87540054321289
+        ],
+        "target": [
+          0.0,
+          0.0500000007450581,
+          -3.0
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          1.30451583862305,
+          0.000120440497994423,
+          -3.00417137145996
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          -3.0
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          1.21054077148438,
+          0.000120440497994423,
+          -0.642278671264648
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          -0.800000011920929
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          -1.32419586181641,
+          0.000842477427795529,
+          -0.792098999023438
+        ],
+        "target": [
+          -1.20000004768372,
+          0.0500000007450581,
+          -0.800000011920929
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          -1.21028518676758,
+          0.000842477427795529,
+          1.95285034179688
+        ],
+        "target": [
+          -1.20000004768372,
+          0.0500000007450581,
+          1.79999995231628
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          1.325439453125,
+          0.000842477427795529,
+          1.80800437927246
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          1.79999995231628
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          1.20892524719238,
+          0.000842477427795529,
+          4.85597801208496
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          4.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          -0.277206420898438,
+          0.000842477427795529,
+          4.70501899719238
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          4.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          -0.210088729858398,
+          0.000842477427795529,
+          6.95580291748047
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          6.80000019073486
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": true,
+        "reached": [
+          -0.20069694519043,
+          0.000842477427795529,
+          8.64890670776367
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          8.5
+        ]
+      },
+      {
+        "arrived": false,
+        "glass": true,
+        "reached": [
+          -1.10000038146973,
+          0.000390626490116119,
+          -2.23752403259277
+        ],
+        "target": [
+          -1.10000002384186,
+          0.0500000007450581,
+          -1.0
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          0.0,
+          0.000390626490116119,
+          -2.87540626525879
+        ],
+        "target": [
+          0.0,
+          0.0500000007450581,
+          -3.0
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          1.20885848999023,
+          0.000390626490116119,
+          -3.00239562988281
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          -3.0
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          1.20599937438965,
+          0.000390626490116119,
+          -0.697843551635742
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          -0.800000011920929
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          -1.27977561950684,
+          0.000390626490116119,
+          -0.78367805480957
+        ],
+        "target": [
+          -1.20000004768372,
+          0.0500000007450581,
+          -0.800000011920929
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          -1.21193695068359,
+          0.000390626490116119,
+          1.91475105285645
+        ],
+        "target": [
+          -1.20000004768372,
+          0.0500000007450581,
+          1.79999995231628
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          1.27168655395508,
+          0.000390626490116119,
+          1.81684494018555
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          1.79999995231628
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          1.21012306213379,
+          0.000390626490116119,
+          4.81667900085449
+        ],
+        "target": [
+          1.20000004768372,
+          0.0500000007450581,
+          4.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          -0.28892707824707,
+          0.000390626490116119,
+          4.70503044128418
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          4.69999980926514
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          -0.216632843017578,
+          0.000390626490116119,
+          6.90237808227539
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          6.80000019073486
+        ]
+      },
+      {
+        "arrived": true,
+        "glass": false,
+        "reached": [
+          -0.20103645324707,
+          0.000390626490116119,
+          8.65539169311523
+        ],
+        "target": [
+          -0.200000002980232,
+          0.0500000007450581,
+          8.5
+        ]
+      },
+      {
+        "arrived": false,
+        "glass": false,
+        "reached": [
+          -1.10000038146973,
+          0.000390626490116119,
+          -2.23752403259277
+        ],
+        "target": [
+          -1.10000002384186,
+          0.0500000007450581,
+          -1.0
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "scope": "Actual isolated production museum and ordinary controller; supplied pointer events. Native interior cameras. No headset or learner trial."
+}

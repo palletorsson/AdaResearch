@@ -1,0 +1,38 @@
+{
+	"baseline": true,
+	"checks": [
+		{
+			"message": "wheel: root receives pointer input",
+			"passed": false
+		},
+		{
+			"message": "Wheel body has a collision shape",
+			"passed": false
+		},
+		{
+			"message": "Wheel mounting collider matches its rectangular backplate",
+			"passed": false
+		},
+		{
+			"message": "lever: root receives pointer input",
+			"passed": false
+		},
+		{
+			"message": "lever: hand-pose redirect resolves",
+			"passed": false
+		},
+		{
+			"message": "lever: hand-pose redirect resolves",
+			"passed": false
+		}
+	],
+	"failures": [
+		"wheel: root receives pointer input",
+		"Wheel body has a collision shape",
+		"Wheel mounting collider matches its rectangular backplate",
+		"lever: root receives pointer input",
+		"lever: hand-pose redirect resolves",
+		"lever: hand-pose redirect resolves"
+	],
+	"headset_tested": false
+}

@@ -1,0 +1,11 @@
+--- before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/summary.md
++++ commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/summary.md
+@@ -6,7 +6,7 @@
+ 
+ Primary: `MolecularDesigner`.
+ 
+-Choose a visible part during the floating phase. Follow it as an assembly forms. Watch another floating phase and a different assembly; notice both its destination and any change of shape or colour.
++Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+ 
+ The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+ 

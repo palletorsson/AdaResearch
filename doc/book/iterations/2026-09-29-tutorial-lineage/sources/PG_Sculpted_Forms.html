@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PG_Sculpted_Forms · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PG_Sculpted_Forms">← Tutorial lineage</a></p><h1>PG Sculpted Forms</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PG_Sculpted_Forms/final.md">Raw captured source</a></p><pre># What did the sample keep?
+
+&lt;!-- @cube_mound_scene --&gt;
+
+Press DROP and watch twelve cubes fall. They turn, strike the ground and meet one another. Do not press the next button immediately. Choose the moment you want the next construction to inherit.
+
+SAMPLE freezes the cubes at that moment and builds a surface from their centres. It can record a settled pile or an unfinished fall. The word sample matters: the new mesh is not the physical event preserved in full.
+
+The positions must first belong to the model&#x27;s local frame:
+
+```gdscript
+positions.append(to_local(cube.global_position))
+```
+
+Without that conversion, a mesh attached beneath the translated artifact could receive its museum displacement twice. Coordinate systems are part of the construction, even when an object makes us forget that it has a parent.
+
+Each centre is mapped to a voxel address. The implementation then marks an axis-aligned neighbourhood around that address and emits faces where occupied cells meet empty ones. The program marks `ceil(cube_size / voxel_size)` cells in each direction around that address: two cells each way at the opening setting, a two-and-a-half-metre box around a one-metre cube. It is an enlarged centre-based approximation. The cubes&#x27; rotations and exact contact surfaces are not copied.
+
+Press ORIGINAL to alternate the frozen bodies with the sampled surface. They share the recorded centres but need not share their silhouette, openings or contact shapes. The sampled collider stays active during this visual comparison. ORIGINAL does not secretly restore the earlier physics experiment.
+
+VOXEL rebuilds from those same frozen positions at a different cell size. Look for an opening that becomes filled or a boundary that moves. A change of resolution can change the opportunities offered by a surface, not merely its smoothness. More detail has a cost, but less detail also makes decisions. Neither setting is innocent by virtue of being easy to compute.
+
+DROP begins another physical run. The previous generated collider is removed when its mesh is replaced, so an invisible old sample does not remain as an extra law inside the new one.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @dome --&gt;
+
+Turn to the dome. Here the empty region has not come from a wandering point or a fallen cube. A geometric operand has cut it from a stock volume.
+
+CUT cycles through the cast, the uncut blank, the cutting cores and a section. The cores show the shapes that made the absence. A hole can carry as much authorship as the material around it. The section view adds one more cutter, carrying the operation the four cores already have:
+
+```gdscript
+cut.operation = CSGShape3D.OPERATION_SUBTRACTION
+```
+
+Return to the cast after seeing its operands. The result may now look less self-evident. It was one possible agreement between volumes and operations. Moving a cutter would make another agreement; it could admit a body, divide an interior or close an opening we had begun to rely upon.
+
+The layered membrane remains nearby and makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid. Look between them. Do not assume that a convincing skin carries the collision or interior its appearance promises.
+
+These works give us different ways to materialize a decision: sample an event, subtract a volume, arrange surfaces. Next we will compose operations we already know, while keeping two questions distinct: how is an image copied, and how are places connected?
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PG_Sculpted_Forms/tutorial.md">Raw captured source</a></p><pre># What did the sample keep? — encounter
+
+&lt;!-- @cube_mound_scene --&gt;
+
+Press DROP and watch twelve cubes fall. They turn, strike the ground and meet one another. Do not press the next button immediately. Choose the moment you want the next construction to inherit.
+
+SAMPLE freezes the cubes at that moment and builds a surface from their centres. It can record a settled pile or an unfinished fall. The word sample matters: the new mesh is not the physical event preserved in full.
+
+The positions must first belong to the model&#x27;s local frame:
+
+```gdscript
+positions.append(to_local(cube.global_position))
+```
+
+Without that conversion, a mesh attached beneath the translated artifact could receive its museum displacement twice. Coordinate systems are part of the construction, even when an object makes us forget that it has a parent.
+
+Each centre is mapped to a voxel address. The implementation then marks an axis-aligned neighbourhood around that address and emits faces where occupied cells meet empty ones. The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction. It is an enlarged centre-based approximation. The cubes&#x27; rotations and exact contact surfaces are not copied.
+
+Press ORIGINAL to alternate the frozen bodies with the sampled surface. They share the recorded centres but need not share their silhouette, openings or contact shapes. The sampled collider stays active during this visual comparison. ORIGINAL does not secretly restore the earlier physics experiment.
+
+VOXEL rebuilds from those same frozen positions at a different cell size. Look for an opening that becomes filled or a boundary that moves. A change of resolution can change the opportunities offered by a surface, not merely its smoothness. More detail has a cost, but less detail also makes decisions. Neither setting is innocent by virtue of being easy to compute.
+
+DROP begins another physical run. The previous generated collider is removed when its mesh is replaced, so an invisible old sample does not remain as an extra law inside the new one.
+
+
+
+&lt;!-- @dome --&gt;
+
+Turn to the dome. Here the empty region has not come from a wandering point or a fallen cube. A geometric operand has cut it from a stock volume.
+
+CUT cycles through the cast, the uncut blank, the cutting cores and a section. The cores show the shapes that made the absence. A hole can carry as much authorship as the material around it.
+
+```gdscript
+cut.operation = CSGShape3D.OPERATION_SUBTRACTION
+```
+
+Return to the cast after seeing its operands. The result may now look less self-evident. It was one possible agreement between volumes and operations. Moving a cutter would make another agreement; it could admit a body, divide an interior or close an opening we had begun to rely upon.
+
+The layered membrane remains nearby. Its repaired scene makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid. Look between them. Do not assume that a convincing skin carries the collision or interior its appearance promises.
+
+These works give us different ways to materialize a decision: sample an event, subtract a volume, arrange surfaces. Next we will compose operations we already know, while keeping two questions distinct: how is an image copied, and how are places connected?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PG_Sculpted_Forms/technical.md">Raw captured source</a></p><pre># What did the sample keep? — implementation
+
+Sources: cube_mound.gd::generate_mesh_from_cubes, clear_generated_mesh; dome.gd::_apply_facture; layered_membrane.gd.
+
+The opt-in `pg_workshop_console` binds the named artifacts within its own museum hall; controls are implemented in commons/artifacts/timing_machines/pg_workshop.gd. Six push buttons occupy one compact 3×2 desk with an inclined translucent readout. RULE reveals the implementation card. Actions are guarded while a rebuild is in progress.
+
+Freeze physical cubes, compare their sampled surface, then reveal Boolean cutting operands.
+
+The positions must first belong to the model&#x27;s local frame:
+
+```gdscript
+positions.append(to_local(cube.global_position))
+```
+
+Each centre is mapped to a voxel address. The implementation then marks an axis-aligned neighbourhood around that address and emits faces where occupied cells meet empty ones. The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction. It is an enlarged centre-based approximation. The cubes&#x27; rotations and exact contact surfaces are not copied.
+
+VOXEL rebuilds from those same frozen positions at a different cell size. Look for an opening that becomes filled or a boundary that moves. A change of resolution can change the opportunities offered by a surface, not merely its smoothness. More detail has a cost, but less detail also makes decisions. Neither setting is innocent by virtue of being easy to compute.
+
+The layered membrane remains nearby. Its repaired scene makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid. Look between them. Do not assume that a convincing skin carries the collision or interior its appearance promises.
+
+Space: the inherited structure is retained in a larger surround; relocated objects have an independent museum aisle. Source zeros remain present and receive explicitly listed museum.floor_cells covers. The floor audit records offsets and covers. Raised historic cells are retained witnesses, not universally certified decks.
+
+Validation: see doc/space/pg-sequence-2026-09-15 and ada_run/pg-review-2026-09-15. Report actual runtime checks separately from outstanding human headset/clearance review.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PG_Sculpted_Forms/intent.md">Raw captured source</a></p><pre># Intent
+
+Freeze physical cubes, compare their sampled surface, then reveal Boolean cutting operands.
+
+Ask what the current construction permits a body, signal or representation to do. Ground the critical question in an observed operation and the code that produces it. Do not infer access from an image or entropy from apparent complexity.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PG_Sculpted_Forms/critical.md">Raw captured source</a></p><pre># What did the sample keep? — the assumption to test
+
+Press DROP and watch twelve cubes fall. They turn, strike the ground and meet one another. Do not press the next button immediately. Choose the moment you want the next construction to inherit.
+
+SAMPLE freezes the cubes at that moment and builds a surface from their centres. It can record a settled pile or an unfinished fall. The word sample matters: the new mesh is not the physical event preserved in full.
+
+Each centre is mapped to a voxel address. The implementation then marks an axis-aligned neighbourhood around that address and emits faces where occupied cells meet empty ones. The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction. It is an enlarged centre-based approximation. The cubes&#x27; rotations and exact contact surfaces are not copied.
+
+Press ORIGINAL to alternate the frozen bodies with the sampled surface. They share the recorded centres but need not share their silhouette, openings or contact shapes. The sampled collider stays active during this visual comparison. ORIGINAL does not secretly restore the earlier physics experiment.
+
+VOXEL rebuilds from those same frozen positions at a different cell size. Look for an opening that becomes filled or a boundary that moves. A change of resolution can change the opportunities offered by a surface, not merely its smoothness. More detail has a cost, but less detail also makes decisions. Neither setting is innocent by virtue of being easy to compute.
+
+DROP begins another physical run. The previous generated collider is removed when its mesh is replaced, so an invisible old sample does not remain as an extra law inside the new one.
+
+Turn to the dome. Here the empty region has not come from a wandering point or a fallen cube. A geometric operand has cut it from a stock volume.
+
+Return to the cast after seeing its operands. The result may now look less self-evident. It was one possible agreement between volumes and operations. Moving a cutter would make another agreement; it could admit a body, divide an interior or close an opening we had begun to rely upon.
+
+The layered membrane remains nearby. Its repaired scene makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid. Look between them. Do not assume that a convincing skin carries the collision or interior its appearance promises.
+
+These works give us different ways to materialize a decision: sample an event, subtract a volume, arrange surfaces. Next we will compose operations we already know, while keeping two questions distinct: how is an image copied, and how are places connected?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="PG_Sculpted_Forms/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `pg_workshop_console` — decoration
+- `cube_mound_scene` — primary
+- `dome` — primary
+- `layered_membrane` — secondary
+
+Primary markers match the book passages. The workshop desk controls the works; it is not an additional required algorithm.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PG_Sculpted_Forms/summary.md">Raw captured source</a></p><pre># What did the sample keep?
+
+Freeze physical cubes, compare their sampled surface, then reveal Boolean cutting operands.
+
+Primary: cube_mound_scene, dome. Supporting collection retained. The physical workshop desk operates these existing programs. Follow final.md in artifact order.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PG_Sculpted_Forms/blurb.md">Raw captured source</a></p><pre># What did the sample keep?
+
+Freeze physical cubes, compare their sampled surface, then reveal Boolean cutting operands.
+</pre></section></body></html>

@@ -1,0 +1,51 @@
+{
+  "checks_passed": 113,
+  "halls": 8,
+  "capture": "Actual isolated Endless Museum runtime; Godot 4.6 Compatibility; 1.7 m visitor eye; fixed moon phase; no headset claim",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d885a1b5be82957303f9d4b40dfc8f818896bbf13ef4dab5e884adb157ebcfe6",
+    "commons/scenes/em/em_colour_gallery.gd": "f37ae97a0b6e956320ee3a8b0b9f04bb60e2b46ab581b1a9b0a5484762162f36",
+    "commons/scenes/em/colour_gallery.gdshader": "b2d5c20e9d34be4b09bf52c373b2b0c676848e9ced60588679ae0cb3d4e5f206",
+    "commons/scenes/em/em_identity.gd": "600ce4d9923a3c9918081a27ae03bbead5667cfa626c271bfd37cccb8f35583b",
+    "tools/run_encounter_probe.py": "68ab99545eb2d484770952b1f99be690c90e7836871cd2c3a8c5c43e84147942",
+    "tools/probes/colour_gallery.gd": "05b9059618f77e3c01fb7fc0dffd2e9a96da038a2d52977fd51da94f4bb7fb7c",
+    "tools/colour_gallery_review.py": "e2a40971ee42d4e46f5d628335e54f87823a17cb0e2eb352ca1def5198c3c8ed",
+    "tools/build_colour_gallery_review.py": "8bb3edbc3dc48bc600f27ff8799d4dee1b218c3a6b026712943cb561ddf04abb",
+    "commons/maps/Color_Context_Placed/map_data.json": "f57ff0b2ceac3363735b24a0806440f04c34fa777163da12e38aee06fb4b755f",
+    "commons/maps/Color_Flashlight/map_data.json": "dd58523efa10eb14eb42a0b0ba49de9620b7192241cf0ff0c4fb86d18fa6e2e8",
+    "commons/maps/Color_Nails/map_data.json": "2640fdf12d4500377cca3c705b70d2866aa800bb480bb103cedeb9d6583ca489",
+    "commons/maps/Color_Rainbow/map_data.json": "4676bda4367a28828d125c3b975ad05b88ea773da4227a3d72364ed20ccb3ffe",
+    "commons/maps/Color_Pillar/map_data.json": "c45b69b39569717041832278e1aecbddf79ca6c40ade256dfa503413db0864d5",
+    "commons/maps/Color_Grid_Pallet/map_data.json": "17c6ff1efc849b6409738f15c7ce13eb4829582b712c0043d34413f6430b7346",
+    "commons/maps/Color_Paint/map_data.json": "f40429f0c87f12a1105b5be55070c55e65edb59af752432cf6772370a41c69f2",
+    "commons/maps/Color_Walls/map_data.json": "737068207a2cd62ffbd1a5294d603016fc4f6fd72ee0787e1d9d4918658aafcb"
+  },
+  "reports": {
+    "Color_Context_Placed": "06fe9e997801dc141e9f1cbd85e600439edf4b7d24046c04b5a4054a3f9d5aed",
+    "Color_Flashlight": "bdc0863378a16f81c6876bce1e01631439f29a74ceaccdc49d70913c158678c3",
+    "Color_Nails": "b3eaac86119c6695e4cacf20765b7d8cf10e65d452d062bf8c1e0f47b8f3d851",
+    "Color_Rainbow": "77753a47b701d876b8dfd8611acdce7bd66bdee122517d04c96a491ab7550d32",
+    "Color_Pillar": "5c50947721b9bd3295fa956730e5f8ce0c5234097f9d88218e5399c1211b97fc",
+    "Color_Grid_Pallet": "47e4a21915799e392debc22ad8d0d83097779fd5e6dd51d981e6af42bf2d5fd7",
+    "Color_Paint": "0ec5094ff8bac1300c0cd1524a572551dd635f42e6dc2cbcf67290a2c3c63c43",
+    "Color_Walls": "71399e23fa250f571849aa3522404f29b6f08e5345ab9cf7bbedd73e34e72969"
+  },
+  "images": {
+    "before/Color_Context_Placed/room.png": "cd71caf0a652e76ab0233f24755dfcc96989be6ddc94dd216605465426507b54",
+    "after/Color_Context_Placed/room.png": "0644bfc9e858596cd6664ff7aecdd12cdff70415fdea7b51df06db87fc06ccc9",
+    "before/Color_Flashlight/room.png": "8cadb9f1663ea6381d069969d6304f816bf64c7d939bd29cec3e577ffaff547d",
+    "after/Color_Flashlight/room.png": "69e272fc6c060220f5e4e363cca796e6bedf7d0d5904804bc3cfa6ad6d53d37f",
+    "before/Color_Nails/room.png": "c74b07407f3475b67ff4b99ecdd09877363fbe367803d04fe38e63845e786d66",
+    "after/Color_Nails/room.png": "b636e2eb846f630b4030acf278cfa2434c185df6fcbeaf97dd07fb53c316e9ab",
+    "before/Color_Rainbow/room.png": "9a428d4021d50a1b343ab38da870a17e3d90e912891a73e07a8e99d1f54dc234",
+    "after/Color_Rainbow/room.png": "579b77c564f076293d72f68787c3bd0e39200626dca2866a36678b6c13ad5d08",
+    "before/Color_Pillar/room.png": "d076f6e25087e0b90ebfcad4d3ee559f056c98837e2a61f9de71d666c57d641a",
+    "after/Color_Pillar/room.png": "8e26399bee63326aaf217493e8529d7e179c28e5416742e08310cfa1c2bcfcfa",
+    "before/Color_Grid_Pallet/room.png": "d582444b835fa3a7bf7c9f72f5819a41909c6f817e9fc31119a5b9b9de9dd591",
+    "after/Color_Grid_Pallet/room.png": "4513814c17708882c3c185ae5c21949b48455f40923f2ddb7c2aee7ff0e5cfb1",
+    "before/Color_Paint/room.png": "94d7b1426f9a6545c1c250bc40caa7c50da726d883a6d1a074a74778f0c9d852",
+    "after/Color_Paint/room.png": "96fa552e52d29b9f370da85392b75d51ef319a6f3f3c33db24d98ae2af448786",
+    "before/Color_Walls/room.png": "273d0c73408b8d2ed91e8760e743fc8b24a4900fe29ebbdedc880dccb3e7a594",
+    "after/Color_Walls/room.png": "686dfa320595ee76cc47abdbd2fde415dac0a6fedfa62d613efa859a5485de0e"
+  }
+}

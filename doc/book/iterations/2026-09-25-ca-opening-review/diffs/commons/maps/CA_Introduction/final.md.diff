@@ -1,0 +1,55 @@
+--- before/commons/maps/CA_Introduction/final.md
++++ commons/maps/CA_Introduction/final.md
+@@ -2,7 +2,7 @@
+ 
+ The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.
+ 
+-We have carried noise a long way: across a sheet, into a volume, around the body and under a foot. A little variation can satisfy the first wish for something organic. Its ease is part of its power. It can also make that first answer so familiar that other possible forms remain in its shadow. Keep the pleasure of the blob. Bring an unfinished question with it.
++Keep the pleasure of the blob. Bring an unfinished question with it.
+ 
+ <!-- @ca_rule_explorer -->
+ 
+@@ -10,7 +10,7 @@
+ 
+ Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.
+ 
+-Begin with Rule 90 and the single seed.[^ca-wolfram] STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.
++On the smaller CA RULES panel, between the study buttons and the board, press 90. Keep the single seed.[^ca-wolfram] STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.
+ 
+ The explorer consults its rule through these actual lines:
+ 
+@@ -22,9 +22,9 @@
+ 
+ Three on/off states make eight possible arrangements. The shifts place them into an index from zero to seven. The rule number stores eight answers, one bit for each arrangement. Reading the selected bit gives this cell's next state.
+ 
+-For Rule 90, compare `100` with `010`. Each contains one occupied cell. The answers differ. A count would have discarded a relation that this rule uses. A neighbourhood is already a decision about what information may matter.
++For Rule 90, compare `100` with `010`. Each contains one occupied cell. The first makes the next cell occupied; the second leaves it empty. A count would have discarded a relation that this rule uses. A neighbourhood is already a decision about what information may matter.
+ 
+-Choose Rule 30 and keep the single seed. Its rows quickly become harder to anticipate by eye. The board still asks the same small question at every position. A more tangled picture has not made the instruction longer. RUN lets the generations arrive automatically; pressing it again holds them, and STEP always leaves this study held after one update.
++Press 30 on that rule panel and keep the single seed. Its rows quickly become harder to anticipate by eye. The board still asks the same small question at every position. A more tangled picture has not made the instruction longer. RUN lets the generations arrive automatically; pressing it again holds them, and STEP always leaves this study held after one update.
+ 
+ The update writes a separate row. Here is the loop inside `_advance`, followed by the moment the new row becomes current:
+ 
+@@ -72,7 +72,7 @@
+ 
+ <!-- @line_network_ca -->
+ 
+-Return to the board's corridor and follow it past the turmites painting a shared surface: Langton's ants, cells that move, each turning by the colour it stands on, flipping that colour and stepping off it.[^ca-langton] Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.
++Return to the board's corridor and follow it past the turmites painting a shared surface: Langton's ants, agents that move, each turning by the colour it stands on, flipping that colour and stepping off it.[^ca-langton] Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.
+ 
+ You are watching a saved growth history. The same fixed frame holds its twenty stages, so a line already present stays where it was. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
+ 
+@@ -86,10 +86,10 @@
+ 
+ <!-- @ -->
+ 
+-Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.
++Other works remain in the hall. The orb rests on the rug's edge, another is held on a low stand, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.
+ 
+-For now, carry four choices: what a cell can hold, which neighbours it can consult, when its answer becomes available to others, and whether that answer is settled by the rule or by a draw. Every hall from here changes one or two of them and keeps the rest; that is all a variation is. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state: the second choice and the first. What forms need a little longer to go away?
++For now, carry four choices: what a cell can hold, which neighbours it can consult, when its answer becomes available to others, and whether that answer is settled by the rule or by a draw. These choices will help us follow the variations ahead. Sometimes the rule changes; sometimes we give the same record another body. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?
+ 
+-[^ca-wolfram]: The numbered rules are Stephen Wolfram's elementary cellular automata: 256 of them, each named by its eight answers read as one byte, so that Rule 90 is 01011010 (“Statistical mechanics of cellular automata”, *Reviews of Modern Physics* 55, 1983; *A New Kind of Science*, 2002). The RULE slider on the board's panel runs through all 256. The lattice of cells updated by their neighbours is older: Stanisław Ulam and John von Neumann at Los Alamos in the 1940s, von Neumann's with twenty-nine states a cell and built to reproduce itself.
++[^ca-wolfram]: The numbered rules are Stephen Wolfram's elementary cellular automata: 256 of them, each named by its eight answers read as one byte, so that Rule 90 is 01011010. In the order 111, 110, 101, 100, 011, 010, 001, 000, its eight answers are 0, 1, 0, 1, 1, 0, 1, 0 (“Statistical mechanics of cellular automata”, *Reviews of Modern Physics* 55, 1983; *A New Kind of Science*, 2002). The RULE slider on the board's panel runs through all 256. The lattice of cells updated by their neighbours is older: Stanisław Ulam and John von Neumann at Los Alamos in the 1940s, von Neumann's with twenty-nine states a cell and built to reproduce itself.
+ 
+ [^ca-langton]: Christopher Langton, “Studying artificial life with cellular automata”, *Physica D* 22 (1986). The ant is the variation in which the cell that changes is the one a body stands on, and the neighbourhood is wherever the body goes next; the painters here are eight to sixteen of them on one surface, dealt at random each time the hall is built.

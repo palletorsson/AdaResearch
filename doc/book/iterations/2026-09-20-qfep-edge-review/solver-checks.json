@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "message": "Finite nonnegative concentrations at lambda 0.0",
+      "ok": true
+    },
+    {
+      "message": "Matched model duration at lambda 0.0",
+      "ok": true
+    },
+    {
+      "message": "Finite nonnegative concentrations at lambda 0.2",
+      "ok": true
+    },
+    {
+      "message": "Matched model duration at lambda 0.2",
+      "ok": true
+    },
+    {
+      "message": "Finite nonnegative concentrations at lambda 0.4",
+      "ok": true
+    },
+    {
+      "message": "Matched model duration at lambda 0.4",
+      "ok": true
+    },
+    {
+      "message": "Finite nonnegative concentrations at lambda 0.7",
+      "ok": true
+    },
+    {
+      "message": "Matched model duration at lambda 0.7",
+      "ok": true
+    },
+    {
+      "message": "Finite nonnegative concentrations at lambda 1.0",
+      "ok": true
+    },
+    {
+      "message": "Matched model duration at lambda 1.0",
+      "ok": true
+    },
+    {
+      "message": "Halving timestep reduces field difference in the selected 64x64, t=60 comparison",
+      "ok": true
+    },
+    {
+      "message": "30 and 120 rendered frames per second give the same model state after three seconds",
+      "ok": true
+    },
+    {
+      "message": "Restart returns to identical field and zero model time",
+      "ok": true
+    },
+    {
+      "message": "New seed actually changes the initial field",
+      "ok": true
+    },
+    {
+      "message": "Hold stops both calculation and its clock",
+      "ok": true
+    },
+    {
+      "message": "Homogeneous supply state remains an exact fixed point",
+      "ok": true
+    }
+  ],
+  "elapsed_ms": 7232,
+  "metrics": [
+    {
+      "B_max": 0.000000239371502175345,
+      "B_min": 0.00000000523779908334632,
+      "duration": 192.000000000002,
+      "lambda": 0.0,
+      "rms_B": 0.0000000124543015712306
+    },
+    {
+      "B_max": 0.00000193478604160191,
+      "B_min": 0.0000000660752164094447,
+      "duration": 192.000000000002,
+      "lambda": 0.2,
+      "rms_B": 0.0000000808500888070584
+    },
+    {
+      "B_max": 0.374346792697906,
+      "B_min": 0.000886629917658865,
+      "duration": 192.000000000002,
+      "lambda": 0.4,
+      "rms_B": 0.000297325522126372
+    },
+    {
+      "B_max": 0.430308490991592,
+      "B_min": 0.428920418024063,
+      "duration": 192.000000000002,
+      "lambda": 0.7,
+      "rms_B": 0.0000107774846642201
+    },
+    {
+      "B_max": 0.592179298400879,
+      "B_min": 0.592177450656891,
+      "duration": 192.000000000002,
+      "lambda": 1.0,
+      "rms_B": 0.000000685972026139927
+    },
+    {
+      "dt_015_vs_0075": 0.000170741910189804,
+      "dt_03_vs_015": 0.000345909801525581,
+      "duration": 60,
+      "grid": 64,
+      "lambda": 0.4
+    }
+  ],
+  "passed": true
+}

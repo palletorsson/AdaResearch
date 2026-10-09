@@ -1,0 +1,123 @@
+{
+  "checks": [
+    {
+      "name": "Printed files build point, label and only one visible generation",
+      "passed": true
+    },
+    {
+      "name": "Recorded seed is an independent array",
+      "passed": true
+    },
+    {
+      "name": "Rule 90 first row has the two neighbouring cells",
+      "passed": true
+    },
+    {
+      "name": "Second row cancels the middle and moves two cells outward",
+      "passed": true
+    },
+    {
+      "name": "Existing museum explorer installs exactly one hand reader",
+      "passed": true
+    },
+    {
+      "name": "Eight explicit answers agree with installed Rule 90",
+      "passed": true
+    },
+    {
+      "name": "Forty generations and retained history agree for Rule 90",
+      "passed": true
+    },
+    {
+      "name": "Eight explicit answers agree with installed Rule 30",
+      "passed": true
+    },
+    {
+      "name": "Forty generations and retained history agree for Rule 30",
+      "passed": true
+    },
+    {
+      "name": "History truncates at 24 while generation continues to 40",
+      "passed": true
+    },
+    {
+      "name": "Independent adjacent-seed variation gives four active addresses",
+      "passed": true
+    },
+    {
+      "name": "A boundary seed affects 31 and 1 without adding cells",
+      "passed": true
+    },
+    {
+      "name": "Reversed traversal preserves all thirty generations",
+      "passed": true
+    },
+    {
+      "name": "The checker rejects an in-place update fault",
+      "passed": true
+    },
+    {
+      "name": "Evolution neither changes nor aliases its input",
+      "passed": true
+    },
+    {
+      "name": "Editing current cannot rewrite a recorded generation",
+      "passed": true
+    },
+    {
+      "name": "Reset keeps the chosen seed and discards prior history",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools pickup selects cell 4 in a rotated local frame",
+      "passed": true
+    },
+    {
+      "name": "Selection does not change the seed or advance time",
+      "passed": true
+    },
+    {
+      "name": "Pickable trigger makes one generation",
+      "passed": true
+    },
+    {
+      "name": "Release parks reader without another generation",
+      "passed": true
+    },
+    {
+      "name": "Desktop reader clamps to first address",
+      "passed": true
+    },
+    {
+      "name": "Desktop reader clamps to last address",
+      "passed": true
+    },
+    {
+      "name": "Enter steps once and key repeat is ignored",
+      "passed": true
+    },
+    {
+      "name": "Every visible tile displays its stored state",
+      "passed": true
+    },
+    {
+      "name": "Installed reader selects the boundary in its rotated hall frame",
+      "passed": true
+    },
+    {
+      "name": "Installed trigger steps existing explorer and its same history receiver",
+      "passed": true
+    },
+    {
+      "name": "Installed release parks at selected address",
+      "passed": true
+    },
+    {
+      "name": "Other explorer configurations retain their existing interface",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed scripts, independent variations, mutation rejection, installed source parity and actual XRTools with synthetic poses. No physical headset or human learner test."
+}

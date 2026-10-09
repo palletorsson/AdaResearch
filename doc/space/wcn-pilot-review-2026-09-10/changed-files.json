@@ -1,0 +1,43 @@
+{
+  "baseline_files": 65,
+  "changed_from_review_baseline": [
+    "commons/scenes/endless_museum.gd",
+    "commons/grid/GridInteractablesComponent.gd",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd",
+    "commons/data/artifact_roles.json",
+    "commons/data/book/noise.json",
+    "commons/artifacts/registry/commons_artifacts.json",
+    "tools/check_wave_platform_recovery.py",
+    "commons/maps/WaveFunctions_Intro/critical.md",
+    "commons/maps/WaveFunctions_Intro/field_notes.md",
+    "commons/maps/WaveFunctions_Intro/final.md",
+    "commons/maps/WaveFunctions_Intro/map_data.json",
+    "commons/maps/Random_Definition/field_notes.md",
+    "commons/maps/Random_Definition/final.md",
+    "commons/maps/Random_Definition/map_data.json",
+    "commons/maps/Noise_Perlin_Simplex/field_notes.md",
+    "commons/maps/Noise_Perlin_Simplex/final.md",
+    "commons/maps/Noise_Perlin_Simplex/map_data.json",
+    "commons/maps/Noise_Perlin_Simplex/technical.md",
+    "algorithms/randomness/simplexnoise/SimplexNoise.gd",
+    "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+    "algorithms/randomness/perlinnoise/NoiseVisualizer.gd",
+    "algorithms/randomness/perlinnoise/PerlinNoise.gd",
+    "commons/testing/probe_wcn_intro.gd",
+    "commons/testing/probe_wcn_noise_pair.gd",
+    "commons/testing/probe_wcn_random_definition.gd",
+    "commons/data/book/wavefunctions.json",
+    "tools/build_waves_chance_noise_plan.py",
+    "doc/research/waves-chance-noise/plan.json",
+    "doc/research/waves-chance-noise/HANDOFF.md",
+    "doc/research/waves-chance-noise/README.md",
+    "doc/book/handoffs/fable-waves-chance-noise-pilots.md",
+    "ada_run/waves_chance_noise/2026-09-10-pilots-batch.md",
+    "commons/artifacts/control_pendulum/control_pendulum.gd"
+  ],
+  "new_review_sources": [
+    "doc/book/handoffs/astra-wcn-pilot-review-2026-09-10.md",
+    "doc/research/waves-chance-noise/pilot-review.html"
+  ],
+  "generated_outputs": "doc/research/waves-chance-noise audit, index, map cards and all-maps; ada_run/waves_chance_noise source/publication evidence"
+}

@@ -1,0 +1,932 @@
+{
+ "sweep": "working_shown",
+ "peak_changed_pct": 12.437,
+ "subject_pct": 7.526,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "changed_px": 17891,
+   "changed_pct": 3.097
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "changed_px": 19135,
+   "changed_pct": 3.313
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "changed_px": 27742,
+   "changed_pct": 4.803
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "changed_px": 20879,
+   "changed_pct": 3.615
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 13697,
+   "changed_pct": 2.371
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 52975,
+   "changed_pct": 9.172
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 41118,
+   "changed_pct": 7.119
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 16750,
+   "changed_pct": 2.9
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 52927,
+   "changed_pct": 9.163
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 16750,
+   "changed_pct": 2.9
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "changed_px": 14434,
+   "changed_pct": 2.499
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "changed_px": 22261,
+   "changed_pct": 3.854
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "changed_px": 10451,
+   "changed_pct": 1.809
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "changed_px": 16120,
+   "changed_pct": 2.791
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 30782,
+   "changed_pct": 5.329
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 36833,
+   "changed_pct": 6.377
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 36976,
+   "changed_pct": 6.402
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 12049,
+   "changed_pct": 2.086
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 48334,
+   "changed_pct": 8.368
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 12049,
+   "changed_pct": 2.086
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "changed_px": 23455,
+   "changed_pct": 4.061
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "changed_px": 23998,
+   "changed_pct": 4.155
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "changed_px": 1796,
+   "changed_pct": 0.311
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 32383,
+   "changed_pct": 5.606
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 49135,
+   "changed_pct": 8.507
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 23179,
+   "changed_pct": 4.013
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 11629,
+   "changed_pct": 2.013
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 48414,
+   "changed_pct": 8.382
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "result",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 11629,
+   "changed_pct": 2.013
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "changed_px": 31848,
+   "changed_pct": 5.514
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "changed_px": 25199,
+   "changed_pct": 4.363
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 15598,
+   "changed_pct": 2.7
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 56385,
+   "changed_pct": 9.762
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 44618,
+   "changed_pct": 7.725
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 21044,
+   "changed_pct": 3.643
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 55405,
+   "changed_pct": 9.592
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 21044,
+   "changed_pct": 3.643
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "changed_px": 25475,
+   "changed_pct": 4.41
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 39727,
+   "changed_pct": 6.878
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 40764,
+   "changed_pct": 7.057
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 44841,
+   "changed_pct": 7.763
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 21904,
+   "changed_pct": 3.792
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 55490,
+   "changed_pct": 9.607
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 21904,
+   "changed_pct": 3.792
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "changed_px": 34097,
+   "changed_pct": 5.903
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 50412,
+   "changed_pct": 8.728
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 23411,
+   "changed_pct": 4.053
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 13373,
+   "changed_pct": 2.315
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 49827,
+   "changed_pct": 8.627
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "trace",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 13373,
+   "changed_pct": 2.315
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "changed_px": 60655,
+   "changed_pct": 10.501
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 51668,
+   "changed_pct": 8.945
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 29734,
+   "changed_pct": 5.148
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 60797,
+   "changed_pct": 10.526
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 29734,
+   "changed_pct": 5.148
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "changed_px": 65560,
+   "changed_pct": 11.35
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 47020,
+   "changed_pct": 8.141
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 71834,
+   "changed_pct": 12.437
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 47020,
+   "changed_pct": 8.141
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "changed_px": 34188,
+   "changed_pct": 5.919
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 65081,
+   "changed_pct": 11.267
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "longhand",
+    "event": "swing"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 34188,
+   "changed_pct": 5.919
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "changed_px": 44088,
+   "changed_pct": 7.633
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "throw"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "attraction"
+   },
+   "b": {
+    "layout": "single",
+    "evidence": "axiom",
+    "event": "swing"
+   },
+   "changed_px": 44088,
+   "changed_pct": 7.633
+  }
+ ]
+}

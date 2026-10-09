@@ -1,0 +1,96 @@
+--- before/commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd
++++ after/commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd
+@@ -2,17 +2,16 @@
+ class_name GradientDescentOptimizer
+ 
+ ## @identity
+-## name: "Settling: gradient descent toward max Q"
++## name: "Gradient descent: two-dimensional search histories"
+ ## tier: applied
+-## lineage: the marble-in-a-bowl wearing a lab coat — the exact motion a neural net makes
+-##   while training. Same downhill walk, just on a loss surface instead of a physical one.
+-## essence: An optimiser device, ~1m, with a soft body descending an energy landscape while a
+-##   readout counts steps and reports the energy falling. Each step takes the gradient and
+-##   moves a little downhill; the energy curve drops and flattens. This is the bridge: settling
+-##   a soft body and training a model are one algorithm — follow the slope of a cost toward its
+-##   minimum. The blob rolling into the basin is a network learning, slowed down to watch.
+-## truth: "TRAINING IS SETTLING — THE SAME WALK DOWNHILL TOWARD MAX Q"
+-## applications: machine learning, control, fitting — gradient descent is the engine of training.
++## lineage: a scalar objective sampled in two coordinates, with a central-difference gradient.
++## essence: A numerical point takes bounded downhill steps while a forty-sample trail records
++##   its history. After more than thirty steps, a small sampled gradient or a small permitted
++##   step against the frame starts a new history. Boundary stops are named separately.
++##   The visible sphere is a marker, not a simulated soft body.
++## truth: a local step and a stopping condition generate a search history; no neural network
++##   or Q objective is evaluated here.
++## applications: comparing local descent paths and the limits of a small-gradient stopping test.
+ 
+ const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
+ 
+@@ -36,6 +35,7 @@
+ var _p: Vector2 = Vector2.ZERO
+ var _step: int = 0
+ var _trail: Array = []
++var _last_stop: String = ""
+ const TRAIL_MAX := 40
+ 
+ 
+@@ -67,7 +67,7 @@
+ 
+ 
+ func _energy(x: float, z: float) -> float:
+-	# A loss surface with a clear global basin near centre plus wrinkles (local minima).
++	# An authored scalar surface: quadratic bowl plus sinusoidal variation.
+ 	var bowl: float = (x * x + z * z) * 0.5
+ 	var wrinkle: float = sin(x * 7.0) * 0.18 + cos(z * 6.0) * 0.16
+ 	return amp * (bowl + wrinkle)
+@@ -143,6 +143,7 @@
+ 	_p = Vector2(span * 0.34, -span * 0.30)
+ 	_step = 0
+ 	_trail.clear()
++	_last_stop = ""
+ 	var ball_holder := Node3D.new()
+ 	ball_holder.position = Vector3(0.0, 0.86, 0.0)
+ 	sway.add_child(ball_holder)
+@@ -169,11 +170,11 @@
+ 	_readout = _billboard_label(_readout_text(), Vector3(0.55, 1.1, 0.32), 16, readout_col)
+ 	add_child(_readout)
+ 
+-	add_child(_billboard_label("TRAINING IS SETTLING — THE WALK DOWNHILL", Vector3(0.0, 1.62, 0.0), 20, label_col))
++	add_child(_billboard_label("GRADIENT DESCENT — FOLLOW THE SEARCH HISTORY", Vector3(0.0, 1.62, 0.0), 20, label_col))
+ 
+ 
+ func _readout_text() -> String:
+-	return "GRADIENT DESCENT\nstep: %d\nenergy: %.4f\nlr: %.3f\n(= a net training)" % [_step, _energy(_p.x, _p.y), learning_rate]
++	return "GRADIENT DESCENT\nstep: %d\nenergy: %.4f\nrate: %.3f\n%s" % [_step, _energy(_p.x, _p.y), learning_rate, "last: " + _last_stop if _last_stop != "" else "2-D objective"]
+ 
+ 
+ func _refresh_trail() -> void:
+@@ -198,6 +199,7 @@
+ 
+ 	# One descent step every ~0.12s so the motion is watchable.
+ 	if fmod(_t, 0.12) < delta:
++		var previous_point := _p
+ 		var g: Vector2 = _grad(_p.x, _p.y)
+ 		_p -= g * learning_rate
+ 		_p.x = clampf(_p.x, -span * 0.5, span * 0.5)
+@@ -207,11 +209,17 @@
+ 		if _trail.size() > TRAIL_MAX:
+ 			_trail.pop_front()
+ 		_refresh_trail()
+-		# Restart from a fresh slope once it has clearly converged (re-runs the demo).
+-		if _grad(_p.x, _p.y).length() < 0.002 and _step > 30:
++		# The frame can block a nonzero gradient. Name that stop separately from
++		# SMALL SLOPE so a clamped address is not presented as convergence.
++		var small_slope: bool = _grad(_p.x, _p.y).length() < 0.002
++		var at_edge: bool = absf(_p.x) >= span * 0.5 or absf(_p.y) >= span * 0.5
++		var boundary_stop: bool = at_edge and _p.distance_to(previous_point) < learning_rate * 0.002
++		if (small_slope or boundary_stop) and _step > 30:
++			_last_stop = "SMALL SLOPE" if small_slope else "BOUNDARY"
+ 			_p = Vector2(_rng.randf_range(-span * 0.4, span * 0.4), _rng.randf_range(-span * 0.4, span * 0.4))
+ 			_step = 0
+ 			_trail.clear()
++			_refresh_trail()
+ 		if _readout != null:
+ 			_readout.text = _readout_text()
+ 

@@ -1,0 +1,44 @@
+--- before/doc/book/iterations/2026-09-23-book-frame/build.py
++++ doc/book/iterations/2026-09-23-book-frame/build.py
+@@ -33,12 +33,14 @@
+         if href.startswith('#'):a['href']='#'+prefix+'-'+href[1:];continue
+         if parts.scheme or parts.netloc or href.startswith('/'):continue
+         target=(path.parent/unquote(parts.path)).resolve()
+-        if target==OUT/'index.html':a['href']=BASE+'/index.html'
++        if target==ROOT/'doc/book/day-zero.md':a['href']='#day-zero';record(target)
++        elif target==OUT/'index.html':a['href']=BASE+'/index.html'
+         elif re.fullmatch(r'commons/maps/[^/]+/final\.md',target.relative_to(ROOT).as_posix()):a['href']='/book-review/'+record(target)
+         else:a['href']=snapshot(target)
+         if parts.fragment and target.suffix.lower()!='.md':a['href']+='#'+parts.fragment
+     return str(soup),[(h.get('id'),h.get_text()) for h in soup.find_all('h3')],download
+ preface,_,preface_source=document('doc/book/preface.md','preface')
++day_zero,_,day_zero_source=document('doc/book/day-zero.md','day-zero')
+ afterword,headings,afterword_source=document('doc/book/afterword-qfep.md','afterword')
+ plan,_,plan_source=document('doc/book/BOOK_FRAME.md','plan')
+ spine_path=ROOT/'commons/maps/curriculum_spine.json';record(spine_path)
+@@ -58,18 +60,19 @@
+ @media(max-width:800px){.layout{display:block;padding:24px}aside{display:none}header{padding:30px 24px}h2{font-size:30px}body{font-size:17px}.source{gap:12px}.path{gap:7px}.path a{padding:7px 10px}}
+ @media print{aside,header nav,.source,.development,footer{display:none}.layout{display:block;max-width:none;padding:0}body{background:white;font-size:11pt}header{padding:0 0 20px}.spine,#afterword{break-before:page}a{color:inherit}h2,h3{break-after:avoid}}
+ </style></head><body>
+-<header><div class="eyebrow">Ada Research · Book framing · Working drafts · Preface and afterword revised 28 September 2026</div><h1>What bodies are possible?</h1><p>An invitation before the journey. A return to its questions after the spine.</p><nav class="path" aria-label="Publication order"><a href="#preface">01 · Preface</a><a href="#spine">02 · The spine</a><a href="#afterword">03 · QFEP afterword</a><a href="#editorial">Editorial scaffold</a></nav></header>
+-<div class="layout"><aside><nav aria-label="On this page"><a href="#preface">Before the first point</a><a href="#spine">The active spine</a><a href="#afterword">The QFEP afterword</a><ol>'''+menu+'''</ol><a href="#editorial">Next writing pass</a><a href="/book?map=Point_One&amp;section=final">Book editor</a></nav></aside><main>
++<header><div class="eyebrow">Ada Research · Book framing · Working drafts · Preface and Day Zero revised 29 September 2026</div><h1>What bodies are possible?</h1><p>An invitation before the journey. A return to its questions after the spine.</p><nav class="path" aria-label="Publication order"><a href="#preface">01 · Preface</a><a href="#day-zero">02 · Day Zero</a><a href="#spine">03 · The spine</a><a href="#afterword">04 · QFEP afterword</a><a href="#editorial">Editorial scaffold</a></nav></header>
++<div class="layout"><aside><nav aria-label="On this page"><a href="#preface">Before the first point</a><a href="#day-zero">Day Zero · Hello, world</a><a href="#spine">The active spine</a><a href="#afterword">The QFEP afterword</a><ol>'''+menu+'''</ol><a href="#editorial">Next writing pass</a><a href="/book?map=Point_One&amp;section=final">Book editor</a></nav></aside><main>
+ <article id="preface"><div class="part">01 · Before the spine</div><div class="source"><a href="'''+preface_source+'''">Preface source · this edition</a></div>'''+preface+'''</article>
+-<section id="spine" class="spine"><div class="part">02 · The journey</div><h2>The active spine</h2><p>Read the halls in sequence, carrying an operation and an unanswered question into the next. The afterword follows the whole journey, including the halls after the QFEP Laboratory.</p><p>'''+str(len(chapters))+' sequences · '+str(count)+' halls in this reading edition. From <strong>'+html.escape(first)+'</strong> to <strong>'+html.escape(last)+'''</strong>.</p><nav class="path" aria-label="Spine reading"><a href="/museum-progress">Browse the active spine</a><a href="/book-review/commons/maps/'''+quote(first)+'''/final.md">First hall · live text</a><a href="/book-review/commons/maps/'''+quote(last)+'''/final.md">Final hall · live text</a><a href="#afterword">Continue to the afterword ↓</a></nav></section>
+-<article id="afterword"><div class="part">03 · After the complete spine</div><div class="source"><a href="'''+afterword_source+'''">Afterword source · this edition</a></div>'''+afterword+'''</article>
+-<details id="editorial" class="development"><summary>Editorial scaffold — evidence, cases, and next revision</summary>'''+plan+'''</details></main></div><footer class="meta">A scaffold for revision. Manuscript sources: doc/book/preface.md and doc/book/afterword-qfep.md.<br>Reading edition rebuilt from those files; hall links open their live final.md sources. <a href="manifest.json">Edition and source record</a></footer></body></html>'''
++<article id="day-zero"><div class="part">02 · Preparation, within the preface</div><div class="source"><a href="'''+day_zero_source+'''">Day Zero source · this edition</a></div>'''+day_zero+'''</article>
++<section id="spine" class="spine"><div class="part">03 · The journey</div><h2>The active spine</h2><p>Read the halls in sequence, carrying an operation and an unanswered question into the next. The afterword follows the whole journey, including the halls after the QFEP Laboratory.</p><p>'''+str(len(chapters))+' sequences · '+str(count)+' halls in this reading edition. From <strong>'+html.escape(first)+'</strong> to <strong>'+html.escape(last)+'''</strong>.</p><nav class="path" aria-label="Spine reading"><a href="/museum-progress">Browse the active spine</a><a href="/book-review/commons/maps/'''+quote(first)+'''/final.md">First hall · live text</a><a href="/book-review/commons/maps/'''+quote(last)+'''/final.md">Final hall · live text</a><a href="#afterword">Continue to the afterword ↓</a></nav></section>
++<article id="afterword"><div class="part">04 · After the complete spine</div><div class="source"><a href="'''+afterword_source+'''">Afterword source · this edition</a></div>'''+afterword+'''</article>
++<details id="editorial" class="development"><summary>Editorial scaffold — evidence, cases, and next revision</summary>'''+plan+'''</details></main></div><footer class="meta">A scaffold for revision. Manuscript sources: doc/book/preface.md, doc/book/day-zero.md and doc/book/afterword-qfep.md.<br>Reading edition rebuilt from those files; hall links open their live final.md sources. <a href="manifest.json">Edition and source record</a></footer></body></html>'''
+ soup=BeautifulSoup(page,'html.parser');ids=[t['id'] for t in soup.find_all(id=True)]
+ if len(ids)!=len(set(ids)):raise ValueError('Duplicate rendered ids')
+ for a in soup.find_all('a',href=True):
+     if a['href'].startswith('#') and a['href'][1:] not in ids:raise ValueError('Broken anchor '+a['href'])
+ if soup.find('script'):raise ValueError('Review preview must remain static')
+ (OUT/'index.html').write_text(page,encoding='utf-8')
+-manifest={'kind':'book-framing-reading-edition','generated_at':datetime.now(timezone.utc).isoformat(),'status':'working drafts; not accepted final manuscript','order':['preface','active spine','QFEP afterword'],'canonical_manuscripts':['doc/book/preface.md','doc/book/afterword-qfep.md'],'sequence_count':len(chapters),'hall_count':count,'chapters':chapters,'first':first,'last':last,'sources_sha256':SOURCES,'preview_url':'http://localhost:3003'+BASE+'/index.html'}
++manifest={'kind':'book-framing-reading-edition','generated_at':datetime.now(timezone.utc).isoformat(),'status':'working drafts; not accepted final manuscript','order':['preface','Day Zero','active spine','QFEP afterword'],'canonical_manuscripts':['doc/book/preface.md','doc/book/day-zero.md','doc/book/afterword-qfep.md'],'sequence_count':len(chapters),'hall_count':count,'chapters':chapters,'first':first,'last':last,'sources_sha256':SOURCES,'preview_url':'http://localhost:3003'+BASE+'/index.html'}
+ (OUT/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ print(json.dumps({'url':manifest['preview_url'],'sequences':len(chapters),'halls':count,'sources':len(SOURCES),'afterword_sections':len(headings)}))

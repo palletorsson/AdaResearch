@@ -1,0 +1,67 @@
+{
+  "runs": [
+    {
+      "phase": "before",
+      "kind": "focused",
+      "checks": 33,
+      "passed": 32,
+      "failures": [
+        "membranes provide79 connecting colliders; no full walk inferred"
+      ],
+      "returncode": 1,
+      "seconds": 4.194582462310791,
+      "stable_watched_sources": true,
+      "script_errors": 0,
+      "shader_cache_errors": 0,
+      "log": "before/focused/process.log",
+      "scope": "isolated source/control/PCM checks; Dummy audio, not listening"
+    },
+    {
+      "phase": "before",
+      "kind": "museum",
+      "checks": 19,
+      "passed": 19,
+      "failures": [],
+      "returncode": 0,
+      "seconds": 23.18915820121765,
+      "stable_watched_sources": true,
+      "script_errors": 0,
+      "shader_cache_errors": 17,
+      "log": "before/museum/process.log",
+      "scope": "actual museum one bench, pointer events, fixed standing camera, approach capsule; not whole hall traversal"
+    },
+    {
+      "phase": "after",
+      "kind": "focused",
+      "checks": 37,
+      "passed": 37,
+      "failures": [],
+      "returncode": 0,
+      "seconds": 4.3580708503723145,
+      "stable_watched_sources": true,
+      "script_errors": 0,
+      "shader_cache_errors": 0,
+      "log": "after/focused/process.log",
+      "scope": "isolated source/control/PCM checks; Dummy audio, not listening"
+    },
+    {
+      "phase": "after",
+      "kind": "museum",
+      "checks": 19,
+      "passed": 19,
+      "failures": [],
+      "returncode": 0,
+      "seconds": 21.12343144416809,
+      "stable_watched_sources": true,
+      "script_errors": 0,
+      "shader_cache_errors": 17,
+      "log": "after/museum/process.log",
+      "scope": "actual museum one bench, pointer events, fixed standing camera, approach capsule; not whole hall traversal"
+    }
+  ],
+  "retained_failure": "before/focused exit1: name-based membrane lookup counted only first duplicated BridgeCollider name. Corrected probe counts direct concave-shape bodies after queued scene children are freed; after/focused verifies79. No production geometry changed.",
+  "headset_tested": false,
+  "heard_by_person": false,
+  "stair_full_ascent_tested": false,
+  "museum_bench_gpu": "matched before/after images; all25 authored Synthesis placements observed in edit records"
+}

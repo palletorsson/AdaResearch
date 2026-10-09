@@ -1,0 +1,135 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "sphere_nodes": [],
+      "tag": "no_sphere_immediately_after_ready"
+    },
+    {
+      "arrow_heads": 4,
+      "arrow_shafts": 4,
+      "case_meshes": 3,
+      "crossing_beams": 2,
+      "passed": true,
+      "tag": "static_vitrine_and_guides_exist"
+    },
+    {
+      "direction_dot_products": [
+        1.00000011920929,
+        1.0,
+        1.0,
+        1.00000011920929
+      ],
+      "passed": true,
+      "tag": "four_arrows_aim_at_focus"
+    },
+    {
+      "passed": true,
+      "tag": "beams_cross_at_focus"
+    },
+    {
+      "passed": true,
+      "plaques": [
+        {
+          "body": "A point is position without extension.\nFollow the arrows and the crossing lines.\nThey locate a position that is never given a visible body.",
+          "name": "PointPlate",
+          "title": "THE INVISIBLE POINT"
+        },
+        {
+          "body": "A position in this case's local frame.\nNo sphere will appear here.",
+          "name": "PositionReadout",
+          "title": "Vector3(0, 1.25, 0)"
+        }
+      ],
+      "tag": "both_plaques_initialized_on_ready"
+    },
+    {
+      "forbidden_properties": [],
+      "has_process_callback": false,
+      "has_standin_builder": false,
+      "passed": true,
+      "scope": "Artifact-specific properties and builders. Its shared base class retains a generic _sphere helper, which this scene does not call and which is not a reveal control.",
+      "tag": "no_artifact_reveal_configuration"
+    },
+    {
+      "legacy_inputs_ignored": [
+        {
+          "absent": 0.0,
+          "present": 1000000.0
+        },
+        {
+          "absent": 1000000.0,
+          "present": 0.0
+        },
+        {
+          "absent": 0.0,
+          "present": 0.0
+        }
+      ],
+      "loader_has_method_gate": false,
+      "passed": true,
+      "tag": "legacy_timing_cannot_reveal_point"
+    },
+    {
+      "elapsed_ms": 6301,
+      "former_cycle_ms": 5200,
+      "passed": true,
+      "sampled_process_frames": 914,
+      "tag": "absence_persists_beyond_former_cycle",
+      "violations": []
+    },
+    {
+      "direct_mesh_count": 13,
+      "passed": true,
+      "tag": "static_guides_remain_unchanged"
+    },
+    {
+      "focus": "(0.0, 1.25, 0.0)",
+      "node_position": "(4.0, 0.0, 2.0)",
+      "passed": true,
+      "tag": "focus_and_node_position_unchanged",
+      "world_focus": "(4.0, 1.25, 2.0)"
+    },
+    {
+      "passed": true,
+      "plaques": [
+        {
+          "body": "A point is position without extension.\nFollow the arrows and the crossing lines.\nThey locate a position that is never given a visible body.",
+          "name": "PointPlate",
+          "title": "THE INVISIBLE POINT"
+        },
+        {
+          "body": "A position in this case's local frame.\nNo sphere will appear here.",
+          "name": "PositionReadout",
+          "title": "Vector3(0, 1.25, 0)"
+        }
+      ],
+      "tag": "static_plaques_remain_unchanged"
+    }
+  ],
+  "passed": true,
+  "scope": "Actual packed the_invisible_point.tscn in isolated Godot4.6 headless runtime; sampled from synchronous _ready completion through more than the former5.2second cycle. No global controls, live museum, other artifacts or learner acceptance tested.",
+  "source_hashes": {
+    "commons/artifacts/the_invisible_point/the_invisible_point.gd": "287996ff206160680cbf9dd4d278babd517e96fe214a4e5a16fc133561a32a30",
+    "commons/artifacts/the_invisible_point/the_invisible_point.tscn": "a3b01139b61a87c394ef7d3153c909746660c2d287e202f99a14d4532cc0fa7a",
+    "commons/artifacts/_embodied/embodied_prop.gd": "ca97e5202dfe11fb9833942741272a7b239b3fc0feafa7eaacc8922c49f0e393",
+    "commons/ui/text_screen.gd": "2398948ab6043b9998c674c7f65665a76ab3fefd5aaf62477b867fb19341e3a5",
+    "ada_run/point_one_restoration/always_invisible_probe.gd": "c77aec4e3b615849067c6c9d10ee0f825ca02c3aef1a8d7089410a861f68d587",
+    "ada_run/point_one_restoration/run_always_invisible.py": "f1d409d93ab4f6d52638af6d50aac02ce91ccfdca950c31910abcdcd2e204fcb"
+  },
+  "input_drift": {},
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--headless",
+    "--xr-mode",
+    "off",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\ada_run\\point_one_restoration\\always-invisible-engine.log",
+    "--script",
+    "res://ada_run/point_one_restoration/always_invisible_probe.gd"
+  ],
+  "exit_code": 0,
+  "duration_seconds": 13.5
+}

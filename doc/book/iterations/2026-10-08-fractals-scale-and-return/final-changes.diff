@@ -1,0 +1,68 @@
+--- before/Fractal_Recursion/final.md
++++ after/Fractal_Recursion/final.md
+@@ -73,6 +73,8 @@
+ 
+ A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?
+ 
++There are two ways to leave this room with something changed. Walk to another frame, and the same construction meets you elsewhere. Return to the desk and change its rule, and another construction becomes available. The museum is one arrangement of these possibilities. Its finite rooms give us somewhere to begin looking; they need not settle where the inquiry ends.
++
+ [^1]: Benoît Mandelbrot coined *fractal* in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in [“What Is a Fractal?”, *The Nature of Code*](https://natureofcode.com/fractals/#what-is-a-fractal). It is a way into the examples, not a complete mathematical definition.
+ 
+-[^noc]: The square and ring source files credit Daniel Shiffman's *The Nature of Code*, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.+[^noc]: The square and ring source files credit Daniel Shiffman's *The Nature of Code*, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.
+--- before/Fractal_RecursiveTrees/final.md
++++ after/Fractal_RecursiveTrees/final.md
+@@ -42,6 +42,12 @@
+ 
+ The same fork can be something to stand beneath or something to get past. Those meanings arrive with us. The instruction contains neither. We have given the branches size and solidity; we have not taught them to make room for us.
+ 
++Beside the controls, two flat drawings follow the tree. The plan keeps its spread and leaves out height; the side view keeps height and leaves out depth. A branch can become a short mark, or a dot, by pointing along the direction that drawing omits. Nothing has been cut from the tree. Something has been left out of the account.
++
++Press KEEP before turning a point. Rose lines retain that view while black lines follow the present branches. Walk beneath the canopy, then return. Which difference mattered while you were there? The drawings remember endpoints, not the way you ducked or the branch you thought would stop you. Try describing the tree again. “A smaller branch follows a larger one” may now need a place, a direction, and a body to which it matters.
++
++KEEP does not undo the turn, save this room for another visit, or choose the better tree. It holds one comparison until you replace or clear it. Something caught your attention; the instrument gives you time to decide what to do with that difference.
++
+ ![Looking up from beneath the enlarged, solid tree in the museum aisle.](images/tree-canopy.png)
+ 
+ <!-- @recursive_tree -->
+--- before/Fractal_MengerSponge/final.md
++++ after/Fractal_MengerSponge/final.md
+@@ -32,6 +32,8 @@
+ 
+ There was a connection in the geometry. There was not yet a route for every body.
+ 
++From outside, we asked where the hole was. Inside, we ask where we can turn, see ahead, or get out. Moving closer has changed the question as well as the view. A diagram can keep the opening's dimensions; it needs more decisions before it can answer for this journey. Carry that difference back to the desk before asking for another cut.
++
+ We changed locomotion without changing the sponge's selection rule. We could also ask what a smaller body would encounter, or what would happen if the opening were enlarged. These would be further experiments. The present room gives us one specific comparison: a large passage we can fly through and a smaller, visibly connected opening that a standing capsule cannot enter.
+ 
+ The glass, the support below us and the borrowed flight belong to the installation. The glass confines that movement to a place where its beginning and ending can be found. At the desk, NEXT, BACK and RESET wait while a visitor remains inside; another press is needed after everyone leaves. GHOST and FRAME can still change the reading. We can discuss a different solid shape without rebuilding it around someone already inhabiting the last one.
+--- before/Fractal_Synthesis/final.md
++++ after/Fractal_Synthesis/final.md
+@@ -16,9 +16,9 @@
+ 
+ In `cantor_set.gd`, `perform_iteration()` creates a left bar and a right bar of that length, each centred a third of the parent's length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.
+ 
+-After three cuts, press HISTORY. The upper rows disappear. Has another third been removed?
++After three cuts, press HISTORY. The upper rows appear. Has any material returned to the current generation?
+ 
+-The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What disappeared was the visible record of earlier stages. Bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.
++The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What returned was the visible record of earlier stages. Hide it and bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.
+ 
+ This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.
+ 
+@@ -53,6 +53,16 @@
+ 
+ The collection beyond offers further procedures to compare. Its held examples leave time for looking; the moving works keep their own clocks. We do not need to turn every resemblance into the same law.
+ 
++Think back to the tree between your hands, its two drawings, and the canopy above you. The endpoints travelled between them. Solidity, reach and the room available to your body did not follow from those endpoints alone. Each version made something available to inspect and required other choices. Returning to the little tree after walking beneath it, you could ask for a different turn for a reason you had not found at the desk.
++
++That return is part of how this museum is written. A sentence proposes an encounter. A drawing gives it positions and edges. Code gives those arrangements behaviour, and a body discovers what the proposal did not describe. We return to the sentence with something to change. The plan did not contain the walk in full; the revised words will not contain it either. What survives the passage matters, and so does what has become newly noticeable.
++
++I call this movement *fractal thinking*: returning to a question at another scale, with another way to act upon it. It names a research practice here, not a mathematical property proved by putting rooms inside sequences or objects inside rooms. A scene hierarchy is not enough to make a fractal. What can recur is the work of setting a boundary, changing something within it, attending to the consequence, and deciding what deserves another encounter.
++
++Walking explores the world we have made. Changing a generating rule explores worlds it could become. Neither route lets us examine everything. We keep a few versions, arrange a comparison, choose where to spend another call. The frame that helps us notice one difference also leaves others outside it.
++
++An unexpected branch need not reorganise the book. It might remain a pleasure in this room. It might expose a mismatch between what we wrote and what the body could do. If that mismatch returns elsewhere, it can change the question that carries us through the sequence. The program can reproduce the difference and an AI can help us search for it. Neither repetition nor the number of variants decides its importance. We still have to say what it changes, for whom, and why we choose to follow it.
++
+ The trees around this hall were grown by a rule too, and it is not any of the desks’. The biome’s own generator writes a sentence with an L-system and reads it with a turtle in three dimensions; how many generations, how many branches at a fork, the angle and the taper come from that plant’s own genes, so no two are the same tree. The flag in the stage file that calls this flora fractal is a name nothing reads. What the ring inherits that the desks do not show is a body per plant: a different sentence for each, and a reader that gives it tubes and leaves. That grammar is where the next sequence begins.
+ 
+ The names on these desks arrived late in another sense. Cantor's set is dated 1883, Koch's curve 1904, Sierpinski's triangle 1915, Menger's sponge 1926, and the word that gathers them, *fractal*, 1975. The structure is older than any of them. The Ba-ila settlements of what is now Zambia were built as a ring of enclosures, each enclosure itself a ring, with the chief's ring at the back of the village repeating the whole at a smaller scale, long before a mathematician called the arrangement self-similar,[^1] and the geometric ornament of Islamic architecture repeats a motif inside itself at descending scales for reasons of its own. A rule can be practised for centuries before it is written down. These desks show the written form. They do not show who was already building it.

@@ -1,0 +1,107 @@
+{
+  "images": [
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/before/museum/attract-overview.png",
+      "image_sha256": "1b477f9d4acfbd3d98fceb76121fe84f454641c390d415afd259920c8c32b32a",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/before/museum/attract-overview-camera.json",
+      "camera_sha256": "1701ea54c2ce1dbe4b57b9773085347c3038b9542440c07d9f884e06a2d32821",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(12.5, 12.0, 18.5)",
+        "standing": false,
+        "target": "(5.5, 0.0, 5.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-overview.png",
+      "image_sha256": "a315f2446c27cbbd593248694e08aa3cb836427aeca46482063901c29af97dcd",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-overview-camera.json",
+      "camera_sha256": "1701ea54c2ce1dbe4b57b9773085347c3038b9542440c07d9f884e06a2d32821",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(12.5, 12.0, 18.5)",
+        "standing": false,
+        "target": "(5.5, 0.0, 5.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/arrival-standing.png",
+      "image_sha256": "b8654ad8a0c6c33856bb71786b1c068c6074c883aebe66474e037756469d2575",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/arrival-standing-camera.json",
+      "camera_sha256": "3b50ec33324c3f67a04c5985e048f6a2b7a5251b31d209b29d8023f4415fe3cc",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(6.5, 1.7, 7.6)",
+        "standing": true,
+        "target": "(6.5, 0.35, 3.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-standing.png",
+      "image_sha256": "9cac478a33cbd33d8ae7d0cc66e2d391ad8fecdd404a8588676180c13c6b1a23",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-standing-camera.json",
+      "camera_sha256": "3b50ec33324c3f67a04c5985e048f6a2b7a5251b31d209b29d8023f4415fe3cc",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(6.5, 1.7, 7.6)",
+        "standing": true,
+        "target": "(6.5, 0.35, 3.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/avoid-standing.png",
+      "image_sha256": "a8fdcb31be9a5616f96e29cf4f0b1788b298a4a2ed6b930b0f8c9c48aabdeef1",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/avoid-standing-camera.json",
+      "camera_sha256": "3b50ec33324c3f67a04c5985e048f6a2b7a5251b31d209b29d8023f4415fe3cc",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(6.5, 1.7, 7.6)",
+        "standing": true,
+        "target": "(6.5, 0.35, 3.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-side-standing.png",
+      "image_sha256": "88e1b4ce8941312f9bd739583dd9b2b599b0ccd2726abbb93847726d8d25b485",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/attract-side-standing-camera.json",
+      "camera_sha256": "5435f79ff5b90892b6cafb8250f96aaa48ce74b58038998a549be329fd678155",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(9.6, 1.7, 5.8)",
+        "standing": true,
+        "target": "(6.5, 0.35, 3.5)",
+        "viewport": "(1600, 1000)"
+      }
+    },
+    {
+      "image": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/avoid-side-standing.png",
+      "image_sha256": "7e74110be0e13142b811bf756a05a48e2289518e6dfaf1ae2de4c6db23f999e3",
+      "camera": "doc/book/iterations/2026-09-19-randomness-review/ending/verified/museum/avoid-side-standing-camera.json",
+      "camera_sha256": "5435f79ff5b90892b6cafb8250f96aaa48ce74b58038998a549be329fd678155",
+      "camera_parameters": {
+        "fov": 70.0,
+        "position": "(9.6, 1.7, 5.8)",
+        "standing": true,
+        "target": "(6.5, 0.35, 3.5)",
+        "viewport": "(1600, 1000)"
+      }
+    }
+  ],
+  "overview_camera_exact_match": true,
+  "current_front_camera_exact_match": true,
+  "current_side_camera_exact_match": true,
+  "owned_current_sources_match_accepted_render": {
+    "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd": true,
+    "commons/artifacts/noise_mixer/noise_mixer.gd": true,
+    "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd": true,
+    "algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd": true,
+    "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd": true
+  },
+  "before_scope": "Actual oversized installation surveyed; eight setup/camera checks only, not certified clear staging.",
+  "after_scope": "Actual museum,36localchecks/native0; two existing laws, same seed/start and300fixedsteps; full headset/navigationplaythrough not claimed."
+}

@@ -1,0 +1,276 @@
+--- before/commons/context/walkgrids/noise_walk_study.gd
++++ after/commons/context/walkgrids/noise_walk_study.gd
+@@ -3,6 +3,7 @@
+ const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ const HEIGHTS := [0.0, 0.25, 0.65, 0.9]
+ var ground: Node3D
++var walked_trail: Node3D
+ var height_index: int = 1
+ var route_index: int = 0
+ var sample_index: int = 0
+@@ -49,6 +50,9 @@
+ 		var action: Callable = actions[i]
+ 		controls.find_child("Btn_%d"%i,true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_button):action.call())
+ 	refresh_profile()
++	walked_trail = load("res://commons/context/walkgrids/noise_walk_trace.gd").new()
++	add_child(walked_trail)
++	walked_trail.build(ground)
+ 
+ func can_rebuild() -> bool:
+ 	var bodies: Array = get_tree().get_nodes_in_group("player_body")
+@@ -63,6 +67,7 @@
+ 	blocked = not can_rebuild()
+ 	if blocked:
+ 		update_witness();return false
++	if walked_trail != null: walked_trail.clear()
+ 	height_index = clampi(index,0,HEIGHTS.size()-1)
+ 	ground.height_scale = HEIGHTS[height_index]
+ 	ground.generate_space()
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -6,8 +6,8 @@
+   "status": "source_checked_draft",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_Space_10/final.md",
+-  "text_sha256": "66acc8cc33efd1eee6583ec766ac014c383ccd78aa6d118873083caaf7a4cbdc",
++  "text_sha256": "3eb28f2288ed6e496dc2b1cb38f5c96e3e885a07740db7f36915b2d35a8040cd",
+   "map_sha256": "0c3d80cd8890d2f4335cdd5c9ba4c77ec75b9a4528646e3753a7c07c188b335e",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Space_10/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-walked-noise/index.html"
+ }
+--- before/commons/maps/Noise_Space_10/artifacts.md
++++ after/commons/maps/Noise_Space_10/artifacts.md
+@@ -1,7 +1,7 @@
+-# Two primary works
++# One primary terrain and a supporting clock
+ 
+-`noise_space#stand:walk` at (6,6) retains the existing NoiseSpace mesh/collision implementation and adds local staging. The eight-metre patch sits at a one-metre reference level, bordered by a stable .8 m margin. A cased instrument on the east side exposes HEIGHT, ROUTE, SAMPLE and RESET. The proposed route and its 2D section use actual mesh-triangle heights. The same sample witness appears on the ground and section. The legacy ten-metre scene stays available with stand:none.
++`noise_space#stand:walk` at (6,6) retains the existing NoiseSpace mesh/collision implementation and adds local staging. The eight-metre patch sits at a one-metre reference level, bordered by a stable .8 m margin. A cased instrument on the east side exposes HEIGHT, ROUTE, SAMPLE and RESET. The proposed route and its 2D section use actual mesh-triangle heights. The same sample witness appears on the ground and section. A pink trail automatically samples the supported player body, drapes the resulting line over the mesh and keeps the attempt after the body leaves. It has no collider or additional control. The legacy ten-metre scene stays available with stand:none.
+ 
+-`dark_sphere` moves from (5,5) to the preserved raised margin at (11,3). Its original geometry, pulse and clock remain. It is primary because the chapter gives it a specific observation: resetting the terrain does not reset this other time.
++`dark_sphere` moves from (5,5) to the preserved raised margin at (11,3). Its original geometry, pulse and clock remain. It remains supporting, with its brief book return: resetting the terrain does not reset this other time.
+ 
+ All two authored tokens are retained. The route posts, line, profile and margin belong to noise_space's optional study. No new artifact token is needed. Two wp ramps are added in empty utility cells; the original sp, annotation and teleporter remain.
+--- before/commons/maps/Noise_Space_10/field_notes.md
++++ after/commons/maps/Noise_Space_10/field_notes.md
+@@ -37,3 +37,14 @@
+ ## Publication and browser check
+ 
+ The local encyclopedia serves all 57 declared publication files with HTTP 200 and SHA-256 matches. The browser exercises all four height states, route B and all five sample positions. Photographs are explicitly labelled as route A while the profile/plan follow the selected route. The book opens with three source excerpts and all five visible photographs load. The review has no horizontal overflow at the inspected 691 px viewport. The primary view shows noise_space and dark_sphere in encounter order, with both current book passages opened and verified. Its pre-existing narrow-layout overflow remains outside this hall change. The accepted run introduces no new diagnostics relative to the original baseline; the pre-existing UID/resource and compatibility-renderer warnings are retained in diagnostic-comparison.json.
++
++
++## 2026-09-25 — The walk leaves a line
++
++Added a measured, bounded pink trail to the existing stand:walk study. It samples the supported museum or XRTools player body, draws on the actual mesh, holds after departure and starts again on entry. Successful HEIGHT/RESET clears the record; rejected occupied presses, ROUTE and SAMPLE retain it. No extra panel, button, generator or map placement. The gold proposals retain their original meaning.
++
++The chapter gains an encounter with the actual walk beside the intended route and a native photograph. Earlier mathematical excerpts, cave/heightfield limit, shelter question, independent orb and dated measurements are preserved. Current role notes now agree with the core: noise_space primary, dark_sphere supporting. The opening intent also recognises the preceding sphere's new vertex relief and matching wall collision.
++
++Evidence: doc/book/iterations/2026-09-25-walked-noise/index.html. Native supplied movement operates the actual CharacterBody and production trace callbacks; synthetic clicks use the museum's pointer. This is not tracked-headset or learner acceptance. No live museum save/bake, shared locomotion rule or frozen export is replaced.
++
++Final native run: 30 assertions and seven actual-pointer synthetic clicks pass; exit zero, no script/shader error. The intentional sidestep is retained in 50 samples and leaves the terrain mesh unchanged. With forward-only input, the low field reaches local z=4.423 m; the .90 field ends at z=-.381 m, with lost-support gaps retained. The sampled positions and endpoints are in museum-runtime.json; source snapshots accompany the review. Ribbon triangle centres stay above the low terrain (minimum measured clearance .0285 m). Explicit unsupported-body and return-to-support checks pass. No generated trace on arrival; new entry, held departure, accepted reset and refused occupied changes all behave as specified. Existing UID/renderer/registry/build warnings remain in the log.
+--- before/commons/maps/Noise_Space_10/final.md
++++ after/commons/maps/Noise_Space_10/final.md
+@@ -7,6 +7,14 @@
+ The previous sphere surrounded us with a changing field while its floor stayed still. Here the answer reaches the ground itself. Take the ramp onto the dark margin. The instrument stands along its side, leaving the route open.
+ 
+ At HEIGHT 0.25, try walking between the posts. A small dip can disappear from the far view and return under your feet. The colour gathers into contours, but your body meets a surface. Keep those two ways of reading it in play.
++
++Look back from the margin. A pink line keeps the walk you have just made. Move a little sideways on the next attempt and compare it with the gold proposal. The gold line was here before you. The pink one had to wait.
++
++The trail holds when you leave the patch; entering again begins another attempt. Changing HEIGHT or using RESET clears it too. We keep a short memory of movement on this ground, rather than asking an old crossing to describe a new surface. The line is made from sampled positions, joined and laid on the mesh. It remembers a passage without keeping a whole body.
++
++![A pink record of a walk beside the gold proposed route](/book-review/doc/book/figures/Noise_Space_10/walked-route.png)
++
++*The gold line proposes a crossing. The pink line keeps the body’s sampled passage, including its sidestep.*
+ 
+ Return to the margin. Press HEIGHT until it reads 0.90 and look for the feature you just crossed. The posts have not moved. The field has not been drawn again from another seed. Try the same approach.
+ 
+@@ -36,7 +44,7 @@
+ 
+ The last three-quarters of a metre gradually withhold the noise's contribution. At the edge, that contribution is zero. The margin did not emerge from the field. We made it, so a body could enter and so the place from which we compare would remain available. The transition is part of the landscape's construction.
+ 
+-Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
++Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. The pink trail keeps the walk you have already made while the gold line chooses another way. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
+ 
+ The display gives the length and steepest sampled stretch of whichever proposed route is selected. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
+ 
+--- before/commons/maps/Noise_Space_10/intent.md
++++ after/commons/maps/Noise_Space_10/intent.md
+@@ -1,7 +1,7 @@
+ # From a surrounding field to supporting ground
+ 
+-Build on Noise_Inside_Noise: the enclosing sphere retained fixed collision; here the existing heightfield sends its reconstructed mesh to collision too. The learner chooses a route, tests it, changes height from a stable margin and tries again. Preserve the original terrain resource and recovered map platforms.
++Build on Noise_Inside_Noise: its enclosing relief now has matching collision while its floor remains fixed. Here the existing heightfield sends its reconstructed ground mesh to collision. The learner chooses a route, tests it, changes height from a stable margin and tries again. Preserve the original terrain resource and recovered map platforms.
+ 
+-The body is part of the comparison. A line on the ground and its section can expose possible difficulties without certifying passage. Keep seed, generator and field scale fixed; vary the height contribution. Preserve boundary access explicitly through an edge envelope. Keep noise_space and dark_sphere primary, and use the orb's independent clock to delimit what RESET resets.
++The body is part of the comparison. A line on the ground and its section can expose possible difficulties without certifying passage. Keep seed, generator and field scale fixed; vary the height contribution. Preserve boundary access explicitly through an edge envelope. Keep noise_space primary and dark_sphere supporting, using the orb's independent clock to delimit what RESET resets. A pink trail records the supported player movement beside the gold proposal. Hold it after leaving; start again on entry or an accepted terrain change. Do not invent a demonstration walk.
+ 
+ Carry the one-height-per-horizontal-position limitation towards later representations. Bring an honest comparison practice into Noise_Perlin_Simplex. Further parameter controls, route finding, line-of-sight and alternative body sizes remain experiments to build, not existing capabilities.
+--- before/commons/maps/Noise_Space_10/summary.md
++++ after/commons/maps/Noise_Space_10/summary.md
+@@ -2,8 +2,8 @@
+ 
+ Noise_Space_10 retains noise_space and dark_sphere. The original ten-metre terrain and legacy defaults remain available in unconfigured placements. This hall selects stand:walk: an eight-metre heightfield, 81 × 81 vertices, a one-metre-high stable margin, entry and exit ramps, and a cased route-section instrument.
+ 
+-HEIGHT selects 0/.25/.65/.90 while a fixed OpenSimplex2S fBM field remains unchanged. An edge envelope blends the final .75 m back to the margin's level. Mesh and trimesh collision rebuild together. ROUTE chooses a straight or bent proposal on the unchanged ground; SAMPLE selects one of five witnesses; RESET returns .25, route A and sample 1. HEIGHT and RESET wait while a player_body or em_walker is on the patch.
++HEIGHT selects 0/.25/.65/.90 while a fixed OpenSimplex2S fBM field remains unchanged. An edge envelope blends the final .75 m back to the margin's level. Mesh and trimesh collision rebuild together. ROUTE chooses a straight or bent proposal on the unchanged ground; SAMPLE selects one of five witnesses; RESET returns .25, route A and sample 1. HEIGHT and RESET refuse while a player_body or em_walker is on the patch; rejected presses are not queued. An automatic pink trail retains the supported player movement beside the gold route. It remains after departure and clears on the next entry or accepted terrain change. ROUTE and SAMPLE preserve it.
+ 
+-Both tokens are primary and have book passages. The orb rests on the preserved east platform and retains its independent clock. All original structure cells and pre-existing utility tokens remain. Two ramps and museum floor at the exit void provide the missing approach. The hall is restored after Noise_Inside_Noise in the active museum plan. Noise_Perlin_Simplex is next.
++noise_space is primary; dark_sphere retains a short supporting book passage. The orb hovers beside the preserved east platform and retains its independent clock. All original structure cells and pre-existing utility tokens remain. Two ramps and museum floor at the exit void provide the missing approach. The hall is restored after Noise_Inside_Noise in the active museum plan. Noise_Perlin_Simplex is next.
+ 
+ The name does not promise ten independent live sliders. The present study isolates one height parameter, two route proposals and a sampled section. Its former broad claims of identical seeded histograms, an everywhere-continuous parameter manifold, or hardcoded parameters making an object unchangeable are not treated as evidence.
+--- before/commons/maps/Noise_Space_10/technical.md
++++ after/commons/maps/Noise_Space_10/technical.md
+@@ -18,6 +18,14 @@
+ 
+ walk_height_at follows the actual two-triangle subdivision of each cell. In the lower triangle it weights h00/h10/h01; in the upper it weights h11/h01/h10. This is local to the optional study. It does not use the inherited helper called get_height_at_world_position, whose current implementation returns a nearby vertex rather than the claimed bilinear interpolation. No shared helper is silently changed.
+ 
++## The remembered walk
++
++The optional WalkStudy now owns noise_walk_trace.gd. It queries the actual em_walker or player_body CharacterBody3D at .08 s intervals and records supported horizontal movement within the patch. The body's origin must be within .45 m of the local mesh height. New samples require .06 m horizontal movement. There is no synthetic path or time-driven example.
++
++The record contains at most 384 positions. Older positions are dropped when full. Unsupported movement leaves a break, and jumps between recorded positions greater than .75 m are not connected. A new entry starts a new attempt; leaving retains the drawing. Successful HEIGHT and RESET changes clear it. The existing occupancy refusal returns before either terrain or trace changes. ROUTE and SAMPLE preserve the record.
++
++The 4.4 cm-wide pink ribbon has no collision and is raised .035 m above triangle-interpolated terrain heights. Each recorded segment is subdivided into drawing spans no longer than .04 m so its triangles follow the ground between observations. Those extra drawing vertices are not extra measured body positions. The recorder adds no node or logic to legacy stand:none. The held trail is local session memory, not a saved route or a pathfinding result.
++
+ ## Place, colour and controls
+ 
+ The patch occupies (6,6) in the map. Frame bars extend to a 9.6 m outer square, top y=1, around the 8 m terrain. The east instrument is supported, cased and tilted, with four native pointer buttons. HEIGHT cycles amplitude; ROUTE selects a proposal; SAMPLE moves a witness; RESET restores .25/A/sample1. ROUTE and SAMPLE preserve the mesh and collision. HEIGHT/RESET decline to regenerate while a player_body or em_walker origin lies within the patch bounds and vertical band; the readout asks them to return to the margin. This is a local occupancy guard, not a global player teleport or pause.
+--- before/commons/maps/Noise_Space_10/tutorial.md
++++ after/commons/maps/Noise_Space_10/tutorial.md
+@@ -1,11 +1,11 @@
+ # Test a route, then change its height
+ 
+ 1. Take the entry ramp onto the raised margin. Choose the far pair of posts as the destination and inspect route A before crossing.
+-2. Try the terrain at HEIGHT .25. Return to the margin and compare the same route at .90. Record where this particular body reaches; stopping is not proof that every route is blocked.
+-3. RESET from the margin returns .25, route A and sample 1. Changes to height wait while a detected player body remains on the patch.
++2. Try the terrain at HEIGHT .25. Return to the margin and compare the same route at .90. Look back at the automatic pink trace from the margin. It records this body's supported movement, while the gold line remains a proposal; stopping is not proof that every route is blocked. Entry starts a new trail, leaving holds it, and accepted HEIGHT/RESET clears it.
++3. RESET from the margin returns .25, route A and sample 1. HEIGHT and RESET refuse while a detected player body remains on the patch. A refused press preserves both ground and trail; it is not queued.
+ 4. Read ground_at in final.md: the fixed noise value becomes 1 + height_scale × edge_weight × value. HEIGHT zero gives a level surface while preserving the field's settings.
+ 5. Follow the .75 m transition towards the margin. The edge envelope makes the noise contribution zero at the boundary. This is an authored access condition.
+-6. Select ROUTE B. Compare its section length and steepest sampled segment with A. The ground and collider do not change. A longer path may still be steeper.
++6. Select ROUTE B. Compare its section length and steepest sampled segment with A. The ground, collider and pink trail do not change. A longer proposed path may still be steeper.
+ 7. SAMPLE selects five positions along the chosen section. Match the yellow marker on the plot with the marker on the actual ground. The readout distinguishes the raw field, edge weight and mesh height.
+ 8. Read the mesh/collision passage. Each triangle is shared between visibility and collision; between vertices, the finite triangle can differ from a newly queried noise value.
+ 9. Look for an overhang, then move to another view. One height per x/z cannot represent both a cave floor and roof there. Recall Noise Voxel's occupied volume.
+--- /dev/null
++++ after/commons/context/walkgrids/noise_walk_trace.gd
+@@ -0,0 +1,117 @@
++extends Node3D
++## A short record of the visitor's supported walk, laid on the same terrain mesh.
++## Empty without a player. No generated motion and no additional control.
++const INTERVAL := 0.08
++const SPACING := 0.06
++const MAX_POINTS := 384
++const MAX_JOIN := 0.75
++const HALF_WIDTH := 0.022
++const LIFT := 0.035
++var ground: Node3D
++var points := PackedVector3Array()
++var joins := PackedByteArray()
++var surface: MeshInstance3D
++var revision: int = 0
++var _elapsed: float = 0.0
++var _inside: bool = false
++var _body_id: int = 0
++var _break_next: bool = true
++
++func build(owner_ground: Node3D) -> void:
++	name = "WalkedTrail"
++	ground = owner_ground
++	surface = MeshInstance3D.new()
++	surface.name = "RememberedWalk"
++	var material := StandardMaterial3D.new()
++	material.albedo_color = Color(1.0, 0.2, 0.55)
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.cull_mode = BaseMaterial3D.CULL_DISABLED
++	surface.material_override = material
++	surface.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	add_child(surface)
++
++func clear() -> void:
++	points.clear()
++	joins.clear()
++	_inside = false
++	_body_id = 0
++	_break_next = true
++	if surface != null: surface.mesh = null
++	revision += 1
++
++func _physics_process(delta: float) -> void:
++	if ground == null: return
++	_elapsed += delta
++	if _elapsed < INTERVAL: return
++	_elapsed = fmod(_elapsed, INTERVAL)
++	var body := _visitor()
++	if body == null:
++		_inside = false
++		_body_id = 0
++		_break_next = true
++		return
++	if not _inside or _body_id != body.get_instance_id():
++		clear()
++		_inside = true
++		_body_id = body.get_instance_id()
++	var p: Vector3 = ground.to_local(body.global_position)
++	var height: float = ground.walk_height_at(Vector2(p.x,p.z))
++	# The trace names supported movement; jumping leaves a break on landing.
++	if not body.is_on_floor() or absf(p.y-height) > 0.45:
++		_break_next = true
++		return
++	var horizontal := Vector2(p.x,p.z)
++	var distance: float = INF if points.is_empty() else horizontal.distance_to(Vector2(points[-1].x,points[-1].z))
++	if distance < SPACING: return
++	points.append(Vector3(p.x,height,p.z))
++	joins.append(0 if _break_next or distance > MAX_JOIN else 1)
++	_break_next = false
++	if points.size() > MAX_POINTS:
++		points.remove_at(0)
++		joins.remove_at(0)
++		joins[0] = 0
++	_redraw()
++
++func _visitor() -> CharacterBody3D:
++	var bodies: Array = get_tree().get_nodes_in_group("em_walker")
++	bodies.append_array(get_tree().get_nodes_in_group("player_body"))
++	for body in bodies:
++		if not body is CharacterBody3D: continue
++		var p: Vector3 = ground.to_local(body.global_position)
++		if absf(p.x)<4.0 and absf(p.z)<4.0 and p.y>-.2 and p.y<5.0:
++			return body
++	return null
++
++func _on_ground(p: Vector2) -> Vector3:
++	p = p.clamp(Vector2.ONE*-4.0,Vector2.ONE*4.0)
++	return Vector3(p.x,ground.walk_height_at(p)+LIFT,p.y)
++
++func _redraw() -> void:
++	var vertices := PackedVector3Array()
++	for i in range(1,points.size()):
++		if joins[i] == 0: continue
++		var a := Vector2(points[i-1].x,points[i-1].z)
++		var b := Vector2(points[i].x,points[i].z)
++		var direction := (b-a).normalized()
++		var side := Vector2(-direction.y,direction.x)*HALF_WIDTH
++		# Drape the drawing over the existing triangles between measured positions.
++		# These extra ribbon vertices are rendering samples, not extra body readings.
++		var pieces: int = maxi(1,ceili(a.distance_to(b)/0.04))
++		for part in range(pieces):
++			var start: Vector2 = a.lerp(b,float(part)/pieces)
++			var end: Vector2 = a.lerp(b,float(part+1)/pieces)
++			var p := _on_ground(start-side)
++			var q := _on_ground(start+side)
++			var r := _on_ground(end-side)
++			var s := _on_ground(end+side)
++			vertices.append_array(PackedVector3Array([p,q,r,q,s,r]))
++	if vertices.is_empty():
++		surface.mesh = null
++	else:
++		var arrays: Array = []
++		arrays.resize(Mesh.ARRAY_MAX)
++		arrays[Mesh.ARRAY_VERTEX] = vertices
++		var mesh := ArrayMesh.new()
++		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
++		surface.mesh = mesh
++	revision += 1

@@ -1,0 +1,105 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Place the pivot</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><h1>4. Equilibrium</h1><div class="spread"><article><h1>Place the pivot</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Mass moments</li>
+<li>Solving a constraint</li>
+<li>Assumptions of a model</li>
+<li>Balance versus stability</li>
+</ul>
+<p>Follow one arm of the hanging mobile. The heavier side has less distance to the suspension. Its stillness was constructed from an arithmetic relation. The room’s truss and animated triangle offer other appearances of support without a load test.</p>
+<h2>What you bring</h2>
+<p>Use masses from Forces, displacement and distance from Lines, functions and the drawn rods. We only need two familiar point markers to reconstruct one arm of the recursive mobile.</p>
+<h2>Build inside the museum</h2>
+<p>Choose two positive masses and a total span. Calculate both distances from the pivot, then place the points. One nearby button changes the left mass while retaining the span.</p>
+<p>Save <code>04_balance.gd</code> beside the <a href="../../../doc/book/course/formfinding-shared-code.md">complete shared code</a>, on your existing <code>PointStudy</code> Node3D. The inspected working bay is hall-local <code>(16, 0, 7)</code> metres, floor level, upright, unit scale. The museum supplies the floor, camera, light, hands and button scene. The larger artifact remains available for comparison.</p>
+<h2>Complete code — 04_balance.gd</h2>
+<!-- student-code:04_balance.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var masses := Vector2(1, 2)
+var span := 2.0
+var distances := Vector2.ZERO
+var points: Array[Node3D] = []
+var arm: MeshInstance3D
+var wire: MeshInstance3D
+var readout: Label3D
+
+func _ready() -&gt; void:
+    points = [make_point(Vector3.ZERO, false), make_point(Vector3.ZERO, false)]
+    arm = rod()
+    wire = rod()
+    readout = caption(&quot;&quot;, Vector3(0, 2.4, 0))
+    button(&quot;LEFT MASS&quot;, Vector3(0, 1, -0.8), change_mass)
+    rebuild()
+
+func change_mass() -&gt; void:
+    masses.x = 4.0 if masses.x == 1 else 1.0
+    rebuild()
+
+func rebuild() -&gt; void:
+    assert(masses.x &gt; 0 and masses.y &gt; 0 and span &gt; 0)
+    distances = Vector2(span * masses.y, span * masses.x) / (masses.x + masses.y)
+    points[0].position = Vector3(-distances.x, 1.5, 0)
+    points[1].position = Vector3(distances.y, 1.5, 0)
+    join(arm, points[0].position, points[1].position)
+    join(wire, Vector3(0, 1.5, 0), Vector3(0, 2.15, 0))
+    readout.text = &quot;%.1f kg / %.1f kg | arms %.3f / %.3f m\nmass x arm: %.3f / %.3f kg m\nCalculated pose; massless arm&quot; % [
+        masses.x, masses.y, distances.x, distances.y,
+        masses.x * distances.x, masses.y * distances.y]
+</code></pre>
+<h2>Read the operation</h2>
+<p>For opposite vertical weights acting on a level, massless arm, equal torque magnitudes require m_left × g × d_left = m_right × g × d_right. The same g cancels. Also, the two arm lengths must add to span. Solving both relations gives d_left = span × m_right / total_mass and the opposite expression for d_right.</p>
+<p>With masses 1 and 2 kg over two metres, the arms are 4/3 and 2/3 m. The heavier mass is closer to the pivot. The label shows mass × arm in kg m; multiply by g for torque magnitude in N m. Equal products express the selected static model.</p>
+<p>The PointBody instances display the calculated places. The masses are numeric inputs, not a claim that these frozen markers are hanging under simulated forces. No joint, collision or settling solver determines this pose. That distinction also applies to the current mobile.</p>
+<h2>Predict, then change</h2>
+<p>Predict the pivot’s relation to the points when the left mass changes from 1 to 4 kg. Press LEFT MASS and compare both products. Check that the arm lengths still add to two metres. Then give the sides equal mass and predict the midpoint.</p>
+<h2>Build another experiment</h2>
+<p>Build a second two-point arm carrying masses 3 and 7 kg over 1.5 m. Display both distances and the residual m_left × d_left − m_right × d_right. It should be near zero. Construct an intentionally centred pivot as a comparison and show its nonzero residual. Explain why a zero residual in this model does not show that a disturbed physical mobile will return to rest.</p>
+<h2>Carry onward</h2>
+<p>A calculated relation can construct a pose without waiting. In Annealing we return to a search where a useful next step may first make the objective worse.</p>
+<h2>Model notes</h2>
+<p>The museum recurses over many arms and uses nominal disc masses. This lesson isolates one level. It omits rod and wire mass, friction, wind, and dynamic stability. The two points are a diagram of its inputs, not a new physics engine.</p></article><article><h1>Where forces cancel</h1>
+<p>Where forces cancel, a form can hold still. That stillness can conceal opposition, exactly matched. But a still image can also be made without calculating any forces. How would you tell?</p>
+<p>The preceding halls gave us steps, drawn curves and a mesh left in the pose where its computation stopped. Here the question becomes structural: which relations make a shape hold, and which relations have only been drawn? Start with a balance whose arithmetic you can inspect.</p>
+<h2>Balanced by arithmetic</h2>
+<!-- @calder_mobile -->
+
+<p>A curtain of painted aluminium discs on hair-thin wires, nearly six metres wide and three and a half tall, filling the north half of the room. Each disc carries a small dark nameplate reading its modelled mass in grams, which is the room telling you what to check.</p>
+<p>Find one arm with a disc hanging from each end, and compare their nameplates. Which has the larger mass? Which is nearer its pivot? Follow that relation up one branch before reading the calculation.</p>
+<pre><code class="language-gdscript">var wl: float = left[&quot;mass&quot;]
+var wr: float = right[&quot;mass&quot;]
+var total: float = wl + wr
+var arm: float = span * (0.7 + 0.35 * float(d)) * _rng.randf_range(0.85, 1.15)
+var dl: float = arm * wr / total
+var dr: float = arm * wl / total
+</code></pre>
+<p>Read the crossover. The left-hand distance is computed from the right-hand mass, and the right-hand distance from the left. Multiply out and the two mass-distance products agree, apart from numerical rounding. Gravity would multiply both by the same factor. The heavier child rides the shorter arm because the arithmetic gives it no choice.</p>
+<p>For each disc, the source multiplies its area by three millimetres of sheet and the density assigned to aluminium. Then it builds every rod from the bottom up: add the two children's masses, place the pivot where their moments cancel, report the total upward. The rods and wires have no mass in this calculation. That omission lets the visible masses and distances satisfy a clean lever model; it does not establish how the sculpture would behave if we built it from the materials it resembles.</p>
+<p>And it does not move. There is no process loop anywhere in it: for all the wire and the counterweighting, this is frozen sculpture. What hangs here is the solution to a chosen system of equations, held still because it was never going to do anything else.</p>
+<!-- @tensegrity_triangle -->
+
+<p>Three struts and three orange joints, with a rhythmic squeeze arriving every few seconds. Watch the width as the height contracts. The whole object is being scaled: the source writes a sine-driven change directly into its transform. It looks as though a load arrives and is refused, but no load has been applied and no member force is calculated.</p>
+<p>There is a structural question worth keeping inside that appearance. An ideal hinged triangle with fixed side lengths cannot rack in its plane as an unbraced four-bar frame can. A side-by-side load experiment could let you test that difference. This animated triangle has not done that experiment for us.</p>
+<p>One correction the name will not make for you. It promises a tensegrity, but the three struts meet at their joints and there is not a tension cable in the object. Keep the distinction between an attractive pose and the force relations needed to sustain it. In the next hall, an apparently impossible table will ask for that distinction again, with an unbothered teacup on top.</p>
+<!-- @fractal_truss_tower -->
+
+<p>A steel tower three and a half metres tall standing on a seven-metre plate, four fat corner legs and four stacked panels of cross-bracing, an orange beacon at the top. Its board now says RECURSIVE BRACED STOREYS / NO LOAD TEST. The old promise of maximum strength for minimum material remains an interesting aim. This construction has not measured either quantity.</p>
+<p>The recursion halves the tower vertically and braces each half again, so what recurses is the storey and not the strut, and the finer legs it adds lie along the same corner lines as the coarse ones, hidden inside them. A beam made of beams is the idea. Stacked bracing, three deep, is the building. Its slight sway is prescribed too; the tower is not responding to a wind or testing a failure threshold.</p>
+<!-- @science_screen -->
+
+<p>The screen has no live load measurement from these objects. Its generic scanner can classify a tower by the word “fractal” and count children, but neither quantity establishes a balance. For the mobile, we need the two mass-distance products at each joint; for the tower, a stated load and a measured response. The nameplates are a beginning. A picture of structure is not yet an instrument for its strength.</p>
+<!-- @ -->
+
+<h2>Gravity as co-designer</h2>
+<p>The hanging models we met at the laundry lines offered another way to approach this problem: set up weights and supports, allow a physical relation to appear, and study its inversion as a possible compression structure. The load and the boundary matter as much as the curve. The model is a way to reason with gravity, not a certificate that every shape it suggests will stand.<sup id="fnref:hanging-model"><a class="footnote-ref" href="#fn:hanging-model">1</a></sup></p>
+<p>Our three objects make different parts of that reasoning available. The mobile exposes a balance encoded in its mass model. The triangle lets us catch an animation passing for resistance. The truss makes repetition and bracing visible while leaving strength untested. Their differences give us the next experiments: change a mass, compare a hinged square, put a specified load on the tower. None of those experiments stands in this room.</p>
+<p>One thing to carry out. Before asking whether a form has reached the bottom, ask what was allowed to move and what counted as success. The next hall asks whether the bottom is where you want to be.</p>
+<p>Next: how to leave a hole you have already fallen into, and why you might not want the deepest one.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:hanging-model">
+<p>Santiago Huerta, <a href="https://oa.upm.es/703/">“Structural design in the work of Gaudí”</a> (2006). The physical equilibrium method is a reference for these digital models, not a claim that their rendered members currently solve it.&#160;<a class="footnote-backref" href="#fnref:hanging-model" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></main>

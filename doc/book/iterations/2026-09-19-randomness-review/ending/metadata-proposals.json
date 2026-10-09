@@ -1,0 +1,165 @@
+[
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Random_Space_Geometry",
+    "new": "What neighbours share"
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations\n\n[Placement applied promenade engine — constraint 0.917→0.929, walkability 0.459→0.616]",
+    "new": "Compare independent seeded height samples with FastNoiseLite Perlin samples. Frequency changes the spatial scale of the coherent field; the comparable columns do not make the two distributions identical or simulate geology."
+  },
+  {
+    "path": "commons/maps/Random_Space_Geometry/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Compare neighbouring independent and spatially correlated samples",
+      "Hold seed while changing spatial frequency",
+      "Distinguish height-field appearance from geological process"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Stigmergy and Trails",
+    "new": "A path that recruits its next visit"
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "Compare deposited, decaying pheromone with cumulative visual height. In the optional paused comparison, ATTRACT and AVOID restart the same seeded walkers; advance equal step counts to inspect how the existing steering law changes their histories."
+  },
+  {
+    "path": "commons/maps/Random_Pheromone/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Distinguish observer-only trail history from a signal that steers later choices",
+      "Compare current pheromone with accumulated height",
+      "Compare existing attraction and avoidance laws from the same seed and starting walkers",
+      "Keep reinforcement distinct from shortest-path or fairness claims"
+    ]
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "title"
+    ],
+    "old": "Randomness Fills Space",
+    "new": "Layers that look like land"
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "description"
+    ],
+    "old": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+    "new": "A finite sum of sine-based spatial functions at different scales. OCT selects the layer count, LAC changes frequency ratios and PER changes amplitude ratios. Seeded offsets, per-setting normalization and an earth-toned palette shape the picture without simulating landscape processes."
+  },
+  {
+    "path": "commons/maps/Random_Space/map_data.json",
+    "keys": [
+      "map_info",
+      "metadata",
+      "learning_objectives"
+    ],
+    "old": [
+      "Algorithm visualization",
+      "Grid manipulation",
+      "Random processes",
+      "8x8 region operations"
+    ],
+    "new": [
+      "Separate layer count, frequency ratio and amplitude ratio",
+      "Use one octave as the baseline for later layers",
+      "Distinguish per-setting contrast normalization from absolute values",
+      "Compare landscape associations with the implemented finite sum"
+    ]
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "perlin_noise_bridge",
+      "description"
+    ],
+    "old": "Side-by-side 16x16 heightfield grids comparing white noise (chaotic) and Perlin noise (terrain-like). Shows how gradient noise transforms raw randomness into coherent structure through spatial memory.",
+    "new": "Compare seeded uniform heights with FastNoiseLite Perlin samples in two 16×16 grids. Frequency changes the scale of spatial correlation. Both fields use comparable column displays, while their sampling procedures and distributions differ."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "noise_mixer",
+      "description"
+    ],
+    "old": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
+    "new": "A visual mixer of finite sine-based spatial layers with seeded offsets. OCT, LAC and PER regenerate the sum live; each texture is normalized to its own range before an earth-toned palette is applied."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "monte_carlo_dartboard",
+      "description"
+    ],
+    "old": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
+    "new": "Uniform generated points estimate an inscribed circle’s area fraction; four times inside/total estimates pi. THROW, AUTO and RESET expose finite sampling, whose estimate need not improve with every point."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "extreme_randomness",
+      "description"
+    ],
+    "old": "A cycling study of 100 particles: random kicks with memory, smooth trigonometric flow, spiral patterns, swarming and selection. These are distinct update rules, not five strengths of one noise source.",
+    "new": "Five cycling particle studies: persistent random pushes, smooth trigonometric flow, spiral patterns, flocking-style interactions and target-ranked following. The selection chapter moves a fixed set of particles; it does not breed a population."
+  },
+  {
+    "path": "commons/artifacts/registry/randomness.json",
+    "keys": [
+      "artifacts",
+      "pheromone_terrain",
+      "description"
+    ],
+    "old": "Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.",
+    "new": "Walkers deposit decaying pheromone and accumulate visual height. Existing trail, sniff, avoid and grid rules change which local signal is followed. An optional paused comparison exposes attraction and avoidance from the same seed and starting walkers, with single-step, 20-step and replay controls."
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "started": "2026-09-14T16:51:02+02:00",
+  "finished": "2026-09-14T16:51:37+02:00",
+  "pid": 32100,
+  "exit": 0,
+  "checks": 47,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/curves_probe_base.gd": "dd12532249d92d484071fa93b86cf21a7430fb03d50a6692056f0885723e0142",
+    "ada_run/curves_acceptance.gd": "545c0e94ab10e44a6e4a0e0cdf91f47e4a2fe088976be999796ac86f1d481598",
+    "commons/maps/LSystems_Grammars_And_Curves/map_data.json": "ffe5f07cce6d81d5bccb1e4d1baa5ee94964e064051ea522b7bde7bb0f50de08",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/curves-review-2026-09-14/review-plan.json": "eaa585d045558568772144fc635cb8ca3dc6953212d2ad0cd99d51d1f8d4b390",
+    "algorithms/lsystems/context_free_grammars/context_free_grammars.tscn": "ec3f34f7029df11d549ccbb333ea937bb783ec51f2e8a3bdae8d51327e331307",
+    "algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd": "268fdc57c61517d8f0c3b6809c3644a50eeb9014ee1d258701410b3b12da9eda",
+    "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn": "ed8b9bb8307e0eb99c2d24036ee08bda2f5d0baaffe2134e37ed6421369f4f27",
+    "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd": "af7272a524dedcbd1091fe0f6c3d6670b2ef7ec38c32e6d536a6c44eb13a0f83",
+    "algorithms/lsystems/Hilbert3D.tscn": "6b80aa3aebd69e366a5cc3927a8ee3b1b991a181213202e2168d46142376e51c",
+    "commons/artifacts/the_believing_turtle/the_believing_turtle.tscn": "a1f3ecea5a3cb9b8dc2fb7fc3a558c1e2a56630ae0327f86587e2bcb75f40747",
+    "commons/artifacts/the_believing_turtle/the_believing_turtle.gd": "7b8a89f777e31899ad0f467c34d5acd26e3e68d91ba3d8096144e661b6eb98f1",
+    "commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.tscn": "2e0bf40772349e530dd19e579590ab3316a08a88b895d7c4f9a4b215d76e75d8",
+    "commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.gd": "28ba2da6d4fb41e19bc9a7b26ae5d232b4dfc2cce899412bbc7ed46c8cc2cfc0",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "80206570338a6ddc3a704a783131c0d0c905de26a5e41b0777c7dabc18210972",
+    "commons/data/trunk_branches.json": "7597e41b1f982efcf8f3083667401b6102c53b4fa9f7778ec55566c6877d98b7",
+    "commons/maps/LSystems_Grammars_And_Curves/final.md": "ede12e1740fc6a9a42d89afcaf39aef661bf98f765c6829b5d6c71cd5a9b31a1",
+    "algorithms/lsystems/Hilbert3D.gd": "edc71a8c86b662dbe56c7b942d511c6e5b047dd2915e9885184d461c7772cc0e",
+    "commons/artifacts/registry/lsystems.json": "1026532be4f5e53fa8111a02a6773368d5bde1eabafd5a02cba192ffb1b36e57",
+    "commons/artifacts/interpreter_lesson/interpreter_lesson.gd": "d9982b0e01dedc616dcf7c26471a348354d1829fbebd5773cd9ac75a2c84fe4e"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

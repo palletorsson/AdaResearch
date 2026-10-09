@@ -1,0 +1,1851 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "37"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				2.79999995231628,
+				0.0,
+				1.39458918571472
+			],
+			"bounds_size": [
+				3.39999985694885,
+				1.68999993801117,
+				2.05541086196899
+			],
+			"cell": [
+				4,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.61520004272461,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.61520004272461,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.38479995727539,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.38479995727539,
+						1.08779311180115,
+						1.4671243429184
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.61520004272461,
+						0.974685966968536,
+						1.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.61520004272461,
+						0.974685966968536,
+						1.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						0.974685966968536,
+						1.41438162326813
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						0.974685966968536,
+						1.41438162326813
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_5/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.38479995727539,
+						0.974685966968536,
+						1.41438162326813
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_5/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.38479995727539,
+						0.974685966968536,
+						1.41438162326813
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RhizomeGrower",
+					"position": [
+						5.69999980926514,
+						1.39999997615814,
+						2.34999990463257
+					],
+					"text": "NODES 3/3 | EDGES 2\nCOMPONENTS 1 | LINKS 3\nMAX DEGREE 2\nGROWING"
+				},
+				{
+					"parent": "RhizomeGrower",
+					"position": [
+						3.29999995231628,
+						1.39999997615814,
+						2.35000014305115
+					],
+					"text": "NODE 01 | BIRTH 01\nDEGREE 1 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal"
+				},
+				{
+					"parent": "CONNECTIONS",
+					"position": [
+						4.5,
+						1.15021514892578,
+						1.53012788295746
+					],
+					"text": "CONNECTIONS"
+				}
+			],
+			"position": [
+				4.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "rhizome_grower"
+		},
+		{
+			"bounds_position": [
+				2.61122512817383,
+				-0.214999943971634,
+				4.55000019073486
+			],
+			"bounds_size": [
+				25.7590637207031,
+				7.46899318695068,
+				27.8999977111816
+			],
+			"cell": [
+				15,
+				18
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.5,
+				0.025000000372529,
+				18.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "rhizome_cave_demo"
+		},
+		{
+			"bounds_position": [
+				13.8599996566772,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.27999973297119,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						15.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				15.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:speculativecomputation rhizome network"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				18.0,
+				1.58000004291534,
+				38.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.0,
+				1.58000004291534,
+				38.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.0089998245239,
+				1.58000004291534,
+				38.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.9909992218018,
+				1.58000004291534,
+				37.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				19.9909992218018,
+				1.58000004291534,
+				39.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				29.9909992218018,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				29.9909992218018,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				29.9909992218018,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				29.9909992218018,
+				1.58000004291534,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				10.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				29.9909992218018,
+				1.58000004291534,
+				10.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0,
+				1.58000004291534,
+				35.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				15.2749996185303,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				4.01717376708984,
+				0.419999986886978,
+				35.0044021606445
+			],
+			"bounds_size": [
+				0.981135368347168,
+				1.67999994754791,
+				0.981132507324219
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.419999986886978,
+				35.5
+			],
+			"rotation": [
+				0.0,
+				213.025344848633,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				26.9802227020264,
+				0.419999986886978,
+				34.9475517272949
+			],
+			"bounds_size": [
+				1.04772567749023,
+				1.62438881397247,
+				1.07638931274414
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				27.5,
+				0.419999986886978,
+				35.5
+			],
+			"rotation": [
+				0.0,
+				171.866134643555,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				20.8209495544434,
+				0.419999986886978,
+				34.7400398254395
+			],
+			"bounds_size": [
+				1.45405578613281,
+				0.566275835037231,
+				1.45405578613281
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				21.5,
+				0.419999986886978,
+				35.5
+			],
+			"rotation": [
+				0.0,
+				214.467788696289,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"room": "SpeculativeComputation_Rhizome_Network",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; continuous controlled walk; no headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/museum-outside.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/museum-entry.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/museum-junction.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/museum-upper.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				15.5,
+				0.019368052482605,
+				4.48948907852173
+			],
+			"passed": true,
+			"tag": "passage-0-to-0",
+			"target": [
+				15.5,
+				0.05,
+				4.5
+			]
+		},
+		{
+			"end": [
+				11.5123739242554,
+				0.0251250565052032,
+				10.4814043045044
+			],
+			"passed": true,
+			"tag": "passage-1-to-1",
+			"target": [
+				11.5,
+				0.05,
+				10.5
+			]
+		},
+		{
+			"end": [
+				15.4938163757324,
+				0.0251250565052032,
+				15.4922180175781
+			],
+			"passed": true,
+			"tag": "passage-2-to-4",
+			"target": [
+				15.5,
+				0.05,
+				15.5
+			]
+		},
+		{
+			"end": [
+				19.4994316101074,
+				0.0251250565052032,
+				10.5007076263428
+			],
+			"passed": true,
+			"tag": "passage-3-to-2",
+			"target": [
+				19.5,
+				0.05,
+				10.5
+			]
+		},
+		{
+			"end": [
+				15.5063285827637,
+				0.0226836502552032,
+				4.5094952583313
+			],
+			"passed": true,
+			"tag": "passage-4-to-0",
+			"target": [
+				15.5,
+				0.05,
+				4.5
+			]
+		},
+		{
+			"end": [
+				11.5040502548218,
+				0.0253823902457953,
+				10.4939432144165
+			],
+			"passed": true,
+			"tag": "passage-5-to-1",
+			"target": [
+				11.5,
+				0.05,
+				10.5
+			]
+		},
+		{
+			"end": [
+				7.51019525527954,
+				0.0253823902457953,
+				16.4847068786621
+			],
+			"passed": true,
+			"tag": "passage-6-to-3",
+			"target": [
+				7.5,
+				0.05,
+				16.5
+			]
+		},
+		{
+			"end": [
+				10.4898586273193,
+				0.0253823902457953,
+				23.476203918457
+			],
+			"passed": true,
+			"tag": "passage-7-to-6",
+			"target": [
+				10.5,
+				0.05,
+				23.5
+			]
+		},
+		{
+			"end": [
+				19.4231853485107,
+				0.0253823902457953,
+				23.4997978210449
+			],
+			"passed": true,
+			"tag": "passage-8-to-7",
+			"target": [
+				19.5,
+				0.05,
+				23.5
+			]
+		},
+		{
+			"end": [
+				15.4897289276123,
+				0.0253823902457953,
+				15.4790563583374
+			],
+			"passed": true,
+			"tag": "passage-9-to-4",
+			"target": [
+				15.5,
+				0.05,
+				15.5
+			]
+		},
+		{
+			"end": [
+				11.4877157211304,
+				0.0253823902457953,
+				10.4846696853638
+			],
+			"passed": true,
+			"tag": "passage-10-to-1",
+			"target": [
+				11.5,
+				0.05,
+				10.5
+			]
+		},
+		{
+			"end": [
+				7.50942754745483,
+				0.0253823902457953,
+				16.4857788085938
+			],
+			"passed": true,
+			"tag": "passage-11-to-3",
+			"target": [
+				7.5,
+				0.05,
+				16.5
+			]
+		},
+		{
+			"end": [
+				4.50300407409668,
+				1.31686472892761,
+				22.4939136505127
+			],
+			"passed": true,
+			"tag": "passage-12-to-9",
+			"target": [
+				4.5,
+				1.35,
+				22.5
+			]
+		},
+		{
+			"end": [
+				6.50460720062256,
+				2.80577492713928,
+				29.5163555145264
+			],
+			"passed": true,
+			"tag": "passage-13-to-10",
+			"target": [
+				6.5,
+				2.85,
+				29.5
+			]
+		},
+		{
+			"end": [
+				12.5046234130859,
+				3.71645283699036,
+				26.4977169036865
+			],
+			"passed": true,
+			"tag": "passage-14-to-11",
+			"target": [
+				12.5,
+				3.75,
+				26.5
+			]
+		},
+		{
+			"end": [
+				17.4621238708496,
+				3.72583317756653,
+				19.5530586242676
+			],
+			"passed": true,
+			"tag": "passage-15-to-12",
+			"target": [
+				17.5,
+				3.75,
+				19.5
+			]
+		},
+		{
+			"end": [
+				25.4797744750977,
+				3.69897770881653,
+				12.5177478790283
+			],
+			"passed": true,
+			"tag": "passage-16-to-13",
+			"target": [
+				25.5,
+				3.75,
+				12.5
+			]
+		},
+		{
+			"end": [
+				26.4900493621826,
+				1.01513719558716,
+				7.54825592041016
+			],
+			"passed": true,
+			"tag": "passage-17-to-14",
+			"target": [
+				26.5,
+				1.05,
+				7.5
+			]
+		},
+		{
+			"end": [
+				19.4851627349854,
+				0.0251960754394531,
+				10.5062656402588
+			],
+			"passed": true,
+			"tag": "passage-18-to-2",
+			"target": [
+				19.5,
+				0.05,
+				10.5
+			]
+		},
+		{
+			"end": [
+				23.4921417236328,
+				0.0251960754394531,
+				16.4882678985596
+			],
+			"passed": true,
+			"tag": "passage-19-to-5",
+			"target": [
+				23.5,
+				0.05,
+				16.5
+			]
+		},
+		{
+			"end": [
+				19.5339088439941,
+				0.0251960754394531,
+				23.4404430389404
+			],
+			"passed": true,
+			"tag": "passage-20-to-7",
+			"target": [
+				19.5,
+				0.05,
+				23.5
+			]
+		},
+		{
+			"end": [
+				15.5204887390137,
+				0.0251960754394531,
+				32.4539833068848
+			],
+			"passed": true,
+			"tag": "passage-21-to-8",
+			"target": [
+				15.5,
+				0.05,
+				32.5
+			]
+		},
+		{
+			"end": [
+				15.5002908706665,
+				0.000196075066924095,
+				35.6539192199707
+			],
+			"passed": true,
+			"tag": "museum exit",
+			"target": [
+				15.5,
+				0.05,
+				35.7
+			]
+		}
+	]
+}

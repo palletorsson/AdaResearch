@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VFM_08_Arena · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=VFM_08_Arena">← Tutorial lineage</a></p><h1>VFM 08 Arena</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="VFM_08_Arena/final.md">Raw captured source</a></p><pre># What makes an encounter?
+
+&lt;!-- @arena_relation_lab --&gt;
+
+The four-legged walker has acquired a small dark body. A familiar shape, perhaps already carrying the expectation that it will jump at you. Before it moves, notice what you have brought into the room with it.
+
+Press RUN. The creature heads toward the blue beacon. Move BEACON to one side. Offer FOOD. Something about the same animal&#x27;s direction changes. Nothing in its legs has been replaced.
+
+Follow it to the mushroom. It pauses over the food and lowers its body. Wait. The pause belongs to the action: arriving is not yet having eaten. After two seconds, the meal is completed and the animal can move again. What does it go toward now?
+
+This encounter considers two candidates: its own offered mushroom and one nominated visitor. At the beginning, that visitor is the beacon. Press VISITOR to take its place yourself. The board says YOU. Walk closer, or let the food be closer. You and the mushroom now enter the same comparison.
+
+There is no bite in this version. That changes what you can risk while looking, without changing the question of how a target becomes a target. The other crabs retained deeper in the Arena have their own configurations; the panel controls this one experiment.
+
+Now bring up SCREEN. A wall appears between the opening positions of the creature and the central beacon. The beacon has not ceased to exist. Move it to the side, or move yourself until the line clears the wall. Which part of the world is available to this creature now?
+
+Reveal PARTS. The candidate label and line expose a current selection, while the completed-meal count records something that has happened. The two numbers are doing different kinds of work.
+
+```gdscript
+if d&lt;distance and _sees(candidate.global_position):
+    best=candidate
+    distance=d
+    bait=candidate==station.food
+```
+
+The closest visible candidate within six metres wins. Food is not given a higher rank simply for being food. A nearer beacon can win instead. This is a scoped version of the existing crab&#x27;s selection: one nominated visitor and this station&#x27;s mushroom, rather than every eligible object in the museum. It has no sight memory. A blocked candidate cannot continue drawing it through a remembered target, although the inherited controller can briefly exclude a candidate it has failed to reach.
+
+Look at the sight line again. The query runs horizontally, twenty centimetres above the floor. Candidate distance, however, uses the three-dimensional positions of the nodes. Seeing and measuring do not even use quite the same world. The golden line on our floor is a display of selection, not a camera image from the creature&#x27;s eyes.
+
+A meal holds its attention for two seconds once feeding begins. Moving another candidate during that interval does not interrupt the meal. Offer another mushroom after the first is gone. The counter rises. At five completed meals, the creature stops moving.
+
+```gdscript
+_rooted = true
+can_bite = false
+_target = null
+_lunge_t = 0.0
+patrol_speed = 0.0
+chase_speed = 0.0
+```
+
+There is a name in the source for this state: rooted. It does not currently grow branches. The same body remains, with a different set of actions available to it. Five is a threshold somebody chose; feeding has changed state, not trained a new policy. How quickly might we have called this trust, taming, exhaustion, or friendship if the counter and the code had stayed hidden?
+
+That gap can hold an artistic question without being passed off as evidence. What relation do you feel when the creature approaches? What changes when it leaves you for something else? We can alter the conditions of that encounter and watch our own interpretation arrive beside its implementation.
+
+RESET replaces this animal with an unfed one and keeps the panel choices. It is a new experimental beginning, not the creature forgetting its meals. RUN can pause this creature&#x27;s controller, including a meal. The food&#x27;s brief appearance and disappearance animations use their own clock; the rest of the museum continues. The golden perimeter pauses observation if the animal leaves the central area; it does not imprison it with a physical collision.
+
+As in Legs, its movement is a commanded position change. The feet plant and swing, and the controller uses obstacle queries to limit steps. There is no integrated body momentum to conserve. The next exhibit asks what an encounter would have to share if that conservation were part of its rule.
+
+## What the collision shares
+
+If momentum is conserved, why can two collisions look so different?
+
+&lt;!-- @collision_carts --&gt;
+
+The carts are shown twice: before the encounter on the upper track and after it on the lower one. Find the striker’s incoming arrow in the first view and look for its outgoing arrow in the second. Move MASS RATIO and follow what happens to that arrow before worrying about the formula.
+
+For a light striker, it points back. Near equal masses, the striker&#x27;s outgoing arrow disappears while the other cart takes the motion forward. With a heavier striker, both outgoing arrows can point in the original direction. The control changes the comparison; these are diagrams of possible outcomes rather than carts repeatedly colliding in front of you.
+
+Keep one mass setting while comparing the upper and lower tracks. Identify the striker by its colour and width, not merely by which cart has the longer arrow. Check that you are comparing the same body before and after. Then follow the other cart across the two views. Its initial lack of an arrow and its later forward arrow belong to one change, while the striker&#x27;s change belongs to another. Describe both before saying that motion was lost. As you adjust the mass ratio, watch the striker&#x27;s width too: the control changes the body&#x27;s represented mass as well as the resulting velocity arrows.
+
+Momentum combines mass with velocity, including its direction. A small body moving quickly and a large body moving slowly can contribute comparable amounts. Conservation constrains the total across the two bodies. It does not require each body to keep its own speed, or even its original direction.
+
+The diagram assumes an isolated, elastic collision along one line. Its target starts at rest, and the striker&#x27;s initial speed stays fixed. Those conditions matter. Two carts that stick together would answer a different collision rule, even though total momentum could still be conserved. The control here changes mass ratio; it does not offer a choice between bouncing and sticking.
+
+Predict which way the striker will leave before crossing the equal-mass setting. Then ask a different question: which cart would be easier to catch afterwards? The quantity the model preserves and the consequence a visitor cares about need not be the same thing. Even the arrows require care: they are drawn for legibility, so their physical lengths are not a precision measuring instrument.
+
+&lt;!-- @ --&gt;
+
+The next room considers force as a place. Bring the habit of looking at the whole relationship before judging an outcome from one body&#x27;s motion.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="VFM_08_Arena/tutorial.md">Raw captured source</a></p><pre># Arena: selection, state and collision
+
+## arena_relation_lab
+
+A full-scale station wraps the existing head_crab.gd controller using lesson_crab.gd. That subclass replaces only candidate selection and fallback target acquisition. It nominates this station&#x27;s food and either a beacon or one actual museum-player node. The nearest visible candidate strictly within 6 m is eligible, excluding the inherited temporary ignore list. A strict less-than comparison means an exact distance tie retains the food candidate encountered first. No sight memory is used; stale targets are cleared on selection. This is explicitly different from the base crab&#x27;s global candidate groups and brief sight memory.
+
+Candidate distance uses 3D node positions; _sees uses the existing horizontal ray at floor + 0.20 m with collision mask 1. The screen is real query-blocking geometry. It can also block the visitor&#x27;s route when present; passages remain at both ends. The displayed candidate line lies at a fixed display height and is not the ray itself.
+
+Crab scale is 0.3, chase speed 0.8 m/s, patrol speed zero, path grid disabled. Existing whisker/shape-query avoidance and plant/swing gait remain. Movement writes position; this is not a RigidBody3D and does not model momentum transfer. The scoped crab cannot bite. Existing crabs and turret deeper in the hall retain their own behavior.
+
+| Control | Action |
+| --- | --- |
+| RUN | Pause/resume this crab&#x27;s controller, including the feeding timer. |
+| RESET | Replace crab with an unfed instance, remove this station&#x27;s food, pause; retain beacon, screen, visitor and reveal choices. |
+| BEACON | Cycle centre, right, left target positions without resetting the animal. |
+| VISITOR | Switch nominated target between beacon and actual museum player. |
+| FOOD | Offer one native mushroom on the pink pad; no stacking, none after the stopping threshold. |
+| SCREEN | Show/hide a 2.4 × 1.4 m collision screen and its sight obstruction. |
+| PARTS | Reveal candidate, candidate line, distance, feeding timer and completed meals. |
+| RULE | Expose selection scope, distance/sight geometry, lack of sight memory and the five-meal threshold. |
+
+Food reuses SporeMushroom via lesson_food.gd. _plant removes global spider_bait membership; only this station&#x27;s selector considers it. Walking pickup is disabled. begin_absorb, consume, eating animation and the meal count use the existing code. A meal begins within feed_reach=0.26 m measured horizontally and takes feed_time=2 seconds of controller updates. Once begun, feeding completes before selection resumes. The fifth completed meal calls _root, disables bite and both speeds. No branches are created and no policy is learned.
+
+At absolute local X or Z greater than 5 m, the station pauses its crab. This is an observation bound, not a wall. RUN cannot resume a boundary exit until RESET. Food&#x27;s short planting/consumption tweens are separate from pausing the crab.
+
+## collision_carts
+
+The existing scene and passage are retained. MASS RATIO maps 0..1 to striker mass 0.4..2.6; target mass is 1, incoming striker speed 1, target initially still. Analytic elastic 1D outcomes are vA=(mA-mB)/(mA+mB)*u and vB=2*mA/(mA+mB)*u. Upper/lower lanes show before/after. Both momentum and kinetic energy balance under those stated conditions. Arrows have a visibility threshold and a fixed length offset, so their drawn length is not a precision speed scale.
+
+## Verification scope
+
+The desktop probe runs in the actual museum and checks live pointer controls, selection/occlusion, autonomous arrival and feeding, timed consumption, five-meal state, reset, actual player nomination, observation boundary, approaches and the retained collision-carts model. It also tests conservation at three ratios independently of the displayed arrows. These do not certify every retained Arena artifact. Headset reach, legibility, comfort and sustained performance remain open.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="VFM_08_Arena/intent.md">Raw captured source</a></p><pre># What Makes an Encounter?
+
+Two primaries in order: arena_relation_lab, collision_carts. Preserve the developed collision passage while introducing an inspectable agent encounter beforehand.
+
+Run the crab, move its nominated beacon, offer food, block sight, and become the nominated visitor. Only then reveal current selection, feeding time and completed meals. The lesson uses the existing head-crab rig, steering, gait and feeding through a scoped subclass; base creature behavior elsewhere remains unchanged. It excludes damage and sight memory, limits selection to this station&#x27;s candidates, and retains the existing five-meal stopping threshold.
+
+The contrast is controller/state versus conservation law. Collision carts remains an analytic before/after elastic 1D diagram, not a live physics collision. The next map, Vectors_Act5_ForceAsPlace, asks how a shared spatial rule becomes different bodily responses.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="VFM_08_Arena/critical.md">Raw captured source</a></p><pre># A candidate is not an identity
+
+The crab compares the nominated visitor and its own food by distance and sight. Those categories can produce the same turn without becoming the same thing. The selection contract makes a relation actionable; it does not exhaust either participant. VISITOR lets the reader enter that contract and feel the difference between being present in a room and being selected by its controller.
+
+The scoped lesson makes some choices particularly stark: two candidates, no sight memory, no bite. These are declared experimental conditions, not a discovery that the underlying creature was harmless all along. Other configurations remain elsewhere in the hall.
+
+Completed meals accumulate into a programmed threshold. Five changes the permitted actions without changing the body&#x27;s form. Calling the resulting stillness friendship would add an interpretation the implementation cannot verify. Such interpretations can be material for artistic research precisely when the selection rule, retained counter and state transition remain inspectable beside them.
+
+The collision carts impose a different contract. Their total momentum and energy follow from an isolated elastic one-dimensional model, while the crab receives commanded position changes. Neither image should borrow the other&#x27;s warrant. The room lets controller, memory and mechanical constraint become separate things we can alter and compare.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="VFM_08_Arena/artifacts.md">Raw captured source</a></p><pre># What Makes an Encounter? — artifacts
+
+Twenty-two placements represent twenty-one identities: one new station plus all original placements, including both head crabs. Two book anchors lead the reading.
+
+| Role | Artifact |
+| --- | --- |
+| secondary | `turret_targeting` |
+| secondary | `reflection_hall` |
+| secondary | `vector_arena` |
+| secondary | `sentry_turret` |
+| primary | `collision_carts` |
+| secondary | `momentum_collision` |
+| secondary | `momentum_cradle` |
+| secondary | `newtons_laws` |
+| secondary | `example_2_1_forces_vr` |
+| secondary | `revolving_door` |
+| secondary | `tug_of_war` |
+| secondary | `prop_mobile` |
+| secondary | `umbrella_field` |
+| secondary | `three_gravities` |
+| secondary | `paused_fountain` |
+| secondary | `brake_skid` |
+| secondary | `prop_spigot` |
+| secondary | `parlour_orbits` |
+| decoration | `queer_cylinder_target` |
+| secondary | `head_crab` |
+| primary | `arena_relation_lab` |
+
+The new station contains a scoped version of the existing head-crab rig and one local food candidate. The two separately placed head crabs remain supporting creatures with their original behavior. Other Arena exhibits have not all been recertified.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="VFM_08_Arena/blurb.md">Raw captured source</a></p><pre>A creature changes direction when another candidate becomes visible. A meal changes what it will do next. Then two carts meet under a rule that preserves momentum. What makes each encounter possible?
+</pre></section></body></html>

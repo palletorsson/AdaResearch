@@ -1,0 +1,300 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12. Synthesis</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}
+.reading{max-width:900px;margin:auto}.reading article{margin:32px 0}
+.chapter{scroll-margin-top:20px}.chapter>h2{border-top:2px solid #809289;padding-top:28px}
+.thread{font:15px/1.6 system-ui;background:#e2ebe7;padding:16px;max-width:none}
+.parallel article>h1{font-size:30px}.parallel{align-items:start}
+.toc{columns:3;column-gap:32px}.toc a{display:block;margin-bottom:12px;break-inside:avoid}
+.interlude{border-top:2px solid #809289;margin-top:3em;padding-top:2em}
+.pictures{margin:28px 0}.pictures img{aspect-ratio:16/10;object-fit:cover}
+details{margin:20px 0}summary{cursor:pointer;font:16px system-ui}pre{tab-size:4}
+@media(max-width:950px){.toc{columns:1}.parallel article>h1{font-size:26px}}
+@media print{.chapter{break-before:page}.reading article{break-inside:auto}details{display:none}}
+</style><header><div class="tag">Endless Museum · Wavefunctions · Reading pass</div><h1>12. Synthesis</h1><nav><a href="index.html">Sequence & changes</a><a href="tutorial.html">Whole tutorial</a><a href="final.html">Whole reflection</a><a href="wavefunctions-readings.zip">Download texts & code</a></nav></header><main><nav><a href="WaveFunctions_TrigWalkingPath.html">← Beats</a></nav><p class="thread">Composition → what is kept · Five harmonic amounts make one curve; restoring a recipe differs from restoring an instant.</p><div class="parallel"><article><div class="tag">Tutorial · build and investigate</div><h1>Five amounts, one shape</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Harmonic number and coefficient</li>
+<li>A weighted sum from a list and loop</li>
+<li>Holding phase while comparing recipes</li>
+<li>Copying a baseline without resetting the clock</li>
+<li>The limits of a finite representation</li>
+</ul>
+<p>Find the dark synthesis bench in the museum. Press HOLD. Lower H2 through H5 one by one. The pale curve changes until only a sine remains. None of the five smooth component rows has the slope you first saw; the slope belonged to their sum.</p>
+<p>In Beats, two nearby frequencies drifted in and out of alignment. Here the frequencies stay in integer ratios: one, two, three, four and five times a fundamental. We change their amounts. The unchanged PointBody returns five times as a hand control; LineSkin draws the five contributions and their sum. Arrays supplies the list, and Trace supplies the loop through stored entries.</p>
+<h2>Build beside the existing bench</h2>
+<p>Use the prepared Endless Museum, with its player, XR Tools, camera and lighting. Save the three scripts below together. Attach <code>12_five_amounts.gd</code> to an empty Node3D at <strong>hall-local (16, 0, 11), Y rotation 180 degrees, unit scale</strong>. The script creates all five points, six rows and labels. Keep <code>point_body.gd</code> and <code>line_skin.gd</code> unchanged.</p>
+<p>Raise a point to increase its harmonic's amount. Local Y = 0.8 metres means zero; 1.6 metres means one. Release it to keep that height. Horizontal movement does not change its coefficient. Each point keeps its harmonic identity even if you move it past another.</p>
+<p>The display starts held. The <strong>H1 point's trigger toggles HOLD/RUN</strong>. The <strong>H5 point's trigger restores BASELINE</strong>, releasing any held controls and returning their heights. It preserves the phase and held state. These are the established PointBody actions; we are giving them new jobs.</p>
+<h2>Multiply a contribution, then add it</h2>
+<p><code>amounts[h]</code> is a coefficient. <code>h + 1</code> is the harmonic number because array indices begin at zero. The coefficient changes the amount; the harmonic number changes how many cycles fit in one fundamental cycle. A nonnegative coefficient can still contribute a negative value when its sine is below zero.</p>
+<!-- student-code:12_five_amounts.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+var baseline: Array[float] = [1.0, 0.5, 1.0 / 3.0, 0.25, 0.2]
+var amounts: Array[float] = []
+var points: Array = []
+var rows: Array = []
+var phase := 0.0
+var held := true
+var segments := 64
+var width := 3.2
+var gain := 0.16
+var label: Label3D
+
+func text_at(words: String, at: Vector3, size: int = 22) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = size
+    text.pixel_size = 0.002
+    add_child(text)
+    return text
+
+func _ready() -&gt; void:
+    amounts = baseline.duplicate()
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.04, 0.04, 0.045)
+    ink.roughness = 0.2
+    for h in range(amounts.size()):
+        var point := PointBody.new()
+        point.position = Vector3(-1.4 + h * 0.7, 0.8 + amounts[h] * 0.8, 0.75)
+        point.get_child(0).material_override = ink
+        add_child(point)
+        points.append(point)
+        text_at(&quot;H%d&quot; % (h + 1), Vector3(point.position.x, 0.6, 0.75))
+    points[0].action_pressed.connect(toggle_hold)
+    points[4].action_pressed.connect(restore_baseline)
+    label = text_at(&quot;&quot;, Vector3(0, 3.55, 0), 23)
+    text_at(&quot;Raise each point: amount 0 to 1\nH1 trigger: HOLD / RUN     H5 trigger: BASELINE&quot;, Vector3(0, 0.34, 0.75), 20)
+    for row in range(6):
+        var lines: Array = []
+        var finish := StandardMaterial3D.new()
+        finish.albedo_color = Color(0.98, 0.7, 0.82) if row == 5 else Color.from_hsv(float(row) / 5.0, 0.4, 0.95)
+        for i in range(segments):
+            var line := LineSkin.new()
+            line.material_override = finish
+            add_child(line)
+            lines.append(line)
+        rows.append(lines)
+        text_at(&quot;SUM&quot; if row == 5 else &quot;H%d&quot; % (row + 1), Vector3(-1.9, row_height(row), 0), 20)
+    draw_state()
+
+func read_amounts() -&gt; void:
+    for h in range(points.size()):
+        amounts[h] = clampf((points[h].position.y - 0.8) / 0.8, 0.0, 1.0)
+
+func contribution(h: int, angle: float) -&gt; float:
+    return amounts[h] * sin((h + 1) * angle)
+
+func sum_at(angle: float) -&gt; float:
+    var total := 0.0
+    for h in range(amounts.size()):
+        total += contribution(h, angle)
+    return total
+
+func row_height(row: int) -&gt; float:
+    return 2.95 if row == 5 else 2.4 - row * 0.29
+
+func plot_position(row: int, u: float) -&gt; Vector3:
+    var angle := u * TAU + phase
+    var value := sum_at(angle) if row == 5 else contribution(row, angle)
+    return Vector3((u - 0.5) * width, row_height(row) + gain * value, 0)
+
+func toggle_hold(_point: Variant = null) -&gt; void:
+    held = not held
+    draw_state()
+
+func restore_baseline(_point: Variant = null) -&gt; void:
+    amounts = baseline.duplicate()
+    for h in range(points.size()):
+        points[h].drop()
+        points[h].position.y = 0.8 + amounts[h] * 0.8
+    draw_state()
+
+func _process(delta: float) -&gt; void:
+    read_amounts()
+    if not held:
+        phase = fposmod(phase + TAU * 0.2 * delta, TAU)
+    draw_state()
+
+func draw_state() -&gt; void:
+    for row in range(rows.size()):
+        var previous := plot_position(row, 0.0)
+        for i in range(segments):
+            var next := plot_position(row, float(i + 1) / segments)
+            var displacement := next - previous
+            rows[row][i].show_segment(previous, displacement, displacement.length())
+            previous = next
+    var values := PackedStringArray()
+    for h in range(amounts.size()):
+        values.append(&quot;H%d %.3f&quot; % [h + 1, amounts[h]])
+    label.text = &quot;%s | phase %.2f rad\n%s\nAll rows: %.2f m per signal unit&quot; % [&quot;HOLD&quot; if held else &quot;RUN&quot;, phase, &quot;   &quot;.join(values), gain]
+</code></pre>
+<p><code>sum_at()</code> starts a new total for each angle. It does not add yesterday's curve to today's. Each pass through the loop adds one signed contribution at the same angle. This is the familiar sum extended from two named values to a list.</p>
+<p>The baseline is copied with <code>duplicate()</code>. Editing the working list must not edit the recipe we hope to restore. <code>restore_baseline()</code> copies it again, moves the handles and leaves <code>phase</code> alone. The inherited <code>drop()</code> releases a held control before repositioning it; otherwise the hand would continue commanding its position.</p>
+<h2>Hold one thing still</h2>
+<p>While held, move a point and inspect the resulting change at one fixed horizontal position. Only when RUN is selected does <code>_process()</code> advance the common phase, at 0.2 fundamental cycles per second. Multiplying that shared angle by each harmonic number keeps the ratios intact.</p>
+<p>At phase zero, a quarter of the way across the rows is angle PI/2. H1 contributes +1; H3 contributes −1/3; H5 contributes +1/5. H2 and H4 are zero there. Predict the total: about 0.867. Now remove H3. The sum rises to 1.2 at that place. Removing something can increase the result because what you removed was negative.</p>
+<p>All six rows use the <strong>same gain: 0.16 metres per signal unit</strong>. Their baselines are vertically separated, so add displacements from those baselines, not absolute screen heights. Unlike the last lesson, the sum has no extra half gain. It can extend farther than any component. The display does not normalize it when you change the recipe.</p>
+<p>The program draws one fundamental cycle as 64 cylinder segments. Five harmonics do not make an exact sawtooth jump. The finite sum is smooth; the displayed polyline is a further sampling of it. These are two separate limits. This construction also supplies no negative coefficient, independent phase or constant offset. It does not express every periodic shape, and it produces no sound.</p>
+<h2>The carried pieces</h2>
+<p>These are the earlier grabbable point and finite-cylinder renderer. Their complete files remain here so the example can be reconstructed.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Make a change you can explain</h2>
+<ol>
+<li>With the display held, remove H3. Predict the change at the quarter-cycle position, then inspect it. Restore BASELINE with H5's trigger.</li>
+<li>Lower H2 through H5. Compare the sum with H1. Their displacement should agree because they use the same gain. Lower H1 too: all rows become flat.</li>
+<li>Run the phase, then hold it. Change several amounts and restore BASELINE. The old shape returns at the held phase. Repeat while running: the recipe returns, but time keeps moving.</li>
+<li>Build a second recipe: <code>[1.0, 0.0, 1.0 / 3.0, 0.0, 0.2]</code>. Before running it, predict what the second half of a cycle will do. With only odd harmonics, it is the negative of the first half. The complete <code>12_odd_recipe.gd</code> variation is included in the code download.</li>
+</ol>
+<p>The museum bench uses the same weighted-sine principle with sliders, four visible cycles and finer sampling. Its component rows and sum have different drawing gains; its H3 baseline is rounded to 0.333. It hides component ribbons below 0.01 and assigns recipe names within a tolerance. Our reduced study keeps every component line and does not classify recipes. Those extra display decisions are useful to investigate in the exhibit without rebuilding them here.</p>
+<p>Native checks execute the exact printed files, known signed contributions, both PointBody actions, baseline independence, phase preservation, displayed geometry and the odd-harmonic variation. Deliberately wrong indexing, unsigned contributions and a shared baseline must fail. Passing these checks establishes code behaviour; it does not establish a reader's understanding or headset comfort.</p>
+<h2>What travels onward</h2>
+<p>The five-harmonic study completes this tutorial sequence. Use the independent recipe to show that you can predict a signed contribution, explain the sum, and distinguish restoring its amounts from restoring its phase. Room Memory is an optional artistic investigation; completing its recording experiment is not a prerequisite for Randomness.</p>
+<p>In the separate Room Memory encounter, each filtered recording becomes the next input. This tutorial recalculates a curve from a recipe instead. Keep that difference. To recover the same curve at the same instant, we need both its amounts and its phase. Random Definition will ask what else must be retained when the next result is chosen rather than prescribed by this cycle.</p></article><article><div class="tag">Reflection · encounter and question</div><h1>The sum on the bench</h1>
+<p>In Beats, two quick motions made a slow pulse. Here a wave is waiting to be taken apart.</p>
+<p>Find the bench with the dark board above it. The board carries a pale wave with five coloured rows beneath it, and the wave already has a shape when you arrive: a long slope down and a steep rise, four times across the board, drifting to the left. On the bench, at its right end, five sliders stand in a column, one for each row.</p>
+<h2>Five amounts</h2>
+<!-- @additive_wave_demo -->
+
+<p>Read the rows before you touch anything. The top row is one smooth rise and fall per cycle; each row below has more, two, three, four, five, and each is drawn smaller than the one above. None of them looks like the pale wave. Press HOLD on the panel at the left of the bench and the drift stops, so a place on the board stays where it is.</p>
+<p>Now take the four lower sliders down, one at a time, and keep your eye on the pale wave while each row leaves the ladder. What remains is the top row, drawn larger: a sine. Press BASELINE and the four return together; press H1 ALONE and they leave together. The shape you arrived at is not one thing with a slope in it. It is five smooth returns added, and the slope belongs to none of them.</p>
+<p>Bring the second row back on its own slider and choose a place on the board. The amber line marked <em>mark</em> is one such place. Before you raise the third slider, decide what the sum will do there: the third row is at a crest, or crossing its middle, or in a trough, and its slider decides how much of that is admitted. Raise it and read the plate on the bench. Its third line lists each row's value at the mark; the fourth adds them and prints the total drawn beside them. With these five visible rows, their sum agrees with the total. Each row makes an integer number of returns in the same span. Its slider decides how much it contributes. The pale line gathers these signed contributions at each place on the board. A crest adds; a trough subtracts. What looks like one slope is a relation maintained across many positions.</p>
+<p>This is a visual instrument. It does not play the curve as sound. No slider changes the fundamental's frequency. Unlike the separately struck bars in Air Music, these rows cannot choose separate beginnings. A shifted row or a negative amount would need a control the bench does not offer. BASELINE restores the five amounts the room was placed with: one, a half, approximately a third, a quarter and a fifth. The plate names which coefficients differ, so you can wander and still know what has changed.</p>
+<p>With the baseline held, look at the rise. An ideal sawtooth jumps; this one climbs through a visible distance. Its descent ripples where the ideal would be straight. Raise the fifth slider and those ripples change. Other amounts can make the sum rise further. Five smooth returns can suggest a corner and cannot make an exact one. From across the room the pale line suggests a sawtooth. At the bench its rounded rise remains available to inspect.</p>
+<p>Take the second and fourth rows out and leave the odd three; the label offers a name. Move the fifth a little. At first the name stays. Move further and it gives way to Custom Waveform. The curve has changed continuously; the naming rule crossed a threshold. It checks all five amounts relative to the first, allowing a small difference from a recipe. Custom is a place to continue from.</p>
+<p>Then remove the row you think matters least and find where its absence shows. It is not in one place, because each row runs the whole cycle. Near zero, a row disappears before its coefficient reaches zero: the display hides values below 0.01 while the sum still includes them. At some marks the plate can report a difference between the visible rows and the total. Something has left the picture without leaving the calculation.</p>
+<!-- @ -->
+
+<h2 class="interlude">Interlude — what the room keeps</h2>
+<p><em>An optional listening encounter. The five-harmonic tutorial is complete; this visit extends its questions. You can also continue at “Return — the recipe and the instant” below.</em></p>
+<p>Leave the five amounts held for a moment. We have been changing a recipe and calculating its result again. Across the laboratory, a sound will carry the result of one change into the next. Give this encounter its own time; we will return to the bench afterward.</p>
+<p>Slow Circuits offers ENTER ROOM. It takes you into a listening room; BACK TO HALL brings you to the museum again. Take a phrase with you.</p>
+<!-- @ambient_patch -->
+
+<p>A loudspeaker stands inside. At the Voice station, press RECORD / END, say a short phrase, and press again to finish. Eight seconds is the limit. DEMO VOICE offers a synthetic phrase if you prefer. Listen once. Then press HEAR ORIGINAL, let it finish, and hear it again. The instrument plays the same stored recording. Repetition has not yet altered its data.</p>
+<p>Press NEXT PASS. Something has acted on the phrase. Listen for a vowel, a consonant, a pause. Press again. Which is easiest to follow now? AUTO continues the returns; HEAR ORIGINAL interrupts them with the recording you began from. The comparison remains available even when the words become difficult to recognize.</p>
+<p>The room keeps the result of each pass and makes that result the next input. The next pass begins with a sound that has already been changed. RESET returns to a copy of the original instead.</p>
+<p>A copy can keep the values. A filter acts on them. Here, delayed sound returns into the calculation, reinforcing some frequencies more than others. Repeating the operation makes that unevenness increasingly audible. The voice and the rule participate in what remains.</p>
+<p>Alvin Lucier's <em>I Am Sitting in a Room</em> begins with a voice recorded and played back into a physical room, then recorded again. The room's resonances become prominent through successive returns. A digital recorder could take part in that physical process too; tape damage is not required for its central effect.<sup id="fnref:synthesis-lucier"><a class="footnote-ref" href="#fn:synthesis-lucier">1</a></sup></p>
+<p>Calling everything we hear here <em>analogue distortion</em> would hide a distinction we can investigate. In Lucier's physical setup, sound passes through air between a loudspeaker and a microphone. In this virtual room, the first recording enters a numerical model. Three delayed paths use the room's dimensions; damping changes what returns. The visible walls do not, by themselves, act on the sound.<sup id="fnref:synthesis-room-model"><a class="footnote-ref" href="#fn:synthesis-room-model">2</a></sup></p>
+<p>Go to SURFACE and move ABSORB. The panels change colour and the experiment returns to the stored voice. Begin the passes again. Keep the same phrase and compare what happens under the changed conditions. Colour and acoustic response have been connected by code. One has not caused the other.</p>
+<p>A wall can look like concrete before we have given it any of concrete's acoustic behaviour. What would it mean to give that wall the response of cloth? Or to let a curtain ring? Those rooms are possibilities for another iteration. The current control changes absorption; it does not yet let us exchange a whole material's behaviour. Even this smaller choice makes appearance and action available to question separately.</p>
+<p>There are other choices inside the return. Each pass is adjusted to the same peak amplitude. The recording has a fixed length, with a short allowance for its tail. Sound that continues beyond that window is cut away. HEAR ORIGINAL means the first recording this instrument stored; it cannot give us the voice before recording, sampling and preparation. Walking changes where we hear the virtual loudspeaker, while the simplified resonance model stays fixed.</p>
+<p>Listen once more to the original. What became difficult to hear has not been deleted from every place. It remains in a buffer we chose to keep. The room's rules shaped one version of the voice; comparison lets us notice their work. Which properties would we carry into another room, and which might we let it change?</p>
+<!-- @ -->
+
+<h2 class="interlude">Return — the recipe and the instant</h2>
+<p>Choose BACK TO HALL and find the five rows again. Press HOLD, then BASELINE. Pick a place on the pale curve and move the fifth slider. Watch that place change. Press BASELINE once more: with the phase held, restoring the five amounts brings the curve back to where you just saw it.</p>
+<p>In the listening room, each pass began with the altered result of the last. Here the slider changes an amount used to calculate the sum afresh. The previous curve does not become an ingredient in the next one. Both instruments let us return, but they keep different things available.</p>
+<p>Release HOLD. The five amounts stay while the shape moves across the board. BASELINE can restore this recipe without recovering the moment before we left the hall. Repeating a recipe and repeating an exact instant ask for different things to be kept. In Random Definition, that question will meet an unfamiliar result: what would we need to retain to bring it back?</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:synthesis-lucier">
+<p>Alvin Lucier, <em>I Am Sitting in a Room</em> (1969). Nicolas Collins's <a href="https://www.dramonline.org/albums/alvin-lucier-i-am-sitting-in-a-room/notes">album notes</a> (1990) describe the result as an encounter between a particular voice and a particular space, and discuss its realization with digital delays or samplers. Collins also attends to Lucier's stutter as a rhythmic contribution. Lucier’s stutter is part of the voice the room receives, not a fault the passes correct. “Less intelligible” describes what happens to the recording, not a judgement of its speaker.&#160;<a class="footnote-backref" href="#fnref:synthesis-lucier" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:synthesis-room-model">
+<p>Julius O. Smith III, <a href="https://www.dsprelated.com/freebooks/pasp/Artificial_Reverberation.html">“Artificial Reverberation,” <em>Physical Audio Signal Processing</em></a>, explains how delays and filters model propagation, reflections and absorption, and why a response between a source and receiver depends on their positions. Ada's current three-path model is much simpler: it does not calculate reflections from the visible mesh, an open doorway or a moving microphone. The implementation is in <code>room_memory_audio.gd</code> and <code>room_memory_dsp.gd</code>; processing runs on a background worker.&#160;<a class="footnote-backref" href="#fnref:synthesis-room-model" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div><details><summary>tutorial.md — show exact prose changes</summary><pre>--- Before tutorial
++++ After tutorial
+@@ -232,4 +232,6 @@
+ 
+ ## What travels onward
+ 
++The five-harmonic study completes this tutorial sequence. Use the independent recipe to show that you can predict a signed contribution, explain the sum, and distinguish restoring its amounts from restoring its phase. Room Memory is an optional artistic investigation; completing its recording experiment is not a prerequisite for Randomness.
++
+ In the separate Room Memory encounter, each filtered recording becomes the next input. This tutorial recalculates a curve from a recipe instead. Keep that difference. To recover the same curve at the same instant, we need both its amounts and its phase. Random Definition will ask what else must be retained when the next result is chosen rather than prescribed by this cycle.
+</pre></details><details><summary>final.md — show exact prose changes</summary><pre>--- Before final
++++ After final
+@@ -24,9 +24,13 @@
+ 
+ &lt;!-- @ --&gt;
+ 
+-## What the room keeps
++## Interlude — what the room keeps
+ 
+-At the bench, one slider changed how much of a wave was present. Another instrument in the laboratory, Slow Circuits, offers ENTER ROOM. It takes you out of this hall and into a listening room. BACK TO HALL will bring you to the museum again. Take a phrase with you.
++*An optional listening encounter. The five-harmonic tutorial is complete; this visit extends its questions. You can also continue at “Return — the recipe and the instant” below.*
++
++Leave the five amounts held for a moment. We have been changing a recipe and calculating its result again. Across the laboratory, a sound will carry the result of one change into the next. Give this encounter its own time; we will return to the bench afterward.
++
++Slow Circuits offers ENTER ROOM. It takes you into a listening room; BACK TO HALL brings you to the museum again. Take a phrase with you.
+ 
+ &lt;!-- @ambient_patch --&gt;
+ 
+@@ -52,7 +56,7 @@
+ 
+ &lt;!-- @ --&gt;
+ 
+-## Back at the bench
++## Return — the recipe and the instant
+ 
+ Choose BACK TO HALL and find the five rows again. Press HOLD, then BASELINE. Pick a place on the pale curve and move the fifth slider. Watch that place change. Press BASELINE once more: with the phase held, restoring the five amounts brings the curve back to where you just saw it.
+ 
+</pre></details><nav><a href="WaveFunctions_TrigWalkingPath.html">← Beats</a></nav></main></html>

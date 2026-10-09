@@ -1,0 +1,34 @@
+--- before/commons/data/museum_core_encounters.json
++++ current/commons/data/museum_core_encounters.json
+@@ -2551,23 +2551,24 @@
+       "status": "runtime_checked_draft",
+       "sequence": "postfoundationscrisis",
+       "text_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+-      "text_sha256": "f0152af83088dce916eb0c3146f5267a517a373798e90c3830e6523c6f6a19a4",
++      "text_sha256": "16ee054aa2b052e47f169b23ba97b7cb97951118a6177c78842f6c1a246ac5ab",
+       "map_sha256": "f805063026e3ef7ae3247c7e30ff31a536691a9d6a18bcfc29983b683479f3dc",
+       "learner_verified": false,
+-      "review_report": "doc/book/iterations/2026-09-21-assembly-immersion/SUMMARY.md"
++      "review_report": "doc/book/iterations/2026-09-21-synthesis-return/SUMMARY.md"
+     },
+     "PostCrisis_Synthesis": {
+       "primary_tokens": [
++        "assembly_return",
+         "accountability_ledger"
+       ],
+-      "reason": "The count continues. Which consequence will you carry back?",
++      "reason": "Look for the hand you moved. What survived the journey?",
+       "status": "runtime_checked_draft",
+       "sequence": "postfoundationscrisis",
+       "text_path": "commons/maps/PostCrisis_Synthesis/final.md",
+-      "text_sha256": "eccfd84b7d02974acb4ce47c8b20478f805795378f19e351c710132e9c48d8a4",
+-      "map_sha256": "90153b96973234bcf17caf965bc9c415ef51dbc943cf8b063f80fd2298e1e257",
+-      "learner_verified": false,
+-      "review_report": "doc/book/iterations/2026-09-20-last-halls-review/SUMMARY.md"
++      "text_sha256": "eed3bfee701d435aaf2a212fe6bf4125e6eac8d526ed69f883c7fac5c691708c",
++      "map_sha256": "8f8aac1598f2f28023d44664dc1d9f2aa60c4abb6ce7f4aff8935b8669e8090d",
++      "learner_verified": false,
++      "review_report": "doc/book/iterations/2026-09-21-synthesis-return/SUMMARY.md"
+     },
+     "Color_Grid_Pallet": {
+       "primary_tokens": [

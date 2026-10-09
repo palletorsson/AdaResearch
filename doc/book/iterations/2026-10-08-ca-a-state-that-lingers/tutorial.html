@@ -1,0 +1,251 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial · A state that lingers</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e9;color:#222b2b;font:19px/1.65 Georgia,serif}header,main,footer{max-width:1480px;margin:auto;padding:36px}header{padding-top:65px}h1{font-size:clamp(40px,6vw,76px);line-height:1.06;max-width:920px}h2{margin-top:2em;line-height:1.2}nav,.eyebrow,figcaption,.badge{font:14px/1.6 system-ui,sans-serif}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:#345e62;text-underline-offset:3px}.eyebrow{letter-spacing:.12em;text-transform:uppercase}.lead{font-size:26px;max-width:850px}p,li{max-width:80ch}.badge{display:inline-block;padding:8px 14px;background:#e5d7dd}figure{margin:20px 0}img{display:block;width:100%;height:auto;border:1px solid #c9c8c1}figcaption{padding:8px 0;color:#505b5a}.pair,.parallel{display:grid;grid-template-columns:1fr 1fr;gap:26px}.parallel article{min-width:0;background:#fffcf7;padding:26px;border-top:4px solid #b06c94}pre{background:#1c2b2c;color:#f5f1e9;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace;tab-size:4}code{font-size:.82em}pre code{font-size:inherit}table{border-collapse:collapse;display:block;overflow:auto}th,td{padding:8px;border-bottom:1px solid #bbc8c4;text-align:left}footer{border-top:1px solid #c9c8c1}.triplet{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}@media(max-width:850px){.pair,.parallel,.triplet{display:block}header,main,footer{padding:22px}.parallel article{padding:16px}}@media print{nav{display:none}body{font-size:11pt}pre{white-space:pre-wrap;color:#111;background:white;font-size:8pt}.parallel{display:block}}</style></head><body><header><div class="eyebrow">Endless Museum / Cellular Automata / 8 October 2026</div><h1>Tutorial · A state that lingers</h1><nav><a href="index.html">Hall report</a><a href="index.html#layout">From above</a><a href="parallel.html">Facing texts</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="ca-states-review.zip">Review ZIP</a></nav></header><main><h1>A state that lingers</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Three cell states: empty, active, fading.</li>
+<li>A three-dimensional address stored in one array.</li>
+<li>A neighbourhood of 26 positions; count only active cells.</li>
+<li>A transition function: the current state changes which answer is possible.</li>
+<li>A synchronous update and an empty outer boundary.</li>
+<li>State, visible surface and colour as separate decisions.</li>
+</ul>
+<h2>Follow the cell</h2>
+<p>We are still in Endless Museum. The small volume and the enlarged neighbourhood show the same running calculation. Gold marks one address. Pick up the black point beside the console; its trigger advances one generation. You can carry the control while walking around a cube that hides another. The console's STEP does the same job.</p>
+<p>Press REPLAY. The gold-framed centre begins active, with eleven active neighbours. STEP makes it green: fading. Now it has seven active neighbours. Predict its next state before stepping again. Does enough company make it active, or does its present state prevent that?</p>
+<h2>What we carry</h2>
+<p>The last hall read an old row and wrote a separate next row. We keep that agreement, along with arrays, loops and the PointBody class. An integer now replaces each Boolean: <code>0</code> means empty, <code>1</code> active, <code>2</code> fading. One address still holds one value. A visible green cell holds a value that the active-neighbour count excludes.</p>
+<p>The point now carries the step action. Moving it does not edit the cells or select a different address. We keep watching one centre, so its history can be followed without moving the question.</p>
+<p>Continue on the existing <code>PointStudy</code> node in the museum, saving the row script as a previous working version. Put the two files below together and attach <code>volume.gd</code>. Keep the node at unit scale on level floor, with clear space around it; face its positive Z side. The museum already supplies camera, light, player and XR Tools. This construction supplies its own geometry, label and pickable point. No authored scene children are assumed.</p>
+<p>Our study is a <strong>7 × 7 × 7 volume with twelve deliberately placed active cells</strong>. The installed work is a 50 × 50 × 50 seeded volume. They share the three-state rule and empty outer shell, but their beginnings and resulting shapes differ. We reconstruct the operation, then return to the larger encounter.</p>
+<h2>Give a volume addresses</h2>
+<p><code>index(p)</code> stores X positions next to each other. Moving one step in Y skips <code>SIZE</code> entries; one step in Z skips <code>SIZE * SIZE</code>. This is still one array. <code>Vector3i</code> keeps the address integer-valued; the drawn position uses metres separately.</p>
+<p>The three nested loops in <code>active_neighbours</code> visit offsets −1, 0 and 1 on each axis: 27 combinations. Excluding <code>(0, 0, 0)</code> leaves 26 neighbours. Face, edge and corner neighbours each count once. Only entries equal to <code>1</code> count. This function is called for interior addresses, whose whole neighbourhood fits inside the array.</p>
+<h2>One function chooses the next state</h2>
+<table>
+<thead>
+<tr>
+<th>Current state</th>
+<th>Active neighbours</th>
+<th>Next state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty, 0</td>
+<td>6, 7 or 8</td>
+<td>Active, 1</td>
+</tr>
+<tr>
+<td>Empty, 0</td>
+<td>Any other count</td>
+<td>Empty, 0</td>
+</tr>
+<tr>
+<td>Active, 1</td>
+<td>6, 7 or 8</td>
+<td>Active, 1</td>
+</tr>
+<tr>
+<td>Active, 1</td>
+<td>Any other count</td>
+<td>Fading, 2</td>
+</tr>
+<tr>
+<td>Fading, 2</td>
+<td>Any count</td>
+<td>Empty, 0</td>
+</tr>
+</tbody>
+</table>
+<p><code>next_state</code> checks fading first. That is why a green cell with seven active neighbours empties. Moving the neighbour-count branch ahead of the fading branch would change the rule. The function assumes the three valid states listed above and a count from zero through twenty-six.</p>
+<p><code>evolve</code> creates a fresh, empty array and fills only its interior. It reads every answer from <code>old</code>, then <code>step</code> replaces <code>current</code>. The outer shell remains zero. Unlike the previous row, these edges do not wrap. Traversing the interior backwards should produce the same result.</p>
+<h2>The complete construction — volume.gd</h2>
+<p>The update functions are the lesson. <code>make_display</code> builds its viewing apparatus; <code>redraw</code> reads the state without changing it. A gold frame holds the central address. Empty cells are hidden; pink and green cells remain visible. This small version draws all occupied cells, without the installed work's hidden-interior optimisation.</p>
+<pre><code class="language-gdscript">extends Node3D
+const PointBody = preload(&quot;point_body.gd&quot;)
+const SIZE := 7
+const SPACING := 0.18
+const CENTRE := Vector3i(3, 3, 3)
+const COLOURS := [Color(&quot;53616b&quot;), Color(&quot;df76b4&quot;), Color(&quot;89d7a3&quot;)]
+var current: Array[int] = []
+var generation := 0
+var point: XRToolsPickable
+var reading := Label3D.new()
+var cells := MultiMesh.new()
+
+func _ready() -&gt; void:
+    make_display()
+    point = PointBody.new()
+    add_child(point)
+    point.action_pressed.connect(func(_body): step())
+    reset()
+    park()
+
+func index(p: Vector3i) -&gt; int:
+    return p.x + SIZE * p.y + SIZE * SIZE * p.z
+
+func reset() -&gt; void:
+    current.resize(SIZE * SIZE * SIZE)
+    current.fill(0)
+    # Nine cells in a flat square; three more just above its middle row.
+    for z in range(2, 5):
+        for x in range(2, 5):
+            current[index(Vector3i(x, 3, z))] = 1
+    for x in range(2, 5):
+        current[index(Vector3i(x, 4, 3))] = 1
+    generation = 0
+    redraw()
+
+func active_neighbours(old: Array[int], p: Vector3i) -&gt; int:
+    var count := 0
+    for z in range(-1, 2):
+        for y in range(-1, 2):
+            for x in range(-1, 2):
+                var offset := Vector3i(x, y, z)
+                if offset != Vector3i.ZERO and old[index(p + offset)] == 1:
+                    count += 1
+    return count
+
+func next_state(state: int, neighbours: int) -&gt; int:
+    if state == 2:
+        return 0
+    if neighbours &gt;= 6 and neighbours &lt;= 8:
+        return 1
+    if state == 1:
+        return 2
+    return 0
+
+func evolve(old: Array[int]) -&gt; Array[int]:
+    var next: Array[int] = []
+    next.resize(old.size())
+    next.fill(0)
+    # The outer shell stays empty; only interior addresses receive answers.
+    for z in range(1, SIZE - 1):
+        for y in range(1, SIZE - 1):
+            for x in range(1, SIZE - 1):
+                var p := Vector3i(x, y, z)
+                next[index(p)] = next_state(old[index(p)], active_neighbours(old, p))
+    return next
+
+func step() -&gt; void:
+    current = evolve(current)
+    generation += 1
+    redraw()
+
+func _physics_process(_delta: float) -&gt; void:
+    if not point.held():
+        park()
+
+func park() -&gt; void:
+    point.position = Vector3(0.8, 1.05, 0.65)
+
+func _unhandled_key_input(event: InputEvent) -&gt; void:
+    if event is InputEventKey and event.pressed and not event.echo:
+        if event.keycode == KEY_ENTER:
+            step()
+            get_viewport().set_input_as_handled()
+        elif event.keycode == KEY_R:
+            reset()
+            get_viewport().set_input_as_handled()
+
+func make_display() -&gt; void:
+    cells.transform_format = MultiMesh.TRANSFORM_3D
+    cells.use_colors = true
+    cells.instance_count = SIZE * SIZE * SIZE
+    var cube := BoxMesh.new()
+    cube.size = Vector3.ONE * SPACING * 0.65
+    cells.mesh = cube
+    var view := MultiMeshInstance3D.new()
+    view.multimesh = cells
+    var finish := StandardMaterial3D.new()
+    finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    finish.vertex_color_use_as_albedo = true
+    view.material_override = finish
+    add_child(view)
+    reading.position = Vector3(0, 1.9, 0)
+    reading.font_size = 30
+    reading.pixel_size = 0.0015
+    reading.outline_size = 4
+    add_child(reading)
+    # A gold address stays after the central cell disappears.
+    for axis in range(3):
+        for a in [-1, 1]:
+            for b in [-1, 1]:
+                var edge := MeshInstance3D.new()
+                var bar := BoxMesh.new()
+                bar.size = Vector3.ONE * 0.006
+                bar.size[axis] = SPACING
+                edge.mesh = bar
+                edge.position = Vector3(0, 1.05, 0)
+                edge.position[(axis + 1) % 3] += a * SPACING / 2
+                edge.position[(axis + 2) % 3] += b * SPACING / 2
+                var gold := StandardMaterial3D.new()
+                gold.albedo_color = Color(&quot;ffd77d&quot;)
+                edge.material_override = gold
+                add_child(edge)
+
+func redraw() -&gt; void:
+    for z in SIZE:
+        for y in SIZE:
+            for x in SIZE:
+                var p := Vector3i(x, y, z)
+                var i := index(p)
+                var basis := Basis.IDENTITY if current[i] &gt; 0 else Basis.IDENTITY.scaled(Vector3.ZERO)
+                var at := Vector3(p - CENTRE) * SPACING + Vector3(0, 1.05, 0)
+                cells.set_instance_transform(i, Transform3D(basis, at))
+                cells.set_instance_color(i, COLOURS[current[i]])
+    var words := [&quot;EMPTY&quot;, &quot;ACTIVE&quot;, &quot;FADING&quot;]
+    reading.text = &quot;GEN %d / CENTRE %s\n%d ACTIVE NEIGHBOURS\nHOLD POINT + TRIGGER: STEP\nENTER: STEP / R: REPLAY&quot; % [generation, words[current[index(CENTRE)]], active_neighbours(current, CENTRE)]
+</code></pre>
+<h2>Carry the point — point_body.gd</h2>
+<p>This is the same small PointBody from the previous hall, unchanged. It contains the sphere and its pickup boundary. The new volume connects its existing action signal to <code>step</code>. Release returns the point to its resting place. With a keyboard, Enter steps and R replays the twelve-cell beginning.</p>
+<pre><code class="language-gdscript">extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color(&quot;25212a&quot;)
+var desktop_pointer: WeakRef
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 0
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.085
+    sphere.height = 0.17
+    sphere.radial_segments = 24
+    sphere.rings = 12
+    surface.mesh = sphere
+    add_child(surface)
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = 0.085
+    boundary.shape = shape
+    add_child(boundary)
+
+func _ready() -&gt; void:
+    super._ready()
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = tint
+    finish.roughness = 0.24
+    get_child(0).material_override = finish
+
+func held() -&gt; bool:
+    return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -&gt; void:
+    desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -&gt; void:
+    desktop_pointer = null
+</code></pre>
+<h2>Try a change you can account for</h2>
+<p>Before running the script, predict the central cell's first two states. The twelve-cell beginning gives it eleven active neighbours at generation zero. Record your prediction, the observed states and the line that explains any difference. The readout always reports the current generation's neighbours, not the count used to produce that generation.</p>
+<p>Then replace the twelve-cell beginning with just two adjacent active cells: the centre and one face neighbour. Predict two generations for the whole volume before running it. Keep the rule unchanged. Explain why a visible fading cell does not keep the other one active. This is your own seed, not a change to the museum installation.</p>
+<p>Finally, ask the transition function for the next state of an empty cell with seven active neighbours and a fading cell with seven. Their counts match. Explain why their answers differ. A good test checks both cases; a successful screenshot alone does not establish that distinction.</p>
+<h2>Return to the larger work</h2>
+<p>REPLAY returns the installed volume to its own seed. The chosen address <code>(26, 22, 24)</code> goes from active with eleven active neighbours, to fading with seven, to empty with five. Its surrounding cells keep evolving too. The gold frame keeps the question at the same address.</p>
+<p>VIEW changes the colours without advancing a generation. DRAWN can be smaller than ACTIVE plus FADING because the installed renderer hides occupied cells enclosed on all six faces. That is a drawing decision; the state array still includes them. The six-face visibility test and the twenty-six-neighbour update answer different questions.</p>
+<p>RUN, the twenty-step budget and the height-colour view belong to the installed observation apparatus. Our reconstruction needs only a step and a replay. Keep them distinct from the rule you have just written.</p>
+<p>Carry onward a transition function that distinguishes presence from participation, and an update that gives every cell the same old world. In <strong>CA_GameOfLife</strong>, a retained generation will become a layer of a structure. Here we replace the array; there we will also keep a history we can approach.</p></main><footer>Native Godot captures. One hall; complete tutorial and separate reflection. No physical headset or independent learner test.</footer></body></html>

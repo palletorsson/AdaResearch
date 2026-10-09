@@ -1,0 +1,157 @@
+{
+  "camera": {
+    "fov": 55.0,
+    "position": "(-0.35, 1.7, 6.7)"
+  },
+  "checks": [
+    {
+      "message": "before-source snapshot compiles",
+      "ok": true
+    },
+    {
+      "message": "before: configured longhand prints zero total immediately",
+      "ok": true
+    },
+    {
+      "message": "capture before-longhand",
+      "ok": true
+    },
+    {
+      "message": "bare/default result placement has no new control or comparison",
+      "ok": true
+    },
+    {
+      "message": "legacy longhand stays visible without opt-in",
+      "ok": true
+    },
+    {
+      "message": "opt-in initial comparison is hidden",
+      "ok": true
+    },
+    {
+      "message": "initial visible labels contain no numeric total",
+      "ok": true
+    },
+    {
+      "message": "signed rate plot label and theorem title remain visible for observation",
+      "ok": true
+    },
+    {
+      "message": "arch retains its 24 deck segments",
+      "ok": true
+    },
+    {
+      "message": "all 40 signed strips remain visible before reveal",
+      "ok": true
+    },
+    {
+      "message": "capture after-predict",
+      "ok": true
+    },
+    {
+      "message": "canonical XR/desktop push-button interaction exists",
+      "ok": true
+    },
+    {
+      "message": "canonical button event reveals endpoint comparison",
+      "ok": true
+    },
+    {
+      "message": "revealed state explains the repeat action",
+      "ok": true
+    },
+    {
+      "message": "revealed zero sum is marked as an approximation",
+      "ok": true
+    },
+    {
+      "message": "capture after-compared",
+      "ok": true
+    },
+    {
+      "message": "reapplying identical config retains learner reveal state",
+      "ok": true
+    },
+    {
+      "message": "second button event hides comparison for another prediction",
+      "ok": true
+    },
+    {
+      "message": "wave: finite trapezoid estimate agrees at displayed precision",
+      "ok": true
+    },
+    {
+      "message": "wave: changed curve restores prediction stage",
+      "ok": true
+    },
+    {
+      "message": "hump: finite trapezoid estimate agrees at displayed precision",
+      "ok": true
+    },
+    {
+      "message": "hump: changed curve restores prediction stage",
+      "ok": true
+    },
+    {
+      "message": "ramp: finite trapezoid estimate agrees at displayed precision",
+      "ok": true
+    },
+    {
+      "message": "ramp: changed curve restores prediction stage",
+      "ok": true
+    },
+    {
+      "message": "spike: finite trapezoid estimate agrees at displayed precision",
+      "ok": true
+    },
+    {
+      "message": "spike: changed curve restores prediction stage",
+      "ok": true
+    },
+    {
+      "message": "step: finite trapezoid estimate agrees at displayed precision",
+      "ok": true
+    },
+    {
+      "message": "step: changed curve restores prediction stage",
+      "ok": true
+    },
+    {
+      "message": "disabling opt-in restores immediate legacy longhand",
+      "ok": true
+    }
+  ],
+  "samples": [
+    {
+      "curve": "wave",
+      "endpoint_difference": -0.000000000000000582912624419452,
+      "error": 0.00000000000000465604334601299,
+      "trapezoid_sum": 0.00000000000000407313072159354
+    },
+    {
+      "curve": "hump",
+      "endpoint_difference": 0.0,
+      "error": 0.000000000000000855218673656566,
+      "trapezoid_sum": 0.000000000000000855218673656566
+    },
+    {
+      "curve": "ramp",
+      "endpoint_difference": 1.4,
+      "error": 0.00000000000000466293670342566,
+      "trapezoid_sum": 1.4
+    },
+    {
+      "curve": "spike",
+      "endpoint_difference": 0.0,
+      "error": -0.00000000000000117311451464994,
+      "trapezoid_sum": -0.00000000000000117311451464994
+    },
+    {
+      "curve": "step",
+      "endpoint_difference": 1.34333666227615,
+      "error": -0.0000000519678329258255,
+      "trapezoid_sum": 1.34333661030832
+    }
+  ],
+  "scope": "Godot 4.6 artifact scene and canonical button event; not a headset, hand reach, or learner test"
+}

@@ -1,0 +1,18 @@
+{
+  "before": true,
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "animated nodes still move",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "moving_nodes": 18,
+  "passed": true,
+  "room": "Trans_Translation",
+  "scope": "Live museum render and native material/state assertions; desktop Compatibility renderer. No headset acceptance claim."
+}

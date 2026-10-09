@@ -1,0 +1,70 @@
+{
+  "shots": [],
+  "rays": [
+    {
+      "tag": "central approach",
+      "x": 9.5,
+      "z": 5.0,
+      "top": 0,
+      "tolerance": 0.2
+    }
+  ],
+  "walks": [
+    {
+      "tag": "between instruments toward shafts",
+      "from": [
+        9.5,
+        0.1,
+        3.1
+      ],
+      "to": [
+        9.5,
+        0.1,
+        6.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "front observation traverse",
+      "from": [
+        8.0,
+        0.1,
+        4.5
+      ],
+      "to": [
+        11.5,
+        0.1,
+        4.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "around east side of trio",
+      "from": [
+        11.0,
+        0.1,
+        4.5
+      ],
+      "to": [
+        11.0,
+        0.1,
+        9.8
+      ],
+      "seconds": 4
+    },
+    {
+      "tag": "behind the held forms",
+      "from": [
+        11.0,
+        0.1,
+        9.8
+      ],
+      "to": [
+        7.8,
+        0.1,
+        9.8
+      ],
+      "seconds": 3
+    }
+  ]
+}

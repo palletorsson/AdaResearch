@@ -1,0 +1,132 @@
+{
+  "checks": [
+    {
+      "name": "complete program makes six events, players, markers and labels",
+      "passed": true
+    },
+    {
+      "name": "three explicit prepared voices",
+      "passed": true
+    },
+    {
+      "name": "carried point retains pickup and frozen release",
+      "passed": true
+    },
+    {
+      "name": "familiar sphere retains radius",
+      "passed": true
+    },
+    {
+      "name": "construction chooses a score without playing",
+      "passed": true
+    },
+    {
+      "name": "clips retain the inherited 0.6-second mono format",
+      "passed": true
+    },
+    {
+      "name": "new helper generates byte-identical inherited sound",
+      "passed": true
+    },
+    {
+      "name": "depth choices actually produce different samples",
+      "passed": true
+    },
+    {
+      "name": "positive intervals accumulate into chronological times",
+      "passed": true
+    },
+    {
+      "name": "every voice address refers to a prepared clip",
+      "passed": true
+    },
+    {
+      "name": "display maps seconds and voice indices to positions",
+      "passed": true
+    },
+    {
+      "name": "left-point trigger starts replay in a rotated translated host",
+      "passed": true
+    },
+    {
+      "name": "replay retains the record",
+      "passed": true
+    },
+    {
+      "name": "replay makes no random requests",
+      "passed": true
+    },
+    {
+      "name": "no event dispatched before its time",
+      "passed": true
+    },
+    {
+      "name": "first event dispatched once at boundary",
+      "passed": true
+    },
+    {
+      "name": "chosen stream reaches its actual audio player",
+      "passed": true
+    },
+    {
+      "name": "played marker changes colour",
+      "passed": true
+    },
+    {
+      "name": "one late frame dispatches every overdue event",
+      "passed": false
+    },
+    {
+      "name": "score ends without dropping overdue voices",
+      "passed": false
+    },
+    {
+      "name": "finished score does not repeat events",
+      "passed": false
+    },
+    {
+      "name": "replay resets only performance state",
+      "passed": true
+    },
+    {
+      "name": "restart stops already sounding players",
+      "passed": true
+    },
+    {
+      "name": "restart clears marker highlight",
+      "passed": true
+    },
+    {
+      "name": "repeated performance keeps event order",
+      "passed": false
+    },
+    {
+      "name": "right-point trigger draws from generator and restarts",
+      "passed": true
+    },
+    {
+      "name": "known test seed yields a changed score on NEW",
+      "passed": true
+    },
+    {
+      "name": "independent equal-wait variation has timestamps 1 through 6",
+      "passed": true
+    },
+    {
+      "name": "regular-pulse variation dispatches exactly two events by 2.01s",
+      "passed": true
+    },
+    {
+      "name": "regular-pulse variation completes",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "one late frame dispatches every overdue event",
+    "score ends without dropping overdue voices",
+    "finished score does not repeat events",
+    "repeated performance keeps event order"
+  ],
+  "passed": false,
+  "scope": "Exact printed files; teacher-authored native assertions. Not a headset, independent reconstruction or comprehension test."
+}

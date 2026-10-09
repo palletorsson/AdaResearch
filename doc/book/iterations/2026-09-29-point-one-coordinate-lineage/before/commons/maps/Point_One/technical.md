@@ -1,0 +1,75 @@
+# A body for a position — implementation
+
+The opening comparison is point_condition.gd: absent, visible, solid and held share the Point one label; visible, solid and held have radius 0.14 m. Only solid has a fixed SphereShape3D. Held reuses interactive_point_origin.tscn, with a matching sphere collider, black material and coordinate_id point_one_main. Existing WORLD/LOCAL readouts and CoordinateSystem3M adopt that exact ID. The force variant remains a secondary comparison with a different ID. The closing pedestal variant has radius 0.65 m, centre height 1.40 m and pedestal top 0.75 m: the surfaces meet. Native desktop checks do not establish headset comfort or user understanding.
+
+## Encounter text and making passage
+
+final.md retains only the single position line. It explains visible shape, collision, pickup, rounded reports, references and acceptance through their consequences. The longer source reductions live in tutorial.md, read separately after the encounter.
+
+The cumulative construction still reduces point_condition.gd: CENTRE becomes point_position = Vector3(0.0, 1.12, 0.0); RADIUS becomes radius = 0.14; the visible node is renamed visible_point. It retains the mesh instance and attachment, fixed body and separate collision shape. The absent production branch returns after the label and creates no hidden sphere.
+
+doc/book/studies/point-one supplies complete position.gd, visible.gd and solid.gd files and a fixed-camera scene. The three teaching scripts are unchanged from the preceding tested study. study.tscn now inherits the shared Day Zero base.tscn for camera, floor and lighting, with its greeting hidden; this scene integration is checked again. Labels, finish, resolution, artifact identity and condition branches stay outside the reduced scripts. The study supplies no portable walking or XR pickup.
+
+The tutorial's further-reading section preserves the WORLD/LOCAL, formatting and tolerance snippets removed from final.md. These remain explanatory museum reductions, with their inputs and limits stated; they are not additions to the standalone study. No production behavior or placements change in this reading experiment.
+
+## Carry one body between two addresses
+
+Pick up `point_held`, which contains the production `interactive_point_origin` pickable. The inherited pickup code cycles its coordinate-label format, including a hidden-label state. The black surface stays black while its pickup responses belong to the artifact built around a position. Their complete implementation need not be learned before carrying it.
+
+The same point feeds both wall cards and the coloured frame. The current configuration links:
+
+- The held point: `coordinate_id:point_one_main`.
+- The frame: `adopt_external_point:1`, `external_point_id:point_one_main`, `floating_point:0`.
+- Frame and cards: `readout_channel:point_one_main`.
+- One card: `space:world`; the other: `space:local`.
+
+The frame creates no second floating point. Its identity filter prevents Fontana's embedded point from taking over this comparison.
+
+The following is a reduced example of the two readings, rather than a copy of the complete update function:
+
+```gdscript
+var world_p := point.global_position
+var local_p := frame.to_local(world_p)
+```
+
+`world_p` uses the scene's world reference. `local_p` expresses that same position relative to the frame, including its position, orientation and scale. Moving the point changes both reports. The frame is fixed in this encounter; a visitor control for moving the frame is not currently part of the room.
+
+The card formats each component with `%.2f`. It rounds the displayed text without rounding the body's stored position. Small movements may therefore share a printed address. The coloured guides still follow the point beyond the ends of the drawn axes; those finite lines are not movement limits.
+
+The two cards are at source cells `(2,17)` and `(2,19)`, facing +X at 1.4 m. Both use token scale 1 and display scale 2.4. Each is 1.728 × 1.44 m. Their two-metre separation leaves 0.272 m between their edges. These are authored dimensions, not a claim about comfortable headset reading distance.
+
+Sources: [pickup base](../../primitives/point/interactive_point_origin.gd), [changing point](../../primitives/point/interactive_point_origin_force.gd), [reference frame](../../../algorithms/vectors/00_coordinates/CoordinateSystem3M.gd), [cards](../../primitives/point/coordinate_readout.gd).
+
+## Arrive, leave, return
+
+Carry the point towards `drag_point_target`. The target checks members of `ada_coordinate_point`; unlike the cards, it does not filter to the named main point. A second eligible point could also trigger it. The book's single-position example isolates the distance comparison:
+
+```gdscript
+var centre := global_position + Vector3(0.0, catch_height, 0.0)
+var accepted := point.global_position.distance_to(centre) <= catch_radius
+```
+
+Here `catch_height` is 1.20 m and `catch_radius` is 0.45 m. Entering the region drops seven white balls. Staying inside does not fire on every frame; departure and re-entry can fire again because `rearm` is true. Releasing the held point is not required. Its intention and the route used to arrive are not inputs to this test.
+
+This makes a repeatable experiment already available in the hall: arrive carefully, then pass through, then leave and return. The rule can treat different gestures as the same event. Their difference can still matter to the person making them.
+
+Source: [arrival target](../../artifacts/drag_point_target/drag_point_target.gd).
+
+## What continues
+
+Point One has introduced a position, a representation, a reference and a test for proximity. Point Lines adds a second position. Subtracting one position from another will give a displacement; drawing between them will give a segment. Remember the changing point: its coordinates alone have not kept the path your hand took. That question will return in Trace.
+
+[Encounter reference](encounter-reference.md) records the first-walk order and additional implementation distinctions. [Current inventory](artifacts.md) distinguishes primary encounters from retained secondary works. Desktop/source evidence exists for the paired cards; physical reach, headset legibility and an unassisted beginner's walk remain observations to make.
+
+
+## Retained alternatives
+
+The invisible-point case and the non-executing code screen remain at (13,13) and (15,15). Their source example `FOCUS = Vector3(0, 1.25, 0)` remains local to the case. The force point is a secondary comparison at (13,14), identified as `point_one_force_return`, so it cannot take over the named coordinate feed. Fontana remains at (12,19), with its own embedded point. The target can accept any eligible point; the cards select only the corridor point.
+
+The pickup label cycles plain coordinates, named X/Y/Z components, a `Vector3(...)` spelling, and no label. The executable match in `interactive_point_origin.gd` is the evidence; its older source-header format descriptions are inaccurate.
+
+The coordinate frame’s optional origin sign is blank in this placement (`origin_sign_text`), so “Point zero” belongs to the origin in the previous chapter. The wider room has a continuous floor and a clear approach to the closing sculpture.
+
+## Coordinate basin — revised 26 September 2026
+
+An L-shaped glass-covered basin follows the horizontal axes: map cells x=4, z=15..20 and z=20, x=4..9. The 11 pool cells are one metre deep. The coordinate origin is at floor level, with a +1.0 m placement offset above the museum’s automatic basin seat. The glass supports a level crossing. WORLD and LOCAL still follow the same carried point. The uncut quadrant stays ordinary floor; no damage volume is enabled.

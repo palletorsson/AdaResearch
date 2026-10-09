@@ -1,0 +1,54 @@
+{
+  "edits": [
+    {
+      "title": "Let the two-point line become a recorder",
+      "old": "Each accepted position occupies a place in that ordered list. The recorder joins neighbouring positions with straight segments. Enough small segments can let us see a curve. Go closer to a turn: the smooth-looking gesture has acquired joints. The connection between two samples has been drawn; it is not a measurement of everything your hand did between them.[^point-trace-sampling]",
+      "new": "`_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^point-trace-sampling]",
+      "incitement": "Give the existing code a plain reading and carry the previous hall's segment into this new capability. Keep the difference between a sampled bend and its constructed joins visible.",
+      "purpose": "Explain the list count and how repeated straight connections form a visible curve without recording every intervening movement.",
+      "reader_move": "Read the count operation and consider what was drawn between two retained positions.",
+      "why_here": "The reader has made a loop and seen the count; a familiar construction can now explain how the record becomes a line.",
+      "without": "The list operation remains partly implicit and the new capability can seem disconnected from the two-point segment.",
+      "evidence": [
+        "count",
+        "duplicate",
+        "segments"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Keep the time of waiting distinct from the count",
+      "old": "The dot waits for at least five millimetres of movement before considering another sample. Below that movement threshold, the update can return without adding a position. A stationary pause can leave the list unchanged while Point One's counter has plenty more calls to count.",
+      "new": "The dot compares its present position with the one where it last passed the movement test. Less than five millimetres apart, and no new position is added. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.",
+      "incitement": "Explain what the five millimetres are measured from, then let the pause acquire its own consequence: elapsed waiting is absent from this position-only list.",
+      "purpose": "Make the movement comparison understandable and distinguish the continuing time of a held pause from the retained position count.",
+      "reader_move": "Watch a still pause and ask what in the record could report its duration.",
+      "why_here": "Answers the opening pause experiment and returns to the counter without treating all running loops as identical records.",
+      "without": "Movement threshold remains programming vocabulary and the pause's unrecorded duration stays implicit.",
+      "evidence": [
+        "dot-scene",
+        "gate",
+        "fading",
+        "optional-times"
+      ],
+      "assessment": "grounded"
+    },
+    {
+      "title": "Watch a row leave the window",
+      "old": "Read two neighbouring rows. The coordinates give places in world metres. If your loop has more than ten points, its first row may have left the table: the instrument shows the last ten, while the larger count names the whole retained list. The line can hold something its small window is no longer showing.",
+      "new": "Read two neighbouring rows. Each gives three coordinates, in world metres, for a retained position. When the count reaches eleven, the table starts at row 2: it has room to show only the last ten. The drawing still has its beginning. What has left the screen has not yet left the line.",
+      "incitement": "Use one exact count to distinguish the visible table from the stored drawing. Leaving the display is not yet deletion from the list.",
+      "purpose": "Explain the last-ten window through the eleven-point case while retaining the difference between display and storage.",
+      "reader_move": "Compare a retained count with the numbered rows currently visible.",
+      "why_here": "After learning what enters the list, inspect the narrower account supplied by its screen.",
+      "without": "The windowing behavior stays conditional and less easy to picture or verify.",
+      "evidence": [
+        "table",
+        "count",
+        "capacity",
+        "segments"
+      ],
+      "assessment": "grounded"
+    }
+  ]
+}

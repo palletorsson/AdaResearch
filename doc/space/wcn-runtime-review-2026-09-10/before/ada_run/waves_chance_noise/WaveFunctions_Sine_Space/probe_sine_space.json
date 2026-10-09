@@ -1,0 +1,305 @@
+{
+  "checks": 57,
+  "control_path": "slider_moved and button_pressed emitted programmatically on the panel's own controls; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "WaveFunctions_Sine_Space",
+  "measurements": {
+    "axis_world": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "built_bodies": [
+      [
+        "lobby:window",
+        [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        []
+      ],
+      [
+        "lobby:view",
+        [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        []
+      ],
+      [
+        "lobby:counter",
+        [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        []
+      ],
+      [
+        "lobby:extinguisher",
+        [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        []
+      ],
+      [
+        "lobby:elevator",
+        [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:pallet",
+        [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:point_zero",
+        [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        []
+      ],
+      [
+        "sine_wall_explanation",
+        [
+          1.5,
+          0.0,
+          1.5
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        "sine_wall_corridor",
+        [
+          6.5,
+          0.0,
+          4.5
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      [
+        "dark_sphere",
+        [
+          9.5,
+          0.0,
+          14.5
+        ],
+        [
+          9,
+          14
+        ]
+      ],
+      [
+        "sine_space",
+        [
+          9.5,
+          0.0,
+          16.5
+        ],
+        [
+          9,
+          16
+        ]
+      ],
+      [
+        "gate:wavefunctions sine space",
+        [
+          6.5,
+          0.0,
+          0.5
+        ],
+        []
+      ]
+    ],
+    "built_cells": [
+      "pp.########################",
+      "................p##########",
+      "##..............p##########",
+      "##............#############",
+      "######...##################",
+      "##ss###..##################",
+      "##...........##############",
+      "##.ssssssss.###############",
+      "##.ssssssss..##############",
+      "##.ssssssss..##############",
+      "##########...##############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########..##############",
+      "##########....#############",
+      "########....#.#############",
+      "########.##...#############",
+      "######...##################",
+      "######...##################",
+      "#######..##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######..###################",
+      "######...##################"
+    ],
+    "built_refused": [],
+    "built_seals": {
+      "1,1": "sine_wall_explanation",
+      "2,1": "sine_wall_explanation",
+      "2,3": "sine_wall_corridor",
+      "2,4": "sine_wall_corridor",
+      "2,5": "sine_wall_corridor",
+      "3,3": "sine_wall_corridor",
+      "3,4": "sine_wall_corridor",
+      "3,5": "sine_wall_corridor",
+      "4,3": "sine_wall_corridor",
+      "4,4": "sine_wall_corridor",
+      "4,5": "sine_wall_corridor",
+      "5,3": "sine_wall_corridor",
+      "5,4": "sine_wall_corridor",
+      "5,5": "sine_wall_corridor",
+      "6,3": "sine_wall_corridor",
+      "6,4": "sine_wall_corridor",
+      "6,5": "sine_wall_corridor",
+      "7,3": "sine_wall_corridor",
+      "7,4": "sine_wall_corridor",
+      "7,5": "sine_wall_corridor",
+      "8,3": "sine_wall_corridor",
+      "8,4": "sine_wall_corridor",
+      "8,5": "sine_wall_corridor",
+      "9,3": "sine_wall_corridor",
+      "9,4": "sine_wall_corridor",
+      "9,5": "sine_wall_corridor"
+    },
+    "built_severed": [],
+    "cells": {
+      "corridor": [
+        6,
+        4
+      ],
+      "sine_space": [
+        9,
+        16
+      ],
+      "sine_wall_explanation": [
+        1,
+        1
+      ]
+    },
+    "contract": {
+      "amplitude": 0.2,
+      "animate": true,
+      "collision": false,
+      "cut": "skin",
+      "frequency": 4.5,
+      "height": 4.0,
+      "layers": 3,
+      "length": 7.0,
+      "phase": 0.535551722222222,
+      "phase_offset": 0.6,
+      "width": 2.0
+    },
+    "drift": {
+      "at_z": 0.0418780413548083,
+      "at_z_after": 0.0903798785945241,
+      "just_west_before": -0.152408729126142
+    },
+    "extent_local": [
+      [
+        3.0,
+        0.0,
+        3.23958206176758
+      ],
+      [
+        10.0,
+        4.0,
+        5.77795505523682
+      ]
+    ],
+    "gap_amp_max_in_step": [
+      0.75487342476226,
+      3.24856459417292
+    ],
+    "gap_declared": [
+      1.47975948857226,
+      2.51482737563522
+    ],
+    "gap_half_turn": [
+      2.0,
+      2.0
+    ],
+    "gap_in_step": [
+      1.44662994455092,
+      2.55537373964737
+    ],
+    "museum_severed": [],
+    "museum_severed_tokens": [],
+    "museum_walk_inside": [
+      "sine_space"
+    ],
+    "panel_local": [
+      2.65691447257996,
+      1.07216954231262,
+      5.55000019073486
+    ],
+    "sine_space_y": 0.0,
+    "sine_wall_explanation_extent_local": [
+      [
+        1.0,
+        -0.199999988079071,
+        1.04220056533813
+      ],
+      [
+        2.12494134902954,
+        0.699999988079071,
+        1.80000019073486
+      ]
+    ],
+    "sine_wall_explanation_origin_y": 0.0,
+    "walk_antechamber_east_to_the_bridge_head": 1.0,
+    "walk_bridge_head_south_onto_the_bridge": 1.0,
+    "walk_door_row_into_the_antechamber": 1.0,
+    "walk_from_the_east_mouth_to_the_bridge_head": 1.0,
+    "walk_passage_west_mouth_to_east_mouth": 1.0,
+    "walk_through_both_walls": 1.0,
+    "walk_west_approach_door_row_down_to_the_mouth": 1.0
+  },
+  "physics_fps": 60
+}

@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>part_library.gd</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f1eee7;color:#302a31;font:17px/1.65 system-ui}header,main,footer{max-width:1160px;margin:auto;padding:42px 28px}h1{font:clamp(50px,8vw,94px)/1.02 Georgia;margin:24px 0}h2{font:36px/1.2 Georgia}a{color:#8a3f5d;text-underline-offset:4px}nav{display:flex;gap:24px;flex-wrap:wrap}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase}.lead{font:26px/1.45 Georgia;max-width:750px}.reading{font:23px/1.65 Georgia;max-width:760px;margin:55px auto}.reading p{margin:0 0 27px}section{padding:32px 0;scroll-margin-top:20px}figure{margin:25px 0}img{width:100%;display:block}figcaption,.small,.footnote{font:13px/1.6 system-ui;color:#6a5e67}details{background:#e7e0d8;padding:22px;margin:26px 0}summary{cursor:pointer;font-weight:600}pre{background:#2a252c;color:#ffe2ed;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}.states input{position:absolute;opacity:0}.states label{display:inline-block;cursor:pointer;padding:10px 17px;border:1px solid #9a8190;margin:0 7px 10px 0}.states input:focus-visible+label{outline:3px solid #ac4d75}.states figure{display:none}.states #together:checked~.together,.states #drift:checked~.drift,.states #same-rate:checked~.same-rate{display:block}.states input:checked+label{background:#873c59;color:white}.note{border-left:3px solid #b66888;padding:5px 23px}code{font-size:.9em}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #c9bec4;padding:12px;text-align:left} @media(max-width:650px){header,main,footer{padding:25px 17px}.reading{font-size:21px}.states label{font-size:14px}}.states #skin:checked~.skin{display:block}.states #path:checked~.path{display:block}.states #rings:checked~.rings{display:block}.states #continued:checked~.continued{display:block}.states #network:checked~.network{display:block}.states #network-joined:checked~.network-joined{display:block}.states #parts-0:checked~.parts-0{display:block}.states #parts-1:checked~.parts-1{display:block}.states #parts-2:checked~.parts-2{display:block}.states #parts-3:checked~.parts-3{display:block}.states #parts-4:checked~.parts-4{display:block}.states #parts-extended:checked~.parts-extended{display:block}.states #parts-connected:checked~.parts-connected{display:block}</style></head><body><main><a href="index.html#making">Back to the work</a><h2>part_library.gd</h2><pre>extends RefCounted
+## Museum adapter for the existing glass-segment and cable-form libraries.
+## Mesh resources are retained in undo records; node instances are disposable.
+const Glass = preload(&quot;res://commons/glass_rack/GlassRackController.gd&quot;)
+const Cable = preload(&quot;res://algorithms/wavefunctions/line_builder_3d/cable_builder.gd&quot;)
+const Ports = preload(&quot;res://commons/glass_rack/GlassSegmentPorts.gd&quot;)
+const GROUPS := [
+	[&quot;straight&quot;,&quot;corner45&quot;,&quot;corner&quot;,&quot;ubend&quot;,&quot;sbend&quot;],
+	[&quot;junction&quot;,&quot;ypipe&quot;,&quot;cross&quot;,&quot;reducer&quot;],
+	[&quot;spiral&quot;,&quot;wobbly&quot;,&quot;flask&quot;,&quot;beaker&quot;],
+	[&quot;cap&quot;,&quot;drip&quot;,&quot;condenser&quot;],
+	[&quot;chord&quot;,&quot;spline&quot;,&quot;catenary&quot;,&quot;festoon&quot;,&quot;truss&quot;]]
+const GROUP_NAMES := [&quot;BENDS&quot;,&quot;BRANCHES&quot;,&quot;COILS AND VESSELS&quot;,&quot;END PIECES&quot;,&quot;CABLE FORMS&quot;]
+const LABELS := {&quot;corner45&quot;:&quot;45° BEND&quot;,&quot;corner&quot;:&quot;90° BEND&quot;,&quot;ubend&quot;:&quot;U-BEND&quot;,&quot;sbend&quot;:&quot;S-BEND&quot;,&quot;junction&quot;:&quot;TEE&quot;,&quot;ypipe&quot;:&quot;Y-JUNCTION&quot;,&quot;wobbly&quot;:&quot;WAVE&quot;,&quot;catenary&quot;:&quot;AUTHORED SAG&quot;}
+
+static func label(part: String) -&gt; String:
+	return LABELS.get(part,part.to_upper())
+
+static func make_record(part: String, at: Vector3, colour: Color) -&gt; Dictionary:
+	var node: Node3D
+	if GROUPS[4].has(part): node = _cable(part)
+	else:
+		var factory = Glass.new(); factory.auto_build=false; factory.show_liquid=false
+		factory.pipe_radius=0.05; factory.segment_length=0.65
+		var params := {&quot;length&quot;:0.7,&quot;height&quot;:0.7,&quot;tube_radius&quot;:0.05,&quot;corner_radius&quot;:0.5,&quot;bend_radius&quot;:0.3,&quot;branch_length&quot;:0.4,&quot;arm_length&quot;:0.35,&quot;radius_in&quot;:0.09,&quot;radius_out&quot;:0.04,&quot;spiral_radius&quot;:0.18,&quot;turns&quot;:3,&quot;resolution&quot;:24,&quot;amplitude&quot;:0.13,&quot;frequency&quot;:2.0,&quot;offset&quot;:0.45,&quot;tip_length&quot;:0.22,&quot;inner_radius&quot;:0.04,&quot;jacket_radius&quot;:0.12,&quot;outer_radius&quot;:0.08,&quot;neck_radius&quot;:0.05,&quot;neck_length&quot;:0.25}
+		params.radius = 0.23 if part in [&quot;flask&quot;,&quot;beaker&quot;] else 0.05
+		node = factory._create_segment(part,params)
+		factory.free()
+	if node == null: return {}
+	var meshes: Array = []
+	var turn := Basis.IDENTITY if part in [&quot;spiral&quot;,&quot;beaker&quot;] or GROUPS[4].has(part) else Basis(Vector3.RIGHT,-PI/2)
+	_collect(node,Transform3D(turn,Vector3.ZERO),meshes)
+	if meshes.is_empty(): node.free(); return {}
+	var bounds: AABB = meshes[0].pose * meshes[0].mesh.get_aabb()
+	for item in meshes: bounds = bounds.merge(item.pose * item.mesh.get_aabb())
+	var scale := 1.05/maxf(0.01,maxf(bounds.size.x,maxf(bounds.size.y,bounds.size.z)))
+	var fit := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE*scale),at-bounds.get_center()*scale)
+	for item in meshes: item.pose = fit*item.pose
+	var sockets: Array = []
+	var raw: Dictionary = node.get_meta(&quot;ports&quot;,{})
+	for name in raw:
+		var port: Dictionary = raw[name]
+		sockets.append({&quot;name&quot;:name,&quot;point&quot;:fit*(turn*port.position),&quot;direction&quot;:turn*port.direction,&quot;radius&quot;:port.radius*scale})
+	var max_radius := 0.0
+	for port in sockets: max_radius=maxf(max_radius,port.radius)
+	var title_at := at+Vector3(0,-0.72,0.35)
+	node.free()
+	return {&quot;part&quot;:part,&quot;part_meshes&quot;:meshes,&quot;sockets&quot;:sockets,&quot;points&quot;:PackedVector3Array([sockets[0].point,sockets[-1].point]),&quot;radius&quot;:max_radius,&quot;sides&quot;:12,&quot;colour&quot;:colour,&quot;kind&quot;:&quot;prefab&quot;,&quot;label_at&quot;:title_at}
+
+static func _collect(node: Node3D, parent: Transform3D, result: Array) -&gt; void:
+	var pose := parent*node.transform
+	if node is MeshInstance3D and node.mesh:
+		result.append({&quot;mesh&quot;:node.mesh,&quot;pose&quot;:pose})
+	for child in node.get_children():
+		if child is Node3D: _collect(child,pose,result)
+
+static func _cable(kind: String) -&gt; Node3D:
+	var factory = Cable.new(); factory.cable_thickness=0.035; factory.tube_sides=12
+	var anchors := PackedVector3Array([Vector3(-0.8,0,0),Vector3(0,0.1,0),Vector3(0.8,0,0)])
+	var node := Node3D.new(); var mesh := MeshInstance3D.new()
+	if kind == &quot;catenary&quot;:
+		factory.curve=Curve3D.new(); factory.curve.up_vector_enabled=false
+		for p in anchors: factory.curve.add_point(p)
+		for i in 2:
+			var delta := anchors[i+1]-anchors[i]
+			factory.curve.set_point_out(i,delta*0.3+Vector3.DOWN*delta.length()*0.25)
+			factory.curve.set_point_in(i+1,-delta*0.3+Vector3.DOWN*delta.length()*0.25)
+		factory.mesh_instance=mesh; factory._generate_tube_from_curve()
+	else:
+		var surface := SurfaceTool.new(); surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var path := anchors
+		if kind == &quot;spline&quot;: path=factory._drafted_arc(anchors)
+		if kind == &quot;festoon&quot;: path=factory._swag(anchors,0.7)
+		factory._emit_run(surface,path,0.035)
+		if kind == &quot;truss&quot;: factory._emit_truss(surface,anchors)
+		surface.generate_normals(); mesh.mesh=surface.commit()
+	node.add_child(mesh)
+	var ports := {&quot;in&quot;:Ports.create_port(anchors[0],Vector3.LEFT,0.035),&quot;out&quot;:Ports.create_port(anchors[-1],Vector3.RIGHT,0.035)}
+	if kind in [&quot;catenary&quot;,&quot;festoon&quot;]: ports[&quot;support&quot;]=Ports.create_port(anchors[1],Vector3.UP,0.035)
+	Ports.apply_ports(node,ports)
+	factory.free()
+	return node
+</pre></main></body></html>

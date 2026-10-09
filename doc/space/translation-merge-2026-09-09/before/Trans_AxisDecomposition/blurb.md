@@ -1,0 +1,1 @@
+Translation produces space as navigable extent. Before movement, space is theoretical - coordinates without consequence. Translation tests the theory: can you get from here to there? The transport cube rises, falls, shuttles. Cube scaffolds mark waypoints in a vertical maze. Space becomes real only when the body passes through it.

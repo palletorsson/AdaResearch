@@ -1,0 +1,36 @@
+{
+  "id": "Color_Pillar",
+  "title": "Ask a field for a colour",
+  "storyboard": "A moving card samples the field between the pillars; leaving it in place keeps its latest sample. Bring Nails’ position-to-colour function and change the rule explicitly: X now chooses hue, Z saturation and represented Y value, converted with Color.from_hsv. The supplied height adapter maps the card’s local 0.65–1.85 metre range into the field’s 0.46–4.60 metre height; it is not the same position passed unchanged. Predict a sample between columns, then vary height while keeping the other coordinates. At value zero, different addresses yield the same black. Carry the field function and one recorded result toward Grid. The matching ceiling and named swatches remain encounters with appearance, classification and the gaps between visible samples.",
+  "storyboard_short": "Use moving sampler and constant swatch. Reuse Nails function pattern, change convention: field X→H, Z→S, Y→V; convert HSV→Color. Supply explicit hand-height adapter (.65–1.85 → .46–4.60 m), card/readouts. Predict between columns; vary V alone. Movement resamples; stationary card keeps latest. Carry function + recorded result. Black has many source addresses; HSV is not perceptually uniform. No automatic Grid handoff.",
+  "mode": "make",
+  "brings": [
+    "position-to-colour function",
+    "declared reference frame and bounded ranges"
+  ],
+  "learns": [
+    "HSV mapping and conversion",
+    "input adaptation versus field evaluation",
+    "rule versus displayed samples"
+  ],
+  "carries": "A stated colour-field function and one recorded sample for an addressed write.",
+  "supplied": [
+    "sampler, readouts and material receiver",
+    "explicit hand-to-field height conversion"
+  ],
+  "artifact_refs": [
+    "pillarcolorcollection",
+    "color_sets_overview"
+  ],
+  "review_note": "The sampler checks position each frame, not whether it is held. A released stationary card keeps the last sample because its position stops changing. Use actual ranges from hsv_at; value is not perceived lightness. A recorded result or copied function can connect Grid, but the installed exhibits have no such transfer.",
+  "prior_maps": [
+    "Color_Nails",
+    "Color_Rainbow"
+  ],
+  "independent_check": "Predict a sample between columns; raise represented height alone, then explain why black cannot reveal its unique source address.",
+  "source_refs": [
+    "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+    "algorithms/color/pillarcolorcollection/field_sampler.gd"
+  ],
+  "change_reason": "Make the change of representation teachable without claiming one formula serves both rooms unchanged."
+}

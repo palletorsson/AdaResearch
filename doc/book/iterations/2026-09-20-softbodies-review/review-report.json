@@ -1,0 +1,2847 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "34"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				14.8000001907349,
+				0.0,
+				1.25249993801117
+			],
+			"bounds_size": [
+				1.40000057220459,
+				1.43678069114685,
+				0.787621378898621
+			],
+			"cell": [
+				15,
+				3
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "PushButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.9499998092651,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "PushButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.9499998092651,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1964/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.6499996185303,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1964/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.6499996185303,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1966/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.3499994277954,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1966/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.3499994277954,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1968/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.0500001907349,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1968/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.0500001907349,
+						1.07260000705719,
+						1.62000000476837
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1970/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.9499998092651,
+						1.07260000705719,
+						1.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1970/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.9499998092651,
+						1.07260000705719,
+						1.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1972/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.6499996185303,
+						1.07260000705719,
+						1.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1972/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.6499996185303,
+						1.07260000705719,
+						1.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1974/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						15.3499994277954,
+						1.07260000705719,
+						1.39000010490417
+					]
+				},
+				{
+					"disabled": false,
+					"path": "@Node3D@1974/HandPoseArea/CollisionShape3D",
+					"position": [
+						15.3499994277954,
+						1.07260000705719,
+						1.39000010490417
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.9499998092651,
+						1.05499994754791,
+						1.52999997138977
+					],
+					"text": "MEASURE"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.6499996185303,
+						1.05499994754791,
+						1.52999997138977
+					],
+					"text": "FEEDBACK"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.3499994277954,
+						1.05499994754791,
+						1.52999997138977
+					],
+					"text": "SQUEEZE"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.0500001907349,
+						1.05499994754791,
+						1.52999997138977
+					],
+					"text": "STIFFNESS"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.9499998092651,
+						1.05499994754791,
+						1.30000019073486
+					],
+					"text": "DURATION"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.6499996185303,
+						1.05499994754791,
+						1.30000019073486
+					],
+					"text": "GRAVITY"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.3499994277954,
+						1.05499994754791,
+						1.30000019073486
+					],
+					"text": "RULE"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.5,
+						0.899999976158142,
+						1.24799990653992
+					],
+					"text": "WHEN DOES A BODY BECOME A FORM?"
+				},
+				{
+					"parent": "TextPanel",
+					"position": [
+						15.5,
+						1.27516222000122,
+						1.91262757778168
+					],
+					"text": "Read: strain | feedback OFF\nSqueeze 2.00 | vessel 200 steps | gravity x 0.0\nFeedback acts on pressure; MEASURE changes the view"
+				},
+				{
+					"parent": "SoftWorkshop",
+					"position": [
+						15.5,
+						2.15000009536743,
+						3.0
+					],
+					"text": "MEASURE changes the reading; FEEDBACK adjusts pressure.\nThe volume proxy is a box aligned with the world axes.\nFeedback off restores selected pressure, not a previous shape.\nDURATION keeps a different moment as a collidable closed skin."
+				}
+			],
+			"position": [
+				15.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "soft_workshop_console"
+		},
+		{
+			"bounds_position": [
+				7.5,
+				-0.25,
+				9.5
+			],
+			"bounds_size": [
+				2.0,
+				1.21499991416931,
+				2.0
+			],
+			"cell": [
+				8,
+				10
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "RoundedSoftBody/RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						8.84799957275391,
+						0.922227501869202,
+						9.81459140777588
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RoundedSoftBody/RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						8.84799957275391,
+						0.922227501869202,
+						9.81459140777588
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RoundedSoftBody/RackPanel/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						8.7903995513916,
+						0.922227501869202,
+						9.81459140777588
+					]
+				},
+				{
+					"disabled": false,
+					"path": "RoundedSoftBody/RackPanel/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						8.7903995513916,
+						0.922227501869202,
+						9.81459140777588
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RackPanel",
+					"position": [
+						8.81919956207275,
+						0.924465715885162,
+						9.91574001312256
+					],
+					"text": ""
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.94079971313477,
+						0.929451048374176,
+						9.89057159423828
+					],
+					"text": "0.5"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.94079971313477,
+						0.924005448818207,
+						9.85968780517578
+					],
+					"text": "STIFFNESS"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.81919956207275,
+						0.929451048374176,
+						9.89057159423828
+					],
+					"text": "0.43"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.81919956207275,
+						0.924005448818207,
+						9.85968780517578
+					],
+					"text": "PRESSURE"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.69759941101074,
+						0.929451048374176,
+						9.89057159423828
+					],
+					"text": "0.4"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						8.69759941101074,
+						0.924005448818207,
+						9.85968780517578
+					],
+					"text": "SQUEEZE"
+				},
+				{
+					"parent": "CubeBaseStaticBody3D",
+					"position": [
+						8.5,
+						0.300000011920929,
+						10.5
+					],
+					"text": "1:1"
+				}
+			],
+			"position": [
+				8.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "rounded_softbody_test"
+		},
+		{
+			"bounds_position": [
+				20.1175975799561,
+				0.0,
+				13.1218852996826
+			],
+			"bounds_size": [
+				0.757732391357422,
+				1.81552696228027,
+				0.759476661682129
+			],
+			"cell": [
+				20,
+				13
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "FrozenGlassVessel",
+					"position": [
+						20.5,
+						1.99552690982819,
+						13.5
+					],
+					"text": "Frozen Glass Vessel\ngravity × initial inflation × 200 steps\nclosed skin / held after simulation"
+				}
+			],
+			"position": [
+				20.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "frozen_glass_vessel"
+		},
+		{
+			"bounds_position": [
+				7.00639867782593,
+				-1.5,
+				22.0063991546631
+			],
+			"bounds_size": [
+				2.98720216751099,
+				3.0,
+				2.98720169067383
+			],
+			"cell": [
+				8,
+				23
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "branching_growth_algorithm"
+		},
+		{
+			"bounds_position": [
+				20.25,
+				0.5,
+				22.25
+			],
+			"bounds_size": [
+				2.5,
+				2.5,
+				2.5
+			],
+			"cell": [
+				21,
+				23
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				21.5,
+				3.0,
+				23.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "entropy_morphogenesis"
+		},
+		{
+			"bounds_position": [
+				4.10045289993286,
+				-0.400000005960464,
+				26.1004524230957
+			],
+			"bounds_size": [
+				0.799094200134277,
+				0.800000011920929,
+				0.799095153808594
+			],
+			"cell": [
+				4,
+				26
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "GridAgent",
+					"position": [
+						4.5,
+						1.20000004768372,
+						26.5
+					],
+					"text": "Searching..."
+				}
+			],
+			"position": [
+				4.5,
+				0.0,
+				26.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gridagent"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				31.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				41.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				43.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				47.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				18.0,
+				1.58000004291534,
+				50.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.0,
+				1.58000004291534,
+				50.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.9910001754761,
+				1.58000004291534,
+				32.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.0089998245239,
+				1.58000004291534,
+				50.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.0090007781982,
+				1.58000004291534,
+				31.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.9909992218018,
+				1.58000004291534,
+				49.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.99100005626678,
+				1.58000004291534,
+				31.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				19.9909992218018,
+				1.58000004291534,
+				51.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				28.9909992218018,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0090000629425,
+				1.58000004291534,
+				32.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				31.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				41.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				43.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				47.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.9910001754761,
+				1.58000004291534,
+				34.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.0090007781982,
+				1.58000004291534,
+				33.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.99100005626678,
+				1.58000004291534,
+				33.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				28.9909992218018,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0090000629425,
+				1.58000004291534,
+				34.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				31.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				41.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				43.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				47.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.9910001754761,
+				1.58000004291534,
+				36.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				16.0090007781982,
+				1.58000004291534,
+				35.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.99100005626678,
+				1.58000004291534,
+				35.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				28.9909992218018,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0090000629425,
+				1.58000004291534,
+				36.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.58000004291534,
+				31.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.58000004291534,
+				41.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.58000004291534,
+				43.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				47.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				14.7749996185303,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.0,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				15.2749996185303,
+				2.91000008583069,
+				50.9169998168945
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.5,
+				3.0,
+				51.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.975000023841858,
+				1.38500010967255,
+				46.9599990844727
+			],
+			"bounds_size": [
+				0.0509999990463257,
+				0.629999995231628,
+				1.08000183105469
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.70000004768372,
+				47.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				7.02500009536743,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				15.0295219421387,
+				0.420000016689301,
+				48.8861045837402
+			],
+			"bounds_size": [
+				1.08223915100098,
+				0.795777857303619,
+				1.20013809204102
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.5,
+				0.419999986886978,
+				49.5
+			],
+			"rotation": [
+				0.0,
+				152.157821655273,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				26.7439651489258,
+				0.419999986886978,
+				46.780818939209
+			],
+			"bounds_size": [
+				1.51206970214844,
+				1.54290461540222,
+				1.43836212158203
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				27.5,
+				0.419999986886978,
+				47.5
+			],
+			"rotation": [
+				0.0,
+				158.015106201172,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				26.185962677002,
+				0.420000016689301,
+				47.2565994262695
+			],
+			"bounds_size": [
+				0.62580680847168,
+				1.65999984741211,
+				0.533969879150391
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				26.5,
+				0.419999986886978,
+				47.5
+			],
+			"rotation": [
+				0.0,
+				153.208831787109,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"body_on_skin": {
+		"contact": true,
+		"position": [
+			20.5,
+			1.81564354896545,
+			13.5
+		]
+	},
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"review_checks": [
+		{
+			"check": "hall desk binds both specimens",
+			"passed": true
+		},
+		{
+			"check": "feedback is explicitly off at arrival",
+			"passed": true
+		},
+		{
+			"check": "lesson bench is seated before reference capture",
+			"passed": true
+		},
+		{
+			"check": "seated specimen has a physics reference",
+			"passed": true
+		},
+		{
+			"check": "live body is at standing working height",
+			"passed": true
+		},
+		{
+			"check": "live points remain with their placed bench",
+			"passed": true
+		},
+		{
+			"check": "world-space overlays align with the solver rather than being transformed twice",
+			"passed": true
+		},
+		{
+			"check": "capture camera owns specimen.png",
+			"passed": true
+		},
+		{
+			"check": "desktop squeeze follows the live body instead of world zero",
+			"passed": true
+		},
+		{
+			"check": "seven controls retain two rows and one height",
+			"passed": true
+		},
+		{
+			"check": "reading collision does not change pressure",
+			"passed": true
+		},
+		{
+			"check": "reading volume does not change pressure",
+			"passed": true
+		},
+		{
+			"check": "reading strain does not change pressure",
+			"passed": true
+		},
+		{
+			"check": "feedback can be enabled without changing the reading",
+			"passed": true
+		},
+		{
+			"check": "declared feedback error changes pressure by gain times elapsed delta",
+			"passed": true
+		},
+		{
+			"check": "feedback continues under a different reading",
+			"passed": true
+		},
+		{
+			"check": "feedback off restores selected pressure and blocks correction",
+			"passed": true
+		},
+		{
+			"check": "local feedback button updates the hall readout",
+			"passed": true
+		},
+		{
+			"check": "root forwards feedback without resetting the selected reading",
+			"passed": true
+		},
+		{
+			"check": "capture camera owns volume-reading.png",
+			"passed": true
+		},
+		{
+			"check": "capture camera owns volume-feedback.png",
+			"passed": true
+		},
+		{
+			"check": "material and interaction controls remain separate",
+			"passed": true
+		},
+		{
+			"check": "initial 200 steps: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "initial 200 steps: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "initial 200 steps: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "initial 200 steps: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "duration 40 removes the old collision",
+			"passed": true
+		},
+		{
+			"check": "duration chooses 40 integration steps",
+			"passed": true
+		},
+		{
+			"check": "40 steps: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "40 steps: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "40 steps: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "40 steps: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "capture camera owns vessel-40.png",
+			"passed": true
+		},
+		{
+			"check": "duration 400 removes the old collision",
+			"passed": true
+		},
+		{
+			"check": "duration chooses 400 integration steps",
+			"passed": true
+		},
+		{
+			"check": "400 steps: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "400 steps: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "400 steps: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "400 steps: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "capture camera owns vessel-400.png",
+			"passed": true
+		},
+		{
+			"check": "duration 200 removes the old collision",
+			"passed": true
+		},
+		{
+			"check": "duration chooses 200 integration steps",
+			"passed": true
+		},
+		{
+			"check": "200 steps: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "200 steps: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "200 steps: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "200 steps: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "lateral force chooses 2.0",
+			"passed": true
+		},
+		{
+			"check": "gravity 2.0: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "gravity 2.0: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "gravity 2.0: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "gravity 2.0: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "lateral force chooses -2.0",
+			"passed": true
+		},
+		{
+			"check": "gravity -2.0: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "gravity -2.0: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "gravity -2.0: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "gravity -2.0: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "lateral force chooses 0.0",
+			"passed": true
+		},
+		{
+			"check": "gravity 0.0: exactly one active skin",
+			"passed": true
+		},
+		{
+			"check": "gravity 0.0: collision matches both sides of the rendered mesh",
+			"passed": true
+		},
+		{
+			"check": "gravity 0.0: full form meets its floor datum",
+			"passed": true
+		},
+		{
+			"check": "gravity 0.0: vertical ray meets the actual skin",
+			"passed": true
+		},
+		{
+			"check": "CharacterBody meets and is supported by the frozen surface",
+			"passed": true
+		},
+		{
+			"check": "explanation remains available after the encounter",
+			"passed": true
+		},
+		{
+			"check": "six-button desks keep their prior layout",
+			"passed": true
+		},
+		{
+			"check": "unconfigured harnesses retain their prior elevation",
+			"passed": true
+		}
+	],
+	"review_scope": "Actual museum artifacts and button signals. One controlled error tests feedback independently of solver variability. Matching mesh/collision, reconstruction replacement, support rays and a CharacterBody contact test. No headset or learner acceptance.",
+	"room": "SoftBodies_Playground_of_Joy",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/SoftBodies_Playground_of_Joy/console.png",
+		"res://ada_run/encounter_pilot/SoftBodies_Playground_of_Joy/vessel.png"
+	],
+	"specimen_y_range": [
+		0.875243902206421,
+		1.36863541603088
+	],
+	"walks": []
+}

@@ -1,0 +1,45 @@
+{
+  "map": "Point_Coordinates",
+  "host": "existing Endless Museum hall",
+  "existing_artifacts": [
+    "point_held",
+    "CoordinateSystem3M",
+    "WORLD coordinate_readout",
+    "LOCAL coordinate_readout"
+  ],
+  "reuses": [
+    "Point Zero: _process",
+    "Point One: Vector3, named values, surface and boundary"
+  ],
+  "introduces": [
+    "supplied pickup relation",
+    "X/Y/Z components and vector addition",
+    "world and frame-local position",
+    "explicit Vector3 type annotation",
+    "coordinate display formatting"
+  ],
+  "supplied": [
+    "museum player and input",
+    "XRToolsPickable hold/release",
+    "point discovery and channel routing",
+    "frame geometry and card construction"
+  ],
+  "student_edits": [
+    "held.position = CENTRE + Vector3(0, 0.5, 0)",
+    "xyz formatting: %.2f to %.3f"
+  ],
+  "defers": [
+    "distance and two-point relation to Point Lines",
+    "implementing pickup and input",
+    "general transformations"
+  ],
+  "source_sha256": {
+    "commons\\primitives\\point\\point_condition.gd": "8b0b7eca1cc404a7668561d748c3cb1f46682dfae40fa14431334faba09e58f7",
+    "algorithms\\vectors\\00_coordinates\\CoordinateSystem3M.gd": "9bad812f30fc9fa327beb0fbf818b9e7fccbe15280c22326ab6fe5be177e1b16",
+    "commons\\primitives\\point\\coordinate_readout.gd": "4570dda3382899e960544b485056da4da1875d90c53e0750efe158b00f423561"
+  },
+  "new_artifacts": [],
+  "physical_headset_tested": false,
+  "native_checks": 32,
+  "next": "Point_Lines after author reading"
+}

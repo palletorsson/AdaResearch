@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "all six authored tokens preserved",
+      "ok": true
+    },
+    {
+      "name": "all four secondary configurations and relative placements retained",
+      "ok": true
+    },
+    {
+      "name": "all three map layers match declared 17 by 26 extent",
+      "ok": true
+    },
+    {
+      "name": "only this map role/order changes",
+      "ok": true
+    },
+    {
+      "name": "primary encounter order equals final.md anchors",
+      "ok": true
+    },
+    {
+      "name": "other book pearls preserved",
+      "ok": true
+    },
+    {
+      "name": "hero and both primary book lines agree",
+      "ok": true
+    },
+    {
+      "name": "other plan rows and route preserved: ada_run/em_plan.json",
+      "ok": true
+    },
+    {
+      "name": "other plan rows and route preserved: commons/data/museum/em_plan.json",
+      "ok": true
+    },
+    {
+      "name": "both current plan rows carry all six tokens identically",
+      "ok": true
+    },
+    {
+      "name": "clockmaker registry entry resolves a map-ready scene",
+      "ok": true
+    },
+    {
+      "name": "no other registry entries changed",
+      "ok": true
+    },
+    {
+      "name": "all final.md code excerpts exist in actual source",
+      "ok": true
+    },
+    {
+      "name": "accepted runtime evidence still matches all captured sources",
+      "ok": true
+    }
+  ],
+  "headset_verified": false
+}

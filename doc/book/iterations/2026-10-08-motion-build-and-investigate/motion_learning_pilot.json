@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "label": "03_mass.gd loads",
+      "passed": true
+    },
+    {
+      "label": "printed reconstruction creates three physical points",
+      "passed": true
+    },
+    {
+      "label": "masses start at 1, 2, 4 kg",
+      "passed": true
+    },
+    {
+      "label": "reconstruction has one declared start control",
+      "passed": true
+    },
+    {
+      "label": "one pulse gives 1, 0.5, 0.25 m/s",
+      "passed": true
+    },
+    {
+      "label": "printed points coast after their push ends",
+      "passed": true
+    },
+    {
+      "label": "reconstruction has one declared start control",
+      "passed": true
+    },
+    {
+      "label": "a second completed pulse adds to existing velocity",
+      "passed": true
+    },
+    {
+      "label": "comparison.gd loads",
+      "passed": true
+    },
+    {
+      "label": "independent construction makes two point bodies",
+      "passed": true
+    },
+    {
+      "label": "independent masses are 1 and 2 kg",
+      "passed": true
+    },
+    {
+      "label": "reconstruction has one declared start control",
+      "passed": true
+    },
+    {
+      "label": "at one second the lighter point is faster",
+      "passed": true
+    },
+    {
+      "label": "different duration compensates for different mass",
+      "passed": true
+    },
+    {
+      "label": "equal final speed leaves different distances",
+      "passed": true
+    },
+    {
+      "label": "both independently timed pushes end and retain velocity",
+      "passed": true
+    },
+    {
+      "label": "the distance snapshot remains readable while points coast",
+      "passed": true
+    },
+    {
+      "label": "current museum uses PUSH 1 s and RESET",
+      "passed": true
+    },
+    {
+      "label": "current museum uses three identical sphere sizes",
+      "passed": true
+    },
+    {
+      "label": "lanes remove downward and sideways motion",
+      "passed": true
+    },
+    {
+      "label": "actual museum preserves the same mass comparison",
+      "passed": true
+    },
+    {
+      "label": "museum trails actually contain movement",
+      "passed": true
+    },
+    {
+      "label": "trace is bounded to 64 samples",
+      "passed": true
+    },
+    {
+      "label": "bounded trace discards the first place and retains the latest",
+      "passed": true
+    },
+    {
+      "label": "reset offers a new beginning",
+      "passed": true
+    },
+    {
+      "label": "reset clears velocity and restores places",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "comparison": {
+      "at_one_second": [
+        0.999999701976776,
+        0.508333206176758
+      ],
+      "at_two_seconds": [
+        0.999999701976776,
+        0.999999403953552
+      ],
+      "distances_after_two_seconds": [
+        1.54166567325592,
+        1.04166638851166
+      ]
+    },
+    "museum_speeds": [
+      0.999999701976776,
+      0.499999850988388,
+      0.249999925494194
+    ],
+    "printed_speeds": [
+      0.999999701976776,
+      0.499999850988388,
+      0.249999925494194
+    ]
+  },
+  "passed": true,
+  "scope": "Actual Jolt integration of code reconstructed from printed lessons, an independent AI-authored variation, and the installed mass artifact. AI reconstruction is not evidence of human learning or physical headset comfort."
+}

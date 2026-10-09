@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "assertions": 46,
+  "variants": {
+    "still": {},
+    "translate": {
+      "var start := Vector3(0, 1, 0)": "var start := Vector3(1, 1, 0)"
+    },
+    "turn": {
+      "var turn_degrees := 0.0": "var turn_degrees := 45.0"
+    },
+    "scale": {
+      "var size_factor := 1.0": "var size_factor := 1.5"
+    },
+    "other-angle": {
+      "var turn_degrees := 0.0": "var turn_degrees := -30.0"
+    },
+    "rise": {
+      "var rise := 0.0": "var rise := 1.0"
+    },
+    "slow": {
+      "var rise := 0.0": "var rise := 1.0",
+      "var duration := 2.0": "var duration := 4.0"
+    },
+    "combine": {
+      "var rise := 0.0": "var rise := 1.0",
+      "var turn_degrees := 0.0": "var turn_degrees := 45.0",
+      "var size_factor := 1.0": "var size_factor := 1.5"
+    }
+  },
+  "faults": {
+    "no-signal": {
+      "mutation": [
+        "sensor.body_entered.connect(_on_body_entered)",
+        "pass # Deliberately disconnect collection."
+      ],
+      "required_failure": "pickup/physics_collects/em_walker",
+      "detected": true
+    },
+    "no-player-filter": {
+      "mutation": [
+        "if body.is_in_group(\"em_walker\") or body.is_in_group(\"player_body\"):",
+        "if true:"
+      ],
+      "required_failure": "pickup/ordinary_body_ignored",
+      "detected": true
+    },
+    "wrong-axis": {
+      "mutation": [
+        "cube.rotation_degrees.y = turn_degrees",
+        "cube.rotation_degrees.x = turn_degrees"
+      ],
+      "required_failure": "rotation/declared_y_axis",
+      "detected": true
+    },
+    "frame-clock": {
+      "mutation": [
+        "elapsed += delta",
+        "elapsed += 1.0"
+      ],
+      "required_failure": "time/30/0.5",
+      "detected": true
+    },
+    "accumulated-position": {
+      "mutation": [
+        "cube.position = start + Vector3.UP * rise * t",
+        "cube.position += start + Vector3.UP * rise * t"
+      ],
+      "required_failure": "still/clock_does_not_require_motion",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "commons/maps/Trans_Pre/tutorial.md": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/native-project.godot": "2f5fa852ab7e315bf6b1eca3ce9c2526fe3775cf6a1d630db6c1af685d28e485",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/run_checks.py": "738b01c279e5cfc0fdc700455822993b9ad6daaa400306c54d734340cfac4240",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/verify.gd": "d8307653ff18d285017a0a2508d0c4482af00078e3cbca65687fc17f207c793e",
+    "doc/book/iterations/2026-10-06-trans-pre-three-operations/lesson.gd": "e2a55ef8c528d32b5e581891a56539c69ac9655504342b442a32755877fa60a6"
+  },
+  "unchanged_helpers": [],
+  "preserved": {
+    "final.md": true,
+    "map_data.json": true
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-trans-pre-z83m9kgp",
+  "scope": "Exact printed code and value-edited variants in native Godot. Actual process callback plus controlled time steps. No headset or learner-understanding claim."
+}

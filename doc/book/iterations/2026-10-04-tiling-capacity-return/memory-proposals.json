@@ -1,0 +1,404 @@
+[
+  {
+    "id": "finding-c59e24a51b484de0a4a7c099d98bd9db",
+    "scope": "map:Pattern_Disco",
+    "kind": "proposal",
+    "text": "Tiling revision — Pattern_Disco: Reuse the existing floor rule. Change palette and phase separately; keep the triangle shader an optional comparison.",
+    "reason": "Let Colour return through an operation the student already knows.",
+    "sequence_effect": "A known address rule with an independently chosen two-colour palette.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:42.769716Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Pattern_Disco.json",
+        "sha256": "8328571a007ccd7f1791c48accaf297d67e33f29a9ac9e20003312c000ba398f",
+        "current_sha256": "8328571a007ccd7f1791c48accaf297d67e33f29a9ac9e20003312c000ba398f",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Pattern_Disco/final.md",
+        "sha256": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987",
+        "current_sha256": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/regularity/disco_controls.gd",
+        "sha256": "3265cadb228731cc8f1db786e18bfb39b66b4498e06375788ec6b21030ee471d",
+        "current_sha256": "3265cadb228731cc8f1db786e18bfb39b66b4498e06375788ec6b21030ee471d",
+        "status": "current"
+      },
+      {
+        "path": "commons/context/discofloor/StandaloneDiscoFloor.gd",
+        "sha256": "d10c5cb9106a6f7e47156dc21a8f4fa629cac1819ece5dad40d66cd52d8bfe1f",
+        "current_sha256": "d10c5cb9106a6f7e47156dc21a8f4fa629cac1819ece5dad40d66cd52d8bfe1f",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-8f9459c2892b4aef9610e379945132c1",
+    "scope": "map:Pattern_Foundry",
+    "kind": "proposal",
+    "text": "Tiling revision — Pattern_Foundry: Start with one small motif and wrapping lookup. Move copying to a return visit; distinguish the tile, loom and held images.",
+    "reason": "Reduce first-visit load without losing the richer questions of sharing and keeping.",
+    "sequence_effect": "A small indexed motif and its reader; an optional separately retained source copy.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:45.234534Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Pattern_Foundry.json",
+        "sha256": "7c6d6331ed6dced4d8ef8e11280582535525fc5347d5453fa1ef9765b80d5936",
+        "current_sha256": "7c6d6331ed6dced4d8ef8e11280582535525fc5347d5453fa1ef9765b80d5936",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Pattern_Foundry/final.md",
+        "sha256": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb",
+        "current_sha256": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb",
+        "status": "current"
+      },
+      {
+        "path": "commons/primitives/arrays/pattern_tile_puzzle.gd",
+        "sha256": "7e122673f036e21b6d7a69371a4d057ec553c0b5204b7bcd689241a0e4cc0169",
+        "current_sha256": "7e122673f036e21b6d7a69371a4d057ec553c0b5204b7bcd689241a0e4cc0169",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/pattern_machine_a/recipe_study.gd",
+        "sha256": "9380d8708184e8cf00cd8c83c8f610d52221b455278d9e2038a831944ea5c8ea",
+        "current_sha256": "9380d8708184e8cf00cd8c83c8f610d52221b455278d9e2038a831944ea5c8ea",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-9dda475ee95d4586af500b9054fb8017",
+    "scope": "map:Tutorial_Pattern",
+    "kind": "proposal",
+    "text": "Tiling revision — Tutorial_Pattern: Make horizontal reversal explicit: read columns backwards, or reverse entries within each row. Check which operation actually changes the source.",
+    "reason": "Keep a visually similar result from concealing two different operations.",
+    "sequence_effect": "Separate read-address and source-edit functions with a revealing test motif.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:47.663918Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Tutorial_Pattern.json",
+        "sha256": "ad58956041e147f0b17d5ab30fbef33cb606f11a326e1bc5eba1e0424c75146e",
+        "current_sha256": "ad58956041e147f0b17d5ab30fbef33cb606f11a326e1bc5eba1e0424c75146e",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Tutorial_Pattern/final.md",
+        "sha256": "6bc8163b46ff43d54a1b1ade2f9bc1fbce69542212d1e990274f4625ab495f03",
+        "current_sha256": "6bc8163b46ff43d54a1b1ade2f9bc1fbce69542212d1e990274f4625ab495f03",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd",
+        "sha256": "11b9830aa47d0af0b9a55526bde870fc4054d955eb8757e9e247ab6ce1a1411d",
+        "current_sha256": "11b9830aa47d0af0b9a55526bde870fc4054d955eb8757e9e247ab6ce1a1411d",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Tutorial_Pattern/tutorial.md",
+        "sha256": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f",
+        "current_sha256": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-ce06f2623b514a428b59ab3e04c6eb64",
+    "scope": "map:Array_Patterns",
+    "kind": "proposal",
+    "text": "Tiling revision — Array_Patterns: Use the installed fixed motif and name each face’s directions. Distinguish one cell’s width from the width of the complete repeat.",
+    "reason": "Give the same number an unambiguous unit and meaning.",
+    "sequence_effect": "A position-to-address conversion with explicit origin, axes and metre units.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:50.104375Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Array_Patterns.json",
+        "sha256": "15ebacd7ece8dd5916745be19730f09c2a21fbe298939c5a82b29d98cb4968c2",
+        "current_sha256": "15ebacd7ece8dd5916745be19730f09c2a21fbe298939c5a82b29d98cb4968c2",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Array_Patterns/final.md",
+        "sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84",
+        "current_sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd",
+        "sha256": "a6874fd40988cc6dca9f94d41abada5d7549dca09b65cc645253dd75f9eb0bcf",
+        "current_sha256": "a6874fd40988cc6dca9f94d41abada5d7549dca09b65cc645253dd75f9eb0bcf",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/pattern_tunnel/pattern_tunnel.gdshader",
+        "sha256": "24103a2b2cd81f32a52164401273c6eb5d103e05b95bb1be628685ccb86a39ae",
+        "current_sha256": "24103a2b2cd81f32a52164401273c6eb5d103e05b95bb1be628685ccb86a39ae",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-ff1b113d61064e2cb63f6961d917e25d",
+    "scope": "map:Symmetry_Seventeen",
+    "kind": "proposal",
+    "text": "Tiling revision — Symmetry_Seventeen: Inspect two neighbouring blocks and test the translation period. Keep the seventeen-group claim separate from this bounded comparison.",
+    "reason": "Make the limit of the demonstrated rule as clear as its visible effect.",
+    "sequence_effect": "A diagnostic motif and a repeating unit checked against more than one source block.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:52.741957Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Symmetry_Seventeen.json",
+        "sha256": "3ade0e52f050ad2fed4d456511f61898891839753f9c3b60932a6e57ea587f04",
+        "current_sha256": "3ade0e52f050ad2fed4d456511f61898891839753f9c3b60932a6e57ea587f04",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Symmetry_Seventeen/final.md",
+        "sha256": "79bd5b7f9f75f06ac3524e0c4c2cb7ed928e34c0b55bf27c27be7ffe6de2aeb6",
+        "current_sha256": "79bd5b7f9f75f06ac3524e0c4c2cb7ed928e34c0b55bf27c27be7ffe6de2aeb6",
+        "status": "current"
+      },
+      {
+        "path": "commons/primitives/arrays/wallpaper_groups.gd",
+        "sha256": "5ddc7d3bb0a4ac5bf5e5ddea6405f060d2e37a86f08ca0ac7e3840c9c829c6a3",
+        "current_sha256": "5ddc7d3bb0a4ac5bf5e5ddea6405f060d2e37a86f08ca0ac7e3840c9c829c6a3",
+        "status": "current"
+      },
+      {
+        "path": "commons/primitives/arrays/symmetry_compare_lesson.gd",
+        "sha256": "55908f7bb4084adade667df732c63ffdc74370615973d7019b7aac9d3c2228fc",
+        "current_sha256": "55908f7bb4084adade667df732c63ffdc74370615973d7019b7aac9d3c2228fc",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-20f7d1f5c57f4cf596a7a9a50ea46942",
+    "scope": "map:Ribbon_Patterns_01",
+    "kind": "proposal",
+    "text": "Tiling revision — Ribbon_Patterns_01: Name source [z][x] and volume [y][z][x], then predict one shifted lookup. Keep zero-as-colour distinct from earlier occupancy.",
+    "reason": "Reuse the earlier volume knowledge without silently changing what its values mean.",
+    "sequence_effect": "A volume reader with declared palette-index values and nondestructive slice views.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:55.156078Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_01.json",
+        "sha256": "c6930cb523314b0d8897e22ad0a5c3f953bf690e4a4260f46bf4a045613120a7",
+        "current_sha256": "c6930cb523314b0d8897e22ad0a5c3f953bf690e4a4260f46bf4a045613120a7",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Ribbon_Patterns_01/final.md",
+        "sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e",
+        "current_sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/arrays/layer_pattern_lesson.gd",
+        "sha256": "e5b55774f2c544a3152c972c5fa6cf75847135397845d902bd5aec24ddc56a02",
+        "current_sha256": "e5b55774f2c544a3152c972c5fa6cf75847135397845d902bd5aec24ddc56a02",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-f09de65348714399ad83476e00e1ccb0",
+    "scope": "map:Ribbon_Patterns_02",
+    "kind": "proposal",
+    "text": "Tiling revision — Ribbon_Patterns_02: Keep it. Clarify equal surface distance versus apparent width; leave the lighting calculation supplied and require no perceptual answer.",
+    "reason": "Allow the sequence to deepen attention without adding more programming.",
+    "sequence_effect": "A comparison that separates stored equality, surface distance and viewed appearance.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:19:57.588995Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_02.json",
+        "sha256": "b5fac2a6afa4ed2917902fabd70683e2115e8207353f6c7a249c2be041ce48e2",
+        "current_sha256": "b5fac2a6afa4ed2917902fabd70683e2115e8207353f6c7a249c2be041ce48e2",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Ribbon_Patterns_02/final.md",
+        "sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af",
+        "current_sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af",
+        "status": "current"
+      },
+      {
+        "path": "algorithms/color/carrier_comparison.gd",
+        "sha256": "e713b9191c18dd0ac046c6d0efa34375a6ec041833a4f7a5bda387944d3f5710",
+        "current_sha256": "e713b9191c18dd0ac046c6d0efa34375a6ec041833a4f7a5bda387944d3f5710",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  },
+  {
+    "id": "finding-3ab1d99e8dd14d739a9c587b111f0e6f",
+    "scope": "map:Ribbon_Patterns_03",
+    "kind": "proposal",
+    "text": "Tiling revision — Ribbon_Patterns_03: Name the existing texture/material host. Teach repeat, offset and sampling only; distinguish saved recipe data from shader code and metre spacing.",
+    "reason": "Give the sequence a small, usable shader ending without implying the whole studio must be rebuilt.",
+    "sequence_effect": "A small repeat-and-offset sampling operation plus a clearly bounded saved appearance recipe.",
+    "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+    "status": "proposed",
+    "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+    "created_by": "Codex",
+    "created_at": "2026-10-04T17:20:00.016904Z",
+    "review_note": "",
+    "reviewed_at": "",
+    "related_scopes": [
+      "sequence:tiling"
+    ],
+    "sources": [
+      {
+        "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_03.json",
+        "sha256": "ba7e0e40dc4857116c415ae6c7c5d4ea204d74437aafa5e013982f87da25910e",
+        "current_sha256": "ba7e0e40dc4857116c415ae6c7c5d4ea204d74437aafa5e013982f87da25910e",
+        "status": "current"
+      },
+      {
+        "path": "doc/book/course/storyboards/TILING.md",
+        "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "current_sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1",
+        "status": "current"
+      },
+      {
+        "path": "commons/maps/Ribbon_Patterns_03/final.md",
+        "sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4",
+        "current_sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+        "sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35",
+        "current_sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/fabric_shader_studio/fabric_recipe.gd",
+        "sha256": "21d87aeb495047a3eb93bc523686a317e7c645a102b28e9548922a6c5c8f844f",
+        "current_sha256": "21d87aeb495047a3eb93bc523686a317e7c645a102b28e9548922a6c5c8f844f",
+        "status": "current"
+      },
+      {
+        "path": "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd",
+        "sha256": "2bcf724239b1e6178fb4e0b4f87aaf98ba38327cba1dfaa3d0fde83da1c05e18",
+        "current_sha256": "2bcf724239b1e6178fb4e0b4f87aaf98ba38327cba1dfaa3d0fde83da1c05e18",
+        "status": "current"
+      }
+    ],
+    "freshness": "current"
+  }
+]

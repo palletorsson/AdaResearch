@@ -1,0 +1,25 @@
+{
+  "checks": 24,
+  "failures": [],
+  "date": "2026-09-11",
+  "headset_tested": false,
+  "probes": {
+    "Change_Choreography": {
+      "checks": 7,
+      "failures": [],
+      "headset_tested": false
+    },
+    "Vectors_Act1_WhatAVectorIs": {
+      "checks": 17,
+      "failures": [],
+      "headset_tested": false
+    }
+  },
+  "conditions": "Actual museum in desktop compatibility renderer. Scripted pointer inputs; supplied camera viewpoints; target artifacts made visible for captures.",
+  "limitations": [
+    "The full 13-hall plan is proposed work, not an implemented force system.",
+    "Headset reach, hand use, comfort and sustained performance untested.",
+    "Existing supporting scenes emit look_at-before-tree and empty-info-board messages; no script errors in this probe.",
+    "Timing machine physics scripts are unchanged in this pass; the new marker checks do not rerun the previous conveyor endurance comparison."
+  ]
+}

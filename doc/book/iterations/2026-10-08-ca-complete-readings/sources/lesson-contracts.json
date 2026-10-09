@@ -1,0 +1,236 @@
+[
+  {
+    "id": "CA_Introduction",
+    "decision": "draft",
+    "mode": "build",
+    "object": "The carried PointBody reads a 32-cell row; a separate history display retains its generations.",
+    "change": "Reconstruct the installed Rule 90 behaviour with an explicit eight-answer table, wrapped neighbours and an old-to-next update.",
+    "dependsOn": [
+      "Point_Coordinates",
+      "Point_Line_Grid",
+      "Array"
+    ],
+    "reuses": "Pickable PointBody and local position; arrays, indexed entries, loops and conditionals.",
+    "given": "Existing museum player, camera, lighting and XR Tools. Full point adapter and display construction are printed.",
+    "later": "Rule byte encoding; automatic clocks; 2D rug symmetry; network growth. These are not required to build the row.",
+    "checks": [
+      "Exact two printed scripts construct the row, reader and label with no authored scene children.",
+      "Eight answers and forty complete generations match the installed explorer for Rules 90 and 30.",
+      "Adjacent seeds and a boundary seed match predictions; reversed traversal preserves thirty generations.",
+      "A deliberately in-place update is rejected; history copies remain independent and bounded at 24.",
+      "Actual XRTools pickup in a rotated frame selects an address; trigger steps once; release parks.",
+      "Installed hall reader advances the existing explorer and its shared ring history. No headset claim."
+    ],
+    "transfer": "Predict two adjacent seeds; independently reverse traversal and compare from the same seed; test a seed at address zero.",
+    "carry": "A synchronous binary row engine, explicit wrapped boundary and copied history, with the familiar point as reader.",
+    "next": "CA_ElementaryRules: expand neighbourhood into a volume and state into empty, active and fading.",
+    "notes": "Complete reconstruction now available in tutorial.md. Installed hand reader delegates to existing explorer state and step; no second automaton.",
+    "baseline": {
+      "tutorial": "e5178418ad2c164b21d6b5f5623ea77dda1e0e70179fd1c0afaa76a3f4605613",
+      "choice": "12bedaa800c0fc7cf5e7325d9315a0fcca8511f5fd390f69c5d62a55f8d34077"
+    },
+    "summary": "Carry the pickable point into a row of 32 cells. Move it to inspect left, self and right, then trigger one generation. Reconstruct Rule 90 as eight readable answers; calculate every next cell from the same old row, wrap the boundary and keep copied history separately. Predict two adjacent seeds and test reversed traversal from the same beginning. Carry the row engine and the distinction between state and its record into the next three-state volume."
+  },
+  {
+    "id": "CA_ElementaryRules",
+    "decision": "draft",
+    "mode": "build",
+    "object": "PointBody step control and a three-state volume.",
+    "change": "Carry old-to-next from the row. Write a 26-neighbour active count and empty/active/fading transition; build a complete compact volume in the existing museum study.",
+    "dependsOn": [
+      "CA_Introduction",
+      "Tutorial_3D"
+    ],
+    "reuses": "An old-state/next-state update.; Three-dimensional cell addresses.",
+    "given": "Day Zero museum camera, light, player and XR Tools; unchanged carried PointBody source printed in full.",
+    "later": "Do not explain every visible artifact. The historical title is misleading; this hall currently owns a three-state 3D study, not another introductory elementary-row lesson.",
+    "checks": [
+      "All 81 state/count cases; active-only neighbour count; independent old/next; empty shell.",
+      "Exact printed scripts versus installed 3D solver across mixed-state seeds; reversed traversal; reject fading-count and premature-rebirth faults.",
+      "Two-cell seed prediction; real XRTools pickup/action/release with supplied poses; native museum witness and route clearance."
+    ],
+    "transfer": "Replace the 12-cell beginning with two adjacent active cells. Predict two generations, run, explain why visible fading does not support a neighbour.",
+    "carry": "Three-state transition, 3D addresses and synchronous next volume; participation differs from visibility.",
+    "next": "CA_GameOfLife: retain generations as spatial history; inspect actual source before writing.",
+    "notes": "Compact 7-cubed learner construction and 50-cubed museum share transition semantics, not seed or renderer. Installed point carries STEP; fixed gold address keeps the observation stable. Physical headset and independent learner test remain open.",
+    "baseline": {
+      "tutorial": "04f9a207439d6c2a4fb02c5c1363249bdbac40f51247c9d7e1715d65bdbad045",
+      "choice": "16d82e63b8809b961c784599be025a943169ef83185dca3d308d96c313d59f4d"
+    },
+    "summary": "Meet one active cell in the enlarged neighbourhood. Carry PointBody as a step control. Replace Boolean state with empty/active/fading, count only active neighbours at 26 surrounding addresses, and write a separate next volume with an empty shell. Build the complete 7-cubed study, predict two adjacent seeds and compare the installed volume. Keep state, participation and drawn surface distinct; carry the update into spatial history."
+  },
+  {
+    "id": "CA_GameOfLife",
+    "decision": "draft",
+    "mode": "build",
+    "object": "PointBody reads a retained Rule 30 history across two receivers.",
+    "change": "Copy each new row into chronological history. Build horizontal collision tiles and a visual vertical screen from the same saved addresses; held point selects a recorded generation.",
+    "dependsOn": [
+      "CA_Introduction",
+      "CA_ElementaryRules"
+    ],
+    "reuses": "Old-to-next row update; arrays and nested indices; PointBody pickup/action; local coordinates; pooled repeated geometry.",
+    "given": "Existing museum Day Zero host: camera, lights, player, XR Tools. Both learner files printed in full, including unchanged PointBody.",
+    "later": "Actual Conway Life follows in CA_BeyondBinary. Rear columns, orb, mirrored automaton and Turing lab are wider encounters, not extra tutorial assignments.",
+    "checks": [
+      "Exact printed files: all eight Rule30 cases; eight seeds through 24 rows versus installed solver; snapshot independence; faulty alias rejected.",
+      "Both mappings, all 360 visibility/support slots, native collision rays; old-row reading preserves current/history; capacity and replay.",
+      "Independent two-site beginning and flipped wall receiver; actual XRTools pickup/action/release with supplied poses; installed walking reader and room routes."
+    ],
+    "transfer": "Begin with sites 5 and 9; predict six occupied sites in generation one. Reverse only the vertical site mapping; explain why saved rows, deck and next state stay the same.",
+    "carry": "Independent chronological snapshots; separate site and generation indices; display and support consume the same data with different consequences.",
+    "next": "CA_BeyondBinary: one two-dimensional present, B3/S23 and a glider whose apparent motion differs from this retained spatial history.",
+    "notes": "30 exact-code checks + 35 museum checks including capture checks. 451 route samples. Small learner has two views/hand reader; installed work has desk, basin, lattice/body reader. No physical headset, human learner, or full portal transfer test. Production rule/study unchanged.",
+    "baseline": {
+      "tutorial": "38a536f0362c9ff0bf4622aa37a7c42626a9ce5ba2885f252885c545264dd00d",
+      "choice": "8e6ec6baa06ccf6ed44de7c7082e5373668b46b5a0b79ca180f0da5d8ffae018"
+    },
+    "summary": "Return to opening Rule30 after the three-state volume. Carry PointBody and old-to-next; copy completed rows into 24 chronological snapshots. Build horizontal support and upright ornament from the same generation/site addresses. Move the held point to read an earlier row without changing state. Predict the two-site seed, then flip only one view. In the installed hall walk beside the basin and watch three witnesses agree. Carry saved state and explicit receiver responsibilities into the next hall’s two-dimensional present."
+  },
+  {
+    "id": "CA_BeyondBinary",
+    "decision": "draft",
+    "mode": "build",
+    "object": "PointBody carries STEP through a two-dimensional present; one fixed cell controls one lamp.",
+    "change": "Count eight surrounding sites, apply B3/S23 into a fresh buffer, and bind a fixed address to an independently switchable output.",
+    "dependsOn": [
+      "CA_Introduction",
+      "CA_ElementaryRules",
+      "CA_GameOfLife"
+    ],
+    "reuses": "PointBody and pickable action; arrays, loops and local coordinates; synchronous old-to-next updates; a value and its receiver.",
+    "given": "Existing Day Zero museum camera, lights, player and XR Tools. Both complete learner files printed, including unchanged PointBody. No supplied dish or lamp children.",
+    "later": "Secondary mould/growth/hexagonal works remain museum encounters. RUN, TRACE, three installed lamps and MEET are wider comparisons, not extra required code in the compact lesson.",
+    "checks": [
+      "29 exact-printed-code checks: all 18 rule cases, eight offsets, wrapping, independent buffer and reverse iteration, installed-solver parity through 48 glider steps and eight random seeds.",
+      "Blinker and alternate-address transfer tasks; rejected centre-count and in-place mutations; native colour, collision, XRTools pickup/action/release and keyboard.",
+      "38 installed museum checks including cameras: carried STEP, one-way LINK, TRACE restoration, patterns, stable floor support, 48-step limit, five routes / 306 capsule-and-floor samples and portal approaches."
+    ],
+    "transfer": "Make the three-cell blinker; predict both phases and the continuously occupied centre. Change SITE from (10,10) to (9,10); predict an alternating lamp without altering the cells.",
+    "carry": "Two-dimensional present versus retained history; fixed address versus travelling pattern; a separately chosen output binding.",
+    "next": "CA_ExpandingSpace: proximity becomes input; the observing body enters the update conditions.",
+    "notes": "Actual Life rule remains binary despite historical map ID. Compact study has one lamp and manual steps; installed hall has three lamps and richer controls. Exact code, native renderer/physics and supplied XRTools poses tested; no tracked headset or independent student acceptance. Solver/receiver unchanged; carryable STEP is opt-in for walk-floor placements.",
+    "baseline": {
+      "tutorial": "e3c48eb3ad9c4df79cb92ba17f8b702e3dc19b2b0fa321c787bd1b31050f6f6a",
+      "choice": "c5ba0933ad83cf5929f3db195e097d8feb407fbc3e50f2d72b70c5bd461e1f4e"
+    },
+    "summary": "Carry PointBody and old-to-next into a 24x24 present. Count eight surrounding neighbours, exclude centre, apply B3/S23 synchronously. Four glider steps shift the pattern while every address stays fixed. Bind A to a lamp; disconnect output without stopping cells. Build a blinker, predict its two phases, then move only the output address to make the lamp alternate. Walk the installed floor with the held STEP point. Carry explicit one-way coupling toward next hall’s proximity input."
+  },
+  {
+    "id": "CA_ExpandingSpace",
+    "decision": "draft",
+    "mode": "build",
+    "object": "The carried PointBody supplies position to a fractional cell field; floor and wall share its state.",
+    "change": "Connect a held point centre as external input. Decay nearby cells, recover through healthy neighbours, and separate recovery from support thresholds. Compare update schedules with three cells.",
+    "dependsOn": [
+      "CA_BeyondBinary",
+      "Point_Coordinates",
+      "Point_Lines"
+    ],
+    "reuses": "Same PointBody and action signal; local/world coordinates and distance; address, loops, old-to-next buffers; a state and its chosen output.",
+    "given": "Existing Day Zero museum host, player, camera, lighting and XR Tools. Full presence.gd and unchanged point_body.gd printed. All learner geometry, materials, labels and colliders are constructed in code.",
+    "later": "Compact model uses manual steps and held point centre. Installed VISITOR resolves the physical body; PROBE, RUN and richer desk remain comparisons. Secondary chair/tree/crossway works are museum encounters, not required lesson code.",
+    "checks": [
+      "32 exact-printed-code native checks: 3D distance, four axial neighbours, strict thresholds, clamping, separate buffers, schedule comparison and 160 updates matching the installed solver.",
+      "Independent height and .49 threshold exercises; flat-distance and accidental-scan faults rejected; native material, collision, actual XRTools pickup/action/release with supplied poses; keyboard and limit.",
+      "37 native museum checks including cameras: four sources, held-point parity, release/recovery, shared materials, schedules, falling body, climbed ramp, four routes/255 capsule-and-floor samples and portal approaches."
+    ],
+    "transfer": "Move the held point above the radius and predict recovery. Change CHAIN W from .495 to .49; in forward SCAN it reaches .5, still cannot contribute to the next cell because healthy means strictly greater than .5.",
+    "carry": "External input can alter future state; visual presence, physical support and recovery participation are distinct permissions. Timing of reads belongs to the rule.",
+    "next": "CA_SoftRules: inspect the installed primary and what its neighbourhood reads beyond a thresholded count; keep one carried object and one tested reconstruction.",
+    "notes": "One-fifth-scale learner model reverses its visual mapping to retain simulation units. It samples PointBody centre only while held; the installed VISITOR samples tracked body origin, not pressure. Bridge solver unchanged. No physical headset, full portal transfer or independent student acceptance.",
+    "baseline": {
+      "tutorial": "6903ca03a1ab207c8f1346558222c02fec833ead9aace241ea8e3fa0c48ab295",
+      "choice": "1d2b4ba0f9a5e8b1a09fb345ecf4320bb75d2ee0a01d4f46ec71d9b4abbf5d22"
+    },
+    "summary": "Carry the same PointBody from STEP-only to spatial input. In a 5x16 fractional field, a held point within a 3D radius removes health; otherwise four healthy axial neighbours permit recovery. Keep every address and show each value twice, on floor and wall. Below .2 floor support ends; only values above .5 aid recovery. Predict withdrawal and height changes. Revisit old-to-next with a three-cell SYNC/SCAN comparison, then edit .495 to .49 and explain the threshold. Carry explicit input/state/output separation toward soft neighbourhood rules. Optional encounter: attempt a route on the installed VISITOR bridge with RUN active, respond to lost support, and let that response change the next question before inspecting steps."
+  },
+  {
+    "id": "CA_SoftRules",
+    "decision": "draft",
+    "mode": "build",
+    "object": "Same PointBody plants a matched seed in two independent concentration fields, each shown twice.",
+    "change": "Move from thresholded neighbour counts to a four-neighbour difference sum. Compare exchange on/off while keeping the supplied reaction and beginnings equal.",
+    "dependsOn": [
+      "CA_ExpandingSpace",
+      "Point_Coordinates"
+    ],
+    "reuses": "Carried PointBody and action; world/local position to grid address; fractional state, arrays, loops, classes, old-to-next updates and field-to-colour mapping.",
+    "given": "Day Zero Endless Museum host, player, camera, lighting and XR Tools. Gray–Scott reaction terms and constants supplied and named. Three complete printed files create the compact field model, staging and point.",
+    "later": "Derivation and numerical analysis of the reaction model. Compact model uses keyboard clock/view/exchange; installed study keeps eight VR desk controls and body crossing. Clockmaker and four rear works remain encounters, not extra coding requirements.",
+    "checks": [
+      "39 exact-printed-file native checks; 2400 steps per exchange mode exactly match production arrays (maximum difference 0). Uniform sum, periodic boundary, independent old/new buffers, clamps, textures, support and supplied XRTools poses.",
+      "Transfer adds one corner seed in both fields. Predicted nine wrapped addresses and first outward V pass. Missing-centre-subtraction and in-place-read mutations fail the expected results.",
+      "40 native museum checks including cameras: selected hand seed, fixed body seed, withdrawal/reentry, replay while occupied, view/coating, clock and cap, four routes/294 clearance and floor samples, supported portal approaches."
+    ],
+    "transfer": "Add left.seed_at(Vector2i(0,0)) and right.seed_at(Vector2i(0,0)) after right.reset in the study. Predict nine wrapped sites and which field can give adjacent unseeded sites their first V.",
+    "carry": "Two values at one address; the neighbourhood offers differences. State, intervention, update and display have distinct jobs; same intervention can meet different field histories.",
+    "next": "CA_AgentsCircuits: audit the actual row-history / Sierpinski comparison. Its current encounter compares procedures behind resemblance; historical map title is not the lesson contract.",
+    "notes": "Field model separated as RefCounted. Same reaction as installed solver, fresh buffers instead of reused buffers. Point input explicitly replaces a 3x3 patch without stepping. Primary solver and walk receiver unchanged. No headset, Quest, full portal transfer or independent student acceptance.",
+    "baseline": {
+      "tutorial": "49c8387b24a4c7c8af589fad57f6c22979ff5624904b6e63f044e99b9fd7bd79",
+      "choice": "7ea7c24a126950599f3a8947350a62249836f782d5dffa857e8107f701cb0781"
+    },
+    "summary": "Bring the same held PointBody to two tables and place an identical seed. Each 32x32 site stores U,V. Sum four neighbour-minus-centre differences, combine with the named supplied reaction, and write both next arrays before replacing the present. Predict W=(12,15): exchange gives (.92,.02), no exchange (1,0). Enable both to recover agreement. Change the palette without changing state. Add a corner seed, predict its nine wrapped sites, then watch exchange carry V beyond it. Carry input/state/update/display separation into a comparison of different procedures behind similar forms."
+  },
+  {
+    "id": "CA_AgentsCircuits",
+    "decision": "draft",
+    "mode": "reuse",
+    "object": "Same PointBody inspects and steps a Rule 90 history beside a fixed recursive cube construction.",
+    "change": "Compare a next-state calculation with a supplied placement recipe. Change the beginning of one and identify which output responds.",
+    "dependsOn": [
+      "CA_Introduction",
+      "CA_GameOfLife",
+      "Point_Coordinates"
+    ],
+    "reuses": "Carried point/action, world-to-local address, Boolean state, old-to-next update, independent saved rows, arrays and loops, supplied classes and mesh instances.",
+    "given": "Existing Day Zero Endless Museum host, player, camera, lighting and XR Tools. Three full files create the learner comparison. Recursive six-offset placement recipe is supplied and explained one level at a time; derivation belongs to Fractals.",
+    "later": "Compact example fixes Rule 90, caps history at 24 rows and uses keyboard C/R for seed/replay; installed desk has wider VR rule controls and a scrolling floor receiver. Wireworld is archived proposal material, not an installed lesson. No universality or fractal-dimension proof.",
+    "checks": [
+      "29 exact printed-file native checks. All eight Rule 90 cases and 240 mixed-start updates match the installed evaluator. Ordered recursive positions match production at depths 0–4. Test independent rows, finite wrap, geometry/support, supplied XRTools poses and keyboard controls.",
+      "Transfer changes seed_sites to [14,16,18]: first next row contains only 13 and 19, while all 216 cube transforms remain fixed. XOR-to-OR and in-place-read defects are detected.",
+      "38 installed museum checks including cameras: actual pickup/step/release, floor history/colour/transforms, seed/reset/scrolling, all 1296 cube transforms, body walking, four routes/158 clearance and floor samples, supported portal approaches."
+    ],
+    "transfer": "Change seed_sites to [14,16,18]. Predict shared-neighbour cancellation, then show that only addresses 13 and 19 survive the first update and that no cube placement changes.",
+    "carry": "Ask what repeats, what it reads and what input can change it. Similar outlines do not establish the same procedure.",
+    "next": "CA_EdgeOfChaos: keep the procedure fixed and follow one changed starting value through two nearly matching volumes. Audit actual implementation before expanding the lesson.",
+    "notes": "Rule 90 and pyramid algorithms unchanged. Existing HandPoint adapter added to comparison branch. All three authored placements and floor retained; incidental sculpture cleared and portals moved to thresholds. Hall blurb and two catalogue captions corrected to the actual six-call/seed comparison. No headset, Quest, full portal transfer or independent student acceptance.",
+    "baseline": {
+      "tutorial": "fe258caa8f53ee9c35396b2b3115cadf38392fdd928a87a3d9d6918fff093a3e",
+      "choice": "efa9f0745167ef58fa3cfc57a3806e3c5a9b01925facbb9d22bc2a5ab4e98065"
+    },
+    "summary": "Return with the same point and Boolean row. Move the held point to inspect one address; trigger advances one generation. Rule 90 reads old left/right values and writes their inequality into a new row; saved rows make time visible on the table and floor. Compare this with the supplied six-offset recursive cube recipe, which reads positions, spacing and depth. Change seed_sites to [14,16,18], predict the next occupied addresses 13 and 19, and confirm the fixed pyramid has not moved. Carry the distinction between changing state and repeating placement into a comparison of almost identical beginnings."
+  },
+  {
+    "id": "CA_EdgeOfChaos",
+    "decision": "draft",
+    "mode": "build",
+    "object": "Same PointBody selects a section of two nearly matching fields and triggers their next synchronous update.",
+    "change": "Copy one beginning, alter one address, apply the same procedure and forcing to both; distinguish stored difference, measured spread and display gain.",
+    "dependsOn": [
+      "CA_AgentsCircuits",
+      "CA_SoftRules",
+      "CA_ElementaryRules",
+      "Point_Coordinates"
+    ],
+    "reuses": "Carried point/action, world-to-local address, independent arrays, old-to-next update, scalar fields and neighbour exchange, model/display separation, supplied host.",
+    "given": "Day Zero Endless Museum host, player, camera, light and XR Tools. Full paired.gd, difference.gd and unchanged point_body.gd. Reproducible address/update forcing function supplied; no independent-random-sample claim.",
+    "later": "Compact reconstruction uses keyboard parameter controls; installed desk retains VR controls, body-selected depth and shared floor receiver. Finite 11-cubed fields, 100-update cap. Secondary works remain museum companions. No universal critical point or proof of chaos.",
+    "checks": [
+      "35 exact printed-file native checks. All values in 120 paired updates match the installed solver exactly across six settings. Analytic integer/fractional/zero-pull cases; 26 interior versus seven corner neighbours; old arrays, geometry, input, gain and cap.",
+      "Independent edit moves site to Vector3i(0,0,0): eight affected addresses, corner .75, edge contribution .25/11, interior contribution .25/26, no wrapping. Unmatched forcing and in-place update defects are detected.",
+      "43 installed museum checks including camera assertions: held point has priority over walking, trigger STEP cancels pending batch, release returns control to stationary body, slice/coat preserve state, real console actions, clock/cap, four routes/348 clearance and level-floor samples, supported portal approaches.",
+      "Optional author-made Trace/presence recorder-replayer: 13 fresh native checks, including 6400 cell values over 80 updates. Required code unchanged; not an independent student or physical VR encounter."
+    ],
+    "transfer": "Move site from (5,5,5) to (0,0,0), keep uniform fractional storage, zero drive and pull .25. Predict eight changed addresses, then explain why receiving cells divide by different neighbour counts.",
+    "carry": "Separate disappearance from view, disappearance from a thresholded count and disappearance from stored state. More affected addresses need not mean a larger difference.",
+    "next": "Fractal_Recursion in the museum: contrast local exchange with explicit repeated construction. The eight CA hall drafts are now ready to read together before another expansion.",
+    "notes": "Installed difference_model.gd and self_organization_ca.gd unchanged. Add carried point beside console and hand priority to walking reader. Retain all five authored works and level floor; move portals to thresholds. Native tests and images only; no physical headset, Quest, independent student or full portal transfer. Rear billboard labels still draw through the main view; secondary interactions remain outside this pass.",
+    "baseline": {
+      "tutorial": "3663a6fe639770d6df6111c74468d671aeb52cd9800908d5a6b19155229aa48e",
+      "choice": "9231723ffa54d4a955bb56b8e4a1ffc094fba2e1798b713ad08028018fcc8795"
+    },
+    "summary": "Bring the same point to two 11-cubed fields. Duplicate the beginning, change one address in B and advance both through the same old-to-next neighbour average and forcing schedule. Move the held point to inspect a Z section; trigger one update. Release returns the installed reader to walking. Compare integer storage erasing the uniform intervention, fractional storage spreading a weaker difference, and zero pull keeping it whole in one place. Read affected count, maximum and image gain separately. Move the changed address to a corner and predict eight affected cells with unequal neighbour denominators. Carry the distinction between a state, its measurement and its image into Fractals. Optional composition after the required study: return to an earlier operation and follow an emergent question. Trace can record each committed input, including pauses and presence, for exact replay and another attempt; other connections remain open."
+  }
+]

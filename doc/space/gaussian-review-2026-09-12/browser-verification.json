@@ -1,0 +1,129 @@
+{
+  "checkedAt": "2026-09-12T21:01:27.740Z",
+  "reviewUrl": "http://localhost:3003/research/possible-bodies/random-gaussian.html",
+  "primaryUrl": "http://localhost:3003/necklace/thread?map=Random_Gaussian&role=primary",
+  "checks": [
+    {
+      "test": "Initial captured samples, images and width",
+      "images": [
+        {
+          "alt": "The existing distribution cabinet from the desktop visitor's operating position",
+          "loaded": true
+        },
+        {
+          "alt": "Twelve actual GAUSS values at seed 31415, with blue sample bars, pale model counts and the orange model shape",
+          "loaded": true
+        },
+        {
+          "alt": "GAUSS at N 300 and seed 31415",
+          "loaded": true
+        },
+        {
+          "alt": "UNIFORM at N 300 and seed 31415",
+          "loaded": true
+        },
+        {
+          "alt": "The cabinet's account identifies issued and landed evidence, clipping, bins, seed and running state",
+          "loaded": true
+        }
+      ],
+      "overflow": false,
+      "plots": [
+        {
+          "bars": 30,
+          "count": 12,
+          "side": "left"
+        },
+        {
+          "bars": 30,
+          "count": 12,
+          "side": "right"
+        }
+      ],
+      "status": "12 retained values per plot · 30 bins · changing bins makes no new draws."
+    },
+    {
+      "test": "One thousand exponential values in ten bins",
+      "view": {
+        "left": "Retained mean 0.162196 · binned mean 0.166. Clipped 0; edge bins 458 | 1.",
+        "note": "Right sample deliberately selected: first seed in 1..20 with at least one clipped draw among 1000; deliberate edge example. Its full thousand contains 2 clipped values; a shorter prefix may contain none.",
+        "right": "Retained mean 0.173600 · binned mean 0.178. Clipped 2; edge bins 422 | 6.",
+        "status": "1000 retained values per plot · 10 bins · changing bins makes no new draws."
+      }
+    },
+    {
+      "test": "Same retained values in thirty bins",
+      "view": {
+        "left": "Retained mean 0.162196 · binned mean 0.162. Clipped 0; edge bins 177 | 0.",
+        "plots": [
+          {
+            "bars": 30,
+            "count": 1000,
+            "side": "left"
+          },
+          {
+            "bars": 30,
+            "count": 1000,
+            "side": "right"
+          }
+        ],
+        "right": "Retained mean 0.173600 · binned mean 0.174. Clipped 2; edge bins 159 | 4."
+      }
+    },
+    {
+      "test": "Individual retained-value strip",
+      "view": [
+        {
+          "colours": {
+            "#537467": 1000
+          },
+          "side": "left",
+          "ticks": 1000
+        },
+        {
+          "colours": {
+            "#537467": 998,
+            "#b43b58": 2
+          },
+          "side": "right",
+          "ticks": 1000
+        }
+      ]
+    },
+    {
+      "test": "Discrete law at sixty bins",
+      "view": {
+        "left": "Retained mean 0.335800 · binned mean 0.344. Clipped 0; edge bins 4 | 2.",
+        "right": "Retained mean 0.498038 · binned mean 0.498. Clipped 0; edge bins 0 | 0.",
+        "status": "1000 retained values per plot · 60 bins · changing bins makes no new draws."
+      }
+    },
+    {
+      "test": "One retained value per plot",
+      "view": {
+        "status": "1 retained values per plot · 60 bins · changing bins makes no new draws.",
+        "totals": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "test": "Book passage opens in review",
+      "view": {
+        "open": true
+      }
+    },
+    {
+      "test": "Primary and book match in the live encyclopedia",
+      "view": {
+        "cards": [
+          "1. distribution_sampler"
+        ],
+        "openBook": true,
+        "primaryButton": "primary · 1",
+        "wordLabel": "primary · 820 words in the book"
+      }
+    }
+  ]
+}

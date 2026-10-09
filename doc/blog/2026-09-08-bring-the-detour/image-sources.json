@@ -1,0 +1,39 @@
+{
+  "captured_images": {
+    "portals.png": "ada_run/portals_primary/portals.png",
+    "trace.png": "ada_run/trace_data_panel/preview.png",
+    "grid.png": "ada_run/grid_lines_discovery/preview.png"
+  },
+  "diagram": {
+    "file": "triangle-fan.svg",
+    "source": "commons/maps/Point_Triangle_Context/final.md",
+    "coordinates": [
+      [
+        0,
+        0
+      ],
+      [
+        1.2,
+        0
+      ],
+      [
+        1.2,
+        0.4
+      ],
+      [
+        0.4,
+        0.4
+      ],
+      [
+        0.4,
+        1.2
+      ],
+      [
+        0,
+        1.2
+      ]
+    ],
+    "algorithm": "First vertex connected to successive pairs, for i in range(1, n-1)",
+    "kind": "explanatory diagram, not engine screenshot"
+  }
+}

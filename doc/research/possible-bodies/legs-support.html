@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Legs — What lets a body stand?</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0} table{font-size:14px} pre{overflow:auto;background:#fff;padding:18px}</style><main><h1>What lets a body stand?</h1>
+<p><a href="index.html#VFM_09_Legs">Working route</a> · <a href="/necklace/thread?map=VFM_09_Legs&amp;role=primary">Book primary</a> · <a href="gravity-relations.html">Previous: Gravity</a></p>
+<p><strong>The Legs hall now starts with a physical support experiment.</strong> A large pink plate waits above four narrow posts. Remove supports, shift its mass centre, and release. Then visit the original seven walkers and distinguish an image of walking from a body supported by contact.</p>
+<p><img alt="Three posts supporting the released plate, with the load shifted toward the supported corner" src="legs_support.png" /></p>
+<h2>The experiment</h2>
+<ol>
+<li>Press RELEASE on the opening four-post arrangement. Watch the plate settle.</li>
+<li>Press FEET once to remove the first corner post and reset.</li>
+<li>Press SHIFT once, then RELEASE: the mass moves toward the supported corner.</li>
+<li>Press SHIFT again, then RELEASE: the same plate tips toward the missing corner.</li>
+<li>Reveal PARTS and RULE. Compare the initial support footprint with the live mass projection and measured tilt.</li>
+</ol>
+<p><img alt="The same three supports with the mass centre shifted toward the missing corner; the plate tips" src="legs_tipping.png" /></p>
+<p>The first checked release stayed level. The second reached about 39.9 degrees of tilt after 120 physics frames. These are actual rigid-body outcomes under the tested settings; their paths are not animated by this artifact.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>What changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FEET</td>
+<td>Four posts → three → adjacent pair → diagonal pair; each edit resets held.</td>
+</tr>
+<tr>
+<td>SHIFT</td>
+<td>Mass centre at the middle → supported diagonal → opposite diagonal; each edit resets held.</td>
+</tr>
+<tr>
+<td>RELEASE</td>
+<td>Unfreeze the rigid load so engine gravity and contact determine motion.</td>
+</tr>
+<tr>
+<td>RESET</td>
+<td>Return to the level, held beginning; retain the selected settings.</td>
+</tr>
+<tr>
+<td>PARTS</td>
+<td>Reveal the X-ray mass centre, floor projection, initial footprint, wall comparison, tilt and signed initial margin.</td>
+</tr>
+<tr>
+<td>RULE</td>
+<td>Explain finite pads, vertical gravity and the limits of a static forecast.</td>
+</tr>
+</tbody>
+</table>
+<p>The load is 10 kg. Its silhouette stays fixed while its custom centre of mass changes. Its assigned inertia tensor also stays fixed: this is an experiment isolating load position, not a detailed model of material redistribution. Plate, posts and catch floor have friction 0.8 and zero bounce. The player does not collide with or push the experimental plate.</p>
+<h2>A foot has width</h2>
+<p>The footprint encloses the corners of the selected <strong>0.16 m square pads</strong>, not ideal contact points. Two opposed pads can therefore make a narrow support region. Reducing them to points would make a line, leaving no margin for sideways movement. Leg count alone cannot settle the question.</p>
+<p>The floor and wall outline keep the initial support geometry. The mass projection and measured tilt follow the released body. Once the plate tips, contacts can change; the outline is explicitly a forecast, not a live contact sensor. The wall compresses the plan's Z dimension to fit its display.</p>
+<h2>The walker that keeps going</h2>
+<p><img alt="The retained four-leg procedural walker in the current museum" src="legs_walker.png" /></p>
+<p>The second book anchor is <strong>four_leg_critter</strong>. Its mesh advances through patrol code; planted feet wait and a selected foot swings to a new target. Inverse kinematics fits the joint chain toward that target. Its controller does not consult a support polygon before lifting, and gravity does not tip the mesh. The body can look supported without the simulation solving body support.</p>
+<p>All seven original walkers remain in their row, shifted sixteen cells along Z to make space for the new encounter. Twenty-nine interior wall/platform cells were flattened so the architecture no longer cuts through the walking comparison; the outer walls remain. The map grows from 32 × 18 to 32 × 34, with eight artifact identities total and two primary book anchors. We retain the row as related implementations rather than claiming that only leg count varies, or that four legs necessarily imply diagonal pairing.</p>
+<p><strong>37 actual-museum desktop checks pass.</strong> They cover held state, engine release, support and tipping outcomes, reset, finite-pad margins, explicit material, exact mass marker, floor/wall display, controls, sampled standing approaches and the retained four-leg walker. Captures are actual desktop views. Headset reach, readability, comfort and sustained performance remain open, along with detailed review of the other six walkers.</p>
+<p><a href="legs-support-check.json">Desktop report</a> · <a href="legs-support-placements.json">Placement ledger</a></p>
+<p>The boot still reports an existing unresolved UID and shader-cache write warnings. These are outside this experiment's verification.</p>
+<p><strong>Next: <a href="arena-relations.html">VFM_08_Arena</a>.</strong> Which parts of an agent's movement come from forces, which from its controller, and which relations to the player are implemented?</p>
+<hr />
+<h2>Book draft</h2>
+<h1>What lets a body stand?</h1>
+<!-- @support_polygon_lab -->
+
+<p>In Gravity, the bodies passed through one another. A surface appeared in the light, but the calculation gave it no skin. This pink plate meets something different: four narrow posts, offering places where falling can be interrupted.</p>
+<p>It is waiting. Press RELEASE. Almost nothing happens. That almost is worth watching: the plate drops the small distance to the supports, and they answer. Staying still is now an outcome of contact.</p>
+<p>Press FEET once. One post disappears and the plate returns to its held beginning. Before releasing it, choose where you think it will go. SHIFT moves the load toward one corner; another press moves it toward the opposite corner. Compare those two releases with the same three supports. The missing post has not returned. Why can one beginning stay level?</p>
+<p>Reveal PARTS. A gold marker shows the mass centre through the plate, and a line projects it onto the floor. The outline joins the outer edges of the available support pads. The wall carries that same initial footprint and the live projection of the mass centre. You can walk around the plate and still keep the relation in view.</p>
+<pre><code class="language-gdscript">hull=Geometry2D.convex_hull(corners)
+</code></pre>
+<p>The corners belong to the little squares at the tops of the posts. Their convex hull is the smallest convex outline enclosing them. With the load initially level, gravity vertical and the supports horizontal, the position of the projected mass centre tells us whether these upward contact forces can balance its weight without a tipping moment. Inside gives room to distribute the support. Outside asks the posts to provide something they cannot: a downward pull from a place where there is no fastening.</p>
+<p>SHIFT changes the rigid body's custom centre of mass. Its silhouette remains the same. The gold mark moves because the simulation has changed where its ten kilograms are represented as acting. A body can become different without acquiring a different outline.</p>
+<p>This is a deliberately sparse body: one rigid plate, a chosen inertia tensor, one mass centre. The fixed inertia stays the same across SHIFT. We are isolating a change of load position, not rebuilding a detailed internal distribution of matter. Its empty-looking interior is full of decisions.</p>
+<p>Try FEET again. Two neighbouring posts remain. Try the next arrangement: two opposite posts. Same count, different relation. The diagonal pair leaves a very narrow region around the centre. Move the load out of it.</p>
+<p>A foot is not necessarily a point. Each pad here is sixteen centimetres wide. Replace the pads by ideal points and the diagonal region contracts to a line: no room for a sideways displacement. On its boundary, balance would be marginal, not automatically a fall. Our earlier habit of counting points has left something out. Width can change what that count permits.</p>
+<p>The right-hand display names its number <strong>initial support margin</strong>. Positive means the opening mass projection lies inside the footprint; negative means outside. After release, the plate can tilt, lose contacts and find new ones. The outline does not pretend to follow those changing contacts. It preserves the prediction beside what actually happens.</p>
+<pre><code class="language-gdscript">body.freeze=false
+body.sleeping=false
+</code></pre>
+<p>Those are the small instructions that release the plate. The engine then integrates gravity and resolves collisions. We have not written its falling path. The museum floor and your body occupy a separate collision arrangement: you can inspect this experiment, but walking into the plate does not push it. Yet another permission deciding which bodies can meet.</p>
+<!-- @four_leg_critter -->
+
+<p>Beyond the table, seven creatures are already walking. Find the one with four legs. Follow a foot while the body travels past it. For a while the foot stays where it was planted. Then it swings through the air and lands ahead.</p>
+<p>It looks like an answer to the table's problem. What happens to its support when that foot lifts?</p>
+<p>This walker selects the planted foot furthest beyond its distance threshold, provided no other foot is already stepping. It moves one foot at a time. Four legs have not forced it into a trot; a branch in the program has chosen this sequence.</p>
+<pre><code class="language-gdscript">var smooth_t: float = t * t * (3.0 - 2.0 * t)
+pos = _leg_step_from[leg_index].lerp(_leg_step_to[leg_index], smooth_t)
+var arc: float = 4.0 * t * (1.0 - t)
+pos.y += step_height * arc
+</code></pre>
+<p>The curve we met as a pattern over time now lifts a foot target. The joint chain reaches toward that target. This is useful work: it makes the planted interval and the swing legible. But reaching the ground and receiving support from it are different operations.</p>
+<p>The body itself is a mesh whose position is advanced by the patrol code. Its gait does not ask the support hull for permission, and gravity does not tip this body when the answer would be no. The creature keeps going. The plate had to negotiate its stillness with contact; this walker has been granted movement directly.</p>
+<p>Look along the row. One leg, two, three, four, five, six, eight. These are related constructions with different rigs and stepping rules, not a proof that a count dictates a way of living. The row is now a set of questions we can bring back to the table. Which feet are planted? How broad is a foot? Where is the load? Is the body trying to remain still, or carrying momentum into another step?</p>
+<p>The gap between a persuasive walk and a supported body is material for another experiment. We could give a creature wider feet, a shifting load, a tail that can touch the ground, or a controller that catches a fall. Each addition would change what bodies this little world can sustain. It would also ask for new code and a new test.</p>
+<p>The Arena is ahead. There, a moving body will share space with yours. We carry a more exact question into that encounter: which of its actions come from forces, which from a controller, and which relations to you has the world actually implemented?</p></main></body></html>

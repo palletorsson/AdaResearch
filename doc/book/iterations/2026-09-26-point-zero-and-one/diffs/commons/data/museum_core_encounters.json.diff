@@ -1,0 +1,63 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -7,24 +7,23 @@
+   "rooms": {
+     "Point_One": {
+       "primary_tokens": [
+-        "frame_counter_display",
+-        "folding_past",
+-        "origin",
+-        "the_invisible_point",
+-        "code_evolution_screen",
+-        "interactive_point_origin_force",
++        "point_absent",
++        "point_visible",
++        "point_solid",
++        "point_held",
+         "coordinate_readout",
+         "CoordinateSystem3M",
+-        "drag_point_target"
+-      ],
+-      "reason": "Eight first-walk encounters in the authored role order. The two readouts and coordinate frame form one encounter; folding_past is the configured lobby view. Fontana and the floating field remain secondary; wireframe_threshold belongs to the later triangle encounter.",
+-      "status": "existing_text_retained",
++        "drag_point_target",
++        "point_pedestal"
++      ],
++      "reason": "Separate visibility, collision and pickup before naming coordinates; return to the same name on a 1.3 m diameter sphere. Secondary comparisons remain.",
++      "status": "revised_native_desktop_checked",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_One/final.md",
+-      "text_sha256": "c2535d3e2200087b57aa497db5447561600922e8f87fb3f65eb8f74e5386feb2",
+-      "map_sha256": "3205471c1850d7e5b8618fb03c69ab76bce17981d4d2db9567e50b0a0d772689",
+-      "learner_verified": false,
+-      "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Point_One"
++      "text_sha256": "b6c025f550123dc33605051dab8c71569274f4677eee6b42ab34e951e8e08f7b",
++      "map_sha256": "2596009172ea907a95d526ff2019d90ba4eed296e125a857a912bea4be692b89",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-26-point-zero-and-one/index.html"
+     },
+     "Point_Lines": {
+       "primary_tokens": [
+@@ -2869,6 +2868,22 @@
+       "text_sha256": "d595d6c53e8785b12c6c4990f9cf04283e9610f61957c61c393f058a120b5bcb",
+       "map_sha256": "9f66cbfb8a2994adcd0bf60556ea3920c2706a7cdfa008d09efb0730aa0d584c",
+       "verification_scope": "66 isolated native checks, including 20 route segments, exact shared local geometry, uniform scale, two-sided surface collision and supports. Full museum-loader, tracked-headset, Quest and learner checks pending."
++    },
++    "Point_Zero": {
++      "primary_tokens": [
++        "arrival_shaft",
++        "frame_counter_display",
++        "folding_past",
++        "origin"
++      ],
++      "reason": "Fall into a running room; folding, inherited work and chosen origin carry the first chapter. The removable you is retained.",
++      "status": "revised_native_desktop_checked",
++      "sequence": "primitives",
++      "text_path": "commons/maps/Point_Zero/final.md",
++      "text_sha256": "76f5df115433a529c533b23cb3bf53221cfecd44d2e74c81f3ca2e5f6e9b2c84",
++      "map_sha256": "d94f4e054d56d0b1a4fc5882ca5d98cea3023f8534b3e3bc2e2207485c220e4b",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-26-point-zero-and-one/index.html"
+     }
+   }
+ }

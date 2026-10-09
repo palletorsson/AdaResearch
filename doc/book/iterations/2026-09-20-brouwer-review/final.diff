@@ -1,0 +1,174 @@
+--- before/commons/maps/Brouwer_Intuitionism/final.md
++++ commons/maps/Brouwer_Intuitionism/final.md
+@@ -1,112 +1,91 @@
+-A staircase with a few steps at the bottom and nothing above them, and the nothing is not unfinished. It is the correct state.
++Wait before touching anything.
+ 
+-Everything so far in this sequence has been a limit discovered from inside: a postulate that cannot be proved, a set that cannot be defined, a loop that cannot close. This room is the first of two answers, and it is the severe one. Brouwer's response to the crisis was not to patch the foundations. It was to say that a large part of what mathematics had been doing was never legitimate, and to give up the results rather than the standard.
++The game keeps running. The row does not grow. For once, the clock is not the author of the next term.
+ 
+-The rule is one sentence. **To assert that something exists, you must produce it.**
++## A place you have not filled
+ 
+-## The third option
++<!-- @brouwer_choice_sequence -->
++
++Choose **0**. A blue bead appears, with its value above it. Choose **1**. An amber bead follows. Try a few more, then stop.
++
++The question mark stays ahead of what you have made. There is no next value concealed behind it, waiting for the animation to reveal it. The program has not stored one. Your next press will append it:
++
++```gdscript
++terms.append(value)
++```
++
++We met the array much earlier. Here it holds a record of decisions. The order matters: `0, 1` is not `1, 0`. Waiting changes neither. **RESET** clears this record and lets another beginning happen.
++
++Ask a small question: does your current prefix contain a 1? You can inspect it. If it does, point to a position. If it does not, checking every stored term settles that finite question.
++
++Now imagine continuing without a final term. Will a 1 ever appear? A single chosen 1 would answer yes. However long a run of zeros you have made, that run alone does not show that no later choice will be 1.
++
++The difference is already in your hand: evidence about what has been made, and a claim about every continuation.
++
++Brouwer's choice sequences make room for construction that proceeds through time. Some sequences follow a rule; others admit choices as they develop.[^choice] This bench offers a modest encounter with that distinction. It records a finite binary prefix, shows its latest ten terms and stores at most 256. Filling that storage completes neither infinity nor the philosophical argument. It fills this instrument.
++
++And who chose the things you are allowed to choose? There are two buttons. You may make a rhythm, break it, repeat yourself, refuse to continue. The freedom has a shape before your hand arrives.
++
++## What would count as an answer?
+ 
+ <!-- @excluded_middle_demo -->
+ 
+-```gdscript
+-# excluded_middle_demo.gd:9
+-# essence: P ∨ ¬P — the law of excluded middle; Brouwer: "not always!"
+-```
++Two spheres name **P** and **not-P**. The sign between them means *or*. Move the reading slider. The objects stay; the caption changes the terms under which the statement may be used.
+ 
+-Two glowing spheres, P and not-P, with the disjunction between them, and a slider that flips the room between classical acceptance and intuitionistic doubt.
++Classical logic permits `P or not-P` without requiring us to settle which. Under the constructive reading, asserting that disjunction calls for a proof of one side. We may have neither proof. That lack is not a third truth value between true and false.[^logic]
+ 
+-Classically, `P ∨ ¬P` is free. Every proposition is true or false; you may use that before knowing which. It is what licenses proof by contradiction: assume not-P, derive absurdity, conclude P — and you have proved P exists without ever exhibiting it.
++Return to your row. The current finite prefix can be checked. An unrestricted question about an indefinitely continuing sequence asks for more. The distinction concerns the claim and its evidence, not whether you happen to feel certain.
+ 
+-Brouwer refused the licence. For him a mathematical statement is not a description of a pre-existing fact but a report on a construction, and a construction either has been carried out or has not. So there is a third state, and the tutorial in this room names it exactly: not true, not false, **not yet constructed**. The third option is the whole point, and it is not ignorance. There is no fact of the matter waiting to be uncovered, because on this account the fact is made by the proof.
++Contradiction still has work to do in intuitionistic logic: showing that an assumption leads to contradiction can establish its negation. What is unavailable in general is the further classical move from *not-not-P* to *P*. The slider is a comparison of these readings. It is not a machine deciding an arbitrary proposition for us.
+ 
+-This is one of two objects in the room you can actually operate. Hold on to that.
+-
+-## Show me
++## Show me which one
+ 
+ <!-- @constructive_proof -->
+ 
++The small cube offers the word *witness* a place to land. To establish that something with a property exists constructively, supply the thing and establish the property. In your row, a position holding 1 is a witness to “there is a 1 here.” A blue cube alone cannot witness every claim written beside it.
++
++Consider a classical existence argument. Let `c = √2^√2`. If c is rational, the irrational pair √2, √2 already gives a rational power. If c is irrational, the irrational pair c, √2 gives `c^√2 = 2`. Either way such a pair exists. This argument does not tell us which pair its case split has supplied.
++
++The constructive demand asks for that missing identification. It changes what we accept as evidence. It does not make every classical proof worthless, or require every mathematical object to be a physical object we have touched.
++
++## A witness you can check
++
++<!-- @cantor_diagonal_workbench -->
++
++At the workbench, set the list size to four. Four rows, four bits in each. Follow the gold diagonal. Underneath it, the red row gives the opposite bit at each position.
++
++Compare the red row with the first row: they disagree at the first position. Compare it with the second: at the second. Keep going. You can point to why the new string differs from every displayed row.
++
++Increase the size. More rows arrive; the earlier bits stay. The construction extends with them:
++
+ ```gdscript
+-# constructive_proof.gd:9
+-# essence: ∃x P(x) requires exhibiting x — no proof by contradiction allowed
+-# critical_parameter: the witness — without an explicit construction, the proof is rejected
++_d[i] = 1 - _list[i][i]
+ ```
+ 
+-The distinction, made into an object: knowing something exists, versus being able to point at it.
++This is a finite stage of diagonalisation. The mathematical argument for infinite binary sequences applies the same rule to every row of a proposed countable list. The headset displays finite strings, up to 32 bits here. Their disagreement is real and inspectable; displaying it does not display the completed infinite object.
+ 
+-The classical proof that there exist irrational `a` and `b` with `a^b` rational is the standard demonstration of how wide the gap is. Take √2 to the power √2. Either it is rational, in which case you are done, or it is irrational, in which case raise it to √2 again and you get 2, and you are done. The proof is valid, it is three lines, and at the end of it you cannot say which of the two cases you are in. It has proved that a witness exists without producing one.
++You now have two ways of extending a row. At the first bench you choose the next bit. Here a rule determines it from another bit. Both produce something, but they distribute the work differently.
+ 
+-Brouwer's answer is that it has therefore proved nothing. The word *exists* was doing work it had not paid for.
+-
+-What that costs is enormous, and honesty about the cost is part of teaching it: intuitionistic mathematics loses large parts of analysis, most of the theory of infinite sets, and any theorem whose only proof runs through contradiction. Brouwer accepted the loss. Hilbert, who did not, wrote that taking excluded middle from the mathematician was like taking the telescope from the astronomer.
+-
+-## Always unfinished
+-
+-<!-- @brouwer_choice_sequence -->
+-
+-```gdscript
+-# brouwer_choice_sequence.gd:8
+-# essence: a₁, a₂, a₃, ... , ?, ? — each term chosen freely, never completed
+-# critical_parameter: time — the sequence unfolds perpetually, dots gently bobbing
+-```
+-
+-A row of terms trailing off into question marks. Brouwer's choice sequences are his positive proposal, not just his prohibition: an infinite object that is never completed, only ever extended, where the next term is chosen and not determined. Infinity as a process rather than a finished set.
+-
+-Now read the two lines above against each other. The essence says *each term chosen freely*. The critical parameter is `time`, and the sequence unfolds perpetually on its own. Its header names the missing piece without flinching — *could add ability to "choose" the next term* — so the object whose entire content is free choice runs on a timer and chooses for you.
+-
+-That is the room's central irony and it is not confined to this one body. Of the four stations of the argument, two have controls and two do not; `constructive_proof` says *VR controls [missing]* in the same breath as declaring that the witness must be exhibited. A room whose claim is that nothing exists until a hand makes it, in which most of the hands are absent.
+-
+-I would not repair that by wiring buttons to everything. The gap is more useful named than closed, because it is the actual condition the philosophy describes: the construction is *possible*, nobody has performed it, and on Brouwer's own terms that means it does not yet exist. The room is in the state it is teaching.
+-
+-## The step that is not there yet
++## Whose construction?
+ 
+ <!-- @constructive_staircase -->
+ 
+-```gdscript
+-# constructive_staircase.gd:14
+-## truth: the next step isn't true-or-false until you build it — existence is
+-##   construction, not the absence of a contradiction.
+-```
++Watch the little staircase. Its steps appear on a timer, then dissolve and begin again. Cyan shapes preview what is about to be drawn. This model supplies a construction for you; it does not wait for a decision, and its treads do not carry your body.
+ 
+-Built steps are solid. Above them there is nothing, and the nothing is not a gap in the model.
+-
+-A classical mathematician looks at the unbuilt region and says: either the seventeenth step exists or it does not, we simply have not looked. Brouwer says there is no seventeenth step to have a property, and there will be one when someone builds it. Not hidden. Not undetermined. Absent.
+-
+-That is the difference between an epistemic gap and an ontological one, and it is the hardest idea in the room, which is why it is worth having it as a thing you can stand at the bottom of and look up from.
+-
+-## The one that does it properly
+-
+-<!-- @cantor_diagonal_workbench -->
+-
+-```gdscript
+-# cantor_diagonal_workbench.gd:6
+-# desire: learner viscerally feels uncountability — you can list "all" reals, and we
+-#   will construct one that isn't in the list, just by flipping the diagonal
+-```
+-
+-Nothing in the room says why this bench is here, so here is why it earns its place: it is the model constructive proof, and it is the other object you can operate.
+-
+-Cantor's diagonal argument is often taught as a proof by contradiction — assume the reals are listable, derive absurdity — but it does not have to be, and this bench does not present it that way. Turn the slider, the list grows, the diagonal extends, and a number is *built*, digit by digit, that differs from the first entry in the first place, the second in the second, and so on. At the end you are holding the witness. It is not that a missing real must exist; it is that here it is, and you watched it being made.
+-
+-So this is what Brouwer is asking for, standing in the same room as the objects that cannot deliver it. The procedure scales, it terminates at any length you choose, and it hands you the thing.
+-
+-## The two that assert
++Come back to the choice bench and wait again. The contrast is audible even in silence: one apparatus continues; the other leaves you time.
+ 
+ <!-- @angle_sum_triangle -->
+ 
+ <!-- @parallel_lines -->
+ 
+-Two objects have been carried forward from the first room and left here without explanation. They are the triangle whose angles sum to 180°, and the pair of parallel lines.
++The triangle and parallel lines return from the earlier geometry. Someone has already supplied their coordinates and relations. A preset is still a construction. What it may conceal is the work by which its particular case supports—or fails to support—a general claim. Look at the displayed shape and ask what the caption adds beyond it.
+ 
+-They are also, of everything in this sequence, the two artifacts that *assert rather than construct*. The triangle does not measure its corners; it prints the string `"60° + 60° + 60° = 180°"`, and the `curvature` knob its own header names appears six times in the file, every one of them inside a comment. The parallel lines have no script at all — the scene file is two line instances and two hand-typed transform matrices, parallel because somebody decided so and typed the numbers.
++<!-- @intractable_evidence -->
+ 
+-In a room about constructive proof, that is the entire lesson standing in the corner. Both objects state a result. Neither exhibits a witness. Both are, on the strict reading this room is teaching, claims for which no construction has been performed — and both are perfectly convincing to look at, which is the danger Brouwer was pointing at.
++The nearby sum over hypotheses brings another limit back from computation. A procedure may be specified and still cost too much to run. That is a different difficulty from having no constructive proof. A formula on a panel cannot tell us, by its appearance alone, which difficulty we face.
+ 
+-Whether they were placed here for that reason, I cannot tell from the map. They earn the position either way.
++This room has not made the world obey your hand. It has made a small part wait for it. Carry that difference onward: what has been asserted, what has been produced, and what follows from the production?
+ 
+-## What it costs
++[^choice]: Joan Rand Moschovakis, [Brouwer's Notion of Choice Sequence and Its Descendants](https://www.math.ucla.edu/~joan/Oslonewzoom2022handout.pdf), especially the distinction between lawlike sequences and successive choices. The binary bench is our finite teaching model.
+ 
+-This is the harder of the two responses to the crisis, and it works by giving things up. Brouwer keeps certainty by shrinking mathematics to what has been made, and pays for it in theorems.
+-
+-The next room takes the opposite route. Rather than refusing to assert what cannot be built, it refuses to panic about holding two assertions that contradict each other. Where Brouwer removes the third option and calls it *not yet*, Florensky keeps both options at once and declines to let the contradiction spread.
+-
+-No existence without witness. No truth without a hand that built it.
++[^logic]: Joan Moschovakis, [Intuitionistic Logic](https://plato.stanford.edu/entries/logic-intuitionistic/), sections 1–2. These explain the restriction on excluded middle, the continued use of contradiction to establish negations, and the constructive interpretation of disjunction and existence.

@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ISO_ImplicitModeling · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ISO_ImplicitModeling">← Tutorial lineage</a></p><h1>ISO ImplicitModeling</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ISO_ImplicitModeling/final.md">Raw captured source</a></p><pre># A surface found by looking
+
+&lt;!-- @implicit_surface_modeling --&gt;
+
+Must a surface exist as a triangle mesh before you can see it?
+
+You have passed this body three times already, at the back of the cave hall and twice in the metaball hall. Here its joins are set wider: the smoothing constant is 2.6 where the earlier copies used 0.4, so look first at what a larger constant does to a neck. Move around the rounded, changing form and inspect a smooth join between lobes. Compare its silhouette with the raymarched copy in the metaball hall. Both can look like a continuous body assembled from influences, but their images do not establish that the same calculation produced them.
+
+Keep one rounded join in view as you change position and watch the silhouette and shading change together. The image responds to the viewing direction, yet that alone cannot tell you whether a detailed collision surface exists there. Compare this observation with the earlier wireframe specimen, where small polygon boundaries supplied direct evidence of one representation. Here the smooth image leaves that representation question open until the rendering method is explained. Looking carefully can identify the evidence you have and the evidence a particular kind of display does not supply.
+
+Here, each sphere contributes a signed distance description. A smooth minimum combines those distances, rounding the joins between their regions. That differs from adding the inverse-square influences of the previous specimen. Similar-looking blends can arise from different field definitions.
+
+The display also takes a different route from field to image. For each viewing ray, a shader repeatedly queries the distance-like field and advances towards a possible boundary. When it reaches a sufficiently small value, it shades a surface point. The box used to host the shader does not become the detailed boundary of the visible body.
+
+Earlier rooms sampled a lattice, selected local cases and assembled triangles. This encounter queries the field from the viewer&#x27;s direction instead. It makes the separation between a geometric description and one way of displaying that description especially clear.
+
+The distinction has practical limits. The ray search stops after a bounded number of steps and distance, and its hit test has a finite tolerance. A visible boundary is also not automatically collision geometry. Seeing a smooth enclosure does not prove that another object, or your hand, can meet that enclosure physically.
+
+Before leaving, put your hand where a join looks most solid and notice that nothing meets it. The metaball desk’s extracted field would have given that join triangles, and with a collider, resistance. The same description shown both ways, side by side, is the comparison this room leaves you to make from memory.
+
+&lt;!-- @ --&gt;
+
+The next room turns a description into a building-like body. Its graph will specify intended connections, while its extracted shell must make those connections into passages a visitor can actually use.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ISO_ImplicitModeling/tutorial.md">Raw captured source</a></p><pre># Shape as a Condition
+
+A sphere is not vertices. It is a sentence: every point whose distance from the center equals the radius. Implicit modeling takes the sentence as the object.
+
+Signed distance functions are the cleanest dialect — each returns *how far to the surface*, negative inside:
+
+```gdscript
+func sd_sphere(p: Vector3, r: float) -&gt; float:
+    return p.length() - r
+
+func sd_box(p: Vector3, b: Vector3) -&gt; float:
+    var q := p.abs() - b
+    return q.max(Vector3.ZERO).length() + min(max(q.x, max(q.y, q.z)), 0.0)
+
+func sd_torus(p: Vector3, R: float, r: float) -&gt; float:
+    return Vector2(Vector2(p.x, p.z).length() - R, p.y).length() - r
+```
+
+The payoff is an algebra. Solid modeling becomes three one-liners:
+
+```gdscript
+func op_union(a: float, b: float) -&gt; float:        return min(a, b)
+func op_intersect(a: float, b: float) -&gt; float:    return max(a, b)
+func op_subtract(a: float, b: float) -&gt; float:     return max(a, -b)
+```
+
+`min` says &quot;the nearer surface wins&quot; — union. `max` keeps only where both are inside — intersection. Negating one flips its inside out — subtraction. The entire CSG chapter of this curriculum, three functions.
+
+The distinctly implicit move is the *smooth* union — blending shapes no mesh operation can blend:
+
+```gdscript
+func op_smooth_union(a: float, b: float, k: float) -&gt; float:
+    var h := clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0)
+    return lerp(b, a, h) - k * h * (1.0 - h)
+```
+
+`k` is the fillet radius: 0 gives a hard seam, 0.5 melts the joint like wax. A model, then, is one function:
+
+```gdscript
+func model(p: Vector3) -&gt; float:
+    var body := op_smooth_union(sd_sphere(p - Vector3(0, 1, 0), 1.0),
+                                sd_box(p, Vector3(1.2, 0.4, 1.2)), 0.3)
+    return op_subtract(body, sd_torus(p - Vector3(0, 1.2, 0), 0.9, 0.25))
+```
+
+Feed `model` to marching cubes and it becomes walkable; hand it to a raymarcher and it renders without ever becoming a mesh at all.
+
+Try: change one constant and re-extract. There is no undo stack because there was never an edit — only a claim about space, revised. The mesh was always just a quotation from the function.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ISO_ImplicitModeling/technical.md">Raw captured source</a></p><pre># ISO_Implicit_Modeling - Technical
+
+Implementation notes for `isosurfaces` map construction, artifacts, and utility flow.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ISO_ImplicitModeling/critical.md">Raw captured source</a></p><pre># ISO_ImplicitModeling — Critical Reflection
+
+A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. The implicit_surface_modeling artifact defines shape as equation — every point in space returns a signed distance. Negative means inside. Positive means outside. Zero is the surface itself. Boolean operations become arithmetic: union is minimum, intersection is maximum, subtraction is negation followed by intersection. No polygon clipping, no edge cases, no manifold repair. Sculpting reduced to inequalities.
+
+Simondon&#x27;s individuation theory begins with a provocation: the individual is not primary. The preindividual field — the supersaturated solution, the metastable system — precedes the individual and contains the potential from which individuation draws. Implicit surfaces enact this ontology computationally. The signed distance field exists everywhere in space simultaneously. The surface is not constructed; it is the locus where the field crosses zero. The individual (the surface) does not exist independently of the field that defines it. Remove the field, and the surface does not persist as a mesh in memory — it simply ceases to be evaluable. The implicit surface is Simondon&#x27;s individual: inseparable from the preindividual conditions that give rise to it.
+
+Maurice Merleau-Ponty&#x27;s phenomenology of perception adds a bodily dimension. For Merleau-Ponty, perception is not the passive reception of sense data but the active exploration of a field of possible experiences. The body moves through the world not by computing positions but by feeling gradients — leaning toward the interesting, recoiling from the threatening, orienting by the felt sense of where things are. The signed distance field is a perceptual field made computational. Every point knows how far it is from the surface and in which direction the surface lies. To navigate an SDF is to move through a world that everywhere tells you where the boundary is, even when you cannot see it. The field perceives on your behalf.
+
+What does this map normalize? That objects are best described by their boundaries rather than their interiors. The signed distance field privileges the zero-crossing — the skin where inside becomes outside. Everything else is gradient, auxiliary, a means to find the surface. This is a topological worldview: objects are their boundaries, and boundaries are where the field changes sign. The interior of the sphere is just &quot;negative.&quot; The exterior is just &quot;positive.&quot; Only the transition matters.
+
+What does it exclude? The interior as a space of its own. In material science, the inside of an object is not homogeneous — it has grain, density variation, stress distributions, voids. In biology, the interior of a body is where organs work, where chemistry happens, where life is. The implicit surface model flattens all interiors to a single sign. Inside is inside. The signed distance field knows how far you are from the surface but nothing about what you are inside of. Two objects with identical surfaces but different interiors are indistinguishable in SDF space.
+
+Merleau-Ponty&#x27;s concept of flesh — the chiasmic intertwining of perceiver and perceived, where touching is always also being touched — finds a strange echo in the smooth-minimum operation. When two fields blend, their surfaces do not collide. They negotiate. The smooth minimum curves the transition, a parameter controlling &quot;how much the shapes know about each other.&quot; This knowing is mutual: each field deforms in the other&#x27;s presence. The resulting surface belongs to neither original shape but to their relationship. This is flesh in computational form — two bodies that cannot meet without transforming each other.
+
+The compact workshop — low room, intimate scale — forces close inspection. You examine boolean operations at arm&#x27;s length. The architecture says: this is craft, not spectacle. You are the sculptor, and your tools are inequalities. But the tools are also the medium. The signed distance field is not a tool applied to material — it is the material. To sculpt in SDF space is to sculpt the field itself, and the surface follows. The sculptor does not shape the clay; the sculptor shapes the conditions under which clay takes shape. The object is not constructed. It is described. What satisfies the equation exists. Everything else is empty space.
+
+Is an object that exists only as a condition — never as a thing, always as a threshold in a field — more real or less real than a mesh made of triangles?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ISO_ImplicitModeling/artifacts.md">Raw captured source</a></p><pre># ISO ImplicitModeling — Artifacts
+*Isosurfaces: Implicit to Explicit · F_order · 1 artifacts*
+
+&gt; A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside. Positive means outside. Zero is the surface itself.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Implicit Surface Modeling
+![Implicit Surface Modeling](/scene-catalog/implicit_surface_modeling.png)
+
+Metaball-based implicit surface generation and modeling
+
+`implicit_surface_modeling`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ISO_ImplicitModeling/summary.md">Raw captured source</a></p><pre># ISO_Implicit_Modeling - Summary
+
+Prototype layout for `isosurfaces`.
+Document spatial logic, core interaction loop, and sequence connection here.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ISO_ImplicitModeling/blurb.md">Raw captured source</a></p><pre>A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside. Positive means outside. Zero is the surface itself.
+
+Boolean operations become arithmetic. Union: take the minimum. Intersection: the maximum. Subtraction: negate one field, then intersect. No polygon clipping, no edge cases, no manifold repair. Sculpting reduced to inequalities.
+
+Blend two fields and hard edges soften into organic joins. Smooth minimum curves the transition — a parameter controls how much the shapes know about each other. The final map in the sequence. Sixteen tiles of implicit logic. Shape without geometry, form without vertices. The object isn&#x27;t constructed — it&#x27;s described. What satisfies the equation exists. Everything else is empty space.</pre></section></body></html>

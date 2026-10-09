@@ -1,0 +1,31 @@
+{
+  "room": "Change_Intro",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Change_Intro/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Change_Intro/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Change_Intro/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Change_Intro/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Change_Intro/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Change_Intro/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Change_Intro/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Change_Intro/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Change_Intro/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Change_Intro/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Change_Intro/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Change_Intro/map_data.json": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+    "doc/book/iterations/2026-09-25-change-review-comments/museum-probe.gd": "19644c033bdaeacf56a871e99ca76db446a3defe9e7306257fce0ddfd4495ccd",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Change_Intro/control.json": "913c123fee9aae5e70cfb2a54fbde26993e1cc03924cfdafc9a1722a77a8c808",
+    "ada_run/encounter_pilot/Change_Intro/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Change_Intro/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Change_Intro/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/change.json": "711a55c711bf5c024c12902feb0f34683816b906d52de1578d3e4f89d9783750",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn": "6187370bd45d62f7c5a79c1a4d31a2f0c63adfd78b16b7dc9a320d973f44048a",
+    "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc"
+  }
+}

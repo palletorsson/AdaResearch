@@ -1,0 +1,45 @@
+[
+  {
+    "fault": "missing-centre",
+    "rejected": true,
+    "failures": [
+      "quarter turn 0 has correct signed offsets",
+      "quarter turn 0 graph shares height",
+      "quarter turn 1 has correct signed offsets",
+      "quarter turn 1 graph shares height",
+      "quarter turn 2 has correct signed offsets",
+      "quarter turn 2 graph shares height",
+      "quarter turn 3 has correct signed offsets",
+      "quarter turn 3 graph shares height",
+      "independent variation predicts top position",
+      "translated centre stays outside radius multiplication"
+    ]
+  },
+  {
+    "fault": "swapped-coordinates",
+    "rejected": true,
+    "failures": [
+      "quarter turn 0 has correct signed offsets",
+      "quarter turn 0 graph shares height",
+      "quarter turn 1 has correct signed offsets",
+      "quarter turn 1 graph shares height",
+      "quarter turn 2 has correct signed offsets",
+      "quarter turn 2 graph shares height",
+      "quarter turn 3 has correct signed offsets",
+      "quarter turn 3 graph shares height",
+      "independent variation predicts top position"
+    ]
+  },
+  {
+    "fault": "wrong-graph-axis",
+    "rejected": true,
+    "failures": [
+      "quarter turn 0 graph X measures angle",
+      "quarter turn 1 graph X measures angle",
+      "quarter turn 2 graph X measures angle",
+      "quarter turn 3 graph X measures angle",
+      "full turn spans four metre graph",
+      "smaller radius retains graph angle scale"
+    ]
+  }
+]

@@ -1,0 +1,304 @@
+{
+  "checks": 40,
+  "failures": [],
+  "flat_control": {
+    "NARROW": [
+      {
+        "band": "X",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          7.5,
+          0.000933712290134281,
+          37.6332550048828
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332546234131,
+        "width": 0.44
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.29999999999998,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          14.5,
+          0.000934773357585073,
+          37.6000022888184
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0000019073486,
+        "width": 0.44
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          21.5,
+          0.000934178475290537,
+          37.6333084106445
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0333080291748,
+        "width": 0.44
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          28.5,
+          0.00093404995277524,
+          37.6332588195801
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332584381104,
+        "width": 0.44
+      }
+    ],
+    "WIDE": [
+      {
+        "band": "X",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.000136283226311207,
+        "position": [
+          7.5,
+          0.00093579274835065,
+          37.6332855224609
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332851409912,
+        "width": 1.2
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.000136283226311207,
+        "position": [
+          14.5,
+          0.000935798685532063,
+          37.6333312988281
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0333309173584,
+        "width": 1.2
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 7.29999999999998,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.000136283226311207,
+        "position": [
+          21.5,
+          0.000935800024308264,
+          37.6000099182129
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0000095367432,
+        "width": 1.2
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": -0.00100408517755568,
+        "position": [
+          28.5,
+          0.00093577936058864,
+          37.6332778930664
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332775115967,
+        "width": 1.2
+      }
+    ]
+  },
+  "gradient": {
+    "NARROW": [
+      {
+        "band": "X",
+        "elapsed_s": 5.14999999999999,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": -0.506896078586578,
+        "position": [
+          7.5,
+          -0.506896078586578,
+          30.4995365142822
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 6.8995361328125,
+        "width": 0.44
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0000152587890625,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          14.5000152587891,
+          0.000934213923756033,
+          37.6332855224609
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332851409912,
+        "width": 0.44
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 3.68333333333333,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0437870025634766,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          21.4562129974365,
+          0.0496938079595566,
+          28.2619190216064
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 4.66191864013672,
+        "width": 0.44
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 4.91666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 1.01109886169434,
+        "lowest_y": -0.862702310085297,
+        "position": [
+          29.5110988616943,
+          -0.861410856246948,
+          28.8216114044189
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 5.22161102294922,
+        "width": 0.44
+      }
+    ],
+    "WIDE": [
+      {
+        "band": "X",
+        "elapsed_s": 5.06666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": -0.240780055522919,
+        "position": [
+          7.5,
+          -0.240780055522919,
+          30.4994602203369
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 6.89945983886719,
+        "width": 1.2
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.00000286102294921875,
+        "lowest_y": -0.00106505700387061,
+        "position": [
+          14.4999971389771,
+          0.00093578320229426,
+          37.6332550048828
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332546234131,
+        "width": 1.2
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 8.06666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 1.15457916259766,
+        "lowest_y": -0.0785075053572655,
+        "position": [
+          20.3454208374023,
+          0.000839688233099878,
+          37.6174850463867
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.017484664917,
+        "width": 1.2
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 3.93333333333332,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0195522308349609,
+        "lowest_y": -0.0273501966148615,
+        "position": [
+          28.480447769165,
+          0.22027562558651,
+          28.4003639221191
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 4.80036354064941,
+        "width": 1.2
+      }
+    ]
+  },
+  "limits": [
+    "Source grid collision, not player headset traversal",
+    "Constant forward input permits collision sliding",
+    "First stopping positions depend on shape and movement settings; no general route impossibility claim"
+  ],
+  "rules": {
+    "floor_snap_m": 0.15,
+    "gravity_m_s2": 9.8,
+    "height_m": 1.6,
+    "radii_m": [
+      0.22,
+      0.6
+    ],
+    "slope_limit_degrees": 45,
+    "speed_m_s": 2.0
+  }
+}

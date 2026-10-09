@@ -1,0 +1,71 @@
+{
+  "status": "existing encounter developed; three chapters revised",
+  "summary": "The burrow was already in the hall, but absent from the book. Its connected hollows stopped the museum body at a raised join. A level cutting profile now makes a tested route into the same wandering plan. The sequence can ask which body an opening accommodates, and let the visitor try an answer.",
+  "items": [
+    {
+      "title": "Give the objects room to disagree",
+      "description": "All nine artifact families remain in Works. The visual wall, roofed burrow and raised cavern model now have separate places, with an aisle beside them. The hall is eight cells longer.",
+      "images": [
+        "doc/book/iterations/2026-09-20-boolean-review/before-overview.png",
+        "doc/book/iterations/2026-09-20-boolean-review/after-overview.png"
+      ],
+      "captions": [
+        "Before · the large models overlap the surrounding architecture.",
+        "Current · the visual wall leads toward the roofed burrow."
+      ],
+      "image_note": "Same overview camera in the actual museum, captured in Godot with Vulkan/mobile rendering. These images show the spatial change; the body tests provide separate evidence about passage.",
+      "text_kind": "book — Boolean_Works opening",
+      "before": "You cannot. Not in any of them. That answer took eight bodies to arrive at, and it is the most useful thing in the chapter.",
+      "after": "Do not answer from the doorway. Several objects here offer an image of an interior. One now asks you to enter it. The difference is worth finding with your body before naming it."
+    },
+    {
+      "title": "Connected for which body?",
+      "description": "Burrow becomes a primary encounter beside the workbench and cavern model. Eleven seeded centres and their overlap graph stay the same. Cylindrical cutters give the hollow a level floor. The original spherical profile remains available.",
+      "images": [
+        "doc/book/iterations/2026-09-20-boolean-review/after-burrow.png",
+        "doc/book/iterations/2026-09-20-boolean-review/after-inside.png"
+      ],
+      "captions": [
+        "Current entrance · the invitation sits above the opening.",
+        "Inside · rounded walls, a roof and a floor that continues through the joins."
+      ],
+      "image_note": "Two views of the revised museum encounter. The actual 1.5 m high, 0.32 m radius desktop collision capsule reached six inward and six return waypoints; intact rock blocked it. Headset comfort and other body sizes remain untested.",
+      "text_kind": "book — new Boolean_Works encounter",
+      "before": "",
+      "after": "This burrow was already in the project. Its cutters followed a seeded walk: eleven overlapping spheres, joined and subtracted from a block. The overlap graph reported one connected component. Yet a test body stalled between the second and third hollows. Two spheres can overlap while leaving a raised lip where your feet want a floor. *Connected* had answered a question, just not the whole question we were asking.\n\nThe spherical version remains available in the artifact. It has not become a wrong shape because we wanted a passage. We have made one kind of body easier to accommodate and changed the space to do it. What else might have lived in the rising hollows? The repair carries a preference. You can now stand inside it."
+    },
+    {
+      "title": "Estimate before reading the number",
+      "description": "The existing intersection-volume display is enabled, turned toward the approach and given enough panel height for its three lines. The text distinguishes a shared radius parameter from the different representations built with it.",
+      "images": [
+        "doc/book/iterations/2026-09-20-boolean-review/verbs-readout.png"
+      ],
+      "captions": [
+        "Current Verbs hall · operand volumes and their shared region."
+      ],
+      "image_note": "Actual Godot hall in compatibility rendering. The revised text asks the reader to look for a facet and compare what the gauge measures with what is visible.",
+      "text_kind": "book — Boolean_Verbs",
+      "before": "So there are three spheres in this exhibit. The one you see, the one that did the cutting, and the one the number is about, and no two of them are the same shape. The instrument is honest, the object is honest, and they are describing different things — which is not a bug so much as the clearest possible demonstration of what a boundary representation is. The sphere on the plinth has no radius. It has twelve segments and six rings, and *radius* is a story told about them.",
+      "after": "A number with three decimal places can look more settled than the body it measures. Move close enough to find a facet. The radius is real as a parameter. What that parameter becomes depends on which system is reading it."
+    },
+    {
+      "title": "Change the route through the comparison",
+      "description": "All 24 Gallery placements remain unchanged. Its default-first catalogue order differs from the gradual order a tutorial might choose. The prose now makes that difference available for exploration.",
+      "text_kind": "book — Boolean_Gallery",
+      "before": "Walk this band left to right and you get `lobed, distinct, necked, single` — the registry's order, which is the order this hall was built from, and which starts you two-thirds of the way up the ladder, sends you back to the bottom, then part way up again, then to the top. The sequence is the same four states. The *argument* is gone, because the argument was the monotonicity.",
+      "after": "Walk this band left to right and you get `lobed, distinct, necked, single` — the registry's order, which is the order this hall was built from, and which starts you two-thirds of the way up the ladder, sends you back to the bottom, then part way up again, then to the top. The sequence is the same four states. The gradual progression is interrupted. The catalogue asks us to recognise the familiar object first; the tutorial asks us to follow the changing offset. Those are two different orders for the same four objects. Start at `distinct`, then find `necked`, `lobed` and `single`. What became legible when you changed your route?"
+    },
+    {
+      "title": "Evidence and remaining work",
+      "description": "32 integration checks pass. Controlled museum tests compare the original obstruction, revised inward and return route, intact wall, gallery aisle and visual wall. The workbench selection affordance and a less forensic Gallery reading remain named next tasks.",
+      "report": "doc/book/iterations/2026-09-20-boolean-review/SUMMARY.md",
+      "report_label": "Findings, decisions, tests and limits"
+    },
+    {
+      "title": "Read the complete text change",
+      "description": "Verbs receives the largest clarification. Gallery keeps its comparisons. Works gains the burrow encounter and an ending that leaves room for an implemented answer. The saved originals remain available beside the current manuscripts.",
+      "report": "doc/book/iterations/2026-09-20-boolean-review/final.diff",
+      "report_label": "Complete three-chapter diff"
+    }
+  ]
+}

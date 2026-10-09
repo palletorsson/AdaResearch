@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "generated_at": "2026-09-28T14:52:35.803982+00:00",
+  "word_counts": {
+    "point-zero": {
+      "before": 1035,
+      "after": 740
+    },
+    "preface": {
+      "before": 911,
+      "after": 1245
+    }
+  },
+  "checks": [
+    {
+      "name": "point-zero footnotes complete and unique",
+      "passed": true
+    },
+    {
+      "name": "preface footnotes complete and unique",
+      "passed": true
+    },
+    {
+      "name": "Code excerpts and encounter anchors unchanged",
+      "passed": true
+    },
+    {
+      "name": "Author inherited-work paragraph exact",
+      "passed": true
+    },
+    {
+      "name": "Origin and exit encounter exact",
+      "passed": true
+    },
+    {
+      "name": "Hall now shorter",
+      "passed": true
+    },
+    {
+      "name": "Historical reference retained in preface",
+      "passed": true
+    },
+    {
+      "name": "Unchanged commons/maps/Point_Zero/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged commons/maps/Point_One/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged commons/maps/Point_One/final.md",
+      "passed": true
+    },
+    {
+      "name": "Unchanged commons/maps/sequences/primitives.json",
+      "passed": true
+    },
+    {
+      "name": "Unchanged doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "name": "Only Point Zero text fingerprint and review reference changed in catalogue",
+      "passed": true
+    },
+    {
+      "name": "Catalogue matches current chapter",
+      "passed": true
+    },
+    {
+      "name": "Current Primitives capture sources",
+      "passed": true
+    },
+    {
+      "name": "Current Primitives capture output",
+      "passed": true
+    },
+    {
+      "name": "Framing preview includes current preface",
+      "passed": true
+    },
+    {
+      "name": "Unique reading IDs",
+      "passed": true
+    },
+    {
+      "name": "Internal reading links resolve",
+      "passed": true
+    },
+    {
+      "name": "Footnotes rendered",
+      "passed": true
+    },
+    {
+      "name": "Removable you visibly struck through",
+      "passed": true
+    }
+  ],
+  "scope": "Editorial relocation and publication. No runtime or reader test."
+}

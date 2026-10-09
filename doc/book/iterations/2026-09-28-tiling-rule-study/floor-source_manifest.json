@@ -1,0 +1,28 @@
+{
+  "room": "Tutorial_Tiling_Floor",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07fe08753fda37c03c491273bf4df2001c0ba0c13b374e6214b08353aa8beaf6",
+    "commons/maps/Tutorial_Tiling_Floor/map_data.json": "85b0ac706bf6d27e2e1453435731db873c12dbf61530cd858033d34c9568bbe6",
+    "tools/probes/tiling_rule_study.gd": "757e907167ec492e3558ada431d2b914c5f74329c02a5962bbc400ad81d676f8",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "74280296475c5e5b72bfd45ee601d35fee180f9544c47eb5e52599ef3f357313",
+    "ada_run/encounter_pilot/Tutorial_Tiling_Floor/control.json": "f9484d22164a4397a1433c5e8a55ee2ebfd1a3031723987335786bb15ba340af",
+    "ada_run/encounter_pilot/Tutorial_Tiling_Floor/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Tutorial_Tiling_Floor/em_bake.json": "fdc8a601b3cc46a706301464799d126cb0bb28cff3a898bbf0eb88b821a1ef63"
+  }
+}

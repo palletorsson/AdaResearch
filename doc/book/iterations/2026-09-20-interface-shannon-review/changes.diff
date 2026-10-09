@@ -1,0 +1,148 @@
+--- before/commons/ui/control_panel.gd
++++ commons/ui/control_panel.gd
+@@ -115,12 +115,12 @@
+ 	var s: Node3D = load(SLIDER_PATH).instantiate()
+ 	# slider_smooth is a vertical fader — lay it HORIZONTAL on the board (the
+ 	# XRT slider's grab math is local-space, so root rotation is safe), and
+-	# counter-rotate the value label so the number stays upright. +90 (not -90)
+-	# so the fader's slide axis maps to +X: dragging RIGHT increases.
+-	s.rotation_degrees.z = 90.0
++	# counter-rotate the value label so the number stays upright. The scene's
++	# live slide axis is +Y; -90 maps it to panel +X, so RIGHT increases.
++	s.rotation_degrees.z = -90.0
+ 	var vl := s.get_node_or_null("Frame/Label3DValue") as Label3D
+ 	if vl:
+-		vl.rotation_degrees.z = -90.0
++		vl.rotation_degrees.z = 90.0
+ 	if s.has_method("set_param_name"):
+ 		s.set_param_name(param_name if param_name != "" else label)
+ 	_row.add_child(s)
+--- before/commons/ui/control_console.gd
++++ commons/ui/control_console.gd
+@@ -233,6 +233,26 @@
+ func set_title(t: String) -> void: _ensure_panel().title = t
+ func panel() -> Node3D: return _ensure_panel()
+ 
++var _housing_refit_pending := false
++
++## Refit after an owner adds controls to an already assembled console. Only the
++## cabinet is replaced; controls, live readouts and apparatus keep their state.
++## Coalesced and explicit, so value changes never rebuild the housing.
++func refit_housing() -> void:
++	if _housing_refit_pending or get_node_or_null("Body") == null: return
++	_housing_refit_pending = true
++	_refit_housing.call_deferred()
++
++func _refit_housing() -> void:
++	for node_name in ["Body", "ConsolePlinth"]:
++		var previous := get_node_or_null(node_name)
++		if previous != null:
++			remove_child(previous)
++			previous.queue_free()
++	_built = false
++	await _build_body()
++	_housing_refit_pending = false
++
+ 
+ # ══════════════════════════════════════════════════════════════════════════
+ # VISUALIZATION HOSTS — the canonical DISPLAY side of the console.
+@@ -320,7 +340,9 @@
+ 	if stack == Vector3.ZERO:
+ 		# TOTEM — the monitor stands on its own floor column in front of the
+ 		# console (cables ride the bridge duct, then hidden inside the column).
+-		_support_column(host, 0.0, -0.03, -size.y * 0.5 + 0.10, viz_floor - host.position.y, 0.10, 0.08)
++		# Attach behind the bezel. At -0.03 its front face crossed the screen
++		# and hid the bottom-centre cells of a monitor's content.
++		_support_column(host, 0.0, -0.075, -size.y * 0.5 + 0.10, viz_floor - host.position.y, 0.10, 0.08)
+ 		_apparatus_base(host, 0.5, 0.42, viz_floor - host.position.y)
+ 	else:
+ 		# LINK — a column tying the stacked monitor to the apparatus below. Runs
+--- before/commons/interactables/push_button.gd
++++ commons/interactables/push_button.gd
+@@ -4,6 +4,9 @@
+ 
+ @export var pressed_color: Color = Color(0.2, 0.8, 1.0, 1.0)
+ @export var released_color: Color = Color(1.0, 0.0, 0.0, 1.0)
++## Optional latched choice feedback. The owner decides selection; pressing a
++## momentary button does not automatically toggle it or change its signals.
++@export var selected_color: Color = Color(0.25, 0.95, 1.0, 1.0)
+ @export var pressed_emission_energy: float = 1.1
+ @export var released_emission_energy: float = 0.35
+ @export_group("Press Sound")
+@@ -19,6 +22,7 @@
+ var _button_material: StandardMaterial3D
+ var _press_audio_player: AudioStreamPlayer3D
+ var _is_pressed_visual := false
++var _selected := false
+ 
+ var _colors_initialized: bool = false
+ 
+@@ -33,7 +37,10 @@
+ 		await tree_entered
+ 	await get_tree().process_frame
+ 	if not _colors_initialized:
+-		_sync_color_to_state()
++		if _selected:
++			update_colors()
++		else:
++			_sync_color_to_state()
+ 		_colors_initialized = true
+ 
+ func _process(_delta: float) -> void:
+@@ -55,7 +62,16 @@
+ 	if not force and _is_pressed_visual == pressed:
+ 		return
+ 	_is_pressed_visual = pressed
+-	_apply_color(pressed_color if pressed else released_color, pressed)
++	_apply_color(pressed_color if pressed else (selected_color if _selected else released_color), pressed)
++
++## Show an owner-selected choice, including after the hand releases the cap.
++func set_selected(value: bool) -> void:
++	if _selected == value: return
++	_selected = value
++	if is_node_ready(): update_colors()
++
++func is_selected() -> bool:
++	return _selected
+ 
+ func update_colors():
+ 	"""Call this after changing pressed_color or released_color externally"""
+--- before/commons/interactables/slider_smooth.gd
++++ commons/interactables/slider_smooth.gd
+@@ -187,7 +187,7 @@
+ 	frame_mesh.mesh = frame_mesh.mesh.duplicate()
+ 	frame_mesh.mesh.size.x = 0.106
+ 	var display := preload("res://commons/ui/control_value_surface.gd").build(
+-		get_node("Frame"), Vector2(0.078, 0.026), Vector3(0.035, 0.061, 0.0085), -90.0)
++		get_node("Frame"), Vector2(0.078, 0.026), Vector3(-0.035, -0.061, 0.0085), 90.0)
+ 	_surface_viewport = display.viewport
+ 	_surface_value = display.label
+ 	_surface_value.text = _last_display_text
+--- before/commons/artifacts/shannon_workbench/shannon_workbench.gd
++++ commons/artifacts/shannon_workbench/shannon_workbench.gd
+@@ -162,7 +162,7 @@
+ 	# CONFIG (InterfacePresets) — one source of truth for desktop form / body /
+ 	# viz floor. Houses the Braun plate with the seated P(1) slider AND the live
+ 	# readout as a 2D-in-3D screen on the board.
+-	_plate_root = InterfacePresets.build("workbench", "Shannon Entropy", plate_height)
++	_plate_root = InterfacePresets.build("workbench", "Shannon Entropy", plate_height, "braun", "instrument")
+ 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
+ 	add_child(_plate_root)
+ 
+@@ -504,6 +504,7 @@
+ 			_prediction_buttons.append(button)
+ 		_prediction_monitor = _plate_root.add_monitor(Vector2(0.84, 0.60), Vector3(0.87, 0.05, 0))
+ 		_prediction_monitor.name = "PredictionReadout"
++		_plate_root.refit_housing()
+ 	for button in _prediction_buttons:
+ 		button.visible = prediction_study
+ 	if _prediction_monitor != null:
+@@ -529,6 +530,8 @@
+ 
+ 
+ func _refresh_prediction() -> void:
++	for bit in _prediction_buttons.size():
++		_prediction_buttons[bit].set_selected(prediction_study and bit == _prediction)
+ 	if not prediction_study:
+ 		for mark in _error_marks: mark.hide()
+ 		return

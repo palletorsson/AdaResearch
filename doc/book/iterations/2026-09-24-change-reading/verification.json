@@ -1,0 +1,73 @@
+{
+  "chapters": [
+    "Change_Intro",
+    "Flow_Field"
+  ],
+  "preserved_inputs": 23,
+  "original_snapshots_intact": true,
+  "core_changes": "Only two text hashes and review links",
+  "capture_current": true,
+  "anchors_and_reading_code_preserved": true,
+  "historical_walks_preserved": true,
+  "http": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-compared.png",
+      "status": 200,
+      "bytes": 2050723
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-predict.png",
+      "status": 200,
+      "bytes": 2039623
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/Change_Intro.diff",
+      "status": 200,
+      "bytes": 20631
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/Change_Intro.notes.md",
+      "status": 200,
+      "bytes": 7069
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/DECISIONS.md",
+      "status": 200,
+      "bytes": 3243
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/Flow_Field.diff",
+      "status": 200,
+      "bytes": 9430
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/Flow_Field.notes.md",
+      "status": 200,
+      "bytes": 3224
+    },
+    {
+      "url": "http://localhost:3003/compose/sources?map=Change_Intro&doc=final",
+      "status": 200,
+      "bytes": 32074
+    },
+    {
+      "url": "http://localhost:3003/compose/sources?map=Flow_Field&doc=final",
+      "status": 200,
+      "bytes": 32062
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/index.html",
+      "status": 200,
+      "bytes": 52816
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-change-reading/capture/change-book.md",
+      "status": 200,
+      "bytes": 12812
+    }
+  ],
+  "browser_visual_check": "Connection failed before setup; no automated visual check claimed",
+  "runtime": "No source or scene changes; no new runtime/headset run",
+  "served_html_matches": "Exact after CRLF normalization",
+  "review_capture_matches_current": true
+}

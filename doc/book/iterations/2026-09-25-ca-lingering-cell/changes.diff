@@ -1,0 +1,311 @@
+--- before/commons/maps/CA_ElementaryRules/final.md
++++ after/commons/maps/CA_ElementaryRules/final.md
+@@ -5,6 +5,8 @@
+ The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. Two of the four choices change at once: a cell can hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
+ 
+ <!-- @structure_growth -->
++
++Beside the volume, twenty-seven positions have been pulled apart. You can walk between them. They show one cell and its neighbours from the small structure, enlarged enough to follow without losing the address. The central position wears a golden frame; the finer outlines keep the empty places visible. Move around a cube that blocks your view. What looked like a crowded surface begins to give up its separate positions.
+ 
+ Begin at the console. The structure is held at its starting generation. Pink means active. Press STEP once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours' active count. Follow it through another step. What does it leave available?
+ 
+@@ -20,7 +22,7 @@
+ 
+ The inscription `6-8/6-8/3/M` names this installation's agreement. An active cell survives with six, seven or eight active neighbours. An empty cell becomes active with those same counts. Three states are available: empty, active, fading. `M` denotes the surrounding Moore neighbourhood, which this implementation fixes at twenty-six positions.
+ 
+-Now find a place that has turned green and imagine it surrounded by seven active neighbours. Will it become pink at the next step? Birth is tempting, but the code has already sent this cell down another branch. These are the lines for a state above one:
++REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but the code has already sent it down another branch. These are the lines for a state above one:
+ 
+ ```gdscript
+ if state < rule_states - 1:
+@@ -29,11 +31,17 @@
+     next_state[idx] = 0
+ ```
+ 
+-Here `rule_states` is three, so state two goes to zero. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
++Here `rule_states` is three, so state two goes to zero. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
++
++![The enlarged address is green after the first step, with seven active neighbours.](images/lingering-cell.png)
++
++![After the next step, the cell is empty and its golden address remains.](images/available-address.png)
++
++*The golden frame keeps the address while the rule changes what can occupy it. The two views follow successive generations from the same position.*
+ 
+ Every answer is written into a second array. The old volume supplies all the questions before the arrays exchange places. There is no privileged first cell whose new answer reaches its neighbours early. STEP gives this local agreement one generation; the rest of the museum keeps running.
+ 
+-Press VIEW. The structure takes on a gradient from dark to light with height. Nothing has advanced. The same cells can look like one continuous material now that their different states share a colour scale. Press VIEW again and recover the distinction. The finish has changed what we can readily recognise. Which reading did we take for the object itself?
++Press VIEW. The structure and its enlarged neighbourhood take on a gradient from dark to light with height. Nothing has advanced. The same cells can look like one continuous material now that their different states share a colour scale. Press VIEW again and recover the distinction. The finish has changed what we can readily recognise. Which reading did we take for the object itself?
+ 
+ The console also separates ACTIVE, FADING and DRAWN. The last number can be smaller than the first two added together. The renderer omits occupied cells surrounded on all six faces by occupied cells. Their state remains in the calculation. What the surface conceals can still help determine its next form. These visible cubes have no individual collision bodies; their appearance is not a promise of footholds.
+ 
+--- before/commons/maps/CA_ElementaryRules/artifacts.md
++++ after/commons/maps/CA_ElementaryRules/artifacts.md
+@@ -1,20 +1,17 @@
+ # CA ElementaryRules — Artifacts
+-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 2 artifacts*
+ 
+-> Elementary cellular automata: one dimension, three-cell neighborhoods, eight possible patterns. 256 possible rules, each producing different behavior. Rule 30 generates apparent chaos. Rule 110 is Turing complete. Wolfram's classification: from death to complexity in a single number.
+-
+-The map, read through what it holds — its artifacts in the order you meet them:
+-
+-## Structure Growth
+-![Structure Growth](/scene-catalog/structure_growth.png)
+-
+-3D structure growth simulation.
++## Structure Growth — primary
+ 
+ `structure_growth`
+ 
+-## Dark Sphere
+-![Dark Sphere](/scene-catalog/dark_sphere.png)
++The existing three-state, 26-neighbour volume: empty, active and fading. Its held console lets us STEP, RUN, REPLAY, change the colour reading with VIEW, and extend the observation budget with +20.
+ 
+-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
++The enlarged neighbourhood beside it reads the same 27 positions around cell (26, 22, 24). At the seeded beginning that cell is active; after one step it is fading beside seven active neighbours; after another it is empty. Gold marks its address. Spacing makes the positions approachable, while the original volume retains their compact relation. Both views share the existing controls and state arrays.
++
++## Dark Sphere — supporting
+ 
+ `dark_sphere`
++
++Retained as a comparison of silhouette and appearance, outside the chapter's primary encounter. It does not supply the neighbourhood rule or the fading-cell example.
++
++The historical map name is preserved. This hall does not exhibit all 256 elementary one-dimensional rules; the preceding hall introduces the three-cell rule table.
+--- before/commons/maps/CA_ElementaryRules/intent.md
++++ after/commons/maps/CA_ElementaryRules/intent.md
+@@ -3,8 +3,8 @@
+ Question: Which parts of a visible body are participating, lingering, or concealed by its drawing?
+ Primary: structure_growth, retaining its 26-neighbour, three-state builder law.
+ Retained further encounter: dark_sphere (decoration).
+-Do: Step, hold/run, replay a seed, switch state/height colouring, extend the observation budget.
++Do: Step, hold/run, replay a seed, switch state/height colouring, extend the observation budget. Walk among the enlarged 27 positions of one actual neighbourhood and follow its gold-framed centre.
+ Observe: Active count differs from occupied count; rendered count may differ from both. State 2 cannot be reborn until after it becomes empty.
+ Critical opening: Visibility, participation and availability are distinct choices in the implementation.
+ Spatial approach: The original relief is preserved inside a level perimeter route; the volume is centred over the opening and the controls stand on its entrance rim.
+-Next improvement: Measure the full retained volume's frame cost and inspect actual pointer reach before headset acceptance. Explore a longer fading interval only as a clearly named comparison, not an unannounced rule change.
++Next improvement: Optimise the measured full-volume update cost (roughly 150 ms on this desktop). Actual desktop pointer reach and the approach between the enlarged cells are checked; tracked-hand reach, whole-route traversal, comfort and Quest performance remain pending. Explore a longer fading interval only as a clearly named comparison, not an unannounced rule change.
+--- before/commons/maps/CA_ElementaryRules/summary.md
++++ after/commons/maps/CA_ElementaryRules/summary.md
+@@ -2,4 +2,6 @@
+ 
+ CA_ElementaryRules keeps the existing structure-growth volume and dark orb. The primary volume uses 26 neighbours and three states: empty, active and fading. A held console exposes individual steps, repeatable replay, state/height colours and an extendable twenty-step observation budget. The original floor relief remains inside an added walled circulation floor. The map is restored between CA_Introduction and CA_GameOfLife in the active museum route.
+ 
+-The lesson distinguishes active cells, occupied cells, rendered cells and a fixed point. The historical map ID is retained; a survey of all 256 elementary one-dimensional rules is not present. Source, remote review and actual Godot captures are available. Twenty-one desktop checks pass, including the five pointer controls. Update cost, route traversal and headset acceptance still need work.
++An enlarged view of one actual 27-position neighbourhood makes the active → fading → empty transition approachable. Its golden central address persists when the cell disappears; the seven-neighbour example now occurs in the seeded installation.
++
++The lesson distinguishes active cells, occupied cells, rendered cells and a fixed point. The historical map ID is retained; a survey of all 256 elementary one-dimensional rules is not present. Source, remote review and actual Godot captures are available. The current native desktop checks cover all 27 copied states, shared colour mapping, eight real pointer events, replay, the budget and a supplied walking body through the open gaps. The full update still takes roughly 150 ms. Whole-route traversal, tracked-headset acceptance and Quest performance remain open. See encounter-notes.md for the bounded evidence.
+--- before/commons/maps/CA_ElementaryRules/tutorial.md
++++ after/commons/maps/CA_ElementaryRules/tutorial.md
+@@ -2,11 +2,11 @@
+ 
+ 1. Walk around the retained volume from the floor rim. Separate apparent neighbours by changing viewpoint.
+ 2. At the held console, STEP once. Find pink active and green fading cells; follow a green cell to empty on the next step.
+-3. Count a 3×3×3 neighbourhood minus its centre: 26. Inspect the source's `== 1` comparison.
+-4. Distinguish the branches: empty can be born, active can survive, fading must finish its interval before rebirth is considered.
++3. Walk between the enlarged 3×3×3 positions beside the specimen. Gold marks the centre. Remove it from the count: 26 neighbours. Inspect the source's `== 1` comparison.
++4. REPLAY then STEP: the golden centre is green beside seven pink neighbours. STEP again: it empties. Empty can be born, active can survive, fading must finish its interval before rebirth is considered.
+ 5. VIEW changes state colours into height colours without advancing or resetting the automaton. Compare what each finish reveals.
+ 6. Compare ACTIVE + FADING with DRAWN. Six-face shell culling hides occupied interior cells while they remain in the 26-neighbour calculation.
+ 7. RUN and hold; REPLAY repeats the same seed. At the twenty-step budget, +20 permits further observation without restarting. Compare CHANGED with mere stillness.
+ 8. Carry state, neighbourhood, edge and time into CA_GameOfLife's generation-as-space comparison.
+ 
+-All five controls have passed real desktop pointer checks in Godot. Headset acceptance, route traversal and update-cost optimisation remain pending. The web exercise is an independent smaller model for remote review.
++All five controls have passed real desktop pointer checks in Godot. The supplied walking body passes through the enlarged neighbourhood on the existing floor. Full-route and headset acceptance, plus update-cost optimisation, remain pending. The web exercise is an independent smaller model for remote review.
+--- before/commons/maps/CA_ElementaryRules/technical.md
++++ after/commons/maps/CA_ElementaryRules/technical.md
+@@ -1,4 +1,6 @@
+ # A three-dimensional Generations study
++
++**25 September encounter update:** `room:neighbours` adds an enlarged reading of 27 existing positions, sharing the original solver and console. Current implementation, native results and limitations are in [encounter-notes.md](encounter-notes.md). The dated implementation record below is retained.
+ 
+ Primary source: `algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd`, with `StructureGrowth.tscn`. This historical map ID does not mean that this room enumerates the 256 elementary binary one-dimensional rules. That elementary mechanism is introduced on CA_Introduction's rule explorer. This specimen extends the comparison to a volume.
+ 
+--- before/commons/maps/CA_ElementaryRules/field_notes.md
++++ after/commons/maps/CA_ElementaryRules/field_notes.md
+@@ -7,3 +7,10 @@
+ Runtime update: PID 40112 was identified as an editor and left open. The earlier all-process guard was too broad. An isolated game capture now passes 21 desktop checks, including all five actual pointer controls. Captures exposed an oversized case and small lettering; the readout is now narrower, larger-lettered and 1.65 m to the side. Current entrance, side and close-up screenshots are saved. A full update took 144 ms and needs optimisation. Physical route traversal and headset work remain pending. See `doc/space/ca-elementary-review-2026-09-13/README.md` and `ada_run/review_ca_elementary.py` for evidence and the prepared next check.
+ 
+ Next is CA_GameOfLife: inspect the existing works that give generations a spatial body. The old historical title should not dictate invented exhibits. Preserve the collection and derive the prose from what its code and interactions can show.
++
++
++## 25 September — the lingering cell becomes an encounter
++
++The manuscript imagined a fading cell surrounded by seven active neighbours. The retained seed already contains that example: position (26, 22, 24) after the first update. An enlarged, spaced view now lets us approach those actual 27 positions without changing the generator. The golden address remains when the cell empties on the next step. The new receiver shares all existing controls.
++
++Native photographs and desktop input/state/approach checks are recorded in `doc/book/iterations/2026-09-25-ca-lingering-cell/`. The first outside camera hid the centre behind a neighbour; the closer gap view reveals it. The full-volume step remains expensive. Headset, Quest and full-route acceptance are still pending. Next: CA_GameOfLife and generations given a spatial body.
+--- before/commons/maps/CA_ElementaryRules/encounter-notes.md
++++ after/commons/maps/CA_ElementaryRules/encounter-notes.md
+@@ -0,0 +1,25 @@
++# Enlarged neighbourhood — 25 September 2026
++
++`structure_growth` remains the primary work. The map opts into `room:neighbours`; ordinary `study:states` placements remain unchanged.
++
++`neighbour_room.gd` reads the 27 actual entries around (26, 22, 24). It shares the original solver, seed, buffers, controls and held clock. It adds no collision, sensor, rule, button or random source. Its 27 boxes are 0.52 m wide at 1.13 m spacing; empty positions remain wire outlines. Gold marks the central address. Directions between neighbours are preserved while the display spacing is enlarged. The compact specimen keeps its own scale and surface culling; the new view shows every occupied position in this neighbourhood, including ones the compact renderer can hide.
++
++For seed 23090 under the existing 6-8/6-8/3/M rule:
++
++| Generation | Centre | Active neighbours |
++| --- | --- | --- |
++| 0 | 1 — active | 11 |
++| 1 | 2 — fading | 7 |
++| 2 | 0 — empty | 5 |
++
++The seven-neighbour count belongs to generation 1. It does not permit birth at that update because the central state is 2, not 0. This is a witnessed instance, not a claim that all fading cells have seven neighbours.
++
++VIEW copies the source height-gradient mapping, using original addresses rather than the enlarged world coordinates. REPLAY restores the whole seeded volume. The fixed selected address also has a small depth-tested outline in the compact specimen; other cells can occlude it.
++
++## Evidence and limits
++
++49 native checks pass, with eight actual museum mouse-ray clicks and a supplied CharacterBody route through the gaps on the existing floor. Every shown state and colour, absence at state zero, shared controls, complete replay, budget, no extra collision and legacy opt-in are checked. The final process exits 0 without GDScript errors. Native images and exact diffs: `doc/book/iterations/2026-09-25-ca-lingering-cell/index.html`.
++
++The full 125,000-cell update took 153.009 ms in the final run; the pre-change measurement was 166.710 ms. This variation is not an optimisation result. The solver is unchanged and its single-frame cost remains a VR problem. Existing missing-UID, environment, registry and renderer warnings, plus generated-art build warnings, remain in the log.
++
++The narrow supplied desktop walking/input tests do not establish whole-route traversal, tracked-hand reach, headset comfort, Quest performance or learner acceptance. The first outside camera hid the chosen cell; later views approach it through a gap. Diagnostic captures are retained.
+--- before/commons/maps/CA_ElementaryRules/map_data.json
++++ after/commons/maps/CA_ElementaryRules/map_data.json
+@@ -609,7 +609,7 @@
+         " ",
+         " ",
+         " ",
+-        "structure_growth:0:0#study:states#plinth:0",
++        "structure_growth:0:0#study:states#plinth:0#room:neighbours",
+         " ",
+         " ",
+         " ",
+--- before/algorithms/cellularautomata/cellular_automata_3d/structure_study.gd
++++ after/algorithms/cellularautomata/cellular_automata_3d/structure_study.gd
+@@ -10,6 +10,7 @@
+ var fading: int = 0
+ var state_colours: bool = true
+ var budget: int = 20
++var neighbour_room: Node3D
+ 
+ func _ready() -> void:
+ 	work = get_parent()
+@@ -38,6 +39,10 @@
+ 	work.use_gradient = false
+ 	_build_console()
+ 	replay()
++	if str(work.get_meta("config_room", "")) == "neighbours":
++		neighbour_room = load("res://algorithms/cellularautomata/cellular_automata_3d/neighbour_room.gd").new()
++		add_child(neighbour_room)
++		neighbour_room.build(self)
+ 
+ func replay() -> void:
+ 	running = false
+@@ -123,6 +128,7 @@
+ 		"running": running, "state_colours": state_colours, "seed": work.growth_seed}
+ 
+ func refresh() -> void:
++	if is_instance_valid(neighbour_room): neighbour_room.refresh()
+ 	var status: String = "RUN" if running else "HELD"
+ 	if work.generation >= budget:
+ 		status = "LIMIT / +20"
+--- before/algorithms/cellularautomata/cellular_automata_3d/neighbour_room.gd
++++ after/algorithms/cellularautomata/cellular_automata_3d/neighbour_room.gd
+@@ -0,0 +1,106 @@
++extends Node3D
++## An exploded reading of one real neighbourhood. No second solver or state edits.
++const ADDRESS := Vector3i(26, 22, 24)
++const SPACING := 1.13
++const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
++var work: Node3D
++var study: Node3D
++var cells: MultiMesh
++var offsets: Array[Vector3i] = []
++var states := PackedInt32Array()
++var colours := PackedColorArray()
++var caption: Label3D
++var source_marker: MeshInstance3D
++var active_neighbours := 0
++
++func build(owner_study: Node3D) -> void:
++	name = "NeighbourRoom"
++	study = owner_study
++	work = study.work
++	position = Vector3(-3.85, 1.5, -1.8)
++	cells = MultiMesh.new()
++	cells.transform_format = MultiMesh.TRANSFORM_3D
++	cells.use_colors = true
++	cells.instance_count = 27
++	var cube := BoxMesh.new()
++	cube.size = Vector3.ONE * .52
++	cells.mesh = cube
++	var view := MultiMeshInstance3D.new()
++	view.name = "TwentySevenAddresses"
++	view.multimesh = cells
++	var material := StandardMaterial3D.new()
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.vertex_color_use_as_albedo = true
++	view.material_override = material
++	add_child(view)
++	var frames := ImmediateMesh.new()
++	frames.surface_begin(Mesh.PRIMITIVE_LINES)
++	for z in range(-1,2):
++		for y in range(-1,2):
++			for x in range(-1,2):
++				var offset := Vector3i(x,y,z)
++				offsets.append(offset)
++				frames.surface_set_color(Color("ffd77d") if offset == Vector3i.ZERO else Color("9faea6"))
++				wire_cube(frames,Vector3(offset)*SPACING,.65)
++	frames.surface_end()
++	var frame := MeshInstance3D.new()
++	frame.name = "AddressesRemain"
++	frame.mesh = frames
++	frame.material_override = material
++	add_child(frame)
++	# The central address has a thicker golden outline, also after its cell empties.
++	for axis in range(3):
++		for a in [-1,1]:
++			for b in [-1,1]:
++				var size:=Vector3.ONE*.014;size[axis]=.68
++				var p:=Vector3.ZERO;p[(axis+1)%3]=a*.34;p[(axis+2)%3]=b*.34
++				add_child(Kit.box(p,size,Kit.emissive(Color("ffd77d"),.3)))
++	caption=Label3D.new()
++	caption.text="CELL (26, 22, 24) / ENLARGED NEIGHBOURHOOD"
++	caption.font_size=32;caption.pixel_size=.0015
++	caption.position=Vector3(0,1.72,-1.17);caption.rotation.y=PI
++	caption.double_sided=false;caption.outline_size=3;add_child(caption)
++	# A depth-tested outline locates this address in the original specimen.
++	var marker_mesh:=ImmediateMesh.new();marker_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
++	marker_mesh.surface_set_color(Color("ffd77d"));wire_cube(marker_mesh,Vector3.ZERO,.148);marker_mesh.surface_end()
++	source_marker=MeshInstance3D.new();source_marker.name="NeighbourAddress"
++	source_marker.mesh=marker_mesh;source_marker.material_override=material
++	work.mesh_instance.add_child(source_marker)
++	source_marker.position=Vector3(ADDRESS)*work.cell_size
++	refresh()
++
++func wire_cube(mesh: ImmediateMesh, centre: Vector3, side: float) -> void:
++	for axis in range(3):
++		for a in [-1,1]:
++			for b in [-1,1]:
++				var p:=centre;p[axis]-=side*.5;p[(axis+1)%3]+=a*side*.5;p[(axis+2)%3]+=b*side*.5
++				var q:=p;q[axis]+=side
++				mesh.surface_add_vertex(p);mesh.surface_add_vertex(q)
++
++func colour_for(state: int, address: Vector3i) -> Color:
++	if work.use_gradient and work.gradient:
++		return work.gradient.sample(float(address.y)/work.grid_size.y)
++	if state > 1:
++		return work.color_alive.lerp(work.color_dying,float(state-1)/float(work.rule_states-2))
++	return work.color_alive
++
++func refresh() -> void:
++	states.clear();colours.clear();active_neighbours=0
++	for i in range(offsets.size()):
++		var p:Vector3i=ADDRESS+offsets[i]
++		var index:int=p.x+p.y*work.stride_y+p.z*work.stride_z
++		var state:int=work.current_state[index]
++		states.append(state)
++		if offsets[i]!=Vector3i.ZERO and state==1:active_neighbours+=1
++		var colour:Color=colour_for(state,p);colours.append(colour)
++		var basis:=Basis.IDENTITY if state>0 else Basis.IDENTITY.scaled(Vector3.ZERO)
++		cells.set_instance_transform(i,Transform3D(basis,Vector3(offsets[i])*SPACING))
++		cells.set_instance_color(i,colour)
++
++func readback() -> Dictionary:
++	return {"address":[ADDRESS.x,ADDRESS.y,ADDRESS.z],"generation":work.generation,
++		"centre":states[13],"active_neighbours":active_neighbours,"states":Array(states),
++		"state_colours":study.state_colours}
++
++func _exit_tree() -> void:
++	if is_instance_valid(source_marker):source_marker.queue_free()

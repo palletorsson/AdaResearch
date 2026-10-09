@@ -1,0 +1,39 @@
+{
+	"grid_ceiling": {
+		"height": 4.0,
+		"hidden_families": 4,
+		"lights": 552,
+		"low_y": 4.0,
+		"mesh_instance_nodes": 5110,
+		"omni_lights": 162,
+		"segments": 2,
+		"tile_size": 0.5,
+		"tiles": 4344
+	},
+	"mode": "grid",
+	"museum_ceiling": {
+		"families": [
+			{
+				"instances": 60,
+				"name": "ArrisCeiling"
+			},
+			{
+				"instances": 42,
+				"name": "Ceiling"
+			},
+			{
+				"instances": 60,
+				"name": "ArrisCeiling"
+			},
+			{
+				"instances": 42,
+				"name": "Ceiling"
+			}
+		],
+		"high_y": 3.39999997615814,
+		"instances": 204,
+		"low_y": 2.94800003897399,
+		"mesh_instance_nodes": 0,
+		"nodes": 4
+	}
+}

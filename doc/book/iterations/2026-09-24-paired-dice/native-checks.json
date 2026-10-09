@@ -1,0 +1,200 @@
+{
+  "checks": [
+    {
+      "detail": null,
+      "name": "starts empty, no invented pair",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "both dice use existing XRToolsPickable",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "held die cannot count",
+      "passed": true
+    },
+    {
+      "detail": 3,
+      "name": "physical drop 0 reads face 3",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "one settled die is not a pair",
+      "passed": true
+    },
+    {
+      "detail": 4,
+      "name": "physical drop 1 reads face 4",
+      "passed": true
+    },
+    {
+      "detail": {
+        "armed": [
+          false,
+          false
+        ],
+        "committed": true,
+        "history": [
+          [
+            3,
+            4
+          ]
+        ],
+        "last": [
+          3,
+          4
+        ],
+        "pairs": 1,
+        "pending": [
+          3,
+          4
+        ],
+        "unit_height": 0.18
+      },
+      "name": "3 plus 4 commits exactly once",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "seven full-size unit meshes",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "support height follows sum",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "duplicate landing cannot duplicate pair",
+      "passed": true
+    },
+    {
+      "detail": 5,
+      "name": "physical drop 0 reads face 5",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "new pair cannot reuse previous B",
+      "passed": true
+    },
+    {
+      "detail": 2,
+      "name": "physical drop 1 reads face 2",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "different ingredients give same total",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "both decompositions retained",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "paired variant creates no reward bodies",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "return adds no throw or pair",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "return respects transformed host",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "held far-away die is never reclaimed",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "fallen die returns without a pair",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "lifting a pending die invalidates its old face",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "clear cancels in-flight stale results",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "history bounded to twelve without losing total",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "history uses two multimeshes",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "clear removes geometry and record",
+      "passed": true
+    },
+    {
+      "detail": 3,
+      "name": "physical drop 0 reads face 3",
+      "passed": true
+    },
+    {
+      "detail": 4,
+      "name": "physical drop 1 reads face 4",
+      "passed": true
+    },
+    {
+      "detail": 5,
+      "name": "physical drop 0 reads face 5",
+      "passed": true
+    },
+    {
+      "detail": 2,
+      "name": "physical drop 1 reads face 2",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Controlled native physics drops on production trays at a translated, rotated host; injected events separately test pair transactions. No tracked headset or fairness claim.",
+  "state": {
+    "armed": [
+      false,
+      false
+    ],
+    "committed": true,
+    "history": [
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "last": [
+      5,
+      2
+    ],
+    "pairs": 2,
+    "pending": [
+      5,
+      2
+    ],
+    "unit_height": 0.18
+  }
+}

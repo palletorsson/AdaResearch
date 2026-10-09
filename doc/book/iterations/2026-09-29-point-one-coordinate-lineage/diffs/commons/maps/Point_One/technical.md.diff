@@ -1,0 +1,29 @@
+--- before/commons/maps/Point_One/technical.md
++++ commons/maps/Point_One/technical.md
+@@ -4,13 +4,13 @@
+ 
+ ## Encounter text and making passage
+ 
+-final.md retains only the single position line. It explains visible shape, collision, pickup, rounded reports, references and acceptance through their consequences. The longer source reductions live in tutorial.md, read separately after the encounter.
++final.md keeps one position line. Its prose can investigate visibility, resistance, holding, reference and acceptance without requiring the first coding exercise to rebuild every exhibit.
+ 
+-The cumulative construction still reduces point_condition.gd: CENTRE becomes point_position = Vector3(0.0, 1.12, 0.0); RADIUS becomes radius = 0.14; the visible node is renamed visible_point. It retains the mesh instance and attachment, fixed body and separate collision shape. The absent production branch returns after the label and creates no hidden sphere.
++The first tutorial now concentrates on a Vector3 position, a supplied marker, one-coordinate variations and a second position in the same reference. doc/book/studies/point-one/coordinates.tscn inherits the Day Zero base and supplies hidden A/B sphere markers, coloured axes and labels. points.gd assigns position and visibility. The markers share a 0.14 m radius SphereMesh, matching the small production points; the code deliberately does not reconstruct that resource.
+ 
+-doc/book/studies/point-one supplies complete position.gd, visible.gd and solid.gd files and a fixed-camera scene. The three teaching scripts are unchanged from the preceding tested study. study.tscn now inherits the shared Day Zero base.tscn for camera, floor and lighting, with its greeting hidden; this scene integration is checked again. Labels, finish, resolution, artifact identity and condition branches stay outside the reduced scripts. The study supplies no portable walking or XR pickup.
++The earlier study.tscn and position.gd, visible.gd and solid.gd remain unchanged as an optional construction comparison. CONSTRUCTION.md in the study folder retains the previous tutorial, including mesh/collision construction, reporting, conversion and tolerance. These are available for source inspection without becoming prerequisites for Line. This study remains fixed-camera desktop material, not a portable XR interaction kit.
+ 
+-The tutorial's further-reading section preserves the WORLD/LOCAL, formatting and tolerance snippets removed from final.md. These remain explanatory museum reductions, with their inputs and limits stated; they are not additions to the standalone study. No production behavior or placements change in this reading experiment.
++The current first exercise is tested from its actual code blocks, including the silent position, revealed marker, independent axis changes and two positions. Execution and structural checks do not demonstrate beginner understanding. The museum source and placements are unchanged in this pass.
+ 
+ ## Carry one body between two addresses
+ 
+@@ -57,7 +57,7 @@
+ 
+ ## What continues
+ 
+-Point One has introduced a position, a representation, a reference and a test for proximity. Point Lines adds a second position. Subtracting one position from another will give a displacement; drawing between them will give a segment. Remember the changing point: its coordinates alone have not kept the path your hand took. That question will return in Trace.
++The hall has encountered a position, a representation, references and a test for proximity. The first making passage teaches two positions in one reference; it does not teach all of that apparatus. Point Lines can connect the two positions. Subtracting one position from another will give a displacement; drawing between them will give a segment. Remember the changing point: its coordinates alone have not kept the path your hand took. That question will return in Trace.
+ 
+ [Encounter reference](encounter-reference.md) records the first-walk order and additional implementation distinctions. [Current inventory](artifacts.md) distinguishes primary encounters from retained secondary works. Desktop/source evidence exists for the paired cards; physical reach, headset legibility and an unassisted beginner's walk remain observations to make.
+ 

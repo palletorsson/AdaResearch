@@ -1,0 +1,81 @@
+{
+  "attract_signature": "81625733333439f185d7b8084120884571e122325f4e6c5bac84da37ba9039c2",
+  "checks": [
+    {
+      "message": "frozen current loader compiles",
+      "ok": true
+    },
+    {
+      "message": "restored authored Pheromone hall loads",
+      "ok": true
+    },
+    {
+      "message": "actual scene uses frozen loader",
+      "ok": true
+    },
+    {
+      "message": "authored pheromone terrain instantiates",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: attract-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: attract-standing",
+      "ok": true
+    },
+    {
+      "message": "capture camera active before draw: attract-overview",
+      "ok": true
+    },
+    {
+      "message": "capture camera active after draw: attract-overview",
+      "ok": true
+    }
+  ],
+  "extent": "[P: (-4.5, -0.05, -4.5), S: (20.0, 0.85, 20.0)]",
+  "headset_tested": false,
+  "inventory": [
+    {
+      "cell": [
+        4,
+        5
+      ],
+      "key": "dark_sphere",
+      "position": "(4.5, 0.0, 5.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        5,
+        5
+      ],
+      "key": "pheromone_terrain",
+      "position": "(5.5, 0.0, 5.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        2,
+        6
+      ],
+      "key": "clipboard",
+      "position": "(2.5, 0.0, 6.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    },
+    {
+      "cell": [
+        3,
+        7
+      ],
+      "key": "clipboard",
+      "position": "(3.5, 0.0, 7.5)",
+      "scale": "(1.0, 1.0, 1.0)"
+    }
+  ],
+  "loaded_museum_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+  "origin": "(5.5, 0.0, 5.5)",
+  "scale": "(1.0, 1.0, 1.0)",
+  "standing_hits": []
+}

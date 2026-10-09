@@ -1,0 +1,163 @@
+{
+  "sequence": "array_tutorial",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Array",
+      "primary_tokens": [
+        "row_3_x",
+        "grid_2d_4x4"
+      ],
+      "question": "What does an address identify when the object at that address disappears?",
+      "ontology": "An array is an ordered set of slots; an index names a slot, and occupancy is a value. A second index selects a row and column rather than making an object intrinsically different.",
+      "action": "Count the four labelled positions along the row. Approach one pickup until contact collects it; compare the corresponding binary-table cell. Repeat with one cube in the two-dimensional grid, reading both coordinates first.",
+      "observable": "The object vanishes while its former slot remains locatable. Its table entry becomes 0; untouched entries remain 1. The grid requires two indices where the row needs one.",
+      "mechanism": "row_3_x.create_row instantiates four pick_up_cube scenes at (i,0,0), initializes [[1,1,1,1]], and binds tree_exiting to _on_cube_removed(i). grid_2d_4x4 initializes grid_data[x][z] and binds the same removal event with two indices. Pickup is triggered by the player body, not a grip gesture.",
+      "limit": "The table records presence or absence, not where a collected cube goes. Labels attached to cubes disappear with them, although the data slot remains. This convention can obscure the distinction between object identity and address.",
+      "variation": "Before collecting a grid cube, ask another visitor to locate its address without touching it. After collection, locate the same empty slot. A proposed map variant uses existing #notation:plate to leave the address on the floor; do not claim that variant is currently installed.",
+      "prior_bridge": "Live previous room: Trans_Pit",
+      "next_bridge": "Live next room: Tutorial_Single",
+      "sources": [
+        "algorithms/arrays/row_3_x.gd :: create_row, _on_cube_removed",
+        "algorithms/arrays/grid_2d_4x4.gd :: create_grid_2d, _on_cube_removed, notation modes",
+        "commons/scenes/mapobjects/pick_up_cube.gd :: _on_detection_area_body_entered and collect"
+      ],
+      "source_files": [
+        "commons/maps/Array/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "algorithms/arrays/row_3_x.tscn",
+        "algorithms/arrays/row_3_x.gd",
+        "algorithms/arrays/grid_2d_4x4.tscn",
+        "algorithms/arrays/grid_2d_4x4.gd",
+        "commons/scenes/mapobjects/pick_up_cube.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Array/map_data.json": "4aaac8627abfb74ea9e6f522bb11be52a0b9a54ece2e632c74434b0593e7bcd9",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "algorithms/arrays/row_3_x.tscn": "e6e92fd31d83499e2c62be91171f92dd3e59258d48e76208017870961ece3e72",
+        "algorithms/arrays/row_3_x.gd": "48220ac5cb4b41618cc2e6b73c02ffb54ebc162ecca88aea329e964a0ef306aa",
+        "algorithms/arrays/grid_2d_4x4.tscn": "b8a71c071e81df564849800a80df64014dfe18a35d94080f72e5a9320ef4fae1",
+        "algorithms/arrays/grid_2d_4x4.gd": "7fd96fef8c4f9316ba5b1c09c0d8d3187015eb0dcbd2a2a7cc3995c35ad3d59e",
+        "commons/scenes/mapobjects/pick_up_cube.gd": "d1b1dc5037d557abb7f81f4e62c48da379c394a9604dc85680bacbb368d2ea8d"
+      },
+      "placements": [
+        {
+          "cell": [
+            6,
+            2
+          ],
+          "value": "row_3_x:0:0"
+        },
+        {
+          "cell": [
+            3,
+            7
+          ],
+          "value": "grid_2d_4x4:0:0"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Tutorial_Single",
+      "primary_tokens": [
+        "pick_up_cube"
+      ],
+      "question": "What is the smallest action this world can recognise?",
+      "ontology": "An encounter has an object, a detection boundary, an event, and a resulting state. The visible cube and the invisible rule recognising contact are different things.",
+      "action": "Watch the lone pickup bob and turn, then approach until your body enters its detection volume. Observe its collection animation and disappearance. This is an approach-and-contact task, not an instruction to grab and carry it.",
+      "observable": "Before contact, the cube persists and animates. After collection it becomes unavailable. The same object cannot be collected again in that instance.",
+      "mechanism": "pick_up_cube.tscn root is Node3D; DetectionArea.body_entered invokes _on_detection_area_body_entered. collect() guards has_been_collected, awards configured points through GameManager when available, plays generated sound and removes the object.",
+      "limit": "The detector accepts an overlap; it cannot establish curiosity, understanding or consent. Successful collection is evidence that an event occurred, not evidence that the visitor has learned a concept.",
+      "variation": "Pause just outside the object and describe what counts as an action before entering. A future two-condition version could contrast inspection with collection, but that alternate success rule is a proposal.",
+      "prior_bridge": "Live previous room: Array",
+      "next_bridge": "Live next room: Tutorial_Disco",
+      "sources": [
+        "commons/scenes/mapobjects/pick_up_cube.gd :: _on_detection_area_body_entered, collect",
+        "commons/maps/Tutorial_Single/technical.md :: stale hypothetical GrabbableCube example contradicts live scene"
+      ],
+      "source_files": [
+        "commons/maps/Tutorial_Single/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/scenes/mapobjects/pick_up_cube.tscn",
+        "commons/scenes/mapobjects/pick_up_cube.gd",
+        "commons/maps/Tutorial_Single/technical.md"
+      ],
+      "source_hashes": {
+        "commons/maps/Tutorial_Single/map_data.json": "0a8f57e28f1c4ee89612462e551bc690b9c98b53dd2667204203428a73330a4b",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/scenes/mapobjects/pick_up_cube.tscn": "257dce29b4e7bc43ac1181b11301c516f7e79f7b11c7469f1d6e80b516c98df8",
+        "commons/scenes/mapobjects/pick_up_cube.gd": "d1b1dc5037d557abb7f81f4e62c48da379c394a9604dc85680bacbb368d2ea8d",
+        "commons/maps/Tutorial_Single/technical.md": "5f71a56e061497245df7bfb01c7389c6292d0545744214fc7846d8c48cea1d76"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            4
+          ],
+          "value": "pick_up_cube"
+        }
+      ],
+      "cautions": "Do not promise the nearby science_screen tracks this pickup: its point mode expects pickable tracking sources. Existing map metadata/technical text incorrectly describe hand grabbing."
+    },
+    {
+      "room_id": "Tutorial_Disco",
+      "primary_tokens": [
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "question": "How does a stored arrangement become an event that repeats in time?",
+      "ontology": "The sequencer is a matrix of active steps: tracks are rows, time positions are columns, and a moving playhead reads them in order.",
+      "action": "Use the sequencer grid to toggle a cell, start playback if stopped, and listen for that event each loop. Change a second cell or the tempo, then compare the rhythm and the floor pulses.",
+      "observable": "Editing a cell changes what sounds when that column is reached. Changing BPM changes how quickly the same arrangement is traversed. The disco floor flashes columns in response to active sequencer steps.",
+      "mechanism": "step_sequencer._on_cell_toggled updates the pattern; _process advances the playhead according to BPM and emits step_triggered(track,step) for active cells. DiscoSequencerBridge connects that signal, flashes step modulo grid_width, and advances the floor pattern for track 0 at step 0. The placed floor scene is 12x12, not the old prose’s 17x17.",
+      "limit": "The floor displays a rhythm written elsewhere; walking on it does not record footsteps into the sequencer. A time grid also quantizes events into available steps and instruments.",
+      "variation": "Move one beat away from the expected pulse and listen for how the same loop changes. Footstep-to-score capture would be a future interface change, not an existing ability.",
+      "prior_bridge": "Live previous room: Tutorial_Single",
+      "next_bridge": "Live next room: Color_Context_Placed",
+      "sources": [
+        "commons/audio/sequencer/step_sequencer.gd :: _on_cell_toggled, _on_playback_toggled, _on_bpm_changed, _process",
+        "commons/context/discofloor/DiscoSequencerBridge.gd :: _on_step_triggered, _pulse_column",
+        "commons/context/discofloor/standalone_disco_floor.tscn :: grid_width=12, grid_depth=12"
+      ],
+      "source_files": [
+        "commons/maps/Tutorial_Disco/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/audio/sequencer/step_sequencer.tscn",
+        "commons/audio/sequencer/step_sequencer.gd",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/context/discofloor/standalone_disco_floor.tscn",
+        "commons/context/discofloor/StandaloneDiscoFloor.gd",
+        "commons/context/discofloor/DiscoSequencerBridge.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Tutorial_Disco/map_data.json": "88d6f722bb0e2b30d7b7c0ce989a0b933664a9ba7653bca6ae106178a18c3c2f",
+        "commons/artifacts/registry/arrays.json": "ecf7b1a87abf190a373525b594590c955638ac4887e2888ee73b5b377d86b1f0",
+        "commons/audio/sequencer/step_sequencer.tscn": "5a62f12e9c1de960334703a7d8e6a9cd7b7e0574b7c4056fa63627c5ef9dc530",
+        "commons/audio/sequencer/step_sequencer.gd": "1f47bbd111a3e8b90eca8c06f2885fb65e5c89c144e25a1488f3e8d85aa13835",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/context/discofloor/standalone_disco_floor.tscn": "9b91e0b4672904cf63bde35bee454a0210730fe7f0ee682df3b0f8056a6c7d2c",
+        "commons/context/discofloor/StandaloneDiscoFloor.gd": "1b873f1c366ad3336791a4ca6e27d9f9cc9ff8d9995393fe5bc41d8bef707ec2",
+        "commons/context/discofloor/DiscoSequencerBridge.gd": "7b84b4c7560bb0ba7ce2fea5a7b995ac512ae059f346029f4900654ca32550ad"
+      },
+      "placements": [
+        {
+          "cell": [
+            7,
+            3
+          ],
+          "value": "step_sequencer:180:1.2:2#house"
+        },
+        {
+          "cell": [
+            8,
+            7
+          ],
+          "value": "standalone_disco#width:12#depth:12#walkable:true"
+        }
+      ],
+      "cautions": "Nearby cross-room sequencer discovery and UI reachability need runtime checks. No footstep recording implementation exists in this bridge."
+    }
+  ]
+}

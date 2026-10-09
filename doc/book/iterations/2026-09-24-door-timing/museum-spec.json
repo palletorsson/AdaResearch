@@ -1,0 +1,92 @@
+{
+  "shots": [
+    {
+      "tag": "room",
+      "from": [
+        9.5,
+        2.6,
+        30.7
+      ],
+      "look_at": [
+        9.5,
+        2.0,
+        38.3
+      ],
+      "fov": 98
+    },
+    {
+      "tag": "plan",
+      "from": [
+        15.2,
+        13.0,
+        42.0
+      ],
+      "look_at": [
+        9.5,
+        0,
+        37.4
+      ],
+      "fov": 75
+    }
+  ],
+  "rays": [
+    {
+      "tag": "trial forecourt floor",
+      "x": 9.5,
+      "z": 33.6,
+      "top": 0,
+      "tolerance": 0.2
+    },
+    {
+      "tag": "rear merging floor",
+      "x": 9.5,
+      "z": 42.0,
+      "top": 0,
+      "tolerance": 0.2
+    }
+  ],
+  "walks": [
+    {
+      "tag": "left gallery bypass",
+      "from": [
+        1.5,
+        0.1,
+        33.0
+      ],
+      "to": [
+        1.5,
+        0.1,
+        43.0
+      ],
+      "seconds": 6
+    },
+    {
+      "tag": "right gallery bypass",
+      "from": [
+        17.5,
+        0.1,
+        33.0
+      ],
+      "to": [
+        17.5,
+        0.1,
+        43.0
+      ],
+      "seconds": 6
+    },
+    {
+      "tag": "rear cross passage",
+      "from": [
+        2.5,
+        0.1,
+        43.0
+      ],
+      "to": [
+        16.5,
+        0.1,
+        43.0
+      ],
+      "seconds": 8
+    }
+  ]
+}

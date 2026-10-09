@@ -1,0 +1,52 @@
+{
+  "status": "route restored; chapters preserved",
+  "summary": "The seven chapters already carry an investigative progression from rewriting to interpretation, construction, environment and authoring. Competition is restored to the museum route. Architecture now lets the reader investigate its two room instructions before disclosing their shared address. All seven final.md files are retained.",
+  "items": [
+    {
+      "title": "Let the two room instructions remain a question",
+      "description": "The manuscript asks the reader to trace both R instructions through the bracketed returns. The artifact previously printed the answer on arrival. Its opening now withholds the address count; RULE or ROOMS reveals it, and RESET restores the question.",
+      "images": [
+        "doc/book/iterations/2026-09-20-lsystems-review/before-opening.png",
+        "doc/book/iterations/2026-09-20-lsystems-review/after-opening.png"
+      ],
+      "captions": [
+        "Before · “1 shared address” was printed before the investigation.",
+        "Current opening · two records, with their address count left to investigate."
+      ],
+      "image_note": "Actual museum, matched camera and opening state. Background animations continue between runs. No wall, footprint or collision change is made.",
+      "text_kind": "artifact readout; book unchanged",
+      "before": "PLAN / clear width 1.4 m / rooms OFF\n4 segments / 2 R records / 1 shared address",
+      "after": "PLAN / clear width 1.4 m / rooms OFF\n4 segments / 2 R records",
+      "report": "doc/book/iterations/2026-09-20-lsystems-review/SUMMARY.md"
+    },
+    {
+      "title": "The answer can arrive through another encounter",
+      "description": "ROOMS expands the footprint at the junction and reveals “1 shared address.” RULE also reveals it. The existing passage remains: “Two Rs appear in the sentence. Find the two places they mark. Follow the brackets carefully before deciding that there must be two rooms.”",
+      "images": [
+        "doc/book/iterations/2026-09-20-lsystems-review/after-opening.png",
+        "doc/book/iterations/2026-09-20-lsystems-review/revealed.png"
+      ],
+      "captions": [
+        "Opening · the instruction count is available.",
+        "ROOMS · the footprint and the address answer appear together."
+      ],
+      "image_note": "Two states of the updated artifact, at the same camera position. Runtime controls were exercised through real button signals; headset understanding remains unverified."
+    },
+    {
+      "title": "Bring the shared world back into the route",
+      "description": "Competition was present in the project and manuscript but omitted from both active museum plans. Its existing forest, coral and dark sphere return between Architecture and Living. The restored controlled pair still reverses its resource advantage when the first turn changes.",
+      "images": [
+        "doc/book/iterations/2026-09-20-lsystems-review/competition.png"
+      ],
+      "captions": [
+        "Restored Competition · the controlled pair stands before the retained forest."
+      ],
+      "image_note": "Actual Competition segment built after Architecture by the museum’s normal next-segment selection. Living then built after it. This is not evidence of a new end-to-end walk.",
+      "before": "Architecture → Living",
+      "after": "Architecture → Competition → Living",
+      "text_kind": "museum route",
+      "report": "doc/book/iterations/2026-09-20-lsystems-review/review-report.json",
+      "report_label": "Runtime evidence and scope"
+    }
+  ]
+}

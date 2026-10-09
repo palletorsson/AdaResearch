@@ -1,0 +1,346 @@
+--- doc/book/iterations/claude-softbodies-softbodies_cloth_physics-pilot/before/soft_workshop.json	2026-09-23 18:42:46.977893500 +0200
++++ commons/artifacts/timing_machines/soft_workshop.json	2026-09-23 18:43:45.326049400 +0200
+@@ -1,171 +1,172 @@
+-[
+-  {
+-    "map": "SoftBodies_Soft_Body_Deformation",
+-    "slug": "deformation",
+-    "title": "What holds a cube together?",
+-    "primary": [
+-      "jelly_cube",
+-      "softmill"
+-    ],
+-    "question": "How can a body yield while keeping relations between its parts?",
+-    "controls": [
+-      "STIFFNESS",
+-      "DAMPING",
+-      "PRESSURE",
+-      "RESET",
+-      "MILL",
+-      "RULE"
+-    ],
+-    "rule": "SoftBody3D updates vertices under stiffness, damping and pressure.\nThe triangle connections remain. A changed shape need not change topology.\nMILL holds the drive; the soft sphere still responds to physics."
+-  },
+-  {
+-    "map": "SoftBodies_Cloth_Physics",
+-    "slug": "cloth",
+-    "title": "Which points must stay?",
+-    "primary": [
+-      "cloth_straps",
+-      "softstopscene"
+-    ],
+-    "question": "How does fixing a boundary change the forms a surface can take?",
+-    "controls": [
+-      "PINS",
+-      "STIFFNESS",
+-      "RELEASE",
+-      "REBUILD",
+-      "LANDING",
+-      "RULE"
+-    ],
+-    "rule": "PINS changes which cloth vertices cannot move.\nRELEASE removes those pins. REBUILD starts fresh strips.\nLANDING changes the obstruction under four falling spheres.\nThose spheres are a comparison, not woven cloth."
+-  },
+-  {
+-    "map": "SoftBodies_Carusell",
+-    "slug": "carousel",
+-    "title": "The support moves",
+-    "primary": [
+-      "revolving_joy_ride",
+-      "cloth_straps"
+-    ],
+-    "question": "What changes when the constraint itself is driven?",
+-    "controls": [
+-      "SPEED",
+-      "REVERSE",
+-      "STOP",
+-      "STIFFNESS",
+-      "PRESSURE",
+-      "RULE"
+-    ],
+-    "rule": "The hub is driven at a prescribed angular rate.\nJoints and soft bodies respond; they do not choose that rate.\nSTOP removes the drive, not gravity or all motion."
+-  },
+-  {
+-    "map": "SoftBodies_Obsticals",
+-    "slug": "breathing",
+-    "title": "The room has a body",
+-    "primary": [
+-      "breathing_room",
+-      "softbody_gallery_part2"
+-    ],
+-    "question": "What happens when the enclosing architecture deforms?",
+-    "controls": [
+-      "AMPLITUDE",
+-      "RATE",
+-      "HOLD DRIVE",
+-      "STIFFNESS",
+-      "RESET PHASE",
+-      "RULE"
+-    ],
+-    "rule": "P = (sin(time) + 1) * amplitude / 2.\nThe sine drives pressure, then the soft solver responds.\nHOLD DRIVE holds pressure while physics continues.\nThe room does not sense or decide to breathe."
+-  },
+-  {
+-    "map": "SoftBodies_Obsticals_Part2",
+-    "slug": "contact",
+-    "title": "Same fall, another encounter",
+-    "primary": [
+-      "softbody_gallery_part2"
+-    ],
+-    "question": "Which differences belong to material, contact geometry and experimental variation?",
+-    "controls": [
+-      "REPLAY",
+-      "VARIATION",
+-      "GROUP",
+-      "HOLD",
+-      "RELEASE",
+-      "RULE"
+-    ],
+-    "rule": "The gallery varies mesh, obstruction and material settings.\nSeed 1337; optional extra material jitter is off initially.\nHOLD pins current points. It does not discover a final shape.\nChoose a named comparison before generalizing."
+-  },
+-  {
+-    "map": "SoftBodies_Playground_of_Joy",
+-    "slug": "sampling",
+-    "title": "When does a body become a form?",
+-    "primary": [
+-      "rounded_softbody_test",
+-      "frozen_glass_vessel"
+-    ],
+-    "question": "What does a frozen surface keep of the process that made it?",
+-    "controls": [
+-      "MEASURE",
+-      "FEEDBACK",
+-      "SQUEEZE",
+-      "STIFFNESS",
+-      "DURATION",
+-      "GRAVITY",
+-      "RULE"
+-    ],
+-    "rule": "MEASURE changes the reading; FEEDBACK adjusts pressure.\nThe volume proxy is a box aligned with the world axes.\nFeedback off restores selected pressure, not a previous shape.\nDURATION keeps a different moment as a collidable closed skin."
+-  },
+-  {
+-    "map": "SoftBodies_Affect_Theory_Visualization",
+-    "slug": "affect",
+-    "title": "What makes this look alive?",
+-    "primary": [
+-      "radiolaria"
+-    ],
+-    "question": "What can the image of a living body tell us about the mechanism?",
+-    "controls": [
+-      "ROTATION",
+-      "COLOUR",
+-      "EFFECTS",
+-      "SEED",
+-      "SPIKES",
+-      "RULE"
+-    ],
+-    "rule": "Spheres, rings, lattices and spikes are constructed by recipes.\nColour, rotation and glow change the encounter.\nThey do not turn this geometry into a biological simulation.\nWhat mechanism does the resemblance invite you to imagine?"
+-  },
+-  {
+-    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+-    "slug": "reaction",
+-    "title": "A pattern has a metabolism",
+-    "primary": [
+-      "turing_pattern_generator",
+-      "reaction_diffusion"
+-    ],
+-    "question": "How can local exchanges maintain a spatial difference?",
+-    "controls": [
+-      "STEP",
+-      "100 STEPS",
+-      "REGIME",
+-      "SEEDING",
+-      "RESET",
+-      "RULE"
+-    ],
+-    "rule": "Gray-Scott: uvv = u * v * v.\nDiffusion exchanges concentrations; feed and kill replenish/remove.\nRead the old arrays, then swap buffers.\nA 2D chemical field is not yet a deforming solid."
+-  },
+-  {
+-    "map": "Topology_Entropy_Morphogenesis",
+-    "slug": "morphogenesis",
+-    "title": "Who connected the controls?",
+-    "primary": [
+-      "entropy_morphogenesis"
+-    ],
+-    "question": "Does a parameter named entropy measure disorder, or prescribe a family of forms?",
+-    "controls": [
+-      "S",
+-      "LEVEL",
+-      "NOISE",
+-      "RESOLUTION",
+-      "RESET",
+-      "RULE"
+-    ],
+-    "rule": "S interpolates frequency and noise, and shifts the threshold.\nIt is not computed from a probability distribution.\nChanging resolution changes the sampled surface.\nAn authored coupling is a choice we can separate and test."
+-  }
+-]
++[
++  {
++    "map": "SoftBodies_Soft_Body_Deformation",
++    "slug": "deformation",
++    "title": "What holds a cube together?",
++    "primary": [
++      "jelly_cube",
++      "softmill"
++    ],
++    "question": "How can a body yield while keeping relations between its parts?",
++    "controls": [
++      "STIFFNESS",
++      "DAMPING",
++      "PRESSURE",
++      "RESET",
++      "MILL",
++      "RULE"
++    ],
++    "rule": "SoftBody3D updates vertices under stiffness, damping and pressure.\nThe triangle connections remain. A changed shape need not change topology.\nMILL holds the drive; the soft sphere still responds to physics."
++  },
++  {
++    "map": "SoftBodies_Cloth_Physics",
++    "slug": "cloth",
++    "title": "Which points must stay?",
++    "primary": [
++      "cloth_straps",
++      "softstopscene"
++    ],
++    "question": "How does fixing a boundary change the forms a surface can take?",
++    "controls": [
++      "PINS",
++      "SUPPORT",
++      "STIFFNESS",
++      "RELEASE",
++      "REBUILD",
++      "LANDING",
++      "RULE"
++    ],
++    "rule": "PINS changes which cloth vertices cannot move.\nSUPPORT changes the frame the strips appear to hang from.\nRELEASE removes the pins. REBUILD starts fresh strips.\nLANDING changes the obstruction under four falling spheres.\nThose spheres are a comparison, not woven cloth."
++  },
++  {
++    "map": "SoftBodies_Carusell",
++    "slug": "carousel",
++    "title": "The support moves",
++    "primary": [
++      "revolving_joy_ride",
++      "cloth_straps"
++    ],
++    "question": "What changes when the constraint itself is driven?",
++    "controls": [
++      "SPEED",
++      "REVERSE",
++      "STOP",
++      "STIFFNESS",
++      "PRESSURE",
++      "RULE"
++    ],
++    "rule": "The hub is driven at a prescribed angular rate.\nJoints and soft bodies respond; they do not choose that rate.\nSTOP removes the drive, not gravity or all motion."
++  },
++  {
++    "map": "SoftBodies_Obsticals",
++    "slug": "breathing",
++    "title": "The room has a body",
++    "primary": [
++      "breathing_room",
++      "softbody_gallery_part2"
++    ],
++    "question": "What happens when the enclosing architecture deforms?",
++    "controls": [
++      "AMPLITUDE",
++      "RATE",
++      "HOLD DRIVE",
++      "STIFFNESS",
++      "RESET PHASE",
++      "RULE"
++    ],
++    "rule": "P = (sin(time) + 1) * amplitude / 2.\nThe sine drives pressure, then the soft solver responds.\nHOLD DRIVE holds pressure while physics continues.\nThe room does not sense or decide to breathe."
++  },
++  {
++    "map": "SoftBodies_Obsticals_Part2",
++    "slug": "contact",
++    "title": "Same fall, another encounter",
++    "primary": [
++      "softbody_gallery_part2"
++    ],
++    "question": "Which differences belong to material, contact geometry and experimental variation?",
++    "controls": [
++      "REPLAY",
++      "VARIATION",
++      "GROUP",
++      "HOLD",
++      "RELEASE",
++      "RULE"
++    ],
++    "rule": "The gallery varies mesh, obstruction and material settings.\nSeed 1337; optional extra material jitter is off initially.\nHOLD pins current points. It does not discover a final shape.\nChoose a named comparison before generalizing."
++  },
++  {
++    "map": "SoftBodies_Playground_of_Joy",
++    "slug": "sampling",
++    "title": "When does a body become a form?",
++    "primary": [
++      "rounded_softbody_test",
++      "frozen_glass_vessel"
++    ],
++    "question": "What does a frozen surface keep of the process that made it?",
++    "controls": [
++      "MEASURE",
++      "FEEDBACK",
++      "SQUEEZE",
++      "STIFFNESS",
++      "DURATION",
++      "GRAVITY",
++      "RULE"
++    ],
++    "rule": "MEASURE changes the reading; FEEDBACK adjusts pressure.\nThe volume proxy is a box aligned with the world axes.\nFeedback off restores selected pressure, not a previous shape.\nDURATION keeps a different moment as a collidable closed skin."
++  },
++  {
++    "map": "SoftBodies_Affect_Theory_Visualization",
++    "slug": "affect",
++    "title": "What makes this look alive?",
++    "primary": [
++      "radiolaria"
++    ],
++    "question": "What can the image of a living body tell us about the mechanism?",
++    "controls": [
++      "ROTATION",
++      "COLOUR",
++      "EFFECTS",
++      "SEED",
++      "SPIKES",
++      "RULE"
++    ],
++    "rule": "Spheres, rings, lattices and spikes are constructed by recipes.\nColour, rotation and glow change the encounter.\nThey do not turn this geometry into a biological simulation.\nWhat mechanism does the resemblance invite you to imagine?"
++  },
++  {
++    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
++    "slug": "reaction",
++    "title": "A pattern has a metabolism",
++    "primary": [
++      "turing_pattern_generator",
++      "reaction_diffusion"
++    ],
++    "question": "How can local exchanges maintain a spatial difference?",
++    "controls": [
++      "STEP",
++      "100 STEPS",
++      "REGIME",
++      "SEEDING",
++      "RESET",
++      "RULE"
++    ],
++    "rule": "Gray-Scott: uvv = u * v * v.\nDiffusion exchanges concentrations; feed and kill replenish/remove.\nRead the old arrays, then swap buffers.\nA 2D chemical field is not yet a deforming solid."
++  },
++  {
++    "map": "Topology_Entropy_Morphogenesis",
++    "slug": "morphogenesis",
++    "title": "Who connected the controls?",
++    "primary": [
++      "entropy_morphogenesis"
++    ],
++    "question": "Does a parameter named entropy measure disorder, or prescribe a family of forms?",
++    "controls": [
++      "S",
++      "LEVEL",
++      "NOISE",
++      "RESOLUTION",
++      "RESET",
++      "RULE"
++    ],
++    "rule": "S interpolates frequency and noise, and shifts the threshold.\nIt is not computed from a probability distribution.\nChanging resolution changes the sampled surface.\nAn authored coupling is a choice we can separate and test."
++  }
++]

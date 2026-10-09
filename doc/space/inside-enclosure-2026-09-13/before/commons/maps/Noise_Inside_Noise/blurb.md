@@ -1,0 +1,1 @@
+The yellow point stays on the body. The pink point moves through its source. Compare two spheres, return the warp to zero, then let the same values become relief. What changes when a surface borrows another address?

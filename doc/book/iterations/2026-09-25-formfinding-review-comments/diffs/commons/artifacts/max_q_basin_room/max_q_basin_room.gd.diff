@@ -1,0 +1,22 @@
+--- before/commons/artifacts/max_q_basin_room/max_q_basin_room.gd
++++ commons/artifacts/max_q_basin_room/max_q_basin_room.gd
+@@ -89,10 +89,18 @@
+ 		# narrow well drops fast (f^0.5 steep walls); wide well is a soft parabola (f^2)
+ 		var depth_f: float = (sqrt(f) if narrow else (f * f))
+ 		var y: float = -depth * depth_f
++		# Sample adjacent rings so the normal follows the drawn hollow. This
++		# also avoids the square-root profile's singular derivative at the rim.
++		var before_f: float = maxf(0.0, f - 1.0 / bands)
++		var after_f: float = minf(1.0, f + 1.0 / bands)
++		var before_y: float = -depth * (sqrt(before_f) if narrow else before_f * before_f)
++		var after_y: float = -depth * (sqrt(after_f) if narrow else after_f * after_f)
++		var profile_slope: float = (before_y - after_y) / (rim_radius * (after_f - before_f))
+ 		for s in range(segs + 1):
+ 			var th: float = (float(s) / float(segs)) * TAU
+ 			verts.append(center + Vector3(rr * cos(th), y, rr * sin(th)))
+-			normals.append(Vector3.UP)
++			# The shared pole has a rotationally symmetric, upward normal.
++			normals.append(Vector3.UP if b == bands else Vector3(-profile_slope * cos(th), 1.0, -profile_slope * sin(th)).normalized())
+ 	var stride: int = segs + 1
+ 	for b in range(bands):
+ 		for s in range(segs):

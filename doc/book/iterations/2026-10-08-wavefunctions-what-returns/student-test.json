@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "name": "ready creates the cube mesh",
+      "passed": true
+    },
+    {
+      "name": "ready creates the label",
+      "passed": true
+    },
+    {
+      "name": "cube retains whole-object scale",
+      "passed": true
+    },
+    {
+      "name": "predicted height at 0.0 seconds",
+      "passed": true
+    },
+    {
+      "name": "predicted height at 0.5 seconds",
+      "passed": true
+    },
+    {
+      "name": "predicted height at 1.0 seconds",
+      "passed": true
+    },
+    {
+      "name": "predicted height at 1.5 seconds",
+      "passed": true
+    },
+    {
+      "name": "predicted height at 2.0 seconds",
+      "passed": true
+    },
+    {
+      "name": "same time never accumulates height",
+      "passed": true
+    },
+    {
+      "name": "formula changes only the vertical coordinate",
+      "passed": true
+    },
+    {
+      "name": "double amplitude doubles the upward extent",
+      "passed": true
+    },
+    {
+      "name": "amplitude leaves the period unchanged",
+      "passed": true
+    },
+    {
+      "name": "double frequency reaches the top in a quarter second",
+      "passed": true
+    },
+    {
+      "name": "double frequency completes a cycle in one second",
+      "passed": true
+    },
+    {
+      "name": "half-cycle phase retains the middle start",
+      "passed": true
+    },
+    {
+      "name": "half-cycle phase reverses the first direction",
+      "passed": true
+    },
+    {
+      "name": "quarter-cycle phase begins at the top",
+      "passed": true
+    },
+    {
+      "name": "zero frequency retains the selected phase height",
+      "passed": true
+    },
+    {
+      "name": "zero amplitude holds the centre",
+      "passed": true
+    },
+    {
+      "name": "equal elapsed seconds agree across render rates",
+      "passed": true
+    },
+    {
+      "name": "two cubes can be at opposite extremes",
+      "passed": true
+    },
+    {
+      "name": "instances keep independent clocks",
+      "passed": true
+    },
+    {
+      "name": "instances keep independent parameters",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [],
+  "passed": true,
+  "scope": "Exact published cube code; teacher-authored native checks, not human or headset evidence.",
+  "source": "res://doc/book/iterations/2026-10-08-wavefunctions-what-returns/extracted/01_cube_return.gd"
+}

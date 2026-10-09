@@ -1,0 +1,165 @@
+--- before/commons/ui/control_console.gd
++++ commons/ui/control_console.gd
+@@ -52,6 +52,9 @@
+ ## A floor-standing console: a solid body rises to `body_height`, then the slant
+ ## begins; the (smaller) board is mounted on the slanted top.
+ @export var board_width: float = 0.62                      # the control board on the slant — smaller than the body
++## Fit the cabinet around controls at their authored size. Opt in before adding
++## controls; board_width becomes a minimum, rather than a scale applied to them.
++@export var fit_controls: bool = false
+ @export var body_height: float = 1.0                       # solid body up to here; the slant starts at this height
+ @export var body_depth: float = 0.4                        # base footprint depth (~0.3–0.5 m)
+ ## DNA gene: how the console meets the room. "kiosk" is the shipped floor cabinet —
+@@ -179,6 +182,7 @@
+ 	if config_data.has("body_height"): body_height = float(config_data["body_height"])
+ 	if config_data.has("body_depth"): body_depth = float(config_data["body_depth"])
+ 	if config_data.has("board_width"): board_width = float(config_data["board_width"])
++	if config_data.has("fit_controls"): fit_controls = str(config_data["fit_controls"]).to_lower() in ["true", "on", "1"]
+ 	if config_data.has("board_drop"): board_drop = float(config_data["board_drop"])
+ 	if config_data.has("board_out"): board_out = float(config_data["board_out"])
+ 	if config_data.has("board_slide"): board_slide = float(config_data["board_slide"])
+@@ -450,19 +454,20 @@
+ 		await tree_entered
+ 	await get_tree().process_frame
+ 
+-	# Measure the plate, then scale it DOWN to the (smaller) board that sits on
+-	# the slant. Absolute metres now — no whole-console rescale.
++	# Legacy placements retain their configured width. Natural-size layouts fit
++	# the housing around the panel so handles and travel stay in authored metres.
+ 	var box := _local_aabb(_panel)
+ 	var pw: float = maxf(0.001, box.size.x)
+ 	var ph: float = maxf(0.001, box.size.y)
+-	var s: float = board_width / pw
++	var s: float = 1.0 if fit_controls else board_width / pw
++	var fitted_width: float = maxf(board_width, pw) if fit_controls else board_width
+ 	_panel.scale = Vector3.ONE * s
+ 	var board_h: float = ph * s
+ 
+ 	var t := deg_to_rad(tilt_deg)
+ 	var face_n := Vector3(0.0, sin(t), cos(t))           # board face normal (reclined, faces up-forward)
+ 
+-	var head_w := board_width + bezel * 2.0
++	var head_w := fitted_width + bezel * 2.0
+ 	# Extra length so the faceplate extends above the (downward-slid) board.
+ 	var head_l := board_h + bezel * 2.0 + board_face_drop * 2.0   # length up the slant
+ 	var head_t := 0.06
+@@ -582,6 +587,11 @@
+ 	#    shows metal above it (nestled into the body, not perched on top). ──────
+ 	_panel.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
+ 	_panel.position = head_c + face_n * (head_t * 0.5 + 0.012) - u_up * board_face_drop
++	if fit_controls:
++		# The header makes panel bounds asymmetric about its origin. Centre the
++		# measured face in the housing, keeping the full backing inside the bezel.
++		var centre := box.get_center()
++		_panel.position -= _panel.basis * Vector3(centre.x, centre.y, 0.0)
+ 
+ 	# DESKTOP form: shift the whole console down so the reading FACE sits at the
+ 	# node origin. Then an artifact can place it at table height (like the old
+--- before/commons/ui/interface_presets.gd
++++ commons/ui/interface_presets.gd
+@@ -136,7 +136,9 @@
+ 
+ ## Build the configured housing for `type`, in the named `skin`. `plate_height`
+ ## = the world Y the board sits at. Returns ControlConsole / InterfaceHousing.
+-static func build(type: String, title: String, plate_height: float = 1.0, skin: String = "braun") -> Node3D:
++## `compact` keeps controls at their authored size and wraps at three columns.
++## Adopt per encounter: it can need a larger casing than a scaled-down legacy one.
++static func build(type: String, title: String, plate_height: float = 1.0, skin: String = "braun", layout: String = "legacy") -> Node3D:
+ 	var cfg: Dictionary = config_for(type)
+ 	var housing: String = cfg.get("housing", "console")
+ 	var sc: Dictionary = SKINS[skin] if SKINS.has(skin) else SKINS["braun"]
+@@ -163,6 +165,10 @@
+ 	console.set("trim_color", sc["trim"])
+ 	console.call("set_title", title)
+ 	_style_panel(console.call("panel"), sc)
++	if layout == "compact":
++		console.set("fit_controls", true)
++		console.call("panel").set("spacing", 0.22)
++		console.call("panel").set("layout_columns", 3)
+ 	return console
+ 
+ 
+--- before/commons/ui/control_panel.gd
++++ commons/ui/control_panel.gd
+@@ -121,6 +121,8 @@
+ 	if s.has_method("set_param_name"):
+ 		s.set_param_name(param_name if param_name != "" else label)
+ 	_row.add_child(s)
++	if _uses_rows() and s.has_method("use_panel_value_surface"):
++		s.use_panel_value_surface()
+ 	# wide: the unscaled fader needs ~1.4 slots (physics controls are never
+ 	# shrunk to fit — see _fit_items_to_cells).
+ 	_items.append({"node": s, "label": label, "wide": true})
+--- before/commons/interactables/slider_smooth.gd
++++ commons/interactables/slider_smooth.gd
+@@ -23,6 +23,8 @@
+ @onready var _slider: Node = get_node_or_null(slider_node)
+ @onready var _label: Label3D = get_node_or_null(label_node)
+ var _last_display_text: String = ""
++var _surface_value: Label
++var _surface_viewport: SubViewport
+ 
+ # Desktop pointer drag state
+ var _pointer_dragging: bool = false
+@@ -168,6 +170,49 @@
+ 		return
+ 	_last_display_text = text
+ 	_label.text = text
++	if is_instance_valid(_surface_value):
++		_surface_value.text = text
++		_surface_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
++
++## Optional live 2D value screen seated on the horizontal panel fader. The
++## original label remains an internal compatibility sink but is never drawn.
++## Rendering happens only when the formatted value changes.
++func use_panel_value_surface() -> void:
++	if is_instance_valid(_surface_value): return
++	if not _ensure_label(): return
++	_label.hide()
++	_surface_viewport = SubViewport.new()
++	_surface_viewport.name = "ValueViewport"
++	_surface_viewport.size = Vector2i(128, 48)
++	_surface_viewport.disable_3d = true
++	_surface_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
++	add_child(_surface_viewport)
++	var background := ColorRect.new()
++	background.size = Vector2(128, 48)
++	background.color = Color(0.08, 0.09, 0.10)
++	_surface_viewport.add_child(background)
++	_surface_value = Label.new()
++	_surface_value.name = "Value"
++	_surface_value.size = Vector2(128, 48)
++	_surface_value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
++	_surface_value.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
++	_surface_value.add_theme_font_size_override("font_size", 28)
++	_surface_value.add_theme_color_override("font_color", Color(0.75, 1.0, 0.70))
++	_surface_value.text = _last_display_text
++	_surface_viewport.add_child(_surface_value)
++	var screen := MeshInstance3D.new()
++	screen.name = "ValueSurface"
++	var quad := QuadMesh.new()
++	quad.size = Vector2(0.052, 0.020)
++	screen.mesh = quad
++	screen.position = Vector3(0.027, 0.075, 0.0085)
++	screen.rotation_degrees.z = -90.0
++	screen.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	var material := StandardMaterial3D.new()
++	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	material.albedo_texture = _surface_viewport.get_texture()
++	screen.material_override = material
++	get_node("Frame").add_child(screen)
+ 
+ func set_param_name(text: String):
+ 	var name_label = get_node_or_null("Frame/LabelName")
+--- before/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd
++++ commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd
+@@ -445,7 +445,8 @@
+ 	# (F · E · λ · φ) as a slider row + a summary readout. The radar / phase bar /
+ 	# detail readout stay as world-space viz. Replaces the hand-built plate + jumpy
+ 	# slider_horizontal with the canonical slider_smooth row.
+-	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height)
++	# Keep the four rails and optional KEEP comparison at their authored size.
++	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height, "braun", "compact")
+ 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
+ 	add_child(_plate_root)
+ 	_owned.append(_plate_root)

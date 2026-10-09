@@ -1,0 +1,216 @@
+{
+	"checks": [
+		{
+			"check": "Twenty-five distinct column instances",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 0/0",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 1/0",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 2/0",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 3/0",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 4/0",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 0/1",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 1/1",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 2/1",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 3/1",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 4/1",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 0/2",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 1/2",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 2/2",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 3/2",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 4/2",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 0/3",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 1/3",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 2/3",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 3/3",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 4/3",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 0/4",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 1/4",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 2/4",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 3/4",
+			"passed": true
+		},
+		{
+			"check": "Resolution pair 4/4",
+			"passed": true
+		},
+		{
+			"check": "Generated heights match the authored arrangement",
+			"passed": true
+		},
+		{
+			"check": "Five profile families and at least twenty different heights",
+			"passed": true
+		},
+		{
+			"check": "All bodies start on their plinths and reach their stated heights",
+			"passed": true
+		},
+		{
+			"check": "Every profile stays within its plinth and below the crossbeams",
+			"passed": true
+		},
+		{
+			"check": "All mesh vertices and flat normals are finite and populated",
+			"passed": true
+		},
+		{
+			"check": "Either resolution axis independently increases triangle count",
+			"passed": true
+		},
+		{
+			"check": "Five different profiles exist at the same height and resolution",
+			"passed": true
+		},
+		{
+			"check": "Continuous floor supports the central aisle",
+			"passed": true
+		},
+		{
+			"check": "Column geometry leaves the centre aisle unobstructed",
+			"passed": true
+		},
+		{
+			"check": "Columns have solid collision",
+			"passed": true
+		},
+		{
+			"check": "Desktop body walks to the far end without falling or blocking",
+			"passed": true
+		},
+		{
+			"check": "Return control restores entrance position",
+			"passed": true
+		},
+		{
+			"check": "Leaving the floor recovers to the entrance",
+			"passed": true
+		},
+		{
+			"check": "Native capture arrival.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture colonnade.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture four.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture sixteen.png",
+			"passed": true
+		},
+		{
+			"check": "Native capture light.png",
+			"passed": true
+		},
+		{
+			"check": "Equal-form resolution comparison remains available",
+			"passed": true
+		}
+	],
+	"column_triangles": 27140,
+	"desktop_walk_tested": true,
+	"passed": true,
+	"per_column_triangles": [
+		264,
+		396,
+		528,
+		792,
+		1056,
+		344,
+		516,
+		688,
+		1032,
+		1376,
+		424,
+		636,
+		848,
+		1272,
+		1696,
+		584,
+		876,
+		1168,
+		1752,
+		2336,
+		744,
+		1116,
+		1488,
+		2232,
+		2976
+	],
+	"physical_headset_tested": false,
+	"source": "Native Godot gallery, code-created geometry"
+}

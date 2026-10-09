@@ -1,0 +1,22 @@
+--- before/commons/maps/CA_EdgeOfChaos/tutorial.md
++++ after/commons/maps/CA_EdgeOfChaos/tutorial.md
+@@ -365,4 +365,18 @@
+ 
+ Explain three different disappearances: moving to a slice that misses the changed address, integer storage discarding the difference, and a stored difference falling below the count's threshold. They require different evidence.
+ 
+-This finishes the cellular-automata passage with a testable comparison. In the unforced fractional case, averaging spreads and reduces the peak; brightness alone does not establish chaos. Fractals returns to explicit repetition: what changes when the procedure calls itself instead of waiting for neighbouring states to exchange values?
++This completes the required cellular-automata passage with a testable comparison. In the unforced fractional case, averaging spreads and reduces the peak; brightness alone does not establish chaos.
++
++## Optional composition — follow a question of your own
++
++Return to one working study and connect it to an operation from an earlier sequence. Keep the original folder. Choose an encounter you want to make possible, rather than another effect the lesson has already predicted. A field might change a route, a moving cube might supply a position, or a trace might let an intervention return. One borrowed operation is enough to begin.
++
++For a concrete starting point, bring **Trace's stored positions** back to `presence.gd` from *The surface includes you*. Record the input in simulation coordinates before each committed step, together with whether the point is held and active as an input. Store one entry per update, including pauses and repeated positions. Trace's minimum-distance filter would lose the duration of a pause here. An absent input must remain distinct from a point parked somewhere in space.
++
++Keep the starting field, update count and SYNC/SCAN and REVERSE settings with that record. Replay it through `evolve` without consulting the live hand. With the same beginning, settings and ordered inputs, each replayed field should match the recorded run. Compare all eighty values, not only the final picture. This agreement tests the recorder; it does not decide whether the encounter was interesting.
++
++Use the live hand to pursue a shape, a disappearing support or something you had not intended. Replay the attempt, find a moment worth revisiting, then make a new attempt in response. The museum bridge already connects bodily position to support and back to possible movement. Its VISITOR source is the tracked body origin; the table records the held point's centre. Do not present a hand replay as a record of a visitor's walk.
++
++You can choose another connection. State which input, rule or receiver you changed and keep enough of its beginning to revisit it. Submit the working variant, one observation that changed your question, and one check that its code still does what you say. You are not required to produce an unexpected result or a prettier pattern. This open task has no single supplied answer and adds no new required code to the eight lessons.
++
++Fractals returns to explicit repetition: what changes when the procedure calls itself instead of waiting for neighbouring states to exchange values?

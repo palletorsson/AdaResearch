@@ -1,0 +1,34 @@
+{
+  "checks": [
+    "Joint body refuses XR direct pickup",
+    "Direct XR pickup leaves body dynamic and attached",
+    "Desktop carry also refuses constrained body",
+    "Actual XRTools pickup holds the separate grip",
+    "Two-metre hand pull leaves hinge within 8 cm",
+    "Pulling the grip actually swings the seat",
+    "Resting stick is discoverable on the pickup layer",
+    "Long stick is held through XRTools",
+    "A held stick cannot be recalled",
+    "Held stick contacts and turns the hinged seat",
+    "Stick contact leaves the hinge attached",
+    "Released stick is a dynamic body",
+    "Local RETURN STICK restores the tool",
+    "Returned stick remains on rack",
+    "Desktop-held stick retains physical contact",
+    "Desktop release restores dynamic stick",
+    "Catalyst can temporarily calm a hinged receiver",
+    "Experiment reset clears temporary catalyst damping",
+    "Real Forces projectile hits the PointBody layer",
+    "Catalyst increases damping on the existing sphere",
+    "Repeated shots refresh rather than accumulate damping",
+    "Damping returns to original after repeated shots"
+  ],
+  "failures": [],
+  "measurements": {
+    "hinge_error_during_pull": 0.00543435383588076,
+    "stick_push_angle": 0.462313681840897
+  },
+  "passed": true,
+  "physics": "Jolt",
+  "scope": "Actual joints, XRTools grabs, desktop carry refusal, held-stick contact and projectile contact; supplied controller motion, no headset claim."
+}

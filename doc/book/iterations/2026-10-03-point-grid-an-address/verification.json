@@ -1,0 +1,166 @@
+{
+	"checks": [
+		{
+			"check": "Script constructs all seven lesson objects",
+			"passed": true
+		},
+		{
+			"check": "Initial address counts grid steps",
+			"passed": true
+		},
+		{
+			"check": "Placed marker converts address back into metres",
+			"passed": true
+		},
+		{
+			"check": "Initial record is seeded without an empty-list read",
+			"passed": true
+		},
+		{
+			"check": "Quarter-metre reference lines match the declared spacing",
+			"passed": true
+		},
+		{
+			"check": "Capture before-boundary.png",
+			"passed": true
+		},
+		{
+			"check": "Movement inside an address leaves record unchanged",
+			"passed": true
+		},
+		{
+			"check": "Crossing halfway adds the next address",
+			"passed": true
+		},
+		{
+			"check": "One centimetre input change produces a quarter-metre placement change",
+			"passed": true
+		},
+		{
+			"check": "Rounding the output does not move the held input",
+			"passed": true
+		},
+		{
+			"check": "Capture after-boundary.png",
+			"passed": true
+		},
+		{
+			"check": "Returning to an address records another ordered visit",
+			"passed": true
+		},
+		{
+			"check": "Waiting at an address creates no duplicate visits",
+			"passed": true
+		},
+		{
+			"check": "Small negative input rounds back to zero",
+			"passed": true
+		},
+		{
+			"check": "Crossing the negative boundary gives a negative address",
+			"passed": true
+		},
+		{
+			"check": "Negative halfway case rounds away from zero",
+			"passed": true
+		},
+		{
+			"check": "Positive halfway case rounds away from zero",
+			"passed": true
+		},
+		{
+			"check": "Each coordinate is rounded independently",
+			"passed": true
+		},
+		{
+			"check": "Snapped path joins consecutive records exactly",
+			"passed": true
+		},
+		{
+			"check": "A jump records the reached address without filling skipped ones",
+			"passed": true
+		},
+		{
+			"check": "A connection can be diagonal in all three axes",
+			"passed": true
+		},
+		{
+			"check": "Capture depth.png",
+			"passed": true
+		},
+		{
+			"check": "Every retained position lies on the quarter-metre lattice",
+			"passed": true
+		},
+		{
+			"check": "Recorded route is ordered and bounded",
+			"passed": true
+		},
+		{
+			"check": "Capture quarter.png",
+			"passed": true
+		},
+		{
+			"check": "Coarser spacing changes the reference and the address",
+			"passed": true
+		},
+		{
+			"check": "The same test movement has fewer address changes on the coarser grid",
+			"passed": true
+		},
+		{
+			"check": "Coarse route stays on its own lattice",
+			"passed": true
+		},
+		{
+			"check": "Capture half.png",
+			"passed": true
+		},
+		{
+			"check": "Inherited capacity keeps only the last four visits in order",
+			"passed": true
+		},
+		{
+			"check": "Renderer remains bounded and reuses its segments",
+			"passed": true
+		},
+		{
+			"check": "Desktop input can hold the unsnapped point",
+			"passed": true
+		},
+		{
+			"check": "Desktop hold moves across addresses while preserving input",
+			"passed": true
+		},
+		{
+			"check": "Release freezes the input without an extra alignment rule",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR near grip can hold the input",
+			"passed": true
+		},
+		{
+			"check": "Synthetic grip updates all three address components",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR release retains the ordered record",
+			"passed": true
+		},
+		{
+			"check": "Lesson constructs its objects on a bare Node3D",
+			"passed": true
+		},
+		{
+			"check": "Grid addresses stay local when the study is translated",
+			"passed": true
+		}
+	],
+	"half_metre_visits": 15,
+	"passed": true,
+	"physical_headset_tested": false,
+	"quarter_metre_visits": 31,
+	"screenshots": "Native Godot desktop views; comparisons use scripted positions",
+	"xr_input": "Synthetic grip tracker; no headset"
+}

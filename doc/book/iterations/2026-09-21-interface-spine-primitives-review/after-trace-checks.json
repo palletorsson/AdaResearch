@@ -1,0 +1,45 @@
+{
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored artifact found, rather than its plinth",
+			"passed": true
+		},
+		{
+			"message": "Readout assembled in the hall",
+			"passed": true
+		},
+		{
+			"message": "Reading position has floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits at reading position",
+			"passed": true
+		},
+		{
+			"message": "Final metre of approach is unobstructed",
+			"passed": true
+		}
+	],
+	"controls": [],
+	"failures": [],
+	"panel": {
+		"height_above_floor": 0.854999996721745,
+		"position": [
+			1.75,
+			0.854999899864197,
+			10.0299997329712
+		]
+	},
+	"passed": true,
+	"room": "Point_Trace",
+	"scope": "Actual museum hall; supplied stroke; desktop images and layout measurements. No headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "CA_Introduction",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A small row automaton and separate history display.",
+  "change": "Write a row update that reads three old cells, writes a next row and swaps only when every address has been processed.",
+  "dependsOn": [
+    "Point_Line_Grid",
+    "Shader_10_ReactionDiffusion"
+  ],
+  "reuses": "Addressed values and neighbours.; The proposed need for retained previous state; tutorial missing.",
+  "given": "row display; controls; wrapped-ring receiver",
+  "later": "Do not explain every visible artifact. Choose a readable rule table before using bit encoding; the rug's symmetry is a separate operation.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A small row automaton and separate history display.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The current encounter refers to _apply_rule and _advance without teaching the learner's readable rule table, array allocation or swap.",
+  "baseline": {
+    "tutorial": "e5178418ad2c164b21d6b5f5623ea77dda1e0e70179fd1c0afaa76a3f4605613",
+    "choice": "12bedaa800c0fc7cf5e7325d9315a0fcca8511f5fd390f69c5d62a55f8d34077"
+  },
+  "summary": "Build a small row update that reads three old cells and writes a separate next row. Choose an explicit boundary rule, predict a short generation by hand and swap buffers only after every address is processed. Display and controls are supplied. Carry the synchronous row engine and separate history storage; demonstrate that reversing traversal does not change a generation when all reads use the same old state."
+}

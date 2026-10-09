@@ -1,0 +1,18 @@
+{
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd",
+    "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e",
+    "provenance": "Complete printed Lines continuation mechanically composed from the exact verified current Coordinates state."
+  },
+  "given_files": [
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "carry": "The extracted PointBody class, two independent held instances and readout, and one live segment/distance relation. No position history."
+}

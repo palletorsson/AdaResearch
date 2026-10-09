@@ -1,0 +1,21 @@
+--- before/map_data.json
++++ current/map_data.json
+@@ -16,7 +16,8 @@
+     "museum": {
+       "basin": {
+         "depth": 2.5,
+-        "glass": false
++        "glass": false,
++        "fire": true
+       },
+       "gate": false,
+       "simulation": {
+@@ -25,7 +26,7 @@
+         "margin": 2,
+         "padding": 2,
+         "depth": 2.5,
+-        "fire": false
++        "fire": true
+       }
+     }
+   },

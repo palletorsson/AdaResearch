@@ -1,0 +1,51 @@
+{
+  "pid": 37172,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--headless",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--resolution",
+    "1600x1000",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-formfinding-review\\relaxation\\control-final\\controls-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-formfinding-review/relaxation/probes/probe_controls.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-formfinding-review/relaxation/control-final/"
+  ],
+  "returncode": -1,
+  "seconds": 180.05617690086365,
+  "source_sha256_before": {
+    "commons/artifacts/verlet_workbench/verlet_workbench.gd": "3a08a806c427eb16211d346dc1489006fc2899e65929a5c0fdb5049b960882a1",
+    "commons/artifacts/verlet_workbench/verlet_workbench.tscn": "ba169386eefa125c0f73e452efaa056f24ab9f2eb6ef548853608ab561970ed6",
+    "commons/artifacts/mass_spring_bench/mass_spring_bench.gd": "ec609c654b95198867e443f2198115a648c56c8dc37de7ca344e365d3b21253e",
+    "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd": "fab72efb66b50534faed18784394a1c925736642d72de3f34821084f43c7b0ee",
+    "commons/soft_body/soft_body_sim.gd": "4622ef01131a5699e197f4efceb5cbf0d09f7a741b9add4a4640ff404c2d625a",
+    "commons/soft_body/soft_body_shapes.gd": "4e8eddb6a7991c1fa2ca92d5279f0056ac380971170af474e61fc452dd668ac7",
+    "commons/maps/FormFinding_Relaxation/map_data.json": "e8f61c07b352c3d810beb326defbcb7d35aec34be72ffb0014a13c6d76afd625",
+    "commons/maps/FormFinding_Relaxation/final.md": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+    "commons/maps/FormFinding_Relaxation/tutorial.md": "21075942806c3dc35a8637d4aa9b0934215fce49b47c929e9c29a98e0735b56c",
+    "commons/scenes/endless_museum.gd": "a156a5f0280985556780f345b485ba3c12778d0c6aba19917cdce821631c067f",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/data/artifact_roles.json": "391a93721d027c5a0ef05401be4b696ec0d741d775259228161219cc5bd2e6ff"
+  },
+  "source_sha256_after": {
+    "commons/artifacts/verlet_workbench/verlet_workbench.gd": "cc3bf00c47314ac31d37dd6b2d727254099673f6555062d9e8c6672a2fed2191",
+    "commons/artifacts/verlet_workbench/verlet_workbench.tscn": "ba169386eefa125c0f73e452efaa056f24ab9f2eb6ef548853608ab561970ed6",
+    "commons/artifacts/mass_spring_bench/mass_spring_bench.gd": "ec609c654b95198867e443f2198115a648c56c8dc37de7ca344e365d3b21253e",
+    "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd": "fab72efb66b50534faed18784394a1c925736642d72de3f34821084f43c7b0ee",
+    "commons/soft_body/soft_body_sim.gd": "4622ef01131a5699e197f4efceb5cbf0d09f7a741b9add4a4640ff404c2d625a",
+    "commons/soft_body/soft_body_shapes.gd": "4e8eddb6a7991c1fa2ca92d5279f0056ac380971170af474e61fc452dd668ac7",
+    "commons/maps/FormFinding_Relaxation/map_data.json": "e8f61c07b352c3d810beb326defbcb7d35aec34be72ffb0014a13c6d76afd625",
+    "commons/maps/FormFinding_Relaxation/final.md": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+    "commons/maps/FormFinding_Relaxation/tutorial.md": "21075942806c3dc35a8637d4aa9b0934215fce49b47c929e9c29a98e0735b56c",
+    "commons/scenes/endless_museum.gd": "a156a5f0280985556780f345b485ba3c12778d0c6aba19917cdce821631c067f",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/data/artifact_roles.json": "391a93721d027c5a0ef05401be4b696ec0d741d775259228161219cc5bd2e6ff"
+  }
+}

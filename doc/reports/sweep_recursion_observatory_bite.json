@@ -1,0 +1,68 @@
+{
+ "sweep": "recursion_observatory",
+ "peak_changed_pct": 3.4,
+ "subject_pct": 21.536,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "tick": "once"
+   },
+   "b": {
+    "tick": "coarse"
+   },
+   "changed_px": 13053,
+   "changed_pct": 2.26
+  },
+  {
+   "a": {
+    "tick": "once"
+   },
+   "b": {
+    "tick": "fine"
+   },
+   "changed_px": 17276,
+   "changed_pct": 2.991
+  },
+  {
+   "a": {
+    "tick": "once"
+   },
+   "b": {
+    "tick": "dense"
+   },
+   "changed_px": 19641,
+   "changed_pct": 3.4
+  },
+  {
+   "a": {
+    "tick": "coarse"
+   },
+   "b": {
+    "tick": "fine"
+   },
+   "changed_px": 8834,
+   "changed_pct": 1.529
+  },
+  {
+   "a": {
+    "tick": "coarse"
+   },
+   "b": {
+    "tick": "dense"
+   },
+   "changed_px": 11496,
+   "changed_pct": 1.99
+  },
+  {
+   "a": {
+    "tick": "fine"
+   },
+   "b": {
+    "tick": "dense"
+   },
+   "changed_px": 8439,
+   "changed_pct": 1.461
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+Concept: What can a body become when stored neighbours participate in its next state?
+Sequence role: First Cellular Automata hall, following Noise_Perlin_Simplex; next is CA_ElementaryRules and its existing three-dimensional multistate structure-growth specimen.
+Primary order: ca_rule_explorer, persian_rug, line_network_ca. Preserve all nine placements; the one-artifact scaffold is not a quota.
+Encounter: The optional rule study starts held, adds STEP/RUN/SEED/CELL, shows the exact triplet and predicted answer, and exposes wrapped boundaries and bounded history. The original rule presets and two sliders remain.
+Critical thread: A cheap-to-apply noise filter can satisfy the first wish for an organic or queer body. Preserve that pleasure while learning more ways to construct form. Inspect which relationships each new mechanism admits. Avoid calling the rug uniform-rule emergence or a one-dimensional system.
+Current limits: Godot was already open during this pass. The runtime/pointer probe and headset checks are pending. The grid substrate runner's museum-floor attachment and retained network/showcase performance need their own inspection; do not describe the entire floor as an operating automaton without evidence.

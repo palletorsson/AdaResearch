@@ -1,0 +1,88 @@
+{
+  "map": "Point_Coordinates",
+  "focus": "Pickup/release reconstruction; first part only",
+  "brief": {
+    "make": "Black sphere; grab, carry, release in place.",
+    "bring": "_ready; variables; mesh/node; collider; local position.",
+    "given": "Museum; configured XR hand; XRToolsPickable; collision settings; black material settings.",
+    "build": "Body; matching mesh/shape; direct refs; frozen release.",
+    "check": "Hold moves both; release stays; disabled refuses; new radius matches.",
+    "later": "Grip pose; trigger action; labels; coordinate readouts."
+  },
+  "host": "Empty unit-scale Node3D station in a working copy of the lit Endless Museum with its configured XR Tools hand. Native proof uses a private test world, not a museum placement.",
+  "lesson": "doc/book/iterations/2026-10-05-reconstruct-the-interaction/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-reconstruct-the-interaction/point.gd",
+  "native_report": "doc/book/iterations/2026-10-05-reconstruct-the-interaction/report-runtime.json",
+  "sources": [
+    {
+      "path": "commons/primitives/point/point_condition.gd",
+      "sha256": "8b0b7eca1cc404a7668561d748c3cb1f46682dfae40fa14431334faba09e58f7"
+    },
+    {
+      "path": "commons/primitives/point/interactive_point_origin.tscn",
+      "sha256": "05db77a52d667a3f5fbad53f18d22a943c017c1c90e2e0e014dac57f5f396129"
+    },
+    {
+      "path": "addons/godot-xr-tools/objects/pickable.gd",
+      "sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7"
+    },
+    {
+      "path": "addons/godot-xr-tools/objects/pickable.tscn",
+      "sha256": "3674320a89f44d1206c440890cee09dcfa812daa6e3187d1fc33605ce526237d"
+    },
+    {
+      "path": "addons/godot-xr-tools/functions/function_pickup.gd",
+      "sha256": "c0af90a317b83db630f61fe173f685226f6a24635bc8c17bf427033095736939"
+    }
+  ],
+  "checks": [
+    {
+      "id": "constructed",
+      "kind": "native",
+      "action": "Run the printed script.",
+      "expect": "A pickable body owns matching sphere mesh and collision shape."
+    },
+    {
+      "id": "eligible",
+      "kind": "native",
+      "action": "Bring the real library detector near; then disable the point.",
+      "expect": "Overlap allows selection; disabled point refuses it."
+    },
+    {
+      "id": "carry-release",
+      "kind": "native",
+      "action": "Pick up, move synthetic controller, drop and move controller again.",
+      "expect": "Body follows while held; release restores configured layers and stays frozen."
+    },
+    {
+      "id": "new-radius",
+      "kind": "native",
+      "action": "Run code with a different RADIUS.",
+      "expect": "Visible mesh and physical shape have the new matching radius."
+    },
+    {
+      "id": "reconstruct",
+      "kind": "learner",
+      "action": "Rebuild from brief; record help used.",
+      "expect": "Learner can assemble required parts and name supplied support."
+    },
+    {
+      "id": "explain",
+      "kind": "learner",
+      "action": "Predict changing radius versus disabling pickup.",
+      "expect": "Explain shared dimensions separately from interaction eligibility."
+    },
+    {
+      "id": "placed",
+      "kind": "museum",
+      "action": "Place the exercise station beside the encounter in a working museum copy.",
+      "expect": "Reachable and visible; no accidental dependence on the original point or wall readouts."
+    },
+    {
+      "id": "hand",
+      "kind": "headset",
+      "action": "Use physical hand/controller to grab, move and release.",
+      "expect": "The selected behaviour works with the prepared player and is comfortable to perform."
+    }
+  ]
+}

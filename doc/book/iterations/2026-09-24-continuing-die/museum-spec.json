@@ -1,0 +1,71 @@
+{
+  "shots": [
+    {
+      "tag": "room",
+      "from": [
+        7.2,
+        2.1,
+        1.1
+      ],
+      "look_at": [
+        3.8,
+        1.2,
+        5.4
+      ],
+      "fov": 75
+    }
+  ],
+  "rays": [
+    {
+      "tag": "new die approach floor",
+      "x": 3.2,
+      "z": 4.25,
+      "top": 0,
+      "tolerance": 0.2
+    }
+  ],
+  "walks": [
+    {
+      "tag": "approach continuing die",
+      "from": [
+        3.2,
+        0.1,
+        3.3
+      ],
+      "to": [
+        3.2,
+        0.1,
+        4.35
+      ],
+      "seconds": 2
+    },
+    {
+      "tag": "between original die and paired comparison",
+      "from": [
+        2.0,
+        0.1,
+        3.3
+      ],
+      "to": [
+        7.8,
+        0.1,
+        3.3
+      ],
+      "seconds": 4
+    },
+    {
+      "tag": "onward route beside existing spawners",
+      "from": [
+        7.8,
+        0.1,
+        3.3
+      ],
+      "to": [
+        7.8,
+        0.1,
+        7.6
+      ],
+      "seconds": 3
+    }
+  ]
+}

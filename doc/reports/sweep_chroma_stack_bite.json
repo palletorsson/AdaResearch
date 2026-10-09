@@ -1,0 +1,800 @@
+{
+ "sweep": "chroma_stack",
+ "peak_changed_pct": 6.736,
+ "subject_pct": 6.624,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "changed_px": 25961,
+   "changed_pct": 4.495
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "changed_px": 25674,
+   "changed_pct": 4.445
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32656,
+   "changed_pct": 5.654
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "changed_px": 32659,
+   "changed_pct": 5.654
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "changed_px": 37331,
+   "changed_pct": 6.463
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32707,
+   "changed_pct": 5.663
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 32685,
+   "changed_pct": 5.659
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 38881,
+   "changed_pct": 6.731
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 16127,
+   "changed_pct": 2.792
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 29677,
+   "changed_pct": 5.138
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 29539,
+   "changed_pct": 5.114
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "changed_px": 31141,
+   "changed_pct": 5.391
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32666,
+   "changed_pct": 5.655
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "changed_px": 21927,
+   "changed_pct": 3.796
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "changed_px": 35506,
+   "changed_pct": 6.147
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32665,
+   "changed_pct": 5.655
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 21957,
+   "changed_pct": 3.801
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 35614,
+   "changed_pct": 6.166
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 29717,
+   "changed_pct": 5.145
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 10016,
+   "changed_pct": 1.734
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 32363,
+   "changed_pct": 5.603
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "changed_px": 38864,
+   "changed_pct": 6.729
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "changed_px": 35639,
+   "changed_pct": 6.17
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "changed_px": 35210,
+   "changed_pct": 6.096
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 38877,
+   "changed_pct": 6.731
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 35616,
+   "changed_pct": 6.166
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 35206,
+   "changed_pct": 6.095
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 29561,
+   "changed_pct": 5.118
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 32367,
+   "changed_pct": 5.604
+  },
+  {
+   "a": {
+    "rule": "one",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 11038,
+   "changed_pct": 1.911
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "changed_px": 32649,
+   "changed_pct": 5.653
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "changed_px": 31758,
+   "changed_pct": 5.498
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32675,
+   "changed_pct": 5.657
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 32716,
+   "changed_pct": 5.664
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 38888,
+   "changed_pct": 6.733
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32713,
+   "changed_pct": 5.664
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 32692,
+   "changed_pct": 5.66
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 38905,
+   "changed_pct": 6.736
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "changed_px": 35605,
+   "changed_pct": 6.164
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32478,
+   "changed_pct": 5.623
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 18956,
+   "changed_pct": 3.282
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 35166,
+   "changed_pct": 6.088
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32659,
+   "changed_pct": 5.654
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 21908,
+   "changed_pct": 3.793
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 35606,
+   "changed_pct": 6.164
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "changed_px": 38896,
+   "changed_pct": 6.734
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 35644,
+   "changed_pct": 6.171
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 35225,
+   "changed_pct": 6.099
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 38890,
+   "changed_pct": 6.733
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 35632,
+   "changed_pct": 6.169
+  },
+  {
+   "a": {
+    "rule": "by_shape",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 35255,
+   "changed_pct": 6.104
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "changed_px": 25692,
+   "changed_pct": 4.448
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 25645,
+   "changed_pct": 4.44
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32666,
+   "changed_pct": 5.655
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 32625,
+   "changed_pct": 5.648
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 38900,
+   "changed_pct": 6.735
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "changed_px": 30975,
+   "changed_pct": 5.363
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 32646,
+   "changed_pct": 5.652
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 21917,
+   "changed_pct": 3.794
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 35615,
+   "changed_pct": 6.166
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "changed_px": 38891,
+   "changed_pct": 6.733
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 35636,
+   "changed_pct": 6.17
+  },
+  {
+   "a": {
+    "rule": "by_height",
+    "stack": "cut"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 35253,
+   "changed_pct": 6.103
+  },
+  {
+   "a": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "changed_px": 25982,
+   "changed_pct": 4.498
+  },
+  {
+   "a": {
+    "rule": "by_neighbour",
+    "stack": "bauhaus"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 25790,
+   "changed_pct": 4.465
+  },
+  {
+   "a": {
+    "rule": "by_neighbour",
+    "stack": "turned"
+   },
+   "b": {
+    "rule": "by_neighbour",
+    "stack": "cut"
+   },
+   "changed_px": 31289,
+   "changed_pct": 5.417
+  }
+ ]
+}

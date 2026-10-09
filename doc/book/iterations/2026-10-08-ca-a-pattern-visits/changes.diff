@@ -1,0 +1,940 @@
+--- before/tutorial.md
++++ after/tutorial.md
+@@ -1,26 +1,273 @@
+-# Follow a cell, then follow a body
+-
+-**Learning elements — proposed focus**
+-
+-_The labels below set the revision focus; the existing lesson still needs alignment._
+-
+-- Birth and survival
+-- Fixed addresses
+-- Output connections
+-
+-Begin at the dish with GLIDER held at generation zero. Let students predict what four presses of STEP will change before explaining Life. REPLAY gives the same beginning to a student exploring alone.
+-
+-1. Compare the arrangement after four steps with its starting shape and address. Keep shape, location and generation as separate observations.
+-2. Replay and follow gold A=(10,10). Notice the occupied cell and lamp together. Then follow the whole pattern while A stays in place.
+-3. Walk the enlarged floor image and stay beside a fixed gold address while its state changes. Your presence does not enter this update rule. Recall the previous history bridge: this room maps occupancy to colour, with continuous support beneath both values.
+-4. Choose BLINKER. Predict its next phase. Its centre stays occupied, so A stays lit although the line changes orientation.
+-5. Read the actual B3/S23 branch in final.md. Work through an empty cell with three neighbours and an occupied cell with one. Explain the second buffer after these observations.
+-6. Return to GLIDER and disconnect LINK during a lit moment. STEP again. Identify which output was removed and which process continues. Read the receiver call.
+-7. Choose MEET. Predict visits to the witnesses, then compare this prepared beginning with GLIDER. Presets replace the beginning; they do not insert into the current board.
+-
+-Ask students to explain a lamp using a single address, without saying “it senses the glider.” Then ask what the glider description helps them predict that the single-address record does not. Neither account exhausts the event.
+-
+-For an independent reader, the readout names generation, population, changed cells, preset, link state and the finite observation limit. REPLAY is local to this experiment. The next hall will make proximity an input; it must earn that claim through its own source and support tests.
+-
+-
+-TRACE offers a second reading of the travelling figure: blue marks newly occupied cells, red marks cells that just stopped. Switching it off restores the ordinary colours immediately, without advancing. In the rear gallery, the hexagonal table changes both neighbourhood and birth condition and allows random flips; it is not just the square rule drawn with another tile shape.
++# A pattern visits an address
++
++## Learning elements
++
++- A two-dimensional present: X and Y are sites, not generations.
++- Eight surrounding neighbours; exclude the centre.
++- Birth and survival: B3/S23.
++- Fixed address, changing occupancy, apparent movement.
++- A separate output: one cell controls one lamp.
++
++## Enter with the point
++
++The last hall kept each new row as history. Here both grid directions belong to the **same present**. Five cells wait in a dish, repeated on the floor. Press STEP four times. The arrangement returns one address farther along both directions. No mesh has moved. Different fixed cells have become occupied.
++
++Take the small black point beside the controls. Carry it to a gold square on the floor and use its trigger to STEP. Follow the address while the pattern passes. The point carries the control; its position does not write into the automaton. REPLAY returns to the beginning. The floor remains solid whether a cell is empty or occupied.
++
++We will reconstruct this relationship at table scale: the same 24 × 24 rule and beginning, one marked address, one lamp and the familiar PointBody. The installation has three lamps, RUN, TRACE and preset buttons. The compact study uses one lamp and manual steps. Those other controls are not needed to understand this operation.
++
++Save the previous lesson. Attach `life.gd` to your existing `PointStudy` Node3D in the museum; keep unit scale and about 3 × 3 metres clear. Face its positive Z side. Keep the unchanged `point_body.gd` beside it. The established museum provides camera, light, player and XR Tools. These two files create all of the study's geometry and behaviour; no prepared child nodes are required.
++
++## Count the surroundings
++
++`current` holds 576 Boolean values. `index(x, y)` finds one address in that flat array. Both coordinates wrap at the boundaries. Logical Y becomes depth Z in `cell_position`; the table's physical height stays fixed. Unlike the previous lesson, stepping does not add a row behind the others.
++
++`neighbours` reads a 3 × 3 patch. The condition `dx != 0 or dy != 0` excludes only its centre, leaving eight neighbours. Their count, together with the centre's old state, selects the answer:
++
++| Current cell | Occupied neighbours | Next cell |
++| --- | --- | --- |
++| Empty | Exactly 3 | Occupied: birth |
++| Occupied | 2 or 3 | Occupied: survival |
++| Either | Any other count for that state | Empty |
++
++This is Conway's Game of Life, written B3/S23. `evolve` uses the buffer agreement we already know: read every neighbourhood from `old`, write every answer into a new array, then replace `current`. Reading the answers you have just written would produce a different process, dependent on loop order.
++
++## Connect an address
++
++`SITE` is (10,10). Its gold frame stays in place. `redraw` colours the existing cell instances and passes this site's value to `receive`. That function changes the lamp and its globe. It cannot change the next state of any cell.
++
++Press L while the lamp is lit. The connection is off, so the lamp goes dark. STEP still evolves the cells. Press L again: the lamp reads the current value immediately, without advancing time. REPLAY resets the beginning and generation counter, but preserves your link setting.
++
++We separate a rule from a use of its answer. The same false value that removed support in the previous hall now makes a dark patch on a solid table. `make_display` builds that support once; `redraw` never removes it.
++
++## Complete study — life.gd
++
++The rule is in `neighbours`, `next_state` and `evolve`. The remaining code creates its visible receivers and connects the controls. The full file is included so the example runs; the new lesson does not require memorising the furniture construction.
++
++```gdscript
++extends Node3D
++const PointBody = preload("point_body.gd")
++const SIZE := 24
++const CELL := 0.08
++const LIMIT := 48
++const SITE := Vector2i(10, 10)
++var seeds: Array[Vector2i] = [Vector2i(7, 6), Vector2i(8, 7), Vector2i(6, 8), Vector2i(7, 8), Vector2i(8, 8)]
++var current: Array[bool] = []
++var generation := 0
++var linked := true
++var point: XRToolsPickable
++var cells := MultiMesh.new()
++var reading := Label3D.new()
++var lamp := OmniLight3D.new()
++var lamp_finish := StandardMaterial3D.new()
++
++func _ready() -> void:
++	make_display()
++	point = PointBody.new()
++	add_child(point)
++	point.action_pressed.connect(func(_body): step())
++	replay()
++	park()
++
++func index(x: int, y: int) -> int:
++	return posmod(y, SIZE) * SIZE + posmod(x, SIZE)
++
++func replay() -> void:
++	current.resize(SIZE * SIZE)
++	current.fill(false)
++	for site in seeds:
++		current[index(site.x, site.y)] = true
++	generation = 0
++	redraw()
++
++func neighbours(old: Array[bool], x: int, y: int) -> int:
++	var count := 0
++	for dy in range(-1, 2):
++		for dx in range(-1, 2):
++			if dx != 0 or dy != 0:
++				count += int(old[index(x + dx, y + dy)])
++	return count
++
++func next_state(alive: bool, count: int) -> bool:
++	if alive:
++		return count == 2 or count == 3
++	return count == 3
++
++func evolve(old: Array[bool]) -> Array[bool]:
++	var next: Array[bool] = []
++	next.resize(SIZE * SIZE)
++	for y in SIZE:
++		for x in SIZE:
++			next[index(x, y)] = next_state(old[index(x, y)], neighbours(old, x, y))
++	return next
++
++func step() -> void:
++	if generation == LIMIT:
++		return
++	current = evolve(current)
++	generation += 1
++	redraw()
++
++func toggle_link() -> void:
++	linked = not linked
++	redraw()
++
++func receive(occupied: bool, connected: bool) -> void:
++	var lit := occupied and connected
++	lamp.light_energy = 1.2 if lit else 0.0
++	lamp_finish.albedo_color = Color("90ebca") if lit else Color("50495b")
++	lamp_finish.emission = Color("62c4a4") if lit else Color.BLACK
++	lamp_finish.emission_energy_multiplier = 1.3 if lit else 0.0
++
++func _physics_process(_delta: float) -> void:
++	if not point.held():
++		park()
++
++func park() -> void:
++	point.position = Vector3(-1.2, 1.12, 0.75)
++
++func _unhandled_key_input(event: InputEvent) -> void:
++	if event is InputEventKey and event.pressed and not event.echo:
++		match event.keycode:
++			KEY_ENTER: step()
++			KEY_R: replay()
++			KEY_L: toggle_link()
++			_: return
++		get_viewport().set_input_as_handled()
++
++func cell_position(x: int, y: int) -> Vector3:
++	return Vector3((x - 11.5) * CELL, 1.06, (y - 11.5) * CELL)
++
++func box(size: Vector3, at: Vector3, colour: Color) -> MeshInstance3D:
++	var node := MeshInstance3D.new()
++	var mesh := BoxMesh.new()
++	mesh.size = size
++	node.mesh = mesh
++	node.position = at
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = colour
++	node.material_override = finish
++	add_child(node)
++	return node
++
++func make_display() -> void:
++	var table := box(Vector3(2.04, 0.1, 2.04), Vector3(0, 1, 0), Color("365159"))
++	var body := StaticBody3D.new()
++	var boundary := CollisionShape3D.new()
++	var shape := BoxShape3D.new()
++	shape.size = Vector3(2.04, 0.1, 2.04)
++	boundary.shape = shape
++	table.add_child(body)
++	body.add_child(boundary)
++	box(Vector3(0.16, 0.95, 0.16), Vector3(0, 0.475, 0), Color("b39470"))
++	cells.transform_format = MultiMesh.TRANSFORM_3D
++	cells.use_colors = true
++	cells.instance_count = SIZE * SIZE
++	var tile := BoxMesh.new()
++	tile.size = Vector3(CELL * 0.92, 0.012, CELL * 0.92)
++	cells.mesh = tile
++	var view := MultiMeshInstance3D.new()
++	view.multimesh = cells
++	var ink := StandardMaterial3D.new()
++	ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	ink.vertex_color_use_as_albedo = true
++	view.material_override = ink
++	add_child(view)
++	for y in SIZE:
++		for x in SIZE:
++			cells.set_instance_transform(index(x, y), Transform3D(Basis.IDENTITY, cell_position(x, y)))
++	var at := cell_position(SITE.x, SITE.y) + Vector3.UP * 0.015
++	for side in [-1, 1]:
++		box(Vector3(CELL, 0.008, 0.008), at + Vector3(0, 0, side * CELL / 2), Color("ffcc70"))
++		box(Vector3(0.008, 0.008, CELL), at + Vector3(side * CELL / 2, 0, 0), Color("ffcc70"))
++	box(Vector3(1.2 - at.x, 0.008, 0.008), Vector3((1.2 + at.x) / 2, at.y, at.z), Color("ffcc70"))
++	var globe := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.12
++	sphere.height = 0.24
++	globe.mesh = sphere
++	globe.position = Vector3(1.2, 1.3, at.z)
++	lamp_finish.emission_enabled = true
++	globe.material_override = lamp_finish
++	add_child(globe)
++	lamp.position = globe.position
++	lamp.light_color = Color("90ebca")
++	lamp.omni_range = 1.0
++	add_child(lamp)
++	reading.position = Vector3(0, 1.85, -0.5)
++	reading.font_size = 28
++	reading.pixel_size = 0.0015
++	reading.modulate = Color("213639")
++	reading.outline_modulate = Color("f5f0e8")
++	reading.outline_size = 4
++	add_child(reading)
++
++func redraw() -> void:
++	for i in current.size():
++		cells.set_instance_color(i, Color("90ebca") if current[i] else Color("273e49"))
++	var occupied := current[index(SITE.x, SITE.y)]
++	receive(occupied, linked)
++	reading.text = "B3/S23 / GEN %d / LIMIT %d\nA (%d,%d) = %d / LAMP %s\nTRIGGER / ENTER: STEP   R: REPLAY   L: LINK" % [generation, LIMIT, SITE.x, SITE.y, int(occupied), "LINKED" if linked else "UNLINKED"]
++```
++
++## Carried file — point_body.gd
++
++This file is unchanged from the previous hall. Keep it, rather than rebuilding the point. Its inherited pickable action supplies the trigger signal. Release returns this study's point to its local parking position.
++
++```gdscript
++extends XRToolsPickable
++## Point Lines' frozen point construction, made smaller for the hand model.
++var tint := Color("25212a")
++var desktop_pointer: WeakRef
++
++func _init() -> void:
++	freeze = true
++	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
++	release_mode = XRToolsPickable.ReleaseMode.FROZEN
++	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
++	collision_layer = 4
++	collision_mask = 0
++	var surface := MeshInstance3D.new()
++	var sphere := SphereMesh.new()
++	sphere.radius = 0.085
++	sphere.height = 0.17
++	sphere.radial_segments = 24
++	sphere.rings = 12
++	surface.mesh = sphere
++	add_child(surface)
++	var boundary := CollisionShape3D.new()
++	var shape := SphereShape3D.new()
++	shape.radius = 0.085
++	boundary.shape = shape
++	add_child(boundary)
++
++func _ready() -> void:
++	super._ready()
++	var finish := StandardMaterial3D.new()
++	finish.albedo_color = tint
++	finish.roughness = 0.24
++	get_child(0).material_override = finish
++
++func held() -> bool:
++	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
++
++func on_desktop_grab(pointer: Node) -> void:
++	desktop_pointer = weakref(pointer)
++
++func on_desktop_drop(_pointer: Node) -> void:
++	desktop_pointer = null
++```
++
++## Follow what stays
++
++Use the held trigger or Enter to step. After four generations, the glider has the seed's arrangement shifted by (1,1). At generation eight, A is occupied and its linked lamp is lit. At generation twelve, A is empty again. Each tile's position stayed fixed throughout. R replays; the forty-eight-step limit holds the last state.
++
++## Make another beginning
++
++Replace `seeds` with three positions: (9,10), (10,10), (11,10). Predict the first answer before running: a vertical line at (10,9), (10,10), (10,11). Step again to recover the horizontal line. The centre survives both phases, so A's lamp stays lit. Disconnect the lamp and repeat. Explain why the cells still alternate.
++
++Now connect a different address by changing `SITE` to (9,10). The frame, wire and lamp reading move together. The same blinker should make this lamp alternate. The rule and the cell record do not need to change. You have changed which state the room receives.
++
++## What travels onward
++
++A pattern can travel while its addressed receivers stay put. A Boolean rule can answer a separate object without accepting any influence back from it. In the next hall, proximity becomes an input: the observer's body will enter the conditions of the update.
+--- before/final.md
++++ after/final.md
+@@ -4,7 +4,7 @@
+ 
+ Five green cells wait in the dish. A larger version spreads across the floor beyond it. Three lamps stand along its edge. They are dark.
+ 
+-Press STEP four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
++Take the small black point beside the controls. Its trigger carries STEP with you. Press it four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
+ 
+ REPLAY brings the five cells back. This time keep your attention on the square marked A, at address (10,10). Step towards it. A cell becomes occupied; a lamp lights. Step again. Follow the square for a while, even when the more recognisable figure tempts your eye away. The address keeps its place. The pattern is already elsewhere.
+ 
+@@ -18,31 +18,19 @@
+ 
+ Try BLINKER. Three cells lie in a line. One step turns the line; another brings it back. Watch A, the middle cell. The surroundings alternate while this address remains occupied. Its lamp stays lit. Returning, travelling and staying can belong to different parts of the same small event. The names for these, now that you have watched them, are still life, oscillator and spaceship: the block the glider will meet is the first, the blinker the second, the glider the third.
+ 
+-The dish runs Conway's Game of Life.[^ca-conway] Each cell has eight neighbours: the second choice, widened from two. An occupied cell survives with two or three occupied neighbours; an empty cell becomes occupied with exactly three. These are the lines that choose its next state:
+-
+-```gdscript
+-if alive:
+-    _next_grid[y][x] = neighbors == 2 or neighbors == 3
+-else:
+-    _next_grid[y][x] = neighbors == 3
+-```
++The dish runs Conway's Game of Life.[^ca-conway] Each cell reads the eight surrounding sites in its plane. The centre is not counted among its neighbours. An occupied cell survives with two or three occupied neighbours; an empty cell becomes occupied with exactly three.
+ 
+ Every answer goes into another array. Only when the whole plane has been read do the two buffers exchange places. A cell later in the loop cannot borrow an answer made earlier in this generation. At the edges, the neighbourhood wraps to the opposite side.
+ 
+ In the glider beginning, four generations reproduce the arrangement one address further along each axis. No instruction has moved a glider object. No cell carries a ticket for that journey. We recognise a body across successive relations among sites. The recognition is useful: it lets us anticipate a visit. It also leaves something out. Following the figure, we can miss the cells that cease to participate. Press TRACE. For one generation after each step, a cell that has just stopped is marked in red and one that has just begun in blue; the figure you were following is seen to be leaving a wake, and the wake is where the rule was working.
+ 
+-Try LINK while a lamp is lit. The light goes out; the figure remains. STEP still changes it. The lamp's relation to this world has been written separately:
+-
+-```gdscript
+-var occupied: bool = work._grid[site.y][site.x]
+-receiver.receive(occupied, linked, count_event)
+-```
++Try LINK while a lamp is lit. The light goes out; the figure remains. STEP still changes it. The lamp receives the state of one fixed address. Disconnecting it changes that relation, not the rule.
+ 
+ That address could have been connected to another object. Here it controls an opal lamp. The lamp does not recognise a glider: any occupied state at its assigned address will light it when connected. Nor does its light return an influence to the cells. We have made a small, one-way traffic between the simulation and the room. Its boundary is a decision we can inspect and change.
+ 
+ Press LINK again to reconnect the lamps. Choose MEET. The same glider begins with a four-cell block in its path. Predict which lamps will light. Advance, then compare with GLIDER. GLIDER, BLINKER and MEET each prepare a fresh beginning, so the difference can be revisited; LINK keeps whatever setting you last gave it. In this particular meeting the field is empty within six generations. Only A ever lights, and it was lit before the first step: the block already sat on its address. The rule has stayed the same; what the glider could continue to be depended on what it met.
+ 
+-Conway chose these rules so that no beginning could be proved to grow for ever while some seemed to, and so that small beginnings would grow, change, and end in one of three ways: fading away, settling, or repeating. You have just watched the first. The rule was tuned to sit at the edge of what it can do, which is the name of the hall called Edge of Chaos, ahead.
++Gardner's 1970 account describes Conway searching for rules whose small beginnings could develop for a while without making their outcome obvious. This was a design ambition, not a proof that growth must always stop. Our finite, wrapped board adds its own conditions. A small experiment can keep a question open without standing for every possible world.
+ 
+ There is pleasure in the travelling figure and in the room answering it. We need not turn that pleasure into proof of a living creature, or ask a fluid-looking body to stand for every possible difference. This body has particular conditions. Another encounter may interrupt it; another connection may let it do something we have not yet tried.
+ 
+@@ -50,8 +38,8 @@
+ 
+ <!-- @ -->
+ 
+-Further in, past the mould network and the dark sphere, a table holds a hexagonal field. Here the neighbourhood and the birth condition both change: six neighbours instead of eight, birth on two. The Random Flip control allows occasional reversals of the rule’s answer. Generations stack upward into a terrain. Time has acquired thickness again, through another agreement.
++The floor continues into a level gallery. The mould and growth networks have space around them; past the dark sphere, a table holds a hexagonal field. Here the neighbourhood and the birth condition both change: six neighbours instead of eight, birth on two. The Random Flip control allows occasional reversals of the rule’s answer. Generations stack upward into a terrain. Time has acquired thickness again, through another agreement.
+ 
+ So far the visitor has chosen a beginning and watched an output. In the next room, approaching a surface enters the calculation. What happens when the body doing the observing becomes one of the conditions?
+ 
+-[^ca-conway]: John Conway's rules were announced in Martin Gardner's “Mathematical Games” column, *Scientific American* 223 (October 1970), with the three conditions Conway set himself: no starting pattern for which there is a simple proof that it grows without limit; patterns that apparently do; and simple patterns that grow and change for a while before ending by fading away, settling, or oscillating.
++[^ca-conway]: Martin Gardner, “Mathematical Games,” *Scientific American* 223 (October 1970), [original article](https://www.scientificamerican.com/article/mathematical-games-1970-10/), [article reproduction](https://ibiblio.org/lifepatterns/october1970.html). Gardner reports Conway's exploratory criteria, including the absence of a simple proof of unbounded growth for a starting pattern. That criterion should not be recast as a theorem forbidding unbounded growth. Our installed work uses finite periodic boundaries and a local observation limit.
+--- before/map_data.json
++++ after/map_data.json
+@@ -34,15 +34,16 @@
+           1,
+           1,
+           13,
+-          19
+-        ],
+-        [
+-          13,
+-          20,
+-          13,
+           25
+         ]
+-      ]
++      ],
++      "gate": false,
++      "portal_entry": {
++        "cage": false
++      },
++      "portal_exit": {
++        "approach": "from_hall"
++      }
+     }
+   },
+   "utility_definitions": {
+@@ -437,97 +438,97 @@
+       ],
+       [
+         "w",
+-        "w",
+-        "w",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "w",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "3",
+-        "3",
+-        "3",
+-        "3",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "1",
+-        "3",
+-        "1",
+-        "3",
+-        "3",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "3",
+-        "1",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "1",
+-        "0",
+-        "0",
+-        "1",
+-        "0",
+-        "0",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "1",
+-        "w",
+-        "1",
+-        "w"
+-      ],
+-      [
+-        "w",
+-        "0",
+-        "0",
+-        "1",
+-        "0",
+-        "0",
+-        "0",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
+         "1",
+         "1",
+         "1",
+@@ -563,23 +564,6 @@
+         "",
+         "",
+         "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+         "sp",
+         "",
+         "",
+@@ -988,24 +972,41 @@
+         "",
+         "",
+         "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
+         "t",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+         "",
+         "",
+         "",
+@@ -1342,73 +1343,41 @@
+       ],
+       [
+         "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "mold_network",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "science_screen:180:1.5#mode:grid",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
++        "science_screen:90:1.5",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "mold_network:0:0:0.4",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
+         "",
+         "",
+         "",
+@@ -1418,6 +1387,38 @@
+         "",
+         "",
+         "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
+         "hexagon_ca_vr:0:0#display:table",
+         "",
+         "",
+@@ -1429,24 +1430,24 @@
+         "",
+         "",
+         "",
+-        "",
+-        " ",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        "",
+-        ""
+-      ],
+-      [
+-        "",
+-        "",
+-        "",
+-        "ca_growth_network",
++        "ca_growth_network:0:1.3:0.35",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        "",
++        ""
++      ],
++      [
++        "",
++        "",
++        "",
++        "",
+         "",
+         "",
+         "",
+--- before/technical.md
++++ after/technical.md
+@@ -26,7 +26,7 @@
+ 
+ ## Placement and retained work
+ 
+-The 15 × 27 map adds a front study and an eastern aisle around the retained rear configuration. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
++The 15 × 27 map has a front study and, since 8 October, a level open rear gallery. Raised strips, pits and its short internal partition have been removed. The secondary works are spaced around the onward route. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
+ 
+ Runtime evidence and actual images: `doc/space/ca-life-review-2026-09-13/`. Desktop tests cover rule cases, wrapping, travelling and repeating patterns, event coupling, controls, support and a margin walk. Headset reach, comfort, performance and the secondary works require later review.
+ 
+@@ -38,3 +38,18 @@
+ TRACE-off now restores the base dish display before refreshing the floor. Neither buffer nor generation advances. The earlier code restored the floor but left the dish's red/blue wake until a later update.
+ 
+ 41 native checks pass, including fourteen real desktop pointer events, four-step glider translation, TRACE colours/restoration, lamp onsets/LINK, the six-generation meeting, body approach to A, occupied/empty support, and retained default floor and hex state dimensions. See encounter-notes.md for evidence and limits.
++
++
++## Complete learner reconstruction — 8 October 2026
++
++`tutorial.md` prints `life.gd` and the unchanged `point_body.gd`, maintained in `doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary`. The 24 × 24 Boolean present uses a flat array and the same seed, periodic neighbourhood and B3/S23 rule as the installed primary. It supplies a complete small table, fixed tile instances, one address frame, one lamp and PointBody STEP. It omits the installed RUN, TRACE and preset UI. The student changes seeds to a blinker, then moves the output binding while keeping cell evolution unchanged.
++
++29 native checks of the exact printed blocks pass: eighteen rule cases; all offsets/wrapping; separate buffer and order independence; solver parity through 48 glider generations and eight random beginnings; two meaningful fault variants; both transfer tasks; rendered colours and fixed transforms; collision support for empty/occupied sites; actual XRTools pickup/action/release with supplied controller poses. The first probe used an incorrect production property name (`initial_culture`); corrected to `culture` before the successful run. This was a test-harness defect, not a learner-code failure.
++
++Walk-floor address-study placements now add `life_hand.gd`: the established pickable point carries the existing `step_once` action and parks beside the console on release. Moving the point never edits a cell. The Life solver and `life_address_receiver.gd` are byte-identical to this turn's baseline. Other address-study placements do not add the hand control.
++
++Rear staging: mould at source (2,20), scale 0.4; growth network at (3,24), height 1.3 and scale 0.35; dark sphere at (6,21); screen at (1,19), facing inward. The hex table keeps (9,23). All six authored artifacts remain; no secondary algorithm was changed. Incidental sculpture is reserved out of circulation. Entry/exit use (6,0)/(6,26), with no extra gate. Only this generated museum-plan row is rederived.
++
++38 museum checks pass, including eight capture checks: installed point action, LINK and onset preservation, TRACE restoration, blinker/meeting, support at A through generations 0/8/12, RUN/limit, stable floor transforms, portal approaches, and five routes with 306 samples of 0.56 m wide/1.7 m high capsule clearance and level floor on collision layer 1. Initial route samples touched the console and readout stem: the final route stops at a reachable console approach and goes around its furniture. This does not establish all-layer walking, full portal transfer, physical headset comfort or secondary-work interaction acceptance.
++
++Current full texts, before/after overhead and visitor captures, native receipts and ZIP: `doc/book/iterations/2026-10-08-ca-a-pattern-visits/index.html`.
+--- before/encounter-notes.md
++++ after/encounter-notes.md
+@@ -24,3 +24,14 @@
+ 
+ 
+ Runtime staging note: the museum automatically relocates the same generated dream_bodies sculpture from (11.5, 0.42, 23.5) to (2.5, 0.42, 23.5), clearing the new table footprint. Its rotation and scale are unchanged. All other native roots except the deliberately restaged hex retain their positions. The initial overly broad publication assertion and this explicit comparison are retained as diagnostic-verification.json and runtime-restaging.json.
++
++
++---
++
++# A pattern visits an address — 8 October 2026
++
++Full runnable two-file tutorial now owns implementation; the reflection's two code blocks become prose. Clarify eight surrounding neighbours and distinguish Conway's reported design ambition from a theorem excluding unbounded growth. Preserve the argument about pattern recognition, withdrawal, support and one-way coupling. The carryable point lets the visitor step while beside an address. The next hall introduces proximity as input.
++
++29 learner checks and 38 museum checks pass. Five capsule/floor routes total 306 samples. The six authored works remain in a levelled rear gallery; mould and growth studies are scaled to fit, the dark sphere and screen repositioned, incidental sculpture reserved out, portals put on thresholds. The Life solver and lamp receiver are unchanged. Before snapshots, an initial test-harness property error, initial route collisions and the corrected evidence are retained in the review directory.
++
++The native screenshots show the installed room from above, obliquely and at eye height. The complete learner study is mounted only temporarily for its own photograph. Existing bright overhead lighting and some blank wall frames remain; this pass does not claim a full art-loading repair, secondary-interaction audit, headset test or independent student review.
+--- before/address_study.gd
++++ after/address_study.gd
+@@ -42,6 +42,10 @@
+ 	_build_floor()
+ 	_build_receivers()
+ 	replay()
++	if walk_floor:
++		var hand: Node3D = load("res://commons/artifacts/game_of_life_petri/life_hand.gd").new()
++		hand.name = "LifeHand"
++		add_child(hand)
+ 
+ func choose_glider() -> void:
+ 	preset = "GLIDER";replay()
+--- before/life_hand.gd
++++ after/life_hand.gd
+@@ -0,0 +1,29 @@
++extends Node3D
++## Carry the existing STEP while walking beside the floor; do not write cell state.
++var study: Node3D
++var point: XRToolsPickable
++
++func _ready() -> void:
++	study = get_parent()
++	point = load("res://commons/artifacts/ca_rule_explorer/point_body.gd").new()
++	point.name = "PointBody"
++	add_child(point)
++	point.action_pressed.connect(func(_body): study.step_once())
++	park()
++	study._box("HandShelf", Vector3(.4,.045,.32), Vector3(1.35,.97,-2.3), Color("365159"), true)
++	study._box("HandStem", Vector3(.06,.95,.06), Vector3(1.35,.475,-2.3), Color("b39470"), true)
++	study._box("HandInstructions", Vector3(.66,.2,.025), Vector3(1.35,.76,-2.37), Color("153237"))
++	var label := Label3D.new()
++	label.text = "CARRY POINT\nTRIGGER: STEP"
++	label.font_size = 30
++	label.pixel_size = .0012
++	label.position = Vector3(1.35,.76,-2.386)
++	label.rotation.y = PI
++	label.outline_size = 0
++	add_child(label)
++
++func _physics_process(_delta: float) -> void:
++	if not point.held(): park()
++
++func park() -> void:
++	point.position = Vector3(1.35,1.08,-2.3)

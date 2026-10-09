@@ -1,0 +1,37 @@
+{
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-forces-review\\opening\\headless\\engine.log",
+    "--headless",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-forces-review/opening/probe.gd",
+    "--",
+    "--out=res://doc/book/iterations/2026-09-19-forces-review/opening/headless/"
+  ],
+  "returncode": 1,
+  "seconds": 5.170944929122925,
+  "hashes_before": {
+    "commons/artifacts/torque_crank/torque_crank.gd": "3f36fdab5b913cada081b8fe9fb474b08e60a1e2a88c01c0d61c60523835c502",
+    "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd": "e18eb3b2bb1f7d31edaabcbf78872fa6973b5ef77f35da27e95db132c5b8ae4a",
+    "commons/artifacts/_toy_console/toy_console.gd": "d0e633be986ca6ff2680d9efd0baa8a5247f79e360ab7007e06c615639a953c3",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5"
+  },
+  "hashes_after": {
+    "commons/artifacts/torque_crank/torque_crank.gd": "3f36fdab5b913cada081b8fe9fb474b08e60a1e2a88c01c0d61c60523835c502",
+    "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd": "e18eb3b2bb1f7d31edaabcbf78872fa6973b5ef77f35da27e95db132c5b8ae4a",
+    "commons/artifacts/_toy_console/toy_console.gd": "d0e633be986ca6ff2680d9efd0baa8a5247f79e360ab7007e06c615639a953c3",
+    "commons/scenes/endless_museum.gd": "8949f19329879a132d951c2324ff94e5fa7901b1978f73bf8490025942e0c443",
+    "commons/scenes/em/em_detail.gd": "21add4ec18bd0e8fbfde9cd1c687577a0930bd67964aef41d7fdeb0278855482",
+    "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5"
+  },
+  "sources_stable_during_run": true
+}

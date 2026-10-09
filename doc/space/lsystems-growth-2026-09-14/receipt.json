@@ -1,0 +1,41 @@
+{
+  "started": "2026-09-14T16:26:54+02:00",
+  "finished": "2026-09-14T16:27:26+02:00",
+  "pid": 44012,
+  "exit": 0,
+  "checks": 60,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/growth_probe_base.gd": "55f8eb6eea582628f8c3e715dc71f1ece22534a77ebb31a3ad88ad5f951438f2",
+    "ada_run/growth_acceptance.gd": "fbd4e617a7ef860456702e82c4d22cc774ebb26994caff646fbc9fff1e61cf6d",
+    "commons/maps/LSystems_Growth/map_data.json": "56b3f32881557092a411aa01ec9a61f0092eacdb905ab9f3cd1e73dd855ad238",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/growth-review-2026-09-14/review-plan.json": "1209e3ae66a83e90b8ab4464945106a764714bcbcfb6ec645408c031f81be997",
+    "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.tscn": "7f61f5a81046b29badfb548c652053a44779658ccc8cb2ca879fcc9df1723a6a",
+    "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.gd": "50cea5cd05d247fba7cc70d6f104ea593f85e584054059e47f9a3769296a5c1a",
+    "algorithms/lsystems/Growth/AnimatedTree.tscn": "d8638184e0853bff945a53a2f7d9de47240d881c0d2fa9d6eed62d6cc4417d39",
+    "commons/artifacts/lsystem_tree/lsystem_tree.tscn": "53b0b1f60c176c5f90742ea1d471fad469952ba3d927ad193133a7724edafd0d",
+    "commons/artifacts/lsystem_tree/lsystem_tree.gd": "202254d9f15c70139c871bc0a60206fc67faa54352981ae8a295bd415d1dd11e",
+    "commons/artifacts/modulor_cypress/modulor_cypress.tscn": "f6d71b57db99b5f6532a3cc753eb584e069364b25a2169f52a6edc96292b5a20",
+    "commons/artifacts/modulor_cypress/modulor_cypress.gd": "2b61be445b29cbc80eb74d68051599aec3427888f13b06e6d31eb9507848dedf",
+    "commons/artifacts/parametric_lsystem/parametric_lsystem.tscn": "8435e957c663d0bb9eb1a0c2d97f89c1dd6f8ba55bf2514e2072aee533235286",
+    "commons/artifacts/parametric_lsystem/parametric_lsystem.gd": "5277d140b2942c545e4fa56c1a18b79a2551bb5f66b1d5c0e5f6a57940ab2e42",
+    "algorithms/lsystems/Growth/AnimatedTree.gd": "8cb011647463afb36d98738790248de9bf207574815a82eb5719095323c7ce9d",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "d3af95e0d30f7ffefa721da91af1f7a661061753db1295f48524cd6d855bf94c",
+    "commons/data/trunk_branches.json": "8dab7804d71a14a59d63d79b38f0c32211e9c9b523911f25a59e9fa7a6a638ba",
+    "commons/maps/LSystems_Growth/final.md": "f01c074ead526b64152eb0b72167e24bee9a575e40856600687e2a88f0f09ef9",
+    "commons/artifacts/growth_lesson/growth_lesson.gd": "3eb6284c26ede9dd21156e4077bd0e0b6ee02fbcce423681ef3f3c2b9e1ac5cf"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "checks": [
+    {
+      "name": "Readings install only with existing hand/canopy encounter",
+      "passed": true
+    },
+    {
+      "name": "Opening view starts with trunk and no kept version",
+      "passed": true
+    },
+    {
+      "name": "Both projections read all 31 current segments",
+      "passed": true
+    },
+    {
+      "name": "Plan deliberately cannot distinguish height",
+      "passed": true
+    },
+    {
+      "name": "Side view keeps height",
+      "passed": true
+    },
+    {
+      "name": "Side view deliberately cannot distinguish depth",
+      "passed": true
+    },
+    {
+      "name": "Plan keeps depth",
+      "passed": true
+    },
+    {
+      "name": "KEEP preserves the source geometry and rule",
+      "passed": true
+    },
+    {
+      "name": "Kept comparison is an independent endpoint snapshot",
+      "passed": true
+    },
+    {
+      "name": "Kept recipe declares generation, ratio, forks and angle",
+      "passed": true
+    },
+    {
+      "name": "Actual XR hand updates live projected records",
+      "passed": true
+    },
+    {
+      "name": "Turning does not mutate the kept view",
+      "passed": true
+    },
+    {
+      "name": "Kept batch transforms remain fixed while live tree turns",
+      "passed": true
+    },
+    {
+      "name": "Live drawings remain non-colliding readings",
+      "passed": true
+    },
+    {
+      "name": "Both batch geometries match projected endpoint vectors",
+      "passed": true
+    },
+    {
+      "name": "Vertical trunk becomes a finite plan dot",
+      "passed": true
+    },
+    {
+      "name": "Reset changes live count while preserving the chosen comparison",
+      "passed": true
+    },
+    {
+      "name": "Another KEEP replaces rather than accumulates snapshots",
+      "passed": true
+    },
+    {
+      "name": "CLEAR removes only the kept reading",
+      "passed": true
+    },
+    {
+      "name": "Existing ternary option fits the 121-segment comparison budget",
+      "passed": true
+    },
+    {
+      "name": "One bounded saved version holds the ternary view",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Production readings and tree, actual XRTools driver with supplied poses. Fixed projections and source invariants, not evidence of learning or comfort."
+}

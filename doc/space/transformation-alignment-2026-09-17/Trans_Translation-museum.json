@@ -1,0 +1,302 @@
+{
+  "checks": [
+    {
+      "name": "actual museum source grid exists",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum arrival has supporting floor",
+      "passed": true,
+      "value": {
+        "deck": 0.0,
+        "drop": "(7.5, 4.0, 1.5)",
+        "hit": "{ \"position\": (7.5, -0.0, 1.5), \"normal\": (0.0, 1.0, 0.0), \"face_index\": -1, \"collider_id\": 361431566177, \"collider\": Collision:<StaticBody3D#361431566177>, \"shape\": 227, \"rid\": RID(365072220162) }"
+      }
+    },
+    {
+      "name": "museum suppresses grid spawn",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "thirteen pickups instantiated",
+      "passed": true,
+      "value": 13
+    },
+    {
+      "name": "seven transport cubes instantiated",
+      "passed": true,
+      "value": 7
+    },
+    {
+      "name": "z_first has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_first pickup at declared cell (3, 6)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (3, 6)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "z_first pickup at declared cell (3, 8)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (3, 8)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "z_first ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_first rider collects (3, 6)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_first rider collects (3, 8)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_sideways has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_sideways pickup at declared cell (6, 13)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (6, 13)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "x_sideways pickup at declared cell (8, 13)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (8, 13)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "x_sideways ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_sideways rider collects (6, 13)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_sideways rider collects (8, 13)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_lift has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_lift pickup at declared cell (11, 17)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (11, 17)",
+      "passed": true,
+      "value": 2.20000004768372
+    },
+    {
+      "name": "y_lift ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_lift rider collects (11, 17)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_high has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_high pickup at declared cell (11, 23)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (11, 23)",
+      "passed": true,
+      "value": 4.0
+    },
+    {
+      "name": "z_high pickup at declared cell (11, 26)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (11, 26)",
+      "passed": true,
+      "value": 4.0
+    },
+    {
+      "name": "z_high ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_high rider collects (11, 23)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "z_high rider collects (11, 26)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_return has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_return pickup at declared cell (8, 31)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (8, 31)",
+      "passed": true,
+      "value": 4.0
+    },
+    {
+      "name": "x_return pickup at declared cell (6, 31)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (6, 31)",
+      "passed": true,
+      "value": 4.0
+    },
+    {
+      "name": "x_return ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_return rider collects (8, 31)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "x_return rider collects (6, 31)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_descent has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_descent pickup at declared cell (3, 36)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (3, 36)",
+      "passed": true,
+      "value": 2.5
+    },
+    {
+      "name": "y_descent ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "y_descent rider collects (3, 36)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "xz_diagonal has carrier",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "xz_diagonal pickup at declared cell (5, 41)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (5, 41)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "xz_diagonal pickup at declared cell (7, 43)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (7, 43)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "xz_diagonal pickup at declared cell (9, 45)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pickup height follows course (9, 45)",
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "name": "xz_diagonal ride reaches destination",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "xz_diagonal rider collects (5, 41)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "xz_diagonal rider collects (7, 43)",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "xz_diagonal rider collects (9, 45)",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Translation",
+  "standalone": false
+}

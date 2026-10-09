@@ -1,0 +1,11 @@
+--- before/commons/maps/FormFinding_Relaxation/map_data.json
++++ commons/maps/FormFinding_Relaxation/map_data.json
+@@ -92,7 +92,7 @@
+   "interactables": [
+    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+-   [ "", "", "mass_spring_bench:270", "", "", "", "verlet_workbench:90", "", "", "frozen_glass_vessel:90", "", "", "", "" ],
++   [ "", "", "mass_spring_bench:270", "", "", "", "verlet_workbench:90#comparison:true", "", "", "frozen_glass_vessel:90", "", "", "", "" ],
+    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],

@@ -1,0 +1,154 @@
+{
+  "hall": "Random_Entropy",
+  "run": {
+    "started": "2026-09-12T21:07:48+02:00",
+    "finished": "2026-09-12T21:08:38+02:00",
+    "pid": 14372,
+    "exit": 0,
+    "checks": 149,
+    "failures": [],
+    "source_sha256": {
+      "commons/testing/probe_wcn_entropy_live.gd": "2345cc6386b9c9dcf641e9a1e4aefa4d3f038b350edd3f066e2b87161cf49bac",
+      "commons/testing/probe_wcn_entropy.gd": "99691d8ac7928a1a84bb9d03879fa259865df3f819c6d3c9b327db978d666f9d",
+      "commons/maps/Random_Entropy/map_data.json": "8b225974d386e446da83b5810a90073678dab1f13c420445660167f5efb40384",
+      "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": "9fa6228b0e03a693a44fda903fc523cf8ca66f5fc2ad2e5538622020d3e8dcff",
+      "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+    },
+    "sources_unchanged": true,
+    "original_hand_unchanged": true,
+    "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+    "headset_verified": false,
+    "heard_by_a_person": false
+  },
+  "current_source_matches_run": {
+    "commons/testing/probe_wcn_entropy_live.gd": true,
+    "commons/testing/probe_wcn_entropy.gd": true,
+    "commons/maps/Random_Entropy/map_data.json": false,
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": true,
+    "commons/testing/wcn_desktop_driver.gd": true
+  },
+  "map_change_after_run": "Only map_info name/title/description/learning objectives; all other data and museum settings unchanged.",
+  "unchanged_functions": [
+    "_measure",
+    "_run_measurement",
+    "_draw_contrast_sample",
+    "_contrast_weights",
+    "active_probabilities",
+    "_refresh_ribbon",
+    "_place_tiles",
+    "set_sorted",
+    "set_contrast",
+    "_rebuild_now",
+    "_apply_stand"
+  ],
+  "exact_source_excerpts": 12,
+  "samples": {
+    "concentrated": {
+      "counts": [
+        109,
+        46,
+        20,
+        17,
+        6,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "entropy": 1.817600456861537,
+      "max_count": 109,
+      "zeros": 4,
+      "seed": 1342042699
+    },
+    "uniform": {
+      "counts": [
+        17,
+        11,
+        21,
+        31,
+        17,
+        18,
+        19,
+        24,
+        13,
+        29
+      ],
+      "entropy": 3.255647320269224,
+      "max_count": 31,
+      "zeros": 0,
+      "seed": 1342042698
+    }
+  },
+  "matched_capture_pose": {
+    "current_camera": "/root/@Node@10021/WcnDesktopRig/Head/Camera3D",
+    "eye": [
+      7.7,
+      1.6,
+      6.0
+    ],
+    "forward": [
+      -0.95,
+      -0.21,
+      0.24
+    ],
+    "rig": [
+      7.7,
+      0.0,
+      6.0
+    ]
+  },
+  "excerpt_max_color_error": 0.000386834144592285,
+  "excerpt_min_palette_gap": 0.191999793052673,
+  "primary_book_hero": [
+    "shannon_entropy_meter"
+  ],
+  "placements": {
+    "planned": 9,
+    "matched": 9,
+    "extra": 0,
+    "slid": 0,
+    "ringed": 0,
+    "placed": 8,
+    "refused": 1,
+    "declared": 0,
+    "unplanned": 0,
+    "vestibule": 4,
+    "key": "randomness|random entropy"
+  },
+  "missing_secondary": "replay_casino",
+  "plan_rows_agree": true,
+  "wcn_audit": {
+    "maps": 35,
+    "active": 19,
+    "with_final": 35,
+    "primary_book_mismatches": 0
+  },
+  "engine_script_errors": false,
+  "engine_diagnostics": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "ERROR: Failed to read the root certificate store.",
+    "ERROR: DebugLogger: ❌ Failed to create log file",
+    "WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.",
+    "WARNING: [em-art] randomness|random entropy: mosaic_body took 156 ms to build — that is a dropped frame in the hall",
+    "WARNING: ObjectDB instances leaked at exit (run with --verbose for details)."
+  ],
+  "headset_verified": false,
+  "files_prepared_for_publication": 55,
+  "global_index_warnings": "Existing Tutorial_Disco ragged rows and stale/degraded ledgers in other halls; retained in tool logs.",
+  "source_sha256_now": {
+    "commons/testing/probe_wcn_entropy_live.gd": "2345cc6386b9c9dcf641e9a1e4aefa4d3f038b350edd3f066e2b87161cf49bac",
+    "commons/testing/probe_wcn_entropy.gd": "99691d8ac7928a1a84bb9d03879fa259865df3f819c6d3c9b327db978d666f9d",
+    "commons/maps/Random_Entropy/map_data.json": "0416db65c30cc83947baca4ef1b3e032bba7fc61315d679af33d5e73b22fc9f7",
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": "9fa6228b0e03a693a44fda903fc523cf8ca66f5fc2ad2e5538622020d3e8dcff",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+  }
+}

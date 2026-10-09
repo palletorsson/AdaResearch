@@ -1,0 +1,122 @@
+{
+  "checks": [
+    {
+      "id": "separate/image_available",
+      "passed": true
+    },
+    {
+      "id": "blue/image_available",
+      "passed": true
+    },
+    {
+      "id": "overlap/image_available",
+      "passed": true
+    },
+    {
+      "id": "away/image_available",
+      "passed": true
+    },
+    {
+      "id": "choice/image_available",
+      "passed": true
+    },
+    {
+      "id": "separate/left_red",
+      "passed": true
+    },
+    {
+      "id": "separate/right_green",
+      "passed": true
+    },
+    {
+      "id": "blue/left_changes_channel",
+      "passed": true
+    },
+    {
+      "id": "blue/green_pool_kept",
+      "passed": true
+    },
+    {
+      "id": "overlap/red_joins_green",
+      "passed": true
+    },
+    {
+      "id": "overlap/left_loses_red",
+      "passed": true
+    },
+    {
+      "id": "away/left_loses_red",
+      "passed": true
+    },
+    {
+      "id": "away/green_pool_kept",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true,
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "samples": {
+    "away": {
+      "left_rgb": [
+        0.180392235517502,
+        0.180392235517502,
+        0.180392235517502
+      ],
+      "right_rgb": [
+        0.180392235517502,
+        1.0,
+        0.180392235517502
+      ]
+    },
+    "blue": {
+      "left_rgb": [
+        0.180392235517502,
+        0.180392235517502,
+        1.0
+      ],
+      "right_rgb": [
+        0.180392235517502,
+        1.0,
+        0.180392235517502
+      ]
+    },
+    "choice": {
+      "left_rgb": [
+        0.180392235517502,
+        0.180392235517502,
+        0.180392235517502
+      ],
+      "right_rgb": [
+        0.180392235517502,
+        1.0,
+        0.180392235517502
+      ]
+    },
+    "overlap": {
+      "left_rgb": [
+        0.180392235517502,
+        0.180392235517502,
+        0.180392235517502
+      ],
+      "right_rgb": [
+        0.858387351036072,
+        1.0,
+        0.180392235517502
+      ]
+    },
+    "separate": {
+      "left_rgb": [
+        1.0,
+        0.180392235517502,
+        0.180392235517502
+      ],
+      "right_rgb": [
+        0.180392235517502,
+        1.0,
+        0.180392235517502
+      ]
+    }
+  },
+  "scope": "Isolated supplied rendering fixture; exact lesson variants. This does not test museum illumination or headset appearance."
+}

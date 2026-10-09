@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "message": "eight halls and a plan owner",
+      "ok": true
+    },
+    {
+      "message": "select GT_Foundations",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Foundations",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Foundations",
+      "ok": true
+    },
+    {
+      "message": "select GT_Layout",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Layout",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Layout",
+      "ok": true
+    },
+    {
+      "message": "select GT_Pathfinding",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Pathfinding",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Pathfinding",
+      "ok": true
+    },
+    {
+      "message": "select GT_Network_Analysis",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Network_Analysis",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Network_Analysis",
+      "ok": true
+    },
+    {
+      "message": "select GT_Connectivity",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Connectivity",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Connectivity",
+      "ok": true
+    },
+    {
+      "message": "select GT_Spanning_Trees",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Spanning_Trees",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Spanning_Trees",
+      "ok": true
+    },
+    {
+      "message": "select GT_Flow",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Flow",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Flow",
+      "ok": true
+    },
+    {
+      "message": "select GT_Matching",
+      "ok": true
+    },
+    {
+      "message": "owner for GT_Matching",
+      "ok": true
+    },
+    {
+      "message": "advance from GT_Matching",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "route": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

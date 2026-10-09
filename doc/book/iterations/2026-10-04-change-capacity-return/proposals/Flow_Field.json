@@ -1,0 +1,36 @@
+{
+  "id": "Flow_Field",
+  "title": "Let the next address follow the last",
+  "storyboard": "Particles keep moving while FIELD HELD stops the field clock. Bring position updates, elapsed seconds and Trace’s retained list. Read the supplied direction function at one position in the two-dimensional canvas; multiply its unit direction by speed and elapsed seconds to get a displacement, then use the new position for the next lookup. Predict two updates from another starting address. Rendering, the field sampler and boundary handling remain supplied; state the canvas frame before relating it to the hall. Carry a follower and its position record, with no stored velocity or inertia. On a return, compare one step with two half-steps using the same start, held field, speed and total duration. This is a proposed calculation, not the SPEED button. Inspect the installed trail across a wrap: its joining stroke can invent a crossing. Separating trail segments remains an optional future extension.",
+  "storyboard_short": "Use FIELD HELD: field clock stops, particles continue. Reuse position/delta/retained list. Supply field_direction(Vector2 canvas_position), renderer/boundary policy; declare frame. Teach unit direction*speed*seconds→displacement; next address→next lookup. Predict two updates from another start. Carry follower/record, no inertia. Optional return: dt versus two dt/2, same start/field/speed/duration; SPEED is not time step and RESET rescatters. Current trails join wraps; segment break only proposed. Defer noise/angle construction and Forces velocity state.",
+  "mode": "make",
+  "brings": [
+    "position updates with elapsed seconds",
+    "Trace’s retained-position list and neighbouring entries"
+  ],
+  "learns": [
+    "sampling at an address produced by the previous update",
+    "direction, speed and time step have different roles"
+  ],
+  "carries": "A repeated field-sampling update and retained path; a clear distinction between prescribed velocity and carried velocity state.",
+  "supplied": [
+    "existing unit-direction sampler and two-dimensional canvas frame",
+    "particle/arrow rendering, input controls and boundary handling"
+  ],
+  "artifact_refs": [
+    "flow_field_painter"
+  ],
+  "review_note": "Select one reduced update in the existing shared_field host; state the Vector2 canvas coordinates and the conversion to museum display separately. The sampler and noise/angle construction remain supplied. SPEED changes prescribed speed; RESET chooses fresh positions. Neither is a controlled numerical-step comparison. Keep such a comparison for a return with identical conditions and equal total duration. Trail segmentation is an unimplemented proposal, not something this summary pass fixes.",
+  "independent_check": "Choose another starting canvas position, predict the first displacement and next sampling address, then repeat once. Explain what FIELD HELD freezes and why a wrap can create a misleading joining line.",
+  "prior_maps": [
+    "Point_Coordinates",
+    "Point_Trace",
+    "Trans_Translation",
+    "Change_Intro"
+  ],
+  "source_refs": [
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd"
+  ],
+  "change_reason": "Teach the feedback in the path before adding a numerical experiment or an unbuilt trail repair."
+}

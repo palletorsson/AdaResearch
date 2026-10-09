@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "name": "complete script builds eleven treads and its own labels",
+      "passed": true
+    },
+    {
+      "name": "first top is at the start of the circle",
+      "passed": true
+    },
+    {
+      "name": "middle top reaches radius 2.95 and height 0.55",
+      "passed": true
+    },
+    {
+      "name": "last top ends a quarter turn at height 1.10",
+      "passed": true
+    },
+    {
+      "name": "all treads face radially with level tops",
+      "passed": false
+    },
+    {
+      "name": "each rendered box has matching solid dimensions",
+      "passed": true
+    },
+    {
+      "name": "sampled positions name top surfaces rather than centres",
+      "passed": true
+    },
+    {
+      "name": "native ray hits every named top in translated rotated host",
+      "passed": true
+    },
+    {
+      "name": "path segment 1 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 2 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 3 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 4 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 5 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 6 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 7 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 8 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 9 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "path segment 10 is visible without collision",
+      "passed": true
+    },
+    {
+      "name": "ten intervals join eleven positions",
+      "passed": true
+    },
+    {
+      "name": "outside midpoint distance exceeds inside",
+      "passed": false
+    },
+    {
+      "name": "released sphere rests on real tread collision",
+      "passed": true
+    },
+    {
+      "name": "independent zero-amplitude variation has constant radius",
+      "passed": true
+    },
+    {
+      "name": "variation keeps count, rise and orientations",
+      "passed": false
+    },
+    {
+      "name": "variation still presents real top surfaces",
+      "passed": true
+    },
+    {
+      "name": "constant-radius edge distances agree with chord geometry",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "all treads face radially with level tops",
+    "outside midpoint distance exceeds inside",
+    "variation keeps count, rise and orientations"
+  ],
+  "passed": false,
+  "scope": "Exact printed construction; physical top contacts and dropped sphere; not player ascent or independent student evaluation."
+}

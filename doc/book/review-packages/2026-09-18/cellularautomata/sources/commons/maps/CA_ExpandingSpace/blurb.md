@@ -1,0 +1,1 @@
+A path changes while you wait on it. The tile is still visible when it stops carrying you. Withdraw: what has to remain for it to recover? Then reverse the loop and ask whether the same neighbourhood still makes the same answer.

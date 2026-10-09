@@ -1,0 +1,33 @@
+GUARD PREDICTION -- written 2026-08-13 BEFORE the guard was written and BEFORE
+it was measured. Session 2 (the first session died before implementing it).
+
+VERIFIED, not inherited: the prior attempt's dying claim "four buildings go to
+ZERO showings under the 6 m floor" is TRUE. Measured over all 30 museums, the
+four that hang something today and hang NOTHING under a 6 m floor are exactly:
+
+  soane-cabinet-vista                   60 -> 0   longest wall 5 m
+  sainsbury-false-perspective-enfilade  52 -> 0   longest wall 5 m
+  pompidou-plateau-libre                27 -> 0   longest wall 4 m
+  mengoni-glazed-thoroughfare            8 -> 0   longest wall 5 m
+
+All four share one property and only one: 0.0% of their wall run is in stretches
+of 6 m or more. Their longest wall is shorter than the floor, so every candidate
+is rejected and the licence has nowhere to spend itself. The other eight zeros in
+the AFTER table are buildings whose own budget row says fill_walls=false; they
+hung nothing BEFORE either and are not a regression.
+
+THE GUARD: per building, if the requested floor silences it completely, fall back
+to that building's OWN longest wall. Not to the shipped 2 m floor -- that would
+put the pictures back on the 1 m stubs, which is the fault being fixed. A museum
+whose longest plane is 5 m hangs on its 5 m planes.
+
+PREDICTED showings after the guard. The licence, not the candidate supply, should
+bind in three of the four -- round(wall_run * 0.1 * 0.55):
+
+  soane-cabinet-vista                   11   (201 m -> licence 11)
+  sainsbury-false-perspective-enfilade  11   (203 m -> licence 11)
+  pompidou-plateau-libre                 3   ( 60 m -> licence  3)
+  mengoni-glazed-thoroughfare            2   ( 32 m -> licence  2)
+
+and no other building's count moves at all, because the guard only fires when the
+first pass returned nothing.

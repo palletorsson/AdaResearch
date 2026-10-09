@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "line gallery loads",
+      "passed": true
+    },
+    {
+      "name": "seven planks present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: seven-planks",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: along-the-wall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "planks": [
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          12.2526082992554,
+          0.490367531776428,
+          1.0
+        ],
+        "length_m": 1.0,
+        "name": "wall_plank_1"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          12.167103767395,
+          0.725290656089783,
+          1.89999997615814
+        ],
+        "length_m": 1.5,
+        "name": "wall_plank_2"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          12.0815982818604,
+          0.960213840007782,
+          2.79999995231628
+        ],
+        "length_m": 2.0,
+        "name": "wall_plank_3"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          11.9960927963257,
+          1.19513702392578,
+          3.70000004768372
+        ],
+        "length_m": 2.5,
+        "name": "wall_plank_4"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          11.9105882644653,
+          1.43006014823914,
+          4.59999990463257
+        ],
+        "length_m": 3.0,
+        "name": "wall_plank_5"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          11.8250827789307,
+          1.66498327255249,
+          5.5
+        ],
+        "length_m": 3.5,
+        "name": "wall_plank_6"
+      },
+      {
+        "angle_degrees": 69.9999992757703,
+        "centre": [
+          11.7395782470703,
+          1.89990639686584,
+          6.40000009536743
+        ],
+        "length_m": 4.0,
+        "name": "wall_plank_7"
+      }
+    ]
+  },
+  "passed": true
+}

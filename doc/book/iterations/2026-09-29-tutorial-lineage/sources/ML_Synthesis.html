@@ -1,0 +1,312 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Synthesis · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Synthesis">← Tutorial lineage</a></p><h1>ML Synthesis</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Synthesis/final.md">Raw captured source</a></p><pre># The point outside the rule
+
+When a point is flagged as unusual, what exactly has been discovered?
+
+&lt;!-- @anomaly_detection --&gt;
+
+Find one raised, enlarged point and compare its position with a nearby unflagged point. Read the active detection mode. Before interpreting the raised point as an error, ask which numerical comparison could have put it above the threshold.
+
+In this room, the exhibit measures displacement from the sample’s mean along each coordinate, scaled by the spread on that coordinate. It adds the two absolute standardised displacements and compares the result with a threshold. Points meeting the threshold are lifted and enlarged, making a numerical decision into a spatial distinction.
+
+Compare a point displaced mainly along one coordinate with a point displaced along both. The default score adds coordinate contributions, so the shape of its decision boundary comes from that addition as well as from the sample’s spread. The pale disc on the floor is a rough marker at the average spread, not the boundary; the real boundary is a diamond in standardised units, which is why some raised points sit inside the disc and some unraised ones outside it. Do not rely only on the impression of being far from the centre. The exhibit gives you a chance to connect the position of a raised point with the particular arithmetic that made its distance count.
+
+The score depends on the sample used to compute the mean and spread. Here the generated outer points are included in those statistics along with the central cloud. The population helping define normality therefore includes the very observations that may later be called abnormal.
+
+This is a specific coordinate-based rule. It is not a complete judgement about an observation’s origin or importance. A point might be an error, a rare valid case, an emerging pattern or a case the representation describes poorly. The raised position tells you what the score did; it does not choose among those explanations.
+
+The machine-learning sequence has repeatedly separated the operation from the interpretation: a cluster from a named class, an edge from an object, and a training curve from demonstrated generalisation. It has also met four different measures. The network changed by a teacher&#x27;s answers; the centres by geometry alone; the bodies in the first hall by whether they went on; and the creature in this hall, teaching itself to walk from a reward every tenth of a second, by feedback on each decision rather than on a life. One word, learning, and four accounts of what did the measuring. The same care applies here. A detector’s name cannot supply evidence that its flags are useful.
+
+Choose one flagged point you would investigate rather than discard. State what additional observation would help you decide. For a future version, exposing the threshold and allowing the reference population to change would make the cost of a decision visible: which rare cases become ordinary, and which ordinary cases become suspect?
+
+&lt;!-- @ --&gt;
+
+Graph theory will give us another representation of relations. Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Synthesis/tutorial.md">Raw captured source</a></p><pre># ML Synthesis
+
+Reinforcement learning, generation, classification. Three islands.
+
+Build a Q-table.
+
+```gdscript
+class_name QLearner
+
+var q_table: Dictionary = {}  # state -&gt; array of Q values per action
+
+func get_q(state, action: int) -&gt; float:
+    return q_table.get(state, Array([0, 0, 0, 0]))[action]
+
+func set_q(state, action: int, value: float) -&gt; void:
+    if not state in q_table:
+        q_table[state] = [0.0, 0.0, 0.0, 0.0]
+    q_table[state][action] = value
+```
+
+One row per state, one column per action. Values track expected future reward.
+
+Epsilon-greedy action selection.
+
+```gdscript
+@export var epsilon: float = 0.1
+
+func choose_action(state) -&gt; int:
+    if randf() &lt; epsilon:
+        return randi() % 4
+    var q_values: Array = q_table.get(state, [0, 0, 0, 0])
+    var best: int = 0
+    for i in range(1, 4):
+        if q_values[i] &gt; q_values[best]:
+            best = i
+    return best
+```
+
+With probability epsilon explore; otherwise exploit the best known action.
+
+Q-learning update.
+
+```gdscript
+@export var alpha: float = 0.1  # learning rate
+@export var gamma: float = 0.99  # discount factor
+
+func update(state, action: int, reward: float, next_state) -&gt; void:
+    var max_next_q: float = -INF
+    for a in 4:
+        max_next_q = max(max_next_q, get_q(next_state, a))
+    var old_q: float = get_q(state, action)
+    var new_q: float = old_q + alpha * (reward + gamma * max_next_q - old_q)
+    set_q(state, action, new_q)
+```
+
+Temporal-difference update. Blends current reward with discounted future expectations.
+
+Run an episode.
+
+```gdscript
+func run_episode(env) -&gt; float:
+    var state = env.reset()
+    var total_reward: float = 0.0
+    while not env.is_done():
+        var action := choose_action(state)
+        var result: Dictionary = env.step(action)
+        update(state, action, result.reward, result.next_state)
+        state = result.next_state
+        total_reward += result.reward
+    return total_reward
+```
+
+One episode from start to terminal state. The total reward measures how well the policy performed.
+
+Policy gradient (REINFORCE).
+
+```gdscript
+func reinforce_update(trajectory: Array, learning_rate: float = 0.01) -&gt; void:
+    var returns: Array = compute_returns(trajectory, gamma)
+    for i in trajectory.size():
+        var state = trajectory[i].state
+        var action: int = trajectory[i].action
+        var G: float = returns[i]
+        var grad: Array = policy_gradient(state, action)
+        update_policy(grad, learning_rate * G)
+```
+
+Gradient ascent on expected return. Unlike Q-learning, learns a stochastic policy directly.
+
+Sample from a trained language model.
+
+```gdscript
+func sample_from_lm(prompt: String, max_tokens: int, temperature: float = 0.7) -&gt; String:
+    var output: String = prompt
+    for _i in max_tokens:
+        var logits: Array = lm_forward(tokenize(output))
+        var scaled: Array = []
+        for l in logits: scaled.append(l / temperature)
+        var probs: Array = softmax(scaled)
+        var token_idx: int = sample_categorical(probs)
+        output += detokenize([token_idx])
+    return output
+```
+
+Autoregressive generation. Temperature controls randomness; higher is more diverse.
+
+Retrain a classifier on new data.
+
+```gdscript
+func online_retrain(classifier, new_examples: Array) -&gt; void:
+    for _epoch in 5:
+        for example in new_examples:
+            classifier.backward(example.features, example.label)
+```
+
+Fine-tune on incoming data. Useful for classifiers that must adapt to distribution shift.
+
+You can now build a Q-learner with epsilon-greedy and temporal-difference updates, run policy gradient, sample from a language model with temperature, and retrain a classifier online. Chamber_ML closes with an adversarial optimiser.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Synthesis/technical.md">Raw captured source</a></p><pre># ML Synthesis — Technical
+
+The map stages three islands, each running a different ML paradigm: reinforcement learning on the first, a small generative language pipeline on the second, a classifier on the third. A central beacon tracks the overall loss across all three systems at once.
+
+Reinforcement learning learns a policy from reward signals rather than from labelled examples. The walker creature on the first island has a policy that maps states to actions; an environment provides reward signals for successful steps. Q-learning is the canonical algorithm.
+
+```gdscript
+class_name QLearner extends Node
+
+var q_table: Dictionary = {}  # (state, action) -&gt; value
+@export var alpha: float = 0.1  # learning rate
+@export var gamma: float = 0.99  # discount factor
+@export var epsilon: float = 0.1  # exploration rate
+
+func choose_action(state) -&gt; int:
+    if randf() &lt; epsilon:
+        return randi() % n_actions
+    var best: int = 0
+    var best_q: float = -INF
+    for a in range(n_actions):
+        var q = q_table.get([state, a], 0.0)
+        if q &gt; best_q:
+            best_q = q; best = a
+    return best
+
+func update(s, a, reward, s_next) -&gt; void:
+    var max_q_next: float = -INF
+    for a_next in range(n_actions):
+        max_q_next = max(max_q_next, q_table.get([s_next, a_next], 0.0))
+    var old_q: float = q_table.get([s, a], 0.0)
+    q_table[[s, a]] = old_q + alpha * (reward + gamma * max_q_next - old_q)
+```
+
+## Policy Gradient
+
+Q-learning works for small state spaces but scales badly. Policy gradient methods parameterise the policy directly and optimise expected reward by gradient ascent.
+
+```gdscript
+func reinforce_update(trajectory: Array, lr: float = 0.01) -&gt; void:
+    var returns: Array = compute_returns(trajectory)
+    for i in range(trajectory.size()):
+        var state = trajectory[i].state
+        var action = trajectory[i].action
+        var G: float = returns[i]
+        var grad = log_policy_gradient(state, action)
+        update_policy_parameters(grad, lr * G)
+```
+
+The REINFORCE algorithm has high variance. Actor-critic methods reduce variance by using a learned value function as a baseline.
+
+## Generative Station
+
+The second island runs a small character-level language model — a two-layer LSTM trained on a short corpus. Given a seed prompt, it samples continuations character by character.
+
+## Classifier Station
+
+The third island runs the classifier from ML_Classification redeployed as a live demo. Incoming data points are classified in real time, and the learner can paint new training examples onto the space and retrain.
+
+## Complexity
+
+Each island&#x27;s runtime cost is dominated by its own forward pass. Running three simultaneously requires careful frame budgeting. The map runs each at a reduced update frequency (every third frame) so all three fit within a single frame&#x27;s time budget.
+
+Within the sequence, Synthesis unifies the arc. Evolution, gradient descent, classification, neural composition, perception, memory, and generation all converge into the single practice of searching a loss surface the model cannot fully see.
+
+## Multi-Armed Bandits
+
+Bandit problems are a simpler setting than full RL. The agent chooses among K actions, each with an unknown reward distribution; the goal is to maximise cumulative reward. Epsilon-greedy explores randomly with probability epsilon and exploits the current best with probability 1-epsilon. Upper Confidence Bound (UCB) chooses the action whose upper confidence interval on reward is highest.
+
+```gdscript
+func ucb_choose(mean_rewards: Array, counts: Array, t: int) -&gt; int:
+    var best: int = 0
+    var best_score: float = -INF
+    for i in range(mean_rewards.size()):
+        if counts[i] == 0:
+            return i
+        var bonus: float = sqrt(2.0 * log(t) / counts[i])
+        var score: float = mean_rewards[i] + bonus
+        if score &gt; best_score:
+            best_score = score; best = i
+    return best
+```
+
+Bandits generalise to contextual bandits (the reward depends on a context vector) and then to full RL (actions change the state). The progression is conceptually clean and the map&#x27;s third island shows it.
+
+## Transfer Learning
+
+Transfer learning reuses features learned on one task for another. A vision model pretrained on ImageNet can be fine-tuned on a small specialised dataset and vastly outperform a model trained from scratch. The reuse is conceptually simple: freeze the early layers, replace the output head, train the output head (and optionally unfreeze some upper layers).
+
+```gdscript
+func transfer_model(base_model, new_task_head) -&gt; FeedforwardNet:
+    var model := FeedforwardNet.new()
+    for layer in base_model.layers.slice(0, -1):
+        model.layers.append(layer)
+        model.layers[-1].trainable = false
+    model.layers.append(new_task_head)
+    return model
+```
+
+Transfer learning is one reason large pretrained models have become dominant. The cost of pretraining is borne once; downstream tasks benefit without repeating the cost.
+
+## Deployment
+
+Training is only one part of the lifecycle. Deployment raises concerns the training process does not: latency, memory, robustness to distribution shift, ability to retrain on new data. Production systems are often smaller than their training-time models (via distillation, quantisation, or pruning) because deployment cost matters more than training cost.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Synthesis/intent.md">Raw captured source</a></p><pre>Concept: The convergence of all machine learning threads — evolution, gradient descent, classification, neural architecture, perception, memory, and generation revealed as facets of a single problem: finding structure in data by searching loss landscapes you cannot fully see.
+Sequence role: Eighth and final map in the Machine Learning sequence (15th spine sequence, integration phase). The synthesis map that unifies the arc. Evolution&#x27;s blind search, gradient descent&#x27;s directed walk, classification&#x27;s boundary drawing, neural composition, perceptron&#x27;s atomic learning, recurrence&#x27;s memory, and generation&#x27;s dreaming are shown as one continuous story. Connects back to every preceding ML map and laterally to Foundations Crisis (limits of what can be learned) and QFEP (optimization as free energy minimization); follows ML_Generative.
+Technical angle: End-to-end pipeline from data to trained generative model — the full stack. Evolution as hyperparameter search, gradient descent as weight optimization, classification and generation as task heads on shared architectures. Transfer learning as the reuse of learned representations. The bias-variance tradeoff as the fundamental tension governing all ML: too simple (underfitting) vs. too complex (overfitting). Regularization as the mechanism that keeps models at their own edge of chaos.
+Critical angle: The synthesis reveals that learning is always optimization under uncertainty — the landscape is too large to explore fully, the model is always a compression, and the loss function encodes assumptions about what matters. ML is not neutral pattern recognition; it is a value-laden act of world-modeling. The integration phase concludes by asking what it means to build systems that learn from data when the data itself is a product of historical power structures.
+Key artifacts: ml_synthesis_lab provides an integrated environment combining evolutionary search, gradient optimization, network architecture, and generative sampling into a single interactive pipeline demonstrating the full ML workflow.
+Gap: Needs a bias audit artifact — a tool that traces how training data composition propagates through the pipeline to affect final model outputs, connecting the technical stack to its social consequences.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Synthesis/critical.md">Raw captured source</a></p><pre># ML_Synthesis — Critical Reflection
+
+Three islands floating over void. Narrow walkways connecting them. A transport cube required to reach one platform. The map is an archipelago, and the synthesis it promises is not fusion but navigation between isolated positions. You visit the joint-learning creature, the explainable AI system, and the anomaly detector on separate platforms, connected by precarious bridges over nothing. The void is not decorative. It is the argument. The synthesis of machine learning is not a unified theory. It is the act of crossing gaps between things that do not naturally connect.
+
+The joint-learning walker sits on the first reachable platform. Its identity is blunt: `Q(s,a) &lt;- Q(s,a) + alpha[r + gamma * max_a&#x27; Q(s&#x27;,a&#x27;) - Q(s,a)]`. Tabular Q-learning for joint torques. A creature with random limbs teaches itself to walk through trial and error. The critical parameter is exploration rate — too high and the creature flails forever, too low and it gets stuck in a local gait. Hayles would see the posthuman body literalized: a form that discovers its own morphology through policy gradient descent.
+
+The creature does not have a body plan. It has a parameter space. It does not walk; it optimizes. And the gait it discovers — the strange, lurching, efficient locomotion that emerges from Q-learning — is not designed but found, which means it may encode solutions no engineer would propose and no human body would perform. The posthuman does not walk like us. It walks like the loss landscape permits.
+
+The explainable AI artifact sits on the central platform, the one requiring the most navigation to reach. Its placement is the map&#x27;s most honest architectural choice. Explainability is the hardest thing to reach in machine learning — not because the techniques are complex but because the demand contradicts the method. A neural network works precisely because it learns features no one specified. Asking it to explain those features is asking it to translate its computational unconscious into human legibility. Chun&#x27;s analysis of software transparency applies: the demand for explainability assumes that the model&#x27;s internal representations correspond to concepts a human can grasp. But the model&#x27;s representations are distributed across thousands of weights, and the patterns they encode may have no human-language equivalent. Saliency maps, attention visualizations, feature importance scores — these produce legibility without producing understanding. They show which parts of the input the model attended to, not why, not what the model understood them to mean.
+
+The anomaly detection artifact sits on the furthest platform, reached through the most void. Its position is exile. Anomaly detection asks: does this belong? Isolation forests, z-scores, autoencoder reconstruction error — three methods for defining the boundary between normal and abnormal. Hayles&#x27; work on the boundary between human and posthuman resonates here.
+
+Every anomaly detection system requires a model of normality, and the model is trained on data representing the world as it was, not as it could be. The anomaly is whatever deviates from the training distribution. If the training data encodes a particular version of normal — a particular body type, behavior pattern, transaction profile — then the anomaly is whatever falls outside that version. The system does not detect anomalies. It detects deviations from a norm it absorbed without examining. Every threshold encodes a politics of normalcy, and the threshold is learned.
+
+The void between platforms is the map&#x27;s real content. Evolution led to gradient descent led to classification led to neural networks led to perception led to memory led to generation — and now, on these floating islands, the sequence confronts the fact that its threads do not converge. Reinforcement learning, explainability, and anomaly detection are not the culmination of the ML arc; they are three problems that remain after the arc completes. The creature walks but cannot explain its gait. The XAI system explains but cannot guarantee its explanations are faithful. The anomaly detector identifies outliers but cannot distinguish the genuinely anomalous from the merely underrepresented. Three competencies, each undermined by its own success.
+
+Chun writes about the moment when the program that was supposed to solve the problem becomes the problem. The synthesis map is this crisis spatialized. The transport cube required to reach a platform is the mechanical labor of integration — brute-force effort to connect systems that resist connection. The walkways over void are narrow and deliberate, not generous. The map does not synthesize machine learning. It shows you the spaces between its parts and asks whether the connections you build are bridges or rationalizations.
+
+The exit waits on solid ground at the bottom-right. You have crossed the void three times, visited three islands. The floor beneath the exit is h1. The floor beneath everything else is h0 — void. The synthesis of machine learning rests on nothing. It floats because the walkways hold, and the walkways hold because someone built them, and the question of whether they lead somewhere real is the question the sequence leaves open and the teleporter closes without answering.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Synthesis/artifacts.md">Raw captured source</a></p><pre># ML Synthesis — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 3 artifacts*
+
+&gt; Everything learned, gathered on floating platforms above a void. Three islands. Three problems. One question: what holds them together.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Joint Learn Walk (Reinforcement Learning)
+![Joint Learn Walk (Reinforcement Learning)](/scene-catalog/joint_learn_walk.png)
+
+RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.
+
+`joint_learn_walk`
+
+## ExplainableAIXAI_VR
+![ExplainableAIXAI_VR](/scene-catalog/explainable_ai_xai_vr.png)
+
+Interactive SHAP, LIME, and Grad-CAM explanations
+
+`explainable_ai_xai_vr`
+
+## Anomaly Detection
+![Anomaly Detection](/scene-catalog/anomaly_detection.png)
+
+Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn&#x27;t belong.
+
+`anomaly_detection`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Synthesis/summary.md">Raw captured source</a></p><pre># ML Synthesis — Summary
+
+ML_Synthesis is the eighth and final map in the Machine Learning sequence. Three floating islands sit above a void, each staging one of the sequence&#x27;s open problems, and the space invites the learner to see them as three views of the same question: how do you find structure in data when the landscape is larger than you can see?
+
+The first island runs reinforcement learning. A creature with random joints learns to walk by trial and failure. It thrashes, falls, and occasionally takes a step; a reward signal reinforces steps and the creature&#x27;s policy slowly improves. The second island runs a small generative pipeline that produces short text continuations from a seed prompt. The third island holds a classifier that sorts incoming data points into a learned decision surface.
+
+The connecting bridges carry labelled panels that name the shared operations: loss functions, optimisation steps, parameter update rules. A central beacon tracks the overall loss across all three systems at once, so the learner can see the three optimisations running in parallel and registering progress on the same axis.
+
+Within the sequence, Synthesis unifies the arc. Evolution, gradient descent, classification, neural composition, perception, memory, and generation all converge into the single practice of searching a loss surface the model cannot fully see.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Synthesis/blurb.md">Raw captured source</a></p><pre>Everything learned, gathered on floating platforms above a void. Three islands. Three problems. One question: what holds them together.
+
+A creature with random joints thrashes, fails, thrashes again — and walks. Reinforcement learning as bodily negotiation. The agent doesn&#x27;t know its own shape until it moves. Policy gradient descent through a space of possible gaits, each trial burning a path between chaos and coordination. Reward is just surprise reduction with a direction.
+
+On another platform, anomaly detection draws boundaries. Isolation forests, z-scores, autoencoder reconstruction error — three ways of asking &quot;does this belong?&quot; The answer depends on who built the model of belonging. Every threshold encodes a politics of normalcy.
+
+The synthesis is not combination. It is the moment the tools turn back on themselves — the model that questions its own predictions, the agent that learns it cannot fully see the landscape it descends. Optimization all the way down, and no ground floor.</pre></section></body></html>

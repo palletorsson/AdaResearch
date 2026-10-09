@@ -1,0 +1,9 @@
+# SwarmIntelligence_Agent_Based_Modeling_ABM — Summary
+
+Give agents rules. Let them interact. Watch what emerges. Agent-based modeling makes no assumptions about aggregate behavior — it builds the aggregate from individuals. Each agent carries state (position, velocity, energy, inventory), perceives its local environment within a limited radius, decides via a finite state machine (exploring, gathering, fleeing, returning), and acts by moving, consuming resources, or depositing markers.
+
+The `ABMSimulation` artifact runs in a grid of corridors and pillars where agents navigate intersections, cluster at resource-rich junctions, and trace territorial patterns shaped by the architecture. The simulation loop is perceive-decide-act per agent, then update the environment — resource respawn, signal decay, population dynamics. The corridor layout constrains movement and blocks sight lines, transforming abstract agent dynamics into spatial navigation problems.
+
+The framework generalizes every swarm that came before. Physarum is an ABM with sense-turn-deposit rules and a trail grid. Boids are an ABM with three steering forces and a spatial hash. Flow field particles are a minimal ABM with no internal state. The ABM map names the pattern and opens it to arbitrary rule sets — any finite state machine, any perception model, any action set. Multiple agent populations with different internal logics can share the same environment, producing collective behavior that neither rule set would generate alone.
+
+This is the fourth map in the Swarm Intelligence sequence. After Physarum (stigmergy), flow fields (field following), and boids (peer interaction), ABM provides the general container. The next maps — ant colony optimization and particle swarm optimization — re-specialize the framework for optimization problems.

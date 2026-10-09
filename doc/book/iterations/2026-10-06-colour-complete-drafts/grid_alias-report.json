@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "id": "Color_Grid_Pallet/start/palette_length",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/all_addresses",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/rule_all_cells",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/selection_does_not_paint",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/invalid_selection_ignored",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/invalid_write_rejected",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/paint_before_advance",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/retention",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/switch_no_advance",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/independent_palettes",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/rule_overwrites",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/wrap",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/unchanged_geometry",
+      "passed": true
+    },
+    {
+      "id": "Color_Grid_Pallet/start/owns_choices",
+      "passed": false
+    }
+  ],
+  "failure_ids": [
+    "Color_Grid_Pallet/start/owns_choices"
+  ],
+  "passed": false
+}

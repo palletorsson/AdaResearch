@@ -1,0 +1,53 @@
+from pathlib import Path
+import hashlib,json,re
+r=Path.cwd();o=Path(__file__).resolve().parent
+base=json.loads((o/'baseline.json').read_text());changed=[]
+def edit(path,changes):
+ p=r/path;raw=p.read_bytes();assert hashlib.sha256(raw).hexdigest()==base[path],path+' changed since baseline'
+ s=raw.decode('utf-8').replace('\r\n','\n')
+ for a,b in changes:
+  assert s.count(a)==1,(path,a[:75],s.count(a))
+  s=s.replace(a,b)
+ if b'\r\n' in raw:s=s.replace('\n','\r\n')
+ p.write_bytes(s.encode('utf-8'));changed.append(path)
+edit('commons/maps/SoftBodies_Soft_Body_Deformation/final.md',[
+('Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. STIFFNESS is a number between nought and one: how much of each spring\'s disagreement the solver corrects each time it looks. It is not a property of a material. It is an instruction to a procedure that looks five times a tick, and the bench in Form Finding showed you that the count alone can stiffen a cloth. A soft body in this engine is a set of distances being corrected, never solved.[^stiffness] A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.',
+ 'Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.'),
+('Your hand is the one body in this room the solver cannot argue with. Its position is written every frame from the tracking, and the cube meets it as a collider that never yields; the rounded body two halls on will meet it as a push within a hand\'s reach instead, and neither will ever move the hand. An engine that is handed a position instead of a force has to treat it as law, and every soft thing here is arranged around that law.',
+ 'Reach toward it. The cube can deform against your hand, but it cannot push the tracked hand out of position. In this room\'s VR rig, the virtual hand follows the controller directly.[^hand] One body must accommodate the meeting; the other has already been placed.'),
+('What holds the cube together is the skin. Every edge of its surface is a spring asked to keep its length, and there is nothing across the inside. Take PRESSURE to nothing and the cube shows you: a bag of triangles with no interior drapes over its pedestal like cloth. Pressure is what this engine offers in place of the internal struts a soft body would otherwise need.',
+ 'There is no modeled flesh behind the green skin. The body is built from a closed surface whose points are linked to keep distances; pressure helps that surface hold a volume. Turn PRESSURE down to zero and wait. What can the remaining links hold on their own?\n\nThe engine has a limited number of attempts to keep those distances at each step. The bench in Form Finding let us change that count; here the cube gets five passes.[^stiffness] What looks like a quality of the material also depends on how much work the simulation is allowed to do.'),
+('[^stiffness]: Godot\'s SoftBody3D: `linear_stiffness` runs from 0 to 1, and `simulation_precision`, the passes the solver makes over its distances each physics tick, is 5 for every soft body in this sequence. The room did not write the solver; it hands it distances and a budget.',
+ '[^stiffness]: This cube sets Godot\'s `simulation_precision` to 5 and exposes `linear_stiffness` from 0 to 1. The count is local to this artifact. Godot Physics links triangle edges and also adds bending constraints between points two edges apart. See the [SoftBody3D reference](https://docs.godotengine.org/en/4.6/classes/class_softbody3d.html) and [Godot 4.6 solver source](https://github.com/godotengine/godot/blob/4.6-stable/modules/godot_physics_3d/godot_soft_body_3d.cpp).\n\n[^hand]: The museum\'s base rig selects TELEPORT mode for both collision hands: their transforms follow the tracked controllers. The same hand component also supports a collision-following mode. This asymmetry is a choice made in this rig, not a necessary property of every virtual hand.')])
+edit('commons/maps/SoftBodies_Cloth_Physics/final.md',[
+('Eight strips hang in a rank, each a forearm wide and twice your height. They overlap by a hand\'s breadth, so from straight on the rank reads as one surface. Walk along the front of it. Walk behind it.',
+ 'Eight strips hang in a rank, each a forearm wide and twice your height. Their edges overlap, so from straight on the rank reads as one surface. Walk along the front of it. Walk behind it. Unlike the cube, this surface does not close around an inside. There is no enclosed volume for pressure to inflate.'),
+('Nothing is driving this: the strips were built hanging and have been settling ever since, and a sheet this long is still stretching and swinging well after it was made.',
+ 'There is no motor here. The strips were built hanging and have been settling under gravity ever since; a sheet this long can keep stretching and swinging well after it was made.'),
+('the held edge in the same place, the rest carrying on exactly as it was.',
+ 'the held edge in the same place, the rest still free to move.'),
+('The hundred and twelve are tied by the edges of the strip\'s own triangles: to the neighbour across, the neighbour below, and one neighbour on the diagonal. That third tie is why a strip can swing without shearing into a parallelogram; a net of squares would. The frame is not consulted, because the frame is not a party to the arrangement. It was built for you.',
+ 'The strip is a mesh of triangles; its points are linked, and the pin rule chooses which must stay. That rule does not consult the frame. The apparent reason for the cloth to hang was built for you to see.'),
+('This is the one value you cannot walk through, and the only one that reaches into the space the cloth occupies. A frame that was scenery to the pin rule is not scenery to the body, yours or the cloth\'s.',
+ 'The opening behind the cloth is now occupied by a solid surface. The pins stay where they were, but the passage changes. The pin rule can ignore a wall that a body must go around.'),
+('It stops being an edge. The strip gathers toward its corners and begins to behave like something hung rather than something fixed.',
+ 'Six points that were held can now sag between the two corners. The edge remains, but its straightness was being maintained.'),
+('Before you let the last two go, try **STIFFNESS**. It is the other route to a different silhouette, and it is worth taking now rather than earlier, because you already know what the first route looks like. Two ways to change how a thing falls: change the material\'s resistance, or change which of its points are allowed to participate.\n\n',''),
+('The strips are on the floor now, and **REBUILD** is the only control that hangs them again.',
+ 'The strips are on the floor now. **REBUILD** makes a fresh hanging rank. Keep its top row held and try **STIFFNESS**. We can now compare two ways of changing the silhouette: change how strongly the surface resists deformation, or change which of its points may move.'),
+('Four bodies stand nearby, already stopped. They are soft spheres kept from the earlier collection, not woven cloth, and each froze at a scheduled moment of a fall you were not here for.',
+ 'Four bodies stand nearby. They began falling when the room loaded, and by the time you reach them their timers may already have stopped them. These are soft spheres kept from the earlier collection, not woven cloth. You can arrive after the event and still meet its shape.'),
+('They are resting on a rail: the contact is a line rather than a plane, and each body has had to resolve a shape around it. Then press **LANDING**. It exchanges the thing underneath them and drops them again; the pan that arrives makes a different contact, two walls where there was one bar.',
+ 'Each has a narrow rail beneath it. Look at where the surface meets the bar and where it hangs clear. Then press **LANDING**. It exchanges the support and starts a new fall; the pan that arrives offers a floor between two walls. Stay for the fall this time.')])
+edit('commons/maps/SoftBodies_Cloth_Physics/technical.md',[
+('offers PINS, STIFFNESS, RELEASE, REBUILD, LANDING, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk',
+ 'offers PINS, SUPPORT, STIFFNESS, RELEASE, REBUILD, LANDING, RULE, and blocks repeated activation during rebuilds. The seven controls occupy a four-column, two-row desk'),
+('Try STIFFNESS after choosing a support.',
+ 'For a comparison that changes one condition at a time, follow PINS with RELEASE, then REBUILD before trying STIFFNESS.'),
+('Floor provenance:',
+ 'The lesson token builds eight strips with 112 vertices each, at stiffness 0.34, damping 0.05 and simulation precision 5. The initial top row has eight pins per strip; PINS keeps the two corners, and RELEASE removes all pins. SUPPORT cycles gantry → none → hoop → mast → wall without changing those indices. The wall and other solid frame pieces can still collide; independence from the pin rule is not independence from the physics world. Godot Physics adds bending links as well as triangle-edge links.\n\nThe map begins with the rail landing, whose bar is 0.14 m wide. The first LANDING press selects the pan. Rebuilding starts new bodies and timers; the stop raises damping and stiffness rather than preserving a vertex snapshot.\n\nFloor provenance:')])
+edit('commons/maps/SoftBodies_Soft_Body_Deformation/technical.md',[
+('Floor provenance:',
+ 'The placed cube sets simulation precision to 5. This count does not apply to every artifact in the sequence: rounded_softbody, for example, uses 10. The engine is GodotPhysics3D. Its links include triangle edges and bending constraints between points two edges apart; the surface is not a volumetric lattice, but saying it has only edge links is inaccurate. Stiffness is not simply a fraction of each distance error corrected per pass.\n\nBoth collision hands in commons/scenes/base.tscn select mode 1, TELEPORT. In addons/godot-xr-tools/hands/collision_hand.gd that mode copies the target transform directly; COLLIDE is another available mode. This is source evidence for the manuscript\'s hand asymmetry, not a completed headset contact test.\n\nFloor provenance:')])
+(o/'changed-files.json').write_bytes((json.dumps(changed,indent=2)+'\n').encode())
+print('Revised',len(changed),'canonical files')

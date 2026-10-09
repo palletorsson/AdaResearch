@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A line to move with · Ada Research</title><style>*{box-sizing:border-box}body{margin:0;background:#13212a;color:#eee9df;font:18px/1.7 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:32px 24px 80px}a{color:#f4b8c7}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font:clamp(36px,6vw,70px)/1.1 Georgia,serif;max-width:900px}h2{font:32px/1.2 Georgia,serif;margin-top:48px}h3{font:24px/1.3 Georgia,serif}.lead{font:25px/1.5 Georgia,serif;max-width:860px}.date,figcaption{color:#b2c0c5;font-size:14px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}.card{border:1px solid #51606b;border-radius:6px;padding:24px;background:#1b303a}.card h2{margin:0 0 16px}img{width:100%;height:auto;display:block}figure{margin:30px 0}figcaption{margin-top:10px}pre{background:#081720;padding:20px;overflow:auto}code{font-size:.9em}details{border-top:1px solid #51606b;padding:24px 0}summary{cursor:pointer;font-size:24px}article{max-width:790px;margin:30px auto}p{max-width:880px}.tag{font-size:13px;color:#a9d8c9}.table{overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:15px;border-bottom:1px solid #51606b;text-align:left;vertical-align:top}small{color:#b2c0c5}h1{margin-bottom:20px}article h1{font-size:52px}article{margin:40px auto}table{font-size:16px}blockquote{border-left:3px solid #f4b8c7;padding-left:20px} @media(max-width:650px){article h1{font-size:38px}td,th{padding:8px}table{font-size:14px}}section.chapter{border-top:1px solid #51606b;margin-top:65px;padding-top:20px}h2.chapter-title{font-size:46px}article h2{font-size:29px}details.reference summary{font-size:17px} .chapter-nav{font-size:15px} :target{scroll-margin-top:25px}</style></head><body><main><nav><a href="primitives-reading-review.html">Current reading review</a><a href="primitives-encounters.html">Four chapters</a></nav><article><h1>A line to move with</h1>
+<p>Editorial pilot · 15 September 2026</p>
+<blockquote>
+<p>Follow-up: <a href="primitives-encounters.html">Read Point One → Line → Trace → Grid</a>. Point One has returned to the earlier text Palle preferred. <a href="primitives-reading-review.html">The reading review</a> records our revised process: preserve the baseline and read local proposals before applying them. The original pilot below remains a historical draft.</p>
+</blockquote>
+<p>The unit of revision is an encounter: something the visitor can do, something the program makes possible, and something the encounter leaves open. Text and artifact can each suggest the next experiment. We will calibrate this relationship in Point–Line, then use it while continuing the first traverse of the spine.</p>
+<p>This is a proposed passage, separate from the current book chapter. It concentrates on two existing artifacts; the rest of the hall still matters. It is not a new restriction on how many artifacts a room can hold.</p>
+<h2>The small brief</h2>
+<table>
+<thead>
+<tr>
+<th>Thread</th>
+<th>Point–Line</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carry in</td>
+<td>From Point One: a position needs a frame; a visible body needs further decisions; we begin while the program is already running.</td>
+</tr>
+<tr>
+<td>Do here</td>
+<td>Follow or walk beside the floor stripe. Pick up and turn the short rod. Compare a fixed span with a changing journey.</td>
+</tr>
+<tr>
+<td>Technical foothold</td>
+<td>Two endpoints describe a segment. Their difference supplies displacement; its length supplies distance. Neither stores the journey between them.</td>
+</tr>
+<tr>
+<td>Opening</td>
+<td>Straightness can guide, invite correction, or give movement something stable to play with. What else can we do with the relation we have learned?</td>
+</tr>
+<tr>
+<td>Carry onward</td>
+<td>Want to keep some of the movement itself. Trace introduces samples; Grid offers a shared reference and another choice about precision.</td>
+</tr>
+</tbody>
+</table>
+<h2>Proposed book passage</h2>
+<p><em>This passage would develop “Read it with your feet” and “Carry the whole line.” It assumes the earlier encounter with two endpoints remains in the chapter. The code below is an illustrative calculation, not the floor marking's implementation.</em></p>
+<p>The point gave us somewhere to begin. Now there is something to follow.</p>
+<p>On the floor, a white stripe: <strong>WALK THIS LINE.</strong></p>
+<p>Try moving along it. Let your pace be your own. You might look down to keep it under you, then look ahead and trust it for a while. Move alongside it. The stripe is still available. It can help you find a direction without having to become the whole of your journey.</p>
+<p>I keep thinking of a dance pole: the rod stays straight; the body finds turns around it. Here the line lies on the floor. What movements does that change invite? Following, crossing, keeping company at a small distance. There is pleasure in having something steady to vary a relation with.</p>
+<p>The words may also make you correct yourself. A little sideways movement can begin to feel like a mistake. This marking does not score your walk. Its script makes the stripe and the lettering; it does not check whether you obey. Yet you have read an instruction, and perhaps begun to arrange yourself around it. Stay with that perhaps. Another visitor may read an invitation where you read a demand.</p>
+<p>Pick up the short rod. Carry it across your view. Turn it. Its two ends move together, keeping their distance. A direction you followed on the floor can now be a direction you hold in your hand.</p>
+<p>We can give a segment two positions in one coordinate frame:</p>
+<pre><code class="language-gdscript">var a := Vector3(0, 0, 0)
+var b := Vector3(1, 0, 0)
+var displacement := b - a
+var distance := displacement.length()
+</code></pre>
+<p>From A to B: one metre along the positive x-axis. The subtraction keeps a direction as well as an amount. The length gives us the amount alone. These few lines let us hold a relation steady enough to compare it with another.</p>
+<p>Now imagine travelling between those same ends by a wide curve. The subtraction still gives the same answer. Your hesitation, the curve, the time spent looking at something halfway: none of those events entered these variables.</p>
+<p>There is usefulness in that small answer. We can measure without having to carry every journey into the measurement. There is also a reason to want more. I want to keep the turn your hand made, the movement that the two ends cannot tell apart from a direct passage.</p>
+<p>The next room gives us a way to begin keeping it. We will save positions along the movement. Even then, we will have to choose how many.</p>
+<p>Bring the detour.</p>
+<h2>What the artifacts already support</h2>
+<ul>
+<li><strong>walk_this_line_marking:</strong> its script constructs a stripe and text. It supplies no obedience score or route tracking. A visitor's sense of correction is an invitation to notice, not a predicted response from every body.</li>
+<li><strong>grabbable_line:</strong> one pickable body carries both endpoints at a fixed length. Its existing position-dependent jitter, sound and controller feedback deserve their own encounter later in the passage; they are not evidence of faulty tracking.</li>
+<li><strong>line and line_demo:</strong> the existing endpoint and connection work supplies the geometry introduced before this excerpt. The barrier's authored response remains a valuable further complication.</li>
+<li><strong>Point Trace:</strong> supplies the next operation—retaining selected positions. Its current text already opens with “Bring the detour.”</li>
+</ul>
+<p>The dance pole is the narrator's association. The short virtual rod is not a weight-bearing pole. This pilot does not claim that ordinary Euclidean lines become curved in VR, or that every visitor experiences drift or disorientation. Source inspection grounds the described operations; embodied reception still needs human testing.</p>
+<h2>How we iterate from here</h2>
+<ol>
+<li><strong>Read this one encounter together.</strong> Mark the sentence where you become curious, where explanation arrives too soon, and what you want to try next. Those reactions are more useful than asking you to specify a complete voice in advance.</li>
+<li><strong>Make one focused revision.</strong> If the passage wants an action the artifact cannot offer, record that gap and choose whether the action or the passage should change. If the existing encounter already works, strengthen its visibility or description first.</li>
+<li><strong>Check the first four halls as a passage.</strong> Point → Line → Trace → Grid should accumulate both capabilities and desires. Preserve strong existing passages and relevant artifacts. Reconcile book anchors and primary roles when a complete revised chapter is accepted.</li>
+<li><strong>Continue through the spine with the small brief.</strong> Carry one unresolved question forward. Save larger additions for the next pass, unless a missing interaction prevents the current encounter from working.</li>
+</ol>
+<p>These fields guide our editing; they need not become headings in every chapter. A poem, a surprising observation, or a technical problem can start the movement. A hall can linger where another moves quickly.</p>
+<p>For each proposed addition, ask: <strong>what does this let the reader do, notice, or ask that the current encounter does not?</strong> Keep a short record of that answer. This makes an improvement reusable without making every room the same.</p>
+<h2>Next actionable improvement</h2>
+<p>Calibrate this passage before commissioning another artifact. Then revise the complete Point–Line chapter around the strongest existing encounters, checking the handover from Point One and into Trace. The immediate uncertainty is the voice and pacing; the two artifacts already offer a workable experiment.</p>
+<h2>Source record</h2>
+<p>Inspected for this pilot: <code>commons/maps/Point_Lines/final.md</code>, <code>commons/artifacts/walk_this_line_marking/walk_this_line_marking.gd</code>, and <code>commons/primitives/line/grabbable_line.gd</code>. Earlier discussion also examined Point One, Trace and Grid. This pilot changes no map, artifact, primary role or canonical <code>final.md</code>.</p>
+<p>The separate Isosurfaces work remains in progress: ISO_Introduction implementation and its desktop checks are complete, but its illustrated review and publication are pending. This editorial pilot does not mark that work finished.</p></article></main></body></html>

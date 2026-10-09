@@ -1,0 +1,3403 @@
+{
+  "Random_Noise_Types": {
+    "map_source": "commons/maps/Random_Noise_Types/map_data.json",
+    "text_source": "commons/maps/Random_Noise_Types/final.md",
+    "map_sha256": "81fefdb5c28f4943ea912123791c6dff61ab2938182ff6adfa03166bf51a9466",
+    "text_sha256": "e4b7453da871c425cbd60134443e95d3730e023bbc7826d0dd56a7a9b1a7f3d0",
+    "map_info": {
+      "description": "White noise vs blue noise — compare uniform random points with structured randomness. Gallery of noise color types with interactive specimens.",
+      "dimensions": {
+        "width": 13,
+        "depth": 10,
+        "max_height": 6
+      },
+      "format": "json",
+      "lookup_name": "Random_Noise_Types",
+      "metadata": {
+        "category": "noise",
+        "difficulty": "beginner",
+        "estimated_time": "3-4 minutes",
+        "learning_objectives": [
+          "White noise characteristics",
+          "Blue noise and structured randomness",
+          "Noise color spectrum",
+          "Visual comparison of noise types"
+        ]
+      },
+      "name": "Random Noise Types",
+      "title": "White Noise vs Blue Noise",
+      "version": "1.0",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            9,
+            2,
+            12,
+            6
+          ],
+          [
+            2,
+            1,
+            5,
+            4
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "auto_reveal_on_entry": false,
+      "background": {
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "gutter": 0.0,
+      "initial_tile_visibility": "hidden_except_corners",
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "6",
+        "6",
+        "1",
+        "6",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "6",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      },
+      "t": {
+        "description": "Continue to next step",
+        "name": "Next",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "randompoint:90:1.25:1#stand:bounds#size:0.6",
+        "commented_out": false,
+        "lookup_hint": "randompoint",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 3,
+        "raw_token": "randompoints:180#stand:compare#count:24#size:0.9",
+        "commented_out": false,
+        "lookup_hint": "randompoints",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "WhiteNoiseGallery:180:-0.500:0.050#stand:gallery#seed:31415",
+        "commented_out": false,
+        "lookup_hint": "WhiteNoiseGallery",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "NoiseColors3D:180:-0.500:0.100#stand:gallery#seed:31415",
+        "commented_out": false,
+        "lookup_hint": "NoiseColors3D",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 7,
+        "z": 1,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 6,
+        "z": 7,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Random_Noise_Types",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1583,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "randompoints"
+        ],
+        "reason": "Can random positions still refuse to be neighbours?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Random_Noise_Types/final.md",
+        "text_sha256": "7aa551478c3170b1f6c68819d8e8f6ea7c5e4c27b1fe642cebc55a1cc70a79a0",
+        "map_sha256": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ],
+      "role_primary_order": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_Columns": {
+    "map_source": "commons/maps/Noise_Columns/map_data.json",
+    "text_source": "commons/maps/Noise_Columns/final.md",
+    "map_sha256": "06b174a5ef314896bf53620930252de9b58544b4e1faaa384866aae6c230ce1f",
+    "text_sha256": "d5e3f300bcf46bcca41512bd10f6082c4426883345271da3f47e273114bbbc8c",
+    "map_info": {
+      "name": "Melting Bernini: Noise as Sculptor",
+      "title": "What keeps a body changing?",
+      "lookup_name": "Noise_Columns",
+      "description": "Three columns in one frame, the same mesh at the same resolution, the same material and the same mapped displacement range, differing only in what drives the melt: one held at a fixed phase, one on the shipped sine, and one on a real coherent field seeded by the room. Which is which is not written anywhere until a visitor presses REVEAL. The instrument logs both drivers and their displacement at the same moment; FREEZE stops time so the geometry can be inspected and repeated, SPIN turns a column without deforming it, MARBLE takes the veined shader off so material noise cannot be mistaken for the geometric driver. The columns carry no collider and hold nothing up. Corrected 2026-09-12: the previous description named an erosion process and an undoing of disorder that the shipped melt never implemented, the melt having been a sine with no field in it at all.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 16,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "beginner",
+        "category": "noise",
+        "estimated_time": "5-7 minutes",
+        "learning_objectives": [
+          "Compare a held shaft, periodic deformation and coherent-field-driven deformation",
+          "Separate local time, whole-body rotation, material and vertex shape",
+          "Read a dark orb and its swarm variant as different recipients of earlier capabilities",
+          "Recognize bounded sampling and the limits of display geometry"
+        ]
+      },
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            7,
+            4,
+            12,
+            11
+          ],
+          [
+            2,
+            2,
+            5,
+            6
+          ]
+        ],
+        "passage": {
+          "kind": "straight",
+          "width": 3,
+          "depth": 3
+        }
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "synthesis_stand:180#subject:dark_sphere#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 7,
+        "raw_token": "MeltingBerniniScene:180#stand:trio#speed:0.9#seed:31415",
+        "commented_out": false,
+        "lookup_hint": "MeltingBerniniScene",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 12,
+        "z": 1,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 10,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_Columns",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1280,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "MeltingBerniniScene"
+        ],
+        "reason": "What remains recognisable while a column changes shape?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Columns/final.md",
+        "text_sha256": "6431a6046c435b1848a31f1cad5cd7a3d55e93fc0cc296c6eb4d99db6c4af0c9",
+        "map_sha256": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "role_primary_order": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_One": {
+    "map_source": "commons/maps/Noise_One/map_data.json",
+    "text_source": "commons/maps/Noise_One/final.md",
+    "map_sha256": "6c8620e7368a67b4a648389f12602fd49995a8f6a7fcb5fa2db1f85ce0e7ce0d",
+    "text_sha256": "6d9528ae1be355500cc4842e1e3e573cb0f1588d85fe90cb283e31a04717b8c0",
+    "map_info": {
+      "name": "Noise: What Does a Value Become?",
+      "title": "Field, Reading, Combination",
+      "lookup_name": "Noise_One",
+      "description": "Three authored works: matching torus rings read a shared field as relief or colour; a compact basin retains the existing three-source terrain and exposes its weighted contributions; the dark orb keeps an independent pulse. FREEZE holds the current local moment, REMAP makes signed differences visible in colour, AMPLITUDE changes relief gain and FREQUENCY changes sampling coordinates. Terrain controls isolate resources before the original slope-lowering pass. Rings have no colliders; the terrain has a matching triangle collider.",
+      "manual_file": "res://commons/context/clipboard/tutorial_text/noise_layers_axioms.md",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 11,
+        "max_height": 5
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "noise",
+        "estimated_time": "7-10 minutes",
+        "learning_objectives": [
+          "Separate a field from its receiving operation",
+          "Compare clipped and signed colour mappings",
+          "Distinguish displacement gain from coordinate scale",
+          "Inspect three retained terrain contributions and their combination",
+          "Distinguish shader relief from collision geometry"
+        ]
+      },
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            3,
+            1,
+            9,
+            9
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "5",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "5",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "noisetorus:180#stand:pair",
+        "commented_out": false,
+        "lookup_hint": "noisetorus",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "noiselayers:0:0.8#stand:basin",
+        "commented_out": false,
+        "lookup_hint": "noiselayers",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 8,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 10,
+        "z": 0,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 8,
+        "z": 9,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_One",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1286,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noisetorus"
+        ],
+        "reason": "Is a restless surface changing its underlying shape or only how that shape is expressed?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_One/final.md",
+        "text_sha256": "24eb619b5cf18b5bdc15ebb7c176dab080d72f9af6fd5a1e7ee04c034798ac20",
+        "map_sha256": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noisetorus",
+        "noiselayers",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noisetorus",
+        "noiselayers",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_Voxel": {
+    "map_source": "commons/maps/Noise_Voxel/map_data.json",
+    "text_source": "commons/maps/Noise_Voxel/final.md",
+    "map_sha256": "101246a5433011743c3a2bee79414684cdb21d164fa487f39d4c5c7b17821893",
+    "text_sha256": "358343c1f30f73c8a98fa2ec7e7e8688d8074cb4c95489cef7e8d9405b6f341a",
+    "map_info": {
+      "name": "Voxel Noise: Discretizing the Continuum",
+      "title": "Noise Carved into Blocks",
+      "lookup_name": "Noise_Voxel",
+      "description": "A fixed Perlin field becomes a sampled occupancy decision. A cased 24-cubed model controls a five-times-larger volume with matching cells. A live screen compares one horizontal score slice with the exact occupied/empty mask; the dark orb keeps its independent pulse. Threshold changes classification, CELL selects a sample and screen layer, SEED changes the field, and CUT changes only the model view. Connected occupied cells do not establish a walkable route.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 15,
+        "depth": 16,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "noise",
+        "estimated_time": "6-8 minutes",
+        "learning_objectives": [
+          "Sampling continuous fields into discrete voxels",
+          "Threshold-based placement algorithms",
+          "3D noise field visualization",
+          "Grid discretization critique"
+        ]
+      },
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            2,
+            2,
+            13,
+            14
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "science_screen:180#mode:voxel_slice#support:stand#screen_width:2.8#screen_height:1.8",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 7,
+        "raw_token": "perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415",
+        "commented_out": false,
+        "lookup_hint": "perlin_terrain_sculptor",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "voxelnoise#stand:volume",
+        "commented_out": false,
+        "lookup_hint": "voxelnoise",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 12,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 4,
+        "z": 1,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      },
+      {
+        "x": 11,
+        "z": 1,
+        "raw_token": "tc:10:y",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 13,
+        "z": 1,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "tc:50:y",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 12,
+        "z": 11,
+        "raw_token": "tc:10:y",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      },
+      {
+        "x": 2,
+        "z": 13,
+        "raw_token": "tc:10:y",
+        "commented_out": false,
+        "lookup_hint": "tc"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_Voxel",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1144,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "perlin_terrain_sculptor",
+          "voxelnoise"
+        ],
+        "reason": "Can you remove matter without changing the field that decides where it could appear?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Voxel/final.md",
+        "text_sha256": "06264cd74c028c727fa63ad728325826f1ca38706d75a58d62e6844de6bdfc77",
+        "map_sha256": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "perlin_terrain_sculptor",
+        "science_screen",
+        "voxelnoise",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "perlin_terrain_sculptor",
+        "science_screen",
+        "voxelnoise",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_6_Wall": {
+    "map_source": "commons/maps/Noise_6_Wall/map_data.json",
+    "text_source": "commons/maps/Noise_6_Wall/final.md",
+    "map_sha256": "63dc252b334ea6af29028239ff0bec504e5b80e15c488ca2c5cdc3020f539169",
+    "text_sha256": "e7a08ec471f7ecb941e512797250f24684056fed92763d79a2350fbd6f943172",
+    "map_info": {
+      "name": "Shader Noise: GPU Randomness and Hash Functions",
+      "title": "Fractal Octave Layering",
+      "lookup_name": "Noise_6_Wall",
+      "description": "A four-patch comparison controls an enterable five-metre shader room and its retained sphere. Compare one, two, four and six cloud terms, hold the current local moment, change the generator separately, and use DRESS to compare the cloud sum with the complete pink material. The independent dark orb remains beside the exit.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 13,
+        "max_height": 3
+      },
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            3,
+            1,
+            12,
+            11
+          ]
+        ]
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "noise",
+        "estimated_time": "12-15 minutes",
+        "learning_objectives": [
+          "GPU-based noise generation techniques",
+          "Hash functions for deterministic pseudo-randomness",
+          "Shader implementations (Perlin, Simplex, Worley, fBm)",
+          "Performance optimization for parallel computation"
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 9,
+        "z": 2,
+        "raw_token": "shader_noise_space:180#stand:panel",
+        "commented_out": false,
+        "lookup_hint": "shader_noise_space",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "shader_noise_space#stand:room",
+        "commented_out": false,
+        "lookup_hint": "shader_noise_space",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 10,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 9,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_6_Wall",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1062,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shader_noise_space"
+        ],
+        "reason": "What changes when the field surrounds you instead of sitting on a bench?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_6_Wall/final.md",
+        "text_sha256": "399a8f654aba82fcce3dc28a21901d8f5bf1de642b64bbe4e38bc57da1aa34a6",
+        "map_sha256": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "shader_noise_space",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "shader_noise_space",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_Inside_Noise": {
+    "map_source": "commons/maps/Noise_Inside_Noise/map_data.json",
+    "text_source": "commons/maps/Noise_Inside_Noise/final.md",
+    "map_sha256": "f1a082ed07da35e4f417f22d05443dc8bbb33fe08b7ccc86f98c9245fbbfddcf",
+    "text_sha256": "8462d0da760da424c42c952fdf02e91373744247abad021d83ecc35697b597fc",
+    "map_info": {
+      "name": "Noise_Inside_Noise",
+      "title": "Noise_Inside_Noise",
+      "lookup_name": "Noise_Inside_Noise",
+      "description": "Experience domain warping - using noise to distort noise coordinates. Explore how layered noise creates organic, swirling patterns far more complex than simple noise alone.\n\n[Placement applied hybrid engine — constraint 0.947→0.960, walkability 0.589→0.716]",
+      "version": "placed-hybrid",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 14,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "noise",
+        "estimated_time": "8-10 minutes",
+        "learning_objectives": [
+          "Domain warping techniques",
+          "Recursive noise application",
+          "Noise as coordinate transformation",
+          "Creating organic patterns through composition"
+        ]
+      },
+      "eye_shot_adopted": "Trial_eye_Noise_Inside_Noise",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "floor_cells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            7,
+            3
+          ],
+          [
+            7,
+            12
+          ],
+          [
+            8,
+            0
+          ],
+          [
+            9,
+            0
+          ],
+          [
+            9,
+            12
+          ],
+          [
+            10,
+            0
+          ],
+          [
+            10,
+            12
+          ],
+          [
+            11,
+            0
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            11,
+            2
+          ],
+          [
+            11,
+            3
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            11,
+            5
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            11,
+            7
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            9
+          ],
+          [
+            11,
+            10
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            11,
+            12
+          ]
+        ],
+        "sculpture_clear_rects": [
+          [
+            2,
+            2,
+            11,
+            9
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "w",
+        "w",
+        "1",
+        "w",
+        "w",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "2",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "w",
+        "w",
+        "0",
+        "w",
+        "0",
+        "0",
+        "0",
+        "w"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "noisesphere:180#stand:warp",
+        "commented_out": false,
+        "lookup_hint": "noisesphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 11,
+        "z": 0,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 5,
+        "z": 8,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 4,
+        "z": 12,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 7,
+        "z": 12,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_Inside_Noise",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1169,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noisesphere"
+        ],
+        "reason": "Does placing noise on a sphere mean one noise is being fed into another?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Inside_Noise/final.md",
+        "text_sha256": "f10412f3539ca924de3e5764a4ce87722d5878bb4a8a009865c9e6446552176c",
+        "map_sha256": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noisesphere",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noisesphere",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_Space_10": {
+    "map_source": "commons/maps/Noise_Space_10/map_data.json",
+    "text_source": "commons/maps/Noise_Space_10/final.md",
+    "map_sha256": "0c3d80cd8890d2f4335cdd5c9ba4c77ec75b9a4528646e3753a7c07c188b335e",
+    "text_sha256": "d348af755b9836b8437747844f12d34d93fa98a92be9a6cd10c723b6d4961c2c",
+    "map_info": {
+      "name": "Noise Space: Interactive Noise Exploration",
+      "title": "Noise Parameter Space",
+      "lookup_name": "Noise_Space_10",
+      "description": "An interactive space for exploring noise parameters, frequencies, and amplitudes. Experiment with different noise types and see how parameter changes affect the resulting patterns.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 14,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "noise",
+        "estimated_time": "10-12 minutes",
+        "learning_objectives": [
+          "Interactive noise parameter manipulation",
+          "Real-time noise visualization",
+          "Understanding frequency and amplitude relationships",
+          "Comparative noise type exploration"
+        ]
+      },
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "floor_cells": [
+          [
+            10,
+            12
+          ]
+        ],
+        "sculpture_clear_rects": [
+          [
+            2,
+            2,
+            11,
+            11
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "0",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "0",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 11,
+        "z": 3,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "noise_space#stand:walk",
+        "commented_out": false,
+        "lookup_hint": "noise_space",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 12,
+        "z": 0,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "wp",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 11,
+        "raw_token": "wp:180",
+        "commented_out": false,
+        "lookup_hint": "wp"
+      },
+      {
+        "x": 10,
+        "z": 12,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_Space_10",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1043,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noise_space"
+        ],
+        "reason": "When a field becomes ground, which variations become a route?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Space_10/final.md",
+        "text_sha256": "32e6473ae9e727d1de3e51cd092636990bc3758e293f8c71b143a4af4b413cbf",
+        "map_sha256": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noise_space",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noise_space",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Noise_Perlin_Simplex": {
+    "map_source": "commons/maps/Noise_Perlin_Simplex/map_data.json",
+    "text_source": "commons/maps/Noise_Perlin_Simplex/final.md",
+    "map_sha256": "1964d1bb14a85542ea5709bd6a9d2a7b04632cb141579ffb2ab33ff3e3b6fa35",
+    "text_sha256": "0748a01ffa376a61ac6790c252be37add52664da592686c5b9077fb6c7974447",
+    "map_info": {
+      "name": "Perlin vs Simplex: The Evolution of Gradient Noise",
+      "title": "Perlin vs Simplex",
+      "lookup_name": "Noise_Perlin_Simplex",
+      "description": "Two matched noise fields on one floor: one told to draw a Perlin basis, one a simplex basis, with the same seed, the same sampling, the same octaves and the same colour ramp, each with a reachable panel and a readout of the field's value at two fixed coordinates. What must stay the same before a difference can be attributed to a rule.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 15,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "intermediate",
+        "category": "noise",
+        "estimated_time": "10-12 minutes",
+        "learning_objectives": [
+          "Perlin noise gradient interpolation",
+          "Simplex noise triangular grid optimization",
+          "Comparative analysis of noise algorithms",
+          "Terrain generation applications"
+        ]
+      },
+      "museum": {
+        "sculpture_clear_rects": [
+          [
+            1,
+            1,
+            11,
+            10
+          ]
+        ],
+        "artifact_placement": "map"
+      }
+    },
+    "settings": {
+      "cube_size": 1,
+      "gutter": 0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.2,
+          0.3,
+          0.7
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Next Lesson",
+        "description": "Continue to the next algorithm demonstration",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      },
+      "s": {
+        "properties": {
+          "height": 5.5
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 7,
+        "raw_token": "simplex_noise:0:1.1#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4#witness:show#study:compare",
+        "commented_out": false,
+        "lookup_hint": "simplex_noise",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "perlin_noise:0:1.1#generator:perlin#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4",
+        "commented_out": false,
+        "lookup_hint": "perlin_noise",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 11,
+        "raw_token": "perlin_noise_terrain:0:1.0",
+        "commented_out": false,
+        "lookup_hint": "perlin_noise_terrain",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 13,
+        "raw_token": "configurable_portal#dest_map:Lab_Path#label:Lab Path - not connected#active:false",
+        "commented_out": false,
+        "lookup_hint": "configurable_portal",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      }
+    ],
+    "editorial_state": {
+      "map": "Noise_Perlin_Simplex",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1281,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "simplex_noise",
+          "perlin_noise"
+        ],
+        "reason": "What would make two noise surfaces a fair comparison?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+        "text_sha256": "669c8888b7f1176176574e5cf36b760e91dca2d4e580df81d94c55e55d6ea47a",
+        "map_sha256": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "simplex_noise",
+        "perlin_noise",
+        "perlin_noise_terrain",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "simplex_noise",
+        "perlin_noise",
+        "perlin_noise_terrain",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "Lab_Path": {
+    "map_source": "commons/maps/Lab_Path/map_data.json",
+    "text_source": "commons/maps/Lab_Path/final.md",
+    "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+    "text_sha256": "30ec6de21896f63ab272d36d012cef582ef4bdd577687830bb8b14eda6512fc2",
+    "map_info": {
+      "name": "Lab Path",
+      "title": "Return Corridor",
+      "lookup_name": "Lab_Path",
+      "description": "Transition corridor back to the lab. Shared endpoint for all sequences.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 5,
+        "depth": 5,
+        "max_height": 1
+      },
+      "metadata": {
+        "difficulty": "beginner",
+        "category": "transition",
+        "estimated_time": "15 seconds"
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "color",
+        "color": [
+          0.02,
+          0.02,
+          0.03
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Return to Lab",
+        "description": "Back to the lab",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 0,
+        "z": 0,
+        "raw_token": "sp",
+        "commented_out": false,
+        "lookup_hint": "sp"
+      },
+      {
+        "x": 4,
+        "z": 0,
+        "raw_token": "an:-90",
+        "commented_out": false,
+        "lookup_hint": "an"
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t"
+      }
+    ],
+    "editorial_state": {
+      "map": "Lab_Path",
+      "recorded_status": "source_checked_draft",
+      "text_words": 391,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "dark_sphere"
+        ],
+        "reason": "What can you carry out of a sequence when the busy demonstrations are gone?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Lab_Path/final.md",
+        "text_sha256": "30ec6de21896f63ab272d36d012cef582ef4bdd577687830bb8b14eda6512fc2",
+        "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

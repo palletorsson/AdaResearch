@@ -1,0 +1,153 @@
+{
+  "columns": [
+    {
+      "base": {
+        "box_depth": 0.52,
+        "box_height": 0.42,
+        "box_width": 0.6
+      },
+      "label": "01 / CARDBOARD",
+      "rows": [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "source": "res://commons/artifacts/cardboard_box/cardboard_box.tscn"
+    },
+    {
+      "base": {
+        "stamp_label": "AGAIN"
+      },
+      "label": "02 / CRATE",
+      "rows": [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "source": "res://commons/artifacts/crate/crate.tscn"
+    },
+    {
+      "base": {
+        "show_leds": false,
+        "use_shader": false
+      },
+      "label": "03 / CARGO",
+      "rows": [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "source": "res://commons/artifacts/tech_crate/tech_crate.tscn"
+    },
+    {
+      "base": {
+
+      },
+      "label": "04 / EDITION",
+      "rows": [
+        {
+
+        },
+        {
+
+        },
+        {
+
+        },
+        {
+
+        }
+      ],
+      "source": "res://commons/artifacts/prefab_box_library/edition_carton.tscn"
+    },
+    {
+      "base": {
+        "stamp_label": "AGAIN"
+      },
+      "label": "05 / CRATE VARIATIONS",
+      "rows": [
+        {
+          "brace_color": "c3b7a4",
+          "plank_color": "e1dacf",
+          "plank_color_alt": "f5f0e5"
+        },
+        {
+          "brace_color": "a45078",
+          "plank_color": "c4779a",
+          "plank_color_alt": "d9a2ba"
+        },
+        {
+          "band_count": 2.0,
+          "plank_count": 8.0,
+          "show_x_brace": false
+        },
+        {
+          "brace_color": "3a4d68",
+          "hazard_tape": true,
+          "plank_color": "566b85",
+          "plank_color_alt": "6d829a"
+        }
+      ],
+      "source": "res://commons/artifacts/crate/crate.tscn"
+    },
+    {
+      "base": {
+
+      },
+      "label": "06 / EDITION VARIATIONS",
+      "rows": [
+        {
+          "paper_color": "f0d86a",
+          "word": "AGAIN"
+        },
+        {
+          "ink_color": "6e2257",
+          "paper_color": "dcabc5",
+          "word": "OTHER"
+        },
+        {
+          "accent_color": "07776c",
+          "paper_color": "c9e4dd",
+          "word": "YET"
+        },
+        {
+          "accent_color": "182d63",
+          "ink_color": "e14a37",
+          "paper_color": "efeee9",
+          "word": "AGAIN"
+        }
+      ],
+      "source": "res://commons/artifacts/prefab_box_library/edition_carton.tscn"
+    }
+  ],
+  "copies": 24,
+  "editions": 12,
+  "surfaces": 105
+}
